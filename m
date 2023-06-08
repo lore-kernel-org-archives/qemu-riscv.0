@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13426C7EE29
-	for <qemu-riscv@archiver.kernel.org>; Thu,  8 Jun 2023 16:56:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1292C7EE23
+	for <qemu-riscv@archiver.kernel.org>; Thu,  8 Jun 2023 17:49:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q7Iw0-0004Zj-VV; Thu, 08 Jun 2023 12:56:30 -0400
+	id 1q7Jl7-0005CA-My; Thu, 08 Jun 2023 13:49:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <tommy.wu@sifive.com>)
- id 1q7Ivy-0004Ys-OB
- for qemu-riscv@nongnu.org; Thu, 08 Jun 2023 12:56:26 -0400
-Received: from mail-ua1-x933.google.com ([2607:f8b0:4864:20::933])
+ (Exim 4.90_1) (envelope-from <robherring2@gmail.com>)
+ id 1q7Jl5-00058v-BM
+ for qemu-riscv@nongnu.org; Thu, 08 Jun 2023 13:49:15 -0400
+Received: from mail-ot1-f52.google.com ([209.85.210.52])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <tommy.wu@sifive.com>)
- id 1q7Ivw-0000Ei-ON
- for qemu-riscv@nongnu.org; Thu, 08 Jun 2023 12:56:26 -0400
-Received: by mail-ua1-x933.google.com with SMTP id
- a1e0cc1a2514c-783f88ce557so324653241.3
- for <qemu-riscv@nongnu.org>; Thu, 08 Jun 2023 09:56:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1686243383; x=1688835383;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CgJTtYLIn70wb52LsiMk1A1J4Mu0c0WIB/RYop7paxs=;
- b=hrw+/mnq28syfSOQFqJG44WutqBwk/nhNNXerib+h/5DcIpJLvP0BOQORfl534ea+q
- vk68kJPNEgWMCNm+tV7cRZpF+lZ53BlhpiF1o8Apfk27C/FdV+KO08XPE28jGNMA11v7
- NGYvuIU7aAIAqyLa7iShf6Guwk8q5rBLD/ufzHbX00zt9YcOrsT5lJeeFcaVZhI5D9Nv
- B7w1pyCrR//J4g18txP3vjafM5qLfmQLUAtdTDPEtQ8lVZUHuWXKlgTjUo0NHlYRfyTf
- 9Tn0uGIeaN3tUsv6IumGMb90f/FEzQ7I1duO3NUNqphKXveUJKmhYmllFNl8CdLx38iJ
- Ul/g==
+ (Exim 4.90_1) (envelope-from <robherring2@gmail.com>)
+ id 1q7Jl2-0007Do-U9
+ for qemu-riscv@nongnu.org; Thu, 08 Jun 2023 13:49:15 -0400
+Received: by mail-ot1-f52.google.com with SMTP id
+ 46e09a7af769-6b2a4cb5776so577674a34.0
+ for <qemu-riscv@nongnu.org>; Thu, 08 Jun 2023 10:49:12 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686243383; x=1688835383;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=CgJTtYLIn70wb52LsiMk1A1J4Mu0c0WIB/RYop7paxs=;
- b=GlAbop4HC3IGoNDw7g7q1GdsUXCCsjNZSD4g/9qF7EAe7cBk4i8LqAY2p0grvuL/9F
- nWshHNGyrOmJTVoGfWyHb5rIzaVMcQ19I1QkXcLNgbPIxUreS673pec5SRs3w4Ruxjsf
- FP5qPNyQzkSdGNkd+iF0eJst4SChghkpUmQG/zr9DVOPvzmcgsmh+0lyubHDuhoXsH/K
- NoyOlcfp3to1HRWtDPLJYi7+yf/r24ZFceZwYLXp+APBgCvOoUZHxQyshiRKhCsemt3l
- vImAmcWczAwKBq+hYt8H353t8IjFhfPVuEmzx6eRBMqNR3V7h+RoA2+ibCURZaZyvCPz
- +zmg==
-X-Gm-Message-State: AC+VfDw+ze6Q4C4SfCB4GA1YH6hrW0G8TpoJAysLPk+YUxmsE1mUacC2
- VngBIL7ITzZMXd48r/o/16JqqK0c1y1FZw5Qx3nv+A==
-X-Google-Smtp-Source: ACHHUZ4Krc0aaleJUOgqMu8s1BpyzMYUAaMSNXFb9DrIR84CtNxzTzaj8KcarrHBVzdouorzDRYHA0ZBRVIXOWqshYs=
-X-Received: by 2002:a67:b905:0:b0:439:3128:587d with SMTP id
- q5-20020a67b905000000b004393128587dmr2271309vsn.28.1686243383492; Thu, 08 Jun
- 2023 09:56:23 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1686246551; x=1688838551;
+ h=date:subject:message-id:references:in-reply-to:cc:to:from
+ :mime-version:content-transfer-encoding:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=WrR2D8ApD1fWX5hojwIV0SLICJZBdxighBSqahhOUM8=;
+ b=ldMS/P0evlqSDW51ZWUzy4QOy6CIaNmeqcbNlAOMz5jz+60s3ajEDO1Ubhd6yOvYdA
+ Igd7vlHqF+aRplk3lvmfG8uJ5nsk3rkfkZImhCWleYzJAzOFtqr15CM4ASvmAI7TbOIO
+ M7abmNvY3uJnUdwr0Ttl7hY5p8fLLOGkcJ0CKOpIFHaR7iUbFPXWTlZuHNCdNWN8IKxJ
+ VIVm/LuyWg1rV4FAEnD1iHcY92TvPSfBXEvxRLeGesDoQ8OmmQBXXqRx53HaxtqtzSN6
+ 1RLfvOKHherR2uYi1MIFOOO+8MKeTElL7W4ofrMN7IhgJCZoabSzBP4hKbvzqQAa/X+2
+ UCmQ==
+X-Gm-Message-State: AC+VfDxdusdR6mM/mFU7Zb0HTHIFZ2P7Ih920Wo1Fglj8w6sCfBnKZr0
+ WsL8r1XZs9PShR2RcBmwHw==
+X-Google-Smtp-Source: ACHHUZ4qqeNQJw4b85sgVojxz/Ckidtai67WfUX7oDZeoaGJMYAmMUojHFYJVgeGOi+p8Mjp87BalA==
+X-Received: by 2002:a9d:7a47:0:b0:6ad:e7dc:851d with SMTP id
+ z7-20020a9d7a47000000b006ade7dc851dmr5441669otm.33.1686246551433; 
+ Thu, 08 Jun 2023 10:49:11 -0700 (PDT)
+Received: from robh_at_kernel.org ([64.188.179.250])
+ by smtp.gmail.com with ESMTPSA id
+ ee24-20020a056638293800b0041658c1838asm403567jab.81.2023.06.08.10.49.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 08 Jun 2023 10:49:10 -0700 (PDT)
+Received: (nullmailer pid 3085775 invoked by uid 1000);
+ Thu, 08 Jun 2023 17:49:08 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-References: <20230523084910.304679-1-tommy.wu@sifive.com>
- <20230523084910.304679-2-tommy.wu@sifive.com>
- <e9ab4620-2878-45c1-264b-305c41958213@linaro.org>
-In-Reply-To: <e9ab4620-2878-45c1-264b-305c41958213@linaro.org>
-From: Tommy Wu <tommy.wu@sifive.com>
-Date: Fri, 9 Jun 2023 00:56:14 +0800
-Message-ID: <CANj3q_kX2+XX7L=fJQ9DcOuXv2Ry5yrcfQTxVU662z8a2pk18Q@mail.gmail.com>
-Subject: Re: [PATCH v4 1/3] hw/misc: sifive_e_aon: Support the watchdog timer
- of HiFive 1 rev b.
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- palmer@dabbelt.com, bin.meng@windriver.com, jim.shu@sifive.com, 
- frank.chang@sifive.com, thuth@redhat.com, liweiwei@iscas.ac.cn
-Content-Type: multipart/alternative; boundary="000000000000e0e6a205fda1219a"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::933;
- envelope-from=tommy.wu@sifive.com; helo=mail-ua1-x933.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+From: Rob Herring <robh@kernel.org>
+To: Conor Dooley <conor@kernel.org>
+Cc: Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Conor Dooley <conor.dooley@microchip.com>,
+ Oleksii <oleksii.kurochko@gmail.com>, Rob Herring <robh+dt@kernel.org>,
+ Anup Patel <apatel@ventanamicro.com>, qemu-riscv@nongnu.org,
+ u-boot@lists.denx.de, Andrew Jones <ajones@ventanamicro.com>,
+ palmer@dabbelt.com, Atish Patra <atishp@atishpatra.org>,
+ Jessica Clarke <jrtc27@jrtc27.com>, Paul Walmsley <paul.walmsley@sifive.com>,
+ Alistair Francis <alistair.francis@wdc.com>, devicetree@vger.kernel.org,
+ linux-riscv@lists.infradead.org, Rick Chen <rick@andestech.com>,
+ linux-kernel@vger.kernel.org, Leo <ycliang@andestech.com>
+In-Reply-To: <20230608-sitting-bath-31eddc03c5a5@spud>
+References: <20230608-sitting-bath-31eddc03c5a5@spud>
+Message-Id: <168624654839.3085745.9088493205796442132.robh@kernel.org>
+Subject: Re: [PATCH v2] dt-bindings: riscv: deprecate riscv,isa
+Date: Thu, 08 Jun 2023 11:49:08 -0600
+Received-SPF: pass client-ip=209.85.210.52; envelope-from=robherring2@gmail.com;
+ helo=mail-ot1-f52.google.com
+X-Spam_score_int: -11
+X-Spam_score: -1.2
+X-Spam_bar: -
+X-Spam_report: (-1.2 / 5.0 requ) BAYES_00=-1.9, FREEMAIL_ENVFROM_END_DIGIT=0.25,
+ FREEMAIL_FORGED_FROMDOMAIN=0.25, FREEMAIL_FROM=0.001,
+ HEADER_FROM_DIFFERENT_DOMAINS=0.25, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -91,356 +93,216 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000e0e6a205fda1219a
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Hi Phil,
-Thanks for all the suggestions, I'll send patch v5 to fix all the issues.
+On Thu, 08 Jun 2023 17:54:05 +0100, Conor Dooley wrote:
+> From: Conor Dooley <conor.dooley@microchip.com>
+> 
+> intro
+> =====
+> 
+> When the RISC-V dt-bindings were accepted upstream in Linux, the base
+> ISA etc had yet to be ratified. By the ratification of the base ISA,
+> incompatible changes had snuck into the specifications - for example the
+> Zicsr and Zifencei extensions were spun out of the base ISA.
+> 
+> Fast forward to today, and the reason for this patch.
+> Currently the riscv,isa dt property permits only a specific subset of
+> the ISA string - in particular it excludes version numbering.
+> With the current constraints, it is not possible to discern whether
+> "rv64i" means that the hart supports the fence.i instruction, for
+> example.
+> Future systems may choose to implement their own instruction fencing,
+> perhaps using a vendor extension, or they may not implement the optional
+> counter extensions. Software needs a way to determine this.
+> 
+> versioning schemes
+> ==================
+> 
+> "Use the extension versions that are described in the ISA manual" you
+> may say, and it's not like this has not been considered.
+> Firstly, software that parses the riscv,isa property at runtime will
+> need to contain a lookup table of some sort that maps arbitrary versions
+> to versions it understands. There is not a consistent application of
+> version number applied to extensions, with a higgledy-piggledy
+> collection of tags, "bare" and version documents awaiting the reader on
+> the "recently ratified extensions" page:
+> https://wiki.riscv.org/display/HOME/Recently+Ratified+Extensions
+> 
+> 	As an aside, this is reflected in the patch too, since many
+> 	extensions have yet to appear in a release of the ISA specs,
+> 	and are defined by commits in their respective "working draft"
+> 	repositories.
+> 
+> Secondly, there is an issue of backwards compatibility, whereby allowing
+> numbers in the ISA string, some parsers may be broken. This would
+> require an additional property to be created to even use the versions in
+> this manner.
+> 
+> boolean properties
+> ==================
+> 
+> If a new property is needed, the whole approach may as well be looked at
+> from the bottom up. A string with limited character choices etc is
+> hardly the best approach for communicating extension information to
+> software.
+> 
+> Switching to using boolean properties, one per extension, allows us to
+> define explicit meanings for the DT representation of each extension -
+> rather than the current situation where different operating systems or
+> other bits of software may impart different meanings to characters in
+> the string. Clearly the best source of meanings is the specifications
+> themselves, this just provides us the ability to choose at what point
+> in time the meaning is set. If an extension changes incompatibility in
+> the future, a new property will be required.
+> 
+> Off-list, some of the RVI folks have committed to shoring up the wording
+> in either the ISA specifications, the riscv-isa-manual or
+> so that in the future, modifications to and additions or removals of
+> features will require a new extension. Codifying that assertion
+> somewhere would make it quite unlikely that compatibility would be
+> broken, but we have the tools required to deal with it, if & when it
+> crops up.
+> It is in our collective interest, as consumers of extension meanings, to
+> define a scheme that enforces compatibility.
+> 
+> The use of boolean properties, rather than elements in a string, will
+> also permit validation that the strings have a meaning, as well as
+> potentially reject mutually exclusive combinations, or enforce
+> dependencies between instructions. That would not be possible with the
+> current dt-schema infrastructure for arbitrary strings, as we would need
+> to add a riscv,isa parser to dt-validate! That's not implemented in this
+> patch, but rather left as future work (for the brave, or the foolish).
+> 
+> acpi
+> ====
+> 
+> The current ACPI ECR is based on having a string unfortunately, but
+> ideally ACPI will move to another method, perhaps GUIDs, that give
+> explicit meaning to extensions.
+> 
+> parser simplicity
+> =================
+> 
+> Many systems that parse DT at runtime already implement an function that
+> can check for the presence of boolean properties, rather than having to
+> implement - although unfortunately for backwards compatibility with old
+> dtbs, existing parsers may not be removable - which may greatly simplify
+> dt parsing code. For example, in Linux, checking for an extension
+> becomes as simple as:
+> 	of_property_present(extension_node, "zicbom")
+> 
+> vendor extensions
+> =================
+> 
+> Compared to riscv,isa, this proposed scheme promotes vendor extensions,
+> oft touted as the strength of RISC-V, to first-class citizens.
+> At present, extensions are defined as meaning what the RISC-V ISA
+> specifications say they do. There is no realistic way of using that
+> interface to provide cross-platform definitions for what vendor
+> extensions mean. Vendor extensions may also have even less consistency
+> than RVI do in terms of versioning, or no care about backwards
+> compatibility.
+> A boolean property allows us to assign explicit meanings on a per vendor
+> extension basis, backed up by a description of their meanings.
+> 
+> fin
+> ===
+> 
+> Create a new file to store the extension meanings, each of which are
+> boolean children of a riscv,isa-extensions node and a new
+> riscv,isa-base property to replace the aspect of riscv,isa that is
+> not represented by booleans - the base ISA implemented by a hart.
+> Originally I proposed properties in the cpu node, rather than as a child
+> of the cpu node, but some concerns were raised about the size of the dtb
+> for systems with dozens of cpus & dozens of extensions. Using a child
+> node, and dropping the "riscv,isa-extension-" prefix saves the guts of
+> 20 bytes per extension, per hart, and hopefully placates the size
+> conscious.
+> 
+> As a starting point, add properties for extensions currently used in
+> Linux.
+> 
+> Finally, mark riscv,isa as deprecated, as removing it is an ABI break.
+> 
+> CC: Palmer Dabbelt <palmer@dabbelt.com>
+> CC: Paul Walmsley <paul.walmsley@sifive.com>
+> CC: Rob Herring <robh+dt@kernel.org>
+> CC: Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>
+> CC: Alistair Francis <alistair.francis@wdc.com>
+> CC: Andrew Jones <ajones@ventanamicro.com>
+> CC: Anup Patel <apatel@ventanamicro.com>
+> CC: Atish Patra <atishp@atishpatra.org>
+> CC: Jessica Clarke <jrtc27@jrtc27.com>
+> CC: Rick Chen <rick@andestech.com>
+> CC: Leo <ycliang@andestech.com>
+> CC: Oleksii <oleksii.kurochko@gmail.com>
+> CC: linux-riscv@lists.infradead.org
+> CC: qemu-riscv@nongnu.org
+> CC: u-boot@lists.denx.de
+> CC: devicetree@vger.kernel.org
+> CC: linux-kernel@vger.kernel.org
+> Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+> ---
+> Changes in v2:
+> - Use Sean's suggestion of a child node to calm fears of bloat
+> - Fixup a rake of wording etc issues that Drew pointed out
+> 
+> As a result of implementing Sean's suggestion, I believe I need to add
+> riscv,isa-extensions as an exception to the rules preventing vendor
+> properties being of object type, otherwise dt_binding_check is less than
+> happy with me.
+> 
+> I've tried to CC a few folks here that would care about this, but I am
+> sure there are more. I'll go cross-post it to sw-dev, if it allows me to
+> post there...
+> ---
+>  .../devicetree/bindings/riscv/cpus.yaml       |  57 ++--
+>  .../devicetree/bindings/riscv/extensions.yaml | 278 ++++++++++++++++++
+>  2 files changed, 313 insertions(+), 22 deletions(-)
+>  create mode 100644 Documentation/devicetree/bindings/riscv/extensions.yaml
+> 
 
-Best Regards,
-Tommy
+My bot found errors running 'make DT_CHECKER_FLAGS=-m dt_binding_check'
+on your patch (DT_CHECKER_FLAGS is new in v5.13):
 
-On Thu, May 25, 2023 at 8:05=E2=80=AFPM Philippe Mathieu-Daud=C3=A9 <philmd=
-@linaro.org>
-wrote:
+yamllint warnings/errors:
 
-> Hi Tommy,
->
-> On 23/5/23 10:49, Tommy Wu wrote:
-> > The watchdog timer is in the always-on domain device of HiFive 1 rev b,
-> > so this patch added the AON device to the sifive_e machine. This patch
-> > only implemented the functionality of the watchdog timer.
-> >
-> > Signed-off-by: Tommy Wu <tommy.wu@sifive.com>
-> > Reviewed-by: Frank Chang <frank.chang@sifive.com>
-> > ---
-> >   hw/misc/Kconfig                |   3 +
-> >   hw/misc/meson.build            |   1 +
-> >   hw/misc/sifive_e_aon.c         | 326 ++++++++++++++++++++++++++++++++=
-+
-> >   include/hw/misc/sifive_e_aon.h |  60 ++++++
-> >   4 files changed, 390 insertions(+)
-> >   create mode 100644 hw/misc/sifive_e_aon.c
-> >   create mode 100644 include/hw/misc/sifive_e_aon.h
->
->
-> > +REG32(AON_WDT_WDOGCFG, 0x0)
-> > +    FIELD(AON_WDT_WDOGCFG, SCALE, 0, 4)
-> > +    FIELD(AON_WDT_WDOGCFG, RSVD0, 4, 4)
-> > +    FIELD(AON_WDT_WDOGCFG, RSTEN, 8, 1)
-> > +    FIELD(AON_WDT_WDOGCFG, ZEROCMP, 9, 1)
-> > +    FIELD(AON_WDT_WDOGCFG, RSVD1, 10, 2)
-> > +    FIELD(AON_WDT_WDOGCFG, EN_ALWAYS, 12, 1)
-> > +    FIELD(AON_WDT_WDOGCFG, EN_CORE_AWAKE, 13, 1)
-> > +    FIELD(AON_WDT_WDOGCFG, RSVD2, 14, 14)
-> > +    FIELD(AON_WDT_WDOGCFG, IP0, 28, 1)
-> > +    FIELD(AON_WDT_WDOGCFG, RSVD3, 29, 3)
-> > +REG32(AON_WDT_WDOGCOUNT, 0x8)
->
-> Adding:
->
->         FIELD(AON_WDT_WDOGCOUNT, VALUE, 0, 31)
->
-> ...
->
-> > +REG32(AON_WDT_WDOGS, 0x10)
-> > +REG32(AON_WDT_WDOGFEED, 0x18)
-> > +REG32(AON_WDT_WDOGKEY, 0x1c)
-> > +REG32(AON_WDT_WDOGCMP0, 0x20)
-> > +
-> > +static void sifive_e_aon_wdt_update_wdogcount(SiFiveEAONState *r)
-> > +{
-> > +    int64_t now;
-> > +    if (0 =3D=3D FIELD_EX32(r->wdogcfg, AON_WDT_WDOGCFG, EN_ALWAYS) &&
-> > +        0 =3D=3D FIELD_EX32(r->wdogcfg, AON_WDT_WDOGCFG, EN_CORE_AWAKE=
-)) {
-> > +        return;
-> > +    }
-> > +
-> > +    now =3D qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
-> > +    r->wdogcount +=3D muldiv64(now - r->wdog_restart_time,
-> > +                             r->wdogclk_freq, NANOSECONDS_PER_SECOND);
-> > +
-> > +    /* Clean the most significant bit. */
-> > +    r->wdogcount =3D ((r->wdogcount << 1) >> 1);
->
-> ... you could use:
->
->         r->wdogcount &=3D R_AON_WDT_WDOGCOUNT_VALUE_MASK
->
-> > +    r->wdog_restart_time =3D now;
-> > +}
-> > +
-> > +static void sifive_e_aon_wdt_update_state(SiFiveEAONState *r)
-> > +{
-> > +    uint16_t wdogs;
-> > +    bool cmp_signal =3D false;
-> > +    sifive_e_aon_wdt_update_wdogcount(r);
-> > +    wdogs =3D (uint16_t)(r->wdogcount >>
-> > +                           FIELD_EX32(r->wdogcfg, AON_WDT_WDOGCFG,
-> SCALE));
-> > +
-> > +    if (wdogs >=3D r->wdogcmp0) {
-> > +        cmp_signal =3D true;
-> > +        if (1 =3D=3D FIELD_EX32(r->wdogcfg, AON_WDT_WDOGCFG, ZEROCMP))=
- {
-> > +            r->wdogcount =3D 0;
-> > +            wdogs =3D 0;
-> > +        }
-> > +    }
-> > +
-> > +    if (cmp_signal) {
-> > +        if (1 =3D=3D FIELD_EX32(r->wdogcfg, AON_WDT_WDOGCFG, RSTEN)) {
->
-> You sometimes check bit equality, ...
->
-> > +            watchdog_perform_action();
-> > +        }
-> > +        r->wdogcfg =3D FIELD_DP32(r->wdogcfg, AON_WDT_WDOGCFG, IP0, 1)=
-;
-> > +    }
-> > +
-> > +    qemu_set_irq(r->wdog_irq, FIELD_EX32(r->wdogcfg, AON_WDT_WDOGCFG,
-> IP0));
-> > +
-> > +    if (wdogs < r->wdogcmp0 &&
-> > +        (FIELD_EX32(r->wdogcfg, AON_WDT_WDOGCFG, EN_ALWAYS) ||
->
-> ... sometimes you don't. Code style consistency would be better.
->
-> (Also, most of QEMU code base check equality using constant value
-> on the right side of the comparaison).
->
-> > +         FIELD_EX32(r->wdogcfg, AON_WDT_WDOGCFG, EN_CORE_AWAKE))) {
-> > +        int64_t next =3D qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
-> > +        next +=3D muldiv64((r->wdogcmp0 - wdogs) <<
-> > +                         FIELD_EX32(r->wdogcfg, AON_WDT_WDOGCFG, SCALE=
-),
-> > +                         NANOSECONDS_PER_SECOND, r->wdogclk_freq);
-> > +        timer_mod(r->wdog_timer, next);
-> > +    } else {
-> > +        timer_mod(r->wdog_timer, INT64_MAX);
-> > +    }
-> > +}
->
-> > +static void sifive_e_aon_init(Object *obj)
-> > +{
-> > +    SysBusDevice *sbd =3D SYS_BUS_DEVICE(obj);
-> > +    SiFiveEAONState *r =3D SIFIVE_E_AON(obj);
-> > +
-> > +    memory_region_init_io(&r->mmio, OBJECT(r), &sifive_e_aon_ops, r,
-> > +                          TYPE_SIFIVE_E_AON, SIFIVE_E_AON_MAX);
-> > +    sysbus_init_mmio(sbd, &r->mmio);
-> > +
-> > +    /* watchdog timer */
-> > +    r->wdogclk_freq =3D SIFIVE_E_LFCLK_DEFAULT_FREQ;
-> > +    sysbus_init_irq(sbd, &r->wdog_irq);
-> > +}
-> > +
-> > +static void sifive_e_aon_realize(DeviceState *dev, Error **errp)
-> > +{
-> > +    SiFiveEAONState *r =3D SIFIVE_E_AON(dev);
-> > +
-> > +    /* watchdog timer */
-> > +    r->wdog_timer =3D timer_new_ns(QEMU_CLOCK_VIRTUAL,
-> > +                                 sifive_e_aon_wdt_expired_cb, r);
->
-> You should be able to create the timer in sifive_e_aon_init().
->
-> > +}
->
-> Regards,
->
-> Phil.
->
+dtschema/dtc warnings/errors:
+/builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/riscv/extensions.yaml: properties:riscv,isa-extensions: 'oneOf' conditional failed, one must be fixed:
+	Additional properties are not allowed ('additionalProperties', 'properties' were unexpected)
+		hint: A vendor boolean property can use "type: boolean"
+	/builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/riscv/extensions.yaml: properties:riscv,isa-extensions: 'oneOf' conditional failed, one must be fixed:
+		'enum' is a required property
+		'const' is a required property
+		hint: A vendor string property with exact values has an implicit type
+		from schema $id: http://devicetree.org/meta-schemas/vendor-props.yaml#
+	Additional properties are not allowed ('additionalProperties', 'properties', 'type' were unexpected)
+		hint: A vendor string property with exact values has an implicit type
+	/builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/riscv/extensions.yaml: properties:riscv,isa-extensions: 'oneOf' conditional failed, one must be fixed:
+		'$ref' is a required property
+		'allOf' is a required property
+		hint: A vendor property needs a $ref to types.yaml
+		from schema $id: http://devicetree.org/meta-schemas/vendor-props.yaml#
+	'boolean' was expected
+		hint: A vendor boolean property can use "type: boolean"
+	hint: Vendor specific properties must have a type and description unless they have a defined, common suffix.
+	from schema $id: http://devicetree.org/meta-schemas/vendor-props.yaml#
 
---000000000000e0e6a205fda1219a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+doc reference errors (make refcheckdocs):
 
-<div dir=3D"ltr">Hi Phil,<div>Thanks for all the suggestions, I&#39;ll send=
- patch v5 to fix all the issues.</div><div><br></div><div>Best Regards,</di=
-v><div>Tommy</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" cla=
-ss=3D"gmail_attr">On Thu, May 25, 2023 at 8:05=E2=80=AFPM Philippe Mathieu-=
-Daud=C3=A9 &lt;<a href=3D"mailto:philmd@linaro.org">philmd@linaro.org</a>&g=
-t; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0p=
-x 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Hi Tom=
-my,<br>
-<br>
-On 23/5/23 10:49, Tommy Wu wrote:<br>
-&gt; The watchdog timer is in the always-on domain device of HiFive 1 rev b=
-,<br>
-&gt; so this patch added the AON device to the sifive_e machine. This patch=
-<br>
-&gt; only implemented the functionality of the watchdog timer.<br>
-&gt; <br>
-&gt; Signed-off-by: Tommy Wu &lt;<a href=3D"mailto:tommy.wu@sifive.com" tar=
-get=3D"_blank">tommy.wu@sifive.com</a>&gt;<br>
-&gt; Reviewed-by: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.com"=
- target=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 =C2=A0hw/misc/Kconfig=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 |=C2=A0 =C2=A03 +<br>
-&gt;=C2=A0 =C2=A0hw/misc/meson.build=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 |=C2=A0 =C2=A01 +<br>
-&gt;=C2=A0 =C2=A0hw/misc/sifive_e_aon.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| =
-326 +++++++++++++++++++++++++++++++++<br>
-&gt;=C2=A0 =C2=A0include/hw/misc/sifive_e_aon.h |=C2=A0 60 ++++++<br>
-&gt;=C2=A0 =C2=A04 files changed, 390 insertions(+)<br>
-&gt;=C2=A0 =C2=A0create mode 100644 hw/misc/sifive_e_aon.c<br>
-&gt;=C2=A0 =C2=A0create mode 100644 include/hw/misc/sifive_e_aon.h<br>
-<br>
-<br>
-&gt; +REG32(AON_WDT_WDOGCFG, 0x0)<br>
-&gt; +=C2=A0 =C2=A0 FIELD(AON_WDT_WDOGCFG, SCALE, 0, 4)<br>
-&gt; +=C2=A0 =C2=A0 FIELD(AON_WDT_WDOGCFG, RSVD0, 4, 4)<br>
-&gt; +=C2=A0 =C2=A0 FIELD(AON_WDT_WDOGCFG, RSTEN, 8, 1)<br>
-&gt; +=C2=A0 =C2=A0 FIELD(AON_WDT_WDOGCFG, ZEROCMP, 9, 1)<br>
-&gt; +=C2=A0 =C2=A0 FIELD(AON_WDT_WDOGCFG, RSVD1, 10, 2)<br>
-&gt; +=C2=A0 =C2=A0 FIELD(AON_WDT_WDOGCFG, EN_ALWAYS, 12, 1)<br>
-&gt; +=C2=A0 =C2=A0 FIELD(AON_WDT_WDOGCFG, EN_CORE_AWAKE, 13, 1)<br>
-&gt; +=C2=A0 =C2=A0 FIELD(AON_WDT_WDOGCFG, RSVD2, 14, 14)<br>
-&gt; +=C2=A0 =C2=A0 FIELD(AON_WDT_WDOGCFG, IP0, 28, 1)<br>
-&gt; +=C2=A0 =C2=A0 FIELD(AON_WDT_WDOGCFG, RSVD3, 29, 3)<br>
-&gt; +REG32(AON_WDT_WDOGCOUNT, 0x8)<br>
-<br>
-Adding:<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 FIELD(AON_WDT_WDOGCOUNT, VALUE, 0, 31)<br>
-<br>
-...<br>
-<br>
-&gt; +REG32(AON_WDT_WDOGS, 0x10)<br>
-&gt; +REG32(AON_WDT_WDOGFEED, 0x18)<br>
-&gt; +REG32(AON_WDT_WDOGKEY, 0x1c)<br>
-&gt; +REG32(AON_WDT_WDOGCMP0, 0x20)<br>
-&gt; +<br>
-&gt; +static void sifive_e_aon_wdt_update_wdogcount(SiFiveEAONState *r)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 int64_t now;<br>
-&gt; +=C2=A0 =C2=A0 if (0 =3D=3D FIELD_EX32(r-&gt;wdogcfg, AON_WDT_WDOGCFG,=
- EN_ALWAYS) &amp;&amp;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 0 =3D=3D FIELD_EX32(r-&gt;wdogcfg, AON_WD=
-T_WDOGCFG, EN_CORE_AWAKE)) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 now =3D qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);<br>
-&gt; +=C2=A0 =C2=A0 r-&gt;wdogcount +=3D muldiv64(now - r-&gt;wdog_restart_=
-time,<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0r-&gt;wdogclk_freq, NANOSECONDS_PER_SECO=
-ND);<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 /* Clean the most significant bit. */<br>
-&gt; +=C2=A0 =C2=A0 r-&gt;wdogcount =3D ((r-&gt;wdogcount &lt;&lt; 1) &gt;&=
-gt; 1);<br>
-<br>
-... you could use:<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 r-&gt;wdogcount &amp;=3D R_AON_WDT_WDOGCOUNT_VA=
-LUE_MASK<br>
-<br>
-&gt; +=C2=A0 =C2=A0 r-&gt;wdog_restart_time =3D now;<br>
-&gt; +}<br>
-&gt; +<br>
-&gt; +static void sifive_e_aon_wdt_update_state(SiFiveEAONState *r)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 uint16_t wdogs;<br>
-&gt; +=C2=A0 =C2=A0 bool cmp_signal =3D false;<br>
-&gt; +=C2=A0 =C2=A0 sifive_e_aon_wdt_update_wdogcount(r);<br>
-&gt; +=C2=A0 =C2=A0 wdogs =3D (uint16_t)(r-&gt;wdogcount &gt;&gt;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0FIELD_EX32(r-&gt;wdogcfg, AON_WDT_WDOGCFG, SCAL=
-E));<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 if (wdogs &gt;=3D r-&gt;wdogcmp0) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 cmp_signal =3D true;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (1 =3D=3D FIELD_EX32(r-&gt;wdogcfg, AO=
-N_WDT_WDOGCFG, ZEROCMP)) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 r-&gt;wdogcount =3D 0;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 wdogs =3D 0;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 if (cmp_signal) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (1 =3D=3D FIELD_EX32(r-&gt;wdogcfg, AO=
-N_WDT_WDOGCFG, RSTEN)) {<br>
-<br>
-You sometimes check bit equality, ...<br>
-<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 watchdog_perform_action();<=
-br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 r-&gt;wdogcfg =3D FIELD_DP32(r-&gt;wdogcf=
-g, AON_WDT_WDOGCFG, IP0, 1);<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 qemu_set_irq(r-&gt;wdog_irq, FIELD_EX32(r-&gt;wdogcfg, =
-AON_WDT_WDOGCFG, IP0));<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 if (wdogs &lt; r-&gt;wdogcmp0 &amp;&amp;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 (FIELD_EX32(r-&gt;wdogcfg, AON_WDT_WDOGCF=
-G, EN_ALWAYS) ||<br>
-<br>
-... sometimes you don&#39;t. Code style consistency would be better.<br>
-<br>
-(Also, most of QEMU code base check equality using constant value<br>
-on the right side of the comparaison).<br>
-<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0FIELD_EX32(r-&gt;wdogcfg, AON_WDT_W=
-DOGCFG, EN_CORE_AWAKE))) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 int64_t next =3D qemu_clock_get_ns(QEMU_C=
-LOCK_VIRTUAL);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 next +=3D muldiv64((r-&gt;wdogcmp0 - wdog=
-s) &lt;&lt;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0FIELD_EX32(r-&gt;wdogcfg, AON_WDT_WDOGCFG, SCALE),<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0NANOSECONDS_PER_SECOND, r-&gt;wdogclk_freq);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 timer_mod(r-&gt;wdog_timer, next);<br>
-&gt; +=C2=A0 =C2=A0 } else {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 timer_mod(r-&gt;wdog_timer, INT64_MAX);<b=
-r>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; +}<br>
-<br>
-&gt; +static void sifive_e_aon_init(Object *obj)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 SysBusDevice *sbd =3D SYS_BUS_DEVICE(obj);<br>
-&gt; +=C2=A0 =C2=A0 SiFiveEAONState *r =3D SIFIVE_E_AON(obj);<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 memory_region_init_io(&amp;r-&gt;mmio, OBJECT(r), &amp;=
-sifive_e_aon_ops, r,<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 TYPE_SIFIVE_E_AON, SIFIVE_E_AON_MAX);<br>
-&gt; +=C2=A0 =C2=A0 sysbus_init_mmio(sbd, &amp;r-&gt;mmio);<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 /* watchdog timer */<br>
-&gt; +=C2=A0 =C2=A0 r-&gt;wdogclk_freq =3D SIFIVE_E_LFCLK_DEFAULT_FREQ;<br>
-&gt; +=C2=A0 =C2=A0 sysbus_init_irq(sbd, &amp;r-&gt;wdog_irq);<br>
-&gt; +}<br>
-&gt; +<br>
-&gt; +static void sifive_e_aon_realize(DeviceState *dev, Error **errp)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 SiFiveEAONState *r =3D SIFIVE_E_AON(dev);<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 /* watchdog timer */<br>
-&gt; +=C2=A0 =C2=A0 r-&gt;wdog_timer =3D timer_new_ns(QEMU_CLOCK_VIRTUAL,<b=
-r>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0sifive_e_aon_wdt_expired_c=
-b, r);<br>
-<br>
-You should be able to create the timer in sifive_e_aon_init().<br>
-<br>
-&gt; +}<br>
-<br>
-Regards,<br>
-<br>
-Phil.<br>
-</blockquote></div>
+See https://patchwork.ozlabs.org/project/devicetree-bindings/patch/20230608-sitting-bath-31eddc03c5a5@spud
 
---000000000000e0e6a205fda1219a--
+The base for the series is generally the latest rc1. A different dependency
+should be noted in *this* patch.
+
+If you already ran 'make dt_binding_check' and didn't see the above
+error(s), then make sure 'yamllint' is installed and dt-schema is up to
+date:
+
+pip3 install dtschema --upgrade
+
+Please check and re-submit after running the above command yourself. Note
+that DT_SCHEMA_FILES can be set to your schema file to speed up checking
+your schema. However, it must be unset to test all examples with your schema.
+
 
