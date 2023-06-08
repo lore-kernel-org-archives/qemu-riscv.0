@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BDA0C7EE23
-	for <qemu-riscv@archiver.kernel.org>; Thu,  8 Jun 2023 13:34:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18741C7EE29
+	for <qemu-riscv@archiver.kernel.org>; Thu,  8 Jun 2023 13:34:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q7Fky-0003sD-Rz; Thu, 08 Jun 2023 09:32:52 -0400
+	id 1q7Fme-0006ui-H4; Thu, 08 Jun 2023 09:34:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q7Fkx-0003l6-3y
- for qemu-riscv@nongnu.org; Thu, 08 Jun 2023 09:32:51 -0400
-Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q7Fmd-0006qM-IA
+ for qemu-riscv@nongnu.org; Thu, 08 Jun 2023 09:34:35 -0400
+Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q7Fkv-00068J-8U
- for qemu-riscv@nongnu.org; Thu, 08 Jun 2023 09:32:50 -0400
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-3f7f4819256so4061875e9.1
- for <qemu-riscv@nongnu.org>; Thu, 08 Jun 2023 06:32:48 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q7FmZ-0006bj-1e
+ for qemu-riscv@nongnu.org; Thu, 08 Jun 2023 09:34:35 -0400
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-30aea656e36so445181f8f.1
+ for <qemu-riscv@nongnu.org>; Thu, 08 Jun 2023 06:34:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1686231167; x=1688823167;
+ d=linaro.org; s=google; t=1686231269; x=1688823269;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=ng8czX/rPWnhz7zc/NWQ/lu09zS0NPFurTxHK6zk5Dg=;
- b=MdmYJutTLKX7pmwg34JehTXAaBuSm9j+gOzCmmCZL+3zSfvibE6ZzESg/spuiUq6AM
- DjiOUo0btHa7hHYu+MoR/QTBNQirC6MA4THicyCIdnZ8mf8/sT73bLLqXtdiBeuo9vP/
- 0z6hgBIaVLIrTgn0mfE2YZ9MuED+hVIYdPi1/FvTVTZqOVQRc6UidQu3cylgIVyjHCuo
- ULhwCFRTERY/W7nMmCwDBq368WP45cjAaD0uWf+mKm0HuFWj0aDLQXOWcZTQIxNbvVI1
- r+C3zjCWWjIuEXBLL8jvcG5Cpb4roqxS9FcFpJmMF462pEa/TC/sMq3tGDZOVziNOFZW
- fQ0Q==
+ bh=687bypAB/7t8xJBD4Gun81A0cQ2TsuTq5l2TZjpJ8W4=;
+ b=JyL8ahp/TmFI57O6nHHpMl59k8c7vU7UVPH/Qy7y9yIA6/DF4Qw5SfGzQbee4gNCGL
+ /oNZuYjutwB0Z/9RJwcsda9wLZtvAuiHmwAUuPuom4rhwL/ZMDtOpJ1GQerArwyv+Crh
+ umBafa5nW4dkdqV0HDfLpMkUTtqeLn4MO8Rsy0RB9slTryXZ1Hb59sW1qR0/nQa3dwsp
+ PzFZxTRBJTZthYNIW2ayW+SVrBE/RkAsg0SG5SYED7WyDHNGFkNPjHZe69zOxiP8N/0j
+ 2HpzvifovZZ+VswP8hS0ZbI5rh9O9drVcveS+EGTw6bWmH/FbqBLiDcqLJpKPoxQWU6H
+ 6veA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686231167; x=1688823167;
+ d=1e100.net; s=20221208; t=1686231269; x=1688823269;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ng8czX/rPWnhz7zc/NWQ/lu09zS0NPFurTxHK6zk5Dg=;
- b=E93OvYZNWtr2hi1xUKli4XTVQaCJcnVDHEZxHXQiPbykIzcb8zhxt4b/NfYC5I2zEy
- 4QtZgyF7Uwelj25ZQ2Klk6xwb/sKgxskls33khYL+6VKALLdtz+xCWSnIScB4wM3EuF2
- AMLZleNoJP242lxLwyhSz0yahs6Goh5cIYg1E1gGacqF8NWvrjDIai2t65dH9mDK3zbc
- WHoHu5ER1XoK7lxBptWUHsYvJ71fV3yHZ5ebOFKY3QBvjMHm35uhfi4c5/u7A9T5o5ru
- YmD+pHcM7Rb1b/yYxJhDtTxvuH6Q57pVQXNAK1eRRseUskC7bAfKohT5sYVXdqzkLyOL
- HFcA==
-X-Gm-Message-State: AC+VfDxewIOF3buO8uLrhhhpgkSiyB3a6FdhBI8F9I+douSAppgT5sMP
- usjs85Ju5JCNn/67goLVM1c8IGmlUNQxnBp1Qkc=
-X-Google-Smtp-Source: ACHHUZ4Bc9yWi+ZscP+LOcDpEsjGX2o90Kw18zFXDbUVvTkFaczlrPI8ZhL4OrU6CNv9L99mVLyPag==
-X-Received: by 2002:a1c:7717:0:b0:3f7:34dc:ed0d with SMTP id
- t23-20020a1c7717000000b003f734dced0dmr1404330wmi.25.1686231167296; 
- Thu, 08 Jun 2023 06:32:47 -0700 (PDT)
+ bh=687bypAB/7t8xJBD4Gun81A0cQ2TsuTq5l2TZjpJ8W4=;
+ b=iVEqndTgUdC2u6rqDzaNcquHi41xUBysEdPho/evD8wgWNd8lv/2zinT6ETRBedQzx
+ 1cT5CSu4XlsLqrnR6wyR947IqGijRVxNbjbWg7VLm6JeOjwuNRdHB8qbgGkOjvEIGAQ9
+ WkTVGSjdGbJvWPl3svVHAR6bHp9AA7Uzek1lGOv5evNqAmsXM4hkQz3wjyztELZVOt9M
+ jmNLQrbSUizO0dz9XYtapT92EAobf4o1K8o64W5MK6sS4bzrFFsZG9T5rr7Mv0DkAAUn
+ 8YN4EIDB9QMJpMAYq+18AITiaj1h46J4eE1JV0KGzRN0Qt5ZU9nZj3UIBgQcLf8wQ7Im
+ 1pxw==
+X-Gm-Message-State: AC+VfDxvch07/YUPzmrOKCtjTaIsQiVS6vgJSZV+WbfaKonQR/mlNXEL
+ c+ExjZumDLUxTPvSSWhcbON84w==
+X-Google-Smtp-Source: ACHHUZ5V9drp1TuTJYOM7rOSgH3XynCQ5qqkI6pW8RAZcjDUFhYD0YUif/AZVhbSkHT4y3V6utEXLw==
+X-Received: by 2002:a5d:534f:0:b0:30a:a478:f559 with SMTP id
+ t15-20020a5d534f000000b0030aa478f559mr6643015wrv.2.1686231269190; 
+ Thu, 08 Jun 2023 06:34:29 -0700 (PDT)
 Received: from [192.168.69.115] ([176.176.169.168])
  by smtp.gmail.com with ESMTPSA id
- c3-20020a7bc843000000b003f7f4b7f286sm3595167wml.12.2023.06.08.06.32.46
+ t11-20020adfdc0b000000b0030ae3a6be5bsm1607171wri.78.2023.06.08.06.34.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 08 Jun 2023 06:32:46 -0700 (PDT)
-Message-ID: <22f84ca4-cd6e-88c5-ff0e-02632c416677@linaro.org>
-Date: Thu, 8 Jun 2023 15:32:44 +0200
+ Thu, 08 Jun 2023 06:34:28 -0700 (PDT)
+Message-ID: <2c4676f2-4c35-9156-e60d-fd3f0b0ad2a2@linaro.org>
+Date: Thu, 8 Jun 2023 15:34:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.11.2
-Subject: Re: [PATCH v2 1/5] hw/remote/proxy: Remove dubious
- 'event_notifier-posix.c' include
+Subject: Re: [PATCH v2 5/5] target: Bulk rename 'helper.h' -> 'helper.h.inc'
+ for all targets
 Content-Language: en-US
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org
 References: <20230608133108.72655-1-philmd@linaro.org>
- <20230608133108.72655-2-philmd@linaro.org>
+ <20230608133108.72655-6-philmd@linaro.org>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230608133108.72655-2-philmd@linaro.org>
+In-Reply-To: <20230608133108.72655-6-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::331;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::431;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x431.google.com
 X-Spam_score_int: 3
 X-Spam_score: 0.3
 X-Spam_bar: /
@@ -99,32 +99,111 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 8/6/23 15:31, Philippe Mathieu-Daudé wrote:
-> event_notifier-posix.c is registered in meson's util_ss[] source
-> set, which is built as libqemuutil.a.p library. Both tools and
-> system emulation binaries are linked with qemuutil, so there is
-> no point in including this source file.
+> Since commit 139c1837db ("meson: rename included C source files
+> to .c.inc"), QEMU standard procedure for included C files is to
+> use *.c.inc.
 > 
-> Introduced in commit bd36adb8df ("multi-process: create IOHUB
-> object to handle irq").
+> Besides, since commit 6a0057aa22 ("docs/devel: make a statement
+> about includes") this is documented as the Coding Style:
+> 
+>    If you do use template header files they should be named with
+>    the ``.c.inc`` or ``.h.inc`` suffix to make it clear they are
+>    being included for expansion.
+> 
+> Therefore rename the included 'helper.h' as 'helper.h.inc' for
+> all targets (
+
+Missing:
+
+"moving the headers which are not in the 'tcg/' subdirectory there and"
+
+> updating the documentation).
+> 
+> Unfortunately since the HELPER_H path definition is used by all
+> targets, we have to do all changes in a single bulk commit.
+> 
+> Mechanical change doing:
+> 
+>    $ for t_a in target/*; do \
+>        if test -f ${t_a}/helper.h; then \
+>          mkdir -p ${t_a}/tcg; \
+>          git mv ${t_a}/helper.h ${t_a}/tcg/helper.h.inc; \
+>        fi; \
+>      done
+>    $ sed -i \
+>      -e 's#define HELPER_H "helper.h"#define HELPER_H "tcg/helper.h.inc"#' \
+>         $(git grep -l 'define HELPER_H')
+> 
+> then manually updating files in include/exec/ and docs/.
 > 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
-> Note, --enable-multiprocess doesn't seem to be covered in CI.
-> ---
->   hw/remote/proxy.c | 1 -
->   1 file changed, 1 deletion(-)
-> 
-> diff --git a/hw/remote/proxy.c b/hw/remote/proxy.c
-> index 1c7786b52c..2052d721e5 100644
-> --- a/hw/remote/proxy.c
-> +++ b/hw/remote/proxy.c
-> @@ -22,7 +22,6 @@
->   #include "qom/object.h"
->   #include "qemu/event_notifier.h"
->   #include "sysemu/kvm.h"
-> -#include "util/event_notifier-posix.c"
+>   include/exec/helper-gen.h                        | 2 +-
+>   include/exec/helper-proto.h                      | 2 +-
+>   target/alpha/{helper.h => tcg/helper.h.inc}      | 0
+>   target/arm/{helper.h => tcg/helper.h.inc}        | 0
+>   target/avr/{helper.h => tcg/helper.h.inc}        | 0
+>   target/cris/{helper.h => tcg/helper.h.inc}       | 0
+>   target/hexagon/{helper.h => tcg/helper.h.inc}    | 0
+>   target/hppa/{helper.h => tcg/helper.h.inc}       | 0
+>   target/i386/{helper.h => tcg/helper.h.inc}       | 0
+>   target/loongarch/{helper.h => tcg/helper.h.inc}  | 0
+>   target/m68k/{helper.h => tcg/helper.h.inc}       | 0
+>   target/microblaze/{helper.h => tcg/helper.h.inc} | 0
+>   target/mips/{helper.h => tcg/helper.h.inc}       | 0
+>   target/nios2/{helper.h => tcg/helper.h.inc}      | 0
+>   target/openrisc/{helper.h => tcg/helper.h.inc}   | 0
+>   target/ppc/{helper.h => tcg/helper.h.inc}        | 0
+>   target/riscv/{helper.h => tcg/helper.h.inc}      | 0
+>   target/rx/{helper.h => tcg/helper.h.inc}         | 0
+>   target/s390x/{helper.h => tcg/helper.h.inc}      | 0
+>   target/sh4/{helper.h => tcg/helper.h.inc}        | 0
+>   target/sparc/{helper.h => tcg/helper.h.inc}      | 0
+>   target/tricore/{helper.h => tcg/helper.h.inc}    | 0
+>   target/xtensa/{helper.h => tcg/helper.h.inc}     | 0
+>   target/alpha/translate.c                         | 2 +-
+>   target/arm/tcg/translate.c                       | 2 +-
+>   target/avr/translate.c                           | 2 +-
+>   target/cris/translate.c                          | 2 +-
+>   target/hexagon/translate.c                       | 2 +-
+>   target/hppa/translate.c                          | 2 +-
+>   target/i386/tcg/translate.c                      | 2 +-
+>   target/loongarch/translate.c                     | 2 +-
+>   target/m68k/translate.c                          | 2 +-
+>   target/microblaze/translate.c                    | 2 +-
+>   target/mips/tcg/translate.c                      | 2 +-
+>   target/nios2/translate.c                         | 2 +-
+>   target/openrisc/translate.c                      | 2 +-
+>   target/ppc/translate.c                           | 2 +-
+>   target/riscv/translate.c                         | 2 +-
+>   target/rx/translate.c                            | 2 +-
+>   target/s390x/tcg/translate.c                     | 2 +-
+>   target/sh4/translate.c                           | 2 +-
+>   target/sparc/translate.c                         | 2 +-
+>   target/tricore/translate.c                       | 2 +-
+>   target/xtensa/translate.c                        | 2 +-
+>   44 files changed, 23 insertions(+), 23 deletions(-)
+>   rename target/alpha/{helper.h => tcg/helper.h.inc} (100%)
+>   rename target/arm/{helper.h => tcg/helper.h.inc} (100%)
+>   rename target/avr/{helper.h => tcg/helper.h.inc} (100%)
+>   rename target/cris/{helper.h => tcg/helper.h.inc} (100%)
+>   rename target/hexagon/{helper.h => tcg/helper.h.inc} (100%)
+>   rename target/hppa/{helper.h => tcg/helper.h.inc} (100%)
+>   rename target/i386/{helper.h => tcg/helper.h.inc} (100%)
+>   rename target/loongarch/{helper.h => tcg/helper.h.inc} (100%)
+>   rename target/m68k/{helper.h => tcg/helper.h.inc} (100%)
+>   rename target/microblaze/{helper.h => tcg/helper.h.inc} (100%)
+>   rename target/mips/{helper.h => tcg/helper.h.inc} (100%)
+>   rename target/nios2/{helper.h => tcg/helper.h.inc} (100%)
+>   rename target/openrisc/{helper.h => tcg/helper.h.inc} (100%)
+>   rename target/ppc/{helper.h => tcg/helper.h.inc} (100%)
+>   rename target/riscv/{helper.h => tcg/helper.h.inc} (100%)
+>   rename target/rx/{helper.h => tcg/helper.h.inc} (100%)
+>   rename target/s390x/{helper.h => tcg/helper.h.inc} (100%)
+>   rename target/sh4/{helper.h => tcg/helper.h.inc} (100%)
+>   rename target/sparc/{helper.h => tcg/helper.h.inc} (100%)
+>   rename target/tricore/{helper.h => tcg/helper.h.inc} (100%)
+>   rename target/xtensa/{helper.h => tcg/helper.h.inc} (100%)
 
-Err wrong branch base, please discard this patch which is already
-in Paolo's queue.
 
 
