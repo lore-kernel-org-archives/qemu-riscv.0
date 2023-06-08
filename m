@@ -4,98 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 779D6C7EE25
-	for <qemu-riscv@archiver.kernel.org>; Thu,  8 Jun 2023 12:25:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A295C7EE23
+	for <qemu-riscv@archiver.kernel.org>; Thu,  8 Jun 2023 13:05:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q7EhQ-0008Kb-M0; Thu, 08 Jun 2023 08:25:08 -0400
+	id 1q7FKe-0007jN-5r; Thu, 08 Jun 2023 09:05:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1q7EhP-0008IU-75
- for qemu-riscv@nongnu.org; Thu, 08 Jun 2023 08:25:07 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1q7FKH-0007gG-MZ; Thu, 08 Jun 2023 09:05:17 -0400
+Received: from out30-112.freemail.mail.aliyun.com ([115.124.30.112])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1q7EhN-0004RS-Nn
- for qemu-riscv@nongnu.org; Thu, 08 Jun 2023 08:25:06 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1686227105;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=cyh9GNwkSeiWX8VVWJet6cmrStrv1Y1BhHYKMAKCy08=;
- b=Vi1kSNr4p9/YQ0YuHDtpiS2TAOwm4MPGlDBaLZ0HW8DqBZViVNkMNU/lRCNgucJe/Hu4zr
- nfpBsZTC5XnF4JyAVsYvyBQuRPMSdicq5tMaVMIwBZFrT5Xjjmpe+XM85/c1mR0pVNJ4kC
- s0/Ae1LfWLo8Owb3E2+F2pLW/giMNrY=
-Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
- [209.85.218.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-41-OBGwE4jiP1GGGHpilbqp7Q-1; Thu, 08 Jun 2023 08:24:53 -0400
-X-MC-Unique: OBGwE4jiP1GGGHpilbqp7Q-1
-Received: by mail-ej1-f70.google.com with SMTP id
- a640c23a62f3a-9715654aba1so77687466b.0
- for <qemu-riscv@nongnu.org>; Thu, 08 Jun 2023 05:24:53 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686227092; x=1688819092;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cyh9GNwkSeiWX8VVWJet6cmrStrv1Y1BhHYKMAKCy08=;
- b=MUXRNIJPokH6wQkJKjor7Cxm2SVjAkGtsIukWdXwxCM/3SWHxwYf1Ie7+p9L3+J9PJ
- lBTE255eKi2R8T7gud6SijMby3SfcsV6/y+LbGUkqmqvfwZRTDeNMYYBr8xshTTVT3yq
- 7T3aKX5+CTlkQA3t5Z55DM+vqGpU2jgmZDP6uMRfth/M7OKbptcTrtI6HKwQRZPLwVxo
- P3XX1ZxdOiX0YUXqhALHuyJrStcSWzeZ3WOa+/1DWLf2h2j9urJMH2MD0k6SlTtLw6HH
- i+XRLPH0dOecGOsRN7I7pDXITTVCJaBh3DY+52/sj/XNPCk1k5wlxa5SAYzTAMOlii2s
- tI6Q==
-X-Gm-Message-State: AC+VfDy6yuEvFtnp6v1F5FvqtIUxF0im3nRDxiBjGxP4M5J+ZXxBf/1f
- jLpYaJudaWcAiKsRl8YKmig7mW1mxvD4c3IN5jXCOsldX2ymCozuSU9WmqVpn4DPTso9XRJBDML
- dX+VsmWlOURF4pmI=
-X-Received: by 2002:a17:907:7f2a:b0:966:1bf2:2af5 with SMTP id
- qf42-20020a1709077f2a00b009661bf22af5mr2086599ejc.22.1686227092617; 
- Thu, 08 Jun 2023 05:24:52 -0700 (PDT)
-X-Google-Smtp-Source: ACHHUZ5cbjEPnJx8LYNpohJp9xPfkKh5nP2U9c3J/hradbFa6vbQvvQtmwK74P5Vl6HmL/w2Ex2Ybw==
-X-Received: by 2002:a17:907:7f2a:b0:966:1bf2:2af5 with SMTP id
- qf42-20020a1709077f2a00b009661bf22af5mr2086571ejc.22.1686227092220; 
- Thu, 08 Jun 2023 05:24:52 -0700 (PDT)
-Received: from [192.168.122.1] ([2001:b07:6468:f312:9af8:e5f5:7516:fa89])
- by smtp.gmail.com with ESMTPSA id
- n26-20020a1709065e1a00b00978897577c6sm631890eju.44.2023.06.08.05.24.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Jun 2023 05:24:51 -0700 (PDT)
-From: Paolo Bonzini <pbonzini@redhat.com>
-To: Gavin Shan <gshan@redhat.com>
-Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- pbonzini@redhat.com, imammedo@redhat.com, peter.maydell@linaro.org,
- rad@semihalf.com, quic_llindhol@quicinc.com, eduardo@habkost.net,
- marcel.apfelbaum@gmail.com, philmd@linaro.org, wangyanan55@huawei.com,
- palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- thuth@redhat.com, lvivier@redhat.com, ajones@ventanamicro.com,
- berrange@redhat.com, dbarboza@ventanamicro.com, yihyu@redhat.com,
- shan.gavin@gmail.com
-Subject: Re: [PATCH v5 0/3] NUMA: Apply cluster-NUMA-node boundary for aarch64
- and riscv machines
-Date: Thu,  8 Jun 2023 14:24:50 +0200
-Message-Id: <20230608122450.915545-1-pbonzini@redhat.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230509002739.18388-1-gshan@redhat.com>
-References: 
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1q7FKE-0006Dn-4Q; Thu, 08 Jun 2023 09:05:17 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R511e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
+ TI=SMTPD_---0VkeSq1y_1686229495; 
+Received: from 30.221.99.194(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0VkeSq1y_1686229495) by smtp.aliyun-inc.com;
+ Thu, 08 Jun 2023 21:04:57 +0800
+Message-ID: <8b073dc8-982b-b4e1-9ee4-cbfb2d4feae6@linux.alibaba.com>
+Date: Thu, 8 Jun 2023 21:04:37 +0800
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH 7/9] disas/riscv: Provide infrastructure for vendor
+ extensions
+Content-Language: en-US
+To: Christoph Muellner <christoph.muellner@vrull.eu>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+References: <20230530131843.1186637-1-christoph.muellner@vrull.eu>
+ <20230530131843.1186637-8-christoph.muellner@vrull.eu>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20230530131843.1186637-8-christoph.muellner@vrull.eu>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="US-ASCII"; x-default=true
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=pbonzini@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=115.124.30.112;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-112.freemail.mail.aliyun.com
+X-Spam_score_int: -99
+X-Spam_score: -10.0
+X-Spam_bar: ----------
+X-Spam_report: (-10.0 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ NICE_REPLY_A=-0.091, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -111,8 +69,88 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Queued, thanks.
 
-Paolo
+On 2023/5/30 21:18, Christoph Muellner wrote:
+> From: Christoph Müllner <christoph.muellner@vrull.eu>
+>
+> A previous patch provides a pointer to the RISCVCPUConfig data.
+> Let's use this to add the necessary code for vendor extensions.
+> This patch does not change the current behaviour, but clearly
+> defines how vendor extension support can be added to the disassembler.
+>
+> Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
+> ---
+>   disas/riscv.c | 34 ++++++++++++++++++++++++++++++----
+>   1 file changed, 30 insertions(+), 4 deletions(-)
+>
+> diff --git a/disas/riscv.c b/disas/riscv.c
+> index 086edee6a2..db98e3ea6a 100644
+> --- a/disas/riscv.c
+> +++ b/disas/riscv.c
+> @@ -20,6 +20,7 @@
+>   #include "qemu/osdep.h"
+>   #include "disas/dis-asm.h"
+>   #include "disas/riscv.h"
+> +#include "target/riscv/cpu-config.h"
+>   
+>   typedef enum {
+>       /* 0 is reserved for rv_op_illegal. */
+> @@ -4599,13 +4600,38 @@ static void decode_inst_decompress(rv_decode *dec, rv_isa isa)
+>   /* disassemble instruction */
+>   
+>   static void
+> -disasm_inst(char *buf, size_t buflen, rv_isa isa, uint64_t pc, rv_inst inst)
+> +disasm_inst(char *buf, size_t buflen, rv_isa isa, uint64_t pc, rv_inst inst,
+> +            struct disassemble_info *info)
+>   {
+> +    RISCVCPUConfig *cfg = info->private_data;
+>       rv_decode dec = { 0 };
+>       dec.pc = pc;
+>       dec.inst = inst;
+> -    dec.opcode_data = rvi_opcode_data;
+> -    decode_inst_opcode(&dec, isa);
+> +
+> +    static const struct {
+> +        bool (*guard_func)(const RISCVCPUConfig *);
+> +        const rv_opcode_data *opcode_data;
+> +        void (*decode_func)(rv_decode *, rv_isa);
+> +    } decoders[] = {
+> +        { always_true_p, rvi_opcode_data, decode_inst_opcode },
+> +    };
+> +
+> +    for (size_t i = 0; i < ARRAY_SIZE(decoders); i++) {
+> +        bool (*guard_func)(const RISCVCPUConfig *) = decoders[i].guard_func;
+> +        const rv_opcode_data *opcode_data = decoders[i].opcode_data;
+> +        void (*decode_func)(rv_decode *, rv_isa) = decoders[i].decode_func;
+> +
+> +        if (guard_func(cfg)) {
+> +            dec.opcode_data = opcode_data;
+> +            decode_func(&dec, isa);
+> +            if (dec.op != rv_op_illegal)
+> +                break;
+> +        }
+> +    }
+> +
+> +    if (dec.op == rv_op_illegal)
+> +        dec.opcode_data = rvi_opcode_data;
 
+Always enclose the if sentence.
+
+Otherwise,
+
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+
+> +
+>       decode_inst_operands(&dec, isa);
+>       decode_inst_decompress(&dec, isa);
+>       decode_inst_lift_pseudo(&dec);
+> @@ -4659,7 +4685,7 @@ print_insn_riscv(bfd_vma memaddr, struct disassemble_info *info, rv_isa isa)
+>           break;
+>       }
+>   
+> -    disasm_inst(buf, sizeof(buf), isa, memaddr, inst);
+> +    disasm_inst(buf, sizeof(buf), isa, memaddr, inst, info);
+>       (*info->fprintf_func)(info->stream, "%s", buf);
+>   
+>       return len;
 
