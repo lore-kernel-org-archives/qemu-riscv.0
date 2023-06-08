@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 337FCC7EE23
-	for <qemu-riscv@archiver.kernel.org>; Thu,  8 Jun 2023 13:31:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55D00C7EE23
+	for <qemu-riscv@archiver.kernel.org>; Thu,  8 Jun 2023 13:32:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q7FjX-0001DF-48; Thu, 08 Jun 2023 09:31:23 -0400
+	id 1q7Fju-0001bB-0f; Thu, 08 Jun 2023 09:31:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q7FjU-00017R-Ts
- for qemu-riscv@nongnu.org; Thu, 08 Jun 2023 09:31:20 -0400
-Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q7Fjm-0001XF-8v
+ for qemu-riscv@nongnu.org; Thu, 08 Jun 2023 09:31:40 -0400
+Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q7FjT-0005id-3y
- for qemu-riscv@nongnu.org; Thu, 08 Jun 2023 09:31:20 -0400
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-3f6e4554453so4016255e9.3
- for <qemu-riscv@nongnu.org>; Thu, 08 Jun 2023 06:31:18 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q7Fjk-0005po-1i
+ for qemu-riscv@nongnu.org; Thu, 08 Jun 2023 09:31:38 -0400
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-3f70fc4682aso4099745e9.1
+ for <qemu-riscv@nongnu.org>; Thu, 08 Jun 2023 06:31:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1686231077; x=1688823077;
+ d=linaro.org; s=google; t=1686231094; x=1688823094;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QX7oEag8EHw5/rO2IwkanQ9xp1UV8fgADH4pyLkBN/8=;
- b=Yty491Tz/CLkQDSwq+5sZgxbDG7fw7qXKqg0I2+qqFNlYiT0oe+BLvr1I9fRtno99Y
- 3wm+0fYUFbVJNzXFKo6oW+bpOF2rTcqGWoL2W9HqvNeeLIyDQy8LmSb2wCUSvpJFPxl9
- m0JFSV7phvOItASvAbXPHx+PrnsLtMkKiHbbLs0du3kluYxjMYsdIImMf89tg6QCtlV6
- TCoKwMQpYqT9s3iCVMvKQ6XtLoO0jNlqKWhSA1Ai5Q4JIgoiEImHDYM+F14RpKAjgH+u
- wiBvGPy/6F/Jds5Jwkr+gGCy1YuJi44biORmwvI/BzEAdLRatA59FiZST2qsTno6FOdW
- Ze4w==
+ bh=ftNyyaWMFAqAjN5bg1efHl67xyXCX1hnkKn723kFLZc=;
+ b=wlwH4be91XESizOmdkrTMO2Lp95KoO5L9JkPWBq3PbHH16N38mTLfLh/iDxAKUh6Dn
+ +w/3dhcGfjeGED+Vuj50Y5WZ71jgxpVfoYiWzfXcI6nb7oxAIaPAY48fmioy5H1M0A0P
+ fddpeLTdW9cqLCbw8ZsRlRhi73lpqyJ2SuNgUEJS5Xvkb/WPLVP8QhEZUaWXKWwLxOK4
+ eVwlEZbRfqOtve6lXEhqRaKlxXSwPX9lcsndf8rA+AsdYTJUBZpt2phhDAEJPO2NW5L6
+ JpkrNAqoEhRgsy8SvytI0GUckndi1qZ4EfCK6tLMKE1kM5bQCnb7uFGtChi89rqhTmMu
+ lQmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686231077; x=1688823077;
+ d=1e100.net; s=20221208; t=1686231094; x=1688823094;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QX7oEag8EHw5/rO2IwkanQ9xp1UV8fgADH4pyLkBN/8=;
- b=kiLIgKA3kC0uZNp3whanS1+p35hpjxiX2ZBrXRxrXAVO+I3GSH0bFDBpW7v2pFHlSk
- 5Too0LdVV9yh5wxqrXDM/HF+soqimb6kEli6Ai6TZ6O3eqxoSX8ZQDJ7QY9/jzD7pxTH
- uqxIrtC79Z6x4N2jSZbjXgLk85+H+PYQkgwHw3Jt+u2KlmMmvW88lF+ovw+CffVAbioC
- 1gpwr/H86Ynlz8QAhonybNC2yiB+WdZ7Ln2Gr8Q/mx/YA3+Wuqn6lUG8FS2B6MCZabZi
- ZdRXg1NSmiLu7teiU1f4qduc1LnlQ4Qcto8u29LAcXR+vAOJ6E5Xt7xI77rbPyjdZeY5
- AQTw==
-X-Gm-Message-State: AC+VfDzrZd2cmwA5Dbd1y6t9yUtHShdUlhB991Jk2dcdYzUsyAtl5iZU
- +H0T3P6TCiUMYqprwCa86+DB4Q==
-X-Google-Smtp-Source: ACHHUZ61tn6vHEAKVl/Vp8pTCAPiqntWPPZLSlOp6Lcuf5M8SqY3aUUWqSkuekw2FlRNU1IkN5xc/g==
-X-Received: by 2002:adf:dd46:0:b0:30a:e9cb:1a2e with SMTP id
- u6-20020adfdd46000000b0030ae9cb1a2emr6312547wrm.65.1686231077545; 
- Thu, 08 Jun 2023 06:31:17 -0700 (PDT)
+ bh=ftNyyaWMFAqAjN5bg1efHl67xyXCX1hnkKn723kFLZc=;
+ b=iQrNUm+6BNtRtqouU3qUeN1ibqvZHSSbpiHA0oldAo0Pj+NSt9S3ksP4Cs8DxNUb/k
+ 62Oh7hl7jnXTYUdmNrZ61SaZHOAVd2tF/K2c0JY/IXDhfeaP9EoFDzo83KfPsMe41B7s
+ pgneMy8v92c0Lfb5AQg8pU++0xG/X28jn/rk8wMRkIjMMhI92GQTc/jmVSoJLtBWGpo0
+ CnwkvgSblkgFvRZnaRswzlQvcCGdNApgixCi5llJGHCc5lHeMXRBShuYchdjPEbE0H7e
+ yUFVwjvreP5Fz6IsbfNMs6mAnJwnnmYqW+Vp3HvOtsg2QLLqyjuXor2QTmr2bsFVvpmR
+ 6REw==
+X-Gm-Message-State: AC+VfDxt/R6qyi3bsS3EpWsH52/dTWUsGkNsKdyvaRTCj/X/xC6vjys3
+ P3XSs7AZUvcUuf0MrZPkFNtTJA==
+X-Google-Smtp-Source: ACHHUZ6MXBq4Cj9JoYey7ZzF5N8f32fovh5Xb2A3f2G13khLDFeBEUCr7Hhzz1cr735UmZev9Yo1FQ==
+X-Received: by 2002:a7b:c7c2:0:b0:3f4:2452:9669 with SMTP id
+ z2-20020a7bc7c2000000b003f424529669mr1469849wmk.0.1686231094400; 
+ Thu, 08 Jun 2023 06:31:34 -0700 (PDT)
 Received: from localhost.localdomain ([176.176.169.168])
  by smtp.gmail.com with ESMTPSA id
- cr5-20020a05600004e500b0030c6751a49dsm1596961wrb.115.2023.06.08.06.31.16
+ 14-20020a05600c22ce00b003f7dfdf36bbsm5286778wmg.45.2023.06.08.06.31.33
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 08 Jun 2023 06:31:17 -0700 (PDT)
+ Thu, 08 Jun 2023 06:31:34 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v2 1/5] hw/remote/proxy: Remove dubious
- 'event_notifier-posix.c' include
-Date: Thu,  8 Jun 2023 15:31:04 +0200
-Message-Id: <20230608133108.72655-2-philmd@linaro.org>
+Subject: [PATCH v2 4/5] target/i386: Rename helper template headers as '.h.inc'
+Date: Thu,  8 Jun 2023 15:31:07 +0200
+Message-Id: <20230608133108.72655-5-philmd@linaro.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20230608133108.72655-1-philmd@linaro.org>
 References: <20230608133108.72655-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::329;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x329.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,33 +94,124 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-event_notifier-posix.c is registered in meson's util_ss[] source
-set, which is built as libqemuutil.a.p library. Both tools and
-system emulation binaries are linked with qemuutil, so there is
-no point in including this source file.
+Since commit 139c1837db ("meson: rename included C source files
+to .c.inc"), QEMU standard procedure for included C files is to
+use *.c.inc.
 
-Introduced in commit bd36adb8df ("multi-process: create IOHUB
-object to handle irq").
+Besides, since commit 6a0057aa22 ("docs/devel: make a statement
+about includes") this is documented as the Coding Style:
 
+  If you do use template header files they should be named with
+  the ``.c.inc`` or ``.h.inc`` suffix to make it clear they are
+  being included for expansion.
+
+Therefore move the included templates in the tcg/ directory and
+rename as '.h.inc'.
+
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
-Note, --enable-multiprocess doesn't seem to be covered in CI.
----
- hw/remote/proxy.c | 1 -
- 1 file changed, 1 deletion(-)
+ target/i386/helper.h                                      | 6 +++---
+ .../{cc_helper_template.h => cc_helper_template.h.inc}    | 0
+ .../i386/{ops_sse_header.h => tcg/ops_sse_header.h.inc}   | 0
+ .../shift_helper_template.h.inc}                          | 0
+ target/i386/tcg/cc_helper.c                               | 8 ++++----
+ target/i386/tcg/int_helper.c                              | 8 ++++----
+ 6 files changed, 11 insertions(+), 11 deletions(-)
+ rename target/i386/tcg/{cc_helper_template.h => cc_helper_template.h.inc} (100%)
+ rename target/i386/{ops_sse_header.h => tcg/ops_sse_header.h.inc} (100%)
+ rename target/i386/{shift_helper_template.h => tcg/shift_helper_template.h.inc} (100%)
 
-diff --git a/hw/remote/proxy.c b/hw/remote/proxy.c
-index 1c7786b52c..2052d721e5 100644
---- a/hw/remote/proxy.c
-+++ b/hw/remote/proxy.c
-@@ -22,7 +22,6 @@
- #include "qom/object.h"
- #include "qemu/event_notifier.h"
- #include "sysemu/kvm.h"
--#include "util/event_notifier-posix.c"
+diff --git a/target/i386/helper.h b/target/i386/helper.h
+index e627a93107..48609c210b 100644
+--- a/target/i386/helper.h
++++ b/target/i386/helper.h
+@@ -203,11 +203,11 @@ DEF_HELPER_1(enter_mmx, void, env)
+ DEF_HELPER_1(emms, void, env)
  
- static void probe_pci_info(PCIDevice *dev, Error **errp);
- static void proxy_device_reset(DeviceState *dev);
+ #define SHIFT 0
+-#include "ops_sse_header.h"
++#include "tcg/ops_sse_header.h.inc"
+ #define SHIFT 1
+-#include "ops_sse_header.h"
++#include "tcg/ops_sse_header.h.inc"
+ #define SHIFT 2
+-#include "ops_sse_header.h"
++#include "tcg/ops_sse_header.h.inc"
+ 
+ DEF_HELPER_3(rclb, tl, env, tl, tl)
+ DEF_HELPER_3(rclw, tl, env, tl, tl)
+diff --git a/target/i386/tcg/cc_helper_template.h b/target/i386/tcg/cc_helper_template.h.inc
+similarity index 100%
+rename from target/i386/tcg/cc_helper_template.h
+rename to target/i386/tcg/cc_helper_template.h.inc
+diff --git a/target/i386/ops_sse_header.h b/target/i386/tcg/ops_sse_header.h.inc
+similarity index 100%
+rename from target/i386/ops_sse_header.h
+rename to target/i386/tcg/ops_sse_header.h.inc
+diff --git a/target/i386/shift_helper_template.h b/target/i386/tcg/shift_helper_template.h.inc
+similarity index 100%
+rename from target/i386/shift_helper_template.h
+rename to target/i386/tcg/shift_helper_template.h.inc
+diff --git a/target/i386/tcg/cc_helper.c b/target/i386/tcg/cc_helper.c
+index 6227dbb30b..c310bd842f 100644
+--- a/target/i386/tcg/cc_helper.c
++++ b/target/i386/tcg/cc_helper.c
+@@ -58,21 +58,21 @@ const uint8_t parity_table[256] = {
+ };
+ 
+ #define SHIFT 0
+-#include "cc_helper_template.h"
++#include "cc_helper_template.h.inc"
+ #undef SHIFT
+ 
+ #define SHIFT 1
+-#include "cc_helper_template.h"
++#include "cc_helper_template.h.inc"
+ #undef SHIFT
+ 
+ #define SHIFT 2
+-#include "cc_helper_template.h"
++#include "cc_helper_template.h.inc"
+ #undef SHIFT
+ 
+ #ifdef TARGET_X86_64
+ 
+ #define SHIFT 3
+-#include "cc_helper_template.h"
++#include "cc_helper_template.h.inc"
+ #undef SHIFT
+ 
+ #endif
+diff --git a/target/i386/tcg/int_helper.c b/target/i386/tcg/int_helper.c
+index 599ac968b0..05418f181f 100644
+--- a/target/i386/tcg/int_helper.c
++++ b/target/i386/tcg/int_helper.c
+@@ -448,20 +448,20 @@ target_ulong helper_pext(target_ulong src, target_ulong mask)
+ }
+ 
+ #define SHIFT 0
+-#include "shift_helper_template.h"
++#include "shift_helper_template.h.inc"
+ #undef SHIFT
+ 
+ #define SHIFT 1
+-#include "shift_helper_template.h"
++#include "shift_helper_template.h.inc"
+ #undef SHIFT
+ 
+ #define SHIFT 2
+-#include "shift_helper_template.h"
++#include "shift_helper_template.h.inc"
+ #undef SHIFT
+ 
+ #ifdef TARGET_X86_64
+ #define SHIFT 3
+-#include "shift_helper_template.h"
++#include "shift_helper_template.h.inc"
+ #undef SHIFT
+ #endif
+ 
 -- 
 2.38.1
 
