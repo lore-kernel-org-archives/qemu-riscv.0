@@ -4,84 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77C20C7EE29
-	for <qemu-riscv@archiver.kernel.org>; Fri,  9 Jun 2023 10:09:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42C9DC7EE29
+	for <qemu-riscv@archiver.kernel.org>; Fri,  9 Jun 2023 14:55:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q7Z3X-0006Ba-Pp; Fri, 09 Jun 2023 06:09:19 -0400
+	id 1q7civ-0000HN-De; Fri, 09 Jun 2023 10:04:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
- id 1q7Z3W-0006BF-BR
- for qemu-riscv@nongnu.org; Fri, 09 Jun 2023 06:09:18 -0400
-Received: from mail-oo1-xc31.google.com ([2607:f8b0:4864:20::c31])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
- id 1q7Z3T-0006Tx-K9
- for qemu-riscv@nongnu.org; Fri, 09 Jun 2023 06:09:18 -0400
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-5523bd97c64so1708493eaf.0
- for <qemu-riscv@nongnu.org>; Fri, 09 Jun 2023 03:09:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1686305353; x=1688897353;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=OzSK7hABA28xCfv4pKGg0lBnF68yq9uktgRx5iEmiaI=;
- b=SnjQiblhpKdUrkFmokq90JQhRukoXq5b8J65xXVJT9EIrcP/WR3hM6uzBoAdAPmaR+
- 3fQp23XvUy7d9X/SQQuG2rTO/QvUD1wJXI7KDWJ2VKJDeQLf+6fi8iH4QVW+bIU077fU
- IGcDNeMIM5dt1wtSEHAEi6nL3rDKqVcHE2Rhnok+EDQfNuL2kAEF43y1yU/7Gx5y24cv
- gwk8IsL+MKxcaEQIvlvHk2aGIrhi9BmaaLoDVjD+hU9fnTLkykF6r0TUD9n8Ftk/ReM1
- vX2baJvN2ZfSLdEv40zycMQoM9odk9M7DrKLraUWbA40Xnwi/iaSU5qSjWDqJ3FyLQBc
- Dopg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686305353; x=1688897353;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=OzSK7hABA28xCfv4pKGg0lBnF68yq9uktgRx5iEmiaI=;
- b=Wp1DwTIL3P/HT28r8CVIbfX9VPORG1htoywdQGMmhUQmW+LtEGKpDJOO5svLpWfave
- Qb+A9IlYoV7Vv0b9jz4nm7dcHx3sbdk5JI888Uj37fNIpXr9iw6RUXLQSADNRjtdEUze
- 0VOM0W7mNc3DGW8DmleMKeI0day9kaobIdYVP35L2FlqNpcF73BV77PsLBWT7P/9iwAZ
- x8soqsVXr504m4cMmfBzjZ+0b0s9S33Ss7XRro9XQ5eJ/4pYwhfh2s+oICUZgOHP9B+2
- zUm83GbpGu5nU5dYtu/RKjxmDu9L/n6VBof5HIOnAm2irUZHrEH/+u/lE2ky4vuflEGX
- 3Q2w==
-X-Gm-Message-State: AC+VfDyABEPDoLzn8d4SzTOoXpHoT7AHv1IKR7A61n+zPTdxscozQGfL
- hf/VmTH2GF2GWYfl+Nvl9EAVX83myT61kWVukntd0A==
-X-Google-Smtp-Source: ACHHUZ6ewDIbcR4/py85q2j6sKSdum5U5/Vdc7cWMVzwmXLvBSTRSLiaS7LXPrZs5BLOaL/cUyMRgLfEvjshvfKWg50=
-X-Received: by 2002:aca:db83:0:b0:39a:7233:3340 with SMTP id
- s125-20020acadb83000000b0039a72333340mr2527082oig.23.1686305353377; Fri, 09
- Jun 2023 03:09:13 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <robh@kernel.org>) id 1q7ciu-0000HF-0R
+ for qemu-riscv@nongnu.org; Fri, 09 Jun 2023 10:04:16 -0400
+Received: from dfw.source.kernel.org ([2604:1380:4641:c500::1])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <robh@kernel.org>) id 1q7cin-0007eh-Hn
+ for qemu-riscv@nongnu.org; Fri, 09 Jun 2023 10:04:15 -0400
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id D85EE65844
+ for <qemu-riscv@nongnu.org>; Fri,  9 Jun 2023 14:03:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C5457C433A1
+ for <qemu-riscv@nongnu.org>; Fri,  9 Jun 2023 14:03:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1686319438;
+ bh=4I/YaRz0JPgSntsbq21xyleaxpnwMk0f+rSHrten7Nw=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=Li+CI9dmjZpFEyKY0TEnA7JMSOf2g/jK3VQik3pEQaGJXtNdC1mbhlhwfoOqbeM/O
+ C7zj/hGfLvcf0pC+JY5CNaWoNHbU6wwyVwVISv9OUBFLh0Uj4Zd93+snwTcRY6DNOI
+ 2aIhhAjus+nq82CirPnQqpSNF6W8UgH230vTi98tauGmmSYiiWzZd+p1yA31PKCftn
+ vBAIU+eR3lwzOLk2/ZR9g1T+Pjx4cm6aQGr7GVBU9jZ5couB7wuur0Gdp+e4RfWs7x
+ TndYjNpGkwSHfiXKXTb4IWtbuVHgNvRWX3Ccd3js8PStYLqDASfAB+ThfJo2IJVG4b
+ 1jO486zxpCFlg==
+Received: by mail-lf1-f43.google.com with SMTP id
+ 2adb3069b0e04-4f61d79b0f2so2363486e87.3
+ for <qemu-riscv@nongnu.org>; Fri, 09 Jun 2023 07:03:58 -0700 (PDT)
+X-Gm-Message-State: AC+VfDy8JDWbuYeTAvC67c4IFYVnT59gRfE8jgGJjWQLRmtnPqd0+GSy
+ eBsjdEUpQnrkleUo/0QKsmTPjcG6TAdJjLDNdw==
+X-Google-Smtp-Source: ACHHUZ5YQv2XPsQRf7fiS5EHNK3U/O/dTd2T5JKiUmddht7wp+IV/pFj6+87nrAXOzHuwKYwetH7tBI6o/ZkH7J0SvU=
+X-Received: by 2002:a2e:9942:0:b0:2b1:b8ad:3456 with SMTP id
+ r2-20020a2e9942000000b002b1b8ad3456mr1157920ljj.50.1686319436756; Fri, 09 Jun
+ 2023 07:03:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230526062509.31682-1-yongxuan.wang@sifive.com>
- <20230526062509.31682-5-yongxuan.wang@sifive.com>
- <a715b6d1-d28a-1e04-34c5-5d6c1fb2696e@ventanamicro.com>
-In-Reply-To: <a715b6d1-d28a-1e04-34c5-5d6c1fb2696e@ventanamicro.com>
-From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-Date: Fri, 9 Jun 2023 18:09:03 +0800
-Message-ID: <CAMWQL2hQkzCxMdvHXw8Yy8HSceEkHaMga5i1Z-79c-Eq6QGftg@mail.gmail.com>
-Subject: Re: [PATCH v3 4/6] target/riscv: Create an KVM AIA irqchip
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, rkanwal@rivosinc.com, 
- anup@brainfault.org, atishp@atishpatra.org, vincent.chen@sifive.com, 
- greentime.hu@sifive.com, frank.chang@sifive.com, jim.shu@sifive.com, 
- Palmer Dabbelt <palmer@dabbelt.com>,
+References: <20230608-sitting-bath-31eddc03c5a5@spud>
+ <168624654839.3085745.9088493205796442132.robh@kernel.org>
+ <20230608-unlucky-carpenter-b3a95f269712@spud>
+In-Reply-To: <20230608-unlucky-carpenter-b3a95f269712@spud>
+From: Rob Herring <robh@kernel.org>
+Date: Fri, 9 Jun 2023 08:03:44 -0600
+X-Gmail-Original-Message-ID: <CAL_JsqK8pr5itTr8xTOf=h7zOan6giGsQcwQ-zUCbjtpUsosfw@mail.gmail.com>
+Message-ID: <CAL_JsqK8pr5itTr8xTOf=h7zOan6giGsQcwQ-zUCbjtpUsosfw@mail.gmail.com>
+Subject: Re: [PATCH v2] dt-bindings: riscv: deprecate riscv,isa
+To: Conor Dooley <conor@kernel.org>
+Cc: Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, 
+ Conor Dooley <conor.dooley@microchip.com>, Oleksii <oleksii.kurochko@gmail.com>,
+ Anup Patel <apatel@ventanamicro.com>, qemu-riscv@nongnu.org,
+ u-boot@lists.denx.de, 
+ Andrew Jones <ajones@ventanamicro.com>, palmer@dabbelt.com, 
+ Atish Patra <atishp@atishpatra.org>, Jessica Clarke <jrtc27@jrtc27.com>, 
+ Paul Walmsley <paul.walmsley@sifive.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Paolo Bonzini <pbonzini@redhat.com>,
- kvm@vger.kernel.org
+ devicetree@vger.kernel.org, linux-riscv@lists.infradead.org, 
+ Rick Chen <rick@andestech.com>, linux-kernel@vger.kernel.org, 
+ Leo <ycliang@andestech.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c31;
- envelope-from=yongxuan.wang@sifive.com; helo=mail-oo1-xc31.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=2604:1380:4641:c500::1;
+ envelope-from=robh@kernel.org; helo=dfw.source.kernel.org
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01,
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,162 +92,65 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi  Daniel,
+On Thu, Jun 8, 2023 at 12:05=E2=80=AFPM Conor Dooley <conor@kernel.org> wro=
+te:
+>
+> On Thu, Jun 08, 2023 at 11:49:08AM -0600, Rob Herring wrote:
+> > On Thu, 08 Jun 2023 17:54:05 +0100, Conor Dooley wrote:
+>
+> > > As a result of implementing Sean's suggestion, I believe I need to ad=
+d
+> > > riscv,isa-extensions as an exception to the rules preventing vendor
+> > > properties being of object type, otherwise dt_binding_check is less t=
+han
+> > > happy with me.
+>
+> > dtschema/dtc warnings/errors:
+> > /builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings=
+/riscv/extensions.yaml: properties:riscv,isa-extensions: 'oneOf' conditiona=
+l failed, one must be fixed:
+> >       Additional properties are not allowed ('additionalProperties', 'p=
+roperties' were unexpected)
+> >               hint: A vendor boolean property can use "type: boolean"
+> >       /builds/robherring/dt-review-ci/linux/Documentation/devicetree/bi=
+ndings/riscv/extensions.yaml: properties:riscv,isa-extensions: 'oneOf' cond=
+itional failed, one must be fixed:
+> >               'enum' is a required property
+> >               'const' is a required property
+> >               hint: A vendor string property with exact values has an i=
+mplicit type
+> >               from schema $id: http://devicetree.org/meta-schemas/vendo=
+r-props.yaml#
+> >       Additional properties are not allowed ('additionalProperties', 'p=
+roperties', 'type' were unexpected)
+> >               hint: A vendor string property with exact values has an i=
+mplicit type
+> >       /builds/robherring/dt-review-ci/linux/Documentation/devicetree/bi=
+ndings/riscv/extensions.yaml: properties:riscv,isa-extensions: 'oneOf' cond=
+itional failed, one must be fixed:
+> >               '$ref' is a required property
+> >               'allOf' is a required property
+> >               hint: A vendor property needs a $ref to types.yaml
+> >               from schema $id: http://devicetree.org/meta-schemas/vendo=
+r-props.yaml#
+> >       'boolean' was expected
+> >               hint: A vendor boolean property can use "type: boolean"
+> >       hint: Vendor specific properties must have a type and description=
+ unless they have a defined, common suffix.
+> >       from schema $id: http://devicetree.org/meta-schemas/vendor-props.=
+yaml#
+>
+> Yeah, expected. I think I need an exception in vendor-props for this to
+> pass the checks.
 
-Thanks for your suggestions! I'll fix it in patch v4.
+Nope, vendor prefixes don't go in node names. That's not explicit
+anywhere, but goes against using generic node names.
 
-Regards,
-Yong-Xuan
+Also, note that looking at the DT spec, there's already prior art here
+with PPC. See "power-isa-*". Though that appears in .dts files, but no
+kernel code. Maybe you already saw that as your v1 is similar. There's
+not really much advantage to align with it, but also not much reason
+to deviate.
 
-On Tue, Jun 6, 2023 at 9:45=E2=80=AFPM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
->
->
-> On 5/26/23 03:25, Yong-Xuan Wang wrote:
-> > implement a function to create an KVM AIA chip
-> >
-> > Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-> > Reviewed-by: Jim Shu <jim.shu@sifive.com>
-> > ---
-> >   target/riscv/kvm.c       | 83 +++++++++++++++++++++++++++++++++++++++=
-+
-> >   target/riscv/kvm_riscv.h |  3 ++
-> >   2 files changed, 86 insertions(+)
-> >
-> > diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-> > index eb469e8ca5..ead121154f 100644
-> > --- a/target/riscv/kvm.c
-> > +++ b/target/riscv/kvm.c
-> > @@ -34,6 +34,7 @@
-> >   #include "exec/address-spaces.h"
-> >   #include "hw/boards.h"
-> >   #include "hw/irq.h"
-> > +#include "hw/intc/riscv_imsic.h"
-> >   #include "qemu/log.h"
-> >   #include "hw/loader.h"
-> >   #include "kvm_riscv.h"
-> > @@ -548,3 +549,85 @@ bool kvm_arch_cpu_check_are_resettable(void)
-> >   void kvm_arch_accel_class_init(ObjectClass *oc)
-> >   {
-> >   }
-> > +
-> > +void kvm_riscv_aia_create(DeviceState *aplic_s, bool msimode, int sock=
-et,
-> > +                          uint64_t aia_irq_num, uint64_t hart_count,
-> > +                          uint64_t aplic_base, uint64_t imsic_base)
-> > +{
-> > +    int ret;
-> > +    int aia_fd =3D -1;
-> > +    uint64_t aia_mode;
-> > +    uint64_t aia_nr_ids;
-> > +    uint64_t aia_hart_bits =3D find_last_bit(&hart_count, BITS_PER_LON=
-G) + 1;
-> > +
-> > +    if (!msimode) {
-> > +        error_report("Currently KVM AIA only supports aplic_imsic mode=
-");
-> > +        exit(1);
-> > +    }
-> > +
-> > +    aia_fd =3D kvm_create_device(kvm_state, KVM_DEV_TYPE_RISCV_AIA, fa=
-lse);
-> > +
-> > +    if (aia_fd < 0) {
-> > +        error_report("Unable to create in-kernel irqchip");
-> > +        exit(1);
-> > +    }
-> > +
-> > +    ret =3D kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
-> > +                            KVM_DEV_RISCV_AIA_CONFIG_MODE,
-> > +                            &aia_mode, false, NULL);
-> > +
-> > +    ret =3D kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
-> > +                            KVM_DEV_RISCV_AIA_CONFIG_IDS,
-> > +                            &aia_nr_ids, false, NULL);
-> > +
-> > +    ret =3D kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
-> > +                            KVM_DEV_RISCV_AIA_CONFIG_SRCS,
-> > +                            &aia_irq_num, true, NULL);
-> > +    if (ret < 0) {
-> > +        error_report("KVM AIA: fail to set number input irq lines");
-> > +        exit(1);
-> > +    }
->
-> I see that you didn't check 'ret' for the first 2 calls of kvm_device_acc=
-ess().
-> Is it intentional?
->
-> Since you're setting customized error messages for every step I think it'=
-s worth
-> also handling the case where we fail to set aia_mode and aia_nr_ids.
->
->
-> Thanks,
->
->
-> Daniel
->
->
-> > +
-> > +    ret =3D kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
-> > +                            KVM_DEV_RISCV_AIA_CONFIG_HART_BITS,
-> > +                            &aia_hart_bits, true, NULL);
-> > +    if (ret < 0) {
-> > +        error_report("KVM AIA: fail to set number of harts");
-> > +        exit(1);
-> > +    }
-> > +
-> > +    ret =3D kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_ADDR,
-> > +                            KVM_DEV_RISCV_AIA_ADDR_APLIC,
-> > +                            &aplic_base, true, NULL);
-> > +    if (ret < 0) {
-> > +        error_report("KVM AIA: fail to set the base address of APLIC")=
-;
-> > +        exit(1);
-> > +    }
-> > +
-> > +    for (int i =3D 0; i < hart_count; i++) {
-> > +        uint64_t imsic_addr =3D imsic_base + i * IMSIC_HART_SIZE(0);
-> > +        ret =3D kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_ADDR,
-> > +                                KVM_DEV_RISCV_AIA_ADDR_IMSIC(i),
-> > +                                &imsic_addr, true, NULL);
-> > +        if (ret < 0) {
-> > +            error_report("KVM AIA: fail to set the base address of IMS=
-ICs");
-> > +            exit(1);
-> > +        }
-> > +    }
-> > +
-> > +    if (kvm_has_gsi_routing()) {
-> > +        for (uint64_t idx =3D 0; idx < aia_irq_num + 1; ++idx) {
-> > +            kvm_irqchip_add_irq_route(kvm_state, idx, socket, idx);
-> > +        }
-> > +        kvm_gsi_routing_allowed =3D true;
-> > +        kvm_irqchip_commit_routes(kvm_state);
-> > +    }
-> > +
-> > +    ret =3D kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CTRL,
-> > +                            KVM_DEV_RISCV_AIA_CTRL_INIT,
-> > +                            NULL, true, NULL);
-> > +    if (ret < 0) {
-> > +        error_report("KVM AIA: initialized fail");
-> > +        exit(1);
-> > +    }
-> > +}
-> > diff --git a/target/riscv/kvm_riscv.h b/target/riscv/kvm_riscv.h
-> > index 606968a4b7..6067adff51 100644
-> > --- a/target/riscv/kvm_riscv.h
-> > +++ b/target/riscv/kvm_riscv.h
-> > @@ -21,6 +21,9 @@
-> >
-> >   void kvm_riscv_reset_vcpu(RISCVCPU *cpu);
-> >   void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level);
-> > +void kvm_riscv_aia_create(DeviceState *aplic_s, bool msimode, int sock=
-et,
-> > +                          uint64_t aia_irq_num, uint64_t hart_count,
-> > +                          uint64_t aplic_base, uint64_t imsic_base);
-> >
-> >   #define KVM_DEV_RISCV_AIA_GRP_CONFIG            0
-> >   #define KVM_DEV_RISCV_AIA_CONFIG_MODE           0
+Rob
 
