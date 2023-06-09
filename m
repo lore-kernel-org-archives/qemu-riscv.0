@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9EC3C7EE29
-	for <qemu-riscv@archiver.kernel.org>; Fri,  9 Jun 2023 02:26:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 093E3C7EE37
+	for <qemu-riscv@archiver.kernel.org>; Fri,  9 Jun 2023 02:26:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q7Rni-0002gF-QG; Thu, 08 Jun 2023 22:24:30 -0400
+	id 1q7RpD-0005dh-11; Thu, 08 Jun 2023 22:26:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1q7Rna-0002bX-2r
- for qemu-riscv@nongnu.org; Thu, 08 Jun 2023 22:24:22 -0400
-Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
+ id 1q7Rof-0003wp-6G
+ for qemu-riscv@nongnu.org; Thu, 08 Jun 2023 22:25:29 -0400
+Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1q7RnQ-0005Zz-1o
- for qemu-riscv@nongnu.org; Thu, 08 Jun 2023 22:24:21 -0400
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-662f0feafb2so985672b3a.1
- for <qemu-riscv@nongnu.org>; Thu, 08 Jun 2023 19:24:11 -0700 (PDT)
+ id 1q7Rnr-0005pW-AG
+ for qemu-riscv@nongnu.org; Thu, 08 Jun 2023 22:25:28 -0400
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-65299178ac5so1353226b3a.1
+ for <qemu-riscv@nongnu.org>; Thu, 08 Jun 2023 19:24:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1686277450; x=1688869450;
+ d=linaro.org; s=google; t=1686277477; x=1688869477;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Wav2LlfUYrH6X3G/qJ3+1S+s5uXr/vPS9iK8dstF4cA=;
- b=d7Z7rt1yBU2Oms30p8qvGSbbn6f+Ww44BiNw0UX3DYKUDrYL3+g58FqHjrUUTeHiiC
- UOegR/NR2nmYKpV5pbR2STSEoViLfRdivn+QnblU0PF8QRHoruL8HdOCEvOULe7mSXli
- 4GRmBWgOrDPDuIqJ+MzY/BklP+iB6iLJpzVGJRgy34vTlj6glrDtHtLZXTRsCkFPNeuT
- zZMfBSRuGXjBQR2z2XHJnISiwDpNXsVmMs+b590odiZZz5AaW80UX3hFR6lgnjmdmayQ
- r9itHGAvtWBGELoiAxWp1o9SkU7eIH4pWkXGur1NGuqAbtgpYchBxLYGaQLLo5jslDHG
- 4htA==
+ bh=sPtIUE7c/k8ebTTYu8yGa6+TIEoSCFv5hTgDoXGO8Z0=;
+ b=sEDwI4e9NsnBUdS7KVdZ6SNyZCWg+yG667RBjWexqleyA6wNjkL9/gZ5FnofF3+wAj
+ BOig0tVWwKqEnhSH0iVBAuBnMKjZ9PJbB1yoRfrV5Dk2hWxEoOuODTzRqmD6sDuWwrBp
+ /TkrFpfmoSakFO2VDQK/YBy8Cj4mZrk7XEE7l4yFB2ZoBKHO22YqLuBYtaZmUdyXPj6c
+ YE//dJIPQO6htBel4u29BU/pPB79ofu5Tq8DkDK8DhdxbEyzbi6CQb/lIDiOJlsZQZ5N
+ PKeu4WvB9ononpeIfCUc0ZJv1ozMh0Ldn9RnY84+FP0CZFjvjikxrSCeBQ0i/O012MeC
+ 4nSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686277450; x=1688869450;
+ d=1e100.net; s=20221208; t=1686277477; x=1688869477;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Wav2LlfUYrH6X3G/qJ3+1S+s5uXr/vPS9iK8dstF4cA=;
- b=NOkOk2YfpZ9ZEAxyvCOFuULc7ZMFDVX8iSOvxWTb/GVvpWgP6Xvq1sFPf7qiRO8h2b
- kmxeRJe3820t6jgvEdXZEB1nPJFytt0zu69qLsP4+GdkouSUpoT2tqwHbLGE5ZmBuKwm
- RZ7uzz3a4CBBXMa0JJQ+ctO3q6ZQvFCxyoGeQz3L/hMI/SV7cvZTT9ELycUcAQSC7vow
- Wp4/JQEy9tlQqB8Fb9J9VSyAEeXoHJwJ6m5IMhDxyyIYOeS6Ax35VL7SbQWS4kBwEkAL
- y2FdtcQIvCdzasg911I7Xe/JzD431p6Gf3KMwQBaMnnGGmZaovVIH3C34hKoLn7HgNY7
- S+qg==
-X-Gm-Message-State: AC+VfDw/rC0BZKxOrhBU8VnH3qFC481PwXsP4Sflwh47x20HaR9lWMS2
- UeAEJgqbQeKa2sCC7DrNZFJOEg==
-X-Google-Smtp-Source: ACHHUZ69M3wr/Y4IQOE3Inzjl9Qi2v+KEmCWoryEc1bSYq1K7Rawf0lI8GNFplEjD345BxHoXDSmQQ==
-X-Received: by 2002:a05:6a00:17a0:b0:656:c971:951 with SMTP id
- s32-20020a056a0017a000b00656c9710951mr5103171pfg.8.1686277450692; 
- Thu, 08 Jun 2023 19:24:10 -0700 (PDT)
+ bh=sPtIUE7c/k8ebTTYu8yGa6+TIEoSCFv5hTgDoXGO8Z0=;
+ b=VrhLeCezBenU1KGaj9t3KbUFx3Nm35tKiOPvK/qTrZVzp8uQWpYtRCsZ+LkVLdSoBu
+ KBrg80+V+dj1hmZxK8XazwWzt/3Rqif4YEc4WIWwrDzPLCkGRR04M+VU8SVU3PcKYxW+
+ MOvIIdyaSL/GWQ4UaMpx6Ieb/wYDpvBp/qarIsHp02FruroruCOC9W1zzMStKlNgtX8L
+ c0APnlNrbZa/q7p8SEOxK0KXSQs8COroKp7HU/BT93x1UUc2w4ER7hEihNJp3uhKRtTr
+ sshQWa0nCN/7VRq0WjffMS2lxDxidswG3RXbJLUQ8OPaP0asvxNx12Mgf9TjHnL6sjlD
+ 9LJA==
+X-Gm-Message-State: AC+VfDyu5WAqDmKt+vLEY2T8owtydQg6R6nQPuD6mqaLXwS042WLJfYQ
+ dpJ89IIhThPraqop9IS20wNw/A==
+X-Google-Smtp-Source: ACHHUZ5KcXHvLUaUXDLmU2C87tRLjh5lF4bdrszNb5jjecL9F4ujswOHYFhfLAnXOEYGj2eZ7k3hxA==
+X-Received: by 2002:a05:6a00:2d21:b0:652:a91c:5599 with SMTP id
+ fa33-20020a056a002d2100b00652a91c5599mr12637829pfb.24.1686277476881; 
+ Thu, 08 Jun 2023 19:24:36 -0700 (PDT)
 Received: from stoup.. ([2602:ae:1598:4c01:b071:df63:5761:f449])
  by smtp.gmail.com with ESMTPSA id
- x25-20020a62fb19000000b0063afb08afeesm1686458pfm.67.2023.06.08.19.24.09
+ x25-20020a62fb19000000b0063afb08afeesm1686458pfm.67.2023.06.08.19.24.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Jun 2023 19:24:10 -0700 (PDT)
+ Thu, 08 Jun 2023 19:24:36 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: ardb@kernel.org, berrange@redhat.com, qemu-ppc@nongnu.org,
- qemu-arm@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v2 08/38] target/arm: Demultiplex AESE and AESMC
-Date: Thu,  8 Jun 2023 19:23:31 -0700
-Message-Id: <20230609022401.684157-9-richard.henderson@linaro.org>
+ qemu-arm@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com
+Subject: [PATCH v2 37/38] host/include/aarch64: Implement aes-round.h
+Date: Thu,  8 Jun 2023 19:24:00 -0700
+Message-Id: <20230609022401.684157-38-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230609022401.684157-1-richard.henderson@linaro.org>
 References: <20230609022401.684157-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x431.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,214 +94,277 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Split these helpers so that we are not passing 'decrypt'
-within the simd descriptor.
+Detect AES in cpuinfo; implement the accel hooks.
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/arm/helper.h             |  2 ++
- target/arm/tcg/sve.decode       |  4 ++--
- target/arm/tcg/crypto_helper.c  | 37 +++++++++++++++++++++++----------
- target/arm/tcg/translate-a64.c  | 13 ++++--------
- target/arm/tcg/translate-neon.c |  4 ++--
- target/arm/tcg/translate-sve.c  |  8 ++++---
- 6 files changed, 41 insertions(+), 27 deletions(-)
+ meson.build                           |   9 ++
+ host/include/aarch64/host/aes-round.h | 205 ++++++++++++++++++++++++++
+ host/include/aarch64/host/cpuinfo.h   |   1 +
+ util/cpuinfo-aarch64.c                |   2 +
+ 4 files changed, 217 insertions(+)
+ create mode 100644 host/include/aarch64/host/aes-round.h
 
-diff --git a/target/arm/helper.h b/target/arm/helper.h
-index 3335c2b10b..95e32a697a 100644
---- a/target/arm/helper.h
-+++ b/target/arm/helper.h
-@@ -552,7 +552,9 @@ DEF_HELPER_FLAGS_2(neon_qzip16, TCG_CALL_NO_RWG, void, ptr, ptr)
- DEF_HELPER_FLAGS_2(neon_qzip32, TCG_CALL_NO_RWG, void, ptr, ptr)
+diff --git a/meson.build b/meson.build
+index 34306a6205..d622e54bef 100644
+--- a/meson.build
++++ b/meson.build
+@@ -2665,6 +2665,15 @@ config_host_data.set('CONFIG_AVX512BW_OPT', get_option('avx512bw') \
+     int main(int argc, char *argv[]) { return bar(argv[0]); }
+   '''), error_message: 'AVX512BW not available').allowed())
  
- DEF_HELPER_FLAGS_4(crypto_aese, TCG_CALL_NO_RWG, void, ptr, ptr, ptr, i32)
-+DEF_HELPER_FLAGS_4(crypto_aesd, TCG_CALL_NO_RWG, void, ptr, ptr, ptr, i32)
- DEF_HELPER_FLAGS_3(crypto_aesmc, TCG_CALL_NO_RWG, void, ptr, ptr, i32)
-+DEF_HELPER_FLAGS_3(crypto_aesimc, TCG_CALL_NO_RWG, void, ptr, ptr, i32)
- 
- DEF_HELPER_FLAGS_4(crypto_sha1su0, TCG_CALL_NO_RWG, void, ptr, ptr, ptr, i32)
- DEF_HELPER_FLAGS_4(crypto_sha1c, TCG_CALL_NO_RWG, void, ptr, ptr, ptr, i32)
-diff --git a/target/arm/tcg/sve.decode b/target/arm/tcg/sve.decode
-index 14b3a69c36..04b6fcc0cf 100644
---- a/target/arm/tcg/sve.decode
-+++ b/target/arm/tcg/sve.decode
-@@ -1629,8 +1629,8 @@ STNT1_zprz      1110010 .. 10 ..... 001 ... ..... ..... \
- ### SVE2 Crypto Extensions
- 
- # SVE2 crypto unary operations
--# AESMC and AESIMC
--AESMC           01000101 00 10000011100 decrypt:1 00000 rd:5
-+AESMC           01000101 00 10000011100 0 00000 rd:5
-+AESIMC          01000101 00 10000011100 1 00000 rd:5
- 
- # SVE2 crypto destructive binary operations
- AESE            01000101 00 10001 0 11100 0 ..... .....  @rdn_rm_e0
-diff --git a/target/arm/tcg/crypto_helper.c b/target/arm/tcg/crypto_helper.c
-index 06254939d2..75882d9ea3 100644
---- a/target/arm/tcg/crypto_helper.c
-+++ b/target/arm/tcg/crypto_helper.c
-@@ -45,11 +45,9 @@ static void clear_tail_16(void *vd, uint32_t desc)
-     clear_tail(vd, opr_sz, max_sz);
- }
- 
--static void do_crypto_aese(uint64_t *rd, uint64_t *rn,
--                           uint64_t *rm, bool decrypt)
-+static void do_crypto_aese(uint64_t *rd, uint64_t *rn, uint64_t *rm,
-+                           const uint8_t *sbox, const uint8_t *shift)
- {
--    static uint8_t const * const sbox[2] = { AES_sbox, AES_isbox };
--    static uint8_t const * const shift[2] = { AES_shifts, AES_ishifts };
-     union CRYPTO_STATE rk = { .l = { rm[0], rm[1] } };
-     union CRYPTO_STATE st = { .l = { rn[0], rn[1] } };
-     int i;
-@@ -60,7 +58,7 @@ static void do_crypto_aese(uint64_t *rd, uint64_t *rn,
- 
-     /* combine ShiftRows operation and sbox substitution */
-     for (i = 0; i < 16; i++) {
--        CR_ST_BYTE(st, i) = sbox[decrypt][CR_ST_BYTE(rk, shift[decrypt][i])];
-+        CR_ST_BYTE(st, i) = sbox[CR_ST_BYTE(rk, shift[i])];
-     }
- 
-     rd[0] = st.l[0];
-@@ -70,18 +68,26 @@ static void do_crypto_aese(uint64_t *rd, uint64_t *rn,
- void HELPER(crypto_aese)(void *vd, void *vn, void *vm, uint32_t desc)
- {
-     intptr_t i, opr_sz = simd_oprsz(desc);
--    bool decrypt = simd_data(desc);
- 
-     for (i = 0; i < opr_sz; i += 16) {
--        do_crypto_aese(vd + i, vn + i, vm + i, decrypt);
-+        do_crypto_aese(vd + i, vn + i, vm + i, AES_sbox, AES_shifts);
-     }
-     clear_tail(vd, opr_sz, simd_maxsz(desc));
- }
- 
--static void do_crypto_aesmc(uint64_t *rd, uint64_t *rm, bool decrypt)
-+void HELPER(crypto_aesd)(void *vd, void *vn, void *vm, uint32_t desc)
-+{
-+    intptr_t i, opr_sz = simd_oprsz(desc);
++# For both AArch64 and AArch32, detect if builtins are available.
++config_host_data.set('CONFIG_ARM_AES_BUILTIN', cc.compiles('''
++    #include <arm_neon.h>
++    #ifndef __ARM_FEATURE_AES
++    __attribute__((target("+crypto")))
++    #endif
++    void foo(uint8x16_t *p) { *p = vaesmcq_u8(*p); }
++  '''))
 +
-+    for (i = 0; i < opr_sz; i += 16) {
-+        do_crypto_aese(vd + i, vn + i, vm + i, AES_isbox, AES_ishifts);
-+    }
-+    clear_tail(vd, opr_sz, simd_maxsz(desc));
+ have_pvrdma = get_option('pvrdma') \
+   .require(rdma.found(), error_message: 'PVRDMA requires OpenFabrics libraries') \
+   .require(cc.compiles(gnu_source_prefix + '''
+diff --git a/host/include/aarch64/host/aes-round.h b/host/include/aarch64/host/aes-round.h
+new file mode 100644
+index 0000000000..6c126c3e89
+--- /dev/null
++++ b/host/include/aarch64/host/aes-round.h
+@@ -0,0 +1,205 @@
++/*
++ * AArch64 specific aes acceleration.
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#ifndef HOST_AES_ROUND_H
++#define HOST_AES_ROUND_H
++
++#include "host/cpuinfo.h"
++#include <arm_neon.h>
++
++#ifdef __ARM_FEATURE_AES
++# define HAVE_AES_ACCEL  true
++#else
++# define HAVE_AES_ACCEL  likely(cpuinfo & CPUINFO_AES)
++#endif
++#if !defined(__ARM_FEATURE_AES) && defined(CONFIG_ARM_AES_BUILTIN)
++# define ATTR_AES_ACCEL  __attribute__((target("+crypto")))
++#else
++# define ATTR_AES_ACCEL
++#endif
++
++static inline uint8x16_t aes_accel_bswap(uint8x16_t x)
++{
++    return vqtbl1q_u8(x, (uint8x16_t){ 15, 14, 13, 12, 11, 10, 9, 8,
++                                        7,  6,  5,  4,  3,  2, 1, 0, });
 +}
 +
-+static void do_crypto_aesmc(uint64_t *rd, uint64_t *rm, const uint32_t *mc)
- {
-     union CRYPTO_STATE st = { .l = { rm[0], rm[1] } };
--    const uint32_t *mc = decrypt ? AES_imc_rot : AES_mc_rot;
-     int i;
- 
-     for (i = 0; i < 16; i += 4) {
-@@ -99,10 +105,19 @@ static void do_crypto_aesmc(uint64_t *rd, uint64_t *rm, bool decrypt)
- void HELPER(crypto_aesmc)(void *vd, void *vm, uint32_t desc)
- {
-     intptr_t i, opr_sz = simd_oprsz(desc);
--    bool decrypt = simd_data(desc);
- 
-     for (i = 0; i < opr_sz; i += 16) {
--        do_crypto_aesmc(vd + i, vm + i, decrypt);
-+        do_crypto_aesmc(vd + i, vm + i, AES_mc_rot);
-+    }
-+    clear_tail(vd, opr_sz, simd_maxsz(desc));
++#ifdef CONFIG_ARM_AES_BUILTIN
++# define aes_accel_aesd            vaesdq_u8
++# define aes_accel_aese            vaeseq_u8
++# define aes_accel_aesmc           vaesmcq_u8
++# define aes_accel_aesimc          vaesimcq_u8
++# define aes_accel_aesd_imc(S, K)  vaesimcq_u8(vaesdq_u8(S, K))
++# define aes_accel_aese_mc(S, K)   vaesmcq_u8(vaeseq_u8(S, K))
++#else
++static inline uint8x16_t aes_accel_aesd(uint8x16_t d, uint8x16_t k)
++{
++    asm(".arch_extension aes\n\t"
++        "aesd %0.16b, %1.16b" : "+w"(d) : "w"(k));
++    return d;
 +}
 +
-+void HELPER(crypto_aesimc)(void *vd, void *vm, uint32_t desc)
++static inline uint8x16_t aes_accel_aese(uint8x16_t d, uint8x16_t k)
 +{
-+    intptr_t i, opr_sz = simd_oprsz(desc);
++    asm(".arch_extension aes\n\t"
++        "aese %0.16b, %1.16b" : "+w"(d) : "w"(k));
++    return d;
++}
 +
-+    for (i = 0; i < opr_sz; i += 16) {
-+        do_crypto_aesmc(vd + i, vm + i, AES_imc_rot);
-     }
-     clear_tail(vd, opr_sz, simd_maxsz(desc));
- }
-diff --git a/target/arm/tcg/translate-a64.c b/target/arm/tcg/translate-a64.c
-index aa93f37e21..8b7337ad01 100644
---- a/target/arm/tcg/translate-a64.c
-+++ b/target/arm/tcg/translate-a64.c
-@@ -13566,7 +13566,6 @@ static void disas_crypto_aes(DisasContext *s, uint32_t insn)
-     int opcode = extract32(insn, 12, 5);
-     int rn = extract32(insn, 5, 5);
-     int rd = extract32(insn, 0, 5);
--    int decrypt;
-     gen_helper_gvec_2 *genfn2 = NULL;
-     gen_helper_gvec_3 *genfn3 = NULL;
++static inline uint8x16_t aes_accel_aesmc(uint8x16_t d)
++{
++    asm(".arch_extension aes\n\t"
++        "aesmc %0.16b, %1.16b" : "=w"(d) : "w"(d));
++    return d;
++}
++
++static inline uint8x16_t aes_accel_aesimc(uint8x16_t d)
++{
++    asm(".arch_extension aes\n\t"
++        "aesimc %0.16b, %1.16b" : "=w"(d) : "w"(d));
++    return d;
++}
++
++/* Most CPUs fuse AESD+AESIMC in the execution pipeline. */
++static inline uint8x16_t aes_accel_aesd_imc(uint8x16_t d, uint8x16_t k)
++{
++    asm(".arch_extension aes\n\t"
++        "aesd %0.16b, %1.16b\n\t"
++        "aesimc %0.16b, %0.16b" : "+w"(d) : "w"(k));
++    return d;
++}
++
++/* Most CPUs fuse AESE+AESMC in the execution pipeline. */
++static inline uint8x16_t aes_accel_aese_mc(uint8x16_t d, uint8x16_t k)
++{
++    asm(".arch_extension aes\n\t"
++        "aese %0.16b, %1.16b\n\t"
++        "aesmc %0.16b, %0.16b" : "+w"(d) : "w"(k));
++    return d;
++}
++#endif /* CONFIG_ARM_AES_BUILTIN */
++
++static inline void ATTR_AES_ACCEL
++aesenc_MC_accel(AESState *ret, const AESState *st, bool be)
++{
++    uint8x16_t t = (uint8x16_t)st->v;
++
++    if (be) {
++        t = aes_accel_bswap(t);
++        t = aes_accel_aesmc(t);
++        t = aes_accel_bswap(t);
++    } else {
++        t = aes_accel_aesmc(t);
++    }
++    ret->v = (AESStateVec)t;
++}
++
++static inline void ATTR_AES_ACCEL
++aesenc_SB_SR_AK_accel(AESState *ret, const AESState *st,
++                      const AESState *rk, bool be)
++{
++    uint8x16_t t = (uint8x16_t)st->v;
++    uint8x16_t z = { };
++
++    if (be) {
++        t = aes_accel_bswap(t);
++        t = aes_accel_aese(t, z);
++        t = aes_accel_bswap(t);
++    } else {
++        t = aes_accel_aese(t, z);
++    }
++    ret->v = (AESStateVec)t ^ rk->v;
++}
++
++static inline void ATTR_AES_ACCEL
++aesenc_SB_SR_MC_AK_accel(AESState *ret, const AESState *st,
++                         const AESState *rk, bool be)
++{
++    uint8x16_t t = (uint8x16_t)st->v;
++    uint8x16_t z = { };
++
++    if (be) {
++        t = aes_accel_bswap(t);
++        t = aes_accel_aese_mc(t, z);
++        t = aes_accel_bswap(t);
++    } else {
++        t = aes_accel_aese_mc(t, z);
++    }
++    ret->v = (AESStateVec)t ^ rk->v;
++}
++
++static inline void ATTR_AES_ACCEL
++aesdec_IMC_accel(AESState *ret, const AESState *st, bool be)
++{
++    uint8x16_t t = (uint8x16_t)st->v;
++
++    if (be) {
++        t = aes_accel_bswap(t);
++        t = aes_accel_aesimc(t);
++        t = aes_accel_bswap(t);
++    } else {
++        t = aes_accel_aesimc(t);
++    }
++    ret->v = (AESStateVec)t;
++}
++
++static inline void ATTR_AES_ACCEL
++aesdec_ISB_ISR_AK_accel(AESState *ret, const AESState *st,
++                        const AESState *rk, bool be)
++{
++    uint8x16_t t = (uint8x16_t)st->v;
++    uint8x16_t z = { };
++
++    if (be) {
++        t = aes_accel_bswap(t);
++        t = aes_accel_aesd(t, z);
++        t = aes_accel_bswap(t);
++    } else {
++        t = aes_accel_aesd(t, z);
++    }
++    ret->v = (AESStateVec)t ^ rk->v;
++}
++
++static inline void ATTR_AES_ACCEL
++aesdec_ISB_ISR_AK_IMC_accel(AESState *ret, const AESState *st,
++                            const AESState *rk, bool be)
++{
++    uint8x16_t t = (uint8x16_t)st->v;
++    uint8x16_t k = (uint8x16_t)rk->v;
++    uint8x16_t z = { };
++
++    if (be) {
++        t = aes_accel_bswap(t);
++        k = aes_accel_bswap(k);
++        t = aes_accel_aesd(t, z);
++        t ^= k;
++        t = aes_accel_aesimc(t);
++        t = aes_accel_bswap(t);
++    } else {
++        t = aes_accel_aesd(t, z);
++        t ^= k;
++        t = aes_accel_aesimc(t);
++    }
++    ret->v = (AESStateVec)t;
++}
++
++static inline void ATTR_AES_ACCEL
++aesdec_ISB_ISR_IMC_AK_accel(AESState *ret, const AESState *st,
++                            const AESState *rk, bool be)
++{
++    uint8x16_t t = (uint8x16_t)st->v;
++    uint8x16_t z = { };
++
++    if (be) {
++        t = aes_accel_bswap(t);
++        t = aes_accel_aesd_imc(t, z);
++        t = aes_accel_bswap(t);
++    } else {
++        t = aes_accel_aesd_imc(t, z);
++    }
++    ret->v = (AESStateVec)t ^ rk->v;
++}
++
++#endif
+diff --git a/host/include/aarch64/host/cpuinfo.h b/host/include/aarch64/host/cpuinfo.h
+index 82227890b4..05feeb4f43 100644
+--- a/host/include/aarch64/host/cpuinfo.h
++++ b/host/include/aarch64/host/cpuinfo.h
+@@ -9,6 +9,7 @@
+ #define CPUINFO_ALWAYS          (1u << 0)  /* so cpuinfo is nonzero */
+ #define CPUINFO_LSE             (1u << 1)
+ #define CPUINFO_LSE2            (1u << 2)
++#define CPUINFO_AES             (1u << 3)
  
-@@ -13577,20 +13576,16 @@ static void disas_crypto_aes(DisasContext *s, uint32_t insn)
+ /* Initialized with a constructor. */
+ extern unsigned cpuinfo;
+diff --git a/util/cpuinfo-aarch64.c b/util/cpuinfo-aarch64.c
+index f99acb7884..ababc39550 100644
+--- a/util/cpuinfo-aarch64.c
++++ b/util/cpuinfo-aarch64.c
+@@ -56,10 +56,12 @@ unsigned __attribute__((constructor)) cpuinfo_init(void)
+     unsigned long hwcap = qemu_getauxval(AT_HWCAP);
+     info |= (hwcap & HWCAP_ATOMICS ? CPUINFO_LSE : 0);
+     info |= (hwcap & HWCAP_USCAT ? CPUINFO_LSE2 : 0);
++    info |= (hwcap & HWCAP_AES ? CPUINFO_AES: 0);
+ #endif
+ #ifdef CONFIG_DARWIN
+     info |= sysctl_for_bool("hw.optional.arm.FEAT_LSE") * CPUINFO_LSE;
+     info |= sysctl_for_bool("hw.optional.arm.FEAT_LSE2") * CPUINFO_LSE2;
++    info |= sysctl_for_bool("hw.optional.arm.FEAT_AES") * CPUINFO_AES;
+ #endif
  
-     switch (opcode) {
-     case 0x4: /* AESE */
--        decrypt = 0;
-         genfn3 = gen_helper_crypto_aese;
-         break;
-     case 0x6: /* AESMC */
--        decrypt = 0;
-         genfn2 = gen_helper_crypto_aesmc;
-         break;
-     case 0x5: /* AESD */
--        decrypt = 1;
--        genfn3 = gen_helper_crypto_aese;
-+        genfn3 = gen_helper_crypto_aesd;
-         break;
-     case 0x7: /* AESIMC */
--        decrypt = 1;
--        genfn2 = gen_helper_crypto_aesmc;
-+        genfn2 = gen_helper_crypto_aesimc;
-         break;
-     default:
-         unallocated_encoding(s);
-@@ -13601,9 +13596,9 @@ static void disas_crypto_aes(DisasContext *s, uint32_t insn)
-         return;
-     }
-     if (genfn2) {
--        gen_gvec_op2_ool(s, true, rd, rn, decrypt, genfn2);
-+        gen_gvec_op2_ool(s, true, rd, rn, 0, genfn2);
-     } else {
--        gen_gvec_op3_ool(s, true, rd, rd, rn, decrypt, genfn3);
-+        gen_gvec_op3_ool(s, true, rd, rd, rn, 0, genfn3);
-     }
- }
- 
-diff --git a/target/arm/tcg/translate-neon.c b/target/arm/tcg/translate-neon.c
-index 03913de047..8de4ceb203 100644
---- a/target/arm/tcg/translate-neon.c
-+++ b/target/arm/tcg/translate-neon.c
-@@ -3451,9 +3451,9 @@ static bool trans_VMVN(DisasContext *s, arg_2misc *a)
-     }
- 
- WRAP_2M_3_OOL_FN(gen_AESE, gen_helper_crypto_aese, 0)
--WRAP_2M_3_OOL_FN(gen_AESD, gen_helper_crypto_aese, 1)
-+WRAP_2M_3_OOL_FN(gen_AESD, gen_helper_crypto_aesd, 0)
- WRAP_2M_2_OOL_FN(gen_AESMC, gen_helper_crypto_aesmc, 0)
--WRAP_2M_2_OOL_FN(gen_AESIMC, gen_helper_crypto_aesmc, 1)
-+WRAP_2M_2_OOL_FN(gen_AESIMC, gen_helper_crypto_aesimc, 0)
- WRAP_2M_2_OOL_FN(gen_SHA1H, gen_helper_crypto_sha1h, 0)
- WRAP_2M_2_OOL_FN(gen_SHA1SU1, gen_helper_crypto_sha1su1, 0)
- WRAP_2M_2_OOL_FN(gen_SHA256SU0, gen_helper_crypto_sha256su0, 0)
-diff --git a/target/arm/tcg/translate-sve.c b/target/arm/tcg/translate-sve.c
-index ff050626e6..b98f469cb1 100644
---- a/target/arm/tcg/translate-sve.c
-+++ b/target/arm/tcg/translate-sve.c
-@@ -7151,12 +7151,14 @@ TRANS_FEAT(USDOT_zzzz, aa64_sve_i8mm, gen_gvec_ool_arg_zzzz,
-            a->esz == 2 ? gen_helper_gvec_usdot_b : NULL, a, 0)
- 
- TRANS_FEAT_NONSTREAMING(AESMC, aa64_sve2_aes, gen_gvec_ool_zz,
--                        gen_helper_crypto_aesmc, a->rd, a->rd, a->decrypt)
-+                        gen_helper_crypto_aesmc, a->rd, a->rd, 0)
-+TRANS_FEAT_NONSTREAMING(AESIMC, aa64_sve2_aes, gen_gvec_ool_zz,
-+                        gen_helper_crypto_aesimc, a->rd, a->rd, 0)
- 
- TRANS_FEAT_NONSTREAMING(AESE, aa64_sve2_aes, gen_gvec_ool_arg_zzz,
--                        gen_helper_crypto_aese, a, false)
-+                        gen_helper_crypto_aese, a, 0)
- TRANS_FEAT_NONSTREAMING(AESD, aa64_sve2_aes, gen_gvec_ool_arg_zzz,
--                        gen_helper_crypto_aese, a, true)
-+                        gen_helper_crypto_aesd, a, 0)
- 
- TRANS_FEAT_NONSTREAMING(SM4E, aa64_sve2_sm4, gen_gvec_ool_arg_zzz,
-                         gen_helper_crypto_sm4e, a, 0)
+     cpuinfo = info;
 -- 
 2.34.1
 
