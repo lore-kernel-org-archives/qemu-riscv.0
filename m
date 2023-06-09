@@ -4,75 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F003C7EE23
-	for <qemu-riscv@archiver.kernel.org>; Thu,  8 Jun 2023 19:30:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC81AC7EE23
+	for <qemu-riscv@archiver.kernel.org>; Fri,  9 Jun 2023 02:05:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q7LLH-0000rI-8X; Thu, 08 Jun 2023 15:30:46 -0400
+	id 1q7RVE-0007y1-0C; Thu, 08 Jun 2023 22:05:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <conor@kernel.org>) id 1q7LLE-0000pk-Jq
- for qemu-riscv@nongnu.org; Thu, 08 Jun 2023 15:30:41 -0400
-Received: from dfw.source.kernel.org ([2604:1380:4641:c500::1])
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1q7RVC-0007xm-KY; Thu, 08 Jun 2023 22:05:22 -0400
+Received: from out30-100.freemail.mail.aliyun.com ([115.124.30.100])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <conor@kernel.org>) id 1q7LLA-0002PU-Qr
- for qemu-riscv@nongnu.org; Thu, 08 Jun 2023 15:30:39 -0400
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 0CAC464B27;
- Thu,  8 Jun 2023 19:30:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DC148C4339B;
- Thu,  8 Jun 2023 19:30:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1686252634;
- bh=Sn9hAi2Kyf0okzCneZ3amJPSCNVbUHG48YWRl4CGl/M=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=lfdr8/t7jAH4glSpjV2KYZiJ23pFC02NUTTTkCYlLGOvVOrmDCcRICN1I7ckFGeAQ
- TPGCO5Yx6pvnH5XLP1XTniYRePwwraYyUDpYJqCXzS6uNl5YuDSEtEqzaa6vast+yd
- AMjS+CzLVMzQGuWTQNRSM0Ufd/re+R18iMYOl+Biy/Afeke4T74nR7ID5P7Lx82b2L
- 1/KMCBpD/NbyjEYVOdgT3myEqZ9cUkkHXTTjYCo/FHA0ZWQmct3tB4tNdElz8hzlKD
- dMXMAC24mzOI1YV/emxTct+WnhjV22drqsWa8YBbOCsThta5By4dLh6opE8JHBZsev
- ojK/xAa+VBS6A==
-Date: Thu, 8 Jun 2023 20:30:28 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Rob Herring <robh@kernel.org>
-Cc: Conor Dooley <conor.dooley@microchip.com>,
- Sean Anderson <sean.anderson@seco.com>, Anup Patel <anup@brainfault.org>,
- Andrew Jones <ajones@ventanamicro.com>, palmer@dabbelt.com,
- Paul Walmsley <paul.walmsley@sifive.com>,
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Alistair Francis <alistair.francis@wdc.com>,
- Anup Patel <apatel@ventanamicro.com>, Atish Patra <atishp@atishpatra.org>,
- Jessica Clarke <jrtc27@jrtc27.com>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, linux-riscv@lists.infradead.org,
- qemu-riscv@nongnu.org, u-boot@lists.denx.de,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v1] dt-bindings: riscv: deprecate riscv,isa
-Message-ID: <20230608-cobbler-giving-e0fac2185e11@spud>
-References: <20230518-thermos-sanitary-cf3fbc777ea1@wendy>
- <20230518-4050231ca8dbe93c08cf9c9a@orel>
- <CAAhSdy07Mg_JBF+4ucGFiWdBKh-Ass5G_aUWqBqTnDSFp7S=0A@mail.gmail.com>
- <20230518-hammock-doornail-478e8ea8e6a7@wendy>
- <f7c20090-220c-2805-86ba-b174a89f65b3@seco.com>
- <20230518-monkhood-dispersal-6749b1228b0d@spud>
- <20230530-duller-reset-a34ae111f207@wendy>
- <20230608191537.GA3233857-robh@kernel.org>
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1q7RV8-0001vg-33; Thu, 08 Jun 2023 22:05:22 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R141e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045176;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
+ TI=SMTPD_---0Vkg9zCz_1686276308; 
+Received: from 30.221.99.194(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0Vkg9zCz_1686276308) by smtp.aliyun-inc.com;
+ Fri, 09 Jun 2023 10:05:09 +0800
+Message-ID: <21f71012-49fc-1972-8905-63d40cbdd7f9@linux.alibaba.com>
+Date: Fri, 9 Jun 2023 10:04:50 +0800
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="J8Z0GTvlCQGm2lQj"
-Content-Disposition: inline
-In-Reply-To: <20230608191537.GA3233857-robh@kernel.org>
-Received-SPF: pass client-ip=2604:1380:4641:c500::1;
- envelope-from=conor@kernel.org; helo=dfw.source.kernel.org
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH 3/9] disas/riscv: Move types/constants to new header file
+Content-Language: en-US
+To: Christoph Muellner <christoph.muellner@vrull.eu>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+References: <20230530131843.1186637-1-christoph.muellner@vrull.eu>
+ <20230530131843.1186637-4-christoph.muellner@vrull.eu>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20230530131843.1186637-4-christoph.muellner@vrull.eu>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=115.124.30.100;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-100.freemail.mail.aliyun.com
+X-Spam_score_int: -99
+X-Spam_score: -10.0
+X-Spam_bar: ----------
+X-Spam_report: (-10.0 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ NICE_REPLY_A=-0.091, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -89,98 +69,606 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
---J8Z0GTvlCQGm2lQj
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2023/5/30 21:18, Christoph Muellner wrote:
+> From: Christoph Müllner <christoph.muellner@vrull.eu>
+>
+> In order to enable vendor disassembler support, we need to
+> move types and constants into a header file so that other
+> compilation units can use them as well.
+>
+> This patch does not introduce any functional changes.
+>
+> Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
 
-On Thu, Jun 08, 2023 at 01:15:37PM -0600, Rob Herring wrote:
-> On Tue, May 30, 2023 at 03:12:12PM +0100, Conor Dooley wrote:
-> > On Thu, May 18, 2023 at 10:42:34PM +0100, Conor Dooley wrote:
-> > > On Thu, May 18, 2023 at 02:30:53PM -0400, Sean Anderson wrote:
-> >=20
-> > > >=20
-> > > > Why not just have something like
-> > > >=20
-> > > > mycpu {
-> > > > 	...
-> > > > 	riscv,isa {
-> > > > 		i;
-> > > > 		m;
-> > > > 		a;
-> > > > 		zicsr;
-> > > > 		...
->=20
-> I prefer property names be globally unique. The tools are geared towards=
-=20
-> that too. That's largely a symptom of having 0 type information in the=20
-> DT.
->=20
-> For example if you had an extension called 'reg', it would be a problem.
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
-Per the current ISA rules, that'd not be valid. But then again, I do
-have trust issues & it's not like "reg" is the only property name in DT
-land.
+Zhiwei
 
-> > > Naming of the node aside (perhaps that could be riscv,isa-extensions)
-> > > there's not something hitting me immediately as to why that is a no-n=
-o.
-> > > If the size is a concern, this would certainly be more efficient & not
-> > > like the probing would be anything other than trivial more difficult
-> > > what I have in my proposal.
-> >=20
-> > Having started messing around with this, one of the main advantages, to
-> > me, of this approach is proper validation.
-> > cpus.yaml has additionalProperties: true in it, which would have had to
-> > be sorted out, or worked around, but creating a child-node with the
-> > properties in it allows setting additionalProperties: false.
->=20
-> That's an issue on my radar to fix. I started that for the Arm cpus.yaml=
-=20
-> a while back. Sadly it involves adding all the misc properties vendors=20
-> added. It's not a lot, but still better to get in front of that for=20
-> Risc-V.
-
-Yeah, guess I can append that to my todo list.
-
-> > > Rob's AFK at the moment, and I was hoping that he would take a look at
-> > > the idea, so I won't respin til he is back, but I'll give this a go in
-> > > the interim.
-> >=20
-> > Mechanically, the conversion of the patch isn't difficult, but I'll sti=
-ll
-> > wait for Rob to come back before sending a v2. But that v2 will more
-> > than likely implement your suggestion.
->=20
-> I haven't read the whole thread, but the initial proposal looks okay to=
-=20
-> me.
->=20
-> Another way you could do this is a list of strings:
->=20
-> riscv,isa-ext =3D "i", "m", "zicsr";
->=20
-> I think we have a helper to test is a string in the list.
-
-Perhaps I should've waited a bit longer than a month for a v2 - I sent
-one this afternoon doing what Sean suggested:
-https://lore.kernel.org/all/20230608-sitting-bath-31eddc03c5a5@spud/
-
-I'll do some poking at the strings and see what I think of it.
-
-Cheers,
-Conor.
-
---J8Z0GTvlCQGm2lQj
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZIIsVAAKCRB4tDGHoIJi
-0g5YAQC9F/U/qWJxcOhejKFcF7fDmwOe+gCq0sgnacuq/Vu+ZAEAwAZ9EAwNs4oF
-aCnC2JOfp//gPzZTwmsYjjFeeLhAkwA=
-=KmSP
------END PGP SIGNATURE-----
-
---J8Z0GTvlCQGm2lQj--
+> ---
+>   disas/riscv.c | 270 +-----------------------------------------------
+>   disas/riscv.h | 280 ++++++++++++++++++++++++++++++++++++++++++++++++++
+>   2 files changed, 281 insertions(+), 269 deletions(-)
+>   create mode 100644 disas/riscv.h
+>
+> diff --git a/disas/riscv.c b/disas/riscv.c
+> index d597161d46..a062fb48cc 100644
+> --- a/disas/riscv.c
+> +++ b/disas/riscv.c
+> @@ -19,158 +19,7 @@
+>   
+>   #include "qemu/osdep.h"
+>   #include "disas/dis-asm.h"
+> -
+> -
+> -/* types */
+> -
+> -typedef uint64_t rv_inst;
+> -typedef uint16_t rv_opcode;
+> -
+> -/* enums */
+> -
+> -typedef enum {
+> -    rv32,
+> -    rv64,
+> -    rv128
+> -} rv_isa;
+> -
+> -typedef enum {
+> -    rv_rm_rne = 0,
+> -    rv_rm_rtz = 1,
+> -    rv_rm_rdn = 2,
+> -    rv_rm_rup = 3,
+> -    rv_rm_rmm = 4,
+> -    rv_rm_dyn = 7,
+> -} rv_rm;
+> -
+> -typedef enum {
+> -    rv_fence_i = 8,
+> -    rv_fence_o = 4,
+> -    rv_fence_r = 2,
+> -    rv_fence_w = 1,
+> -} rv_fence;
+> -
+> -typedef enum {
+> -    rv_ireg_zero,
+> -    rv_ireg_ra,
+> -    rv_ireg_sp,
+> -    rv_ireg_gp,
+> -    rv_ireg_tp,
+> -    rv_ireg_t0,
+> -    rv_ireg_t1,
+> -    rv_ireg_t2,
+> -    rv_ireg_s0,
+> -    rv_ireg_s1,
+> -    rv_ireg_a0,
+> -    rv_ireg_a1,
+> -    rv_ireg_a2,
+> -    rv_ireg_a3,
+> -    rv_ireg_a4,
+> -    rv_ireg_a5,
+> -    rv_ireg_a6,
+> -    rv_ireg_a7,
+> -    rv_ireg_s2,
+> -    rv_ireg_s3,
+> -    rv_ireg_s4,
+> -    rv_ireg_s5,
+> -    rv_ireg_s6,
+> -    rv_ireg_s7,
+> -    rv_ireg_s8,
+> -    rv_ireg_s9,
+> -    rv_ireg_s10,
+> -    rv_ireg_s11,
+> -    rv_ireg_t3,
+> -    rv_ireg_t4,
+> -    rv_ireg_t5,
+> -    rv_ireg_t6,
+> -} rv_ireg;
+> -
+> -typedef enum {
+> -    rvc_end,
+> -    rvc_rd_eq_ra,
+> -    rvc_rd_eq_x0,
+> -    rvc_rs1_eq_x0,
+> -    rvc_rs2_eq_x0,
+> -    rvc_rs2_eq_rs1,
+> -    rvc_rs1_eq_ra,
+> -    rvc_imm_eq_zero,
+> -    rvc_imm_eq_n1,
+> -    rvc_imm_eq_p1,
+> -    rvc_csr_eq_0x001,
+> -    rvc_csr_eq_0x002,
+> -    rvc_csr_eq_0x003,
+> -    rvc_csr_eq_0xc00,
+> -    rvc_csr_eq_0xc01,
+> -    rvc_csr_eq_0xc02,
+> -    rvc_csr_eq_0xc80,
+> -    rvc_csr_eq_0xc81,
+> -    rvc_csr_eq_0xc82,
+> -} rvc_constraint;
+> -
+> -typedef enum {
+> -    rv_codec_illegal,
+> -    rv_codec_none,
+> -    rv_codec_u,
+> -    rv_codec_uj,
+> -    rv_codec_i,
+> -    rv_codec_i_sh5,
+> -    rv_codec_i_sh6,
+> -    rv_codec_i_sh7,
+> -    rv_codec_i_csr,
+> -    rv_codec_s,
+> -    rv_codec_sb,
+> -    rv_codec_r,
+> -    rv_codec_r_m,
+> -    rv_codec_r4_m,
+> -    rv_codec_r_a,
+> -    rv_codec_r_l,
+> -    rv_codec_r_f,
+> -    rv_codec_cb,
+> -    rv_codec_cb_imm,
+> -    rv_codec_cb_sh5,
+> -    rv_codec_cb_sh6,
+> -    rv_codec_ci,
+> -    rv_codec_ci_sh5,
+> -    rv_codec_ci_sh6,
+> -    rv_codec_ci_16sp,
+> -    rv_codec_ci_lwsp,
+> -    rv_codec_ci_ldsp,
+> -    rv_codec_ci_lqsp,
+> -    rv_codec_ci_li,
+> -    rv_codec_ci_lui,
+> -    rv_codec_ci_none,
+> -    rv_codec_ciw_4spn,
+> -    rv_codec_cj,
+> -    rv_codec_cj_jal,
+> -    rv_codec_cl_lw,
+> -    rv_codec_cl_ld,
+> -    rv_codec_cl_lq,
+> -    rv_codec_cr,
+> -    rv_codec_cr_mv,
+> -    rv_codec_cr_jalr,
+> -    rv_codec_cr_jr,
+> -    rv_codec_cs,
+> -    rv_codec_cs_sw,
+> -    rv_codec_cs_sd,
+> -    rv_codec_cs_sq,
+> -    rv_codec_css_swsp,
+> -    rv_codec_css_sdsp,
+> -    rv_codec_css_sqsp,
+> -    rv_codec_k_bs,
+> -    rv_codec_k_rnum,
+> -    rv_codec_v_r,
+> -    rv_codec_v_ldst,
+> -    rv_codec_v_i,
+> -    rv_codec_vsetvli,
+> -    rv_codec_vsetivli,
+> -    rv_codec_zcb_ext,
+> -    rv_codec_zcb_mul,
+> -    rv_codec_zcb_lb,
+> -    rv_codec_zcb_lh,
+> -    rv_codec_zcmp_cm_pushpop,
+> -    rv_codec_zcmp_cm_mv,
+> -    rv_codec_zcmt_jt,
+> -} rv_codec;
+> +#include "disas/riscv.h"
+>   
+>   typedef enum {
+>       rv_op_illegal = 0,
+> @@ -966,50 +815,6 @@ typedef enum {
+>       rv_op_czero_nez = 790,
+>   } rv_op;
+>   
+> -/* structures */
+> -
+> -typedef struct {
+> -    uint64_t  pc;
+> -    uint64_t  inst;
+> -    int32_t   imm;
+> -    uint16_t  op;
+> -    uint8_t   codec;
+> -    uint8_t   rd;
+> -    uint8_t   rs1;
+> -    uint8_t   rs2;
+> -    uint8_t   rs3;
+> -    uint8_t   rm;
+> -    uint8_t   pred;
+> -    uint8_t   succ;
+> -    uint8_t   aq;
+> -    uint8_t   rl;
+> -    uint8_t   bs;
+> -    uint8_t   rnum;
+> -    uint8_t   vm;
+> -    uint32_t  vzimm;
+> -    uint8_t   rlist;
+> -} rv_decode;
+> -
+> -typedef struct {
+> -    const int op;
+> -    const rvc_constraint *constraints;
+> -} rv_comp_data;
+> -
+> -enum {
+> -    rvcd_imm_nz = 0x1
+> -};
+> -
+> -typedef struct {
+> -    const char * const name;
+> -    const rv_codec codec;
+> -    const char * const format;
+> -    const rv_comp_data *pseudo;
+> -    const short decomp_rv32;
+> -    const short decomp_rv64;
+> -    const short decomp_rv128;
+> -    const short decomp_data;
+> -} rv_opcode_data;
+> -
+>   /* register names */
+>   
+>   static const char rv_ireg_name_sym[32][5] = {
+> @@ -1033,79 +838,6 @@ static const char rv_vreg_name_sym[32][4] = {
+>       "v24", "v25", "v26", "v27", "v28", "v29", "v30", "v31"
+>   };
+>   
+> -/* instruction formats */
+> -
+> -#define rv_fmt_none                   "O\t"
+> -#define rv_fmt_rs1                    "O\t1"
+> -#define rv_fmt_offset                 "O\to"
+> -#define rv_fmt_pred_succ              "O\tp,s"
+> -#define rv_fmt_rs1_rs2                "O\t1,2"
+> -#define rv_fmt_rd_imm                 "O\t0,i"
+> -#define rv_fmt_rd_offset              "O\t0,o"
+> -#define rv_fmt_rd_rs1_rs2             "O\t0,1,2"
+> -#define rv_fmt_frd_rs1                "O\t3,1"
+> -#define rv_fmt_frd_frs1               "O\t3,4"
+> -#define rv_fmt_rd_frs1                "O\t0,4"
+> -#define rv_fmt_rd_frs1_frs2           "O\t0,4,5"
+> -#define rv_fmt_frd_frs1_frs2          "O\t3,4,5"
+> -#define rv_fmt_rm_frd_frs1            "O\tr,3,4"
+> -#define rv_fmt_rm_frd_rs1             "O\tr,3,1"
+> -#define rv_fmt_rm_rd_frs1             "O\tr,0,4"
+> -#define rv_fmt_rm_frd_frs1_frs2       "O\tr,3,4,5"
+> -#define rv_fmt_rm_frd_frs1_frs2_frs3  "O\tr,3,4,5,6"
+> -#define rv_fmt_rd_rs1_imm             "O\t0,1,i"
+> -#define rv_fmt_rd_rs1_offset          "O\t0,1,i"
+> -#define rv_fmt_rd_offset_rs1          "O\t0,i(1)"
+> -#define rv_fmt_frd_offset_rs1         "O\t3,i(1)"
+> -#define rv_fmt_rd_csr_rs1             "O\t0,c,1"
+> -#define rv_fmt_rd_csr_zimm            "O\t0,c,7"
+> -#define rv_fmt_rs2_offset_rs1         "O\t2,i(1)"
+> -#define rv_fmt_frs2_offset_rs1        "O\t5,i(1)"
+> -#define rv_fmt_rs1_rs2_offset         "O\t1,2,o"
+> -#define rv_fmt_rs2_rs1_offset         "O\t2,1,o"
+> -#define rv_fmt_aqrl_rd_rs2_rs1        "OAR\t0,2,(1)"
+> -#define rv_fmt_aqrl_rd_rs1            "OAR\t0,(1)"
+> -#define rv_fmt_rd                     "O\t0"
+> -#define rv_fmt_rd_zimm                "O\t0,7"
+> -#define rv_fmt_rd_rs1                 "O\t0,1"
+> -#define rv_fmt_rd_rs2                 "O\t0,2"
+> -#define rv_fmt_rs1_offset             "O\t1,o"
+> -#define rv_fmt_rs2_offset             "O\t2,o"
+> -#define rv_fmt_rs1_rs2_bs             "O\t1,2,b"
+> -#define rv_fmt_rd_rs1_rnum            "O\t0,1,n"
+> -#define rv_fmt_ldst_vd_rs1_vm         "O\tD,(1)m"
+> -#define rv_fmt_ldst_vd_rs1_rs2_vm     "O\tD,(1),2m"
+> -#define rv_fmt_ldst_vd_rs1_vs2_vm     "O\tD,(1),Fm"
+> -#define rv_fmt_vd_vs2_vs1             "O\tD,F,E"
+> -#define rv_fmt_vd_vs2_vs1_vl          "O\tD,F,El"
+> -#define rv_fmt_vd_vs2_vs1_vm          "O\tD,F,Em"
+> -#define rv_fmt_vd_vs2_rs1_vl          "O\tD,F,1l"
+> -#define rv_fmt_vd_vs2_fs1_vl          "O\tD,F,4l"
+> -#define rv_fmt_vd_vs2_rs1_vm          "O\tD,F,1m"
+> -#define rv_fmt_vd_vs2_fs1_vm          "O\tD,F,4m"
+> -#define rv_fmt_vd_vs2_imm_vl          "O\tD,F,il"
+> -#define rv_fmt_vd_vs2_imm_vm          "O\tD,F,im"
+> -#define rv_fmt_vd_vs2_uimm_vm         "O\tD,F,um"
+> -#define rv_fmt_vd_vs1_vs2_vm          "O\tD,E,Fm"
+> -#define rv_fmt_vd_rs1_vs2_vm          "O\tD,1,Fm"
+> -#define rv_fmt_vd_fs1_vs2_vm          "O\tD,4,Fm"
+> -#define rv_fmt_vd_vs1                 "O\tD,E"
+> -#define rv_fmt_vd_rs1                 "O\tD,1"
+> -#define rv_fmt_vd_fs1                 "O\tD,4"
+> -#define rv_fmt_vd_imm                 "O\tD,i"
+> -#define rv_fmt_vd_vs2                 "O\tD,F"
+> -#define rv_fmt_vd_vs2_vm              "O\tD,Fm"
+> -#define rv_fmt_rd_vs2_vm              "O\t0,Fm"
+> -#define rv_fmt_rd_vs2                 "O\t0,F"
+> -#define rv_fmt_fd_vs2                 "O\t3,F"
+> -#define rv_fmt_vd_vm                  "O\tDm"
+> -#define rv_fmt_vsetvli                "O\t0,1,v"
+> -#define rv_fmt_vsetivli               "O\t0,u,v"
+> -#define rv_fmt_rs1_rs2_zce_ldst       "O\t2,i(1)"
+> -#define rv_fmt_push_rlist             "O\tx,-i"
+> -#define rv_fmt_pop_rlist              "O\tx,i"
+> -#define rv_fmt_zcmt_index             "O\ti"
+> -
+>   /* pseudo-instruction constraints */
+>   
+>   static const rvc_constraint rvcc_jal[] = { rvc_rd_eq_ra, rvc_end };
+> diff --git a/disas/riscv.h b/disas/riscv.h
+> new file mode 100644
+> index 0000000000..0f34b71518
+> --- /dev/null
+> +++ b/disas/riscv.h
+> @@ -0,0 +1,280 @@
+> +/*
+> + * QEMU disassembler -- RISC-V specific header.
+> + *
+> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + */
+> +
+> +#ifndef DISAS_RISCV_H
+> +#define DISAS_RISCV_H
+> +
+> +#include "qemu/osdep.h"
+> +
+> +/* types */
+> +
+> +typedef uint64_t rv_inst;
+> +typedef uint16_t rv_opcode;
+> +
+> +/* enums */
+> +
+> +typedef enum {
+> +    rv32,
+> +    rv64,
+> +    rv128
+> +} rv_isa;
+> +
+> +typedef enum {
+> +    rv_rm_rne = 0,
+> +    rv_rm_rtz = 1,
+> +    rv_rm_rdn = 2,
+> +    rv_rm_rup = 3,
+> +    rv_rm_rmm = 4,
+> +    rv_rm_dyn = 7,
+> +} rv_rm;
+> +
+> +typedef enum {
+> +    rv_fence_i = 8,
+> +    rv_fence_o = 4,
+> +    rv_fence_r = 2,
+> +    rv_fence_w = 1,
+> +} rv_fence;
+> +
+> +typedef enum {
+> +    rv_ireg_zero,
+> +    rv_ireg_ra,
+> +    rv_ireg_sp,
+> +    rv_ireg_gp,
+> +    rv_ireg_tp,
+> +    rv_ireg_t0,
+> +    rv_ireg_t1,
+> +    rv_ireg_t2,
+> +    rv_ireg_s0,
+> +    rv_ireg_s1,
+> +    rv_ireg_a0,
+> +    rv_ireg_a1,
+> +    rv_ireg_a2,
+> +    rv_ireg_a3,
+> +    rv_ireg_a4,
+> +    rv_ireg_a5,
+> +    rv_ireg_a6,
+> +    rv_ireg_a7,
+> +    rv_ireg_s2,
+> +    rv_ireg_s3,
+> +    rv_ireg_s4,
+> +    rv_ireg_s5,
+> +    rv_ireg_s6,
+> +    rv_ireg_s7,
+> +    rv_ireg_s8,
+> +    rv_ireg_s9,
+> +    rv_ireg_s10,
+> +    rv_ireg_s11,
+> +    rv_ireg_t3,
+> +    rv_ireg_t4,
+> +    rv_ireg_t5,
+> +    rv_ireg_t6,
+> +} rv_ireg;
+> +
+> +typedef enum {
+> +    rvc_end,
+> +    rvc_rd_eq_ra,
+> +    rvc_rd_eq_x0,
+> +    rvc_rs1_eq_x0,
+> +    rvc_rs2_eq_x0,
+> +    rvc_rs2_eq_rs1,
+> +    rvc_rs1_eq_ra,
+> +    rvc_imm_eq_zero,
+> +    rvc_imm_eq_n1,
+> +    rvc_imm_eq_p1,
+> +    rvc_csr_eq_0x001,
+> +    rvc_csr_eq_0x002,
+> +    rvc_csr_eq_0x003,
+> +    rvc_csr_eq_0xc00,
+> +    rvc_csr_eq_0xc01,
+> +    rvc_csr_eq_0xc02,
+> +    rvc_csr_eq_0xc80,
+> +    rvc_csr_eq_0xc81,
+> +    rvc_csr_eq_0xc82,
+> +} rvc_constraint;
+> +
+> +typedef enum {
+> +    rv_codec_illegal,
+> +    rv_codec_none,
+> +    rv_codec_u,
+> +    rv_codec_uj,
+> +    rv_codec_i,
+> +    rv_codec_i_sh5,
+> +    rv_codec_i_sh6,
+> +    rv_codec_i_sh7,
+> +    rv_codec_i_csr,
+> +    rv_codec_s,
+> +    rv_codec_sb,
+> +    rv_codec_r,
+> +    rv_codec_r_m,
+> +    rv_codec_r4_m,
+> +    rv_codec_r_a,
+> +    rv_codec_r_l,
+> +    rv_codec_r_f,
+> +    rv_codec_cb,
+> +    rv_codec_cb_imm,
+> +    rv_codec_cb_sh5,
+> +    rv_codec_cb_sh6,
+> +    rv_codec_ci,
+> +    rv_codec_ci_sh5,
+> +    rv_codec_ci_sh6,
+> +    rv_codec_ci_16sp,
+> +    rv_codec_ci_lwsp,
+> +    rv_codec_ci_ldsp,
+> +    rv_codec_ci_lqsp,
+> +    rv_codec_ci_li,
+> +    rv_codec_ci_lui,
+> +    rv_codec_ci_none,
+> +    rv_codec_ciw_4spn,
+> +    rv_codec_cj,
+> +    rv_codec_cj_jal,
+> +    rv_codec_cl_lw,
+> +    rv_codec_cl_ld,
+> +    rv_codec_cl_lq,
+> +    rv_codec_cr,
+> +    rv_codec_cr_mv,
+> +    rv_codec_cr_jalr,
+> +    rv_codec_cr_jr,
+> +    rv_codec_cs,
+> +    rv_codec_cs_sw,
+> +    rv_codec_cs_sd,
+> +    rv_codec_cs_sq,
+> +    rv_codec_css_swsp,
+> +    rv_codec_css_sdsp,
+> +    rv_codec_css_sqsp,
+> +    rv_codec_k_bs,
+> +    rv_codec_k_rnum,
+> +    rv_codec_v_r,
+> +    rv_codec_v_ldst,
+> +    rv_codec_v_i,
+> +    rv_codec_vsetvli,
+> +    rv_codec_vsetivli,
+> +    rv_codec_zcb_ext,
+> +    rv_codec_zcb_mul,
+> +    rv_codec_zcb_lb,
+> +    rv_codec_zcb_lh,
+> +    rv_codec_zcmp_cm_pushpop,
+> +    rv_codec_zcmp_cm_mv,
+> +    rv_codec_zcmt_jt,
+> +} rv_codec;
+> +
+> +/* structures */
+> +
+> +typedef struct {
+> +    uint64_t  pc;
+> +    uint64_t  inst;
+> +    int32_t   imm;
+> +    uint16_t  op;
+> +    uint8_t   codec;
+> +    uint8_t   rd;
+> +    uint8_t   rs1;
+> +    uint8_t   rs2;
+> +    uint8_t   rs3;
+> +    uint8_t   rm;
+> +    uint8_t   pred;
+> +    uint8_t   succ;
+> +    uint8_t   aq;
+> +    uint8_t   rl;
+> +    uint8_t   bs;
+> +    uint8_t   rnum;
+> +    uint8_t   vm;
+> +    uint32_t  vzimm;
+> +    uint8_t   rlist;
+> +} rv_decode;
+> +
+> +typedef struct {
+> +    const int op;
+> +    const rvc_constraint *constraints;
+> +} rv_comp_data;
+> +
+> +enum {
+> +    rvcd_imm_nz = 0x1
+> +};
+> +
+> +typedef struct {
+> +    const char * const name;
+> +    const rv_codec codec;
+> +    const char * const format;
+> +    const rv_comp_data *pseudo;
+> +    const short decomp_rv32;
+> +    const short decomp_rv64;
+> +    const short decomp_rv128;
+> +    const short decomp_data;
+> +} rv_opcode_data;
+> +
+> +/* instruction formats */
+> +
+> +#define rv_fmt_none                   "O\t"
+> +#define rv_fmt_rs1                    "O\t1"
+> +#define rv_fmt_offset                 "O\to"
+> +#define rv_fmt_pred_succ              "O\tp,s"
+> +#define rv_fmt_rs1_rs2                "O\t1,2"
+> +#define rv_fmt_rd_imm                 "O\t0,i"
+> +#define rv_fmt_rd_offset              "O\t0,o"
+> +#define rv_fmt_rd_rs1_rs2             "O\t0,1,2"
+> +#define rv_fmt_frd_rs1                "O\t3,1"
+> +#define rv_fmt_frd_frs1               "O\t3,4"
+> +#define rv_fmt_rd_frs1                "O\t0,4"
+> +#define rv_fmt_rd_frs1_frs2           "O\t0,4,5"
+> +#define rv_fmt_frd_frs1_frs2          "O\t3,4,5"
+> +#define rv_fmt_rm_frd_frs1            "O\tr,3,4"
+> +#define rv_fmt_rm_frd_rs1             "O\tr,3,1"
+> +#define rv_fmt_rm_rd_frs1             "O\tr,0,4"
+> +#define rv_fmt_rm_frd_frs1_frs2       "O\tr,3,4,5"
+> +#define rv_fmt_rm_frd_frs1_frs2_frs3  "O\tr,3,4,5,6"
+> +#define rv_fmt_rd_rs1_imm             "O\t0,1,i"
+> +#define rv_fmt_rd_rs1_offset          "O\t0,1,i"
+> +#define rv_fmt_rd_offset_rs1          "O\t0,i(1)"
+> +#define rv_fmt_frd_offset_rs1         "O\t3,i(1)"
+> +#define rv_fmt_rd_csr_rs1             "O\t0,c,1"
+> +#define rv_fmt_rd_csr_zimm            "O\t0,c,7"
+> +#define rv_fmt_rs2_offset_rs1         "O\t2,i(1)"
+> +#define rv_fmt_frs2_offset_rs1        "O\t5,i(1)"
+> +#define rv_fmt_rs1_rs2_offset         "O\t1,2,o"
+> +#define rv_fmt_rs2_rs1_offset         "O\t2,1,o"
+> +#define rv_fmt_aqrl_rd_rs2_rs1        "OAR\t0,2,(1)"
+> +#define rv_fmt_aqrl_rd_rs1            "OAR\t0,(1)"
+> +#define rv_fmt_rd                     "O\t0"
+> +#define rv_fmt_rd_zimm                "O\t0,7"
+> +#define rv_fmt_rd_rs1                 "O\t0,1"
+> +#define rv_fmt_rd_rs2                 "O\t0,2"
+> +#define rv_fmt_rs1_offset             "O\t1,o"
+> +#define rv_fmt_rs2_offset             "O\t2,o"
+> +#define rv_fmt_rs1_rs2_bs             "O\t1,2,b"
+> +#define rv_fmt_rd_rs1_rnum            "O\t0,1,n"
+> +#define rv_fmt_ldst_vd_rs1_vm         "O\tD,(1)m"
+> +#define rv_fmt_ldst_vd_rs1_rs2_vm     "O\tD,(1),2m"
+> +#define rv_fmt_ldst_vd_rs1_vs2_vm     "O\tD,(1),Fm"
+> +#define rv_fmt_vd_vs2_vs1             "O\tD,F,E"
+> +#define rv_fmt_vd_vs2_vs1_vl          "O\tD,F,El"
+> +#define rv_fmt_vd_vs2_vs1_vm          "O\tD,F,Em"
+> +#define rv_fmt_vd_vs2_rs1_vl          "O\tD,F,1l"
+> +#define rv_fmt_vd_vs2_fs1_vl          "O\tD,F,4l"
+> +#define rv_fmt_vd_vs2_rs1_vm          "O\tD,F,1m"
+> +#define rv_fmt_vd_vs2_fs1_vm          "O\tD,F,4m"
+> +#define rv_fmt_vd_vs2_imm_vl          "O\tD,F,il"
+> +#define rv_fmt_vd_vs2_imm_vm          "O\tD,F,im"
+> +#define rv_fmt_vd_vs2_uimm_vm         "O\tD,F,um"
+> +#define rv_fmt_vd_vs1_vs2_vm          "O\tD,E,Fm"
+> +#define rv_fmt_vd_rs1_vs2_vm          "O\tD,1,Fm"
+> +#define rv_fmt_vd_fs1_vs2_vm          "O\tD,4,Fm"
+> +#define rv_fmt_vd_vs1                 "O\tD,E"
+> +#define rv_fmt_vd_rs1                 "O\tD,1"
+> +#define rv_fmt_vd_fs1                 "O\tD,4"
+> +#define rv_fmt_vd_imm                 "O\tD,i"
+> +#define rv_fmt_vd_vs2                 "O\tD,F"
+> +#define rv_fmt_vd_vs2_vm              "O\tD,Fm"
+> +#define rv_fmt_rd_vs2_vm              "O\t0,Fm"
+> +#define rv_fmt_rd_vs2                 "O\t0,F"
+> +#define rv_fmt_fd_vs2                 "O\t3,F"
+> +#define rv_fmt_vd_vm                  "O\tDm"
+> +#define rv_fmt_vsetvli                "O\t0,1,v"
+> +#define rv_fmt_vsetivli               "O\t0,u,v"
+> +#define rv_fmt_rs1_rs2_zce_ldst       "O\t2,i(1)"
+> +#define rv_fmt_push_rlist             "O\tx,-i"
+> +#define rv_fmt_pop_rlist              "O\tx,i"
+> +#define rv_fmt_zcmt_index             "O\ti"
+> +
+> +#endif /* DISAS_RISCV_H */
 
