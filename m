@@ -4,79 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33C37C7EE25
-	for <qemu-riscv@archiver.kernel.org>; Fri,  9 Jun 2023 08:38:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77C20C7EE29
+	for <qemu-riscv@archiver.kernel.org>; Fri,  9 Jun 2023 10:09:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q7Xd8-0008Rc-Ig; Fri, 09 Jun 2023 04:37:58 -0400
+	id 1q7Z3X-0006Ba-Pp; Fri, 09 Jun 2023 06:09:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <tommy.wu@sifive.com>)
- id 1q7Xd6-0008RD-Mt
- for qemu-riscv@nongnu.org; Fri, 09 Jun 2023 04:37:56 -0400
-Received: from mail-vs1-xe36.google.com ([2607:f8b0:4864:20::e36])
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1q7Z3W-0006BF-BR
+ for qemu-riscv@nongnu.org; Fri, 09 Jun 2023 06:09:18 -0400
+Received: from mail-oo1-xc31.google.com ([2607:f8b0:4864:20::c31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <tommy.wu@sifive.com>)
- id 1q7Xd3-0002Zm-RY
- for qemu-riscv@nongnu.org; Fri, 09 Jun 2023 04:37:56 -0400
-Received: by mail-vs1-xe36.google.com with SMTP id
- ada2fe7eead31-43b87490a27so525062137.0
- for <qemu-riscv@nongnu.org>; Fri, 09 Jun 2023 01:37:53 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1q7Z3T-0006Tx-K9
+ for qemu-riscv@nongnu.org; Fri, 09 Jun 2023 06:09:18 -0400
+Received: by mail-oo1-xc31.google.com with SMTP id
+ 006d021491bc7-5523bd97c64so1708493eaf.0
+ for <qemu-riscv@nongnu.org>; Fri, 09 Jun 2023 03:09:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1686299872; x=1688891872;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=kKJgu0Y3h26oBcC7LozsU/J1Ar+vqf0d27xOH+ejCy8=;
- b=OY5vB9lol2EcVOnATr/S9xcrevPNcbmSx9BN/Di08fNHdgchDw4vyvC016MasCLAHA
- egpsR9D0Z9h0DOx3jC9B5gRSeSNbv8psxMkwTJoOdYPd8gJ5M/jO6BM4vMrlrwy9b9EA
- PFdiSIVdURZ0Xwd7MK3zDKIdBSLILUTQgzKQv26HNRpvEkd6g2Ir32dr6oAwM1oX7+Yb
- GNWG2fLF9WAhvvITN7PTASFjdJHhTRiGTxpoSCpsOAD1+9RlQLZUBflYEAC5UrNvhIqx
- rHpwf7nGm7oe6VUnbQXKH7OdcgbCjD5xnDQksrJfvLT0MaUHzrLBMo+Q4y+i2PrZnL13
- fvcg==
+ d=sifive.com; s=google; t=1686305353; x=1688897353;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OzSK7hABA28xCfv4pKGg0lBnF68yq9uktgRx5iEmiaI=;
+ b=SnjQiblhpKdUrkFmokq90JQhRukoXq5b8J65xXVJT9EIrcP/WR3hM6uzBoAdAPmaR+
+ 3fQp23XvUy7d9X/SQQuG2rTO/QvUD1wJXI7KDWJ2VKJDeQLf+6fi8iH4QVW+bIU077fU
+ IGcDNeMIM5dt1wtSEHAEi6nL3rDKqVcHE2Rhnok+EDQfNuL2kAEF43y1yU/7Gx5y24cv
+ gwk8IsL+MKxcaEQIvlvHk2aGIrhi9BmaaLoDVjD+hU9fnTLkykF6r0TUD9n8Ftk/ReM1
+ vX2baJvN2ZfSLdEv40zycMQoM9odk9M7DrKLraUWbA40Xnwi/iaSU5qSjWDqJ3FyLQBc
+ Dopg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686299872; x=1688891872;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=kKJgu0Y3h26oBcC7LozsU/J1Ar+vqf0d27xOH+ejCy8=;
- b=bMBgHokv8gd9UJp2D+gvhJZPfnz0afBEQ9UbkNEk+xioMEkRdNRII8g1mWmeLHCtGa
- dW21myjm7Ew/wMmcApUtq0JsV9G1W9rQfZGTHzkyRt8fQzz8TWz53rJDObDKZxdRoYTL
- aCVGN6JNJwli6DugO1yGP6QkmwBKFE02r59NHjI/p9E6S0pZxVU1i22xYusxuBtjgef6
- 5KLsHF9rWe632uC/rqDYzpnRPiUSn4+0bObvPJFO103avU7AePdeDQyEkj71uGkJ1Xxv
- 1+MrxM/aSrwhJwHKK9y/VzeGlPY2WO/9agILkYt4L9CEYBhFeLavxJGuKK3EXuYNdgnt
- ykfw==
-X-Gm-Message-State: AC+VfDzftUbIROTuLIj1jkKm6yq370aCoLQvfBMs3IMnm8ufTqhWYR+r
- SGqdTife2ZAVjfPa0g/bxuh4VyLSgouue55yV+V4Zw==
-X-Google-Smtp-Source: ACHHUZ7tnDy2VT2LAW+rFEtZUmX6zcfD7rrKMxku+pCIUNAa7pGMQatRbfvZUZSsnrgrXmN1+C/HmuF+v3y8MJrDyVI=
-X-Received: by 2002:a05:6102:34f9:b0:43b:458f:b078 with SMTP id
- bi25-20020a05610234f900b0043b458fb078mr522568vsb.30.1686299872113; Fri, 09
- Jun 2023 01:37:52 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1686305353; x=1688897353;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=OzSK7hABA28xCfv4pKGg0lBnF68yq9uktgRx5iEmiaI=;
+ b=Wp1DwTIL3P/HT28r8CVIbfX9VPORG1htoywdQGMmhUQmW+LtEGKpDJOO5svLpWfave
+ Qb+A9IlYoV7Vv0b9jz4nm7dcHx3sbdk5JI888Uj37fNIpXr9iw6RUXLQSADNRjtdEUze
+ 0VOM0W7mNc3DGW8DmleMKeI0day9kaobIdYVP35L2FlqNpcF73BV77PsLBWT7P/9iwAZ
+ x8soqsVXr504m4cMmfBzjZ+0b0s9S33Ss7XRro9XQ5eJ/4pYwhfh2s+oICUZgOHP9B+2
+ zUm83GbpGu5nU5dYtu/RKjxmDu9L/n6VBof5HIOnAm2irUZHrEH/+u/lE2ky4vuflEGX
+ 3Q2w==
+X-Gm-Message-State: AC+VfDyABEPDoLzn8d4SzTOoXpHoT7AHv1IKR7A61n+zPTdxscozQGfL
+ hf/VmTH2GF2GWYfl+Nvl9EAVX83myT61kWVukntd0A==
+X-Google-Smtp-Source: ACHHUZ6ewDIbcR4/py85q2j6sKSdum5U5/Vdc7cWMVzwmXLvBSTRSLiaS7LXPrZs5BLOaL/cUyMRgLfEvjshvfKWg50=
+X-Received: by 2002:aca:db83:0:b0:39a:7233:3340 with SMTP id
+ s125-20020acadb83000000b0039a72333340mr2527082oig.23.1686305353377; Fri, 09
+ Jun 2023 03:09:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230523114454.717708-1-tommy.wu@sifive.com>
- <20230523114454.717708-2-tommy.wu@sifive.com>
- <CAKmqyKOfkhN=3+asF-u3r7y83GiZjv34mv42Yp0Ye0NzUEnezQ@mail.gmail.com>
-In-Reply-To: <CAKmqyKOfkhN=3+asF-u3r7y83GiZjv34mv42Yp0Ye0NzUEnezQ@mail.gmail.com>
-From: Tommy Wu <tommy.wu@sifive.com>
-Date: Fri, 9 Jun 2023 16:37:41 +0800
-Message-ID: <CANj3q_ng7=2-gosL7HywNRVcqZqkK4aWodBNp6rjqV8OpMJDEA@mail.gmail.com>
-Subject: Re: [PATCH 1/2] target/riscv: Add a function to refresh the dynamic
- CSRs xml.
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, frank.chang@sifive.com, 
- alistair.francis@wdc.com, apatel@ventanamicro.com, palmer@rivosinc.com, 
- dbarboza@ventanamicro.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn, 
- zhiwei_liu@linux.alibaba.com
-Content-Type: multipart/alternative; boundary="000000000000dcd43805fdae4838"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e36;
- envelope-from=tommy.wu@sifive.com; helo=mail-vs1-xe36.google.com
+References: <20230526062509.31682-1-yongxuan.wang@sifive.com>
+ <20230526062509.31682-5-yongxuan.wang@sifive.com>
+ <a715b6d1-d28a-1e04-34c5-5d6c1fb2696e@ventanamicro.com>
+In-Reply-To: <a715b6d1-d28a-1e04-34c5-5d6c1fb2696e@ventanamicro.com>
+From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+Date: Fri, 9 Jun 2023 18:09:03 +0800
+Message-ID: <CAMWQL2hQkzCxMdvHXw8Yy8HSceEkHaMga5i1Z-79c-Eq6QGftg@mail.gmail.com>
+Subject: Re: [PATCH v3 4/6] target/riscv: Create an KVM AIA irqchip
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, rkanwal@rivosinc.com, 
+ anup@brainfault.org, atishp@atishpatra.org, vincent.chen@sifive.com, 
+ greentime.hu@sifive.com, frank.chang@sifive.com, jim.shu@sifive.com, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ kvm@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c31;
+ envelope-from=yongxuan.wang@sifive.com; helo=mail-oo1-xc31.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -92,218 +97,162 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000dcd43805fdae4838
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hi  Daniel,
 
-Hi Alistair,
-Thanks for the suggestion! Do you mean
-```
-    ...
-    g_free(cpu->dyn_csr_xml);
-    riscv_gen_dynamic_csr_xml(cs, cpu-> gdb_num_regs  -  CSR_TABLE_SIZE);
-    ...
-``` ?
+Thanks for your suggestions! I'll fix it in patch v4.
 
-Or maybe we don't need this refresh function, and just add ext_ssaia &
-ext_smaia in the command line.
+Regards,
+Yong-Xuan
 
-Best Regards,
-Tommy
-
-On Thu, May 25, 2023 at 10:33=E2=80=AFAM Alistair Francis <alistair23@gmail=
-.com>
-wrote:
-
-> On Tue, May 23, 2023 at 9:46=E2=80=AFPM Tommy Wu <tommy.wu@sifive.com> wr=
-ote:
+On Tue, Jun 6, 2023 at 9:45=E2=80=AFPM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+>
+>
+> On 5/26/23 03:25, Yong-Xuan Wang wrote:
+> > implement a function to create an KVM AIA chip
 > >
-> > When we change the cpu extension state after the cpu is
-> > realized, we cannot print the value of some CSRs in the remote
-> > gdb debugger. The root cause is that the dynamic CSR xml is
-> > generated when the cpu is realized.
-> >
-> > This patch add a function to refresh the dynamic CSR xml after
-> > the cpu is realized.
-> >
-> > Signed-off-by: Tommy Wu <tommy.wu@sifive.com>
-> > Reviewed-by: Frank Chang <frank.chang@sifive.com>
+> > Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+> > Reviewed-by: Jim Shu <jim.shu@sifive.com>
 > > ---
-> >  target/riscv/cpu.h     |  2 ++
-> >  target/riscv/gdbstub.c | 12 ++++++++++++
-> >  2 files changed, 14 insertions(+)
+> >   target/riscv/kvm.c       | 83 +++++++++++++++++++++++++++++++++++++++=
++
+> >   target/riscv/kvm_riscv.h |  3 ++
+> >   2 files changed, 86 insertions(+)
 > >
-> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> > index de7e43126a..dc8e592275 100644
-> > --- a/target/riscv/cpu.h
-> > +++ b/target/riscv/cpu.h
-> > @@ -494,6 +494,7 @@ struct ArchCPU {
-> >      CPUNegativeOffsetState neg;
-> >      CPURISCVState env;
-> >
-> > +    int dyn_csr_base_reg;
-> >      char *dyn_csr_xml;
-> >      char *dyn_vreg_xml;
-> >
-> > @@ -781,6 +782,7 @@ void riscv_get_csr_ops(int csrno,
-> riscv_csr_operations *ops);
-> >  void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);
-> >
-> >  void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
-> > +void riscv_refresh_dynamic_csr_xml(CPUState *cs);
-> >
-> >  uint8_t satp_mode_max_from_map(uint32_t map);
-> >  const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit);
-> > diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> > index 524bede865..9e97ee2c35 100644
-> > --- a/target/riscv/gdbstub.c
-> > +++ b/target/riscv/gdbstub.c
-> > @@ -230,6 +230,8 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs,
-> int base_reg)
-> >          bitsize =3D 64;
-> >      }
-> >
-> > +    cpu->dyn_csr_base_reg =3D base_reg;
+> > diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
+> > index eb469e8ca5..ead121154f 100644
+> > --- a/target/riscv/kvm.c
+> > +++ b/target/riscv/kvm.c
+> > @@ -34,6 +34,7 @@
+> >   #include "exec/address-spaces.h"
+> >   #include "hw/boards.h"
+> >   #include "hw/irq.h"
+> > +#include "hw/intc/riscv_imsic.h"
+> >   #include "qemu/log.h"
+> >   #include "hw/loader.h"
+> >   #include "kvm_riscv.h"
+> > @@ -548,3 +549,85 @@ bool kvm_arch_cpu_check_are_resettable(void)
+> >   void kvm_arch_accel_class_init(ObjectClass *oc)
+> >   {
+> >   }
 > > +
-> >      g_string_printf(s, "<?xml version=3D\"1.0\"?>");
-> >      g_string_append_printf(s, "<!DOCTYPE feature SYSTEM
-> \"gdb-target.dtd\">");
-> >      g_string_append_printf(s, "<feature
-> name=3D\"org.gnu.gdb.riscv.csr\">");
-> > @@ -349,3 +351,13 @@ void
-> riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
-> >                                   "riscv-csr.xml", 0);
-> >      }
-> >  }
-> > +
-> > +void riscv_refresh_dynamic_csr_xml(CPUState *cs)
+> > +void kvm_riscv_aia_create(DeviceState *aplic_s, bool msimode, int sock=
+et,
+> > +                          uint64_t aia_irq_num, uint64_t hart_count,
+> > +                          uint64_t aplic_base, uint64_t imsic_base)
 > > +{
-> > +    RISCVCPU *cpu =3D RISCV_CPU(cs);
-> > +    if (!cpu->dyn_csr_xml) {
-> > +        g_assert_not_reached();
+> > +    int ret;
+> > +    int aia_fd =3D -1;
+> > +    uint64_t aia_mode;
+> > +    uint64_t aia_nr_ids;
+> > +    uint64_t aia_hart_bits =3D find_last_bit(&hart_count, BITS_PER_LON=
+G) + 1;
+> > +
+> > +    if (!msimode) {
+> > +        error_report("Currently KVM AIA only supports aplic_imsic mode=
+");
+> > +        exit(1);
 > > +    }
-> > +    g_free(cpu->dyn_csr_xml);
-> > +    riscv_gen_dynamic_csr_xml(cs, cpu->dyn_csr_base_reg);
+> > +
+> > +    aia_fd =3D kvm_create_device(kvm_state, KVM_DEV_TYPE_RISCV_AIA, fa=
+lse);
+> > +
+> > +    if (aia_fd < 0) {
+> > +        error_report("Unable to create in-kernel irqchip");
+> > +        exit(1);
+> > +    }
+> > +
+> > +    ret =3D kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+> > +                            KVM_DEV_RISCV_AIA_CONFIG_MODE,
+> > +                            &aia_mode, false, NULL);
+> > +
+> > +    ret =3D kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+> > +                            KVM_DEV_RISCV_AIA_CONFIG_IDS,
+> > +                            &aia_nr_ids, false, NULL);
+> > +
+> > +    ret =3D kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+> > +                            KVM_DEV_RISCV_AIA_CONFIG_SRCS,
+> > +                            &aia_irq_num, true, NULL);
+> > +    if (ret < 0) {
+> > +        error_report("KVM AIA: fail to set number input irq lines");
+> > +        exit(1);
+> > +    }
 >
-> I don't really understand why we need dyn_csr_base_reg, could we just
-> use cs->gdb_num_regs directly here?
+> I see that you didn't check 'ret' for the first 2 calls of kvm_device_acc=
+ess().
+> Is it intentional?
 >
-> Alistair
+> Since you're setting customized error messages for every step I think it'=
+s worth
+> also handling the case where we fail to set aia_mode and aia_nr_ids.
 >
+>
+> Thanks,
+>
+>
+> Daniel
+>
+>
+> > +
+> > +    ret =3D kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+> > +                            KVM_DEV_RISCV_AIA_CONFIG_HART_BITS,
+> > +                            &aia_hart_bits, true, NULL);
+> > +    if (ret < 0) {
+> > +        error_report("KVM AIA: fail to set number of harts");
+> > +        exit(1);
+> > +    }
+> > +
+> > +    ret =3D kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_ADDR,
+> > +                            KVM_DEV_RISCV_AIA_ADDR_APLIC,
+> > +                            &aplic_base, true, NULL);
+> > +    if (ret < 0) {
+> > +        error_report("KVM AIA: fail to set the base address of APLIC")=
+;
+> > +        exit(1);
+> > +    }
+> > +
+> > +    for (int i =3D 0; i < hart_count; i++) {
+> > +        uint64_t imsic_addr =3D imsic_base + i * IMSIC_HART_SIZE(0);
+> > +        ret =3D kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_ADDR,
+> > +                                KVM_DEV_RISCV_AIA_ADDR_IMSIC(i),
+> > +                                &imsic_addr, true, NULL);
+> > +        if (ret < 0) {
+> > +            error_report("KVM AIA: fail to set the base address of IMS=
+ICs");
+> > +            exit(1);
+> > +        }
+> > +    }
+> > +
+> > +    if (kvm_has_gsi_routing()) {
+> > +        for (uint64_t idx =3D 0; idx < aia_irq_num + 1; ++idx) {
+> > +            kvm_irqchip_add_irq_route(kvm_state, idx, socket, idx);
+> > +        }
+> > +        kvm_gsi_routing_allowed =3D true;
+> > +        kvm_irqchip_commit_routes(kvm_state);
+> > +    }
+> > +
+> > +    ret =3D kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CTRL,
+> > +                            KVM_DEV_RISCV_AIA_CTRL_INIT,
+> > +                            NULL, true, NULL);
+> > +    if (ret < 0) {
+> > +        error_report("KVM AIA: initialized fail");
+> > +        exit(1);
+> > +    }
 > > +}
-> > --
-> > 2.38.1
+> > diff --git a/target/riscv/kvm_riscv.h b/target/riscv/kvm_riscv.h
+> > index 606968a4b7..6067adff51 100644
+> > --- a/target/riscv/kvm_riscv.h
+> > +++ b/target/riscv/kvm_riscv.h
+> > @@ -21,6 +21,9 @@
 > >
+> >   void kvm_riscv_reset_vcpu(RISCVCPU *cpu);
+> >   void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level);
+> > +void kvm_riscv_aia_create(DeviceState *aplic_s, bool msimode, int sock=
+et,
+> > +                          uint64_t aia_irq_num, uint64_t hart_count,
+> > +                          uint64_t aplic_base, uint64_t imsic_base);
 > >
->
-
---000000000000dcd43805fdae4838
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi Alistair,<br>Thanks for the suggestion! Do you mean=C2=
-=A0<div>```</div><div>=C2=A0 =C2=A0 ...</div><div>=C2=A0 =C2=A0 g_free(cpu-=
-&gt;dyn_csr_xml);<br>=C2=A0 =C2=A0 riscv_gen_dynamic_csr_xml(cs, cpu-&gt;
-
-gdb_num_regs=C2=A0 -=C2=A0 CSR_TABLE_SIZE);<br></div><div>=C2=A0 =C2=A0 ...=
-</div><div>``` ?</div><div><br></div><div>Or maybe we don&#39;t need this r=
-efresh function, and just add ext_ssaia=C2=A0&amp; ext_smaia in the command=
- line.</div><div><br>Best Regards,<br>Tommy</div></div><br><div class=3D"gm=
-ail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, May 25, 2023 at 10=
-:33=E2=80=AFAM Alistair Francis &lt;<a href=3D"mailto:alistair23@gmail.com"=
->alistair23@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_qu=
-ote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,20=
-4);padding-left:1ex">On Tue, May 23, 2023 at 9:46=E2=80=AFPM Tommy Wu &lt;<=
-a href=3D"mailto:tommy.wu@sifive.com" target=3D"_blank">tommy.wu@sifive.com=
-</a>&gt; wrote:<br>
-&gt;<br>
-&gt; When we change the cpu extension state after the cpu is<br>
-&gt; realized, we cannot print the value of some CSRs in the remote<br>
-&gt; gdb debugger. The root cause is that the dynamic CSR xml is<br>
-&gt; generated when the cpu is realized.<br>
-&gt;<br>
-&gt; This patch add a function to refresh the dynamic CSR xml after<br>
-&gt; the cpu is realized.<br>
-&gt;<br>
-&gt; Signed-off-by: Tommy Wu &lt;<a href=3D"mailto:tommy.wu@sifive.com" tar=
-get=3D"_blank">tommy.wu@sifive.com</a>&gt;<br>
-&gt; Reviewed-by: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.com"=
- target=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 target/riscv/cpu.h=C2=A0 =C2=A0 =C2=A0|=C2=A0 2 ++<br>
-&gt;=C2=A0 target/riscv/gdbstub.c | 12 ++++++++++++<br>
-&gt;=C2=A0 2 files changed, 14 insertions(+)<br>
-&gt;<br>
-&gt; diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h<br>
-&gt; index de7e43126a..dc8e592275 100644<br>
-&gt; --- a/target/riscv/cpu.h<br>
-&gt; +++ b/target/riscv/cpu.h<br>
-&gt; @@ -494,6 +494,7 @@ struct ArchCPU {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 CPUNegativeOffsetState neg;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 CPURISCVState env;<br>
-&gt;<br>
-&gt; +=C2=A0 =C2=A0 int dyn_csr_base_reg;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 char *dyn_csr_xml;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 char *dyn_vreg_xml;<br>
-&gt;<br>
-&gt; @@ -781,6 +782,7 @@ void riscv_get_csr_ops(int csrno, riscv_csr_operat=
-ions *ops);<br>
-&gt;=C2=A0 void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);<br=
->
-&gt;<br>
-&gt;=C2=A0 void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);<br>
-&gt; +void riscv_refresh_dynamic_csr_xml(CPUState *cs);<br>
-&gt;<br>
-&gt;=C2=A0 uint8_t satp_mode_max_from_map(uint32_t map);<br>
-&gt;=C2=A0 const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit);<br=
->
-&gt; diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c<br>
-&gt; index 524bede865..9e97ee2c35 100644<br>
-&gt; --- a/target/riscv/gdbstub.c<br>
-&gt; +++ b/target/riscv/gdbstub.c<br>
-&gt; @@ -230,6 +230,8 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs,=
- int base_reg)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 bitsize =3D 64;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 }<br>
-&gt;<br>
-&gt; +=C2=A0 =C2=A0 cpu-&gt;dyn_csr_base_reg =3D base_reg;<br>
-&gt; +<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 g_string_printf(s, &quot;&lt;?xml version=3D\&quot=
-;1.0\&quot;?&gt;&quot;);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 g_string_append_printf(s, &quot;&lt;!DOCTYPE featu=
-re SYSTEM \&quot;gdb-target.dtd\&quot;&gt;&quot;);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 g_string_append_printf(s, &quot;&lt;feature name=
-=3D\&quot;org.gnu.gdb.riscv.csr\&quot;&gt;&quot;);<br>
-&gt; @@ -349,3 +351,13 @@ void riscv_cpu_register_gdb_regs_for_features(CPU=
-State *cs)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;riscv-csr.xml&=
-quot;, 0);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 }<br>
-&gt;=C2=A0 }<br>
-&gt; +<br>
-&gt; +void riscv_refresh_dynamic_csr_xml(CPUState *cs)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 RISCVCPU *cpu =3D RISCV_CPU(cs);<br>
-&gt; +=C2=A0 =C2=A0 if (!cpu-&gt;dyn_csr_xml) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 g_assert_not_reached();<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; +=C2=A0 =C2=A0 g_free(cpu-&gt;dyn_csr_xml);<br>
-&gt; +=C2=A0 =C2=A0 riscv_gen_dynamic_csr_xml(cs, cpu-&gt;dyn_csr_base_reg)=
-;<br>
-<br>
-I don&#39;t really understand why we need dyn_csr_base_reg, could we just<b=
-r>
-use cs-&gt;gdb_num_regs directly here?<br>
-<br>
-Alistair<br>
-<br>
-&gt; +}<br>
-&gt; --<br>
-&gt; 2.38.1<br>
-&gt;<br>
-&gt;<br>
-</blockquote></div>
-
---000000000000dcd43805fdae4838--
+> >   #define KVM_DEV_RISCV_AIA_GRP_CONFIG            0
+> >   #define KVM_DEV_RISCV_AIA_CONFIG_MODE           0
 
