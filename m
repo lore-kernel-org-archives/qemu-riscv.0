@@ -4,79 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBA95C77B7A
-	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Jun 2023 03:02:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF0BAC7EE23
+	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Jun 2023 03:08:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q8XoV-0006ML-ES; Sun, 11 Jun 2023 23:01:51 -0400
+	id 1q8Xv2-0007dH-NA; Sun, 11 Jun 2023 23:08:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q8XoT-0006Lb-Nx; Sun, 11 Jun 2023 23:01:49 -0400
-Received: from mail-ua1-x935.google.com ([2607:f8b0:4864:20::935])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q8XoS-0005R1-C0; Sun, 11 Jun 2023 23:01:49 -0400
-Received: by mail-ua1-x935.google.com with SMTP id
- a1e0cc1a2514c-78cdb90aa66so83921241.3; 
- Sun, 11 Jun 2023 20:01:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1686538907; x=1689130907;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Y7O+LAq3X1OyxE0LDgjuyBbdczJ0gkfSPA9IPN8ldyc=;
- b=NrHpza70YHxn4GiDkM0PYog9lq20sX3cGXVwLfNNqHoeZoKbY9K5kEDfdP3FAAuASx
- A+8He8VH+3W2h1jhGOcIg24DEmbRsYZ2/0v5goSZlVAfBuzMDssauWpn/2LLJyZtV6zN
- ld8m5olrGqetiUGQymJIXD/YTBczqitR9bIbvbrCJHrZTNQBUChJrvCY6mtFA8F2kCer
- k8mpidGhO0RXS46CXvhWpretlptKKejkevQL+NActxoXbGUWSznnyUcbqs+JZLI1imDf
- hwpPYCUi6N3kBkJc/kxF2zyS0/SKu0AnchdxqdTP1ty1eYVzhlUg2+mRzxLLJ8qbCi8D
- o2sA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686538907; x=1689130907;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Y7O+LAq3X1OyxE0LDgjuyBbdczJ0gkfSPA9IPN8ldyc=;
- b=QBo6NLG2DFQ6EgJBggfONFQ8RH9487Z2R5gYe0jJjfIatSLpct1Y3TvIbYUKZq/9nE
- XOZJmIedNUWQbrkivS+YWgGQoidxp18xSEGvBE37C98rwLv7JlzpfMDgoN2a7yOX+sXo
- Ffq+ilBB04gKTLnTvTa5vp9jP55cEriseHhBHRb5Gzrz7iiPWiNdXN1lAkGujFaqKK5e
- lGe3JXmzgFHbhGlrv5JgY6EinJGTaTc2ASyoKGwy1phnNl8ntqobPz4RBqIr2KVuTv0X
- 1e/T9Jj4KgyG7Bob4hb8NA2I6lWZkrv8vr44YeWbbnLWUBjmhrT/rcuNc29pZ7LxdoYR
- U+OQ==
-X-Gm-Message-State: AC+VfDx77eMpizDC+nB8VXGvVge4jAb5Na+sALDxi4qNXNldoDsashid
- dDcZ8VCU3DEHCy/HqC9l3vnQlzxAFzptDtw2VcU=
-X-Google-Smtp-Source: ACHHUZ4pLuaFzPOdp2cZToBLafKVhFhm/0o428sIvvnhi78s1Mt9n8vPqvc5dxZ6J0j0VSACHKDTLg+8Y52k5kxFc+U=
-X-Received: by 2002:a1f:3f49:0:b0:45c:8ef0:e351 with SMTP id
- m70-20020a1f3f49000000b0045c8ef0e351mr3239166vka.4.1686538906632; Sun, 11 Jun
- 2023 20:01:46 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1q8Xv0-0007cy-Tt; Sun, 11 Jun 2023 23:08:34 -0400
+Received: from out30-111.freemail.mail.aliyun.com ([115.124.30.111])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1q8Xuy-0007lg-7F; Sun, 11 Jun 2023 23:08:34 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R151e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
+ TI=SMTPD_---0VkqcQyb_1686539300; 
+Received: from 30.221.96.167(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0VkqcQyb_1686539300) by smtp.aliyun-inc.com;
+ Mon, 12 Jun 2023 11:08:22 +0800
+Message-ID: <7b8bc5a7-ccc1-a764-cb55-706b62a36a37@linux.alibaba.com>
+Date: Mon, 12 Jun 2023 11:08:02 +0800
 MIME-Version: 1.0
-References: <20230609055936.3925438-1-tommy.wu@sifive.com>
-In-Reply-To: <20230609055936.3925438-1-tommy.wu@sifive.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 12 Jun 2023 13:01:20 +1000
-Message-ID: <CAKmqyKNsdq7tJA2e1XdtrihyGq2DuYB56JnS-C1aLm63tW1XVQ@mail.gmail.com>
-Subject: Re: [PATCH] hw/intc: If mmsiaddrcfgh.L == 1, smsiaddrcfg and
- smsiaddrcfgh are read-only.
-To: Tommy Wu <tommy.wu@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Frank Chang <frank.chang@sifive.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Anup Patel <anup@brainfault.org>, Mayuresh Chitale <mchitale@ventanamicro.com>,
- Ivan Klokov <ivan.klokov@syntacore.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::935;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x935.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.12.0
+Subject: Re: [PATCH 3/4] target/riscv: Support MSTATUS.MPV/GVA only when RVH
+ is enabled
+Content-Language: en-US
+To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ dbarboza@ventanamicro.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+References: <20230529121719.179507-1-liweiwei@iscas.ac.cn>
+ <20230529121719.179507-4-liweiwei@iscas.ac.cn>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20230529121719.179507-4-liweiwei@iscas.ac.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=115.124.30.111;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-111.freemail.mail.aliyun.com
+X-Spam_score_int: -99
+X-Spam_score: -10.0
+X-Spam_bar: ----------
+X-Spam_report: (-10.0 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ NICE_REPLY_A=-0.093, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -92,49 +68,48 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Jun 9, 2023 at 4:01=E2=80=AFPM Tommy Wu <tommy.wu@sifive.com> wrote=
-:
+
+On 2023/5/29 20:17, Weiwei Li wrote:
+> MPV and GVA bits are added by hypervisor extension to mstatus
+> and mstatush (if MXLEN=32).
+
+Have you found the CSR field specifications for them, especially for GVA.
+
+Zhiwei
+
 >
-> According to the `The RISC-V Advanced Interrupt Architecture`
-> document, if register `mmsiaddrcfgh` of the domain has bit L set
-> to one, then `smsiaddrcfg` and `smsiaddrcfgh` are locked as
-> read-only alongside `mmsiaddrcfg` and `mmsiaddrcfgh`.
->
-> Signed-off-by: Tommy Wu <tommy.wu@sifive.com>
-> Reviewed-by: Frank Chang <frank.chang@sifive.com>
-
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 > ---
->  hw/intc/riscv_aplic.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+>   target/riscv/csr.c | 10 ++++------
+>   1 file changed, 4 insertions(+), 6 deletions(-)
 >
-> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-> index afc5b54dbb..4bdc6a5d1a 100644
-> --- a/hw/intc/riscv_aplic.c
-> +++ b/hw/intc/riscv_aplic.c
-> @@ -688,13 +688,13 @@ static void riscv_aplic_write(void *opaque, hwaddr =
-addr, uint64_t value,
->           * domains).
->           */
->          if (aplic->num_children &&
-> -            !(aplic->smsicfgaddrH & APLIC_xMSICFGADDRH_L)) {
-> +            !(aplic->mmsicfgaddrH & APLIC_xMSICFGADDRH_L)) {
->              aplic->smsicfgaddr =3D value;
->          }
->      } else if (aplic->mmode && aplic->msimode &&
->                 (addr =3D=3D APLIC_SMSICFGADDRH)) {
->          if (aplic->num_children &&
-> -            !(aplic->smsicfgaddrH & APLIC_xMSICFGADDRH_L)) {
-> +            !(aplic->mmsicfgaddrH & APLIC_xMSICFGADDRH_L)) {
->              aplic->smsicfgaddrH =3D value & APLIC_xMSICFGADDRH_VALID_MAS=
-K;
->          }
->      } else if ((APLIC_SETIP_BASE <=3D addr) &&
-> --
-> 2.31.1
->
->
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 58499b5afc..6ac11d1f11 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -1311,11 +1311,9 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+>       }
+>   
+>       if (xl != MXL_RV32 || env->debugger) {
+> -        /*
+> -         * RV32: MPV and GVA are not in mstatus. The current plan is to
+> -         * add them to mstatush. For now, we just don't support it.
+> -         */
+> -        mask |= MSTATUS_MPV | MSTATUS_GVA;
+> +        if (riscv_has_ext(env, RVH)) {
+> +            mask |= MSTATUS_MPV | MSTATUS_GVA;
+> +        }
+>           if ((val & MSTATUS64_UXL) != 0) {
+>               mask |= MSTATUS64_UXL;
+>           }
+> @@ -1351,7 +1349,7 @@ static RISCVException write_mstatush(CPURISCVState *env, int csrno,
+>                                        target_ulong val)
+>   {
+>       uint64_t valh = (uint64_t)val << 32;
+> -    uint64_t mask = MSTATUS_MPV | MSTATUS_GVA;
+> +    uint64_t mask = riscv_has_ext(env, RVH) ? MSTATUS_MPV | MSTATUS_GVA : 0;
+>   
+>       env->mstatus = (env->mstatus & ~mask) | (valh & mask);
+>   
 
