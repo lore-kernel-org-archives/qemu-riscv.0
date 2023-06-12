@@ -4,73 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6521C7EE23
-	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Jun 2023 03:22:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20438C7EE23
+	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Jun 2023 03:23:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q8Y7x-0004Uc-Oq; Sun, 11 Jun 2023 23:21:57 -0400
+	id 1q8Y8r-0005Bl-41; Sun, 11 Jun 2023 23:22:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q8Y7w-0004UI-Ig; Sun, 11 Jun 2023 23:21:56 -0400
-Received: from mail-vk1-xa2f.google.com ([2607:f8b0:4864:20::a2f])
+ id 1q8Y8o-0005Am-N6; Sun, 11 Jun 2023 23:22:50 -0400
+Received: from mail-vk1-xa32.google.com ([2607:f8b0:4864:20::a32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q8Y7u-0004Mm-It; Sun, 11 Jun 2023 23:21:56 -0400
-Received: by mail-vk1-xa2f.google.com with SMTP id
- 71dfb90a1353d-462a2998bceso1161382e0c.2; 
- Sun, 11 Jun 2023 20:21:53 -0700 (PDT)
+ id 1q8Y8m-0004dF-9O; Sun, 11 Jun 2023 23:22:50 -0400
+Received: by mail-vk1-xa32.google.com with SMTP id
+ 71dfb90a1353d-463e368a74cso1555271e0c.0; 
+ Sun, 11 Jun 2023 20:22:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1686540112; x=1689132112;
+ d=gmail.com; s=20221208; t=1686540167; x=1689132167;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Pq9afIScTSaxD+ourO03PzcvbCQ40DM5fFlfdoXj2kU=;
- b=MBdM0/UgWiFMPDueCuU2ZQcV0d1NGNw/uIHudB5ZYTid0eYSu35isdAl3i9SWgJ7ZZ
- 7wsbWnMt38NT271k7ba2P2L7GAQ+7m8FWbNTSXLnyMLvnqJxFLq3WddNbIQ21dZlFtsp
- 6U9lSSR+OKBOHXALyZ1OiUDm2ROIZa+ayiMZpTCDTrmt2f0dh50OHVEqypHvRZWDP6bi
- 8XstMBeDwQzW8paAD6Y06ddni8AfTWUrXI2mvFdjOigaE/dEXeYB0UzCAb24pqYPTWT2
- 8Yz1oyNt1Pmi2QfULa5y7lqTrbcPGvQ+Sdj7whktkHY8uhBV8JlkEcJ93tVxa0lXkNH1
- dkXg==
+ bh=p+QXTiueh7Rqimb9RSqnC0JOFKzvOKlUXgyL1TvY9PA=;
+ b=UA9onc5MShNVtc1i7s2StNFz9JC2VOdEd3wW+yv8UZKrHz/btSoFzGN4GQT4XN3A83
+ EAL46lR1MRLl8yEqTc9nqVZy01RgYwt72JUSrfopE6SZVjF2woHuklWDfmtnwBVZ7AET
+ 8TxHOPTx2fKhGjKPZh5o9TxZdrVqzNihhHFKBnn8IEVCVZ6qdmrH/hEWoOqbulwO6LTG
+ L0rYJWoUtez0gSN80HUYYRm2hEXnhb1oendVRuME6SYYmqWaYG1Q338mWbRxLlmX5iB5
+ gTRsGvkLw/A3R2sM5M3yDOJchiT5YkVLvDUNzZn9rOvsx6uqHwwWG4seJtZ73RlgqvWY
+ 3VTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686540112; x=1689132112;
+ d=1e100.net; s=20221208; t=1686540167; x=1689132167;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Pq9afIScTSaxD+ourO03PzcvbCQ40DM5fFlfdoXj2kU=;
- b=hIZ2DsJwDp7L/9n5pOqAERMa1K4qykDlelOAE5F//dS8iZRlSTqkguZLzpEhxr+UXF
- jAOsx77cuzAFMKBE73rrvbQ0zK6XiPiZDwVPdUlmdXp+IeE38VvB7+3CPVLJhi5rBywa
- mcPwHZpi1weW/6R5N4k6caQUcV6alcR72OttI4co8jB9UdzNzW0y25rmK1Sv+Wj7RJET
- RpAqdwCyAeilI+VsGkUhTIJ4feMSrs1kA+JeM/KXYLwwDhlQ4By7u8C8Zh03m6icjZSU
- mCByYVyIPpczzSGLMoHQSanN0VTfCCfl/gGWWq1eDYOXD1kkM6ZVNTknB1meASPWMFS5
- cong==
-X-Gm-Message-State: AC+VfDxiZ2RgiicvbY+i5UeguKbBNX5GRx7iCnffl9iYplpv6Nl9mWuB
- 7w6yK9k6WWxTqqHPHI+3fmaIpJk5XIJgGPqgBK8=
-X-Google-Smtp-Source: ACHHUZ6lfn+EkuVGARiVsncioZLkp0VU4A0r1i9CrJtfgSzp4V/5QLG0ZunvSPu9J2NcqemwI862FUxFmUlzk6AOfuU=
-X-Received: by 2002:a1f:cac3:0:b0:464:6be9:9f3d with SMTP id
- a186-20020a1fcac3000000b004646be99f3dmr3193763vkg.14.1686540112293; Sun, 11
- Jun 2023 20:21:52 -0700 (PDT)
+ bh=p+QXTiueh7Rqimb9RSqnC0JOFKzvOKlUXgyL1TvY9PA=;
+ b=JKCDjx56qEVDP2+3mEUvlHr9OBKP5KNGVX+Xz+AFvgBskrntajnp7tKMg+44gUu+/g
+ Uesj8I9ry2hu8RRZorKyxPpwcFhuCWtBPOOrFnHPaFKwIphL6NeHflRxJiSGx/XWKF5g
+ nZjlWVqQZ3UV+kOsKmxXjPk1yySsyRjeir48Hn9sLMSx6R/s1eipPdH1v9lMh5xlH0Ks
+ spcN40Z6AOrUMt0QM2zo+dnNjBdB1yc0nG8mO/SugyRgSvl6GK22FI4sLdHI56UhyKW+
+ nwisP24MMtvVYEyaRUQ3UtU8Vm9eOuhLicYtYnPFIpHzG2tCY5g8O+q+/2dScmjatUcM
+ 2d6Q==
+X-Gm-Message-State: AC+VfDxs3jey5lyhDz3hjqQusRqrykLkDYnQEdjB/6K3yxa9tXvbytcZ
+ /4w3jvPRO2wNfo3NUwkCpSGUrOP1Juk3Rt/UcsY=
+X-Google-Smtp-Source: ACHHUZ4CCOjxO0epezXfNO1caVpDebbzD1m6Ey/V52pnmhwWaw1Ss5KKnNGwWBoyTX3dA9bBfcvjiyV8eSTClWfj2Uo=
+X-Received: by 2002:a05:6102:410:b0:439:316a:e1eb with SMTP id
+ d16-20020a056102041000b00439316ae1ebmr3748929vsq.32.1686540166647; Sun, 11
+ Jun 2023 20:22:46 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230530131843.1186637-1-christoph.muellner@vrull.eu>
- <20230530131843.1186637-3-christoph.muellner@vrull.eu>
-In-Reply-To: <20230530131843.1186637-3-christoph.muellner@vrull.eu>
+ <20230530131843.1186637-4-christoph.muellner@vrull.eu>
+In-Reply-To: <20230530131843.1186637-4-christoph.muellner@vrull.eu>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 12 Jun 2023 13:21:26 +1000
-Message-ID: <CAKmqyKN=59chkcdHqL7A4NgcHGqZBgmnBQ-GZ5kSBy61-6Rgtg@mail.gmail.com>
-Subject: Re: [PATCH 2/9] target/riscv: Factor out RISCVCPUConfig from cpu.h
+Date: Mon, 12 Jun 2023 13:22:20 +1000
+Message-ID: <CAKmqyKNif8pi9hZ0gNg-x6bdnJ8SX7BJKDsKOUNo0qx=JjYuig@mail.gmail.com>
+Subject: Re: [PATCH 3/9] disas/riscv: Move types/constants to new header file
 To: Christoph Muellner <christoph.muellner@vrull.eu>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
  Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
  Richard Henderson <richard.henderson@linaro.org>,
- Zhiwei Liu <zhiwei_liu@linux.alibaba.com>, 
- Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+ Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2f;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a32;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa32.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -94,26 +92,16 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, May 30, 2023 at 11:21=E2=80=AFPM Christoph Muellner
+On Tue, May 30, 2023 at 11:23=E2=80=AFPM Christoph Muellner
 <christoph.muellner@vrull.eu> wrote:
 >
 > From: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
 >
-> The file target/riscv/cpu.h cannot be included by files outside
-> of target/riscv/. To share data with other parts of QEMU (e.g.
-> the disassembler) we need to factor out the relevant code.
-> Therefore, this patch moves the definition of RISCVCPUConfig
-> (and tightly coupled dependencies and functions) into its
-> own target/riscv/cpu-config.h file.
-> The goal is to be able to share the enablement-status of
-> the RISC-V ISA extensions (RISCVCPUConfig::ext_*) with
-> other parts of QEMU.
+> In order to enable vendor disassembler support, we need to
+> move types and constants into a header file so that other
+> compilation units can use them as well.
 >
-> This patch does not introduce new functionality.
-> However, the patch includes a small change:
-> The parameter for the extension test functions has been changed
-> from 'DisasContext*' to 'const RISCVCPUConfig*'.
-> This allows to keep these functions in cpu-config.h.
+> This patch does not introduce any functional changes.
 >
 > Signed-off-by: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
 
@@ -122,362 +110,592 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/cpu-config.h | 148 ++++++++++++++++++++++++++++++++++++++
->  target/riscv/cpu.h        | 114 +----------------------------
->  target/riscv/translate.c  |  27 +------
->  3 files changed, 151 insertions(+), 138 deletions(-)
->  create mode 100644 target/riscv/cpu-config.h
+>  disas/riscv.c | 270 +-----------------------------------------------
+>  disas/riscv.h | 280 ++++++++++++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 281 insertions(+), 269 deletions(-)
+>  create mode 100644 disas/riscv.h
 >
-> diff --git a/target/riscv/cpu-config.h b/target/riscv/cpu-config.h
+> diff --git a/disas/riscv.c b/disas/riscv.c
+> index d597161d46..a062fb48cc 100644
+> --- a/disas/riscv.c
+> +++ b/disas/riscv.c
+> @@ -19,158 +19,7 @@
+>
+>  #include "qemu/osdep.h"
+>  #include "disas/dis-asm.h"
+> -
+> -
+> -/* types */
+> -
+> -typedef uint64_t rv_inst;
+> -typedef uint16_t rv_opcode;
+> -
+> -/* enums */
+> -
+> -typedef enum {
+> -    rv32,
+> -    rv64,
+> -    rv128
+> -} rv_isa;
+> -
+> -typedef enum {
+> -    rv_rm_rne =3D 0,
+> -    rv_rm_rtz =3D 1,
+> -    rv_rm_rdn =3D 2,
+> -    rv_rm_rup =3D 3,
+> -    rv_rm_rmm =3D 4,
+> -    rv_rm_dyn =3D 7,
+> -} rv_rm;
+> -
+> -typedef enum {
+> -    rv_fence_i =3D 8,
+> -    rv_fence_o =3D 4,
+> -    rv_fence_r =3D 2,
+> -    rv_fence_w =3D 1,
+> -} rv_fence;
+> -
+> -typedef enum {
+> -    rv_ireg_zero,
+> -    rv_ireg_ra,
+> -    rv_ireg_sp,
+> -    rv_ireg_gp,
+> -    rv_ireg_tp,
+> -    rv_ireg_t0,
+> -    rv_ireg_t1,
+> -    rv_ireg_t2,
+> -    rv_ireg_s0,
+> -    rv_ireg_s1,
+> -    rv_ireg_a0,
+> -    rv_ireg_a1,
+> -    rv_ireg_a2,
+> -    rv_ireg_a3,
+> -    rv_ireg_a4,
+> -    rv_ireg_a5,
+> -    rv_ireg_a6,
+> -    rv_ireg_a7,
+> -    rv_ireg_s2,
+> -    rv_ireg_s3,
+> -    rv_ireg_s4,
+> -    rv_ireg_s5,
+> -    rv_ireg_s6,
+> -    rv_ireg_s7,
+> -    rv_ireg_s8,
+> -    rv_ireg_s9,
+> -    rv_ireg_s10,
+> -    rv_ireg_s11,
+> -    rv_ireg_t3,
+> -    rv_ireg_t4,
+> -    rv_ireg_t5,
+> -    rv_ireg_t6,
+> -} rv_ireg;
+> -
+> -typedef enum {
+> -    rvc_end,
+> -    rvc_rd_eq_ra,
+> -    rvc_rd_eq_x0,
+> -    rvc_rs1_eq_x0,
+> -    rvc_rs2_eq_x0,
+> -    rvc_rs2_eq_rs1,
+> -    rvc_rs1_eq_ra,
+> -    rvc_imm_eq_zero,
+> -    rvc_imm_eq_n1,
+> -    rvc_imm_eq_p1,
+> -    rvc_csr_eq_0x001,
+> -    rvc_csr_eq_0x002,
+> -    rvc_csr_eq_0x003,
+> -    rvc_csr_eq_0xc00,
+> -    rvc_csr_eq_0xc01,
+> -    rvc_csr_eq_0xc02,
+> -    rvc_csr_eq_0xc80,
+> -    rvc_csr_eq_0xc81,
+> -    rvc_csr_eq_0xc82,
+> -} rvc_constraint;
+> -
+> -typedef enum {
+> -    rv_codec_illegal,
+> -    rv_codec_none,
+> -    rv_codec_u,
+> -    rv_codec_uj,
+> -    rv_codec_i,
+> -    rv_codec_i_sh5,
+> -    rv_codec_i_sh6,
+> -    rv_codec_i_sh7,
+> -    rv_codec_i_csr,
+> -    rv_codec_s,
+> -    rv_codec_sb,
+> -    rv_codec_r,
+> -    rv_codec_r_m,
+> -    rv_codec_r4_m,
+> -    rv_codec_r_a,
+> -    rv_codec_r_l,
+> -    rv_codec_r_f,
+> -    rv_codec_cb,
+> -    rv_codec_cb_imm,
+> -    rv_codec_cb_sh5,
+> -    rv_codec_cb_sh6,
+> -    rv_codec_ci,
+> -    rv_codec_ci_sh5,
+> -    rv_codec_ci_sh6,
+> -    rv_codec_ci_16sp,
+> -    rv_codec_ci_lwsp,
+> -    rv_codec_ci_ldsp,
+> -    rv_codec_ci_lqsp,
+> -    rv_codec_ci_li,
+> -    rv_codec_ci_lui,
+> -    rv_codec_ci_none,
+> -    rv_codec_ciw_4spn,
+> -    rv_codec_cj,
+> -    rv_codec_cj_jal,
+> -    rv_codec_cl_lw,
+> -    rv_codec_cl_ld,
+> -    rv_codec_cl_lq,
+> -    rv_codec_cr,
+> -    rv_codec_cr_mv,
+> -    rv_codec_cr_jalr,
+> -    rv_codec_cr_jr,
+> -    rv_codec_cs,
+> -    rv_codec_cs_sw,
+> -    rv_codec_cs_sd,
+> -    rv_codec_cs_sq,
+> -    rv_codec_css_swsp,
+> -    rv_codec_css_sdsp,
+> -    rv_codec_css_sqsp,
+> -    rv_codec_k_bs,
+> -    rv_codec_k_rnum,
+> -    rv_codec_v_r,
+> -    rv_codec_v_ldst,
+> -    rv_codec_v_i,
+> -    rv_codec_vsetvli,
+> -    rv_codec_vsetivli,
+> -    rv_codec_zcb_ext,
+> -    rv_codec_zcb_mul,
+> -    rv_codec_zcb_lb,
+> -    rv_codec_zcb_lh,
+> -    rv_codec_zcmp_cm_pushpop,
+> -    rv_codec_zcmp_cm_mv,
+> -    rv_codec_zcmt_jt,
+> -} rv_codec;
+> +#include "disas/riscv.h"
+>
+>  typedef enum {
+>      rv_op_illegal =3D 0,
+> @@ -966,50 +815,6 @@ typedef enum {
+>      rv_op_czero_nez =3D 790,
+>  } rv_op;
+>
+> -/* structures */
+> -
+> -typedef struct {
+> -    uint64_t  pc;
+> -    uint64_t  inst;
+> -    int32_t   imm;
+> -    uint16_t  op;
+> -    uint8_t   codec;
+> -    uint8_t   rd;
+> -    uint8_t   rs1;
+> -    uint8_t   rs2;
+> -    uint8_t   rs3;
+> -    uint8_t   rm;
+> -    uint8_t   pred;
+> -    uint8_t   succ;
+> -    uint8_t   aq;
+> -    uint8_t   rl;
+> -    uint8_t   bs;
+> -    uint8_t   rnum;
+> -    uint8_t   vm;
+> -    uint32_t  vzimm;
+> -    uint8_t   rlist;
+> -} rv_decode;
+> -
+> -typedef struct {
+> -    const int op;
+> -    const rvc_constraint *constraints;
+> -} rv_comp_data;
+> -
+> -enum {
+> -    rvcd_imm_nz =3D 0x1
+> -};
+> -
+> -typedef struct {
+> -    const char * const name;
+> -    const rv_codec codec;
+> -    const char * const format;
+> -    const rv_comp_data *pseudo;
+> -    const short decomp_rv32;
+> -    const short decomp_rv64;
+> -    const short decomp_rv128;
+> -    const short decomp_data;
+> -} rv_opcode_data;
+> -
+>  /* register names */
+>
+>  static const char rv_ireg_name_sym[32][5] =3D {
+> @@ -1033,79 +838,6 @@ static const char rv_vreg_name_sym[32][4] =3D {
+>      "v24", "v25", "v26", "v27", "v28", "v29", "v30", "v31"
+>  };
+>
+> -/* instruction formats */
+> -
+> -#define rv_fmt_none                   "O\t"
+> -#define rv_fmt_rs1                    "O\t1"
+> -#define rv_fmt_offset                 "O\to"
+> -#define rv_fmt_pred_succ              "O\tp,s"
+> -#define rv_fmt_rs1_rs2                "O\t1,2"
+> -#define rv_fmt_rd_imm                 "O\t0,i"
+> -#define rv_fmt_rd_offset              "O\t0,o"
+> -#define rv_fmt_rd_rs1_rs2             "O\t0,1,2"
+> -#define rv_fmt_frd_rs1                "O\t3,1"
+> -#define rv_fmt_frd_frs1               "O\t3,4"
+> -#define rv_fmt_rd_frs1                "O\t0,4"
+> -#define rv_fmt_rd_frs1_frs2           "O\t0,4,5"
+> -#define rv_fmt_frd_frs1_frs2          "O\t3,4,5"
+> -#define rv_fmt_rm_frd_frs1            "O\tr,3,4"
+> -#define rv_fmt_rm_frd_rs1             "O\tr,3,1"
+> -#define rv_fmt_rm_rd_frs1             "O\tr,0,4"
+> -#define rv_fmt_rm_frd_frs1_frs2       "O\tr,3,4,5"
+> -#define rv_fmt_rm_frd_frs1_frs2_frs3  "O\tr,3,4,5,6"
+> -#define rv_fmt_rd_rs1_imm             "O\t0,1,i"
+> -#define rv_fmt_rd_rs1_offset          "O\t0,1,i"
+> -#define rv_fmt_rd_offset_rs1          "O\t0,i(1)"
+> -#define rv_fmt_frd_offset_rs1         "O\t3,i(1)"
+> -#define rv_fmt_rd_csr_rs1             "O\t0,c,1"
+> -#define rv_fmt_rd_csr_zimm            "O\t0,c,7"
+> -#define rv_fmt_rs2_offset_rs1         "O\t2,i(1)"
+> -#define rv_fmt_frs2_offset_rs1        "O\t5,i(1)"
+> -#define rv_fmt_rs1_rs2_offset         "O\t1,2,o"
+> -#define rv_fmt_rs2_rs1_offset         "O\t2,1,o"
+> -#define rv_fmt_aqrl_rd_rs2_rs1        "OAR\t0,2,(1)"
+> -#define rv_fmt_aqrl_rd_rs1            "OAR\t0,(1)"
+> -#define rv_fmt_rd                     "O\t0"
+> -#define rv_fmt_rd_zimm                "O\t0,7"
+> -#define rv_fmt_rd_rs1                 "O\t0,1"
+> -#define rv_fmt_rd_rs2                 "O\t0,2"
+> -#define rv_fmt_rs1_offset             "O\t1,o"
+> -#define rv_fmt_rs2_offset             "O\t2,o"
+> -#define rv_fmt_rs1_rs2_bs             "O\t1,2,b"
+> -#define rv_fmt_rd_rs1_rnum            "O\t0,1,n"
+> -#define rv_fmt_ldst_vd_rs1_vm         "O\tD,(1)m"
+> -#define rv_fmt_ldst_vd_rs1_rs2_vm     "O\tD,(1),2m"
+> -#define rv_fmt_ldst_vd_rs1_vs2_vm     "O\tD,(1),Fm"
+> -#define rv_fmt_vd_vs2_vs1             "O\tD,F,E"
+> -#define rv_fmt_vd_vs2_vs1_vl          "O\tD,F,El"
+> -#define rv_fmt_vd_vs2_vs1_vm          "O\tD,F,Em"
+> -#define rv_fmt_vd_vs2_rs1_vl          "O\tD,F,1l"
+> -#define rv_fmt_vd_vs2_fs1_vl          "O\tD,F,4l"
+> -#define rv_fmt_vd_vs2_rs1_vm          "O\tD,F,1m"
+> -#define rv_fmt_vd_vs2_fs1_vm          "O\tD,F,4m"
+> -#define rv_fmt_vd_vs2_imm_vl          "O\tD,F,il"
+> -#define rv_fmt_vd_vs2_imm_vm          "O\tD,F,im"
+> -#define rv_fmt_vd_vs2_uimm_vm         "O\tD,F,um"
+> -#define rv_fmt_vd_vs1_vs2_vm          "O\tD,E,Fm"
+> -#define rv_fmt_vd_rs1_vs2_vm          "O\tD,1,Fm"
+> -#define rv_fmt_vd_fs1_vs2_vm          "O\tD,4,Fm"
+> -#define rv_fmt_vd_vs1                 "O\tD,E"
+> -#define rv_fmt_vd_rs1                 "O\tD,1"
+> -#define rv_fmt_vd_fs1                 "O\tD,4"
+> -#define rv_fmt_vd_imm                 "O\tD,i"
+> -#define rv_fmt_vd_vs2                 "O\tD,F"
+> -#define rv_fmt_vd_vs2_vm              "O\tD,Fm"
+> -#define rv_fmt_rd_vs2_vm              "O\t0,Fm"
+> -#define rv_fmt_rd_vs2                 "O\t0,F"
+> -#define rv_fmt_fd_vs2                 "O\t3,F"
+> -#define rv_fmt_vd_vm                  "O\tDm"
+> -#define rv_fmt_vsetvli                "O\t0,1,v"
+> -#define rv_fmt_vsetivli               "O\t0,u,v"
+> -#define rv_fmt_rs1_rs2_zce_ldst       "O\t2,i(1)"
+> -#define rv_fmt_push_rlist             "O\tx,-i"
+> -#define rv_fmt_pop_rlist              "O\tx,i"
+> -#define rv_fmt_zcmt_index             "O\ti"
+> -
+>  /* pseudo-instruction constraints */
+>
+>  static const rvc_constraint rvcc_jal[] =3D { rvc_rd_eq_ra, rvc_end };
+> diff --git a/disas/riscv.h b/disas/riscv.h
 > new file mode 100644
-> index 0000000000..ca368af0b2
+> index 0000000000..0f34b71518
 > --- /dev/null
-> +++ b/target/riscv/cpu-config.h
-> @@ -0,0 +1,148 @@
+> +++ b/disas/riscv.h
+> @@ -0,0 +1,280 @@
 > +/*
-> + * QEMU RISC-V CPU Config
+> + * QEMU disassembler -- RISC-V specific header.
 > + *
 > + * SPDX-License-Identifier: GPL-2.0-or-later
 > + */
 > +
-> +#ifndef RISCV_CPU_CONFIG_H
-> +#define RISCV_CPU_CONFIG_H
+> +#ifndef DISAS_RISCV_H
+> +#define DISAS_RISCV_H
 > +
-> +/*
-> + * map is a 16-bit bitmap: the most significant set bit in map is the ma=
-ximum
-> + * satp mode that is supported. It may be chosen by the user and must re=
-spect
-> + * what qemu implements (valid_1_10_32/64) and what the hw is capable of
-> + * (supported bitmap below).
-> + *
-> + * init is a 16-bit bitmap used to make sure the user selected a correct
-> + * configuration as per the specification.
-> + *
-> + * supported is a 16-bit bitmap used to reflect the hw capabilities.
-> + */
+> +#include "qemu/osdep.h"
+> +
+> +/* types */
+> +
+> +typedef uint64_t rv_inst;
+> +typedef uint16_t rv_opcode;
+> +
+> +/* enums */
+> +
+> +typedef enum {
+> +    rv32,
+> +    rv64,
+> +    rv128
+> +} rv_isa;
+> +
+> +typedef enum {
+> +    rv_rm_rne =3D 0,
+> +    rv_rm_rtz =3D 1,
+> +    rv_rm_rdn =3D 2,
+> +    rv_rm_rup =3D 3,
+> +    rv_rm_rmm =3D 4,
+> +    rv_rm_dyn =3D 7,
+> +} rv_rm;
+> +
+> +typedef enum {
+> +    rv_fence_i =3D 8,
+> +    rv_fence_o =3D 4,
+> +    rv_fence_r =3D 2,
+> +    rv_fence_w =3D 1,
+> +} rv_fence;
+> +
+> +typedef enum {
+> +    rv_ireg_zero,
+> +    rv_ireg_ra,
+> +    rv_ireg_sp,
+> +    rv_ireg_gp,
+> +    rv_ireg_tp,
+> +    rv_ireg_t0,
+> +    rv_ireg_t1,
+> +    rv_ireg_t2,
+> +    rv_ireg_s0,
+> +    rv_ireg_s1,
+> +    rv_ireg_a0,
+> +    rv_ireg_a1,
+> +    rv_ireg_a2,
+> +    rv_ireg_a3,
+> +    rv_ireg_a4,
+> +    rv_ireg_a5,
+> +    rv_ireg_a6,
+> +    rv_ireg_a7,
+> +    rv_ireg_s2,
+> +    rv_ireg_s3,
+> +    rv_ireg_s4,
+> +    rv_ireg_s5,
+> +    rv_ireg_s6,
+> +    rv_ireg_s7,
+> +    rv_ireg_s8,
+> +    rv_ireg_s9,
+> +    rv_ireg_s10,
+> +    rv_ireg_s11,
+> +    rv_ireg_t3,
+> +    rv_ireg_t4,
+> +    rv_ireg_t5,
+> +    rv_ireg_t6,
+> +} rv_ireg;
+> +
+> +typedef enum {
+> +    rvc_end,
+> +    rvc_rd_eq_ra,
+> +    rvc_rd_eq_x0,
+> +    rvc_rs1_eq_x0,
+> +    rvc_rs2_eq_x0,
+> +    rvc_rs2_eq_rs1,
+> +    rvc_rs1_eq_ra,
+> +    rvc_imm_eq_zero,
+> +    rvc_imm_eq_n1,
+> +    rvc_imm_eq_p1,
+> +    rvc_csr_eq_0x001,
+> +    rvc_csr_eq_0x002,
+> +    rvc_csr_eq_0x003,
+> +    rvc_csr_eq_0xc00,
+> +    rvc_csr_eq_0xc01,
+> +    rvc_csr_eq_0xc02,
+> +    rvc_csr_eq_0xc80,
+> +    rvc_csr_eq_0xc81,
+> +    rvc_csr_eq_0xc82,
+> +} rvc_constraint;
+> +
+> +typedef enum {
+> +    rv_codec_illegal,
+> +    rv_codec_none,
+> +    rv_codec_u,
+> +    rv_codec_uj,
+> +    rv_codec_i,
+> +    rv_codec_i_sh5,
+> +    rv_codec_i_sh6,
+> +    rv_codec_i_sh7,
+> +    rv_codec_i_csr,
+> +    rv_codec_s,
+> +    rv_codec_sb,
+> +    rv_codec_r,
+> +    rv_codec_r_m,
+> +    rv_codec_r4_m,
+> +    rv_codec_r_a,
+> +    rv_codec_r_l,
+> +    rv_codec_r_f,
+> +    rv_codec_cb,
+> +    rv_codec_cb_imm,
+> +    rv_codec_cb_sh5,
+> +    rv_codec_cb_sh6,
+> +    rv_codec_ci,
+> +    rv_codec_ci_sh5,
+> +    rv_codec_ci_sh6,
+> +    rv_codec_ci_16sp,
+> +    rv_codec_ci_lwsp,
+> +    rv_codec_ci_ldsp,
+> +    rv_codec_ci_lqsp,
+> +    rv_codec_ci_li,
+> +    rv_codec_ci_lui,
+> +    rv_codec_ci_none,
+> +    rv_codec_ciw_4spn,
+> +    rv_codec_cj,
+> +    rv_codec_cj_jal,
+> +    rv_codec_cl_lw,
+> +    rv_codec_cl_ld,
+> +    rv_codec_cl_lq,
+> +    rv_codec_cr,
+> +    rv_codec_cr_mv,
+> +    rv_codec_cr_jalr,
+> +    rv_codec_cr_jr,
+> +    rv_codec_cs,
+> +    rv_codec_cs_sw,
+> +    rv_codec_cs_sd,
+> +    rv_codec_cs_sq,
+> +    rv_codec_css_swsp,
+> +    rv_codec_css_sdsp,
+> +    rv_codec_css_sqsp,
+> +    rv_codec_k_bs,
+> +    rv_codec_k_rnum,
+> +    rv_codec_v_r,
+> +    rv_codec_v_ldst,
+> +    rv_codec_v_i,
+> +    rv_codec_vsetvli,
+> +    rv_codec_vsetivli,
+> +    rv_codec_zcb_ext,
+> +    rv_codec_zcb_mul,
+> +    rv_codec_zcb_lb,
+> +    rv_codec_zcb_lh,
+> +    rv_codec_zcmp_cm_pushpop,
+> +    rv_codec_zcmp_cm_mv,
+> +    rv_codec_zcmt_jt,
+> +} rv_codec;
+> +
+> +/* structures */
+> +
 > +typedef struct {
-> +    uint16_t map, init, supported;
-> +} RISCVSATPMap;
+> +    uint64_t  pc;
+> +    uint64_t  inst;
+> +    int32_t   imm;
+> +    uint16_t  op;
+> +    uint8_t   codec;
+> +    uint8_t   rd;
+> +    uint8_t   rs1;
+> +    uint8_t   rs2;
+> +    uint8_t   rs3;
+> +    uint8_t   rm;
+> +    uint8_t   pred;
+> +    uint8_t   succ;
+> +    uint8_t   aq;
+> +    uint8_t   rl;
+> +    uint8_t   bs;
+> +    uint8_t   rnum;
+> +    uint8_t   vm;
+> +    uint32_t  vzimm;
+> +    uint8_t   rlist;
+> +} rv_decode;
 > +
-> +struct RISCVCPUConfig {
-> +    bool ext_zba;
-> +    bool ext_zbb;
-> +    bool ext_zbc;
-> +    bool ext_zbkb;
-> +    bool ext_zbkc;
-> +    bool ext_zbkx;
-> +    bool ext_zbs;
-> +    bool ext_zca;
-> +    bool ext_zcb;
-> +    bool ext_zcd;
-> +    bool ext_zce;
-> +    bool ext_zcf;
-> +    bool ext_zcmp;
-> +    bool ext_zcmt;
-> +    bool ext_zk;
-> +    bool ext_zkn;
-> +    bool ext_zknd;
-> +    bool ext_zkne;
-> +    bool ext_zknh;
-> +    bool ext_zkr;
-> +    bool ext_zks;
-> +    bool ext_zksed;
-> +    bool ext_zksh;
-> +    bool ext_zkt;
-> +    bool ext_ifencei;
-> +    bool ext_icsr;
-> +    bool ext_icbom;
-> +    bool ext_icboz;
-> +    bool ext_zicond;
-> +    bool ext_zihintpause;
-> +    bool ext_smstateen;
-> +    bool ext_sstc;
-> +    bool ext_svadu;
-> +    bool ext_svinval;
-> +    bool ext_svnapot;
-> +    bool ext_svpbmt;
-> +    bool ext_zdinx;
-> +    bool ext_zawrs;
-> +    bool ext_zfh;
-> +    bool ext_zfhmin;
-> +    bool ext_zfinx;
-> +    bool ext_zhinx;
-> +    bool ext_zhinxmin;
-> +    bool ext_zve32f;
-> +    bool ext_zve64f;
-> +    bool ext_zve64d;
-> +    bool ext_zmmul;
-> +    bool ext_zvfh;
-> +    bool ext_zvfhmin;
-> +    bool ext_smaia;
-> +    bool ext_ssaia;
-> +    bool ext_sscofpmf;
-> +    bool rvv_ta_all_1s;
-> +    bool rvv_ma_all_1s;
+> +typedef struct {
+> +    const int op;
+> +    const rvc_constraint *constraints;
+> +} rv_comp_data;
 > +
-> +    uint32_t mvendorid;
-> +    uint64_t marchid;
-> +    uint64_t mimpid;
-> +
-> +    /* Vendor-specific custom extensions */
-> +    bool ext_xtheadba;
-> +    bool ext_xtheadbb;
-> +    bool ext_xtheadbs;
-> +    bool ext_xtheadcmo;
-> +    bool ext_xtheadcondmov;
-> +    bool ext_xtheadfmemidx;
-> +    bool ext_xtheadfmv;
-> +    bool ext_xtheadmac;
-> +    bool ext_xtheadmemidx;
-> +    bool ext_xtheadmempair;
-> +    bool ext_xtheadsync;
-> +    bool ext_XVentanaCondOps;
-> +
-> +    uint8_t pmu_num;
-> +    char *priv_spec;
-> +    char *user_spec;
-> +    char *bext_spec;
-> +    char *vext_spec;
-> +    uint16_t vlen;
-> +    uint16_t elen;
-> +    uint16_t cbom_blocksize;
-> +    uint16_t cboz_blocksize;
-> +    bool mmu;
-> +    bool pmp;
-> +    bool epmp;
-> +    bool debug;
-> +    bool misa_w;
-> +
-> +    bool short_isa_string;
-> +
-> +#ifndef CONFIG_USER_ONLY
-> +    RISCVSATPMap satp_mode;
-> +#endif
+> +enum {
+> +    rvcd_imm_nz =3D 0x1
 > +};
 > +
-> +typedef struct RISCVCPUConfig RISCVCPUConfig;
+> +typedef struct {
+> +    const char * const name;
+> +    const rv_codec codec;
+> +    const char * const format;
+> +    const rv_comp_data *pseudo;
+> +    const short decomp_rv32;
+> +    const short decomp_rv64;
+> +    const short decomp_rv128;
+> +    const short decomp_data;
+> +} rv_opcode_data;
 > +
-> +/* Helper functions to test for extensions.  */
+> +/* instruction formats */
 > +
-> +static inline bool always_true_p(const RISCVCPUConfig *cfg __attribute__=
-((__unused__)))
-> +{
-> +    return true;
-> +}
+> +#define rv_fmt_none                   "O\t"
+> +#define rv_fmt_rs1                    "O\t1"
+> +#define rv_fmt_offset                 "O\to"
+> +#define rv_fmt_pred_succ              "O\tp,s"
+> +#define rv_fmt_rs1_rs2                "O\t1,2"
+> +#define rv_fmt_rd_imm                 "O\t0,i"
+> +#define rv_fmt_rd_offset              "O\t0,o"
+> +#define rv_fmt_rd_rs1_rs2             "O\t0,1,2"
+> +#define rv_fmt_frd_rs1                "O\t3,1"
+> +#define rv_fmt_frd_frs1               "O\t3,4"
+> +#define rv_fmt_rd_frs1                "O\t0,4"
+> +#define rv_fmt_rd_frs1_frs2           "O\t0,4,5"
+> +#define rv_fmt_frd_frs1_frs2          "O\t3,4,5"
+> +#define rv_fmt_rm_frd_frs1            "O\tr,3,4"
+> +#define rv_fmt_rm_frd_rs1             "O\tr,3,1"
+> +#define rv_fmt_rm_rd_frs1             "O\tr,0,4"
+> +#define rv_fmt_rm_frd_frs1_frs2       "O\tr,3,4,5"
+> +#define rv_fmt_rm_frd_frs1_frs2_frs3  "O\tr,3,4,5,6"
+> +#define rv_fmt_rd_rs1_imm             "O\t0,1,i"
+> +#define rv_fmt_rd_rs1_offset          "O\t0,1,i"
+> +#define rv_fmt_rd_offset_rs1          "O\t0,i(1)"
+> +#define rv_fmt_frd_offset_rs1         "O\t3,i(1)"
+> +#define rv_fmt_rd_csr_rs1             "O\t0,c,1"
+> +#define rv_fmt_rd_csr_zimm            "O\t0,c,7"
+> +#define rv_fmt_rs2_offset_rs1         "O\t2,i(1)"
+> +#define rv_fmt_frs2_offset_rs1        "O\t5,i(1)"
+> +#define rv_fmt_rs1_rs2_offset         "O\t1,2,o"
+> +#define rv_fmt_rs2_rs1_offset         "O\t2,1,o"
+> +#define rv_fmt_aqrl_rd_rs2_rs1        "OAR\t0,2,(1)"
+> +#define rv_fmt_aqrl_rd_rs1            "OAR\t0,(1)"
+> +#define rv_fmt_rd                     "O\t0"
+> +#define rv_fmt_rd_zimm                "O\t0,7"
+> +#define rv_fmt_rd_rs1                 "O\t0,1"
+> +#define rv_fmt_rd_rs2                 "O\t0,2"
+> +#define rv_fmt_rs1_offset             "O\t1,o"
+> +#define rv_fmt_rs2_offset             "O\t2,o"
+> +#define rv_fmt_rs1_rs2_bs             "O\t1,2,b"
+> +#define rv_fmt_rd_rs1_rnum            "O\t0,1,n"
+> +#define rv_fmt_ldst_vd_rs1_vm         "O\tD,(1)m"
+> +#define rv_fmt_ldst_vd_rs1_rs2_vm     "O\tD,(1),2m"
+> +#define rv_fmt_ldst_vd_rs1_vs2_vm     "O\tD,(1),Fm"
+> +#define rv_fmt_vd_vs2_vs1             "O\tD,F,E"
+> +#define rv_fmt_vd_vs2_vs1_vl          "O\tD,F,El"
+> +#define rv_fmt_vd_vs2_vs1_vm          "O\tD,F,Em"
+> +#define rv_fmt_vd_vs2_rs1_vl          "O\tD,F,1l"
+> +#define rv_fmt_vd_vs2_fs1_vl          "O\tD,F,4l"
+> +#define rv_fmt_vd_vs2_rs1_vm          "O\tD,F,1m"
+> +#define rv_fmt_vd_vs2_fs1_vm          "O\tD,F,4m"
+> +#define rv_fmt_vd_vs2_imm_vl          "O\tD,F,il"
+> +#define rv_fmt_vd_vs2_imm_vm          "O\tD,F,im"
+> +#define rv_fmt_vd_vs2_uimm_vm         "O\tD,F,um"
+> +#define rv_fmt_vd_vs1_vs2_vm          "O\tD,E,Fm"
+> +#define rv_fmt_vd_rs1_vs2_vm          "O\tD,1,Fm"
+> +#define rv_fmt_vd_fs1_vs2_vm          "O\tD,4,Fm"
+> +#define rv_fmt_vd_vs1                 "O\tD,E"
+> +#define rv_fmt_vd_rs1                 "O\tD,1"
+> +#define rv_fmt_vd_fs1                 "O\tD,4"
+> +#define rv_fmt_vd_imm                 "O\tD,i"
+> +#define rv_fmt_vd_vs2                 "O\tD,F"
+> +#define rv_fmt_vd_vs2_vm              "O\tD,Fm"
+> +#define rv_fmt_rd_vs2_vm              "O\t0,Fm"
+> +#define rv_fmt_rd_vs2                 "O\t0,F"
+> +#define rv_fmt_fd_vs2                 "O\t3,F"
+> +#define rv_fmt_vd_vm                  "O\tDm"
+> +#define rv_fmt_vsetvli                "O\t0,1,v"
+> +#define rv_fmt_vsetivli               "O\t0,u,v"
+> +#define rv_fmt_rs1_rs2_zce_ldst       "O\t2,i(1)"
+> +#define rv_fmt_push_rlist             "O\tx,-i"
+> +#define rv_fmt_pop_rlist              "O\tx,i"
+> +#define rv_fmt_zcmt_index             "O\ti"
 > +
-> +static inline bool has_xthead_p(const RISCVCPUConfig *cfg)
-> +{
-> +    return cfg->ext_xtheadba || cfg->ext_xtheadbb ||
-> +           cfg->ext_xtheadbs || cfg->ext_xtheadcmo ||
-> +           cfg->ext_xtheadcondmov ||
-> +           cfg->ext_xtheadfmemidx || cfg->ext_xtheadfmv ||
-> +           cfg->ext_xtheadmac || cfg->ext_xtheadmemidx ||
-> +           cfg->ext_xtheadmempair || cfg->ext_xtheadsync;
-> +}
-> +
-> +#define MATERIALISE_EXT_PREDICATE(ext) \
-> +    static inline bool has_ ## ext ## _p(const RISCVCPUConfig *cfg) \
-> +    { \
-> +        return cfg->ext_ ## ext ; \
-> +    }
-> +
-> +MATERIALISE_EXT_PREDICATE(XVentanaCondOps)
-> +
-> +#endif /* RISCV_CPU_CONFIG_H */
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index de7e43126a..895a307bad 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -28,6 +28,7 @@
->  #include "qemu/int128.h"
->  #include "cpu_bits.h"
->  #include "qapi/qapi-types-common.h"
-> +#include "cpu-config.h"
->  #include "cpu-qom.h"
->
->  #define TCG_GUEST_DEFAULT_MO 0
-> @@ -368,119 +369,6 @@ struct CPUArchState {
->      uint64_t kvm_timer_frequency;
->  };
->
-> -/*
-> - * map is a 16-bit bitmap: the most significant set bit in map is the ma=
-ximum
-> - * satp mode that is supported. It may be chosen by the user and must re=
-spect
-> - * what qemu implements (valid_1_10_32/64) and what the hw is capable of
-> - * (supported bitmap below).
-> - *
-> - * init is a 16-bit bitmap used to make sure the user selected a correct
-> - * configuration as per the specification.
-> - *
-> - * supported is a 16-bit bitmap used to reflect the hw capabilities.
-> - */
-> -typedef struct {
-> -    uint16_t map, init, supported;
-> -} RISCVSATPMap;
-> -
-> -struct RISCVCPUConfig {
-> -    bool ext_zba;
-> -    bool ext_zbb;
-> -    bool ext_zbc;
-> -    bool ext_zbkb;
-> -    bool ext_zbkc;
-> -    bool ext_zbkx;
-> -    bool ext_zbs;
-> -    bool ext_zca;
-> -    bool ext_zcb;
-> -    bool ext_zcd;
-> -    bool ext_zce;
-> -    bool ext_zcf;
-> -    bool ext_zcmp;
-> -    bool ext_zcmt;
-> -    bool ext_zk;
-> -    bool ext_zkn;
-> -    bool ext_zknd;
-> -    bool ext_zkne;
-> -    bool ext_zknh;
-> -    bool ext_zkr;
-> -    bool ext_zks;
-> -    bool ext_zksed;
-> -    bool ext_zksh;
-> -    bool ext_zkt;
-> -    bool ext_ifencei;
-> -    bool ext_icsr;
-> -    bool ext_icbom;
-> -    bool ext_icboz;
-> -    bool ext_zicond;
-> -    bool ext_zihintpause;
-> -    bool ext_smstateen;
-> -    bool ext_sstc;
-> -    bool ext_svadu;
-> -    bool ext_svinval;
-> -    bool ext_svnapot;
-> -    bool ext_svpbmt;
-> -    bool ext_zdinx;
-> -    bool ext_zawrs;
-> -    bool ext_zfh;
-> -    bool ext_zfhmin;
-> -    bool ext_zfinx;
-> -    bool ext_zhinx;
-> -    bool ext_zhinxmin;
-> -    bool ext_zve32f;
-> -    bool ext_zve64f;
-> -    bool ext_zve64d;
-> -    bool ext_zmmul;
-> -    bool ext_zvfh;
-> -    bool ext_zvfhmin;
-> -    bool ext_smaia;
-> -    bool ext_ssaia;
-> -    bool ext_sscofpmf;
-> -    bool rvv_ta_all_1s;
-> -    bool rvv_ma_all_1s;
-> -
-> -    uint32_t mvendorid;
-> -    uint64_t marchid;
-> -    uint64_t mimpid;
-> -
-> -    /* Vendor-specific custom extensions */
-> -    bool ext_xtheadba;
-> -    bool ext_xtheadbb;
-> -    bool ext_xtheadbs;
-> -    bool ext_xtheadcmo;
-> -    bool ext_xtheadcondmov;
-> -    bool ext_xtheadfmemidx;
-> -    bool ext_xtheadfmv;
-> -    bool ext_xtheadmac;
-> -    bool ext_xtheadmemidx;
-> -    bool ext_xtheadmempair;
-> -    bool ext_xtheadsync;
-> -    bool ext_XVentanaCondOps;
-> -
-> -    uint8_t pmu_num;
-> -    char *priv_spec;
-> -    char *user_spec;
-> -    char *bext_spec;
-> -    char *vext_spec;
-> -    uint16_t vlen;
-> -    uint16_t elen;
-> -    uint16_t cbom_blocksize;
-> -    uint16_t cboz_blocksize;
-> -    bool mmu;
-> -    bool pmp;
-> -    bool epmp;
-> -    bool debug;
-> -    bool misa_w;
-> -
-> -    bool short_isa_string;
-> -
-> -#ifndef CONFIG_USER_ONLY
-> -    RISCVSATPMap satp_mode;
-> -#endif
-> -};
-> -
-> -typedef struct RISCVCPUConfig RISCVCPUConfig;
-> -
->  /*
->   * RISCVCPU:
->   * @env: #CPURISCVState
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 928da0d3f0..2697cc26d0 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -119,29 +119,6 @@ static inline bool has_ext(DisasContext *ctx, uint32=
-_t ext)
->      return ctx->misa_ext & ext;
->  }
->
-> -static bool always_true_p(DisasContext *ctx  __attribute__((__unused__))=
-)
-> -{
-> -    return true;
-> -}
-> -
-> -static bool has_xthead_p(DisasContext *ctx  __attribute__((__unused__)))
-> -{
-> -    return ctx->cfg_ptr->ext_xtheadba || ctx->cfg_ptr->ext_xtheadbb ||
-> -           ctx->cfg_ptr->ext_xtheadbs || ctx->cfg_ptr->ext_xtheadcmo ||
-> -           ctx->cfg_ptr->ext_xtheadcondmov ||
-> -           ctx->cfg_ptr->ext_xtheadfmemidx || ctx->cfg_ptr->ext_xtheadfm=
-v ||
-> -           ctx->cfg_ptr->ext_xtheadmac || ctx->cfg_ptr->ext_xtheadmemidx=
- ||
-> -           ctx->cfg_ptr->ext_xtheadmempair || ctx->cfg_ptr->ext_xtheadsy=
-nc;
-> -}
-> -
-> -#define MATERIALISE_EXT_PREDICATE(ext)  \
-> -    static bool has_ ## ext ## _p(DisasContext *ctx)    \
-> -    { \
-> -        return ctx->cfg_ptr->ext_ ## ext ; \
-> -    }
-> -
-> -MATERIALISE_EXT_PREDICATE(XVentanaCondOps);
-> -
->  #ifdef TARGET_RISCV32
->  #define get_xl(ctx)    MXL_RV32
->  #elif defined(CONFIG_USER_ONLY)
-> @@ -1106,7 +1083,7 @@ static void decode_opc(CPURISCVState *env, DisasCon=
-text *ctx, uint16_t opcode)
->       * that are tested in-order until a decoder matches onto the opcode.
->       */
->      static const struct {
-> -        bool (*guard_func)(DisasContext *);
-> +        bool (*guard_func)(const RISCVCPUConfig *);
->          bool (*decode_func)(DisasContext *, uint32_t);
->      } decoders[] =3D {
->          { always_true_p,  decode_insn32 },
-> @@ -1135,7 +1112,7 @@ static void decode_opc(CPURISCVState *env, DisasCon=
-text *ctx, uint16_t opcode)
->          ctx->pc_succ_insn =3D ctx->base.pc_next + 4;
->
->          for (size_t i =3D 0; i < ARRAY_SIZE(decoders); ++i) {
-> -            if (decoders[i].guard_func(ctx) &&
-> +            if (decoders[i].guard_func(ctx->cfg_ptr) &&
->                  decoders[i].decode_func(ctx, opcode32)) {
->                  return;
->              }
+> +#endif /* DISAS_RISCV_H */
 > --
 > 2.40.1
 >
