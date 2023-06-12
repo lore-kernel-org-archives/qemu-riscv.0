@@ -4,68 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A814BC7EE23
-	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Jun 2023 03:51:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02133C7EE37
+	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Jun 2023 03:54:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q8Ya4-0007NO-8T; Sun, 11 Jun 2023 23:51:00 -0400
+	id 1q8Yd9-0008EJ-Cm; Sun, 11 Jun 2023 23:54:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q8Ya3-0007NA-Cw; Sun, 11 Jun 2023 23:50:59 -0400
-Received: from mail-ua1-x929.google.com ([2607:f8b0:4864:20::929])
+ id 1q8Yd2-0008Dc-IS; Sun, 11 Jun 2023 23:54:04 -0400
+Received: from mail-ua1-x930.google.com ([2607:f8b0:4864:20::930])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q8Ya1-0003HZ-SM; Sun, 11 Jun 2023 23:50:59 -0400
-Received: by mail-ua1-x929.google.com with SMTP id
- a1e0cc1a2514c-789de11638fso1657649241.1; 
- Sun, 11 Jun 2023 20:50:57 -0700 (PDT)
+ id 1q8Yd0-0003px-Q0; Sun, 11 Jun 2023 23:54:04 -0400
+Received: by mail-ua1-x930.google.com with SMTP id
+ a1e0cc1a2514c-78a03acc52aso1337601241.3; 
+ Sun, 11 Jun 2023 20:54:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1686541856; x=1689133856;
+ d=gmail.com; s=20221208; t=1686542041; x=1689134041;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AlDwBvdzwsajAPQvZwsTKGFA7ZoUhniiOIytSqhLpvA=;
- b=J09z7HmSUOTlKq104ItWvqfJCzJMvm+Ko8V2MBXqXJbkB8WpmFsz/JBm1gnxiiENJp
- 7Jxu9pOtcJs/HgBs0oGc1DMM5Ygt1Y4bHEONhx2LiiPVad3K7POA1+Nb74uLdGQGPp1g
- +m0nmRZ0rUxGo7MZ3yiSvd9Dd4FhzGqNs68/H0MzwOJCjEWB5s+JEBp0nRipad5xOnAG
- aDbjWuhqnsPZB+WBXZkzGlu0o5588VX3jAEvAq02zyvM0iJN9ZVU4773fDokZVdqAl7K
- x8Mtsq+rsTel7KkOzWWpWIA4wW38JHJmFwjZWlnQjv57NF3bQrql6u+MN94k+kryjuNC
- 1Ejg==
+ bh=uJgjpQD+47M1BDt8Lg1JUtnfKvWZxMnAUnvA1IeoUf8=;
+ b=KhRLfuU7AHAXU4Thcjkb/AhCItqOF2zq4O8FZ3j6srpMpDqgGX8S2RUASeNkIsnv3p
+ FQAeBkHYrCPJ7gD2+leB+9jtDAj0cBkgPSc2SIFNVG9gjoRNbZx4YNKIQdE+aeqK0Eew
+ gLFucAw8FMOfrHMTd4sjDkQVi9FlFQBgQmxTJSUCQ61P0gBOzaSUT6dhK+nw2xkUoqM+
+ mvDzAN03W+tAMX+9CD388q/cNtgT5PVFRRZz8tDTsi1fWMJyNeU1+ZrZaetTInX3ucqN
+ rHhhHur1DKcySSpsFilmKgwqntHxgcpUqjpf5OUWybPDgj0PTsgWqNj+xX4PyJojRFAY
+ dIiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686541856; x=1689133856;
+ d=1e100.net; s=20221208; t=1686542041; x=1689134041;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AlDwBvdzwsajAPQvZwsTKGFA7ZoUhniiOIytSqhLpvA=;
- b=Bel2Y4k+CcMb7Eb1jKz3hPbdTPzmZ3pHHpODFYoQpinJLgoyqOnBPDH/cDpqlVwdOd
- VydtdaveGeMWsgA3kwKZFdhazs2iCeWJU/1zE2LIroykdZKlMkwY5S0KNigNrNWJdgjH
- N6lapv3IRccoGsx5mChepB9G6u32mVKz5nu+5DSGCMIuzOainFwAzn8VAdcxiGbwtRL8
- qbRAFQ5FQURwfJx9AyX++bGtFGG1Ih7sYMGlajBEfVmB60BIT4/zHCo06GFrEYH4LWk1
- A2hfkRaFZi+LkA0j3BPZet4Bgr/ckcdIOEB+Wa2RNm4h5FpQrMRTnqfCA9HT5hYTeafH
- 0m5Q==
-X-Gm-Message-State: AC+VfDz9VazX6/aEYdQX2jslw8wY8bDx43slmbh5wPzdFB8jNjk4LkmO
- sDStuQqJ9Intmoz5jyD/t3gFcezLLm+aYOsm0bGJaWPHt0I=
-X-Google-Smtp-Source: ACHHUZ6PgolJ2HbMASEEkFWDHFNb4hU6/7Yftya0i+f/YJeH1yr+9bUzWy8o1ckaqA6HAFR56jQ6FFs4KH3tqLM5Clc=
-X-Received: by 2002:a05:6102:94:b0:43b:1f8a:d581 with SMTP id
- t20-20020a056102009400b0043b1f8ad581mr3370487vsp.31.1686541856518; Sun, 11
- Jun 2023 20:50:56 -0700 (PDT)
+ bh=uJgjpQD+47M1BDt8Lg1JUtnfKvWZxMnAUnvA1IeoUf8=;
+ b=B2Dtes2nTxO+mu8iDHt7nSdAqKVduV8Uz1D1sJL1GcTzDGODt+QVpE6EiZUa7g/dbF
+ XTmkzGCr1E9LsXva6dHhQFLDI9OINWB13ds/pUzH7ZcELnqD3qigjqIAq7TUcr9XiqOd
+ gqbKF7MeYRqMuyMRIG9nhxf9lcirmLq+/lhVCyWpZ5NaAadN6KNnEPjL9SWaJg9PJczk
+ bUCi1np+P1L25puYpYzAtCtDZUTunSFFJn3ldAMuDcR1N3WFGxg42iKimLq4Ll/m1QeV
+ JLGxJs0kNuYDA/v7WqYcMfpwhMbu270GHVXgY3MwalTozhnv0+KlDeegkWKywKLJn2BI
+ hv6w==
+X-Gm-Message-State: AC+VfDzR0pcQby7JGEcqgAeVFTl3y1pOGY3aZ6rJNBA6yKWkbrhDBoVx
+ gcPbHC4MjBIE5/mKPciI5vtuuQvM/bO0MAvhCpcwSk6ZC/w=
+X-Google-Smtp-Source: ACHHUZ6Hks+U03gk/OPvYwdwUDcQ/ybGcjbx8DdGsghEBBDub8RiGzBG61eObw3YblFGRUmLJAkQA3cn0cJcYRtFlWk=
+X-Received: by 2002:a1f:45d1:0:b0:440:125:7e59 with SMTP id
+ s200-20020a1f45d1000000b0044001257e59mr3210104vka.1.1686542041152; Sun, 11
+ Jun 2023 20:54:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230605075150.367555-1-hchauhan@ventanamicro.com>
- <20230605164548.715336-1-hchauhan@ventanamicro.com>
-In-Reply-To: <20230605164548.715336-1-hchauhan@ventanamicro.com>
+References: <20230530194623.272652-1-dbarboza@ventanamicro.com>
+ <20230530194623.272652-3-dbarboza@ventanamicro.com>
+In-Reply-To: <20230530194623.272652-3-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 12 Jun 2023 13:50:30 +1000
-Message-ID: <CAKmqyKM=zBcO1ndJHZbq9HByd1JtU8u3jiN2KcqtjUvo6PT=WA@mail.gmail.com>
-Subject: Re: [PATCH v3] target/riscv: Smepmp: Return error when access
- permission not allowed in PMP
-To: Himanshu Chauhan <hchauhan@ventanamicro.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Date: Mon, 12 Jun 2023 13:53:35 +1000
+Message-ID: <CAKmqyKPKGAL945WYW3ua8rTA-nMs8GRtGLJneZTzyvvc0G=EcQ@mail.gmail.com>
+Subject: Re: [PATCH 02/16] hw/riscv/virt.c: skip 'mmu-type' FDT if satp mode
+ not set
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::929;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x929.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::930;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x930.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -89,72 +91,77 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jun 6, 2023 at 2:47=E2=80=AFAM Himanshu Chauhan
-<hchauhan@ventanamicro.com> wrote:
+On Wed, May 31, 2023 at 5:48=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
 >
-> On an address match, skip checking for default permissions and return err=
-or
-> based on access defined in PMP configuration.
+> The absence of a satp mode in riscv_host_cpu_init() is causing the
+> following error:
 >
-> v3 Changes:
-> o Removed explicit return of boolean value from comparision
->   of priv/allowed_priv
+> $ sudo ./qemu/build/qemu-system-riscv64  -machine virt,accel=3Dkvm \
+>     -m 2G -smp 1  -nographic -snapshot \
+>     -kernel ./guest_imgs/Image \
+>     -initrd ./guest_imgs/rootfs_kvm_riscv64.img \
+>     -append "earlycon=3Dsbi root=3D/dev/ram rw" \
+>     -cpu host
+> **
+> ERROR:../target/riscv/cpu.c:320:satp_mode_str: code should not be
+> reached
+> Bail out! ERROR:../target/riscv/cpu.c:320:satp_mode_str: code should
+> not be reached
+> Aborted
 >
-> v2 Changes:
-> o Removed goto to return in place when address matches
-> o Call pmp_hart_has_privs_default at the end of the loop
+> The error is triggered from create_fdt_socket_cpus() in hw/riscv/virt.c.
+> It's trying to get satp_mode_str for a NULL cpu->cfg.satp_mode.map.
 >
-> Fixes: 90b1fafce06 ("target/riscv: Smepmp: Skip applying default rules wh=
-en address matches")
-> Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
+> For this KVM 'cpu' we would need to inherit the satp supported modes
+> from the RISC-V host. At this moment this is not possible because the
+> KVM driver does not support it. And even when it does we can't just let
+> this broken for every other older kernel.
+>
+> Skip the 'mmu-type' FDT node if there's no satp_mode set.
+>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/pmp.c | 10 ++--------
->  1 file changed, 2 insertions(+), 8 deletions(-)
+>  hw/riscv/virt.c | 14 +++++++-------
+>  1 file changed, 7 insertions(+), 7 deletions(-)
 >
-> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index 418738afd8..9d8db493e6 100644
-> --- a/target/riscv/pmp.c
-> +++ b/target/riscv/pmp.c
-> @@ -291,7 +291,6 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ul=
-ong addr,
->                          pmp_priv_t *allowed_privs, target_ulong mode)
->  {
->      int i =3D 0;
-> -    bool ret =3D false;
->      int pmp_size =3D 0;
->      target_ulong s =3D 0;
->      target_ulong e =3D 0;
-> @@ -435,17 +434,12 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_=
-ulong addr,
->               * defined with PMP must be used. We shouldn't fallback on
->               * finding default privileges.
->               */
-> -            ret =3D true;
-> -            break;
-> +            return (privs & *allowed_privs) =3D=3D privs;
->          }
->      }
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 4e3efbee16..8aa907e81f 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -243,13 +243,13 @@ static void create_fdt_socket_cpus(RISCVVirtState *=
+s, int socket,
+>              s->soc[socket].hartid_base + cpu);
+>          qemu_fdt_add_subnode(ms->fdt, cpu_name);
 >
->      /* No rule matched */
-> -    if (!ret) {
-> -        ret =3D pmp_hart_has_privs_default(env, privs, allowed_privs, mo=
-de);
-> -    }
+> -        satp_mode_max =3D satp_mode_max_from_map(
+> -            s->soc[socket].harts[cpu].cfg.satp_mode.map);
+> -        sv_name =3D g_strdup_printf("riscv,%s",
+> -                                  satp_mode_str(satp_mode_max, is_32_bit=
+));
+> -        qemu_fdt_setprop_string(ms->fdt, cpu_name, "mmu-type", sv_name);
+> -        g_free(sv_name);
 > -
-> -    return ret;
-> +    return pmp_hart_has_privs_default(env, privs, allowed_privs, mode);
->  }
+> +        if (cpu_ptr->cfg.satp_mode.supported !=3D 0) {
+> +            satp_mode_max =3D satp_mode_max_from_map(cpu_ptr->cfg.satp_m=
+ode.map);
+> +            sv_name =3D g_strdup_printf("riscv,%s",
+> +                                      satp_mode_str(satp_mode_max, is_32=
+_bit));
+> +            qemu_fdt_setprop_string(ms->fdt, cpu_name, "mmu-type", sv_na=
+me);
+> +            g_free(sv_name);
+> +        }
 >
->  /*
+>          name =3D riscv_isa_string(cpu_ptr);
+>          qemu_fdt_setprop_string(ms->fdt, cpu_name, "riscv,isa", name);
 > --
-> 2.34.1
+> 2.40.1
 >
 >
 
