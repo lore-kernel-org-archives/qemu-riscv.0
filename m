@@ -4,71 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2293C7EE23
-	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Jun 2023 04:36:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82137C7EE2E
+	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Jun 2023 04:59:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q8ZHX-0007rC-2J; Mon, 12 Jun 2023 00:35:55 -0400
+	id 1q8ZeP-0004eM-0Y; Mon, 12 Jun 2023 00:59:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q8ZHV-0007qY-5i; Mon, 12 Jun 2023 00:35:53 -0400
-Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
- by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q8ZHQ-0005Ip-2E; Mon, 12 Jun 2023 00:35:52 -0400
-Received: from [192.168.100.156] (unknown [203.168.25.149])
- by APP-05 (Coremail) with SMTP id zQCowACX8iyYoIZk90EbAQ--.49162S2;
- Mon, 12 Jun 2023 12:35:37 +0800 (CST)
-Message-ID: <5037c47f-1277-4dfc-aa8a-3b62a06b97d7@iscas.ac.cn>
-Date: Mon, 12 Jun 2023 12:35:35 +0800
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1q8ZeL-0004bh-7Y; Mon, 12 Jun 2023 00:59:30 -0400
+Received: from mail-vk1-xa2e.google.com ([2607:f8b0:4864:20::a2e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1q8ZeJ-0002e3-El; Mon, 12 Jun 2023 00:59:28 -0400
+Received: by mail-vk1-xa2e.google.com with SMTP id
+ 71dfb90a1353d-46288dcacb5so1150365e0c.3; 
+ Sun, 11 Jun 2023 21:59:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1686545965; x=1689137965;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=z9sNA9OJGqc1Ib1amtQG4m3ZKe9U2YZZkJOFPx3Sj3Q=;
+ b=mAV1Tk+6on5XppjIft6Jy+7P8dcOl50G/CiLKezJVDlybmo0q6CgEftcXV4RHl2uOO
+ HWhaGi4wkfIWmW4JcAZDIxussq5ok4v0MQr6p27352iPPt/bnzxahRznGuGS1lbgOuc8
+ /f5BLXcheIjx3Jp3eDoWBxNGDQpamFFIDZZUrQRO6ZtkWDbdeGXfGvNnX/IvRisieAmx
+ JvCkJMX2me0q4FxK/CXD4ZjyeoA2eZsMooVNzwpUUIsmB7agIh0wBcOZtMCN6A6OAfri
+ lJsGShJ9ICyG9Dsx4wJ0H4SO5TTEdoKUhDA2+gWkI7DBDxC+9MZwSvpSYdorTNG1q5sr
+ iP/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1686545965; x=1689137965;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=z9sNA9OJGqc1Ib1amtQG4m3ZKe9U2YZZkJOFPx3Sj3Q=;
+ b=gs4t7xgWcI9YoJ8KBC7pK5KCuuEQEIRegz3seN1wO+gVmXsOoplO4mG34MceGW7MXQ
+ xcJeWGRlg+rqtxrjIHjQBEFmHLA0aRP8yLGu2aX1DoTOQMQcmt0HHMyk3F3nEmICBW8v
+ jlCFlyCpZVYzStNTKYoSVMKbWmLY7MxC56DYxenS3Unz3cRrcOW4BozxIMX6+0sbJnCt
+ ddN7n4QxHjUJhZXY294lUU0+Ag66deOH3nVwqV1Znm2VTblIrRDZSsskarednlCZW1cf
+ wjpDFn/m4RX2BQBS2vrq79p5fwjGu/3TpuVRphOuK+OLN3fw5tkcPrMkaRG7OGsVE/sH
+ rERQ==
+X-Gm-Message-State: AC+VfDzHntTvOkD7WXquUunga5k7aG1Q4jrwT5kxTdN1yAPJSyFc+QA2
+ hVsSyTXp9X/uWTxBRVI9iq2peputLXxPtccbcfY=
+X-Google-Smtp-Source: ACHHUZ7qRypLXyrob/OaCipR+xkdCFcUxDadEfUtfPKzfYunJr1qvmHbUqPT5V9nXn3GQpWWQkCKxvp43/5GQIaFzWs=
+X-Received: by 2002:a05:6102:2741:b0:43b:2507:4419 with SMTP id
+ p1-20020a056102274100b0043b25074419mr3000637vsu.32.1686545965605; Sun, 11 Jun
+ 2023 21:59:25 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Cc: liweiwei@iscas.ac.cn, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, dbarboza@ventanamicro.com, wangjunqiang@iscas.ac.cn,
- lazyparser@gmail.com
-Subject: Re: [PATCH 3/4] target/riscv: Support MSTATUS.MPV/GVA only when RVH
- is enabled
-Content-Language: en-US
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-References: <20230529121719.179507-1-liweiwei@iscas.ac.cn>
- <20230529121719.179507-4-liweiwei@iscas.ac.cn>
- <7b8bc5a7-ccc1-a764-cb55-706b62a36a37@linux.alibaba.com>
- <91eb4769-bfc3-23da-0a97-cd91a93ec936@iscas.ac.cn>
- <ad06f409-5f14-75ea-9f9c-65a4b8596a3a@linux.alibaba.com>
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-In-Reply-To: <ad06f409-5f14-75ea-9f9c-65a4b8596a3a@linux.alibaba.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowACX8iyYoIZk90EbAQ--.49162S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxuF18GF4xJryfAw43ZF4xWFg_yoW5GrW8pr
- 1kAFW7JrW5Jr4kAr1IqF1UWry5tryUKa4UXr1kXF18JF4Dtrn09F1UZr1qgr1DXrW8Gr1j
- vF1jqwnrZF47ArDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9G14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Cr
- 1j6rxdM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj
- 6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr
- 0_Gr1lF7xvr2IY64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxa
- n2IY04v7Mxk0xIA0c2IEe2xFo4CEbIxvr21lc2xSY4AK6x8DMxAIw28IcxkI7VAKI48JMx
- C20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAF
- wI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20x
- vE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v2
- 0xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxV
- W8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7sRRGQ6PUUUUU==
-X-Originating-IP: [203.168.25.149]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -42
-X-Spam_score: -4.3
-X-Spam_bar: ----
-X-Spam_report: (-4.3 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.093,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+References: <20230608072314.3561109-1-tommy.wu@sifive.com>
+ <20230608072314.3561109-3-tommy.wu@sifive.com>
+In-Reply-To: <20230608072314.3561109-3-tommy.wu@sifive.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 12 Jun 2023 14:58:59 +1000
+Message-ID: <CAKmqyKO9kcK=FB+gy534dmy9DmKMJF-+Mdm1dOs-WmNxjpOaxQ@mail.gmail.com>
+Subject: Re: [PATCH v4 2/4] target/riscv: Add Smrnmi CSRs.
+To: Tommy Wu <tommy.wu@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, frank.chang@sifive.com, 
+ palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
+ liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
+ richard.henderson@linaro.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2e;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2e.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -85,82 +91,211 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-On 2023/6/12 11:18, LIU Zhiwei wrote:
+On Thu, Jun 8, 2023 at 5:25=E2=80=AFPM Tommy Wu <tommy.wu@sifive.com> wrote=
+:
 >
-> On 2023/6/12 11:16, Weiwei Li wrote:
->>
->> On 2023/6/12 11:08, LIU Zhiwei wrote:
->>>
->>> On 2023/5/29 20:17, Weiwei Li wrote:
->>>> MPV and GVA bits are added by hypervisor extension to mstatus
->>>> and mstatush (if MXLEN=32).
->>>
->>> Have you found the CSR field specifications for them, especially for 
->>> GVA.
->>
->> Yeah.  in the section 9.4.1 of the privilege spec:
->>
->> "/The hypervisor extension adds two fields, MPV and GVA, to the 
->> machine-level mstatus or mstatush CSR/".
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> Signed-off-by: Tommy Wu <tommy.wu@sifive.com>
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
+> ---
+>  target/riscv/cpu.c      |  5 +++
+>  target/riscv/cpu.h      |  4 ++
+>  target/riscv/cpu_bits.h | 11 ++++++
+>  target/riscv/csr.c      | 82 +++++++++++++++++++++++++++++++++++++++++
+>  4 files changed, 102 insertions(+)
 >
-> I mean the WARL or other CSR field specifications here.
-
-I don't quite get your idea. The only specification for MPV and GVA  I 
-found is in section 9.4.1.  The spec for most of mstatus fields can be 
-found in  Section 3.1.6
-"Machine Status Registers (mstatus and mstatush)".
-
-Regards,
-
-Weiwei Li
-
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index c8dc0eaa87..ee0a4bf33f 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -810,6 +810,11 @@ static void riscv_cpu_reset_hold(Object *obj)
+>          riscv_trigger_init(env);
+>      }
 >
-> Zhiwei
+> +    if (cpu->cfg.ext_smrnmi) {
+> +        env->rnmip =3D 0;
+> +        env->mnstatus =3D set_field(env->mnstatus, MNSTATUS_NMIE, false)=
+;
+> +    }
+> +
+>      if (kvm_enabled()) {
+>          kvm_riscv_reset_vcpu(cpu);
+>      }
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 6c14b93cb5..f44fd95f16 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -368,6 +368,10 @@ struct CPUArchState {
+>      uint64_t kvm_timer_frequency;
 >
->>
->> Regards,
->>
->> Weiwei Li
->>
->>>
->>> Zhiwei
->>>
->>>>
->>>> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
->>>> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
->>>> ---
->>>>   target/riscv/csr.c | 10 ++++------
->>>>   1 file changed, 4 insertions(+), 6 deletions(-)
->>>>
->>>> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->>>> index 58499b5afc..6ac11d1f11 100644
->>>> --- a/target/riscv/csr.c
->>>> +++ b/target/riscv/csr.c
->>>> @@ -1311,11 +1311,9 @@ static RISCVException 
->>>> write_mstatus(CPURISCVState *env, int csrno,
->>>>       }
->>>>         if (xl != MXL_RV32 || env->debugger) {
->>>> -        /*
->>>> -         * RV32: MPV and GVA are not in mstatus. The current plan 
->>>> is to
->>>> -         * add them to mstatush. For now, we just don't support it.
->>>> -         */
->>>> -        mask |= MSTATUS_MPV | MSTATUS_GVA;
->>>> +        if (riscv_has_ext(env, RVH)) {
->>>> +            mask |= MSTATUS_MPV | MSTATUS_GVA;
->>>> +        }
->>>>           if ((val & MSTATUS64_UXL) != 0) {
->>>>               mask |= MSTATUS64_UXL;
->>>>           }
->>>> @@ -1351,7 +1349,7 @@ static RISCVException 
->>>> write_mstatush(CPURISCVState *env, int csrno,
->>>>                                        target_ulong val)
->>>>   {
->>>>       uint64_t valh = (uint64_t)val << 32;
->>>> -    uint64_t mask = MSTATUS_MPV | MSTATUS_GVA;
->>>> +    uint64_t mask = riscv_has_ext(env, RVH) ? MSTATUS_MPV | 
->>>> MSTATUS_GVA : 0;
->>>>         env->mstatus = (env->mstatus & ~mask) | (valh & mask);
-
+>      /* RNMI */
+> +    target_ulong mnscratch;
+> +    target_ulong mnepc;
+> +    target_ulong mncause; /* mncause without bit XLEN-1 set to 1 */
+> +    target_ulong mnstatus;
+>      target_ulong rnmip;
+>      uint64_t rnmi_irqvec;
+>      uint64_t rnmi_excpvec;
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 7cb43b88f3..d7bd4538ab 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -355,6 +355,12 @@
+>  #define CSR_PMPADDR14       0x3be
+>  #define CSR_PMPADDR15       0x3bf
+>
+> +/* RNMI */
+> +#define CSR_MNSCRATCH       0x740
+> +#define CSR_MNEPC           0x741
+> +#define CSR_MNCAUSE         0x742
+> +#define CSR_MNSTATUS        0x744
+> +
+>  /* Debug/Trace Registers (shared with Debug Mode) */
+>  #define CSR_TSELECT         0x7a0
+>  #define CSR_TDATA1          0x7a1
+> @@ -624,6 +630,11 @@ typedef enum {
+>  #define SATP64_ASID         0x0FFFF00000000000ULL
+>  #define SATP64_PPN          0x00000FFFFFFFFFFFULL
+>
+> +/* RNMI mnstatus CSR mask */
+> +#define MNSTATUS_NMIE       0x00000008
+> +#define MNSTATUS_MNPV       0x00000080
+> +#define MNSTATUS_MNPP       0x00001800
+> +
+>  /* VM modes (satp.mode) privileged ISA 1.10 */
+>  #define VM_1_10_MBARE       0
+>  #define VM_1_10_SV32        1
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 4451bd1263..a1d39fc116 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -536,6 +536,18 @@ static RISCVException debug(CPURISCVState *env, int =
+csrno)
+>
+>      return RISCV_EXCP_ILLEGAL_INST;
+>  }
+> +
+> +static RISCVException rnmi(CPURISCVState *env, int csrno)
+> +{
+> +    RISCVCPU *cpu =3D env_archcpu(env);
+> +
+> +    if (cpu->cfg.ext_smrnmi) {
+> +        return RISCV_EXCP_NONE;
+> +    }
+> +
+> +    return RISCV_EXCP_ILLEGAL_INST;
+> +}
+> +
+>  #endif
+>
+>  static RISCVException seed(CPURISCVState *env, int csrno)
+> @@ -2336,6 +2348,66 @@ static RISCVException rmw_miph(CPURISCVState *env,=
+ int csrno,
+>      return ret;
+>  }
+>
+> +static int read_mnscratch(CPURISCVState *env, int csrno, target_ulong *v=
+al)
+> +{
+> +    *val =3D env->mnscratch;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static int write_mnscratch(CPURISCVState *env, int csrno, target_ulong v=
+al)
+> +{
+> +    env->mnscratch =3D val;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static int read_mnepc(CPURISCVState *env, int csrno, target_ulong *val)
+> +{
+> +    *val =3D env->mnepc;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static int write_mnepc(CPURISCVState *env, int csrno, target_ulong val)
+> +{
+> +    env->mnepc =3D val;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static int read_mncause(CPURISCVState *env, int csrno, target_ulong *val=
+)
+> +{
+> +    *val =3D env->mncause;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static int write_mncause(CPURISCVState *env, int csrno, target_ulong val=
+)
+> +{
+> +    env->mncause =3D val;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static int read_mnstatus(CPURISCVState *env, int csrno, target_ulong *va=
+l)
+> +{
+> +    *val =3D env->mnstatus;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static int write_mnstatus(CPURISCVState *env, int csrno, target_ulong va=
+l)
+> +{
+> +    target_ulong mask =3D (MNSTATUS_NMIE | MNSTATUS_MNPP);
+> +
+> +    if (riscv_has_ext(env, RVH)) {
+> +        /* Flush tlb on mnstatus fields that affect VM. */
+> +        if ((val ^ env->mnstatus) & MNSTATUS_MNPV) {
+> +            tlb_flush(env_cpu(env));
+> +        }
+> +
+> +        mask |=3D MNSTATUS_MNPV;
+> +    }
+> +
+> +    /* mnstatus.mnie can only be cleared by hardware. */
+> +    env->mnstatus =3D (env->mnstatus & MNSTATUS_NMIE) | (val & mask);
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+>  /* Supervisor Trap Setup */
+>  static RISCVException read_sstatus_i128(CPURISCVState *env, int csrno,
+>                                          Int128 *val)
+> @@ -4204,6 +4276,16 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
+>                          write_sstateen_1_3,
+>                          .min_priv_ver =3D PRIV_VERSION_1_12_0 },
+>
+> +    /* RNMI */
+> +    [CSR_MNSCRATCH] =3D { "mnscratch", rnmi, read_mnscratch, write_mnscr=
+atch,
+> +                        .min_priv_ver =3D PRIV_VERSION_1_12_0           =
+    },
+> +    [CSR_MNEPC]     =3D { "mnepc",     rnmi, read_mnepc,     write_mnepc=
+,
+> +                        .min_priv_ver =3D PRIV_VERSION_1_12_0           =
+    },
+> +    [CSR_MNCAUSE]   =3D { "mncause",   rnmi, read_mncause,   write_mncau=
+se,
+> +                        .min_priv_ver =3D PRIV_VERSION_1_12_0           =
+    },
+> +    [CSR_MNSTATUS]  =3D { "mnstatus",  rnmi, read_mnstatus,  write_mnsta=
+tus,
+> +                        .min_priv_ver =3D PRIV_VERSION_1_12_0           =
+    },
+> +
+>      /* Supervisor Trap Setup */
+>      [CSR_SSTATUS]    =3D { "sstatus",    smode, read_sstatus,    write_s=
+status,
+>                           NULL,                read_sstatus_i128         =
+     },
+> --
+> 2.31.1
+>
+>
 
