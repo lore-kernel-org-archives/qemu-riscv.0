@@ -4,74 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58A85C7EE23
-	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Jun 2023 07:27:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7A14C7EE25
+	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Jun 2023 09:48:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q8bxa-0001MJ-Uy; Mon, 12 Jun 2023 03:27:31 -0400
+	id 1q8e9X-0003K0-68; Mon, 12 Jun 2023 05:47:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q8bxZ-0001M4-EX; Mon, 12 Jun 2023 03:27:29 -0400
-Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
- by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q8bxW-00047M-N6; Mon, 12 Jun 2023 03:27:29 -0400
-Received: from [192.168.100.156] (unknown [203.168.25.149])
- by APP-05 (Coremail) with SMTP id zQCowAAHKQbRyIZkw0crAQ--.52143S2;
- Mon, 12 Jun 2023 15:27:15 +0800 (CST)
-Message-ID: <ccbe8b1e-3f0d-72db-7863-bf3f4ebdf525@iscas.ac.cn>
-Date: Mon, 12 Jun 2023 15:27:13 +0800
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1q8e9W-0003Jl-9i
+ for qemu-riscv@nongnu.org; Mon, 12 Jun 2023 05:47:58 -0400
+Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1q8e9U-00045I-O2
+ for qemu-riscv@nongnu.org; Mon, 12 Jun 2023 05:47:58 -0400
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-30c2bd52f82so4058162f8f.3
+ for <qemu-riscv@nongnu.org>; Mon, 12 Jun 2023 02:47:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=vrull.eu; s=google; t=1686563274; x=1689155274;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=68yK9YpbPZeRYh+gEbj6bSXzJfW5T3mG0JEA9KzTtjk=;
+ b=SLcG8WeJSJSTLUY4gllal6//l3P2C25ZFsviioTSK6h6ePhDPkBnRnGtUzSOeE+yeY
+ 30job2f+CDRom50bjyP6hBgA8TojvlRoQtHMS55X9hcVEGwo43ggMvxZUX2DnaGSRgOC
+ j4Hf+0Kg++96QrViu1PhDtk9anEqAKbnYsgyO/PlDJihx2bKO2//YRDYCzUNQC7bslMV
+ hJKtARZkAqndX5a2JRBs44FrXW5hwkOLd5CX1QTEnBb1vMaxsWN4xco/rOnEzg6dL08o
+ N24Ci0gRykd7S7OL44OjXPg4GxInCavrj0TLyKOX5baioBKj1QtBMLjpZJ8T9LCg3DDh
+ U3Vw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1686563274; x=1689155274;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=68yK9YpbPZeRYh+gEbj6bSXzJfW5T3mG0JEA9KzTtjk=;
+ b=Vez5b1FwyNfgLfDdZwRB/RhcPJXVUHD54YWxDeWD9UemM1xK5yDodO46AOs0oidWTy
+ k64dIsxq/QzCB8DlKFbS5EscmLbQHDtUCh6m8Y0RENXKfnqFfYJheRr0G+ydPFN0+/kB
+ 1n0Gps87oF9MlqP76zJJtx5SU+2VT2Z0UkZS/r7gLQbFJKTkHVnoZgG/fGbXERhBM2MV
+ iM6/JM+DkDETkOo4qIreVIZS0OwuxbTfV9Po4TA/w0CXmOSsiNwpTxfm+qEzw+lKyVM8
+ XHeAOqQdM/5qmAjrGkrV/ZkgmodeYnZlW4XrCZeYOM33MUXv5s6QY5gbCkmIVUpmiJa5
+ Wbcg==
+X-Gm-Message-State: AC+VfDyB31yNbLegK6/vbQVqwmO7vPx60jLpkvGzmazo1/yhnTSAGRC+
+ heLrGo76s7fudoezK0fkxKPenmgJPs1cN53lh0v+0BpWokk8O/pSfOY=
+X-Google-Smtp-Source: ACHHUZ4n40Jma1128giyjFo+iFxhU3OFDXalpUNeGboUMgJzFRAmpSGE/DL+wLxMHUjhuU9lP9BGo2DchiOD6fJ34Mc=
+X-Received: by 2002:a5d:6148:0:b0:30f:b948:6f8f with SMTP id
+ y8-20020a5d6148000000b0030fb9486f8fmr2759287wrt.70.1686563273971; Mon, 12 Jun
+ 2023 02:47:53 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Cc: liweiwei@iscas.ac.cn, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, dbarboza@ventanamicro.com, wangjunqiang@iscas.ac.cn,
- lazyparser@gmail.com
-Subject: Re: [PATCH 3/4] target/riscv: Support MSTATUS.MPV/GVA only when RVH
- is enabled
-Content-Language: en-US
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-References: <20230529121719.179507-1-liweiwei@iscas.ac.cn>
- <20230529121719.179507-4-liweiwei@iscas.ac.cn>
- <7b8bc5a7-ccc1-a764-cb55-706b62a36a37@linux.alibaba.com>
- <91eb4769-bfc3-23da-0a97-cd91a93ec936@iscas.ac.cn>
- <ad06f409-5f14-75ea-9f9c-65a4b8596a3a@linux.alibaba.com>
- <5037c47f-1277-4dfc-aa8a-3b62a06b97d7@iscas.ac.cn>
- <c22265b1-6ef4-72d5-3c4c-e14829b0ec42@linux.alibaba.com>
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-In-Reply-To: <c22265b1-6ef4-72d5-3c4c-e14829b0ec42@linux.alibaba.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowAAHKQbRyIZkw0crAQ--.52143S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxZw1xJFW7Xr1kWFy3ZrWUArb_yoW5CFy5pr
- 1kAFWUJrW5Jr4kAr12qr1UWryYyryUKa4UXr1kJF18Jr4Dtr1Y9F1UZr4qgr1DXrWxGr1j
- vF1UXasrZF17ArDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9l14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
- 6r4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
- CE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
- 2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
- W8JwACjcxG0xvEwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2ka
- 0xkIwI1lc7I2V7IY0VAS07AlzVAYIcxG8wCY02Avz4vE7c1l42xK82IYc2Ij64vIr41l4I
- 8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AK
- xVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcV
- AFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8I
- cIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r
- 4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjTRRnmiDUUUU
-X-Originating-IP: [203.168.25.149]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -42
-X-Spam_score: -4.3
-X-Spam_bar: ----
-X-Spam_report: (-4.3 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.093,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+References: <20230530131843.1186637-1-christoph.muellner@vrull.eu>
+ <20230530131843.1186637-7-christoph.muellner@vrull.eu>
+ <29c57d6a-247c-ef4c-da4c-f3021bb0ea54@gmail.com>
+In-Reply-To: <29c57d6a-247c-ef4c-da4c-f3021bb0ea54@gmail.com>
+From: =?UTF-8?Q?Christoph_M=C3=BCllner?= <christoph.muellner@vrull.eu>
+Date: Mon, 12 Jun 2023 11:47:40 +0200
+Message-ID: <CAEg0e7iShmcrvqXJkfy+wv+v4e2y=S4go52aTs8cZ_+Lb6rvwg@mail.gmail.com>
+Subject: Re: [PATCH 6/9] target/riscv/cpu: Share RISCVCPUConfig with
+ disassembler
+To: LIU Zhiwei <baxiantai@gmail.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Zhiwei Liu <zhiwei_liu@linux.alibaba.com>, 
+ Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::430;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-wr1-x430.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -87,100 +97,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-On 2023/6/12 13:40, LIU Zhiwei wrote:
+On Mon, Jun 12, 2023 at 8:25=E2=80=AFAM LIU Zhiwei <baxiantai@gmail.com> wr=
+ote:
 >
-> On 2023/6/12 12:35, Weiwei Li wrote:
->>
->> On 2023/6/12 11:18, LIU Zhiwei wrote:
->>>
->>> On 2023/6/12 11:16, Weiwei Li wrote:
->>>>
->>>> On 2023/6/12 11:08, LIU Zhiwei wrote:
->>>>>
->>>>> On 2023/5/29 20:17, Weiwei Li wrote:
->>>>>> MPV and GVA bits are added by hypervisor extension to mstatus
->>>>>> and mstatush (if MXLEN=32).
->>>>>
->>>>> Have you found the CSR field specifications for them, especially 
->>>>> for GVA.
->>>>
->>>> Yeah.  in the section 9.4.1 of the privilege spec:
->>>>
->>>> "/The hypervisor extension adds two fields, MPV and GVA, to the 
->>>> machine-level mstatus or mstatush CSR/".
->>>
->>> I mean the WARL or other CSR field specifications here.
->>
->> I don't quite get your idea. The only specification for MPV and GVA  
->> I found is in section 9.4.1.  The spec for most of mstatus fields can 
->> be found in  Section 3.1.6
->> "Machine Status Registers (mstatus and mstatush)".
 >
-> I mean is the GVA field read only or WARL(WPRI or WLRL) for the 
-> software? It could be written by the implementation. But I am not sure 
-> whether it could be written by the software.
+> On 2023/5/30 21:18, Christoph Muellner wrote:
+> > From: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
+> >
+> > The disassembler needs the available extensions in order
+> > to properly decode instructions in case of overlapping
+> > encodings (e.g. for vendor extensions).
+> >
+> > Let's use the field 'disassemble_info::private_data' to store
+> > our RISCVCPUConfig pointer.
+> >
+> > Signed-off-by: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
+> > ---
+> >   target/riscv/cpu.c | 3 +++
+> >   1 file changed, 3 insertions(+)
+> >
+> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > index 5b7818dbd1..6f0cd9a0bb 100644
+> > --- a/target/riscv/cpu.c
+> > +++ b/target/riscv/cpu.c
+> > @@ -819,6 +819,9 @@ static void riscv_cpu_disas_set_info(CPUState *s, d=
+isassemble_info *info)
+> >   {
+> >       RISCVCPU *cpu =3D RISCV_CPU(s);
+> >       CPURISCVState *env =3D &cpu->env;
+> > +    RISCVCPUConfig *cfg =3D &cpu->cfg;
+> > +
+> > +    info->private_data =3D cfg;
+>
+> I don't know if this field will be overridden by the binutils. Can we
+> extend the struct disassemble_info, and add some fields like supporting
+> for Capstone?
 
-No, I didn't find any description about this.
 
-Regards,
+Initially I wanted to add a new field, but then I noticed that the field
+'disassemble_info::private_data' is used for a similar purpose by
+disas/cris.c, disas/m68k.c, and dias/xtensa.c.
+So I decided to not add yet another field, which only serves one architectu=
+re.
 
-Weiwei Li
+But if that's the preferred way, then I can change.
+
+Thanks
+Christoph
 
 >
 > Zhiwei
 >
->>
->> Regards,
->>
->> Weiwei Li
->>
->>>
->>> Zhiwei
->>>
->>>>
->>>> Regards,
->>>>
->>>> Weiwei Li
->>>>
->>>>>
->>>>> Zhiwei
->>>>>
->>>>>>
->>>>>> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
->>>>>> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
->>>>>> ---
->>>>>>   target/riscv/csr.c | 10 ++++------
->>>>>>   1 file changed, 4 insertions(+), 6 deletions(-)
->>>>>>
->>>>>> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->>>>>> index 58499b5afc..6ac11d1f11 100644
->>>>>> --- a/target/riscv/csr.c
->>>>>> +++ b/target/riscv/csr.c
->>>>>> @@ -1311,11 +1311,9 @@ static RISCVException 
->>>>>> write_mstatus(CPURISCVState *env, int csrno,
->>>>>>       }
->>>>>>         if (xl != MXL_RV32 || env->debugger) {
->>>>>> -        /*
->>>>>> -         * RV32: MPV and GVA are not in mstatus. The current 
->>>>>> plan is to
->>>>>> -         * add them to mstatush. For now, we just don't support it.
->>>>>> -         */
->>>>>> -        mask |= MSTATUS_MPV | MSTATUS_GVA;
->>>>>> +        if (riscv_has_ext(env, RVH)) {
->>>>>> +            mask |= MSTATUS_MPV | MSTATUS_GVA;
->>>>>> +        }
->>>>>>           if ((val & MSTATUS64_UXL) != 0) {
->>>>>>               mask |= MSTATUS64_UXL;
->>>>>>           }
->>>>>> @@ -1351,7 +1349,7 @@ static RISCVException 
->>>>>> write_mstatush(CPURISCVState *env, int csrno,
->>>>>>                                        target_ulong val)
->>>>>>   {
->>>>>>       uint64_t valh = (uint64_t)val << 32;
->>>>>> -    uint64_t mask = MSTATUS_MPV | MSTATUS_GVA;
->>>>>> +    uint64_t mask = riscv_has_ext(env, RVH) ? MSTATUS_MPV | 
->>>>>> MSTATUS_GVA : 0;
->>>>>>         env->mstatus = (env->mstatus & ~mask) | (valh & mask);
-
+> >
+> >       switch (env->xl) {
+> >       case MXL_RV32:
 
