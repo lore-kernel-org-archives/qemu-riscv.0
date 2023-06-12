@@ -4,84 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7A14C7EE25
-	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Jun 2023 09:48:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF197C7EE25
+	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Jun 2023 10:02:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q8e9X-0003K0-68; Mon, 12 Jun 2023 05:47:59 -0400
+	id 1q8eN4-0006YT-Fl; Mon, 12 Jun 2023 06:01:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1q8e9W-0003Jl-9i
- for qemu-riscv@nongnu.org; Mon, 12 Jun 2023 05:47:58 -0400
-Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
+ (Exim 4.90_1) (envelope-from <baxiantai@gmail.com>)
+ id 1q8eN0-0006Y0-MJ; Mon, 12 Jun 2023 06:01:54 -0400
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1q8e9U-00045I-O2
- for qemu-riscv@nongnu.org; Mon, 12 Jun 2023 05:47:58 -0400
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-30c2bd52f82so4058162f8f.3
- for <qemu-riscv@nongnu.org>; Mon, 12 Jun 2023 02:47:55 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <baxiantai@gmail.com>)
+ id 1q8eMz-0006Xt-17; Mon, 12 Jun 2023 06:01:54 -0400
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-1b3b3f67ad6so14675555ad.3; 
+ Mon, 12 Jun 2023 03:01:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=vrull.eu; s=google; t=1686563274; x=1689155274;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=68yK9YpbPZeRYh+gEbj6bSXzJfW5T3mG0JEA9KzTtjk=;
- b=SLcG8WeJSJSTLUY4gllal6//l3P2C25ZFsviioTSK6h6ePhDPkBnRnGtUzSOeE+yeY
- 30job2f+CDRom50bjyP6hBgA8TojvlRoQtHMS55X9hcVEGwo43ggMvxZUX2DnaGSRgOC
- j4Hf+0Kg++96QrViu1PhDtk9anEqAKbnYsgyO/PlDJihx2bKO2//YRDYCzUNQC7bslMV
- hJKtARZkAqndX5a2JRBs44FrXW5hwkOLd5CX1QTEnBb1vMaxsWN4xco/rOnEzg6dL08o
- N24Ci0gRykd7S7OL44OjXPg4GxInCavrj0TLyKOX5baioBKj1QtBMLjpZJ8T9LCg3DDh
- U3Vw==
+ d=gmail.com; s=20221208; t=1686564111; x=1689156111;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=WAmVFBDNxIJPa5vmUn1uEMS1TRYiFIyGsYHQwKHWfL4=;
+ b=ScYf9MyGhAtgFfMOhg0cARaNlUmhK69kpK01kU4FFw+44KpAI/vCaz2Y+UwjzPaJXi
+ ATZjv5KTkhtm5EI6kkfTVaEO1IUkk04HMKGg3u8mEOYm475WLGEiy6euw45Aa10SM5Q8
+ vT3hmSTx02xEwHgErR73mRnsb1ytizAH0M7VlGyLrjC1L0Z516EKH0fq5sXY+m5kgWTD
+ lOilhjFgpdsEBTvDUsUbtRTQlldgSiDmA/kvN7/yEkbt2yQtidFD7hMki9up4YcgE6EV
+ OCNz/WF6lVqOYKpW1Z2Z7JhOnyweXkfvAQNXh4/kEwZmUdWMDLNSx+hQMPUJPwrI0P6K
+ ujtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686563274; x=1689155274;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=68yK9YpbPZeRYh+gEbj6bSXzJfW5T3mG0JEA9KzTtjk=;
- b=Vez5b1FwyNfgLfDdZwRB/RhcPJXVUHD54YWxDeWD9UemM1xK5yDodO46AOs0oidWTy
- k64dIsxq/QzCB8DlKFbS5EscmLbQHDtUCh6m8Y0RENXKfnqFfYJheRr0G+ydPFN0+/kB
- 1n0Gps87oF9MlqP76zJJtx5SU+2VT2Z0UkZS/r7gLQbFJKTkHVnoZgG/fGbXERhBM2MV
- iM6/JM+DkDETkOo4qIreVIZS0OwuxbTfV9Po4TA/w0CXmOSsiNwpTxfm+qEzw+lKyVM8
- XHeAOqQdM/5qmAjrGkrV/ZkgmodeYnZlW4XrCZeYOM33MUXv5s6QY5gbCkmIVUpmiJa5
- Wbcg==
-X-Gm-Message-State: AC+VfDyB31yNbLegK6/vbQVqwmO7vPx60jLpkvGzmazo1/yhnTSAGRC+
- heLrGo76s7fudoezK0fkxKPenmgJPs1cN53lh0v+0BpWokk8O/pSfOY=
-X-Google-Smtp-Source: ACHHUZ4n40Jma1128giyjFo+iFxhU3OFDXalpUNeGboUMgJzFRAmpSGE/DL+wLxMHUjhuU9lP9BGo2DchiOD6fJ34Mc=
-X-Received: by 2002:a5d:6148:0:b0:30f:b948:6f8f with SMTP id
- y8-20020a5d6148000000b0030fb9486f8fmr2759287wrt.70.1686563273971; Mon, 12 Jun
- 2023 02:47:53 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1686564111; x=1689156111;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=WAmVFBDNxIJPa5vmUn1uEMS1TRYiFIyGsYHQwKHWfL4=;
+ b=b5YMwWC97Jcoqbsrsu3xwYuVriPDhWt+9ZsCuyAppkPNZMY8ChhaksqZSSHNcaYAXv
+ oHdCRSEuXDQ9QiY/HiyDVQcLOr0yRxXBg0QsAbk/+r9bi2eb37nh1rhHm1iv677sCRfS
+ Qw9VcG8ZhJj9KBU2mDu0x4V5wy3rpWK/CvJYACqnY0au65Wr68fT5euPYEzmUjuLPmZ1
+ rm71qpz7wUDDvNO/+y1WgubSRoMIDr2OhjjFvr/eGX9tb9ayHxzKB8KHNnmSzzxSLcBx
+ XDAKYCxzUC1A9Y51CcEv8wMrDNLhUwjD6EnwOYyvwgC+lvyQIW+O6U3MzCmDbWTwQE0x
+ j22Q==
+X-Gm-Message-State: AC+VfDzW45oLPN9SIZ6jx7Kedc2yAM6FnLN9evEmNS1s5AzwwaH3SjAI
+ 8GQIt+S3ELYKOWkTwzvUZoU=
+X-Google-Smtp-Source: ACHHUZ5JsXhdeIh7ZJnu+AjOB+TMjo/ww5DqfVs7yZJrG/u3kHkFX5MDaP0Rzdw7QelGKfDtBX7LKg==
+X-Received: by 2002:a17:902:e74c:b0:1b0:3f89:9836 with SMTP id
+ p12-20020a170902e74c00b001b03f899836mr6086159plf.22.1686564110877; 
+ Mon, 12 Jun 2023 03:01:50 -0700 (PDT)
+Received: from [30.221.96.167] ([47.246.101.55])
+ by smtp.gmail.com with ESMTPSA id
+ s1-20020a170902b18100b001a4fe00a8d4sm7793042plr.90.2023.06.12.03.01.48
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 12 Jun 2023 03:01:50 -0700 (PDT)
+Message-ID: <18954fce-c08d-66f0-fe32-b6bdd4ac1892@gmail.com>
+Date: Mon, 12 Jun 2023 18:01:28 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.12.0
+Subject: Re: [PATCH 6/9] target/riscv/cpu: Share RISCVCPUConfig with
+ disassembler
+Content-Language: en-US
+To: =?UTF-8?Q?Christoph_M=c3=bcllner?= <christoph.muellner@vrull.eu>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Zhiwei Liu <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 References: <20230530131843.1186637-1-christoph.muellner@vrull.eu>
  <20230530131843.1186637-7-christoph.muellner@vrull.eu>
  <29c57d6a-247c-ef4c-da4c-f3021bb0ea54@gmail.com>
-In-Reply-To: <29c57d6a-247c-ef4c-da4c-f3021bb0ea54@gmail.com>
-From: =?UTF-8?Q?Christoph_M=C3=BCllner?= <christoph.muellner@vrull.eu>
-Date: Mon, 12 Jun 2023 11:47:40 +0200
-Message-ID: <CAEg0e7iShmcrvqXJkfy+wv+v4e2y=S4go52aTs8cZ_+Lb6rvwg@mail.gmail.com>
-Subject: Re: [PATCH 6/9] target/riscv/cpu: Share RISCVCPUConfig with
- disassembler
-To: LIU Zhiwei <baxiantai@gmail.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Zhiwei Liu <zhiwei_liu@linux.alibaba.com>, 
- Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::430;
- envelope-from=christoph.muellner@vrull.eu; helo=mail-wr1-x430.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+ <CAEg0e7iShmcrvqXJkfy+wv+v4e2y=S4go52aTs8cZ_+Lb6rvwg@mail.gmail.com>
+From: LIU Zhiwei <baxiantai@gmail.com>
+In-Reply-To: <CAEg0e7iShmcrvqXJkfy+wv+v4e2y=S4go52aTs8cZ_+Lb6rvwg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=baxiantai@gmail.com; helo=mail-pl1-x62e.google.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ NICE_REPLY_A=-0.093, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,58 +104,60 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Jun 12, 2023 at 8:25=E2=80=AFAM LIU Zhiwei <baxiantai@gmail.com> wr=
-ote:
->
->
-> On 2023/5/30 21:18, Christoph Muellner wrote:
-> > From: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
-> >
-> > The disassembler needs the available extensions in order
-> > to properly decode instructions in case of overlapping
-> > encodings (e.g. for vendor extensions).
-> >
-> > Let's use the field 'disassemble_info::private_data' to store
-> > our RISCVCPUConfig pointer.
-> >
-> > Signed-off-by: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
-> > ---
-> >   target/riscv/cpu.c | 3 +++
-> >   1 file changed, 3 insertions(+)
-> >
-> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > index 5b7818dbd1..6f0cd9a0bb 100644
-> > --- a/target/riscv/cpu.c
-> > +++ b/target/riscv/cpu.c
-> > @@ -819,6 +819,9 @@ static void riscv_cpu_disas_set_info(CPUState *s, d=
-isassemble_info *info)
-> >   {
-> >       RISCVCPU *cpu =3D RISCV_CPU(s);
-> >       CPURISCVState *env =3D &cpu->env;
-> > +    RISCVCPUConfig *cfg =3D &cpu->cfg;
-> > +
-> > +    info->private_data =3D cfg;
->
-> I don't know if this field will be overridden by the binutils. Can we
-> extend the struct disassemble_info, and add some fields like supporting
-> for Capstone?
 
+On 2023/6/12 17:47, Christoph Müllner wrote:
+> On Mon, Jun 12, 2023 at 8:25 AM LIU Zhiwei <baxiantai@gmail.com> wrote:
+>>
+>> On 2023/5/30 21:18, Christoph Muellner wrote:
+>>> From: Christoph Müllner <christoph.muellner@vrull.eu>
+>>>
+>>> The disassembler needs the available extensions in order
+>>> to properly decode instructions in case of overlapping
+>>> encodings (e.g. for vendor extensions).
+>>>
+>>> Let's use the field 'disassemble_info::private_data' to store
+>>> our RISCVCPUConfig pointer.
+>>>
+>>> Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
+>>> ---
+>>>    target/riscv/cpu.c | 3 +++
+>>>    1 file changed, 3 insertions(+)
+>>>
+>>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>>> index 5b7818dbd1..6f0cd9a0bb 100644
+>>> --- a/target/riscv/cpu.c
+>>> +++ b/target/riscv/cpu.c
+>>> @@ -819,6 +819,9 @@ static void riscv_cpu_disas_set_info(CPUState *s, disassemble_info *info)
+>>>    {
+>>>        RISCVCPU *cpu = RISCV_CPU(s);
+>>>        CPURISCVState *env = &cpu->env;
+>>> +    RISCVCPUConfig *cfg = &cpu->cfg;
+>>> +
+>>> +    info->private_data = cfg;
+>> I don't know if this field will be overridden by the binutils. Can we
+>> extend the struct disassemble_info, and add some fields like supporting
+>> for Capstone?
+>
+> Initially I wanted to add a new field, but then I noticed that the field
+> 'disassemble_info::private_data' is used for a similar purpose by
+> disas/cris.c, disas/m68k.c, and dias/xtensa.c.
+> So I decided to not add yet another field, which only serves one architecture.
+I think you can CC these arch maintainers to see if it need some 
+specially process before using the private_data.
+>
+> But if that's the preferred way, then I can change.
 
-Initially I wanted to add a new field, but then I noticed that the field
-'disassemble_info::private_data' is used for a similar purpose by
-disas/cris.c, disas/m68k.c, and dias/xtensa.c.
-So I decided to not add yet another field, which only serves one architectu=
-re.
+I prefer this way, but not insist on  if it really works using the 
+private_data.
 
-But if that's the preferred way, then I can change.
-
-Thanks
-Christoph
+Zhiwei
 
 >
-> Zhiwei
+> Thanks
+> Christoph
 >
-> >
-> >       switch (env->xl) {
-> >       case MXL_RV32:
+>> Zhiwei
+>>
+>>>        switch (env->xl) {
+>>>        case MXL_RV32:
 
