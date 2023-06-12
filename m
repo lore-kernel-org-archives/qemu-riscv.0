@@ -4,78 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87FADC7EE25
-	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Jun 2023 05:04:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CBF9C7EE23
+	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Jun 2023 05:41:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q8Zio-0006Vb-Uh; Mon, 12 Jun 2023 01:04:06 -0400
+	id 1q8aIm-0002C2-0P; Mon, 12 Jun 2023 01:41:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q8Zin-0006VG-Sv; Mon, 12 Jun 2023 01:04:05 -0400
-Received: from mail-vs1-xe2c.google.com ([2607:f8b0:4864:20::e2c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q8Zim-0003ws-0p; Mon, 12 Jun 2023 01:04:05 -0400
-Received: by mail-vs1-xe2c.google.com with SMTP id
- ada2fe7eead31-43b4ffbaec6so1058661137.0; 
- Sun, 11 Jun 2023 22:04:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1686546242; x=1689138242;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=OwKiU0fna/G42FvXhbJINm0Yz9P9fJQKd+9pSZDuh14=;
- b=S/zliuBdp8swan4QzdHhaNKRiilBG1bml4muCEu1ThUa9TSatLMzglJ2kqVrOTzCFg
- Zj6qgTJVvceDq/3V+jxPUxMiTFJJZ6UBK4m6K3Pd3THUAn+H3pk71yQY7FWlhwWaBKzY
- cxmwAa9SipCmA6n8DJtY9ng+Fv0VA3n8hhcI98eqiLZgcXsWikmYN6hKHc6sI4IX8dG/
- eivTZZS1iHrbvsMRhtwDDtOycIzDhm1CAcsrIMXqsHTK5a30WhOrzdBoEwSNCip/USdZ
- Fbrjai2VmaJbVPH/R+5ndEZFf8AeI0YKiM7fri+UTmeco2iUYQieMUq5em86/5yxgpI8
- 2vcA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686546242; x=1689138242;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=OwKiU0fna/G42FvXhbJINm0Yz9P9fJQKd+9pSZDuh14=;
- b=ARQJQ1k5SNIdH1sz+CgAPj9AEtm9CYG9lkiLw8V9urM28l/Sjnf/y9EM/RrSvHYqL2
- sCHS2Rgwp7nyZB705VF3YCIaqvVJj2WLK9drNvgB7CEu32N+khKd1hDXvq5fA+Ch5Jyx
- 4q/ZvP6Dgh657lF8bRb3UC+O6uCSrQvkjbNk9G1ZQfTi/rtuGOV1VHpC6ZHLyq2UpvXm
- 7rjT9QsawWBTEaX18MopaCgmVMjLtfa5P5cMTQHaMoFrvmXof1zdbTKiAJYERI+gZCl9
- 1V0TPNEvNgi65/P+40Oz9tsvP0kjpHtHHEpz1HD3zJM9ahZTxMFqpX4LpnrX/v70JEnq
- IBrQ==
-X-Gm-Message-State: AC+VfDx74/3O/YfD9h0Im30v8fySTepL+jnItv/XckZrAQm2V8mYdXa8
- JiEsm2EvFdHXuPaeplnThjnfMUdFPHO9mzvLMAY=
-X-Google-Smtp-Source: ACHHUZ5o/VNk+lQ6DtY5bLT6ahJT0FPaGhWdq1kBrSZTNqhwSKILIWVUfWqDFJFO7Vu7B0NntvySE/SfTvG0BlK96rU=
-X-Received: by 2002:a67:e9d2:0:b0:43b:2682:a4a3 with SMTP id
- q18-20020a67e9d2000000b0043b2682a4a3mr2912756vso.23.1686546242401; Sun, 11
- Jun 2023 22:04:02 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1q8aIc-0002Aw-Gi; Mon, 12 Jun 2023 01:41:06 -0400
+Received: from out30-112.freemail.mail.aliyun.com ([115.124.30.112])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1q8aIX-0001ME-Ca; Mon, 12 Jun 2023 01:41:06 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R631e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045168;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
+ TI=SMTPD_---0Vkrbttd_1686548447; 
+Received: from 30.221.96.167(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0Vkrbttd_1686548447) by smtp.aliyun-inc.com;
+ Mon, 12 Jun 2023 13:40:48 +0800
+Message-ID: <c22265b1-6ef4-72d5-3c4c-e14829b0ec42@linux.alibaba.com>
+Date: Mon, 12 Jun 2023 13:40:29 +0800
 MIME-Version: 1.0
-References: <20230608072314.3561109-1-tommy.wu@sifive.com>
- <20230608072314.3561109-2-tommy.wu@sifive.com>
-In-Reply-To: <20230608072314.3561109-2-tommy.wu@sifive.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 12 Jun 2023 15:03:36 +1000
-Message-ID: <CAKmqyKOve+ceaiVQbYWsLqLgtH6VCPHCuaZZJim3KHaQHcJyfQ@mail.gmail.com>
-Subject: Re: [PATCH v4 1/4] target/riscv: Add Smrnmi cpu extension.
-To: Tommy Wu <tommy.wu@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, frank.chang@sifive.com, 
- palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
- liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
- richard.henderson@linaro.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2c;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2c.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.12.0
+Subject: Re: [PATCH 3/4] target/riscv: Support MSTATUS.MPV/GVA only when RVH
+ is enabled
+Content-Language: en-US
+To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ dbarboza@ventanamicro.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+References: <20230529121719.179507-1-liweiwei@iscas.ac.cn>
+ <20230529121719.179507-4-liweiwei@iscas.ac.cn>
+ <7b8bc5a7-ccc1-a764-cb55-706b62a36a37@linux.alibaba.com>
+ <91eb4769-bfc3-23da-0a97-cd91a93ec936@iscas.ac.cn>
+ <ad06f409-5f14-75ea-9f9c-65a4b8596a3a@linux.alibaba.com>
+ <5037c47f-1277-4dfc-aa8a-3b62a06b97d7@iscas.ac.cn>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <5037c47f-1277-4dfc-aa8a-3b62a06b97d7@iscas.ac.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=115.124.30.112;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-112.freemail.mail.aliyun.com
+X-Spam_score_int: -99
+X-Spam_score: -10.0
+X-Spam_bar: ----------
+X-Spam_report: (-10.0 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ NICE_REPLY_A=-0.093, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -91,251 +72,90 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jun 8, 2023 at 5:25=E2=80=AFPM Tommy Wu <tommy.wu@sifive.com> wrote=
-:
->
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> Signed-off-by: Tommy Wu <tommy.wu@sifive.com>
-> ---
->  hw/riscv/riscv_hart.c         | 21 +++++++++++++++++++++
->  include/hw/riscv/riscv_hart.h |  4 ++++
->  target/riscv/cpu.c            | 13 +++++++++++++
->  target/riscv/cpu.h            |  7 +++++++
->  target/riscv/cpu_bits.h       | 12 ++++++++++++
->  target/riscv/cpu_helper.c     | 24 ++++++++++++++++++++++++
->  6 files changed, 81 insertions(+)
->
-> diff --git a/hw/riscv/riscv_hart.c b/hw/riscv/riscv_hart.c
-> index 613ea2aaa0..eac18f8c29 100644
-> --- a/hw/riscv/riscv_hart.c
-> +++ b/hw/riscv/riscv_hart.c
-> @@ -33,6 +33,12 @@ static Property riscv_harts_props[] =3D {
->      DEFINE_PROP_STRING("cpu-type", RISCVHartArrayState, cpu_type),
->      DEFINE_PROP_UINT64("resetvec", RISCVHartArrayState, resetvec,
->                         DEFAULT_RSTVEC),
-> +    DEFINE_PROP_ARRAY("rnmi-interrupt-vector", RISCVHartArrayState,
-> +                      num_rnmi_irqvec, rnmi_irqvec, qdev_prop_uint64,
-> +                      uint64_t),
-> +    DEFINE_PROP_ARRAY("rnmi-exception-vector", RISCVHartArrayState,
-> +                      num_rnmi_excpvec, rnmi_excpvec, qdev_prop_uint64,
-> +                      uint64_t),
->      DEFINE_PROP_END_OF_LIST(),
->  };
->
-> @@ -47,6 +53,21 @@ static bool riscv_hart_realize(RISCVHartArrayState *s,=
- int idx,
->  {
->      object_initialize_child(OBJECT(s), "harts[*]", &s->harts[idx], cpu_t=
-ype);
->      qdev_prop_set_uint64(DEVICE(&s->harts[idx]), "resetvec", s->resetvec=
-);
-> +
-> +    if (s->harts[idx].cfg.ext_smrnmi) {
-> +        if (s->rnmi_irqvec) {
-> +            qdev_prop_set_uint64(DEVICE(&s->harts[idx]),
-> +                                 "rnmi-interrupt-vector",
-> +                                 s->rnmi_irqvec[idx]);
-> +        }
-> +
-> +        if (s->rnmi_excpvec) {
-> +            qdev_prop_set_uint64(DEVICE(&s->harts[idx]),
-> +                                 "rnmi-exception-vector",
-> +                                 s->rnmi_excpvec[idx]);
-> +        }
-> +    }
-> +
->      s->harts[idx].env.mhartid =3D s->hartid_base + idx;
->      qemu_register_reset(riscv_harts_cpu_reset, &s->harts[idx]);
->      return qdev_realize(DEVICE(&s->harts[idx]), NULL, errp);
-> diff --git a/include/hw/riscv/riscv_hart.h b/include/hw/riscv/riscv_hart.=
-h
-> index bbc21cdc9a..99c0ac5009 100644
-> --- a/include/hw/riscv/riscv_hart.h
-> +++ b/include/hw/riscv/riscv_hart.h
-> @@ -38,6 +38,10 @@ struct RISCVHartArrayState {
->      uint32_t hartid_base;
->      char *cpu_type;
->      uint64_t resetvec;
-> +    uint32_t num_rnmi_irqvec;
-> +    uint64_t *rnmi_irqvec;
-> +    uint32_t num_rnmi_excpvec;
-> +    uint64_t *rnmi_excpvec;
->      RISCVCPU *harts;
->  };
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index db0875fb43..c8dc0eaa87 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -119,6 +119,7 @@ static const struct isa_ext_data isa_edata_arr[] =3D =
-{
->      ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
->      ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
->      ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
-> +    ISA_EXT_DATA_ENTRY(smrnmi, PRIV_VERSION_1_12_0, ext_smrnmi),
 
-The extension should be added after the implementation, so this patch
-should be the last patch.
+On 2023/6/12 12:35, Weiwei Li wrote:
+>
+> On 2023/6/12 11:18, LIU Zhiwei wrote:
+>>
+>> On 2023/6/12 11:16, Weiwei Li wrote:
+>>>
+>>> On 2023/6/12 11:08, LIU Zhiwei wrote:
+>>>>
+>>>> On 2023/5/29 20:17, Weiwei Li wrote:
+>>>>> MPV and GVA bits are added by hypervisor extension to mstatus
+>>>>> and mstatush (if MXLEN=32).
+>>>>
+>>>> Have you found the CSR field specifications for them, especially 
+>>>> for GVA.
+>>>
+>>> Yeah.  in the section 9.4.1 of the privilege spec:
+>>>
+>>> "/The hypervisor extension adds two fields, MPV and GVA, to the 
+>>> machine-level mstatus or mstatush CSR/".
+>>
+>> I mean the WARL or other CSR field specifications here.
+>
+> I don't quite get your idea. The only specification for MPV and GVA  I 
+> found is in section 9.4.1.  The spec for most of mstatus fields can be 
+> found in  Section 3.1.6
+> "Machine Status Registers (mstatus and mstatush)".
 
-Alistair
+I mean is the GVA field read only or WARL(WPRI or WLRL) for the 
+software? It could be written by the implementation. But I am not sure 
+whether it could be written by the software.
 
->      ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
->      ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
->      ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
-> @@ -1404,6 +1405,11 @@ static void riscv_cpu_set_irq(void *opaque, int ir=
-q, int level)
->          g_assert_not_reached();
->      }
->  }
-> +
-> +static void riscv_cpu_set_nmi(void *opaque, int irq, int level)
-> +{
-> +    riscv_cpu_set_rnmi(RISCV_CPU(opaque), irq, level);
-> +}
->  #endif /* CONFIG_USER_ONLY */
+Zhiwei
+
 >
->  static void riscv_cpu_init(Object *obj)
-> @@ -1420,6 +1426,8 @@ static void riscv_cpu_init(Object *obj)
->  #ifndef CONFIG_USER_ONLY
->      qdev_init_gpio_in(DEVICE(cpu), riscv_cpu_set_irq,
->                        IRQ_LOCAL_MAX + IRQ_LOCAL_GUEST_MAX);
-> +    qdev_init_gpio_in_named(DEVICE(cpu), riscv_cpu_set_nmi,
-> +                            "riscv.cpu.rnmi", RNMI_MAX);
->  #endif /* CONFIG_USER_ONLY */
->  }
+> Regards,
 >
-> @@ -1600,6 +1608,7 @@ static Property riscv_cpu_extensions[] =3D {
->      DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
->      DEFINE_PROP_BOOL("x-smaia", RISCVCPU, cfg.ext_smaia, false),
->      DEFINE_PROP_BOOL("x-ssaia", RISCVCPU, cfg.ext_ssaia, false),
-> +    DEFINE_PROP_BOOL("x-smrnmi", RISCVCPU, cfg.ext_smrnmi, false),
+> Weiwei Li
 >
->      DEFINE_PROP_BOOL("x-zvfh", RISCVCPU, cfg.ext_zvfh, false),
->      DEFINE_PROP_BOOL("x-zvfhmin", RISCVCPU, cfg.ext_zvfhmin, false),
-> @@ -1644,6 +1653,10 @@ static Property riscv_cpu_properties[] =3D {
->
->      DEFINE_PROP_BOOL("rvv_ta_all_1s", RISCVCPU, cfg.rvv_ta_all_1s, false=
-),
->      DEFINE_PROP_BOOL("rvv_ma_all_1s", RISCVCPU, cfg.rvv_ma_all_1s, false=
-),
-> +    DEFINE_PROP_UINT64("rnmi-interrupt-vector", RISCVCPU, env.rnmi_irqve=
-c,
-> +                       DEFAULT_RNMI_IRQVEC),
-> +    DEFINE_PROP_UINT64("rnmi-exception-vector", RISCVCPU, env.rnmi_excpv=
-ec,
-> +                       DEFAULT_RNMI_EXCPVEC),
->
->      /*
->       * write_misa() is marked as experimental for now so mark
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index de7e43126a..6c14b93cb5 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -366,6 +366,11 @@ struct CPUArchState {
->      uint64_t kvm_timer_compare;
->      uint64_t kvm_timer_state;
->      uint64_t kvm_timer_frequency;
-> +
-> +    /* RNMI */
-> +    target_ulong rnmip;
-> +    uint64_t rnmi_irqvec;
-> +    uint64_t rnmi_excpvec;
->  };
->
->  /*
-> @@ -436,6 +441,7 @@ struct RISCVCPUConfig {
->      bool ext_smaia;
->      bool ext_ssaia;
->      bool ext_sscofpmf;
-> +    bool ext_smrnmi;
->      bool rvv_ta_all_1s;
->      bool rvv_ma_all_1s;
->
-> @@ -562,6 +568,7 @@ void riscv_cpu_swap_hypervisor_regs(CPURISCVState *en=
-v);
->  int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint64_t interrupts);
->  uint64_t riscv_cpu_update_mip(CPURISCVState *env, uint64_t mask,
->                                uint64_t value);
-> +void riscv_cpu_set_rnmi(RISCVCPU *cpu, uint32_t irq, bool level);
->  #define BOOL_TO_MASK(x) (-!!(x)) /* helper for riscv_cpu_update_mip valu=
-e */
->  void riscv_cpu_set_rdtime_fn(CPURISCVState *env, uint64_t (*fn)(void *),
->                               void *arg);
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 59f0ffd9e1..7cb43b88f3 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -659,6 +659,12 @@ typedef enum {
->  /* Default Reset Vector adress */
->  #define DEFAULT_RSTVEC      0x1000
->
-> +/* Default RNMI Interrupt Vector address */
-> +#define DEFAULT_RNMI_IRQVEC     0x0
-> +
-> +/* Default RNMI Exception Vector address */
-> +#define DEFAULT_RNMI_EXCPVEC    0x0
-> +
->  /* Exception causes */
->  typedef enum RISCVException {
->      RISCV_EXCP_NONE =3D -1, /* sentinel value */
-> @@ -705,6 +711,9 @@ typedef enum RISCVException {
->  #define IRQ_LOCAL_MAX                      16
->  #define IRQ_LOCAL_GUEST_MAX                (TARGET_LONG_BITS - 1)
->
-> +/* RNMI causes */
-> +#define RNMI_MAX                           16
-> +
->  /* mip masks */
->  #define MIP_USIP                           (1 << IRQ_U_SOFT)
->  #define MIP_SSIP                           (1 << IRQ_S_SOFT)
-> @@ -896,6 +905,9 @@ typedef enum RISCVException {
->  #define MHPMEVENT_IDX_MASK                 0xFFFFF
->  #define MHPMEVENT_SSCOF_RESVD              16
->
-> +/* RISC-V-specific interrupt pending bits. */
-> +#define CPU_INTERRUPT_RNMI                 CPU_INTERRUPT_TGT_EXT_0
-> +
->  /* JVT CSR bits */
->  #define JVT_MODE                           0x3F
->  #define JVT_BASE                           (~0x3F)
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 56381aaf26..da477b6c99 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -636,6 +636,30 @@ uint64_t riscv_cpu_update_mip(CPURISCVState *env, ui=
-nt64_t mask,
->      return old;
->  }
->
-> +void riscv_cpu_set_rnmi(RISCVCPU *cpu, uint32_t irq, bool level)
-> +{
-> +    CPURISCVState *env =3D &cpu->env;
-> +    CPUState *cs =3D CPU(cpu);
-> +    bool release_lock =3D false;
-> +
-> +    if (!qemu_mutex_iothread_locked()) {
-> +        release_lock =3D true;
-> +        qemu_mutex_lock_iothread();
-> +    }
-> +
-> +    if (level) {
-> +        env->rnmip |=3D 1 << irq;
-> +        cpu_interrupt(cs, CPU_INTERRUPT_RNMI);
-> +    } else {
-> +        env->rnmip &=3D ~(1 << irq);
-> +        cpu_reset_interrupt(cs, CPU_INTERRUPT_RNMI);
-> +    }
-> +
-> +    if (release_lock) {
-> +        qemu_mutex_unlock_iothread();
-> +    }
-> +}
-> +
->  void riscv_cpu_set_rdtime_fn(CPURISCVState *env, uint64_t (*fn)(void *),
->                               void *arg)
->  {
-> --
-> 2.31.1
->
->
+>>
+>> Zhiwei
+>>
+>>>
+>>> Regards,
+>>>
+>>> Weiwei Li
+>>>
+>>>>
+>>>> Zhiwei
+>>>>
+>>>>>
+>>>>> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+>>>>> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+>>>>> ---
+>>>>>   target/riscv/csr.c | 10 ++++------
+>>>>>   1 file changed, 4 insertions(+), 6 deletions(-)
+>>>>>
+>>>>> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+>>>>> index 58499b5afc..6ac11d1f11 100644
+>>>>> --- a/target/riscv/csr.c
+>>>>> +++ b/target/riscv/csr.c
+>>>>> @@ -1311,11 +1311,9 @@ static RISCVException 
+>>>>> write_mstatus(CPURISCVState *env, int csrno,
+>>>>>       }
+>>>>>         if (xl != MXL_RV32 || env->debugger) {
+>>>>> -        /*
+>>>>> -         * RV32: MPV and GVA are not in mstatus. The current plan 
+>>>>> is to
+>>>>> -         * add them to mstatush. For now, we just don't support it.
+>>>>> -         */
+>>>>> -        mask |= MSTATUS_MPV | MSTATUS_GVA;
+>>>>> +        if (riscv_has_ext(env, RVH)) {
+>>>>> +            mask |= MSTATUS_MPV | MSTATUS_GVA;
+>>>>> +        }
+>>>>>           if ((val & MSTATUS64_UXL) != 0) {
+>>>>>               mask |= MSTATUS64_UXL;
+>>>>>           }
+>>>>> @@ -1351,7 +1349,7 @@ static RISCVException 
+>>>>> write_mstatush(CPURISCVState *env, int csrno,
+>>>>>                                        target_ulong val)
+>>>>>   {
+>>>>>       uint64_t valh = (uint64_t)val << 32;
+>>>>> -    uint64_t mask = MSTATUS_MPV | MSTATUS_GVA;
+>>>>> +    uint64_t mask = riscv_has_ext(env, RVH) ? MSTATUS_MPV | 
+>>>>> MSTATUS_GVA : 0;
+>>>>>         env->mstatus = (env->mstatus & ~mask) | (valh & mask);
 
