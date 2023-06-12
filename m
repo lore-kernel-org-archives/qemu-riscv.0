@@ -4,57 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75DCDC7EE23
-	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Jun 2023 03:19:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6521C7EE23
+	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Jun 2023 03:22:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q8Y5O-0003aB-QW; Sun, 11 Jun 2023 23:19:19 -0400
+	id 1q8Y7x-0004Uc-Oq; Sun, 11 Jun 2023 23:21:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1q8Y5N-0003Zk-OI; Sun, 11 Jun 2023 23:19:17 -0400
-Received: from out30-100.freemail.mail.aliyun.com ([115.124.30.100])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1q8Y5L-0003AA-Ko; Sun, 11 Jun 2023 23:19:17 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R171e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
- TI=SMTPD_---0VkqfrK7_1686539941; 
-Received: from 30.221.96.167(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VkqfrK7_1686539941) by smtp.aliyun-inc.com;
- Mon, 12 Jun 2023 11:19:02 +0800
-Message-ID: <ad06f409-5f14-75ea-9f9c-65a4b8596a3a@linux.alibaba.com>
-Date: Mon, 12 Jun 2023 11:18:42 +0800
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1q8Y7w-0004UI-Ig; Sun, 11 Jun 2023 23:21:56 -0400
+Received: from mail-vk1-xa2f.google.com ([2607:f8b0:4864:20::a2f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1q8Y7u-0004Mm-It; Sun, 11 Jun 2023 23:21:56 -0400
+Received: by mail-vk1-xa2f.google.com with SMTP id
+ 71dfb90a1353d-462a2998bceso1161382e0c.2; 
+ Sun, 11 Jun 2023 20:21:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1686540112; x=1689132112;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Pq9afIScTSaxD+ourO03PzcvbCQ40DM5fFlfdoXj2kU=;
+ b=MBdM0/UgWiFMPDueCuU2ZQcV0d1NGNw/uIHudB5ZYTid0eYSu35isdAl3i9SWgJ7ZZ
+ 7wsbWnMt38NT271k7ba2P2L7GAQ+7m8FWbNTSXLnyMLvnqJxFLq3WddNbIQ21dZlFtsp
+ 6U9lSSR+OKBOHXALyZ1OiUDm2ROIZa+ayiMZpTCDTrmt2f0dh50OHVEqypHvRZWDP6bi
+ 8XstMBeDwQzW8paAD6Y06ddni8AfTWUrXI2mvFdjOigaE/dEXeYB0UzCAb24pqYPTWT2
+ 8Yz1oyNt1Pmi2QfULa5y7lqTrbcPGvQ+Sdj7whktkHY8uhBV8JlkEcJ93tVxa0lXkNH1
+ dkXg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1686540112; x=1689132112;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Pq9afIScTSaxD+ourO03PzcvbCQ40DM5fFlfdoXj2kU=;
+ b=hIZ2DsJwDp7L/9n5pOqAERMa1K4qykDlelOAE5F//dS8iZRlSTqkguZLzpEhxr+UXF
+ jAOsx77cuzAFMKBE73rrvbQ0zK6XiPiZDwVPdUlmdXp+IeE38VvB7+3CPVLJhi5rBywa
+ mcPwHZpi1weW/6R5N4k6caQUcV6alcR72OttI4co8jB9UdzNzW0y25rmK1Sv+Wj7RJET
+ RpAqdwCyAeilI+VsGkUhTIJ4feMSrs1kA+JeM/KXYLwwDhlQ4By7u8C8Zh03m6icjZSU
+ mCByYVyIPpczzSGLMoHQSanN0VTfCCfl/gGWWq1eDYOXD1kkM6ZVNTknB1meASPWMFS5
+ cong==
+X-Gm-Message-State: AC+VfDxiZ2RgiicvbY+i5UeguKbBNX5GRx7iCnffl9iYplpv6Nl9mWuB
+ 7w6yK9k6WWxTqqHPHI+3fmaIpJk5XIJgGPqgBK8=
+X-Google-Smtp-Source: ACHHUZ6lfn+EkuVGARiVsncioZLkp0VU4A0r1i9CrJtfgSzp4V/5QLG0ZunvSPu9J2NcqemwI862FUxFmUlzk6AOfuU=
+X-Received: by 2002:a1f:cac3:0:b0:464:6be9:9f3d with SMTP id
+ a186-20020a1fcac3000000b004646be99f3dmr3193763vkg.14.1686540112293; Sun, 11
+ Jun 2023 20:21:52 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Subject: Re: [PATCH 3/4] target/riscv: Support MSTATUS.MPV/GVA only when RVH
- is enabled
-Content-Language: en-US
-To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- dbarboza@ventanamicro.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-References: <20230529121719.179507-1-liweiwei@iscas.ac.cn>
- <20230529121719.179507-4-liweiwei@iscas.ac.cn>
- <7b8bc5a7-ccc1-a764-cb55-706b62a36a37@linux.alibaba.com>
- <91eb4769-bfc3-23da-0a97-cd91a93ec936@iscas.ac.cn>
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <91eb4769-bfc3-23da-0a97-cd91a93ec936@iscas.ac.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.100;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-100.freemail.mail.aliyun.com
-X-Spam_score_int: -99
-X-Spam_score: -10.0
-X-Spam_bar: ----------
-X-Spam_report: (-10.0 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- NICE_REPLY_A=-0.093, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+References: <20230530131843.1186637-1-christoph.muellner@vrull.eu>
+ <20230530131843.1186637-3-christoph.muellner@vrull.eu>
+In-Reply-To: <20230530131843.1186637-3-christoph.muellner@vrull.eu>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 12 Jun 2023 13:21:26 +1000
+Message-ID: <CAKmqyKN=59chkcdHqL7A4NgcHGqZBgmnBQ-GZ5kSBy61-6Rgtg@mail.gmail.com>
+Subject: Re: [PATCH 2/9] target/riscv: Factor out RISCVCPUConfig from cpu.h
+To: Christoph Muellner <christoph.muellner@vrull.eu>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Zhiwei Liu <zhiwei_liu@linux.alibaba.com>, 
+ Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2f;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2f.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -70,69 +94,392 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Tue, May 30, 2023 at 11:21=E2=80=AFPM Christoph Muellner
+<christoph.muellner@vrull.eu> wrote:
+>
+> From: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
+>
+> The file target/riscv/cpu.h cannot be included by files outside
+> of target/riscv/. To share data with other parts of QEMU (e.g.
+> the disassembler) we need to factor out the relevant code.
+> Therefore, this patch moves the definition of RISCVCPUConfig
+> (and tightly coupled dependencies and functions) into its
+> own target/riscv/cpu-config.h file.
+> The goal is to be able to share the enablement-status of
+> the RISC-V ISA extensions (RISCVCPUConfig::ext_*) with
+> other parts of QEMU.
+>
+> This patch does not introduce new functionality.
+> However, the patch includes a small change:
+> The parameter for the extension test functions has been changed
+> from 'DisasContext*' to 'const RISCVCPUConfig*'.
+> This allows to keep these functions in cpu-config.h.
+>
+> Signed-off-by: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
 
-On 2023/6/12 11:16, Weiwei Li wrote:
->
-> On 2023/6/12 11:08, LIU Zhiwei wrote:
->>
->> On 2023/5/29 20:17, Weiwei Li wrote:
->>> MPV and GVA bits are added by hypervisor extension to mstatus
->>> and mstatush (if MXLEN=32).
->>
->> Have you found the CSR field specifications for them, especially for 
->> GVA.
->
-> Yeah.  in the section 9.4.1 of the privilege spec:
->
-> "/The hypervisor extension adds two fields, MPV and GVA, to the 
-> machine-level mstatus or mstatush CSR/".
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-I mean the WARL or other CSR field specifications here.
+Alistair
 
-Zhiwei
-
+> ---
+>  target/riscv/cpu-config.h | 148 ++++++++++++++++++++++++++++++++++++++
+>  target/riscv/cpu.h        | 114 +----------------------------
+>  target/riscv/translate.c  |  27 +------
+>  3 files changed, 151 insertions(+), 138 deletions(-)
+>  create mode 100644 target/riscv/cpu-config.h
 >
-> Regards,
+> diff --git a/target/riscv/cpu-config.h b/target/riscv/cpu-config.h
+> new file mode 100644
+> index 0000000000..ca368af0b2
+> --- /dev/null
+> +++ b/target/riscv/cpu-config.h
+> @@ -0,0 +1,148 @@
+> +/*
+> + * QEMU RISC-V CPU Config
+> + *
+> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + */
+> +
+> +#ifndef RISCV_CPU_CONFIG_H
+> +#define RISCV_CPU_CONFIG_H
+> +
+> +/*
+> + * map is a 16-bit bitmap: the most significant set bit in map is the ma=
+ximum
+> + * satp mode that is supported. It may be chosen by the user and must re=
+spect
+> + * what qemu implements (valid_1_10_32/64) and what the hw is capable of
+> + * (supported bitmap below).
+> + *
+> + * init is a 16-bit bitmap used to make sure the user selected a correct
+> + * configuration as per the specification.
+> + *
+> + * supported is a 16-bit bitmap used to reflect the hw capabilities.
+> + */
+> +typedef struct {
+> +    uint16_t map, init, supported;
+> +} RISCVSATPMap;
+> +
+> +struct RISCVCPUConfig {
+> +    bool ext_zba;
+> +    bool ext_zbb;
+> +    bool ext_zbc;
+> +    bool ext_zbkb;
+> +    bool ext_zbkc;
+> +    bool ext_zbkx;
+> +    bool ext_zbs;
+> +    bool ext_zca;
+> +    bool ext_zcb;
+> +    bool ext_zcd;
+> +    bool ext_zce;
+> +    bool ext_zcf;
+> +    bool ext_zcmp;
+> +    bool ext_zcmt;
+> +    bool ext_zk;
+> +    bool ext_zkn;
+> +    bool ext_zknd;
+> +    bool ext_zkne;
+> +    bool ext_zknh;
+> +    bool ext_zkr;
+> +    bool ext_zks;
+> +    bool ext_zksed;
+> +    bool ext_zksh;
+> +    bool ext_zkt;
+> +    bool ext_ifencei;
+> +    bool ext_icsr;
+> +    bool ext_icbom;
+> +    bool ext_icboz;
+> +    bool ext_zicond;
+> +    bool ext_zihintpause;
+> +    bool ext_smstateen;
+> +    bool ext_sstc;
+> +    bool ext_svadu;
+> +    bool ext_svinval;
+> +    bool ext_svnapot;
+> +    bool ext_svpbmt;
+> +    bool ext_zdinx;
+> +    bool ext_zawrs;
+> +    bool ext_zfh;
+> +    bool ext_zfhmin;
+> +    bool ext_zfinx;
+> +    bool ext_zhinx;
+> +    bool ext_zhinxmin;
+> +    bool ext_zve32f;
+> +    bool ext_zve64f;
+> +    bool ext_zve64d;
+> +    bool ext_zmmul;
+> +    bool ext_zvfh;
+> +    bool ext_zvfhmin;
+> +    bool ext_smaia;
+> +    bool ext_ssaia;
+> +    bool ext_sscofpmf;
+> +    bool rvv_ta_all_1s;
+> +    bool rvv_ma_all_1s;
+> +
+> +    uint32_t mvendorid;
+> +    uint64_t marchid;
+> +    uint64_t mimpid;
+> +
+> +    /* Vendor-specific custom extensions */
+> +    bool ext_xtheadba;
+> +    bool ext_xtheadbb;
+> +    bool ext_xtheadbs;
+> +    bool ext_xtheadcmo;
+> +    bool ext_xtheadcondmov;
+> +    bool ext_xtheadfmemidx;
+> +    bool ext_xtheadfmv;
+> +    bool ext_xtheadmac;
+> +    bool ext_xtheadmemidx;
+> +    bool ext_xtheadmempair;
+> +    bool ext_xtheadsync;
+> +    bool ext_XVentanaCondOps;
+> +
+> +    uint8_t pmu_num;
+> +    char *priv_spec;
+> +    char *user_spec;
+> +    char *bext_spec;
+> +    char *vext_spec;
+> +    uint16_t vlen;
+> +    uint16_t elen;
+> +    uint16_t cbom_blocksize;
+> +    uint16_t cboz_blocksize;
+> +    bool mmu;
+> +    bool pmp;
+> +    bool epmp;
+> +    bool debug;
+> +    bool misa_w;
+> +
+> +    bool short_isa_string;
+> +
+> +#ifndef CONFIG_USER_ONLY
+> +    RISCVSATPMap satp_mode;
+> +#endif
+> +};
+> +
+> +typedef struct RISCVCPUConfig RISCVCPUConfig;
+> +
+> +/* Helper functions to test for extensions.  */
+> +
+> +static inline bool always_true_p(const RISCVCPUConfig *cfg __attribute__=
+((__unused__)))
+> +{
+> +    return true;
+> +}
+> +
+> +static inline bool has_xthead_p(const RISCVCPUConfig *cfg)
+> +{
+> +    return cfg->ext_xtheadba || cfg->ext_xtheadbb ||
+> +           cfg->ext_xtheadbs || cfg->ext_xtheadcmo ||
+> +           cfg->ext_xtheadcondmov ||
+> +           cfg->ext_xtheadfmemidx || cfg->ext_xtheadfmv ||
+> +           cfg->ext_xtheadmac || cfg->ext_xtheadmemidx ||
+> +           cfg->ext_xtheadmempair || cfg->ext_xtheadsync;
+> +}
+> +
+> +#define MATERIALISE_EXT_PREDICATE(ext) \
+> +    static inline bool has_ ## ext ## _p(const RISCVCPUConfig *cfg) \
+> +    { \
+> +        return cfg->ext_ ## ext ; \
+> +    }
+> +
+> +MATERIALISE_EXT_PREDICATE(XVentanaCondOps)
+> +
+> +#endif /* RISCV_CPU_CONFIG_H */
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index de7e43126a..895a307bad 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -28,6 +28,7 @@
+>  #include "qemu/int128.h"
+>  #include "cpu_bits.h"
+>  #include "qapi/qapi-types-common.h"
+> +#include "cpu-config.h"
+>  #include "cpu-qom.h"
 >
-> Weiwei Li
+>  #define TCG_GUEST_DEFAULT_MO 0
+> @@ -368,119 +369,6 @@ struct CPUArchState {
+>      uint64_t kvm_timer_frequency;
+>  };
 >
->>
->> Zhiwei
->>
->>>
->>> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
->>> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
->>> ---
->>>   target/riscv/csr.c | 10 ++++------
->>>   1 file changed, 4 insertions(+), 6 deletions(-)
->>>
->>> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->>> index 58499b5afc..6ac11d1f11 100644
->>> --- a/target/riscv/csr.c
->>> +++ b/target/riscv/csr.c
->>> @@ -1311,11 +1311,9 @@ static RISCVException 
->>> write_mstatus(CPURISCVState *env, int csrno,
->>>       }
->>>         if (xl != MXL_RV32 || env->debugger) {
->>> -        /*
->>> -         * RV32: MPV and GVA are not in mstatus. The current plan 
->>> is to
->>> -         * add them to mstatush. For now, we just don't support it.
->>> -         */
->>> -        mask |= MSTATUS_MPV | MSTATUS_GVA;
->>> +        if (riscv_has_ext(env, RVH)) {
->>> +            mask |= MSTATUS_MPV | MSTATUS_GVA;
->>> +        }
->>>           if ((val & MSTATUS64_UXL) != 0) {
->>>               mask |= MSTATUS64_UXL;
->>>           }
->>> @@ -1351,7 +1349,7 @@ static RISCVException 
->>> write_mstatush(CPURISCVState *env, int csrno,
->>>                                        target_ulong val)
->>>   {
->>>       uint64_t valh = (uint64_t)val << 32;
->>> -    uint64_t mask = MSTATUS_MPV | MSTATUS_GVA;
->>> +    uint64_t mask = riscv_has_ext(env, RVH) ? MSTATUS_MPV | 
->>> MSTATUS_GVA : 0;
->>>         env->mstatus = (env->mstatus & ~mask) | (valh & mask);
+> -/*
+> - * map is a 16-bit bitmap: the most significant set bit in map is the ma=
+ximum
+> - * satp mode that is supported. It may be chosen by the user and must re=
+spect
+> - * what qemu implements (valid_1_10_32/64) and what the hw is capable of
+> - * (supported bitmap below).
+> - *
+> - * init is a 16-bit bitmap used to make sure the user selected a correct
+> - * configuration as per the specification.
+> - *
+> - * supported is a 16-bit bitmap used to reflect the hw capabilities.
+> - */
+> -typedef struct {
+> -    uint16_t map, init, supported;
+> -} RISCVSATPMap;
+> -
+> -struct RISCVCPUConfig {
+> -    bool ext_zba;
+> -    bool ext_zbb;
+> -    bool ext_zbc;
+> -    bool ext_zbkb;
+> -    bool ext_zbkc;
+> -    bool ext_zbkx;
+> -    bool ext_zbs;
+> -    bool ext_zca;
+> -    bool ext_zcb;
+> -    bool ext_zcd;
+> -    bool ext_zce;
+> -    bool ext_zcf;
+> -    bool ext_zcmp;
+> -    bool ext_zcmt;
+> -    bool ext_zk;
+> -    bool ext_zkn;
+> -    bool ext_zknd;
+> -    bool ext_zkne;
+> -    bool ext_zknh;
+> -    bool ext_zkr;
+> -    bool ext_zks;
+> -    bool ext_zksed;
+> -    bool ext_zksh;
+> -    bool ext_zkt;
+> -    bool ext_ifencei;
+> -    bool ext_icsr;
+> -    bool ext_icbom;
+> -    bool ext_icboz;
+> -    bool ext_zicond;
+> -    bool ext_zihintpause;
+> -    bool ext_smstateen;
+> -    bool ext_sstc;
+> -    bool ext_svadu;
+> -    bool ext_svinval;
+> -    bool ext_svnapot;
+> -    bool ext_svpbmt;
+> -    bool ext_zdinx;
+> -    bool ext_zawrs;
+> -    bool ext_zfh;
+> -    bool ext_zfhmin;
+> -    bool ext_zfinx;
+> -    bool ext_zhinx;
+> -    bool ext_zhinxmin;
+> -    bool ext_zve32f;
+> -    bool ext_zve64f;
+> -    bool ext_zve64d;
+> -    bool ext_zmmul;
+> -    bool ext_zvfh;
+> -    bool ext_zvfhmin;
+> -    bool ext_smaia;
+> -    bool ext_ssaia;
+> -    bool ext_sscofpmf;
+> -    bool rvv_ta_all_1s;
+> -    bool rvv_ma_all_1s;
+> -
+> -    uint32_t mvendorid;
+> -    uint64_t marchid;
+> -    uint64_t mimpid;
+> -
+> -    /* Vendor-specific custom extensions */
+> -    bool ext_xtheadba;
+> -    bool ext_xtheadbb;
+> -    bool ext_xtheadbs;
+> -    bool ext_xtheadcmo;
+> -    bool ext_xtheadcondmov;
+> -    bool ext_xtheadfmemidx;
+> -    bool ext_xtheadfmv;
+> -    bool ext_xtheadmac;
+> -    bool ext_xtheadmemidx;
+> -    bool ext_xtheadmempair;
+> -    bool ext_xtheadsync;
+> -    bool ext_XVentanaCondOps;
+> -
+> -    uint8_t pmu_num;
+> -    char *priv_spec;
+> -    char *user_spec;
+> -    char *bext_spec;
+> -    char *vext_spec;
+> -    uint16_t vlen;
+> -    uint16_t elen;
+> -    uint16_t cbom_blocksize;
+> -    uint16_t cboz_blocksize;
+> -    bool mmu;
+> -    bool pmp;
+> -    bool epmp;
+> -    bool debug;
+> -    bool misa_w;
+> -
+> -    bool short_isa_string;
+> -
+> -#ifndef CONFIG_USER_ONLY
+> -    RISCVSATPMap satp_mode;
+> -#endif
+> -};
+> -
+> -typedef struct RISCVCPUConfig RISCVCPUConfig;
+> -
+>  /*
+>   * RISCVCPU:
+>   * @env: #CPURISCVState
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 928da0d3f0..2697cc26d0 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -119,29 +119,6 @@ static inline bool has_ext(DisasContext *ctx, uint32=
+_t ext)
+>      return ctx->misa_ext & ext;
+>  }
+>
+> -static bool always_true_p(DisasContext *ctx  __attribute__((__unused__))=
+)
+> -{
+> -    return true;
+> -}
+> -
+> -static bool has_xthead_p(DisasContext *ctx  __attribute__((__unused__)))
+> -{
+> -    return ctx->cfg_ptr->ext_xtheadba || ctx->cfg_ptr->ext_xtheadbb ||
+> -           ctx->cfg_ptr->ext_xtheadbs || ctx->cfg_ptr->ext_xtheadcmo ||
+> -           ctx->cfg_ptr->ext_xtheadcondmov ||
+> -           ctx->cfg_ptr->ext_xtheadfmemidx || ctx->cfg_ptr->ext_xtheadfm=
+v ||
+> -           ctx->cfg_ptr->ext_xtheadmac || ctx->cfg_ptr->ext_xtheadmemidx=
+ ||
+> -           ctx->cfg_ptr->ext_xtheadmempair || ctx->cfg_ptr->ext_xtheadsy=
+nc;
+> -}
+> -
+> -#define MATERIALISE_EXT_PREDICATE(ext)  \
+> -    static bool has_ ## ext ## _p(DisasContext *ctx)    \
+> -    { \
+> -        return ctx->cfg_ptr->ext_ ## ext ; \
+> -    }
+> -
+> -MATERIALISE_EXT_PREDICATE(XVentanaCondOps);
+> -
+>  #ifdef TARGET_RISCV32
+>  #define get_xl(ctx)    MXL_RV32
+>  #elif defined(CONFIG_USER_ONLY)
+> @@ -1106,7 +1083,7 @@ static void decode_opc(CPURISCVState *env, DisasCon=
+text *ctx, uint16_t opcode)
+>       * that are tested in-order until a decoder matches onto the opcode.
+>       */
+>      static const struct {
+> -        bool (*guard_func)(DisasContext *);
+> +        bool (*guard_func)(const RISCVCPUConfig *);
+>          bool (*decode_func)(DisasContext *, uint32_t);
+>      } decoders[] =3D {
+>          { always_true_p,  decode_insn32 },
+> @@ -1135,7 +1112,7 @@ static void decode_opc(CPURISCVState *env, DisasCon=
+text *ctx, uint16_t opcode)
+>          ctx->pc_succ_insn =3D ctx->base.pc_next + 4;
+>
+>          for (size_t i =3D 0; i < ARRAY_SIZE(decoders); ++i) {
+> -            if (decoders[i].guard_func(ctx) &&
+> +            if (decoders[i].guard_func(ctx->cfg_ptr) &&
+>                  decoders[i].decode_func(ctx, opcode32)) {
+>                  return;
+>              }
+> --
+> 2.40.1
+>
+>
 
