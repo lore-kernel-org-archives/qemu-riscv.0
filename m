@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B7EBC7EE2E
-	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Jun 2023 04:06:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA765C7EE25
+	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Jun 2023 04:12:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q8Yob-0002l4-8G; Mon, 12 Jun 2023 00:06:01 -0400
+	id 1q8YuF-0003kb-Qq; Mon, 12 Jun 2023 00:11:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q8YoC-0002gz-VD; Mon, 12 Jun 2023 00:05:46 -0400
-Received: from mail-vk1-xa2e.google.com ([2607:f8b0:4864:20::a2e])
+ id 1q8YuA-0003jm-AV; Mon, 12 Jun 2023 00:11:47 -0400
+Received: from mail-ua1-x92e.google.com ([2607:f8b0:4864:20::92e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q8Yo7-0006bq-Ol; Mon, 12 Jun 2023 00:05:35 -0400
-Received: by mail-vk1-xa2e.google.com with SMTP id
- 71dfb90a1353d-45eabad43c4so1548782e0c.3; 
- Sun, 11 Jun 2023 21:05:31 -0700 (PDT)
+ id 1q8Yu8-00086W-92; Mon, 12 Jun 2023 00:11:45 -0400
+Received: by mail-ua1-x92e.google.com with SMTP id
+ a1e0cc1a2514c-786e637f06dso1338740241.2; 
+ Sun, 11 Jun 2023 21:11:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1686542730; x=1689134730;
+ d=gmail.com; s=20221208; t=1686543103; x=1689135103;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=knGD8Qo8E0F8XDKD5vx5h5+Sd7hS8F9TjerkqIUq6yk=;
- b=Ucr2JKq7kXfbXa6+S+Po0pmqflExvwUsqtGNyPVHNs3IdznjJK2kEzOV4NjsKK0IJG
- DqMTEagflGZp61Ofp8IIgZ3eob1QeldGSCYQZYciDHFDhPvOIBk5wxbx5UHhjFrN3aNu
- 5dul9Xs2CFneEqAtpysHnalE+2IkY9g0KTZGGsacCCyPSIMkd9zQsIiF4/qrbwDABNk3
- HZdsmNBGYJWiA5Rtd9SbfpOIPSlZm2BOxkXHwrHj27EnrMQ2HlpAqmASU/k8Qevx1+mF
- Ql7YUgZ993qagt3/+598UkhkfrfnvTX4vyyNFXNlStXfLz2hQ7hwv5zlfctf8qWpoLxQ
- 7Hew==
+ bh=qQ3xHbf4POZ0yqbsGW7+wM4C8k3ij6uEO9UMZXrKipI=;
+ b=U66qSc1pEufTwI9Mwhm0mzY7uPnL/SaC4aldnn3m+ZbY4/HF+b6TdNe8QoIEzZLA73
+ NTYXPAfuutPhYHrsFOe0qTCD6SOE+EKD1BYBbB/hU+GmiTRFY1OL/L+HwQKLA8XeZYrH
+ zLChhXIB1PHCqJZtKWw8w2zEQvvyWWd1YfwZklzff2gf6PUkFGqhqBBheLcZX1KX+grs
+ CK/bxI0ND4QkNSZwZ0D+/Na1d73Ub+2iyXKvcHMGiGXVTCmUF3vCNM2Oo9LCAc5si5iW
+ DaXx1FVj8lnCPxLwAx9+PMOcFyh0ywmGZmX1/camH1WE/DCrZ2ZZEfoBi/HYUUd0y4sh
+ FwNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686542730; x=1689134730;
+ d=1e100.net; s=20221208; t=1686543103; x=1689135103;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=knGD8Qo8E0F8XDKD5vx5h5+Sd7hS8F9TjerkqIUq6yk=;
- b=asZm7LBFiMgDr7/cWCYIPgv6AN1aEpImLhURBr9Gwa9muXwBRHQUNkwCsf+3CMPIvl
- HzrpisvAB/BeYkd1CaTFw9ucS6DgFMLClQAOg218EpHK5R4CXwGOQBYFzoIuV5hzLdSv
- x70qiICqONQqnlHgii1ISQaHeAGuuoIj5IDD89gF1CJMbCDVXJZR9//zmvvS5aZoIZ6p
- v4Zjbyy5agcC6vWpRMFUVxEJOwYDBXD8LubYTO0Agi0FlT3MufVArLeqt9vlAJUzLhn+
- lzf8Gs+jtQ5hXQ5I3fIl0AWUoogsOslds7TnOEmUdsDOsuJkZc83h+HlPzqWi63r3mU3
- qEZw==
-X-Gm-Message-State: AC+VfDw1R4fq7Yjf354j7vrVrhnoIrdKBEgGqQt4HSYQDnqWxCed6vDf
- GbeCsPFupSTdNu7EUpEr4MgYiXY3z3FvzH2bU+0=
-X-Google-Smtp-Source: ACHHUZ7rwxPIR8AXMGphRdl7zrgr5UDizyJeIlGPhiowbHwS1EDOnBA695IsxKXVR+1rTCrY0WkQYQGwnGzpKDjHp9Y=
-X-Received: by 2002:a67:eb4c:0:b0:437:e5ce:7e8f with SMTP id
- x12-20020a67eb4c000000b00437e5ce7e8fmr3521063vso.4.1686542730388; Sun, 11 Jun
- 2023 21:05:30 -0700 (PDT)
+ bh=qQ3xHbf4POZ0yqbsGW7+wM4C8k3ij6uEO9UMZXrKipI=;
+ b=MKjOly6jb384F49dPaQsOnvX2UJrf4w8at2DaXUrUaSq9ng2d/9ggqzwTpY22pOPWb
+ uFvMDCz0W5onNRQtoTm1xPnM2YNTUSpLnKcyeApsKnBQ/RXyJd6GH+nBVfEWvNZlvwGB
+ ZLqajvY10Ie6Ys+8fzlk7ietHUsQd9oqVJXgHAMEbVR90327y8OSKrcwnsQfLu+u1xhs
+ LimlfSNYHaBeb6sBmDz/wMU9pEkEsrE4dBvpdJPQ/6o1BB4UzQFbtbKdpBUqzYUpSTnZ
+ c3J+SmGvKADOEH1Ts1PkVrDEB0A0QvvWWrbVMWWH/V86Io4g80s48kMo4cclFnmDUu8x
+ jCyg==
+X-Gm-Message-State: AC+VfDzsM8iBiqkbm5252rhqt1uVjk0uSosww23KPKUXn8hqhhJsyuxG
+ xa1FNTY4JmbfKrVFaIPA1EIn63wVHve8+uws7Ms=
+X-Google-Smtp-Source: ACHHUZ6qyzd2dlHYAj4SaFHDrxK0wMuxTV2M1GP2CLtpI1byGmpmXJU3v9spwgsJJ3s50DzORQF+XPKgYW1Z/GjPIlE=
+X-Received: by 2002:a05:6102:2da:b0:43b:4550:3a06 with SMTP id
+ h26-20020a05610202da00b0043b45503a06mr3190160vsh.31.1686543102754; Sun, 11
+ Jun 2023 21:11:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230530194623.272652-1-dbarboza@ventanamicro.com>
- <20230530194623.272652-8-dbarboza@ventanamicro.com>
-In-Reply-To: <20230530194623.272652-8-dbarboza@ventanamicro.com>
+References: <20230609055936.3925438-1-tommy.wu@sifive.com>
+In-Reply-To: <20230609055936.3925438-1-tommy.wu@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 12 Jun 2023 14:05:04 +1000
-Message-ID: <CAKmqyKMZPSMTGHQizrsMqNXqu2fQiFjuuGUmj=mxmPB5iL5-hg@mail.gmail.com>
-Subject: Re: [PATCH 07/16] target/riscv: read marchid/mimpid in
- kvm_riscv_init_machine_ids()
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
+Date: Mon, 12 Jun 2023 14:11:16 +1000
+Message-ID: <CAKmqyKMoeAn_7h=S0S=QR6YcYmvTd5VfT749Umm1BprUTrAjeg@mail.gmail.com>
+Subject: Re: [PATCH] hw/intc: If mmsiaddrcfgh.L == 1, smsiaddrcfg and
+ smsiaddrcfgh are read-only.
+To: Tommy Wu <tommy.wu@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Frank Chang <frank.chang@sifive.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Anup Patel <anup@brainfault.org>, Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Ivan Klokov <ivan.klokov@syntacore.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2e;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92e;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92e.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -91,60 +92,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, May 31, 2023 at 5:48=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Fri, Jun 9, 2023 at 4:01=E2=80=AFPM Tommy Wu <tommy.wu@sifive.com> wrote=
+:
 >
-> Allow 'marchid' and 'mimpid' to also be initialized in
-> kvm_riscv_init_machine_ids().
+> According to the `The RISC-V Advanced Interrupt Architecture`
+> document, if register `mmsiaddrcfgh` of the domain has bit L set
+> to one, then `smsiaddrcfg` and `smsiaddrcfgh` are locked as
+> read-only alongside `mmsiaddrcfg` and `mmsiaddrcfgh`.
 >
-> After this change, the handling of mvendorid/marchid/mimpid for the
-> 'host' CPU type will be equal to what we already have for TCG named
-> CPUs, i.e. the user is not able to set these values to a different val
-> than the one that is already preset.
->
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Signed-off-by: Tommy Wu <tommy.wu@sifive.com>
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
 > ---
->  target/riscv/kvm.c | 16 ++++++++++++++++
->  1 file changed, 16 insertions(+)
+>  hw/intc/riscv_aplic.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-> index 37f0f70794..cd2974c663 100644
-> --- a/target/riscv/kvm.c
-> +++ b/target/riscv/kvm.c
-> @@ -378,6 +378,22 @@ static void kvm_riscv_init_machine_ids(RISCVCPU *cpu=
-, KVMScratchCPU *kvmcpu)
->      if (ret !=3D 0) {
->          error_report("Unable to retrieve mvendorid from host, error %d",=
- ret);
->      }
-> +
-> +    reg.id =3D kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG,
-> +                              KVM_REG_RISCV_CONFIG_REG(marchid));
-> +    reg.addr =3D (uint64_t)&cpu->cfg.marchid;
-> +    ret =3D ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
-> +    if (ret !=3D 0) {
-> +        error_report("Unable to retrieve marchid from host, error %d", r=
-et);
-> +    }
-> +
-> +    reg.id =3D kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG,
-> +                              KVM_REG_RISCV_CONFIG_REG(mimpid));
-> +    reg.addr =3D (uint64_t)&cpu->cfg.mimpid;
-> +    ret =3D ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
-> +    if (ret !=3D 0) {
-> +        error_report("Unable to retrieve mimpid from host, error %d", re=
-t);
-> +    }
->  }
->
->  void kvm_riscv_init_user_properties(Object *cpu_obj)
+> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+> index afc5b54dbb..4bdc6a5d1a 100644
+> --- a/hw/intc/riscv_aplic.c
+> +++ b/hw/intc/riscv_aplic.c
+> @@ -688,13 +688,13 @@ static void riscv_aplic_write(void *opaque, hwaddr =
+addr, uint64_t value,
+>           * domains).
+>           */
+>          if (aplic->num_children &&
+> -            !(aplic->smsicfgaddrH & APLIC_xMSICFGADDRH_L)) {
+> +            !(aplic->mmsicfgaddrH & APLIC_xMSICFGADDRH_L)) {
+>              aplic->smsicfgaddr =3D value;
+>          }
+>      } else if (aplic->mmode && aplic->msimode &&
+>                 (addr =3D=3D APLIC_SMSICFGADDRH)) {
+>          if (aplic->num_children &&
+> -            !(aplic->smsicfgaddrH & APLIC_xMSICFGADDRH_L)) {
+> +            !(aplic->mmsicfgaddrH & APLIC_xMSICFGADDRH_L)) {
+>              aplic->smsicfgaddrH =3D value & APLIC_xMSICFGADDRH_VALID_MAS=
+K;
+>          }
+>      } else if ((APLIC_SETIP_BASE <=3D addr) &&
 > --
-> 2.40.1
+> 2.31.1
 >
 >
 
