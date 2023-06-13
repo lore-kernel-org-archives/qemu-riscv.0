@@ -4,73 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D810EB64D0
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Jun 2023 13:34:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95229C00057
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Jun 2023 13:28:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q94A4-0006Ch-D8; Tue, 13 Jun 2023 09:34:16 -0400
+	id 1q94Bn-0001GK-S7; Tue, 13 Jun 2023 09:36:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q94A3-0006CS-0A
- for qemu-riscv@nongnu.org; Tue, 13 Jun 2023 09:34:15 -0400
-Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q94Bm-00015g-4S
+ for qemu-riscv@nongnu.org; Tue, 13 Jun 2023 09:36:02 -0400
+Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q94A0-00021J-TH
- for qemu-riscv@nongnu.org; Tue, 13 Jun 2023 09:34:14 -0400
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-9741caaf9d4so811070166b.0
- for <qemu-riscv@nongnu.org>; Tue, 13 Jun 2023 06:34:12 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q94Bj-0002cy-U2
+ for qemu-riscv@nongnu.org; Tue, 13 Jun 2023 09:36:01 -0400
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-4f658a17aa4so5951632e87.0
+ for <qemu-riscv@nongnu.org>; Tue, 13 Jun 2023 06:35:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1686663251; x=1689255251;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=gBFSVqesPLYVNvOpKpmvg4XLW+9gcOy7P9MjR5bQqc0=;
- b=eBMpvCWDRgAGb497ldgG467Ib67WHof5rqsmbhIbDLRcBMQE4SdLHgNOWTEB4f7M7D
- fYFoRAVipghhQYnXwzkgLc+pPD9p+3rJLQcfy9qT83OdTdnbXm1cXZk1Rwo9d9yXt44Y
- 0OCHWoIe21LiOJielueRrko0zVuNRQqm7yXlNGRr7ubtVwocJABygl0K+oZcRImsnpgg
- fB23W2EpL79f1wO4kD+sc+pUKwqRO+oWUdNWGCWPVCnSlnOMZArgDaZfzoL0rzXgBIbq
- kYSC+/QKbstZ9h9FW8gcNMr5BUALQtSitWWtbR9rA8O3kK6E8CXyPXNqrLq4vjC2Xe/y
- RolQ==
+ d=linaro.org; s=google; t=1686663358; x=1689255358;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QWPTnkImhuHCo3jirUvcxZ5f588h3TWca2fzH3d9+/s=;
+ b=etfl5uxgikvtUSh5hOV/QhteyFz9S9M0LqnpCIT0ZtrgCOwvyNDLTxVeo9njqJKxw5
+ Q5C2qZf6cQj7OAylQ5b2oQmqqMlR7IA/FEDc988GbOyaKohV4mBnjRjSefP82yZLYrJX
+ m6exBC2d2aKxXRxncBy35zpt/QdbmPuY6bVaCIvY+bUz+IngmpOFRR3Tu89JoUO7yGVK
+ cruw8ReX1w0XakBdW5UzvH2mUkJk0VfspJ2XQTjmPvqtzdlZBzId2ep5VWjskeLYemAO
+ HaIkFmu3uj8r1rGe4anGHYNxwm4FzzN/F24aqAALAYXJU88i3n0gEQA+58LVqPx7Ne2n
+ ZycQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686663251; x=1689255251;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gBFSVqesPLYVNvOpKpmvg4XLW+9gcOy7P9MjR5bQqc0=;
- b=g+2c+FnQjd/ZwOfyt23CJiGiXPpX5fwOszs4cYDsyqH5nNjUlwxI7qNYtkcmTa+hmr
- SwEq0Cp8/p0S09Wvfl9tcjPA9LPPhQs7tzNMRzOKNIMHh82Pb2krMCfM5HBj4UmPvGzP
- S4r85O5Mv+mW+R8B+l7j21ah9z1w3SWcqJC4RuschMTTRA2CAuELpFraqT4OKl4Y/K7j
- s7TyEMQvBrlInuwXug8WBAS1RfMurNxgxhniyfejc4MvnfmjQ6A4/o7RPWMDup7GjHSs
- AP/P5Vtq/c9qDtmz93M/zt1MfEH5Ia1S++70xfJZUKsYL3DhimYkMtw6vUpVjv2ZtdEB
- p7mA==
-X-Gm-Message-State: AC+VfDzC9jdDrKOTuQ5eHBnkK3oNEkQYKHdQX2+6Azv/l8AMEmk/y8Iv
- Z78SBWWojC6tnlQoFQjG3z6Y5A==
-X-Google-Smtp-Source: ACHHUZ7lh9dBl+2LMdPbHrPbllwHDqN1ewTuK5TK7Ifc2VHlM3n94wfGxH89IaIEnLFth0NCqRp+Ag==
-X-Received: by 2002:a17:907:948e:b0:982:416f:1963 with SMTP id
- dm14-20020a170907948e00b00982416f1963mr1063297ejc.39.1686663251226; 
- Tue, 13 Jun 2023 06:34:11 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1686663358; x=1689255358;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=QWPTnkImhuHCo3jirUvcxZ5f588h3TWca2fzH3d9+/s=;
+ b=HXaiPn8hCJ08qIOCIOXikIx79Vm8Atq4lyAFxQhhwGMPDAQvUFwRRYfV4UStQGH/RS
+ TpKxnBsZ/0cObhTw96rWpsc7+/L3ArCe/3RwR1FjupS30jtLqmheAGCnn++++NPdJTMF
+ UI1M85Re/fAWyVpTYSZCtums4tubUgivmvl4g4yaBEOS2hplHuCMzn7FIkFQHKOzBFqB
+ QpspiYAjI0asHSAK+KoBDjHGVnYx4epy0wtZsQ1sdKv+BS8orISDN68Sk03Tfm2gmDyR
+ 52uTeLwu4nnDn/cKx2HvmjnbgpIZrv14NNOPsGRN5JmWv41UNrdP4tfPNTOwPxHod8Ly
+ muSA==
+X-Gm-Message-State: AC+VfDw1aU0wO/HoiYiDHF0GpCJN0MS+8Qj5Tglz5hSgWe3sFaDIgZxY
+ /Ujfs8A6Z7N+3OZETjy/Kt9UmQ==
+X-Google-Smtp-Source: ACHHUZ4h7/WGYQAnWECUDRK1Db5g5x6cIq6gVpli5gyMCHc/xV7gMznDid04VvLG2F95wb2Rwoas0A==
+X-Received: by 2002:a19:5e12:0:b0:4f6:d9e:7c3b with SMTP id
+ s18-20020a195e12000000b004f60d9e7c3bmr5524079lfb.44.1686663358151; 
+ Tue, 13 Jun 2023 06:35:58 -0700 (PDT)
 Received: from localhost.localdomain ([213.235.133.109])
  by smtp.gmail.com with ESMTPSA id
- p10-20020a17090635ca00b00961277a426dsm6608330ejb.205.2023.06.13.06.34.01
+ i8-20020a170906a28800b009655eb8be26sm6697881ejz.73.2023.06.13.06.35.55
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 13 Jun 2023 06:34:10 -0700 (PDT)
+ Tue, 13 Jun 2023 06:35:57 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-block@nongnu.org, Thomas Huth <thuth@redhat.com>,
  qemu-s390x@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>, qemu-ppc@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v3 0/9] bulk: Replace CONFIG_SOFTMMU by
- !CONFIG_USER_ONLY/CONFIG_SYSTEM_ONLY
-Date: Tue, 13 Jun 2023 15:33:38 +0200
-Message-Id: <20230613133347.82210-1-philmd@linaro.org>
+Subject: [PATCH v3 5/9] hw/core/cpu: Check for USER_ONLY definition instead of
+ SOFTMMU one
+Date: Tue, 13 Jun 2023 15:33:43 +0200
+Message-Id: <20230613133347.82210-6-philmd@linaro.org>
 X-Mailer: git-send-email 2.38.1
+In-Reply-To: <20230613133347.82210-1-philmd@linaro.org>
+References: <20230613133347.82210-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::631;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x631.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::134;
+ envelope-from=philmd@linaro.org; helo=mail-lf1-x134.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -93,156 +96,160 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Missing review: 1, 7, 8
+Since we *might* have user emulation with softmmu,
+replace the system emulation check by !user emulation one.
 
-Since v2:
-- Rebased
-- Added R-b tags
-- Rework i386_tr_init_disas_context() patch (Richard)
-- Dropped RFC prefix
+Invert the #ifdef'ry in TCGCPUOps structure for clarity.
 
-This series aims to clarify the CONFIG_[USER|SYSTEM] vs CONFIG_SOFTMMU
-confusion [*] by using explicit definitions, removing mentions of
-CONFIG_SOFTMMU in non-TCG code.
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ include/hw/core/cpu.h         |   4 +-
+ include/hw/core/tcg-cpu-ops.h | 102 +++++++++++++++++-----------------
+ 2 files changed, 53 insertions(+), 53 deletions(-)
 
-We replace CONFIG_SOFTMMU by !CONFIG_USER_ONLY in C code and
-by CONFIG_SYSTEM_ONLY in meson config files.
-
-[*] Richard clarified my confusion with CONFIG_SOFTMMU on v1:
-https://lore.kernel.org/qemu-devel/7913570a-8bf6-2ac9-6869-fab87273742c@linaro.org/
-
-Philippe Mathieu-Daudé (9):
-  target/i386: Simplify i386_tr_init_disas_context()
-  target/tricore: Remove pointless CONFIG_SOFTMMU guard
-  target/m68k: Check for USER_ONLY definition instead of SOFTMMU one
-  target/ppc: Check for USER_ONLY definition instead of SOFTMMU one
-  hw/core/cpu: Check for USER_ONLY definition instead of SOFTMMU one
-  accel/tcg: Check for USER_ONLY definition instead of SOFTMMU one
-  meson: Alias CONFIG_SOFTMMU -> CONFIG_SYSTEM_ONLY
-  meson: Replace CONFIG_SOFTMMU -> CONFIG_SYSTEM_ONLY
-  meson: Replace softmmu_ss -> system_ss
-
- docs/devel/build-system.rst        |  14 +--
- meson.build                        |  15 +--
- accel/tcg/internal.h               |   6 +-
- include/hw/core/cpu.h              |   4 +-
- include/hw/core/tcg-cpu-ops.h      | 102 ++++++++++----------
- target/m68k/helper.h               |   2 +-
- accel/tcg/cpu-exec.c               |   4 +-
- target/i386/tcg/translate.c        |   3 -
- target/m68k/cpu.c                  |  14 ++-
- target/m68k/helper.c               |   4 +-
- target/m68k/translate.c            |  28 +++---
- target/ppc/cpu_init.c              |  20 ++--
- target/ppc/helper_regs.c           |   6 +-
- target/tricore/helper.c            |   2 -
- accel/meson.build                  |   4 +-
- accel/qtest/meson.build            |   2 +-
- accel/stubs/meson.build            |   2 +-
- accel/tcg/meson.build              |   6 +-
- audio/meson.build                  |   8 +-
- backends/meson.build               |  20 ++--
- backends/tpm/meson.build           |   8 +-
- block/meson.build                  |   6 +-
- block/monitor/meson.build          |   2 +-
- chardev/meson.build                |   2 +-
- disas/meson.build                  |   2 +-
- dump/meson.build                   |   4 +-
- ebpf/meson.build                   |   2 +-
- fsdev/meson.build                  |   4 +-
- gdbstub/meson.build                |  10 +-
- hw/9pfs/meson.build                |   2 +-
- hw/acpi/meson.build                |  10 +-
- hw/adc/meson.build                 |  10 +-
- hw/arm/meson.build                 |   8 +-
- hw/audio/meson.build               |  28 +++---
- hw/block/meson.build               |  28 +++---
- hw/char/meson.build                |  70 +++++++-------
- hw/core/meson.build                |  22 ++---
- hw/cpu/meson.build                 |   6 +-
- hw/cxl/meson.build                 |   4 +-
- hw/display/meson.build             |  76 +++++++--------
- hw/dma/meson.build                 |  32 +++----
- hw/gpio/meson.build                |  26 ++---
- hw/i2c/meson.build                 |   2 +-
- hw/i386/kvm/meson.build            |   2 +-
- hw/ide/meson.build                 |  28 +++---
- hw/input/meson.build               |  32 +++----
- hw/intc/meson.build                |  44 ++++-----
- hw/ipack/meson.build               |   2 +-
- hw/ipmi/meson.build                |   2 +-
- hw/isa/meson.build                 |  18 ++--
- hw/mem/meson.build                 |   8 +-
- hw/misc/macio/meson.build          |   2 +-
- hw/misc/meson.build                | 148 ++++++++++++++---------------
- hw/net/can/meson.build             |  16 ++--
- hw/net/meson.build                 |  96 +++++++++----------
- hw/nubus/meson.build               |   2 +-
- hw/nvme/meson.build                |   2 +-
- hw/nvram/meson.build               |  26 ++---
- hw/pci-bridge/meson.build          |   4 +-
- hw/pci-host/meson.build            |   2 +-
- hw/pci/meson.build                 |   8 +-
- hw/pcmcia/meson.build              |   4 +-
- hw/rdma/meson.build                |   2 +-
- hw/remote/meson.build              |   2 +-
- hw/rtc/meson.build                 |  28 +++---
- hw/scsi/meson.build                |   2 +-
- hw/sd/meson.build                  |  24 ++---
- hw/sensor/meson.build              |  18 ++--
- hw/smbios/meson.build              |   6 +-
- hw/ssi/meson.build                 |  26 ++---
- hw/timer/meson.build               |  74 +++++++--------
- hw/tpm/meson.build                 |  14 +--
- hw/usb/meson.build                 |  74 +++++++--------
- hw/virtio/meson.build              |  12 +--
- hw/watchdog/meson.build            |  18 ++--
- hw/xen/meson.build                 |   4 +-
- migration/meson.build              |  12 +--
- monitor/meson.build                |   6 +-
- net/can/meson.build                |   2 +-
- net/meson.build                    |  38 ++++----
- qapi/meson.build                   |   2 +-
- qom/meson.build                    |   2 +-
- replay/meson.build                 |   2 +-
- semihosting/meson.build            |   2 +-
- softmmu/meson.build                |  12 +--
- stats/meson.build                  |   2 +-
- target/alpha/meson.build           |   6 +-
- target/arm/hvf/meson.build         |   2 +-
- target/arm/meson.build             |   6 +-
- target/arm/tcg/meson.build         |   2 +-
- target/avr/meson.build             |   6 +-
- target/cris/meson.build            |   6 +-
- target/hppa/meson.build            |   6 +-
- target/i386/hax/meson.build        |   6 +-
- target/i386/hvf/meson.build        |   2 +-
- target/i386/kvm/meson.build        |   4 +-
- target/i386/meson.build            |   8 +-
- target/i386/nvmm/meson.build       |   4 +-
- target/i386/tcg/sysemu/meson.build |   2 +-
- target/i386/whpx/meson.build       |   2 +-
- target/loongarch/meson.build       |   6 +-
- target/m68k/meson.build            |   6 +-
- target/microblaze/meson.build      |   6 +-
- target/mips/meson.build            |   4 +-
- target/mips/sysemu/meson.build     |   2 +-
- target/mips/tcg/sysemu/meson.build |   2 +-
- target/nios2/meson.build           |   6 +-
- target/openrisc/meson.build        |   6 +-
- target/ppc/meson.build             |  10 +-
- target/riscv/meson.build           |   6 +-
- target/s390x/kvm/meson.build       |   2 +-
- target/s390x/meson.build           |   6 +-
- target/sh4/meson.build             |   6 +-
- target/sparc/meson.build           |   6 +-
- target/tricore/meson.build         |   4 +-
- target/xtensa/meson.build          |   6 +-
- tcg/meson.build                    |   2 +-
- trace/meson.build                  |   2 +-
- ui/meson.build                     |  30 +++---
- 119 files changed, 816 insertions(+), 824 deletions(-)
-
+diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+index 383456d1b3..f41b0c56f7 100644
+--- a/include/hw/core/cpu.h
++++ b/include/hw/core/cpu.h
+@@ -1014,7 +1014,7 @@ void page_size_init(void);
+ 
+ #ifdef NEED_CPU_H
+ 
+-#ifdef CONFIG_SOFTMMU
++#ifndef CONFIG_USER_ONLY
+ 
+ extern const VMStateDescription vmstate_cpu_common;
+ 
+@@ -1025,7 +1025,7 @@ extern const VMStateDescription vmstate_cpu_common;
+     .flags = VMS_STRUCT,                                                    \
+     .offset = 0,                                                            \
+ }
+-#endif /* CONFIG_SOFTMMU */
++#endif /* !CONFIG_USER_ONLY */
+ 
+ #endif /* NEED_CPU_H */
+ 
+diff --git a/include/hw/core/tcg-cpu-ops.h b/include/hw/core/tcg-cpu-ops.h
+index 0ae08df47e..3e8b1b737a 100644
+--- a/include/hw/core/tcg-cpu-ops.h
++++ b/include/hw/core/tcg-cpu-ops.h
+@@ -64,7 +64,56 @@ struct TCGCPUOps {
+      */
+     void (*do_interrupt)(CPUState *cpu);
+ #endif /* !CONFIG_USER_ONLY || !TARGET_I386 */
+-#ifdef CONFIG_SOFTMMU
++#ifdef CONFIG_USER_ONLY
++    /**
++     * record_sigsegv:
++     * @cpu: cpu context
++     * @addr: faulting guest address
++     * @access_type: access was read/write/execute
++     * @maperr: true for invalid page, false for permission fault
++     * @ra: host pc for unwinding
++     *
++     * We are about to raise SIGSEGV with si_code set for @maperr,
++     * and si_addr set for @addr.  Record anything further needed
++     * for the signal ucontext_t.
++     *
++     * If the emulated kernel does not provide anything to the signal
++     * handler with anything besides the user context registers, and
++     * the siginfo_t, then this hook need do nothing and may be omitted.
++     * Otherwise, record the data and return; the caller will raise
++     * the signal, unwind the cpu state, and return to the main loop.
++     *
++     * If it is simpler to re-use the sysemu tlb_fill code, @ra is provided
++     * so that a "normal" cpu exception can be raised.  In this case,
++     * the signal must be raised by the architecture cpu_loop.
++     */
++    void (*record_sigsegv)(CPUState *cpu, vaddr addr,
++                           MMUAccessType access_type,
++                           bool maperr, uintptr_t ra);
++    /**
++     * record_sigbus:
++     * @cpu: cpu context
++     * @addr: misaligned guest address
++     * @access_type: access was read/write/execute
++     * @ra: host pc for unwinding
++     *
++     * We are about to raise SIGBUS with si_code BUS_ADRALN,
++     * and si_addr set for @addr.  Record anything further needed
++     * for the signal ucontext_t.
++     *
++     * If the emulated kernel does not provide the signal handler with
++     * anything besides the user context registers, and the siginfo_t,
++     * then this hook need do nothing and may be omitted.
++     * Otherwise, record the data and return; the caller will raise
++     * the signal, unwind the cpu state, and return to the main loop.
++     *
++     * If it is simpler to re-use the sysemu do_unaligned_access code,
++     * @ra is provided so that a "normal" cpu exception can be raised.
++     * In this case, the signal must be raised by the architecture cpu_loop.
++     */
++    void (*record_sigbus)(CPUState *cpu, vaddr addr,
++                          MMUAccessType access_type, uintptr_t ra);
++#else
+     /** @cpu_exec_interrupt: Callback for processing interrupts in cpu_exec */
+     bool (*cpu_exec_interrupt)(CPUState *cpu, int interrupt_request);
+     /**
+@@ -121,56 +170,7 @@ struct TCGCPUOps {
+      */
+     bool (*io_recompile_replay_branch)(CPUState *cpu,
+                                        const TranslationBlock *tb);
+-#else
+-    /**
+-     * record_sigsegv:
+-     * @cpu: cpu context
+-     * @addr: faulting guest address
+-     * @access_type: access was read/write/execute
+-     * @maperr: true for invalid page, false for permission fault
+-     * @ra: host pc for unwinding
+-     *
+-     * We are about to raise SIGSEGV with si_code set for @maperr,
+-     * and si_addr set for @addr.  Record anything further needed
+-     * for the signal ucontext_t.
+-     *
+-     * If the emulated kernel does not provide anything to the signal
+-     * handler with anything besides the user context registers, and
+-     * the siginfo_t, then this hook need do nothing and may be omitted.
+-     * Otherwise, record the data and return; the caller will raise
+-     * the signal, unwind the cpu state, and return to the main loop.
+-     *
+-     * If it is simpler to re-use the sysemu tlb_fill code, @ra is provided
+-     * so that a "normal" cpu exception can be raised.  In this case,
+-     * the signal must be raised by the architecture cpu_loop.
+-     */
+-    void (*record_sigsegv)(CPUState *cpu, vaddr addr,
+-                           MMUAccessType access_type,
+-                           bool maperr, uintptr_t ra);
+-    /**
+-     * record_sigbus:
+-     * @cpu: cpu context
+-     * @addr: misaligned guest address
+-     * @access_type: access was read/write/execute
+-     * @ra: host pc for unwinding
+-     *
+-     * We are about to raise SIGBUS with si_code BUS_ADRALN,
+-     * and si_addr set for @addr.  Record anything further needed
+-     * for the signal ucontext_t.
+-     *
+-     * If the emulated kernel does not provide the signal handler with
+-     * anything besides the user context registers, and the siginfo_t,
+-     * then this hook need do nothing and may be omitted.
+-     * Otherwise, record the data and return; the caller will raise
+-     * the signal, unwind the cpu state, and return to the main loop.
+-     *
+-     * If it is simpler to re-use the sysemu do_unaligned_access code,
+-     * @ra is provided so that a "normal" cpu exception can be raised.
+-     * In this case, the signal must be raised by the architecture cpu_loop.
+-     */
+-    void (*record_sigbus)(CPUState *cpu, vaddr addr,
+-                          MMUAccessType access_type, uintptr_t ra);
+-#endif /* CONFIG_SOFTMMU */
++#endif /* !CONFIG_USER_ONLY */
+ #endif /* NEED_CPU_H */
+ 
+ };
 -- 
 2.38.1
 
