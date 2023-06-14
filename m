@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3B7FEB64D8
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Jun 2023 05:16:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBFB8EB64DA
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Jun 2023 05:17:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q9IsG-000686-Na; Wed, 14 Jun 2023 01:16:52 -0400
+	id 1q9Ish-0006Ti-5G; Wed, 14 Jun 2023 01:17:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1q9Is3-00063H-C6
- for qemu-riscv@nongnu.org; Wed, 14 Jun 2023 01:16:39 -0400
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
+ id 1q9Isc-0006H3-91
+ for qemu-riscv@nongnu.org; Wed, 14 Jun 2023 01:17:16 -0400
+Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1q9Is0-0001JR-Qo
- for qemu-riscv@nongnu.org; Wed, 14 Jun 2023 01:16:39 -0400
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-3f736e0c9b1so3008855e9.3
- for <qemu-riscv@nongnu.org>; Tue, 13 Jun 2023 22:16:33 -0700 (PDT)
+ id 1q9IsZ-0001PD-Mg
+ for qemu-riscv@nongnu.org; Wed, 14 Jun 2023 01:17:13 -0400
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-3f7ebb2b82cso3012335e9.2
+ for <qemu-riscv@nongnu.org>; Tue, 13 Jun 2023 22:17:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1686719792; x=1689311792;
+ d=linaro.org; s=google; t=1686719826; x=1689311826;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Qj61P99PMz7Bwj7U991Mjm37+0kIZapr3a4VZrigir0=;
- b=xsmzCKwBpFPriRVOKvEcsL6CG8/+fvkjmxU1fLTKJ1aOyxrXRj+bF39zMVqdH5o9bY
- 3P/n81L0HBj03l+MS7jV2gXPLq5QG/5GwE1KLwVB3JrhCWC/y92/JGrFwvU7TN5rAeZ0
- CTZSlhZ0kF6JLwmxK3UlB6j/JbtZIs3UK8Dplg0gNS3Z4+T0tmBPxBORhnVKGZMaLA9W
- sNvp3y2maKgfCL/54C7wHHV7SSA4qS0C3zR8AUdG0e1BqCiOrJglrPU1bZYJkYVjPNp7
- x4JA63vNqz+tO4GqtYCAkrOrZ+geqMBEugza8F+WlQ8BHPV5zHgHTpKr6gbF5CPj2GWm
- ScDw==
+ bh=RUixE331uCC1TmqrKK2xSaxt4BSc1VuFgFBldd9cxmE=;
+ b=sDkm3emtXKbGZigvZxWrGyACN2XSTrOuCgKCvclc77uUXo8jQCHb+zSu6Seh1N1KbN
+ /JTm8Yr4BCeh4lMUUQf6KABWIJcf4xLjv5M2wJ6xzKgMe8H3a8q/Go3dVaqjkmdjzI1J
+ kZxqXg2V4SLER9x2jzFdBwZPqZqalF1dimbJuX62NEiwmt8kjvnY6cGc5fOSan2F/PeJ
+ ydcE7NK980ZdciLBJNCM/TPs7yMmeQPYRs2hKW1mm64CJcIuezgd8l7SFi6xWxO2Ny7u
+ s9AaHEP7kgpIRVeMC7q1q7K/Blq4QKlM7YtWa9imS7dWZr3rvWWikeJRvANumbSZV9Me
+ wscw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686719792; x=1689311792;
+ d=1e100.net; s=20221208; t=1686719826; x=1689311826;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Qj61P99PMz7Bwj7U991Mjm37+0kIZapr3a4VZrigir0=;
- b=fMWquPdmX8dM5La4wZMR+ijxhdOi/LNyrCgtI9p6nriTtJhkpvkkUyC6gj3Y2H2fIE
- x8uPQ/O4yMI2KbyoIthsI8oXmn2Mx13KPeOsPkUWLYwIES14a47c8VFmYvTgDEc7TTGv
- 4DFvglDO7BMQPuShU4RGlVcq74goKdELEnA/ijFLu0hv0jYW2UiJsq0NNN+vbX11AoI6
- ALedxuFtMk/xwRDH+iZQDFDteyhAfhdyjk5dKQgdxCjvIVnYJChR2VrYcIID/wioHv0q
- C/EKlohjO5/rgeTotRVcLQ7X1Oog9+iOQowlUf0mjp0fZmDGixLDPb/YHZuf4ZmBVsJh
- pGjw==
-X-Gm-Message-State: AC+VfDwsSm9O6decBaOB2tytu2lJSrYAWXp2AYV81r4FXcr3sNH1fuH7
- ZR5jpMu4xgAM0n1jbvzE9SAywQ==
-X-Google-Smtp-Source: ACHHUZ43eA8S57a47YbXnkfzIsnlkAn+NXb+jNccTbyf4EN8m1mEx3gOtuG1Re/aU0ZfTT3hocicGw==
-X-Received: by 2002:a05:6000:181:b0:30f:cd95:a603 with SMTP id
- p1-20020a056000018100b0030fcd95a603mr2579482wrx.51.1686719792039; 
- Tue, 13 Jun 2023 22:16:32 -0700 (PDT)
+ bh=RUixE331uCC1TmqrKK2xSaxt4BSc1VuFgFBldd9cxmE=;
+ b=jjArIqNnMDJWrHE1+79fV75jmWlWykWzunsHJxbokrUPrwE0o4EWufZkzLXhzkXxnH
+ CGFtTbHH6onO2iFwpFQTnzvUp7AAHrrEZQDEwrTq0QX1qe49s7bYbvv8MbDbg+IkXLnJ
+ mH5dOjsZYf2NlwUbYCk5fJm1RgWH8hDelQUccs0wMw3O9JXaYFvkJ0K4aYMFvDer4pqi
+ BflxHWLv6ZZyyDaPAhGHkZYQYIOoC7c/J0XC5rysPqekEHJjHikCFwAyRiyK5V2gZd2o
+ heqxg+VuR8iUORUkzJ5RGUgEziQCBNYV8KAIJpTbr/pL0V16wYEggFAjTYrLCNGCueJn
+ 4y5A==
+X-Gm-Message-State: AC+VfDwnizsW0tW6owINaJx9/h9Un54aatvGIl5Ay+ZQIqb4vD1yAPM/
+ b+Ex1A7BJlhVecWae4vmB0mqKQ==
+X-Google-Smtp-Source: ACHHUZ56jkvn9MlBwfXlnitRoOizs5TTak4VVvLpwEboA8lbLP2w5v9VJ2YUqn77o/CC/vTirwYQ2w==
+X-Received: by 2002:a7b:c3cb:0:b0:3f8:1af0:802f with SMTP id
+ t11-20020a7bc3cb000000b003f81af0802fmr5646688wmj.24.1686719826542; 
+ Tue, 13 Jun 2023 22:17:06 -0700 (PDT)
 Received: from [192.168.4.112] (90-182-62-66.rcp.o2.cz. [90.182.62.66])
  by smtp.gmail.com with ESMTPSA id
- q3-20020adff503000000b002ca864b807csm17098769wro.0.2023.06.13.22.16.31
+ z14-20020a7bc7ce000000b003f50d6ee334sm16182641wmk.47.2023.06.13.22.17.05
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 13 Jun 2023 22:16:31 -0700 (PDT)
-Message-ID: <ae869dc0-c1e9-54ec-007a-102b53b4b935@linaro.org>
-Date: Wed, 14 Jun 2023 07:16:30 +0200
+ Tue, 13 Jun 2023 22:17:06 -0700 (PDT)
+Message-ID: <06aafe2e-afba-431e-c863-c9e124ef1c93@linaro.org>
+Date: Wed, 14 Jun 2023 07:17:04 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.0
-Subject: Re: [PATCH v3 7/9] meson: Alias CONFIG_SOFTMMU -> CONFIG_SYSTEM_ONLY
+Subject: Re: [PATCH v3 8/9] meson: Replace CONFIG_SOFTMMU -> CONFIG_SYSTEM_ONLY
 Content-Language: en-US
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
@@ -71,20 +71,20 @@ Cc: qemu-block@nongnu.org, Thomas Huth <thuth@redhat.com>,
  qemu-s390x@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org
 References: <20230613133347.82210-1-philmd@linaro.org>
- <20230613133347.82210-8-philmd@linaro.org>
+ <20230613133347.82210-9-philmd@linaro.org>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230613133347.82210-8-philmd@linaro.org>
+In-Reply-To: <20230613133347.82210-9-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
- envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x32d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x334.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
 X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.098,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,14 +101,26 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 6/13/23 15:33, Philippe Mathieu-Daudé wrote:
-> We use the CONFIG_USER_ONLY key to describe user emulation,
-> and the CONFIG_SOFTMMU key to describe system emulation. Alias
-> it as 'CONFIG_SYSTEM_ONLY' for parity with user emulation.
+> Since we*might*  have user emulation with softmmu,
+> use the clearer 'CONFIG_SYSTEM_ONLY' key to check
+> for system emulation.
 > 
 > Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
 > ---
->   meson.build | 1 +
->   1 file changed, 1 insertion(+)
+>   meson.build                        | 4 ++--
+>   accel/qtest/meson.build            | 2 +-
+>   accel/stubs/meson.build            | 2 +-
+>   accel/tcg/meson.build              | 6 +++---
+>   dump/meson.build                   | 2 +-
+>   hw/i386/kvm/meson.build            | 2 +-
+>   migration/meson.build              | 2 +-
+>   monitor/meson.build                | 2 +-
+>   qapi/meson.build                   | 2 +-
+>   semihosting/meson.build            | 2 +-
+>   softmmu/meson.build                | 4 ++--
+>   target/i386/tcg/sysemu/meson.build | 2 +-
+>   ui/meson.build                     | 4 ++--
+>   13 files changed, 18 insertions(+), 18 deletions(-)
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
