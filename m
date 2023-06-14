@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFF05EB64D8
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Jun 2023 03:40:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C036AEB64DA
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Jun 2023 05:15:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q9HND-0006M8-Hk; Tue, 13 Jun 2023 23:40:43 -0400
+	id 1q9Iqb-00040k-3I; Wed, 14 Jun 2023 01:15:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1q9HNB-0006LS-VA
- for qemu-riscv@nongnu.org; Tue, 13 Jun 2023 23:40:41 -0400
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
+ id 1q9IqY-0003xo-Sz
+ for qemu-riscv@nongnu.org; Wed, 14 Jun 2023 01:15:06 -0400
+Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1q9HNA-00068d-Fi
- for qemu-riscv@nongnu.org; Tue, 13 Jun 2023 23:40:41 -0400
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-30e53cacc10so4110078f8f.0
- for <qemu-riscv@nongnu.org>; Tue, 13 Jun 2023 20:40:39 -0700 (PDT)
+ id 1q9IqX-0000fN-2n
+ for qemu-riscv@nongnu.org; Wed, 14 Jun 2023 01:15:06 -0400
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-30fc90f359fso1665408f8f.3
+ for <qemu-riscv@nongnu.org>; Tue, 13 Jun 2023 22:15:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1686714038; x=1689306038;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=linaro.org; s=google; t=1686719703; x=1689311703;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=L6K/NmwQs8K/GbD67mVMV6a2RgYlMcLBnHP5k6Y04s4=;
- b=iorcpyY999QWehIb+CAgrA/F1N36in6cm7c1xcz3U7MfL2vyFgHedlBylx1ziCuvVS
- 6hDNVpZ6lP7/9eAFG96KxzKNl2HhnwnKPK5QObniPPw2KacRaR45KHN5BNwQ/fBN1TXQ
- U5RpYQn/tF0sz0HWy9+ubLlJ7YnSBixn33/5t6Eq0CtS6cKkyc6K6OYYMQ/eFjAqYHCb
- hXETirYPQAPIQA8VlSLXLSEaDNiuMIatOAOvJhC+kyTgDnkFMtRqcljuLWr2TCuqESGi
- ocDTciV7b4uNGmeum+J6Upimotn2JRrMfMVdsGmEYxK3plrzy86NRJ5xIlO+VqD33li6
- D79Q==
+ bh=MoyoJuP23Bw8Ze7mOXHxgQzuOcLqIfN5RWRdROWIjy4=;
+ b=YIwc0YRI/azSD4oj7159JmDW0QkUrMOTXtds+kcn0SmPTiftV6Q6jTyrhGEZr0s6rQ
+ AL5zlnz1WVLLBBtjtI58mqmzviM2t+s7wB0A7bolaFCEiJcrZ52F3IIiT3PW4j9OutXz
+ W0NM6ghGR+boYpkycQllifWRaTsP8KGnE5nHCNwYcK4n1UMaqsyX2Ey2D/6KzABOULXm
+ UPl+MHwBjNgb91PioJBdet4U510xFw76AIlvKaeTWizBndl+JEZw95BN4xZsQS2p0pwh
+ 4E2f10fMath50bNx+iCTaFpCN8ajNjVaY3GoNLrKJd8TyzxWMwcxee7rc0Uuvj9iCaDK
+ v/eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686714038; x=1689306038;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20221208; t=1686719703; x=1689311703;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=L6K/NmwQs8K/GbD67mVMV6a2RgYlMcLBnHP5k6Y04s4=;
- b=N+/i3mKi2PUyuov2w55vzHoxLtJh8XopaUn7JrmusxiCfsJtTJWogtSTu20KevhM0F
- G4LRzFDZSBvtkJqVxEVjAr40tJa+EZ7PtFMcQSly4pTTqbLuvL5D9zr3tr5CTBl3JzcQ
- aGMmUnpNznb7kUxd83hC4b5zBjCnlvT02FQUOF71LAVLizNAP4ZLLsxfkXjWopSNqw+x
- i8xU+R0uyq8nEhn62IU5eSNWgRXoRzuTRTTinWVqKBEKFZ2rBrXRiCZB1fYn1lbnZl7T
- cWu35oLjs6BdT2SiCwovhqpeidtOcNuyq9rp949H4JZDKDa7knDDkx+zQ4cAifxmLi9u
- aCPQ==
-X-Gm-Message-State: AC+VfDxXTi20St0Aemm1zmadwbGGw1iP32BHxPQJkyQ2yIhcmAL6tlu0
- MvJfPo0ss33UtQsMPZqtP4tHuQ==
-X-Google-Smtp-Source: ACHHUZ4aWTG5W05cUIT4zylXDSRz78kF6JI8I9XWAoMiPFUy6icBSFAV4yrrX70Rn2DB1VQxr5htrw==
-X-Received: by 2002:adf:fa85:0:b0:30f:ba73:dff8 with SMTP id
- h5-20020adffa85000000b0030fba73dff8mr6002074wrr.28.1686714038089; 
- Tue, 13 Jun 2023 20:40:38 -0700 (PDT)
+ bh=MoyoJuP23Bw8Ze7mOXHxgQzuOcLqIfN5RWRdROWIjy4=;
+ b=N7NPG7jFPnG5MUvcyAk7h+ft87b2v1zB5Aln7r33N/+gsi2sbahLiPtEhVN4749Hlg
+ K6ak/ZSU99GoQTr/AIX4v8OQZ5AgoI+SXAcoK246Ne32LoAmHpTQKU9DsDzjv80Eey/Y
+ O0K2UekOiQLljYodcnoW5RW/tb8WxsKaWV9VBiWqrP1coDxrVZumXTJ7oOHTwjwKyjEK
+ Gb7SkAOoN7rwWEyZ9YL/QTt11vhQk3Q1lfzXCpI8Pww9vxExjU0mUGt4fIQLfBYsmMaq
+ sFqLxWhThH/6Lx8J+plYhfES28a3GNna8SPV2RDsFqzKzYNX7PlO3iGMdsdHmo2wE8wK
+ dEvA==
+X-Gm-Message-State: AC+VfDxKi6VqzhrUom5sa1TljjgwaXdlUsVJ8bOGS9EhFj8t8BajWm/V
+ Ymmm1TDNzONlEpVCRod85EY+RQ==
+X-Google-Smtp-Source: ACHHUZ50pu8GtgFDj3ahlcOJXANBLw5oIguja3R/W+tpOa0elmUYpyS26WMiyVCRFe4wCqflFz8+sw==
+X-Received: by 2002:a5d:67c4:0:b0:30e:590f:78d1 with SMTP id
+ n4-20020a5d67c4000000b0030e590f78d1mr8259415wrw.63.1686719703405; 
+ Tue, 13 Jun 2023 22:15:03 -0700 (PDT)
 Received: from [192.168.4.112] (90-182-62-66.rcp.o2.cz. [90.182.62.66])
  by smtp.gmail.com with ESMTPSA id
- q25-20020a7bce99000000b003f17848673fsm16017895wmj.27.2023.06.13.20.40.37
+ v17-20020adfedd1000000b0030630de6fbdsm16968233wro.13.2023.06.13.22.15.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 13 Jun 2023 20:40:37 -0700 (PDT)
-Message-ID: <cd379806-ef2b-d13e-472c-a15d21532bb3@linaro.org>
-Date: Wed, 14 Jun 2023 05:40:35 +0200
+ Tue, 13 Jun 2023 22:15:03 -0700 (PDT)
+Message-ID: <f4bfc853-b926-6ae3-698e-9a4fbb75c76e@linaro.org>
+Date: Wed, 14 Jun 2023 07:15:01 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.0
-Subject: Re: [PATCH v2 03/38] tests/multiarch: Add test-aes
-To: =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>
-Cc: ardb@kernel.org, berrange@redhat.com, qemu-ppc@nongnu.org,
- qemu-arm@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com,
- qemu-devel@nongnu.org
-References: <20230609022401.684157-1-richard.henderson@linaro.org>
- <20230609022401.684157-4-richard.henderson@linaro.org>
- <87zg5468ed.fsf@linaro.org>
+Subject: Re: [PATCH v3 1/9] target/i386: Simplify i386_tr_init_disas_context()
 Content-Language: en-US
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: qemu-block@nongnu.org, Thomas Huth <thuth@redhat.com>,
+ qemu-s390x@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
+ qemu-ppc@nongnu.org
+References: <20230613133347.82210-1-philmd@linaro.org>
+ <20230613133347.82210-2-philmd@linaro.org>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <87zg5468ed.fsf@linaro.org>
+In-Reply-To: <20230613133347.82210-2-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::432;
- envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x432.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::429;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x429.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
@@ -100,33 +100,17 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 6/12/23 16:46, Alex Bennée wrote:
+On 6/13/23 15:33, Philippe Mathieu-Daudé wrote:
+> Since cpu_mmu_index() is well-defined for user-only,
+> we can remove the surrounding #ifdef'ry entirely.
 > 
-> Richard Henderson <richard.henderson@linaro.org> writes:
-> 
->> Use a shared driver and backends for i386, aarch64, ppc64, riscv64.
->>
->> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
->> ---
->>   tests/tcg/aarch64/test-aes.c            |  58 ++++++++
->>   tests/tcg/i386/test-aes.c               |  68 +++++++++
->>   tests/tcg/ppc64/test-aes.c              | 116 +++++++++++++++
->>   tests/tcg/riscv64/test-aes.c            |  76 ++++++++++
->>   tests/tcg/multiarch/test-aes-main.c.inc | 183
->> ++++++++++++++++++++++++
-> 
-> I find it odd the file with the main function is the c.inc and the per
-> guest impl's are the plain .c files. Is it possible to have it the other
-> way around?
+> Suggested-by: Richard Henderson<richard.henderson@linaro.org>
+> Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
+> ---
+>   target/i386/tcg/translate.c | 3 ---
+>   1 file changed, 3 deletions(-)
 
-Not with the way tests/tcg is structured, no.
-
-> If we have a fallback library function for aes then we could
-> enable the test for all targets (a true multiarch test) with some having CPU specific
-> accelerations where available.
-
-We don't have that either.
-
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 r~
 
