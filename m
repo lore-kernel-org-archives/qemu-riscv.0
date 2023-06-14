@@ -4,80 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBFB8EB64DA
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Jun 2023 05:17:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D454EB64D9
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Jun 2023 08:59:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q9Ish-0006Ti-5G; Wed, 14 Jun 2023 01:17:19 -0400
+	id 1q9MLN-0000Dz-TW; Wed, 14 Jun 2023 04:59:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1q9Isc-0006H3-91
- for qemu-riscv@nongnu.org; Wed, 14 Jun 2023 01:17:16 -0400
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1q9MLL-0000Cl-Dj
+ for qemu-riscv@nongnu.org; Wed, 14 Jun 2023 04:59:07 -0400
+Received: from mail-oo1-xc2c.google.com ([2607:f8b0:4864:20::c2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1q9IsZ-0001PD-Mg
- for qemu-riscv@nongnu.org; Wed, 14 Jun 2023 01:17:13 -0400
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-3f7ebb2b82cso3012335e9.2
- for <qemu-riscv@nongnu.org>; Tue, 13 Jun 2023 22:17:07 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1q9MLJ-0004xe-6A
+ for qemu-riscv@nongnu.org; Wed, 14 Jun 2023 04:59:06 -0400
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-55b2fb308bbso306338eaf.1
+ for <qemu-riscv@nongnu.org>; Wed, 14 Jun 2023 01:59:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1686719826; x=1689311826;
+ d=ventanamicro.com; s=google; t=1686733143; x=1689325143;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=RUixE331uCC1TmqrKK2xSaxt4BSc1VuFgFBldd9cxmE=;
- b=sDkm3emtXKbGZigvZxWrGyACN2XSTrOuCgKCvclc77uUXo8jQCHb+zSu6Seh1N1KbN
- /JTm8Yr4BCeh4lMUUQf6KABWIJcf4xLjv5M2wJ6xzKgMe8H3a8q/Go3dVaqjkmdjzI1J
- kZxqXg2V4SLER9x2jzFdBwZPqZqalF1dimbJuX62NEiwmt8kjvnY6cGc5fOSan2F/PeJ
- ydcE7NK980ZdciLBJNCM/TPs7yMmeQPYRs2hKW1mm64CJcIuezgd8l7SFi6xWxO2Ny7u
- s9AaHEP7kgpIRVeMC7q1q7K/Blq4QKlM7YtWa9imS7dWZr3rvWWikeJRvANumbSZV9Me
- wscw==
+ bh=mp6qKwnHe+KsjV34LVJ9sRj3p8qxH2ZQ4O0PgFUZ0Sc=;
+ b=oR3fEwFIc3Py5ZGFxzJycZ5V+6fGp9X5W1AlbXgZpy7fETYhX3f8xMNMaDr/T8mzps
+ 74wDkTKgec51/vUGwE6FgfhBPhwUe5XPXwZBKX4fufox2elXFcQkIR4TCvCOeNqOfLRa
+ Cqw2gHnsCi94g8iC67Nimr55aditd0iGxHAU+gp6wIJdHmba1Vf3AxB5YIjnWQ2EmIRg
+ la5CHI61MKXYPdyFIcznwP//ECTJQw9y2Re0/7d7l2CqJDNZ5AbE/DgqAxoAP37HsslV
+ /Ly9zJzCyRqkFJuotR/LgrvMcv/6/puyw40aEcNhHRfWUOuFWWFPG+SPT04Rp8lhEAWK
+ N8ZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686719826; x=1689311826;
+ d=1e100.net; s=20221208; t=1686733143; x=1689325143;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=RUixE331uCC1TmqrKK2xSaxt4BSc1VuFgFBldd9cxmE=;
- b=jjArIqNnMDJWrHE1+79fV75jmWlWykWzunsHJxbokrUPrwE0o4EWufZkzLXhzkXxnH
- CGFtTbHH6onO2iFwpFQTnzvUp7AAHrrEZQDEwrTq0QX1qe49s7bYbvv8MbDbg+IkXLnJ
- mH5dOjsZYf2NlwUbYCk5fJm1RgWH8hDelQUccs0wMw3O9JXaYFvkJ0K4aYMFvDer4pqi
- BflxHWLv6ZZyyDaPAhGHkZYQYIOoC7c/J0XC5rysPqekEHJjHikCFwAyRiyK5V2gZd2o
- heqxg+VuR8iUORUkzJ5RGUgEziQCBNYV8KAIJpTbr/pL0V16wYEggFAjTYrLCNGCueJn
- 4y5A==
-X-Gm-Message-State: AC+VfDwnizsW0tW6owINaJx9/h9Un54aatvGIl5Ay+ZQIqb4vD1yAPM/
- b+Ex1A7BJlhVecWae4vmB0mqKQ==
-X-Google-Smtp-Source: ACHHUZ56jkvn9MlBwfXlnitRoOizs5TTak4VVvLpwEboA8lbLP2w5v9VJ2YUqn77o/CC/vTirwYQ2w==
-X-Received: by 2002:a7b:c3cb:0:b0:3f8:1af0:802f with SMTP id
- t11-20020a7bc3cb000000b003f81af0802fmr5646688wmj.24.1686719826542; 
- Tue, 13 Jun 2023 22:17:06 -0700 (PDT)
-Received: from [192.168.4.112] (90-182-62-66.rcp.o2.cz. [90.182.62.66])
+ bh=mp6qKwnHe+KsjV34LVJ9sRj3p8qxH2ZQ4O0PgFUZ0Sc=;
+ b=ZvdG86gn3L4RtzQ5j1C+JVclM1JqtuDI2HA+/fFjDrhp2sJOIUbJO7h5VNyVyQtNVa
+ jzg2u7VwnoDKYjfKMaNqs8fXHRMPAaRLjTYr4kgptUWbER15oEP5mICXNljSBAG1Cj12
+ S8Ym1M8mokEHoA4VaDbPcEe8XRgkLPTG0V1pXGUpiPzanNbHqpHIrmaBSlzxrYL9m1vL
+ ctW9pmU4dgFUNVL72ZMS9Fpj24ex9qkObvrmdiOjYvNdVtzIxv1l7k3704i8//M+kGIH
+ xgANF3R8oLor/Xci7IWyuS9+nz/GLp4E9d77W3n4j2Sn0ygkXXsOL1ycldCbAyJ1HFO3
+ zzqw==
+X-Gm-Message-State: AC+VfDxYipCzjbSOv/nrmJMLYcO4fOcH3zhCaBQFhM53gYbd5atX2WV0
+ 6EYk+DCwhl7z9GF90xt2p7WCvA==
+X-Google-Smtp-Source: ACHHUZ41vggVzS1xlR0cL6acMaYu/0T1OvHbnCGSlRWuq01aZViXoavu0LXvHqoH1BuZWfnTlCOgPA==
+X-Received: by 2002:a4a:c90b:0:b0:552:4bca:a9df with SMTP id
+ v11-20020a4ac90b000000b005524bcaa9dfmr7765501ooq.3.1686733143200; 
+ Wed, 14 Jun 2023 01:59:03 -0700 (PDT)
+Received: from [192.168.68.107] ([177.170.117.210])
  by smtp.gmail.com with ESMTPSA id
- z14-20020a7bc7ce000000b003f50d6ee334sm16182641wmk.47.2023.06.13.22.17.05
+ bf14-20020a056820174e00b0051134f333d3sm4831348oob.16.2023.06.14.01.58.59
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 13 Jun 2023 22:17:06 -0700 (PDT)
-Message-ID: <06aafe2e-afba-431e-c863-c9e124ef1c93@linaro.org>
-Date: Wed, 14 Jun 2023 07:17:04 +0200
+ Wed, 14 Jun 2023 01:59:02 -0700 (PDT)
+Message-ID: <f22d710e-d1bb-d33a-78c1-c86a6740dbe1@ventanamicro.com>
+Date: Wed, 14 Jun 2023 05:58:57 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [PATCH v3 8/9] meson: Replace CONFIG_SOFTMMU -> CONFIG_SYSTEM_ONLY
+ Thunderbird/102.10.0
+Subject: Re: [PATCH v2 2/8] target/riscv: Factor out extension tests to
+ cpu_cfg.h
 Content-Language: en-US
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: qemu-block@nongnu.org, Thomas Huth <thuth@redhat.com>,
- qemu-s390x@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- qemu-ppc@nongnu.org
-References: <20230613133347.82210-1-philmd@linaro.org>
- <20230613133347.82210-9-philmd@linaro.org>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230613133347.82210-9-philmd@linaro.org>
+To: Christoph Muellner <christoph.muellner@vrull.eu>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
+Cc: Weiwei Li <liweiwei@iscas.ac.cn>
+References: <20230612111034.3955227-1-christoph.muellner@vrull.eu>
+ <20230612111034.3955227-3-christoph.muellner@vrull.eu>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20230612111034.3955227-3-christoph.muellner@vrull.eu>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x334.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c2c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc2c.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
@@ -100,29 +103,115 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 6/13/23 15:33, Philippe Mathieu-Daudé wrote:
-> Since we*might*  have user emulation with softmmu,
-> use the clearer 'CONFIG_SYSTEM_ONLY' key to check
-> for system emulation.
+
+
+On 6/12/23 08:10, Christoph Muellner wrote:
+> From: Christoph Müllner <christoph.muellner@vrull.eu>
 > 
-> Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
+> This patch moves the extension test functions that are used
+> to gate vendor extension decoders, into cpu_cfg.h.
+> This allows to reuse them in the disassembler.
+> 
+> This patch does not introduce new functionality.
+> However, the patch includes a small change:
+> The parameter for the extension test functions has been changed
+> from 'DisasContext*' to 'const RISCVCPUConfig*' to keep
+> the code in cpu_cfg.h self-contained.
+> 
+> Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
 > ---
->   meson.build                        | 4 ++--
->   accel/qtest/meson.build            | 2 +-
->   accel/stubs/meson.build            | 2 +-
->   accel/tcg/meson.build              | 6 +++---
->   dump/meson.build                   | 2 +-
->   hw/i386/kvm/meson.build            | 2 +-
->   migration/meson.build              | 2 +-
->   monitor/meson.build                | 2 +-
->   qapi/meson.build                   | 2 +-
->   semihosting/meson.build            | 2 +-
->   softmmu/meson.build                | 4 ++--
->   target/i386/tcg/sysemu/meson.build | 2 +-
->   ui/meson.build                     | 4 ++--
->   13 files changed, 18 insertions(+), 18 deletions(-)
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-r~
+>   target/riscv/cpu_cfg.h   | 26 ++++++++++++++++++++++++++
+>   target/riscv/translate.c | 27 ++-------------------------
+>   2 files changed, 28 insertions(+), 25 deletions(-)
+> 
+> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> index c4a627d335..0b4fe4b540 100644
+> --- a/target/riscv/cpu_cfg.h
+> +++ b/target/riscv/cpu_cfg.h
+> @@ -133,4 +133,30 @@ struct RISCVCPUConfig {
+>   };
+>   
+>   typedef struct RISCVCPUConfig RISCVCPUConfig;
+> +
+> +/* Helper functions to test for extensions.  */
+> +
+> +static inline bool always_true_p(const RISCVCPUConfig *cfg __attribute__((__unused__)))
+> +{
+> +    return true;
+> +}
+> +
+> +static inline bool has_xthead_p(const RISCVCPUConfig *cfg)
+> +{
+> +    return cfg->ext_xtheadba || cfg->ext_xtheadbb ||
+> +           cfg->ext_xtheadbs || cfg->ext_xtheadcmo ||
+> +           cfg->ext_xtheadcondmov ||
+> +           cfg->ext_xtheadfmemidx || cfg->ext_xtheadfmv ||
+> +           cfg->ext_xtheadmac || cfg->ext_xtheadmemidx ||
+> +           cfg->ext_xtheadmempair || cfg->ext_xtheadsync;
+> +}
+> +
+> +#define MATERIALISE_EXT_PREDICATE(ext) \
+> +    static inline bool has_ ## ext ## _p(const RISCVCPUConfig *cfg) \
+> +    { \
+> +        return cfg->ext_ ## ext ; \
+> +    }
+> +
+> +MATERIALISE_EXT_PREDICATE(XVentanaCondOps)
+> +
+>   #endif
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 859d5b2dcf..275b922811 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -119,29 +119,6 @@ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+>       return ctx->misa_ext & ext;
+>   }
+>   
+> -static bool always_true_p(DisasContext *ctx  __attribute__((__unused__)))
+> -{
+> -    return true;
+> -}
+> -
+> -static bool has_xthead_p(DisasContext *ctx  __attribute__((__unused__)))
+> -{
+> -    return ctx->cfg_ptr->ext_xtheadba || ctx->cfg_ptr->ext_xtheadbb ||
+> -           ctx->cfg_ptr->ext_xtheadbs || ctx->cfg_ptr->ext_xtheadcmo ||
+> -           ctx->cfg_ptr->ext_xtheadcondmov ||
+> -           ctx->cfg_ptr->ext_xtheadfmemidx || ctx->cfg_ptr->ext_xtheadfmv ||
+> -           ctx->cfg_ptr->ext_xtheadmac || ctx->cfg_ptr->ext_xtheadmemidx ||
+> -           ctx->cfg_ptr->ext_xtheadmempair || ctx->cfg_ptr->ext_xtheadsync;
+> -}
+> -
+> -#define MATERIALISE_EXT_PREDICATE(ext)  \
+> -    static bool has_ ## ext ## _p(DisasContext *ctx)    \
+> -    { \
+> -        return ctx->cfg_ptr->ext_ ## ext ; \
+> -    }
+> -
+> -MATERIALISE_EXT_PREDICATE(XVentanaCondOps);
+> -
+>   #ifdef TARGET_RISCV32
+>   #define get_xl(ctx)    MXL_RV32
+>   #elif defined(CONFIG_USER_ONLY)
+> @@ -1132,7 +1109,7 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
+>        * that are tested in-order until a decoder matches onto the opcode.
+>        */
+>       static const struct {
+> -        bool (*guard_func)(DisasContext *);
+> +        bool (*guard_func)(const RISCVCPUConfig *);
+>           bool (*decode_func)(DisasContext *, uint32_t);
+>       } decoders[] = {
+>           { always_true_p,  decode_insn32 },
+> @@ -1161,7 +1138,7 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
+>           ctx->opcode = opcode32;
+>   
+>           for (size_t i = 0; i < ARRAY_SIZE(decoders); ++i) {
+> -            if (decoders[i].guard_func(ctx) &&
+> +            if (decoders[i].guard_func(ctx->cfg_ptr) &&
+>                   decoders[i].decode_func(ctx, opcode32)) {
+>                   return;
+>               }
 
