@@ -4,67 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D454EB64D9
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Jun 2023 08:59:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7E7BEB64DA
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Jun 2023 09:00:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q9MLN-0000Dz-TW; Wed, 14 Jun 2023 04:59:11 -0400
+	id 1q9MMc-0000wK-N0; Wed, 14 Jun 2023 05:00:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1q9MLL-0000Cl-Dj
- for qemu-riscv@nongnu.org; Wed, 14 Jun 2023 04:59:07 -0400
-Received: from mail-oo1-xc2c.google.com ([2607:f8b0:4864:20::c2c])
+ id 1q9MMb-0000vz-DT
+ for qemu-riscv@nongnu.org; Wed, 14 Jun 2023 05:00:25 -0400
+Received: from mail-oa1-x35.google.com ([2001:4860:4864:20::35])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1q9MLJ-0004xe-6A
- for qemu-riscv@nongnu.org; Wed, 14 Jun 2023 04:59:06 -0400
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-55b2fb308bbso306338eaf.1
- for <qemu-riscv@nongnu.org>; Wed, 14 Jun 2023 01:59:04 -0700 (PDT)
+ id 1q9MMZ-0005FG-JV
+ for qemu-riscv@nongnu.org; Wed, 14 Jun 2023 05:00:25 -0400
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-1a67ea77c3bso3349927fac.3
+ for <qemu-riscv@nongnu.org>; Wed, 14 Jun 2023 02:00:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1686733143; x=1689325143;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ d=ventanamicro.com; s=google; t=1686733222; x=1689325222;
+ h=content-transfer-encoding:in-reply-to:from:references:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=mp6qKwnHe+KsjV34LVJ9sRj3p8qxH2ZQ4O0PgFUZ0Sc=;
- b=oR3fEwFIc3Py5ZGFxzJycZ5V+6fGp9X5W1AlbXgZpy7fETYhX3f8xMNMaDr/T8mzps
- 74wDkTKgec51/vUGwE6FgfhBPhwUe5XPXwZBKX4fufox2elXFcQkIR4TCvCOeNqOfLRa
- Cqw2gHnsCi94g8iC67Nimr55aditd0iGxHAU+gp6wIJdHmba1Vf3AxB5YIjnWQ2EmIRg
- la5CHI61MKXYPdyFIcznwP//ECTJQw9y2Re0/7d7l2CqJDNZ5AbE/DgqAxoAP37HsslV
- /Ly9zJzCyRqkFJuotR/LgrvMcv/6/puyw40aEcNhHRfWUOuFWWFPG+SPT04Rp8lhEAWK
- N8ZQ==
+ bh=PSiVnoNXwA/9+IsbqMn7p7LJuDWj7Q4v/whuwhU8Za8=;
+ b=Fbj9bbV4zh/7QLA0S9zUnxkKTQ87CBp7k3jlTleXdEa5/ttMc/KisiZvfNGU6y4rIm
+ t/tf0Z6zpDaFmcb8HtZo01pezHiJFj5GbkvNmfmYS4+Vgw3ANGJDUTrweNpAhHupCtLQ
+ b5czFn7nsEbGKHdRcsoQ6yWaojrs+3YTPp+O2emLOdImmxMqob9Ps3SNSKe2tF46Le7q
+ K7yctblqCqNlV/eFWPC4Aomub4aK8uPyd//pdWAHUVzWC47WK/V9jBCumMAzAMEHcMPi
+ QKO4ZoyV0S9ojwuf1h0BSmxJtIlJp6UHO4fjr080uKF0nS0q1MwLsfahCejramED+G1h
+ WOnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686733143; x=1689325143;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ d=1e100.net; s=20221208; t=1686733222; x=1689325222;
+ h=content-transfer-encoding:in-reply-to:from:references:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=mp6qKwnHe+KsjV34LVJ9sRj3p8qxH2ZQ4O0PgFUZ0Sc=;
- b=ZvdG86gn3L4RtzQ5j1C+JVclM1JqtuDI2HA+/fFjDrhp2sJOIUbJO7h5VNyVyQtNVa
- jzg2u7VwnoDKYjfKMaNqs8fXHRMPAaRLjTYr4kgptUWbER15oEP5mICXNljSBAG1Cj12
- S8Ym1M8mokEHoA4VaDbPcEe8XRgkLPTG0V1pXGUpiPzanNbHqpHIrmaBSlzxrYL9m1vL
- ctW9pmU4dgFUNVL72ZMS9Fpj24ex9qkObvrmdiOjYvNdVtzIxv1l7k3704i8//M+kGIH
- xgANF3R8oLor/Xci7IWyuS9+nz/GLp4E9d77W3n4j2Sn0ygkXXsOL1ycldCbAyJ1HFO3
- zzqw==
-X-Gm-Message-State: AC+VfDxYipCzjbSOv/nrmJMLYcO4fOcH3zhCaBQFhM53gYbd5atX2WV0
- 6EYk+DCwhl7z9GF90xt2p7WCvA==
-X-Google-Smtp-Source: ACHHUZ41vggVzS1xlR0cL6acMaYu/0T1OvHbnCGSlRWuq01aZViXoavu0LXvHqoH1BuZWfnTlCOgPA==
-X-Received: by 2002:a4a:c90b:0:b0:552:4bca:a9df with SMTP id
- v11-20020a4ac90b000000b005524bcaa9dfmr7765501ooq.3.1686733143200; 
- Wed, 14 Jun 2023 01:59:03 -0700 (PDT)
+ bh=PSiVnoNXwA/9+IsbqMn7p7LJuDWj7Q4v/whuwhU8Za8=;
+ b=QurMebyTY9MpLd7GKGcY7cLDvGzGNKSyj7QPg9all6agO7ydzwk8k+dO/E2V7dpIT/
+ Jb5fe8l8PcLAu9WqYxuNLzk0j0wz3tzmshj7/21CqnXcZaeOQoQ9vdrJwgnZsXN/cTnI
+ TNjSUfJKuQ7HTkLoCyuh4ZWURWt3G9/JRw9v4WC+U3JFULHW9mU9MInX/FHwMJtzHJ7m
+ aYZz3q/AXXZhc19J09xA4sYkrYOi/4SNK0R4P+9i5ZXdp694vZCq3kT9I7oWz2+43YRy
+ Nlk3FX4KJC7sUU7SgeLUWYPwUkRANs83os4Q4p2yfWOQ4SkINLj3sW3QjYoai9doebZs
+ q0Vg==
+X-Gm-Message-State: AC+VfDwQ861O6ETj/CPdjs/i2PbUVuTVLHnmjNCHbFo+mb8ZzHJcT+00
+ CeNwjjRbxewudjYJcHlGivov+g==
+X-Google-Smtp-Source: ACHHUZ4R8H4rselBxiDDnpEjbvfTuSqtKWzQ81mtjX+Dies7JGDrs7O43yhCDyglLYpQqEJhVry59A==
+X-Received: by 2002:a05:6870:5415:b0:19f:a1da:49d3 with SMTP id
+ d21-20020a056870541500b0019fa1da49d3mr10424859oan.51.1686733221940; 
+ Wed, 14 Jun 2023 02:00:21 -0700 (PDT)
 Received: from [192.168.68.107] ([177.170.117.210])
  by smtp.gmail.com with ESMTPSA id
- bf14-20020a056820174e00b0051134f333d3sm4831348oob.16.2023.06.14.01.58.59
+ r21-20020a05687032d500b001a663e49523sm5241974oac.36.2023.06.14.02.00.19
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 14 Jun 2023 01:59:02 -0700 (PDT)
-Message-ID: <f22d710e-d1bb-d33a-78c1-c86a6740dbe1@ventanamicro.com>
-Date: Wed, 14 Jun 2023 05:58:57 -0300
+ Wed, 14 Jun 2023 02:00:21 -0700 (PDT)
+Message-ID: <de6d5a44-66e4-4795-0604-b56beb18a2c8@ventanamicro.com>
+Date: Wed, 14 Jun 2023 06:00:17 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.0
-Subject: Re: [PATCH v2 2/8] target/riscv: Factor out extension tests to
- cpu_cfg.h
+Subject: Re: [PATCH v2 7/8] disas/riscv: Add support for XVentanaCondOps
 Content-Language: en-US
 To: Christoph Muellner <christoph.muellner@vrull.eu>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
@@ -72,15 +71,14 @@ To: Christoph Muellner <christoph.muellner@vrull.eu>, qemu-riscv@nongnu.org,
  <philipp.tomsich@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
-Cc: Weiwei Li <liweiwei@iscas.ac.cn>
 References: <20230612111034.3955227-1-christoph.muellner@vrull.eu>
- <20230612111034.3955227-3-christoph.muellner@vrull.eu>
+ <20230612111034.3955227-8-christoph.muellner@vrull.eu>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230612111034.3955227-3-christoph.muellner@vrull.eu>
+In-Reply-To: <20230612111034.3955227-8-christoph.muellner@vrull.eu>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c2c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc2c.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::35;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x35.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
@@ -108,110 +106,130 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On 6/12/23 08:10, Christoph Muellner wrote:
 > From: Christoph Müllner <christoph.muellner@vrull.eu>
 > 
-> This patch moves the extension test functions that are used
-> to gate vendor extension decoders, into cpu_cfg.h.
-> This allows to reuse them in the disassembler.
+> This patch adds XVentanaCondOps support to the RISC-V disassembler.
 > 
-> This patch does not introduce new functionality.
-> However, the patch includes a small change:
-> The parameter for the extension test functions has been changed
-> from 'DisasContext*' to 'const RISCVCPUConfig*' to keep
-> the code in cpu_cfg.h self-contained.
-> 
+> Co-developed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> Acked-by: Alistair Francis <alistair.francis@wdc.com>
 > Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
 > ---
 
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
->   target/riscv/cpu_cfg.h   | 26 ++++++++++++++++++++++++++
->   target/riscv/translate.c | 27 ++-------------------------
->   2 files changed, 28 insertions(+), 25 deletions(-)
+>   disas/meson.build      |  5 ++++-
+>   disas/riscv-xventana.c | 41 +++++++++++++++++++++++++++++++++++++++++
+>   disas/riscv-xventana.h | 18 ++++++++++++++++++
+>   disas/riscv.c          |  4 ++++
+>   4 files changed, 67 insertions(+), 1 deletion(-)
+>   create mode 100644 disas/riscv-xventana.c
+>   create mode 100644 disas/riscv-xventana.h
 > 
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> index c4a627d335..0b4fe4b540 100644
-> --- a/target/riscv/cpu_cfg.h
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -133,4 +133,30 @@ struct RISCVCPUConfig {
->   };
->   
->   typedef struct RISCVCPUConfig RISCVCPUConfig;
+> diff --git a/disas/meson.build b/disas/meson.build
+> index 832727e4b3..e0ee326411 100644
+> --- a/disas/meson.build
+> +++ b/disas/meson.build
+> @@ -6,7 +6,10 @@ common_ss.add(when: 'CONFIG_M68K_DIS', if_true: files('m68k.c'))
+>   common_ss.add(when: 'CONFIG_MICROBLAZE_DIS', if_true: files('microblaze.c'))
+>   common_ss.add(when: 'CONFIG_MIPS_DIS', if_true: files('mips.c', 'nanomips.c'))
+>   common_ss.add(when: 'CONFIG_NIOS2_DIS', if_true: files('nios2.c'))
+> -common_ss.add(when: 'CONFIG_RISCV_DIS', if_true: files('riscv.c'))
+> +common_ss.add(when: 'CONFIG_RISCV_DIS', if_true: files(
+> +    'riscv.c',
+> +    'riscv-xventana.c'
+> +))
+>   common_ss.add(when: 'CONFIG_SH4_DIS', if_true: files('sh4.c'))
+>   common_ss.add(when: 'CONFIG_SPARC_DIS', if_true: files('sparc.c'))
+>   common_ss.add(when: 'CONFIG_XTENSA_DIS', if_true: files('xtensa.c'))
+> diff --git a/disas/riscv-xventana.c b/disas/riscv-xventana.c
+> new file mode 100644
+> index 0000000000..a0224d1fb3
+> --- /dev/null
+> +++ b/disas/riscv-xventana.c
+> @@ -0,0 +1,41 @@
+> +/*
+> + * QEMU RISC-V Disassembler for xventana.
+> + *
+> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + */
 > +
-> +/* Helper functions to test for extensions.  */
+> +#include "disas/riscv.h"
+> +#include "disas/riscv-xventana.h"
 > +
-> +static inline bool always_true_p(const RISCVCPUConfig *cfg __attribute__((__unused__)))
+> +typedef enum {
+> +    /* 0 is reserved for rv_op_illegal. */
+> +    ventana_op_vt_maskc = 1,
+> +    ventana_op_vt_maskcn = 2,
+> +} rv_ventana_op;
+> +
+> +const rv_opcode_data ventana_opcode_data[] = {
+> +    { "vt.illegal", rv_codec_illegal, rv_fmt_none, NULL, 0, 0, 0 },
+> +    { "vt.maskc", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
+> +    { "vt.maskcn", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
+> +};
+> +
+> +void decode_xventanacondops(rv_decode *dec, rv_isa isa)
 > +{
-> +    return true;
-> +}
+> +    rv_inst inst = dec->inst;
+> +    rv_opcode op = rv_op_illegal;
 > +
-> +static inline bool has_xthead_p(const RISCVCPUConfig *cfg)
-> +{
-> +    return cfg->ext_xtheadba || cfg->ext_xtheadbb ||
-> +           cfg->ext_xtheadbs || cfg->ext_xtheadcmo ||
-> +           cfg->ext_xtheadcondmov ||
-> +           cfg->ext_xtheadfmemidx || cfg->ext_xtheadfmv ||
-> +           cfg->ext_xtheadmac || cfg->ext_xtheadmemidx ||
-> +           cfg->ext_xtheadmempair || cfg->ext_xtheadsync;
-> +}
-> +
-> +#define MATERIALISE_EXT_PREDICATE(ext) \
-> +    static inline bool has_ ## ext ## _p(const RISCVCPUConfig *cfg) \
-> +    { \
-> +        return cfg->ext_ ## ext ; \
+> +    switch (((inst >> 0) & 0b11)) {
+> +    case 3:
+> +        switch (((inst >> 2) & 0b11111)) {
+> +        case 30:
+> +            switch (((inst >> 22) & 0b1111111000) | ((inst >> 12) & 0b0000000111)) {
+> +            case 6: op = ventana_op_vt_maskc; break;
+> +            case 7: op = ventana_op_vt_maskcn; break;
+> +            }
+> +            break;
+> +        }
+> +        break;
 > +    }
 > +
-> +MATERIALISE_EXT_PREDICATE(XVentanaCondOps)
+> +    dec->op = op;
+> +}
+> diff --git a/disas/riscv-xventana.h b/disas/riscv-xventana.h
+> new file mode 100644
+> index 0000000000..72be9ffa16
+> --- /dev/null
+> +++ b/disas/riscv-xventana.h
+> @@ -0,0 +1,18 @@
+> +/*
+> + * QEMU disassembler -- RISC-V specific header (xventana*).
+> + *
+> + * Copyright (c) 2023 VRULL GmbH
+> + *
+> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + */
 > +
->   #endif
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 859d5b2dcf..275b922811 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -119,29 +119,6 @@ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
->       return ctx->misa_ext & ext;
->   }
+> +#ifndef DISAS_RISCV_XVENTANA_H
+> +#define DISAS_RISCV_XVENTANA_H
+> +
+> +#include "disas/riscv.h"
+> +
+> +extern const rv_opcode_data ventana_opcode_data[];
+> +
+> +void decode_xventanacondops(rv_decode*, rv_isa);
+> +
+> +#endif /* DISAS_RISCV_XVENTANA_H */
+> diff --git a/disas/riscv.c b/disas/riscv.c
+> index dc3bfb0123..c7bfd4ed32 100644
+> --- a/disas/riscv.c
+> +++ b/disas/riscv.c
+> @@ -22,6 +22,9 @@
+>   #include "target/riscv/cpu_cfg.h"
+>   #include "disas/riscv.h"
 >   
-> -static bool always_true_p(DisasContext *ctx  __attribute__((__unused__)))
-> -{
-> -    return true;
-> -}
-> -
-> -static bool has_xthead_p(DisasContext *ctx  __attribute__((__unused__)))
-> -{
-> -    return ctx->cfg_ptr->ext_xtheadba || ctx->cfg_ptr->ext_xtheadbb ||
-> -           ctx->cfg_ptr->ext_xtheadbs || ctx->cfg_ptr->ext_xtheadcmo ||
-> -           ctx->cfg_ptr->ext_xtheadcondmov ||
-> -           ctx->cfg_ptr->ext_xtheadfmemidx || ctx->cfg_ptr->ext_xtheadfmv ||
-> -           ctx->cfg_ptr->ext_xtheadmac || ctx->cfg_ptr->ext_xtheadmemidx ||
-> -           ctx->cfg_ptr->ext_xtheadmempair || ctx->cfg_ptr->ext_xtheadsync;
-> -}
-> -
-> -#define MATERIALISE_EXT_PREDICATE(ext)  \
-> -    static bool has_ ## ext ## _p(DisasContext *ctx)    \
-> -    { \
-> -        return ctx->cfg_ptr->ext_ ## ext ; \
-> -    }
-> -
-> -MATERIALISE_EXT_PREDICATE(XVentanaCondOps);
-> -
->   #ifdef TARGET_RISCV32
->   #define get_xl(ctx)    MXL_RV32
->   #elif defined(CONFIG_USER_ONLY)
-> @@ -1132,7 +1109,7 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
->        * that are tested in-order until a decoder matches onto the opcode.
->        */
->       static const struct {
-> -        bool (*guard_func)(DisasContext *);
-> +        bool (*guard_func)(const RISCVCPUConfig *);
->           bool (*decode_func)(DisasContext *, uint32_t);
+> +/* Vendor extensions */
+> +#include "disas/riscv-xventana.h"
+> +
+>   typedef enum {
+>       /* 0 is reserved for rv_op_illegal. */
+>       rv_op_lui = 1,
+> @@ -4708,6 +4711,7 @@ disasm_inst(char *buf, size_t buflen, rv_isa isa, uint64_t pc, rv_inst inst,
+>           void (*decode_func)(rv_decode *, rv_isa);
 >       } decoders[] = {
->           { always_true_p,  decode_insn32 },
-> @@ -1161,7 +1138,7 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
->           ctx->opcode = opcode32;
+>           { always_true_p, rvi_opcode_data, decode_inst_opcode },
+> +        { has_XVentanaCondOps_p, ventana_opcode_data, decode_xventanacondops },
+>       };
 >   
->           for (size_t i = 0; i < ARRAY_SIZE(decoders); ++i) {
-> -            if (decoders[i].guard_func(ctx) &&
-> +            if (decoders[i].guard_func(ctx->cfg_ptr) &&
->                   decoders[i].decode_func(ctx, opcode32)) {
->                   return;
->               }
+>       for (size_t i = 0; i < ARRAY_SIZE(decoders); i++) {
 
