@@ -4,86 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91B11EB64D8
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Jun 2023 13:02:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C4CBEB64D9
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Jun 2023 06:34:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q9Q7v-0002tO-Iu; Wed, 14 Jun 2023 09:01:31 -0400
+	id 1q9gYS-0006v1-Ay; Thu, 15 Jun 2023 02:34:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <npiggin@gmail.com>)
- id 1q9K2A-0005Km-Dj; Wed, 14 Jun 2023 02:31:10 -0400
-Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <npiggin@gmail.com>)
- id 1q9K28-0005ZC-7n; Wed, 14 Jun 2023 02:31:10 -0400
-Received: by mail-pg1-x536.google.com with SMTP id
- 41be03b00d2f7-53fbf2c42bfso4473465a12.3; 
- Tue, 13 Jun 2023 23:31:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1686724265; x=1689316265;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :content-transfer-encoding:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=OBt3bnhhx1Xjce0w0KL7iWrNgw5Htt4Y7dzhMZBjXnU=;
- b=fqYEsmDp3zjvNJHYBGgxX+gR7Jdo1EQsMEKvuqoy+fT5/dLlj/yqys5W5yQCzshrcd
- 7yODPbJs80Qevv0QAoGdm6XtMstzn0/+bATO/ILqUOiucjwqjnpHZarItLUeWqZmaFna
- ujMW6wTHk0H9BqAsCMGOsIIyh4xyYdhqQGm+Q29XN0rForXRb4ypxWa7m9xw5peJOgai
- UUJSyTaNsUBQ2OTC9BB37pJbXwfeb26wnh/uH74US9WnnD2YXRAUTIn8kPwqxOs81kSf
- RqIDKHQ/ZjQp8BogRgACUty3eJFa5cjHzOkyju3n3zV6GKLpqyS5/KcOW0L2gQyMxpn7
- dbuA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686724265; x=1689316265;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :content-transfer-encoding:mime-version:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=OBt3bnhhx1Xjce0w0KL7iWrNgw5Htt4Y7dzhMZBjXnU=;
- b=LSIYQHFq3SZeKfXzgerhTqi1YbzUKqN0fEOFJ2C6aPX7XnAnLIP1Puadr0IN13dbhN
- OOHqqyqDObHSZlTgtITKkT/lHSGFBHMUgb623ya7538/2j1V2900dRXtt/I3RaE+RCtM
- 3WwrWIxKejppC+Ljvi7MfJCNykioz7yYLBKu9ggA5+nktxupw7pHwxb+ZR0gHES8gqDx
- 4i8f2Jowt+qa4wgktBR1oPN2QLQwwizXT2nDbjwOZJWIeIRXGgpqIso9wcMPwhJElsLW
- VsVRvQPzU/ecWU/rx6GIv36hmzSXYXU1VBwklsiX021ZhnpGoPcwJg6tHG/dcwZQw4AZ
- wEDw==
-X-Gm-Message-State: AC+VfDw+xYz6TdJ2YAj+4ZgBH+d7SFGLSVoyWv6Mx9j2l6LSw8YSRrbM
- ZWheOepktjQxjm1aXxf6QfE=
-X-Google-Smtp-Source: ACHHUZ5yvx65i8oqlfxhZ3W+JfrCQhsy8WojqQ36smOroSBTlsq+rvs94i/geTyYeofrOc9pYoOygQ==
-X-Received: by 2002:a17:90a:ab12:b0:24d:f59a:d331 with SMTP id
- m18-20020a17090aab1200b0024df59ad331mr798905pjq.26.1686724264660; 
- Tue, 13 Jun 2023 23:31:04 -0700 (PDT)
-Received: from localhost (14-203-144-223.static.tpgi.com.au. [14.203.144.223])
- by smtp.gmail.com with ESMTPSA id
- u14-20020a17090ae00e00b00256bbfbabcfsm1892335pjy.48.2023.06.13.23.31.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 13 Jun 2023 23:31:04 -0700 (PDT)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Wed, 14 Jun 2023 16:30:58 +1000
-Message-Id: <CTC5UJ3RY4ME.1UPZ2BDJUUCQ7@wheely>
-Cc: <qemu-block@nongnu.org>, "Thomas Huth" <thuth@redhat.com>,
- <qemu-s390x@nongnu.org>, <qemu-riscv@nongnu.org>, <qemu-arm@nongnu.org>,
- "Richard Henderson" <richard.henderson@linaro.org>, <qemu-ppc@nongnu.org>
-Subject: Re: [PATCH v3 4/9] target/ppc: Check for USER_ONLY definition
- instead of SOFTMMU one
-From: "Nicholas Piggin" <npiggin@gmail.com>
-To: =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- <qemu-devel@nongnu.org>
-X-Mailer: aerc 0.14.0
-References: <20230613133347.82210-1-philmd@linaro.org>
- <20230613133347.82210-5-philmd@linaro.org>
-In-Reply-To: <20230613133347.82210-5-philmd@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::536;
- envelope-from=npiggin@gmail.com; helo=mail-pg1-x536.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1q9gXz-0006Vh-Tp; Thu, 15 Jun 2023 02:33:32 -0400
+Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1q9gXq-0004Ah-Jy; Thu, 15 Jun 2023 02:33:25 -0400
+Received: from localhost.localdomain (unknown [117.61.111.213])
+ by APP-05 (Coremail) with SMTP id zQCowAD3_h6isIpkuxShAg--.21989S7;
+ Thu, 15 Jun 2023 14:33:18 +0800 (CST)
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
+ Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH v2 5/6] target/riscv: Expose properties for BF16 extensions
+Date: Thu, 15 Jun 2023 14:33:01 +0800
+Message-Id: <20230615063302.102409-6-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230615063302.102409-1-liweiwei@iscas.ac.cn>
+References: <20230615063302.102409-1-liweiwei@iscas.ac.cn>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: zQCowAD3_h6isIpkuxShAg--.21989S7
+X-Coremail-Antispam: 1UD129KBjvJXoW7KFy7CF45Xw1DCF1rGF17KFg_yoW8uF1xpr
+ 4jga4UGw15Jr13WwnxtrWDGa15Jw45X3s7K3yxCa4xXrWfCrsrGFnrC39rWayUKF4rZa1I
+ qr1a9w1xJr4kta7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUPF14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
+ kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
+ z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
+ 4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq
+ 3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7
+ IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4U
+ M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2
+ kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E
+ 14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIx
+ kGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUCVW8JwCI42IY6xIIjxv20xvEc7CjxVAF
+ wI0_Cr0_Gr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJV
+ W8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUOBTY
+ UUUUU
+X-Originating-IP: [117.61.111.213]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 14 Jun 2023 09:01:24 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -98,156 +79,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue Jun 13, 2023 at 11:33 PM AEST, Philippe Mathieu-Daud=C3=A9 wrote:
-> Since we *might* have user emulation with softmmu,
-> replace the system emulation check by !user emulation one.
->
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ target/riscv/cpu.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-Reviewed-by: Nicholas Piggin <npiggin@gmail.com>
-
-> ---
->  target/ppc/cpu_init.c    | 20 ++++++++++----------
->  target/ppc/helper_regs.c |  6 ++----
->  2 files changed, 12 insertions(+), 14 deletions(-)
->
-> diff --git a/target/ppc/cpu_init.c b/target/ppc/cpu_init.c
-> index 9f97222655..7bce421a7c 100644
-> --- a/target/ppc/cpu_init.c
-> +++ b/target/ppc/cpu_init.c
-> @@ -5841,7 +5841,7 @@ POWERPC_FAMILY(970)(ObjectClass *oc, void *data)
->                      (1ull << MSR_PMM) |
->                      (1ull << MSR_RI);
->      pcc->mmu_model =3D POWERPC_MMU_64B;
-> -#if defined(CONFIG_SOFTMMU)
-> +#if !defined(CONFIG_USER_ONLY)
->      pcc->hash64_opts =3D &ppc_hash64_opts_basic;
->  #endif
->      pcc->excp_model =3D POWERPC_EXCP_970;
-> @@ -5920,7 +5920,7 @@ POWERPC_FAMILY(POWER5P)(ObjectClass *oc, void *data=
-)
->      pcc->lpcr_mask =3D LPCR_RMLS | LPCR_ILE | LPCR_LPES0 | LPCR_LPES1 |
->          LPCR_RMI | LPCR_HDICE;
->      pcc->mmu_model =3D POWERPC_MMU_2_03;
-> -#if defined(CONFIG_SOFTMMU)
-> +#if !defined(CONFIG_USER_ONLY)
->      pcc->hash64_opts =3D &ppc_hash64_opts_basic;
->      pcc->lrg_decr_bits =3D 32;
->  #endif
-> @@ -6037,7 +6037,7 @@ POWERPC_FAMILY(POWER7)(ObjectClass *oc, void *data)
->          LPCR_LPES0 | LPCR_LPES1 | LPCR_HDICE;
->      pcc->lpcr_pm =3D LPCR_P7_PECE0 | LPCR_P7_PECE1 | LPCR_P7_PECE2;
->      pcc->mmu_model =3D POWERPC_MMU_2_06;
-> -#if defined(CONFIG_SOFTMMU)
-> +#if !defined(CONFIG_USER_ONLY)
->      pcc->hash64_opts =3D &ppc_hash64_opts_POWER7;
->      pcc->lrg_decr_bits =3D 32;
->  #endif
-> @@ -6181,7 +6181,7 @@ POWERPC_FAMILY(POWER8)(ObjectClass *oc, void *data)
->      pcc->lpcr_pm =3D LPCR_P8_PECE0 | LPCR_P8_PECE1 | LPCR_P8_PECE2 |
->                     LPCR_P8_PECE3 | LPCR_P8_PECE4;
->      pcc->mmu_model =3D POWERPC_MMU_2_07;
-> -#if defined(CONFIG_SOFTMMU)
-> +#if !defined(CONFIG_USER_ONLY)
->      pcc->hash64_opts =3D &ppc_hash64_opts_POWER7;
->      pcc->lrg_decr_bits =3D 32;
->      pcc->n_host_threads =3D 8;
-> @@ -6197,7 +6197,7 @@ POWERPC_FAMILY(POWER8)(ObjectClass *oc, void *data)
->      pcc->l1_icache_size =3D 0x8000;
->  }
-> =20
-> -#ifdef CONFIG_SOFTMMU
-> +#ifndef CONFIG_USER_ONLY
->  /*
->   * Radix pg sizes and AP encodings for dt node ibm,processor-radix-AP-en=
-codings
->   * Encoded as array of int_32s in the form:
-> @@ -6214,7 +6214,7 @@ static struct ppc_radix_page_info POWER9_radix_page=
-_info =3D {
->          0x4000001e  /*  1G - enc: 0x2 */
->      }
->  };
-> -#endif /* CONFIG_SOFTMMU */
-> +#endif /* CONFIG_USER_ONLY */
-> =20
->  static void init_proc_POWER9(CPUPPCState *env)
->  {
-> @@ -6371,7 +6371,7 @@ POWERPC_FAMILY(POWER9)(ObjectClass *oc, void *data)
->          LPCR_HEIC | LPCR_LPES0 | LPCR_HVICE | LPCR_HDICE;
->      pcc->lpcr_pm =3D LPCR_PDEE | LPCR_HDEE | LPCR_EEE | LPCR_DEE | LPCR_=
-OEE;
->      pcc->mmu_model =3D POWERPC_MMU_3_00;
-> -#if defined(CONFIG_SOFTMMU)
-> +#if !defined(CONFIG_USER_ONLY)
->      /* segment page size remain the same */
->      pcc->hash64_opts =3D &ppc_hash64_opts_POWER7;
->      pcc->radix_page_info =3D &POWER9_radix_page_info;
-> @@ -6389,7 +6389,7 @@ POWERPC_FAMILY(POWER9)(ObjectClass *oc, void *data)
->      pcc->l1_icache_size =3D 0x8000;
->  }
-> =20
-> -#ifdef CONFIG_SOFTMMU
-> +#ifndef CONFIG_USER_ONLY
->  /*
->   * Radix pg sizes and AP encodings for dt node ibm,processor-radix-AP-en=
-codings
->   * Encoded as array of int_32s in the form:
-> @@ -6406,7 +6406,7 @@ static struct ppc_radix_page_info POWER10_radix_pag=
-e_info =3D {
->          0x4000001e  /*  1G - enc: 0x2 */
->      }
->  };
-> -#endif /* CONFIG_SOFTMMU */
-> +#endif /* !CONFIG_USER_ONLY */
-> =20
->  static void init_proc_POWER10(CPUPPCState *env)
->  {
-> @@ -6547,7 +6547,7 @@ POWERPC_FAMILY(POWER10)(ObjectClass *oc, void *data=
-)
-> =20
->      pcc->lpcr_pm =3D LPCR_PDEE | LPCR_HDEE | LPCR_EEE | LPCR_DEE | LPCR_=
-OEE;
->      pcc->mmu_model =3D POWERPC_MMU_3_00;
-> -#if defined(CONFIG_SOFTMMU)
-> +#if !defined(CONFIG_USER_ONLY)
->      /* segment page size remain the same */
->      pcc->hash64_opts =3D &ppc_hash64_opts_POWER7;
->      pcc->radix_page_info =3D &POWER10_radix_page_info;
-> diff --git a/target/ppc/helper_regs.c b/target/ppc/helper_regs.c
-> index bc7e9d7eda..e27f4a75a4 100644
-> --- a/target/ppc/helper_regs.c
-> +++ b/target/ppc/helper_regs.c
-> @@ -310,7 +310,7 @@ int hreg_store_msr(CPUPPCState *env, target_ulong val=
-ue, int alter_hv)
->      return excp;
->  }
-> =20
-> -#ifdef CONFIG_SOFTMMU
-> +#ifndef CONFIG_USER_ONLY
->  void store_40x_sler(CPUPPCState *env, uint32_t val)
->  {
->      /* XXX: TO BE FIXED */
-> @@ -320,9 +320,7 @@ void store_40x_sler(CPUPPCState *env, uint32_t val)
->      }
->      env->spr[SPR_405_SLER] =3D val;
->  }
-> -#endif /* CONFIG_SOFTMMU */
-> =20
-> -#ifndef CONFIG_USER_ONLY
->  void check_tlb_flush(CPUPPCState *env, bool global)
->  {
->      CPUState *cs =3D env_cpu(env);
-> @@ -341,7 +339,7 @@ void check_tlb_flush(CPUPPCState *env, bool global)
->          tlb_flush(cs);
->      }
->  }
-> -#endif
-> +#endif /* !CONFIG_USER_ONLY */
-> =20
->  /**
->   * _spr_register
-> --=20
-> 2.38.1
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index dc6b2f72f6..feb0ee5e6f 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -83,6 +83,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zifencei, PRIV_VERSION_1_10_0, ext_ifencei),
+     ISA_EXT_DATA_ENTRY(zihintpause, PRIV_VERSION_1_10_0, ext_zihintpause),
+     ISA_EXT_DATA_ENTRY(zawrs, PRIV_VERSION_1_12_0, ext_zawrs),
++    ISA_EXT_DATA_ENTRY(zfbfmin, PRIV_VERSION_1_12_0, ext_zfbfmin),
+     ISA_EXT_DATA_ENTRY(zfh, PRIV_VERSION_1_11_0, ext_zfh),
+     ISA_EXT_DATA_ENTRY(zfhmin, PRIV_VERSION_1_11_0, ext_zfhmin),
+     ISA_EXT_DATA_ENTRY(zfinx, PRIV_VERSION_1_12_0, ext_zfinx),
+@@ -114,6 +115,8 @@ static const struct isa_ext_data isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zve32f, PRIV_VERSION_1_10_0, ext_zve32f),
+     ISA_EXT_DATA_ENTRY(zve64f, PRIV_VERSION_1_10_0, ext_zve64f),
+     ISA_EXT_DATA_ENTRY(zve64d, PRIV_VERSION_1_10_0, ext_zve64d),
++    ISA_EXT_DATA_ENTRY(zvfbfmin, PRIV_VERSION_1_12_0, ext_zvfbfmin),
++    ISA_EXT_DATA_ENTRY(zvfbfwma, PRIV_VERSION_1_12_0, ext_zvfbfwma),
+     ISA_EXT_DATA_ENTRY(zvfh, PRIV_VERSION_1_12_0, ext_zvfh),
+     ISA_EXT_DATA_ENTRY(zvfhmin, PRIV_VERSION_1_12_0, ext_zvfhmin),
+     ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
+@@ -1703,6 +1706,10 @@ static Property riscv_cpu_extensions[] = {
+     DEFINE_PROP_BOOL("x-zvfh", RISCVCPU, cfg.ext_zvfh, false),
+     DEFINE_PROP_BOOL("x-zvfhmin", RISCVCPU, cfg.ext_zvfhmin, false),
+ 
++    DEFINE_PROP_BOOL("x-zfbfmin", RISCVCPU, cfg.ext_zfbfmin, false),
++    DEFINE_PROP_BOOL("x-zvfbfmin", RISCVCPU, cfg.ext_zvfbfmin, false),
++    DEFINE_PROP_BOOL("x-zvfbfwma", RISCVCPU, cfg.ext_zvfbfwma, false),
++
+     DEFINE_PROP_END_OF_LIST(),
+ };
+ 
+-- 
+2.25.1
 
 
