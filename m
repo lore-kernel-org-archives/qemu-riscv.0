@@ -4,43 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8573CEB64D9
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Jun 2023 06:34:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5499BEB64D9
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Jun 2023 06:34:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q9gYf-00075W-CM; Thu, 15 Jun 2023 02:34:13 -0400
+	id 1q9gYf-00075b-Ck; Thu, 15 Jun 2023 02:34:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q9gY0-0006Vj-03; Thu, 15 Jun 2023 02:33:32 -0400
+ id 1q9gY0-0006Vl-7V; Thu, 15 Jun 2023 02:33:32 -0400
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q9gXr-0004AL-Ru; Thu, 15 Jun 2023 02:33:25 -0400
+ id 1q9gXt-0004BY-1R; Thu, 15 Jun 2023 02:33:31 -0400
 Received: from localhost.localdomain (unknown [117.61.111.213])
- by APP-05 (Coremail) with SMTP id zQCowAD3_h6isIpkuxShAg--.21989S6;
- Thu, 15 Jun 2023 14:33:16 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowAD3_h6isIpkuxShAg--.21989S8;
+ Thu, 15 Jun 2023 14:33:20 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
- Weiwei Li <liweiwei@iscas.ac.cn>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v2 4/6] target/riscv: Add support for Zvfbfwma extension
-Date: Thu, 15 Jun 2023 14:33:00 +0800
-Message-Id: <20230615063302.102409-5-liweiwei@iscas.ac.cn>
+ Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH v2 6/6] target/riscv: Add disas support for BF16 extensions
+Date: Thu, 15 Jun 2023 14:33:02 +0800
+Message-Id: <20230615063302.102409-7-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230615063302.102409-1-liweiwei@iscas.ac.cn>
 References: <20230615063302.102409-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowAD3_h6isIpkuxShAg--.21989S6
-X-Coremail-Antispam: 1UD129KBjvJXoWxAF45Gr48trWDKF1rZryrZwb_yoWrKw1xpF
- 4xGrya939xCFyxAa1ftF45Aw4Ygws3Gw4UAwn3WwsxAay7GrZ8Jryqyw4Ikr4jvFWDur42
- 9ayqyry3Cws2qa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+X-CM-TRANSID: zQCowAD3_h6isIpkuxShAg--.21989S8
+X-Coremail-Antispam: 1UD129KBjvJXoWxuF47Kr4xJFyUAF47WrWrAFb_yoW7JFyfpr
+ y5Z3y3KrZIkF1xJa1fZF4UAF95try8Jr48Za4Fv3y3WasxWFy5Cr45X343AFy8WFW0yr4x
+ Wa1Sg3yYvF1xAa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
  9KBjDU0xBIdaVrnRJUUUPF14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
  kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
@@ -51,7 +50,7 @@ X-Coremail-Antispam: 1UD129KBjvJXoWxAF45Gr48trWDKF1rZryrZwb_yoWrKw1xpF
  M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2
  kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E
  14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIx
- kGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAF
+ kGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUCVW8JwCI42IY6xIIjxv20xvEc7CjxVAF
  wI0_Cr0_Gr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJV
  W8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUOBTY
  UUUUU
@@ -80,136 +79,144 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add trans_* and helper function for Zvfbfwma instructions.
-
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/helper.h                      |  3 ++
- target/riscv/insn32.decode                 |  4 ++
- target/riscv/insn_trans/trans_rvbf16.c.inc | 58 ++++++++++++++++++++++
- target/riscv/vector_helper.c               | 11 ++++
- 4 files changed, 76 insertions(+)
+ disas/riscv.c | 44 ++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 44 insertions(+)
 
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index fc48853e07..3170b8daa6 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -1160,3 +1160,6 @@ DEF_HELPER_FLAGS_2(fcvt_s_bf16, TCG_CALL_NO_RWG, i64, env, i64)
+diff --git a/disas/riscv.c b/disas/riscv.c
+index 5005364aba..44ea69315c 100644
+--- a/disas/riscv.c
++++ b/disas/riscv.c
+@@ -964,6 +964,16 @@ typedef enum {
+     rv_op_cm_jalt = 788,
+     rv_op_czero_eqz = 789,
+     rv_op_czero_nez = 790,
++    rv_op_fcvt_bf16_s = 791,
++    rv_op_fcvt_s_bf16 = 792,
++    rv_op_vfncvtbf16_f_f_w = 793,
++    rv_op_vfwcvtbf16_f_f_v = 794,
++    rv_op_vfwmaccbf16_vv = 795,
++    rv_op_vfwmaccbf16_vf = 796,
++    rv_op_flh = 797,
++    rv_op_fsh = 798,
++    rv_op_fmv_h_x = 799,
++    rv_op_fmv_x_h = 800,
+ } rv_op;
  
- DEF_HELPER_5(vfncvtbf16_f_f_w, void, ptr, ptr, ptr, env, i32)
- DEF_HELPER_5(vfwcvtbf16_f_f_v, void, ptr, ptr, ptr, env, i32)
-+
-+DEF_HELPER_6(vfwmaccbf16_vv, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vfwmaccbf16_vf, void, ptr, ptr, i64, ptr, env, i32)
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 10d001f14d..8c5d293f07 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -916,3 +916,7 @@ fcvt_s_bf16       0100000  00110 ..... ... ..... 1010011 @r2_rm
- # *** Zvfbfmin Standard Extension ***
- vfncvtbf16_f_f_w  010010 . ..... 11101 001 ..... 1010111 @r2_vm
- vfwcvtbf16_f_f_v  010010 . ..... 01101 001 ..... 1010111 @r2_vm
-+
-+# *** Zvfbfwma Standard Extension ***
-+vfwmaccbf16_vv    111011 . ..... ..... 001 ..... 1010111 @r_vm
-+vfwmaccbf16_vf    111011 . ..... ..... 101 ..... 1010111 @r_vm
-diff --git a/target/riscv/insn_trans/trans_rvbf16.c.inc b/target/riscv/insn_trans/trans_rvbf16.c.inc
-index f794a3f745..911bc29908 100644
---- a/target/riscv/insn_trans/trans_rvbf16.c.inc
-+++ b/target/riscv/insn_trans/trans_rvbf16.c.inc
-@@ -28,6 +28,12 @@
-     } \
- } while (0)
+ /* structures */
+@@ -2168,6 +2178,16 @@ const rv_opcode_data opcode_data[] = {
+     { "cm.jalt", rv_codec_zcmt_jt, rv_fmt_zcmt_index, NULL, 0 },
+     { "czero.eqz", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
+     { "czero.nez", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
++    { "fcvt.bf16.s", rv_codec_r_m, rv_fmt_rm_frd_frs1, NULL, 0, 0, 0 },
++    { "fcvt.s.bf16", rv_codec_r_m, rv_fmt_rm_frd_frs1, NULL, 0, 0, 0 },
++    { "vfncvtbf16.f.f.w", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, 0, 0, 0 },
++    { "vfwcvtbf16.f.f.v", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, 0, 0, 0 },
++    { "vfwmaccbf16.vv", rv_codec_v_r, rv_fmt_vd_vs1_vs2_vm, NULL, 0, 0, 0 },
++    { "vfwmaccbf16.vf", rv_codec_v_r, rv_fmt_vd_fs1_vs2_vm, NULL, 0, 0, 0 },
++    { "flh", rv_codec_i, rv_fmt_frd_offset_rs1, NULL, 0, 0, 0 },
++    { "fsh", rv_codec_s, rv_fmt_frs2_offset_rs1, NULL, 0, 0, 0 },
++    { "fmv.h.x", rv_codec_r, rv_fmt_frd_rs1, NULL, 0, 0, 0 },
++    { "fmv.x.h", rv_codec_r, rv_fmt_rd_frs1, NULL, 0, 0, 0 },
+ };
  
-+#define REQUIRE_ZVFBFWMA(ctx) do { \
-+    if (!ctx->cfg_ptr->ext_zvfbfwma) { \
-+        return false; \
-+    } \
-+} while (0)
-+
- static bool trans_fcvt_bf16_s(DisasContext *ctx, arg_fcvt_bf16_s *a)
- {
-     REQUIRE_FPU;
-@@ -115,3 +121,55 @@ static bool trans_vfwcvtbf16_f_f_v(DisasContext *ctx, arg_vfwcvtbf16_f_f_v *a)
-     }
-     return false;
- }
-+
-+static bool trans_vfwmaccbf16_vv(DisasContext *ctx, arg_vfwmaccbf16_vv *a)
-+{
-+    REQUIRE_FPU;
-+    REQUIRE_ZVFBFWMA(ctx);
-+
-+    if (require_rvv(ctx) && vext_check_isa_ill(ctx) && (ctx->sew == MO_16) &&
-+        vext_check_dss(ctx, a->rd, a->rs1, a->rs2, a->vm)) {
-+        uint32_t data = 0;
-+        TCGLabel *over = gen_new_label();
-+
-+        gen_set_rm_chkfrm(ctx, RISCV_FRM_DYN);
-+        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-+        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
-+
-+        data = FIELD_DP32(data, VDATA, VM, a->vm);
-+        data = FIELD_DP32(data, VDATA, LMUL, ctx->lmul);
-+        data = FIELD_DP32(data, VDATA, VTA, ctx->vta);
-+        data = FIELD_DP32(data, VDATA, VMA, ctx->vma);
-+        tcg_gen_gvec_4_ptr(vreg_ofs(ctx, a->rd), vreg_ofs(ctx, 0),
-+                           vreg_ofs(ctx, a->rs1),
-+                           vreg_ofs(ctx, a->rs2), cpu_env,
-+                           ctx->cfg_ptr->vlen / 8,
-+                           ctx->cfg_ptr->vlen / 8, data,
-+                           gen_helper_vfwmaccbf16_vv);
-+        mark_vs_dirty(ctx);
-+        gen_set_label(over);
-+        return true;
-+    }
-+    return false;
-+}
-+
-+static bool trans_vfwmaccbf16_vf(DisasContext *ctx, arg_vfwmaccbf16_vf *a)
-+{
-+    REQUIRE_FPU;
-+    REQUIRE_ZVFBFWMA(ctx);
-+
-+    if (require_rvv(ctx) && (ctx->sew == MO_16) && vext_check_isa_ill(ctx) &&
-+        vext_check_ds(ctx, a->rd, a->rs2, a->vm)) {
-+        uint32_t data = 0;
-+
-+        gen_set_rm(ctx, RISCV_FRM_DYN);
-+        data = FIELD_DP32(data, VDATA, VM, a->vm);
-+        data = FIELD_DP32(data, VDATA, LMUL, ctx->lmul);
-+        data = FIELD_DP32(data, VDATA, VTA, ctx->vta);
-+        data = FIELD_DP32(data, VDATA, VMA, ctx->vma);
-+        return opfvf_trans(a->rd, a->rs1, a->rs2, data,
-+                           gen_helper_vfwmaccbf16_vf, ctx);
-+    }
-+
-+    return false;
-+}
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 4d2bd42155..71bb9b4457 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -3554,6 +3554,17 @@ RVVCALL(OPFVF3, vfwmacc_vf_w, WOP_UUU_W, H8, H4, fwmacc32)
- GEN_VEXT_VF(vfwmacc_vf_h, 4)
- GEN_VEXT_VF(vfwmacc_vf_w, 8)
- 
-+static uint32_t fwmaccbf16(uint16_t a, uint16_t b, uint32_t d, float_status *s)
-+{
-+    return float32_muladd(bfloat16_to_float32(a, s),
-+                          bfloat16_to_float32(b, s), d, 0, s);
-+}
-+
-+RVVCALL(OPFVV3, vfwmaccbf16_vv, WOP_UUU_H, H4, H2, H2, fwmaccbf16)
-+GEN_VEXT_VV_ENV(vfwmaccbf16_vv, 4)
-+RVVCALL(OPFVF3, vfwmaccbf16_vf, WOP_UUU_H, H4, H2, fwmacc16)
-+GEN_VEXT_VF(vfwmaccbf16_vf, 4)
-+
- static uint32_t fwnmacc16(uint16_t a, uint16_t b, uint32_t d, float_status *s)
- {
-     return float32_muladd(float16_to_float32(a, true, s),
+ /* CSR names */
+@@ -2643,6 +2663,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+                 case 3: op = rv_op_vloxei8_v; break;
+                 }
+                 break;
++            case 1: op = rv_op_flh; break;
+             case 2: op = rv_op_flw; break;
+             case 3: op = rv_op_fld; break;
+             case 4: op = rv_op_flq; break;
+@@ -2846,6 +2867,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+                 case 3: op = rv_op_vsoxei8_v; break;
+                 }
+                 break;
++            case 1: op = rv_op_fsh; break;
+             case 2: op = rv_op_fsw; break;
+             case 3: op = rv_op_fsd; break;
+             case 4: op = rv_op_fsq; break;
+@@ -3123,6 +3145,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+                 switch ((inst >> 20) & 0b11111) {
+                 case 1: op = rv_op_fcvt_s_d; break;
+                 case 3: op = rv_op_fcvt_s_q; break;
++                case 6: op = rv_op_fcvt_s_bf16; break;
+                 }
+                 break;
+             case 33:
+@@ -3131,6 +3154,11 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+                 case 3: op = rv_op_fcvt_d_q; break;
+                 }
+                 break;
++            case 34:
++                switch (((inst >> 20) & 0b11111)) {
++                case 8: op = rv_op_fcvt_bf16_s; break;
++                }
++                break;
+             case 35:
+                 switch ((inst >> 20) & 0b11111) {
+                 case 0: op = rv_op_fcvt_q_s; break;
+@@ -3235,6 +3263,12 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+                 case 1: op = rv_op_fclass_d; break;
+                 }
+                 break;
++            case 114:
++                switch (((inst >> 17) & 0b11111000) |
++                        ((inst >> 12) & 0b00000111)) {
++                case 0: op = rv_op_fmv_x_h; break;
++                }
++                break;
+             case 115:
+                 switch (((inst >> 17) & 0b11111000) |
+                         ((inst >> 12) & 0b00000111)) {
+@@ -3254,6 +3288,12 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+                 case 0: op = rv_op_fmv_d_x; break;
+                 }
+                 break;
++            case 122:
++                switch (((inst >> 17) & 0b11111000) |
++                        ((inst >> 12) & 0b00000111)) {
++                case 0: op = rv_op_fmv_h_x; break;
++                }
++                break;
+             case 123:
+                 switch (((inst >> 17) & 0b11111000) |
+                         ((inst >> 12) & 0b00000111)) {
+@@ -3350,6 +3390,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+                     case 10: op = rv_op_vfwcvt_f_xu_v; break;
+                     case 11: op = rv_op_vfwcvt_f_x_v; break;
+                     case 12: op = rv_op_vfwcvt_f_f_v; break;
++                    case 13: op = rv_op_vfwcvtbf16_f_f_v; break;
+                     case 14: op = rv_op_vfwcvt_rtz_xu_f_v; break;
+                     case 15: op = rv_op_vfwcvt_rtz_x_f_v; break;
+                     case 16: op = rv_op_vfncvt_xu_f_w; break;
+@@ -3360,6 +3401,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+                     case 21: op = rv_op_vfncvt_rod_f_f_w; break;
+                     case 22: op = rv_op_vfncvt_rtz_xu_f_w; break;
+                     case 23: op = rv_op_vfncvt_rtz_x_f_w; break;
++                    case 29: op = rv_op_vfncvtbf16_f_f_w; break;
+                     }
+                     break;
+                 case 19:
+@@ -3391,6 +3433,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+                 case 52: op = rv_op_vfwadd_wv; break;
+                 case 54: op = rv_op_vfwsub_wv; break;
+                 case 56: op = rv_op_vfwmul_vv; break;
++                case 59: op = rv_op_vfwmaccbf16_vv; break;
+                 case 60: op = rv_op_vfwmacc_vv; break;
+                 case 61: op = rv_op_vfwnmacc_vv; break;
+                 case 62: op = rv_op_vfwmsac_vv; break;
+@@ -3629,6 +3672,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+                 case 52: op = rv_op_vfwadd_wf; break;
+                 case 54: op = rv_op_vfwsub_wf; break;
+                 case 56: op = rv_op_vfwmul_vf; break;
++                case 59: op = rv_op_vfwmaccbf16_vf; break;
+                 case 60: op = rv_op_vfwmacc_vf; break;
+                 case 61: op = rv_op_vfwnmacc_vf; break;
+                 case 62: op = rv_op_vfwmsac_vf; break;
 -- 
 2.25.1
 
