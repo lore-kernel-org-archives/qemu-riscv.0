@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAD8AEB64D9
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Jun 2023 10:26:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53FA6EB64D9
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Jun 2023 12:58:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q9kBD-0001Ct-JB; Thu, 15 Jun 2023 06:26:15 -0400
+	id 1q9mYN-0007j6-1N; Thu, 15 Jun 2023 08:58:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q9kB3-00014Q-0U
- for qemu-riscv@nongnu.org; Thu, 15 Jun 2023 06:26:08 -0400
-Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e])
+ (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
+ id 1q9mYM-0007iq-Hf
+ for qemu-riscv@nongnu.org; Thu, 15 Jun 2023 08:58:18 -0400
+Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q9kB0-000861-Ff
- for qemu-riscv@nongnu.org; Thu, 15 Jun 2023 06:26:04 -0400
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-4f6195d2b3fso10400042e87.1
- for <qemu-riscv@nongnu.org>; Thu, 15 Jun 2023 03:26:02 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
+ id 1q9mYK-0005iD-CL
+ for qemu-riscv@nongnu.org; Thu, 15 Jun 2023 08:58:18 -0400
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-3090d3e9c92so7600748f8f.2
+ for <qemu-riscv@nongnu.org>; Thu, 15 Jun 2023 05:58:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1686824760; x=1689416760;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=tWNh5l5zansgkYD8JM+QZqpVlxfmhmpr1H7kB5PRlzc=;
- b=OZBY5bTGLwXNlKlniFuBR+MU4SI5z0PtB1i3oWBTykgh9LmJD/q3UowGwIFi2sIc1z
- dnHb+uJRdV8KTRMrawf1flu6tZlPOcvdZVfxD1eEQ58fFDSVzFtybBKpVN79y1fKqPG6
- HYeTm0E9vVY0vpTU/p3WI2L90nsFIEeX/lu0UlM/XfKoMAf7wQbmR52/+aS3VH0rAb9p
- xqEEknGC4IcKMoMcUAwRy575B/tjCzup0tfrHBS5GvYt6AY9WQt0z3dGU8GBo0MpfZlw
- gvLJau/dCl4Icxl3i43x9HS/fSXQhAv8F4WWRu3vLk8AhRuBZgm7GqKybl0fZKzV+3qg
- DV0A==
+ d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1686833894; x=1689425894; 
+ h=mime-version:user-agent:content-transfer-encoding:references
+ :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=LRzh51+4ZLcW0C37vuin+uAT5EbtMs9l5mZLom2bfqA=;
+ b=XO0wc1i90Ahbo+/ZlcOJgKshA4CumA3ZEPW7naBHmiVCpsXXnTtkLBn44nUXu6dDWJ
+ c9pA7wumnlXhLzu3ayV8JkmtBGMUxiUylzefcyXarckVHn5V2gOHEb+fX3oLbyJ3JcCe
+ w70ODpgmxS1wynmbTBSAiQGGCSjvm1eJ+7xqA83B7ayz74zeG/ygzn7fsClpZ4vxDfc9
+ Ug3TXlKBSteNrsH2ic0chqilv7uUKsQw0GhIC/ifa0JxXOPQpY8tQSJcFl2prjZQQqPX
+ 69WpR7a2dMmh2wiHyE9IDHL3DNbpFNc33FHA/9r0XYe8pmDpNIlg/tbtd9Hq+rdb4Y2R
+ NVMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686824760; x=1689416760;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=tWNh5l5zansgkYD8JM+QZqpVlxfmhmpr1H7kB5PRlzc=;
- b=JYxv+sEHZFkEcU67wITYaPPecv0iSEVJq65iFTxy2+WPJMai8mqDlfNll43zU8Dib8
- 22olLu1YBiuksJ0Ew+kI1pl5nrNyjSa0pIsQ45yHD4Qiamj6C7uzuibvzrfiPCeEkY0t
- z4VCDFykE3LmMODGF5Jx7T7pk44gEtIn23DInkZw+5GeRJ5gUp/yf50U4kAbg6psHTFY
- f9FNnPSv5zL633Kv2YJk0Rf552X2L+pXsUxUJftgex7iCg8/vCVClqXAwmBCE4wNOLH1
- WNozuLNoZ8zi51DRViV2YoL76bkei+/0JW8iBHVj3rVQUxtwVLDVhsePJpuAs0DDjv/S
- uasA==
-X-Gm-Message-State: AC+VfDwikr43rtTNqQPIH0WtZIktozmQJgnnwRLXeCVSOKXveIRIReIy
- Aao70Eoj1Q6DMVFKMvU2pMXg9Q==
-X-Google-Smtp-Source: ACHHUZ4nwkraB7Q2Yo9AZ6t9G0Wi7nRVdJ3LcoSvKUE1x+PpKP5+OsGTe9ImmmOIdJ4ytXHflma/EQ==
-X-Received: by 2002:ac2:5307:0:b0:4f4:b864:1da0 with SMTP id
- c7-20020ac25307000000b004f4b8641da0mr10462407lfh.15.1686824760445; 
- Thu, 15 Jun 2023 03:26:00 -0700 (PDT)
-Received: from [10.14.201.118] ([213.175.39.66])
+ d=1e100.net; s=20221208; t=1686833894; x=1689425894;
+ h=mime-version:user-agent:content-transfer-encoding:references
+ :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=LRzh51+4ZLcW0C37vuin+uAT5EbtMs9l5mZLom2bfqA=;
+ b=F+VBfXQak1cRP2ye53qd0OoQD8kgdX4WcGaTcia21D7gAWXqMAgQ1s8Ogu5ER6HmWE
+ 8giJ6OR9F/1VBBCFs6Q2ds7E3wKCby+B6NwerejZ0rTak+1ut/w09qkuCF+LEq6qBjt8
+ rgeBcI5A0FhgT8QP8DAQlQshLop/V4izOv+smIEkKuMq5fqqQqBClnOAdWqFofsaVLlj
+ +ZOIwF4Xs3yrl0IDgI6A2PW3FLp7I0Dt9WgU08TZBBQLAKHEboCboj0/mNK09TnW0sMf
+ D1A55vrs3B1/dypPvHmqwKzvPMeowt3R40WuEtVajxh8iikQUPlHNhOCA8WdKinK3hCa
+ lEnQ==
+X-Gm-Message-State: AC+VfDw1PP3qfDtjy3T3dnWibJ01HXdOrroSHaKg0wCK+mna0IY+WCQa
+ O6em+qEXpIU4SklC+9SQ+oxGxQ==
+X-Google-Smtp-Source: ACHHUZ7/iO4b0ZJxkZVC+TlILlfTb74P5p7GdYBPgGbscrJsOf3luCXMiP8ILDfQ7spVlRUb/vlt5w==
+X-Received: by 2002:adf:f050:0:b0:30f:c1ab:f72b with SMTP id
+ t16-20020adff050000000b0030fc1abf72bmr11002159wro.62.1686833893895; 
+ Thu, 15 Jun 2023 05:58:13 -0700 (PDT)
+Received: from [192.168.1.9] (214.11.169.217.in-addr.arpa. [217.169.11.214])
  by smtp.gmail.com with ESMTPSA id
- jw23-20020a17090776b700b00974630b1e85sm9180146ejc.155.2023.06.15.03.25.59
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 15 Jun 2023 03:26:00 -0700 (PDT)
-Message-ID: <8622a181-95e5-b2df-d09f-77c8c45718f1@linaro.org>
-Date: Thu, 15 Jun 2023 12:25:59 +0200
+ u3-20020a5d5143000000b0030fcda0508fsm7379976wrt.110.2023.06.15.05.58.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 15 Jun 2023 05:58:13 -0700 (PDT)
+Message-ID: <4b6274c6741baf435b5579f5a089c65997a8e0e6.camel@rivosinc.com>
+Subject: Re: [PATCH v2 1/6] target/riscv: Add properties for BF16 extensions
+From: Rob Bradford <rbradford@rivosinc.com>
+To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org, 
+ qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
+ wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+Date: Thu, 15 Jun 2023 13:58:12 +0100
+In-Reply-To: <20230615063302.102409-2-liweiwei@iscas.ac.cn>
+References: <20230615063302.102409-1-liweiwei@iscas.ac.cn>
+ <20230615063302.102409-2-liweiwei@iscas.ac.cn>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.48.1 (3.48.1-1.module_f38+16663+080ec715) 
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.11.2
-Subject: Re: [PATCH] hw/riscv/virt.c: fix typo in 'aia' description
-Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- qemu-trivial@nongnu.org
-References: <20230615092148.612875-1-dbarboza@ventanamicro.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230615092148.612875-1-dbarboza@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::12e;
- envelope-from=philmd@linaro.org; helo=mail-lf1-x12e.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
-X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.098,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::431;
+ envelope-from=rbradford@rivosinc.com; helo=mail-wr1-x431.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,13 +97,112 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 15/6/23 11:21, Daniel Henrique Barboza wrote:
-> Cc: qemu-trivial@nongnu.org
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+On Thu, 2023-06-15 at 14:32 +0800, Weiwei Li wrote:
+> Add ext_zfbfmin/zvfbfmin/zvfbfwma properties.
+> Add require check for BF16 extensions.
+>=20
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > ---
->   hw/riscv/virt.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+> =C2=A0target/riscv/cpu.c=C2=A0=C2=A0=C2=A0=C2=A0 | 20 +++++++++++++++++++=
++
+> =C2=A0target/riscv/cpu_cfg.h |=C2=A0 3 +++
+> =C2=A02 files changed, 23 insertions(+)
+>=20
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 881bddf393..dc6b2f72f6 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1059,6 +1059,11 @@ void
+> riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return;
+> =C2=A0=C2=A0=C2=A0=C2=A0 }
+> =C2=A0
+> +=C2=A0=C2=A0=C2=A0 if (cpu->cfg.ext_zfbfmin && !riscv_has_ext(env, RVF))=
+ {
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 error_setg(errp, "Zfbfmin ext=
+ension depends on F
+> extension");
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return;
+> +=C2=A0=C2=A0=C2=A0 }
+> +
+> =C2=A0=C2=A0=C2=A0=C2=A0 if (riscv_has_ext(env, RVD) && !riscv_has_ext(en=
+v, RVF)) {
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 error_setg(errp, "D exte=
+nsion requires F extension");
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return;
+> @@ -1109,6 +1114,21 @@ void
+> riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return;
+> =C2=A0=C2=A0=C2=A0=C2=A0 }
+> =C2=A0
+> +=C2=A0=C2=A0=C2=A0 if (cpu->cfg.ext_zvfbfmin && !cpu->cfg.ext_zfbfmin) {
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 error_setg(errp, "Zvfbfmin ex=
+tension depends on Zfbfmin
+> extension");
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return;
+> +=C2=A0=C2=A0=C2=A0 }
+> +
+> +=C2=A0=C2=A0=C2=A0 if (cpu->cfg.ext_zvfbfmin && !cpu->cfg.ext_zve32f) {
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 error_setg(errp, "Zvfbfmin ex=
+tension depends on Zve32f
+> extension");
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return;
+> +=C2=A0=C2=A0=C2=A0 }
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+I don't think this is correct - from the spec:
+
+"This extension [Zvfbfmin] depends on the Zfbfmin extension and either
+the "V" extension or the Zve32f embedded vector extension."
+
+So this should be:=20
+
++    if (cpu->cfg.ext_zvfbfmin && !(cpu->cfg.ext_zve32f || cpu-
+>cfg.ext_v) {
++        error_setg(errp, "Zvfbfmin extension depends on Zve32f or V
+extension");
++        return;
++    }
+
+Cheers,
+
+Rob
+
+> +
+> +=C2=A0=C2=A0=C2=A0 if (cpu->cfg.ext_zvfbfwma && !cpu->cfg.ext_zvfbfmin) =
+{
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 error_setg(errp, "Zvfbfwma ex=
+tension depends on Zvfbfmin
+> extension");
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return;
+> +=C2=A0=C2=A0=C2=A0 }
+> +
+> =C2=A0=C2=A0=C2=A0=C2=A0 /* Set the ISA extensions, checks should have ha=
+ppened above */
+> =C2=A0=C2=A0=C2=A0=C2=A0 if (cpu->cfg.ext_zhinx) {
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 cpu->cfg.ext_zhinxmin =
+=3D true;
+> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> index c4a627d335..7d16f32720 100644
+> --- a/target/riscv/cpu_cfg.h
+> +++ b/target/riscv/cpu_cfg.h
+> @@ -75,6 +75,7 @@ struct RISCVCPUConfig {
+> =C2=A0=C2=A0=C2=A0=C2=A0 bool ext_svpbmt;
+> =C2=A0=C2=A0=C2=A0=C2=A0 bool ext_zdinx;
+> =C2=A0=C2=A0=C2=A0=C2=A0 bool ext_zawrs;
+> +=C2=A0=C2=A0=C2=A0 bool ext_zfbfmin;
+> =C2=A0=C2=A0=C2=A0=C2=A0 bool ext_zfh;
+> =C2=A0=C2=A0=C2=A0=C2=A0 bool ext_zfhmin;
+> =C2=A0=C2=A0=C2=A0=C2=A0 bool ext_zfinx;
+> @@ -84,6 +85,8 @@ struct RISCVCPUConfig {
+> =C2=A0=C2=A0=C2=A0=C2=A0 bool ext_zve64f;
+> =C2=A0=C2=A0=C2=A0=C2=A0 bool ext_zve64d;
+> =C2=A0=C2=A0=C2=A0=C2=A0 bool ext_zmmul;
+> +=C2=A0=C2=A0=C2=A0 bool ext_zvfbfmin;
+> +=C2=A0=C2=A0=C2=A0 bool ext_zvfbfwma;
+> =C2=A0=C2=A0=C2=A0=C2=A0 bool ext_zvfh;
+> =C2=A0=C2=A0=C2=A0=C2=A0 bool ext_zvfhmin;
+> =C2=A0=C2=A0=C2=A0=C2=A0 bool ext_smaia;
 
 
