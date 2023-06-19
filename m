@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B944FEB64D9
-	for <qemu-riscv@archiver.kernel.org>; Mon, 19 Jun 2023 15:42:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE022EB64D9
+	for <qemu-riscv@archiver.kernel.org>; Mon, 19 Jun 2023 16:50:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qBH1A-0000ty-KZ; Mon, 19 Jun 2023 11:42:12 -0400
+	id 1qBI4n-0000Cj-So; Mon, 19 Jun 2023 12:50:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1qBH0z-0000rD-48
- for qemu-riscv@nongnu.org; Mon, 19 Jun 2023 11:42:02 -0400
+ id 1qBI4l-0000B5-Uw
+ for qemu-riscv@nongnu.org; Mon, 19 Jun 2023 12:49:59 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1qBH0t-0000MF-Bc
- for qemu-riscv@nongnu.org; Mon, 19 Jun 2023 11:41:58 -0400
+ id 1qBI4k-0003BJ-21
+ for qemu-riscv@nongnu.org; Mon, 19 Jun 2023 12:49:59 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1687189309;
+ s=mimecast20190719; t=1687193397;
  h=from:from:reply-to:reply-to:subject:subject:date:date:
  message-id:message-id:to:to:cc:cc:mime-version:mime-version:
  content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=zVejXGWt4jtEY1L56ggG0zyoOAcDrYMTrAoz7F5LVwo=;
- b=Mc5JaCVn4NMY7bq4y3YGe3D51Sxb7xnuvWDPzfzjq3g3E43W2Ay1e31XJTGM1QkAYYESAz
- sBmFtZG4bQmOnJ9SQ41M4r6kmp6eJjw7jy2G8asz0NUa+Co6DXmQDyw9TpdY2WTffdFXsE
- P9iUyCsbV1Esx1cDeTGYiL+qiPaGXjk=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=9n58Lqm5i2hK98bcuJbfJLqpasaimpFTgsqHuYyTG5k=;
+ b=hYyBos2D9BEjBzf67ZpgvWaLPG5oTKSqnpgWlquKj1Tv5eqxznvGoYvryiIiqko0LSp/O+
+ D3gEIZHrToWZyPgZs+FimL6ENDr3uFXjnmFCzeAnW+mEmQP22sayQ0ah5RzJ7uVVnI443Q
+ wl3jLNhC6U4ELlgf5fmrAE6kFcaxwOE=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-295-6PicLleYOSWOYx4y5pmWtA-1; Mon, 19 Jun 2023 11:41:46 -0400
-X-MC-Unique: 6PicLleYOSWOYx4y5pmWtA-1
+ us-mta-543-KxOhP5yBPQeCwC1etxdKQg-1; Mon, 19 Jun 2023 12:49:51 -0400
+X-MC-Unique: KxOhP5yBPQeCwC1etxdKQg-1
 Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
  [10.11.54.5])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id E941429ABA1C;
- Mon, 19 Jun 2023 15:41:45 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 390A818F026E;
+ Mon, 19 Jun 2023 16:49:51 +0000 (UTC)
 Received: from redhat.com (unknown [10.42.28.57])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 00E32422B0;
- Mon, 19 Jun 2023 15:41:44 +0000 (UTC)
-Date: Mon, 19 Jun 2023 16:41:42 +0100
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 48A2C83B8B;
+ Mon, 19 Jun 2023 16:49:50 +0000 (UTC)
+Date: Mon, 19 Jun 2023 17:49:48 +0100
 From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, ardb@kernel.org, qemu-ppc@nongnu.org,
  qemu-arm@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com,
  Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: Re: [PATCH v2 05/38] crypto/aes: Add constants for ShiftRows,
- InvShiftRows
-Message-ID: <ZJB3NmrDfvDl6Pea@redhat.com>
+Subject: Re: [PATCH v2 04/38] target/arm: Move aesmc and aesimc tables to
+ crypto/aes.c
+Message-ID: <ZJCHLPZcO1gfW9xY@redhat.com>
 References: <20230609022401.684157-1-richard.henderson@linaro.org>
- <20230609022401.684157-6-richard.henderson@linaro.org>
+ <20230609022401.684157-5-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20230609022401.684157-6-richard.henderson@linaro.org>
+In-Reply-To: <20230609022401.684157-5-richard.henderson@linaro.org>
 User-Agent: Mutt/2.2.9 (2022-11-12)
 X-Scanned-By: MIMEDefang 3.1 on 10.11.54.5
 Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
@@ -88,15 +88,17 @@ Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jun 08, 2023 at 07:23:28PM -0700, Richard Henderson wrote:
-> These symbols will avoid the indirection through memory
-> when fully unrolling some new primitives.
+On Thu, Jun 08, 2023 at 07:23:27PM -0700, Richard Henderson wrote:
+> We do not currently have a table in crypto/ for just MixColumns.
+> Move both tables for consistency.
 > 
 > Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->  crypto/aes.c | 50 ++++++++++++++++++++++++++++++++++++++++++++++++--
->  1 file changed, 48 insertions(+), 2 deletions(-)
+>  include/crypto/aes.h           |   6 ++
+>  crypto/aes.c                   | 140 ++++++++++++++++++++++++++++++++
+>  target/arm/tcg/crypto_helper.c | 143 ++-------------------------------
+>  3 files changed, 151 insertions(+), 138 deletions(-)
 
 Acked-by: Daniel P. Berrangé <berrange@redhat.com>
 
