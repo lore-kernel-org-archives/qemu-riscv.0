@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2152CEB64D9
-	for <qemu-riscv@archiver.kernel.org>; Mon, 19 Jun 2023 13:59:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9C8BEB64D9
+	for <qemu-riscv@archiver.kernel.org>; Mon, 19 Jun 2023 14:45:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qBFPw-0007SM-OB; Mon, 19 Jun 2023 09:59:40 -0400
+	id 1qBG7b-0001OH-IN; Mon, 19 Jun 2023 10:44:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qBFPv-0007RR-CG
- for qemu-riscv@nongnu.org; Mon, 19 Jun 2023 09:59:39 -0400
-Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1qBG7a-0001Nz-C9
+ for qemu-riscv@nongnu.org; Mon, 19 Jun 2023 10:44:46 -0400
+Received: from mail-lf1-x12d.google.com ([2a00:1450:4864:20::12d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qBFPt-0001Y2-R4
- for qemu-riscv@nongnu.org; Mon, 19 Jun 2023 09:59:39 -0400
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-519c0ad1223so4375007a12.0
- for <qemu-riscv@nongnu.org>; Mon, 19 Jun 2023 06:59:37 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1qBG7Y-00079d-Kq
+ for qemu-riscv@nongnu.org; Mon, 19 Jun 2023 10:44:46 -0400
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-4f87592ecaeso803587e87.0
+ for <qemu-riscv@nongnu.org>; Mon, 19 Jun 2023 07:44:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1687183176; x=1689775176;
+ d=linaro.org; s=google; t=1687185881; x=1689777881;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=F1ITw7OriNqjVl/jvxDv2HEcl5ZDD6hAU+/z548XyKU=;
- b=MlNUrEWGbkOpD2Zwm6EKKji+xfDeSvG/SMZ02AhXVcwvwV8vYhA7G7jP31qBkedplA
- DqHKcB35Bso25USWv539Hxad0xfvEDjsMiFRnlWBaK0Y7tYshdtQBBunHJBLH0O/PM1L
- pMxVKtLhM840f2dKbc7be9HBaRhjHu1A6OlsgTcNldCz4LfGjNJJpZNovQuhNmrKcblt
- 5/qFsSMwpGzYzWMbCNeKqpahRt+YBrGO28vRe72qNnNDlrDat16ep/0KSNwAKJKcPMo2
- itX0MwCHImfHb/gFiT06WFPn7X5TL5rvBe0aNl82JLsktH4phTt5fr+tGJ1STCmj39Fv
- NmIg==
+ bh=OGdtDTFYiQTDBFYfZ4oBFyIXPm72bZOjt2mRUQqE67k=;
+ b=p44dEAVpdmMaSE0FUIU8AqOaEN3P6W27jonTLs8KZVTgtdnXFgDlZkRV1B0rdujwxM
+ j679mlYtKoy3VPb6Qz/GQMhJWpEuq8U3qy7bBUiys9INPbfjNTFCy2RRqQ7Jm5twdsYT
+ EOGQz1jHBtUgLJNC2rwb8LZ5DHDguSuOCKj7mgwnM1znPALQH/pCKQuYTNRXY/yROHj/
+ SiztD3d2UbaZD3XcIS4zO0RRQLoCT69Tl3EaNhcc0g72yyKRKdk3uNDOcTxZt2u9TXi9
+ dIY4uyDAJ9XHqZpwTZQiCGsrqVHpSO2Te2TcI2y5UDKahSnBaQ3ZzFHblmyjqeG/kjNX
+ uWuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687183176; x=1689775176;
+ d=1e100.net; s=20221208; t=1687185881; x=1689777881;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=F1ITw7OriNqjVl/jvxDv2HEcl5ZDD6hAU+/z548XyKU=;
- b=CBvd9V8xfJ7N06yMhSVcneyNudRV/xK3STEyX5AL+R6JceD1TrmJ3TlJKD1ng60gRF
- VGxtc0uvJoAuv5K4DrZvOicBQRLVOWtoSWC9Kwna+xoZ9Bfauj3eaRNeAGDwOAzctzz0
- +lxsBiYuMPZVoDwhCy0QzEs4kdo4yWYTyg4QIzATbDGKGI1SfH5PrmnUk2dUnHBOYy7b
- LrGznKz4aUm4lqGcNDHFy7gc8e/uDMvZII758V7ozFITfkiXUgzCjlDp9oLYu8mG/2VL
- Lb5nJBEk8kuhm2fwuLtHEDQ1Tv/c+QqgCAepgJXNVc8D3ibFUpzq3J87f2S0IA2w4/MZ
- MobQ==
-X-Gm-Message-State: AC+VfDxmpV5IbeqQZq7xkE9NPfq4SLGpE/6xPLJCWd1s8uoGa9tbOcc1
- fzNnqyWThgWTNt4nFJJJpXIyrQ==
-X-Google-Smtp-Source: ACHHUZ6UJ7rEpFVmtRkuVL8WIqKAIfDIwEGylK/snjsSQ+cI9ePRKmHawPL6VWn73eXXMl6LiOfHMQ==
-X-Received: by 2002:a05:6402:5162:b0:51a:4963:e012 with SMTP id
- d2-20020a056402516200b0051a4963e012mr3671509ede.18.1687183176165; 
- Mon, 19 Jun 2023 06:59:36 -0700 (PDT)
-Received: from [192.168.69.115] (sar95-h02-176-184-10-225.dsl.sta.abo.bbox.fr.
+ bh=OGdtDTFYiQTDBFYfZ4oBFyIXPm72bZOjt2mRUQqE67k=;
+ b=mAzI1cRhKPMcYC4Q6s4nTvvZaz3PEcdMEpeyX20uqs/tIsuLZChzL9QHvBMVAIA69r
+ tZBex40cJEUt6rwsEMrTwpMWR1FHdnZo4N5kd/evNrgt6uJvc9rPezrXgHES6TVGd0k+
+ lC2cWUJiIstJi0VFz6OI6C+GoGSoW8DK1iH45thOUsugAMzEbBnnMykWkgS0XLJAkObJ
+ QELPTqtw+8twkV06DUxYgqMbhPwZddKaa4vqhvS8XxUlHdwxGR2A6Dya3cdeEC3Xgb65
+ SE0LljarMC1005cHPBEEHtmVccSbRYAo6kncJ9PwVN1mLJ1zWad8pMzECP5ussrkn0/r
+ +Q9w==
+X-Gm-Message-State: AC+VfDwAjzPzLFStK22rqZWMdL3dtJy67qbThkdc3jURZtAXJV7SAD2U
+ CdM88+AX1u8M+Vt9UABOhAeJ0A==
+X-Google-Smtp-Source: ACHHUZ6IhUIptRJFKrrxWOACHIgAZJuaTb9OWNO/FEVSRACuTDiv9XQzVo/urEC6LCGjwdd6ckDv1g==
+X-Received: by 2002:a05:6512:1319:b0:4f8:6625:f2ca with SMTP id
+ x25-20020a056512131900b004f86625f2camr2902268lfu.61.1687185881121; 
+ Mon, 19 Jun 2023 07:44:41 -0700 (PDT)
+Received: from [192.168.69.129] (sar95-h02-176-184-10-225.dsl.sta.abo.bbox.fr.
  [176.184.10.225]) by smtp.gmail.com with ESMTPSA id
- e4-20020a056402088400b0051a5360052csm1711270edy.48.2023.06.19.06.59.34
+ c6-20020a7bc846000000b003f8fb02c413sm9538346wml.8.2023.06.19.07.44.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 19 Jun 2023 06:59:35 -0700 (PDT)
-Message-ID: <2312da69-e5f9-d8df-35af-deb7561c66fb@linaro.org>
-Date: Mon, 19 Jun 2023 15:59:32 +0200
+ Mon, 19 Jun 2023 07:44:40 -0700 (PDT)
+Message-ID: <b46c3dc4-5017-97a3-3935-f8e1c6a7e72d@linaro.org>
+Date: Mon, 19 Jun 2023 16:44:37 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.12.0
-Subject: Re: [PATCH v2 30/38] crypto: Add aesdec_ISB_ISR_AK_IMC
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH v2 02/38] util: Add cpuinfo-ppc.c
 Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
 Cc: ardb@kernel.org, berrange@redhat.com, qemu-ppc@nongnu.org,
  qemu-arm@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com
 References: <20230609022401.684157-1-richard.henderson@linaro.org>
- <20230609022401.684157-31-richard.henderson@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230609022401.684157-31-richard.henderson@linaro.org>
+ <20230609022401.684157-3-richard.henderson@linaro.org>
+ <ed63d01a-4903-a233-ac80-6e8d10411a02@linaro.org>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <ed63d01a-4903-a233-ac80-6e8d10411a02@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::534;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x534.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::12d;
+ envelope-from=richard.henderson@linaro.org; helo=mail-lf1-x12d.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
@@ -96,17 +100,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 9/6/23 04:23, Richard Henderson wrote:
-> Add a primitive for InvSubBytes + InvShiftRows +
-> AddRoundKey + InvMixColumns.
+On 6/19/23 12:37, Philippe Mathieu-Daudé wrote:
+> On 9/6/23 04:23, Richard Henderson wrote:
+>> Move the code from tcg/.  Fix a bug in that PPC_FEATURE2_ARCH_3_10
+>> is actually spelled PPC_FEATURE2_ARCH_3_1.
 > 
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->   host/include/generic/host/aes-round.h |  3 +++
->   include/crypto/aes-round.h            | 21 +++++++++++++++++++++
->   crypto/aes.c                          | 14 ++++++++++++++
->   3 files changed, 38 insertions(+)
+> This is rather confusing.
+> 
+>> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+>> ---
+>>   host/include/ppc/host/cpuinfo.h   | 29 ++++++++++++++++
+>>   host/include/ppc64/host/cpuinfo.h |  1 +
+>>   tcg/ppc/tcg-target.h              | 16 ++++-----
+>>   util/cpuinfo-ppc.c                | 57 +++++++++++++++++++++++++++++++
+>>   tcg/ppc/tcg-target.c.inc          | 44 +-----------------------
+>>   util/meson.build                  |  2 ++
+>>   6 files changed, 98 insertions(+), 51 deletions(-)
+>>   create mode 100644 host/include/ppc/host/cpuinfo.h
+>>   create mode 100644 host/include/ppc64/host/cpuinfo.h
+>>   create mode 100644 util/cpuinfo-ppc.c
+>>
+>> diff --git a/host/include/ppc/host/cpuinfo.h b/host/include/ppc/host/cpuinfo.h
+>> new file mode 100644
+>> index 0000000000..7ec252ef52
+>> --- /dev/null
+>> +++ b/host/include/ppc/host/cpuinfo.h
+>> @@ -0,0 +1,29 @@
+>> +/*
+>> + * SPDX-License-Identifier: GPL-2.0-or-later
+>> + * Host specific cpu indentification for ppc.
+>> + */
+>> +
+>> +#ifndef HOST_CPUINFO_H
+>> +#define HOST_CPUINFO_H
+>> +
+>> +/* Digested version of <cpuid.h> */
+>> +
+>> +#define CPUINFO_ALWAYS          (1u << 0)  /* so cpuinfo is nonzero */
+>> +#define CPUINFO_V2_06           (1u << 1)
+>> +#define CPUINFO_V2_07           (1u << 2)
+>> +#define CPUINFO_V3_00           (1u << 3)
+>> +#define CPUINFO_V3_10           (1u << 4)
+> 
+> Could we define as CPUINFO_V3_1 ...
+> 
+>> +#define CPUINFO_ISEL            (1u << 5)
+>> +#define CPUINFO_ALTIVEC         (1u << 6)
+>> +#define CPUINFO_VSX             (1u << 7)
+> 
+> 
+>> -#define have_isa_2_06  (have_isa >= tcg_isa_2_06)
+>> -#define have_isa_2_07  (have_isa >= tcg_isa_2_07)
+>> -#define have_isa_3_00  (have_isa >= tcg_isa_3_00)
+>> -#define have_isa_3_10  (have_isa >= tcg_isa_3_10)
+>> +#define have_isa_2_06  (cpuinfo & CPUINFO_V2_06)
+>> +#define have_isa_2_07  (cpuinfo & CPUINFO_V2_07)
+>> +#define have_isa_3_00  (cpuinfo & CPUINFO_V3_00)
+>> +#define have_isa_3_10  (cpuinfo & CPUINFO_V3_10)
+> 
+> ... and have_isa_3_1 instead?
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+I suppose we could, but they all line up this way.  :-)
+
+r~
+
+> 
+> Otherwise,
+> 
+> Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> 
 
 
