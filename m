@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58211EB64D8
-	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Jun 2023 16:38:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F4CAEB64DC
+	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Jun 2023 16:39:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qC0qd-0001ol-8l; Wed, 21 Jun 2023 12:38:23 -0400
+	id 1qC0rO-0002IQ-Ir; Wed, 21 Jun 2023 12:39:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1qC0qb-0001o7-Q8
- for qemu-riscv@nongnu.org; Wed, 21 Jun 2023 12:38:21 -0400
+ id 1qC0rI-00029M-0U
+ for qemu-riscv@nongnu.org; Wed, 21 Jun 2023 12:39:05 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1qC0qa-0001x6-2x
- for qemu-riscv@nongnu.org; Wed, 21 Jun 2023 12:38:21 -0400
+ id 1qC0rF-00025Y-H4
+ for qemu-riscv@nongnu.org; Wed, 21 Jun 2023 12:39:03 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1687365499;
+ s=mimecast20190719; t=1687365540;
  h=from:from:reply-to:reply-to:subject:subject:date:date:
  message-id:message-id:to:to:cc:cc:mime-version:mime-version:
  content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=EV0cielQhWyx/HzbNCQNhSqqVWgt1fzQFVFTm+wxU1s=;
- b=YbTs1rwZ5MkVZV0S4nDGaifFKiWfAvcH1gxL2CcBdGGt4BWJmqPGG8f8M02SKiq4TxKxq2
- hkjnLpxg/8BE6d/1Nfm40WuL0ufP4YeqfaO8E0Cov1Xjp7X1kRv8zJR3aEARB2G+hGLkWt
- 1M3elzgGqtkNx2BSDt/OuvhlGdJmm68=
+ bh=QooPdPxGTJom9bQce6QKQkbXbajmlCADA4uPFT9ImnM=;
+ b=X2MVysjNnVM9uJUxdhZouPs7SoeOyt1TXAAtzGalzRiPnKb3thfrJj60nxcf26T8YGxBbb
+ EoeHkBKerDLZcJZIwlNTWVnSOFt7qx1pPN9CEKoSStRhIf1TJ7Yz9cx85u9eDvNgm3jhDq
+ SAsdWVA65EbQzQWku6BMFwzgL8cXSD0=
 Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
  [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-473-n6bw3rbeN02sE8ptvlUjZw-1; Wed, 21 Jun 2023 12:38:15 -0400
-X-MC-Unique: n6bw3rbeN02sE8ptvlUjZw-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
- [10.11.54.5])
+ us-mta-19-9Hxo7_SYO1yCuWjr-AMp9w-1; Wed, 21 Jun 2023 12:38:54 -0400
+X-MC-Unique: 9Hxo7_SYO1yCuWjr-AMp9w-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.7])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id E5F9B3C10151;
- Wed, 21 Jun 2023 16:38:14 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 0A5AA1C06ED6;
+ Wed, 21 Jun 2023 16:38:54 +0000 (UTC)
 Received: from redhat.com (unknown [10.42.28.44])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 4334D1131F;
- Wed, 21 Jun 2023 16:38:14 +0000 (UTC)
-Date: Wed, 21 Jun 2023 17:38:12 +0100
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 5CDD2140EBB8;
+ Wed, 21 Jun 2023 16:38:53 +0000 (UTC)
+Date: Wed, 21 Jun 2023 17:38:51 +0100
 From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  qemu-riscv@nongnu.org
-Subject: Re: [PATCH v3 05/37] crypto: Add aesenc_SB_SR_AK
-Message-ID: <ZJMndAbLe01orksj@redhat.com>
+Subject: Re: [PATCH v3 11/37] crypto: Add aesdec_ISB_ISR_AK
+Message-ID: <ZJMnm/ziySmKWYVu@redhat.com>
 References: <20230620110758.787479-1-richard.henderson@linaro.org>
- <20230620110758.787479-6-richard.henderson@linaro.org>
+ <20230620110758.787479-12-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20230620110758.787479-6-richard.henderson@linaro.org>
+In-Reply-To: <20230620110758.787479-12-richard.henderson@linaro.org>
 User-Agent: Mutt/2.2.9 (2022-11-12)
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.5
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.7
 Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
@@ -87,21 +87,18 @@ Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jun 20, 2023 at 01:07:26PM +0200, Richard Henderson wrote:
-> Start adding infrastructure for accelerating guest AES.
-> Begin with a SubBytes + ShiftRows + AddRoundKey primitive.
+On Tue, Jun 20, 2023 at 01:07:32PM +0200, Richard Henderson wrote:
+> Add a primitive for InvSubBytes + InvShiftRows + AddRoundKey.
 > 
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->  MAINTAINERS                                  |  1 +
->  host/include/generic/host/crypto/aes-round.h | 16 +++++++
->  include/crypto/aes-round.h                   | 44 +++++++++++++++++++
->  crypto/aes.c                                 | 46 ++++++++++++++++++++
->  4 files changed, 107 insertions(+)
->  create mode 100644 host/include/generic/host/crypto/aes-round.h
->  create mode 100644 include/crypto/aes-round.h
+>  host/include/generic/host/crypto/aes-round.h |  4 ++
+>  include/crypto/aes-round.h                   | 21 +++++++++
+>  crypto/aes.c                                 | 45 ++++++++++++++++++++
+>  3 files changed, 70 insertions(+)
 
-Acked-by: Daniel P. Berrangé <berrange@redhat.com>
+Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
+
 
 With regards,
 Daniel
