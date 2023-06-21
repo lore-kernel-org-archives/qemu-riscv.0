@@ -4,90 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57A57EB64D7
-	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Jun 2023 09:44:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF138EB64D7
+	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Jun 2023 14:55:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qBuMu-0002J5-U8; Wed, 21 Jun 2023 05:43:17 -0400
+	id 1qBzEl-0001zK-5o; Wed, 21 Jun 2023 10:55:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qBuMq-0002Eh-UG
- for qemu-riscv@nongnu.org; Wed, 21 Jun 2023 05:43:12 -0400
-Received: from mail-ot1-x329.google.com ([2607:f8b0:4864:20::329])
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1qBzEj-0001yR-Kc
+ for qemu-riscv@nongnu.org; Wed, 21 Jun 2023 10:55:09 -0400
+Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qBuMp-000175-23
- for qemu-riscv@nongnu.org; Wed, 21 Jun 2023 05:43:12 -0400
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-6b4551089c9so4577086a34.2
- for <qemu-riscv@nongnu.org>; Wed, 21 Jun 2023 02:43:10 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1qBzEh-0006NH-Px
+ for qemu-riscv@nongnu.org; Wed, 21 Jun 2023 10:55:09 -0400
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-666e916b880so2785780b3a.2
+ for <qemu-riscv@nongnu.org>; Wed, 21 Jun 2023 07:55:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1687340590; x=1689932590;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=J6ECwfCxUrbQ7mrGd+S+knUEhOO5grcoBRUGmmvqWEA=;
- b=Wr+3rLdUdZFVL3LNvePT4UMZ1BPsSbxSKYjYm93/L690kv26bVK453L9NAUa5j6DPp
- 1spZMqmm6LE6G26NiyqJ+Z7JU4RowxhW4izzHEC8JYi04H+WanwwX7dP9o8/bmTO6fH6
- 5NY7lrmWThSOQ1k3cxlqc0r1t3lTjk9ZnTjwMtaiADF8BFtj9aP+Ru+N4EdIZ8aVY/ry
- rKy6fBkamqUq/LvOWIJdfatOMRkauOwSkYgtqaDFdittMNcMXpwuwvfVYJa/fz9gXZE/
- 4oD0L7veuH4QuTAxjMbgNQlbvyfKEH2Sg1+yvXIgaSds9fVh2OqHH10yg2RbXvOPYzIX
- SePA==
+ d=sifive.com; s=google; t=1687359306; x=1689951306;
+ h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=H0Rf7uVhnkk9iY0zEaUMWCNAGIV4sHC6oNj06uJ9D1E=;
+ b=d3gEagbF4u6TWuCoq7cbeWL5zSWMTw+EXMWVIU5Adunlx9+wbhKEzny5lBFhNh5Gf3
+ dM4e4mr/YT8WqxH9UcmdXFlyMBclYoNXSv4ikp0n55grohZITN5IZKYL1xMCCWzxhLLr
+ DkGsbkL1oHBgdOnWt/nNwg9Lt8Vjjs+igQIKmBYgHJZLMPe//wQY3tBjJ0hbkpEI/7TM
+ 4eWCuJodmBhVsJgwviyRPDysk5ojNRdQmB5KEKS9f62i95imhp32pOrJaWZzrPddhHLu
+ 53S5gEXx52fiWCftD+E8ATGOB0ayiseaneLBZtuy+99+F5wf1yS3ZrAFVheOV/XZvZyN
+ zJeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687340590; x=1689932590;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=J6ECwfCxUrbQ7mrGd+S+knUEhOO5grcoBRUGmmvqWEA=;
- b=fX53NJ0ojfQBx4zJI4S5McamEgHG1OYWF8C1Rm6FWxQeG8W+NryGlwSHxFygVFQ1eF
- SDx1Xcb4D6mHd8+Z0bgb/2zuUqVeUEMlM3XYa5ZcjU31IoMBMlzWT3poM5M5/yjr9MhM
- 6vel+o77JXfUXI6z/PHAHQBj27AeS4S+Y3jyt1WH/DYR3OX12Y39gEDf0y13yWtTb3Do
- QKRVsBSh7bpkc6MnCnHLlEkfSX0086BkGj1kFEQA7L2McNgPEHJm8sN02cXLXn/ve7jk
- +Y/kWrdZak9t2IB2PyPfAeoO7P0EuAbziCvVHygGFvMKm/5xXAyyCrv5F4W6HthLEdE1
- SUUA==
-X-Gm-Message-State: AC+VfDwhVEvBqFkU7deS0NzjTmTtiNqFYKmqg8BS84F/9+/FhFLOohxS
- gQIJAYZRwzP/NB/+JNSe3Mys/w==
-X-Google-Smtp-Source: ACHHUZ4xY+SBaqpmqHVL0/Nlv1LWW77xxEPAvumqreaJtSCmsM+DzBVUP2MYX3i2Mj0iuxc42yI2lA==
-X-Received: by 2002:a9d:74c9:0:b0:696:1583:642 with SMTP id
- a9-20020a9d74c9000000b0069615830642mr14219233otl.21.1687340589715; 
- Wed, 21 Jun 2023 02:43:09 -0700 (PDT)
-Received: from [192.168.68.108] (201-69-66-110.dial-up.telesp.net.br.
- [201.69.66.110]) by smtp.gmail.com with ESMTPSA id
- i2-20020a9d6242000000b006a662e9f074sm1761808otk.58.2023.06.21.02.43.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 21 Jun 2023 02:43:09 -0700 (PDT)
-Message-ID: <ede6aa9c-feeb-15ef-3842-86fe3efcec12@ventanamicro.com>
-Date: Wed, 21 Jun 2023 06:43:05 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Subject: Re: [PATCH v2 15/18] target/riscv: make riscv_isa_string_ext() KVM
- compatible
-Content-Language: en-US
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
- palmer@rivosinc.com
-References: <20230613205857.495165-1-dbarboza@ventanamicro.com>
- <20230613205857.495165-16-dbarboza@ventanamicro.com>
- <20230619-30e78979c13df598ca2e4493@orel>
- <7c5920b1-8240-9922-c4eb-3d7be7436176@ventanamicro.com>
- <20230621-6ff3576dad2e55bb261819c8@orel>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230621-6ff3576dad2e55bb261819c8@orel>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::329;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x329.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+ d=1e100.net; s=20221208; t=1687359306; x=1689951306;
+ h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=H0Rf7uVhnkk9iY0zEaUMWCNAGIV4sHC6oNj06uJ9D1E=;
+ b=JYRR13fur+B76u7H8FD6zzjWJkaJPGR18cnLrbVQIjpADiBkraXiWe+aJapql1JP7r
+ xFZH37uwbDpy1H/NBwkL3Mqgg+rwqK6ClDUfu7zA7GgqECG6iFGsH+bWZpul6eKlCgvc
+ 0bPFpibax4mhuE7kf8FpGr9PMpvRXSwNqdnwdFGPBR/NT6aHEKjVdSVgisQOb3KiIo0w
+ NQ1lXBtIToJeLcJh2kbG67mHcwS67xccCfwee7r9uck5qiDCx+BK7I8gH0faQ5PkplvJ
+ dKSOyjd6Syifh/XbuCd3Pk+CwpMeMRljbzQN13JS8DjBYLsv85c5ktGr/YOiHzfC/XeT
+ Z8KA==
+X-Gm-Message-State: AC+VfDyL0AAGUk07tt8ghNCOmgQmq2r45H6hJs2BUP9KX3LAwFldLKOW
+ 71fnhyX3Wrztiw8ZBKiFI5RxdA==
+X-Google-Smtp-Source: ACHHUZ7CFLf2dLsam6wadTQj5jpYYPQsRbzfrCYZQESDHh5r6etUg8SeJuzWpu1WzJsKGg7YVvCw7w==
+X-Received: by 2002:a05:6a20:734a:b0:122:cb38:636a with SMTP id
+ v10-20020a056a20734a00b00122cb38636amr3810669pzc.33.1687359305644; 
+ Wed, 21 Jun 2023 07:55:05 -0700 (PDT)
+Received: from hsinchu26.internal.sifive.com
+ (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
+ by smtp.gmail.com with ESMTPSA id
+ v8-20020a62a508000000b0066a4e561beesm356762pfm.173.2023.06.21.07.55.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 21 Jun 2023 07:55:05 -0700 (PDT)
+From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: rkanwal@rivosinc.com, anup@brainfault.org, dbarboza@ventanamicro.com,
+ atishp@atishpatra.org, vincent.chen@sifive.com, greentime.hu@sifive.com,
+ frank.chang@sifive.com, jim.shu@sifive.com,
+ Yong-Xuan Wang <yongxuan.wang@sifive.com>
+Subject: [PATCH v4 0/6] Add RISC-V KVM AIA Support
+Date: Wed, 21 Jun 2023 14:54:50 +0000
+Message-Id: <20230621145500.25624-1-yongxuan.wang@sifive.com>
+X-Mailer: git-send-email 2.17.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
+ envelope-from=yongxuan.wang@sifive.com; helo=mail-pf1-x42e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.09,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,163 +92,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+This series adds support for KVM AIA in RISC-V architecture.
 
+In order to test these patches, we require Linux with KVM AIA support which can
+be found in the riscv_kvm_aia_hwaccel_v1 branch at
+https://github.com/avpatel/linux.git
 
-On 6/21/23 05:20, Andrew Jones wrote:
-> On Tue, Jun 20, 2023 at 07:05:18PM -0300, Daniel Henrique Barboza wrote:
->>
->>
->> On 6/19/23 06:54, Andrew Jones wrote:
->>> On Tue, Jun 13, 2023 at 05:58:54PM -0300, Daniel Henrique Barboza wrote:
->>>> The isa_edata_arr[] is used by riscv_isa_string_ext() to create the
->>>> riscv,isa DT attribute. isa_edata_arr[] is kept in sync with the TCG
->>>> property vector riscv_cpu_extensions[], i.e. all TCG properties from
->>>> this vector that has a riscv,isa representation are included in
->>>> isa_edata_arr[].
->>>>
->>>> KVM doesn't implement all TCG properties, but allow them to be created
->>>> anyway to not force an API change between TCG and KVM guests. Some of
->>>> these TCG-only extensions are defaulted to 'true', and users are also
->>>> allowed to enable them. KVM doesn't care, but riscv_isa_string_ext()
->>>> does. The result is that these TCG-only enabled extensions will appear
->>>> in the riscv,isa DT string under KVM.
->>>>
->>>> To avoid code repetition and re-use riscv_isa_string_ext() for KVM
->>>> guests we'll make a couple of tweaks:
->>>>
->>>> - set env->priv_ver to 'LATEST' for the KVM 'host' CPU. This is needed
->>>>     because riscv_isa_string_ext() makes a priv check for each extension
->>>>     before including them in the ISA string. KVM doesn't care about
->>>>     env->priv_ver, since it's part of the TCG-only CPU validation, so this
->>>>     change is benign for KVM;
->>>>
->>>> - add a new 'kvm_available' flag in isa_ext_data struct. This flag is
->>>>     set via a new ISA_EXT_DATA_ENTRY_KVM macro to report that, for a given
->>>>     extension, KVM also supports it. riscv_isa_string_ext() then can check
->>>>     if a given extension is known by KVM and skip it if it's not.
->>>>
->>>> This will allow us to re-use riscv_isa_string_ext() for KVM guests.
->>>>
->>>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->>>> ---
->>>>    target/riscv/cpu.c | 28 ++++++++++++++++++++--------
->>>>    1 file changed, 20 insertions(+), 8 deletions(-)
->>>>
->>>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->>>> index a4f3ed0c17..a773c09645 100644
->>>> --- a/target/riscv/cpu.c
->>>> +++ b/target/riscv/cpu.c
->>>> @@ -44,11 +44,15 @@ struct isa_ext_data {
->>>>        const char *name;
->>>>        int min_version;
->>>>        int ext_enable_offset;
->>>> +    bool kvm_available;
->>>>    };
->>>>    #define ISA_EXT_DATA_ENTRY(_name, _min_ver, _prop) \
->>>>        {#_name, _min_ver, offsetof(struct RISCVCPUConfig, _prop)}
->>>> +#define ISA_EXT_DATA_ENTRY_KVM(_name, _min_ver, _prop) \
->>>> +    {#_name, _min_ver, offsetof(struct RISCVCPUConfig, _prop), true}
->>>> +
->>>>    /*
->>>>     * Here are the ordering rules of extension naming defined by RISC-V
->>>>     * specification :
->>>> @@ -68,14 +72,17 @@ struct isa_ext_data {
->>>>     *
->>>>     * Single letter extensions are checked in riscv_cpu_validate_misa_priv()
->>>>     * instead.
->>>> + *
->>>> + * ISA_EXT_DATA_ENTRY_KVM() is used to indicate that the extension is
->>>> + * also known by the KVM driver. If unsure, use ISA_EXT_DATA_ENTRY().
->>>>     */
->>>>    static const struct isa_ext_data isa_edata_arr[] = {
->>>> -    ISA_EXT_DATA_ENTRY(zicbom, PRIV_VERSION_1_12_0, ext_icbom),
->>>> -    ISA_EXT_DATA_ENTRY(zicboz, PRIV_VERSION_1_12_0, ext_icboz),
->>>> +    ISA_EXT_DATA_ENTRY_KVM(zicbom, PRIV_VERSION_1_12_0, ext_icbom),
->>>> +    ISA_EXT_DATA_ENTRY_KVM(zicboz, PRIV_VERSION_1_12_0, ext_icboz),
->>>>        ISA_EXT_DATA_ENTRY(zicond, PRIV_VERSION_1_12_0, ext_zicond),
->>>>        ISA_EXT_DATA_ENTRY(zicsr, PRIV_VERSION_1_10_0, ext_icsr),
->>>>        ISA_EXT_DATA_ENTRY(zifencei, PRIV_VERSION_1_10_0, ext_ifencei),
->>>> -    ISA_EXT_DATA_ENTRY(zihintpause, PRIV_VERSION_1_10_0, ext_zihintpause),
->>>> +    ISA_EXT_DATA_ENTRY_KVM(zihintpause, PRIV_VERSION_1_10_0, ext_zihintpause),
->>>>        ISA_EXT_DATA_ENTRY(zawrs, PRIV_VERSION_1_12_0, ext_zawrs),
->>>>        ISA_EXT_DATA_ENTRY(zfh, PRIV_VERSION_1_11_0, ext_zfh),
->>>>        ISA_EXT_DATA_ENTRY(zfhmin, PRIV_VERSION_1_11_0, ext_zfhmin),
->>>> @@ -89,7 +96,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
->>>>        ISA_EXT_DATA_ENTRY(zcmp, PRIV_VERSION_1_12_0, ext_zcmp),
->>>>        ISA_EXT_DATA_ENTRY(zcmt, PRIV_VERSION_1_12_0, ext_zcmt),
->>>>        ISA_EXT_DATA_ENTRY(zba, PRIV_VERSION_1_12_0, ext_zba),
->>>> -    ISA_EXT_DATA_ENTRY(zbb, PRIV_VERSION_1_12_0, ext_zbb),
->>>> +    ISA_EXT_DATA_ENTRY_KVM(zbb, PRIV_VERSION_1_12_0, ext_zbb),
->>>>        ISA_EXT_DATA_ENTRY(zbc, PRIV_VERSION_1_12_0, ext_zbc),
->>>>        ISA_EXT_DATA_ENTRY(zbkb, PRIV_VERSION_1_12_0, ext_zbkb),
->>>>        ISA_EXT_DATA_ENTRY(zbkc, PRIV_VERSION_1_12_0, ext_zbkc),
->>>> @@ -114,13 +121,13 @@ static const struct isa_ext_data isa_edata_arr[] = {
->>>>        ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
->>>>        ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
->>>>        ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
->>>> -    ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
->>>> +    ISA_EXT_DATA_ENTRY_KVM(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
->>>>        ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
->>>> -    ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
->>>> +    ISA_EXT_DATA_ENTRY_KVM(sstc, PRIV_VERSION_1_12_0, ext_sstc),
->>>>        ISA_EXT_DATA_ENTRY(svadu, PRIV_VERSION_1_12_0, ext_svadu),
->>>> -    ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
->>>> +    ISA_EXT_DATA_ENTRY_KVM(svinval, PRIV_VERSION_1_12_0, ext_svinval),
->>>>        ISA_EXT_DATA_ENTRY(svnapot, PRIV_VERSION_1_12_0, ext_svnapot),
->>>> -    ISA_EXT_DATA_ENTRY(svpbmt, PRIV_VERSION_1_12_0, ext_svpbmt),
->>>> +    ISA_EXT_DATA_ENTRY_KVM(svpbmt, PRIV_VERSION_1_12_0, ext_svpbmt),
->>>
->>> This approach looks a bit difficult to maintain (it's hard to even see the
->>> _KVM macro uses). The approach will be even more difficult if we add more
->>> accelerators. I feel like we need an extension class where objects of that
->>> class can be passed to functions like riscv_isa_string_ext(). And then we
->>> also need tcg-extension and kvm-extension classes which inherit from
->>> the extension class. We can then keep the lists of extensions separate, as
->>> you originally proposed, as each list will be of its own type.
->>
->> So, after coding around a little, I didn't manage to create a KVM list in
->> kvm.c file because of how ARRAY_SIZE() (a macro that riscv_isa_string_ext())
->> calculates the array size. If the list is exported from another file the macro
->> fails to calculate the size of the array. Similar issues also happens when trying
->> to use kvm_multi_ext_cfgs[] in this function.
->>
->> This means that both tcg and kvm arrays ended up in cpu.c.
-> 
-> Hmm, I'd really rather we don't have a kvm array in cpu.c. Going back to
-> duplicating functions like riscv_isa_string_ext() into kvm.c is better,
-> IMO.
-> 
->> The tcg array is
->> left untouched (isa_edata_arr). The KVM array uses the same type TCG already
->> uses (isa_ext_edata) because it's good enough for KVM as well. I removed the
->> 'kvm_available' flag since we're going to manually edit the array.
->>
->> riscv_isa_string_ext() is then changed to switch between the tcg/kvm array
->> as required. The rest of the logic of the function stood the same. I'll also
->> add a pre-patch prior to all these changes to simplify riscv_isa_string_ext()
->> a bit when running under TCG.
-> 
-> If we have to teach riscv_isa_string_ext() about both tcg and kvm cfg
-> types (and any other functions that come along), then this approach
-> isn't all that helpful anyway.
+---
+v4:
+- update the linux header by the scripts/update-linux-headers.sh in PATCH1
+- remove the checking for "aplic_m" before creating S-mode APLIC device in PATCH2
+- add more setting when we initialize the KVM AIA chip in PATCH4
+- fix msi message delivery and the APLIC devices emulation in PATCH5
+- fix the AIA devices mapping with NUMA enabled in PATCH6
+- add "kvm-aia" parameter to sepecify the KVM AIA mode in PATCH6
 
-Someone must point the function to the right array. We can do it inside the function,
-we can pass the array as parameter and the caller will be responsible for it. But
-somewhere along the road there'll be an 'if (kvm_enabled())'.
+v3:
+- fix typo
+- tag the linux-header patch as placeholder
 
-All this said, the root cause of all this saga is due to extensions being enabled
-without KVM knowing about it. riscv_isa_string_ext() is quite straightforward: it is
-going through all the cpu->cfg.ext_() properties and picking the ones enable.
-If we can ensure that (1) all non-kvm properties are always default to false and
-(2) there is no way for the user to set them via command line, riscv_isa_string_ext()
-and all related artifacts can remain untouched.
+v2:
+- rebase to riscv-to-apply.next
+- update the linux header by the scripts/update-linux-headers.sh
 
-I have an idea to accomplish that. I'll see how it goes. Thanks,
+Yong-Xuan Wang (6):
+  update-linux-headers: sync-up header with Linux for KVM AIA support
+    placeholder
+  target/riscv: support the AIA device emulation with KVM enabled
+  target/riscv: check the in-kernel irqchip support
+  target/riscv: Create an KVM AIA irqchip
+  target/riscv: update APLIC and IMSIC to support KVM AIA
+  target/riscv: select KVM AIA in riscv virt machine
 
+ hw/intc/riscv_aplic.c         |  58 +++++--
+ hw/intc/riscv_imsic.c         |  26 ++-
+ hw/riscv/virt.c               | 297 +++++++++++++++++++++-------------
+ include/hw/riscv/virt.h       |   1 +
+ linux-headers/asm-riscv/kvm.h | 123 +++++++++++++-
+ linux-headers/linux/kvm.h     |   2 +
+ target/riscv/kvm.c            | 176 +++++++++++++++++++-
+ target/riscv/kvm_riscv.h      |   6 +
+ 8 files changed, 554 insertions(+), 135 deletions(-)
 
-Daniel
+-- 
+2.17.1
 
-> 
-> Thanks,
-> drew
 
