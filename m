@@ -4,52 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44975EB64D8
-	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Jun 2023 01:32:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C79FEB64D7
+	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Jun 2023 06:36:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qBmiC-0001RT-OD; Tue, 20 Jun 2023 21:32:45 -0400
+	id 1qBrRI-0001hI-Pz; Wed, 21 Jun 2023 02:35:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qBmiB-0001RA-Rw; Tue, 20 Jun 2023 21:32:43 -0400
-Received: from out30-111.freemail.mail.aliyun.com ([115.124.30.111])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qBmi9-0000ei-RZ; Tue, 20 Jun 2023 21:32:43 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R211e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045168;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=7; SR=0;
- TI=SMTPD_---0Vldqif3_1687311149; 
-Received: from 30.221.97.101(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0Vldqif3_1687311149) by smtp.aliyun-inc.com;
- Wed, 21 Jun 2023 09:32:30 +0800
-Message-ID: <91038a8e-6ff6-fbbb-0dda-ded772dab5f5@linux.alibaba.com>
-Date: Wed, 21 Jun 2023 09:32:05 +0800
+ (Exim 4.90_1) (envelope-from <groeck7@gmail.com>)
+ id 1qBrQj-0001bI-4Z; Wed, 21 Jun 2023 02:35:05 -0400
+Received: from mail-ot1-x32a.google.com ([2607:f8b0:4864:20::32a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <groeck7@gmail.com>)
+ id 1qBrQh-000643-0J; Wed, 21 Jun 2023 02:35:00 -0400
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-6b597fd6bc8so1193884a34.1; 
+ Tue, 20 Jun 2023 23:34:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1687329296; x=1689921296;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
+ :reply-to; bh=E1922YpPcDrvKqrIN3oBTikN+/54fWK8SaVDSBVBzHM=;
+ b=iJ/dyuUfdIvrOznOeK1iZb7JVbHetObXBBUJpDljNhre4SrCLblpcfiInD7htJC+S6
+ EI3hM5FFhcc//453x3Biv48mwYGgGhhlvcuW1mwBMhMCefl94N6nU+PA1wRdMIeQmc8d
+ wK0N87DpzK8bIYE1f3ybpb2jItvWCy4bZhziX5YNMP5BK9O9LJXWny3uJaAxvz+DomAB
+ pOswFpq5LzrSx5+CdyYfYShuXHChiwB/2GDqWzVedxXvrk9vciuzMNyCuaOZ5Ssd4DLy
+ lAJ2KUAvQ0id21IKpPQo9gWlxrxqScA30lZL+d0w014iZaj0C8/pXKs5yDHrZ3W378ZQ
+ LCaA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1687329296; x=1689921296;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:sender:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=E1922YpPcDrvKqrIN3oBTikN+/54fWK8SaVDSBVBzHM=;
+ b=bI8l4F2MOr0hEZGQNwabvUPxl1EpJcCKVKq2S+2j5pFOuY1q7JoWQC+SNpUiZDoOhO
+ xzM4KqDFpoJ6i1r2UQuBdLTG539JsUCPwYm40x8VNqn39xefz8SAlV503c7dW9UXiPHE
+ UOEcJrx5EqOwNFzkULsx7TG3vblq1Rm5Kn0h1kaIZHyI0jOlhnIU1/Krl4nR3htanIU6
+ 9N7WyAbQ3fSv9Easdhy9DZEW4ZREDo3H6rbnrjmMJDYGjuu56H5KHQg/FT+J+FeauY4j
+ /r0GhvWLXkWuRlx6eq63cvnelC0o2ws6P6T/y7oLLw84mIRdYlHYwhcVmvbdqKDWARoZ
+ 1UxQ==
+X-Gm-Message-State: AC+VfDxu8GbFfo25obdhPcInKxeoCUGFgOoavwG0HeDcVwG2PyJJX74a
+ FPLeGG6Uz73zcF4T+Y0ATBY=
+X-Google-Smtp-Source: ACHHUZ78lf0X2T9cvuXIaCb+fJ30xl7p+uKikKIzRMEFtJZ4S+lZ9b6nwCLatSXpDUI+3oe1Lebwyw==
+X-Received: by 2002:a9d:6455:0:b0:6b3:d369:9c0a with SMTP id
+ m21-20020a9d6455000000b006b3d3699c0amr8402238otl.19.1687329296326; 
+ Tue, 20 Jun 2023 23:34:56 -0700 (PDT)
+Received: from server.roeck-us.net ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
+ by smtp.gmail.com with ESMTPSA id
+ n21-20020a63e055000000b00502f4c62fd3sm2361080pgj.33.2023.06.20.23.34.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 20 Jun 2023 23:34:54 -0700 (PDT)
+Date: Tue, 20 Jun 2023 23:34:52 -0700
+From: Guenter Roeck <linux@roeck-us.net>
+To: Alistair Francis <alistair.francis@opensource.wdc.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair@alistair23.me>, alistair23@gmail.com,
+ Bin Meng <bin.meng@windriver.com>,
+ Alistair Francis <alistair.francis@wdc.com>, qemu-arm@nongnu.org,
+ Peter Maydell <peter.maydell@linaro.org>, bmeng.cn@gmail.com,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
+Subject: Re: [PATCH v4 6/6] hw/riscv: Enable TPM backends
+Message-ID: <d9007e92-c2d2-4ce6-aaf8-9d8d37b2d119@roeck-us.net>
+References: <20220420055248.960491-1-alistair.francis@opensource.wdc.com>
+ <20220420055248.960491-7-alistair.francis@opensource.wdc.com>
+ <3c07be7c-4af2-4a2b-8b0a-236e2f6a4a62@roeck-us.net>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Subject: Re: [PATCH] target/riscv/cpu.c: fix veyron-v1 CPU properties
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, palmer@rivosinc.com
-References: <20230620152443.137079-1-dbarboza@ventanamicro.com>
-Content-Language: en-US
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20230620152443.137079-1-dbarboza@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=115.124.30.111;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-111.freemail.mail.aliyun.com
-X-Spam_score_int: -99
-X-Spam_score: -10.0
-X-Spam_bar: ----------
-X-Spam_report: (-10.0 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- NICE_REPLY_A=-0.09, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <3c07be7c-4af2-4a2b-8b0a-236e2f6a4a62@roeck-us.net>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::32a;
+ envelope-from=groeck7@gmail.com; helo=mail-ot1-x32a.google.com
+X-Spam_score_int: -12
+X-Spam_score: -1.3
+X-Spam_bar: -
+X-Spam_report: (-1.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25,
+ FREEMAIL_FORGED_FROMDOMAIN=0.25, FREEMAIL_FROM=0.001,
+ HEADER_FROM_DIFFERENT_DOMAINS=0.25, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -65,53 +100,78 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Mon, Jun 19, 2023 at 01:32:34PM -0700, Guenter Roeck wrote:
+> Hi Alistair,
+> 
+> On Wed, Apr 20, 2022 at 03:52:48PM +1000, Alistair Francis wrote:
+> > From: Alistair Francis <alistair.francis@wdc.com>
+> > 
+> > Imply the TPM sysbus devices. This allows users to add TPM devices to
+> > the RISC-V virt board.
+> > 
+> > This was tested by first creating an emulated TPM device:
+> > 
+> >     swtpm socket --tpm2 -t -d --tpmstate dir=/tmp/tpm \
+> >         --ctrl type=unixio,path=swtpm-sock
+> > 
+> > Then launching QEMU with:
+> > 
+> >     -chardev socket,id=chrtpm,path=swtpm-sock \
+> >     -tpmdev emulator,id=tpm0,chardev=chrtpm \
+> >     -device tpm-tis-device,tpmdev=tpm0
+> > 
+> > The TPM device can be seen in the memory tree and the generated device
+> > tree.
+> > 
+> I tried to get this working with qemu 8.0, but I did not have any success.
+> I am quite sure I have the above command line correctly, and it does work
+> with arm64. Any idea what I might be missing ?
+> 
 
-On 2023/6/20 23:24, Daniel Henrique Barboza wrote:
-> Commit 7f0bdfb5bfc2 ("target/riscv/cpu.c: remove cfg setup from
-> riscv_cpu_init()") removed code that was enabling mmu, pmp, ext_ifencei
-> and ext_icsr from riscv_cpu_init(), the init() function of
-> TYPE_RISCV_CPU, parent type of all RISC-V CPUss. This was done to force
-> CPUs to explictly enable all extensions and features it requires,
-> without any 'magic values' that were inherited by the parent type.
->
-> This commit failed to make appropriate changes in the 'veyron-v1' CPU,
-> added earlier by commit e1d084a8524a. The result is that the veyron-v1
-> CPU has ext_ifencei, ext_icsr and pmp set to 'false', which is not the
-> case.
->
-> The reason why it took this long to notice (thanks LIU Zhiwei for
-> reporting it) is because Linux doesn't mind 'ifencei' and 'icsr' being
-> absent in the 'riscv,isa' DT, implying that they're both present if the
-> 'i' extension is enabled. OpenSBI also doesn't error out or warns about
-> the lack of 'pmp', it'll just not protect memory pages.
->
-> Fix it by setting them to 'true' in rv64_veyron_v1_cpu_init() like
-> 7f0bdfb5bfc2 already did with other CPUs.
->
-> Reported-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-> Fixes: 7f0bdfb5bfc2 ("target/riscv/cpu.c: remove cfg setup from riscv_cpu_init()")
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->   target/riscv/cpu.c | 3 +++
->   1 file changed, 3 insertions(+)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 881bddf393..707f62b592 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -444,6 +444,9 @@ static void rv64_veyron_v1_cpu_init(Object *obj)
->   
->       /* Enable ISA extensions */
->       cpu->cfg.mmu = true;
-> +    cpu->cfg.ext_ifencei = true;
-> +    cpu->cfg.ext_icsr = true;
-> +    cpu->cfg.pmp = true;
+Answering my own question: Nothing. The problem is that the devicetree
+is created too early, before the tpm device is instantiated/realized in
+qemu. The tpm device therefore does not show up in devicetree, and the
+tom device does not instantiate in Linux. The patch below fixes the problem
+for me.
 
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Any comments / thoughts ? Is that change acceptable, or should it be
+implemented differently ?
 
-Zhiwei
+Thanks,
+Guenter
 
->       cpu->cfg.ext_icbom = true;
->       cpu->cfg.cbom_blocksize = 64;
->       cpu->cfg.cboz_blocksize = 64;
+---
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 4e3efbee16..ea259d7ade 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1247,6 +1247,11 @@ static void virt_machine_done(Notifier *notifier, void *data)
+     uint32_t fdt_load_addr;
+     uint64_t kernel_entry;
+ 
++    /* create devicetree if not provided */
++    if (!machine->dtb) {
++        create_fdt(s, memmap);
++    }
++
+     /*
+      * Only direct boot kernel is currently supported for KVM VM,
+      * so the "-bios" parameter is not supported when KVM is enabled.
+@@ -1519,15 +1524,13 @@ static void virt_machine_init(MachineState *machine)
+     }
+     virt_flash_map(s, system_memory);
+ 
+-    /* load/create device tree */
++    /* load device tree */
+     if (machine->dtb) {
+         machine->fdt = load_device_tree(machine->dtb, &s->fdt_size);
+         if (!machine->fdt) {
+             error_report("load_device_tree() failed");
+             exit(1);
+         }
+-    } else {
+-        create_fdt(s, memmap);
+     }
+ 
+     s->machine_done.notify = virt_machine_done;
 
