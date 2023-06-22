@@ -4,84 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9C07EB64DC
-	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Jun 2023 18:46:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0467DEB64D8
+	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Jun 2023 19:00:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qCPJj-0000zG-D5; Thu, 22 Jun 2023 14:46:03 -0400
+	id 1qCPX7-00052E-6o; Thu, 22 Jun 2023 14:59:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qCPJa-0000yK-Ns
- for qemu-riscv@nongnu.org; Thu, 22 Jun 2023 14:45:56 -0400
-Received: from mail-oo1-xc35.google.com ([2607:f8b0:4864:20::c35])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qCPJV-0001GT-2k
- for qemu-riscv@nongnu.org; Thu, 22 Jun 2023 14:45:51 -0400
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-561403f7225so604763eaf.1
- for <qemu-riscv@nongnu.org>; Thu, 22 Jun 2023 11:45:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1687459543; x=1690051543;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=XKyN5QSE+MTdh+8+dUkT/aMB00OyZJli1HAFK0+xm+Y=;
- b=Ssyrkfslz362xPdIp7qNlwKfJTcoyaKos0fxbpK2PLbvB5qDlFaNmT5zbs4CxfYnNB
- Ap3DWH5vRK8skZMXOzh7TZMkaNR0SBOKpjHAEpBddrcuEoQWMh4WafU3WG1vWFSQ+HNq
- Q96foL4x5DJQ4IQ/QwAS4eL4Ui8mExEztkhQ4sNuf+6idXXvrAXZhrII7NGVUyPnVbdQ
- 83n8HXOpCMKTWI7JDry4smmTGpGaGgssBwhTviTgssn55ndBBBHDvDU+GcKdGlWszPm/
- EEONh9g2kYwXC6zNYwWrsQtcDvF3m16AJnnyg7kb6E3ifNjEs20V3/IbH8f99DtF/ZfB
- pXuw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687459543; x=1690051543;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=XKyN5QSE+MTdh+8+dUkT/aMB00OyZJli1HAFK0+xm+Y=;
- b=CyGux1RD7GHYl2ZTzTtl41elsw115WbkUSuIqYTEV+p0zOivweoQc0J5B8zLNmpWYM
- 1jiLpxRWtp5kFbafeESbULg07tDRyRyDaZEJz33HbFGrHPxpEZZFwRaZ8XuduIkBcz8Q
- QXcg7JRW1JSYWIJYzhJ/gVQsRWaip6R5dL7GktdCsim0q9ko09k62JVETwLKN+lP2jlF
- j0uTqYPdjl1GHGNnToQRkqttHLBq1tmOlYVcCcX6M9ry4beXlzuhb+Lmr8yOrK5XCZvS
- baaY7FL0/CYWb6qAGWdcIrugRN4ht7n6dkV50YwYYqnfHCzQC4M9SydFkrj1vfnmPndv
- 2ueQ==
-X-Gm-Message-State: AC+VfDzg1Atkq3TqR+vmNWfHCFT4MVuTTiXaqyba1qnY97u8ljiv68Tl
- b7dO2o//eS2RvfBPx3+0Cy3whA==
-X-Google-Smtp-Source: ACHHUZ5iaB+lQl39UaiZXGSgKe75oXW6Oq9puiDOUo7kf6Z7ueVsTlBpbr/3ukkDS1YNXrMciNaU5Q==
-X-Received: by 2002:a4a:dd04:0:b0:560:8f20:73d3 with SMTP id
- m4-20020a4add04000000b005608f2073d3mr6895126oou.1.1687459543437; 
- Thu, 22 Jun 2023 11:45:43 -0700 (PDT)
-Received: from [192.168.68.108] (201-69-66-110.dial-up.telesp.net.br.
- [201.69.66.110]) by smtp.gmail.com with ESMTPSA id
- t7-20020a4ad0a7000000b00560b1febfdfsm434793oor.10.2023.06.22.11.45.41
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 22 Jun 2023 11:45:43 -0700 (PDT)
-Message-ID: <da9768b2-84be-5e80-cdfd-ca60bdb48ac9@ventanamicro.com>
-Date: Thu, 22 Jun 2023 15:45:40 -0300
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>) id 1qCPX6-000526-7E
+ for qemu-riscv@nongnu.org; Thu, 22 Jun 2023 14:59:52 -0400
+Received: from dfw.source.kernel.org ([2604:1380:4641:c500::1])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>) id 1qCPX4-000800-N4
+ for qemu-riscv@nongnu.org; Thu, 22 Jun 2023 14:59:51 -0400
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 5B69F618CD;
+ Thu, 22 Jun 2023 18:59:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4E127C433C0;
+ Thu, 22 Jun 2023 18:59:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1687460378;
+ bh=NV9aTfcB04hyaA/wBUYwR/eWp1snE1/lwhMpdPWU8zE=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=DJDv0M49XxR7xapPfqyDpyau9GCb+JU7gfceKdSrjxnku2eDn6Yi10Rdm7RbTgGJp
+ kZ/GA5PD8qX492Qf9yQ4FG3JiymJ5omsdksYTg3Lv3tuPkV4TivY3Up00cBanE/IvZ
+ VVcBqY7VZXd03W/yLJqos7ps1HijN1ZQAXFiuWUggdwx9dVVuRI8td3MzYRC0EraZn
+ ddQxdMsljEv3T7nAu3kh5spV2aCgwicGzwmsDyrcY1QrsGzDN1f9FDsDkmzuxJLk30
+ 8RZG8gqMOB8HSFmLHDK960sBCoBuN7kcaok7FVd/AyT8MwdBmls5iBW+U96BaeA6Ku
+ 29wqvCkpK3vTQ==
+Date: Thu, 22 Jun 2023 19:59:32 +0100
+From: Conor Dooley <conor@kernel.org>
+To: Palmer Dabbelt <palmer@dabbelt.com>
+Cc: Conor Dooley <conor.dooley@microchip.com>,
+ Paul Walmsley <paul.walmsley@sifive.com>, robh+dt@kernel.org,
+ krzysztof.kozlowski+dt@linaro.org,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ ajones@ventanamicro.com, apatel@ventanamicro.com,
+ atishp@atishpatra.org, jrtc27@jrtc27.com, rick@andestech.com,
+ ycliang@andestech.com, oleksii.kurochko@gmail.com,
+ linux-riscv@lists.infradead.org, qemu-riscv@nongnu.org,
+ u-boot@lists.denx.de, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2] dt-bindings: riscv: deprecate riscv,isa
+Message-ID: <20230622-stipend-flashily-97917469f39b@spud>
+References: <20230608-sitting-bath-31eddc03c5a5@spud>
+ <mhng-aa00c037-6201-4548-9036-1d6dbbfc9343@palmer-ri-x1c9a>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Subject: Re: [PATCH qemu v2] change the fdt_load_addr variable datatype to
- handle 64-bit DRAM address
-Content-Language: en-US
-To: ~rlakshmibai <lakshmi.bai.rajasubramanian@bodhicomputing.com>,
- qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
-Cc: qemu-devel@nongnu.org
-References: <168728374725.24164.15960018589525015764-0@git.sr.ht>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <168728374725.24164.15960018589525015764-0@git.sr.ht>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c35;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc35.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
-X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.09,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="zHw74JTtVBfhm0Fq"
+Content-Disposition: inline
+In-Reply-To: <mhng-aa00c037-6201-4548-9036-1d6dbbfc9343@palmer-ri-x1c9a>
+Received-SPF: pass client-ip=2604:1380:4641:c500::1;
+ envelope-from=conor@kernel.org; helo=dfw.source.kernel.org
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -98,41 +82,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-(CC-ing Alistair)
 
-On 6/20/23 14:44, ~rlakshmibai wrote:
-> From: Lakshmi Bai Raja Subramanian <lakshmi.bai.rajasubramanian@bodhicomputing.com>
-> 
-> fdt_load_addr is getting overflowed when there is no DRAM at lower 32 bit address space.
-> To support pure 64-bit DRAM address, fdt_load_addr variable's data type is changed to uint64_t
-> instead of uint32_t.
+--zHw74JTtVBfhm0Fq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-It's worth mentioning that fdt_load_addr receives the result of
-riscv_compute_fdt_addr(), which is an uint64_t.
+On Thu, Jun 22, 2023 at 11:25:35AM -0700, Palmer Dabbelt wrote:
 
-> 
-> Signed-off-by: Lakshmi Bai Raja Subramanian <lakshmi.bai.rajasubramanian@bodhicomputing.com>
-> ---
+> Reviewed-by: Palmer Dabbelt <palmer@rivosinc.com>
+> Acked-by: Palmer Dabbelt <palmer@rivosinc.com>
+>=20
+> I'm not wed to any particular encoding for the properties, IMO that's more
+> of a decision for the DT folks.  IMO the important bit is to just get away
+> from ISA strings and move towards some tightly-specified properties that
+> indicate how the HW actually behaves.
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+I'm going to resubmit with Rob's list of strings. I'll keep your tags,
+since the spirit of the patch will be the same, with enforced meanings
+for each extension.
 
->   hw/riscv/virt.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 95708d890e..c348529ac0 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -1244,7 +1244,7 @@ static void virt_machine_done(Notifier *notifier, void *data)
->       target_ulong start_addr = memmap[VIRT_DRAM].base;
->       target_ulong firmware_end_addr, kernel_start_addr;
->       const char *firmware_name = riscv_default_firmware_name(&s->soc[0]);
-> -    uint32_t fdt_load_addr;
-> +    uint64_t fdt_load_addr;
+Cheers,
+Conor.
 
 
+--zHw74JTtVBfhm0Fq
+Content-Type: application/pgp-signature; name="signature.asc"
 
->       uint64_t kernel_entry = 0;
->       BlockBackend *pflash_blk0;
->   
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZJSaFAAKCRB4tDGHoIJi
+0nLsAP9kIuB4WQ2zaDQIzZJDUmQQv0dwtsHhgVoBlQDxIsLhOwD/RSmCg2YNJLDn
+bReL/deUbjlXqTBNq+D6jzJQm7r6VQ8=
+=eP0v
+-----END PGP SIGNATURE-----
+
+--zHw74JTtVBfhm0Fq--
 
