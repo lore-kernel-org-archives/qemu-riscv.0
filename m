@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD9E4EB64D8
-	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Jun 2023 18:10:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D79B2EB64D8
+	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Jun 2023 18:11:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qCOkY-0005Zr-VZ; Thu, 22 Jun 2023 14:09:42 -0400
+	id 1qCOli-0006Kx-8O; Thu, 22 Jun 2023 14:10:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qCOkY-0005ZU-1p
- for qemu-riscv@nongnu.org; Thu, 22 Jun 2023 14:09:42 -0400
-Received: from mail-oa1-x32.google.com ([2001:4860:4864:20::32])
+ id 1qCOlh-0006Kp-3s
+ for qemu-riscv@nongnu.org; Thu, 22 Jun 2023 14:10:53 -0400
+Received: from mail-oi1-x22c.google.com ([2607:f8b0:4864:20::22c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qCOkU-0000te-G2
- for qemu-riscv@nongnu.org; Thu, 22 Jun 2023 14:09:41 -0400
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-19674cab442so6555651fac.3
- for <qemu-riscv@nongnu.org>; Thu, 22 Jun 2023 11:09:34 -0700 (PDT)
+ id 1qCOld-00027d-5C
+ for qemu-riscv@nongnu.org; Thu, 22 Jun 2023 14:10:52 -0400
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-39ea511930eso4925810b6e.1
+ for <qemu-riscv@nongnu.org>; Thu, 22 Jun 2023 11:10:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1687457374; x=1690049374;
+ d=ventanamicro.com; s=google; t=1687457448; x=1690049448;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=6074fidB9Uan3xr8bHi15m+ff8h0hEEnZ5kBLhgpFOk=;
- b=O2YCx6JGsq9o6N0Qtf1WPZrHsBm2Cat/Ki7TEODIIEGI15oIhUd7RVwaZvbYyRFnWl
- F2M/JiIbalTAPCszbw9shguxifqzK03mjxo38m/WiJH8Jm7vM3HEt7rd5Cj83GngQdcv
- bUb6Ucxh2kByvEEVTuD3Xkbt2qJTQU8fCfrXIUAf4ncOuAz+N2GRvAQyaiD66KH39vIm
- 05tdZBvN7/HuOK7Cdzrvlyd+PE0Qw9ng+abYNjUhjwjREV+n5o8K9FE+LYmaBVSTC5ZT
- 70tff1/hFZSBlkiu04EzDBrs2u6T+/NPgYOI3ZrDYpi0QDjCmNN61LdfFS20B8qTtM3k
- 0vrQ==
+ bh=pQ+++coWpXmi0zO8+dIEZlodBa584/Hr7pw5kQztVlM=;
+ b=Yb6ZqF2uw3lW+VDn06MrtruGt8UZdpsqIZtFUJEAqqtYdx7fG12m/ivD2DUVwz7vIK
+ gR4Wevj9O27/Ftp5FL9vsZNxZu8XdF9Q6LatTL8EPlss1N0Jl1pfuPhWISpAGbWGew8C
+ Ul/nnulIqz264S4WIwhLUMWqg6VuMQL6euRQ6yYAOecS8F8yL9IYNpn3ebRD2Ly5feVb
+ 8+xmnoxkcqFJ/d/n47NWdQblTjtwKI/ShVWuLudrzIQpY5yzyQuA+fPa8s5vdW0IYpBm
+ koso++TjRI3Z6BZIb6UkIPyb7RpzAn7UCltB0r4Sn0T/p118mXmtc5Oz9JtKIlbM0DHS
+ L8Ig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687457374; x=1690049374;
+ d=1e100.net; s=20221208; t=1687457448; x=1690049448;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=6074fidB9Uan3xr8bHi15m+ff8h0hEEnZ5kBLhgpFOk=;
- b=Iqg+2nx176NkFvyH25FfNTI5b9yHOF6d8huQvg+QC/bmlzpW8xhr9a+KtgD+05kRe6
- FWCLm3bVDYNZnrDb+4PXENMtpx5uTfH+TcL230SXc3kqg/z+6ETfs7HgpIO5Rlat6Gk7
- 1OWOoANWWKvTj+nlo4OsW/7MLS8ARUjqDXm5xTSEpNDxYEokeLJHWKKK3a8HREJiIhM8
- w5+yrgHL38vv3HxAQiuXYVvUczwFU4ANKt2UBCYMZvSX2/d4X4+NDFHe5ZGAHZZYZqqt
- lBxboa/6n/iGveKkXtH4L83M/8o20t9IOSXSqsDKvEz2UhiPpsPETYVkg64uikIwxYDp
- 4NZg==
-X-Gm-Message-State: AC+VfDztlyr8kgdSgxOWYwBLcKCEe2BtdHSAvuD5idF00b5SDP6dorFA
- rV2i9Gn7NTq1sKV5KRnBkRA+4g==
-X-Google-Smtp-Source: ACHHUZ7jQTGpkx1SiRbTy7xf5q0KJeve7Ynfgqe3izXqizTpHU3txYhrIC2iuroKIJCXkG9OabrGJQ==
-X-Received: by 2002:a05:6870:a481:b0:1ad:376c:4d7a with SMTP id
- j1-20020a056870a48100b001ad376c4d7amr1783307oal.58.1687457373916; 
- Thu, 22 Jun 2023 11:09:33 -0700 (PDT)
+ bh=pQ+++coWpXmi0zO8+dIEZlodBa584/Hr7pw5kQztVlM=;
+ b=k4RmtHqEaANYANu9warp+CrCb1sV8vUdGVnP2GOuMsBql5wOwfDNrfH0+dSDa9izgQ
+ +0Sbgkod8g7Lt2pkYBmg1XMWS+io1e+nK8nF6mlx36NpX7p5LKDirUTN4xSMF1KSaCXL
+ h25m/aT8tKhad1WL4JD2RcyQR7z+vh52NJQsTRIZLOlRLAaa4Z2oq2nU4yrQhZ1TGZtS
+ 7nIhpVQFZ6pMTi35T6udNaMQvG37zYJpbQuG8LlonRa28QeupGdTTfVEvk2o9yZcSDaf
+ UxgGHEbtXvxKwHN/KBZ7EgGDzOnIYoMPRljSsE0kNs+taqCo7JDrUyhkmxomtASgOQyH
+ j8SA==
+X-Gm-Message-State: AC+VfDzZGmIozoSteruCkujGdVNtOE2zwU7qnh9+HdVjaVAqleY49W5C
+ HKGQRd/Lo7KX/z6l/E7t0XWM7w==
+X-Google-Smtp-Source: ACHHUZ7ar5Z053BB4PZYN6wFcVlijH/M6ZRun/BxrrHvd2V5XaFjiDcNNzbUX8En2TQxRy9vNK0ilg==
+X-Received: by 2002:a05:6808:2224:b0:398:4ad8:5ce6 with SMTP id
+ bd36-20020a056808222400b003984ad85ce6mr23926784oib.30.1687457447838; 
+ Thu, 22 Jun 2023 11:10:47 -0700 (PDT)
 Received: from [192.168.68.108] (201-69-66-110.dial-up.telesp.net.br.
  [201.69.66.110]) by smtp.gmail.com with ESMTPSA id
- hp23-20020a0568709a9700b001807f020a39sm4446318oab.12.2023.06.22.11.09.30
+ u7-20020a056808114700b0039ea3942c33sm3443878oiu.3.2023.06.22.11.10.44
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 22 Jun 2023 11:09:33 -0700 (PDT)
-Message-ID: <11ce0ab4-5dd9-864e-7e25-0a114dc0968c@ventanamicro.com>
-Date: Thu, 22 Jun 2023 15:09:29 -0300
+ Thu, 22 Jun 2023 11:10:47 -0700 (PDT)
+Message-ID: <3226dc15-c94f-24c7-f19d-2ff0e27194b6@ventanamicro.com>
+Date: Thu, 22 Jun 2023 15:10:42 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.12.0
-Subject: Re: [PATCH v4 12/17] target/riscv: Add Zvksh ISA extension support
+Subject: Re: [PATCH v4 13/17] target/riscv: Add Zvkg ISA extension support
 Content-Language: en-US
 To: Max Chou <max.chou@sifive.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Cc: Lawrence Hunter <lawrence.hunter@codethink.co.uk>,
- Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>,
+Cc: Nazar Kazakov <nazar.kazakov@codethink.co.uk>,
+ Lawrence Hunter <lawrence.hunter@codethink.co.uk>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Nazar Kazakov <nazar.kazakov@codethink.co.uk>,
+ Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>,
  William Salmon <will.salmon@codethink.co.uk>
 References: <20230622161646.32005-1-max.chou@sifive.com>
- <20230622161646.32005-13-max.chou@sifive.com>
+ <20230622161646.32005-14-max.chou@sifive.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230622161646.32005-13-max.chou@sifive.com>
+In-Reply-To: <20230622161646.32005-14-max.chou@sifive.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2001:4860:4864:20::32;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::22c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22c.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
@@ -108,272 +108,209 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 6/22/23 13:16, Max Chou wrote:
-> From: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
+> From: Nazar Kazakov <nazar.kazakov@codethink.co.uk>
 > 
-> This commit adds support for the Zvksh vector-crypto extension, which
+> This commit adds support for the Zvkg vector-crypto extension, which
 > consists of the following instructions:
 > 
-> * vsm3me.vv
-> * vsm3c.vi
+> * vgmul.vv
+> * vghsh.vv
 > 
 > Translation functions are defined in
 > `target/riscv/insn_trans/trans_rvvk.c.inc` and helpers are defined in
 > `target/riscv/vcrypto_helper.c`.
 > 
-> Co-authored-by: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
+> Co-authored-by: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
 > [max.chou@sifive.com: Replaced vstart checking by TCG op]
-> Signed-off-by: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
 > Signed-off-by: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
+> Signed-off-by: Nazar Kazakov <nazar.kazakov@codethink.co.uk>
 > Signed-off-by: Max Chou <max.chou@sifive.com>
 > ---
 
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
->   target/riscv/cpu.c                       |   5 +-
->   target/riscv/cpu_cfg.h                   |   1 +
->   target/riscv/helper.h                    |   3 +
->   target/riscv/insn32.decode               |   4 +
->   target/riscv/insn_trans/trans_rvvk.c.inc |  31 ++++++
->   target/riscv/vcrypto_helper.c            | 134 +++++++++++++++++++++++
->   6 files changed, 176 insertions(+), 2 deletions(-)
+>   target/riscv/cpu.c                       |  5 +-
+>   target/riscv/cpu_cfg.h                   |  1 +
+>   target/riscv/helper.h                    |  3 +
+>   target/riscv/insn32.decode               |  4 ++
+>   target/riscv/insn_trans/trans_rvvk.c.inc | 30 ++++++++++
+>   target/riscv/vcrypto_helper.c            | 72 ++++++++++++++++++++++++
+>   6 files changed, 113 insertions(+), 2 deletions(-)
 > 
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 6bba8ba8c9..c9a9ff80cd 100644
+> index c9a9ff80cd..8e60a122d4 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -121,6 +121,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
+> @@ -118,6 +118,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
+>       ISA_EXT_DATA_ENTRY(zve64d, PRIV_VERSION_1_10_0, ext_zve64d),
+>       ISA_EXT_DATA_ENTRY(zvfh, PRIV_VERSION_1_12_0, ext_zvfh),
+>       ISA_EXT_DATA_ENTRY(zvfhmin, PRIV_VERSION_1_12_0, ext_zvfhmin),
+> +    ISA_EXT_DATA_ENTRY(zvkg, PRIV_VERSION_1_12_0, ext_zvkg),
 >       ISA_EXT_DATA_ENTRY(zvkned, PRIV_VERSION_1_12_0, ext_zvkned),
 >       ISA_EXT_DATA_ENTRY(zvknha, PRIV_VERSION_1_12_0, ext_zvknha),
 >       ISA_EXT_DATA_ENTRY(zvknhb, PRIV_VERSION_1_12_0, ext_zvknhb),
-> +    ISA_EXT_DATA_ENTRY(zvksh, PRIV_VERSION_1_12_0, ext_zvksh),
->       ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
->       ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
->       ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
-> @@ -1197,8 +1198,8 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+> @@ -1198,8 +1199,8 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
 >        * In principle Zve*x would also suffice here, were they supported
 >        * in qemu
 >        */
-> -    if ((cpu->cfg.ext_zvbb || cpu->cfg.ext_zvkned || cpu->cfg.ext_zvknha) &&
-> -        !cpu->cfg.ext_zve32f) {
-> +    if ((cpu->cfg.ext_zvbb || cpu->cfg.ext_zvkned || cpu->cfg.ext_zvknha ||
-> +         cpu->cfg.ext_zvksh) && !cpu->cfg.ext_zve32f) {
+> -    if ((cpu->cfg.ext_zvbb || cpu->cfg.ext_zvkned || cpu->cfg.ext_zvknha ||
+> -         cpu->cfg.ext_zvksh) && !cpu->cfg.ext_zve32f) {
+> +    if ((cpu->cfg.ext_zvbb || cpu->cfg.ext_zvkg || cpu->cfg.ext_zvkned ||
+> +         cpu->cfg.ext_zvknha || cpu->cfg.ext_zvksh) && !cpu->cfg.ext_zve32f) {
 >           error_setg(errp,
 >                      "Vector crypto extensions require V or Zve* extensions");
 >           return;
 > diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> index 41cce87ffc..f859d9e2f5 100644
+> index f859d9e2f5..b125b0b33f 100644
 > --- a/target/riscv/cpu_cfg.h
 > +++ b/target/riscv/cpu_cfg.h
-> @@ -88,6 +88,7 @@ struct RISCVCPUConfig {
+> @@ -85,6 +85,7 @@ struct RISCVCPUConfig {
+>       bool ext_zve64d;
+>       bool ext_zvbb;
+>       bool ext_zvbc;
+> +    bool ext_zvkg;
 >       bool ext_zvkned;
 >       bool ext_zvknha;
 >       bool ext_zvknhb;
-> +    bool ext_zvksh;
->       bool ext_zmmul;
->       bool ext_zvfh;
->       bool ext_zvfhmin;
 > diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> index 19f5a8a28d..9220af18e6 100644
+> index 9220af18e6..a4fe1ff5ca 100644
 > --- a/target/riscv/helper.h
 > +++ b/target/riscv/helper.h
-> @@ -1238,3 +1238,6 @@ DEF_HELPER_5(vaeskf2_vi, void, ptr, ptr, i32, env, i32)
->   DEF_HELPER_5(vsha2ms_vv, void, ptr, ptr, ptr, env, i32)
->   DEF_HELPER_5(vsha2ch_vv, void, ptr, ptr, ptr, env, i32)
->   DEF_HELPER_5(vsha2cl_vv, void, ptr, ptr, ptr, env, i32)
+> @@ -1241,3 +1241,6 @@ DEF_HELPER_5(vsha2cl_vv, void, ptr, ptr, ptr, env, i32)
+>   
+>   DEF_HELPER_5(vsm3me_vv, void, ptr, ptr, ptr, env, i32)
+>   DEF_HELPER_5(vsm3c_vi, void, ptr, ptr, i32, env, i32)
 > +
-> +DEF_HELPER_5(vsm3me_vv, void, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_5(vsm3c_vi, void, ptr, ptr, i32, env, i32)
+> +DEF_HELPER_5(vghsh_vv, void, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_4(vgmul_vv, void, ptr, ptr, env, i32)
 > diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> index d2cfb2729c..5ca83e8462 100644
+> index 5ca83e8462..b10497afd3 100644
 > --- a/target/riscv/insn32.decode
 > +++ b/target/riscv/insn32.decode
-> @@ -953,3 +953,7 @@ vaeskf2_vi  101010 1 ..... ..... 010 ..... 1110111 @r_vm_1
->   vsha2ms_vv  101101 1 ..... ..... 010 ..... 1110111 @r_vm_1
->   vsha2ch_vv  101110 1 ..... ..... 010 ..... 1110111 @r_vm_1
->   vsha2cl_vv  101111 1 ..... ..... 010 ..... 1110111 @r_vm_1
+> @@ -957,3 +957,7 @@ vsha2cl_vv  101111 1 ..... ..... 010 ..... 1110111 @r_vm_1
+>   # *** Zvksh vector crypto extension ***
+>   vsm3me_vv   100000 1 ..... ..... 010 ..... 1110111 @r_vm_1
+>   vsm3c_vi    101011 1 ..... ..... 010 ..... 1110111 @r_vm_1
 > +
-> +# *** Zvksh vector crypto extension ***
-> +vsm3me_vv   100000 1 ..... ..... 010 ..... 1110111 @r_vm_1
-> +vsm3c_vi    101011 1 ..... ..... 010 ..... 1110111 @r_vm_1
+> +# *** Zvkg vector crypto extension ***
+> +vghsh_vv    101100 1 ..... ..... 010 ..... 1110111 @r_vm_1
+> +vgmul_vv    101000 1 ..... 10001 010 ..... 1110111 @r2_vm_1
 > diff --git a/target/riscv/insn_trans/trans_rvvk.c.inc b/target/riscv/insn_trans/trans_rvvk.c.inc
-> index 528a0d3b32..af1fb74c38 100644
+> index af1fb74c38..e5ccb26c45 100644
 > --- a/target/riscv/insn_trans/trans_rvvk.c.inc
 > +++ b/target/riscv/insn_trans/trans_rvvk.c.inc
-> @@ -479,3 +479,34 @@ static bool vsha_check(DisasContext *s, arg_rmrr *a)
->   GEN_VV_UNMASKED_TRANS(vsha2ms_vv, vsha_check, ZVKNH_EGS)
->   GEN_VV_UNMASKED_TRANS(vsha2cl_vv, vsha_check, ZVKNH_EGS)
->   GEN_VV_UNMASKED_TRANS(vsha2ch_vv, vsha_check, ZVKNH_EGS)
+> @@ -510,3 +510,33 @@ static inline bool vsm3c_check(DisasContext *s, arg_rmrr *a)
+>   
+>   GEN_VV_UNMASKED_TRANS(vsm3me_vv, vsm3me_check, ZVKSH_EGS)
+>   GEN_VI_UNMASKED_TRANS(vsm3c_vi, vsm3c_check, ZVKSH_EGS)
 > +
 > +/*
-> + * Zvksh
+> + * Zvkg
 > + */
 > +
-> +#define ZVKSH_EGS 8
+> +#define ZVKG_EGS 4
 > +
-> +static inline bool vsm3_check(DisasContext *s, arg_rmrr *a)
+> +static bool vgmul_check(DisasContext *s, arg_rmr *a)
 > +{
-> +    int egw_bytes = ZVKSH_EGS << s->sew;
-> +    int mult = 1 << MAX(s->lmul, 0);
-> +    return s->cfg_ptr->ext_zvksh == true &&
-> +           require_rvv(s) &&
+> +    int egw_bytes = ZVKG_EGS << s->sew;
+> +    return s->cfg_ptr->ext_zvkg == true &&
 > +           vext_check_isa_ill(s) &&
-> +           !is_overlapped(a->rd, mult, a->rs2, mult) &&
+> +           require_rvv(s) &&
+> +           MAXSZ(s) >= egw_bytes &&
+> +           vext_check_ss(s, a->rd, a->rs2, a->vm) &&
+> +           s->sew == MO_32;
+> +}
+> +
+> +GEN_V_UNMASKED_TRANS(vgmul_vv, vgmul_check, ZVKG_EGS)
+> +
+> +static bool vghsh_check(DisasContext *s, arg_rmrr *a)
+> +{
+> +    int egw_bytes = ZVKG_EGS << s->sew;
+> +    return s->cfg_ptr->ext_zvkg == true &&
+> +           opivv_check(s, a) &&
 > +           MAXSZ(s) >= egw_bytes &&
 > +           s->sew == MO_32;
 > +}
 > +
-> +static inline bool vsm3me_check(DisasContext *s, arg_rmrr *a)
-> +{
-> +    return vsm3_check(s, a) && vext_check_sss(s, a->rd, a->rs1, a->rs2, a->vm);
-> +}
-> +
-> +static inline bool vsm3c_check(DisasContext *s, arg_rmrr *a)
-> +{
-> +    return vsm3_check(s, a) && vext_check_ss(s, a->rd, a->rs2, a->vm);
-> +}
-> +
-> +GEN_VV_UNMASKED_TRANS(vsm3me_vv, vsm3me_check, ZVKSH_EGS)
-> +GEN_VI_UNMASKED_TRANS(vsm3c_vi, vsm3c_check, ZVKSH_EGS)
+> +GEN_VV_UNMASKED_TRANS(vghsh_vv, vghsh_check, ZVKG_EGS)
 > diff --git a/target/riscv/vcrypto_helper.c b/target/riscv/vcrypto_helper.c
-> index ca09062c6c..06c8f4adc7 100644
+> index 06c8f4adc7..04e6374211 100644
 > --- a/target/riscv/vcrypto_helper.c
 > +++ b/target/riscv/vcrypto_helper.c
-> @@ -717,3 +717,137 @@ void HELPER(vsha2cl_vv)(void *vd, void *vs1, void *vs2, CPURISCVState *env,
->       vext_set_elems_1s(vd, vta, env->vl * esz, total_elems * esz);
+> @@ -851,3 +851,75 @@ void HELPER(vsm3c_vi)(void *vd_vptr, void *vs2_vptr, uint32_t uimm,
+>       vext_set_elems_1s(vd_vptr, vta, env->vl * esz, total_elems * esz);
 >       env->vstart = 0;
 >   }
 > +
-> +static inline uint32_t p1(uint32_t x)
+> +void HELPER(vghsh_vv)(void *vd_vptr, void *vs1_vptr, void *vs2_vptr,
+> +                      CPURISCVState *env, uint32_t desc)
 > +{
-> +    return x ^ rol32(x, 15) ^ rol32(x, 23);
-> +}
-> +
-> +static inline uint32_t zvksh_w(uint32_t m16, uint32_t m9, uint32_t m3,
-> +                               uint32_t m13, uint32_t m6)
-> +{
-> +    return p1(m16 ^ m9 ^ rol32(m3, 15)) ^ rol32(m13, 7) ^ m6;
-> +}
-> +
-> +void HELPER(vsm3me_vv)(void *vd_vptr, void *vs1_vptr, void *vs2_vptr,
-> +                       CPURISCVState *env, uint32_t desc)
-> +{
-> +    uint32_t esz = memop_size(FIELD_EX64(env->vtype, VTYPE, VSEW));
-> +    uint32_t total_elems = vext_get_total_elems(env, desc, esz);
+> +    uint64_t *vd = vd_vptr;
+> +    uint64_t *vs1 = vs1_vptr;
+> +    uint64_t *vs2 = vs2_vptr;
 > +    uint32_t vta = vext_vta(desc);
-> +    uint32_t *vd = vd_vptr;
-> +    uint32_t *vs1 = vs1_vptr;
-> +    uint32_t *vs2 = vs2_vptr;
+> +    uint32_t total_elems = vext_get_total_elems(env, desc, 4);
 > +
-> +    for (int i = env->vstart / 8; i < env->vl / 8; i++) {
-> +        uint32_t w[24];
-> +        for (int j = 0; j < 8; j++) {
-> +            w[j] = bswap32(vs1[H4((i * 8) + j)]);
-> +            w[j + 8] = bswap32(vs2[H4((i * 8) + j)]);
+> +    for (uint32_t i = env->vstart / 4; i < env->vl / 4; i++) {
+> +        uint64_t Y[2] = {vd[i * 2 + 0], vd[i * 2 + 1]};
+> +        uint64_t H[2] = {brev8(vs2[i * 2 + 0]), brev8(vs2[i * 2 + 1])};
+> +        uint64_t X[2] = {vs1[i * 2 + 0], vs1[i * 2 + 1]};
+> +        uint64_t Z[2] = {0, 0};
+> +
+> +        uint64_t S[2] = {brev8(Y[0] ^ X[0]), brev8(Y[1] ^ X[1])};
+> +
+> +        for (uint j = 0; j < 128; j++) {
+> +            if ((S[j / 64] >> (j % 64)) & 1) {
+> +                Z[0] ^= H[0];
+> +                Z[1] ^= H[1];
+> +            }
+> +            bool reduce = ((H[1] >> 63) & 1);
+> +            H[1] = H[1] << 1 | H[0] >> 63;
+> +            H[0] = H[0] << 1;
+> +            if (reduce) {
+> +                H[0] ^= 0x87;
+> +            }
 > +        }
-> +        for (int j = 0; j < 8; j++) {
-> +            w[j + 16] =
-> +                zvksh_w(w[j], w[j + 7], w[j + 13], w[j + 3], w[j + 10]);
-> +        }
-> +        for (int j = 0; j < 8; j++) {
-> +            vd[(i * 8) + j] = bswap32(w[H4(j + 16)]);
-> +        }
+> +
+> +        vd[i * 2 + 0] = brev8(Z[0]);
+> +        vd[i * 2 + 1] = brev8(Z[1]);
 > +    }
-> +    vext_set_elems_1s(vd_vptr, vta, env->vl * esz, total_elems * esz);
+> +    /* set tail elements to 1s */
+> +    vext_set_elems_1s(vd, vta, env->vl * 4, total_elems * 4);
 > +    env->vstart = 0;
 > +}
 > +
-> +static inline uint32_t ff1(uint32_t x, uint32_t y, uint32_t z)
+> +void HELPER(vgmul_vv)(void *vd_vptr, void *vs2_vptr, CPURISCVState *env,
+> +                      uint32_t desc)
 > +{
-> +    return x ^ y ^ z;
-> +}
-> +
-> +static inline uint32_t ff2(uint32_t x, uint32_t y, uint32_t z)
-> +{
-> +    return (x & y) | (x & z) | (y & z);
-> +}
-> +
-> +static inline uint32_t ff_j(uint32_t x, uint32_t y, uint32_t z, uint32_t j)
-> +{
-> +    return (j <= 15) ? ff1(x, y, z) : ff2(x, y, z);
-> +}
-> +
-> +static inline uint32_t gg1(uint32_t x, uint32_t y, uint32_t z)
-> +{
-> +    return x ^ y ^ z;
-> +}
-> +
-> +static inline uint32_t gg2(uint32_t x, uint32_t y, uint32_t z)
-> +{
-> +    return (x & y) | (~x & z);
-> +}
-> +
-> +static inline uint32_t gg_j(uint32_t x, uint32_t y, uint32_t z, uint32_t j)
-> +{
-> +    return (j <= 15) ? gg1(x, y, z) : gg2(x, y, z);
-> +}
-> +
-> +static inline uint32_t t_j(uint32_t j)
-> +{
-> +    return (j <= 15) ? 0x79cc4519 : 0x7a879d8a;
-> +}
-> +
-> +static inline uint32_t p_0(uint32_t x)
-> +{
-> +    return x ^ rol32(x, 9) ^ rol32(x, 17);
-> +}
-> +
-> +static void sm3c(uint32_t *vd, uint32_t *vs1, uint32_t *vs2, uint32_t uimm)
-> +{
-> +    uint32_t x0, x1;
-> +    uint32_t j;
-> +    uint32_t ss1, ss2, tt1, tt2;
-> +    x0 = vs2[0] ^ vs2[4];
-> +    x1 = vs2[1] ^ vs2[5];
-> +    j = 2 * uimm;
-> +    ss1 = rol32(rol32(vs1[0], 12) + vs1[4] + rol32(t_j(j), j % 32), 7);
-> +    ss2 = ss1 ^ rol32(vs1[0], 12);
-> +    tt1 = ff_j(vs1[0], vs1[1], vs1[2], j) + vs1[3] + ss2 + x0;
-> +    tt2 = gg_j(vs1[4], vs1[5], vs1[6], j) + vs1[7] + ss1 + vs2[0];
-> +    vs1[3] = vs1[2];
-> +    vd[3] = rol32(vs1[1], 9);
-> +    vs1[1] = vs1[0];
-> +    vd[1] = tt1;
-> +    vs1[7] = vs1[6];
-> +    vd[7] = rol32(vs1[5], 19);
-> +    vs1[5] = vs1[4];
-> +    vd[5] = p_0(tt2);
-> +    j = 2 * uimm + 1;
-> +    ss1 = rol32(rol32(vd[1], 12) + vd[5] + rol32(t_j(j), j % 32), 7);
-> +    ss2 = ss1 ^ rol32(vd[1], 12);
-> +    tt1 = ff_j(vd[1], vs1[1], vd[3], j) + vs1[3] + ss2 + x1;
-> +    tt2 = gg_j(vd[5], vs1[5], vd[7], j) + vs1[7] + ss1 + vs2[1];
-> +    vd[2] = rol32(vs1[1], 9);
-> +    vd[0] = tt1;
-> +    vd[6] = rol32(vs1[5], 19);
-> +    vd[4] = p_0(tt2);
-> +}
-> +
-> +void HELPER(vsm3c_vi)(void *vd_vptr, void *vs2_vptr, uint32_t uimm,
-> +                      CPURISCVState *env, uint32_t desc)
-> +{
-> +    uint32_t esz = memop_size(FIELD_EX64(env->vtype, VTYPE, VSEW));
-> +    uint32_t total_elems = vext_get_total_elems(env, desc, esz);
+> +    uint64_t *vd = vd_vptr;
+> +    uint64_t *vs2 = vs2_vptr;
 > +    uint32_t vta = vext_vta(desc);
-> +    uint32_t *vd = vd_vptr;
-> +    uint32_t *vs2 = vs2_vptr;
-> +    uint32_t v1[8], v2[8], v3[8];
+> +    uint32_t total_elems = vext_get_total_elems(env, desc, 4);
 > +
-> +    for (int i = env->vstart / 8; i < env->vl / 8; i++) {
-> +        for (int k = 0; k < 8; k++) {
-> +            v2[k] = bswap32(vd[H4(i * 8 + k)]);
-> +            v3[k] = bswap32(vs2[H4(i * 8 + k)]);
+> +    for (uint32_t i = env->vstart / 4; i < env->vl / 4; i++) {
+> +        uint64_t Y[2] = {brev8(vd[i * 2 + 0]), brev8(vd[i * 2 + 1])};
+> +        uint64_t H[2] = {brev8(vs2[i * 2 + 0]), brev8(vs2[i * 2 + 1])};
+> +        uint64_t Z[2] = {0, 0};
+> +
+> +        for (uint j = 0; j < 128; j++) {
+> +            if ((Y[j / 64] >> (j % 64)) & 1) {
+> +                Z[0] ^= H[0];
+> +                Z[1] ^= H[1];
+> +            }
+> +            bool reduce = ((H[1] >> 63) & 1);
+> +            H[1] = H[1] << 1 | H[0] >> 63;
+> +            H[0] = H[0] << 1;
+> +            if (reduce) {
+> +                H[0] ^= 0x87;
+> +            }
 > +        }
-> +        sm3c(v1, v2, v3, uimm);
-> +        for (int k = 0; k < 8; k++) {
-> +            vd[i * 8 + k] = bswap32(v1[H4(k)]);
-> +        }
+> +
+> +        vd[i * 2 + 0] = brev8(Z[0]);
+> +        vd[i * 2 + 1] = brev8(Z[1]);
 > +    }
-> +    vext_set_elems_1s(vd_vptr, vta, env->vl * esz, total_elems * esz);
+> +    /* set tail elements to 1s */
+> +    vext_set_elems_1s(vd, vta, env->vl * 4, total_elems * 4);
 > +    env->vstart = 0;
 > +}
 
