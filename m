@@ -4,66 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DE83EB64D8
-	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Jun 2023 01:35:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1548EB64D7
+	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Jun 2023 01:51:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qC9Dw-0002Xz-Fl; Wed, 21 Jun 2023 21:35:00 -0400
+	id 1qC9TK-0005GA-4P; Wed, 21 Jun 2023 21:50:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qC9Du-0002XJ-Ux; Wed, 21 Jun 2023 21:34:58 -0400
+ id 1qC9TI-0005Fp-Dm; Wed, 21 Jun 2023 21:50:52 -0400
 Received: from mail-ua1-x92f.google.com ([2607:f8b0:4864:20::92f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qC9Dr-0005dY-7t; Wed, 21 Jun 2023 21:34:58 -0400
+ id 1qC9TF-0006oY-T9; Wed, 21 Jun 2023 21:50:51 -0400
 Received: by mail-ua1-x92f.google.com with SMTP id
- a1e0cc1a2514c-784f7f7deddso2130821241.3; 
- Wed, 21 Jun 2023 18:34:54 -0700 (PDT)
+ a1e0cc1a2514c-78cdb90aa66so2468869241.3; 
+ Wed, 21 Jun 2023 18:50:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1687397694; x=1689989694;
+ d=gmail.com; s=20221208; t=1687398648; x=1689990648;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3DPAyejqKUYY+NANkrdsXUcjGzxaSQbhyVr0OXxiy7M=;
- b=rdbSPFsDaMlea7bOsiURTdNiJkf2EbzXpuXCXPCywTt6LY3w5B7Br8YifPVK3Sc+UQ
- qulCNy2fsMYJ/Gsx3qmj2PSHQrFe+kY5OYqg2Es7PUdoyJ9MHDs39gdLlU5KCWs2PPWs
- iIIx5haKlMR5gKPaqjKFGKFduazoElw1c5/LPWCAi3tEbQDSOaAwHE1Ihs6AG9xWOXE2
- bLyxU/l8H2eDXtv/Ndnv4QzDY8VZwjKlg4DmaVYCCJthc0q27z/wox48uYpNoUjhgM3I
- 5ig15R6SNeKmwUb4pV6P7wFGHDbxJqqmyHL17XRozbkfeBfQhRVg6Q/BzziEmsVDZ33V
- cG4A==
+ bh=Stfnyt1qTHZZ6QBjYoPcN6QWJnANHXdlyPwGT6cP/PI=;
+ b=coVjCPT1hvFsiz8q7wSVQ15QSwF3jDqEZNVCppAthUCoQ2eMSPJiegQ6hhEyRCBCeX
+ GXarHnpFMfgqny7oUROI+WShvEPuR+93tFjTUeHGL1Rlt/yhWwCfKnfZXTRl2TLPYQrw
+ pVw+zk3I3eyWohUSnDTpy1Mb1o4NsSJq+Y7gdmmZxS4E7lhjN5iEbNeoJr3gRynMuB/e
+ dHkTOi6xFuE08MGGh44c/9lNi696gepsD2LoaeIB+UK7HEHJYDRO/A9oI0dlQAkKTOCC
+ 3Bx6vmgQgw7RvV95rO1ERrDmI3Iro1C/tZoC2SdeRNUlunuY7O+V3zc4m5ZrkMV9tapz
+ u7YA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687397694; x=1689989694;
+ d=1e100.net; s=20221208; t=1687398648; x=1689990648;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3DPAyejqKUYY+NANkrdsXUcjGzxaSQbhyVr0OXxiy7M=;
- b=U8iYxXINsIn58M9r77dSNKInY7ZKW7HN+fmq/qxNmj2MvRE6bO33F3N2f2sbcsvuPn
- +vZCY/xiOD3B2MfOsL/oT+qMpAlu10hvMVUmXaJYYuRIaxRns/+h3aqDOiB0hrJt3Gbq
- zczpJKis+gKtx8abZmlI3iQ2DTp5aFht5a+Sn8eCZYhcmnadrJn/VIboxBFNelR/IZ7x
- FSGXH4vUvoVXWYvH0+pfAZPCweWtz024Oq5OHUIRT65Yn2xwyehnKiDf6iprpZg4y85V
- DvDewzDB6M05xCM9u2QPdqXD+DDfN0D0Rb5H3W6jArNMC32Eu8f8u7pd6QrFEAJwE38M
- GQyw==
-X-Gm-Message-State: AC+VfDyLHfgQuGuawACXmweV+Fadr6rZtKKbozwcyEg+YtIsfyeafotn
- Z9WufDED/0EkzUvtdiFP78sZX7SchZEgHpvUR1E=
-X-Google-Smtp-Source: ACHHUZ7w/IU4TWh6wupJK5AtnVOhWmd3XkhC5SdKp5sMlaLzBeb8oeAnhr/gAwZriuIbjrQWCRQfmyoNKLENRsnNVFA=
-X-Received: by 2002:a67:f746:0:b0:43f:ac81:a43a with SMTP id
- w6-20020a67f746000000b0043fac81a43amr8109883vso.25.1687397693644; Wed, 21 Jun
- 2023 18:34:53 -0700 (PDT)
+ bh=Stfnyt1qTHZZ6QBjYoPcN6QWJnANHXdlyPwGT6cP/PI=;
+ b=PwjgGjk8dKdtyTZKqqbjdX47haQ0t+QQVPcUhM9qe1Pus9X4W0uIK7d2wn0SitVl2C
+ uFtlgx70jXa7D1iA+Q5QpNKxJbBorNy0M82b+jlMp8rFNeKluIxrzJ6vhFlV0Lgmh2sp
+ hd+EOHuvPEEWNZEOa2ioZgmHLaCPJBXrTDsHF6uqaQbD6DDImiRDZQjeOb5eRKE7FUvq
+ eJ5Z8DAPXZ7vTg0/InP72D5wEvXGwdE/hwIbFJzbvkz9ZpgLbbyXFrnCG6wls/1dirPD
+ BfY2fQMzkqsnqpV6RJ1Sote7YPxABzQ8wQdou8fJcN4RnV6S6HTuMjS0t5dxZ4Yr7neE
+ +E+g==
+X-Gm-Message-State: AC+VfDypxf2eOkJialhBioON8K9dQTKdMhZuc5USWZ1BL1j/NbOANMBD
+ Tr7Ihu5+Y6LcsfObDlgYonmbhBhJkEkMwWchrV1rg/B8Ib0=
+X-Google-Smtp-Source: ACHHUZ5fDyQNhMLMwHApsl8BExVFQPHSoBDa2H5EpjMpGwxJUpZ936xR0PjDIoxOVPMQpdc0bnR5Cn6wNXcS9uie2Ww=
+X-Received: by 2002:a67:fa4c:0:b0:43f:61cd:7c74 with SMTP id
+ j12-20020a67fa4c000000b0043f61cd7c74mr6184923vsq.21.1687398647953; Wed, 21
+ Jun 2023 18:50:47 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230613205857.495165-1-dbarboza@ventanamicro.com>
- <20230613205857.495165-11-dbarboza@ventanamicro.com>
-In-Reply-To: <20230613205857.495165-11-dbarboza@ventanamicro.com>
+References: <20230609055936.3925438-1-tommy.wu@sifive.com>
+ <CAKmqyKMoeAn_7h=S0S=QR6YcYmvTd5VfT749Umm1BprUTrAjeg@mail.gmail.com>
+ <CAFEAcA83+kaM9r4PqWks8tjCncnMS_Mh3NW=RyGFULV6wE5LMA@mail.gmail.com>
+In-Reply-To: <CAFEAcA83+kaM9r4PqWks8tjCncnMS_Mh3NW=RyGFULV6wE5LMA@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 22 Jun 2023 11:34:27 +1000
-Message-ID: <CAKmqyKNVb5mdvWJjNudmuEacbkArXnfWpaubJWJN_QeCF1JU8A@mail.gmail.com>
-Subject: Re: [PATCH v2 10/18] target/riscv/kvm.c: init 'misa_ext_mask' with
- scratch CPU
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, ajones@ventanamicro.com
+Date: Thu, 22 Jun 2023 11:50:21 +1000
+Message-ID: <CAKmqyKOi23Lqug9Fi2OHCNPsfoT-upN7N1UVtt-dKvZM1-kdXw@mail.gmail.com>
+Subject: Re: [PATCH] hw/intc: If mmsiaddrcfgh.L == 1, smsiaddrcfg and
+ smsiaddrcfgh are read-only.
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: Tommy Wu <tommy.wu@sifive.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Anup Patel <anup@brainfault.org>, Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Ivan Klokov <ivan.klokov@syntacore.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 Received-SPF: pass client-ip=2607:f8b0:4864:20::92f;
@@ -91,100 +94,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jun 14, 2023 at 7:00=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Mon, Jun 19, 2023 at 7:24=E2=80=AFPM Peter Maydell <peter.maydell@linaro=
+.org> wrote:
 >
-> At this moment we're retrieving env->misa_ext during
-> kvm_arch_init_cpu(), leaving env->misa_ext_mask behind.
+> On Mon, 12 Jun 2023 at 05:12, Alistair Francis <alistair23@gmail.com> wro=
+te:
+> >
+> > On Fri, Jun 9, 2023 at 4:01=E2=80=AFPM Tommy Wu <tommy.wu@sifive.com> w=
+rote:
+> > >
+> > > According to the `The RISC-V Advanced Interrupt Architecture`
+> > > document, if register `mmsiaddrcfgh` of the domain has bit L set
+> > > to one, then `smsiaddrcfg` and `smsiaddrcfgh` are locked as
+> > > read-only alongside `mmsiaddrcfg` and `mmsiaddrcfgh`.
+> > >
+> > > Signed-off-by: Tommy Wu <tommy.wu@sifive.com>
+> > > Reviewed-by: Frank Chang <frank.chang@sifive.com>
+> >
+> > Thanks!
+> >
+> > Applied to riscv-to-apply.next
 >
-> We want to set env->misa_ext_mask, and we want to set it as early as
-> possible. The reason is that we're going to use it in the validation
-> process of the KVM MISA properties we're going to add next. Setting it
-> during arch_init_cpu() is too late for user validation.
->
-> Move the code to a new helper that is going to be called during init()
-> time, via kvm_riscv_init_user_properties(), like we're already doing for
-> the machine ID properties. Set both misa_ext and misa_ext_mask to the
-> same value retrieved by the 'isa' config reg.
->
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+> If it hasn't gone in already, would you mind tweaking the
+> subject line so that it says which interrupt controller
+> the change is for ? (ie "hw/intc/riscv_aplic", not just "hw/intc".)
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Sorry Peter, it's already in. I'll try to keep a closer eye on the
+commit titles in future
 
 Alistair
 
-> ---
->  target/riscv/kvm.c | 34 +++++++++++++++++++++++-----------
->  1 file changed, 23 insertions(+), 11 deletions(-)
 >
-> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-> index 602727cdfd..4d0808cb9a 100644
-> --- a/target/riscv/kvm.c
-> +++ b/target/riscv/kvm.c
-> @@ -396,6 +396,28 @@ static void kvm_riscv_init_machine_ids(RISCVCPU *cpu=
-, KVMScratchCPU *kvmcpu)
->      }
->  }
->
-> +static void kvm_riscv_init_misa_ext_mask(RISCVCPU *cpu,
-> +                                         KVMScratchCPU *kvmcpu)
-> +{
-> +    CPURISCVState *env =3D &cpu->env;
-> +    struct kvm_one_reg reg;
-> +    int ret;
-> +
-> +    reg.id =3D kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG,
-> +                              KVM_REG_RISCV_CONFIG_REG(isa));
-> +    reg.addr =3D (uint64_t)&env->misa_ext_mask;
-> +    ret =3D ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
-> +
-> +    if (ret) {
-> +        error_report("Unable to fetch ISA register from KVM, "
-> +                     "error %d", ret);
-> +        kvm_riscv_destroy_scratch_vcpu(kvmcpu);
-> +        exit(EXIT_FAILURE);
-> +    }
-> +
-> +    env->misa_ext =3D env->misa_ext_mask;
-> +}
-> +
->  void kvm_riscv_init_user_properties(Object *cpu_obj)
->  {
->      RISCVCPU *cpu =3D RISCV_CPU(cpu_obj);
-> @@ -406,6 +428,7 @@ void kvm_riscv_init_user_properties(Object *cpu_obj)
->      }
->
->      kvm_riscv_init_machine_ids(cpu, &kvmcpu);
-> +    kvm_riscv_init_misa_ext_mask(cpu, &kvmcpu);
->
->      kvm_riscv_destroy_scratch_vcpu(&kvmcpu);
->  }
-> @@ -525,21 +548,10 @@ static int kvm_vcpu_set_machine_ids(RISCVCPU *cpu, =
-CPUState *cs)
->  int kvm_arch_init_vcpu(CPUState *cs)
->  {
->      int ret =3D 0;
-> -    target_ulong isa;
->      RISCVCPU *cpu =3D RISCV_CPU(cs);
-> -    CPURISCVState *env =3D &cpu->env;
-> -    uint64_t id;
->
->      qemu_add_vm_change_state_handler(kvm_riscv_vm_state_change, cs);
->
-> -    id =3D kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG,
-> -                          KVM_REG_RISCV_CONFIG_REG(isa));
-> -    ret =3D kvm_get_one_reg(cs, id, &isa);
-> -    if (ret) {
-> -        return ret;
-> -    }
-> -    env->misa_ext =3D isa;
-> -
->      if (!object_dynamic_cast(OBJECT(cpu), TYPE_RISCV_CPU_HOST)) {
->          ret =3D kvm_vcpu_set_machine_ids(cpu, cs);
->      }
-> --
-> 2.40.1
->
->
+> thanks
+> -- PMM
 
