@@ -4,69 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21BB1EB64DA
-	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Jun 2023 02:23:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B2A3EB64DA
+	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Jun 2023 02:25:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qCWS2-0002wI-8o; Thu, 22 Jun 2023 22:23:06 -0400
+	id 1qCWUI-0003i1-D3; Thu, 22 Jun 2023 22:25:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qCWS0-0002vz-P9; Thu, 22 Jun 2023 22:23:04 -0400
-Received: from mail-vk1-xa35.google.com ([2607:f8b0:4864:20::a35])
+ id 1qCWUF-0003h8-LZ; Thu, 22 Jun 2023 22:25:23 -0400
+Received: from mail-ua1-x933.google.com ([2607:f8b0:4864:20::933])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qCWRz-0000uL-7K; Thu, 22 Jun 2023 22:23:04 -0400
-Received: by mail-vk1-xa35.google.com with SMTP id
- 71dfb90a1353d-471b1ba1a7dso70416e0c.2; 
- Thu, 22 Jun 2023 19:23:02 -0700 (PDT)
+ id 1qCWUD-0002vs-MG; Thu, 22 Jun 2023 22:25:23 -0400
+Received: by mail-ua1-x933.google.com with SMTP id
+ a1e0cc1a2514c-78cbc8176c7so33679241.0; 
+ Thu, 22 Jun 2023 19:25:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1687486981; x=1690078981;
+ d=gmail.com; s=20221208; t=1687487120; x=1690079120;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5a7LP+fu/x2uylWneeW+EV7CVps5diESBLSeZ4RYZKk=;
- b=AXMmOCDlK9qiL/tXTz7RkcyI9Lgvgcr1p/KwCRyrenj6X5uaNqKIlje81HDG9qqDya
- QhZXJUyRYzzTFjC/If9BciHX91HpIiNFYg8pUaTAYwJb0R3ZTRTEb4G7K+UcdMOF8CLm
- GOC3m2zJnjO1iFu6fff+u4otwJgU5m3pK3mLZckLJrrhCreCOjDTfBGGRPYazfMenqVl
- Ml4aOcgsqDg5eo67GqyxEE+tampKsObZVGWhHmknyPNOF24hr5z/Axq5Od+pUo9qjP1e
- +/fQPzfWB83NsQqYtoXRTg8e1s07BP2wew2mtvPjGb75yg92EE8627yQKEvEoWgjM156
- mQNg==
+ bh=ZFJ6gvOhAG5QNiKDGGglRJ492mNGYez3M3ULUZ/TUu0=;
+ b=RO+C9AGd5jx5EgXqvHycn1QNnpjDfMPzh8u34cvp0pvVHTJmfWjSm8P24v6e0L98KB
+ sx8TJs09qI98aVMmhb43BASkA6VehmwnEP3saGEdB+XexR4hzaLfqxWueERNuL/QDxrY
+ kMzvsC8rS9xRvOheX/WpjbYeYZpDhF7Ed2DNcBGkbsuXD9Qzr/ojvWNfJFu/mYjaMfQD
+ vDa61NP4/lGh8GHfCJn/uhn6HLyT++H2ckItjyAnXrKFpHJCrrOJrmyxVkZt1OvUqcds
+ oManEs4uuEFmMQCdjXjiGkaE1oRx8x4py1RN8mU4wI82NNILM22e5oVjUlMJ9cFr+Y0G
+ uECw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687486981; x=1690078981;
+ d=1e100.net; s=20221208; t=1687487120; x=1690079120;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5a7LP+fu/x2uylWneeW+EV7CVps5diESBLSeZ4RYZKk=;
- b=UBEipygq33aNZhoDBN9QpA1MY/7KrcGuvr+yx73BqBGbECV9UH7003BpxY0Ia82xP0
- sxYnSv5qH+Y0M9Fw+SnzsXVaRUjYJNafbBAeTmDog5MArI3z4lvx+B8T4yf/+ONEW34k
- 6HKZRlN+2sb6aWEK5Is85vixOfNpvz4Mi5XaKxO9bGfI0aAIxWo9uKS2OWEpRirHtv+o
- im4oS9qSopbbvnS1GlAixQ6H+jwu8WPrDokz6msLvkL9VgcFsCoQQtxPl1yrEJ4c5zNn
- 0q4WwPWYWXFE6pdAVTCOxQCUEUA/6ePSLcw9jDL2ZS0Rq9LvSaTyyf1IoQH1AQhhmz9K
- ovNA==
-X-Gm-Message-State: AC+VfDz9PVImv/lx7hIelahP/HcRkoUvbtj5RwmfjFWk6y6EbLy4+LwR
- X9HYbzHQ0pQsvs+ednvYMhGC/qOTJKX9xbtNjEw=
-X-Google-Smtp-Source: ACHHUZ6EfQ0VvREPwW6vQN+1p6SgOM9nbqunuSz698HYrvu2l/7jQpG4SAY+KQRosZqhe23w8p+n25whTlPEQ+B1p+4=
-X-Received: by 2002:a67:cd05:0:b0:440:9eb0:6f17 with SMTP id
- u5-20020a67cd05000000b004409eb06f17mr9139057vsl.0.1687486981564; Thu, 22 Jun
- 2023 19:23:01 -0700 (PDT)
+ bh=ZFJ6gvOhAG5QNiKDGGglRJ492mNGYez3M3ULUZ/TUu0=;
+ b=dacABh02NNIYWjRo02UbJgnH1jXsjc4uZkjqz5EI0W360rtuiUAkc7BjPPWcQYi2zk
+ 5Lg5EZ9SdIuYoL/O2PLHavsfUXn91myAaDFPCoNDbOoWQoYsZmd1HaBv5c74SBExDFx8
+ 6GeDS8263ihEeAKs91de0hur/aqd6IVQ93N2zrc7rsd4uhX8vK3jGfCF3ll3a6xaH7dd
+ wUMgqZ+8dMXrnn+zeTA4Lp1k08KcER6oRJQ0FK1UtuAigpj7NVSeXmbPMhWKEms2H/DL
+ Xf5n3XS0ibl7NlGg0IdA2rmkpILN4PzvIqpqQP6Hx5A0CWNN2D75iA+Cn+6yghREFikU
+ 9oEw==
+X-Gm-Message-State: AC+VfDzwnRTx8PmGC317lq1fgR50O+DZ7s7BFSIC17aqqnJC/4OnJ+xg
+ FykkUB3+Pxx1PtkzEj3WxYwj122SmF+I4uThyIzEhu836LqB+g==
+X-Google-Smtp-Source: ACHHUZ4cw7l1MoJbMmsaE90SUEgk8/dGr3UFh5xEUngt78jlQbMv63jzF0fGJibiqPjA6s7lstDCbJPVQYqTCha4OkM=
+X-Received: by 2002:a1f:cf02:0:b0:471:849b:ae2d with SMTP id
+ f2-20020a1fcf02000000b00471849bae2dmr8294626vkg.1.1687487120147; Thu, 22 Jun
+ 2023 19:25:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230614032547.35895-1-liweiwei@iscas.ac.cn>
-In-Reply-To: <20230614032547.35895-1-liweiwei@iscas.ac.cn>
+References: <06a4543df2aa6101ca9a48f21a3198064b4f1f87.camel@rivosinc.com>
+In-Reply-To: <06a4543df2aa6101ca9a48f21a3198064b4f1f87.camel@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 23 Jun 2023 12:22:35 +1000
-Message-ID: <CAKmqyKMUFVGTAw4BDvjhsdfuh0-t+0hJ_xmgFZ6KD3n9YKG+xg@mail.gmail.com>
-Subject: Re: [PATCH 0/2] target/riscv: Fix the xlen for data address when
- MPRV=1
-To: Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+Date: Fri, 23 Jun 2023 12:24:54 +1000
+Message-ID: <CAKmqyKNpE7gCMXqWnxCp58v+aXb=hWswniOTthM7joL+E+1Q_A@mail.gmail.com>
+Subject: Re: [PATCH] linux-user/riscv: Add syscall riscv_hwprobe
+To: Robbin Ehn <rehn@rivosinc.com>
+Cc: qemu-devel@nongnu.org, palmer@rivosinc.com, laurent@vivier.eu, 
+ qemu-riscv@nongnu.org, richard.henderson@linaro.org, ajones@ventanamicro.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a35;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa35.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::933;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x933.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -90,35 +88,231 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jun 14, 2023 at 1:27=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wr=
-ote:
+On Mon, Jun 19, 2023 at 6:25=E2=80=AFPM Robbin Ehn <rehn@rivosinc.com> wrot=
+e:
 >
-> Currently, we use the current env->xl as the xlen for address. However, t=
-he xlen for data address should be changed to the xlen related to MPP when =
-MPRV=3D1.
+> This patch adds the new syscall for the
+> "RISC-V Hardware Probing Interface"
+> (https://docs.kernel.org/riscv/hwprobe.html).
 >
-> The port is available here:
-> https://github.com/plctlab/plct-qemu/tree/plct-addr-xl-upstream
->
-> Weiwei Li (2):
->   target/riscv: Add additional xlen for address when MPRV=3D1
->   target/riscv: update cur_pmbase/pmmask based on mode affected by MPRV
+> Reviewed-by: Palmer Dabbelt <palmer@rivosinc.com>
+> Signed-off-by: Robbin Ehn <rehn@rivosinc.com>
 
-Thanks!
+Thanks for the patch!
 
-Applied to riscv-to-apply.next
+Do you mind re-sending this when 6.4 comes out? I would like it in a
+kernel release before we pick it up
 
 Alistair
 
+> ---
+> v1->v2: Moved to syscall.c
+> v2->v3: Separate function, get/put user
+> v3->patch
+> ---
+>  linux-user/riscv/syscall32_nr.h |   1 +
+>  linux-user/riscv/syscall64_nr.h |   1 +
+>  linux-user/syscall.c            | 146 ++++++++++++++++++++++++++++++++
+>  3 files changed, 148 insertions(+)
 >
->  target/riscv/cpu.h        | 49 +++++++++++++++++++++++++++++++++------
->  target/riscv/cpu_helper.c |  8 +++++--
->  target/riscv/csr.c        | 27 +++++++++++++++------
->  target/riscv/translate.c  | 13 ++++++++++-
->  4 files changed, 80 insertions(+), 17 deletions(-)
+> diff --git a/linux-user/riscv/syscall32_nr.h b/linux-user/riscv/syscall32=
+_nr.h
+> index 1327d7dffa..412e58e5b2 100644
+> --- a/linux-user/riscv/syscall32_nr.h
+> +++ b/linux-user/riscv/syscall32_nr.h
+> @@ -228,6 +228,7 @@
+>  #define TARGET_NR_accept4 242
+>  #define TARGET_NR_arch_specific_syscall 244
+>  #define TARGET_NR_riscv_flush_icache (TARGET_NR_arch_specific_syscall + =
+15)
+> +#define TARGET_NR_riscv_hwprobe (TARGET_NR_arch_specific_syscall + 14)
+>  #define TARGET_NR_prlimit64 261
+>  #define TARGET_NR_fanotify_init 262
+>  #define TARGET_NR_fanotify_mark 263
+> diff --git a/linux-user/riscv/syscall64_nr.h b/linux-user/riscv/syscall64=
+_nr.h
+> index 6659751933..29e1eb2075 100644
+> --- a/linux-user/riscv/syscall64_nr.h
+> +++ b/linux-user/riscv/syscall64_nr.h
+> @@ -251,6 +251,7 @@
+>  #define TARGET_NR_recvmmsg 243
+>  #define TARGET_NR_arch_specific_syscall 244
+>  #define TARGET_NR_riscv_flush_icache (TARGET_NR_arch_specific_syscall + =
+15)
+> +#define TARGET_NR_riscv_hwprobe (TARGET_NR_arch_specific_syscall + 14)
+>  #define TARGET_NR_wait4 260
+>  #define TARGET_NR_prlimit64 261
+>  #define TARGET_NR_fanotify_init 262
+> diff --git a/linux-user/syscall.c b/linux-user/syscall.c
+> index f2cb101d83..55becf3666 100644
+> --- a/linux-user/syscall.c
+> +++ b/linux-user/syscall.c
+> @@ -8874,6 +8874,147 @@ static int do_getdents64(abi_long dirfd, abi_long=
+ arg2, abi_long count)
+>  }
+>  #endif /* TARGET_NR_getdents64 */
 >
+> +#if defined(TARGET_NR_riscv_hwprobe)
+> +
+> +#define RISCV_HWPROBE_KEY_MVENDORID     0
+> +#define RISCV_HWPROBE_KEY_MARCHID       1
+> +#define RISCV_HWPROBE_KEY_MIMPID        2
+> +
+> +#define RISCV_HWPROBE_KEY_BASE_BEHAVIOR 3
+> +#define     RISCV_HWPROBE_BASE_BEHAVIOR_IMA (1 << 0)
+> +
+> +#define RISCV_HWPROBE_KEY_IMA_EXT_0     4
+> +#define     RISCV_HWPROBE_IMA_FD       (1 << 0)
+> +#define     RISCV_HWPROBE_IMA_C        (1 << 1)
+> +
+> +#define RISCV_HWPROBE_KEY_CPUPERF_0     5
+> +#define     RISCV_HWPROBE_MISALIGNED_UNKNOWN     (0 << 0)
+> +#define     RISCV_HWPROBE_MISALIGNED_EMULATED    (1 << 0)
+> +#define     RISCV_HWPROBE_MISALIGNED_SLOW        (2 << 0)
+> +#define     RISCV_HWPROBE_MISALIGNED_FAST        (3 << 0)
+> +#define     RISCV_HWPROBE_MISALIGNED_UNSUPPORTED (4 << 0)
+> +#define     RISCV_HWPROBE_MISALIGNED_MASK        (7 << 0)
+> +
+> +struct riscv_hwprobe {
+> +    abi_llong  key;
+> +    abi_ullong value;
+> +};
+> +
+> +static void risc_hwprobe_fill_pairs(CPURISCVState *env,
+> +                                    struct riscv_hwprobe *pair,
+> +                                    size_t pair_count)
+> +{
+> +    const RISCVCPUConfig *cfg =3D riscv_cpu_cfg(env);
+> +
+> +    for (; pair_count > 0; pair_count--, pair++) {
+> +        abi_llong key;
+> +        abi_ullong value;
+> +        __put_user(0, &pair->value);
+> +        __get_user(key, &pair->key);
+> +        switch (key) {
+> +        case RISCV_HWPROBE_KEY_MVENDORID:
+> +            __put_user(cfg->mvendorid, &pair->value);
+> +            break;
+> +        case RISCV_HWPROBE_KEY_MARCHID:
+> +            __put_user(cfg->marchid, &pair->value);
+> +            break;
+> +        case RISCV_HWPROBE_KEY_MIMPID:
+> +            __put_user(cfg->mimpid, &pair->value);
+> +            break;
+> +        case RISCV_HWPROBE_KEY_BASE_BEHAVIOR:
+> +            value =3D riscv_has_ext(env, RVI) &&
+> +                    riscv_has_ext(env, RVM) &&
+> +                    riscv_has_ext(env, RVA) ?
+> +                    RISCV_HWPROBE_BASE_BEHAVIOR_IMA : 0;
+> +            __put_user(value, &pair->value);
+> +            break;
+> +        case RISCV_HWPROBE_KEY_IMA_EXT_0:
+> +            value =3D riscv_has_ext(env, RVF) &&
+> +                    riscv_has_ext(env, RVD) ?
+> +                    RISCV_HWPROBE_IMA_FD : 0;
+> +            value |=3D riscv_has_ext(env, RVC) ?
+> +                     RISCV_HWPROBE_IMA_C : pair->value;
+> +            __put_user(value, &pair->value);
+> +            break;
+> +        case RISCV_HWPROBE_KEY_CPUPERF_0:
+> +            __put_user(RISCV_HWPROBE_MISALIGNED_FAST, &pair->value);
+> +            break;
+> +        default:
+> +            __put_user(-1, &pair->key);
+> +            break;
+> +        }
+> +    }
+> +}
+> +
+> +static int cpu_set_valid(abi_long arg3, abi_long arg4)
+> +{
+> +    int ret, i, tmp;
+> +    size_t host_mask_size, target_mask_size;
+> +    unsigned long *host_mask;
+> +
+> +    /*
+> +     * cpu_set_t represent CPU masks as bit masks of type unsigned long =
+*.
+> +     * arg3 contains the cpu count.
+> +     */
+> +    tmp =3D (8 * sizeof(abi_ulong));
+> +    target_mask_size =3D ((arg3 + tmp - 1) / tmp) * sizeof(abi_ulong);
+> +    host_mask_size =3D (target_mask_size + (sizeof(*host_mask) - 1)) &
+> +                     ~(sizeof(*host_mask) - 1);
+> +
+> +    host_mask =3D alloca(host_mask_size);
+> +
+> +    ret =3D target_to_host_cpu_mask(host_mask, host_mask_size,
+> +                                  arg4, target_mask_size);
+> +    if (ret !=3D 0) {
+> +        return ret;
+> +    }
+> +
+> +    for (i =3D 0 ; i < host_mask_size / sizeof(*host_mask); i++) {
+> +        if (host_mask[i] !=3D 0) {
+> +            return 0;
+> +        }
+> +    }
+> +    return -TARGET_EINVAL;
+> +}
+> +
+> +static abi_long do_riscv_hwprobe(CPUArchState *cpu_env, abi_long arg1,
+> +                                 abi_long arg2, abi_long arg3,
+> +                                 abi_long arg4, abi_long arg5)
+> +{
+> +    int ret;
+> +    struct riscv_hwprobe *host_pairs;
+> +
+> +    /* flags must be 0 */
+> +    if (arg5 !=3D 0) {
+> +        return -TARGET_EINVAL;
+> +    }
+> +
+> +    /* check cpu_set */
+> +    if (arg3 !=3D 0) {
+> +        ret =3D cpu_set_valid(arg3, arg4);
+> +        if (ret !=3D 0) {
+> +            return ret;
+> +        }
+> +    } else if (arg4 !=3D 0) {
+> +        return -TARGET_EINVAL;
+> +    }
+> +
+> +    /* no pairs */
+> +    if (arg2 =3D=3D 0) {
+> +        return 0;
+> +    }
+> +
+> +    host_pairs =3D lock_user(VERIFY_WRITE, arg1,
+> +                           sizeof(*host_pairs) * (size_t)arg2, 0);
+> +    if (host_pairs =3D=3D NULL) {
+> +        return -TARGET_EFAULT;
+> +    }
+> +    risc_hwprobe_fill_pairs(cpu_env, host_pairs, arg2);
+> +    unlock_user(host_pairs, arg1, sizeof(*host_pairs) * (size_t)arg2);
+> +    return 0;
+> +}
+> +#endif /* TARGET_NR_riscv_hwprobe */
+> +
+>  #if defined(TARGET_NR_pivot_root) && defined(__NR_pivot_root)
+>  _syscall2(int, pivot_root, const char *, new_root, const char *, put_old=
+)
+>  #endif
+> @@ -13571,6 +13712,11 @@ static abi_long do_syscall1(CPUArchState *cpu_en=
+v, int num, abi_long arg1,
+>          return ret;
+>  #endif
+>
+> +#if defined(TARGET_NR_riscv_hwprobe)
+> +    case TARGET_NR_riscv_hwprobe:
+> +        return do_riscv_hwprobe(cpu_env, arg1, arg2, arg3, arg4, arg5);
+> +#endif
+> +
+>      default:
+>          qemu_log_mask(LOG_UNIMP, "Unsupported syscall: %d\n", num);
+>          return -TARGET_ENOSYS;
 > --
-> 2.25.1
+> 2.39.2
 >
 >
 
