@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7961BC001B0
-	for <qemu-riscv@archiver.kernel.org>; Sat, 24 Jun 2023 07:42:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63FCCEB64DA
+	for <qemu-riscv@archiver.kernel.org>; Sat, 24 Jun 2023 19:30:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qCxuH-0000uz-UV; Sat, 24 Jun 2023 03:42:05 -0400
+	id 1qD8xT-000062-8L; Sat, 24 Jun 2023 15:30:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qCxuF-0000uM-9w
- for qemu-riscv@nongnu.org; Sat, 24 Jun 2023 03:42:03 -0400
-Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qD8xR-00005e-NI
+ for qemu-riscv@nongnu.org; Sat, 24 Jun 2023 15:30:05 -0400
+Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qCxu9-0006Il-38
- for qemu-riscv@nongnu.org; Sat, 24 Jun 2023 03:42:02 -0400
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-9786fc23505so131678966b.2
- for <qemu-riscv@nongnu.org>; Sat, 24 Jun 2023 00:41:56 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qD8xP-0007uB-RT
+ for qemu-riscv@nongnu.org; Sat, 24 Jun 2023 15:30:05 -0400
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-313e09a5b19so595418f8f.0
+ for <qemu-riscv@nongnu.org>; Sat, 24 Jun 2023 12:30:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1687592515; x=1690184515;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=qhmVfOjUMWSqtK39WahiVC3cYUdp7FqW+gT317BI4zw=;
- b=DNLJDS76Is6fnQwJlIX+nBS3zIFLjoRRa3wCXzskrUi3InDQOsCa5q6iae8nnCRo5e
- E2NfGczMGQVq3A3OSOmOswzs1rd+7Pp/aPUrSuFYLn3A5SSV5cDIQdPJ/4kacs71b79Q
- SJzebHtvxRMpYniG1AJAwJ7oRq/99iGn9vLm6NjvnPOTNYX5M6P8k15rlRgmMiHegt0F
- OPfAeTw73FWfb95efwOzt2gDu+0NlSFkFIB+YfKyxKjOTNH0iLoY9bvj3wlUsbGWKVMu
- wj80eUfWywq4sZcSAAFYZJSZvT00RmiVxg7M3oyloaKDDf8ogbYxQn1cso7KEpXIdiEI
- /SzQ==
+ d=linaro.org; s=google; t=1687635001; x=1690227001;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=wU88BtO0sTwE3bYofWLDGzDhy2I29H1Da5E42WxgmXI=;
+ b=FRff/0NCKZq+Z+2kV+0yF60lILVHK3p6xNMENqSiuC+XSj+o+OaJ//xMeJjOgupfUf
+ XdGQ8di7r+YY861H9buAUAbkuDwEraz58wee4p/XpF47b0clCiz2JWB+/xNfB2TraexA
+ UaPQAcpbdE5HqRzU9RB89W8yq26MX6hHcKYoDq0jt7/HsuXXACMd5O8IyVCTR69XJeIO
+ ayMiiScxzzcHLfgR3mrkA0niZ7OAhzjgb6/qKSWZEmw2ltgzNNJ/i3Lr+ySfckF6I27f
+ uSNpd5PwQYTC7lPR/OOlF1YBr55MSroJfAezjvpxarcxLGIgQ9hFdOW+o4+ZUzlm51EV
+ abNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687592515; x=1690184515;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qhmVfOjUMWSqtK39WahiVC3cYUdp7FqW+gT317BI4zw=;
- b=COrRKZMZXA42KAMnmzMqMIc/u+tYCeY2gnvFuuxwPc62yVFy+Hgg6+wU/1s0Qq8lKl
- p+G70MzWt0t3RPED3yRLDGPk6LikPIl8KzXdwh9VD3NsM3AoPi1gNDGhprYktSOf1Khk
- jmxUv8yrQJ00QDiY9Q38kttJ164uGM4rmJeO76ABgJ7o/FhH83SPpIWFAKOhys9W/BJt
- C5Dl8oq/up8hhHHpdDuxDyvAIYmabG6WJ9GGCDHfWgnA8bzHhV8cWToG3DocdPM/6fDO
- gcPk2aRxEZB/EIQsGftNzk5/EwNzXtw7vnXIAGpmi6g0WmcsdzWEcGuGpvDF9bt1eblV
- /HKw==
-X-Gm-Message-State: AC+VfDw99t1SkCTQRBmkNGxddq43tfJnw4AH/D4uWuhE9POWNoAvlQlu
- OTHM3KI5zyqd6imSn01rv9eaPfjj3CpNi1kwU+4=
-X-Google-Smtp-Source: ACHHUZ5JxvqeBOuq6r7SC5nlsK9jzcV5U5tos97i34Y7S4oAdX6nxFtsJRwsYnoF5HqjPJ6J8MNeHA==
-X-Received: by 2002:a17:907:c13:b0:988:aa45:806 with SMTP id
- ga19-20020a1709070c1300b00988aa450806mr15828464ejc.15.1687592515048; 
- Sat, 24 Jun 2023 00:41:55 -0700 (PDT)
-Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
+ d=1e100.net; s=20221208; t=1687635001; x=1690227001;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wU88BtO0sTwE3bYofWLDGzDhy2I29H1Da5E42WxgmXI=;
+ b=fbhGcCoGzKcBNLtnnws5jNVy56kQQ27Ovt248d4tajGc2eEhBQECwTTfqIwoa7LTgP
+ MR6Iw1KGdruC5QFTqZNWDmKt+ZHll3v3qoCNeCXl+d+DF0pw+iz3RuvBAs4zcLA5Okyx
+ nAuztYnH06fiQUgq/qs91BkXw6zXeYqg/okz/uZaVLRdYmeiMMrUDkTjontt67z00z2K
+ bxRK6EXOetME26QFzOoUVw8vLcmwepwiJtTT9odB2rT0x06YBxmBa/QYxz8+Wrf3SHy0
+ sqqHJPGwbG+jwSnHfbvJ1b5BSOvvZyfwZSHQ6E7XPrv2/CAn5nEhzjRna4G8O7m1qD3/
+ ExOA==
+X-Gm-Message-State: AC+VfDxOzAozbwow6pa/son9vrE0CuOGKVZelWdohIJpnxAzZcR+8kLe
+ lUGP1GrLBoiwQtMFBewyrA6ieg==
+X-Google-Smtp-Source: ACHHUZ6nTOStIMehl3095EdhW2XoDDKDqOqIsM4OMFev4nU90sDjQreqrq0mopjSUIizknus+sr6wQ==
+X-Received: by 2002:a5d:4e86:0:b0:30a:e589:68a5 with SMTP id
+ e6-20020a5d4e86000000b0030ae58968a5mr21340362wru.29.1687635000750; 
+ Sat, 24 Jun 2023 12:30:00 -0700 (PDT)
+Received: from m1x-phil.lan ([176.187.217.150])
  by smtp.gmail.com with ESMTPSA id
- qh15-20020a170906ecaf00b009885462a644sm569716ejb.215.2023.06.24.00.41.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 24 Jun 2023 00:41:54 -0700 (PDT)
-Date: Sat, 24 Jun 2023 09:41:53 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
-Subject: Re: [PATCH v3 16/19] target/riscv/cpu.c: create KVM mock properties
-Message-ID: <20230624-fad369c515a7f4edd9d21c2a@orel>
-References: <20230622135700.105383-1-dbarboza@ventanamicro.com>
- <20230622135700.105383-17-dbarboza@ventanamicro.com>
- <20230623-421ca497f9f83486881b9d9c@orel>
- <c1056ba9-4418-d6ce-536b-93155fff84a2@ventanamicro.com>
+ v10-20020a5d590a000000b0030631a599a0sm2795897wrd.24.2023.06.24.12.29.58
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Sat, 24 Jun 2023 12:30:00 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Weiwei Li <liweiwei@iscas.ac.cn>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-riscv@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH v2] target/riscv: Restrict KVM-specific fields from ArchCPU
+Date: Sat, 24 Jun 2023 21:29:57 +0200
+Message-Id: <20230624192957.14067-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.38.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <c1056ba9-4418-d6ce-536b-93155fff84a2@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::629;
- envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x629.google.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::429;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,44 +95,82 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Jun 23, 2023 at 11:28:03AM -0300, Daniel Henrique Barboza wrote:
-...
-> > I think we should actually fail with an error when the user tries to
-> > enable an extension KVM doesn't support. Otherwise a user may be
-> > confused as to why their Zawrs=on didn't provide them a machine with
-> > Zawrs. And, when KVM learns how to provide that support to guests
-> > (Zawrs is actually on my TODO...), then migrating the same VM to
-> > later KVM/QEMU will actually enable the feature, possibly confusing
-> > the guest.
-> > 
-> > So, we should probably just not add any extension properties to KVM
-> > guests which can't be enabled. Then, as we add support to KVM, we'll
-> > add the properties too.
-> 
-> By 'extension properties' do you mean just the flags that enable/disable them,
-> like '-cpu, rawrs=<bool>', or also the other properties related to extensions
-> that KVM might not support, like 'vlen' and 'elen' from RVV? I'd say that it's
-> ok to leave things such as 'vlen' because the user won't be able to enable RVV
-> in KVM anyways.
+These fields shouldn't be accessed when KVM is not available.
 
-Properties like 'vlen', which have a dependency on an extension, should
-probably have their own error checking at cpu finalize features time.
-I.e. if 'vlen' is present, but not V, then QEMU should complain. I see
-we don't currently do that, though.
+Restrict the KVM timer migration state. Rename the KVM timer
+post_load() handler accordingly, because cpu_post_load() is
+too generic.
 
-> 
-> And what error do we want to throw? With this patch it's easy to just add an
-> Extension zawrs is not available using KVM" error message. Otherwise we can
-> not add the property at all and then QEMU will fail with a "property cpu.X not
-> found" type of error. Both will error out, question is whether we want to be
-> more informative about it.
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+Since v1 https://lore.kernel.org/qemu-devel/20230405160454.97436-10-philmd@linaro.org/:
+- Restrict whole vmstate_kvmtimer (thus drop Daniel's R-b)
+---
+ target/riscv/cpu.h     | 2 ++
+ target/riscv/machine.c | 8 ++++++--
+ 2 files changed, 8 insertions(+), 2 deletions(-)
 
-It's probably best to do the "not available with KVM" error by changing
-this patch from adding a no-op setter to an error-out setter. That way,
-our story that a riscv machine is the same for both KVM and TCG still
-remains, i.e. all properties are still present, but we add the honesty
-to the story that not everything works with KVM.
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index e3e08d315f..b1b56aa29e 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -363,12 +363,14 @@ struct CPUArchState {
+     hwaddr kernel_addr;
+     hwaddr fdt_addr;
+ 
++#ifdef CONFIG_KVM
+     /* kvm timer */
+     bool kvm_timer_dirty;
+     uint64_t kvm_timer_time;
+     uint64_t kvm_timer_compare;
+     uint64_t kvm_timer_state;
+     uint64_t kvm_timer_frequency;
++#endif /* CONFIG_KVM */
+ };
+ 
+ /*
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+index 3ce2970785..d27f8a2a3a 100644
+--- a/target/riscv/machine.c
++++ b/target/riscv/machine.c
+@@ -199,7 +199,8 @@ static bool kvmtimer_needed(void *opaque)
+     return kvm_enabled();
+ }
+ 
+-static int cpu_post_load(void *opaque, int version_id)
++#ifdef CONFIG_KVM
++static int cpu_kvmtimer_post_load(void *opaque, int version_id)
+ {
+     RISCVCPU *cpu = opaque;
+     CPURISCVState *env = &cpu->env;
+@@ -213,7 +214,7 @@ static const VMStateDescription vmstate_kvmtimer = {
+     .version_id = 1,
+     .minimum_version_id = 1,
+     .needed = kvmtimer_needed,
+-    .post_load = cpu_post_load,
++    .post_load = cpu_kvmtimer_post_load,
+     .fields = (VMStateField[]) {
+         VMSTATE_UINT64(env.kvm_timer_time, RISCVCPU),
+         VMSTATE_UINT64(env.kvm_timer_compare, RISCVCPU),
+@@ -221,6 +222,7 @@ static const VMStateDescription vmstate_kvmtimer = {
+         VMSTATE_END_OF_LIST()
+     }
+ };
++#endif
+ 
+ static bool debug_needed(void *opaque)
+ {
+@@ -409,7 +411,9 @@ const VMStateDescription vmstate_riscv_cpu = {
+         &vmstate_vector,
+         &vmstate_pointermasking,
+         &vmstate_rv128,
++#ifdef CONFIG_KVM
+         &vmstate_kvmtimer,
++#endif
+         &vmstate_envcfg,
+         &vmstate_debug,
+         &vmstate_smstateen,
+-- 
+2.38.1
 
-Thanks,
-drew
 
