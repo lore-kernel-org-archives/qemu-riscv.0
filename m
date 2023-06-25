@@ -4,81 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63FCCEB64DA
-	for <qemu-riscv@archiver.kernel.org>; Sat, 24 Jun 2023 19:30:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 964C1EB64DC
+	for <qemu-riscv@archiver.kernel.org>; Sun, 25 Jun 2023 20:49:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qD8xT-000062-8L; Sat, 24 Jun 2023 15:30:07 -0400
+	id 1qDWg7-0007Le-Lv; Sun, 25 Jun 2023 16:49:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qD8xR-00005e-NI
- for qemu-riscv@nongnu.org; Sat, 24 Jun 2023 15:30:05 -0400
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qD8xP-0007uB-RT
- for qemu-riscv@nongnu.org; Sat, 24 Jun 2023 15:30:05 -0400
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-313e09a5b19so595418f8f.0
- for <qemu-riscv@nongnu.org>; Sat, 24 Jun 2023 12:30:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1687635001; x=1690227001;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=wU88BtO0sTwE3bYofWLDGzDhy2I29H1Da5E42WxgmXI=;
- b=FRff/0NCKZq+Z+2kV+0yF60lILVHK3p6xNMENqSiuC+XSj+o+OaJ//xMeJjOgupfUf
- XdGQ8di7r+YY861H9buAUAbkuDwEraz58wee4p/XpF47b0clCiz2JWB+/xNfB2TraexA
- UaPQAcpbdE5HqRzU9RB89W8yq26MX6hHcKYoDq0jt7/HsuXXACMd5O8IyVCTR69XJeIO
- ayMiiScxzzcHLfgR3mrkA0niZ7OAhzjgb6/qKSWZEmw2ltgzNNJ/i3Lr+ySfckF6I27f
- uSNpd5PwQYTC7lPR/OOlF1YBr55MSroJfAezjvpxarcxLGIgQ9hFdOW+o4+ZUzlm51EV
- abNw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687635001; x=1690227001;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=wU88BtO0sTwE3bYofWLDGzDhy2I29H1Da5E42WxgmXI=;
- b=fbhGcCoGzKcBNLtnnws5jNVy56kQQ27Ovt248d4tajGc2eEhBQECwTTfqIwoa7LTgP
- MR6Iw1KGdruC5QFTqZNWDmKt+ZHll3v3qoCNeCXl+d+DF0pw+iz3RuvBAs4zcLA5Okyx
- nAuztYnH06fiQUgq/qs91BkXw6zXeYqg/okz/uZaVLRdYmeiMMrUDkTjontt67z00z2K
- bxRK6EXOetME26QFzOoUVw8vLcmwepwiJtTT9odB2rT0x06YBxmBa/QYxz8+Wrf3SHy0
- sqqHJPGwbG+jwSnHfbvJ1b5BSOvvZyfwZSHQ6E7XPrv2/CAn5nEhzjRna4G8O7m1qD3/
- ExOA==
-X-Gm-Message-State: AC+VfDxOzAozbwow6pa/son9vrE0CuOGKVZelWdohIJpnxAzZcR+8kLe
- lUGP1GrLBoiwQtMFBewyrA6ieg==
-X-Google-Smtp-Source: ACHHUZ6nTOStIMehl3095EdhW2XoDDKDqOqIsM4OMFev4nU90sDjQreqrq0mopjSUIizknus+sr6wQ==
-X-Received: by 2002:a5d:4e86:0:b0:30a:e589:68a5 with SMTP id
- e6-20020a5d4e86000000b0030ae58968a5mr21340362wru.29.1687635000750; 
- Sat, 24 Jun 2023 12:30:00 -0700 (PDT)
-Received: from m1x-phil.lan ([176.187.217.150])
- by smtp.gmail.com with ESMTPSA id
- v10-20020a5d590a000000b0030631a599a0sm2795897wrd.24.2023.06.24.12.29.58
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Sat, 24 Jun 2023 12:30:00 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: Weiwei Li <liweiwei@iscas.ac.cn>,
- Richard Henderson <richard.henderson@linaro.org>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-riscv@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v2] target/riscv: Restrict KVM-specific fields from ArchCPU
-Date: Sat, 24 Jun 2023 21:29:57 +0200
-Message-Id: <20230624192957.14067-1-philmd@linaro.org>
-X-Mailer: git-send-email 2.38.1
+ (Exim 4.90_1) (envelope-from <tommy_murphy@hotmail.com>)
+ id 1qDWg5-0007L9-JB
+ for qemu-riscv@nongnu.org; Sun, 25 Jun 2023 16:49:45 -0400
+Received: from mail-cwlgbr01olkn0170.outbound.protection.outlook.com
+ ([104.47.20.170] helo=GBR01-CWL-obe.outbound.protection.outlook.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <tommy_murphy@hotmail.com>)
+ id 1qDWfz-00025o-SW
+ for qemu-riscv@nongnu.org; Sun, 25 Jun 2023 16:49:45 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=LCuZvye2ItRCFgh/7xtUD8kqJ0lPCAPJNqDHpfBcqRoSULMWHEJI7v27pP/hZiaVVIevPJ0H5x/PX+/lbn43HBNwV3LmiRJUcNUb8d/K4Uh2EZjnveD5BkQNAR40J3W2GvLoaiVXTShCLz5Y6J3e5qxPoKyXd7VGa0dFZOY4JFoHFi88EaaUtE3G79QdV3NrKha0UBtUVIFn67nMeI5sSgiD7ku3wQDO7DZxDbIypPxmD178WrtW5uYoi8G0NDAKeh+gFP53HxTEmgqDhwCzMSjyz9rB4UjLnNDjkbaTNMBZ88rbUSkqthx/acCXGvmpMg3A9IzLmazv5P1x6hVFbg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=cOVrtQZMQtqOv9+6lqGDoEkH/5cepntLN3YfICmamtY=;
+ b=Iq2Z/CbPHgtEGc2F+GJrzjHE69+4iU9FX91L3csompevxA4RTj/TOGZnUOHthFOxzSECzBKE0n3Qh3BJPhcBGKIIWNor68mZBebg6ZAwASoUX8mgw0NBtfG5bmB8kC60aU5lHKCQXGfr4erjF4Vb2yCxBAdKYpLoWYnQtcayJT8skQiF1CJItjL1iBbU5Vn6rlK3loihYFY0cA86x7FbjxLaluAJmTayQG1NiqlnmRFVhYL42p9pduKuYDezPUwTczdx5y2dDVhJJEc5ssa03qRSm6uVjIETTb+pU9TpYxsfLsHU5LUWXdWz6EGPG+nfenu5ZHEzgjPyWtbMXPEJyg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cOVrtQZMQtqOv9+6lqGDoEkH/5cepntLN3YfICmamtY=;
+ b=g0mQguAfS+zUP/KYXgU9JQz5w4YiNabIkeAmCctIGv3XUvi8BCD4MiKOd1J1jrm8UQELAuCOtOovCpGgRfoeCzV3LAhTfVlWgAOMHl7xJE5nl7L6hUBahCiJbMPZByto8cy9Mt53p8mFw46++yZ2ZMxdAvpFUGD/deIux2UFarECraUDu8MIl5kjPYPjKVaF0OwXusTp6rzj4wRNfXioJ8SfUsidnqAApuLndeX7/j9DQicJJepQADYGBEdppCSA/81/5UYeTVBcEQ5i21k1SHXYQCsYaQ/OSBIh8yAW9dCwVA9zjA+i+EDywa9FDdrFLL/FKI+PuJhQ1TJKomDQXQ==
+Received: from LO0P265MB6866.GBRP265.PROD.OUTLOOK.COM (2603:10a6:600:2d7::13)
+ by CWLP265MB6232.GBRP265.PROD.OUTLOOK.COM (2603:10a6:400:185::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6521.26; Sun, 25 Jun
+ 2023 20:44:33 +0000
+Received: from LO0P265MB6866.GBRP265.PROD.OUTLOOK.COM
+ ([fe80::b870:1776:525a:482d]) by LO0P265MB6866.GBRP265.PROD.OUTLOOK.COM
+ ([fe80::b870:1776:525a:482d%5]) with mapi id 15.20.6521.026; Sun, 25 Jun 2023
+ 20:44:33 +0000
+From: Tommy Murphy <tommy_murphy@hotmail.com>
+To: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
+Subject: How to enable Zicsr extension support on qemu-riscv32?
+Thread-Topic: How to enable Zicsr extension support on qemu-riscv32?
+Thread-Index: AQHZp6Tik5XYO+yanE+VCghfDM1x3g==
+Date: Sun, 25 Jun 2023 20:44:33 +0000
+Message-ID: <LO0P265MB686600A85E9B6F3AEFAC066BF921A@LO0P265MB6866.GBRP265.PROD.OUTLOOK.COM>
+Accept-Language: en-IE, en-US
+Content-Language: en-IE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-tmn: [uE4ik427rnesPYLw7j8zrzazz3aJmoL6]
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: LO0P265MB6866:EE_|CWLP265MB6232:EE_
+x-ms-office365-filtering-correlation-id: f789bffc-2e6d-44dd-5018-08db75bcfb6c
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: lMjHrHIs35e82IicTiHKwplPjpwJVE8qH4xi0iY0DpTJ6zAW297aEZJlbnimzXyIqh/fa71FyaI9skYFLM6rL15deST+PD2Ot4AYoeAlDEk5JgRhn8pbiwfKmlwhPXBphWOg2JHqIvDJOwjMYtZUZ9KvUn6t4K7eV9Xy8Iyn5L5DbWplDLdIo9I5VLbN/2OmzeP5hEw8Iz8SFezwjX3tlL1kn7YnSq261c+LHuU4H3+FLDjeUcviArvflvNBnGxHWt194zef0/OzgcAzarbYDZe7ri4yNxvv8ataPFzjC7EezdOHn+LBIl1yfGHZ3Xy6P9bQxevk2XRffoiVnQbgfL3cxt5NpeH35yJuAdxBwdYZsJT/FEQOgCv0YIdZEtpfafG0rrdhSbORa3l1aELMphJ4Xg1uubPdL+60ACkpiVxOouE/LKoqcnt6Eb4aXCoJ+HtCXiL7PeYgfdh4jV2c/x96JnTtH+sekvEarU8Fu293IFh/JGpiurpgU0uDcZkmBRWeKFQ/N1pthucyjufQ+VpW7HVx6Agt8hLbmOvwIxaj+HLQaGA0rQXdz8d1hYyv8PAzMa9LgFNRc/0NfXj4PniACuChGxkGvxAmfEvFVv0=
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?2qsCAlKSL3mYXYxiVUAbZCb7we7VX+tqFNf3xiUNXSY7rA8g1XEic6ooCs?=
+ =?iso-8859-1?Q?iDs0oa+qkGTwbrWgF2HryIlUwBR72et8cKc/SDcSMiGfQVbqrso2xrvfYC?=
+ =?iso-8859-1?Q?MrY2o0/HR95XeDvoP1RBHgpdjI7lfecCnF5HmNITBY6pOTBNxzscuobGeQ?=
+ =?iso-8859-1?Q?smsunznFYlBCyMJHlxvTd34NRgtdWMfVp2ZXpp4y2oFQCJJx1fyNxHn9dj?=
+ =?iso-8859-1?Q?EXXQa7YeifIIkHng6puOvaUjM5+W/8pdV+SydqmusT5piLzRJJPCDcU+F9?=
+ =?iso-8859-1?Q?gCMygXK34rS6aVSfaAIswvrtIF0cce1S83FHcNKOHvTERy92RZCVu+HXPG?=
+ =?iso-8859-1?Q?wMDiIVsTPul3RZKzkbo4D9Ctx8UGdDFhldapljHE4bobLNNT6mwWoQHf8y?=
+ =?iso-8859-1?Q?JYzX+l+TYtBHEn61cm9IcAwJJeYLNYaCrpAVxunJD+dYGwz74Nu3+Utgvr?=
+ =?iso-8859-1?Q?t/P6x91D16AnWdNch5dYDO0T0R0GkUqVEAaK9dWFmTpV9kJ5rv87iGE2cA?=
+ =?iso-8859-1?Q?6SRGP3oaJWFiiS5/et6onD1orVV6/N19JtJMyLcdfuohpQjPHlfHmiVo86?=
+ =?iso-8859-1?Q?LuSDrNkfO4JWSZnxrjxEfLnN1XC3QoFjdIM9pY17Cqx91FXjHMxvLPo7lH?=
+ =?iso-8859-1?Q?t/EicLwOn8AdhV1LZX/PVXDHt7UwfO9zP6VX6FEnzGL94EarKWN7SCsyFh?=
+ =?iso-8859-1?Q?yQLYgVut4sSvM5DPmSUONBEAj4jg1XUAtxaUa+eijvRflVG6L7EcviweXc?=
+ =?iso-8859-1?Q?VdEbU3U/FQLeNapBgWnvUv6saqe8foAIAjcoRefKamHTFVWszP7WzbPUVt?=
+ =?iso-8859-1?Q?uZ6mOY8atr5jGdb8r17eKyG9W27rFJ08MOeqzQubGn3O3v3LiwvTBIwlOo?=
+ =?iso-8859-1?Q?GRtXAECBwuzukhxF8RswsyvTHg0oKUGNt9IFtFiYPLKyLKkNDNCuRnoXSb?=
+ =?iso-8859-1?Q?pvrHtErXllcKbRU5a20sGYe6vLXp+CU4NSgc+iFPRLHGmsr7j3WJasq/fV?=
+ =?iso-8859-1?Q?lDu9XANeSMxCbHYvlcTDPIvqWngBQqfuusMsMjlZj+k6FdjJyIckGZ7Wjx?=
+ =?iso-8859-1?Q?9+UR5WebwALKpLjuam2Sc+22kPvXuNMgCT8K6/emElNqs8eZFrh7QenkhH?=
+ =?iso-8859-1?Q?sdL1/KNMt9PajkZp3fo2b0376nOVP1qCni7NXnok1PPXCubmeAMhIfykaV?=
+ =?iso-8859-1?Q?RS1p9DCIF/o2V1apBjmDTI56tHFZT0GSFKOi8/zI857W4y52Dx+pjRqztK?=
+ =?iso-8859-1?Q?XKifNnovXa974PfDobQw=3D=3D?=
+Content-Type: multipart/alternative;
+ boundary="_000_LO0P265MB686600A85E9B6F3AEFAC066BF921ALO0P265MB6866GBRP_"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x429.google.com
+X-OriginatorOrg: sct-15-20-4755-11-msonline-outlook-5e42a.templateTenant
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: LO0P265MB6866.GBRP265.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-Network-Message-Id: f789bffc-2e6d-44dd-5018-08db75bcfb6c
+X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Jun 2023 20:44:33.4982 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CWLP265MB6232
+Received-SPF: pass client-ip=104.47.20.170;
+ envelope-from=tommy_murphy@hotmail.com;
+ helo=GBR01-CWL-obe.outbound.protection.outlook.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -95,82 +125,124 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-These fields shouldn't be accessed when KVM is not available.
+--_000_LO0P265MB686600A85E9B6F3AEFAC066BF921ALO0P265MB6866GBRP_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Restrict the KVM timer migration state. Rename the KVM timer
-post_load() handler accordingly, because cpu_post_load() is
-too generic.
+Hi there
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
-Since v1 https://lore.kernel.org/qemu-devel/20230405160454.97436-10-philmd@linaro.org/:
-- Restrict whole vmstate_kvmtimer (thus drop Daniel's R-b)
----
- target/riscv/cpu.h     | 2 ++
- target/riscv/machine.c | 8 ++++++--
- 2 files changed, 8 insertions(+), 2 deletions(-)
+I've tried searching to find an answer to this question but with no success=
+ so far unfortunately.
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index e3e08d315f..b1b56aa29e 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -363,12 +363,14 @@ struct CPUArchState {
-     hwaddr kernel_addr;
-     hwaddr fdt_addr;
- 
-+#ifdef CONFIG_KVM
-     /* kvm timer */
-     bool kvm_timer_dirty;
-     uint64_t kvm_timer_time;
-     uint64_t kvm_timer_compare;
-     uint64_t kvm_timer_state;
-     uint64_t kvm_timer_frequency;
-+#endif /* CONFIG_KVM */
- };
- 
- /*
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index 3ce2970785..d27f8a2a3a 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -199,7 +199,8 @@ static bool kvmtimer_needed(void *opaque)
-     return kvm_enabled();
- }
- 
--static int cpu_post_load(void *opaque, int version_id)
-+#ifdef CONFIG_KVM
-+static int cpu_kvmtimer_post_load(void *opaque, int version_id)
- {
-     RISCVCPU *cpu = opaque;
-     CPURISCVState *env = &cpu->env;
-@@ -213,7 +214,7 @@ static const VMStateDescription vmstate_kvmtimer = {
-     .version_id = 1,
-     .minimum_version_id = 1,
-     .needed = kvmtimer_needed,
--    .post_load = cpu_post_load,
-+    .post_load = cpu_kvmtimer_post_load,
-     .fields = (VMStateField[]) {
-         VMSTATE_UINT64(env.kvm_timer_time, RISCVCPU),
-         VMSTATE_UINT64(env.kvm_timer_compare, RISCVCPU),
-@@ -221,6 +222,7 @@ static const VMStateDescription vmstate_kvmtimer = {
-         VMSTATE_END_OF_LIST()
-     }
- };
-+#endif
- 
- static bool debug_needed(void *opaque)
- {
-@@ -409,7 +411,9 @@ const VMStateDescription vmstate_riscv_cpu = {
-         &vmstate_vector,
-         &vmstate_pointermasking,
-         &vmstate_rv128,
-+#ifdef CONFIG_KVM
-         &vmstate_kvmtimer,
-+#endif
-         &vmstate_envcfg,
-         &vmstate_debug,
-         &vmstate_smstateen,
--- 
-2.38.1
+The issue is discussed here: https://github.com/riscv-collab/riscv-gnu-tool=
+chain/issues/1278#issuecomment-1606108826
 
+But the gist is that I can configure, build and use `qemu-riscv32` to run a=
+ simple bare metal "hello world" program fine.
+But if I add a CSR read instruction to it (e.g. `asm("csrr t0, misa");`) th=
+en I get Illegal Instruction.
+
+This is the case even if I use `qemu-riscv32 -cpu rv32,Zicsr=3Don hello.exe=
+`.
+
+How can I configure/invoke `qemu-riscv32` so that I can emulate CSR instruc=
+tions?
+
+Thanks a lot
+
+Regards
+Tommy
+
+
+
+--_000_LO0P265MB686600A85E9B6F3AEFAC066BF921ALO0P265MB6866GBRP_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
+ color: rgb(0, 0, 0);" class=3D"elementToProof">
+Hi there</div>
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
+ color: rgb(0, 0, 0);" class=3D"elementToProof">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
+ color: rgb(0, 0, 0);" class=3D"elementToProof">
+I've tried searching to find an answer to this question but with no success=
+ so far unfortunately.</div>
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
+ color: rgb(0, 0, 0);" class=3D"elementToProof">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
+ color: rgb(0, 0, 0);" class=3D"elementToProof ContentPasted0">
+The issue is discussed here:&nbsp;<a href=3D"https://github.com/riscv-colla=
+b/riscv-gnu-toolchain/issues/1278#issuecomment-1606108826">https://github.c=
+om/riscv-collab/riscv-gnu-toolchain/issues/1278#issuecomment-1606108826</a>=
+</div>
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
+ color: rgb(0, 0, 0);" class=3D"elementToProof ContentPasted0">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
+ color: rgb(0, 0, 0);" class=3D"elementToProof ContentPasted0">
+But the gist is that I can configure, build and use `qemu-riscv32` to run a=
+ simple bare metal &quot;hello world&quot; program fine.</div>
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
+ color: rgb(0, 0, 0);" class=3D"elementToProof ContentPasted0">
+But if I add a CSR read instruction to it (e.g. `asm(&quot;csrr t0, misa&qu=
+ot;);`) then I get Illegal Instruction.</div>
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
+ color: rgb(0, 0, 0);" class=3D"elementToProof ContentPasted0">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
+ color: rgb(0, 0, 0);" class=3D"elementToProof ContentPasted0">
+This is the case even if I use `qemu-riscv32 -cpu rv32,Zicsr=3Don hello.exe=
+`.</div>
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
+ color: rgb(0, 0, 0);" class=3D"elementToProof ContentPasted0">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
+ color: rgb(0, 0, 0);" class=3D"elementToProof ContentPasted0">
+How can I configure/invoke `qemu-riscv32` so that I can emulate CSR instruc=
+tions?</div>
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
+ color: rgb(0, 0, 0);" class=3D"elementToProof ContentPasted0">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
+ color: rgb(0, 0, 0);" class=3D"elementToProof ContentPasted0">
+Thanks a lot</div>
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
+ color: rgb(0, 0, 0);" class=3D"elementToProof ContentPasted0">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
+ color: rgb(0, 0, 0);" class=3D"elementToProof ContentPasted0">
+Regards</div>
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
+ color: rgb(0, 0, 0);" class=3D"elementToProof ContentPasted0">
+Tommy</div>
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
+ color: rgb(0, 0, 0);" class=3D"elementToProof ContentPasted0">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
+ color: rgb(0, 0, 0);" class=3D"elementToProof ContentPasted0">
+<br>
+</div>
+</body>
+</html>
+
+--_000_LO0P265MB686600A85E9B6F3AEFAC066BF921ALO0P265MB6866GBRP_--
 
