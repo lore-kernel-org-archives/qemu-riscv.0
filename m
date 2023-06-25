@@ -4,87 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B771EB64DC
-	for <qemu-riscv@archiver.kernel.org>; Sun, 25 Jun 2023 23:27:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54D1DEB64DC
+	for <qemu-riscv@archiver.kernel.org>; Sun, 25 Jun 2023 23:29:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qDZ8Y-0001S6-LI; Sun, 25 Jun 2023 19:27:18 -0400
+	id 1qDZB5-0002s5-HW; Sun, 25 Jun 2023 19:29:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qDZ8W-0001Rk-Rj
- for qemu-riscv@nongnu.org; Sun, 25 Jun 2023 19:27:16 -0400
-Received: from mail-oi1-x22d.google.com ([2607:f8b0:4864:20::22d])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qDZ8V-0002sz-2s
- for qemu-riscv@nongnu.org; Sun, 25 Jun 2023 19:27:16 -0400
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-3a1ba074dadso1025570b6e.1
- for <qemu-riscv@nongnu.org>; Sun, 25 Jun 2023 16:27:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1687735631; x=1690327631;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=gEjRHBsrr1dT9wqudUY/3yg84UNpyFKBQlvUGGHZCn8=;
- b=F4FMPiVABSK2NsrKCC0S8ShX/jWfigGPDEtplBFXwZTzzXdlZVKv0nPTI/bmY5Ffr4
- ++zdqvWRW0s8IyoLu7AP64N24xDWD5kzfJL+P8LUj+emKYweR3TEemOmTPdrhECXlsCi
- ND4rG22dRY1n29URv9uXh9P9aTvhqcCFczRkzs29VXcb95KvFhtytzCOHKFjbtbu6Z3j
- zDPV0MYgBS+eVf4aycccTCBk7AoBn42Wmau/eUm2oIg/bFk+7cxpyTyKLzE1JlTn2ptT
- NVkkFT5LggUCa79GUz7hj4j40P0oHUxrLCKIfk66/QbWLzVicmW792LE9neGn3c+MpPT
- zB8Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687735631; x=1690327631;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=gEjRHBsrr1dT9wqudUY/3yg84UNpyFKBQlvUGGHZCn8=;
- b=jNsOAsgzyhufN9WU+Bi9d6Jfda9Kh/MKlqRkX8r8Q9c5pbpVr0b8xLB6eRJPqNpNub
- cvYhIqmm+qOiFOekHUYW1veldLLK5blN1TNgNkZXVuiTjfBOu1/xMFnUWWMXqVcfqrV+
- SSrvDCZsBQZEE/65J7Z+/OTTrXfT/6/NfXenpMCAw9/tZgmQYD+pEegUB7NFZOihyDBV
- X62tixnzEb2MVy9o8KQbYgsLxHUmivqGwlyYlvxAeBHy9BlfdR2rPZ3uvHxa2OR+4yLv
- XG8WCcAotNJ5oy4O9Y9gFS3j+6GXskLf2RARGWJdVM/RxL+2pM1O8Uqsf22Fu7bW66so
- Nq2Q==
-X-Gm-Message-State: AC+VfDyNsqpQzZbO9enU0WHmBLvuCc8rx0blw1bOWQcW1zb0Y6/Re0QZ
- tBQC5KD0tRHGe9lDh/yDml/wJA==
-X-Google-Smtp-Source: ACHHUZ5CvuymUtlWWzPzBakmYVKXjVsMD8OJJ7yNJnHVq42R4wuo3RB/t8kBaJUoon0D9YfnnLBlUw==
-X-Received: by 2002:a05:6808:2096:b0:3a0:6540:794c with SMTP id
- s22-20020a056808209600b003a06540794cmr8158234oiw.19.1687735631066; 
- Sun, 25 Jun 2023 16:27:11 -0700 (PDT)
-Received: from [192.168.68.107] (201-69-66-110.dial-up.telesp.net.br.
- [201.69.66.110]) by smtp.gmail.com with ESMTPSA id
- i17-20020a056808031100b003a04cd0e13dsm1926417oie.9.2023.06.25.16.27.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 25 Jun 2023 16:27:10 -0700 (PDT)
-Message-ID: <0570cc14-04a4-2808-8668-446d2e6ea62d@ventanamicro.com>
-Date: Sun, 25 Jun 2023 20:27:05 -0300
+ (Exim 4.90_1) (envelope-from <tommy_murphy@hotmail.com>)
+ id 1qDZB4-0002re-Di
+ for qemu-riscv@nongnu.org; Sun, 25 Jun 2023 19:29:54 -0400
+Received: from mail-cwlgbr01olkn0809.outbound.protection.outlook.com
+ ([2a01:111:f400:fe14::809]
+ helo=GBR01-CWL-obe.outbound.protection.outlook.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <tommy_murphy@hotmail.com>)
+ id 1qDZB2-0003F0-77
+ for qemu-riscv@nongnu.org; Sun, 25 Jun 2023 19:29:54 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=hWfWQBP/tWFkuWBdtO8Zet/h1zuhcs/t0ok66MzWnKlGrm+GJRNMKn7FCwQOcE4arglN8sFgLJx1Xt/Mz0rS3sb46FR3gyD0Y6FwTCa29uhTARbfSYjJ+dKTRrcEhzU56foDBmYcZTEn+jdifsX6nmALdmcp2BqOzvR6Y0w+zL3tRg2bvFC3KGfc3N05RXVtslzw8PwKAhm+oGcgWO/1eEeODI8FxkFSLcH6v6FzzeP0Dl8eU2WknwqWlr2+8ZcnoyRNyPuQGX3oD8xOOUaXl0JygAQSxTCzIUszRt/ICeF8l39jfzssfFpgMWvI89Qk0fzDLxVzHB8bp1IOIFYjPw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=cA+W7c3Ie0X68XARb2K463qb2p8fGGDfs6WTweOXv5o=;
+ b=aHdpzjbm3FaFcgyhH88LX5gAm/c6a+aFLkb/6LpfQHTN/LYP/Nqh476651SX3lBPdcFhYLOXY9IUbsJMhbELw6w+28qyYSxZSMwGqf3lXqRcqjZbWs44kbZBd9Sk/4CDl0tCdlq5MMD9gPwxu9EcizMOgIjppxeXGgiTJrWLOWNXGCMqZnDcxwZytt2Mo9qBWtMpTn4yGYyBo6z3+gPSnrjUNIstV4h3VDd9dBUVZtDW3rV69+KBhBJ2HdPu84pul/xRJrApHguZ4yn8A660MbriHohmTzqi50M4Ig/1JZQ7Ge7dQBMiMQWh805AHmEBZKi8MyEG1zSpNT02feJdpQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cA+W7c3Ie0X68XARb2K463qb2p8fGGDfs6WTweOXv5o=;
+ b=uPvTz8/Ba6Noa/qI0Mp9PlvVg7RuOWj+oUDSkqmYm5Faem4dPpEkSJ5DBZN+I57R86gfQqH2WNpNeWoVShqJKKg1isphPyipkAEmA4ye673u3su+zRVIJXoLCe8OH86ikbHoRWKQjTUcB6G6lG0kGC8+hTOZlMGd9LPzi9mcv4277A5Z7ELkc2va0uVkjts62Q0YOi3oDKX4hWNdgT4Nd+QWy0gIbX0xA74UUjeGuu98MIbeLBcKX8nnOgv/H+6HlB66L1ce+XWK2d0WW6WeOS/Po3+z+veTx8L8ZELqggYmmGzjTMP9piUg/ua01cbD5nhSUUMMPrvBKoNsW1saBQ==
+Received: from LO0P265MB6866.GBRP265.PROD.OUTLOOK.COM (2603:10a6:600:2d7::13)
+ by LO0P265MB2601.GBRP265.PROD.OUTLOOK.COM (2603:10a6:600:13e::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6521.26; Sun, 25 Jun
+ 2023 23:29:49 +0000
+Received: from LO0P265MB6866.GBRP265.PROD.OUTLOOK.COM
+ ([fe80::b870:1776:525a:482d]) by LO0P265MB6866.GBRP265.PROD.OUTLOOK.COM
+ ([fe80::b870:1776:525a:482d%5]) with mapi id 15.20.6521.026; Sun, 25 Jun 2023
+ 23:29:49 +0000
+From: Tommy Murphy <tommy_murphy@hotmail.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
+Subject: Re: How to enable Zicsr extension support on qemu-riscv32?
+Thread-Topic: How to enable Zicsr extension support on qemu-riscv32?
+Thread-Index: AQHZp6Tik5XYO+yanE+VCghfDM1x3q+cKQkAgAABKwE=
+Date: Sun, 25 Jun 2023 23:29:49 +0000
+Message-ID: <LO0P265MB686697E7508B5BA227E324D4F921A@LO0P265MB6866.GBRP265.PROD.OUTLOOK.COM>
+References: <LO0P265MB686600A85E9B6F3AEFAC066BF921A@LO0P265MB6866.GBRP265.PROD.OUTLOOK.COM>
+ <a998a5d1-f397-4925-d61f-5abacf44fb96@ventanamicro.com>
+In-Reply-To: <a998a5d1-f397-4925-d61f-5abacf44fb96@ventanamicro.com>
+Accept-Language: en-IE, en-US
+Content-Language: en-IE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-tmn: [u3Kl+J7jCQ4SJbIM8yuif6SREgGQwgV8]
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: LO0P265MB6866:EE_|LO0P265MB2601:EE_
+x-ms-office365-filtering-correlation-id: 64906d5a-b2ab-4aa8-26d1-08db75d411b3
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: Cs2BA4folfUgXd3sAmA4H9L6q3vLIAuRJbX7nymiv68dVUvU20jcw1HFxTQAepO8b1qI9K2uXNgIlgjuW106wkdcrLr3bjoLpnwbKBDFmnoXhaG1/RdtiITPGJb6oojcW1oEVg2PgKkrTiyN9ZhvRw0GjDVK9HOVwJK/cnloiVSFnvKz7QcLJb3bfkj/cj67+Qyr9fbBdi4iu+XRg780Fr3vya0p9E/Px+02FoorS40KtS7tC2Ve7CsqHokT/tV3g+/phLcTpUcAmPvEH+pyhjdCy07VI2Fnvu6g7Twojzf3BVWavfE/nYlEmUYE+F8OlMEMlVAkqOvcEJUojs96TlE6SYFhMoWmQKDKD1EviSs7fK3pS2VpWjinjtEpGsl1kG4tlJ9O/mFZnygsDk7drFt6/wiRICmG1YbHsA39Ys4NcymVD1bxQesvXkCyKDNPLc7qOHhPJIPE4Uy1K6PV57HfYlfpkUD6IXpPWLB6LsaRQIWYZHLnjvO4jltDxW8pOSURw53btUBkToBXCcCXiCh6anmXs48mB538zI1SC+I2uMBHjEjPHxx/rP/SLMRg8EOf+QMXs3L7udX4SIBpjeWFXp7lpwKDi+gPFcwkhxA=
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?d1mNFDm62KBn4SNueRo5+HwHZ7F7nuK6eupBONWM4A8XTzEk551qOLIbzQ?=
+ =?iso-8859-1?Q?T1BEzqy3gyd7a7srBQNDyMGPR9kcc4VMX+XuD4RbI2lLtxNwqKyZ5kXLKZ?=
+ =?iso-8859-1?Q?dWBayfMh4nqz6WX4eENMk4bpie8JmeTK5nwivf0jm9z6fMygHmyPW10C3x?=
+ =?iso-8859-1?Q?crLUlK7qtobcbKDdQ7qcdY/CIMvjHiJsYWNPCX92Vesk/2I8VkDpCufffn?=
+ =?iso-8859-1?Q?yUEYTfv07jcLbxO3oE0UHQQtBFJD+8JDL1MB1IFTPgkvdAowBbyVIxafaw?=
+ =?iso-8859-1?Q?g46GrOE44C/rbhYkRgYb+0nTLzMW+c+/i2Gfui4F3jFlK7wDw4sFH2SxyB?=
+ =?iso-8859-1?Q?4gXDKjuKcbdwXL2xF6vQEd8matf2YLYyVumRdQzKn7zsltevtOZJocl59L?=
+ =?iso-8859-1?Q?lfTCFY91r8XI1nto1mz+zBHi/1eroAZSsCZYMCdoJeDmKnXNGzrrGFMM/n?=
+ =?iso-8859-1?Q?HIIstVvujlgdiG6KtXvq8mkHkpx6nwWG0iBGreqLoBZEOrZf3qn7eMJI86?=
+ =?iso-8859-1?Q?5R/WryA4GK0F77sHMiQx1vt2TJhzg1OMAC5Op/G/UpOExViS9rhop4W1md?=
+ =?iso-8859-1?Q?+0Jubg2xSu8q/1Ojgotu6VLxKE9M8O5n27G1JlOiH9rrJNxsGZy8+Aq0F1?=
+ =?iso-8859-1?Q?jvPemtCtlE5VD2HYqdBvy7TqUuX9sQtI0EdbWrJMP8inpxssT2E/fafGeU?=
+ =?iso-8859-1?Q?cYsBJVn+/J2JP6f/rzDMBZvA1ueYophnobyftnjF5c6y1ZI0iW6vF1r70X?=
+ =?iso-8859-1?Q?HjOrbtl9UsJC+UugnwMghUS94RBcNFRsOSGYrjgVdmZQC+BxboJbIra5pz?=
+ =?iso-8859-1?Q?ClcXoaGm8fiDCGU85yrJhYYdcTegX3HStXXYHccnwSOKtEFT8skndkAT5G?=
+ =?iso-8859-1?Q?LnbHLSgIneRqoYdjR7H8ZviXaJdZlDiFE2u3CmvyKUFyyQvX91duOkFu9a?=
+ =?iso-8859-1?Q?i2CzS//Ki1PIjv7T8UOgXKBZ+iuSZPJyjC2SNSM+1K0x+d3gjZdGx9DzFP?=
+ =?iso-8859-1?Q?+UZThPC9Exh2JuT4xPxH1OYPnNriJ86PGZyqQEywyZwXr0ybw0wcmYVjD3?=
+ =?iso-8859-1?Q?8saZHWzr/O39VClWGZU/4D2ntBNlmXTYRqiTlUpFq+ifyi1yM264deXkH6?=
+ =?iso-8859-1?Q?Qt19DpZugn9t+Lbd+cFG4FnSQ1CAxrbLmZS7V92QDhK7tEMnDd3cNt4oA3?=
+ =?iso-8859-1?Q?FqIeFluldhKA5R01sgKAvDD66jLRmejJpADmb3G/HTV9wz8SfvyBcqgFOj?=
+ =?iso-8859-1?Q?EWQNlk3P2JYgkOlzetOg=3D=3D?=
+Content-Type: multipart/alternative;
+ boundary="_000_LO0P265MB686697E7508B5BA227E324D4F921ALO0P265MB6866GBRP_"
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Subject: Re: [PATCH v2] target/riscv: Restrict KVM-specific fields from ArchCPU
-Content-Language: en-US
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: Weiwei Li <liweiwei@iscas.ac.cn>,
- Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>
-References: <20230624192957.14067-1-philmd@linaro.org>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230624192957.14067-1-philmd@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22d;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22d.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+X-OriginatorOrg: sct-15-20-4755-11-msonline-outlook-5e42a.templateTenant
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: LO0P265MB6866.GBRP265.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-Network-Message-Id: 64906d5a-b2ab-4aa8-26d1-08db75d411b3
+X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Jun 2023 23:29:49.3129 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LO0P265MB2601
+Received-SPF: pass client-ip=2a01:111:f400:fe14::809;
+ envelope-from=tommy_murphy@hotmail.com;
+ helo=GBR01-CWL-obe.outbound.protection.outlook.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.089,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ HTML_MESSAGE=0.001, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -101,85 +129,72 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+--_000_LO0P265MB686697E7508B5BA227E324D4F921ALO0P265MB6866GBRP_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
+> rv32 already has Zicsr support enabled by default. There might a bug
+> somewhere.
+>
+> Please file a gitlab bug (https://gitlab.com/qemu-project/qemu/-/issues) =
+and
+> we'll take a look. Don't forget to mention that you managed to reproduce =
+the
+> SIGILL using upstream QEMU as you mentioned in the toolchain bug. Thanks,
 
-On 6/24/23 16:29, Philippe Mathieu-Daudé wrote:
-> These fields shouldn't be accessed when KVM is not available.
-> 
-> Restrict the KVM timer migration state. Rename the KVM timer
-> post_load() handler accordingly, because cpu_post_load() is
-> too generic.
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> ---
+Hi Daniel
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Thanks a lot for the quick reply.
+I'll collate the relevant info and log a bug as you suggest ASAP.
 
-> Since v1 https://lore.kernel.org/qemu-devel/20230405160454.97436-10-philmd@linaro.org/:
-> - Restrict whole vmstate_kvmtimer (thus drop Daniel's R-b)
-> ---
->   target/riscv/cpu.h     | 2 ++
->   target/riscv/machine.c | 8 ++++++--
->   2 files changed, 8 insertions(+), 2 deletions(-)
-> 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index e3e08d315f..b1b56aa29e 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -363,12 +363,14 @@ struct CPUArchState {
->       hwaddr kernel_addr;
->       hwaddr fdt_addr;
->   
-> +#ifdef CONFIG_KVM
->       /* kvm timer */
->       bool kvm_timer_dirty;
->       uint64_t kvm_timer_time;
->       uint64_t kvm_timer_compare;
->       uint64_t kvm_timer_state;
->       uint64_t kvm_timer_frequency;
-> +#endif /* CONFIG_KVM */
->   };
->   
->   /*
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index 3ce2970785..d27f8a2a3a 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -199,7 +199,8 @@ static bool kvmtimer_needed(void *opaque)
->       return kvm_enabled();
->   }
->   
-> -static int cpu_post_load(void *opaque, int version_id)
-> +#ifdef CONFIG_KVM
-> +static int cpu_kvmtimer_post_load(void *opaque, int version_id)
->   {
->       RISCVCPU *cpu = opaque;
->       CPURISCVState *env = &cpu->env;
-> @@ -213,7 +214,7 @@ static const VMStateDescription vmstate_kvmtimer = {
->       .version_id = 1,
->       .minimum_version_id = 1,
->       .needed = kvmtimer_needed,
-> -    .post_load = cpu_post_load,
-> +    .post_load = cpu_kvmtimer_post_load,
->       .fields = (VMStateField[]) {
->           VMSTATE_UINT64(env.kvm_timer_time, RISCVCPU),
->           VMSTATE_UINT64(env.kvm_timer_compare, RISCVCPU),
-> @@ -221,6 +222,7 @@ static const VMStateDescription vmstate_kvmtimer = {
->           VMSTATE_END_OF_LIST()
->       }
->   };
-> +#endif
->   
->   static bool debug_needed(void *opaque)
->   {
-> @@ -409,7 +411,9 @@ const VMStateDescription vmstate_riscv_cpu = {
->           &vmstate_vector,
->           &vmstate_pointermasking,
->           &vmstate_rv128,
-> +#ifdef CONFIG_KVM
->           &vmstate_kvmtimer,
-> +#endif
->           &vmstate_envcfg,
->           &vmstate_debug,
->           &vmstate_smstateen,
+Regards
+Tommy
+
+--_000_LO0P265MB686697E7508B5BA227E324D4F921ALO0P265MB6866GBRP_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
+ color: rgb(0, 0, 0);" class=3D"elementToProof">
+&gt;&nbsp;rv32 already has Zicsr support enabled by default. There might a =
+bug</div>
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
+ color: rgb(0, 0, 0);" class=3D"elementToProof">
+&gt;&nbsp;somewhere.</div>
+<div class=3D"BodyFragment"><font size=3D"2"><span style=3D"font-size:11pt"=
+>
+<div class=3D"PlainText elementToProof">&gt;<br>
+&gt;&nbsp;Please file a gitlab bug (<a href=3D"https://gitlab.com/qemu-proj=
+ect/qemu/-/issues" data-auth=3D"NotApplicable">https://gitlab.com/qemu-proj=
+ect/qemu/-/issues</a>) and<br>
+&gt;&nbsp;we'll take a look. Don't forget to mention that you managed to re=
+produce the<br>
+&gt;&nbsp;SIGILL using upstream QEMU as you mentioned in the toolchain bug.=
+ Thanks,<br>
+<br>
+</div>
+<div class=3D"PlainText elementToProof">Hi Daniel</div>
+<div class=3D"PlainText elementToProof"><br>
+</div>
+<div class=3D"PlainText elementToProof">Thanks a lot for the quick reply.</=
+div>
+<div class=3D"PlainText elementToProof">I'll collate the relevant info and =
+log a bug as you suggest ASAP.</div>
+<div class=3D"PlainText elementToProof"><br>
+</div>
+<div class=3D"PlainText elementToProof">Regards</div>
+<div class=3D"PlainText elementToProof">Tommy</div>
+</span></font></div>
+</body>
+</html>
+
+--_000_LO0P265MB686697E7508B5BA227E324D4F921ALO0P265MB6866GBRP_--
 
