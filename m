@@ -4,76 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A0C7EB64DC
-	for <qemu-riscv@archiver.kernel.org>; Sun, 25 Jun 2023 23:24:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B771EB64DC
+	for <qemu-riscv@archiver.kernel.org>; Sun, 25 Jun 2023 23:27:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qDZ5m-0000tK-SO; Sun, 25 Jun 2023 19:24:27 -0400
+	id 1qDZ8Y-0001S6-LI; Sun, 25 Jun 2023 19:27:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qDZ5l-0000t6-87
- for qemu-riscv@nongnu.org; Sun, 25 Jun 2023 19:24:25 -0400
-Received: from mail-oa1-x29.google.com ([2001:4860:4864:20::29])
+ id 1qDZ8W-0001Rk-Rj
+ for qemu-riscv@nongnu.org; Sun, 25 Jun 2023 19:27:16 -0400
+Received: from mail-oi1-x22d.google.com ([2607:f8b0:4864:20::22d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qDZ5j-0001yf-Di
- for qemu-riscv@nongnu.org; Sun, 25 Jun 2023 19:24:24 -0400
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-1a998a2e7a6so2871458fac.1
- for <qemu-riscv@nongnu.org>; Sun, 25 Jun 2023 16:24:22 -0700 (PDT)
+ id 1qDZ8V-0002sz-2s
+ for qemu-riscv@nongnu.org; Sun, 25 Jun 2023 19:27:16 -0400
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-3a1ba074dadso1025570b6e.1
+ for <qemu-riscv@nongnu.org>; Sun, 25 Jun 2023 16:27:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1687735461; x=1690327461;
- h=content-transfer-encoding:in-reply-to:from:references:to
+ d=ventanamicro.com; s=google; t=1687735631; x=1690327631;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=OsZmkpR6WDcTc+O/Rxg7SSe6pz6sYv/ySDn9CkoN/Is=;
- b=g49plx3/bzzr9/vAdUX/OWPOud/jaFLRL2t4jiCamdwHnXAWNY6FivOx5JBrW6sMOM
- rb2007ByPVu9TU1DYHgzaenB5ZDfuK7Bl2Z/6JcStXZPTf1u9tQO1klbbueUGtvIkIyI
- KSRf2DIkxl3zyYCq1Q9dGQ9WQakEmdSXY6uWEbjKpJzC1HGPrKU4ylCalkhozj7ZzavH
- yXE9dpZidSoN8TWSD35BPicUgTY5358oWDEUKHrXQA8lOl+5wRBn0We/OvrnaNaY5Y5y
- yD1IiSM0qCN8YbsBVYK4JNBvsxey+ieF0DWcXcgA7YTaNN08103x1iCbjHkD9YN1Id1w
- ljew==
+ bh=gEjRHBsrr1dT9wqudUY/3yg84UNpyFKBQlvUGGHZCn8=;
+ b=F4FMPiVABSK2NsrKCC0S8ShX/jWfigGPDEtplBFXwZTzzXdlZVKv0nPTI/bmY5Ffr4
+ ++zdqvWRW0s8IyoLu7AP64N24xDWD5kzfJL+P8LUj+emKYweR3TEemOmTPdrhECXlsCi
+ ND4rG22dRY1n29URv9uXh9P9aTvhqcCFczRkzs29VXcb95KvFhtytzCOHKFjbtbu6Z3j
+ zDPV0MYgBS+eVf4aycccTCBk7AoBn42Wmau/eUm2oIg/bFk+7cxpyTyKLzE1JlTn2ptT
+ NVkkFT5LggUCa79GUz7hj4j40P0oHUxrLCKIfk66/QbWLzVicmW792LE9neGn3c+MpPT
+ zB8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687735461; x=1690327461;
- h=content-transfer-encoding:in-reply-to:from:references:to
+ d=1e100.net; s=20221208; t=1687735631; x=1690327631;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=OsZmkpR6WDcTc+O/Rxg7SSe6pz6sYv/ySDn9CkoN/Is=;
- b=DBlr9a4wPfSc5HH5+23ixZAyAjw5wQkoSnt4H4N2bWSQbnRgRnpA1dRb33dWmNLmk+
- tvpssR8sFBJ5KFNqEkfq76KEhoeFcDO4Lej2+up+u2vOZfjsxEqjbgM1xQGOnSDbUZbn
- /sapf79f9rTfusUQFsZSUtrim+g7Fhs0EJBqtOE9EWnTFSGtV7oYd7zBcuelu/DUnT0W
- UxZGuDNmNBtOaqL3MySpxn3bgklS+nUK/imurX/oesz7oaV0MofqUmyX8m5hWASQYngV
- LWG98kyvESpdOU4kr8g37ShMAvifBfRwHXlNjo/2pDdR7V6+uXEVWbQ3PwlEOoOPgK3f
- o84w==
-X-Gm-Message-State: AC+VfDyJIYGZyvhjL5wI4yV2IOZmu6rwA4lzB7UGX1dDdxmnkuDLDKTH
- OdJzBzXB5wSpks4CwdKFyY62Qw==
-X-Google-Smtp-Source: ACHHUZ7bXJIbgo06v1AphdhKPfHm0qwkHrblrekctbf1LIkpiTMfV0L5w1aps34sYCpSw6JTojWZPQ==
-X-Received: by 2002:a05:6871:6ba3:b0:1a2:a0d0:431a with SMTP id
- zh35-20020a0568716ba300b001a2a0d0431amr19017692oab.29.1687735461552; 
- Sun, 25 Jun 2023 16:24:21 -0700 (PDT)
+ bh=gEjRHBsrr1dT9wqudUY/3yg84UNpyFKBQlvUGGHZCn8=;
+ b=jNsOAsgzyhufN9WU+Bi9d6Jfda9Kh/MKlqRkX8r8Q9c5pbpVr0b8xLB6eRJPqNpNub
+ cvYhIqmm+qOiFOekHUYW1veldLLK5blN1TNgNkZXVuiTjfBOu1/xMFnUWWMXqVcfqrV+
+ SSrvDCZsBQZEE/65J7Z+/OTTrXfT/6/NfXenpMCAw9/tZgmQYD+pEegUB7NFZOihyDBV
+ X62tixnzEb2MVy9o8KQbYgsLxHUmivqGwlyYlvxAeBHy9BlfdR2rPZ3uvHxa2OR+4yLv
+ XG8WCcAotNJ5oy4O9Y9gFS3j+6GXskLf2RARGWJdVM/RxL+2pM1O8Uqsf22Fu7bW66so
+ Nq2Q==
+X-Gm-Message-State: AC+VfDyNsqpQzZbO9enU0WHmBLvuCc8rx0blw1bOWQcW1zb0Y6/Re0QZ
+ tBQC5KD0tRHGe9lDh/yDml/wJA==
+X-Google-Smtp-Source: ACHHUZ5CvuymUtlWWzPzBakmYVKXjVsMD8OJJ7yNJnHVq42R4wuo3RB/t8kBaJUoon0D9YfnnLBlUw==
+X-Received: by 2002:a05:6808:2096:b0:3a0:6540:794c with SMTP id
+ s22-20020a056808209600b003a06540794cmr8158234oiw.19.1687735631066; 
+ Sun, 25 Jun 2023 16:27:11 -0700 (PDT)
 Received: from [192.168.68.107] (201-69-66-110.dial-up.telesp.net.br.
  [201.69.66.110]) by smtp.gmail.com with ESMTPSA id
- hl17-20020a0568701b1100b0019e8deb387bsm2837974oab.53.2023.06.25.16.24.20
+ i17-20020a056808031100b003a04cd0e13dsm1926417oie.9.2023.06.25.16.27.07
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 25 Jun 2023 16:24:21 -0700 (PDT)
-Message-ID: <a998a5d1-f397-4925-d61f-5abacf44fb96@ventanamicro.com>
-Date: Sun, 25 Jun 2023 20:24:18 -0300
+ Sun, 25 Jun 2023 16:27:10 -0700 (PDT)
+Message-ID: <0570cc14-04a4-2808-8668-446d2e6ea62d@ventanamicro.com>
+Date: Sun, 25 Jun 2023 20:27:05 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.12.0
-Subject: Re: How to enable Zicsr extension support on qemu-riscv32?
+Subject: Re: [PATCH v2] target/riscv: Restrict KVM-specific fields from ArchCPU
 Content-Language: en-US
-To: Tommy Murphy <tommy_murphy@hotmail.com>,
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
-References: <LO0P265MB686600A85E9B6F3AEFAC066BF921A@LO0P265MB6866.GBRP265.PROD.OUTLOOK.COM>
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: Weiwei Li <liweiwei@iscas.ac.cn>,
+ Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>
+References: <20230624192957.14067-1-philmd@linaro.org>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <LO0P265MB686600A85E9B6F3AEFAC066BF921A@LO0P265MB6866.GBRP265.PROD.OUTLOOK.COM>
+In-Reply-To: <20230624192957.14067-1-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2001:4860:4864:20::29;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x29.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::22d;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22d.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
@@ -96,37 +101,85 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
-
-On 6/25/23 17:44, Tommy Murphy wrote:
-> Hi there
-> 
-> I've tried searching to find an answer to this question but with no success so far unfortunately.
-> 
-> The issue is discussed here: https://github.com/riscv-collab/riscv-gnu-toolchain/issues/1278#issuecomment-1606108826 <https://github.com/riscv-collab/riscv-gnu-toolchain/issues/1278#issuecomment-1606108826>
-> 
-> But the gist is that I can configure, build and use `qemu-riscv32` to run a simple bare metal "hello world" program fine.
-> But if I add a CSR read instruction to it (e.g. `asm("csrr t0, misa");`) then I get Illegal Instruction.
-> 
-> This is the case even if I use `qemu-riscv32 -cpu rv32,Zicsr=on hello.exe`.
-> 
-> How can I configure/invoke `qemu-riscv32` so that I can emulate CSR instructions?
-
-rv32 already has Zicsr support enabled by default. There might a bug
-somewhere.
-
-Please file a gitlab bug (https://gitlab.com/qemu-project/qemu/-/issues) and
-we'll take a look. Don't forget to mention that you managed to reproduce the
-SIGILL using upstream QEMU as you mentioned in the toolchain bug. Thanks,
 
 
-Daniel
+On 6/24/23 16:29, Philippe Mathieu-Daudé wrote:
+> These fields shouldn't be accessed when KVM is not available.
+> 
+> Restrict the KVM timer migration state. Rename the KVM timer
+> post_load() handler accordingly, because cpu_post_load() is
+> too generic.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> ---
 
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+> Since v1 https://lore.kernel.org/qemu-devel/20230405160454.97436-10-philmd@linaro.org/:
+> - Restrict whole vmstate_kvmtimer (thus drop Daniel's R-b)
+> ---
+>   target/riscv/cpu.h     | 2 ++
+>   target/riscv/machine.c | 8 ++++++--
+>   2 files changed, 8 insertions(+), 2 deletions(-)
 > 
-> Thanks a lot
-> 
-> Regards
-> Tommy
-> 
-> 
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index e3e08d315f..b1b56aa29e 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -363,12 +363,14 @@ struct CPUArchState {
+>       hwaddr kernel_addr;
+>       hwaddr fdt_addr;
+>   
+> +#ifdef CONFIG_KVM
+>       /* kvm timer */
+>       bool kvm_timer_dirty;
+>       uint64_t kvm_timer_time;
+>       uint64_t kvm_timer_compare;
+>       uint64_t kvm_timer_state;
+>       uint64_t kvm_timer_frequency;
+> +#endif /* CONFIG_KVM */
+>   };
+>   
+>   /*
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index 3ce2970785..d27f8a2a3a 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -199,7 +199,8 @@ static bool kvmtimer_needed(void *opaque)
+>       return kvm_enabled();
+>   }
+>   
+> -static int cpu_post_load(void *opaque, int version_id)
+> +#ifdef CONFIG_KVM
+> +static int cpu_kvmtimer_post_load(void *opaque, int version_id)
+>   {
+>       RISCVCPU *cpu = opaque;
+>       CPURISCVState *env = &cpu->env;
+> @@ -213,7 +214,7 @@ static const VMStateDescription vmstate_kvmtimer = {
+>       .version_id = 1,
+>       .minimum_version_id = 1,
+>       .needed = kvmtimer_needed,
+> -    .post_load = cpu_post_load,
+> +    .post_load = cpu_kvmtimer_post_load,
+>       .fields = (VMStateField[]) {
+>           VMSTATE_UINT64(env.kvm_timer_time, RISCVCPU),
+>           VMSTATE_UINT64(env.kvm_timer_compare, RISCVCPU),
+> @@ -221,6 +222,7 @@ static const VMStateDescription vmstate_kvmtimer = {
+>           VMSTATE_END_OF_LIST()
+>       }
+>   };
+> +#endif
+>   
+>   static bool debug_needed(void *opaque)
+>   {
+> @@ -409,7 +411,9 @@ const VMStateDescription vmstate_riscv_cpu = {
+>           &vmstate_vector,
+>           &vmstate_pointermasking,
+>           &vmstate_rv128,
+> +#ifdef CONFIG_KVM
+>           &vmstate_kvmtimer,
+> +#endif
+>           &vmstate_envcfg,
+>           &vmstate_debug,
+>           &vmstate_smstateen,
 
