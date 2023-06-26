@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6587EB64D7
-	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Jun 2023 22:09:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31997EB64DC
+	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Jun 2023 22:09:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qDuIy-0004He-Du; Mon, 26 Jun 2023 18:03:28 -0400
+	id 1qDuIu-0003qN-LE; Mon, 26 Jun 2023 18:03:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qDuIH-0002Gm-HZ
- for qemu-riscv@nongnu.org; Mon, 26 Jun 2023 18:02:47 -0400
-Received: from mail-oa1-x2a.google.com ([2001:4860:4864:20::2a])
+ id 1qDuIP-0002UU-OV
+ for qemu-riscv@nongnu.org; Mon, 26 Jun 2023 18:02:57 -0400
+Received: from mail-oa1-x33.google.com ([2001:4860:4864:20::33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qDuIE-0005x7-2e
- for qemu-riscv@nongnu.org; Mon, 26 Jun 2023 18:02:44 -0400
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-1b056276889so508262fac.2
- for <qemu-riscv@nongnu.org>; Mon, 26 Jun 2023 15:02:41 -0700 (PDT)
+ id 1qDuIM-0005yz-B8
+ for qemu-riscv@nongnu.org; Mon, 26 Jun 2023 18:02:52 -0400
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-1a991886254so3811013fac.2
+ for <qemu-riscv@nongnu.org>; Mon, 26 Jun 2023 15:02:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1687816961; x=1690408961;
+ d=ventanamicro.com; s=google; t=1687816969; x=1690408969;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Q+CyYYsT+no8ORo4ySoZlRGtfXelSCUG7SzpXcEZGc8=;
- b=Q9GS67Q0wXSxsMbRuaAS7LDuMY6naaZrTPYnaxv7bU0gswxaCEkttdbCi9FANN0Vad
- DVkTt0T90lM1Di6jqcNyoqTxyXHuyJlWnM0aHKizcdn2Ugv0ZkS+moWPOBHz4Utu4ink
- yIcIRLE5SW2nmVOmEh/OgaBlzSmgv4kxXV35cYq5Md1nP47HwN5LpFdiP6dHXd92hUtT
- Lfr+XUSkuqGY4eowbMVfGAstGwlFI+YxC8cTHqryVm0Zd51lcNtYmAPQD7MFvPEf+9zN
- lV9h9ZRa6kcSq+tiOerALD0KZ/o6BVztjGLiTFnCLkJ1hcVzQPoAQJ2XluyyYKsc1xUk
- 88hQ==
+ bh=R8VqpGFPSGeVpgOJnRllgdcIk6EK894TdQ7CcFzt6AI=;
+ b=VcPivnq0/DhFzhoMVglMyzj2ub4dO/yGTZWmhmaENnYhh6BDxSg32dhbv6ZxQ1LbWu
+ RlCPSaxp/TZrf2YofUDFYYM1g0eYtGuoxvkCsCF4btiYYMS06MeiJ8LzD/flStJWZ3lx
+ yz6ssq2DPF0lIR53dCcetfSqVJplif4q+R0iijT7b1GnWeqG5JFaKSXIo4Dz9/sp4dfh
+ zC4Fgzq0IuFuUJDGADk+Y6hUm1DEKno5dc9aP31zgtoxojtLcUhN5oKkl/ZcGvfXNz35
+ YY0j9A1gL8iROjarh8/dF8wvcRVlO8+V3Z8/P7JrGVUab14lER8fktul5WYorjR2ael0
+ JrXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687816961; x=1690408961;
+ d=1e100.net; s=20221208; t=1687816969; x=1690408969;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Q+CyYYsT+no8ORo4ySoZlRGtfXelSCUG7SzpXcEZGc8=;
- b=NGbrOh13XMY5Dg1O6SnJKBM2vYEgFy4LwsOSAGGLzKEZW1iJE6proNxpRuB8H+facQ
- e+xxF7XyHfI63bMcpStfKGFlVtI91SX6Vu3wEs/YFY4R84+ghmuQkTG4I3qB+sjHAuzF
- DPotg7nb2M6TM/XNl4a+tiMkv+PNFii5tnyQwaxqBo45cyWIzSnZoP31v9SP0GCq0w2b
- sl8N84F5/ExtWce4usrCCrHHk0jaxrnSgHd1uW5i/MUBOnrPkn9XNiwronDubPnbW2jk
- A6e983IeVwjbEZjLNtP7+WsLc7Un7C71ccBJGrDyojWkHMjWFAwBONS3cbbpB7/K0FeX
- Lglw==
-X-Gm-Message-State: AC+VfDxYVDn4zbdOFfsCsSU8O8Gmmj1CzqLFFgz1rQ7YhC9+F8IHinCo
- jLremigZ3FfCD3i4ZgdNlDJR5Q==
-X-Google-Smtp-Source: ACHHUZ6pjCgVSLWUbGrZpToNFVLIfF2UJzzk4FzcMxWXZdojo7XGB469n+FINALk7EvkZmPPBQ9vBQ==
-X-Received: by 2002:a05:6870:4c3:b0:1b0:5218:cefe with SMTP id
- u3-20020a05687004c300b001b05218cefemr1609632oam.25.1687816960710; 
- Mon, 26 Jun 2023 15:02:40 -0700 (PDT)
+ bh=R8VqpGFPSGeVpgOJnRllgdcIk6EK894TdQ7CcFzt6AI=;
+ b=K86ltrBES80OOry1YwexORvjE+b9BAUNqTXHSXOxBJlkdL2DcY0bMg8TOwXNHNDWsW
+ 86cnPo9+FNbtLnddD0lix0HBOTLZMaOYnDj/JUH+6m8UjROT6O8l3Oo4G3fk+macJ1Rg
+ Fsqfv6OpUFVIFVaSRdNkGVjuvQBLjJ8fB5pB7+Uv53ttDw4yCrR2MYXXEhfbsnupTMgB
+ tnOl2RmQveW65wRew3XIaivM7uBLpxYeMpgaA72bYdfDQgsSYZ9AoGIyzE/IL97D9VYC
+ x1g4lt7MBoBk4Dc6q7xDNLTZSho+K+yEXbB6LYHpRjemVdjT7zNcFQi0FM4ufNcoopVd
+ 0HUg==
+X-Gm-Message-State: AC+VfDzljavh/lUV1k07HJeCGTiDQw3BZrKnHw5j8uCNR2NJQRE/93d1
+ wJy8Lum0bGzQnHGOeKBS85VL4hPbLDNjBub2eBc=
+X-Google-Smtp-Source: ACHHUZ4k1vwoI8lyez6jbcgo+kRsimdPhL0SI6Wav8CRypp9+5r68aLI8JIbyEkql0IcQVr1OJoFEg==
+X-Received: by 2002:a05:6870:9444:b0:1ad:4d4:3104 with SMTP id
+ e4-20020a056870944400b001ad04d43104mr16862651oal.38.1687816969265; 
+ Mon, 26 Jun 2023 15:02:49 -0700 (PDT)
 Received: from grind.dc1.ventanamicro.com
  (201-69-66-110.dial-up.telesp.net.br. [201.69.66.110])
  by smtp.gmail.com with ESMTPSA id
- m12-20020a056870a10c00b001b03fbfa0c5sm1831419oae.39.2023.06.26.15.02.38
+ m12-20020a056870a10c00b001b03fbfa0c5sm1831419oae.39.2023.06.26.15.02.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Jun 2023 15:02:40 -0700 (PDT)
+ Mon, 26 Jun 2023 15:02:48 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  ajones@ventanamicro.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v4 09/19] linux-headers: Update to v6.4-rc1
-Date: Mon, 26 Jun 2023 19:01:59 -0300
-Message-ID: <20230626220209.22142-10-dbarboza@ventanamicro.com>
+Subject: [PATCH v4 12/19] target/riscv: add KVM specific MISA properties
+Date: Mon, 26 Jun 2023 19:02:02 -0300
+Message-ID: <20230626220209.22142-13-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230626220209.22142-1-dbarboza@ventanamicro.com>
 References: <20230626220209.22142-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::2a;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x2a.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::33;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x33.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,474 +97,185 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Update to commit ac9a78681b92 ("Linux 6.4-rc1").
+Using all TCG user properties in KVM is tricky. First because KVM
+supports only a small subset of what TCG provides, so most of the
+cpu->cfg flags do nothing for KVM.
+
+Second, and more important, we don't have a way of telling if any given
+value is an user input or not. For TCG this has a small impact since we
+just validating everything and error out if needed. But for KVM it would
+be good to know if a given value was set by the user or if it's a value
+already provided by KVM. Otherwise we don't know how to handle failed
+kvm_set_one_regs() when writing the configurations back.
+
+These characteristics make it overly complicated to use the same user
+facing flags for both KVM and TCG. A simpler approach is to create KVM
+specific properties that have specialized logic, forking KVM and TCG use
+cases for those cases only. Fully separating KVM/TCG properties is
+unneeded at this point - in fact we want the user experience to be as
+equal as possible, regardless of the acceleration chosen.
+
+We'll start this fork with the MISA properties, adding the MISA bits
+that the KVM driver currently supports. A new KVMCPUConfig type is
+introduced. It'll hold general information about an extension. For MISA
+extensions we're going to use the newly created misa_ext_infos[] to
+populate their name and description. 'offset' holds the MISA bit (RVA,
+RVC, ...). We're calling it 'offset' instead of 'misa_bit' because this
+same KVMCPUConfig struct will be used to multi-letter extensions later
+on.
+
+This new type also holds a 'user_set' flag. This flag will be set when
+the user set an option that's different than what is already configured
+in the host, requiring KVM intervention to write the regs back during
+kvm_arch_init_vcpu(). Similar mechanics will be implemented for
+multi-letter extensions as well.
+
+There is no need to duplicate more code than necessary, so we're going
+to use the existing kvm_riscv_init_user_properties() to add the KVM
+specific properties. Any code that is adding a TCG user prop is then
+changed slightly to verify first if there's a KVM prop with the same
+name already added.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 ---
- include/standard-headers/linux/const.h        |  2 +-
- include/standard-headers/linux/virtio_blk.h   | 18 +++----
- .../standard-headers/linux/virtio_config.h    |  6 +++
- include/standard-headers/linux/virtio_net.h   |  1 +
- linux-headers/asm-arm64/kvm.h                 | 33 ++++++++++++
- linux-headers/asm-riscv/kvm.h                 | 53 ++++++++++++++++++-
- linux-headers/asm-riscv/unistd.h              |  9 ++++
- linux-headers/asm-s390/unistd_32.h            |  1 +
- linux-headers/asm-s390/unistd_64.h            |  1 +
- linux-headers/asm-x86/kvm.h                   |  3 ++
- linux-headers/linux/const.h                   |  2 +-
- linux-headers/linux/kvm.h                     | 12 +++--
- linux-headers/linux/psp-sev.h                 |  7 +++
- linux-headers/linux/userfaultfd.h             | 17 +++++-
- 14 files changed, 149 insertions(+), 16 deletions(-)
+ target/riscv/cpu.c | 10 ++++++
+ target/riscv/kvm.c | 78 ++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 88 insertions(+)
 
-diff --git a/include/standard-headers/linux/const.h b/include/standard-headers/linux/const.h
-index 5e48987251..1eb84b5087 100644
---- a/include/standard-headers/linux/const.h
-+++ b/include/standard-headers/linux/const.h
-@@ -28,7 +28,7 @@
- #define _BITUL(x)	(_UL(1) << (x))
- #define _BITULL(x)	(_ULL(1) << (x))
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 0e5d8b05a2..5a50cb1d0b 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1610,6 +1610,11 @@ static void riscv_cpu_add_misa_properties(Object *cpu_obj)
+     for (i = 0; i < ARRAY_SIZE(misa_ext_cfgs); i++) {
+         const RISCVCPUMisaExtConfig *misa_cfg = &misa_ext_cfgs[i];
  
--#define __ALIGN_KERNEL(x, a)		__ALIGN_KERNEL_MASK(x, (typeof(x))(a) - 1)
-+#define __ALIGN_KERNEL(x, a)		__ALIGN_KERNEL_MASK(x, (__typeof__(x))(a) - 1)
- #define __ALIGN_KERNEL_MASK(x, mask)	(((x) + (mask)) & ~(mask))
- 
- #define __KERNEL_DIV_ROUND_UP(n, d) (((n) + (d) - 1) / (d))
-diff --git a/include/standard-headers/linux/virtio_blk.h b/include/standard-headers/linux/virtio_blk.h
-index 7155b1a470..d7be3cf5e4 100644
---- a/include/standard-headers/linux/virtio_blk.h
-+++ b/include/standard-headers/linux/virtio_blk.h
-@@ -138,11 +138,11 @@ struct virtio_blk_config {
- 
- 	/* Zoned block device characteristics (if VIRTIO_BLK_F_ZONED) */
- 	struct virtio_blk_zoned_characteristics {
--		uint32_t zone_sectors;
--		uint32_t max_open_zones;
--		uint32_t max_active_zones;
--		uint32_t max_append_sectors;
--		uint32_t write_granularity;
-+		__virtio32 zone_sectors;
-+		__virtio32 max_open_zones;
-+		__virtio32 max_active_zones;
-+		__virtio32 max_append_sectors;
-+		__virtio32 write_granularity;
- 		uint8_t model;
- 		uint8_t unused2[3];
- 	} zoned;
-@@ -239,11 +239,11 @@ struct virtio_blk_outhdr {
-  */
- struct virtio_blk_zone_descriptor {
- 	/* Zone capacity */
--	uint64_t z_cap;
-+	__virtio64 z_cap;
- 	/* The starting sector of the zone */
--	uint64_t z_start;
-+	__virtio64 z_start;
- 	/* Zone write pointer position in sectors */
--	uint64_t z_wp;
-+	__virtio64 z_wp;
- 	/* Zone type */
- 	uint8_t z_type;
- 	/* Zone state */
-@@ -252,7 +252,7 @@ struct virtio_blk_zone_descriptor {
- };
- 
- struct virtio_blk_zone_report {
--	uint64_t nr_zones;
-+	__virtio64 nr_zones;
- 	uint8_t reserved[56];
- 	struct virtio_blk_zone_descriptor zones[];
- };
-diff --git a/include/standard-headers/linux/virtio_config.h b/include/standard-headers/linux/virtio_config.h
-index 965ee6ae23..8a7d0dc8b0 100644
---- a/include/standard-headers/linux/virtio_config.h
-+++ b/include/standard-headers/linux/virtio_config.h
-@@ -97,6 +97,12 @@
-  */
- #define VIRTIO_F_SR_IOV			37
- 
-+/*
-+ * This feature indicates that the driver passes extra data (besides
-+ * identifying the virtqueue) in its device notifications.
-+ */
-+#define VIRTIO_F_NOTIFICATION_DATA	38
++        /* Check if KVM didn't create the property already */
++        if (object_property_find(cpu_obj, misa_cfg->name)) {
++            continue;
++        }
 +
- /*
-  * This feature indicates that the driver can reset a queue individually.
-  */
-diff --git a/include/standard-headers/linux/virtio_net.h b/include/standard-headers/linux/virtio_net.h
-index c0e797067a..2325485f2c 100644
---- a/include/standard-headers/linux/virtio_net.h
-+++ b/include/standard-headers/linux/virtio_net.h
-@@ -61,6 +61,7 @@
- #define VIRTIO_NET_F_GUEST_USO6	55	/* Guest can handle USOv6 in. */
- #define VIRTIO_NET_F_HOST_USO	56	/* Host can handle USO in. */
- #define VIRTIO_NET_F_HASH_REPORT  57	/* Supports hash report */
-+#define VIRTIO_NET_F_GUEST_HDRLEN  59	/* Guest provides the exact hdr_len value. */
- #define VIRTIO_NET_F_RSS	  60	/* Supports RSS RX steering */
- #define VIRTIO_NET_F_RSC_EXT	  61	/* extended coalescing info */
- #define VIRTIO_NET_F_STANDBY	  62	/* Act as standby for another device
-diff --git a/linux-headers/asm-arm64/kvm.h b/linux-headers/asm-arm64/kvm.h
-index d7e7bb885e..38e5957526 100644
---- a/linux-headers/asm-arm64/kvm.h
-+++ b/linux-headers/asm-arm64/kvm.h
-@@ -198,6 +198,15 @@ struct kvm_arm_copy_mte_tags {
- 	__u64 reserved[2];
- };
+         object_property_add(cpu_obj, misa_cfg->name, "bool",
+                             cpu_get_misa_ext_cfg,
+                             cpu_set_misa_ext_cfg,
+@@ -1733,6 +1738,11 @@ static void riscv_cpu_add_user_properties(Object *obj)
+     riscv_cpu_add_misa_properties(obj);
  
-+/*
-+ * Counter/Timer offset structure. Describe the virtual/physical offset.
-+ * To be used with KVM_ARM_SET_COUNTER_OFFSET.
-+ */
-+struct kvm_arm_counter_offset {
-+	__u64 counter_offset;
-+	__u64 reserved;
+     for (prop = riscv_cpu_extensions; prop && prop->name; prop++) {
++        /* Check if KVM didn't create the property already */
++        if (object_property_find(obj, prop->name)) {
++            continue;
++        }
++
+         qdev_property_add_static(dev, prop);
+     }
+ 
+diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
+index 4d0808cb9a..fb5c5d4bfc 100644
+--- a/target/riscv/kvm.c
++++ b/target/riscv/kvm.c
+@@ -22,8 +22,10 @@
+ #include <linux/kvm.h>
+ 
+ #include "qemu/timer.h"
++#include "qapi/error.h"
+ #include "qemu/error-report.h"
+ #include "qemu/main-loop.h"
++#include "qapi/visitor.h"
+ #include "sysemu/sysemu.h"
+ #include "sysemu/kvm.h"
+ #include "sysemu/kvm_int.h"
+@@ -105,6 +107,81 @@ static uint64_t kvm_riscv_reg_id(CPURISCVState *env, uint64_t type,
+         } \
+     } while (0)
+ 
++typedef struct KVMCPUConfig {
++    const char *name;
++    const char *description;
++    target_ulong offset;
++    int kvm_reg_id;
++    bool user_set;
++} KVMCPUConfig;
++
++#define KVM_MISA_CFG(_bit, _reg_id) \
++    {.offset = _bit, .kvm_reg_id = _reg_id}
++
++/* KVM ISA extensions */
++static KVMCPUConfig kvm_misa_ext_cfgs[] = {
++    KVM_MISA_CFG(RVA, KVM_RISCV_ISA_EXT_A),
++    KVM_MISA_CFG(RVC, KVM_RISCV_ISA_EXT_C),
++    KVM_MISA_CFG(RVD, KVM_RISCV_ISA_EXT_D),
++    KVM_MISA_CFG(RVF, KVM_RISCV_ISA_EXT_F),
++    KVM_MISA_CFG(RVH, KVM_RISCV_ISA_EXT_H),
++    KVM_MISA_CFG(RVI, KVM_RISCV_ISA_EXT_I),
++    KVM_MISA_CFG(RVM, KVM_RISCV_ISA_EXT_M),
 +};
 +
- #define KVM_ARM_TAGS_TO_GUEST		0
- #define KVM_ARM_TAGS_FROM_GUEST		1
- 
-@@ -363,6 +372,10 @@ enum {
- 	KVM_REG_ARM_VENDOR_HYP_BIT_PTP		= 1,
- };
- 
-+/* Device Control API on vm fd */
-+#define KVM_ARM_VM_SMCCC_CTRL		0
-+#define   KVM_ARM_VM_SMCCC_FILTER	0
++static void kvm_cpu_set_misa_ext_cfg(Object *obj, Visitor *v,
++                                     const char *name,
++                                     void *opaque, Error **errp)
++{
++    KVMCPUConfig *misa_ext_cfg = opaque;
++    target_ulong misa_bit = misa_ext_cfg->offset;
++    RISCVCPU *cpu = RISCV_CPU(obj);
++    CPURISCVState *env = &cpu->env;
++    bool value, host_bit;
 +
- /* Device Control API: ARM VGIC */
- #define KVM_DEV_ARM_VGIC_GRP_ADDR	0
- #define KVM_DEV_ARM_VGIC_GRP_DIST_REGS	1
-@@ -402,6 +415,8 @@ enum {
- #define KVM_ARM_VCPU_TIMER_CTRL		1
- #define   KVM_ARM_VCPU_TIMER_IRQ_VTIMER		0
- #define   KVM_ARM_VCPU_TIMER_IRQ_PTIMER		1
-+#define   KVM_ARM_VCPU_TIMER_IRQ_HVTIMER	2
-+#define   KVM_ARM_VCPU_TIMER_IRQ_HPTIMER	3
- #define KVM_ARM_VCPU_PVTIME_CTRL	2
- #define   KVM_ARM_VCPU_PVTIME_IPA	0
- 
-@@ -458,6 +473,24 @@ enum {
- /* run->fail_entry.hardware_entry_failure_reason codes. */
- #define KVM_EXIT_FAIL_ENTRY_CPU_UNSUPPORTED	(1ULL << 0)
- 
-+enum kvm_smccc_filter_action {
-+	KVM_SMCCC_FILTER_HANDLE = 0,
-+	KVM_SMCCC_FILTER_DENY,
-+	KVM_SMCCC_FILTER_FWD_TO_USER,
++    if (!visit_type_bool(v, name, &value, errp)) {
++        return;
++    }
 +
-+};
++    host_bit = env->misa_ext_mask & misa_bit;
 +
-+struct kvm_smccc_filter {
-+	__u32 base;
-+	__u32 nr_functions;
-+	__u8 action;
-+	__u8 pad[15];
-+};
++    if (value == host_bit) {
++        return;
++    }
 +
-+/* arm64-specific KVM_EXIT_HYPERCALL flags */
-+#define KVM_HYPERCALL_EXIT_SMC		(1U << 0)
-+#define KVM_HYPERCALL_EXIT_16BIT	(1U << 1)
++    if (!value) {
++        misa_ext_cfg->user_set = true;
++        return;
++    }
 +
- #endif
- 
- #endif /* __ARM_KVM_H__ */
-diff --git a/linux-headers/asm-riscv/kvm.h b/linux-headers/asm-riscv/kvm.h
-index 92af6f3f05..f92790c948 100644
---- a/linux-headers/asm-riscv/kvm.h
-+++ b/linux-headers/asm-riscv/kvm.h
-@@ -12,6 +12,7 @@
- #ifndef __ASSEMBLY__
- 
- #include <linux/types.h>
-+#include <asm/bitsperlong.h>
- #include <asm/ptrace.h>
- 
- #define __KVM_HAVE_READONLY_MEM
-@@ -52,6 +53,7 @@ struct kvm_riscv_config {
- 	unsigned long mvendorid;
- 	unsigned long marchid;
- 	unsigned long mimpid;
-+	unsigned long zicboz_block_size;
- };
- 
- /* CORE registers for KVM_GET_ONE_REG and KVM_SET_ONE_REG */
-@@ -64,7 +66,7 @@ struct kvm_riscv_core {
- #define KVM_RISCV_MODE_S	1
- #define KVM_RISCV_MODE_U	0
- 
--/* CSR registers for KVM_GET_ONE_REG and KVM_SET_ONE_REG */
-+/* General CSR registers for KVM_GET_ONE_REG and KVM_SET_ONE_REG */
- struct kvm_riscv_csr {
- 	unsigned long sstatus;
- 	unsigned long sie;
-@@ -78,6 +80,17 @@ struct kvm_riscv_csr {
- 	unsigned long scounteren;
- };
- 
-+/* AIA CSR registers for KVM_GET_ONE_REG and KVM_SET_ONE_REG */
-+struct kvm_riscv_aia_csr {
-+	unsigned long siselect;
-+	unsigned long iprio1;
-+	unsigned long iprio2;
-+	unsigned long sieh;
-+	unsigned long siph;
-+	unsigned long iprio1h;
-+	unsigned long iprio2h;
-+};
++    /*
++     * Forbid users to enable extensions that aren't
++     * available in the hart.
++     */
++    error_setg(errp, "Enabling MISA bit '%s' is not allowed: it's not "
++               "enabled in the host", misa_ext_cfg->name);
++}
 +
- /* TIMER registers for KVM_GET_ONE_REG and KVM_SET_ONE_REG */
- struct kvm_riscv_timer {
- 	__u64 frequency;
-@@ -105,9 +118,29 @@ enum KVM_RISCV_ISA_EXT_ID {
- 	KVM_RISCV_ISA_EXT_SVINVAL,
- 	KVM_RISCV_ISA_EXT_ZIHINTPAUSE,
- 	KVM_RISCV_ISA_EXT_ZICBOM,
-+	KVM_RISCV_ISA_EXT_ZICBOZ,
-+	KVM_RISCV_ISA_EXT_ZBB,
-+	KVM_RISCV_ISA_EXT_SSAIA,
- 	KVM_RISCV_ISA_EXT_MAX,
- };
- 
-+/*
-+ * SBI extension IDs specific to KVM. This is not the same as the SBI
-+ * extension IDs defined by the RISC-V SBI specification.
-+ */
-+enum KVM_RISCV_SBI_EXT_ID {
-+	KVM_RISCV_SBI_EXT_V01 = 0,
-+	KVM_RISCV_SBI_EXT_TIME,
-+	KVM_RISCV_SBI_EXT_IPI,
-+	KVM_RISCV_SBI_EXT_RFENCE,
-+	KVM_RISCV_SBI_EXT_SRST,
-+	KVM_RISCV_SBI_EXT_HSM,
-+	KVM_RISCV_SBI_EXT_PMU,
-+	KVM_RISCV_SBI_EXT_EXPERIMENTAL,
-+	KVM_RISCV_SBI_EXT_VENDOR,
-+	KVM_RISCV_SBI_EXT_MAX,
-+};
++static void kvm_riscv_add_cpu_user_properties(Object *cpu_obj)
++{
++    int i;
 +
- /* Possible states for kvm_riscv_timer */
- #define KVM_RISCV_TIMER_STATE_OFF	0
- #define KVM_RISCV_TIMER_STATE_ON	1
-@@ -118,6 +151,8 @@ enum KVM_RISCV_ISA_EXT_ID {
- /* If you need to interpret the index values, here is the key: */
- #define KVM_REG_RISCV_TYPE_MASK		0x00000000FF000000
- #define KVM_REG_RISCV_TYPE_SHIFT	24
-+#define KVM_REG_RISCV_SUBTYPE_MASK	0x0000000000FF0000
-+#define KVM_REG_RISCV_SUBTYPE_SHIFT	16
- 
- /* Config registers are mapped as type 1 */
- #define KVM_REG_RISCV_CONFIG		(0x01 << KVM_REG_RISCV_TYPE_SHIFT)
-@@ -131,8 +166,12 @@ enum KVM_RISCV_ISA_EXT_ID {
- 
- /* Control and status registers are mapped as type 3 */
- #define KVM_REG_RISCV_CSR		(0x03 << KVM_REG_RISCV_TYPE_SHIFT)
-+#define KVM_REG_RISCV_CSR_GENERAL	(0x0 << KVM_REG_RISCV_SUBTYPE_SHIFT)
-+#define KVM_REG_RISCV_CSR_AIA		(0x1 << KVM_REG_RISCV_SUBTYPE_SHIFT)
- #define KVM_REG_RISCV_CSR_REG(name)	\
- 		(offsetof(struct kvm_riscv_csr, name) / sizeof(unsigned long))
-+#define KVM_REG_RISCV_CSR_AIA_REG(name)	\
-+	(offsetof(struct kvm_riscv_aia_csr, name) / sizeof(unsigned long))
- 
- /* Timer registers are mapped as type 4 */
- #define KVM_REG_RISCV_TIMER		(0x04 << KVM_REG_RISCV_TYPE_SHIFT)
-@@ -152,6 +191,18 @@ enum KVM_RISCV_ISA_EXT_ID {
- /* ISA Extension registers are mapped as type 7 */
- #define KVM_REG_RISCV_ISA_EXT		(0x07 << KVM_REG_RISCV_TYPE_SHIFT)
- 
-+/* SBI extension registers are mapped as type 8 */
-+#define KVM_REG_RISCV_SBI_EXT		(0x08 << KVM_REG_RISCV_TYPE_SHIFT)
-+#define KVM_REG_RISCV_SBI_SINGLE	(0x0 << KVM_REG_RISCV_SUBTYPE_SHIFT)
-+#define KVM_REG_RISCV_SBI_MULTI_EN	(0x1 << KVM_REG_RISCV_SUBTYPE_SHIFT)
-+#define KVM_REG_RISCV_SBI_MULTI_DIS	(0x2 << KVM_REG_RISCV_SUBTYPE_SHIFT)
-+#define KVM_REG_RISCV_SBI_MULTI_REG(__ext_id)	\
-+		((__ext_id) / __BITS_PER_LONG)
-+#define KVM_REG_RISCV_SBI_MULTI_MASK(__ext_id)	\
-+		(1UL << ((__ext_id) % __BITS_PER_LONG))
-+#define KVM_REG_RISCV_SBI_MULTI_REG_LAST	\
-+		KVM_REG_RISCV_SBI_MULTI_REG(KVM_RISCV_SBI_EXT_MAX - 1)
++    for (i = 0; i < ARRAY_SIZE(kvm_misa_ext_cfgs); i++) {
++        KVMCPUConfig *misa_cfg = &kvm_misa_ext_cfgs[i];
++        int bit = misa_cfg->offset;
 +
- #endif
- 
- #endif /* __LINUX_KVM_RISCV_H */
-diff --git a/linux-headers/asm-riscv/unistd.h b/linux-headers/asm-riscv/unistd.h
-index 73d7cdd2ec..950ab3fd44 100644
---- a/linux-headers/asm-riscv/unistd.h
-+++ b/linux-headers/asm-riscv/unistd.h
-@@ -43,3 +43,12 @@
- #define __NR_riscv_flush_icache (__NR_arch_specific_syscall + 15)
- #endif
- __SYSCALL(__NR_riscv_flush_icache, sys_riscv_flush_icache)
++        misa_cfg->name = misa_ext_info_arr[bit].name;
++        misa_cfg->description = misa_ext_info_arr[bit].description;
 +
-+/*
-+ * Allows userspace to query the kernel for CPU architecture and
-+ * microarchitecture details across a given set of CPUs.
-+ */
-+#ifndef __NR_riscv_hwprobe
-+#define __NR_riscv_hwprobe (__NR_arch_specific_syscall + 14)
-+#endif
-+__SYSCALL(__NR_riscv_hwprobe, sys_riscv_hwprobe)
-diff --git a/linux-headers/asm-s390/unistd_32.h b/linux-headers/asm-s390/unistd_32.h
-index 8e644d65f5..800f3adb20 100644
---- a/linux-headers/asm-s390/unistd_32.h
-+++ b/linux-headers/asm-s390/unistd_32.h
-@@ -419,6 +419,7 @@
- #define __NR_landlock_create_ruleset 444
- #define __NR_landlock_add_rule 445
- #define __NR_landlock_restrict_self 446
-+#define __NR_memfd_secret 447
- #define __NR_process_mrelease 448
- #define __NR_futex_waitv 449
- #define __NR_set_mempolicy_home_node 450
-diff --git a/linux-headers/asm-s390/unistd_64.h b/linux-headers/asm-s390/unistd_64.h
-index 51da542fec..399a605901 100644
---- a/linux-headers/asm-s390/unistd_64.h
-+++ b/linux-headers/asm-s390/unistd_64.h
-@@ -367,6 +367,7 @@
- #define __NR_landlock_create_ruleset 444
- #define __NR_landlock_add_rule 445
- #define __NR_landlock_restrict_self 446
-+#define __NR_memfd_secret 447
- #define __NR_process_mrelease 448
- #define __NR_futex_waitv 449
- #define __NR_set_mempolicy_home_node 450
-diff --git a/linux-headers/asm-x86/kvm.h b/linux-headers/asm-x86/kvm.h
-index 2937e7bf69..2b3a8f7bd2 100644
---- a/linux-headers/asm-x86/kvm.h
-+++ b/linux-headers/asm-x86/kvm.h
-@@ -557,4 +557,7 @@ struct kvm_pmu_event_filter {
- #define KVM_VCPU_TSC_CTRL 0 /* control group for the timestamp counter (TSC) */
- #define   KVM_VCPU_TSC_OFFSET 0 /* attribute for the TSC offset */
- 
-+/* x86-specific KVM_EXIT_HYPERCALL flags. */
-+#define KVM_EXIT_HYPERCALL_LONG_MODE	BIT(0)
++        object_property_add(cpu_obj, misa_cfg->name, "bool",
++                            NULL,
++                            kvm_cpu_set_misa_ext_cfg,
++                            NULL, misa_cfg);
++        object_property_set_description(cpu_obj, misa_cfg->name,
++                                        misa_cfg->description);
++    }
++}
 +
- #endif /* _ASM_X86_KVM_H */
-diff --git a/linux-headers/linux/const.h b/linux-headers/linux/const.h
-index 5e48987251..1eb84b5087 100644
---- a/linux-headers/linux/const.h
-+++ b/linux-headers/linux/const.h
-@@ -28,7 +28,7 @@
- #define _BITUL(x)	(_UL(1) << (x))
- #define _BITULL(x)	(_ULL(1) << (x))
+ static int kvm_riscv_get_regs_core(CPUState *cs)
+ {
+     int ret = 0;
+@@ -427,6 +504,7 @@ void kvm_riscv_init_user_properties(Object *cpu_obj)
+         return;
+     }
  
--#define __ALIGN_KERNEL(x, a)		__ALIGN_KERNEL_MASK(x, (typeof(x))(a) - 1)
-+#define __ALIGN_KERNEL(x, a)		__ALIGN_KERNEL_MASK(x, (__typeof__(x))(a) - 1)
- #define __ALIGN_KERNEL_MASK(x, mask)	(((x) + (mask)) & ~(mask))
++    kvm_riscv_add_cpu_user_properties(cpu_obj);
+     kvm_riscv_init_machine_ids(cpu, &kvmcpu);
+     kvm_riscv_init_misa_ext_mask(cpu, &kvmcpu);
  
- #define __KERNEL_DIV_ROUND_UP(n, d) (((n) + (d) - 1) / (d))
-diff --git a/linux-headers/linux/kvm.h b/linux-headers/linux/kvm.h
-index 599de3c6e3..65b145b317 100644
---- a/linux-headers/linux/kvm.h
-+++ b/linux-headers/linux/kvm.h
-@@ -341,8 +341,11 @@ struct kvm_run {
- 			__u64 nr;
- 			__u64 args[6];
- 			__u64 ret;
--			__u32 longmode;
--			__u32 pad;
-+
-+			union {
-+				__u32 longmode;
-+				__u64 flags;
-+			};
- 		} hypercall;
- 		/* KVM_EXIT_TPR_ACCESS */
- 		struct {
-@@ -1182,6 +1185,7 @@ struct kvm_ppc_resize_hpt {
- #define KVM_CAP_S390_PROTECTED_ASYNC_DISABLE 224
- #define KVM_CAP_DIRTY_LOG_RING_WITH_BITMAP 225
- #define KVM_CAP_PMU_EVENT_MASKED_EVENTS 226
-+#define KVM_CAP_COUNTER_OFFSET 227
- 
- #ifdef KVM_CAP_IRQ_ROUTING
- 
-@@ -1449,7 +1453,7 @@ struct kvm_vfio_spapr_tce {
- #define KVM_CREATE_VCPU           _IO(KVMIO,   0x41)
- #define KVM_GET_DIRTY_LOG         _IOW(KVMIO,  0x42, struct kvm_dirty_log)
- #define KVM_SET_NR_MMU_PAGES      _IO(KVMIO,   0x44)
--#define KVM_GET_NR_MMU_PAGES      _IO(KVMIO,   0x45)
-+#define KVM_GET_NR_MMU_PAGES      _IO(KVMIO,   0x45)  /* deprecated */
- #define KVM_SET_USER_MEMORY_REGION _IOW(KVMIO, 0x46, \
- 					struct kvm_userspace_memory_region)
- #define KVM_SET_TSS_ADDR          _IO(KVMIO,   0x47)
-@@ -1541,6 +1545,8 @@ struct kvm_s390_ucas_mapping {
- #define KVM_SET_PMU_EVENT_FILTER  _IOW(KVMIO,  0xb2, struct kvm_pmu_event_filter)
- #define KVM_PPC_SVM_OFF		  _IO(KVMIO,  0xb3)
- #define KVM_ARM_MTE_COPY_TAGS	  _IOR(KVMIO,  0xb4, struct kvm_arm_copy_mte_tags)
-+/* Available with KVM_CAP_COUNTER_OFFSET */
-+#define KVM_ARM_SET_COUNTER_OFFSET _IOW(KVMIO,  0xb5, struct kvm_arm_counter_offset)
- 
- /* ioctl for vm fd */
- #define KVM_CREATE_DEVICE	  _IOWR(KVMIO,  0xe0, struct kvm_create_device)
-diff --git a/linux-headers/linux/psp-sev.h b/linux-headers/linux/psp-sev.h
-index 51d8b3940e..12ccb70099 100644
---- a/linux-headers/linux/psp-sev.h
-+++ b/linux-headers/linux/psp-sev.h
-@@ -36,6 +36,13 @@ enum {
-  * SEV Firmware status code
-  */
- typedef enum {
-+	/*
-+	 * This error code is not in the SEV spec. Its purpose is to convey that
-+	 * there was an error that prevented the SEV firmware from being called.
-+	 * The SEV API error codes are 16 bits, so the -1 value will not overlap
-+	 * with possible values from the specification.
-+	 */
-+	SEV_RET_NO_FW_CALL = -1,
- 	SEV_RET_SUCCESS = 0,
- 	SEV_RET_INVALID_PLATFORM_STATE,
- 	SEV_RET_INVALID_GUEST_STATE,
-diff --git a/linux-headers/linux/userfaultfd.h b/linux-headers/linux/userfaultfd.h
-index ba5d0df52f..14e402263a 100644
---- a/linux-headers/linux/userfaultfd.h
-+++ b/linux-headers/linux/userfaultfd.h
-@@ -38,7 +38,8 @@
- 			   UFFD_FEATURE_MINOR_HUGETLBFS |	\
- 			   UFFD_FEATURE_MINOR_SHMEM |		\
- 			   UFFD_FEATURE_EXACT_ADDRESS |		\
--			   UFFD_FEATURE_WP_HUGETLBFS_SHMEM)
-+			   UFFD_FEATURE_WP_HUGETLBFS_SHMEM |	\
-+			   UFFD_FEATURE_WP_UNPOPULATED)
- #define UFFD_API_IOCTLS				\
- 	((__u64)1 << _UFFDIO_REGISTER |		\
- 	 (__u64)1 << _UFFDIO_UNREGISTER |	\
-@@ -203,6 +204,12 @@ struct uffdio_api {
- 	 *
- 	 * UFFD_FEATURE_WP_HUGETLBFS_SHMEM indicates that userfaultfd
- 	 * write-protection mode is supported on both shmem and hugetlbfs.
-+	 *
-+	 * UFFD_FEATURE_WP_UNPOPULATED indicates that userfaultfd
-+	 * write-protection mode will always apply to unpopulated pages
-+	 * (i.e. empty ptes).  This will be the default behavior for shmem
-+	 * & hugetlbfs, so this flag only affects anonymous memory behavior
-+	 * when userfault write-protection mode is registered.
- 	 */
- #define UFFD_FEATURE_PAGEFAULT_FLAG_WP		(1<<0)
- #define UFFD_FEATURE_EVENT_FORK			(1<<1)
-@@ -217,6 +224,7 @@ struct uffdio_api {
- #define UFFD_FEATURE_MINOR_SHMEM		(1<<10)
- #define UFFD_FEATURE_EXACT_ADDRESS		(1<<11)
- #define UFFD_FEATURE_WP_HUGETLBFS_SHMEM		(1<<12)
-+#define UFFD_FEATURE_WP_UNPOPULATED		(1<<13)
- 	__u64 features;
- 
- 	__u64 ioctls;
-@@ -297,6 +305,13 @@ struct uffdio_writeprotect {
- struct uffdio_continue {
- 	struct uffdio_range range;
- #define UFFDIO_CONTINUE_MODE_DONTWAKE		((__u64)1<<0)
-+	/*
-+	 * UFFDIO_CONTINUE_MODE_WP will map the page write protected on
-+	 * the fly.  UFFDIO_CONTINUE_MODE_WP is available only if the
-+	 * write protected ioctl is implemented for the range
-+	 * according to the uffdio_register.ioctls.
-+	 */
-+#define UFFDIO_CONTINUE_MODE_WP			((__u64)1<<1)
- 	__u64 mode;
- 
- 	/*
 -- 
 2.41.0
 
