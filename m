@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 956BEEB64D9
-	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Jun 2023 23:21:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25BFDEB64D7
+	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Jun 2023 23:21:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qDvVn-0004hQ-GD; Mon, 26 Jun 2023 19:20:47 -0400
+	id 1qDvWN-0005Yb-PF; Mon, 26 Jun 2023 19:21:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qDvVl-0004eI-Ob
- for qemu-riscv@nongnu.org; Mon, 26 Jun 2023 19:20:45 -0400
-Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qDvWM-0005VH-Px
+ for qemu-riscv@nongnu.org; Mon, 26 Jun 2023 19:21:22 -0400
+Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qDvVj-0008WK-JJ
- for qemu-riscv@nongnu.org; Mon, 26 Jun 2023 19:20:45 -0400
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-991b7a4d2e8so196939566b.1
- for <qemu-riscv@nongnu.org>; Mon, 26 Jun 2023 16:20:43 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qDvWL-0000HS-2S
+ for qemu-riscv@nongnu.org; Mon, 26 Jun 2023 19:21:22 -0400
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-991c786369cso188726666b.1
+ for <qemu-riscv@nongnu.org>; Mon, 26 Jun 2023 16:21:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1687821642; x=1690413642;
+ d=linaro.org; s=google; t=1687821680; x=1690413680;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zgOYNNSnoVwlQK/r9wkyHNyY/Yl022DGjtE43qf1HB0=;
- b=DMKuUklZ/aESEWoH5CgrsX3F4rcfgPe9IrSZaXQpG4FXUBKofvrH4/lsKzLPIfFfRs
- 7nbwF1DT5cAOKIYyBXdiUnCJakYNxQHosGP5Bbhwd4aByVwPZ9sOC8UJY2HefGetNAm/
- yeGWG0L77JyAiqFZTdkpvgZmkI7JwvAbDuVWJof39mkoX31p4f/J6aSIsXmY5AGDMAlX
- nnTW273WVHCawSNloNfyia29CXFP52v9mvjvSzzVhy2TyQtkzhT2t/nzj0sEr7oRnWaT
- W1KnOzRrJH8O0ovcnpNA89i9IsTpssqTBlQrQAgqpeZYPpFkxxw/bvBVTIJuFuKNajXk
- ePeA==
+ bh=umqULTLx7y1vximp4pWvumHBDvz4vkd4kJDrOMbD9Wk=;
+ b=yEcu+IfU0alH0+8hkzstPE+C+cuVpwD7s3T/uXezMF7Rf6PR2T/hYdL2e0o1VfLnCF
+ 3UJuafXWXccI0g6ZauwVfF5b0JrUtkUOZjqEtpwz+NHbm+OnIYZmv069IPgz6M8D5DGO
+ kP3a4OD7189IBFZHFYtBvO004id4+7HTgaaNmJAloe/z42hi+P1WgY251zsmVgVqOwYT
+ 2h+Kj3s+0ZWBJkjfO3vW4YxXaF/gYwSd4ccvwAq5uAXdsSrdfuggoZjbjw2HNXxrS0h5
+ LcypWegrCS6y3qLf9r9IcgG8fexqB2cqSgHk43RaqlLJej6A7lvbl13m1p+9lAVxqSaD
+ lqyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687821642; x=1690413642;
+ d=1e100.net; s=20221208; t=1687821680; x=1690413680;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zgOYNNSnoVwlQK/r9wkyHNyY/Yl022DGjtE43qf1HB0=;
- b=PG8rzvbV8/AblhgIAu1lBgu8YPSHtPn7ZX0gMRiwawIwa8Z9mbh8dHTZH3iw1cYnwe
- 96f3K2ZgfL0SpNk4Jg616u6lWVgH6lH6gGNTb9WGbLISMrTxyJRApLc9tI44KjwH5P4h
- 62fFCW5Pd3AkXDK7Fgd/hop2S+3VC7XfrnaTeIvzmaOEOqcietKLHJFOEIxBPUVm0Rw2
- L4Hv5A8EGz+zHtQ7KNkaasTckNkK4PxXFcozkPJZyMJuetlaT3b8WzdJ9DPzauentueQ
- M/1+hOhZdL4BfDcYDqmGGvEXPH01QUUkQoknSowhDIb2S4e0xj94GsQL/U02k3IU2XaQ
- vVLg==
-X-Gm-Message-State: AC+VfDyU++JwQ/3CabS2fzN5yjMAcY0GGwhk4/DmPAiHINkMXKPA7s2Y
- uW4aFGPVGT81NgadhZIJOu+c3w==
-X-Google-Smtp-Source: ACHHUZ7CCLSkPrh0C0sPMD+HAJJSGoX+OLIqD1OuKi9lCbnDlBTRL4w6eBQfPS8JQMQLhK+6LqaaIg==
-X-Received: by 2002:a17:906:fe03:b0:96f:b58e:7e21 with SMTP id
- wy3-20020a170906fe0300b0096fb58e7e21mr26173106ejb.52.1687821642178; 
- Mon, 26 Jun 2023 16:20:42 -0700 (PDT)
+ bh=umqULTLx7y1vximp4pWvumHBDvz4vkd4kJDrOMbD9Wk=;
+ b=Y01mP6I0/+pal9GJ87NUhhbRq3eeeQFxCtqltZLCUA7PlVskPwl4kj5RO0xPKrHdyi
+ H4/RJmrXlKIt29joYUv/ynxfG9kuQZX8kHUjbjpbVujFVw1vMYHgLaluI9CBzKP4tttG
+ VACYStrVkrto3HgxjaeWboY70rMJ/zCsPzvBiiOBf9CKjsn0tCAp3mQHnJbc8rAlKyG/
+ h6OSvPYmqAkapMOpCMcZJ1PbsuZQiot/L+btXYpvCqBt/Ud7LKP5kWN4Oows7VDghUAJ
+ qWppgXhMmZ+qB2d9nO1rhvSwJypWG9aj35cNGcqjgn/SGquwmCnwNi9xu81sWJceVRrK
+ X27Q==
+X-Gm-Message-State: AC+VfDyyR3iKkiM31NB1ivGWUY56cqnfz99wRmg+optcl0fREcBnD+dq
+ FbLQqhS4sNvpx7LKkcIktRPf7g==
+X-Google-Smtp-Source: ACHHUZ6bwSx30VCAYO4LjunmM912mg5E/tapZ9zXCKAGD0Vyklv9x+o0cOVj6I5yzDH6sTodzk9JxQ==
+X-Received: by 2002:a17:907:160d:b0:989:4776:11a1 with SMTP id
+ hb13-20020a170907160d00b00989477611a1mr16111532ejc.47.1687821679888; 
+ Mon, 26 Jun 2023 16:21:19 -0700 (PDT)
 Received: from m1x-phil.lan ([176.187.199.226])
  by smtp.gmail.com with ESMTPSA id
- gg18-20020a170906e29200b0098d2d219649sm3843858ejb.174.2023.06.26.16.20.40
+ o10-20020a17090637ca00b00992025654c2sm393546ejc.150.2023.06.26.16.21.18
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 26 Jun 2023 16:20:41 -0700 (PDT)
+ Mon, 26 Jun 2023 16:21:19 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>,
@@ -68,18 +68,18 @@ Cc: Bin Meng <bin.meng@windriver.com>,
  Wainer dos Santos Moschetta <wainersm@redhat.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org
-Subject: [PATCH 05/16] target/riscv: Move sysemu-specific files to
+Subject: [PATCH 11/16] target/riscv: Move sysemu-specific debug files to
  target/riscv/sysemu/
-Date: Tue, 27 Jun 2023 01:19:56 +0200
-Message-Id: <20230626232007.8933-6-philmd@linaro.org>
+Date: Tue, 27 Jun 2023 01:20:02 +0200
+Message-Id: <20230626232007.8933-12-philmd@linaro.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20230626232007.8933-1-philmd@linaro.org>
 References: <20230626232007.8933-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::632;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x632.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x62a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -102,233 +102,78 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Move sysemu-specific files to the a new 'sysemu' sub-directory,
-adapt meson rules.
-
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/riscv/cpu.h                         |  2 +-
- target/riscv/{ => sysemu}/instmap.h        |  0
- target/riscv/{ => sysemu}/kvm_riscv.h      |  0
- target/riscv/{ => sysemu}/pmp.h            |  0
- target/riscv/{ => sysemu}/pmu.h            |  0
- target/riscv/{ => sysemu}/time_helper.h    |  0
- hw/riscv/virt.c                            |  2 +-
- target/riscv/cpu.c                         |  6 +++---
- target/riscv/cpu_helper.c                  |  4 ++--
- target/riscv/csr.c                         |  4 ++--
- target/riscv/{ => sysemu}/arch_dump.c      |  0
- target/riscv/{ => sysemu}/kvm-stub.c       |  0
- target/riscv/{ => sysemu}/kvm.c            |  0
- target/riscv/{ => sysemu}/machine.c        |  0
- target/riscv/{ => sysemu}/monitor.c        |  0
- target/riscv/{ => sysemu}/pmp.c            |  0
- target/riscv/{ => sysemu}/pmu.c            |  0
- target/riscv/{ => sysemu}/riscv-qmp-cmds.c |  0
- target/riscv/{ => sysemu}/time_helper.c    |  0
- target/riscv/meson.build                   | 13 ++++---------
- target/riscv/sysemu/meson.build            | 12 ++++++++++++
- 21 files changed, 25 insertions(+), 18 deletions(-)
- rename target/riscv/{ => sysemu}/instmap.h (100%)
- rename target/riscv/{ => sysemu}/kvm_riscv.h (100%)
- rename target/riscv/{ => sysemu}/pmp.h (100%)
- rename target/riscv/{ => sysemu}/pmu.h (100%)
- rename target/riscv/{ => sysemu}/time_helper.h (100%)
- rename target/riscv/{ => sysemu}/arch_dump.c (100%)
- rename target/riscv/{ => sysemu}/kvm-stub.c (100%)
- rename target/riscv/{ => sysemu}/kvm.c (100%)
- rename target/riscv/{ => sysemu}/machine.c (100%)
- rename target/riscv/{ => sysemu}/monitor.c (100%)
- rename target/riscv/{ => sysemu}/pmp.c (100%)
- rename target/riscv/{ => sysemu}/pmu.c (100%)
- rename target/riscv/{ => sysemu}/riscv-qmp-cmds.c (100%)
- rename target/riscv/{ => sysemu}/time_helper.c (100%)
- create mode 100644 target/riscv/sysemu/meson.build
+ target/riscv/cpu.h                | 2 +-
+ target/riscv/{ => sysemu}/debug.h | 0
+ target/riscv/cpu_helper.c         | 2 +-
+ target/riscv/{ => sysemu}/debug.c | 0
+ target/riscv/meson.build          | 4 ----
+ target/riscv/sysemu/meson.build   | 1 +
+ 6 files changed, 3 insertions(+), 6 deletions(-)
+ rename target/riscv/{ => sysemu}/debug.h (100%)
+ rename target/riscv/{ => sysemu}/debug.c (100%)
 
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index b1b56aa29e..83a9a965d1 100644
+index 288df4c2b1..6908dc395c 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -88,7 +88,7 @@ typedef enum {
- #define MAX_RISCV_PMPS (16)
+@@ -89,7 +89,7 @@ typedef enum {
  
  #if !defined(CONFIG_USER_ONLY)
--#include "pmp.h"
-+#include "sysemu/pmp.h"
- #include "debug.h"
+ #include "sysemu/pmp.h"
+-#include "debug.h"
++#include "sysemu/debug.h"
  #endif
  
-diff --git a/target/riscv/instmap.h b/target/riscv/sysemu/instmap.h
+ #define RV_VLEN_MAX 1024
+diff --git a/target/riscv/debug.h b/target/riscv/sysemu/debug.h
 similarity index 100%
-rename from target/riscv/instmap.h
-rename to target/riscv/sysemu/instmap.h
-diff --git a/target/riscv/kvm_riscv.h b/target/riscv/sysemu/kvm_riscv.h
-similarity index 100%
-rename from target/riscv/kvm_riscv.h
-rename to target/riscv/sysemu/kvm_riscv.h
-diff --git a/target/riscv/pmp.h b/target/riscv/sysemu/pmp.h
-similarity index 100%
-rename from target/riscv/pmp.h
-rename to target/riscv/sysemu/pmp.h
-diff --git a/target/riscv/pmu.h b/target/riscv/sysemu/pmu.h
-similarity index 100%
-rename from target/riscv/pmu.h
-rename to target/riscv/sysemu/pmu.h
-diff --git a/target/riscv/time_helper.h b/target/riscv/sysemu/time_helper.h
-similarity index 100%
-rename from target/riscv/time_helper.h
-rename to target/riscv/sysemu/time_helper.h
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 95708d890e..11f9577004 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -30,7 +30,7 @@
- #include "hw/char/serial.h"
- #include "target/riscv/cpu.h"
- #include "hw/core/sysbus-fdt.h"
--#include "target/riscv/pmu.h"
-+#include "target/riscv/sysemu/pmu.h"
- #include "hw/riscv/riscv_hart.h"
- #include "hw/riscv/virt.h"
- #include "hw/riscv/boot.h"
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 7f281cdcf6..a1513bf5cc 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -24,10 +24,10 @@
- #include "cpu.h"
- #include "cpu_vendorid.h"
- #ifndef CONFIG_USER_ONLY
--#include "pmu.h"
--#include "time_helper.h"
-+#include "sysemu/pmu.h"
-+#include "sysemu/time_helper.h"
- #include "sysemu/kvm.h"
--#include "kvm_riscv.h"
-+#include "sysemu/kvm_riscv.h"
- #endif
- #include "internals.h"
- #include "exec/exec-all.h"
+rename from target/riscv/debug.h
+rename to target/riscv/sysemu/debug.h
 diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index d871718e5d..5ff48be561 100644
+index a1501fea76..88760248c0 100644
 --- a/target/riscv/cpu_helper.c
 +++ b/target/riscv/cpu_helper.c
-@@ -22,9 +22,9 @@
- #include "qemu/main-loop.h"
- #include "cpu.h"
- #include "internals.h"
--#include "pmu.h"
-+#include "sysemu/pmu.h"
- #include "exec/exec-all.h"
--#include "instmap.h"
-+#include "sysemu/instmap.h"
- #include "tcg/tcg-op.h"
- #include "trace.h"
- #include "semihosting/common-semi.h"
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 936ba2be24..788d169502 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -22,8 +22,8 @@
- #include "qemu/timer.h"
- #include "cpu.h"
- #ifndef CONFIG_USER_ONLY
--#include "pmu.h"
--#include "time_helper.h"
-+#include "sysemu/pmu.h"
-+#include "sysemu/time_helper.h"
+@@ -32,7 +32,7 @@
+ #include "sysemu/cpu-timers.h"
  #endif
- #include "qemu/main-loop.h"
- #include "exec/exec-all.h"
-diff --git a/target/riscv/arch_dump.c b/target/riscv/sysemu/arch_dump.c
+ #include "cpu_bits.h"
+-#include "debug.h"
++#include "sysemu/debug.h"
+ #include "tcg/oversized-guest.h"
+ 
+ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
+diff --git a/target/riscv/debug.c b/target/riscv/sysemu/debug.c
 similarity index 100%
-rename from target/riscv/arch_dump.c
-rename to target/riscv/sysemu/arch_dump.c
-diff --git a/target/riscv/kvm-stub.c b/target/riscv/sysemu/kvm-stub.c
-similarity index 100%
-rename from target/riscv/kvm-stub.c
-rename to target/riscv/sysemu/kvm-stub.c
-diff --git a/target/riscv/kvm.c b/target/riscv/sysemu/kvm.c
-similarity index 100%
-rename from target/riscv/kvm.c
-rename to target/riscv/sysemu/kvm.c
-diff --git a/target/riscv/machine.c b/target/riscv/sysemu/machine.c
-similarity index 100%
-rename from target/riscv/machine.c
-rename to target/riscv/sysemu/machine.c
-diff --git a/target/riscv/monitor.c b/target/riscv/sysemu/monitor.c
-similarity index 100%
-rename from target/riscv/monitor.c
-rename to target/riscv/sysemu/monitor.c
-diff --git a/target/riscv/pmp.c b/target/riscv/sysemu/pmp.c
-similarity index 100%
-rename from target/riscv/pmp.c
-rename to target/riscv/sysemu/pmp.c
-diff --git a/target/riscv/pmu.c b/target/riscv/sysemu/pmu.c
-similarity index 100%
-rename from target/riscv/pmu.c
-rename to target/riscv/sysemu/pmu.c
-diff --git a/target/riscv/riscv-qmp-cmds.c b/target/riscv/sysemu/riscv-qmp-cmds.c
-similarity index 100%
-rename from target/riscv/riscv-qmp-cmds.c
-rename to target/riscv/sysemu/riscv-qmp-cmds.c
-diff --git a/target/riscv/time_helper.c b/target/riscv/sysemu/time_helper.c
-similarity index 100%
-rename from target/riscv/time_helper.c
-rename to target/riscv/sysemu/time_helper.c
+rename from target/riscv/debug.c
+rename to target/riscv/sysemu/debug.c
 diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-index 7f56c5f88d..8967dfaded 100644
+index 8ef47f43f9..49cdcde679 100644
 --- a/target/riscv/meson.build
 +++ b/target/riscv/meson.build
-@@ -7,6 +7,8 @@ gen = [
- ]
- 
- riscv_ss = ss.source_set()
-+riscv_system_ss = ss.source_set()
-+
- riscv_ss.add(gen)
- riscv_ss.add(files(
-   'cpu.c',
-@@ -22,19 +24,12 @@ riscv_ss.add(files(
-   'crypto_helper.c',
-   'zce_helper.c'
- ))
--riscv_ss.add(when: 'CONFIG_KVM', if_true: files('kvm.c'), if_false: files('kvm-stub.c'))
- 
--riscv_system_ss = ss.source_set()
- riscv_system_ss.add(files(
--  'arch_dump.c',
--  'pmp.c',
-   'debug.c',
--  'monitor.c',
--  'machine.c',
--  'pmu.c',
--  'time_helper.c',
--  'riscv-qmp-cmds.c',
+@@ -8,10 +8,6 @@ riscv_ss.add(files(
+   'gdbstub.c',
  ))
  
-+subdir('sysemu')
-+
- target_arch += {'riscv': riscv_ss}
- target_softmmu_arch += {'riscv': riscv_system_ss}
+-riscv_system_ss.add(files(
+-  'debug.c',
+-))
+-
+ subdir('tcg')
+ subdir('sysemu')
+ 
 diff --git a/target/riscv/sysemu/meson.build b/target/riscv/sysemu/meson.build
-new file mode 100644
-index 0000000000..5f8e1edcf2
---- /dev/null
+index 5f8e1edcf2..33fec8f11e 100644
+--- a/target/riscv/sysemu/meson.build
 +++ b/target/riscv/sysemu/meson.build
-@@ -0,0 +1,12 @@
-+riscv_system_ss.add(files(
-+  'arch_dump.c',
-+  'machine.c',
-+  'monitor.c',
-+  'pmp.c',
-+  'pmu.c',
-+  'riscv-qmp-cmds.c',
-+  'time_helper.c',
-+))
-+
-+riscv_ss.add(when: 'CONFIG_KVM', if_true: files('kvm.c'),
-+                                 if_false: files('kvm-stub.c'))
+@@ -1,5 +1,6 @@
+ riscv_system_ss.add(files(
+   'arch_dump.c',
++  'debug.c',
+   'machine.c',
+   'monitor.c',
+   'pmp.c',
 -- 
 2.38.1
 
