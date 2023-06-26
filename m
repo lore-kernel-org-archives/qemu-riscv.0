@@ -4,80 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9798EEB64D7
-	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Jun 2023 06:25:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1DC2EB64DA
+	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Jun 2023 08:03:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qDffP-0001OH-1Z; Mon, 26 Jun 2023 02:25:39 -0400
+	id 1qDhBf-0003tm-6z; Mon, 26 Jun 2023 04:03:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qDffB-0001MI-Uv
- for qemu-riscv@nongnu.org; Mon, 26 Jun 2023 02:25:28 -0400
-Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1qDhBb-0003sH-06
+ for qemu-riscv@nongnu.org; Mon, 26 Jun 2023 04:02:59 -0400
+Received: from mail-il1-x134.google.com ([2607:f8b0:4864:20::134])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qDff9-0006C0-OM
- for qemu-riscv@nongnu.org; Mon, 26 Jun 2023 02:25:25 -0400
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-3fa7cd95dacso36267315e9.3
- for <qemu-riscv@nongnu.org>; Sun, 25 Jun 2023 23:24:50 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1qDhBV-0006Ss-UZ
+ for qemu-riscv@nongnu.org; Mon, 26 Jun 2023 04:02:56 -0400
+Received: by mail-il1-x134.google.com with SMTP id
+ e9e14a558f8ab-345ad94db0aso1450325ab.1
+ for <qemu-riscv@nongnu.org>; Mon, 26 Jun 2023 01:02:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1687760689; x=1690352689;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=4I16nClGNXeo1xcHlC0BCbMXVdeGsIW97j/CdTeGM1A=;
- b=Wz9IPZNivaIg4gi6VW/5hzotXrhoPcth9l7hVYplKxoAoS3o0w/SapcbuxFFLaffWi
- bwKMsumnNjdobZfPQySKAPUuCRZIfHYhCfsQNDjnChtWwdqz1VJ8XwWgD2Lk4CTe5nUu
- lL+Zm5sWhSDqUQmTC99qYrN1p34frgDORx/jrmvdJHo9uaMQeG+32BAl86lIIWg1YF0+
- YjksKJTjiEKQ1+Wuy73+MS5fmZjkRnZq7zq34r8hiD5THi1vsI0TPYNRPXD3Bp6PziK1
- vRrjQI3iHCSz/cDOmUiWPYuKR6fqC6MrzvAYA9/uWojiAKDpamFdywpYmZuA1H6ZPO8E
- L7bw==
+ d=sifive.com; s=google; t=1687766571; x=1690358571;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=MvkjMPRn1ycbgvwekgZMshuyjatEUBQBC8wNlNdbf0Y=;
+ b=FqEKi6aGTj/tPH6pE9A2yT2Z95ibvrQB2++8pEkDi9YEcGYSK0VE5LpS1z4unj9ke1
+ 1uYvjsSFDGMNYVwIo6x9RWXz/ssw7Ig1LphnkZNNP5ouz7braqD4ibOA61c8hKVnfnRA
+ UuCPgfCFxVtec2zcwb0TZxmK30dtEfv+pviNX63sfLDDkHqM4bOYinYgbHoT8j9cfg7A
+ ZS6cw0VuMAwjcgccnRRBQyJFp5GUct0ovrJool351+LdI1gWU8+NbCRIV6pyVqmuwLWb
+ 37cZazofhZjm4/3QICATc1Ry192XUC6JIUnpVPd+LOnfI/Qvgrgvq3i4LYo0lbvli0FJ
+ zIQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687760689; x=1690352689;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4I16nClGNXeo1xcHlC0BCbMXVdeGsIW97j/CdTeGM1A=;
- b=B047NbcXQHJEQoFZvVmGVLfxjpU80G87bFmVhsxqy0aF0GDZ4XSnTGqNQAKMqTfrOT
- Vi3B/+Re6EJ3n6bDiUscbcNQZGzp6/vKVhf+GMhxnfPbzMjyuav6EUcFhmRCr90hY+DT
- DyyiICxe788AAIBshElQ4l3/YXy+CExX35RD+7UFnAysNU43jj7dK5JB/OU5UX38DOQl
- Vk38yjdXdBZC7VkRax62+jLU9s5Y+/HFyx4qZV19o6GzlrQx6jM3TZHuBa4BsSNixq8M
- rfLoxQwNabi/G4c794Raf3LzTXkXpXk8KcLZximM3GilmNO6z0ME7WqcHwGKIXh2TRbg
- sqOQ==
-X-Gm-Message-State: AC+VfDzkJBmmxp5KtSFKExIp4glTRsDenITuDtv9aoAxioULpkflAiWd
- 7PY61VFOXBw9oXydStKpOUIxSg==
-X-Google-Smtp-Source: ACHHUZ48k1d/67M153307x9+3Wt+OYnopFIv086dk9YYYbEU2xkKCJDTX6BgwP0mnmdioO2Uj93l9g==
-X-Received: by 2002:a05:600c:2182:b0:3fa:79af:15c8 with SMTP id
- e2-20020a05600c218200b003fa79af15c8mr7000661wme.23.1687760688972; 
- Sun, 25 Jun 2023 23:24:48 -0700 (PDT)
-Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
- by smtp.gmail.com with ESMTPSA id
- j14-20020adfff8e000000b003112dbc3257sm6180715wrr.90.2023.06.25.23.24.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 25 Jun 2023 23:24:48 -0700 (PDT)
-Date: Mon, 26 Jun 2023 08:24:47 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
-Subject: Re: [PATCH v3 12/19] target/riscv: add KVM specific MISA properties
-Message-ID: <20230626-b5e6933676608436b6558fc4@orel>
-References: <20230622135700.105383-1-dbarboza@ventanamicro.com>
- <20230622135700.105383-13-dbarboza@ventanamicro.com>
+ d=1e100.net; s=20221208; t=1687766571; x=1690358571;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=MvkjMPRn1ycbgvwekgZMshuyjatEUBQBC8wNlNdbf0Y=;
+ b=a3aeuoKK8AZcn/zp9/hKhZ8e/kXxeS4VNoR4SbCfs18CfRyUY5zm7SxKZ48wx1McWk
+ pWO9fC5RtGyeU34bVgGeMuMPJkYcmWg1ElQq52wSFkJZ4dDi+V/Y9HhE6FYsuVAe93YK
+ TcTzL+i4XZsHKSigWkstmpWSnxfM9/lhIKfqNavPwEGEDQhKnOemVsqFo/4gi1cKoGUr
+ 42DDEojvRk8fH802iK1jEyIAbwX5tj0Y0CGEWo413HjxLkmzJbChD+9IFKwnXMgdkNwh
+ zS9iqlDsCVijXi84GFB/0HINF5M7nVSfjCeZ4VgiLTklbPCx5xBx+54FB+X+3HGy4NQL
+ AuTA==
+X-Gm-Message-State: AC+VfDwbs5XC3EnyN19X/UIsozrwF8jT59T3DVBMSRsm8EY48X+lpOUz
+ HHYixMpmKGSJR8wqo/ip2FLxRg==
+X-Google-Smtp-Source: ACHHUZ5udQtK28UzxHmB7VPIzpOziv0zxM+0VhiDTEXrrcPvboyGHBSGh+eLXrX0ZEQ5LpqTR/AuAA==
+X-Received: by 2002:a92:daca:0:b0:345:7c3a:e68 with SMTP id
+ o10-20020a92daca000000b003457c3a0e68mr4711475ilq.1.1687766571617; 
+ Mon, 26 Jun 2023 01:02:51 -0700 (PDT)
+Received: from [192.168.100.101] (59-124-168-89.hinet-ip.hinet.net.
+ [59.124.168.89]) by smtp.gmail.com with ESMTPSA id
+ v1-20020a634641000000b00548fb73874asm3475358pgk.37.2023.06.26.01.02.49
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 26 Jun 2023 01:02:51 -0700 (PDT)
+Message-ID: <0be48869-7df8-bb81-be01-eb0ac2e7428e@sifive.com>
+Date: Mon, 26 Jun 2023 16:02:48 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230622135700.105383-13-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
- envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x32b.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.12.0
+Subject: Re: [PATCH v4 10/17] target/riscv: Add Zvkned ISA extension support
+Content-Language: en-US
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: dbarboza@ventanamicro.com, Nazar Kazakov <nazar.kazakov@codethink.co.uk>, 
+ Lawrence Hunter <lawrence.hunter@codethink.co.uk>,
+ William Salmon <will.salmon@codethink.co.uk>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
+References: <20230622161646.32005-1-max.chou@sifive.com>
+ <20230622161646.32005-11-max.chou@sifive.com>
+ <323d7da1-3e66-bf22-42c1-1afa4df3aeb4@linaro.org>
+From: Max Chou <max.chou@sifive.com>
+In-Reply-To: <323d7da1-3e66-bf22-42c1-1afa4df3aeb4@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::134;
+ envelope-from=max.chou@sifive.com; helo=mail-il1-x134.google.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.089,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -95,53 +106,267 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jun 22, 2023 at 10:56:53AM -0300, Daniel Henrique Barboza wrote:
-> Using all TCG user properties in KVM is tricky. First because KVM
-> supports only a small subset of what TCG provides, so most of the
-> cpu->cfg flags do nothing for KVM.
-> 
-> Second, and more important, we don't have a way of telling if any given
-> value is an user input or not. For TCG this has a small impact since we
-> just validating everything and error out if needed. But for KVM it would
-> be good to know if a given value was set by the user or if it's a value
-> already provided by KVM. Otherwise we don't know how to handle failed
-> kvm_set_one_regs() when writing the configurations back.
-> 
-> These characteristics make it overly complicated to use the same user
-> facing flags for both KVM and TCG. A simpler approach is to create KVM
-> specific properties that have specialized logic, forking KVM and TCG use
-> cases for those cases only. Fully separating KVM/TCG properties is
-> unneeded at this point - in fact we want the user experience to be as
-> equal as possible, regardless of the acceleration chosen.
-> 
-> We'll start this fork with the MISA properties, adding the MISA bits
-> that the KVM driver currently supports. A new KVMCPUConfig type is
-> introduced. It'll hold general information about an extension. For MISA
-> extensions we're going to use the newly created misa_ext_infos[] to
-> populate their name and description. 'offset' holds the MISA bit (RVA,
-> RVC, ...). We're calling it 'offset' instead of 'misa_bit' because this
-> same KVMCPUConfig struct will be used to multi-letter extensions later
-> on.
-> 
-> This new type also holds a 'user_set' flag. This flag will be set when
-> the user set an option that's different than what is already configured
-> in the host, requiring KVM intervention to write the regs back during
-> kvm_arch_init_vcpu(). Similar mechanics will be implemented for
-> multi-letter extensions as well.
-> 
-> There is no need to duplicate more code than necessary, so we're going
-> to use the existing kvm_riscv_init_user_properties() to add the KVM
-> specific properties. Any code that is adding a TCG user prop is then
-> changed slightly to verify first if there's a KVM prop with the same
-> name already added.
-> 
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-> ---
->  target/riscv/cpu.c | 10 ++++++
->  target/riscv/kvm.c | 78 ++++++++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 88 insertions(+)
->
+On 2023/6/23 3:33 PM, Richard Henderson wrote:
 
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+> On 6/22/23 18:16, Max Chou wrote:
+>> --- a/target/riscv/vcrypto_helper.c
+>> +++ b/target/riscv/vcrypto_helper.c
+>> @@ -22,6 +22,7 @@
+>>   #include "qemu/bitops.h"
+>>   #include "qemu/bswap.h"
+>>   #include "cpu.h"
+>> +#include "crypto/aes.h"
+>>   #include "exec/memop.h"
+>>   #include "exec/exec-all.h"
+>>   #include "exec/helper-proto.h"
+>> @@ -195,3 +196,310 @@ RVVCALL(OPIVX2, vwsll_vx_w, WOP_UUU_W, H8, H4, 
+>> DO_SLL)
+>>   GEN_VEXT_VX(vwsll_vx_b, 2)
+>>   GEN_VEXT_VX(vwsll_vx_h, 4)
+>>   GEN_VEXT_VX(vwsll_vx_w, 8)
+>> +
+>> +static inline void aes_sub_bytes(uint8_t round_state[4][4])
+>> +{
+>> +    for (int j = 0; j < 16; j++) {
+>> +        round_state[j / 4][j % 4] = AES_sbox[round_state[j / 4][j % 
+>> 4]];
+>> +    }
+>> +}
+>> +
+>> +static inline void aes_shift_bytes(uint8_t round_state[4][4])
+>> +{
+>> +    uint8_t temp;
+>> +    temp = round_state[0][1];
+>> +    round_state[0][1] = round_state[1][1];
+>> +    round_state[1][1] = round_state[2][1];
+>> +    round_state[2][1] = round_state[3][1];
+>> +    round_state[3][1] = temp;
+>> +    temp = round_state[0][2];
+>> +    round_state[0][2] = round_state[2][2];
+>> +    round_state[2][2] = temp;
+>> +    temp = round_state[1][2];
+>> +    round_state[1][2] = round_state[3][2];
+>> +    round_state[3][2] = temp;
+>> +    temp = round_state[0][3];
+>> +    round_state[0][3] = round_state[3][3];
+>> +    round_state[3][3] = round_state[2][3];
+>> +    round_state[2][3] = round_state[1][3];
+>> +    round_state[1][3] = temp;
+>> +}
+>> +
+>> +static inline void xor_round_key(uint8_t round_state[4][4], uint8_t 
+>> *round_key)
+>> +{
+>> +    for (int j = 0; j < 16; j++) {
+>> +        round_state[j / 4][j % 4] = round_state[j / 4][j % 4] ^ 
+>> (round_key)[j];
+>> +    }
+>> +}
+>> +
+>> +static inline void aes_inv_sub_bytes(uint8_t round_state[4][4])
+>> +{
+>> +    for (int j = 0; j < 16; j++) {
+>> +        round_state[j / 4][j % 4] = AES_isbox[round_state[j / 4][j % 
+>> 4]];
+>> +    }
+>> +}
+>> +
+>> +static inline void aes_inv_shift_bytes(uint8_t round_state[4][4])
+>> +{
+>> +    uint8_t temp;
+>> +    temp = round_state[3][1];
+>> +    round_state[3][1] = round_state[2][1];
+>> +    round_state[2][1] = round_state[1][1];
+>> +    round_state[1][1] = round_state[0][1];
+>> +    round_state[0][1] = temp;
+>> +    temp = round_state[0][2];
+>> +    round_state[0][2] = round_state[2][2];
+>> +    round_state[2][2] = temp;
+>> +    temp = round_state[1][2];
+>> +    round_state[1][2] = round_state[3][2];
+>> +    round_state[3][2] = temp;
+>> +    temp = round_state[0][3];
+>> +    round_state[0][3] = round_state[1][3];
+>> +    round_state[1][3] = round_state[2][3];
+>> +    round_state[2][3] = round_state[3][3];
+>> +    round_state[3][3] = temp;
+>> +}
+>> +
+>> +static inline uint8_t xtime(uint8_t x)
+>> +{
+>> +    return (x << 1) ^ (((x >> 7) & 1) * 0x1b);
+>> +}
+>> +
+>> +static inline uint8_t multiply(uint8_t x, uint8_t y)
+>> +{
+>> +    return (((y & 1) * x) ^ ((y >> 1 & 1) * xtime(x)) ^
+>> +            ((y >> 2 & 1) * xtime(xtime(x))) ^
+>> +            ((y >> 3 & 1) * xtime(xtime(xtime(x)))) ^
+>> +            ((y >> 4 & 1) * xtime(xtime(xtime(xtime(x))))));
+>> +}
+>> +
+>> +static inline void aes_inv_mix_cols(uint8_t round_state[4][4])
+>> +{
+>> +    uint8_t a, b, c, d;
+>> +    for (int j = 0; j < 4; ++j) {
+>> +        a = round_state[j][0];
+>> +        b = round_state[j][1];
+>> +        c = round_state[j][2];
+>> +        d = round_state[j][3];
+>> +        round_state[j][0] = multiply(a, 0x0e) ^ multiply(b, 0x0b) ^
+>> +                            multiply(c, 0x0d) ^ multiply(d, 0x09);
+>> +        round_state[j][1] = multiply(a, 0x09) ^ multiply(b, 0x0e) ^
+>> +                            multiply(c, 0x0b) ^ multiply(d, 0x0d);
+>> +        round_state[j][2] = multiply(a, 0x0d) ^ multiply(b, 0x09) ^
+>> +                            multiply(c, 0x0e) ^ multiply(d, 0x0b);
+>> +        round_state[j][3] = multiply(a, 0x0b) ^ multiply(b, 0x0d) ^
+>> +                            multiply(c, 0x09) ^ multiply(d, 0x0e);
+>> +    }
+>> +}
+>> +
+>> +static inline void aes_mix_cols(uint8_t round_state[4][4])
+>> +{
+>> +    uint8_t a, b;
+>> +    for (int j = 0; j < 4; ++j) {
+>> +        a = round_state[j][0];
+>> +        b = round_state[j][0] ^ round_state[j][1] ^ round_state[j][2] ^
+>> +            round_state[j][3];
+>> +        round_state[j][0] ^= xtime(round_state[j][0] ^ 
+>> round_state[j][1]) ^ b;
+>> +        round_state[j][1] ^= xtime(round_state[j][1] ^ 
+>> round_state[j][2]) ^ b;
+>> +        round_state[j][2] ^= xtime(round_state[j][2] ^ 
+>> round_state[j][3]) ^ b;
+>> +        round_state[j][3] ^= xtime(round_state[j][3] ^ a) ^ b;
+>> +    }
+>> +}
+>> +
+>> +#define GEN_ZVKNED_HELPER_VV(NAME, 
+>> ...)                                   \
+>> +    void HELPER(NAME)(void *vd_vptr, void *vs2_vptr, CPURISCVState 
+>> *env,  \
+>> +                      uint32_t 
+>> desc)                                      \
+>> + { \
+>> +        uint64_t *vd = 
+>> vd_vptr;                                           \
+>> +        uint64_t *vs2 = 
+>> vs2_vptr;                                         \
+>> +        uint32_t vl = 
+>> env->vl;                                            \
+>> +        uint32_t total_elems = vext_get_total_elems(env, desc, 
+>> 4);        \
+>> +        uint32_t vta = 
+>> vext_vta(desc);                                    \
+>> + \
+>> +        for (uint32_t i = env->vstart / 4; i < env->vl / 4; i++) 
+>> {        \
+>> +            uint64_t round_key[2] = 
+>> {                                     \
+>> +                cpu_to_le64(vs2[i * 2 + 
+>> 0]),                              \
+>> +                cpu_to_le64(vs2[i * 2 + 
+>> 1]),                              \
+>> + };                                                            \
+>> +            uint8_t 
+>> round_state[4][4];                                    \
+>> +            cpu_to_le64s(vd + i * 2 + 
+>> 0);                                 \
+>> +            cpu_to_le64s(vd + i * 2 + 
+>> 1);                                 \
+>> +            for (int j = 0; j < 16; j++) 
+>> {                                \
+>> +                round_state[j / 4][j % 4] = ((uint8_t *)(vd + i * 
+>> 2))[j]; \
+>> + }                                                             \
+>> + __VA_ARGS__;                                                  \
+>> +            for (int j = 0; j < 16; j++) 
+>> {                                \
+>> +                ((uint8_t *)(vd + i * 2))[j] = round_state[j / 4][j 
+>> % 4]; \
+>> + }                                                             \
+>> +            le64_to_cpus(vd + i * 2 + 
+>> 0);                                 \
+>> +            le64_to_cpus(vd + i * 2 + 
+>> 1);                                 \
+>> + } \
+>> +        env->vstart = 
+>> 0;                                                  \
+>> +        /* set tail elements to 1s 
+>> */                                     \
+>> +        vext_set_elems_1s(vd, vta, vl * 4, total_elems * 
+>> 4);              \
+>> +    }
+>> +
+>> +#define GEN_ZVKNED_HELPER_VS(NAME, 
+>> ...)                                   \
+>> +    void HELPER(NAME)(void *vd_vptr, void *vs2_vptr, CPURISCVState 
+>> *env,  \
+>> +                      uint32_t 
+>> desc)                                      \
+>> + { \
+>> +        uint64_t *vd = 
+>> vd_vptr;                                           \
+>> +        uint64_t *vs2 = 
+>> vs2_vptr;                                         \
+>> +        uint32_t vl = 
+>> env->vl;                                            \
+>> +        uint32_t total_elems = vext_get_total_elems(env, desc, 
+>> 4);        \
+>> +        uint32_t vta = 
+>> vext_vta(desc);                                    \
+>> + \
+>> +        for (uint32_t i = env->vstart / 4; i < env->vl / 4; i++) 
+>> {        \
+>> +            uint64_t round_key[2] = 
+>> {                                     \
+>> + cpu_to_le64(vs2[0]),                                      \
+>> + cpu_to_le64(vs2[1]),                                      \
+>> + };                                                            \
+>> +            uint8_t 
+>> round_state[4][4];                                    \
+>> +            cpu_to_le64s(vd + i * 2 + 
+>> 0);                                 \
+>> +            cpu_to_le64s(vd + i * 2 + 
+>> 1);                                 \
+>> +            for (int j = 0; j < 16; j++) 
+>> {                                \
+>> +                round_state[j / 4][j % 4] = ((uint8_t *)(vd + i * 
+>> 2))[j]; \
+>> + }                                                             \
+>> + __VA_ARGS__;                                                  \
+>> +            for (int j = 0; j < 16; j++) 
+>> {                                \
+>> +                ((uint8_t *)(vd + i * 2))[j] = round_state[j / 4][j 
+>> % 4]; \
+>> + }                                                             \
+>> +            le64_to_cpus(vd + i * 2 + 
+>> 0);                                 \
+>> +            le64_to_cpus(vd + i * 2 + 
+>> 1);                                 \
+>> + } \
+>> +        env->vstart = 
+>> 0;                                                  \
+>> +        /* set tail elements to 1s 
+>> */                                     \
+>> +        vext_set_elems_1s(vd, vta, vl * 4, total_elems * 
+>> 4);              \
+>> +    }
+>
+> See
+>
+> https://lore.kernel.org/qemu-devel/20230620110758.787479-1-richard.henderson@linaro.org/ 
+>
+>
+> which should greatly simplify all of this.
+>
+>
+> r~
+Thanks a lot.
+
+I'll update the patch set for this.
+
+With regards,
+Max
+
 
