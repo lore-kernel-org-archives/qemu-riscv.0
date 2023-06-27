@@ -4,77 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52C94EB64DD
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Jun 2023 16:37:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BDA7EB64D9
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Jun 2023 17:19:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qEBcn-00044S-VP; Tue, 27 Jun 2023 12:33:05 -0400
+	id 1qECLR-0006T7-De; Tue, 27 Jun 2023 13:19:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qEBcj-0003si-3s
- for qemu-riscv@nongnu.org; Tue, 27 Jun 2023 12:33:03 -0400
-Received: from mail-oa1-x35.google.com ([2001:4860:4864:20::35])
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1qECLJ-0006QL-Tw
+ for qemu-riscv@nongnu.org; Tue, 27 Jun 2023 13:19:07 -0400
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qEBcg-0004wZ-KX
- for qemu-riscv@nongnu.org; Tue, 27 Jun 2023 12:33:00 -0400
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-1acdfbe1c78so4522801fac.2
- for <qemu-riscv@nongnu.org>; Tue, 27 Jun 2023 09:32:58 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1qECLD-0006gT-HR
+ for qemu-riscv@nongnu.org; Tue, 27 Jun 2023 13:19:01 -0400
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1b8033987baso607425ad.0
+ for <qemu-riscv@nongnu.org>; Tue, 27 Jun 2023 10:18:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1687883577; x=1690475577;
+ d=sifive.com; s=google; t=1687886338; x=1690478338;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=veNPdoP0KMiS6MurmQQ4EerCcRcND9mpTP9rXWTlN60=;
- b=nqaFwURHP0RMsKZIaZTcnSNdGKfFVXZlA0oejhgVcYARCmK7VeqblRkB12uLKuORDD
- vaBAnQGbs8mm7BbfIWj0zxUnNEhiz+b1PliyFZCJ7CymHx2T9s8KjbRpsZMAFE4ou6V4
- iW2ZFzEhZS2HoFD6v1uX11vYL/0Kmbn5/742rtjytARk3npEF08FfRUJoE/xJUlJz6Qw
- ZD8bBGGSrRA2nQRRytSy5fRMSvMfsUvolUoSw/gMz+BkXkM7yzqVe/2tv3dRs6rNRA1w
- E79Y4RII536YXUy8gQTGvj6YeF8mrZOoAMNbDJcX1y6qY2Bieg9XwqlQ/oo1eb0Xk0d7
- Bz6g==
+ bh=XwUJQhiAl4EVmU4h1QeBvtoql9shb+1W6JLFKowVkAg=;
+ b=ByLkIqczapgo0HOZ8EUCnZ3vSA72cc+6E8yGay885PHoj338H3RK20kubewaVouiZm
+ SjQe8P+2Pw2P6E0TQIS3ygk4qpL3i6VsZ7OM4eyIMvFwssQZqJe+KELGCj/ghnRC6+Yd
+ GFqiBcYg/jIByseIXRnQw5I0UCVH3Rv3CglgB3ifcXO/tSlcaPPpcEyHrAz6mAlqP1ki
+ ceXO7EYdTZNpHTl69uAF4r3Bqa4nW1d0nq0gzEZ4H4MNoQeH6ifFgFdMrUfRaY8fD7Cr
+ crFF36JrMlFi1BbJhvGl2RHW4XKmN6wQM7Z2mVhVWkb1GcFG01YwmnaTJTeGPVG2/k6S
+ oK5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687883577; x=1690475577;
+ d=1e100.net; s=20221208; t=1687886338; x=1690478338;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=veNPdoP0KMiS6MurmQQ4EerCcRcND9mpTP9rXWTlN60=;
- b=NfKpQR9k2cAXnJQjspBF3UX8qmBT5rJmvuBG6Vzk5QwdD3emCXWipeqKk+TypSMXpo
- 0U2oVKyD6vedl0f+VF0Pqfi3hrybL11fzrD6TTYR658EHSlrgucx2s4C0dVwGE4djWpJ
- x6gm43tu+Z6O4QoVGPZ0hUT1A0e3cOe3eeehV4WV2mSTl18Wmdyr8if2CDI6GNVge+To
- xNqPUSKfoz6FN3Hw31JGUQOADlKwoaK7HijnVr2cJSPfhHeVFL/r8n/jTIJ2NzSkJUJb
- fztyAMYq+mLOjkWebh2JRcnwI+JyPR9Ikl/jDBL3FC4ZfbHjGZhmLH5MRM09Fzb8m1Vy
- qT7g==
-X-Gm-Message-State: AC+VfDz/8a6B1l76RSIxiKTNZCZ5A2pKnzovPwbmJd8XUE+2NvhYZeWh
- XDNdhWl1IjoYnYSt+zv0sRGDeA==
-X-Google-Smtp-Source: ACHHUZ7NwK7kJ8P8zmsqs/fr3PaCxDSGTrYK3AjuTzfkgRZ77T9cSsU4BWw6sCsKY3wAsoG/bsrr8A==
-X-Received: by 2002:a05:6871:4685:b0:1a9:af29:46eb with SMTP id
- ni5-20020a056871468500b001a9af2946ebmr30460404oab.59.1687883577756; 
- Tue, 27 Jun 2023 09:32:57 -0700 (PDT)
-Received: from grind.. (201-69-66-110.dial-up.telesp.net.br. [201.69.66.110])
- by smtp.gmail.com with ESMTPSA id
- gu17-20020a056870ab1100b001a3093ec23fsm5254134oab.32.2023.06.27.09.32.55
+ bh=XwUJQhiAl4EVmU4h1QeBvtoql9shb+1W6JLFKowVkAg=;
+ b=NVIwxpO4EwOTYTkh2qeZk3EPktGiNp4wp5rjOCaya61eqi64uXTbNeSuOp5DHOMR+H
+ 7gnvEI41EK7IF0dv/OrBBAjLOoQxgkIqcIT7etx0ilasDXMmZADQmEldqWqqx3zftU6M
+ kgcBRmMBh+HtI0W3RV93weHVGQCJuk2s8EmPoswDcKgZLnYTRnvMjI5uH630wmoWt267
+ qamXayKrcBUvrxi76njzf0f/Otb6GjGehXqNNWpbgFalvIwfLXHNh0TtX2RqAsRnCD3y
+ EWhVdJ2foOvNLUfc2PMw+iXPmSmZzuoU859bIPkxyTUtfWyCWqiAKAptyg7tvzZO07VF
+ /J6w==
+X-Gm-Message-State: AC+VfDyR7jTczIBnbvqCovOS8JbEsMdIMoPNpNh0mJK8VT7ZRDKPI93r
+ dc0TajXJe4asuu/SKxVUOFu8Iw==
+X-Google-Smtp-Source: ACHHUZ64DaH9wIzT7/J2pKHopo+N070Re557jcr13hlaQ9tEm7Acm7aKkkIUGl0JTjH8giZsIiq6bw==
+X-Received: by 2002:a17:903:22c8:b0:1b6:99a1:177d with SMTP id
+ y8-20020a17090322c800b001b699a1177dmr12979064plg.31.1687886338176; 
+ Tue, 27 Jun 2023 10:18:58 -0700 (PDT)
+Received: from MaxdeMBP.localdomain (125-228-20-175.hinet-ip.hinet.net.
+ [125.228.20.175]) by smtp.gmail.com with ESMTPSA id
+ jb13-20020a170903258d00b001b8052d58a0sm3796145plb.305.2023.06.27.10.18.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Jun 2023 09:32:57 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v5 15/19] target/riscv/cpu.c: remove priv_ver check from
- riscv_isa_string_ext()
-Date: Tue, 27 Jun 2023 13:31:59 -0300
-Message-ID: <20230627163203.49422-16-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230627163203.49422-1-dbarboza@ventanamicro.com>
-References: <20230627163203.49422-1-dbarboza@ventanamicro.com>
+ Tue, 27 Jun 2023 10:18:57 -0700 (PDT)
+From: Max Chou <max.chou@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: dbarboza@ventanamicro.com,
+ Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liweiwei@iscas.ac.cn>, Max Chou <max.chou@sifive.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Frank Chang <frank.chang@sifive.com>
+Subject: [PATCH v5 02/15] target/riscv: Refactor vector-vector translation
+ macro
+Date: Wed, 28 Jun 2023 01:17:33 +0800
+Message-Id: <20230627171759.64653-3-max.chou@sifive.com>
+X-Mailer: git-send-email 2.39.2 (Apple Git-143)
+In-Reply-To: <20230627171759.64653-1-max.chou@sifive.com>
+References: <20230627171759.64653-1-max.chou@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::35;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x35.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=max.chou@sifive.com; helo=mail-pl1-x62b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,41 +102,97 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-riscv_isa_string_ext() is being used by riscv_isa_string(), which is
-then used by boards to retrieve the 'riscv,isa' string to be written in
-the FDT. All this happens after riscv_cpu_realize(), meaning that we're
-already past riscv_cpu_validate_set_extensions() and, more important,
-riscv_cpu_disable_priv_spec_isa_exts().
+From: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
 
-This means that all extensions that needed to be disabled due to
-priv_spec mismatch are already disabled. Checking this again during
-riscv_isa_string_ext() is unneeded. Remove it.
+Refactor the non SEW-specific stuff out of `GEN_OPIVV_TRANS` into
+function `opivv_trans` (similar to `opivi_trans`). `opivv_trans` will be
+used in proceeding vector-crypto commits.
 
-As a bonus, riscv_isa_string_ext() can now be used with the 'host'
-KVM-only CPU type since it doesn't have a env->priv_ver assigned and it
-would fail this check for no good reason.
-
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+Signed-off-by: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Max Chou <max.chou@sifive.com>
 ---
- target/riscv/cpu.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ target/riscv/insn_trans/trans_rvv.c.inc | 62 +++++++++++++------------
+ 1 file changed, 32 insertions(+), 30 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 5a50cb1d0b..b65db165cc 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -2001,8 +2001,7 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str,
-     int i;
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index c2f7527f53..4a8e62a8be 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -1643,38 +1643,40 @@ GEN_OPIWX_WIDEN_TRANS(vwadd_wx)
+ GEN_OPIWX_WIDEN_TRANS(vwsubu_wx)
+ GEN_OPIWX_WIDEN_TRANS(vwsub_wx)
  
-     for (i = 0; i < ARRAY_SIZE(isa_edata_arr); i++) {
--        if (cpu->env.priv_ver >= isa_edata_arr[i].min_version &&
--            isa_ext_is_enabled(cpu, &isa_edata_arr[i])) {
-+        if (isa_ext_is_enabled(cpu, &isa_edata_arr[i])) {
-             new = g_strconcat(old, "_", isa_edata_arr[i].name, NULL);
-             g_free(old);
-             old = new;
++static bool opivv_trans(uint32_t vd, uint32_t vs1, uint32_t vs2, uint32_t vm,
++                        gen_helper_gvec_4_ptr *fn, DisasContext *s)
++{
++    uint32_t data = 0;
++    TCGLabel *over = gen_new_label();
++    tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
++    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
++
++    data = FIELD_DP32(data, VDATA, VM, vm);
++    data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
++    data = FIELD_DP32(data, VDATA, VTA, s->vta);
++    data = FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);
++    data = FIELD_DP32(data, VDATA, VMA, s->vma);
++    tcg_gen_gvec_4_ptr(vreg_ofs(s, vd), vreg_ofs(s, 0), vreg_ofs(s, vs1),
++                       vreg_ofs(s, vs2), cpu_env, s->cfg_ptr->vlen / 8,
++                       s->cfg_ptr->vlen / 8, data, fn);
++    mark_vs_dirty(s);
++    gen_set_label(over);
++    return true;
++}
++
+ /* Vector Integer Add-with-Carry / Subtract-with-Borrow Instructions */
+ /* OPIVV without GVEC IR */
+-#define GEN_OPIVV_TRANS(NAME, CHECK)                               \
+-static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
+-{                                                                  \
+-    if (CHECK(s, a)) {                                             \
+-        uint32_t data = 0;                                         \
+-        static gen_helper_gvec_4_ptr * const fns[4] = {            \
+-            gen_helper_##NAME##_b, gen_helper_##NAME##_h,          \
+-            gen_helper_##NAME##_w, gen_helper_##NAME##_d,          \
+-        };                                                         \
+-        TCGLabel *over = gen_new_label();                          \
+-        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+-        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+-                                                                   \
+-        data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
+-        data = FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+-        data = FIELD_DP32(data, VDATA, VTA, s->vta);               \
+-        data =                                                     \
+-            FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);\
+-        data = FIELD_DP32(data, VDATA, VMA, s->vma);               \
+-        tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+-                           vreg_ofs(s, a->rs1),                    \
+-                           vreg_ofs(s, a->rs2), cpu_env,           \
+-                           s->cfg_ptr->vlen / 8,                   \
+-                           s->cfg_ptr->vlen / 8, data,             \
+-                           fns[s->sew]);                           \
+-        mark_vs_dirty(s);                                          \
+-        gen_set_label(over);                                       \
+-        return true;                                               \
+-    }                                                              \
+-    return false;                                                  \
++#define GEN_OPIVV_TRANS(NAME, CHECK)                                     \
++static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                   \
++{                                                                        \
++    if (CHECK(s, a)) {                                                   \
++        static gen_helper_gvec_4_ptr * const fns[4] = {                  \
++            gen_helper_##NAME##_b, gen_helper_##NAME##_h,                \
++            gen_helper_##NAME##_w, gen_helper_##NAME##_d,                \
++        };                                                               \
++        return opivv_trans(a->rd, a->rs1, a->rs2, a->vm, fns[s->sew], s);\
++    }                                                                    \
++    return false;                                                        \
+ }
+ 
+ /*
 -- 
-2.41.0
+2.31.1
 
 
