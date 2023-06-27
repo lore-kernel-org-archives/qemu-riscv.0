@@ -4,82 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B74DEEB64D9
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Jun 2023 14:13:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD7DEEB64D9
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Jun 2023 14:14:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qE9Qv-0007Pv-55; Tue, 27 Jun 2023 10:12:41 -0400
+	id 1qE9Sp-0001rK-A0; Tue, 27 Jun 2023 10:14:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <tommy.wu@sifive.com>)
- id 1qE9Qs-0007P3-OX
- for qemu-riscv@nongnu.org; Tue, 27 Jun 2023 10:12:39 -0400
-Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
+ id 1qE9Sm-0001q8-Ob
+ for qemu-riscv@nongnu.org; Tue, 27 Jun 2023 10:14:36 -0400
+Received: from mail-ua1-x929.google.com ([2607:f8b0:4864:20::929])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <tommy.wu@sifive.com>)
- id 1qE9Qf-0007Qw-6J
- for qemu-riscv@nongnu.org; Tue, 27 Jun 2023 10:12:28 -0400
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-1b80b514fb7so12211435ad.0
- for <qemu-riscv@nongnu.org>; Tue, 27 Jun 2023 07:12:24 -0700 (PDT)
+ id 1qE9Sk-0007sX-O1
+ for qemu-riscv@nongnu.org; Tue, 27 Jun 2023 10:14:36 -0400
+Received: by mail-ua1-x929.google.com with SMTP id
+ a1e0cc1a2514c-78cdb90aa66so1420206241.3
+ for <qemu-riscv@nongnu.org>; Tue, 27 Jun 2023 07:14:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1687875144; x=1690467144;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VvYbAC6J9pF0VD1T2uOv/EsfLGica+Emefc47gOAID0=;
- b=ZXPkr4xer0dVbFHqBXWazELZ2nPtJPggfBhr+HiXo4nOhvt07llpT9wwy4NtU0nTby
- bkQqqY5OO74dT3gO0B+EPoJjZjRBJrqGUyaqM5X8Fxw5iCe7eCiKvMb3KLYh3gD9aMYs
- XfEc4frRTSYBW1gLrfXQm5wLd7vUE9ZLPrZagGR/PZdO62NRTMyTHoF6a0neDtcJZ21Y
- CHNQXtBQ5VrIL+zEJS6xmA03Z4WKo0Xd+FNuI7I13WLlnQwU42yGr3U3g7albJzy9qRn
- 58CsOQDLstCrbBpGG4eEMYjAj09zJ2jbeDH6+0UmS+VmU7eShE7zWL/by35inLvT+fAB
- X2Ow==
+ d=sifive.com; s=google; t=1687875273; x=1690467273;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=TGn1co+5gjEkoV6mjWMcrEZWQMIJS6X7hIs85QmOjtA=;
+ b=mrkOxV2AmZF4IXzSYUSrRJA8tBc0OfWId4wP7DUAIbP+YJrc6lUAAwSWf9Yz9zL2Op
+ GX6kXrVJX8w/b2EobvcqayypxCGpCHnFMDfGDUSm+j7cOJaA5WmDKDxtDGriIQC1b1F3
+ Lap1S8In133dpRSt/Om6+6A1quDauYEw13qoY2UJF5XFBseXiKoOOeFsWPBAbKz2urKI
+ LQwflmQrDJM852i2mvQUJETN59wpRnF06/sCUYasZWzPVQu/FXYsRJGYVcQxMWbKKfEx
+ wl/KiTXvoEesM9JdR49PoN8hOdYx8+qaa2ci1DVI3XbIRmK8344gbpSma1Ix9NTazpEI
+ ypjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687875144; x=1690467144;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VvYbAC6J9pF0VD1T2uOv/EsfLGica+Emefc47gOAID0=;
- b=D2mhBOQI7YHPB1IwX4rmWNYVh0uKkJeQHRm9Cd4n33tKo+YzLQ37eqY3Fdf8SqmnnL
- 9rgGK68qiyFH5w6uIUmn2KvUo6H3rrVazqQPKHUW/U1cdPrzm48QHWEn4sAsgGV74sZ6
- LjuEsu32WWMBPMLid20r3pZUWihDalWErtzSeT7C841YEhKiIml5Ygp8uDmP6fu1RBtA
- 90ipBioa5tkjzde9nqe9SMgC9Rs8CujXDJuIrddaYV9B9PufpNSJ3vw4KDnNbhcQ1PwV
- d+0dlXF/x92xwdCIDtfZbTUqYJZUDkXFHIcNp+4nH711thkifZUi4CDN19xFz28DGHUo
- bmBg==
-X-Gm-Message-State: AC+VfDzvaO8rS55Diu9Ia8AXW58Bj+Fzwxq8JgwBOFYFmiWkN2ARy/3O
- c1ludNQFuLFxCUMfbdCsIBo9OA==
-X-Google-Smtp-Source: ACHHUZ78hqdVI9tFYYn3m9O49+1rIjV5Y4GFdhPuyFWEwqFlW0lUXyydVJOtOWlr62QcaKV10vj6Rg==
-X-Received: by 2002:a17:903:248:b0:1b6:9cb9:bb55 with SMTP id
- j8-20020a170903024800b001b69cb9bb55mr7332265plh.42.1687875143778; 
- Tue, 27 Jun 2023 07:12:23 -0700 (PDT)
-Received: from sw05.internal.sifive.com ([64.62.193.194])
- by smtp.gmail.com with ESMTPSA id
- e16-20020a17090301d000b001b69303db65sm6080441plh.26.2023.06.27.07.12.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Jun 2023 07:12:23 -0700 (PDT)
-From: Tommy Wu <tommy.wu@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: alistair.francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
- jim.shu@sifive.com, frank.chang@sifive.com, liweiwei@iscas.ac.cn,
- philmd@linaro.org, Tommy Wu <tommy.wu@sifive.com>
-Subject: [PATCH v6 2/3] hw/riscv: sifive_e: Support the watchdog timer of
- HiFive 1 rev b.
-Date: Tue, 27 Jun 2023 07:12:15 -0700
-Message-Id: <20230627141216.3962299-3-tommy.wu@sifive.com>
-X-Mailer: git-send-email 2.38.1
-In-Reply-To: <20230627141216.3962299-1-tommy.wu@sifive.com>
-References: <20230627141216.3962299-1-tommy.wu@sifive.com>
+ d=1e100.net; s=20221208; t=1687875273; x=1690467273;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TGn1co+5gjEkoV6mjWMcrEZWQMIJS6X7hIs85QmOjtA=;
+ b=XY/I9dmpZmvvomqG/64todVkW9v/mgYxsTllwv+vl8mFfV+EULChtuvG6cG4eNn7+H
+ 0Ae20lsffeg0/BtF3ncM17RU+kcxa4UHLdrpGXYFJdtPyqWv4Mds4J8ab80i9DApqM1L
+ IqsGvNaYz8q+OR6YDVLvVY4CNzvzUKxOCo3xDXTOid+uyiAtogwhQePbd7VrqHP7TP88
+ 9/Df1bGfZYS0AmligFzm3MT0J7qTM4GOLXE9lPLY6UykWsH0tUlOchmBuvGbi6D+S7dm
+ 5GDXz+oRfIUZqPsEkEkQCkafxcCVAsq984X5UupmYEOcJjb2ZgsBbQVAHOiZVHeqsVl5
+ TXyw==
+X-Gm-Message-State: AC+VfDx0kPsqM6PhGYeSSRMGo3Um44Yg5kBfq1DXualoDUkVmZPl93Wh
+ nlmiXlDaHu6IxgOt9st78kBIDWNx0kbw9kMVFjZ+1g==
+X-Google-Smtp-Source: ACHHUZ7vQMzAf3z8bECThlKKqGxP0qHxuMp5HQ+qz7GnUIXSUCdZQ87fsOilQ7DmPdHOKCiwyIq3xQsCAVb4GZz3DVs=
+X-Received: by 2002:a67:cd97:0:b0:443:6052:43ae with SMTP id
+ r23-20020a67cd97000000b00443605243aemr3733691vsl.24.1687875273374; Tue, 27
+ Jun 2023 07:14:33 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
- envelope-from=tommy.wu@sifive.com; helo=mail-pl1-x635.google.com
+References: <20230608164542.3675619-1-tommy.wu@sifive.com>
+ <CAKmqyKMKB2c+cfYFdPCwcst10hO7Zn7juB+u5ScV2gBTw=cjbg@mail.gmail.com>
+In-Reply-To: <CAKmqyKMKB2c+cfYFdPCwcst10hO7Zn7juB+u5ScV2gBTw=cjbg@mail.gmail.com>
+From: Tommy Wu <tommy.wu@sifive.com>
+Date: Tue, 27 Jun 2023 22:14:26 +0800
+Message-ID: <CANj3q_mvkoGv2UQLdUHw9YLDVEn5_EwWx-=r1ouJqm52XGPRHg@mail.gmail.com>
+Subject: Re: [PATCH v5 0/3] Implement the watchdog timer of HiFive 1 rev b.
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ palmer@dabbelt.com, bin.meng@windriver.com, jim.shu@sifive.com, 
+ frank.chang@sifive.com, liweiwei@iscas.ac.cn, philmd@linaro.org
+Content-Type: multipart/alternative; boundary="00000000000018522105ff1d16cb"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::929;
+ envelope-from=tommy.wu@sifive.com; helo=mail-ua1-x929.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -97,117 +89,178 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Create the AON device when we realize the sifive_e machine.
-This patch only implemented the functionality of the watchdog timer,
-not all the functionality of the AON device.
+--00000000000018522105ff1d16cb
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Tommy Wu <tommy.wu@sifive.com>
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- hw/riscv/Kconfig            |  1 +
- hw/riscv/sifive_e.c         | 17 +++++++++++++++--
- include/hw/riscv/sifive_e.h |  9 ++++++---
- 3 files changed, 22 insertions(+), 5 deletions(-)
+Hi Alistair,
+Thanks for the suggestion! I've rebased and sent patch v6.
 
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index 6528ebfa3a..b6a5eb4452 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -60,6 +60,7 @@ config SIFIVE_E
-     select SIFIVE_PLIC
-     select SIFIVE_UART
-     select SIFIVE_E_PRCI
-+    select SIFIVE_E_AON
-     select UNIMP
- 
- config SIFIVE_U
-diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-index 04939b60c3..0d37adc542 100644
---- a/hw/riscv/sifive_e.c
-+++ b/hw/riscv/sifive_e.c
-@@ -45,6 +45,7 @@
- #include "hw/intc/riscv_aclint.h"
- #include "hw/intc/sifive_plic.h"
- #include "hw/misc/sifive_e_prci.h"
-+#include "hw/misc/sifive_e_aon.h"
- #include "chardev/char.h"
- #include "sysemu/sysemu.h"
- 
-@@ -185,6 +186,8 @@ static void sifive_e_soc_init(Object *obj)
-     object_property_set_int(OBJECT(&s->cpus), "resetvec", 0x1004, &error_abort);
-     object_initialize_child(obj, "riscv.sifive.e.gpio0", &s->gpio,
-                             TYPE_SIFIVE_GPIO);
-+    object_initialize_child(obj, "riscv.sifive.e.aon", &s->aon,
-+                            TYPE_SIFIVE_E_AON);
- }
- 
- static void sifive_e_soc_realize(DeviceState *dev, Error **errp)
-@@ -223,10 +226,17 @@ static void sifive_e_soc_realize(DeviceState *dev, Error **errp)
-         RISCV_ACLINT_DEFAULT_MTIMER_SIZE, 0, ms->smp.cpus,
-         RISCV_ACLINT_DEFAULT_MTIMECMP, RISCV_ACLINT_DEFAULT_MTIME,
-         RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ, false);
--    create_unimplemented_device("riscv.sifive.e.aon",
--        memmap[SIFIVE_E_DEV_AON].base, memmap[SIFIVE_E_DEV_AON].size);
-     sifive_e_prci_create(memmap[SIFIVE_E_DEV_PRCI].base);
- 
-+    /* AON */
-+
-+    if (!sysbus_realize(SYS_BUS_DEVICE(&s->aon), errp)) {
-+        return;
-+    }
-+
-+    /* Map AON registers */
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->aon), 0, memmap[SIFIVE_E_DEV_AON].base);
-+
-     /* GPIO */
- 
-     if (!sysbus_realize(SYS_BUS_DEVICE(&s->gpio), errp)) {
-@@ -245,6 +255,9 @@ static void sifive_e_soc_realize(DeviceState *dev, Error **errp)
-                            qdev_get_gpio_in(DEVICE(s->plic),
-                                             SIFIVE_E_GPIO0_IRQ0 + i));
-     }
-+    sysbus_connect_irq(SYS_BUS_DEVICE(&s->aon), 0,
-+                       qdev_get_gpio_in(DEVICE(s->plic),
-+                                        SIFIVE_E_AON_WDT_IRQ));
- 
-     sifive_uart_create(sys_mem, memmap[SIFIVE_E_DEV_UART0].base,
-         serial_hd(0), qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_E_UART0_IRQ));
-diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
-index b824a79e2d..31180a680e 100644
---- a/include/hw/riscv/sifive_e.h
-+++ b/include/hw/riscv/sifive_e.h
-@@ -22,6 +22,7 @@
- #include "hw/riscv/riscv_hart.h"
- #include "hw/riscv/sifive_cpu.h"
- #include "hw/gpio/sifive_gpio.h"
-+#include "hw/misc/sifive_e_aon.h"
- #include "hw/boards.h"
- 
- #define TYPE_RISCV_E_SOC "riscv.sifive.e.soc"
-@@ -35,6 +36,7 @@ typedef struct SiFiveESoCState {
-     /*< public >*/
-     RISCVHartArrayState cpus;
-     DeviceState *plic;
-+    SiFiveEAONState aon;
-     SIFIVEGPIOState gpio;
-     MemoryRegion xip_mem;
-     MemoryRegion mask_rom;
-@@ -76,9 +78,10 @@ enum {
- };
- 
- enum {
--    SIFIVE_E_UART0_IRQ  = 3,
--    SIFIVE_E_UART1_IRQ  = 4,
--    SIFIVE_E_GPIO0_IRQ0 = 8
-+    SIFIVE_E_AON_WDT_IRQ  = 1,
-+    SIFIVE_E_UART0_IRQ    = 3,
-+    SIFIVE_E_UART1_IRQ    = 4,
-+    SIFIVE_E_GPIO0_IRQ0   = 8
- };
- 
- #define SIFIVE_E_PLIC_HART_CONFIG "M"
--- 
-2.31.1
+Best Regards,
+Tommy
 
+On Thu, Jun 22, 2023 at 10:10=E2=80=AFAM Alistair Francis <alistair23@gmail=
+.com>
+wrote:
+
+> On Fri, Jun 9, 2023 at 2:46=E2=80=AFAM Tommy Wu <tommy.wu@sifive.com> wro=
+te:
+> >
+> > The HiFive 1 rev b includes a watchdog module based on a 32-bit
+> > counter. The watchdog timer is in the always-on domain device of
+> > HiFive 1 rev b, so this patch added the AON device to the sifive_e
+> > machine. This patch only implemented the functionality of the
+> > watchdog timer, not all the functionality of the AON device.
+> >
+> > You can test the patchset by the QTest
+> tests/qtest/sifive-e-aon-watchdog-test.c
+> >
+> > Changes since v1 ( Thank Alistair for the feedback ):
+> > - Use the register field macro.
+> > - Delete the public create function. The board creates the aon device
+> itself.
+> > - Keep all variable declarations at the top of the code block.
+> >
+> > Changes since v2 ( Thank Alistair for the feedback ):
+> > - Delete the declaration and definition of the create function.
+> >
+> > Changes since v3 ( Thank Alistair and Thomas for the feedback ):
+> > - Use `device_class_set_props()` for the properties in sifive_e_aon
+> device.
+> > - Add SPDX identifier in QTEST.
+> > - Use libqtest.h in QTEST.
+> > - Let the statements on one line as long as they still fit into 80
+> columns.
+> >
+> > Changes since v4 ( Thank Phil for the feedback ):
+> > - Improve code style consistency.
+> > - Move the timer create function to the sifive_e_aon_init.
+> > - Allocate the sifive_e_aon device state in the SoC.
+> >
+> > Tommy Wu (3):
+> >   hw/misc: sifive_e_aon: Support the watchdog timer of HiFive 1 rev b.
+> >   hw/riscv: sifive_e: Support the watchdog timer of HiFive 1 rev b.
+> >   tests/qtest: sifive-e-aon-watchdog-test.c: Add QTest of watchdog of
+> >     sifive_e
+>
+> Do you mind rebasing this on
+> https://github.com/alistair23/qemu/tree/riscv-to-apply.next ? Then I
+> will apply it
+>
+> Alistair
+>
+> >
+> >  hw/misc/Kconfig                          |   3 +
+> >  hw/misc/meson.build                      |   1 +
+> >  hw/misc/sifive_e_aon.c                   | 319 ++++++++++++++++
+> >  hw/riscv/Kconfig                         |   1 +
+> >  hw/riscv/sifive_e.c                      |  17 +-
+> >  include/hw/misc/sifive_e_aon.h           |  60 +++
+> >  include/hw/riscv/sifive_e.h              |   9 +-
+> >  tests/qtest/meson.build                  |   3 +
+> >  tests/qtest/sifive-e-aon-watchdog-test.c | 450 +++++++++++++++++++++++
+> >  9 files changed, 858 insertions(+), 5 deletions(-)
+> >  create mode 100644 hw/misc/sifive_e_aon.c
+> >  create mode 100644 include/hw/misc/sifive_e_aon.h
+> >  create mode 100644 tests/qtest/sifive-e-aon-watchdog-test.c
+> >
+> > --
+> > 2.27.0
+> >
+> >
+>
+
+--00000000000018522105ff1d16cb
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi=C2=A0Alistair,<br>Thanks for the suggestion! I&#39;ve r=
+ebased and sent patch v6.<br><br><div>Best Regards,</div><div>Tommy</div></=
+div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On=
+ Thu, Jun 22, 2023 at 10:10=E2=80=AFAM Alistair Francis &lt;<a href=3D"mail=
+to:alistair23@gmail.com">alistair23@gmail.com</a>&gt; wrote:<br></div><bloc=
+kquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:=
+1px solid rgb(204,204,204);padding-left:1ex">On Fri, Jun 9, 2023 at 2:46=E2=
+=80=AFAM Tommy Wu &lt;<a href=3D"mailto:tommy.wu@sifive.com" target=3D"_bla=
+nk">tommy.wu@sifive.com</a>&gt; wrote:<br>
+&gt;<br>
+&gt; The HiFive 1 rev b includes a watchdog module based on a 32-bit<br>
+&gt; counter. The watchdog timer is in the always-on domain device of<br>
+&gt; HiFive 1 rev b, so this patch added the AON device to the sifive_e<br>
+&gt; machine. This patch only implemented the functionality of the<br>
+&gt; watchdog timer, not all the functionality of the AON device.<br>
+&gt;<br>
+&gt; You can test the patchset by the QTest tests/qtest/sifive-e-aon-watchd=
+og-test.c<br>
+&gt;<br>
+&gt; Changes since v1 ( Thank Alistair for the feedback ):<br>
+&gt; - Use the register field macro.<br>
+&gt; - Delete the public create function. The board creates the aon device =
+itself.<br>
+&gt; - Keep all variable declarations at the top of the code block.<br>
+&gt;<br>
+&gt; Changes since v2 ( Thank Alistair for the feedback ):<br>
+&gt; - Delete the declaration and definition of the create function.<br>
+&gt;<br>
+&gt; Changes since v3 ( Thank Alistair and Thomas for the feedback ):<br>
+&gt; - Use `device_class_set_props()` for the properties in sifive_e_aon de=
+vice.<br>
+&gt; - Add SPDX identifier in QTEST.<br>
+&gt; - Use libqtest.h in QTEST.<br>
+&gt; - Let the statements on one line as long as they still fit into 80 col=
+umns.<br>
+&gt;<br>
+&gt; Changes since v4 ( Thank Phil for the feedback ):<br>
+&gt; - Improve code style consistency.<br>
+&gt; - Move the timer create function to the sifive_e_aon_init.<br>
+&gt; - Allocate the sifive_e_aon device state in the SoC.<br>
+&gt;<br>
+&gt; Tommy Wu (3):<br>
+&gt;=C2=A0 =C2=A0hw/misc: sifive_e_aon: Support the watchdog timer of HiFiv=
+e 1 rev b.<br>
+&gt;=C2=A0 =C2=A0hw/riscv: sifive_e: Support the watchdog timer of HiFive 1=
+ rev b.<br>
+&gt;=C2=A0 =C2=A0tests/qtest: sifive-e-aon-watchdog-test.c: Add QTest of wa=
+tchdog of<br>
+&gt;=C2=A0 =C2=A0 =C2=A0sifive_e<br>
+<br>
+Do you mind rebasing this on<br>
+<a href=3D"https://github.com/alistair23/qemu/tree/riscv-to-apply.next" rel=
+=3D"noreferrer" target=3D"_blank">https://github.com/alistair23/qemu/tree/r=
+iscv-to-apply.next</a> ? Then I<br>
+will apply it<br>
+<br>
+Alistair<br>
+<br>
+&gt;<br>
+&gt;=C2=A0 hw/misc/Kconfig=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A03 +<br>
+&gt;=C2=A0 hw/misc/meson.build=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A01 +<br>
+&gt;=C2=A0 hw/misc/sifive_e_aon.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0| 319 ++++++++++++++++<br>
+&gt;=C2=A0 hw/riscv/Kconfig=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A01 +<br>
+&gt;=C2=A0 hw/riscv/sifive_e.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 17 +-<br>
+&gt;=C2=A0 include/hw/misc/sifive_e_aon.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0|=C2=A0 60 +++<br>
+&gt;=C2=A0 include/hw/riscv/sifive_e.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 |=C2=A0 =C2=A09 +-<br>
+&gt;=C2=A0 tests/qtest/meson.build=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A03 +<br>
+&gt;=C2=A0 tests/qtest/sifive-e-aon-watchdog-test.c | 450 +++++++++++++++++=
+++++++<br>
+&gt;=C2=A0 9 files changed, 858 insertions(+), 5 deletions(-)<br>
+&gt;=C2=A0 create mode 100644 hw/misc/sifive_e_aon.c<br>
+&gt;=C2=A0 create mode 100644 include/hw/misc/sifive_e_aon.h<br>
+&gt;=C2=A0 create mode 100644 tests/qtest/sifive-e-aon-watchdog-test.c<br>
+&gt;<br>
+&gt; --<br>
+&gt; 2.27.0<br>
+&gt;<br>
+&gt;<br>
+</blockquote></div>
+
+--00000000000018522105ff1d16cb--
 
