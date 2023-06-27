@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD98AEB64DD
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Jun 2023 16:32:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C17DEB64D9
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Jun 2023 16:33:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qEBc7-0003WT-QE; Tue, 27 Jun 2023 12:32:23 -0400
+	id 1qEBc3-0003Uy-Vl; Tue, 27 Jun 2023 12:32:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qEBc6-0003WD-WE
- for qemu-riscv@nongnu.org; Tue, 27 Jun 2023 12:32:23 -0400
-Received: from mail-oa1-x2b.google.com ([2001:4860:4864:20::2b])
+ id 1qEBc2-0003Th-5E
+ for qemu-riscv@nongnu.org; Tue, 27 Jun 2023 12:32:18 -0400
+Received: from mail-oa1-x2e.google.com ([2001:4860:4864:20::2e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qEBc5-0004nH-9Q
- for qemu-riscv@nongnu.org; Tue, 27 Jun 2023 12:32:22 -0400
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-1b055511f8bso15829fac.1
- for <qemu-riscv@nongnu.org>; Tue, 27 Jun 2023 09:32:20 -0700 (PDT)
+ id 1qEBbz-0004lZ-1Z
+ for qemu-riscv@nongnu.org; Tue, 27 Jun 2023 12:32:16 -0400
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-1b06c978946so402602fac.0
+ for <qemu-riscv@nongnu.org>; Tue, 27 Jun 2023 09:32:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1687883540; x=1690475540;
+ d=ventanamicro.com; s=google; t=1687883534; x=1690475534;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9gwOO78O4XTM3BGF4an3EOt2RG84iLZdasioodl4gL8=;
- b=JzkNTRO/jDQmUvFfeutVvWZ5fGqJNnPuI0oKaa6jRZqjtpxNHzhBRhrdsKBUuf0e3G
- m1w+sf7yNbn9jF8jVsJPfjJNlffvhZ+pYTbYjd69hJ1r/z/6Qn4fuTRUV4aOk9QszxbL
- Nfc2c53XT1VcRfR4/L1XkGpN67FdCNYe0DqbkzRvI2eiY1Ikfby3NgDYmGmXOjcmBsrw
- +4dVe4cl7EV2quXc9nmZDHcMeNV5yGMfm5yUQLwZrWU00h+f01BG3R4ezmprudnTd6OU
- 8iUGJw2yoFZJdiYBg2IKjD8YzxqYkZMeFlvqCOJYVMtP0BM/t+D6NYj/deUU3Q2DbMli
- sPiw==
+ bh=eYM0A7uhWQTD7Fcgtx52OKl1AAN477E4boZNXUg2Gdg=;
+ b=dvreN359J3aaZr7Ksm6tIgAWf6ITUFd70jmQIhuByoRW2Ox3orSbZfSfJhVWeV6WEG
+ 43n4DAyBhWoRAhKGtJNgxhOW8aHUWWE1+8wm1mX9cA5/dAZuGy0Xe6qX1auI6KoHF2N4
+ yyPfBss14nctudATrMSWOeNaCPD6RV/Xq3x3XWMtHBtZxdU0BOSHwoNt09847a/BRDhP
+ LV+mv8NY05HBNcUM5WBA4lNxpxQcz/vyrh1D0lWStHq3yizWdi4wRTeDQKZxKWkgYl2/
+ GAJrEeXakFkug38awecmgcMysfawAYCKsuHIb7opugczISBV1w011iF2HGKfkVZnqWR9
+ 4Bfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687883540; x=1690475540;
+ d=1e100.net; s=20221208; t=1687883534; x=1690475534;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9gwOO78O4XTM3BGF4an3EOt2RG84iLZdasioodl4gL8=;
- b=e/nc0VaoXMPQqUqRYPwa2v9No+xWRsU4iP61+wuNsNb5WunN5OXIlaLYlVrT1ryEAI
- YAsNM6oPAuratz0rsziIM5pkzzcOIYKVF0DxXwbOqI0ou/+FDPp35mDZNgOjMxKdyBBR
- HAkWcWpUba2NlNphuxR4YbaunmG8ZFo5EK2SFVE3IcfZUuKYu4Jnt4iX+Ylpz7E67KTP
- ct4Nfraj1T5ledxA9k5DNda7Nhu/olmEA7XWNbTCTCEhlHl38CsxZDa2Re53lL1Ab2ep
- 6y91bPuNaT39m/anBecYw8bdsdNHYCH8FkNHZ6P4qGVfJ0EnbfFUQNJTzF8DzNUIVzCP
- dafg==
-X-Gm-Message-State: AC+VfDygNHWvMDrSnPsAAWeBluK7N+CR5zPD2tZ28PRBXH6Z0J1HQ4Ko
- EFaLiHiHJQs0A6F2SX5QVG1r7g==
-X-Google-Smtp-Source: ACHHUZ5cb9jE+dVWFSa++E7+VvrzXJ31UrwKtF3StnkNOyGrM1YGWD0fW5VGyjjm4r4AXi5cVFZ5RA==
-X-Received: by 2002:a05:6870:3a06:b0:1b0:35a6:5ac6 with SMTP id
- du6-20020a0568703a0600b001b035a65ac6mr4088862oab.17.1687883540244; 
- Tue, 27 Jun 2023 09:32:20 -0700 (PDT)
+ bh=eYM0A7uhWQTD7Fcgtx52OKl1AAN477E4boZNXUg2Gdg=;
+ b=Ey1RO+NVAw472nwQWpD0dWCBt5VFmLpxbjUUPw+7qyZ460e3+e2hPYJxJOyEhRWFsV
+ nLIPDj9qr9sk7jxtKjFtbxSgHl46jY95u/1Q+57h/0a6dektx8yaM4tGKgxrDiMwUdKk
+ ebWhIxcXFSV8bjm2m3N6u20AWUMz2FzYZMNxjLA9X/6AcBZqfTq4oMpTVRql2928NJA9
+ NyWwQLlMaAXlNSUVcStEJlzBWDBLyvTukdUHgeq7CnmS01WoHZIt4PVhwC9awEh4idMa
+ EhQIJLgHF3DOuzpSaSqmQtvkLhJAR9eW+kEC2077pC3Ks5MqEfU2Q4yOFR5ZzxDNoJTu
+ Uljg==
+X-Gm-Message-State: AC+VfDx11zQS9RHpmgizefkbjJkxSrGJMYxOXtqZU+HZe4bEzMLmx/0K
+ +SNlHY0xFZFQYo4WPob7DTc8wQ==
+X-Google-Smtp-Source: ACHHUZ6qJireGY4ZkLx0ENrSstUca8TuTjQmz0IdTo357citMDHYGv5r6KpY8lzP5Fd3ksp9AkSSfA==
+X-Received: by 2002:a05:6870:4155:b0:1a2:8e53:c418 with SMTP id
+ r21-20020a056870415500b001a28e53c418mr28098404oad.57.1687883533706; 
+ Tue, 27 Jun 2023 09:32:13 -0700 (PDT)
 Received: from grind.. (201-69-66-110.dial-up.telesp.net.br. [201.69.66.110])
  by smtp.gmail.com with ESMTPSA id
- gu17-20020a056870ab1100b001a3093ec23fsm5254134oab.32.2023.06.27.09.32.17
+ gu17-20020a056870ab1100b001a3093ec23fsm5254134oab.32.2023.06.27.09.32.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Jun 2023 09:32:19 -0700 (PDT)
+ Tue, 27 Jun 2023 09:32:13 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  ajones@ventanamicro.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v5 03/19] target/riscv/cpu.c: restrict 'mvendorid' value
-Date: Tue, 27 Jun 2023 13:31:47 -0300
-Message-ID: <20230627163203.49422-4-dbarboza@ventanamicro.com>
+Subject: [PATCH v5 01/19] target/riscv: skip features setup for KVM CPUs
+Date: Tue, 27 Jun 2023 13:31:45 -0300
+Message-ID: <20230627163203.49422-2-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230627163203.49422-1-dbarboza@ventanamicro.com>
 References: <20230627163203.49422-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::2b;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x2b.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::2e;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x2e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,95 +96,127 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We're going to change the handling of mvendorid/marchid/mimpid by the
-KVM driver. Since these are always present in all CPUs let's put the
-same validation for everyone.
+As it is today it's not possible to use '-cpu host' if the RISC-V host
+has RVH enabled. This is the resulting error:
 
-It doesn't make sense to allow 'mvendorid' to be different than it
-is already set in named (vendor) CPUs. Generic (dynamic) CPUs can have
-any 'mvendorid' they want.
+$ sudo ./qemu/build/qemu-system-riscv64 \
+    -machine virt,accel=kvm -m 2G -smp 1 \
+    -nographic -snapshot -kernel ./guest_imgs/Image  \
+    -initrd ./guest_imgs/rootfs_kvm_riscv64.img \
+    -append "earlycon=sbi root=/dev/ram rw" \
+    -cpu host
+qemu-system-riscv64: H extension requires priv spec 1.12.0
 
-Change 'mvendorid' to be a class property created via
-'object_class_property_add', instead of using the DEFINE_PROP_UINT32()
-macro. This allow us to define a custom setter for it that will verify,
-for named CPUs, if mvendorid is different than it is already set by the
-CPU. This is the error thrown for the 'veyron-v1' CPU if 'mvendorid' is
-set to an invalid value:
+This happens because we're checking for priv spec for all CPUs, and
+since we're not setting  env->priv_ver for the 'host' CPU, it's being
+default to zero (i.e. PRIV_SPEC_1_10_0).
 
-$ qemu-system-riscv64 -M virt -nographic -cpu veyron-v1,mvendorid=2
-qemu-system-riscv64: can't apply global veyron-v1-riscv-cpu.mvendorid=2:
-    Unable to change veyron-v1-riscv-cpu mvendorid (0x61f)
+In reality env->priv_ver does not make sense when running with the KVM
+'host' CPU. It's used to gate certain CSRs/extensions during translation
+to make them unavailable if the hart declares an older spec version. It
+doesn't have any other use. E.g. OpenSBI version 1.2 retrieves the spec
+checking if the CSR_MCOUNTEREN, CSR_MCOUNTINHIBIT and CSR_MENVCFG CSRs
+are available [1].
+
+'priv_ver' is just one example. We're doing a lot of feature validation
+and setup during riscv_cpu_realize() that it doesn't apply KVM CPUs.
+Validating the feature set for those CPUs is a KVM problem that should
+be handled in KVM specific code.
+
+The new riscv_cpu_realize_features() helper contains all validation
+logic that are not applicable to KVM CPUs. riscv_cpu_realize() verifies
+if we're dealing with a KVM CPU and, if not, execute the new helper to
+proceed with the usual realize() logic for all other CPUs.
+
+[1] lib/sbi/sbi_hart.c, hart_detect_features()
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 ---
- target/riscv/cpu.c | 38 +++++++++++++++++++++++++++++++++++++-
- 1 file changed, 37 insertions(+), 1 deletion(-)
+ target/riscv/cpu.c | 43 +++++++++++++++++++++++++++++++++----------
+ 1 file changed, 33 insertions(+), 10 deletions(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index e515dde208..b65958a887 100644
+index fb8458bf74..e515dde208 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -1738,7 +1738,6 @@ static void riscv_cpu_add_user_properties(Object *obj)
- static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
+@@ -331,6 +331,15 @@ static void set_satp_mode_default_map(RISCVCPU *cpu)
+ }
+ #endif
  
--    DEFINE_PROP_UINT32("mvendorid", RISCVCPU, cfg.mvendorid, 0),
-     DEFINE_PROP_UINT64("marchid", RISCVCPU, cfg.marchid, RISCV_CPU_MARCHID),
-     DEFINE_PROP_UINT64("mimpid", RISCVCPU, cfg.mimpid, RISCV_CPU_MIMPID),
- 
-@@ -1825,6 +1824,40 @@ static const struct TCGCPUOps riscv_tcg_ops = {
- #endif /* !CONFIG_USER_ONLY */
- };
- 
-+static bool riscv_cpu_is_dynamic(Object *cpu_obj)
++static bool riscv_running_kvm(void)
 +{
-+    return object_dynamic_cast(cpu_obj, TYPE_RISCV_DYNAMIC_CPU) != NULL;
++#ifndef CONFIG_USER_ONLY
++    return kvm_enabled();
++#else
++    return false;
++#endif
 +}
 +
-+static void cpu_set_mvendorid(Object *obj, Visitor *v, const char *name,
-+                              void *opaque, Error **errp)
-+{
-+    bool dynamic_cpu = riscv_cpu_is_dynamic(obj);
-+    RISCVCPU *cpu = RISCV_CPU(obj);
-+    uint32_t prev_val = cpu->cfg.mvendorid;
-+    uint32_t value;
-+
-+    if (!visit_type_uint32(v, name, &value, errp)) {
-+        return;
-+    }
-+
-+    if (!dynamic_cpu && prev_val != value) {
-+        error_setg(errp, "Unable to change %s mvendorid (0x%x)",
-+                   object_get_typename(obj), prev_val);
-+        return;
-+    }
-+
-+    cpu->cfg.mvendorid = value;
-+}
-+
-+static void cpu_get_mvendorid(Object *obj, Visitor *v, const char *name,
-+                              void *opaque, Error **errp)
-+{
-+    bool value = RISCV_CPU(obj)->cfg.mvendorid;
-+
-+    visit_type_bool(v, name, &value, errp);
-+}
-+
- static void riscv_cpu_class_init(ObjectClass *c, void *data)
+ static void riscv_any_cpu_init(Object *obj)
  {
-     RISCVCPUClass *mcc = RISCV_CPU_CLASS(c);
-@@ -1856,6 +1889,9 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
-     cc->gdb_get_dynamic_xml = riscv_gdb_get_dynamic_xml;
-     cc->tcg_ops = &riscv_tcg_ops;
- 
-+    object_class_property_add(c, "mvendorid", "uint32", cpu_get_mvendorid,
-+                              cpu_set_mvendorid, NULL, NULL);
-+
-     device_class_set_props(dc, riscv_cpu_properties);
+     RISCVCPU *cpu = RISCV_CPU(obj);
+@@ -1308,20 +1317,12 @@ static void riscv_cpu_validate_misa_priv(CPURISCVState *env, Error **errp)
+     }
  }
  
+-static void riscv_cpu_realize(DeviceState *dev, Error **errp)
++static void riscv_cpu_realize_features(DeviceState *dev, Error **errp)
+ {
+-    CPUState *cs = CPU(dev);
+     RISCVCPU *cpu = RISCV_CPU(dev);
+     CPURISCVState *env = &cpu->env;
+-    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
+     Error *local_err = NULL;
+ 
+-    cpu_exec_realizefn(cs, &local_err);
+-    if (local_err != NULL) {
+-        error_propagate(errp, local_err);
+-        return;
+-    }
+-
+     riscv_cpu_validate_misa_mxl(cpu, &local_err);
+     if (local_err != NULL) {
+         error_propagate(errp, local_err);
+@@ -1356,7 +1357,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+     }
+ 
+ #ifndef CONFIG_USER_ONLY
+-    cs->tcg_cflags |= CF_PCREL;
++    CPU(dev)->tcg_cflags |= CF_PCREL;
+ 
+     if (cpu->cfg.ext_sstc) {
+         riscv_timer_init(cpu);
+@@ -1369,6 +1370,28 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+         }
+      }
+ #endif
++}
++
++static void riscv_cpu_realize(DeviceState *dev, Error **errp)
++{
++    CPUState *cs = CPU(dev);
++    RISCVCPU *cpu = RISCV_CPU(dev);
++    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
++    Error *local_err = NULL;
++
++    cpu_exec_realizefn(cs, &local_err);
++    if (local_err != NULL) {
++        error_propagate(errp, local_err);
++        return;
++    }
++
++    if (!riscv_running_kvm()) {
++        riscv_cpu_realize_features(dev, &local_err);
++        if (local_err != NULL) {
++            error_propagate(errp, local_err);
++            return;
++        }
++    }
+ 
+     riscv_cpu_finalize_features(cpu, &local_err);
+     if (local_err != NULL) {
 -- 
 2.41.0
 
