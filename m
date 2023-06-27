@@ -4,90 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88984EB64D7
-	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Jun 2023 23:23:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51FE5EB64D7
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Jun 2023 00:59:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qDvWm-0006eH-6k; Mon, 26 Jun 2023 19:21:48 -0400
+	id 1qDx3G-0004L9-6S; Mon, 26 Jun 2023 20:59:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qDvWi-0006SL-WE
- for qemu-riscv@nongnu.org; Mon, 26 Jun 2023 19:21:45 -0400
-Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qDvWe-0000KM-G2
- for qemu-riscv@nongnu.org; Mon, 26 Jun 2023 19:21:44 -0400
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-51d5569e4d1so2680751a12.2
- for <qemu-riscv@nongnu.org>; Mon, 26 Jun 2023 16:21:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1687821699; x=1690413699;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YU13su2z+qmCb5X0HjHMFAIusdV2jg9rpudf82qXwe4=;
- b=nnGNvKUrn9UCLtlcjeBNf4HApMCPVabMu2JBTs0xeZdtu1gabmZTXAWQOg+qfyPqTd
- tbWc2WqlGGio+PsOOJs20bgFo3SQ514TGXOOfqprpF/U8xGgQLyGgqCii1TTog9H3A4O
- n4ANv3hnUCQil2z4saQVKOzElOdnvtUOZAztIPBXjx+7Cil6F7QmZ7CPW4WqUBSOzM4o
- kajj/AfV6uLrvh5zuDcnn6V8CU2qcJX2tYGZtiKLe2JGrmL4OQ7I2QZNR1kWA82ummfu
- O6bBfWpqq572N6SFtMo1eILPrdAuk7z23jEr7+n1HGnatjRBk+ty7vm9acXW+DH6XPHW
- aRqw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687821699; x=1690413699;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=YU13su2z+qmCb5X0HjHMFAIusdV2jg9rpudf82qXwe4=;
- b=RJ9JlQL/V0qYk8TlLss/vqLd22eXYVMoJlvBxyGoWVZ8u/tXMZOuYvo00NSVHxtKm0
- Zc/waJh6EQ8AWHBNVJ4W9oV3534ogsFsItO0VbUksKSeFjmXLkYFH9cPdqUDKE9R7bjY
- ZQHqDdZeitwTUeQa2ny3Ccj0h2bqyikHiF1vB1VbDlJuANVb4d7ACT5DLMGJl+yVgjlW
- 0vvPlP/S+gbC1qpt6yyKJc4/AyL2llaxF2JLWMf6K4hh4n0e3nqNF8ucEAFpgAMOKWMV
- +uw9J3fwP6czAEmJX71Jdppdig57b8LGRERDbzn+gnfG+jH51aDRywvk1kBvCv/oqjcb
- m7HA==
-X-Gm-Message-State: AC+VfDyfT+tUh6Sgh52TCvmJOaLsJ8mLJMP/Ljzdqhm54ix7bDD148/N
- arI5GQ8WRP0rCx4dQsn2Ur9tVA==
-X-Google-Smtp-Source: ACHHUZ4QkuhAsaXssyeKqFbXVRzW9az1OsmP72kz+DhZ16PhNKSbklTIdWRVgvtFVlZUi3dmvTlggg==
-X-Received: by 2002:a17:907:807:b0:970:71c:df58 with SMTP id
- wv7-20020a170907080700b00970071cdf58mr21443597ejb.42.1687821698824; 
- Mon, 26 Jun 2023 16:21:38 -0700 (PDT)
-Received: from m1x-phil.lan ([176.187.199.226])
- by smtp.gmail.com with ESMTPSA id
- e2-20020a170906080200b009534211cc97sm3817875ejd.159.2023.06.26.16.21.36
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 26 Jun 2023 16:21:38 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: Bin Meng <bin.meng@windriver.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Thomas Huth <thuth@redhat.com>, Beraldo Leal <bleal@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org
-Subject: [PATCH 14/16] target/riscv: Move sysemu-specific code to
- sysemu/cpu_helper.c
-Date: Tue, 27 Jun 2023 01:20:05 +0200
-Message-Id: <20230626232007.8933-15-philmd@linaro.org>
-X-Mailer: git-send-email 2.38.1
-In-Reply-To: <20230626232007.8933-1-philmd@linaro.org>
-References: <20230626232007.8933-1-philmd@linaro.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x52c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+ (Exim 4.90_1) (envelope-from <sorear@fastmail.com>)
+ id 1qDwl3-0007XH-NK
+ for qemu-riscv@nongnu.org; Mon, 26 Jun 2023 20:40:37 -0400
+Received: from wout5-smtp.messagingengine.com ([64.147.123.21])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <sorear@fastmail.com>)
+ id 1qDwkv-0006zi-CF
+ for qemu-riscv@nongnu.org; Mon, 26 Jun 2023 20:40:33 -0400
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+ by mailout.west.internal (Postfix) with ESMTP id 0580432009E9;
+ Mon, 26 Jun 2023 20:40:24 -0400 (EDT)
+Received: from imap50 ([10.202.2.100])
+ by compute1.internal (MEProxy); Mon, 26 Jun 2023 20:40:26 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fastmail.com; h=
+ cc:cc:content-type:content-type:date:date:from:from:in-reply-to
+ :in-reply-to:message-id:mime-version:references:reply-to:sender
+ :subject:subject:to:to; s=fm2; t=1687826424; x=1687912824; bh=5Q
+ MWD7XlquszqzisiC71Nc4buC34U05ZsykVLOeIuq0=; b=e2nvqwcro2clfQTrt4
+ pU1ocsYGQV9zwFw1ZFc56IsqJRwozgjtyre5xcToQ94MjH2nsVXEHiUBBdt7KWQf
+ HPn2Oi/mg9v14kq9wLoXVWHiJLCOJnWq7GBB0TL2dzraRR9MTdWIHHJnaLyIq6t+
+ woGUZw5pL6jkQ+Nh4LAovo6fnL0srrdV/vRN3OzFXJY3H5GgBBrLHopWH5DRF8Pw
+ /wvyXIpaPVDqjrFOh4YOOIh/EXA6wcwOccP3U4nGkNupYuz1U8lTSjuKZJanQvCd
+ 4+5Ylqh43p+NHsqsb6NryBPVN3SGBOI+CxTmw1R2i4NoYnIXXpksJEfP0p6DanR8
+ zwEQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:content-type:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:sender:subject
+ :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+ :x-sasl-enc; s=fm2; t=1687826424; x=1687912824; bh=5QMWD7Xlquszq
+ zisiC71Nc4buC34U05ZsykVLOeIuq0=; b=IUYduRiHyLJRxXOsAx8N+XquVVBt+
+ sqIx7D9CC8DsX5S+IZ13F4AjjX2m2op+Vbr7puwKZqJMlIjIVW7/LFyTjPYvFMRl
+ UCQSZTE+1bdN4Cgeq8O+UANsi872tAapD7YmDaWMGWeKwGFrur1GC6JLA/IvrbsF
+ Mw7MlaCwN6rzBSlkUruDSdG4LzotI8GPmZC0pcGwvoFD6lOqQLO8uBPfiLJxPFNW
+ 0v+bhNon6qLe2cSv5BW3PPgCGURWBZ4IeFlObkIsv5o94y1+flbBxjJxbO3xQdY5
+ TEDTJe5tFcZArVHGJgMSFvBp4+wdcfl4WP2vyg/GGUVyEUGN3Qg1UdgPw==
+X-ME-Sender: <xms:9y-aZPSGj6SWwSQMrPqQ1w6ivpecFJtq4tkWNZw4qWZubPRETYJKlQ>
+ <xme:9y-aZAzKQU0GHElPJSCy0QXnSN0T2WbvnDvghvr0Na3LuiUmUzICOmhLnEZg9h-SC
+ 3VYCcKs_Ix1u0OzEA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrgeehgedgfeejucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhepofgfggfkjghffffhvfevufgtsehttdertderredtnecuhfhrohhmpedfufht
+ vghfrghnucfqkdftvggrrhdfuceoshhorhgvrghrsehfrghsthhmrghilhdrtghomheqne
+ cuggftrfgrthhtvghrnhepleejteffuefhueetueeileevfedvkeefgfeiheelgfdukeeg
+ vdekteehleetgfeinecuffhomhgrihhnpehrihhstghvrdhorhhgpdguvghvihgtvghtrh
+ gvvgdrohhrghdpihhnfhhrrgguvggrugdrohhrghenucevlhhushhtvghrufhiiigvpedt
+ necurfgrrhgrmhepmhgrihhlfhhrohhmpehsohhrvggrrhesfhgrshhtmhgrihhlrdgtoh
+ hm
+X-ME-Proxy: <xmx:9y-aZE0n-qKyh4xMUi0ZwVm3OoXwKe19JaPo1EKrMlmhkM9CUPBLTA>
+ <xmx:9y-aZPBVsWnOBn_YM_qTuw28FMEVZt1M204bd2SME1trlKsAtxLmng>
+ <xmx:9y-aZIj7OukpYDM81rXijTw3qXs4PawogUbIjXZEH6vXAoByjR2Suw>
+ <xmx:-C-aZLWxUDD1x0J00tNHeSpM7yKZnbtep1mCktdBMNsyWhubviuHWA>
+Feedback-ID: i84414492:Fastmail
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id 63EE21700089; Mon, 26 Jun 2023 20:40:23 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.9.0-alpha0-499-gf27bbf33e2-fm-20230619.001-gf27bbf33
+Mime-Version: 1.0
+Message-Id: <a6449161-d800-4094-bf15-cde890ed17b5@app.fastmail.com>
+In-Reply-To: <20230626-unmarked-atom-70b4d624a386@wendy>
+References: <20230626-unmarked-atom-70b4d624a386@wendy>
+Date: Mon, 26 Jun 2023 20:40:01 -0400
+From: "Stefan O'Rear" <sorear@fastmail.com>
+To: "Conor Dooley" <conor.dooley@microchip.com>,
+ "Palmer Dabbelt" <palmer@dabbelt.com>
+Cc: conor@kernel.org, "Paul Walmsley" <paul.walmsley@sifive.com>,
+ "Rob Herring" <robh+dt@kernel.org>,
+ "Krzysztof Kozlowski" <krzysztof.kozlowski+dt@linaro.org>,
+ "Alistair Francis" <alistair.francis@wdc.com>,
+ "Andrew Jones" <ajones@ventanamicro.com>,
+ "Anup Patel" <apatel@ventanamicro.com>,
+ "Atish Patra" <atishp@atishpatra.org>, "Jessica Clarke" <jrtc27@jrtc27.com>,
+ "Rick Chen" <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Oleksii <oleksii.kurochko@gmail.com>, linux-riscv@lists.infradead.org,
+ qemu-riscv@nongnu.org, u-boot@lists.denx.de, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, "Palmer Dabbelt" <palmer@rivosinc.com>
+Subject: Re: [PATCH v3] dt-bindings: riscv: deprecate riscv,isa
+Content-Type: text/plain
+Received-SPF: pass client-ip=64.147.123.21; envelope-from=sorear@fastmail.com;
+ helo=wout5-smtp.messagingengine.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Mon, 26 Jun 2023 20:59:25 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -102,1774 +116,627 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
- target/riscv/cpu_helper.c        | 859 +-----------------------------
- target/riscv/sysemu/cpu_helper.c | 863 +++++++++++++++++++++++++++++++
- target/riscv/sysemu/meson.build  |   1 +
- 3 files changed, 865 insertions(+), 858 deletions(-)
- create mode 100644 target/riscv/sysemu/cpu_helper.c
+On Mon, Jun 26, 2023, at 6:10 AM, Conor Dooley wrote:
+> intro
+> =====
+>
+> When the RISC-V dt-bindings were accepted upstream in Linux, the base
+> ISA etc had yet to be ratified. By the ratification of the base ISA,
+> incompatible changes had snuck into the specifications - for example the
+> Zicsr and Zifencei extensions were spun out of the base ISA.
+>
+> Fast forward to today, and the reason for this patch.
+> Currently the riscv,isa dt property permits only a specific subset of
+> the ISA string - in particular it excludes version numbering.
+> With the current constraints, it is not possible to discern whether
+> "rv64i" means that the hart supports the fence.i instruction, for
+> example.
+> Future systems may choose to implement their own instruction fencing,
+> perhaps using a vendor extension, or they may not implement the optional
+> counter extensions. Software needs a way to determine this.
+>
+> versioning schemes
+> ==================
+>
+> "Use the extension versions that are described in the ISA manual" you
+> may say, and it's not like this has not been considered.
+> Firstly, software that parses the riscv,isa property at runtime will
+> need to contain a lookup table of some sort that maps arbitrary versions
+> to versions it understands. There is not a consistent application of
+> version number applied to extensions, with a higgledy-piggledy
+> collection of tags, "bare" and versioned documents awaiting the reader
+> on the "recently ratified extensions" page:
+> https://wiki.riscv.org/display/HOME/Recently+Ratified+Extensions
+>
+> 	As an aside, and this is reflected in the patch too, since many
+> 	extensions have yet to appear in a release of the ISA specs,
+> 	they are defined by commits in their respective "working draft"
+> 	repositories.
+>
+> Secondly, there is an issue of backwards compatibility, whereby allowing
+> numbers in the ISA string, some parsers may be broken. This would
+> require an additional property to be created to even use the versions in
+> this manner.
+>
+> ~boolean properties~ string array property
+> ==========================================
+>
+> If a new property is needed, the whole approach may as well be looked at
+> from the bottom up. A string with limited character choices etc is
+> hardly the best approach for communicating extension information to
+> software.
+>
+> Switching to using properties that are defined on a per extension basis,
+> allows us to define explicit meanings for the DT representation of each
+> extension - rather than the current situation where different operating
+> systems or other bits of software may impart different meanings to
+> characters in the string.
+> Clearly the best source of meanings is the specifications themselves,
+> this just provides us the ability to choose at what point in time the
+> meaning is set. If an extension changes incompatibility in the future,
+> a new property will be required.
+>
+> Off-list, some of the RVI folks have committed to shoring up the wording
+> in either the ISA specifications, the riscv-isa-manual or
+> so that in the future, modifications to and additions or removals of
+> features will require a new extension. Codifying that assertion
+> somewhere would make it quite unlikely that compatibility would be
+> broken, but we have the tools required to deal with it, if & when it
+> crops up.
+> It is in our collective interest, as consumers of extension meanings, to
+> define a scheme that enforces compatibility.
+>
+> The use of individual properties, rather than elements in a single
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index ded1fee489..075b1ae068 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -18,22 +18,12 @@
-  */
- 
- #include "qemu/osdep.h"
--#include "qemu/log.h"
--#include "qemu/main-loop.h"
- #include "cpu.h"
- #include "internals.h"
--#include "sysemu/pmu.h"
--#include "exec/exec-all.h"
--#include "sysemu/instmap.h"
--#include "tcg/tcg-op.h"
--#include "trace.h"
--#include "semihosting/common-semi.h"
- #ifndef CONFIG_USER_ONLY
- #include "sysemu/cpu-timers.h"
- #endif
--#include "cpu_bits.h"
--#include "sysemu/debug.h"
--#include "tcg/oversized-guest.h"
-+
- 
- int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
- {
-@@ -104,850 +94,3 @@ void riscv_cpu_update_mask(CPURISCVState *env)
-         env->cur_pmbase = base;
-     }
- }
--
--#ifndef CONFIG_USER_ONLY
--
--/*
-- * The HS-mode is allowed to configure priority only for the
-- * following VS-mode local interrupts:
-- *
-- * 0  (Reserved interrupt, reads as zero)
-- * 1  Supervisor software interrupt
-- * 4  (Reserved interrupt, reads as zero)
-- * 5  Supervisor timer interrupt
-- * 8  (Reserved interrupt, reads as zero)
-- * 13 (Reserved interrupt)
-- * 14 "
-- * 15 "
-- * 16 "
-- * 17 "
-- * 18 "
-- * 19 "
-- * 20 "
-- * 21 "
-- * 22 "
-- * 23 "
-- */
--
--static const int hviprio_index2irq[] = {
--    0, 1, 4, 5, 8, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
--static const int hviprio_index2rdzero[] = {
--    1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
--
--int riscv_cpu_hviprio_index2irq(int index, int *out_irq, int *out_rdzero)
--{
--    if (index < 0 || ARRAY_SIZE(hviprio_index2irq) <= index) {
--        return -EINVAL;
--    }
--
--    if (out_irq) {
--        *out_irq = hviprio_index2irq[index];
--    }
--
--    if (out_rdzero) {
--        *out_rdzero = hviprio_index2rdzero[index];
--    }
--
--    return 0;
--}
--
--/*
-- * Default priorities of local interrupts are defined in the
-- * RISC-V Advanced Interrupt Architecture specification.
-- *
-- * ----------------------------------------------------------------
-- *  Default  |
-- *  Priority | Major Interrupt Numbers
-- * ----------------------------------------------------------------
-- *  Highest  | 47, 23, 46, 45, 22, 44,
-- *           | 43, 21, 42, 41, 20, 40
-- *           |
-- *           | 11 (0b),  3 (03),  7 (07)
-- *           |  9 (09),  1 (01),  5 (05)
-- *           | 12 (0c)
-- *           | 10 (0a),  2 (02),  6 (06)
-- *           |
-- *           | 39, 19, 38, 37, 18, 36,
-- *  Lowest   | 35, 17, 34, 33, 16, 32
-- * ----------------------------------------------------------------
-- */
--static const uint8_t default_iprio[64] = {
--    /* Custom interrupts 48 to 63 */
--    [63] = IPRIO_MMAXIPRIO,
--    [62] = IPRIO_MMAXIPRIO,
--    [61] = IPRIO_MMAXIPRIO,
--    [60] = IPRIO_MMAXIPRIO,
--    [59] = IPRIO_MMAXIPRIO,
--    [58] = IPRIO_MMAXIPRIO,
--    [57] = IPRIO_MMAXIPRIO,
--    [56] = IPRIO_MMAXIPRIO,
--    [55] = IPRIO_MMAXIPRIO,
--    [54] = IPRIO_MMAXIPRIO,
--    [53] = IPRIO_MMAXIPRIO,
--    [52] = IPRIO_MMAXIPRIO,
--    [51] = IPRIO_MMAXIPRIO,
--    [50] = IPRIO_MMAXIPRIO,
--    [49] = IPRIO_MMAXIPRIO,
--    [48] = IPRIO_MMAXIPRIO,
--
--    /* Custom interrupts 24 to 31 */
--    [31] = IPRIO_MMAXIPRIO,
--    [30] = IPRIO_MMAXIPRIO,
--    [29] = IPRIO_MMAXIPRIO,
--    [28] = IPRIO_MMAXIPRIO,
--    [27] = IPRIO_MMAXIPRIO,
--    [26] = IPRIO_MMAXIPRIO,
--    [25] = IPRIO_MMAXIPRIO,
--    [24] = IPRIO_MMAXIPRIO,
--
--    [47] = IPRIO_DEFAULT_UPPER,
--    [23] = IPRIO_DEFAULT_UPPER + 1,
--    [46] = IPRIO_DEFAULT_UPPER + 2,
--    [45] = IPRIO_DEFAULT_UPPER + 3,
--    [22] = IPRIO_DEFAULT_UPPER + 4,
--    [44] = IPRIO_DEFAULT_UPPER + 5,
--
--    [43] = IPRIO_DEFAULT_UPPER + 6,
--    [21] = IPRIO_DEFAULT_UPPER + 7,
--    [42] = IPRIO_DEFAULT_UPPER + 8,
--    [41] = IPRIO_DEFAULT_UPPER + 9,
--    [20] = IPRIO_DEFAULT_UPPER + 10,
--    [40] = IPRIO_DEFAULT_UPPER + 11,
--
--    [11] = IPRIO_DEFAULT_M,
--    [3]  = IPRIO_DEFAULT_M + 1,
--    [7]  = IPRIO_DEFAULT_M + 2,
--
--    [9]  = IPRIO_DEFAULT_S,
--    [1]  = IPRIO_DEFAULT_S + 1,
--    [5]  = IPRIO_DEFAULT_S + 2,
--
--    [12] = IPRIO_DEFAULT_SGEXT,
--
--    [10] = IPRIO_DEFAULT_VS,
--    [2]  = IPRIO_DEFAULT_VS + 1,
--    [6]  = IPRIO_DEFAULT_VS + 2,
--
--    [39] = IPRIO_DEFAULT_LOWER,
--    [19] = IPRIO_DEFAULT_LOWER + 1,
--    [38] = IPRIO_DEFAULT_LOWER + 2,
--    [37] = IPRIO_DEFAULT_LOWER + 3,
--    [18] = IPRIO_DEFAULT_LOWER + 4,
--    [36] = IPRIO_DEFAULT_LOWER + 5,
--
--    [35] = IPRIO_DEFAULT_LOWER + 6,
--    [17] = IPRIO_DEFAULT_LOWER + 7,
--    [34] = IPRIO_DEFAULT_LOWER + 8,
--    [33] = IPRIO_DEFAULT_LOWER + 9,
--    [16] = IPRIO_DEFAULT_LOWER + 10,
--    [32] = IPRIO_DEFAULT_LOWER + 11,
--};
--
--uint8_t riscv_cpu_default_priority(int irq)
--{
--    if (irq < 0 || irq > 63) {
--        return IPRIO_MMAXIPRIO;
--    }
--
--    return default_iprio[irq] ? default_iprio[irq] : IPRIO_MMAXIPRIO;
--};
--
--int riscv_cpu_pending_to_irq(CPURISCVState *env,
--                             int extirq, unsigned int extirq_def_prio,
--                             uint64_t pending, uint8_t *iprio)
--{
--    int irq, best_irq = RISCV_EXCP_NONE;
--    unsigned int prio, best_prio = UINT_MAX;
--
--    if (!pending) {
--        return RISCV_EXCP_NONE;
--    }
--
--    irq = ctz64(pending);
--    if (!((extirq == IRQ_M_EXT) ? riscv_cpu_cfg(env)->ext_smaia :
--                                  riscv_cpu_cfg(env)->ext_ssaia)) {
--        return irq;
--    }
--
--    pending = pending >> irq;
--    while (pending) {
--        prio = iprio[irq];
--        if (!prio) {
--            if (irq == extirq) {
--                prio = extirq_def_prio;
--            } else {
--                prio = (riscv_cpu_default_priority(irq) < extirq_def_prio) ?
--                       1 : IPRIO_MMAXIPRIO;
--            }
--        }
--        if ((pending & 0x1) && (prio <= best_prio)) {
--            best_irq = irq;
--            best_prio = prio;
--        }
--        irq++;
--        pending = pending >> 1;
--    }
--
--    return best_irq;
--}
--
--uint64_t riscv_cpu_all_pending(CPURISCVState *env)
--{
--    uint32_t gein = get_field(env->hstatus, HSTATUS_VGEIN);
--    uint64_t vsgein = (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0;
--    uint64_t vstip = (env->vstime_irq) ? MIP_VSTIP : 0;
--
--    return (env->mip | vsgein | vstip) & env->mie;
--}
--
--int riscv_cpu_mirq_pending(CPURISCVState *env)
--{
--    uint64_t irqs = riscv_cpu_all_pending(env) & ~env->mideleg &
--                    ~(MIP_SGEIP | MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
--
--    return riscv_cpu_pending_to_irq(env, IRQ_M_EXT, IPRIO_DEFAULT_M,
--                                    irqs, env->miprio);
--}
--
--int riscv_cpu_sirq_pending(CPURISCVState *env)
--{
--    uint64_t irqs = riscv_cpu_all_pending(env) & env->mideleg &
--                    ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
--
--    return riscv_cpu_pending_to_irq(env, IRQ_S_EXT, IPRIO_DEFAULT_S,
--                                    irqs, env->siprio);
--}
--
--int riscv_cpu_vsirq_pending(CPURISCVState *env)
--{
--    uint64_t irqs = riscv_cpu_all_pending(env) & env->mideleg &
--                    (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
--
--    return riscv_cpu_pending_to_irq(env, IRQ_S_EXT, IPRIO_DEFAULT_S,
--                                    irqs >> 1, env->hviprio);
--}
--
--/* Return true is floating point support is currently enabled */
--bool riscv_cpu_fp_enabled(CPURISCVState *env)
--{
--    if (env->mstatus & MSTATUS_FS) {
--        if (env->virt_enabled && !(env->mstatus_hs & MSTATUS_FS)) {
--            return false;
--        }
--        return true;
--    }
--
--    return false;
--}
--
--/* Return true is vector support is currently enabled */
--bool riscv_cpu_vector_enabled(CPURISCVState *env)
--{
--    if (env->mstatus & MSTATUS_VS) {
--        if (env->virt_enabled && !(env->mstatus_hs & MSTATUS_VS)) {
--            return false;
--        }
--        return true;
--    }
--
--    return false;
--}
--
--void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env)
--{
--    uint64_t mstatus_mask = MSTATUS_MXR | MSTATUS_SUM |
--                            MSTATUS_SPP | MSTATUS_SPIE | MSTATUS_SIE |
--                            MSTATUS64_UXL | MSTATUS_VS;
--
--    if (riscv_has_ext(env, RVF)) {
--        mstatus_mask |= MSTATUS_FS;
--    }
--    bool current_virt = env->virt_enabled;
--
--    g_assert(riscv_has_ext(env, RVH));
--
--    if (current_virt) {
--        /* Current V=1 and we are about to change to V=0 */
--        env->vsstatus = env->mstatus & mstatus_mask;
--        env->mstatus &= ~mstatus_mask;
--        env->mstatus |= env->mstatus_hs;
--
--        env->vstvec = env->stvec;
--        env->stvec = env->stvec_hs;
--
--        env->vsscratch = env->sscratch;
--        env->sscratch = env->sscratch_hs;
--
--        env->vsepc = env->sepc;
--        env->sepc = env->sepc_hs;
--
--        env->vscause = env->scause;
--        env->scause = env->scause_hs;
--
--        env->vstval = env->stval;
--        env->stval = env->stval_hs;
--
--        env->vsatp = env->satp;
--        env->satp = env->satp_hs;
--    } else {
--        /* Current V=0 and we are about to change to V=1 */
--        env->mstatus_hs = env->mstatus & mstatus_mask;
--        env->mstatus &= ~mstatus_mask;
--        env->mstatus |= env->vsstatus;
--
--        env->stvec_hs = env->stvec;
--        env->stvec = env->vstvec;
--
--        env->sscratch_hs = env->sscratch;
--        env->sscratch = env->vsscratch;
--
--        env->sepc_hs = env->sepc;
--        env->sepc = env->vsepc;
--
--        env->scause_hs = env->scause;
--        env->scause = env->vscause;
--
--        env->stval_hs = env->stval;
--        env->stval = env->vstval;
--
--        env->satp_hs = env->satp;
--        env->satp = env->vsatp;
--    }
--}
--
--target_ulong riscv_cpu_get_geilen(CPURISCVState *env)
--{
--    if (!riscv_has_ext(env, RVH)) {
--        return 0;
--    }
--
--    return env->geilen;
--}
--
--void riscv_cpu_set_geilen(CPURISCVState *env, target_ulong geilen)
--{
--    if (!riscv_has_ext(env, RVH)) {
--        return;
--    }
--
--    if (geilen > (TARGET_LONG_BITS - 1)) {
--        return;
--    }
--
--    env->geilen = geilen;
--}
--
--/* This function can only be called to set virt when RVH is enabled */
--void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable)
--{
--    /* Flush the TLB on all virt mode changes. */
--    if (env->virt_enabled != enable) {
--        tlb_flush(env_cpu(env));
--    }
--
--    env->virt_enabled = enable;
--
--    if (enable) {
--        /*
--         * The guest external interrupts from an interrupt controller are
--         * delivered only when the Guest/VM is running (i.e. V=1). This means
--         * any guest external interrupt which is triggered while the Guest/VM
--         * is not running (i.e. V=0) will be missed on QEMU resulting in guest
--         * with sluggish response to serial console input and other I/O events.
--         *
--         * To solve this, we check and inject interrupt after setting V=1.
--         */
--        riscv_cpu_update_mip(env, 0, 0);
--    }
--}
--
--int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint64_t interrupts)
--{
--    CPURISCVState *env = &cpu->env;
--    if (env->miclaim & interrupts) {
--        return -1;
--    } else {
--        env->miclaim |= interrupts;
--        return 0;
--    }
--}
--
--uint64_t riscv_cpu_update_mip(CPURISCVState *env, uint64_t mask,
--                              uint64_t value)
--{
--    CPUState *cs = env_cpu(env);
--    uint64_t gein, vsgein = 0, vstip = 0, old = env->mip;
--
--    if (env->virt_enabled) {
--        gein = get_field(env->hstatus, HSTATUS_VGEIN);
--        vsgein = (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0;
--    }
--
--    vstip = env->vstime_irq ? MIP_VSTIP : 0;
--
--    QEMU_IOTHREAD_LOCK_GUARD();
--
--    env->mip = (env->mip & ~mask) | (value & mask);
--
--    if (env->mip | vsgein | vstip) {
--        cpu_interrupt(cs, CPU_INTERRUPT_HARD);
--    } else {
--        cpu_reset_interrupt(cs, CPU_INTERRUPT_HARD);
--    }
--
--    return old;
--}
--
--void riscv_cpu_set_rdtime_fn(CPURISCVState *env, uint64_t (*fn)(void *),
--                             void *arg)
--{
--    env->rdtime_fn = fn;
--    env->rdtime_fn_arg = arg;
--}
--
--void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, uint32_t priv,
--                                   int (*rmw_fn)(void *arg,
--                                                 target_ulong reg,
--                                                 target_ulong *val,
--                                                 target_ulong new_val,
--                                                 target_ulong write_mask),
--                                   void *rmw_fn_arg)
--{
--    if (priv <= PRV_M) {
--        env->aia_ireg_rmw_fn[priv] = rmw_fn;
--        env->aia_ireg_rmw_fn_arg[priv] = rmw_fn_arg;
--    }
--}
--
--void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
--{
--    g_assert(newpriv <= PRV_M && newpriv != PRV_RESERVED);
--
--    if (icount_enabled() && newpriv != env->priv) {
--        riscv_itrigger_update_priv(env);
--    }
--    /* tlb_flush is unnecessary as mode is contained in mmu_idx */
--    env->priv = newpriv;
--    env->xl = cpu_recompute_xl(env);
--    riscv_cpu_update_mask(env);
--
--    /*
--     * Clear the load reservation - otherwise a reservation placed in one
--     * context/process can be used by another, resulting in an SC succeeding
--     * incorrectly. Version 2.2 of the ISA specification explicitly requires
--     * this behaviour, while later revisions say that the kernel "should" use
--     * an SC instruction to force the yielding of a load reservation on a
--     * preemptive context switch. As a result, do both.
--     */
--    env->load_res = -1;
--}
--
--
--static target_ulong riscv_transformed_insn(CPURISCVState *env,
--                                           target_ulong insn,
--                                           target_ulong taddr)
--{
--    target_ulong xinsn = 0;
--    target_ulong access_rs1 = 0, access_imm = 0, access_size = 0;
--
--    /*
--     * Only Quadrant 0 and Quadrant 2 of RVC instruction space need to
--     * be uncompressed. The Quadrant 1 of RVC instruction space need
--     * not be transformed because these instructions won't generate
--     * any load/store trap.
--     */
--
--    if ((insn & 0x3) != 0x3) {
--        /* Transform 16bit instruction into 32bit instruction */
--        switch (GET_C_OP(insn)) {
--        case OPC_RISC_C_OP_QUAD0: /* Quadrant 0 */
--            switch (GET_C_FUNC(insn)) {
--            case OPC_RISC_C_FUNC_FLD_LQ:
--                if (riscv_cpu_xlen(env) != 128) { /* C.FLD (RV32/64) */
--                    xinsn = OPC_RISC_FLD;
--                    xinsn = SET_RD(xinsn, GET_C_RS2S(insn));
--                    access_rs1 = GET_C_RS1S(insn);
--                    access_imm = GET_C_LD_IMM(insn);
--                    access_size = 8;
--                }
--                break;
--            case OPC_RISC_C_FUNC_LW: /* C.LW */
--                xinsn = OPC_RISC_LW;
--                xinsn = SET_RD(xinsn, GET_C_RS2S(insn));
--                access_rs1 = GET_C_RS1S(insn);
--                access_imm = GET_C_LW_IMM(insn);
--                access_size = 4;
--                break;
--            case OPC_RISC_C_FUNC_FLW_LD:
--                if (riscv_cpu_xlen(env) == 32) { /* C.FLW (RV32) */
--                    xinsn = OPC_RISC_FLW;
--                    xinsn = SET_RD(xinsn, GET_C_RS2S(insn));
--                    access_rs1 = GET_C_RS1S(insn);
--                    access_imm = GET_C_LW_IMM(insn);
--                    access_size = 4;
--                } else { /* C.LD (RV64/RV128) */
--                    xinsn = OPC_RISC_LD;
--                    xinsn = SET_RD(xinsn, GET_C_RS2S(insn));
--                    access_rs1 = GET_C_RS1S(insn);
--                    access_imm = GET_C_LD_IMM(insn);
--                    access_size = 8;
--                }
--                break;
--            case OPC_RISC_C_FUNC_FSD_SQ:
--                if (riscv_cpu_xlen(env) != 128) { /* C.FSD (RV32/64) */
--                    xinsn = OPC_RISC_FSD;
--                    xinsn = SET_RS2(xinsn, GET_C_RS2S(insn));
--                    access_rs1 = GET_C_RS1S(insn);
--                    access_imm = GET_C_SD_IMM(insn);
--                    access_size = 8;
--                }
--                break;
--            case OPC_RISC_C_FUNC_SW: /* C.SW */
--                xinsn = OPC_RISC_SW;
--                xinsn = SET_RS2(xinsn, GET_C_RS2S(insn));
--                access_rs1 = GET_C_RS1S(insn);
--                access_imm = GET_C_SW_IMM(insn);
--                access_size = 4;
--                break;
--            case OPC_RISC_C_FUNC_FSW_SD:
--                if (riscv_cpu_xlen(env) == 32) { /* C.FSW (RV32) */
--                    xinsn = OPC_RISC_FSW;
--                    xinsn = SET_RS2(xinsn, GET_C_RS2S(insn));
--                    access_rs1 = GET_C_RS1S(insn);
--                    access_imm = GET_C_SW_IMM(insn);
--                    access_size = 4;
--                } else { /* C.SD (RV64/RV128) */
--                    xinsn = OPC_RISC_SD;
--                    xinsn = SET_RS2(xinsn, GET_C_RS2S(insn));
--                    access_rs1 = GET_C_RS1S(insn);
--                    access_imm = GET_C_SD_IMM(insn);
--                    access_size = 8;
--                }
--                break;
--            default:
--                break;
--            }
--            break;
--        case OPC_RISC_C_OP_QUAD2: /* Quadrant 2 */
--            switch (GET_C_FUNC(insn)) {
--            case OPC_RISC_C_FUNC_FLDSP_LQSP:
--                if (riscv_cpu_xlen(env) != 128) { /* C.FLDSP (RV32/64) */
--                    xinsn = OPC_RISC_FLD;
--                    xinsn = SET_RD(xinsn, GET_C_RD(insn));
--                    access_rs1 = 2;
--                    access_imm = GET_C_LDSP_IMM(insn);
--                    access_size = 8;
--                }
--                break;
--            case OPC_RISC_C_FUNC_LWSP: /* C.LWSP */
--                xinsn = OPC_RISC_LW;
--                xinsn = SET_RD(xinsn, GET_C_RD(insn));
--                access_rs1 = 2;
--                access_imm = GET_C_LWSP_IMM(insn);
--                access_size = 4;
--                break;
--            case OPC_RISC_C_FUNC_FLWSP_LDSP:
--                if (riscv_cpu_xlen(env) == 32) { /* C.FLWSP (RV32) */
--                    xinsn = OPC_RISC_FLW;
--                    xinsn = SET_RD(xinsn, GET_C_RD(insn));
--                    access_rs1 = 2;
--                    access_imm = GET_C_LWSP_IMM(insn);
--                    access_size = 4;
--                } else { /* C.LDSP (RV64/RV128) */
--                    xinsn = OPC_RISC_LD;
--                    xinsn = SET_RD(xinsn, GET_C_RD(insn));
--                    access_rs1 = 2;
--                    access_imm = GET_C_LDSP_IMM(insn);
--                    access_size = 8;
--                }
--                break;
--            case OPC_RISC_C_FUNC_FSDSP_SQSP:
--                if (riscv_cpu_xlen(env) != 128) { /* C.FSDSP (RV32/64) */
--                    xinsn = OPC_RISC_FSD;
--                    xinsn = SET_RS2(xinsn, GET_C_RS2(insn));
--                    access_rs1 = 2;
--                    access_imm = GET_C_SDSP_IMM(insn);
--                    access_size = 8;
--                }
--                break;
--            case OPC_RISC_C_FUNC_SWSP: /* C.SWSP */
--                xinsn = OPC_RISC_SW;
--                xinsn = SET_RS2(xinsn, GET_C_RS2(insn));
--                access_rs1 = 2;
--                access_imm = GET_C_SWSP_IMM(insn);
--                access_size = 4;
--                break;
--            case 7:
--                if (riscv_cpu_xlen(env) == 32) { /* C.FSWSP (RV32) */
--                    xinsn = OPC_RISC_FSW;
--                    xinsn = SET_RS2(xinsn, GET_C_RS2(insn));
--                    access_rs1 = 2;
--                    access_imm = GET_C_SWSP_IMM(insn);
--                    access_size = 4;
--                } else { /* C.SDSP (RV64/RV128) */
--                    xinsn = OPC_RISC_SD;
--                    xinsn = SET_RS2(xinsn, GET_C_RS2(insn));
--                    access_rs1 = 2;
--                    access_imm = GET_C_SDSP_IMM(insn);
--                    access_size = 8;
--                }
--                break;
--            default:
--                break;
--            }
--            break;
--        default:
--            break;
--        }
--
--        /*
--         * Clear Bit1 of transformed instruction to indicate that
--         * original insruction was a 16bit instruction
--         */
--        xinsn &= ~((target_ulong)0x2);
--    } else {
--        /* Transform 32bit (or wider) instructions */
--        switch (MASK_OP_MAJOR(insn)) {
--        case OPC_RISC_ATOMIC:
--            xinsn = insn;
--            access_rs1 = GET_RS1(insn);
--            access_size = 1 << GET_FUNCT3(insn);
--            break;
--        case OPC_RISC_LOAD:
--        case OPC_RISC_FP_LOAD:
--            xinsn = SET_I_IMM(insn, 0);
--            access_rs1 = GET_RS1(insn);
--            access_imm = GET_IMM(insn);
--            access_size = 1 << GET_FUNCT3(insn);
--            break;
--        case OPC_RISC_STORE:
--        case OPC_RISC_FP_STORE:
--            xinsn = SET_S_IMM(insn, 0);
--            access_rs1 = GET_RS1(insn);
--            access_imm = GET_STORE_IMM(insn);
--            access_size = 1 << GET_FUNCT3(insn);
--            break;
--        case OPC_RISC_SYSTEM:
--            if (MASK_OP_SYSTEM(insn) == OPC_RISC_HLVHSV) {
--                xinsn = insn;
--                access_rs1 = GET_RS1(insn);
--                access_size = 1 << ((GET_FUNCT7(insn) >> 1) & 0x3);
--                access_size = 1 << access_size;
--            }
--            break;
--        default:
--            break;
--        }
--    }
--
--    if (access_size) {
--        xinsn = SET_RS1(xinsn, (taddr - (env->gpr[access_rs1] + access_imm)) &
--                               (access_size - 1));
--    }
--
--    return xinsn;
--}
--
--/*
-- * Handle Traps
-- *
-- * Adapted from Spike's processor_t::take_trap.
-- *
-- */
--void riscv_cpu_do_interrupt(CPUState *cs)
--{
--    RISCVCPU *cpu = RISCV_CPU(cs);
--    CPURISCVState *env = &cpu->env;
--    bool write_gva = false;
--    uint64_t s;
--
--    /*
--     * cs->exception is 32-bits wide unlike mcause which is XLEN-bits wide
--     * so we mask off the MSB and separate into trap type and cause.
--     */
--    bool async = !!(cs->exception_index & RISCV_EXCP_INT_FLAG);
--    target_ulong cause = cs->exception_index & RISCV_EXCP_INT_MASK;
--    uint64_t deleg = async ? env->mideleg : env->medeleg;
--    target_ulong tval = 0;
--    target_ulong tinst = 0;
--    target_ulong htval = 0;
--    target_ulong mtval2 = 0;
--
--    if  (cause == RISCV_EXCP_SEMIHOST) {
--        do_common_semihosting(cs);
--        env->pc += 4;
--        return;
--    }
--
--    if (!async) {
--        /* set tval to badaddr for traps with address information */
--        switch (cause) {
--        case RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT:
--        case RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT:
--        case RISCV_EXCP_LOAD_ADDR_MIS:
--        case RISCV_EXCP_STORE_AMO_ADDR_MIS:
--        case RISCV_EXCP_LOAD_ACCESS_FAULT:
--        case RISCV_EXCP_STORE_AMO_ACCESS_FAULT:
--        case RISCV_EXCP_LOAD_PAGE_FAULT:
--        case RISCV_EXCP_STORE_PAGE_FAULT:
--            write_gva = env->two_stage_lookup;
--            tval = env->badaddr;
--            if (env->two_stage_indirect_lookup) {
--                /*
--                 * special pseudoinstruction for G-stage fault taken while
--                 * doing VS-stage page table walk.
--                 */
--                tinst = (riscv_cpu_xlen(env) == 32) ? 0x00002000 : 0x00003000;
--            } else {
--                /*
--                 * The "Addr. Offset" field in transformed instruction is
--                 * non-zero only for misaligned access.
--                 */
--                tinst = riscv_transformed_insn(env, env->bins, tval);
--            }
--            break;
--        case RISCV_EXCP_INST_GUEST_PAGE_FAULT:
--        case RISCV_EXCP_INST_ADDR_MIS:
--        case RISCV_EXCP_INST_ACCESS_FAULT:
--        case RISCV_EXCP_INST_PAGE_FAULT:
--            write_gva = env->two_stage_lookup;
--            tval = env->badaddr;
--            if (env->two_stage_indirect_lookup) {
--                /*
--                 * special pseudoinstruction for G-stage fault taken while
--                 * doing VS-stage page table walk.
--                 */
--                tinst = (riscv_cpu_xlen(env) == 32) ? 0x00002000 : 0x00003000;
--            }
--            break;
--        case RISCV_EXCP_ILLEGAL_INST:
--        case RISCV_EXCP_VIRT_INSTRUCTION_FAULT:
--            tval = env->bins;
--            break;
--        case RISCV_EXCP_BREAKPOINT:
--            if (cs->watchpoint_hit) {
--                tval = cs->watchpoint_hit->hitaddr;
--                cs->watchpoint_hit = NULL;
--            }
--            break;
--        default:
--            break;
--        }
--        /* ecall is dispatched as one cause so translate based on mode */
--        if (cause == RISCV_EXCP_U_ECALL) {
--            assert(env->priv <= 3);
--
--            if (env->priv == PRV_M) {
--                cause = RISCV_EXCP_M_ECALL;
--            } else if (env->priv == PRV_S && env->virt_enabled) {
--                cause = RISCV_EXCP_VS_ECALL;
--            } else if (env->priv == PRV_S && !env->virt_enabled) {
--                cause = RISCV_EXCP_S_ECALL;
--            } else if (env->priv == PRV_U) {
--                cause = RISCV_EXCP_U_ECALL;
--            }
--        }
--    }
--
--    trace_riscv_trap(env->mhartid, async, cause, env->pc, tval,
--                     riscv_cpu_get_trap_name(cause, async));
--
--    qemu_log_mask(CPU_LOG_INT,
--                  "%s: hart:"TARGET_FMT_ld", async:%d, cause:"TARGET_FMT_lx", "
--                  "epc:0x"TARGET_FMT_lx", tval:0x"TARGET_FMT_lx", desc=%s\n",
--                  __func__, env->mhartid, async, cause, env->pc, tval,
--                  riscv_cpu_get_trap_name(cause, async));
--
--    if (env->priv <= PRV_S &&
--            cause < TARGET_LONG_BITS && ((deleg >> cause) & 1)) {
--        /* handle the trap in S-mode */
--        if (riscv_has_ext(env, RVH)) {
--            uint64_t hdeleg = async ? env->hideleg : env->hedeleg;
--
--            if (env->virt_enabled && ((hdeleg >> cause) & 1)) {
--                /* Trap to VS mode */
--                /*
--                 * See if we need to adjust cause. Yes if its VS mode interrupt
--                 * no if hypervisor has delegated one of hs mode's interrupt
--                 */
--                if (cause == IRQ_VS_TIMER || cause == IRQ_VS_SOFT ||
--                    cause == IRQ_VS_EXT) {
--                    cause = cause - 1;
--                }
--                write_gva = false;
--            } else if (env->virt_enabled) {
--                /* Trap into HS mode, from virt */
--                riscv_cpu_swap_hypervisor_regs(env);
--                env->hstatus = set_field(env->hstatus, HSTATUS_SPVP,
--                                         env->priv);
--                env->hstatus = set_field(env->hstatus, HSTATUS_SPV, true);
--
--                htval = env->guest_phys_fault_addr;
--
--                riscv_cpu_set_virt_enabled(env, 0);
--            } else {
--                /* Trap into HS mode */
--                env->hstatus = set_field(env->hstatus, HSTATUS_SPV, false);
--                htval = env->guest_phys_fault_addr;
--            }
--            env->hstatus = set_field(env->hstatus, HSTATUS_GVA, write_gva);
--        }
--
--        s = env->mstatus;
--        s = set_field(s, MSTATUS_SPIE, get_field(s, MSTATUS_SIE));
--        s = set_field(s, MSTATUS_SPP, env->priv);
--        s = set_field(s, MSTATUS_SIE, 0);
--        env->mstatus = s;
--        env->scause = cause | ((target_ulong)async << (TARGET_LONG_BITS - 1));
--        env->sepc = env->pc;
--        env->stval = tval;
--        env->htval = htval;
--        env->htinst = tinst;
--        env->pc = (env->stvec >> 2 << 2) +
--                  ((async && (env->stvec & 3) == 1) ? cause * 4 : 0);
--        riscv_cpu_set_mode(env, PRV_S);
--    } else {
--        /* handle the trap in M-mode */
--        if (riscv_has_ext(env, RVH)) {
--            if (env->virt_enabled) {
--                riscv_cpu_swap_hypervisor_regs(env);
--            }
--            env->mstatus = set_field(env->mstatus, MSTATUS_MPV,
--                                     env->virt_enabled);
--            if (env->virt_enabled && tval) {
--                env->mstatus = set_field(env->mstatus, MSTATUS_GVA, 1);
--            }
--
--            mtval2 = env->guest_phys_fault_addr;
--
--            /* Trapping to M mode, virt is disabled */
--            riscv_cpu_set_virt_enabled(env, 0);
--        }
--
--        s = env->mstatus;
--        s = set_field(s, MSTATUS_MPIE, get_field(s, MSTATUS_MIE));
--        s = set_field(s, MSTATUS_MPP, env->priv);
--        s = set_field(s, MSTATUS_MIE, 0);
--        env->mstatus = s;
--        env->mcause = cause | ~(((target_ulong)-1) >> async);
--        env->mepc = env->pc;
--        env->mtval = tval;
--        env->mtval2 = mtval2;
--        env->mtinst = tinst;
--        env->pc = (env->mtvec >> 2 << 2) +
--                  ((async && (env->mtvec & 3) == 1) ? cause * 4 : 0);
--        riscv_cpu_set_mode(env, PRV_M);
--    }
--
--    /*
--     * NOTE: it is not necessary to yield load reservations here. It is only
--     * necessary for an SC from "another hart" to cause a load reservation
--     * to be yielded. Refer to the memory consistency model section of the
--     * RISC-V ISA Specification.
--     */
--
--    env->two_stage_lookup = false;
--    env->two_stage_indirect_lookup = false;
--}
--
--#endif /* !CONFIG_USER_ONLY */
-diff --git a/target/riscv/sysemu/cpu_helper.c b/target/riscv/sysemu/cpu_helper.c
-new file mode 100644
-index 0000000000..05a6b834fa
---- /dev/null
-+++ b/target/riscv/sysemu/cpu_helper.c
-@@ -0,0 +1,863 @@
-+/*
-+ * RISC-V CPU system helpers for QEMU.
-+ *
-+ * Copyright (c) 2016-2017 Sagar Karandikar, sagark@eecs.berkeley.edu
-+ * Copyright (c) 2017-2018 SiFive, Inc.
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qemu/log.h"
-+#include "qemu/main-loop.h"
-+#include "exec/exec-all.h"
-+#include "cpu.h"
-+#include "internals.h"
-+#include "sysemu/cpu-timers.h"
-+#include "sysemu/pmu.h"
-+#include "sysemu/instmap.h"
-+#include "semihosting/common-semi.h"
-+#include "trace.h"
-+
-+
-+/*
-+ * The HS-mode is allowed to configure priority only for the
-+ * following VS-mode local interrupts:
-+ *
-+ * 0  (Reserved interrupt, reads as zero)
-+ * 1  Supervisor software interrupt
-+ * 4  (Reserved interrupt, reads as zero)
-+ * 5  Supervisor timer interrupt
-+ * 8  (Reserved interrupt, reads as zero)
-+ * 13 (Reserved interrupt)
-+ * 14 "
-+ * 15 "
-+ * 16 "
-+ * 17 "
-+ * 18 "
-+ * 19 "
-+ * 20 "
-+ * 21 "
-+ * 22 "
-+ * 23 "
-+ */
-+
-+static const int hviprio_index2irq[] = {
-+    0, 1, 4, 5, 8, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
-+static const int hviprio_index2rdzero[] = {
-+    1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-+
-+int riscv_cpu_hviprio_index2irq(int index, int *out_irq, int *out_rdzero)
-+{
-+    if (index < 0 || ARRAY_SIZE(hviprio_index2irq) <= index) {
-+        return -EINVAL;
-+    }
-+
-+    if (out_irq) {
-+        *out_irq = hviprio_index2irq[index];
-+    }
-+
-+    if (out_rdzero) {
-+        *out_rdzero = hviprio_index2rdzero[index];
-+    }
-+
-+    return 0;
-+}
-+
-+/*
-+ * Default priorities of local interrupts are defined in the
-+ * RISC-V Advanced Interrupt Architecture specification.
-+ *
-+ * ----------------------------------------------------------------
-+ *  Default  |
-+ *  Priority | Major Interrupt Numbers
-+ * ----------------------------------------------------------------
-+ *  Highest  | 47, 23, 46, 45, 22, 44,
-+ *           | 43, 21, 42, 41, 20, 40
-+ *           |
-+ *           | 11 (0b),  3 (03),  7 (07)
-+ *           |  9 (09),  1 (01),  5 (05)
-+ *           | 12 (0c)
-+ *           | 10 (0a),  2 (02),  6 (06)
-+ *           |
-+ *           | 39, 19, 38, 37, 18, 36,
-+ *  Lowest   | 35, 17, 34, 33, 16, 32
-+ * ----------------------------------------------------------------
-+ */
-+static const uint8_t default_iprio[64] = {
-+    /* Custom interrupts 48 to 63 */
-+    [63] = IPRIO_MMAXIPRIO,
-+    [62] = IPRIO_MMAXIPRIO,
-+    [61] = IPRIO_MMAXIPRIO,
-+    [60] = IPRIO_MMAXIPRIO,
-+    [59] = IPRIO_MMAXIPRIO,
-+    [58] = IPRIO_MMAXIPRIO,
-+    [57] = IPRIO_MMAXIPRIO,
-+    [56] = IPRIO_MMAXIPRIO,
-+    [55] = IPRIO_MMAXIPRIO,
-+    [54] = IPRIO_MMAXIPRIO,
-+    [53] = IPRIO_MMAXIPRIO,
-+    [52] = IPRIO_MMAXIPRIO,
-+    [51] = IPRIO_MMAXIPRIO,
-+    [50] = IPRIO_MMAXIPRIO,
-+    [49] = IPRIO_MMAXIPRIO,
-+    [48] = IPRIO_MMAXIPRIO,
-+
-+    /* Custom interrupts 24 to 31 */
-+    [31] = IPRIO_MMAXIPRIO,
-+    [30] = IPRIO_MMAXIPRIO,
-+    [29] = IPRIO_MMAXIPRIO,
-+    [28] = IPRIO_MMAXIPRIO,
-+    [27] = IPRIO_MMAXIPRIO,
-+    [26] = IPRIO_MMAXIPRIO,
-+    [25] = IPRIO_MMAXIPRIO,
-+    [24] = IPRIO_MMAXIPRIO,
-+
-+    [47] = IPRIO_DEFAULT_UPPER,
-+    [23] = IPRIO_DEFAULT_UPPER + 1,
-+    [46] = IPRIO_DEFAULT_UPPER + 2,
-+    [45] = IPRIO_DEFAULT_UPPER + 3,
-+    [22] = IPRIO_DEFAULT_UPPER + 4,
-+    [44] = IPRIO_DEFAULT_UPPER + 5,
-+
-+    [43] = IPRIO_DEFAULT_UPPER + 6,
-+    [21] = IPRIO_DEFAULT_UPPER + 7,
-+    [42] = IPRIO_DEFAULT_UPPER + 8,
-+    [41] = IPRIO_DEFAULT_UPPER + 9,
-+    [20] = IPRIO_DEFAULT_UPPER + 10,
-+    [40] = IPRIO_DEFAULT_UPPER + 11,
-+
-+    [11] = IPRIO_DEFAULT_M,
-+    [3]  = IPRIO_DEFAULT_M + 1,
-+    [7]  = IPRIO_DEFAULT_M + 2,
-+
-+    [9]  = IPRIO_DEFAULT_S,
-+    [1]  = IPRIO_DEFAULT_S + 1,
-+    [5]  = IPRIO_DEFAULT_S + 2,
-+
-+    [12] = IPRIO_DEFAULT_SGEXT,
-+
-+    [10] = IPRIO_DEFAULT_VS,
-+    [2]  = IPRIO_DEFAULT_VS + 1,
-+    [6]  = IPRIO_DEFAULT_VS + 2,
-+
-+    [39] = IPRIO_DEFAULT_LOWER,
-+    [19] = IPRIO_DEFAULT_LOWER + 1,
-+    [38] = IPRIO_DEFAULT_LOWER + 2,
-+    [37] = IPRIO_DEFAULT_LOWER + 3,
-+    [18] = IPRIO_DEFAULT_LOWER + 4,
-+    [36] = IPRIO_DEFAULT_LOWER + 5,
-+
-+    [35] = IPRIO_DEFAULT_LOWER + 6,
-+    [17] = IPRIO_DEFAULT_LOWER + 7,
-+    [34] = IPRIO_DEFAULT_LOWER + 8,
-+    [33] = IPRIO_DEFAULT_LOWER + 9,
-+    [16] = IPRIO_DEFAULT_LOWER + 10,
-+    [32] = IPRIO_DEFAULT_LOWER + 11,
-+};
-+
-+uint8_t riscv_cpu_default_priority(int irq)
-+{
-+    if (irq < 0 || irq > 63) {
-+        return IPRIO_MMAXIPRIO;
-+    }
-+
-+    return default_iprio[irq] ? default_iprio[irq] : IPRIO_MMAXIPRIO;
-+};
-+
-+int riscv_cpu_pending_to_irq(CPURISCVState *env,
-+                             int extirq, unsigned int extirq_def_prio,
-+                             uint64_t pending, uint8_t *iprio)
-+{
-+    int irq, best_irq = RISCV_EXCP_NONE;
-+    unsigned int prio, best_prio = UINT_MAX;
-+
-+    if (!pending) {
-+        return RISCV_EXCP_NONE;
-+    }
-+
-+    irq = ctz64(pending);
-+    if (!((extirq == IRQ_M_EXT) ? riscv_cpu_cfg(env)->ext_smaia :
-+                                  riscv_cpu_cfg(env)->ext_ssaia)) {
-+        return irq;
-+    }
-+
-+    pending = pending >> irq;
-+    while (pending) {
-+        prio = iprio[irq];
-+        if (!prio) {
-+            if (irq == extirq) {
-+                prio = extirq_def_prio;
-+            } else {
-+                prio = (riscv_cpu_default_priority(irq) < extirq_def_prio) ?
-+                       1 : IPRIO_MMAXIPRIO;
-+            }
-+        }
-+        if ((pending & 0x1) && (prio <= best_prio)) {
-+            best_irq = irq;
-+            best_prio = prio;
-+        }
-+        irq++;
-+        pending = pending >> 1;
-+    }
-+
-+    return best_irq;
-+}
-+
-+uint64_t riscv_cpu_all_pending(CPURISCVState *env)
-+{
-+    uint32_t gein = get_field(env->hstatus, HSTATUS_VGEIN);
-+    uint64_t vsgein = (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0;
-+    uint64_t vstip = (env->vstime_irq) ? MIP_VSTIP : 0;
-+
-+    return (env->mip | vsgein | vstip) & env->mie;
-+}
-+
-+int riscv_cpu_mirq_pending(CPURISCVState *env)
-+{
-+    uint64_t irqs = riscv_cpu_all_pending(env) & ~env->mideleg &
-+                    ~(MIP_SGEIP | MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
-+
-+    return riscv_cpu_pending_to_irq(env, IRQ_M_EXT, IPRIO_DEFAULT_M,
-+                                    irqs, env->miprio);
-+}
-+
-+int riscv_cpu_sirq_pending(CPURISCVState *env)
-+{
-+    uint64_t irqs = riscv_cpu_all_pending(env) & env->mideleg &
-+                    ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
-+
-+    return riscv_cpu_pending_to_irq(env, IRQ_S_EXT, IPRIO_DEFAULT_S,
-+                                    irqs, env->siprio);
-+}
-+
-+int riscv_cpu_vsirq_pending(CPURISCVState *env)
-+{
-+    uint64_t irqs = riscv_cpu_all_pending(env) & env->mideleg &
-+                    (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
-+
-+    return riscv_cpu_pending_to_irq(env, IRQ_S_EXT, IPRIO_DEFAULT_S,
-+                                    irqs >> 1, env->hviprio);
-+}
-+
-+/* Return true is floating point support is currently enabled */
-+bool riscv_cpu_fp_enabled(CPURISCVState *env)
-+{
-+    if (env->mstatus & MSTATUS_FS) {
-+        if (env->virt_enabled && !(env->mstatus_hs & MSTATUS_FS)) {
-+            return false;
-+        }
-+        return true;
-+    }
-+
-+    return false;
-+}
-+
-+/* Return true is vector support is currently enabled */
-+bool riscv_cpu_vector_enabled(CPURISCVState *env)
-+{
-+    if (env->mstatus & MSTATUS_VS) {
-+        if (env->virt_enabled && !(env->mstatus_hs & MSTATUS_VS)) {
-+            return false;
-+        }
-+        return true;
-+    }
-+
-+    return false;
-+}
-+
-+void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env)
-+{
-+    uint64_t mstatus_mask = MSTATUS_MXR | MSTATUS_SUM |
-+                            MSTATUS_SPP | MSTATUS_SPIE | MSTATUS_SIE |
-+                            MSTATUS64_UXL | MSTATUS_VS;
-+
-+    if (riscv_has_ext(env, RVF)) {
-+        mstatus_mask |= MSTATUS_FS;
-+    }
-+    bool current_virt = env->virt_enabled;
-+
-+    g_assert(riscv_has_ext(env, RVH));
-+
-+    if (current_virt) {
-+        /* Current V=1 and we are about to change to V=0 */
-+        env->vsstatus = env->mstatus & mstatus_mask;
-+        env->mstatus &= ~mstatus_mask;
-+        env->mstatus |= env->mstatus_hs;
-+
-+        env->vstvec = env->stvec;
-+        env->stvec = env->stvec_hs;
-+
-+        env->vsscratch = env->sscratch;
-+        env->sscratch = env->sscratch_hs;
-+
-+        env->vsepc = env->sepc;
-+        env->sepc = env->sepc_hs;
-+
-+        env->vscause = env->scause;
-+        env->scause = env->scause_hs;
-+
-+        env->vstval = env->stval;
-+        env->stval = env->stval_hs;
-+
-+        env->vsatp = env->satp;
-+        env->satp = env->satp_hs;
-+    } else {
-+        /* Current V=0 and we are about to change to V=1 */
-+        env->mstatus_hs = env->mstatus & mstatus_mask;
-+        env->mstatus &= ~mstatus_mask;
-+        env->mstatus |= env->vsstatus;
-+
-+        env->stvec_hs = env->stvec;
-+        env->stvec = env->vstvec;
-+
-+        env->sscratch_hs = env->sscratch;
-+        env->sscratch = env->vsscratch;
-+
-+        env->sepc_hs = env->sepc;
-+        env->sepc = env->vsepc;
-+
-+        env->scause_hs = env->scause;
-+        env->scause = env->vscause;
-+
-+        env->stval_hs = env->stval;
-+        env->stval = env->vstval;
-+
-+        env->satp_hs = env->satp;
-+        env->satp = env->vsatp;
-+    }
-+}
-+
-+target_ulong riscv_cpu_get_geilen(CPURISCVState *env)
-+{
-+    if (!riscv_has_ext(env, RVH)) {
-+        return 0;
-+    }
-+
-+    return env->geilen;
-+}
-+
-+void riscv_cpu_set_geilen(CPURISCVState *env, target_ulong geilen)
-+{
-+    if (!riscv_has_ext(env, RVH)) {
-+        return;
-+    }
-+
-+    if (geilen > (TARGET_LONG_BITS - 1)) {
-+        return;
-+    }
-+
-+    env->geilen = geilen;
-+}
-+
-+/* This function can only be called to set virt when RVH is enabled */
-+void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable)
-+{
-+    /* Flush the TLB on all virt mode changes. */
-+    if (env->virt_enabled != enable) {
-+        tlb_flush(env_cpu(env));
-+    }
-+
-+    env->virt_enabled = enable;
-+
-+    if (enable) {
-+        /*
-+         * The guest external interrupts from an interrupt controller are
-+         * delivered only when the Guest/VM is running (i.e. V=1). This means
-+         * any guest external interrupt which is triggered while the Guest/VM
-+         * is not running (i.e. V=0) will be missed on QEMU resulting in guest
-+         * with sluggish response to serial console input and other I/O events.
-+         *
-+         * To solve this, we check and inject interrupt after setting V=1.
-+         */
-+        riscv_cpu_update_mip(env, 0, 0);
-+    }
-+}
-+
-+int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint64_t interrupts)
-+{
-+    CPURISCVState *env = &cpu->env;
-+    if (env->miclaim & interrupts) {
-+        return -1;
-+    } else {
-+        env->miclaim |= interrupts;
-+        return 0;
-+    }
-+}
-+
-+uint64_t riscv_cpu_update_mip(CPURISCVState *env, uint64_t mask,
-+                              uint64_t value)
-+{
-+    CPUState *cs = env_cpu(env);
-+    uint64_t gein, vsgein = 0, vstip = 0, old = env->mip;
-+
-+    if (env->virt_enabled) {
-+        gein = get_field(env->hstatus, HSTATUS_VGEIN);
-+        vsgein = (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0;
-+    }
-+
-+    vstip = env->vstime_irq ? MIP_VSTIP : 0;
-+
-+    QEMU_IOTHREAD_LOCK_GUARD();
-+
-+    env->mip = (env->mip & ~mask) | (value & mask);
-+
-+    if (env->mip | vsgein | vstip) {
-+        cpu_interrupt(cs, CPU_INTERRUPT_HARD);
-+    } else {
-+        cpu_reset_interrupt(cs, CPU_INTERRUPT_HARD);
-+    }
-+
-+    return old;
-+}
-+
-+void riscv_cpu_set_rdtime_fn(CPURISCVState *env, uint64_t (*fn)(void *),
-+                             void *arg)
-+{
-+    env->rdtime_fn = fn;
-+    env->rdtime_fn_arg = arg;
-+}
-+
-+void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, uint32_t priv,
-+                                   int (*rmw_fn)(void *arg,
-+                                                 target_ulong reg,
-+                                                 target_ulong *val,
-+                                                 target_ulong new_val,
-+                                                 target_ulong write_mask),
-+                                   void *rmw_fn_arg)
-+{
-+    if (priv <= PRV_M) {
-+        env->aia_ireg_rmw_fn[priv] = rmw_fn;
-+        env->aia_ireg_rmw_fn_arg[priv] = rmw_fn_arg;
-+    }
-+}
-+
-+void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
-+{
-+    g_assert(newpriv <= PRV_M && newpriv != PRV_RESERVED);
-+
-+    if (icount_enabled() && newpriv != env->priv) {
-+        riscv_itrigger_update_priv(env);
-+    }
-+    /* tlb_flush is unnecessary as mode is contained in mmu_idx */
-+    env->priv = newpriv;
-+    env->xl = cpu_recompute_xl(env);
-+    riscv_cpu_update_mask(env);
-+
-+    /*
-+     * Clear the load reservation - otherwise a reservation placed in one
-+     * context/process can be used by another, resulting in an SC succeeding
-+     * incorrectly. Version 2.2 of the ISA specification explicitly requires
-+     * this behaviour, while later revisions say that the kernel "should" use
-+     * an SC instruction to force the yielding of a load reservation on a
-+     * preemptive context switch. As a result, do both.
-+     */
-+    env->load_res = -1;
-+}
-+
-+static target_ulong riscv_transformed_insn(CPURISCVState *env,
-+                                           target_ulong insn,
-+                                           target_ulong taddr)
-+{
-+    target_ulong xinsn = 0;
-+    target_ulong access_rs1 = 0, access_imm = 0, access_size = 0;
-+
-+    /*
-+     * Only Quadrant 0 and Quadrant 2 of RVC instruction space need to
-+     * be uncompressed. The Quadrant 1 of RVC instruction space need
-+     * not be transformed because these instructions won't generate
-+     * any load/store trap.
-+     */
-+
-+    if ((insn & 0x3) != 0x3) {
-+        /* Transform 16bit instruction into 32bit instruction */
-+        switch (GET_C_OP(insn)) {
-+        case OPC_RISC_C_OP_QUAD0: /* Quadrant 0 */
-+            switch (GET_C_FUNC(insn)) {
-+            case OPC_RISC_C_FUNC_FLD_LQ:
-+                if (riscv_cpu_xlen(env) != 128) { /* C.FLD (RV32/64) */
-+                    xinsn = OPC_RISC_FLD;
-+                    xinsn = SET_RD(xinsn, GET_C_RS2S(insn));
-+                    access_rs1 = GET_C_RS1S(insn);
-+                    access_imm = GET_C_LD_IMM(insn);
-+                    access_size = 8;
-+                }
-+                break;
-+            case OPC_RISC_C_FUNC_LW: /* C.LW */
-+                xinsn = OPC_RISC_LW;
-+                xinsn = SET_RD(xinsn, GET_C_RS2S(insn));
-+                access_rs1 = GET_C_RS1S(insn);
-+                access_imm = GET_C_LW_IMM(insn);
-+                access_size = 4;
-+                break;
-+            case OPC_RISC_C_FUNC_FLW_LD:
-+                if (riscv_cpu_xlen(env) == 32) { /* C.FLW (RV32) */
-+                    xinsn = OPC_RISC_FLW;
-+                    xinsn = SET_RD(xinsn, GET_C_RS2S(insn));
-+                    access_rs1 = GET_C_RS1S(insn);
-+                    access_imm = GET_C_LW_IMM(insn);
-+                    access_size = 4;
-+                } else { /* C.LD (RV64/RV128) */
-+                    xinsn = OPC_RISC_LD;
-+                    xinsn = SET_RD(xinsn, GET_C_RS2S(insn));
-+                    access_rs1 = GET_C_RS1S(insn);
-+                    access_imm = GET_C_LD_IMM(insn);
-+                    access_size = 8;
-+                }
-+                break;
-+            case OPC_RISC_C_FUNC_FSD_SQ:
-+                if (riscv_cpu_xlen(env) != 128) { /* C.FSD (RV32/64) */
-+                    xinsn = OPC_RISC_FSD;
-+                    xinsn = SET_RS2(xinsn, GET_C_RS2S(insn));
-+                    access_rs1 = GET_C_RS1S(insn);
-+                    access_imm = GET_C_SD_IMM(insn);
-+                    access_size = 8;
-+                }
-+                break;
-+            case OPC_RISC_C_FUNC_SW: /* C.SW */
-+                xinsn = OPC_RISC_SW;
-+                xinsn = SET_RS2(xinsn, GET_C_RS2S(insn));
-+                access_rs1 = GET_C_RS1S(insn);
-+                access_imm = GET_C_SW_IMM(insn);
-+                access_size = 4;
-+                break;
-+            case OPC_RISC_C_FUNC_FSW_SD:
-+                if (riscv_cpu_xlen(env) == 32) { /* C.FSW (RV32) */
-+                    xinsn = OPC_RISC_FSW;
-+                    xinsn = SET_RS2(xinsn, GET_C_RS2S(insn));
-+                    access_rs1 = GET_C_RS1S(insn);
-+                    access_imm = GET_C_SW_IMM(insn);
-+                    access_size = 4;
-+                } else { /* C.SD (RV64/RV128) */
-+                    xinsn = OPC_RISC_SD;
-+                    xinsn = SET_RS2(xinsn, GET_C_RS2S(insn));
-+                    access_rs1 = GET_C_RS1S(insn);
-+                    access_imm = GET_C_SD_IMM(insn);
-+                    access_size = 8;
-+                }
-+                break;
-+            default:
-+                break;
-+            }
-+            break;
-+        case OPC_RISC_C_OP_QUAD2: /* Quadrant 2 */
-+            switch (GET_C_FUNC(insn)) {
-+            case OPC_RISC_C_FUNC_FLDSP_LQSP:
-+                if (riscv_cpu_xlen(env) != 128) { /* C.FLDSP (RV32/64) */
-+                    xinsn = OPC_RISC_FLD;
-+                    xinsn = SET_RD(xinsn, GET_C_RD(insn));
-+                    access_rs1 = 2;
-+                    access_imm = GET_C_LDSP_IMM(insn);
-+                    access_size = 8;
-+                }
-+                break;
-+            case OPC_RISC_C_FUNC_LWSP: /* C.LWSP */
-+                xinsn = OPC_RISC_LW;
-+                xinsn = SET_RD(xinsn, GET_C_RD(insn));
-+                access_rs1 = 2;
-+                access_imm = GET_C_LWSP_IMM(insn);
-+                access_size = 4;
-+                break;
-+            case OPC_RISC_C_FUNC_FLWSP_LDSP:
-+                if (riscv_cpu_xlen(env) == 32) { /* C.FLWSP (RV32) */
-+                    xinsn = OPC_RISC_FLW;
-+                    xinsn = SET_RD(xinsn, GET_C_RD(insn));
-+                    access_rs1 = 2;
-+                    access_imm = GET_C_LWSP_IMM(insn);
-+                    access_size = 4;
-+                } else { /* C.LDSP (RV64/RV128) */
-+                    xinsn = OPC_RISC_LD;
-+                    xinsn = SET_RD(xinsn, GET_C_RD(insn));
-+                    access_rs1 = 2;
-+                    access_imm = GET_C_LDSP_IMM(insn);
-+                    access_size = 8;
-+                }
-+                break;
-+            case OPC_RISC_C_FUNC_FSDSP_SQSP:
-+                if (riscv_cpu_xlen(env) != 128) { /* C.FSDSP (RV32/64) */
-+                    xinsn = OPC_RISC_FSD;
-+                    xinsn = SET_RS2(xinsn, GET_C_RS2(insn));
-+                    access_rs1 = 2;
-+                    access_imm = GET_C_SDSP_IMM(insn);
-+                    access_size = 8;
-+                }
-+                break;
-+            case OPC_RISC_C_FUNC_SWSP: /* C.SWSP */
-+                xinsn = OPC_RISC_SW;
-+                xinsn = SET_RS2(xinsn, GET_C_RS2(insn));
-+                access_rs1 = 2;
-+                access_imm = GET_C_SWSP_IMM(insn);
-+                access_size = 4;
-+                break;
-+            case 7:
-+                if (riscv_cpu_xlen(env) == 32) { /* C.FSWSP (RV32) */
-+                    xinsn = OPC_RISC_FSW;
-+                    xinsn = SET_RS2(xinsn, GET_C_RS2(insn));
-+                    access_rs1 = 2;
-+                    access_imm = GET_C_SWSP_IMM(insn);
-+                    access_size = 4;
-+                } else { /* C.SDSP (RV64/RV128) */
-+                    xinsn = OPC_RISC_SD;
-+                    xinsn = SET_RS2(xinsn, GET_C_RS2(insn));
-+                    access_rs1 = 2;
-+                    access_imm = GET_C_SDSP_IMM(insn);
-+                    access_size = 8;
-+                }
-+                break;
-+            default:
-+                break;
-+            }
-+            break;
-+        default:
-+            break;
-+        }
-+
-+        /*
-+         * Clear Bit1 of transformed instruction to indicate that
-+         * original insruction was a 16bit instruction
-+         */
-+        xinsn &= ~((target_ulong)0x2);
-+    } else {
-+        /* Transform 32bit (or wider) instructions */
-+        switch (MASK_OP_MAJOR(insn)) {
-+        case OPC_RISC_ATOMIC:
-+            xinsn = insn;
-+            access_rs1 = GET_RS1(insn);
-+            access_size = 1 << GET_FUNCT3(insn);
-+            break;
-+        case OPC_RISC_LOAD:
-+        case OPC_RISC_FP_LOAD:
-+            xinsn = SET_I_IMM(insn, 0);
-+            access_rs1 = GET_RS1(insn);
-+            access_imm = GET_IMM(insn);
-+            access_size = 1 << GET_FUNCT3(insn);
-+            break;
-+        case OPC_RISC_STORE:
-+        case OPC_RISC_FP_STORE:
-+            xinsn = SET_S_IMM(insn, 0);
-+            access_rs1 = GET_RS1(insn);
-+            access_imm = GET_STORE_IMM(insn);
-+            access_size = 1 << GET_FUNCT3(insn);
-+            break;
-+        case OPC_RISC_SYSTEM:
-+            if (MASK_OP_SYSTEM(insn) == OPC_RISC_HLVHSV) {
-+                xinsn = insn;
-+                access_rs1 = GET_RS1(insn);
-+                access_size = 1 << ((GET_FUNCT7(insn) >> 1) & 0x3);
-+                access_size = 1 << access_size;
-+            }
-+            break;
-+        default:
-+            break;
-+        }
-+    }
-+
-+    if (access_size) {
-+        xinsn = SET_RS1(xinsn, (taddr - (env->gpr[access_rs1] + access_imm)) &
-+                               (access_size - 1));
-+    }
-+
-+    return xinsn;
-+}
-+
-+/*
-+ * Handle Traps
-+ *
-+ * Adapted from Spike's processor_t::take_trap.
-+ *
-+ */
-+void riscv_cpu_do_interrupt(CPUState *cs)
-+{
-+    RISCVCPU *cpu = RISCV_CPU(cs);
-+    CPURISCVState *env = &cpu->env;
-+    bool write_gva = false;
-+    uint64_t s;
-+
-+    /*
-+     * cs->exception is 32-bits wide unlike mcause which is XLEN-bits wide
-+     * so we mask off the MSB and separate into trap type and cause.
-+     */
-+    bool async = !!(cs->exception_index & RISCV_EXCP_INT_FLAG);
-+    target_ulong cause = cs->exception_index & RISCV_EXCP_INT_MASK;
-+    uint64_t deleg = async ? env->mideleg : env->medeleg;
-+    target_ulong tval = 0;
-+    target_ulong tinst = 0;
-+    target_ulong htval = 0;
-+    target_ulong mtval2 = 0;
-+
-+    if  (cause == RISCV_EXCP_SEMIHOST) {
-+        do_common_semihosting(cs);
-+        env->pc += 4;
-+        return;
-+    }
-+
-+    if (!async) {
-+        /* set tval to badaddr for traps with address information */
-+        switch (cause) {
-+        case RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT:
-+        case RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT:
-+        case RISCV_EXCP_LOAD_ADDR_MIS:
-+        case RISCV_EXCP_STORE_AMO_ADDR_MIS:
-+        case RISCV_EXCP_LOAD_ACCESS_FAULT:
-+        case RISCV_EXCP_STORE_AMO_ACCESS_FAULT:
-+        case RISCV_EXCP_LOAD_PAGE_FAULT:
-+        case RISCV_EXCP_STORE_PAGE_FAULT:
-+            write_gva = env->two_stage_lookup;
-+            tval = env->badaddr;
-+            if (env->two_stage_indirect_lookup) {
-+                /*
-+                 * special pseudoinstruction for G-stage fault taken while
-+                 * doing VS-stage page table walk.
-+                 */
-+                tinst = (riscv_cpu_xlen(env) == 32) ? 0x00002000 : 0x00003000;
-+            } else {
-+                /*
-+                 * The "Addr. Offset" field in transformed instruction is
-+                 * non-zero only for misaligned access.
-+                 */
-+                tinst = riscv_transformed_insn(env, env->bins, tval);
-+            }
-+            break;
-+        case RISCV_EXCP_INST_GUEST_PAGE_FAULT:
-+        case RISCV_EXCP_INST_ADDR_MIS:
-+        case RISCV_EXCP_INST_ACCESS_FAULT:
-+        case RISCV_EXCP_INST_PAGE_FAULT:
-+            write_gva = env->two_stage_lookup;
-+            tval = env->badaddr;
-+            if (env->two_stage_indirect_lookup) {
-+                /*
-+                 * special pseudoinstruction for G-stage fault taken while
-+                 * doing VS-stage page table walk.
-+                 */
-+                tinst = (riscv_cpu_xlen(env) == 32) ? 0x00002000 : 0x00003000;
-+            }
-+            break;
-+        case RISCV_EXCP_ILLEGAL_INST:
-+        case RISCV_EXCP_VIRT_INSTRUCTION_FAULT:
-+            tval = env->bins;
-+            break;
-+        case RISCV_EXCP_BREAKPOINT:
-+            if (cs->watchpoint_hit) {
-+                tval = cs->watchpoint_hit->hitaddr;
-+                cs->watchpoint_hit = NULL;
-+            }
-+            break;
-+        default:
-+            break;
-+        }
-+        /* ecall is dispatched as one cause so translate based on mode */
-+        if (cause == RISCV_EXCP_U_ECALL) {
-+            assert(env->priv <= 3);
-+
-+            if (env->priv == PRV_M) {
-+                cause = RISCV_EXCP_M_ECALL;
-+            } else if (env->priv == PRV_S && env->virt_enabled) {
-+                cause = RISCV_EXCP_VS_ECALL;
-+            } else if (env->priv == PRV_S && !env->virt_enabled) {
-+                cause = RISCV_EXCP_S_ECALL;
-+            } else if (env->priv == PRV_U) {
-+                cause = RISCV_EXCP_U_ECALL;
-+            }
-+        }
-+    }
-+
-+    trace_riscv_trap(env->mhartid, async, cause, env->pc, tval,
-+                     riscv_cpu_get_trap_name(cause, async));
-+
-+    qemu_log_mask(CPU_LOG_INT,
-+                  "%s: hart:"TARGET_FMT_ld", async:%d, cause:"TARGET_FMT_lx", "
-+                  "epc:0x"TARGET_FMT_lx", tval:0x"TARGET_FMT_lx", desc=%s\n",
-+                  __func__, env->mhartid, async, cause, env->pc, tval,
-+                  riscv_cpu_get_trap_name(cause, async));
-+
-+    if (env->priv <= PRV_S &&
-+            cause < TARGET_LONG_BITS && ((deleg >> cause) & 1)) {
-+        /* handle the trap in S-mode */
-+        if (riscv_has_ext(env, RVH)) {
-+            uint64_t hdeleg = async ? env->hideleg : env->hedeleg;
-+
-+            if (env->virt_enabled && ((hdeleg >> cause) & 1)) {
-+                /* Trap to VS mode */
-+                /*
-+                 * See if we need to adjust cause. Yes if its VS mode interrupt
-+                 * no if hypervisor has delegated one of hs mode's interrupt
-+                 */
-+                if (cause == IRQ_VS_TIMER || cause == IRQ_VS_SOFT ||
-+                    cause == IRQ_VS_EXT) {
-+                    cause = cause - 1;
-+                }
-+                write_gva = false;
-+            } else if (env->virt_enabled) {
-+                /* Trap into HS mode, from virt */
-+                riscv_cpu_swap_hypervisor_regs(env);
-+                env->hstatus = set_field(env->hstatus, HSTATUS_SPVP,
-+                                         env->priv);
-+                env->hstatus = set_field(env->hstatus, HSTATUS_SPV, true);
-+
-+                htval = env->guest_phys_fault_addr;
-+
-+                riscv_cpu_set_virt_enabled(env, 0);
-+            } else {
-+                /* Trap into HS mode */
-+                env->hstatus = set_field(env->hstatus, HSTATUS_SPV, false);
-+                htval = env->guest_phys_fault_addr;
-+            }
-+            env->hstatus = set_field(env->hstatus, HSTATUS_GVA, write_gva);
-+        }
-+
-+        s = env->mstatus;
-+        s = set_field(s, MSTATUS_SPIE, get_field(s, MSTATUS_SIE));
-+        s = set_field(s, MSTATUS_SPP, env->priv);
-+        s = set_field(s, MSTATUS_SIE, 0);
-+        env->mstatus = s;
-+        env->scause = cause | ((target_ulong)async << (TARGET_LONG_BITS - 1));
-+        env->sepc = env->pc;
-+        env->stval = tval;
-+        env->htval = htval;
-+        env->htinst = tinst;
-+        env->pc = (env->stvec >> 2 << 2) +
-+                  ((async && (env->stvec & 3) == 1) ? cause * 4 : 0);
-+        riscv_cpu_set_mode(env, PRV_S);
-+    } else {
-+        /* handle the trap in M-mode */
-+        if (riscv_has_ext(env, RVH)) {
-+            if (env->virt_enabled) {
-+                riscv_cpu_swap_hypervisor_regs(env);
-+            }
-+            env->mstatus = set_field(env->mstatus, MSTATUS_MPV,
-+                                     env->virt_enabled);
-+            if (env->virt_enabled && tval) {
-+                env->mstatus = set_field(env->mstatus, MSTATUS_GVA, 1);
-+            }
-+
-+            mtval2 = env->guest_phys_fault_addr;
-+
-+            /* Trapping to M mode, virt is disabled */
-+            riscv_cpu_set_virt_enabled(env, 0);
-+        }
-+
-+        s = env->mstatus;
-+        s = set_field(s, MSTATUS_MPIE, get_field(s, MSTATUS_MIE));
-+        s = set_field(s, MSTATUS_MPP, env->priv);
-+        s = set_field(s, MSTATUS_MIE, 0);
-+        env->mstatus = s;
-+        env->mcause = cause | ~(((target_ulong)-1) >> async);
-+        env->mepc = env->pc;
-+        env->mtval = tval;
-+        env->mtval2 = mtval2;
-+        env->mtinst = tinst;
-+        env->pc = (env->mtvec >> 2 << 2) +
-+                  ((async && (env->mtvec & 3) == 1) ? cause * 4 : 0);
-+        riscv_cpu_set_mode(env, PRV_M);
-+    }
-+
-+    /*
-+     * NOTE: it is not necessary to yield load reservations here. It is only
-+     * necessary for an SC from "another hart" to cause a load reservation
-+     * to be yielded. Refer to the memory consistency model section of the
-+     * RISC-V ISA Specification.
-+     */
-+
-+    env->two_stage_lookup = false;
-+    env->two_stage_indirect_lookup = false;
-+}
-diff --git a/target/riscv/sysemu/meson.build b/target/riscv/sysemu/meson.build
-index 33fec8f11e..d5d8ad17a0 100644
---- a/target/riscv/sysemu/meson.build
-+++ b/target/riscv/sysemu/meson.build
-@@ -1,5 +1,6 @@
- riscv_system_ss.add(files(
-   'arch_dump.c',
-+  'cpu_helper.c',
-   'debug.c',
-   'machine.c',
-   'monitor.c',
--- 
-2.38.1
+no longer individual properties
 
+> string, will also permit validation that the properties have a meaning,
+> as well as potentially reject mutually exclusive combinations, or
+> enforce dependencies between extensions. That would not have be possible
+
+Under what circumstances is a device tree which declares support for a
+superset extension (e.g. m) required to also declare support for its subsets
+(e.g. zmmul)?  There are compatibility issues in both directions.
+
+Proposal: If an extension X is a superset of an extension Y and X is present
+in riscv,isa-extensions, Y must also be present if Y was ratified or added
+to the schema before X, but need not also be present if Y was ratified after
+or at the same time as X.  If X "depends on" Y, then Y must be present in
+riscv,isa-extensions even if X and Y were ratified at the same time.
+
+> with the current dt-schema infrastructure for arbitrary strings, as we
+> would need to add a riscv,isa parser to dt-validate!
+> That's not implemented in this patch, but rather left as future work (for
+> the brave, or the foolish).
+>
+> acpi
+> ====
+>
+> The current ACPI ECR is based on having a single ISA string unfortunately,
+> but ideally ACPI will move to another method, perhaps GUIDs, that give
+> explicit meaning to extensions.
+>
+> parser simplicity
+> =================
+>
+> Many systems that parse DT at runtime already implement an function that
+> can check for the presence of a string in an array of string, as it is
+> similar to the process for parsing a list of compatible strings, so a
+> bunch of new, custom, DT parsing should not be needed.
+> Getting rid of "riscv,isa" parsing would be a nice simplification, but
+> unfortunately for backwards compatibility with old dtbs, existing
+> parsers may not be removable - which may greatly simplify
+> dt parsing code. In Linux, for example, checking for whether a hart
+> supports an extension becomes as simple as:
+> 	of_property_match_string(node, "riscv,isa-extensions", "zicbom")
+>
+> vendor extensions
+> =================
+>
+> Compared to riscv,isa, this proposed scheme promotes vendor extensions,
+> oft touted as the strength of RISC-V, to first-class citizens.
+> At present, extensions are defined as meaning what the RISC-V ISA
+> specifications say they do. There is no realistic way of using that
+> interface to provide cross-platform definitions for what vendor
+> extensions mean. Vendor extensions may also have even less consistency
+> than RVI do in terms of versioning, or no care about backwards
+> compatibility.
+> The new property allows us to assign explicit meanings on a per vendor
+> extension basis, backed up by a description of their meanings.
+
+How are vendor extension names allocated?  Will any proposed name for a
+vendor extension pass through linux-riscv@ before it shows up in the wild,
+or are vendors expected to allocate extension names unilaterally?  Is it
+worth creating an experimental-* namespace for prototype implementations
+of unreleased extensions?
+
+> fin
+> ===
+>
+> Create a new file to store the extension meanings and a new
+> riscv,isa-base property to replace the aspect of riscv,isa that is
+> not represented by the new property - the base ISA implemented by a hart.
+>
+> As a starting point, add properties for extensions currently used in
+> Linux.
+>
+> Finally, mark riscv,isa as deprecated, as removing support for it in
+> existing programs would be an ABI break.
+>
+> CC: Palmer Dabbelt <palmer@dabbelt.com>
+> CC: Paul Walmsley <paul.walmsley@sifive.com>
+> CC: Rob Herring <robh+dt@kernel.org>
+> CC: Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>
+> CC: Alistair Francis <alistair.francis@wdc.com>
+> CC: Andrew Jones <ajones@ventanamicro.com>
+> CC: Anup Patel <apatel@ventanamicro.com>
+> CC: Atish Patra <atishp@atishpatra.org>
+> CC: Jessica Clarke <jrtc27@jrtc27.com>
+> CC: Rick Chen <rick@andestech.com>
+> CC: Leo <ycliang@andestech.com>
+> CC: Oleksii <oleksii.kurochko@gmail.com>
+> CC: linux-riscv@lists.infradead.org
+> CC: qemu-riscv@nongnu.org
+> CC: u-boot@lists.denx.de
+> CC: devicetree@vger.kernel.org
+> CC: linux-kernel@vger.kernel.org
+> Reviewed-by: Palmer Dabbelt <palmer@rivosinc.com>
+> Acked-by: Palmer Dabbelt <palmer@rivosinc.com>
+> Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+> ---
+> Changes in v3:
+> - Per Rob's suggestion, switch to an array of strings. Cuts down on the
+>   size, compared to booleans. It has a standard mechanism for parsing
+>   (you need to parse arrays of strings for compatibles). It still allows
+>   for having a limited set of explicitly defined properties - so the
+>   advantages over a free-form string still apply.
+> - Pick up Palmer's Ack and Review (although I expect that he will be the
+>   one to apply this).
+> ---
+>  .../devicetree/bindings/riscv/cpus.yaml       |  43 ++-
+>  .../devicetree/bindings/riscv/extensions.yaml | 245 ++++++++++++++++++
+>  2 files changed, 265 insertions(+), 23 deletions(-)
+>  create mode 100644 Documentation/devicetree/bindings/riscv/extensions.yaml
+>
+> diff --git a/Documentation/devicetree/bindings/riscv/cpus.yaml 
+> b/Documentation/devicetree/bindings/riscv/cpus.yaml
+> index 67bd239ead0b..74bc92591086 100644
+> --- a/Documentation/devicetree/bindings/riscv/cpus.yaml
+> +++ b/Documentation/devicetree/bindings/riscv/cpus.yaml
+> @@ -25,6 +25,7 @@ description: |
+> 
+>  allOf:
+>    - $ref: /schemas/cpu.yaml#
+> +  - $ref: extensions.yaml
+> 
+>  properties:
+>    compatible:
+> @@ -82,25 +83,6 @@ properties:
+>      description:
+>        The blocksize in bytes for the Zicboz cache operations.
+> 
+> -  riscv,isa:
+> -    description:
+> -      Identifies the specific RISC-V instruction set architecture
+> -      supported by the hart.  These are documented in the RISC-V
+> -      User-Level ISA document, available from
+> -      https://riscv.org/specifications/
+> -
+> -      Due to revisions of the ISA specification, some deviations
+> -      have arisen over time.
+> -      Notably, riscv,isa was defined prior to the creation of the
+> -      Zicntr, Zicsr, Zifencei and Zihpm extensions and thus "i"
+> -      implies "zicntr_zicsr_zifencei_zihpm".
+> -
+> -      While the isa strings in ISA specification are case
+> -      insensitive, letters in the riscv,isa string must be all
+> -      lowercase.
+> -    $ref: /schemas/types.yaml#/definitions/string
+> -    pattern: 
+> ^rv(?:64|32)imaf?d?q?c?b?k?j?p?v?h?(?:[hsxz](?:[a-z])+)?(?:_[hsxz](?:[a-z])+)*$
+> -
+>    # RISC-V has multiple properties for cache op block sizes as the 
+> sizes
+>    # differ between individual CBO extensions
+>    cache-op-block-size: false
+> @@ -139,8 +121,17 @@ properties:
+>        DMIPS/MHz, relative to highest capacity-dmips-mhz
+>        in the system.
+> 
+> +oneOf:
+> +  - required:
+> +      - riscv,isa
+> +  - required:
+> +      - riscv,isa-base
+> +
+> +dependencies:
+> +  riscv,isa-base: [ "riscv,isa-extensions" ]
+> +  riscv,isa-extensions: [ "riscv,isa-base" ]
+> +
+>  required:
+> -  - riscv,isa
+>    - interrupt-controller
+> 
+>  unevaluatedProperties: false
+> @@ -160,7 +151,9 @@ examples:
+>                  i-cache-sets = <128>;
+>                  i-cache-size = <16384>;
+>                  reg = <0>;
+> -                riscv,isa = "rv64imac";
+> +                riscv,isa-base = "rv64i";
+> +                riscv,isa-extensions = "i", "m", "a", "c";
+> +
+>                  cpu_intc0: interrupt-controller {
+>                          #interrupt-cells = <1>;
+>                          compatible = "riscv,cpu-intc";
+> @@ -183,8 +176,10 @@ examples:
+>                  i-tlb-size = <32>;
+>                  mmu-type = "riscv,sv39";
+>                  reg = <1>;
+> -                riscv,isa = "rv64imafdc";
+>                  tlb-split;
+> +                riscv,isa-base = "rv64i";
+> +                riscv,isa-extensions = "i", "m", "a", "f", "d", "c";
+> +
+>                  cpu_intc1: interrupt-controller {
+>                          #interrupt-cells = <1>;
+>                          compatible = "riscv,cpu-intc";
+> @@ -202,8 +197,10 @@ examples:
+>                  device_type = "cpu";
+>                  reg = <0>;
+>                  compatible = "riscv";
+> -                riscv,isa = "rv64imafdc";
+>                  mmu-type = "riscv,sv48";
+> +                riscv,isa-base = "rv64i";
+> +                riscv,isa-extensions = "i", "m", "a", "f", "d", "c";
+> +
+>                  interrupt-controller {
+>                          #interrupt-cells = <1>;
+>                          interrupt-controller;
+> diff --git a/Documentation/devicetree/bindings/riscv/extensions.yaml 
+> b/Documentation/devicetree/bindings/riscv/extensions.yaml
+> new file mode 100644
+> index 000000000000..af98307f2c2c
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/riscv/extensions.yaml
+> @@ -0,0 +1,245 @@
+> +# SPDX-License-Identifier: (GPL-2.0 OR MIT)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/riscv/extensions.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: RISC-V ISA extensions
+> +
+> +maintainers:
+> +  - Paul Walmsley <paul.walmsley@sifive.com>
+> +  - Palmer Dabbelt <palmer@sifive.com>
+> +  - Conor Dooley <conor@kernel.org>
+> +
+> +description: |
+> +  RISC-V has a large number of extensions, some of which are "standard"
+> +  extensions, meaning they are ratified by RISC-V International, and 
+> others
+> +  are "vendor" extensions.
+> +  This document defines properties that indicate whether a hart 
+> supports a
+> +  given extension.
+> +
+> +  Once a standard extension has been ratified, no changes in behaviour 
+> can be
+> +  made without the creation of a new extension.
+> +  The properties for standard extensions therefore map to their 
+> originally
+> +  ratified states, with the exception of the I, Zicntr & Zihpm 
+> extensions.
+> +  See the "i" property for more information.
+> +
+> +select:
+> +  properties:
+> +    compatible:
+> +      contains:
+> +        const: riscv
+> +
+> +properties:
+> +  riscv,isa:
+> +    description:
+> +      Identifies the specific RISC-V instruction set architecture
+> +      supported by the hart.  These are documented in the RISC-V
+> +      User-Level ISA document, available from
+> +      https://riscv.org/specifications/
+> +
+> +      Due to revisions of the ISA specification, some deviations
+> +      have arisen over time.
+> +      Notably, riscv,isa was defined prior to the creation of the
+> +      Zicntr, Zicsr, Zifencei and Zihpm extensions and thus "i"
+> +      implies "zicntr_zicsr_zifencei_zihpm".
+> +
+> +      While the isa strings in ISA specification are case
+> +      insensitive, letters in the riscv,isa string must be all
+> +      lowercase.
+> +    $ref: /schemas/types.yaml#/definitions/string
+> +    pattern: 
+> ^rv(?:64|32)imaf?d?q?c?b?k?j?p?v?h?(?:[hsxz](?:[a-z])+)?(?:_[hsxz](?:[a-z])+)*$
+> +    deprecated: true
+> +
+> +  riscv,isa-base:
+> +    description:
+> +      The base ISA implemented by this hart, as described by the 
+> 20191213
+> +      version of the unprivileged ISA specification.
+> +    enum:
+> +      - rv32i
+> +      - rv64i
+> +
+> +  riscv,isa-extensions:
+> +    $ref: /schemas/types.yaml#/definitions/string-array
+> +    minItems: 1
+> +    description: Extensions supported by the hart.
+> +    items:
+> +      anyOf:
+> +        # single letter extensions, in canonical order
+> +        - const: i
+> +          description: |
+> +            The base integer instruction set, as ratified in the 
+> 20191213
+> +            version of the unprivileged ISA specification, with the 
+> exception of
+> +            counter access.
+> +            Counter access was removed after the ratification of the 
+> 20191213
+> +            version of the unprivileged specification and shunted into 
+> the
+> +            Zicntr and Zihpm extensions.
+
+I think this may belong in the description of zicsr?  rdcycle in 20191213
+is a special case of csrrs, which is in zicsr not the base.
+
+> +
+> +        - const: m
+> +          description:
+> +            The standard M extension for integer multiplication and 
+> division, as
+> +            ratified in the 20191213 version of the unprivileged ISA
+> +            specification.
+> +
+> +        - const: a
+> +          description:
+> +            The standard A extension for atomic instructions, as 
+> ratified in the
+> +            20191213 version of the unprivileged ISA specification.
+> +
+> +        - const: f
+> +          description:
+> +            The standard F extension for single-precision floating 
+> point, as
+> +            ratified in the 20191213 version of the unprivileged ISA
+> +            specification.
+
+Do we want to be able to describe the K210 in the new schema?  I believe
+that it implements the 2.0 F and D extensions, which are neither forward
+nor backward compatible with the ratified ones.
+
+#include <stdio.h>
+int main() {
+    long a,b;
+    asm("fsub.s fa0,fa0,fa0\n"
+        "fdiv.s fa0,fa0,fa0\n"
+        "fmv.x.d %0,fa0\n"
+        "fcvt.s.w fa1,x0\n"
+        "fmax.s fa1,fa1,fa0\n"
+        "fmv.x.d %1,fa1\n" : "=r" (a), "=r" (b));
+    printf("box(nan) = %lx\nmax(0,nan) = %lx\n", a, b);
+    return 0;
+}
+
+> +
+> +        - const: d
+> +          description:
+> +            The standard D extension for double-precision 
+> floating-point, as
+> +            ratified in the 20191213 version of the unprivileged ISA
+> +            specification.
+> +
+> +        - const: q
+> +          description:
+> +            The standard Q extension for quad-precision 
+> floating-point, as
+> +            ratified in the 20191213 version of the unprivileged ISA
+> +            specification.
+> +
+> +        - const: c
+> +          description:
+> +            The standard C extension for compressed instructions, as 
+> ratified in
+> +            the 20191213 version of the unprivileged ISA specification.
+> +
+> +        - const: v
+> +          description:
+> +            The standard V extension for vector operations, as ratified
+> +            in-and-around commit 7a6c8ae ("Fix text that describes 
+> vfmv.v.f
+> +            encoding") of the riscv-v-spec.
+> +
+> +        - const: h
+> +          description:
+> +            The standard H extension for hypervisors as ratified in 
+> the 20191213
+> +            version of the privileged ISA specification.
+> +
+> +        # multi-letter extensions, sorted alphanumerically
+> +        - const: smaia
+> +          description: |
+> +            The standard Smaia supervisor-level extension for the 
+> advanced
+> +            interrupt architecture for machine-mode-visible csr and 
+> behavioural
+> +            changes to interrupts as frozen at commit ccbddab ("Merge 
+> pull
+> +            request #42 from riscv/jhauser-2023-RC4") of riscv-aia.
+> +
+> +        - const: ssaia
+> +          description: |
+> +            The standard Ssaia supervisor-level extension for the 
+> advanced
+> +            interrupt architecture for supervisor-mode-visible csr and
+> +            behavioural changes to interrupts as frozen at commit 
+> ccbddab
+> +            ("Merge pull request #42 from riscv/jhauser-2023-RC4") of 
+> riscv-aia.
+> +
+> +        - const: sscofpmf
+> +          description: |
+> +            The standard Sscofpmf supervisor-level extension for count 
+> overflow
+> +            and mode-based filtering as ratified at commit 01d1df0 
+> ("Add ability
+> +            to manually trigger workflow. (#2)") of 
+> riscv-count-overflow.
+> +
+> +        - const: sstc
+> +          description: |
+> +            The standard Sstc supervisor-level extension for time 
+> compare as
+> +            ratified at commit 3f9ed34 ("Add ability to manually 
+> trigger
+> +            workflow. (#2)") of riscv-time-compare.
+> +
+> +        - const: svinval
+> +          description:
+> +            The standard Svinval supervisor-level extension for 
+> fine-grained
+> +            address-translation cache invalidation as ratified in the 
+> 20191213
+> +            version of the privileged ISA specification.
+> +
+> +        - const: svnapot
+> +          description:
+> +            The standard Svnapot supervisor-level extensions for napot
+> +            translation contiguity as ratified in the 20191213 version 
+> of the
+> +            privileged ISA specification.
+> +
+> +        - const: svpbmt
+> +          description:
+> +            The standard Svpbmt supervisor-level extensions for 
+> page-based
+> +            memory types as ratified in the 20191213 version of the 
+> privileged
+> +            ISA specification.
+> +
+> +        - const: zba
+> +          description: |
+> +            The standard Zba bit-manipulation extension for address 
+> generation
+> +            acceleration instructions as ratified at commit 6d33919 
+> ("Merge pull
+> +            request #158 from hirooih/clmul-fix-loop-end-condition") of
+> +            riscv-bitmanip.
+> +
+> +        - const: zbb
+> +          description: |
+> +            The standard Zbb bit-manipulation extension for basic 
+> bit-manipulation
+> +            as ratified at commit 6d33919 ("Merge pull request #158 
+> from
+> +            hirooih/clmul-fix-loop-end-condition") of riscv-bitmanip.
+> +
+> +        - const: zbc
+> +          description: |
+> +            The standard Zbc bit-manipulation extension for carry-less
+> +            multiplication as ratified at commit 6d33919 ("Merge pull 
+> request
+> +            #158 from hirooih/clmul-fix-loop-end-condition") of 
+> riscv-bitmanip.
+> +
+> +        - const: zbs
+> +          description: |
+> +            The standard Zbs bit-manipulation extension for single-bit
+> +            instructions as ratified at commit 6d33919 ("Merge pull 
+> request #158
+> +            from hirooih/clmul-fix-loop-end-condition") of 
+> riscv-bitmanip.
+> +
+> +        - const: zicbom
+> +          description:
+> +            The standard Zicbom extension for base cache management 
+> operations as
+> +            ratified in commit 3dd606f ("Create cmobase-v1.0.pdf") of 
+> riscv-CMOs.
+> +
+> +        - const: zicbop
+> +          description:
+> +            The standard Zicbop extension for cache-block prefetch 
+> instructions
+> +            as ratified in commit 3dd606f ("Create cmobase-v1.0.pdf") 
+> of
+> +            riscv-CMOs.
+> +
+> +        - const: zicboz
+> +          description:
+> +            The standard Zicboz extension for cache-block zeroing as 
+> ratified
+> +            in commit 3dd606f ("Create cmobase-v1.0.pdf") of 
+> riscv-CMOs.
+> +
+> +        - const: zicntr
+> +          description:
+> +            The standard Zicntr extension for base counters and 
+> timers, as
+> +            ratified in the 20191213 version of the unprivileged ISA
+> +            specification.
+> +
+> +        - const: zicsr
+> +          description:
+> +            The standard Zicsr extension for control and status 
+> register
+> +            instructions, as ratified in the 20191213 version of the
+> +            unprivileged ISA specification.
+> +
+> +        - const: zifencei
+> +          description:
+> +            The standard Zifencei extension for instruction-fetch 
+> fence, as
+> +            ratified in the 20191213 version of the unprivileged ISA
+> +            specification.
+> +
+> +        - const: zihintpause
+> +          description:
+> +            The standard Zihintpause extension for pause hints, as 
+> ratified in
+> +            commit d8ab5c7 ("Zihintpause is ratified") of the 
+> riscv-isa-manual.
+> +
+> +        - const: zihpm
+> +          description:
+> +            The standard Zihpm extension for hardware performance 
+> counters, as
+> +            ratified in the 20191213 version of the unprivileged ISA
+> +            specification.
+> +
+> +        - const: ztso
+> +          description:
+> +            The standard Ztso extension for total store ordering, as 
+> ratified
+> +            in commit 2e5236 ("Ztso is now ratified.") of the
+> +            riscv-isa-manual.
+
+There are quite a few extension names defined in ratified specifications
+that aren't in that list yet.  Would there be interest in adding them or
+are we waiting for specific conditions to be met?
+
+In particular several subsystems depend on "ziccif" from the profiles
+spec but we haven't previously had a way to check or document that
+dependency.
+
+> +additionalProperties: true
+> +...
+> -- 
+> 2.40.1
+>
+>
+> _______________________________________________
+> linux-riscv mailing list
+> linux-riscv@lists.infradead.org
+> http://lists.infradead.org/mailman/listinfo/linux-riscv
 
