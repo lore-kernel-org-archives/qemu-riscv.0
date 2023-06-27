@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD119EB64D9
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Jun 2023 11:31:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 321BFEB64D9
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Jun 2023 12:35:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qE6uk-0002pA-Ga; Tue, 27 Jun 2023 07:31:20 -0400
+	id 1qE7up-00014d-Sc; Tue, 27 Jun 2023 08:35:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <Conor.Dooley@microchip.com>)
- id 1qE6uc-0002la-Sz
- for qemu-riscv@nongnu.org; Tue, 27 Jun 2023 07:31:12 -0400
-Received: from esa.microchip.iphmx.com ([68.232.154.123])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <Conor.Dooley@microchip.com>)
- id 1qE6uX-00006e-U4
- for qemu-riscv@nongnu.org; Tue, 27 Jun 2023 07:31:09 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1687865465; x=1719401465;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=QH8bCWg3AE+hEhb3xFWyuBXx3P9V8zIniV4gMZjSDGI=;
- b=fkBhs2cplCatQnrES4nDbzabDZX5l3wF+U4DyiKXC/dW2iSqpFtzaK2N
- HLjwtOpr349E4Oq5Qbg9fawE9sXXXh/9t4f9X2JZ2snyXxcNCNwHUPqLj
- yQ+TLAdesNhGxAddjY4jbJoU7/PVeGgal8U5FMZ/M4TzVzhYsxVRhjAUS
- 7h/zYuNA/tgVFpQOa8hD2Ch1CigaQCmEsNCBweUDXvLGGh6/2sz/GbZ/x
- iLakuo43nmvG9prOazzmaSjoVpxLeq1PKbkFBOSbyBw0CpaUE0f92iUKh
- g6lABBXdo1ukOgcu7BE2NjmBhJz+JefgAz7HxwkiFyBCZVTh/cDjrdPaP Q==;
-X-IronPort-AV: E=Sophos;i="6.01,162,1684825200"; 
- d="asc'?scan'208";a="158783040"
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa6.microchip.iphmx.com with ESMTP/TLS/AES256-SHA256;
- 27 Jun 2023 04:30:57 -0700
-Received: from chn-vm-ex03.mchp-main.com (10.10.85.151) by
- chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.21; Tue, 27 Jun 2023 04:30:56 -0700
-Received: from wendy (10.10.115.15) by chn-vm-ex03.mchp-main.com
- (10.10.85.151) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21 via Frontend
- Transport; Tue, 27 Jun 2023 04:30:53 -0700
-Date: Tue, 27 Jun 2023 12:30:25 +0100
-From: Conor Dooley <conor.dooley@microchip.com>
-To: Atish Patra <atishp@atishpatra.org>
-CC: Stefan O'Rear <sorear@fastmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- <conor@kernel.org>, Paul Walmsley <paul.walmsley@sifive.com>, Rob Herring
- <robh+dt@kernel.org>, Krzysztof Kozlowski
- <krzysztof.kozlowski+dt@linaro.org>, Alistair Francis
- <alistair.francis@wdc.com>, Andrew Jones <ajones@ventanamicro.com>, Anup
- Patel <apatel@ventanamicro.com>, Jessica Clarke <jrtc27@jrtc27.com>, Rick
- Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, Oleksii
- <oleksii.kurochko@gmail.com>, <linux-riscv@lists.infradead.org>,
- <qemu-riscv@nongnu.org>, <u-boot@lists.denx.de>,
- <devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>, Palmer Dabbelt
- <palmer@rivosinc.com>
-Subject: Re: [PATCH v3] dt-bindings: riscv: deprecate riscv,isa
-Message-ID: <20230627-harmonize-monastery-c6b40d2e5556@wendy>
-References: <20230626-unmarked-atom-70b4d624a386@wendy>
- <a6449161-d800-4094-bf15-cde890ed17b5@app.fastmail.com>
- <CAOnJCULs47ZCai5EOQJPFrgV1-2xPjWAOB2CfUDStcigsR5Wew@mail.gmail.com>
+ (Exim 4.90_1) (envelope-from <rehn@rivosinc.com>) id 1qE7uk-00013D-F8
+ for qemu-riscv@nongnu.org; Tue, 27 Jun 2023 08:35:24 -0400
+Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <rehn@rivosinc.com>) id 1qE7ub-00076S-VO
+ for qemu-riscv@nongnu.org; Tue, 27 Jun 2023 08:35:20 -0400
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-4f86e6e4038so5513340e87.0
+ for <qemu-riscv@nongnu.org>; Tue, 27 Jun 2023 05:35:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1687869308; x=1690461308; 
+ h=mime-version:user-agent:content-transfer-encoding:references
+ :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=nSlPFv4xsGFp7sT3StespzX3zM8bJK9dIseoY9yP/rk=;
+ b=fFBunD/K1aKt1HbuQOYAu5xJcm99tu13PLZ9I7KS2e3auSVKmurNiR6x9dZuj7MtZL
+ DViwTB56QLqXj9GwZtRY7aSp3eLF0+wutbXhTT1gKn/sUTJIgLYx6Zzphq1wXZEzxzgA
+ Pp9+D3KcB464artJz0t09vOQ56JSNtTnzutQIHeoBH5kj1DEd8KaPkFa6pgEoCwZh4w2
+ l0pld4ReDKSmK3Vi060Vv+bTZ4Cu807WBI7FlTGGZxNqA5bE4GobQilNYiDfrLtePuLT
+ Pn3DHzR9operBjquAAdt6xprxicYw9LUVqUSsqagbMlt1aiyBvXn3gEYefBKiGZoYzsW
+ HFhQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1687869308; x=1690461308;
+ h=mime-version:user-agent:content-transfer-encoding:references
+ :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=nSlPFv4xsGFp7sT3StespzX3zM8bJK9dIseoY9yP/rk=;
+ b=I9ro2a6Igja82zX6qQ6DWDKtUoaEehRGniYvu6SdefkPCekIgmPSO1xon7Dh5v2AnK
+ LoXjmhnlt8+N1FfmSyrHOKw1EQEI2y7/fC880a/19/a0H8umRd4ddZlP2Igt4RXQek5f
+ /y5rWUgstWlH6QH0CXu8JbC4wEyfCbgds8/DkBF9v0u77QjQZBRvR+XiE4eNJ8PGq4Xg
+ 8HSyXPOFQL1h4TEIloye91dXRUNSrNiJgxNo6C67QKdZ0/umaeo1/eikw9Yq6Hw0rIZM
+ 5mGVRoE/f7iLepmr6S/ksHz9jF92LnFNLX/Ze6kDrjxn8nyMbauluVO0SFSFLhO01QcA
+ nfdg==
+X-Gm-Message-State: AC+VfDwE0ibHkfzqWE/uovh2TRqC9kjsUBMWr4BW0coFWSRhCfjTJ39b
+ rf8+EW4kTE+fdYxp0fgSFi2npg==
+X-Google-Smtp-Source: ACHHUZ7PYCXH0zb5S0rhu2dxqQPtaLTpTeP9mEHIEOleENXWd9YLJozqbcpCPzeIlIuoUlFMi3wuwA==
+X-Received: by 2002:a05:6512:110a:b0:4fb:7bf8:51c8 with SMTP id
+ l10-20020a056512110a00b004fb7bf851c8mr902255lfg.1.1687869307866; 
+ Tue, 27 Jun 2023 05:35:07 -0700 (PDT)
+Received: from [192.168.50.45] (h-155-4-92-80.A980.priv.bahnhof.se.
+ [155.4.92.80]) by smtp.gmail.com with ESMTPSA id
+ r1-20020a19ac41000000b004f8416892f1sm1480030lfc.87.2023.06.27.05.35.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 27 Jun 2023 05:35:07 -0700 (PDT)
+Message-ID: <0af8f346455e514eeff14f12ef3d22609225fc29.camel@rivosinc.com>
+Subject: Re: [PATCH] linux-user/riscv: Add syscall riscv_hwprobe
+From: Robbin Ehn <rehn@rivosinc.com>
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-devel@nongnu.org, palmer@rivosinc.com, laurent@vivier.eu, 
+ qemu-riscv@nongnu.org, richard.henderson@linaro.org, ajones@ventanamicro.com
+Date: Tue, 27 Jun 2023 14:35:06 +0200
+In-Reply-To: <CAKmqyKNpE7gCMXqWnxCp58v+aXb=hWswniOTthM7joL+E+1Q_A@mail.gmail.com>
+References: <06a4543df2aa6101ca9a48f21a3198064b4f1f87.camel@rivosinc.com>
+ <CAKmqyKNpE7gCMXqWnxCp58v+aXb=hWswniOTthM7joL+E+1Q_A@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.48.1-0ubuntu1 
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="kURSL2kHWkb9OT7S"
-Content-Disposition: inline
-In-Reply-To: <CAOnJCULs47ZCai5EOQJPFrgV1-2xPjWAOB2CfUDStcigsR5Wew@mail.gmail.com>
-Received-SPF: pass client-ip=68.232.154.123;
- envelope-from=Conor.Dooley@microchip.com; helo=esa.microchip.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::134;
+ envelope-from=rehn@rivosinc.com; helo=mail-lf1-x134.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,225 +94,241 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---kURSL2kHWkb9OT7S
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hey Atish, Stefan,
-
-On Mon, Jun 26, 2023 at 11:35:10PM -0700, Atish Patra wrote:
-> On Mon, Jun 26, 2023 at 5:40=E2=80=AFPM Stefan O'Rear <sorear@fastmail.co=
-m> wrote:
-> > On Mon, Jun 26, 2023, at 6:10 AM, Conor Dooley wrote:
-
-> > > Off-list, some of the RVI folks have committed to shoring up the word=
-ing
-> > > in either the ISA specifications, the riscv-isa-manual or
-> > > so that in the future, modifications to and additions or removals of
-> > > features will require a new extension. Codifying that assertion
-> > > somewhere would make it quite unlikely that compatibility would be
-> > > broken, but we have the tools required to deal with it, if & when it
-> > > crops up.
-> > > It is in our collective interest, as consumers of extension meanings,=
- to
-> > > define a scheme that enforces compatibility.
-> > >
-> > > The use of individual properties, rather than elements in a single
-> >
-> > no longer individual properties
-> >
-> > > string, will also permit validation that the properties have a meanin=
-g,
-> > > as well as potentially reject mutually exclusive combinations, or
-> > > enforce dependencies between extensions. That would not have be possi=
-ble
-> >
-> > Under what circumstances is a device tree which declares support for a
-> > superset extension (e.g. m) required to also declare support for its su=
-bsets
-> > (e.g. zmmul)?  There are compatibility issues in both directions.
-> >
-> > Proposal: If an extension X is a superset of an extension Y and X is pr=
-esent
-> > in riscv,isa-extensions, Y must also be present if Y was ratified or ad=
-ded
-> > to the schema before X, but need not also be present if Y was ratified =
-after
-> > or at the same time as X.  If X "depends on" Y, then Y must be present =
-in
-> > riscv,isa-extensions even if X and Y were ratified at the same time.
-
-Yes, I think that this all makes sense from a compatibility point of
-view. Splitting it up:
-
-> > If an extension X is a superset of an extension Y and X is present
-> > in riscv,isa-extensions, Y must also be present if Y was ratified or ad=
-ded
-> > to the schema before X
-
-This makes total sense from a "being nice to" software point of view.
-
-> > but need not also be present if Y was ratified after
-> > or at the same time as X.
-
-It may make sense to reduce this to only after, or not permit the
-supersets at all where they are ratified alongside their subsets.
-Cross that bridge when we come to it perhaps.
-
-> > If X "depends on" Y, then Y must be present in
-> > riscv,isa-extensions even if X and Y were ratified at the same tim
-
-For Linux, this is already the case for F & D. I think that's a good
-policy to follow.
-
-> > >
-> > > vendor extensions
-> > > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > >
-> > > Compared to riscv,isa, this proposed scheme promotes vendor extension=
-s,
-> > > oft touted as the strength of RISC-V, to first-class citizens.
-> > > At present, extensions are defined as meaning what the RISC-V ISA
-> > > specifications say they do. There is no realistic way of using that
-> > > interface to provide cross-platform definitions for what vendor
-> > > extensions mean. Vendor extensions may also have even less consistency
-> > > than RVI do in terms of versioning, or no care about backwards
-> > > compatibility.
-> > > The new property allows us to assign explicit meanings on a per vendor
-> > > extension basis, backed up by a description of their meanings.
-> >
-> > How are vendor extension names allocated?  Will any proposed name for a
-> > vendor extension pass through linux-riscv@ before it shows up in the wi=
-ld,
-> > or are vendors expected to allocate extension names unilaterally?
-
-The same way any other dt-binding works, it's no different in that
-respect to compatible strings.
-
-> > Is it
-> > worth creating an experimental-* namespace for prototype implementations
-> > of unreleased extensions?
-
-IMO, people are free to do whatever they like in their own development
-trees. I don't really know why we'd introduce stuff in dt-bindings for
-things that are only in an experimental state.
-
-> > > +  riscv,isa-extensions:
-> > > +    $ref: /schemas/types.yaml#/definitions/string-array
-> > > +    minItems: 1
-> > > +    description: Extensions supported by the hart.
-> > > +    items:
-> > > +      anyOf:
-> > > +        # single letter extensions, in canonical order
-> > > +        - const: i
-> > > +          description: |
-> > > +            The base integer instruction set, as ratified in the
-> > > 20191213
-> > > +            version of the unprivileged ISA specification, with the
-> > > exception of
-> > > +            counter access.
-> > > +            Counter access was removed after the ratification of the
-> > > 20191213
-> > > +            version of the unprivileged specification and shunted in=
-to
-> > > the
-> > > +            Zicntr and Zihpm extensions.
-> >
-> > I think this may belong in the description of zicsr?  rdcycle in 201912=
-13
-> > is a special case of csrrs, which is in zicsr not the base.
-
-Sorry, this is a bit unclear. Do you mean that the sentence you have
-provided here should be in the Zicsr entry?
-
-> > > +        - const: m
-> > > +          description:
-> > > +            The standard M extension for integer multiplication and
-> > > division, as
-> > > +            ratified in the 20191213 version of the unprivileged ISA
-> > > +            specification.
-> > > +
-> > > +        - const: a
-> > > +          description:
-> > > +            The standard A extension for atomic instructions, as
-> > > ratified in the
-> > > +            20191213 version of the unprivileged ISA specification.
-> > > +
-> > > +        - const: f
-> > > +          description:
-> > > +            The standard F extension for single-precision floating
-> > > point, as
-> > > +            ratified in the 20191213 version of the unprivileged ISA
-> > > +            specification.
-> >
-> > Do we want to be able to describe the K210 in the new schema?  I believe
-> > that it implements the 2.0 F and D extensions, which are neither forward
-> > nor backward compatible with the ratified ones.
-
-If it is not compatible, then it should not claim to be :)
-We currently report the thing as implementing the same F extension as
-anything else that claims to support F, but I don't think we should be
-adding a new strictly defined property if it does not apply. Kinda
-defeats the purpose I think. I'm not sure whether it should get a new
-property, or continue (mis)using riscv,isa, in that case.
-
-> > #include <stdio.h>
-> > int main() {
-> >     long a,b;
-> >     asm("fsub.s fa0,fa0,fa0\n"
-> >         "fdiv.s fa0,fa0,fa0\n"
-> >         "fmv.x.d %0,fa0\n"
-> >         "fcvt.s.w fa1,x0\n"
-> >         "fmax.s fa1,fa1,fa0\n"
-> >         "fmv.x.d %1,fa1\n" : "=3Dr" (a), "=3Dr" (b));
-> >     printf("box(nan) =3D %lx\nmax(0,nan) =3D %lx\n", a, b);
-> >     return 0;
-> > }
-
-As an aside, if you are building software for a k210, you probably know
-pretty damn well what your target system is, given the constraints of
-the platform!
-
-> > > +        - const: h
-> > > +          description:
-> > > +            The standard H extension for hypervisors as ratified in
-> > > the 20191213
-> > > +            version of the privileged ISA specification.
-> > > +
-> > > +        # multi-letter extensions, sorted alphanumerically
+On Fri, 2023-06-23 at 12:24 +1000, Alistair Francis wrote:
+> On Mon, Jun 19, 2023 at 6:25=E2=80=AFPM Robbin Ehn <rehn@rivosinc.com> wr=
+ote:
+> >=20
+> > This patch adds the new syscall for the
+> > "RISC-V Hardware Probing Interface"
+> > (https://docs.kernel.org/riscv/hwprobe.html).
+> >=20
+> > Reviewed-by: Palmer Dabbelt <palmer@rivosinc.com>
+> > Signed-off-by: Robbin Ehn <rehn@rivosinc.com>
 >=20
-> The multi-letter extensions name should match(ignoring case) the name
-> of the frozen/ratified or
-> vendor specific extension name. Correct ?
+> Thanks for the patch!
+>=20
+> Do you mind re-sending this when 6.4 comes out? I would like it in a
+> kernel release before we pick it up
 
-Iff it is the first time of appearance, yes.
+Hi!
 
-> > There are quite a few extension names defined in ratified specifications
-> > that aren't in that list yet.  Would there be interest in adding them or
-> > are we waiting for specific conditions to be met?
+6.4 is out. This still applies clean, you want me to re-send it anyways?
 
-I only added what was already in use, adding new stuff can be done
-subsequently.
+Thanks, Robbin
 
-> > In particular several subsystems depend on "ziccif" from the profiles
-> > spec but we haven't previously had a way to check or document that
-> > dependency.
+>=20
+> Alistair
+>=20
+> > ---
+> > v1->v2: Moved to syscall.c
+> > v2->v3: Separate function, get/put user
+> > v3->patch
+> > ---
+> >  linux-user/riscv/syscall32_nr.h |   1 +
+> >  linux-user/riscv/syscall64_nr.h |   1 +
+> >  linux-user/syscall.c            | 146 ++++++++++++++++++++++++++++++++
+> >  3 files changed, 148 insertions(+)
+> >=20
+> > diff --git a/linux-user/riscv/syscall32_nr.h b/linux-user/riscv/syscall=
+32_nr.h
+> > index 1327d7dffa..412e58e5b2 100644
+> > --- a/linux-user/riscv/syscall32_nr.h
+> > +++ b/linux-user/riscv/syscall32_nr.h
+> > @@ -228,6 +228,7 @@
+> >  #define TARGET_NR_accept4 242
+> >  #define TARGET_NR_arch_specific_syscall 244
+> >  #define TARGET_NR_riscv_flush_icache (TARGET_NR_arch_specific_syscall =
++ 15)
+> > +#define TARGET_NR_riscv_hwprobe (TARGET_NR_arch_specific_syscall + 14)
+> >  #define TARGET_NR_prlimit64 261
+> >  #define TARGET_NR_fanotify_init 262
+> >  #define TARGET_NR_fanotify_mark 263
+> > diff --git a/linux-user/riscv/syscall64_nr.h b/linux-user/riscv/syscall=
+64_nr.h
+> > index 6659751933..29e1eb2075 100644
+> > --- a/linux-user/riscv/syscall64_nr.h
+> > +++ b/linux-user/riscv/syscall64_nr.h
+> > @@ -251,6 +251,7 @@
+> >  #define TARGET_NR_recvmmsg 243
+> >  #define TARGET_NR_arch_specific_syscall 244
+> >  #define TARGET_NR_riscv_flush_icache (TARGET_NR_arch_specific_syscall =
++ 15)
+> > +#define TARGET_NR_riscv_hwprobe (TARGET_NR_arch_specific_syscall + 14)
+> >  #define TARGET_NR_wait4 260
+> >  #define TARGET_NR_prlimit64 261
+> >  #define TARGET_NR_fanotify_init 262
+> > diff --git a/linux-user/syscall.c b/linux-user/syscall.c
+> > index f2cb101d83..55becf3666 100644
+> > --- a/linux-user/syscall.c
+> > +++ b/linux-user/syscall.c
+> > @@ -8874,6 +8874,147 @@ static int do_getdents64(abi_long dirfd, abi_lo=
+ng arg2, abi_long count)
+> >  }
+> >  #endif /* TARGET_NR_getdents64 */
+> >=20
+> > +#if defined(TARGET_NR_riscv_hwprobe)
+> > +
+> > +#define RISCV_HWPROBE_KEY_MVENDORID     0
+> > +#define RISCV_HWPROBE_KEY_MARCHID       1
+> > +#define RISCV_HWPROBE_KEY_MIMPID        2
+> > +
+> > +#define RISCV_HWPROBE_KEY_BASE_BEHAVIOR 3
+> > +#define     RISCV_HWPROBE_BASE_BEHAVIOR_IMA (1 << 0)
+> > +
+> > +#define RISCV_HWPROBE_KEY_IMA_EXT_0     4
+> > +#define     RISCV_HWPROBE_IMA_FD       (1 << 0)
+> > +#define     RISCV_HWPROBE_IMA_C        (1 << 1)
+> > +
+> > +#define RISCV_HWPROBE_KEY_CPUPERF_0     5
+> > +#define     RISCV_HWPROBE_MISALIGNED_UNKNOWN     (0 << 0)
+> > +#define     RISCV_HWPROBE_MISALIGNED_EMULATED    (1 << 0)
+> > +#define     RISCV_HWPROBE_MISALIGNED_SLOW        (2 << 0)
+> > +#define     RISCV_HWPROBE_MISALIGNED_FAST        (3 << 0)
+> > +#define     RISCV_HWPROBE_MISALIGNED_UNSUPPORTED (4 << 0)
+> > +#define     RISCV_HWPROBE_MISALIGNED_MASK        (7 << 0)
+> > +
+> > +struct riscv_hwprobe {
+> > +    abi_llong  key;
+> > +    abi_ullong value;
+> > +};
+> > +
+> > +static void risc_hwprobe_fill_pairs(CPURISCVState *env,
+> > +                                    struct riscv_hwprobe *pair,
+> > +                                    size_t pair_count)
+> > +{
+> > +    const RISCVCPUConfig *cfg =3D riscv_cpu_cfg(env);
+> > +
+> > +    for (; pair_count > 0; pair_count--, pair++) {
+> > +        abi_llong key;
+> > +        abi_ullong value;
+> > +        __put_user(0, &pair->value);
+> > +        __get_user(key, &pair->key);
+> > +        switch (key) {
+> > +        case RISCV_HWPROBE_KEY_MVENDORID:
+> > +            __put_user(cfg->mvendorid, &pair->value);
+> > +            break;
+> > +        case RISCV_HWPROBE_KEY_MARCHID:
+> > +            __put_user(cfg->marchid, &pair->value);
+> > +            break;
+> > +        case RISCV_HWPROBE_KEY_MIMPID:
+> > +            __put_user(cfg->mimpid, &pair->value);
+> > +            break;
+> > +        case RISCV_HWPROBE_KEY_BASE_BEHAVIOR:
+> > +            value =3D riscv_has_ext(env, RVI) &&
+> > +                    riscv_has_ext(env, RVM) &&
+> > +                    riscv_has_ext(env, RVA) ?
+> > +                    RISCV_HWPROBE_BASE_BEHAVIOR_IMA : 0;
+> > +            __put_user(value, &pair->value);
+> > +            break;
+> > +        case RISCV_HWPROBE_KEY_IMA_EXT_0:
+> > +            value =3D riscv_has_ext(env, RVF) &&
+> > +                    riscv_has_ext(env, RVD) ?
+> > +                    RISCV_HWPROBE_IMA_FD : 0;
+> > +            value |=3D riscv_has_ext(env, RVC) ?
+> > +                     RISCV_HWPROBE_IMA_C : pair->value;
+> > +            __put_user(value, &pair->value);
+> > +            break;
+> > +        case RISCV_HWPROBE_KEY_CPUPERF_0:
+> > +            __put_user(RISCV_HWPROBE_MISALIGNED_FAST, &pair->value);
+> > +            break;
+> > +        default:
+> > +            __put_user(-1, &pair->key);
+> > +            break;
+> > +        }
+> > +    }
+> > +}
+> > +
+> > +static int cpu_set_valid(abi_long arg3, abi_long arg4)
+> > +{
+> > +    int ret, i, tmp;
+> > +    size_t host_mask_size, target_mask_size;
+> > +    unsigned long *host_mask;
+> > +
+> > +    /*
+> > +     * cpu_set_t represent CPU masks as bit masks of type unsigned lon=
+g *.
+> > +     * arg3 contains the cpu count.
+> > +     */
+> > +    tmp =3D (8 * sizeof(abi_ulong));
+> > +    target_mask_size =3D ((arg3 + tmp - 1) / tmp) * sizeof(abi_ulong);
+> > +    host_mask_size =3D (target_mask_size + (sizeof(*host_mask) - 1)) &
+> > +                     ~(sizeof(*host_mask) - 1);
+> > +
+> > +    host_mask =3D alloca(host_mask_size);
+> > +
+> > +    ret =3D target_to_host_cpu_mask(host_mask, host_mask_size,
+> > +                                  arg4, target_mask_size);
+> > +    if (ret !=3D 0) {
+> > +        return ret;
+> > +    }
+> > +
+> > +    for (i =3D 0 ; i < host_mask_size / sizeof(*host_mask); i++) {
+> > +        if (host_mask[i] !=3D 0) {
+> > +            return 0;
+> > +        }
+> > +    }
+> > +    return -TARGET_EINVAL;
+> > +}
+> > +
+> > +static abi_long do_riscv_hwprobe(CPUArchState *cpu_env, abi_long arg1,
+> > +                                 abi_long arg2, abi_long arg3,
+> > +                                 abi_long arg4, abi_long arg5)
+> > +{
+> > +    int ret;
+> > +    struct riscv_hwprobe *host_pairs;
+> > +
+> > +    /* flags must be 0 */
+> > +    if (arg5 !=3D 0) {
+> > +        return -TARGET_EINVAL;
+> > +    }
+> > +
+> > +    /* check cpu_set */
+> > +    if (arg3 !=3D 0) {
+> > +        ret =3D cpu_set_valid(arg3, arg4);
+> > +        if (ret !=3D 0) {
+> > +            return ret;
+> > +        }
+> > +    } else if (arg4 !=3D 0) {
+> > +        return -TARGET_EINVAL;
+> > +    }
+> > +
+> > +    /* no pairs */
+> > +    if (arg2 =3D=3D 0) {
+> > +        return 0;
+> > +    }
+> > +
+> > +    host_pairs =3D lock_user(VERIFY_WRITE, arg1,
+> > +                           sizeof(*host_pairs) * (size_t)arg2, 0);
+> > +    if (host_pairs =3D=3D NULL) {
+> > +        return -TARGET_EFAULT;
+> > +    }
+> > +    risc_hwprobe_fill_pairs(cpu_env, host_pairs, arg2);
+> > +    unlock_user(host_pairs, arg1, sizeof(*host_pairs) * (size_t)arg2);
+> > +    return 0;
+> > +}
+> > +#endif /* TARGET_NR_riscv_hwprobe */
+> > +
+> >  #if defined(TARGET_NR_pivot_root) && defined(__NR_pivot_root)
+> >  _syscall2(int, pivot_root, const char *, new_root, const char *, put_o=
+ld)
+> >  #endif
+> > @@ -13571,6 +13712,11 @@ static abi_long do_syscall1(CPUArchState *cpu_=
+env, int num, abi_long arg1,
+> >          return ret;
+> >  #endif
+> >=20
+> > +#if defined(TARGET_NR_riscv_hwprobe)
+> > +    case TARGET_NR_riscv_hwprobe:
+> > +        return do_riscv_hwprobe(cpu_env, arg1, arg2, arg3, arg4, arg5)=
+;
+> > +#endif
+> > +
+> >      default:
+> >          qemu_log_mask(LOG_UNIMP, "Unsupported syscall: %d\n", num);
+> >          return -TARGET_ENOSYS;
+> > --
+> > 2.39.2
+> >=20
+> >=20
 
-Cheers,
-Conor.
-
-
---kURSL2kHWkb9OT7S
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZJrIUQAKCRB4tDGHoIJi
-0lBbAP9jXwlv1nE24nhP671Dp1q3gBe8nJMes2/JaeL9fMfJAQEA2xRKTGT94tyg
-aW8dQFmO2POpJoKK3PwGFpGEdNajoAc=
-=BB4b
------END PGP SIGNATURE-----
-
---kURSL2kHWkb9OT7S--
 
