@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBA12EB64D9
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Jun 2023 08:12:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD119EB64D9
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Jun 2023 11:31:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qE3nI-0006rk-3O; Tue, 27 Jun 2023 04:11:24 -0400
+	id 1qE6uk-0002pA-Ga; Tue, 27 Jun 2023 07:31:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qE3nG-0006qn-CN
- for qemu-riscv@nongnu.org; Tue, 27 Jun 2023 04:11:22 -0400
-Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qE3nE-00045T-Fi
- for qemu-riscv@nongnu.org; Tue, 27 Jun 2023 04:11:22 -0400
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-51da8a744c4so670229a12.0
- for <qemu-riscv@nongnu.org>; Tue, 27 Jun 2023 01:11:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1687853478; x=1690445478;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QGhtgikDkTHQR3mKxUZoeEzAiGCdraUqtSCubdSLM1E=;
- b=O0YYsgmJSk/Nx0dwe80KBGq0nPxO8lHcTPcuye1BP03KDr88Jj42wWRWZHW5XEVsvD
- 2n+lVLdOTTfZzICSGLwmZwxk/KHXZwCL/pYa8q/iiXvO8oDZMOkGvuyBNJu/toYnOzYj
- +NwWoDxjfYJ5AUGbcP66hXGL0UzIlfozb4HJz40/6iwIf4Qcutvases/jEPN1Xd8Bhe7
- 8TVrtsdhPFoeVM9j1xt4A7HFBlHti/1jLSnCoAZPWjcQM6U5x1gh7VKsfaUdeYO2wr15
- A13cdzLffcj1v+piNBltn7Hg6dj6HQFWU2g2XQ1HJEytU8p9qXIoj9Dq0BliofZqQIFi
- 2dvA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687853478; x=1690445478;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QGhtgikDkTHQR3mKxUZoeEzAiGCdraUqtSCubdSLM1E=;
- b=kVCn6116cQ5rQQdu7LDnpf/o9k9C4mGU2ZElg4MPP/LjNURux9iEkq3sELBYNkyqFV
- p21h3ZX2POuu4He3n5kcGEazZ8fc9b3a6tq7XaD/GjyGgs/iElW0RRBUJeExeSH/KANh
- ETXqrLOiZB2JAi6nNi7cg59T7zF0C9zmxi18Wb6rO44StxbaPvju7r0jOy2H/LUsKHkC
- tMDHXKcWrf/gSZLQmPgfDBNlj48QRTjTi6JzIEysc8VdmOklC3xFHBI1Mbt2T9tMRQaa
- i/FT/NyUnsGbcFEMySymAMgFoC9rEX2zbxINPy/9TuyZy1qwI8x/OErcid5Qf7gvjJPl
- 7vkA==
-X-Gm-Message-State: AC+VfDxLlgsgXD883QWoVMrDZ4qkH2/jDWLw3SrjvtnXe9wFulNUO8lT
- 7srg/nnUr98DIuBsJgVW3qgEdA==
-X-Google-Smtp-Source: ACHHUZ7v4iOywnXWldcBg/7w2X9B6mmst8qWHoUujU5OlK/f2DIi1NMWju7P+7a7nfdEH4deVkGxWg==
-X-Received: by 2002:a05:6402:1496:b0:51d:91ef:c836 with SMTP id
- e22-20020a056402149600b0051d91efc836mr4191133edv.32.1687853478407; 
- Tue, 27 Jun 2023 01:11:18 -0700 (PDT)
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
- by smtp.gmail.com with ESMTPSA id
- v14-20020aa7d80e000000b0051a59d81c4dsm3622319edq.3.2023.06.27.01.11.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Jun 2023 01:11:17 -0700 (PDT)
-Date: Tue, 27 Jun 2023 10:11:16 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
-Subject: Re: [PATCH v4 16/19] target/riscv/cpu.c: create KVM mock properties
-Message-ID: <20230627-204449ad8ad9fccf5411fec1@orel>
-References: <20230626220209.22142-1-dbarboza@ventanamicro.com>
- <20230626220209.22142-17-dbarboza@ventanamicro.com>
+ (Exim 4.90_1) (envelope-from <Conor.Dooley@microchip.com>)
+ id 1qE6uc-0002la-Sz
+ for qemu-riscv@nongnu.org; Tue, 27 Jun 2023 07:31:12 -0400
+Received: from esa.microchip.iphmx.com ([68.232.154.123])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <Conor.Dooley@microchip.com>)
+ id 1qE6uX-00006e-U4
+ for qemu-riscv@nongnu.org; Tue, 27 Jun 2023 07:31:09 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+ t=1687865465; x=1719401465;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=QH8bCWg3AE+hEhb3xFWyuBXx3P9V8zIniV4gMZjSDGI=;
+ b=fkBhs2cplCatQnrES4nDbzabDZX5l3wF+U4DyiKXC/dW2iSqpFtzaK2N
+ HLjwtOpr349E4Oq5Qbg9fawE9sXXXh/9t4f9X2JZ2snyXxcNCNwHUPqLj
+ yQ+TLAdesNhGxAddjY4jbJoU7/PVeGgal8U5FMZ/M4TzVzhYsxVRhjAUS
+ 7h/zYuNA/tgVFpQOa8hD2Ch1CigaQCmEsNCBweUDXvLGGh6/2sz/GbZ/x
+ iLakuo43nmvG9prOazzmaSjoVpxLeq1PKbkFBOSbyBw0CpaUE0f92iUKh
+ g6lABBXdo1ukOgcu7BE2NjmBhJz+JefgAz7HxwkiFyBCZVTh/cDjrdPaP Q==;
+X-IronPort-AV: E=Sophos;i="6.01,162,1684825200"; 
+ d="asc'?scan'208";a="158783040"
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+ by esa6.microchip.iphmx.com with ESMTP/TLS/AES256-SHA256;
+ 27 Jun 2023 04:30:57 -0700
+Received: from chn-vm-ex03.mchp-main.com (10.10.85.151) by
+ chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.21; Tue, 27 Jun 2023 04:30:56 -0700
+Received: from wendy (10.10.115.15) by chn-vm-ex03.mchp-main.com
+ (10.10.85.151) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21 via Frontend
+ Transport; Tue, 27 Jun 2023 04:30:53 -0700
+Date: Tue, 27 Jun 2023 12:30:25 +0100
+From: Conor Dooley <conor.dooley@microchip.com>
+To: Atish Patra <atishp@atishpatra.org>
+CC: Stefan O'Rear <sorear@fastmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ <conor@kernel.org>, Paul Walmsley <paul.walmsley@sifive.com>, Rob Herring
+ <robh+dt@kernel.org>, Krzysztof Kozlowski
+ <krzysztof.kozlowski+dt@linaro.org>, Alistair Francis
+ <alistair.francis@wdc.com>, Andrew Jones <ajones@ventanamicro.com>, Anup
+ Patel <apatel@ventanamicro.com>, Jessica Clarke <jrtc27@jrtc27.com>, Rick
+ Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, Oleksii
+ <oleksii.kurochko@gmail.com>, <linux-riscv@lists.infradead.org>,
+ <qemu-riscv@nongnu.org>, <u-boot@lists.denx.de>,
+ <devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>, Palmer Dabbelt
+ <palmer@rivosinc.com>
+Subject: Re: [PATCH v3] dt-bindings: riscv: deprecate riscv,isa
+Message-ID: <20230627-harmonize-monastery-c6b40d2e5556@wendy>
+References: <20230626-unmarked-atom-70b4d624a386@wendy>
+ <a6449161-d800-4094-bf15-cde890ed17b5@app.fastmail.com>
+ <CAOnJCULs47ZCai5EOQJPFrgV1-2xPjWAOB2CfUDStcigsR5Wew@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="kURSL2kHWkb9OT7S"
 Content-Disposition: inline
-In-Reply-To: <20230626220209.22142-17-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
- envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x52c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+In-Reply-To: <CAOnJCULs47ZCai5EOQJPFrgV1-2xPjWAOB2CfUDStcigsR5Wew@mail.gmail.com>
+Received-SPF: pass client-ip=68.232.154.123;
+ envelope-from=Conor.Dooley@microchip.com; helo=esa.microchip.iphmx.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,123 +95,225 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Jun 26, 2023 at 07:02:06PM -0300, Daniel Henrique Barboza wrote:
-> KVM-specific properties are being created inside target/riscv/kvm.c. But
-> at this moment we're gathering all the remaining properties from TCG and
-> adding them as is when running KVM. This creates a situation where
-> non-KVM properties are setting flags to 'true' due to its default
-> settings (e.g.  Zawrs). Users can also freely enable them via command
-> line.
-> 
-> This doesn't impact runtime per se because KVM doesn't care about these
-> flags, but code such as riscv_isa_string_ext() take those flags into
-> account. The result is that, for a KVM guest, setting non-KVM properties
-> will make them appear in the riscv,isa DT.
-> 
-> We want to keep the same API for both TCG and KVM and at the same time,
-> when running KVM, forbid non-KVM extensions to be enabled internally. We
-> accomplish both by changing riscv_cpu_add_user_properties() to add a
-> mock/no-op boolean property for every non-KVM extension in
-> riscv_cpu_extensions[]. Then, when running KVM, users are still free to
-> set extensions at will, we'll treat non-KVM extensions as a no-op, and
-> riscv_isa_string_ext() will not report bogus extensions in the DT.
+--kURSL2kHWkb9OT7S
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-We're no longer treating these as no-ops. We're now intercepting attempts
-to set unsupported extensions and erroring out.
+Hey Atish, Stefan,
 
-> 
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->  target/riscv/cpu.c | 40 +++++++++++++++++++++++++++++++++++++---
->  1 file changed, 37 insertions(+), 3 deletions(-)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index b65db165cc..ad4b0e3490 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1720,6 +1720,22 @@ static Property riscv_cpu_extensions[] = {
->      DEFINE_PROP_END_OF_LIST(),
->  };
->  
-> +
-> +static void cpu_set_cfg_noop(Object *obj, Visitor *v,
+On Mon, Jun 26, 2023 at 11:35:10PM -0700, Atish Patra wrote:
+> On Mon, Jun 26, 2023 at 5:40=E2=80=AFPM Stefan O'Rear <sorear@fastmail.co=
+m> wrote:
+> > On Mon, Jun 26, 2023, at 6:10 AM, Conor Dooley wrote:
 
-As stated above, I don't think 'noop' conveys the right message.
+> > > Off-list, some of the RVI folks have committed to shoring up the word=
+ing
+> > > in either the ISA specifications, the riscv-isa-manual or
+> > > so that in the future, modifications to and additions or removals of
+> > > features will require a new extension. Codifying that assertion
+> > > somewhere would make it quite unlikely that compatibility would be
+> > > broken, but we have the tools required to deal with it, if & when it
+> > > crops up.
+> > > It is in our collective interest, as consumers of extension meanings,=
+ to
+> > > define a scheme that enforces compatibility.
+> > >
+> > > The use of individual properties, rather than elements in a single
+> >
+> > no longer individual properties
+> >
+> > > string, will also permit validation that the properties have a meanin=
+g,
+> > > as well as potentially reject mutually exclusive combinations, or
+> > > enforce dependencies between extensions. That would not have be possi=
+ble
+> >
+> > Under what circumstances is a device tree which declares support for a
+> > superset extension (e.g. m) required to also declare support for its su=
+bsets
+> > (e.g. zmmul)?  There are compatibility issues in both directions.
+> >
+> > Proposal: If an extension X is a superset of an extension Y and X is pr=
+esent
+> > in riscv,isa-extensions, Y must also be present if Y was ratified or ad=
+ded
+> > to the schema before X, but need not also be present if Y was ratified =
+after
+> > or at the same time as X.  If X "depends on" Y, then Y must be present =
+in
+> > riscv,isa-extensions even if X and Y were ratified at the same time.
 
-> +                             const char *name,
-> +                             void *opaque, Error **errp)
-> +{
-> +    const char *propname = opaque;
-> +    bool value;
-> +
-> +    if (!visit_type_bool(v, name, &value, errp)) {
-> +        return;
-> +    }
-> +
+Yes, I think that this all makes sense from a compatibility point of
+view. Splitting it up:
 
-We should only error out when value == true. Just like the other
-KVM-unsupported extensions, we don't mind if the user explicitly
-disables something we can't handle.
+> > If an extension X is a superset of an extension Y and X is present
+> > in riscv,isa-extensions, Y must also be present if Y was ratified or ad=
+ded
+> > to the schema before X
 
-> +    error_setg(errp, "extension %s is not available with KVM",
-> +               propname);
-> +}
-> +
->  /*
->   * Add CPU properties with user-facing flags.
->   *
-> @@ -1738,9 +1754,27 @@ static void riscv_cpu_add_user_properties(Object *obj)
->      riscv_cpu_add_misa_properties(obj);
->  
->      for (prop = riscv_cpu_extensions; prop && prop->name; prop++) {
-> -        /* Check if KVM didn't create the property already */
-> -        if (object_property_find(obj, prop->name)) {
-> -            continue;
-> +        if (riscv_running_kvm()) {
-> +            /* Check if KVM didn't create the property already */
+This makes total sense from a "being nice to" software point of view.
 
-The check is for the positive, so I think the comment would read better as
+> > but need not also be present if Y was ratified after
+> > or at the same time as X.
 
- "Check if KVM created the property already."
+It may make sense to reduce this to only after, or not permit the
+supersets at all where they are ratified alongside their subsets.
+Cross that bridge when we come to it perhaps.
 
-> +            if (object_property_find(obj, prop->name)) {
-> +                continue;
-> +            }
-> +
-> +            /*
-> +             * Set every multi-letter extension that KVM doesn't
-> +             * know as a no-op. This will allow users to set values
+> > If X "depends on" Y, then Y must be present in
+> > riscv,isa-extensions even if X and Y were ratified at the same tim
 
-How about "Set the default to disabled for every extension unknown to
-KVM and error out if the user attempts to enable any of them."
+For Linux, this is already the case for F & D. I think that's a good
+policy to follow.
+
+> > >
+> > > vendor extensions
+> > > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > >
+> > > Compared to riscv,isa, this proposed scheme promotes vendor extension=
+s,
+> > > oft touted as the strength of RISC-V, to first-class citizens.
+> > > At present, extensions are defined as meaning what the RISC-V ISA
+> > > specifications say they do. There is no realistic way of using that
+> > > interface to provide cross-platform definitions for what vendor
+> > > extensions mean. Vendor extensions may also have even less consistency
+> > > than RVI do in terms of versioning, or no care about backwards
+> > > compatibility.
+> > > The new property allows us to assign explicit meanings on a per vendor
+> > > extension basis, backed up by a description of their meanings.
+> >
+> > How are vendor extension names allocated?  Will any proposed name for a
+> > vendor extension pass through linux-riscv@ before it shows up in the wi=
+ld,
+> > or are vendors expected to allocate extension names unilaterally?
+
+The same way any other dt-binding works, it's no different in that
+respect to compatible strings.
+
+> > Is it
+> > worth creating an experimental-* namespace for prototype implementations
+> > of unreleased extensions?
+
+IMO, people are free to do whatever they like in their own development
+trees. I don't really know why we'd introduce stuff in dt-bindings for
+things that are only in an experimental state.
+
+> > > +  riscv,isa-extensions:
+> > > +    $ref: /schemas/types.yaml#/definitions/string-array
+> > > +    minItems: 1
+> > > +    description: Extensions supported by the hart.
+> > > +    items:
+> > > +      anyOf:
+> > > +        # single letter extensions, in canonical order
+> > > +        - const: i
+> > > +          description: |
+> > > +            The base integer instruction set, as ratified in the
+> > > 20191213
+> > > +            version of the unprivileged ISA specification, with the
+> > > exception of
+> > > +            counter access.
+> > > +            Counter access was removed after the ratification of the
+> > > 20191213
+> > > +            version of the unprivileged specification and shunted in=
+to
+> > > the
+> > > +            Zicntr and Zihpm extensions.
+> >
+> > I think this may belong in the description of zicsr?  rdcycle in 201912=
+13
+> > is a special case of csrrs, which is in zicsr not the base.
+
+Sorry, this is a bit unclear. Do you mean that the sentence you have
+provided here should be in the Zicsr entry?
+
+> > > +        - const: m
+> > > +          description:
+> > > +            The standard M extension for integer multiplication and
+> > > division, as
+> > > +            ratified in the 20191213 version of the unprivileged ISA
+> > > +            specification.
+> > > +
+> > > +        - const: a
+> > > +          description:
+> > > +            The standard A extension for atomic instructions, as
+> > > ratified in the
+> > > +            20191213 version of the unprivileged ISA specification.
+> > > +
+> > > +        - const: f
+> > > +          description:
+> > > +            The standard F extension for single-precision floating
+> > > point, as
+> > > +            ratified in the 20191213 version of the unprivileged ISA
+> > > +            specification.
+> >
+> > Do we want to be able to describe the K210 in the new schema?  I believe
+> > that it implements the 2.0 F and D extensions, which are neither forward
+> > nor backward compatible with the ratified ones.
+
+If it is not compatible, then it should not claim to be :)
+We currently report the thing as implementing the same F extension as
+anything else that claims to support F, but I don't think we should be
+adding a new strictly defined property if it does not apply. Kinda
+defeats the purpose I think. I'm not sure whether it should get a new
+property, or continue (mis)using riscv,isa, in that case.
+
+> > #include <stdio.h>
+> > int main() {
+> >     long a,b;
+> >     asm("fsub.s fa0,fa0,fa0\n"
+> >         "fdiv.s fa0,fa0,fa0\n"
+> >         "fmv.x.d %0,fa0\n"
+> >         "fcvt.s.w fa1,x0\n"
+> >         "fmax.s fa1,fa1,fa0\n"
+> >         "fmv.x.d %1,fa1\n" : "=3Dr" (a), "=3Dr" (b));
+> >     printf("box(nan) =3D %lx\nmax(0,nan) =3D %lx\n", a, b);
+> >     return 0;
+> > }
+
+As an aside, if you are building software for a k210, you probably know
+pretty damn well what your target system is, given the constraints of
+the platform!
+
+> > > +        - const: h
+> > > +          description:
+> > > +            The standard H extension for hypervisors as ratified in
+> > > the 20191213
+> > > +            version of the privileged ISA specification.
+> > > +
+> > > +        # multi-letter extensions, sorted alphanumerically
+>=20
+> The multi-letter extensions name should match(ignoring case) the name
+> of the frozen/ratified or
+> vendor specific extension name. Correct ?
+
+Iff it is the first time of appearance, yes.
+
+> > There are quite a few extension names defined in ratified specifications
+> > that aren't in that list yet.  Would there be interest in adding them or
+> > are we waiting for specific conditions to be met?
+
+I only added what was already in use, adding new stuff can be done
+subsequently.
+
+> > In particular several subsystems depend on "ziccif" from the profiles
+> > spec but we haven't previously had a way to check or document that
+> > dependency.
+
+Cheers,
+Conor.
 
 
-> +             * to them while keeping their internal state to 'false'.
-> +             *
-> +             * We're giving a pass for non-bool properties since they're
-> +             * not related to the availability of extensions and can be
-> +             * safely ignored as is.
+--kURSL2kHWkb9OT7S
+Content-Type: application/pgp-signature; name="signature.asc"
 
-I guess that's OK for now. Ideally, we wouldn't have any non-booleans as
-that will complicate QMP cpu model expansion. Instead, we'd have booleans
-for valid values. For example, for vlen, we'd have vlen128, vlen256,
-vlen512, etc.. Figuring out how to do that best is for another series
-though.
+-----BEGIN PGP SIGNATURE-----
 
-> +             */
-> +            if (prop->info == &qdev_prop_bool) {
-> +                object_property_add(obj, prop->name, "bool",
-> +                                    NULL, cpu_set_cfg_noop,
-> +                                    NULL, (void *)prop->name);
-> +                continue;
-> +            }
->          }
->  
->          qdev_property_add_static(dev, prop);
-> -- 
-> 2.41.0
->
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZJrIUQAKCRB4tDGHoIJi
+0lBbAP9jXwlv1nE24nhP671Dp1q3gBe8nJMes2/JaeL9fMfJAQEA2xRKTGT94tyg
+aW8dQFmO2POpJoKK3PwGFpGEdNajoAc=
+=BB4b
+-----END PGP SIGNATURE-----
 
-Thanks,
-drew
+--kURSL2kHWkb9OT7S--
 
