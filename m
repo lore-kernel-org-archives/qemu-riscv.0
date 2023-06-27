@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 764EDEB64DC
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Jun 2023 13:32:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DADC4EB64D9
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Jun 2023 14:12:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qE8nn-0008Kz-Iy; Tue, 27 Jun 2023 09:32:15 -0400
+	id 1qE9Qf-0007N6-36; Tue, 27 Jun 2023 10:12:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1qE3SR-0002pw-L3
- for qemu-riscv@nongnu.org; Tue, 27 Jun 2023 03:49:51 -0400
+ (Exim 4.90_1) (envelope-from <tommy.wu@sifive.com>)
+ id 1qE9Qe-0007Mp-Lp
+ for qemu-riscv@nongnu.org; Tue, 27 Jun 2023 10:12:24 -0400
 Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1qE3SP-0006AS-Rk
- for qemu-riscv@nongnu.org; Tue, 27 Jun 2023 03:49:51 -0400
+ (Exim 4.90_1) (envelope-from <tommy.wu@sifive.com>)
+ id 1qE9Qb-0007QM-OW
+ for qemu-riscv@nongnu.org; Tue, 27 Jun 2023 10:12:24 -0400
 Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-1b7f68f1c9eso21224915ad.2
- for <qemu-riscv@nongnu.org>; Tue, 27 Jun 2023 00:49:48 -0700 (PDT)
+ d9443c01a7336-1b80b514fb7so12210695ad.0
+ for <qemu-riscv@nongnu.org>; Tue, 27 Jun 2023 07:12:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1687852188; x=1690444188;
- h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=c9EpieEvbwRuonLUO4ZFLZ77OR4kXPqxojCQI1x4UU4=;
- b=aP9L6RdMnqgJU8Fw7Ig8f4ynFw8Kcn5UIgz8vI0/uMQHvlJP0CCWwRnRZkA08/4rhW
- xm1k3OnUhRpqpUMAmMBD3fHX5U7Cm4o7BXcaer2MVchV2fZTSDJ32tKYZeck+coUrdyA
- +KDz+S3qWRwe0RoN1J7chN7jRdqxdBO94pHZ5lSRU5ksMji4BX9rzwEiIH4VrdZ6KL4j
- CWgPe25NyTMhQSsp3eo3SOMVH80fR9+FXo8hgCW3GNtxgPqKJK4CXeFMOxf1m8qIVUN+
- /7P5qirEteYyUH6kRc3ZhJaevk0b9hl7wbWS5E6N/R5QcQ7kDpmwhShUlDoHfGiBP9M8
- k4aw==
+ d=sifive.com; s=google; t=1687875140; x=1690467140;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=kli0/Lkm16c0rkWo2x67k9BNkE6PIAQDk2lO7/WA3d8=;
+ b=CbIrGq4afD7PHD7dcr/9asa9Q0jOxa5nVcVv+TTJC0xpZFUXPJwl8zFqPx7hi3Dmqm
+ qZfROlP7P3OwBTVE0sLC4lmKvjn+xE8UB//x+BPyyK0+VCgDJjQPyzRuOl1DICS2LXpY
+ bLVACQQIMN960xVS7Fb6TDuuIFBrHYCSIB5NI5eK/G7ozvDYnOZmBB5gQ8e8vSmTXo9W
+ hrfienXUFDt45soCztrx/dcix7QSHI3t6F7oQH0IuK2voy+Fql36T7aZo2FO1AaHf7Ls
+ ADSJXamGSNtF+kUxOZbNqmiitoCffy/TBoNCnqEWsUn41c40i0ZYPyA6Bnz00DiLsHHd
+ 9v7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687852188; x=1690444188;
- h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=c9EpieEvbwRuonLUO4ZFLZ77OR4kXPqxojCQI1x4UU4=;
- b=GIGaqE1kzyCa6S8NLa8VjFfeAyfsZ8kbMedXqt3+kBSdV7cPyzRhpgiV5XGWMR1hnG
- c54r2PQ2pyq/pvoq+5iraH8tk+tvZpkujh34TU297HaPTyn00v6I2o/b7b9Vu2Udyn12
- 9yZDgj8WDzKbKBA1gxB6O7FoABX7n3YmaZBfQ/TYrU8Xoo4/zvsXFNmzUNOmtMlTnj4l
- nbZtaL4NfTiYtbjQYZhRltKRpF4SQqyF/ShmqSILcDoo0e3eTF3M9IfwR/IqnvEVNE8n
- 0DIQvX2i6xnKioaK8myTLgG66csySDJzg/bEUz8u1lqI+SOPNZf2rNdnWHKMWXXSe6+S
- or6w==
-X-Gm-Message-State: AC+VfDzec4kvSS+B8fr5WzAtJC9gtvtI4fTHWSh8pDg/uT8hzOoIoPO+
- d6MNW97gm509AsLP70nLgbzxcw==
-X-Google-Smtp-Source: ACHHUZ7Bjc6I4sweo1EVoVgYZjkfWzbVAnfoGXNoaf7fatDXg2lsYjOPGdZlfDQHyB6VNCgmaf99jA==
-X-Received: by 2002:a17:902:b497:b0:1b7:f73d:524 with SMTP id
- y23-20020a170902b49700b001b7f73d0524mr5935185plr.43.1687852187851; 
- Tue, 27 Jun 2023 00:49:47 -0700 (PDT)
-Received: from hsinchu26.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
+ d=1e100.net; s=20221208; t=1687875140; x=1690467140;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=kli0/Lkm16c0rkWo2x67k9BNkE6PIAQDk2lO7/WA3d8=;
+ b=J1LW7y36BYbTwa4ZBy+jFHblseOLfs164sH389QfUjAzrlW1y8AY/lMKcikaOVzY+w
+ crQu6PyjHRNXhMpcOYDhdT8auBVY9pkISYEve96FRqVxlHEF94a0sZ4rHjYkoGA4wb5u
+ Viy7MPPNM9EzitkmcQ4n/RKHCGGjDPzK8xH5KwhEGZCme2eZr+c6KxwtzrHnM7E9F4iE
+ ryRh7Zs9tsJzFkVe1VowcArn2s8r4XPQlAwawUoaR1+NI8iFDU+ey2z3ePnhw1nD2D5S
+ aSlRYER7XuOsf5td750KhYaEcEpyfpFrMS4ClDw/IsTBxtHHvRlVY+SWChj4llRK1yvh
+ MRcQ==
+X-Gm-Message-State: AC+VfDwxBWmNslHkMMiBRsfz2P7dgAncNPidrG8Z1vai3TzdMtGKaBsq
+ vFIDAeX6RuNMT0qfVMhO/YWeyw==
+X-Google-Smtp-Source: ACHHUZ7nQQIYZe2lZX50FyRPF0fCes5OL7vdxtw+WAJjaz3GeXKMeMst6lOOkjjkpZg5DVemJ8iToQ==
+X-Received: by 2002:a17:902:e744:b0:1b5:edd:e3c7 with SMTP id
+ p4-20020a170902e74400b001b50edde3c7mr9069777plf.16.1687875139599; 
+ Tue, 27 Jun 2023 07:12:19 -0700 (PDT)
+Received: from sw05.internal.sifive.com ([64.62.193.194])
  by smtp.gmail.com with ESMTPSA id
- t4-20020a170902a5c400b001b077301a58sm5360714plq.79.2023.06.27.00.49.45
+ e16-20020a17090301d000b001b69303db65sm6080441plh.26.2023.06.27.07.12.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Jun 2023 00:49:47 -0700 (PDT)
-From: Jason Chien <jason.chien@sifive.com>
+ Tue, 27 Jun 2023 07:12:19 -0700 (PDT)
+From: Tommy Wu <tommy.wu@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Cc: Jason Chien <jason.chien@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH] target/riscv: Set the correct exception for implict G-stage
- translation fail
-Date: Tue, 27 Jun 2023 07:48:52 +0000
-Message-Id: <20230627074915.7686-1-jason.chien@sifive.com>
-X-Mailer: git-send-email 2.17.1
+Cc: alistair.francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
+ jim.shu@sifive.com, frank.chang@sifive.com, liweiwei@iscas.ac.cn,
+ philmd@linaro.org, Tommy Wu <tommy.wu@sifive.com>
+Subject: [PATCH v6 0/3] Implement the watchdog timer of HiFive 1 rev b.
+Date: Tue, 27 Jun 2023 07:12:13 -0700
+Message-Id: <20230627141216.3962299-1-tommy.wu@sifive.com>
+X-Mailer: git-send-email 2.38.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=jason.chien@sifive.com; helo=mail-pl1-x631.google.com
+ envelope-from=tommy.wu@sifive.com; helo=mail-pl1-x631.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -80,7 +79,6 @@ X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Tue, 27 Jun 2023 09:32:13 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -95,36 +93,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The privileged spec states:
-For a memory access made to support VS-stage address translation (such as
-to read/write a VS-level page table), permissions are checked as though
-for a load or store, not for the original access type. However, any
-exception is always reported for the original access type (instruction,
-load, or store/AMO).
+The HiFive 1 rev b includes a watchdog module based on a 32-bit
+counter. The watchdog timer is in the always-on domain device of
+HiFive 1 rev b, so this patch added the AON device to the sifive_e
+machine. This patch only implemented the functionality of the
+watchdog timer, not all the functionality of the AON device.
 
-The current implementation converts the access type to LOAD if implicit
-G-stage translation fails which results in only reporting "Load guest-page
-fault". This commit removes the convertion of access type, so the reported
-exception conforms to the spec.
+You can test the patchset by the QTest tests/qtest/sifive-e-aon-watchdog-test.c
 
-Signed-off-by: Jason Chien <jason.chien@sifive.com>
----
- target/riscv/cpu_helper.c | 1 -
- 1 file changed, 1 deletion(-)
+Changes since v1 ( Thank Alistair for the feedback ):
+- Use the register field macro.
+- Delete the public create function. The board creates the aon device itself.
+- Keep all variable declarations at the top of the code block.
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index a944f25694..ff2a1469dc 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -1277,7 +1277,6 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-         if (ret == TRANSLATE_G_STAGE_FAIL) {
-             first_stage_error = false;
-             two_stage_indirect_error = true;
--            access_type = MMU_DATA_LOAD;
-         }
- 
-         qemu_log_mask(CPU_LOG_MMU,
+Changes since v2 ( Thank Alistair for the feedback ):
+- Delete the declaration and definition of the create function.
+
+Changes since v3 ( Thank Alistair and Thomas for the feedback ):
+- Use `device_class_set_props()` for the properties in sifive_e_aon device.
+- Add SPDX identifier in QTEST.
+- Use libqtest.h in QTEST.
+- Let the statements on one line as long as they still fit into 80 columns.
+
+Changes since v4 ( Thank Phil for the feedback ):
+- Improve code style consistency.
+- Move the timer create function to the sifive_e_aon_init.
+- Allocate the sifive_e_aon device state in the SoC.
+
+Changes since v5 ( Thank Alistair for the feedback ):
+- Rebase to the riscv-to-apply.next branch.
+
+Tommy Wu (3):
+  hw/misc: sifive_e_aon: Support the watchdog timer of HiFive 1 rev b.
+  hw/riscv: sifive_e: Support the watchdog timer of HiFive 1 rev b.
+  tests/qtest: sifive-e-aon-watchdog-test.c: Add QTest of watchdog of
+    sifive_e
+
+ hw/misc/Kconfig                          |   3 +
+ hw/misc/meson.build                      |   1 +
+ hw/misc/sifive_e_aon.c                   | 319 ++++++++++++++++
+ hw/riscv/Kconfig                         |   1 +
+ hw/riscv/sifive_e.c                      |  17 +-
+ include/hw/misc/sifive_e_aon.h           |  60 +++
+ include/hw/riscv/sifive_e.h              |   9 +-
+ tests/qtest/meson.build                  |   3 +
+ tests/qtest/sifive-e-aon-watchdog-test.c | 450 +++++++++++++++++++++++
+ 9 files changed, 858 insertions(+), 5 deletions(-)
+ create mode 100644 hw/misc/sifive_e_aon.c
+ create mode 100644 include/hw/misc/sifive_e_aon.h
+ create mode 100644 tests/qtest/sifive-e-aon-watchdog-test.c
+
 -- 
-2.17.1
+2.31.1
 
 
