@@ -4,45 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FD5DEB64D7
-	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Jun 2023 13:34:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E699EB64DD
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Jun 2023 13:34:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qEVJD-0007ej-Oe; Wed, 28 Jun 2023 09:34:11 -0400
+	id 1qEVJD-0007ep-VG; Wed, 28 Jun 2023 09:34:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <reaperlu@hust.edu.cn>)
- id 1qESi9-0005eI-P7; Wed, 28 Jun 2023 06:47:45 -0400
-Received: from [202.114.0.240] (helo=hust.edu.cn)
+ id 1qESZK-0003Y0-Td; Wed, 28 Jun 2023 06:38:39 -0400
+Received: from mail.hust.edu.cn ([202.114.0.240] helo=hust.edu.cn)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <reaperlu@hust.edu.cn>)
- id 1qESi5-0006S6-U7; Wed, 28 Jun 2023 06:47:45 -0400
+ id 1qESZI-0002uw-9y; Wed, 28 Jun 2023 06:38:38 -0400
 Received: from localhost.localdomain ([10.12.190.169])
  (user=reaperlu@hust.edu.cn mech=LOGIN bits=0)
- by mx1.hust.edu.cn  with ESMTP id 35SAaxkx015992-35SAaxl0015992
+ by mx1.hust.edu.cn  with ESMTP id 35SAcQ9X025160-35SAcQ9Y025160
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Wed, 28 Jun 2023 18:37:12 +0800
+ Wed, 28 Jun 2023 18:38:30 +0800
 From: Ruibo Lu <reaperlu@hust.edu.cn>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, luruibo2000@163.com, alistair.francis@wdc.com,
  liweiwei@iscas.ac.cn
-Subject: [PATCH 1/2] target/riscv: Remove redundant check in pmp_is_locked
-Date: Wed, 28 Jun 2023 18:36:51 +0800
-Message-ID: <20230628103651.55194-1-reaperlu@hust.edu.cn>
+Subject: [PATCH 2/2] target/riscv: Optimize ambiguous local variable in
+ pmp_hart_has_privs
+Date: Wed, 28 Jun 2023 18:38:18 +0800
+Message-ID: <20230628103818.55471-1-reaperlu@hust.edu.cn>
 X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-FEAS-AUTH-USER: reaperlu@hust.edu.cn
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 202.114.0.240 (deferred)
 Received-SPF: pass client-ip=202.114.0.240; envelope-from=reaperlu@hust.edu.cn;
  helo=hust.edu.cn
-X-Spam_score_int: -10
-X-Spam_score: -1.1
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, RDNS_NONE=0.793,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-Mailman-Approved-At: Wed, 28 Jun 2023 09:34:10 -0400
 X-BeenThere: qemu-riscv@nongnu.org
@@ -59,30 +58,75 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-the check of top PMP is redundant and will not influence the return
-value, so consider remove it
+These two values represents whether start/end address is in pmp_range.
+However, the type and name of them is ambiguous. This commit change the
+name and type of them to improve code readability and accuracy.
 
 Signed-off-by: Ruibo Lu <reaperlu@hust.edu.cn>
 ---
- target/riscv/pmp.c | 5 -----
- 1 file changed, 5 deletions(-)
+ target/riscv/pmp.c | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
 
 diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 9d8db493e6..1a9279ba88 100644
+index 1a9279ba88..aa573bab14 100644
 --- a/target/riscv/pmp.c
 +++ b/target/riscv/pmp.c
-@@ -49,11 +49,6 @@ static inline int pmp_is_locked(CPURISCVState *env, uint32_t pmp_index)
-         return 1;
+@@ -203,16 +203,16 @@ void pmp_update_rule_nums(CPURISCVState *env)
      }
- 
--    /* Top PMP has no 'next' to check */
--    if ((pmp_index + 1u) >= MAX_RISCV_PMPS) {
--        return 0;
--    }
--
-     return 0;
  }
  
+-static int pmp_is_in_range(CPURISCVState *env, int pmp_index,
++static bool pmp_is_in_range(CPURISCVState *env, int pmp_index,
+                            target_ulong addr)
+ {
+-    int result = 0;
++    int result = false;
+ 
+     if ((addr >= env->pmp_state.addr[pmp_index].sa) &&
+         (addr <= env->pmp_state.addr[pmp_index].ea)) {
+-        result = 1;
++        result = true;
+     } else {
+-        result = 0;
++        result = false;
+     }
+ 
+     return result;
+@@ -287,8 +287,8 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+ {
+     int i = 0;
+     int pmp_size = 0;
+-    target_ulong s = 0;
+-    target_ulong e = 0;
++    bool sa_in = 0;
++    bool ea_in = 0;
+ 
+     /* Short cut if no rules */
+     if (0 == pmp_get_num_rules(env)) {
+@@ -314,11 +314,11 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+      * from low to high
+      */
+     for (i = 0; i < MAX_RISCV_PMPS; i++) {
+-        s = pmp_is_in_range(env, i, addr);
+-        e = pmp_is_in_range(env, i, addr + pmp_size - 1);
++        sa_in = pmp_is_in_range(env, i, addr);
++        ea_in = pmp_is_in_range(env, i, addr + pmp_size - 1);
+ 
+         /* partially inside */
+-        if ((s + e) == 1) {
++        if (sa_in ^ ea_in) {
+             qemu_log_mask(LOG_GUEST_ERROR,
+                           "pmp violation - access is partially inside\n");
+             *allowed_privs = 0;
+@@ -339,7 +339,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+             (env->pmp_state.pmp[i].cfg_reg & PMP_WRITE) |
+             ((env->pmp_state.pmp[i].cfg_reg & PMP_EXEC) >> 2);
+ 
+-        if (((s + e) == 2) && (PMP_AMATCH_OFF != a_field)) {
++        if ((sa_in & ea_in) && (PMP_AMATCH_OFF != a_field)) {
+             /*
+              * If the PMP entry is not off and the address is in range,
+              * do the priv check
 -- 
 2.41.0
 
