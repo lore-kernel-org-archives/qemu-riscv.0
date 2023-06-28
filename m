@@ -4,81 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4B2EEB64D7
-	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Jun 2023 08:14:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83CD3EB64DA
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Jun 2023 09:08:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qEQK0-0001i3-Kd; Wed, 28 Jun 2023 04:14:40 -0400
+	id 1qER9Q-0008Tz-71; Wed, 28 Jun 2023 05:07:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qEQJz-0001hR-3p
- for qemu-riscv@nongnu.org; Wed, 28 Jun 2023 04:14:39 -0400
-Received: from mail-ej1-x635.google.com ([2a00:1450:4864:20::635])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1qER9P-0008Tj-7v
+ for qemu-riscv@nongnu.org; Wed, 28 Jun 2023 05:07:47 -0400
+Received: from mail-lf1-x130.google.com ([2a00:1450:4864:20::130])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qEQJx-0002Xe-Dp
- for qemu-riscv@nongnu.org; Wed, 28 Jun 2023 04:14:38 -0400
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-977e0fbd742so657830866b.2
- for <qemu-riscv@nongnu.org>; Wed, 28 Jun 2023 01:14:36 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1qER9M-0008ST-UF
+ for qemu-riscv@nongnu.org; Wed, 28 Jun 2023 05:07:46 -0400
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-4fb94b1423eso289455e87.1
+ for <qemu-riscv@nongnu.org>; Wed, 28 Jun 2023 02:07:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1687940075; x=1690532075;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=cFkITCm7Ej6n3DjkfdwkD4Elkhz2kqSHz2YVvLg1u08=;
- b=RTCvYi/1PQugB30B06+ygqrdftaCE1v2/txMRMz17itSwI1uTcU62xa3qDmngRUbNv
- m2vKCnB2AuM4LRSHUZI1mYTXrAL5HSBxWfchEyyvoPcLjLdEscvCFV1DAY74REWXw4Ps
- EjH2wIR3F0Gj6k+3Wn676l597vohi/u+s0KBWRWaudwz7cuRYWcldAIcQVtZ7x4d1qgc
- x9o/RBugw/6Fwc/rsxDFOtT9SmbQSlYeVjEeYpj3Tpn/A+QamAjjETXH+j1rf1sL25e0
- /RHe6PLgGhDAMRcVXZXzIvagciUyjw8xcdCdttDrB7mY8/jaGW38VKhlrT8F+b5STQ4F
- f6OA==
+ d=linaro.org; s=google; t=1687943263; x=1690535263;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Yg+Y5FmR7KsY+IEy4o0xFzpFhAX0DMCj+mtO6dzHn3Q=;
+ b=QY5ITJ0tZwUOni3jUTYQbNHMu4AW0NPV5ZwOepLnNwyc1Mbkdv9HOV8VEEdo7jYWH0
+ Jky3mC8GExhzx/XtbdCTl1RKnle0zF1bsAQk/3dGbLHa4Ro1XxNBDPKMhNbdMHeuqmbE
+ BoU9OQN6q7WKGtvjrRSmgxNVWmSGvsuDIkeCbXpcFsEXD6HMHq91lFdOCpYkXaQfwvx5
+ z9yKB95Tai34Dtq1KXm7YBfkFY9JspBWgeZwVDdE0sZN87ao/xvFtqxTo1r1bg7THsO2
+ 33McTrwaRld2Z3JN4Ppg8svHwqWYPK8rZSJa3wxzJJfybj/d6G1PN8XgnBPYTT2B44Xs
+ rztg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687940075; x=1690532075;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cFkITCm7Ej6n3DjkfdwkD4Elkhz2kqSHz2YVvLg1u08=;
- b=SCjxjUI03IS0TnRlaFv1q6wr+mlFNAqAES4V6o6muaEqTVSAQz4rWOIr4B9B6RMAm0
- /UGJGHw30wb8dItaAW5IdUmFTcMIdjzKG4hRYKw4Bk3nMRoOq7TqmMe3rpjCLlTG8REO
- gqsJ4KMo+tvivdDzpwKTSUQxP7uJHzoUFZI21rXTaJENDKclyotkyFBLwJeiUzhJUdYe
- fpJMgka+N6j4DBDNkYGldbXNlabKbCqByI2Sgx3lZ/QUUmdr42i9RFVLjcjpcFqfNL2z
- lN1dkvXZdI/b+2I6rm1XxY3t3paLIqPp7mpbGDZKhM2h54JBqP6u2vT1sPOFb7oDoH9O
- BkHw==
-X-Gm-Message-State: AC+VfDxTmvW5AFY/4EcqSAV20qWov7W3jUXAXgMgpRshAE+q/4RonNxM
- AnwcBg3zYIezZrRDWzAUfGDqwQ==
-X-Google-Smtp-Source: ACHHUZ67bFSbmMlXFuxlfzAxQaVtZCIn6e+AI3cERCDJgGm7a1WEEoRA0cmqI1t56uRQXeiM4JPMeQ==
-X-Received: by 2002:a17:906:da8a:b0:97d:2bcc:47d5 with SMTP id
- xh10-20020a170906da8a00b0097d2bcc47d5mr29715601ejb.49.1687940075311; 
- Wed, 28 Jun 2023 01:14:35 -0700 (PDT)
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ d=1e100.net; s=20221208; t=1687943263; x=1690535263;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Yg+Y5FmR7KsY+IEy4o0xFzpFhAX0DMCj+mtO6dzHn3Q=;
+ b=ERoVHgl0ZYcIlDHpQg0ylLmadLkHknMSZKJZ0vUJN61bcGwqXlEl5WYxbKHsxeKwHA
+ xduy1WVFpqIC/aFhHBcTneDbnegMiULuHbf6x8zbQepGkPy78mfkGjQhu8v3l61xi0jc
+ JX41/LDNUdXZJnupQCXC8J47nsmknpF6JSg2DbDDe8XHw5+lBdcrYG0Vn/+oOf4qc6uO
+ VF3U2xhLl+BolKETFcO2xIApP/KmA+GjWKC7cfv0/WSQxbRRSRkYW8yYRerX5em5CBmG
+ JWNp8xlbeDJRwwD8grtc0GF/eg2067FbeKV2a6kEW7yJxGSp1H4BxfgS76BcTqV4YItC
+ DGzw==
+X-Gm-Message-State: AC+VfDxwh5JRPWMYcUmv557+sna0egJ1nm4k3e/emAQcZJAikyUAlods
+ rVqsKlLCaxTQLizKJi1x+R7qsg==
+X-Google-Smtp-Source: ACHHUZ4oOeon2Qse9QXn/vYmIjvSluaGxsIQHySTcxOQ34NUjbl4AZm6GydbRjsUr4YVb6LAmFsiXQ==
+X-Received: by 2002:ac2:4e03:0:b0:4fb:9497:b2a5 with SMTP id
+ e3-20020ac24e03000000b004fb9497b2a5mr525870lfr.21.1687943262914; 
+ Wed, 28 Jun 2023 02:07:42 -0700 (PDT)
+Received: from [192.168.1.208] ([139.47.41.103])
  by smtp.gmail.com with ESMTPSA id
- l16-20020a1709065a9000b0098884f86e41sm5379644ejq.123.2023.06.28.01.14.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Jun 2023 01:14:34 -0700 (PDT)
-Date: Wed, 28 Jun 2023 10:14:33 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
-Subject: Re: [PATCH v5 16/19] target/riscv/cpu.c: create KVM mock properties
-Message-ID: <20230628-3c9c1c6716a2b5752db75315@orel>
-References: <20230627163203.49422-1-dbarboza@ventanamicro.com>
- <20230627163203.49422-17-dbarboza@ventanamicro.com>
+ z16-20020a5d4d10000000b00313eeca9f4asm9207596wrt.14.2023.06.28.02.07.41
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 28 Jun 2023 02:07:42 -0700 (PDT)
+Message-ID: <af36c183-aad0-6e66-62e0-0f97b04eb4cc@linaro.org>
+Date: Wed, 28 Jun 2023 11:07:40 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230627163203.49422-17-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::635;
- envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x635.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH v6 09/15] target/riscv: Add Zvkned ISA extension support
+Content-Language: en-US
+To: Max Chou <max.chou@sifive.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: dbarboza@ventanamicro.com, Nazar Kazakov <nazar.kazakov@codethink.co.uk>, 
+ Lawrence Hunter <lawrence.hunter@codethink.co.uk>,
+ William Salmon <will.salmon@codethink.co.uk>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
+References: <20230627174551.65498-1-max.chou@sifive.com>
+ <20230627174551.65498-10-max.chou@sifive.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20230627174551.65498-10-max.chou@sifive.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::130;
+ envelope-from=richard.henderson@linaro.org; helo=mail-lf1-x130.google.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.103,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -96,104 +105,221 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jun 27, 2023 at 01:32:00PM -0300, Daniel Henrique Barboza wrote:
-> KVM-specific properties are being created inside target/riscv/kvm.c. But
-> at this moment we're gathering all the remaining properties from TCG and
-> adding them as is when running KVM. This creates a situation where
-> non-KVM properties are setting flags to 'true' due to its default
-> settings (e.g.  Zawrs). Users can also freely enable them via command
-> line.
-> 
-> This doesn't impact runtime per se because KVM doesn't care about these
-> flags, but code such as riscv_isa_string_ext() take those flags into
-> account. The result is that, for a KVM guest, setting non-KVM properties
-> will make them appear in the riscv,isa DT.
-> 
-> We want to keep the same API for both TCG and KVM and at the same time,
-> when running KVM, forbid non-KVM extensions to be enabled internally. We
-> accomplish both by changing riscv_cpu_add_user_properties() to add a
-> mock boolean property for every non-KVM extension in
-> riscv_cpu_extensions[]. Then, when running KVM, users are still free to
-> set extensions at will, but we'll error out if a non-KVM extension is
-> enabled. Setting such extension to 'false' will be ignored.
-> 
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->  target/riscv/cpu.c | 42 +++++++++++++++++++++++++++++++++++++++---
->  1 file changed, 39 insertions(+), 3 deletions(-)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index b65db165cc..22851b0e93 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1720,6 +1720,24 @@ static Property riscv_cpu_extensions[] = {
->      DEFINE_PROP_END_OF_LIST(),
->  };
->  
-> +
-> +static void cpu_set_cfg_unavailable(Object *obj, Visitor *v,
-> +                                    const char *name,
-> +                                    void *opaque, Error **errp)
+On 6/27/23 19:45, Max Chou wrote:
+> +#define GEN_V_UNMASKED_TRANS(NAME, CHECK, EGS)                                \
+> +    static bool trans_##NAME(DisasContext *s, arg_##NAME *a)                  \
+> +    {                                                                         \
+> +        if (CHECK(s, a)) {                                                    \
+> +            TCGv_ptr rd_v, rs2_v;                                             \
+> +            TCGv_i32 desc;                                                    \
+> +            uint32_t data = 0;                                                \
+> +            TCGLabel *over = gen_new_label();                                 \
+> +            TCGLabel *vl_ok = gen_new_label();                                \
+> +            TCGLabel *vstart_ok = gen_new_label();                            \
+> +            TCGv_i32 tmp = tcg_temp_new_i32();                                \
+> +                                                                              \
+> +            /* save opcode for unwinding in case we throw an exception */     \
+> +            decode_save_opc(s);                                               \
+> +                                                                              \
+> +            /* check (vl % EGS == 0) assuming it's power of 2 */              \
+> +            tcg_gen_trunc_tl_i32(tmp, cpu_vl);                                \
+> +            tcg_gen_andi_i32(tmp, tmp, EGS - 1);                              \
+> +            tcg_gen_brcondi_i32(TCG_COND_EQ, tmp, 0, vl_ok);                  \
+> +            gen_helper_restore_cpu_and_raise_exception(                       \
+> +                cpu_env, tcg_constant_i32(RISCV_EXCP_ILLEGAL_INST));          \
+> +            gen_set_label(vl_ok);                                             \
+> +                                                                              \
+> +            /* check (vstart % EGS == 0) assuming it's power of 2 */          \
+> +            tcg_gen_trunc_tl_i32(tmp, cpu_vstart);                            \
+> +            tcg_gen_andi_i32(tmp, tmp, EGS - 1);                              \
+> +            tcg_gen_brcondi_i32(TCG_COND_EQ, tmp, 0, vstart_ok);              \
+> +            gen_helper_restore_cpu_and_raise_exception(                       \
+> +                cpu_env, tcg_constant_i32(RISCV_EXCP_ILLEGAL_INST));          \
+> +            gen_set_label(vstart_ok);                                         \
+> +                                                                              \
+> +            tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);        \
+> +            data = FIELD_DP32(data, VDATA, VM, a->vm);                        \
+> +            data = FIELD_DP32(data, VDATA, LMUL, s->lmul);                    \
+> +            data = FIELD_DP32(data, VDATA, VTA, s->vta);                      \
+> +            data = FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);    \
+> +            data = FIELD_DP32(data, VDATA, VMA, s->vma);                      \
+> +            rd_v = tcg_temp_new_ptr();                                        \
+> +            rs2_v = tcg_temp_new_ptr();                                       \
+> +            desc = tcg_constant_i32(                                          \
+> +                simd_desc(s->cfg_ptr->vlen / 8, s->cfg_ptr->vlen / 8, data)); \
+> +            tcg_gen_addi_ptr(rd_v, cpu_env, vreg_ofs(s, a->rd));              \
+> +            tcg_gen_addi_ptr(rs2_v, cpu_env, vreg_ofs(s, a->rs2));            \
+> +            gen_helper_##NAME(rd_v, rs2_v, cpu_env, desc);                    \
+> +            mark_vs_dirty(s);                                                 \
+> +            gen_set_label(over);                                              \
+> +            return true;                                                      \
+> +        }                                                                     \
+> +        return false;                                                         \
+> +    }
+
+This kind of massive macro is bad style.
+Much better to have a helper function and pass in gen_helper_foo as a parameter.
+
+You can eliminate the vstart % EGS test, and the vstart < vl test, when VSTART_EQ_ZERO.
+You can eliminate the vl % EGS test when VL_EQ_VLMAX.
+
+You could move all of these tests out of line, into a helper_foo_chk() function which 
+performs the checks and then calls helper_foo().
+
+> +#define GEN_VI_UNMASKED_TRANS(NAME, CHECK, EGS)                               \
+> +    static bool trans_##NAME(DisasContext *s, arg_##NAME *a)                  \
+> +    {                                                                         \
+> +        if (CHECK(s, a)) {                                                    \
+> +            TCGv_ptr rd_v, rs2_v;                                             \
+> +            TCGv_i32 uimm_v, desc;                                            \
+> +            uint32_t data = 0;                                                \
+> +            TCGLabel *over = gen_new_label();                                 \
+> +            TCGLabel *vl_ok = gen_new_label();                                \
+> +            TCGLabel *vstart_ok = gen_new_label();                            \
+> +            TCGv_i32 tmp = tcg_temp_new_i32();                                \
+> +                                                                              \
+> +            /* save opcode for unwinding in case we throw an exception */     \
+> +            decode_save_opc(s);                                               \
+> +                                                                              \
+> +            /* check (vl % EGS == 0) assuming it's power of 2 */              \
+> +            tcg_gen_trunc_tl_i32(tmp, cpu_vl);                                \
+> +            tcg_gen_andi_i32(tmp, tmp, EGS - 1);                              \
+> +            tcg_gen_brcondi_i32(TCG_COND_EQ, tmp, 0, vl_ok);                  \
+> +            gen_helper_restore_cpu_and_raise_exception(                       \
+> +                cpu_env, tcg_constant_i32(RISCV_EXCP_ILLEGAL_INST));          \
+> +            gen_set_label(vl_ok);                                             \
+> +                                                                              \
+> +            /* check (vstart % EGS == 0) assuming it's power of 2 */          \
+> +            tcg_gen_trunc_tl_i32(tmp, cpu_vstart);                            \
+> +            tcg_gen_andi_i32(tmp, tmp, EGS - 1);                              \
+> +            tcg_gen_brcondi_i32(TCG_COND_EQ, tmp, 0, vstart_ok);              \
+> +            gen_helper_restore_cpu_and_raise_exception(                       \
+> +                cpu_env, tcg_constant_i32(RISCV_EXCP_ILLEGAL_INST));          \
+> +            gen_set_label(vstart_ok);                                         \
+> +                                                                              \
+> +            tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);        \
+> +            data = FIELD_DP32(data, VDATA, VM, a->vm);                        \
+> +            data = FIELD_DP32(data, VDATA, LMUL, s->lmul);                    \
+> +            data = FIELD_DP32(data, VDATA, VTA, s->vta);                      \
+> +            data = FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);    \
+> +            data = FIELD_DP32(data, VDATA, VMA, s->vma);                      \
+> +                                                                              \
+> +            rd_v = tcg_temp_new_ptr();                                        \
+> +            rs2_v = tcg_temp_new_ptr();                                       \
+> +            uimm_v = tcg_constant_i32(a->rs1);                                \
+> +            desc = tcg_constant_i32(                                          \
+> +                simd_desc(s->cfg_ptr->vlen / 8, s->cfg_ptr->vlen / 8, data)); \
+> +            tcg_gen_addi_ptr(rd_v, cpu_env, vreg_ofs(s, a->rd));              \
+> +            tcg_gen_addi_ptr(rs2_v, cpu_env, vreg_ofs(s, a->rs2));            \
+> +            gen_helper_##NAME(rd_v, rs2_v, uimm_v, cpu_env, desc);            \
+> +            mark_vs_dirty(s);                                                 \
+> +            gen_set_label(over);                                              \
+> +            return true;                                                      \
+> +        }                                                                     \
+> +        return false;                                                         \
+> +    }
+
+Likewise.
+
+> +#define GEN_ZVKNED_HELPER_VV(NAME, ...)                                   \
+> +    void HELPER(NAME)(void *vd_vptr, void *vs2_vptr, CPURISCVState *env,  \
+> +                      uint32_t desc)                                      \
+> +    {                                                                     \
+> +        uint64_t *vd = vd_vptr;                                           \
+> +        uint64_t *vs2 = vs2_vptr;                                         \
+> +        uint32_t vl = env->vl;                                            \
+> +        uint32_t total_elems = vext_get_total_elems(env, desc, 4);        \
+> +        uint32_t vta = vext_vta(desc);                                    \
+> +                                                                          \
+> +        for (uint32_t i = env->vstart / 4; i < env->vl / 4; i++) {        \
+> +            AESState round_key;                                           \
+> +            round_key.d[HOST_BIG_ENDIAN] = cpu_to_le64(vs2[i * 2 + 0]);   \
+> +            round_key.d[!HOST_BIG_ENDIAN] = cpu_to_le64(vs2[i * 2 + 1]);  \
+> +            AESState round_state;                                         \
+> +            cpu_to_le64s(vd + i * 2 + 0);                                 \
+> +            cpu_to_le64s(vd + i * 2 + 1);                                 \
+> +            for (int j = 0; j < 16; j++) {                                \
+> +                round_state.b[j] = ((uint8_t *)(vd + i * 2))[j];          \
+> +            }                                                             \
+
+I think all of this byte swapping is wrong.
+With this last loop particularly being particularly silly.
+
+You want to present the 16 bytes in *host* endian order.
+Because the words are always in little-endian order (see H1 et al),
+we only need to swap the words on big-endian hosts.
+
+See https://lore.kernel.org/qemu-devel/20230620110758.787479-21-richard.henderson@linaro.org/
+where I do exactly the same thing for ARM:
+
++        AESState *ad = (AESState *)(vd + i);
++        AESState *st = (AESState *)(vm + i);
++        AESState t;
++
++        /* Our uint64_t are in the wrong order for big-endian. */
++        if (HOST_BIG_ENDIAN) {
++            t.d[0] = st->d[1];
++            t.d[1] = st->d[0];
++            aesdec_IMC(&t, &t, false);
++            ad->d[0] = t.d[1];
++            ad->d[1] = t.d[0];
++        } else {
++            aesdec_IMC(ad, st, false);
++        }
+
+> +void HELPER(vaeskf1_vi)(void *vd_vptr, void *vs2_vptr, uint32_t uimm,
+> +                        CPURISCVState *env, uint32_t desc)
 > +{
-> +    const char *propname = opaque;
-> +    bool value;
+> +    uint32_t *vd = vd_vptr;
+> +    uint32_t *vs2 = vs2_vptr;
+> +    uint32_t vl = env->vl;
+> +    uint32_t total_elems = vext_get_total_elems(env, desc, 4);
+> +    uint32_t vta = vext_vta(desc);
 > +
-> +    if (!visit_type_bool(v, name, &value, errp)) {
-> +        return;
+> +    uimm &= 0b1111;
+> +    if (uimm > 10 || uimm == 0) {
+> +        uimm ^= 0b1000;
 > +    }
 > +
-> +    if (value) {
-> +        error_setg(errp, "extension %s is not available with KVM",
-> +                   propname);
+> +    for (uint32_t i = env->vstart / 4; i < env->vl / 4; i++) {
+> +        uint32_t rk[8];
+> +        static const uint32_t rcon[] = {
+> +            0x01000000, 0x02000000, 0x04000000, 0x08000000, 0x10000000,
+> +            0x20000000, 0x40000000, 0x80000000, 0x1B000000, 0x36000000,
+> +        };
+> +
+> +        rk[0] = bswap32(vs2[i * 4 + H4(0)]);
+> +        rk[1] = bswap32(vs2[i * 4 + H4(1)]);
+> +        rk[2] = bswap32(vs2[i * 4 + H4(2)]);
+> +        rk[3] = bswap32(vs2[i * 4 + H4(3)]);
+> +
+> +        rk[4] = rk[0] ^ (((uint32_t)AES_sbox[(rk[3] >> 16) & 0xff] << 24) |
+> +                         ((uint32_t)AES_sbox[(rk[3] >> 8) & 0xff] << 16) |
+> +                         ((uint32_t)AES_sbox[(rk[3] >> 0) & 0xff] << 8) |
+> +                         ((uint32_t)AES_sbox[(rk[3] >> 24) & 0xff] << 0))
+> +                      ^ rcon[uimm - 1];
+> +        rk[5] = rk[1] ^ rk[4];
+> +        rk[6] = rk[2] ^ rk[5];
+> +        rk[7] = rk[3] ^ rk[6];
+> +
+> +        vd[i * 4 + H4(0)] = bswap32(rk[4]);
+> +        vd[i * 4 + H4(1)] = bswap32(rk[5]);
+> +        vd[i * 4 + H4(2)] = bswap32(rk[6]);
+> +        vd[i * 4 + H4(3)] = bswap32(rk[7]);
 > +    }
+> +    env->vstart = 0;
+> +    /* set tail elements to 1s */
+> +    vext_set_elems_1s(vd, vta, vl * 4, total_elems * 4);
 > +}
-> +
->  /*
->   * Add CPU properties with user-facing flags.
->   *
-> @@ -1738,9 +1756,27 @@ static void riscv_cpu_add_user_properties(Object *obj)
->      riscv_cpu_add_misa_properties(obj);
->  
->      for (prop = riscv_cpu_extensions; prop && prop->name; prop++) {
-> -        /* Check if KVM didn't create the property already */
-> -        if (object_property_find(obj, prop->name)) {
-> -            continue;
-> +        if (riscv_running_kvm()) {
-> +            /* Check if KVM created the property already */
 
-The comment change should have been fixed on patch 12 where it was
-introduced.
+All of this byte swapping is going to be wrong for a big-endian host.
+It is also a little bit silly to do for a little-endian host.
 
-> +            if (object_property_find(obj, prop->name)) {
-> +                continue;
-> +            }
-> +
-> +            /*
-> +             * Set the default to disabled for every extension
-> +             * unknown to KVM and error out if the user attempts
-> +             * to enable any of them.
-> +             *
-> +             * We're giving a pass for non-bool properties since they're
-> +             * not related to the availability of extensions and can be
-> +             * safely ignored as is.
-> +             */
-> +            if (prop->info == &qdev_prop_bool) {
-> +                object_property_add(obj, prop->name, "bool",
-> +                                    NULL, cpu_set_cfg_unavailable,
-> +                                    NULL, (void *)prop->name);
-> +                continue;
-> +            }
->          }
->  
->          qdev_property_add_static(dev, prop);
-> -- 
-> 2.41.0
->
+You're byte swapping uint32_t words, then extracting bytes from those words.  Just extract 
+the exact byte you require from the original input, using the H1() macro, and now you have 
+correct code for both big- and little-endian hosts.
 
-Otherwise,
 
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+r~
 
-Thanks,
-drew
 
