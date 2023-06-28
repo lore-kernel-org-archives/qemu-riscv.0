@@ -4,91 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71DBBEB64D7
-	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Jun 2023 09:15:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29CB5EB64DA
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Jun 2023 13:21:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qERGD-0001wo-Gj; Wed, 28 Jun 2023 05:14:49 -0400
+	id 1qEV6u-0001Xf-Rz; Wed, 28 Jun 2023 09:21:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1qERGB-0001wT-Je
- for qemu-riscv@nongnu.org; Wed, 28 Jun 2023 05:14:47 -0400
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1qERG8-0005on-2X
- for qemu-riscv@nongnu.org; Wed, 28 Jun 2023 05:14:47 -0400
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-3fa99f6a4a1so32445405e9.3
- for <qemu-riscv@nongnu.org>; Wed, 28 Jun 2023 02:14:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1687943680; x=1690535680;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ARYV02Jdpox+u+co30Tt5vOPwjF2ZX3ItzKd8SZDTLc=;
- b=MT7NtfztkhwxQND4mW0nfkBSZGkjdaFlEoJv9gBeHX74IKTT7L4n6WaI8Uffd27EVS
- yuYFkhtectwyGxE0nUxRE2lESXW8HG4GRpjVeDS0swdoVJZenPaGVem2kT0swoU6HMPC
- saZks8vEWsMPA/agAfLWxX+0koecC0JXCad9R3pV2EIWWJx2KExANetKfXAdc1N1NcAr
- vQXBOd1Jm0m47foUysNGMVTSUrYE7T31qf+JaZgGlX0ctBvcRG8FPBlR9Cg3blKq1hjy
- nLplD9PNwFBxlkFG4uoEEpLhXBtxjJ/BYWs8055jzytMJTFMXVJtAs+6gGxrpXnf1rO5
- SWKA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687943680; x=1690535680;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ARYV02Jdpox+u+co30Tt5vOPwjF2ZX3ItzKd8SZDTLc=;
- b=Zagr2Moyty9pLln59FM/xIflIsSSbDNnSMML89o+0D+JVrO8daLNKAG/gdQ9H5vHsR
- /tHPdk2IW8SDSExIVvcMpAmhw+qlyfqFSNen9BlaEbNZB+egbDxRnoDKtzt+60VpF9Vm
- Li1t9R1VR1nFI2JXzk+KBJOiKoouGcG9P+bPXkw48T4qBjLjOjdvxZ6rITb4Ho9mpymA
- wLtfIVkBinykrB6+pFZmlWQO+zAdJ9Zi1X3zG3OZc+sLGAcU5J+FKgMUzWO0EvCR5Ajq
- pJaw8yo9qb3iWiXghnKGc25gicv5L4KBevln5+vzECV9XLkd6eIOuJJve6uCiIZbT0JD
- c4rg==
-X-Gm-Message-State: AC+VfDwR2iHR0L1LdBkT8ypimc8mYjva7KaweGoDoBbTBCnnLq095qYV
- K791VgVKcFcmhpgDPV4t4ebpsg==
-X-Google-Smtp-Source: ACHHUZ7+R7+hvko6P1WTlaocnzqZoyTFtXGoiVXpDfao6l4Z3+C0o3YCoBtFGjJA66COfnwGzxF1eg==
-X-Received: by 2002:a7b:c852:0:b0:3fb:415a:d07 with SMTP id
- c18-20020a7bc852000000b003fb415a0d07mr4775640wml.36.1687943679910; 
- Wed, 28 Jun 2023 02:14:39 -0700 (PDT)
-Received: from [192.168.1.208] ([139.47.41.103])
- by smtp.gmail.com with ESMTPSA id
- s25-20020a7bc399000000b003fa96fe2bebsm8198909wmj.41.2023.06.28.02.14.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 28 Jun 2023 02:14:39 -0700 (PDT)
-Message-ID: <1aef4266-e196-ccfb-6631-bbefef96111b@linaro.org>
-Date: Wed, 28 Jun 2023 11:14:37 +0200
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1qEV6m-0001Sw-JV; Wed, 28 Jun 2023 09:21:20 -0400
+Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1qEV6j-0006nJ-By; Wed, 28 Jun 2023 09:21:20 -0400
+Received: from [192.168.0.120] (unknown [114.95.176.74])
+ by APP-01 (Coremail) with SMTP id qwCowAD3__O+M5xkCJWJBQ--.52066S2;
+ Wed, 28 Jun 2023 21:21:03 +0800 (CST)
+Message-ID: <dfc222e9-905d-2f55-7451-0180db4e6f82@iscas.ac.cn>
+Date: Wed, 28 Jun 2023 21:21:02 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.0
-Subject: Re: [PATCH v6 10/15] target/riscv: Add Zvknh ISA extension support
+Cc: liweiwei@iscas.ac.cn, qemu-riscv@nongnu.org, luruibo2000@163.com,
+ alistair.francis@wdc.com
+Subject: Re: [PATCH 1/2] target/riscv: Remove redundant check in pmp_is_locked
+To: Ruibo Lu <reaperlu@hust.edu.cn>, qemu-devel@nongnu.org
+References: <20230628103651.55194-1-reaperlu@hust.edu.cn>
 Content-Language: en-US
-To: Max Chou <max.chou@sifive.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: dbarboza@ventanamicro.com,
- Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>,
- Nazar Kazakov <nazar.kazakov@codethink.co.uk>,
- Lawrence Hunter <lawrence.hunter@codethink.co.uk>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20230627174551.65498-1-max.chou@sifive.com>
- <20230627174551.65498-11-max.chou@sifive.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230627174551.65498-11-max.chou@sifive.com>
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+In-Reply-To: <20230628103651.55194-1-reaperlu@hust.edu.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x334.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+X-CM-TRANSID: qwCowAD3__O+M5xkCJWJBQ--.52066S2
+X-Coremail-Antispam: 1UD129KBjvdXoW7JFyUKw45Jw45ZFy5Cr45ZFb_yoWxtrX_Gr
+ W0gF48XryDW3WjyFy8Cry5Jw1xKFykG347Kayftw47G347WrW7Xa4kKF95Jryj9F97GFs7
+ ur1fAFy7KrnI9jkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUbckFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+ 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
+ A2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Jr0_
+ Gr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s
+ 0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xII
+ jxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr
+ 1lF7xvr2IY64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7Mxk0xIA0c2IEe2xFo4CEbIxv
+ r21l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxV
+ WUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r126r1DMIIYrxkI
+ 7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r
+ 1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI
+ 42IY6I8E87Iv6xkF7I0E14v26r1j6r4UYxBIdaVFxhVjvjDU0xZFpf9x0JUywZ7UUUUU=
+X-Originating-IP: [114.95.176.74]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -19
+X-Spam_score: -2.0
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.103,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.089,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -105,29 +77,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 6/27/23 19:45, Max Chou wrote:
-> +void HELPER(vsha2cl_vv)(void *vd, void *vs1, void *vs2, CPURISCVState *env,
-> +                        uint32_t desc)
-> +{
-> +    uint32_t sew = FIELD_EX64(env->vtype, VTYPE, VSEW);
-> +    uint32_t esz = sew == MO_64 ? 8 : 4;
-> +    uint32_t total_elems;
-> +    uint32_t vta = vext_vta(desc);
-> +
-> +    for (uint32_t i = env->vstart / 4; i < env->vl / 4; i++) {
-> +        if (sew == MO_64) {
-> +            vsha2c_64(((uint64_t *)vs2) + 4 * i, ((uint64_t *)vd) + 4 * i,
-> +                      (((uint64_t *)vs1) + 4 * i));
-> +        } else {
-> +            vsha2c_32(((uint32_t *)vs2) + 4 * i, ((uint32_t *)vd) + 4 * i,
-> +                      (((uint32_t *)vs1) + 4 * i));
-> +        }
-> +    }
 
-You should have two separate functions for two separate VSEW, so that you do not need to 
-pass the value nor decode the value here.  The selection of SEW should happen during 
-translation using DisasContext.sew.
+On 2023/6/28 18:36, Ruibo Lu wrote:
+> the check of top PMP is redundant and will not influence the return
+> value, so consider remove it
+>
+> Signed-off-by: Ruibo Lu <reaperlu@hust.edu.cn>
+> ---
+Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
 
+Weiwei Li
+>   target/riscv/pmp.c | 5 -----
+>   1 file changed, 5 deletions(-)
+>
+> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> index 9d8db493e6..1a9279ba88 100644
+> --- a/target/riscv/pmp.c
+> +++ b/target/riscv/pmp.c
+> @@ -49,11 +49,6 @@ static inline int pmp_is_locked(CPURISCVState *env, uint32_t pmp_index)
+>           return 1;
+>       }
+>   
+> -    /* Top PMP has no 'next' to check */
+> -    if ((pmp_index + 1u) >= MAX_RISCV_PMPS) {
+> -        return 0;
+> -    }
+> -
+>       return 0;
+>   }
+>   
 
-r~
 
