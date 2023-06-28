@@ -4,70 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 388E5EB64D7
-	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Jun 2023 07:48:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E8DCEB64DA
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Jun 2023 07:55:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qEPuT-0000CM-Vl; Wed, 28 Jun 2023 03:48:18 -0400
+	id 1qEQ1R-0003j5-E4; Wed, 28 Jun 2023 03:55:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1qEPuR-0008VI-Az
- for qemu-riscv@nongnu.org; Wed, 28 Jun 2023 03:48:15 -0400
-Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qEQ1K-0003i7-P5
+ for qemu-riscv@nongnu.org; Wed, 28 Jun 2023 03:55:23 -0400
+Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1qEPuP-0004tn-DV
- for qemu-riscv@nongnu.org; Wed, 28 Jun 2023 03:48:14 -0400
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-311367a3e12so6810335f8f.2
- for <qemu-riscv@nongnu.org>; Wed, 28 Jun 2023 00:48:12 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qEQ1J-0001la-2j
+ for qemu-riscv@nongnu.org; Wed, 28 Jun 2023 03:55:22 -0400
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-98e1d3be004so478549966b.1
+ for <qemu-riscv@nongnu.org>; Wed, 28 Jun 2023 00:55:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1687938492; x=1690530492;
+ d=linaro.org; s=google; t=1687938919; x=1690530919;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=jJN4Suhhvh/vNEWWIgV42qpuvIadtPahvACBQkU1+rA=;
- b=pFSI3KiscKQ/4U51qSHXuelxLFpcEHajHu+ISdFhR//FIwcG6F+YJZ/rhJqlRxS4LS
- +aV74BbpoeMtuxaDZLjFUHaO3CtOogItFqkjcxDBa+LzV/Qm0Wwdoxbn0R/P0wTFcRY8
- sHdr/O5KF0ONe59chcnJF9lve3K9ULvw9ix0gxgU5ajLgsRw9xrwlPM6MllxyTeqdR9D
- u1z70P/09mbcccG3LN7ytCfYyuM91omzRRqt+IakJSAwcJRjWdI/onVecEt0QgXbbD5/
- FbRyljCqVlFJhrbAXcY/wLUXAWYj+c4A+uQqZDTGIhXp3LzAmENfGDguTEONqPiiSXHH
- S7Cg==
+ bh=8FkPvJUYL5+A7956IsLwDUAOtiRR2ssOj/eTdwSyLeo=;
+ b=XjHEYyCUsPyKaayabs/FtNNXPVkmUf/pTPQouiFxTQIKrtU1ZU26bd63niGLQ7EiMN
+ 1ZwX3QykQb8eSMPx8BF7A2T6HrTdMW0Y5wjWHzN+NcuWWE2GWf7uXoV07tXXc9pe7JmM
+ LDM24/++3KOyUvz++WUKxeiMMHW1M/xsCtis4HbCNHV4XmyfqWgZNQUKTC56vav3PzxB
+ E6IwjVYY0gk8iOHhfgrkvbzlf66GrFekiS3TqtJMrDrqLA6IXb4wd7sZ/xVzcjx77AxI
+ crAYNQI1EqxhqktHsbpHWZQcBG+TbJHzlkjW2fX4guEr5awNN6R+/48/bRnOo39F4jFp
+ Leow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687938492; x=1690530492;
+ d=1e100.net; s=20221208; t=1687938919; x=1690530919;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=jJN4Suhhvh/vNEWWIgV42qpuvIadtPahvACBQkU1+rA=;
- b=lj3eePaEEp+fjOEyTnbWX4PSt388R1uxlFaALQydgNgooysBwd3YZKYEp7dT49OAOz
- qca9IiNPaVak0Rjbb0191o1lH/PARm00+MMyllJwxe9m8gzihzPoBbScjR6JuR+Z0aHY
- uMx71nvES8gmYOP3UUEJ7oHigE0uSWVY761Dap+6unhfg6WCViSBE2QSINkJEc5SfjBn
- COJIOfPNvnIaJF9XUB9nDD0jF9yewW6pfK5G08nsoskLSOZxPQiJwhDEL4gUIhb8OT+J
- hpR1ZkIyFq+XngKUSDAkXL2QKhx/G6jfqiVfUJPKi4nPCTqS61mDVZ0O201qi9t9Rrnt
- wFoQ==
-X-Gm-Message-State: AC+VfDx83MOCpsX80phNlqxoxORzWq41Ddhvznacx/jw6Vztz5g9UyWn
- Om0CJNMoSAi/1xkGYBUIt2DH1g==
-X-Google-Smtp-Source: ACHHUZ501p1B3gcKWeJ3QS6fjsCrecUx1ouGyskO3KrWHQNiNp4ByRmXtKCG2Jeh/MJSxoBZ0UgV5Q==
-X-Received: by 2002:a5d:4910:0:b0:314:144:adb2 with SMTP id
- x16-20020a5d4910000000b003140144adb2mr3294257wrq.5.1687938491780; 
- Wed, 28 Jun 2023 00:48:11 -0700 (PDT)
-Received: from [192.168.1.208] ([139.47.41.103])
+ bh=8FkPvJUYL5+A7956IsLwDUAOtiRR2ssOj/eTdwSyLeo=;
+ b=TrZ33KdVZvmtuxc5JlJ87zugv+KZ78JJ5xqI2LFkpPm818w/rGdchxYG1iaV6+MH33
+ amjX9kW89kmth8RI2RPUOsYNM6oXT6MKyKfuTxtuiCxvK0LmeB/r7e6ptlQpicsTb7Ei
+ 0cxQbnHPtK20QdjuPW5uRNn1x4jzASzV/nzv66nT1OG5ufRQAN2GfVvsDaQzssii4RXS
+ SlX0urAHkHnkB4nih+MfnDPXoVIj+8Jkn6rBEQ4iLy69Of0sewxoKh28d2VzEyauljLq
+ bEuTCVA6m75jgipNXWaIBXLsJ2O5ZZGjFDlDg6CIvESZGG7ip9ilykiCVytT/7KXB5sz
+ HmBw==
+X-Gm-Message-State: AC+VfDz5OVGGaqn8cqKkTk3JMlQEInKR8TOwsN5enYqx0bVb2FgqdrCN
+ Hxlq5G2ReAempRN0S3ypBzWxWA==
+X-Google-Smtp-Source: ACHHUZ4Nd022tyB2XWG1cdNlQ52nvPaKIPz7Ta7ADuOllDNqdkNpOr0/KzSAQc9a8Q8Q0A3aMv3nZA==
+X-Received: by 2002:a17:907:a426:b0:992:bc8:58e4 with SMTP id
+ sg38-20020a170907a42600b009920bc858e4mr4450713ejc.20.1687938919072; 
+ Wed, 28 Jun 2023 00:55:19 -0700 (PDT)
+Received: from [192.168.69.115] ([176.187.207.229])
  by smtp.gmail.com with ESMTPSA id
- d11-20020a5d4f8b000000b00313ff56eaa2sm4023878wru.20.2023.06.28.00.48.10
+ t23-20020a170906179700b00987f64b84afsm5352762eje.39.2023.06.28.00.55.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 28 Jun 2023 00:48:11 -0700 (PDT)
-Message-ID: <747bf8a9-355f-b84a-6e0a-a10c5ea28395@linaro.org>
-Date: Wed, 28 Jun 2023 09:48:09 +0200
+ Wed, 28 Jun 2023 00:55:18 -0700 (PDT)
+Message-ID: <b57d62e3-181d-d496-7793-77fd9b2a59cd@linaro.org>
+Date: Wed, 28 Jun 2023 09:55:16 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.12.0
 Subject: Re: [PATCH 0/2] target/riscv: Only build qemu-system-riscv$$ on rv$$
  host
 Content-Language: en-US
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
+To: qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>,
  Paolo Bonzini <pbonzini@redhat.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
  Palmer Dabbelt <palmer@dabbelt.com>,
@@ -77,12 +74,12 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Thomas Huth <thuth@redhat.com>,
  qemu-riscv@nongnu.org
 References: <20230627143235.29947-1-philmd@linaro.org>
-From: Richard Henderson <richard.henderson@linaro.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
 In-Reply-To: <20230627143235.29947-1-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
- envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x42b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::632;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x632.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
@@ -105,7 +102,7 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 6/27/23 16:32, Philippe Mathieu-Daudé wrote:
+On 27/6/23 16:32, Philippe Mathieu-Daudé wrote:
 > Per Anup Patel in [*]:
 > 
 >   > Currently, we only support running rv64 guest on rv64 host
@@ -124,16 +121,7 @@ On 6/27/23 16:32, Philippe Mathieu-Daudé wrote:
 > Based-on: <20230626232007.8933-1-philmd@linaro.org>
 > "target/riscv: Allow building without TCG (KVM-only so far)"
 > https://lore.kernel.org/qemu-devel/20230626232007.8933-1-philmd@linaro.org/
-> 
-> Philippe Mathieu-Daudé (2):
->    target/riscv: Only unify 'riscv32/64' -> 'riscv' for host cpu in meson
->    target/riscv: Only build KVM guest with same wordsize as host
-> 
->   meson.build | 15 +++++++--------
->   1 file changed, 7 insertions(+), 8 deletions(-)
-> 
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-
-r~
+Alistair: I just noticed there is no strict dependency with the
+other series (aimed for 8.2), so this can get merged for 8.1.
 
