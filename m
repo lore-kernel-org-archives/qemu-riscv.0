@@ -4,85 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 527F0EB64DA
-	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Jun 2023 21:33:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61DFDEB64D7
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Jun 2023 21:33:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qEcm9-0004fc-Lm; Wed, 28 Jun 2023 17:32:33 -0400
+	id 1qEckd-0001uw-SU; Wed, 28 Jun 2023 17:30:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qEcm2-0004Mx-R6
- for qemu-riscv@nongnu.org; Wed, 28 Jun 2023 17:32:28 -0400
-Received: from mail-oo1-xc35.google.com ([2607:f8b0:4864:20::c35])
+ id 1qEckd-0001tX-4O
+ for qemu-riscv@nongnu.org; Wed, 28 Jun 2023 17:30:59 -0400
+Received: from mail-oa1-x31.google.com ([2001:4860:4864:20::31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qEcm1-0000Eu-6u
- for qemu-riscv@nongnu.org; Wed, 28 Jun 2023 17:32:26 -0400
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-5658573b1faso285792eaf.1
- for <qemu-riscv@nongnu.org>; Wed, 28 Jun 2023 14:32:24 -0700 (PDT)
+ id 1qEckb-0007x8-8h
+ for qemu-riscv@nongnu.org; Wed, 28 Jun 2023 17:30:58 -0400
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-1b0156a1c49so15700fac.0
+ for <qemu-riscv@nongnu.org>; Wed, 28 Jun 2023 14:30:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1687987944; x=1690579944;
+ d=ventanamicro.com; s=google; t=1687987855; x=1690579855;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EiNvpsLjP0ikqlRCdf/dgDy6nJZjXTzSnGyXN6QwndA=;
- b=DyonKPb3ApGJulAElGxxV13lFFUc14H2UQOxY8+mSI28rdPr0fxNqilnhDmoQ0F0W0
- 0296jBUWbnK9K6hbsRQYuc5m+p8U8odAVS0NCmGWEpD9uPcI+56F+8Wx85NI4uPAcjk3
- 4JfXQLhiZNoAeAd5hMg+yXCZ3L1rICalLVSUg3qssiEcKsHeVDSJnuq3imVCTunZC4W3
- iVX8eGpQ/NHBVrr7EOdsqxiNSAmY3ThobxYIbA/27ks5/WoaH6lKiDevqtfN9rSDV0S5
- 3U8D5nl/5R71vFSXghOBlixwJe5gaDBEnRoqy2hJMbNsho3/PVTJw0nSeGg6yCIOZf//
- k0HQ==
+ bh=Qq5qA7YTGBupPjchdNTXF4wsUj+6lPmEnmsrbTcIfCo=;
+ b=aAjDdTEQONRM6KjecBT/p8kpm5n3u2FyJN1rSBvpkYZxkKtSpl06sVuAgXRSTEEQor
+ 11+JifkkyqbKgT02aodyZL0w8Wugta5VCJTfr14dM+q2fCUF4QJcij6y9pUtnnkjIi7Y
+ WTfQw2m6RubXny7RK9wp4UoWlCt/UklfrXTHndFJD9TjJj5afId8TQwEC+fiZEOIeaG5
+ B9v7BvgVHUHdWgabUIesoas8FQm7r0Z82wSLCcRXWCEjq/z6YdR5IrtN5huKyDYPtdtq
+ 7/zoI5WWvKgn0hvRkg6iD/oQ+RV4xYLRU05A960o5mrFacLRZ5/+E5LtfUR3KPBguSoN
+ qTpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687987944; x=1690579944;
+ d=1e100.net; s=20221208; t=1687987855; x=1690579855;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EiNvpsLjP0ikqlRCdf/dgDy6nJZjXTzSnGyXN6QwndA=;
- b=GaeN0oiAJgPipnsvQoWJqJZmh81ucB8a617Fe5AiIAaLoOEjttfmySAtkJBhXClq8C
- mR1Pzf9irhjmmuLzXR3N+1EhcH+/kQsMoth2s/E4pgRfOhBu9pKToQExM62wLncK0g6y
- wH/pMuMSiX050QpgcQjyVHWFIYi2HH5WNX8IRjKPCNWkd+5MD9HaTCZdIEeu4M1AXZlF
- RN8qwhnqfxUIW3abtxJRsiOmJLRuMra9jmEBvjJ3JihAzP6VjUOAgXhpLINidvEqgftb
- 5Kpw5i2Vx5siJdZhMDvM9IoejZkVBTfEdtRNUWkM+YTZAjONqS6DeYLcxo9/EHF72QCc
- QZ9w==
-X-Gm-Message-State: AC+VfDzPRijplbPXaSmrRJ3MnC1+iujMwBkL5YGfaMBoPKbI+mpsSVeY
- 6Z9SWmIJjxYr6etoE7OrAlOFgOurRMZyo9phUXg=
-X-Google-Smtp-Source: ACHHUZ5OFzlzayMhQDqxM1rtvQ6+T2ntjR8WxuiRxUItfdTLJscIvamMCKJJe3M8aGcDciXt2dewHw==
-X-Received: by 2002:a4a:d28e:0:b0:560:befd:6d6a with SMTP id
- h14-20020a4ad28e000000b00560befd6d6amr19560000oos.7.1687987944128; 
- Wed, 28 Jun 2023 14:32:24 -0700 (PDT)
+ bh=Qq5qA7YTGBupPjchdNTXF4wsUj+6lPmEnmsrbTcIfCo=;
+ b=K2NJhy1Dpd0myKmWRbDWNv2W5cOLu/o6zzmyhyigKcrfolRuTy++m74BHqEWXFa0YP
+ NrkLXehfA6AKEb8E0WEZinEmc3QvyQLINEqp+kATPaAJYv1hXvc7wmN+AFgdzVkKsmq+
+ LQCneA6vE1PUoYTt9QNNcAq66Ry4yCHvUiYVAMGPqBzKEF95/BKwEdEpKmzYbyLOVi3R
+ 0skXYpJc9UC4luFr+o3iUKLh7Y83cnga1H3d9uPcMsbKLxCV4AD+dZImXSBQrRtQfXem
+ 6xrfwwP9yP2/O7Lui0fTzqatKstgKlMbr6TY9/rtnKcwdXqoWSY2vP501wUUrdL8b0Fn
+ OI2g==
+X-Gm-Message-State: AC+VfDwQUdT1xpFJQpWd5bDetelM0IDs2lnSFV/hjYnN4pOOr+IjjKWf
+ uZIihHP06cRpQD7bYmv43rsekw==
+X-Google-Smtp-Source: ACHHUZ4JAIKnldIho2x/q2MkqfeBO/tvaOzXsyWgUmSHpeP0EC8Li2vGHgg60qedX/aqoBHLPdMpng==
+X-Received: by 2002:a05:6870:a442:b0:1b0:579:195f with SMTP id
+ n2-20020a056870a44200b001b00579195fmr10860486oal.47.1687987854809; 
+ Wed, 28 Jun 2023 14:30:54 -0700 (PDT)
 Received: from grind.dc1.ventanamicro.com
  (201-69-66-110.dial-up.telesp.net.br. [201.69.66.110])
  by smtp.gmail.com with ESMTPSA id
- y17-20020a4a4511000000b0056084a91c74sm832892ooa.24.2023.06.28.14.32.19
+ y17-20020a4a4511000000b0056084a91c74sm832892ooa.24.2023.06.28.14.30.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Jun 2023 14:32:23 -0700 (PDT)
+ Wed, 28 Jun 2023 14:30:54 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  ajones@ventanamicro.com, philmd@linaro.org,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v6 18/20] target/riscv: update multi-letter extension KVM
- properties
-Date: Wed, 28 Jun 2023 18:30:31 -0300
-Message-ID: <20230628213033.170315-19-dbarboza@ventanamicro.com>
+Subject: [PATCH v6 02/20] hw/riscv/virt.c: skip 'mmu-type' FDT if satp mode
+ not set
+Date: Wed, 28 Jun 2023 18:30:15 -0300
+Message-ID: <20230628213033.170315-3-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230628213033.170315-1-dbarboza@ventanamicro.com>
 References: <20230628213033.170315-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c35;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc35.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::31;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x31.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,68 +99,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We're now ready to update the multi-letter extensions status for KVM.
+The absence of a satp mode in riscv_host_cpu_init() is causing the
+following error:
 
-kvm_riscv_update_cpu_cfg_isa_ext() is called called during vcpu creation
-time to verify which user options changes host defaults (via the 'user_set'
-flag) and tries to write them back to KVM.
+$ sudo ./qemu/build/qemu-system-riscv64  -machine virt,accel=kvm \
+    -m 2G -smp 1  -nographic -snapshot \
+    -kernel ./guest_imgs/Image \
+    -initrd ./guest_imgs/rootfs_kvm_riscv64.img \
+    -append "earlycon=sbi root=/dev/ram rw" \
+    -cpu host
+**
+ERROR:../target/riscv/cpu.c:320:satp_mode_str: code should not be
+reached
+Bail out! ERROR:../target/riscv/cpu.c:320:satp_mode_str: code should
+not be reached
+Aborted
 
-Failure to commit a change to KVM is only ignored in case KVM doesn't
-know about the extension (-EINVAL error code) and the user wanted to
-disable the given extension. Otherwise we're going to abort the boot
-process.
+The error is triggered from create_fdt_socket_cpus() in hw/riscv/virt.c.
+It's trying to get satp_mode_str for a NULL cpu->cfg.satp_mode.map.
+
+For this KVM cpu we would need to inherit the satp supported modes
+from the RISC-V host. At this moment this is not possible because the
+KVM driver does not support it. And even when it does we can't just let
+this broken for every other older kernel.
+
+Since mmu-type is not a required node, according to [1], skip the
+'mmu-type' FDT node if there's no satp_mode set. We'll revisit this
+logic when we can get satp information from KVM.
+
+[1] https://github.com/devicetree-org/dt-schema/blob/main/dtschema/schemas/cpu.yaml
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/riscv/kvm.c | 27 +++++++++++++++++++++++++++
- 1 file changed, 27 insertions(+)
+ hw/riscv/virt.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-index 68f6538b04..aa4edc8a56 100644
---- a/target/riscv/kvm.c
-+++ b/target/riscv/kvm.c
-@@ -273,6 +273,32 @@ static void kvm_cpu_set_multi_ext_cfg(Object *obj, Visitor *v,
-     kvm_cpu_cfg_set(cpu, multi_ext_cfg, value);
- }
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 95708d890e..f025a0fcaf 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -243,13 +243,13 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
+             s->soc[socket].hartid_base + cpu);
+         qemu_fdt_add_subnode(ms->fdt, cpu_name);
  
-+static void kvm_riscv_update_cpu_cfg_isa_ext(RISCVCPU *cpu, CPUState *cs)
-+{
-+    CPURISCVState *env = &cpu->env;
-+    uint64_t id, reg;
-+    int i, ret;
-+
-+    for (i = 0; i < ARRAY_SIZE(kvm_multi_ext_cfgs); i++) {
-+        KVMCPUConfig *multi_ext_cfg = &kvm_multi_ext_cfgs[i];
-+
-+        if (!multi_ext_cfg->user_set) {
-+            continue;
+-        satp_mode_max = satp_mode_max_from_map(
+-            s->soc[socket].harts[cpu].cfg.satp_mode.map);
+-        sv_name = g_strdup_printf("riscv,%s",
+-                                  satp_mode_str(satp_mode_max, is_32_bit));
+-        qemu_fdt_setprop_string(ms->fdt, cpu_name, "mmu-type", sv_name);
+-        g_free(sv_name);
+-
++        if (cpu_ptr->cfg.satp_mode.supported != 0) {
++            satp_mode_max = satp_mode_max_from_map(cpu_ptr->cfg.satp_mode.map);
++            sv_name = g_strdup_printf("riscv,%s",
++                                      satp_mode_str(satp_mode_max, is_32_bit));
++            qemu_fdt_setprop_string(ms->fdt, cpu_name, "mmu-type", sv_name);
++            g_free(sv_name);
 +        }
-+
-+        id = kvm_riscv_reg_id(env, KVM_REG_RISCV_ISA_EXT,
-+                              multi_ext_cfg->kvm_reg_id);
-+        reg = kvm_cpu_cfg_get(cpu, multi_ext_cfg);
-+        ret = kvm_set_one_reg(cs, id, &reg);
-+        if (ret != 0) {
-+            error_report("Unable to %s extension %s in KVM, error %d",
-+                         reg ? "enable" : "disable",
-+                         multi_ext_cfg->name, ret);
-+            exit(EXIT_FAILURE);
-+        }
-+    }
-+}
-+
- static void kvm_riscv_add_cpu_user_properties(Object *cpu_obj)
- {
-     int i;
-@@ -792,6 +818,7 @@ int kvm_arch_init_vcpu(CPUState *cs)
-     }
  
-     kvm_riscv_update_cpu_misa_ext(cpu, cs);
-+    kvm_riscv_update_cpu_cfg_isa_ext(cpu, cs);
- 
-     return ret;
- }
+         name = riscv_isa_string(cpu_ptr);
+         qemu_fdt_setprop_string(ms->fdt, cpu_name, "riscv,isa", name);
 -- 
 2.41.0
 
