@@ -4,81 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C687EB64DC
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Jun 2023 09:17:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE28BEB64DD
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Jun 2023 10:22:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qEnlz-0001Nt-0H; Thu, 29 Jun 2023 05:17:07 -0400
+	id 1qEomQ-0004VW-0P; Thu, 29 Jun 2023 06:21:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qEnlx-0001Nb-Qd
- for qemu-riscv@nongnu.org; Thu, 29 Jun 2023 05:17:05 -0400
-Received: from mail-lj1-x22f.google.com ([2a00:1450:4864:20::22f])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qEnlv-0003PR-Oq
- for qemu-riscv@nongnu.org; Thu, 29 Jun 2023 05:17:05 -0400
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-2b69a48368fso6426001fa.0
- for <qemu-riscv@nongnu.org>; Thu, 29 Jun 2023 02:17:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1688030222; x=1690622222;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=hWj2ttQ8jb3fXTntAE7ptEjkjqiuagHEdNt/Cpx+LFk=;
- b=jhwPA3tIISfITFKtrQBiYn7MUP0N5wKWieHAgCuL/NoRvfGxW+WnMImvWPD23Ms7vY
- i105OztOXObB1iPOWpQRGsUhb+oDedYq/ck8Vo8xr8JnKFiqea5HTkEYBsupVyHJweqq
- x8MlZE2CkQDwX0+fmtlvYsrZUgsBUk2bxqUZlTRtKaGaTbW9p6IFgn93p8ellYMiPw7K
- dRGmmn+b/QnZsAPbZA9bNVDODLyLOazX8cSl+RoVe3yoI59kOKmj5ZzjLHCTHCgsO+/2
- kuiEgRwyEkSrysFCpCspFMuJdS+X2xZSx+2L5GzXoAczOXz/WvIrzJqlLzyjWFPAdUGr
- 4JTw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688030222; x=1690622222;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hWj2ttQ8jb3fXTntAE7ptEjkjqiuagHEdNt/Cpx+LFk=;
- b=RI3hrDUvsZqrtcsP4vaO31D3mcg5ugEpRGS7vfkPEbKNd25/ghnHQNAV0GgX8ZP4Ru
- 8zO9JXApYLN16JAYwCa4QJPMhFw2VlguYx1OPqDwN2f67FSS8d9HwCiErMwudW2V+mZU
- L4yvw3dVYtTm88RM3+PWtv9JDevGmO8AKmPmydbjO+F+5FenUfD//ITtmEcpSvaxu5uY
- +CRj6osnSrG2ey0HU/EQKgQOoSFDp4vHpQWyzWoQPz5LBE1Nq1CV3F1IRCOp9HdzvfCr
- NXzuASWsRDS8FNzAd9OhDq5aBGOxf+FdmH8rCInEX7meNZPsRBTxGzAtXcDpnR+JLdFb
- DYIg==
-X-Gm-Message-State: ABy/qLZWSHndlbmul1fLpIBhqAinXzNPw4F2cK6GLpJWCapRv4rYOx+g
- /SXlSfc2NikEUqRjKhUVN0PCGw==
-X-Google-Smtp-Source: APBJJlGF0tK7cm98vpEhHiUx3CYzmnFdwHVR018NkFR3iXDXqGXV+eCUiWlgwOTkDuNe77ZZ/QBgdg==
-X-Received: by 2002:a2e:9cc5:0:b0:2b6:ca54:8d13 with SMTP id
- g5-20020a2e9cc5000000b002b6ca548d13mr655024ljj.29.1688030221928; 
- Thu, 29 Jun 2023 02:17:01 -0700 (PDT)
-Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
- by smtp.gmail.com with ESMTPSA id
- 12-20020a05600c028c00b003fbaade072dsm5543403wmk.23.2023.06.29.02.17.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Jun 2023 02:17:01 -0700 (PDT)
-Date: Thu, 29 Jun 2023 11:17:00 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, philmd@linaro.org
-Subject: Re: [PATCH v6 17/20] target/riscv/cpu.c: create KVM mock properties
-Message-ID: <20230629-a8a185516a5db22afdebcc6d@orel>
-References: <20230628213033.170315-1-dbarboza@ventanamicro.com>
- <20230628213033.170315-18-dbarboza@ventanamicro.com>
+ (Exim 4.90_1) (envelope-from <ardb@kernel.org>)
+ id 1qEomO-0004V8-SV; Thu, 29 Jun 2023 06:21:36 -0400
+Received: from dfw.source.kernel.org ([2604:1380:4641:c500::1])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <ardb@kernel.org>)
+ id 1qEomN-0006Ol-6Z; Thu, 29 Jun 2023 06:21:36 -0400
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 23D0061506;
+ Thu, 29 Jun 2023 10:21:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8D14EC433C8;
+ Thu, 29 Jun 2023 10:21:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1688034083;
+ bh=26X0wWq+9KqrfqXu/Z+vH+/l90zYEKnyYvOsKiRdzKE=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=biMNwu58JhpCG8gJB8SliP0AtvD1dm4Byr5ngD9JtJq3EkQPRASM2atXj9cnQ2kC6
+ ABi/p2g/Zowc8Vh5mTSqkkObAvk06ArIRQkLEmfjg6JPSm449iIHaMSTv7bXUIv6yi
+ vA5wRGY3zLFv/byNkRl6EJmebT5y8mNHAsEgHn5ErZPU+ji55XSl4RPFGpBvcI57qg
+ /999W82SDJMrY8AtJnesScL/M4RPXoVfF0ofMf3l1MkkVB1yZVpgszNxlB5M+I1dyg
+ sK1j2jPXqxJMyk+BO5EW+SaECDLznQ7HOe/DARC4bLIBNEWc85cvbq+4KPv/zcsTTi
+ jwiZ0sAIplm7A==
+Received: by mail-lf1-f47.google.com with SMTP id
+ 2adb3069b0e04-4f9fdb0ef35so798564e87.0; 
+ Thu, 29 Jun 2023 03:21:23 -0700 (PDT)
+X-Gm-Message-State: AC+VfDzyjcpWsjI76306tww6vTZ0V0SfR7OI11RiA7sRWskXx8ib4wqh
+ pBMXmCqoxzm33UyieD50sIFhdLU4YUM77bSRi24=
+X-Google-Smtp-Source: ACHHUZ6CMgGckNqoYrAsVyX0A/Absc5pxPxp9gj0E/IrHqGnrJ1jPmvq/eN4Fu/At1IKM+yiffqJVFz+evwB9fYG48o=
+X-Received: by 2002:a05:6512:224c:b0:4fa:f79f:85a with SMTP id
+ i12-20020a056512224c00b004faf79f085amr9525226lfu.69.1688034081556; Thu, 29
+ Jun 2023 03:21:21 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230628213033.170315-18-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::22f;
- envelope-from=ajones@ventanamicro.com; helo=mail-lj1-x22f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+References: <20230609022401.684157-1-richard.henderson@linaro.org>
+ <20230609022401.684157-6-richard.henderson@linaro.org>
+In-Reply-To: <20230609022401.684157-6-richard.henderson@linaro.org>
+From: Ard Biesheuvel <ardb@kernel.org>
+Date: Thu, 29 Jun 2023 12:21:10 +0200
+X-Gmail-Original-Message-ID: <CAMj1kXFWDMijy6eTCBwCbygJHyBpS6PqaU=1d5OeE6h_v4=-zg@mail.gmail.com>
+Message-ID: <CAMj1kXFWDMijy6eTCBwCbygJHyBpS6PqaU=1d5OeE6h_v4=-zg@mail.gmail.com>
+Subject: Re: [PATCH v2 05/38] crypto/aes: Add constants for ShiftRows,
+ InvShiftRows
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, berrange@redhat.com, qemu-ppc@nongnu.org, 
+ qemu-arm@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2604:1380:4641:c500::1;
+ envelope-from=ardb@kernel.org; helo=dfw.source.kernel.org
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -95,89 +85,90 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jun 28, 2023 at 06:30:30PM -0300, Daniel Henrique Barboza wrote:
-> KVM-specific properties are being created inside target/riscv/kvm.c. But
-> at this moment we're gathering all the remaining properties from TCG and
-> adding them as is when running KVM. This creates a situation where
-> non-KVM properties are setting flags to 'true' due to its default
-> settings (e.g.  Zawrs). Users can also freely enable them via command
-> line.
-> 
-> This doesn't impact runtime per se because KVM doesn't care about these
-> flags, but code such as riscv_isa_string_ext() take those flags into
-> account. The result is that, for a KVM guest, setting non-KVM properties
-> will make them appear in the riscv,isa DT.
-> 
-> We want to keep the same API for both TCG and KVM and at the same time,
-> when running KVM, forbid non-KVM extensions to be enabled internally. We
-> accomplish both by changing riscv_cpu_add_user_properties() to add a
-> mock boolean property for every non-KVM extension in
-> riscv_cpu_extensions[]. Then, when running KVM, users are still free to
-> set extensions at will, but we'll error out if a non-KVM extension is
-> enabled. Setting such extension to 'false' will be ignored.
-> 
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->  target/riscv/cpu.c | 36 ++++++++++++++++++++++++++++++++++++
->  1 file changed, 36 insertions(+)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 79c8ffe6b7..6d7a0bc4ae 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1731,6 +1731,26 @@ static Property riscv_cpu_extensions[] = {
->      DEFINE_PROP_END_OF_LIST(),
->  };
->  
-> +
-> +#ifndef CONFIG_USER_ONLY
-> +static void cpu_set_cfg_unavailable(Object *obj, Visitor *v,
-> +                                    const char *name,
-> +                                    void *opaque, Error **errp)
-> +{
-> +    const char *propname = opaque;
-> +    bool value;
-> +
-> +    if (!visit_type_bool(v, name, &value, errp)) {
-> +        return;
-> +    }
-> +
-> +    if (value) {
-> +        error_setg(errp, "extension %s is not available with KVM",
-> +                   propname);
-> +    }
-> +}
-> +#endif
-> +
->  /*
->   * Add CPU properties with user-facing flags.
->   *
-> @@ -1759,6 +1779,22 @@ static void riscv_cpu_add_user_properties(Object *obj)
->              if (object_property_find(obj, prop->name)) {
->                  continue;
->              }
-> +
-> +            /*
-> +             * Set the default to disabled for every extension
-> +             * unknown to KVM and error out if the user attempts
-> +             * to enable any of them.
-> +             *
-> +             * We're giving a pass for non-bool properties since they're
-> +             * not related to the availability of extensions and can be
-> +             * safely ignored as is.
-> +             */
-> +            if (prop->info == &qdev_prop_bool) {
-> +                object_property_add(obj, prop->name, "bool",
-> +                                    NULL, cpu_set_cfg_unavailable,
-> +                                    NULL, (void *)prop->name);
-> +                continue;
-> +            }
->          }
->  #endif
->          qdev_property_add_static(dev, prop);
-> -- 
-> 2.41.0
+On Fri, 9 Jun 2023 at 04:24, Richard Henderson
+<richard.henderson@linaro.org> wrote:
 >
+> These symbols will avoid the indirection through memory
+> when fully unrolling some new primitives.
+>
+> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>  crypto/aes.c | 50 ++++++++++++++++++++++++++++++++++++++++++++++++--
+>  1 file changed, 48 insertions(+), 2 deletions(-)
+>
+> diff --git a/crypto/aes.c b/crypto/aes.c
+> index 67bb74b8e3..cdf937883d 100644
+> --- a/crypto/aes.c
+> +++ b/crypto/aes.c
+> @@ -108,12 +108,58 @@ const uint8_t AES_isbox[256] =3D {
+>      0xE1, 0x69, 0x14, 0x63, 0x55, 0x21, 0x0C, 0x7D,
+>  };
+>
+> +/* AES ShiftRows, for complete unrolling. */
+> +enum {
+> +    AES_SH_0 =3D 0x0,
+> +    AES_SH_1 =3D 0x5,
+> +    AES_SH_2 =3D 0xa,
+> +    AES_SH_3 =3D 0xf,
+> +    AES_SH_4 =3D 0x4,
+> +    AES_SH_5 =3D 0x9,
+> +    AES_SH_6 =3D 0xe,
+> +    AES_SH_7 =3D 0x3,
+> +    AES_SH_8 =3D 0x8,
+> +    AES_SH_9 =3D 0xd,
+> +    AES_SH_A =3D 0x2,
+> +    AES_SH_B =3D 0x7,
+> +    AES_SH_C =3D 0xc,
+> +    AES_SH_D =3D 0x1,
+> +    AES_SH_E =3D 0x6,
+> +    AES_SH_F =3D 0xb,
+> +};
+> +
 
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+We might simplify this further by doing
+
+#define AES_SH(n)  (((n) * 5) % 16)
+#define AES_ISH(n)  (((n) * 13) % 16)
+
+>  const uint8_t AES_shifts[16] =3D {
+> -    0, 5, 10, 15, 4, 9, 14, 3, 8, 13, 2, 7, 12, 1, 6, 11
+> +    AES_SH_0, AES_SH_1, AES_SH_2, AES_SH_3,
+> +    AES_SH_4, AES_SH_5, AES_SH_6, AES_SH_7,
+> +    AES_SH_8, AES_SH_9, AES_SH_A, AES_SH_B,
+> +    AES_SH_C, AES_SH_D, AES_SH_E, AES_SH_F,
+> +};
+> +
+> +/* AES InvShiftRows, for complete unrolling. */
+> +enum {
+> +    AES_ISH_0 =3D 0x0,
+> +    AES_ISH_1 =3D 0xd,
+> +    AES_ISH_2 =3D 0xa,
+> +    AES_ISH_3 =3D 0x7,
+> +    AES_ISH_4 =3D 0x4,
+> +    AES_ISH_5 =3D 0x1,
+> +    AES_ISH_6 =3D 0xe,
+> +    AES_ISH_7 =3D 0xb,
+> +    AES_ISH_8 =3D 0x8,
+> +    AES_ISH_9 =3D 0x5,
+> +    AES_ISH_A =3D 0x2,
+> +    AES_ISH_B =3D 0xf,
+> +    AES_ISH_C =3D 0xc,
+> +    AES_ISH_D =3D 0x9,
+> +    AES_ISH_E =3D 0x6,
+> +    AES_ISH_F =3D 0x3,
+>  };
+>
+>  const uint8_t AES_ishifts[16] =3D {
+> -    0, 13, 10, 7, 4, 1, 14, 11, 8, 5, 2, 15, 12, 9, 6, 3
+> +    AES_ISH_0, AES_ISH_1, AES_ISH_2, AES_ISH_3,
+> +    AES_ISH_4, AES_ISH_5, AES_ISH_6, AES_ISH_7,
+> +    AES_ISH_8, AES_ISH_9, AES_ISH_A, AES_ISH_B,
+> +    AES_ISH_C, AES_ISH_D, AES_ISH_E, AES_ISH_F,
+>  };
+>
+>  /*
+> --
+> 2.34.1
+>
 
