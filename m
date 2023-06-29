@@ -4,91 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92361EB64D9
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Jun 2023 12:04:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 532B7EB64D9
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Jun 2023 12:11:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qEqNV-0003OC-9q; Thu, 29 Jun 2023 08:04:01 -0400
+	id 1qEqUe-0005r7-WE; Thu, 29 Jun 2023 08:11:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qEqNT-0003Nm-Pd
- for qemu-riscv@nongnu.org; Thu, 29 Jun 2023 08:03:59 -0400
-Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qEqUd-0005qV-FA
+ for qemu-riscv@nongnu.org; Thu, 29 Jun 2023 08:11:23 -0400
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qEqNS-0005Tc-33
- for qemu-riscv@nongnu.org; Thu, 29 Jun 2023 08:03:59 -0400
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-313f1085ac2so562773f8f.1
- for <qemu-riscv@nongnu.org>; Thu, 29 Jun 2023 05:03:57 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qEqUb-0000Cf-O9
+ for qemu-riscv@nongnu.org; Thu, 29 Jun 2023 08:11:23 -0400
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-3141140f51bso668844f8f.1
+ for <qemu-riscv@nongnu.org>; Thu, 29 Jun 2023 05:11:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1688040236; x=1690632236;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=484IBCDD6g031cWsQu9FYt5VZMx54R+H9rvVVBcgOy8=;
- b=xzz4AsC7udrRnE0Iwh1jG1g5et+oDlIcMjVTRrtt4b3HLmsRwTn+2BaXP+OQe80uXH
- yNX0tEdJamlQ/qTiVQDbaxO9rZxmdV2+oW5wwr46m5LftWWkH5+B+KWnqkWGmruJdKGy
- vg75lhvGf5jOCDCyTLTmBayMR8ARPwbSf5Ng1y+856kv5RtOaUxrZroPmjU44SlZsI+2
- 1obhLubV1fHrGnZDpnYMru6htBev1CARKpYoaxblzNRoGR92jKqDMrahhtokDdQISTAG
- LPG/Q5WWldrfS/rJqu8qDV5oNwDHMQiXWoionJgKWlpTxDSxPy2qyk2wYNaMpUyHTNSL
- cnhg==
+ d=linaro.org; s=google; t=1688040679; x=1690632679;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yB0NCZT8QF6RTN9p4AzdupdhKCd458WHvVaRRns1YuU=;
+ b=YNT/N+beqVDkqxKFnOFvYKPKZqC0gomiXkMrDN/ybmsWD/4Wk+bM5W5hq6C3LYxm1D
+ aEOtlHgE9CW+Hf1Pn/EdvkvslJ2F1/6MZxi8aWp1772TTxrYDRvlNV/ziK7l131j83fp
+ F9UpapQPNdwUsk31DnjwzefnQtNVREQcu2QXgBymg7JGevXCgsqBJZigFwK8HQo/6KBv
+ 2hXamMCBiO/Whp7AvHaAdrQOjWwZkYBYmf+7MCxvMAT3NIeZ6laaXUSdnXacXcXn+Be5
+ I2QDB5I9kvywZVS/uGUCq+RF6TBHts03K4Q2go7AY47//Vh/th6zcrfkGGCle9l+c655
+ hUOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688040236; x=1690632236;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=484IBCDD6g031cWsQu9FYt5VZMx54R+H9rvVVBcgOy8=;
- b=Hr2Iw2yOV6dYCE6kudn0fPOBD5WHQLjybFhhDMbQoHhxr2F6ZeGUEFmAmULpya7kPf
- MWxj2g70WHMY4Kpmek1cugUYEFZT3Vp/YdPfhRRRlaF7e1mZgBIu+rUKx6rNA9K4TOrt
- ryyXDlKbICM9FUuKvKiDFx/6d/SREjxlYrkIi+ewnT1owaBjzQUtvV8rTAj9oRSjA08S
- +prMJhC1KP2bbD5rnoGiN2NBm8jrJ8kW+VQpvzzyqDpVKSQd9+De8IhWxlThxLrUKsjV
- 2bgUjsCndanrILQk6jSG/J4kwmf76msHxVgoPzHmGuil81cnADVJJI9FxSDuL+NBBO7t
- vVCQ==
-X-Gm-Message-State: AC+VfDyZ1Z+uBk2+2u7DGQiyBJZydMWyCi7+xyRbvVMqMJOzF/Lg2/V3
- 1y++AA0WuWmmioJ3b0k3SU9qDg==
-X-Google-Smtp-Source: ACHHUZ7tRmkRWcxsXTQWm66X3IzHgK3UlTFqfJd1HOEM/33ogOePkrMtMDVwjYxJhJOW1aaUPhzYEw==
-X-Received: by 2002:a5d:63ce:0:b0:313:e404:688b with SMTP id
- c14-20020a5d63ce000000b00313e404688bmr10212177wrw.42.1688040236607; 
- Thu, 29 Jun 2023 05:03:56 -0700 (PDT)
-Received: from [192.168.69.115] ([176.176.166.242])
+ d=1e100.net; s=20221208; t=1688040679; x=1690632679;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=yB0NCZT8QF6RTN9p4AzdupdhKCd458WHvVaRRns1YuU=;
+ b=RqsL1ezoBVC3x6X9/qdj5zVKkyzOBrTvAUpvmApuXL/4lyUtUbA0aybfpcHHXYWgk9
+ GEjXxsqsJLdA+DBlwy9Aj3437CBV6mw2JkCSp+2Bnj99uDg9DKTakG1i3PtueTuTpcoF
+ kPmALpq6+wBhmCQEaWGauzaiQJrnuuVMdbhcOnZy2yPq64rc6Z7uXqmtieNlQNsNdccS
+ VZmwOihJ5AjcT8jW23uttMfTWJBVnZ0l6VlNMP0NZpWldsQB6TQxtW38pCjePmhgI902
+ p36aV2teqCwpQooAMWYPOQr+bDgGRWN/NNlDhZomSCqrfMJg9xiH8U1ZwbInGvWEIqqD
+ MqgQ==
+X-Gm-Message-State: AC+VfDyV+i6sMrwqTNFMGiwd/a4brmyF0yqKd90yqYi9UfHIT4MCHgBJ
+ M4eceXv8h40rqoSHATAsez6Yuw==
+X-Google-Smtp-Source: ACHHUZ5HwHZ4gV+p92tEanxKFvyyxd/a+esdaHnzALF6ZcnyXPROh5MV12wMcm01D3MKgRjaFiN/Nw==
+X-Received: by 2002:a5d:6a8c:0:b0:313:f8ca:989f with SMTP id
+ s12-20020a5d6a8c000000b00313f8ca989fmr7409629wru.10.1688040679265; 
+ Thu, 29 Jun 2023 05:11:19 -0700 (PDT)
+Received: from m1x-phil.lan ([176.176.166.242])
  by smtp.gmail.com with ESMTPSA id
- a5-20020a5d5705000000b00313f9a0c521sm8143123wrv.107.2023.06.29.05.03.54
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 29 Jun 2023 05:03:56 -0700 (PDT)
-Message-ID: <6fdb63c3-25b1-eb2c-2bd6-7e01b40e8e2b@linaro.org>
-Date: Thu, 29 Jun 2023 14:03:53 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.12.0
-Subject: Re: [PATCH 2/2] accel/tcg: Replace qemu_tcg_mttcg_enabled() by
- mttcg_enabled
-Content-Language: en-US
+ j4-20020adfea44000000b0030fa3567541sm15838493wrn.48.2023.06.29.05.11.17
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Thu, 29 Jun 2023 05:11:18 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-riscv@nongnu.org,
- Bin Meng <bin.meng@windriver.com>,
+Cc: Bin Meng <bin.meng@windriver.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Yanan Wang <wangyanan55@huawei.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Palmer Dabbelt <palmer@dabbelt.com>, Eduardo Habkost <eduardo@habkost.net>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20230629120255.85581-1-philmd@linaro.org>
- <20230629120255.85581-3-philmd@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230629120255.85581-3-philmd@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
+ Weiwei Li <liweiwei@iscas.ac.cn>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 2/2] hw/riscv/virt: Restrict ACLINT to TCG
+Date: Thu, 29 Jun 2023 14:11:03 +0200
+Message-Id: <20230629121103.87733-3-philmd@linaro.org>
+X-Mailer: git-send-email 2.38.1
+In-Reply-To: <20230629121103.87733-1-philmd@linaro.org>
+References: <20230629121103.87733-1-philmd@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::435;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x435.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42a.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.093,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,56 +98,79 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 29/6/23 14:02, Philippe Mathieu-Daudé wrote:
-> Move 'mttcg_enabled' declaration to "tcg-accel-ops-mttcg.h"
-> which is a TCG-internal header; un-inline and remove the
-> qemu_tcg_mttcg_enabled() definition.
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> ---
->   accel/tcg/tcg-accel-ops-mttcg.h | 8 ++++++++
->   include/hw/core/cpu.h           | 9 ---------
->   accel/tcg/tcg-accel-ops.c       | 2 +-
->   tcg/region.c                    | 3 ++-
->   4 files changed, 11 insertions(+), 11 deletions(-)
-> 
-> diff --git a/accel/tcg/tcg-accel-ops-mttcg.h b/accel/tcg/tcg-accel-ops-mttcg.h
-> index 8ffa7a9a9f..1ffe8f3ac2 100644
-> --- a/accel/tcg/tcg-accel-ops-mttcg.h
-> +++ b/accel/tcg/tcg-accel-ops-mttcg.h
-> @@ -10,6 +10,14 @@
->   #ifndef TCG_ACCEL_OPS_MTTCG_H
->   #define TCG_ACCEL_OPS_MTTCG_H
->   
-> +/**
-> + * qemu_tcg_mttcg_enabled:
-> + * Check whether we are running MultiThread TCG or not.
-> + *
-> + * Returns: %true if we are in MTTCG mode %false otherwise.
-> + */
+The Advanced Core Local Interruptor (ACLINT) device can
+only be used with TCG. Check for TCG enabled instead of
+KVM being not. Only add the property when TCG is used.
 
-Bah, outdated comment... To be removed.
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ docs/system/riscv/virt.rst |  1 +
+ hw/riscv/virt.c            | 18 ++++++++++--------
+ 2 files changed, 11 insertions(+), 8 deletions(-)
 
-> +extern bool mttcg_enabled;
-> +
->   /* kick MTTCG vCPU thread */
->   void mttcg_kick_vcpu_thread(CPUState *cpu);
->   
-> diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-> index b08f8b7079..5d26e6c90c 100644
-> --- a/include/hw/core/cpu.h
-> +++ b/include/hw/core/cpu.h
-> @@ -456,15 +456,6 @@ extern CPUTailQ cpus;
->   
->   extern __thread CPUState *current_cpu;
->   
-> -/**
-> - * qemu_tcg_mttcg_enabled:
-> - * Check whether we are running MultiThread TCG or not.
-> - *
-> - * Returns: %true if we are in MTTCG mode %false otherwise.
-> - */
-> -extern bool mttcg_enabled;
-> -#define qemu_tcg_mttcg_enabled() (mttcg_enabled)
+diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
+index b33f45e5b3..f9a2eac544 100644
+--- a/docs/system/riscv/virt.rst
++++ b/docs/system/riscv/virt.rst
+@@ -93,6 +93,7 @@ The following machine-specific options are supported:
+ 
+   When this option is "on", ACLINT devices will be emulated instead of
+   SiFive CLINT. When not specified, this option is assumed to be "off".
++  This option is restricted to the TCG accelerator.
+ 
+ - aia=[none|aplic|aplic-imsic]
+ 
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 68ccd0bde1..cdb88a1529 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -44,6 +44,7 @@
+ #include "chardev/char.h"
+ #include "sysemu/device_tree.h"
+ #include "sysemu/sysemu.h"
++#include "sysemu/tcg.h"
+ #include "sysemu/kvm.h"
+ #include "sysemu/tpm.h"
+ #include "hw/pci/pci.h"
+@@ -776,7 +777,7 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
+ 
+         g_free(clust_name);
+ 
+-        if (!kvm_enabled()) {
++        if (tcg_enabled()) {
+             if (s->have_aclint) {
+                 create_fdt_socket_aclint(s, memmap, socket,
+                     &intc_phandles[phandle_pos]);
+@@ -1370,7 +1371,7 @@ static void virt_machine_init(MachineState *machine)
+                                 hart_count, &error_abort);
+         sysbus_realize(SYS_BUS_DEVICE(&s->soc[i]), &error_fatal);
+ 
+-        if (!kvm_enabled()) {
++        if (tcg_enabled()) {
+             if (s->have_aclint) {
+                 if (s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC) {
+                     /* Per-socket ACLINT MTIMER */
+@@ -1682,12 +1683,13 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
+     machine_class_allow_dynamic_sysbus_dev(mc, TYPE_TPM_TIS_SYSBUS);
+ #endif
+ 
+-    object_class_property_add_bool(oc, "aclint", virt_get_aclint,
+-                                   virt_set_aclint);
+-    object_class_property_set_description(oc, "aclint",
+-                                          "Set on/off to enable/disable "
+-                                          "emulating ACLINT devices");
+-
++    if (tcg_enabled()) {
++        object_class_property_add_bool(oc, "aclint", virt_get_aclint,
++                                       virt_set_aclint);
++        object_class_property_set_description(oc, "aclint",
++                                              "Set on/off to enable/disable "
++                                              "emulating ACLINT devices");
++    }
+     object_class_property_add_str(oc, "aia", virt_get_aia,
+                                   virt_set_aia);
+     object_class_property_set_description(oc, "aia",
+-- 
+2.38.1
 
 
