@@ -4,72 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE28BEB64DD
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Jun 2023 10:22:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 228BEEB64D9
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Jun 2023 11:06:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qEomQ-0004VW-0P; Thu, 29 Jun 2023 06:21:38 -0400
+	id 1qEpTn-0007iU-J3; Thu, 29 Jun 2023 07:06:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ardb@kernel.org>)
- id 1qEomO-0004V8-SV; Thu, 29 Jun 2023 06:21:36 -0400
-Received: from dfw.source.kernel.org ([2604:1380:4641:c500::1])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ardb@kernel.org>)
- id 1qEomN-0006Ol-6Z; Thu, 29 Jun 2023 06:21:36 -0400
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 23D0061506;
- Thu, 29 Jun 2023 10:21:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8D14EC433C8;
- Thu, 29 Jun 2023 10:21:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1688034083;
- bh=26X0wWq+9KqrfqXu/Z+vH+/l90zYEKnyYvOsKiRdzKE=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=biMNwu58JhpCG8gJB8SliP0AtvD1dm4Byr5ngD9JtJq3EkQPRASM2atXj9cnQ2kC6
- ABi/p2g/Zowc8Vh5mTSqkkObAvk06ArIRQkLEmfjg6JPSm449iIHaMSTv7bXUIv6yi
- vA5wRGY3zLFv/byNkRl6EJmebT5y8mNHAsEgHn5ErZPU+ji55XSl4RPFGpBvcI57qg
- /999W82SDJMrY8AtJnesScL/M4RPXoVfF0ofMf3l1MkkVB1yZVpgszNxlB5M+I1dyg
- sK1j2jPXqxJMyk+BO5EW+SaECDLznQ7HOe/DARC4bLIBNEWc85cvbq+4KPv/zcsTTi
- jwiZ0sAIplm7A==
-Received: by mail-lf1-f47.google.com with SMTP id
- 2adb3069b0e04-4f9fdb0ef35so798564e87.0; 
- Thu, 29 Jun 2023 03:21:23 -0700 (PDT)
-X-Gm-Message-State: AC+VfDzyjcpWsjI76306tww6vTZ0V0SfR7OI11RiA7sRWskXx8ib4wqh
- pBMXmCqoxzm33UyieD50sIFhdLU4YUM77bSRi24=
-X-Google-Smtp-Source: ACHHUZ6CMgGckNqoYrAsVyX0A/Absc5pxPxp9gj0E/IrHqGnrJ1jPmvq/eN4Fu/At1IKM+yiffqJVFz+evwB9fYG48o=
-X-Received: by 2002:a05:6512:224c:b0:4fa:f79f:85a with SMTP id
- i12-20020a056512224c00b004faf79f085amr9525226lfu.69.1688034081556; Thu, 29
- Jun 2023 03:21:21 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1qEpTm-0007hj-FM
+ for qemu-riscv@nongnu.org; Thu, 29 Jun 2023 07:06:26 -0400
+Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1qEpTk-0002kC-RD
+ for qemu-riscv@nongnu.org; Thu, 29 Jun 2023 07:06:26 -0400
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-55ac628e3cfso264200a12.3
+ for <qemu-riscv@nongnu.org>; Thu, 29 Jun 2023 04:06:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1688036783; x=1690628783;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=v0NXOVudxD54qK/sC+EfV2UsQndgsGQJy6spBzC0o4A=;
+ b=kioiPBwcEJkUmupz7Z+8LgI6A5+l4Dxehqux45AYqDWK6i8ehtROwQC0yBLqjRFSlB
+ gIOYBSDzE+maIg4fkCOTz2LsW89b18K6eqozlZLapC/FRRo928bHKCwz5JjSm6omBISL
+ NIkBjm8iZ0vs+F42+AIMPXwykNvr0NR8UswmkA84QXY90rVIlnCEtuOkxF9NmDQKkmCV
+ DMCPxIUJ0y3icYv8EmbgaI6g+d1dHeAGAqveQwmcVKmzlXSNoiGPbNq9CPNj8+UVMNO2
+ PQuoI55WkLSddTpSih7aGb0Yq53OJV4moxZPgWKhzXoUu6CskBvnQk8IuylCn75jCWH2
+ TuqA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1688036783; x=1690628783;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=v0NXOVudxD54qK/sC+EfV2UsQndgsGQJy6spBzC0o4A=;
+ b=IuCrTV1GKBimI1wtjYmj+y/0aPdEJB8YQBa1+LZAa30wo0Ew8+1ojHtnCwfcrvweoH
+ AyZdSx98rc/BMbkV5m7R7hicbirVqkfa1I5GapIY3NORAHZhfFCz9nP6HoM6HpfAE0Q6
+ xhmuUO5UInB2xFVx9w7S0ouoXIC6dgL0FQfD8oU4TZq7u2xqgHIDrwrtH/vxRBCR7917
+ l47etl3ubpKmny7UT/dvl9YZ1jypbfc/UR5jUxrCZBUGE1RaIU0IBKf7rJELBp4AUh9K
+ cxOTUJ9nr2gkBgqS7uWD8cWUPxcMgZKORcmX3yu7pdXUgxr1MzhK9MpqXxjpXTQpZuek
+ XhPw==
+X-Gm-Message-State: AC+VfDzT1kTCVoycDmtrggYZGMEAMYF5lksmXqWthZuzAu9PGmFwBRx3
+ VPvVOF7LQXch7QafOdjjjQQjlg==
+X-Google-Smtp-Source: ACHHUZ5Y7RgI/HigdB/Vy/A/mlccuH6q4x/1T1dR3KtCf5RkqdPSmXfzXXGd8aEY+nDge3m+W6T+XA==
+X-Received: by 2002:a05:6a20:12c2:b0:12d:10b6:990f with SMTP id
+ v2-20020a056a2012c200b0012d10b6990fmr365188pzg.44.1688036782711; 
+ Thu, 29 Jun 2023 04:06:22 -0700 (PDT)
+Received: from [10.11.0.74] (125-228-20-175.hinet-ip.hinet.net.
+ [125.228.20.175]) by smtp.gmail.com with ESMTPSA id
+ b15-20020aa7810f000000b0065da94fe921sm2037190pfi.50.2023.06.29.04.06.20
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 29 Jun 2023 04:06:22 -0700 (PDT)
+Message-ID: <31d3cdc8-58c4-0fde-8dd3-2d0109b8f575@sifive.com>
+Date: Thu, 29 Jun 2023 19:06:19 +0800
 MIME-Version: 1.0
-References: <20230609022401.684157-1-richard.henderson@linaro.org>
- <20230609022401.684157-6-richard.henderson@linaro.org>
-In-Reply-To: <20230609022401.684157-6-richard.henderson@linaro.org>
-From: Ard Biesheuvel <ardb@kernel.org>
-Date: Thu, 29 Jun 2023 12:21:10 +0200
-X-Gmail-Original-Message-ID: <CAMj1kXFWDMijy6eTCBwCbygJHyBpS6PqaU=1d5OeE6h_v4=-zg@mail.gmail.com>
-Message-ID: <CAMj1kXFWDMijy6eTCBwCbygJHyBpS6PqaU=1d5OeE6h_v4=-zg@mail.gmail.com>
-Subject: Re: [PATCH v2 05/38] crypto/aes: Add constants for ShiftRows,
- InvShiftRows
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-devel@nongnu.org, berrange@redhat.com, qemu-ppc@nongnu.org, 
- qemu-arm@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2604:1380:4641:c500::1;
- envelope-from=ardb@kernel.org; helo=dfw.source.kernel.org
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.12.0
+Subject: Re: [PATCH v6 10/15] target/riscv: Add Zvknh ISA extension support
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: dbarboza@ventanamicro.com,
+ Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>,
+ Nazar Kazakov <nazar.kazakov@codethink.co.uk>,
+ Lawrence Hunter <lawrence.hunter@codethink.co.uk>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20230627174551.65498-1-max.chou@sifive.com>
+ <20230627174551.65498-11-max.chou@sifive.com>
+ <1aef4266-e196-ccfb-6631-bbefef96111b@linaro.org>
+Content-Language: en-US
+From: Max Chou <max.chou@sifive.com>
+In-Reply-To: <1aef4266-e196-ccfb-6631-bbefef96111b@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
+ envelope-from=max.chou@sifive.com; helo=mail-pg1-x535.google.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
+X-Spam_bar: --
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.093,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -85,90 +106,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, 9 Jun 2023 at 04:24, Richard Henderson
-<richard.henderson@linaro.org> wrote:
->
-> These symbols will avoid the indirection through memory
-> when fully unrolling some new primitives.
->
-> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->  crypto/aes.c | 50 ++++++++++++++++++++++++++++++++++++++++++++++++--
->  1 file changed, 48 insertions(+), 2 deletions(-)
->
-> diff --git a/crypto/aes.c b/crypto/aes.c
-> index 67bb74b8e3..cdf937883d 100644
-> --- a/crypto/aes.c
-> +++ b/crypto/aes.c
-> @@ -108,12 +108,58 @@ const uint8_t AES_isbox[256] =3D {
->      0xE1, 0x69, 0x14, 0x63, 0x55, 0x21, 0x0C, 0x7D,
->  };
->
-> +/* AES ShiftRows, for complete unrolling. */
-> +enum {
-> +    AES_SH_0 =3D 0x0,
-> +    AES_SH_1 =3D 0x5,
-> +    AES_SH_2 =3D 0xa,
-> +    AES_SH_3 =3D 0xf,
-> +    AES_SH_4 =3D 0x4,
-> +    AES_SH_5 =3D 0x9,
-> +    AES_SH_6 =3D 0xe,
-> +    AES_SH_7 =3D 0x3,
-> +    AES_SH_8 =3D 0x8,
-> +    AES_SH_9 =3D 0xd,
-> +    AES_SH_A =3D 0x2,
-> +    AES_SH_B =3D 0x7,
-> +    AES_SH_C =3D 0xc,
-> +    AES_SH_D =3D 0x1,
-> +    AES_SH_E =3D 0x6,
-> +    AES_SH_F =3D 0xb,
-> +};
-> +
+On 2023/6/28 5:14 PM, Richard Henderson wrote:
 
-We might simplify this further by doing
+> On 6/27/23 19:45, Max Chou wrote:
+>> +void HELPER(vsha2cl_vv)(void *vd, void *vs1, void *vs2, 
+>> CPURISCVState *env,
+>> +                        uint32_t desc)
+>> +{
+>> +    uint32_t sew = FIELD_EX64(env->vtype, VTYPE, VSEW);
+>> +    uint32_t esz = sew == MO_64 ? 8 : 4;
+>> +    uint32_t total_elems;
+>> +    uint32_t vta = vext_vta(desc);
+>> +
+>> +    for (uint32_t i = env->vstart / 4; i < env->vl / 4; i++) {
+>> +        if (sew == MO_64) {
+>> +            vsha2c_64(((uint64_t *)vs2) + 4 * i, ((uint64_t *)vd) + 
+>> 4 * i,
+>> +                      (((uint64_t *)vs1) + 4 * i));
+>> +        } else {
+>> +            vsha2c_32(((uint32_t *)vs2) + 4 * i, ((uint32_t *)vd) + 
+>> 4 * i,
+>> +                      (((uint32_t *)vs1) + 4 * i));
+>> +        }
+>> +    }
+>
+> You should have two separate functions for two separate VSEW, so that 
+> you do not need to pass the value nor decode the value here. The 
+> selection of SEW should happen during translation using DisasContext.sew.
+>
+>
+> r~
+Thanks for the suggestion. I'll provide the v7 patch set for this.
 
-#define AES_SH(n)  (((n) * 5) % 16)
-#define AES_ISH(n)  (((n) * 13) % 16)
-
->  const uint8_t AES_shifts[16] =3D {
-> -    0, 5, 10, 15, 4, 9, 14, 3, 8, 13, 2, 7, 12, 1, 6, 11
-> +    AES_SH_0, AES_SH_1, AES_SH_2, AES_SH_3,
-> +    AES_SH_4, AES_SH_5, AES_SH_6, AES_SH_7,
-> +    AES_SH_8, AES_SH_9, AES_SH_A, AES_SH_B,
-> +    AES_SH_C, AES_SH_D, AES_SH_E, AES_SH_F,
-> +};
-> +
-> +/* AES InvShiftRows, for complete unrolling. */
-> +enum {
-> +    AES_ISH_0 =3D 0x0,
-> +    AES_ISH_1 =3D 0xd,
-> +    AES_ISH_2 =3D 0xa,
-> +    AES_ISH_3 =3D 0x7,
-> +    AES_ISH_4 =3D 0x4,
-> +    AES_ISH_5 =3D 0x1,
-> +    AES_ISH_6 =3D 0xe,
-> +    AES_ISH_7 =3D 0xb,
-> +    AES_ISH_8 =3D 0x8,
-> +    AES_ISH_9 =3D 0x5,
-> +    AES_ISH_A =3D 0x2,
-> +    AES_ISH_B =3D 0xf,
-> +    AES_ISH_C =3D 0xc,
-> +    AES_ISH_D =3D 0x9,
-> +    AES_ISH_E =3D 0x6,
-> +    AES_ISH_F =3D 0x3,
->  };
->
->  const uint8_t AES_ishifts[16] =3D {
-> -    0, 13, 10, 7, 4, 1, 14, 11, 8, 5, 2, 15, 12, 9, 6, 3
-> +    AES_ISH_0, AES_ISH_1, AES_ISH_2, AES_ISH_3,
-> +    AES_ISH_4, AES_ISH_5, AES_ISH_6, AES_ISH_7,
-> +    AES_ISH_8, AES_ISH_9, AES_ISH_A, AES_ISH_B,
-> +    AES_ISH_C, AES_ISH_D, AES_ISH_E, AES_ISH_F,
->  };
->
->  /*
-> --
-> 2.34.1
->
+Thanks,
+Max
 
