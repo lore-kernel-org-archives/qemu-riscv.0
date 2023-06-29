@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5562EEB64DD
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Jun 2023 07:16:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0D4DEB64DC
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Jun 2023 07:26:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qElt0-0001XR-8f; Thu, 29 Jun 2023 03:16:14 -0400
+	id 1qEm2p-00056W-Tu; Thu, 29 Jun 2023 03:26:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qElss-0001Ub-Te
- for qemu-riscv@nongnu.org; Thu, 29 Jun 2023 03:16:10 -0400
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qEm2n-00056B-TO
+ for qemu-riscv@nongnu.org; Thu, 29 Jun 2023 03:26:22 -0400
+Received: from mail-lf1-x132.google.com ([2a00:1450:4864:20::132])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qElsq-0005lk-2V
- for qemu-riscv@nongnu.org; Thu, 29 Jun 2023 03:16:06 -0400
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-3fbab0d0b88so2427305e9.0
- for <qemu-riscv@nongnu.org>; Thu, 29 Jun 2023 00:16:02 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qEm2l-0000lS-T6
+ for qemu-riscv@nongnu.org; Thu, 29 Jun 2023 03:26:21 -0400
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-4fb8574a3a1so549336e87.1
+ for <qemu-riscv@nongnu.org>; Thu, 29 Jun 2023 00:26:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1688022960; x=1690614960;
+ d=linaro.org; s=google; t=1688023576; x=1690615576;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=mhuGH43rqskaJ9lzn6R+EiBCIw/7R/2pgPj63zxHnNM=;
- b=pcJOrr9oHxOvAw6nv0w1e4luzPiEtAISELbw1JU+/ROg0CUFVUZfiw1b6ouurZ06Q2
- 22QExn065uGDkjyvMpSTgsR4IsOL+vJAG55B/Bx+ykX5l13kdbTOk7wF2Vnz4cMdprDm
- im1sbYn2zJ6SwyR8bYOGGZkRVGBmnBMeaSf2jt9i//Y+kRAFG21NbJbaf9heuEhK3I/A
- thwZ/nMOXkS5Eczortw+ol32uH0jfTSGk3RzLI8DudU/cgtpdyzDxxaha8XSYcFH7bvM
- 7lPUXloLSJkU0YRkt1UnSDrglDVDpdmNdHgGZ2O9eeZmHrwVWJZ7WJAfdJR5PJlkUVkT
- 0eQA==
+ bh=PO1GM1pxnPAQQKnzudxw5zwsMO8K0Q4X03az0rUwhx0=;
+ b=D+VT5yAARFsMDUbByuDieKlqVbGV55Kt4uVHrxlyEbpQ7Cpabi1i4eG2aUTHX7A1p9
+ YTdtQWXhPZzk5+vT2RWFbRXGWjWo7Phhhf+lto9dxmuYgUOtTBHBYI8zdOx3+FuIOSrh
+ Y6dPn6XANuU5/Fvalo4N4pbwS67UxnzEPOjqCUWWNdMvzswpEzBJsdTC8nrqNzuAB1So
+ Jwaciz2DgJLqJlDC1lNjqBeRarf4pya/NlOgsR4GijYAdaVqb52nGuLUVVwiIcIRuULX
+ InL3ebC2A+12MCAz/OHhxOLTROFsGHwG2tUHoekHqR8psRlaV1+FTI8QoNdLLfSgaDcF
+ +EqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688022960; x=1690614960;
+ d=1e100.net; s=20221208; t=1688023576; x=1690615576;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=mhuGH43rqskaJ9lzn6R+EiBCIw/7R/2pgPj63zxHnNM=;
- b=CCUWd0jF/fEf2kaNfvWLQ7OfVzpW1dJA5btHkRx9/JmEApJX7ZcFT1ydhkVZMRs9xY
- s4kxquIxudRWDxblHHDxPLIRlu8+qNFXKhkYxeSshl/J/+ZPiRSm2km+7dXh8dh47UOr
- E0fzT/31QbrcoDg93P32HsKrXQgytjVTXoasQ1AbgDApS63I2Mq8Q1JyKSE2GywUFfpx
- nxGSO3Kzt9MITsYl5Ni1/wio3FDGtwCDz0xWxg49XlRJ0AgMBU7zNVEEleGi2VZ34Wqm
- D+jMCV7AvZ+GPo8q3o1sXKZVYyxRjRiieFTjv7MME1G5ScFj5b7Zja0EHFJHd6kc8uJ8
- HRdQ==
-X-Gm-Message-State: AC+VfDxj/1wxmFCXL3pcY+rjvN/psCMRL/NPGcuJ3uTY6WYl1lpw2UZI
- nQWTwW1VENGcHdysyluaoaWAJg==
-X-Google-Smtp-Source: ACHHUZ56Q2TQ+Fk/4ZjCSpq7eeWP20ehxWdYwyapJh+t/Mg6++L3e1nkxi7Zqz0u5jbDOFlLtdudig==
-X-Received: by 2002:a05:600c:5014:b0:3fa:9996:8e03 with SMTP id
- n20-20020a05600c501400b003fa99968e03mr3450547wmr.10.1688022960256; 
- Thu, 29 Jun 2023 00:16:00 -0700 (PDT)
+ bh=PO1GM1pxnPAQQKnzudxw5zwsMO8K0Q4X03az0rUwhx0=;
+ b=Sm1/3MfckYRMgTUsMT2WJLPysryJ/dFrJLKlwqxqXL5R+OF5YkP/ehLKa73Y8/WHhf
+ RzzcsduvdseVvdV32BBSOgGfX491oSXFiI/0y6N2weVYjvS/SHbW70yEItOuS17OBZxS
+ G9fJFsuZ5IkAAoS43VZXY703eFi0E2+8raXrPG7p3QoxnSRguoxBzkva+eUrL7+Yo7bW
+ VfmMLumx9aZte1Nf/cVqincrCXMpKnbldEcHYDdN1qaxUxBR8nyteHUwCSYhJ+bb5543
+ dvrHHjmvWRsxAHdQZjM/qZbxOsXyGSo/MNM2UwdYMKCZumCyqYlYwdHb0qvmrKzIwO/S
+ L8yw==
+X-Gm-Message-State: AC+VfDxZbCbdO1P9aNUG+L4x/1bjFY5MkM2KDPFWYvX8h9Aq03/+vpzl
+ GAGubTByIIHGqkrlMQHQZDgD2YqqsvwwoHzEfFc=
+X-Google-Smtp-Source: ACHHUZ7bHdKQI8JyOzOCHj71oIPrrIgTGfnP0b83qiTVFsjZdg6Rmu4IPrOYa4ddc9ww3p9k5M0ucw==
+X-Received: by 2002:a05:6512:2527:b0:4fa:a217:1e76 with SMTP id
+ be39-20020a056512252700b004faa2171e76mr9210097lfb.9.1688023575828; 
+ Thu, 29 Jun 2023 00:26:15 -0700 (PDT)
 Received: from [192.168.69.115] ([176.176.166.242])
  by smtp.gmail.com with ESMTPSA id
- x9-20020a05600c21c900b003fb40ec9475sm8668765wmj.11.2023.06.29.00.15.58
+ f13-20020a5d50cd000000b0030647d1f34bsm15368247wrt.1.2023.06.29.00.26.14
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 29 Jun 2023 00:15:59 -0700 (PDT)
-Message-ID: <b13a2a4f-0c80-1539-11ea-f517a1009073@linaro.org>
-Date: Thu, 29 Jun 2023 09:15:57 +0200
+ Thu, 29 Jun 2023 00:26:15 -0700 (PDT)
+Message-ID: <053d4c93-6501-257c-5473-3de78d5635b5@linaro.org>
+Date: Thu, 29 Jun 2023 09:26:13 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.12.0
-Subject: Re: [PATCH] target/riscv: Remove unuseful KVM stubs
+Subject: Re: [PATCH v6 11/20] target/riscv/cpu: add misa_ext_info_arr[]
 Content-Language: en-US
-To: qemu-devel@nongnu.org
-Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Bin Meng <bin.meng@windriver.com>,
- qemu-riscv@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- kvm@vger.kernel.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Weiwei Li <liweiwei@iscas.ac.cn>, Alistair Francis <alistair.francis@wdc.com>
-References: <20230620081611.88158-1-philmd@linaro.org>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ ajones@ventanamicro.com
+References: <20230628213033.170315-1-dbarboza@ventanamicro.com>
+ <20230628213033.170315-12-dbarboza@ventanamicro.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230620081611.88158-1-philmd@linaro.org>
+In-Reply-To: <20230628213033.170315-12-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::132;
+ envelope-from=philmd@linaro.org; helo=mail-lf1-x132.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
 X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.089,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,85 +97,137 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-ping?
-
-On 20/6/23 10:16, Philippe Mathieu-Daudé wrote:
-> Since we always check whether KVM is enabled before calling
-> kvm_riscv_reset_vcpu() and kvm_riscv_set_irq(), their call
-> is elided by the compiler when KVM is not available.
-> Therefore the stubs are not even linked. Remove them.
+On 28/6/23 23:30, Daniel Henrique Barboza wrote:
+> Next patch will add KVM specific user properties for both MISA and
+> multi-letter extensions. For MISA extensions we want to make use of what
+> is already available in misa_ext_cfgs[] to avoid code repetition.
 > 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> misa_ext_info_arr[] array will hold name and description for each MISA
+> extension that misa_ext_cfgs[] is declaring. We'll then use this new
+> array in KVM code to avoid duplicating strings.
+> 
+> There's nothing holding us back from doing the same with multi-letter
+> extensions. For now doing just with MISA extensions is enough.
+> 
+> Suggested-by: Andrew Jones <ajones@ventanamicro.com>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > ---
->   target/riscv/kvm-stub.c  | 30 ------------------------------
->   target/riscv/kvm.c       |  4 +---
->   target/riscv/meson.build |  2 +-
->   3 files changed, 2 insertions(+), 34 deletions(-)
->   delete mode 100644 target/riscv/kvm-stub.c
+>   target/riscv/cpu.c | 83 ++++++++++++++++++++++++++++++----------------
+>   target/riscv/cpu.h |  7 +++-
+>   2 files changed, 61 insertions(+), 29 deletions(-)
 > 
-> diff --git a/target/riscv/kvm-stub.c b/target/riscv/kvm-stub.c
-> deleted file mode 100644
-> index 4e8fc31a21..0000000000
-> --- a/target/riscv/kvm-stub.c
-> +++ /dev/null
-> @@ -1,30 +0,0 @@
-> -/*
-> - * QEMU KVM RISC-V specific function stubs
-> - *
-> - * Copyright (c) 2020 Huawei Technologies Co., Ltd
-> - *
-> - * This program is free software; you can redistribute it and/or modify it
-> - * under the terms and conditions of the GNU General Public License,
-> - * version 2 or later, as published by the Free Software Foundation.
-> - *
-> - * This program is distributed in the hope it will be useful, but WITHOUT
-> - * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> - * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-> - * more details.
-> - *
-> - * You should have received a copy of the GNU General Public License along with
-> - * this program.  If not, see <http://www.gnu.org/licenses/>.
-> - */
-> -#include "qemu/osdep.h"
-> -#include "cpu.h"
-> -#include "kvm_riscv.h"
-> -
-> -void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
-> -{
-> -    abort();
-> -}
-> -
-> -void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level)
-> -{
-> -    abort();
-> -}
-> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-> index 0f932a5b96..52884bbe15 100644
-> --- a/target/riscv/kvm.c
-> +++ b/target/riscv/kvm.c
-> @@ -503,9 +503,7 @@ void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
->   {
->       CPURISCVState *env = &cpu->env;
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 2485e820f8..90dd2078ae 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1558,33 +1558,57 @@ static void cpu_get_misa_ext_cfg(Object *obj, Visitor *v, const char *name,
+>       visit_type_bool(v, name, &value, errp);
+>   }
 >   
-> -    if (!kvm_enabled()) {
-> -        return;
-> -    }
-> +    assert(kvm_enabled());
->       env->pc = cpu->env.kernel_addr;
->       env->gpr[10] = kvm_arch_vcpu_id(CPU(cpu)); /* a0 */
->       env->gpr[11] = cpu->env.fdt_addr;          /* a1 */
-> diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-> index e1ff6d9b95..37fc2cf487 100644
-> --- a/target/riscv/meson.build
-> +++ b/target/riscv/meson.build
-> @@ -22,7 +22,7 @@ riscv_ss.add(files(
->     'crypto_helper.c',
->     'zce_helper.c'
->   ))
-> -riscv_ss.add(when: 'CONFIG_KVM', if_true: files('kvm.c'), if_false: files('kvm-stub.c'))
-> +riscv_ss.add(when: 'CONFIG_KVM', if_true: files('kvm.c'))
+> -static const RISCVCPUMisaExtConfig misa_ext_cfgs[] = {
+> -    {.name = "a", .description = "Atomic instructions",
+> -     .misa_bit = RVA, .enabled = true},
+> -    {.name = "c", .description = "Compressed instructions",
+> -     .misa_bit = RVC, .enabled = true},
+> -    {.name = "d", .description = "Double-precision float point",
+> -     .misa_bit = RVD, .enabled = true},
+> -    {.name = "f", .description = "Single-precision float point",
+> -     .misa_bit = RVF, .enabled = true},
+> -    {.name = "i", .description = "Base integer instruction set",
+> -     .misa_bit = RVI, .enabled = true},
+> -    {.name = "e", .description = "Base integer instruction set (embedded)",
+> -     .misa_bit = RVE, .enabled = false},
+> -    {.name = "m", .description = "Integer multiplication and division",
+> -     .misa_bit = RVM, .enabled = true},
+> -    {.name = "s", .description = "Supervisor-level instructions",
+> -     .misa_bit = RVS, .enabled = true},
+> -    {.name = "u", .description = "User-level instructions",
+> -     .misa_bit = RVU, .enabled = true},
+> -    {.name = "h", .description = "Hypervisor",
+> -     .misa_bit = RVH, .enabled = true},
+> -    {.name = "x-j", .description = "Dynamic translated languages",
+> -     .misa_bit = RVJ, .enabled = false},
+> -    {.name = "v", .description = "Vector operations",
+> -     .misa_bit = RVV, .enabled = false},
+> -    {.name = "g", .description = "General purpose (IMAFD_Zicsr_Zifencei)",
+> -     .misa_bit = RVG, .enabled = false},
+> +typedef struct misa_ext_info {
+> +    const char *name;
+> +    const char *description;
+> +} MISAExtInfo;
+> +
+> +#define MISA_EXT_INFO(_idx, _propname, _descr) \
+> +    [(_idx - 'A')] = {.name = _propname, .description = _descr}
+> +
+> +static const MISAExtInfo misa_ext_info_arr[] = {
+> +    MISA_EXT_INFO('A', "a", "Atomic instructions"),
+> +    MISA_EXT_INFO('C', "c", "Compressed instructions"),
+> +    MISA_EXT_INFO('D', "d", "Double-precision float point"),
+> +    MISA_EXT_INFO('F', "f", "Single-precision float point"),
+> +    MISA_EXT_INFO('I', "i", "Base integer instruction set"),
+> +    MISA_EXT_INFO('E', "e", "Base integer instruction set (embedded)"),
+> +    MISA_EXT_INFO('M', "m", "Integer multiplication and division"),
+> +    MISA_EXT_INFO('S', "s", "Supervisor-level instructions"),
+> +    MISA_EXT_INFO('U', "u", "User-level instructions"),
+> +    MISA_EXT_INFO('H', "h", "Hypervisor"),
+> +    MISA_EXT_INFO('J', "x-j", "Dynamic translated languages"),
+> +    MISA_EXT_INFO('V', "v", "Vector operations"),
+> +    MISA_EXT_INFO('G', "g", "General purpose (IMAFD_Zicsr_Zifencei)"),
+> +};
+> +
+> +const char *riscv_get_misa_ext_name(uint32_t bit)
+> +{
+
+Is that OK to return NULL, or should we assert for
+unimplemented bit/feature?
+
+> +    return misa_ext_info_arr[ctz32(bit)].name;
+> +}
+> +
+> +const char *riscv_get_misa_ext_descr(uint32_t bit)
+> +{
+> +    return misa_ext_info_arr[ctz32(bit)].description;
+
+Ditto.
+
+> +}
+> +
+> +#define MISA_CFG(_bit, _enabled) \
+> +    {.misa_bit = _bit, .enabled = _enabled}
+> +
+> +static RISCVCPUMisaExtConfig misa_ext_cfgs[] = {
+
+'const'
+
+> +    MISA_CFG(RVA, true),
+> +    MISA_CFG(RVC, true),
+> +    MISA_CFG(RVD, true),
+> +    MISA_CFG(RVF, true),
+> +    MISA_CFG(RVI, true),
+> +    MISA_CFG(RVE, false),
+> +    MISA_CFG(RVM, true),
+> +    MISA_CFG(RVS, true),
+> +    MISA_CFG(RVU, true),
+> +    MISA_CFG(RVH, true),
+> +    MISA_CFG(RVJ, false),
+> +    MISA_CFG(RVV, false),
+> +    MISA_CFG(RVG, false),
+>   };
 >   
->   riscv_softmmu_ss = ss.source_set()
->   riscv_softmmu_ss.add(files(
+>   static void riscv_cpu_add_misa_properties(Object *cpu_obj)
+> @@ -1592,7 +1616,10 @@ static void riscv_cpu_add_misa_properties(Object *cpu_obj)
+>       int i;
+>   
+>       for (i = 0; i < ARRAY_SIZE(misa_ext_cfgs); i++) {
+> -        const RISCVCPUMisaExtConfig *misa_cfg = &misa_ext_cfgs[i];
+> +        RISCVCPUMisaExtConfig *misa_cfg = &misa_ext_cfgs[i];
+
+const
+
+> +
+> +        misa_cfg->name = riscv_get_misa_ext_name(misa_cfg->misa_bit);
+> +        misa_cfg->description = riscv_get_misa_ext_descr(misa_cfg->misa_bit);
+
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
