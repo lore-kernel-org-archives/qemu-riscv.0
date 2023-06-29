@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BF88EB64D9
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Jun 2023 11:37:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1E43EB64D9
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Jun 2023 11:41:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qEpx3-0001nv-0x; Thu, 29 Jun 2023 07:36:41 -0400
+	id 1qEq0t-00030A-It; Thu, 29 Jun 2023 07:40:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qEpx1-0001nI-9u
- for qemu-riscv@nongnu.org; Thu, 29 Jun 2023 07:36:39 -0400
-Received: from mail-oi1-x231.google.com ([2607:f8b0:4864:20::231])
+ id 1qEq0r-0002zh-6b
+ for qemu-riscv@nongnu.org; Thu, 29 Jun 2023 07:40:37 -0400
+Received: from mail-oo1-xc35.google.com ([2607:f8b0:4864:20::c35])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qEpwz-00047X-Bb
- for qemu-riscv@nongnu.org; Thu, 29 Jun 2023 07:36:39 -0400
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-39eab4bcee8so389862b6e.0
- for <qemu-riscv@nongnu.org>; Thu, 29 Jun 2023 04:36:36 -0700 (PDT)
+ id 1qEq0p-0005I5-2U
+ for qemu-riscv@nongnu.org; Thu, 29 Jun 2023 07:40:36 -0400
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-55e1ae72dceso357170eaf.3
+ for <qemu-riscv@nongnu.org>; Thu, 29 Jun 2023 04:40:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1688038596; x=1690630596;
+ d=ventanamicro.com; s=google; t=1688038834; x=1690630834;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=cKJECIjJSvuaP+QK1f4KeShINHti2qIjm+JtIQLBuO0=;
- b=OvjrFn+UnnmLo8ju0dr5cvJ/2Nag7rErUzPI7dhVxbVBruuRrmUD6YGKup0gHKBvTw
- 7a1Zcvqb5Hqk0R90ZQcySxyPBTSKBIrmDYTgazsp6HQq3hJFuiffpKnunRd20SozQiqL
- M7mC9wEeXD+7eGmG4E9GMRW1akQ5IF257uCNxbMhvvIB5EyfZA8O5Za1HB1VaI3L1G/U
- +80yT3oSdxW6DRrk3X8bmeir/Bg+jjy1FNYOZfpTX/GJ9J4DhbxUhXAKVDjY38+kHKRu
- +izsei9p4h28URPkdDIFErCEbzxf8fYgBrIHNCo5rNTTannqMPXNV/sc2MDQpPW3iDcB
- 923A==
+ bh=uFyok/UFZoKMfyxwKl4lVidO4fwklyfuTxeT29CJgQw=;
+ b=LrKYTFw9edXOM5mDgNpetLsijJTO+VFlqaZp+CmuGNlgdxM5+g16MAGpZszjtlSOct
+ GvOJDkIuAonXZzvd624YG8x2H5oj2rnmq3ORpQdqiraK4rNV/IvRSC4lahf4S7frpaFZ
+ 8t130pBN81qvR34eHEUk78BbYISaD/Ot85PHiIiXFAs9zhriWi8ojnyiYdD8HmTax3CH
+ +mAD/qN2aIL5lwI7B/Kl5/f/16HDJM85WRYzABUkvuYJQWOMGqWLlqX4eArGLbAiyZAQ
+ eWgh+6sBUYCTDmwvQDyoUfQNX6xsZbTrA9eg5K+D5SiH+mxYLDlq++ScKFCdtOrqRtTb
+ WFrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688038596; x=1690630596;
+ d=1e100.net; s=20221208; t=1688038834; x=1690630834;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=cKJECIjJSvuaP+QK1f4KeShINHti2qIjm+JtIQLBuO0=;
- b=jXWhmhy4oHCfr6sq5RTKkdY+884A868jExIE1QyEhCUs/WYwmbCZVi6TGWKfbFcYPO
- WRbgQcf8rp4JM/NGKxhboF1qlFna+oWkbwh31fWGPmm8e8g2AsCniTHkMXj9zo/3IWNH
- gYF/EDKLlIWyEBrqpA4FFrL3M+XNjdxwrpwx5PXHPLgOB7aHoYSfF5qByt0KEZLh74ld
- zblftVWjaOUmpTXUrYA1rCXBEHz/hYVrVQf43YU1d7aWSA0NjJ5i6QQ+vBUB4eBYz2/u
- M4Krx+32PxfeWjb5IytmBuDEmXH8zfFC0zmoKosVS+y74PvLt52E5rdkprVhFbnGAe7o
- nyJA==
-X-Gm-Message-State: AC+VfDxEIGaaJkHhKuk+Tjd0SlUi+MyxAvfa2q0KwsgX1Fv0IIlZAaGZ
- s6190Ebvc/w37H/BDW06sYei0w==
-X-Google-Smtp-Source: ACHHUZ4ziSb23P3NR65ybExWISzWRj+NDzr/A+uguclOhxTiHp/+t5OWTCqU0XmA/gNcHoVPzvW69Q==
-X-Received: by 2002:a05:6808:bd4:b0:3a0:3161:ee2f with SMTP id
- o20-20020a0568080bd400b003a03161ee2fmr34688511oik.57.1688038596042; 
- Thu, 29 Jun 2023 04:36:36 -0700 (PDT)
+ bh=uFyok/UFZoKMfyxwKl4lVidO4fwklyfuTxeT29CJgQw=;
+ b=CCZuwhpZ5uvF4jveb1NY5eL0ZDnV/POHM0K6Yw+/uH32I38iME/RYtbdbAydzHY90H
+ Az0soQ6BJ8j7PQHXl+oMTZCt+PG6XOUkj1bAv4mlU6TUy3T8gPD7gYD6GNHQ0GfuIriT
+ b49iL9nWDywlGPIKnJqpLsbXbsfiaPQnISaG5Mlea30j6zu/7LBAwhPXTDQjJZ4xodXE
+ rykUFqK40msZp/NjwhmnbNDb3F/WmFVYb30gprHqng6m6SLjS9pegIj2C39j1DPvvYDf
+ X8W9BaT4tLb6wpGyntOX5hZ4PcoX0Zy0PO6EvTcRAGmUHPLOFxDP0J8EHfNes+FxhWfD
+ 4UEQ==
+X-Gm-Message-State: AC+VfDz/DMZbtyuV+stIy3ZOq0qamb4ey9VFkenDSANrNQZMrBGLW1Jj
+ e7ZAfHudMMLF4nduNUcsaHSkvA==
+X-Google-Smtp-Source: ACHHUZ6ndyOqKjZT/3P0KGHTdBB7u1HAR6GHAQ1wwtmv9SJ0s16BFayVH7D4VXVaGQU+r0zElLJjXw==
+X-Received: by 2002:a4a:dbca:0:b0:563:568d:e274 with SMTP id
+ t10-20020a4adbca000000b00563568de274mr8766991oou.7.1688038833864; 
+ Thu, 29 Jun 2023 04:40:33 -0700 (PDT)
 Received: from ?IPV6:2804:7f0:bcc0:bdf2:b7ba:a476:c0e3:fb59?
  ([2804:7f0:bcc0:bdf2:b7ba:a476:c0e3:fb59])
  by smtp.gmail.com with ESMTPSA id
- u6-20020a544386000000b003a36382d006sm1694433oiv.13.2023.06.29.04.36.32
+ c7-20020a4ad8c7000000b00562f3936c01sm1692948oov.45.2023.06.29.04.40.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 29 Jun 2023 04:36:35 -0700 (PDT)
-Message-ID: <ff4ccd13-2dfe-ce52-3528-d302578e1fed@ventanamicro.com>
-Date: Thu, 29 Jun 2023 08:36:29 -0300
+ Thu, 29 Jun 2023 04:40:33 -0700 (PDT)
+Message-ID: <301b09a1-11dd-3413-15d3-c7bdd1f81dde@ventanamicro.com>
+Date: Thu, 29 Jun 2023 08:40:29 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.12.0
 Subject: Re: [PATCH v6 11/20] target/riscv/cpu: add misa_ext_info_arr[]
 Content-Language: en-US
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
+ palmer@rivosinc.com, philmd@linaro.org
 References: <20230628213033.170315-1-dbarboza@ventanamicro.com>
  <20230628213033.170315-12-dbarboza@ventanamicro.com>
- <053d4c93-6501-257c-5473-3de78d5635b5@linaro.org>
+ <20230629-6a932f8d5f71fefc9afbd974@orel>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <053d4c93-6501-257c-5473-3de78d5635b5@linaro.org>
+In-Reply-To: <20230629-6a932f8d5f71fefc9afbd974@orel>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::231;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x231.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c35;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc35.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
@@ -104,8 +103,8 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 6/29/23 04:26, Philippe Mathieu-Daudé wrote:
-> On 28/6/23 23:30, Daniel Henrique Barboza wrote:
+On 6/29/23 05:59, Andrew Jones wrote:
+> On Wed, Jun 28, 2023 at 06:30:24PM -0300, Daniel Henrique Barboza wrote:
 >> Next patch will add KVM specific user properties for both MISA and
 >> multi-letter extensions. For MISA extensions we want to make use of what
 >> is already available in misa_ext_cfgs[] to avoid code repetition.
@@ -120,125 +119,171 @@ On 6/29/23 04:26, Philippe Mathieu-Daudé wrote:
 >> Suggested-by: Andrew Jones <ajones@ventanamicro.com>
 >> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 >> ---
->>   target/riscv/cpu.c | 83 ++++++++++++++++++++++++++++++----------------
->>   target/riscv/cpu.h |  7 +++-
->>   2 files changed, 61 insertions(+), 29 deletions(-)
+>>   target/riscv/cpu.c | 83 ++++++++++++++++++++++++++++++----------------
+>>   target/riscv/cpu.h |  7 +++-
+>>   2 files changed, 61 insertions(+), 29 deletions(-)
 >>
 >> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
 >> index 2485e820f8..90dd2078ae 100644
 >> --- a/target/riscv/cpu.c
 >> +++ b/target/riscv/cpu.c
 >> @@ -1558,33 +1558,57 @@ static void cpu_get_misa_ext_cfg(Object *obj, Visitor *v, const char *name,
->>       visit_type_bool(v, name, &value, errp);
->>   }
+>>       visit_type_bool(v, name, &value, errp);
+>>   }
+>>   
 >> -static const RISCVCPUMisaExtConfig misa_ext_cfgs[] = {
->> -    {.name = "a", .description = "Atomic instructions",
->> -     .misa_bit = RVA, .enabled = true},
->> -    {.name = "c", .description = "Compressed instructions",
->> -     .misa_bit = RVC, .enabled = true},
->> -    {.name = "d", .description = "Double-precision float point",
->> -     .misa_bit = RVD, .enabled = true},
->> -    {.name = "f", .description = "Single-precision float point",
->> -     .misa_bit = RVF, .enabled = true},
->> -    {.name = "i", .description = "Base integer instruction set",
->> -     .misa_bit = RVI, .enabled = true},
->> -    {.name = "e", .description = "Base integer instruction set (embedded)",
->> -     .misa_bit = RVE, .enabled = false},
->> -    {.name = "m", .description = "Integer multiplication and division",
->> -     .misa_bit = RVM, .enabled = true},
->> -    {.name = "s", .description = "Supervisor-level instructions",
->> -     .misa_bit = RVS, .enabled = true},
->> -    {.name = "u", .description = "User-level instructions",
->> -     .misa_bit = RVU, .enabled = true},
->> -    {.name = "h", .description = "Hypervisor",
->> -     .misa_bit = RVH, .enabled = true},
->> -    {.name = "x-j", .description = "Dynamic translated languages",
->> -     .misa_bit = RVJ, .enabled = false},
->> -    {.name = "v", .description = "Vector operations",
->> -     .misa_bit = RVV, .enabled = false},
->> -    {.name = "g", .description = "General purpose (IMAFD_Zicsr_Zifencei)",
->> -     .misa_bit = RVG, .enabled = false},
+>> -    {.name = "a", .description = "Atomic instructions",
+>> -     .misa_bit = RVA, .enabled = true},
+>> -    {.name = "c", .description = "Compressed instructions",
+>> -     .misa_bit = RVC, .enabled = true},
+>> -    {.name = "d", .description = "Double-precision float point",
+>> -     .misa_bit = RVD, .enabled = true},
+>> -    {.name = "f", .description = "Single-precision float point",
+>> -     .misa_bit = RVF, .enabled = true},
+>> -    {.name = "i", .description = "Base integer instruction set",
+>> -     .misa_bit = RVI, .enabled = true},
+>> -    {.name = "e", .description = "Base integer instruction set (embedded)",
+>> -     .misa_bit = RVE, .enabled = false},
+>> -    {.name = "m", .description = "Integer multiplication and division",
+>> -     .misa_bit = RVM, .enabled = true},
+>> -    {.name = "s", .description = "Supervisor-level instructions",
+>> -     .misa_bit = RVS, .enabled = true},
+>> -    {.name = "u", .description = "User-level instructions",
+>> -     .misa_bit = RVU, .enabled = true},
+>> -    {.name = "h", .description = "Hypervisor",
+>> -     .misa_bit = RVH, .enabled = true},
+>> -    {.name = "x-j", .description = "Dynamic translated languages",
+>> -     .misa_bit = RVJ, .enabled = false},
+>> -    {.name = "v", .description = "Vector operations",
+>> -     .misa_bit = RVV, .enabled = false},
+>> -    {.name = "g", .description = "General purpose (IMAFD_Zicsr_Zifencei)",
+>> -     .misa_bit = RVG, .enabled = false},
 >> +typedef struct misa_ext_info {
->> +    const char *name;
->> +    const char *description;
+>> +    const char *name;
+>> +    const char *description;
 >> +} MISAExtInfo;
 >> +
 >> +#define MISA_EXT_INFO(_idx, _propname, _descr) \
->> +    [(_idx - 'A')] = {.name = _propname, .description = _descr}
->> +
->> +static const MISAExtInfo misa_ext_info_arr[] = {
->> +    MISA_EXT_INFO('A', "a", "Atomic instructions"),
->> +    MISA_EXT_INFO('C', "c", "Compressed instructions"),
->> +    MISA_EXT_INFO('D', "d", "Double-precision float point"),
->> +    MISA_EXT_INFO('F', "f", "Single-precision float point"),
->> +    MISA_EXT_INFO('I', "i", "Base integer instruction set"),
->> +    MISA_EXT_INFO('E', "e", "Base integer instruction set (embedded)"),
->> +    MISA_EXT_INFO('M', "m", "Integer multiplication and division"),
->> +    MISA_EXT_INFO('S', "s", "Supervisor-level instructions"),
->> +    MISA_EXT_INFO('U', "u", "User-level instructions"),
->> +    MISA_EXT_INFO('H', "h", "Hypervisor"),
->> +    MISA_EXT_INFO('J', "x-j", "Dynamic translated languages"),
->> +    MISA_EXT_INFO('V', "v", "Vector operations"),
->> +    MISA_EXT_INFO('G', "g", "General purpose (IMAFD_Zicsr_Zifencei)"),
->> +};
->> +
->> +const char *riscv_get_misa_ext_name(uint32_t bit)
->> +{
+>> +    [(_idx - 'A')] = {.name = _propname, .description = _descr}
 > 
-> Is that OK to return NULL, or should we assert for
-> unimplemented bit/feature?
+> We don't have to give up on passing RV* to this macro. Directly
+> using __builtin_ctz() with a constant should work, i.e.
 > 
->> +    return misa_ext_info_arr[ctz32(bit)].name;
->> +}
->> +
->> +const char *riscv_get_misa_ext_descr(uint32_t bit)
->> +{
->> +    return misa_ext_info_arr[ctz32(bit)].description;
+>   #define MISA_EXT_INFO(_bit, _propname, _descr) \
+>       [__builtin_ctz(_bit)] = {.name = _propname, .description = _descr}
 > 
-> Ditto.
+> and then
 > 
->> +}
->> +
->> +#define MISA_CFG(_bit, _enabled) \
->> +    {.misa_bit = _bit, .enabled = _enabled}
->> +
->> +static RISCVCPUMisaExtConfig misa_ext_cfgs[] = {
+>   MISA_EXT_INFO(RVA, "a", "Atomic instructions"),
+>   MISA_EXT_INFO(RVD, "d", "Double-precision float point"),
+>   ...
 > 
-> 'const'
+> (We don't need the ctz32() wrapper since we know we'll never input zero to
+> __builtin_ctz().)
 
-Not sure why I got rid of 'const' here. I'll reintroduce it.
-
+I'll give it a try. I'll spare us from having to assign name and descr during
+runtime (at least for this file).
 
 Daniel
 
 > 
->> +    MISA_CFG(RVA, true),
->> +    MISA_CFG(RVC, true),
->> +    MISA_CFG(RVD, true),
->> +    MISA_CFG(RVF, true),
->> +    MISA_CFG(RVI, true),
->> +    MISA_CFG(RVE, false),
->> +    MISA_CFG(RVM, true),
->> +    MISA_CFG(RVS, true),
->> +    MISA_CFG(RVU, true),
->> +    MISA_CFG(RVH, true),
->> +    MISA_CFG(RVJ, false),
->> +    MISA_CFG(RVV, false),
->> +    MISA_CFG(RVG, false),
->>   };
->>   static void riscv_cpu_add_misa_properties(Object *cpu_obj)
->> @@ -1592,7 +1616,10 @@ static void riscv_cpu_add_misa_properties(Object *cpu_obj)
->>       int i;
->>       for (i = 0; i < ARRAY_SIZE(misa_ext_cfgs); i++) {
->> -        const RISCVCPUMisaExtConfig *misa_cfg = &misa_ext_cfgs[i];
->> +        RISCVCPUMisaExtConfig *misa_cfg = &misa_ext_cfgs[i];
-> 
-> const
-> 
 >> +
->> +        misa_cfg->name = riscv_get_misa_ext_name(misa_cfg->misa_bit);
->> +        misa_cfg->description = riscv_get_misa_ext_descr(misa_cfg->misa_bit);
+>> +static const MISAExtInfo misa_ext_info_arr[] = {
+>> +    MISA_EXT_INFO('A', "a", "Atomic instructions"),
+>> +    MISA_EXT_INFO('C', "c", "Compressed instructions"),
+>> +    MISA_EXT_INFO('D', "d", "Double-precision float point"),
+>> +    MISA_EXT_INFO('F', "f", "Single-precision float point"),
+>> +    MISA_EXT_INFO('I', "i", "Base integer instruction set"),
+>> +    MISA_EXT_INFO('E', "e", "Base integer instruction set (embedded)"),
+>> +    MISA_EXT_INFO('M', "m", "Integer multiplication and division"),
+>> +    MISA_EXT_INFO('S', "s", "Supervisor-level instructions"),
+>> +    MISA_EXT_INFO('U', "u", "User-level instructions"),
+>> +    MISA_EXT_INFO('H', "h", "Hypervisor"),
+>> +    MISA_EXT_INFO('J', "x-j", "Dynamic translated languages"),
+>> +    MISA_EXT_INFO('V', "v", "Vector operations"),
+>> +    MISA_EXT_INFO('G', "g", "General purpose (IMAFD_Zicsr_Zifencei)"),
+>> +};
+>> +
+>> +const char *riscv_get_misa_ext_name(uint32_t bit)
+>> +{
+>> +    return misa_ext_info_arr[ctz32(bit)].name;
+>> +}
+>> +
+>> +const char *riscv_get_misa_ext_descr(uint32_t bit)
 > 
-> Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> nit: I'd prefer riscv_get_misa_ext_description() for the name.
 > 
+>> +{
+>> +    return misa_ext_info_arr[ctz32(bit)].description;
+>> +}
+>> +
+>> +#define MISA_CFG(_bit, _enabled) \
+>> +    {.misa_bit = _bit, .enabled = _enabled}
+>> +
+>> +static RISCVCPUMisaExtConfig misa_ext_cfgs[] = {
+>> +    MISA_CFG(RVA, true),
+>> +    MISA_CFG(RVC, true),
+>> +    MISA_CFG(RVD, true),
+>> +    MISA_CFG(RVF, true),
+>> +    MISA_CFG(RVI, true),
+>> +    MISA_CFG(RVE, false),
+>> +    MISA_CFG(RVM, true),
+>> +    MISA_CFG(RVS, true),
+>> +    MISA_CFG(RVU, true),
+>> +    MISA_CFG(RVH, true),
+>> +    MISA_CFG(RVJ, false),
+>> +    MISA_CFG(RVV, false),
+>> +    MISA_CFG(RVG, false),
+>>   };
+>>   
+>>   static void riscv_cpu_add_misa_properties(Object *cpu_obj)
+>> @@ -1592,7 +1616,10 @@ static void riscv_cpu_add_misa_properties(Object *cpu_obj)
+>>       int i;
+>>   
+>>       for (i = 0; i < ARRAY_SIZE(misa_ext_cfgs); i++) {
+>> -        const RISCVCPUMisaExtConfig *misa_cfg = &misa_ext_cfgs[i];
+>> +        RISCVCPUMisaExtConfig *misa_cfg = &misa_ext_cfgs[i];
+>> +
+>> +        misa_cfg->name = riscv_get_misa_ext_name(misa_cfg->misa_bit);
+>> +        misa_cfg->description = riscv_get_misa_ext_descr(misa_cfg->misa_bit);
+> 
+> This might be necessary for the KVM side, but we should be able to avoid
+> this runtime setting here where the compiler can be certain everything is
+> a constant. We just need the old MISA_CFG() back, slightly tweaked to use
+> __builtin_ctz().
+> 
+>>   
+>>           object_property_add(cpu_obj, misa_cfg->name, "bool",
+>>                               cpu_get_misa_ext_cfg,
+>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+>> index cc20ee25a7..acae118b9b 100644
+>> --- a/target/riscv/cpu.h
+>> +++ b/target/riscv/cpu.h
+>> @@ -41,7 +41,10 @@
+>>   
+>>   #define RV(x) ((target_ulong)1 << (x - 'A'))
+>>   
+>> -/* Consider updating misa_ext_cfgs[] when adding new MISA bits here */
+>> +/*
+>> + * Consider updating misa_ext_info_arr[] and misa_ext_cfgs[]
+>> + * when adding new MISA bits here.
+>> + */
+>>   #define RVI RV('I')
+>>   #define RVE RV('E') /* E and I are mutually exclusive */
+>>   #define RVM RV('M')
+>> @@ -56,6 +59,8 @@
+>>   #define RVJ RV('J')
+>>   #define RVG RV('G')
+>>   
+>> +const char *riscv_get_misa_ext_name(uint32_t bit);
+>> +const char *riscv_get_misa_ext_descr(uint32_t bit);
+>>   
+>>   /* Privileged specification version */
+>>   enum {
+>> -- 
+>> 2.41.0
+>>
+> 
+> Thanks,
+> drew
 
