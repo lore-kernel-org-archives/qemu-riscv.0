@@ -4,87 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15963EB64D7
-	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Jun 2023 09:14:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DB9AEB64D7
+	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Jun 2023 09:22:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qFABq-00074g-PM; Fri, 30 Jun 2023 05:13:18 -0400
+	id 1qFAKb-0007l3-37; Fri, 30 Jun 2023 05:22:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1qFABn-00072s-4x
- for qemu-riscv@nongnu.org; Fri, 30 Jun 2023 05:13:15 -0400
-Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1qFAKZ-0007k1-RL
+ for qemu-riscv@nongnu.org; Fri, 30 Jun 2023 05:22:19 -0400
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1qFABh-0000A4-Uu
- for qemu-riscv@nongnu.org; Fri, 30 Jun 2023 05:13:14 -0400
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-9928abc11deso195043266b.1
- for <qemu-riscv@nongnu.org>; Fri, 30 Jun 2023 02:13:08 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1qFAKY-0006AD-2d
+ for qemu-riscv@nongnu.org; Fri, 30 Jun 2023 05:22:19 -0400
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-3fb4146e8deso20594115e9.0
+ for <qemu-riscv@nongnu.org>; Fri, 30 Jun 2023 02:22:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=vrull.eu; s=google; t=1688116387; x=1690708387;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=3KTxLg4dSDtZAVmzzFfuOvvIA3stkgiJMugzNvO/Dvc=;
- b=d+hDpfCFompkkMMkk4YdyO7fnWob5EA8Jxjx3aH5wirhO/Eegyuo3CgH83wkMwvSjx
- COf0Xf1I5aN9Lg9sI8a3/XgI+PoKmkHAYDsgzuoPoiMMLZsFkGB1oU9uKDuP2+KM4+Cm
- Sw+1KHMkecGqHkNOMjE1SatTNkNo5u2Ki22RGckkWhJ4T7h+yCOjluYvvJKDDCexRYHX
- 9UZ6Fz6Ih/UkkFTWb+IhRN+nh1I/trLZDEx+iKVi0lNC/q2A1nG7xbrr6lazq/3wtV1u
- OhGkCemAJOn+453h2gpFmCEbPcYcoVs4tCeKgblAjzcxkKZfO3mn7DspolHDromgiAPm
- CB3Q==
+ d=linaro.org; s=google; t=1688116936; x=1690708936;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=NmckWYY4DImTm7/X39mu6H10aMzd/4akBzdZC6emEBk=;
+ b=K9fB443uQ28zYwCbjV2uQ1gTYc+PtFWgWwpnAtFj/YE0pbMZ/KfO/VnSvY71E9/DwB
+ gg8OgfyIjuvYfpVg2EXlu1+xgy9akh9wBCUwgsVT2YfY+lJjM+C3IhngsrwnVNx9RdDx
+ JeK5+kA29iuSaVPYcyCOhETWboyft4Iqj1yAeRcj+aOs8iWhpFW7QtKZXEZTRYjMEHNA
+ QsSjVM9ryRb8AFuZX4qZaG4lI0ECkVqSSQSM0Z3EGhuqmXXcO2k0zL3ymAgDFRhHCS/j
+ zWSIgOSIIEOPC/7VykP+qdGX8UzMHKPz3DKNQj0kOYjvN7GU4vfofJDphTlwzey5bFIg
+ FyRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688116387; x=1690708387;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=3KTxLg4dSDtZAVmzzFfuOvvIA3stkgiJMugzNvO/Dvc=;
- b=ScxkcL3g2ltE/1FGK8IP1tymWo+E8H586Sg9Iu/82y+BWekDTPmjjGVmtm+gHX3MhE
- eO+4ciEnOohJgo0RtleWDzAvtGCWgxIF+CaS1+8iIAV4Ev2GjIfHwcQC+huQBikVhTq8
- qdqoUtlWyqOqRfMCAK7roI6HSQEMQ++nCB6T19GuO7f3Qvs1ABXzVfzX6HYz7KG5LIDj
- p9jOURzFIgFIhExVLH7NoCe/C0KSOEmOgQQ7FvJdGH2C76zjRlS7m3RpWLt6eTjKRnL8
- BoCES/slD9TbQwKl3tGtpm4L7Ok0NBJDF9/nlfHwJ9ShpbsW2A9o2mORncRPOtHlkoOb
- J5lg==
-X-Gm-Message-State: ABy/qLbEPK/UfzqIklXw/I4eez83lk7ALn3Qn3MVtf+1j3KxXPaMEdqq
- g6LV8etl+alVNK3mSCeSP4ErX1hA+UwthIR8dkE=
-X-Google-Smtp-Source: APBJJlEDYF2NoNR54zKAU1xFnl18o+ZdMM0tGH2d//JcJTQh6EVuJQmub8yRP0HbMPtHLsVtKdi0vw==
-X-Received: by 2002:a17:907:76b4:b0:977:eed1:4510 with SMTP id
- jw20-20020a17090776b400b00977eed14510mr1139808ejc.21.1688116387238; 
- Fri, 30 Jun 2023 02:13:07 -0700 (PDT)
-Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
- [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
- lc1-20020a170906f90100b00988e953a586sm7869892ejb.61.2023.06.30.02.13.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Jun 2023 02:13:06 -0700 (PDT)
-From: Christoph Muellner <christoph.muellner@vrull.eu>
-To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Richard Henderson <richard.henderson@linaro.org>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Palmer Dabbelt <palmer@dabbelt.com>, Jeff Law <jeffreyalaw@gmail.com>,
- Tsukasa OI <research_trasio@irq.a4lg.com>, liweiwei@iscas.ac.cn,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ d=1e100.net; s=20221208; t=1688116936; x=1690708936;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=NmckWYY4DImTm7/X39mu6H10aMzd/4akBzdZC6emEBk=;
+ b=JVQl2aSVjNXly/I2HaTuzxIv5r6mrVkXTLDUsm5GUtwQOStsHxISADXPDFVKWo5dJa
+ 7mGXL7caikqL1BpvnJ/Yw4r6DbN+3gBkvX/ZcgQTqkirrvf1FLZREI3ttFZIVUPQxlwY
+ tO5N+cTbkBrEqWIKU8UvV3pAi7708u2yN/aLlslx9Krfmp1hPZ+J1M6gvE85dR/PwuzV
+ fCi53Tq0VsBnEQJQfhgzCvF4is0wc3MEMLe+15dU6JJToMQ4wfJ7F1h6qLL/GusDTZ8x
+ KkpFUCqe7MbADglK+NF4fPqleJhswKrC74VdEZiKZdVAWQXpRe0P4SoWVrVVTEJpsqux
+ eecw==
+X-Gm-Message-State: ABy/qLY+GBf2MdGhTmaXqX+z7Odw0tI3briyUvNgKwkpgp5HZiXFwrxV
+ PNYwjxzQgryPrGVO+NKcGVhEYw==
+X-Google-Smtp-Source: APBJJlGX9vj35jt25BoQ57X5SHTZV8A05tNucfwWfniUP9b4GHjhYwqQ1Br95vF1rdJLAMXg9+M/6Q==
+X-Received: by 2002:a05:6000:1087:b0:313:f551:b037 with SMTP id
+ y7-20020a056000108700b00313f551b037mr1807980wrw.68.1688116936295; 
+ Fri, 30 Jun 2023 02:22:16 -0700 (PDT)
+Received: from [192.168.1.208] ([139.47.41.96])
+ by smtp.gmail.com with ESMTPSA id
+ z3-20020a5d4c83000000b0030497b3224bsm17760110wrs.64.2023.06.30.02.22.15
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 30 Jun 2023 02:22:16 -0700 (PDT)
+Message-ID: <599e9042-4e58-d468-940c-f8a8ee1edf5d@linaro.org>
+Date: Fri, 30 Jun 2023 11:22:13 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH v4 2/3] target/riscv: Use float64_to_int64_modulo for
+ fcvtmod.w.d
+Content-Language: en-US
+To: Christoph Muellner <christoph.muellner@vrull.eu>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Jeff Law <jeffreyalaw@gmail.com>, Tsukasa OI <research_trasio@irq.a4lg.com>,
+ liweiwei@iscas.ac.cn, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Rob Bradford <rbradford@rivosinc.com>
-Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>
-Subject: [PATCH v4 0/3] riscv: Add support for the Zfa extension
-Date: Fri, 30 Jun 2023 11:13:00 +0200
-Message-ID: <20230630091303.1676486-1-christoph.muellner@vrull.eu>
-X-Mailer: git-send-email 2.41.0
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+References: <20230630091303.1676486-1-christoph.muellner@vrull.eu>
+ <20230630091303.1676486-3-christoph.muellner@vrull.eu>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20230630091303.1676486-3-christoph.muellner@vrull.eu>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
- envelope-from=christoph.muellner@vrull.eu; helo=mail-ej1-x62d.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x32e.google.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.093,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,66 +104,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Christoph Müllner <christoph.muellner@vrull.eu>
+On 6/30/23 11:13, Christoph Muellner wrote:
+> From: Christoph Müllner <christoph.muellner@vrull.eu>
+> 
+> For the most part we can use the new generic routine,
+> though exceptions need some post-processing.
+> 
+> Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
+> ---
+>   target/riscv/fpu_helper.c | 78 ++++++++++++++-------------------------
+>   1 file changed, 27 insertions(+), 51 deletions(-)
+> 
+> diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
+> index 289b3bbea5..0f897cf072 100644
+> --- a/target/riscv/fpu_helper.c
+> +++ b/target/riscv/fpu_helper.c
+> @@ -482,70 +482,46 @@ target_ulong helper_fcvt_w_d(CPURISCVState *env, uint64_t frs1)
+>       return float64_to_int32(frs1, &env->fp_status);
+>   }
+>   
+> +/* T floating (double) */
+> +static inline float64 t_to_float64(uint64_t a)
+> +{
+> +    /* Memory format is the same as float64 */
+> +    CPU_DoubleU r;
+> +    r.ll = a;
+> +    return r.d;
+> +}
 
-This patch introduces the RISC-V Zfa extension.
+You don't need this.  Nor does Alpha anymore, come to that.
+float64 is uint64_t now, always.
 
-The Zfa specification can be found here:
-  https://github.com/riscv/riscv-isa-manual/blob/master/src/zfa.tex
-The Zfa specifciation is frozen and is in public review since May 3, 2023:
-  https://groups.google.com/a/groups.riscv.org/g/isa-dev/c/SED4ntBkabg
+> +    int64_t ret;
+> +    int32_t ret32;
+> +    uint32_t e_old, e_new;
+> +    float64 fvalue;
+> +
+> +    e_old = get_float_exception_flags(status);
+> +    set_float_exception_flags(0, status);
+> +    fvalue = t_to_float64(value);
+> +    ret = float64_to_int32_modulo(fvalue, float_round_to_zero, status);
+> +    e_new = get_float_exception_flags(status);
+> +
+> +    /* Map the flags to the specified ones. */
+> +    if (e_new & float_flag_inexact) {
+> +        e_new = float_flag_inexact;
+> +    } else if (e_new) {
+> +        e_new = float_flag_invalid;
+>       }
 
-The first patch is mostly equal to v3 (plus resolved rebase issues and
-fixed whitespace issues). The second patch changes the implementation
-of fcvtmod.w.d to use float64_to_int64_modulo(), which is provided
-by a patchset from Richard Henderson:
-  https://lists.nongnu.org/archive/html/qemu-devel/2023-05/msg07022.html
-The third test contains a test for fcvtmod.w.d, which was used for
-development. Since compiling this test requires Zfa support in the
-RISC-V toolchain (which is not given), this patch is not meant to
-be merged as of now.
+Why?  Generic code will not set both inexact and invalid.
+So this is a nop.
 
-Changes in v4:
-* Rebase and resolve conflicts
-* Fix whitespace issue (thanks Rob)
-* Add patch to implemnt fcvtmod.w.d using float64_to_int64_modulo()
-* Add (demo) test for fcvtmod.w.d
+Removing that, all of your fp flags handling can go away.
 
-Changes in v3:
-* Add disassembler support
-* Enable Zfa by default
-* Remove forgotten comments in the decoder
-* Fix fli translation code (use movi instead of ld)
-* Tested against SPEC CPU2017 fprate
-* Use floatN_[min|max] for f[min|max]m.* instructions
 
-Changes in v2:
-* Remove calls to mark_fs_dirty() in comparison trans functions
-* Rewrite fround(nx) using float*_round_to_int()
-* Move fli* to translation unit and fix NaN-boxing of NaN values
-* Reimplement FCVTMOD.W.D
-* Add use of second register in trans_fmvp_d_x()
+>       /* Truncate to 32-bits. */
+> -    int32_t ret32 = (int32_t)ret;
+> +    ret32 = (int32_t)ret;
+>   
+>       /* If the truncation drops bits then raise NV. */
+>       if ((uint64_t)ret32 != ret)
 
-Christoph Müllner (3):
-  riscv: Add support for the Zfa extension
-  target/riscv: Use float64_to_int64_modulo for fcvtmod.w.d
-  DO NOT MERGE: tests/tcg/riscv64: Add test for fcvtmod.w.d
+This will never fail, because you used float64_to_int32_modulo, which already returns int32_t.
 
- disas/riscv.c                             | 151 ++++++
- target/riscv/cpu.c                        |   8 +
- target/riscv/cpu_cfg.h                    |   1 +
- target/riscv/fpu_helper.c                 | 198 ++++++++
- target/riscv/helper.h                     |  19 +
- target/riscv/insn32.decode                |  26 ++
- target/riscv/insn_trans/trans_rvzfa.c.inc | 529 ++++++++++++++++++++++
- target/riscv/translate.c                  |   1 +
- tests/tcg/riscv64/Makefile.target         |   6 +
- tests/tcg/riscv64/test-fcvtmod.c          | 354 +++++++++++++++
- 10 files changed, 1293 insertions(+)
- create mode 100644 target/riscv/insn_trans/trans_rvzfa.c.inc
- create mode 100644 tests/tcg/riscv64/test-fcvtmod.c
+But we have already raised invalid for overflow, so this can go away as well.
 
--- 
-2.41.0
+Finally, this patch must be merged with the previous, which introduced this function.
 
+
+r~
 
