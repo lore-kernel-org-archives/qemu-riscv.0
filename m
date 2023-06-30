@@ -4,88 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03689EB64D7
-	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Jun 2023 09:33:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F8C1EB64D7
+	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Jun 2023 09:40:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qFAVH-0005gS-92; Fri, 30 Jun 2023 05:33:23 -0400
+	id 1qFAbL-0006xy-2F; Fri, 30 Jun 2023 05:39:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qFAVG-0005g8-71
- for qemu-riscv@nongnu.org; Fri, 30 Jun 2023 05:33:22 -0400
-Received: from mail-oo1-xc2c.google.com ([2607:f8b0:4864:20::c2c])
+ id 1qFAbG-0006xZ-Fp
+ for qemu-riscv@nongnu.org; Fri, 30 Jun 2023 05:39:34 -0400
+Received: from mail-oi1-x22e.google.com ([2607:f8b0:4864:20::22e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qFAVD-0001b7-Ez
- for qemu-riscv@nongnu.org; Fri, 30 Jun 2023 05:33:21 -0400
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-560b7ac3cbfso1132120eaf.2
- for <qemu-riscv@nongnu.org>; Fri, 30 Jun 2023 02:33:19 -0700 (PDT)
+ id 1qFAbE-0004TE-7n
+ for qemu-riscv@nongnu.org; Fri, 30 Jun 2023 05:39:34 -0400
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-3a0423ea74eso1214767b6e.1
+ for <qemu-riscv@nongnu.org>; Fri, 30 Jun 2023 02:39:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1688117598; x=1690709598;
+ d=ventanamicro.com; s=google; t=1688117970; x=1690709970;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=S+Pu6gkHKrasLBbohBqAoKdYG6qEByKeuuLEGJpa2h0=;
- b=Xx9Ir9Tx6yTie/k21f6zSb9el6mvw4BSpvb+9zD6BCTEaWn1ZIcpd8UQmlbEtU7tp3
- UlKc6zgICLe+3hjqUdr0aO7mfcjHMSqMAU7/RWjaS8weARMM2zLvdSvbcaDp69tNYK4n
- 7pS9E+MuJZGt8QZjvfStsm0pmINrJVAWys43gqixy8Tyg994kR27aGshY7zbOCLzAzSd
- vjVmQF/Iydsrx/eHpPVk/giH4MIPhnD2XqVyIE8QvbW856t52lfzxjm6N5E4RfC0XiNB
- ByQVMR+x2/UHm/Cjo9IKmO1o0nfa5SZKU39vR0yzkjZqGYatmDDxX+FJOOUdfiZ5ApJw
- hP+g==
+ bh=5urSgy5I4IwvaiQtXhKePvn+VEkDW0bmkYukGeBOKUg=;
+ b=mBtlFxps3CFG0cZJeYavid28sTJg6TLipdixle/XTiIa6Rg/rGQN6UTUVNnfvuWFJ6
+ W9/Db7JptYAD2nh+xN4JRcaaBBsYufZ2TZSz0pKeN86IuMynvYAFcfyEEiP8/U/hKzeB
+ zH7TmOFp3z45lhILy9E20i1zRvnl4vjqvWLQwXAbuhm45QAnHPNJVw07HQFlQXeFdLNp
+ /eKQLWSL1VxvI9bmzmC6QqMqQVKAvC6Mz4nR+wFyMzVX8WZlSkeLB8NTtlY9bLDqNHCU
+ VHqrt6jthqDy0kciAMDrzcxZjSjWq6bun/c9/F9Gnp6uWBswDJmlEqthkMjofaMtptMq
+ 9xSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688117598; x=1690709598;
+ d=1e100.net; s=20221208; t=1688117970; x=1690709970;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=S+Pu6gkHKrasLBbohBqAoKdYG6qEByKeuuLEGJpa2h0=;
- b=EGxgH42eOhEyWzhCt3CvXIJk2VzdRuhHF0iyqjNe6zeCPm40PJV3u2AfFxxPWUX7Vp
- +aofLBSR6W6Pr64y7l2TCLWHU9/NLqJu7K+ic0jj9/emVAi1ty+N4rjsMx971KppZSry
- 5s2AZvYXqagOlOiNtBYRvJFSwiXginiXfWdNZGPNEYHE9u5EEDUs2FrVLqwr8DtQEynz
- V+a9Jrr43osXpNx4/ENY6eLGyYiX7wjrYbvd/hWbw74e8ntYDlGI5Wu9EhsuZX4priRk
- YH04YeqQN7DdustBHJE9UE3UDRzvJgvdsk+6UdvU13z8FyWQ51DcY72VNMVODMRBGwpk
- UpRg==
-X-Gm-Message-State: AC+VfDw0QDnYtkQBlAALgpLOALnQ537wKm5YSoc1jhEzZhN/aBmuAM14
- cbdqul0v+RXh8P1zz1gvGuUDmw==
-X-Google-Smtp-Source: ACHHUZ5lXLPUToOWOX8BjgFPAkPreQH6dIR0MJWxWC5VBG9tCVf42BP4uXCGNLVAUFZeu1Uch4HI5w==
-X-Received: by 2002:a4a:4511:0:b0:565:bf28:ee72 with SMTP id
- y17-20020a4a4511000000b00565bf28ee72mr1857278ooa.0.1688117597635; 
- Fri, 30 Jun 2023 02:33:17 -0700 (PDT)
+ bh=5urSgy5I4IwvaiQtXhKePvn+VEkDW0bmkYukGeBOKUg=;
+ b=PHtHyjPv0pftw3TgvVKZz5swhBLD0Gz+tzT7oHLmerKYgUsiabF2xpNtRkTFqcSRPU
+ JzPsGwMTB4xPb42xb3jZKSDHMQydQ4V/iHhvCpkZGnFBGkQoh9ZINmyRar2qxuJq+dSC
+ N3cD02rivdCiowDogxZh95kXDPsNU7XnrNp7Z7DmhPF29vsUI2+2bEH1+9fxNeskAZB9
+ 9b9uefAEPHRnlYeSdWjVJXosaZTGLsay+326qCo0wXFeOTmGfKx+A9Bz1p650zQ6noiE
+ LHz2I67bDrzO2K8lq57PPDhoKyf3e6Js5tKvopcPHtGnLidT9Q1Dk3afCuP33W2QBAe5
+ w4fQ==
+X-Gm-Message-State: AC+VfDzEXsbfJUS1AHGpaBvS9ntfS/eQ2IRpcZr1+LPi+B/ebk2Pp6Dq
+ Xam4uy2v2OaENI8/qQOGAP0zyQ==
+X-Google-Smtp-Source: ACHHUZ4zNxrBUYSxsgdWcWTPSSlTuUsj8ubrAV6YxUMvSX0p3pvOHvZwDI/1wT0Scsjx9UMZ3zVU5Q==
+X-Received: by 2002:a05:6808:15a4:b0:3a2:79ea:d372 with SMTP id
+ t36-20020a05680815a400b003a279ead372mr2538146oiw.52.1688117970683; 
+ Fri, 30 Jun 2023 02:39:30 -0700 (PDT)
 Received: from [192.168.68.107] (201-69-66-110.dial-up.telesp.net.br.
  [201.69.66.110]) by smtp.gmail.com with ESMTPSA id
- y21-20020a4ae7d5000000b0056591172bedsm249802oov.37.2023.06.30.02.33.14
+ 1-20020aca1001000000b003a368f3e0a6sm2115286oiq.3.2023.06.30.02.39.26
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 30 Jun 2023 02:33:17 -0700 (PDT)
-Message-ID: <f8394b68-0250-3cd4-b865-c76105aea3fd@ventanamicro.com>
-Date: Fri, 30 Jun 2023 06:33:12 -0300
+ Fri, 30 Jun 2023 02:39:30 -0700 (PDT)
+Message-ID: <52f4fdec-a74d-002d-a3b0-144463ca6fd6@ventanamicro.com>
+Date: Fri, 30 Jun 2023 06:39:23 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.12.0
-Subject: Re: [PATCH v2 6/6] target/riscv: Add HS-mode virtual interrupt and
- IRQ filtering support.
+Subject: Re: [PATCH v4 2/6] target/riscv: support the AIA device emulation
+ with KVM enabled
 Content-Language: en-US
-To: Rajnesh Kanwal <rkanwal@rivosinc.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, atishp@rivosinc.com,
- apatel@ventanamicro.com
-References: <20230526162308.22892-1-rkanwal@rivosinc.com>
- <20230526162308.22892-7-rkanwal@rivosinc.com>
+To: Yong-Xuan Wang <yongxuan.wang@sifive.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: rkanwal@rivosinc.com, anup@brainfault.org, atishp@atishpatra.org,
+ vincent.chen@sifive.com, greentime.hu@sifive.com, frank.chang@sifive.com,
+ jim.shu@sifive.com, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20230621145500.25624-1-yongxuan.wang@sifive.com>
+ <20230621145500.25624-3-yongxuan.wang@sifive.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230526162308.22892-7-rkanwal@rivosinc.com>
+In-Reply-To: <20230621145500.25624-3-yongxuan.wang@sifive.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c2c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc2c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::22e;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22e.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
 X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.093,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,489 +106,266 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 5/26/23 13:23, Rajnesh Kanwal wrote:
-> This change adds support for inserting virtual interrupts from HS-mode
-> into VS-mode using hvien and hvip csrs. This also allows for IRQ filtering
-> from HS-mode.
+On 6/21/23 11:54, Yong-Xuan Wang wrote:
+> Remove M mode AIA devices when using KVM acceleration
 > 
-> Also, the spec doesn't mandate the interrupt to be actually supported
-> in hardware. Which allows HS-mode to assert virtual interrupts to VS-mode
-> that have no connection to any real interrupt events.
-> 
-> This is defined as part of the AIA specification [0], "6.3.2 Virtual
-> interrupts for VS level".
-> 
-> [0]: https://github.com/riscv/riscv-aia/releases/download/1.0-RC4/riscv-interrupts-1.0-RC4.pdf
-> 
-> Signed-off-by: Rajnesh Kanwal <rkanwal@rivosinc.com>
+> Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+> Reviewed-by: Jim Shu <jim.shu@sifive.com>
 > ---
-
-LGTM.
 
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
->   target/riscv/cpu.c        |   3 +-
->   target/riscv/cpu.h        |  14 +++
->   target/riscv/cpu_helper.c |  48 +++++++---
->   target/riscv/csr.c        | 196 ++++++++++++++++++++++++++++++++++----
->   target/riscv/machine.c    |   3 +
->   5 files changed, 234 insertions(+), 30 deletions(-)
+>   hw/riscv/virt.c | 207 +++++++++++++++++++++++++-----------------------
+>   1 file changed, 108 insertions(+), 99 deletions(-)
 > 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 7c4999431a..6f2f8f21cc 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -713,7 +713,8 @@ static bool riscv_cpu_has_work(CPUState *cs)
->        * mode and delegation registers, but respect individual enables
->        */
->       return riscv_cpu_all_pending(env) != 0 ||
-> -        riscv_cpu_sirq_pending(env) != RISCV_EXCP_NONE;
-> +        riscv_cpu_sirq_pending(env) != RISCV_EXCP_NONE ||
-> +        riscv_cpu_vsirq_pending(env) != RISCV_EXCP_NONE;
->   #else
->       return true;
->   #endif
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 07cf656471..3e10eee38f 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -196,6 +196,12 @@ struct CPUArchState {
->        */
->       uint64_t sie;
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 245c7b97b2..4a1d29a741 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -531,52 +531,54 @@ static void create_fdt_imsic(RISCVVirtState *s, const MemMapEntry *memmap,
+>       imsic_cells = g_new0(uint32_t, ms->smp.cpus * 2);
+>       imsic_regs = g_new0(uint32_t, socket_count * 4);
 >   
-> +    /*
-> +     * When hideleg[i]=0 and hvien[i]=1, vsie[i] is no more
-> +     * alias of sie[i] (mie[i]) and needs to be maintained separatly.
-> +     */
-> +    uint64_t vsie;
-> +
->       target_ulong satp;   /* since: priv-1.10.0 */
->       target_ulong stval;
->       target_ulong medeleg;
-> @@ -230,6 +236,14 @@ struct CPUArchState {
->       target_ulong hgeie;
->       target_ulong hgeip;
->       uint64_t htimedelta;
-> +    uint64_t hvien;
-> +
-> +    /*
-> +     * Bits VSSIP, VSTIP and VSEIP in hvip are maintained in mip. Other bits
-> +     * from 0:12 are reserved. Bits 13:63 are not aliased and must be separately
-> +     * maintain in hvip.
-> +     */
-> +    uint64_t hvip;
->   
->       /* Hypervisor controlled virtual interrupt priorities */
->       target_ulong hvictl;
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 6567ddef7b..fd7dae9b68 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -366,8 +366,9 @@ static int riscv_cpu_pending_to_irq(CPURISCVState *env,
->   }
->   
->   /*
-> - * Doesn't report interrupts inserted using mvip from M-mode firmware. Those
-> - * are returned in riscv_cpu_sirq_pending().
-> + * Doesn't report interrupts inserted using mvip from M-mode firmware or
-> + * using hvip bits 13:63 from HS-mode. Those are returned in
-> + * riscv_cpu_sirq_pending() and riscv_cpu_vsirq_pending().
->    */
->   uint64_t riscv_cpu_all_pending(CPURISCVState *env)
->   {
-> @@ -399,16 +400,23 @@ int riscv_cpu_sirq_pending(CPURISCVState *env)
->   
->   int riscv_cpu_vsirq_pending(CPURISCVState *env)
->   {
-> -    uint64_t irqs = riscv_cpu_all_pending(env) & env->mideleg &
-> -                    (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
-> +    uint64_t irqs = riscv_cpu_all_pending(env) & env->mideleg & env->hideleg;
-> +    uint64_t irqs_f_vs = env->hvip & env->hvien & ~env->hideleg & env->vsie;
-> +    uint64_t vsbits;
-> +
-> +    /* Bring VS-level bits to correct position */
-> +    vsbits = irqs & VS_MODE_INTERRUPTS;
-> +    irqs &= ~VS_MODE_INTERRUPTS;
-> +    irqs |= vsbits >> 1;
->   
->       return riscv_cpu_pending_to_irq(env, IRQ_S_EXT, IPRIO_DEFAULT_S,
-> -                                    irqs >> 1, env->hviprio);
-> +                                    (irqs | irqs_f_vs), env->hviprio);
->   }
->   
->   static int riscv_cpu_local_irq_pending(CPURISCVState *env)
->   {
-> -    uint64_t irqs, pending, mie, hsie, vsie, irqs_f;
-> +    uint64_t irqs, pending, mie, hsie, vsie, irqs_f, irqs_f_vs;
-> +    uint64_t vsbits, irq_delegated;
->       int virq;
->   
->       /* Determine interrupt enable state of all privilege modes */
-> @@ -445,12 +453,26 @@ static int riscv_cpu_local_irq_pending(CPURISCVState *env)
->                                           irqs, env->siprio);
->       }
->   
-> +    /* Check for virtual VS-mode interrupts. */
-> +    irqs_f_vs = env->hvip & env->hvien & ~env->hideleg & env->vsie;
-> +
->       /* Check VS-mode interrupts */
-> -    irqs = pending & env->mideleg & env->hideleg & -vsie;
-> +    irq_delegated = pending & env->mideleg & env->hideleg;
-> +
-> +    /* Bring VS-level bits to correct position */
-> +    vsbits = irq_delegated & VS_MODE_INTERRUPTS;
-> +    irq_delegated &= ~VS_MODE_INTERRUPTS;
-> +    irq_delegated |= vsbits >> 1;
-> +
-> +    irqs = (irq_delegated | irqs_f_vs) & -vsie;
->       if (irqs) {
->           virq = riscv_cpu_pending_to_irq(env, IRQ_S_EXT, IPRIO_DEFAULT_S,
-> -                                        irqs >> 1, env->hviprio);
-> -        return (virq <= 0) ? virq : virq + 1;
-> +                                        irqs, env->hviprio);
-> +        if (virq <= 0 || (virq > 12 && virq <= 63)) {
-> +            return virq;
-> +        } else {
-> +            return virq + 1;
+> -    /* M-level IMSIC node */
+> -    for (cpu = 0; cpu < ms->smp.cpus; cpu++) {
+> -        imsic_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
+> -        imsic_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_M_EXT);
+> -    }
+> -    imsic_max_hart_per_socket = 0;
+> -    for (socket = 0; socket < socket_count; socket++) {
+> -        imsic_addr = memmap[VIRT_IMSIC_M].base +
+> -                     socket * VIRT_IMSIC_GROUP_MAX_SIZE;
+> -        imsic_size = IMSIC_HART_SIZE(0) * s->soc[socket].num_harts;
+> -        imsic_regs[socket * 4 + 0] = 0;
+> -        imsic_regs[socket * 4 + 1] = cpu_to_be32(imsic_addr);
+> -        imsic_regs[socket * 4 + 2] = 0;
+> -        imsic_regs[socket * 4 + 3] = cpu_to_be32(imsic_size);
+> -        if (imsic_max_hart_per_socket < s->soc[socket].num_harts) {
+> -            imsic_max_hart_per_socket = s->soc[socket].num_harts;
+> +    if (!kvm_enabled()) {
+> +        /* M-level IMSIC node */
+> +        for (cpu = 0; cpu < ms->smp.cpus; cpu++) {
+> +            imsic_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
+> +            imsic_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_M_EXT);
+>           }
+> -    }
+> -    imsic_name = g_strdup_printf("/soc/imsics@%lx",
+> -        (unsigned long)memmap[VIRT_IMSIC_M].base);
+> -    qemu_fdt_add_subnode(ms->fdt, imsic_name);
+> -    qemu_fdt_setprop_string(ms->fdt, imsic_name, "compatible",
+> -        "riscv,imsics");
+> -    qemu_fdt_setprop_cell(ms->fdt, imsic_name, "#interrupt-cells",
+> -        FDT_IMSIC_INT_CELLS);
+> -    qemu_fdt_setprop(ms->fdt, imsic_name, "interrupt-controller",
+> -        NULL, 0);
+> -    qemu_fdt_setprop(ms->fdt, imsic_name, "msi-controller",
+> -        NULL, 0);
+> -    qemu_fdt_setprop(ms->fdt, imsic_name, "interrupts-extended",
+> -        imsic_cells, ms->smp.cpus * sizeof(uint32_t) * 2);
+> -    qemu_fdt_setprop(ms->fdt, imsic_name, "reg", imsic_regs,
+> -        socket_count * sizeof(uint32_t) * 4);
+> -    qemu_fdt_setprop_cell(ms->fdt, imsic_name, "riscv,num-ids",
+> -        VIRT_IRQCHIP_NUM_MSIS);
+> -    if (socket_count > 1) {
+> -        qemu_fdt_setprop_cell(ms->fdt, imsic_name, "riscv,hart-index-bits",
+> -            imsic_num_bits(imsic_max_hart_per_socket));
+> -        qemu_fdt_setprop_cell(ms->fdt, imsic_name, "riscv,group-index-bits",
+> -            imsic_num_bits(socket_count));
+> -        qemu_fdt_setprop_cell(ms->fdt, imsic_name, "riscv,group-index-shift",
+> -            IMSIC_MMIO_GROUP_MIN_SHIFT);
+> -    }
+> -    qemu_fdt_setprop_cell(ms->fdt, imsic_name, "phandle", *msi_m_phandle);
+> +        imsic_max_hart_per_socket = 0;
+> +        for (socket = 0; socket < socket_count; socket++) {
+> +            imsic_addr = memmap[VIRT_IMSIC_M].base +
+> +                         socket * VIRT_IMSIC_GROUP_MAX_SIZE;
+> +            imsic_size = IMSIC_HART_SIZE(0) * s->soc[socket].num_harts;
+> +            imsic_regs[socket * 4 + 0] = 0;
+> +            imsic_regs[socket * 4 + 1] = cpu_to_be32(imsic_addr);
+> +            imsic_regs[socket * 4 + 2] = 0;
+> +            imsic_regs[socket * 4 + 3] = cpu_to_be32(imsic_size);
+> +            if (imsic_max_hart_per_socket < s->soc[socket].num_harts) {
+> +                imsic_max_hart_per_socket = s->soc[socket].num_harts;
+> +            }
 > +        }
+> +        imsic_name = g_strdup_printf("/soc/imsics@%lx",
+> +            (unsigned long)memmap[VIRT_IMSIC_M].base);
+> +        qemu_fdt_add_subnode(ms->fdt, imsic_name);
+> +        qemu_fdt_setprop_string(ms->fdt, imsic_name, "compatible",
+> +            "riscv,imsics");
+> +        qemu_fdt_setprop_cell(ms->fdt, imsic_name, "#interrupt-cells",
+> +            FDT_IMSIC_INT_CELLS);
+> +        qemu_fdt_setprop(ms->fdt, imsic_name, "interrupt-controller",
+> +            NULL, 0);
+> +        qemu_fdt_setprop(ms->fdt, imsic_name, "msi-controller",
+> +            NULL, 0);
+> +        qemu_fdt_setprop(ms->fdt, imsic_name, "interrupts-extended",
+> +            imsic_cells, ms->smp.cpus * sizeof(uint32_t) * 2);
+> +        qemu_fdt_setprop(ms->fdt, imsic_name, "reg", imsic_regs,
+> +            socket_count * sizeof(uint32_t) * 4);
+> +        qemu_fdt_setprop_cell(ms->fdt, imsic_name, "riscv,num-ids",
+> +            VIRT_IRQCHIP_NUM_MSIS);
+> +        if (socket_count > 1) {
+> +            qemu_fdt_setprop_cell(ms->fdt, imsic_name, "riscv,hart-index-bits",
+> +                imsic_num_bits(imsic_max_hart_per_socket));
+> +            qemu_fdt_setprop_cell(ms->fdt, imsic_name, "riscv,group-index-bits",
+> +                imsic_num_bits(socket_count));
+> +            qemu_fdt_setprop_cell(ms->fdt, imsic_name,
+> +                "riscv,group-index-shift", IMSIC_MMIO_GROUP_MIN_SHIFT);
+> +        }
+> +        qemu_fdt_setprop_cell(ms->fdt, imsic_name, "phandle", *msi_m_phandle);
+>   
+> -    g_free(imsic_name);
+> +        g_free(imsic_name);
+> +    }
+>   
+>       /* S-level IMSIC node */
+>       for (cpu = 0; cpu < ms->smp.cpus; cpu++) {
+> @@ -653,37 +655,40 @@ static void create_fdt_socket_aplic(RISCVVirtState *s,
+>       aplic_s_phandle = (*phandle)++;
+>       aplic_cells = g_new0(uint32_t, s->soc[socket].num_harts * 2);
+>   
+> -    /* M-level APLIC node */
+> -    for (cpu = 0; cpu < s->soc[socket].num_harts; cpu++) {
+> -        aplic_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
+> -        aplic_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_M_EXT);
+> -    }
+> -    aplic_addr = memmap[VIRT_APLIC_M].base +
+> -                 (memmap[VIRT_APLIC_M].size * socket);
+> -    aplic_name = g_strdup_printf("/soc/aplic@%lx", aplic_addr);
+> -    qemu_fdt_add_subnode(ms->fdt, aplic_name);
+> -    qemu_fdt_setprop_string(ms->fdt, aplic_name, "compatible", "riscv,aplic");
+> -    qemu_fdt_setprop_cell(ms->fdt, aplic_name,
+> -        "#interrupt-cells", FDT_APLIC_INT_CELLS);
+> -    qemu_fdt_setprop(ms->fdt, aplic_name, "interrupt-controller", NULL, 0);
+> -    if (s->aia_type == VIRT_AIA_TYPE_APLIC) {
+> -        qemu_fdt_setprop(ms->fdt, aplic_name, "interrupts-extended",
+> -            aplic_cells, s->soc[socket].num_harts * sizeof(uint32_t) * 2);
+> -    } else {
+> -        qemu_fdt_setprop_cell(ms->fdt, aplic_name, "msi-parent",
+> -            msi_m_phandle);
+> +    if (!kvm_enabled()) {
+> +        /* M-level APLIC node */
+> +        for (cpu = 0; cpu < s->soc[socket].num_harts; cpu++) {
+> +            aplic_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
+> +            aplic_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_M_EXT);
+> +        }
+> +        aplic_addr = memmap[VIRT_APLIC_M].base +
+> +                     (memmap[VIRT_APLIC_M].size * socket);
+> +        aplic_name = g_strdup_printf("/soc/aplic@%lx", aplic_addr);
+> +        qemu_fdt_add_subnode(ms->fdt, aplic_name);
+> +        qemu_fdt_setprop_string(ms->fdt, aplic_name,
+> +            "compatible", "riscv,aplic");
+> +        qemu_fdt_setprop_cell(ms->fdt, aplic_name,
+> +            "#interrupt-cells", FDT_APLIC_INT_CELLS);
+> +        qemu_fdt_setprop(ms->fdt, aplic_name, "interrupt-controller", NULL, 0);
+> +        if (s->aia_type == VIRT_AIA_TYPE_APLIC) {
+> +            qemu_fdt_setprop(ms->fdt, aplic_name, "interrupts-extended",
+> +                aplic_cells, s->soc[socket].num_harts * sizeof(uint32_t) * 2);
+> +        } else {
+> +            qemu_fdt_setprop_cell(ms->fdt, aplic_name, "msi-parent",
+> +                msi_m_phandle);
+> +        }
+> +        qemu_fdt_setprop_cells(ms->fdt, aplic_name, "reg",
+> +            0x0, aplic_addr, 0x0, memmap[VIRT_APLIC_M].size);
+> +        qemu_fdt_setprop_cell(ms->fdt, aplic_name, "riscv,num-sources",
+> +            VIRT_IRQCHIP_NUM_SOURCES);
+> +        qemu_fdt_setprop_cell(ms->fdt, aplic_name, "riscv,children",
+> +            aplic_s_phandle);
+> +        qemu_fdt_setprop_cells(ms->fdt, aplic_name, "riscv,delegate",
+> +            aplic_s_phandle, 0x1, VIRT_IRQCHIP_NUM_SOURCES);
+> +        riscv_socket_fdt_write_id(ms, aplic_name, socket);
+> +        qemu_fdt_setprop_cell(ms->fdt, aplic_name, "phandle", aplic_m_phandle);
+> +        g_free(aplic_name);
+>       }
+> -    qemu_fdt_setprop_cells(ms->fdt, aplic_name, "reg",
+> -        0x0, aplic_addr, 0x0, memmap[VIRT_APLIC_M].size);
+> -    qemu_fdt_setprop_cell(ms->fdt, aplic_name, "riscv,num-sources",
+> -        VIRT_IRQCHIP_NUM_SOURCES);
+> -    qemu_fdt_setprop_cell(ms->fdt, aplic_name, "riscv,children",
+> -        aplic_s_phandle);
+> -    qemu_fdt_setprop_cells(ms->fdt, aplic_name, "riscv,delegate",
+> -        aplic_s_phandle, 0x1, VIRT_IRQCHIP_NUM_SOURCES);
+> -    riscv_socket_fdt_write_id(ms, aplic_name, socket);
+> -    qemu_fdt_setprop_cell(ms->fdt, aplic_name, "phandle", aplic_m_phandle);
+> -    g_free(aplic_name);
+>   
+>       /* S-level APLIC node */
+>       for (cpu = 0; cpu < s->soc[socket].num_harts; cpu++) {
+> @@ -1162,16 +1167,20 @@ static DeviceState *virt_create_aia(RISCVVirtAIAType aia_type, int aia_guests,
+>       int i;
+>       hwaddr addr;
+>       uint32_t guest_bits;
+> -    DeviceState *aplic_m;
+> +    DeviceState *aplic_s = NULL;
+> +    DeviceState *aplic_m = NULL;
+>       bool msimode = (aia_type == VIRT_AIA_TYPE_APLIC_IMSIC) ? true : false;
+>   
+>       if (msimode) {
+> -        /* Per-socket M-level IMSICs */
+> -        addr = memmap[VIRT_IMSIC_M].base + socket * VIRT_IMSIC_GROUP_MAX_SIZE;
+> -        for (i = 0; i < hart_count; i++) {
+> -            riscv_imsic_create(addr + i * IMSIC_HART_SIZE(0),
+> -                               base_hartid + i, true, 1,
+> -                               VIRT_IRQCHIP_NUM_MSIS);
+> +        if (!kvm_enabled()) {
+> +            /* Per-socket M-level IMSICs */
+> +            addr = memmap[VIRT_IMSIC_M].base +
+> +                   socket * VIRT_IMSIC_GROUP_MAX_SIZE;
+> +            for (i = 0; i < hart_count; i++) {
+> +                riscv_imsic_create(addr + i * IMSIC_HART_SIZE(0),
+> +                        base_hartid + i, true, 1,
+> +                        VIRT_IRQCHIP_NUM_MSIS);
+> +            }
+>           }
+>   
+>           /* Per-socket S-level IMSICs */
+> @@ -1184,29 +1193,29 @@ static DeviceState *virt_create_aia(RISCVVirtAIAType aia_type, int aia_guests,
+>           }
 >       }
 >   
->       /* Indicate no pending interrupt */
-> @@ -627,6 +649,7 @@ void riscv_cpu_interrupt(CPURISCVState *env)
->       if (env->virt_enabled) {
->           gein = get_field(env->hstatus, HSTATUS_VGEIN);
->           vsgein = (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0;
-> +        irqf = env->hvien & env->hvip & env->vsie;
->       } else {
->           irqf = env->mvien & env->mvip & env->sie;
->       }
-> @@ -1620,6 +1643,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->       uint64_t deleg = async ? env->mideleg : env->medeleg;
->       bool s_injected = env->mvip & (1 << cause) & env->mvien &&
->           !(env->mip & (1 << cause));
-> +    bool vs_injected = env->hvip & (1 << cause) & env->hvien &&
-> +        !(env->mip & (1 << cause));
->       target_ulong tval = 0;
->       target_ulong tinst = 0;
->       target_ulong htval = 0;
-> @@ -1709,12 +1734,13 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->                     riscv_cpu_get_trap_name(cause, async));
->   
->       if (env->priv <= PRV_S && cause < 64 &&
-> -        (((deleg >> cause) & 1) || s_injected)) {
-> +        (((deleg >> cause) & 1) || s_injected || vs_injected)) {
->           /* handle the trap in S-mode */
->           if (riscv_has_ext(env, RVH)) {
->               uint64_t hdeleg = async ? env->hideleg : env->hedeleg;
->   
-> -            if (env->virt_enabled && ((hdeleg >> cause) & 1)) {
-> +            if (env->virt_enabled &&
-> +                (((hdeleg >> cause) & 1) || vs_injected)) {
->                   /* Trap to VS mode */
->                   /*
->                    * See if we need to adjust cause. Yes if its VS mode interrupt
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index c1ca065a81..e165bb5632 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -30,6 +30,7 @@
->   #include "qemu/guest-random.h"
->   #include "qapi/error.h"
->   
-> +
->   /* CSR function table public API */
->   void riscv_get_csr_ops(int csrno, riscv_csr_operations *ops)
->   {
-> @@ -1176,6 +1177,8 @@ static const target_ulong sip_writable_mask = SIP_SSIP | LOCAL_INTERRUPTS;
->   static const target_ulong hip_writable_mask = MIP_VSSIP;
->   static const target_ulong hvip_writable_mask = MIP_VSSIP | MIP_VSTIP |
->                                       MIP_VSEIP | LOCAL_INTERRUPTS;
-> +static const target_ulong hvien_writable_mask = LOCAL_INTERRUPTS;
-> +
->   static const target_ulong vsip_writable_mask = MIP_VSSIP | LOCAL_INTERRUPTS;
->   
->   const bool valid_vm_1_10_32[16] = {
-> @@ -2584,16 +2587,36 @@ static RISCVException rmw_vsie64(CPURISCVState *env, int csrno,
->                                    uint64_t *ret_val,
->                                    uint64_t new_val, uint64_t wr_mask)
->   {
-> +    uint64_t alias_mask = (LOCAL_INTERRUPTS | VS_MODE_INTERRUPTS) &
-> +                            env->hideleg;
-> +    uint64_t nalias_mask = LOCAL_INTERRUPTS & (~env->hideleg & env->hvien);
-> +    uint64_t rval, rval_vs, vsbits;
-> +    uint64_t wr_mask_vsie;
-> +    uint64_t wr_mask_mie;
->       RISCVException ret;
-> -    uint64_t rval, mask = env->hideleg & VS_MODE_INTERRUPTS;
->   
->       /* Bring VS-level bits to correct position */
-> -    new_val = (new_val & (VS_MODE_INTERRUPTS >> 1)) << 1;
-> -    wr_mask = (wr_mask & (VS_MODE_INTERRUPTS >> 1)) << 1;
-> +    vsbits = new_val & (VS_MODE_INTERRUPTS >> 1);
-> +    new_val &= ~(VS_MODE_INTERRUPTS >> 1);
-> +    new_val |= vsbits << 1;
-> +
-> +    vsbits = wr_mask & (VS_MODE_INTERRUPTS >> 1);
-> +    wr_mask &= ~(VS_MODE_INTERRUPTS >> 1);
-> +    wr_mask |= vsbits << 1;
-> +
-> +    wr_mask_mie = wr_mask & alias_mask;
-> +    wr_mask_vsie = wr_mask & nalias_mask;
-> +
-> +    ret = rmw_mie64(env, csrno, &rval, new_val, wr_mask_mie);
-> +
-> +    rval_vs = env->vsie & nalias_mask;
-> +    env->vsie = (env->vsie & ~wr_mask_vsie) | (new_val & wr_mask_vsie);
->   
-> -    ret = rmw_mie64(env, csrno, &rval, new_val, wr_mask & mask);
->       if (ret_val) {
-> -        *ret_val = (rval & mask) >> 1;
-> +        rval &= alias_mask;
-> +        vsbits = rval & VS_MODE_INTERRUPTS;
-> +        rval &= ~VS_MODE_INTERRUPTS;
-> +        *ret_val = rval | (vsbits >> 1) | rval_vs;
->       }
->   
->       return ret;
-> @@ -2806,21 +2829,36 @@ static RISCVException write_stval(CPURISCVState *env, int csrno,
->       return RISCV_EXCP_NONE;
->   }
->   
-> +static RISCVException rmw_hvip64(CPURISCVState *env, int csrno,
-> +                                 uint64_t *ret_val,
-> +                                 uint64_t new_val, uint64_t wr_mask);
-> +
->   static RISCVException rmw_vsip64(CPURISCVState *env, int csrno,
->                                    uint64_t *ret_val,
->                                    uint64_t new_val, uint64_t wr_mask)
->   {
->       RISCVException ret;
->       uint64_t rval, mask = env->hideleg & VS_MODE_INTERRUPTS;
-> +    uint64_t vsbits;
->   
-> -    /* Bring VS-level bits to correct position */
-> -    new_val = (new_val & (VS_MODE_INTERRUPTS >> 1)) << 1;
-> -    wr_mask = (wr_mask & (VS_MODE_INTERRUPTS >> 1)) << 1;
-> +    /* Add virtualized bits into vsip mask. */
-> +    mask |= env->hvien & ~env->hideleg;
->   
-> -    ret = rmw_mip64(env, csrno, &rval, new_val,
-> -                    wr_mask & mask & vsip_writable_mask);
-> +    /* Bring VS-level bits to correct position */
-> +    vsbits = new_val & (VS_MODE_INTERRUPTS >> 1);
-> +    new_val &= ~(VS_MODE_INTERRUPTS >> 1);
-> +    new_val |= vsbits << 1;
-> +    vsbits = wr_mask & (VS_MODE_INTERRUPTS >> 1);
-> +    wr_mask &= ~(VS_MODE_INTERRUPTS >> 1);
-> +    wr_mask |= vsbits << 1;
-> +
-> +    ret = rmw_hvip64(env, csrno, &rval, new_val,
-> +                     wr_mask & mask & vsip_writable_mask);
->       if (ret_val) {
-> -        *ret_val = (rval & mask) >> 1;
-> +        rval &= mask;
-> +        vsbits = rval & VS_MODE_INTERRUPTS;
-> +        rval &= ~VS_MODE_INTERRUPTS;
-> +        *ret_val = rval | (vsbits >> 1);
->       }
->   
->       return ret;
-> @@ -3112,6 +3150,52 @@ static RISCVException write_hedeleg(CPURISCVState *env, int csrno,
->       return RISCV_EXCP_NONE;
->   }
->   
-> +static RISCVException rmw_hvien64(CPURISCVState *env, int csrno,
-> +                                    uint64_t *ret_val,
-> +                                    uint64_t new_val, uint64_t wr_mask)
-> +{
-> +    uint64_t mask = wr_mask & hvien_writable_mask;
-> +
-> +    if (ret_val) {
-> +        *ret_val = env->hvien;
+> -    /* Per-socket M-level APLIC */
+> -    aplic_m = riscv_aplic_create(
+> -        memmap[VIRT_APLIC_M].base + socket * memmap[VIRT_APLIC_M].size,
+> -        memmap[VIRT_APLIC_M].size,
+> +    if (!kvm_enabled()) {
+> +        /* Per-socket M-level APLIC */
+> +        aplic_m = riscv_aplic_create(
+> +                memmap[VIRT_APLIC_M].base + socket * memmap[VIRT_APLIC_M].size,
+> +                memmap[VIRT_APLIC_M].size,
+> +                (msimode) ? 0 : base_hartid,
+> +                (msimode) ? 0 : hart_count,
+> +                VIRT_IRQCHIP_NUM_SOURCES,
+> +                VIRT_IRQCHIP_NUM_PRIO_BITS,
+> +                msimode, true, NULL);
 > +    }
 > +
-> +    env->hvien = (env->hvien & ~mask) | (new_val & mask);
-> +
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException rmw_hvien(CPURISCVState *env, int csrno,
-> +                               target_ulong *ret_val,
-> +                               target_ulong new_val, target_ulong wr_mask)
-> +{
-> +    uint64_t rval;
-> +    RISCVException ret;
-> +
-> +    ret = rmw_hvien64(env, csrno, &rval, new_val, wr_mask);
-> +    if (ret_val) {
-> +        *ret_val = rval;
-> +    }
-> +
-> +    return ret;
-> +}
-> +
-> +static RISCVException rmw_hvienh(CPURISCVState *env, int csrno,
-> +                                   target_ulong *ret_val,
-> +                                   target_ulong new_val, target_ulong wr_mask)
-> +{
-> +    uint64_t rval;
-> +    RISCVException ret;
-> +
-> +    ret = rmw_hvien64(env, csrno, &rval,
-> +        ((uint64_t)new_val) << 32, ((uint64_t)wr_mask) << 32);
-> +    if (ret_val) {
-> +        *ret_val = rval >> 32;
-> +    }
-> +
-> +    return ret;
-> +}
-> +
->   static RISCVException rmw_hideleg64(CPURISCVState *env, int csrno,
->                                       uint64_t *ret_val,
->                                       uint64_t new_val, uint64_t wr_mask)
-> @@ -3157,16 +3241,94 @@ static RISCVException rmw_hidelegh(CPURISCVState *env, int csrno,
->       return ret;
->   }
->   
-> +/*
-> + * The function is written for two use-cases:
-> + * 1- To access hvip csr as is for HS-mode access.
-> + * 2- To access vsip as a combination of hvip, and mip for vs-mode.
-> + *
-> + * Both report bits 2, 6, 10 and 13:63.
-> + * vsip needs to be read-only zero when both hideleg[i] and
-> + * hvien[i] are zero.
-> + */
->   static RISCVException rmw_hvip64(CPURISCVState *env, int csrno,
->                                    uint64_t *ret_val,
->                                    uint64_t new_val, uint64_t wr_mask)
->   {
->       RISCVException ret;
-> +    uint64_t old_hvip;
-> +    uint64_t ret_mip;
-> +
-> +    /*
-> +     * For bits 10, 6 and 2, vsip[i] is an alias of hip[i]. These bits are
-> +     * present in hip, hvip and mip. Where mip[i] is alias of hip[i] and hvip[i]
-> +     * is OR'ed in hip[i] to inject virtual interrupts from hypervisor. These
-> +     * bits are actually being maintained in mip so we read them from there.
-> +     * This way we have a single source of truth and allows for easier
-> +     * implementation.
-> +     *
-> +     * For bits 13:63 we have:
-> +     *
-> +     * hideleg[i]  hvien[i]
-> +     *   0           0      No delegation. vsip[i] readonly zero.
-> +     *   0           1      vsip[i] is alias of hvip[i], sip bypassed.
-> +     *   1           X      vsip[i] is alias of sip[i], hvip bypassed.
-> +     *
-> +     *  alias_mask denotes the bits that come from sip (mip here given we
-> +     *  maintain all bits there). nalias_mask denotes bits that come from
-> +     *  hvip.
-> +     */
-> +    uint64_t alias_mask = (env->hideleg | ~env->hvien) | VS_MODE_INTERRUPTS;
-> +    uint64_t nalias_mask = (~env->hideleg & env->hvien);
-> +    uint64_t wr_mask_hvip;
-> +    uint64_t wr_mask_mip;
-> +
-> +    /*
-> +     * Both alias and non-alias mask remain same for vsip except:
-> +     *  1- For VS* bits if they are zero in hideleg.
-> +     *  2- For 13:63 bits if they are zero in both hideleg and hvien.
-> +     */
-> +    if (csrno == CSR_VSIP) {
-> +        /* zero-out VS* bits that are not delegated to VS mode. */
-> +        alias_mask &= (env->hideleg | ~VS_MODE_INTERRUPTS);
-> +
-> +        /*
-> +         * zero-out 13:63 bits that are zero in both hideleg and hvien.
-> +         * nalias_mask mask can not contain any VS* bits so only second
-> +         * condition applies on it.
-> +         */
-> +        nalias_mask &= (env->hideleg | env->hvien);
-> +        alias_mask &= (env->hideleg | env->hvien);
-> +    }
-> +
-> +    wr_mask_hvip = wr_mask & nalias_mask & hvip_writable_mask;
-> +    wr_mask_mip = wr_mask & alias_mask & hvip_writable_mask;
-> +
-> +    /* Aliased bits, bits 10, 6, 2 need to come from mip. */
-> +    ret = rmw_mip64(env, csrno, &ret_mip, new_val, wr_mask_mip);
-> +    if (ret != RISCV_EXCP_NONE) {
-> +        return ret;
-> +    }
-> +
-> +    old_hvip = env->hvip;
-> +
-> +    if (wr_mask_hvip) {
-> +        env->hvip = (env->hvip & ~wr_mask_hvip) | (new_val & wr_mask_hvip);
-> +
-> +        /*
-> +         * Given hvip is separate source from mip, we need to trigger interrupt
-> +         * from here separately. Normally this happen from riscv_cpu_update_mip.
-> +         */
-> +        riscv_cpu_interrupt(env);
-> +    }
->   
-> -    ret = rmw_mip64(env, csrno, ret_val, new_val,
-> -                    wr_mask & hvip_writable_mask);
->       if (ret_val) {
-> -        *ret_val &= VS_MODE_INTERRUPTS;
-> +        /* Only take VS* bits from mip. */
-> +        ret_mip &= alias_mask;
-> +
-> +        /* Take in non-delegated 13:63 bits from hvip. */
-> +        old_hvip &= nalias_mask;
-> +
-> +        *ret_val = ret_mip | old_hvip;
->       }
->   
->       return ret;
-> @@ -4527,14 +4689,13 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->                             .min_priv_ver = PRIV_VERSION_1_12_0                },
->   
->       /* Virtual Interrupts and Interrupt Priorities (H-extension with AIA) */
-> -    [CSR_HVIEN]       = { "hvien",       aia_hmode, read_zero, write_ignore },
-> +    [CSR_HVIEN]       = { "hvien",       aia_hmode, NULL, NULL, rmw_hvien },
->       [CSR_HVICTL]      = { "hvictl",      aia_hmode, read_hvictl,
->                             write_hvictl                                      },
->       [CSR_HVIPRIO1]    = { "hviprio1",    aia_hmode, read_hviprio1,
->                             write_hviprio1                                    },
->       [CSR_HVIPRIO2]    = { "hviprio2",    aia_hmode, read_hviprio2,
->                             write_hviprio2                                    },
+> +    /* Per-socket S-level APLIC */
+> +    aplic_s = riscv_aplic_create(
+> +        memmap[VIRT_APLIC_S].base + socket * memmap[VIRT_APLIC_S].size,
+> +        memmap[VIRT_APLIC_S].size,
+>           (msimode) ? 0 : base_hartid,
+>           (msimode) ? 0 : hart_count,
+>           VIRT_IRQCHIP_NUM_SOURCES,
+>           VIRT_IRQCHIP_NUM_PRIO_BITS,
+> -        msimode, true, NULL);
 > -
->       /*
->        * VS-Level Window to Indirectly Accessed Registers (H-extension with AIA)
->        */
-> @@ -4549,8 +4710,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->       /* Hypervisor and VS-Level High-Half CSRs (H-extension with AIA) */
->       [CSR_HIDELEGH]    = { "hidelegh",    aia_hmode32, NULL, NULL,
->                             rmw_hidelegh                                      },
-> -    [CSR_HVIENH]      = { "hvienh",      aia_hmode32, read_zero,
-> -                          write_ignore                                      },
-> +    [CSR_HVIENH]      = { "hvienh",      aia_hmode32, NULL, NULL, rmw_hvienh },
->       [CSR_HVIPH]       = { "hviph",       aia_hmode32, NULL, NULL, rmw_hviph },
->       [CSR_HVIPRIO1H]   = { "hviprio1h",   aia_hmode32, read_hviprio1h,
->                             write_hviprio1h                                   },
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index dd7bdbb691..3fff230a1c 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -92,6 +92,8 @@ static const VMStateDescription vmstate_hyper = {
->           VMSTATE_UINTTL(env.hgatp, RISCVCPU),
->           VMSTATE_UINTTL(env.hgeie, RISCVCPU),
->           VMSTATE_UINTTL(env.hgeip, RISCVCPU),
-> +        VMSTATE_UINT64(env.hvien, RISCVCPU),
-> +        VMSTATE_UINT64(env.hvip, RISCVCPU),
->           VMSTATE_UINT64(env.htimedelta, RISCVCPU),
->           VMSTATE_UINT64(env.vstimecmp, RISCVCPU),
+> -    if (aplic_m) {
+> -        /* Per-socket S-level APLIC */
+> -        riscv_aplic_create(
+> -            memmap[VIRT_APLIC_S].base + socket * memmap[VIRT_APLIC_S].size,
+> -            memmap[VIRT_APLIC_S].size,
+> -            (msimode) ? 0 : base_hartid,
+> -            (msimode) ? 0 : hart_count,
+> -            VIRT_IRQCHIP_NUM_SOURCES,
+> -            VIRT_IRQCHIP_NUM_PRIO_BITS,
+> -            msimode, false, aplic_m);
+> -    }
+> +        msimode, false, aplic_m);
 >   
-> @@ -106,6 +108,7 @@ static const VMStateDescription vmstate_hyper = {
->           VMSTATE_UINTTL(env.vstval, RISCVCPU),
->           VMSTATE_UINTTL(env.vsatp, RISCVCPU),
->           VMSTATE_UINTTL(env.vsiselect, RISCVCPU),
-> +        VMSTATE_UINT64(env.vsie, RISCVCPU),
+> -    return aplic_m;
+> +    return kvm_enabled() ? aplic_s : aplic_m;
+>   }
 >   
->           VMSTATE_UINTTL(env.mtval2, RISCVCPU),
->           VMSTATE_UINTTL(env.mtinst, RISCVCPU),
+>   static void create_platform_bus(RISCVVirtState *s, DeviceState *irqchip)
 
