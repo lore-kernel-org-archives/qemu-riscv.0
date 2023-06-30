@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF37EEB64D7
-	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Jun 2023 09:14:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFBA1EB64D7
+	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Jun 2023 09:14:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qFABp-00073x-5r; Fri, 30 Jun 2023 05:13:17 -0400
+	id 1qFABs-00075a-TR; Fri, 30 Jun 2023 05:13:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1qFABn-00072t-5U
- for qemu-riscv@nongnu.org; Fri, 30 Jun 2023 05:13:15 -0400
-Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630])
+ id 1qFABp-00073w-3f
+ for qemu-riscv@nongnu.org; Fri, 30 Jun 2023 05:13:17 -0400
+Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1qFABk-0000AU-8y
- for qemu-riscv@nongnu.org; Fri, 30 Jun 2023 05:13:14 -0400
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-98d34f1e54fso178356666b.2
- for <qemu-riscv@nongnu.org>; Fri, 30 Jun 2023 02:13:11 -0700 (PDT)
+ id 1qFABm-0000Ak-LZ
+ for qemu-riscv@nongnu.org; Fri, 30 Jun 2023 05:13:16 -0400
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-51d93425853so1717901a12.1
+ for <qemu-riscv@nongnu.org>; Fri, 30 Jun 2023 02:13:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=vrull.eu; s=google; t=1688116390; x=1690708390;
+ d=vrull.eu; s=google; t=1688116392; x=1690708392;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IX/I0sfGCUuRLUYWiDDex/hhFLmikHItMDR4zyKdTtk=;
- b=RegFUmrZQCeU/NWlmk/37iPoufyoHN3bEaYuRS09GAcW66ukUJnIoUxGRsbecA+Mnl
- jOo/RbFzAGuJ7b0nJJRqI14DM/hilNtWZxSmzi+GZqiiBlUwK40/PfBryWj8Ohgt3sIN
- l9rA9IIRb1BaF2gY0+bm5cf2Uij0ol2zoXoDQW+GB5kzaRdlmjqRtNlNgxvsoVbTTEaL
- fx3WFag+/MyM8w++BzwKVyOV5Kthdg6/AaL/rXZ94BvQJmU8gYHe4NPpM1L3xEghRLY6
- L5UqdWCAv/1gmYRKRggU1SqOsOeRp4FeckBL1eLuuC48O3sxU1u/ri0gJ6du2FECoNJz
- lsrg==
+ bh=427hG0VZLBAHC0MKH9qijIzaZ3qYnVMMsCFX2foNeKg=;
+ b=hQlp5dU31jnGajW1E3kJv7IitGXmtEUIOzW1kn+8qOBaxnNzSo5dtDLIo4k1KTB0vy
+ AiHvmZM+zVY4P/5ekHupfOd6lVS9IWUqr5juIPZS+LAyigOKmwVodSABTy56nvyiRWmp
+ dIvM5MVYLPQUaIBQiUwcIGeS0/3xGuu9FnXiFU0eXKAsRrgl7AHHI+T3gjvyAqQTpGER
+ FBT/NkZG6GvUvRIqNQwJqobCbG/9uQh4/6Zn5oO5wp0fY/fTlUqpnI0Qm/NfVVWGil+q
+ ASE7TxVncEXUrRnsp8AZXYk090faXBUO9R7xPBIS4U1O9d+l3II0UD5+Efrw3e05fgYR
+ pzyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688116390; x=1690708390;
+ d=1e100.net; s=20221208; t=1688116392; x=1690708392;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IX/I0sfGCUuRLUYWiDDex/hhFLmikHItMDR4zyKdTtk=;
- b=EINQcV16ZQv/qEWXKYgIGnN3oqyVWCIWARsFE0OFOYrOt3LRGzRK5lEJJv7cSjZ4aK
- qst5epqRBpCdiMky8CyLrs/9HLzuZSChNha/uV72/Sm5SuW33oxRzim++iUXQu/ROGFA
- L9W0AitTKD1pck9uN/AV+9/A/PFFQ6uaxUP1ESqnHBXH3kM69VdHovs+M+JZaiohxTKL
- SzZWOVSCshDh48a+EZY1UPA2FCTwXKN1eXRqTA5gnEo9KkozF8+EP0djHrPC4ImOOAil
- pE7bP4YzIkhlFZvdPPvmMmFfthxS4ItEXDEoRDwmyBxT7zLYHRJ6WMrV9TgO88Xevh1F
- xPZQ==
-X-Gm-Message-State: ABy/qLbLeBQZH7hwOs8bFrZalvMWbu167IKfxUUsHOOqAXFjDv2vtuH0
- iwpDlvaacVpmhsDS1NL9Rm9ffTBI2q9zUsnO8OM=
-X-Google-Smtp-Source: ACHHUZ6mtKQOYeufzu+QMauFcQfkd/H6lV/ejPn22JvH5SgZlQirJWEMPikyf6mQOnFw6cMctE7DYQ==
-X-Received: by 2002:a17:907:20a4:b0:982:80b7:ad4c with SMTP id
- pw4-20020a17090720a400b0098280b7ad4cmr1427882ejb.16.1688116390554; 
- Fri, 30 Jun 2023 02:13:10 -0700 (PDT)
+ bh=427hG0VZLBAHC0MKH9qijIzaZ3qYnVMMsCFX2foNeKg=;
+ b=fkM/alC4A4jUDDHFg8/3VDl1RW/6tboaHbygZrKE/9U5tT1+GOZl67xzIFCQyE1geD
+ kned1q/Y/Xq1/FcgFjKxx/CSdEr4VUJvPPkVjdsMHNkPxx93U8VOG1iEhLbPfFJe1A5n
+ 46daFldZX7Y3S3VTs5yTaQLnDVbaPc+41Q2Y7rG4IsJDMnGOVvPg44fBXuFZyuV0kt7G
+ 8JI5hB0Vs7qf5tUrNFjcTH8ijF4JpgwbniA+UsMIPVFtNZfMhR1lNoB7aBBUlFMZAzBP
+ dH2+pugniMDw1wlWbG1dDIr4+5cuTkJdZW2yjuWixe0PsOmY6/GkEiRKEP0Xnf1Qp71z
+ +sGA==
+X-Gm-Message-State: ABy/qLbupspp/OOWtg0kXmTHR+k2A3eiWcRmB3JojbG/9jZ3GhlgTT+I
+ MBY5okNdSvmcfkx4eWV99seSiLdXL0q3LWDRSe0=
+X-Google-Smtp-Source: APBJJlGfoCrjhY0Q908NQOP7qVm7zR7qzmpnSc8auUaPWZX66O8tXr+OHqWjOGZu2N//LkuQSSWaJQ==
+X-Received: by 2002:aa7:c253:0:b0:51d:a237:d45b with SMTP id
+ y19-20020aa7c253000000b0051da237d45bmr1244097edo.36.1688116391763; 
+ Fri, 30 Jun 2023 02:13:11 -0700 (PDT)
 Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
  [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
- lc1-20020a170906f90100b00988e953a586sm7869892ejb.61.2023.06.30.02.13.09
+ lc1-20020a170906f90100b00988e953a586sm7869892ejb.61.2023.06.30.02.13.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Jun 2023 02:13:09 -0700 (PDT)
+ Fri, 30 Jun 2023 02:13:11 -0700 (PDT)
 From: Christoph Muellner <christoph.muellner@vrull.eu>
 To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
@@ -70,18 +70,18 @@ To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Rob Bradford <rbradford@rivosinc.com>
 Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>
-Subject: [PATCH v4 2/3] target/riscv: Use float64_to_int64_modulo for
+Subject: [PATCH v4 3/3] DO NOT MERGE: tests/tcg/riscv64: Add test for
  fcvtmod.w.d
-Date: Fri, 30 Jun 2023 11:13:02 +0200
-Message-ID: <20230630091303.1676486-3-christoph.muellner@vrull.eu>
+Date: Fri, 30 Jun 2023 11:13:03 +0200
+Message-ID: <20230630091303.1676486-4-christoph.muellner@vrull.eu>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230630091303.1676486-1-christoph.muellner@vrull.eu>
 References: <20230630091303.1676486-1-christoph.muellner@vrull.eu>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::630;
- envelope-from=christoph.muellner@vrull.eu; helo=mail-ej1-x630.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-ed1-x52e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,116 +106,399 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Christoph Müllner <christoph.muellner@vrull.eu>
 
-For the most part we can use the new generic routine,
-though exceptions need some post-processing.
+This patch introduces a test for Zfa's fcvtmod.w.d instruction.
+The test cases test for correct results and flag behaviour.
+Note, that the Zfa specification requires fcvtmod's flag behaviour
+to be identical to a fcvt with the same operands (which is also
+tested).
+
+DO NOT MERGE!!!
+Although this test works just fine, it requires a toolchain
+that supports the Zfa extension. Unless this is available
+this patch cannot be merged.
+DO NOT MERGE!!!
 
 Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
 ---
- target/riscv/fpu_helper.c | 78 ++++++++++++++-------------------------
- 1 file changed, 27 insertions(+), 51 deletions(-)
+ tests/tcg/riscv64/Makefile.target |   6 +
+ tests/tcg/riscv64/test-fcvtmod.c  | 354 ++++++++++++++++++++++++++++++
+ 2 files changed, 360 insertions(+)
+ create mode 100644 tests/tcg/riscv64/test-fcvtmod.c
 
-diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
-index 289b3bbea5..0f897cf072 100644
---- a/target/riscv/fpu_helper.c
-+++ b/target/riscv/fpu_helper.c
-@@ -482,70 +482,46 @@ target_ulong helper_fcvt_w_d(CPURISCVState *env, uint64_t frs1)
-     return float64_to_int32(frs1, &env->fp_status);
- }
- 
-+/* T floating (double) */
-+static inline float64 t_to_float64(uint64_t a)
+diff --git a/tests/tcg/riscv64/Makefile.target b/tests/tcg/riscv64/Makefile.target
+index 9973ba3b5f..54c3d83458 100644
+--- a/tests/tcg/riscv64/Makefile.target
++++ b/tests/tcg/riscv64/Makefile.target
+@@ -9,3 +9,9 @@ TESTS += noexec
+ TESTS += test-noc
+ test-noc: LDFLAGS = -nostdlib -static
+ run-test-noc: QEMU_OPTS += -cpu rv64,c=false
++
++# Test for fcvtmod
++TESTS += test-fcvtmod
++test-fcvtmod: CFLAGS += -march=rv64imafdc_zfa
++test-fcvtmod: LDFLAGS = -nostdlib -static
++run-test-fcvtmod: QEMU_OPTS += -cpu rv64,d=true,Zfa=true
+diff --git a/tests/tcg/riscv64/test-fcvtmod.c b/tests/tcg/riscv64/test-fcvtmod.c
+new file mode 100644
+index 0000000000..c124459314
+--- /dev/null
++++ b/tests/tcg/riscv64/test-fcvtmod.c
+@@ -0,0 +1,354 @@
++#include <stdio.h>
++#include <stddef.h>
++#include <stdint.h>
++
++#define FFLAG_NX_POS 0 /* inexact */
++#define FFLAG_UF_POS 1 /* underflow */
++#define FFLAG_OF_POS 2 /* overflow */
++#define FFLAG_DZ_POS 3 /* divide by zero */
++#define FFLAG_NV_POS 4 /* invalid operation */
++#define FFLAG_DN_POS 5 /* input denormal (not defined for RISC-V) */
++
++#define FFLAG_NV (1<<FFLAG_NV_POS)
++#define FFLAG_DZ (1<<FFLAG_DZ_POS)
++#define FFLAG_OF (1<<FFLAG_OF_POS)
++#define FFLAG_UF (1<<FFLAG_UF_POS)
++#define FFLAG_NX (1<<FFLAG_NX_POS)
++#define FFLAG_DN (1<<FFLAG_DN_POS)
++
++typedef struct fp64_fcvt_fcvtmod_testcase {
++    const char* name;
++    union {
++        uint64_t inp_lu;
++        double inp_lf;
++    };
++    uint64_t exp_fcvt;
++    uint8_t exp_fcvt_fflags;
++    uint64_t exp_fcvtmod;
++    uint8_t exp_fcvtmod_fflags;
++} fp64_fcvt_fcvtmod_testcase_t;
++
++void print_fflags(uint8_t fflags)
 +{
-+    /* Memory format is the same as float64 */
-+    CPU_DoubleU r;
-+    r.ll = a;
-+    return r.d;
++    int set = 0;
++
++    if (fflags == 0) {
++        printf("-");
++        return;
++    }
++
++    if (fflags & FFLAG_NV) {
++        printf("%sFFLAG_NV", set ? " | " : "");
++        set = 1;
++    }
++    if (fflags & FFLAG_DZ) {
++        printf("%sFFLAG_DZ", set ? " | " : "");
++        set = 1;
++    }
++    if (fflags & FFLAG_OF) {
++        printf("%sFFLAG_OF", set ? " | " : "");
++        set = 1;
++    }
++    if (fflags & FFLAG_UF) {
++        printf("%sFFLAG_UF", set ? " | " : "");
++        set = 1;
++    }
++    if (fflags & FFLAG_NX) {
++        printf("%sFFLAG_NX", set ? " | " : "");
++        set = 1;
++    }
++    if (fflags & FFLAG_DN) {
++        printf("%sFFLAG_DN", set ? " | " : "");
++        set = 1;
++    }
 +}
 +
- /*
-  * Implement float64 to int32_t conversion without saturation;
-  * the result is supplied modulo 2^32.
-  * Rounding mode is RTZ.
-  * Flag behaviour identical to fcvt.w.d (see F specification).
-- *
-- * Similar conversion of this function can be found in
-- * target/arm/vfp_helper.c (fjcvtzs): f64->i32 with other fflag behaviour, and
-- * target/alpha/fpu_helper.c (do_cvttq): f64->i64 with support for several
-- * rounding modes and different fflag behaviour.
-  */
- uint64_t helper_fcvtmod_w_d(CPURISCVState *env, uint64_t value)
- {
-     float_status *status = &env->fp_status;
--    uint32_t sign = extract64(value, 63, 1);
--    uint32_t exp = extract64(value, 52, 11);
--    uint64_t frac = extract64(value, 0, 52);
--
--    /* Handle the special cases first. */
--    if (exp == 0) {
--        if (unlikely(frac != 0)) {
--            /* Subnormal numbers. */
--            float_raise(float_flag_inexact, status);
--            return 0;
--        } else {
--            /* +0 or -0 */
--            return 0;
--	}
--    } else if (exp == 0x7ff) {
--        /* NaN (frac != 0) or INF (frac == 0). */
--        float_raise(float_flag_invalid, status);
--	return 0;
--    }
--
--    /* Normal value. */
--    int true_exp = exp - 1023;
--    int shift = true_exp - 52;
--    uint64_t true_frac = frac | 1ull << 52;
--    uint64_t ret;
--
--    /* Shift the fraction into place and set NX flag. */
--    if (shift >= 64 || shift <= -64) {
--            /* The fraction is shifted out entirely. */
--            ret = 0;
--            float_raise(float_flag_inexact, status);
--    } else if (shift >= 0) {
--        ret = true_frac << shift;
--        /* Raise NX if bit 52 got shifted out. */
--        if (shift >= 12)
--            float_raise(float_flag_inexact, status);
--    } else { /* shift < 0 */
--        ret = true_frac >> -shift;
--        /* Raise NX if bits got shifted out. */
--        if ((ret << -shift) != true_frac)
--            float_raise(float_flag_inexact, status);
-+    int64_t ret;
-+    int32_t ret32;
-+    uint32_t e_old, e_new;
-+    float64 fvalue;
++/* Clear all FP flags. */
++static inline void clear_fflags()
++{
++    __asm__ __volatile__("fsflags zero");
++}
 +
-+    e_old = get_float_exception_flags(status);
-+    set_float_exception_flags(0, status);
-+    fvalue = t_to_float64(value);
-+    ret = float64_to_int32_modulo(fvalue, float_round_to_zero, status);
-+    e_new = get_float_exception_flags(status);
++/* Read all FP flags. */
++static inline uint8_t get_fflags()
++{
++    uint64_t v;
++    __asm__ __volatile__("frflags %0" : "=r"(v));
++    return (uint8_t)v;
++}
 +
-+    /* Map the flags to the specified ones. */
-+    if (e_new & float_flag_inexact) {
-+        e_new = float_flag_inexact;
-+    } else if (e_new) {
-+        e_new = float_flag_invalid;
-     }
- 
--    /* Honor the sign bit. */
--    if (sign) {
--        ret = -ret;
--    }
-+    set_float_exception_flags(e_old | e_new, status);
- 
-     /* Truncate to 32-bits. */
--    int32_t ret32 = (int32_t)ret;
-+    ret32 = (int32_t)ret;
- 
-     /* If the truncation drops bits then raise NV. */
-     if ((uint64_t)ret32 != ret)
++/* Move input value (without conversations) into an FP register. */
++static inline double do_fmv_d_x(uint64_t inp)
++{
++    double fpr;
++    __asm__ __volatile__("fmv.d.x %0, %1" : "=fp"(fpr) : "r"(inp));
++    return fpr;
++}
++
++static inline uint64_t do_fcvt_w_d(uint64_t inp, uint8_t *fflags)
++{
++    double fpr = do_fmv_d_x(inp);
++
++    clear_fflags();
++
++    uint64_t ret;
++    __asm__ __volatile__("fcvt.w.d %0, %1, rtz"
++                         : "=r"(ret) : "fp"(fpr));
++
++    *fflags = get_fflags();
++
++    return ret;
++}
++
++static inline uint64_t do_fcvtmod_w_d(uint64_t inp, uint8_t *fflags)
++{
++    double fpr = do_fmv_d_x(inp);
++
++    clear_fflags();
++
++    uint64_t ret;
++    __asm__ __volatile__("fcvtmod.w.d %0, %1, rtz"
++                         : "=r"(ret) : "fp"(fpr));
++
++    *fflags = get_fflags();
++
++    return ret;
++}
++
++static const fp64_fcvt_fcvtmod_testcase_t tests[] = {
++    /* Zero (exp=0, frac=0) */
++    { .name = "+0.0",
++      .inp_lf = 0x0p0,
++      .exp_fcvt = 0x0000000000000000,
++      .exp_fcvt_fflags = 0,
++      .exp_fcvtmod = 0x0000000000000000,
++      .exp_fcvtmod_fflags = 0 },
++    { .name = "-0.0",
++      .inp_lf = -0x0p0,
++      .exp_fcvt = 0x0000000000000000,
++      .exp_fcvt_fflags = 0,
++      .exp_fcvtmod = 0x0000000000000000,
++      .exp_fcvtmod_fflags = 0 },
++
++    /* Subnormal: exp=0 frac!=0 */
++    { .name = "Subnormal frac=1",
++      .inp_lu = 0x0000000000000001,
++      .exp_fcvt = 0x0000000000000000,
++      .exp_fcvt_fflags = FFLAG_NX,
++      .exp_fcvtmod = 0,
++      .exp_fcvtmod_fflags = FFLAG_NX },
++    { .name = "Subnormal frac=0xf..f",
++      .inp_lu = 0x0000ffffffffffff,
++      .exp_fcvt = 0x0000000000000000,
++      .exp_fcvt_fflags = FFLAG_NX,
++      .exp_fcvtmod = 0,
++      .exp_fcvtmod_fflags = FFLAG_NX },
++    { .name = "Neg subnormal frac=1",
++      .inp_lu = 0x0000000000000001,
++      .exp_fcvt = 0x0000000000000000,
++      .exp_fcvt_fflags = FFLAG_NX,
++      .exp_fcvtmod = 0,
++      .exp_fcvtmod_fflags = FFLAG_NX },
++    { .name = "Neg subnormal frac=0xf..f",
++      .inp_lu = 0x8000ffffffffffff,
++      .exp_fcvt = 0x0000000000000000,
++      .exp_fcvt_fflags = FFLAG_NX,
++      .exp_fcvtmod = 0,
++      .exp_fcvtmod_fflags = FFLAG_NX },
++
++    /* Infinity: exp=0x7ff, frac=0 */
++    { .name = "+INF",
++      .inp_lu = 0x7ff0000000000000,
++      .exp_fcvt = 0x000000007fffffff, /* int32 max */
++      .exp_fcvt_fflags = FFLAG_NV,
++      .exp_fcvtmod = 0,
++      .exp_fcvtmod_fflags = FFLAG_NV },
++    { .name = "-INF",
++      .inp_lu = 0xfff0000000000000,
++      .exp_fcvt = 0xffffffff80000000, /* int32 min */
++      .exp_fcvt_fflags = FFLAG_NV,
++      .exp_fcvtmod = 0,
++      .exp_fcvtmod_fflags = FFLAG_NV },
++
++    /* NaN: exp=7ff, frac!=0 */
++    { .name = "canonical NaN",
++      .inp_lu = 0x7ff8000000000000,
++      .exp_fcvt = 0x000000007fffffff, /* int32 max */
++      .exp_fcvt_fflags = FFLAG_NV,
++      .exp_fcvtmod = 0,
++      .exp_fcvtmod_fflags = FFLAG_NV },
++    { .name = "non-canonical NaN",
++      .inp_lu = 0x7ff8000000100000,
++      .exp_fcvt = 0x000000007fffffff, /* int32 min */
++      .exp_fcvt_fflags = FFLAG_NV,
++      .exp_fcvtmod = 0,
++      .exp_fcvtmod_fflags = FFLAG_NV },
++
++    /* Normal numbers: exp!=0, exp!=7ff */
++    { .name = "+smallest normal value",
++      .inp_lu = 0x0010000000000000,
++      .exp_fcvt = 0,
++      .exp_fcvt_fflags = FFLAG_NX,
++      .exp_fcvtmod = 0,
++      .exp_fcvtmod_fflags = FFLAG_NX },
++    { .name = "-smallest normal value",
++      .inp_lu = 0x8010000000000000,
++      .exp_fcvt = 0,
++      .exp_fcvt_fflags = FFLAG_NX,
++      .exp_fcvtmod = 0,
++      .exp_fcvtmod_fflags = FFLAG_NX },
++
++    { .name = "+0.5",
++      .inp_lf = 0x1p-1,
++      .exp_fcvt = 0,
++      .exp_fcvt_fflags = FFLAG_NX,
++      .exp_fcvtmod = 0,
++      .exp_fcvtmod_fflags = FFLAG_NX },
++    { .name = "-0.5",
++      .inp_lf = -0x1p-1,
++      .exp_fcvt = 0,
++      .exp_fcvt_fflags = FFLAG_NX,
++      .exp_fcvtmod = 0,
++      .exp_fcvtmod_fflags = FFLAG_NX },
++
++    { .name = "+value just below 1.0",
++      .inp_lu = 0x3fefffffffffffff,
++      .exp_fcvt = 0,
++      .exp_fcvt_fflags = FFLAG_NX,
++      .exp_fcvtmod = 0,
++      .exp_fcvtmod_fflags = FFLAG_NX },
++    { .name = "-value just above -1.0",
++      .inp_lu = 0xbfefffffffffffff,
++      .exp_fcvt = 0,
++      .exp_fcvt_fflags = FFLAG_NX,
++      .exp_fcvtmod = 0,
++      .exp_fcvtmod_fflags = FFLAG_NX },
++
++    { .name = "+1.0",
++      .inp_lf = 0x1p0,
++      .exp_fcvt = 0x0000000000000001,
++      .exp_fcvt_fflags = 0,
++      .exp_fcvtmod = 0x0000000000000001,
++      .exp_fcvtmod_fflags = 0 },
++    { .name = "-1.0",
++      .inp_lf = -0x1p0,
++      .exp_fcvt = 0xffffffffffffffff,
++      .exp_fcvt_fflags = 0,
++      .exp_fcvtmod = 0xffffffffffffffff,
++      .exp_fcvtmod_fflags = 0 },
++
++    { .name = "+1.5",
++      .inp_lu = 0x3ff8000000000000,
++      .exp_fcvt = 1,
++      .exp_fcvt_fflags = FFLAG_NX,
++      .exp_fcvtmod = 1,
++      .exp_fcvtmod_fflags = FFLAG_NX },
++    { .name = "-1.5",
++      .inp_lu = 0xbff8000000000000,
++      .exp_fcvt = 0xffffffffffffffff,
++      .exp_fcvt_fflags = FFLAG_NX,
++      .exp_fcvtmod = 0xffffffffffffffff,
++      .exp_fcvtmod_fflags = FFLAG_NX },
++
++    { .name = "+max int32 (2147483647)",
++      .inp_lu = 0x41dfffffffc00000,
++      .exp_fcvt = 0x000000007fffffff,
++      .exp_fcvt_fflags = 0,
++      .exp_fcvtmod = 0x000000007fffffff,
++      .exp_fcvtmod_fflags = 0 },
++    { .name = "+max int32 +1 (2147483648)",
++      .inp_lf = 0x1p31,
++      .exp_fcvt = 0x000000007fffffff,
++      .exp_fcvt_fflags = FFLAG_NV,
++      .exp_fcvtmod = (uint64_t)-2147483648l, /* int32 min */
++      .exp_fcvtmod_fflags = FFLAG_NV },
++    { .name = "+max int32 +2 (2147483649)",
++      .inp_lu = 0x41e0000000200000,
++      .exp_fcvt = 0x000000007fffffff,
++      .exp_fcvt_fflags = FFLAG_NV,
++      .exp_fcvtmod = (uint64_t)-2147483647l, /* int32 min +1 */
++      .exp_fcvtmod_fflags = FFLAG_NV },
++
++    { .name = "-max int32 (-2147483648)",
++      .inp_lf = -0x1p31,
++      .exp_fcvt = 0xffffffff80000000,
++      .exp_fcvt_fflags = 0,
++      .exp_fcvtmod = 0xffffffff80000000,
++      .exp_fcvtmod_fflags = 0 },
++    { .name = "-max int32 -1 (-2147483649)",
++      .inp_lf = -0x1.00000002p+31,
++      .exp_fcvt = 0xffffffff80000000,
++      .exp_fcvt_fflags = FFLAG_NV,
++      .exp_fcvtmod = 2147483647, /* int32 max */
++      .exp_fcvtmod_fflags = FFLAG_NV },
++    { .name = "-max int32 -2 (-2147483650)",
++      .inp_lf = -0x1.00000004p+31,
++      .exp_fcvt = 0xffffffff80000000,
++      .exp_fcvt_fflags = FFLAG_NV,
++      .exp_fcvtmod = 2147483646, /* int32 max -1 */
++      .exp_fcvtmod_fflags = FFLAG_NV },
++};
++
++int run_fcvtmod_tests()
++{
++    uint64_t act_fcvt;
++    uint8_t act_fcvt_fflags;
++    uint64_t act_fcvtmod;
++    uint8_t act_fcvtmod_fflags;
++
++    for (size_t i = 0; i < sizeof(tests)/sizeof(tests[0]); i++) {
++        const fp64_fcvt_fcvtmod_testcase_t *t = &tests[i];
++	//printf("Test %zu (%s): ", i, t->name);
++
++        act_fcvt = do_fcvt_w_d(t->inp_lu, &act_fcvt_fflags);
++        int fcvt_correct = act_fcvt == t->exp_fcvt &&
++                    act_fcvt_fflags == t->exp_fcvt_fflags;
++        act_fcvtmod = do_fcvtmod_w_d(t->inp_lu, &act_fcvtmod_fflags);
++        int fcvtmod_correct = act_fcvtmod == t->exp_fcvtmod &&
++                       act_fcvtmod_fflags == t->exp_fcvtmod_fflags;
++
++        if (fcvt_correct && fcvtmod_correct) {
++            //printf("pass\n");
++            continue;
++        }
++
++        printf("FAIL\n");
++
++        double fpr = do_fmv_d_x(t->inp_lu);
++        printf("inp_lu: 0x%016lx == %lf\n", t->inp_lu, fpr);
++        printf("inp_lf: %lf\n", t->inp_lf);
++
++        uint32_t sign = (t->inp_lu >> 63);
++        uint32_t exp = (uint32_t)(t->inp_lu >> 52) & 0x7ff;
++        uint64_t frac = t->inp_lu & 0xfffffffffffffull; /* significand */
++        int true_exp = exp - 1023;
++        int shift = true_exp - 52;
++        uint64_t true_frac = frac | 1ull << 52;
++
++        printf("sign=%d, exp=0x%03x, frac=0x%012lx\n", sign, exp, frac);
++        printf("true_exp=%d, shift=%d, true_frac=0x%016lx\n", true_exp, shift, true_frac);
++
++        if (!fcvt_correct) {
++            printf("act_fcvt: 0x%016lx == %li\n", act_fcvt, act_fcvt);
++            printf("exp_fcvt: 0x%016lx == %li\n", t->exp_fcvt, t->exp_fcvt);
++            printf("act_fcvt_fflags: "); print_fflags(act_fcvt_fflags); printf("\n");
++            printf("exp_fcvt_fflags: "); print_fflags(t->exp_fcvt_fflags); printf("\n");
++        }
++
++        if (!fcvtmod_correct) {
++            printf("act_fcvtmod: 0x%016lx == %li\n", act_fcvtmod, act_fcvtmod);
++            printf("exp_fcvtmod: 0x%016lx == %li\n", t->exp_fcvtmod, t->exp_fcvtmod);
++            printf("act_fcvtmod_fflags: "); print_fflags(act_fcvtmod_fflags); printf("\n");
++            printf("exp_fcvtmod_fflags: "); print_fflags(t->exp_fcvtmod_fflags); printf("\n");
++        }
++
++        return 1;
++    }
++
++    return 0;
++}
++
++int main()
++{
++    return run_fcvtmod_tests();
++}
 -- 
 2.41.0
 
