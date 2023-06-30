@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4703CEB64DA
-	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Jun 2023 12:15:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9968EB64D7
+	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Jun 2023 12:16:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qFD1t-0007n8-F9; Fri, 30 Jun 2023 08:15:13 -0400
+	id 1qFD2N-0007zc-BR; Fri, 30 Jun 2023 08:15:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qFD1s-0007me-8G
- for qemu-riscv@nongnu.org; Fri, 30 Jun 2023 08:15:12 -0400
-Received: from mail-oa1-x31.google.com ([2001:4860:4864:20::31])
+ id 1qFD2H-0007sp-15
+ for qemu-riscv@nongnu.org; Fri, 30 Jun 2023 08:15:40 -0400
+Received: from mail-oo1-xc33.google.com ([2607:f8b0:4864:20::c33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qFD1q-000271-By
- for qemu-riscv@nongnu.org; Fri, 30 Jun 2023 08:15:11 -0400
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-1b0156a1c4bso1343185fac.1
- for <qemu-riscv@nongnu.org>; Fri, 30 Jun 2023 05:15:10 -0700 (PDT)
+ id 1qFD2D-0002Gs-Bk
+ for qemu-riscv@nongnu.org; Fri, 30 Jun 2023 08:15:35 -0400
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-55e0706af99so1181967eaf.1
+ for <qemu-riscv@nongnu.org>; Fri, 30 Jun 2023 05:15:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1688127309; x=1690719309;
+ d=ventanamicro.com; s=google; t=1688127331; x=1690719331;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=RPOxu5tbYzqG9w+IoRV2cSiWD+SezI9JB4zsAoVqy8w=;
- b=ZrR1cCM6P0ceGc+g6/DJmRA+E6ghenN2knkqcj41vJuoPHJB+S1HAy3Yqmsw9yVbxt
- F9nVPIH/wxpbFgsKo3yogxjxcdXEO+Px2532i8GwIx2whF0Ip43EKIfr0mHVWB4x0v+o
- +GqoAO+vURi5zfkzPUTJmbHnVtK1A/K9vXqrtciSW5Myy+qhCCrYrF9GbzswfKeN+KE0
- lqervdczibHxFzSkywO0l7W8J/mM5Y1rQSLhgwtYsl2GKhI9Yk98BhPK+w37uh95sRYL
- /O1G+slXEzh1q1RmDgSWt0x/c+sc4I3Yl/UvCJQVrf4CBBATG+0/EbH/LU/zHx6y5Sum
- D9qg==
+ bh=XOz68jeNNCrkM4h/QTA8gjG0fkB2qRFff6RjnTf1moQ=;
+ b=EzmY/jQYjMvL81WBFEwC66OaxEwDC2G24jRhzFCfXLuEIhQONYSMpdtNA6r7wqtZ0W
+ CwOi78qdeHrMis43OESolGc+3iGTVuvdoB3iIoOJqZ6hqISj0F23ao+7WCqD0ayuhBbg
+ K3gs+hUFzah/3z3KbCAiEm+uZpTWnNZYaUGfRmMChKmO9B2zUAG2nMF3QK/SP2o/DzM7
+ p51eJ1kpr1r8ZlfqFBvgVfen5oaogtFI3wGUIvCl+moMEqfa8bKNi4MA+ZeLc04kFXrA
+ cVovclZwEYoyPOgrZmhrHmodCwh5Ykry/MOl2zHhbZqFBbEcz9yjUvELBNGMCOLUjZDg
+ mzEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688127309; x=1690719309;
+ d=1e100.net; s=20221208; t=1688127331; x=1690719331;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=RPOxu5tbYzqG9w+IoRV2cSiWD+SezI9JB4zsAoVqy8w=;
- b=iIFrIl2cBGC+q/P+fIjuaNVd1E8+GHJ/W9zLhUK/VlOgbI6p9lIjAj0o6dwpgtZ7VT
- no3KDu5NU7Si4yaIjFKZ4CiJaZxtLVzB5qHrZv/OUlGksiV68U7IxsqFrIAmM2lNL+4M
- MGCMEnoW7wg2S0Zx+vSGvT76y1JgmCgpWMev/3gzOGBE2T2XlXSWYeyDmRqCOTJJyJXv
- J8ix5Xg6wLWbLXYE1uqUPT+Y50XPbCWrfWO7tBwjXGuT1beaRE3nHM4Tg+ZEsIOKO4l8
- SskOElyaA4CVtnsZta39UkFGV4FACKeQf4aMgqpAAkbSZ3aQU8u0CCfi98t4MfWqxSal
- LVPQ==
-X-Gm-Message-State: ABy/qLY6iv5C5P9aGDF134Zn7RiFM04uJQpKNzDBz3k4o9ODgCcpoA0R
- yNckYbgh9EefzatnicY0bz2FyA==
-X-Google-Smtp-Source: ACHHUZ6SflSCc99VQuoQy1Ix9TKwImPTmhyZROGNx7OVhhxPx6zCf5+hvMqQ4R8YEywCqrxeY9VTQw==
-X-Received: by 2002:a05:6871:8f85:b0:1b0:805:8670 with SMTP id
- aa5-20020a0568718f8500b001b008058670mr2321158oac.19.1688127309158; 
- Fri, 30 Jun 2023 05:15:09 -0700 (PDT)
+ bh=XOz68jeNNCrkM4h/QTA8gjG0fkB2qRFff6RjnTf1moQ=;
+ b=TFLLjqcw+eJmMcmVH27Vnv/Jx1ad0Ov5ydaS6xVIA7bgHxr9RAh+ISW9mic7hWA0wF
+ 3csWe6YeHvXlZfmK2ZGfO9Tk0XyouTA2aZjaH0KYbT3MpDk0DqoJgVqDYQSyKa0VGScR
+ IvjrcPfPmRj2w+MiXbg07zN6jiCCZ0msLQhb2d2m/+9ujaIIrwxhKPVKd6C0LXpAvZHP
+ nqZ33ZRx4QQWZsAgBXi8gk3rjP9sTNLDMJnVJ9T2aq+6SxfuiX5cofmV3euR3ZCsNqKA
+ 1vm2R3hOqx5VGuuTesaqoi3dGjOAHyE9jCFGnt9Hhk7Q4A7iY9nRSpQEG4tmOnKjTLT5
+ X+tw==
+X-Gm-Message-State: AC+VfDyRqANKPNayRJdaXnayk0A9fu+pR7x2DKoK53IYbdTBd3QX3mYD
+ lVlKuxJ6mHkAYvJ5tF5QkFY0MQ==
+X-Google-Smtp-Source: ACHHUZ6fzOMmWp+ZFF0UysZbbUu+Q9e/cWGUXjFcdjTyaKuyxE45KrgsK3Zn5oIdr8Tl0hjfg/JbEg==
+X-Received: by 2002:a4a:490b:0:b0:565:cf26:5a10 with SMTP id
+ z11-20020a4a490b000000b00565cf265a10mr2208286ooa.0.1688127331387; 
+ Fri, 30 Jun 2023 05:15:31 -0700 (PDT)
 Received: from ?IPV6:2804:7f0:bcc0:bdf2:b7ba:a476:c0e3:fb59?
  ([2804:7f0:bcc0:bdf2:b7ba:a476:c0e3:fb59])
  by smtp.gmail.com with ESMTPSA id
- g8-20020a9d6b08000000b006b74d8b219asm4877667otp.40.2023.06.30.05.15.06
+ e26-20020a4ada1a000000b0054fdb673104sm5866299oou.9.2023.06.30.05.15.28
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 30 Jun 2023 05:15:08 -0700 (PDT)
-Message-ID: <70361354-b581-dc46-729d-6a8d50a94ab9@ventanamicro.com>
-Date: Fri, 30 Jun 2023 09:15:05 -0300
+ Fri, 30 Jun 2023 05:15:31 -0700 (PDT)
+Message-ID: <405f870a-9a28-57c6-d68c-5718dc74a70d@ventanamicro.com>
+Date: Fri, 30 Jun 2023 09:15:27 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.12.0
-Subject: Re: [PATCH v2 2/4] target/riscv: Restrict sysemu specific header to
- user emulation
+Subject: Re: [PATCH v2 4/4] target/riscv: Restrict riscv_cpu_do_interrupt() to
+ sysemu
 Content-Language: en-US
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
@@ -73,20 +73,20 @@ Cc: Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Weiwei Li <liweiwei@iscas.ac.cn>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
 References: <20230628063234.32544-1-philmd@linaro.org>
- <20230628063234.32544-3-philmd@linaro.org>
+ <20230628063234.32544-5-philmd@linaro.org>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230628063234.32544-3-philmd@linaro.org>
+In-Reply-To: <20230628063234.32544-5-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::31;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x31.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c33;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc33.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
 X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.095,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,71 +105,75 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 6/28/23 03:32, Philippe Mathieu-Daudé wrote:
+> riscv_cpu_do_interrupt() is not reachable on user emulation.
+> 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
 
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
->   target/riscv/cpu.c        | 8 +++++---
->   target/riscv/cpu_helper.c | 2 ++
->   target/riscv/csr.c        | 2 ++
->   3 files changed, 9 insertions(+), 3 deletions(-)
+>   target/riscv/cpu.h        | 5 +++--
+>   target/riscv/cpu_helper.c | 7 ++-----
+>   2 files changed, 5 insertions(+), 7 deletions(-)
 > 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index fb8458bf74..d9a3684b3e 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -23,9 +23,13 @@
->   #include "qemu/log.h"
->   #include "cpu.h"
->   #include "cpu_vendorid.h"
-> +#ifndef CONFIG_USER_ONLY
->   #include "pmu.h"
-> -#include "internals.h"
->   #include "time_helper.h"
-> +#include "sysemu/kvm.h"
-> +#include "kvm_riscv.h"
-> +#endif
-> +#include "internals.h"
->   #include "exec/exec-all.h"
->   #include "qapi/error.h"
->   #include "qapi/visitor.h"
-> @@ -33,8 +37,6 @@
->   #include "hw/qdev-properties.h"
->   #include "migration/vmstate.h"
->   #include "fpu/softfloat-helpers.h"
-> -#include "sysemu/kvm.h"
-> -#include "kvm_riscv.h"
->   #include "tcg/tcg.h"
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index cc20ee25a7..ab6aa7e3ea 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -409,7 +409,6 @@ extern const char * const riscv_int_regnamesh[];
+>   extern const char * const riscv_fpr_regnames[];
 >   
->   /* RISC-V CPU definitions */
+>   const char *riscv_cpu_get_trap_name(target_ulong cause, bool async);
+> -void riscv_cpu_do_interrupt(CPUState *cpu);
+>   int riscv_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cs,
+>                                  int cpuid, DumpState *s);
+>   int riscv_cpu_write_elf32_note(WriteCoreDumpFunction f, CPUState *cs,
+> @@ -442,6 +441,7 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp);
+>   #define cpu_mmu_index riscv_cpu_mmu_index
+>   
+>   #ifndef CONFIG_USER_ONLY
+> +void riscv_cpu_do_interrupt(CPUState *cpu);
+>   void riscv_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr,
+>                                        vaddr addr, unsigned size,
+>                                        MMUAccessType access_type,
+> @@ -465,7 +465,8 @@ void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, uint32_t priv,
+>                                      void *rmw_fn_arg);
+>   
+>   RISCVException smstateen_acc_ok(CPURISCVState *env, int index, uint64_t bit);
+> -#endif
+> +#endif /* !CONFIG_USER_ONLY */
+> +
+>   void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv);
+>   
+>   void riscv_translate_init(void);
 > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 55c36025d7..3c28396eaf 100644
+> index 3c28396eaf..3f5ba2b4ef 100644
 > --- a/target/riscv/cpu_helper.c
 > +++ b/target/riscv/cpu_helper.c
-> @@ -28,7 +28,9 @@
->   #include "tcg/tcg-op.h"
->   #include "trace.h"
->   #include "semihosting/common-semi.h"
-> +#ifndef CONFIG_USER_ONLY
->   #include "sysemu/cpu-timers.h"
-> +#endif
->   #include "cpu_bits.h"
->   #include "debug.h"
->   #include "tcg/oversized-guest.h"
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index ea7585329e..e5737dcf58 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -21,8 +21,10 @@
->   #include "qemu/log.h"
->   #include "qemu/timer.h"
->   #include "cpu.h"
-> +#ifndef CONFIG_USER_ONLY
->   #include "pmu.h"
->   #include "time_helper.h"
-> +#endif
->   #include "qemu/main-loop.h"
->   #include "exec/exec-all.h"
->   #include "exec/tb-flush.h"
+> @@ -1580,7 +1580,6 @@ static target_ulong riscv_transformed_insn(CPURISCVState *env,
+>   
+>       return xinsn;
+>   }
+> -#endif /* !CONFIG_USER_ONLY */
+>   
+>   /*
+>    * Handle Traps
+> @@ -1590,8 +1589,6 @@ static target_ulong riscv_transformed_insn(CPURISCVState *env,
+>    */
+>   void riscv_cpu_do_interrupt(CPUState *cs)
+>   {
+> -#if !defined(CONFIG_USER_ONLY)
+> -
+>       RISCVCPU *cpu = RISCV_CPU(cs);
+>       CPURISCVState *env = &cpu->env;
+>       bool write_gva = false;
+> @@ -1784,6 +1781,6 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>   
+>       env->two_stage_lookup = false;
+>       env->two_stage_indirect_lookup = false;
+> -#endif
+> -    cs->exception_index = RISCV_EXCP_NONE; /* mark handled to qemu */
+>   }
+> +
+> +#endif /* !CONFIG_USER_ONLY */
 
