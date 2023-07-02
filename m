@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 369DCEB64D9
-	for <qemu-riscv@archiver.kernel.org>; Sun,  2 Jul 2023 15:55:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88A39EB64D9
+	for <qemu-riscv@archiver.kernel.org>; Sun,  2 Jul 2023 15:55:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qFzPW-0002DH-9k; Sun, 02 Jul 2023 11:54:53 -0400
+	id 1qFzPw-0002Xf-Mz; Sun, 02 Jul 2023 11:55:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1qFzPU-0002BN-MV
- for qemu-riscv@nongnu.org; Sun, 02 Jul 2023 11:54:48 -0400
-Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
+ id 1qFzPi-0002U9-8X
+ for qemu-riscv@nongnu.org; Sun, 02 Jul 2023 11:55:05 -0400
+Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1qFzPS-0008Lh-Bu
- for qemu-riscv@nongnu.org; Sun, 02 Jul 2023 11:54:48 -0400
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-668704a5b5bso2913424b3a.0
- for <qemu-riscv@nongnu.org>; Sun, 02 Jul 2023 08:54:46 -0700 (PDT)
+ id 1qFzPc-0008M8-Tv
+ for qemu-riscv@nongnu.org; Sun, 02 Jul 2023 11:55:01 -0400
+Received: by mail-pf1-x434.google.com with SMTP id
+ d2e1a72fcca58-666eef03ebdso1779834b3a.1
+ for <qemu-riscv@nongnu.org>; Sun, 02 Jul 2023 08:54:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1688313285; x=1690905285;
+ d=sifive.com; s=google; t=1688313289; x=1690905289;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OEJ9kwymeFlmuuKiMd/g4dpMPoDIXBBqm7ECdie05ks=;
- b=iYsROF1GOplbDCnMac+xg1NdRh8tr6aubb7OwSKs0XNFyqDlQceWBoizviFXWsinpx
- exaer0RBI4zKqLDLw8I1Yfn3EyRBTs4sape2vVWno56ugmgo3eLUtR8V/5gOYSeYbgKi
- v8GQqIE8zGl3E7J19nbpEgSYNRD8sdzTzxe7epEfDU38nD4g0sLaaPPQkhYf9JRGuUqu
- DEvlN3JdXev7zAt6Q9dzKCv5hSQzK7iJN2UKQPMMmPKaiHu9i0X2/3Mr5oDgn++He9UC
- +fGSA+06mk5gx/sZDjg5qtOkCX5TXgwgIrLe4r+NqGpi+taR5H3VWqvQdRcg89ARsgbi
- kZcQ==
+ bh=Q2Ovee+6qNzPOr0iR3dEIiS21VnlZ9hT+MEjpqH5QMg=;
+ b=X3zpVaj1LxzhS1EUMbiYZaWFECsl63qAGDKU/BaYXzHIaaa/16+7ocuVvokB0mvIi4
+ piW885I2Sgt6j3eOx/oq2MJErwxkxIb/KCLkrW3VqOMw4/pF/2geNrQVF5/CVjrNl67K
+ bzDtgGn+UXAf9t2Jb8wgN9BgcOOZL/UlH6otlkGZvf6d9UFFy05FGxknnlq1gv2fqJyy
+ tW985iS0+LnOYbM7JlaWgb0y6n4ux1BZNHNHj0UdjNHgFHl9w5YyBbWk8t7rG7YM/cVV
+ 6fi7ZYtgDy5cIhYunkikpt1GnB8WzlaaQu9OaaP+iIWSYH9JgWIc48YD3Hma1m9O6yBo
+ 9/fw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688313285; x=1690905285;
+ d=1e100.net; s=20221208; t=1688313289; x=1690905289;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OEJ9kwymeFlmuuKiMd/g4dpMPoDIXBBqm7ECdie05ks=;
- b=ROXTuPY/L8q4g5zyeMAUbdRpsblMYF2q1THKVRJ0DrxdIh0NiRn297hhVwAdQvhW6J
- mmnhP9iEqMSqgdSToKuULZ6TUHTHPPRvsnXeJlU/ivE1KOKjIG6o79jzGc4U0fjhCr90
- e9acriut9c1aGrRhQ3diK9suf9lJud8pBauph6UtOzzowK17dwbic1/2Oke30kfDlKrD
- u8V3NEM1UWMPlewcmTPOqsALeRqf+WftoB9QsJCTdVoC7Rt7MqS7f6xKbplCqWiGNNkE
- b4GncXvLOxZabZ1RF9g0ONxBq4AJolnv6Nuj3pC7qJbPpxyyrO5bZLwHL1HpgiqvqiZv
- CYng==
-X-Gm-Message-State: ABy/qLZ8WJ7RGL/nJPkVqhWjK0p8/cbE6l2iRCT4ny4JiLf+Nw+y6OPp
- Dm5BLhQ3BB4fZR6xUIcz8x6HmGeDeWOuY6rG7ccsBne3
-X-Google-Smtp-Source: APBJJlEjBmxT6IdRXOjoQEUqA9a9NEENLkRE+0ZIxbZPimzQ8saRldFSZUsD39WpsiFWt4x3fCpKiQ==
-X-Received: by 2002:aa7:982e:0:b0:67b:8602:aa1e with SMTP id
- q14-20020aa7982e000000b0067b8602aa1emr9977755pfl.28.1688313285016; 
- Sun, 02 Jul 2023 08:54:45 -0700 (PDT)
+ bh=Q2Ovee+6qNzPOr0iR3dEIiS21VnlZ9hT+MEjpqH5QMg=;
+ b=FlKAZre+mSQWF04RrM2aEImNcYtRq/4IsULSdJS7Tg7eFvuyDUYoUucXy3dyf2AR0m
+ jzMMZ56wPE+eDyu/Df2M/BD8OPZhqLMfGO/4CRg1BwebX/ppHz8WXsq9GOsUW0SKIrKO
+ edAsIiHP+/sR1pL0VhdtyImw6CayVBSsQ8jrhUTHVwBFF/Olai28s4iQMqLYHcadBLiC
+ y98VMX3XLaf8st0WAveYMtQ2DSw0RWwnIahr5ocM5gxSlWIdlVI6+DHwVjj2rtFU+9Sg
+ KeKS8gx+06sVXJOCu4AmQe7VuCS15GUCgFBOwmPCRQ82A9eXxFscwdPRHjk3bG/tSAFq
+ USiA==
+X-Gm-Message-State: ABy/qLY/T1BRrLlMheUFPMGKd5yxhYW43dGVB93N3SXRHf07mHtRiLuB
+ WlFXDt00KwPraPo0yLeYhd3JdQ==
+X-Google-Smtp-Source: APBJJlFbOlvzbGl9KML6qpg+abd4FbEePh1Gqfj7VkOHD6X3PpvyT3swyzX/oqLGifAiz2eHOflF3A==
+X-Received: by 2002:a05:6a00:1501:b0:668:9bf9:fa70 with SMTP id
+ q1-20020a056a00150100b006689bf9fa70mr7655739pfu.34.1688313289319; 
+ Sun, 02 Jul 2023 08:54:49 -0700 (PDT)
 Received: from duncan.localdomain (125-228-20-175.hinet-ip.hinet.net.
  [125.228.20.175]) by smtp.gmail.com with ESMTPSA id
- y19-20020aa78553000000b0066f37665a63sm8231969pfn.73.2023.07.02.08.54.42
+ y19-20020aa78553000000b0066f37665a63sm8231969pfn.73.2023.07.02.08.54.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 02 Jul 2023 08:54:44 -0700 (PDT)
+ Sun, 02 Jul 2023 08:54:49 -0700 (PDT)
 From: Max Chou <max.chou@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Cc: dbarboza@ventanamicro.com,
- Lawrence Hunter <lawrence.hunter@codethink.co.uk>,
- Nazar Kazakov <nazar.kazakov@codethink.co.uk>,
- Max Chou <max.chou@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+Cc: dbarboza@ventanamicro.com, Nazar Kazakov <nazar.kazakov@codethink.co.uk>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Weiwei Li <liweiwei@iscas.ac.cn>, Max Chou <max.chou@sifive.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Bin Meng <bin.meng@windriver.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
-Subject: [PATCH v7 04/15] target/riscv: Add Zvbc ISA extension support
-Date: Sun,  2 Jul 2023 23:53:38 +0800
-Message-Id: <20230702155354.2478495-5-max.chou@sifive.com>
+ Frank Chang <frank.chang@sifive.com>
+Subject: [PATCH v7 05/15] target/riscv: Move vector translation checks
+Date: Sun,  2 Jul 2023 23:53:39 +0800
+Message-Id: <20230702155354.2478495-6-max.chou@sifive.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230702155354.2478495-1-max.chou@sifive.com>
 References: <20230702155354.2478495-1-max.chou@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
- envelope-from=max.chou@sifive.com; helo=mail-pf1-x429.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
+ envelope-from=max.chou@sifive.com; helo=mail-pf1-x434.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,270 +101,108 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
+From: Nazar Kazakov <nazar.kazakov@codethink.co.uk>
 
-This commit adds support for the Zvbc vector-crypto extension, which
-consists of the following instructions:
+Move the checks out of `do_opiv{v,x,i}_gvec{,_shift}` functions
+and into the corresponding macros. This enables the functions to be
+reused in proceeding commits without check duplication.
 
-* vclmulh.[vx,vv]
-* vclmul.[vx,vv]
-
-Translation functions are defined in
-`target/riscv/insn_trans/trans_rvvk.c.inc` and helpers are defined in
-`target/riscv/vcrypto_helper.c`.
-
-Co-authored-by: Nazar Kazakov <nazar.kazakov@codethink.co.uk>
-Co-authored-by: Max Chou <max.chou@sifive.com>
 Signed-off-by: Nazar Kazakov <nazar.kazakov@codethink.co.uk>
-Signed-off-by: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Max Chou <max.chou@sifive.com>
-[max.chou@sifive.com: Exposed x-zvbc property]
 ---
- target/riscv/cpu.c                       |  9 ++++
- target/riscv/cpu_cfg.h                   |  1 +
- target/riscv/helper.h                    |  6 +++
- target/riscv/insn32.decode               |  6 +++
- target/riscv/insn_trans/trans_rvvk.c.inc | 62 ++++++++++++++++++++++++
- target/riscv/meson.build                 |  3 +-
- target/riscv/translate.c                 |  1 +
- target/riscv/vcrypto_helper.c            | 59 ++++++++++++++++++++++
- 8 files changed, 146 insertions(+), 1 deletion(-)
- create mode 100644 target/riscv/insn_trans/trans_rvvk.c.inc
- create mode 100644 target/riscv/vcrypto_helper.c
+ target/riscv/insn_trans/trans_rvv.c.inc | 28 +++++++++++--------------
+ 1 file changed, 12 insertions(+), 16 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 881bddf393..174ae9fe1a 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -111,6 +111,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zksed, PRIV_VERSION_1_12_0, ext_zksed),
-     ISA_EXT_DATA_ENTRY(zksh, PRIV_VERSION_1_12_0, ext_zksh),
-     ISA_EXT_DATA_ENTRY(zkt, PRIV_VERSION_1_12_0, ext_zkt),
-+    ISA_EXT_DATA_ENTRY(zvbc, PRIV_VERSION_1_12_0, ext_zvbc),
-     ISA_EXT_DATA_ENTRY(zve32f, PRIV_VERSION_1_10_0, ext_zve32f),
-     ISA_EXT_DATA_ENTRY(zve64f, PRIV_VERSION_1_10_0, ext_zve64f),
-     ISA_EXT_DATA_ENTRY(zve64d, PRIV_VERSION_1_10_0, ext_zve64d),
-@@ -1184,6 +1185,11 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         return;
-     }
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index 7e194aae34..5dfd524c7d 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -1183,9 +1183,6 @@ do_opivv_gvec(DisasContext *s, arg_rmrr *a, GVecGen3Fn *gvec_fn,
+               gen_helper_gvec_4_ptr *fn)
+ {
+     TCGLabel *over = gen_new_label();
+-    if (!opivv_check(s, a)) {
+-        return false;
+-    }
  
-+    if (cpu->cfg.ext_zvbc && !cpu->cfg.ext_zve64f) {
-+        error_setg(errp, "Zvbc extension requires V or Zve64{f,d} extensions");
-+        return;
-+    }
-+
-     if (cpu->cfg.ext_zk) {
-         cpu->cfg.ext_zkn = true;
-         cpu->cfg.ext_zkr = true;
-@@ -1683,6 +1689,9 @@ static Property riscv_cpu_extensions[] = {
-     DEFINE_PROP_BOOL("x-zvfh", RISCVCPU, cfg.ext_zvfh, false),
-     DEFINE_PROP_BOOL("x-zvfhmin", RISCVCPU, cfg.ext_zvfhmin, false),
+     tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
  
-+    /* Vector cryptography extensions */
-+    DEFINE_PROP_BOOL("x-zvbc", RISCVCPU, cfg.ext_zvbc, false),
-+
-     DEFINE_PROP_END_OF_LIST(),
- };
+@@ -1218,6 +1215,9 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
+         gen_helper_##NAME##_b, gen_helper_##NAME##_h,              \
+         gen_helper_##NAME##_w, gen_helper_##NAME##_d,              \
+     };                                                             \
++    if (!opivv_check(s, a)) {                                      \
++        return false;                                              \
++    }                                                              \
+     return do_opivv_gvec(s, a, tcg_gen_gvec_##SUF, fns[s->sew]);   \
+ }
  
-diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-index c4a627d335..b6e9bd2e99 100644
---- a/target/riscv/cpu_cfg.h
-+++ b/target/riscv/cpu_cfg.h
-@@ -83,6 +83,7 @@ struct RISCVCPUConfig {
-     bool ext_zve32f;
-     bool ext_zve64f;
-     bool ext_zve64d;
-+    bool ext_zvbc;
-     bool ext_zmmul;
-     bool ext_zvfh;
-     bool ext_zvfhmin;
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 98e97810fd..be0f0f1058 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -1153,3 +1153,9 @@ DEF_HELPER_FLAGS_3(sm4ks, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
+@@ -1276,10 +1276,6 @@ static inline bool
+ do_opivx_gvec(DisasContext *s, arg_rmrr *a, GVecGen2sFn *gvec_fn,
+               gen_helper_opivx *fn)
+ {
+-    if (!opivx_check(s, a)) {
+-        return false;
+-    }
+-
+     if (a->vm && s->vl_eq_vlmax && !(s->vta && s->lmul < 0)) {
+         TCGv_i64 src1 = tcg_temp_new_i64();
  
- /* Zce helper */
- DEF_HELPER_FLAGS_2(cm_jalt, TCG_CALL_NO_WG, tl, env, i32)
-+
-+/* Vector crypto functions */
-+DEF_HELPER_6(vclmul_vv, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vclmul_vx, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vclmulh_vv, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vclmulh_vx, void, ptr, ptr, tl, ptr, env, i32)
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 73d5d1b045..52cd92e262 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -908,3 +908,9 @@ sm4ks       .. 11010 ..... ..... 000 ..... 0110011 @k_aes
- # *** RV32 Zicond Standard Extension ***
- czero_eqz   0000111  ..... ..... 101 ..... 0110011 @r
- czero_nez   0000111  ..... ..... 111 ..... 0110011 @r
-+
-+# *** Zvbc vector crypto extension ***
-+vclmul_vv   001100 . ..... ..... 010 ..... 1010111 @r_vm
-+vclmul_vx   001100 . ..... ..... 110 ..... 1010111 @r_vm
-+vclmulh_vv  001101 . ..... ..... 010 ..... 1010111 @r_vm
-+vclmulh_vx  001101 . ..... ..... 110 ..... 1010111 @r_vm
-diff --git a/target/riscv/insn_trans/trans_rvvk.c.inc b/target/riscv/insn_trans/trans_rvvk.c.inc
-new file mode 100644
-index 0000000000..552b08a2fd
---- /dev/null
-+++ b/target/riscv/insn_trans/trans_rvvk.c.inc
-@@ -0,0 +1,62 @@
-+/*
-+ * RISC-V translation routines for the vector crypto extension.
-+ *
-+ * Copyright (C) 2023 SiFive, Inc.
-+ * Written by Codethink Ltd and SiFive.
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+/*
-+ * Zvbc
-+ */
-+
-+#define GEN_VV_MASKED_TRANS(NAME, CHECK)                     \
-+    static bool trans_##NAME(DisasContext *s, arg_rmrr *a)   \
-+    {                                                        \
-+        if (CHECK(s, a)) {                                   \
-+            return opivv_trans(a->rd, a->rs1, a->rs2, a->vm, \
-+                               gen_helper_##NAME, s);        \
-+        }                                                    \
-+        return false;                                        \
-+    }
-+
-+static bool vclmul_vv_check(DisasContext *s, arg_rmrr *a)
-+{
-+    return opivv_check(s, a) &&
-+           s->cfg_ptr->ext_zvbc == true &&
-+           s->sew == MO_64;
-+}
-+
-+GEN_VV_MASKED_TRANS(vclmul_vv, vclmul_vv_check)
-+GEN_VV_MASKED_TRANS(vclmulh_vv, vclmul_vv_check)
-+
-+#define GEN_VX_MASKED_TRANS(NAME, CHECK)                     \
-+    static bool trans_##NAME(DisasContext *s, arg_rmrr *a)   \
-+    {                                                        \
-+        if (CHECK(s, a)) {                                   \
-+            return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, \
-+                               gen_helper_##NAME, s);        \
-+        }                                                    \
-+        return false;                                        \
-+    }
-+
-+static bool vclmul_vx_check(DisasContext *s, arg_rmrr *a)
-+{
-+    return opivx_check(s, a) &&
-+           s->cfg_ptr->ext_zvbc == true &&
-+           s->sew == MO_64;
-+}
-+
-+GEN_VX_MASKED_TRANS(vclmul_vx, vclmul_vx_check)
-+GEN_VX_MASKED_TRANS(vclmulh_vx, vclmul_vx_check)
-diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-index c3801ee5e0..660078bda1 100644
---- a/target/riscv/meson.build
-+++ b/target/riscv/meson.build
-@@ -21,7 +21,8 @@ riscv_ss.add(files(
-   'translate.c',
-   'm128_helper.c',
-   'crypto_helper.c',
--  'zce_helper.c'
-+  'zce_helper.c',
-+  'vcrypto_helper.c'
- ))
- riscv_ss.add(when: 'CONFIG_KVM', if_true: files('kvm.c'), if_false: files('kvm-stub.c'))
+@@ -1301,6 +1297,9 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
+         gen_helper_##NAME##_b, gen_helper_##NAME##_h,              \
+         gen_helper_##NAME##_w, gen_helper_##NAME##_d,              \
+     };                                                             \
++    if (!opivx_check(s, a)) {                                      \
++        return false;                                              \
++    }                                                              \
+     return do_opivx_gvec(s, a, tcg_gen_gvec_##SUF, fns[s->sew]);   \
+ }
  
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 8a33da811e..b785f83cdc 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -1106,6 +1106,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
- #include "insn_trans/trans_rvzicbo.c.inc"
- #include "insn_trans/trans_rvzfh.c.inc"
- #include "insn_trans/trans_rvk.c.inc"
-+#include "insn_trans/trans_rvvk.c.inc"
- #include "insn_trans/trans_privileged.c.inc"
- #include "insn_trans/trans_svinval.c.inc"
- #include "decode-xthead.c.inc"
-diff --git a/target/riscv/vcrypto_helper.c b/target/riscv/vcrypto_helper.c
-new file mode 100644
-index 0000000000..8b7c63d499
---- /dev/null
-+++ b/target/riscv/vcrypto_helper.c
-@@ -0,0 +1,59 @@
-+/*
-+ * RISC-V Vector Crypto Extension Helpers for QEMU.
-+ *
-+ * Copyright (C) 2023 SiFive, Inc.
-+ * Written by Codethink Ltd and SiFive.
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qemu/host-utils.h"
-+#include "qemu/bitops.h"
-+#include "cpu.h"
-+#include "exec/memop.h"
-+#include "exec/exec-all.h"
-+#include "exec/helper-proto.h"
-+#include "internals.h"
-+#include "vector_internals.h"
-+
-+static uint64_t clmul64(uint64_t y, uint64_t x)
-+{
-+    uint64_t result = 0;
-+    for (int j = 63; j >= 0; j--) {
-+        if ((y >> j) & 1) {
-+            result ^= (x << j);
-+        }
-+    }
-+    return result;
-+}
-+
-+static uint64_t clmulh64(uint64_t y, uint64_t x)
-+{
-+    uint64_t result = 0;
-+    for (int j = 63; j >= 1; j--) {
-+        if ((y >> j) & 1) {
-+            result ^= (x >> (64 - j));
-+        }
-+    }
-+    return result;
-+}
-+
-+RVVCALL(OPIVV2, vclmul_vv, OP_UUU_D, H8, H8, H8, clmul64)
-+GEN_VEXT_VV(vclmul_vv, 8)
-+RVVCALL(OPIVX2, vclmul_vx, OP_UUU_D, H8, H8, clmul64)
-+GEN_VEXT_VX(vclmul_vx, 8)
-+RVVCALL(OPIVV2, vclmulh_vv, OP_UUU_D, H8, H8, H8, clmulh64)
-+GEN_VEXT_VV(vclmulh_vv, 8)
-+RVVCALL(OPIVX2, vclmulh_vx, OP_UUU_D, H8, H8, clmulh64)
-+GEN_VEXT_VX(vclmulh_vx, 8)
+@@ -1432,10 +1431,6 @@ static inline bool
+ do_opivi_gvec(DisasContext *s, arg_rmrr *a, GVecGen2iFn *gvec_fn,
+               gen_helper_opivx *fn, imm_mode_t imm_mode)
+ {
+-    if (!opivx_check(s, a)) {
+-        return false;
+-    }
+-
+     if (a->vm && s->vl_eq_vlmax && !(s->vta && s->lmul < 0)) {
+         gvec_fn(s->sew, vreg_ofs(s, a->rd), vreg_ofs(s, a->rs2),
+                 extract_imm(s, a->rs1, imm_mode), MAXSZ(s), MAXSZ(s));
+@@ -1453,6 +1448,9 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
+         gen_helper_##OPIVX##_b, gen_helper_##OPIVX##_h,            \
+         gen_helper_##OPIVX##_w, gen_helper_##OPIVX##_d,            \
+     };                                                             \
++    if (!opivx_check(s, a)) {                                      \
++        return false;                                              \
++    }                                                              \
+     return do_opivi_gvec(s, a, tcg_gen_gvec_##SUF,                 \
+                          fns[s->sew], IMM_MODE);                   \
+ }
+@@ -1775,10 +1773,6 @@ static inline bool
+ do_opivx_gvec_shift(DisasContext *s, arg_rmrr *a, GVecGen2sFn32 *gvec_fn,
+                     gen_helper_opivx *fn)
+ {
+-    if (!opivx_check(s, a)) {
+-        return false;
+-    }
+-
+     if (a->vm && s->vl_eq_vlmax && !(s->vta && s->lmul < 0)) {
+         TCGv_i32 src1 = tcg_temp_new_i32();
+ 
+@@ -1800,7 +1794,9 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                    \
+         gen_helper_##NAME##_b, gen_helper_##NAME##_h,                     \
+         gen_helper_##NAME##_w, gen_helper_##NAME##_d,                     \
+     };                                                                    \
+-                                                                          \
++    if (!opivx_check(s, a)) {                                             \
++        return false;                                                     \
++    }                                                                     \
+     return do_opivx_gvec_shift(s, a, tcg_gen_gvec_##SUF, fns[s->sew]);    \
+ }
+ 
 -- 
 2.34.1
 
