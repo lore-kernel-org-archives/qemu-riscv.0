@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E189AEB64D9
-	for <qemu-riscv@archiver.kernel.org>; Sun,  2 Jul 2023 15:54:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 369DCEB64D9
+	for <qemu-riscv@archiver.kernel.org>; Sun,  2 Jul 2023 15:55:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qFzPE-0001eT-U7; Sun, 02 Jul 2023 11:54:32 -0400
+	id 1qFzPW-0002DH-9k; Sun, 02 Jul 2023 11:54:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1qFzPD-0001dy-NN
- for qemu-riscv@nongnu.org; Sun, 02 Jul 2023 11:54:31 -0400
-Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
+ id 1qFzPU-0002BN-MV
+ for qemu-riscv@nongnu.org; Sun, 02 Jul 2023 11:54:48 -0400
+Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1qFzPB-0008Ju-1I
- for qemu-riscv@nongnu.org; Sun, 02 Jul 2023 11:54:31 -0400
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-666683eb028so1836703b3a.0
- for <qemu-riscv@nongnu.org>; Sun, 02 Jul 2023 08:54:28 -0700 (PDT)
+ id 1qFzPS-0008Lh-Bu
+ for qemu-riscv@nongnu.org; Sun, 02 Jul 2023 11:54:48 -0400
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-668704a5b5bso2913424b3a.0
+ for <qemu-riscv@nongnu.org>; Sun, 02 Jul 2023 08:54:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1688313268; x=1690905268;
+ d=sifive.com; s=google; t=1688313285; x=1690905285;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1riBvo1oXFtMRmpl8ENRZtm2YSjNOJkGaUz7dnmSvt8=;
- b=nlUaSpfgRUAs+TSnTLE3zY1mQrIEjF80xv386ocVBndswXlNeHz8bhmBDC1R74LcRb
- ToaV+Q+Sc4ET4L1pk+sFoY/ZPG/Ef0ZiiNJnRYqT1B9nPzR55d+J+xxOwf1e/1GODjEm
- llzl3LcDf4dpzuWmECq4+EKQMXq/uqMvZ5mwIPN2HW7RcuOYm87YA346qER+O37tki4l
- nqtjMnIisy4Hn5+T8QaApRru64UmanXrVp6bgm0EQJQ3Ya473B5Ss9whErRBadlZFeu4
- /Drrw2ZXjdb7eDns9VGa13WBcR9k6bR84yW/4zG0rISNEItarg5VkKutCiZNLOezbLT2
- a9ew==
+ bh=OEJ9kwymeFlmuuKiMd/g4dpMPoDIXBBqm7ECdie05ks=;
+ b=iYsROF1GOplbDCnMac+xg1NdRh8tr6aubb7OwSKs0XNFyqDlQceWBoizviFXWsinpx
+ exaer0RBI4zKqLDLw8I1Yfn3EyRBTs4sape2vVWno56ugmgo3eLUtR8V/5gOYSeYbgKi
+ v8GQqIE8zGl3E7J19nbpEgSYNRD8sdzTzxe7epEfDU38nD4g0sLaaPPQkhYf9JRGuUqu
+ DEvlN3JdXev7zAt6Q9dzKCv5hSQzK7iJN2UKQPMMmPKaiHu9i0X2/3Mr5oDgn++He9UC
+ +fGSA+06mk5gx/sZDjg5qtOkCX5TXgwgIrLe4r+NqGpi+taR5H3VWqvQdRcg89ARsgbi
+ kZcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688313268; x=1690905268;
+ d=1e100.net; s=20221208; t=1688313285; x=1690905285;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1riBvo1oXFtMRmpl8ENRZtm2YSjNOJkGaUz7dnmSvt8=;
- b=B1Mk84Vnmlkt1R/RRX8aubr/tM/6hzLtUflkROTSuytIVRVs5Vfk9s1u2cqUHO58/B
- ycMd8ZQIQJg7b1NTTScKdTCO9kOPj43pBZukBKuiAxAoj5VYIBaAEAdSJSB7f+1piMRn
- hZdEfScglnldG5IFr+1eW1PKkefbqaak/r4q3TWLbVqwW7qR6uqmkDQsp64VxqD0Cyyx
- 4/ihRBVT8jk13q40r9NvjFx3+3gVMlvH8oxH+m5ctI/m4TmuEoRweI9BFeIiBvELlMPM
- f5RpTnGq9o2KlMVhEdhbbEuuZX+7uokCIC4RFFmYBvS1bcW7EkKRw3SLet+0rhxJ49Rs
- 9ylw==
-X-Gm-Message-State: ABy/qLZ7vGxEnLGczyDgcMQZwk4iWPhdeuvw4dUdUTFKTGentH8+3hEH
- BPxDkKqg1e24OkTpxkm95mh2nQ==
-X-Google-Smtp-Source: APBJJlGuNQgHy21FaTv9T2e4+2C78seBUVPV1Gx/OGwo8a9fBBKe9oeGgyJJbhGaAEDL6ZvsA6pArQ==
-X-Received: by 2002:a05:6a00:1a8f:b0:676:20f8:be41 with SMTP id
- e15-20020a056a001a8f00b0067620f8be41mr8232006pfv.16.1688313267568; 
- Sun, 02 Jul 2023 08:54:27 -0700 (PDT)
+ bh=OEJ9kwymeFlmuuKiMd/g4dpMPoDIXBBqm7ECdie05ks=;
+ b=ROXTuPY/L8q4g5zyeMAUbdRpsblMYF2q1THKVRJ0DrxdIh0NiRn297hhVwAdQvhW6J
+ mmnhP9iEqMSqgdSToKuULZ6TUHTHPPRvsnXeJlU/ivE1KOKjIG6o79jzGc4U0fjhCr90
+ e9acriut9c1aGrRhQ3diK9suf9lJud8pBauph6UtOzzowK17dwbic1/2Oke30kfDlKrD
+ u8V3NEM1UWMPlewcmTPOqsALeRqf+WftoB9QsJCTdVoC7Rt7MqS7f6xKbplCqWiGNNkE
+ b4GncXvLOxZabZ1RF9g0ONxBq4AJolnv6Nuj3pC7qJbPpxyyrO5bZLwHL1HpgiqvqiZv
+ CYng==
+X-Gm-Message-State: ABy/qLZ8WJ7RGL/nJPkVqhWjK0p8/cbE6l2iRCT4ny4JiLf+Nw+y6OPp
+ Dm5BLhQ3BB4fZR6xUIcz8x6HmGeDeWOuY6rG7ccsBne3
+X-Google-Smtp-Source: APBJJlEjBmxT6IdRXOjoQEUqA9a9NEENLkRE+0ZIxbZPimzQ8saRldFSZUsD39WpsiFWt4x3fCpKiQ==
+X-Received: by 2002:aa7:982e:0:b0:67b:8602:aa1e with SMTP id
+ q14-20020aa7982e000000b0067b8602aa1emr9977755pfl.28.1688313285016; 
+ Sun, 02 Jul 2023 08:54:45 -0700 (PDT)
 Received: from duncan.localdomain (125-228-20-175.hinet-ip.hinet.net.
  [125.228.20.175]) by smtp.gmail.com with ESMTPSA id
- y19-20020aa78553000000b0066f37665a63sm8231969pfn.73.2023.07.02.08.54.25
+ y19-20020aa78553000000b0066f37665a63sm8231969pfn.73.2023.07.02.08.54.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 02 Jul 2023 08:54:27 -0700 (PDT)
+ Sun, 02 Jul 2023 08:54:44 -0700 (PDT)
 From: Max Chou <max.chou@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: dbarboza@ventanamicro.com,
- Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>,
- Weiwei Li <liweiwei@iscas.ac.cn>, Max Chou <max.chou@sifive.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
+ Lawrence Hunter <lawrence.hunter@codethink.co.uk>,
+ Nazar Kazakov <nazar.kazakov@codethink.co.uk>,
+ Max Chou <max.chou@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH v7 01/15] target/riscv: Refactor some of the generic vector
- functionality
-Date: Sun,  2 Jul 2023 23:53:35 +0800
-Message-Id: <20230702155354.2478495-2-max.chou@sifive.com>
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
+Subject: [PATCH v7 04/15] target/riscv: Add Zvbc ISA extension support
+Date: Sun,  2 Jul 2023 23:53:38 +0800
+Message-Id: <20230702155354.2478495-5-max.chou@sifive.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230702155354.2478495-1-max.chou@sifive.com>
 References: <20230702155354.2478495-1-max.chou@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
- envelope-from=max.chou@sifive.com; helo=mail-pf1-x42e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
+ envelope-from=max.chou@sifive.com; helo=mail-pf1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,414 +101,122 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
+From: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
 
-Take some functions/macros out of `vector_helper` and put them in a new
-module called `vector_internals`. This ensures they can be used by both
-vector and vector-crypto helpers (latter implemented in proceeding
-commits).
+This commit adds support for the Zvbc vector-crypto extension, which
+consists of the following instructions:
 
-Signed-off-by: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
-Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+* vclmulh.[vx,vv]
+* vclmul.[vx,vv]
+
+Translation functions are defined in
+`target/riscv/insn_trans/trans_rvvk.c.inc` and helpers are defined in
+`target/riscv/vcrypto_helper.c`.
+
+Co-authored-by: Nazar Kazakov <nazar.kazakov@codethink.co.uk>
+Co-authored-by: Max Chou <max.chou@sifive.com>
+Signed-off-by: Nazar Kazakov <nazar.kazakov@codethink.co.uk>
+Signed-off-by: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
 Signed-off-by: Max Chou <max.chou@sifive.com>
+[max.chou@sifive.com: Exposed x-zvbc property]
 ---
- target/riscv/meson.build        |   1 +
- target/riscv/vector_helper.c    | 201 +-------------------------------
- target/riscv/vector_internals.c |  81 +++++++++++++
- target/riscv/vector_internals.h | 182 +++++++++++++++++++++++++++++
- 4 files changed, 265 insertions(+), 200 deletions(-)
- create mode 100644 target/riscv/vector_internals.c
- create mode 100644 target/riscv/vector_internals.h
+ target/riscv/cpu.c                       |  9 ++++
+ target/riscv/cpu_cfg.h                   |  1 +
+ target/riscv/helper.h                    |  6 +++
+ target/riscv/insn32.decode               |  6 +++
+ target/riscv/insn_trans/trans_rvvk.c.inc | 62 ++++++++++++++++++++++++
+ target/riscv/meson.build                 |  3 +-
+ target/riscv/translate.c                 |  1 +
+ target/riscv/vcrypto_helper.c            | 59 ++++++++++++++++++++++
+ 8 files changed, 146 insertions(+), 1 deletion(-)
+ create mode 100644 target/riscv/insn_trans/trans_rvvk.c.inc
+ create mode 100644 target/riscv/vcrypto_helper.c
 
-diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-index 7f56c5f88d..c3801ee5e0 100644
---- a/target/riscv/meson.build
-+++ b/target/riscv/meson.build
-@@ -16,6 +16,7 @@ riscv_ss.add(files(
-   'gdbstub.c',
-   'op_helper.c',
-   'vector_helper.c',
-+  'vector_internals.c',
-   'bitmanip_helper.c',
-   'translate.c',
-   'm128_helper.c',
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 1e06e7447c..57be83400d 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -26,6 +26,7 @@
- #include "fpu/softfloat.h"
- #include "tcg/tcg-gvec-desc.h"
- #include "internals.h"
-+#include "vector_internals.h"
- #include <math.h>
- 
- target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
-@@ -72,68 +73,6 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
-     return vl;
- }
- 
--/*
-- * Note that vector data is stored in host-endian 64-bit chunks,
-- * so addressing units smaller than that needs a host-endian fixup.
-- */
--#if HOST_BIG_ENDIAN
--#define H1(x)   ((x) ^ 7)
--#define H1_2(x) ((x) ^ 6)
--#define H1_4(x) ((x) ^ 4)
--#define H2(x)   ((x) ^ 3)
--#define H4(x)   ((x) ^ 1)
--#define H8(x)   ((x))
--#else
--#define H1(x)   (x)
--#define H1_2(x) (x)
--#define H1_4(x) (x)
--#define H2(x)   (x)
--#define H4(x)   (x)
--#define H8(x)   (x)
--#endif
--
--static inline uint32_t vext_nf(uint32_t desc)
--{
--    return FIELD_EX32(simd_data(desc), VDATA, NF);
--}
--
--static inline uint32_t vext_vm(uint32_t desc)
--{
--    return FIELD_EX32(simd_data(desc), VDATA, VM);
--}
--
--/*
-- * Encode LMUL to lmul as following:
-- *     LMUL    vlmul    lmul
-- *      1       000       0
-- *      2       001       1
-- *      4       010       2
-- *      8       011       3
-- *      -       100       -
-- *     1/8      101      -3
-- *     1/4      110      -2
-- *     1/2      111      -1
-- */
--static inline int32_t vext_lmul(uint32_t desc)
--{
--    return sextract32(FIELD_EX32(simd_data(desc), VDATA, LMUL), 0, 3);
--}
--
--static inline uint32_t vext_vta(uint32_t desc)
--{
--    return FIELD_EX32(simd_data(desc), VDATA, VTA);
--}
--
--static inline uint32_t vext_vma(uint32_t desc)
--{
--    return FIELD_EX32(simd_data(desc), VDATA, VMA);
--}
--
--static inline uint32_t vext_vta_all_1s(uint32_t desc)
--{
--    return FIELD_EX32(simd_data(desc), VDATA, VTA_ALL_1S);
--}
--
- /*
-  * Get the maximum number of elements can be operated.
-  *
-@@ -152,21 +91,6 @@ static inline uint32_t vext_max_elems(uint32_t desc, uint32_t log2_esz)
-     return scale < 0 ? vlenb >> -scale : vlenb << scale;
- }
- 
--/*
-- * Get number of total elements, including prestart, body and tail elements.
-- * Note that when LMUL < 1, the tail includes the elements past VLMAX that
-- * are held in the same vector register.
-- */
--static inline uint32_t vext_get_total_elems(CPURISCVState *env, uint32_t desc,
--                                            uint32_t esz)
--{
--    uint32_t vlenb = simd_maxsz(desc);
--    uint32_t sew = 1 << FIELD_EX64(env->vtype, VTYPE, VSEW);
--    int8_t emul = ctzl(esz) - ctzl(sew) + vext_lmul(desc) < 0 ? 0 :
--                  ctzl(esz) - ctzl(sew) + vext_lmul(desc);
--    return (vlenb << emul) / esz;
--}
--
- static inline target_ulong adjust_addr(CPURISCVState *env, target_ulong addr)
- {
-     return (addr & ~env->cur_pmmask) | env->cur_pmbase;
-@@ -199,20 +123,6 @@ static void probe_pages(CPURISCVState *env, target_ulong addr,
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 881bddf393..174ae9fe1a 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -111,6 +111,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zksed, PRIV_VERSION_1_12_0, ext_zksed),
+     ISA_EXT_DATA_ENTRY(zksh, PRIV_VERSION_1_12_0, ext_zksh),
+     ISA_EXT_DATA_ENTRY(zkt, PRIV_VERSION_1_12_0, ext_zkt),
++    ISA_EXT_DATA_ENTRY(zvbc, PRIV_VERSION_1_12_0, ext_zvbc),
+     ISA_EXT_DATA_ENTRY(zve32f, PRIV_VERSION_1_10_0, ext_zve32f),
+     ISA_EXT_DATA_ENTRY(zve64f, PRIV_VERSION_1_10_0, ext_zve64f),
+     ISA_EXT_DATA_ENTRY(zve64d, PRIV_VERSION_1_10_0, ext_zve64d),
+@@ -1184,6 +1185,11 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         return;
      }
- }
  
--/* set agnostic elements to 1s */
--static void vext_set_elems_1s(void *base, uint32_t is_agnostic, uint32_t cnt,
--                              uint32_t tot)
--{
--    if (is_agnostic == 0) {
--        /* policy undisturbed */
--        return;
--    }
--    if (tot - cnt == 0) {
--        return;
--    }
--    memset(base + cnt, -1, tot - cnt);
--}
--
- static inline void vext_set_elem_mask(void *v0, int index,
-                                       uint8_t value)
- {
-@@ -222,18 +132,6 @@ static inline void vext_set_elem_mask(void *v0, int index,
-     ((uint64_t *)v0)[idx] = deposit64(old, pos, 1, value);
- }
- 
--/*
-- * Earlier designs (pre-0.9) had a varying number of bits
-- * per mask value (MLEN). In the 0.9 design, MLEN=1.
-- * (Section 4.5)
-- */
--static inline int vext_elem_mask(void *v0, int index)
--{
--    int idx = index / 64;
--    int pos = index  % 64;
--    return (((uint64_t *)v0)[idx] >> pos) & 1;
--}
--
- /* elements operations for load and store */
- typedef void vext_ldst_elem_fn(CPURISCVState *env, target_ulong addr,
-                                uint32_t idx, void *vd, uintptr_t retaddr);
-@@ -728,18 +626,11 @@ GEN_VEXT_ST_WHOLE(vs8r_v, int8_t, ste_b)
-  * Vector Integer Arithmetic Instructions
-  */
- 
--/* expand macro args before macro */
--#define RVVCALL(macro, ...)  macro(__VA_ARGS__)
--
- /* (TD, T1, T2, TX1, TX2) */
- #define OP_SSS_B int8_t, int8_t, int8_t, int8_t, int8_t
- #define OP_SSS_H int16_t, int16_t, int16_t, int16_t, int16_t
- #define OP_SSS_W int32_t, int32_t, int32_t, int32_t, int32_t
- #define OP_SSS_D int64_t, int64_t, int64_t, int64_t, int64_t
--#define OP_UUU_B uint8_t, uint8_t, uint8_t, uint8_t, uint8_t
--#define OP_UUU_H uint16_t, uint16_t, uint16_t, uint16_t, uint16_t
--#define OP_UUU_W uint32_t, uint32_t, uint32_t, uint32_t, uint32_t
--#define OP_UUU_D uint64_t, uint64_t, uint64_t, uint64_t, uint64_t
- #define OP_SUS_B int8_t, uint8_t, int8_t, uint8_t, int8_t
- #define OP_SUS_H int16_t, uint16_t, int16_t, uint16_t, int16_t
- #define OP_SUS_W int32_t, uint32_t, int32_t, uint32_t, int32_t
-@@ -763,16 +654,6 @@ GEN_VEXT_ST_WHOLE(vs8r_v, int8_t, ste_b)
- #define NOP_UUU_H uint16_t, uint16_t, uint32_t, uint16_t, uint32_t
- #define NOP_UUU_W uint32_t, uint32_t, uint64_t, uint32_t, uint64_t
- 
--/* operation of two vector elements */
--typedef void opivv2_fn(void *vd, void *vs1, void *vs2, int i);
--
--#define OPIVV2(NAME, TD, T1, T2, TX1, TX2, HD, HS1, HS2, OP)    \
--static void do_##NAME(void *vd, void *vs1, void *vs2, int i)    \
--{                                                               \
--    TX1 s1 = *((T1 *)vs1 + HS1(i));                             \
--    TX2 s2 = *((T2 *)vs2 + HS2(i));                             \
--    *((TD *)vd + HD(i)) = OP(s2, s1);                           \
--}
- #define DO_SUB(N, M) (N - M)
- #define DO_RSUB(N, M) (M - N)
- 
-@@ -785,40 +666,6 @@ RVVCALL(OPIVV2, vsub_vv_h, OP_SSS_H, H2, H2, H2, DO_SUB)
- RVVCALL(OPIVV2, vsub_vv_w, OP_SSS_W, H4, H4, H4, DO_SUB)
- RVVCALL(OPIVV2, vsub_vv_d, OP_SSS_D, H8, H8, H8, DO_SUB)
- 
--static void do_vext_vv(void *vd, void *v0, void *vs1, void *vs2,
--                       CPURISCVState *env, uint32_t desc,
--                       opivv2_fn *fn, uint32_t esz)
--{
--    uint32_t vm = vext_vm(desc);
--    uint32_t vl = env->vl;
--    uint32_t total_elems = vext_get_total_elems(env, desc, esz);
--    uint32_t vta = vext_vta(desc);
--    uint32_t vma = vext_vma(desc);
--    uint32_t i;
--
--    for (i = env->vstart; i < vl; i++) {
--        if (!vm && !vext_elem_mask(v0, i)) {
--            /* set masked-off elements to 1s */
--            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);
--            continue;
--        }
--        fn(vd, vs1, vs2, i);
--    }
--    env->vstart = 0;
--    /* set tail elements to 1s */
--    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);
--}
--
--/* generate the helpers for OPIVV */
--#define GEN_VEXT_VV(NAME, ESZ)                            \
--void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
--                  void *vs2, CPURISCVState *env,          \
--                  uint32_t desc)                          \
--{                                                         \
--    do_vext_vv(vd, v0, vs1, vs2, env, desc,               \
--               do_##NAME, ESZ);                           \
--}
--
- GEN_VEXT_VV(vadd_vv_b, 1)
- GEN_VEXT_VV(vadd_vv_h, 2)
- GEN_VEXT_VV(vadd_vv_w, 4)
-@@ -828,18 +675,6 @@ GEN_VEXT_VV(vsub_vv_h, 2)
- GEN_VEXT_VV(vsub_vv_w, 4)
- GEN_VEXT_VV(vsub_vv_d, 8)
- 
--typedef void opivx2_fn(void *vd, target_long s1, void *vs2, int i);
--
--/*
-- * (T1)s1 gives the real operator type.
-- * (TX1)(T1)s1 expands the operator type of widen or narrow operations.
-- */
--#define OPIVX2(NAME, TD, T1, T2, TX1, TX2, HD, HS2, OP)             \
--static void do_##NAME(void *vd, target_long s1, void *vs2, int i)   \
--{                                                                   \
--    TX2 s2 = *((T2 *)vs2 + HS2(i));                                 \
--    *((TD *)vd + HD(i)) = OP(s2, (TX1)(T1)s1);                      \
--}
- 
- RVVCALL(OPIVX2, vadd_vx_b, OP_SSS_B, H1, H1, DO_ADD)
- RVVCALL(OPIVX2, vadd_vx_h, OP_SSS_H, H2, H2, DO_ADD)
-@@ -854,40 +689,6 @@ RVVCALL(OPIVX2, vrsub_vx_h, OP_SSS_H, H2, H2, DO_RSUB)
- RVVCALL(OPIVX2, vrsub_vx_w, OP_SSS_W, H4, H4, DO_RSUB)
- RVVCALL(OPIVX2, vrsub_vx_d, OP_SSS_D, H8, H8, DO_RSUB)
- 
--static void do_vext_vx(void *vd, void *v0, target_long s1, void *vs2,
--                       CPURISCVState *env, uint32_t desc,
--                       opivx2_fn fn, uint32_t esz)
--{
--    uint32_t vm = vext_vm(desc);
--    uint32_t vl = env->vl;
--    uint32_t total_elems = vext_get_total_elems(env, desc, esz);
--    uint32_t vta = vext_vta(desc);
--    uint32_t vma = vext_vma(desc);
--    uint32_t i;
--
--    for (i = env->vstart; i < vl; i++) {
--        if (!vm && !vext_elem_mask(v0, i)) {
--            /* set masked-off elements to 1s */
--            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);
--            continue;
--        }
--        fn(vd, s1, vs2, i);
--    }
--    env->vstart = 0;
--    /* set tail elements to 1s */
--    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);
--}
--
--/* generate the helpers for OPIVX */
--#define GEN_VEXT_VX(NAME, ESZ)                            \
--void HELPER(NAME)(void *vd, void *v0, target_ulong s1,    \
--                  void *vs2, CPURISCVState *env,          \
--                  uint32_t desc)                          \
--{                                                         \
--    do_vext_vx(vd, v0, s1, vs2, env, desc,                \
--               do_##NAME, ESZ);                           \
--}
--
- GEN_VEXT_VX(vadd_vx_b, 1)
- GEN_VEXT_VX(vadd_vx_h, 2)
- GEN_VEXT_VX(vadd_vx_w, 4)
-diff --git a/target/riscv/vector_internals.c b/target/riscv/vector_internals.c
-new file mode 100644
-index 0000000000..9cf5c17cde
---- /dev/null
-+++ b/target/riscv/vector_internals.c
-@@ -0,0 +1,81 @@
-+/*
-+ * RISC-V Vector Extension Internals
-+ *
-+ * Copyright (c) 2020 T-Head Semiconductor Co., Ltd. All rights reserved.
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include "vector_internals.h"
-+
-+/* set agnostic elements to 1s */
-+void vext_set_elems_1s(void *base, uint32_t is_agnostic, uint32_t cnt,
-+                       uint32_t tot)
-+{
-+    if (is_agnostic == 0) {
-+        /* policy undisturbed */
++    if (cpu->cfg.ext_zvbc && !cpu->cfg.ext_zve64f) {
++        error_setg(errp, "Zvbc extension requires V or Zve64{f,d} extensions");
 +        return;
 +    }
-+    if (tot - cnt == 0) {
-+        return ;
-+    }
-+    memset(base + cnt, -1, tot - cnt);
-+}
 +
-+void do_vext_vv(void *vd, void *v0, void *vs1, void *vs2,
-+                CPURISCVState *env, uint32_t desc,
-+                opivv2_fn *fn, uint32_t esz)
-+{
-+    uint32_t vm = vext_vm(desc);
-+    uint32_t vl = env->vl;
-+    uint32_t total_elems = vext_get_total_elems(env, desc, esz);
-+    uint32_t vta = vext_vta(desc);
-+    uint32_t vma = vext_vma(desc);
-+    uint32_t i;
+     if (cpu->cfg.ext_zk) {
+         cpu->cfg.ext_zkn = true;
+         cpu->cfg.ext_zkr = true;
+@@ -1683,6 +1689,9 @@ static Property riscv_cpu_extensions[] = {
+     DEFINE_PROP_BOOL("x-zvfh", RISCVCPU, cfg.ext_zvfh, false),
+     DEFINE_PROP_BOOL("x-zvfhmin", RISCVCPU, cfg.ext_zvfhmin, false),
+ 
++    /* Vector cryptography extensions */
++    DEFINE_PROP_BOOL("x-zvbc", RISCVCPU, cfg.ext_zvbc, false),
 +
-+    for (i = env->vstart; i < vl; i++) {
-+        if (!vm && !vext_elem_mask(v0, i)) {
-+            /* set masked-off elements to 1s */
-+            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);
-+            continue;
-+        }
-+        fn(vd, vs1, vs2, i);
-+    }
-+    env->vstart = 0;
-+    /* set tail elements to 1s */
-+    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);
-+}
+     DEFINE_PROP_END_OF_LIST(),
+ };
+ 
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index c4a627d335..b6e9bd2e99 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -83,6 +83,7 @@ struct RISCVCPUConfig {
+     bool ext_zve32f;
+     bool ext_zve64f;
+     bool ext_zve64d;
++    bool ext_zvbc;
+     bool ext_zmmul;
+     bool ext_zvfh;
+     bool ext_zvfhmin;
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 98e97810fd..be0f0f1058 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -1153,3 +1153,9 @@ DEF_HELPER_FLAGS_3(sm4ks, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
+ 
+ /* Zce helper */
+ DEF_HELPER_FLAGS_2(cm_jalt, TCG_CALL_NO_WG, tl, env, i32)
 +
-+void do_vext_vx(void *vd, void *v0, target_long s1, void *vs2,
-+                CPURISCVState *env, uint32_t desc,
-+                opivx2_fn fn, uint32_t esz)
-+{
-+    uint32_t vm = vext_vm(desc);
-+    uint32_t vl = env->vl;
-+    uint32_t total_elems = vext_get_total_elems(env, desc, esz);
-+    uint32_t vta = vext_vta(desc);
-+    uint32_t vma = vext_vma(desc);
-+    uint32_t i;
++/* Vector crypto functions */
++DEF_HELPER_6(vclmul_vv, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vclmul_vx, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vclmulh_vv, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vclmulh_vx, void, ptr, ptr, tl, ptr, env, i32)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 73d5d1b045..52cd92e262 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -908,3 +908,9 @@ sm4ks       .. 11010 ..... ..... 000 ..... 0110011 @k_aes
+ # *** RV32 Zicond Standard Extension ***
+ czero_eqz   0000111  ..... ..... 101 ..... 0110011 @r
+ czero_nez   0000111  ..... ..... 111 ..... 0110011 @r
 +
-+    for (i = env->vstart; i < vl; i++) {
-+        if (!vm && !vext_elem_mask(v0, i)) {
-+            /* set masked-off elements to 1s */
-+            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);
-+            continue;
-+        }
-+        fn(vd, s1, vs2, i);
-+    }
-+    env->vstart = 0;
-+    /* set tail elements to 1s */
-+    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);
-+}
-diff --git a/target/riscv/vector_internals.h b/target/riscv/vector_internals.h
++# *** Zvbc vector crypto extension ***
++vclmul_vv   001100 . ..... ..... 010 ..... 1010111 @r_vm
++vclmul_vx   001100 . ..... ..... 110 ..... 1010111 @r_vm
++vclmulh_vv  001101 . ..... ..... 010 ..... 1010111 @r_vm
++vclmulh_vx  001101 . ..... ..... 110 ..... 1010111 @r_vm
+diff --git a/target/riscv/insn_trans/trans_rvvk.c.inc b/target/riscv/insn_trans/trans_rvvk.c.inc
 new file mode 100644
-index 0000000000..749d138beb
+index 0000000000..552b08a2fd
 --- /dev/null
-+++ b/target/riscv/vector_internals.h
-@@ -0,0 +1,182 @@
++++ b/target/riscv/insn_trans/trans_rvvk.c.inc
+@@ -0,0 +1,62 @@
 +/*
-+ * RISC-V Vector Extension Internals
++ * RISC-V translation routines for the vector crypto extension.
 + *
-+ * Copyright (c) 2020 T-Head Semiconductor Co., Ltd. All rights reserved.
++ * Copyright (C) 2023 SiFive, Inc.
++ * Written by Codethink Ltd and SiFive.
 + *
 + * This program is free software; you can redistribute it and/or modify it
 + * under the terms and conditions of the GNU General Public License,
@@ -523,170 +231,140 @@ index 0000000000..749d138beb
 + * this program.  If not, see <http://www.gnu.org/licenses/>.
 + */
 +
-+#ifndef TARGET_RISCV_VECTOR_INTERNALS_H
-+#define TARGET_RISCV_VECTOR_INTERNALS_H
++/*
++ * Zvbc
++ */
++
++#define GEN_VV_MASKED_TRANS(NAME, CHECK)                     \
++    static bool trans_##NAME(DisasContext *s, arg_rmrr *a)   \
++    {                                                        \
++        if (CHECK(s, a)) {                                   \
++            return opivv_trans(a->rd, a->rs1, a->rs2, a->vm, \
++                               gen_helper_##NAME, s);        \
++        }                                                    \
++        return false;                                        \
++    }
++
++static bool vclmul_vv_check(DisasContext *s, arg_rmrr *a)
++{
++    return opivv_check(s, a) &&
++           s->cfg_ptr->ext_zvbc == true &&
++           s->sew == MO_64;
++}
++
++GEN_VV_MASKED_TRANS(vclmul_vv, vclmul_vv_check)
++GEN_VV_MASKED_TRANS(vclmulh_vv, vclmul_vv_check)
++
++#define GEN_VX_MASKED_TRANS(NAME, CHECK)                     \
++    static bool trans_##NAME(DisasContext *s, arg_rmrr *a)   \
++    {                                                        \
++        if (CHECK(s, a)) {                                   \
++            return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, \
++                               gen_helper_##NAME, s);        \
++        }                                                    \
++        return false;                                        \
++    }
++
++static bool vclmul_vx_check(DisasContext *s, arg_rmrr *a)
++{
++    return opivx_check(s, a) &&
++           s->cfg_ptr->ext_zvbc == true &&
++           s->sew == MO_64;
++}
++
++GEN_VX_MASKED_TRANS(vclmul_vx, vclmul_vx_check)
++GEN_VX_MASKED_TRANS(vclmulh_vx, vclmul_vx_check)
+diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+index c3801ee5e0..660078bda1 100644
+--- a/target/riscv/meson.build
++++ b/target/riscv/meson.build
+@@ -21,7 +21,8 @@ riscv_ss.add(files(
+   'translate.c',
+   'm128_helper.c',
+   'crypto_helper.c',
+-  'zce_helper.c'
++  'zce_helper.c',
++  'vcrypto_helper.c'
+ ))
+ riscv_ss.add(when: 'CONFIG_KVM', if_true: files('kvm.c'), if_false: files('kvm-stub.c'))
+ 
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 8a33da811e..b785f83cdc 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -1106,6 +1106,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+ #include "insn_trans/trans_rvzicbo.c.inc"
+ #include "insn_trans/trans_rvzfh.c.inc"
+ #include "insn_trans/trans_rvk.c.inc"
++#include "insn_trans/trans_rvvk.c.inc"
+ #include "insn_trans/trans_privileged.c.inc"
+ #include "insn_trans/trans_svinval.c.inc"
+ #include "decode-xthead.c.inc"
+diff --git a/target/riscv/vcrypto_helper.c b/target/riscv/vcrypto_helper.c
+new file mode 100644
+index 0000000000..8b7c63d499
+--- /dev/null
++++ b/target/riscv/vcrypto_helper.c
+@@ -0,0 +1,59 @@
++/*
++ * RISC-V Vector Crypto Extension Helpers for QEMU.
++ *
++ * Copyright (C) 2023 SiFive, Inc.
++ * Written by Codethink Ltd and SiFive.
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
 +
 +#include "qemu/osdep.h"
++#include "qemu/host-utils.h"
 +#include "qemu/bitops.h"
 +#include "cpu.h"
-+#include "tcg/tcg-gvec-desc.h"
++#include "exec/memop.h"
++#include "exec/exec-all.h"
++#include "exec/helper-proto.h"
 +#include "internals.h"
++#include "vector_internals.h"
 +
-+static inline uint32_t vext_nf(uint32_t desc)
++static uint64_t clmul64(uint64_t y, uint64_t x)
 +{
-+    return FIELD_EX32(simd_data(desc), VDATA, NF);
++    uint64_t result = 0;
++    for (int j = 63; j >= 0; j--) {
++        if ((y >> j) & 1) {
++            result ^= (x << j);
++        }
++    }
++    return result;
 +}
 +
-+/*
-+ * Note that vector data is stored in host-endian 64-bit chunks,
-+ * so addressing units smaller than that needs a host-endian fixup.
-+ */
-+#if HOST_BIG_ENDIAN
-+#define H1(x)   ((x) ^ 7)
-+#define H1_2(x) ((x) ^ 6)
-+#define H1_4(x) ((x) ^ 4)
-+#define H2(x)   ((x) ^ 3)
-+#define H4(x)   ((x) ^ 1)
-+#define H8(x)   ((x))
-+#else
-+#define H1(x)   (x)
-+#define H1_2(x) (x)
-+#define H1_4(x) (x)
-+#define H2(x)   (x)
-+#define H4(x)   (x)
-+#define H8(x)   (x)
-+#endif
-+
-+/*
-+ * Encode LMUL to lmul as following:
-+ *     LMUL    vlmul    lmul
-+ *      1       000       0
-+ *      2       001       1
-+ *      4       010       2
-+ *      8       011       3
-+ *      -       100       -
-+ *     1/8      101      -3
-+ *     1/4      110      -2
-+ *     1/2      111      -1
-+ */
-+static inline int32_t vext_lmul(uint32_t desc)
++static uint64_t clmulh64(uint64_t y, uint64_t x)
 +{
-+    return sextract32(FIELD_EX32(simd_data(desc), VDATA, LMUL), 0, 3);
++    uint64_t result = 0;
++    for (int j = 63; j >= 1; j--) {
++        if ((y >> j) & 1) {
++            result ^= (x >> (64 - j));
++        }
++    }
++    return result;
 +}
 +
-+static inline uint32_t vext_vm(uint32_t desc)
-+{
-+    return FIELD_EX32(simd_data(desc), VDATA, VM);
-+}
-+
-+static inline uint32_t vext_vma(uint32_t desc)
-+{
-+    return FIELD_EX32(simd_data(desc), VDATA, VMA);
-+}
-+
-+static inline uint32_t vext_vta(uint32_t desc)
-+{
-+    return FIELD_EX32(simd_data(desc), VDATA, VTA);
-+}
-+
-+static inline uint32_t vext_vta_all_1s(uint32_t desc)
-+{
-+    return FIELD_EX32(simd_data(desc), VDATA, VTA_ALL_1S);
-+}
-+
-+/*
-+ * Earlier designs (pre-0.9) had a varying number of bits
-+ * per mask value (MLEN). In the 0.9 design, MLEN=1.
-+ * (Section 4.5)
-+ */
-+static inline int vext_elem_mask(void *v0, int index)
-+{
-+    int idx = index / 64;
-+    int pos = index  % 64;
-+    return (((uint64_t *)v0)[idx] >> pos) & 1;
-+}
-+
-+/*
-+ * Get number of total elements, including prestart, body and tail elements.
-+ * Note that when LMUL < 1, the tail includes the elements past VLMAX that
-+ * are held in the same vector register.
-+ */
-+static inline uint32_t vext_get_total_elems(CPURISCVState *env, uint32_t desc,
-+                                            uint32_t esz)
-+{
-+    uint32_t vlenb = simd_maxsz(desc);
-+    uint32_t sew = 1 << FIELD_EX64(env->vtype, VTYPE, VSEW);
-+    int8_t emul = ctzl(esz) - ctzl(sew) + vext_lmul(desc) < 0 ? 0 :
-+                  ctzl(esz) - ctzl(sew) + vext_lmul(desc);
-+    return (vlenb << emul) / esz;
-+}
-+
-+/* set agnostic elements to 1s */
-+void vext_set_elems_1s(void *base, uint32_t is_agnostic, uint32_t cnt,
-+                       uint32_t tot);
-+
-+/* expand macro args before macro */
-+#define RVVCALL(macro, ...)  macro(__VA_ARGS__)
-+
-+/* (TD, T1, T2, TX1, TX2) */
-+#define OP_UUU_B uint8_t, uint8_t, uint8_t, uint8_t, uint8_t
-+#define OP_UUU_H uint16_t, uint16_t, uint16_t, uint16_t, uint16_t
-+#define OP_UUU_W uint32_t, uint32_t, uint32_t, uint32_t, uint32_t
-+#define OP_UUU_D uint64_t, uint64_t, uint64_t, uint64_t, uint64_t
-+
-+/* operation of two vector elements */
-+typedef void opivv2_fn(void *vd, void *vs1, void *vs2, int i);
-+
-+#define OPIVV2(NAME, TD, T1, T2, TX1, TX2, HD, HS1, HS2, OP)    \
-+static void do_##NAME(void *vd, void *vs1, void *vs2, int i)    \
-+{                                                               \
-+    TX1 s1 = *((T1 *)vs1 + HS1(i));                             \
-+    TX2 s2 = *((T2 *)vs2 + HS2(i));                             \
-+    *((TD *)vd + HD(i)) = OP(s2, s1);                           \
-+}
-+
-+void do_vext_vv(void *vd, void *v0, void *vs1, void *vs2,
-+                CPURISCVState *env, uint32_t desc,
-+                opivv2_fn *fn, uint32_t esz);
-+
-+/* generate the helpers for OPIVV */
-+#define GEN_VEXT_VV(NAME, ESZ)                            \
-+void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
-+                  void *vs2, CPURISCVState *env,          \
-+                  uint32_t desc)                          \
-+{                                                         \
-+    do_vext_vv(vd, v0, vs1, vs2, env, desc,               \
-+               do_##NAME, ESZ);                           \
-+}
-+
-+typedef void opivx2_fn(void *vd, target_long s1, void *vs2, int i);
-+
-+/*
-+ * (T1)s1 gives the real operator type.
-+ * (TX1)(T1)s1 expands the operator type of widen or narrow operations.
-+ */
-+#define OPIVX2(NAME, TD, T1, T2, TX1, TX2, HD, HS2, OP)             \
-+static void do_##NAME(void *vd, target_long s1, void *vs2, int i)   \
-+{                                                                   \
-+    TX2 s2 = *((T2 *)vs2 + HS2(i));                                 \
-+    *((TD *)vd + HD(i)) = OP(s2, (TX1)(T1)s1);                      \
-+}
-+
-+void do_vext_vx(void *vd, void *v0, target_long s1, void *vs2,
-+                CPURISCVState *env, uint32_t desc,
-+                opivx2_fn fn, uint32_t esz);
-+
-+/* generate the helpers for OPIVX */
-+#define GEN_VEXT_VX(NAME, ESZ)                            \
-+void HELPER(NAME)(void *vd, void *v0, target_ulong s1,    \
-+                  void *vs2, CPURISCVState *env,          \
-+                  uint32_t desc)                          \
-+{                                                         \
-+    do_vext_vx(vd, v0, s1, vs2, env, desc,                \
-+               do_##NAME, ESZ);                           \
-+}
-+
-+#endif /* TARGET_RISCV_VECTOR_INTERNALS_H */
++RVVCALL(OPIVV2, vclmul_vv, OP_UUU_D, H8, H8, H8, clmul64)
++GEN_VEXT_VV(vclmul_vv, 8)
++RVVCALL(OPIVX2, vclmul_vx, OP_UUU_D, H8, H8, clmul64)
++GEN_VEXT_VX(vclmul_vx, 8)
++RVVCALL(OPIVV2, vclmulh_vv, OP_UUU_D, H8, H8, H8, clmulh64)
++GEN_VEXT_VV(vclmulh_vv, 8)
++RVVCALL(OPIVX2, vclmulh_vx, OP_UUU_D, H8, H8, clmulh64)
++GEN_VEXT_VX(vclmulh_vx, 8)
 -- 
 2.34.1
 
