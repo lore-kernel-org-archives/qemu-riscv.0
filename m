@@ -4,81 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B129EB64DA
-	for <qemu-riscv@archiver.kernel.org>; Sun,  2 Jul 2023 15:58:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 613A8EB64DA
+	for <qemu-riscv@archiver.kernel.org>; Sun,  2 Jul 2023 15:58:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qFzQ3-0002t8-Mr; Sun, 02 Jul 2023 11:55:23 -0400
+	id 1qFzQI-0004Of-BA; Sun, 02 Jul 2023 11:55:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1qFzPj-0002UK-RU
- for qemu-riscv@nongnu.org; Sun, 02 Jul 2023 11:55:07 -0400
-Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
+ id 1qFzQD-0003uK-St
+ for qemu-riscv@nongnu.org; Sun, 02 Jul 2023 11:55:34 -0400
+Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1qFzPg-0008NQ-Is
- for qemu-riscv@nongnu.org; Sun, 02 Jul 2023 11:55:03 -0400
-Received: by mail-pg1-x535.google.com with SMTP id
- 41be03b00d2f7-55ba5fae2e6so108910a12.0
- for <qemu-riscv@nongnu.org>; Sun, 02 Jul 2023 08:55:00 -0700 (PDT)
+ id 1qFzQ9-0000GM-6p
+ for qemu-riscv@nongnu.org; Sun, 02 Jul 2023 11:55:30 -0400
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-668711086f4so2209516b3a.1
+ for <qemu-riscv@nongnu.org>; Sun, 02 Jul 2023 08:55:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1688313299; x=1690905299;
+ d=sifive.com; s=google; t=1688313328; x=1690905328;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XkO25Rg1Lt6NXKDYaL4gODfG/1cPbL2sMM5/ee4/pn4=;
- b=Mtmyp0lpM3CH0/kNd+tmGiG4dr5rMCo5yB8z7xw1XXKbVG3REmq3aSku0WjJN7enwB
- lT3bHG9Zcqh6cBUn6658V2HlOy7s70Q0QSzuyltFQgcVfNrPNBTVkvj2ZRRG9RX2ELwd
- BIO0x9Okrv7tFrYYKJrnGbqlU4a6xeeRY9O0Xg/vu3bMpw4/XP859hm1kT+B/XW7LbsK
- BXFGKKIXYzz1v7Z1jsFeMJrewDckEGXM/eaaJK25HiQ+Rd9A7tSruJTeWDu2oAWn4WV6
- GDxfCcRIe4xsJ9n0F3AXr7kv6+jAUhOtOOTsn//HIydlDNwl3q5t5kgVAgasFWDKA9XO
- wOJQ==
+ bh=DEIqVctPEZTYbzcDe0Hbcq05xA1rg82RA8xn7gYRFBw=;
+ b=QTxmpJw9M5cu3YaNlWJZaqkAzB8f1Oejcl1mWtsEMyniZr9egiGF5rgKaZMa0YNVEU
+ Qx9I9HnwJo8s4oWo+PCFsPa05GRrrDZQmuH2BAf9nnR8mxf2zg0XDpH0xhWI+pabfKvS
+ 76lYDHzFw4z1Oo4UMLRsp0X+ynzEShVn5M9sMHqlgaQB7sY+hIacSwhf03NbxD//OI8J
+ JDjQH1x3Rn1FDEqt5mYFoIVai/1JbtENMDFzy/TYGuAnjsSknKqTeZHpMVPdN4IzR3qY
+ n2BvgiFKOY3gsoyg5DTI++CgIk3xBYooL+bHs/Q+JOKN7XLU8GczIoxy2nS5fv34zsuS
+ XIew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688313299; x=1690905299;
+ d=1e100.net; s=20221208; t=1688313328; x=1690905328;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XkO25Rg1Lt6NXKDYaL4gODfG/1cPbL2sMM5/ee4/pn4=;
- b=TQcGqB5sso9y927Po6mFFxFNXvIprAevAcnRfuN5JkY/AFIFhBAFHz9+Ef2yHFgVc4
- 1Ro7mfedW4P5Jo11nX+/oXOD4ILhaJfHge/T59bU0Rutw3Nx6K5M0MIQPwpGLAu2lMfm
- XMNC4riTBtGr8/MEljKQISi27vThcbUZOOu6BhTtuki9KwndqN/8vRrbSgjBc6ZBdaza
- vao0yJ+wpUYsscKvAAQYzp8e1DdRa24XKO8JPrnse6g90gkAxRfN+SS0Ditfk2KuiHTk
- Twoevqvp/luGWP9bKmKa3TY0UIoSmqydIgqX3nASstDckvJEF9gzcTPaOsGxgXlMOFf7
- k19w==
-X-Gm-Message-State: AC+VfDzCDXGH5y/odialtBod78xEqpGB5r8xylARIQzBDDFzZn68aInJ
- Ae6wtFx7Tj59DJIs7ifYye4UYQ==
-X-Google-Smtp-Source: ACHHUZ4FqKOoCIjTHb90BD5bSm+XbK4xg4QOD1PUcejSp/GgcnLy9WenRC/GEFwjXFfvYpv+VF5n/g==
-X-Received: by 2002:a05:6a20:1051:b0:12b:e7de:6382 with SMTP id
- gt17-20020a056a20105100b0012be7de6382mr8537676pzc.34.1688313299101; 
- Sun, 02 Jul 2023 08:54:59 -0700 (PDT)
+ bh=DEIqVctPEZTYbzcDe0Hbcq05xA1rg82RA8xn7gYRFBw=;
+ b=V7rHVzDfbEVYkIek6zNYX92ZwoN430TrW1y6qsE1Z/IwS/n0wJ5featg+VX93NwZYy
+ Pxld0ZEBNECdnIMQxa0O2kVB1TWcJlEi32UgWkfX6fXxZeEVeJCqPLT8NjOO9+bex0JN
+ hTzFe2aeO9t3Iqp3MwjTSbPLEN268qvXbKHeINxHgMEENiH+hph4iPxhvb0iBKfqG5YI
+ dgrQJfXinpNyAoEstHb6oc+o9WKvPrbiQYIf/lr6y2det5BUEHCH/JIo+9thaXnLsRvE
+ D7XK8XSpAauxMe9akty5DzOu74n8BqwNQBhWalNFlR/RTqIYAbEvNKSDN/3O5jJqgxEd
+ Zhmw==
+X-Gm-Message-State: ABy/qLbyDOViyhh+19RmhMuqUu9m37hQsz6bhjtGPuoDV5WZe/kskaXa
+ kp1MC1XJ7rn7J9woIWBGLzv9AiYQ5bodeqABu2NBYTBf
+X-Google-Smtp-Source: APBJJlEzmw9aR7JGkhGtbn9ZCtEW7/DTDyKAh5CL8Fl0Tb/hnLteOPDxP8EDnuFPppD8mVJTNCFpcA==
+X-Received: by 2002:a05:6a00:2d0f:b0:682:93ce:4825 with SMTP id
+ fa15-20020a056a002d0f00b0068293ce4825mr460345pfb.3.1688313327834; 
+ Sun, 02 Jul 2023 08:55:27 -0700 (PDT)
 Received: from duncan.localdomain (125-228-20-175.hinet-ip.hinet.net.
  [125.228.20.175]) by smtp.gmail.com with ESMTPSA id
- y19-20020aa78553000000b0066f37665a63sm8231969pfn.73.2023.07.02.08.54.57
+ y19-20020aa78553000000b0066f37665a63sm8231969pfn.73.2023.07.02.08.55.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 02 Jul 2023 08:54:58 -0700 (PDT)
+ Sun, 02 Jul 2023 08:55:27 -0700 (PDT)
 From: Max Chou <max.chou@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Cc: dbarboza@ventanamicro.com,
- Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>,
- Weiwei Li <liweiwei@iscas.ac.cn>, Max Chou <max.chou@sifive.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH v7 07/15] target/riscv: Refactor some of the generic vector
- functionality
-Date: Sun,  2 Jul 2023 23:53:41 +0800
-Message-Id: <20230702155354.2478495-8-max.chou@sifive.com>
+Cc: dbarboza@ventanamicro.com, Max Chou <max.chou@sifive.com>,
+ Frank Chang <frank.chang@sifive.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>, qemu-arm@nongnu.org
+Subject: [PATCH v7 13/15] crypto: Create sm4_subword
+Date: Sun,  2 Jul 2023 23:53:47 +0800
+Message-Id: <20230702155354.2478495-14-max.chou@sifive.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230702155354.2478495-1-max.chou@sifive.com>
 References: <20230702155354.2478495-1-max.chou@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
- envelope-from=max.chou@sifive.com; helo=mail-pg1-x535.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
+ envelope-from=max.chou@sifive.com; helo=mail-pf1-x42f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,155 +98,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
+Allows sharing of sm4_subword between different targets.
 
-Move some macros out of `vector_helper` and into `vector_internals`.
-This ensures they can be used by both vector and vector-crypto helpers
-(latter implemented in proceeding commits).
-
-Signed-off-by: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
-Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Max Chou <max.chou@sifive.com>
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Max Chou <max.chou@sifive.com>
 ---
- target/riscv/vector_helper.c    | 42 ------------------------------
- target/riscv/vector_internals.h | 46 +++++++++++++++++++++++++++++++++
- 2 files changed, 46 insertions(+), 42 deletions(-)
+ include/crypto/sm4.h           |  8 ++++++++
+ target/arm/tcg/crypto_helper.c | 10 ++--------
+ 2 files changed, 10 insertions(+), 8 deletions(-)
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 57be83400d..124ed22f95 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -635,9 +635,6 @@ GEN_VEXT_ST_WHOLE(vs8r_v, int8_t, ste_b)
- #define OP_SUS_H int16_t, uint16_t, int16_t, uint16_t, int16_t
- #define OP_SUS_W int32_t, uint32_t, int32_t, uint32_t, int32_t
- #define OP_SUS_D int64_t, uint64_t, int64_t, uint64_t, int64_t
--#define WOP_UUU_B uint16_t, uint8_t, uint8_t, uint16_t, uint16_t
--#define WOP_UUU_H uint32_t, uint16_t, uint16_t, uint32_t, uint32_t
--#define WOP_UUU_W uint64_t, uint32_t, uint32_t, uint64_t, uint64_t
- #define WOP_SSS_B int16_t, int8_t, int8_t, int16_t, int16_t
- #define WOP_SSS_H int32_t, int16_t, int16_t, int32_t, int32_t
- #define WOP_SSS_W int64_t, int32_t, int32_t, int64_t, int64_t
-@@ -3426,11 +3423,6 @@ GEN_VEXT_VF(vfwnmsac_vf_h, 4)
- GEN_VEXT_VF(vfwnmsac_vf_w, 8)
+diff --git a/include/crypto/sm4.h b/include/crypto/sm4.h
+index 9bd3ebc62e..de8245d8a7 100644
+--- a/include/crypto/sm4.h
++++ b/include/crypto/sm4.h
+@@ -3,4 +3,12 @@
  
- /* Vector Floating-Point Square-Root Instruction */
--/* (TD, T2, TX2) */
--#define OP_UU_H uint16_t, uint16_t, uint16_t
--#define OP_UU_W uint32_t, uint32_t, uint32_t
--#define OP_UU_D uint64_t, uint64_t, uint64_t
--
- #define OPFVV1(NAME, TD, T2, TX2, HD, HS2, OP)         \
- static void do_##NAME(void *vd, void *vs2, int i,      \
-                       CPURISCVState *env)              \
-@@ -4127,40 +4119,6 @@ GEN_VEXT_CMP_VF(vmfge_vf_w, uint32_t, H4, vmfge32)
- GEN_VEXT_CMP_VF(vmfge_vf_d, uint64_t, H8, vmfge64)
+ extern const uint8_t sm4_sbox[256];
  
- /* Vector Floating-Point Classify Instruction */
--#define OPIVV1(NAME, TD, T2, TX2, HD, HS2, OP)         \
--static void do_##NAME(void *vd, void *vs2, int i)      \
--{                                                      \
--    TX2 s2 = *((T2 *)vs2 + HS2(i));                    \
--    *((TD *)vd + HD(i)) = OP(s2);                      \
--}
--
--#define GEN_VEXT_V(NAME, ESZ)                          \
--void HELPER(NAME)(void *vd, void *v0, void *vs2,       \
--                  CPURISCVState *env, uint32_t desc)   \
--{                                                      \
--    uint32_t vm = vext_vm(desc);                       \
--    uint32_t vl = env->vl;                             \
--    uint32_t total_elems =                             \
--        vext_get_total_elems(env, desc, ESZ);          \
--    uint32_t vta = vext_vta(desc);                     \
--    uint32_t vma = vext_vma(desc);                     \
--    uint32_t i;                                        \
--                                                       \
--    for (i = env->vstart; i < vl; i++) {               \
--        if (!vm && !vext_elem_mask(v0, i)) {           \
--            /* set masked-off elements to 1s */        \
--            vext_set_elems_1s(vd, vma, i * ESZ,        \
--                              (i + 1) * ESZ);          \
--            continue;                                  \
--        }                                              \
--        do_##NAME(vd, vs2, i);                         \
--    }                                                  \
--    env->vstart = 0;                                   \
--    /* set tail elements to 1s */                      \
--    vext_set_elems_1s(vd, vta, vl * ESZ,               \
--                      total_elems * ESZ);              \
--}
--
- target_ulong fclass_h(uint64_t frs1)
- {
-     float16 f = frs1;
-diff --git a/target/riscv/vector_internals.h b/target/riscv/vector_internals.h
-index 749d138beb..8133111e5f 100644
---- a/target/riscv/vector_internals.h
-+++ b/target/riscv/vector_internals.h
-@@ -121,12 +121,52 @@ void vext_set_elems_1s(void *base, uint32_t is_agnostic, uint32_t cnt,
- /* expand macro args before macro */
- #define RVVCALL(macro, ...)  macro(__VA_ARGS__)
- 
-+/* (TD, T2, TX2) */
-+#define OP_UU_B uint8_t, uint8_t, uint8_t
-+#define OP_UU_H uint16_t, uint16_t, uint16_t
-+#define OP_UU_W uint32_t, uint32_t, uint32_t
-+#define OP_UU_D uint64_t, uint64_t, uint64_t
-+
- /* (TD, T1, T2, TX1, TX2) */
- #define OP_UUU_B uint8_t, uint8_t, uint8_t, uint8_t, uint8_t
- #define OP_UUU_H uint16_t, uint16_t, uint16_t, uint16_t, uint16_t
- #define OP_UUU_W uint32_t, uint32_t, uint32_t, uint32_t, uint32_t
- #define OP_UUU_D uint64_t, uint64_t, uint64_t, uint64_t, uint64_t
- 
-+#define OPIVV1(NAME, TD, T2, TX2, HD, HS2, OP)         \
-+static void do_##NAME(void *vd, void *vs2, int i)      \
-+{                                                      \
-+    TX2 s2 = *((T2 *)vs2 + HS2(i));                    \
-+    *((TD *)vd + HD(i)) = OP(s2);                      \
++static inline uint32_t sm4_subword(uint32_t word)
++{
++    return sm4_sbox[word & 0xff] |
++           sm4_sbox[(word >> 8) & 0xff] << 8 |
++           sm4_sbox[(word >> 16) & 0xff] << 16 |
++           sm4_sbox[(word >> 24) & 0xff] << 24;
 +}
 +
-+#define GEN_VEXT_V(NAME, ESZ)                          \
-+void HELPER(NAME)(void *vd, void *v0, void *vs2,       \
-+                  CPURISCVState *env, uint32_t desc)   \
-+{                                                      \
-+    uint32_t vm = vext_vm(desc);                       \
-+    uint32_t vl = env->vl;                             \
-+    uint32_t total_elems =                             \
-+        vext_get_total_elems(env, desc, ESZ);          \
-+    uint32_t vta = vext_vta(desc);                     \
-+    uint32_t vma = vext_vma(desc);                     \
-+    uint32_t i;                                        \
-+                                                       \
-+    for (i = env->vstart; i < vl; i++) {               \
-+        if (!vm && !vext_elem_mask(v0, i)) {           \
-+            /* set masked-off elements to 1s */        \
-+            vext_set_elems_1s(vd, vma, i * ESZ,        \
-+                              (i + 1) * ESZ);          \
-+            continue;                                  \
-+        }                                              \
-+        do_##NAME(vd, vs2, i);                         \
-+    }                                                  \
-+    env->vstart = 0;                                   \
-+    /* set tail elements to 1s */                      \
-+    vext_set_elems_1s(vd, vta, vl * ESZ,               \
-+                      total_elems * ESZ);              \
-+}
-+
- /* operation of two vector elements */
- typedef void opivv2_fn(void *vd, void *vs1, void *vs2, int i);
+ #endif
+diff --git a/target/arm/tcg/crypto_helper.c b/target/arm/tcg/crypto_helper.c
+index fdd70abbfd..7cadd61e12 100644
+--- a/target/arm/tcg/crypto_helper.c
++++ b/target/arm/tcg/crypto_helper.c
+@@ -614,10 +614,7 @@ static void do_crypto_sm4e(uint64_t *rd, uint64_t *rn, uint64_t *rm)
+             CR_ST_WORD(d, (i + 3) % 4) ^
+             CR_ST_WORD(n, i);
  
-@@ -179,4 +219,10 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,    \
-                do_##NAME, ESZ);                           \
- }
+-        t = sm4_sbox[t & 0xff] |
+-            sm4_sbox[(t >> 8) & 0xff] << 8 |
+-            sm4_sbox[(t >> 16) & 0xff] << 16 |
+-            sm4_sbox[(t >> 24) & 0xff] << 24;
++        t = sm4_subword(t);
  
-+/* Three of the widening shortening macros: */
-+/* (TD, T1, T2, TX1, TX2) */
-+#define WOP_UUU_B uint16_t, uint8_t, uint8_t, uint16_t, uint16_t
-+#define WOP_UUU_H uint32_t, uint16_t, uint16_t, uint32_t, uint32_t
-+#define WOP_UUU_W uint64_t, uint32_t, uint32_t, uint64_t, uint64_t
-+
- #endif /* TARGET_RISCV_VECTOR_INTERNALS_H */
+         CR_ST_WORD(d, i) ^= t ^ rol32(t, 2) ^ rol32(t, 10) ^ rol32(t, 18) ^
+                             rol32(t, 24);
+@@ -651,10 +648,7 @@ static void do_crypto_sm4ekey(uint64_t *rd, uint64_t *rn, uint64_t *rm)
+             CR_ST_WORD(d, (i + 3) % 4) ^
+             CR_ST_WORD(m, i);
+ 
+-        t = sm4_sbox[t & 0xff] |
+-            sm4_sbox[(t >> 8) & 0xff] << 8 |
+-            sm4_sbox[(t >> 16) & 0xff] << 16 |
+-            sm4_sbox[(t >> 24) & 0xff] << 24;
++        t = sm4_subword(t);
+ 
+         CR_ST_WORD(d, i) ^= t ^ rol32(t, 13) ^ rol32(t, 23);
+     }
 -- 
 2.34.1
 
