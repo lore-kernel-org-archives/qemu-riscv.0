@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BF7AEB64D9
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jul 2023 02:47:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61E38EB64D9
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jul 2023 02:48:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qG9aT-0000W7-RO; Sun, 02 Jul 2023 22:46:49 -0400
+	id 1qG9bS-0001E6-78; Sun, 02 Jul 2023 22:47:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qG9aR-0000V0-IH; Sun, 02 Jul 2023 22:46:47 -0400
-Received: from mail-vk1-xa32.google.com ([2607:f8b0:4864:20::a32])
+ id 1qG9bP-0001Cg-S7; Sun, 02 Jul 2023 22:47:47 -0400
+Received: from mail-vk1-xa2d.google.com ([2607:f8b0:4864:20::a2d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qG9aP-0004Vj-Nq; Sun, 02 Jul 2023 22:46:47 -0400
-Received: by mail-vk1-xa32.google.com with SMTP id
- 71dfb90a1353d-47e4e621637so67717e0c.3; 
- Sun, 02 Jul 2023 19:46:45 -0700 (PDT)
+ id 1qG9bN-00058R-Pi; Sun, 02 Jul 2023 22:47:47 -0400
+Received: by mail-vk1-xa2d.google.com with SMTP id
+ 71dfb90a1353d-47e2df3c418so310761e0c.3; 
+ Sun, 02 Jul 2023 19:47:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1688352404; x=1690944404;
+ d=gmail.com; s=20221208; t=1688352464; x=1690944464;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JhPdOMM+y6xe927PuZ9Pjicd8cI9mlBX9T6H2jTzJ/8=;
- b=llY1xwktWGRmA0MimPwoVFjUoWv+/8Qf1Tt2/HH+XkY78EMwQf23vXZn+ksX1DSY4k
- Bs/EgpHq6FIH6eXEUBl4b9ypXNb0ZZrFescbSMWPAqjqDV4u1K9kycfoyc+S3LA7O6e4
- 1q3dT0VPH12C2DpDwhUaR1FGL4sZ3TwjZX9ePXnAeuJIyPfL9l3fwtuywWLP4uVudJzQ
- hnBE+6gtasRZzgjpjKpVL7HRkOBP4fuLxB5AAmh0r1eAmJkCalPEz6RJ48bx0mzy7fOV
- JdNvG84+6mZ4SUX6mk8IDzAZ+6ShDgNWw5NLfB5p22pPwFNNKXBP6wfklyd3Kwcjk5MC
- IohQ==
+ bh=x43LMeC71mWklkzr15r4pKrbZRjs1/HyvGGzbeLlFP8=;
+ b=XPj6aLWecO+DK/GcslzE0LB3/qYDlReWD4qB9S3s6geSVEFJ5dc0ARJk9z4SyX3/Ox
+ 1WS9fSdcgstODX4f7z01UDVDe26KgmGL9xZcxFTPoRbjZ/hTqGEts5svZHVhHSmYtWFC
+ iRrqhV7zIESg4iYckQmVNiAibWjFhmaTLvf6g+zQUK9aEeJ+euMk3d2dYF7ZHJstJQiU
+ D0SN7zMi3zg2QDFl97XXLWMsIJ96+40rRzs+E+htbvPo3/yWv/okfe7ui6Q+TYYnKXsQ
+ kWQqQWNXxidl4DFNByP5lQxULR/MnXrP2RUp0qCaZ+xyZ7S9LnrFp7xMDBwr0J4+jKwZ
+ pdkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688352404; x=1690944404;
+ d=1e100.net; s=20221208; t=1688352464; x=1690944464;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JhPdOMM+y6xe927PuZ9Pjicd8cI9mlBX9T6H2jTzJ/8=;
- b=eGtStHnCztUqQIpkUJFctf+KvNrFmIJAFFNbucs/myB2WOWWjGjHwp1lW3O/sbPexm
- N9+XIOGyt5itnaNDOJY6wLv9X9Mj63EoOxAqmPc/rbLmIqVslU4d07+ZuleUassb72q4
- MD9QM8nvanOTrsxKQBBuTknFDZiwsMLy+ZIpm5i4FFSF7t6l25l/Z5T1G8Pojv9+dWaj
- nHuR9VolDhTr54wp+vWOSjPUxW+vV1qQuurxptv4AfhH11PvxxvE2OVX47W+KYPx2iZp
- Zpctdk/a674zOz2q47gur2LPiguz4v+RXezNizH0pzJ4X0EkXFOGGtE1C9/YRVqGb6ti
- 1I2g==
-X-Gm-Message-State: ABy/qLYx8Z9YUwkSMsRtTvMnW02pm4lo2BsB7QhdlOSYbzXMIm4+SQmK
- 0Fkmjm3pqVM10ToCkIYaEf2z8Lixkc1zlP44wC9Xs9xuocnYiQ==
-X-Google-Smtp-Source: APBJJlHgA9yyvhBMDJw+Eo5Ho7OpluD2q2xTEvFqi1Zln2zCMpwwUgG9IFzFYeqcLefUG/HZqlJQllv6NZi+xbvapdo=
-X-Received: by 2002:a05:6122:231f:b0:471:b14a:fc48 with SMTP id
- bq31-20020a056122231f00b00471b14afc48mr3695011vkb.13.1688352404366; Sun, 02
- Jul 2023 19:46:44 -0700 (PDT)
+ bh=x43LMeC71mWklkzr15r4pKrbZRjs1/HyvGGzbeLlFP8=;
+ b=IfIHp31AEfHbQKhalQvYT/0e6/EGRlRedTcOJswZ+yF/cIR/RWJ3A2O5PlXBgeZCbj
+ UGGyEZ2wThLXmyaEng/0/qn0qGAiMKXARtS5O9JCNC/5yarg2TTyUPeETyWQIqc2xu+U
+ sIu6bMMHs+veHTAXhaSCCe2i5dviylUwmTGhGi80EfP7i9YkflzvgsOLDL6GZ3u8GLOR
+ 5BOmdIi38d6Ma571Xr9scsDY+uTzFxk+gqexqK9DCH7rPDesA15NdDa8RDPcE/FSAp5+
+ kSzjS5ucsAGCLjTmVUj89QfQCCklb6tDHWvFSoK4rt5edWq1zFKfEZZqUt4FDMQLqJTA
+ i81Q==
+X-Gm-Message-State: ABy/qLbR231++5y8iSkf7tvHm5BnzaFF+Z/P+b2GNvmxSFQNG6NNr0rX
+ HaWxplORixe7KCj7EAGzV0A9T6+44KUK7NnJCYE=
+X-Google-Smtp-Source: APBJJlFC5dDuJusbjb+1gw5MPxBs3K60SCmO73nn0nWmIk0blsxaZ79/EXVcq3mKcq8RQYJRlvws3C4iSL1s4Tdhdks=
+X-Received: by 2002:a1f:bdcb:0:b0:47e:47d4:958 with SMTP id
+ n194-20020a1fbdcb000000b0047e47d40958mr481379vkf.15.1688352464425; Sun, 02
+ Jul 2023 19:47:44 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230629121103.87733-1-philmd@linaro.org>
  <20230629121103.87733-3-philmd@linaro.org>
 In-Reply-To: <20230629121103.87733-3-philmd@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 3 Jul 2023 12:46:18 +1000
-Message-ID: <CAKmqyKMiTkGwvF81UP9gFVXryPO85Dg_dxMVXVBfoLPoKCn3iQ@mail.gmail.com>
+Date: Mon, 3 Jul 2023 12:47:18 +1000
+Message-ID: <CAKmqyKOHU4TJiNs6OFe0JRBF2-qgo-6L0-YjGAHBqhEuhgO-qw@mail.gmail.com>
 Subject: Re: [PATCH 2/2] hw/riscv/virt: Restrict ACLINT to TCG
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, Bin Meng <bin.meng@windriver.com>, 
@@ -67,8 +67,8 @@ Cc: qemu-devel@nongnu.org, Bin Meng <bin.meng@windriver.com>,
  Weiwei Li <liweiwei@iscas.ac.cn>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a32;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2d;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2d.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -101,7 +101,9 @@ On Thu, Jun 29, 2023 at 10:12=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
 >
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
