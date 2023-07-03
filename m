@@ -4,73 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92525EB64DC
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jul 2023 12:42:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15FF4EB64DC
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jul 2023 14:04:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qGIsq-0003Zi-G4; Mon, 03 Jul 2023 08:42:25 -0400
+	id 1qGKAB-00061H-5Y; Mon, 03 Jul 2023 10:04:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <schwab@suse.de>)
- id 1qGIsh-0003YU-UR; Mon, 03 Jul 2023 08:42:17 -0400
-Received: from smtp-out2.suse.de ([2001:67c:2178:6::1d])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <schwab@suse.de>)
- id 1qGIsg-00062g-7M; Mon, 03 Jul 2023 08:42:15 -0400
-Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
- by smtp-out2.suse.de (Postfix) with ESMTP id 8850F1FE15;
- Mon,  3 Jul 2023 12:42:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1688388132; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=DB+LpbSBhOQXoOnxD1apCRG2sZYIV8qKUcIRz2Y16ZQ=;
- b=JYqEd3bb2OETemuZU0iq0gInLynziPZcat5BIlDQ/tamXhC7geV9LY/lI5YobHwOVKCqBJ
- Lxc8t1NJ5b4SYY2Luq+XtqM+M5L1Xc4Gs0iqS1IMkMrpQsOO/7+msr9OAcOPYWhew4CWQI
- x0/e+FjJCEjvlSsX2oWKU5VNUhTp0gI=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1688388132;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=DB+LpbSBhOQXoOnxD1apCRG2sZYIV8qKUcIRz2Y16ZQ=;
- b=M8OP4guAJLSzkLuaCoHrk9koS77Dt9zN+t9JxN0MlH58xD6NOIkBCj6yX5X8lGW2cPBlBp
- yo22CzYt+ZLitwAw==
-Received: from hawking.nue2.suse.org (unknown [10.168.4.11])
- by relay2.suse.de (Postfix) with ESMTP id 100712C141;
- Mon,  3 Jul 2023 12:42:12 +0000 (UTC)
-Received: by hawking.nue2.suse.org (Postfix, from userid 17005)
- id ECE8D4A03BD; Mon,  3 Jul 2023 14:42:11 +0200 (CEST)
-From: Andreas Schwab <schwab@suse.de>
-To: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-Cc: Helge Deller <deller@gmx.de>,  Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,  Bin Meng
- <bin.meng@windriver.com>,  qemu-riscv@nongnu.org,  qemu-devel@nongnu.org
-Subject: Re: [RISC-V] ERROR:../accel/tcg/cpu-exec.c:1028:cpu_exec_setjmp:
- assertion failed: (cpu == current_cpu)
-In-Reply-To: <87h6qli4au.fsf@linaro.org> ("Alex =?utf-8?Q?Benn=C3=A9e=22's?=
- message of "Mon, 03 Jul 2023 13:08:02 +0100")
-References: <mvmmt0dtosg.fsf@suse.de> <mvma5wdtdiw.fsf@suse.de>
- <87h6qli4au.fsf@linaro.org>
-X-Yow: Here we are in America...  when do we collect unemployment?
-Date: Mon, 03 Jul 2023 14:42:11 +0200
-Message-ID: <mvm5y71tbdo.fsf@suse.de>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ (Exim 4.90_1) (envelope-from <reaperlu@hust.edu.cn>)
+ id 1qGKA7-0005uN-1f; Mon, 03 Jul 2023 10:04:21 -0400
+Received: from [202.114.0.240] (helo=hust.edu.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <reaperlu@hust.edu.cn>)
+ id 1qGKA4-0003Fv-Gf; Mon, 03 Jul 2023 10:04:18 -0400
+Received: from localhost.localdomain ([10.12.190.169])
+ (user=reaperlu@hust.edu.cn mech=LOGIN bits=0)
+ by mx1.hust.edu.cn  with ESMTP id 363E3lXW013519-363E3lXX013519
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Mon, 3 Jul 2023 22:04:00 +0800
+From: Ruibo Lu <reaperlu@hust.edu.cn>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, luruibo2000@163.com, alistair.francis@wdc.com,
+ liweiwei@iscas.ac.cn
+Subject: [PATCH v2] target/riscv: Optimize ambiguous local variable in
+ pmp_hart_has_privs
+Date: Mon,  3 Jul 2023 22:03:40 +0800
+Message-ID: <20230703140340.212360-1-reaperlu@hust.edu.cn>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:67c:2178:6::1d; envelope-from=schwab@suse.de;
- helo=smtp-out2.suse.de
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-FEAS-AUTH-USER: reaperlu@hust.edu.cn
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 202.114.0.240 (deferred)
+Received-SPF: pass client-ip=202.114.0.240; envelope-from=reaperlu@hust.edu.cn;
+ helo=hust.edu.cn
+X-Spam_score_int: -10
+X-Spam_score: -1.1
+X-Spam_bar: -
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, RDNS_NONE=0.793,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -86,46 +59,76 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Jul 03 2023, Alex Bennée wrote:
+These two values represents whether start/end address is in pmp_range.
+However, the type and name of them is ambiguous. This commit change the
+name and type of them to improve code readability and accuracy.
 
-> Andreas Schwab <schwab@suse.de> writes:
->
->> On Jul 03 2023, Andreas Schwab wrote:
->>
->>> This is a regression in 8.0.  It causes the testsuite of mold to fail:
->>>
->>> https://build.opensuse.org/package/live_build_log/openSUSE:Factory:RISCV/mold/standard/riscv64
->>>
->>> + out/test/elf/riscv64/section-start/exe2
->>> **
->>> ERROR:../accel/tcg/cpu-exec.c:1028:cpu_exec_setjmp: assertion failed: (cpu == current_cpu)
->>> **
->>> ERROR:../accel/tcg/cpu-exec.c:1028:cpu_exec_setjmp: assertion failed: (cpu == current_cpu)
->>
->> This bisects down to commit 86f04735ac ("linux-user: Fix brk() to
->> release pages").  See the attached test case.
->>
->> $ ./qemu-riscv64 ../exe1
->> **
->> ERROR:../qemu/accel/tcg/cpu-exec.c:1027:cpu_exec_setjmp: assertion failed: (cpu == current_cpu)
->> Bail out! ERROR:../qemu/accel/tcg/cpu-exec.c:1027:cpu_exec_setjmp: assertion failed: (cpu == current_cpu)
->> **
->> ERROR:../qemu/accel/tcg/cpu-exec.c:1027:cpu_exec_setjmp: assertion failed: (cpu == current_cpu)
->> Bail out! ERROR:../qemu/accel/tcg/cpu-exec.c:1027:cpu_exec_setjmp: assertion failed: (cpu == current_cpu)
->
-> I wonder if applying c5ffd16ba4c8fd fixes this?
+Signed-off-by: Ruibo Lu <reaperlu@hust.edu.cn>
+---
+ target/riscv/pmp.c | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
 
-No, the error still happens with current master, and reverting
-86f04735ac on top of it fixes it.
-
-> I tried to double check with the test case but I can't run it as it's a
-> dynamic binary so needs an ld.so.
-
-You can download the glibc package from
-<https://download.opensuse.org/ports/riscv/tumbleweed/repo/oss/>.
-
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index 1a9279ba88..cdf32d9833 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -203,16 +203,16 @@ void pmp_update_rule_nums(CPURISCVState *env)
+     }
+ }
+ 
+-static int pmp_is_in_range(CPURISCVState *env, int pmp_index,
++static bool pmp_is_in_range(CPURISCVState *env, int pmp_index,
+                            target_ulong addr)
+ {
+-    int result = 0;
++    bool result = false;
+ 
+     if ((addr >= env->pmp_state.addr[pmp_index].sa) &&
+         (addr <= env->pmp_state.addr[pmp_index].ea)) {
+-        result = 1;
++        result = true;
+     } else {
+-        result = 0;
++        result = false;
+     }
+ 
+     return result;
+@@ -287,8 +287,8 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+ {
+     int i = 0;
+     int pmp_size = 0;
+-    target_ulong s = 0;
+-    target_ulong e = 0;
++    bool sa_in = false;
++    bool ea_in = false;
+ 
+     /* Short cut if no rules */
+     if (0 == pmp_get_num_rules(env)) {
+@@ -314,11 +314,11 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+      * from low to high
+      */
+     for (i = 0; i < MAX_RISCV_PMPS; i++) {
+-        s = pmp_is_in_range(env, i, addr);
+-        e = pmp_is_in_range(env, i, addr + pmp_size - 1);
++        sa_in = pmp_is_in_range(env, i, addr);
++        ea_in = pmp_is_in_range(env, i, addr + pmp_size - 1);
+ 
+         /* partially inside */
+-        if ((s + e) == 1) {
++        if (sa_in ^ ea_in) {
+             qemu_log_mask(LOG_GUEST_ERROR,
+                           "pmp violation - access is partially inside\n");
+             *allowed_privs = 0;
+@@ -339,7 +339,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+             (env->pmp_state.pmp[i].cfg_reg & PMP_WRITE) |
+             ((env->pmp_state.pmp[i].cfg_reg & PMP_EXEC) >> 2);
+ 
+-        if (((s + e) == 2) && (PMP_AMATCH_OFF != a_field)) {
++        if (sa_in && ea_in && (PMP_AMATCH_OFF != a_field)) {
+             /*
+              * If the PMP entry is not off and the address is in range,
+              * do the priv check
 -- 
-Andreas Schwab, SUSE Labs, schwab@suse.de
-GPG Key fingerprint = 0196 BAD8 1CE9 1970 F4BE  1748 E4D4 88E3 0EEA B9D7
-"And now for something completely different."
+2.41.0
+
 
