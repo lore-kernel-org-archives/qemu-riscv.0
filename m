@@ -4,71 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA78FEB64D9
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jul 2023 01:42:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C248CEB64D9
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jul 2023 02:24:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qG8Zl-0001pH-04; Sun, 02 Jul 2023 21:42:01 -0400
+	id 1qG9Ev-0000AY-0c; Sun, 02 Jul 2023 22:24:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qG8Zj-0001oY-Af; Sun, 02 Jul 2023 21:41:59 -0400
-Received: from mail-vs1-xe2d.google.com ([2607:f8b0:4864:20::e2d])
+ id 1qG9Et-00004z-EM; Sun, 02 Jul 2023 22:24:31 -0400
+Received: from mail-qk1-x734.google.com ([2607:f8b0:4864:20::734])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qG8Zh-0007sD-4x; Sun, 02 Jul 2023 21:41:59 -0400
-Received: by mail-vs1-xe2d.google.com with SMTP id
- ada2fe7eead31-44360717659so2841953137.0; 
- Sun, 02 Jul 2023 18:41:56 -0700 (PDT)
+ id 1qG9Ep-0007i9-OK; Sun, 02 Jul 2023 22:24:31 -0400
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-76571dae5feso364288485a.1; 
+ Sun, 02 Jul 2023 19:24:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1688348515; x=1690940515;
+ d=gmail.com; s=20221208; t=1688351066; x=1690943066;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=40f3lmBbMv6Q14NCcehep/Jyx29+4QEf9hxmuSV1T2E=;
- b=cvENE7mDwuuEQFQfh0fX1WOcZS2Nah3wQArIN0QPyLaAyYCPVXptiRkL2RJCiUkbNI
- QlBdwvnIlsnm7Rct8Dh8TDObHjS7NpFOK3Hu7qa6XFaPglgiqla8fmL5yx4w0RoRTjO+
- tDBQknsNfFHo/NnvJI2VGoglMQqQ+jrQmdsXQ5nvWfF5QWaNP76O6Qr99LeLkenqKqnk
- 1LHK8WMyM5yMXzwp9U7kCDtNKRp97FfZtiJrLZaBLJmrYh1yTXLMqtfEUl9bv35kGAgE
- 7YSzoT/m6pviyIEJyJO3WJgRMJnGQuKi7AOQDm+9Y4IKzNxzk7rerhfR4y5Iu+KD0jUY
- x5nw==
+ bh=Ikv3XpnBt5HqBmgbgjgBYygxJqrH8OVfX0eLI5yw6u8=;
+ b=IvnY96XMg/tWAUtKMw0Qyx4vSgFKGbiL8eVCJnGO7Uey0whmSvT6uankQefDmZVZGL
+ N4GucDtOXKHnopsPNBiLuQMmJRhua9ER2IebiSfnRJddT3EyKxyc2pmz+72K0xS95v1w
+ jY5IMlO6KuOK952vXU4AOend2SvRlcVNM8JmBuEvILjXXEshgogKqoCCXNSGIG4ca5nf
+ bDJjLjNM/DU1cVqEjpzmZljg3ZWhZS5nIOTLy76T0u+pOXR64YXJ0bDJvqGZWCJ9ltlo
+ k67wS/zny88Y2MXs8fK0wusTsDk5EfZvRxbmLy1QTvLbJ3YXSKzEwNRKocACaSBtaU/L
+ FZ1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688348515; x=1690940515;
+ d=1e100.net; s=20221208; t=1688351066; x=1690943066;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=40f3lmBbMv6Q14NCcehep/Jyx29+4QEf9hxmuSV1T2E=;
- b=jWHFjRC4ZIsNLlKz2LGXBI2u3LlIZeJ45OXERh3ay/81HUpiciasZlnf7oqNh64yyQ
- NnkzAhy0IuFOF5kK0M60wEF7VZQLMkdZJcZVaK9AKFmrNp8hktdDQSfI87iL+dnAFM3k
- rcP4kcDzi+JCL6xJL9CPhgco0AXGP4tPNW4+dN4DrDfLbJdtqXxpd2YZb0T2mic0fWGH
- k/n8r4ruaWZokwaDyffFdn/VszPb5Tb2l9HPKirvZx3kPpR4ggZeHnTAH9tdGc1bHVzp
- PXyB9ybTC9dM8zyvyBvcYXy51IVaYJPZSnG70/sa6oVdsnioXqSB+kt7exnwGuwzSlVQ
- koBQ==
-X-Gm-Message-State: AC+VfDxlD/IU+xQCMGOxbrn7jRWW6xwSj9vqab3XzwNlDBG23TlV/V/y
- qncYne0ozrjV42OIbJuwO2do4+/LVnWn3M0JgEM=
-X-Google-Smtp-Source: ACHHUZ75dlkodCgqSbo54gQaUVWb7qSX5+vIVzNFzTyBG2T+fSEXJn0igdB07i1PXs8kNNscx1a3S4EoD1Cd3fFXFjw=
-X-Received: by 2002:a05:6102:75b:b0:43b:4f2e:359 with SMTP id
- v27-20020a056102075b00b0043b4f2e0359mr4491248vsg.3.1688348515554; Sun, 02 Jul
- 2023 18:41:55 -0700 (PDT)
+ bh=Ikv3XpnBt5HqBmgbgjgBYygxJqrH8OVfX0eLI5yw6u8=;
+ b=RHV41pT/3xiC3Cktivd3Wz9nSDEget2VwuTOCYXZwbtFzHmPUgpwQZEXXVMUKPzCdL
+ SV7ljYOAl5HNnvzmTX52qc86g2y2SdpyFXyBKHLtFbH9tzRot7A0cPqtx5dTqt9bqmUp
+ kRn80U8NhI2fNC3lRbDfnKfb7AvUbbLUun0jlIT6DpyO96erciQng2APPz0/c0O9v1lM
+ ZvzUz7QGLE63fzAhF7qWzGGOWEVonXTQsGrDEK6BNv9VZkXmgGlpNMfGgxZG2hAPnOEv
+ Z7Md9OE+VMw59WXV4MNavd46BTB0Snk2rg7uDoNU+62vxzMqpK2bL+tmvFa3z7ACs1g0
+ yMqQ==
+X-Gm-Message-State: AC+VfDxqjIyo+KpA+weBLC9yKSaWVcPV2H4NHnxT32n0jtmJFMWbHUMc
+ B+ADLlvC0dXG42HRJm5FZV1+YKa13uDJGtDZH3U=
+X-Google-Smtp-Source: ACHHUZ6B89GJ9sR7C11kd2ynRaaejqb3dPiRnFEmwxxX6tZDfw8qtUAKHfvKboZMxH/6Mwm9QHdoukLNdUPfMbJutj0=
+X-Received: by 2002:a05:620a:1915:b0:767:352d:54f4 with SMTP id
+ bj21-20020a05620a191500b00767352d54f4mr11091190qkb.30.1688351066171; Sun, 02
+ Jul 2023 19:24:26 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230624192957.14067-1-philmd@linaro.org>
-In-Reply-To: <20230624192957.14067-1-philmd@linaro.org>
+References: <20230627143235.29947-1-philmd@linaro.org>
+In-Reply-To: <20230627143235.29947-1-philmd@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 3 Jul 2023 11:41:29 +1000
-Message-ID: <CAKmqyKOR_f_Kh2fJ3ArgruS+bgfkBe=m8aMm4-r3z_bDKGwTbw@mail.gmail.com>
-Subject: Re: [PATCH v2] target/riscv: Restrict KVM-specific fields from ArchCPU
+Date: Mon, 3 Jul 2023 12:24:00 +1000
+Message-ID: <CAKmqyKOXOCwGKgonnkX0zqEbYdGq1G=cHnYw5VuQeK01KixQdw@mail.gmail.com>
+Subject: Re: [PATCH 0/2] target/riscv: Only build qemu-system-riscv$$ on rv$$
+ host
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, Weiwei Li <liweiwei@iscas.ac.cn>, 
- Richard Henderson <richard.henderson@linaro.org>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-riscv@nongnu.org, 
- Alistair Francis <alistair.francis@wdc.com>,
+Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
+ Bin Meng <bin.meng@windriver.com>,
+ =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>
+ Thomas Huth <thuth@redhat.com>, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2d;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::734;
+ envelope-from=alistair23@gmail.com; helo=mail-qk1-x734.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -92,92 +96,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sun, Jun 25, 2023 at 5:30=E2=80=AFAM Philippe Mathieu-Daud=C3=A9
+On Wed, Jun 28, 2023 at 12:33=E2=80=AFAM Philippe Mathieu-Daud=C3=A9
 <philmd@linaro.org> wrote:
 >
-> These fields shouldn't be accessed when KVM is not available.
+> Per Anup Patel in [*]:
 >
-> Restrict the KVM timer migration state. Rename the KVM timer
-> post_load() handler accordingly, because cpu_post_load() is
-> too generic.
+>  > Currently, we only support running rv64 guest on rv64 host
+>  > and rv32 guest on rv32 host.
+>  >
+>  > In the future, we might support running rv32 guest on rv64
+>  > host but as of now we don't see a strong push for it.
 >
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> Therefore, when only using the KVM accelerator it is pointless
+> to build qemu-system-riscv32 on a rv64 host (or qemu-system-riscv64
+> on a rv32 host). Restrict meson to only build the correct binary,
+> avoiding to waste ressources building unusable code.
+>
+> [*] https://lore.kernel.org/qemu-devel/CAAhSdy2JeRHeeoEc1XKQhPO3aDz4YKeyQ=
+sPT4S8yKJcYTA+AiQ@mail.gmail.com/
+>
+> Based-on: <20230626232007.8933-1-philmd@linaro.org>
+> "target/riscv: Allow building without TCG (KVM-only so far)"
+> https://lore.kernel.org/qemu-devel/20230626232007.8933-1-philmd@linaro.or=
+g/
+>
+> Philippe Mathieu-Daud=C3=A9 (2):
+>   target/riscv: Only unify 'riscv32/64' -> 'riscv' for host cpu in meson
+>   target/riscv: Only build KVM guest with same wordsize as host
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
-> ---
-> Since v1 https://lore.kernel.org/qemu-devel/20230405160454.97436-10-philm=
-d@linaro.org/:
-> - Restrict whole vmstate_kvmtimer (thus drop Daniel's R-b)
-> ---
->  target/riscv/cpu.h     | 2 ++
->  target/riscv/machine.c | 8 ++++++--
->  2 files changed, 8 insertions(+), 2 deletions(-)
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index e3e08d315f..b1b56aa29e 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -363,12 +363,14 @@ struct CPUArchState {
->      hwaddr kernel_addr;
->      hwaddr fdt_addr;
+>  meson.build | 15 +++++++--------
+>  1 file changed, 7 insertions(+), 8 deletions(-)
 >
-> +#ifdef CONFIG_KVM
->      /* kvm timer */
->      bool kvm_timer_dirty;
->      uint64_t kvm_timer_time;
->      uint64_t kvm_timer_compare;
->      uint64_t kvm_timer_state;
->      uint64_t kvm_timer_frequency;
-> +#endif /* CONFIG_KVM */
->  };
->
->  /*
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index 3ce2970785..d27f8a2a3a 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -199,7 +199,8 @@ static bool kvmtimer_needed(void *opaque)
->      return kvm_enabled();
->  }
->
-> -static int cpu_post_load(void *opaque, int version_id)
-> +#ifdef CONFIG_KVM
-> +static int cpu_kvmtimer_post_load(void *opaque, int version_id)
->  {
->      RISCVCPU *cpu =3D opaque;
->      CPURISCVState *env =3D &cpu->env;
-> @@ -213,7 +214,7 @@ static const VMStateDescription vmstate_kvmtimer =3D =
-{
->      .version_id =3D 1,
->      .minimum_version_id =3D 1,
->      .needed =3D kvmtimer_needed,
-> -    .post_load =3D cpu_post_load,
-> +    .post_load =3D cpu_kvmtimer_post_load,
->      .fields =3D (VMStateField[]) {
->          VMSTATE_UINT64(env.kvm_timer_time, RISCVCPU),
->          VMSTATE_UINT64(env.kvm_timer_compare, RISCVCPU),
-> @@ -221,6 +222,7 @@ static const VMStateDescription vmstate_kvmtimer =3D =
-{
->          VMSTATE_END_OF_LIST()
->      }
->  };
-> +#endif
->
->  static bool debug_needed(void *opaque)
->  {
-> @@ -409,7 +411,9 @@ const VMStateDescription vmstate_riscv_cpu =3D {
->          &vmstate_vector,
->          &vmstate_pointermasking,
->          &vmstate_rv128,
-> +#ifdef CONFIG_KVM
->          &vmstate_kvmtimer,
-> +#endif
->          &vmstate_envcfg,
->          &vmstate_debug,
->          &vmstate_smstateen,
 > --
 > 2.38.1
 >
