@@ -4,86 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2081EB64DD
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jul 2023 12:11:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92525EB64DC
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jul 2023 12:42:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qGIOQ-0004z1-Q7; Mon, 03 Jul 2023 08:10:59 -0400
+	id 1qGIsq-0003Zi-G4; Mon, 03 Jul 2023 08:42:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qGIOG-0004tj-4x
- for qemu-riscv@nongnu.org; Mon, 03 Jul 2023 08:10:49 -0400
-Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
+ (Exim 4.90_1) (envelope-from <schwab@suse.de>)
+ id 1qGIsh-0003YU-UR; Mon, 03 Jul 2023 08:42:17 -0400
+Received: from smtp-out2.suse.de ([2001:67c:2178:6::1d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qGIO6-0005qS-Hm
- for qemu-riscv@nongnu.org; Mon, 03 Jul 2023 08:10:46 -0400
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-3fbc244d307so50726035e9.1
- for <qemu-riscv@nongnu.org>; Mon, 03 Jul 2023 05:10:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1688386235; x=1690978235;
- h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
- :subject:cc:to:from:user-agent:references:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TjWCszWfe513WyppL7zb8v0IrQpKTYicUil+LiuuY8Y=;
- b=ViRsOoFRUTNO6xLoiFX5S/O/9DgAsXB67SDztdnICiLhIJqhkYA7x6ekwJ2E7YwgRY
- d/ePNsfqGJjQ8mUyt95187wNCSnzu5wJZoe2fm/zOsGqxm4N1tEy4cKMkoexW5EnlsKS
- tniLf0UI2ktzd+A4G8xSX2I77BZ8cxkKD6QjhZW0T563yQ2UoNGb2/kPE0tvC3dWpbTF
- HGIEbGWFYRaue9fbizMiVJScC1du0ikqJEO8haxrliT27ydL2+0izHVoSa0C2efcBsGg
- 6doltvUrrwiXWOMsbCBucLucBaPqwLUgRttq+3cZg0JOm0o/e05Q3ZGtsfm8fchXmHwY
- 9Xbg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688386235; x=1690978235;
- h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
- :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=TjWCszWfe513WyppL7zb8v0IrQpKTYicUil+LiuuY8Y=;
- b=GGio8DABqVID/XxiJyKzxFPBVYWS2/HkNWKGV6MxNaxhOOYr113jOU3p6TEheFCDqu
- cdd04zm4/q9djeCfB6w6vAfYZS4h++RWv+f2EvORRWv/kVojmVvS9deEt5EF2aS7KjfX
- fyCReNRqBRLOCu+NRYKtmgFif6Bbs17JJO9TL2KIFKAJhkTctOZe5yQgbvf7gEW/gz8X
- HM1pe8JUR6NnaUupg/O7dvPF6IYHSuYjb8WMnsKZPEc2WFnGiHkyFEpy31XOuNik0f6g
- f/GMoYrQXjsi0Ce9Do5MVmyCEhL29XC7uU21giuos9JgazyNwm+m+MO/1XPedebp+1Yt
- jp9Q==
-X-Gm-Message-State: ABy/qLZFJBvXhhYaGfpNQjPI6TAgohdNlmuJhuB6rKQgYFtnJz3RW8VW
- AaZC7li+8R6xAWTR8Pjgf/TudQ==
-X-Google-Smtp-Source: APBJJlFgr8E5OQdvQ1x3BVq1eyBkbBeFEIhnza0ilSScB6OdIdLwjRimA2eIhomIfyOU+3dFcR9o7Q==
-X-Received: by 2002:a7b:c446:0:b0:3fb:cf8e:c934 with SMTP id
- l6-20020a7bc446000000b003fbcf8ec934mr6775612wmi.27.1688386234620; 
- Mon, 03 Jul 2023 05:10:34 -0700 (PDT)
-Received: from zen.linaroharston ([85.9.250.243])
- by smtp.gmail.com with ESMTPSA id
- f3-20020adff443000000b00314367cf43asm3032754wrp.106.2023.07.03.05.10.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Jul 2023 05:10:34 -0700 (PDT)
-Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id E3D751FFBB;
- Mon,  3 Jul 2023 13:10:33 +0100 (BST)
-References: <mvmmt0dtosg.fsf@suse.de> <mvma5wdtdiw.fsf@suse.de>
-User-agent: mu4e 1.11.8; emacs 29.0.92
-From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Andreas Schwab <schwab@suse.de>
-Cc: Helge Deller <deller@gmx.de>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng
- <bin.meng@windriver.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+ (Exim 4.90_1) (envelope-from <schwab@suse.de>)
+ id 1qGIsg-00062g-7M; Mon, 03 Jul 2023 08:42:15 -0400
+Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
+ by smtp-out2.suse.de (Postfix) with ESMTP id 8850F1FE15;
+ Mon,  3 Jul 2023 12:42:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1688388132; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=DB+LpbSBhOQXoOnxD1apCRG2sZYIV8qKUcIRz2Y16ZQ=;
+ b=JYqEd3bb2OETemuZU0iq0gInLynziPZcat5BIlDQ/tamXhC7geV9LY/lI5YobHwOVKCqBJ
+ Lxc8t1NJ5b4SYY2Luq+XtqM+M5L1Xc4Gs0iqS1IMkMrpQsOO/7+msr9OAcOPYWhew4CWQI
+ x0/e+FjJCEjvlSsX2oWKU5VNUhTp0gI=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1688388132;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=DB+LpbSBhOQXoOnxD1apCRG2sZYIV8qKUcIRz2Y16ZQ=;
+ b=M8OP4guAJLSzkLuaCoHrk9koS77Dt9zN+t9JxN0MlH58xD6NOIkBCj6yX5X8lGW2cPBlBp
+ yo22CzYt+ZLitwAw==
+Received: from hawking.nue2.suse.org (unknown [10.168.4.11])
+ by relay2.suse.de (Postfix) with ESMTP id 100712C141;
+ Mon,  3 Jul 2023 12:42:12 +0000 (UTC)
+Received: by hawking.nue2.suse.org (Postfix, from userid 17005)
+ id ECE8D4A03BD; Mon,  3 Jul 2023 14:42:11 +0200 (CEST)
+From: Andreas Schwab <schwab@suse.de>
+To: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
+Cc: Helge Deller <deller@gmx.de>,  Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,  Bin Meng
+ <bin.meng@windriver.com>,  qemu-riscv@nongnu.org,  qemu-devel@nongnu.org
 Subject: Re: [RISC-V] ERROR:../accel/tcg/cpu-exec.c:1028:cpu_exec_setjmp:
  assertion failed: (cpu == current_cpu)
-Date: Mon, 03 Jul 2023 13:08:02 +0100
-In-reply-to: <mvma5wdtdiw.fsf@suse.de>
-Message-ID: <87h6qli4au.fsf@linaro.org>
+In-Reply-To: <87h6qli4au.fsf@linaro.org> ("Alex =?utf-8?Q?Benn=C3=A9e=22's?=
+ message of "Mon, 03 Jul 2023 13:08:02 +0100")
+References: <mvmmt0dtosg.fsf@suse.de> <mvma5wdtdiw.fsf@suse.de>
+ <87h6qli4au.fsf@linaro.org>
+X-Yow: Here we are in America...  when do we collect unemployment?
+Date: Mon, 03 Jul 2023 14:42:11 +0200
+Message-ID: <mvm5y71tbdo.fsf@suse.de>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2001:67c:2178:6::1d; envelope-from=schwab@suse.de;
+ helo=smtp-out2.suse.de
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -100,45 +86,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Jul 03 2023, Alex Bennée wrote:
 
-Andreas Schwab <schwab@suse.de> writes:
-
-> On Jul 03 2023, Andreas Schwab wrote:
+> Andreas Schwab <schwab@suse.de> writes:
 >
->> This is a regression in 8.0.  It causes the testsuite of mold to fail:
+>> On Jul 03 2023, Andreas Schwab wrote:
 >>
->> https://build.opensuse.org/package/live_build_log/openSUSE:Factory:RISCV=
-/mold/standard/riscv64
+>>> This is a regression in 8.0.  It causes the testsuite of mold to fail:
+>>>
+>>> https://build.opensuse.org/package/live_build_log/openSUSE:Factory:RISCV/mold/standard/riscv64
+>>>
+>>> + out/test/elf/riscv64/section-start/exe2
+>>> **
+>>> ERROR:../accel/tcg/cpu-exec.c:1028:cpu_exec_setjmp: assertion failed: (cpu == current_cpu)
+>>> **
+>>> ERROR:../accel/tcg/cpu-exec.c:1028:cpu_exec_setjmp: assertion failed: (cpu == current_cpu)
 >>
->> + out/test/elf/riscv64/section-start/exe2
+>> This bisects down to commit 86f04735ac ("linux-user: Fix brk() to
+>> release pages").  See the attached test case.
+>>
+>> $ ./qemu-riscv64 ../exe1
 >> **
->> ERROR:../accel/tcg/cpu-exec.c:1028:cpu_exec_setjmp: assertion failed: (c=
-pu =3D=3D current_cpu)
+>> ERROR:../qemu/accel/tcg/cpu-exec.c:1027:cpu_exec_setjmp: assertion failed: (cpu == current_cpu)
+>> Bail out! ERROR:../qemu/accel/tcg/cpu-exec.c:1027:cpu_exec_setjmp: assertion failed: (cpu == current_cpu)
 >> **
->> ERROR:../accel/tcg/cpu-exec.c:1028:cpu_exec_setjmp: assertion failed: (c=
-pu =3D=3D current_cpu)
+>> ERROR:../qemu/accel/tcg/cpu-exec.c:1027:cpu_exec_setjmp: assertion failed: (cpu == current_cpu)
+>> Bail out! ERROR:../qemu/accel/tcg/cpu-exec.c:1027:cpu_exec_setjmp: assertion failed: (cpu == current_cpu)
 >
-> This bisects down to commit 86f04735ac ("linux-user: Fix brk() to
-> release pages").  See the attached test case.
->
-> $ ./qemu-riscv64 ../exe1
-> **
-> ERROR:../qemu/accel/tcg/cpu-exec.c:1027:cpu_exec_setjmp: assertion failed=
-: (cpu =3D=3D current_cpu)
-> Bail out! ERROR:../qemu/accel/tcg/cpu-exec.c:1027:cpu_exec_setjmp: assert=
-ion failed: (cpu =3D=3D current_cpu)
-> **
-> ERROR:../qemu/accel/tcg/cpu-exec.c:1027:cpu_exec_setjmp: assertion failed=
-: (cpu =3D=3D current_cpu)
-> Bail out! ERROR:../qemu/accel/tcg/cpu-exec.c:1027:cpu_exec_setjmp: assert=
-ion failed: (cpu =3D=3D current_cpu)
+> I wonder if applying c5ffd16ba4c8fd fixes this?
 
-I wonder if applying c5ffd16ba4c8fd fixes this?
+No, the error still happens with current master, and reverting
+86f04735ac on top of it fixes it.
 
-I tried to double check with the test case but I can't run it as it's a
-dynamic binary so needs an ld.so.
+> I tried to double check with the test case but I can't run it as it's a
+> dynamic binary so needs an ld.so.
 
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
+You can download the glibc package from
+<https://download.opensuse.org/ports/riscv/tumbleweed/repo/oss/>.
+
+-- 
+Andreas Schwab, SUSE Labs, schwab@suse.de
+GPG Key fingerprint = 0196 BAD8 1CE9 1970 F4BE  1748 E4D4 88E3 0EEA B9D7
+"And now for something completely different."
 
