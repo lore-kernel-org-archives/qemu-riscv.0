@@ -4,81 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CD3DC001B3
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jul 2023 10:14:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6904EB64DC
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jul 2023 10:14:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qGGRf-000365-8o; Mon, 03 Jul 2023 06:06:11 -0400
+	id 1qGGRb-00030j-5D; Mon, 03 Jul 2023 06:06:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1qGGRY-0002v7-5y
- for qemu-riscv@nongnu.org; Mon, 03 Jul 2023 06:06:04 -0400
-Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
+ id 1qGGRR-0002qM-JW
+ for qemu-riscv@nongnu.org; Mon, 03 Jul 2023 06:06:01 -0400
+Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1qGGRH-0005tY-Gv
- for qemu-riscv@nongnu.org; Mon, 03 Jul 2023 06:06:03 -0400
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-3fbca8935bfso26592385e9.3
- for <qemu-riscv@nongnu.org>; Mon, 03 Jul 2023 03:05:47 -0700 (PDT)
+ id 1qGGRG-0005sD-GH
+ for qemu-riscv@nongnu.org; Mon, 03 Jul 2023 06:05:57 -0400
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-31297125334so3568791f8f.0
+ for <qemu-riscv@nongnu.org>; Mon, 03 Jul 2023 03:05:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1688378746; x=1690970746;
+ d=linaro.org; s=google; t=1688378744; x=1690970744;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+os3nHQ/ZmARewYX8s5fRYkcgS0NtfZNFjYHPGkpaM4=;
- b=X5TrsKfAhQX/kK1CsQ/ipdzc+4Nj/S5XX4YJ45qsbLFxdaK9RAoC+QjOOK3flb3hrj
- MKhWK7LSXOlky1g+ytCR4o9OJdPGZaI8BuoJffTrWhpBojgxmhc+pFA/XZO73EDZ4CRl
- gWgutKsdYSJP9oUN8QstNcmAfiFS9NMyQM4hghNmU3pNglAQZCJ0T05oe69+S88Zm7hD
- +jaMZRrOOHl05q91EUSJNv1gfHqdUHrow3MrrOEMD65cvmctQKvckyjIdbqMu7RR3wzp
- WzlerCFCKLjy9gcmPWFmapv5Sl2toL9nRzREUZkofCQQMgi7+4li0wx+DQKMMWwlZSdp
- C/ag==
+ bh=Vdmp9g0LETEOImAoeAZ0vz3CHG5eCYIT92dyMVPeN7s=;
+ b=lIzVhNtoj5F6bRYtVeKVIjArwvK6p7enSfe9GQjPkN+NfKlT1zcL1UvFfCFN+izCFz
+ cWoLsKc3Sz7bUS0s1wGImM+eKWSmqwB/JJDwOpO3oxgqvS+DkN1XjbdYrUQE0ujpdInG
+ 3Uz6YB9EMIcYsPNAUOa4zA+ztXge+Tac9FQVFERyZkpU2E24zaHscJMhd2SB2Py1PTHG
+ N1Nehrc+LK7o7r2DzeYjDY9tkQKh58PFvJejUFXpxOSoZgrktPcqgk3oN6Jga0e1+n/Q
+ z8fAnBu/xVCwsjN/mP4wiFRsjxGsxWaZD3r5oJTjHkLHywdXtAeFzC9EQ73G7kpLEG3K
+ NMVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688378746; x=1690970746;
+ d=1e100.net; s=20221208; t=1688378744; x=1690970744;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+os3nHQ/ZmARewYX8s5fRYkcgS0NtfZNFjYHPGkpaM4=;
- b=JXYKNWydmofJ+zeK6lPaCKCGz0YcVjUMKtg5DYhKpdQbwkBiA1cguvApeaXsf4YnPx
- DDqlGfAC01EqxgciSbP59LgH5TJdF2NvUrKF2XkE0Tl+WFgShYF+ZiI5D8USeuWc8iLd
- 8+9yHimL1SADJxF352vwPCOR5gRLIk7FoZ9DhRSbLgbyvEDlMh4wvyo7IwpAHM7KRV19
- ogMEPA4f6Q4tu7ZKjEG1xcLew4E/c/KSYCKPkZ4nZ4+m1oi3pY9dCLb5FOTVD8dyS5Up
- YH1kape2E+mW9tQoCOoW8kt8Q2hGHUHN+ezKg0m7xYb5qaEsUf7Gwg7N3EFMaxlGdSwf
- r8mg==
-X-Gm-Message-State: AC+VfDzROcEciNhyiwwk/35peZY+7YYqyNZX5L3B2rCWo+ZyAgOAqBJ2
- ez6X0P3ZWg4ZV9hj5YOfN9eh5A==
-X-Google-Smtp-Source: ACHHUZ44n7UqB44H291RGVVvCZ8CI95gg/yhq4p5d9KjrwxSOncV6wVCWPmS5qVvFnz/KQMLd+zIBQ==
-X-Received: by 2002:a05:600c:2253:b0:3fb:a5b3:4f02 with SMTP id
- a19-20020a05600c225300b003fba5b34f02mr7464716wmm.36.1688378746218; 
- Mon, 03 Jul 2023 03:05:46 -0700 (PDT)
+ bh=Vdmp9g0LETEOImAoeAZ0vz3CHG5eCYIT92dyMVPeN7s=;
+ b=OvvHYhJXZO7ld8Vb3R9Z1OJ1upR7HvaZswS1clkqdFePVLz2toxZioSQej1gOu31kf
+ FfUjZzigKWD2O/gp6axaJqlh+o757GC0po/BD8Af/k+8VoWdnLyE0o+Kop9ULbEAowrI
+ LXn4hWml07M+lwAqSK7KHOt7oftrFJh4jrufqhTvvHStSFeuSPeoPW+NvKqoGCfz1B8R
+ +/YZ5jA+9eOQZcgOqRrkky/QaxqNjNK3tVa+qGBH3ed+cpuaF7ybbGDJhEvHgwWaJB1d
+ GW0jVzVjg2kmj3lubJ33t7lGay0QXkCCFL2keA6+GC2lGg+ckJZnjYor0kpYSDZ9mcaB
+ 71AA==
+X-Gm-Message-State: ABy/qLYi5m7/n+l/l8C5qlDVGeNhKbwGprSrorohgaMpHEI0eKgiD3n/
+ fO7b3MFw0WYv1C5cIT2Wn4nXCg==
+X-Google-Smtp-Source: APBJJlEse5ck8aUfC8LmxRLx5Z3E2hvsQXNMv5ofp9reBryWphZa+Ky21MEAG5qCXNpXYc/cKrwV2A==
+X-Received: by 2002:a5d:660b:0:b0:314:c6b:b9a2 with SMTP id
+ n11-20020a5d660b000000b003140c6bb9a2mr9401053wru.13.1688378744098; 
+ Mon, 03 Jul 2023 03:05:44 -0700 (PDT)
 Received: from stoup.home (91.232.79.188.dynamic.jazztel.es. [188.79.232.91])
  by smtp.gmail.com with ESMTPSA id
- t5-20020a05600001c500b00313f7b077fesm18446562wrx.59.2023.07.03.03.05.45
+ t5-20020a05600001c500b00313f7b077fesm18446562wrx.59.2023.07.03.03.05.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Jul 2023 03:05:45 -0700 (PDT)
+ Mon, 03 Jul 2023 03:05:43 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com,
- eduardo@habkost.net, alistair.francis@wdc.com, danielhb413@gmail.com
-Subject: [PATCH v4 22/37] target/i386: Use aesenc_SB_SR_MC_AK
-Date: Mon,  3 Jul 2023 12:05:05 +0200
-Message-Id: <20230703100520.68224-23-richard.henderson@linaro.org>
+ eduardo@habkost.net, alistair.francis@wdc.com, danielhb413@gmail.com,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH v4 20/37] target/i386: Use aesdec_ISB_ISR_AK
+Date: Mon,  3 Jul 2023 12:05:03 +0200
+Message-Id: <20230703100520.68224-21-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230703100520.68224-1-richard.henderson@linaro.org>
 References: <20230703100520.68224-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::331;
- envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x331.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::434;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x434.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -94,20 +96,21 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This implements the AESENC instruction.
+This implements the AESDECLAST instruction.
 
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/i386/ops_sse.h | 14 +++++---------
- 1 file changed, 5 insertions(+), 9 deletions(-)
+ target/i386/ops_sse.h | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/target/i386/ops_sse.h b/target/i386/ops_sse.h
-index 893913ebf8..93a4e0cf16 100644
+index 63fdecbe03..0a37bde595 100644
 --- a/target/i386/ops_sse.h
 +++ b/target/i386/ops_sse.h
-@@ -2188,16 +2188,12 @@ void glue(helper_aesdeclast, SUFFIX)(CPUX86State *env, Reg *d, Reg *v, Reg *s)
+@@ -2177,12 +2177,12 @@ void glue(helper_aesdec, SUFFIX)(CPUX86State *env, Reg *d, Reg *v, Reg *s)
  
- void glue(helper_aesenc, SUFFIX)(CPUX86State *env, Reg *d, Reg *v, Reg *s)
+ void glue(helper_aesdeclast, SUFFIX)(CPUX86State *env, Reg *d, Reg *v, Reg *s)
  {
 -    int i;
 -    Reg st = *v;
@@ -117,13 +120,9 @@ index 893913ebf8..93a4e0cf16 100644
 +        AESState *st = (AESState *)&v->ZMM_X(i);
 +        AESState *rk = (AESState *)&s->ZMM_X(i);
  
--    for (i = 0 ; i < 2 << SHIFT ; i++) {
--        int j = i & 3;
--        d->L(i) = rk.L(i) ^ bswap32(AES_Te0[st.B(AES_shifts[4 * j + 0])] ^
--                                    AES_Te1[st.B(AES_shifts[4 * j + 1])] ^
--                                    AES_Te2[st.B(AES_shifts[4 * j + 2])] ^
--                                    AES_Te3[st.B(AES_shifts[4 * j + 3])]);
-+        aesenc_SB_SR_MC_AK(ad, st, rk, false);
+-    for (i = 0; i < 8 << SHIFT; i++) {
+-        d->B(i) = rk.B(i) ^ (AES_isbox[st.B(AES_ishifts[i & 15] + (i & ~15))]);
++        aesdec_ISB_ISR_AK(ad, st, rk, false);
      }
  }
  
