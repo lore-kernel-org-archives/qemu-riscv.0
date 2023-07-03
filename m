@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EFF3C001DD
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jul 2023 18:32:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C56D8C001B3
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jul 2023 18:32:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qGOLS-0007ed-UV; Mon, 03 Jul 2023 14:32:18 -0400
+	id 1qGOLE-0007bT-F1; Mon, 03 Jul 2023 14:32:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qGOLR-0007e4-9R
- for qemu-riscv@nongnu.org; Mon, 03 Jul 2023 14:32:17 -0400
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qGOLD-0007bG-El
+ for qemu-riscv@nongnu.org; Mon, 03 Jul 2023 14:32:03 -0400
 Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qGOLP-0000E8-IZ
- for qemu-riscv@nongnu.org; Mon, 03 Jul 2023 14:32:17 -0400
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qGOLB-00008x-Rm
+ for qemu-riscv@nongnu.org; Mon, 03 Jul 2023 14:32:03 -0400
 Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-31438512cafso1254292f8f.2
- for <qemu-riscv@nongnu.org>; Mon, 03 Jul 2023 11:32:15 -0700 (PDT)
+ ffacd0b85a97d-31434226a2eso2495448f8f.1
+ for <qemu-riscv@nongnu.org>; Mon, 03 Jul 2023 11:32:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1688409133; x=1691001133;
+ d=linaro.org; s=google; t=1688409120; x=1691001120;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KNXX9yjMUQcBLaEX0n22oT0yHELrjRtAMDfsIdBaNkY=;
- b=KIK5m6ETMi3E+DS0NOoaPhJTIaeZWsAbFYOV6Zl7AOmoiTcn8qvuL0HF+pnuVFScFG
- dagK5jUXqbUkBh/CoHtVTNrK5Zw8YVfRszT6X3I7J2y+JgZ7ak1OIwTX5AxRLKfZJse1
- EWs66tgk92rQ1CnP1vltH6gmx+vFVYlZuNXlRl5sTfE4nzmSeOJWqW/OhoiCeX1XP91e
- BCsyxZ1YR/EQynYeZ2xomyJXpZH9A1VE4rtdD3TNFlPkZpEPJBc5M9kJQfg5mAU8DMah
- 0KQKxqwC1+GiTfkqYbXnA/CHoUHbKyS75aZMGaU1oIVMOthqNpFIYYkf5PAr+iOHlBKF
- Wjcw==
+ bh=N55U4NP3yl4GvH3dWyOKO0l2DdmIx/ff1ghfMtMlOlU=;
+ b=WitXZlHOET0XeyI0S46Q/K7yteKUZtSFQ+dEETzxJvjTxIoDbA2RxizG6FhquwjEZO
+ 5Z1WWj07NMCsg1VdZbUMSjVm1NB9ZPNTZyWr/KIdl8cUe1zW+cqUeuVntMvGLPcko1dO
+ B9bdTnuKqyJB6EorK//ZFtAClhBMwIQGps2XyWMto/r7nyJ7wDsJ8dIxY9KbQHqoGHVp
+ /wYVnzqUX0hbj72jYRkWySsgUpWcN/t3UIvvuYFRvqHEvW2I2KcSWdZcmZB0kPjuLsK+
+ ZN2xmc3AikkIlyngLtFxwG+M2IkeAp0XGEhOL3WW1Y+ftO0dYz132IfCNalodo+8OpPL
+ QItw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688409133; x=1691001133;
+ d=1e100.net; s=20221208; t=1688409120; x=1691001120;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KNXX9yjMUQcBLaEX0n22oT0yHELrjRtAMDfsIdBaNkY=;
- b=WQjHScWFL+uMTaBRvFNjwJXkiyL4lVd6pGMIWzLOu5xRXjQ/DxuKrt5LYY3CEHoQXY
- epxUMuj4I169ksuze25PtNaAxHOVTT57iEQhPbHktQPkqS7RqRf5daOiPUL8/9CnRmGx
- KK8ybq8cOkDoCisGYfV3FCuiCjP1WDcLZJ8tGg0OGIk7OxlbH8NG/2dKq3n8iHBM8nu8
- W5tfBfYc1R576RX2yM3nb75BOogNq6cwiLyRo0BRnAd1fytxgQYUyEUIpsrPCgjGMxqt
- dR2gE3F1pqbd5lx7oaoBcd/cUArY0StgH33lCkVLJLW5XcgiUQP//e7DgViSVbl9OFBU
- eiEw==
-X-Gm-Message-State: ABy/qLakUr1Qtvtg0feqJ8UghVIHj98dSig7Z72O3bZlXYU/GGe/Utaq
- AMhH8ZLzn2+7yH2dio/9EqD2OA==
-X-Google-Smtp-Source: APBJJlHatMbhgx8arqDUSOAALOI8iktiuHwcIb3VHA/qra9oYQt49PQ0pLFIYvPi0+AxjH5Xon74jA==
-X-Received: by 2002:a05:6000:924:b0:314:2c17:d921 with SMTP id
- cx4-20020a056000092400b003142c17d921mr6336643wrb.38.1688409133603; 
- Mon, 03 Jul 2023 11:32:13 -0700 (PDT)
+ bh=N55U4NP3yl4GvH3dWyOKO0l2DdmIx/ff1ghfMtMlOlU=;
+ b=GSquy8VxT5qstwX3tCFvMvVXuYpsbn/vnRFSJ/Jq0eDJgJYHq39dSV/DzOm0kiZHT2
+ xksbcSWeV0qh0rJeyMN8n97ymcidQlXmesBv4otYdetFiS8zbn4R7YLbzJQHIXBDSl9g
+ R3o3/biMGxhlPBrECikesW/GjyerA+v9LdrP41mkeDMPnj4zhsrXgrVKKzwuVP8m1xNj
+ FsGUXeSCp2bG7lTd6z5LXGtz6y9538XBZjKmwrszUr6Ewi4rtDcqA59G2yEfN6IZuN7u
+ oILKtC44FdUsUQiScw1HJuKzvy3hgkvYe37Qfb7xw/f5gz/H4Fpc49brW/hAs62J7VOy
+ Pvew==
+X-Gm-Message-State: ABy/qLZ4fZ0C8j1RBEIs1Nfih8DJgXHXWg+XKqazvagSKR1R/RjikLVs
+ P3JBes+mgR6FF+f3bXljNZUEKB6ewedMYSBQzA4KpQ==
+X-Google-Smtp-Source: APBJJlF6W9TcJobh0g4C5n7RXR5qR3/Fcvv3ZJUkmNWMCWjsCFbrGHQQGW/5pKhjSaVIUc5gsRCnTw==
+X-Received: by 2002:adf:f209:0:b0:314:2bd2:9611 with SMTP id
+ p9-20020adff209000000b003142bd29611mr9405839wro.34.1688409120602; 
+ Mon, 03 Jul 2023 11:32:00 -0700 (PDT)
 Received: from localhost.localdomain ([176.176.178.91])
  by smtp.gmail.com with ESMTPSA id
- w10-20020adfec4a000000b00314172ba213sm11770980wrn.108.2023.07.03.11.32.11
+ z5-20020adfd0c5000000b003143aa0ca8asm1949291wrh.13.2023.07.03.11.31.59
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 03 Jul 2023 11:32:13 -0700 (PDT)
+ Mon, 03 Jul 2023 11:32:00 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>,
@@ -67,10 +67,10 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>,
  qemu-riscv@nongnu.org, Bin Meng <bin.meng@windriver.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Weiwei Li <liweiwei@iscas.ac.cn>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH v2 04/16] target/riscv: Restrict 'rv128' machine to TCG
- accelerator
-Date: Mon,  3 Jul 2023 20:31:33 +0200
-Message-Id: <20230703183145.24779-5-philmd@linaro.org>
+Subject: [PATCH v2 02/16] target/riscv: Remove unused 'instmap.h' header in
+ translate.c
+Date: Mon,  3 Jul 2023 20:31:31 +0200
+Message-Id: <20230703183145.24779-3-philmd@linaro.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20230703183145.24779-1-philmd@linaro.org>
 References: <20230703183145.24779-1-philmd@linaro.org>
@@ -101,61 +101,25 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We only build for 32/64-bit hosts, so TCG is required for
-128-bit targets.
-
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Acked-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c | 12 +++++++++---
- 1 file changed, 9 insertions(+), 3 deletions(-)
+ target/riscv/translate.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 174003348f..78ab61c274 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -498,6 +498,7 @@ static void rv64_veyron_v1_cpu_init(Object *obj)
- #endif
- }
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 621dd99241..e3a6697cd8 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -30,7 +30,6 @@
+ #include "exec/log.h"
+ #include "semihosting/semihost.h"
  
-+#ifdef CONFIG_TCG
- static void rv128_base_cpu_init(Object *obj)
- {
-     if (qemu_tcg_mttcg_enabled()) {
-@@ -516,7 +517,10 @@ static void rv128_base_cpu_init(Object *obj)
-     set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV57);
- #endif
- }
--#else
-+#endif
-+
-+#else /* !TARGET_RISCV64 */
-+
- static void rv32_base_cpu_init(Object *obj)
- {
-     CPURISCVState *env = &RISCV_CPU(obj)->env;
-@@ -598,7 +602,7 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)
-     cpu->cfg.ext_icsr = true;
-     cpu->cfg.pmp = true;
- }
--#endif
-+#endif /* !TARGET_RISCV64 */
+-#include "instmap.h"
+ #include "internals.h"
  
- #if defined(CONFIG_KVM)
- static void riscv_host_cpu_init(Object *obj)
-@@ -2033,8 +2037,10 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-     DEFINE_CPU(TYPE_RISCV_CPU_SHAKTI_C,         rv64_sifive_u_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_THEAD_C906,       rv64_thead_c906_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_VEYRON_V1,        rv64_veyron_v1_cpu_init),
-+#ifdef CONFIG_TCG
-     DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE128,  rv128_base_cpu_init),
--#endif
-+#endif /* CONFIG_TCG */
-+#endif /* TARGET_RISCV64 */
- };
- 
- DEFINE_TYPES(riscv_cpu_type_infos)
+ #define HELPER_H "helper.h"
 -- 
 2.38.1
 
