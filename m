@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68297EB64D9
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jul 2023 01:04:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3D1FEB64DA
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jul 2023 01:23:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qG7yr-0002Tb-7f; Sun, 02 Jul 2023 21:03:53 -0400
+	id 1qG8HH-0005lo-JL; Sun, 02 Jul 2023 21:22:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qG7yo-0002T7-2e; Sun, 02 Jul 2023 21:03:50 -0400
-Received: from mail-vs1-xe36.google.com ([2607:f8b0:4864:20::e36])
+ id 1qG8HG-0005lZ-TC; Sun, 02 Jul 2023 21:22:54 -0400
+Received: from mail-yb1-xb2a.google.com ([2607:f8b0:4864:20::b2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qG7yl-0000jS-4J; Sun, 02 Jul 2023 21:03:49 -0400
-Received: by mail-vs1-xe36.google.com with SMTP id
- ada2fe7eead31-44358c019ddso1353993137.1; 
- Sun, 02 Jul 2023 18:03:45 -0700 (PDT)
+ id 1qG8HE-0004bz-Va; Sun, 02 Jul 2023 21:22:54 -0400
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-bff89873d34so3489478276.2; 
+ Sun, 02 Jul 2023 18:22:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1688346225; x=1690938225;
+ d=gmail.com; s=20221208; t=1688347371; x=1690939371;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kr/csRpj7yRPd+a7XEQy9luDGdTRfuaDwcgbO882Uj8=;
- b=kOhKlHs+rIVwGNY5dryVgpjloNzsE74uqLEH50SI1+QjWy0EzNZs/z6Szie+6igmog
- OaWB5piKPLNyMtmpSVGY77Zf4cT5S8rssJAO2ivGBWZEmvkp//5aMZp6TzXYsNN3m3Za
- iTedvqhwrm0xaf6V6ERCqoGESvdmTcJIiSrdzVL33uYJhHgLKRjzN6WxGVRxUXy2KijT
- jOI5xDUOIhsiW72ztAr0f/vqtinUztpsGSrK6iFL6dibO6Vq9RRDR+UBz27o5d5Vs0p+
- hNe7ebF4NCxiRCHpgpzkZtRMX++j37B5sd5D3vN/2mA9JoUctktxc/cIA/hfGT7HL239
- ETUg==
+ bh=gRF740pvkTjPn4YyUomuPjqPm+NWFaBR5Nuuxw9suaE=;
+ b=sZzttCQ2aFMeuk7Qzxvb8/ctk3BL0j6coXsUhhhCjG4NhHIREn+/97VJ+hl7OSxG3F
+ Aa1MUdSfU1WWWKn8kYjOU8fVooQopsh0+VRCQjlG1orSFCZxUuesUzPYZyulQUjCJqZr
+ l92XA22clFVvGECLdQG8Ie9qfgl1I3UX0Y9T1uVc5RxR6vbVW5HRUmpRhwt6K6IoMnJR
+ Gm3bzOnS2FfrFoeH/5ygtHkXEqKRAm+paQCB9TofUjsOQYza9/ncXTIct/+m691bChfE
+ g55Zv9q5NXBF+C21VdaqT+PLTawrGvR//8whU1yY4KI1VHhFCBpRJyda8y0wmcEcu8EC
+ myLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688346225; x=1690938225;
+ d=1e100.net; s=20221208; t=1688347371; x=1690939371;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kr/csRpj7yRPd+a7XEQy9luDGdTRfuaDwcgbO882Uj8=;
- b=d2hHZcEEvSputSRyDzhxTuM2w2ZYkmBJCwVXW+IkOB4pIcVJNb8x2OVW7mDZJlu6GL
- cO8FG7OW46gEkUEfrnyqhWptj9g7y7zVKoyxtV9y+5rsB/IROBjlAO/LQxYc73sRAFma
- 0FNn/VGyXS6yLkzoxZhTMesATxN64dcGZ+BmzcjyhxjPLCl5pfWDsdVosYV3cm4eg++U
- GzQR9SYCI6wj4JEXuHjcqZY2sdhcOKl3WrRScvoP7fxoSOg5MLDDQxZX/lV+AKazByjq
- lR8z/IPHoYTQIfp/zGG04t6ARWjoU/wyMEtgTfF3L9R/NfeqkZe+kgz4V8aIq5/Oa5Ev
- qhLg==
-X-Gm-Message-State: ABy/qLZxhxhT99gn2CqPgcQfTzTqBvnerqcDxi5rAIMbkF7RyWVpQQrv
- geTUoPVogAQgmpgrBpt/pOQh8dbFeTylZEIYn1c=
-X-Google-Smtp-Source: APBJJlEiA/DJ04JzAYoPetRZd51MbkR1pL12E+h/WqOyzTBsiq/7TvFwrnAP3Qm1BvA19qUXYTGTSNpZoG5Upuv9KcQ=
-X-Received: by 2002:a67:f981:0:b0:443:672c:2d8 with SMTP id
- b1-20020a67f981000000b00443672c02d8mr4324597vsq.22.1688346224763; Sun, 02 Jul
- 2023 18:03:44 -0700 (PDT)
+ bh=gRF740pvkTjPn4YyUomuPjqPm+NWFaBR5Nuuxw9suaE=;
+ b=X9GYqevxFWV+mS3toiJ8iYoq8LZjMN8fNF+G/g4g556OwyAE6SBu2CFLWqLdMxE9Cg
+ qvCiRoSe6/+NC2dEhLkCq7wH0yvoXpvBO23OrIVqIU1kDCxtVjjchqs3FkuRbK0/LtdB
+ ooiI27ct7INgrJOSubBgCqrxDB9comM2U3OSDB2rj0XMU3dcmZtESjCs5AaZsnpFHrZx
+ OE1BeiG9FV+koPJKbgSOGOzg07YWJH7f2u+GG3KGyx7OXnE8k1FBTRM/GJFO1e4pwm7H
+ 7XXiMm8qSwT+iv9+FbZ46ircMq6zDS0Z+pBnbBWqWyDsfJH79hzuDfhH8pKAIzfg+ZGO
+ R+Aw==
+X-Gm-Message-State: ABy/qLZFhgHSO0x+sE7wvFjcx1ZqnrnL1PT5U9QkGp3XIt0ArGB6F+2r
+ cFkWxDEVFDQ6Acx2Eggn0DBaNRR7tdinYoO0sIQ=
+X-Google-Smtp-Source: APBJJlEYfvoyq7nlwsb2Qd+EnEtO+x8RmnoUJdsf3KLdVU8hbVL3wJDxvBrE6UtcPOKcqPjcE1hYTT0Q8ZhcfgSdgdo=
+X-Received: by 2002:a25:4d07:0:b0:be5:fa6b:1fcd with SMTP id
+ a7-20020a254d07000000b00be5fa6b1fcdmr6540014ybb.30.1688347371509; Sun, 02 Jul
+ 2023 18:22:51 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230620081611.88158-1-philmd@linaro.org>
 In-Reply-To: <20230620081611.88158-1-philmd@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 3 Jul 2023 11:03:18 +1000
-Message-ID: <CAKmqyKObAOYmgT54azCgrYt-aHD8V37c1h6KoNBjshASEdvVwA@mail.gmail.com>
+Date: Mon, 3 Jul 2023 11:22:25 +1000
+Message-ID: <CAKmqyKNXLxE=AN-nOt6eMYFMdY1hFQqg3wFh364-pQ26xTeTaA@mail.gmail.com>
 Subject: Re: [PATCH] target/riscv: Remove unuseful KVM stubs
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
@@ -67,8 +67,8 @@ Cc: qemu-devel@nongnu.org, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Alistair Francis <alistair.francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e36;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe36.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b2a;
+ envelope-from=alistair23@gmail.com; helo=mail-yb1-xb2a.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -102,7 +102,8 @@ On Tue, Jun 20, 2023 at 6:17=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
 >
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Do you mind rebasing this on
+https://github.com/alistair23/qemu/tree/riscv-to-apply.next?
 
 Alistair
 
