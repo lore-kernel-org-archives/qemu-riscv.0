@@ -4,57 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05B7FC001B3
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jul 2023 18:34:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11170C001B3
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jul 2023 18:34:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qGOL8-0007Zd-6y; Mon, 03 Jul 2023 14:31:58 -0400
+	id 1qGOLy-0007vy-Rm; Mon, 03 Jul 2023 14:32:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qGOL5-0007Z9-Se
- for qemu-riscv@nongnu.org; Mon, 03 Jul 2023 14:31:55 -0400
-Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qGOLx-0007uq-Oh
+ for qemu-riscv@nongnu.org; Mon, 03 Jul 2023 14:32:49 -0400
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qGOL1-000070-Sj
- for qemu-riscv@nongnu.org; Mon, 03 Jul 2023 14:31:55 -0400
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-31297125334so4095115f8f.0
- for <qemu-riscv@nongnu.org>; Mon, 03 Jul 2023 11:31:50 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qGOLw-0000Mv-8Z
+ for qemu-riscv@nongnu.org; Mon, 03 Jul 2023 14:32:49 -0400
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-3fbc5d5746cso51206865e9.2
+ for <qemu-riscv@nongnu.org>; Mon, 03 Jul 2023 11:32:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1688409109; x=1691001109;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=MnDJGuJyd7hy6IfHuJQpgiX6kirrk5oLgIqP4WgR1ls=;
- b=gEm4cpDrD3c1t4Nku/wH3DSWqoJYBY8rXsG6uve0H6hqmkTAHZilGfKJR8tLCp98RO
- W2PfW/L52q9exJkigW9f8M3dXkoHTwH4iiZVbTLi7gaC1r4mXQDF5dbWTzWlEFkFx7xP
- dI/2v8X8dMzLVCJ8vC2nNon2r+AICrhf9DwTDEElP1I/qBoYtGULXDNtU8RzJ03eCCbv
- PLMpJZGU5hkNmVg1ffcmTKb8Go8arRbJUYOgKn7a7r++IvgEFmMQ/AJ12Urp0wXCFCYg
- 2Fs6BPstdIauuoLAeh16rokGJ0CElfOhkHh9MiJv1C64n4ipcTlrAILbWL/wLwfjQyqM
- //8Q==
+ d=linaro.org; s=google; t=1688409166; x=1691001166;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Y5G3GZnisObOugerwvl7UVGEu2t0avWriP2R6IveebM=;
+ b=gArLSy6UVnwhbUvId2CPKgLMDrnRG+LSn8P3Y9zKm3qKRdS8QwkfZVJZ2207HtTRgB
+ iihho0KTaU6KcfKiFae/vh7wpkYSQt//pGXBnvf0O3XxYtaIO13Gl3kuKEB12IG4tmw6
+ SyDE6qCSpfhIa0+vXELSpH82eB9hXBIAVopshElO1yZ6x2CGPD5+ZRr1Q+VXJh5QESdE
+ x3YL3CGEkwkhaCjWiHE+1qNv/RKN4E3iw1hgRI1WPJiw70KP9TGRGRWXj7rYFpHcCmGt
+ DOYtf2FbPXTocF4UFbURftbvhe2tNEvJ4PKx/kPER44ur8W2yajlLHWWu7so/JZMzRee
+ CnWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688409109; x=1691001109;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=MnDJGuJyd7hy6IfHuJQpgiX6kirrk5oLgIqP4WgR1ls=;
- b=brfxJzjvhR+UpEjxUIGG+5ZwgMz6FpfhSddcEHfIK/GHTzPeXpXqb1pfEaKNUHyKFf
- JB6T4iAQHWHpR+AOeuCQDzrDnhOCgKoFugfz5U9jp+w9k3hJVb+uXo97MzUsQRqFSc4P
- oDWdicl/swsxSuh0R8ynW2QyU1hAaMzZSNi1xltnAK+WQc/TQ5h31ooIh3JBdcz8JOft
- w31TEJ5tr3Nm8NvtTlfQFdsGafgLp7S6Efn/sY0ud+kuCgeEqaV6+8GyzT5nWf9A5cC/
- wVRJqFghs7aTEAZ9Tq/9EB+lY13t/cndjnNHzHHHQcS2wKKaFcllvLfBL1CsjKi+3x33
- i7uw==
-X-Gm-Message-State: AC+VfDwALZ/M7GwIJUUomVio3XGCo78B2uk93LOH+FRQUscRgG3WVMtW
- stnu9RWovWaRsq/CbinKFnXn+w==
-X-Google-Smtp-Source: ACHHUZ7YmFH6Jzw1OE18FZ5zHqnPjrQ1t77qrBJiI/Vjn6V6i/AusMhLJViSj8AKo6q+Hhx797kODg==
-X-Received: by 2002:adf:e3c9:0:b0:313:ef28:d3d6 with SMTP id
- k9-20020adfe3c9000000b00313ef28d3d6mr14384299wrm.6.1688409108711; 
- Mon, 03 Jul 2023 11:31:48 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1688409166; x=1691001166;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Y5G3GZnisObOugerwvl7UVGEu2t0avWriP2R6IveebM=;
+ b=KF/mZiylhacBRIbc0rF64l/4O8XlFTj56zsUSqVG0UFkxb/0uiF9F5F25sviMXQo5p
+ qsV3HgqVU4hRfnjZrdC+rPcXSKi8edAUBVS/Czuz5PHZ6xTRgpdTa5RhAyKNmnw87s6i
+ BheiRsAwxxwJkvAytunj4pJmx3kDy3uizwel+By98QUsI8hyMtZ+pknsjAVjc1ISo1vh
+ qCFT2nJNJD5qfPJzuz5WTsh4YNQxkFvA4ksMDkX8UZ+KWJ0jk1ze+hlvKCZqEpm33L7Y
+ oFDjb1gju3Xz1Mno8yeVq9H7rZqF1HOOIZOnxOwW62QOrTmUV03+GkX9tU3/Ra+3O3Sa
+ /X7Q==
+X-Gm-Message-State: AC+VfDwQKZuQnV7bJ+MPABY8QPph3jnTmWtpX9CdGUavTawhvS/FgnWX
+ r19+2aapDzQ7tkeLrK72feuNnA==
+X-Google-Smtp-Source: ACHHUZ7h8rLAhEb2ZvzJiN8tqunRElre+99fEUHX6oHEQbMkqj/bM3Myyd2PKQNyWBN1KrL64zWX3Q==
+X-Received: by 2002:a7b:c858:0:b0:3fa:98f8:225f with SMTP id
+ c24-20020a7bc858000000b003fa98f8225fmr10164667wml.26.1688409166721; 
+ Mon, 03 Jul 2023 11:32:46 -0700 (PDT)
 Received: from localhost.localdomain ([176.176.178.91])
  by smtp.gmail.com with ESMTPSA id
- y17-20020a1c4b11000000b003f9b24cf881sm30498831wma.16.2023.07.03.11.31.46
+ m21-20020a7bcb95000000b003faabd8fcb8sm21628765wmi.46.2023.07.03.11.32.44
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 03 Jul 2023 11:31:48 -0700 (PDT)
+ Mon, 03 Jul 2023 11:32:46 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>,
@@ -66,16 +67,18 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>,
  qemu-riscv@nongnu.org, Bin Meng <bin.meng@windriver.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Weiwei Li <liweiwei@iscas.ac.cn>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH v2 00/16] target/riscv: Allow building without TCG (KVM-only
- so far)
-Date: Mon,  3 Jul 2023 20:31:29 +0200
-Message-Id: <20230703183145.24779-1-philmd@linaro.org>
+Subject: [PATCH v2 09/16] target/riscv: Expose some 'trigger' prototypes from
+ debug.c
+Date: Mon,  3 Jul 2023 20:31:38 +0200
+Message-Id: <20230703183145.24779-10-philmd@linaro.org>
 X-Mailer: git-send-email 2.38.1
+In-Reply-To: <20230703183145.24779-1-philmd@linaro.org>
+References: <20230703183145.24779-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::436;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x436.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::335;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x335.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -98,110 +101,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-v2: Rebased on alistair23/riscv-to-apply.next
+We want to extract TCG-specific code from debug.c, but some
+functions call get_trigger_type() / do_trigger_action().
+Expose these prototypes in "debug.h".
 
-Patch #1-#5 reviewed.
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ target/riscv/debug.h | 4 ++++
+ target/riscv/debug.c | 5 ++---
+ 2 files changed, 6 insertions(+), 3 deletions(-)
 
-Philippe Mathieu-Daudé (16):
-  target/riscv: Remove unuseful KVM stubs
-  target/riscv: Remove unused 'instmap.h' header in translate.c
-  target/riscv: Restrict sysemu specific header to user emulation
-  target/riscv: Restrict 'rv128' machine to TCG accelerator
-  target/riscv: Move sysemu-specific files to target/riscv/sysemu/
-  target/riscv: Restrict riscv_cpu_do_interrupt() to sysemu
-  target/riscv: Move TCG-specific files to target/riscv/tcg/
-  target/riscv: Move TCG-specific cpu_get_tb_cpu_state() to tcg/cpu.c
-  target/riscv: Expose some 'trigger' prototypes from debug.c
-  target/riscv: Extract TCG-specific code from debug.c
-  target/riscv: Move sysemu-specific debug files to target/riscv/sysemu/
-  target/riscv: Expose riscv_cpu_pending_to_irq() from cpu_helper.c
-  target/riscv: Move TCG/sysemu-specific code to tcg/sysemu/cpu_helper.c
-  target/riscv: Move sysemu-specific code to sysemu/cpu_helper.c
-  target/riscv: Restrict TCG-specific prototype declarations
-  gitlab-ci.d/crossbuilds: Add KVM riscv64 cross-build jobs
-
- target/riscv/cpu.h                            |   27 +-
- target/riscv/internals.h                      |    4 +
- target/riscv/{ => sysemu}/debug.h             |    6 +
- target/riscv/{ => sysemu}/instmap.h           |    0
- target/riscv/{ => sysemu}/kvm_riscv.h         |    0
- target/riscv/{ => sysemu}/pmp.h               |    0
- target/riscv/{ => sysemu}/pmu.h               |    0
- target/riscv/{ => sysemu}/time_helper.h       |    0
- target/riscv/{ => tcg}/XVentanaCondOps.decode |    0
- target/riscv/{ => tcg}/insn16.decode          |    0
- target/riscv/{ => tcg}/insn32.decode          |    0
- target/riscv/{ => tcg}/xthead.decode          |    0
- hw/riscv/virt.c                               |    2 +-
- target/riscv/cpu.c                            |   33 +-
- target/riscv/cpu_helper.c                     | 1692 +----------------
- target/riscv/csr.c                            |    6 +-
- target/riscv/{ => sysemu}/arch_dump.c         |    0
- target/riscv/sysemu/cpu_helper.c              |  863 +++++++++
- target/riscv/{ => sysemu}/debug.c             |  153 +-
- target/riscv/{ => sysemu}/kvm-stub.c          |    0
- target/riscv/{ => sysemu}/kvm.c               |    4 +-
- target/riscv/{ => sysemu}/machine.c           |    0
- target/riscv/{ => sysemu}/monitor.c           |    0
- target/riscv/{ => sysemu}/pmp.c               |    0
- target/riscv/{ => sysemu}/pmu.c               |    0
- target/riscv/{ => sysemu}/riscv-qmp-cmds.c    |    0
- target/riscv/{ => sysemu}/time_helper.c       |    0
- target/riscv/{ => tcg}/bitmanip_helper.c      |    0
- target/riscv/tcg/cpu.c                        |   98 +
- target/riscv/{ => tcg}/crypto_helper.c        |    0
- target/riscv/{ => tcg}/fpu_helper.c           |    0
- target/riscv/{ => tcg}/m128_helper.c          |    0
- target/riscv/{ => tcg}/op_helper.c            |    0
- target/riscv/tcg/sysemu/cpu_helper.c          |  765 ++++++++
- target/riscv/tcg/sysemu/debug.c               |  165 ++
- target/riscv/tcg/tcg-stub.c                   |   31 +
- target/riscv/{ => tcg}/translate.c            |    1 -
- target/riscv/{ => tcg}/vector_helper.c        |    0
- target/riscv/{ => tcg}/zce_helper.c           |    0
- .gitlab-ci.d/crossbuilds.yml                  |    8 +
- target/riscv/meson.build                      |   33 +-
- target/riscv/sysemu/meson.build               |   13 +
- target/riscv/tcg/meson.build                  |   22 +
- target/riscv/tcg/sysemu/meson.build           |    4 +
- 44 files changed, 2037 insertions(+), 1893 deletions(-)
- rename target/riscv/{ => sysemu}/debug.h (96%)
- rename target/riscv/{ => sysemu}/instmap.h (100%)
- rename target/riscv/{ => sysemu}/kvm_riscv.h (100%)
- rename target/riscv/{ => sysemu}/pmp.h (100%)
- rename target/riscv/{ => sysemu}/pmu.h (100%)
- rename target/riscv/{ => sysemu}/time_helper.h (100%)
- rename target/riscv/{ => tcg}/XVentanaCondOps.decode (100%)
- rename target/riscv/{ => tcg}/insn16.decode (100%)
- rename target/riscv/{ => tcg}/insn32.decode (100%)
- rename target/riscv/{ => tcg}/xthead.decode (100%)
- rename target/riscv/{ => sysemu}/arch_dump.c (100%)
- create mode 100644 target/riscv/sysemu/cpu_helper.c
- rename target/riscv/{ => sysemu}/debug.c (83%)
- rename target/riscv/{ => sysemu}/kvm-stub.c (100%)
- rename target/riscv/{ => sysemu}/kvm.c (99%)
- rename target/riscv/{ => sysemu}/machine.c (100%)
- rename target/riscv/{ => sysemu}/monitor.c (100%)
- rename target/riscv/{ => sysemu}/pmp.c (100%)
- rename target/riscv/{ => sysemu}/pmu.c (100%)
- rename target/riscv/{ => sysemu}/riscv-qmp-cmds.c (100%)
- rename target/riscv/{ => sysemu}/time_helper.c (100%)
- rename target/riscv/{ => tcg}/bitmanip_helper.c (100%)
- create mode 100644 target/riscv/tcg/cpu.c
- rename target/riscv/{ => tcg}/crypto_helper.c (100%)
- rename target/riscv/{ => tcg}/fpu_helper.c (100%)
- rename target/riscv/{ => tcg}/m128_helper.c (100%)
- rename target/riscv/{ => tcg}/op_helper.c (100%)
- create mode 100644 target/riscv/tcg/sysemu/cpu_helper.c
- create mode 100644 target/riscv/tcg/sysemu/debug.c
- create mode 100644 target/riscv/tcg/tcg-stub.c
- rename target/riscv/{ => tcg}/translate.c (99%)
- rename target/riscv/{ => tcg}/vector_helper.c (100%)
- rename target/riscv/{ => tcg}/zce_helper.c (100%)
- create mode 100644 target/riscv/sysemu/meson.build
- create mode 100644 target/riscv/tcg/meson.build
- create mode 100644 target/riscv/tcg/sysemu/meson.build
-
+diff --git a/target/riscv/debug.h b/target/riscv/debug.h
+index c471748d5a..65cd45b8f3 100644
+--- a/target/riscv/debug.h
++++ b/target/riscv/debug.h
+@@ -147,4 +147,8 @@ void riscv_trigger_init(CPURISCVState *env);
+ 
+ bool riscv_itrigger_enabled(CPURISCVState *env);
+ void riscv_itrigger_update_priv(CPURISCVState *env);
++
++target_ulong get_trigger_type(CPURISCVState *env, target_ulong trigger_index);
++void do_trigger_action(CPURISCVState *env, target_ulong trigger_index);
++
+ #endif /* RISCV_DEBUG_H */
+diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+index 75ee1c4971..5676f2c57e 100644
+--- a/target/riscv/debug.c
++++ b/target/riscv/debug.c
+@@ -88,8 +88,7 @@ static inline target_ulong extract_trigger_type(CPURISCVState *env,
+     }
+ }
+ 
+-static inline target_ulong get_trigger_type(CPURISCVState *env,
+-                                            target_ulong trigger_index)
++target_ulong get_trigger_type(CPURISCVState *env, target_ulong trigger_index)
+ {
+     return extract_trigger_type(env, env->tdata1[trigger_index]);
+ }
+@@ -217,7 +216,7 @@ static inline void warn_always_zero_bit(target_ulong val, target_ulong mask,
+     }
+ }
+ 
+-static void do_trigger_action(CPURISCVState *env, target_ulong trigger_index)
++void do_trigger_action(CPURISCVState *env, target_ulong trigger_index)
+ {
+     trigger_action_t action = get_trigger_action(env, trigger_index);
+ 
 -- 
 2.38.1
 
