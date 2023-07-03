@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3D1FEB64DA
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jul 2023 01:23:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD67DEB64D9
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jul 2023 01:30:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qG8HH-0005lo-JL; Sun, 02 Jul 2023 21:22:55 -0400
+	id 1qG8Ny-00074l-BS; Sun, 02 Jul 2023 21:29:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qG8HG-0005lZ-TC; Sun, 02 Jul 2023 21:22:54 -0400
-Received: from mail-yb1-xb2a.google.com ([2607:f8b0:4864:20::b2a])
+ id 1qG8Nq-000747-Sb; Sun, 02 Jul 2023 21:29:43 -0400
+Received: from mail-vk1-xa34.google.com ([2607:f8b0:4864:20::a34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qG8HE-0004bz-Va; Sun, 02 Jul 2023 21:22:54 -0400
-Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-bff89873d34so3489478276.2; 
- Sun, 02 Jul 2023 18:22:52 -0700 (PDT)
+ id 1qG8Np-0005YB-C0; Sun, 02 Jul 2023 21:29:42 -0400
+Received: by mail-vk1-xa34.google.com with SMTP id
+ 71dfb90a1353d-47179f18c76so1285406e0c.3; 
+ Sun, 02 Jul 2023 18:29:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1688347371; x=1690939371;
+ d=gmail.com; s=20221208; t=1688347780; x=1690939780;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gRF740pvkTjPn4YyUomuPjqPm+NWFaBR5Nuuxw9suaE=;
- b=sZzttCQ2aFMeuk7Qzxvb8/ctk3BL0j6coXsUhhhCjG4NhHIREn+/97VJ+hl7OSxG3F
- Aa1MUdSfU1WWWKn8kYjOU8fVooQopsh0+VRCQjlG1orSFCZxUuesUzPYZyulQUjCJqZr
- l92XA22clFVvGECLdQG8Ie9qfgl1I3UX0Y9T1uVc5RxR6vbVW5HRUmpRhwt6K6IoMnJR
- Gm3bzOnS2FfrFoeH/5ygtHkXEqKRAm+paQCB9TofUjsOQYza9/ncXTIct/+m691bChfE
- g55Zv9q5NXBF+C21VdaqT+PLTawrGvR//8whU1yY4KI1VHhFCBpRJyda8y0wmcEcu8EC
- myLg==
+ bh=bl5+4bxQm8vaMUVxDHuN52f3qzIdub/uhCc8lry4NdQ=;
+ b=AUc7x2N/5uUzMEYgs2q+ntSFD7qbr4o3pbpvkLlZcfJ0XjlV+fa4ddXHi0e8werLOs
+ tFSOCqForLyAUgWUcfN5Va6ImfHsL/WrWqUzG2RxiCYo3EsKIk78eTizKDjCdc/G/AJN
+ u5ZqYrA19bYnWQXq4BmNnyr4KxB5Wq3u07mQewxdidik3n9j9BuOxFo5K/ZMy4Ivem66
+ 2ccnYg2MdLY7jtTHQwqcosTXse5z8UVTkKyqIw6LB49l1a6radXJiRIALiZrtCG0xJzK
+ kRr2Qz1DQoTS1bY7aFReepNH5m8JWJ8MOmQ9vq1YfDcXKJ0b7PgNyVD4Mb/B4R4ApKiV
+ wpww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688347371; x=1690939371;
+ d=1e100.net; s=20221208; t=1688347780; x=1690939780;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gRF740pvkTjPn4YyUomuPjqPm+NWFaBR5Nuuxw9suaE=;
- b=X9GYqevxFWV+mS3toiJ8iYoq8LZjMN8fNF+G/g4g556OwyAE6SBu2CFLWqLdMxE9Cg
- qvCiRoSe6/+NC2dEhLkCq7wH0yvoXpvBO23OrIVqIU1kDCxtVjjchqs3FkuRbK0/LtdB
- ooiI27ct7INgrJOSubBgCqrxDB9comM2U3OSDB2rj0XMU3dcmZtESjCs5AaZsnpFHrZx
- OE1BeiG9FV+koPJKbgSOGOzg07YWJH7f2u+GG3KGyx7OXnE8k1FBTRM/GJFO1e4pwm7H
- 7XXiMm8qSwT+iv9+FbZ46ircMq6zDS0Z+pBnbBWqWyDsfJH79hzuDfhH8pKAIzfg+ZGO
- R+Aw==
-X-Gm-Message-State: ABy/qLZFhgHSO0x+sE7wvFjcx1ZqnrnL1PT5U9QkGp3XIt0ArGB6F+2r
- cFkWxDEVFDQ6Acx2Eggn0DBaNRR7tdinYoO0sIQ=
-X-Google-Smtp-Source: APBJJlEYfvoyq7nlwsb2Qd+EnEtO+x8RmnoUJdsf3KLdVU8hbVL3wJDxvBrE6UtcPOKcqPjcE1hYTT0Q8ZhcfgSdgdo=
-X-Received: by 2002:a25:4d07:0:b0:be5:fa6b:1fcd with SMTP id
- a7-20020a254d07000000b00be5fa6b1fcdmr6540014ybb.30.1688347371509; Sun, 02 Jul
- 2023 18:22:51 -0700 (PDT)
+ bh=bl5+4bxQm8vaMUVxDHuN52f3qzIdub/uhCc8lry4NdQ=;
+ b=E4tfljEcnDI4zbyUe0X4sdS1Mjf8TrUtfm26WJ5xcunh/EVGdr455+cLwGACPUyigq
+ I1kzqZrgnHllDGXyw3wT/k6Rx8jI9gx9W711Y9h+IfbJMOH9ZYN7IWwuUUJhJ7wtWiiW
+ pC2a3mcF+Vag2Rome4SvN812h86OrdnlukHlIXP54CLuovAjkeOS6xV96Y22BZTGOeQ6
+ HKeIMHouZbcHhqYO3gZ3FvG0R0FhwQEk/EHGQ0qzJvmqnB0diuS35shoMDW2Gdc8o2sC
+ MWlwM4fK1mFSFvMGpoxta9Lg7tiaHe4APWIObesdm5VJqb/5p0gDANHCR2P0DyKnGH0J
+ 5aEg==
+X-Gm-Message-State: ABy/qLZL5hkQb/7DQJ+Hf4KYDb1lg2K9ib4y3cvIungC6NRndPXcvWg7
+ gICVwGxH1DJ7UN8Tv13T165NSj5GA+P7QX+hMWU=
+X-Google-Smtp-Source: APBJJlFLTjxPWCXX0Fr+NW5KpRynRkL1XdqRYEss4FrbdY+HgYP9ZrHkbmH1NtLz1HUNZVdwjnGHpVWXQ2BurnZCdW8=
+X-Received: by 2002:a1f:3dd1:0:b0:471:cd12:9c6a with SMTP id
+ k200-20020a1f3dd1000000b00471cd129c6amr4234770vka.12.1688347780011; Sun, 02
+ Jul 2023 18:29:40 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230620081611.88158-1-philmd@linaro.org>
-In-Reply-To: <20230620081611.88158-1-philmd@linaro.org>
+References: <20230628063234.32544-1-philmd@linaro.org>
+In-Reply-To: <20230628063234.32544-1-philmd@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 3 Jul 2023 11:22:25 +1000
-Message-ID: <CAKmqyKNXLxE=AN-nOt6eMYFMdY1hFQqg3wFh364-pQ26xTeTaA@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Remove unuseful KVM stubs
+Date: Mon, 3 Jul 2023 11:29:14 +1000
+Message-ID: <CAKmqyKOkZjozb9t+D3kDjZmrFC30EtbpHY+aEKsLoRCj9ydh2A@mail.gmail.com>
+Subject: Re: [PATCH v2 0/4] target/riscv: Misc header cleanups
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Bin Meng <bin.meng@windriver.com>,
- qemu-riscv@nongnu.org, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, kvm@vger.kernel.org, 
+Cc: qemu-devel@nongnu.org, Bin Meng <bin.meng@windriver.com>, 
  Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-riscv@nongnu.org, 
  Alistair Francis <alistair.francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2a;
- envelope-from=alistair23@gmail.com; helo=mail-yb1-xb2a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a34;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa34.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -92,97 +91,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jun 20, 2023 at 6:17=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
+On Wed, Jun 28, 2023 at 4:34=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
 <philmd@linaro.org> wrote:
 >
-> Since we always check whether KVM is enabled before calling
-> kvm_riscv_reset_vcpu() and kvm_riscv_set_irq(), their call
-> is elided by the compiler when KVM is not available.
-> Therefore the stubs are not even linked. Remove them.
+> As requested by Daniel in [1], these patches are extracted from
+> my "target/riscv: Allow building without TCG (KVM-only so far)"
+> series and cleanly rebased onto Alistair's riscv-to-apply.next.
 >
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> [1] https://lore.kernel.org/qemu-devel/59b5b342-8940-5ac1-0cec-8c136c4916=
+d8@ventanamicro.com/
+> [2] https://lore.kernel.org/qemu-devel/20230626232007.8933-1-philmd@linar=
+o.org/
+>
+> Philippe Mathieu-Daud=C3=A9 (4):
+>   target/riscv: Remove unused 'instmap.h' header in translate.c
+>   target/riscv: Restrict sysemu specific header to user emulation
+>   target/riscv: Restrict 'rv128' machine to TCG accelerator
+>   target/riscv: Restrict riscv_cpu_do_interrupt() to sysemu
 
-Do you mind rebasing this on
-https://github.com/alistair23/qemu/tree/riscv-to-apply.next?
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+
+But this doesn't apply on the latest riscv-to-apply.next
 
 Alistair
 
-> ---
->  target/riscv/kvm-stub.c  | 30 ------------------------------
->  target/riscv/kvm.c       |  4 +---
->  target/riscv/meson.build |  2 +-
->  3 files changed, 2 insertions(+), 34 deletions(-)
->  delete mode 100644 target/riscv/kvm-stub.c
 >
-> diff --git a/target/riscv/kvm-stub.c b/target/riscv/kvm-stub.c
-> deleted file mode 100644
-> index 4e8fc31a21..0000000000
-> --- a/target/riscv/kvm-stub.c
-> +++ /dev/null
-> @@ -1,30 +0,0 @@
-> -/*
-> - * QEMU KVM RISC-V specific function stubs
-> - *
-> - * Copyright (c) 2020 Huawei Technologies Co., Ltd
-> - *
-> - * This program is free software; you can redistribute it and/or modify =
-it
-> - * under the terms and conditions of the GNU General Public License,
-> - * version 2 or later, as published by the Free Software Foundation.
-> - *
-> - * This program is distributed in the hope it will be useful, but WITHOU=
-T
-> - * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> - * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License=
- for
-> - * more details.
-> - *
-> - * You should have received a copy of the GNU General Public License alo=
-ng with
-> - * this program.  If not, see <http://www.gnu.org/licenses/>.
-> - */
-> -#include "qemu/osdep.h"
-> -#include "cpu.h"
-> -#include "kvm_riscv.h"
-> -
-> -void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
-> -{
-> -    abort();
-> -}
-> -
-> -void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level)
-> -{
-> -    abort();
-> -}
-> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-> index 0f932a5b96..52884bbe15 100644
-> --- a/target/riscv/kvm.c
-> +++ b/target/riscv/kvm.c
-> @@ -503,9 +503,7 @@ void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
->  {
->      CPURISCVState *env =3D &cpu->env;
+>  target/riscv/cpu.h        |  5 +++--
+>  target/riscv/cpu.c        | 20 ++++++++++++++------
+>  target/riscv/cpu_helper.c |  9 ++++-----
+>  target/riscv/csr.c        |  2 ++
+>  target/riscv/translate.c  |  1 -
+>  5 files changed, 23 insertions(+), 14 deletions(-)
 >
-> -    if (!kvm_enabled()) {
-> -        return;
-> -    }
-> +    assert(kvm_enabled());
->      env->pc =3D cpu->env.kernel_addr;
->      env->gpr[10] =3D kvm_arch_vcpu_id(CPU(cpu)); /* a0 */
->      env->gpr[11] =3D cpu->env.fdt_addr;          /* a1 */
-> diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-> index e1ff6d9b95..37fc2cf487 100644
-> --- a/target/riscv/meson.build
-> +++ b/target/riscv/meson.build
-> @@ -22,7 +22,7 @@ riscv_ss.add(files(
->    'crypto_helper.c',
->    'zce_helper.c'
->  ))
-> -riscv_ss.add(when: 'CONFIG_KVM', if_true: files('kvm.c'), if_false: file=
-s('kvm-stub.c'))
-> +riscv_ss.add(when: 'CONFIG_KVM', if_true: files('kvm.c'))
->
->  riscv_softmmu_ss =3D ss.source_set()
->  riscv_softmmu_ss.add(files(
 > --
 > 2.38.1
 >
