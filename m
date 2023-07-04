@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 306D5EB64D9
-	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Jul 2023 15:13:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAE6CEB64D9
+	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Jul 2023 16:19:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qGhht-00038D-Vo; Tue, 04 Jul 2023 11:12:46 -0400
+	id 1qGijl-0003Rd-CB; Tue, 04 Jul 2023 12:18:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qGhhr-000379-TV
- for qemu-riscv@nongnu.org; Tue, 04 Jul 2023 11:12:43 -0400
-Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
+ id 1qGijj-0003R3-U4
+ for qemu-riscv@nongnu.org; Tue, 04 Jul 2023 12:18:43 -0400
+Received: from mail-ej1-x635.google.com ([2a00:1450:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qGhhp-0007zD-M3
- for qemu-riscv@nongnu.org; Tue, 04 Jul 2023 11:12:43 -0400
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-51de841a727so6035691a12.3
- for <qemu-riscv@nongnu.org>; Tue, 04 Jul 2023 08:12:41 -0700 (PDT)
+ id 1qGijh-0005bI-3B
+ for qemu-riscv@nongnu.org; Tue, 04 Jul 2023 12:18:43 -0400
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-9936b3d0286so265040266b.0
+ for <qemu-riscv@nongnu.org>; Tue, 04 Jul 2023 09:18:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1688483560; x=1691075560;
+ d=ventanamicro.com; s=google; t=1688487518; x=1691079518;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=UmwEhHGCiPaByJisLi3VmUJ7Uu9s7XovyhRxpM0ByVo=;
- b=S6xyKfnLmgSL390ag4/Mb5Pi2POMaMiUvAQJKyXPglWbayXbrZd0XXtwnAPq/ilWFE
- QGNaETVwgm/jP4XR6Sjamsu0dtchAKrsZiUVurN1uc1LsjKMQ4QhqaJrWeR0m7y2lCFk
- JqNP5QA6jaqdWcCYmf6Lg/1rGFnGgYGTFZJ4VD4u97Z8HAa2bzHemsA2sxXGZ6iW71jA
- t/kV+SUUMDd8ZALULU6nHk41KmwzHbM/QM0hN2dpIYG9IXSFwK61hLeLUmMfX8uyKWuq
- mOfNUVW/szx0Qr2Bf6yfzSrqiksX3HG/jSpRK0AzI5t3pXwN5UNDN64sHuZ+aGLzTYNq
- rr8g==
+ bh=oKLkCx4tl/A8o0iGgphfIMHOV/endOUf6B1yYvUPffc=;
+ b=F48s1OLKW5okY1L4gRgCvHf2f5ZeVH5LYPppZpwvtRAFTUT/qR6+N/JQxIythyjS7K
+ ZXzkZvRQNI9XETDOGNSgGq/JNXOtc7pPsrTnCPMxhCmjgui7p4lDCGbabmW6c489jjr7
+ AZ2PjekF+qx0C5rFZ7g5hfCAwRmSbZ306Oe54HbqeN6xXkADLDvS9/ZEpuwpQjn6IDuz
+ bo2CldSulanJIKjuWLACBacnQZ99AQQ31VQi7kLSw56JY5rCH+nkYZRUaMhdQsfm116J
+ 2z/ADarooHMzTS31p5DGgFwyXJg7tA8VDiwP0voYzuDXnaS6jyE+5qze4yKdpanbDVmn
+ D2mQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688483560; x=1691075560;
+ d=1e100.net; s=20221208; t=1688487518; x=1691079518;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UmwEhHGCiPaByJisLi3VmUJ7Uu9s7XovyhRxpM0ByVo=;
- b=FYG9C2kWcTz9EQWYt4xVnvDjC1P5bg1OIAUX4qIbeDvzxuSQL5p0C5U/+8M9HOHUlF
- 56vQ7iZ16UxF70Zm3yLlPwd4uXuQmrr0kOijzfzqmCtyvwHnvBRdyGrTH3pJzvgUHopK
- BvV3vv6sDsz/Vg57HKcIhe7x9/PRWJjCHTincdNBCMs6EFAjvvts8phXXcBG/UQYMPY6
- T5DCcG5y8Z1BkjUX05wxWGxaAv3BQptBjK6WhWcLdaP8EPEpGWn+OlFJepyGi0gUW/3K
- c8ZT/CWbmD7KZ1ddrT9UPeqW3iew+P+EJgygsitYbezdWr+KoU7qYSgT8jw2AROMqc5O
- H8gg==
-X-Gm-Message-State: AC+VfDx83WGRdyHSJu1Zvu+2E2LSxLhhgpr3mWGELlFCgLozPRtCAPXG
- RtGOU07DzCbePN0wy7AxvP/VrQ==
-X-Google-Smtp-Source: APBJJlEFsaTF0C9YEC6MH3s75YSrBseUxS4LBAy0tC0lcDgNKEGdMAsHr1mltmZVIS/RuN6vnv9Yuw==
-X-Received: by 2002:a17:906:f196:b0:992:7295:61c9 with SMTP id
- gs22-20020a170906f19600b00992729561c9mr9981772ejb.69.1688483559913; 
- Tue, 04 Jul 2023 08:12:39 -0700 (PDT)
+ bh=oKLkCx4tl/A8o0iGgphfIMHOV/endOUf6B1yYvUPffc=;
+ b=hXphRMweLYa85eRgwWSjnoVr47Wfbgs7WFz2rXhNEowUu0G3z6ZPYn13QMMhq5Q9mj
+ cxKoOgGUCOg6bGlhDvArEBBI+j7f1mA8jrW46z87TRqEoRhYMZYbwcc6CRWpjYpEEXWk
+ 4jAp2RG7ZXM4MxC4+PYpkswMzZdlBjsOTfWA5nSO2tPBUv4z2pjmT9rRos8iM2G6EMOi
+ C7zHYygiwPWKxIFGc2U69Z18PSLPJrc26dbdY28//u+9PDN3I4yYOZIrI2Bu3LpgJNTh
+ wcaE1FEKVMmue4JlfLNBh+SbIsgcNIlBSiRaum+VeDWyMrgYCKeSRGX1lsWXw5bJpwHt
+ jGsg==
+X-Gm-Message-State: ABy/qLaoQlak/DY/kihKw24ADEIfaRuWIWETH9ru83CYT985hhmGOwyQ
+ KEdRwcPSOpFktJG/lUMlCUfLvA==
+X-Google-Smtp-Source: APBJJlESQiipaDalgP/FrECOMBmz+5wY8Vy99lmeQhdnAo2fEZ8H4KrLVnz+kv/SQvV4tIPm9eLovQ==
+X-Received: by 2002:a17:906:6846:b0:979:65f0:cd12 with SMTP id
+ a6-20020a170906684600b0097965f0cd12mr10334901ejs.15.1688487517897; 
+ Tue, 04 Jul 2023 09:18:37 -0700 (PDT)
 Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
  by smtp.gmail.com with ESMTPSA id
- i16-20020a1709061cd000b00992e14af9b9sm6189928ejh.134.2023.07.04.08.12.38
+ kt19-20020a170906aad300b009894b476310sm13570990ejb.163.2023.07.04.09.18.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Jul 2023 08:12:39 -0700 (PDT)
-Date: Tue, 4 Jul 2023 17:12:37 +0200
+ Tue, 04 Jul 2023 09:18:37 -0700 (PDT)
+Date: Tue, 4 Jul 2023 18:18:35 +0200
 From: Andrew Jones <ajones@ventanamicro.com>
 To: Yong-Xuan Wang <yongxuan.wang@sifive.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, rkanwal@rivosinc.com, 
  anup@brainfault.org, dbarboza@ventanamicro.com, atishp@atishpatra.org, 
  vincent.chen@sifive.com, greentime.hu@sifive.com, frank.chang@sifive.com, 
- jim.shu@sifive.com, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Weiwei Li <liweiwei@iscas.ac.cn>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, kvm@vger.kernel.org
-Subject: Re: [PATCH v4 4/6] target/riscv: Create an KVM AIA irqchip
-Message-ID: <20230704-e98d67cadfcb3fc3fdf3d958@orel>
+ jim.shu@sifive.com, Alistair Francis <alistair.francis@wdc.com>, 
+ Ivan Klokov <ivan.klokov@syntacore.com>, Palmer Dabbelt <palmer@rivosinc.com>, 
+ Mayuresh Chitale <mchitale@ventanamicro.com>
+Subject: Re: [PATCH v4 5/6] target/riscv: update APLIC and IMSIC to support
+ KVM AIA
+Message-ID: <20230704-ffe89ca7f752270ceb1a6d5c@orel>
 References: <20230621145500.25624-1-yongxuan.wang@sifive.com>
- <20230621145500.25624-5-yongxuan.wang@sifive.com>
+ <20230621145500.25624-6-yongxuan.wang@sifive.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230621145500.25624-5-yongxuan.wang@sifive.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::531;
- envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x531.google.com
+In-Reply-To: <20230621145500.25624-6-yongxuan.wang@sifive.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::635;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x635.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,250 +99,206 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jun 21, 2023 at 02:54:54PM +0000, Yong-Xuan Wang wrote:
-> implement a function to create an KVM AIA chip
+On Wed, Jun 21, 2023 at 02:54:55PM +0000, Yong-Xuan Wang wrote:
+> KVM AIA can't emulate APLIC only.
 
-This is a bit too terse. We should at least summarize the KVM API this
-uses.
+I think you mean "KVM AIA can't emulate the APLIC alone." ?
 
+> When "aia=aplic" parameter is passed,
+> APLIC devices is emulated by QEMU. For "aia=aplic-imsic", remove the
+> mmio operations of APLIC when using KVM AIA and send wired interrupt
+> signal via KVM_IRQ_LINE API.
+> After KVM AIA enabled, MSI messages are delivered by KVM_SIGNAL_MSI API
+> when the IMSICs receive mmio write requests.
 > 
 > Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
 > Reviewed-by: Jim Shu <jim.shu@sifive.com>
 > ---
->  target/riscv/kvm.c       | 163 +++++++++++++++++++++++++++++++++++++++
->  target/riscv/kvm_riscv.h |   6 ++
->  2 files changed, 169 insertions(+)
+>  hw/intc/riscv_aplic.c | 58 +++++++++++++++++++++++++++++++------------
+>  hw/intc/riscv_imsic.c | 26 +++++++++++++++----
+>  2 files changed, 63 insertions(+), 21 deletions(-)
 > 
-> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-> index eb469e8ca5..3dd8467031 100644
-> --- a/target/riscv/kvm.c
-> +++ b/target/riscv/kvm.c
-> @@ -34,6 +34,7 @@
->  #include "exec/address-spaces.h"
->  #include "hw/boards.h"
+> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+> index afc5b54dbb..b1949636b6 100644
+> --- a/hw/intc/riscv_aplic.c
+> +++ b/hw/intc/riscv_aplic.c
+> @@ -31,6 +31,7 @@
 >  #include "hw/irq.h"
-> +#include "hw/intc/riscv_imsic.h"
->  #include "qemu/log.h"
->  #include "hw/loader.h"
->  #include "kvm_riscv.h"
-> @@ -41,6 +42,7 @@
->  #include "chardev/char-fe.h"
->  #include "migration/migration.h"
->  #include "sysemu/runstate.h"
-> +#include "hw/riscv/numa.h"
+>  #include "target/riscv/cpu.h"
+>  #include "sysemu/sysemu.h"
+> +#include "sysemu/kvm.h"
+>  #include "migration/vmstate.h"
 >  
->  static uint64_t kvm_riscv_reg_id(CPURISCVState *env, uint64_t type,
->                                   uint64_t idx)
-> @@ -548,3 +550,164 @@ bool kvm_arch_cpu_check_are_resettable(void)
->  void kvm_arch_accel_class_init(ObjectClass *oc)
+>  #define APLIC_MAX_IDC                  (1UL << 14)
+> @@ -148,6 +149,15 @@
+>  
+>  #define APLIC_IDC_CLAIMI               0x1c
+>  
+> +/*
+> + * KVM AIA only supports APLIC.m, fallback to QEMU emulation if we want to use
+> + * APLIC.w.
+
+I assume APLIC.m and APLIC.w mean "APLIC MSI" and "APLIC Wired". Can you
+please spell that out?
+
+> + */
+> +static bool is_kvm_aia(bool msimode)
+> +{
+> +    return kvm_irqchip_in_kernel() && msimode;
+> +}
+> +
+>  static uint32_t riscv_aplic_read_input_word(RISCVAPLICState *aplic,
+>                                              uint32_t word)
 >  {
+> @@ -471,6 +481,13 @@ static uint32_t riscv_aplic_idc_claimi(RISCVAPLICState *aplic, uint32_t idc)
+>      return topi;
 >  }
-> +
-> +char *kvm_aia_mode_str(uint64_t aia_mode)
+>  
+> +static void riscv_kvm_aplic_request(void *opaque, int irq, int level)
 > +{
-> +    const char *val;
+> +    kvm_set_irq(kvm_state, irq, !!level);
 > +
-> +    switch (aia_mode) {
-> +    case KVM_DEV_RISCV_AIA_MODE_EMUL:
-> +        val = "emul";
-> +        break;
-> +    case KVM_DEV_RISCV_AIA_MODE_HWACCEL:
-> +        val = "hwaccel";
-> +        break;
-> +    case KVM_DEV_RISCV_AIA_MODE_AUTO:
-> +    default:
-> +        val = "auto";
-> +        break;
-> +    };
-> +
-> +    return g_strdup(val);
+> +    return;
 
-There's no need to duplicate statically allocated strings unless they need
-to be manipulated. These strings do not, so this should just be
-
- const char *kvm_aia_mode_str(uint64_t aia_mode)
- {
-    switch (aia_mode) {
-    case KVM_DEV_RISCV_AIA_MODE_EMUL:
-        return "emul";
-    ...
-
-or even just an array
-
- const char *kvm_aia_mode_str[] = { "emul", "hwaccel", "auto" };
+Unnecessary 'return'
 
 > +}
 > +
-> +void kvm_riscv_aia_create(MachineState *machine,
-> +                          uint64_t aia_mode, uint64_t group_shift,
-> +                          uint64_t aia_irq_num, uint64_t aia_msi_num,
-> +                          uint64_t aplic_base, uint64_t imsic_base,
-> +                          uint64_t guest_num)
-> +{
-> +    int ret, i;
-> +    int aia_fd = -1;
-> +    uint64_t default_aia_mode;
-> +    uint64_t socket_count = riscv_socket_count(machine);
-> +    uint64_t max_hart_per_socket = 0;
-> +    uint64_t socket, base_hart, hart_count, socket_imsic_base, imsic_addr;
-> +    uint64_t socket_bits, hart_bits, guest_bits;
-> +
-> +    aia_fd = kvm_create_device(kvm_state, KVM_DEV_TYPE_RISCV_AIA, false);
-> +
-> +    if (aia_fd < 0) {
-> +        error_report("Unable to create in-kernel irqchip");
-> +        exit(1);
-> +    }
-> +
-
-For all the "fail to..." error messages below I would change them to
-"failed to..."
-
-> +    ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
-> +                            KVM_DEV_RISCV_AIA_CONFIG_MODE,
-> +                            &default_aia_mode, false, NULL);
-> +    if (ret < 0) {
-> +        error_report("KVM AIA: fail to get current KVM AIA mode");
-> +        exit(1);
-> +    }
-> +    qemu_log("KVM AIA: default mode is %s\n",
-> +             kvm_aia_mode_str(default_aia_mode));
-> +
-> +    if (default_aia_mode != aia_mode) {
-> +        ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
-> +                                KVM_DEV_RISCV_AIA_CONFIG_MODE,
-> +                                &aia_mode, true, NULL);
-> +        if (ret < 0)
-> +            warn_report("KVM AIA: fail to set KVM AIA mode");
-> +        else
-> +            qemu_log("KVM AIA: set current mode to %s\n",
-> +                     kvm_aia_mode_str(aia_mode));
-> +    }
-> +
-> +    ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
-> +                            KVM_DEV_RISCV_AIA_CONFIG_SRCS,
-> +                            &aia_irq_num, true, NULL);
-> +    if (ret < 0) {
-> +        error_report("KVM AIA: fail to set number of input irq lines");
-> +        exit(1);
-> +    }
-> +
-> +    ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
-> +                            KVM_DEV_RISCV_AIA_CONFIG_IDS,
-> +                            &aia_msi_num, true, NULL);
-> +    if (ret < 0) {
-> +        error_report("KVM AIA: fail to set number of msi");
-> +        exit(1);
-> +    }
-> +
-> +    socket_bits = find_last_bit(&socket_count, BITS_PER_LONG) + 1;
-> +    ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
-> +                            KVM_DEV_RISCV_AIA_CONFIG_GROUP_BITS,
-> +                            &socket_bits, true, NULL);
-> +    if (ret < 0) {
-> +        error_report("KVM AIA: fail to set group_bits");
-> +        exit(1);
-> +    }
-> +
-> +    ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
-> +                            KVM_DEV_RISCV_AIA_CONFIG_GROUP_SHIFT,
-> +                            &group_shift, true, NULL);
-> +    if (ret < 0) {
-> +        error_report("KVM AIA: fail to set group_shift");
-> +        exit(1);
-> +    }
-> +
-> +    guest_bits = guest_num == 0 ? 0 :
-> +                 find_last_bit(&guest_num, BITS_PER_LONG) + 1;
-> +    ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
-> +                            KVM_DEV_RISCV_AIA_CONFIG_GUEST_BITS,
-> +                            &guest_bits, true, NULL);
-> +    if (ret < 0) {
-> +        error_report("KVM AIA: fail to set guest_bits");
-> +        exit(1);
-> +    }
-> +
-> +    ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_ADDR,
-> +                            KVM_DEV_RISCV_AIA_ADDR_APLIC,
-> +                            &aplic_base, true, NULL);
-> +    if (ret < 0) {
-> +        error_report("KVM AIA: fail to set the base address of APLIC");
-> +        exit(1);
-> +    }
-> +
-> +    for (socket = 0; socket < socket_count; socket++) {
-> +        socket_imsic_base = imsic_base + socket * (1U << group_shift);
-> +        hart_count = riscv_socket_hart_count(machine, socket);
-> +        base_hart = riscv_socket_first_hartid(machine, socket);
-> +
-> +        if (max_hart_per_socket < hart_count) {
-> +            max_hart_per_socket = hart_count;
-> +        }
-> +
-> +        for (i = 0; i < hart_count; i++) {
-> +            imsic_addr = socket_imsic_base + i * IMSIC_HART_SIZE(guest_bits);
-> +            ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_ADDR,
-> +                                    KVM_DEV_RISCV_AIA_ADDR_IMSIC(i + base_hart),
-> +                                    &imsic_addr, true, NULL);
-> +            if (ret < 0) {
-> +                error_report("KVM AIA: fail to set the address of IMSICs");
-
- ("KVM AIA: failed to set the IMSIC address for hart index %d", i)
-
-> +                exit(1);
+>  static void riscv_aplic_request(void *opaque, int irq, int level)
+>  {
+>      bool update = false;
+> @@ -801,29 +818,35 @@ static void riscv_aplic_realize(DeviceState *dev, Error **errp)
+>      uint32_t i;
+>      RISCVAPLICState *aplic = RISCV_APLIC(dev);
+>  
+> -    aplic->bitfield_words = (aplic->num_irqs + 31) >> 5;
+> -    aplic->sourcecfg = g_new0(uint32_t, aplic->num_irqs);
+> -    aplic->state = g_new0(uint32_t, aplic->num_irqs);
+> -    aplic->target = g_new0(uint32_t, aplic->num_irqs);
+> -    if (!aplic->msimode) {
+> -        for (i = 0; i < aplic->num_irqs; i++) {
+> -            aplic->target[i] = 1;
+> +    if (!is_kvm_aia(aplic->msimode)) {
+> +        aplic->bitfield_words = (aplic->num_irqs + 31) >> 5;
+> +        aplic->sourcecfg = g_new0(uint32_t, aplic->num_irqs);
+> +        aplic->state = g_new0(uint32_t, aplic->num_irqs);
+> +        aplic->target = g_new0(uint32_t, aplic->num_irqs);
+> +        if (!aplic->msimode) {
+> +            for (i = 0; i < aplic->num_irqs; i++) {
+> +                aplic->target[i] = 1;
 > +            }
-> +        }
-> +    }
-> +
-> +    hart_bits = find_last_bit(&max_hart_per_socket, BITS_PER_LONG) + 1;
-> +    ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
-> +                            KVM_DEV_RISCV_AIA_CONFIG_HART_BITS,
-> +                            &hart_bits, true, NULL);
-> +    if (ret < 0) {
-> +        error_report("KVM AIA: fail to set hart_bits");
-> +        exit(1);
-> +    }
-> +
-> +    if (kvm_has_gsi_routing()) {
-> +        for (uint64_t idx = 0; idx < aia_irq_num + 1; ++idx) {
-> +            /* KVM AIA only has one APLIC instance */
-> +            kvm_irqchip_add_irq_route(kvm_state, idx, 0, idx);
-> +        }
-> +        kvm_gsi_routing_allowed = true;
-> +        kvm_irqchip_commit_routes(kvm_state);
-> +    }
-> +
-> +    ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CTRL,
-> +                            KVM_DEV_RISCV_AIA_CTRL_INIT,
-> +                            NULL, true, NULL);
-> +    if (ret < 0) {
-> +        error_report("KVM AIA: initialized fail");
-
-"KVM AIA: failed to initialize"
-
-> +        exit(1);
-> +    }
-> +}
-> diff --git a/target/riscv/kvm_riscv.h b/target/riscv/kvm_riscv.h
-> index ed281bdce0..a61f552d1d 100644
-> --- a/target/riscv/kvm_riscv.h
-> +++ b/target/riscv/kvm_riscv.h
-> @@ -21,5 +21,11 @@
+>          }
+> -    }
+> -    aplic->idelivery = g_new0(uint32_t, aplic->num_harts);
+> -    aplic->iforce = g_new0(uint32_t, aplic->num_harts);
+> -    aplic->ithreshold = g_new0(uint32_t, aplic->num_harts);
+> +        aplic->idelivery = g_new0(uint32_t, aplic->num_harts);
+> +        aplic->iforce = g_new0(uint32_t, aplic->num_harts);
+> +        aplic->ithreshold = g_new0(uint32_t, aplic->num_harts);
 >  
->  void kvm_riscv_reset_vcpu(RISCVCPU *cpu);
->  void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level);
-> +char *kvm_aia_mode_str(uint64_t aia_mode);
-> +void kvm_riscv_aia_create(MachineState *machine,
-> +                          uint64_t aia_mode, uint64_t group_shift,
-> +                          uint64_t aia_irq_num, uint64_t aia_msi_num,
-> +                          uint64_t aplic_base, uint64_t imsic_base,
-> +                          uint64_t guest_num);
+> -    memory_region_init_io(&aplic->mmio, OBJECT(dev), &riscv_aplic_ops, aplic,
+> -                          TYPE_RISCV_APLIC, aplic->aperture_size);
+> -    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &aplic->mmio);
+> +        memory_region_init_io(&aplic->mmio, OBJECT(dev), &riscv_aplic_ops,
+> +                             aplic, TYPE_RISCV_APLIC, aplic->aperture_size);
+> +        sysbus_init_mmio(SYS_BUS_DEVICE(dev), &aplic->mmio);
+> +    }
 >  
->  #endif
+>      /*
+>       * Only root APLICs have hardware IRQ lines. All non-root APLICs
+>       * have IRQ lines delegated by their parent APLIC.
+>       */
+>      if (!aplic->parent) {
+> -        qdev_init_gpio_in(dev, riscv_aplic_request, aplic->num_irqs);
+> +        if (is_kvm_aia(aplic->msimode)) {
+> +            qdev_init_gpio_in(dev, riscv_kvm_aplic_request, aplic->num_irqs);
+> +        } else {
+> +            qdev_init_gpio_in(dev, riscv_aplic_request, aplic->num_irqs);
+> +        }
+>      }
+>  
+>      /* Create output IRQ lines for non-MSI mode */
+> @@ -958,7 +981,10 @@ DeviceState *riscv_aplic_create(hwaddr addr, hwaddr size,
+>      qdev_prop_set_bit(dev, "mmode", mmode);
+>  
+>      sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+> -    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
+> +
+> +    if (!is_kvm_aia(msimode)) {
+> +        sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
+> +    }
+>  
+>      if (parent) {
+>          riscv_aplic_add_child(parent, dev);
+> diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
+> index fea3385b51..00fdb60fc6 100644
+> --- a/hw/intc/riscv_imsic.c
+> +++ b/hw/intc/riscv_imsic.c
+> @@ -32,6 +32,7 @@
+>  #include "target/riscv/cpu.h"
+>  #include "target/riscv/cpu_bits.h"
+>  #include "sysemu/sysemu.h"
+> +#include "sysemu/kvm.h"
+>  #include "migration/vmstate.h"
+>  
+>  #define IMSIC_MMIO_PAGE_LE             0x00
+> @@ -283,6 +284,20 @@ static void riscv_imsic_write(void *opaque, hwaddr addr, uint64_t value,
+>          goto err;
+>      }
+>  
+> +#if defined(CONFIG_KVM)
+> +    if (kvm_irqchip_in_kernel()) {
+> +        struct kvm_msi msi;
+> +
+> +        msi.address_lo = extract64(imsic->mmio.addr + addr, 0, 32);
+> +        msi.address_hi = extract64(imsic->mmio.addr + addr, 32, 32);
+> +        msi.data = le32_to_cpu(value);
+> +
+> +        kvm_vm_ioctl(kvm_state, KVM_SIGNAL_MSI, &msi);
+> +
+> +        return;
+> +    }
+> +#endif
+> +
+>      /* Writes only supported for MSI little-endian registers */
+>      page = addr >> IMSIC_MMIO_PAGE_SHIFT;
+>      if ((addr & (IMSIC_MMIO_PAGE_SZ - 1)) == IMSIC_MMIO_PAGE_LE) {
+> @@ -296,7 +311,6 @@ static void riscv_imsic_write(void *opaque, hwaddr addr, uint64_t value,
+>      riscv_imsic_update(imsic, page);
+>  
+>      return;
+> -
+
+Stray line removal. IMO it's better to leave it.
+
+>  err:
+>      qemu_log_mask(LOG_GUEST_ERROR,
+>                    "%s: Invalid register write 0x%" HWADDR_PRIx "\n",
+> @@ -320,10 +334,12 @@ static void riscv_imsic_realize(DeviceState *dev, Error **errp)
+>      CPUState *cpu = cpu_by_arch_id(imsic->hartid);
+>      CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
+>  
+> -    imsic->num_eistate = imsic->num_pages * imsic->num_irqs;
+> -    imsic->eidelivery = g_new0(uint32_t, imsic->num_pages);
+> -    imsic->eithreshold = g_new0(uint32_t, imsic->num_pages);
+> -    imsic->eistate = g_new0(uint32_t, imsic->num_eistate);
+> +    if (!kvm_irqchip_in_kernel()) {
+> +        imsic->num_eistate = imsic->num_pages * imsic->num_irqs;
+> +        imsic->eidelivery = g_new0(uint32_t, imsic->num_pages);
+> +        imsic->eithreshold = g_new0(uint32_t, imsic->num_pages);
+> +        imsic->eistate = g_new0(uint32_t, imsic->num_eistate);
+> +    }
+>  
+>      memory_region_init_io(&imsic->mmio, OBJECT(dev), &riscv_imsic_ops,
+>                            imsic, TYPE_RISCV_IMSIC,
 > -- 
 > 2.17.1
 > 
 >
+
+Otherwise,
+
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
 Thanks,
 drew
