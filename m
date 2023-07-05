@@ -4,57 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E7F6EB64DA
-	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Jul 2023 13:32:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E51A5EB64DA
+	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Jul 2023 13:33:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qH2by-0006JR-Aa; Wed, 05 Jul 2023 09:32:05 -0400
+	id 1qH2cR-0006NQ-IH; Wed, 05 Jul 2023 09:32:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qH2bv-0006H9-Sn
- for qemu-riscv@nongnu.org; Wed, 05 Jul 2023 09:32:01 -0400
-Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qH2c2-0006Jn-Ot
+ for qemu-riscv@nongnu.org; Wed, 05 Jul 2023 09:32:07 -0400
+Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qH2bt-0001yA-To
- for qemu-riscv@nongnu.org; Wed, 05 Jul 2023 09:31:59 -0400
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-51e285ac32eso633245a12.2
- for <qemu-riscv@nongnu.org>; Wed, 05 Jul 2023 06:31:57 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qH2c0-0001zL-Qb
+ for qemu-riscv@nongnu.org; Wed, 05 Jul 2023 09:32:06 -0400
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-51da8a744c4so7573095a12.0
+ for <qemu-riscv@nongnu.org>; Wed, 05 Jul 2023 06:32:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1688563916; x=1691155916;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=8csFKMjZVuRSRwCfVd0lvLcd2iu1cnTH6S6ysLgFoCk=;
- b=ZXp2zRjMqjof1A1zhHwk12O8UlT/rgkwakAG5D17jnA3VGSTNHp77qajrPAWOGSG67
- BBHlTwv1PBu2s7/g0k+SD3Phu4uyKuFkn8JobnQOMGvem2tV1KMLGfblFoD93vnl6TkK
- z4+JdiFXENKoxdXcFl/WterrOKiA0SECPqlFAyJ33SuiugbE/QE6M55ENQx5zxcVMpBc
- ZhTyxtxCtlHEj1HxdfXV1EI6Va3nj1AmIQcEc+sqHrkjwdO0zllbpqtvS9zZppXlho0+
- fxFx5+j44EQvuBhDsHCngtw0CRFmi8mQpQ+PknpMb4dkLUyq/sZP2MlKIe4AGHDjgKbT
- IhPQ==
+ d=linaro.org; s=google; t=1688563923; x=1691155923;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BC1jdW44jTbjaqw2f+cHkqvuGEwANPMIK+BI/ks2IFM=;
+ b=XDbDSozq35ZG0pXCbsCpOfO7iANG2I1G6CfJEwXUGwroSkox9wFFNPyOFGZlyR0ZN1
+ gwSR6q5IJz+JTmQ2+HbnA+FsJfFx//Cx7MDyGP6xqQj5pS8ePITVfiOwS4HaDpfwKMz2
+ qrjCJtX5x+LUmHqvD54lu8bxs6nUpC92QkmxBjeGksl1doJjDZznu3Vzzeblx66OHvKH
+ 5xcZVJGN5LKzY4XzxMaV8KQpZU4unp00GP8BjzBvnfUcBFb+hViKs/Q8iXZ2UCqhgA2/
+ Ofv+d+6bfYkIhIr9u0Al34GR1epXqVgc+DLTVzoODWhDq0+huYQP16zih5ysaio9/66H
+ pfQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688563916; x=1691155916;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=8csFKMjZVuRSRwCfVd0lvLcd2iu1cnTH6S6ysLgFoCk=;
- b=dggQINyW6ngG40776UOrMuisSbcFTxzayhbHhGfvCf/ffVne7VNSc8F2oqCjTTZ8Sn
- 3IcVAXPKSXFlJA+4kPOR9uC8b/PAcOBOqcEKYMl4M4gk81aIMkSGupGkYfiR2wMX+Caa
- 2KstV4cpW/W7fwQs3zNw3cVxX4w7I2VZ682+YkYT6ilpdYyQEMfPOnHRIdFx/1pBzCTS
- WiNWvh3AN0C4wFWigYePAoufz36KQUQ0hHc5YGmb6CoKE4/a7GT4RQN3sWSarmmSm6e6
- 0K1Ry91hATsrHzb6nU1o7x6CRUrfvtqxyPNvnHWHmPzE3lucLl95ffG52HFNGOF0rRiG
- 05ZA==
-X-Gm-Message-State: ABy/qLYED00iOq2EUGUbXZmWP/Jssfc3PNN2WjKbOYhCxTNlxh+7bmcC
- iZfhAPagiAAssh0OIjkUgjroTQ==
-X-Google-Smtp-Source: APBJJlGDOh7LgVrmb2lvIuj7R0kmOi9bQcgjYdZ7LNPiwn7BmSDgYl762UqVj1hHz9c14Yoij6G91g==
-X-Received: by 2002:aa7:d68f:0:b0:516:af22:bcc6 with SMTP id
- d15-20020aa7d68f000000b00516af22bcc6mr9477842edr.21.1688563916383; 
- Wed, 05 Jul 2023 06:31:56 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1688563923; x=1691155923;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=BC1jdW44jTbjaqw2f+cHkqvuGEwANPMIK+BI/ks2IFM=;
+ b=N1kKYs79mSiNknzGpXQ5HS6WY9uInd33EMhP79wJJHja10K+X23SV73c7YCc4sXPgp
+ gtuYduhoxO/dJHrrmA1WOwuxKjg1UypOvpPARuFDLIqFYY0HTjQgv0ev28XVIGKxh1c+
+ PKihkAlG4PyyRpyHoU4XhfuuTFY2zTkuYrBvBSXAJzmue51zaFH0QRhgkLKkWGnfDDsf
+ Mr+jIg8Y7EJ0MWRo95cCHqPLnkfxdVKxu2Iur8gCjDHfd3mMeZs+KVovVr5ahRl8Joj5
+ TMlS3hDqtYVe89Rau6R4au1rIGv/iWwiH7hutav9x+ec++OnTzxBfGnoBUpNkWMx68SQ
+ YEfw==
+X-Gm-Message-State: ABy/qLbx9ILbeQHIfYNVgiQkMstI4VPPHdh8kYUUcufhl1O3e/4zvtc+
+ McZj4jq86Shpl4leU4COh4lb2g==
+X-Google-Smtp-Source: APBJJlE1s3AeW0n7XHE+gP/KuquZEt+wiurKiZM0MJJV2zqY+4ase25SCW25I0URuVRnEriRlVsLZQ==
+X-Received: by 2002:aa7:c158:0:b0:51d:9ddf:f0f6 with SMTP id
+ r24-20020aa7c158000000b0051d9ddff0f6mr11671088edp.36.1688563923308; 
+ Wed, 05 Jul 2023 06:32:03 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.142.96])
  by smtp.gmail.com with ESMTPSA id
- l11-20020a056402028b00b0051e0272ad00sm5794845edv.75.2023.07.05.06.31.48
+ e11-20020a056402148b00b0051e1a4454b2sm2701296edv.67.2023.07.05.06.32.00
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 05 Jul 2023 06:31:56 -0700 (PDT)
+ Wed, 05 Jul 2023 06:32:03 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Gerd Hoffmann <kraxel@redhat.com>, Joel Stanley <joel@jms.id.au>,
@@ -70,23 +71,25 @@ Cc: Gerd Hoffmann <kraxel@redhat.com>, Joel Stanley <joel@jms.id.au>,
  Jason Wang <jasowang@redhat.com>, qemu-arm@nongnu.org,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 0/4] chardev/char-fe: Document FEWatchFunc and use
- G_SOURCE_CONTINUE/REMOVE
-Date: Wed,  5 Jul 2023 15:31:35 +0200
-Message-Id: <20230705133139.54419-1-philmd@linaro.org>
+Subject: [PATCH 1/4] io/channel: Explicit QIOChannel doc is based on GLib's
+ IOChannel
+Date: Wed,  5 Jul 2023 15:31:36 +0200
+Message-Id: <20230705133139.54419-2-philmd@linaro.org>
 X-Mailer: git-send-email 2.38.1
+In-Reply-To: <20230705133139.54419-1-philmd@linaro.org>
+References: <20230705133139.54419-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::535;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x535.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::532;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x532.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,29 +105,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Improve qio and chardev frontend documentation,
-have FEWatchFunc handlers return G_SOURCE_CONTINUE/REMOVE.
+One can get lost looking for "public API docs". Explicit
+we are referring to GLib IOChannel documentation.
 
-Philippe Mathieu-Daudé (4):
-  io/channel: Explicit QIOChannel doc is based on GLib's IOChannel
-  chardev/char-fe: Clarify qemu_chr_fe_add_watch 'condition' arg is a
-    mask
-  chardev/char-fe: Document FEWatchFunc typedef
-  hw/char: Have FEWatchFunc handlers return G_SOURCE_CONTINUE/REMOVE
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ include/io/channel.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- include/chardev/char-fe.h | 18 ++++++++++++++++--
- include/io/channel.h      |  2 +-
- hw/char/cadence_uart.c    |  8 ++++----
- hw/char/cmsdk-apb-uart.c  |  6 +++---
- hw/char/ibex_uart.c       |  8 ++++----
- hw/char/nrf51_uart.c      |  4 ++--
- hw/char/serial.c          |  2 +-
- hw/char/virtio-console.c  |  2 +-
- hw/usb/redirect.c         |  2 +-
- monitor/monitor.c         |  2 +-
- net/vhost-user.c          |  2 +-
- 11 files changed, 35 insertions(+), 21 deletions(-)
-
+diff --git a/include/io/channel.h b/include/io/channel.h
+index 229bf36910..998718b470 100644
+--- a/include/io/channel.h
++++ b/include/io/channel.h
+@@ -97,7 +97,7 @@ struct QIOChannel {
+  * The first five callbacks are mandatory to support, others
+  * provide additional optional features.
+  *
+- * Consult the corresponding public API docs for a description
++ * Consult the corresponding GLib IOChannel public API docs for a description
+  * of the semantics of each callback. io_shutdown in particular
+  * must be thread-safe, terminate quickly and must not block.
+  */
 -- 
 2.38.1
 
