@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 634D2EB64DA
-	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Jul 2023 21:41:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B35EEEB64DD
+	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Jul 2023 21:41:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qHAEQ-0004kk-Ec; Wed, 05 Jul 2023 17:40:14 -0400
+	id 1qHAEh-0004sa-SH; Wed, 05 Jul 2023 17:40:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qHAEJ-0004jX-JO
- for qemu-riscv@nongnu.org; Wed, 05 Jul 2023 17:40:07 -0400
-Received: from mail-oo1-xc30.google.com ([2607:f8b0:4864:20::c30])
+ id 1qHAEg-0004rk-JP
+ for qemu-riscv@nongnu.org; Wed, 05 Jul 2023 17:40:30 -0400
+Received: from mail-oo1-xc29.google.com ([2607:f8b0:4864:20::c29])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qHAEH-0001Yj-H8
- for qemu-riscv@nongnu.org; Wed, 05 Jul 2023 17:40:07 -0400
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-55b8f1c930eso4612839eaf.3
- for <qemu-riscv@nongnu.org>; Wed, 05 Jul 2023 14:40:05 -0700 (PDT)
+ id 1qHAEd-0001hX-Iw
+ for qemu-riscv@nongnu.org; Wed, 05 Jul 2023 17:40:30 -0400
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-5633b7e5f90so4713253eaf.1
+ for <qemu-riscv@nongnu.org>; Wed, 05 Jul 2023 14:40:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1688593204; x=1691185204;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=+ZZ9FOf+ijHw8rtn0izfd5SdfH+XKwxMBzyU9jGP940=;
- b=EVJd3McFmFStrbkaUo7BWOwHJrb5zYTkeaOG6161etNUBD6jfFKhWb+7gPvBkU3+SG
- Qnke7I1uuH+xccDT4/WbdG9B7KcqHgPdRtDtGqtnfT3sqdwIzpVuamIBUAsIClTYKjpB
- wkrmepFLqDdblaqtlWEeqMv8RGO+osUMKiKvV8QYUBh7xTQLX9t8/FVRTAVRi3HcA4yj
- ha0jYOiqD9SVqWwMPKFcK3/xQS2DqCtsEmsm4W4H2OCbQp7J+YrxlMGgbLrDUXde26oJ
- jSchOkwEAp5SuyYrrU9NyXKFV9+8KDV4FRhooQmVhs4UqrSiacYG8xtt3lh3HEZq8irz
- G8CA==
+ d=ventanamicro.com; s=google; t=1688593225; x=1691185225;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Zsw0pJ1ZMaa7pJqxBp9+XWOi9ryOdYncMUElEND8Y8o=;
+ b=iZLX4ZpQlnEGo+ssQ/3/dXjA+Hj0z37yMR+YwGvS8P0u+hpkAFI9jVbErrerCLh8FL
+ UnH+/+Hv4tDyFdv2OIEUkenaVrs5nes+JJ9KOPxOQ0V9QrY441w6RIoDWA977PYP97RC
+ MWi8YICqPA1xTraT50JyebVOX3dSVLWWkVll03cSPK4OMgCiWHXHII6zchN41nKKstZV
+ IdYzBdN9Uh1Qr9alrhZM0rYrIte32MDvv3NBeHZC272a5LJG5TPpeGXYCoTMJzaT/8L2
+ GTe5q//rqzFgMZezjGk10Jxq4iYMAwmshwhRIwPWQbYhG7waAADhX71kO5HBx0Xw59DF
+ iOCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688593204; x=1691185204;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=+ZZ9FOf+ijHw8rtn0izfd5SdfH+XKwxMBzyU9jGP940=;
- b=RUR/ZLY5OTs5Fpi4lig4s6vLmvNBHJdKfL0yQj3JAhSPBDiG3JRnnQhDhhdq7llD2H
- nfKaLScj3ewkJUNoPx/BxSYEs/V+GHdnq9d2vX0Q6dNbgJsgA/4QX0jfvUNBZCip9mYp
- HSCrYoqA3XAanz2ofQlSTyYFeStu+qkH097DabJW/u8R2/Ugjb3rhSaWTkxEKxTOXg5N
- VhQUvKJzuMjvdYT2fdmoFBmtbLk3bIxB9LkAlI9r1VCli8lyVq51IGts6gl5Wnz2Vq2B
- /FvdBamSlQis7opgAhGlzlSG6a04CnkbJOOlHUUjoIsiyDepR7yWqOTaLLbFIf7I5k8g
- JzjA==
-X-Gm-Message-State: ABy/qLaGwyPTN1EHmfsG5Tb2yjsQyydtgMiHUSXq4fHw2lE3wQYK3opk
- KpnjxzfcKEHwGzIuqsHUaWcJ3w==
-X-Google-Smtp-Source: APBJJlE/50fpCNS3jI4oq+3hmlHjo7Hsw5l2ZlX3rE5Hl/mY1NWc13Lj3MDLPkFFoDnO4gWI9G+wlw==
-X-Received: by 2002:a4a:4151:0:b0:55e:9ee:2a30 with SMTP id
- x78-20020a4a4151000000b0055e09ee2a30mr19012ooa.4.1688593204075; 
- Wed, 05 Jul 2023 14:40:04 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1688593225; x=1691185225;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Zsw0pJ1ZMaa7pJqxBp9+XWOi9ryOdYncMUElEND8Y8o=;
+ b=PPMt+lM11xH31rEOcsMv0jmJLb2xIeDIJwLATEJ8qiFEkNFTnXKKCz/4q5fLJmTDMf
+ ocM7a4TtE2bDcVBUC+Z+ujbeJqo0/wFD5xlf7+ItrwB0XhiI7Y2J3w3TcyhuciKF+rmp
+ 6YpNvXEAYYsRSBpnFJbP5rC5UTyDzXtOd4tzb+L3xyjo5GKISsPqpCWEFeYgqyJE4Br5
+ PdEjiPz5qu/Qbp+bFnfUwoY7A+chxHT7FLl0aJaQdlRWETp/6Xz6z+Eh7eSc8qeKBm1B
+ zyTowXtnvO4n/aJEwOu7OOi4uKpbgF3BmVXXoWi7AE5mkhuZRL/Mm/5jYqYvrWGiXJcV
+ iSdA==
+X-Gm-Message-State: ABy/qLZ7PfljACT0N+QbMvscTnDwVrwD8ADn8bVXCeBj4PYfX6AI6u1r
+ qxAMffXaszUQ70RhjeoRN9by+A==
+X-Google-Smtp-Source: APBJJlHmwopqcMX5jK4hYn4zHJb5UJCGsCsXvbxYW+4YD03tMQCDNha037vckDVSTNvzfiX/qy4W8Q==
+X-Received: by 2002:a4a:4fc9:0:b0:565:8648:9cf1 with SMTP id
+ c192-20020a4a4fc9000000b0056586489cf1mr73586oob.0.1688593225241; 
+ Wed, 05 Jul 2023 14:40:25 -0700 (PDT)
 Received: from grind.. (201-69-66-110.dial-up.telesp.net.br. [201.69.66.110])
  by smtp.gmail.com with ESMTPSA id
- m1-20020a4add01000000b0056665a16536sm70764oou.30.2023.07.05.14.40.01
+ m1-20020a4add01000000b0056665a16536sm70764oou.30.2023.07.05.14.40.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Jul 2023 14:40:03 -0700 (PDT)
+ Wed, 05 Jul 2023 14:40:24 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  ajones@ventanamicro.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v8 00/20] target/riscv, KVM: fixes and enhancements 
-Date: Wed,  5 Jul 2023 18:39:35 -0300
-Message-ID: <20230705213955.429895-1-dbarboza@ventanamicro.com>
+Subject: [PATCH v8 07/20] target/riscv: read marchid/mimpid in
+ kvm_riscv_init_machine_ids()
+Date: Wed,  5 Jul 2023 18:39:42 -0300
+Message-ID: <20230705213955.429895-8-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20230705213955.429895-1-dbarboza@ventanamicro.com>
+References: <20230705213955.429895-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c30;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc30.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c29;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc29.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -94,101 +97,48 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+Allow 'marchid' and 'mimpid' to also be initialized in
+kvm_riscv_init_machine_ids().
 
-This version has a last minute change in patch 14. It's a bug fix and a
-design change.
+After this change, the handling of mvendorid/marchid/mimpid for the
+'host' CPU type will be equal to what we already have for TCG named
+CPUs, i.e. the user is not able to set these values to a different val
+than the one that is already preset.
 
-The bug fix: ioctl() will always error out with -1 and return the error
-code in 'errno'. I was checking the ioctl() return value for EINVAL,
-which doesn't work.
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/kvm.c | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
-The design change has to do with discussions between Andrew and Anup and
-myself in our internal Slack. RISC-V KVM is overusing the EINVAL error
-code in set_one_reg() and get_one_reg() APIs, making it very hard for
-userspace (such as QEMU, crosvm, etc) to tell what went wrong. In our
-case, patch 14 is making an EINVAL assumption that we're not confident
-about because this error code can mean almost anything.
-
-We'll push for a KVM change in the next few days. As far as QEMU goes
-we're going to do what we consider the right thing: check for ENOENT
-instead of EINVAL in patch 14. The reason why we're doing this change
-right now in QEMU, instead of waiting for KVM to change first, can be
-better explained by Drew's comment in version 7 [1]:
-
-" But, also as discussed internally, based on our upcoming plans to use
-ENOENT for missing registers, we should change this check to be for
-ENOENT now. While that may seem premature, I think it's OK, because
-until a KVM which returns ENOENT for missing registers exists and is
-used, QEMU command lines which disable unknown registers will be
-rejected. But, that will also happen even after a KVM that returns
-ENOENT exits if an older KVM is used. In both cases that's fine, as
-rejecting is the more conservative behavior for an error. Finally, if
-the yet-to-be-posted KVM ENOENT patch never gets merged, then we may be
-stuck rejecting forever anyway, since EINVAL is quite generic and
-probably isn't safe to use for this purpose."
-
-Checking for ENOENT is the right approach and we'll change QEMU to
-implement it right off the gate for 8.1. In case KVM refuses to change
-we'll error out in all cases in patch 14, which is still a better
-solution than making guesses about EINVAL means.
-
-
-Series based on top of Alistair's riscv-to-apply.next.
-
-Patches missing review: 14
-
-Changes from v7:
-- Patch 14:
-  - use 'errno' to check the error code from ioctl()
-  - test for ENOENT instead of EINVAL
-- v7 link: https://lore.kernel.org/qemu-devel/20230630100811.287315-1-dbarboza@ventanamicro.com/
-
-[1] https://lore.kernel.org/qemu-devel/20230705-091906904fcc54a4ce96e625@orel/
-
-Daniel Henrique Barboza (20):
-  target/riscv: skip features setup for KVM CPUs
-  hw/riscv/virt.c: skip 'mmu-type' FDT if satp mode not set
-  target/riscv/cpu.c: restrict 'mvendorid' value
-  target/riscv/cpu.c: restrict 'mimpid' value
-  target/riscv/cpu.c: restrict 'marchid' value
-  target/riscv: use KVM scratch CPUs to init KVM properties
-  target/riscv: read marchid/mimpid in kvm_riscv_init_machine_ids()
-  target/riscv: handle mvendorid/marchid/mimpid for KVM CPUs
-  linux-headers: Update to v6.4-rc1
-  target/riscv/kvm.c: init 'misa_ext_mask' with scratch CPU
-  target/riscv/cpu: add misa_ext_info_arr[]
-  target/riscv: add KVM specific MISA properties
-  target/riscv/kvm.c: update KVM MISA bits
-  target/riscv/kvm.c: add multi-letter extension KVM properties
-  target/riscv/cpu.c: add satp_mode properties earlier
-  target/riscv/cpu.c: remove priv_ver check from riscv_isa_string_ext()
-  target/riscv/cpu.c: create KVM mock properties
-  target/riscv: update multi-letter extension KVM properties
-  target/riscv/kvm.c: add kvmconfig_get_cfg_addr() helper
-  target/riscv/kvm.c: read/write (cbom|cboz)_blocksize in KVM
-
- hw/riscv/virt.c                               |  14 +-
- include/standard-headers/linux/const.h        |   2 +-
- include/standard-headers/linux/virtio_blk.h   |  18 +-
- .../standard-headers/linux/virtio_config.h    |   6 +
- include/standard-headers/linux/virtio_net.h   |   1 +
- linux-headers/asm-arm64/kvm.h                 |  33 ++
- linux-headers/asm-riscv/kvm.h                 |  53 +-
- linux-headers/asm-riscv/unistd.h              |   9 +
- linux-headers/asm-s390/unistd_32.h            |   1 +
- linux-headers/asm-s390/unistd_64.h            |   1 +
- linux-headers/asm-x86/kvm.h                   |   3 +
- linux-headers/linux/const.h                   |   2 +-
- linux-headers/linux/kvm.h                     |  12 +-
- linux-headers/linux/psp-sev.h                 |   7 +
- linux-headers/linux/userfaultfd.h             |  17 +-
- target/riscv/cpu.c                            | 341 ++++++++++--
- target/riscv/cpu.h                            |   7 +-
- target/riscv/kvm.c                            | 499 +++++++++++++++++-
- target/riscv/kvm_riscv.h                      |   1 +
- 19 files changed, 940 insertions(+), 87 deletions(-)
-
+diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
+index 37f0f70794..cd2974c663 100644
+--- a/target/riscv/kvm.c
++++ b/target/riscv/kvm.c
+@@ -378,6 +378,22 @@ static void kvm_riscv_init_machine_ids(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
+     if (ret != 0) {
+         error_report("Unable to retrieve mvendorid from host, error %d", ret);
+     }
++
++    reg.id = kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG,
++                              KVM_REG_RISCV_CONFIG_REG(marchid));
++    reg.addr = (uint64_t)&cpu->cfg.marchid;
++    ret = ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
++    if (ret != 0) {
++        error_report("Unable to retrieve marchid from host, error %d", ret);
++    }
++
++    reg.id = kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG,
++                              KVM_REG_RISCV_CONFIG_REG(mimpid));
++    reg.addr = (uint64_t)&cpu->cfg.mimpid;
++    ret = ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
++    if (ret != 0) {
++        error_report("Unable to retrieve mimpid from host, error %d", ret);
++    }
+ }
+ 
+ void kvm_riscv_init_user_properties(Object *cpu_obj)
 -- 
 2.41.0
 
