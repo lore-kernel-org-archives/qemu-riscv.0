@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83FDFEB64DD
-	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Jul 2023 13:33:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B5E1EB64DA
+	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Jul 2023 13:33:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qH2cl-0006Te-RO; Wed, 05 Jul 2023 09:32:51 -0400
+	id 1qH2co-0006Wi-2i; Wed, 05 Jul 2023 09:32:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qH2cX-0006OT-Eu
- for qemu-riscv@nongnu.org; Wed, 05 Jul 2023 09:32:42 -0400
-Received: from mail-ej1-x62c.google.com ([2a00:1450:4864:20::62c])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qH2cP-0006Mg-En
+ for qemu-riscv@nongnu.org; Wed, 05 Jul 2023 09:32:31 -0400
+Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qH2cV-00024Y-I5
- for qemu-riscv@nongnu.org; Wed, 05 Jul 2023 09:32:37 -0400
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-992b27e1c55so779793866b.2
- for <qemu-riscv@nongnu.org>; Wed, 05 Jul 2023 06:32:35 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qH2cJ-00021A-EK
+ for qemu-riscv@nongnu.org; Wed, 05 Jul 2023 09:32:27 -0400
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-51e29964942so297419a12.2
+ for <qemu-riscv@nongnu.org>; Wed, 05 Jul 2023 06:32:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1688563953; x=1691155953;
+ d=linaro.org; s=google; t=1688563938; x=1691155938;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hTQw0+m/TSUjm/E7y2FkWg7UcKy3q1iulYca/mbmODQ=;
- b=mgXBbAvoJ1d/4T84vYM7w9ALmPodsi78fAF8trS6HASjpjd+vvCvsUg98x6nHSmT5a
- l8GiM+pS/kcyjazWKzCtIuwBkHK/6u4cpLELSBpdkmbDPcFeCanwpP5tMRaqxnf2gnhX
- XQ1pvvnkgC6mQ8U2wXVw6qvikeSI4Tm+pi+2aQQywp6no31K+q0Kknyud979R+hE2b24
- 3xzJwbDquUDpIKKOebKsq4m6tWfG+UIFe5OTOzu1lnWt6fYoNxEXyg3prBYoFFpCvlfQ
- L38QIEQG/soeqypPOegcF1GlJ6HplJG2FalbawsxvzqZKwsIn03dEBFm+8Xn+a0Apau5
- owgw==
+ bh=W5L5O6YuXvA1gkJxg2X5z0QB/Yl+Zb8DVDs3tCRC3SE=;
+ b=smJuboJxZxqWVhq2qfGMiGBglMt5r/4wcLpj/V5ygXtpT/rzOyu7yFPnr1eNgVviIs
+ TsOi44QXlc9o5XP5RWAdTuoOHEJVO7TOKcYfg4AY2cog87IDysIMMHSrz7d8wsoRCYOC
+ p/rAm2IOKT45lVnnZecaGs6vUSBLz8O4Hu4Vo694upTmxMr4I30+J7fbqRzI26m26lvb
+ OCo0quaefvK/laFKpXYv/2J/JueWU71eUBOy94O2MCzmfNA7fNoJJecLVNGeq1jIHoz/
+ x3n8GhqGfXhnTVusKa3ghhyqKp8jn+KUANJSDAjSQx3OS9201/pmOSFSc0FG0zhRTWSB
+ StzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688563953; x=1691155953;
+ d=1e100.net; s=20221208; t=1688563938; x=1691155938;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hTQw0+m/TSUjm/E7y2FkWg7UcKy3q1iulYca/mbmODQ=;
- b=NMYJHKHMywwUvYut0vBrlEe/4SUJj27Dpp3MkCtSdvppbUP4NRkKr/p4T2cMOL6rqy
- hcs5BDAsjMEtzUEQ5yqGZ7NTEFzdMK2y9EmpCizIwz3U9C61tVK6vevcfBqPUDB//QUd
- dcwIfNMkCJHMEBG0y7QTDGXUs8DzRPwuvUtYcVBFz5UPZkqD9vius1+lECJRu25+ts5/
- MstgzvHOKMsBlQbsIIPS3goWfVCByTsz/SD23KuxnuqVABnQW/l3wNabVuRNLHzlb0db
- LyKRPyUs9ojMnkCfvy/CQ7N19OZcnX8lsAuah9EWZSHxuKFsTBLb0x+JzaxzLLMaqACr
- L0OA==
-X-Gm-Message-State: ABy/qLbfLMJu+bEVTGa8dXcASTx8zoolInxpZ799AZjIFLLTvb7ZlLeJ
- VC0uL+3LGe4QuDNWiEZYBhyGSQ==
-X-Google-Smtp-Source: APBJJlGqAdiV8A5xSfVdO6bx22twXoTcD3psqTpayoqOL9g/5EDDLn8iFch/1nZNLsBwohMjLTnPYw==
-X-Received: by 2002:a17:906:c408:b0:991:caa8:fc3a with SMTP id
- u8-20020a170906c40800b00991caa8fc3amr10944746ejz.72.1688563953770; 
- Wed, 05 Jul 2023 06:32:33 -0700 (PDT)
+ bh=W5L5O6YuXvA1gkJxg2X5z0QB/Yl+Zb8DVDs3tCRC3SE=;
+ b=Dr1bIF3TO8LJBzMjN3kkDeNpmwh4t+xq4jzf18Z9sCwHwFuC57hlPrgLlgP48n1lkE
+ mFvpkwt3iQX2340k4rJuH1mOOE3f50USoIb8UVFRd8QjZd4LFfupaiUrscjxPWf+4Itn
+ 32SF8c8awKFbmleVB2MNjAKfOzNwQXg0tp0vORL7aDyNN+kgST3hGvZEqMEGmaPzgzG+
+ qkSnTxg39UUy1mT1y4GQFi/nB/S+JHKwDMMeW4xTEs6hmZQZz0aISyz8frZkLvIaXkI1
+ cLRkPEkdyMqL7+Dzs2J8aaEw6QnCMsRrSFrtpZYSfO6i0TSD4aD4D/84P/wvA11jiHRy
+ kcNg==
+X-Gm-Message-State: ABy/qLbxbR/MB/vvt+qWuyvn7hnAoFTdSSwINoG5sRI7jVKSdmQtejep
+ KUrfub8DWjoNz37X4+L6XqpBHw==
+X-Google-Smtp-Source: APBJJlHcEF944JFWKrYI+x3EBMMELL9ufOQEeTctIC13D6wloxn9B5IpbmO4fS8/6GNKGiToDJpF3A==
+X-Received: by 2002:aa7:c644:0:b0:51e:29e1:b6c7 with SMTP id
+ z4-20020aa7c644000000b0051e29e1b6c7mr392572edr.33.1688563938463; 
+ Wed, 05 Jul 2023 06:32:18 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.142.96])
  by smtp.gmail.com with ESMTPSA id
- n17-20020a1709065e1100b00991481e7c53sm12507910eju.206.2023.07.05.06.32.26
+ b5-20020aa7cd05000000b0051da8fd7570sm7823672edw.41.2023.07.05.06.32.11
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 05 Jul 2023 06:32:33 -0700 (PDT)
+ Wed, 05 Jul 2023 06:32:18 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Gerd Hoffmann <kraxel@redhat.com>, Joel Stanley <joel@jms.id.au>,
@@ -71,17 +71,18 @@ Cc: Gerd Hoffmann <kraxel@redhat.com>, Joel Stanley <joel@jms.id.au>,
  Jason Wang <jasowang@redhat.com>, qemu-arm@nongnu.org,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 3/4] chardev/char-fe: Document FEWatchFunc typedef
-Date: Wed,  5 Jul 2023 15:31:38 +0200
-Message-Id: <20230705133139.54419-4-philmd@linaro.org>
+Subject: [PATCH 2/4] chardev/char-fe: Clarify qemu_chr_fe_add_watch
+ 'condition' arg is a mask
+Date: Wed,  5 Jul 2023 15:31:37 +0200
+Message-Id: <20230705133139.54419-3-philmd@linaro.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20230705133139.54419-1-philmd@linaro.org>
 References: <20230705133139.54419-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62c;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x62c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x52c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -104,36 +105,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+qemu_chr_fe_add_watch() can poll for multiple conditions.
+It's @cond argument is a combination of all the condition bits.
+
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/chardev/char-fe.h | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ include/chardev/char-fe.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/include/chardev/char-fe.h b/include/chardev/char-fe.h
-index 309960046a..ec3f706a14 100644
+index 8c420fa36e..309960046a 100644
 --- a/include/chardev/char-fe.h
 +++ b/include/chardev/char-fe.h
-@@ -175,6 +175,20 @@ void qemu_chr_fe_printf(CharBackend *be, const char *fmt, ...)
-     G_GNUC_PRINTF(2, 3);
- 
- 
-+/**
-+ * FEWatchFunc: a #GSourceFunc called when any conditions requested by
-+ *              qemu_chr_fe_add_watch() is satisfied.
-+ * @do_not_use: depending on the underlying chardev, a GIOChannel or a
-+ *              QIOChannel. DO NOT USE!
-+ * @cond: bitwise combination of conditions watched and satisfied
-+ *              before calling this callback.
-+ * @data: user data passed at creation to qemu_chr_fe_add_watch(). Can
-+ *              be NULL.
-+ *
-+ * Returns: G_SOURCE_REMOVE if the GSource should be removed from the
-+ *              main loop, or G_SOURCE_CONTINUE to leave the GSource in
-+ *              the main loop.
-+ */
- typedef gboolean (*FEWatchFunc)(void *do_not_use, GIOCondition condition, void *data);
+@@ -179,8 +179,8 @@ typedef gboolean (*FEWatchFunc)(void *do_not_use, GIOCondition condition, void *
  
  /**
+  * qemu_chr_fe_add_watch:
+- * @cond: the condition to poll for
+- * @func: the function to call when the condition happens
++ * @cond: bitwise combination of conditions to poll for
++ * @func: the function to call when the conditions are satisfied
+  * @user_data: the opaque pointer to pass to @func
+  *
+  * If the backend is connected, create and add a #GSource that fires
 -- 
 2.38.1
 
