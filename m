@@ -4,75 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86C49EB64D9
-	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Jul 2023 05:52:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEB24EB64D9
+	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Jul 2023 08:46:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qHHuQ-0002gC-08; Thu, 06 Jul 2023 01:52:06 -0400
+	id 1qHKc8-0006lk-5y; Thu, 06 Jul 2023 04:45:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qHHuO-0002ad-Hs; Thu, 06 Jul 2023 01:52:04 -0400
-Received: from mail-vs1-xe2d.google.com ([2607:f8b0:4864:20::e2d])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1qHKbx-0006kV-DE
+ for qemu-riscv@nongnu.org; Thu, 06 Jul 2023 04:45:21 -0400
+Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qHHuM-0008Ka-IN; Thu, 06 Jul 2023 01:52:04 -0400
-Received: by mail-vs1-xe2d.google.com with SMTP id
- ada2fe7eead31-440bc794fcdso91309137.3; 
- Wed, 05 Jul 2023 22:52:01 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1qHKbr-0006MM-Vb
+ for qemu-riscv@nongnu.org; Thu, 06 Jul 2023 04:45:12 -0400
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-51e28cac164so2435778a12.1
+ for <qemu-riscv@nongnu.org>; Thu, 06 Jul 2023 01:45:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1688622720; x=1691214720;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NQjelDx7CyOiQWfvkPlCTEnKx6CE+Dog3fytrj4gH34=;
- b=AJQLbgg/bZlky48x/vK1h7o1d73tVBq5qYr9fUBLo9m+TQknxlZXdG+GS86FzspdCE
- diadWUWICA57/AJKMfDHDTYB/uNTItpfiXQQIatfVft8ENnWTDJfKxvg5I6jpIymF6x9
- 5foIJL/SJ/+PdAvWEs6NQk2dHjtKMQeJVqCm6AtEpxultSGxfxkLjxpz0KYfxSWqGOeM
- I8Jp2o8H2lQbRfrYnewFf5OgDP6HBNotZeL+64k5xTUvGBkXQpN0zho1sCQgAKZn9StQ
- YU8+vZvrF2lgRshkgXmFenwal6ti+aNUV8fBQmo8hvyANh1N/b7FQudQFluibCH+tI+i
- 9OXg==
+ d=ventanamicro.com; s=google; t=1688633106; x=1691225106;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=YCNTGYVea76GSpgz2WNzq6N3B6PTyizieaabZcYhOtw=;
+ b=GEnjkOadw8qgPfQIXH21I73fpWDgS7/dHS2+qgOz/joM5BKTjtmdwpSxw4A3vqvLfA
+ 80viCyJzAgl9oJT1jqp5sj9IQAXReUIszq7hV1VXt3B4X/j3U0AN4wzeAHK0Z0KoRQi8
+ AuCQrfyY2L9mH5KhbeXyxgm3Rh6Adf+T/dr4LiKrReqmTZGJpv/YIwBDwSPeMrIa66vr
+ Pdkz71rToRm3wlmOZ3iYq2Fc/yLhrtT18zCTH4FTjkQDVGtvB6oId5aAmeNuKG2d331s
+ Z4OuqBSBm6D0Je2zNiu/EDRoZCZeB2g+jqGz/+qfDr6ZF5vcP3U04kF3io9gyzlrcYv0
+ faKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688622720; x=1691214720;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=NQjelDx7CyOiQWfvkPlCTEnKx6CE+Dog3fytrj4gH34=;
- b=Je4pHKXeuiIE4uMkxxFT4IHpsQXULxcqEp2b1+d6lqILThKux2buQ6VDZr270n6u+m
- D2nlOCiJYhxsPAwQ5V24TL6NHvVwCqaB5DzoAdY/vYXGUaHnOiqMVTQLnqZLNspsjqWS
- mV8Mg3QkyvGVEauZeKnsvjI7gjbxfrMzfiU4qco4ZB7SHppI8Wk0SEjzkA1cZus+pAVb
- XpWJtBaF5Dm5eIbMtWAHc44enEZves+lVKz42cmHiorW1aHKABx8FxT3tgSriZi5cPRq
- kf45hSt58oygbHFv3Oqqf5M5MwTrS9ts0dOVS7VWOS2i1b8ZDINhK0WVnswPzf0DEDVA
- 6Zxg==
-X-Gm-Message-State: ABy/qLYOV2KTcU3Il2JNoroWP59ualxgL0DxWpdch28uKxJxlVfTTL0R
- pM6mlYQSOI45DVpjrPHbZkx55LhcFZn93Naa4RQ=
-X-Google-Smtp-Source: APBJJlEfg8/pmbTE/hEMSLMHAdsDYlVGIfasnfCn8Dtl9/L6OwnqHjn+8kwE7+iGw03RXG8nC0j9N69oHxrvh+OKXBU=
-X-Received: by 2002:a67:ec82:0:b0:445:209:cac7 with SMTP id
- h2-20020a67ec82000000b004450209cac7mr629638vsp.27.1688622720604; Wed, 05 Jul
- 2023 22:52:00 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1688633106; x=1691225106;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YCNTGYVea76GSpgz2WNzq6N3B6PTyizieaabZcYhOtw=;
+ b=SIfTgk6sMYseCFYnPdYef1MjT9ZYNO1LzJqnMzxz0Vr/BBoicahjtG/MzHDA1PINWe
+ 5FkZSJdMbFkOML11u7DogJtU6aravqusWCvwqEDNe9gyvuf39TVirX5Iaj3gVg1Zj2Dm
+ W84RRTVr003VaSTMsv4YieTJj/dpEXJ+mNevATYtNkwpiBpMODkcLi5OXq6oG/CPTptk
+ XY4uGIixX2FUSWALa2WJCBbfgdk82XcRUnDRhKzLIybu5l4t6T4ZWu/XASS4ysRi5v6e
+ r8DhiDfDk46OiJH1IDE6qRWQihW4NVrgIf/Cjh0VR5U+4X2m/MIbKxFwOYUlI7dnBE77
+ G9hA==
+X-Gm-Message-State: ABy/qLbLthjZs34RFru+xuGuLSXsRXR5uVt0SluWJTFmeawcE0yJyWOT
+ GoiIhInNYCu+ek26jFwlsOPt5A==
+X-Google-Smtp-Source: APBJJlGAYaC2EG0V6BmL7wTjJTVp522D4+26U0E1ZyktdaneqJjWUZ7LnLE7L1WnPUFtDvnIdg1FwA==
+X-Received: by 2002:a17:906:530b:b0:973:84b0:b077 with SMTP id
+ h11-20020a170906530b00b0097384b0b077mr1337996ejo.33.1688633105922; 
+ Thu, 06 Jul 2023 01:45:05 -0700 (PDT)
+Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
+ by smtp.gmail.com with ESMTPSA id
+ f10-20020a1709067f8a00b00988e953a586sm522946ejr.61.2023.07.06.01.45.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 06 Jul 2023 01:45:05 -0700 (PDT)
+Date: Thu, 6 Jul 2023 10:45:04 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com
+Subject: Re: [PATCH v8 14/20] target/riscv/kvm.c: add multi-letter extension
+ KVM properties
+Message-ID: <20230706-ec06b3d750f813f9c7256fe9@orel>
+References: <20230705213955.429895-1-dbarboza@ventanamicro.com>
+ <20230705213955.429895-15-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-References: <20230703071759.86775-1-liweiwei@iscas.ac.cn>
- <20230703071759.86775-2-liweiwei@iscas.ac.cn>
-In-Reply-To: <20230703071759.86775-2-liweiwei@iscas.ac.cn>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 6 Jul 2023 15:51:34 +1000
-Message-ID: <CAKmqyKOk6nriU67WRwhFXVmnwt8Xgix2d1n6wM9dA=Lw71vHzw@mail.gmail.com>
-Subject: Re: [PATCH v3 1/1] target/riscv: Add disas support for BF16 extensions
-To: Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2d;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2d.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230705213955.429895-15-dbarboza@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x52d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -90,168 +96,249 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Jul 3, 2023 at 5:20=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wro=
-te:
->
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
+On Wed, Jul 05, 2023 at 06:39:49PM -0300, Daniel Henrique Barboza wrote:
+> Let's add KVM user properties for the multi-letter extensions that KVM
+> currently supports: zicbom, zicboz, zihintpause, zbb, ssaia, sstc,
+> svinval and svpbmt.
+> 
+> As with MISA extensions, we're using the KVMCPUConfig type to hold
+> information about the state of each extension. However, multi-letter
+> extensions have more cases to cover than MISA extensions, so we're
+> adding an extra 'supported' flag as well. This flag will reflect if a
+> given extension is supported by KVM, i.e. KVM knows how to handle it.
+> This is determined during KVM extension discovery in
+> kvm_riscv_init_multiext_cfg(), where we test for ENOENT errors. Any
+> other error will cause an abort.
+> 
+> The use of the 'user_set' is similar to what we already do with MISA
+> extensions: the flag set only if the user is changing the extension
+> state.
+> 
+> The 'supported' flag will be used later on to make an exception for
+> users that are disabling multi-letter extensions that are unknown to
+> KVM.
+> 
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > ---
->  disas/riscv.c | 44 ++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 44 insertions(+)
->
-> diff --git a/disas/riscv.c b/disas/riscv.c
-> index 94e568a7e9..9f0195be30 100644
-> --- a/disas/riscv.c
-> +++ b/disas/riscv.c
-> @@ -819,6 +819,16 @@ typedef enum {
->      rv_op_cm_jalt =3D 788,
->      rv_op_czero_eqz =3D 789,
->      rv_op_czero_nez =3D 790,
-> +    rv_op_fcvt_bf16_s =3D 791,
-> +    rv_op_fcvt_s_bf16 =3D 792,
-> +    rv_op_vfncvtbf16_f_f_w =3D 793,
-> +    rv_op_vfwcvtbf16_f_f_v =3D 794,
-> +    rv_op_vfwmaccbf16_vv =3D 795,
-> +    rv_op_vfwmaccbf16_vf =3D 796,
-> +    rv_op_flh =3D 797,
-> +    rv_op_fsh =3D 798,
-> +    rv_op_fmv_h_x =3D 799,
-> +    rv_op_fmv_x_h =3D 800,
->  } rv_op;
->
->  /* register names */
-> @@ -1905,6 +1915,16 @@ const rv_opcode_data rvi_opcode_data[] =3D {
->      { "cm.jalt", rv_codec_zcmt_jt, rv_fmt_zcmt_index, NULL, 0 },
->      { "czero.eqz", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
->      { "czero.nez", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
-> +    { "fcvt.bf16.s", rv_codec_r_m, rv_fmt_rm_frd_frs1, NULL, 0, 0, 0 },
-> +    { "fcvt.s.bf16", rv_codec_r_m, rv_fmt_rm_frd_frs1, NULL, 0, 0, 0 },
-> +    { "vfncvtbf16.f.f.w", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, 0, 0, 0 =
-},
-> +    { "vfwcvtbf16.f.f.v", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, 0, 0, 0 =
-},
-> +    { "vfwmaccbf16.vv", rv_codec_v_r, rv_fmt_vd_vs1_vs2_vm, NULL, 0, 0, =
-0 },
-> +    { "vfwmaccbf16.vf", rv_codec_v_r, rv_fmt_vd_fs1_vs2_vm, NULL, 0, 0, =
-0 },
-> +    { "flh", rv_codec_i, rv_fmt_frd_offset_rs1, NULL, 0, 0, 0 },
-> +    { "fsh", rv_codec_s, rv_fmt_frs2_offset_rs1, NULL, 0, 0, 0 },
-> +    { "fmv.h.x", rv_codec_r, rv_fmt_frd_rs1, NULL, 0, 0, 0 },
-> +    { "fmv.x.h", rv_codec_r, rv_fmt_rd_frs1, NULL, 0, 0, 0 },
->  };
->
->  /* CSR names */
-> @@ -2380,6 +2400,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  case 3: op =3D rv_op_vloxei8_v; break;
->                  }
->                  break;
-> +            case 1: op =3D rv_op_flh; break;
->              case 2: op =3D rv_op_flw; break;
->              case 3: op =3D rv_op_fld; break;
->              case 4: op =3D rv_op_flq; break;
-> @@ -2583,6 +2604,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  case 3: op =3D rv_op_vsoxei8_v; break;
->                  }
->                  break;
-> +            case 1: op =3D rv_op_fsh; break;
->              case 2: op =3D rv_op_fsw; break;
->              case 3: op =3D rv_op_fsd; break;
->              case 4: op =3D rv_op_fsq; break;
-> @@ -2860,6 +2882,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  switch ((inst >> 20) & 0b11111) {
->                  case 1: op =3D rv_op_fcvt_s_d; break;
->                  case 3: op =3D rv_op_fcvt_s_q; break;
-> +                case 6: op =3D rv_op_fcvt_s_bf16; break;
->                  }
->                  break;
->              case 33:
-> @@ -2868,6 +2891,11 @@ static void decode_inst_opcode(rv_decode *dec, rv_=
-isa isa)
->                  case 3: op =3D rv_op_fcvt_d_q; break;
->                  }
->                  break;
-> +            case 34:
-> +                switch (((inst >> 20) & 0b11111)) {
-> +                case 8: op =3D rv_op_fcvt_bf16_s; break;
-> +                }
-> +                break;
->              case 35:
->                  switch ((inst >> 20) & 0b11111) {
->                  case 0: op =3D rv_op_fcvt_q_s; break;
-> @@ -2972,6 +3000,12 @@ static void decode_inst_opcode(rv_decode *dec, rv_=
-isa isa)
->                  case 1: op =3D rv_op_fclass_d; break;
->                  }
->                  break;
-> +            case 114:
-> +                switch (((inst >> 17) & 0b11111000) |
-> +                        ((inst >> 12) & 0b00000111)) {
-> +                case 0: op =3D rv_op_fmv_x_h; break;
-> +                }
-> +                break;
->              case 115:
->                  switch (((inst >> 17) & 0b11111000) |
->                          ((inst >> 12) & 0b00000111)) {
-> @@ -2991,6 +3025,12 @@ static void decode_inst_opcode(rv_decode *dec, rv_=
-isa isa)
->                  case 0: op =3D rv_op_fmv_d_x; break;
->                  }
->                  break;
-> +            case 122:
-> +                switch (((inst >> 17) & 0b11111000) |
-> +                        ((inst >> 12) & 0b00000111)) {
-> +                case 0: op =3D rv_op_fmv_h_x; break;
-> +                }
-> +                break;
->              case 123:
->                  switch (((inst >> 17) & 0b11111000) |
->                          ((inst >> 12) & 0b00000111)) {
-> @@ -3087,6 +3127,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                      case 10: op =3D rv_op_vfwcvt_f_xu_v; break;
->                      case 11: op =3D rv_op_vfwcvt_f_x_v; break;
->                      case 12: op =3D rv_op_vfwcvt_f_f_v; break;
-> +                    case 13: op =3D rv_op_vfwcvtbf16_f_f_v; break;
->                      case 14: op =3D rv_op_vfwcvt_rtz_xu_f_v; break;
->                      case 15: op =3D rv_op_vfwcvt_rtz_x_f_v; break;
->                      case 16: op =3D rv_op_vfncvt_xu_f_w; break;
-> @@ -3097,6 +3138,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                      case 21: op =3D rv_op_vfncvt_rod_f_f_w; break;
->                      case 22: op =3D rv_op_vfncvt_rtz_xu_f_w; break;
->                      case 23: op =3D rv_op_vfncvt_rtz_x_f_w; break;
-> +                    case 29: op =3D rv_op_vfncvtbf16_f_f_w; break;
->                      }
->                      break;
->                  case 19:
-> @@ -3128,6 +3170,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  case 52: op =3D rv_op_vfwadd_wv; break;
->                  case 54: op =3D rv_op_vfwsub_wv; break;
->                  case 56: op =3D rv_op_vfwmul_vv; break;
-> +                case 59: op =3D rv_op_vfwmaccbf16_vv; break;
->                  case 60: op =3D rv_op_vfwmacc_vv; break;
->                  case 61: op =3D rv_op_vfwnmacc_vv; break;
->                  case 62: op =3D rv_op_vfwmsac_vv; break;
-> @@ -3366,6 +3409,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  case 52: op =3D rv_op_vfwadd_wf; break;
->                  case 54: op =3D rv_op_vfwsub_wf; break;
->                  case 56: op =3D rv_op_vfwmul_vf; break;
-> +                case 59: op =3D rv_op_vfwmaccbf16_vf; break;
->                  case 60: op =3D rv_op_vfwmacc_vf; break;
->                  case 61: op =3D rv_op_vfwnmacc_vf; break;
->                  case 62: op =3D rv_op_vfwmsac_vf; break;
-> --
-> 2.25.1
->
->
+>  target/riscv/cpu.c |   8 +++
+>  target/riscv/kvm.c | 119 +++++++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 127 insertions(+)
+> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 5c8832a030..31e591a938 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1860,6 +1860,14 @@ static void riscv_cpu_add_user_properties(Object *obj)
+>      riscv_cpu_add_misa_properties(obj);
+>  
+>      for (prop = riscv_cpu_extensions; prop && prop->name; prop++) {
+> +#ifndef CONFIG_USER_ONLY
+> +        if (kvm_enabled()) {
+> +            /* Check if KVM created the property already */
+> +            if (object_property_find(obj, prop->name)) {
+> +                continue;
+> +            }
+> +        }
+> +#endif
+>          qdev_property_add_static(dev, prop);
+>      }
+>  
+> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
+> index 7afd6024e6..f2545bd560 100644
+> --- a/target/riscv/kvm.c
+> +++ b/target/riscv/kvm.c
+> @@ -113,6 +113,7 @@ typedef struct KVMCPUConfig {
+>      target_ulong offset;
+>      int kvm_reg_id;
+>      bool user_set;
+> +    bool supported;
+>  } KVMCPUConfig;
+>  
+>  #define KVM_MISA_CFG(_bit, _reg_id) \
+> @@ -197,6 +198,81 @@ static void kvm_riscv_update_cpu_misa_ext(RISCVCPU *cpu, CPUState *cs)
+>      }
+>  }
+>  
+> +#define CPUCFG(_prop) offsetof(struct RISCVCPUConfig, _prop)
+> +
+> +#define KVM_EXT_CFG(_name, _prop, _reg_id) \
+> +    {.name = _name, .offset = CPUCFG(_prop), \
+> +     .kvm_reg_id = _reg_id}
+> +
+> +static KVMCPUConfig kvm_multi_ext_cfgs[] = {
+> +    KVM_EXT_CFG("zicbom", ext_icbom, KVM_RISCV_ISA_EXT_ZICBOM),
+> +    KVM_EXT_CFG("zicboz", ext_icboz, KVM_RISCV_ISA_EXT_ZICBOZ),
+> +    KVM_EXT_CFG("zihintpause", ext_zihintpause, KVM_RISCV_ISA_EXT_ZIHINTPAUSE),
+> +    KVM_EXT_CFG("zbb", ext_zbb, KVM_RISCV_ISA_EXT_ZBB),
+> +    KVM_EXT_CFG("ssaia", ext_ssaia, KVM_RISCV_ISA_EXT_SSAIA),
+> +    KVM_EXT_CFG("sstc", ext_sstc, KVM_RISCV_ISA_EXT_SSTC),
+> +    KVM_EXT_CFG("svinval", ext_svinval, KVM_RISCV_ISA_EXT_SVINVAL),
+> +    KVM_EXT_CFG("svpbmt", ext_svpbmt, KVM_RISCV_ISA_EXT_SVPBMT),
+> +};
+> +
+> +static void kvm_cpu_cfg_set(RISCVCPU *cpu, KVMCPUConfig *multi_ext,
+> +                            uint32_t val)
+> +{
+> +    int cpu_cfg_offset = multi_ext->offset;
+> +    bool *ext_enabled = (void *)&cpu->cfg + cpu_cfg_offset;
+> +
+> +    *ext_enabled = val;
+> +}
+> +
+> +static uint32_t kvm_cpu_cfg_get(RISCVCPU *cpu,
+> +                                KVMCPUConfig *multi_ext)
+> +{
+> +    int cpu_cfg_offset = multi_ext->offset;
+> +    bool *ext_enabled = (void *)&cpu->cfg + cpu_cfg_offset;
+> +
+> +    return *ext_enabled;
+> +}
+> +
+> +static void kvm_cpu_set_multi_ext_cfg(Object *obj, Visitor *v,
+> +                                      const char *name,
+> +                                      void *opaque, Error **errp)
+> +{
+> +    KVMCPUConfig *multi_ext_cfg = opaque;
+> +    RISCVCPU *cpu = RISCV_CPU(obj);
+> +    bool value, host_val;
+> +
+> +    if (!visit_type_bool(v, name, &value, errp)) {
+> +        return;
+> +    }
+> +
+> +    host_val = kvm_cpu_cfg_get(cpu, multi_ext_cfg);
+> +
+> +    /*
+> +     * Ignore if the user is setting the same value
+> +     * as the host.
+> +     */
+> +    if (value == host_val) {
+> +        return;
+> +    }
+> +
+> +    if (!multi_ext_cfg->supported) {
+> +        /*
+> +         * Error out if the user is trying to enable an
+> +         * extension that KVM doesn't support. Ignore
+> +         * option otherwise.
+> +         */
+> +        if (value) {
+> +            error_setg(errp, "KVM does not support disabling extension %s",
+> +                       multi_ext_cfg->name);
+> +        }
+> +
+> +        return;
+> +    }
+> +
+> +    multi_ext_cfg->user_set = true;
+> +    kvm_cpu_cfg_set(cpu, multi_ext_cfg, value);
+> +}
+> +
+>  static void kvm_riscv_add_cpu_user_properties(Object *cpu_obj)
+>  {
+>      int i;
+> @@ -215,6 +291,15 @@ static void kvm_riscv_add_cpu_user_properties(Object *cpu_obj)
+>          object_property_set_description(cpu_obj, misa_cfg->name,
+>                                          misa_cfg->description);
+>      }
+> +
+> +    for (i = 0; i < ARRAY_SIZE(kvm_multi_ext_cfgs); i++) {
+> +        KVMCPUConfig *multi_cfg = &kvm_multi_ext_cfgs[i];
+> +
+> +        object_property_add(cpu_obj, multi_cfg->name, "bool",
+> +                            NULL,
+> +                            kvm_cpu_set_multi_ext_cfg,
+> +                            NULL, multi_cfg);
+> +    }
+>  }
+>  
+>  static int kvm_riscv_get_regs_core(CPUState *cs)
+> @@ -530,6 +615,39 @@ static void kvm_riscv_init_misa_ext_mask(RISCVCPU *cpu,
+>      env->misa_ext = env->misa_ext_mask;
+>  }
+>  
+> +static void kvm_riscv_init_multiext_cfg(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
+> +{
+> +    CPURISCVState *env = &cpu->env;
+> +    uint64_t val;
+> +    int i, ret;
+> +
+> +    for (i = 0; i < ARRAY_SIZE(kvm_multi_ext_cfgs); i++) {
+> +        KVMCPUConfig *multi_ext_cfg = &kvm_multi_ext_cfgs[i];
+> +        struct kvm_one_reg reg;
+> +
+> +        reg.id = kvm_riscv_reg_id(env, KVM_REG_RISCV_ISA_EXT,
+> +                                  multi_ext_cfg->kvm_reg_id);
+> +        reg.addr = (uint64_t)&val;
+> +        ret = ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
+> +        if (ret != 0) {
+> +            if (errno == ENOENT) {
+> +                /* Silently default to 'false' if KVM does not support it. */
+> +                multi_ext_cfg->supported = false;
+> +                val = false;
+> +            } else {
+> +                error_report("Unable to read ISA_EXT KVM register %s, "
+> +                             "error %d", multi_ext_cfg->name, ret);
+> +                kvm_riscv_destroy_scratch_vcpu(kvmcpu);
+> +                exit(EXIT_FAILURE);
+
+TL;DR - We need to change ENOENT back to EINVAL.
+
+I realized that I wasn't thinking clearly yesterday when I suggested we
+should error out for everything but the still-nonexistent ENOENT, which
+means erroring out even for EINVAL when it means "register not present".
+That might be fine if we were making this ioctl due to user input, but
+we're making this ioctl based on what QEMU knows about potential KVM
+extension support, which means QEMU will no longer work on older KVM which
+doesn't support everything QEMU knows about, regardless of user input.
+
+We're sort of stuck here with either assuming EINVAL is most likely going
+to be "register not present" and go with that, or we can't do this early
+probing for extensions at all, since we can't tell the difference between
+"invalid input" and "register not present".
+
+But, there is a solution on the horizon! get-reg-list is coming soon[1].
+So, I suggest we do the following:
+
+ 1. Audit KVM to ensure using EINVAL for get-one-reg's "register not
+    present" is currently safe, and keep our eye on KVM to make sure
+    it remains safe until get-reg-list lands.
+ 2. Once we have get-reg-list then use that as the authority, rather
+    than trying to decide if a register is present or not by errno.
+    We'll still fall back to EINVAL probing when get-reg-list isn't
+    present in KVM, but we'll know it's safe to do so because of (1),
+    i.e. we only fall back when we're on an already audited KVM version.
+
+Whether or not we proceed with the EINVAL to ENOENT conversion in KVM no
+longer currently matters to QEMU with this plan, but we can still do it,
+as it seems more appropriate and may matter later.
+
+[1] https://lore.kernel.org/all/cover.1688010022.git.haibo1.xu@intel.com/
+
+Thanks,
+drew
+
+> +            }
+> +        } else {
+> +            multi_ext_cfg->supported = true;
+> +        }
+> +
+> +        kvm_cpu_cfg_set(cpu, multi_ext_cfg, val);
+> +    }
+> +}
+> +
+>  void kvm_riscv_init_user_properties(Object *cpu_obj)
+>  {
+>      RISCVCPU *cpu = RISCV_CPU(cpu_obj);
+> @@ -542,6 +660,7 @@ void kvm_riscv_init_user_properties(Object *cpu_obj)
+>      kvm_riscv_add_cpu_user_properties(cpu_obj);
+>      kvm_riscv_init_machine_ids(cpu, &kvmcpu);
+>      kvm_riscv_init_misa_ext_mask(cpu, &kvmcpu);
+> +    kvm_riscv_init_multiext_cfg(cpu, &kvmcpu);
+>  
+>      kvm_riscv_destroy_scratch_vcpu(&kvmcpu);
+>  }
+> -- 
+> 2.41.0
+> 
 
