@@ -4,68 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50A02EB64DC
-	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Jul 2023 13:22:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23437EB64DA
+	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Jul 2023 07:17:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qHOwW-0003JG-Qb; Thu, 06 Jul 2023 09:22:45 -0400
+	id 1qHfi4-0002v1-8W; Fri, 07 Jul 2023 03:16:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1qHOwV-0003IN-7E; Thu, 06 Jul 2023 09:22:43 -0400
-Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
- by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1qHOwS-0008Ej-8e; Thu, 06 Jul 2023 09:22:42 -0400
-Received: from [192.168.0.120] (unknown [114.95.176.74])
- by APP-01 (Coremail) with SMTP id qwCowAB3fwsRwKZkROHtCA--.26543S2;
- Thu, 06 Jul 2023 21:22:26 +0800 (CST)
-Message-ID: <dfc75d1f-f28d-7d2c-26f9-72086ffb54ca@iscas.ac.cn>
-Date: Thu, 6 Jul 2023 21:22:25 +0800
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qHfi2-0002uB-2R
+ for qemu-riscv@nongnu.org; Fri, 07 Jul 2023 03:16:54 -0400
+Received: from mail-oo1-xc2a.google.com ([2607:f8b0:4864:20::c2a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qHfi0-00014f-Dy
+ for qemu-riscv@nongnu.org; Fri, 07 Jul 2023 03:16:53 -0400
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-5634db21a58so1102892eaf.0
+ for <qemu-riscv@nongnu.org>; Fri, 07 Jul 2023 00:16:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1688714210; x=1691306210;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=zv9gIjS82L5+OWY0+arteaIf4C3sR4crycr5MrZ+BUM=;
+ b=AIPYH9ivrxNo/SisRpzbXbNoIge2+BjNO7ocSHZoC3BDV3AMf+ETHpbvWJhJnhnOYi
+ tzuiDksOQMWb/uzUvwFscyJldHj8TAB+yIv0wRXS/dSOamj8S8SZ70x42d29F7gUKgji
+ gMxZptHCEstADgK4+/+ffLd6RMBTGADond2lis9+UyNUhuTZEcEuF44MAIbZRO4Wj04T
+ A6uUnIaFyC/p4Ia0Nt4MSFneZVQgCoHsUyykpDbNvhwjBjmafNB7n1T4FAJawFDiUBUl
+ pSvQFqlKXbnfgYA5Myct3BgBAtjmSo2GRIlyNN3EUkDhh+yZ/bhDhA7B4udkFBOhTuVd
+ 28Kg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1688714210; x=1691306210;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=zv9gIjS82L5+OWY0+arteaIf4C3sR4crycr5MrZ+BUM=;
+ b=W10aLZI+NhrVETNMT7lirfkI+Jv0pQb/UXSacEbfjr2XBTG8cMJy5jTegRncvFWsK5
+ xUOqYrwCltz79XF1ek7jxpy0At+6ZTxNOgz8zIOy9n+ifLlPefCvNepL30GTGb+lwPMU
+ iLkQAmIwDWRWwSLfSlrO+qG5xRxX0N65i9irTm41LsZ8UZA/WTbCrJhkt2WueL4o1LgV
+ AyiznKKPrewGWw3/jZWLYm3N94xl0mIjtdWiVFrmyPpI5yjOCqekRnS0VilmYtMP6Wb+
+ GPE1xMbu6XPmyOnxedo1shsr09Xv4XkHa1QDo1t62yR5eyN2M1i6+Usnm3wfcK1jRXb1
+ sd+A==
+X-Gm-Message-State: ABy/qLYlLa88l3VaeJmm/Ra0XKN3hYmIsn0r9knVzu5K9cTZgl3VwkBV
+ qfNEQbNMAQ5hFW9FmmGoDzngYw==
+X-Google-Smtp-Source: APBJJlG4lud8+n8QUDPhrJlFA0hLEMwvNl/6xyDqQa5sqZ9WgCFMbPzW0buVWpAJkn7U3gJYTBA9JQ==
+X-Received: by 2002:a4a:4110:0:b0:563:53fa:324f with SMTP id
+ x16-20020a4a4110000000b0056353fa324fmr3581280ooa.6.1688714210659; 
+ Fri, 07 Jul 2023 00:16:50 -0700 (PDT)
+Received: from [192.168.68.107] (201-69-66-19.dial-up.telesp.net.br.
+ [201.69.66.19]) by smtp.gmail.com with ESMTPSA id
+ x22-20020a4ab916000000b0056082ad01desm1278956ooo.14.2023.07.07.00.16.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 07 Jul 2023 00:16:50 -0700 (PDT)
+Message-ID: <fdd959fc-6630-99fe-d5ef-4b6b73998b9c@ventanamicro.com>
+Date: Fri, 7 Jul 2023 04:16:46 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Cc: liweiwei@iscas.ac.cn, qemu-riscv@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: Re: [PATCH] target/riscv: Fix LMUL check to use minimum SEW
-To: Rob Bradford <rbradford@rivosinc.com>, qemu-devel@nongnu.org
-References: <20230706104433.16264-1-rbradford@rivosinc.com>
+ Thunderbird/102.12.0
+Subject: Re: [PATCH] target/riscv KVM_RISCV_SET_TIMER macro is not configured
+ correctly
 Content-Language: en-US
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-In-Reply-To: <20230706104433.16264-1-rbradford@rivosinc.com>
+To: "yang.zhang" <gaoshanliukou@163.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, pbonzini@redhat.com, kvm@vger.kernel.org,
+ zhiwei_liu@linux.alibaba.com, "yang.zhang" <yang.zhang@hexintek.com>
+References: <20230707032306.4606-1-gaoshanliukou@163.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20230707032306.4606-1-gaoshanliukou@163.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowAB3fwsRwKZkROHtCA--.26543S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7CrWrXr1DXFyrCFWxGrW7urg_yoW8KFWDpF
- 4UCFW29FykXayxu3Z29w4jqw45ZFW8KFWjkwnYv34UA345GryvvFn8K3ZrZF18JFyfAryj
- qa4jv3WfZ398AaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUkm14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r1j
- 6r4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
- Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
- I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
- 4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCYjI0SjxkI62AI1cAE67vI
- Y487MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI
- 0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y
- 0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxV
- WUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1l
- IxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjfUoOJ5UUUUU
-X-Originating-IP: [114.95.176.74]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -19
-X-Spam_score: -2.0
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c2a;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc2a.google.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
 X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.091,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.091,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -82,80 +100,38 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
-On 2023/7/6 18:44, Rob Bradford wrote:
-> The previous check was failing with:
->
-> ELEN = 64 SEW = 16 and LMUL = 1/8 (encoded as 5) which is a valid
-> combination.
->
-> Fix the check to correctly match the specification by using minimum SEW
-> rather than the active SEW.
->
->  From the specification:
->
-> "In general, the requirement is to support LMUL ≥ SEWMIN/ELEN, where
-> SEWMIN is the narrowest supported SEW value and ELEN is the widest
-> supported SEW value. In the standard extensions, SEWMIN=8. For standard
-> vector extensions with ELEN=32, fractional LMULs of 1/2 and 1/4 must be
-> supported. For standard vector extensions with ELEN=64, fractional LMULs
-> of 1/2, 1/4, and 1/8 must be supported."
->
->  From inspection this new check allows:
->
-> ELEN=64 1/2, 1/4, 1/8 (encoded as 7, 6, 5 respectfully)
-> ELEN=32 1/2, 1/4 (encoded as 7 and 6 respectfully)
 
-This is a little confusing.  there is  note in spec to explain why  LMUL 
-≥ SEW MIN /ELEN:
+On 7/7/23 00:23, yang.zhang wrote:
+> From: "yang.zhang" <yang.zhang@hexintek.com>
+> 
+> Should set/get riscv all reg timer,i.e, time/compare/frequency/state.
 
-"When LMUL < SEW MIN /ELEN, there is no guarantee an implementation 
-would have enough bits in the fractional vector register to store
+Nice catch.
 
-Note at least one element, as VLEN=ELEN is a valid implementation 
-choice. For example, with VLEN=ELEN=32, and SEW MIN =8, an LMUL of
+The reason why this went under the radar for 18 months is because kvm.c is using
+an external 'time' variable.
 
-1/8 would only provide four bits of storage in a vector register."
-
-In this way, when VLEN=ELEN=64,  an LMUL of 1/8 would only provide 8 
-bits of storage in a vector register, so it's also not suitable for sew 
-= 16.
-
-Maybe we can explain the above description of the spec in another way: 
-we must support lmul=1/8 when ELEN=64, but it's only available when sew = 8.
-
-Regards,
-
-Weiwei Li
-
-`
-
-Regards,
-
-Weiwei Li
-
->
-> Fixes: d9b7609a1fb2 ("target/riscv: rvv-1.0: configure instructions")
->
-> Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
+> 
+> Signed-off-by:Yang Zhang <yang.zhang@hexintek.com>
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1688
 > ---
->   target/riscv/vector_helper.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 1e06e7447c..8dfd8fe484 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -43,9 +43,9 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
->                                               xlen - 1 - R_VTYPE_RESERVED_SHIFT);
->   
->       if (lmul & 4) {
-> -        /* Fractional LMUL. */
-> +        /* Fractional LMUL - check LMUL >= ELEN/SEW_MIN (8) */
->           if (lmul == 4 ||
-> -            cpu->cfg.elen >> (8 - lmul) < sew) {
-> +            cpu->cfg.elen >> (8 - lmul) < 8) {
->               vill = true;
->           }
->       }
 
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+>   target/riscv/kvm.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
+> index 30f21453d6..0c567f668c 100644
+> --- a/target/riscv/kvm.c
+> +++ b/target/riscv/kvm.c
+> @@ -99,7 +99,7 @@ static uint64_t kvm_riscv_reg_id(CPURISCVState *env, uint64_t type,
+>   
+>   #define KVM_RISCV_SET_TIMER(cs, env, name, reg) \
+>       do { \
+> -        int ret = kvm_set_one_reg(cs, RISCV_TIMER_REG(env, time), &reg); \
+> +        int ret = kvm_set_one_reg(cs, RISCV_TIMER_REG(env, name), &reg); \
+>           if (ret) { \
+>               abort(); \
+>           } \
 
