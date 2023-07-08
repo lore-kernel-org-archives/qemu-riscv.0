@@ -4,35 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B30BEB64DA
-	for <qemu-riscv@archiver.kernel.org>; Sat,  8 Jul 2023 09:12:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFDB6EB64DA
+	for <qemu-riscv@archiver.kernel.org>; Sat,  8 Jul 2023 09:12:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qI3ya-0006ED-CN; Sat, 08 Jul 2023 05:11:36 -0400
+	id 1qI3yV-0006Ca-44; Sat, 08 Jul 2023 05:11:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <reaperlu@hust.edu.cn>)
- id 1qI3yU-0006CG-9u; Sat, 08 Jul 2023 05:11:30 -0400
+ id 1qI3yT-0006Bt-3x; Sat, 08 Jul 2023 05:11:29 -0400
 Received: from [202.114.0.240] (helo=hust.edu.cn)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <reaperlu@hust.edu.cn>)
- id 1qI3yQ-0007jv-RU; Sat, 08 Jul 2023 05:11:30 -0400
+ id 1qI3yQ-0007jr-Oc; Sat, 08 Jul 2023 05:11:28 -0400
 Received: from localhost.localdomain ([10.12.190.169])
  (user=reaperlu@hust.edu.cn mech=LOGIN bits=0)
- by mx1.hust.edu.cn  with ESMTP id 3689B3bo008217-3689B3bq008217
+ by mx1.hust.edu.cn  with ESMTP id 3689B3bo008217-3689B3bp008217
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
  Sat, 8 Jul 2023 17:11:15 +0800
 From: Ruibo Lu <reaperlu@hust.edu.cn>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, luruibo2000@163.com, alistair.francis@wdc.com,
  liweiwei@iscas.ac.cn
-Subject: [PATCH v3 1/2] target/riscv: Remove redundant check in pmp_is_locked
-Date: Sat,  8 Jul 2023 17:10:53 +0800
-Message-ID: <20230708091055.38505-2-reaperlu@hust.edu.cn>
+Subject: [PATCH v3 0/2] target/riscv: improve code accuracy and
+Date: Sat,  8 Jul 2023 17:10:52 +0800
+Message-ID: <20230708091055.38505-1-reaperlu@hust.edu.cn>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230708091055.38505-1-reaperlu@hust.edu.cn>
-References: <20230708091055.38505-1-reaperlu@hust.edu.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-FEAS-AUTH-USER: reaperlu@hust.edu.cn
@@ -60,33 +58,23 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-the check of top PMP is redundant and will not influence the return
-value, so consider remove it
+I'm so sorry. As a newcomer, I'm not familiar with the patch mechanism. I mistakenly added the reviewer's "Reviewed-by" line into the wrong commit, So I have resent this patchset
 
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1733
-Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Signed-off-by: Ruibo Lu <reaperlu@hust.edu.cn>
----
- target/riscv/pmp.c | 5 -----
- 1 file changed, 5 deletions(-)
 
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 9d8db493e6..1a9279ba88 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -49,11 +49,6 @@ static inline int pmp_is_locked(CPURISCVState *env, uint32_t pmp_index)
-         return 1;
-     }
- 
--    /* Top PMP has no 'next' to check */
--    if ((pmp_index + 1u) >= MAX_RISCV_PMPS) {
--        return 0;
--    }
--
-     return 0;
- }
- 
+Changes in v3:
+* fix the allignment of pmp_is_in_range parameter line
+
+Changes in v2:
+* change the initial values of sa_in and ea_in to false
+* change the condition expression when address area fully in range
+
+Ruibo Lu (2):
+  target/riscv: Remove redundant check in pmp_is_locked
+  target/riscv: Optimize ambiguous local variable in pmp_hart_has_privs
+
+ target/riscv/pmp.c | 27 +++++++++++----------------
+ 1 file changed, 11 insertions(+), 16 deletions(-)
+
 -- 
 2.41.0
 
