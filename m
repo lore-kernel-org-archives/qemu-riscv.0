@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C39BEB64DD
-	for <qemu-riscv@archiver.kernel.org>; Sat,  8 Jul 2023 17:20:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EC7BEB64DA
+	for <qemu-riscv@archiver.kernel.org>; Sat,  8 Jul 2023 17:20:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qIBb1-0000K1-EJ; Sat, 08 Jul 2023 13:19:47 -0400
+	id 1qIBba-0000zS-M7; Sat, 08 Jul 2023 13:20:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qIBaz-0000Ih-Cq
- for qemu-riscv@nongnu.org; Sat, 08 Jul 2023 13:19:45 -0400
-Received: from mail-lf1-x12a.google.com ([2a00:1450:4864:20::12a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qIBbX-0000wa-EZ
+ for qemu-riscv@nongnu.org; Sat, 08 Jul 2023 13:20:20 -0400
+Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qIBaw-0003q3-Vf
- for qemu-riscv@nongnu.org; Sat, 08 Jul 2023 13:19:45 -0400
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-4fb9fd28025so4507591e87.2
- for <qemu-riscv@nongnu.org>; Sat, 08 Jul 2023 10:19:42 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qIBbT-0004KA-Sg
+ for qemu-riscv@nongnu.org; Sat, 08 Jul 2023 13:20:19 -0400
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-9922d6f003cso399538666b.0
+ for <qemu-riscv@nongnu.org>; Sat, 08 Jul 2023 10:20:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1688836781; x=1691428781;
+ d=linaro.org; s=google; t=1688836813; x=1691428813;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=uBq6xE0H67dxAxxLrM+uItKGrmh4nAnJSVcXuurF28Y=;
- b=sHgNXnHRDhWSK8PPLDS/A81M4E2QhZ4MbpfotK8OE6kbNEsKNCKWgEuisq0ykp6h5V
- I9bB0LPjy++zY153jpjY1FKukyFMDubsqtD3cVKFtq5/+LQhlxvcV3bcQa2gHBHof/zv
- xSSOGhmTE1xv1UqyxDrfQgU54qOToK+K6epZxPygFJXtddjRTlOWxrdIlD7nmfwJahBP
- kHInyOGPaDCad0zs+xuOZwnrgph7RUwpfmwmmphwxXxATtPWjUBcOy5TwslBUi+b+Amc
- w99C1aUus1k8GljAP71qJf/7UTEZYxPUD8d5HLEet+erJZ/Vsg9VSQSlanxzEl4/ji54
- rp3g==
+ bh=MxhKU43bs1JHSSm0qPgBg513gg2gr4mB0L87lM7uzVc=;
+ b=NTD3TzbcDaBttxDjvzKyx6unCgyI2PJiiG0H1fhXeZbn6ns9mkoMXyA3fTH+w7tfBD
+ at6xQQM+H59gLVUJ7QIW94DDaWVe1wjosPOLNgH8SP1kVznH/RbwnQBeYWnRdWBaRUe7
+ IDEsIdV/hmab9bNWalqBxoDohyLXhsjNfqo63HRc43v3LDVK6j7myY6zts3JqlOMPRZq
+ slYJalyyp+n8vaLENVGQVghABxvdkgw97p00wapbsB3zuNY8G8aXpa9zy51wAB2n64wJ
+ YlrHmK6+m0qeCN2XYjdbscQahSGXNiWhr4FZz9Fdz6NC89aeti5Wuet26B7gYjTD5LCl
+ A7aA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688836781; x=1691428781;
+ d=1e100.net; s=20221208; t=1688836813; x=1691428813;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=uBq6xE0H67dxAxxLrM+uItKGrmh4nAnJSVcXuurF28Y=;
- b=ZFNcv8YvhQvDh3sb302IzYmFZLv0TmYCILGzuzi9JmY3OqGtN/7JQJdUDW+ad19Wv3
- xf9LGtqUS1/X7c/cBKOGrAwKqsF51HQqeDBIyKLFkKkhEJE/jwU5DfyIzCSXdU3pf9hw
- htT5JFCvMy39k16+xzDdFVDaOs5fYcnSsEY3mMR3Ztg58y19zZZE7xso7SnDF9Qtwu6v
- TAy2zzjuHtTVVo1y88G2lMknWmL1Tu9ee3jFr8iuU+d/3MuqJgkHy9hxYdFtqppIr0uH
- V5cm1HVAP7PG8FLOeZoJS4vTvTIVZq14nFUvP4HC0yriMBX14GhseWKdw8UJmKj3Kpk0
- szDg==
-X-Gm-Message-State: ABy/qLag1oNJ15b+aO1iYX+DA2+sz5kyqQ3SKTw+RbJEgJH5sJTJFqPq
- ZRwVHMbJO3hGu99w3r3fZDU/pg==
-X-Google-Smtp-Source: APBJJlFRFkI9ZkHKXn2lF143R3z/oaRTPLLPkF285qpVqp12ECDK1HMJUtffrCv/FFh4Ss10suEXyw==
-X-Received: by 2002:a05:6512:3253:b0:4fa:5e76:7ad4 with SMTP id
- c19-20020a056512325300b004fa5e767ad4mr5483697lfr.10.1688836780953; 
- Sat, 08 Jul 2023 10:19:40 -0700 (PDT)
+ bh=MxhKU43bs1JHSSm0qPgBg513gg2gr4mB0L87lM7uzVc=;
+ b=TDuAKoLCc21B3+54u6L/j/xOMcTCDDMK5EuUgqtQW5t7SRzEUeqWcmBk7WRpbLi/QC
+ z8TfS/rmssZ8c1YmY1tbb+74jEhg6B++cPUlFX4XO2od+r4gWG5i3tJJm6oXeI2+aCW8
+ StFJlYe/wU6FJEqSPyYp7KyutatQOc5b5YjLG2RnBQlYlxjuMSpLoM/X+v41RzRZq0ri
+ vV/rsE51ouqHBD64Xv+hZIH6dgfKFUNw9pDB4NhK3dtKlFtcEW2ZxM4dthzfARgwJvby
+ EBLFOj7j3K7IsTlZTktdARtcLKbnSqFxs84GeuZEZ6jGR0MjtHpLC6vk646lZnggcWIB
+ UZ/w==
+X-Gm-Message-State: ABy/qLZdkmeFQoZwkyWk+E7cGSL1LA8GrN8h1AQ9C8g42MqlP6Xl+awP
+ mvOgMZaCnpsJLAtyGlinfGA9gA==
+X-Google-Smtp-Source: APBJJlGRcACcnrYSfggOoHD4z64BNPNPwszVGAGxIv9UQJ3AKWef5Y/n7FHCovs5+dr5oO6lxBKBEA==
+X-Received: by 2002:a17:906:5c:b0:978:ab6b:afd4 with SMTP id
+ 28-20020a170906005c00b00978ab6bafd4mr6995548ejg.43.1688836813661; 
+ Sat, 08 Jul 2023 10:20:13 -0700 (PDT)
 Received: from [192.168.69.115] ([176.176.184.32])
  by smtp.gmail.com with ESMTPSA id
- w25-20020a056402071900b0051a5cf5fcaasm3504349edx.23.2023.07.08.10.19.39
+ c21-20020a170906925500b00984822540c9sm3760146ejx.96.2023.07.08.10.20.12
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 08 Jul 2023 10:19:40 -0700 (PDT)
-Message-ID: <54371e18-33aa-5871-3eaa-7931f22339b5@linaro.org>
-Date: Sat, 8 Jul 2023 19:19:38 +0200
+ Sat, 08 Jul 2023 10:20:13 -0700 (PDT)
+Message-ID: <8d230498-06fa-c4a7-b461-19dcc047b4ff@linaro.org>
+Date: Sat, 8 Jul 2023 19:20:11 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.12.0
-Subject: Re: [PATCH v4 26/37] target/arm: Use aesdec_ISB_ISR_AK
+Subject: Re: [PATCH v4 27/37] target/arm: Use aesenc_MC
 Content-Language: en-US
 To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com,
  eduardo@habkost.net, alistair.francis@wdc.com, danielhb413@gmail.com
 References: <20230703100520.68224-1-richard.henderson@linaro.org>
- <20230703100520.68224-27-richard.henderson@linaro.org>
+ <20230703100520.68224-28-richard.henderson@linaro.org>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230703100520.68224-27-richard.henderson@linaro.org>
+In-Reply-To: <20230703100520.68224-28-richard.henderson@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::12a;
- envelope-from=philmd@linaro.org; helo=mail-lf1-x12a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::636;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x636.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
@@ -97,12 +97,12 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 3/7/23 12:05, Richard Henderson wrote:
-> This implements the AESD instruction.
+> This implements the AESMC instruction.
 > 
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->   target/arm/tcg/crypto_helper.c | 37 +++++++++++++++-------------------
->   1 file changed, 16 insertions(+), 21 deletions(-)
+>   target/arm/tcg/crypto_helper.c | 15 ++++++++++++++-
+>   1 file changed, 14 insertions(+), 1 deletion(-)
 
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
