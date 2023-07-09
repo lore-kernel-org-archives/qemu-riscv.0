@@ -4,83 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55385EB64DA
-	for <qemu-riscv@archiver.kernel.org>; Sat,  8 Jul 2023 17:39:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 108F3EB64DC
+	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Jul 2023 09:17:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qIBtS-0000Fa-CG; Sat, 08 Jul 2023 13:38:50 -0400
+	id 1qIQXZ-0005V5-Sv; Sun, 09 Jul 2023 05:17:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qIBtR-0000FH-JI
- for qemu-riscv@nongnu.org; Sat, 08 Jul 2023 13:38:49 -0400
-Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qIBtO-0000em-Ui
- for qemu-riscv@nongnu.org; Sat, 08 Jul 2023 13:38:48 -0400
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-3fbc54cab6fso31271325e9.0
- for <qemu-riscv@nongnu.org>; Sat, 08 Jul 2023 10:38:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1688837925; x=1691429925;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=X9V3mlclSrZnn64RNlPhkleDibYYoVmln79aRJTZDHo=;
- b=yvSoWskVNJ6/Y3ZSap6nGL/Bdien/DkvOEeSJJZMItaX6jTWh6FgVhdhz7sQ0XqlKU
- EGSE1hxItCnQgu6K2OrGRYwVYUuzd9wVMCmSGGelPj6qVUOGdhCBRBpKSI9n7E73PThK
- 0Shg7HnJBN8asOw04mbuvLJTqEUL5TA1VTDcf/zCA9oKxM4qHNQMfzGaVC6PRHQBNRby
- RCMarjvvgsDXKlp0W1EDRSeCz1lj7pKCsPT4y2QGYLTGk6MHsYw7ES1bsPrv0mz9ZI9V
- T8dFNYgrQkDK6wK6hyolW5vHdXZQfzOXmRlsYMgd8YKHqmivy2hvGKsoACIgHpPhz7gj
- CUOw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688837925; x=1691429925;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=X9V3mlclSrZnn64RNlPhkleDibYYoVmln79aRJTZDHo=;
- b=R5RaxK4LQH/O8YZBJBs86xSaYKVvVWRO4Jc4eBhtMS5C8An1WU/1m8Tz+iR1ACTDj0
- DYmXs3RNqoYKd3PuZzKTBeB40l06T85Ml8VrkTxyVXqCnxkjDdy7Xk/gLwSt/EWNhF2F
- cTLjydqWBeUG47/msvTIniLiuveEYf//onuIBbvI5NzlvAxW+H0LPikZxL2CobZ/LtqO
- JrzL3H02X3ov0SzFPg2GBkTc8DKa7XOI8m1trZyr6UBUVvyWN23OG6Kta7EA4ub0P5p0
- n7feNhpelLRtO9DHbDuJyLLXDTSvuVA79Um5v8RVOGPNrVXcryhCJW1vau5SBHEui2D2
- nPlA==
-X-Gm-Message-State: ABy/qLbj+CCh2REnR+jzAX6YfS5qQTc9yr9vym2I14GQu/8NpuI9coTW
- OUo8MK6b+kXNe+9lfou5F9FaGw==
-X-Google-Smtp-Source: APBJJlGm0P7wRvMmz4kS2uBbmOQO/ku8qB3tUMl+BINLKn60SmWxFbtorcuA12zsnlIFsPZ9+9KPSA==
-X-Received: by 2002:a1c:e902:0:b0:3fa:8874:fe69 with SMTP id
- q2-20020a1ce902000000b003fa8874fe69mr6744892wmc.29.1688837924986; 
- Sat, 08 Jul 2023 10:38:44 -0700 (PDT)
-Received: from [192.168.69.115] ([176.176.184.32])
- by smtp.gmail.com with ESMTPSA id
- y11-20020a05600c364b00b003f90b9b2c31sm5626969wmq.28.2023.07.08.10.38.43
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 08 Jul 2023 10:38:44 -0700 (PDT)
-Message-ID: <d33e7552-2f53-6669-ff6c-348b7f024967@linaro.org>
-Date: Sat, 8 Jul 2023 19:38:42 +0200
+ (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
+ id 1qIQXY-0005UJ-28; Sun, 09 Jul 2023 05:17:12 -0400
+Received: from isrv.corpit.ru ([86.62.121.231])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
+ id 1qIQXW-0008Jt-6g; Sun, 09 Jul 2023 05:17:11 -0400
+Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
+ by isrv.corpit.ru (Postfix) with ESMTP id 55137128B9;
+ Sun,  9 Jul 2023 12:17:08 +0300 (MSK)
+Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
+ by tsrv.corpit.ru (Postfix) with ESMTP id 44A3013B25;
+ Sun,  9 Jul 2023 12:17:02 +0300 (MSK)
+Message-ID: <45231603-3635-0e9e-dcf2-08053ba73c98@tls.msk.ru>
+Date: Sun, 9 Jul 2023 12:17:01 +0300
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.12.0
-Subject: Re: [PATCH v4 00/37] crypto: Provide aes-round.h and host accel
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.12.0
+Subject: Re: [PATCH v3 2/2] target/riscv: Optimize ambiguous local variable in
+ pmp_hart_has_privs
 Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
- Ard Biesheuvel <ardb@kernel.org>
-Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com,
- eduardo@habkost.net, alistair.francis@wdc.com, danielhb413@gmail.com
-References: <20230703100520.68224-1-richard.henderson@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230703100520.68224-1-richard.henderson@linaro.org>
+To: Ruibo Lu <reaperlu@hust.edu.cn>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, luruibo2000@163.com, alistair.francis@wdc.com,
+ liweiwei@iscas.ac.cn, =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?=
+ <philmd@linaro.org>
+References: <20230708091055.38505-1-reaperlu@hust.edu.cn>
+ <20230708091055.38505-3-reaperlu@hust.edu.cn>
+From: Michael Tokarev <mjt@tls.msk.ru>
+In-Reply-To: <20230708091055.38505-3-reaperlu@hust.edu.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::335;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x335.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
-X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.091,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=86.62.121.231; envelope-from=mjt@tls.msk.ru;
+ helo=isrv.corpit.ru
+X-Spam_score_int: -69
+X-Spam_score: -7.0
+X-Spam_bar: -------
+X-Spam_report: (-7.0 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.091,
+ RCVD_IN_DNSWL_HI=-5, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,31 +65,96 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 3/7/23 12:04, Richard Henderson wrote:
-> Inspired by Ard Biesheuvel's RFC patches for accelerating AES
-> under emulation, provide a set of primitives that maps between
-> the guest and host fragments.
+08.07.2023 12:10, Ruibo Lu пишет:
+> These two values represents whether start/end address is in pmp_range.
+> However, the type and name of them is ambiguous. This commit change the
+> name and type of them to improve code readability and accuracy.
 > 
-> Changes for v4:
->    * Fix typo in AESState (Max Chou)
->    * Define AES_SH/ISH as macros (Ard Biesheuvel)
->    * Group patches by subsystem.
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1735
+> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Signed-off-by: Ruibo Lu <reaperlu@hust.edu.cn>
+> ---
+>   target/riscv/pmp.c | 22 +++++++++++-----------
+>   1 file changed, 11 insertions(+), 11 deletions(-)
 > 
-> Patches lacking review:
->    12-host-include-i386-Implement-aes-round.h.patch
+> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> index 1a9279ba88..ea3d29217a 100644
+> --- a/target/riscv/pmp.c
+> +++ b/target/riscv/pmp.c
+> @@ -203,16 +203,16 @@ void pmp_update_rule_nums(CPURISCVState *env)
+>       }
+>   }
+>   
+> -static int pmp_is_in_range(CPURISCVState *env, int pmp_index,
+> -                           target_ulong addr)
+> +static bool pmp_is_in_range(CPURISCVState *env, int pmp_index,
+> +                            target_ulong addr)
+>   {
+> -    int result = 0;
+> +    bool result = false;
+>   
+>       if ((addr >= env->pmp_state.addr[pmp_index].sa) &&
+>           (addr <= env->pmp_state.addr[pmp_index].ea)) {
+> -        result = 1;
+> +        result = true;
+>       } else {
+> -        result = 0;
+> +        result = false;
+>       }
+>   
+>       return result;
 
-Deferring this one to Paolo & co,
+And the initial assignment of result isn't needed.  How about this:
 
->    13-host-include-aarch64-Implement-aes-round.h.patch
+  return (addr >= env->pmp_state.addr[pmp_index].sa) &&
+         (addr <= env->pmp_state.addr[pmp_index].ea);
 
-and this one to Ard :)
+instead? :)
 
+> @@ -287,8 +287,8 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+>   {
+>       int i = 0;
+>       int pmp_size = 0;
+> -    target_ulong s = 0;
+> -    target_ulong e = 0;
+> +    bool sa_in = false;
+> +    bool ea_in = false;
+>   
+>       /* Short cut if no rules */
+>       if (0 == pmp_get_num_rules(env)) {
+> @@ -314,11 +314,11 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+>        * from low to high
+>        */
+>       for (i = 0; i < MAX_RISCV_PMPS; i++) {
+> -        s = pmp_is_in_range(env, i, addr);
+> -        e = pmp_is_in_range(env, i, addr + pmp_size - 1);
+> +        sa_in = pmp_is_in_range(env, i, addr);
+> +        ea_in = pmp_is_in_range(env, i, addr + pmp_size - 1);
+>   
+>           /* partially inside */
+> -        if ((s + e) == 1) {
+> +        if (sa_in ^ ea_in) {
 
-Possible cleanup to add in patch #4 "crypto/aes: Add AES_SH,
-AES_ISH macros", declare 'extern const AESState aes_zero;' in
-include/crypto/aes-round.h and define it in crypto/aes.c.
+Dunno how for others, but to me this is a bit difficult to
+read, as an exclusive or isn't a commonly used operation.
+Maybe sa_in != ea_in ?
 
-Regards,
+Thanks,
 
-Phil.
+/mjt
+
+>               qemu_log_mask(LOG_GUEST_ERROR,
+>                             "pmp violation - access is partially inside\n");
+>               *allowed_privs = 0;
+> @@ -339,7 +339,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+>               (env->pmp_state.pmp[i].cfg_reg & PMP_WRITE) |
+>               ((env->pmp_state.pmp[i].cfg_reg & PMP_EXEC) >> 2);
+>   
+> -        if (((s + e) == 2) && (PMP_AMATCH_OFF != a_field)) {
+> +        if (sa_in && ea_in && (PMP_AMATCH_OFF != a_field)) {
+>               /*
+>                * If the PMP entry is not off and the address is in range,
+>                * do the priv check
+
 
