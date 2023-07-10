@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B653EB64DC
-	for <qemu-riscv@archiver.kernel.org>; Mon, 10 Jul 2023 01:08:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B24EEB64DC
+	for <qemu-riscv@archiver.kernel.org>; Mon, 10 Jul 2023 01:11:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qIfNo-0002EN-NJ; Sun, 09 Jul 2023 21:08:08 -0400
+	id 1qIfQq-0003a6-JR; Sun, 09 Jul 2023 21:11:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qIfNn-0002Dw-5M; Sun, 09 Jul 2023 21:08:07 -0400
-Received: from mail-vk1-xa2c.google.com ([2607:f8b0:4864:20::a2c])
+ id 1qIfQo-0003Z8-SN; Sun, 09 Jul 2023 21:11:14 -0400
+Received: from mail-ua1-x92c.google.com ([2607:f8b0:4864:20::92c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qIfNl-0008Te-Ip; Sun, 09 Jul 2023 21:08:06 -0400
-Received: by mail-vk1-xa2c.google.com with SMTP id
- 71dfb90a1353d-45a0ee1c411so973692e0c.0; 
- Sun, 09 Jul 2023 18:08:04 -0700 (PDT)
+ id 1qIfQn-0002iG-5S; Sun, 09 Jul 2023 21:11:14 -0400
+Received: by mail-ua1-x92c.google.com with SMTP id
+ a1e0cc1a2514c-7918b56b1e1so1370331241.2; 
+ Sun, 09 Jul 2023 18:11:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1688951284; x=1691543284;
+ d=gmail.com; s=20221208; t=1688951471; x=1691543471;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sDAj1etpz0OIZ/5/3YkzXs1Wc9QmABwLbQaXCTnl26A=;
- b=F7eqfb52j4ME8fypvBw9mmgvOzf5vWgHCPf60qhCUQ5vw9YeSLD87U0buimpGNMsZa
- QlfoVplQ8304egbrU3oHR8WEgv2+BB1VKFXl4qRzgAGx9ByJ2WRW+AgGV3NRNRrYqKvG
- OxtKEBNiC1SefpDE23bUti6aAtLIVbJa73rTHWykexaorLuJ+0jJLZZ4q+hwZgMw0AlM
- SHT65xxE7XlKKFucvtA6ZInJykuC93//VXSEVLFr/parpoqNtliA8cbODu4TcQv7+d+y
- 2owJ3rdzNzAxpSD/KAitw0hVsN4wZD+HNsIFQzaUwsPoCJaz0y1OukiPX/Yd11+Bod2/
- CMKg==
+ bh=S5Fo+VHe4JVTJcEFIcDLIKP999Y4yWbgILe3Ib40Pmg=;
+ b=VweBS6/Yk+sR3wpyqK5Yb7ppUvICTUHnhj59Ilg5DrAiniq8x07Lv6Qe/fCCZhjH5b
+ qxbw9VBYf+B9tFzOkkMB0SnF9WGOeyZRKKkDPw2w0A9r0bt2SQJwi+RGicC1Ed8BhHLd
+ d+SUuG0Oim0gNDiJJZpu5qUG67XNMB5MXid9QjtcXCfo8UwEOpitrYDo+LSa2LfQZSSZ
+ cZYlpSjFv6kdLYl2qsXbZGkXJEeucOENogNDPabB583hCn7sNXhy+mi1oOjYp4aRkYa1
+ 2eIgOJZRkSn2NX0trHi8QBBessUOWh23vsyfSdk2t6lUAKaeVf4ebEhN8/2E+t2EbuJg
+ 7IAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688951284; x=1691543284;
+ d=1e100.net; s=20221208; t=1688951471; x=1691543471;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sDAj1etpz0OIZ/5/3YkzXs1Wc9QmABwLbQaXCTnl26A=;
- b=BwjeRx1sr2IFQhhjvdo0cSY9+2tCpB5MkKRUVPdQsXY9ZpYNSj45NMporKpZ34nrlY
- BdsTzS4Xx3XqG6hY73OY6i+2XN/LNyCGFN5oD9OgrX8p5VVHBneffUJB4RxTES0jyzu7
- V5UJ2SCdRgqjnTw7L4391gU6H/M2ZpQZ01mXtHyhMqIRpLylBfUF+5ryQLUgsKycKmKJ
- x/6TDz9jvmj8jCOwKRPOP5U0qNVIGbokT/iElcA+ReYvFIsKozBZ2BM5gRvz0cMFAXaj
- b2JZTaxBo7KcmEnrq3wl1ik14fHYbAkyvPe2tKxKrUFEKBlYCz3+FXG3ArOFpvtrJcH3
- 14aw==
-X-Gm-Message-State: ABy/qLanTijYNplgteWAZ/xoVcLavJk6C5MykhKfKz8kI6aY46y9T60i
- FU0IZ0sMdBtRaD9RO72qIo+RRvB/AZ86WkjKxgo=
-X-Google-Smtp-Source: APBJJlHvOyUnEwTosFYTKOw9XiVgMssp7bJvYOLqozWbznkq17YMMPy2LqrqNJm7tk6V0cIRkSigpLGpWtD1R4yI0xU=
-X-Received: by 2002:a05:6102:3030:b0:443:85fa:32dc with SMTP id
- v16-20020a056102303000b0044385fa32dcmr3232419vsa.7.1688951283961; Sun, 09 Jul
- 2023 18:08:03 -0700 (PDT)
+ bh=S5Fo+VHe4JVTJcEFIcDLIKP999Y4yWbgILe3Ib40Pmg=;
+ b=Zfg3xa8/JC7xT7Mgh6c5i+c4Ohp41X/PlJSFApwEn0uEp8yY+vQ1loJeds6pYWsBJb
+ w3gUzp0TF31QOYvFaZX90UFBO+eXvVQugPgsfzGxhhGz7vpeSpq0PV5fZ3Yc7i6X+x7X
+ nnzrOfI0FwvypaiIGZDISMk+I0ZWDDr4TsNHmzeMeNgVHUU4Olc2JMMuT5QrF0wOyz4B
+ iexztou76oyu9GJRdtHg8LzDK7Qy4how0xGEYtvPYK4y1p+Nkn7L20F3uzu+h4+5loSL
+ KPdZaWpsNXBt7CCfnLyb46zsiyPgwfiFJruZfIjERVYGMDDWJ57YqkU8C2OPkqyxVj1K
+ 3oiA==
+X-Gm-Message-State: ABy/qLaBxGS/OSNaTpEg0OhiroqDzy5RS3BVz9cP4PC+cHL+igrnLUOP
+ GLt3gUz+6PYVbJ4/pwEGBSU9N7+F+mwtmFLSXCs=
+X-Google-Smtp-Source: APBJJlGdmfPuhzjQqONKluI4Qmxj1LmscX9ib3KUbGKuNBqgjDQ8pLAP5rXnrLoPi/JvSGQfP6RoMk6+j6W3D787J6k=
+X-Received: by 2002:a67:ea91:0:b0:443:873a:16b8 with SMTP id
+ f17-20020a67ea91000000b00443873a16b8mr5385865vso.30.1688951471490; Sun, 09
+ Jul 2023 18:11:11 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230704084013.21749-1-jason.chien@sifive.com>
 In-Reply-To: <20230704084013.21749-1-jason.chien@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 10 Jul 2023 11:07:38 +1000
-Message-ID: <CAKmqyKOiaVzLy_KdZpDv1pMYx4C7HtHM39c=QrT4j53AvBUj5g@mail.gmail.com>
+Date: Mon, 10 Jul 2023 11:10:45 +1000
+Message-ID: <CAKmqyKOGwGcswdXBmMFHjvjBSz3b0-joTAoNf5rW3RvSKFG+8Q@mail.gmail.com>
 Subject: Re: [PATCH] target/riscv: Add Zihintntl extension ISA string to DTS
 To: Jason Chien <jason.chien@sifive.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
@@ -67,8 +67,8 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2c;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92c;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92c.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -122,7 +122,8 @@ ch
 >
 > Signed-off-by: Jason Chien <jason.chien@sifive.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks for the patch, do you mind rebasing it on
+https://github.com/alistair23/qemu/tree/riscv-to-apply.next
 
 Alistair
 
