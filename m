@@ -4,61 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65094EB64D9
-	for <qemu-riscv@archiver.kernel.org>; Mon, 10 Jul 2023 11:21:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF914EB64D9
+	for <qemu-riscv@archiver.kernel.org>; Mon, 10 Jul 2023 11:22:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qIowB-0005tl-Gu; Mon, 10 Jul 2023 07:20:15 -0400
+	id 1qIoyW-0000FQ-0n; Mon, 10 Jul 2023 07:22:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@gmail.com>)
- id 1qIow8-0005sv-8c; Mon, 10 Jul 2023 07:20:12 -0400
-Received: from mail-qk1-x735.google.com ([2607:f8b0:4864:20::735])
+ id 1qIoyT-0000EN-Pb; Mon, 10 Jul 2023 07:22:37 -0400
+Received: from mail-qk1-x732.google.com ([2607:f8b0:4864:20::732])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@gmail.com>)
- id 1qIow4-0007Ie-W5; Mon, 10 Jul 2023 07:20:11 -0400
-Received: by mail-qk1-x735.google.com with SMTP id
- af79cd13be357-7672303c831so397932985a.2; 
- Mon, 10 Jul 2023 04:20:05 -0700 (PDT)
+ id 1qIoyS-0007pB-AW; Mon, 10 Jul 2023 07:22:37 -0400
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-7679d444210so332343985a.2; 
+ Mon, 10 Jul 2023 04:22:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1688988004; x=1691580004;
+ d=gmail.com; s=20221208; t=1688988154; x=1691580154;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1zXGzS/0sE5e+QYS0lYZsTi/l4GhadTivJcFUlQANPE=;
- b=In7plE3TSYyUI5g4EoQDf6j0cBc4wOS2bMTQFSuEZNVjxHcEgob12YJ+LG/kcOyX2v
- l2aoxwZMsIB4yEyH+cTp/LrM8RS+QvjqgEJiLPwfYQ6dYIzYjXAsNzIPtIf61AXe2H5V
- /wqCSb/DDACTWJvAAGadFTQ3GUJqOKN5f3CQ1GbCZHX2R7wAax9d7lnVfdjkE8Zz+kDR
- qlVPLzCGHfLX2HV6OMbo9ZlNyoL0VrOemFFEejn2PqM+Xqdw9chlL4vgmxdndOWbmgrB
- fSgXE19qYjvm1KDyWqOYmL9/rMe6H2pHRkxVv9okVsJtw4vlKoyhSMw9hsUozP89C4Y2
- CHWA==
+ bh=gUvbCVY/317D3QeuSshcE0x5zBgLgj5qT7WR3kC5t/k=;
+ b=Um27WrSPHbNEafzMAvzJhRAnxv1ZF+D+9dh11lsLvlil51+KIJsleElmDwzsdB/JS7
+ qx/N63CgXeahtWlodxIlVL7zFJev5nQr/C6GMCQAnJ5TXjzb5dHDhfC283Rc/7LvVssJ
+ 1pXX5oZ0iJhvBjpTaJ4hByf67VpX2iL+iIfGtHH+H7qe6i9CTH/pksPCxTKks2BdC6Jm
+ WfxHS8uLLPFDh0X3w96YQslQbZNkVb8QVoFMh9KIldFaB/68Rdxb/pqFpa9GNR8lIVuO
+ 043dg4RjMGEN2pTQmAAjZvJZVrQAaoJP0jo3d5chj8hjR1IImGVeX7h4IbEADrqaUCbZ
+ LDfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688988004; x=1691580004;
+ d=1e100.net; s=20221208; t=1688988154; x=1691580154;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1zXGzS/0sE5e+QYS0lYZsTi/l4GhadTivJcFUlQANPE=;
- b=c36qjeZJg1C/u9ZkVA/h/4It1sJhq/8sh6e5tEXK8hIbhgQmOUTPT7WwQgTrpsSDOe
- SQGuIJiPYiyzl9YkXQ/tga2A30D8neh8E+66IZEWkAdjTgIiSNP6biHUQ+Pz2zwOfjh8
- SDKKkWvitUFyjFmk2SFwXQ07fKPxu4fK38jUjBvFPFQlbhQHRtdnJTU1EdpbvIxNQqol
- NuZZSMECXpGCAJ5Ci7WIuAO9Q073/z2qYqkHWu/fOZqbo6mG3KVZ4GLBmTZjArOBh3iA
- ifQR7VktHrmleItZAtvpBeqEjY5ViXH49pDt9JMO2bFi0TWisFl7WC2H08LGab0hM6hz
- f1Dg==
-X-Gm-Message-State: ABy/qLbVF4ppQfl24UYZjgylHF2E3gZ9iRQl9PJ7bB2qpc0yXFpXIgBF
- udAw0FGKhJGy59amijxkWy/ptayf6Ze93jOpx/U=
-X-Google-Smtp-Source: APBJJlG188g3oV4E7tb4B+AjdMj2MIC7lQjaUlO0egUq0rdKsqg6+QWbBf4pIXIwbpSC87ojpuN51w7urwQhagfcLOg=
-X-Received: by 2002:a05:620a:198a:b0:765:abeb:a13e with SMTP id
- bm10-20020a05620a198a00b00765abeba13emr14143181qkb.60.1688988004321; Mon, 10
- Jul 2023 04:20:04 -0700 (PDT)
+ bh=gUvbCVY/317D3QeuSshcE0x5zBgLgj5qT7WR3kC5t/k=;
+ b=WFicDaU1C72wqv/JZj0o3m16H1Jnw5LwFuPo75jhw7H8Av6pP+QuwOM/Vw9zF0PuK+
+ GR/J9XHVWjaPk4dkIhIk5DSlb393cpuV1ZNRT7YXe9iqO/+uQFJF+QEDgsgqiAjTRBc1
+ RAgyXeSIKe7SGkpDn7BJfx+PcfU7CiDyT3jBWUx+atQLrqOfdNyL8FKO+hjQn9AO2kUi
+ npTCWMhcuY3gQda3CymUUM1iF/4c125fjMESkkxh7pioZcXkoomwjPfgvyfkntAorKUY
+ YXTuvLUGN+L8LQFJPP95rPkufZXifIMOpM85G4Xa8iQCz90/MLOgP8hpJZ2ibJ55BPtQ
+ mhLA==
+X-Gm-Message-State: ABy/qLY28hz62Gw/3YiLwWNysFXG8KSuzHwM1KXqXrOOaz89zZQL0zDa
+ kYytbBz+GuA5nC7HPt4zaCp4zMCYC7XQoubMwsw=
+X-Google-Smtp-Source: APBJJlG9Gb82RrGg3hTjTPiNluH2VZc14PdI2qOGaM6xAu6qVPDgxDiUeLmR0MFjZ5O13v3r7OfNxCGQvp1YdjRrzRE=
+X-Received: by 2002:a05:620a:290d:b0:767:250d:f083 with SMTP id
+ m13-20020a05620a290d00b00767250df083mr13847203qkp.78.1688988154493; Mon, 10
+ Jul 2023 04:22:34 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230705133139.54419-1-philmd@linaro.org>
- <20230705133139.54419-3-philmd@linaro.org>
-In-Reply-To: <20230705133139.54419-3-philmd@linaro.org>
+ <20230705133139.54419-4-philmd@linaro.org>
+In-Reply-To: <20230705133139.54419-4-philmd@linaro.org>
 From: =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@gmail.com>
-Date: Mon, 10 Jul 2023 15:19:53 +0400
-Message-ID: <CAJ+F1CJ_vkZRK4F7mYY_+rFZmHMuO6ivB8L=aemJswgrvUhHWA@mail.gmail.com>
-Subject: Re: [PATCH 2/4] chardev/char-fe: Clarify qemu_chr_fe_add_watch
- 'condition' arg is a mask
+Date: Mon, 10 Jul 2023 15:22:23 +0400
+Message-ID: <CAJ+F1CKeWVD=ZF_J6X7SJzXD3PBPEV7EXoXhNVQ7cXPJYo7+Qw@mail.gmail.com>
+Subject: Re: [PATCH 3/4] chardev/char-fe: Document FEWatchFunc typedef
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, Gerd Hoffmann <kraxel@redhat.com>,
  Joel Stanley <joel@jms.id.au>, Markus Armbruster <armbru@redhat.com>,
@@ -72,9 +71,9 @@ Cc: qemu-devel@nongnu.org, Gerd Hoffmann <kraxel@redhat.com>,
  "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
  qemu-arm@nongnu.org, 
  =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
-Content-Type: multipart/alternative; boundary="00000000000007134b0600202ada"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::735;
- envelope-from=marcandre.lureau@gmail.com; helo=mail-qk1-x735.google.com
+Content-Type: multipart/alternative; boundary="000000000000fa829f06002032a3"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::732;
+ envelope-from=marcandre.lureau@gmail.com; helo=mail-qk1-x732.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,108 +96,114 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---00000000000007134b0600202ada
+--000000000000fa829f06002032a3
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+
+Hi
 
 On Wed, Jul 5, 2023 at 5:33=E2=80=AFPM Philippe Mathieu-Daud=C3=A9 <philmd@=
 linaro.org>
 wrote:
 
-> qemu_chr_fe_add_watch() can poll for multiple conditions.
-> It's @cond argument is a combination of all the condition bits.
->
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 > ---
->  include/chardev/char-fe.h | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+>  include/chardev/char-fe.h | 14 ++++++++++++++
+>  1 file changed, 14 insertions(+)
 >
 > diff --git a/include/chardev/char-fe.h b/include/chardev/char-fe.h
-> index 8c420fa36e..309960046a 100644
+> index 309960046a..ec3f706a14 100644
 > --- a/include/chardev/char-fe.h
 > +++ b/include/chardev/char-fe.h
-> @@ -179,8 +179,8 @@ typedef gboolean (*FEWatchFunc)(void *do_not_use,
-> GIOCondition condition, void *
+> @@ -175,6 +175,20 @@ void qemu_chr_fe_printf(CharBackend *be, const char
+> *fmt, ...)
+>      G_GNUC_PRINTF(2, 3);
+>
+>
+> +/**
+> + * FEWatchFunc: a #GSourceFunc called when any conditions requested by
+> + *              qemu_chr_fe_add_watch() is satisfied.
+> + * @do_not_use: depending on the underlying chardev, a GIOChannel or a
+> + *              QIOChannel. DO NOT USE!
+> + * @cond: bitwise combination of conditions watched and satisfied
+> + *              before calling this callback.
+> + * @data: user data passed at creation to qemu_chr_fe_add_watch(). Can
+> + *              be NULL.
+> + *
+> + * Returns: G_SOURCE_REMOVE if the GSource should be removed from the
+> + *              main loop, or G_SOURCE_CONTINUE to leave the GSource in
+> + *              the main loop.
+> + */
+>  typedef gboolean (*FEWatchFunc)(void *do_not_use, GIOCondition condition=
+,
+> void *data);
 >
 >  /**
->   * qemu_chr_fe_add_watch:
-> - * @cond: the condition to poll for
->
-- * @func: the function to call when the condition happens
-> + * @cond: bitwise combination of conditions to poll for
-> + * @func: the function to call when the conditions are satisfied
->
-
-Not really worth imo, do you want to also fix all the io/ docs for
-@condition? and probably elsewhere...
-
-The rewording of @func isn't much clearer either... "any of the conditions"=
-?
-
-
->   * @user_data: the opaque pointer to pass to @func
->   *
->   * If the backend is connected, create and add a #GSource that fires
 > --
 > 2.38.1
 >
 >
 >
+Acked-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
 
 --=20
 Marc-Andr=C3=A9 Lureau
 
---00000000000007134b0600202ada
+--000000000000fa829f06002032a3
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Wed, Jul 5, 2023 at 5:33=E2=80=AFP=
-M Philippe Mathieu-Daud=C3=A9 &lt;<a href=3D"mailto:philmd@linaro.org">phil=
-md@linaro.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" sty=
-le=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddi=
-ng-left:1ex">qemu_chr_fe_add_watch() can poll for multiple conditions.<br>
-It&#39;s @cond argument is a combination of all the condition bits.<br>
-<br>
-Signed-off-by: Philippe Mathieu-Daud=C3=A9 &lt;<a href=3D"mailto:philmd@lin=
-aro.org" target=3D"_blank">philmd@linaro.org</a>&gt;<br>
+<div dir=3D"ltr"><div dir=3D"ltr">Hi<br></div><br><div class=3D"gmail_quote=
+"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Jul 5, 2023 at 5:33=E2=80=
+=AFPM Philippe Mathieu-Daud=C3=A9 &lt;<a href=3D"mailto:philmd@linaro.org">=
+philmd@linaro.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote"=
+ style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);p=
+adding-left:1ex">Signed-off-by: Philippe Mathieu-Daud=C3=A9 &lt;<a href=3D"=
+mailto:philmd@linaro.org" target=3D"_blank">philmd@linaro.org</a>&gt;<br>
 ---<br>
-=C2=A0include/chardev/char-fe.h | 4 ++--<br>
-=C2=A01 file changed, 2 insertions(+), 2 deletions(-)<br>
+=C2=A0include/chardev/char-fe.h | 14 ++++++++++++++<br>
+=C2=A01 file changed, 14 insertions(+)<br>
 <br>
 diff --git a/include/chardev/char-fe.h b/include/chardev/char-fe.h<br>
-index 8c420fa36e..309960046a 100644<br>
+index 309960046a..ec3f706a14 100644<br>
 --- a/include/chardev/char-fe.h<br>
 +++ b/include/chardev/char-fe.h<br>
-@@ -179,8 +179,8 @@ typedef gboolean (*FEWatchFunc)(void *do_not_use, GIOCo=
-ndition condition, void *<br>
+@@ -175,6 +175,20 @@ void qemu_chr_fe_printf(CharBackend *be, const char *f=
+mt, ...)<br>
+=C2=A0 =C2=A0 =C2=A0G_GNUC_PRINTF(2, 3);<br>
+<br>
+<br>
++/**<br>
++ * FEWatchFunc: a #GSourceFunc called when any conditions requested by<br>
++ *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_chr_fe_add_watch()=
+ is satisfied.<br>
++ * @do_not_use: depending on the underlying chardev, a GIOChannel or a<br>
++ *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 QIOChannel. DO NOT USE!=
+<br>
++ * @cond: bitwise combination of conditions watched and satisfied<br>
++ *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 before calling this cal=
+lback.<br>
++ * @data: user data passed at creation to qemu_chr_fe_add_watch(). Can<br>
++ *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 be NULL.<br>
++ *<br>
++ * Returns: G_SOURCE_REMOVE if the GSource should be removed from the<br>
++ *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 main loop, or G_SOURCE_=
+CONTINUE to leave the GSource in<br>
++ *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 the main loop.<br>
++ */<br>
+=C2=A0typedef gboolean (*FEWatchFunc)(void *do_not_use, GIOCondition condit=
+ion, void *data);<br>
 <br>
 =C2=A0/**<br>
-=C2=A0 * qemu_chr_fe_add_watch:<br>
-- * @cond: the condition to poll for <br></blockquote><blockquote class=3D"=
-gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(20=
-4,204,204);padding-left:1ex">
-- * @func: the function to call when the condition happens<br>
-+ * @cond: bitwise combination of conditions to poll for<br>
-+ * @func: the function to call when the conditions are satisfied<br></bloc=
-kquote><div><br></div><div>Not really worth imo, do you want to also fix al=
-l the io/ docs for @condition? and probably elsewhere...<br></div></div><di=
-v class=3D"gmail_quote"><br></div><div class=3D"gmail_quote">The rewording =
-of @func isn&#39;t much clearer either... &quot;any of the conditions&quot;=
-?<br></div><div class=3D"gmail_quote">=C2=A0<br><blockquote class=3D"gmail_=
-quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,=
-204);padding-left:1ex">
-=C2=A0 * @user_data: the opaque pointer to pass to @func<br>
-=C2=A0 *<br>
-=C2=A0 * If the backend is connected, create and add a #GSource that fires<=
-br>
 -- <br>
 2.38.1<br>
 <br>
 <br>
-</blockquote></div><br clear=3D"all"><br><span class=3D"gmail_signature_pre=
-fix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature">Marc-Andr=C3=
-=A9 Lureau<br></div></div>
+</blockquote></div><div><br></div><div>Acked-by: Marc-Andr=C3=A9 Lureau &lt=
+;<a href=3D"mailto:marcandre.lureau@redhat.com">marcandre.lureau@redhat.com=
+</a>&gt;</div><br><span class=3D"gmail_signature_prefix">-- </span><br><div=
+ dir=3D"ltr" class=3D"gmail_signature">Marc-Andr=C3=A9 Lureau<br></div></di=
+v>
 
---00000000000007134b0600202ada--
+--000000000000fa829f06002032a3--
 
