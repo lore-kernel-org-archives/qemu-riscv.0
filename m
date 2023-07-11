@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 814B1EB64DD
-	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Jul 2023 08:30:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78749EB64DC
+	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Jul 2023 12:15:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qJ8ln-0006n5-B4; Tue, 11 Jul 2023 04:30:51 -0400
+	id 1qJCGm-0001N6-P5; Tue, 11 Jul 2023 08:15:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qJ8lk-0006mt-Gz
- for qemu-riscv@nongnu.org; Tue, 11 Jul 2023 04:30:49 -0400
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qJCGj-0001ML-IY
+ for qemu-riscv@nongnu.org; Tue, 11 Jul 2023 08:15:02 -0400
+Received: from mail-lj1-x229.google.com ([2a00:1450:4864:20::229])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qJ8lT-0001Pc-Si
- for qemu-riscv@nongnu.org; Tue, 11 Jul 2023 04:30:48 -0400
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-3fbca8935bfso55625815e9.3
- for <qemu-riscv@nongnu.org>; Tue, 11 Jul 2023 01:30:30 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qJCGg-000566-Vn
+ for qemu-riscv@nongnu.org; Tue, 11 Jul 2023 08:15:01 -0400
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2b6f97c7115so85638361fa.2
+ for <qemu-riscv@nongnu.org>; Tue, 11 Jul 2023 05:14:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1689064229; x=1691656229;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=yOlWtKVl0rW4JNCIuxRHSNe9H2DcX1nbHL6z9rExvlU=;
- b=R0jVyltAfDpv3+YG7j/uQDxxywb9mKfqrc4ltkIgoW2ZNIVxkpZ0vvM/gLq8n0LnFP
- //I4dAXfjM7o4kB12gg+D9zXYb7hk4fWL3J74m5Z6COlPnzM/gsw2Zs3AMvHL1Sgs1oL
- jvbayl7wboYaBqRhlyRCddvBHr7/+kyb+9gCsm7PzJKwQjIkxwcC6xB5gF6P22Acxew/
- VhktBD6rIiBN/Vz+3Z1dLUWSWenlefsI49SJ0+6Jm6Ctk5mDabrVye2sBiply8yu03Bu
- Y7IPg+hv21Ce+NsOvRasb17x1PY9JaXzgkM2O8ipXqniMjO9iE13jqrW9K/f1hjOm0g8
- mxwg==
+ d=linaro.org; s=google; t=1689077696; x=1691669696;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=s1/TjbYAfFSJ50EXdWkfI4zXmq+X44y5XBsdJS5iKns=;
+ b=bfHdYVgiNYHqnQxm9VCTLYKJmeiZD490KXK4s77Ga9lAmXSBvxNAsaejbsVJDqu8Xw
+ ACqmGhaQHdv4kOT3skYuVANws0Rg+UIqdQI6BmvvPrddv2SGJpuM6tFQRcyCr1eKbD/P
+ yJwI7cAJOjnyIteY3WIw5iaUfv9I6dhAUqx7U821u7EeSZnDeBxAc48vEzeWXSML4Fbw
+ XgUKBHR8HNUk5waaPNJ69O9WvQWWSB3tBjkMQ+1dUUy/djkpWt9NHYAvoEb12f+yUsSY
+ ljkesHEN1bLa+880uEAsf86/Am7V+uay6E9oA9bS36Qe+Hi3HbcYddGzCrRVz2Vo4pIy
+ FVDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689064229; x=1691656229;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yOlWtKVl0rW4JNCIuxRHSNe9H2DcX1nbHL6z9rExvlU=;
- b=krWQsPh7bbg5oQQLhdzlLGJ1AFrmWGsAtqlkrAqG2g/USGy/2qSLRrJbVvYja+txlG
- YKNwahxMjDeyJaVIiup+iD21xSeHHZqcFd4TyzeCVFA+ya+VOYTYfbF3WPUkKzkWlxsE
- pmVCukVZP6UV/vOukuBPku+04vccK8vt8muf589ppTNdZXAmH/1xNVFlX7Exm3t1ZLmE
- PfwXw1WzESeuxf9xMxqSdgVIk2L1uNXFpvIM0LVTljghFszla++IDq4baXShMN9osncS
- IseS6Ozh+JLdD6Q5maQ4ekII2BCUrqTkf9/I1m6Ajx7qRfwqgdaDu44BzL6ghpplCd85
- HeEg==
-X-Gm-Message-State: ABy/qLY8MYh804dwQHWVHeP6uadhemx/EBgd0/1Oj9wLqttXrVejI9sP
- dlzArwU0EMf3b20l+F0JybQ5pw==
-X-Google-Smtp-Source: APBJJlEQbDWlY6T/VlKxpGy7KqT6OnEB8VSkI8RT6s5IRlUdRKqntqQY/1JzGbWRCOe8Owbc7m1XUQ==
-X-Received: by 2002:adf:f60c:0:b0:311:1aee:4e1d with SMTP id
- t12-20020adff60c000000b003111aee4e1dmr13725658wrp.33.1689064229427; 
- Tue, 11 Jul 2023 01:30:29 -0700 (PDT)
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ d=1e100.net; s=20221208; t=1689077696; x=1691669696;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=s1/TjbYAfFSJ50EXdWkfI4zXmq+X44y5XBsdJS5iKns=;
+ b=K1dNejXvJ+lHB6sS6UAVZMYoI38WtNFdsjLAXNFjo1KXnsgU78BcvoRK84i1Hu8vuq
+ H1BMZnaQIMyBAaJUgIAu93qG+CrSlXn7pKykeEF9ppKSoJlrOy1eFglbrpF4x7HASGPm
+ 4NZ7Rmn5ApqcryFgh2OkTZiR8eTRcacvi8MaiZJlvZ7La89qfEgEotKXQQmkd7GczOIq
+ JiL2GPsYlYcDkDuJ4AkI9bhSgNGeuRobh00V0HyNNYmYM4EdG9K8f70NvnvZq3qv+88y
+ 9GgF0Ad0QBBrWsQDz3jKQIlNusRf7QXIybQbA0yaNS0lgqeCLCi40R0bpkedYRlVE74a
+ W6wA==
+X-Gm-Message-State: ABy/qLZ3vHsMUFsenS67fHn2PGM7QlFUvDiSy2n+FwAK1imWIf51G3ty
+ vTsiIvKYTYs8A34Gjx0WCOZcGg==
+X-Google-Smtp-Source: APBJJlE2cOqgCGsPe9bU4prJ2pKpJ/CKdIgtIjCIdFu1Om/Wg2aq9kHbCh+K6Zm5C37kTK7Olgz7Fg==
+X-Received: by 2002:a2e:9807:0:b0:2b6:e2aa:8fc2 with SMTP id
+ a7-20020a2e9807000000b002b6e2aa8fc2mr11593798ljj.46.1689077696411; 
+ Tue, 11 Jul 2023 05:14:56 -0700 (PDT)
+Received: from m1x-phil.lan ([176.187.194.156])
  by smtp.gmail.com with ESMTPSA id
- l6-20020adffe86000000b0031435731dfasm1596876wrr.35.2023.07.11.01.30.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Jul 2023 01:30:29 -0700 (PDT)
-Date: Tue, 11 Jul 2023 10:30:28 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-riscv <qemu-riscv@nongnu.org>, Andrea Bolognani <abologna@redhat.com>
-Subject: Re: RFC: QEMU rv64/rv32 CPU, 'max' CPU and profile support
-Message-ID: <20230711-c2dd60b2d7d86712dc8a1c59@orel>
-References: <35a847a1-2720-14ab-61b0-c72d77d5f43b@ventanamicro.com>
+ o16-20020a1709062e9000b00992ea405a79sm1072478eji.166.2023.07.11.05.14.55
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Tue, 11 Jul 2023 05:14:56 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH-for-8.2 v3 00/16] target/riscv: Allow building without TCG
+ (KVM-only so far)
+Date: Tue, 11 Jul 2023 14:14:37 +0200
+Message-Id: <20230711121453.59138-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.38.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <35a847a1-2720-14ab-61b0-c72d77d5f43b@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
- envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x32e.google.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::229;
+ envelope-from=philmd@linaro.org; helo=mail-lj1-x229.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -92,65 +91,110 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Jul 10, 2023 at 02:53:12PM -0300, Daniel Henrique Barboza wrote:
-> Hi,
-> 
-> We don't have a 'max' cpu type in riscv32 and riscv64. This is a special,
-> fictional CPU type that has all possible extensions enabled. It can be
-> either an alias for a real CPU or a new CPU type. It's used by tooling
-> such as libvirt for capabilities probing.
-> 
-> Well, in our case it can't be an alias because we don't have any CPU type
-> that enables all extensions. Which brings me to my first question:
-> what's the criteria for marking a certain extension default true/false
-> in rv32/rv64/rv128?
-> 
-> E.g. this is the riscv,isa DT for rv64:
-> 
-> rv64imafdch_zicbom_zicboz_zicsr_zifencei_zihintpause_zawrs_zfa_zca_zcd_zba_zbb_zbc_zbs_sstc_svadu
-> 
-> It has a lot of extensions but it's missing some common ones like svinval
-> and smstateen.
-> 
-> We can add/remove some extensions from these generic CPUs, document it
-> and be done with it. I want to propose a different design though:
-> 
-> 1 - introduce the 'max' CPU. I guess we'll need some prep work in how
-> the extensions are being declared/stored in the code. I'll work on
-> it;
-> 
-> 2 - introduce rva23U64/rva23S64. I would like to add a new 'profile' option
-> for generic CPUs, with '-cpu rv64,profile=rva23U64' enabling a whole set
-> of extensions. We would also support enabling optional profile extensions.
-> Yes, we don't have all the profile extensions available yet (neither does
-> the kernel AFAIK) but nothing is stopping us from adding the base
-> framework;
-> 
-> 3 - reduce the generic CPUs up to the minimum required to boot Linux.
-> Yes, a rather arbitrary criteria, but Linux is the most common OS used
-> by RISC-V QEMU currently so we'll go with what most people are using.
-> This would reduce rv64 to "rv64ima".
-> 
-> The end result is that we would have a max extensions CPU, a barebones
-> generic CPU that can be fully customizable from the ground up, and
-> a profile option to allow users to boost the generic CPUs with a
-> set of extensions. We will avoid having to deal with generic CPUs having
-> an (apparently) arbitrary set of extensions.
-> 
-> I don't think we'll have too much opposition on adding (1) so I'll get
-> on it. I really would like to hear about (2) and (3). (3) will break
-> users that are using rv64 while counting with that whole set of extensions
-> that are being enabled by default, but this is why we're going to add
-> (2) first.
+v3: Rebased on master
+    (commit 94d68c1136, merge tag 'pull-riscv-to-apply-20230710-1')
 
-Everything sounds good to me, once we've agreed on a proper "minimal
-Linux supporting" base to map rv64 to. One thing I would change, though,
-is rather than have an enum property 'profile', I'd create booleans
-rva22S64, rva23S64, ... Keeping cpu properties boolean simplifies
-introspection. And, when we have mutually exclusive profiles, QEMU can
-error out at cpu feature finalize time, but, when they're not mutually
-exclusive, then why not allow more than one to be selected.
+Philippe Mathieu-Daudé (16):
+  target/riscv: Remove unuseful KVM stubs
+  target/riscv: Remove unused 'instmap.h' header in translate.c
+  target/riscv: Restrict sysemu specific header to user emulation
+  target/riscv: Restrict 'rv128' machine to TCG accelerator
+  target/riscv: Move sysemu-specific files to target/riscv/sysemu/
+  target/riscv: Restrict riscv_cpu_do_interrupt() to sysemu
+  target/riscv: Move TCG-specific files to target/riscv/tcg/
+  target/riscv: Move TCG-specific cpu_get_tb_cpu_state() to tcg/cpu.c
+  target/riscv: Expose some 'trigger' prototypes from debug.c
+  target/riscv: Extract TCG-specific code from debug.c
+  target/riscv: Move sysemu-specific debug files to target/riscv/sysemu/
+  target/riscv: Expose riscv_cpu_pending_to_irq() from cpu_helper.c
+  target/riscv: Move TCG/sysemu-specific code to tcg/sysemu/cpu_helper.c
+  target/riscv: Move sysemu-specific code to sysemu/cpu_helper.c
+  target/riscv: Restrict TCG-specific prototype declarations
+  gitlab-ci.d/crossbuilds: Add KVM riscv64 cross-build jobs
 
-Thanks,
-drew
+ target/riscv/cpu.h                            |   27 +-
+ target/riscv/internals.h                      |    4 +
+ target/riscv/{ => sysemu}/debug.h             |    6 +
+ target/riscv/{ => sysemu}/instmap.h           |    0
+ target/riscv/{ => sysemu}/kvm_riscv.h         |    0
+ target/riscv/{ => sysemu}/pmp.h               |    0
+ target/riscv/{ => sysemu}/pmu.h               |    0
+ target/riscv/{ => sysemu}/time_helper.h       |    0
+ target/riscv/{ => tcg}/XVentanaCondOps.decode |    0
+ target/riscv/{ => tcg}/insn16.decode          |    0
+ target/riscv/{ => tcg}/insn32.decode          |    0
+ target/riscv/{ => tcg}/xthead.decode          |    0
+ hw/riscv/virt.c                               |    2 +-
+ target/riscv/cpu.c                            |   35 +-
+ target/riscv/cpu_helper.c                     | 1692 +----------------
+ target/riscv/csr.c                            |    6 +-
+ target/riscv/{ => sysemu}/arch_dump.c         |    0
+ target/riscv/sysemu/cpu_helper.c              |  863 +++++++++
+ target/riscv/{ => sysemu}/debug.c             |  153 +-
+ target/riscv/{ => sysemu}/kvm-stub.c          |    0
+ target/riscv/{ => sysemu}/kvm.c               |    4 +-
+ target/riscv/{ => sysemu}/machine.c           |    0
+ target/riscv/{ => sysemu}/monitor.c           |    0
+ target/riscv/{ => sysemu}/pmp.c               |    0
+ target/riscv/{ => sysemu}/pmu.c               |    0
+ target/riscv/{ => sysemu}/riscv-qmp-cmds.c    |    0
+ target/riscv/{ => sysemu}/time_helper.c       |    0
+ target/riscv/{ => tcg}/bitmanip_helper.c      |    0
+ target/riscv/tcg/cpu.c                        |   98 +
+ target/riscv/{ => tcg}/crypto_helper.c        |    0
+ target/riscv/{ => tcg}/fpu_helper.c           |    0
+ target/riscv/{ => tcg}/m128_helper.c          |    0
+ target/riscv/{ => tcg}/op_helper.c            |    0
+ target/riscv/tcg/sysemu/cpu_helper.c          |  765 ++++++++
+ target/riscv/tcg/sysemu/debug.c               |  165 ++
+ target/riscv/tcg/tcg-stub.c                   |   31 +
+ target/riscv/{ => tcg}/translate.c            |    1 -
+ target/riscv/{ => tcg}/vector_helper.c        |    0
+ target/riscv/{ => tcg}/zce_helper.c           |    0
+ .gitlab-ci.d/crossbuilds.yml                  |    8 +
+ target/riscv/meson.build                      |   33 +-
+ target/riscv/sysemu/meson.build               |   13 +
+ target/riscv/tcg/meson.build                  |   22 +
+ target/riscv/tcg/sysemu/meson.build           |    4 +
+ 44 files changed, 2038 insertions(+), 1894 deletions(-)
+ rename target/riscv/{ => sysemu}/debug.h (96%)
+ rename target/riscv/{ => sysemu}/instmap.h (100%)
+ rename target/riscv/{ => sysemu}/kvm_riscv.h (100%)
+ rename target/riscv/{ => sysemu}/pmp.h (100%)
+ rename target/riscv/{ => sysemu}/pmu.h (100%)
+ rename target/riscv/{ => sysemu}/time_helper.h (100%)
+ rename target/riscv/{ => tcg}/XVentanaCondOps.decode (100%)
+ rename target/riscv/{ => tcg}/insn16.decode (100%)
+ rename target/riscv/{ => tcg}/insn32.decode (100%)
+ rename target/riscv/{ => tcg}/xthead.decode (100%)
+ rename target/riscv/{ => sysemu}/arch_dump.c (100%)
+ create mode 100644 target/riscv/sysemu/cpu_helper.c
+ rename target/riscv/{ => sysemu}/debug.c (83%)
+ rename target/riscv/{ => sysemu}/kvm-stub.c (100%)
+ rename target/riscv/{ => sysemu}/kvm.c (99%)
+ rename target/riscv/{ => sysemu}/machine.c (100%)
+ rename target/riscv/{ => sysemu}/monitor.c (100%)
+ rename target/riscv/{ => sysemu}/pmp.c (100%)
+ rename target/riscv/{ => sysemu}/pmu.c (100%)
+ rename target/riscv/{ => sysemu}/riscv-qmp-cmds.c (100%)
+ rename target/riscv/{ => sysemu}/time_helper.c (100%)
+ rename target/riscv/{ => tcg}/bitmanip_helper.c (100%)
+ create mode 100644 target/riscv/tcg/cpu.c
+ rename target/riscv/{ => tcg}/crypto_helper.c (100%)
+ rename target/riscv/{ => tcg}/fpu_helper.c (100%)
+ rename target/riscv/{ => tcg}/m128_helper.c (100%)
+ rename target/riscv/{ => tcg}/op_helper.c (100%)
+ create mode 100644 target/riscv/tcg/sysemu/cpu_helper.c
+ create mode 100644 target/riscv/tcg/sysemu/debug.c
+ create mode 100644 target/riscv/tcg/tcg-stub.c
+ rename target/riscv/{ => tcg}/translate.c (99%)
+ rename target/riscv/{ => tcg}/vector_helper.c (100%)
+ rename target/riscv/{ => tcg}/zce_helper.c (100%)
+ create mode 100644 target/riscv/sysemu/meson.build
+ create mode 100644 target/riscv/tcg/meson.build
+ create mode 100644 target/riscv/tcg/sysemu/meson.build
+
+-- 
+2.38.1
+
 
