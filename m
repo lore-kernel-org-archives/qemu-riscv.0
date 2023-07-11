@@ -4,90 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41DDEEB64DC
-	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Jul 2023 17:01:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BA99C001DC
+	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Jul 2023 17:01:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qJGjH-0001nd-BV; Tue, 11 Jul 2023 13:00:47 -0400
+	id 1qJGio-0001Li-Hn; Tue, 11 Jul 2023 13:00:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1qJGjE-0001bG-M4
- for qemu-riscv@nongnu.org; Tue, 11 Jul 2023 13:00:44 -0400
-Received: from mail-pg1-x52f.google.com ([2607:f8b0:4864:20::52f])
+ id 1qJGil-0001JB-QL
+ for qemu-riscv@nongnu.org; Tue, 11 Jul 2023 13:00:15 -0400
+Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1qJGjC-0001CW-47
- for qemu-riscv@nongnu.org; Tue, 11 Jul 2023 13:00:44 -0400
-Received: by mail-pg1-x52f.google.com with SMTP id
- 41be03b00d2f7-55b5a3915f5so4166842a12.0
- for <qemu-riscv@nongnu.org>; Tue, 11 Jul 2023 10:00:40 -0700 (PDT)
+ id 1qJGij-00010q-HM
+ for qemu-riscv@nongnu.org; Tue, 11 Jul 2023 13:00:15 -0400
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-666ecf9a081so5223119b3a.2
+ for <qemu-riscv@nongnu.org>; Tue, 11 Jul 2023 10:00:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1689094840; x=1691686840;
+ d=sifive.com; s=google; t=1689094812; x=1691686812;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FBifTLJyNVrHXcwQTPdSLju8n+Q3WGNj+ogm/u94S6U=;
- b=lJP78Xd+RYaxGo4GJtgDIqz2uCLgfxaaZdoBPNqrslZbbGNLmJYO27QQFkqLNFPx4e
- +KljWRoOAsvSV0GEWjPuf0D6nDP/+EFwhhUZi7R94th1k5Pz8vt05NaNYfbLxL3Oy/R/
- hH96zmYq6nsmkk39UhOM6lB0Tab7s7pvbtwyjnyDbaXWG1scDrFUHdNuf69acST7Vw2Q
- +7wIPGGhHkwl4E959/UJSKQ194zHpGoGcUiwFgXWisPCbnar6KW/qUlNO4v/8DtR3eCz
- N852er9Mokj5LDmpEVuOcUpI3i9kESkQLH7XkVncOlopH8SzbsiQyTusCdmtRzLOGBdO
- JCug==
+ bh=20zjHcE4T1HdyN5trsH0CcJ3coRR5e50EgCGbZ5ivBw=;
+ b=h+DPKHrf39UEsr7PcC4CsXpyQ/bGEN/o2iDcDiU3OFBgI+dR2ljqXEKNeSF7+h5e9J
+ o1BcWYpIsVFwqtRKpa0C98hRHLZs1tDunHB/SPtAq47+KUm8HTy6fn8VfX+rrofEQ7Ie
+ WC9bnpz9qYAK9Dv+w4vMsRSvlAlx6UMbLHPwQMHrNEWIlM5odYPaN5gzxu0VWmHw6kx2
+ SvIFinu1RAcvOgWYpChIe/3BvOSsQ+CISTcOyiqZiwrCk0u4W5udaPAq2afrPIHss6IF
+ oP+mM6V4vclghdKq9rqu0V89+7yPJi3R367zcV5Hg1mpwWW9faVasWylXqN4CWeAtfdw
+ Zoqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689094840; x=1691686840;
+ d=1e100.net; s=20221208; t=1689094812; x=1691686812;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FBifTLJyNVrHXcwQTPdSLju8n+Q3WGNj+ogm/u94S6U=;
- b=Bo2POpuEjx6lXbLzuepWLkU5Bhz5wyL7+aRbA3YCBKeqxI4nUlULjz9FsTx94Oqj6R
- 7miUJNgSAaXyHKErn5ziOOUp7q46eTKjyM78gNu0Opl2l/KbCz6bADunjscUDTfybQdH
- M3oT5ojgs8NfrVvqdnwhqLAnQuKa3PfCRg3w+58ml+irBz+A2JDys1N7efQoVQJHM+Lr
- BofsMiHDhXHZUG/xGLvgFVgaB6+8pm/SJAuaw3XA8rBMzJ7qThV4TB408776UkwCdpGR
- CY3gVMJa6MT7NnpbFNpIgYiKfYXKY3MM3jvwDz/HAZV1aUrbIe/fRvaQK1BpmahhhmkV
- KUyw==
-X-Gm-Message-State: ABy/qLbCL9iNpRaT9Bhu/N3G2DF0k0oov1fLNJ7g5+Y6HwkkpciSECVg
- ytV0sdh3gWPLyiikBxXbM+dP4Q==
-X-Google-Smtp-Source: APBJJlFR/m/6NWsFlFk2jiXh/MTt0+GPvuaf0OjhnGlPhvMsPDcCzwJgCS58p3ITTKSuGrOtqas/Tw==
-X-Received: by 2002:a17:90a:c587:b0:25e:935f:8449 with SMTP id
- l7-20020a17090ac58700b0025e935f8449mr12337913pjt.36.1689094839741; 
- Tue, 11 Jul 2023 10:00:39 -0700 (PDT)
+ bh=20zjHcE4T1HdyN5trsH0CcJ3coRR5e50EgCGbZ5ivBw=;
+ b=DvtIwnbl1HlCidmbNoOuGaA/aNa4iroAVRV/2O/MNQGGKkMALPkVDVnyCXWce3BweU
+ ObGQ75HB+Cqou0udabPn9f+YatYkGQCTg20vk7up+ZmLL3J+ZsKPlXkdxqBwNraUXARD
+ p3mMDwaufyxd6WQVBRv5IqKCzMlRiFAjHV35VJCeZp9RIwNWENf6oKdkUQP0kUd9rAsU
+ MrvKCAlZFqZYnjeev2QxXT/ad1UFdvuDsPO1ZLq1bKn6WvRix5wzXeI4DiqKlFOUNVeA
+ 9GfbOQF+KK4jxIVAAVe2EYdLGDIvnBWPTqTBiawWdDkTrCJQnoRJMNk24WgJSjltrcRX
+ laEg==
+X-Gm-Message-State: ABy/qLZ2x9Qto+huDxVDT6KSj1ILUhVdL2722Ts14ptIzfV3R8Erva4G
+ Egc7H1Zlbxi8qMzuDZP4sNkcOw==
+X-Google-Smtp-Source: APBJJlF+yjFn0Vfrxj4m1tB/Xh3YzgodYBEDURDZRasfFbPWf/HDqC2gqpPsMhJimo/I2xTK0Gp0VQ==
+X-Received: by 2002:a17:90b:390d:b0:262:f99b:a530 with SMTP id
+ ob13-20020a17090b390d00b00262f99ba530mr16512272pjb.34.1689094812100; 
+ Tue, 11 Jul 2023 10:00:12 -0700 (PDT)
 Received: from duncan.localdomain (125-228-20-175.hinet-ip.hinet.net.
  [125.228.20.175]) by smtp.gmail.com with ESMTPSA id
- gw10-20020a17090b0a4a00b00262fc84b931sm8381793pjb.44.2023.07.11.10.00.37
+ gw10-20020a17090b0a4a00b00262fc84b931sm8381793pjb.44.2023.07.11.10.00.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Jul 2023 10:00:39 -0700 (PDT)
+ Tue, 11 Jul 2023 10:00:11 -0700 (PDT)
 From: Max Chou <max.chou@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: dbarboza@ventanamicro.com, alistair23@gmail.com,
- Dickon Hood <dickon.hood@codethink.co.uk>,
- Richard Henderson <richard.henderson@linaro.org>,
+ Nazar Kazakov <nazar.kazakov@codethink.co.uk>,
  Weiwei Li <liweiwei@iscas.ac.cn>, Max Chou <max.chou@sifive.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Frank Chang <frank.chang@sifive.com>
-Subject: [PATCH v8 06/15] target/riscv: Refactor translation of
- vector-widening instruction
-Date: Wed, 12 Jul 2023 00:59:05 +0800
-Message-Id: <20230711165917.2629866-7-max.chou@sifive.com>
+ Richard Henderson <richard.henderson@linaro.org>,
+ Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Subject: [PATCH v8 03/15] target/riscv: Remove redundant "cpu_vl == 0" checks
+Date: Wed, 12 Jul 2023 00:59:02 +0800
+Message-Id: <20230711165917.2629866-4-max.chou@sifive.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230711165917.2629866-1-max.chou@sifive.com>
 References: <20230711165917.2629866-1-max.chou@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52f;
- envelope-from=max.chou@sifive.com; helo=mail-pg1-x52f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
+ envelope-from=max.chou@sifive.com; helo=mail-pf1-x433.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,100 +102,255 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Dickon Hood <dickon.hood@codethink.co.uk>
+From: Nazar Kazakov <nazar.kazakov@codethink.co.uk>
 
-Zvbb (implemented in later commit) has a widening instruction, which
-requires an extra check on the enabled extensions.  Refactor
-GEN_OPIVX_WIDEN_TRANS() to take a check function to avoid reimplementing
-it.
+Remove the redundant "vl == 0" check which is already included within the  vstart >= vl check, when vl == 0.
 
-Signed-off-by: Dickon Hood <dickon.hood@codethink.co.uk>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Nazar Kazakov <nazar.kazakov@codethink.co.uk>
 Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Max Chou <max.chou@sifive.com>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 52 +++++++++++--------------
- 1 file changed, 23 insertions(+), 29 deletions(-)
+ target/riscv/insn_trans/trans_rvv.c.inc | 31 +------------------------
+ 1 file changed, 1 insertion(+), 30 deletions(-)
 
 diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 5dfd524c7d2..a5562505531 100644
+index 4a8e62a8bef..7e194aae34a 100644
 --- a/target/riscv/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -1526,30 +1526,24 @@ static bool opivx_widen_check(DisasContext *s, arg_rmrr *a)
-            vext_check_ds(s, a->rd, a->rs2, a->vm);
- }
+@@ -617,7 +617,6 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1, uint32_t data,
+     TCGv_i32 desc;
  
--static bool do_opivx_widen(DisasContext *s, arg_rmrr *a,
--                           gen_helper_opivx *fn)
--{
--    if (opivx_widen_check(s, a)) {
--        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s);
--    }
--    return false;
--}
--
--#define GEN_OPIVX_WIDEN_TRANS(NAME) \
--static bool trans_##NAME(DisasContext *s, arg_rmrr *a)       \
--{                                                            \
--    static gen_helper_opivx * const fns[3] = {               \
--        gen_helper_##NAME##_b,                               \
--        gen_helper_##NAME##_h,                               \
--        gen_helper_##NAME##_w                                \
--    };                                                       \
--    return do_opivx_widen(s, a, fns[s->sew]);                \
-+#define GEN_OPIVX_WIDEN_TRANS(NAME, CHECK) \
-+static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                    \
-+{                                                                         \
-+    if (CHECK(s, a)) {                                                    \
-+        static gen_helper_opivx * const fns[3] = {                        \
-+            gen_helper_##NAME##_b,                                        \
-+            gen_helper_##NAME##_h,                                        \
-+            gen_helper_##NAME##_w                                         \
-+        };                                                                \
-+        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fns[s->sew], s); \
-+    }                                                                     \
-+    return false;                                                         \
- }
+     TCGLabel *over = gen_new_label();
+-    tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+     tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
  
--GEN_OPIVX_WIDEN_TRANS(vwaddu_vx)
--GEN_OPIVX_WIDEN_TRANS(vwadd_vx)
--GEN_OPIVX_WIDEN_TRANS(vwsubu_vx)
--GEN_OPIVX_WIDEN_TRANS(vwsub_vx)
-+GEN_OPIVX_WIDEN_TRANS(vwaddu_vx, opivx_widen_check)
-+GEN_OPIVX_WIDEN_TRANS(vwadd_vx, opivx_widen_check)
-+GEN_OPIVX_WIDEN_TRANS(vwsubu_vx, opivx_widen_check)
-+GEN_OPIVX_WIDEN_TRANS(vwsub_vx, opivx_widen_check)
+     dest = tcg_temp_new_ptr();
+@@ -786,7 +785,6 @@ static bool ldst_stride_trans(uint32_t vd, uint32_t rs1, uint32_t rs2,
+     TCGv_i32 desc;
  
- /* WIDEN OPIVV with WIDEN */
- static bool opiwv_widen_check(DisasContext *s, arg_rmrr *a)
-@@ -1997,9 +1991,9 @@ GEN_OPIVX_TRANS(vrem_vx, opivx_check)
- GEN_OPIVV_WIDEN_TRANS(vwmul_vv, opivv_widen_check)
- GEN_OPIVV_WIDEN_TRANS(vwmulu_vv, opivv_widen_check)
- GEN_OPIVV_WIDEN_TRANS(vwmulsu_vv, opivv_widen_check)
--GEN_OPIVX_WIDEN_TRANS(vwmul_vx)
--GEN_OPIVX_WIDEN_TRANS(vwmulu_vx)
--GEN_OPIVX_WIDEN_TRANS(vwmulsu_vx)
-+GEN_OPIVX_WIDEN_TRANS(vwmul_vx, opivx_widen_check)
-+GEN_OPIVX_WIDEN_TRANS(vwmulu_vx, opivx_widen_check)
-+GEN_OPIVX_WIDEN_TRANS(vwmulsu_vx, opivx_widen_check)
+     TCGLabel *over = gen_new_label();
+-    tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+     tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
  
- /* Vector Single-Width Integer Multiply-Add Instructions */
- GEN_OPIVV_TRANS(vmacc_vv, opivv_check)
-@@ -2015,10 +2009,10 @@ GEN_OPIVX_TRANS(vnmsub_vx, opivx_check)
- GEN_OPIVV_WIDEN_TRANS(vwmaccu_vv, opivv_widen_check)
- GEN_OPIVV_WIDEN_TRANS(vwmacc_vv, opivv_widen_check)
- GEN_OPIVV_WIDEN_TRANS(vwmaccsu_vv, opivv_widen_check)
--GEN_OPIVX_WIDEN_TRANS(vwmaccu_vx)
--GEN_OPIVX_WIDEN_TRANS(vwmacc_vx)
--GEN_OPIVX_WIDEN_TRANS(vwmaccsu_vx)
--GEN_OPIVX_WIDEN_TRANS(vwmaccus_vx)
-+GEN_OPIVX_WIDEN_TRANS(vwmaccu_vx, opivx_widen_check)
-+GEN_OPIVX_WIDEN_TRANS(vwmacc_vx, opivx_widen_check)
-+GEN_OPIVX_WIDEN_TRANS(vwmaccsu_vx, opivx_widen_check)
-+GEN_OPIVX_WIDEN_TRANS(vwmaccus_vx, opivx_widen_check)
+     dest = tcg_temp_new_ptr();
+@@ -893,7 +891,6 @@ static bool ldst_index_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
+     TCGv_i32 desc;
  
- /* Vector Integer Merge and Move Instructions */
- static bool trans_vmv_v_v(DisasContext *s, arg_vmv_v_v *a)
+     TCGLabel *over = gen_new_label();
+-    tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+     tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+ 
+     dest = tcg_temp_new_ptr();
+@@ -1034,7 +1031,6 @@ static bool ldff_trans(uint32_t vd, uint32_t rs1, uint32_t data,
+     TCGv_i32 desc;
+ 
+     TCGLabel *over = gen_new_label();
+-    tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+     tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+ 
+     dest = tcg_temp_new_ptr();
+@@ -1191,7 +1187,6 @@ do_opivv_gvec(DisasContext *s, arg_rmrr *a, GVecGen3Fn *gvec_fn,
+         return false;
+     }
+ 
+-    tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+     tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+ 
+     if (a->vm && s->vl_eq_vlmax && !(s->vta && s->lmul < 0)) {
+@@ -1241,7 +1236,6 @@ static bool opivx_trans(uint32_t vd, uint32_t rs1, uint32_t vs2, uint32_t vm,
+     uint32_t data = 0;
+ 
+     TCGLabel *over = gen_new_label();
+-    tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+     tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+ 
+     dest = tcg_temp_new_ptr();
+@@ -1405,7 +1399,6 @@ static bool opivi_trans(uint32_t vd, uint32_t imm, uint32_t vs2, uint32_t vm,
+     uint32_t data = 0;
+ 
+     TCGLabel *over = gen_new_label();
+-    tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+     tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+ 
+     dest = tcg_temp_new_ptr();
+@@ -1492,7 +1485,6 @@ static bool do_opivv_widen(DisasContext *s, arg_rmrr *a,
+     if (checkfn(s, a)) {
+         uint32_t data = 0;
+         TCGLabel *over = gen_new_label();
+-        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+         tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+ 
+         data = FIELD_DP32(data, VDATA, VM, a->vm);
+@@ -1575,7 +1567,6 @@ static bool do_opiwv_widen(DisasContext *s, arg_rmrr *a,
+     if (opiwv_widen_check(s, a)) {
+         uint32_t data = 0;
+         TCGLabel *over = gen_new_label();
+-        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+         tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+ 
+         data = FIELD_DP32(data, VDATA, VM, a->vm);
+@@ -1648,7 +1639,6 @@ static bool opivv_trans(uint32_t vd, uint32_t vs1, uint32_t vs2, uint32_t vm,
+ {
+     uint32_t data = 0;
+     TCGLabel *over = gen_new_label();
+-    tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+     tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+ 
+     data = FIELD_DP32(data, VDATA, VM, vm);
+@@ -1842,7 +1832,6 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
+             gen_helper_##NAME##_w,                                 \
+         };                                                         \
+         TCGLabel *over = gen_new_label();                          \
+-        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+         tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+                                                                    \
+         data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
+@@ -2054,7 +2043,6 @@ static bool trans_vmv_v_v(DisasContext *s, arg_vmv_v_v *a)
+                 gen_helper_vmv_v_v_w, gen_helper_vmv_v_v_d,
+             };
+             TCGLabel *over = gen_new_label();
+-            tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+             tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+ 
+             tcg_gen_gvec_2_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, a->rs1),
+@@ -2078,7 +2066,6 @@ static bool trans_vmv_v_x(DisasContext *s, arg_vmv_v_x *a)
+         vext_check_ss(s, a->rd, 0, 1)) {
+         TCGv s1;
+         TCGLabel *over = gen_new_label();
+-        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+         tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+ 
+         s1 = get_gpr(s, a->rs1, EXT_SIGN);
+@@ -2140,7 +2127,6 @@ static bool trans_vmv_v_i(DisasContext *s, arg_vmv_v_i *a)
+                 gen_helper_vmv_v_x_w, gen_helper_vmv_v_x_d,
+             };
+             TCGLabel *over = gen_new_label();
+-            tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+             tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+ 
+             s1 = tcg_constant_i64(simm);
+@@ -2288,7 +2274,6 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
+         };                                                         \
+         TCGLabel *over = gen_new_label();                          \
+         gen_set_rm(s, RISCV_FRM_DYN);                              \
+-        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+         tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+                                                                    \
+         data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
+@@ -2323,7 +2308,6 @@ static bool opfvf_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
+     TCGv_i64 t1;
+ 
+     TCGLabel *over = gen_new_label();
+-    tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+     tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+ 
+     dest = tcg_temp_new_ptr();
+@@ -2408,7 +2392,6 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)           \
+         };                                                       \
+         TCGLabel *over = gen_new_label();                        \
+         gen_set_rm(s, RISCV_FRM_DYN);                            \
+-        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);        \
+         tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);\
+                                                                  \
+         data = FIELD_DP32(data, VDATA, VM, a->vm);               \
+@@ -2483,7 +2466,6 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
+         };                                                         \
+         TCGLabel *over = gen_new_label();                          \
+         gen_set_rm(s, RISCV_FRM_DYN);                              \
+-        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+         tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+                                                                    \
+         data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
+@@ -2601,7 +2583,6 @@ static bool do_opfv(DisasContext *s, arg_rmr *a,
+         uint32_t data = 0;
+         TCGLabel *over = gen_new_label();
+         gen_set_rm_chkfrm(s, rm);
+-        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+         tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+ 
+         data = FIELD_DP32(data, VDATA, VM, a->vm);
+@@ -2713,7 +2694,6 @@ static bool trans_vfmv_v_f(DisasContext *s, arg_vfmv_v_f *a)
+                 gen_helper_vmv_v_x_d,
+             };
+             TCGLabel *over = gen_new_label();
+-            tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+             tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+ 
+             t1 = tcg_temp_new_i64();
+@@ -2792,7 +2772,6 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
+         };                                                         \
+         TCGLabel *over = gen_new_label();                          \
+         gen_set_rm_chkfrm(s, FRM);                                 \
+-        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+         tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+                                                                    \
+         data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
+@@ -2844,7 +2823,6 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
+         };                                                         \
+         TCGLabel *over = gen_new_label();                          \
+         gen_set_rm(s, RISCV_FRM_DYN);                              \
+-        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+         tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+                                                                    \
+         data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
+@@ -2912,7 +2890,6 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
+         };                                                         \
+         TCGLabel *over = gen_new_label();                          \
+         gen_set_rm_chkfrm(s, FRM);                                 \
+-        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+         tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+                                                                    \
+         data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
+@@ -2962,7 +2939,6 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
+         };                                                         \
+         TCGLabel *over = gen_new_label();                          \
+         gen_set_rm_chkfrm(s, FRM);                                 \
+-        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+         tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+                                                                    \
+         data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
+@@ -3053,7 +3029,6 @@ static bool trans_##NAME(DisasContext *s, arg_r *a)                \
+         uint32_t data = 0;                                         \
+         gen_helper_gvec_4_ptr *fn = gen_helper_##NAME;             \
+         TCGLabel *over = gen_new_label();                          \
+-        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+         tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+                                                                    \
+         data = FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+@@ -3224,7 +3199,6 @@ static bool trans_vid_v(DisasContext *s, arg_vid_v *a)
+         require_vm(a->vm, a->rd)) {
+         uint32_t data = 0;
+         TCGLabel *over = gen_new_label();
+-        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+         tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+ 
+         data = FIELD_DP32(data, VDATA, VM, a->vm);
+@@ -3411,7 +3385,6 @@ static bool trans_vmv_s_x(DisasContext *s, arg_vmv_s_x *a)
+         TCGv s1;
+         TCGLabel *over = gen_new_label();
+ 
+-        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+         tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+ 
+         t1 = tcg_temp_new_i64();
+@@ -3468,8 +3441,7 @@ static bool trans_vfmv_s_f(DisasContext *s, arg_vfmv_s_f *a)
+         TCGv_i64 t1;
+         TCGLabel *over = gen_new_label();
+ 
+-        /* if vl == 0 or vstart >= vl, skip vector register write back */
+-        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
++        /* if vstart >= vl, skip vector register write back */
+         tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+ 
+         /* NaN-box f[rs1] */
+@@ -3720,7 +3692,6 @@ static bool int_ext_op(DisasContext *s, arg_rmr *a, uint8_t seq)
+     uint32_t data = 0;
+     gen_helper_gvec_3_ptr *fn;
+     TCGLabel *over = gen_new_label();
+-    tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+     tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+ 
+     static gen_helper_gvec_3_ptr * const fns[6][4] = {
 -- 
 2.34.1
 
