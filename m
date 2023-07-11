@@ -4,77 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66B61EB64DA
-	for <qemu-riscv@archiver.kernel.org>; Mon, 10 Jul 2023 19:30:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66F8AEB64D9
+	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Jul 2023 03:16:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qIwaY-0002uq-Jj; Mon, 10 Jul 2023 15:30:27 -0400
+	id 1qJ3rU-0006iz-EL; Mon, 10 Jul 2023 23:16:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1qIwaX-0002ug-6V
- for qemu-riscv@nongnu.org; Mon, 10 Jul 2023 15:30:25 -0400
-Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1qJ3rS-0006iF-DP; Mon, 10 Jul 2023 23:16:22 -0400
+Received: from mail-vs1-xe32.google.com ([2607:f8b0:4864:20::e32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1qIwaU-0007iD-9L
- for qemu-riscv@nongnu.org; Mon, 10 Jul 2023 15:30:24 -0400
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-1b8b4748fe4so24027945ad.1
- for <qemu-riscv@nongnu.org>; Mon, 10 Jul 2023 12:30:18 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1qJ3rQ-0001S9-2Z; Mon, 10 Jul 2023 23:16:22 -0400
+Received: by mail-vs1-xe32.google.com with SMTP id
+ ada2fe7eead31-440c368b4e2so1609472137.2; 
+ Mon, 10 Jul 2023 20:16:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=dabbelt-com.20221208.gappssmtp.com; s=20221208; t=1689017416; x=1691609416; 
- h=content-transfer-encoding:mime-version:message-id:to:from:cc
- :in-reply-to:subject:date:from:to:cc:subject:date:message-id
- :reply-to; bh=01jGvtYbeW2F1rF92ARgyTHNZ0vjiZmIVWM3U7xsUn0=;
- b=d5Vd83E5SbXXIPxHRNYLrxbxE5ntGuzwz/gpgfgbLbaJYaJN6gRAecFLhkTU0aVO8d
- TkgTqb/Kg3Qq/b4zp+1Qt/h/lc+6j5TkMHVPlYS72Wrc2KJacgTfgsXPPH507lI32F4l
- NnwqTCJuHljGiLeYwFSscCwiPgVCd3EL3584mdqsih5f8E+SMjml0fEFsxkAJdKKFXyC
- nB17i/qvhzbc+f/pu8617E0ONMzMEzliQY+tu8FPT/gFoTAjVF1eb+TlUyhfNwyedGsH
- 65RcRrrhTYZHVkcX4goAHYF00mhGY9Zk4p+X5w8UTlM//yzq5XDM/JAY8TkCAxIMooL2
- P3Dw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689017416; x=1691609416;
- h=content-transfer-encoding:mime-version:message-id:to:from:cc
- :in-reply-to:subject:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20221208; t=1689045378; x=1691637378;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=01jGvtYbeW2F1rF92ARgyTHNZ0vjiZmIVWM3U7xsUn0=;
- b=bg5B+YdAPO2u7okishI81GT/BvTsq7ujbEpy23awnxBYBs96V8w7VRsx8eJwv1C7wh
- 063eh1b9F26Q3qOeQSyAeITy7rQd1jvLqsT2bUUQpQCF1VIiXCi49bSwdO7L+6QyuBfY
- DUno6BPgQDijUERSENK/ZrN6CKJI5OM0uAhuG/UJZ6oO1GWh0tY6IwUGPqq+//V6e8si
- 0oEICPT7HQ5rKcw/ByHiLTjHZnOsvz/ztaZ1InLlZqX9WB7tXWwiHF06eB9IcpcNvUJG
- ERplN8AkA2NGv7rW4+rs7RL85LVnF9QmnNlmBy454mjtA5FDTANnFS/sYVPyMZzGe99a
- vXIQ==
-X-Gm-Message-State: ABy/qLY8IjMofMXPv7G60p5A+gbeDMmVD5mzKlyXApZSsvmpLCqgTOXD
- t0+NgXxvLXrzsLEuV+mYOvhcszMN5hIzpoDkk+Q=
-X-Google-Smtp-Source: APBJJlHRlB1A+TUcGay4euiSZu2a4mgaX6z/FdESs34ThJN5+Y++EYrXIGE7RvFvix39O0TVcuJYYQ==
-X-Received: by 2002:a17:902:d48c:b0:1b8:b288:6274 with SMTP id
- c12-20020a170902d48c00b001b8b2886274mr12651699plg.18.1689017416464; 
- Mon, 10 Jul 2023 12:30:16 -0700 (PDT)
-Received: from localhost ([50.38.6.230]) by smtp.gmail.com with ESMTPSA id
- w19-20020a1709027b9300b001ae3f73b9c1sm262133pll.101.2023.07.10.12.30.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Jul 2023 12:30:15 -0700 (PDT)
-Date: Mon, 10 Jul 2023 12:30:15 -0700 (PDT)
-X-Google-Original-Date: Mon, 10 Jul 2023 12:29:30 PDT (-0700)
-Subject: Re: RFC: QEMU rv64/rv32 CPU, 'max' CPU and profile support
-In-Reply-To: <72277222-2af6-84ca-9fad-22b0293a6695@ventanamicro.com>
-CC: qemu-riscv@nongnu.org, abologna@redhat.com, ajones@ventanamicro.com
-From: Palmer Dabbelt <palmer@dabbelt.com>
-To: dbarboza@ventanamicro.com
-Message-ID: <mhng-2142b63f-6a9b-4646-89df-9b7e0a818523@palmer-ri-x1c9a>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
- envelope-from=palmer@dabbelt.com; helo=mail-pl1-x629.google.com
+ bh=IeeWerrXbZriJ/eJOOog9XQClSHx8b4bawswCvDPmtM=;
+ b=bMfnHHaENunwaWcGc91zGt/KlzgtVoGBZUyvXAEUDlwOAsTDl+ox18arBHO2sJny7a
+ wYqchzooYaFNC3o9r65uSyCRQLcC/vMF+JUEgVm+FyHxzXQAFQK4AQLvTV6PROcVasYa
+ vwZNsRfp1KTt0VcY8srq/lonU90AW6Gcq2RWvSFU699w34oUGeaKvI4RzNugGgnyhHm/
+ i7Ggabcyw4BZxHFmDzZO+pk3hrN4iwFqigGEXauk30thTaw3NHIMxkCrbQwgSLLWou1t
+ b2sEubkhSn0AeP5pacutDuxCsL0CHwwrZWIOcWrrYhiLXlZy5djk9diHvK9PrTGeX1iP
+ yrIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1689045378; x=1691637378;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=IeeWerrXbZriJ/eJOOog9XQClSHx8b4bawswCvDPmtM=;
+ b=JRpRK/95uhtpoGVT2/DB9cT8jDNvPOiGy7z7Xh9FytHz99nFPj3XSdYj8ZG2gVONWh
+ iNExNs4m3iTjWKMDFPxwHha9nf/t/HHh0nhwHQ/US1k8JkpQ1iXFMPLDkMWfFYhbe60U
+ /QoqKuktobY9WMDuYTm7XWHVtC+eiXiexXnnDEO1DlWJ6UYX+bGIU0cvk79uQ0LLHRNU
+ st9fj19xs2BnoyRt9qkgMPXCYV9Miq8IoMwgAVvkrILfRi5MFKQuZkvsKZYO1VQPUUqy
+ uhR3lsrdfm3X9dAH7rBpGx3Ca12jnHDnW3PCTwQmSWeHjx2ZWLNgEngQ+9qLV2ZS3nDA
+ /5aQ==
+X-Gm-Message-State: ABy/qLbDtWZ/UdQ7fjG6L1DJF80m/5yEoAzLSBlOECYZXIlRmHCsHGn2
+ QPxNBqlksBGzFlU+UAEmW/IpYsJ5LhI7Gav3aus=
+X-Google-Smtp-Source: APBJJlF671/N+78HbATC392NfAA/gGKeFu/4bPcGmO4QEZpjfmCoz+y9TwTp2ynDo78cWvbrO1/2CKK4b6r/Y6D4srM=
+X-Received: by 2002:a67:fd4c:0:b0:443:6457:101 with SMTP id
+ g12-20020a67fd4c000000b0044364570101mr7017573vsr.7.1689045378159; Mon, 10 Jul
+ 2023 20:16:18 -0700 (PDT)
+MIME-Version: 1.0
+References: <20230702155354.2478495-1-max.chou@sifive.com>
+ <20230702155354.2478495-13-max.chou@sifive.com>
+ <f943fa94-d105-da53-28e0-04b7afeba165@ventanamicro.com>
+ <9922287f-7852-1167-51ac-53b977c94a94@sifive.com>
+In-Reply-To: <9922287f-7852-1167-51ac-53b977c94a94@sifive.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 11 Jul 2023 13:15:51 +1000
+Message-ID: <CAKmqyKP4_oyqHD+dfBJmKX6nuJA4bfgRSi8LUWYOQG9FQ06DEg@mail.gmail.com>
+Subject: Re: [PATCH v7 12/15] target/riscv: Add Zvkg ISA extension support
+To: Max Chou <max.chou@sifive.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, Nazar Kazakov <nazar.kazakov@codethink.co.uk>, 
+ Lawrence Hunter <lawrence.hunter@codethink.co.uk>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Weiwei Li <liweiwei@iscas.ac.cn>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e32;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe32.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -90,165 +96,387 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, 10 Jul 2023 12:26:21 PDT (-0700), dbarboza@ventanamicro.com wrote:
+On Mon, Jul 10, 2023 at 6:37=E2=80=AFPM Max Chou <max.chou@sifive.com> wrot=
+e:
 >
+> On 2023/7/8 5:25 PM, Daniel Henrique Barboza wrote:
 >
-> On 7/10/23 16:06, Palmer Dabbelt wrote:
->> On Mon, 10 Jul 2023 11:46:34 PDT (-0700), dbarboza@ventanamicro.com wrote:
->>>
->>>
->>> On 7/10/23 15:13, Palmer Dabbelt wrote:
->>>> On Mon, 10 Jul 2023 10:53:12 PDT (-0700), dbarboza@ventanamicro.com wrote:
->>>>> Hi,
->>>>>
->>>>> We don't have a 'max' cpu type in riscv32 and riscv64. This is a special,
->>>>> fictional CPU type that has all possible extensions enabled. It can be
->>>>> either an alias for a real CPU or a new CPU type. It's used by tooling
->>>>> such as libvirt for capabilities probing.
->>>>>
->>>>> Well, in our case it can't be an alias because we don't have any CPU type
->>>>> that enables all extensions. Which brings me to my first question:
->>>>> what's the criteria for marking a certain extension default true/false
->>>>> in rv32/rv64/rv128?
->>>>
->>>> Pretty sure it's just been a somewhat arbitrary decision, with stuff that's likely to be used being enabled when it's added.
->>>>
->>>>> E.g. this is the riscv,isa DT for rv64:
->>>>>
->>>>> rv64imafdch_zicbom_zicboz_zicsr_zifencei_zihintpause_zawrs_zfa_zca_zcd_zba_zbb_zbc_zbs_sstc_svadu
->>>>>
->>>>> It has a lot of extensions but it's missing some common ones like svinval
->>>>> and smstateen.
->>>>>
->>>>> We can add/remove some extensions from these generic CPUs, document it
->>>>> and be done with it. I want to propose a different design though:
->>>>>
->>>>> 1 - introduce the 'max' CPU. I guess we'll need some prep work in how
->>>>> the extensions are being declared/stored in the code. I'll work on
->>>>> it;
->>>>
->>>> IMO it's the right idea in spirit, but there's a handful of conflicting extensions -- mostly vendor stuff, but even some of the standard ones have conflicting encodings.  So I think there's likely to be some decisions to make there, but when there's conflicts there's usually also one called out as being aimed at microcontroller-class systems so there should be a natural choice.
->>>>
->>>>> 2 - introduce rva23U64/rva23S64. I would like to add a new 'profile' option
->>>>> for generic CPUs, with '-cpu rv64,profile=rva23U64' enabling a whole set
->>>>> of extensions. We would also support enabling optional profile extensions.
->>>>> Yes, we don't have all the profile extensions available yet (neither does
->>>>> the kernel AFAIK) but nothing is stopping us from adding the base
->>>>> framework;
->>>>
->>>> Would we also make incompatible extensions forbidden in the profile CPUs?
->>>
->>> I think we can allow those as long as they're not in conflict with mandatory
->>> profile extensions (not sure if there's a case of that).
->>
->> That seems reasonable to me too.
->>
->>>> If we add the 23 profiles, we should probably also add some other bases. We've got a defacto base in Linux that's rv{32,64}ima (plus some cruft as things have drifted around), I think there's also some interest in the 22 profiles.
->>>
->>> rv32/64ima would be the base of the minimal generic CPUs I proposed below.
->>
->> The Linux base has a few other things like Zicntr, Zifencei, Zicsr, etc -- essentially IMA from back before that stuff was all removed.
+> > Hi,
+> >
+> > This patch breaks some gitlab runners because of this:
+> >
+> > On 7/2/23 12:53, Max Chou wrote:
+> >> From: Nazar Kazakov <nazar.kazakov@codethink.co.uk>
+> >>
+> >> This commit adds support for the Zvkg vector-crypto extension, which
+> >> consists of the following instructions:
+> >>
+> >> * vgmul.vv
+> >> * vghsh.vv
+> >>
+> >> Translation functions are defined in
+> >> `target/riscv/insn_trans/trans_rvvk.c.inc` and helpers are defined in
+> >> `target/riscv/vcrypto_helper.c`.
+> >>
+> >> Co-authored-by: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
+> >> [max.chou@sifive.com: Replaced vstart checking by TCG op]
+> >> Signed-off-by: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
+> >> Signed-off-by: Nazar Kazakov <nazar.kazakov@codethink.co.uk>
+> >> Signed-off-by: Max Chou <max.chou@sifive.com>
+> >> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> >> [max.chou@sifive.com: Exposed x-zvkg property]
+> >> ---
+> >>   target/riscv/cpu.c                       |  6 +-
+> >>   target/riscv/cpu_cfg.h                   |  1 +
+> >>   target/riscv/helper.h                    |  3 +
+> >>   target/riscv/insn32.decode               |  4 ++
+> >>   target/riscv/insn_trans/trans_rvvk.c.inc | 30 ++++++++++
+> >>   target/riscv/vcrypto_helper.c            | 72 ++++++++++++++++++++++=
+++
+> >>   6 files changed, 114 insertions(+), 2 deletions(-)
+> >>
+> >> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> >> index 08b8355f52..699ab5e9fa 100644
+> >> --- a/target/riscv/cpu.c
+> >> +++ b/target/riscv/cpu.c
+> >> @@ -118,6 +118,7 @@ static const struct isa_ext_data isa_edata_arr[] =
+=3D {
+> >>       ISA_EXT_DATA_ENTRY(zve64d, PRIV_VERSION_1_10_0, ext_zve64d),
+> >>       ISA_EXT_DATA_ENTRY(zvfh, PRIV_VERSION_1_12_0, ext_zvfh),
+> >>       ISA_EXT_DATA_ENTRY(zvfhmin, PRIV_VERSION_1_12_0, ext_zvfhmin),
+> >> +    ISA_EXT_DATA_ENTRY(zvkg, PRIV_VERSION_1_12_0, ext_zvkg),
+> >>       ISA_EXT_DATA_ENTRY(zvkned, PRIV_VERSION_1_12_0, ext_zvkned),
+> >>       ISA_EXT_DATA_ENTRY(zvknha, PRIV_VERSION_1_12_0, ext_zvknha),
+> >>       ISA_EXT_DATA_ENTRY(zvknhb, PRIV_VERSION_1_12_0, ext_zvknhb),
+> >> @@ -1194,8 +1195,8 @@ void riscv_cpu_validate_set_extensions(RISCVCPU
+> >> *cpu, Error **errp)
+> >>        * In principle Zve*x would also suffice here, were they support=
+ed
+> >>        * in qemu
+> >>        */
+> >> -    if ((cpu->cfg.ext_zvbb || cpu->cfg.ext_zvkned ||
+> >> cpu->cfg.ext_zvknha ||
+> >> -         cpu->cfg.ext_zvksh) && !cpu->cfg.ext_zve32f) {
+> >> +    if ((cpu->cfg.ext_zvbb || cpu->cfg.ext_zvkg ||
+> >> cpu->cfg.ext_zvkned ||
+> >> +         cpu->cfg.ext_zvknha || cpu->cfg.ext_zvksh) &&
+> >> !cpu->cfg.ext_zve32f) {
+> >>           error_setg(errp,
+> >>                      "Vector crypto extensions require V or Zve*
+> >> extensions");
+> >>           return;
+> >> @@ -1710,6 +1711,7 @@ static Property riscv_cpu_extensions[] =3D {
+> >>       /* Vector cryptography extensions */
+> >>       DEFINE_PROP_BOOL("x-zvbb", RISCVCPU, cfg.ext_zvbb, false),
+> >>       DEFINE_PROP_BOOL("x-zvbc", RISCVCPU, cfg.ext_zvbc, false),
+> >> +    DEFINE_PROP_BOOL("x-zvkg", RISCVCPU, cfg.ext_zvkg, false),
+> >>       DEFINE_PROP_BOOL("x-zvkned", RISCVCPU, cfg.ext_zvkned, false),
+> >>       DEFINE_PROP_BOOL("x-zvknha", RISCVCPU, cfg.ext_zvknha, false),
+> >>       DEFINE_PROP_BOOL("x-zvknhb", RISCVCPU, cfg.ext_zvknhb, false),
+> >> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> >> index 27062b12a8..960761c479 100644
+> >> --- a/target/riscv/cpu_cfg.h
+> >> +++ b/target/riscv/cpu_cfg.h
+> >> @@ -85,6 +85,7 @@ struct RISCVCPUConfig {
+> >>       bool ext_zve64d;
+> >>       bool ext_zvbb;
+> >>       bool ext_zvbc;
+> >> +    bool ext_zvkg;
+> >>       bool ext_zvkned;
+> >>       bool ext_zvknha;
+> >>       bool ext_zvknhb;
+> >> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+> >> index 172c91c65c..238343cb42 100644
+> >> --- a/target/riscv/helper.h
+> >> +++ b/target/riscv/helper.h
+> >> @@ -1244,3 +1244,6 @@ DEF_HELPER_5(vsha2cl64_vv, void, ptr, ptr, ptr,
+> >> env, i32)
+> >>     DEF_HELPER_5(vsm3me_vv, void, ptr, ptr, ptr, env, i32)
+> >>   DEF_HELPER_5(vsm3c_vi, void, ptr, ptr, i32, env, i32)
+> >> +
+> >> +DEF_HELPER_5(vghsh_vv, void, ptr, ptr, ptr, env, i32)
+> >> +DEF_HELPER_4(vgmul_vv, void, ptr, ptr, env, i32)
+> >> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> >> index 5ca83e8462..b10497afd3 100644
+> >> --- a/target/riscv/insn32.decode
+> >> +++ b/target/riscv/insn32.decode
+> >> @@ -957,3 +957,7 @@ vsha2cl_vv  101111 1 ..... ..... 010 .....
+> >> 1110111 @r_vm_1
+> >>   # *** Zvksh vector crypto extension ***
+> >>   vsm3me_vv   100000 1 ..... ..... 010 ..... 1110111 @r_vm_1
+> >>   vsm3c_vi    101011 1 ..... ..... 010 ..... 1110111 @r_vm_1
+> >> +
+> >> +# *** Zvkg vector crypto extension ***
+> >> +vghsh_vv    101100 1 ..... ..... 010 ..... 1110111 @r_vm_1
+> >> +vgmul_vv    101000 1 ..... 10001 010 ..... 1110111 @r2_vm_1
+> >> diff --git a/target/riscv/insn_trans/trans_rvvk.c.inc
+> >> b/target/riscv/insn_trans/trans_rvvk.c.inc
+> >> index 6469dd2f02..af7cd62e7d 100644
+> >> --- a/target/riscv/insn_trans/trans_rvvk.c.inc
+> >> +++ b/target/riscv/insn_trans/trans_rvvk.c.inc
+> >> @@ -531,3 +531,33 @@ static inline bool vsm3c_check(DisasContext *s,
+> >> arg_rmrr *a)
+> >>     GEN_VV_UNMASKED_TRANS(vsm3me_vv, vsm3me_check, ZVKSH_EGS)
+> >>   GEN_VI_UNMASKED_TRANS(vsm3c_vi, vsm3c_check, ZVKSH_EGS)
+> >> +
+> >> +/*
+> >> + * Zvkg
+> >> + */
+> >> +
+> >> +#define ZVKG_EGS 4
+> >> +
+> >> +static bool vgmul_check(DisasContext *s, arg_rmr *a)
+> >> +{
+> >> +    int egw_bytes =3D ZVKG_EGS << s->sew;
+> >> +    return s->cfg_ptr->ext_zvkg =3D=3D true &&
+> >> +           vext_check_isa_ill(s) &&
+> >> +           require_rvv(s) &&
+> >> +           MAXSZ(s) >=3D egw_bytes &&
+> >> +           vext_check_ss(s, a->rd, a->rs2, a->vm) &&
+> >> +           s->sew =3D=3D MO_32;
+> >> +}
+> >> +
+> >> +GEN_V_UNMASKED_TRANS(vgmul_vv, vgmul_check, ZVKG_EGS)
+> >> +
+> >> +static bool vghsh_check(DisasContext *s, arg_rmrr *a)
+> >> +{
+> >> +    int egw_bytes =3D ZVKG_EGS << s->sew;
+> >> +    return s->cfg_ptr->ext_zvkg =3D=3D true &&
+> >> +           opivv_check(s, a) &&
+> >> +           MAXSZ(s) >=3D egw_bytes &&
+> >> +           s->sew =3D=3D MO_32;
+> >> +}
+> >> +
+> >> +GEN_VV_UNMASKED_TRANS(vghsh_vv, vghsh_check, ZVKG_EGS)
+> >> diff --git a/target/riscv/vcrypto_helper.c
+> >> b/target/riscv/vcrypto_helper.c
+> >> index ff7fb11928..f127fc0d3a 100644
+> >> --- a/target/riscv/vcrypto_helper.c
+> >> +++ b/target/riscv/vcrypto_helper.c
+> >> @@ -769,3 +769,75 @@ void HELPER(vsm3c_vi)(void *vd_vptr, void
+> >> *vs2_vptr, uint32_t uimm,
+> >>       vext_set_elems_1s(vd_vptr, vta, env->vl * esz, total_elems * esz=
+);
+> >>       env->vstart =3D 0;
+> >>   }
+> >> +
+> >> +void HELPER(vghsh_vv)(void *vd_vptr, void *vs1_vptr, void *vs2_vptr,
+> >> +                      CPURISCVState *env, uint32_t desc)
+> >> +{
+> >> +    uint64_t *vd =3D vd_vptr;
+> >> +    uint64_t *vs1 =3D vs1_vptr;
+> >> +    uint64_t *vs2 =3D vs2_vptr;
+> >> +    uint32_t vta =3D vext_vta(desc);
+> >> +    uint32_t total_elems =3D vext_get_total_elems(env, desc, 4);
+> >> +
+> >> +    for (uint32_t i =3D env->vstart / 4; i < env->vl / 4; i++) {
+> >> +        uint64_t Y[2] =3D {vd[i * 2 + 0], vd[i * 2 + 1]};
+> >> +        uint64_t H[2] =3D {brev8(vs2[i * 2 + 0]), brev8(vs2[i * 2 + 1=
+])};
+> >> +        uint64_t X[2] =3D {vs1[i * 2 + 0], vs1[i * 2 + 1]};
+> >> +        uint64_t Z[2] =3D {0, 0};
+> >> +
+> >> +        uint64_t S[2] =3D {brev8(Y[0] ^ X[0]), brev8(Y[1] ^ X[1])};
+> >> +
+> >> +        for (uint j =3D 0; j < 128; j++) {
+> >
+> > ^
+> >
+> > and this
+> >
+> >     FAILED:
+> >     libqemu-riscv64-softmmu.fa.p/target_riscv_vcrypto_helper.c.obj
+> >     i686-w64-mingw32-gcc -m32 -Ilibqemu-riscv64-softmmu.fa.p -I. -I..
+> >     -Itarget/riscv -I../target/riscv -Isubprojects/dtc/libfdt
+> >     -I../subprojects/dtc/libfdt -Iqapi -Itrace -Iui -Iui/shader
+> >     -I/usr/i686-w64-mingw32/sys-root/mingw/include/pixman-1
+> >     -I/usr/i686-w64-mingw32/sys-root/mingw/include/glib-2.0
+> >     -I/usr/i686-w64-mingw32/sys-root/mingw/lib/glib-2.0/include
+> >     -fdiagnostics-color=3Dauto -Wall -Winvalid-pch -Werror -std=3Dgnu11
+> > -O2 -g
+> >     -fstack-protector-strong -Wundef -Wwrite-strings -Wmissing-prototyp=
+es
+> >     -Wstrict-prototypes -Wredundant-decls -Wold-style-declaration
+> >     -Wold-style-definition -Wtype-limits -Wformat-security -Wformat-y2k
+> >     -Winit-self -Wignored-qualifiers -Wempty-body -Wnested-externs
+> >     -Wendif-labels -Wexpansion-to-defined -Wimplicit-fallthrough=3D2
+> >     -Wmissing-format-attribute -Wno-missing-include-dirs
+> >     -Wno-shift-negative-value -Wno-psabi -iquote . -iquote
+> >     /builds/danielhb/qemu -iquote /builds/danielhb/qemu/include -iquote
+> >     /builds/danielhb/qemu/host/include/i386 -iquote
+> >     /builds/danielhb/qemu/host/include/generic -iquote
+> >     /builds/danielhb/qemu/tcg/i386 -mms-bitfields -D_GNU_SOURCE
+> >     -D_FILE_OFFSET_BITS=3D64 -D_LARGEFILE_SOURCE -fno-strict-aliasing
+> >     -fno-common -fwrapv -fno-pie -no-pie -DNEED_CPU_H
+> >     '-DCONFIG_TARGET=3D"riscv64-softmmu-config-target.h"'
+> >     '-DCONFIG_DEVICES=3D"riscv64-softmmu-config-devices.h"' -MD -MQ
+> >     libqemu-riscv64-softmmu.fa.p/target_riscv_vcrypto_helper.c.obj -MF
+> > libqemu-riscv64-softmmu.fa.p/target_riscv_vcrypto_helper.c.obj.d -o
+> >     libqemu-riscv64-softmmu.fa.p/target_riscv_vcrypto_helper.c.obj -c
+> >     ../target/riscv/vcrypto_helper.c
+> >     ../target/riscv/vcrypto_helper.c: In function 'helper_vghsh_vv':
+> >     ../target/riscv/vcrypto_helper.c:791:14: error: unknown type name
+> >     'uint'; did you mean 'u_int'?
+> >       791 |         for (uint j =3D 0; j < 128; j++) {
+> >           |              ^~~~
+> >           |              u_int
+> >     ../target/riscv/vcrypto_helper.c: In function 'helper_vgmul_vv':
+> >     ../target/riscv/vcrypto_helper.c:825:14: error: unknown type name
+> >     'uint'; did you mean 'u_int'?
+> >       825 |         for (uint j =3D 0; j < 128; j++) {
+> >           |              ^~~~
+> >           |              u_int
+> >     [2503/3700] Compiling C object
+> >     libqemu-riscv64-softmmu.fa.p/target_riscv_vector_helper.c.obj
+> >
+> >
+> > If you want to take a look yourself:
+> >
+> > https://gitlab.com/danielhb/qemu/-/jobs/4615946161
+> >
+> > The fix is to use 'int' instead of 'uint' in both cases.
+> >
+> > I apologize for noticing the error this late. I haven't had the chance
+> > to run
+> > Gitlab runners in these patches until now.
+> >
+> > Alistair, in case you decide to take this series you'll have to amend
+> > this
+> > in-tree I'm afraid. It's too late to ask for another review.
+> >
+> >
+> > Thanks,
+> >
+> >
+> > Daniel
 >
+> Hi Daniel,
 >
-> Hmm I guess we'll need some more thought in how we define a minimal set for
-> Linux then.
+> Thanks you for the testing and notification.
+> If this series are not be taken at the 8.1 feature freeze (July 11th),
+> I'll provide the next version with the fix.
 
-There's a few bits in the kernel docs about it, but they're all kind of 
-ad-hoc because we tend to find out about the ISA changes after they 
-happen.  Probably still the best starting point, though.
+Hey Max,
 
-The best one I could find is the RISCV_HWPROBE_BASE_BEHAVIOR_IMA 
-description in <https://docs.kernel.org/riscv/hwprobe.html> (though 
-looks like we've got some formatting bugs...)
+Thanks for the patches. Unfortunately they won't make the feature
+freeze. They depend on other patches and I haven't gotten a chance to
+look at them yet. If you can send a new version I can start reviewing
+and apply them to my tree in preparation of the next release
 
->>>>> 3 - reduce the generic CPUs up to the minimum required to boot Linux.
->>>>> Yes, a rather arbitrary criteria, but Linux is the most common OS used
->>>>> by RISC-V QEMU currently so we'll go with what most people are using.
->>>>> This would reduce rv64 to "rv64ima".
->>>>
->>>> Have a "minimum CPU required to boot Linux" option seems reasonable. Most users will probably want at least FD and C, though, so maybe we want something like that as well?
->>>
->>> I don't mind making the minimal CPU be rv32/64imafdc.
->>
->> Ya, IDK if there's a right answer.  Maybe someone else has a stronger opinion?  IMO it's kind of just a double-edged sword as to which we pick for the minimum.
->
-> As long as we change it and document it it should be ok. Users will still be able
-> to enable/disable extensions from the base rv64 CPU as well.
->
->
->>
->>>>> The end result is that we would have a max extensions CPU, a barebones
->>>>> generic CPU that can be fully customizable from the ground up, and
->>>>> a profile option to allow users to boost the generic CPUs with a
->>>>> set of extensions. We will avoid having to deal with generic CPUs having
->>>>> an (apparently) arbitrary set of extensions.
->>>>
->>>> IMO we still want to keep the ability to turn on/off extensions, the profiles are a long way from being concrete and we'll still have a lot of systems floating around that don't line up with them.  Being able to test those configurations in QEMU is a huge benefit for users, even if it's a headache to keep around all the options.
->>>
->>> Absolutely. What I meant is that, today, rv64 has a default set of extensions
->>> that seems arbitrary. It would be good to have more predictability, i.e. have
->>> a fixed set of extensions (like rv64imafdc) that users can use as a base to
->>> enable/disable extensions.
->>>
->>> The same thing can be done with profiles. I don't see a reason to forbid users
->>> to do this:
->>>
->>> '-cpu rv64,profile=rva23S64,icbom=false'
->>>
->>> Meaning "I want the rva23S64 profile without Zicbom". The user should be aware that
->>> Zicbom is mandatory for the profile, but since it's being explicitly disabled in the
->>> command line, we can comply. This can be used for debug/development purposes or
->>> the user is doing something silly. As long as it's explicit in the command line
->>> it's fine.
->>
->> Cool, I think I just misunderstood the original post.  I thought you were trying to say we should drop the per-extension properties.  I definitely agree that it's worth taking a look at the base CPUs, what we've got now is kind of just some arbitrary stuff that's left over from when the ISA was a lot simpler.
->>
->> That'd also make the "should we allow incompatible extensions in profiles" questions easier, as we'd essentially just be saying the profile is shorthand for some set of base/extensions.
->>
->> I guess that also brings up what to do with the U/S profiles split.  My guess is that most users just want both to match, so rva23s64 would include all the mandatory rva23u64 base/extensions?
->
-> I think so. The profile doc states:
->
-> RVA23S64 Mandatory Extensions
->
->   The following unprivileged extensions are mandatory:
->
->    The RVA23S64 mandatory unprivileged extensions include all the mandatory
->    unprivileged extensions in RVA23U64.
->
->
-> So '-cpu rv64,profile=rva32S64' would include all the mandatory U64 extensions
-> plus all the mandatory S64. We should add both, so S64 will be build on top of
-> U64.
+Alistair
 
-Thanks, I'd missed that.  So I think that's an easy one.
-
->
 >
 > Thanks,
 >
-> Daniel
+> Max
 >
+> >
+> >> +            if ((S[j / 64] >> (j % 64)) & 1) {
+> >> +                Z[0] ^=3D H[0];
+> >> +                Z[1] ^=3D H[1];
+> >> +            }
+> >> +            bool reduce =3D ((H[1] >> 63) & 1);
+> >> +            H[1] =3D H[1] << 1 | H[0] >> 63;
+> >> +            H[0] =3D H[0] << 1;
+> >> +            if (reduce) {
+> >> +                H[0] ^=3D 0x87;
+> >> +            }
+> >> +        }
+> >> +
+> >> +        vd[i * 2 + 0] =3D brev8(Z[0]);
+> >> +        vd[i * 2 + 1] =3D brev8(Z[1]);
+> >> +    }
+> >> +    /* set tail elements to 1s */
+> >> +    vext_set_elems_1s(vd, vta, env->vl * 4, total_elems * 4);
+> >> +    env->vstart =3D 0;
+> >> +}
+> >> +
+> >> +void HELPER(vgmul_vv)(void *vd_vptr, void *vs2_vptr, CPURISCVState
+> >> *env,
+> >> +                      uint32_t desc)
+> >> +{
+> >> +    uint64_t *vd =3D vd_vptr;
+> >> +    uint64_t *vs2 =3D vs2_vptr;
+> >> +    uint32_t vta =3D vext_vta(desc);
+> >> +    uint32_t total_elems =3D vext_get_total_elems(env, desc, 4);
+> >> +
+> >> +    for (uint32_t i =3D env->vstart / 4; i < env->vl / 4; i++) {
+> >> +        uint64_t Y[2] =3D {brev8(vd[i * 2 + 0]), brev8(vd[i * 2 + 1])=
+};
+> >> +        uint64_t H[2] =3D {brev8(vs2[i * 2 + 0]), brev8(vs2[i * 2 + 1=
+])};
+> >> +        uint64_t Z[2] =3D {0, 0};
+> >> +
+> >> +        for (uint j =3D 0; j < 128; j++) {
+> >
+> > ^
+> >
+> > The error being thrown:
+> >
+> >     FAILED:
+> >     libqemu-riscv64-softmmu.fa.p/target_riscv_vcrypto_helper.c.obj
+> >     i686-w64-mingw32-gcc -m32 -Ilibqemu-riscv64-softmmu.fa.p -I. -I..
+> >     -Itarget/riscv -I../target/riscv -Isubprojects/dtc/libfdt
+> >     -I../subprojects/dtc/libfdt -Iqapi -Itrace -Iui -Iui/shader
+> >     -I/usr/i686-w64-mingw32/sys-root/mingw/include/pixman-1
+> >     -I/usr/i686-w64-mingw32/sys-root/mingw/include/glib-2.0
+> >     -I/usr/i686-w64-mingw32/sys-root/mingw/lib/glib-2.0/include
+> >     -fdiagnostics-color=3Dauto -Wall -Winvalid-pch -Werror -std=3Dgnu11
+> > -O2 -g
+> >     -fstack-protector-strong -Wundef -Wwrite-strings -Wmissing-prototyp=
+es
+> >     -Wstrict-prototypes -Wredundant-decls -Wold-style-declaration
+> >     -Wold-style-definition -Wtype-limits -Wformat-security -Wformat-y2k
+> >     -Winit-self -Wignored-qualifiers -Wempty-body -Wnested-externs
+> >     -Wendif-labels -Wexpansion-to-defined -Wimplicit-fallthrough=3D2
+> >     -Wmissing-format-attribute -Wno-missing-include-dirs
+> >     -Wno-shift-negative-value -Wno-psabi -iquote . -iquote
+> >     /builds/danielhb/qemu -iquote /builds/danielhb/qemu/include -iquote
+> >     /builds/danielhb/qemu/host/include/i386 -iquote
+> >     /builds/danielhb/qemu/host/include/generic -iquote
+> >     /builds/danielhb/qemu/tcg/i386 -mms-bitfields -D_GNU_SOURCE
+> >     -D_FILE_OFFSET_BITS=3D64 -D_LARGEFILE_SOURCE -fno-strict-aliasing
+> >     -fno-common -fwrapv -fno-pie -no-pie -DNEED_CPU_H
+> >     '-DCONFIG_TARGET=3D"riscv64-softmmu-config-target.h"'
+> >     '-DCONFIG_DEVICES=3D"riscv64-softmmu-config-devices.h"' -MD -MQ
+> >     libqemu-riscv64-softmmu.fa.p/target_riscv_vcrypto_helper.c.obj -MF
+> > libqemu-riscv64-softmmu.fa.p/target_riscv_vcrypto_helper.c.obj.d -o
+> >     libqemu-riscv64-softmmu.fa.p/target_riscv_vcrypto_helper.c.obj -c
+> >     ../target/riscv/vcrypto_helper.c
+> >     ../target/riscv/vcrypto_helper.c: In function 'helper_vghsh_vv':
+> >     ../target/riscv/vcrypto_helper.c:791:14: error: unknown type name
+> >     'uint'; did you mean 'u_int'?
+> >       791 |         for (uint j =3D 0; j < 128; j++) {
+> >           |              ^~~~
+> >           |              u_int
+> >     ../target/riscv/vcrypto_helper.c: In function 'helper_vgmul_vv':
+> >     ../target/riscv/vcrypto_helper.c:825:14: error: unknown type name
+> >     'uint'; did you mean 'u_int'?
+> >       825 |         for (uint j =3D 0; j < 128; j++) {
+> >           |              ^~~~
+> >           |              u_int
+> >     [2503/3700] Compiling C object
+> >     libqemu-riscv64-softmmu.fa.p/target_riscv_vector_helper.c.obj
+> >
+> >
+> >> +            if ((Y[j / 64] >> (j % 64)) & 1) {
+> >> +                Z[0] ^=3D H[0];
+> >> +                Z[1] ^=3D H[1];
+> >> +            }
+> >> +            bool reduce =3D ((H[1] >> 63) & 1);
+> >> +            H[1] =3D H[1] << 1 | H[0] >> 63;
+> >> +            H[0] =3D H[0] << 1;
+> >> +            if (reduce) {
+> >> +                H[0] ^=3D 0x87;
+> >> +            }
+> >> +        }
+> >> +
+> >> +        vd[i * 2 + 0] =3D brev8(Z[0]);
+> >> +        vd[i * 2 + 1] =3D brev8(Z[1]);
+> >> +    }
+> >> +    /* set tail elements to 1s */
+> >> +    vext_set_elems_1s(vd, vta, env->vl * 4, total_elems * 4);
+> >> +    env->vstart =3D 0;
+> >> +}
 >
->
->>
->>> Thanks,
->>>
->>> Daniel
->>>
->>>
->>>>
->>>>> I don't think we'll have too much opposition on adding (1) so I'll get
->>>>> on it. I really would like to hear about (2) and (3). (3) will break
->>>>> users that are using rv64 while counting with that whole set of extensions
->>>>> that are being enabled by default, but this is why we're going to add
->>>>> (2) first.
->>>>>
->>>>>
->>>>> Please comment. Andrea, feel free to give us libvirt/tooling insights.
->>>>>
->>>>>
->>>>> Thanks,
->>>>>
->>>>> Daniel
 
