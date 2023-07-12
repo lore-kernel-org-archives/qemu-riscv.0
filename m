@@ -4,81 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBB02C001DE
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Jul 2023 19:04:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 411BDC001B0
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Jul 2023 19:07:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qJf6Q-0000qQ-FJ; Wed, 12 Jul 2023 15:02:22 -0400
+	id 1qJfAz-00078K-7q; Wed, 12 Jul 2023 15:07:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qJf6J-0000og-UY
- for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 15:02:13 -0400
-Received: from mail-oi1-x229.google.com ([2607:f8b0:4864:20::229])
+ id 1qJfAq-00075g-EU
+ for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 15:06:53 -0400
+Received: from mail-ot1-x332.google.com ([2607:f8b0:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qJf6H-0006Y5-EG
- for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 15:02:11 -0400
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-3a1ebb85f99so6258477b6e.2
- for <qemu-riscv@nongnu.org>; Wed, 12 Jul 2023 12:02:08 -0700 (PDT)
+ id 1qJfAn-0007ri-S5
+ for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 15:06:51 -0400
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-6b8a6ca994eso6411260a34.1
+ for <qemu-riscv@nongnu.org>; Wed, 12 Jul 2023 12:06:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1689188528; x=1691780528;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GVucVXFNkJSGKig816k3fMRcU2cBqg0nqnC1rOrLG+w=;
- b=V0lviKDXlzzJ9DEAPTBoffZab9rfaXfD+fh8p3Mgl7q4GTqxexKtyXhlz80WsIq7DT
- HZhDRCv+rAzwfmqeAzg8F/VGSpYL7Q+6RjsJcCcIoiX62afecEuHAhNnTjzf6uxJdqJj
- iwcgTuLLmbOzT1YfIjhCIrZzAv0AEKxh1cIB4rYFdVPuYgSTHS8to99K2K5omj5NS08F
- SxCnONBDM2X9ccZE+BLaQp7MKLexJh0mxRkru9ddh8K5Ftf1F2Tzpv/oBASL4VBxifgk
- oQmpUY46TSEyQ9zAymDS0ElAiWAnx2YBnzr3DMqRfWe4ysjFBIxKE5kygrkvZReejcuJ
- 9SIg==
+ d=ventanamicro.com; s=google; t=1689188805; x=1691780805;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=gxjhCOTLKfeGm6Ne+aGWKJ1TT/PjhpkHkM/7xorCfCA=;
+ b=IlpsAE1V6yvQU+ODnsNfQBjw6QmX0A/s632iwYS4uZv+YYlMOFq1jcPqYlwpGoosn+
+ S74AH75D2VvLZ0qpvil11N9XxeFru1EIvdo0ea15PDLAukJ14Ou2+h7OBO3Hpxy+LbvK
+ oL1IyMr4UjdfSDr+nlAz01qbz7YU2FvygXQ6OzP813eh+bsHGkyRNUkRZlAEEN/RNycT
+ SCvfraYOkn/EAnO3zrcDEdbhQQFqe/po9UBfAzwz7t+XC+ZzIcGvguLq+Wsi+bVUiPt2
+ 7YjpF1HIHfJ18ifyLx2CigWa4Lan3Urx6UlXtXfDRUx0EX28q1YkUryJmXW8td/iiwiV
+ kNCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689188528; x=1691780528;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GVucVXFNkJSGKig816k3fMRcU2cBqg0nqnC1rOrLG+w=;
- b=V/SJdNK8ldAAP/+fnNl+TxzIBEfK0+MNNB9J0qLLwwAdot+WC0aoM7+/TShALQ7Hx6
- 1s7iCEtFkYH8E02ICzIhEN/vGA0XVkuCmFGJZVzwxC5kvI04FpIz3CUxs1II8EQX8gQX
- WABdNFsK/sQQsF8fWyx5hjPYUPtAs+10lJLoFiS3CBjU19ueyTLg7GcIacez4dFT5rIm
- egSieCTTYDTaqejDj06pHzI0btB6S5qI3W29YEblRIuFAxdWzkI3quCMxF3bgMSKZzoy
- XOZXh4EqBdYcXb08BqRxaaXVFdHm1UkgbAY1M9I3NaMdcdpO/WJgC6OLX02FQCzQJvaF
- POww==
-X-Gm-Message-State: ABy/qLZJkKlymrQI+zVHg4a1mEsV5HHZSsdFHHiVVNUN7bSEYSK2uING
- rLySxDEmd9zujZ+nQ7OMTP249HosXIjqb30nAGY=
-X-Google-Smtp-Source: APBJJlEItkFmTUD6H5JqQgBE29jJUGqX3e/s+3VZ1gS7TiXuXAKeLM8P0TjAIA3OqT84J6/syobgBw==
-X-Received: by 2002:a05:6808:10c5:b0:3a3:eab8:8ba5 with SMTP id
- s5-20020a05680810c500b003a3eab88ba5mr23137521ois.27.1689188528048; 
- Wed, 12 Jul 2023 12:02:08 -0700 (PDT)
-Received: from grind.. (201-69-66-19.dial-up.telesp.net.br. [201.69.66.19])
- by smtp.gmail.com with ESMTPSA id
- a9-20020a05680802c900b003a020d24d7dsm2174435oid.56.2023.07.12.12.02.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Jul 2023 12:02:07 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH for-8.2 4/7] target/riscv/cpu.c: split non-ratified exts from
- riscv_cpu_extensions[]
-Date: Wed, 12 Jul 2023 16:01:46 -0300
-Message-ID: <20230712190149.424675-5-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230712190149.424675-1-dbarboza@ventanamicro.com>
-References: <20230712190149.424675-1-dbarboza@ventanamicro.com>
+ d=1e100.net; s=20221208; t=1689188805; x=1691780805;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=gxjhCOTLKfeGm6Ne+aGWKJ1TT/PjhpkHkM/7xorCfCA=;
+ b=ZDv9gM3KriZd1DNPDMaV6pKTodZ0LZpS1rMM9u4rNDCthgC9xB5mkfpFabNopAALZA
+ pc3LZf6Or1/cfAnBdQobmjPsMIsr+dFCd5wRhfhrvdF4J3g58xQZyf4y1nnbsvQrhr7R
+ mq6fCpR9DvuTsWvcg04tcOKLm7DI+j5cU5QuaYRsXWZs+MtofSN7ZcZHfgZBMw2N4U8t
+ TUizzVd1uMmPsiKYdcnp9f7y/11TzymH02pps+owaSQJKzkp3jvB6R+ZTbfPNTr5UxzB
+ SmSS0mp3a/vrJh0j3swbm6+anGq5zOXI8gYepAEKsdGOWXa4YC7m5RwdZvfJXZBPNUrv
+ LGgA==
+X-Gm-Message-State: ABy/qLbXG6g2lIKsLzPQgx5UqonyqX2zRipyyW4KIn26RYGYyh9TaZ9V
+ 4ROmT2y4db+ZV0KNrMDkstLuag==
+X-Google-Smtp-Source: APBJJlEedrUHD8HHOcJ+2EISmK+KpggJ/m4ipN/JC8WGPpH7gu6GKwSGLwbvT28vNR2e4rGm6FkkFw==
+X-Received: by 2002:a9d:6244:0:b0:6b9:9b0a:b9a8 with SMTP id
+ i4-20020a9d6244000000b006b99b0ab9a8mr3686304otk.13.1689188805201; 
+ Wed, 12 Jul 2023 12:06:45 -0700 (PDT)
+Received: from [192.168.68.107] (201-69-66-19.dial-up.telesp.net.br.
+ [201.69.66.19]) by smtp.gmail.com with ESMTPSA id
+ z11-20020a9d65cb000000b006b75242d6c3sm2185342oth.38.2023.07.12.12.06.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 12 Jul 2023 12:06:44 -0700 (PDT)
+Message-ID: <f3c8e751-bc18-b4b8-39ba-822aa4c19f98@ventanamicro.com>
+Date: Wed, 12 Jul 2023 16:06:38 -0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::229;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x229.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.12.0
+Subject: Re: [PATCH 01/10] hw/arm/virt-acpi-build.c: Move fw_cfg and virtio to
+ common location
+Content-Language: en-US
+To: Sunil V L <sunilvl@ventanamicro.com>, qemu-devel@nongnu.org,
+ qemu-arm@nongnu.org, qemu-riscv@nongnu.org
+Cc: "Michael S . Tsirkin" <mst@redhat.com>,
+ Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Shannon Zhao <shannon.zhaosl@gmail.com>, Paolo Bonzini
+ <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Andrew Jones <ajones@ventanamicro.com>, Anup Patel <apatel@ventanamicro.com>
+References: <20230712163943.98994-1-sunilvl@ventanamicro.com>
+ <20230712163943.98994-2-sunilvl@ventanamicro.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20230712163943.98994-2-sunilvl@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::332;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x332.google.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.11,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -96,81 +107,190 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Create a new riscv_cpu_experimental_exts[] to store the non-ratified
-extensions properties. Once they are ratified we'll move them back to
-riscv_cpu_extensions[].
 
-Change riscv_cpu_add_user_properties to keep adding them to users.
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/cpu.c | 38 +++++++++++++++++++++++---------------
- 1 file changed, 23 insertions(+), 15 deletions(-)
+On 7/12/23 13:39, Sunil V L wrote:
+> The functions which add fw_cfg and virtio to DSDT are same for ARM
+> and RISC-V. So, instead of duplicating in RISC-V, move them from
+> hw/arm/virt-acpi-build.c to common aml-build.c.
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 9bbdc46126..c0826b449d 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1808,21 +1808,6 @@ static Property riscv_cpu_extensions[] = {
-     DEFINE_PROP_BOOL("zcmp", RISCVCPU, cfg.ext_zcmp, false),
-     DEFINE_PROP_BOOL("zcmt", RISCVCPU, cfg.ext_zcmt, false),
- 
--    /* These are experimental so mark with 'x-' */
--    DEFINE_PROP_BOOL("x-zicond", RISCVCPU, cfg.ext_zicond, false),
--
--    /* ePMP 0.9.3 */
--    DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
--    DEFINE_PROP_BOOL("x-smaia", RISCVCPU, cfg.ext_smaia, false),
--    DEFINE_PROP_BOOL("x-ssaia", RISCVCPU, cfg.ext_ssaia, false),
--
--    DEFINE_PROP_BOOL("x-zvfh", RISCVCPU, cfg.ext_zvfh, false),
--    DEFINE_PROP_BOOL("x-zvfhmin", RISCVCPU, cfg.ext_zvfhmin, false),
--
--    DEFINE_PROP_BOOL("x-zfbfmin", RISCVCPU, cfg.ext_zfbfmin, false),
--    DEFINE_PROP_BOOL("x-zvfbfmin", RISCVCPU, cfg.ext_zvfbfmin, false),
--    DEFINE_PROP_BOOL("x-zvfbfwma", RISCVCPU, cfg.ext_zvfbfwma, false),
--
-     DEFINE_PROP_END_OF_LIST(),
- };
- 
-@@ -1843,6 +1828,25 @@ static Property riscv_cpu_vendor_exts[] = {
-     DEFINE_PROP_END_OF_LIST(),
- };
- 
-+/* These are experimental so mark with 'x-' */
-+static Property riscv_cpu_experimental_exts[] = {
-+    DEFINE_PROP_BOOL("x-zicond", RISCVCPU, cfg.ext_zicond, false),
-+
-+    /* ePMP 0.9.3 */
-+    DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
-+    DEFINE_PROP_BOOL("x-smaia", RISCVCPU, cfg.ext_smaia, false),
-+    DEFINE_PROP_BOOL("x-ssaia", RISCVCPU, cfg.ext_ssaia, false),
-+
-+    DEFINE_PROP_BOOL("x-zvfh", RISCVCPU, cfg.ext_zvfh, false),
-+    DEFINE_PROP_BOOL("x-zvfhmin", RISCVCPU, cfg.ext_zvfhmin, false),
-+
-+    DEFINE_PROP_BOOL("x-zfbfmin", RISCVCPU, cfg.ext_zfbfmin, false),
-+    DEFINE_PROP_BOOL("x-zvfbfmin", RISCVCPU, cfg.ext_zvfbfmin, false),
-+    DEFINE_PROP_BOOL("x-zvfbfwma", RISCVCPU, cfg.ext_zvfbfwma, false),
-+
-+    DEFINE_PROP_END_OF_LIST(),
-+};
-+
- static Property riscv_cpu_options[] = {
-     DEFINE_PROP_UINT8("pmu-num", RISCVCPU, cfg.pmu_num, 16),
- 
-@@ -1927,6 +1931,10 @@ static void riscv_cpu_add_user_properties(Object *obj)
-     for (prop = riscv_cpu_vendor_exts; prop && prop->name; prop++) {
-         qdev_property_add_static(dev, prop);
-     }
-+
-+    for (prop = riscv_cpu_experimental_exts; prop && prop->name; prop++) {
-+        qdev_property_add_static(dev, prop);
-+    }
- }
- 
- static Property riscv_cpu_properties[] = {
--- 
-2.41.0
+Nice.
 
+> 
+> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> ---
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+>   hw/acpi/aml-build.c         | 41 ++++++++++++++++++++++++++++++++++++
+>   hw/arm/virt-acpi-build.c    | 42 -------------------------------------
+>   hw/riscv/virt-acpi-build.c  | 16 --------------
+>   include/hw/acpi/aml-build.h |  6 ++++++
+>   4 files changed, 47 insertions(+), 58 deletions(-)
+> 
+> diff --git a/hw/acpi/aml-build.c b/hw/acpi/aml-build.c
+> index ea331a20d1..eeb1263c8c 100644
+> --- a/hw/acpi/aml-build.c
+> +++ b/hw/acpi/aml-build.c
+> @@ -2467,3 +2467,44 @@ Aml *aml_i2c_serial_bus_device(uint16_t address, const char *resource_source)
+>   
+>       return var;
+>   }
+> +
+> +void acpi_dsdt_add_fw_cfg(Aml *scope, const MemMapEntry *fw_cfg_memmap)
+> +{
+> +    Aml *dev = aml_device("FWCF");
+> +    aml_append(dev, aml_name_decl("_HID", aml_string("QEMU0002")));
+> +    /* device present, functioning, decoding, not shown in UI */
+> +    aml_append(dev, aml_name_decl("_STA", aml_int(0xB)));
+> +    aml_append(dev, aml_name_decl("_CCA", aml_int(1)));
+> +
+> +    Aml *crs = aml_resource_template();
+> +    aml_append(crs, aml_memory32_fixed(fw_cfg_memmap->base,
+> +                                       fw_cfg_memmap->size, AML_READ_WRITE));
+> +    aml_append(dev, aml_name_decl("_CRS", crs));
+> +    aml_append(scope, dev);
+> +}
+> +
+> +void acpi_dsdt_add_virtio(Aml *scope,
+> +                          const MemMapEntry *virtio_mmio_memmap,
+> +                          uint32_t mmio_irq, int num)
+> +{
+> +    hwaddr base = virtio_mmio_memmap->base;
+> +    hwaddr size = virtio_mmio_memmap->size;
+> +    int i;
+> +
+> +    for (i = 0; i < num; i++) {
+> +        uint32_t irq = mmio_irq + i;
+> +        Aml *dev = aml_device("VR%02u", i);
+> +        aml_append(dev, aml_name_decl("_HID", aml_string("LNRO0005")));
+> +        aml_append(dev, aml_name_decl("_UID", aml_int(i)));
+> +        aml_append(dev, aml_name_decl("_CCA", aml_int(1)));
+> +
+> +        Aml *crs = aml_resource_template();
+> +        aml_append(crs, aml_memory32_fixed(base, size, AML_READ_WRITE));
+> +        aml_append(crs,
+> +                   aml_interrupt(AML_CONSUMER, AML_LEVEL, AML_ACTIVE_HIGH,
+> +                                 AML_EXCLUSIVE, &irq, 1));
+> +        aml_append(dev, aml_name_decl("_CRS", crs));
+> +        aml_append(scope, dev);
+> +        base += size;
+> +    }
+> +}
+> diff --git a/hw/arm/virt-acpi-build.c b/hw/arm/virt-acpi-build.c
+> index 6b674231c2..fdedb68e2b 100644
+> --- a/hw/arm/virt-acpi-build.c
+> +++ b/hw/arm/virt-acpi-build.c
+> @@ -35,7 +35,6 @@
+>   #include "target/arm/cpu.h"
+>   #include "hw/acpi/acpi-defs.h"
+>   #include "hw/acpi/acpi.h"
+> -#include "hw/nvram/fw_cfg.h"
+>   #include "hw/acpi/bios-linker-loader.h"
+>   #include "hw/acpi/aml-build.h"
+>   #include "hw/acpi/utils.h"
+> @@ -94,21 +93,6 @@ static void acpi_dsdt_add_uart(Aml *scope, const MemMapEntry *uart_memmap,
+>       aml_append(scope, dev);
+>   }
+>   
+> -static void acpi_dsdt_add_fw_cfg(Aml *scope, const MemMapEntry *fw_cfg_memmap)
+> -{
+> -    Aml *dev = aml_device("FWCF");
+> -    aml_append(dev, aml_name_decl("_HID", aml_string("QEMU0002")));
+> -    /* device present, functioning, decoding, not shown in UI */
+> -    aml_append(dev, aml_name_decl("_STA", aml_int(0xB)));
+> -    aml_append(dev, aml_name_decl("_CCA", aml_int(1)));
+> -
+> -    Aml *crs = aml_resource_template();
+> -    aml_append(crs, aml_memory32_fixed(fw_cfg_memmap->base,
+> -                                       fw_cfg_memmap->size, AML_READ_WRITE));
+> -    aml_append(dev, aml_name_decl("_CRS", crs));
+> -    aml_append(scope, dev);
+> -}
+> -
+>   static void acpi_dsdt_add_flash(Aml *scope, const MemMapEntry *flash_memmap)
+>   {
+>       Aml *dev, *crs;
+> @@ -133,32 +117,6 @@ static void acpi_dsdt_add_flash(Aml *scope, const MemMapEntry *flash_memmap)
+>       aml_append(scope, dev);
+>   }
+>   
+> -static void acpi_dsdt_add_virtio(Aml *scope,
+> -                                 const MemMapEntry *virtio_mmio_memmap,
+> -                                 uint32_t mmio_irq, int num)
+> -{
+> -    hwaddr base = virtio_mmio_memmap->base;
+> -    hwaddr size = virtio_mmio_memmap->size;
+> -    int i;
+> -
+> -    for (i = 0; i < num; i++) {
+> -        uint32_t irq = mmio_irq + i;
+> -        Aml *dev = aml_device("VR%02u", i);
+> -        aml_append(dev, aml_name_decl("_HID", aml_string("LNRO0005")));
+> -        aml_append(dev, aml_name_decl("_UID", aml_int(i)));
+> -        aml_append(dev, aml_name_decl("_CCA", aml_int(1)));
+> -
+> -        Aml *crs = aml_resource_template();
+> -        aml_append(crs, aml_memory32_fixed(base, size, AML_READ_WRITE));
+> -        aml_append(crs,
+> -                   aml_interrupt(AML_CONSUMER, AML_LEVEL, AML_ACTIVE_HIGH,
+> -                                 AML_EXCLUSIVE, &irq, 1));
+> -        aml_append(dev, aml_name_decl("_CRS", crs));
+> -        aml_append(scope, dev);
+> -        base += size;
+> -    }
+> -}
+> -
+>   static void acpi_dsdt_add_pci(Aml *scope, const MemMapEntry *memmap,
+>                                 uint32_t irq, VirtMachineState *vms)
+>   {
+> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+> index 7331248f59..01843e4509 100644
+> --- a/hw/riscv/virt-acpi-build.c
+> +++ b/hw/riscv/virt-acpi-build.c
+> @@ -97,22 +97,6 @@ static void acpi_dsdt_add_cpus(Aml *scope, RISCVVirtState *s)
+>       }
+>   }
+>   
+> -static void acpi_dsdt_add_fw_cfg(Aml *scope, const MemMapEntry *fw_cfg_memmap)
+> -{
+> -    Aml *dev = aml_device("FWCF");
+> -    aml_append(dev, aml_name_decl("_HID", aml_string("QEMU0002")));
+> -
+> -    /* device present, functioning, decoding, not shown in UI */
+> -    aml_append(dev, aml_name_decl("_STA", aml_int(0xB)));
+> -    aml_append(dev, aml_name_decl("_CCA", aml_int(1)));
+> -
+> -    Aml *crs = aml_resource_template();
+> -    aml_append(crs, aml_memory32_fixed(fw_cfg_memmap->base,
+> -                                       fw_cfg_memmap->size, AML_READ_WRITE));
+> -    aml_append(dev, aml_name_decl("_CRS", crs));
+> -    aml_append(scope, dev);
+> -}
+> -
+>   /* RHCT Node[N] starts at offset 56 */
+>   #define RHCT_NODE_ARRAY_OFFSET 56
+>   
+> diff --git a/include/hw/acpi/aml-build.h b/include/hw/acpi/aml-build.h
+> index d1fb08514b..c4a8967310 100644
+> --- a/include/hw/acpi/aml-build.h
+> +++ b/include/hw/acpi/aml-build.h
+> @@ -3,6 +3,7 @@
+>   
+>   #include "hw/acpi/acpi-defs.h"
+>   #include "hw/acpi/bios-linker-loader.h"
+> +#include "hw/nvram/fw_cfg.h"
+>   
+>   #define ACPI_BUILD_APPNAME6 "BOCHS "
+>   #define ACPI_BUILD_APPNAME8 "BXPC    "
+> @@ -497,4 +498,9 @@ void build_fadt(GArray *tbl, BIOSLinker *linker, const AcpiFadtData *f,
+>   
+>   void build_tpm2(GArray *table_data, BIOSLinker *linker, GArray *tcpalog,
+>                   const char *oem_id, const char *oem_table_id);
+> +
+> +void acpi_dsdt_add_fw_cfg(Aml *scope, const MemMapEntry *fw_cfg_memmap);
+> +void acpi_dsdt_add_virtio(Aml *scope, const MemMapEntry *virtio_mmio_memmap,
+> +                          uint32_t mmio_irq, int num);
+> +
+>   #endif
 
