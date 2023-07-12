@@ -4,59 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3A85EB64DA
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Jul 2023 16:40:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92FC9C0015E
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Jul 2023 16:40:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qJcsi-0003eH-Ks; Wed, 12 Jul 2023 12:40:00 -0400
+	id 1qJcsm-0003gl-Qt; Wed, 12 Jul 2023 12:40:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qJcsh-0003da-BR
- for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 12:39:59 -0400
-Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a])
+ id 1qJcsl-0003gF-Lm
+ for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 12:40:03 -0400
+Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qJcsf-0004ar-Lh
- for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 12:39:59 -0400
-Received: by mail-pf1-x42a.google.com with SMTP id
- d2e1a72fcca58-66872d4a141so5005807b3a.1
- for <qemu-riscv@nongnu.org>; Wed, 12 Jul 2023 09:39:53 -0700 (PDT)
+ id 1qJcsk-0004c8-6o
+ for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 12:40:03 -0400
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1b8ad9eede0so53907735ad.1
+ for <qemu-riscv@nongnu.org>; Wed, 12 Jul 2023 09:40:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1689179992; x=1691771992;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=D902WXe63pYmiWsNpDy68C8o3fZwaz3JAmPZ0EGpNog=;
- b=iG4l8FVPI7oYlI22GP8jHv36gEoDHXFZ0M+pd+3Pn8uEVvRDyVU8jsSVN0GkhVbTID
- J/5vmG8lkxBETX9CGeRS6DuIUBd9CRJxjVh2ShuZWBI36zUqmnaPHQsWTt7tG/B76qoU
- TDBSBLvX82D27K2P6QAfZ0nCPK25sTL825A5pmCiFzBu9BhD/fGWbln8jhE5+pTizRoc
- M8iiQX3LlAr2xg8Qa23SOOuhqYPqbdL7wZGv5s23yxXVbUyV5IqTz7/jdL/NPB333gEY
- jao4LeiBHOYCl9/LWBRuw/jszwa+VRs8ppDZzhYo+S9SE/KKtMS/WFYf/25tFxMFX21V
- 6h1w==
+ d=ventanamicro.com; s=google; t=1689180001; x=1691772001;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=my6WC56v1NHoMbkaX3PQi+I7N7GynsA+Ik6uIihef78=;
+ b=BI7LIKlv/hre/FD7W1RLXqzzMMJlEa5d1oNvWH9OiHAsEGIoL0zWWKZ+OCePMkSfBG
+ J8frAkEJtaMTJFja1w/hyPYGlKeP6QUWVLHDRcXVom2bTYzDSc3xfpRKiX+JPN5YdkMH
+ pgOLDlwAtfj09mIwZrhJQtCZQ4KN3N40a82duYDcv5DIs6NKx9GoUS29vgawaMUG1yYz
+ dARyE7y9MvMvWHnzl24xiuFoHSmewP0JmKdCOFEDTOZkd+w0WuswE2ewxd5deDsKB/t8
+ rNHXOrcTebScCH7ioS4KitHHPKlnHwnjP8tOQ343FwHg0Sxm9WfM+ivUJunK4A07PS0Q
+ 46Bw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689179992; x=1691771992;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=D902WXe63pYmiWsNpDy68C8o3fZwaz3JAmPZ0EGpNog=;
- b=Vi3CV1tKRJtiaUhc10ztD7ZU69B97pn1lG2aTWgXVM9l7T9yIoU8YBSAyi4XfR1Efl
- PiWHqnDRz+gt6sA04dMdYx+Uw49RsIDO+ZC0G8EPv3A4MOraaMlf2Tfs5Hwq7Gqezlcq
- P6d4kOW9yd70ites+KQFpCDSXE1+4mZU0TsTSIgpBTptY2FMx7hK8ACjR52aJaGFYXBY
- wd1u1cv9hxVsMnjW8v0gdlLBCJdmFaS/ZmrC1HyEb8EljLjaCbTRrnE8vCUeFSFDG2FM
- eQfI/ZRpRvbdSdQCHxWQO1WcdvLlT2HmHqxfTqpmUmkNnf9wTWS+o6BEy22fV6V7P5Is
- 1C3A==
-X-Gm-Message-State: ABy/qLZUgPc14fU4e3shkT0psWoqjWRSucoZoYjqI0q/2DmZ8KNFSiM8
- SjuVioehCBBbDqseKA2F9IzOJw==
-X-Google-Smtp-Source: APBJJlFZW4wQtQZVnwK/nOj7CqTSYws6xe30qDFxC+pztWR8snFQLb1P3WYOHHGHvuJ7ulx56TeEVA==
-X-Received: by 2002:a17:902:c3cc:b0:1b8:9f6a:39de with SMTP id
- j12-20020a170902c3cc00b001b89f6a39demr14219298plj.65.1689179991519; 
- Wed, 12 Jul 2023 09:39:51 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1689180001; x=1691772001;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=my6WC56v1NHoMbkaX3PQi+I7N7GynsA+Ik6uIihef78=;
+ b=hwq6iQPj4P/uZ7g82YehoV8xQQXtuB9hok7tDqTzMRCPvqES/HjXDJ9JP8aIxv2oOe
+ 0n2ZD7pYX4n5sQa80HnqiEBRP1xDZk5yMoCIFv9plQLFvYX5ypYZRZeJncuSWDfaBMY2
+ uQ80BPvnVLHZVKjcbwPIpCu8ap32GBl7KKNCcf75vtw6uyWTfgNFPxLgnCQHX1ZkZb3u
+ NcGzFDgR9okMjHgyPZznseKGNwLnvX0EAHN5v1etmajz7P6cGFaBAH+QaCqWOUftHX8M
+ yhaEPy2nyRSQs1CHb2bfTz99SBkQs94+wPhVc1C8GIp/ci/jKoAjDEb0G9HWMgZRYYqu
+ Wjew==
+X-Gm-Message-State: ABy/qLa1/ri5Bhnsx2nA/K2u2CMNlQklEE9QqmUuxJqGcG32M9cwHREW
+ NcrF7z+atwpKCvOkgb0DTgCfOg==
+X-Google-Smtp-Source: APBJJlH1bZVw1Yd3yPQHPGl8QtjMxDrioDa8QrrC6KVYinDmUTKywH+eI973l9Xx5Aq+SqZ+kWhebw==
+X-Received: by 2002:a17:902:788c:b0:1ae:8892:7d27 with SMTP id
+ q12-20020a170902788c00b001ae88927d27mr10527926pll.42.1689180000942; 
+ Wed, 12 Jul 2023 09:40:00 -0700 (PDT)
 Received: from sunil-pc.Dlink ([106.51.190.25])
  by smtp.gmail.com with ESMTPSA id
- a18-20020a1709027d9200b001ac7f583f72sm4172824plm.209.2023.07.12.09.39.46
+ a18-20020a1709027d9200b001ac7f583f72sm4172824plm.209.2023.07.12.09.39.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Jul 2023 09:39:50 -0700 (PDT)
+ Wed, 12 Jul 2023 09:40:00 -0700 (PDT)
 From: Sunil V L <sunilvl@ventanamicro.com>
 To: qemu-devel@nongnu.org,
 	qemu-arm@nongnu.org,
@@ -72,14 +73,16 @@ Cc: "Michael S . Tsirkin" <mst@redhat.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Andrew Jones <ajones@ventanamicro.com>,
  Anup Patel <apatel@ventanamicro.com>, Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH 00/10] RISC-V: ACPI: Enable AIA and update RHC
-Date: Wed, 12 Jul 2023 22:09:33 +0530
-Message-Id: <20230712163943.98994-1-sunilvl@ventanamicro.com>
+Subject: [PATCH 02/10] hw/riscv: virt: Add PCI bus reference in RISCVVirtState
+Date: Wed, 12 Jul 2023 22:09:35 +0530
+Message-Id: <20230712163943.98994-3-sunilvl@ventanamicro.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20230712163943.98994-1-sunilvl@ventanamicro.com>
+References: <20230712163943.98994-1-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pf1-x42a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x62f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -102,46 +105,59 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This series primarily enables AIA interrupt controllers in
-ACPI tables for RISC-V virt platform. It also updates RHCT
-with CMO and MMU related information.
+The PCI bus information is needed in RISCVVirtState so that other
+files like virt-acpi-build.c can make use of it. Add new field in
+RISCVVirtState so that ACPI code can use it.
 
-Below ECRs for these changes are approved by ASWG and will be
-available in next ACPI spec release.
+Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+---
+ hw/riscv/virt.c         | 6 ++++--
+ include/hw/riscv/virt.h | 1 +
+ 2 files changed, 5 insertions(+), 2 deletions(-)
 
-1) MADT (AIA) - https://drive.google.com/file/d/1oMGPyOD58JaPgMl1pKasT-VKsIKia7zR/view?usp=sharing
-2) RHCT - https://drive.google.com/file/d/1sKbOa8m1UZw1JkquZYe3F1zQBN1xXsaf/view?usp=sharing
-
-First patch in this series is to migrate a couple of functions from
-ARM architecture to common code so that RISC-V doesn't need to
-duplicate the same.
-
-The patch set is based on Alistair's riscv-to-apply.next branch.
-
-These changes are also available in  riscv_acpi_b2_v1 branch at:
-https://github.com/vlsunil/qemu/
-
-Sunil V L (10):
-  hw/arm/virt-acpi-build.c: Move fw_cfg and virtio to common location
-  hw/riscv: virt: Add PCI bus reference in RISCVVirtState
-  hw/riscv: virt: Make few IMSIC macros and functions public
-  hw/riscv: virt: Add PCIe HIGHMEM in memmap
-  hw/riscv/virt-acpi-build.c: Add AIA support in RINTC
-  hw/riscv/virt-acpi-build.c: Add IMSIC in the MADT
-  hw/riscv/virt-acpi-build.c: Add APLIC in the MADT
-  hw/riscv/virt-acpi-build.c: Add CMO information in RHCT
-  hw/riscv/virt-acpi-build.c: Add MMU node in RHCT
-  hw/riscv/virt-acpi-build.c: Add IO controllers and devices
-
- hw/acpi/aml-build.c         |  41 +++++
- hw/arm/virt-acpi-build.c    |  42 -----
- hw/riscv/Kconfig            |   1 +
- hw/riscv/virt-acpi-build.c  | 321 +++++++++++++++++++++++++++++++++---
- hw/riscv/virt.c             |  62 ++++---
- include/hw/acpi/aml-build.h |   6 +
- include/hw/riscv/virt.h     |  35 +++-
- 7 files changed, 416 insertions(+), 92 deletions(-)
-
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index d90286dc46..46d3341113 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1073,7 +1073,8 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
+                                           hwaddr high_mmio_base,
+                                           hwaddr high_mmio_size,
+                                           hwaddr pio_base,
+-                                          DeviceState *irqchip)
++                                          DeviceState *irqchip,
++                                          RISCVVirtState *s)
+ {
+     DeviceState *dev;
+     MemoryRegion *ecam_alias, *ecam_reg;
+@@ -1113,6 +1114,7 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
+         gpex_set_irq_num(GPEX_HOST(dev), i, PCIE_IRQ + i);
+     }
+ 
++    s->bus = PCI_HOST_BRIDGE(dev)->bus;
+     return dev;
+ }
+ 
+@@ -1502,7 +1504,7 @@ static void virt_machine_init(MachineState *machine)
+                    virt_high_pcie_memmap.base,
+                    virt_high_pcie_memmap.size,
+                    memmap[VIRT_PCIE_PIO].base,
+-                   pcie_irqchip);
++                   pcie_irqchip, s);
+ 
+     create_platform_bus(s, mmio_irqchip);
+ 
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index e5c474b26e..4ef1f660ab 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -60,6 +60,7 @@ struct RISCVVirtState {
+     char *oem_table_id;
+     OnOffAuto acpi;
+     const MemMapEntry *memmap;
++    PCIBus *bus;
+ };
+ 
+ enum {
 -- 
 2.39.2
 
