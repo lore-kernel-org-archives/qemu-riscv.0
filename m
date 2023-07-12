@@ -4,85 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1199C0015E
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Jul 2023 20:31:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04A40EB64DA
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Jul 2023 20:58:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qJgU6-0003VS-RV; Wed, 12 Jul 2023 16:30:50 -0400
+	id 1qJguh-0000J7-Ok; Wed, 12 Jul 2023 16:58:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qJgU4-0003Ta-6j
- for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 16:30:48 -0400
-Received: from mail-oi1-x229.google.com ([2607:f8b0:4864:20::229])
+ id 1qJguf-0000IN-Il
+ for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 16:58:17 -0400
+Received: from mail-oa1-x31.google.com ([2001:4860:4864:20::31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qJgU2-00085U-N4
- for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 16:30:47 -0400
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-3a40b756eb0so2144838b6e.2
- for <qemu-riscv@nongnu.org>; Wed, 12 Jul 2023 13:30:46 -0700 (PDT)
+ id 1qJgue-0005VC-1T
+ for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 16:58:17 -0400
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-1b055511f8bso789047fac.1
+ for <qemu-riscv@nongnu.org>; Wed, 12 Jul 2023 13:58:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1689193845; x=1691785845;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=rnrTUjmw1hSE7RnGBwTNI0eiK/PNw5p/T84Bx6uctlg=;
- b=m1603YjUUfF6dew9pV8bStV+ukhM/TZga5vG79InCVxZgCLi6Y5h8FKERgupAxHHOW
- XCUG5WUMM1VIO0ph2T52FGtHUgzyXnFzKs5TQZpGAzPb/KnEpSXWh696zK3VIdel08/9
- sVSsHcSmeCqnWiaFhmpQPn6IhbR9Ye0w74hDGL4QbRR8ufyhasful3eR0mAFjaVJnsYb
- /AFOyu5XNbSRJlDp9OR/S+rpQrK9sFIeCMI5YMgvYkTce3dQzTz/sRA6Jh5F5b6re1lm
- lC6j5/7F+Zu9exupT5TJCFVU76UCcG0YmGqVUXMgQHbkEt243VJ+wkGdyHAmUXVvWXNg
- XybA==
+ d=ventanamicro.com; s=google; t=1689195495; x=1691787495;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GVucVXFNkJSGKig816k3fMRcU2cBqg0nqnC1rOrLG+w=;
+ b=jMlK2RgwYmBYpFOX9+mBllD3yvywiYTR8UdCrvC6ikjfBwCa+U8tc0XEf2kcLIOlqz
+ T1iQkwus9h3EYzwLdYJQIvGduj3Vj9ExvmGCV18CIvjqgNDYUlAkDsPtsUzH4b4Zb+KV
+ hZnMbS33gel8/q9lnrQjLfh+Vczk/xXBS3ZZ2SI/NxvgqYmn1ndGHa5QOxRZ8VPXtEoT
+ q5qhRCnfeWByu+ZWe4gzc1aE9txVM3DTKxDcceJnLynHst/7xEho4qzCoexXXIPWNQBe
+ fISlx6jX3yRzv/9PCaTENQeWZW7tOlRwhSzF+bA8IB9L5+Qppqy1cijxOjYgiWU5yBNA
+ hjZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689193845; x=1691785845;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=rnrTUjmw1hSE7RnGBwTNI0eiK/PNw5p/T84Bx6uctlg=;
- b=O6v93ap/kWIstePzTC4CTZ7v5tOtGFQsqM94cNW5qg/8ME+/rRrZZIMUsacbmHCvZz
- UPOcfROCT6O5uR7BP1DCl6nIOPXZcuPZV/w48dasMmSSGzJGiy8QZGMJdJAY7POPmj9+
- WvmXj8jsJODe2tKWO7Si0hLTo6KE4y204fI7OpWQrtigPn7auVbTQPiGOjDBk1+hysfz
- MP1wp7wrksCoGH25TVjRMNyFAroiPrm/pmngyHZ72todXGz2ePwa1Yifqo4xqo/auaPw
- C2OvJ+vIZB/X4VBCt4mzV85CEBHqLLQ6XFIi4ID95/Me5Z1ItWcAYJnzwZEE6hcShjfz
- jhPg==
-X-Gm-Message-State: ABy/qLbG5R7c7/uELB89XoP+6mwN+yv5p6SkspSvo09RhaLsiyd36nB6
- +fyoZ8924uwVVL0q5n8ndrYwXw==
-X-Google-Smtp-Source: APBJJlGP4Ydweqx6Dw5EjRVWbWRtDSgxTQXty03oaVNn3/Jgi0KRnz31fGcPPR8tPo3lbYnlt3GtcQ==
-X-Received: by 2002:a05:6808:10cf:b0:3a3:fd01:504f with SMTP id
- s15-20020a05680810cf00b003a3fd01504fmr12450053ois.32.1689193845365; 
- Wed, 12 Jul 2023 13:30:45 -0700 (PDT)
-Received: from [192.168.68.107] (201-69-66-19.dial-up.telesp.net.br.
- [201.69.66.19]) by smtp.gmail.com with ESMTPSA id
- bg32-20020a05680817a000b00398031b1014sm2273088oib.26.2023.07.12.13.30.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Jul 2023 13:30:45 -0700 (PDT)
-Message-ID: <3e9b5be8-d3ca-3a17-bef9-4a6a5bdc0ad0@ventanamicro.com>
-Date: Wed, 12 Jul 2023 17:30:41 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Subject: Re: [PATCH for-8.2 6/7] target/riscv: add 'max' CPU type
-Content-Language: en-US
-To: Conor Dooley <conor@kernel.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
- palmer@rivosinc.com
-References: <20230712190149.424675-1-dbarboza@ventanamicro.com>
- <20230712190149.424675-7-dbarboza@ventanamicro.com>
- <20230712-stench-happiness-40c2ea831257@spud>
+ d=1e100.net; s=20221208; t=1689195495; x=1691787495;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=GVucVXFNkJSGKig816k3fMRcU2cBqg0nqnC1rOrLG+w=;
+ b=IAEfL48rA+C2bMFguEyYsum3zK5oA9SQFLUB7BkUiSLGIvj0W8Lk4jjrKuPfdIXPg4
+ YmsagzXYx7W2V5olYySJh7XJMsQQpgtoGdG/r73CJmRIw2SXEhRhUnaPT6qKBivuRBvP
+ S76PnZ2fDaCRBLzdUQqZQtEmScVTBZy1MNafd4YRbb3VCRXegyfVjT9Sf5Rl/L4N+MlU
+ zqydOI9GWy5yBuGPhVGcgIcQ47fq//XIEPL+TgQnOz6YCvlgjGnvdu9lqD0+SyMg+Aov
+ Xl835HDP9iHmA37Jk2POLzO8eSJMkAVz63ZLXvkmdUiLQgdaE3X0tLM+5nMrtcn5dK6V
+ jRfA==
+X-Gm-Message-State: ABy/qLY7ZODbCHGXJ2euULBDC1Qa0hsdeGlD44uiMa0fORaT1vKgsLQs
+ JpOEC8lzBjDTmItYNDK11e+Kew==
+X-Google-Smtp-Source: APBJJlGfKyn0wT+0tLmJFEQy1lQEVG0znR+YbwlDT34UbGXtMyVG2yK2wurps6bWGRU+CU5iw8fpqA==
+X-Received: by 2002:a05:6870:f10f:b0:1b7:8957:bfe0 with SMTP id
+ k15-20020a056870f10f00b001b78957bfe0mr206122oac.20.1689195495001; 
+ Wed, 12 Jul 2023 13:58:15 -0700 (PDT)
+Received: from grind.. (201-69-66-19.dial-up.telesp.net.br. [201.69.66.19])
+ by smtp.gmail.com with ESMTPSA id
+ i2-20020a056870344200b001a9911765efsm2359904oah.40.2023.07.12.13.58.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 12 Jul 2023 13:58:14 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230712-stench-happiness-40c2ea831257@spud>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::229;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x229.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH for-8.2 v2 4/7] target/riscv/cpu.c: split non-ratified exts
+ from riscv_cpu_extensions[]
+Date: Wed, 12 Jul 2023 17:57:45 -0300
+Message-ID: <20230712205748.446931-5-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20230712205748.446931-1-dbarboza@ventanamicro.com>
+References: <20230712205748.446931-1-dbarboza@ventanamicro.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2001:4860:4864:20::31;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x31.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.11,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -100,52 +96,81 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Create a new riscv_cpu_experimental_exts[] to store the non-ratified
+extensions properties. Once they are ratified we'll move them back to
+riscv_cpu_extensions[].
 
+Change riscv_cpu_add_user_properties to keep adding them to users.
 
-On 7/12/23 16:22, Conor Dooley wrote:
-> On Wed, Jul 12, 2023 at 04:01:48PM -0300, Daniel Henrique Barboza wrote:
->> The 'max' CPU type is used by tooling to determine what's the most
->> capable CPU a current QEMU version implements. Other archs such as ARM
->> implements this type. Let's add it to RISC-V.
->>
->> What we consider "most capable CPU" in this context are related to
->> ratified, non-vendor extensions. This means that we want the 'max' CPU
->> to enable all (possible) ratified extensions by default. The reasoning
->> behind this design is (1) vendor extensions can conflict with each other
->> and we won't play favorities deciding which one is default or not and
->> (2) non-ratified extensions are always prone to changes, not being
->> stable enough to be enabled by default.
->>
->> All this said, we're still not able to enable all ratified extensions
->> due to conflicts between them. Zfinx and all its dependencies aren't
->> enabled because of a conflict with RVF. zce, zcmp and zcmt are also
->> disabled due to RVD conflicts. When running with 64 bits we're also
->> disabling zcf.
->>
->> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> 
-> This seems like it will be super helpful for CI stuff etc, thanks for
-> doing it.
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ target/riscv/cpu.c | 38 +++++++++++++++++++++++---------------
+ 1 file changed, 23 insertions(+), 15 deletions(-)
 
-And Linux actually boots on it, which was remarkable to see. I was expecting something
-to blow up I guess.
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 9bbdc46126..c0826b449d 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1808,21 +1808,6 @@ static Property riscv_cpu_extensions[] = {
+     DEFINE_PROP_BOOL("zcmp", RISCVCPU, cfg.ext_zcmp, false),
+     DEFINE_PROP_BOOL("zcmt", RISCVCPU, cfg.ext_zcmt, false),
+ 
+-    /* These are experimental so mark with 'x-' */
+-    DEFINE_PROP_BOOL("x-zicond", RISCVCPU, cfg.ext_zicond, false),
+-
+-    /* ePMP 0.9.3 */
+-    DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
+-    DEFINE_PROP_BOOL("x-smaia", RISCVCPU, cfg.ext_smaia, false),
+-    DEFINE_PROP_BOOL("x-ssaia", RISCVCPU, cfg.ext_ssaia, false),
+-
+-    DEFINE_PROP_BOOL("x-zvfh", RISCVCPU, cfg.ext_zvfh, false),
+-    DEFINE_PROP_BOOL("x-zvfhmin", RISCVCPU, cfg.ext_zvfhmin, false),
+-
+-    DEFINE_PROP_BOOL("x-zfbfmin", RISCVCPU, cfg.ext_zfbfmin, false),
+-    DEFINE_PROP_BOOL("x-zvfbfmin", RISCVCPU, cfg.ext_zvfbfmin, false),
+-    DEFINE_PROP_BOOL("x-zvfbfwma", RISCVCPU, cfg.ext_zvfbfwma, false),
+-
+     DEFINE_PROP_END_OF_LIST(),
+ };
+ 
+@@ -1843,6 +1828,25 @@ static Property riscv_cpu_vendor_exts[] = {
+     DEFINE_PROP_END_OF_LIST(),
+ };
+ 
++/* These are experimental so mark with 'x-' */
++static Property riscv_cpu_experimental_exts[] = {
++    DEFINE_PROP_BOOL("x-zicond", RISCVCPU, cfg.ext_zicond, false),
++
++    /* ePMP 0.9.3 */
++    DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
++    DEFINE_PROP_BOOL("x-smaia", RISCVCPU, cfg.ext_smaia, false),
++    DEFINE_PROP_BOOL("x-ssaia", RISCVCPU, cfg.ext_ssaia, false),
++
++    DEFINE_PROP_BOOL("x-zvfh", RISCVCPU, cfg.ext_zvfh, false),
++    DEFINE_PROP_BOOL("x-zvfhmin", RISCVCPU, cfg.ext_zvfhmin, false),
++
++    DEFINE_PROP_BOOL("x-zfbfmin", RISCVCPU, cfg.ext_zfbfmin, false),
++    DEFINE_PROP_BOOL("x-zvfbfmin", RISCVCPU, cfg.ext_zvfbfmin, false),
++    DEFINE_PROP_BOOL("x-zvfbfwma", RISCVCPU, cfg.ext_zvfbfwma, false),
++
++    DEFINE_PROP_END_OF_LIST(),
++};
++
+ static Property riscv_cpu_options[] = {
+     DEFINE_PROP_UINT8("pmu-num", RISCVCPU, cfg.pmu_num, 16),
+ 
+@@ -1927,6 +1931,10 @@ static void riscv_cpu_add_user_properties(Object *obj)
+     for (prop = riscv_cpu_vendor_exts; prop && prop->name; prop++) {
+         qdev_property_add_static(dev, prop);
+     }
++
++    for (prop = riscv_cpu_experimental_exts; prop && prop->name; prop++) {
++        qdev_property_add_static(dev, prop);
++    }
+ }
+ 
+ static Property riscv_cpu_properties[] = {
+-- 
+2.41.0
 
-This is the riscv,isa DT generated:
-
-# cat /proc/device-tree/cpus/cpu@0/riscv,isa
-rv64imafdch_zicbom_zicboz_zicsr_zifencei_zihintpause_zawrs_zfa_zfh_zfhmin_zca_zcb_zcd_
-zba_zbb_zbc_zbkb_zbkc_zbkx_zbs_zk_zkn_zknd_zkne_zknh_zkr_zks_zksed_zksh_zkt_
-zve32f_zve64f_zve64d_smstateen_sscofpmf_sstc_svadu_svinval_svnapot_svpbmt#
-
-
-I'll put this in the commit message for the next version.
-
-Oh, and I just realized that I forgot to light up all the MISA bits (we're missing
-RVV). Guess I'll have to send the v2 right away.
-
-
-Thanks,
-
-
-Daniel
 
