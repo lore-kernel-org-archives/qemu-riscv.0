@@ -4,78 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18AB8EB64D9
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Jul 2023 14:38:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C682EEB64D9
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Jul 2023 15:19:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qJayJ-0000lA-I1; Wed, 12 Jul 2023 10:37:39 -0400
+	id 1qJbcK-0005Qv-G5; Wed, 12 Jul 2023 11:19:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qJayI-0000kl-Pt
- for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 10:37:38 -0400
-Received: from mail-ot1-x336.google.com ([2607:f8b0:4864:20::336])
+ id 1qJbcI-0005Qe-VT
+ for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 11:18:58 -0400
+Received: from mail-oa1-x2d.google.com ([2001:4860:4864:20::2d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qJayF-0005qX-V7
- for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 10:37:38 -0400
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-6b8decf09e1so6160901a34.0
- for <qemu-riscv@nongnu.org>; Wed, 12 Jul 2023 07:37:35 -0700 (PDT)
+ id 1qJbcG-0006cm-To
+ for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 11:18:58 -0400
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-1b3f722fdafso6346282fac.3
+ for <qemu-riscv@nongnu.org>; Wed, 12 Jul 2023 08:18:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1689172654; x=1691764654;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=XvA/EW8bgL9rBEB5uuntP1wRIt5rz95dfXHcblCouLk=;
- b=HOyvcmOn0PvoikoQYkhLmnnyOjEm2NdTRFFCj9EkZUEjxCKVYXf3sDyuOuqDMsABQf
- /BR3lmFvAKlBH9spBzcI+g+IM/84AXMXicpvA8Igmm9cCx5bBAORVKWLfZj+50GhAegt
- 48v1+4wJ/S9GR9p6Q6JnmyrB/NucHaa4HngBiumbof1Cz2JmPR2dX6qkjTz4CaAC5jF+
- WbWGRk1T0E5hrli8MW6Mu5R0yAfSpWFW80fETO3vEewSlUFds7v06dU7OfRynZEuWzKM
- u67IPy8SDdGLSZhAI6DRL/Wsnt2/W1AYZ6KyiZCcbwdeMsPFIBdI4DBvLHEUjo4FUo3r
- 8lqw==
+ d=ventanamicro.com; s=google; t=1689175135; x=1691767135;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=NNpSG6MqDlVXlRgkK1GP48lMnw6hX+h2cP548hIrfp0=;
+ b=AFX+Kq9SCjb+vGB6IhZCGPf0Nxj2g9U9dMs2qzfL1Nxr3elMx+bz536zGoJzKqvQT+
+ bVVTQXwa92n+Mv+ZINgelVPEa3QGwfjcwsXAUNyWx0rIOxDSY98jcwHEirzuL80395bG
+ dX9tYCBiCtaDh2e07Dl+8qTb0DUmoi2DrYL0l3GJ7RUP1BZmyTuJ7jWjJ0ANzLOv9NEn
+ PxaiVzTmYXfxKm0/QScSjAFTLJiIBnGxkrYGNg/Cd9eYMsArcBaBnd8V6Qvgm1l+PVja
+ J2tPAQWT44uPmEiTmsOstaeoHlQXaYOKz3GvdjqUGaEX8bgrYZ2APAl3lULwS59Sfvj2
+ h8UA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689172654; x=1691764654;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=XvA/EW8bgL9rBEB5uuntP1wRIt5rz95dfXHcblCouLk=;
- b=cVZcETFgUkTvDUSZxn356vExaCdYCZ7X7GU7eXIflVYtYWYxZshOH9g37bQvjNMup2
- uyHFvdoW8UDD97VtEXNj9SQG6cWqF3YkJgOryEiZj5vRG+CkWCGFc1n1P1rTBoR2YdTY
- 4oSvIHDwcy6X8KHBQeeVH/ZDVLFINNjjo60dNLahYja6Eh4G+2p4GodVS2qTRSg5edwn
- oH9prbIFy7valscg2hjTEAd87irhwxUXbSF300ITN+jVW3QTNc6oUNUWQF+XqbPnBbcE
- kMuuMf329LG0N4dzOwMlrY/ODpg/pioRXrEk7jwSXfN/R4qEMRvCCF/k4Voo2nKudGzM
- n+tg==
-X-Gm-Message-State: ABy/qLbtYgNw4FQXkoXeKcIjKgaUNJloVvcG815PtO52B+b/yfFZ+BCY
- ooa2TcYWZRvViTs/eM5z5UZU0g==
-X-Google-Smtp-Source: APBJJlHMU/S80yWZsdYvRzBj9tKDMKxDb8D8kg/I8Lr7/ELbM5QZu6wD1UzcY84a6Wr9PK8RPvowsA==
-X-Received: by 2002:a05:6830:328e:b0:6b8:7e53:e7c3 with SMTP id
- m14-20020a056830328e00b006b87e53e7c3mr17519659ott.31.1689172654308; 
- Wed, 12 Jul 2023 07:37:34 -0700 (PDT)
-Received: from grind.. (201-69-66-19.dial-up.telesp.net.br. [201.69.66.19])
- by smtp.gmail.com with ESMTPSA id
- s5-20020a9d7585000000b006b29947160csm1953388otk.30.2023.07.12.07.37.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Jul 2023 07:37:34 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- qemu-trivial@nongnu.org
-Subject: [PATCH] docs/system/target-riscv.rst: tidy CPU firmware section
-Date: Wed, 12 Jul 2023 11:37:28 -0300
-Message-ID: <20230712143728.383528-1-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.41.0
+ d=1e100.net; s=20221208; t=1689175135; x=1691767135;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=NNpSG6MqDlVXlRgkK1GP48lMnw6hX+h2cP548hIrfp0=;
+ b=Jws1+sd026k6VmeKTW/6PT+h9A2pONNhTEWzpko1weevRSduyXHBXwwAo9RN8T170L
+ XZKKhkveGibWzm4ebv2akQV3tSYn2hFX04L5rlXGDh6lu1DjUcxnzuGBcSm7c1T1XOz4
+ ua/uh9Rfu/DiLmM3OQyhTVdqqXXy4xyv93qgQtm1OoWCt8FEGK+qqj2at1BwggcmMf1V
+ qS22VLxxwQmkbabz61OXjhycuPjN5KGpDcV4KhtrjcgDgWJ+N/R6e7pa/2D5WkA897DC
+ 8Hv5OIwwDL/jLN1QnR9fgLj445gWdx7EmLfGK8KhkPPPuVSF+HClDTofuCkIU3M0PgBk
+ BgBA==
+X-Gm-Message-State: ABy/qLZOKI1ubasgp4q//DPQemWKNyLX7wxTDEdL3fKnE/D/qDs8sFMI
+ a2C1aRKZaE8fiiCvMHgwxNaY0g==
+X-Google-Smtp-Source: APBJJlFNeS2lij54Lbrg2ee0ZjDWH2IlP7VgvHFgkEWEMmUS2oEq5CyIX7GHtV+AgYDhYaGmch2teg==
+X-Received: by 2002:a05:6870:2215:b0:1b0:3637:2bbe with SMTP id
+ i21-20020a056870221500b001b036372bbemr22157786oaf.54.1689175135152; 
+ Wed, 12 Jul 2023 08:18:55 -0700 (PDT)
+Received: from [192.168.68.107] (201-69-66-19.dial-up.telesp.net.br.
+ [201.69.66.19]) by smtp.gmail.com with ESMTPSA id
+ q3-20020a056870e7c300b001b3538afd01sm2057447oak.51.2023.07.12.08.18.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 12 Jul 2023 08:18:54 -0700 (PDT)
+Message-ID: <6b9ed103-3355-24c5-daaf-ee1bd01eec4a@ventanamicro.com>
+Date: Wed, 12 Jul 2023 12:18:50 -0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::336;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x336.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.12.0
+Subject: Re: [PATCH v3 03/16] target/riscv: Restrict sysemu specific header to
+ user emulation
+Content-Language: en-US
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
+References: <20230711121453.59138-1-philmd@linaro.org>
+ <20230711121453.59138-4-philmd@linaro.org>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20230711121453.59138-4-philmd@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
+Received-SPF: pass client-ip=2001:4860:4864:20::2d;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x2d.google.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.11,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -93,60 +99,112 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This is how the content of the "RISC-V CPU firmware" section is
-displayed after the html is generated:
-
-"When using the sifive_u or virt machine there are three different
-firmware boot options: 1. -bios default - This is the default behaviour
-if no -bios option is included. (...) 3. -bios <file> - Tells QEMU to
-load the specified file as the firmware."
-
-It's all in the same paragraph, in a numbered list, and no special
-formatting for the options.
-
-Tidy it a bit by adding line breaks between items and its description.
-Remove the numbered list. And apply formatting for the options cited in
-the middle of the text.
-
-Cc: qemu-trivial@nongnu.org
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- docs/system/target-riscv.rst | 24 ++++++++++++++++--------
- 1 file changed, 16 insertions(+), 8 deletions(-)
-
-diff --git a/docs/system/target-riscv.rst b/docs/system/target-riscv.rst
-index 89a866e4f4..ba195f1518 100644
---- a/docs/system/target-riscv.rst
-+++ b/docs/system/target-riscv.rst
-@@ -76,11 +76,19 @@ RISC-V CPU firmware
- 
- When using the ``sifive_u`` or ``virt`` machine there are three different
- firmware boot options:
--1. ``-bios default`` - This is the default behaviour if no -bios option
--is included. This option will load the default OpenSBI firmware automatically.
--The firmware is included with the QEMU release and no user interaction is
--required. All a user needs to do is specify the kernel they want to boot
--with the -kernel option
--2. ``-bios none`` - QEMU will not automatically load any firmware. It is up
--to the user to load all the images they need.
--3. ``-bios <file>`` - Tells QEMU to load the specified file as the firmware.
-+
-+* ``-bios default``
-+
-+This is the default behaviour if no ``-bios`` option is included. This option
-+will load the default OpenSBI firmware automatically. The firmware is included
-+with the QEMU release and no user interaction is required. All a user needs to
-+do is specify the kernel they want to boot with the ``-kernel`` option
-+
-+* ``-bios none``
-+
-+QEMU will not automatically load any firmware. It is up to the user to load all
-+the images they need.
-+
-+* ``-bios <file>``
-+
-+Tells QEMU to load the specified file as the firmware.
--- 
-2.41.0
-
+UGhpbCwNCg0KDQpUaGlzIHBhdGNoIGJyZWFrcyB0aGUgYnVpbGQgZm9yIG1lLiBBcHBsaWVk
+IG9uIHRvcCBvZiBtYXN0ZXI6DQoNCg0KRkFJTEVEOiBsaWJxZW11LXJpc2N2NjQtbGludXgt
+dXNlci5mYS5wL3RhcmdldF9yaXNjdl9jcHUuYy5vDQpjYyAtbTY0IC1tY3gxNiAtSWxpYnFl
+bXUtcmlzY3Y2NC1saW51eC11c2VyLmZhLnAgLUkuIC1JLi4gLUl0YXJnZXQvcmlzY3YgLUku
+Li90YXJnZXQvcmlzY3YgLUkuLi9jb21tb24tdXNlci9ob3N0L3g4Nl82NCAtSS4uL2xpbnV4
+LXVzZXIvaW5jbHVkZS9ob3N0L3g4Nl82NCAtSS4uL2xpbnV4LXVzZXIvaW5jbHVkZSAtSWxp
+bnV4LXVzZXIgLUkuLi9saW51eC11c2VyIC1JLi4vbGludXgtdXNlci9yaXNjdiAtSXFhcGkg
+LUl0cmFjZSAtSXVpIC1JdWkvc2hhZGVyIC1JL3Vzci9pbmNsdWRlL2dsaWItMi4wIC1JL3Vz
+ci9saWI2NC9nbGliLTIuMC9pbmNsdWRlIC1JL3Vzci9pbmNsdWRlL3N5c3Byb2YtNCAtZmRp
+YWdub3N0aWNzLWNvbG9yPWF1dG8gLVdhbGwgLVdpbnZhbGlkLXBjaCAtV2Vycm9yIC1zdGQ9
+Z251MTEgLU8yIC1nIC1mc3RhY2stcHJvdGVjdG9yLXN0cm9uZyAtVV9GT1JUSUZZX1NPVVJD
+RSAtRF9GT1JUSUZZX1NPVVJDRT0yIC1XdW5kZWYgLVd3cml0ZS1zdHJpbmdzIC1XbWlzc2lu
+Zy1wcm90b3R5cGVzIC1Xc3RyaWN0LXByb3RvdHlwZXMgLVdyZWR1bmRhbnQtZGVjbHMgLVdv
+bGQtc3R5bGUtZGVjbGFyYXRpb24gLVdvbGQtc3R5bGUtZGVmaW5pdGlvbiAtV3R5cGUtbGlt
+aXRzIC1XZm9ybWF0LXNlY3VyaXR5IC1XZm9ybWF0LXkyayAtV2luaXQtc2VsZiAtV2lnbm9y
+ZWQtcXVhbGlmaWVycyAtV2VtcHR5LWJvZHkgLVduZXN0ZWQtZXh0ZXJucyAtV2VuZGlmLWxh
+YmVscyAtV2V4cGFuc2lvbi10by1kZWZpbmVkIC1XaW1wbGljaXQtZmFsbHRocm91Z2g9MiAt
+V21pc3NpbmctZm9ybWF0LWF0dHJpYnV0ZSAtV25vLW1pc3NpbmctaW5jbHVkZS1kaXJzIC1X
+bm8tc2hpZnQtbmVnYXRpdmUtdmFsdWUgLVduby1wc2FiaSAtaXN5c3RlbSAvaG9tZS9kYW5p
+ZWxoYi93b3JrL3FlbXUvbGludXgtaGVhZGVycyAtaXN5c3RlbSBsaW51eC1oZWFkZXJzIC1p
+cXVvdGUgLiAtaXF1b3RlIC9ob21lL2RhbmllbGhiL3dvcmsvcWVtdSAtaXF1b3RlIC9ob21l
+L2RhbmllbGhiL3dvcmsvcWVtdS9pbmNsdWRlIC1pcXVvdGUgL2hvbWUvZGFuaWVsaGIvd29y
+ay9xZW11L2hvc3QvaW5jbHVkZS94ODZfNjQgLWlxdW90ZSAvaG9tZS9kYW5pZWxoYi93b3Jr
+L3FlbXUvaG9zdC9pbmNsdWRlL2dlbmVyaWMgLWlxdW90ZSAvaG9tZS9kYW5pZWxoYi93b3Jr
+L3FlbXUvdGNnL2kzODYgLXB0aHJlYWQgLURfR05VX1NPVVJDRSAtRF9GSUxFX09GRlNFVF9C
+SVRTPTY0IC1EX0xBUkdFRklMRV9TT1VSQ0UgLWZuby1zdHJpY3QtYWxpYXNpbmcgLWZuby1j
+b21tb24gLWZ3cmFwdiAtZlBJRSAtaXN5c3RlbS4uL2xpbnV4LWhlYWRlcnMgLWlzeXN0ZW1s
+aW51eC1oZWFkZXJzIC1ETkVFRF9DUFVfSCAnLURDT05GSUdfVEFSR0VUPSJyaXNjdjY0LWxp
+bnV4LXVzZXItY29uZmlnLXRhcmdldC5oIicgJy1EQ09ORklHX0RFVklDRVM9InJpc2N2NjQt
+bGludXgtdXNlci1jb25maWctZGV2aWNlcy5oIicgLU1EIC1NUSBsaWJxZW11LXJpc2N2NjQt
+bGludXgtdXNlci5mYS5wL3RhcmdldF9yaXNjdl9jcHUuYy5vIC1NRiBsaWJxZW11LXJpc2N2
+NjQtbGludXgtdXNlci5mYS5wL3RhcmdldF9yaXNjdl9jcHUuYy5vLmQgLW8gbGlicWVtdS1y
+aXNjdjY0LWxpbnV4LXVzZXIuZmEucC90YXJnZXRfcmlzY3ZfY3B1LmMubyAtYyAuLi90YXJn
+ZXQvcmlzY3YvY3B1LmMNCi4uL3RhcmdldC9yaXNjdi9jcHUuYzogSW4gZnVuY3Rpb24g4oCY
+cmlzY3ZfY3B1X3JlYWxpemXigJk6DQouLi90YXJnZXQvcmlzY3YvY3B1LmM6MTQ2MTo5OiBl
+cnJvcjogaW1wbGljaXQgZGVjbGFyYXRpb24gb2YgZnVuY3Rpb24g4oCYdGNnX2VuYWJsZWTi
+gJkgWy1XZXJyb3I9aW1wbGljaXQtZnVuY3Rpb24tZGVjbGFyYXRpb25dDQogIDE0NjEgfCAg
+ICAgaWYgKHRjZ19lbmFibGVkKCkpIHsNCiAgICAgICB8ICAgICAgICAgXn5+fn5+fn5+fn4N
+Ci4uL3RhcmdldC9yaXNjdi9jcHUuYzoxNDYxOjk6IGVycm9yOiBuZXN0ZWQgZXh0ZXJuIGRl
+Y2xhcmF0aW9uIG9mIOKAmHRjZ19lbmFibGVk4oCZIFstV2Vycm9yPW5lc3RlZC1leHRlcm5z
+XQ0KY2MxOiBhbGwgd2FybmluZ3MgYmVpbmcgdHJlYXRlZCBhcyBlcnJvcnMNCg0KDQpJIGFk
+ZGVkIHRoaXMgJ3RjZ19lbmFibGVkKCknIGNhbGwgaW4gY29tbWl0IGVkZGFiYjZiOCwgInRh
+cmdldC9yaXNjdjogc2tpcA0KZmVhdHVyZXMgc2V0dXAgZm9yIEtWTSBDUFVzIiwgYmFjayBp
+biB0aGF0IHJldmlldyB3aGVyZSB3ZSBkaXNjdXNzZWQgd2hldGhlcg0KdGhpcyBzaG91bGQg
+YmUgYSBrdm1fZW5hYmxlZCgpIGNoZWNrIG9yIG5vdC4NCg0KVGhlIGJ1aWxkIGJyZWFrcyBi
+ZWNhdXNlIHdlJ3JlIG1vdmluZyB0aGUgInN5c2VtdS9rdm0uaCIgaW5jbHVkZSBhd2F5IGZy
+b20gdGhlDQpmaWxlLg0KDQpJIGFkZGVkIGEgcGF0Y2ggb24gdG9wIG9mIHRoZSBzZXJpZXMg
+dG8gZml4IHRoZSBicmVhazoNCg0KZGlmZiAtLWdpdCBhL3RhcmdldC9yaXNjdi9jcHUuYyBi
+L3RhcmdldC9yaXNjdi9jcHUuYw0KaW5kZXggYzk2ODE5ZGFmNy4uNzhmZWI2OGU4NiAxMDA2
+NDQNCi0tLSBhL3RhcmdldC9yaXNjdi9jcHUuYw0KKysrIGIvdGFyZ2V0L3Jpc2N2L2NwdS5j
+DQpAQCAtMjYsNyArMjYsNiBAQA0KICAjaWZuZGVmIENPTkZJR19VU0VSX09OTFkNCiAgI2lu
+Y2x1ZGUgInN5c2VtdS9wbXUuaCINCiAgI2luY2x1ZGUgInN5c2VtdS90aW1lX2hlbHBlci5o
+Ig0KLSNpbmNsdWRlICJzeXNlbXUvdGNnLmgiDQogICNpbmNsdWRlICJzeXNlbXUva3ZtLmgi
+DQogICNpbmNsdWRlICJzeXNlbXUva3ZtX3Jpc2N2LmgiDQogICNlbmRpZg0KQEAgLTM5LDYg
+KzM4LDcgQEANCiAgI2luY2x1ZGUgIm1pZ3JhdGlvbi92bXN0YXRlLmgiDQogICNpbmNsdWRl
+ICJmcHUvc29mdGZsb2F0LWhlbHBlcnMuaCINCiAgI2lmZGVmIENPTkZJR19UQ0cNCisjaW5j
+bHVkZSAic3lzZW11L3RjZy5oIg0KICAjaW5jbHVkZSAidGNnL3RjZy5oIg0KICAjZW5kaWYN
+CiAgDQpAQCAtMTQ2OCw2ICsxNDY4LDcgQEAgc3RhdGljIHZvaWQgcmlzY3ZfY3B1X3JlYWxp
+emUoRGV2aWNlU3RhdGUgKmRldiwgRXJyb3IgKiplcnJwKQ0KICAgICAgICAgIHJldHVybjsN
+CiAgICAgIH0NCiAgDQorI2lmZGVmIENPTkZJR19UQ0cNCiAgICAgIGlmICh0Y2dfZW5hYmxl
+ZCgpKSB7DQogICAgICAgICAgcmlzY3ZfY3B1X3JlYWxpemVfdGNnKGRldiwgJmxvY2FsX2Vy
+cik7DQogICAgICAgICAgaWYgKGxvY2FsX2VyciAhPSBOVUxMKSB7DQpAQCAtMTQ3NSw2ICsx
+NDc2LDcgQEAgc3RhdGljIHZvaWQgcmlzY3ZfY3B1X3JlYWxpemUoRGV2aWNlU3RhdGUgKmRl
+diwgRXJyb3IgKiplcnJwKQ0KICAgICAgICAgICAgICByZXR1cm47DQogICAgICAgICAgfQ0K
+ICAgICAgfQ0KKyNlbmRpZg0KICANCiAgICAgIHJpc2N2X2NwdV9maW5hbGl6ZV9mZWF0dXJl
+cyhjcHUsICZsb2NhbF9lcnIpOw0KDQpJJ20gdW5zdXJlIGlmIHRoaXMgaXMgdGhlIHJpZ2h0
+IGZpeCBmb3Igd2hhdCB5b3UncmUgYWltaW5nIHRvIGRvIGhlcmUgdGhvdWdoLg0KDQoNClRo
+YW5rcywNCg0KDQpEYW5pZWwNCg0KDQpPbiA3LzExLzIzIDA5OjE0LCBQaGlsaXBwZSBNYXRo
+aWV1LURhdWTDqSB3cm90ZToNCj4gU2lnbmVkLW9mZi1ieTogUGhpbGlwcGUgTWF0aGlldS1E
+YXVkw6kgPHBoaWxtZEBsaW5hcm8ub3JnPg0KPiBSZXZpZXdlZC1ieTogRGFuaWVsIEhlbnJp
+cXVlIEJhcmJvemEgPGRiYXJib3phQHZlbnRhbmFtaWNyby5jb20+DQo+IEFja2VkLWJ5OiBB
+bGlzdGFpciBGcmFuY2lzIDxhbGlzdGFpci5mcmFuY2lzQHdkYy5jb20+DQo+IC0tLQ0KPiAg
+IHRhcmdldC9yaXNjdi9jcHUuYyAgICAgICAgfCAxMCArKysrKystLS0tDQo+ICAgdGFyZ2V0
+L3Jpc2N2L2NwdV9oZWxwZXIuYyB8ICAyICsrDQo+ICAgdGFyZ2V0L3Jpc2N2L2Nzci5jICAg
+ICAgICB8ICAyICsrDQo+ICAgMyBmaWxlcyBjaGFuZ2VkLCAxMCBpbnNlcnRpb25zKCspLCA0
+IGRlbGV0aW9ucygtKQ0KPiANCj4gZGlmZiAtLWdpdCBhL3RhcmdldC9yaXNjdi9jcHUuYyBi
+L3RhcmdldC9yaXNjdi9jcHUuYw0KPiBpbmRleCA5MzM5YzAyNDFkLi41NzEyYTU0NDA0IDEw
+MDY0NA0KPiAtLS0gYS90YXJnZXQvcmlzY3YvY3B1LmMNCj4gKysrIGIvdGFyZ2V0L3Jpc2N2
+L2NwdS5jDQo+IEBAIC0yMyw5ICsyMywxNCBAQA0KPiAgICNpbmNsdWRlICJxZW11L2xvZy5o
+Ig0KPiAgICNpbmNsdWRlICJjcHUuaCINCj4gICAjaW5jbHVkZSAiY3B1X3ZlbmRvcmlkLmgi
+DQo+ICsjaWZuZGVmIENPTkZJR19VU0VSX09OTFkNCj4gICAjaW5jbHVkZSAicG11LmgiDQo+
+IC0jaW5jbHVkZSAiaW50ZXJuYWxzLmgiDQo+ICAgI2luY2x1ZGUgInRpbWVfaGVscGVyLmgi
+DQo+ICsjaW5jbHVkZSAic3lzZW11L3RjZy5oIg0KPiArI2luY2x1ZGUgInN5c2VtdS9rdm0u
+aCINCj4gKyNpbmNsdWRlICJrdm1fcmlzY3YuaCINCj4gKyNlbmRpZg0KPiArI2luY2x1ZGUg
+ImludGVybmFscy5oIg0KPiAgICNpbmNsdWRlICJleGVjL2V4ZWMtYWxsLmgiDQo+ICAgI2lu
+Y2x1ZGUgInFhcGkvZXJyb3IuaCINCj4gICAjaW5jbHVkZSAicWFwaS92aXNpdG9yLmgiDQo+
+IEBAIC0zMyw5ICszOCw2IEBADQo+ICAgI2luY2x1ZGUgImh3L3FkZXYtcHJvcGVydGllcy5o
+Ig0KPiAgICNpbmNsdWRlICJtaWdyYXRpb24vdm1zdGF0ZS5oIg0KPiAgICNpbmNsdWRlICJm
+cHUvc29mdGZsb2F0LWhlbHBlcnMuaCINCj4gLSNpbmNsdWRlICJzeXNlbXUva3ZtLmgiDQo+
+IC0jaW5jbHVkZSAic3lzZW11L3RjZy5oIg0KPiAtI2luY2x1ZGUgImt2bV9yaXNjdi5oIg0K
+PiAgICNpbmNsdWRlICJ0Y2cvdGNnLmgiDQo+ICAgDQo+ICAgLyogUklTQy1WIENQVSBkZWZp
+bml0aW9ucyAqLw0KPiBkaWZmIC0tZ2l0IGEvdGFyZ2V0L3Jpc2N2L2NwdV9oZWxwZXIuYyBi
+L3RhcmdldC9yaXNjdi9jcHVfaGVscGVyLmMNCj4gaW5kZXggOWY2MTFkODliYi4uZThiN2Y3
+MGJlMyAxMDA2NDQNCj4gLS0tIGEvdGFyZ2V0L3Jpc2N2L2NwdV9oZWxwZXIuYw0KPiArKysg
+Yi90YXJnZXQvcmlzY3YvY3B1X2hlbHBlci5jDQo+IEBAIC0yOCw3ICsyOCw5IEBADQo+ICAg
+I2luY2x1ZGUgInRjZy90Y2ctb3AuaCINCj4gICAjaW5jbHVkZSAidHJhY2UuaCINCj4gICAj
+aW5jbHVkZSAic2VtaWhvc3RpbmcvY29tbW9uLXNlbWkuaCINCj4gKyNpZm5kZWYgQ09ORklH
+X1VTRVJfT05MWQ0KPiAgICNpbmNsdWRlICJzeXNlbXUvY3B1LXRpbWVycy5oIg0KPiArI2Vu
+ZGlmDQo+ICAgI2luY2x1ZGUgImNwdV9iaXRzLmgiDQo+ICAgI2luY2x1ZGUgImRlYnVnLmgi
+DQo+ICAgI2luY2x1ZGUgInRjZy9vdmVyc2l6ZWQtZ3Vlc3QuaCINCj4gZGlmZiAtLWdpdCBh
+L3RhcmdldC9yaXNjdi9jc3IuYyBiL3RhcmdldC9yaXNjdi9jc3IuYw0KPiBpbmRleCBlYTc1
+ODUzMjllLi5lNTczN2RjZjU4IDEwMDY0NA0KPiAtLS0gYS90YXJnZXQvcmlzY3YvY3NyLmMN
+Cj4gKysrIGIvdGFyZ2V0L3Jpc2N2L2Nzci5jDQo+IEBAIC0yMSw4ICsyMSwxMCBAQA0KPiAg
+ICNpbmNsdWRlICJxZW11L2xvZy5oIg0KPiAgICNpbmNsdWRlICJxZW11L3RpbWVyLmgiDQo+
+ICAgI2luY2x1ZGUgImNwdS5oIg0KPiArI2lmbmRlZiBDT05GSUdfVVNFUl9PTkxZDQo+ICAg
+I2luY2x1ZGUgInBtdS5oIg0KPiAgICNpbmNsdWRlICJ0aW1lX2hlbHBlci5oIg0KPiArI2Vu
+ZGlmDQo+ICAgI2luY2x1ZGUgInFlbXUvbWFpbi1sb29wLmgiDQo+ICAgI2luY2x1ZGUgImV4
+ZWMvZXhlYy1hbGwuaCINCj4gICAjaW5jbHVkZSAiZXhlYy90Yi1mbHVzaC5oIg0K
 
