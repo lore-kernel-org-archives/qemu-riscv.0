@@ -4,86 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C682EEB64D9
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Jul 2023 15:19:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72F8BEB64DA
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Jul 2023 16:40:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qJbcK-0005Qv-G5; Wed, 12 Jul 2023 11:19:00 -0400
+	id 1qJcsl-0003gE-CA; Wed, 12 Jul 2023 12:40:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qJbcI-0005Qe-VT
- for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 11:18:58 -0400
-Received: from mail-oa1-x2d.google.com ([2001:4860:4864:20::2d])
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1qJcsi-0003dt-8e
+ for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 12:40:00 -0400
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qJbcG-0006cm-To
- for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 11:18:58 -0400
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-1b3f722fdafso6346282fac.3
- for <qemu-riscv@nongnu.org>; Wed, 12 Jul 2023 08:18:56 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1qJcsf-0004bD-Mu
+ for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 12:40:00 -0400
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-1b89d47ffb6so37808075ad.2
+ for <qemu-riscv@nongnu.org>; Wed, 12 Jul 2023 09:39:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1689175135; x=1691767135;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=NNpSG6MqDlVXlRgkK1GP48lMnw6hX+h2cP548hIrfp0=;
- b=AFX+Kq9SCjb+vGB6IhZCGPf0Nxj2g9U9dMs2qzfL1Nxr3elMx+bz536zGoJzKqvQT+
- bVVTQXwa92n+Mv+ZINgelVPEa3QGwfjcwsXAUNyWx0rIOxDSY98jcwHEirzuL80395bG
- dX9tYCBiCtaDh2e07Dl+8qTb0DUmoi2DrYL0l3GJ7RUP1BZmyTuJ7jWjJ0ANzLOv9NEn
- PxaiVzTmYXfxKm0/QScSjAFTLJiIBnGxkrYGNg/Cd9eYMsArcBaBnd8V6Qvgm1l+PVja
- J2tPAQWT44uPmEiTmsOstaeoHlQXaYOKz3GvdjqUGaEX8bgrYZ2APAl3lULwS59Sfvj2
- h8UA==
+ d=ventanamicro.com; s=google; t=1689179996; x=1691771996;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Lu6/lJ6nJ6IfmttPhp9N/F2YV6d72m51nrXTGOHEspY=;
+ b=nNyCRAf2TUj0DvZhG1de5ksAnfMkfEcDO8CGWId+8vnT+WcUNMc/a5zMT0q/1PGxNp
+ 3KLiOgNlsyWY7SW84WtMuksJINdFtzVPCJcpSgXSnOB7lhCAyk/29VxC+olVaBEjbxpl
+ +2xOjokoc35pP6tRELvHnZS3sIP8lTaSO3g6u1Etles2/wGiKrJkEdeCD/MOudi3ddGl
+ 2/K3zxwkEVu7Z/dRJ3LSpGzPCivaGYbfu/NNrbjApNMh1GC+nSM101qXZ3oYqUI6gXgO
+ O5g9sO3X4x71kajkRCPLxnmWEHiLBwAI7OOw5925l+MbaI1XL7zj105mG/QCkIYjxtwj
+ 8r6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689175135; x=1691767135;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=NNpSG6MqDlVXlRgkK1GP48lMnw6hX+h2cP548hIrfp0=;
- b=Jws1+sd026k6VmeKTW/6PT+h9A2pONNhTEWzpko1weevRSduyXHBXwwAo9RN8T170L
- XZKKhkveGibWzm4ebv2akQV3tSYn2hFX04L5rlXGDh6lu1DjUcxnzuGBcSm7c1T1XOz4
- ua/uh9Rfu/DiLmM3OQyhTVdqqXXy4xyv93qgQtm1OoWCt8FEGK+qqj2at1BwggcmMf1V
- qS22VLxxwQmkbabz61OXjhycuPjN5KGpDcV4KhtrjcgDgWJ+N/R6e7pa/2D5WkA897DC
- 8Hv5OIwwDL/jLN1QnR9fgLj445gWdx7EmLfGK8KhkPPPuVSF+HClDTofuCkIU3M0PgBk
- BgBA==
-X-Gm-Message-State: ABy/qLZOKI1ubasgp4q//DPQemWKNyLX7wxTDEdL3fKnE/D/qDs8sFMI
- a2C1aRKZaE8fiiCvMHgwxNaY0g==
-X-Google-Smtp-Source: APBJJlFNeS2lij54Lbrg2ee0ZjDWH2IlP7VgvHFgkEWEMmUS2oEq5CyIX7GHtV+AgYDhYaGmch2teg==
-X-Received: by 2002:a05:6870:2215:b0:1b0:3637:2bbe with SMTP id
- i21-20020a056870221500b001b036372bbemr22157786oaf.54.1689175135152; 
- Wed, 12 Jul 2023 08:18:55 -0700 (PDT)
-Received: from [192.168.68.107] (201-69-66-19.dial-up.telesp.net.br.
- [201.69.66.19]) by smtp.gmail.com with ESMTPSA id
- q3-20020a056870e7c300b001b3538afd01sm2057447oak.51.2023.07.12.08.18.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Jul 2023 08:18:54 -0700 (PDT)
-Message-ID: <6b9ed103-3355-24c5-daaf-ee1bd01eec4a@ventanamicro.com>
-Date: Wed, 12 Jul 2023 12:18:50 -0300
+ d=1e100.net; s=20221208; t=1689179996; x=1691771996;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Lu6/lJ6nJ6IfmttPhp9N/F2YV6d72m51nrXTGOHEspY=;
+ b=QdAAVQXMPP6Dyup3IT6lcIB94lXq8Zrn0En882DWv4I3BdoefHl4J0/HGP7MwsR4VV
+ B6LpswPyi6UkhDSkGzEH8ot2Kn2aCrOWazXwphGl/WJ0JWAxHNQuWHZ+GxFlV8DKGoJ/
+ /GZxmdbVU69rUuQU4P3JA6aAP2881C+gF/2Es1wYP8CeyiixYDWpzVFGdNeRPDNYmy2Y
+ APkmXqFEJQZuKhIhw/dNjrqIbH2Fl0NA4sUWMlZHtagdlPsh0zZ4mRxIT99LOOvolisd
+ EN7f7F858lP6kN0jAp/Ewy7sybpd6RSWjF3XZGmLCc2L7vn/Gb1Z58PJ2UhqWziCGqJT
+ nbSg==
+X-Gm-Message-State: ABy/qLbNkTpcbfF6wH8/gbEsHglPq6YuKtTBUSuyOP5JHm89xMAyLAdc
+ iyXfTSz5irCvP93WzGXiqLhkGA==
+X-Google-Smtp-Source: APBJJlGLiOIIML2no3vassfh0hhBvtIYs2CW1W9MVjdbRmy4GHg0jWoBy2Oo28RUvdAymQpzfZqgRQ==
+X-Received: by 2002:a17:902:6bc9:b0:1b8:2537:541c with SMTP id
+ m9-20020a1709026bc900b001b82537541cmr13238841plt.32.1689179996161; 
+ Wed, 12 Jul 2023 09:39:56 -0700 (PDT)
+Received: from sunil-pc.Dlink ([106.51.190.25])
+ by smtp.gmail.com with ESMTPSA id
+ a18-20020a1709027d9200b001ac7f583f72sm4172824plm.209.2023.07.12.09.39.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 12 Jul 2023 09:39:55 -0700 (PDT)
+From: Sunil V L <sunilvl@ventanamicro.com>
+To: qemu-devel@nongnu.org,
+	qemu-arm@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: "Michael S . Tsirkin" <mst@redhat.com>,
+ Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Shannon Zhao <shannon.zhaosl@gmail.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Andrew Jones <ajones@ventanamicro.com>,
+ Anup Patel <apatel@ventanamicro.com>, Sunil V L <sunilvl@ventanamicro.com>
+Subject: [PATCH 01/10] hw/arm/virt-acpi-build.c: Move fw_cfg and virtio to
+ common location
+Date: Wed, 12 Jul 2023 22:09:34 +0530
+Message-Id: <20230712163943.98994-2-sunilvl@ventanamicro.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20230712163943.98994-1-sunilvl@ventanamicro.com>
+References: <20230712163943.98994-1-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Subject: Re: [PATCH v3 03/16] target/riscv: Restrict sysemu specific header to
- user emulation
-Content-Language: en-US
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
-References: <20230711121453.59138-1-philmd@linaro.org>
- <20230711121453.59138-4-philmd@linaro.org>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230711121453.59138-4-philmd@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-Received-SPF: pass client-ip=2001:4860:4864:20::2d;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x2d.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x634.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.11,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,112 +106,184 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-UGhpbCwNCg0KDQpUaGlzIHBhdGNoIGJyZWFrcyB0aGUgYnVpbGQgZm9yIG1lLiBBcHBsaWVk
-IG9uIHRvcCBvZiBtYXN0ZXI6DQoNCg0KRkFJTEVEOiBsaWJxZW11LXJpc2N2NjQtbGludXgt
-dXNlci5mYS5wL3RhcmdldF9yaXNjdl9jcHUuYy5vDQpjYyAtbTY0IC1tY3gxNiAtSWxpYnFl
-bXUtcmlzY3Y2NC1saW51eC11c2VyLmZhLnAgLUkuIC1JLi4gLUl0YXJnZXQvcmlzY3YgLUku
-Li90YXJnZXQvcmlzY3YgLUkuLi9jb21tb24tdXNlci9ob3N0L3g4Nl82NCAtSS4uL2xpbnV4
-LXVzZXIvaW5jbHVkZS9ob3N0L3g4Nl82NCAtSS4uL2xpbnV4LXVzZXIvaW5jbHVkZSAtSWxp
-bnV4LXVzZXIgLUkuLi9saW51eC11c2VyIC1JLi4vbGludXgtdXNlci9yaXNjdiAtSXFhcGkg
-LUl0cmFjZSAtSXVpIC1JdWkvc2hhZGVyIC1JL3Vzci9pbmNsdWRlL2dsaWItMi4wIC1JL3Vz
-ci9saWI2NC9nbGliLTIuMC9pbmNsdWRlIC1JL3Vzci9pbmNsdWRlL3N5c3Byb2YtNCAtZmRp
-YWdub3N0aWNzLWNvbG9yPWF1dG8gLVdhbGwgLVdpbnZhbGlkLXBjaCAtV2Vycm9yIC1zdGQ9
-Z251MTEgLU8yIC1nIC1mc3RhY2stcHJvdGVjdG9yLXN0cm9uZyAtVV9GT1JUSUZZX1NPVVJD
-RSAtRF9GT1JUSUZZX1NPVVJDRT0yIC1XdW5kZWYgLVd3cml0ZS1zdHJpbmdzIC1XbWlzc2lu
-Zy1wcm90b3R5cGVzIC1Xc3RyaWN0LXByb3RvdHlwZXMgLVdyZWR1bmRhbnQtZGVjbHMgLVdv
-bGQtc3R5bGUtZGVjbGFyYXRpb24gLVdvbGQtc3R5bGUtZGVmaW5pdGlvbiAtV3R5cGUtbGlt
-aXRzIC1XZm9ybWF0LXNlY3VyaXR5IC1XZm9ybWF0LXkyayAtV2luaXQtc2VsZiAtV2lnbm9y
-ZWQtcXVhbGlmaWVycyAtV2VtcHR5LWJvZHkgLVduZXN0ZWQtZXh0ZXJucyAtV2VuZGlmLWxh
-YmVscyAtV2V4cGFuc2lvbi10by1kZWZpbmVkIC1XaW1wbGljaXQtZmFsbHRocm91Z2g9MiAt
-V21pc3NpbmctZm9ybWF0LWF0dHJpYnV0ZSAtV25vLW1pc3NpbmctaW5jbHVkZS1kaXJzIC1X
-bm8tc2hpZnQtbmVnYXRpdmUtdmFsdWUgLVduby1wc2FiaSAtaXN5c3RlbSAvaG9tZS9kYW5p
-ZWxoYi93b3JrL3FlbXUvbGludXgtaGVhZGVycyAtaXN5c3RlbSBsaW51eC1oZWFkZXJzIC1p
-cXVvdGUgLiAtaXF1b3RlIC9ob21lL2RhbmllbGhiL3dvcmsvcWVtdSAtaXF1b3RlIC9ob21l
-L2RhbmllbGhiL3dvcmsvcWVtdS9pbmNsdWRlIC1pcXVvdGUgL2hvbWUvZGFuaWVsaGIvd29y
-ay9xZW11L2hvc3QvaW5jbHVkZS94ODZfNjQgLWlxdW90ZSAvaG9tZS9kYW5pZWxoYi93b3Jr
-L3FlbXUvaG9zdC9pbmNsdWRlL2dlbmVyaWMgLWlxdW90ZSAvaG9tZS9kYW5pZWxoYi93b3Jr
-L3FlbXUvdGNnL2kzODYgLXB0aHJlYWQgLURfR05VX1NPVVJDRSAtRF9GSUxFX09GRlNFVF9C
-SVRTPTY0IC1EX0xBUkdFRklMRV9TT1VSQ0UgLWZuby1zdHJpY3QtYWxpYXNpbmcgLWZuby1j
-b21tb24gLWZ3cmFwdiAtZlBJRSAtaXN5c3RlbS4uL2xpbnV4LWhlYWRlcnMgLWlzeXN0ZW1s
-aW51eC1oZWFkZXJzIC1ETkVFRF9DUFVfSCAnLURDT05GSUdfVEFSR0VUPSJyaXNjdjY0LWxp
-bnV4LXVzZXItY29uZmlnLXRhcmdldC5oIicgJy1EQ09ORklHX0RFVklDRVM9InJpc2N2NjQt
-bGludXgtdXNlci1jb25maWctZGV2aWNlcy5oIicgLU1EIC1NUSBsaWJxZW11LXJpc2N2NjQt
-bGludXgtdXNlci5mYS5wL3RhcmdldF9yaXNjdl9jcHUuYy5vIC1NRiBsaWJxZW11LXJpc2N2
-NjQtbGludXgtdXNlci5mYS5wL3RhcmdldF9yaXNjdl9jcHUuYy5vLmQgLW8gbGlicWVtdS1y
-aXNjdjY0LWxpbnV4LXVzZXIuZmEucC90YXJnZXRfcmlzY3ZfY3B1LmMubyAtYyAuLi90YXJn
-ZXQvcmlzY3YvY3B1LmMNCi4uL3RhcmdldC9yaXNjdi9jcHUuYzogSW4gZnVuY3Rpb24g4oCY
-cmlzY3ZfY3B1X3JlYWxpemXigJk6DQouLi90YXJnZXQvcmlzY3YvY3B1LmM6MTQ2MTo5OiBl
-cnJvcjogaW1wbGljaXQgZGVjbGFyYXRpb24gb2YgZnVuY3Rpb24g4oCYdGNnX2VuYWJsZWTi
-gJkgWy1XZXJyb3I9aW1wbGljaXQtZnVuY3Rpb24tZGVjbGFyYXRpb25dDQogIDE0NjEgfCAg
-ICAgaWYgKHRjZ19lbmFibGVkKCkpIHsNCiAgICAgICB8ICAgICAgICAgXn5+fn5+fn5+fn4N
-Ci4uL3RhcmdldC9yaXNjdi9jcHUuYzoxNDYxOjk6IGVycm9yOiBuZXN0ZWQgZXh0ZXJuIGRl
-Y2xhcmF0aW9uIG9mIOKAmHRjZ19lbmFibGVk4oCZIFstV2Vycm9yPW5lc3RlZC1leHRlcm5z
-XQ0KY2MxOiBhbGwgd2FybmluZ3MgYmVpbmcgdHJlYXRlZCBhcyBlcnJvcnMNCg0KDQpJIGFk
-ZGVkIHRoaXMgJ3RjZ19lbmFibGVkKCknIGNhbGwgaW4gY29tbWl0IGVkZGFiYjZiOCwgInRh
-cmdldC9yaXNjdjogc2tpcA0KZmVhdHVyZXMgc2V0dXAgZm9yIEtWTSBDUFVzIiwgYmFjayBp
-biB0aGF0IHJldmlldyB3aGVyZSB3ZSBkaXNjdXNzZWQgd2hldGhlcg0KdGhpcyBzaG91bGQg
-YmUgYSBrdm1fZW5hYmxlZCgpIGNoZWNrIG9yIG5vdC4NCg0KVGhlIGJ1aWxkIGJyZWFrcyBi
-ZWNhdXNlIHdlJ3JlIG1vdmluZyB0aGUgInN5c2VtdS9rdm0uaCIgaW5jbHVkZSBhd2F5IGZy
-b20gdGhlDQpmaWxlLg0KDQpJIGFkZGVkIGEgcGF0Y2ggb24gdG9wIG9mIHRoZSBzZXJpZXMg
-dG8gZml4IHRoZSBicmVhazoNCg0KZGlmZiAtLWdpdCBhL3RhcmdldC9yaXNjdi9jcHUuYyBi
-L3RhcmdldC9yaXNjdi9jcHUuYw0KaW5kZXggYzk2ODE5ZGFmNy4uNzhmZWI2OGU4NiAxMDA2
-NDQNCi0tLSBhL3RhcmdldC9yaXNjdi9jcHUuYw0KKysrIGIvdGFyZ2V0L3Jpc2N2L2NwdS5j
-DQpAQCAtMjYsNyArMjYsNiBAQA0KICAjaWZuZGVmIENPTkZJR19VU0VSX09OTFkNCiAgI2lu
-Y2x1ZGUgInN5c2VtdS9wbXUuaCINCiAgI2luY2x1ZGUgInN5c2VtdS90aW1lX2hlbHBlci5o
-Ig0KLSNpbmNsdWRlICJzeXNlbXUvdGNnLmgiDQogICNpbmNsdWRlICJzeXNlbXUva3ZtLmgi
-DQogICNpbmNsdWRlICJzeXNlbXUva3ZtX3Jpc2N2LmgiDQogICNlbmRpZg0KQEAgLTM5LDYg
-KzM4LDcgQEANCiAgI2luY2x1ZGUgIm1pZ3JhdGlvbi92bXN0YXRlLmgiDQogICNpbmNsdWRl
-ICJmcHUvc29mdGZsb2F0LWhlbHBlcnMuaCINCiAgI2lmZGVmIENPTkZJR19UQ0cNCisjaW5j
-bHVkZSAic3lzZW11L3RjZy5oIg0KICAjaW5jbHVkZSAidGNnL3RjZy5oIg0KICAjZW5kaWYN
-CiAgDQpAQCAtMTQ2OCw2ICsxNDY4LDcgQEAgc3RhdGljIHZvaWQgcmlzY3ZfY3B1X3JlYWxp
-emUoRGV2aWNlU3RhdGUgKmRldiwgRXJyb3IgKiplcnJwKQ0KICAgICAgICAgIHJldHVybjsN
-CiAgICAgIH0NCiAgDQorI2lmZGVmIENPTkZJR19UQ0cNCiAgICAgIGlmICh0Y2dfZW5hYmxl
-ZCgpKSB7DQogICAgICAgICAgcmlzY3ZfY3B1X3JlYWxpemVfdGNnKGRldiwgJmxvY2FsX2Vy
-cik7DQogICAgICAgICAgaWYgKGxvY2FsX2VyciAhPSBOVUxMKSB7DQpAQCAtMTQ3NSw2ICsx
-NDc2LDcgQEAgc3RhdGljIHZvaWQgcmlzY3ZfY3B1X3JlYWxpemUoRGV2aWNlU3RhdGUgKmRl
-diwgRXJyb3IgKiplcnJwKQ0KICAgICAgICAgICAgICByZXR1cm47DQogICAgICAgICAgfQ0K
-ICAgICAgfQ0KKyNlbmRpZg0KICANCiAgICAgIHJpc2N2X2NwdV9maW5hbGl6ZV9mZWF0dXJl
-cyhjcHUsICZsb2NhbF9lcnIpOw0KDQpJJ20gdW5zdXJlIGlmIHRoaXMgaXMgdGhlIHJpZ2h0
-IGZpeCBmb3Igd2hhdCB5b3UncmUgYWltaW5nIHRvIGRvIGhlcmUgdGhvdWdoLg0KDQoNClRo
-YW5rcywNCg0KDQpEYW5pZWwNCg0KDQpPbiA3LzExLzIzIDA5OjE0LCBQaGlsaXBwZSBNYXRo
-aWV1LURhdWTDqSB3cm90ZToNCj4gU2lnbmVkLW9mZi1ieTogUGhpbGlwcGUgTWF0aGlldS1E
-YXVkw6kgPHBoaWxtZEBsaW5hcm8ub3JnPg0KPiBSZXZpZXdlZC1ieTogRGFuaWVsIEhlbnJp
-cXVlIEJhcmJvemEgPGRiYXJib3phQHZlbnRhbmFtaWNyby5jb20+DQo+IEFja2VkLWJ5OiBB
-bGlzdGFpciBGcmFuY2lzIDxhbGlzdGFpci5mcmFuY2lzQHdkYy5jb20+DQo+IC0tLQ0KPiAg
-IHRhcmdldC9yaXNjdi9jcHUuYyAgICAgICAgfCAxMCArKysrKystLS0tDQo+ICAgdGFyZ2V0
-L3Jpc2N2L2NwdV9oZWxwZXIuYyB8ICAyICsrDQo+ICAgdGFyZ2V0L3Jpc2N2L2Nzci5jICAg
-ICAgICB8ICAyICsrDQo+ICAgMyBmaWxlcyBjaGFuZ2VkLCAxMCBpbnNlcnRpb25zKCspLCA0
-IGRlbGV0aW9ucygtKQ0KPiANCj4gZGlmZiAtLWdpdCBhL3RhcmdldC9yaXNjdi9jcHUuYyBi
-L3RhcmdldC9yaXNjdi9jcHUuYw0KPiBpbmRleCA5MzM5YzAyNDFkLi41NzEyYTU0NDA0IDEw
-MDY0NA0KPiAtLS0gYS90YXJnZXQvcmlzY3YvY3B1LmMNCj4gKysrIGIvdGFyZ2V0L3Jpc2N2
-L2NwdS5jDQo+IEBAIC0yMyw5ICsyMywxNCBAQA0KPiAgICNpbmNsdWRlICJxZW11L2xvZy5o
-Ig0KPiAgICNpbmNsdWRlICJjcHUuaCINCj4gICAjaW5jbHVkZSAiY3B1X3ZlbmRvcmlkLmgi
-DQo+ICsjaWZuZGVmIENPTkZJR19VU0VSX09OTFkNCj4gICAjaW5jbHVkZSAicG11LmgiDQo+
-IC0jaW5jbHVkZSAiaW50ZXJuYWxzLmgiDQo+ICAgI2luY2x1ZGUgInRpbWVfaGVscGVyLmgi
-DQo+ICsjaW5jbHVkZSAic3lzZW11L3RjZy5oIg0KPiArI2luY2x1ZGUgInN5c2VtdS9rdm0u
-aCINCj4gKyNpbmNsdWRlICJrdm1fcmlzY3YuaCINCj4gKyNlbmRpZg0KPiArI2luY2x1ZGUg
-ImludGVybmFscy5oIg0KPiAgICNpbmNsdWRlICJleGVjL2V4ZWMtYWxsLmgiDQo+ICAgI2lu
-Y2x1ZGUgInFhcGkvZXJyb3IuaCINCj4gICAjaW5jbHVkZSAicWFwaS92aXNpdG9yLmgiDQo+
-IEBAIC0zMyw5ICszOCw2IEBADQo+ICAgI2luY2x1ZGUgImh3L3FkZXYtcHJvcGVydGllcy5o
-Ig0KPiAgICNpbmNsdWRlICJtaWdyYXRpb24vdm1zdGF0ZS5oIg0KPiAgICNpbmNsdWRlICJm
-cHUvc29mdGZsb2F0LWhlbHBlcnMuaCINCj4gLSNpbmNsdWRlICJzeXNlbXUva3ZtLmgiDQo+
-IC0jaW5jbHVkZSAic3lzZW11L3RjZy5oIg0KPiAtI2luY2x1ZGUgImt2bV9yaXNjdi5oIg0K
-PiAgICNpbmNsdWRlICJ0Y2cvdGNnLmgiDQo+ICAgDQo+ICAgLyogUklTQy1WIENQVSBkZWZp
-bml0aW9ucyAqLw0KPiBkaWZmIC0tZ2l0IGEvdGFyZ2V0L3Jpc2N2L2NwdV9oZWxwZXIuYyBi
-L3RhcmdldC9yaXNjdi9jcHVfaGVscGVyLmMNCj4gaW5kZXggOWY2MTFkODliYi4uZThiN2Y3
-MGJlMyAxMDA2NDQNCj4gLS0tIGEvdGFyZ2V0L3Jpc2N2L2NwdV9oZWxwZXIuYw0KPiArKysg
-Yi90YXJnZXQvcmlzY3YvY3B1X2hlbHBlci5jDQo+IEBAIC0yOCw3ICsyOCw5IEBADQo+ICAg
-I2luY2x1ZGUgInRjZy90Y2ctb3AuaCINCj4gICAjaW5jbHVkZSAidHJhY2UuaCINCj4gICAj
-aW5jbHVkZSAic2VtaWhvc3RpbmcvY29tbW9uLXNlbWkuaCINCj4gKyNpZm5kZWYgQ09ORklH
-X1VTRVJfT05MWQ0KPiAgICNpbmNsdWRlICJzeXNlbXUvY3B1LXRpbWVycy5oIg0KPiArI2Vu
-ZGlmDQo+ICAgI2luY2x1ZGUgImNwdV9iaXRzLmgiDQo+ICAgI2luY2x1ZGUgImRlYnVnLmgi
-DQo+ICAgI2luY2x1ZGUgInRjZy9vdmVyc2l6ZWQtZ3Vlc3QuaCINCj4gZGlmZiAtLWdpdCBh
-L3RhcmdldC9yaXNjdi9jc3IuYyBiL3RhcmdldC9yaXNjdi9jc3IuYw0KPiBpbmRleCBlYTc1
-ODUzMjllLi5lNTczN2RjZjU4IDEwMDY0NA0KPiAtLS0gYS90YXJnZXQvcmlzY3YvY3NyLmMN
-Cj4gKysrIGIvdGFyZ2V0L3Jpc2N2L2Nzci5jDQo+IEBAIC0yMSw4ICsyMSwxMCBAQA0KPiAg
-ICNpbmNsdWRlICJxZW11L2xvZy5oIg0KPiAgICNpbmNsdWRlICJxZW11L3RpbWVyLmgiDQo+
-ICAgI2luY2x1ZGUgImNwdS5oIg0KPiArI2lmbmRlZiBDT05GSUdfVVNFUl9PTkxZDQo+ICAg
-I2luY2x1ZGUgInBtdS5oIg0KPiAgICNpbmNsdWRlICJ0aW1lX2hlbHBlci5oIg0KPiArI2Vu
-ZGlmDQo+ICAgI2luY2x1ZGUgInFlbXUvbWFpbi1sb29wLmgiDQo+ICAgI2luY2x1ZGUgImV4
-ZWMvZXhlYy1hbGwuaCINCj4gICAjaW5jbHVkZSAiZXhlYy90Yi1mbHVzaC5oIg0K
+The functions which add fw_cfg and virtio to DSDT are same for ARM
+and RISC-V. So, instead of duplicating in RISC-V, move them from
+hw/arm/virt-acpi-build.c to common aml-build.c.
+
+Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+---
+ hw/acpi/aml-build.c         | 41 ++++++++++++++++++++++++++++++++++++
+ hw/arm/virt-acpi-build.c    | 42 -------------------------------------
+ hw/riscv/virt-acpi-build.c  | 16 --------------
+ include/hw/acpi/aml-build.h |  6 ++++++
+ 4 files changed, 47 insertions(+), 58 deletions(-)
+
+diff --git a/hw/acpi/aml-build.c b/hw/acpi/aml-build.c
+index ea331a20d1..eeb1263c8c 100644
+--- a/hw/acpi/aml-build.c
++++ b/hw/acpi/aml-build.c
+@@ -2467,3 +2467,44 @@ Aml *aml_i2c_serial_bus_device(uint16_t address, const char *resource_source)
+ 
+     return var;
+ }
++
++void acpi_dsdt_add_fw_cfg(Aml *scope, const MemMapEntry *fw_cfg_memmap)
++{
++    Aml *dev = aml_device("FWCF");
++    aml_append(dev, aml_name_decl("_HID", aml_string("QEMU0002")));
++    /* device present, functioning, decoding, not shown in UI */
++    aml_append(dev, aml_name_decl("_STA", aml_int(0xB)));
++    aml_append(dev, aml_name_decl("_CCA", aml_int(1)));
++
++    Aml *crs = aml_resource_template();
++    aml_append(crs, aml_memory32_fixed(fw_cfg_memmap->base,
++                                       fw_cfg_memmap->size, AML_READ_WRITE));
++    aml_append(dev, aml_name_decl("_CRS", crs));
++    aml_append(scope, dev);
++}
++
++void acpi_dsdt_add_virtio(Aml *scope,
++                          const MemMapEntry *virtio_mmio_memmap,
++                          uint32_t mmio_irq, int num)
++{
++    hwaddr base = virtio_mmio_memmap->base;
++    hwaddr size = virtio_mmio_memmap->size;
++    int i;
++
++    for (i = 0; i < num; i++) {
++        uint32_t irq = mmio_irq + i;
++        Aml *dev = aml_device("VR%02u", i);
++        aml_append(dev, aml_name_decl("_HID", aml_string("LNRO0005")));
++        aml_append(dev, aml_name_decl("_UID", aml_int(i)));
++        aml_append(dev, aml_name_decl("_CCA", aml_int(1)));
++
++        Aml *crs = aml_resource_template();
++        aml_append(crs, aml_memory32_fixed(base, size, AML_READ_WRITE));
++        aml_append(crs,
++                   aml_interrupt(AML_CONSUMER, AML_LEVEL, AML_ACTIVE_HIGH,
++                                 AML_EXCLUSIVE, &irq, 1));
++        aml_append(dev, aml_name_decl("_CRS", crs));
++        aml_append(scope, dev);
++        base += size;
++    }
++}
+diff --git a/hw/arm/virt-acpi-build.c b/hw/arm/virt-acpi-build.c
+index 6b674231c2..fdedb68e2b 100644
+--- a/hw/arm/virt-acpi-build.c
++++ b/hw/arm/virt-acpi-build.c
+@@ -35,7 +35,6 @@
+ #include "target/arm/cpu.h"
+ #include "hw/acpi/acpi-defs.h"
+ #include "hw/acpi/acpi.h"
+-#include "hw/nvram/fw_cfg.h"
+ #include "hw/acpi/bios-linker-loader.h"
+ #include "hw/acpi/aml-build.h"
+ #include "hw/acpi/utils.h"
+@@ -94,21 +93,6 @@ static void acpi_dsdt_add_uart(Aml *scope, const MemMapEntry *uart_memmap,
+     aml_append(scope, dev);
+ }
+ 
+-static void acpi_dsdt_add_fw_cfg(Aml *scope, const MemMapEntry *fw_cfg_memmap)
+-{
+-    Aml *dev = aml_device("FWCF");
+-    aml_append(dev, aml_name_decl("_HID", aml_string("QEMU0002")));
+-    /* device present, functioning, decoding, not shown in UI */
+-    aml_append(dev, aml_name_decl("_STA", aml_int(0xB)));
+-    aml_append(dev, aml_name_decl("_CCA", aml_int(1)));
+-
+-    Aml *crs = aml_resource_template();
+-    aml_append(crs, aml_memory32_fixed(fw_cfg_memmap->base,
+-                                       fw_cfg_memmap->size, AML_READ_WRITE));
+-    aml_append(dev, aml_name_decl("_CRS", crs));
+-    aml_append(scope, dev);
+-}
+-
+ static void acpi_dsdt_add_flash(Aml *scope, const MemMapEntry *flash_memmap)
+ {
+     Aml *dev, *crs;
+@@ -133,32 +117,6 @@ static void acpi_dsdt_add_flash(Aml *scope, const MemMapEntry *flash_memmap)
+     aml_append(scope, dev);
+ }
+ 
+-static void acpi_dsdt_add_virtio(Aml *scope,
+-                                 const MemMapEntry *virtio_mmio_memmap,
+-                                 uint32_t mmio_irq, int num)
+-{
+-    hwaddr base = virtio_mmio_memmap->base;
+-    hwaddr size = virtio_mmio_memmap->size;
+-    int i;
+-
+-    for (i = 0; i < num; i++) {
+-        uint32_t irq = mmio_irq + i;
+-        Aml *dev = aml_device("VR%02u", i);
+-        aml_append(dev, aml_name_decl("_HID", aml_string("LNRO0005")));
+-        aml_append(dev, aml_name_decl("_UID", aml_int(i)));
+-        aml_append(dev, aml_name_decl("_CCA", aml_int(1)));
+-
+-        Aml *crs = aml_resource_template();
+-        aml_append(crs, aml_memory32_fixed(base, size, AML_READ_WRITE));
+-        aml_append(crs,
+-                   aml_interrupt(AML_CONSUMER, AML_LEVEL, AML_ACTIVE_HIGH,
+-                                 AML_EXCLUSIVE, &irq, 1));
+-        aml_append(dev, aml_name_decl("_CRS", crs));
+-        aml_append(scope, dev);
+-        base += size;
+-    }
+-}
+-
+ static void acpi_dsdt_add_pci(Aml *scope, const MemMapEntry *memmap,
+                               uint32_t irq, VirtMachineState *vms)
+ {
+diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+index 7331248f59..01843e4509 100644
+--- a/hw/riscv/virt-acpi-build.c
++++ b/hw/riscv/virt-acpi-build.c
+@@ -97,22 +97,6 @@ static void acpi_dsdt_add_cpus(Aml *scope, RISCVVirtState *s)
+     }
+ }
+ 
+-static void acpi_dsdt_add_fw_cfg(Aml *scope, const MemMapEntry *fw_cfg_memmap)
+-{
+-    Aml *dev = aml_device("FWCF");
+-    aml_append(dev, aml_name_decl("_HID", aml_string("QEMU0002")));
+-
+-    /* device present, functioning, decoding, not shown in UI */
+-    aml_append(dev, aml_name_decl("_STA", aml_int(0xB)));
+-    aml_append(dev, aml_name_decl("_CCA", aml_int(1)));
+-
+-    Aml *crs = aml_resource_template();
+-    aml_append(crs, aml_memory32_fixed(fw_cfg_memmap->base,
+-                                       fw_cfg_memmap->size, AML_READ_WRITE));
+-    aml_append(dev, aml_name_decl("_CRS", crs));
+-    aml_append(scope, dev);
+-}
+-
+ /* RHCT Node[N] starts at offset 56 */
+ #define RHCT_NODE_ARRAY_OFFSET 56
+ 
+diff --git a/include/hw/acpi/aml-build.h b/include/hw/acpi/aml-build.h
+index d1fb08514b..c4a8967310 100644
+--- a/include/hw/acpi/aml-build.h
++++ b/include/hw/acpi/aml-build.h
+@@ -3,6 +3,7 @@
+ 
+ #include "hw/acpi/acpi-defs.h"
+ #include "hw/acpi/bios-linker-loader.h"
++#include "hw/nvram/fw_cfg.h"
+ 
+ #define ACPI_BUILD_APPNAME6 "BOCHS "
+ #define ACPI_BUILD_APPNAME8 "BXPC    "
+@@ -497,4 +498,9 @@ void build_fadt(GArray *tbl, BIOSLinker *linker, const AcpiFadtData *f,
+ 
+ void build_tpm2(GArray *table_data, BIOSLinker *linker, GArray *tcpalog,
+                 const char *oem_id, const char *oem_table_id);
++
++void acpi_dsdt_add_fw_cfg(Aml *scope, const MemMapEntry *fw_cfg_memmap);
++void acpi_dsdt_add_virtio(Aml *scope, const MemMapEntry *virtio_mmio_memmap,
++                          uint32_t mmio_irq, int num);
++
+ #endif
+-- 
+2.39.2
+
 
