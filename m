@@ -4,88 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D58DEB64DA
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Jul 2023 21:09:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 406F0EB64DA
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Jul 2023 21:35:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qJh5M-0008SP-PD; Wed, 12 Jul 2023 17:09:21 -0400
+	id 1qJhUN-0004mz-Nq; Wed, 12 Jul 2023 17:35:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qJh5K-0008Qy-9S
- for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 17:09:18 -0400
-Received: from mail-oa1-x32.google.com ([2001:4860:4864:20::32])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qJh5I-0000vA-21
- for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 17:09:18 -0400
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-1b06777596cso6223668fac.2
- for <qemu-riscv@nongnu.org>; Wed, 12 Jul 2023 14:09:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1689196155; x=1691788155;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=0ZcV8mBt2qeqq+YHcHVaAJrKmunmDJsI24PFdshb0Yg=;
- b=GqYezGvauGxPT/wpJKbbLb2kvshllIPjAHknRobdrj7eyhljPxEux+nNvv2XgoaS3b
- tEqnnnObou52QmCpJ94fn394ENYueccrHqxI1vYZuJsmTSG1IzeK+7byJdUK1gx8+DEL
- ozMIwnCVibzdpV1WWQmC3plx7O3l3a9ZGWZHrInHasLNxB2h0Dlh968WPQuQTFvAhKi5
- CpbNsqEMbi7pNplcsJRGC0QQ1UHEGKmxaEiPTYvNthEoOi/etWpdPMj2tzpyM5WIEeLw
- GBH1nB6N3afHThMunkjvRoC6/CgX0ODp5rLaO9kAyfMY+0yWOTo51p/ZzpRPnv/CkOWw
- qwbg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689196155; x=1691788155;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=0ZcV8mBt2qeqq+YHcHVaAJrKmunmDJsI24PFdshb0Yg=;
- b=V1GtwTwqelcbt+/ddWDnuPz6+dkBdrSh9DbntVI8HrNFhk24lM09vxr59AZ+Bdeh+/
- tDPZ5YnecMQFVlTcWhI/5zXqQzlNrGRXlAGoGaimGLmfnBiY5XhFnWTynNdQyDe83UAd
- rwLCL413PhTKM8FlHXYixDN4j0y7Nf9BoeISaXHad4kKMhHWohA3NWWWe0y5jOYPJX9A
- 1o4vOZTUiV7by0Nl7qk9rMk9WfrvmC3cLiiuRHX0gCxDFndc+KlVGYJKvfiHpumyB7vE
- cRgPqgopi92IVH6V0NdT0CbJIc52JEkaLghF059byOqhhHGmFpCyU5KBvvXWpLYXzntm
- qdNw==
-X-Gm-Message-State: ABy/qLZv2aNKoipa/LAPPz00ONFtrfRHAITuvujMtm7oV3Q/R+NrOL/f
- KkOqiS84qFJZS7jb/wO1do+yhg==
-X-Google-Smtp-Source: APBJJlGxRtSdcuzWlz+0GyVuLhTn7hsxlMMEq7HRX4MVn9vQ6QrghoFM/3R1DvdEzuhltj5DLlhNoA==
-X-Received: by 2002:a05:6870:fb91:b0:1b3:b8b4:4aba with SMTP id
- kv17-20020a056870fb9100b001b3b8b44abamr22204001oab.1.1689196154670; 
- Wed, 12 Jul 2023 14:09:14 -0700 (PDT)
-Received: from [192.168.68.107] (201-69-66-19.dial-up.telesp.net.br.
- [201.69.66.19]) by smtp.gmail.com with ESMTPSA id
- m10-20020a4aab8a000000b005660ff9e037sm2026738oon.25.2023.07.12.14.09.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Jul 2023 14:09:14 -0700 (PDT)
-Message-ID: <744cbde6-7ce5-c327-3c5a-3858e994cc39@ventanamicro.com>
-Date: Wed, 12 Jul 2023 18:09:10 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Subject: Re: [PATCH for-8.2 6/7] target/riscv: add 'max' CPU type
-Content-Language: en-US
-To: Conor Dooley <conor@kernel.org>
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1qJhUK-0004mI-RS; Wed, 12 Jul 2023 17:35:09 -0400
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1qJhUJ-000523-9k; Wed, 12 Jul 2023 17:35:08 -0400
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 12D1A61927;
+ Wed, 12 Jul 2023 21:35:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 87A01C433C8;
+ Wed, 12 Jul 2023 21:35:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1689197704;
+ bh=gPj0baPX5VYP/r3GKsB/fuBDkrq+C3tm6Xm3T2h/tsM=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=czs4AgDzt9OkDWFEb0I+cEKrcOTW0NkrLU/7JqhRZOkzXPs4hBpm7NtxdKu3rjLXb
+ S1s1Iq5W5Fw0GFAK6PaNsLCz5UOj+ZTwg8TDC91Bg9iqdjMOC5XkjiB7/bGox8jWIt
+ iGomMCO6EZxDwZyxlLgCT29IXndFX9/UAGVKD8MZ3ZNc9S39YvBtqYoq5XhkL8XMEk
+ DVxLiDPm6yJs23rIT/jKQxQegBv/PWwV9v05+CtRSTKHhVU4qOA3/+37ucgQnfTIu4
+ Lu9Ezfnhm8q8OL4c7lbQhMcdwo9OVZTnBuxoxuffHKSknTU+v9hRuwkV7+DccZGQ8Q
+ lbXPzkKVY5/+w==
+Date: Wed, 12 Jul 2023 22:35:00 +0100
+From: Conor Dooley <conor@kernel.org>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
- palmer@rivosinc.com
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn,
+ zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
+Subject: Re: [PATCH for-8.2 6/7] target/riscv: add 'max' CPU type
+Message-ID: <20230712-superhero-rabid-578605f52927@spud>
 References: <20230712190149.424675-1-dbarboza@ventanamicro.com>
  <20230712190149.424675-7-dbarboza@ventanamicro.com>
  <20230712-stench-happiness-40c2ea831257@spud>
  <3e9b5be8-d3ca-3a17-bef9-4a6a5bdc0ad0@ventanamicro.com>
  <20230712-tulip-replica-0322e71c3e81@spud>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230712-tulip-replica-0322e71c3e81@spud>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2001:4860:4864:20::32;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x32.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
-X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.11,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ <744cbde6-7ce5-c327-3c5a-3858e994cc39@ventanamicro.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="miIp1PN+tlxmhFI+"
+Content-Disposition: inline
+In-Reply-To: <744cbde6-7ce5-c327-3c5a-3858e994cc39@ventanamicro.com>
+Received-SPF: pass client-ip=139.178.84.217; envelope-from=conor@kernel.org;
+ helo=dfw.source.kernel.org
+X-Spam_score_int: -70
+X-Spam_score: -7.1
+X-Spam_bar: -------
+X-Spam_report: (-7.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_HI=-5, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -103,77 +80,36 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
+--miIp1PN+tlxmhFI+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 7/12/23 18:00, Conor Dooley wrote:
-> On Wed, Jul 12, 2023 at 05:30:41PM -0300, Daniel Henrique Barboza wrote:
->> On 7/12/23 16:22, Conor Dooley wrote:
->>> On Wed, Jul 12, 2023 at 04:01:48PM -0300, Daniel Henrique Barboza wrote:
->>>> The 'max' CPU type is used by tooling to determine what's the most
->>>> capable CPU a current QEMU version implements. Other archs such as ARM
->>>> implements this type. Let's add it to RISC-V.
->>>>
->>>> What we consider "most capable CPU" in this context are related to
->>>> ratified, non-vendor extensions. This means that we want the 'max' CPU
->>>> to enable all (possible) ratified extensions by default. The reasoning
->>>> behind this design is (1) vendor extensions can conflict with each other
->>>> and we won't play favorities deciding which one is default or not and
->>>> (2) non-ratified extensions are always prone to changes, not being
->>>> stable enough to be enabled by default.
->>>>
->>>> All this said, we're still not able to enable all ratified extensions
->>>> due to conflicts between them. Zfinx and all its dependencies aren't
->>>> enabled because of a conflict with RVF. zce, zcmp and zcmt are also
->>>> disabled due to RVD conflicts. When running with 64 bits we're also
->>>> disabling zcf.
->>>>
->>>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->>>
->>> This seems like it will be super helpful for CI stuff etc, thanks for
->>> doing it.
->>
->> And Linux actually boots on it, which was remarkable to see. I was expecting something
->> to blow up I guess.
->>
->> This is the riscv,isa DT generated:
->>
->> # cat /proc/device-tree/cpus/cpu@0/riscv,isa
->> rv64imafdch_zicbom_zicboz_zicsr_zifencei_zihintpause_zawrs_zfa_zfh_zfhmin_zca_zcb_zcd_
->> zba_zbb_zbc_zbkb_zbkc_zbkx_zbs_zk_zkn_zknd_zkne_zknh_zkr_zks_zksed_zksh_zkt_
->> zve32f_zve64f_zve64d_smstateen_sscofpmf_sstc_svadu_svinval_svnapot_svpbmt#
-> 
-> Of which an upstream Linux kernel, building using something close to
-> defconfig, accepts only
-> rv64imafdch_zicbom_zicboz_zicntr_zicsr_zifencei_zihintpause_zihpm_zba_zbb_zbs_sscofpmf_sstc_svinval_svnapot_svpbmt
-> so the set of possible things that break could break it has been reduced
-> somewhat.
-> 
-> btw, I noticed that the default marchid/mimpid have changed. Previously I
-> used to see something like:
-> processor       : 15
-> hart            : 15
-> isa             : rv64imafdcvh_zicbom_zicboz_zicntr_zicsr_zifencei_zihintpause_zihpm_zba_zbb_zbs_sscofpmf_sstc
-> mmu             : sv57
-> mvendorid       : 0x0
-> marchid         : 0x80032
-> mimpid          : 0x80032
-> in /proc/cpuinfo, but "now" I see 0x0 for marchid & mimpid. Is this
-> change to the default behaviour intentional? I saw "now" in "s because
-> I applied your patches on top of Alistair's next branch, which contains
-> the changes to m*id stuff.
+On Wed, Jul 12, 2023 at 06:09:10PM -0300, Daniel Henrique Barboza wrote:
 
-It is intentional. Those default marchid/mimpid vals were derived from the current
-QEMU version ID/build and didn't mean much.
+> It is intentional. Those default marchid/mimpid vals were derived from th=
+e current
+> QEMU version ID/build and didn't mean much.
+>=20
+> It is still possible to set them via "-cpu rv64,marchid=3DN,mimpid=3DN" i=
+f needed when
+> using the generic (rv64,rv32) CPUs. Vendor CPUs can't have their machine =
+IDs changed
+> via command line.
 
-It is still possible to set them via "-cpu rv64,marchid=N,mimpid=N" if needed when
-using the generic (rv64,rv32) CPUs. Vendor CPUs can't have their machine IDs changed
-via command line.
+Sounds good, thanks. I did just now go and check icicle to see what it
+would report & it does not boot. I'll go bisect...
 
+--miIp1PN+tlxmhFI+
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Thanks,
+-----BEGIN PGP SIGNATURE-----
 
-Daniel
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZK8cgwAKCRB4tDGHoIJi
+0gdzAQCN6XyuaWeJWDiSe+jo63Jci5Ikppv3fZ2rSxBAovKlAAEAjbxitsw29l9q
+aztJfojlvmXPY7BfDTOkIwGTQMevFAs=
+=eoUf
+-----END PGP SIGNATURE-----
 
-> 
-> Cheers,
-> Conor.
+--miIp1PN+tlxmhFI+--
 
