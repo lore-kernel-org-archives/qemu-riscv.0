@@ -4,60 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB780C0015E
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Jul 2023 16:40:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3A85EB64DA
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Jul 2023 16:40:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qJcsx-0003ld-TO; Wed, 12 Jul 2023 12:40:15 -0400
+	id 1qJcsi-0003eH-Ks; Wed, 12 Jul 2023 12:40:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qJcsv-0003kA-Vz
- for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 12:40:14 -0400
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
+ id 1qJcsh-0003da-BR
+ for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 12:39:59 -0400
+Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qJcsu-0004px-2c
- for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 12:40:13 -0400
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-1b9e8e5b12dso22544945ad.3
- for <qemu-riscv@nongnu.org>; Wed, 12 Jul 2023 09:40:11 -0700 (PDT)
+ id 1qJcsf-0004ar-Lh
+ for qemu-riscv@nongnu.org; Wed, 12 Jul 2023 12:39:59 -0400
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-66872d4a141so5005807b3a.1
+ for <qemu-riscv@nongnu.org>; Wed, 12 Jul 2023 09:39:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1689180010; x=1691772010;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YO6q94z1b55DMhCVDxdVi8lkeoDHIzdqcZLtLcOPdJs=;
- b=btUPRI8Khsv6HQrYeB6fzInd9HNRhJxxY1bxtWZlHdUb/UizeJnNLClGcJo2gsWwcE
- n6BFgJWYn5Scc04JJH/F867EjfHW/rlN2t9q2Yj4ytcKmg/uT2XEK1YFFn+IyjereWb6
- 4+bP5bzflafFRBeH1t18AJcDcChOv75rKxpDxcncmK3XF/FIUgsGXXFJIaG6yMfG2uHf
- /3mFXp3ekEWq7+XhMeFVIAPFSxC6veajxN57D8HYL1N5xH7ziuQw3fbYAuSr5z3eG+Pf
- YSxXy7IYwJpkNGsCuU0uZYdVp5yGmBC1INmbdhrM42uxWsi2BWUB+5GyzHVJQCxPH5I9
- WS/A==
+ d=ventanamicro.com; s=google; t=1689179992; x=1691771992;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=D902WXe63pYmiWsNpDy68C8o3fZwaz3JAmPZ0EGpNog=;
+ b=iG4l8FVPI7oYlI22GP8jHv36gEoDHXFZ0M+pd+3Pn8uEVvRDyVU8jsSVN0GkhVbTID
+ J/5vmG8lkxBETX9CGeRS6DuIUBd9CRJxjVh2ShuZWBI36zUqmnaPHQsWTt7tG/B76qoU
+ TDBSBLvX82D27K2P6QAfZ0nCPK25sTL825A5pmCiFzBu9BhD/fGWbln8jhE5+pTizRoc
+ M8iiQX3LlAr2xg8Qa23SOOuhqYPqbdL7wZGv5s23yxXVbUyV5IqTz7/jdL/NPB333gEY
+ jao4LeiBHOYCl9/LWBRuw/jszwa+VRs8ppDZzhYo+S9SE/KKtMS/WFYf/25tFxMFX21V
+ 6h1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689180010; x=1691772010;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=YO6q94z1b55DMhCVDxdVi8lkeoDHIzdqcZLtLcOPdJs=;
- b=aEJyUHC6X0YP0Lb7og0oy070kIHduYeTYK7zRJJXglS5uF+j0B6vGyiM/KZSStP5k9
- bPPp4gse87C5z0adEy1n0oFSTAP0vHjMRxn4W6ar4x9RZDg82sS5T+A8NqvsUr2D59VN
- QSrpUrsZyQUfJUTz2LU9Tc6x6ptOTKrr80kaTB7/WAT/vfFiKp9mvxZwW7KahRKmjb/Z
- ybzpJPmv7H8yMgYQFjgCT1NXdfZxp8azcbvwPkMtG5rVQritombD/toerNy34tg0Pt01
- RMVt4rreKUwWFpDFrjC0K9y6UCeNniJpIf3ZJTSwCx6y/4MEgM/s/32gBQ+2A3zjxDgW
- DXtw==
-X-Gm-Message-State: ABy/qLa1IljBQkvGTce8A9+emPJ+UYJ7fb0YGXtGrs3YXwMCyf2TiMJi
- HOjf9KTtm9XarvOkdrBOgqAWoQ==
-X-Google-Smtp-Source: APBJJlGtTb1WUENx3y5gSTRktRqt4I4GJCvB1moHi+UlBU9v2eQF1d9FmflK6ltxu0zDVDzRVRUpig==
-X-Received: by 2002:a17:902:ecc2:b0:1b6:6e3a:77fb with SMTP id
- a2-20020a170902ecc200b001b66e3a77fbmr26321110plh.2.1689180010652; 
- Wed, 12 Jul 2023 09:40:10 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1689179992; x=1691771992;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=D902WXe63pYmiWsNpDy68C8o3fZwaz3JAmPZ0EGpNog=;
+ b=Vi3CV1tKRJtiaUhc10ztD7ZU69B97pn1lG2aTWgXVM9l7T9yIoU8YBSAyi4XfR1Efl
+ PiWHqnDRz+gt6sA04dMdYx+Uw49RsIDO+ZC0G8EPv3A4MOraaMlf2Tfs5Hwq7Gqezlcq
+ P6d4kOW9yd70ites+KQFpCDSXE1+4mZU0TsTSIgpBTptY2FMx7hK8ACjR52aJaGFYXBY
+ wd1u1cv9hxVsMnjW8v0gdlLBCJdmFaS/ZmrC1HyEb8EljLjaCbTRrnE8vCUeFSFDG2FM
+ eQfI/ZRpRvbdSdQCHxWQO1WcdvLlT2HmHqxfTqpmUmkNnf9wTWS+o6BEy22fV6V7P5Is
+ 1C3A==
+X-Gm-Message-State: ABy/qLZUgPc14fU4e3shkT0psWoqjWRSucoZoYjqI0q/2DmZ8KNFSiM8
+ SjuVioehCBBbDqseKA2F9IzOJw==
+X-Google-Smtp-Source: APBJJlFZW4wQtQZVnwK/nOj7CqTSYws6xe30qDFxC+pztWR8snFQLb1P3WYOHHGHvuJ7ulx56TeEVA==
+X-Received: by 2002:a17:902:c3cc:b0:1b8:9f6a:39de with SMTP id
+ j12-20020a170902c3cc00b001b89f6a39demr14219298plj.65.1689179991519; 
+ Wed, 12 Jul 2023 09:39:51 -0700 (PDT)
 Received: from sunil-pc.Dlink ([106.51.190.25])
  by smtp.gmail.com with ESMTPSA id
- a18-20020a1709027d9200b001ac7f583f72sm4172824plm.209.2023.07.12.09.40.06
+ a18-20020a1709027d9200b001ac7f583f72sm4172824plm.209.2023.07.12.09.39.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Jul 2023 09:40:10 -0700 (PDT)
+ Wed, 12 Jul 2023 09:39:50 -0700 (PDT)
 From: Sunil V L <sunilvl@ventanamicro.com>
 To: qemu-devel@nongnu.org,
 	qemu-arm@nongnu.org,
@@ -73,16 +72,14 @@ Cc: "Michael S . Tsirkin" <mst@redhat.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Andrew Jones <ajones@ventanamicro.com>,
  Anup Patel <apatel@ventanamicro.com>, Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH 04/10] hw/riscv: virt: Add PCIe HIGHMEM in memmap
-Date: Wed, 12 Jul 2023 22:09:37 +0530
-Message-Id: <20230712163943.98994-5-sunilvl@ventanamicro.com>
+Subject: [PATCH 00/10] RISC-V: ACPI: Enable AIA and update RHC
+Date: Wed, 12 Jul 2023 22:09:33 +0530
+Message-Id: <20230712163943.98994-1-sunilvl@ventanamicro.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230712163943.98994-1-sunilvl@ventanamicro.com>
-References: <20230712163943.98994-1-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x634.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pf1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,96 +102,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-PCIe High MMIO base is actually dynamic and fixed at
-run time based on the RAM configured. Currently, this is
-not part of the memmap and kept in separate static variable
-in virt.c. However, ACPI code also needs this information
-to populate DSDT. So, once the base is discovered, merge
-this into the final memmap which can be used to create
-ACPI tables later.
+This series primarily enables AIA interrupt controllers in
+ACPI tables for RISC-V virt platform. It also updates RHCT
+with CMO and MMU related information.
 
-Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
----
- hw/riscv/virt.c         | 31 ++++++++++++++++++++++++++++++-
- include/hw/riscv/virt.h |  9 +++++++--
- 2 files changed, 37 insertions(+), 3 deletions(-)
+Below ECRs for these changes are approved by ASWG and will be
+available in next ACPI spec release.
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index f6067db8ec..7aee06f021 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -84,6 +84,22 @@ static const MemMapEntry virt_memmap[] = {
- 
- static MemMapEntry virt_high_pcie_memmap;
- 
-+/*
-+ * virt_memmap doesn't include floating High Mem IO address entry. To enable
-+ * code organization in multiple files (ex: ACPI), it is better to have single
-+ * memmap which has complete information.
-+ *
-+ * VIRT_HIGH_PCIE_MMIO is always greater than the last memmap entry and hence
-+ * full_virt_memmap is capable of holding both virt_memmap and
-+ * VIRT_HIGH_PCIE_MMIO entry.
-+ *
-+ * The values for these floating entries will be updated when top of RAM is
-+ * discovered.
-+ */
-+static MemMapEntry full_virt_memmap[] = {
-+    [VIRT_HIGH_PCIE_MMIO] =     { 0x0, 0 },
-+};
-+
- #define VIRT_FLASH_SECTOR_SIZE (256 * KiB)
- 
- static PFlashCFI01 *virt_flash_create1(RISCVVirtState *s,
-@@ -1444,7 +1460,20 @@ static void virt_machine_init(MachineState *machine)
-             ROUND_UP(virt_high_pcie_memmap.base, virt_high_pcie_memmap.size);
-     }
- 
--    s->memmap = virt_memmap;
-+    /*
-+     * Initialize the floating values in full memory map
-+     */
-+    full_virt_memmap[VIRT_HIGH_PCIE_MMIO].base = virt_high_pcie_memmap.base;
-+    full_virt_memmap[VIRT_HIGH_PCIE_MMIO].size = virt_high_pcie_memmap.size;
-+
-+    s->memmap = full_virt_memmap;
-+    /*
-+     * Copy the base virt_memmap entries to full memmap
-+     */
-+    for (i = 0; i < ARRAY_SIZE(virt_memmap); i++) {
-+        s->memmap[i] = virt_memmap[i];
-+    }
-+
- 
-     /* register system main memory (actual RAM) */
-     memory_region_add_subregion(system_memory, memmap[VIRT_DRAM].base,
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index 00c22492a7..1d7ddf5df0 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -60,7 +60,7 @@ struct RISCVVirtState {
-     char *oem_id;
-     char *oem_table_id;
-     OnOffAuto acpi;
--    const MemMapEntry *memmap;
-+    MemMapEntry *memmap;
-     PCIBus *bus;
- };
- 
-@@ -84,7 +84,12 @@ enum {
-     VIRT_PCIE_MMIO,
-     VIRT_PCIE_PIO,
-     VIRT_PLATFORM_BUS,
--    VIRT_PCIE_ECAM
-+    VIRT_PCIE_ECAM,
-+    VIRT_LAST_MEMMAP /* Keep this entry always last */
-+};
-+
-+enum {
-+    VIRT_HIGH_PCIE_MMIO = VIRT_LAST_MEMMAP,
- };
- 
- enum {
+1) MADT (AIA) - https://drive.google.com/file/d/1oMGPyOD58JaPgMl1pKasT-VKsIKia7zR/view?usp=sharing
+2) RHCT - https://drive.google.com/file/d/1sKbOa8m1UZw1JkquZYe3F1zQBN1xXsaf/view?usp=sharing
+
+First patch in this series is to migrate a couple of functions from
+ARM architecture to common code so that RISC-V doesn't need to
+duplicate the same.
+
+The patch set is based on Alistair's riscv-to-apply.next branch.
+
+These changes are also available in  riscv_acpi_b2_v1 branch at:
+https://github.com/vlsunil/qemu/
+
+Sunil V L (10):
+  hw/arm/virt-acpi-build.c: Move fw_cfg and virtio to common location
+  hw/riscv: virt: Add PCI bus reference in RISCVVirtState
+  hw/riscv: virt: Make few IMSIC macros and functions public
+  hw/riscv: virt: Add PCIe HIGHMEM in memmap
+  hw/riscv/virt-acpi-build.c: Add AIA support in RINTC
+  hw/riscv/virt-acpi-build.c: Add IMSIC in the MADT
+  hw/riscv/virt-acpi-build.c: Add APLIC in the MADT
+  hw/riscv/virt-acpi-build.c: Add CMO information in RHCT
+  hw/riscv/virt-acpi-build.c: Add MMU node in RHCT
+  hw/riscv/virt-acpi-build.c: Add IO controllers and devices
+
+ hw/acpi/aml-build.c         |  41 +++++
+ hw/arm/virt-acpi-build.c    |  42 -----
+ hw/riscv/Kconfig            |   1 +
+ hw/riscv/virt-acpi-build.c  | 321 +++++++++++++++++++++++++++++++++---
+ hw/riscv/virt.c             |  62 ++++---
+ include/hw/acpi/aml-build.h |   6 +
+ include/hw/riscv/virt.h     |  35 +++-
+ 7 files changed, 416 insertions(+), 92 deletions(-)
+
 -- 
 2.39.2
 
