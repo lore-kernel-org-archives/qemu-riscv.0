@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4822AEB64DD
-	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Jul 2023 09:26:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 565FAEB64DD
+	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Jul 2023 09:36:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qJsas-000223-3t; Thu, 13 Jul 2023 05:26:38 -0400
+	id 1qJskd-0004Qp-Vb; Thu, 13 Jul 2023 05:36:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qJsaq-00021E-EO
- for qemu-riscv@nongnu.org; Thu, 13 Jul 2023 05:26:36 -0400
-Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
+ id 1qJskc-0004QE-OZ
+ for qemu-riscv@nongnu.org; Thu, 13 Jul 2023 05:36:42 -0400
+Received: from mail-lj1-x22d.google.com ([2a00:1450:4864:20::22d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qJsao-0001aP-VJ
- for qemu-riscv@nongnu.org; Thu, 13 Jul 2023 05:26:36 -0400
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-98e39784a85so378105866b.1
- for <qemu-riscv@nongnu.org>; Thu, 13 Jul 2023 02:26:34 -0700 (PDT)
+ id 1qJska-00086u-RR
+ for qemu-riscv@nongnu.org; Thu, 13 Jul 2023 05:36:42 -0400
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2b70bfc8db5so6552411fa.2
+ for <qemu-riscv@nongnu.org>; Thu, 13 Jul 2023 02:36:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1689240393; x=1691832393;
+ d=ventanamicro.com; s=google; t=1689240999; x=1691832999;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=15U9uDXPb/OlRHK4Y6KhNZVmgYaDgAPnXX1XqWhvPsI=;
- b=oDKowRgrbThGORJOiQUmTLsnoWKLaggAwOdM/nJLAxNGfq4vLnSXSZv1XMi8MqLvRY
- bcYCyyUyEbN92KwJcHjNlAXSIdjDZdGHvg6V9aNdecCuebZIYpmVevh1fKMmKTupLCGc
- fJAgqjF0ebZTT8NETa+XGvuU6wfjBFXD9Hbf526tr69jWpcB2M00+lPdX1HnNj0JkTou
- lY/8ylX2ElnlMSupifkn6mNEQb93IlZ5yeATyXnw39q2ml3sSunoq5iIMB8n2YaqPOCy
- 2WeFhT8jnbfvWUXcciFkLse8gbxYpEgwK8D/ddswST8uUBjZa9ArmeJ869WPDfAVYqhH
- 3v8A==
+ bh=DnqOGtMbUybzYXNNEiUJ2lUCWcqOCGWVPCl4WonSRms=;
+ b=ltWamSs606+x+tu5bpb9jKWGE6Tx4J+Evk3uRY7j64up/aS0BZtJkbGC55p7NxvEkf
+ WGtsdY8uoyG9UbbWexq+c/soXRnkEg6OUrkyz+3sOIvmQVOZU+7xsZ9rRehYHv05hJvw
+ WU5/+A6wckEkZ3jtKXdL12bBtAGu26lJi9zYJSbxw5F8M6YozwISw7juQfI5tsa8rteA
+ 5PwW6uMGCVKDH4sIDJf+zwDDlxkJbyojuJduEl7h+/FJLhMe84UfkX1US5ZLO3cdvftb
+ JYezAZvzMzNIMBQSvCWkUQMSjUjtFWKYgSudzS4KOgtUXKw0yvAlZT/0OrUkOI3dwjKq
+ 51nQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689240393; x=1691832393;
+ d=1e100.net; s=20221208; t=1689240999; x=1691832999;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=15U9uDXPb/OlRHK4Y6KhNZVmgYaDgAPnXX1XqWhvPsI=;
- b=UEJuomT2HaU9/NUUTNPgvIlzRQ1Wl28X7gdeGyORXsmplHCl4Cjv1DECmp4csOUAUz
- JTRRxg/22eJHrI0FCh0G5sw4/7oGrdqviCaNCrCf6XtbUIQRznlvEMAJr6fZS6qbtgZk
- ZAJQU6VAjXr76fEiefQnf53+YrPMYcCxjY+n5rDlRvVG0yvDdNe/AKHKgFmC1aX08HOZ
- CJaBKrD92QAjIZkU7zn3J0Cdb8vlvrxKvK211C31AmguM2ewW0VumuDvaQ1iRHKYO12u
- jpWH48CNt7rMf4HG+mv1C9xI1+FYqoR7uujLPXpcxe2xOAnIJMobOspu9ST1ecmHx2Vl
- pipQ==
-X-Gm-Message-State: ABy/qLblc72Kj0gvbvKjBJP9OsVHLvmH1VwvcgbOzTC63GumXRE8IMwE
- yC2fIz1HcS0UcGf2SOouJDAvVw==
-X-Google-Smtp-Source: APBJJlHmTjnTAYkm3Z19cBosH9qp3zmPxyq9tVsa/Eyq79OXIqYKyMduKLtN3h0ITyRDHmVRkc0+yg==
-X-Received: by 2002:a17:907:a410:b0:993:da5f:5a9b with SMTP id
- sg16-20020a170907a41000b00993da5f5a9bmr6076165ejc.8.1689240393511; 
- Thu, 13 Jul 2023 02:26:33 -0700 (PDT)
+ bh=DnqOGtMbUybzYXNNEiUJ2lUCWcqOCGWVPCl4WonSRms=;
+ b=c38NvzoYG14bkV06P3tM5JQ2ZOwF1VrxzVco/mwkX0g16LnTpebFQM+M4r6eLVUOU0
+ 9CuQYZqgSlpZonuq1yOCyl+FCj2NZ/Sqr1B7FIpqrykurWRoREFlPjHTIBIg6z9/UVgn
+ KhEWwM2zmvRr+j0yfASCEyCSeA6eqw2X19BH1KtJB/RsoEfrIbhnEiTBjPUGxfz7bkmW
+ CEAUu4gQCWUxx/HfoWh9L4wQo3UbWwZOdLrswT/gdOLoEgLpVa8lCEE8NK3p+aq4Ti0K
+ fNR8sj9VkLcv6CCNUBxc1VIU14uhG+zIgYZ7LR90eL81bgzSIyY9eJKTfF56rq9Z+mKv
+ AeVQ==
+X-Gm-Message-State: ABy/qLZ4CXsPaX7pXnaG513U9rDrEto1rbEOhQ804g6cM6lhQvA40HmI
+ NM+lrOxM3a1XwuS/eGXx3Bnf6w==
+X-Google-Smtp-Source: APBJJlE7mABvpfEwzlK0wiBB3C/JO2huIm8KKuk9N3ImcWBXDjWnQi4gpRaV6WIrNXB42fgqYBXqBw==
+X-Received: by 2002:a2e:a318:0:b0:2b6:ce35:2e9e with SMTP id
+ l24-20020a2ea318000000b002b6ce352e9emr867017lje.44.1689240998829; 
+ Thu, 13 Jul 2023 02:36:38 -0700 (PDT)
 Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
  [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
  by smtp.gmail.com with ESMTPSA id
- v1-20020a1709063bc100b00992b7ff3993sm3710877ejf.126.2023.07.13.02.26.32
+ ov15-20020a170906fc0f00b0099364d9f0e6sm3748389ejb.117.2023.07.13.02.36.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Jul 2023 02:26:33 -0700 (PDT)
-Date: Thu, 13 Jul 2023 11:26:32 +0200
+ Thu, 13 Jul 2023 02:36:38 -0700 (PDT)
+Date: Thu, 13 Jul 2023 11:36:37 +0200
 From: Andrew Jones <ajones@ventanamicro.com>
 To: Yong-Xuan Wang <yongxuan.wang@sifive.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, rkanwal@rivosinc.com, 
@@ -68,16 +68,16 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, rkanwal@rivosinc.com,
  Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
  Weiwei Li <liweiwei@iscas.ac.cn>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
  Paolo Bonzini <pbonzini@redhat.com>, kvm@vger.kernel.org
-Subject: Re: [PATCH v5 2/5] target/riscv: check the in-kernel irqchip support
-Message-ID: <20230713-c8221857f478558194b4d5bd@orel>
+Subject: Re: [PATCH v5 3/5] target/riscv: Create an KVM AIA irqchip
+Message-ID: <20230713-71df3bff303a42341f4d3687@orel>
 References: <20230713084405.24545-1-yongxuan.wang@sifive.com>
- <20230713084405.24545-3-yongxuan.wang@sifive.com>
+ <20230713084405.24545-4-yongxuan.wang@sifive.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230713084405.24545-3-yongxuan.wang@sifive.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
- envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x62f.google.com
+In-Reply-To: <20230713084405.24545-4-yongxuan.wang@sifive.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::22d;
+ envelope-from=ajones@ventanamicro.com; helo=mail-lj1-x22d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,40 +100,228 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jul 13, 2023 at 08:43:54AM +0000, Yong-Xuan Wang wrote:
-> We check the in-kernel irqchip support when using KVM acceleration.
+On Thu, Jul 13, 2023 at 08:43:55AM +0000, Yong-Xuan Wang wrote:
+> We create a vAIA chip by using the KVM_DEV_TYPE_RISCV_AIA and then set up
+> the chip with the KVM_DEV_RISCV_AIA_GRP_* APIs.
 > 
 > Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
 > Reviewed-by: Jim Shu <jim.shu@sifive.com>
 > Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > ---
->  target/riscv/kvm.c | 10 +++++++++-
->  1 file changed, 9 insertions(+), 1 deletion(-)
+>  target/riscv/kvm.c       | 160 +++++++++++++++++++++++++++++++++++++++
+>  target/riscv/kvm_riscv.h |   6 ++
+>  2 files changed, 166 insertions(+)
 > 
 > diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-> index 9d8a8982f9..005e054604 100644
+> index 005e054604..64156c15ec 100644
 > --- a/target/riscv/kvm.c
 > +++ b/target/riscv/kvm.c
-> @@ -914,7 +914,15 @@ int kvm_arch_init(MachineState *ms, KVMState *s)
+> @@ -36,6 +36,7 @@
+>  #include "exec/address-spaces.h"
+>  #include "hw/boards.h"
+>  #include "hw/irq.h"
+> +#include "hw/intc/riscv_imsic.h"
+>  #include "qemu/log.h"
+>  #include "hw/loader.h"
+>  #include "kvm_riscv.h"
+> @@ -43,6 +44,7 @@
+>  #include "chardev/char-fe.h"
+>  #include "migration/migration.h"
+>  #include "sysemu/runstate.h"
+> +#include "hw/riscv/numa.h"
 >  
->  int kvm_arch_irqchip_create(KVMState *s)
+>  static uint64_t kvm_riscv_reg_id(CPURISCVState *env, uint64_t type,
+>                                   uint64_t idx)
+> @@ -1026,3 +1028,161 @@ bool kvm_arch_cpu_check_are_resettable(void)
+>  void kvm_arch_accel_class_init(ObjectClass *oc)
 >  {
-> -    return 0;
-> +    if (kvm_kernel_irqchip_split()) {
-> +        error_report("-machine kernel_irqchip=split is not supported on RISC-V.");
+>  }
+> +
+> +char *kvm_aia_mode_str(uint64_t aia_mode)
+> +{
+> +    const char *val;
+> +
+> +    switch (aia_mode) {
+> +    case KVM_DEV_RISCV_AIA_MODE_EMUL:
+> +        return "emul";
+> +    case KVM_DEV_RISCV_AIA_MODE_HWACCEL:
+> +        return "hwaccel";
+> +    case KVM_DEV_RISCV_AIA_MODE_AUTO:
+> +    default:
+> +        return "auto";
+> +    };
+> +}
+> +
+> +void kvm_riscv_aia_create(MachineState *machine,
+> +                          uint64_t aia_mode, uint64_t group_shift,
+> +                          uint64_t aia_irq_num, uint64_t aia_msi_num,
+> +                          uint64_t aplic_base, uint64_t imsic_base,
+> +                          uint64_t guest_num)
+> +{
+> +    int ret, i;
+> +    int aia_fd = -1;
+> +    uint64_t default_aia_mode;
+> +    uint64_t socket_count = riscv_socket_count(machine);
+> +    uint64_t max_hart_per_socket = 0;
+> +    uint64_t socket, base_hart, hart_count, socket_imsic_base, imsic_addr;
+> +    uint64_t socket_bits, hart_bits, guest_bits;
+> +
+> +    aia_fd = kvm_create_device(kvm_state, KVM_DEV_TYPE_RISCV_AIA, false);
+> +
+> +    if (aia_fd < 0) {
+> +        error_report("Unable to create in-kernel irqchip");
 > +        exit(1);
 > +    }
 > +
-> +    /*
-> +     * We can create the VAIA using the newer device control API.
-> +     */
-> +    return kvm_check_extension(s, KVM_CAP_DEVICE_CTRL);
->  }
+> +    ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+> +                            KVM_DEV_RISCV_AIA_CONFIG_MODE,
+> +                            &default_aia_mode, false, NULL);
+> +    if (ret < 0) {
+> +        error_report("KVM AIA: failed to get current KVM AIA mode");
+> +        exit(1);
+> +    }
+> +    qemu_log("KVM AIA: default mode is %s\n",
+> +             kvm_aia_mode_str(default_aia_mode));
+> +
+> +    if (default_aia_mode != aia_mode) {
+> +        ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+> +                                KVM_DEV_RISCV_AIA_CONFIG_MODE,
+> +                                &aia_mode, true, NULL);
+> +        if (ret < 0)
+> +            warn_report("KVM AIA: failed to set KVM AIA mode");
+> +        else
+> +            qemu_log("KVM AIA: set current mode to %s\n",
+> +                     kvm_aia_mode_str(aia_mode));
+> +    }
+> +
+> +    ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+> +                            KVM_DEV_RISCV_AIA_CONFIG_SRCS,
+> +                            &aia_irq_num, true, NULL);
+> +    if (ret < 0) {
+> +        error_report("KVM AIA: failed to set number of input irq lines");
+> +        exit(1);
+> +    }
+> +
+> +    ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+> +                            KVM_DEV_RISCV_AIA_CONFIG_IDS,
+> +                            &aia_msi_num, true, NULL);
+> +    if (ret < 0) {
+> +        error_report("KVM AIA: failed to set number of msi");
+> +        exit(1);
+> +    }
+> +
+> +    socket_bits = find_last_bit(&socket_count, BITS_PER_LONG) + 1;
+> +    ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+> +                            KVM_DEV_RISCV_AIA_CONFIG_GROUP_BITS,
+> +                            &socket_bits, true, NULL);
+> +    if (ret < 0) {
+> +        error_report("KVM AIA: failed to set group_bits");
+> +        exit(1);
+> +    }
+> +
+> +    ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+> +                            KVM_DEV_RISCV_AIA_CONFIG_GROUP_SHIFT,
+> +                            &group_shift, true, NULL);
+> +    if (ret < 0) {
+> +        error_report("KVM AIA: failed to set group_shift");
+> +        exit(1);
+> +    }
+> +
+> +    guest_bits = guest_num == 0 ? 0 :
+> +                 find_last_bit(&guest_num, BITS_PER_LONG) + 1;
+> +    ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+> +                            KVM_DEV_RISCV_AIA_CONFIG_GUEST_BITS,
+> +                            &guest_bits, true, NULL);
+> +    if (ret < 0) {
+> +        error_report("KVM AIA: failed to set guest_bits");
+> +        exit(1);
+> +    }
+> +
+> +    ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_ADDR,
+> +                            KVM_DEV_RISCV_AIA_ADDR_APLIC,
+> +                            &aplic_base, true, NULL);
+> +    if (ret < 0) {
+> +        error_report("KVM AIA: failed to set the base address of APLIC");
+> +        exit(1);
+> +    }
+> +
+> +    for (socket = 0; socket < socket_count; socket++) {
+> +        socket_imsic_base = imsic_base + socket * (1U << group_shift);
+> +        hart_count = riscv_socket_hart_count(machine, socket);
+> +        base_hart = riscv_socket_first_hartid(machine, socket);
+> +
+> +        if (max_hart_per_socket < hart_count) {
+> +            max_hart_per_socket = hart_count;
+> +        }
+> +
+> +        for (i = 0; i < hart_count; i++) {
+> +            imsic_addr = socket_imsic_base + i * IMSIC_HART_SIZE(guest_bits);
+> +            ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_ADDR,
+> +                                    KVM_DEV_RISCV_AIA_ADDR_IMSIC(i + base_hart),
+> +                                    &imsic_addr, true, NULL);
+> +            if (ret < 0) {
+> +                error_report("KVM AIA: failed to set the address of IMSICs");
+
+Maybe not worth respinning for, but I'd probably include the hart index in
+this output
+
+ error_report("KVM AIA: failed to set the IMSIC address for hart %d", i);
+
+> +                exit(1);
+> +            }
+> +        }
+> +    }
+> +
+> +    hart_bits = find_last_bit(&max_hart_per_socket, BITS_PER_LONG) + 1;
+> +    ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+> +                            KVM_DEV_RISCV_AIA_CONFIG_HART_BITS,
+> +                            &hart_bits, true, NULL);
+> +    if (ret < 0) {
+> +        error_report("KVM AIA: failed to set hart_bits");
+> +        exit(1);
+> +    }
+> +
+> +    if (kvm_has_gsi_routing()) {
+> +        for (uint64_t idx = 0; idx < aia_irq_num + 1; ++idx) {
+> +            /* KVM AIA only has one APLIC instance */
+> +            kvm_irqchip_add_irq_route(kvm_state, idx, 0, idx);
+> +        }
+> +        kvm_gsi_routing_allowed = true;
+> +        kvm_irqchip_commit_routes(kvm_state);
+> +    }
+> +
+> +    ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CTRL,
+> +                            KVM_DEV_RISCV_AIA_CTRL_INIT,
+> +                            NULL, true, NULL);
+> +    if (ret < 0) {
+> +        error_report("KVM AIA: initialized fail");
+> +        exit(1);
+> +    }
+> +
+> +    kvm_msi_via_irqfd_allowed = kvm_irqfds_enabled();
+> +}
+> diff --git a/target/riscv/kvm_riscv.h b/target/riscv/kvm_riscv.h
+> index e3ba935808..c6745dd29a 100644
+> --- a/target/riscv/kvm_riscv.h
+> +++ b/target/riscv/kvm_riscv.h
+> @@ -22,5 +22,11 @@
+>  void kvm_riscv_init_user_properties(Object *cpu_obj);
+>  void kvm_riscv_reset_vcpu(RISCVCPU *cpu);
+>  void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level);
+> +char *kvm_aia_mode_str(uint64_t aia_mode);
+> +void kvm_riscv_aia_create(MachineState *machine,
+> +                          uint64_t aia_mode, uint64_t group_shift,
+> +                          uint64_t aia_irq_num, uint64_t aia_msi_num,
+> +                          uint64_t aplic_base, uint64_t imsic_base,
+> +                          uint64_t guest_num);
 >  
->  int kvm_arch_process_async_events(CPUState *cs)
+>  #endif
 > -- 
 > 2.17.1
 >
 
 Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+
+Thanks,
+drew
 
