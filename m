@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BB1BEB64DD
-	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Jul 2023 03:16:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6825DEB64DD
+	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Jul 2023 03:18:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qK9Hj-0007QT-QE; Thu, 13 Jul 2023 23:15:59 -0400
+	id 1qK9Jc-0000SO-80; Thu, 13 Jul 2023 23:17:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qK9Hh-0007K1-Ls; Thu, 13 Jul 2023 23:15:57 -0400
-Received: from mail-vs1-xe2f.google.com ([2607:f8b0:4864:20::e2f])
+ id 1qK9JZ-0000S1-HH; Thu, 13 Jul 2023 23:17:54 -0400
+Received: from mail-oo1-xc31.google.com ([2607:f8b0:4864:20::c31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qK9Hg-00066U-4O; Thu, 13 Jul 2023 23:15:57 -0400
-Received: by mail-vs1-xe2f.google.com with SMTP id
- ada2fe7eead31-44357f34e2dso570097137.3; 
- Thu, 13 Jul 2023 20:15:55 -0700 (PDT)
+ id 1qK9JW-0006Hs-7W; Thu, 13 Jul 2023 23:17:51 -0400
+Received: by mail-oo1-xc31.google.com with SMTP id
+ 006d021491bc7-56598263d1dso1002641eaf.0; 
+ Thu, 13 Jul 2023 20:17:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1689304555; x=1691896555;
+ d=gmail.com; s=20221208; t=1689304668; x=1691896668;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=o4w7muP1aSLmrQ3IKHWExjcoefXU4XwSFU3AbtHrsow=;
- b=QQr7Fuf6VCigY89EShOJ0ENtKv+0W+Xz9koXcU01mPaRt74itntz5DIDpmt9B6axW8
- R8YwWAZe46kZPi4JUOUrk5ith+GXh2/fsBf8W3jxbPN1gvlxNP2mFxY9oL/N0Fsfx+ie
- e0zuuyHbB1Hk+NLZmcyuxoNo2sGvrGSHd7Hwf4VQw730Yd3zgTv9LOiHIM5togp4Vjeu
- mumb2+9N9k/vLHO17b5UBc4ZhHUPgiFBeAE/ycWdxHFQvuXqS9Ady502uVqHPzDBSePo
- N4KNYFOZdUV6q4yQZzp1ZjK/X2pB805ANgp8aLbQEN4zjpYpPaf62E4xxI8hdIzHk+9h
- Gp+Q==
+ bh=yHiyVeyjOJZwlWpIEXgTboZekKC7/yCAyBaCXjwZ15E=;
+ b=GrHn0V6zVVf4NV/4FutNUAoy9M0ViV9vsT//KG+EOGi7VkIpdbdN8uNMfVg5oOHenY
+ w9azGcJeCkI4HeFdObtC3rKMgxCvsrlenK2qAS1yitScM3685OW1ryJHFDweEuKlOPnn
+ 2iF7jlhdw+KrybHb4hHCpZR7Lr2FWHwn2Se+4tw01SMsbiIGTi4yRI/JrcHEkpzv6W+m
+ bj6qymY9Lzojsl6Qx49chHQGyilf3wI42ZuU+rk/Ov0Sa8Hz5LO0pZD8btknIlfRlcry
+ CXgczV+MGWNYr8DvUULI7gWAfPmPgTRsTcOoZJ06//VrjTufzmaZtRvLz+LmhaMhVNVn
+ vxLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689304555; x=1691896555;
+ d=1e100.net; s=20221208; t=1689304668; x=1691896668;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=o4w7muP1aSLmrQ3IKHWExjcoefXU4XwSFU3AbtHrsow=;
- b=aeSX7e/XxWTI1V+MkHvtnPGJNM/dhN+ybk1+U8hlGSu3Rrt/9I6rcpTFOvTxwBqsuY
- ReRtMIMmUs4bHLApN/XlA6rbH/xAYuHJMDwKg4dE5xYsERsHUySAkKBVgc4cOiSkCJOc
- Hl5QnHC6ef8lCZTxchfMzJ0dcbMv7PhNYTXU93GOtdu6GKFxwOHvixOIwCqn/iaqDGkP
- HazOUyebaGXtzPizS/jd2xvBBCCkmwmsg9BcMtr2R3SjvZRBN7K4VG6TCH1v6Fx37l/t
- +LXRuvBlqeuV3m1QvDtCCmB9Vz6gkM3ZNMK19Og78pE5zcaXqxNvDmQNxby4bVT8OZPH
- UP8A==
-X-Gm-Message-State: ABy/qLao4FZufbY0Ymd4Sj16xbab0X60l3VEeU/vv7L5q+IvgY6l6LOS
- mO7Ncc04B6ZV0hnw4bVkRCL7V4sik7+cuzDFZYk=
-X-Google-Smtp-Source: APBJJlEP+qvIhuOniBYU5SemnqB1gTp6OB40EtQgzVrwYmA/pFIw5X106EXn7Ke1ldU0dtAKl5d61RsRKZ3qfrO5AN8=
-X-Received: by 2002:a67:f5ce:0:b0:443:7bbc:e397 with SMTP id
- t14-20020a67f5ce000000b004437bbce397mr2612726vso.26.1689304554937; Thu, 13
- Jul 2023 20:15:54 -0700 (PDT)
+ bh=yHiyVeyjOJZwlWpIEXgTboZekKC7/yCAyBaCXjwZ15E=;
+ b=HF+J2e+u5S36sP4bod3gXHNCOKZFEyXUcx9JbaXBfrQgaBSlZhwCnSViq1AGDpdScL
+ LJoJJ/r9pXUEkm7eliS/ZBc8FKuqt2XMYWTKq6oIovmh1QpcLPF8qjVWovb0JwX6s8R8
+ Wa+RNH8A+IaEjYZV4mbQ+uTWU3q9jtJeBDTEXBhhckoN4CdK3xUmKWtlOzE/BAVOArSM
+ AzQ9eao8uEeF/jVs61gU8ZF49cm0P878xCaDzVMq11r3Y7sNVi8JM1WO+Da5k4cSGKyW
+ AHkgRibdhGyIfbE1vvFfe2fpUji2HaiD7pmNdQSFwnV0p2uyEl1tFP6IUtAtq0ciqVxd
+ vNPA==
+X-Gm-Message-State: ABy/qLb4nX7LMxoeSZP0wtA2/zXh7SlFZfVThInJkXmXivQSRfxL8djH
+ LziSppYGPGSuN4xvRvoQ8y/1faXayaT25LFx+hE=
+X-Google-Smtp-Source: APBJJlE3MZjNLn/37dDCxLSQve1aIx+929R1vC+Ld+W1pps/ArvhCTE4rgt8WRfH8geWJcDQC1JTxMtDYG08NIQChi4=
+X-Received: by 2002:a05:6358:c07:b0:134:f0c7:90ae with SMTP id
+ f7-20020a0563580c0700b00134f0c790aemr4355443rwj.5.1689304668442; Thu, 13 Jul
+ 2023 20:17:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230712205748.446931-1-dbarboza@ventanamicro.com>
- <20230712205748.446931-5-dbarboza@ventanamicro.com>
-In-Reply-To: <20230712205748.446931-5-dbarboza@ventanamicro.com>
+References: <20230711121453.59138-1-philmd@linaro.org>
+ <20230711121453.59138-7-philmd@linaro.org>
+In-Reply-To: <20230711121453.59138-7-philmd@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 14 Jul 2023 13:15:28 +1000
-Message-ID: <CAKmqyKMnnLwEQmCyH2fy0mjhtPKs29H9gyHP3-cu8NsnpRDZDg@mail.gmail.com>
-Subject: Re: [PATCH for-8.2 v2 4/7] target/riscv/cpu.c: split non-ratified
- exts from riscv_cpu_extensions[]
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
+Date: Fri, 14 Jul 2023 13:17:22 +1000
+Message-ID: <CAKmqyKOBMzOvxMhzxUB62XpmuE3ckmy1=DDd1WfmGTKe-n75jg@mail.gmail.com>
+Subject: Re: [PATCH v3 06/16] target/riscv: Restrict riscv_cpu_do_interrupt()
+ to sysemu
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2f;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c31;
+ envelope-from=alistair23@gmail.com; helo=mail-oo1-xc31.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -91,92 +90,89 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jul 13, 2023 at 7:00=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Tue, Jul 11, 2023 at 10:20=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
+<philmd@linaro.org> wrote:
 >
-> Create a new riscv_cpu_experimental_exts[] to store the non-ratified
-> extensions properties. Once they are ratified we'll move them back to
-> riscv_cpu_extensions[].
+> riscv_cpu_do_interrupt() is not reachable on user emulation.
 >
-> Change riscv_cpu_add_user_properties to keep adding them to users.
->
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu.c | 38 +++++++++++++++++++++++---------------
->  1 file changed, 23 insertions(+), 15 deletions(-)
+>  target/riscv/cpu.h        | 5 +++--
+>  target/riscv/cpu_helper.c | 7 ++-----
+>  2 files changed, 5 insertions(+), 7 deletions(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 9bbdc46126..c0826b449d 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1808,21 +1808,6 @@ static Property riscv_cpu_extensions[] =3D {
->      DEFINE_PROP_BOOL("zcmp", RISCVCPU, cfg.ext_zcmp, false),
->      DEFINE_PROP_BOOL("zcmt", RISCVCPU, cfg.ext_zcmt, false),
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index dba78db644..0602b948d4 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -416,7 +416,6 @@ extern const char * const riscv_int_regnamesh[];
+>  extern const char * const riscv_fpr_regnames[];
 >
-> -    /* These are experimental so mark with 'x-' */
-> -    DEFINE_PROP_BOOL("x-zicond", RISCVCPU, cfg.ext_zicond, false),
-> -
-> -    /* ePMP 0.9.3 */
-> -    DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
-> -    DEFINE_PROP_BOOL("x-smaia", RISCVCPU, cfg.ext_smaia, false),
-> -    DEFINE_PROP_BOOL("x-ssaia", RISCVCPU, cfg.ext_ssaia, false),
-> -
-> -    DEFINE_PROP_BOOL("x-zvfh", RISCVCPU, cfg.ext_zvfh, false),
-> -    DEFINE_PROP_BOOL("x-zvfhmin", RISCVCPU, cfg.ext_zvfhmin, false),
-> -
-> -    DEFINE_PROP_BOOL("x-zfbfmin", RISCVCPU, cfg.ext_zfbfmin, false),
-> -    DEFINE_PROP_BOOL("x-zvfbfmin", RISCVCPU, cfg.ext_zvfbfmin, false),
-> -    DEFINE_PROP_BOOL("x-zvfbfwma", RISCVCPU, cfg.ext_zvfbfwma, false),
-> -
->      DEFINE_PROP_END_OF_LIST(),
->  };
+>  const char *riscv_cpu_get_trap_name(target_ulong cause, bool async);
+> -void riscv_cpu_do_interrupt(CPUState *cpu);
+>  int riscv_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cs,
+>                                 int cpuid, DumpState *s);
+>  int riscv_cpu_write_elf32_note(WriteCoreDumpFunction f, CPUState *cs,
+> @@ -449,6 +448,7 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu,=
+ Error **errp);
+>  #define cpu_mmu_index riscv_cpu_mmu_index
 >
-> @@ -1843,6 +1828,25 @@ static Property riscv_cpu_vendor_exts[] =3D {
->      DEFINE_PROP_END_OF_LIST(),
->  };
+>  #ifndef CONFIG_USER_ONLY
+> +void riscv_cpu_do_interrupt(CPUState *cpu);
+>  void riscv_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr,
+>                                       vaddr addr, unsigned size,
+>                                       MMUAccessType access_type,
+> @@ -472,7 +472,8 @@ void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env=
+, uint32_t priv,
+>                                     void *rmw_fn_arg);
 >
-> +/* These are experimental so mark with 'x-' */
-> +static Property riscv_cpu_experimental_exts[] =3D {
-> +    DEFINE_PROP_BOOL("x-zicond", RISCVCPU, cfg.ext_zicond, false),
+>  RISCVException smstateen_acc_ok(CPURISCVState *env, int index, uint64_t =
+bit);
+> -#endif
+> +#endif /* !CONFIG_USER_ONLY */
 > +
-> +    /* ePMP 0.9.3 */
-> +    DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
-> +    DEFINE_PROP_BOOL("x-smaia", RISCVCPU, cfg.ext_smaia, false),
-> +    DEFINE_PROP_BOOL("x-ssaia", RISCVCPU, cfg.ext_ssaia, false),
-> +
-> +    DEFINE_PROP_BOOL("x-zvfh", RISCVCPU, cfg.ext_zvfh, false),
-> +    DEFINE_PROP_BOOL("x-zvfhmin", RISCVCPU, cfg.ext_zvfhmin, false),
-> +
-> +    DEFINE_PROP_BOOL("x-zfbfmin", RISCVCPU, cfg.ext_zfbfmin, false),
-> +    DEFINE_PROP_BOOL("x-zvfbfmin", RISCVCPU, cfg.ext_zvfbfmin, false),
-> +    DEFINE_PROP_BOOL("x-zvfbfwma", RISCVCPU, cfg.ext_zvfbfwma, false),
-> +
-> +    DEFINE_PROP_END_OF_LIST(),
-> +};
-> +
->  static Property riscv_cpu_options[] =3D {
->      DEFINE_PROP_UINT8("pmu-num", RISCVCPU, cfg.pmu_num, 16),
+>  void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv);
 >
-> @@ -1927,6 +1931,10 @@ static void riscv_cpu_add_user_properties(Object *=
-obj)
->      for (prop =3D riscv_cpu_vendor_exts; prop && prop->name; prop++) {
->          qdev_property_add_static(dev, prop);
->      }
-> +
-> +    for (prop =3D riscv_cpu_experimental_exts; prop && prop->name; prop+=
-+) {
-> +        qdev_property_add_static(dev, prop);
-> +    }
+>  void riscv_translate_init(void);
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 0adde26321..597c47bc56 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -1579,7 +1579,6 @@ static target_ulong riscv_transformed_insn(CPURISCV=
+State *env,
+>
+>      return xinsn;
 >  }
+> -#endif /* !CONFIG_USER_ONLY */
 >
->  static Property riscv_cpu_properties[] =3D {
+>  /*
+>   * Handle Traps
+> @@ -1589,8 +1588,6 @@ static target_ulong riscv_transformed_insn(CPURISCV=
+State *env,
+>   */
+>  void riscv_cpu_do_interrupt(CPUState *cs)
+>  {
+> -#if !defined(CONFIG_USER_ONLY)
+> -
+>      RISCVCPU *cpu =3D RISCV_CPU(cs);
+>      CPURISCVState *env =3D &cpu->env;
+>      bool write_gva =3D false;
+> @@ -1783,6 +1780,6 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>
+>      env->two_stage_lookup =3D false;
+>      env->two_stage_indirect_lookup =3D false;
+> -#endif
+> -    cs->exception_index =3D RISCV_EXCP_NONE; /* mark handled to qemu */
+>  }
+> +
+> +#endif /* !CONFIG_USER_ONLY */
 > --
-> 2.41.0
+> 2.38.1
 >
 >
 
