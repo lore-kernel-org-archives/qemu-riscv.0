@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B2D4EB64DD
-	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Jul 2023 02:58:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50F08EB64DD
+	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Jul 2023 03:10:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qK90r-0001Sk-Vn; Thu, 13 Jul 2023 22:58:34 -0400
+	id 1qK9CW-0004IG-RU; Thu, 13 Jul 2023 23:10:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qK90q-0001S2-FQ; Thu, 13 Jul 2023 22:58:32 -0400
-Received: from mail-vs1-xe32.google.com ([2607:f8b0:4864:20::e32])
+ id 1qK9CT-0004HD-KK; Thu, 13 Jul 2023 23:10:33 -0400
+Received: from mail-vk1-xa2a.google.com ([2607:f8b0:4864:20::a2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qK90o-0003UW-Sh; Thu, 13 Jul 2023 22:58:32 -0400
-Received: by mail-vs1-xe32.google.com with SMTP id
- ada2fe7eead31-44691ebb0e1so577490137.0; 
- Thu, 13 Jul 2023 19:58:29 -0700 (PDT)
+ id 1qK9CQ-0003Hk-5x; Thu, 13 Jul 2023 23:10:32 -0400
+Received: by mail-vk1-xa2a.google.com with SMTP id
+ 71dfb90a1353d-48137f8b118so1603753e0c.0; 
+ Thu, 13 Jul 2023 20:10:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1689303508; x=1691895508;
+ d=gmail.com; s=20221208; t=1689304228; x=1691896228;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8ljfNYVIKwGLaHPEXj4njhV7CNnvKn8QWv2BGf1vmxA=;
- b=YNeqOFuYMgFM8g8LSuRfsYJmyJj/vu6V+kcwcgQQQJzET494gOpgKMtymcJYBrHdJ1
- 44JfXUz9FqPM3yabRXG87eDB7R3mpWwjqfCUyPQbwXgbOamdwOZha3nefO33P5M4mhs5
- +w2eBoCrSac5U8Q28JhyTChQqhf9NGUgyzkrBvtf2ed1udr5W9U3gpEtluZzwbuTZIgW
- kDCGiYb6Llpp8ckDRwXSDajds2sh90iLM/4IGTwnOQJJokHtU9EkfZPLgxJwSGPR4gqh
- pOPYKB4M96Qsj9Z6cdsKIyRXd1EbXCsNwhLr3sCDeieRkYsfB8D7AvfcHGIqxgUM16PT
- rrfA==
+ bh=egAJlZsCaebrNr9CT4FfzfMm0iauuG3KKJtLB89mRLk=;
+ b=LnvsvVUBRx5lorlYuVCWR+zZWgmZKaRKjA0EyanRk8Qrs+zW+7+ji0bxKG/33acMbS
+ ORSAbMD4RhaSufGhKFIQD+0kSas+eMM/amqesKA6sECXXjJI9YXMkJF1L3lsOrAdYGmw
+ kJzWhxjudrZDtCl9ny2q5on88675bXBuKGxFqqHV9vJJCe4lbHDVOYVMj3i+yZmsQvO+
+ 0pAyUrSc6jPnRvSetU1uBXXfdnlGZSJ5fR4uggKdugQ97zt5By5jle2fdS4hMsdHZ4QQ
+ 85+AJ8Krz6sdWlCDhUjzgGMzZon1G7AZscZdoeQh457Rfs69J9eQH6afhCYnVsZK8qCz
+ kxLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689303508; x=1691895508;
+ d=1e100.net; s=20221208; t=1689304228; x=1691896228;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8ljfNYVIKwGLaHPEXj4njhV7CNnvKn8QWv2BGf1vmxA=;
- b=EkRAw+u75W2wjhcN1TEm5vMTQMzb/zwSMZgp8BS0SFvaZwMu1Nmk4foaza3rmSH2fX
- yjbPCUjqNnVmoikchKkyiWSdWexM6bMESvPj6Iijr0WORCVPBe6AWkcQRYWBG6ULtKI8
- GievH5wEf3f1bgZioLUQ1qfQnNrO7vDIDKJkVrmkcMK6rWgodjoqtogqnQI6ElckSV2O
- pnyL0PN43fJTzBZpWLDDSyZuAHHRg5mAEXKjvBeSlAgIOjkyYxshl0XfAVWEDTL2o7xQ
- O5lKEuEwAVOGxKx593nDpSPYNheBVBstLI7UHGjWVDfF0lfxyBDZwMV2Q5bXqHcZG/m7
- sjTQ==
-X-Gm-Message-State: ABy/qLa3ys9rmIhtkbscV2ZnU6hCOOeb+iqlL1TPw47h5BQgpFPIMRNB
- olc7rvLuAnc/vujw0/C6OUyrlw417SvCONKD0j8=
-X-Google-Smtp-Source: APBJJlG5NQ6MC+ujfw/AfA2BinsaHBgJAmaEc8NWdekIdpcS+0e9iObpktvWS7qd13GiJgvROWFRBIxVh0pGQmie2J0=
-X-Received: by 2002:a05:6102:2d6:b0:445:2be0:f54f with SMTP id
- h22-20020a05610202d600b004452be0f54fmr2542460vsh.22.1689303508357; Thu, 13
- Jul 2023 19:58:28 -0700 (PDT)
+ bh=egAJlZsCaebrNr9CT4FfzfMm0iauuG3KKJtLB89mRLk=;
+ b=H1+hgiksphVo1oy7L84LUpRTSKojfUTwL6jQsi9jYS33D5pWWcKez/TUS5mUeQSh3V
+ Zo9v8b1dfPnV+6Z4OvN1KxiX/5sqBdoGU1s6KAZSYQYuGlj0g6XyZ3QOHwvZrFVVFtaM
+ 6h4J8qwOAWi4Fztp/wH2LucIIwx4bn8FmcwLn5Vb9F18d3SYsbkc1pRuohXVhcf5y26m
+ KOoid5bximwZdLAPAQPUGprIRhdwZZRX/1k2b4U7ey/D8zw/ARRTjnZ6eJ2APrNc0s9u
+ Ox8O/MgdlExfGKJXrQtjRNw8qo3QzirmaTU9cgf8O4f4wKENvgNnq8jhTqa+qDYvImsc
+ LJhg==
+X-Gm-Message-State: ABy/qLaKdVY4So4DaeWhxR9eS+RZpN7K+Nj6AhLzby8KGhRVRFQCad2O
+ bLzzIFyfTzKk/KuJ1DAp2cK2WKoud1Zj6VgYU9g=
+X-Google-Smtp-Source: APBJJlEgd0xUjHu2C8Jn0b7Ulb0ZEAkTr9iafWL2xEjmQZ78rfwY4RiIhKar/IbR6TXSlv2L9/viX0MWYW8V6ZZMLdQ=
+X-Received: by 2002:a1f:5ed4:0:b0:47e:838:a704 with SMTP id
+ s203-20020a1f5ed4000000b0047e0838a704mr468552vkb.6.1689304228446; Thu, 13 Jul
+ 2023 20:10:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230711075051.1531007-1-christoph.muellner@vrull.eu>
-In-Reply-To: <20230711075051.1531007-1-christoph.muellner@vrull.eu>
+References: <20230712205748.446931-1-dbarboza@ventanamicro.com>
+ <20230712205748.446931-7-dbarboza@ventanamicro.com>
+In-Reply-To: <20230712205748.446931-7-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 14 Jul 2023 12:58:02 +1000
-Message-ID: <CAKmqyKMQ2nOmymXCSBYxH-q=QSTO_1z3-UaMXf98Jt6-oFvHYg@mail.gmail.com>
-Subject: Re: [PATCH] riscv/disas: Fix disas output of upper immediates
-To: Christoph Muellner <christoph.muellner@vrull.eu>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
- Richard Henderson <richard.henderson@linaro.org>
+Date: Fri, 14 Jul 2023 13:10:02 +1000
+Message-ID: <CAKmqyKNPo1bZULzaAF+5a6w=Qaz6aG7WkAGRXK0FVGG8fxTP6w@mail.gmail.com>
+Subject: Re: [PATCH for-8.2 v2 6/7] target/riscv: add 'max' CPU type
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e32;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2a;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2a.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -90,108 +90,147 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jul 11, 2023 at 5:52=E2=80=AFPM Christoph Muellner
-<christoph.muellner@vrull.eu> wrote:
+On Thu, Jul 13, 2023 at 7:00=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
 >
-> From: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
+> The 'max' CPU type is used by tooling to determine what's the most
+> capable CPU a current QEMU version implements. Other archs such as ARM
+> implements this type. Let's add it to RISC-V.
 >
-> The GNU assembler produces the following output for instructions
-> with upper immediates:
->     00002597                auipc   a1,0x2
->     000024b7                lui     s1,0x2
->     6409                    lui     s0,0x2 # c.lui
+> What we consider "most capable CPU" in this context are related to
+> ratified, non-vendor extensions. This means that we want the 'max' CPU
+> to enable all (possible) ratified extensions by default. The reasoning
+> behind this design is (1) vendor extensions can conflict with each other
+> and we won't play favorities deciding which one is default or not and
+> (2) non-ratified extensions are always prone to changes, not being
+> stable enough to be enabled by default.
 >
-> The immediate operands of upper immediates are not shifted.
+> All this said, we're still not able to enable all ratified extensions
+> due to conflicts between them. Zfinx and all its dependencies aren't
+> enabled because of a conflict with RVF. zce, zcmp and zcmt are also
+> disabled due to RVD conflicts. When running with 64 bits we're also
+> disabling zcf.
 >
-> However, the QEMU disassembler prints them shifted:
->     00002597          auipc                   a1,8192
->     000024b7          lui                     s1,8192
->     6409              lui                     s0,8192 # c.lui
+> MISA bits RVG, RVJ and RVV are also being set manually since they're
+> default disabled.
 >
-> The current implementation extracts the immediate bits and shifts the by =
-12,
-> so the internal representation of the immediate is the actual immediate.
-> However, the immediates are later printed using rv_fmt_rd_imm or
-> rv_fmt_rd_offset, which don't undo the shift.
+> This is the resulting 'riscv,isa' DT for this new CPU:
 >
-> Let's fix this by using specific output formats for instructions
-> with upper immediates, that take care of the shift.
+> rv64imafdcvh_zicbom_zicboz_zicsr_zifencei_zihintpause_zawrs_zfa_
+> zfh_zfhmin_zca_zcb_zcd_zba_zbb_zbc_zbkb_zbkc_zbkx_zbs_zk_zkn_zknd_
+> zkne_zknh_zkr_zks_zksed_zksh_zkt_zve32f_zve64f_zve64d_
+> smstateen_sscofpmf_sstc_svadu_svinval_svnapot_svpbmt
 >
-> Signed-off-by: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>  target/riscv/cpu-qom.h |  1 +
+>  target/riscv/cpu.c     | 53 ++++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 54 insertions(+)
+>
+> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+> index 04af50983e..f3fbe37a2c 100644
+> --- a/target/riscv/cpu-qom.h
+> +++ b/target/riscv/cpu-qom.h
+> @@ -30,6 +30,7 @@
+>  #define CPU_RESOLVING_TYPE TYPE_RISCV_CPU
+>
+>  #define TYPE_RISCV_CPU_ANY              RISCV_CPU_TYPE_NAME("any")
+> +#define TYPE_RISCV_CPU_MAX              RISCV_CPU_TYPE_NAME("max")
 
-Thanks!
-
-Applied to riscv-to-apply.next
+From memory the "any" CPU was supposed to do this, so we might want to remo=
+ve it
 
 Alistair
 
-> ---
->  disas/riscv.c | 19 ++++++++++++++++---
->  disas/riscv.h |  2 ++
->  2 files changed, 18 insertions(+), 3 deletions(-)
+>  #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
+>  #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
+>  #define TYPE_RISCV_CPU_BASE128          RISCV_CPU_TYPE_NAME("x-rv128")
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index b61465c8c4..5172566cda 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -248,6 +248,7 @@ static const char * const riscv_intr_names[] =3D {
+>  };
 >
-> diff --git a/disas/riscv.c b/disas/riscv.c
-> index cd7b6e86a7..3873a69157 100644
-> --- a/disas/riscv.c
-> +++ b/disas/riscv.c
-> @@ -1135,8 +1135,8 @@ static const rv_comp_data rvcp_fsgnjx_q[] =3D {
+>  static void riscv_cpu_add_user_properties(Object *obj);
+> +static void riscv_init_max_cpu_extensions(Object *obj);
 >
->  const rv_opcode_data rvi_opcode_data[] =3D {
->      { "illegal", rv_codec_illegal, rv_fmt_none, NULL, 0, 0, 0 },
-> -    { "lui", rv_codec_u, rv_fmt_rd_imm, NULL, 0, 0, 0 },
-> -    { "auipc", rv_codec_u, rv_fmt_rd_offset, NULL, 0, 0, 0 },
-> +    { "lui", rv_codec_u, rv_fmt_rd_uimm, NULL, 0, 0, 0 },
-> +    { "auipc", rv_codec_u, rv_fmt_rd_uoffset, NULL, 0, 0, 0 },
->      { "jal", rv_codec_uj, rv_fmt_rd_offset, rvcp_jal, 0, 0, 0 },
->      { "jalr", rv_codec_i, rv_fmt_rd_rs1_offset, rvcp_jalr, 0, 0, 0 },
->      { "beq", rv_codec_sb, rv_fmt_rs1_rs2_offset, rvcp_beq, 0, 0, 0 },
-> @@ -1382,7 +1382,7 @@ const rv_opcode_data rvi_opcode_data[] =3D {
->        rv_op_addi },
->      { "c.addi16sp", rv_codec_ci_16sp, rv_fmt_rd_rs1_imm, NULL, rv_op_add=
-i,
->        rv_op_addi, rv_op_addi, rvcd_imm_nz },
-> -    { "c.lui", rv_codec_ci_lui, rv_fmt_rd_imm, NULL, rv_op_lui, rv_op_lu=
-i,
-> +    { "c.lui", rv_codec_ci_lui, rv_fmt_rd_uimm, NULL, rv_op_lui, rv_op_l=
-ui,
->        rv_op_lui, rvcd_imm_nz },
->      { "c.srli", rv_codec_cb_sh6, rv_fmt_rd_rs1_imm, NULL, rv_op_srli,
->        rv_op_srli, rv_op_srli, rvcd_imm_nz },
-> @@ -4694,6 +4694,19 @@ static void format_inst(char *buf, size_t buflen, =
-size_t tab, rv_decode *dec)
->                  dec->pc + dec->imm);
->              append(buf, tmp, buflen);
->              break;
-> +        case 'U':
-> +            fmt++;
-> +            snprintf(tmp, sizeof(tmp), "%d", dec->imm >> 12);
-> +            append(buf, tmp, buflen);
-> +            if (*fmt =3D=3D 'o') {
-> +                while (strlen(buf) < tab * 2) {
-> +                    append(buf, " ", buflen);
-> +                }
-> +                snprintf(tmp, sizeof(tmp), "# 0x%" PRIx64,
-> +                    dec->pc + dec->imm);
-> +                append(buf, tmp, buflen);
-> +            }
-> +            break;
->          case 'c': {
->              const char *name =3D csr_name(dec->imm & 0xfff);
->              if (name) {
-> diff --git a/disas/riscv.h b/disas/riscv.h
-> index 9cf901fc1e..8abb578b51 100644
-> --- a/disas/riscv.h
-> +++ b/disas/riscv.h
-> @@ -227,7 +227,9 @@ enum {
->  #define rv_fmt_pred_succ              "O\tp,s"
->  #define rv_fmt_rs1_rs2                "O\t1,2"
->  #define rv_fmt_rd_imm                 "O\t0,i"
-> +#define rv_fmt_rd_uimm                "O\t0,Ui"
->  #define rv_fmt_rd_offset              "O\t0,o"
-> +#define rv_fmt_rd_uoffset             "O\t0,Uo"
->  #define rv_fmt_rd_rs1_rs2             "O\t0,1,2"
->  #define rv_fmt_frd_rs1                "O\t3,1"
->  #define rv_fmt_frd_rs1_rs2            "O\t3,1,2"
+>  const char *riscv_cpu_get_trap_name(target_ulong cause, bool async)
+>  {
+> @@ -374,6 +375,25 @@ static void riscv_any_cpu_init(Object *obj)
+>      cpu->cfg.pmp =3D true;
+>  }
+>
+> +static void riscv_max_cpu_init(Object *obj)
+> +{
+> +    RISCVCPU *cpu =3D RISCV_CPU(obj);
+> +    CPURISCVState *env =3D &cpu->env;
+> +    RISCVMXL mlx =3D MXL_RV64;
+> +
+> +#ifdef TARGET_RISCV32
+> +    mlx =3D MXL_RV32;
+> +#endif
+> +    set_misa(env, mlx, 0);
+> +    riscv_cpu_add_user_properties(obj);
+> +    riscv_init_max_cpu_extensions(obj);
+> +    env->priv_ver =3D PRIV_VERSION_LATEST;
+> +#ifndef CONFIG_USER_ONLY
+> +    set_satp_mode_max_supported(RISCV_CPU(obj), mlx =3D=3D MXL_RV32 ?
+> +                                VM_1_10_SV32 : VM_1_10_SV57);
+> +#endif
+> +}
+> +
+>  #if defined(TARGET_RISCV64)
+>  static void rv64_base_cpu_init(Object *obj)
+>  {
+> @@ -1934,6 +1954,38 @@ static void riscv_cpu_add_user_properties(Object *=
+obj)
+>      ADD_CPU_PROPERTIES_ARRAY(dev, riscv_cpu_experimental_exts);
+>  }
+>
+> +/*
+> + * The 'max' type CPU will have all possible ratified
+> + * non-vendor extensions enabled.
+> + */
+> +static void riscv_init_max_cpu_extensions(Object *obj)
+> +{
+> +    RISCVCPU *cpu =3D RISCV_CPU(obj);
+> +    CPURISCVState *env =3D &cpu->env;
+> +    Property *prop;
+> +
+> +    /* Enable RVG, RVJ and RVV that are disabled by default */
+> +    set_misa(env, env->misa_mxl, env->misa_ext | RVG | RVJ | RVV);
+> +
+> +    for (prop =3D riscv_cpu_extensions; prop && prop->name; prop++) {
+> +        object_property_set_bool(obj, prop->name, true, NULL);
+> +    }
+> +
+> +    /* Zfinx is not compatible with F. Disable it */
+> +    object_property_set_bool(obj, "zfinx", false, NULL);
+> +    object_property_set_bool(obj, "zdinx", false, NULL);
+> +    object_property_set_bool(obj, "zhinx", false, NULL);
+> +    object_property_set_bool(obj, "zhinxmin", false, NULL);
+> +
+> +    object_property_set_bool(obj, "zce", false, NULL);
+> +    object_property_set_bool(obj, "zcmp", false, NULL);
+> +    object_property_set_bool(obj, "zcmt", false, NULL);
+> +
+> +    if (env->misa_mxl !=3D MXL_RV32) {
+> +        object_property_set_bool(obj, "zcf", false, NULL);
+> +    }
+> +}
+> +
+>  static Property riscv_cpu_properties[] =3D {
+>      DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
+>
+> @@ -2272,6 +2324,7 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
+>          .abstract =3D true,
+>      },
+>      DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_ANY,      riscv_any_cpu_init),
+> +    DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_MAX,      riscv_max_cpu_init),
+>  #if defined(CONFIG_KVM)
+>      DEFINE_CPU(TYPE_RISCV_CPU_HOST,             riscv_host_cpu_init),
+>  #endif
 > --
 > 2.41.0
 >
