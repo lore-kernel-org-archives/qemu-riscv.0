@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6268EB64DD
-	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Jul 2023 02:51:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B2D4EB64DD
+	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Jul 2023 02:58:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qK8tw-0008Lb-LG; Thu, 13 Jul 2023 22:51:24 -0400
+	id 1qK90r-0001Sk-Vn; Thu, 13 Jul 2023 22:58:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qK8tv-0008L7-Fa; Thu, 13 Jul 2023 22:51:23 -0400
-Received: from mail-vs1-xe29.google.com ([2607:f8b0:4864:20::e29])
+ id 1qK90q-0001S2-FQ; Thu, 13 Jul 2023 22:58:32 -0400
+Received: from mail-vs1-xe32.google.com ([2607:f8b0:4864:20::e32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qK8tt-0008KI-Mg; Thu, 13 Jul 2023 22:51:23 -0400
-Received: by mail-vs1-xe29.google.com with SMTP id
- ada2fe7eead31-440ac4b44a8so574731137.3; 
- Thu, 13 Jul 2023 19:51:21 -0700 (PDT)
+ id 1qK90o-0003UW-Sh; Thu, 13 Jul 2023 22:58:32 -0400
+Received: by mail-vs1-xe32.google.com with SMTP id
+ ada2fe7eead31-44691ebb0e1so577490137.0; 
+ Thu, 13 Jul 2023 19:58:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1689303080; x=1691895080;
+ d=gmail.com; s=20221208; t=1689303508; x=1691895508;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gaWxKsU0rnpR6Twn5dlGozrYhvnF+Eh/VjPohLf8mW0=;
- b=PQ4EMbkxG8WvKQg7WkVPOt3bG9kUtL1utdmGirahDY+k3JDVWHgiwYsjM60vzNQpsr
- /4A7Vsf7kGpjZ05G04bXgMaG0fKQ1D45OhgFy9OcxPQW89Tg8N/TSQUe6gvlxp9yHM7d
- DDsLe/0DmxLmgEuVgK6yfNCRZbajjVSyXOcDi34Gk32IBw+o6OO0gVhu4YWiubogBCvF
- xk64i43zKzcu1x4F+vIBXilnO1MoHZRoQSF8B6fEImr73LAqOHbyPZQGMehuvjHRntnm
- u4x+3iHsnyvj3N36ICRNur9YEILbkG1Q3Odp3WmDLesFjmJ+ASOlyJ7G0Wi/2eW7hWRV
- eQpA==
+ bh=8ljfNYVIKwGLaHPEXj4njhV7CNnvKn8QWv2BGf1vmxA=;
+ b=YNeqOFuYMgFM8g8LSuRfsYJmyJj/vu6V+kcwcgQQQJzET494gOpgKMtymcJYBrHdJ1
+ 44JfXUz9FqPM3yabRXG87eDB7R3mpWwjqfCUyPQbwXgbOamdwOZha3nefO33P5M4mhs5
+ +w2eBoCrSac5U8Q28JhyTChQqhf9NGUgyzkrBvtf2ed1udr5W9U3gpEtluZzwbuTZIgW
+ kDCGiYb6Llpp8ckDRwXSDajds2sh90iLM/4IGTwnOQJJokHtU9EkfZPLgxJwSGPR4gqh
+ pOPYKB4M96Qsj9Z6cdsKIyRXd1EbXCsNwhLr3sCDeieRkYsfB8D7AvfcHGIqxgUM16PT
+ rrfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689303080; x=1691895080;
+ d=1e100.net; s=20221208; t=1689303508; x=1691895508;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gaWxKsU0rnpR6Twn5dlGozrYhvnF+Eh/VjPohLf8mW0=;
- b=RQGMyVnm926+V6ymCA2p2RD+A13PgGi86H2HBMXECW0ZJ7Mq2CXHgXshnQdA/8JH39
- pxjq8tvoeWkl9Mi5PBnJ7qBQPrHyvT8pGW1EncGQWEIUDC/Suk6oiy6upMx0DrqOu9ai
- qDImwZN0nPQl9srhV5ORTCCte33FbEKzlHtuDrfclbp4uObB3pJC1ryRC+BMlNrFKEKQ
- QTt3w5AnE+mJTvn8XR/6GcXLltbS3fPk0T5AU5xjHQlCNpl/sJcfTzWuj3/aw8XwmEWp
- +XkGe3rw6BZo6fo984wuxDTqQjjsGG1uxS6AMSgUD1hB7EH9RhCGzZ+Ywe/mAbfkUtEu
- ppUA==
-X-Gm-Message-State: ABy/qLbfkQZ3v1QOAc6SR7Q2dNg69OyB2NwnOvzh1LddCSW7Xt5sU0Bg
- Phq5wIrMlHczdbJwbpJ5x+8VMQPwKy/K97ZB/dM5JEd7a7fhAg==
-X-Google-Smtp-Source: APBJJlGkDQAmBQH5uU0xW5Rvt82GxovE1hwogC16zhajkhJgCbW6iL78UT5AqvoV1VFm0IBNZpLec/ka1X8fh1AmO4c=
-X-Received: by 2002:a1f:bdd6:0:b0:471:549e:c1ff with SMTP id
- n205-20020a1fbdd6000000b00471549ec1ffmr2316503vkf.7.1689303080189; Thu, 13
- Jul 2023 19:51:20 -0700 (PDT)
+ bh=8ljfNYVIKwGLaHPEXj4njhV7CNnvKn8QWv2BGf1vmxA=;
+ b=EkRAw+u75W2wjhcN1TEm5vMTQMzb/zwSMZgp8BS0SFvaZwMu1Nmk4foaza3rmSH2fX
+ yjbPCUjqNnVmoikchKkyiWSdWexM6bMESvPj6Iijr0WORCVPBe6AWkcQRYWBG6ULtKI8
+ GievH5wEf3f1bgZioLUQ1qfQnNrO7vDIDKJkVrmkcMK6rWgodjoqtogqnQI6ElckSV2O
+ pnyL0PN43fJTzBZpWLDDSyZuAHHRg5mAEXKjvBeSlAgIOjkyYxshl0XfAVWEDTL2o7xQ
+ O5lKEuEwAVOGxKx593nDpSPYNheBVBstLI7UHGjWVDfF0lfxyBDZwMV2Q5bXqHcZG/m7
+ sjTQ==
+X-Gm-Message-State: ABy/qLa3ys9rmIhtkbscV2ZnU6hCOOeb+iqlL1TPw47h5BQgpFPIMRNB
+ olc7rvLuAnc/vujw0/C6OUyrlw417SvCONKD0j8=
+X-Google-Smtp-Source: APBJJlG5NQ6MC+ujfw/AfA2BinsaHBgJAmaEc8NWdekIdpcS+0e9iObpktvWS7qd13GiJgvROWFRBIxVh0pGQmie2J0=
+X-Received: by 2002:a05:6102:2d6:b0:445:2be0:f54f with SMTP id
+ h22-20020a05610202d600b004452be0f54fmr2542460vsh.22.1689303508357; Thu, 13
+ Jul 2023 19:58:28 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230711075051.1531007-1-christoph.muellner@vrull.eu>
 In-Reply-To: <20230711075051.1531007-1-christoph.muellner@vrull.eu>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 14 Jul 2023 12:50:53 +1000
-Message-ID: <CAKmqyKNqUW4CMqbROYBahJN2qSvV6BJCWFsr2FUXdNyyW4aUcg@mail.gmail.com>
+Date: Fri, 14 Jul 2023 12:58:02 +1000
+Message-ID: <CAKmqyKMQ2nOmymXCSBYxH-q=QSTO_1z3-UaMXf98Jt6-oFvHYg@mail.gmail.com>
 Subject: Re: [PATCH] riscv/disas: Fix disas output of upper immediates
 To: Christoph Muellner <christoph.muellner@vrull.eu>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
@@ -65,8 +65,8 @@ Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e29;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe29.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e32;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe32.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -119,7 +119,9 @@ On Tue, Jul 11, 2023 at 5:52=E2=80=AFPM Christoph Muellner
 >
 > Signed-off-by: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
