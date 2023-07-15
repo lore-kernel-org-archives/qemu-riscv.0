@@ -4,67 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11609EB64DA
-	for <qemu-riscv@archiver.kernel.org>; Sat, 15 Jul 2023 02:34:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBD2DC001DE
+	for <qemu-riscv@archiver.kernel.org>; Sat, 15 Jul 2023 09:13:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qKV7O-0000of-AQ; Fri, 14 Jul 2023 22:34:46 -0400
+	id 1qKbKo-0003bk-Bn; Sat, 15 Jul 2023 05:13:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1qKV7M-0000oD-LX; Fri, 14 Jul 2023 22:34:44 -0400
-Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
- by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1qKV7J-00055U-Qy; Fri, 14 Jul 2023 22:34:44 -0400
-Received: from [192.168.0.120] (unknown [180.175.26.191])
- by APP-01 (Coremail) with SMTP id qwCowADn7wu4BbJkotopCw--.31217S2;
- Sat, 15 Jul 2023 10:34:33 +0800 (CST)
-Message-ID: <4328c272-cc7e-6c81-32fb-f2135d054629@iscas.ac.cn>
-Date: Sat, 15 Jul 2023 10:34:32 +0800
+ (Exim 4.90_1) (envelope-from <atishp@atishpatra.org>)
+ id 1qKbKn-0003bN-NW
+ for qemu-riscv@nongnu.org; Sat, 15 Jul 2023 05:13:01 -0400
+Received: from mail-lj1-x22c.google.com ([2a00:1450:4864:20::22c])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <atishp@atishpatra.org>)
+ id 1qKbKl-0004N8-Px
+ for qemu-riscv@nongnu.org; Sat, 15 Jul 2023 05:13:01 -0400
+Received: by mail-lj1-x22c.google.com with SMTP id
+ 38308e7fff4ca-2b933bbd3eeso2296961fa.1
+ for <qemu-riscv@nongnu.org>; Sat, 15 Jul 2023 02:12:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=atishpatra.org; s=google; t=1689412377; x=1692004377;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lplq7nNh9v/iOOE5xwG4FxLJTS7HJUPMDYimkMR+PQE=;
+ b=WUB9kdNtP8fzlZQ8bIdpBjjq2SdEbyiNwdfyyxGAXI8zf0Fnc42KUQpBtezvlCIaCb
+ iy5NlyCmOkyhG//10Hqam4et9XAqkuf+SESLVxLhqx4X11Zc8l0mWkyd28ptWMqti/gx
+ /Jdo39Pf+lKBZSPnJM0sdsX95DCmK1HK5USn8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1689412377; x=1692004377;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lplq7nNh9v/iOOE5xwG4FxLJTS7HJUPMDYimkMR+PQE=;
+ b=AygE5DNClPZgn0qkJIHiDuFrwWXt4vEcVFFrrv/xfCelXOOY1ZElHZXyoJgtDN5uSn
+ ZqVyPRS8TxyxS6Xq50uBGLHakoLA4xcxJ7LpWbNso3aXkquJIm0FbPPmuJqg9XBlSgD8
+ srgNAsF5rUu+a0X96vqdVCxHTKidPYDG3xHtfgUmIrRiIeRVlKQg3IEL20qoDzk3Zx/n
+ 05oMFRatDvuSQpdKZNwGOJbC87lJo1VrB7W+Wnrv8Ru+tX6GXqqYNKcaKQt/sSrYsy92
+ T6GSvoQAuzaNMo8E85tR/V8iQYJL5xxYxhb56L2oTSV/HQcRzMTHNXc+CBanXU2vzw/I
+ veDA==
+X-Gm-Message-State: ABy/qLb3gJEsAwVcUA1Y+z9/vbL6tN24nAvwG/PkmVoY6zML7cxKI7g2
+ EdQ+u8i5xwpE2vIm+TFFioFNjYb+BUzUTfJmRRc+
+X-Google-Smtp-Source: APBJJlFiqj5a/hMIGpY2CNA1zDNxNqMighSiAZQcZg0BK/ajf3/yAKI7BvJbsvS0oQ+OTfKCiGxnLLmMF2dNwGxRTFM=
+X-Received: by 2002:a2e:b04b:0:b0:2b8:3ff3:cd93 with SMTP id
+ d11-20020a2eb04b000000b002b83ff3cd93mr3210352ljl.7.1689412376854; Sat, 15 Jul
+ 2023 02:12:56 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Cc: liweiwei@iscas.ac.cn, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- bmeng@tinylab.org, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- richard.henderson@linaro.org
-Subject: Re: [PATCH for-8.2 v3 6/8] target/riscv: add 'max' CPU type
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-References: <20230714174311.672359-1-dbarboza@ventanamicro.com>
- <20230714174311.672359-7-dbarboza@ventanamicro.com>
-Content-Language: en-US
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-In-Reply-To: <20230714174311.672359-7-dbarboza@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-CM-TRANSID: qwCowADn7wu4BbJkotopCw--.31217S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxKF1DuF1fJF45JF4xZw4UXFb_yoW7Wr17pF
- 45GFZ09FZ8XFs7t3yfJw1kWrs5Aw40gw4agw43Ww42va1fJ3y3Jr1DtF4jkF1DWF4xZ3WY
- 9w1YkF13Zw43tFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUkG14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8JV
- W8Jr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
- 2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
- W8JwACjcxG0xvEwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc7I2V7IY0VAS07AlzVAY
- IcxG8wCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14
- v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkG
- c2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI
- 0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4U
- MIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUdHUDUUU
- UU=
-X-Originating-IP: [180.175.26.191]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -19
-X-Spam_score: -2.0
+References: <20230712-stench-happiness-40c2ea831257@spud>
+ <3e9b5be8-d3ca-3a17-bef9-4a6a5bdc0ad0@ventanamicro.com>
+ <20230712-tulip-replica-0322e71c3e81@spud>
+ <744cbde6-7ce5-c327-3c5a-3858e994cc39@ventanamicro.com>
+ <20230712-superhero-rabid-578605f52927@spud>
+ <5dd3366d-13ba-c7fb-554f-549d97e7d4f9@ventanamicro.com>
+ <20230712-fancied-aviator-270f51166407@spud>
+ <20230713-craziness-lankiness-8aec3db24993@spud>
+ <CAAhSdy3J5HUoVP21jo11FBuAFSPSxHNKtuL7amn-5t7n_smoSg@mail.gmail.com>
+ <20230714-reoccur-confined-4b37494b1201@spud>
+ <20230714-hash-handwrite-339817b93ba1@spud>
+In-Reply-To: <20230714-hash-handwrite-339817b93ba1@spud>
+From: Atish Patra <atishp@atishpatra.org>
+Date: Sat, 15 Jul 2023 02:12:45 -0700
+Message-ID: <CAOnJCUL3=G_yV5cP5OjCGQKNvciNgXWnoQGUU4Bqh4iwnx6C4A@mail.gmail.com>
+Subject: Re: Boot failure after QEMU's upgrade to OpenSBI v1.3 (was Re: [PATCH
+ for-8.2 6/7] target/riscv: add 'max' CPU type)
+To: Conor Dooley <conor@kernel.org>
+Cc: Anup Patel <anup@brainfault.org>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, 
+ alistair.francis@wdc.com, bmeng@tinylab.org, liweiwei@iscas.ac.cn, 
+ zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com, 
+ opensbi@lists.infradead.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::22c;
+ envelope-from=atishp@atishpatra.org; helo=mail-lj1-x22c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.091,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -80,142 +101,115 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Fri, Jul 14, 2023 at 5:29=E2=80=AFAM Conor Dooley <conor@kernel.org> wro=
+te:
+>
+> On Fri, Jul 14, 2023 at 11:19:34AM +0100, Conor Dooley wrote:
+> > On Fri, Jul 14, 2023 at 10:00:19AM +0530, Anup Patel wrote:
+> >
+> > > > > OpenSBI v1.3
+> > > > >    ____                    _____ ____ _____
+> > > > >   / __ \                  / ____|  _ \_   _|
+> > > > >  | |  | |_ __   ___ _ __ | (___ | |_) || |
+> > > > >  | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+> > > > >  | |__| | |_) |  __/ | | |____) | |_) || |_
+> > > > >   \____/| .__/ \___|_| |_|_____/|___/_____|
+> > > > >         | |
+> > > > >         |_|
+> > > > >
+> > > > > init_coldboot: ipi init failed (error -1009)
+> > > > >
+> > > > > Just to note, because we use our own firmware that vendors in Ope=
+nSBI
+> > > > > and compiles only a significantly cut down number of files from i=
+t, we
+> > > > > do not use the fw_dynamic etc flow on our hardware. As a result, =
+we have
+> > > > > not tested v1.3, nor do we have any immediate plans to change our
+> > > > > platform firmware to vendor v1.3 either.
+> > > > >
+> > > > > I unless there's something obvious to you, it sounds like I will =
+need to
+> > > > > go and bisect OpenSBI. That's a job for another day though, given=
+ the
+> > > > > time.
+> > > > >
+> > >
+> > > The real issue is some CPU/HART DT nodes marked as disabled in the
+> > > DT passed to OpenSBI 1.3.
+> > >
+> > > This issue does not exist in any of the DTs generated by QEMU but som=
+e
+> > > of the DTs in the kernel (such as microchip and SiFive board DTs) hav=
+e
+> > > the E-core disabled.
+> > >
+> > > I had discovered this issue in a totally different context after the =
+OpenSBI 1.3
+> > > release happened. This issue is already fixed in the latest OpenSBI b=
+y the
+> > > following commit c6a35733b74aeff612398f274ed19a74f81d1f37 ("lib: util=
+s:
+> > > Fix sbi_hartid_to_scratch() usage in ACLINT drivers").
+> >
+> > Great, thanks Anup! I thought I had tested tip-of-tree too, but
+> > obviously not.
+> >
+> > > I always assumed that Microchip hss.bin is the preferred BIOS for the
+> > > QEMU microchip-icicle-kit machine but I guess that's not true.
+> >
+> > Unfortunately the HSS has not worked in QEMU for a long time, and while
+> > I would love to fix it, but am pretty stretched for spare time to begin
+> > with.
+> > I usually just do direct kernel boots, which use the OpenSBI that comes
+> > with QEMU, as I am sure you already know :)
+> >
+> > > At this point, you can either:
+> > > 1) Use latest OpenSBI on QEMU microchip-icicle-kit machine
+>
+> I forgot to reply to this point, wondering what should be done with
+> QEMU. Bumping to v1.3 in QEMU introduces a regression here, regardless
+> of whether I can go and build a fixed version of OpenSBI.
+>
+FYI: The no-map fix went in OpenSBI v1.3. Without the upgrade, any
+user using the latest kernel (> v6.4)
+may hit those random linear map related issues (in hibernation or EFI
+booting path).
 
-On 2023/7/15 01:43, Daniel Henrique Barboza wrote:
-> The 'max' CPU type is used by tooling to determine what's the most
-> capable CPU a current QEMU version implements. Other archs such as ARM
-> implements this type. Let's add it to RISC-V.
->
-> What we consider "most capable CPU" in this context are related to
-> ratified, non-vendor extensions. This means that we want the 'max' CPU
-> to enable all (possible) ratified extensions by default. The reasoning
-> behind this design is (1) vendor extensions can conflict with each other
-> and we won't play favorities deciding which one is default or not and
-> (2) non-ratified extensions are always prone to changes, not being
-> stable enough to be enabled by default.
->
-> All this said, we're still not able to enable all ratified extensions
-> due to conflicts between them. Zfinx and all its dependencies aren't
-> enabled because of a conflict with RVF. zce, zcmp and zcmt are also
-> disabled due to RVD conflicts. When running with 64 bits we're also
-> disabling zcf.
->
-> MISA bits RVG, RVJ and RVV are also being set manually since they're
-> default disabled.
->
-> This is the resulting 'riscv,isa' DT for this new CPU:
->
-> rv64imafdcvh_zicbom_zicboz_zicsr_zifencei_zihintpause_zawrs_zfa_
-> zfh_zfhmin_zca_zcb_zcd_zba_zbb_zbc_zbkb_zbkc_zbkx_zbs_zk_zkn_zknd_
-> zkne_zknh_zkr_zks_zksed_zksh_zkt_zve32f_zve64f_zve64d_
-> smstateen_sscofpmf_sstc_svadu_svinval_svnapot_svpbmt
->
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
+There are three possible scenarios:
 
-Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+1. Upgrade to OpenSBI v1.3: Any user of microchip-icicle-kit machine
+or sifive fu540 machine users
+may hit this issue if the device tree has the disabled hart (e core).
+2. No upgrade to OpenSBI v1.2. Any user using hibernation or UEFI may
+have issues [1]
+3. Include a non-release version OpenSBI in Qemu with the fix as an excepti=
+on.
 
-Weiwei Li
->   target/riscv/cpu-qom.h |  1 +
->   target/riscv/cpu.c     | 53 ++++++++++++++++++++++++++++++++++++++++++
->   2 files changed, 54 insertions(+)
+#3 probably deviates from policy and sets a bad precedent. So I am not
+advocating for it though ;)
+For both #1 & #2, the solution would be to use the latest OpenSBI in
+-bios argument instead of the stock one.
+I could be wrong but my guess is the number of users facing #2 would
+be higher than #1.
+
+[1] https://lore.kernel.org/linux-riscv/20230625140931.1266216-1-songshuais=
+huai@tinylab.org/
+> > > 2) Ensure CPU0 DT node is enabled in DT when booting on QEMU
+> > >     microchip-icicle-kit machine with OpenSBI 1.3
+> >
+> > Will OpenSBI disable it? If not, I think option 2) needs to be remove
+> > the DT node. I'll just use tip-of-tree myself & up to the
 >
-> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
-> index 04af50983e..f3fbe37a2c 100644
-> --- a/target/riscv/cpu-qom.h
-> +++ b/target/riscv/cpu-qom.h
-> @@ -30,6 +30,7 @@
->   #define CPU_RESOLVING_TYPE TYPE_RISCV_CPU
->   
->   #define TYPE_RISCV_CPU_ANY              RISCV_CPU_TYPE_NAME("any")
-> +#define TYPE_RISCV_CPU_MAX              RISCV_CPU_TYPE_NAME("max")
->   #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
->   #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
->   #define TYPE_RISCV_CPU_BASE128          RISCV_CPU_TYPE_NAME("x-rv128")
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index f7083b2d5c..1cdffd5927 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -248,6 +248,7 @@ static const char * const riscv_intr_names[] = {
->   };
->   
->   static void riscv_cpu_add_user_properties(Object *obj);
-> +static void riscv_init_max_cpu_extensions(Object *obj);
->   
->   const char *riscv_cpu_get_trap_name(target_ulong cause, bool async)
->   {
-> @@ -374,6 +375,25 @@ static void riscv_any_cpu_init(Object *obj)
->       cpu->cfg.pmp = true;
->   }
->   
-> +static void riscv_max_cpu_init(Object *obj)
-> +{
-> +    RISCVCPU *cpu = RISCV_CPU(obj);
-> +    CPURISCVState *env = &cpu->env;
-> +    RISCVMXL mlx = MXL_RV64;
-> +
-> +#ifdef TARGET_RISCV32
-> +    mlx = MXL_RV32;
-> +#endif
-> +    set_misa(env, mlx, 0);
-> +    riscv_cpu_add_user_properties(obj);
-> +    riscv_init_max_cpu_extensions(obj);
-> +    env->priv_ver = PRIV_VERSION_LATEST;
-> +#ifndef CONFIG_USER_ONLY
-> +    set_satp_mode_max_supported(RISCV_CPU(obj), mlx == MXL_RV32 ?
-> +                                VM_1_10_SV32 : VM_1_10_SV57);
-> +#endif
-> +}
-> +
->   #if defined(TARGET_RISCV64)
->   static void rv64_base_cpu_init(Object *obj)
->   {
-> @@ -1930,6 +1950,38 @@ static void riscv_cpu_add_user_properties(Object *obj)
->       ADD_CPU_PROPERTIES_ARRAY(dev, riscv_cpu_experimental_exts);
->   }
->   
-> +/*
-> + * The 'max' type CPU will have all possible ratified
-> + * non-vendor extensions enabled.
-> + */
-> +static void riscv_init_max_cpu_extensions(Object *obj)
-> +{
-> +    RISCVCPU *cpu = RISCV_CPU(obj);
-> +    CPURISCVState *env = &cpu->env;
-> +    Property *prop;
-> +
-> +    /* Enable RVG, RVJ and RVV that are disabled by default */
-> +    set_misa(env, env->misa_mxl, env->misa_ext | RVG | RVJ | RVV);
-> +
-> +    for (prop = riscv_cpu_extensions; prop && prop->name; prop++) {
-> +        object_property_set_bool(obj, prop->name, true, NULL);
-> +    }
-> +
-> +    /* Zfinx is not compatible with F. Disable it */
-> +    object_property_set_bool(obj, "zfinx", false, NULL);
-> +    object_property_set_bool(obj, "zdinx", false, NULL);
-> +    object_property_set_bool(obj, "zhinx", false, NULL);
-> +    object_property_set_bool(obj, "zhinxmin", false, NULL);
-> +
-> +    object_property_set_bool(obj, "zce", false, NULL);
-> +    object_property_set_bool(obj, "zcmp", false, NULL);
-> +    object_property_set_bool(obj, "zcmt", false, NULL);
-> +
-> +    if (env->misa_mxl != MXL_RV32) {
-> +        object_property_set_bool(obj, "zcf", false, NULL);
-> +    }
-> +}
-> +
->   static Property riscv_cpu_properties[] = {
->       DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
->   
-> @@ -2268,6 +2320,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
->           .abstract = true,
->       },
->       DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_ANY,      riscv_any_cpu_init),
-> +    DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_MAX,      riscv_max_cpu_init),
->   #if defined(CONFIG_KVM)
->       DEFINE_CPU(TYPE_RISCV_CPU_HOST,             riscv_host_cpu_init),
->   #endif
+> Clearly didn't finish this comment. It was meant to say "up to the QEMU
+> maintainers what they want to do on the QEMU side of things".
+>
+> Thanks,
+> Conor.
 
+
+
+--=20
+Regards,
+Atish
 
