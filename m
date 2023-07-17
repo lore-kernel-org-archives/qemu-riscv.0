@@ -4,61 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 270ADEB64DC
-	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Jul 2023 17:29:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3558EB64DC
+	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Jul 2023 21:54:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qLS1h-0003ZI-IQ; Mon, 17 Jul 2023 13:28:49 -0400
+	id 1qLWAp-0004po-Pg; Mon, 17 Jul 2023 17:54:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <conor@kernel.org>)
- id 1qLS1g-0003Ym-Br; Mon, 17 Jul 2023 13:28:48 -0400
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <conor@kernel.org>)
- id 1qLS1e-0007Di-MT; Mon, 17 Jul 2023 13:28:48 -0400
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 6566461018;
- Mon, 17 Jul 2023 17:28:37 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 28022C433C7;
- Mon, 17 Jul 2023 17:28:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1689614916;
- bh=px33rVYDqeJN3iXdtLbuAArlFaxSnmaBt7gih68dTmI=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=SvSQZCoqrLBo9k8uBMU95ZcnZ0Aj1YPNy+O3t2e8NARzz6GZbK0qdVsnDo/7Ne28f
- DCN2dJr0e53nhNbzS1IIFva8ei+B86gflCJ7QXhC/fmhEB8caJzg6rrhJYsNiOEWmX
- wFvxfK1dIRpktC86L2zjYghqHb5kDMRsqOqQZ2DiFOv6lBcuBCZVs1tTSTiBmloebI
- oa4z4KASYOpbZAcZzgiSjk4NwHuEDtpp7IAQcqSlgUjcvF/VI9/c5g41wm2cQwtJqY
- WQBs+IhK7WHLBSQv0uZma0dwuY6Sx2skUYzSSUGPObawxJHcsM16W5Jy6MC/gpjcgR
- ZGWyNbln90v2w==
-Date: Mon, 17 Jul 2023 18:28:32 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- bmeng@tinylab.org, liweiwei@iscas.ac.cn,
- zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
-Subject: Re: [PATCH] target/riscv/cpu.c: check priv_ver before auto-enable
- zca/zcd/zcf
-Message-ID: <20230717-reattach-ungloved-ab5e4a067a4b@spud>
-References: <20230717154141.60898-1-dbarboza@ventanamicro.com>
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qLWAl-0004pN-MU
+ for qemu-riscv@nongnu.org; Mon, 17 Jul 2023 17:54:27 -0400
+Received: from mail-oa1-x33.google.com ([2001:4860:4864:20::33])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qLWAk-00040q-41
+ for qemu-riscv@nongnu.org; Mon, 17 Jul 2023 17:54:27 -0400
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-1b0719dd966so3943460fac.1
+ for <qemu-riscv@nongnu.org>; Mon, 17 Jul 2023 14:54:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1689630864; x=1692222864;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=UjgKOjBVg5RoJdkiE54ny4j9gWpEU6MbpdXOZnvlujs=;
+ b=Qx8HzN+yuMt/MDC4Z1VUpNJqzMkdg4bRROpf8sQDol3oO0b63n+F2UmlhPUDq8PNf2
+ J7+BOJmk3xwmGVRiykSlXmqLCzWpewaqS55P1+1Dutt8QBrGN/1b3Zwk+dapxbDZgQMZ
+ Gro+yJdw2OwRaKgvXSSg3lFtD9hvrBO7FHGnz5IXMpN+0o5GpUOsUUo3Qr4FMtY0yH7x
+ q3N3MCINjEps16MN0yZXal28R8Qha0V9IoMru6Jql7ZTRPvD9QNad9ya58al8VtfmxAx
+ Kj8ec5SgawMRe52iplM6YFbfL8EAFNvQtj+gM18aZTL4Sr4lMmQWMXkWq6Lzt2sxJJfE
+ YLew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1689630864; x=1692222864;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=UjgKOjBVg5RoJdkiE54ny4j9gWpEU6MbpdXOZnvlujs=;
+ b=cjn8PRkuzNCC+O6sQDjRSt0FX5Bm10EcPXJ1We7sIfB/RAT6QuIqnBg/nORUzNng+5
+ Hn6RUIYfkFYexHFKsJ1cK6bsU76J7FMizNAIZJUqvynnbOJ5JOUysltqeavK9V6q+/hr
+ vhFsXLniSiTFYbaEg6n5bxXjqd0xil9DTfJSb/b9WnacunBujPn/yzon9N9YYsnHC3kB
+ yA8kAduItK+MWX25xSSS1SYpPtBO2R/XKVDOkjnpmD5KkBNJIN5xzx5l7raitxHpqCkg
+ JsetxLZTS1Te/Fjbg2QwcmuHDMU1hbUCQLbB57p79tN1LQCuP2S0VUDql7BuwBB8FSqm
+ F7tQ==
+X-Gm-Message-State: ABy/qLbSvw3Qnat6pg2pRw8MEzAtUCuH/wES9bWwkNOtaCXKv+x2MUaD
+ zKe3VpB9dAJe/r40mgm8wMm/MA==
+X-Google-Smtp-Source: APBJJlGntC/laa9xWPG50VXs6y/blov4QMFGuJtV7IUhwXsd8bzdpwh1a61s+X9pY0Ig1xZhWhLANg==
+X-Received: by 2002:a05:6871:1cd:b0:1b7:4b56:fe68 with SMTP id
+ q13-20020a05687101cd00b001b74b56fe68mr13600664oad.3.1689630864322; 
+ Mon, 17 Jul 2023 14:54:24 -0700 (PDT)
+Received: from grind.. (201-69-66-211.dial-up.telesp.net.br. [201.69.66.211])
+ by smtp.gmail.com with ESMTPSA id
+ a1-20020a056830008100b006b9848f8aa7sm322958oto.45.2023.07.17.14.54.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 Jul 2023 14:54:23 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH for-8.2 0/2] target/riscv: add zicntr and zihpm flags
+Date: Mon, 17 Jul 2023 18:54:17 -0300
+Message-ID: <20230717215419.124258-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="PRJxtakJMSS2BssI"
-Content-Disposition: inline
-In-Reply-To: <20230717154141.60898-1-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=139.178.84.217; envelope-from=conor@kernel.org;
- helo=dfw.source.kernel.org
-X-Spam_score_int: -70
-X-Spam_score: -7.1
-X-Spam_bar: -------
-X-Spam_report: (-7.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_HI=-5, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2001:4860:4864:20::33;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x33.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -75,63 +92,30 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Hi,
 
---PRJxtakJMSS2BssI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I decided to include flags for both timer/counter extensions to make it
+easier for us later on when dealing with the RVA22 profile (which
+includes both). 
 
-On Mon, Jul 17, 2023 at 12:41:41PM -0300, Daniel Henrique Barboza wrote:
-> Commit bd30559568 made changes in how we're checking and disabling
-> extensions based on env->priv_ver. One of the changes was to move the
-> extension disablement code to the end of realize(), being able to
-> disable extensions after we've auto-enabled some of them.
->=20
-> An unfortunate side effect of this change started to happen with CPUs
-> that has an older priv version, like sifive-u54. Starting on commit
-> 2288a5ce43e5 we're auto-enabling zca, zcd and zcf if RVC is enabled,
-> but these extensions are priv version 1.12.0. When running a cpu that
-> has an older priv ver (like sifive-u54) the user is spammed with
-> warnings like these:
->=20
-> qemu-system-riscv64: warning: disabling zca extension for hart 0x00000000=
-00000000 because privilege spec version does not match
-> qemu-system-riscv64: warning: disabling zcd extension for hart 0x00000000=
-00000000 because privilege spec version does not match
->=20
-> The warnings are part of the code that disables the extension, but in this
-> case we're throwing user warnings for stuff that we enabled on our own,
-> without user intervention. Users are left wondering what they did wrong.
->=20
-> A quick 8.1 fix for this nuisance is to check the CPU priv spec before
-> auto-enabling zca/zcd/zcf. A more appropriate fix will include a more
-> robust framework that will account for both priv_ver and user choice
-> when auto-enabling/disabling extensions, but for 8.1 we'll make it do
-> with this simple check.
->=20
-> It's also worth noticing that this is the only case where we're
-> auto-enabling extensions based on a criteria (in this case RVC) that
-> doesn't match the priv spec of the extensions we're enabling. There's no
-> need for more 8.1 band-aids.
->=20
-> Cc: Conor Dooley <conor@kernel.org>
+The features were already implemented by Atish Patra some time ago, but
+back then these 2 extensions weren't introduced yet. This means that,
+aside from extra stuff in riscv,isa FDT no other functional changes were
+made.
 
-Does the job, thanks for doing this.
-Tested-by: Conor Dooley <conor.dooley@microchip.com>
+Both are defaulted to 'true' since QEMU already implements both
+features, but the flag can be disabled if Zicsr isn't present or, in
+the case of zihpm, if pmu_num = 0.
 
-Cheers,
-Conor.
+Daniel Henrique Barboza (2):
+  target/riscv/cpu.c: add zicntr extension flag
+  target/riscv/cpu.c: add zihpm extension flag
 
---PRJxtakJMSS2BssI
-Content-Type: application/pgp-signature; name="signature.asc"
+ target/riscv/cpu.c     | 29 +++++++++++++++++++++++------
+ target/riscv/cpu_cfg.h |  2 ++
+ 2 files changed, 25 insertions(+), 6 deletions(-)
 
------BEGIN PGP SIGNATURE-----
+-- 
+2.41.0
 
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZLV6QAAKCRB4tDGHoIJi
-0sCNAQD/7SgmbqznAXbn1qD9MGrpSU4x5077mgfESjtK0wDtUgD/ermRI0e+j7vT
-kgMQEP2AqkivRY0nGYqcvYY+dYXcWwg=
-=qfuq
------END PGP SIGNATURE-----
-
---PRJxtakJMSS2BssI--
 
