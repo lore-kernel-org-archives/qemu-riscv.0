@@ -4,83 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 461E2EB64DC
-	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Jul 2023 15:13:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D82CEB64DC
+	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Jul 2023 15:42:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qLPun-0003ab-Hh; Mon, 17 Jul 2023 11:13:34 -0400
+	id 1qLQMG-0002uA-SF; Mon, 17 Jul 2023 11:41:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
- id 1qLPue-0003XW-E5
- for qemu-riscv@nongnu.org; Mon, 17 Jul 2023 11:13:26 -0400
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qLQME-0002pZ-O2
+ for qemu-riscv@nongnu.org; Mon, 17 Jul 2023 11:41:54 -0400
+Received: from mail-oi1-x234.google.com ([2607:f8b0:4864:20::234])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
- id 1qLPuN-0007Xs-QF
- for qemu-riscv@nongnu.org; Mon, 17 Jul 2023 11:13:22 -0400
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-3fbc5d5742eso48601555e9.3
- for <qemu-riscv@nongnu.org>; Mon, 17 Jul 2023 08:13:06 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qLQMD-0008EV-3t
+ for qemu-riscv@nongnu.org; Mon, 17 Jul 2023 11:41:54 -0400
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-3a337ddff16so3399135b6e.0
+ for <qemu-riscv@nongnu.org>; Mon, 17 Jul 2023 08:41:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1689606785; x=1692198785; 
- h=mime-version:user-agent:content-transfer-encoding:references
- :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
- :date:message-id:reply-to;
- bh=h3o+V93CFEyVod0W339jSGHcaYLMMNPwhfES1kUGhic=;
- b=WyjZU6Ip6K9dXu8vb057CckEppqaAx7iI8S/XNlcY2VheHp/+OlWsPE8kusswNZU/M
- X3X4brwrH29qZYHmXtkZzkDLaBu6Z520FKGa7E1dXL55k9UpLj/kL7EoOkYkWbdFJBwL
- O5KMi9+ZdEtKEDI7dAt95tmh0muLrcbge146pHGTMh9FA3Mm/vZr/ZR1rAxTf6zYjvLn
- molTrx8GiF+SmyXWB3IOHmIms/HZRGwc8oBxajezNrLoToP47hRU3LJbz4KucfdL6Zng
- hJyC6zI9FEPrbmB0jbJSIGvhjElQsSuOrqTyKuu5KuNl+UvPNiL7Qje2MBnTkaSY7aLn
- IofA==
+ d=ventanamicro.com; s=google; t=1689608511; x=1692200511;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Am7ITXKQFOljx/D2CumawP5jQcrbC9JOhJwqTweZbs0=;
+ b=mbxYukwALILqAXBz2kaHG52McAF9qFc4Tze2F805D9lwYtZU2XDtcDwG4rYk2mVVB+
+ 7IBPjfMbKyTyy2DJX0Y+58EiuTz5ciAJRzELHL/6wHkRD2JqYQl4wYRkduozBoueLIHk
+ H1IyrDtZaALaFFkhc1lZO+9XslaGTrMN5b+tojaTfw70L956tlu32R6iS+F9vL+b0vrn
+ /SgPC1exmZulFoXcFgC7XwvlXzJZVqBjxobuPRyqlPPHgVtr1xISol/64LeNXAKv789Q
+ aZmiQmG+cFnvPKq3FmxaHrVLI+lmArM7QRe2wfQmJjQZ6AnMUudmrvfiAoGJNudyjTUM
+ /X1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689606785; x=1692198785;
- h=mime-version:user-agent:content-transfer-encoding:references
- :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=h3o+V93CFEyVod0W339jSGHcaYLMMNPwhfES1kUGhic=;
- b=GMlEQZIY8ioeX3Kd6DB7wujvwMk58SWzWAckw1KwDVmZZ+FEZTYyaVDY71zIdyQZaX
- fyxwjidfxtyN+D1OTurxqSlLWBUfCAuhLMkIGrcyNGJmLVWBwMp8psxr+buCIAcwJl7Z
- XjRfCi92STRYNrmjUheH/hiTdy4fbfYhIT1mpUj3dgScu+AT3qIboKeJLlO5ZAyCUAbB
- WvUQa5dCLTjN6MVin0IABnu+kl68kyClUr9fvvLDBEbDuCNeS01ykii1FzTQUc0Itwdw
- b2ifAFcBKbL/M6S7FrDhdTjLm9MvC+ya30pUSthv4pWmxgKGfznfIKpVcLk5hjWj+Hii
- Dk4w==
-X-Gm-Message-State: ABy/qLZCj1llkTeSVsxjJhnwF7twrSwGkP/ByS0hEXlEDgfxFYkMUVzH
- d2z/gpUFV+rnZG10seBMp+THjQ==
-X-Google-Smtp-Source: APBJJlF7PjVOtLpUI8BZsSHVAOUYbtwBkbrxrTjudEQneQI4qmilc8G5CC01Pwu4NbhCFmUEJZ6CTA==
-X-Received: by 2002:a05:600c:213:b0:3f7:cb42:fa28 with SMTP id
- 19-20020a05600c021300b003f7cb42fa28mr10770140wmi.28.1689606785324; 
- Mon, 17 Jul 2023 08:13:05 -0700 (PDT)
-Received: from [192.168.1.9] (214.11.169.217.in-addr.arpa. [217.169.11.214])
+ d=1e100.net; s=20221208; t=1689608511; x=1692200511;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Am7ITXKQFOljx/D2CumawP5jQcrbC9JOhJwqTweZbs0=;
+ b=l7DgFVMzg/mZO8hjoq3H586Ogfjes4dYL1gAAjgtIQdWUbf0VddUTL1Ob8eoca9ZwZ
+ wK92QH+8DTylCegx/sT3hVj4QXBB6KNC+2MlBkgRIZqvdST1H63OyISBo9K/HCbfGPBc
+ 4tKtkC4uG9phbQkhaVQja8E19yHxvvUCttNQ8cn9M7WkaYXGkw8ZAHHUfKuBNsrEqldc
+ ViQj5kIk65LU8gHCeonYd7fNzDVkVGyb2F30eC8vCpYQKxR0NNnj/lKDtaKQkZTcqxoi
+ al9fDMeNxdXL2ZPhtNQjON9ZDAmc1jyePxGBxbq/bXNjqxK2EfMeGFXcQTkHNWVksUgD
+ srhA==
+X-Gm-Message-State: ABy/qLYyTqNC+S46zXdy+JIk1MfC/zU0uZ/2+8o7BUl+ZOhKnPVmPnue
+ uaWKHWocSH2bs5u02ZqU+j++vA==
+X-Google-Smtp-Source: APBJJlGvyak+uCnoVgXDa/t1NGEoGgs24p6AQknuTQvoFbz3wwYf34FzUzrkHx0LTq4f99wqu8yMtA==
+X-Received: by 2002:a05:6808:1914:b0:3a3:e0ad:e332 with SMTP id
+ bf20-20020a056808191400b003a3e0ade332mr15604435oib.38.1689608510724; 
+ Mon, 17 Jul 2023 08:41:50 -0700 (PDT)
+Received: from grind.. (201-69-66-211.dial-up.telesp.net.br. [201.69.66.211])
  by smtp.gmail.com with ESMTPSA id
- i10-20020a5d558a000000b0030fb828511csm19389140wrv.100.2023.07.17.08.13.04
+ eh1-20020a056808274100b003a1d29f0549sm6934093oib.15.2023.07.17.08.41.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Jul 2023 08:13:04 -0700 (PDT)
-Message-ID: <7a102598badfaa01b0e0c04e4f59e81eac5a2b81.camel@rivosinc.com>
-Subject: Re: [PATCH] target/riscv: Fix LMUL check to use minimum SEW
-From: Rob Bradford <rbradford@rivosinc.com>
-To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, Alistair
- Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>
-Date: Mon, 17 Jul 2023 16:13:04 +0100
-In-Reply-To: <dfc75d1f-f28d-7d2c-26f9-72086ffb54ca@iscas.ac.cn>
-References: <20230706104433.16264-1-rbradford@rivosinc.com>
- <dfc75d1f-f28d-7d2c-26f9-72086ffb54ca@iscas.ac.cn>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.48.3 (3.48.3-1.module_f38+16987+774193ea) 
+ Mon, 17 Jul 2023 08:41:50 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Conor Dooley <conor@kernel.org>
+Subject: [PATCH] target/riscv/cpu.c: check priv_ver before auto-enable
+ zca/zcd/zcf
+Date: Mon, 17 Jul 2023 12:41:41 -0300
+Message-ID: <20230717154141.60898-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
- envelope-from=rbradford@rivosinc.com; helo=mail-wm1-x32e.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::234;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x234.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -97,129 +94,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, 2023-07-06 at 21:22 +0800, Weiwei Li wrote:
->=20
-> On 2023/7/6 18:44, Rob Bradford wrote:
-> > The previous check was failing with:
-> >=20
-> > ELEN =3D 64 SEW =3D 16 and LMUL =3D 1/8 (encoded as 5) which is a valid
-> > combination.
-> >=20
-> > Fix the check to correctly match the specification by using minimum
-> > SEW
-> > rather than the active SEW.
-> >=20
-> > =C2=A0From the specification:
-> >=20
-> > "In general, the requirement is to support LMUL =E2=89=A5 SEWMIN/ELEN,
-> > where
-> > SEWMIN is the narrowest supported SEW value and ELEN is the widest
-> > supported SEW value. In the standard extensions, SEWMIN=3D8. For
-> > standard
-> > vector extensions with ELEN=3D32, fractional LMULs of 1/2 and 1/4
-> > must be
-> > supported. For standard vector extensions with ELEN=3D64, fractional
-> > LMULs
-> > of 1/2, 1/4, and 1/8 must be supported."
-> >=20
-> > =C2=A0From inspection this new check allows:
-> >=20
-> > ELEN=3D64 1/2, 1/4, 1/8 (encoded as 7, 6, 5 respectfully)
-> > ELEN=3D32 1/2, 1/4 (encoded as 7 and 6 respectfully)
->=20
+Commit bd30559568 made changes in how we're checking and disabling
+extensions based on env->priv_ver. One of the changes was to move the
+extension disablement code to the end of realize(), being able to
+disable extensions after we've auto-enabled some of them.
 
-Hi Weiwei Li,
+An unfortunate side effect of this change started to happen with CPUs
+that has an older priv version, like sifive-u54. Starting on commit
+2288a5ce43e5 we're auto-enabling zca, zcd and zcf if RVC is enabled,
+but these extensions are priv version 1.12.0. When running a cpu that
+has an older priv ver (like sifive-u54) the user is spammed with
+warnings like these:
 
-Thanks for your reply. Sorry for delay in replying i've been away.
+qemu-system-riscv64: warning: disabling zca extension for hart 0x0000000000000000 because privilege spec version does not match
+qemu-system-riscv64: warning: disabling zcd extension for hart 0x0000000000000000 because privilege spec version does not match
 
-> This is a little confusing.=C2=A0 there is=C2=A0 note in spec to explain =
-why=C2=A0
-> LMUL=20
-> =E2=89=A5 SEW MIN /ELEN:
->=20
-> "When LMUL < SEW MIN /ELEN, there is no guarantee an implementation=20
-> would have enough bits in the fractional vector register to store
->=20
-> Note at least one element, as VLEN=3DELEN is a valid implementation=20
-> choice. For example, with VLEN=3DELEN=3D32, and SEW MIN =3D8, an LMUL of
->=20
-> 1/8 would only provide four bits of storage in a vector register."
->=20
-> In this way, when VLEN=3DELEN=3D64,=C2=A0 an LMUL of 1/8 would only provi=
-de 8=20
-> bits of storage in a vector register, so it's also not suitable for
-> sew=20
-> =3D 16.
->=20
-> Maybe we can explain the above description of the spec in another
-> way:=20
-> we must support lmul=3D1/8 when ELEN=3D64, but it's only available when
-> sew =3D 8.
->=20
+The warnings are part of the code that disables the extension, but in this
+case we're throwing user warnings for stuff that we enabled on our own,
+without user intervention. Users are left wondering what they did wrong.
 
-I'm afraid i'm not sure I agree with this comment.
+A quick 8.1 fix for this nuisance is to check the CPU priv spec before
+auto-enabling zca/zcd/zcf. A more appropriate fix will include a more
+robust framework that will account for both priv_ver and user choice
+when auto-enabling/disabling extensions, but for 8.1 we'll make it do
+with this simple check.
 
-VLEN=3D128 ELEN=3D64 SEW=3D16 LMUL=3D1/8 is a perfectly reasonable
-configuration and contradicts your statement.
+It's also worth noticing that this is the only case where we're
+auto-enabling extensions based on a criteria (in this case RVC) that
+doesn't match the priv spec of the extensions we're enabling. There's no
+need for more 8.1 band-aids.
 
-The goal of my patch was to ensure that we permit a valid configuration
-not to also reject other invalid configurations.
+Cc: Conor Dooley <conor@kernel.org>
+Fixes: 2288a5ce43e5 ("target/riscv: add cfg properties for Zc* extension")
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ target/riscv/cpu.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-An extra check that takes into consideration VLEN would also make sense
-to me:
-
-e.g. VLEN=3D64 LMUL=3D1/8 SEW=3D16 should be rejected
-
-Cheers,
-
-Rob
-
-> Regards,
->=20
-> Weiwei Li
->=20
-> `
->=20
-> Regards,
->=20
-> Weiwei Li
->=20
-> >=20
-> > Fixes: d9b7609a1fb2 ("target/riscv: rvv-1.0: configure
-> > instructions")
-> >=20
-> > Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
-> > ---
-> > =C2=A0 target/riscv/vector_helper.c | 4 ++--
-> > =C2=A0 1 file changed, 2 insertions(+), 2 deletions(-)
-> >=20
-> > diff --git a/target/riscv/vector_helper.c
-> > b/target/riscv/vector_helper.c
-> > index 1e06e7447c..8dfd8fe484 100644
-> > --- a/target/riscv/vector_helper.c
-> > +++ b/target/riscv/vector_helper.c
-> > @@ -43,9 +43,9 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env,
-> > target_ulong s1,
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 xlen - 1 -
-> > R_VTYPE_RESERVED_SHIFT);
-> > =C2=A0=20
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (lmul & 4) {
-> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /* Fractional LMUL. */
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /* Fractional LMUL - check =
-LMUL >=3D ELEN/SEW_MIN (8) */
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (lmul =3D=3D =
-4 ||
-> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 cpu=
-->cfg.elen >> (8 - lmul) < sew) {
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 cpu=
-->cfg.elen >> (8 - lmul) < 8) {
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 vill =3D true;
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
->=20
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 9339c0241d..6b93b04453 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1225,7 +1225,8 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         }
+     }
+ 
+-    if (riscv_has_ext(env, RVC)) {
++    /* zca, zcd and zcf has a PRIV 1.12.0 restriction */
++    if (riscv_has_ext(env, RVC) && env->priv_ver >= PRIV_VERSION_1_12_0) {
+         cpu->cfg.ext_zca = true;
+         if (riscv_has_ext(env, RVF) && env->misa_mxl_max == MXL_RV32) {
+             cpu->cfg.ext_zcf = true;
+-- 
+2.41.0
 
 
