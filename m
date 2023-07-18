@@ -4,85 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07B8FEB64DC
-	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Jul 2023 23:11:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01C36EB64DC
+	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Jul 2023 00:32:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qLXNE-0000Nn-6e; Mon, 17 Jul 2023 19:11:24 -0400
+	id 1qLYdg-0000c5-3z; Mon, 17 Jul 2023 20:32:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qLXNC-0000NK-22
- for qemu-riscv@nongnu.org; Mon, 17 Jul 2023 19:11:22 -0400
-Received: from mail-ot1-x335.google.com ([2607:f8b0:4864:20::335])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qLXN6-0007m3-2d
- for qemu-riscv@nongnu.org; Mon, 17 Jul 2023 19:11:21 -0400
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-6b9d68a7abaso1058587a34.3
- for <qemu-riscv@nongnu.org>; Mon, 17 Jul 2023 16:11:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1689635473; x=1692227473;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=xB3jzmsfUxwitg5niwscS/7l3TLsPIhKwR6+kzYcaz0=;
- b=c86PVyRSke7jX6s9hQnyOda0OGeN1zm1/Gz5FkYQ4y6UyTKwT10rgiDOQek11yA1TU
- o8y/zirXUtlv1fa0V9e0f2chNQczjx82s2CE4KOxqMFcztnBLNQRTjgIUjH2ptK/46AU
- cP0rzdSeof4pFqaI9Pu9eVXp1cJqtaQE5lLQBW/UQ9rQ3R22RkB+WVcb3bgg3dFpOD1L
- NulkYxK27RZKzGL9FTCvUhurszkn280PLfgYl2pQFiu647v0alHP+sOaJ5+Enh495aqZ
- ifW2dkGOxE2V2MHZqnfRiv3rRi/Edsn0Ixf4nmtA1jiF4pkKDt2tDIBGJE6J6dxPHROZ
- kp7g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689635473; x=1692227473;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xB3jzmsfUxwitg5niwscS/7l3TLsPIhKwR6+kzYcaz0=;
- b=CsQHYNRUSJ0OT3ZoZwZhZQVNKGD4+9qpEz+sSk81LB8HpuUzF/JvtVmn2OvUwPVq38
- BtUxmLTl5C0ktW8fs/85bbSrbVskw3OOoJIIYaqmDKqObcctHtFuIeX6adsWMCj0c+YD
- mjKvdpcRDZBmDqtT6SEctKiRr6kZyEqgYo1J5BBKDuK/w7ptbJZS7erw20h8kUZPcDOf
- ikxIp2MTHVDQFuwal4XJY9OlOrc5KLN7L442HMFqxQdxj6FHw8i0Yf2Bpq9x9WY9r/8l
- +r76elqJGmVzmnRt/S61VXURfBO7zSufD0T9QFzkmlnUbnhsXXdm2AKh3Fq8EzftVqZq
- 0BsQ==
-X-Gm-Message-State: ABy/qLan80nY90tBiha2Z0vMjDuuPW6iroE0UYfdvjmlV+lMsp64CHR3
- ebccwLwRDxgzjuzaWkWy0ckqtg==
-X-Google-Smtp-Source: APBJJlFuGWUzPMVBInc1O7ZCXvQTVQhgrEms9gvWN1oJLxLyQA5exaIRF60XxsRdP2wYBz+JIZ3Iyw==
-X-Received: by 2002:a9d:66c1:0:b0:6b7:57aa:45cc with SMTP id
- t1-20020a9d66c1000000b006b757aa45ccmr10711004otm.15.1689635473448; 
- Mon, 17 Jul 2023 16:11:13 -0700 (PDT)
-Received: from [192.168.68.108] (201-69-66-211.dial-up.telesp.net.br.
- [201.69.66.211]) by smtp.gmail.com with ESMTPSA id
- b25-20020a056830105900b006b94fb2762asm378720otp.23.2023.07.17.16.11.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Jul 2023 16:11:13 -0700 (PDT)
-Message-ID: <2f123883-3064-28af-649f-2bbc8c52a60a@ventanamicro.com>
-Date: Mon, 17 Jul 2023 20:11:09 -0300
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1qLYdb-0000bh-Ul; Mon, 17 Jul 2023 20:32:24 -0400
+Received: from smtp81.cstnet.cn ([159.226.251.81] helo=cstnet.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1qLYdZ-00055C-2F; Mon, 17 Jul 2023 20:32:23 -0400
+Received: from [192.168.0.120] (unknown [180.175.26.191])
+ by APP-03 (Coremail) with SMTP id rQCowAAHKGWD3bVk3HEbDA--.61478S2;
+ Tue, 18 Jul 2023 08:32:04 +0800 (CST)
+Message-ID: <d5a1b09e-0519-b193-4158-e9ddee18d03f@iscas.ac.cn>
+Date: Tue, 18 Jul 2023 08:32:03 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.13.0
-Subject: Re: [PATCH for-8.2 0/2] target/riscv: add zicntr and zihpm flags
+Cc: liweiwei@iscas.ac.cn, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ bmeng@tinylab.org, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ Conor Dooley <conor@kernel.org>
+Subject: Re: [PATCH] target/riscv/cpu.c: check priv_ver before auto-enable
+ zca/zcd/zcf
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+References: <20230717154141.60898-1-dbarboza@ventanamicro.com>
 Content-Language: en-US
-To: Conor Dooley <conor@kernel.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
- palmer@rivosinc.com
-References: <20230717215419.124258-1-dbarboza@ventanamicro.com>
- <20230717-snugly-pencil-98d62b254a74@spud>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230717-snugly-pencil-98d62b254a74@spud>
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+In-Reply-To: <20230717154141.60898-1-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::335;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x335.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+X-CM-TRANSID: rQCowAAHKGWD3bVk3HEbDA--.61478S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxAF47JryUZF4rAr4DCFy5CFg_yoW5Gw43pF
+ Wjk3yakr4kJF97Ga4xJ3W7Xr17Cws09ayxJanYgw18u3y3Ar4Ygr97Kw48ua48JFs3Cr4a
+ 93WqyryYvr47A3DanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUkm14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4j6r
+ 4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
+ I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
+ 4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCYjI0SjxkI62AI1cAE67vI
+ Y487MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI
+ 0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y
+ 0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxV
+ WUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1l
+ IxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjfUoOJ5UUUUU
+X-Originating-IP: [180.175.26.191]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.81; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -19
+X-Spam_score: -2.0
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.097,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.097,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -100,54 +80,62 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
+On 2023/7/17 23:41, Daniel Henrique Barboza wrote:
+> Commit bd30559568 made changes in how we're checking and disabling
+> extensions based on env->priv_ver. One of the changes was to move the
+> extension disablement code to the end of realize(), being able to
+> disable extensions after we've auto-enabled some of them.
+>
+> An unfortunate side effect of this change started to happen with CPUs
+> that has an older priv version, like sifive-u54. Starting on commit
+> 2288a5ce43e5 we're auto-enabling zca, zcd and zcf if RVC is enabled,
+> but these extensions are priv version 1.12.0. When running a cpu that
+> has an older priv ver (like sifive-u54) the user is spammed with
+> warnings like these:
+>
+> qemu-system-riscv64: warning: disabling zca extension for hart 0x0000000000000000 because privilege spec version does not match
+> qemu-system-riscv64: warning: disabling zcd extension for hart 0x0000000000000000 because privilege spec version does not match
+>
+> The warnings are part of the code that disables the extension, but in this
+> case we're throwing user warnings for stuff that we enabled on our own,
+> without user intervention. Users are left wondering what they did wrong.
+>
+> A quick 8.1 fix for this nuisance is to check the CPU priv spec before
+> auto-enabling zca/zcd/zcf. A more appropriate fix will include a more
+> robust framework that will account for both priv_ver and user choice
+> when auto-enabling/disabling extensions, but for 8.1 we'll make it do
+> with this simple check.
+>
+> It's also worth noticing that this is the only case where we're
+> auto-enabling extensions based on a criteria (in this case RVC) that
+> doesn't match the priv spec of the extensions we're enabling. There's no
+> need for more 8.1 band-aids.
+>
+> Cc: Conor Dooley <conor@kernel.org>
+> Fixes: 2288a5ce43e5 ("target/riscv: add cfg properties for Zc* extension")
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
 
-On 7/17/23 19:33, Conor Dooley wrote:
-> Hey,
-> 
-> On Mon, Jul 17, 2023 at 06:54:17PM -0300, Daniel Henrique Barboza wrote:
->> Hi,
->>
->> I decided to include flags for both timer/counter extensions to make it
->> easier for us later on when dealing with the RVA22 profile (which
->> includes both).
->>
->> The features were already implemented by Atish Patra some time ago, but
->> back then these 2 extensions weren't introduced yet. This means that,
->> aside from extra stuff in riscv,isa FDT no other functional changes were
->> made.
->>
->> Both are defaulted to 'true' since QEMU already implements both
->> features, but the flag can be disabled if Zicsr isn't present or, in
->> the case of zihpm, if pmu_num = 0.
-> 
-> Out of curiosity, since you are allowing them to be disabled, how do you
-> intend to communicate to a guest that zicsr or zihpm are not present?
+Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
 
-At this point I'd say that existing guests are using other ways of checking
-if these timers and counters are available. After this patches OSes can confirm
-if these timers are available via riscv,isa, but they can't assume that
-they are not available if riscv,isa doesn't display them.
+Weiwei Li
 
-There's a chance that guests will continue ignoring these 2 extensions regardless
-of whether the platform exposes them or not.
+>   target/riscv/cpu.c | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 9339c0241d..6b93b04453 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1225,7 +1225,8 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+>           }
+>       }
+>   
+> -    if (riscv_has_ext(env, RVC)) {
+> +    /* zca, zcd and zcf has a PRIV 1.12.0 restriction */
+> +    if (riscv_has_ext(env, RVC) && env->priv_ver >= PRIV_VERSION_1_12_0) {
+>           cpu->cfg.ext_zca = true;
+>           if (riscv_has_ext(env, RVF) && env->misa_mxl_max == MXL_RV32) {
+>               cpu->cfg.ext_zcf = true;
 
-> 
->> This means that,
->> aside from extra stuff in riscv,isa FDT no other functional changes were
->> made.
-> 
-> This is barely a "functional" change either, as the presence of these
-> extensions has to be assumed, whether they appear in riscv,isa or not :/
-
-It's more of an organizational change for the sake of QEMU internals because the
-RVA22 profile happens to include zicntr and zihpm as mandatory extensions. It's
-easier to add the flags than to document why we're claiming RVA22 support but
-aren't displaying these 2 in riscv,isa.
-
-
-
-Thanks,
-
-
-Daniel
 
