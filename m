@@ -4,59 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60E1CC001DE
-	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Jul 2023 02:17:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8C22EB64DA
+	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Jul 2023 08:24:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qLaHU-00076t-C9; Mon, 17 Jul 2023 22:17:41 -0400
+	id 1qLg09-0003ry-2l; Tue, 18 Jul 2023 04:24:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qLaHT-00076g-32; Mon, 17 Jul 2023 22:17:39 -0400
-Received: from out30-131.freemail.mail.aliyun.com ([115.124.30.131])
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1qLg07-0003ri-GO; Tue, 18 Jul 2023 04:24:07 -0400
+Received: from dfw.source.kernel.org ([2604:1380:4641:c500::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qLaHQ-0006zL-09; Mon, 17 Jul 2023 22:17:38 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R191e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
- TI=SMTPD_---0Vnfj.mK_1689646644; 
-Received: from 30.221.100.194(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0Vnfj.mK_1689646644) by smtp.aliyun-inc.com;
- Tue, 18 Jul 2023 10:17:25 +0800
-Content-Type: multipart/alternative;
- boundary="------------0Z0ykRfNzhR1u4loeKdT9jmJ"
-Message-ID: <035b6d20-daa0-eac1-afa1-21ccf775a1f4@linux.alibaba.com>
-Date: Tue, 18 Jul 2023 10:16:53 +0800
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1qLg05-0004vI-RF; Tue, 18 Jul 2023 04:24:07 -0400
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 9517C61341;
+ Tue, 18 Jul 2023 08:24:03 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 56C69C433C8;
+ Tue, 18 Jul 2023 08:24:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1689668643;
+ bh=e+jLmT7QNeeriktU/tIBKhPQlwHBu/kJoAe12vTjtCI=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=FlTjKF4nHtPk0WzpLbOWKs+T/piiib6wAVX2TVriQjQbWVlwwMH0wOdKO//CUNAwI
+ AGpypCCcqsiMWhOlnXnQtd39tvoT/R31ZTLkyAQ7ULX3PMQ6/nz6R4gmBY8n744fz+
+ OO8SuST9d1TBY63FMzjKnfW5fTiAnXsAxIH+76UP+8frB27Wq5dY7jVpSju8Ux1CgA
+ vU68RIQLgX4/iIl0WNmJ6mvJ0tpgaVgYwR5bqCluo6Zm9c3qpbVfII6WNrNQtpDTaB
+ KZm5R27ViwMvDy0saXQprnSXnW9Lrb4SPrKvR9EjcR8j3NwA+ARDj8o19K1q+lZeSI
+ H5Ttv3HYsiJwA==
+Date: Tue, 18 Jul 2023 09:23:59 +0100
+From: Conor Dooley <conor@kernel.org>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn,
+ zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
+Subject: Re: [PATCH for-8.2 0/2] target/riscv: add zicntr and zihpm flags
+Message-ID: <20230718-freedom-subway-0b5d2083b474@spud>
+References: <20230717215419.124258-1-dbarboza@ventanamicro.com>
+ <20230717-snugly-pencil-98d62b254a74@spud>
+ <2f123883-3064-28af-649f-2bbc8c52a60a@ventanamicro.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH] target/riscv: Fix LMUL check to use minimum SEW
-Content-Language: en-US
-To: Weiwei Li <liweiwei@iscas.ac.cn>, Rob Bradford <rbradford@rivosinc.com>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-References: <20230706104433.16264-1-rbradford@rivosinc.com>
- <dfc75d1f-f28d-7d2c-26f9-72086ffb54ca@iscas.ac.cn>
- <7a102598badfaa01b0e0c04e4f59e81eac5a2b81.camel@rivosinc.com>
- <21bd465f-9f27-be77-cb3b-2b44b5f1e837@iscas.ac.cn>
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <21bd465f-9f27-be77-cb3b-2b44b5f1e837@iscas.ac.cn>
-Received-SPF: pass client-ip=115.124.30.131;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-131.freemail.mail.aliyun.com
-X-Spam_score_int: -99
-X-Spam_score: -10.0
-X-Spam_bar: ----------
-X-Spam_report: (-10.0 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- HTML_MESSAGE=0.001, NICE_REPLY_A=-0.097, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01,
- UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="tm2idzwlOWRcHRMG"
+Content-Disposition: inline
+In-Reply-To: <2f123883-3064-28af-649f-2bbc8c52a60a@ventanamicro.com>
+Received-SPF: pass client-ip=2604:1380:4641:c500::1;
+ envelope-from=conor@kernel.org; helo=dfw.source.kernel.org
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -72,405 +76,83 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This is a multi-part message in MIME format.
---------------0Z0ykRfNzhR1u4loeKdT9jmJ
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
 
+--tm2idzwlOWRcHRMG
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 2023/7/18 8:43, Weiwei Li wrote:
->
-> On 2023/7/17 23:13, Rob Bradford wrote:
->> On Thu, 2023-07-06 at 21:22 +0800, Weiwei Li wrote:
->>> On 2023/7/6 18:44, Rob Bradford wrote:
->>>> The previous check was failing with:
->>>>
->>>> ELEN = 64 SEW = 16 and LMUL = 1/8 (encoded as 5) which is a valid
->>>> combination.
->>>>
->>>> Fix the check to correctly match the specification by using minimum
->>>> SEW
->>>> rather than the active SEW.
->>>>
->>>>   From the specification:
->>>>
->>>> "In general, the requirement is to support LMUL ≥ SEWMIN/ELEN,
->>>> where
->>>> SEWMIN is the narrowest supported SEW value and ELEN is the widest
->>>> supported SEW value. In the standard extensions, SEWMIN=8. For
->>>> standard
->>>> vector extensions with ELEN=32, fractional LMULs of 1/2 and 1/4
->>>> must be
->>>> supported. For standard vector extensions with ELEN=64, fractional
->>>> LMULs
->>>> of 1/2, 1/4, and 1/8 must be supported."
->>>>
->>>>   From inspection this new check allows:
->>>>
->>>> ELEN=64 1/2, 1/4, 1/8 (encoded as 7, 6, 5 respectfully)
->>>> ELEN=32 1/2, 1/4 (encoded as 7 and 6 respectfully)
->> Hi Weiwei Li,
->>
->> Thanks for your reply. Sorry for delay in replying i've been away.
->>
->>> This is a little confusing.  there is note in spec to explain why
->>> LMUL
->>> ≥ SEW MIN /ELEN:
->>>
->>> "When LMUL < SEW MIN /ELEN, there is no guarantee an implementation
->>> would have enough bits in the fractional vector register to store
->>>
->>> Note at least one element, as VLEN=ELEN is a valid implementation
->>> choice. For example, with VLEN=ELEN=32, and SEW MIN =8, an LMUL of
->>>
->>> 1/8 would only provide four bits of storage in a vector register."
->>>
->>> In this way, when VLEN=ELEN=64,  an LMUL of 1/8 would only provide 8
->>> bits of storage in a vector register, so it's also not suitable for
->>> sew
->>> = 16.
->>>
->>> Maybe we can explain the above description of the spec in another
->>> way:
->>> we must support lmul=1/8 when ELEN=64, but it's only available when
->>> sew = 8.
->>>
->> I'm afraid i'm not sure I agree with this comment.
->>
->> VLEN=128 ELEN=64 SEW=16 LMUL=1/8 is a perfectly reasonable
->> configuration and contradicts your statement.
->>
->> The goal of my patch was to ensure that we permit a valid configuration
->> not to also reject other invalid configurations.
->>
->> An extra check that takes into consideration VLEN would also make sense
->> to me:
->>
->> e.g. VLEN=64 LMUL=1/8 SEW=16 should be rejected
->
-> Yeah. I agree. But instead of an extra check, I think VLEN is the one 
-> that really works instead of ELEN.
+On Mon, Jul 17, 2023 at 08:11:09PM -0300, Daniel Henrique Barboza wrote:
+> On 7/17/23 19:33, Conor Dooley wrote:
 
-Yes.  Currently,  we only check sew <= cpu.cfg->elen. We should also add 
-a check
+> > On Mon, Jul 17, 2023 at 06:54:17PM -0300, Daniel Henrique Barboza wrote:
+> > > Hi,
+> > >=20
+> > > I decided to include flags for both timer/counter extensions to make =
+it
+> > > easier for us later on when dealing with the RVA22 profile (which
+> > > includes both).
+> > >=20
+> > > The features were already implemented by Atish Patra some time ago, b=
+ut
+> > > back then these 2 extensions weren't introduced yet. This means that,
+> > > aside from extra stuff in riscv,isa FDT no other functional changes w=
+ere
+> > > made.
+> > >=20
+> > > Both are defaulted to 'true' since QEMU already implements both
+> > > features, but the flag can be disabled if Zicsr isn't present or, in
+> > > the case of zihpm, if pmu_num =3D 0.
+> >=20
+> > Out of curiosity, since you are allowing them to be disabled, how do you
+> > intend to communicate to a guest that zicsr or zihpm are not present?
+>=20
+> At this point I'd say that existing guests are using other ways of checki=
+ng
+> if these timers and counters are available.
 
-SEW <= VLEN * LMUL
+Or they just assume they're there as part of their baseline requirements
+;)
 
-Zhiwei
+> After this patches OSes can confirm
+> if these timers are available via riscv,isa, but they can't assume that
+> they are not available if riscv,isa doesn't display them.
+>=20
+> There's a chance that guests will continue ignoring these 2 extensions re=
+gardless
+> of whether the platform exposes them or not.
+>=20
+> >=20
+> > > This means that,
+> > > aside from extra stuff in riscv,isa FDT no other functional changes w=
+ere
+> > > made.
+> >=20
+> > This is barely a "functional" change either, as the presence of these
+> > extensions has to be assumed, whether they appear in riscv,isa or not :/
+>=20
+> It's more of an organizational change for the sake of QEMU internals beca=
+use the
+> RVA22 profile happens to include zicntr and zihpm as mandatory extensions=
+=2E It's
+> easier to add the flags than to document why we're claiming RVA22 support=
+ but
+> aren't displaying these 2 in riscv,isa.
 
->
-> Such as when ELEN=32,  LMUL=1/8 with SEW=8 is also a reasonable 
-> configuration  if VLEN >= 64.
->
-> Regards,
->
-> Weiwei Li
->
->>
->> Cheers,
->>
->> Rob
->>
->>> Regards,
->>>
->>> Weiwei Li
->>>
->>> `
->>>
->>> Regards,
->>>
->>> Weiwei Li
->>>
->>>> Fixes: d9b7609a1fb2 ("target/riscv: rvv-1.0: configure
->>>> instructions")
->>>>
->>>> Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
->>>> ---
->>>>    target/riscv/vector_helper.c | 4 ++--
->>>>    1 file changed, 2 insertions(+), 2 deletions(-)
->>>>
->>>> diff --git a/target/riscv/vector_helper.c
->>>> b/target/riscv/vector_helper.c
->>>> index 1e06e7447c..8dfd8fe484 100644
->>>> --- a/target/riscv/vector_helper.c
->>>> +++ b/target/riscv/vector_helper.c
->>>> @@ -43,9 +43,9 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env,
->>>> target_ulong s1,
->>>>                                                xlen - 1 -
->>>> R_VTYPE_RESERVED_SHIFT);
->>>>           if (lmul & 4) {
->>>> -        /* Fractional LMUL. */
->>>> +        /* Fractional LMUL - check LMUL >= ELEN/SEW_MIN (8) */
->>>>            if (lmul == 4 ||
->>>> -            cpu->cfg.elen >> (8 - lmul) < sew) {
->>>> +            cpu->cfg.elen >> (8 - lmul) < 8) {
->>>>                vill = true;
->>>>            }
->>>>        }
---------------0Z0ykRfNzhR1u4loeKdT9jmJ
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Possibly you should call out ACPI here too, since that does not suffer
+=66rom the same issues as riscv,isa in DT, and putting zicntr/zihpm et al
+in the ISA string there is needed.
 
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 2023/7/18 8:43, Weiwei Li wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:21bd465f-9f27-be77-cb3b-2b44b5f1e837@iscas.ac.cn">
-      <br>
-      On 2023/7/17 23:13, Rob Bradford wrote:
-      <br>
-      <blockquote type="cite">On Thu, 2023-07-06 at 21:22 +0800, Weiwei
-        Li wrote:
-        <br>
-        <blockquote type="cite">On 2023/7/6 18:44, Rob Bradford wrote:
-          <br>
-          <blockquote type="cite">The previous check was failing with:
-            <br>
-            <br>
-            ELEN = 64 SEW = 16 and LMUL = 1/8 (encoded as 5) which is a
-            valid
-            <br>
-            combination.
-            <br>
-            <br>
-            Fix the check to correctly match the specification by using
-            minimum
-            <br>
-            SEW
-            <br>
-            rather than the active SEW.
-            <br>
-            <br>
-              From the specification:
-            <br>
-            <br>
-            "In general, the requirement is to support LMUL ≥
-            SEWMIN/ELEN,
-            <br>
-            where
-            <br>
-            SEWMIN is the narrowest supported SEW value and ELEN is the
-            widest
-            <br>
-            supported SEW value. In the standard extensions, SEWMIN=8.
-            For
-            <br>
-            standard
-            <br>
-            vector extensions with ELEN=32, fractional LMULs of 1/2 and
-            1/4
-            <br>
-            must be
-            <br>
-            supported. For standard vector extensions with ELEN=64,
-            fractional
-            <br>
-            LMULs
-            <br>
-            of 1/2, 1/4, and 1/8 must be supported."
-            <br>
-            <br>
-              From inspection this new check allows:
-            <br>
-            <br>
-            ELEN=64 1/2, 1/4, 1/8 (encoded as 7, 6, 5 respectfully)
-            <br>
-            ELEN=32 1/2, 1/4 (encoded as 7 and 6 respectfully)
-            <br>
-          </blockquote>
-        </blockquote>
-        Hi Weiwei Li,
-        <br>
-        <br>
-        Thanks for your reply. Sorry for delay in replying i've been
-        away.
-        <br>
-        <br>
-        <blockquote type="cite">This is a little confusing.  there is 
-          note in spec to explain why
-          <br>
-          LMUL
-          <br>
-          ≥ SEW MIN /ELEN:
-          <br>
-          <br>
-          "When LMUL &lt; SEW MIN /ELEN, there is no guarantee an
-          implementation
-          <br>
-          would have enough bits in the fractional vector register to
-          store
-          <br>
-          <br>
-          Note at least one element, as VLEN=ELEN is a valid
-          implementation
-          <br>
-          choice. For example, with VLEN=ELEN=32, and SEW MIN =8, an
-          LMUL of
-          <br>
-          <br>
-          1/8 would only provide four bits of storage in a vector
-          register."
-          <br>
-          <br>
-          In this way, when VLEN=ELEN=64,  an LMUL of 1/8 would only
-          provide 8
-          <br>
-          bits of storage in a vector register, so it's also not
-          suitable for
-          <br>
-          sew
-          <br>
-          = 16.
-          <br>
-          <br>
-          Maybe we can explain the above description of the spec in
-          another
-          <br>
-          way:
-          <br>
-          we must support lmul=1/8 when ELEN=64, but it's only available
-          when
-          <br>
-          sew = 8.
-          <br>
-          <br>
-        </blockquote>
-        I'm afraid i'm not sure I agree with this comment.
-        <br>
-        <br>
-        VLEN=128 ELEN=64 SEW=16 LMUL=1/8 is a perfectly reasonable
-        <br>
-        configuration and contradicts your statement.
-        <br>
-        <br>
-        The goal of my patch was to ensure that we permit a valid
-        configuration
-        <br>
-        not to also reject other invalid configurations.
-        <br>
-        <br>
-        An extra check that takes into consideration VLEN would also
-        make sense
-        <br>
-        to me:
-        <br>
-        <br>
-        e.g. VLEN=64 LMUL=1/8 SEW=16 should be rejected
-        <br>
-      </blockquote>
-      <br>
-      Yeah. I agree. But instead of an extra check, I think VLEN is the
-      one that really works instead of ELEN.
-      <br>
-    </blockquote>
-    <p>Yes.  Currently,  we only check sew &lt;= cpu.cfg-&gt;elen. We
-      should also add a check</p>
-    <pre>SEW &lt;= VLEN * LMUL
-</pre>
-    <p>Zhiwei<br>
-    </p>
-    <blockquote type="cite"
-      cite="mid:21bd465f-9f27-be77-cb3b-2b44b5f1e837@iscas.ac.cn">
-      <br>
-      Such as when ELEN=32,  LMUL=1/8 with SEW=8 is also a reasonable
-      configuration  if VLEN &gt;= 64.
-      <br>
-      <br>
-      Regards,
-      <br>
-      <br>
-      Weiwei Li
-      <br>
-      <br>
-      <blockquote type="cite">
-        <br>
-        Cheers,
-        <br>
-        <br>
-        Rob
-        <br>
-        <br>
-        <blockquote type="cite">Regards,
-          <br>
-          <br>
-          Weiwei Li
-          <br>
-          <br>
-          `
-          <br>
-          <br>
-          Regards,
-          <br>
-          <br>
-          Weiwei Li
-          <br>
-          <br>
-          <blockquote type="cite">Fixes: d9b7609a1fb2 ("target/riscv:
-            rvv-1.0: configure
-            <br>
-            instructions")
-            <br>
-            <br>
-            Signed-off-by: Rob Bradford <a class="moz-txt-link-rfc2396E" href="mailto:rbradford@rivosinc.com">&lt;rbradford@rivosinc.com&gt;</a>
-            <br>
-            ---
-            <br>
-               target/riscv/vector_helper.c | 4 ++--
-            <br>
-               1 file changed, 2 insertions(+), 2 deletions(-)
-            <br>
-            <br>
-            diff --git a/target/riscv/vector_helper.c
-            <br>
-            b/target/riscv/vector_helper.c
-            <br>
-            index 1e06e7447c..8dfd8fe484 100644
-            <br>
-            --- a/target/riscv/vector_helper.c
-            <br>
-            +++ b/target/riscv/vector_helper.c
-            <br>
-            @@ -43,9 +43,9 @@ target_ulong HELPER(vsetvl)(CPURISCVState
-            *env,
-            <br>
-            target_ulong s1,
-            <br>
-                                                           xlen - 1 -
-            <br>
-            R_VTYPE_RESERVED_SHIFT);
-            <br>
-                      if (lmul &amp; 4) {
-            <br>
-            -        /* Fractional LMUL. */
-            <br>
-            +        /* Fractional LMUL - check LMUL &gt;= ELEN/SEW_MIN
-            (8) */
-            <br>
-                       if (lmul == 4 ||
-            <br>
-            -            cpu-&gt;cfg.elen &gt;&gt; (8 - lmul) &lt; sew)
-            {
-            <br>
-            +            cpu-&gt;cfg.elen &gt;&gt; (8 - lmul) &lt; 8) {
-            <br>
-                           vill = true;
-            <br>
-                       }
-            <br>
-                   }
-            <br>
-          </blockquote>
-        </blockquote>
-      </blockquote>
-    </blockquote>
-  </body>
-</html>
+--tm2idzwlOWRcHRMG
+Content-Type: application/pgp-signature; name="signature.asc"
 
---------------0Z0ykRfNzhR1u4loeKdT9jmJ--
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZLZMHgAKCRB4tDGHoIJi
+0o/TAQD18ERkZ7TKDHmu1TjNd0ztBLoIIzWuKSfyyVXlMwweNAD/UA+z+r+tor+T
+VNFgDg4PQrPgldYTqBu1bgUu6gym7gI=
+=0J0e
+-----END PGP SIGNATURE-----
+
+--tm2idzwlOWRcHRMG--
 
