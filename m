@@ -4,71 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25015EB64DC
-	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Jul 2023 00:44:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48795EB64DC
+	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Jul 2023 01:37:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qLYot-0002gu-3d; Mon, 17 Jul 2023 20:44:04 -0400
+	id 1qLZe1-0000Cu-1d; Mon, 17 Jul 2023 21:36:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1qLYor-0002gX-H7; Mon, 17 Jul 2023 20:44:01 -0400
-Received: from smtp81.cstnet.cn ([159.226.251.81] helo=cstnet.cn)
- by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1qLYoo-0007B2-L5; Mon, 17 Jul 2023 20:44:01 -0400
-Received: from [192.168.0.120] (unknown [180.175.26.191])
- by APP-03 (Coremail) with SMTP id rQCowAC312RC4LVkZcsbDA--.55003S2;
- Tue, 18 Jul 2023 08:43:47 +0800 (CST)
-Message-ID: <21bd465f-9f27-be77-cb3b-2b44b5f1e837@iscas.ac.cn>
-Date: Tue, 18 Jul 2023 08:43:46 +0800
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1qLZdx-00006P-BM; Mon, 17 Jul 2023 21:36:49 -0400
+Received: from out30-97.freemail.mail.aliyun.com ([115.124.30.97])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1qLZdu-0007md-FW; Mon, 17 Jul 2023 21:36:49 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
+ TI=SMTPD_---0VnfYrLx_1689644192; 
+Received: from 30.221.100.194(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0VnfYrLx_1689644192) by smtp.aliyun-inc.com;
+ Tue, 18 Jul 2023 09:36:33 +0800
+Message-ID: <f0f0b1fb-327b-abb8-0262-027c75c76520@linux.alibaba.com>
+Date: Tue, 18 Jul 2023 09:36:00 +0800
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.13.0
-Cc: liweiwei@iscas.ac.cn, qemu-riscv@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: Re: [PATCH] target/riscv: Fix LMUL check to use minimum SEW
+Subject: Re: [PATCH] target/riscv/cpu.c: check priv_ver before auto-enable
+ zca/zcd/zcf
 Content-Language: en-US
-To: Rob Bradford <rbradford@rivosinc.com>, qemu-devel@nongnu.org
-References: <20230706104433.16264-1-rbradford@rivosinc.com>
- <dfc75d1f-f28d-7d2c-26f9-72086ffb54ca@iscas.ac.cn>
- <7a102598badfaa01b0e0c04e4f59e81eac5a2b81.camel@rivosinc.com>
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-In-Reply-To: <7a102598badfaa01b0e0c04e4f59e81eac5a2b81.camel@rivosinc.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, palmer@rivosinc.com, Conor Dooley <conor@kernel.org>
+References: <20230717154141.60898-1-dbarboza@ventanamicro.com>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20230717154141.60898-1-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: rQCowAC312RC4LVkZcsbDA--.55003S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxWrWkKw1kKw18uw4rGF1kAFb_yoWrGr15pF
- W8JFW7tFy8X34xZr12q3WDX3y0vF48G3WUJrnYqa4UJws8Gr1qvFn0qF1q9F18AF4fJr1j
- qa4jv3WfZrZ8AFDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUkl14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4j6r
- 4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
- I7IYx2IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
- 4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCYjI0SjxkI62AI1cAE67vI
- Y487MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI
- 0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y
- 0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxV
- W8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1l
- IxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VU1a9aPUUUU
- U==
-X-Originating-IP: [180.175.26.191]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.81; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -19
-X-Spam_score: -2.0
-X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.097,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=115.124.30.97;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-97.freemail.mail.aliyun.com
+X-Spam_score_int: -99
+X-Spam_score: -10.0
+X-Spam_bar: ----------
+X-Spam_report: (-10.0 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ NICE_REPLY_A=-0.097, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -85,125 +67,68 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
-On 2023/7/17 23:13, Rob Bradford wrote:
-> On Thu, 2023-07-06 at 21:22 +0800, Weiwei Li wrote:
->> On 2023/7/6 18:44, Rob Bradford wrote:
->>> The previous check was failing with:
->>>
->>> ELEN = 64 SEW = 16 and LMUL = 1/8 (encoded as 5) which is a valid
->>> combination.
->>>
->>> Fix the check to correctly match the specification by using minimum
->>> SEW
->>> rather than the active SEW.
->>>
->>>   From the specification:
->>>
->>> "In general, the requirement is to support LMUL ≥ SEWMIN/ELEN,
->>> where
->>> SEWMIN is the narrowest supported SEW value and ELEN is the widest
->>> supported SEW value. In the standard extensions, SEWMIN=8. For
->>> standard
->>> vector extensions with ELEN=32, fractional LMULs of 1/2 and 1/4
->>> must be
->>> supported. For standard vector extensions with ELEN=64, fractional
->>> LMULs
->>> of 1/2, 1/4, and 1/8 must be supported."
->>>
->>>   From inspection this new check allows:
->>>
->>> ELEN=64 1/2, 1/4, 1/8 (encoded as 7, 6, 5 respectfully)
->>> ELEN=32 1/2, 1/4 (encoded as 7 and 6 respectfully)
-> Hi Weiwei Li,
+On 2023/7/17 23:41, Daniel Henrique Barboza wrote:
+> Commit bd30559568 made changes in how we're checking and disabling
+> extensions based on env->priv_ver. One of the changes was to move the
+> extension disablement code to the end of realize(), being able to
+> disable extensions after we've auto-enabled some of them.
 >
-> Thanks for your reply. Sorry for delay in replying i've been away.
+> An unfortunate side effect of this change started to happen with CPUs
+> that has an older priv version, like sifive-u54. Starting on commit
+> 2288a5ce43e5 we're auto-enabling zca, zcd and zcf if RVC is enabled,
+> but these extensions are priv version 1.12.0. When running a cpu that
+> has an older priv ver (like sifive-u54) the user is spammed with
+> warnings like these:
 >
->> This is a little confusing.  there is  note in spec to explain why
->> LMUL
->> ≥ SEW MIN /ELEN:
->>
->> "When LMUL < SEW MIN /ELEN, there is no guarantee an implementation
->> would have enough bits in the fractional vector register to store
->>
->> Note at least one element, as VLEN=ELEN is a valid implementation
->> choice. For example, with VLEN=ELEN=32, and SEW MIN =8, an LMUL of
->>
->> 1/8 would only provide four bits of storage in a vector register."
->>
->> In this way, when VLEN=ELEN=64,  an LMUL of 1/8 would only provide 8
->> bits of storage in a vector register, so it's also not suitable for
->> sew
->> = 16.
->>
->> Maybe we can explain the above description of the spec in another
->> way:
->> we must support lmul=1/8 when ELEN=64, but it's only available when
->> sew = 8.
->>
-> I'm afraid i'm not sure I agree with this comment.
+> qemu-system-riscv64: warning: disabling zca extension for hart 0x0000000000000000 because privilege spec version does not match
+> qemu-system-riscv64: warning: disabling zcd extension for hart 0x0000000000000000 because privilege spec version does not match
 >
-> VLEN=128 ELEN=64 SEW=16 LMUL=1/8 is a perfectly reasonable
-> configuration and contradicts your statement.
+> The warnings are part of the code that disables the extension, but in this
+> case we're throwing user warnings for stuff that we enabled on our own,
+> without user intervention. Users are left wondering what they did wrong.
 >
-> The goal of my patch was to ensure that we permit a valid configuration
-> not to also reject other invalid configurations.
+> A quick 8.1 fix for this nuisance is to check the CPU priv spec before
+> auto-enabling zca/zcd/zcf. A more appropriate fix will include a more
+> robust framework that will account for both priv_ver and user choice
+> when auto-enabling/disabling extensions, but for 8.1 we'll make it do
+> with this simple check.
 >
-> An extra check that takes into consideration VLEN would also make sense
-> to me:
+> It's also worth noticing that this is the only case where we're
+> auto-enabling extensions based on a criteria (in this case RVC) that
+> doesn't match the priv spec of the extensions we're enabling. There's no
+> need for more 8.1 band-aids.
 >
-> e.g. VLEN=64 LMUL=1/8 SEW=16 should be rejected
+> Cc: Conor Dooley <conor@kernel.org>
+> Fixes: 2288a5ce43e5 ("target/riscv: add cfg properties for Zc* extension")
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>   target/riscv/cpu.c | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 9339c0241d..6b93b04453 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1225,7 +1225,8 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+>           }
+>       }
+>   
+> -    if (riscv_has_ext(env, RVC)) {
+> +    /* zca, zcd and zcf has a PRIV 1.12.0 restriction */
 
-Yeah. I agree. But instead of an extra check, I think VLEN is the one 
-that really works instead of ELEN.
+I think the Zca/zcd/zcf doesn't have much relationship with the 
+privilege specification. The privilege specification doesn't define any
+CSR or rules that Zca/zcd/zcf depend on. Maybe I missed something.  Does 
+anyone  know why we should check PRIV_VERSION_1_12_0 for zca/zcf/zcd?
 
-Such as when ELEN=32,  LMUL=1/8 with SEW=8 is also a reasonable 
-configuration  if VLEN >= 64.
+I think we should remove the check for priv_ver for many user mode 
+extensions. We should set the checking privilege specification version 
+for these extensions to PRIV_VERSION_1_10_0.
 
-Regards,
+Zhiwei
 
-Weiwei Li
-
->
-> Cheers,
->
-> Rob
->
->> Regards,
->>
->> Weiwei Li
->>
->> `
->>
->> Regards,
->>
->> Weiwei Li
->>
->>> Fixes: d9b7609a1fb2 ("target/riscv: rvv-1.0: configure
->>> instructions")
->>>
->>> Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
->>> ---
->>>    target/riscv/vector_helper.c | 4 ++--
->>>    1 file changed, 2 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/target/riscv/vector_helper.c
->>> b/target/riscv/vector_helper.c
->>> index 1e06e7447c..8dfd8fe484 100644
->>> --- a/target/riscv/vector_helper.c
->>> +++ b/target/riscv/vector_helper.c
->>> @@ -43,9 +43,9 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env,
->>> target_ulong s1,
->>>                                                xlen - 1 -
->>> R_VTYPE_RESERVED_SHIFT);
->>>    
->>>        if (lmul & 4) {
->>> -        /* Fractional LMUL. */
->>> +        /* Fractional LMUL - check LMUL >= ELEN/SEW_MIN (8) */
->>>            if (lmul == 4 ||
->>> -            cpu->cfg.elen >> (8 - lmul) < sew) {
->>> +            cpu->cfg.elen >> (8 - lmul) < 8) {
->>>                vill = true;
->>>            }
->>>        }
-
+> +    if (riscv_has_ext(env, RVC) && env->priv_ver >= PRIV_VERSION_1_12_0) {
+>           cpu->cfg.ext_zca = true;
+>           if (riscv_has_ext(env, RVF) && env->misa_mxl_max == MXL_RV32) {
+>               cpu->cfg.ext_zcf = true;
 
