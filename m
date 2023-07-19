@@ -4,76 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A41C4EB64DC
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Jul 2023 00:57:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B91A1EB64DD
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Jul 2023 01:01:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qLvUl-0006VC-Cd; Tue, 18 Jul 2023 20:56:47 -0400
+	id 1qLvZ0-0007dn-Kl; Tue, 18 Jul 2023 21:01:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qLvUj-0006Uz-GN; Tue, 18 Jul 2023 20:56:45 -0400
-Received: from mail-vs1-xe2a.google.com ([2607:f8b0:4864:20::e2a])
+ id 1qLvYv-0007cl-KG; Tue, 18 Jul 2023 21:01:05 -0400
+Received: from mail-vs1-xe2f.google.com ([2607:f8b0:4864:20::e2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qLvUf-0004o1-QA; Tue, 18 Jul 2023 20:56:44 -0400
-Received: by mail-vs1-xe2a.google.com with SMTP id
- ada2fe7eead31-440ad576d87so2055773137.1; 
- Tue, 18 Jul 2023 17:56:40 -0700 (PDT)
+ id 1qLvYs-0006vX-RA; Tue, 18 Jul 2023 21:01:04 -0400
+Received: by mail-vs1-xe2f.google.com with SMTP id
+ ada2fe7eead31-444c5209861so1765193137.2; 
+ Tue, 18 Jul 2023 18:01:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1689728200; x=1692320200;
+ d=gmail.com; s=20221208; t=1689728460; x=1692320460;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HeRmSEZDNVdxpWjzv7/Osg+9CPUqEsv9I0wiblsgUd4=;
- b=VdgzM4TQqSWkHYBcIjT43vo1IGUFnylfGzIjb86lDNd4VZ3wHn05UpJftwbFi/gP9W
- 4gvqVeVldTMcUrtR5Z8gPQ2mZsWxcBh+fRNYKlPBT+3V2WkCIjmBKOGcakLqJb8w+cTk
- IyHX5EZCgScdMrp0LIkE/OoicydanL3uf3f7gJY5gAno3UEYHwsVLF46fVYa8odd6w6C
- vStTMUqGgrSuD2vqLuFOKb+U5Gm5iGn6CZQKQtuKKp4anNCrxhI4H0zsvrBQrZPLdUcD
- ajyppnqwwmiRt1s2vTNo3NQSHr1ytsh0OWXtufxtCRzaQOmXT4MwQUgIVTJ52jEhheoz
- QAOA==
+ bh=cbXknfk4iLdL2FqQJSxUENd0P0BlDzQfMtmr3vrUvPo=;
+ b=UMACn5gGz67cv+I48p8mhMPjvK6AXF0BKZjQR0UF3vPh/8WrPwqsjM1QOQ6eNMjYxh
+ WIWGcCuilZbDt7uI9ryvizDGkrcGV426BhIMfZh+AsMtenETiR5kcreJf1Aocf4+UYyq
+ fANrHdYRGTc73U0E2zh+HGDHxbeGr7SEiAkk0ySO6uTrp2VgSGGAmDd4AYIZO7mj3pLG
+ OYSsSE7xCt+Krr2xc7mKfsTSdLfi9Xo+ttHvISoWV1OGiK9gLzgwM3LJRCpRbIusxA3h
+ 9c6cLtL/uUJMbc0svqycA6FjDocom4aO/gOSekElowErEMQurjsIYKBgo+JNNcKGb7ze
+ sIfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689728200; x=1692320200;
+ d=1e100.net; s=20221208; t=1689728460; x=1692320460;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HeRmSEZDNVdxpWjzv7/Osg+9CPUqEsv9I0wiblsgUd4=;
- b=c0fb7SbUtQCXYS7fP0l/FQpH5v7TwrR3ukYkl3Al9b1sA5dBG8qRQz5PNGMTVJw5V1
- 7jpdAwm9rw+guPf826bBFdkSLQbmnUjzi4Cvowk6AXaNPj9sktsNJbwe/584CC3yzZvi
- Zo//0HhNThkKn9qoWyMzVniP5T0JrCtCf6TeI7hNMeWtaCRbu94/yrexvgKnnDMQCWWC
- OePh6BA+jQb441y9g2976FZmyAAIgtBTcJdJLctxFLTiZuol0TlrS1AMJjhrnz8JX7uH
- quAvw6Obc1EDSjA6L4JzjToaaoQrWYg/QWBOyH7CopWkjBApExa6lGdNUyY9QaHkV+iQ
- VdLw==
-X-Gm-Message-State: ABy/qLaX8VBwIFX4e4YznpJzk/xTXlJ17+WQlzDgjY8hgQkaCicHfUwq
- tZvi8Qbx05Sy8lDWl5VEzkRkYFJ2yRpV9bjtT5I=
-X-Google-Smtp-Source: APBJJlE10yeGyDcPi00zfSyh7Kj30G7yDPg7HQVSBFIsWIIVKdCOiTVWEexG3UkKFUAw/nN3a2jjwg2t6jrqvXFtlrk=
-X-Received: by 2002:a67:f7c7:0:b0:443:664f:f15 with SMTP id
- a7-20020a67f7c7000000b00443664f0f15mr9418188vsp.5.1689728200051; Tue, 18 Jul
- 2023 17:56:40 -0700 (PDT)
+ bh=cbXknfk4iLdL2FqQJSxUENd0P0BlDzQfMtmr3vrUvPo=;
+ b=c1Fqi5iw//Db/JbUA54Nohbyd4PEaaa+SXv51Zeg7r9Nk341ma3EZ5d313rUxjYcJ0
+ AIMviuXHMFb6XuJwKJBWiZ0GVKC/CPjNsw4MVmHVlQkkMi0d19n/NTqiXYHyN1blMPd5
+ YZ/zfbYyiGCqF/j1SNAWx+tpbshzvi/SK/j2XpbnA8HYFuTmBaNFmgzZhgOVGhABM28J
+ rR/E3bLM27w2iXGwr+QrC07xecCsn+7bG+szfiTuCEkD0A0RGr5vJpDOlB/4E2OgLaCF
+ SEGOGZy53BrPGVRSXlyGJniwT9UxVezx3+lO98c7XN0fmNZAtzMsnVs+X4O2u6wmYfZW
+ kFuQ==
+X-Gm-Message-State: ABy/qLaIv9Kwlo66h6YPDrxHpFte+9HZAMg09pkTIaSuexsJjoNBWCSH
+ tHrLRW97ELdC5BRxoBZjY6aYycsw5e6b7P5DedAftBnqgzKDOg==
+X-Google-Smtp-Source: APBJJlG5avgP8NMGWh/9080ufPFKfATL/lxBDx6hFcl4sSvAXzKXes7/wA7Z6S9XZ0IF9jYIHVCAI7FochdEDUoHTfc=
+X-Received: by 2002:a67:e3d1:0:b0:445:2154:746b with SMTP id
+ k17-20020a67e3d1000000b004452154746bmr2764214vsm.4.1689728460389; Tue, 18 Jul
+ 2023 18:01:00 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230703183145.24779-1-philmd@linaro.org>
- <20230703183145.24779-9-philmd@linaro.org>
-In-Reply-To: <20230703183145.24779-9-philmd@linaro.org>
+References: <20230711121453.59138-1-philmd@linaro.org>
+ <20230711121453.59138-8-philmd@linaro.org>
+In-Reply-To: <20230711121453.59138-8-philmd@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 19 Jul 2023 10:56:14 +1000
-Message-ID: <CAKmqyKO4Dq+WPJr0=+OpNmuMiGGWLOnsFQjuirc8KFra6C6sPA@mail.gmail.com>
-Subject: Re: [PATCH v2 08/16] target/riscv: Move TCG-specific
- cpu_get_tb_cpu_state() to tcg/cpu.c
+Date: Wed, 19 Jul 2023 11:00:34 +1000
+Message-ID: <CAKmqyKOM0=1OZ0b0uNS=gpA=uQawvEGUx3Emuyyqf5wQkqBsVA@mail.gmail.com>
+Subject: Re: [PATCH v3 07/16] target/riscv: Move TCG-specific files to
+ target/riscv/tcg/
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, Thomas Huth <thuth@redhat.com>,
- Beraldo Leal <bleal@redhat.com>, 
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, kvm@vger.kernel.org,
- qemu-riscv@nongnu.org, Bin Meng <bin.meng@windriver.com>,
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Weiwei Li <liweiwei@iscas.ac.cn>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2a;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2f;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2f.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -97,8 +90,12 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jul 4, 2023 at 4:34=E2=80=AFAM Philippe Mathieu-Daud=C3=A9 <philmd@=
-linaro.org> wrote:
+On Tue, Jul 11, 2023 at 10:21=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
+<philmd@linaro.org> wrote:
+>
+> Move TCG-specific files to the a new 'tcg' sub-directory. Add
+> stubs for riscv_cpu_[get/set]_fflags and riscv_raise_exception().
+> Adapt meson rules.
 >
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 
@@ -107,236 +104,193 @@ Acked-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/cpu_helper.c    | 84 -------------------------------
->  target/riscv/tcg/cpu.c       | 98 ++++++++++++++++++++++++++++++++++++
->  target/riscv/tcg/meson.build |  1 +
->  3 files changed, 99 insertions(+), 84 deletions(-)
->  create mode 100644 target/riscv/tcg/cpu.c
+>  target/riscv/{ =3D> tcg}/XVentanaCondOps.decode |  0
+>  target/riscv/{ =3D> tcg}/insn16.decode          |  0
+>  target/riscv/{ =3D> tcg}/insn32.decode          |  0
+>  target/riscv/{ =3D> tcg}/xthead.decode          |  0
+>  target/riscv/{ =3D> tcg}/bitmanip_helper.c      |  0
+>  target/riscv/{ =3D> tcg}/crypto_helper.c        |  0
+>  target/riscv/{ =3D> tcg}/fpu_helper.c           |  0
+>  target/riscv/{ =3D> tcg}/m128_helper.c          |  0
+>  target/riscv/{ =3D> tcg}/op_helper.c            |  0
+>  target/riscv/tcg/tcg-stub.c                   | 25 +++++++++++++++++++
+>  target/riscv/{ =3D> tcg}/translate.c            |  0
+>  target/riscv/{ =3D> tcg}/vector_helper.c        |  0
+>  target/riscv/{ =3D> tcg}/zce_helper.c           |  0
+>  target/riscv/meson.build                      | 18 +------------
+>  target/riscv/tcg/meson.build                  | 19 ++++++++++++++
+>  15 files changed, 45 insertions(+), 17 deletions(-)
+>  rename target/riscv/{ =3D> tcg}/XVentanaCondOps.decode (100%)
+>  rename target/riscv/{ =3D> tcg}/insn16.decode (100%)
+>  rename target/riscv/{ =3D> tcg}/insn32.decode (100%)
+>  rename target/riscv/{ =3D> tcg}/xthead.decode (100%)
+>  rename target/riscv/{ =3D> tcg}/bitmanip_helper.c (100%)
+>  rename target/riscv/{ =3D> tcg}/crypto_helper.c (100%)
+>  rename target/riscv/{ =3D> tcg}/fpu_helper.c (100%)
+>  rename target/riscv/{ =3D> tcg}/m128_helper.c (100%)
+>  rename target/riscv/{ =3D> tcg}/op_helper.c (100%)
+>  create mode 100644 target/riscv/tcg/tcg-stub.c
+>  rename target/riscv/{ =3D> tcg}/translate.c (100%)
+>  rename target/riscv/{ =3D> tcg}/vector_helper.c (100%)
+>  rename target/riscv/{ =3D> tcg}/zce_helper.c (100%)
+>  create mode 100644 target/riscv/tcg/meson.build
 >
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 597c47bc56..6f8778c6d3 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -64,90 +64,6 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetc=
-h)
->  #endif
->  }
->
-> -void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
-> -                          uint64_t *cs_base, uint32_t *pflags)
-> -{
-> -    CPUState *cs =3D env_cpu(env);
-> -    RISCVCPU *cpu =3D RISCV_CPU(cs);
-> -    RISCVExtStatus fs, vs;
-> -    uint32_t flags =3D 0;
-> -
-> -    *pc =3D env->xl =3D=3D MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
-> -    *cs_base =3D 0;
-> -
-> -    if (cpu->cfg.ext_zve32f) {
-> -        /*
-> -         * If env->vl equals to VLMAX, we can use generic vector operati=
-on
-> -         * expanders (GVEC) to accerlate the vector operations.
-> -         * However, as LMUL could be a fractional number. The maximum
-> -         * vector size can be operated might be less than 8 bytes,
-> -         * which is not supported by GVEC. So we set vl_eq_vlmax flag to=
- true
-> -         * only when maxsz >=3D 8 bytes.
-> -         */
-> -        uint32_t vlmax =3D vext_get_vlmax(cpu, env->vtype);
-> -        uint32_t sew =3D FIELD_EX64(env->vtype, VTYPE, VSEW);
-> -        uint32_t maxsz =3D vlmax << sew;
-> -        bool vl_eq_vlmax =3D (env->vstart =3D=3D 0) && (vlmax =3D=3D env=
-->vl) &&
-> -                           (maxsz >=3D 8);
-> -        flags =3D FIELD_DP32(flags, TB_FLAGS, VILL, env->vill);
-> -        flags =3D FIELD_DP32(flags, TB_FLAGS, SEW, sew);
-> -        flags =3D FIELD_DP32(flags, TB_FLAGS, LMUL,
-> -                           FIELD_EX64(env->vtype, VTYPE, VLMUL));
-> -        flags =3D FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
-> -        flags =3D FIELD_DP32(flags, TB_FLAGS, VTA,
-> -                           FIELD_EX64(env->vtype, VTYPE, VTA));
-> -        flags =3D FIELD_DP32(flags, TB_FLAGS, VMA,
-> -                           FIELD_EX64(env->vtype, VTYPE, VMA));
-> -        flags =3D FIELD_DP32(flags, TB_FLAGS, VSTART_EQ_ZERO, env->vstar=
-t =3D=3D 0);
-> -    } else {
-> -        flags =3D FIELD_DP32(flags, TB_FLAGS, VILL, 1);
-> -    }
-> -
-> -#ifdef CONFIG_USER_ONLY
-> -    fs =3D EXT_STATUS_DIRTY;
-> -    vs =3D EXT_STATUS_DIRTY;
-> -#else
-> -    flags =3D FIELD_DP32(flags, TB_FLAGS, PRIV, env->priv);
-> -
-> -    flags |=3D cpu_mmu_index(env, 0);
-> -    fs =3D get_field(env->mstatus, MSTATUS_FS);
-> -    vs =3D get_field(env->mstatus, MSTATUS_VS);
-> -
-> -    if (env->virt_enabled) {
-> -        flags =3D FIELD_DP32(flags, TB_FLAGS, VIRT_ENABLED, 1);
-> -        /*
-> -         * Merge DISABLED and !DIRTY states using MIN.
-> -         * We will set both fields when dirtying.
-> -         */
-> -        fs =3D MIN(fs, get_field(env->mstatus_hs, MSTATUS_FS));
-> -        vs =3D MIN(vs, get_field(env->mstatus_hs, MSTATUS_VS));
-> -    }
-> -
-> -    /* With Zfinx, floating point is enabled/disabled by Smstateen. */
-> -    if (!riscv_has_ext(env, RVF)) {
-> -        fs =3D (smstateen_acc_ok(env, 0, SMSTATEEN0_FCSR) =3D=3D RISCV_E=
-XCP_NONE)
-> -             ? EXT_STATUS_DIRTY : EXT_STATUS_DISABLED;
-> -    }
-> -
-> -    if (cpu->cfg.debug && !icount_enabled()) {
-> -        flags =3D FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_en=
-abled);
-> -    }
-> -#endif
-> -
-> -    flags =3D FIELD_DP32(flags, TB_FLAGS, FS, fs);
-> -    flags =3D FIELD_DP32(flags, TB_FLAGS, VS, vs);
-> -    flags =3D FIELD_DP32(flags, TB_FLAGS, XL, env->xl);
-> -    flags =3D FIELD_DP32(flags, TB_FLAGS, AXL, cpu_address_xl(env));
-> -    if (env->cur_pmmask !=3D 0) {
-> -        flags =3D FIELD_DP32(flags, TB_FLAGS, PM_MASK_ENABLED, 1);
-> -    }
-> -    if (env->cur_pmbase !=3D 0) {
-> -        flags =3D FIELD_DP32(flags, TB_FLAGS, PM_BASE_ENABLED, 1);
-> -    }
-> -
-> -    *pflags =3D flags;
-> -}
-> -
->  void riscv_cpu_update_mask(CPURISCVState *env)
->  {
->      target_ulong mask =3D 0, base =3D 0;
-> diff --git a/target/riscv/tcg/cpu.c b/target/riscv/tcg/cpu.c
+> diff --git a/target/riscv/XVentanaCondOps.decode b/target/riscv/tcg/XVent=
+anaCondOps.decode
+> similarity index 100%
+> rename from target/riscv/XVentanaCondOps.decode
+> rename to target/riscv/tcg/XVentanaCondOps.decode
+> diff --git a/target/riscv/insn16.decode b/target/riscv/tcg/insn16.decode
+> similarity index 100%
+> rename from target/riscv/insn16.decode
+> rename to target/riscv/tcg/insn16.decode
+> diff --git a/target/riscv/insn32.decode b/target/riscv/tcg/insn32.decode
+> similarity index 100%
+> rename from target/riscv/insn32.decode
+> rename to target/riscv/tcg/insn32.decode
+> diff --git a/target/riscv/xthead.decode b/target/riscv/tcg/xthead.decode
+> similarity index 100%
+> rename from target/riscv/xthead.decode
+> rename to target/riscv/tcg/xthead.decode
+> diff --git a/target/riscv/bitmanip_helper.c b/target/riscv/tcg/bitmanip_h=
+elper.c
+> similarity index 100%
+> rename from target/riscv/bitmanip_helper.c
+> rename to target/riscv/tcg/bitmanip_helper.c
+> diff --git a/target/riscv/crypto_helper.c b/target/riscv/tcg/crypto_helpe=
+r.c
+> similarity index 100%
+> rename from target/riscv/crypto_helper.c
+> rename to target/riscv/tcg/crypto_helper.c
+> diff --git a/target/riscv/fpu_helper.c b/target/riscv/tcg/fpu_helper.c
+> similarity index 100%
+> rename from target/riscv/fpu_helper.c
+> rename to target/riscv/tcg/fpu_helper.c
+> diff --git a/target/riscv/m128_helper.c b/target/riscv/tcg/m128_helper.c
+> similarity index 100%
+> rename from target/riscv/m128_helper.c
+> rename to target/riscv/tcg/m128_helper.c
+> diff --git a/target/riscv/op_helper.c b/target/riscv/tcg/op_helper.c
+> similarity index 100%
+> rename from target/riscv/op_helper.c
+> rename to target/riscv/tcg/op_helper.c
+> diff --git a/target/riscv/tcg/tcg-stub.c b/target/riscv/tcg/tcg-stub.c
 > new file mode 100644
-> index 0000000000..2ae6919b80
+> index 0000000000..dfe42ae2ac
 > --- /dev/null
-> +++ b/target/riscv/tcg/cpu.c
-> @@ -0,0 +1,98 @@
+> +++ b/target/riscv/tcg/tcg-stub.c
+> @@ -0,0 +1,25 @@
 > +/*
-> + * RISC-V CPU helpers (TCG specific)
+> + * QEMU RISC-V TCG stubs
 > + *
-> + * Copyright (c) 2016-2017 Sagar Karandikar, sagark@eecs.berkeley.edu
-> + * Copyright (c) 2017-2018 SiFive, Inc.
+> + * Copyright (c) 2023 Linaro
 > + *
 > + * SPDX-License-Identifier: GPL-2.0-or-later
 > + */
-> +
 > +#include "qemu/osdep.h"
 > +#include "cpu.h"
-> +#ifndef CONFIG_USER_ONLY
-> +#include "sysemu/cpu-timers.h"
-> +#endif
 > +
-> +void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
-> +                          uint64_t *cs_base, uint32_t *pflags)
+> +target_ulong riscv_cpu_get_fflags(CPURISCVState *env)
 > +{
-> +    CPUState *cs =3D env_cpu(env);
-> +    RISCVCPU *cpu =3D RISCV_CPU(cs);
-> +    RISCVExtStatus fs, vs;
-> +    uint32_t flags =3D 0;
-> +
-> +    *pc =3D env->xl =3D=3D MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
-> +    *cs_base =3D 0;
-> +
-> +    if (cpu->cfg.ext_zve32f) {
-> +        /*
-> +         * If env->vl equals to VLMAX, we can use generic vector operati=
-on
-> +         * expanders (GVEC) to accerlate the vector operations.
-> +         * However, as LMUL could be a fractional number. The maximum
-> +         * vector size can be operated might be less than 8 bytes,
-> +         * which is not supported by GVEC. So we set vl_eq_vlmax flag to=
- true
-> +         * only when maxsz >=3D 8 bytes.
-> +         */
-> +        uint32_t vlmax =3D vext_get_vlmax(cpu, env->vtype);
-> +        uint32_t sew =3D FIELD_EX64(env->vtype, VTYPE, VSEW);
-> +        uint32_t maxsz =3D vlmax << sew;
-> +        bool vl_eq_vlmax =3D (env->vstart =3D=3D 0) && (vlmax =3D=3D env=
-->vl) &&
-> +                           (maxsz >=3D 8);
-> +        flags =3D FIELD_DP32(flags, TB_FLAGS, VILL, env->vill);
-> +        flags =3D FIELD_DP32(flags, TB_FLAGS, SEW, sew);
-> +        flags =3D FIELD_DP32(flags, TB_FLAGS, LMUL,
-> +                           FIELD_EX64(env->vtype, VTYPE, VLMUL));
-> +        flags =3D FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
-> +        flags =3D FIELD_DP32(flags, TB_FLAGS, VTA,
-> +                           FIELD_EX64(env->vtype, VTYPE, VTA));
-> +        flags =3D FIELD_DP32(flags, TB_FLAGS, VMA,
-> +                           FIELD_EX64(env->vtype, VTYPE, VMA));
-> +        flags =3D FIELD_DP32(flags, TB_FLAGS, VSTART_EQ_ZERO, env->vstar=
-t =3D=3D 0);
-> +    } else {
-> +        flags =3D FIELD_DP32(flags, TB_FLAGS, VILL, 1);
-> +    }
-> +
-> +#ifdef CONFIG_USER_ONLY
-> +    fs =3D EXT_STATUS_DIRTY;
-> +    vs =3D EXT_STATUS_DIRTY;
-> +#else
-> +    flags =3D FIELD_DP32(flags, TB_FLAGS, PRIV, env->priv);
-> +
-> +    flags |=3D cpu_mmu_index(env, 0);
-> +    fs =3D get_field(env->mstatus, MSTATUS_FS);
-> +    vs =3D get_field(env->mstatus, MSTATUS_VS);
-> +
-> +    if (env->virt_enabled) {
-> +        flags =3D FIELD_DP32(flags, TB_FLAGS, VIRT_ENABLED, 1);
-> +        /*
-> +         * Merge DISABLED and !DIRTY states using MIN.
-> +         * We will set both fields when dirtying.
-> +         */
-> +        fs =3D MIN(fs, get_field(env->mstatus_hs, MSTATUS_FS));
-> +        vs =3D MIN(vs, get_field(env->mstatus_hs, MSTATUS_VS));
-> +    }
-> +
-> +    /* With Zfinx, floating point is enabled/disabled by Smstateen. */
-> +    if (!riscv_has_ext(env, RVF)) {
-> +        fs =3D (smstateen_acc_ok(env, 0, SMSTATEEN0_FCSR) =3D=3D RISCV_E=
-XCP_NONE)
-> +             ? EXT_STATUS_DIRTY : EXT_STATUS_DISABLED;
-> +    }
-> +
-> +    if (cpu->cfg.debug && !icount_enabled()) {
-> +        flags =3D FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_en=
-abled);
-> +    }
-> +#endif
-> +
-> +    flags =3D FIELD_DP32(flags, TB_FLAGS, FS, fs);
-> +    flags =3D FIELD_DP32(flags, TB_FLAGS, VS, vs);
-> +    flags =3D FIELD_DP32(flags, TB_FLAGS, XL, env->xl);
-> +    flags =3D FIELD_DP32(flags, TB_FLAGS, AXL, cpu_address_xl(env));
-> +    if (env->cur_pmmask !=3D 0) {
-> +        flags =3D FIELD_DP32(flags, TB_FLAGS, PM_MASK_ENABLED, 1);
-> +    }
-> +    if (env->cur_pmbase !=3D 0) {
-> +        flags =3D FIELD_DP32(flags, TB_FLAGS, PM_BASE_ENABLED, 1);
-> +    }
-> +
-> +    *pflags =3D flags;
+> +    g_assert_not_reached();
 > +}
-> diff --git a/target/riscv/tcg/meson.build b/target/riscv/tcg/meson.build
-> index 65670493b1..a615aafd9a 100644
-> --- a/target/riscv/tcg/meson.build
-> +++ b/target/riscv/tcg/meson.build
-> @@ -8,6 +8,7 @@ gen =3D [
->  riscv_ss.add(when: 'CONFIG_TCG', if_true: gen)
+> +
+> +void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong)
+> +{
+> +    g_assert_not_reached();
+> +}
+> +
+> +G_NORETURN void riscv_raise_exception(CPURISCVState *env,
+> +                                      uint32_t exception, uintptr_t pc)
+> +{
+> +    g_assert_not_reached();
+> +}
+> diff --git a/target/riscv/translate.c b/target/riscv/tcg/translate.c
+> similarity index 100%
+> rename from target/riscv/translate.c
+> rename to target/riscv/tcg/translate.c
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/tcg/vector_helpe=
+r.c
+> similarity index 100%
+> rename from target/riscv/vector_helper.c
+> rename to target/riscv/tcg/vector_helper.c
+> diff --git a/target/riscv/zce_helper.c b/target/riscv/tcg/zce_helper.c
+> similarity index 100%
+> rename from target/riscv/zce_helper.c
+> rename to target/riscv/tcg/zce_helper.c
+> diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+> index 8967dfaded..8ef47f43f9 100644
+> --- a/target/riscv/meson.build
+> +++ b/target/riscv/meson.build
+> @@ -1,34 +1,18 @@
+> -# FIXME extra_args should accept files()
+> -gen =3D [
+> -  decodetree.process('insn16.decode', extra_args: ['--static-decode=3Dde=
+code_insn16', '--insnwidth=3D16']),
+> -  decodetree.process('insn32.decode', extra_args: '--static-decode=3Ddec=
+ode_insn32'),
+> -  decodetree.process('xthead.decode', extra_args: '--static-decode=3Ddec=
+ode_xthead'),
+> -  decodetree.process('XVentanaCondOps.decode', extra_args: '--static-dec=
+ode=3Ddecode_XVentanaCodeOps'),
+> -]
+> -
+>  riscv_ss =3D ss.source_set()
+>  riscv_system_ss =3D ss.source_set()
 >
->  riscv_ss.add(when: 'CONFIG_TCG', if_true: files(
-> +  'cpu.c',
->    'fpu_helper.c',
->    'op_helper.c',
->    'vector_helper.c',
+> -riscv_ss.add(gen)
+>  riscv_ss.add(files(
+>    'cpu.c',
+>    'cpu_helper.c',
+>    'csr.c',
+> -  'fpu_helper.c',
+>    'gdbstub.c',
+> -  'op_helper.c',
+> -  'vector_helper.c',
+> -  'bitmanip_helper.c',
+> -  'translate.c',
+> -  'm128_helper.c',
+> -  'crypto_helper.c',
+> -  'zce_helper.c'
+>  ))
+>
+>  riscv_system_ss.add(files(
+>    'debug.c',
+>  ))
+>
+> +subdir('tcg')
+>  subdir('sysemu')
+>
+>  target_arch +=3D {'riscv': riscv_ss}
+> diff --git a/target/riscv/tcg/meson.build b/target/riscv/tcg/meson.build
+> new file mode 100644
+> index 0000000000..65670493b1
+> --- /dev/null
+> +++ b/target/riscv/tcg/meson.build
+> @@ -0,0 +1,19 @@
+> +# FIXME extra_args should accept files()
+> +gen =3D [
+> +  decodetree.process('insn16.decode', extra_args: ['--static-decode=3Dde=
+code_insn16', '--insnwidth=3D16']),
+> +  decodetree.process('insn32.decode', extra_args: '--static-decode=3Ddec=
+ode_insn32'),
+> +  decodetree.process('xthead.decode', extra_args: '--static-decode=3Ddec=
+ode_xthead'),
+> +  decodetree.process('XVentanaCondOps.decode', extra_args: '--static-dec=
+ode=3Ddecode_XVentanaCodeOps'),
+> +]
+> +riscv_ss.add(when: 'CONFIG_TCG', if_true: gen)
+> +
+> +riscv_ss.add(when: 'CONFIG_TCG', if_true: files(
+> +  'fpu_helper.c',
+> +  'op_helper.c',
+> +  'vector_helper.c',
+> +  'bitmanip_helper.c',
+> +  'translate.c',
+> +  'm128_helper.c',
+> +  'crypto_helper.c',
+> +  'zce_helper.c',
+> +), if_false: files('tcg-stub.c'))
 > --
 > 2.38.1
 >
