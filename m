@@ -4,89 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 836E4EB64DC
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Jul 2023 03:38:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41BA5EB64DA
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Jul 2023 05:40:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qLy0n-00081c-JB; Tue, 18 Jul 2023 23:38:01 -0400
+	id 1qLzuc-0004mT-NE; Wed, 19 Jul 2023 01:39:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qLy0m-00081I-2R
- for qemu-riscv@nongnu.org; Tue, 18 Jul 2023 23:38:00 -0400
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1qLzuT-0004jv-72
+ for qemu-riscv@nongnu.org; Wed, 19 Jul 2023 01:39:38 -0400
+Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qLy0k-00059X-Fj
- for qemu-riscv@nongnu.org; Tue, 18 Jul 2023 23:37:59 -0400
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-1b9e9765f2cso38478545ad.3
- for <qemu-riscv@nongnu.org>; Tue, 18 Jul 2023 20:37:57 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1qLzuN-00020j-66
+ for qemu-riscv@nongnu.org; Wed, 19 Jul 2023 01:39:36 -0400
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-51e6113437cso8799769a12.2
+ for <qemu-riscv@nongnu.org>; Tue, 18 Jul 2023 22:39:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1689737876; x=1692329876;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=p4FSI+TJXz+i2rFMQzor+Uv2E1K8lVetu4ZigiR9to8=;
- b=QDUqkKJDOnDucP6SMLgF+RvnSpsb7QIdkDcyMrM6VwtlmQlEOTQ8EYVIvPJDvM04B3
- z2tGb6g5UbliY5gPA7RWQotrtiDBDgNTEJeMJoJNfo42TqhT2ncqc5LCuLHPELwRHf0o
- zytZmjADH9yoNMX3LcS1pAmfMneB2iKk1IgSMnubxR8AaglbCZd+/rMdTAULomp/a4Xf
- H6+oIlhJV1iU3pY4XrB6qeZ9zDbnWLrfEGA6upJgROKCGCunmZ9THM8YZxXxYZhPhrO9
- USt/YaT9faMJlU3iqDUJrpt6cTJYytF4u+pY/i/Bv0HtgZDkqS94eadcN3qqjq6KafxK
- sjYQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689737876; x=1692329876;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=brainfault-org.20221208.gappssmtp.com; s=20221208; t=1689745168; x=1692337168;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=p4FSI+TJXz+i2rFMQzor+Uv2E1K8lVetu4ZigiR9to8=;
- b=CMQKFMOpjK87i94IqHT7AZfoqlHeg6z8FA8MUlZP1NMQB0pPKHY46FU1nUg2ZkXjsh
- DZfGyFqCi36kjVOCLfu0NGxbLISjd8DulW/nGrkGF7P4Nko2nI/Yy0leYaiUOktQBSD6
- /aRgbPEvw6KbeKleHLRCHtptZ2cZrRK+PAtd52MLJXLThGTV7ah4L9+FFiEEm8LGCi1w
- 23eXdq+uNws8rZ7XuFXZeKrMIH685u5+S6zTagUkobJzlyJS/Nad/kLpDyhf9ipKu8fC
- IiQxcofKIgJOXkB18SeNiCRJklgKb9isK3fsqE2EW+e2yf5KCWHkWBgD7DwGlFe1u47C
- i7NQ==
-X-Gm-Message-State: ABy/qLZCDFfi8xpA2kcUMgj1ZiBrYNOnnPRe2U4SOAdCiRBPIETMqSIv
- Kk3fonEFdVxRYTJzmy8Db0MSJw==
-X-Google-Smtp-Source: APBJJlG+dv6PQ4M39JK4muDuabBScOAkoBcZchJjg1Rd3T9raqT0Ug8GagFZYrYDifG2FMzsQ6gVfw==
-X-Received: by 2002:a17:902:ed54:b0:1a6:b496:4053 with SMTP id
- y20-20020a170902ed5400b001a6b4964053mr1250581plb.59.1689737875925; 
- Tue, 18 Jul 2023 20:37:55 -0700 (PDT)
-Received: from sunil-laptop ([106.51.83.242]) by smtp.gmail.com with ESMTPSA id
- a22-20020a170902b59600b001b86dd825e7sm2654579pls.108.2023.07.18.20.37.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jul 2023 20:37:55 -0700 (PDT)
-Date: Wed, 19 Jul 2023 09:07:48 +0530
-From: Sunil V L <sunilvl@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
- "Michael S . Tsirkin" <mst@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Shannon Zhao <shannon.zhaosl@gmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Andrew Jones <ajones@ventanamicro.com>,
- Anup Patel <apatel@ventanamicro.com>
-Subject: Re: [PATCH 04/10] hw/riscv: virt: Add PCIe HIGHMEM in memmap
-Message-ID: <ZLdajOyuPXxxaVJO@sunil-laptop>
-References: <20230712163943.98994-1-sunilvl@ventanamicro.com>
- <20230712163943.98994-5-sunilvl@ventanamicro.com>
- <6105a331-7c24-2c8e-a3ce-65c6080fd17f@ventanamicro.com>
+ bh=W5d/i/dGDjP7U09IXayOr3fCVVtIO7R7WGnAxr59wNc=;
+ b=KDukS+uZQKvAS8X5pXTiuWSQMFndxLo/Vfp8FLFqxAtCZnhjgSyUKP7ohFzo/txUZe
+ k7S9ASKYmsR9RZ4DM60gJZ/vaL+7QiWug3QtumrueRFNJ8a3pUOPDLV8/GK8pH5+vQUn
+ 9OkBrDJGmiCVMo0vicDJLlj3tC0+KvpH32kWsGOrXbqCaqZ0Cmqrjaxatpyf7ITimhQ5
+ gktIpgvFbXDksT9mZVVwvOqL9obd79pgLiWAu78bNs1qe1zxvaUQn4Nai4ZVeyS7aK3u
+ kLqI3mOlgz6yZNSxZduztaOXD3BsmY2N0XEaiyNntLJEyTzSbV8CDZeTISWmNDU5cBef
+ DGZw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1689745168; x=1692337168;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=W5d/i/dGDjP7U09IXayOr3fCVVtIO7R7WGnAxr59wNc=;
+ b=USQlWPoznjuSD2shiM6uY+lVYrck3goCtf3q8EUTNSMUuQhB9vZjJq1DLa29OEU0I4
+ cWjo8RDZNtSju3Bk1amY+wtuNbeXTlDcR4M3EzGxDdeI15/Vm8i/keLyh5JL/7xOasIT
+ f5Tpv6x/F3keSws8EocZ20FKeiVY9PkApqovD4vkc0vPtx1ckkdOChQQNqsuApa8AXAx
+ CJTx3aaTlC7JMwjYbs2UcNlF5N7pd854YIb6LXHXAjSp4j74ol3ek2YTZzp318h+qoxP
+ mQtTiJzlcZC8bpaL+N4w0S43jteQPXz0aNHE21L/4xbdR+Biz1u+Hn8f/AXa2D9g2FGc
+ 78iw==
+X-Gm-Message-State: ABy/qLbVM4CqgH9YAmauKdexb6Vq5fakboZHTWKYcb800bPBBVfzLgSN
+ E5p4yeJgevL9KJynqgpZNCo99V5vtfk8bU66trsFSA==
+X-Google-Smtp-Source: APBJJlH/GlG+OaY0TYtmINaM4/zxWvfhdaxOMwLYIqwf8jboX8rLirpqHIJK6G8cVG0vTx1esNxSjFfReIK4pv3jjKg=
+X-Received: by 2002:a05:6402:345:b0:51e:d76:25b2 with SMTP id
+ r5-20020a056402034500b0051e0d7625b2mr1503473edw.29.1689745168074; Tue, 18 Jul
+ 2023 22:39:28 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <6105a331-7c24-2c8e-a3ce-65c6080fd17f@ventanamicro.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x631.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+References: <20230712-stench-happiness-40c2ea831257@spud>
+ <3e9b5be8-d3ca-3a17-bef9-4a6a5bdc0ad0@ventanamicro.com>
+ <20230712-tulip-replica-0322e71c3e81@spud>
+ <744cbde6-7ce5-c327-3c5a-3858e994cc39@ventanamicro.com>
+ <20230712-superhero-rabid-578605f52927@spud>
+ <5dd3366d-13ba-c7fb-554f-549d97e7d4f9@ventanamicro.com>
+ <20230712-fancied-aviator-270f51166407@spud>
+ <20230713-craziness-lankiness-8aec3db24993@spud>
+ <CAAhSdy3J5HUoVP21jo11FBuAFSPSxHNKtuL7amn-5t7n_smoSg@mail.gmail.com>
+ <20230714-reoccur-confined-4b37494b1201@spud>
+ <20230714-hash-handwrite-339817b93ba1@spud>
+ <CAOnJCUL3=G_yV5cP5OjCGQKNvciNgXWnoQGUU4Bqh4iwnx6C4A@mail.gmail.com>
+ <CAKmqyKO3O87ETntm7pzMPedKW19ANpEp5nM4jFiHXO76K9saTQ@mail.gmail.com>
+In-Reply-To: <CAKmqyKO3O87ETntm7pzMPedKW19ANpEp5nM4jFiHXO76K9saTQ@mail.gmail.com>
+From: Anup Patel <anup@brainfault.org>
+Date: Wed, 19 Jul 2023 11:09:16 +0530
+Message-ID: <CAAhSdy1+wRpqoTFmBRNF7uFnc_fFCyCnt5ctoMu7zhTiu2GcTg@mail.gmail.com>
+Subject: Re: Boot failure after QEMU's upgrade to OpenSBI v1.3 (was Re: [PATCH
+ for-8.2 6/7] target/riscv: add 'max' CPU type)
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Atish Patra <atishp@atishpatra.org>, Anup Patel <apatel@ventanamicro.com>, 
+ Conor Dooley <conor.dooley@microchip.com>, Conor Dooley <conor@kernel.org>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, 
+ alistair.francis@wdc.com, bmeng@tinylab.org, liweiwei@iscas.ac.cn, 
+ zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com, 
+ opensbi@lists.infradead.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: none client-ip=2a00:1450:4864:20::533;
+ envelope-from=anup@brainfault.org; helo=mail-ed1-x533.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -103,80 +107,166 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jul 18, 2023 at 05:05:12PM -0300, Daniel Henrique Barboza wrote:
-> 
-> 
-> On 7/12/23 13:39, Sunil V L wrote:
-> > PCIe High MMIO base is actually dynamic and fixed at
-> > run time based on the RAM configured. Currently, this is
-> > not part of the memmap and kept in separate static variable
-> > in virt.c. However, ACPI code also needs this information
-> > to populate DSDT. So, once the base is discovered, merge
-> > this into the final memmap which can be used to create
-> > ACPI tables later.
-> > 
-> > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-> > ---
-> >   hw/riscv/virt.c         | 31 ++++++++++++++++++++++++++++++-
-> >   include/hw/riscv/virt.h |  9 +++++++--
-> >   2 files changed, 37 insertions(+), 3 deletions(-)
-> > 
-> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> > index f6067db8ec..7aee06f021 100644
-> > --- a/hw/riscv/virt.c
-> > +++ b/hw/riscv/virt.c
-> > @@ -84,6 +84,22 @@ static const MemMapEntry virt_memmap[] = {
-> >   static MemMapEntry virt_high_pcie_memmap;
-> > +/*
-> > + * virt_memmap doesn't include floating High Mem IO address entry. To enable
-> > + * code organization in multiple files (ex: ACPI), it is better to have single
-> > + * memmap which has complete information.
-> > + *
-> > + * VIRT_HIGH_PCIE_MMIO is always greater than the last memmap entry and hence
-> > + * full_virt_memmap is capable of holding both virt_memmap and
-> > + * VIRT_HIGH_PCIE_MMIO entry.
-> > + *
-> > + * The values for these floating entries will be updated when top of RAM is
-> > + * discovered.
-> > + */
-> > +static MemMapEntry full_virt_memmap[] = {
-> > +    [VIRT_HIGH_PCIE_MMIO] =     { 0x0, 0 },
-> > +};
-> > +
-> >   #define VIRT_FLASH_SECTOR_SIZE (256 * KiB)
-> >   static PFlashCFI01 *virt_flash_create1(RISCVVirtState *s,
-> > @@ -1444,7 +1460,20 @@ static void virt_machine_init(MachineState *machine)
-> >               ROUND_UP(virt_high_pcie_memmap.base, virt_high_pcie_memmap.size);
-> >       }
-> > -    s->memmap = virt_memmap;
-> > +    /*
-> > +     * Initialize the floating values in full memory map
-> > +     */
-> > +    full_virt_memmap[VIRT_HIGH_PCIE_MMIO].base = virt_high_pcie_memmap.base;
-> > +    full_virt_memmap[VIRT_HIGH_PCIE_MMIO].size = virt_high_pcie_memmap.size;
-> > +
-> > +    s->memmap = full_virt_memmap;
-> > +    /*
-> > +     * Copy the base virt_memmap entries to full memmap
-> > +     */
-> > +    for (i = 0; i < ARRAY_SIZE(virt_memmap); i++) {
-> > +        s->memmap[i] = virt_memmap[i];
-> > +    }
-> > +
-> 
-> This change here kind of convinces me of the point I made earlier in patch 2:
-> we can simplify gpex_pcie_init() to use just the RISCVVirtState as a parameter
-> and get everything else from it.
-> 
-> It's also something for a follow-up. As for this patch:
-> 
-> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> 
-Thanks Daniel. I agree. I can send another follow-up patch to simplify
-gpex_pcie_init.
+On Wed, Jul 19, 2023 at 7:03=E2=80=AFAM Alistair Francis <alistair23@gmail.=
+com> wrote:
+>
+> On Sat, Jul 15, 2023 at 7:14=E2=80=AFPM Atish Patra <atishp@atishpatra.or=
+g> wrote:
+> >
+> > On Fri, Jul 14, 2023 at 5:29=E2=80=AFAM Conor Dooley <conor@kernel.org>=
+ wrote:
+> > >
+> > > On Fri, Jul 14, 2023 at 11:19:34AM +0100, Conor Dooley wrote:
+> > > > On Fri, Jul 14, 2023 at 10:00:19AM +0530, Anup Patel wrote:
+> > > >
+> > > > > > > OpenSBI v1.3
+> > > > > > >    ____                    _____ ____ _____
+> > > > > > >   / __ \                  / ____|  _ \_   _|
+> > > > > > >  | |  | |_ __   ___ _ __ | (___ | |_) || |
+> > > > > > >  | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+> > > > > > >  | |__| | |_) |  __/ | | |____) | |_) || |_
+> > > > > > >   \____/| .__/ \___|_| |_|_____/|___/_____|
+> > > > > > >         | |
+> > > > > > >         |_|
+> > > > > > >
+> > > > > > > init_coldboot: ipi init failed (error -1009)
+> > > > > > >
+> > > > > > > Just to note, because we use our own firmware that vendors in=
+ OpenSBI
+> > > > > > > and compiles only a significantly cut down number of files fr=
+om it, we
+> > > > > > > do not use the fw_dynamic etc flow on our hardware. As a resu=
+lt, we have
+> > > > > > > not tested v1.3, nor do we have any immediate plans to change=
+ our
+> > > > > > > platform firmware to vendor v1.3 either.
+> > > > > > >
+> > > > > > > I unless there's something obvious to you, it sounds like I w=
+ill need to
+> > > > > > > go and bisect OpenSBI. That's a job for another day though, g=
+iven the
+> > > > > > > time.
+> > > > > > >
+> > > > >
+> > > > > The real issue is some CPU/HART DT nodes marked as disabled in th=
+e
+> > > > > DT passed to OpenSBI 1.3.
+> > > > >
+> > > > > This issue does not exist in any of the DTs generated by QEMU but=
+ some
+> > > > > of the DTs in the kernel (such as microchip and SiFive board DTs)=
+ have
+> > > > > the E-core disabled.
+> > > > >
+> > > > > I had discovered this issue in a totally different context after =
+the OpenSBI 1.3
+> > > > > release happened. This issue is already fixed in the latest OpenS=
+BI by the
+> > > > > following commit c6a35733b74aeff612398f274ed19a74f81d1f37 ("lib: =
+utils:
+> > > > > Fix sbi_hartid_to_scratch() usage in ACLINT drivers").
+> > > >
+> > > > Great, thanks Anup! I thought I had tested tip-of-tree too, but
+> > > > obviously not.
+> > > >
+> > > > > I always assumed that Microchip hss.bin is the preferred BIOS for=
+ the
+> > > > > QEMU microchip-icicle-kit machine but I guess that's not true.
+> > > >
+> > > > Unfortunately the HSS has not worked in QEMU for a long time, and w=
+hile
+> > > > I would love to fix it, but am pretty stretched for spare time to b=
+egin
+> > > > with.
+> > > > I usually just do direct kernel boots, which use the OpenSBI that c=
+omes
+> > > > with QEMU, as I am sure you already know :)
+> > > >
+> > > > > At this point, you can either:
+> > > > > 1) Use latest OpenSBI on QEMU microchip-icicle-kit machine
+> > >
+> > > I forgot to reply to this point, wondering what should be done with
+> > > QEMU. Bumping to v1.3 in QEMU introduces a regression here, regardles=
+s
+> > > of whether I can go and build a fixed version of OpenSBI.
+> > >
+> > FYI: The no-map fix went in OpenSBI v1.3. Without the upgrade, any
+> > user using the latest kernel (> v6.4)
+> > may hit those random linear map related issues (in hibernation or EFI
+> > booting path).
+> >
+> > There are three possible scenarios:
+> >
+> > 1. Upgrade to OpenSBI v1.3: Any user of microchip-icicle-kit machine
+> > or sifive fu540 machine users
+> > may hit this issue if the device tree has the disabled hart (e core).
+> > 2. No upgrade to OpenSBI v1.2. Any user using hibernation or UEFI may
+> > have issues [1]
+> > 3. Include a non-release version OpenSBI in Qemu with the fix as an exc=
+eption.
+> >
+> > #3 probably deviates from policy and sets a bad precedent. So I am not
+> > advocating for it though ;)
+> > For both #1 & #2, the solution would be to use the latest OpenSBI in
+> > -bios argument instead of the stock one.
+> > I could be wrong but my guess is the number of users facing #2 would
+> > be higher than #1.
+>
+> Thanks for that info Atish!
+>
+> We are stuck in a bad situation.
+>
+> The best solution would be if OpenSBI can release a 1.3.1, @Anup Patel
+> do you think you could do that?
 
-Thanks,
-Sunil
+OpenSBI has a major number and minor number in the version but it does
+not have release/patch number so best would be to treat OpenSBI vX.Y.Z
+as bug fixes on-top-of OpenSBI vX.Y. In other words, supervisor software
+won't be able to differentiate between OpenSBI vX.Y.Z and OpenSBI vX.Y
+using sbi_get_impl_version().
 
+There are only three commits between the ACLINT fix and OpenSBI v1.3
+so as one-of case I will go ahead create OpenSBI v1.3.1 containing only
+four commits on-top of OpenSBI v1.3
 
+Does this sound okay ?
+
+>
+> Otherwise I think we should stick with OpenSBI 1.3. Considering that
+> it fixes UEFI boot issues for the virt board (which would be the most
+> used) it seems like a best call to make. People using the other boards
+> are unfortunately stuck building their own OpenSBI release.
+>
+> If there is no OpenSBI 1.3.1 release we should add something to the
+> release notes. @Conor Dooley are you able to give a clear sentence on
+> how the boot fails?
+>
+> Alistair
+>
+> >
+> > [1] https://lore.kernel.org/linux-riscv/20230625140931.1266216-1-songsh=
+uaishuai@tinylab.org/
+> > > > > 2) Ensure CPU0 DT node is enabled in DT when booting on QEMU
+> > > > >     microchip-icicle-kit machine with OpenSBI 1.3
+> > > >
+> > > > Will OpenSBI disable it? If not, I think option 2) needs to be remo=
+ve
+> > > > the DT node. I'll just use tip-of-tree myself & up to the
+> > >
+> > > Clearly didn't finish this comment. It was meant to say "up to the QE=
+MU
+> > > maintainers what they want to do on the QEMU side of things".
+> > >
+> > > Thanks,
+> > > Conor.
+> >
+> >
+> >
+> > --
+> > Regards,
+> > Atish
+> >
+
+Regards,
+Anup
 
