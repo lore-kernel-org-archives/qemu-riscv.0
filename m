@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5F0CEB64DD
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Jul 2023 01:04:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE09BEB64DD
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Jul 2023 01:05:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qLvbi-00027P-88; Tue, 18 Jul 2023 21:03:58 -0400
+	id 1qLvcm-0002x6-GL; Tue, 18 Jul 2023 21:05:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qLvbe-00020I-Pm; Tue, 18 Jul 2023 21:03:54 -0400
-Received: from mail-vs1-xe32.google.com ([2607:f8b0:4864:20::e32])
+ id 1qLvcf-0002ra-Gl; Tue, 18 Jul 2023 21:04:57 -0400
+Received: from mail-ua1-x935.google.com ([2607:f8b0:4864:20::935])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qLvbb-0007xW-RS; Tue, 18 Jul 2023 21:03:54 -0400
-Received: by mail-vs1-xe32.google.com with SMTP id
- ada2fe7eead31-446e8355203so425440137.3; 
- Tue, 18 Jul 2023 18:03:51 -0700 (PDT)
+ id 1qLvcd-000061-7B; Tue, 18 Jul 2023 21:04:57 -0400
+Received: by mail-ua1-x935.google.com with SMTP id
+ a1e0cc1a2514c-791b8500a1dso1786811241.1; 
+ Tue, 18 Jul 2023 18:04:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1689728630; x=1692320630;
+ d=gmail.com; s=20221208; t=1689728690; x=1692320690;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=q74qDzO1rVoFNt1s44E7atU8GlOTUQvVA8eYLXCeC6k=;
- b=OGzrZV+Q5NUn/ISe9ufNBuvT4XGe4MDa/V7bEfHpbRqkZ1kRgK50RLblKuYscKDShZ
- sqVtDbO/JOZAzHbpfYzj7+duqrMto5GE6/C0gfsYLnNmxVEGZs2kPUiYNfwsxOabPaeU
- QLVih4wQzDRU48RpDAUc2cK/l4eqlmxgK16c+k+fZ8PoIFDUjLkyHzV6+qVXW3vedEmp
- FVGyB92LsNOVHK78ugLnArYhYEswjhHu3a5iT4LSRnndbDkhI3pl5370L2+pZQ80peIA
- 38+qLkpnA3a0VYNvcEZLoPR5vVXzXv8sg5lY7YSVUitp25qw3KCuar8DNadRVSXD8L8z
- UCLg==
+ bh=MrW8iA9kapKbgLQ+U8chQg6whUytUweiVRdQblGzbg0=;
+ b=la/fvLf4CZY5Bnblwm000OBwX166fksXEG90qSobw4uOa2N/ph6bfCVJOkxnpEgkZj
+ wg3YovwMYbC1PQkELtjb/nlqHIekWhOl1pUDxyC5aOnfGdehw0k59/Dp3MgaDNIab1H5
+ XrIDV+hPo0Ln3o4PzMu4Cmi1Mp/fAN+Nq0VWS38DMWxd8PMJIx/VsqSCPANgg0OIin7c
+ Qg73ZUx4bmfjNg7LKbM9lNH8jArQyMrhuhkYuCJthPBB3HHmUuECPE3IESUg1FqNwMBo
+ BlOEUkff3SWmn1rSn5BRZ2huWaubkTiJAcuCd8+daSK/hJJV7F74rSxQw7oJihXRTWY+
+ xAmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689728630; x=1692320630;
+ d=1e100.net; s=20221208; t=1689728690; x=1692320690;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=q74qDzO1rVoFNt1s44E7atU8GlOTUQvVA8eYLXCeC6k=;
- b=VcMXzY6IoqsbEbMLnaraQN/6C2BsJ1rrhEtcQerYP1btIC9RFUZ8ufga8K6LXjAAG5
- sUVAQprSoMXMygU8rdx8hwVonNxrTQ2t2p17eb5LE/jHq+fXMorFW2Dbq6480otFAtAf
- IhqiGW94bU6MEGt1qcEXk4QaWLjDGfW/p6y09iRCB0Uezzdv4yM2+HXzDhhmIn4n4N87
- q2xzlmlP/TyCQpAbT7zSUoaNbs/wxMFtvZyAjRkTfWLfb3RnbSLzaUtKOCW5F52cA9/C
- Ma+RItT1lpe4KerLAqsum/tOyx2ZBl/nELp3EZRZnTN+bBzUKD16U2osA1M3me44+Aq3
- 9JxQ==
-X-Gm-Message-State: ABy/qLbozAxvp6mL44nE3UgWPwy2Q7eMDc1/3+EIVZ5F205Zvmd1q9ds
- XkILLSoOeEOVGtPUMd6fbNOO44+8yCByd4bDIfU=
-X-Google-Smtp-Source: APBJJlEZLi+dfdsKQpYNeHRQ3nhhFvkxtu4AmRyjCRvURy2bld4FfqYJY/GEnwtUziF8WuNlnep/9y8bLq5416CkcJM=
-X-Received: by 2002:a67:f84d:0:b0:443:a4d2:86b9 with SMTP id
- b13-20020a67f84d000000b00443a4d286b9mr10145498vsp.0.1689728630521; Tue, 18
- Jul 2023 18:03:50 -0700 (PDT)
+ bh=MrW8iA9kapKbgLQ+U8chQg6whUytUweiVRdQblGzbg0=;
+ b=fd2NVGiO8V50h9HWCUajidDZ3uKmDR2ZN2TgYKSVUWE0UvAXSpuZdnIxVjHG2W16nQ
+ HpAI5/NbIQhc6claRj11tMc4BcSaNf5o7Hap7m3hTn7IdxEvXXRJt6IvTJehZo2GQRC1
+ jTLEXqVB49R/kBoa+P+Lu68cvUL32SF2RnPBexYp+502GMwO4dVn/jnxIPwp7QAuga51
+ k5RTyQ5Qyl7AnvDwoofgxKYFq1OfIxX2Jpc6529mB6SEFSHjwQyENLEWMUgkAtuV2BQw
+ fnuhzDN1ENKNKVGmknoTs41URIrCs2CLmwONcrUGA9nTplUigdMzzmVUu+mKes9s5ix5
+ 9LsA==
+X-Gm-Message-State: ABy/qLYMOYOHg7rYExvFiRXxz8RxUVBu2iZZwMtmJpdkp8rwL1MU1s90
+ hIWP5a1098r/j+Mk+521TMqiF28+WFwyGpWwN6E=
+X-Google-Smtp-Source: APBJJlEOZsjtuZviXXLw0Vr2tsNCuBMSyS5s/QLMNXTOiARa2/lvHvZVyk4hj45HC78ETJFXqmZBrMDVIfbplt9AYXA=
+X-Received: by 2002:a1f:4ac2:0:b0:481:30bb:991f with SMTP id
+ x185-20020a1f4ac2000000b0048130bb991fmr435359vka.15.1689728690502; Tue, 18
+ Jul 2023 18:04:50 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230711121453.59138-1-philmd@linaro.org>
- <20230711121453.59138-11-philmd@linaro.org>
-In-Reply-To: <20230711121453.59138-11-philmd@linaro.org>
+ <20230711121453.59138-12-philmd@linaro.org>
+In-Reply-To: <20230711121453.59138-12-philmd@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 19 Jul 2023 11:03:24 +1000
-Message-ID: <CAKmqyKOcVm0+Dux3WcFqhWj4pD-urt68+ds7ofh3NEjOMEV0aA@mail.gmail.com>
-Subject: Re: [PATCH v3 10/16] target/riscv: Extract TCG-specific code from
- debug.c
+Date: Wed, 19 Jul 2023 11:04:24 +1000
+Message-ID: <CAKmqyKOoO3Vs4CJTiYETEQMYW1ZegqaU+2tWGj2eGHZy6dyBUw@mail.gmail.com>
+Subject: Re: [PATCH v3 11/16] target/riscv: Move sysemu-specific debug files
+ to target/riscv/sysemu/
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e32;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::935;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x935.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -90,11 +90,8 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jul 11, 2023 at 10:21=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
+On Tue, Jul 11, 2023 at 10:22=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
 <philmd@linaro.org> wrote:
->
-> Extract TCG-specific code from debug.c to tcg/sysemu/debug.c,
-> restrict the prototypes to TCG, adapt meson rules.
 >
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 
@@ -103,398 +100,77 @@ Acked-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/debug.h                |   2 +
->  target/riscv/debug.c                | 148 -------------------------
->  target/riscv/tcg/sysemu/debug.c     | 165 ++++++++++++++++++++++++++++
->  target/riscv/tcg/meson.build        |   2 +
->  target/riscv/tcg/sysemu/meson.build |   3 +
->  5 files changed, 172 insertions(+), 148 deletions(-)
->  create mode 100644 target/riscv/tcg/sysemu/debug.c
->  create mode 100644 target/riscv/tcg/sysemu/meson.build
+>  target/riscv/cpu.h                | 2 +-
+>  target/riscv/{ =3D> sysemu}/debug.h | 0
+>  target/riscv/cpu_helper.c         | 2 +-
+>  target/riscv/{ =3D> sysemu}/debug.c | 0
+>  target/riscv/meson.build          | 4 ----
+>  target/riscv/sysemu/meson.build   | 1 +
+>  6 files changed, 3 insertions(+), 6 deletions(-)
+>  rename target/riscv/{ =3D> sysemu}/debug.h (100%)
+>  rename target/riscv/{ =3D> sysemu}/debug.c (100%)
 >
-> diff --git a/target/riscv/debug.h b/target/riscv/debug.h
-> index 65cd45b8f3..0b3bdd5be1 100644
-> --- a/target/riscv/debug.h
-> +++ b/target/riscv/debug.h
-> @@ -139,9 +139,11 @@ void tdata_csr_write(CPURISCVState *env, int tdata_i=
-ndex, target_ulong val);
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 0602b948d4..8d8e30d6c1 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -94,7 +94,7 @@ typedef enum {
 >
->  target_ulong tinfo_csr_read(CPURISCVState *env);
+>  #if !defined(CONFIG_USER_ONLY)
+>  #include "sysemu/pmp.h"
+> -#include "debug.h"
+> +#include "sysemu/debug.h"
+>  #endif
 >
-> +#ifdef CONFIG_TCG
->  void riscv_cpu_debug_excp_handler(CPUState *cs);
->  bool riscv_cpu_debug_check_breakpoint(CPUState *cs);
->  bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp);
-> +#endif
+>  #define RV_VLEN_MAX 1024
+> diff --git a/target/riscv/debug.h b/target/riscv/sysemu/debug.h
+> similarity index 100%
+> rename from target/riscv/debug.h
+> rename to target/riscv/sysemu/debug.h
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 6f8778c6d3..6c773000a5 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -32,7 +32,7 @@
+>  #include "sysemu/cpu-timers.h"
+>  #endif
+>  #include "cpu_bits.h"
+> -#include "debug.h"
+> +#include "sysemu/debug.h"
+>  #include "tcg/oversized-guest.h"
 >
->  void riscv_trigger_init(CPURISCVState *env);
+>  int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
+> diff --git a/target/riscv/debug.c b/target/riscv/sysemu/debug.c
+> similarity index 100%
+> rename from target/riscv/debug.c
+> rename to target/riscv/sysemu/debug.c
+> diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+> index 8ef47f43f9..49cdcde679 100644
+> --- a/target/riscv/meson.build
+> +++ b/target/riscv/meson.build
+> @@ -8,10 +8,6 @@ riscv_ss.add(files(
+>    'gdbstub.c',
+>  ))
 >
-> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-> index 5676f2c57e..45a2605d8a 100644
-> --- a/target/riscv/debug.c
-> +++ b/target/riscv/debug.c
-> @@ -754,154 +754,6 @@ target_ulong tinfo_csr_read(CPURISCVState *env)
->             BIT(TRIGGER_TYPE_AD_MATCH6);
->  }
+> -riscv_system_ss.add(files(
+> -  'debug.c',
+> -))
+> -
+>  subdir('tcg')
+>  subdir('sysemu')
 >
-> -void riscv_cpu_debug_excp_handler(CPUState *cs)
-> -{
-> -    RISCVCPU *cpu =3D RISCV_CPU(cs);
-> -    CPURISCVState *env =3D &cpu->env;
-> -
-> -    if (cs->watchpoint_hit) {
-> -        if (cs->watchpoint_hit->flags & BP_CPU) {
-> -            do_trigger_action(env, DBG_ACTION_BP);
-> -        }
-> -    } else {
-> -        if (cpu_breakpoint_test(cs, env->pc, BP_CPU)) {
-> -            do_trigger_action(env, DBG_ACTION_BP);
-> -        }
-> -    }
-> -}
-> -
-> -bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
-> -{
-> -    RISCVCPU *cpu =3D RISCV_CPU(cs);
-> -    CPURISCVState *env =3D &cpu->env;
-> -    CPUBreakpoint *bp;
-> -    target_ulong ctrl;
-> -    target_ulong pc;
-> -    int trigger_type;
-> -    int i;
-> -
-> -    QTAILQ_FOREACH(bp, &cs->breakpoints, entry) {
-> -        for (i =3D 0; i < RV_MAX_TRIGGERS; i++) {
-> -            trigger_type =3D get_trigger_type(env, i);
-> -
-> -            switch (trigger_type) {
-> -            case TRIGGER_TYPE_AD_MATCH:
-> -                /* type 2 trigger cannot be fired in VU/VS mode */
-> -                if (env->virt_enabled) {
-> -                    return false;
-> -                }
-> -
-> -                ctrl =3D env->tdata1[i];
-> -                pc =3D env->tdata2[i];
-> -
-> -                if ((ctrl & TYPE2_EXEC) && (bp->pc =3D=3D pc)) {
-> -                    /* check U/S/M bit against current privilege level *=
-/
-> -                    if ((ctrl >> 3) & BIT(env->priv)) {
-> -                        return true;
-> -                    }
-> -                }
-> -                break;
-> -            case TRIGGER_TYPE_AD_MATCH6:
-> -                ctrl =3D env->tdata1[i];
-> -                pc =3D env->tdata2[i];
-> -
-> -                if ((ctrl & TYPE6_EXEC) && (bp->pc =3D=3D pc)) {
-> -                    if (env->virt_enabled) {
-> -                        /* check VU/VS bit against current privilege lev=
-el */
-> -                        if ((ctrl >> 23) & BIT(env->priv)) {
-> -                            return true;
-> -                        }
-> -                    } else {
-> -                        /* check U/S/M bit against current privilege lev=
-el */
-> -                        if ((ctrl >> 3) & BIT(env->priv)) {
-> -                            return true;
-> -                        }
-> -                    }
-> -                }
-> -                break;
-> -            default:
-> -                /* other trigger types are not supported or irrelevant *=
-/
-> -                break;
-> -            }
-> -        }
-> -    }
-> -
-> -    return false;
-> -}
-> -
-> -bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
-> -{
-> -    RISCVCPU *cpu =3D RISCV_CPU(cs);
-> -    CPURISCVState *env =3D &cpu->env;
-> -    target_ulong ctrl;
-> -    target_ulong addr;
-> -    int trigger_type;
-> -    int flags;
-> -    int i;
-> -
-> -    for (i =3D 0; i < RV_MAX_TRIGGERS; i++) {
-> -        trigger_type =3D get_trigger_type(env, i);
-> -
-> -        switch (trigger_type) {
-> -        case TRIGGER_TYPE_AD_MATCH:
-> -            /* type 2 trigger cannot be fired in VU/VS mode */
-> -            if (env->virt_enabled) {
-> -                return false;
-> -            }
-> -
-> -            ctrl =3D env->tdata1[i];
-> -            addr =3D env->tdata2[i];
-> -            flags =3D 0;
-> -
-> -            if (ctrl & TYPE2_LOAD) {
-> -                flags |=3D BP_MEM_READ;
-> -            }
-> -            if (ctrl & TYPE2_STORE) {
-> -                flags |=3D BP_MEM_WRITE;
-> -            }
-> -
-> -            if ((wp->flags & flags) && (wp->vaddr =3D=3D addr)) {
-> -                /* check U/S/M bit against current privilege level */
-> -                if ((ctrl >> 3) & BIT(env->priv)) {
-> -                    return true;
-> -                }
-> -            }
-> -            break;
-> -        case TRIGGER_TYPE_AD_MATCH6:
-> -            ctrl =3D env->tdata1[i];
-> -            addr =3D env->tdata2[i];
-> -            flags =3D 0;
-> -
-> -            if (ctrl & TYPE6_LOAD) {
-> -                flags |=3D BP_MEM_READ;
-> -            }
-> -            if (ctrl & TYPE6_STORE) {
-> -                flags |=3D BP_MEM_WRITE;
-> -            }
-> -
-> -            if ((wp->flags & flags) && (wp->vaddr =3D=3D addr)) {
-> -                if (env->virt_enabled) {
-> -                    /* check VU/VS bit against current privilege level *=
-/
-> -                    if ((ctrl >> 23) & BIT(env->priv)) {
-> -                        return true;
-> -                    }
-> -                } else {
-> -                    /* check U/S/M bit against current privilege level *=
-/
-> -                    if ((ctrl >> 3) & BIT(env->priv)) {
-> -                        return true;
-> -                    }
-> -                }
-> -            }
-> -            break;
-> -        default:
-> -            /* other trigger types are not supported */
-> -            break;
-> -        }
-> -    }
-> -
-> -    return false;
-> -}
-> -
->  void riscv_trigger_init(CPURISCVState *env)
->  {
->      target_ulong tdata1 =3D build_tdata1(env, TRIGGER_TYPE_AD_MATCH, 0, =
-0);
-> diff --git a/target/riscv/tcg/sysemu/debug.c b/target/riscv/tcg/sysemu/de=
-bug.c
-> new file mode 100644
-> index 0000000000..cdd6744b3a
-> --- /dev/null
-> +++ b/target/riscv/tcg/sysemu/debug.c
-> @@ -0,0 +1,165 @@
-> +/*
-> + * QEMU RISC-V Native Debug Support (TCG specific)
-> + *
-> + * Copyright (c) 2022 Wind River Systems, Inc.
-> + *
-> + * Author:
-> + *   Bin Meng <bin.meng@windriver.com>
-> + *
-> + * This provides the native debug support via the Trigger Module, as def=
-ined
-> + * in the RISC-V Debug Specification:
-> + * https://github.com/riscv/riscv-debug-spec/raw/master/riscv-debug-stab=
-le.pdf
-> + *
-> + * SPDX-License-Identifier: GPL-2.0-or-later
-> + */
-> +
-> +#include "qemu/osdep.h"
-> +#include "cpu.h"
-> +
-> +void riscv_cpu_debug_excp_handler(CPUState *cs)
-> +{
-> +    RISCVCPU *cpu =3D RISCV_CPU(cs);
-> +    CPURISCVState *env =3D &cpu->env;
-> +
-> +    if (cs->watchpoint_hit) {
-> +        if (cs->watchpoint_hit->flags & BP_CPU) {
-> +            do_trigger_action(env, DBG_ACTION_BP);
-> +        }
-> +    } else {
-> +        if (cpu_breakpoint_test(cs, env->pc, BP_CPU)) {
-> +            do_trigger_action(env, DBG_ACTION_BP);
-> +        }
-> +    }
-> +}
-> +
-> +bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
-> +{
-> +    RISCVCPU *cpu =3D RISCV_CPU(cs);
-> +    CPURISCVState *env =3D &cpu->env;
-> +    CPUBreakpoint *bp;
-> +    target_ulong ctrl;
-> +    target_ulong pc;
-> +    int trigger_type;
-> +    int i;
-> +
-> +    QTAILQ_FOREACH(bp, &cs->breakpoints, entry) {
-> +        for (i =3D 0; i < RV_MAX_TRIGGERS; i++) {
-> +            trigger_type =3D get_trigger_type(env, i);
-> +
-> +            switch (trigger_type) {
-> +            case TRIGGER_TYPE_AD_MATCH:
-> +                /* type 2 trigger cannot be fired in VU/VS mode */
-> +                if (env->virt_enabled) {
-> +                    return false;
-> +                }
-> +
-> +                ctrl =3D env->tdata1[i];
-> +                pc =3D env->tdata2[i];
-> +
-> +                if ((ctrl & TYPE2_EXEC) && (bp->pc =3D=3D pc)) {
-> +                    /* check U/S/M bit against current privilege level *=
-/
-> +                    if ((ctrl >> 3) & BIT(env->priv)) {
-> +                        return true;
-> +                    }
-> +                }
-> +                break;
-> +            case TRIGGER_TYPE_AD_MATCH6:
-> +                ctrl =3D env->tdata1[i];
-> +                pc =3D env->tdata2[i];
-> +
-> +                if ((ctrl & TYPE6_EXEC) && (bp->pc =3D=3D pc)) {
-> +                    if (env->virt_enabled) {
-> +                        /* check VU/VS bit against current privilege lev=
-el */
-> +                        if ((ctrl >> 23) & BIT(env->priv)) {
-> +                            return true;
-> +                        }
-> +                    } else {
-> +                        /* check U/S/M bit against current privilege lev=
-el */
-> +                        if ((ctrl >> 3) & BIT(env->priv)) {
-> +                            return true;
-> +                        }
-> +                    }
-> +                }
-> +                break;
-> +            default:
-> +                /* other trigger types are not supported or irrelevant *=
-/
-> +                break;
-> +            }
-> +        }
-> +    }
-> +
-> +    return false;
-> +}
-> +
-> +bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
-> +{
-> +    RISCVCPU *cpu =3D RISCV_CPU(cs);
-> +    CPURISCVState *env =3D &cpu->env;
-> +    target_ulong ctrl;
-> +    target_ulong addr;
-> +    int trigger_type;
-> +    int flags;
-> +    int i;
-> +
-> +    for (i =3D 0; i < RV_MAX_TRIGGERS; i++) {
-> +        trigger_type =3D get_trigger_type(env, i);
-> +
-> +        switch (trigger_type) {
-> +        case TRIGGER_TYPE_AD_MATCH:
-> +            /* type 2 trigger cannot be fired in VU/VS mode */
-> +            if (env->virt_enabled) {
-> +                return false;
-> +            }
-> +
-> +            ctrl =3D env->tdata1[i];
-> +            addr =3D env->tdata2[i];
-> +            flags =3D 0;
-> +
-> +            if (ctrl & TYPE2_LOAD) {
-> +                flags |=3D BP_MEM_READ;
-> +            }
-> +            if (ctrl & TYPE2_STORE) {
-> +                flags |=3D BP_MEM_WRITE;
-> +            }
-> +
-> +            if ((wp->flags & flags) && (wp->vaddr =3D=3D addr)) {
-> +                /* check U/S/M bit against current privilege level */
-> +                if ((ctrl >> 3) & BIT(env->priv)) {
-> +                    return true;
-> +                }
-> +            }
-> +            break;
-> +        case TRIGGER_TYPE_AD_MATCH6:
-> +            ctrl =3D env->tdata1[i];
-> +            addr =3D env->tdata2[i];
-> +            flags =3D 0;
-> +
-> +            if (ctrl & TYPE6_LOAD) {
-> +                flags |=3D BP_MEM_READ;
-> +            }
-> +            if (ctrl & TYPE6_STORE) {
-> +                flags |=3D BP_MEM_WRITE;
-> +            }
-> +
-> +            if ((wp->flags & flags) && (wp->vaddr =3D=3D addr)) {
-> +                if (env->virt_enabled) {
-> +                    /* check VU/VS bit against current privilege level *=
-/
-> +                    if ((ctrl >> 23) & BIT(env->priv)) {
-> +                        return true;
-> +                    }
-> +                } else {
-> +                    /* check U/S/M bit against current privilege level *=
-/
-> +                    if ((ctrl >> 3) & BIT(env->priv)) {
-> +                        return true;
-> +                    }
-> +                }
-> +            }
-> +            break;
-> +        default:
-> +            /* other trigger types are not supported */
-> +            break;
-> +        }
-> +    }
-> +
-> +    return false;
-> +}
-> diff --git a/target/riscv/tcg/meson.build b/target/riscv/tcg/meson.build
-> index a615aafd9a..933d340799 100644
-> --- a/target/riscv/tcg/meson.build
-> +++ b/target/riscv/tcg/meson.build
-> @@ -18,3 +18,5 @@ riscv_ss.add(when: 'CONFIG_TCG', if_true: files(
->    'crypto_helper.c',
->    'zce_helper.c',
->  ), if_false: files('tcg-stub.c'))
-> +
-> +subdir('sysemu')
-> diff --git a/target/riscv/tcg/sysemu/meson.build b/target/riscv/tcg/sysem=
-u/meson.build
-> new file mode 100644
-> index 0000000000..e8e61e5784
-> --- /dev/null
-> +++ b/target/riscv/tcg/sysemu/meson.build
-> @@ -0,0 +1,3 @@
-> +riscv_system_ss.add(when: 'CONFIG_TCG', if_true: files(
+> diff --git a/target/riscv/sysemu/meson.build b/target/riscv/sysemu/meson.=
+build
+> index 64de0256a5..e902ba2dad 100644
+> --- a/target/riscv/sysemu/meson.build
+> +++ b/target/riscv/sysemu/meson.build
+> @@ -1,5 +1,6 @@
+>  riscv_system_ss.add(files(
+>    'arch_dump.c',
 > +  'debug.c',
-> +))
+>    'machine.c',
+>    'monitor.c',
+>    'pmp.c',
 > --
 > 2.38.1
 >
