@@ -4,72 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4456CEB64DC
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Jul 2023 01:21:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C73FBEB64DC
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Jul 2023 01:22:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qLvsD-0002va-79; Tue, 18 Jul 2023 21:21:01 -0400
+	id 1qLvtC-0003fF-G5; Tue, 18 Jul 2023 21:22:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1qLvsB-0002tY-Uw; Tue, 18 Jul 2023 21:20:59 -0400
-Received: from smtp81.cstnet.cn ([159.226.251.81] helo=cstnet.cn)
- by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1qLvs9-0003IG-Hm; Tue, 18 Jul 2023 21:20:59 -0400
-Received: from [192.168.0.120] (unknown [180.175.26.191])
- by APP-03 (Coremail) with SMTP id rQCowAC312RrOrdkEJddDA--.3278S2;
- Wed, 19 Jul 2023 09:20:43 +0800 (CST)
-Message-ID: <07409bc6-dc55-abd6-f527-2797aa251a88@iscas.ac.cn>
-Date: Wed, 19 Jul 2023 09:20:42 +0800
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1qLvt6-0003cs-Qx; Tue, 18 Jul 2023 21:21:56 -0400
+Received: from mail-vk1-xa32.google.com ([2607:f8b0:4864:20::a32])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1qLvt5-0003VM-BR; Tue, 18 Jul 2023 21:21:56 -0400
+Received: by mail-vk1-xa32.google.com with SMTP id
+ 71dfb90a1353d-48142b4134eso2225352e0c.2; 
+ Tue, 18 Jul 2023 18:21:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1689729714; x=1692321714;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=SSmM/ghEP67tgU0prkrLjwVri2VgNnSEe/C7srUCOh4=;
+ b=AtKTXgywq5amDel9nMBzfEcN8grq+QcdY8zsaNnlQwUnauj9AKM3z5EXfWOK9bMPpE
+ Fc16xUh0kbdlRDkYgQTmgGgysPKoeNhhxpD+rk+RVi4PpOd3Zdf6vNu+eNxpPlkHrRCu
+ FWPv42VKhtRBdJNW7jFI9SlCi5glqBBAs4njPn+b9+9ot14uVvKhg8wZdMx772xcLsmA
+ g4Zrr4cunc1m9OZotHKs3rEjuGTkS45yQHt7CKuagbgZfOqTryz4MfFQ8Q/qu5HncAQV
+ J25m3yu5AKkv0cj+89VSVAJ7c4RwXF0i/RwzMJ5m9yZQioIm1TkSdsNxTu5DCC3E4nBf
+ zdfw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1689729714; x=1692321714;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=SSmM/ghEP67tgU0prkrLjwVri2VgNnSEe/C7srUCOh4=;
+ b=WuqJD7LkPtVAmZLPCu5VCV7+Ih0Z8t3tQF5kMtnyrijlf88cc9rgreRWCRSYDrcgCr
+ B8l/egz/+TRtteKVpoDLdK4jCsHag2nm8stOAdrEN7RLiHCOi7kPfA0yUKhXXAtcJ9t/
+ iSSwczY7uLoYrsxk8hQ8hfCFRAmzKWR4HrlAlSd/fCM2CNOK9NAZTQ7aBx49cOZxuhiX
+ xfX3mA2WdFPzjMfRGtyoVYy51PtMKSNUXnqBu4nYpbUVbgv/KjPvibyNO0ZHS8FUroe1
+ BxXixBFdHlbUX8M2I9BpyHlvH7+G4PD8OqGXPLMAETOMYyk72sgkjFWwlMmz/pgaMF85
+ gKKw==
+X-Gm-Message-State: ABy/qLbcOLJwtQlWsIG6UCAUeWPjCTyjnxhxCzzsYahGICF6YDPSYvxI
+ FTKXrUsKmyozlVSIbAFtKi/Eh0bmH+34OfXluU0=
+X-Google-Smtp-Source: APBJJlGckT2bjA0kbTZVeOnR/Sih/VqVyClmo3v+uqrMYQUhDBCSeZN9Pwv5Fuxo87Oi0TRQwf7AMiEZ+T/OyAb2OuQ=
+X-Received: by 2002:a1f:ed47:0:b0:471:7996:228f with SMTP id
+ l68-20020a1fed47000000b004717996228fmr894432vkh.7.1689729714009; Tue, 18 Jul
+ 2023 18:21:54 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Cc: liweiwei@iscas.ac.cn, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
+References: <20230718080712.503333-1-zhao1.liu@linux.intel.com>
+In-Reply-To: <20230718080712.503333-1-zhao1.liu@linux.intel.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 19 Jul 2023 11:21:28 +1000
+Message-ID: <CAKmqyKNYNiSSBtcVbfJg0VO=M05VnxyO_hNPgsGzAf0u6X-JGA@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv: Fix topo field in error_report
+To: Zhao Liu <zhao1.liu@linux.intel.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Atish Kumar Patra <atishp@atishpatra.org>,
- Kaiwen Xue <kaiwenx@andrew.cmu.edu>
-Subject: Re: [PATCH 1/3] target/riscv: Add cycle & instret privilege mode
- filtering properties
-Content-Language: en-US
-To: Kaiwen Xue <kaiwenx@rivosinc.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-References: <cover.1689631639.git.kaiwenx@rivosinc.com>
- <d0e7d84180afec116b9fc54ef72fba1d7d8ff345.1689631639.git.kaiwenx@rivosinc.com>
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-In-Reply-To: <d0e7d84180afec116b9fc54ef72fba1d7d8ff345.1689631639.git.kaiwenx@rivosinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-CM-TRANSID: rQCowAC312RrOrdkEJddDA--.3278S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7Zr18KFyDKryxCw1UGFyfZwb_yoW8uF4kpr
- 4DG34xCan8Ary5Z34xtr4DXws5Cws8W397K3ykuw1ktFZ3GrW7W3ZrCFsFkry5tFWrurya
- gF4a9F15AFs2qa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9j14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4j6r
- 4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
- I7IYx2IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
- 4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kI
- c2xKxwCYjI0SjxkI62AI1cAE67vIY487MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4
- AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE
- 17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMI
- IF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4l
- IxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvf
- C2KfnxnUUI43ZEXa7VU1a9aPUUUUU==
-X-Originating-IP: [180.175.26.191]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.81; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -19
-X-Spam_score: -2.0
-X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.095,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Zhenyu Wang <zhenyu.z.wang@intel.com>, Zhao Liu <zhao1.liu@intel.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a32;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa32.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -86,57 +94,56 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-On 2023/7/19 06:47, Kaiwen Xue wrote:
-> This adds the properties for ISA extension smcntrpmf. Patches
-> implementing it will follow.
+On Tue, Jul 18, 2023 at 5:57=E2=80=AFPM Zhao Liu <zhao1.liu@linux.intel.com=
+> wrote:
 >
-> Signed-off-by: Kaiwen Xue <kaiwenx@andrew.cmu.edu>
-> Signed-off-by: Kaiwen Xue <kaiwenx@rivosinc.com>
+> From: Zhao Liu <zhao1.liu@intel.com>
+>
+> "smp.cpus" means the number of online CPUs and "smp.max_cpus" means the
+> total number of CPUs.
+>
+> riscv_numa_get_default_cpu_node_id() checks "smp.cpus" and the
+> "available CPUs" description in the next error message also indicates
+> online CPUs.
+>
+> So report "smp.cpus" in error_report() instand of "smp.max_cpus".
+>
+> Since "smp.cpus" is "unsigned int", use "%u".
+>
+> Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
+
+I fixed up the typo in the commit title
+
+Thanks!
+
+Applied to riscv-to-apply.next
+
+Alistair
+
 > ---
->   target/riscv/cpu.c     | 2 ++
->   target/riscv/cpu_cfg.h | 1 +
->   2 files changed, 3 insertions(+)
+>  hw/riscv/numa.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 9339c0241d..31a1862561 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -132,6 +132,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
->       ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
->       ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
->       ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
-> +    ISA_EXT_DATA_ENTRY(smcntrpmf, PRIV_VERSION_1_12_0, ext_smcntrpmf),
->       ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
->       ISA_EXT_DATA_ENTRY(svadu, PRIV_VERSION_1_12_0, ext_svadu),
->       ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
-> @@ -1753,6 +1754,7 @@ static Property riscv_cpu_extensions[] = {
->       /* Defaults for standard extensions */
->       DEFINE_PROP_UINT8("pmu-num", RISCVCPU, cfg.pmu_num, 16),
->       DEFINE_PROP_BOOL("sscofpmf", RISCVCPU, cfg.ext_sscofpmf, false),
-> +    DEFINE_PROP_BOOL("smcntrpmf", RISCVCPU, cfg.ext_smcntrpmf, false),
-
-Normally, property should be exposed to user at last after the function 
-is implemented.
-
-Regards,
-
-Weiwei Li
-
->       DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
->       DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
->       DEFINE_PROP_BOOL("Zihintpause", RISCVCPU, cfg.ext_zihintpause, true),
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> index 2bd9510ba3..424246cbec 100644
-> --- a/target/riscv/cpu_cfg.h
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -69,6 +69,7 @@ struct RISCVCPUConfig {
->       bool ext_zihintpause;
->       bool ext_smstateen;
->       bool ext_sstc;
-> +    bool ext_smcntrpmf;
->       bool ext_svadu;
->       bool ext_svinval;
->       bool ext_svnapot;
-
+> diff --git a/hw/riscv/numa.c b/hw/riscv/numa.c
+> index e0414d5b1b73..d319aefb4511 100644
+> --- a/hw/riscv/numa.c
+> +++ b/hw/riscv/numa.c
+> @@ -209,8 +209,8 @@ int64_t riscv_numa_get_default_cpu_node_id(const Mach=
+ineState *ms, int idx)
+>
+>      if (ms->numa_state->num_nodes > ms->smp.cpus) {
+>          error_report("Number of NUMA nodes (%d)"
+> -                     " cannot exceed the number of available CPUs (%d)."=
+,
+> -                     ms->numa_state->num_nodes, ms->smp.max_cpus);
+> +                     " cannot exceed the number of available CPUs (%u)."=
+,
+> +                     ms->numa_state->num_nodes, ms->smp.cpus);
+>          exit(EXIT_FAILURE);
+>      }
+>      if (ms->numa_state->num_nodes) {
+> --
+> 2.34.1
+>
+>
 
