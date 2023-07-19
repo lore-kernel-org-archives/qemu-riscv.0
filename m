@@ -4,72 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4156CEB64DC
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Jul 2023 00:55:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A41C4EB64DC
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Jul 2023 00:57:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qLvSh-0005eI-5l; Tue, 18 Jul 2023 20:54:39 -0400
+	id 1qLvUl-0006VC-Cd; Tue, 18 Jul 2023 20:56:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qLvSe-0005dy-Mt; Tue, 18 Jul 2023 20:54:36 -0400
-Received: from mail-vk1-xa2f.google.com ([2607:f8b0:4864:20::a2f])
+ id 1qLvUj-0006Uz-GN; Tue, 18 Jul 2023 20:56:45 -0400
+Received: from mail-vs1-xe2a.google.com ([2607:f8b0:4864:20::e2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qLvSb-0001yI-Sz; Tue, 18 Jul 2023 20:54:36 -0400
-Received: by mail-vk1-xa2f.google.com with SMTP id
- 71dfb90a1353d-483e175352cso973250e0c.2; 
- Tue, 18 Jul 2023 17:54:33 -0700 (PDT)
+ id 1qLvUf-0004o1-QA; Tue, 18 Jul 2023 20:56:44 -0400
+Received: by mail-vs1-xe2a.google.com with SMTP id
+ ada2fe7eead31-440ad576d87so2055773137.1; 
+ Tue, 18 Jul 2023 17:56:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1689728072; x=1692320072;
+ d=gmail.com; s=20221208; t=1689728200; x=1692320200;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+iEuub0lDNgnK/i90qP00xBV/xsasM2kmvs/zDndY9Y=;
- b=kbreG4Ni5Yw3bu0F6OrfIXI/0/vvG0QGGN0lNqGG7B9h6WS2CAXqImg68RsDVjhOZS
- REks1mSTi2UMJpaqux0l5UvdIrlbAM5bEMQLvVLx+N0H4wCVc0TNY8q9eE7UtRRB0Ehx
- JdWX7KytNpokv/ebhEpaNx0hpXmTsEekOAKw8t/A+Eu5FjRsV7HcdtbthXQdvbZAQtBx
- ZgxkIXqs4QdBtH0CrUAzKHEK93uvhayA2yGXruvRra14bAOq6k1z5XeBguYMdclTX+nK
- y8aN/agBRgOhOhLLd5D8cYq/nyZXyjzGtx9bEQZMCtSH0N6AKKn7TNC4+nWlDhPWNzvr
- 2RoA==
+ bh=HeRmSEZDNVdxpWjzv7/Osg+9CPUqEsv9I0wiblsgUd4=;
+ b=VdgzM4TQqSWkHYBcIjT43vo1IGUFnylfGzIjb86lDNd4VZ3wHn05UpJftwbFi/gP9W
+ 4gvqVeVldTMcUrtR5Z8gPQ2mZsWxcBh+fRNYKlPBT+3V2WkCIjmBKOGcakLqJb8w+cTk
+ IyHX5EZCgScdMrp0LIkE/OoicydanL3uf3f7gJY5gAno3UEYHwsVLF46fVYa8odd6w6C
+ vStTMUqGgrSuD2vqLuFOKb+U5Gm5iGn6CZQKQtuKKp4anNCrxhI4H0zsvrBQrZPLdUcD
+ ajyppnqwwmiRt1s2vTNo3NQSHr1ytsh0OWXtufxtCRzaQOmXT4MwQUgIVTJ52jEhheoz
+ QAOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689728072; x=1692320072;
+ d=1e100.net; s=20221208; t=1689728200; x=1692320200;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+iEuub0lDNgnK/i90qP00xBV/xsasM2kmvs/zDndY9Y=;
- b=CYUf86+q5v9XhjszQYqy8SBs7VQnMuKkivxxzA8Q9oAgQ5zZ/bx72KGst8X8cqn1dR
- uPMxaqythet5uaJQJ7hoxPYW+/n93i1OCSmllsqsvzZLdumkvwPp0e3ygmevge2By516
- ZtxDCkIoB8af5g97ZZA3dBm3DynijCoXoKlVpluCmtu1IxAuc43ayyilOgwTCNNMyhH5
- t0cNcNSPxKK/PELMvNTwh2Bj2F2ZuVdc4pzgTb82ICC0OrV6THIEQ1oxcwl8h0UUtJsz
- l51aqNCUsvOD8qqvpmfOsloQiPQB3ptxK7JDvWZiUGE8TaB8tZaSuuQl2BP2We7JZ2OT
- CITw==
-X-Gm-Message-State: ABy/qLa8MbMe99aDRKN7cIXHe+Sq7AOEd5kfaEP4DCrQ7g7P8bvyg9lF
- leZ/cA6iMmttRXVcLfqXAqIgqLlan39kNhPIQiE=
-X-Google-Smtp-Source: APBJJlEPJs2NFQnuJ3b9BhqlOPfoeGbz2qJFyieulyfewLYq+cTseTQgxwYkU9lc8oZPsSRNYofZ8EfE3NTclAoT6Zg=
-X-Received: by 2002:a1f:4a83:0:b0:481:2cd7:75a7 with SMTP id
- x125-20020a1f4a83000000b004812cd775a7mr1563075vka.16.1689728070534; Tue, 18
- Jul 2023 17:54:30 -0700 (PDT)
+ bh=HeRmSEZDNVdxpWjzv7/Osg+9CPUqEsv9I0wiblsgUd4=;
+ b=c0fb7SbUtQCXYS7fP0l/FQpH5v7TwrR3ukYkl3Al9b1sA5dBG8qRQz5PNGMTVJw5V1
+ 7jpdAwm9rw+guPf826bBFdkSLQbmnUjzi4Cvowk6AXaNPj9sktsNJbwe/584CC3yzZvi
+ Zo//0HhNThkKn9qoWyMzVniP5T0JrCtCf6TeI7hNMeWtaCRbu94/yrexvgKnnDMQCWWC
+ OePh6BA+jQb441y9g2976FZmyAAIgtBTcJdJLctxFLTiZuol0TlrS1AMJjhrnz8JX7uH
+ quAvw6Obc1EDSjA6L4JzjToaaoQrWYg/QWBOyH7CopWkjBApExa6lGdNUyY9QaHkV+iQ
+ VdLw==
+X-Gm-Message-State: ABy/qLaX8VBwIFX4e4YznpJzk/xTXlJ17+WQlzDgjY8hgQkaCicHfUwq
+ tZvi8Qbx05Sy8lDWl5VEzkRkYFJ2yRpV9bjtT5I=
+X-Google-Smtp-Source: APBJJlE10yeGyDcPi00zfSyh7Kj30G7yDPg7HQVSBFIsWIIVKdCOiTVWEexG3UkKFUAw/nN3a2jjwg2t6jrqvXFtlrk=
+X-Received: by 2002:a67:f7c7:0:b0:443:664f:f15 with SMTP id
+ a7-20020a67f7c7000000b00443664f0f15mr9418188vsp.5.1689728200051; Tue, 18 Jul
+ 2023 17:56:40 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230711165917.2629866-1-max.chou@sifive.com>
- <20230711165917.2629866-2-max.chou@sifive.com>
-In-Reply-To: <20230711165917.2629866-2-max.chou@sifive.com>
+References: <20230703183145.24779-1-philmd@linaro.org>
+ <20230703183145.24779-9-philmd@linaro.org>
+In-Reply-To: <20230703183145.24779-9-philmd@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 19 Jul 2023 10:54:04 +1000
-Message-ID: <CAKmqyKP0V9QpUaOw_4jYmQ+nQOhMXrxkQ41rR7a2SjpfZE=90A@mail.gmail.com>
-Subject: Re: [PATCH v8 01/15] target/riscv: Refactor some of the generic
- vector functionality
-To: Max Chou <max.chou@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, dbarboza@ventanamicro.com, 
- Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>,
- Weiwei Li <liweiwei@iscas.ac.cn>, Palmer Dabbelt <palmer@dabbelt.com>,
+Date: Wed, 19 Jul 2023 10:56:14 +1000
+Message-ID: <CAKmqyKO4Dq+WPJr0=+OpNmuMiGGWLOnsFQjuirc8KFra6C6sPA@mail.gmail.com>
+Subject: Re: [PATCH v2 08/16] target/riscv: Move TCG-specific
+ cpu_get_tb_cpu_state() to tcg/cpu.c
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, Thomas Huth <thuth@redhat.com>,
+ Beraldo Leal <bleal@redhat.com>, 
+ Wainer dos Santos Moschetta <wainersm@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, kvm@vger.kernel.org,
+ qemu-riscv@nongnu.org, Bin Meng <bin.meng@windriver.com>,
+ =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
+ Weiwei Li <liweiwei@iscas.ac.cn>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2f;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2a;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2a.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -93,628 +97,248 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jul 12, 2023 at 2:59=E2=80=AFAM Max Chou <max.chou@sifive.com> wrot=
-e:
+On Tue, Jul 4, 2023 at 4:34=E2=80=AFAM Philippe Mathieu-Daud=C3=A9 <philmd@=
+linaro.org> wrote:
 >
-> From: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
->
-> Take some functions/macros out of `vector_helper` and put them in a new
-> module called `vector_internals`. This ensures they can be used by both
-> vector and vector-crypto helpers (latter implemented in proceeding
-> commits).
->
-> Signed-off-by: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
-> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Max Chou <max.chou@sifive.com>
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 
 Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/meson.build        |   1 +
->  target/riscv/vector_helper.c    | 201 +-------------------------------
->  target/riscv/vector_internals.c |  81 +++++++++++++
->  target/riscv/vector_internals.h | 182 +++++++++++++++++++++++++++++
->  4 files changed, 265 insertions(+), 200 deletions(-)
->  create mode 100644 target/riscv/vector_internals.c
->  create mode 100644 target/riscv/vector_internals.h
+>  target/riscv/cpu_helper.c    | 84 -------------------------------
+>  target/riscv/tcg/cpu.c       | 98 ++++++++++++++++++++++++++++++++++++
+>  target/riscv/tcg/meson.build |  1 +
+>  3 files changed, 99 insertions(+), 84 deletions(-)
+>  create mode 100644 target/riscv/tcg/cpu.c
 >
-> diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-> index 7f56c5f88d4..c3801ee5e04 100644
-> --- a/target/riscv/meson.build
-> +++ b/target/riscv/meson.build
-> @@ -16,6 +16,7 @@ riscv_ss.add(files(
->    'gdbstub.c',
->    'op_helper.c',
->    'vector_helper.c',
-> +  'vector_internals.c',
->    'bitmanip_helper.c',
->    'translate.c',
->    'm128_helper.c',
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 71bb9b4457b..6434fd2f7e8 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -26,6 +26,7 @@
->  #include "fpu/softfloat.h"
->  #include "tcg/tcg-gvec-desc.h"
->  #include "internals.h"
-> +#include "vector_internals.h"
->  #include <math.h>
->
->  target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
-> @@ -72,68 +73,6 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target=
-_ulong s1,
->      return vl;
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 597c47bc56..6f8778c6d3 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -64,90 +64,6 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetc=
+h)
+>  #endif
 >  }
 >
-> -/*
-> - * Note that vector data is stored in host-endian 64-bit chunks,
-> - * so addressing units smaller than that needs a host-endian fixup.
-> - */
-> -#if HOST_BIG_ENDIAN
-> -#define H1(x)   ((x) ^ 7)
-> -#define H1_2(x) ((x) ^ 6)
-> -#define H1_4(x) ((x) ^ 4)
-> -#define H2(x)   ((x) ^ 3)
-> -#define H4(x)   ((x) ^ 1)
-> -#define H8(x)   ((x))
+> -void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+> -                          uint64_t *cs_base, uint32_t *pflags)
+> -{
+> -    CPUState *cs =3D env_cpu(env);
+> -    RISCVCPU *cpu =3D RISCV_CPU(cs);
+> -    RISCVExtStatus fs, vs;
+> -    uint32_t flags =3D 0;
+> -
+> -    *pc =3D env->xl =3D=3D MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
+> -    *cs_base =3D 0;
+> -
+> -    if (cpu->cfg.ext_zve32f) {
+> -        /*
+> -         * If env->vl equals to VLMAX, we can use generic vector operati=
+on
+> -         * expanders (GVEC) to accerlate the vector operations.
+> -         * However, as LMUL could be a fractional number. The maximum
+> -         * vector size can be operated might be less than 8 bytes,
+> -         * which is not supported by GVEC. So we set vl_eq_vlmax flag to=
+ true
+> -         * only when maxsz >=3D 8 bytes.
+> -         */
+> -        uint32_t vlmax =3D vext_get_vlmax(cpu, env->vtype);
+> -        uint32_t sew =3D FIELD_EX64(env->vtype, VTYPE, VSEW);
+> -        uint32_t maxsz =3D vlmax << sew;
+> -        bool vl_eq_vlmax =3D (env->vstart =3D=3D 0) && (vlmax =3D=3D env=
+->vl) &&
+> -                           (maxsz >=3D 8);
+> -        flags =3D FIELD_DP32(flags, TB_FLAGS, VILL, env->vill);
+> -        flags =3D FIELD_DP32(flags, TB_FLAGS, SEW, sew);
+> -        flags =3D FIELD_DP32(flags, TB_FLAGS, LMUL,
+> -                           FIELD_EX64(env->vtype, VTYPE, VLMUL));
+> -        flags =3D FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
+> -        flags =3D FIELD_DP32(flags, TB_FLAGS, VTA,
+> -                           FIELD_EX64(env->vtype, VTYPE, VTA));
+> -        flags =3D FIELD_DP32(flags, TB_FLAGS, VMA,
+> -                           FIELD_EX64(env->vtype, VTYPE, VMA));
+> -        flags =3D FIELD_DP32(flags, TB_FLAGS, VSTART_EQ_ZERO, env->vstar=
+t =3D=3D 0);
+> -    } else {
+> -        flags =3D FIELD_DP32(flags, TB_FLAGS, VILL, 1);
+> -    }
+> -
+> -#ifdef CONFIG_USER_ONLY
+> -    fs =3D EXT_STATUS_DIRTY;
+> -    vs =3D EXT_STATUS_DIRTY;
 > -#else
-> -#define H1(x)   (x)
-> -#define H1_2(x) (x)
-> -#define H1_4(x) (x)
-> -#define H2(x)   (x)
-> -#define H4(x)   (x)
-> -#define H8(x)   (x)
+> -    flags =3D FIELD_DP32(flags, TB_FLAGS, PRIV, env->priv);
+> -
+> -    flags |=3D cpu_mmu_index(env, 0);
+> -    fs =3D get_field(env->mstatus, MSTATUS_FS);
+> -    vs =3D get_field(env->mstatus, MSTATUS_VS);
+> -
+> -    if (env->virt_enabled) {
+> -        flags =3D FIELD_DP32(flags, TB_FLAGS, VIRT_ENABLED, 1);
+> -        /*
+> -         * Merge DISABLED and !DIRTY states using MIN.
+> -         * We will set both fields when dirtying.
+> -         */
+> -        fs =3D MIN(fs, get_field(env->mstatus_hs, MSTATUS_FS));
+> -        vs =3D MIN(vs, get_field(env->mstatus_hs, MSTATUS_VS));
+> -    }
+> -
+> -    /* With Zfinx, floating point is enabled/disabled by Smstateen. */
+> -    if (!riscv_has_ext(env, RVF)) {
+> -        fs =3D (smstateen_acc_ok(env, 0, SMSTATEEN0_FCSR) =3D=3D RISCV_E=
+XCP_NONE)
+> -             ? EXT_STATUS_DIRTY : EXT_STATUS_DISABLED;
+> -    }
+> -
+> -    if (cpu->cfg.debug && !icount_enabled()) {
+> -        flags =3D FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_en=
+abled);
+> -    }
 > -#endif
 > -
-> -static inline uint32_t vext_nf(uint32_t desc)
-> -{
-> -    return FIELD_EX32(simd_data(desc), VDATA, NF);
+> -    flags =3D FIELD_DP32(flags, TB_FLAGS, FS, fs);
+> -    flags =3D FIELD_DP32(flags, TB_FLAGS, VS, vs);
+> -    flags =3D FIELD_DP32(flags, TB_FLAGS, XL, env->xl);
+> -    flags =3D FIELD_DP32(flags, TB_FLAGS, AXL, cpu_address_xl(env));
+> -    if (env->cur_pmmask !=3D 0) {
+> -        flags =3D FIELD_DP32(flags, TB_FLAGS, PM_MASK_ENABLED, 1);
+> -    }
+> -    if (env->cur_pmbase !=3D 0) {
+> -        flags =3D FIELD_DP32(flags, TB_FLAGS, PM_BASE_ENABLED, 1);
+> -    }
+> -
+> -    *pflags =3D flags;
 > -}
 > -
-> -static inline uint32_t vext_vm(uint32_t desc)
-> -{
-> -    return FIELD_EX32(simd_data(desc), VDATA, VM);
-> -}
-> -
-> -/*
-> - * Encode LMUL to lmul as following:
-> - *     LMUL    vlmul    lmul
-> - *      1       000       0
-> - *      2       001       1
-> - *      4       010       2
-> - *      8       011       3
-> - *      -       100       -
-> - *     1/8      101      -3
-> - *     1/4      110      -2
-> - *     1/2      111      -1
-> - */
-> -static inline int32_t vext_lmul(uint32_t desc)
-> -{
-> -    return sextract32(FIELD_EX32(simd_data(desc), VDATA, LMUL), 0, 3);
-> -}
-> -
-> -static inline uint32_t vext_vta(uint32_t desc)
-> -{
-> -    return FIELD_EX32(simd_data(desc), VDATA, VTA);
-> -}
-> -
-> -static inline uint32_t vext_vma(uint32_t desc)
-> -{
-> -    return FIELD_EX32(simd_data(desc), VDATA, VMA);
-> -}
-> -
-> -static inline uint32_t vext_vta_all_1s(uint32_t desc)
-> -{
-> -    return FIELD_EX32(simd_data(desc), VDATA, VTA_ALL_1S);
-> -}
-> -
->  /*
->   * Get the maximum number of elements can be operated.
->   *
-> @@ -152,21 +91,6 @@ static inline uint32_t vext_max_elems(uint32_t desc, =
-uint32_t log2_esz)
->      return scale < 0 ? vlenb >> -scale : vlenb << scale;
->  }
->
-> -/*
-> - * Get number of total elements, including prestart, body and tail eleme=
-nts.
-> - * Note that when LMUL < 1, the tail includes the elements past VLMAX th=
-at
-> - * are held in the same vector register.
-> - */
-> -static inline uint32_t vext_get_total_elems(CPURISCVState *env, uint32_t=
- desc,
-> -                                            uint32_t esz)
-> -{
-> -    uint32_t vlenb =3D simd_maxsz(desc);
-> -    uint32_t sew =3D 1 << FIELD_EX64(env->vtype, VTYPE, VSEW);
-> -    int8_t emul =3D ctzl(esz) - ctzl(sew) + vext_lmul(desc) < 0 ? 0 :
-> -                  ctzl(esz) - ctzl(sew) + vext_lmul(desc);
-> -    return (vlenb << emul) / esz;
-> -}
-> -
->  static inline target_ulong adjust_addr(CPURISCVState *env, target_ulong =
-addr)
+>  void riscv_cpu_update_mask(CPURISCVState *env)
 >  {
->      return (addr & ~env->cur_pmmask) | env->cur_pmbase;
-> @@ -199,20 +123,6 @@ static void probe_pages(CPURISCVState *env, target_u=
-long addr,
->      }
->  }
->
-> -/* set agnostic elements to 1s */
-> -static void vext_set_elems_1s(void *base, uint32_t is_agnostic, uint32_t=
- cnt,
-> -                              uint32_t tot)
-> -{
-> -    if (is_agnostic =3D=3D 0) {
-> -        /* policy undisturbed */
-> -        return;
-> -    }
-> -    if (tot - cnt =3D=3D 0) {
-> -        return;
-> -    }
-> -    memset(base + cnt, -1, tot - cnt);
-> -}
-> -
->  static inline void vext_set_elem_mask(void *v0, int index,
->                                        uint8_t value)
->  {
-> @@ -222,18 +132,6 @@ static inline void vext_set_elem_mask(void *v0, int =
-index,
->      ((uint64_t *)v0)[idx] =3D deposit64(old, pos, 1, value);
->  }
->
-> -/*
-> - * Earlier designs (pre-0.9) had a varying number of bits
-> - * per mask value (MLEN). In the 0.9 design, MLEN=3D1.
-> - * (Section 4.5)
-> - */
-> -static inline int vext_elem_mask(void *v0, int index)
-> -{
-> -    int idx =3D index / 64;
-> -    int pos =3D index  % 64;
-> -    return (((uint64_t *)v0)[idx] >> pos) & 1;
-> -}
-> -
->  /* elements operations for load and store */
->  typedef void vext_ldst_elem_fn(CPURISCVState *env, target_ulong addr,
->                                 uint32_t idx, void *vd, uintptr_t retaddr=
-);
-> @@ -728,18 +626,11 @@ GEN_VEXT_ST_WHOLE(vs8r_v, int8_t, ste_b)
->   * Vector Integer Arithmetic Instructions
->   */
->
-> -/* expand macro args before macro */
-> -#define RVVCALL(macro, ...)  macro(__VA_ARGS__)
-> -
->  /* (TD, T1, T2, TX1, TX2) */
->  #define OP_SSS_B int8_t, int8_t, int8_t, int8_t, int8_t
->  #define OP_SSS_H int16_t, int16_t, int16_t, int16_t, int16_t
->  #define OP_SSS_W int32_t, int32_t, int32_t, int32_t, int32_t
->  #define OP_SSS_D int64_t, int64_t, int64_t, int64_t, int64_t
-> -#define OP_UUU_B uint8_t, uint8_t, uint8_t, uint8_t, uint8_t
-> -#define OP_UUU_H uint16_t, uint16_t, uint16_t, uint16_t, uint16_t
-> -#define OP_UUU_W uint32_t, uint32_t, uint32_t, uint32_t, uint32_t
-> -#define OP_UUU_D uint64_t, uint64_t, uint64_t, uint64_t, uint64_t
->  #define OP_SUS_B int8_t, uint8_t, int8_t, uint8_t, int8_t
->  #define OP_SUS_H int16_t, uint16_t, int16_t, uint16_t, int16_t
->  #define OP_SUS_W int32_t, uint32_t, int32_t, uint32_t, int32_t
-> @@ -763,16 +654,6 @@ GEN_VEXT_ST_WHOLE(vs8r_v, int8_t, ste_b)
->  #define NOP_UUU_H uint16_t, uint16_t, uint32_t, uint16_t, uint32_t
->  #define NOP_UUU_W uint32_t, uint32_t, uint64_t, uint32_t, uint64_t
->
-> -/* operation of two vector elements */
-> -typedef void opivv2_fn(void *vd, void *vs1, void *vs2, int i);
-> -
-> -#define OPIVV2(NAME, TD, T1, T2, TX1, TX2, HD, HS1, HS2, OP)    \
-> -static void do_##NAME(void *vd, void *vs1, void *vs2, int i)    \
-> -{                                                               \
-> -    TX1 s1 =3D *((T1 *)vs1 + HS1(i));                             \
-> -    TX2 s2 =3D *((T2 *)vs2 + HS2(i));                             \
-> -    *((TD *)vd + HD(i)) =3D OP(s2, s1);                           \
-> -}
->  #define DO_SUB(N, M) (N - M)
->  #define DO_RSUB(N, M) (M - N)
->
-> @@ -785,40 +666,6 @@ RVVCALL(OPIVV2, vsub_vv_h, OP_SSS_H, H2, H2, H2, DO_=
-SUB)
->  RVVCALL(OPIVV2, vsub_vv_w, OP_SSS_W, H4, H4, H4, DO_SUB)
->  RVVCALL(OPIVV2, vsub_vv_d, OP_SSS_D, H8, H8, H8, DO_SUB)
->
-> -static void do_vext_vv(void *vd, void *v0, void *vs1, void *vs2,
-> -                       CPURISCVState *env, uint32_t desc,
-> -                       opivv2_fn *fn, uint32_t esz)
-> -{
-> -    uint32_t vm =3D vext_vm(desc);
-> -    uint32_t vl =3D env->vl;
-> -    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);
-> -    uint32_t vta =3D vext_vta(desc);
-> -    uint32_t vma =3D vext_vma(desc);
-> -    uint32_t i;
-> -
-> -    for (i =3D env->vstart; i < vl; i++) {
-> -        if (!vm && !vext_elem_mask(v0, i)) {
-> -            /* set masked-off elements to 1s */
-> -            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);
-> -            continue;
-> -        }
-> -        fn(vd, vs1, vs2, i);
-> -    }
-> -    env->vstart =3D 0;
-> -    /* set tail elements to 1s */
-> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);
-> -}
-> -
-> -/* generate the helpers for OPIVV */
-> -#define GEN_VEXT_VV(NAME, ESZ)                            \
-> -void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
-> -                  void *vs2, CPURISCVState *env,          \
-> -                  uint32_t desc)                          \
-> -{                                                         \
-> -    do_vext_vv(vd, v0, vs1, vs2, env, desc,               \
-> -               do_##NAME, ESZ);                           \
-> -}
-> -
->  GEN_VEXT_VV(vadd_vv_b, 1)
->  GEN_VEXT_VV(vadd_vv_h, 2)
->  GEN_VEXT_VV(vadd_vv_w, 4)
-> @@ -828,18 +675,6 @@ GEN_VEXT_VV(vsub_vv_h, 2)
->  GEN_VEXT_VV(vsub_vv_w, 4)
->  GEN_VEXT_VV(vsub_vv_d, 8)
->
-> -typedef void opivx2_fn(void *vd, target_long s1, void *vs2, int i);
-> -
-> -/*
-> - * (T1)s1 gives the real operator type.
-> - * (TX1)(T1)s1 expands the operator type of widen or narrow operations.
-> - */
-> -#define OPIVX2(NAME, TD, T1, T2, TX1, TX2, HD, HS2, OP)             \
-> -static void do_##NAME(void *vd, target_long s1, void *vs2, int i)   \
-> -{                                                                   \
-> -    TX2 s2 =3D *((T2 *)vs2 + HS2(i));                                 \
-> -    *((TD *)vd + HD(i)) =3D OP(s2, (TX1)(T1)s1);                      \
-> -}
->
->  RVVCALL(OPIVX2, vadd_vx_b, OP_SSS_B, H1, H1, DO_ADD)
->  RVVCALL(OPIVX2, vadd_vx_h, OP_SSS_H, H2, H2, DO_ADD)
-> @@ -854,40 +689,6 @@ RVVCALL(OPIVX2, vrsub_vx_h, OP_SSS_H, H2, H2, DO_RSU=
-B)
->  RVVCALL(OPIVX2, vrsub_vx_w, OP_SSS_W, H4, H4, DO_RSUB)
->  RVVCALL(OPIVX2, vrsub_vx_d, OP_SSS_D, H8, H8, DO_RSUB)
->
-> -static void do_vext_vx(void *vd, void *v0, target_long s1, void *vs2,
-> -                       CPURISCVState *env, uint32_t desc,
-> -                       opivx2_fn fn, uint32_t esz)
-> -{
-> -    uint32_t vm =3D vext_vm(desc);
-> -    uint32_t vl =3D env->vl;
-> -    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);
-> -    uint32_t vta =3D vext_vta(desc);
-> -    uint32_t vma =3D vext_vma(desc);
-> -    uint32_t i;
-> -
-> -    for (i =3D env->vstart; i < vl; i++) {
-> -        if (!vm && !vext_elem_mask(v0, i)) {
-> -            /* set masked-off elements to 1s */
-> -            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);
-> -            continue;
-> -        }
-> -        fn(vd, s1, vs2, i);
-> -    }
-> -    env->vstart =3D 0;
-> -    /* set tail elements to 1s */
-> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);
-> -}
-> -
-> -/* generate the helpers for OPIVX */
-> -#define GEN_VEXT_VX(NAME, ESZ)                            \
-> -void HELPER(NAME)(void *vd, void *v0, target_ulong s1,    \
-> -                  void *vs2, CPURISCVState *env,          \
-> -                  uint32_t desc)                          \
-> -{                                                         \
-> -    do_vext_vx(vd, v0, s1, vs2, env, desc,                \
-> -               do_##NAME, ESZ);                           \
-> -}
-> -
->  GEN_VEXT_VX(vadd_vx_b, 1)
->  GEN_VEXT_VX(vadd_vx_h, 2)
->  GEN_VEXT_VX(vadd_vx_w, 4)
-> diff --git a/target/riscv/vector_internals.c b/target/riscv/vector_intern=
-als.c
+>      target_ulong mask =3D 0, base =3D 0;
+> diff --git a/target/riscv/tcg/cpu.c b/target/riscv/tcg/cpu.c
 > new file mode 100644
-> index 00000000000..9cf5c17cdea
+> index 0000000000..2ae6919b80
 > --- /dev/null
-> +++ b/target/riscv/vector_internals.c
-> @@ -0,0 +1,81 @@
+> +++ b/target/riscv/tcg/cpu.c
+> @@ -0,0 +1,98 @@
 > +/*
-> + * RISC-V Vector Extension Internals
+> + * RISC-V CPU helpers (TCG specific)
 > + *
-> + * Copyright (c) 2020 T-Head Semiconductor Co., Ltd. All rights reserved=
-.
+> + * Copyright (c) 2016-2017 Sagar Karandikar, sagark@eecs.berkeley.edu
+> + * Copyright (c) 2017-2018 SiFive, Inc.
 > + *
-> + * This program is free software; you can redistribute it and/or modify =
-it
-> + * under the terms and conditions of the GNU General Public License,
-> + * version 2 or later, as published by the Free Software Foundation.
-> + *
-> + * This program is distributed in the hope it will be useful, but WITHOU=
-T
-> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License=
- for
-> + * more details.
-> + *
-> + * You should have received a copy of the GNU General Public License alo=
-ng with
-> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + * SPDX-License-Identifier: GPL-2.0-or-later
 > + */
-> +
-> +#include "vector_internals.h"
-> +
-> +/* set agnostic elements to 1s */
-> +void vext_set_elems_1s(void *base, uint32_t is_agnostic, uint32_t cnt,
-> +                       uint32_t tot)
-> +{
-> +    if (is_agnostic =3D=3D 0) {
-> +        /* policy undisturbed */
-> +        return;
-> +    }
-> +    if (tot - cnt =3D=3D 0) {
-> +        return ;
-> +    }
-> +    memset(base + cnt, -1, tot - cnt);
-> +}
-> +
-> +void do_vext_vv(void *vd, void *v0, void *vs1, void *vs2,
-> +                CPURISCVState *env, uint32_t desc,
-> +                opivv2_fn *fn, uint32_t esz)
-> +{
-> +    uint32_t vm =3D vext_vm(desc);
-> +    uint32_t vl =3D env->vl;
-> +    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);
-> +    uint32_t vta =3D vext_vta(desc);
-> +    uint32_t vma =3D vext_vma(desc);
-> +    uint32_t i;
-> +
-> +    for (i =3D env->vstart; i < vl; i++) {
-> +        if (!vm && !vext_elem_mask(v0, i)) {
-> +            /* set masked-off elements to 1s */
-> +            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);
-> +            continue;
-> +        }
-> +        fn(vd, vs1, vs2, i);
-> +    }
-> +    env->vstart =3D 0;
-> +    /* set tail elements to 1s */
-> +    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);
-> +}
-> +
-> +void do_vext_vx(void *vd, void *v0, target_long s1, void *vs2,
-> +                CPURISCVState *env, uint32_t desc,
-> +                opivx2_fn fn, uint32_t esz)
-> +{
-> +    uint32_t vm =3D vext_vm(desc);
-> +    uint32_t vl =3D env->vl;
-> +    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);
-> +    uint32_t vta =3D vext_vta(desc);
-> +    uint32_t vma =3D vext_vma(desc);
-> +    uint32_t i;
-> +
-> +    for (i =3D env->vstart; i < vl; i++) {
-> +        if (!vm && !vext_elem_mask(v0, i)) {
-> +            /* set masked-off elements to 1s */
-> +            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);
-> +            continue;
-> +        }
-> +        fn(vd, s1, vs2, i);
-> +    }
-> +    env->vstart =3D 0;
-> +    /* set tail elements to 1s */
-> +    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);
-> +}
-> diff --git a/target/riscv/vector_internals.h b/target/riscv/vector_intern=
-als.h
-> new file mode 100644
-> index 00000000000..749d138bebe
-> --- /dev/null
-> +++ b/target/riscv/vector_internals.h
-> @@ -0,0 +1,182 @@
-> +/*
-> + * RISC-V Vector Extension Internals
-> + *
-> + * Copyright (c) 2020 T-Head Semiconductor Co., Ltd. All rights reserved=
-.
-> + *
-> + * This program is free software; you can redistribute it and/or modify =
-it
-> + * under the terms and conditions of the GNU General Public License,
-> + * version 2 or later, as published by the Free Software Foundation.
-> + *
-> + * This program is distributed in the hope it will be useful, but WITHOU=
-T
-> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License=
- for
-> + * more details.
-> + *
-> + * You should have received a copy of the GNU General Public License alo=
-ng with
-> + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#ifndef TARGET_RISCV_VECTOR_INTERNALS_H
-> +#define TARGET_RISCV_VECTOR_INTERNALS_H
 > +
 > +#include "qemu/osdep.h"
-> +#include "qemu/bitops.h"
 > +#include "cpu.h"
-> +#include "tcg/tcg-gvec-desc.h"
-> +#include "internals.h"
-> +
-> +static inline uint32_t vext_nf(uint32_t desc)
-> +{
-> +    return FIELD_EX32(simd_data(desc), VDATA, NF);
-> +}
-> +
-> +/*
-> + * Note that vector data is stored in host-endian 64-bit chunks,
-> + * so addressing units smaller than that needs a host-endian fixup.
-> + */
-> +#if HOST_BIG_ENDIAN
-> +#define H1(x)   ((x) ^ 7)
-> +#define H1_2(x) ((x) ^ 6)
-> +#define H1_4(x) ((x) ^ 4)
-> +#define H2(x)   ((x) ^ 3)
-> +#define H4(x)   ((x) ^ 1)
-> +#define H8(x)   ((x))
-> +#else
-> +#define H1(x)   (x)
-> +#define H1_2(x) (x)
-> +#define H1_4(x) (x)
-> +#define H2(x)   (x)
-> +#define H4(x)   (x)
-> +#define H8(x)   (x)
+> +#ifndef CONFIG_USER_ONLY
+> +#include "sysemu/cpu-timers.h"
 > +#endif
 > +
-> +/*
-> + * Encode LMUL to lmul as following:
-> + *     LMUL    vlmul    lmul
-> + *      1       000       0
-> + *      2       001       1
-> + *      4       010       2
-> + *      8       011       3
-> + *      -       100       -
-> + *     1/8      101      -3
-> + *     1/4      110      -2
-> + *     1/2      111      -1
-> + */
-> +static inline int32_t vext_lmul(uint32_t desc)
+> +void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+> +                          uint64_t *cs_base, uint32_t *pflags)
 > +{
-> +    return sextract32(FIELD_EX32(simd_data(desc), VDATA, LMUL), 0, 3);
+> +    CPUState *cs =3D env_cpu(env);
+> +    RISCVCPU *cpu =3D RISCV_CPU(cs);
+> +    RISCVExtStatus fs, vs;
+> +    uint32_t flags =3D 0;
+> +
+> +    *pc =3D env->xl =3D=3D MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
+> +    *cs_base =3D 0;
+> +
+> +    if (cpu->cfg.ext_zve32f) {
+> +        /*
+> +         * If env->vl equals to VLMAX, we can use generic vector operati=
+on
+> +         * expanders (GVEC) to accerlate the vector operations.
+> +         * However, as LMUL could be a fractional number. The maximum
+> +         * vector size can be operated might be less than 8 bytes,
+> +         * which is not supported by GVEC. So we set vl_eq_vlmax flag to=
+ true
+> +         * only when maxsz >=3D 8 bytes.
+> +         */
+> +        uint32_t vlmax =3D vext_get_vlmax(cpu, env->vtype);
+> +        uint32_t sew =3D FIELD_EX64(env->vtype, VTYPE, VSEW);
+> +        uint32_t maxsz =3D vlmax << sew;
+> +        bool vl_eq_vlmax =3D (env->vstart =3D=3D 0) && (vlmax =3D=3D env=
+->vl) &&
+> +                           (maxsz >=3D 8);
+> +        flags =3D FIELD_DP32(flags, TB_FLAGS, VILL, env->vill);
+> +        flags =3D FIELD_DP32(flags, TB_FLAGS, SEW, sew);
+> +        flags =3D FIELD_DP32(flags, TB_FLAGS, LMUL,
+> +                           FIELD_EX64(env->vtype, VTYPE, VLMUL));
+> +        flags =3D FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
+> +        flags =3D FIELD_DP32(flags, TB_FLAGS, VTA,
+> +                           FIELD_EX64(env->vtype, VTYPE, VTA));
+> +        flags =3D FIELD_DP32(flags, TB_FLAGS, VMA,
+> +                           FIELD_EX64(env->vtype, VTYPE, VMA));
+> +        flags =3D FIELD_DP32(flags, TB_FLAGS, VSTART_EQ_ZERO, env->vstar=
+t =3D=3D 0);
+> +    } else {
+> +        flags =3D FIELD_DP32(flags, TB_FLAGS, VILL, 1);
+> +    }
+> +
+> +#ifdef CONFIG_USER_ONLY
+> +    fs =3D EXT_STATUS_DIRTY;
+> +    vs =3D EXT_STATUS_DIRTY;
+> +#else
+> +    flags =3D FIELD_DP32(flags, TB_FLAGS, PRIV, env->priv);
+> +
+> +    flags |=3D cpu_mmu_index(env, 0);
+> +    fs =3D get_field(env->mstatus, MSTATUS_FS);
+> +    vs =3D get_field(env->mstatus, MSTATUS_VS);
+> +
+> +    if (env->virt_enabled) {
+> +        flags =3D FIELD_DP32(flags, TB_FLAGS, VIRT_ENABLED, 1);
+> +        /*
+> +         * Merge DISABLED and !DIRTY states using MIN.
+> +         * We will set both fields when dirtying.
+> +         */
+> +        fs =3D MIN(fs, get_field(env->mstatus_hs, MSTATUS_FS));
+> +        vs =3D MIN(vs, get_field(env->mstatus_hs, MSTATUS_VS));
+> +    }
+> +
+> +    /* With Zfinx, floating point is enabled/disabled by Smstateen. */
+> +    if (!riscv_has_ext(env, RVF)) {
+> +        fs =3D (smstateen_acc_ok(env, 0, SMSTATEEN0_FCSR) =3D=3D RISCV_E=
+XCP_NONE)
+> +             ? EXT_STATUS_DIRTY : EXT_STATUS_DISABLED;
+> +    }
+> +
+> +    if (cpu->cfg.debug && !icount_enabled()) {
+> +        flags =3D FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_en=
+abled);
+> +    }
+> +#endif
+> +
+> +    flags =3D FIELD_DP32(flags, TB_FLAGS, FS, fs);
+> +    flags =3D FIELD_DP32(flags, TB_FLAGS, VS, vs);
+> +    flags =3D FIELD_DP32(flags, TB_FLAGS, XL, env->xl);
+> +    flags =3D FIELD_DP32(flags, TB_FLAGS, AXL, cpu_address_xl(env));
+> +    if (env->cur_pmmask !=3D 0) {
+> +        flags =3D FIELD_DP32(flags, TB_FLAGS, PM_MASK_ENABLED, 1);
+> +    }
+> +    if (env->cur_pmbase !=3D 0) {
+> +        flags =3D FIELD_DP32(flags, TB_FLAGS, PM_BASE_ENABLED, 1);
+> +    }
+> +
+> +    *pflags =3D flags;
 > +}
-> +
-> +static inline uint32_t vext_vm(uint32_t desc)
-> +{
-> +    return FIELD_EX32(simd_data(desc), VDATA, VM);
-> +}
-> +
-> +static inline uint32_t vext_vma(uint32_t desc)
-> +{
-> +    return FIELD_EX32(simd_data(desc), VDATA, VMA);
-> +}
-> +
-> +static inline uint32_t vext_vta(uint32_t desc)
-> +{
-> +    return FIELD_EX32(simd_data(desc), VDATA, VTA);
-> +}
-> +
-> +static inline uint32_t vext_vta_all_1s(uint32_t desc)
-> +{
-> +    return FIELD_EX32(simd_data(desc), VDATA, VTA_ALL_1S);
-> +}
-> +
-> +/*
-> + * Earlier designs (pre-0.9) had a varying number of bits
-> + * per mask value (MLEN). In the 0.9 design, MLEN=3D1.
-> + * (Section 4.5)
-> + */
-> +static inline int vext_elem_mask(void *v0, int index)
-> +{
-> +    int idx =3D index / 64;
-> +    int pos =3D index  % 64;
-> +    return (((uint64_t *)v0)[idx] >> pos) & 1;
-> +}
-> +
-> +/*
-> + * Get number of total elements, including prestart, body and tail eleme=
-nts.
-> + * Note that when LMUL < 1, the tail includes the elements past VLMAX th=
-at
-> + * are held in the same vector register.
-> + */
-> +static inline uint32_t vext_get_total_elems(CPURISCVState *env, uint32_t=
- desc,
-> +                                            uint32_t esz)
-> +{
-> +    uint32_t vlenb =3D simd_maxsz(desc);
-> +    uint32_t sew =3D 1 << FIELD_EX64(env->vtype, VTYPE, VSEW);
-> +    int8_t emul =3D ctzl(esz) - ctzl(sew) + vext_lmul(desc) < 0 ? 0 :
-> +                  ctzl(esz) - ctzl(sew) + vext_lmul(desc);
-> +    return (vlenb << emul) / esz;
-> +}
-> +
-> +/* set agnostic elements to 1s */
-> +void vext_set_elems_1s(void *base, uint32_t is_agnostic, uint32_t cnt,
-> +                       uint32_t tot);
-> +
-> +/* expand macro args before macro */
-> +#define RVVCALL(macro, ...)  macro(__VA_ARGS__)
-> +
-> +/* (TD, T1, T2, TX1, TX2) */
-> +#define OP_UUU_B uint8_t, uint8_t, uint8_t, uint8_t, uint8_t
-> +#define OP_UUU_H uint16_t, uint16_t, uint16_t, uint16_t, uint16_t
-> +#define OP_UUU_W uint32_t, uint32_t, uint32_t, uint32_t, uint32_t
-> +#define OP_UUU_D uint64_t, uint64_t, uint64_t, uint64_t, uint64_t
-> +
-> +/* operation of two vector elements */
-> +typedef void opivv2_fn(void *vd, void *vs1, void *vs2, int i);
-> +
-> +#define OPIVV2(NAME, TD, T1, T2, TX1, TX2, HD, HS1, HS2, OP)    \
-> +static void do_##NAME(void *vd, void *vs1, void *vs2, int i)    \
-> +{                                                               \
-> +    TX1 s1 =3D *((T1 *)vs1 + HS1(i));                             \
-> +    TX2 s2 =3D *((T2 *)vs2 + HS2(i));                             \
-> +    *((TD *)vd + HD(i)) =3D OP(s2, s1);                           \
-> +}
-> +
-> +void do_vext_vv(void *vd, void *v0, void *vs1, void *vs2,
-> +                CPURISCVState *env, uint32_t desc,
-> +                opivv2_fn *fn, uint32_t esz);
-> +
-> +/* generate the helpers for OPIVV */
-> +#define GEN_VEXT_VV(NAME, ESZ)                            \
-> +void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
-> +                  void *vs2, CPURISCVState *env,          \
-> +                  uint32_t desc)                          \
-> +{                                                         \
-> +    do_vext_vv(vd, v0, vs1, vs2, env, desc,               \
-> +               do_##NAME, ESZ);                           \
-> +}
-> +
-> +typedef void opivx2_fn(void *vd, target_long s1, void *vs2, int i);
-> +
-> +/*
-> + * (T1)s1 gives the real operator type.
-> + * (TX1)(T1)s1 expands the operator type of widen or narrow operations.
-> + */
-> +#define OPIVX2(NAME, TD, T1, T2, TX1, TX2, HD, HS2, OP)             \
-> +static void do_##NAME(void *vd, target_long s1, void *vs2, int i)   \
-> +{                                                                   \
-> +    TX2 s2 =3D *((T2 *)vs2 + HS2(i));                                 \
-> +    *((TD *)vd + HD(i)) =3D OP(s2, (TX1)(T1)s1);                      \
-> +}
-> +
-> +void do_vext_vx(void *vd, void *v0, target_long s1, void *vs2,
-> +                CPURISCVState *env, uint32_t desc,
-> +                opivx2_fn fn, uint32_t esz);
-> +
-> +/* generate the helpers for OPIVX */
-> +#define GEN_VEXT_VX(NAME, ESZ)                            \
-> +void HELPER(NAME)(void *vd, void *v0, target_ulong s1,    \
-> +                  void *vs2, CPURISCVState *env,          \
-> +                  uint32_t desc)                          \
-> +{                                                         \
-> +    do_vext_vx(vd, v0, s1, vs2, env, desc,                \
-> +               do_##NAME, ESZ);                           \
-> +}
-> +
-> +#endif /* TARGET_RISCV_VECTOR_INTERNALS_H */
+> diff --git a/target/riscv/tcg/meson.build b/target/riscv/tcg/meson.build
+> index 65670493b1..a615aafd9a 100644
+> --- a/target/riscv/tcg/meson.build
+> +++ b/target/riscv/tcg/meson.build
+> @@ -8,6 +8,7 @@ gen =3D [
+>  riscv_ss.add(when: 'CONFIG_TCG', if_true: gen)
+>
+>  riscv_ss.add(when: 'CONFIG_TCG', if_true: files(
+> +  'cpu.c',
+>    'fpu_helper.c',
+>    'op_helper.c',
+>    'vector_helper.c',
 > --
-> 2.34.1
+> 2.38.1
+>
 >
 
