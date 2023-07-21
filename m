@@ -4,57 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A0B0EB64DA
-	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Jul 2023 01:34:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB79AEB64DA
+	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Jul 2023 01:37:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qMf2V-00012C-LY; Thu, 20 Jul 2023 21:34:39 -0400
+	id 1qMf5K-0002B0-QM; Thu, 20 Jul 2023 21:37:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1qMf2U-00011w-1Z; Thu, 20 Jul 2023 21:34:38 -0400
+ id 1qMf5J-0002An-Ov; Thu, 20 Jul 2023 21:37:33 -0400
 Received: from smtp21.cstnet.cn ([159.226.251.21] helo=cstnet.cn)
  by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1qMf2R-0002nw-Fn; Thu, 20 Jul 2023 21:34:37 -0400
+ id 1qMf5H-0003V7-ER; Thu, 20 Jul 2023 21:37:33 -0400
 Received: from [192.168.0.120] (unknown [180.175.26.191])
- by APP-01 (Coremail) with SMTP id qwCowACnrhql4LlkMSKGDA--.62368S2;
- Fri, 21 Jul 2023 09:34:29 +0800 (CST)
-Message-ID: <e0d30a7a-4cd2-acf0-85af-a77f584533ad@iscas.ac.cn>
-Date: Fri, 21 Jul 2023 09:34:29 +0800
+ by APP-01 (Coremail) with SMTP id qwCowAAnLwtV4blk0E+GDA--.1052S2;
+ Fri, 21 Jul 2023 09:37:26 +0800 (CST)
+Message-ID: <38a4d06e-3923-c995-5ae6-f09a6e986684@iscas.ac.cn>
+Date: Fri, 21 Jul 2023 09:37:25 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.13.0
 Cc: liweiwei@iscas.ac.cn, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
  bmeng@tinylab.org, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
-Subject: Re: [PATCH for-8.2 v5 08/11] target/riscv/cpu.c: add
- ADD_UNAVAIL_KVM_PROP_ARRAY() macro
+Subject: Re: [PATCH 1/2] target/riscv/cpu.c: add zmmul isa string
 Content-Language: en-US
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-References: <20230720171933.404398-1-dbarboza@ventanamicro.com>
- <20230720171933.404398-9-dbarboza@ventanamicro.com>
+References: <20230720132424.371132-1-dbarboza@ventanamicro.com>
+ <20230720132424.371132-2-dbarboza@ventanamicro.com>
 From: Weiwei Li <liweiwei@iscas.ac.cn>
-In-Reply-To: <20230720171933.404398-9-dbarboza@ventanamicro.com>
+In-Reply-To: <20230720132424.371132-2-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-CM-TRANSID: qwCowACnrhql4LlkMSKGDA--.62368S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7WrWkuFy7Gr1kWw1xGryDKFg_yoW8Zw47pr
- WfGrWjvas5JFy7J34xXr1kCw1UtrsrWr1fKw47GwnruF4rZ3yYgrs8ta1SkFnrW3Wku3WF
- vw409F1Fya17tFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUkG14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26w1j6s0DM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4U
- JVWxJr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
- CE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
- 2Ix0cI8IcVAFwI0_Jrv_JF1lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
- W8JwACjcxG0xvEwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc7I2V7IY0VAS07AlzVAY
- IcxG8wCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14
- v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkG
- c2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI
- 0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4U
- MIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUp6wZUUU
- UU=
+X-CM-TRANSID: qwCowAAnLwtV4blk0E+GDA--.1052S2
+X-Coremail-Antispam: 1UD129KBjvdXoW7Gr17tw47tw18WFyrKryfJFb_yoWktFg_Gr
+ nYqwnrX34UXFyrtFyDG34rtw4Ut34rJa18Kan7ZF45Wayjg3WFy3Z7K3WF9r4kCayxXFsx
+ ArZ3JFW7Cw4DAjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUb48FF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+ 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
+ A2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j
+ 6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
+ Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
+ I7IYx2IY67AKxVWUXVWUAwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
+ 4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCYjI0SjxkI62AI1cAE67vI
+ Y487MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI
+ 0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y
+ 0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxV
+ W8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1l
+ IxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbE_M3UUUU
+ U==
 X-Originating-IP: [180.175.26.191]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
@@ -81,11 +80,11 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
-On 2023/7/21 01:19, Daniel Henrique Barboza wrote:
-> Use a macro in riscv_cpu_add_kvm_properties() to eliminate some of its
-> code repetition, similar to what we're already doing with
-> ADD_CPU_QDEV_PROPERTIES_ARRAY().
+On 2023/7/20 21:24, Daniel Henrique Barboza wrote:
+> zmmul was promoted from experimental to ratified in commit 6d00ffad4e95.
+> Add a riscv,isa string for it.
 >
+> Fixes: 6d00ffad4e95 ("target/riscv: move zmmul out of the experimental properties")
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > ---
 
@@ -93,48 +92,20 @@ Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
 
 Weiwei Li
 
->   target/riscv/cpu.c | 22 ++++++++++------------
->   1 file changed, 10 insertions(+), 12 deletions(-)
+>   target/riscv/cpu.c | 1 +
+>   1 file changed, 1 insertion(+)
 >
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 23169a606f..8675839cb4 100644
+> index 9339c0241d..d64ac07558 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -1900,6 +1900,13 @@ static void riscv_cpu_add_kvm_unavail_prop(Object *obj, const char *prop_name)
->                           NULL, (void *)prop_name);
->   }
->   
-> +#define ADD_UNAVAIL_KVM_PROP_ARRAY(_obj, _array) \
-> +    do { \
-> +        for (int i = 0; i < ARRAY_SIZE(_array); i++) { \
-> +            riscv_cpu_add_kvm_unavail_prop(_obj, _array[i].name); \
-> +        } \
-> +    } while (0)
-> +
->   static void riscv_cpu_add_kvm_properties(Object *obj)
->   {
->       DeviceState *dev = DEVICE(obj);
-> @@ -1907,18 +1914,9 @@ static void riscv_cpu_add_kvm_properties(Object *obj)
->       kvm_riscv_init_user_properties(obj);
->       riscv_cpu_add_misa_properties(obj);
->   
-> -    for (int i = 0; i < ARRAY_SIZE(riscv_cpu_extensions); i++) {
-> -        riscv_cpu_add_kvm_unavail_prop(obj, riscv_cpu_extensions[i].name);
-> -    }
-> -
-> -    for (int i = 0; i < ARRAY_SIZE(riscv_cpu_vendor_exts); i++) {
-> -        riscv_cpu_add_kvm_unavail_prop(obj, riscv_cpu_vendor_exts[i].name);
-> -    }
-> -
-> -    for (int i = 0; i < ARRAY_SIZE(riscv_cpu_experimental_exts); i++) {
-> -        riscv_cpu_add_kvm_unavail_prop(obj,
-> -                                       riscv_cpu_experimental_exts[i].name);
-> -    }
-> +    ADD_UNAVAIL_KVM_PROP_ARRAY(obj, riscv_cpu_extensions);
-> +    ADD_UNAVAIL_KVM_PROP_ARRAY(obj, riscv_cpu_vendor_exts);
-> +    ADD_UNAVAIL_KVM_PROP_ARRAY(obj, riscv_cpu_experimental_exts);
->   
->       for (int i = 0; i < ARRAY_SIZE(riscv_cpu_options); i++) {
->           /* Check if KVM created the property already */
+> @@ -88,6 +88,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
+>       ISA_EXT_DATA_ENTRY(zicsr, PRIV_VERSION_1_10_0, ext_icsr),
+>       ISA_EXT_DATA_ENTRY(zifencei, PRIV_VERSION_1_10_0, ext_ifencei),
+>       ISA_EXT_DATA_ENTRY(zihintpause, PRIV_VERSION_1_10_0, ext_zihintpause),
+> +    ISA_EXT_DATA_ENTRY(zmmul, PRIV_VERSION_1_12_0, ext_zmmul),
+>       ISA_EXT_DATA_ENTRY(zawrs, PRIV_VERSION_1_12_0, ext_zawrs),
+>       ISA_EXT_DATA_ENTRY(zfa, PRIV_VERSION_1_12_0, ext_zfa),
+>       ISA_EXT_DATA_ENTRY(zfbfmin, PRIV_VERSION_1_12_0, ext_zfbfmin),
 
 
