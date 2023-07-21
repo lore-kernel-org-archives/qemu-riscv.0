@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1D78EB64DC
-	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Jul 2023 10:20:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B5F1EB64DC
+	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Jul 2023 10:21:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qMnFL-0001Q0-Km; Fri, 21 Jul 2023 06:20:27 -0400
+	id 1qMnFD-0001OM-Fu; Fri, 21 Jul 2023 06:20:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qMnFE-0001Om-OO
- for qemu-riscv@nongnu.org; Fri, 21 Jul 2023 06:20:20 -0400
-Received: from mail-oi1-x231.google.com ([2607:f8b0:4864:20::231])
+ id 1qMnFB-0001Nc-T6
+ for qemu-riscv@nongnu.org; Fri, 21 Jul 2023 06:20:17 -0400
+Received: from mail-oo1-xc36.google.com ([2607:f8b0:4864:20::c36])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qMnFC-00065I-J5
- for qemu-riscv@nongnu.org; Fri, 21 Jul 2023 06:20:20 -0400
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-3a1ebb85f99so1284529b6e.2
- for <qemu-riscv@nongnu.org>; Fri, 21 Jul 2023 03:20:18 -0700 (PDT)
+ id 1qMnF9-0005rJ-7v
+ for qemu-riscv@nongnu.org; Fri, 21 Jul 2023 06:20:17 -0400
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-565a8d9d832so1171607eaf.1
+ for <qemu-riscv@nongnu.org>; Fri, 21 Jul 2023 03:20:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1689934817; x=1690539617;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=ventanamicro.com; s=google; t=1689934809; x=1690539609;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=jFWkYtetezdFc9lzRYqCl1YXATFrTSOxidKcr8+pxdc=;
- b=YNW7Ks/ffotHrYR+ZxNKV/zI6keGZVTXcVjc2C+tz/8ug7xzsxnlrXpqbxAXAJRtUg
- wBfeLGt2gNwQy2+WQgUqco59vmU0gFj3ghkUOOjNmwQURgreGd3CvRCj+ZFRRi4rSzSC
- CnAVfIALyU+eZSJ9FpTCfxFgIPFMqzVczyKLhsbJhEB1XoEqADg6gm4ohkf9QYzysu4j
- a9r2Gs2B4zAbWQSLDVmgSwxQTdHYwB3LnKrZ4eY/Kt2k3IPEVfq00pA1ru6v6JWfB4OX
- ueIC42EWYs3ZyCZ/CP2vo9+ah5KLj63lKyDG6owPb8aQn6LIjQ8zMYNmrsljGCG2YYpE
- uPgQ==
+ bh=rfUC5HuPj86tZ06Bu45DA3Hlsmr9WK4+5lOu3mhk+tw=;
+ b=MsjcDa3gmvBh0LuBy+fByrVkSKoChQhOHS2J6TDQkFyrpMdPa63XskOyCSRxxCMbXr
+ 6jG9PTQ7Z/M+x6fyXD9GzDv5oQUqwRdZvGBGlszFgkr58ABvzfa6uUsuz9yeTcErB8zb
+ hlmdmc9Z9AA9Jewfcaet4bbQgMGhArYNOK9Pj9SHwWeuGSQpE9Wmr/qCEM0ntcv1JzGN
+ HVzR+tIYXTAoc21iAcqc6tlDfITFhnSI4HOStDXAYCNSMRbGLCTLyTV+BmTnliZF65Lx
+ 4VgthupDPKv+Sy6KYNkvUlCBuDE/KZl88wuvXSzp1w1D3cAcHMMVOeNJEKZ5c69/pTkl
+ vE2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689934817; x=1690539617;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20221208; t=1689934809; x=1690539609;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=jFWkYtetezdFc9lzRYqCl1YXATFrTSOxidKcr8+pxdc=;
- b=OqyYo70cqhV3Qlr6/sRNU6rw3pQJn78Azb48GfIbbeIptw/pX4ZOadGJTvWrrAOr8o
- x/K5Fps7N/cli75GpSmX7O4CnWQqCC0giNxHYWr0OY1/sqShH4JQ7tTlD/SQ/TNgg153
- vFzzZflvZsJAmRU2Z0UzOA5CLB1qm6WPon1Z4vqimk/lkKEbb409l1G5pezTuqov8ydK
- 3ZwLDsTLZTzI/Asnekv/c1bxHuphDW2vCtSZ2BHYbxdcpLgszLpEN9zTH/G/OfWy/xZ3
- 3/TP7U8KnstIZVnHOXx5JlR39/xsh/1eefwdDTBBB6LyRQ5iOrCX0BiHP0hZi2R/uDu0
- 6Ddw==
-X-Gm-Message-State: ABy/qLZd3fgE0i2eu6Hce8Zv4AoGsksByacPQRzWzY4l2hQFn63vMebn
- 0qEX5Y92KGVCAkRVIx5UqCK1Ng==
-X-Google-Smtp-Source: APBJJlET86qVPQf5ZPywJzj0wrqZMa+BwUjyPhvNHsKk5zD0WS1/jqw47GGWs5UOHXttid2Z4jywrQ==
-X-Received: by 2002:a05:6808:bc1:b0:3a1:eb47:a943 with SMTP id
- o1-20020a0568080bc100b003a1eb47a943mr1996240oik.10.1689934817277; 
- Fri, 21 Jul 2023 03:20:17 -0700 (PDT)
+ bh=rfUC5HuPj86tZ06Bu45DA3Hlsmr9WK4+5lOu3mhk+tw=;
+ b=HmxkaHkZfAp1+JzS6FaSLQOTuHzlqNjcsyQMljsWWwklwKSTHbBjHcyDeAjUOsIHBS
+ eGRewpMtjlO0UfjPRTJaf3j0ZUhWSOaE6gv6ASrX9e05VUQPBhDuM5FnXRtloNfIwq2w
+ sJFpbd3LAUiC+k3nsTKBw440/ffbSa91YeCSnoSKp3q8F3YBbhEB57TPpvrXF76v2JnM
+ fvDeWw0YVCtEcumLamLAn8eVGomoqsjABERPUzGNyh7H+36ztt2JbQgKVGow8Ts5dX32
+ uY3v3o6IZI0DWQ41pIA3/CctRJjGpPRC7COHGrf4hhco1Sh/bnsKGpv4vrytpE9f6f+/
+ Yegg==
+X-Gm-Message-State: ABy/qLaD4wScWRCorHfEnOPl3N4tSobnfXr8AWpcdrXkFdoUPZFwz+4W
+ 9gVKXw2CP9PBCvqUe4x4H0a5Ig==
+X-Google-Smtp-Source: APBJJlE1YUXnJUEUanyo2C6tg7zNUcCQMt1gSmGmwv5Quhed5AFyXvilgKsLiZYPPOypytF63mYswA==
+X-Received: by 2002:a4a:3c5c:0:b0:566:fcc8:5b6e with SMTP id
+ p28-20020a4a3c5c000000b00566fcc85b6emr1502210oof.6.1689934808926; 
+ Fri, 21 Jul 2023 03:20:08 -0700 (PDT)
 Received: from [192.168.68.108] (201-69-66-211.dial-up.telesp.net.br.
  [201.69.66.211]) by smtp.gmail.com with ESMTPSA id
- d5-20020a05680813c500b003a1e38362b7sm1254585oiw.25.2023.07.21.03.20.14
+ w1-20020a4a5d01000000b00565fcfabab8sm1396589ooa.21.2023.07.21.03.20.05
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 21 Jul 2023 03:20:16 -0700 (PDT)
-Message-ID: <fcee58c0-0e25-32dc-e6b2-6fda3464a088@ventanamicro.com>
-Date: Fri, 21 Jul 2023 07:20:13 -0300
+ Fri, 21 Jul 2023 03:20:08 -0700 (PDT)
+Message-ID: <35d454dd-babf-bc59-b8bb-b430e7f7103a@ventanamicro.com>
+Date: Fri, 21 Jul 2023 07:20:03 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.13.0
-Subject: Re: [PATCH 2/2] hw/char/riscv_htif: Fix the console syscall on big
- endian hosts
-Content-Language: en-US
+Subject: Re: [PATCH 1/2] hw/char/riscv_htif: Fix printing of console
+ characters on big endian hosts
 To: Thomas Huth <thuth@redhat.com>, qemu-devel@nongnu.org,
  =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
@@ -75,13 +74,14 @@ Cc: qemu-stable@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
  qemu-riscv@nongnu.org, Weiwei Li <liweiwei@iscas.ac.cn>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 References: <20230721094720.902454-1-thuth@redhat.com>
- <20230721094720.902454-3-thuth@redhat.com>
+ <20230721094720.902454-2-thuth@redhat.com>
+Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230721094720.902454-3-thuth@redhat.com>
+In-Reply-To: <20230721094720.902454-2-thuth@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::231;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x231.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c36;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc36.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
@@ -107,45 +107,34 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 7/21/23 06:47, Thomas Huth wrote:
-> Values that have been read via cpu_physical_memory_read() from the
-> guest's memory have to be swapped in case the host endianess differs
-> from the guest.
+> The character that should be printed is stored in the 64 bit "payload"
+> variable. The code currently tries to print it by taking the address
+> of the variable and passing this pointer to qemu_chr_fe_write(). However,
+> this only works on little endian hosts where the least significant bits
+> are stored on the lowest address. To do this in a portable way, we have
+> to store the value in an uint8_t variable instead.
 > 
-> Fixes: a6e13e31d5 ("riscv_htif: Support console output via proxy syscall")
+> Fixes: 5033606780 ("RISC-V HTIF Console")
 > Signed-off-by: Thomas Huth <thuth@redhat.com>
 > ---
 
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
->   hw/char/riscv_htif.c | 9 +++++----
->   1 file changed, 5 insertions(+), 4 deletions(-)
+>   hw/char/riscv_htif.c | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
 > 
 > diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
-> index f96df40124..40de6b8b77 100644
+> index 37d3ccc76b..f96df40124 100644
 > --- a/hw/char/riscv_htif.c
 > +++ b/hw/char/riscv_htif.c
-> @@ -30,6 +30,7 @@
->   #include "qemu/timer.h"
->   #include "qemu/error-report.h"
->   #include "exec/address-spaces.h"
-> +#include "exec/tswap.h"
->   #include "sysemu/dma.h"
->   
->   #define RISCV_DEBUG_HTIF 0
-> @@ -209,11 +210,11 @@ static void htif_handle_tohost_write(HTIFState *s, uint64_t val_written)
->               } else {
->                   uint64_t syscall[8];
->                   cpu_physical_memory_read(payload, syscall, sizeof(syscall));
-> -                if (syscall[0] == PK_SYS_WRITE &&
-> -                    syscall[1] == HTIF_DEV_CONSOLE &&
-> -                    syscall[3] == HTIF_CONSOLE_CMD_PUTC) {
-> +                if (tswap64(syscall[0]) == PK_SYS_WRITE &&
-> +                    tswap64(syscall[1]) == HTIF_DEV_CONSOLE &&
-> +                    tswap64(syscall[3]) == HTIF_CONSOLE_CMD_PUTC) {
->                       uint8_t ch;
-> -                    cpu_physical_memory_read(syscall[2], &ch, 1);
-> +                    cpu_physical_memory_read(tswap64(syscall[2]), &ch, 1);
->                       qemu_chr_fe_write(&s->chr, &ch, 1);
->                       resp = 0x100 | (uint8_t)payload;
->                   } else {
+> @@ -232,7 +232,8 @@ static void htif_handle_tohost_write(HTIFState *s, uint64_t val_written)
+>               s->tohost = 0; /* clear to indicate we read */
+>               return;
+>           } else if (cmd == HTIF_CONSOLE_CMD_PUTC) {
+> -            qemu_chr_fe_write(&s->chr, (uint8_t *)&payload, 1);
+> +            uint8_t ch = (uint8_t)payload;
+> +            qemu_chr_fe_write(&s->chr, &ch, 1);
+>               resp = 0x100 | (uint8_t)payload;
+>           } else {
+>               qemu_log("HTIF device %d: unknown command\n", device);
 
