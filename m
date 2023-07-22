@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F22FEB64DD
-	for <qemu-riscv@archiver.kernel.org>; Sat, 22 Jul 2023 00:13:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1401CEB64DD
+	for <qemu-riscv@archiver.kernel.org>; Sat, 22 Jul 2023 00:25:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qN0FZ-00062I-QX; Fri, 21 Jul 2023 20:13:33 -0400
+	id 1qN0RG-0008E4-5d; Fri, 21 Jul 2023 20:25:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <kaiwenx@rivosinc.com>)
- id 1qN0FX-00061y-TW
- for qemu-riscv@nongnu.org; Fri, 21 Jul 2023 20:13:32 -0400
-Received: from mail-qk1-x734.google.com ([2607:f8b0:4864:20::734])
+ id 1qN0RB-0008DP-E3
+ for qemu-riscv@nongnu.org; Fri, 21 Jul 2023 20:25:34 -0400
+Received: from mail-vk1-xa2c.google.com ([2607:f8b0:4864:20::a2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <kaiwenx@rivosinc.com>)
- id 1qN0FI-0007nW-EU
- for qemu-riscv@nongnu.org; Fri, 21 Jul 2023 20:13:31 -0400
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-76714caf466so232256985a.1
- for <qemu-riscv@nongnu.org>; Fri, 21 Jul 2023 17:13:15 -0700 (PDT)
+ id 1qN0R9-0004zT-5P
+ for qemu-riscv@nongnu.org; Fri, 21 Jul 2023 20:25:33 -0400
+Received: by mail-vk1-xa2c.google.com with SMTP id
+ 71dfb90a1353d-4815756d742so918101e0c.1
+ for <qemu-riscv@nongnu.org>; Fri, 21 Jul 2023 17:25:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1689984794; x=1690589594; 
+ d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1689985529; x=1690590329; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hjXT1R8oiBgHcpsMWV7f0/G+Lw623RvPbNcbZjo3qzs=;
- b=RL1hnW4qET0+f/c2wcYfYCuZKpyLDzK4lfy7uXSVkYtoH6IWx/nYPs+If5eqrBBfYP
- DiNfTNySXFm7DhbOJ9kMbSEGSK6BkbgXPZuY8NZdnmf1i3gDSVGK8KWuOHdN+acPVkqB
- MQMeNXFVDpd3RdqY3qKQ4o2/v4AOXr8506rMzGpKm/E4m9+vu0hrZjmPmurstOy/w9aS
- SABsLLZUyRjTED57JT5F6TTGwCbkCtCzC5yyxxVH1K+5aexnN3OpLkZfueqqNtcE4oIU
- anu+Up3zZKvzhDhJTqWaWJvKwh0b43AcoQzZfJt8Yi298V8OkMPe+a0LA9qRumcqtkvO
- JWZA==
+ bh=3QPSb4CWTRfIADpPzZqK7YEyQnKkR9xmef6Q52DYxH8=;
+ b=nSeTNsirYIYN/8rWwsMQPc+QQHNBE/eBSdOrrZyqZlfmF9DnHunfV/GZC1sc3OmaWe
+ FxEjy0hcaTjT5MPbhs4BSOtwRajKPJK8pwn3B81lLQ7azMWYI7cJ+ppKwZ3hVT0H65Eo
+ cnsAVQ4z0+81xMjmhI0cuDDgXliUd2AGVQMfx77bgNV9yvoGG2y85+krqkLGCV2A5N0G
+ WTFKBMOJz1Ke2rrjwdV/Hi8BPPRr8Vul+GnFtrGNIaUciRVpiuj68c5kgoyo+c353R9F
+ G240q7KWLjl7cnCSx3uYCJ4mhG2rCAF9/VJuMMLXIVbgbxi61N6Qw64rSALVZzfw7fPr
+ If/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689984794; x=1690589594;
+ d=1e100.net; s=20221208; t=1689985529; x=1690590329;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hjXT1R8oiBgHcpsMWV7f0/G+Lw623RvPbNcbZjo3qzs=;
- b=ZNr2OhwRFkiijx4BbxpaHVE6iCqzDPBCnk5Ly1J1fymEE8D94fyeZmd1gfQ1a617TA
- 0/o17EdsJiR3phN+wOgpfnfJQcnzI9YDcQXRrUultwqlfZFCOSfc4Zj7duok8EuJwtD0
- E8fjhpIBXkgOBmqmabf5dHWtNCa8q6VxBs2V6hrJenCNArdRTOdtfcnmNkOqnEwUODum
- vDC1+Y3cIL9HEKNsYGNwQfZl03hADJ2HdRvR7staR4XF01SecD8FY++BYJzDadcGYDRG
- fanpdchBWMNfs5QHiRrT+HtLqrg3KPtoJE+pgOv9o8/gf6P9UHHGIqKC4nhLh0LRf2cN
- /eow==
-X-Gm-Message-State: ABy/qLaldkyy6aUXnXcvjHcNUysD123dE2YeVOZIkrvv96Mb5ROMa9V5
- 3Fb9EvQbT3WRA7mGwK6t953UsFY/IIf2JCa8nWgMYQ==
-X-Google-Smtp-Source: APBJJlFcaqTAdP1Dgg8L4vD6ZyhQpF3LHRXsa+ODK7JJjwlGLc8guM5XfpoOcEOS7q/sbPk0HVvfoRKUDZlTTfnz5/w=
-X-Received: by 2002:a05:620a:f12:b0:765:a23b:cc27 with SMTP id
- v18-20020a05620a0f1200b00765a23bcc27mr1668791qkl.14.1689984794701; Fri, 21
- Jul 2023 17:13:14 -0700 (PDT)
+ bh=3QPSb4CWTRfIADpPzZqK7YEyQnKkR9xmef6Q52DYxH8=;
+ b=dPtv2SoTnpNCyJtmVe+lxfZYiDuoiAjadwznWGR42dmNuwuCuAHBpXdHfLn55I4WMr
+ gWTnfw+rGWZ/WFo2mJfti3R2Oc/ZLnkXhqqNwRft34sb8G3pb+kPDyS6cEduc2fYbjuf
+ LmtGcUy2X5c1RZG21r4072050HtzkivllgYP9oE9VabT7uSUQPHNhNvMvbADZDrCLdlE
+ 8Kf72m56OhegPDq8QXliDz57nZDjKfcZm9jEDTsP8kBxTUL5HNhhcnWldRYDdC/5r6hi
+ RkQWPfgYyEbbUuaUycCd9wWg5Uyfe7S8ixOKtq1Ljkzd8miITFYhTqsO5aQVU6ztL1r1
+ izRw==
+X-Gm-Message-State: ABy/qLZaJBgvOhjZQivKI6P6SraL5dZ7I1Z20glFR0odW/EZdQOLEXaZ
+ jn6KROUBoZPwPOUohnqPGoADTFGMOmYjlBUhNUs5Sw==
+X-Google-Smtp-Source: APBJJlHNd67StYXhjudvlPQPRdNV6Ho3s+552V4ruiqZvmzyfISBdTy+3tV4D1UiG8NaFhj9Q9RTxcLW5/NAVMLlJIk=
+X-Received: by 2002:a1f:d945:0:b0:46e:7158:1cf0 with SMTP id
+ q66-20020a1fd945000000b0046e71581cf0mr2082017vkg.10.1689985529206; Fri, 21
+ Jul 2023 17:25:29 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1689631639.git.kaiwenx@rivosinc.com>
- <d0e7d84180afec116b9fc54ef72fba1d7d8ff345.1689631639.git.kaiwenx@rivosinc.com>
- <07409bc6-dc55-abd6-f527-2797aa251a88@iscas.ac.cn>
-In-Reply-To: <07409bc6-dc55-abd6-f527-2797aa251a88@iscas.ac.cn>
+ <3ed71e9812a806b98dd519594af52b9525ec459c.1689631639.git.kaiwenx@rivosinc.com>
+ <a3ce50f7-0ff7-a646-06ac-36b26e96547c@iscas.ac.cn>
+In-Reply-To: <a3ce50f7-0ff7-a646-06ac-36b26e96547c@iscas.ac.cn>
 From: Kevin Xue <kaiwenx@rivosinc.com>
-Date: Fri, 21 Jul 2023 17:13:04 -0700
-Message-ID: <CAOkKhRSkhpoW3xhYdnazK4hRa2BZOZMdzxfmtvZeQ_RjxitNnw@mail.gmail.com>
-Subject: Re: [PATCH 1/3] target/riscv: Add cycle & instret privilege mode
- filtering properties
+Date: Fri, 21 Jul 2023 17:25:18 -0700
+Message-ID: <CAOkKhRQk_yso1a1mtFaXBOjOzJtFWnO9Xiq7xNk9Grt+xx4ZXw@mail.gmail.com>
+Subject: Re: [PATCH 3/3] target/riscv: Add cycle & instret privilege mode
+ filtering support
 To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
  Palmer Dabbelt <palmer@dabbelt.com>,
@@ -73,14 +73,14 @@ Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Atish Kumar Patra <atishp@atishpatra.org>, Kaiwen Xue <kaiwenx@andrew.cmu.edu>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::734;
- envelope-from=kaiwenx@rivosinc.com; helo=mail-qk1-x734.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2c;
+ envelope-from=kaiwenx@rivosinc.com; helo=mail-vk1-xa2c.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,70 +96,177 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jul 18, 2023 at 6:21=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wr=
+On Tue, Jul 18, 2023 at 6:25=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wr=
 ote:
 >
 >
 > On 2023/7/19 06:47, Kaiwen Xue wrote:
-> > This adds the properties for ISA extension smcntrpmf. Patches
-> > implementing it will follow.
+> > QEMU only calculates dummy cycles and instructions, so there is no
+> > actual means to stop the icount in QEMU. Hence this patch merely adds
+> > the functionality of accessing the cfg registers, and cause no actual
+> > effects on the counting of cycle and instret counters.
+> Maybe you can record/accumulate them when privilege mode changes/switchs.
+
+Good idea. Will do in the next version as well.
+
+- Kevin
+
 > >
 > > Signed-off-by: Kaiwen Xue <kaiwenx@andrew.cmu.edu>
 > > Signed-off-by: Kaiwen Xue <kaiwenx@rivosinc.com>
 > > ---
-> >   target/riscv/cpu.c     | 2 ++
-> >   target/riscv/cpu_cfg.h | 1 +
-> >   2 files changed, 3 insertions(+)
+> >   target/riscv/csr.c | 73 +++++++++++++++++++++++++++++++++++++++++++++=
++
+> >   1 file changed, 73 insertions(+)
 > >
-> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > index 9339c0241d..31a1862561 100644
-> > --- a/target/riscv/cpu.c
-> > +++ b/target/riscv/cpu.c
-> > @@ -132,6 +132,7 @@ static const struct isa_ext_data isa_edata_arr[] =
-=3D {
-> >       ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen)=
-,
-> >       ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
-> >       ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
-> > +    ISA_EXT_DATA_ENTRY(smcntrpmf, PRIV_VERSION_1_12_0, ext_smcntrpmf),
-> >       ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
-> >       ISA_EXT_DATA_ENTRY(svadu, PRIV_VERSION_1_12_0, ext_svadu),
-> >       ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
-> > @@ -1753,6 +1754,7 @@ static Property riscv_cpu_extensions[] =3D {
-> >       /* Defaults for standard extensions */
-> >       DEFINE_PROP_UINT8("pmu-num", RISCVCPU, cfg.pmu_num, 16),
-> >       DEFINE_PROP_BOOL("sscofpmf", RISCVCPU, cfg.ext_sscofpmf, false),
-> > +    DEFINE_PROP_BOOL("smcntrpmf", RISCVCPU, cfg.ext_smcntrpmf, false),
+> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> > index ea7585329e..b1d5e85a79 100644
+> > --- a/target/riscv/csr.c
+> > +++ b/target/riscv/csr.c
+> > @@ -218,6 +218,17 @@ static RISCVException sscofpmf(CPURISCVState *env,=
+ int csrno)
+> >       return RISCV_EXCP_NONE;
+> >   }
+> >
+> > +static RISCVException smcntrpmf(CPURISCVState *env, int csrno)
+> > +{
+> > +    RISCVCPU *cpu =3D env_archcpu(env);
+> > +
+> > +    if (!cpu->cfg.ext_smcntrpmf) {
+> > +        return RISCV_EXCP_ILLEGAL_INST;
+> > +    }
+> > +
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> >   static RISCVException any(CPURISCVState *env, int csrno)
+> >   {
+> >       return RISCV_EXCP_NONE;
+> > @@ -800,6 +811,54 @@ static int read_hpmcounterh(CPURISCVState *env, in=
+t csrno, target_ulong *val)
+> >
+> >   #else /* CONFIG_USER_ONLY */
+> >
+> > +static int read_mcyclecfg(CPURISCVState *env, int csrno, target_ulong =
+*val)
+> > +{
+> > +    *val =3D env->mcyclecfg;
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> > +static int write_mcyclecfg(CPURISCVState *env, int csrno, target_ulong=
+ val)
+> > +{
+> > +    env->mcyclecfg =3D val;
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> > +static int read_mcyclecfgh(CPURISCVState *env, int csrno, target_ulong=
+ *val)
+> > +{
+> > +    *val =3D env->mcyclecfgh;
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> > +static int write_mcyclecfgh(CPURISCVState *env, int csrno, target_ulon=
+g val)
+> > +{
+> > +    env->mcyclecfgh =3D val;
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> > +static int read_minstretcfg(CPURISCVState *env, int csrno, target_ulon=
+g *val)
+> > +{
+> > +    *val =3D env->minstretcfg;
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> > +static int write_minstretcfg(CPURISCVState *env, int csrno, target_ulo=
+ng val)
+> > +{
+> > +    env->minstretcfg =3D val;
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> > +static int read_minstretcfgh(CPURISCVState *env, int csrno, target_ulo=
+ng *val)
+> > +{
+> > +    *val =3D env->minstretcfgh;
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> > +static int write_minstretcfgh(CPURISCVState *env, int csrno, target_ul=
+ong val)
+> > +{
+> > +    env->minstretcfgh =3D val;
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> >   static int read_mhpmevent(CPURISCVState *env, int csrno, target_ulong=
+ *val)
+> >   {
+> >       int evt_index =3D csrno - CSR_MCOUNTINHIBIT;
+> > @@ -4506,6 +4565,13 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D=
+ {
+> >                                write_mcountinhibit,
+> >                                .min_priv_ver =3D PRIV_VERSION_1_11_0   =
+    },
+> >
+> > +    [CSR_MCYCLECFG]      =3D { "mcyclecfg",   smcntrpmf, read_mcyclecf=
+g,
+> > +                             write_mcyclecfg,
+> > +                             .min_priv_ver =3D PRIV_VERSION_1_12_0    =
+   },
+> > +    [CSR_MINSTRETCFG]    =3D { "minstretcfg", smcntrpmf, read_minstret=
+cfg,
+> > +                             write_minstretcfg,
+> > +                             .min_priv_ver =3D PRIV_VERSION_1_12_0    =
+   },
+> > +
+> >       [CSR_MHPMEVENT3]     =3D { "mhpmevent3",     any,    read_mhpmeve=
+nt,
+> >                                write_mhpmevent                         =
+  },
+> >       [CSR_MHPMEVENT4]     =3D { "mhpmevent4",     any,    read_mhpmeve=
+nt,
+> > @@ -4565,6 +4631,13 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D=
+ {
+> >       [CSR_MHPMEVENT31]    =3D { "mhpmevent31",    any,    read_mhpmeve=
+nt,
+> >                                write_mhpmevent                         =
+  },
+> >
+> > +    [CSR_MCYCLECFGH]     =3D { "mcyclecfgh",   smcntrpmf, read_mcyclec=
+fgh,
+> > +                             write_mcyclecfgh,
+> > +                             .min_priv_ver =3D PRIV_VERSION_1_12_0    =
+    },
+> > +    [CSR_MINSTRETCFGH]   =3D { "minstretcfgh", smcntrpmf, read_minstre=
+tcfgh,
+> > +                             write_minstretcfgh,
+> > +                             .min_priv_ver =3D PRIV_VERSION_1_12_0    =
+    },
 >
-> Normally, property should be exposed to user at last after the function
-> is implemented.
+> This two CSRs are RV32-only, they cannot directly share the same
+> predicate as MCYCLECFG/MINSTRETCFG.
 >
 > Regards,
 >
 > Weiwei Li
 
-Will do in the next version.
+Thanks for catching this! Seems sscofpmf also reused the sscofpmf()
+predicate for scountovf
+and mhpmeventXh. I'll probably turn in another patch for that later on.
 
-Thanks,
-Kevin
+- Kevin
 
 >
-> >       DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
-> >       DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
-> >       DEFINE_PROP_BOOL("Zihintpause", RISCVCPU, cfg.ext_zihintpause, tr=
-ue),
-> > diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> > index 2bd9510ba3..424246cbec 100644
-> > --- a/target/riscv/cpu_cfg.h
-> > +++ b/target/riscv/cpu_cfg.h
-> > @@ -69,6 +69,7 @@ struct RISCVCPUConfig {
-> >       bool ext_zihintpause;
-> >       bool ext_smstateen;
-> >       bool ext_sstc;
-> > +    bool ext_smcntrpmf;
-> >       bool ext_svadu;
-> >       bool ext_svinval;
-> >       bool ext_svnapot;
->
+> > +
+> >       [CSR_MHPMEVENT3H]    =3D { "mhpmevent3h",    sscofpmf,  read_mhpm=
+eventh,
+> >                                write_mhpmeventh,
+> >                                .min_priv_ver =3D PRIV_VERSION_1_12_0   =
+     },
 >
 
