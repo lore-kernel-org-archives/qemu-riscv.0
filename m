@@ -4,85 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37237C001DC
-	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Jul 2023 18:07:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F22FEB64DD
+	for <qemu-riscv@archiver.kernel.org>; Sat, 22 Jul 2023 00:13:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qMuWs-0003SN-1j; Fri, 21 Jul 2023 14:07:02 -0400
+	id 1qN0FZ-00062I-QX; Fri, 21 Jul 2023 20:13:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qMuWr-0003S7-IG
- for qemu-riscv@nongnu.org; Fri, 21 Jul 2023 14:07:01 -0400
-Received: from mail-lj1-x235.google.com ([2a00:1450:4864:20::235])
+ (Exim 4.90_1) (envelope-from <kaiwenx@rivosinc.com>)
+ id 1qN0FX-00061y-TW
+ for qemu-riscv@nongnu.org; Fri, 21 Jul 2023 20:13:32 -0400
+Received: from mail-qk1-x734.google.com ([2607:f8b0:4864:20::734])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qMuWp-00066G-SC
- for qemu-riscv@nongnu.org; Fri, 21 Jul 2023 14:07:01 -0400
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2b734aea34aso32765751fa.0
- for <qemu-riscv@nongnu.org>; Fri, 21 Jul 2023 11:06:59 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <kaiwenx@rivosinc.com>)
+ id 1qN0FI-0007nW-EU
+ for qemu-riscv@nongnu.org; Fri, 21 Jul 2023 20:13:31 -0400
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-76714caf466so232256985a.1
+ for <qemu-riscv@nongnu.org>; Fri, 21 Jul 2023 17:13:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1689962818; x=1690567618;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=FJ/E6Ov3CfrZi46Zkx9g+zod3BBOILtbXBx5cNUe9HU=;
- b=STrFLm6uDXQE5prOTjKW4G3HzMhcdNWaBmwCZhxOTtRUle89lpNJsU5gngAKMVpKGU
- BI+nv+/z2mKRLcHjQfRz+/8eDglbASC+hY8Y74QdFgKmWbV4vLTRMM2f2WBeYQRJPfBz
- u8ge64/rBS4+ofuyYN7A0IBJL1dVIBEnFdlQkdHdK7x/GwQ22arFYk/HcRF+p+384d9D
- 87wQvflIYkEfI65yBUfUXzKjkrhtGgkT1hgbQV5qI0e3cWVsCbaFoi1fj/uq1guTarVG
- Y1PJCg+08q7Ht1uQmRWD22iZuav41thTho48QnD7RZRYumsxahCjrkKYkbfo3ek+CRCw
- 42Ow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689962818; x=1690567618;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1689984794; x=1690589594; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FJ/E6Ov3CfrZi46Zkx9g+zod3BBOILtbXBx5cNUe9HU=;
- b=GNww9W+HZMFRlRGo/lx+oVZfGptWdxhgyOzcgZTCKoiI+WmjB6d5lvJFtwrd/aZ4s9
- Y54I5O8JSZMQ+PbTlCZ01yriy1qs+G/4QbTPCoE/M68+FLwwiqyXcCNhe4OCEXFKgCx+
- igade3qTizjNHFv94nuHxnpIvRX/EyuDxgVHj9Il7/GsWrgcqZ7+Sq0H4+Q11RUJjMKc
- M4YcZphtBf90b0vEZRU2MPSQq9UnaMZ1IiMuYjBSU0kC/D3YwPI04JuXwcp51Iuu9nra
- Bp4H447Mqoch9g1O6i2JWGNmDXMgzvgpsmmige5geNKmbInPV4W8twYa9VTya3+hNreE
- Q3wg==
-X-Gm-Message-State: ABy/qLYfpcP3SKj2U4KtUi+mQLTOjD04C6Cvn9ZlcVRIz2DYtrhiceJd
- FvOiwi7YqzH/tpiBBuA2u6nCsQ==
-X-Google-Smtp-Source: APBJJlHoBzpHP/vKowoOp7GQ2v7UMio0kyRxt9itPMMSRqOQUH9tqImEXsiHRb8Aesf2dt+8hp1vWA==
-X-Received: by 2002:a2e:9650:0:b0:2b6:fa54:cec1 with SMTP id
- z16-20020a2e9650000000b002b6fa54cec1mr2273238ljh.48.1689962817706; 
- Fri, 21 Jul 2023 11:06:57 -0700 (PDT)
-Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
- by smtp.gmail.com with ESMTPSA id
- b11-20020a05600c4e0b00b003f7f475c3bcsm10194639wmq.1.2023.07.21.11.06.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Jul 2023 11:06:57 -0700 (PDT)
-Date: Fri, 21 Jul 2023 20:06:56 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, rkanwal@rivosinc.com, 
- anup@brainfault.org, dbarboza@ventanamicro.com, atishp@atishpatra.org, 
- vincent.chen@sifive.com, greentime.hu@sifive.com, frank.chang@sifive.com, 
- jim.shu@sifive.com, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Weiwei Li <liweiwei@iscas.ac.cn>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: Re: [PATCH v6 5/5] target/riscv: select KVM AIA in riscv virt machine
-Message-ID: <20230721-4f5015dcef5454d421f033ea@orel>
-References: <20230714084429.22349-1-yongxuan.wang@sifive.com>
- <20230714084429.22349-6-yongxuan.wang@sifive.com>
+ bh=hjXT1R8oiBgHcpsMWV7f0/G+Lw623RvPbNcbZjo3qzs=;
+ b=RL1hnW4qET0+f/c2wcYfYCuZKpyLDzK4lfy7uXSVkYtoH6IWx/nYPs+If5eqrBBfYP
+ DiNfTNySXFm7DhbOJ9kMbSEGSK6BkbgXPZuY8NZdnmf1i3gDSVGK8KWuOHdN+acPVkqB
+ MQMeNXFVDpd3RdqY3qKQ4o2/v4AOXr8506rMzGpKm/E4m9+vu0hrZjmPmurstOy/w9aS
+ SABsLLZUyRjTED57JT5F6TTGwCbkCtCzC5yyxxVH1K+5aexnN3OpLkZfueqqNtcE4oIU
+ anu+Up3zZKvzhDhJTqWaWJvKwh0b43AcoQzZfJt8Yi298V8OkMPe+a0LA9qRumcqtkvO
+ JWZA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1689984794; x=1690589594;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=hjXT1R8oiBgHcpsMWV7f0/G+Lw623RvPbNcbZjo3qzs=;
+ b=ZNr2OhwRFkiijx4BbxpaHVE6iCqzDPBCnk5Ly1J1fymEE8D94fyeZmd1gfQ1a617TA
+ 0/o17EdsJiR3phN+wOgpfnfJQcnzI9YDcQXRrUultwqlfZFCOSfc4Zj7duok8EuJwtD0
+ E8fjhpIBXkgOBmqmabf5dHWtNCa8q6VxBs2V6hrJenCNArdRTOdtfcnmNkOqnEwUODum
+ vDC1+Y3cIL9HEKNsYGNwQfZl03hADJ2HdRvR7staR4XF01SecD8FY++BYJzDadcGYDRG
+ fanpdchBWMNfs5QHiRrT+HtLqrg3KPtoJE+pgOv9o8/gf6P9UHHGIqKC4nhLh0LRf2cN
+ /eow==
+X-Gm-Message-State: ABy/qLaldkyy6aUXnXcvjHcNUysD123dE2YeVOZIkrvv96Mb5ROMa9V5
+ 3Fb9EvQbT3WRA7mGwK6t953UsFY/IIf2JCa8nWgMYQ==
+X-Google-Smtp-Source: APBJJlFcaqTAdP1Dgg8L4vD6ZyhQpF3LHRXsa+ODK7JJjwlGLc8guM5XfpoOcEOS7q/sbPk0HVvfoRKUDZlTTfnz5/w=
+X-Received: by 2002:a05:620a:f12:b0:765:a23b:cc27 with SMTP id
+ v18-20020a05620a0f1200b00765a23bcc27mr1668791qkl.14.1689984794701; Fri, 21
+ Jul 2023 17:13:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230714084429.22349-6-yongxuan.wang@sifive.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::235;
- envelope-from=ajones@ventanamicro.com; helo=mail-lj1-x235.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+References: <cover.1689631639.git.kaiwenx@rivosinc.com>
+ <d0e7d84180afec116b9fc54ef72fba1d7d8ff345.1689631639.git.kaiwenx@rivosinc.com>
+ <07409bc6-dc55-abd6-f527-2797aa251a88@iscas.ac.cn>
+In-Reply-To: <07409bc6-dc55-abd6-f527-2797aa251a88@iscas.ac.cn>
+From: Kevin Xue <kaiwenx@rivosinc.com>
+Date: Fri, 21 Jul 2023 17:13:04 -0700
+Message-ID: <CAOkKhRSkhpoW3xhYdnazK4hRa2BZOZMdzxfmtvZeQ_RjxitNnw@mail.gmail.com>
+Subject: Re: [PATCH 1/3] target/riscv: Add cycle & instret privilege mode
+ filtering properties
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Atish Kumar Patra <atishp@atishpatra.org>, Kaiwen Xue <kaiwenx@andrew.cmu.edu>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::734;
+ envelope-from=kaiwenx@rivosinc.com; helo=mail-qk1-x734.google.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
+ DKIM_SIGNED=0.1, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,77 +96,70 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Jul 14, 2023 at 08:44:27AM +0000, Yong-Xuan Wang wrote:
-...
-> +#if defined(CONFIG_KVM)
-> +static char *virt_get_kvm_aia(Object *obj, Error **errp)
-> +{
-> +    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
-> +
-> +    return g_strdup(kvm_aia_mode_str(s->kvm_aia_mode));
-> +}
-> +
-> +static void virt_set_kvm_aia(Object *obj, const char *val, Error **errp)
-> +{
-> +    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
-> +
-> +    if (!strcmp(val, "emul")) {
-> +        s->kvm_aia_mode = KVM_DEV_RISCV_AIA_MODE_EMUL;
-> +    } else if (!strcmp(val, "hwaccel")) {
-> +        s->kvm_aia_mode = KVM_DEV_RISCV_AIA_MODE_HWACCEL;
-> +    } else if (!strcmp(val, "auto")) {
-> +        s->kvm_aia_mode = KVM_DEV_RISCV_AIA_MODE_AUTO;
-> +    } else {
-> +        error_setg(errp, "Invalid KVM AIA mode");
-> +        error_append_hint(errp, "Valid values are emul, hwaccel, and auto.\n");
-> +    }
-> +}
-> +#endif
-> +
->  static bool virt_get_aclint(Object *obj, Error **errp)
->  {
->      RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
-> @@ -1687,6 +1745,18 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
->      sprintf(str, "Set number of guest MMIO pages for AIA IMSIC. Valid value "
->                   "should be between 0 and %d.", VIRT_IRQCHIP_MAX_GUESTS);
->      object_class_property_set_description(oc, "aia-guests", str);
-> +
-> +#if defined(CONFIG_KVM)
-> +    object_class_property_add_str(oc, "kvm-aia", virt_get_kvm_aia,
-> +                                  virt_set_kvm_aia);
-> +    object_class_property_set_description(oc, "kvm-aia",
-> +                                          "Set KVM AIA mode. Valid values are "
-> +                                          "emul, hwaccel, and auto. Default "
-> +                                          "is auto.");
-> +    object_property_set_default_str(object_class_property_find(oc, "kvm-aia"),
-> +                                    "auto");
+On Tue, Jul 18, 2023 at 6:21=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wr=
+ote:
+>
+>
+> On 2023/7/19 06:47, Kaiwen Xue wrote:
+> > This adds the properties for ISA extension smcntrpmf. Patches
+> > implementing it will follow.
+> >
+> > Signed-off-by: Kaiwen Xue <kaiwenx@andrew.cmu.edu>
+> > Signed-off-by: Kaiwen Xue <kaiwenx@rivosinc.com>
+> > ---
+> >   target/riscv/cpu.c     | 2 ++
+> >   target/riscv/cpu_cfg.h | 1 +
+> >   2 files changed, 3 insertions(+)
+> >
+> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > index 9339c0241d..31a1862561 100644
+> > --- a/target/riscv/cpu.c
+> > +++ b/target/riscv/cpu.c
+> > @@ -132,6 +132,7 @@ static const struct isa_ext_data isa_edata_arr[] =
+=3D {
+> >       ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen)=
+,
+> >       ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
+> >       ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
+> > +    ISA_EXT_DATA_ENTRY(smcntrpmf, PRIV_VERSION_1_12_0, ext_smcntrpmf),
+> >       ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
+> >       ISA_EXT_DATA_ENTRY(svadu, PRIV_VERSION_1_12_0, ext_svadu),
+> >       ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
+> > @@ -1753,6 +1754,7 @@ static Property riscv_cpu_extensions[] =3D {
+> >       /* Defaults for standard extensions */
+> >       DEFINE_PROP_UINT8("pmu-num", RISCVCPU, cfg.pmu_num, 16),
+> >       DEFINE_PROP_BOOL("sscofpmf", RISCVCPU, cfg.ext_sscofpmf, false),
+> > +    DEFINE_PROP_BOOL("smcntrpmf", RISCVCPU, cfg.ext_smcntrpmf, false),
+>
+> Normally, property should be exposed to user at last after the function
+> is implemented.
+>
+> Regards,
+>
+> Weiwei Li
 
-I'm starting to think the "kvm-aia" property should be renamed to
-"riscv-aia" or just "aia" and added in
-target/riscv/kvm.c:kvm_arch_accel_class_init() to be a riscv kvm
-accelerator property instead of a virt machine property.
+Will do in the next version.
 
 Thanks,
-drew
+Kevin
 
-> +
-> +#endif
->      object_class_property_add(oc, "acpi", "OnOffAuto",
->                                virt_get_acpi, virt_set_acpi,
->                                NULL, NULL);
-> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-> index e5c474b26e..d0140feeff 100644
-> --- a/include/hw/riscv/virt.h
-> +++ b/include/hw/riscv/virt.h
-> @@ -56,6 +56,7 @@ struct RISCVVirtState {
->      bool have_aclint;
->      RISCVVirtAIAType aia_type;
->      int aia_guests;
-> +    uint64_t kvm_aia_mode;
->      char *oem_id;
->      char *oem_table_id;
->      OnOffAuto acpi;
-> -- 
-> 2.17.1
-> 
+>
+> >       DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
+> >       DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
+> >       DEFINE_PROP_BOOL("Zihintpause", RISCVCPU, cfg.ext_zihintpause, tr=
+ue),
+> > diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> > index 2bd9510ba3..424246cbec 100644
+> > --- a/target/riscv/cpu_cfg.h
+> > +++ b/target/riscv/cpu_cfg.h
+> > @@ -69,6 +69,7 @@ struct RISCVCPUConfig {
+> >       bool ext_zihintpause;
+> >       bool ext_smstateen;
+> >       bool ext_sstc;
+> > +    bool ext_smcntrpmf;
+> >       bool ext_svadu;
+> >       bool ext_svinval;
+> >       bool ext_svnapot;
+>
+>
 
