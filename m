@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1401CEB64DD
-	for <qemu-riscv@archiver.kernel.org>; Sat, 22 Jul 2023 00:25:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC637C001B0
+	for <qemu-riscv@archiver.kernel.org>; Sun, 23 Jul 2023 22:37:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qN0RG-0008E4-5d; Fri, 21 Jul 2023 20:25:38 -0400
+	id 1qNhi2-00011G-Kz; Sun, 23 Jul 2023 18:37:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kaiwenx@rivosinc.com>)
- id 1qN0RB-0008DP-E3
- for qemu-riscv@nongnu.org; Fri, 21 Jul 2023 20:25:34 -0400
-Received: from mail-vk1-xa2c.google.com ([2607:f8b0:4864:20::a2c])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1qNhi1-0000ye-Do; Sun, 23 Jul 2023 18:37:49 -0400
+Received: from mail-qv1-xf2b.google.com ([2607:f8b0:4864:20::f2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <kaiwenx@rivosinc.com>)
- id 1qN0R9-0004zT-5P
- for qemu-riscv@nongnu.org; Fri, 21 Jul 2023 20:25:33 -0400
-Received: by mail-vk1-xa2c.google.com with SMTP id
- 71dfb90a1353d-4815756d742so918101e0c.1
- for <qemu-riscv@nongnu.org>; Fri, 21 Jul 2023 17:25:30 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1qNhhz-0004tD-TI; Sun, 23 Jul 2023 18:37:49 -0400
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-635e6f8bf77so27031966d6.0; 
+ Sun, 23 Jul 2023 15:37:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1689985529; x=1690590329; 
+ d=gmail.com; s=20221208; t=1690151866; x=1690756666;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3QPSb4CWTRfIADpPzZqK7YEyQnKkR9xmef6Q52DYxH8=;
- b=nSeTNsirYIYN/8rWwsMQPc+QQHNBE/eBSdOrrZyqZlfmF9DnHunfV/GZC1sc3OmaWe
- FxEjy0hcaTjT5MPbhs4BSOtwRajKPJK8pwn3B81lLQ7azMWYI7cJ+ppKwZ3hVT0H65Eo
- cnsAVQ4z0+81xMjmhI0cuDDgXliUd2AGVQMfx77bgNV9yvoGG2y85+krqkLGCV2A5N0G
- WTFKBMOJz1Ke2rrjwdV/Hi8BPPRr8Vul+GnFtrGNIaUciRVpiuj68c5kgoyo+c353R9F
- G240q7KWLjl7cnCSx3uYCJ4mhG2rCAF9/VJuMMLXIVbgbxi61N6Qw64rSALVZzfw7fPr
- If/w==
+ bh=USk48pwChPkS0weRkQRyDaK4GKfNpvS3fNDRoimti4s=;
+ b=slbQvfOKFdZJR5BhLHPaqaebxMVOG9kt9uQcyRPA5f9zUkfh6XC7UOYeAxqsDnB//1
+ xg2LrbIteVIZ6Gsee7eyej0ULja81/bjH9bACP1MG2sTHVg0Y3dqWLOgG2feR7Qjfg1j
+ BQOP6DwVLmyZZbB4HvjmBhbKvHIEioAFkr6kbRuiTeljaljXAjGZCDSOKT5Bu9wam+PQ
+ O4P17Y7wUEGeNj4lbVoo7AOJeKlpi2uF8N0IVrVtbu20ttgT410qOOfcpYRCysSdEw3t
+ MRfF7+o8iGBtyFO7+/2n7xJTwXeKexFc2AjY44wAx1rdNaYCcoEaObIuiY40Kvtx+4Kz
+ CFrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689985529; x=1690590329;
+ d=1e100.net; s=20221208; t=1690151866; x=1690756666;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3QPSb4CWTRfIADpPzZqK7YEyQnKkR9xmef6Q52DYxH8=;
- b=dPtv2SoTnpNCyJtmVe+lxfZYiDuoiAjadwznWGR42dmNuwuCuAHBpXdHfLn55I4WMr
- gWTnfw+rGWZ/WFo2mJfti3R2Oc/ZLnkXhqqNwRft34sb8G3pb+kPDyS6cEduc2fYbjuf
- LmtGcUy2X5c1RZG21r4072050HtzkivllgYP9oE9VabT7uSUQPHNhNvMvbADZDrCLdlE
- 8Kf72m56OhegPDq8QXliDz57nZDjKfcZm9jEDTsP8kBxTUL5HNhhcnWldRYDdC/5r6hi
- RkQWPfgYyEbbUuaUycCd9wWg5Uyfe7S8ixOKtq1Ljkzd8miITFYhTqsO5aQVU6ztL1r1
- izRw==
-X-Gm-Message-State: ABy/qLZaJBgvOhjZQivKI6P6SraL5dZ7I1Z20glFR0odW/EZdQOLEXaZ
- jn6KROUBoZPwPOUohnqPGoADTFGMOmYjlBUhNUs5Sw==
-X-Google-Smtp-Source: APBJJlHNd67StYXhjudvlPQPRdNV6Ho3s+552V4ruiqZvmzyfISBdTy+3tV4D1UiG8NaFhj9Q9RTxcLW5/NAVMLlJIk=
-X-Received: by 2002:a1f:d945:0:b0:46e:7158:1cf0 with SMTP id
- q66-20020a1fd945000000b0046e71581cf0mr2082017vkg.10.1689985529206; Fri, 21
- Jul 2023 17:25:29 -0700 (PDT)
+ bh=USk48pwChPkS0weRkQRyDaK4GKfNpvS3fNDRoimti4s=;
+ b=P5MzNEvWIvn9lgr80Y/hogybKcjmP5vESzY0zLjNaoDvlhpC/fMFRmb4cCxrLtUJj0
+ uffNdp6vCes9FsyRBFULyTe2P1wd5MbCVkJqDAFNo6BURDSXVhze8OTWsTX+8eXyXRQr
+ nmCFo6DejD8r+gFpoy6HTXD0mv63SNz+Oxq+N6AetOU8ahFDKSr+TPgByqF6atLGbCHL
+ HkJdJgmif2wGQM8W3cI4sEVpeVLKyjnn9pfxjURKgbbnVk89/951uMqaee6YBV+zsbMW
+ 7VHRip24QOKOZxsc/0ilu6S/b8ddPSi69qhxESJ6YtIjLvODRqat+j8OeQJK4TQWAnS0
+ RO3A==
+X-Gm-Message-State: ABy/qLZrFIeaZy3zcRiaw0406zFsbA4pA8YKfr9i1Qdlr+W+dokefAI4
+ uGrfirBo065RTCt4h2OZq4adfUh1yCLgo4mSfQ8=
+X-Google-Smtp-Source: APBJJlE4GTsHNCt10XcnoEgyPSegzxnC0vRWar4yM6DUIqYrSvmlx9fMnjuC48wGV640vS8iw3DQ3TPhqGNx+Nw1s68=
+X-Received: by 2002:a05:620a:4016:b0:765:a57a:16fe with SMTP id
+ h22-20020a05620a401600b00765a57a16femr9804523qko.76.1690151865856; Sun, 23
+ Jul 2023 15:37:45 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1689631639.git.kaiwenx@rivosinc.com>
- <3ed71e9812a806b98dd519594af52b9525ec459c.1689631639.git.kaiwenx@rivosinc.com>
- <a3ce50f7-0ff7-a646-06ac-36b26e96547c@iscas.ac.cn>
-In-Reply-To: <a3ce50f7-0ff7-a646-06ac-36b26e96547c@iscas.ac.cn>
-From: Kevin Xue <kaiwenx@rivosinc.com>
-Date: Fri, 21 Jul 2023 17:25:18 -0700
-Message-ID: <CAOkKhRQk_yso1a1mtFaXBOjOzJtFWnO9Xiq7xNk9Grt+xx4ZXw@mail.gmail.com>
-Subject: Re: [PATCH 3/3] target/riscv: Add cycle & instret privilege mode
- filtering support
-To: Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+References: <20230721094720.902454-1-thuth@redhat.com>
+ <20230721094720.902454-3-thuth@redhat.com>
+In-Reply-To: <20230721094720.902454-3-thuth@redhat.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 24 Jul 2023 08:37:19 +1000
+Message-ID: <CAKmqyKM3JMnPfp-RS5OuKk7Scj+zGaeUy+Eu7M+c+Ojrvp5tMA@mail.gmail.com>
+Subject: Re: [PATCH 2/2] hw/char/riscv_htif: Fix the console syscall on big
+ endian hosts
+To: Thomas Huth <thuth@redhat.com>
+Cc: qemu-devel@nongnu.org,
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Atish Kumar Patra <atishp@atishpatra.org>, Kaiwen Xue <kaiwenx@andrew.cmu.edu>
+ Bin Meng <bin.meng@windriver.com>, qemu-stable@nongnu.org, 
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-riscv@nongnu.org, 
+ Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2c;
- envelope-from=kaiwenx@rivosinc.com; helo=mail-vk1-xa2c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::f2b;
+ envelope-from=alistair23@gmail.com; helo=mail-qv1-xf2b.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,177 +97,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jul 18, 2023 at 6:25=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wr=
-ote:
+On Fri, Jul 21, 2023 at 7:48=E2=80=AFPM Thomas Huth <thuth@redhat.com> wrot=
+e:
 >
+> Values that have been read via cpu_physical_memory_read() from the
+> guest's memory have to be swapped in case the host endianess differs
+> from the guest.
 >
-> On 2023/7/19 06:47, Kaiwen Xue wrote:
-> > QEMU only calculates dummy cycles and instructions, so there is no
-> > actual means to stop the icount in QEMU. Hence this patch merely adds
-> > the functionality of accessing the cfg registers, and cause no actual
-> > effects on the counting of cycle and instret counters.
-> Maybe you can record/accumulate them when privilege mode changes/switchs.
+> Fixes: a6e13e31d5 ("riscv_htif: Support console output via proxy syscall"=
+)
+> Signed-off-by: Thomas Huth <thuth@redhat.com>
 
-Good idea. Will do in the next version as well.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-- Kevin
+Alistair
 
-> >
-> > Signed-off-by: Kaiwen Xue <kaiwenx@andrew.cmu.edu>
-> > Signed-off-by: Kaiwen Xue <kaiwenx@rivosinc.com>
-> > ---
-> >   target/riscv/csr.c | 73 +++++++++++++++++++++++++++++++++++++++++++++=
-+
-> >   1 file changed, 73 insertions(+)
-> >
-> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> > index ea7585329e..b1d5e85a79 100644
-> > --- a/target/riscv/csr.c
-> > +++ b/target/riscv/csr.c
-> > @@ -218,6 +218,17 @@ static RISCVException sscofpmf(CPURISCVState *env,=
- int csrno)
-> >       return RISCV_EXCP_NONE;
-> >   }
-> >
-> > +static RISCVException smcntrpmf(CPURISCVState *env, int csrno)
-> > +{
-> > +    RISCVCPU *cpu =3D env_archcpu(env);
-> > +
-> > +    if (!cpu->cfg.ext_smcntrpmf) {
-> > +        return RISCV_EXCP_ILLEGAL_INST;
-> > +    }
-> > +
-> > +    return RISCV_EXCP_NONE;
-> > +}
-> > +
-> >   static RISCVException any(CPURISCVState *env, int csrno)
-> >   {
-> >       return RISCV_EXCP_NONE;
-> > @@ -800,6 +811,54 @@ static int read_hpmcounterh(CPURISCVState *env, in=
-t csrno, target_ulong *val)
-> >
-> >   #else /* CONFIG_USER_ONLY */
-> >
-> > +static int read_mcyclecfg(CPURISCVState *env, int csrno, target_ulong =
-*val)
-> > +{
-> > +    *val =3D env->mcyclecfg;
-> > +    return RISCV_EXCP_NONE;
-> > +}
-> > +
-> > +static int write_mcyclecfg(CPURISCVState *env, int csrno, target_ulong=
- val)
-> > +{
-> > +    env->mcyclecfg =3D val;
-> > +    return RISCV_EXCP_NONE;
-> > +}
-> > +
-> > +static int read_mcyclecfgh(CPURISCVState *env, int csrno, target_ulong=
- *val)
-> > +{
-> > +    *val =3D env->mcyclecfgh;
-> > +    return RISCV_EXCP_NONE;
-> > +}
-> > +
-> > +static int write_mcyclecfgh(CPURISCVState *env, int csrno, target_ulon=
-g val)
-> > +{
-> > +    env->mcyclecfgh =3D val;
-> > +    return RISCV_EXCP_NONE;
-> > +}
-> > +
-> > +static int read_minstretcfg(CPURISCVState *env, int csrno, target_ulon=
-g *val)
-> > +{
-> > +    *val =3D env->minstretcfg;
-> > +    return RISCV_EXCP_NONE;
-> > +}
-> > +
-> > +static int write_minstretcfg(CPURISCVState *env, int csrno, target_ulo=
-ng val)
-> > +{
-> > +    env->minstretcfg =3D val;
-> > +    return RISCV_EXCP_NONE;
-> > +}
-> > +
-> > +static int read_minstretcfgh(CPURISCVState *env, int csrno, target_ulo=
-ng *val)
-> > +{
-> > +    *val =3D env->minstretcfgh;
-> > +    return RISCV_EXCP_NONE;
-> > +}
-> > +
-> > +static int write_minstretcfgh(CPURISCVState *env, int csrno, target_ul=
-ong val)
-> > +{
-> > +    env->minstretcfgh =3D val;
-> > +    return RISCV_EXCP_NONE;
-> > +}
-> > +
-> >   static int read_mhpmevent(CPURISCVState *env, int csrno, target_ulong=
- *val)
-> >   {
-> >       int evt_index =3D csrno - CSR_MCOUNTINHIBIT;
-> > @@ -4506,6 +4565,13 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D=
- {
-> >                                write_mcountinhibit,
-> >                                .min_priv_ver =3D PRIV_VERSION_1_11_0   =
-    },
-> >
-> > +    [CSR_MCYCLECFG]      =3D { "mcyclecfg",   smcntrpmf, read_mcyclecf=
-g,
-> > +                             write_mcyclecfg,
-> > +                             .min_priv_ver =3D PRIV_VERSION_1_12_0    =
-   },
-> > +    [CSR_MINSTRETCFG]    =3D { "minstretcfg", smcntrpmf, read_minstret=
-cfg,
-> > +                             write_minstretcfg,
-> > +                             .min_priv_ver =3D PRIV_VERSION_1_12_0    =
-   },
-> > +
-> >       [CSR_MHPMEVENT3]     =3D { "mhpmevent3",     any,    read_mhpmeve=
-nt,
-> >                                write_mhpmevent                         =
-  },
-> >       [CSR_MHPMEVENT4]     =3D { "mhpmevent4",     any,    read_mhpmeve=
-nt,
-> > @@ -4565,6 +4631,13 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D=
- {
-> >       [CSR_MHPMEVENT31]    =3D { "mhpmevent31",    any,    read_mhpmeve=
-nt,
-> >                                write_mhpmevent                         =
-  },
-> >
-> > +    [CSR_MCYCLECFGH]     =3D { "mcyclecfgh",   smcntrpmf, read_mcyclec=
-fgh,
-> > +                             write_mcyclecfgh,
-> > +                             .min_priv_ver =3D PRIV_VERSION_1_12_0    =
-    },
-> > +    [CSR_MINSTRETCFGH]   =3D { "minstretcfgh", smcntrpmf, read_minstre=
-tcfgh,
-> > +                             write_minstretcfgh,
-> > +                             .min_priv_ver =3D PRIV_VERSION_1_12_0    =
-    },
+> ---
+>  hw/char/riscv_htif.c | 9 +++++----
+>  1 file changed, 5 insertions(+), 4 deletions(-)
 >
-> This two CSRs are RV32-only, they cannot directly share the same
-> predicate as MCYCLECFG/MINSTRETCFG.
+> diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
+> index f96df40124..40de6b8b77 100644
+> --- a/hw/char/riscv_htif.c
+> +++ b/hw/char/riscv_htif.c
+> @@ -30,6 +30,7 @@
+>  #include "qemu/timer.h"
+>  #include "qemu/error-report.h"
+>  #include "exec/address-spaces.h"
+> +#include "exec/tswap.h"
+>  #include "sysemu/dma.h"
 >
-> Regards,
+>  #define RISCV_DEBUG_HTIF 0
+> @@ -209,11 +210,11 @@ static void htif_handle_tohost_write(HTIFState *s, =
+uint64_t val_written)
+>              } else {
+>                  uint64_t syscall[8];
+>                  cpu_physical_memory_read(payload, syscall, sizeof(syscal=
+l));
+> -                if (syscall[0] =3D=3D PK_SYS_WRITE &&
+> -                    syscall[1] =3D=3D HTIF_DEV_CONSOLE &&
+> -                    syscall[3] =3D=3D HTIF_CONSOLE_CMD_PUTC) {
+> +                if (tswap64(syscall[0]) =3D=3D PK_SYS_WRITE &&
+> +                    tswap64(syscall[1]) =3D=3D HTIF_DEV_CONSOLE &&
+> +                    tswap64(syscall[3]) =3D=3D HTIF_CONSOLE_CMD_PUTC) {
+>                      uint8_t ch;
+> -                    cpu_physical_memory_read(syscall[2], &ch, 1);
+> +                    cpu_physical_memory_read(tswap64(syscall[2]), &ch, 1=
+);
+>                      qemu_chr_fe_write(&s->chr, &ch, 1);
+>                      resp =3D 0x100 | (uint8_t)payload;
+>                  } else {
+> --
+> 2.39.3
 >
-> Weiwei Li
-
-Thanks for catching this! Seems sscofpmf also reused the sscofpmf()
-predicate for scountovf
-and mhpmeventXh. I'll probably turn in another patch for that later on.
-
-- Kevin
-
->
-> > +
-> >       [CSR_MHPMEVENT3H]    =3D { "mhpmevent3h",    sscofpmf,  read_mhpm=
-eventh,
-> >                                write_mhpmeventh,
-> >                                .min_priv_ver =3D PRIV_VERSION_1_12_0   =
-     },
 >
 
