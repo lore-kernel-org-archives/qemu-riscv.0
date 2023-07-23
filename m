@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B214EC001B0
-	for <qemu-riscv@archiver.kernel.org>; Sun, 23 Jul 2023 23:42:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BA59C001DE
+	for <qemu-riscv@archiver.kernel.org>; Sun, 23 Jul 2023 23:46:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qNihs-00034Q-Aw; Sun, 23 Jul 2023 19:41:44 -0400
+	id 1qNimD-0004M2-5G; Sun, 23 Jul 2023 19:46:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qNiha-00030o-Fq; Sun, 23 Jul 2023 19:41:27 -0400
-Received: from mail-ua1-x92f.google.com ([2607:f8b0:4864:20::92f])
+ id 1qNim0-0004Iv-Tr; Sun, 23 Jul 2023 19:46:00 -0400
+Received: from mail-ua1-x92b.google.com ([2607:f8b0:4864:20::92b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qNihY-0000Y2-6v; Sun, 23 Jul 2023 19:41:25 -0400
-Received: by mail-ua1-x92f.google.com with SMTP id
- a1e0cc1a2514c-799761430c2so911340241.2; 
- Sun, 23 Jul 2023 16:41:23 -0700 (PDT)
+ id 1qNilz-0001dS-9U; Sun, 23 Jul 2023 19:46:00 -0400
+Received: by mail-ua1-x92b.google.com with SMTP id
+ a1e0cc1a2514c-7996e265b4dso1464605241.2; 
+ Sun, 23 Jul 2023 16:45:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1690155682; x=1690760482;
+ d=gmail.com; s=20221208; t=1690155956; x=1690760756;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2UXbCSiqPu9W6ZtO3z7yqITNJDYYwNIU0Bv/hiM65ew=;
- b=IhRw/3J/32TNtl5mLCoW8o9LqyVVcRXIGK5dWevR8quCWAbzIzopZ4XiAK8ClKqtay
- kvwbDz7RfMpDcKtI/I2shMsy8tYWfJwjCXh9iT5Y6qbe2CPvQebMgKC4fp9muDe4qC/p
- 7GK7UcNSBEy0/RtODzQBgunIGK4tMcKGQAzxQOipac+qfZnQ8mWbQ03vKKM5IovzmVNe
- N/sFKR0iD4Dj+YpznpMg7tRp1GfQkUpTlZ+Rt/2KQbTQvolWPlRFOgy+hJeU/DOVYTrR
- PXK541B5LsvYKbLNz5IdMysOf4khjeSzeDcaUPfui/VuIS7LU4zp+78MxQVaA2TXXAqG
- kt8Q==
+ bh=FjhIaXTvM+YazFlF0I0qdrNY4Jr2xUalkd8K3LBKGis=;
+ b=cJFLRL/kINhVbgsMGyi3NN3jvOluS03E03/N+iws4dv0GuxH6zgZezge1OLeMx2+yA
+ fV5CnsPh5Hm1zaEYA41knxZR+vBe8pyz+msQM0udZ4po3jSu5OXqQZmL/DQpJh5LDwGl
+ KhNR9EadLTTYgcwt5YU1et6l/l2Qs4SJntgqgUbgGubVL02110TeZ7adFcXBQYPi61gN
+ 9NVm9PtTkHATpxzPmm0DWKT/+XHQ+r0CREE/2M2qxRgPvSPFGhhAtxmTHmaLyDtQrDDM
+ vWpEww+PROC+tzrO8rqtdnBaPuJtjlSByaeBRaIfYX1diAOj5kZOfuQyiF0sUpkTTRw4
+ Q2jA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1690155682; x=1690760482;
+ d=1e100.net; s=20221208; t=1690155956; x=1690760756;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2UXbCSiqPu9W6ZtO3z7yqITNJDYYwNIU0Bv/hiM65ew=;
- b=DNLP5BNt1ge4Oiz+DBXsJ7rHFIrVYinCQ7HBOexpqOZNZKQX5m13AoXm0QCzxIGijt
- yk/rvXRQL4rpvAPUF1vwwY7snylqHf9SJinaQgpfyNioAF1yksro4iTU2BzE3kvJJ9nn
- roTBjkVb4il/DgWYLtG5yS2A4bkg+VqKvF4Wg9uhzF470aQ+UwlhALYa5keiLOWqM/zZ
- hJg963vAm4v21LWjJbUWZ8jb1NTuM9XczmFPN4F9B798s9XioL5OceYGVeG+MDHCGwog
- DjGyFrTrp4dcAOuP/s/uZVXmib6MspXEKxX8JFZN3OFnS+exjjje6xIRbsOHpwpII6WJ
- UXjA==
-X-Gm-Message-State: ABy/qLaGVzULaGP9fB/eeM0iwIRJLhj2Oi2jLTt2YZYie72xMmMRBdQt
- btU8kOS8wo9peWomFOU9EIq8HLGEPqQBYsLPVYU=
-X-Google-Smtp-Source: APBJJlGS/CDYRnqV9lXRVElTM9BeQWGTnvFX8PadwtmFCtFrfUY2v6I5SngZE+a4OFIN1mXPgZOpb3oDPEmvLTiWC38=
-X-Received: by 2002:a1f:60cf:0:b0:471:5427:39a5 with SMTP id
- u198-20020a1f60cf000000b00471542739a5mr3509379vkb.10.1690155682279; Sun, 23
- Jul 2023 16:41:22 -0700 (PDT)
+ bh=FjhIaXTvM+YazFlF0I0qdrNY4Jr2xUalkd8K3LBKGis=;
+ b=Zar/jRo+pldlPF6uAy4Rn3H5oDrxRDFkPPOj1KNvePlTZqZgb3GGmmNxxiPKIkSwQY
+ QyJ/WjaPUyJdZ6G0LsbifVHMkVHeZDX26fsCJdO5QTJmSgoPckVNyNjaDUn2bR8mB8xg
+ 0IfR4LQ20L47O2PhB7geFqC+Vz2dH6OU7g8Rzocojb3+jskpOO4+T5nk/OZrbyMT1N8P
+ +4Od2yPoAtIF71qNJuUkOAViYNqZCZAuG6AXagb2u8nEJeSe6bMMJWZ9w3mAYyf5vDhK
+ viHw89LJ5xJuPceU0rwZ1vuCDK8yh/owVzGXQmAIG8vJsk2ahtxMweWK3FDvZVQP581X
+ uP7A==
+X-Gm-Message-State: ABy/qLZAx3T9tEHS6sAz1VDlNMilQ5BSEGxpQgpg3Pn8n+iz6o3HCuTs
+ dOaDEPP7ndvuMSw9disoTv2OMUQbVX64W3+HKEE=
+X-Google-Smtp-Source: APBJJlG1kVdO0XaKF084mmBL7nARt4k1Ka/ac8oH2f2bXESx/y+L/gAVYNn4XEfzzShlfv4P4AOPas/n6K9vsS8agBk=
+X-Received: by 2002:a1f:3d4f:0:b0:47e:1425:12a7 with SMTP id
+ k76-20020a1f3d4f000000b0047e142512a7mr3843034vka.5.1690155956547; Sun, 23 Jul
+ 2023 16:45:56 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230712163943.98994-1-sunilvl@ventanamicro.com>
- <20230712163943.98994-2-sunilvl@ventanamicro.com>
-In-Reply-To: <20230712163943.98994-2-sunilvl@ventanamicro.com>
+ <20230712163943.98994-3-sunilvl@ventanamicro.com>
+In-Reply-To: <20230712163943.98994-3-sunilvl@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 24 Jul 2023 09:40:56 +1000
-Message-ID: <CAKmqyKOiZhQz=vKnw0JcMJaMLsVfTWpKAJ5-F0=hKcUfOwEdgg@mail.gmail.com>
-Subject: Re: [PATCH 01/10] hw/arm/virt-acpi-build.c: Move fw_cfg and virtio to
- common location
+Date: Mon, 24 Jul 2023 09:45:30 +1000
+Message-ID: <CAKmqyKOGnyBvwFu3yX03ksdOtwG2z0_VY+AKhbYQ3ODiJF_mfQ@mail.gmail.com>
+Subject: Re: [PATCH 02/10] hw/riscv: virt: Add PCI bus reference in
+ RISCVVirtState
 To: Sunil V L <sunilvl@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, 
  "Michael S . Tsirkin" <mst@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
@@ -74,8 +74,8 @@ Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  Anup Patel <apatel@ventanamicro.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92f;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92b;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92b.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -99,12 +99,12 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jul 13, 2023 at 2:41=E2=80=AFAM Sunil V L <sunilvl@ventanamicro.com=
+On Thu, Jul 13, 2023 at 2:42=E2=80=AFAM Sunil V L <sunilvl@ventanamicro.com=
 > wrote:
 >
-> The functions which add fw_cfg and virtio to DSDT are same for ARM
-> and RISC-V. So, instead of duplicating in RISC-V, move them from
-> hw/arm/virt-acpi-build.c to common aml-build.c.
+> The PCI bus information is needed in RISCVVirtState so that other
+> files like virt-acpi-build.c can make use of it. Add new field in
+> RISCVVirtState so that ACPI code can use it.
 >
 > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
 
@@ -113,191 +113,56 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  hw/acpi/aml-build.c         | 41 ++++++++++++++++++++++++++++++++++++
->  hw/arm/virt-acpi-build.c    | 42 -------------------------------------
->  hw/riscv/virt-acpi-build.c  | 16 --------------
->  include/hw/acpi/aml-build.h |  6 ++++++
->  4 files changed, 47 insertions(+), 58 deletions(-)
+>  hw/riscv/virt.c         | 6 ++++--
+>  include/hw/riscv/virt.h | 1 +
+>  2 files changed, 5 insertions(+), 2 deletions(-)
 >
-> diff --git a/hw/acpi/aml-build.c b/hw/acpi/aml-build.c
-> index ea331a20d1..eeb1263c8c 100644
-> --- a/hw/acpi/aml-build.c
-> +++ b/hw/acpi/aml-build.c
-> @@ -2467,3 +2467,44 @@ Aml *aml_i2c_serial_bus_device(uint16_t address, c=
-onst char *resource_source)
->
->      return var;
->  }
-> +
-> +void acpi_dsdt_add_fw_cfg(Aml *scope, const MemMapEntry *fw_cfg_memmap)
-> +{
-> +    Aml *dev =3D aml_device("FWCF");
-> +    aml_append(dev, aml_name_decl("_HID", aml_string("QEMU0002")));
-> +    /* device present, functioning, decoding, not shown in UI */
-> +    aml_append(dev, aml_name_decl("_STA", aml_int(0xB)));
-> +    aml_append(dev, aml_name_decl("_CCA", aml_int(1)));
-> +
-> +    Aml *crs =3D aml_resource_template();
-> +    aml_append(crs, aml_memory32_fixed(fw_cfg_memmap->base,
-> +                                       fw_cfg_memmap->size, AML_READ_WRI=
-TE));
-> +    aml_append(dev, aml_name_decl("_CRS", crs));
-> +    aml_append(scope, dev);
-> +}
-> +
-> +void acpi_dsdt_add_virtio(Aml *scope,
-> +                          const MemMapEntry *virtio_mmio_memmap,
-> +                          uint32_t mmio_irq, int num)
-> +{
-> +    hwaddr base =3D virtio_mmio_memmap->base;
-> +    hwaddr size =3D virtio_mmio_memmap->size;
-> +    int i;
-> +
-> +    for (i =3D 0; i < num; i++) {
-> +        uint32_t irq =3D mmio_irq + i;
-> +        Aml *dev =3D aml_device("VR%02u", i);
-> +        aml_append(dev, aml_name_decl("_HID", aml_string("LNRO0005")));
-> +        aml_append(dev, aml_name_decl("_UID", aml_int(i)));
-> +        aml_append(dev, aml_name_decl("_CCA", aml_int(1)));
-> +
-> +        Aml *crs =3D aml_resource_template();
-> +        aml_append(crs, aml_memory32_fixed(base, size, AML_READ_WRITE));
-> +        aml_append(crs,
-> +                   aml_interrupt(AML_CONSUMER, AML_LEVEL, AML_ACTIVE_HIG=
-H,
-> +                                 AML_EXCLUSIVE, &irq, 1));
-> +        aml_append(dev, aml_name_decl("_CRS", crs));
-> +        aml_append(scope, dev);
-> +        base +=3D size;
-> +    }
-> +}
-> diff --git a/hw/arm/virt-acpi-build.c b/hw/arm/virt-acpi-build.c
-> index 6b674231c2..fdedb68e2b 100644
-> --- a/hw/arm/virt-acpi-build.c
-> +++ b/hw/arm/virt-acpi-build.c
-> @@ -35,7 +35,6 @@
->  #include "target/arm/cpu.h"
->  #include "hw/acpi/acpi-defs.h"
->  #include "hw/acpi/acpi.h"
-> -#include "hw/nvram/fw_cfg.h"
->  #include "hw/acpi/bios-linker-loader.h"
->  #include "hw/acpi/aml-build.h"
->  #include "hw/acpi/utils.h"
-> @@ -94,21 +93,6 @@ static void acpi_dsdt_add_uart(Aml *scope, const MemMa=
-pEntry *uart_memmap,
->      aml_append(scope, dev);
->  }
->
-> -static void acpi_dsdt_add_fw_cfg(Aml *scope, const MemMapEntry *fw_cfg_m=
-emmap)
-> -{
-> -    Aml *dev =3D aml_device("FWCF");
-> -    aml_append(dev, aml_name_decl("_HID", aml_string("QEMU0002")));
-> -    /* device present, functioning, decoding, not shown in UI */
-> -    aml_append(dev, aml_name_decl("_STA", aml_int(0xB)));
-> -    aml_append(dev, aml_name_decl("_CCA", aml_int(1)));
-> -
-> -    Aml *crs =3D aml_resource_template();
-> -    aml_append(crs, aml_memory32_fixed(fw_cfg_memmap->base,
-> -                                       fw_cfg_memmap->size, AML_READ_WRI=
-TE));
-> -    aml_append(dev, aml_name_decl("_CRS", crs));
-> -    aml_append(scope, dev);
-> -}
-> -
->  static void acpi_dsdt_add_flash(Aml *scope, const MemMapEntry *flash_mem=
-map)
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index d90286dc46..46d3341113 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -1073,7 +1073,8 @@ static inline DeviceState *gpex_pcie_init(MemoryReg=
+ion *sys_mem,
+>                                            hwaddr high_mmio_base,
+>                                            hwaddr high_mmio_size,
+>                                            hwaddr pio_base,
+> -                                          DeviceState *irqchip)
+> +                                          DeviceState *irqchip,
+> +                                          RISCVVirtState *s)
 >  {
->      Aml *dev, *crs;
-> @@ -133,32 +117,6 @@ static void acpi_dsdt_add_flash(Aml *scope, const Me=
-mMapEntry *flash_memmap)
->      aml_append(scope, dev);
->  }
->
-> -static void acpi_dsdt_add_virtio(Aml *scope,
-> -                                 const MemMapEntry *virtio_mmio_memmap,
-> -                                 uint32_t mmio_irq, int num)
-> -{
-> -    hwaddr base =3D virtio_mmio_memmap->base;
-> -    hwaddr size =3D virtio_mmio_memmap->size;
-> -    int i;
-> -
-> -    for (i =3D 0; i < num; i++) {
-> -        uint32_t irq =3D mmio_irq + i;
-> -        Aml *dev =3D aml_device("VR%02u", i);
-> -        aml_append(dev, aml_name_decl("_HID", aml_string("LNRO0005")));
-> -        aml_append(dev, aml_name_decl("_UID", aml_int(i)));
-> -        aml_append(dev, aml_name_decl("_CCA", aml_int(1)));
-> -
-> -        Aml *crs =3D aml_resource_template();
-> -        aml_append(crs, aml_memory32_fixed(base, size, AML_READ_WRITE));
-> -        aml_append(crs,
-> -                   aml_interrupt(AML_CONSUMER, AML_LEVEL, AML_ACTIVE_HIG=
-H,
-> -                                 AML_EXCLUSIVE, &irq, 1));
-> -        aml_append(dev, aml_name_decl("_CRS", crs));
-> -        aml_append(scope, dev);
-> -        base +=3D size;
-> -    }
-> -}
-> -
->  static void acpi_dsdt_add_pci(Aml *scope, const MemMapEntry *memmap,
->                                uint32_t irq, VirtMachineState *vms)
->  {
-> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-> index 7331248f59..01843e4509 100644
-> --- a/hw/riscv/virt-acpi-build.c
-> +++ b/hw/riscv/virt-acpi-build.c
-> @@ -97,22 +97,6 @@ static void acpi_dsdt_add_cpus(Aml *scope, RISCVVirtSt=
-ate *s)
+>      DeviceState *dev;
+>      MemoryRegion *ecam_alias, *ecam_reg;
+> @@ -1113,6 +1114,7 @@ static inline DeviceState *gpex_pcie_init(MemoryReg=
+ion *sys_mem,
+>          gpex_set_irq_num(GPEX_HOST(dev), i, PCIE_IRQ + i);
 >      }
+>
+> +    s->bus =3D PCI_HOST_BRIDGE(dev)->bus;
+>      return dev;
 >  }
 >
-> -static void acpi_dsdt_add_fw_cfg(Aml *scope, const MemMapEntry *fw_cfg_m=
-emmap)
-> -{
-> -    Aml *dev =3D aml_device("FWCF");
-> -    aml_append(dev, aml_name_decl("_HID", aml_string("QEMU0002")));
-> -
-> -    /* device present, functioning, decoding, not shown in UI */
-> -    aml_append(dev, aml_name_decl("_STA", aml_int(0xB)));
-> -    aml_append(dev, aml_name_decl("_CCA", aml_int(1)));
-> -
-> -    Aml *crs =3D aml_resource_template();
-> -    aml_append(crs, aml_memory32_fixed(fw_cfg_memmap->base,
-> -                                       fw_cfg_memmap->size, AML_READ_WRI=
-TE));
-> -    aml_append(dev, aml_name_decl("_CRS", crs));
-> -    aml_append(scope, dev);
-> -}
-> -
->  /* RHCT Node[N] starts at offset 56 */
->  #define RHCT_NODE_ARRAY_OFFSET 56
+> @@ -1502,7 +1504,7 @@ static void virt_machine_init(MachineState *machine=
+)
+>                     virt_high_pcie_memmap.base,
+>                     virt_high_pcie_memmap.size,
+>                     memmap[VIRT_PCIE_PIO].base,
+> -                   pcie_irqchip);
+> +                   pcie_irqchip, s);
 >
-> diff --git a/include/hw/acpi/aml-build.h b/include/hw/acpi/aml-build.h
-> index d1fb08514b..c4a8967310 100644
-> --- a/include/hw/acpi/aml-build.h
-> +++ b/include/hw/acpi/aml-build.h
-> @@ -3,6 +3,7 @@
+>      create_platform_bus(s, mmio_irqchip);
 >
->  #include "hw/acpi/acpi-defs.h"
->  #include "hw/acpi/bios-linker-loader.h"
-> +#include "hw/nvram/fw_cfg.h"
+> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+> index e5c474b26e..4ef1f660ab 100644
+> --- a/include/hw/riscv/virt.h
+> +++ b/include/hw/riscv/virt.h
+> @@ -60,6 +60,7 @@ struct RISCVVirtState {
+>      char *oem_table_id;
+>      OnOffAuto acpi;
+>      const MemMapEntry *memmap;
+> +    PCIBus *bus;
+>  };
 >
->  #define ACPI_BUILD_APPNAME6 "BOCHS "
->  #define ACPI_BUILD_APPNAME8 "BXPC    "
-> @@ -497,4 +498,9 @@ void build_fadt(GArray *tbl, BIOSLinker *linker, cons=
-t AcpiFadtData *f,
->
->  void build_tpm2(GArray *table_data, BIOSLinker *linker, GArray *tcpalog,
->                  const char *oem_id, const char *oem_table_id);
-> +
-> +void acpi_dsdt_add_fw_cfg(Aml *scope, const MemMapEntry *fw_cfg_memmap);
-> +void acpi_dsdt_add_virtio(Aml *scope, const MemMapEntry *virtio_mmio_mem=
-map,
-> +                          uint32_t mmio_irq, int num);
-> +
->  #endif
+>  enum {
 > --
 > 2.39.2
 >
