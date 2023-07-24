@@ -4,78 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49C07C001B0
-	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Jul 2023 01:54:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B6DCC001E0
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Jul 2023 01:57:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qNklm-0000AK-Lh; Sun, 23 Jul 2023 21:53:54 -0400
+	id 1qNkoX-0001gk-BJ; Sun, 23 Jul 2023 21:56:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qNklk-00009m-Us; Sun, 23 Jul 2023 21:53:52 -0400
-Received: from mail-vk1-xa35.google.com ([2607:f8b0:4864:20::a35])
+ id 1qNkoV-0001gV-Jq; Sun, 23 Jul 2023 21:56:43 -0400
+Received: from mail-vk1-xa32.google.com ([2607:f8b0:4864:20::a32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qNklj-00040z-AP; Sun, 23 Jul 2023 21:53:52 -0400
-Received: by mail-vk1-xa35.google.com with SMTP id
- 71dfb90a1353d-4814299c981so1411348e0c.0; 
- Sun, 23 Jul 2023 18:53:50 -0700 (PDT)
+ id 1qNkoU-0004f5-3l; Sun, 23 Jul 2023 21:56:43 -0400
+Received: by mail-vk1-xa32.google.com with SMTP id
+ 71dfb90a1353d-460eb67244eso1468094e0c.1; 
+ Sun, 23 Jul 2023 18:56:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1690163629; x=1690768429;
+ d=gmail.com; s=20221208; t=1690163800; x=1690768600;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nOgKbsHcKBp18Ik30E4NzavS5ZCDmTBbUZ8nKA2gHoA=;
- b=L7oTW04PPdyM1s3kqhfRxH6EeGQHBiyKyFOb0lgXekX22JWIz+NyR50uiLPQ8j5Rip
- M/uaR8AUmjqfIzzSJ/qcwSvVjjvW99tam4kT0a04FlPY2dVfxldG/mtNn5cK2jfb3Ujy
- vlzCdRrtaxPTQQMiH+XspvqqOql0iiz3UQeQTxQgnxmS4JZ7BbMCsIsULiFQNjMNEUy/
- Scs6vmYvr7IE48+LYxsJ3kYKAFIw7iYdSyoNIRWXa0xLFAuqPKRt6MjRgbz4FMY9djKP
- NnWXmf/Y5xMSnQpkOEt1spLRJlHgGL2i2D38+wIyaWifnrZsqlTyB9YKXFLumCE9oX7w
- cgJA==
+ bh=F3sSru2rjyKueBTs/Yjo9Ux/9V0nYgFtsY6vkL1nTEo=;
+ b=TWj//AFwJc8CGJct2msvvOJbg5o2rZDE4IW1BfRfPIED3tjWcBxDx31z31mRKn5mQh
+ tn/Wa5cgmw2Q+W2A5AJ6/xNYy0vS9Pt5JXeiIrZO6/kDcQJ5VfOb81LcrsfvUIRV6ds4
+ tIMdHshXGTPxz6sl3hOcYL8CWrJh3fWmiXrQLoKN4iiSCiuYZzgDrFly1J0fNFN2APwG
+ 8NyJvYiWm5aJaCDERYnoN/iXIhUxNKfvV9qPzQfQYwx00WYB5EwNSXHcsngVgt4/I1d3
+ eLLMWREZqQo4BnyeX+SHZ3J2jIxEEBKZiHHsn1zwN0jC4QoX3yZo13wLtVjHI+K6lpwc
+ tWqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1690163629; x=1690768429;
+ d=1e100.net; s=20221208; t=1690163800; x=1690768600;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=nOgKbsHcKBp18Ik30E4NzavS5ZCDmTBbUZ8nKA2gHoA=;
- b=HE8Aemt0hJf2PATL/cu1aLcfloICdIZJfQPkSliL5JxElPYuO+r05MLfeEr3NKU4by
- ddKi0jCNf+610ptmjXY/Y/r6sKHWcprWtMEQwp3NcV9cTvdPhpZCCBmT8XhZuyfoSr7T
- Qs8HBBTmbV9z3IzPcDliXzw7LRT0WoOVktRjn/yHWa+MekTpxPGpPT2S+//vpYsaamE/
- 8612Mc3FF6ccAR8+FYq7WYJAFNKaSSfSbkLh0ftYuSSHLUe95+Rp4EOEMPfH60DpGTze
- Lms9rhhufhyil4V8Cu0Vbi2/iJ3xGLdXuaHWKPEDP0Dmch+k/k4K78WBClVfS57xQNN8
- Eeig==
-X-Gm-Message-State: ABy/qLaP9CIdhgLzPWB8+jBbnu6TPHdKUoKS4447NA0q5uGxo/62BfY/
- Rh4C7oSLmm8qZIiBRIYunTqzDHFPlWDB//u99HM=
-X-Google-Smtp-Source: APBJJlEWM3xnUdEQKNBnEhN14HZN/oxrSapkVBiODdi5wUCi6zqfU3Vr1iZTT5jRydkzZMTV4TGcD2zARgdF+wNnTlw=
-X-Received: by 2002:a1f:cec6:0:b0:481:35ea:10cf with SMTP id
- e189-20020a1fcec6000000b0048135ea10cfmr3373403vkg.4.1690163629444; Sun, 23
- Jul 2023 18:53:49 -0700 (PDT)
+ bh=F3sSru2rjyKueBTs/Yjo9Ux/9V0nYgFtsY6vkL1nTEo=;
+ b=mEy4jh/oDr7IAn3CfgBVK1blTPDIAsE9A2KqxOJ7j177hTp8CvrQ/Jp4DfOaVuv8Di
+ 2EYTACHbUf90CD7KgtLKH/cDWaHWS4+zGWijvk5j8TfaLCRsqbX0iFa7GdtasLcb47oW
+ wjvZS9JCFqxt36YuMiHeQ5V5StmSGBJRxppFm3M3LvPJ3lGsdNal3OxB392nQzRWW1y+
+ OauyMBeQf6ceu386sbWphp/VFpq50BFY4pGKhIM/bjaTe4KZw+l+OfokXsaNUNshVEQ9
+ zmUND4UCkr9VFkA2cb9+u8usGZKFulVc8Quuav9BSfmWKsX9PviS+tMrJozTKAUnB+jZ
+ 6Abg==
+X-Gm-Message-State: ABy/qLbdb4sO8SRYjNIq0mi5LlAaG19ad2h+d8DEO1l0HtDf5XfJlaG2
+ o5E8HGWrOc7N97RQMa5ebAa+xHdRQLCvMC12Mh4=
+X-Google-Smtp-Source: APBJJlGke8A/pAzIxQBLl34Y4PEzHJB8nKrWw3aucJLXBFW8FTOaM0Df80+DzRGKOd0W/DVME48Jo0klYmU8AvE4VcA=
+X-Received: by 2002:a1f:5e09:0:b0:476:4267:1788 with SMTP id
+ s9-20020a1f5e09000000b0047642671788mr3430457vkb.13.1690163800618; Sun, 23 Jul
+ 2023 18:56:40 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230712163943.98994-1-sunilvl@ventanamicro.com>
- <20230712163943.98994-4-sunilvl@ventanamicro.com>
-In-Reply-To: <20230712163943.98994-4-sunilvl@ventanamicro.com>
+References: <20230717215419.124258-1-dbarboza@ventanamicro.com>
+ <20230717215419.124258-2-dbarboza@ventanamicro.com>
+In-Reply-To: <20230717215419.124258-2-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 24 Jul 2023 11:53:23 +1000
-Message-ID: <CAKmqyKOV7R3DLTfn2ZB4dRz_9BNYdd-SND1Qg4rW+Y-FuBKtdQ@mail.gmail.com>
-Subject: Re: [PATCH 03/10] hw/riscv: virt: Make few IMSIC macros and functions
- public
-To: Sunil V L <sunilvl@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, 
- "Michael S . Tsirkin" <mst@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
- Ani Sinha <anisinha@redhat.com>, Peter Maydell <peter.maydell@linaro.org>,
- Shannon Zhao <shannon.zhaosl@gmail.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Andrew Jones <ajones@ventanamicro.com>, 
- Anup Patel <apatel@ventanamicro.com>
+Date: Mon, 24 Jul 2023 11:56:14 +1000
+Message-ID: <CAKmqyKMOrwrVq0QUPafhQSGzr+K_C0MS-5Ki7wPmmRnxThqZiw@mail.gmail.com>
+Subject: Re: [PATCH for-8.2 1/2] target/riscv/cpu.c: add zicntr extension flag
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a35;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa35.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a32;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa32.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -99,119 +90,84 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jul 13, 2023 at 2:42=E2=80=AFAM Sunil V L <sunilvl@ventanamicro.com=
-> wrote:
+On Tue, Jul 18, 2023 at 7:55=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
 >
-> Some macros and static function related to IMSIC are defined
-> in virt.c. They are required in virt-acpi-build.c. So, make them
-> public.
+> zicntr is the Base Counters and Timers extension described in chapter 12
+> of the unprivileged spec. It describes support for RDCYCLE, RDTIME and
+> RDINSTRET.
 >
-> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> QEMU already implements it way before it was a discrete extension.
+> zicntr is part of the RVA22 profile, so let's add it to QEMU to make the
+> future profile implementation flag complete.
+>
+> Given than it represents an already existing feature, default it to
+> 'true'. Change the realize() time validation to disable it in case its
+> dependency (icsr) isn't present.
+>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  hw/riscv/virt.c         | 25 +------------------------
->  include/hw/riscv/virt.h | 25 +++++++++++++++++++++++++
->  2 files changed, 26 insertions(+), 24 deletions(-)
+>  target/riscv/cpu.c     | 11 +++++++++++
+>  target/riscv/cpu_cfg.h |  1 +
+>  2 files changed, 12 insertions(+)
 >
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 46d3341113..f6067db8ec 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -37,7 +37,6 @@
->  #include "hw/riscv/numa.h"
->  #include "hw/intc/riscv_aclint.h"
->  #include "hw/intc/riscv_aplic.h"
-> -#include "hw/intc/riscv_imsic.h"
->  #include "hw/intc/sifive_plic.h"
->  #include "hw/misc/sifive_test.h"
->  #include "hw/platform-bus.h"
-> @@ -53,28 +52,6 @@
->  #include "hw/acpi/aml-build.h"
->  #include "qapi/qapi-visit-common.h"
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 9339c0241d..7ec88659be 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -85,6 +85,7 @@ static const struct isa_ext_data isa_edata_arr[] =3D {
+>      ISA_EXT_DATA_ENTRY(zicbom, PRIV_VERSION_1_12_0, ext_icbom),
+>      ISA_EXT_DATA_ENTRY(zicboz, PRIV_VERSION_1_12_0, ext_icboz),
+>      ISA_EXT_DATA_ENTRY(zicond, PRIV_VERSION_1_12_0, ext_zicond),
+> +    ISA_EXT_DATA_ENTRY(zicntr, PRIV_VERSION_1_12_0, ext_icntr),
+>      ISA_EXT_DATA_ENTRY(zicsr, PRIV_VERSION_1_10_0, ext_icsr),
+>      ISA_EXT_DATA_ENTRY(zifencei, PRIV_VERSION_1_10_0, ext_ifencei),
+>      ISA_EXT_DATA_ENTRY(zihintpause, PRIV_VERSION_1_10_0, ext_zihintpause=
+),
+> @@ -1291,6 +1292,10 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *c=
+pu, Error **errp)
+>          cpu->cfg.ext_zksh =3D true;
+>      }
 >
-> -/*
-> - * The virt machine physical address space used by some of the devices
-> - * namely ACLINT, PLIC, APLIC, and IMSIC depend on number of Sockets,
-> - * number of CPUs, and number of IMSIC guest files.
-> - *
-> - * Various limits defined by VIRT_SOCKETS_MAX_BITS, VIRT_CPUS_MAX_BITS,
-> - * and VIRT_IRQCHIP_MAX_GUESTS_BITS are tuned for maximum utilization
-> - * of virt machine physical address space.
-> - */
-> -
-> -#define VIRT_IMSIC_GROUP_MAX_SIZE      (1U << IMSIC_MMIO_GROUP_MIN_SHIFT=
-)
-> -#if VIRT_IMSIC_GROUP_MAX_SIZE < \
-> -    IMSIC_GROUP_SIZE(VIRT_CPUS_MAX_BITS, VIRT_IRQCHIP_MAX_GUESTS_BITS)
-> -#error "Can't accomodate single IMSIC group in address space"
-> -#endif
-> -
-> -#define VIRT_IMSIC_MAX_SIZE            (VIRT_SOCKETS_MAX * \
-> -                                        VIRT_IMSIC_GROUP_MAX_SIZE)
-> -#if 0x4000000 < VIRT_IMSIC_MAX_SIZE
-> -#error "Can't accomodate all IMSIC groups in address space"
-> -#endif
-> -
->  static const MemMapEntry virt_memmap[] =3D {
->      [VIRT_DEBUG] =3D        {        0x0,         0x100 },
->      [VIRT_MROM] =3D         {     0x1000,        0xf000 },
-> @@ -505,7 +482,7 @@ static void create_fdt_socket_plic(RISCVVirtState *s,
->      g_free(plic_cells);
->  }
->
-> -static uint32_t imsic_num_bits(uint32_t count)
-> +uint32_t imsic_num_bits(uint32_t count)
->  {
->      uint32_t ret =3D 0;
->
-> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-> index 4ef1f660ab..00c22492a7 100644
-> --- a/include/hw/riscv/virt.h
-> +++ b/include/hw/riscv/virt.h
-> @@ -23,6 +23,7 @@
->  #include "hw/riscv/riscv_hart.h"
->  #include "hw/sysbus.h"
->  #include "hw/block/flash.h"
-> +#include "hw/intc/riscv_imsic.h"
->
->  #define VIRT_CPUS_MAX_BITS             9
->  #define VIRT_CPUS_MAX                  (1 << VIRT_CPUS_MAX_BITS)
-> @@ -128,4 +129,28 @@ enum {
->
->  bool virt_is_acpi_enabled(RISCVVirtState *s);
->  void virt_acpi_setup(RISCVVirtState *vms);
-> +uint32_t imsic_num_bits(uint32_t count);
+> +    if (cpu->cfg.ext_icntr && !cpu->cfg.ext_icsr) {
+> +        cpu->cfg.ext_icntr =3D false;
+> +    }
 > +
-> +/*
-> + * The virt machine physical address space used by some of the devices
-> + * namely ACLINT, PLIC, APLIC, and IMSIC depend on number of Sockets,
-> + * number of CPUs, and number of IMSIC guest files.
-> + *
-> + * Various limits defined by VIRT_SOCKETS_MAX_BITS, VIRT_CPUS_MAX_BITS,
-> + * and VIRT_IRQCHIP_MAX_GUESTS_BITS are tuned for maximum utilization
-> + * of virt machine physical address space.
-> + */
+>      /*
+>       * Disable isa extensions based on priv spec after we
+>       * validated and set everything we need.
+> @@ -1778,6 +1783,12 @@ static Property riscv_cpu_extensions[] =3D {
+>      DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
+>      DEFINE_PROP_BOOL("svpbmt", RISCVCPU, cfg.ext_svpbmt, false),
+>
+> +    /*
+> +     * Always default true - we'll disable it during
+> +     * realize() if needed.
+> +     */
+> +    DEFINE_PROP_BOOL("zicntr", RISCVCPU, cfg.ext_icntr, true),
 > +
-> +#define VIRT_IMSIC_GROUP_MAX_SIZE      (1U << IMSIC_MMIO_GROUP_MIN_SHIFT=
-)
-> +#if VIRT_IMSIC_GROUP_MAX_SIZE < \
-> +    IMSIC_GROUP_SIZE(VIRT_CPUS_MAX_BITS, VIRT_IRQCHIP_MAX_GUESTS_BITS)
-> +#error "Can't accomodate single IMSIC group in address space"
-> +#endif
-> +
-> +#define VIRT_IMSIC_MAX_SIZE            (VIRT_SOCKETS_MAX * \
-> +                                        VIRT_IMSIC_GROUP_MAX_SIZE)
-> +#if 0x4000000 < VIRT_IMSIC_MAX_SIZE
-> +#error "Can't accomodate all IMSIC groups in address space"
-> +#endif
-> +
->  #endif
+>      DEFINE_PROP_BOOL("zba", RISCVCPU, cfg.ext_zba, true),
+>      DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, true),
+>      DEFINE_PROP_BOOL("zbc", RISCVCPU, cfg.ext_zbc, true),
+> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> index 2bd9510ba3..d36dc12b92 100644
+> --- a/target/riscv/cpu_cfg.h
+> +++ b/target/riscv/cpu_cfg.h
+> @@ -62,6 +62,7 @@ struct RISCVCPUConfig {
+>      bool ext_zksh;
+>      bool ext_zkt;
+>      bool ext_ifencei;
+> +    bool ext_icntr;
+>      bool ext_icsr;
+>      bool ext_icbom;
+>      bool ext_icboz;
 > --
-> 2.39.2
+> 2.41.0
 >
 >
 
