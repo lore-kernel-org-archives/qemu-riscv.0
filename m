@@ -4,59 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CD3DC0015E
-	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Jul 2023 05:39:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF24CC41513
+	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Jul 2023 16:51:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qOAl7-0000tx-Dr; Tue, 25 Jul 2023 01:38:57 -0400
+	id 1qOLFO-0000hs-Er; Tue, 25 Jul 2023 12:50:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <nikita.shubin@maquefel.me>)
- id 1qOAkX-0000nK-SW; Tue, 25 Jul 2023 01:38:22 -0400
-Received: from forward103c.mail.yandex.net ([2a02:6b8:c03:500:1:45:d181:d103])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <nikita.shubin@maquefel.me>)
- id 1qOAkU-0001T1-IR; Tue, 25 Jul 2023 01:38:21 -0400
-Received: from mail-nwsmtp-smtp-production-main-59.iva.yp-c.yandex.net
- (mail-nwsmtp-smtp-production-main-59.iva.yp-c.yandex.net
- [IPv6:2a02:6b8:c0c:1e2b:0:640:94b5:0])
- by forward103c.mail.yandex.net (Yandex) with ESMTP id D239060024;
- Tue, 25 Jul 2023 08:38:08 +0300 (MSK)
-Received: by mail-nwsmtp-smtp-production-main-59.iva.yp-c.yandex.net
- (smtp/Yandex) with ESMTPSA id 6cClcVZDfuQ0-WdPkXeM7; 
- Tue, 25 Jul 2023 08:38:08 +0300
-X-Yandex-Fwd: 1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=maquefel.me; s=mail;
- t=1690263488; bh=qBO2Omcn5BargoaMfiM6gEzoIgFTjptpKB2sMLMlBk0=;
- h=Message-Id:Date:Cc:Subject:To:From;
- b=GjibuyiM0Td72mliUJ4qIQmVxaCUgFBJO/scaMnVOEyCaWoTfKtnK3ztiNzY9Yi33
- +Ajfy6ySCMr9FL7r+y8ZE7/MkT4cZRo+WCntTqa5BosNudHEYENzukx+3gFVMgw7mT
- BQncMoqJRt5Z7SClVGTYLN6OxnLRKXKM+2CfowBQ=
-Authentication-Results: mail-nwsmtp-smtp-production-main-59.iva.yp-c.yandex.net;
- dkim=pass header.i=@maquefel.me
-From: Nikita Shubin <nikita.shubin@maquefel.me>
-To: Weiwei Li <liweiwei@iscas.ac.cn>,
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1qOLFN-0000gq-0z
+ for qemu-riscv@nongnu.org; Tue, 25 Jul 2023 12:50:53 -0400
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1qOLFH-0001JK-WE
+ for qemu-riscv@nongnu.org; Tue, 25 Jul 2023 12:50:52 -0400
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-1b8b4748fe4so32760275ad.1
+ for <qemu-riscv@nongnu.org>; Tue, 25 Jul 2023 09:50:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1690303846; x=1690908646;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=UupfCeLlOPr89U4fvrUq1hDfHjr6/3EmNi9g/vK4Vt4=;
+ b=gH9YLatVpoOdgD1crPaqLNzV+tYtmbgMIOHLXnkZFFe68EwzCocbjhskLMgWa67/Pe
+ 5IPj8gMxfSy6TsMfoaP1PKbwT+QAQxKrSbiz3neEZMqCk+Z2gJJgvWkZ0yOcx9TV55vX
+ FeMSpBbI9ogPKl/vb0turq0uXyeAGbOzBBtQ4zVkSMkyK0V/ZocATNs4j7d51PvT+zIn
+ 9WFJyoSm1wC8uiRx4n5NwKO03t9ff5zuzYQ+lliIVLdmaWE7fHpMULWOOHn0vLy6jYXM
+ C2ZJeeT9STFwvlUKia6aOGCdL0Bf03QorjmQYOJJhqNukzp54UcCh5DffX1OqvhqJiA2
+ VzZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1690303846; x=1690908646;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UupfCeLlOPr89U4fvrUq1hDfHjr6/3EmNi9g/vK4Vt4=;
+ b=fci7JAagji6ivMRXRIoQbNJ9+wWadPLPJ+Dr3nzbKDnjW9LV1y9xdhHTsZUsL2DNrC
+ dv055Ba66xAnHHtm9ay5L4evuf503+R0cUEwSCpzBTyfkbkgDwk6+6IXs39oeu9eUFcS
+ mY2XmB1X5RnBhJWnYBDJvDKM4/1zem1H3cTx8WPB8TvmUmYpDTnkZda98LROihpTGnB9
+ /2EY2obEpUfebJXwACXCfMO8rcckCuUpn0KFOpI6ci8HrnwiEewcGJhvzwYT5gM/rsX9
+ paIygH+dqmgywLhkXBl/1Ry+4tYygafa8D/J1JDvoXfFFZAdoi3Ohqo5cFtLFPwWfKJe
+ r0xA==
+X-Gm-Message-State: ABy/qLaPa518431j21EZIi6TcpzL/gWzNRWABKBdIlPvAHjn0np+/xNm
+ irm92ltTCCjhW9JoGsqfzovk7w==
+X-Google-Smtp-Source: APBJJlEVkETHp4rNjR8WCO6teT6pZXgGpu8gM9FWhaTmi+HUp9qOcHe8dIXhG/viLzLd4+IvqPFVeA==
+X-Received: by 2002:a17:903:2342:b0:1b8:b3f9:58eb with SMTP id
+ c2-20020a170903234200b001b8b3f958ebmr13680551plh.31.1690303845959; 
+ Tue, 25 Jul 2023 09:50:45 -0700 (PDT)
+Received: from sunil-laptop ([106.51.190.25]) by smtp.gmail.com with ESMTPSA id
+ j4-20020a170902c3c400b001aaecc0b6ffsm11318253plj.160.2023.07.25.09.50.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 25 Jul 2023 09:50:45 -0700 (PDT)
+Date: Tue, 25 Jul 2023 22:20:36 +0530
+From: Sunil V L <sunilvl@ventanamicro.com>
+To: Igor Mammedov <imammedo@redhat.com>
+Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
+ "Michael S . Tsirkin" <mst@redhat.com>, Ani Sinha <anisinha@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Shannon Zhao <shannon.zhaosl@gmail.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: linux@yadro.com,
-	Nikita Shubin <n.shubin@yadro.com>
-Subject: [PATCH] target/riscv: don't read write-only CSR
-Date: Tue, 25 Jul 2023 08:38:06 +0300
-Message-Id: <20230725053806.9463-1-nikita.shubin@maquefel.me>
-X-Mailer: git-send-email 2.39.2
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Andrew Jones <ajones@ventanamicro.com>,
+ Anup Patel <apatel@ventanamicro.com>
+Subject: Re: [PATCH 01/10] hw/arm/virt-acpi-build.c: Move fw_cfg and virtio
+ to common location
+Message-ID: <ZL/9XO47yEnaNzyN@sunil-laptop>
+References: <20230712163943.98994-1-sunilvl@ventanamicro.com>
+ <20230712163943.98994-2-sunilvl@ventanamicro.com>
+ <20230724171859.212fec62@imammedo.users.ipa.redhat.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a02:6b8:c03:500:1:45:d181:d103;
- envelope-from=nikita.shubin@maquefel.me; helo=forward103c.mail.yandex.net
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230724171859.212fec62@imammedo.users.ipa.redhat.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x62e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -72,55 +104,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Nikita Shubin <n.shubin@yadro.com>
+On Mon, Jul 24, 2023 at 05:18:59PM +0200, Igor Mammedov wrote:
+> On Wed, 12 Jul 2023 22:09:34 +0530
+> Sunil V L <sunilvl@ventanamicro.com> wrote:
+> 
+> > The functions which add fw_cfg and virtio to DSDT are same for ARM
+> > and RISC-V. So, instead of duplicating in RISC-V, move them from
+> > hw/arm/virt-acpi-build.c to common aml-build.c.
+> > 
+> > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> > ---
+> >  hw/acpi/aml-build.c         | 41 ++++++++++++++++++++++++++++++++++++
+> >  hw/arm/virt-acpi-build.c    | 42 -------------------------------------
+> >  hw/riscv/virt-acpi-build.c  | 16 --------------
+> >  include/hw/acpi/aml-build.h |  6 ++++++
+> >  4 files changed, 47 insertions(+), 58 deletions(-)
+> > 
+> > diff --git a/hw/acpi/aml-build.c b/hw/acpi/aml-build.c
+> 
+> patch looks fine modulo,
+> I'd put these into respective device files instead of generic
+> aml-build.c which was intended for basic AML primitives
+> (it 's got polluted over time with device specific functions
+> but that's not the reason to continue doing that).
+> 
+> Also having those functions along with devices models
+> goes along with self enumerating ACPI devices (currently
+> it works for x86 PCI/ISA device but there is no reason
+> that it can't work with other types as well when
+> I get there)
+> 
+Thanks!, Igor. Let me add them to device specific files as per your
+recommendation.
 
-In case of write-only CSR don't return illegal inst error when CSR is
-written and lacks read op.
-
-Signed-off-by: Nikita Shubin <n.shubin@yadro.com>
----
-Anyway it not might be a good idea to read CSR when we are not asked
-for, during CSRRW or CSRRWI:
-
-"For CSRRWI, if rd=x0, then the instruction shall not read the CSR and 
-shall not cause any of the side effects that might occur on a CSR read."
-
-May be i am missing something of course.
----
- target/riscv/csr.c | 19 +++++++++++--------
- 1 file changed, 11 insertions(+), 8 deletions(-)
-
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index ea7585329e..6d6a8821a8 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -3915,14 +3915,17 @@ static RISCVException riscv_csrrw_do64(CPURISCVState *env, int csrno,
-         return csr_ops[csrno].op(env, csrno, ret_value, new_value, write_mask);
-     }
- 
--    /* if no accessor exists then return failure */
--    if (!csr_ops[csrno].read) {
--        return RISCV_EXCP_ILLEGAL_INST;
--    }
--    /* read old value */
--    ret = csr_ops[csrno].read(env, csrno, &old_value);
--    if (ret != RISCV_EXCP_NONE) {
--        return ret;
-+    /* don't read if ret_value==NULL */
-+    if (ret_value) {
-+        /* if no accessor exists then return failure */
-+        if (!csr_ops[csrno].read) {
-+            return RISCV_EXCP_ILLEGAL_INST;
-+        }
-+        /* read old value */
-+        ret = csr_ops[csrno].read(env, csrno, &old_value);
-+        if (ret != RISCV_EXCP_NONE) {
-+            return ret;
-+        }
-     }
- 
-     /* write value if writable and write mask set, otherwise drop writes */
--- 
-2.39.2
-
+Thanks!
+Sunil
 
