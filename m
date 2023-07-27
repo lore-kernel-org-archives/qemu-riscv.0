@@ -4,96 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5CA7C001DC
-	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Jul 2023 14:32:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11F56C001DC
+	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Jul 2023 14:33:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qP1y2-0006ZI-Sq; Thu, 27 Jul 2023 10:27:52 -0400
+	id 1qP1Wo-000592-6W; Thu, 27 Jul 2023 09:59:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1qP1y0-0006Sd-66
- for qemu-riscv@nongnu.org; Thu, 27 Jul 2023 10:27:48 -0400
-Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1qP1xx-00068b-Fj
- for qemu-riscv@nongnu.org; Thu, 27 Jul 2023 10:27:47 -0400
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-686e0213c0bso775321b3a.1
- for <qemu-riscv@nongnu.org>; Thu, 27 Jul 2023 07:27:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1690468064; x=1691072864;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=mnll3YnzAhuEV+dKxBZko/tIefx3NBcNIu5X1R+g1OY=;
- b=fx0lJ8kWrRDT0a4PFHouBRLMX3UqQ5H1OLkkszpedbZr73CGkrvYR4OMUONdQlmCPE
- fNZT5N9WZT370pXtPQJfUAvOaF832YyWYy9Xj/911kDsm2AvWf06/r+G56dFfsWU8Ilr
- nb/Pvi5z4rTb8BlqXLHMb+F2Mrsbcabo+cq1TTw9uzqcU0peg2kqsfPKjzWcroyZMX/6
- Gnj0oC85os51jJoBRGM0ywdpKojG92hs3/pB/fz6u2BVvbF9gTMLjppjZrR+/SY7Cdw3
- kfTY5eJskNrlcJkfxD4GqfmGFlX2+ltpYgipamOooBMFoLC2YbJI/EDtn/gDBZpqsQss
- xQxg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1690468064; x=1691072864;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=mnll3YnzAhuEV+dKxBZko/tIefx3NBcNIu5X1R+g1OY=;
- b=M/QqfN7cVjm88aiWFnTXndthBYu3yH/wjWUHND2nctDUHqMhuib2rj4/GYKYl+OjSY
- 4YFJynmbiOLOaa1Jf5aPwKiX62IqlAQquT4xmPBV4zigllOLKXPTBB8p6OGo38M5mS+5
- 46i1JNSCdqKP1+pJhImVe0klQx3bBLIu40SKtB7t4uizaSW7K6XE031576Rbi2KUebSV
- IIfzoJniLoS8OFxkSurkKu8AGGKfElcQLuhssn1VByuM/tJO6diJ4CaG9WEn5o7RdjxO
- XwgumtxA2Oq55GGMmFI48o6pRQVDN49aLlOWHQQQDP+AGsAtQae8vmmnD7Lbeh/M7OOl
- FQNQ==
-X-Gm-Message-State: ABy/qLbq6cR2d4VjLKtRtbLqYgcZIMkN80eARXbOTdplj/4rk51jtChD
- djjXyWCtqAnwh120PLYmhEQVNA==
-X-Google-Smtp-Source: APBJJlFXldcSJ7xbgf9Dm6V4sbu3tej7i31yQSlBEnfXzQ7ZOWwcmfjN98wkxt5MeGwGA/F6Y5Wl2w==
-X-Received: by 2002:a05:6a00:1882:b0:668:8596:752f with SMTP id
- x2-20020a056a00188200b006688596752fmr5817168pfh.4.1690468063963; 
- Thu, 27 Jul 2023 07:27:43 -0700 (PDT)
-Received: from ?IPV6:2602:ae:1598:4c01:3178:82f3:53ff:b9bb?
- ([2602:ae:1598:4c01:3178:82f3:53ff:b9bb])
- by smtp.gmail.com with ESMTPSA id
- 5-20020a630105000000b0056353c0a03esm1598128pgb.37.2023.07.27.07.27.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Jul 2023 07:27:43 -0700 (PDT)
-Message-ID: <af279f3d-35b9-e782-8d55-98cd6b3ceb80@linaro.org>
-Date: Thu, 27 Jul 2023 07:27:40 -0700
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1qP1Wl-00055A-Bb; Thu, 27 Jul 2023 09:59:39 -0400
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1qP1Wj-0006Y0-Nw; Thu, 27 Jul 2023 09:59:39 -0400
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 198F660695;
+ Thu, 27 Jul 2023 13:59:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D200AC433C7;
+ Thu, 27 Jul 2023 13:59:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1690466368;
+ bh=ZzDSIlJCwse1xnbgVm6j02bD6rHDKIR4AehVqHegf3s=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=TKj1RCXzEA6cODr/OVmx8LaFwnVKzrRTK/XACqnecgaEkNhuMDP3vMMnVHkNtzVGK
+ 4GgGKLz3gsgrStWPB7wq0L5bQ3EEnBqodxfArjwgRJLYH72MIlLZNgxmEjtl43QN5R
+ kr2/IQEyZX2KxHo2Dfu5t/hk2DKGSJu0x4qJ8LrZh/+anVzeIJymLDm7auLEE7dau+
+ yB+M7zCXt9RlR3ihrFaG4c7+AMxRivAJOwOLva3KsKgwrEaH44XI2cYgKlpAa2/HfG
+ XwuIl4RE+ZMSz5Gr7FWPXcdLXPPjzfp7QEaMxBtHg8JhTfrfgXpCUd0Q3fdA+og/Fp
+ Qi0Mm01vU4yAg==
+Date: Thu, 27 Jul 2023 14:59:24 +0100
+From: Conor Dooley <conor@kernel.org>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn,
+ zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
+Subject: Re: [PATCH for-8.2 v5 09/11] target/riscv: add 'max' CPU type
+Message-ID: <20230727-armful-french-e572d80fcac1@spud>
+References: <20230720171933.404398-1-dbarboza@ventanamicro.com>
+ <20230720171933.404398-10-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH v2 3/8] machine: Print supported CPU models instead of
- typenames
-Content-Language: en-US
-To: Gavin Shan <gshan@redhat.com>, qemu-arm@nongnu.org
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org,
- b.galvani@gmail.com, strahinja.p.jankovic@gmail.com, sundeep.lkml@gmail.com,
- kfting@nuvoton.com, wuhaotsh@google.com, nieklinnenbank@gmail.com,
- rad@semihalf.com, quic_llindhol@quicinc.com, marcin.juszkiewicz@linaro.org,
- eduardo@habkost.net, marcel.apfelbaum@gmail.com, philmd@linaro.org,
- wangyanan55@huawei.com, laurent@vivier.eu, vijai@behindbytes.com,
- palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, imammedo@redhat.com, cohuck@redhat.com,
- pbonzini@redhat.com, shan.gavin@gmail.com
-References: <20230726003205.1599788-1-gshan@redhat.com>
- <20230726003205.1599788-4-gshan@redhat.com>
- <24e54bac-9149-20da-e4cf-5829a6dcb174@linaro.org>
- <0454c1ad-314c-3df6-d6e9-1a05cb4c4050@redhat.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <0454c1ad-314c-3df6-d6e9-1a05cb4c4050@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42e.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
-X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.091,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="TQTLQ3T5Ey+fZbus"
+Content-Disposition: inline
+In-Reply-To: <20230720171933.404398-10-dbarboza@ventanamicro.com>
+Received-SPF: pass client-ip=139.178.84.217; envelope-from=conor@kernel.org;
+ helo=dfw.source.kernel.org
+X-Spam_score_int: -70
+X-Spam_score: -7.1
+X-Spam_bar: -------
+X-Spam_report: (-7.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_HI=-5, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -110,93 +75,66 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 7/26/23 22:16, Gavin Shan wrote:
-> 
-> On 7/27/23 09:08, Richard Henderson wrote:
->> On 7/25/23 17:32, Gavin Shan wrote:
->>> -static const char *q800_machine_valid_cpu_types[] = {
->>> +static const char * const q800_machine_valid_cpu_types[] = {
->>>       M68K_CPU_TYPE_NAME("m68040"),
->>>       NULL
->>>   };
->>> +static const char * const q800_machine_valid_cpu_models[] = {
->>> +    "m68040",
->>> +    NULL
->>> +};
->>
->> I really don't like this replication.
->>
-> 
-> Right, it's going to be lots of replications, but gives much flexibility.
-> There are 21 targets and we don't have fixed pattern for the mapping between
-> CPU model name and CPU typename. I'm summarizing the used patterns like below.
-> 
->    1 All CPU model names are mappinged to fixed CPU typename;
->    2 CPU model name is same to CPU typename;
->    3 CPU model name is alias to CPU typename;
->    4 CPU model name is prefix of CPU typename;
-> 
->    Target         Categories    suffix-of-CPU-typename
->    -------------------------------------------------------
->    alpha          -234          -alpha-cpu
->    arm            ---4          -arm-cpu
->    avr            -2--
->    cris           --34          -cris-cpu
->    hexagon        ---4          -hexagon-cpu
->    hppa           1---
->    i386           ---4          -i386-cpu
->    loongarch      -2-4          -loongarch-cpu
->    m68k           ---4          -m68k-cpu
->    microblaze     1---
->    mips           ---4          -mips64-cpu  -mips-cpu
->    nios2          1---
->    openrisc       ---4          -or1k-cpu
->    ppc            --34          -powerpc64-cpu  -powerpc-cpu
->    riscv          ---4          -riscv-cpu
->    rx             -2-4          -rx-cpu
->    s390x          ---4          -s390x-cpu
->    sh4            --34          -superh-cpu
->    sparc          -2--
->    tricore        ---4          -tricore-cpu
->    xtensa         ---4          -xtensa-cpu
 
-That is unfortunate, however...
+--TQTLQ3T5Ey+fZbus
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+Hey Daniel,
 
-> There are several options as below. Please let me know which one or something
-> else is the best.
-> 
-> (a) Keep what we have and use mc->valid_{cpu_types, cpu_models}[] to track
-> the valid CPU typenames and CPU model names.
-> 
-> (b) Introduce CPUClass::model_name_by_typename(). Every target has their own
-> implementation to convert CPU typename to CPU model name. The CPU model name
-> is parsed from mc->valid_cpu_types[i].
-> 
->      char *CPUClass::model_by_typename(const char *typename);
-> 
-> (c) As we discussed before, use mc->valid_cpu_type_suffix and mc->valid_cpu_models
-> because the CPU type check is currently needed by target arm/m68k/riscv where we
-> do have fixed pattern to convert CPU model names to CPU typenames. The CPU typename
-> is comprised of CPU model name and suffix. However, it won't be working when the CPU
-> type check is required by other target where we have patterns other than this.
+On Thu, Jul 20, 2023 at 02:19:31PM -0300, Daniel Henrique Barboza wrote:
+> The 'max' CPU type is used by tooling to determine what's the most
+> capable CPU a current QEMU version implements. Other archs such as ARM
+> implements this type. Let's add it to RISC-V.
+>=20
+> What we consider "most capable CPU" in this context are related to
+> ratified, non-vendor extensions. This means that we want the 'max' CPU
+> to enable all (possible) ratified extensions by default. The reasoning
+> behind this design is (1) vendor extensions can conflict with each other
+> and we won't play favorities deciding which one is default or not and
+> (2) non-ratified extensions are always prone to changes, not being
+> stable enough to be enabled by default.
+>=20
+> All this said, we're still not able to enable all ratified extensions
+> due to conflicts between them. Zfinx and all its dependencies aren't
+> enabled because of a conflict with RVF. zce, zcmp and zcmt are also
+> disabled due to RVD conflicts. When running with 64 bits we're also
+> disabling zcf.
+>=20
+> MISA bits RVG, RVJ and RVV are also being set manually since they're
+> default disabled.
+>=20
+> This is the resulting 'riscv,isa' DT for this new CPU:
+>=20
+> rv64imafdcvh_zicbom_zicboz_zicsr_zifencei_zihintpause_zawrs_zfa_
+> zfh_zfhmin_zca_zcb_zcd_zba_zbb_zbc_zbkb_zbkc_zbkx_zbs_zk_zkn_zknd_
+> zkne_zknh_zkr_zks_zksed_zksh_zkt_zve32f_zve64f_zve64d_
+> smstateen_sscofpmf_sstc_svadu_svinval_svnapot_svpbmt
+>=20
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
 
-(d) Merge the two arrays together and use macro expansion, e.g.
+I was giving this another go today, like so
+$(qemu) -smp 4 -M virt,aia=3Daplic,dumpdtb=3Dqemu.dtb -cpu max -m 1G
+which lead to a few
+vector version is not specified, use the default value v1.0
+printed. Should the max cpu set a vector version w/o user input
+being required?
 
-typedef struct {
-     const char *name;
-     const char *type;
-} Something;
+Cheers,
+Conor.
 
-#define ARM_SOMETHING(x)  { x, ARM_CPU_TYPE_NAME(x) }
+--TQTLQ3T5Ey+fZbus
+Content-Type: application/pgp-signature; name="signature.asc"
 
-static const Something valid[] = {
-     ARM_SOMETHING("cortex-a53"),
-     { NULL, NULL }
-};
+-----BEGIN PGP SIGNATURE-----
 
-where Something ought to be better named.
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZMJ4PAAKCRB4tDGHoIJi
+0uMQAP0cyH+MmoYDq0bYqc1tDH4XJx8aqF7Nnl51fyCgkhswTQD+IGEtJb1Kpfwn
+bn0tQDipAdeNStQ35ykLjoCpsinO0gU=
+=1IdJ
+-----END PGP SIGNATURE-----
 
-
-r~
+--TQTLQ3T5Ey+fZbus--
 
