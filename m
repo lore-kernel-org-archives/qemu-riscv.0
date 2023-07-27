@@ -4,92 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E388C001E0
-	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Jul 2023 12:52:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B5B3C001DC
+	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Jul 2023 13:49:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qP0Ab-0002J2-Jj; Thu, 27 Jul 2023 08:32:41 -0400
+	id 1qP14I-0001HK-Mn; Thu, 27 Jul 2023 09:30:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qP0AG-0002CH-48
- for qemu-riscv@nongnu.org; Thu, 27 Jul 2023 08:32:20 -0400
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qP0AD-0002fy-B9
- for qemu-riscv@nongnu.org; Thu, 27 Jul 2023 08:32:19 -0400
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-686ea67195dso689662b3a.2
- for <qemu-riscv@nongnu.org>; Thu, 27 Jul 2023 05:32:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1690461135; x=1691065935;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zIdwfgWq+zPXtz7uG9D1x7QB8jEPgnzU4g7wLDf2u98=;
- b=VwLsaDN2IUL2b7OcZScHL6JXD25OM8ZeMAoY66mrIWit5kyg9JBQgwtaNGP+61vR+C
- dnUxJvcvVh1SNWBcs8GOj/AKpgcx6GngUsvQ5OEWPDR1/G6LeFZz8DG/Dsp3Qq3bJnND
- djHvZhisr8OQ47cBg0KnDaaEkUsKSDuk82wQKULQW549e2Dv0hGKUCIO2Tcp7KgHBC7A
- 9vgv935iIaGGKM0VaJ3qg2IhcFPrscDaz0lYBjoXbZ2TEMklH/cb/kD9dYezuHjU3Vtf
- F0JgGg03XMM4HAZ76zMODFR9iSbKF07jE/071KdwInx0kBWUHjxHf2kBqp1n6z6ZJB6h
- oxfA==
+ (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
+ id 1qP14G-0001EE-HD
+ for qemu-riscv@nongnu.org; Thu, 27 Jul 2023 09:30:13 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
+ id 1qP14B-0003bT-LV
+ for qemu-riscv@nongnu.org; Thu, 27 Jul 2023 09:30:10 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1690464601;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=bVFqC97Q3dgFHlPg9C89I86oMxMnpxjbbA/stSo4quA=;
+ b=Eu5FIN18tKdcG7I2EVUmX+VCguCdQirUWvjv9511zoF/GSGDJGPLTjg48WDiw0ZUgtNlRo
+ eZwNn4a3Ek1d4fQnsUm9O4+Am5iNj5XYwbHRwf0NzUiKP8MoO7Ih56eEjDdQHKpIj0sXyB
+ IFKo6nKs3iFtpSZQWsnzS7hVP9xHGsQ=
+Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
+ [209.85.214.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-689-wMEBT9v_PxCVULcMqxGRUA-1; Thu, 27 Jul 2023 09:28:33 -0400
+X-MC-Unique: wMEBT9v_PxCVULcMqxGRUA-1
+Received: by mail-pl1-f199.google.com with SMTP id
+ d9443c01a7336-1bbdced15f3so7181195ad.2
+ for <qemu-riscv@nongnu.org>; Thu, 27 Jul 2023 06:28:33 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1690461135; x=1691065935;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zIdwfgWq+zPXtz7uG9D1x7QB8jEPgnzU4g7wLDf2u98=;
- b=EurOHZGMfcbpodcOevs9SiW3kuRs2Hxfw/bz5LDRcAPYd/g8h2csn9JVcVdwzyNqT8
- BeorpAvTemPhlISWdXf1VZ4gMchhwnglgPZBczSNNhPkz8WqhM4CIwzizSXvGpZpoVPq
- fsJnu6b83wqqZAOU2DgFhyezXvIiV1yfeP0Mdf4F5OR6sMeCT2mMcIBPlblTjcFCIfaJ
- EYh0nmnKiPl4UYiVVrs4PteJnU1MEHaZjCHD9h4Nf00FOJsl3eiDyy/dat5ZLqVaTDIK
- IjZOzPCLVA2gvreKlxkVNao00I0KNcJ51xf9JHb0D5lPLWpJ4cDS5wM6lfQaPO9EoN0b
- LFvg==
-X-Gm-Message-State: ABy/qLbzCF4+PAFY/p5+Ff2z7/911CVggrXJjpZDxNY+6J3mAGCIbO3E
- OBpmPL+VauCgtZ627T5sNg4hMw==
-X-Google-Smtp-Source: APBJJlFdtqsl/rcqw3r3/yGIQ0tmqXAsoKHUTrOpzUDDcd+Efb5zi+rPGdctmXFXNNsUANUmnNTPlA==
-X-Received: by 2002:a17:90a:e2ca:b0:268:2f2:cc88 with SMTP id
- fr10-20020a17090ae2ca00b0026802f2cc88mr4012232pjb.12.1690461135363; 
- Thu, 27 Jul 2023 05:32:15 -0700 (PDT)
-Received: from sunil-laptop ([106.51.190.25]) by smtp.gmail.com with ESMTPSA id
- 26-20020a17090a035a00b0025bd4db25f0sm1169440pjf.53.2023.07.27.05.32.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Jul 2023 05:32:14 -0700 (PDT)
-Date: Thu, 27 Jul 2023 18:02:05 +0530
-From: Sunil V L <sunilvl@ventanamicro.com>
-To: Igor Mammedov <imammedo@redhat.com>
-Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
- "Michael S . Tsirkin" <mst@redhat.com>, Ani Sinha <anisinha@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Shannon Zhao <shannon.zhaosl@gmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Andrew Jones <ajones@ventanamicro.com>,
- Anup Patel <apatel@ventanamicro.com>
-Subject: Re: [PATCH 04/10] hw/riscv: virt: Add PCIe HIGHMEM in memmap
-Message-ID: <ZMJjxfYMgdVZpRPp@sunil-laptop>
-References: <20230712163943.98994-1-sunilvl@ventanamicro.com>
- <20230712163943.98994-5-sunilvl@ventanamicro.com>
- <20230724173254.3423a204@imammedo.users.ipa.redhat.com>
- <ZMJOB7qZGqzbvACZ@sunil-laptop>
- <20230727140446.14f4c9f0@imammedo.users.ipa.redhat.com>
+ d=1e100.net; s=20221208; t=1690464512; x=1691069312;
+ h=cc:to:subject:message-id:date:in-reply-to:mime-version:references
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=bVFqC97Q3dgFHlPg9C89I86oMxMnpxjbbA/stSo4quA=;
+ b=VyWNZJLSx/vrubrFcK4katb3nHwuWM1vsKEmR9EHcGtRwPSZrIQaEafhrPbKZ8fUqy
+ 8/utM65Mfsit0RyK++Iwtl/zif5pm01sHSottF3+UacIwv8J71tmxrnDppq+8t4RIfjm
+ IPJWjGA5eXvT6aPtfMuU4PI7on/jFUmMd3xjj93WOgK2/1UL6fsSksvQ0PJJ1blGFCHT
+ luQfySMGJFP1RuC4/qrR6N0UXo73/1T01ed9YrYsk/hx2ozZzJ3BoR3jTLw1t+M6y4B0
+ pqtVSc6uw17OR2m5scxbkrwquqNqvHmrhpQSUoREOu8twXNVl34poutUGZ1I7AKxzygS
+ jyNA==
+X-Gm-Message-State: ABy/qLaQ+SYB5hBmNu17O6eaaOk/4rZS+vcmdyCV980LPRwYTn4VZFqB
+ CXUPLbDu2A4mLzJwG1uS12rX6iIthK/+TFoGJ7ujV+b59RYvDHPope+a08G7P7+3VtA1PElT7AG
+ BgcdGo5CepKZ933fR9m0jBRHVmlQ3v30M7lSDeo0=
+X-Received: by 2002:a17:902:7d83:b0:1b3:d608:899a with SMTP id
+ a3-20020a1709027d8300b001b3d608899amr4517748plm.68.1690464512077; 
+ Thu, 27 Jul 2023 06:28:32 -0700 (PDT)
+X-Google-Smtp-Source: APBJJlHB9h79eAF9cP0v0MD2+zBFlyt9fsDL85NoCYQO9XJ5tMaHi3l2prmaiwwHHdSiZTKtD2WzYdMJVlCHHtJVglw=
+X-Received: by 2002:a17:902:7d83:b0:1b3:d608:899a with SMTP id
+ a3-20020a1709027d8300b001b3d608899amr4517738plm.68.1690464511767; Thu, 27 Jul
+ 2023 06:28:31 -0700 (PDT)
+Received: from 744723338238 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 27 Jul 2023 09:28:30 -0400
+From: Andrea Bolognani <abologna@redhat.com>
+References: <35a847a1-2720-14ab-61b0-c72d77d5f43b@ventanamicro.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230727140446.14f4c9f0@imammedo.users.ipa.redhat.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pf1-x432.google.com
+In-Reply-To: <35a847a1-2720-14ab-61b0-c72d77d5f43b@ventanamicro.com>
+Date: Thu, 27 Jul 2023 09:28:30 -0400
+Message-ID: <CABJz62NyVNu4Z1qmCG7MyJkGG_9yWxjUFHHWjmoQEP6unRrHNA@mail.gmail.com>
+Subject: Re: RFC: QEMU rv64/rv32 CPU, 'max' CPU and profile support
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-riscv <qemu-riscv@nongnu.org>, Andrew Jones <ajones@ventanamicro.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=abologna@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,46 +97,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jul 27, 2023 at 02:04:46PM +0200, Igor Mammedov wrote:
-> On Thu, 27 Jul 2023 16:29:19 +0530
-> Sunil V L <sunilvl@ventanamicro.com> wrote:
-> 
-> > On Mon, Jul 24, 2023 at 05:32:54PM +0200, Igor Mammedov wrote:
-> > > On Wed, 12 Jul 2023 22:09:37 +0530
-> > > Sunil V L <sunilvl@ventanamicro.com> wrote:
-> > >   
-> > > > PCIe High MMIO base is actually dynamic and fixed at
-> > > > run time based on the RAM configured. Currently, this is
-> > > > not part of the memmap and kept in separate static variable
-> > > > in virt.c. However, ACPI code also needs this information
-> > > > to populate DSDT. So, once the base is discovered, merge
-> > > > this into the final memmap which can be used to create
-> > > > ACPI tables later.  
-> > > 
-> > > can ACPI code fetch virt_high_pcie_memmap at runtime from
-> > > host bridge (like we do in pc/q35)?
-> > >   
-> > Hi Igor,
-> > 
-> > Looking at the current design of virt machines (arm/loongarch/riscv),
-> > getting this directly from the memmap looks simpler. ARM ACPI also uses
-> > the memmap to get the pcie_high space. It appears to me we need some
-> > more infrastructure code if ACPI needs to fetch from host bridge. I am
-> > not sure why that would be beneficial.
-> 
-> Sure it's possible to directly hardcode access, but it becomes machine
-> specific and hard to generalize/reuse (defaults might belong to machine,
-> but ACPI shall pickup these from actual owner - hostbridge).
-> 
-> And no extra infrastructure is need, x86 manages to do that by
-> using properties on host bridge (one can pre-program values on host bridge
-> during it's creation, firmware can also change them later when initializing PCI).
-> Then DSDT generator picks up uptodate values from hostbridge
-> (which is actual owner of these values) via properties.
-> (basically copy pc/q35 approach). 
-> 
-Ahh OK. Thanks!. Let me update.
+Sorry for being late to the party, and I see that you're already a
+few versions in with the actual patches. Hopefully nothing I write
+here is going to be too disruptive of the work you've already done :)
 
-Thanks,
-Sunil
+On Mon, Jul 10, 2023 at 02:53:12PM -0300, Daniel Henrique Barboza wrote:
+> 1 - introduce the 'max' CPU. I guess we'll need some prep work in how
+> the extensions are being declared/stored in the code. I'll work on
+> it;
+
+Yes please. At least for TCG, this is pretty much a no-brainer and
+what most people will probably want to use.
+
+> 2 - introduce rva23U64/rva23S64. I would like to add a new 'profile' option
+> for generic CPUs, with '-cpu rv64,profile=rva23U64' enabling a whole set
+> of extensions. We would also support enabling optional profile extensions.
+> Yes, we don't have all the profile extensions available yet (neither does
+> the kernel AFAIK) but nothing is stopping us from adding the base
+> framework;
+
+IIUC profiles are basically shorthands for well-defined sets of
+extensions. The idea definitely sounds valuable, but I wonder how
+we'd expose it from the libvirt XML.
+
+My question would be, why should this be -cpu rv64,profile=rva23U64
+instead of just -cpu rva23U64? "Base ISA plus a number of extensions"
+pretty much sounds like a named CPU model to me, but I'm sure there
+is more to it :)
+
+> 3 - reduce the generic CPUs up to the minimum required to boot Linux.
+> Yes, a rather arbitrary criteria, but Linux is the most common OS used
+> by RISC-V QEMU currently so we'll go with what most people are using.
+> This would reduce rv64 to "rv64ima".
+
+Can't we make the generic CPUs really bare-bones instead?
+
+Not sure what exactly that would look like, but as long as you can
+enable specific extensions explicitly I don't see the advantage in
+targeting a specific use case (boot Linux), no matter how popular,
+instead of providing useful building blocks for custom behavior.
+
+The use case of booting Linux, and really most RISC-V operating
+systems, should already be well served by -cpu max for TCG and -cpu
+host for KVM.
+
+-- 
+Andrea Bolognani / Red Hat / Virtualization
+
 
