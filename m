@@ -4,83 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E9A1EB64DD
-	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Jul 2023 23:08:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 904D0C0015E
+	for <qemu-riscv@archiver.kernel.org>; Fri, 28 Jul 2023 01:06:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qPA1r-0003Eu-LZ; Thu, 27 Jul 2023 19:04:19 -0400
+	id 1qPBsD-0007nm-2A; Thu, 27 Jul 2023 21:02:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qPA1q-0003Ek-Ep
- for qemu-riscv@nongnu.org; Thu, 27 Jul 2023 19:04:18 -0400
-Received: from mail-oo1-xc2e.google.com ([2607:f8b0:4864:20::c2e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qPA1l-0005M4-Da
- for qemu-riscv@nongnu.org; Thu, 27 Jul 2023 19:04:18 -0400
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-569bad45b63so1616613eaf.0
- for <qemu-riscv@nongnu.org>; Thu, 27 Jul 2023 16:04:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1690499051; x=1691103851;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=+lLTDyVK5NpTfYC063dCYiFgyLM2yBsbrd9u3I8H5yY=;
- b=WsbeD+eY0Hi5NvjNOZRGFG7n+RoF3Qd1gtO1UekUX/raBUZIN0wSSqf+YdSHllKlCy
- PXcMDK26TuMFb1HvdDqeirTf2K15i47daOEjL/cB/rdZdmoJunkVYTagCr9gu//quOfM
- T8s29Bz2ZCwjAlZ3jkp15TEimdRsQSz3d2vNaLZw1oz6tp62H9pGuSV+erNH7ZoQY53/
- GpeUMrQMsGQHMQqZS/XdQTKbbQ1yWG6C6nY1AINkZghTaid93E3bMJP7phgGbNtIstuJ
- 9dnbyAesznl2GTaxkyFgxoqqu/Nb3wG4KlKOTRIH22WJJX3l++iz0ggLuUpwUMhmB8rT
- dnXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1690499051; x=1691103851;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=+lLTDyVK5NpTfYC063dCYiFgyLM2yBsbrd9u3I8H5yY=;
- b=DdP20m1BO8F99VCvCRFrV06yeTk+RWiP0BzN70p2rFoSaIoFzXLoy9ZfRqc1nOECVE
- MDoP6/u2FjKYQIcY/rjKFExHr835IIiGKNY5yZ4ncrCTdfnC9fcrh3FZGpnfOTxzRCO7
- akJhhpEhotGNy+eQshLYQPW3PieVRqos5szg0X4QDB1WPo5uDX//WDT3cupXyWWpFWvj
- iYj0OQytHnq8DKSfT2CQINz3+qkR8/M1NX/gz646s2yKDIZNn2mO3PMoM67Y/et0a7zo
- TuFS/3WuvvcyR0mNrHJITsv0m4BitrhBBlDGNTL1gltt+U3Tz/R7CqZUwBS+6ui/bgdu
- j+ow==
-X-Gm-Message-State: ABy/qLackh/bCfc0Hm0hhk2nDy/J2ByPNF8m3eiGKcEYdxKANcM0xX/h
- iO9j19btE8LfHk9V1ouD8QxNRA==
-X-Google-Smtp-Source: APBJJlHkkN3Z4HR1uKumni6OLE3kYTP4UgBiM1XQIDFcASoRwfe/djgOR9GTxdx00/8e3ckiOx9/4A==
-X-Received: by 2002:a05:6870:d613:b0:1b0:3821:f09b with SMTP id
- a19-20020a056870d61300b001b03821f09bmr660676oaq.13.1690499051322; 
- Thu, 27 Jul 2023 16:04:11 -0700 (PDT)
-Received: from [192.168.68.108] (201-69-66-36.dial-up.telesp.net.br.
- [201.69.66.36]) by smtp.gmail.com with ESMTPSA id
- s16-20020a056830125000b006b9cc67386fsm1077321otp.66.2023.07.27.16.04.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Jul 2023 16:04:11 -0700 (PDT)
-Message-ID: <f08254a6-e251-b920-9a09-39f2dfc2cdde@ventanamicro.com>
-Date: Thu, 27 Jul 2023 20:04:07 -0300
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1qPBsA-0007nX-IW; Thu, 27 Jul 2023 21:02:27 -0400
+Received: from smtp84.cstnet.cn ([159.226.251.84] helo=cstnet.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1qPBs5-0006i0-SD; Thu, 27 Jul 2023 21:02:24 -0400
+Received: from [192.168.0.120] (unknown [180.165.241.20])
+ by APP-05 (Coremail) with SMTP id zQCowABHTxeYE8NkrY41Dw--.13401S2;
+ Fri, 28 Jul 2023 09:02:16 +0800 (CST)
+Message-ID: <1738f65f-8c6c-da9f-a073-60114d641045@iscas.ac.cn>
+Date: Fri, 28 Jul 2023 09:02:16 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.13.0
-Subject: Re: RFC: QEMU rv64/rv32 CPU, 'max' CPU and profile support
+Cc: liweiwei@iscas.ac.cn, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ bmeng@tinylab.org, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
+Subject: Re: [PATCH v6 09/12] target/riscv/cpu.c: limit cfg->vext_spec log
+ message
 Content-Language: en-US
-To: Andrea Bolognani <abologna@redhat.com>
-Cc: qemu-riscv <qemu-riscv@nongnu.org>, Andrew Jones <ajones@ventanamicro.com>
-References: <35a847a1-2720-14ab-61b0-c72d77d5f43b@ventanamicro.com>
- <CABJz62NyVNu4Z1qmCG7MyJkGG_9yWxjUFHHWjmoQEP6unRrHNA@mail.gmail.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <CABJz62NyVNu4Z1qmCG7MyJkGG_9yWxjUFHHWjmoQEP6unRrHNA@mail.gmail.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+References: <20230727220927.62950-1-dbarboza@ventanamicro.com>
+ <20230727220927.62950-10-dbarboza@ventanamicro.com>
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+In-Reply-To: <20230727220927.62950-10-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c2e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc2e.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+X-CM-TRANSID: zQCowABHTxeYE8NkrY41Dw--.13401S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7KrWruw17Cw15Wr4kZFWfAFb_yoW8uFWrp3
+ yUKrZF9Fn8tFnrZayftw1UJF4UGws8KF4kGw4rA3s8CF4ftFZrWryDtw12kFWxJFZ3CrWY
+ k340gry3Zr4DtaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUkl14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4j6r
+ 4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
+ I7IYx2IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
+ 4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCYjI0SjxkI62AI1cAE67vI
+ Y487MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI
+ 0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y
+ 0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxV
+ W8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1l
+ IxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VU1a9aPUUUU
+ U==
+X-Originating-IP: [180.165.241.20]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.84; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -19
+X-Spam_score: -2.0
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.091,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.091,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -98,120 +81,65 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
+On 2023/7/28 06:09, Daniel Henrique Barboza wrote:
+> Inside riscv_cpu_validate_v() we're always throwing a log message if the
+> user didn't set a vector version via 'vext_spec'.
+>
+> We're going to include one case with the 'max' CPU where env->vext_ver
+> will be set in the cpu_init(). But that alone will not stop the "vector
+> version is not specified" message from appearing. The usefulness of this
+> log message is debatable for the generic CPUs, but for a 'max' CPU type,
+> where we are supposed to deliver a CPU model with all features possible,
+> it's strange to force users to set 'vext_spec' to get rid of this
+> message.
+>
+> Change riscv_cpu_validate_v() to not throw this log message if
+> env->vext_ver is already set.
+>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
 
-On 7/27/23 10:28, Andrea Bolognani wrote:
-> Sorry for being late to the party, and I see that you're already a
-> few versions in with the actual patches. Hopefully nothing I write
-> here is going to be too disruptive of the work you've already done :)
+Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
 
-We just finished warming up. National anthem starting in a few seconds.
-Whole match ahead of us yet :P
+Weiwei Li
 
-> 
-> On Mon, Jul 10, 2023 at 02:53:12PM -0300, Daniel Henrique Barboza wrote:
->> 1 - introduce the 'max' CPU. I guess we'll need some prep work in how
->> the extensions are being declared/stored in the code. I'll work on
->> it;
-> 
-> Yes please. At least for TCG, this is pretty much a no-brainer and
-> what most people will probably want to use.
-> 
->> 2 - introduce rva23U64/rva23S64. I would like to add a new 'profile' option
->> for generic CPUs, with '-cpu rv64,profile=rva23U64' enabling a whole set
->> of extensions. We would also support enabling optional profile extensions.
->> Yes, we don't have all the profile extensions available yet (neither does
->> the kernel AFAIK) but nothing is stopping us from adding the base
->> framework;
-> 
-> IIUC profiles are basically shorthands for well-defined sets of
-> extensions. The idea definitely sounds valuable, but I wonder how
-> we'd expose it from the libvirt XML.
+>   target/riscv/cpu.c | 9 ++++-----
+>   1 file changed, 4 insertions(+), 5 deletions(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 08f61ed051..01b0d228f5 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -939,8 +939,6 @@ static void riscv_cpu_disas_set_info(CPUState *s, disassemble_info *info)
+>   static void riscv_cpu_validate_v(CPURISCVState *env, RISCVCPUConfig *cfg,
+>                                    Error **errp)
+>   {
+> -    int vext_version = VEXT_VERSION_1_00_0;
+> -
+>       if (!is_power_of_2(cfg->vlen)) {
+>           error_setg(errp, "Vector extension VLEN must be power of 2");
+>           return;
+> @@ -963,17 +961,18 @@ static void riscv_cpu_validate_v(CPURISCVState *env, RISCVCPUConfig *cfg,
+>       }
+>       if (cfg->vext_spec) {
+>           if (!g_strcmp0(cfg->vext_spec, "v1.0")) {
+> -            vext_version = VEXT_VERSION_1_00_0;
+> +            env->vext_ver = VEXT_VERSION_1_00_0;
+>           } else {
+>               error_setg(errp, "Unsupported vector spec version '%s'",
+>                          cfg->vext_spec);
+>               return;
+>           }
+> -    } else {
+> +    } else if (env->vext_ver == 0) {
+>           qemu_log("vector version is not specified, "
+>                    "use the default value v1.0\n");
+> +
+> +        env->vext_ver = VEXT_VERSION_1_00_0;
+>       }
+> -    env->vext_ver = vext_version;
+>   }
+>   
+>   static void riscv_cpu_validate_priv_spec(RISCVCPU *cpu, Error **errp)
 
-I was thinking about adding them like CPU features, maybe? Like it is
-already done for hyperv, gic, sev and so on. So we would have, e.g.:
-
-<features>
-   <profile>rva23U64</profile>
-</features>
-
-
-> 
-> My question would be, why should this be -cpu rv64,profile=rva23U64
-> instead of just -cpu rva23U64? "Base ISA plus a number of extensions"
-> pretty much sounds like a named CPU model to me, but I'm sure there
-> is more to it :)
-
-We can do what makes sense since it's a virtual CPU model anyways.
-
-The advantage of implementing profiles using a new 'profile' flag instead
-of using a new CPU model is that we can pile up profiles on top of
-each other using the existing generic CPU (rv64) which is also the default
-CPU for some time. Implementing a new profile would then be a matter of
-adding a new flag instead of a new CPU model.
-
-
-> 
->> 3 - reduce the generic CPUs up to the minimum required to boot Linux.
->> Yes, a rather arbitrary criteria, but Linux is the most common OS used
->> by RISC-V QEMU currently so we'll go with what most people are using.
->> This would reduce rv64 to "rv64ima".
-> 
-> Can't we make the generic CPUs really bare-bones instead?
-> 
-> Not sure what exactly that would look like, but as long as you can
-> enable specific extensions explicitly I don't see the advantage in
-> targeting a specific use case (boot Linux), no matter how popular,
-> instead of providing useful building blocks for custom behavior.
-
-I agree that it's kind of lame to play favorites here and assume that Linux
-is the only case that we care about. There's a high chance that other OSes
-like FreeBSD might require even less extensions than Linux, so why can't
-we use FreeBSD minimal extension set then?
-
-The idea here is less about 'make rv64 a minimal CPU' and more about 'the
-generic CPUs should have a predictable extension set'. Having a criteria
-like 'It needs to boot Linux' grant that we will not break (too many)
-existing users of these generics default CPUs that became used to a random
-set of extensions and, all of a sudden, their setup stop working.
-
-> 
-> The use case of booting Linux, and really most RISC-V operating
-> systems, should already be well served by -cpu max for TCG and -cpu
-> host for KVM.
-
-That's a fair point.
-
-What if we:
-
-- leave the rv64 CPU as is. We'll document the default enabled extensions the
-CPU already has and leave it at that. We'll have to refrain from enabling
-more default extensions in it though;
-
-- if required, add a new 'barebones' CPU. Call it 'rv64min' or any other
-suggestive name. Since it's a new CPU we can really strip it out without
-worrying about breaking existing setups. Can be a good CPU for debugging;
-
-- all future profiles are implemented as flags, similar to what we already
-do with regular extensions. That will enable us to do things like '-cpu
-rv64,rva22U64=true,rva23S64=true' and let user combo profiles that might
-be compatible with each other.
-
-And, reproducing here a question LIU Zhiwei asked me in the QEMU SIG meeting,
-I believe enabling a profile should do just that - enable a certain set of
-extensions. If the user wants to enable a profile and then disable some
-mandatory extensions, have at it.
-
-
-Let me know your thoughts. I have one more prep series to send before
-starting the profile implementation, so we have time.
-
-
-Thanks,
-
-Daniel
-
-
-
-
-> 
 
