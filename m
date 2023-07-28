@@ -4,48 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60F69C0015E
-	for <qemu-riscv@archiver.kernel.org>; Fri, 28 Jul 2023 01:16:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2578DC0015E
+	for <qemu-riscv@archiver.kernel.org>; Fri, 28 Jul 2023 08:19:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qPBWS-0008Jj-FE; Thu, 27 Jul 2023 20:40:01 -0400
+	id 1qPICZ-0003cd-1R; Fri, 28 Jul 2023 03:47:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qPBWP-0008JB-RR; Thu, 27 Jul 2023 20:39:58 -0400
-Received: from out30-119.freemail.mail.aliyun.com ([115.124.30.119])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qPBWM-0005YV-Ou; Thu, 27 Jul 2023 20:39:57 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R211e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045170;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
- TI=SMTPD_---0VoO0eDf_1690504780; 
-Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VoO0eDf_1690504780) by smtp.aliyun-inc.com;
- Fri, 28 Jul 2023 08:39:42 +0800
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-To: qemu-devel@nongnu.org
-Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
- liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, qemu-riscv@nongnu.org,
- LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH] target/riscv: Fix zfa fleq.d and fltq.d
-Date: Fri, 28 Jul 2023 08:39:06 +0800
-Message-Id: <20230728003906.768-1-zhiwei_liu@linux.alibaba.com>
-X-Mailer: git-send-email 2.23.0
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qPICY-0003cO-Hf
+ for qemu-riscv@nongnu.org; Fri, 28 Jul 2023 03:47:54 -0400
+Received: from mail-oo1-xc2f.google.com ([2607:f8b0:4864:20::c2f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qPICW-0004uV-VM
+ for qemu-riscv@nongnu.org; Fri, 28 Jul 2023 03:47:54 -0400
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-56c685b7e91so161235eaf.2
+ for <qemu-riscv@nongnu.org>; Fri, 28 Jul 2023 00:47:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1690530472; x=1691135272;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=MMQFu/gMC2oZ2PpZP1iQJImmfvVCtzU/hGKfgdPRKpA=;
+ b=lFpqAqGnOyGpHWnVMV3Uv4xakcjjCVdTwwiU0mda2+ZE52wbMHADY9YDCJ6XALJrja
+ 4kWapCbcFb8/5k6HBVxKkQT+Ml8QXwOiOCWucK61PBBuY9iLQ1tkHZ2AbjRE0KAAie2j
+ g622cKj81vVrgmYG+F2JBaC6hnpQqcuIsm5y2CWmp3WjxCsv5c5bKVXYJOrHsuzH0Qsw
+ 5UOLA0JJLQOeyjMvmfazVB4RsBc2Ij7kvFp1oQ6GLXQaWiYOmKpGcz7MSAPRSl4/bcRk
+ symlEGVbDVdxywzb3+/CJRzv/3OjSHkejENmaSWuO0G8+zmVfwNVrmlEAV15qqlOVPmZ
+ C1/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1690530472; x=1691135272;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=MMQFu/gMC2oZ2PpZP1iQJImmfvVCtzU/hGKfgdPRKpA=;
+ b=Ul/9TiTms5+D0E0C/I4WVPPWZB2KkbKEGJ5ZwPxOnoI3mxY31L9kttGWh3DmnEKxL+
+ eWv/VoTEUztO/7eYxa/FE4zenITsme3NdBeC2FKOUN28uiwflcVa7/vxcXy3Q7GWYasg
+ eQsCj2bOghOUJN0KSPVGiOserGDLM0dyBpWR6UPEzfwqNRU1U3MmpFF6NuK41g2bnLz8
+ QPJzXD6hm0nHlVw/j+d+sNWJ2p2/U+YB1evSiZx0xpsVIKgwQUVtptpSnfvzePo+XbNF
+ Td8Amv7RcSvxZJ2aR4S3JJ2H3d9N+lOCuiFULxVXeBlZtG/ZlsXeLzj8FOOO/e2goV2Y
+ 6CBw==
+X-Gm-Message-State: ABy/qLaHf1FZeE+CpTeQ0ttGVsUFPAW0Scc42haWF61Xjfavevsd6zrx
+ 6vFgfziQLI/j1bt4QJErMTh3NA==
+X-Google-Smtp-Source: APBJJlGmnoHWUUdp9sO2U1N1XcRY2IImvZJ2jh0RrMSYRPMULGQO1kmIqfLxHn+PEWKip/8SQLSmvQ==
+X-Received: by 2002:a05:6808:bd4:b0:3a5:ca93:fb69 with SMTP id
+ o20-20020a0568080bd400b003a5ca93fb69mr2711299oik.55.1690530471578; 
+ Fri, 28 Jul 2023 00:47:51 -0700 (PDT)
+Received: from [192.168.68.108] (201-69-66-36.dial-up.telesp.net.br.
+ [201.69.66.36]) by smtp.gmail.com with ESMTPSA id
+ z2-20020a056808048200b003a422b6ff4csm1402054oid.49.2023.07.28.00.47.49
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 28 Jul 2023 00:47:51 -0700 (PDT)
+Message-ID: <27b8fef7-7850-d99c-ae7b-110fa18ccaa9@ventanamicro.com>
+Date: Fri, 28 Jul 2023 04:47:47 -0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.119;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-119.freemail.mail.aliyun.com
-X-Spam_score_int: -98
-X-Spam_score: -9.9
-X-Spam_bar: ---------
-X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH] target/riscv: Fix zfa fleq.d and fltq.d
+Content-Language: en-US
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
+Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
+ liweiwei@iscas.ac.cn, qemu-riscv@nongnu.org
+References: <20230728003906.768-1-zhiwei_liu@linux.alibaba.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20230728003906.768-1-zhiwei_liu@linux.alibaba.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c2f;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc2f.google.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
+X-Spam_bar: --
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.091,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -61,38 +97,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Commit a47842d ("riscv: Add support for the Zfa extension") implemented the zfa extension.
-However, it has some typos for fleq.d and fltq.d. Both of them misused the fltq.s
-helper function.
 
-Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
----
- target/riscv/insn_trans/trans_rvzfa.c.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvzfa.c.inc b/target/riscv/insn_trans/trans_rvzfa.c.inc
-index 2c715af3e5..0fdd2698f6 100644
---- a/target/riscv/insn_trans/trans_rvzfa.c.inc
-+++ b/target/riscv/insn_trans/trans_rvzfa.c.inc
-@@ -470,7 +470,7 @@ bool trans_fleq_d(DisasContext *ctx, arg_fleq_d *a)
-     TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-     TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
- 
--    gen_helper_fltq_s(dest, cpu_env, src1, src2);
-+    gen_helper_fleq_d(dest, cpu_env, src1, src2);
-     gen_set_gpr(ctx, a->rd, dest);
-     return true;
- }
-@@ -485,7 +485,7 @@ bool trans_fltq_d(DisasContext *ctx, arg_fltq_d *a)
-     TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-     TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
- 
--    gen_helper_fltq_s(dest, cpu_env, src1, src2);
-+    gen_helper_fltq_d(dest, cpu_env, src1, src2);
-     gen_set_gpr(ctx, a->rd, dest);
-     return true;
- }
--- 
-2.17.1
+On 7/27/23 21:39, LIU Zhiwei wrote:
+> Commit a47842d ("riscv: Add support for the Zfa extension") implemented the zfa extension.
+> However, it has some typos for fleq.d and fltq.d. Both of them misused the fltq.s
+> helper function.
+> 
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> ---
 
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+>   target/riscv/insn_trans/trans_rvzfa.c.inc | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/target/riscv/insn_trans/trans_rvzfa.c.inc b/target/riscv/insn_trans/trans_rvzfa.c.inc
+> index 2c715af3e5..0fdd2698f6 100644
+> --- a/target/riscv/insn_trans/trans_rvzfa.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvzfa.c.inc
+> @@ -470,7 +470,7 @@ bool trans_fleq_d(DisasContext *ctx, arg_fleq_d *a)
+>       TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
+>       TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
+>   
+> -    gen_helper_fltq_s(dest, cpu_env, src1, src2);
+> +    gen_helper_fleq_d(dest, cpu_env, src1, src2);
+>       gen_set_gpr(ctx, a->rd, dest);
+>       return true;
+>   }
+> @@ -485,7 +485,7 @@ bool trans_fltq_d(DisasContext *ctx, arg_fltq_d *a)
+>       TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
+>       TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
+>   
+> -    gen_helper_fltq_s(dest, cpu_env, src1, src2);
+> +    gen_helper_fltq_d(dest, cpu_env, src1, src2);
+>       gen_set_gpr(ctx, a->rd, dest);
+>       return true;
+>   }
 
