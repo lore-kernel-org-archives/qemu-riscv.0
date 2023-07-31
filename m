@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BFFCC001E0
-	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Jul 2023 13:46:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46CAEC001DE
+	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Jul 2023 13:47:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qQTDl-0000oe-T7; Mon, 31 Jul 2023 09:46:02 -0400
+	id 1qQTEx-0002oq-97; Mon, 31 Jul 2023 09:47:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qQTDh-0000i8-8v
- for qemu-riscv@nongnu.org; Mon, 31 Jul 2023 09:45:57 -0400
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qQTEd-0002dh-7n
+ for qemu-riscv@nongnu.org; Mon, 31 Jul 2023 09:46:57 -0400
+Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qQTDe-0001rF-T7
- for qemu-riscv@nongnu.org; Mon, 31 Jul 2023 09:45:57 -0400
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-317715ec496so4837546f8f.3
- for <qemu-riscv@nongnu.org>; Mon, 31 Jul 2023 06:45:54 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qQTEa-000259-TW
+ for qemu-riscv@nongnu.org; Mon, 31 Jul 2023 09:46:54 -0400
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-31297125334so3093535f8f.0
+ for <qemu-riscv@nongnu.org>; Mon, 31 Jul 2023 06:46:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1690811153; x=1691415953;
+ d=linaro.org; s=google; t=1690811210; x=1691416010;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=nQ3reraINQ9aqfKUKaeldl1vlh1lyTB9JIH6X3eokKs=;
- b=h9lwSGncjCHcAn12JKsftrabS4nfigm3sHN+MhY6qrIozYkfycqMaJwYAVGMULRLRl
- hCIAFrlDlr5qOK4DzdtoxX0IeATQbS+bc7oRO3QQlbIQ3t+A010rT78zpKnbN1GqMa31
- MTHUga9IVCtMFnLJBPb0UBswnRupNB6r8jzRRur33UAiwjLgczomFkN2LArkuSW2zie1
- +VWN47jxXanCA0sq3gFMCibAmT8KqIJ6jxQT3dSmBE3a3FFc8zVhUORcIykbbs5tz9YQ
- 1VIlmgsjKh19oF8n7CP97ygzELRD5uY8v+I88WDDD9/1qnUdOM1f0lg1YWGbz62BF7fE
- XwHQ==
+ bh=dQ0I3HmeLwdb2CHpthEIho6U8+3evu764gXwyozJFJk=;
+ b=cBIHIBOSLNObNV9EcCZWuJdAP3X/Yjf8MfPWDJ0xynWkhkAvOoCoeQ3ilBgYosgf0q
+ IqixA1oCTZtQ5WZRLM6Sp3mWD4Ei12jQRo8QEZ0zL050VpnJud2f2cbulxvqFnF2LcV4
+ TSxyxCWhp2FdO+Y9B37ehlsT6fvVD5nST6ZCzxWjKLAgCIRGzss02W+3Oi+8AjTpNeNk
+ iHkpi1tG/V4Yj1avZhXhTcXQJnFp1RGefp/CvNyJ6jEMJppRo9a/3bLdW1VSSIz2X4HU
+ TiiLHf+luOys2jBAoJnKgFfCD6u1aYYGd0E9UHSVdh9bwk5HWk7t/ywXn5GqUMjygicC
+ YLiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1690811153; x=1691415953;
+ d=1e100.net; s=20221208; t=1690811210; x=1691416010;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=nQ3reraINQ9aqfKUKaeldl1vlh1lyTB9JIH6X3eokKs=;
- b=HmiflMlXhcNSPwk0aLB7z+35GhgwVMCJjbiWbKTw+w2nDP8W5x0jTR6wGTMZ32hxHi
- N4aIameN45jhfleEgv6OMweBriADd9W9bEuXoL4AAHkMcZFSl/X0stdbL25rAw0hsPpe
- hIT6AXZJLtUYSVg37B04jIGdWgTR2PPfKLb+0CSBFG0YdN8/hsrBw1ZbtbxyPgfCMISA
- 81rqIl4LMEBmT9f8BKGTAhq9AJCTQ8VwiVb1Osw6B++ode+/6Z31UGnG0KSmndJGiQT4
- crVIoxEXG7VhEI7NgzwBnfdvPfAgsO8QWHoGY6EZtLON5WhQQYatvNFRXI9/RX2MHbck
- BYBg==
-X-Gm-Message-State: ABy/qLbBS5FIWTbVLMgL4eOaplPUGTXGX5+dtieJkMYrROWkycoBTN4V
- FhrB7YiZBdJaEnlKiehPDXqcfg==
-X-Google-Smtp-Source: APBJJlH4gyq7JrTkfEpvQa84k4NIFE18KTu4UsifBNdTs57wOfERvKO5Hcmx4G0JBwtVPCjxuezb3A==
-X-Received: by 2002:a5d:4acf:0:b0:316:e04a:29e8 with SMTP id
- y15-20020a5d4acf000000b00316e04a29e8mr7512961wrs.54.1690811152959; 
- Mon, 31 Jul 2023 06:45:52 -0700 (PDT)
+ bh=dQ0I3HmeLwdb2CHpthEIho6U8+3evu764gXwyozJFJk=;
+ b=KrbmQlFcMsAwgpYvzdpSJpewSJBdgZSQ14csKhzzxuhLHGhY1C66ZUPJSqM7UImxst
+ Yh5XdPeYNwCgu8isawH+JhK2+gGjHg93O4CvlfZckw5NrGmIVC9i6zk3l13xDp05i1eI
+ zzsIEBZCdtTVCvTPimDjoyZqTNOH/p2fvOmTa+g5xjzqiVLeoxhjAJ1wJuLrfRAyJCQy
+ OxwY+1uJAbGaHWoHYG+l86ZYC/kOI4zDlANWICEq3EI4DP7fCbrOY/bC2fL3hQ3g5BKH
+ M+6EKTOLXCESjrf3V1wjFkB77Tzw9y0eoAMPbH/AA3/Hp4/7Debo3/W0PXb7VhsfzWlN
+ XB0A==
+X-Gm-Message-State: ABy/qLZBnqYzlCxpTzPNFWepk/BWEEJejiWgSoBxU4a8jPtKPxAoOY+i
+ VheHuEv/DqtBL60+UQdVJOE0MA==
+X-Google-Smtp-Source: APBJJlEGscdCdyrOOjocrIiffHS4ZOgq9nstpeavSp5NQ755reBaDEaDK7cpizfk0ROb2M0X1gS8Qw==
+X-Received: by 2002:a5d:4b85:0:b0:315:7f1d:7790 with SMTP id
+ b5-20020a5d4b85000000b003157f1d7790mr7532962wrt.6.1690811210364; 
+ Mon, 31 Jul 2023 06:46:50 -0700 (PDT)
 Received: from [192.168.69.115] ([176.187.198.42])
  by smtp.gmail.com with ESMTPSA id
- y18-20020adff152000000b0031784ac0babsm12011439wro.28.2023.07.31.06.45.46
+ a10-20020a5d508a000000b0031773e3cf46sm13250562wrt.61.2023.07.31.06.46.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 31 Jul 2023 06:45:52 -0700 (PDT)
-Message-ID: <6b4c6870-35a3-0f7f-b405-ca6e6634c4ab@linaro.org>
-Date: Mon, 31 Jul 2023 15:45:44 +0200
+ Mon, 31 Jul 2023 06:46:49 -0700 (PDT)
+Message-ID: <277b6422-7820-bd1e-74d8-5410d67bc09a@linaro.org>
+Date: Mon, 31 Jul 2023 15:46:41 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.13.0
-Subject: Re: [RFC PATCH 08/24] target/ppc: Use GDBFeature for dynamic XML
+Subject: Re: [RFC PATCH 09/24] target/riscv: Use GDBFeature for dynamic XML
 Content-Language: en-US
 To: Akihiko Odaki <akihiko.odaki@daynix.com>
 Cc: Paolo Bonzini <pbonzini@redhat.com>, =?UTF-8?Q?Alex_Benn=c3=a9e?=
@@ -99,13 +99,13 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>, =?UTF-8?Q?Alex_Benn=c3=a9e?=
  qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org
 References: <20230731084354.115015-1-akihiko.odaki@daynix.com>
- <20230731084354.115015-9-akihiko.odaki@daynix.com>
+ <20230731084354.115015-10-akihiko.odaki@daynix.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230731084354.115015-9-akihiko.odaki@daynix.com>
+In-Reply-To: <20230731084354.115015-10-akihiko.odaki@daynix.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::432;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x432.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::435;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x435.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
@@ -135,11 +135,25 @@ On 31/7/23 10:43, Akihiko Odaki wrote:
 > 
 > Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 > ---
->   target/ppc/cpu-qom.h  |  3 +--
->   target/ppc/cpu.h      |  2 +-
->   target/ppc/cpu_init.c |  2 +-
->   target/ppc/gdbstub.c  | 13 +++++++------
->   4 files changed, 10 insertions(+), 10 deletions(-)
+>   target/riscv/cpu.h     |  4 ++--
+>   target/riscv/cpu.c     |  4 ++--
+>   target/riscv/gdbstub.c | 25 ++++++++++++++-----------
+>   3 files changed, 18 insertions(+), 15 deletions(-)
+> 
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 6ea22e0eea..f67751d5b7 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -391,8 +391,8 @@ struct ArchCPU {
+>       CPUNegativeOffsetState neg;
+>       CPURISCVState env;
+>   
+> -    char *dyn_csr_xml;
+> -    char *dyn_vreg_xml;
+> +    GDBFeature dyn_csr_feature;
+> +    GDBFeature dyn_vreg_feature;
+
+Similar comment that ARM (dyn_features array).
 
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
