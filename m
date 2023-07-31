@@ -4,85 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 947DAC0015E
-	for <qemu-riscv@archiver.kernel.org>; Sat, 29 Jul 2023 22:06:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30F92EB64DD
+	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Jul 2023 01:58:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qPrKJ-0002hz-7n; Sat, 29 Jul 2023 17:18:15 -0400
+	id 1qQIAz-0003o4-HA; Sun, 30 Jul 2023 21:58:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1qPrKF-0002h7-PI
- for qemu-riscv@nongnu.org; Sat, 29 Jul 2023 17:18:11 -0400
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1qPrKE-0001ff-19
- for qemu-riscv@nongnu.org; Sat, 29 Jul 2023 17:18:11 -0400
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1bb775625e2so20543495ad.1
- for <qemu-riscv@nongnu.org>; Sat, 29 Jul 2023 14:18:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1690665488; x=1691270288;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=2M9+soq9/vyWJ3xsv/OorLOQth0Z/WnuaAE3XOzrz1o=;
- b=zhk152XSUw4Q1SzJeuEnYiHJH4rEIbqvIja28vH/qGbWma9Zv5onhKtpiYTFuFu1si
- t1KHvNbDZshi2enzo2TXFf27pc5hnxOkrlS39CG+pJd1Q/mzLK2uP1xnsHGjjUzilZYD
- AuAs4I+TXACiWk1Kdgvv3bXbfcQvFKwNu3gKmuQafqDnYD+Y8e09HhAiN8OGomw8CoOC
- WS6/jKdrTo6efjVa2wv3wKW0MvS+t3Xu0QIltA5QdCYrmm92R4gGYN9nia1DO9HrX0Sf
- 7CzY1fyDyi4k+1fDHRMkYaaf08VzcXKGb6aTXSQgNfWD3l2zOUtSpl/EPizFW6Ba0/2e
- YpDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1690665488; x=1691270288;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=2M9+soq9/vyWJ3xsv/OorLOQth0Z/WnuaAE3XOzrz1o=;
- b=WLpyxUABvSu2Qh46gS7xY5iamTDszRkKJKAD8FGehSScSlw1vMshCAsDuFTABkxRmN
- FMuaDjZOGs5fuQSiwxRsLygcTQpswTjOpCfDFO2ItNB0bBQTs4STvCsS+g1RS0Zccv5a
- dqn3Jri0fdDkY9xa79uB/gOiZph8ZYAR5rR0Q7Y/pJP12eCvRnVyiwx8XrqIU6AwHYcw
- fhbj8iLIR3U3OQ13F0tntTsUh4ogt/JIOJLl5ZUEuRsfVbjKWYwYj+ZhhJGYidw6QxRv
- lcFdDKXerqXc4GaWy3LNg7xMXFx3pUk4ISuHNwq+AhY90wTPuHx9zd58IR62AvQ8wZaj
- S+IA==
-X-Gm-Message-State: ABy/qLY4dW6o9re9w4yjy0bXnSRsblriyMxK2NQf7TEoa8tNFp+zWu2Z
- 444K2dxMJLtSRrICdTJz2K/11A==
-X-Google-Smtp-Source: APBJJlEJZD391X/wPvWnYlt4/6rKozvSbeuSUvNlZhtH88zrYnt78jLaN9siHAGTGtDEz63yWheIVA==
-X-Received: by 2002:a17:902:ba96:b0:1b8:c6f8:d9b with SMTP id
- k22-20020a170902ba9600b001b8c6f80d9bmr6114607pls.34.1690665487598; 
- Sat, 29 Jul 2023 14:18:07 -0700 (PDT)
-Received: from ?IPV6:2602:ae:154e:c001:3ba7:1297:fffe:e7cb?
- ([2602:ae:154e:c001:3ba7:1297:fffe:e7cb])
- by smtp.gmail.com with ESMTPSA id
- j3-20020a170902c3c300b001bb40b880efsm4681915plj.101.2023.07.29.14.18.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 29 Jul 2023 14:18:07 -0700 (PDT)
-Message-ID: <4c8751cf-7e27-a5dc-e7e1-2074c2d5f09d@linaro.org>
-Date: Sat, 29 Jul 2023 14:18:04 -0700
+ (Exim 4.90_1) (envelope-from <fei2.wu@intel.com>)
+ id 1qQIAy-0003iF-AA; Sun, 30 Jul 2023 21:58:24 -0400
+Received: from [192.55.52.136] (helo=mgamail.intel.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <fei2.wu@intel.com>)
+ id 1qQIAv-0007jG-Oz; Sun, 30 Jul 2023 21:58:24 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1690768701; x=1722304701;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=lBAI0qFx6IhVQYJzBWvvcX3bLtMyXPAiMtqmarShKro=;
+ b=aB4WQGMN4xy3Ih1dCFpPiYzCWyTZhYqxyOP24tNWWkJ1O3uGVEYlj+Q3
+ C0bCZZk2YQslbmgyefafFjOw7MlipgBbtVnaXXs9a1Gt9Dv2bH2QVWzpo
+ 6sJKuoqqgzd002cStGpbWtniMyvFP1JQBJUUQQB7lnau+VBISiqBOELt3
+ 8z536kMEGwoY2uAtsjSZIIu7x9Bdcw1CBs/NGRTjT5uhUaxjFBvJ5dRiv
+ 0pKqkRVUpcQv0U1g7sGzwfxi5y5ekhtR5lzIh140u+kRdSnHwhP7TN3d2
+ vhsOivALv99tY7wOrAndJ+j4eLybW6wBxbLUVZjctyopGiqUDFs8TUuYV g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="348500841"
+X-IronPort-AV: E=Sophos;i="6.01,243,1684825200"; d="scan'208";a="348500841"
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+ by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 30 Jul 2023 18:51:01 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10787"; a="728122173"
+X-IronPort-AV: E=Sophos;i="6.01,243,1684825200"; d="scan'208";a="728122173"
+Received: from wufei-optiplex-7090.sh.intel.com ([10.238.200.247])
+ by orsmga002.jf.intel.com with ESMTP; 30 Jul 2023 18:50:58 -0700
+From: Fei Wu <fei2.wu@intel.com>
+To: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: Fei Wu <fei2.wu@intel.com>, Andrei Warkentin <andrei.warkentin@intel.com>
+Subject: [PATCH] hw/riscv: split RAM into low and high memory
+Date: Mon, 31 Jul 2023 09:53:17 +0800
+Message-Id: <20230731015317.1026996-1-fei2.wu@intel.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH] target/riscv: Fix page_check_range use in fault-only-first
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
-Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
- liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, qemu-riscv@nongnu.org
-References: <20230729031618.821-1-zhiwei_liu@linux.alibaba.com>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230729031618.821-1-zhiwei_liu@linux.alibaba.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x636.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
-X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.089,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 8bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 192.55.52.136 (failed)
+Received-SPF: pass client-ip=192.55.52.136; envelope-from=fei2.wu@intel.com;
+ helo=mgamail.intel.com
+X-Spam_score_int: -35
+X-Spam_score: -3.6
+X-Spam_bar: ---
+X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, RDNS_NONE=0.793, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,23 +76,181 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 7/28/23 20:16, LIU Zhiwei wrote:
-> Commit bef6f008b98(accel/tcg: Return bool from page_check_range) converts
-> integer return value to bool type. However, it wrongly converted the use
-> of the API in riscv fault-only-first, where page_check_range < = 0, should
-> be converted to !page_check_range.
-> 
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-> ---
->   target/riscv/vector_helper.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+riscv virt platform's memory started at 0x80000000 and
+straddled the 4GiB boundary. Curiously enough, this choice
+of a memory layout will prevent from launching a VM with
+a bit more than 2000MiB and PCIe pass-thru on an x86 host, due
+to identity mapping requirements for the MSI doorbell on x86,
+and these (APIC/IOAPIC) live right below 4GiB.
 
-As far as it goes,
+So just split the RAM range into two portions:
+- 1 GiB range from 0x80000000 to 0xc0000000.
+- The remainder at 0x100000000
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+...leaving a hole between the ranges.
 
-though the test will never fail, because tlb_vaddr_to_host just succeeded.
+Signed-off-by: Andrei Warkentin <andrei.warkentin@intel.com>
+Signed-off-by: Fei Wu <fei2.wu@intel.com>
+---
+ hw/riscv/virt.c         | 74 ++++++++++++++++++++++++++++++++++++-----
+ include/hw/riscv/virt.h |  1 +
+ 2 files changed, 66 insertions(+), 9 deletions(-)
 
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index d90286dc46..8fbdc7220c 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -75,7 +75,9 @@
+ #error "Can't accomodate all IMSIC groups in address space"
+ #endif
+ 
+-static const MemMapEntry virt_memmap[] = {
++#define LOW_MEM (1 * GiB)
++
++static MemMapEntry virt_memmap[] = {
+     [VIRT_DEBUG] =        {        0x0,         0x100 },
+     [VIRT_MROM] =         {     0x1000,        0xf000 },
+     [VIRT_TEST] =         {   0x100000,        0x1000 },
+@@ -96,6 +98,7 @@ static const MemMapEntry virt_memmap[] = {
+     [VIRT_PCIE_ECAM] =    { 0x30000000,    0x10000000 },
+     [VIRT_PCIE_MMIO] =    { 0x40000000,    0x40000000 },
+     [VIRT_DRAM] =         { 0x80000000,           0x0 },
++    [VIRT_DRAM_HIGH] =    { 0x100000000,          0x0 },
+ };
+ 
+ /* PCIe high mmio is fixed for RV32 */
+@@ -295,15 +298,12 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
+     }
+ }
+ 
+-static void create_fdt_socket_memory(RISCVVirtState *s,
+-                                     const MemMapEntry *memmap, int socket)
++static void create_fdt_socket_mem_range(RISCVVirtState *s, uint64_t addr,
++                                        uint64_t size, int socket)
+ {
+     char *mem_name;
+-    uint64_t addr, size;
+     MachineState *ms = MACHINE(s);
+ 
+-    addr = memmap[VIRT_DRAM].base + riscv_socket_mem_offset(ms, socket);
+-    size = riscv_socket_mem_size(ms, socket);
+     mem_name = g_strdup_printf("/memory@%lx", (long)addr);
+     qemu_fdt_add_subnode(ms->fdt, mem_name);
+     qemu_fdt_setprop_cells(ms->fdt, mem_name, "reg",
+@@ -313,6 +313,34 @@ static void create_fdt_socket_memory(RISCVVirtState *s,
+     g_free(mem_name);
+ }
+ 
++static void create_fdt_socket_memory(RISCVVirtState *s,
++                                     const MemMapEntry *memmap, int socket)
++{
++    uint64_t addr, size;
++    MachineState *mc = MACHINE(s);
++    uint64_t sock_offset = riscv_socket_mem_offset(mc, socket);
++    uint64_t sock_size = riscv_socket_mem_size(mc, socket);
++
++    if (sock_offset < memmap[VIRT_DRAM].size) {
++        uint64_t low_mem_end = memmap[VIRT_DRAM].base + memmap[VIRT_DRAM].size;
++
++        addr = memmap[VIRT_DRAM].base + sock_offset;
++        size = MIN(low_mem_end - addr, sock_size);
++        create_fdt_socket_mem_range(s, addr, size, socket);
++
++        size = sock_size - size;
++        if (size > 0) {
++            create_fdt_socket_mem_range(s, memmap[VIRT_DRAM_HIGH].base,
++                                        size, socket);
++        }
++    } else {
++        addr = memmap[VIRT_DRAM_HIGH].base +
++               sock_offset - memmap[VIRT_DRAM].size;
++
++        create_fdt_socket_mem_range(s, addr, sock_size, socket);
++    }
++}
++
+ static void create_fdt_socket_clint(RISCVVirtState *s,
+                                     const MemMapEntry *memmap, int socket,
+                                     uint32_t *intc_phandles)
+@@ -1334,10 +1362,12 @@ static void virt_machine_done(Notifier *notifier, void *data)
+ 
+ static void virt_machine_init(MachineState *machine)
+ {
+-    const MemMapEntry *memmap = virt_memmap;
++    MemMapEntry *memmap = virt_memmap;
+     RISCVVirtState *s = RISCV_VIRT_MACHINE(machine);
+     MemoryRegion *system_memory = get_system_memory();
+     MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
++    MemoryRegion *ram_below_4g, *ram_above_4g;
++    uint64_t ram_size_low, ram_size_high;
+     char *soc_name;
+     DeviceState *mmio_irqchip, *virtio_irqchip, *pcie_irqchip;
+     int i, base_hartid, hart_count;
+@@ -1448,6 +1478,17 @@ static void virt_machine_init(MachineState *machine)
+         }
+     }
+ 
++    if (machine->ram_size > LOW_MEM) {
++        ram_size_high = machine->ram_size - LOW_MEM;
++        ram_size_low = LOW_MEM;
++    } else {
++        ram_size_high = 0;
++        ram_size_low = machine->ram_size;
++    }
++
++    memmap[VIRT_DRAM].size = ram_size_low;
++    memmap[VIRT_DRAM_HIGH].size = ram_size_high;
++
+     if (riscv_is_32bit(&s->soc[0])) {
+ #if HOST_LONG_BITS == 64
+         /* limit RAM size in a 32-bit system */
+@@ -1460,7 +1501,8 @@ static void virt_machine_init(MachineState *machine)
+         virt_high_pcie_memmap.size = VIRT32_HIGH_PCIE_MMIO_SIZE;
+     } else {
+         virt_high_pcie_memmap.size = VIRT64_HIGH_PCIE_MMIO_SIZE;
+-        virt_high_pcie_memmap.base = memmap[VIRT_DRAM].base + machine->ram_size;
++        virt_high_pcie_memmap.base = memmap[VIRT_DRAM_HIGH].base +
++                                     memmap[VIRT_DRAM_HIGH].size;
+         virt_high_pcie_memmap.base =
+             ROUND_UP(virt_high_pcie_memmap.base, virt_high_pcie_memmap.size);
+     }
+@@ -1468,8 +1510,22 @@ static void virt_machine_init(MachineState *machine)
+     s->memmap = virt_memmap;
+ 
+     /* register system main memory (actual RAM) */
++    ram_below_4g = g_malloc(sizeof(*ram_below_4g));
++    memory_region_init_alias(ram_below_4g, NULL, "ram-below-4g", machine->ram,
++                             0, memmap[VIRT_DRAM].size);
+     memory_region_add_subregion(system_memory, memmap[VIRT_DRAM].base,
+-        machine->ram);
++                                ram_below_4g);
++
++    if (memmap[VIRT_DRAM_HIGH].size) {
++        ram_above_4g = g_malloc(sizeof(*ram_above_4g));
++        memory_region_init_alias(ram_above_4g, NULL, "ram-above-4g",
++                                 machine->ram,
++                                 memmap[VIRT_DRAM].size,
++                                 memmap[VIRT_DRAM_HIGH].size);
++        memory_region_add_subregion(system_memory,
++                                    memmap[VIRT_DRAM_HIGH].base,
++                                    ram_above_4g);
++    }
+ 
+     /* boot rom */
+     memory_region_init_rom(mask_rom, NULL, "riscv_virt_board.mrom",
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index e5c474b26e..36004eb6ef 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -79,6 +79,7 @@ enum {
+     VIRT_IMSIC_S,
+     VIRT_FLASH,
+     VIRT_DRAM,
++    VIRT_DRAM_HIGH,
+     VIRT_PCIE_MMIO,
+     VIRT_PCIE_PIO,
+     VIRT_PLATFORM_BUS,
+-- 
+2.34.1
 
-r~
 
