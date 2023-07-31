@@ -4,116 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B92BAC001DC
-	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Jul 2023 14:01:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE1D4C00528
+	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Jul 2023 14:12:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qQTS7-00034W-UN; Mon, 31 Jul 2023 10:00:51 -0400
+	id 1qQTd7-0003Jg-3j; Mon, 31 Jul 2023 10:12:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qQTS0-00031i-U3
- for qemu-riscv@nongnu.org; Mon, 31 Jul 2023 10:00:50 -0400
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qQTd5-0003GL-W3
+ for qemu-riscv@nongnu.org; Mon, 31 Jul 2023 10:12:12 -0400
+Received: from mail-ot1-x332.google.com ([2607:f8b0:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qQTRu-0004iF-Ch
- for qemu-riscv@nongnu.org; Mon, 31 Jul 2023 10:00:44 -0400
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-1bb81809ca8so35875345ad.3
- for <qemu-riscv@nongnu.org>; Mon, 31 Jul 2023 07:00:29 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qQTd2-0006zA-M4
+ for qemu-riscv@nongnu.org; Mon, 31 Jul 2023 10:12:11 -0400
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-6bb07d274feso3624601a34.0
+ for <qemu-riscv@nongnu.org>; Mon, 31 Jul 2023 07:12:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1690812028; x=1691416828;
+ d=ventanamicro.com; s=google; t=1690812726; x=1691417526;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=dFI5/dDGgtKfts1m9Qur3+hIlx9/w17jNCSRDR4ep4A=;
- b=3EPqxcNQLkbIAN43BnvhYZVYFN8u1avdTBAov9OH4wtbeM2Z/NKEQdQOXqOQqaSA7W
- wzU0t/EQvRuU+GjQjJd+AkPA1CQK5Yi1ZInbVUkjrnoYJxEmBDhASTvZUwboLnpe2ad9
- evmGSq52GlcBtKeCA43f8XyfLcLGT8KVBN6A5jEhptsqms8uAcya+MkMvYG3aos3C/en
- DtnP7HixhflynPBJNKOchyxMUeOHGLUfZMUN2EYFlBuV4ftryIydIWL7lVchim3/cobK
- aNpaUWV3K5bOBUhPol7UOvmxMf7DKUfW07qLqq8sVTi4DBIWC1nu3XNbeaAjdd1+hqW/
- GkNA==
+ bh=PqwR6AdhNK6JHv6Bea2K63f4F47Voo7lal+nAQ6q8EQ=;
+ b=cVD/kH/XnSuHi8ty6DakS6Y7h8a9GJ3X0kYHE7NBRJW56hXB/KsdAenm3j96KHvR/Q
+ 1h5F2TrbeNq6pR8MI3o9Y/gK8xtb3wEjZv8N67/8f7mZG72jnTQykyj2/JKqSl4XI01i
+ 1vxc97aXqZu2MUxp7qtHWIXzrU3LXtgZbPRfj/xmwB+r5zo89dJAVQEYHMUCTBo2iMn+
+ H9zOJs0fiD/VC+UvU/gfzDQYtCBq71QY9Grp0DLvoQdkhkcoeFC9onj04ucNxrc1Ezzb
+ 04QNBGw1fRo+2aMycTbcLJ2vpIHvX1LG4mm1mik6W7caZe4CN3EjtHE09KOnp8yMuoIM
+ 2SOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1690812028; x=1691416828;
+ d=1e100.net; s=20221208; t=1690812726; x=1691417526;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=dFI5/dDGgtKfts1m9Qur3+hIlx9/w17jNCSRDR4ep4A=;
- b=fNtxxYtmjG/m7guvcuK+gIYokPATRRTDu7KlzyOZfA/zKIMFIn38mxk3lZueqVzKd/
- 81GSif4NUAguOHMqqzWtvVDIRgHnzF1R4zewFVIA4KRilOk8hNJAxp/YFy0nrBQ69NKi
- zMt9GJgAgTIqZ/UGoI6QPUE2+brh5jE4lX6PCq6bAcNWKv3UOBaZcrX+fqYsMVVnqdBa
- AOh+B1SGKeH8BaATxgQ4opT19NVqyreICfQS0KBvqsyj6MleLDGNcGwrT9gCydIWmrA1
- CPzsR2OSQSQ20OQEXZT7OGyZNrmD5vpjFCU/+tNbU9q7WD4TFu+7TAXjLymnIxpHE1gR
- 9Xbg==
-X-Gm-Message-State: ABy/qLaDn04bXBV4HDyI9wvQSwpg6MHDro/ZTNdx77dbnvCnTjSR+kfs
- 7SZde/Pf37JSliiCubJSltUgbw==
-X-Google-Smtp-Source: APBJJlFvL8s6ELhm4xoUw4u+DrnTuGXUQIjU2FysvwOYLzpco137/GPcI1hDqnIqDVUiZC9M1PCW4A==
-X-Received: by 2002:a17:903:1ce:b0:1b8:88c5:2d2f with SMTP id
- e14-20020a17090301ce00b001b888c52d2fmr11462865plh.64.1690812028070; 
- Mon, 31 Jul 2023 07:00:28 -0700 (PDT)
-Received: from [10.4.77.242] ([118.103.63.133])
- by smtp.gmail.com with ESMTPSA id
- c6-20020a170902c1c600b001acae9734c0sm8638603plc.266.2023.07.31.07.00.19
+ bh=PqwR6AdhNK6JHv6Bea2K63f4F47Voo7lal+nAQ6q8EQ=;
+ b=li9sD+t9BI0HdPyLtx5o4OuvNtfNzHII1+6uWQl84TqypY0knwC9ubPoxkUeUA3sDu
+ rYov537AJ6WWZozaOCaYT2wpc47JymgF0Q+01pnIuQt5OhnqYmIw3iTjUkFBTXxSEBiF
+ wXRF8WsCkbPnmhxZLTMIMimFLowa2hAiL+cu4x9PP0ZBynUk7J8H9NtbLIBOeU/75Y9l
+ xdtucKeL1PnvyzhcuAUk9xh/sHiEIcnLO6FVrldv79+MyfCqDSNeTZiIM80OmR79W0ra
+ mYWUWdSOxafBP8vA1hRZz00+CeJvVTYUpY8GY35NTL4QSF2LocyshcT7RdDT3/HI6IvP
+ 0uyA==
+X-Gm-Message-State: ABy/qLbM/afQV77NCmr1IlMe9NysUNJ5c08RbPA6VfjTIhx1unnDVXBI
+ zqmUckmOMXZ/5jt6aGVJCghUUQ==
+X-Google-Smtp-Source: APBJJlHk4dskhqgIeGGtzHfU/VNYKycZfsOm4cPCNfOuFuoj9/iKMyfZ/IwXfbIqhjS6fZlNUDoecQ==
+X-Received: by 2002:a05:6870:2109:b0:1a3:2447:7f4a with SMTP id
+ f9-20020a056870210900b001a324477f4amr11081591oae.32.1690812726159; 
+ Mon, 31 Jul 2023 07:12:06 -0700 (PDT)
+Received: from [192.168.68.108] (201-69-66-110.dial-up.telesp.net.br.
+ [201.69.66.110]) by smtp.gmail.com with ESMTPSA id
+ q20-20020a9d6554000000b006b9cc007e87sm4108841otl.20.2023.07.31.07.12.03
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 31 Jul 2023 07:00:27 -0700 (PDT)
-Message-ID: <e11c2c4b-fcf8-cd24-2735-0ea107b289d3@daynix.com>
-Date: Mon, 31 Jul 2023 23:00:18 +0900
+ Mon, 31 Jul 2023 07:12:05 -0700 (PDT)
+Message-ID: <43c6120f-ed43-d45c-a3a5-a3bf22fd8f67@ventanamicro.com>
+Date: Mon, 31 Jul 2023 11:12:01 -0300
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 07/24] target/arm: Use GDBFeature for dynamic XML
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [RFC PATCH] hw/riscv: hart: allow other cpu instance
 Content-Language: en-US
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: Paolo Bonzini <pbonzini@redhat.com>, =?UTF-8?Q?Alex_Benn=C3=A9e?=
- <alex.bennee@linaro.org>, Thomas Huth <thuth@redhat.com>,
- Alexandre Iooss <erdnaxe@crans.org>, Mahmoud Mandour
- <ma.mandourr@gmail.com>, Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- John Snow <jsnow@redhat.com>, Cleber Rosa <crosa@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>, Michael Rolnik
- <mrolnik@gmail.com>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Brian Cain <bcain@quicinc.com>, Song Gao <gaosong@loongson.cn>,
- Xiaojuan Yang <yangxiaojuan@loongson.cn>, Laurent Vivier
- <laurent@vivier.eu>, Aurelien Jarno <aurelien@aurel32.net>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Chris Wulff <crwulff@gmail.com>, Marek Vasut <marex@denx.de>,
- Stafford Horne <shorne@gmail.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
- David Gibson <david@gibson.dropbear.id.au>, Greg Kurz <groug@kaod.org>,
- Nicholas Piggin <npiggin@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+To: Nikita Shubin <nikita.shubin@maquefel.me>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Max Filippov <jcmvbkbc@gmail.com>, qemu-devel@nongnu.org,
- qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- qemu-s390x@nongnu.org
-References: <20230731084354.115015-1-akihiko.odaki@daynix.com>
- <20230731084354.115015-8-akihiko.odaki@daynix.com>
- <6c92b326-d386-2dd4-c9a0-cbf9e7583243@linaro.org>
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <6c92b326-d386-2dd4-c9a0-cbf9e7583243@linaro.org>
+ Sunil V L <sunilvl@ventanamicro.com>
+Cc: Nikita Shubin <n.shubin@yadro.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+References: <20230727080545.7908-1-nikita.shubin@maquefel.me>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20230727080545.7908-1-nikita.shubin@maquefel.me>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::630;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pl1-x630.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001,
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::332;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x332.google.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
+X-Spam_bar: --
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.101,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -130,91 +102,248 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2023/07/31 22:44, Philippe Mathieu-Daudé wrote:
-> On 31/7/23 10:43, Akihiko Odaki wrote:
->> In preparation for a change to use GDBFeature as a parameter of
->> gdb_register_coprocessor(), convert the internal representation of
->> dynamic feature from plain XML to GDBFeature.
->>
->> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
->> ---
->>   target/arm/cpu.h       | 20 +++++------
->>   target/arm/internals.h |  2 +-
->>   target/arm/gdbstub.c   | 80 +++++++++++++++++++++++-------------------
->>   target/arm/gdbstub64.c | 11 +++---
->>   4 files changed, 60 insertions(+), 53 deletions(-)
->>
->> diff --git a/target/arm/cpu.h b/target/arm/cpu.h
->> index 88e5accda6..d6c2378d05 100644
->> --- a/target/arm/cpu.h
->> +++ b/target/arm/cpu.h
->> @@ -136,23 +136,21 @@ enum {
->>    */
->>   /**
->> - * DynamicGDBXMLInfo:
->> - * @desc: Contains the XML descriptions.
->> - * @num: Number of the registers in this XML seen by GDB.
->> + * DynamicGDBFeatureInfo:
->> + * @desc: Contains the feature descriptions.
->>    * @data: A union with data specific to the set of registers
->>    *    @cpregs_keys: Array that contains the corresponding Key of
->>    *                  a given cpreg with the same order of the cpreg
->>    *                  in the XML description.
->>    */
->> -typedef struct DynamicGDBXMLInfo {
->> -    char *desc;
->> -    int num;
->> +typedef struct DynamicGDBFeatureInfo {
->> +    GDBFeature desc;
->>       union {
->>           struct {
->>               uint32_t *keys;
->>           } cpregs;
->>       } data;
->> -} DynamicGDBXMLInfo;
->> +} DynamicGDBFeatureInfo;
->>   /* CPU state for each instance of a generic timer (in cp15 c14) */
->>   typedef struct ARMGenericTimer {
->> @@ -881,10 +879,10 @@ struct ArchCPU {
->>       uint64_t *cpreg_vmstate_values;
->>       int32_t cpreg_vmstate_array_len;
->> -    DynamicGDBXMLInfo dyn_sysreg_xml;
->> -    DynamicGDBXMLInfo dyn_svereg_xml;
->> -    DynamicGDBXMLInfo dyn_m_systemreg_xml;
->> -    DynamicGDBXMLInfo dyn_m_secextreg_xml;
->> +    DynamicGDBFeatureInfo dyn_sysreg_feature;
->> +    DynamicGDBFeatureInfo dyn_svereg_feature;
->> +    DynamicGDBFeatureInfo dyn_m_systemreg_feature;
->> +    DynamicGDBFeatureInfo dyn_m_secextreg_feature;
-> 
-> Since now DynamicGDBFeatureInfo.desc contains xmlname, we can replace
-> all these by a generic 'DynamicGDBFeatureInfo *dyn_features' and have
-> arm_gdb_get_dynamic_xml() looking up the xmlname.
 
-In patch 12, cpu-specific gdb_get_dynamic_xml() function is removed, and 
-gdbstub instead looks up an internal list it holds.
 
+On 7/27/23 05:05, Nikita Shubin wrote:
+> From: Nikita Shubin <n.shubin@yadro.com>
 > 
-> Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Allow using instances derivative from RISCVCPU
 > 
->> @@ -489,14 +497,14 @@ const char *arm_gdb_get_dynamic_xml(CPUState 
->> *cs, const char *xmlname)
->>       ARMCPU *cpu = ARM_CPU(cs);
->>       if (strcmp(xmlname, "system-registers.xml") == 0) {
->> -        return cpu->dyn_sysreg_xml.desc;
->> +        return cpu->dyn_sysreg_feature.desc.xml;
->>       } else if (strcmp(xmlname, "sve-registers.xml") == 0) {
->> -        return cpu->dyn_svereg_xml.desc;
->> +        return cpu->dyn_svereg_feature.desc.xml;
->>       } else if (strcmp(xmlname, "arm-m-system.xml") == 0) {
->> -        return cpu->dyn_m_systemreg_xml.desc;
->> +        return cpu->dyn_m_systemreg_feature.desc.xml;
->>   #ifndef CONFIG_USER_ONLY
->>       } else if (strcmp(xmlname, "arm-m-secext.xml") == 0) {
->> -        return cpu->dyn_m_secextreg_xml.desc;
->> +        return cpu->dyn_m_secextreg_feature.desc.xml;
->>   #endif
->>       }
->>       return NULL;
+> Signed-off-by: Nikita Shubin <n.shubin@yadro.com>
+> ---
+> Currently it is not possible to overload instance of RISCVCPU,
+> i.e. something like this:
 > 
+> static const TypeInfo riscv_cpu_type_infos[] = {
+>       {
+>          .name = TYPE_ANOTHER_RISCV_CPU,
+>          .parent = TYPE_RISCV_CPU,
+>          .instance_size = sizeof(MyCPUState),
+>          .instance_init = riscv_my_cpu_init,
+>      }
+> };
+> 
+> Because we have RISCVHartArrayState.harts with exactly
+> the size of RISCVCPU.
+> 
+> Using own instances can be used to store some internal hart state.
+> ---
+>   hw/riscv/boot.c               |  5 +++--
+>   hw/riscv/riscv_hart.c         | 20 ++++++++++++--------
+>   hw/riscv/sifive_u.c           |  7 +++++--
+>   hw/riscv/spike.c              |  4 +++-
+>   hw/riscv/virt-acpi-build.c    |  2 +-
+>   hw/riscv/virt.c               |  6 +++---
+>   include/hw/riscv/riscv_hart.h | 18 +++++++++++++++++-
+>   7 files changed, 44 insertions(+), 18 deletions(-)
+> 
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index 52bf8e67de..c0456dcc2e 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -36,7 +36,8 @@
+>   
+>   bool riscv_is_32bit(RISCVHartArrayState *harts)
+>   {
+> -    return harts->harts[0].env.misa_mxl_max == MXL_RV32;
+> +    RISCVCPU *hart = riscv_array_get_hart(harts, 0);
+> +    return hart->env.misa_mxl_max == MXL_RV32;
+>   }
+>   
+>   /*
+> @@ -414,7 +415,7 @@ void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts
+>           reset_vec[4] = 0x0182b283;   /*     ld     t0, 24(t0) */
+>       }
+>   
+> -    if (!harts->harts[0].cfg.ext_icsr) {
+> +    if (!riscv_array_get_hart(harts, 0)->cfg.ext_icsr) {
+>           /*
+>            * The Zicsr extension has been disabled, so let's ensure we don't
+>            * run the CSR instruction. Let's fill the address with a non
+> diff --git a/hw/riscv/riscv_hart.c b/hw/riscv/riscv_hart.c
+> index 613ea2aaa0..74fc10ef48 100644
+> --- a/hw/riscv/riscv_hart.c
+> +++ b/hw/riscv/riscv_hart.c
+> @@ -43,24 +43,28 @@ static void riscv_harts_cpu_reset(void *opaque)
+>   }
+>   
+>   static bool riscv_hart_realize(RISCVHartArrayState *s, int idx,
+> -                               char *cpu_type, Error **errp)
+> +                               char *cpu_type, size_t size, Error **errp)
+>   {
+> -    object_initialize_child(OBJECT(s), "harts[*]", &s->harts[idx], cpu_type);
+> -    qdev_prop_set_uint64(DEVICE(&s->harts[idx]), "resetvec", s->resetvec);
+> -    s->harts[idx].env.mhartid = s->hartid_base + idx;
+> -    qemu_register_reset(riscv_harts_cpu_reset, &s->harts[idx]);
+> -    return qdev_realize(DEVICE(&s->harts[idx]), NULL, errp);
+> +    RISCVCPU *hart = riscv_array_get_hart(s, idx);
+> +    object_initialize_child_internal(OBJECT(s), "harts[*]",
+> +                                    hart, size, cpu_type);
+> +    qdev_prop_set_uint64(DEVICE(hart), "resetvec", s->resetvec);
+> +    hart->env.mhartid = s->hartid_base + idx;
+> +    qemu_register_reset(riscv_harts_cpu_reset, hart);
+> +    return qdev_realize(DEVICE(hart), NULL, errp);
+>   }
+>   
+>   static void riscv_harts_realize(DeviceState *dev, Error **errp)
+>   {
+>       RISCVHartArrayState *s = RISCV_HART_ARRAY(dev);
+> +    size_t size = object_type_get_instance_size(s->cpu_type);
+>       int n;
+>   
+> -    s->harts = g_new0(RISCVCPU, s->num_harts);
+> +    s->harts = g_new0(RISCVCPU *, s->num_harts);
+>   
+>       for (n = 0; n < s->num_harts; n++) {
+> -        if (!riscv_hart_realize(s, n, s->cpu_type, errp)) {
+> +        s->harts[n] = RISCV_CPU(object_new(s->cpu_type));
+> +        if (!riscv_hart_realize(s, n, s->cpu_type, size, errp)) {
+>               return;
+
+Not an issue with this patch but riscv_hart_realize() can use some review. I
+I think that we're doing stuff in the wrong place. Perhaps I'll look into it.
+
+
+>           }
+>       }
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index 35a335b8d0..b8a54db81b 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -104,6 +104,7 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
+>       char *nodename;
+>       uint32_t plic_phandle, prci_phandle, gpio_phandle, phandle = 1;
+>       uint32_t hfclk_phandle, rtcclk_phandle, phy_phandle;
+> +    RISCVCPU *hart;
+>       static const char * const ethclk_names[2] = { "pclk", "hclk" };
+>       static const char * const clint_compat[2] = {
+>           "sifive,clint0", "riscv,clint0"
+> @@ -180,9 +181,11 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
+>               } else {
+>                   qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv48");
+>               }
+> -            isa = riscv_isa_string(&s->soc.u_cpus.harts[cpu - 1]);
+> +            hart = riscv_array_get_hart(&s->soc.u_cpus, cpu - 1);
+> +            isa = riscv_isa_string(hart);
+>           } else {
+> -            isa = riscv_isa_string(&s->soc.e_cpus.harts[0]);
+> +            hart = riscv_array_get_hart(&s->soc.e_cpus, 0);
+> +            isa = riscv_isa_string(hart);
+>           }
+>           qemu_fdt_setprop_string(fdt, nodename, "riscv,isa", isa);
+>           qemu_fdt_setprop_string(fdt, nodename, "compatible", "riscv");
+> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> index 81f7e53aed..85b7568dad 100644
+> --- a/hw/riscv/spike.c
+> +++ b/hw/riscv/spike.c
+> @@ -61,6 +61,7 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
+>       uint32_t cpu_phandle, intc_phandle, phandle = 1;
+>       char *name, *mem_name, *clint_name, *clust_name;
+>       char *core_name, *cpu_name, *intc_name;
+> +    RISCVCPU *hart;
+>       static const char * const clint_compat[2] = {
+>           "sifive,clint0", "riscv,clint0"
+>       };
+> @@ -103,6 +104,7 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
+>           clint_cells =  g_new0(uint32_t, s->soc[socket].num_harts * 4);
+>   
+>           for (cpu = s->soc[socket].num_harts - 1; cpu >= 0; cpu--) {
+> +            hart = riscv_array_get_hart(&s->soc[socket], cpu);
+>               cpu_phandle = phandle++;
+>   
+>               cpu_name = g_strdup_printf("/cpus/cpu@%d",
+> @@ -113,7 +115,7 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
+>               } else {
+>                   qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv48");
+>               }
+> -            name = riscv_isa_string(&s->soc[socket].harts[cpu]);
+> +            name = riscv_isa_string(hart);
+>               qemu_fdt_setprop_string(fdt, cpu_name, "riscv,isa", name);
+>               g_free(name);
+>               qemu_fdt_setprop_string(fdt, cpu_name, "compatible", "riscv");
+> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+> index 7331248f59..7cff4e4baf 100644
+> --- a/hw/riscv/virt-acpi-build.c
+> +++ b/hw/riscv/virt-acpi-build.c
+> @@ -158,7 +158,7 @@ static void build_rhct(GArray *table_data,
+>       isa_offset = table_data->len - table.table_offset;
+>       build_append_int_noprefix(table_data, 0, 2);   /* Type 0 */
+>   
+> -    cpu = &s->soc[0].harts[0];
+> +    cpu = riscv_array_get_hart(&s->soc[0], 0);
+>       isa = riscv_isa_string(cpu);
+>       len = 8 + strlen(isa) + 1;
+>       aligned_len = (len % 2) ? (len + 1) : len;
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index d90286dc46..59b42cc5e4 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -236,7 +236,7 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
+>       uint8_t satp_mode_max;
+>   
+>       for (cpu = s->soc[socket].num_harts - 1; cpu >= 0; cpu--) {
+> -        RISCVCPU *cpu_ptr = &s->soc[socket].harts[cpu];
+> +        RISCVCPU *cpu_ptr = riscv_array_get_hart(&s->soc[socket], cpu);
+>   
+>           cpu_phandle = (*phandle)++;
+>   
+> @@ -730,12 +730,12 @@ static void create_fdt_pmu(RISCVVirtState *s)
+>   {
+>       char *pmu_name;
+>       MachineState *ms = MACHINE(s);
+> -    RISCVCPU hart = s->soc[0].harts[0];
+> +    RISCVCPU *hart = riscv_array_get_hart(&s->soc[0], 0);
+>   
+>       pmu_name = g_strdup_printf("/soc/pmu");
+>       qemu_fdt_add_subnode(ms->fdt, pmu_name);
+>       qemu_fdt_setprop_string(ms->fdt, pmu_name, "compatible", "riscv,pmu");
+> -    riscv_pmu_generate_fdt_node(ms->fdt, hart.cfg.pmu_num, pmu_name);
+> +    riscv_pmu_generate_fdt_node(ms->fdt, hart->cfg.pmu_num, pmu_name);
+>   
+>       g_free(pmu_name);
+>   }
+> diff --git a/include/hw/riscv/riscv_hart.h b/include/hw/riscv/riscv_hart.h
+> index bbc21cdc9a..a5393c361b 100644
+> --- a/include/hw/riscv/riscv_hart.h
+> +++ b/include/hw/riscv/riscv_hart.h
+> @@ -38,7 +38,23 @@ struct RISCVHartArrayState {
+>       uint32_t hartid_base;
+>       char *cpu_type;
+>       uint64_t resetvec;
+> -    RISCVCPU *harts;
+> +    RISCVCPU **harts;
+>   };
+>   
+> +/**
+> + * riscv_array_get_hart:
+> + */
+> +static inline RISCVCPU *riscv_array_get_hart(RISCVHartArrayState *harts, int i)
+> +{
+> +    return harts->harts[i];
+> +}
+
+I don't see too much gain in this API because you'll still need a RISCVHartArrayState
+instance anyways, which is the most annoying part. E.g:
+
+> -    cpu = &s->soc[0].harts[0];
+> +    cpu = riscv_array_get_hart(&s->soc[0], 0);
+
+
+
+> +
+> +/**
+> + * riscv_array_get_num_harts:
+> + */
+> +static inline unsigned riscv_array_get_num_harts(RISCVHartArrayState *harts)
+> +{
+> +    return harts->num_harts;
+> +}
+
+Same with this API, which you didn't end up using in this patch. Thanks,
+
+
+Daniel
+
+> +
+>   #endif
 
