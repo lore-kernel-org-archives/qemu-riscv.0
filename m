@@ -4,65 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0A01C001DE
-	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Jul 2023 13:28:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2037EC001DE
+	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Jul 2023 13:35:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qQSwW-0000TZ-3r; Mon, 31 Jul 2023 09:28:12 -0400
+	id 1qQT2w-0008QA-HS; Mon, 31 Jul 2023 09:34:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qQSwU-0000T3-Ta
- for qemu-riscv@nongnu.org; Mon, 31 Jul 2023 09:28:10 -0400
-Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qQT2u-0008P3-0Q
+ for qemu-riscv@nongnu.org; Mon, 31 Jul 2023 09:34:48 -0400
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qQSwT-0005QQ-7a
- for qemu-riscv@nongnu.org; Mon, 31 Jul 2023 09:28:10 -0400
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-3fe078dcc3aso27055365e9.2
- for <qemu-riscv@nongnu.org>; Mon, 31 Jul 2023 06:28:07 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qQT2s-0006fV-CD
+ for qemu-riscv@nongnu.org; Mon, 31 Jul 2023 09:34:47 -0400
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-3fe110de3b6so19562905e9.1
+ for <qemu-riscv@nongnu.org>; Mon, 31 Jul 2023 06:34:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1690810086; x=1691414886;
+ d=linaro.org; s=google; t=1690810484; x=1691415284;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=8gMMA/S+lNdmt0rM5meRi6+/oF86zlRB/iWExxnovjs=;
- b=eKyept5pR0+LCuvgVtuHqz+gUkYvmH1fOnCKrWkN1C4/AHre8Gr9NuFwoqKkGNYnzM
- HGfZHqhlFvvuZUoDH5xVpuaNGge3GabK4g69MYb/eDBlK9MI7NIUn+fecjwmWhHwzOWd
- 7WAuLe11k9DIdATZ0J/grBL5tZkDft8E8DtL5wwBTi60ja7v8XzfpE95Xh9nEIYqPlfQ
- lNwXEcxGkHpa+deZoQoz+P7iTnhh4hRqsTEw6bu0fPMBDNQDvtsbRnqVB45ynma1QbIU
- qwCPbmXoG9SII0AMySgmiCVxOvyH8luhT+xFnkbNDWc8io9dV5rqMiAmLUs+29ETR2p0
- MgSg==
+ bh=r7Uopr2kgIXt3FFhLmTKhDjvzf6Kx+vE1vxShydLgeA=;
+ b=JSMWrok2UQBCpyrAEWsgW2Hbs50BJw08em/KcVvuVIxLGOsz3E6LsKaRVfl9eB/5c8
+ OYk6qRpnK8E1KRfNK4SJODWZBROQvKybthPZkluX9Ink2ajQQfe2WvkKvdL5l3pDDZgJ
+ 3YBUbTvZ2JLWTsm+8iM1/shQq5eA/YhnXNEs89YNYLlaGJSkbTax2mL6/JaNtUSrWLq1
+ bf/CnUqSNCB1AmCSeZhwHHKXfx4Z682pJid4Z1eRR69oWc/O4BVRp6ChHp/xdSmI3x/G
+ QV6GetEt3zxwdduQY8tuTHAX1XosnyVweHmxmF0w8437PgCGBe5ISQnFQ1uRZhmp978Q
+ q9aA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1690810086; x=1691414886;
+ d=1e100.net; s=20221208; t=1690810484; x=1691415284;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=8gMMA/S+lNdmt0rM5meRi6+/oF86zlRB/iWExxnovjs=;
- b=c0h71FmAflEFxwagXpfBIGeyrAF94dczY75Itjintsq86gefWYK38SRUxIcEfe8+5M
- tIRGlyF4lhDGt9yUuXlL2nFB+Uw0uQWr+MPdIjPrzY0N46RG0vG7Sozk53xe/asAqxQu
- t3k21Cg2I0PP1et7qRwVTd4gM7hgBqhXDSd1hvQuH3MJe1ahEjJYHmSjVl50iJ/TjMgN
- U9H2SMRsgEJUG5kt6erndoqFVdEqIsi9aTbeh+lslYfCh+nYtqDJXDB3z4o65cYDTiyL
- ttGMptlVJc6T6kMN4gKYTi/vDyh1qIWvT4HRPaM/hT4vuz4ptGmWAYqL5Pwxzrj6fses
- o2yA==
-X-Gm-Message-State: ABy/qLYS7EERjBBEyoxHzpjacFOfxZbCNy8bJOC6cMRHi+zuN7t+Im6j
- y7RG4UeJ9YFgowlq58qpvUERDg==
-X-Google-Smtp-Source: APBJJlHMwNoxRxepGnxKznkemeh+5H/tbO8K1yA/ssP05TfXPMen4vhX1EkgXRhaigZL+EBcbX0dSw==
-X-Received: by 2002:a1c:7c1a:0:b0:3fc:f9c:a3e6 with SMTP id
- x26-20020a1c7c1a000000b003fc0f9ca3e6mr7632898wmc.9.1690810086070; 
- Mon, 31 Jul 2023 06:28:06 -0700 (PDT)
+ bh=r7Uopr2kgIXt3FFhLmTKhDjvzf6Kx+vE1vxShydLgeA=;
+ b=FYGF+NjVY6c3JVs/y+B4dVXMrzjVluufWj3sp/DOxpNGr8Q23+ZDEtlL9fYr22kbLb
+ lz4Jn8O01uOmbzOnsKN+1O2Y6EFVzjue8XRyWHMtPCotYxqdo5EN71AnXQAfHgOJwiQI
+ lr9ayh8Uh0d2Hke4IXRBMhAEvlhoWRF56jpo+/8zalRzGDTZS6Il1PdRa0UHNTuhoroH
+ 4J8MCdgQsfMrxHFANA9dQebCtoRvAj8T8hxlU90oNVoNyc5dXhMw69ravrIFk9BMHJQn
+ l0ISKaAvew/5GaSCUqEo6Bp3jNJe9xTSSG7XxzxNgVtKMceSVOQEOUUtSCEXo+y75y01
+ 4nKg==
+X-Gm-Message-State: ABy/qLahGLJ3eOxaJH6+o5yuSxXiTzC9pixustiRihE1FJY1nNcj62Yu
+ FgIFdUaHHuoxxvi5z+kotG/0TA==
+X-Google-Smtp-Source: APBJJlHgjcjnmExY7U3tcpjy8F+fxzOvv6AKBpdUY6kpOips7eRhD3ysZnz85lMBaf7HYKmQhGRIeA==
+X-Received: by 2002:a05:600c:11c9:b0:3f6:d90:3db with SMTP id
+ b9-20020a05600c11c900b003f60d9003dbmr7656681wmi.3.1690810483742; 
+ Mon, 31 Jul 2023 06:34:43 -0700 (PDT)
 Received: from [192.168.69.115] ([176.187.198.42])
  by smtp.gmail.com with ESMTPSA id
- f2-20020a7bc8c2000000b003fbc9b9699dsm11464862wml.45.2023.07.31.06.27.59
+ e36-20020a5d5964000000b002fb60c7995esm13215285wri.8.2023.07.31.06.34.37
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 31 Jul 2023 06:28:05 -0700 (PDT)
-Message-ID: <09cad822-85c2-3e0b-9414-e1da9de2a2d1@linaro.org>
-Date: Mon, 31 Jul 2023 15:27:56 +0200
+ Mon, 31 Jul 2023 06:34:43 -0700 (PDT)
+Message-ID: <eb9ef3c1-18f8-2209-8630-155e38dd4d12@linaro.org>
+Date: Mon, 31 Jul 2023 15:34:34 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.13.0
-Subject: Re: [RFC PATCH 06/24] hw/core/cpu: Replace gdb_core_xml_file with
- gdb_core_feature
+Subject: Re: [RFC PATCH 02/24] gdbstub: Introduce GDBFeature structure
 Content-Language: en-US
 To: Akihiko Odaki <akihiko.odaki@daynix.com>
 Cc: Paolo Bonzini <pbonzini@redhat.com>, =?UTF-8?Q?Alex_Benn=c3=a9e?=
@@ -100,13 +99,13 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>, =?UTF-8?Q?Alex_Benn=c3=a9e?=
  qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org
 References: <20230731084354.115015-1-akihiko.odaki@daynix.com>
- <20230731084354.115015-7-akihiko.odaki@daynix.com>
+ <20230731084354.115015-3-akihiko.odaki@daynix.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230731084354.115015-7-akihiko.odaki@daynix.com>
+In-Reply-To: <20230731084354.115015-3-akihiko.odaki@daynix.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x329.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
@@ -130,64 +129,70 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 31/7/23 10:43, Akihiko Odaki wrote:
-> This is a tree-wide change to replace gdb_core_xml_file, the path to
-> GDB XML file with gdb_core_feature, the pointer to GDBFeature. This
-> also replaces the values assigned to gdb_num_core_regs with the
-> num_regs member of GDBFeature where applicable to remove magic numbers.
-> 
-> A following change will utilize additional information provided by
-> GDBFeature to simplify XML file lookup.
-> 
+> Before this change, the information from a XML file was stored in an
+> array that is not descriptive. Introduce a dedicated structure type to
+> make it easier to understand and to extend with more fields.
+
+Great idea!
+
 > Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 > ---
->   include/hw/core/cpu.h   | 5 +++--
->   target/s390x/cpu.h      | 2 --
->   gdbstub/gdbstub.c       | 6 +++---
->   target/arm/cpu.c        | 4 ++--
->   target/arm/cpu64.c      | 4 ++--
->   target/arm/tcg/cpu32.c  | 3 ++-
->   target/avr/cpu.c        | 4 ++--
->   target/hexagon/cpu.c    | 2 +-
->   target/i386/cpu.c       | 7 +++----
->   target/loongarch/cpu.c  | 4 ++--
->   target/m68k/cpu.c       | 7 ++++---
->   target/microblaze/cpu.c | 4 ++--
->   target/ppc/cpu_init.c   | 4 ++--
->   target/riscv/cpu.c      | 7 ++++---
->   target/rx/cpu.c         | 4 ++--
->   target/s390x/cpu.c      | 4 ++--
->   16 files changed, 36 insertions(+), 35 deletions(-)
+>   MAINTAINERS             |  2 +-
+>   meson.build             |  2 +-
+>   include/exec/gdbstub.h  |  9 ++++--
+>   gdbstub/gdbstub.c       |  4 +--
+>   stubs/gdbstub.c         |  6 ++--
+>   scripts/feature_to_c.py | 44 ++++++++++++++++++++++++++
+>   scripts/feature_to_c.sh | 69 -----------------------------------------
+>   7 files changed, 58 insertions(+), 78 deletions(-)
+>   create mode 100755 scripts/feature_to_c.py
+>   delete mode 100644 scripts/feature_to_c.sh
 
 
-> diff --git a/target/arm/cpu.c b/target/arm/cpu.c
-> index d71a162070..a206ab6b1b 100644
-> --- a/target/arm/cpu.c
-> +++ b/target/arm/cpu.c
-> @@ -2353,7 +2353,6 @@ static void arm_cpu_class_init(ObjectClass *oc, void *data)
->   #ifndef CONFIG_USER_ONLY
->       cc->sysemu_ops = &arm_sysemu_ops;
->   #endif
-> -    cc->gdb_num_core_regs = 26;
->       cc->gdb_arch_name = arm_gdb_arch_name;
->       cc->gdb_get_dynamic_xml = arm_gdb_get_dynamic_xml;
->       cc->gdb_stop_before_watchpoint = true;
-> @@ -2378,7 +2377,8 @@ static void cpu_register_class_init(ObjectClass *oc, void *data)
->       CPUClass *cc = CPU_CLASS(acc);
->   
->       acc->info = data;
-> -    cc->gdb_core_xml_file = "arm-core.xml";
-> +    cc->gdb_core_feature = gdb_find_static_feature("arm-core.xml");
+> diff --git a/scripts/feature_to_c.py b/scripts/feature_to_c.py
+> new file mode 100755
+> index 0000000000..5a5b49367b
+> --- /dev/null
+> +++ b/scripts/feature_to_c.py
+> @@ -0,0 +1,44 @@
 
-Can we have:
+SPDX-License-Identifier: GPL-2.0-or-later ?
 
-   cc->gdb_core_feature = gdb_find_static_feature(cc->gdb_core_xml_file);
+> +#!/usr/bin/env python3
+> +
+> +import os, sys
+> +
+> +def writeliteral(indent, bytes):
+> +    sys.stdout.write(' ' * indent)
+> +    sys.stdout.write('"')
+> +    quoted = True
+> +
+> +    for c in bytes:
+> +        if not quoted:
+> +            sys.stdout.write('\n')
+> +            sys.stdout.write(' ' * indent)
+> +            sys.stdout.write('"')
+> +            quoted = True
+> +
+> +        if c == b'"'[0]:
+> +            sys.stdout.write('\\"')
+> +        elif c == b'\\'[0]:
+> +            sys.stdout.write('\\\\')
+> +        elif c == b'\n'[0]:
+> +            sys.stdout.write('\\n"')
+> +            quoted = False
+> +        elif c >= 32 and c < 127:
+> +            sys.stdout.write(c.to_bytes(1, 'big').decode())
+> +        else:
+> +            sys.stdout.write(f'\{c:03o}')
+> +
+> +    if quoted:
+> +        sys.stdout.write('"')
+> +
+> +sys.stdout.write('#include "qemu/osdep.h"\n#include "exec/gdbstub.h"\n\nconst GDBFeature gdb_features[] = {\n')
 
-once in hw/core/cpu-common.c::cpu_class_init()?
+Preferably split in 3 calls for readability, otherwise:
 
-(haven't verified, just wondering)
-
-> +    cc->gdb_num_core_regs = cc->gdb_core_feature->num_regs;
->   }
-
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
