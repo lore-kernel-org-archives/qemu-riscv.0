@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46CAEC001DE
-	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Jul 2023 13:47:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F386CC04FE0
+	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Jul 2023 13:52:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qQTEx-0002oq-97; Mon, 31 Jul 2023 09:47:17 -0400
+	id 1qQTJW-0004Oi-FF; Mon, 31 Jul 2023 09:51:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qQTEd-0002dh-7n
- for qemu-riscv@nongnu.org; Mon, 31 Jul 2023 09:46:57 -0400
-Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qQTJT-0004O1-89
+ for qemu-riscv@nongnu.org; Mon, 31 Jul 2023 09:51:55 -0400
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qQTEa-000259-TW
- for qemu-riscv@nongnu.org; Mon, 31 Jul 2023 09:46:54 -0400
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-31297125334so3093535f8f.0
- for <qemu-riscv@nongnu.org>; Mon, 31 Jul 2023 06:46:51 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qQTJR-0002to-8D
+ for qemu-riscv@nongnu.org; Mon, 31 Jul 2023 09:51:54 -0400
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-3fbc1218262so49359835e9.3
+ for <qemu-riscv@nongnu.org>; Mon, 31 Jul 2023 06:51:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1690811210; x=1691416010;
+ d=linaro.org; s=google; t=1690811511; x=1691416311;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=dQ0I3HmeLwdb2CHpthEIho6U8+3evu764gXwyozJFJk=;
- b=cBIHIBOSLNObNV9EcCZWuJdAP3X/Yjf8MfPWDJ0xynWkhkAvOoCoeQ3ilBgYosgf0q
- IqixA1oCTZtQ5WZRLM6Sp3mWD4Ei12jQRo8QEZ0zL050VpnJud2f2cbulxvqFnF2LcV4
- TSxyxCWhp2FdO+Y9B37ehlsT6fvVD5nST6ZCzxWjKLAgCIRGzss02W+3Oi+8AjTpNeNk
- iHkpi1tG/V4Yj1avZhXhTcXQJnFp1RGefp/CvNyJ6jEMJppRo9a/3bLdW1VSSIz2X4HU
- TiiLHf+luOys2jBAoJnKgFfCD6u1aYYGd0E9UHSVdh9bwk5HWk7t/ywXn5GqUMjygicC
- YLiQ==
+ bh=9C61sNBuLzkP1k7MRGfWxhB6WPJh2Tq71aTnep3VwTY=;
+ b=hgL3LJ4UbBI66bG/QiBth9eUNg5I+oqxWFsmTMTz1CCwJSbu61BSpk0r/IdaOeHuka
+ Gx3C7ghuD3CaQffRhxbvAaISlraH7FmeBl4U/lvb2m6BnJQwHjazCPFTJvbCpgKahCbZ
+ 0BGtLzVHJ21k4/pyfYFYH0Na+Abts0XOdUYIZqMreN17bT5DnMsMdxAZbUkAYKwQxKDl
+ fZlUFoAkHd1QbHHDGDWPHgKT2HRtJsEkUIbJ5eH0KGP1FyzfSuZwfTGPAy11imywQxbH
+ qCLJBGB09vPQZWLgHMIFdpBumwCCTuqxcJKIlnVnuIqzPFY+hXkQYxvCbnRH363Tgp9s
+ l9zQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1690811210; x=1691416010;
+ d=1e100.net; s=20221208; t=1690811511; x=1691416311;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=dQ0I3HmeLwdb2CHpthEIho6U8+3evu764gXwyozJFJk=;
- b=KrbmQlFcMsAwgpYvzdpSJpewSJBdgZSQ14csKhzzxuhLHGhY1C66ZUPJSqM7UImxst
- Yh5XdPeYNwCgu8isawH+JhK2+gGjHg93O4CvlfZckw5NrGmIVC9i6zk3l13xDp05i1eI
- zzsIEBZCdtTVCvTPimDjoyZqTNOH/p2fvOmTa+g5xjzqiVLeoxhjAJ1wJuLrfRAyJCQy
- OxwY+1uJAbGaHWoHYG+l86ZYC/kOI4zDlANWICEq3EI4DP7fCbrOY/bC2fL3hQ3g5BKH
- M+6EKTOLXCESjrf3V1wjFkB77Tzw9y0eoAMPbH/AA3/Hp4/7Debo3/W0PXb7VhsfzWlN
- XB0A==
-X-Gm-Message-State: ABy/qLZBnqYzlCxpTzPNFWepk/BWEEJejiWgSoBxU4a8jPtKPxAoOY+i
- VheHuEv/DqtBL60+UQdVJOE0MA==
-X-Google-Smtp-Source: APBJJlEGscdCdyrOOjocrIiffHS4ZOgq9nstpeavSp5NQ755reBaDEaDK7cpizfk0ROb2M0X1gS8Qw==
-X-Received: by 2002:a5d:4b85:0:b0:315:7f1d:7790 with SMTP id
- b5-20020a5d4b85000000b003157f1d7790mr7532962wrt.6.1690811210364; 
- Mon, 31 Jul 2023 06:46:50 -0700 (PDT)
+ bh=9C61sNBuLzkP1k7MRGfWxhB6WPJh2Tq71aTnep3VwTY=;
+ b=bQZSxYBZRS591K1vvbSWEUJkUyEJQ8dDh+ZatAGIKGEmsW3HjQHttfEUJsvTHy4HRB
+ jA5B8soHJ/ss0ecDnjbwhgK7Ri3VKpUAUVgrqOYVhd+Jy8I0ZAW75s42L76pSzfojduI
+ nE4u6ERzN2qAYIyLA9ZAzJdRdwIQZvkPaLS/IyLYYB0U3p7rQAz0Vh05sr/6kg1yw+nP
+ 2hZW8QsIPYQc4ki1VXNqOCOvkqcQtVswNSY+8tkQIgaNyaY+jry038vDP/CWmpXgtm2W
+ ffv4sGeqG6II74EZdDqWYEeXBO74fEhb58nLLn+TxqmzumMMG/TG2NQeDVr/vvEjaAmd
+ M74w==
+X-Gm-Message-State: ABy/qLZr/3iZgKlHQcDDiVaCUY2HZbv5FELazyGyI2wSk4YlYSNu6JwN
+ DOOZZNFEYu3KInBIwZj6b8p0bA==
+X-Google-Smtp-Source: APBJJlHILCBJRNZrn5crmer00CWRWg2FEycLAoJ3X2ChQegv8+/byit6ZlNXsw37noTTEhadIYXccw==
+X-Received: by 2002:adf:ef05:0:b0:315:8f4f:81b8 with SMTP id
+ e5-20020adfef05000000b003158f4f81b8mr8322326wro.50.1690811511118; 
+ Mon, 31 Jul 2023 06:51:51 -0700 (PDT)
 Received: from [192.168.69.115] ([176.187.198.42])
  by smtp.gmail.com with ESMTPSA id
- a10-20020a5d508a000000b0031773e3cf46sm13250562wrt.61.2023.07.31.06.46.42
+ h4-20020adffa84000000b0031417fd473csm13249602wrr.78.2023.07.31.06.51.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 31 Jul 2023 06:46:49 -0700 (PDT)
-Message-ID: <277b6422-7820-bd1e-74d8-5410d67bc09a@linaro.org>
-Date: Mon, 31 Jul 2023 15:46:41 +0200
+ Mon, 31 Jul 2023 06:51:50 -0700 (PDT)
+Message-ID: <f087def2-31f9-f18a-c6e1-03243af04b5e@linaro.org>
+Date: Mon, 31 Jul 2023 15:51:43 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.13.0
-Subject: Re: [RFC PATCH 09/24] target/riscv: Use GDBFeature for dynamic XML
+Subject: Re: [RFC PATCH 02/24] gdbstub: Introduce GDBFeature structure
 Content-Language: en-US
 To: Akihiko Odaki <akihiko.odaki@daynix.com>
 Cc: Paolo Bonzini <pbonzini@redhat.com>, =?UTF-8?Q?Alex_Benn=c3=a9e?=
@@ -99,20 +99,20 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>, =?UTF-8?Q?Alex_Benn=c3=a9e?=
  qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org
 References: <20230731084354.115015-1-akihiko.odaki@daynix.com>
- <20230731084354.115015-10-akihiko.odaki@daynix.com>
+ <20230731084354.115015-3-akihiko.odaki@daynix.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230731084354.115015-10-akihiko.odaki@daynix.com>
+In-Reply-To: <20230731084354.115015-3-akihiko.odaki@daynix.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::435;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x435.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x330.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
 X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.101,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -129,32 +129,47 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 31/7/23 10:43, Akihiko Odaki wrote:
-> In preparation for a change to use GDBFeature as a parameter of
-> gdb_register_coprocessor(), convert the internal representation of
-> dynamic feature from plain XML to GDBFeature.
+> Before this change, the information from a XML file was stored in an
+> array that is not descriptive. Introduce a dedicated structure type to
+> make it easier to understand and to extend with more fields.
 > 
 > Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 > ---
->   target/riscv/cpu.h     |  4 ++--
->   target/riscv/cpu.c     |  4 ++--
->   target/riscv/gdbstub.c | 25 ++++++++++++++-----------
->   3 files changed, 18 insertions(+), 15 deletions(-)
-> 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 6ea22e0eea..f67751d5b7 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -391,8 +391,8 @@ struct ArchCPU {
->       CPUNegativeOffsetState neg;
->       CPURISCVState env;
+>   MAINTAINERS             |  2 +-
+>   meson.build             |  2 +-
+>   include/exec/gdbstub.h  |  9 ++++--
+>   gdbstub/gdbstub.c       |  4 +--
+>   stubs/gdbstub.c         |  6 ++--
+>   scripts/feature_to_c.py | 44 ++++++++++++++++++++++++++
+>   scripts/feature_to_c.sh | 69 -----------------------------------------
+>   7 files changed, 58 insertions(+), 78 deletions(-)
+>   create mode 100755 scripts/feature_to_c.py
+>   delete mode 100644 scripts/feature_to_c.sh
+
+
+> diff --git a/include/exec/gdbstub.h b/include/exec/gdbstub.h
+> index 7d743fe1e9..bd5bc91dda 100644
+> --- a/include/exec/gdbstub.h
+> +++ b/include/exec/gdbstub.h
+> @@ -10,6 +10,11 @@
+>   #define GDB_WATCHPOINT_READ      3
+>   #define GDB_WATCHPOINT_ACCESS    4
 >   
-> -    char *dyn_csr_xml;
-> -    char *dyn_vreg_xml;
-> +    GDBFeature dyn_csr_feature;
-> +    GDBFeature dyn_vreg_feature;
-
-Similar comment that ARM (dyn_features array).
-
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-
+> +typedef struct GDBFeature {
+> +    const char *xmlname;
+> +    const char *xml;
+> +} GDBFeature;
+> +
+>   
+>   /* Get or set a register.  Returns the size of the register.  */
+>   typedef int (*gdb_get_reg_cb)(CPUArchState *env, GByteArray *buf, int reg);
+> @@ -38,7 +43,7 @@ void gdb_set_stop_cpu(CPUState *cpu);
+>    */
+>   extern bool gdb_has_xml;
+>   
+> -/* in gdbstub-xml.c, generated by scripts/feature_to_c.sh */
+> -extern const char *const xml_builtin[][2];
+> +/* in gdbstub-xml.c, generated by scripts/feature_to_c.py */
+> +extern const GDBFeature gdb_features[];
+Maybe clearer named gdb_static_features[].
 
