@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B977BC001DE
-	for <qemu-riscv@archiver.kernel.org>; Wed,  2 Aug 2023 08:49:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73A7BC00528
+	for <qemu-riscv@archiver.kernel.org>; Wed,  2 Aug 2023 08:49:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qR7Xf-0006MD-QL; Wed, 02 Aug 2023 04:49:15 -0400
+	id 1qR7XM-0004tr-1u; Wed, 02 Aug 2023 04:48:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qR7Xd-0006DB-Fh
- for qemu-riscv@nongnu.org; Wed, 02 Aug 2023 04:49:13 -0400
-Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
+ id 1qR7XK-0004eB-Ir
+ for qemu-riscv@nongnu.org; Wed, 02 Aug 2023 04:48:54 -0400
+Received: from mail-oi1-x22b.google.com ([2607:f8b0:4864:20::22b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qR7Xa-0007Vj-HU
- for qemu-riscv@nongnu.org; Wed, 02 Aug 2023 04:49:13 -0400
-Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-686ba29ccb1so478365b3a.1
- for <qemu-riscv@nongnu.org>; Wed, 02 Aug 2023 01:49:10 -0700 (PDT)
+ id 1qR7XH-0006cy-GN
+ for qemu-riscv@nongnu.org; Wed, 02 Aug 2023 04:48:54 -0400
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-3a5ac8717c6so5068944b6e.2
+ for <qemu-riscv@nongnu.org>; Wed, 02 Aug 2023 01:48:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1690966149; x=1691570949;
+ d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1690966130; x=1691570930;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ANoP9Fpb4WsMF0Xvgw/Yso2QUviba5iZTbYCAi6ODvM=;
- b=32iKauRLm81dMdupNHGvMeT0jcPCTs2ygcH6qGMBFC/EttM1MJZitTxUaJtFLsCECS
- nDjDMQ9PhulSU3lH/qEOj+I7DcwiunIKOlu5ogkiUbJYpBRy5Vn1B8LIINuz5Wdt51+r
- N9f/c++u7xCtFn2Z8aOZASMRn1+LaEttNIb/CVT2lg3jSpmuKvYMDW6a55ILoh4JYXda
- tOxozn4pLEwGIk71uMj2x9YC3KuDsdOAOe92R5uwwMybzGZgQoz3BMIFzooYwPbTX+Qn
- 0vAY8AazAOtizEqZsEfOlefKV8N+Ucs6taGYeOvY+Ue+A0R2oCo3/IOT4OHbAlso2A7u
- TUzg==
+ bh=3mXpG7RfRm8JlpAYSZCkqg1BzSErUQp+Pq7CWqY/JwI=;
+ b=CrhfxksF1NFb0q2nze9v1c26xeVhGQQ7irYxosnuSWwpGACUwn+ENg9cUk7h5knF2Q
+ +reg8hFWf8jzXgTzWoUi7QDnxmx1ktcUWQBBoKGGRuu5dGBUb5/fGVRkkJSTTqMH7yQr
+ i/j1JQSY+hAzf9/cks/CVHHdqGyBfvhE9kJNZeHsczMigBf/mrudwbBG3YPmJOLd1VkJ
+ PszOFPiqrCdexxBb2lWsu8sUfeVSXSryU/j4PdQ8Y6JFz6VghghuMGwQCliwxK1LJjv+
+ 4J5mGX9Aee12hdwLHLOipxjGAUxCiksDVhnbgPkMvAI09N756FiIRGNVDDGohQ2Uoids
+ yiLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1690966149; x=1691570949;
+ d=1e100.net; s=20221208; t=1690966130; x=1691570930;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ANoP9Fpb4WsMF0Xvgw/Yso2QUviba5iZTbYCAi6ODvM=;
- b=WxXbuZidsVZk+YaByftHORXIhP91wtfJUHYYneLhXw/o7EXedmaR+ornakN/+8hmwu
- R7wwVUzOXCfg1jZai6EJRYdodMlFfQsj6ZivsCOzOFNdHxlPO/JbJziYT2RcxrA9jvTt
- aDtMDf9FEzuGMX/9LDt7ePeueVw7In7E3H4I4fguW5BS5AGPiyeYIKgMsSgxB6N9aer1
- 3B85yH0AEhWg1ZWVVxYm3djieNXomLEX1VIKqjJwPhcMHA4gU6yG4kAF2OeEDqLq5/xu
- ZAcTUrLKOyVUmdifGuwTWFkboxcGw1m3lIhsAOHpd3rJMJJ6pGzU5UOffWGatcBEC7PE
- d9Dw==
-X-Gm-Message-State: ABy/qLYdDGjLP1nR7Cg0HFyBOzcYmV3v1lut8CBzfUS0oLN4bV7uSMsP
- TLS2rFpqVRIqAVj85/KRzbee8w==
-X-Google-Smtp-Source: APBJJlHOTYRm37ZBlokXGWWoGIFh/LaeDtcj+HzwoToZ0gPsZdSfjpIdmRQWrLaDADrsY5eJUpsINA==
-X-Received: by 2002:a05:6a00:1f0f:b0:67a:72d5:3365 with SMTP id
- be15-20020a056a001f0f00b0067a72d53365mr16066677pfb.6.1690966149354; 
- Wed, 02 Aug 2023 01:49:09 -0700 (PDT)
+ bh=3mXpG7RfRm8JlpAYSZCkqg1BzSErUQp+Pq7CWqY/JwI=;
+ b=W6OKdwM4C+dpkB3RWV5A2+OkLLtcDKkEaZESReGR1tpnN9x3Zn5caAdMW+jbXv1Vzl
+ D5L/HeH4ZleBkgnsKrs+zM7w8nEDv8vH2ZL7SlK/Yq6QGckwQQik0n8CWHZ36iEcCxoW
+ P+ztuo+LZ32eCFcQY/YJthGZwrvc67krqRXifosZH4YTNpt5R1fdMXm9fCW537jn+E4x
+ kkmtJ8hwdtVW60YIAD3RnbxgLluIusSZURRtbIH+Yo6ltd9clGocZxEOEXSfUZowDE0F
+ gmJdY9r2Yvr+6fYYYQzwpjFeduC7EhzlN2hPWyWQA7EkATC40MdpZf62Uo6VwkMVUShH
+ FQyQ==
+X-Gm-Message-State: ABy/qLZfNy5uxvcUlo66EJoygwP+nwrtP1CgXLzm6UtVkuk8RgCzfL+S
+ ViLKpp9GOxzhcmvDmlZEyPcECA==
+X-Google-Smtp-Source: APBJJlER6reQfJykuZwjPtzbzzona963n6JmU7xtwhUp5XPbBq9g91pdWRQFRo9OIB6cc9JjfzMZDg==
+X-Received: by 2002:aca:f14:0:b0:3a7:8f7:62ee with SMTP id
+ 20-20020aca0f14000000b003a708f762eemr12789666oip.12.1690966129957; 
+ Wed, 02 Aug 2023 01:48:49 -0700 (PDT)
 Received: from alarm.flets-east.jp ([2400:4050:a840:1e00:78d2:b862:10a7:d486])
  by smtp.gmail.com with ESMTPSA id
- j22-20020aa79296000000b00659b8313d08sm10592860pfa.78.2023.08.02.01.49.00
+ j22-20020aa79296000000b00659b8313d08sm10592860pfa.78.2023.08.02.01.48.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Aug 2023 01:49:09 -0700 (PDT)
+ Wed, 02 Aug 2023 01:48:49 -0700 (PDT)
 From: Akihiko Odaki <akihiko.odaki@daynix.com>
 To: 
 Cc: Paolo Bonzini <pbonzini@redhat.com>,
@@ -98,16 +98,17 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
  qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, Anton Kochkov <anton.kochkov@proton.me>,
  Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH v2 16/24] target/ppc: Fill new members of GDBFeature
-Date: Wed,  2 Aug 2023 17:46:04 +0900
-Message-ID: <20230802084614.23619-17-akihiko.odaki@daynix.com>
+Subject: [PATCH v2 14/24] gdbstub: Add members to identify registers to
+ GDBFeature
+Date: Wed,  2 Aug 2023 17:46:02 +0900
+Message-ID: <20230802084614.23619-15-akihiko.odaki@daynix.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230802084614.23619-1-akihiko.odaki@daynix.com>
 References: <20230802084614.23619-1-akihiko.odaki@daynix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::42f;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x42f.google.com
+Received-SPF: none client-ip=2607:f8b0:4864:20::22b;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-oi1-x22b.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -131,54 +132,67 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 These members will be used to help plugins to identify registers.
+The added members in instances of GDBFeature dynamically generated by
+CPUs will be filled in later changes.
 
 Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 ---
- target/ppc/gdbstub.c | 10 ++++++----
- 1 file changed, 6 insertions(+), 4 deletions(-)
+ include/exec/gdbstub.h  |  2 ++
+ scripts/feature_to_c.py | 14 +++++++++++++-
+ 2 files changed, 15 insertions(+), 1 deletion(-)
 
-diff --git a/target/ppc/gdbstub.c b/target/ppc/gdbstub.c
-index 19c4935260..ac4ed12371 100644
---- a/target/ppc/gdbstub.c
-+++ b/target/ppc/gdbstub.c
-@@ -323,7 +323,7 @@ void ppc_gdb_gen_spr_feature(PowerPCCPU *cpu)
-     PowerPCCPUClass *pcc = POWERPC_CPU_GET_CLASS(cpu);
-     CPUPPCState *env = &cpu->env;
-     GString *xml;
--    char *spr_name;
-+    const char **regs;
-     unsigned int num_regs = 0;
-     int i;
+diff --git a/include/exec/gdbstub.h b/include/exec/gdbstub.h
+index d6d1c1d5c9..da4b9173a9 100644
+--- a/include/exec/gdbstub.h
++++ b/include/exec/gdbstub.h
+@@ -13,6 +13,8 @@
+ typedef struct GDBFeature {
+     const char *xmlname;
+     const char *xml;
++    const char *name;
++    const char * const *regs;
+     int num_regs;
+ } GDBFeature;
  
-@@ -350,6 +350,7 @@ void ppc_gdb_gen_spr_feature(PowerPCCPU *cpu)
-         return;
-     }
+diff --git a/scripts/feature_to_c.py b/scripts/feature_to_c.py
+index e04d6b2df7..807af0e685 100755
+--- a/scripts/feature_to_c.py
++++ b/scripts/feature_to_c.py
+@@ -50,7 +50,9 @@ def writeliteral(indent, bytes):
+         sys.stderr.write(f'unexpected start tag: {element.tag}\n')
+         exit(1)
  
-+    regs = g_new(const char *, num_regs);
-     xml = g_string_new("<?xml version=\"1.0\"?>");
-     g_string_append(xml, "<!DOCTYPE target SYSTEM \"gdb-target.dtd\">");
-     g_string_append(xml, "<feature name=\"org.qemu.power.spr\">");
-@@ -361,9 +362,8 @@ void ppc_gdb_gen_spr_feature(PowerPCCPU *cpu)
-             continue;
-         }
++    feature_name = element.attrib['name']
+     regnum = 0
++    regnames = []
+     regnums = []
+     tags = ['feature']
+     for event, element in events:
+@@ -67,6 +69,7 @@ def writeliteral(indent, bytes):
+                 if 'regnum' in element.attrib:
+                     regnum = int(element.attrib['regnum'])
  
--        spr_name = g_ascii_strdown(spr->name, -1);
--        g_string_append_printf(xml, "<reg name=\"%s\"", spr_name);
--        g_free(spr_name);
-+        regs[spr->gdb_id] = g_ascii_strdown(spr->name, -1);
-+        g_string_append_printf(xml, "<reg name=\"%s\"", regs[spr->gdb_id]);
++                regnames.append(element.attrib['name'])
+                 regnums.append(regnum)
+                 regnum += 1
  
-         g_string_append_printf(xml, " bitsize=\"%d\"", TARGET_LONG_BITS);
-         g_string_append(xml, " group=\"spr\"/>");
-@@ -371,6 +371,8 @@ void ppc_gdb_gen_spr_feature(PowerPCCPU *cpu)
+@@ -85,6 +88,15 @@ def writeliteral(indent, bytes):
+     writeliteral(8, bytes(os.path.basename(input), 'utf-8'))
+     sys.stdout.write(',\n')
+     writeliteral(8, read)
+-    sys.stdout.write(f',\n        {num_regs},\n    }},\n')
++    sys.stdout.write(',\n')
++    writeliteral(8, bytes(feature_name, 'utf-8'))
++    sys.stdout.write(',\n        (const char * const []) {\n')
++
++    for index, regname in enumerate(regnames):
++        sys.stdout.write(f'            [{regnums[index] - base_reg}] =\n')
++        writeliteral(16, bytes(regname, 'utf-8'))
++        sys.stdout.write(',\n')
++
++    sys.stdout.write(f'        }},\n        {num_regs},\n    }},\n')
  
-     g_string_append(xml, "</feature>");
- 
-+    pcc->gdb_spr.name = "org.qemu.power.spr";
-+    pcc->gdb_spr.regs = regs;
-     pcc->gdb_spr.num_regs = num_regs;
-     pcc->gdb_spr.xmlname = "power-spr.xml";
-     pcc->gdb_spr.xml = g_string_free(xml, false);
+ sys.stdout.write('    { NULL }\n};\n')
 -- 
 2.41.0
 
