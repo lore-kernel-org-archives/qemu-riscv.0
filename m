@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF615C00528
-	for <qemu-riscv@archiver.kernel.org>; Wed,  2 Aug 2023 08:50:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22C02C41513
+	for <qemu-riscv@archiver.kernel.org>; Wed,  2 Aug 2023 08:51:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qR7Yw-0005AP-2S; Wed, 02 Aug 2023 04:50:34 -0400
+	id 1qR7Y7-00013K-PT; Wed, 02 Aug 2023 04:49:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qR7Ys-00055E-0j
- for qemu-riscv@nongnu.org; Wed, 02 Aug 2023 04:50:30 -0400
-Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
+ id 1qR7Y5-0000iN-Qv
+ for qemu-riscv@nongnu.org; Wed, 02 Aug 2023 04:49:41 -0400
+Received: from mail-oi1-x229.google.com ([2607:f8b0:4864:20::229])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qR7Yp-0000jR-VS
- for qemu-riscv@nongnu.org; Wed, 02 Aug 2023 04:50:29 -0400
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-686b9964ae2so4595414b3a.3
- for <qemu-riscv@nongnu.org>; Wed, 02 Aug 2023 01:50:27 -0700 (PDT)
+ id 1qR7Y3-0000D9-0X
+ for qemu-riscv@nongnu.org; Wed, 02 Aug 2023 04:49:41 -0400
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-3a5ac8717c6so5069400b6e.2
+ for <qemu-riscv@nongnu.org>; Wed, 02 Aug 2023 01:49:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1690966227; x=1691571027;
+ d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1690966178; x=1691570978;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kNR+2DDMQySc8psqEDhnZbBav2KTV36MZCBGyLQQO2o=;
- b=K3R00I0tgQEZb0otU0GHIAVYlvmecLUiB5W39EKRq4ECqfoqWkNTjCmG4zKtIpZoZh
- VfsG4KPhxENtsIe86jub6NeeRolk5LB9TLjyihIYhW2P65+56Ba8/TwltgAnhLzyA9P9
- xGPX7FvX9WUGwemYyrLWJhYPYDCKVkw0qSWaTesj1zHl1Pj4HFb3cgPWnF7Pgwpl5s8K
- NpyqMiYzhBMrobxSmC6uVYD4aF/1h/joNnykcji0hmsweV4k7Fz+ZeyYelN6HWkAxkC+
- 9ZegLOJACRjnrPK/TVG0NmwyITi3ttLvQ3relVP1Erynux1YurQ01HCinx6WEZzUfsF5
- +MtQ==
+ bh=+UF5S4BAA/eK+ZwqrbbvWnZLqcwv53M7+DITdN+nup4=;
+ b=YYYPirH24uWg7w/+2GQEt8PnEr6ndcrCwToWcTIylCL9ZOFMATdIBokhxiHySCpdnN
+ u4FKHg02k6fsXM1xvYzyW9kPI4tS8AXV0dw8h37LBZnNzZ5EeHBoIf3YMdXFBcaTMS6r
+ tgikHOvTAQFlc52x/SL3B3Ls6SHknMjm9wSkrvJS2oX51+lXJtOMzZ1sAyR92LpSac9a
+ wXyh5Bj+rvYyHHW2sH7ZzsrT8gvzb066JznuyiSRGkzFz6WcJDkzgEtGkWEjuv74MTO5
+ IVFJGu9tP6PjsjmuQPAtqGmZIPJ7zO7MtZHaOI3D8TzyqYEQLgdmfiVf3W3U217k4US9
+ qS/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1690966227; x=1691571027;
+ d=1e100.net; s=20221208; t=1690966178; x=1691570978;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kNR+2DDMQySc8psqEDhnZbBav2KTV36MZCBGyLQQO2o=;
- b=cQycZLClUFpd1xuDLtLQ9O7cvQvrl/L/AyTyX7ARXSRcnwjRkrKdyMZjcOlPOsld6w
- ExlZq+TvuMtuiyFIijhVLCt6dcLXwvXm4I8+rBy02Z4rmWvV3qONoaUPqJuUQjInrCBl
- K2eS6QqosHOWbTjmNBousLv7ZVAzdxy3ep1UReIIE9zeIMMRChIwMiWdQOdakjx56N5m
- YhERDtsu0dD3R9bxWW2masnuNRch1MztKjXF63UCLeoQfuaamuxA86j9r86y+bT5SbYE
- eH6aQx0FB9leNlZ5Nt5wDOITqslFVjvKJbYKavSFTvnpko/leFw6FlIPEZHUJy046jow
- VCeg==
-X-Gm-Message-State: ABy/qLYEs3rzKcFmP4ngFNYg5hgxKK9Xp/iXvufBb5n4DEiHuiqR5vLe
- aWO9UaobjEtYxJoWQw+Wg1CSxg==
-X-Google-Smtp-Source: APBJJlFGHdzb68i9hkzSc4thw9evgdTiFF4LBhOLeZ9K59RBAH4Gv68G5UXefQweRnrCHWCvkNy+Sw==
-X-Received: by 2002:a05:6a20:840b:b0:137:514a:9835 with SMTP id
- c11-20020a056a20840b00b00137514a9835mr18011045pzd.9.1690966226760; 
- Wed, 02 Aug 2023 01:50:26 -0700 (PDT)
+ bh=+UF5S4BAA/eK+ZwqrbbvWnZLqcwv53M7+DITdN+nup4=;
+ b=ZpeUfyua1gklvi6wA2WUr8Zxd+K5dGWnIbXWsebHOTFJyN5bYdjhJhd/JRZ48mFt8z
+ +/3sVCEwYRXeikJBuFIz2rG0o5ou4lUjKhySDb/Y4DJDX+0PJ11USvJmU1fRyFSRSMHl
+ 12E4jy5z+G0asdfSxDTdEHbOCvYISutBmAGt+R7hhMjbd9K59PTY3ut/e9JfYMF+prgB
+ rjL++7FngAHXE3mpUQJfHDo3yO9ZN52Jov3pyNQBmPZHebbYdK8ici105ajyvKZw8poK
+ Mz9wLLIUGQDtTIWxFMECDmjNx7PkYrHfleDiubvoU6DmqCSaseiehjOAjhf9Cs6o0nvL
+ 2QaQ==
+X-Gm-Message-State: ABy/qLbcCKYL4T1mmTGM3vSmL8J74xEP2dPenJg/wKmBdn+rTszyh48U
+ Jz23H+uGE91hxzLjTtpQL1FWxw==
+X-Google-Smtp-Source: APBJJlFrQBDzH2I3mg74KwFQ0Q8QnXZRyBTfiWFR68SVT7RXFCg1IlIPcfLorCZvXM+RBFRLS3jDnQ==
+X-Received: by 2002:a05:6808:148e:b0:3a3:613b:2787 with SMTP id
+ e14-20020a056808148e00b003a3613b2787mr19582390oiw.32.1690966177903; 
+ Wed, 02 Aug 2023 01:49:37 -0700 (PDT)
 Received: from alarm.flets-east.jp ([2400:4050:a840:1e00:78d2:b862:10a7:d486])
  by smtp.gmail.com with ESMTPSA id
- j22-20020aa79296000000b00659b8313d08sm10592860pfa.78.2023.08.02.01.50.17
+ j22-20020aa79296000000b00659b8313d08sm10592860pfa.78.2023.08.02.01.49.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Aug 2023 01:50:26 -0700 (PDT)
+ Wed, 02 Aug 2023 01:49:37 -0700 (PDT)
 From: Akihiko Odaki <akihiko.odaki@daynix.com>
 To: 
 Cc: Paolo Bonzini <pbonzini@redhat.com>,
@@ -98,22 +98,23 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
  qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, Anton Kochkov <anton.kochkov@proton.me>,
  Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH v2 24/24] contrib/plugins: Add cc plugin
-Date: Wed,  2 Aug 2023 17:46:12 +0900
-Message-ID: <20230802084614.23619-25-akihiko.odaki@daynix.com>
+Subject: [PATCH v2 19/24] gdbstub: Hide gdb_has_xml
+Date: Wed,  2 Aug 2023 17:46:07 +0900
+Message-ID: <20230802084614.23619-20-akihiko.odaki@daynix.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230802084614.23619-1-akihiko.odaki@daynix.com>
 References: <20230802084614.23619-1-akihiko.odaki@daynix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::42d;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x42d.google.com
+Received-SPF: none client-ip=2607:f8b0:4864:20::229;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-oi1-x229.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ SPF_NONE=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -129,131 +130,50 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This demonstrates how to write a plugin in C++.
+gdb_has_xml is no longer referenced by the other components.
 
 Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 ---
- docs/devel/tcg-plugins.rst |  8 ++++++++
- configure                  | 15 ++++++++++++---
- contrib/plugins/Makefile   |  5 +++++
- contrib/plugins/cc.cc      | 17 +++++++++++++++++
- tests/tcg/Makefile.target  |  3 +++
- 5 files changed, 45 insertions(+), 3 deletions(-)
- create mode 100644 contrib/plugins/cc.cc
+ gdbstub/internals.h    | 8 ++++++++
+ include/exec/gdbstub.h | 8 --------
+ 2 files changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/docs/devel/tcg-plugins.rst b/docs/devel/tcg-plugins.rst
-index c9f8b27590..0a11f8036c 100644
---- a/docs/devel/tcg-plugins.rst
-+++ b/docs/devel/tcg-plugins.rst
-@@ -584,6 +584,14 @@ The plugin has a number of arguments, all of them are optional:
-   configuration arguments implies ``l2=on``.
-   (default: N = 2097152 (2MB), B = 64, A = 16)
+diff --git a/gdbstub/internals.h b/gdbstub/internals.h
+index f2b46cce41..92f5ce8cbb 100644
+--- a/gdbstub/internals.h
++++ b/gdbstub/internals.h
+@@ -234,4 +234,12 @@ void gdb_breakpoint_remove_all(CPUState *cs);
+ int gdb_target_memory_rw_debug(CPUState *cs, hwaddr addr,
+                                uint8_t *buf, int len, bool is_write);
  
-+- contrib/plugins/cc.cc
++/**
++ * gdb_has_xml:
++ * This is an ugly hack to cope with both new and old gdb.
++ * If gdb sends qXfer:features:read then assume we're talking to a newish
++ * gdb that understands target descriptions.
++ */
++extern bool gdb_has_xml;
 +
-+cc plugin demonstrates how to write a plugin in C++. It simply outputs
-+"hello, world" to the plugin log::
-+
-+  $ qemu-system-arm $(QEMU_ARGS) \
-+    -plugin ./contrib/plugins/libcc.so -d plugin
-+
- API
- ---
+ #endif /* GDBSTUB_INTERNALS_H */
+diff --git a/include/exec/gdbstub.h b/include/exec/gdbstub.h
+index da4b9173a9..aafbea78ab 100644
+--- a/include/exec/gdbstub.h
++++ b/include/exec/gdbstub.h
+@@ -40,14 +40,6 @@ const GDBFeature *gdb_find_static_feature(const char *xmlname);
  
-diff --git a/configure b/configure
-index 26ec5e4f54..0065b0dfe0 100755
---- a/configure
-+++ b/configure
-@@ -293,10 +293,18 @@ else
-   cc="${CC-${cross_prefix}gcc}"
- fi
+ void gdb_set_stop_cpu(CPUState *cpu);
  
--if test -z "${CXX}${cross_prefix}"; then
--  cxx="c++"
-+if test -n "${CXX+x}"; then
-+  cxx="$CXX"
- else
--  cxx="${CXX-${cross_prefix}g++}"
-+  if test -n "${cross_prefix}"; then
-+    cxx="${cross_prefix}g++"
-+  else
-+    cxx="c++"
-+  fi
-+
-+  if ! has "$cxx"; then
-+    cxx=
-+  fi
- fi
+-/**
+- * gdb_has_xml:
+- * This is an ugly hack to cope with both new and old gdb.
+- * If gdb sends qXfer:features:read then assume we're talking to a newish
+- * gdb that understands target descriptions.
+- */
+-extern bool gdb_has_xml;
+-
+ /* in gdbstub-xml.c, generated by scripts/feature_to_c.py */
+ extern const GDBFeature gdb_static_features[];
  
- # Preferred ObjC compiler:
-@@ -1702,6 +1710,7 @@ echo "MESON=$meson" >> $config_host_mak
- echo "NINJA=$ninja" >> $config_host_mak
- echo "PKG_CONFIG=${pkg_config}" >> $config_host_mak
- echo "CC=$cc" >> $config_host_mak
-+echo "CXX=$cxx" >> $config_host_mak
- echo "EXESUF=$EXESUF" >> $config_host_mak
- 
- # use included Linux headers
-diff --git a/contrib/plugins/Makefile b/contrib/plugins/Makefile
-index b2b9db9f51..93d86b3d07 100644
---- a/contrib/plugins/Makefile
-+++ b/contrib/plugins/Makefile
-@@ -21,6 +21,9 @@ NAMES += lockstep
- NAMES += hwprofile
- NAMES += cache
- NAMES += drcov
-+ifneq ($(CXX),)
-+NAMES += cc
-+endif
- 
- SONAMES := $(addsuffix .so,$(addprefix lib,$(NAMES)))
- 
-@@ -31,6 +34,8 @@ CFLAGS += -fPIC -Wall
- CFLAGS += $(if $(CONFIG_DEBUG_TCG), -ggdb -O0)
- CFLAGS += -I$(SRC_PATH)/include/qemu
- 
-+CXXFLAGS := $(CFLAGS)
-+
- all: $(SONAMES)
- 
- %.o: %.c
-diff --git a/contrib/plugins/cc.cc b/contrib/plugins/cc.cc
-new file mode 100644
-index 0000000000..83a5528db0
---- /dev/null
-+++ b/contrib/plugins/cc.cc
-@@ -0,0 +1,17 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+
-+#include <qemu-plugin.h>
-+
-+extern "C" {
-+
-+QEMU_PLUGIN_EXPORT int qemu_plugin_version = QEMU_PLUGIN_VERSION;
-+
-+QEMU_PLUGIN_EXPORT int qemu_plugin_install(qemu_plugin_id_t id,
-+                                           const qemu_info_t *info, int argc,
-+                                           char **argv)
-+{
-+    qemu_plugin_outs("hello, world\n");
-+    return 0;
-+}
-+
-+};
-diff --git a/tests/tcg/Makefile.target b/tests/tcg/Makefile.target
-index 462289f47c..3d7837d3b8 100644
---- a/tests/tcg/Makefile.target
-+++ b/tests/tcg/Makefile.target
-@@ -149,6 +149,9 @@ PLUGIN_SRC=$(SRC_PATH)/tests/plugin
- PLUGIN_LIB=../../plugin
- VPATH+=$(PLUGIN_LIB)
- PLUGINS=$(patsubst %.c, lib%.so, $(notdir $(wildcard $(PLUGIN_SRC)/*.c)))
-+ifneq ($(CXX),)
-+PLUGINS+=$(patsubst %.cc, lib%.so, $(notdir $(wildcard $(PLUGIN_SRC)/*.cc)))
-+endif
- 
- # We need to ensure expand the run-plugin-TEST-with-PLUGIN
- # pre-requistes manually here as we can't use stems to handle it. We
 -- 
 2.41.0
 
