@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 730B2C001DE
-	for <qemu-riscv@archiver.kernel.org>; Wed,  2 Aug 2023 08:50:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33FC2C00528
+	for <qemu-riscv@archiver.kernel.org>; Wed,  2 Aug 2023 08:50:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qR7Y4-0000Wu-LV; Wed, 02 Aug 2023 04:49:40 -0400
+	id 1qR7YH-0001jf-A0; Wed, 02 Aug 2023 04:49:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qR7Y2-0000El-Pn
- for qemu-riscv@nongnu.org; Wed, 02 Aug 2023 04:49:38 -0400
-Received: from mail-oi1-x230.google.com ([2607:f8b0:4864:20::230])
+ id 1qR7YF-0001eK-UI
+ for qemu-riscv@nongnu.org; Wed, 02 Aug 2023 04:49:52 -0400
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qR7Xu-0000Al-Ms
- for qemu-riscv@nongnu.org; Wed, 02 Aug 2023 04:49:38 -0400
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-3a412653335so4354828b6e.1
- for <qemu-riscv@nongnu.org>; Wed, 02 Aug 2023 01:49:29 -0700 (PDT)
+ id 1qR7YC-0000FO-N9
+ for qemu-riscv@nongnu.org; Wed, 02 Aug 2023 04:49:51 -0400
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-686efdeabaeso4415059b3a.3
+ for <qemu-riscv@nongnu.org>; Wed, 02 Aug 2023 01:49:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1690966168; x=1691570968;
+ d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1690966187; x=1691570987;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yjvQDe2b+YgBASgDnFbtEHw5GS6qkoh6PD3E7sO/27M=;
- b=IbMBUT1hX3yJoM+MVTBXLAisKFdsPH2XOlflYVD7CFpuA/bJzfcbg0b0OHBgYFNbER
- hgJ0w4NWJ1dQ4aNkDr58zgM3FyhzVUz7MQq79WA25b/7hvTEqSPX7fl+xW/baH+mmQte
- hOi1SNnNiDMSZimRi2zIvMmkv7tpDoSqBNvXNC97JqaVPe7veL0QW6LwMgdlJiZxcht2
- v63/4RzGBFPEOWcxu5phhTJuFLv75UtN5jF0MxzDbXTzfmCFaevYPmdKFRh5mKOYvsnN
- cC0HROJNmbtUjiBXFSsHVqWflbuFUEj8oOBhaFWsw3UaKvGyhRtYho7of/en2mFV/jaq
- XS7w==
+ bh=b1wI6pbT+UOvNduKCMCkfq23k895sVylyUMgvMoltAI=;
+ b=i7IvH2YNE7Fbek3+xcRbwdyMf+UMhgDfWnFXIqDtHy9An+D9BuS6csAdsYfmvZMovp
+ s3CZsvzqvZtMGUxO3MooQ3U8oiwe7IyIlAIS0rxInvVxc38L6tmYwRAurNPUA2cetf0N
+ spcomepRsHP7/5mIi+CQxxra5sBZjMbvCl+EyfJA5Qk4kfn8VUQYlFVS3YLpk3MB2AqG
+ 8eAj1zUHNkPZ/glsl5+nT5n5P0m804GfhEk2scyRZK6xLByYl1whMJIwmBW5WhbX2SpY
+ Ggc8jajpPLrZV+rOvwJ/mmYX+aXIMqWx+zS93qwB+QFpdXrrLQvIoys5KzbRa/ky5uSm
+ sOyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1690966168; x=1691570968;
+ d=1e100.net; s=20221208; t=1690966187; x=1691570987;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yjvQDe2b+YgBASgDnFbtEHw5GS6qkoh6PD3E7sO/27M=;
- b=OBPOssE52aCsGtl8CxjAAqhqKaAdJr9E6g9VxB1Zj02s829eJFPzY4VeIgCy8//kEf
- 1ZHUcubCuAf5AbCgjJOCdoVhUjop+dgiwTkyHvL+ap9LxJujTn2q3jCFXKsNB97ZPc3A
- E3HWIuw7tZTmq+gAiNGzdqvlla0wX8AM2NnbWPQPOZFoYbyZGbMGHM6OirPHKo8KWHRT
- q33O6RXH6+a9ECR4sP0W7ZjsblrbP2WYWK9x6fj5QkGATu1rVzViBVZNYnXXKX7Ueh7l
- htS4jZa9O2/0bM+YGneyqFJjcUShk/ysj775gp4ljJVepUYIi59Otq3S3o1b981TEqD6
- zvxA==
-X-Gm-Message-State: ABy/qLbrlNjVRTrWUEuDQo9GLPvBd+zpDdVyR2tmohWtv8HfvjPsjTQB
- 1pLL4gK/eYAUc5PTzLBM/B9R6w==
-X-Google-Smtp-Source: APBJJlH+3IlZocuW1L0dWvAcqtjNLM67z8T/WtUvRCzwWrJeAFXA+Sy+o1+QNVwfj2iR7N5WD8dErA==
-X-Received: by 2002:a05:6808:2a7b:b0:3a7:55b3:85ee with SMTP id
- fu27-20020a0568082a7b00b003a755b385eemr1659073oib.6.1690966168444; 
- Wed, 02 Aug 2023 01:49:28 -0700 (PDT)
+ bh=b1wI6pbT+UOvNduKCMCkfq23k895sVylyUMgvMoltAI=;
+ b=hroFsQPGsfvPv9Sd7jLtat1Lhvo/M0ug1K00Zh5+flKZWCBi52quzyXqmlCd/QXi5D
+ Skt7kOGWGIvYk3OqB2mysSJm7xJZMKxUJCP5gSQLxSDX+6H+O3vehun1XsGtOloCyiv0
+ D9oI3U3nkeI1OiwHb4DjZo3yv3v2NwZisBBXMNTmtMVVWbv6pt5R0H2bKoBPpx23WWJL
+ U1Jz4ZqLBzQ4bBhAvWz9nNSKF1Vli+jJoaNFlbwRuZMB0NqWIkFNw3pmrMlkzcU6wEyd
+ D+J6hEcVmlT0tgeiRlgMg8nRMQOlYrSi2kkW0tT+9qtDfP/3ug0EKrwJOB4OPtxrW9QU
+ 8ZAA==
+X-Gm-Message-State: ABy/qLaOvUdtHvfaL66MOJgFzqHqoDXv/FGgjmGAqowruNxC0xL49kMd
+ zx1Xkg4Flc8Q9BjMlMQ3hfVpPQ==
+X-Google-Smtp-Source: APBJJlHs2gxFhAzibAywGj6CvASC/9SoxfmpCfsJv3DymHVWtTmAN7gtXGM6Bwq8kInKr4phCH8C8Q==
+X-Received: by 2002:a05:6a00:390f:b0:682:4de1:adcc with SMTP id
+ fh15-20020a056a00390f00b006824de1adccmr15775059pfb.12.1690966187524; 
+ Wed, 02 Aug 2023 01:49:47 -0700 (PDT)
 Received: from alarm.flets-east.jp ([2400:4050:a840:1e00:78d2:b862:10a7:d486])
  by smtp.gmail.com with ESMTPSA id
- j22-20020aa79296000000b00659b8313d08sm10592860pfa.78.2023.08.02.01.49.19
+ j22-20020aa79296000000b00659b8313d08sm10592860pfa.78.2023.08.02.01.49.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Aug 2023 01:49:27 -0700 (PDT)
+ Wed, 02 Aug 2023 01:49:46 -0700 (PDT)
 From: Akihiko Odaki <akihiko.odaki@daynix.com>
 To: 
 Cc: Paolo Bonzini <pbonzini@redhat.com>,
@@ -98,17 +98,16 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
  qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, Anton Kochkov <anton.kochkov@proton.me>,
  Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH v2 18/24] hw/core/cpu: Add a parameter to
- gdb_read_register/gdb_write_register
-Date: Wed,  2 Aug 2023 17:46:06 +0900
-Message-ID: <20230802084614.23619-19-akihiko.odaki@daynix.com>
+Subject: [PATCH v2 20/24] gdbstub: Expose functions to read registers
+Date: Wed,  2 Aug 2023 17:46:08 +0900
+Message-ID: <20230802084614.23619-21-akihiko.odaki@daynix.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230802084614.23619-1-akihiko.odaki@daynix.com>
 References: <20230802084614.23619-1-akihiko.odaki@daynix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::230;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-oi1-x230.google.com
+Received-SPF: none client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x42d.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -131,1135 +130,128 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-gdbstub has a static variable named gdb_has_xml that tells if
-workarounds for old GDB versions are required when manipulating
-registers for GDB.
-
-Now we are reusing the infrastructure to manipulate registers for
-plugins. Plugins will not need these workarounds even when an old GDB
-is attached. Converting the static variable to a function parameter
-would allow to apply or not to apply workarounds depending on the
-context.
-
-This change adds the new parameter and replaces references to
-gdb_has_xml with it. New code to pass different values to the functions
-will be added later.
+gdb_foreach_feature() enumerates features that are useful to identify
+registers. gdb_read_register() actually reads registers.
 
 Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 ---
- include/hw/core/cpu.h         |  6 ++++--
- target/alpha/cpu.h            |  6 ++++--
- target/arm/cpu.h              | 13 +++++++++----
- target/avr/cpu.h              |  6 ++++--
- target/cris/cpu.h             |  9 ++++++---
- target/hexagon/internal.h     |  6 ++++--
- target/hppa/cpu.h             |  6 ++++--
- target/i386/cpu.h             |  6 ++++--
- target/loongarch/internals.h  |  6 ++++--
- target/m68k/cpu.h             |  6 ++++--
- target/microblaze/cpu.h       |  6 ++++--
- target/mips/internal.h        |  6 ++++--
- target/openrisc/cpu.h         |  6 ++++--
- target/ppc/cpu.h              | 12 ++++++++----
- target/riscv/cpu.h            |  6 ++++--
- target/rx/cpu.h               |  6 ++++--
- target/s390x/s390x-internal.h |  6 ++++--
- target/sh4/cpu.h              |  6 ++++--
- target/sparc/cpu.h            |  6 ++++--
- target/tricore/cpu.h          |  6 ++++--
- target/xtensa/cpu.h           |  6 ++++--
- gdbstub/gdbstub.c             |  4 ++--
- hw/core/cpu-common.c          |  6 ++++--
- target/alpha/gdbstub.c        |  6 ++++--
- target/arm/gdbstub.c          | 14 ++++++++------
- target/arm/gdbstub64.c        |  6 ++++--
- target/avr/gdbstub.c          |  6 ++++--
- target/cris/gdbstub.c         |  9 ++++++---
- target/hexagon/gdbstub.c      |  6 ++++--
- target/hppa/gdbstub.c         |  6 ++++--
- target/i386/gdbstub.c         | 10 +++++-----
- target/loongarch/gdbstub.c    |  6 ++++--
- target/m68k/gdbstub.c         |  6 ++++--
- target/microblaze/gdbstub.c   |  6 ++++--
- target/mips/gdbstub.c         |  6 ++++--
- target/nios2/cpu.c            |  6 ++++--
- target/openrisc/gdbstub.c     |  6 ++++--
- target/ppc/gdbstub.c          | 22 +++++++++++++---------
- target/riscv/gdbstub.c        |  6 ++++--
- target/rx/gdbstub.c           |  6 ++++--
- target/s390x/gdbstub.c        |  6 ++++--
- target/sh4/gdbstub.c          |  6 ++++--
- target/sparc/gdbstub.c        |  6 ++++--
- target/tricore/gdbstub.c      |  6 ++++--
- target/xtensa/gdbstub.c       |  6 ++++--
- 45 files changed, 205 insertions(+), 110 deletions(-)
+ include/exec/gdbstub.h |  6 ++++++
+ gdbstub/gdbstub.c      | 38 ++++++++++++++++++++++++++++++--------
+ 2 files changed, 36 insertions(+), 8 deletions(-)
 
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 9323d26f84..9428e57e7c 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -157,8 +157,10 @@ struct CPUClass {
-     int64_t (*get_arch_id)(CPUState *cpu);
-     void (*set_pc)(CPUState *cpu, vaddr value);
-     vaddr (*get_pc)(CPUState *cpu);
--    int (*gdb_read_register)(CPUState *cpu, GByteArray *buf, int reg);
--    int (*gdb_write_register)(CPUState *cpu, uint8_t *buf, int reg);
-+    int (*gdb_read_register)(CPUState *cpu, GByteArray *buf, int reg,
-+                             bool has_xml);
-+    int (*gdb_write_register)(CPUState *cpu, uint8_t *buf, int reg,
-+                              bool has_xml);
-     vaddr (*gdb_adjust_breakpoint)(CPUState *cpu, vaddr addr);
+diff --git a/include/exec/gdbstub.h b/include/exec/gdbstub.h
+index aafbea78ab..86fc0c46f4 100644
+--- a/include/exec/gdbstub.h
++++ b/include/exec/gdbstub.h
+@@ -38,6 +38,12 @@ int gdbserver_start(const char *port_or_device);
  
-     const GDBFeature *gdb_core_feature;
-diff --git a/target/alpha/cpu.h b/target/alpha/cpu.h
-index 13306665af..46bd9bc37b 100644
---- a/target/alpha/cpu.h
-+++ b/target/alpha/cpu.h
-@@ -279,8 +279,10 @@ bool alpha_cpu_exec_interrupt(CPUState *cpu, int int_req);
- hwaddr alpha_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
- #endif /* !CONFIG_USER_ONLY */
- void alpha_cpu_dump_state(CPUState *cs, FILE *f, int flags);
--int alpha_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
--int alpha_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-+int alpha_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg,
-+                                bool has_xml);
-+int alpha_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg,
-+                                 bool has_xml);
+ const GDBFeature *gdb_find_static_feature(const char *xmlname);
  
- #define cpu_list alpha_cpu_list
- 
-diff --git a/target/arm/cpu.h b/target/arm/cpu.h
-index 09bf82034d..3dfa29c3aa 100644
---- a/target/arm/cpu.h
-+++ b/target/arm/cpu.h
-@@ -1128,8 +1128,11 @@ hwaddr arm_cpu_get_phys_page_attrs_debug(CPUState *cpu, vaddr addr,
-                                          MemTxAttrs *attrs);
- #endif /* !CONFIG_USER_ONLY */
- 
--int arm_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
--int arm_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-+int arm_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg,
-+                              bool has_xml);
++void gdb_foreach_feature(CPUState *cpu,
++                         void (* callback)(void *, const GDBFeature *, int),
++                         void *opaque);
 +
-+int arm_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg,
-+                               bool has_xml);
++int gdb_read_register(CPUState *cpu, GByteArray *buf, int reg, bool has_xml);
++
+ void gdb_set_stop_cpu(CPUState *cpu);
  
- int arm_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cs,
-                              int cpuid, DumpState *s);
-@@ -1137,8 +1140,10 @@ int arm_cpu_write_elf32_note(WriteCoreDumpFunction f, CPUState *cs,
-                              int cpuid, DumpState *s);
- 
- #ifdef TARGET_AARCH64
--int aarch64_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
--int aarch64_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-+int aarch64_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg,
-+                                  bool has_xml);
-+int aarch64_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg,
-+                                   bool has_xml);
- void aarch64_sve_narrow_vq(CPUARMState *env, unsigned vq);
- void aarch64_sve_change_el(CPUARMState *env, int old_el,
-                            int new_el, bool el0_a64);
-diff --git a/target/avr/cpu.h b/target/avr/cpu.h
-index 7225174668..006e79e018 100644
---- a/target/avr/cpu.h
-+++ b/target/avr/cpu.h
-@@ -157,8 +157,10 @@ extern const struct VMStateDescription vms_avr_cpu;
- void avr_cpu_do_interrupt(CPUState *cpu);
- bool avr_cpu_exec_interrupt(CPUState *cpu, int int_req);
- hwaddr avr_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
--int avr_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
--int avr_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-+int avr_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg,
-+                              bool has_xml);
-+int avr_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg,
-+                               bool has_xml);
- int avr_print_insn(bfd_vma addr, disassemble_info *info);
- vaddr avr_cpu_gdb_adjust_breakpoint(CPUState *cpu, vaddr addr);
- 
-diff --git a/target/cris/cpu.h b/target/cris/cpu.h
-index 8e37c6e50d..d3a62c5480 100644
---- a/target/cris/cpu.h
-+++ b/target/cris/cpu.h
-@@ -198,9 +198,12 @@ hwaddr cris_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
- 
- void cris_cpu_dump_state(CPUState *cs, FILE *f, int flags);
- 
--int crisv10_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
--int cris_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
--int cris_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-+int crisv10_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg,
-+                                  bool has_xml);
-+int cris_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg,
-+                               bool has_xml);
-+int cris_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg,
-+                                bool has_xml);
- 
- void cris_initialize_tcg(void);
- void cris_initialize_crisv10_tcg(void);
-diff --git a/target/hexagon/internal.h b/target/hexagon/internal.h
-index d732b6bb3c..cdd4bb7d26 100644
---- a/target/hexagon/internal.h
-+++ b/target/hexagon/internal.h
-@@ -31,8 +31,10 @@
-         } \
-     } while (0)
- 
--int hexagon_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
--int hexagon_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-+int hexagon_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg,
-+                              bool has_xml);
-+int hexagon_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg,
-+                               bool has_xml);
- int hexagon_hvx_gdb_read_register(CPUHexagonState *env, GByteArray *mem_buf, int n);
- int hexagon_hvx_gdb_write_register(CPUHexagonState *env, uint8_t *mem_buf, int n);
- 
-diff --git a/target/hppa/cpu.h b/target/hppa/cpu.h
-index 9fe79b1242..a983540dd2 100644
---- a/target/hppa/cpu.h
-+++ b/target/hppa/cpu.h
-@@ -321,8 +321,10 @@ static inline void cpu_hppa_change_prot_id(CPUHPPAState *env) { }
- void cpu_hppa_change_prot_id(CPUHPPAState *env);
- #endif
- 
--int hppa_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
--int hppa_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-+int hppa_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg,
-+                               bool has_xml);
-+int hppa_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg,
-+                                bool has_xml);
- void hppa_cpu_dump_state(CPUState *cs, FILE *f, int);
- #ifndef CONFIG_USER_ONLY
- hwaddr hppa_cpu_get_phys_page_debug(CPUState *cs, vaddr addr);
-diff --git a/target/i386/cpu.h b/target/i386/cpu.h
-index e0771a1043..d177f500b8 100644
---- a/target/i386/cpu.h
-+++ b/target/i386/cpu.h
-@@ -2057,8 +2057,10 @@ void x86_cpu_get_memory_mapping(CPUState *cpu, MemoryMappingList *list,
- 
- void x86_cpu_dump_state(CPUState *cs, FILE *f, int flags);
- 
--int x86_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
--int x86_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-+int x86_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg,
-+                              bool has_xml);
-+int x86_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg,
-+                               bool has_xml);
- 
- void x86_cpu_list(void);
- int cpu_x86_support_mca_broadcast(CPUX86State *env);
-diff --git a/target/loongarch/internals.h b/target/loongarch/internals.h
-index 7b0f29c942..a2ff8b3e3d 100644
---- a/target/loongarch/internals.h
-+++ b/target/loongarch/internals.h
-@@ -77,8 +77,10 @@ hwaddr loongarch_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
- uint64_t read_fcc(CPULoongArchState *env);
- void write_fcc(CPULoongArchState *env, uint64_t val);
- 
--int loongarch_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n);
--int loongarch_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n);
-+int loongarch_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n,
-+                                    bool has_xml);
-+int loongarch_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n,
-+                                     bool has_xml);
- void loongarch_cpu_register_gdb_regs_for_features(CPUState *cs);
- 
- #endif
-diff --git a/target/m68k/cpu.h b/target/m68k/cpu.h
-index cf70282717..b59d076c0c 100644
---- a/target/m68k/cpu.h
-+++ b/target/m68k/cpu.h
-@@ -179,8 +179,10 @@ bool m68k_cpu_exec_interrupt(CPUState *cpu, int int_req);
- hwaddr m68k_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
- #endif /* !CONFIG_USER_ONLY */
- void m68k_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
--int m68k_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
--int m68k_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-+int m68k_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg,
-+                               bool has_xml);
-+int m68k_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg,
-+                                bool has_xml);
- 
- void m68k_tcg_init(void);
- void m68k_cpu_init_gdb(M68kCPU *cpu);
-diff --git a/target/microblaze/cpu.h b/target/microblaze/cpu.h
-index f6cab6ce19..8840bf17f3 100644
---- a/target/microblaze/cpu.h
-+++ b/target/microblaze/cpu.h
-@@ -368,8 +368,10 @@ G_NORETURN void mb_cpu_do_unaligned_access(CPUState *cs, vaddr vaddr,
-                                            MMUAccessType access_type,
-                                            int mmu_idx, uintptr_t retaddr);
- void mb_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
--int mb_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
--int mb_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-+int mb_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg,
-+                             bool has_xml);
-+int mb_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg,
-+                              bool has_xml);
- int mb_cpu_gdb_read_stack_protect(CPUArchState *cpu, GByteArray *buf, int reg);
- int mb_cpu_gdb_write_stack_protect(CPUArchState *cpu, uint8_t *buf, int reg);
- 
-diff --git a/target/mips/internal.h b/target/mips/internal.h
-index 1d0c026c7d..b5462f53a9 100644
---- a/target/mips/internal.h
-+++ b/target/mips/internal.h
-@@ -92,8 +92,10 @@ extern const char fregnames[32][4];
- extern const struct mips_def_t mips_defs[];
- extern const int mips_defs_number;
- 
--int mips_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
--int mips_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-+int mips_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg,
-+                               bool has_xml);
-+int mips_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg,
-+                                bool has_xml);
- 
- #define USEG_LIMIT      ((target_ulong)(int32_t)0x7FFFFFFFUL)
- #define KSEG0_BASE      ((target_ulong)(int32_t)0x80000000UL)
-diff --git a/target/openrisc/cpu.h b/target/openrisc/cpu.h
-index ce4d605eb7..8c2089db92 100644
---- a/target/openrisc/cpu.h
-+++ b/target/openrisc/cpu.h
-@@ -312,8 +312,10 @@ struct ArchCPU {
- 
- void cpu_openrisc_list(void);
- void openrisc_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
--int openrisc_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
--int openrisc_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-+int openrisc_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg,
-+                                   bool has_xml);
-+int openrisc_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg,
-+                                    bool has_xml);
- void openrisc_translate_init(void);
- int print_insn_or1k(bfd_vma addr, disassemble_info *info);
- 
-diff --git a/target/ppc/cpu.h b/target/ppc/cpu.h
-index 3dc6e545e3..0849ee6e1f 100644
---- a/target/ppc/cpu.h
-+++ b/target/ppc/cpu.h
-@@ -1375,10 +1375,14 @@ static inline bool vhyp_cpu_in_nested(PowerPCCPU *cpu)
- #endif /* CONFIG_USER_ONLY */
- 
- void ppc_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
--int ppc_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
--int ppc_cpu_gdb_read_register_apple(CPUState *cpu, GByteArray *buf, int reg);
--int ppc_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
--int ppc_cpu_gdb_write_register_apple(CPUState *cpu, uint8_t *buf, int reg);
-+int ppc_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg,
-+                              bool has_xml);
-+int ppc_cpu_gdb_read_register_apple(CPUState *cpu, GByteArray *buf, int reg,
-+                                    bool has_xml);
-+int ppc_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg,
-+                               bool has_xml);
-+int ppc_cpu_gdb_write_register_apple(CPUState *cpu, uint8_t *buf, int reg,
-+                                     bool has_xml);
- #ifndef CONFIG_USER_ONLY
- hwaddr ppc_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
- void ppc_gdb_gen_spr_feature(PowerPCCPU *cpu);
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index f67751d5b7..46b06b1962 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -421,8 +421,10 @@ int riscv_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cs,
-                                int cpuid, DumpState *s);
- int riscv_cpu_write_elf32_note(WriteCoreDumpFunction f, CPUState *cs,
-                                int cpuid, DumpState *s);
--int riscv_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
--int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-+int riscv_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg,
-+                                bool has_xml);
-+int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg,
-+                                 bool has_xml);
- int riscv_cpu_hviprio_index2irq(int index, int *out_irq, int *out_rdzero);
- uint8_t riscv_cpu_default_priority(int irq);
- uint64_t riscv_cpu_all_pending(CPURISCVState *env);
-diff --git a/target/rx/cpu.h b/target/rx/cpu.h
-index 7f03ffcfed..d1a099cf72 100644
---- a/target/rx/cpu.h
-+++ b/target/rx/cpu.h
-@@ -126,8 +126,10 @@ bool rx_cpu_exec_interrupt(CPUState *cpu, int int_req);
- hwaddr rx_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
- #endif /* !CONFIG_USER_ONLY */
- void rx_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
--int rx_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
--int rx_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-+int rx_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg,
-+                             bool has_xml);
-+int rx_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg,
-+                              bool has_xml);
- 
- void rx_translate_init(void);
- void rx_cpu_list(void);
-diff --git a/target/s390x/s390x-internal.h b/target/s390x/s390x-internal.h
-index 825252d728..4c2bb30358 100644
---- a/target/s390x/s390x-internal.h
-+++ b/target/s390x/s390x-internal.h
-@@ -316,8 +316,10 @@ uint16_t float128_dcmask(CPUS390XState *env, float128 f1);
- 
- 
- /* gdbstub.c */
--int s390_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
--int s390_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-+int s390_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg,
-+                               bool has_xml);
-+int s390_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg,
-+                                bool has_xml);
- void s390_cpu_gdb_init(CPUState *cs);
- 
- 
-diff --git a/target/sh4/cpu.h b/target/sh4/cpu.h
-index 1399d3840f..74c8f0f574 100644
---- a/target/sh4/cpu.h
-+++ b/target/sh4/cpu.h
-@@ -214,8 +214,10 @@ struct ArchCPU {
- 
- 
- void superh_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
--int superh_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
--int superh_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-+int superh_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg,
-+                                 bool has_xml);
-+int superh_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg,
-+                                  bool has_xml);
- G_NORETURN void superh_cpu_do_unaligned_access(CPUState *cpu, vaddr addr,
-                                                MMUAccessType access_type, int mmu_idx,
-                                                uintptr_t retaddr);
-diff --git a/target/sparc/cpu.h b/target/sparc/cpu.h
-index 98044572f2..b03174938c 100644
---- a/target/sparc/cpu.h
-+++ b/target/sparc/cpu.h
-@@ -573,8 +573,10 @@ hwaddr sparc_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
- #endif
- 
- void sparc_cpu_do_interrupt(CPUState *cpu);
--int sparc_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
--int sparc_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-+int sparc_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg,
-+                                bool has_xml);
-+int sparc_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg,
-+                                 bool has_xml);
- G_NORETURN void sparc_cpu_do_unaligned_access(CPUState *cpu, vaddr addr,
-                                               MMUAccessType access_type,
-                                               int mmu_idx,
-diff --git a/target/tricore/cpu.h b/target/tricore/cpu.h
-index 3708405be8..7da6c88a15 100644
---- a/target/tricore/cpu.h
-+++ b/target/tricore/cpu.h
-@@ -361,8 +361,10 @@ enum {
- 
- uint32_t psw_read(CPUTriCoreState *env);
- void psw_write(CPUTriCoreState *env, uint32_t val);
--int tricore_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n);
--int tricore_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n);
-+int tricore_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n,
-+                                  bool has_xml);
-+int tricore_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n,
-+                                   bool has_xml);
- 
- void fpu_set_state(CPUTriCoreState *env);
- 
-diff --git a/target/xtensa/cpu.h b/target/xtensa/cpu.h
-index 87fe992ba6..093593eb0c 100644
---- a/target/xtensa/cpu.h
-+++ b/target/xtensa/cpu.h
-@@ -581,8 +581,10 @@ hwaddr xtensa_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
- void xtensa_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
- void xtensa_count_regs(const XtensaConfig *config,
-                        unsigned *n_regs, unsigned *n_core_regs);
--int xtensa_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
--int xtensa_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-+int xtensa_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg,
-+                                 bool has_xml);
-+int xtensa_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg,
-+                                  bool has_xml);
- G_NORETURN void xtensa_cpu_do_unaligned_access(CPUState *cpu, vaddr addr,
-                                                MMUAccessType access_type, int mmu_idx,
-                                                uintptr_t retaddr);
+ /* in gdbstub-xml.c, generated by scripts/feature_to_c.py */
 diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-index 9955f996ac..8e0c85d7b0 100644
+index 8e0c85d7b0..aa165111db 100644
 --- a/gdbstub/gdbstub.c
 +++ b/gdbstub/gdbstub.c
-@@ -423,7 +423,7 @@ static int gdb_read_register(CPUState *cpu, GByteArray *buf, int reg)
+@@ -416,14 +416,32 @@ const GDBFeature *gdb_find_static_feature(const char *xmlname)
+     return NULL;
+ }
+ 
+-static int gdb_read_register(CPUState *cpu, GByteArray *buf, int reg)
++void gdb_foreach_feature(CPUState *cpu,
++                         void (* callback)(void *, const GDBFeature *, int),
++                         void *opaque)
++{
++    CPUClass *cc = CPU_GET_CLASS(cpu);
++    GDBRegisterState *r;
++
++    if (!cc->gdb_core_feature) {
++        return;
++    }
++
++    callback(opaque, cc->gdb_core_feature, 0);
++
++    for (r = cpu->gdb_regs; r; r = r->next) {
++        callback(opaque, r->feature, r->base_reg);
++    }
++}
++
++int gdb_read_register(CPUState *cpu, GByteArray *buf, int reg, bool has_xml)
+ {
+     CPUClass *cc = CPU_GET_CLASS(cpu);
+     CPUArchState *env = cpu->env_ptr;
      GDBRegisterState *r;
  
      if (reg < cc->gdb_num_core_regs) {
--        return cc->gdb_read_register(cpu, buf, reg);
-+        return cc->gdb_read_register(cpu, buf, reg, gdb_has_xml);
+-        return cc->gdb_read_register(cpu, buf, reg, gdb_has_xml);
++        return cc->gdb_read_register(cpu, buf, reg, has_xml);
      }
  
      for (r = cpu->gdb_regs; r; r = r->next) {
-@@ -441,7 +441,7 @@ static int gdb_write_register(CPUState *cpu, uint8_t *mem_buf, int reg)
+@@ -434,14 +452,15 @@ static int gdb_read_register(CPUState *cpu, GByteArray *buf, int reg)
+     return 0;
+ }
+ 
+-static int gdb_write_register(CPUState *cpu, uint8_t *mem_buf, int reg)
++static int gdb_write_register(CPUState *cpu, uint8_t *mem_buf, int reg,
++                              bool has_xml)
+ {
+     CPUClass *cc = CPU_GET_CLASS(cpu);
+     CPUArchState *env = cpu->env_ptr;
      GDBRegisterState *r;
  
      if (reg < cc->gdb_num_core_regs) {
--        return cc->gdb_write_register(cpu, mem_buf, reg);
-+        return cc->gdb_write_register(cpu, mem_buf, reg, gdb_has_xml);
+-        return cc->gdb_write_register(cpu, mem_buf, reg, gdb_has_xml);
++        return cc->gdb_write_register(cpu, mem_buf, reg, has_xml);
      }
  
      for (r = cpu->gdb_regs; r; r = r->next) {
-diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
-index ced66c2b34..549f52f46f 100644
---- a/hw/core/cpu-common.c
-+++ b/hw/core/cpu-common.c
-@@ -89,12 +89,14 @@ void cpu_exit(CPUState *cpu)
-     qatomic_set(&cpu->icount_decr_ptr->u16.high, -1);
+@@ -1067,7 +1086,7 @@ static void handle_set_reg(GArray *params, void *user_ctx)
+     reg_size = strlen(get_param(params, 1)->data) / 2;
+     gdb_hextomem(gdbserver_state.mem_buf, get_param(params, 1)->data, reg_size);
+     gdb_write_register(gdbserver_state.g_cpu, gdbserver_state.mem_buf->data,
+-                       get_param(params, 0)->val_ull);
++                       get_param(params, 0)->val_ull, gdb_has_xml);
+     gdb_put_packet("OK");
  }
  
--static int cpu_common_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg)
-+static int cpu_common_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg,
-+                                        bool has_xml)
- {
-     return 0;
- }
+@@ -1087,7 +1106,8 @@ static void handle_get_reg(GArray *params, void *user_ctx)
  
--static int cpu_common_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg)
-+static int cpu_common_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg,
-+                                         bool has_xml)
- {
-     return 0;
- }
-diff --git a/target/alpha/gdbstub.c b/target/alpha/gdbstub.c
-index 0f8fa150f8..c5b4a190f3 100644
---- a/target/alpha/gdbstub.c
-+++ b/target/alpha/gdbstub.c
-@@ -21,7 +21,8 @@
- #include "cpu.h"
- #include "gdbstub/helpers.h"
- 
--int alpha_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-+int alpha_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n,
-+                                bool has_xml)
- {
-     AlphaCPU *cpu = ALPHA_CPU(cs);
-     CPUAlphaState *env = &cpu->env;
-@@ -57,7 +58,8 @@ int alpha_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-     return gdb_get_regl(mem_buf, val);
- }
- 
--int alpha_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-+int alpha_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n,
-+                                 bool has_xml)
- {
-     AlphaCPU *cpu = ALPHA_CPU(cs);
-     CPUAlphaState *env = &cpu->env;
-diff --git a/target/arm/gdbstub.c b/target/arm/gdbstub.c
-index 56d24028f6..f941186b58 100644
---- a/target/arm/gdbstub.c
-+++ b/target/arm/gdbstub.c
-@@ -37,7 +37,8 @@ typedef struct RegisterSysregFeatureParam {
-    We hack round this by giving the FPA regs zero size when talking to a
-    newer gdb.  */
- 
--int arm_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-+int arm_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n,
-+                              bool has_xml)
- {
-     ARMCPU *cpu = ARM_CPU(cs);
-     CPUARMState *env = &cpu->env;
-@@ -48,7 +49,7 @@ int arm_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+     reg_size = gdb_read_register(gdbserver_state.g_cpu,
+                                  gdbserver_state.mem_buf,
+-                                 get_param(params, 0)->val_ull);
++                                 get_param(params, 0)->val_ull,
++                                 gdb_has_xml);
+     if (!reg_size) {
+         gdb_put_packet("E14");
+         return;
+@@ -1174,7 +1194,8 @@ static void handle_write_all_regs(GArray *params, void *user_ctx)
+     for (reg_id = 0;
+          reg_id < gdbserver_state.g_cpu->gdb_num_g_regs && len > 0;
+          reg_id++) {
+-        reg_size = gdb_write_register(gdbserver_state.g_cpu, registers, reg_id);
++        reg_size = gdb_write_register(gdbserver_state.g_cpu, registers, reg_id,
++                                      gdb_has_xml);
+         len -= reg_size;
+         registers += reg_size;
      }
-     if (n < 24) {
-         /* FPA registers.  */
--        if (gdb_has_xml) {
-+        if (has_xml) {
-             return 0;
-         }
-         return gdb_get_zeroes(mem_buf, 12);
-@@ -56,7 +57,7 @@ int arm_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-     switch (n) {
-     case 24:
-         /* FPA status register.  */
--        if (gdb_has_xml) {
-+        if (has_xml) {
-             return 0;
-         }
-         return gdb_get_reg32(mem_buf, 0);
-@@ -72,7 +73,8 @@ int arm_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-     return 0;
- }
- 
--int arm_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-+int arm_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n,
-+                               bool has_xml)
- {
-     ARMCPU *cpu = ARM_CPU(cs);
-     CPUARMState *env = &cpu->env;
-@@ -102,7 +104,7 @@ int arm_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+@@ -1192,7 +1213,8 @@ static void handle_read_all_regs(GArray *params, void *user_ctx)
+     for (reg_id = 0; reg_id < gdbserver_state.g_cpu->gdb_num_g_regs; reg_id++) {
+         len += gdb_read_register(gdbserver_state.g_cpu,
+                                  gdbserver_state.mem_buf,
+-                                 reg_id);
++                                 reg_id,
++                                 gdb_has_xml);
      }
-     if (n < 24) { /* 16-23 */
-         /* FPA registers (ignored).  */
--        if (gdb_has_xml) {
-+        if (has_xml) {
-             return 0;
-         }
-         return 12;
-@@ -110,7 +112,7 @@ int arm_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-     switch (n) {
-     case 24:
-         /* FPA status register (ignored).  */
--        if (gdb_has_xml) {
-+        if (has_xml) {
-             return 0;
-         }
-         return 4;
-diff --git a/target/arm/gdbstub64.c b/target/arm/gdbstub64.c
-index c5ed7c0aa3..aff3836037 100644
---- a/target/arm/gdbstub64.c
-+++ b/target/arm/gdbstub64.c
-@@ -22,7 +22,8 @@
- #include "internals.h"
- #include "gdbstub/helpers.h"
+     g_assert(len == gdbserver_state.mem_buf->len);
  
--int aarch64_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-+int aarch64_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n,
-+                                  bool has_xml)
- {
-     ARMCPU *cpu = ARM_CPU(cs);
-     CPUARMState *env = &cpu->env;
-@@ -43,7 +44,8 @@ int aarch64_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-     return 0;
- }
- 
--int aarch64_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-+int aarch64_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n,
-+                                   bool has_xml)
- {
-     ARMCPU *cpu = ARM_CPU(cs);
-     CPUARMState *env = &cpu->env;
-diff --git a/target/avr/gdbstub.c b/target/avr/gdbstub.c
-index 150344d8b9..c40f4ecd4b 100644
---- a/target/avr/gdbstub.c
-+++ b/target/avr/gdbstub.c
-@@ -21,7 +21,8 @@
- #include "qemu/osdep.h"
- #include "gdbstub/helpers.h"
- 
--int avr_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-+int avr_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n,
-+                              bool has_xml)
- {
-     AVRCPU *cpu = AVR_CPU(cs);
-     CPUAVRState *env = &cpu->env;
-@@ -51,7 +52,8 @@ int avr_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-     return 0;
- }
- 
--int avr_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-+int avr_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n,
-+                               bool has_xml)
- {
-     AVRCPU *cpu = AVR_CPU(cs);
-     CPUAVRState *env = &cpu->env;
-diff --git a/target/cris/gdbstub.c b/target/cris/gdbstub.c
-index 25c0ca33a5..2b5c0d5f14 100644
---- a/target/cris/gdbstub.c
-+++ b/target/cris/gdbstub.c
-@@ -21,7 +21,8 @@
- #include "cpu.h"
- #include "gdbstub/helpers.h"
- 
--int crisv10_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-+int crisv10_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n,
-+                                  bool has_xml)
- {
-     CRISCPU *cpu = CRIS_CPU(cs);
-     CPUCRISState *env = &cpu->env;
-@@ -53,7 +54,8 @@ int crisv10_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-     return 0;
- }
- 
--int cris_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-+int cris_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n,
-+                               bool has_xml)
- {
-     CRISCPU *cpu = CRIS_CPU(cs);
-     CPUCRISState *env = &cpu->env;
-@@ -88,7 +90,8 @@ int cris_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-     return 0;
- }
- 
--int cris_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-+int cris_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n,
-+                                bool has_xml)
- {
-     CRISCPU *cpu = CRIS_CPU(cs);
-     CPUCRISState *env = &cpu->env;
-diff --git a/target/hexagon/gdbstub.c b/target/hexagon/gdbstub.c
-index 54d37e006e..42fa563fc4 100644
---- a/target/hexagon/gdbstub.c
-+++ b/target/hexagon/gdbstub.c
-@@ -20,7 +20,8 @@
- #include "cpu.h"
- #include "internal.h"
- 
--int hexagon_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-+int hexagon_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n,
-+                              bool has_xml)
- {
-     HexagonCPU *cpu = HEXAGON_CPU(cs);
-     CPUHexagonState *env = &cpu->env;
-@@ -40,7 +41,8 @@ int hexagon_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-     g_assert_not_reached();
- }
- 
--int hexagon_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-+int hexagon_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n,
-+                               bool has_xml)
- {
-     HexagonCPU *cpu = HEXAGON_CPU(cs);
-     CPUHexagonState *env = &cpu->env;
-diff --git a/target/hppa/gdbstub.c b/target/hppa/gdbstub.c
-index 48a514384f..44a1869d54 100644
---- a/target/hppa/gdbstub.c
-+++ b/target/hppa/gdbstub.c
-@@ -21,7 +21,8 @@
- #include "cpu.h"
- #include "gdbstub/helpers.h"
- 
--int hppa_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-+int hppa_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n,
-+                               bool has_xml)
- {
-     HPPACPU *cpu = HPPA_CPU(cs);
-     CPUHPPAState *env = &cpu->env;
-@@ -146,7 +147,8 @@ int hppa_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-     }
- }
- 
--int hppa_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-+int hppa_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n,
-+                                bool has_xml)
- {
-     HPPACPU *cpu = HPPA_CPU(cs);
-     CPUHPPAState *env = &cpu->env;
-diff --git a/target/i386/gdbstub.c b/target/i386/gdbstub.c
-index ebb000df6a..56c9aedd6b 100644
---- a/target/i386/gdbstub.c
-+++ b/target/i386/gdbstub.c
-@@ -32,9 +32,7 @@ static const int gpr_map[16] = {
- static const int gpr_map32[8] = { 0, 1, 2, 3, 4, 5, 6, 7 };
- 
- /*
-- * Keep these in sync with assignment to
-- * gdb_num_core_regs in target/i386/cpu.c
-- * and with the machine description
-+ * Keep these in sync with the machine description
-  */
- 
- /*
-@@ -96,7 +94,8 @@ static int gdb_write_reg_cs64(uint32_t hflags, uint8_t *buf, target_ulong *val)
-     return 4;
- }
- 
--int x86_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-+int x86_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n,
-+                              bool has_xml)
- {
-     X86CPU *cpu = X86_CPU(cs);
-     CPUX86State *env = &cpu->env;
-@@ -248,7 +247,8 @@ static int x86_cpu_gdb_load_seg(X86CPU *cpu, X86Seg sreg, uint8_t *mem_buf)
-     return 4;
- }
- 
--int x86_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-+int x86_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n,
-+                               bool has_xml)
- {
-     X86CPU *cpu = X86_CPU(cs);
-     CPUX86State *env = &cpu->env;
-diff --git a/target/loongarch/gdbstub.c b/target/loongarch/gdbstub.c
-index 2886b106bb..6b14f73084 100644
---- a/target/loongarch/gdbstub.c
-+++ b/target/loongarch/gdbstub.c
-@@ -30,7 +30,8 @@ void write_fcc(CPULoongArchState *env, uint64_t val)
-     }
- }
- 
--int loongarch_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-+int loongarch_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n,
-+                                    bool has_xml)
- {
-     LoongArchCPU *cpu = LOONGARCH_CPU(cs);
-     CPULoongArchState *env = &cpu->env;
-@@ -48,7 +49,8 @@ int loongarch_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-     return 0;
- }
- 
--int loongarch_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-+int loongarch_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n,
-+                                     bool has_xml)
- {
-     LoongArchCPU *cpu = LOONGARCH_CPU(cs);
-     CPULoongArchState *env = &cpu->env;
-diff --git a/target/m68k/gdbstub.c b/target/m68k/gdbstub.c
-index 1e5f033a12..24e636cddc 100644
---- a/target/m68k/gdbstub.c
-+++ b/target/m68k/gdbstub.c
-@@ -21,7 +21,8 @@
- #include "cpu.h"
- #include "gdbstub/helpers.h"
- 
--int m68k_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-+int m68k_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n,
-+                               bool has_xml)
- {
-     M68kCPU *cpu = M68K_CPU(cs);
-     CPUM68KState *env = &cpu->env;
-@@ -48,7 +49,8 @@ int m68k_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-     return 0;
- }
- 
--int m68k_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-+int m68k_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n,
-+                                bool has_xml)
- {
-     M68kCPU *cpu = M68K_CPU(cs);
-     CPUM68KState *env = &cpu->env;
-diff --git a/target/microblaze/gdbstub.c b/target/microblaze/gdbstub.c
-index 29ac6e9c0f..71962b98de 100644
---- a/target/microblaze/gdbstub.c
-+++ b/target/microblaze/gdbstub.c
-@@ -46,7 +46,8 @@ enum {
-     GDB_SP_SHR,
- };
- 
--int mb_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-+int mb_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n,
-+                             bool has_xml)
- {
-     MicroBlazeCPU *cpu = MICROBLAZE_CPU(cs);
-     CPUClass *cc = CPU_GET_CLASS(cs);
-@@ -111,7 +112,8 @@ int mb_cpu_gdb_read_stack_protect(CPUMBState *env, GByteArray *mem_buf, int n)
-     return gdb_get_reg32(mem_buf, val);
- }
- 
--int mb_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-+int mb_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n,
-+                              bool has_xml)
- {
-     MicroBlazeCPU *cpu = MICROBLAZE_CPU(cs);
-     CPUClass *cc = CPU_GET_CLASS(cs);
-diff --git a/target/mips/gdbstub.c b/target/mips/gdbstub.c
-index 62d7b72407..9022fc5375 100644
---- a/target/mips/gdbstub.c
-+++ b/target/mips/gdbstub.c
-@@ -23,7 +23,8 @@
- #include "gdbstub/helpers.h"
- #include "fpu_helper.h"
- 
--int mips_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-+int mips_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n,
-+                               bool has_xml)
- {
-     MIPSCPU *cpu = MIPS_CPU(cs);
-     CPUMIPSState *env = &cpu->env;
-@@ -76,7 +77,8 @@ int mips_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-     return 0;
- }
- 
--int mips_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-+int mips_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n,
-+                                bool has_xml)
- {
-     MIPSCPU *cpu = MIPS_CPU(cs);
-     CPUMIPSState *env = &cpu->env;
-diff --git a/target/nios2/cpu.c b/target/nios2/cpu.c
-index bc5cbf81c2..5015866b4d 100644
---- a/target/nios2/cpu.c
-+++ b/target/nios2/cpu.c
-@@ -280,7 +280,8 @@ static void nios2_cpu_disas_set_info(CPUState *cpu, disassemble_info *info)
-     info->print_insn = print_insn_nios2;
- }
- 
--static int nios2_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-+static int nios2_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n,
-+                                       bool has_xml)
- {
-     Nios2CPU *cpu = NIOS2_CPU(cs);
-     CPUNios2State *env = &cpu->env;
-@@ -305,7 +306,8 @@ static int nios2_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-     return gdb_get_reg32(mem_buf, val);
- }
- 
--static int nios2_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-+static int nios2_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n,
-+                                        bool has_xml)
- {
-     Nios2CPU *cpu = NIOS2_CPU(cs);
-     CPUClass *cc = CPU_GET_CLASS(cs);
-diff --git a/target/openrisc/gdbstub.c b/target/openrisc/gdbstub.c
-index d1074a0581..5ac841e52a 100644
---- a/target/openrisc/gdbstub.c
-+++ b/target/openrisc/gdbstub.c
-@@ -21,7 +21,8 @@
- #include "cpu.h"
- #include "gdbstub/helpers.h"
- 
--int openrisc_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-+int openrisc_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n,
-+                                   bool has_xml)
- {
-     OpenRISCCPU *cpu = OPENRISC_CPU(cs);
-     CPUOpenRISCState *env = &cpu->env;
-@@ -46,7 +47,8 @@ int openrisc_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-     return 0;
- }
- 
--int openrisc_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-+int openrisc_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n,
-+                                    bool has_xml)
- {
-     OpenRISCCPU *cpu = OPENRISC_CPU(cs);
-     CPUClass *cc = CPU_GET_CLASS(cs);
-diff --git a/target/ppc/gdbstub.c b/target/ppc/gdbstub.c
-index ac4ed12371..fba4b9a2fa 100644
---- a/target/ppc/gdbstub.c
-+++ b/target/ppc/gdbstub.c
-@@ -48,7 +48,7 @@ static int ppc_gdb_register_len_apple(int n)
-     }
- }
- 
--static int ppc_gdb_register_len(int n)
-+static int ppc_gdb_register_len(int n, bool has_xml)
- {
-     switch (n) {
-     case 0 ... 31:
-@@ -56,7 +56,7 @@ static int ppc_gdb_register_len(int n)
-         return sizeof(target_ulong);
-     case 32 ... 63:
-         /* fprs */
--        if (gdb_has_xml) {
-+        if (has_xml) {
-             return 0;
-         }
-         return 8;
-@@ -76,7 +76,7 @@ static int ppc_gdb_register_len(int n)
-         return sizeof(target_ulong);
-     case 70:
-         /* fpscr */
--        if (gdb_has_xml) {
-+        if (has_xml) {
-             return 0;
-         }
-         return sizeof(target_ulong);
-@@ -118,12 +118,13 @@ void ppc_maybe_bswap_register(CPUPPCState *env, uint8_t *mem_buf, int len)
-  * the FP regs zero size when talking to a newer gdb.
-  */
- 
--int ppc_cpu_gdb_read_register(CPUState *cs, GByteArray *buf, int n)
-+int ppc_cpu_gdb_read_register(CPUState *cs, GByteArray *buf, int n,
-+                              bool has_xml)
- {
-     PowerPCCPU *cpu = POWERPC_CPU(cs);
-     CPUPPCState *env = &cpu->env;
-     uint8_t *mem_buf;
--    int r = ppc_gdb_register_len(n);
-+    int r = ppc_gdb_register_len(n, has_xml);
- 
-     if (!r) {
-         return r;
-@@ -168,7 +169,8 @@ int ppc_cpu_gdb_read_register(CPUState *cs, GByteArray *buf, int n)
-     return r;
- }
- 
--int ppc_cpu_gdb_read_register_apple(CPUState *cs, GByteArray *buf, int n)
-+int ppc_cpu_gdb_read_register_apple(CPUState *cs, GByteArray *buf, int n,
-+                                    bool has_xml)
- {
-     PowerPCCPU *cpu = POWERPC_CPU(cs);
-     CPUPPCState *env = &cpu->env;
-@@ -222,11 +224,12 @@ int ppc_cpu_gdb_read_register_apple(CPUState *cs, GByteArray *buf, int n)
-     return r;
- }
- 
--int ppc_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-+int ppc_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n,
-+                               bool has_xml)
- {
-     PowerPCCPU *cpu = POWERPC_CPU(cs);
-     CPUPPCState *env = &cpu->env;
--    int r = ppc_gdb_register_len(n);
-+    int r = ppc_gdb_register_len(n, has_xml);
- 
-     if (!r) {
-         return r;
-@@ -269,7 +272,8 @@ int ppc_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-     }
-     return r;
- }
--int ppc_cpu_gdb_write_register_apple(CPUState *cs, uint8_t *mem_buf, int n)
-+int ppc_cpu_gdb_write_register_apple(CPUState *cs, uint8_t *mem_buf, int n,
-+                                     bool has_xml)
- {
-     PowerPCCPU *cpu = POWERPC_CPU(cs);
-     CPUPPCState *env = &cpu->env;
-diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-index b3d4d4de3e..060bfa4317 100644
---- a/target/riscv/gdbstub.c
-+++ b/target/riscv/gdbstub.c
-@@ -47,7 +47,8 @@ static const struct TypeSize vec_lanes[] = {
-     { "uint8", "bytes", 8, 'b' },
- };
- 
--int riscv_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-+int riscv_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n,
-+                                bool has_xml)
- {
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     CPURISCVState *env = &cpu->env;
-@@ -73,7 +74,8 @@ int riscv_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-     return 0;
- }
- 
--int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-+int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n,
-+                                 bool has_xml)
- {
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     CPURISCVState *env = &cpu->env;
-diff --git a/target/rx/gdbstub.c b/target/rx/gdbstub.c
-index d7e0e6689b..57d5ed11eb 100644
---- a/target/rx/gdbstub.c
-+++ b/target/rx/gdbstub.c
-@@ -19,7 +19,8 @@
- #include "cpu.h"
- #include "gdbstub/helpers.h"
- 
--int rx_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-+int rx_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n,
-+                             bool has_xml)
- {
-     RXCPU *cpu = RX_CPU(cs);
-     CPURXState *env = &cpu->env;
-@@ -51,7 +52,8 @@ int rx_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-     return 0;
- }
- 
--int rx_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-+int rx_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n,
-+                              bool has_xml)
- {
-     RXCPU *cpu = RX_CPU(cs);
-     CPURXState *env = &cpu->env;
-diff --git a/target/s390x/gdbstub.c b/target/s390x/gdbstub.c
-index 02c388dc32..57871e3b24 100644
---- a/target/s390x/gdbstub.c
-+++ b/target/s390x/gdbstub.c
-@@ -28,7 +28,8 @@
- #include "sysemu/hw_accel.h"
- #include "sysemu/tcg.h"
- 
--int s390_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-+int s390_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n,
-+                               bool has_xml)
- {
-     S390CPU *cpu = S390_CPU(cs);
-     CPUS390XState *env = &cpu->env;
-@@ -44,7 +45,8 @@ int s390_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-     return 0;
- }
- 
--int s390_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-+int s390_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n,
-+                                bool has_xml)
- {
-     S390CPU *cpu = S390_CPU(cs);
-     CPUS390XState *env = &cpu->env;
-diff --git a/target/sh4/gdbstub.c b/target/sh4/gdbstub.c
-index d8e199fc06..9afe6fc116 100644
---- a/target/sh4/gdbstub.c
-+++ b/target/sh4/gdbstub.c
-@@ -24,7 +24,8 @@
- /* Hint: Use "set architecture sh4" in GDB to see fpu registers */
- /* FIXME: We should use XML for this.  */
- 
--int superh_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-+int superh_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n,
-+                                 bool has_xml)
- {
-     SuperHCPU *cpu = SUPERH_CPU(cs);
-     CPUSH4State *env = &cpu->env;
-@@ -74,7 +75,8 @@ int superh_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-     return 0;
- }
- 
--int superh_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-+int superh_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n,
-+                                  bool has_xml)
- {
-     SuperHCPU *cpu = SUPERH_CPU(cs);
-     CPUSH4State *env = &cpu->env;
-diff --git a/target/sparc/gdbstub.c b/target/sparc/gdbstub.c
-index a1c8fdc4d5..288cf7d6f7 100644
---- a/target/sparc/gdbstub.c
-+++ b/target/sparc/gdbstub.c
-@@ -27,7 +27,8 @@
- #define gdb_get_rega(buf, val) gdb_get_regl(buf, val)
- #endif
- 
--int sparc_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-+int sparc_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n,
-+                                bool has_xml)
- {
-     SPARCCPU *cpu = SPARC_CPU(cs);
-     CPUSPARCState *env = &cpu->env;
-@@ -104,7 +105,8 @@ int sparc_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-     return 0;
- }
- 
--int sparc_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-+int sparc_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n,
-+                                 bool has_xml)
- {
-     SPARCCPU *cpu = SPARC_CPU(cs);
-     CPUSPARCState *env = &cpu->env;
-diff --git a/target/tricore/gdbstub.c b/target/tricore/gdbstub.c
-index e8f8e5e6ea..a06e590344 100644
---- a/target/tricore/gdbstub.c
-+++ b/target/tricore/gdbstub.c
-@@ -104,7 +104,8 @@ static void tricore_cpu_gdb_write_csfr(CPUTriCoreState *env, int n,
- }
- 
- 
--int tricore_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-+int tricore_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n,
-+                                  bool has_xml)
- {
-     TriCoreCPU *cpu = TRICORE_CPU(cs);
-     CPUTriCoreState *env = &cpu->env;
-@@ -119,7 +120,8 @@ int tricore_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-     return 0;
- }
- 
--int tricore_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-+int tricore_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n,
-+                                   bool has_xml)
- {
-     TriCoreCPU *cpu = TRICORE_CPU(cs);
-     CPUTriCoreState *env = &cpu->env;
-diff --git a/target/xtensa/gdbstub.c b/target/xtensa/gdbstub.c
-index 4b3bfb7e59..81d97b51b8 100644
---- a/target/xtensa/gdbstub.c
-+++ b/target/xtensa/gdbstub.c
-@@ -63,7 +63,8 @@ void xtensa_count_regs(const XtensaConfig *config,
-     }
- }
- 
--int xtensa_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-+int xtensa_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n,
-+                                 bool has_xml)
- {
-     XtensaCPU *cpu = XTENSA_CPU(cs);
-     CPUXtensaState *env = &cpu->env;
-@@ -118,7 +119,8 @@ int xtensa_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-     }
- }
- 
--int xtensa_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-+int xtensa_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n,
-+                                  bool has_xml)
- {
-     XtensaCPU *cpu = XTENSA_CPU(cs);
-     CPUXtensaState *env = &cpu->env;
 -- 
 2.41.0
 
