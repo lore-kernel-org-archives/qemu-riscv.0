@@ -4,85 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25A71EB64DD
-	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Aug 2023 04:17:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABF99C00528
+	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Aug 2023 09:30:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qRPle-0006uU-NQ; Thu, 03 Aug 2023 00:16:54 -0400
+	id 1qRUeN-0005XC-OO; Thu, 03 Aug 2023 05:29:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1qRPld-0006uF-Tv
- for qemu-riscv@nongnu.org; Thu, 03 Aug 2023 00:16:53 -0400
-Received: from mail-oi1-x22c.google.com ([2607:f8b0:4864:20::22c])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1qRUeM-0005Wm-4n
+ for qemu-riscv@nongnu.org; Thu, 03 Aug 2023 05:29:42 -0400
+Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1qRPlb-00005D-1p
- for qemu-riscv@nongnu.org; Thu, 03 Aug 2023 00:16:53 -0400
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-3a5a7ebdd9fso402012b6e.0
- for <qemu-riscv@nongnu.org>; Wed, 02 Aug 2023 21:16:48 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1qRUeK-0005FP-Du
+ for qemu-riscv@nongnu.org; Thu, 03 Aug 2023 05:29:41 -0400
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-52229f084beso905491a12.2
+ for <qemu-riscv@nongnu.org>; Thu, 03 Aug 2023 02:29:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1691036207; x=1691641007;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=IoxhNX4gbtgGPpGZZxwZsgwFIH4+/dp5oUN5r9FD1E0=;
- b=kdojOvCNhAsNc7r/WAsGsLCpVuhqsne+48zamG1n1ls+bjVR3GG7SqXdptoJpBpRTq
- bSTAZezlPpmBGEzih7IAL20pQHpArGo/WowpzavIO0+8abRxgLyJCycU0SEz0+fyPtoJ
- Q2uYU6TkuZA/dmLmMx36L1CxxfvyFHUsaK8Kz0Ar2dMNLzP9pE1qrip3wW4LMH1jVUN8
- M74wXL6DLh3SOZyba/Cy2I0dAvYpw2szQu2dB2h3zNnJZFkOuD9f/4Ym5eQi/USnB00r
- Noi3uUvpntIlGJw1uPlK536gc8Fkpg7EvkbEPnm4iJw7DJqW2pa3nNfydEzWiu1XY5Og
- AFLw==
+ d=ventanamicro.com; s=google; t=1691054978; x=1691659778;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=rlrE5XJ09/9REigZYxsyn6zKBhJpaEz0mtorTQki3T0=;
+ b=lV9N+gPdPUUhV3xLFoY+haHJSKqCDbLhTLMI9BFgN1+uDR8ySZ8zG0niLKqjcqsLM5
+ mnHwVm7+aSUJYIOnKTNEIaKXcUxrzLoK2DK9Ht/anVAFzbdnmDbwNs6p8qpg4mS0J4gu
+ m06f7prUv6MNFh4hLMTScilX2ZtVjWIhbxd2jI/5tFhy322SV+MIdNb/Vn8awB3p4jSS
+ 9sduhcOqYPIXBPao+dFKilGX0zJseP+5PVWwODuW0YPZ2LoRufqhROrVZNmrE09jECHu
+ KHQR+C5CSh0lKe9c5yDzizwBAX/zcmNtbF9Lj+Q/ZlR4OSWJdficev9x6yKgJAUriv3B
+ vdNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691036207; x=1691641007;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=IoxhNX4gbtgGPpGZZxwZsgwFIH4+/dp5oUN5r9FD1E0=;
- b=ZbvtgkpPyPUuLqwE72hWp0duJ36MnRwA2rpgZuR/S0PjozerLYhyA3O00tilASYQAP
- C9kDGVjiOlYCKioPwJXZ6hha7vl5DxLGWrX0VKr22subg8S7Fu49X3SgU0prQxn9yfun
- maFuaMNo6zTcZFKdETEXsxtYQbdIw1R5TNSHTZucblaoiJRRrPN7QYFmiLJdKkgR2B4g
- t2fgvt4AUTlnafOJH4Ei6jXU2M+vzH78X4EEmDDcdCQ3oecOVmg3iZhNidfo5+LajZ0Y
- /SWZxnDb+vAgWMypMHCW2A/D3EuKqGgVBN4g5xn0+EgfIOu+m10XXoz4uwW5SRV7/VDm
- UK3g==
-X-Gm-Message-State: ABy/qLYmkbZ8qpRpKHgDemgz8y6vOwH7ie0D2adkDyJZNb/iVlAB/IDq
- 0YCyx1O7zA4gLALGOC2nVE3Nbw==
-X-Google-Smtp-Source: APBJJlE3nu3QLl1uEGVoClu0lXpwx0nKsYqNUV80DWuKnaF6jQINmQ7Bhi0kbE9K3Ea2yPNT69Jecw==
-X-Received: by 2002:a05:6358:9895:b0:134:de8b:17f0 with SMTP id
- q21-20020a056358989500b00134de8b17f0mr9110099rwa.19.1691036207608; 
- Wed, 02 Aug 2023 21:16:47 -0700 (PDT)
-Received: from [10.11.0.74] (125-228-20-175.hinet-ip.hinet.net.
- [125.228.20.175]) by smtp.gmail.com with ESMTPSA id
- u10-20020aa7838a000000b006870814361bsm10448916pfm.114.2023.08.02.21.16.46
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 02 Aug 2023 21:16:47 -0700 (PDT)
-Message-ID: <ad20c2b0-9c1e-f1aa-1a5d-e5ea5df9b03e@sifive.com>
-Date: Thu, 3 Aug 2023 12:16:44 +0800
+ d=1e100.net; s=20221208; t=1691054978; x=1691659778;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rlrE5XJ09/9REigZYxsyn6zKBhJpaEz0mtorTQki3T0=;
+ b=Ss7L6t1+7/Q1usrn91nha3Ltu9NznC/g/ngctHiBhfc8fsvZTrovnG8rXO2UG5PK01
+ 5gN6HPPxLJ0PqOCxgYrsdWlMiuDrd+tSGntNwg57T87BebbMsf6YN7XLV31/6PCvyX27
+ BBQtMBfd1F1RobEOD1GHHeNLPinOzl8JV5JLjufcJVlwKLBhnJ8rmljfgEkUD25YXmQz
+ dPTQN2nB1m1d57QX4bKLEL4tVusLGbLqxnFi6lTWppYbo9/x3qI80YIBdaecUOerRukz
+ bJrZpo+BcOfYMLmSrHJ+mvA9cn+CyiHd9CrhjKQDPhZJzsRMYj51KaahjwEirrCB+Gii
+ Myhw==
+X-Gm-Message-State: ABy/qLa8j0wtSK565VFTCsosnm5tINLLttWb0mXNrtpQ0+7JKZs2Oe6c
+ n7KcUt3eftrpdBJpSqcVYZbw7A==
+X-Google-Smtp-Source: APBJJlEDJE2zyoxWF7faMxf2DP8aTobs0O0bRZdmJE3qAkYiEAds2ny5iLYkvkd9GJvMsuOXLXP3dw==
+X-Received: by 2002:a17:906:9bdb:b0:982:79fa:4532 with SMTP id
+ de27-20020a1709069bdb00b0098279fa4532mr7432730ejc.53.1691054978408; 
+ Thu, 03 Aug 2023 02:29:38 -0700 (PDT)
+Received: from localhost (212-5-140-29.ip.btc-net.bg. [212.5.140.29])
+ by smtp.gmail.com with ESMTPSA id
+ f25-20020a170906085900b00991d54db2acsm10212251ejd.44.2023.08.03.02.29.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 03 Aug 2023 02:29:38 -0700 (PDT)
+Date: Thu, 3 Aug 2023 12:29:34 +0300
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com
+Subject: Re: [PATCH] target/riscv/kvm.c: fix mvendorid size in
+ vcpu_set_machine_ids()
+Message-ID: <20230803-3d2b378004c77196efc74f09@orel>
+References: <20230802180058.281385-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.13.0
-Subject: Re: [PATCH v8 00/15] Add RISC-V vector cryptographic instruction set
- support
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, dbarboza@ventanamicro.com
-References: <20230711165917.2629866-1-max.chou@sifive.com>
- <CAKmqyKNpg=DMbidwRbR5La2GrETTfR--zKBGGgJ-eirRmCywBA@mail.gmail.com>
-Content-Language: en-US
-From: Max Chou <max.chou@sifive.com>
-In-Reply-To: <CAKmqyKNpg=DMbidwRbR5La2GrETTfR--zKBGGgJ-eirRmCywBA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22c;
- envelope-from=max.chou@sifive.com; helo=mail-oi1-x22c.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230802180058.281385-1-dbarboza@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::534;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x534.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.102,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,175 +95,102 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2023/8/2 10:54 PM, Alistair Francis wrote:
+On Wed, Aug 02, 2023 at 03:00:58PM -0300, Daniel Henrique Barboza wrote:
+> cpu->cfg.mvendorid is a 32 bit field and kvm_set_one_reg() always write
+> a target_ulong val, i.e. a 64 bit field in a 64 bit host.
+> 
+> Given that we're passing a pointer to the mvendorid field, the reg is
+> reading 64 bits starting from mvendorid and going 32 bits in the next
+> field, marchid. Here's an example:
+> 
+> $ ./qemu-system-riscv64 -machine virt,accel=kvm -m 2G -smp 1 \
+>    -cpu rv64,marchid=0xab,mvendorid=0xcd,mimpid=0xef(...)
+> 
+> (inside the guest)
+>  # cat /proc/cpuinfo
+> processor	: 0
+> hart		: 0
+> isa		: rv64imafdc_zicbom_zicboz_zihintpause_zbb_sstc
+> mmu		: sv57
+> mvendorid	: 0xab000000cd
+> marchid		: 0xab
+> mimpid		: 0xef
+> 
+> 'mvendorid' was written as a combination of 0xab (the value from the
+> adjacent field, marchid) and its intended value 0xcd.
+> 
+> Fix it by assigning cpu->cfg.mvendorid to a target_ulong var 'reg' and
+> use it as input for kvm_set_one_reg(). Here's the result with this patch
+> applied and using the same QEMU command line:
+> 
+>  # cat /proc/cpuinfo
+> processor	: 0
+> hart		: 0
+> isa		: rv64imafdc_zicbom_zicboz_zihintpause_zbb_sstc
+> mmu		: sv57
+> mvendorid	: 0xcd
+> marchid		: 0xab
+> mimpid		: 0xef
+> 
+> This bug affects only the generic (rv64) CPUs when running with KVM in a
+> 64 bit env since the 'host' CPU does not allow the machine IDs to be
+> changed via command line.
+> 
+> Fixes: 1fb5a622f7 ("target/riscv: handle mvendorid/marchid/mimpid for KVM CPUs")
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>  target/riscv/kvm.c | 9 ++++++++-
+>  1 file changed, 8 insertions(+), 1 deletion(-)
+> 
+> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
+> index 9d8a8982f9..b1fd2233c0 100644
+> --- a/target/riscv/kvm.c
+> +++ b/target/riscv/kvm.c
+> @@ -852,12 +852,19 @@ void kvm_arch_init_irq_routing(KVMState *s)
+>  static int kvm_vcpu_set_machine_ids(RISCVCPU *cpu, CPUState *cs)
+>  {
+>      CPURISCVState *env = &cpu->env;
+> +    target_ulong reg;
 
-> On Tue, Jul 11, 2023 at 12:59 PM Max Chou <max.chou@sifive.com> wrote:
->> This patchset provides an implementation for Zvbb, Zvbc, Zvkned, Zvknh,
->> Zvksh, Zvkg, and Zvksed of the draft RISC-V vector cryptography
->> extensions as per the v20230620 version of the specification(1)(168e7b4).
->> This is an update to the patchset submitted to qemu-devel on
->> Wed, 12 Jul 2023 00:31:21 +0800
->>
->> v2:
->>
->>      Squashed commits into one commit per extension with separate
->>      commits for each refactoring.
->>      Unified trans_rvzvk*.c.inc files into one trans_rvvk.c.inc.
->>      Style fixes in insn32.decode and other files.
->>      Added macros for EGS values in translation functions.
->>      Updated from v20230303 to v20230407 of the spec:
->>          Zvkb has been split into Zvbb and Zvbc.
->>          vbrev, vclz, vctz, vcpop and vwsll have been added to Zvbb.
->>
->> v3:
->>
->>      New patch 03/19 removes redundant “cpu_vl == 0” checks from
->>      trans_rvv.c.inc.
->>      Introduction of new tcg ops has been factored out of patch 11/19
->>      and into 09/19.
->>          These ops are now added to non riscv-specific files.
->>
->> v4:
->>
->>      New patch 08/17 fixes the tcg_gen_gvec_andcs temporary variable
->>      issue.
->>      Patch 09/17 fixes imm mode for vror.vi.
->>      Rebased to riscv-to-apply.next branch (de395bb):
->>          Replace vstart constraint checking by TCG op.
->>      Verified by code examples provided by vector crypto spec repository
->>      (riscv-crypto).
->>
->> v5:
->>
->>      Imported aes-round.h for Zvkned extension.
->>          Rebased to 20230620110758.787479-1-richard.henderson@linaro.org
->>      Exposed the properties of v4 patch 17/17 to the patches that the
->>      extension was added.
->>      Removed v4 patch 08/17 that is queued to tcg-next.
->>
->> v6:
->>
->>      Resent the same content becaue v5 was splitted by broken
->>      git-send-mail
->>
->> v7:
->>
->>      Fixed endian issues
->>      Replace the TCG ops of vstart & vl EGS checking by helper function
->>      Changed the SEW selection of vsha2c[hl].vv to TCG translation
->>
->> v8:
->>
->>      Rebased to the riscv-to-apply.next branch
->>      Fixed cross win32 build issue
->>      Removed redundent swap in AES key expanding (vaeskf1 & vaeskf2)
->>
->>
->> As v20230620 is a frozen version, we are not expecting any significant
->> changes to the specification or this patch series.
->>
->> Please note that the Zvkt data-independent execution latency extension
->> (and all extensions including it) has not been implemented, and we
->> would recommend not using these patches in an environment where timing
->> attacks are an issue.
->>
->> Work performed by Dickon, Lawrence, Nazar, Kiran, and William from
->> Codethink sponsored by SiFive, as well as Max Chou and Frank Chang
->> from SiFive.
->>
->>      https://github.com/riscv/riscv-crypto/releases
->>
->> Thanks to those who have already reviewed:
->>
->>      Daniel Henrique Barboza dbarboza@ventanamicro.com
->>          [PATCH v4 09/17] target/riscv: Add Zvbb ISA extension support
->>          [PATCH v4 10/17] target/riscv: Add Zvkned ISA extension support
->>          [PATCH v4 11/17] target/riscv: Add Zvknh ISA extension support
->>          [PATCH v4 12/17] target/riscv: Add Zvksh ISA extension support
->>          [PATCH v4 13/17] target/riscv: Add Zvkg ISA extension support
->>      Weiwei Li liweiwei@iscas.ac.cn
->>          [PATCH v3 01/19] target/riscv: Refactor some of the generic vector functionality
->>          [PATCH v3 02/19] target/riscv: Refactor vector-vector translation macro
->>          [PATCH v3 03/19] target/riscv: Remove redundant "cpu_vl == 0" checks
->>          [PATCH v3 05/19] target/riscv: Move vector translation checks
->>          [PATCH v3 06/19] target/riscv: Refactor translation of vector-widening instruction
->>          [PATCH v3 07/19] target/riscv: Refactor some of the generic vector functionality
->>          [PATCH v3 19/19] target/riscv: Expose Zvk* and Zvb[b, c] cpu properties
->>      Richard Henderson richard.henderson@linaro.org
->>          [PATCH v2 02/17] target/riscv: Refactor vector-vector translation macro
->>          [PATCH v2 04/17] target/riscv: Move vector translation checks
->>          [PATCH v2 05/17] target/riscv: Refactor translation of vector-widening instruction
->>          [PATCH v2 07/17] qemu/bitops.h: Limit rotate amounts
->>          [PATCH v2 08/17] qemu/host-utils.h: Add clz and ctz functions for lower-bit integers
->>          [PATCH v2 14/17] crypto: Create sm4_subword
->>      Alistair Francis alistair.francis@wdc.com
->>          [PATCH v2 02/17] target/riscv: Refactor vector-vector translation macro
->>      Philipp Tomsich philipp.tomsich@vrull.eu
->>          Various v1 reviews
->>      Christoph Müllner christoph.muellner@vrull.eu
->>          Various v1 reviews
->>
->> Dickon Hood (2):
->>    target/riscv: Refactor translation of vector-widening instruction
->>    target/riscv: Add Zvbb ISA extension support
->>
->> Kiran Ostrolenk (4):
->>    target/riscv: Refactor some of the generic vector functionality
->>    target/riscv: Refactor vector-vector translation macro
->>    target/riscv: Refactor some of the generic vector functionality
->>    target/riscv: Add Zvknh ISA extension support
->>
->> Lawrence Hunter (2):
->>    target/riscv: Add Zvbc ISA extension support
->>    target/riscv: Add Zvksh ISA extension support
->>
->> Max Chou (3):
->>    crypto: Create sm4_subword
->>    crypto: Add SM4 constant parameter CK
->>    target/riscv: Add Zvksed ISA extension support
->>
->> Nazar Kazakov (4):
->>    target/riscv: Remove redundant "cpu_vl == 0" checks
->>    target/riscv: Move vector translation checks
->>    target/riscv: Add Zvkned ISA extension support
->>    target/riscv: Add Zvkg ISA extension support
-> Thanks!
->
-> Applied to riscv-to-apply.next
->
-> Alistair
-Thanks!
+We can use the type of cfg since KVM just gets an address and uses the
+KVM register type to determine the size. So here,
 
-We will send another patch set after the vector cryptographic spec is 
-ratified for the corresponding update (e.g. remove the `x-` prefix from 
-the cpu options, etc.).
-And with the disassembler support and the `Zvkt` & other shorthand 
-extensions support.
+ uint32_t reg = cpu->cfg.mvendorid;
 
-Max
+and then...
+
+>      uint64_t id;
+>      int ret;
+>  
+>      id = kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG,
+>                            KVM_REG_RISCV_CONFIG_REG(mvendorid));
+> -    ret = kvm_set_one_reg(cs, id, &cpu->cfg.mvendorid);
+> +    /*
+> +     * cfg.mvendorid is an uint32 but a target_ulong will
+> +     * be written. Assign it to a target_ulong var to avoid
+> +     * writing pieces of other cpu->cfg fields in the reg.
+> +     */
+
+...we don't need this comment since we're not doing anything special.
+
+> +    reg = cpu->cfg.mvendorid;
+> +    ret = kvm_set_one_reg(cs, id, &reg);
+>      if (ret != 0) {
+>          return ret;
+>      }
+> -- 
+> 2.41.0
 >
->>   crypto/sm4.c                             |  10 +
->>   include/crypto/sm4.h                     |   9 +
->>   target/arm/tcg/crypto_helper.c           |  10 +-
->>   target/riscv/cpu.c                       |  37 +
->>   target/riscv/cpu_cfg.h                   |   8 +
->>   target/riscv/helper.h                    |  98 +++
->>   target/riscv/insn32.decode               |  58 ++
->>   target/riscv/insn_trans/trans_rvv.c.inc  | 171 ++--
->>   target/riscv/insn_trans/trans_rvvk.c.inc | 606 ++++++++++++++
->>   target/riscv/meson.build                 |   4 +-
->>   target/riscv/translate.c                 |   1 +
->>   target/riscv/vcrypto_helper.c            | 970 +++++++++++++++++++++++
->>   target/riscv/vector_helper.c             | 243 +-----
->>   target/riscv/vector_internals.c          |  81 ++
->>   target/riscv/vector_internals.h          | 228 ++++++
->>   15 files changed, 2179 insertions(+), 355 deletions(-)
->>   create mode 100644 target/riscv/insn_trans/trans_rvvk.c.inc
->>   create mode 100644 target/riscv/vcrypto_helper.c
->>   create mode 100644 target/riscv/vector_internals.c
->>   create mode 100644 target/riscv/vector_internals.h
->>
->> --
->> 2.34.1
->>
+
+We should audit and fix all uses of &cpu->cfg.* with KVM ioctls. We can
+also consider introducing wrappers like
+
+#define kvm_set_one_reg_safe(cs, id, addr)	\
+({						\
+	typeof(*(addr)) _addr = *(addr);	\
+	kvm_set_one_reg(cs, id, &_addr)		\
+})
+
+Thanks,
+drew
 
