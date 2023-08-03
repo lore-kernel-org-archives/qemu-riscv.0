@@ -4,85 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA56AEB64DD
-	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Aug 2023 14:42:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76150EB64DD
+	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Aug 2023 15:07:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qRZWr-0008Vz-ME; Thu, 03 Aug 2023 10:42:18 -0400
+	id 1qRZv1-0002EJ-Gi; Thu, 03 Aug 2023 11:07:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qRZWl-0008VH-Og
- for qemu-riscv@nongnu.org; Thu, 03 Aug 2023 10:42:12 -0400
-Received: from mail-oi1-x229.google.com ([2607:f8b0:4864:20::229])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1qRZv0-0002E5-5M
+ for qemu-riscv@nongnu.org; Thu, 03 Aug 2023 11:07:14 -0400
+Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qRZWj-0005xC-AX
- for qemu-riscv@nongnu.org; Thu, 03 Aug 2023 10:42:11 -0400
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-3a5ad6087a1so639146b6e.2
- for <qemu-riscv@nongnu.org>; Thu, 03 Aug 2023 07:42:08 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1qRZuy-0000zU-20
+ for qemu-riscv@nongnu.org; Thu, 03 Aug 2023 11:07:13 -0400
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-99c1c66876aso152194466b.2
+ for <qemu-riscv@nongnu.org>; Thu, 03 Aug 2023 08:07:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1691073728; x=1691678528;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=K49iSYn5Duy2+itGeTtPLhzPb0sx7kGRYTiYoEIeH00=;
- b=H/tsQIz4h24gchAv2juXU390CUVEiolABI1VZb2oaFkJRFo1jGnAK+UK9lIVttqJIo
- T6hCF3zuJTf7So0gEbAkj5sppB8no31G+z2AAY/DG0qMsNdAXdctxFKzb1+r+o6GniP7
- 5qV9n16KM//A8JDisyF5oJF6GssWlzwWdq5Ca2knkJlXfKAFdmtMHMVubWpqGdXrqJjI
- icc+8kIV6DuZ7qumNTG+lyroB1Izm8JnoE1af94lD/zv/UdjbNMl4yQDzjL5lY6rl7Zw
- aWM3yfPtWpJbQGEb0W+wH19NA9oj37gBxme7yctAKubf5ST+yqvY6uTMmLp7VLNtSBgo
- hAuQ==
+ d=ventanamicro.com; s=google; t=1691075230; x=1691680030;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=0cXqoXIy279gLDVv4Hu2uIWuvxfqgmNM+vlX3uwmTYg=;
+ b=EvEcWq7FGO7y/CdqlCH5R5s5ulG9F1EOd96zBTvlrWD5ptYBx5BpMz3OPqulHgsBkt
+ 6l+b4WDdgcO/mMTvdcXNoJoxMv7AaZj/nAkD+2SHVzXoP911G9mMjXoT50QNSiB/Z8aI
+ UA/MMaanpfVrJCTvMnzGDFWU3U3ndi8Tcm+8lY04g8NVW1mXuHP/mk0GZMOY2K1GY73L
+ nT74vXpLCGJT5LE6tZFadHBA0PG1enkTMDNohqlSgJMNqQrrgcpWJdwQy7dyzea42cW3
+ fETYqM+EeyL1Vv2wfFZF2L5LSNmnw2zP6K9NjVy3GhlQI93nf71SZyTgHQFe+eS2grGW
+ 1U9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691073728; x=1691678528;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=K49iSYn5Duy2+itGeTtPLhzPb0sx7kGRYTiYoEIeH00=;
- b=S48yTfZpme6T3/DmoABhsVW/uGQTWMNf6u1e1iOaevN8xmsBm0mKg2QDCRJG7uIq4i
- 3QlSwTbGwKoyRtWMpx+VXOBfgysiDiDGs9TKTIxsfMiY3od0wniGucr+hYTzulK5JBk1
- VK5/3qgMmEQEz9jJOlAkfGEX4YyJ4YAU2zn2jgdOs4PtedefYenXq7YLm/piQL6WY4Af
- M4KlZWBZbeDDHjuuclLTbPeekJKRKhRsbW0ghjuMkzGyGH8UsUVOPpTFCOS/5a0SIcQf
- o+Sbk/MTCpwaZEYiBkeOYSjo5afk0cLVKyk990+GrBGBbVwK7qU4BFyZiRXGcalryg7N
- TWiw==
-X-Gm-Message-State: ABy/qLY071Xv0nUMC/NaEFBalQJKt5+UZ6tx0ww2AwvzNeTs5FiI0bCX
- AwnhxgBW/RZpi884emvG7go5lw==
-X-Google-Smtp-Source: APBJJlGLEhA5mldHtPl6v83pgHE5ZDqy7/9fN20BiP7qeEoSWgIAVPa1IkZX7bTvsrsR7cGherWQ8w==
-X-Received: by 2002:a05:6808:300f:b0:3a1:de61:d414 with SMTP id
- ay15-20020a056808300f00b003a1de61d414mr20784691oib.51.1691073727744; 
- Thu, 03 Aug 2023 07:42:07 -0700 (PDT)
-Received: from [192.168.68.108] ([187.11.154.63])
+ d=1e100.net; s=20221208; t=1691075230; x=1691680030;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0cXqoXIy279gLDVv4Hu2uIWuvxfqgmNM+vlX3uwmTYg=;
+ b=SIF2D7jUaka8a0tCXLVlOwMbBsKtCSzSMBQFRWYrPgaoxhNp+/8Bj+IydiM4Bg3c1U
+ rdqn88anUI/xugPyV73VIIOlXkMeLIOQw3eshxJOVsq9YWMOtXGHBEQofQskUW5yOd16
+ 4xNd2FzxEtTBHqtrbzei6icLZ/9BITIaz6XIGuWdxY+wLgcWv8kYwQ/4EXrB0K0/foGl
+ e2Up4VTLTuyVXzcWgm2HD1s4H3zxU2HHiI/F7dY5kRmCPX0CDl5fV8rPsT4idD5BKjlx
+ 8oVdqBDYfZUn5hK10NHOu34JqHshraljH530KDLOj1EXZmGXRsLuQfrs0x4Bk0O4hDVl
+ FH6A==
+X-Gm-Message-State: ABy/qLZ7wuq93u5zds1+XYnBr9UbpPKjShOx0Hyou66c274x448uJadz
+ 6oGdlSGNFbbNGRTBZDEw0GN0eg==
+X-Google-Smtp-Source: APBJJlFTAHbB95dodXdKQBYoly991uJL6pbvvv1ndLPuexQ4sDgt5D/p5Pj4sphIomeKoLzIMOWb4A==
+X-Received: by 2002:a17:906:cc58:b0:991:d05c:f065 with SMTP id
+ mm24-20020a170906cc5800b00991d05cf065mr7981368ejb.52.1691075229503; 
+ Thu, 03 Aug 2023 08:07:09 -0700 (PDT)
+Received: from localhost (212-5-140-29.ip.btc-net.bg. [212.5.140.29])
  by smtp.gmail.com with ESMTPSA id
- bx32-20020a0568081b2000b003a76b1b2862sm571461oib.16.2023.08.03.07.42.05
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 03 Aug 2023 07:42:07 -0700 (PDT)
-Message-ID: <cfb8653b-ddc8-b4a9-9792-73ef84ee925e@ventanamicro.com>
-Date: Thu, 3 Aug 2023 11:42:03 -0300
+ cw25-20020a170906c79900b0098d2d219649sm10684737ejb.174.2023.08.03.08.07.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 03 Aug 2023 08:07:09 -0700 (PDT)
+Date: Thu, 3 Aug 2023 18:07:03 +0300
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Fei Wu <fei2.wu@intel.com>
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
+ liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Andrei Warkentin <andrei.warkentin@intel.com>
+Subject: Re: [PATCH] hw/riscv: split RAM into low and high memory
+Message-ID: <20230803-3855259bbabb934c247c5607@orel>
+References: <20230731015317.1026996-1-fei2.wu@intel.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH] linux-user/elfload: Set V in ELF_HWCAP for RISC-V
-Content-Language: en-US
-To: Nathan Egge <negge@xiph.org>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>
-Cc: Weiwei Li <liweiwei@iscas.ac.cn>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-References: <20230803131424.40744-1-negge@xiph.org>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230803131424.40744-1-negge@xiph.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::229;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x229.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230731015317.1026996-1-fei2.wu@intel.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x62a.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.091,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -100,61 +95,26 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-On 8/3/23 10:14, Nathan Egge wrote:
-> From: "Nathan Egge" <negge@xiph.org>
+On Mon, Jul 31, 2023 at 09:53:17AM +0800, Fei Wu wrote:
+> riscv virt platform's memory started at 0x80000000 and
+> straddled the 4GiB boundary. Curiously enough, this choice
+> of a memory layout will prevent from launching a VM with
+> a bit more than 2000MiB and PCIe pass-thru on an x86 host, due
+> to identity mapping requirements for the MSI doorbell on x86,
+> and these (APIC/IOAPIC) live right below 4GiB.
 > 
-> Set V bit for hwcap if misa is set.
+> So just split the RAM range into two portions:
+> - 1 GiB range from 0x80000000 to 0xc0000000.
+> - The remainder at 0x100000000
 > 
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1793
-> Signed-off-by: Nathan Egge <negge@xiph.org>
-> ---
+> ...leaving a hole between the ranges.
 
-Tested with the example program described in the bug:
+Can you elaborate on the use case? Maybe provide details of the host
+system and the QEMU command line? I'm wondering why we didn't have
+any problems with the arm virt machine type. Has nobody tried this
+use case with that? Is the use case something valid for riscv, but
+not arm?
 
-===========
-#include <sys/auxv.h>
-#include <stdio.h>
-
-#define ISA_V_HWCAP (1 << ('v' - 'a'))
-
-void main() {
-   unsigned long hw_cap = getauxval(AT_HWCAP);
-   printf("RVV %s\n", hw_cap & ISA_V_HWCAP ? "detected" : "not found");
-}
-===========
-
-$ ./qemu-riscv64 -cpu rv64,vext_spec=v1.0,v=true,vlen=128 -B 0x100000 ./a.out
-RVV detected
-$ ./qemu-riscv64 -cpu rv64,vext_spec=v1.0,vlen=128 -B 0x100000 ./a.out
-RVV not found
-
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Tested-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
-
-Looks like 8.1 material to me. Thanks,
-
-
-Daniel
-
->   linux-user/elfload.c | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/linux-user/elfload.c b/linux-user/elfload.c
-> index 861ec07abc..a299ba7300 100644
-> --- a/linux-user/elfload.c
-> +++ b/linux-user/elfload.c
-> @@ -1710,7 +1710,8 @@ static uint32_t get_elf_hwcap(void)
->   #define MISA_BIT(EXT) (1 << (EXT - 'A'))
->       RISCVCPU *cpu = RISCV_CPU(thread_cpu);
->       uint32_t mask = MISA_BIT('I') | MISA_BIT('M') | MISA_BIT('A')
-> -                    | MISA_BIT('F') | MISA_BIT('D') | MISA_BIT('C');
-> +                    | MISA_BIT('F') | MISA_BIT('D') | MISA_BIT('C')
-> +                    | MISA_BIT('V');
->   
->       return cpu->env.misa_ext & mask;
->   #undef MISA_BIT
+Thanks,
+drew
 
