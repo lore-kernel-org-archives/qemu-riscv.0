@@ -4,74 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 383DBEB64DD
-	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Aug 2023 03:15:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AE9FEB64DD
+	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Aug 2023 03:15:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qTD9R-0003SD-7y; Mon, 07 Aug 2023 23:12:53 -0400
+	id 1qTD8P-0008Q3-O6; Mon, 07 Aug 2023 23:11:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1qTD8s-0001bK-D2
- for qemu-riscv@nongnu.org; Mon, 07 Aug 2023 23:12:20 -0400
-Received: from mail-oo1-xc30.google.com ([2607:f8b0:4864:20::c30])
+ id 1qTD8O-0008O6-D8
+ for qemu-riscv@nongnu.org; Mon, 07 Aug 2023 23:11:48 -0400
+Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1qTD8c-0000JZ-Br
- for qemu-riscv@nongnu.org; Mon, 07 Aug 2023 23:12:18 -0400
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-56c96982829so3629698eaf.0
- for <qemu-riscv@nongnu.org>; Mon, 07 Aug 2023 20:12:01 -0700 (PDT)
+ id 1qTD8M-00006p-JR
+ for qemu-riscv@nongnu.org; Mon, 07 Aug 2023 23:11:48 -0400
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-686f0d66652so4949746b3a.2
+ for <qemu-riscv@nongnu.org>; Mon, 07 Aug 2023 20:11:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1691464321; x=1692069121;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5bAv2VkeF2nF/Nch+eWToS5kdoZdnIAW3FmjUUhtDDU=;
- b=SUUPWgh+XIMAPs7bvA4YCksr0dMjMZVJDkI9hzC6Ku7umWLcpE/uAZT4Tnq97H48lD
- TTj/Fy9BFJPnjcGwBwaG6sdZg/cSqnSb61KEDIV6rTSioQ6woN049qJkFFaP79jEDh8I
- kKSKLM2FETsJfq/xAOvMDMboIKQXPXs/YUs9JIPI1emJaE2cAYiajzKEBqIUjsV/PzqM
- j1fV3dRwxR3KT/gW6lZZ1m6OTt/iXkaTAj1rTla/FZoeKkmCdm50AOrfjDFE8VvpsJeD
- nt0bDeaFRSdMeDfFDzD/lTJy1EeChsJI47M0GzOJxxHV1p71WSpgsWHQJmqmtpxPZobn
- EYMQ==
+ d=linaro.org; s=google; t=1691464304; x=1692069104;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=beXQyTRLGdD+zrgylrsHYTELdRMMXnrVVBuGcJOXCHg=;
+ b=iDVMP18rzv9csWNh0WdGZIWaCPqWys/mxgMYr0W1vj2iiEHZhsjWfDozIi+ovBKLoX
+ lkK6hFeyxu9BOv5x5CLNiWhIsPU8vduD6z2XaHrfJM6npn+om9dPKIvmCJU/0tB/VTBQ
+ 2OEc4RQrlNMH2Qzhs/BGRvabkZNxNG/OPQrOl0AvAlwb/qas79DvN8BDwdk/nN6BYAZv
+ TcrMHSybUsvHVKYkK2wjCnX7iE9yK3J9/gkQ5j8kX9k9j98aDAlHDgajMWvipLGoRLnH
+ RAoWhGvx1zw+tprzQA2lpZGT09axpFLngJnr2/ys/s16f1AG9xPjKkUrgZa2v4jZB2pt
+ xSpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691464321; x=1692069121;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=5bAv2VkeF2nF/Nch+eWToS5kdoZdnIAW3FmjUUhtDDU=;
- b=HdTaU2uUid9OOYEXkJHN4xYQZZZZOujWPx1ePuaMp4zbw/M8QsMvWvJD8cf+VIkx85
- eq985Sy1gN9qqYs+8mMWNvcGAiZzslHtj9sQdr0VAAYgTPD3UD3f1NPKlsR2iQvL4fYN
- BvGUAhJJIQx8WsHKfZJT9Plko3j6jELmYBoVa0tPrzZ8taelCAIhLaUnIUiWaHqx7l0R
- g54eEppkRVgrlEYf8tx43Axi0Wlmiqp2o/T07XlpuGXrgrAP7DiXsWgOR1205aitpKaz
- DDmi3CPPvbj9H9TpcRmCchBCxqdAb8gCqn0AX8PPPcqmvakZTXkJdIKAknpWeCzXZ9rk
- FmLg==
-X-Gm-Message-State: AOJu0Yyw30BCBggF+zukYX3LkdnDyv7SWGnoLZuV95ZbFJf5d6/hhxrJ
- F8l21wMB9vpFSlW2VNgcme/Wyg==
-X-Google-Smtp-Source: AGHT+IGCRUZv8SyCwzVdSnph8+vaIWmk7xHFufrzLKQeDcaUu+J5LR7Mb3E+jI1UWOHCokpmyjOxwA==
-X-Received: by 2002:a05:6358:7250:b0:134:e777:c78b with SMTP id
- i16-20020a056358725000b00134e777c78bmr9986135rwa.5.1691464320876; 
- Mon, 07 Aug 2023 20:12:00 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1691464304; x=1692069104;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=beXQyTRLGdD+zrgylrsHYTELdRMMXnrVVBuGcJOXCHg=;
+ b=ZpJU44DQzvjF1MBaud97kOk9XsWOZfg+skURLeF4M7tVzXSVK8GhcUveWjCUrRq6tB
+ chm9vszXIhGYsVSNiQDfQZQVAIS0B8cmSxORLub0wQM/0qw/gG1gypI5oOWWW+a1scU7
+ VQVSk9N5SJS8W/dyU6/8JKablyF2dlGtaJLAzjzYd068mudKoN3QPJWPm1gir4VXi5U+
+ vUjlnQjzLluS8lN3zwYD69Umn9+7sdgT2a9KvSBUN0//vw25LCgF7+2ZB3qhjt6iEGW4
+ caCadWvAEJ7TCUKuE3bH3BxQfl0VkqEKBpAx1lDA8bCJpBVvZdVic0wAavaJayzOEyP2
+ /k0w==
+X-Gm-Message-State: AOJu0YyB7gq+B3PzplIKRJYcUlHCQKzPlbPIifPbtHdik0K8inCI9kdR
+ ne42li4StOlsiA0k9zA8J1FCAg==
+X-Google-Smtp-Source: AGHT+IFY1UNNC7Z5ZNw4sVuvfalGQnnnQH90DfIbJOd0I19n8g2gPOyaJWzBfCME22QH7j3EAkmNXg==
+X-Received: by 2002:a05:6a20:549f:b0:12f:bc36:4c67 with SMTP id
+ i31-20020a056a20549f00b0012fbc364c67mr14021987pzk.61.1691464304626; 
+ Mon, 07 Aug 2023 20:11:44 -0700 (PDT)
 Received: from stoup.. ([2602:47:d490:6901:e306:567a:e0a1:341])
  by smtp.gmail.com with ESMTPSA id
- g64-20020a636b43000000b0055bf96b11d9sm5639087pgc.89.2023.08.07.20.12.00
+ g64-20020a636b43000000b0055bf96b11d9sm5639087pgc.89.2023.08.07.20.11.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Aug 2023 20:12:00 -0700 (PDT)
+ Mon, 07 Aug 2023 20:11:44 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org
-Subject: [PATCH 18/24] tcg/i386: Merge tcg_out_setcond{32,64}
-Date: Mon,  7 Aug 2023 20:11:37 -0700
-Message-Id: <20230808031143.50925-19-richard.henderson@linaro.org>
+Subject: [PATCH for-8.2 00/24] tcg: Introduce negsetcond opcodes
+Date: Mon,  7 Aug 2023 20:11:19 -0700
+Message-Id: <20230808031143.50925-1-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230808031143.50925-1-richard.henderson@linaro.org>
-References: <20230808031143.50925-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c30;
- envelope-from=richard.henderson@linaro.org; helo=mail-oo1-xc30.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x430.google.com
 X-Spam_score_int: 4
 X-Spam_score: 0.4
 X-Spam_bar: /
@@ -94,67 +91,81 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Pass a rexw parameter instead of duplicating the functions.
+Introduce two new setcond opcode variants which produce -1 instead
+of 1 when the condition.  For most of our hosts, producing -1 is
+just as easy as 1, and avoid requiring a separate negate instruction.
 
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
----
- tcg/i386/tcg-target.c.inc | 24 +++++++-----------------
- 1 file changed, 7 insertions(+), 17 deletions(-)
+Use the new opcode in tcg/tcg-op-gvec.c for integral expansion of
+generic vector operations.  I looked through target/ for obvious
+pairings of setcond and neg.
 
-diff --git a/tcg/i386/tcg-target.c.inc b/tcg/i386/tcg-target.c.inc
-index b9673b55bd..ec3c7012d4 100644
---- a/tcg/i386/tcg-target.c.inc
-+++ b/tcg/i386/tcg-target.c.inc
-@@ -1524,23 +1524,16 @@ static void tcg_out_brcond2(TCGContext *s, const TCGArg *args,
- }
- #endif
- 
--static void tcg_out_setcond32(TCGContext *s, TCGCond cond, TCGArg dest,
--                              TCGArg arg1, TCGArg arg2, int const_arg2)
-+static void tcg_out_setcond(TCGContext *s, int rexw, TCGCond cond,
-+                            TCGArg dest, TCGArg arg1, TCGArg arg2,
-+                            int const_arg2)
- {
--    tcg_out_cmp(s, arg1, arg2, const_arg2, 0);
-+    tcg_out_cmp(s, arg1, arg2, const_arg2, rexw);
-     tcg_out_modrm(s, OPC_SETCC | tcg_cond_to_jcc[cond], 0, dest);
-     tcg_out_ext8u(s, dest, dest);
- }
- 
--#if TCG_TARGET_REG_BITS == 64
--static void tcg_out_setcond64(TCGContext *s, TCGCond cond, TCGArg dest,
--                              TCGArg arg1, TCGArg arg2, int const_arg2)
--{
--    tcg_out_cmp(s, arg1, arg2, const_arg2, P_REXW);
--    tcg_out_modrm(s, OPC_SETCC | tcg_cond_to_jcc[cond], 0, dest);
--    tcg_out_ext8u(s, dest, dest);
--}
--#else
-+#if TCG_TARGET_REG_BITS == 32
- static void tcg_out_setcond2(TCGContext *s, const TCGArg *args,
-                              const int *const_args)
- {
-@@ -2565,8 +2558,8 @@ static inline void tcg_out_op(TCGContext *s, TCGOpcode opc,
-         tcg_out_brcond(s, rexw, a2, a0, a1, const_args[1],
-                        arg_label(args[3]), 0);
-         break;
--    case INDEX_op_setcond_i32:
--        tcg_out_setcond32(s, args[3], a0, a1, a2, const_a2);
-+    OP_32_64(setcond):
-+        tcg_out_setcond(s, rexw, args[3], a0, a1, a2, const_a2);
-         break;
-     case INDEX_op_movcond_i32:
-         tcg_out_movcond32(s, args[5], a0, a1, a2, const_a2, args[3]);
-@@ -2718,9 +2711,6 @@ static inline void tcg_out_op(TCGContext *s, TCGOpcode opc,
-         }
-         break;
- 
--    case INDEX_op_setcond_i64:
--        tcg_out_setcond64(s, args[3], a0, a1, a2, const_a2);
--        break;
-     case INDEX_op_movcond_i64:
-         tcg_out_movcond64(s, args[5], a0, a1, a2, const_a2, args[3]);
-         break;
+
+r~
+
+
+Richard Henderson (24):
+  tcg: Introduce negsetcond opcodes
+  tcg: Use tcg_gen_negsetcond_*
+  target/alpha: Use tcg_gen_movcond_i64 in gen_fold_mzero
+  target/arm: Use tcg_gen_negsetcond_*
+  target/m68k: Use tcg_gen_negsetcond_*
+  target/openrisc: Use tcg_gen_negsetcond_*
+  target/ppc: Use tcg_gen_negsetcond_*
+  target/sparc: Use tcg_gen_movcond_i64 in gen_edge
+  target/tricore: Replace gen_cond_w with tcg_gen_negsetcond_tl
+  tcg/ppc: Implement negsetcond_*
+  tcg/ppc: Use the Set Boolean Extension
+  tcg/aarch64: Implement negsetcond_*
+  tcg/arm: Implement negsetcond_i32
+  tcg/riscv: Implement negsetcond_*
+  tcg/s390x: Implement negsetcond_*
+  tcg/sparc64: Implement negsetcond_*
+  tcg/i386: Merge tcg_out_brcond{32,64}
+  tcg/i386: Merge tcg_out_setcond{32,64}
+  tcg/i386: Merge tcg_out_movcond{32,64}
+  tcg/i386: Add cf parameter to tcg_out_cmp
+  tcg/i386: Use CMP+SBB in tcg_out_setcond
+  tcg/i386: Clear dest first in tcg_out_setcond if possible
+  tcg/i386: Use shift in tcg_out_setcond
+  tcg/i386: Implement negsetcond_*
+
+ docs/devel/tcg-ops.rst                     |   6 +
+ include/tcg/tcg-op-common.h                |   4 +
+ include/tcg/tcg-op.h                       |   2 +
+ include/tcg/tcg-opc.h                      |   2 +
+ include/tcg/tcg.h                          |   1 +
+ tcg/aarch64/tcg-target.h                   |   2 +
+ tcg/arm/tcg-target.h                       |   1 +
+ tcg/i386/tcg-target.h                      |   2 +
+ tcg/loongarch64/tcg-target.h               |   3 +
+ tcg/mips/tcg-target.h                      |   2 +
+ tcg/ppc/tcg-target.h                       |   2 +
+ tcg/riscv/tcg-target.h                     |   2 +
+ tcg/s390x/tcg-target.h                     |   2 +
+ tcg/sparc64/tcg-target.h                   |   2 +
+ tcg/tci/tcg-target.h                       |   2 +
+ target/alpha/translate.c                   |   7 +-
+ target/arm/tcg/translate-a64.c             |  22 +-
+ target/arm/tcg/translate.c                 |  12 +-
+ target/m68k/translate.c                    |  24 +-
+ target/openrisc/translate.c                |   6 +-
+ target/sparc/translate.c                   |  17 +-
+ target/tricore/translate.c                 |  16 +-
+ tcg/optimize.c                             |  41 +++-
+ tcg/tcg-op-gvec.c                          |   6 +-
+ tcg/tcg-op.c                               |  42 +++-
+ tcg/tcg.c                                  |   6 +
+ target/ppc/translate/fixedpoint-impl.c.inc |   6 +-
+ target/ppc/translate/vmx-impl.c.inc        |   8 +-
+ tcg/aarch64/tcg-target.c.inc               |  12 +
+ tcg/arm/tcg-target.c.inc                   |   9 +
+ tcg/i386/tcg-target.c.inc                  | 265 +++++++++++++--------
+ tcg/ppc/tcg-target.c.inc                   | 149 ++++++++----
+ tcg/riscv/tcg-target.c.inc                 |  45 ++++
+ tcg/s390x/tcg-target.c.inc                 |  78 ++++--
+ tcg/sparc64/tcg-target.c.inc               |  36 ++-
+ 35 files changed, 572 insertions(+), 270 deletions(-)
+
 -- 
 2.34.1
 
