@@ -4,84 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4180CC04A6A
-	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Aug 2023 16:57:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8187C04A94
+	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Aug 2023 18:17:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qTQ0z-0002aZ-W8; Tue, 08 Aug 2023 12:57:02 -0400
+	id 1qTRGo-0007jg-Oo; Tue, 08 Aug 2023 14:17:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <danielhb413@gmail.com>)
- id 1qTQ0e-0002WU-OF; Tue, 08 Aug 2023 12:56:41 -0400
-Received: from mail-oo1-xc2e.google.com ([2607:f8b0:4864:20::c2e])
+ (Exim 4.90_1) (envelope-from <vineetg@rivosinc.com>)
+ id 1qTRGl-0007ik-K0
+ for qemu-riscv@nongnu.org; Tue, 08 Aug 2023 14:17:23 -0400
+Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <danielhb413@gmail.com>)
- id 1qTQ0d-000098-7B; Tue, 08 Aug 2023 12:56:40 -0400
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-56d0f4180bbso3969280eaf.1; 
- Tue, 08 Aug 2023 09:56:37 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <vineetg@rivosinc.com>)
+ id 1qTRGj-0005fi-1K
+ for qemu-riscv@nongnu.org; Tue, 08 Aug 2023 14:17:23 -0400
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1bba04b9df3so52330625ad.0
+ for <qemu-riscv@nongnu.org>; Tue, 08 Aug 2023 11:17:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1691513796; x=1692118596;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=RIp1xjusZjxIGj+gLwY29HItiBkrkrOG/kUK/4zPIRw=;
- b=W2ZoEz9dxyWKa45KdDT0xef0T1kUrE5hghR7Y3JddsReAa1Hj0rgZVHFyXXP73ZTVR
- +JgukFOl+vnQFfxZ4uLGHO6GXyJf8BCDirkhECXePZDkdnyV04ApgSJA9XVJzIupmnUw
- blcUmGoR2Atz8Jb0qArLqrLbtlI/T5dROP/vDXy/8XNPC7a1jYlTYZ2I3DzzPKyZfZ5k
- Ikq5JkCA4ru+W4J47aOSv8UFoSOmABxsFQpkGd4qRmlRfCxi0bvZTG757xvP+g9mZxs8
- YzdaHRm9hLOhy7k9Vv4G8UiHISaBq2GPogzxL6AyPQ54hl5r6vFBR1H6BL7QoVmXancq
- 5Q0w==
+ d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1691518639; x=1692123439; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=B1ezyGpTPwogAIyEYf04Cvy1wGMxvwq/DdGKXUwa+sQ=;
+ b=BnDw/IwFZTiO7PAP/DXqWKYdTm187cw1+j4cbr9IZJdkc8PzrKmM2iF80TJSmAmQfc
+ 8tpMBVnIrV0jumUESWv0h5XKgsLN8XRbZDb2Dp3Y/AKwviY8l9UiOhnIDfTKXcOiX3YR
+ 3NrRjVz7k8nMyy4JMkYWyFKcQV4AoY4dLW5kKF2y0VWHSauUc9FbvXmWq9Sps7RbHwhC
+ Zwit5k47dmSjH/iJhzc5+/KrxuryvWcuZ3gk+xief1akn2HcFDT4hlr9c5Q4YRCdr70J
+ 9sUEdAdlXg4krqtq2MqEz58BNg6Y/NWyA1hWYqymy8lEYKMcxPQaoMP2VvHhR3wBWJZS
+ Y8EA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691513796; x=1692118596;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=RIp1xjusZjxIGj+gLwY29HItiBkrkrOG/kUK/4zPIRw=;
- b=cof1wm/A+4/2Y2P/9553kCw+9oTmV3N69DJ866GH5C3lfFvxBqbvnp8kmeKiyF8nsi
- yYuKS+BvTZsg+Nf4/zqZQWyjh6lH2BXjj0AaX0Ku5KUUPjvKU+1bfScocfNCllVO76cx
- IEAVGgWGcyO9eFP0BSLokOvxoA0DTk/BRMkPv7oTZhuaNU2r1/TqwTBDvh2coFCL7TEo
- YJm23KvGmaJW8O3R4cYlxi1rz761ciGeq5frvgy7Ipznec3o4nXGz7PAq97o+qhE/7BH
- 3wzV3f2ZCXBPPmA+rwMdsYoE83kUjwe2tFGYoO06mdokH76Mk9rIdG8oV6T/nsjdJUkp
- YWzA==
-X-Gm-Message-State: AOJu0YwvK7Lm4fwPThlv2Qe7zprcc3ndt3t1Zpb0U59qVrI0QLOb3NtY
- z0zjK9ouSU9Ssz+MDXFkgng=
-X-Google-Smtp-Source: AGHT+IGpn5fnzB2MjNKoCbbJbRRyP/PWXcuMNbQcxxI06k+KpTg1Un4t6YW+Ru5dZFvCfiMpVwOAJA==
-X-Received: by 2002:a4a:ea39:0:b0:566:ec2f:36d0 with SMTP id
- y25-20020a4aea39000000b00566ec2f36d0mr429449ood.2.1691513796365; 
- Tue, 08 Aug 2023 09:56:36 -0700 (PDT)
-Received: from [192.168.68.108] (189-69-160-189.dial-up.telesp.net.br.
- [189.69.160.189]) by smtp.gmail.com with ESMTPSA id
- w63-20020a4a5d42000000b00569478f2d83sm1391283ooa.23.2023.08.08.09.56.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Aug 2023 09:56:36 -0700 (PDT)
-Message-ID: <5d2b3e5d-6dea-1cf2-02e3-cfa4b987c88a@gmail.com>
-Date: Tue, 8 Aug 2023 13:56:32 -0300
+ d=1e100.net; s=20221208; t=1691518639; x=1692123439;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=B1ezyGpTPwogAIyEYf04Cvy1wGMxvwq/DdGKXUwa+sQ=;
+ b=SRh8ICrhWH3uwCXcYMuCgNwsYwE2FFM2mafqDpFJV41+1U3QKuqbsjRtUJUkw3Z8wC
+ 8tXNpLvYFWozr4G38w5p45zK2J1jdeIWmK551z105cp6ev2HeRqfi1qfN7F0GORBRr6C
+ IutQIhtNAREsqbE5KMpKXD8kfr9zJmeTUeiCbOmd7BqPmNMkIxp6TfF5cxtHdT+G68q2
+ 1jHNJxznNopXlocks9o7RjnAnzx7auQ8wkbebJP/ujm8l7N+Rswdn0yUk/S1p5fZR/+/
+ 0tziB2B8CcldOleS6tEPGAsNZP6Xx/iSeYF+DNj2hojhayBoohuDdhPhdX0Qx1pKGjC+
+ 3ghg==
+X-Gm-Message-State: AOJu0YzyB/0GwUPgxS323U/eBAEOk8Uakvu5lChyTxNwts4u+HiHC2Su
+ mgd7DmS5VCU6L0LxtXd7Mfvdqw==
+X-Google-Smtp-Source: AGHT+IEfHMob4e3+gLfJC1z27OKPjlyViu8Vx5ZVaPGpCZXAmQCN7T9kBE6YxIydZma6CG2+Jg1TWQ==
+X-Received: by 2002:a17:903:120b:b0:1bb:7f71:df43 with SMTP id
+ l11-20020a170903120b00b001bb7f71df43mr662012plh.34.1691518639481; 
+ Tue, 08 Aug 2023 11:17:19 -0700 (PDT)
+Received: from vineet-framework.hq.rivosinc.com ([50.221.140.188])
+ by smtp.gmail.com with ESMTPSA id
+ e5-20020a170902b78500b001a5fccab02dsm9337248pls.177.2023.08.08.11.17.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 08 Aug 2023 11:17:19 -0700 (PDT)
+From: Vineet Gupta <vineetg@rivosinc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: kito.cheng@gmail.com, Jeff Law <jeffreyalaw@gmail.com>,
+ Palmer Dabbelt <palmer@rivosinc.com>, Vineet Gupta <vineetg@rivosinc.com>
+Subject: [PATCH 2/2] riscv: zicond: make default
+Date: Tue,  8 Aug 2023 11:17:15 -0700
+Message-Id: <20230808181715.436395-2-vineetg@rivosinc.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230808181715.436395-1-vineetg@rivosinc.com>
+References: <20230808181715.436395-1-vineetg@rivosinc.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH 11/24] tcg/ppc: Use the Set Boolean Extension
-Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- qemu-s390x@nongnu.org
-References: <20230808031143.50925-1-richard.henderson@linaro.org>
- <20230808031143.50925-12-richard.henderson@linaro.org>
-From: Daniel Henrique Barboza <danielhb413@gmail.com>
-In-Reply-To: <20230808031143.50925-12-richard.henderson@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c2e;
- envelope-from=danielhb413@gmail.com; helo=mail-oo1-xc2e.google.com
-X-Spam_score_int: -34
-X-Spam_score: -3.5
-X-Spam_bar: ---
-X-Spam_report: (-3.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, NICE_REPLY_A=-4.14,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- SUSPICIOUS_RECIPS=2.51 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
+ envelope-from=vineetg@rivosinc.com; helo=mail-pl1-x62f.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,62 +94,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Again this helps with better testing and something qemu has been doing
+with newer features anyways.
 
+Signed-off-by: Vineet Gupta <vineetg@rivosinc.com>
+---
+ target/riscv/cpu.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-On 8/8/23 00:11, Richard Henderson wrote:
-> The SETBC family of instructions requires exactly two insns for
-> all comparisions, saving 0-3 insns per (neg)setcond.
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 022bd9d01223..e6e28414b223 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -438,6 +438,7 @@ static void rv64_thead_c906_cpu_init(Object *obj)
+     cpu->cfg.ext_xtheadbs = true;
+     cpu->cfg.ext_xtheadcmo = true;
+     cpu->cfg.ext_xtheadcondmov = true;
++    cpu->cfg.ext_zicond = false;
+     cpu->cfg.ext_xtheadfmemidx = true;
+     cpu->cfg.ext_xtheadmac = true;
+     cpu->cfg.ext_xtheadmemidx = true;
+@@ -483,6 +484,7 @@ static void rv64_veyron_v1_cpu_init(Object *obj)
+     cpu->cfg.ext_zbc = true;
+     cpu->cfg.ext_zbs = true;
+     cpu->cfg.ext_XVentanaCondOps = true;
++    cpu->cfg.ext_zicond = false;
+ 
+     cpu->cfg.mvendorid = VEYRON_V1_MVENDORID;
+     cpu->cfg.marchid = VEYRON_V1_MARCHID;
+@@ -1816,7 +1818,7 @@ static Property riscv_cpu_extensions[] = {
+     DEFINE_PROP_BOOL("zcf", RISCVCPU, cfg.ext_zcf, false),
+     DEFINE_PROP_BOOL("zcmp", RISCVCPU, cfg.ext_zcmp, false),
+     DEFINE_PROP_BOOL("zcmt", RISCVCPU, cfg.ext_zcmt, false),
+-    DEFINE_PROP_BOOL("zicond", RISCVCPU, cfg.ext_zicond, false),
++    DEFINE_PROP_BOOL("zicond", RISCVCPU, cfg.ext_zicond, true),
+ 
+     /* Vendor-specific custom extensions */
+     DEFINE_PROP_BOOL("xtheadba", RISCVCPU, cfg.ext_xtheadba, false),
+-- 
+2.34.1
 
-Nice.
-
-> 
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
-
-
-Reviewed-by: Daniel Henrique Barboza <danielhb413@gmail.com>
-
->   tcg/ppc/tcg-target.c.inc | 22 ++++++++++++++++++++++
->   1 file changed, 22 insertions(+)
-> 
-> diff --git a/tcg/ppc/tcg-target.c.inc b/tcg/ppc/tcg-target.c.inc
-> index 10448aa0e6..090f11e71c 100644
-> --- a/tcg/ppc/tcg-target.c.inc
-> +++ b/tcg/ppc/tcg-target.c.inc
-> @@ -447,6 +447,11 @@ static bool tcg_target_const_match(int64_t val, TCGType type, int ct)
->   #define TW     XO31( 4)
->   #define TRAP   (TW | TO(31))
->   
-> +#define SETBC    XO31(384)  /* v3.10 */
-> +#define SETBCR   XO31(416)  /* v3.10 */
-> +#define SETNBC   XO31(448)  /* v3.10 */
-> +#define SETNBCR  XO31(480)  /* v3.10 */
-> +
->   #define NOP    ORI  /* ori 0,0,0 */
->   
->   #define LVX        XO31(103)
-> @@ -1624,6 +1629,23 @@ static void tcg_out_setcond(TCGContext *s, TCGType type, TCGCond cond,
->           arg2 = (uint32_t)arg2;
->       }
->   
-> +    /* With SETBC/SETBCR, we can always implement with 2 insns. */
-> +    if (have_isa_3_10) {
-> +        tcg_insn_unit bi, opc;
-> +
-> +        tcg_out_cmp(s, cond, arg1, arg2, const_arg2, 7, type);
-> +
-> +        /* Re-use tcg_to_bc for BI and BO_COND_{TRUE,FALSE}. */
-> +        bi = tcg_to_bc[cond] & (0x1f << 16);
-> +        if (tcg_to_bc[cond] & BO(8)) {
-> +            opc = neg ? SETNBC : SETBC;
-> +        } else {
-> +            opc = neg ? SETNBCR : SETBCR;
-> +        }
-> +        tcg_out32(s, opc | RT(arg0) | bi);
-> +        return;
-> +    }
-> +
->       /* Handle common and trivial cases before handling anything else.  */
->       if (arg2 == 0) {
->           switch (cond) {
 
