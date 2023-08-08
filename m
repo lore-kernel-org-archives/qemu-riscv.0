@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD5E7C00528
-	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Aug 2023 03:18:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6204C001B0
+	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Aug 2023 03:18:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qTD8a-0000FX-EN; Mon, 07 Aug 2023 23:12:00 -0400
+	id 1qTD9a-00042G-MG; Mon, 07 Aug 2023 23:13:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1qTD8Y-0000Cq-KX
- for qemu-riscv@nongnu.org; Mon, 07 Aug 2023 23:11:58 -0400
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
+ id 1qTD8v-0001fw-QI
+ for qemu-riscv@nongnu.org; Mon, 07 Aug 2023 23:12:23 -0400
+Received: from mail-qk1-x732.google.com ([2607:f8b0:4864:20::732])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1qTD8Q-00009a-Or
- for qemu-riscv@nongnu.org; Mon, 07 Aug 2023 23:11:58 -0400
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-686b91c2744so3778457b3a.0
- for <qemu-riscv@nongnu.org>; Mon, 07 Aug 2023 20:11:50 -0700 (PDT)
+ id 1qTD8e-0000Lq-GJ
+ for qemu-riscv@nongnu.org; Mon, 07 Aug 2023 23:12:21 -0400
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-7659cb9c42aso381232285a.3
+ for <qemu-riscv@nongnu.org>; Mon, 07 Aug 2023 20:12:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1691464309; x=1692069109;
+ d=linaro.org; s=google; t=1691464323; x=1692069123;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZfPoEwU2O4IK9AqxqstJxMdbJLfYwviBA2IVblhOckE=;
- b=CYy0zxEgPdbPeNcZuGP69o6VeEYuvsty2f4ROFOJ90mZsLLrkgA6Art9rAOOSsXJws
- o6tXLUdxlG0DhMwE/criK95ovC/ncOfkU4/0Deih/j2uFOjVHCrIiZVIndxJx7UtqRWo
- Trkv+G4JThfcJV2hkhKI8MY+IpsDKaW2kGUQfW4tc3Wqoql94PfRWDEu6fmVGzOYrVWG
- RmhEMkJNUn4w33TupHt+BTB9XaGAn64KlFopd28D9RXnQdIOYbgmDu0XTiwJMz4Sa02Q
- D/C0zGxmC14P1QwtiubvAy1VmZtfwIYqEndenTKDgw+LkHp2qaoh2TThkbdlLY13Xy/P
- x6LA==
+ bh=/f7JkVfHL643EJ3O1Eknq2OobIgOuuERSYG+cUCRBXY=;
+ b=zT39XaoSIsCwy7Br/dzbVOcpNCldA727Se8aj5hLn2cHupnsC+0aP4Kh+zTxl+PSh3
+ CzRls10GtbavVA3//+qAceVIaFrb5rceXtACZhcNYuaNINbnO9F9wHHv1xThYnU+h0W/
+ YTFxUnfVXjP48aBWuyj1H02Wyi6KdOe1Lmji2wWPjRWl699GdYUXLBQpFEiXHjjQZ+AH
+ VJojxaa+VpVCRV+V6XCNQYPiO0jZZGNSJtctqMW5PodLIqCSZ4zGetc2SlUsRYm0ebc+
+ s18QbCZ6vJIBxiZ47R8o74ZMzRiNUfSH7qp1c9oOcc/2gA7KpCnmPwEopVY8LqZDVHvC
+ t+vA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691464309; x=1692069109;
+ d=1e100.net; s=20221208; t=1691464323; x=1692069123;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZfPoEwU2O4IK9AqxqstJxMdbJLfYwviBA2IVblhOckE=;
- b=k6Z1ZBSTssZ1UpfHG23PheTU/4yUeL6K/1d7K16UAjl5snhOYs+8Apupx+U8UPDqns
- i1DHEihFp3zAaD8Ok36IaWFeqTLRBnA2rRC/1MjfJj91g96/lg9RPGjtUPjs/nGhhtls
- PFXvK9615Z9KQi1XCf93cKwp3KMOUMYa2xvaPMa9B4yDrB0Z9Dh1SbrhnQaTYs9p7Vy0
- +Sr1dA5qyAUWcgjbckN/AIJ6DD2pllrZJ0rUpzbuMMyQmwvk0qtBOhq72UKA63SJpaaX
- 8XggNc7+jm/PXGVqMl6NMys0fh3jgy1lMQ/E6NvBwNrv/Fj+s5nOw/0UdUtT3H37XCMB
- PcDQ==
-X-Gm-Message-State: AOJu0Yz7RfWt0TCUj9RWedEm6Q3kY5iD5pwvv5WLXCXzh1UBuZ1NTUwQ
- M/7yJKxYrtnlvblChxbaxlswag==
-X-Google-Smtp-Source: AGHT+IFZ8g8ozpVXqVj7zEJGFeLKkkJ/l8JrOKqZ1F31o9lDyN/7HwvBOpZ0xGedNzppYEOdGt8R4Q==
-X-Received: by 2002:a05:6a20:4312:b0:140:f1d2:4fc with SMTP id
- h18-20020a056a20431200b00140f1d204fcmr4154408pzk.45.1691464309192; 
- Mon, 07 Aug 2023 20:11:49 -0700 (PDT)
+ bh=/f7JkVfHL643EJ3O1Eknq2OobIgOuuERSYG+cUCRBXY=;
+ b=OykpGXF/KrXJBNx2q/lG6V2Hzk8aRvWotTrV5I1r6n+DUsQdN0mvknWh/zYx3DOEkd
+ KqB+RrMip8PkOhk8oJULgs/9+euDLYzLAuJuec5kEbM+dNJq5JNYsSPO7T3DRc3kKeUp
+ TZSPaaMJ58K6NGvZJmNHWbRxoBALL5evrRiEtv6U/9czK0AUq4CZV8hWQvKkClix6GCL
+ 9pdyfuPnfdwsrRHTJYY+N4/wiaZuCUAvfTHv1hWrnkz7TVccaRhjCIyzqbnn3y4sxV6Q
+ BS8c9UA6RnHJOQaXW5amQ3Ulv9cC3tj5GWr7Mhwz7h1Kz9ctb/JI0QB9XUub/T2UgZVo
+ DNPg==
+X-Gm-Message-State: AOJu0YwQaKp1FlN2U81Vm3Phdj9UCjYy9m7+uTzRMszvBM65Bq0GCRrf
+ 2XN2NU4L/L5bZKIqCj70CPgGgw==
+X-Google-Smtp-Source: AGHT+IEd8gkruVqwS1OPyOB9qlMAru4MLT/lkjZl3aBrDV6Yb8/gYKx7Mxe+EeBTGsdrYYNwmUHjpw==
+X-Received: by 2002:a05:620a:3953:b0:76c:ce1c:930c with SMTP id
+ qs19-20020a05620a395300b0076cce1c930cmr12474381qkn.53.1691464323349; 
+ Mon, 07 Aug 2023 20:12:03 -0700 (PDT)
 Received: from stoup.. ([2602:47:d490:6901:e306:567a:e0a1:341])
  by smtp.gmail.com with ESMTPSA id
- g64-20020a636b43000000b0055bf96b11d9sm5639087pgc.89.2023.08.07.20.11.48
+ g64-20020a636b43000000b0055bf96b11d9sm5639087pgc.89.2023.08.07.20.12.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Aug 2023 20:11:48 -0700 (PDT)
+ Mon, 07 Aug 2023 20:12:02 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org
-Subject: [PATCH 05/24] target/m68k: Use tcg_gen_negsetcond_*
-Date: Mon,  7 Aug 2023 20:11:24 -0700
-Message-Id: <20230808031143.50925-6-richard.henderson@linaro.org>
+Subject: [PATCH 21/24] tcg/i386: Use CMP+SBB in tcg_out_setcond
+Date: Mon,  7 Aug 2023 20:11:40 -0700
+Message-Id: <20230808031143.50925-22-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230808031143.50925-1-richard.henderson@linaro.org>
 References: <20230808031143.50925-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x432.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::732;
+ envelope-from=richard.henderson@linaro.org; helo=mail-qk1-x732.google.com
 X-Spam_score_int: 4
 X-Spam_score: 0.4
 X-Spam_bar: /
@@ -94,93 +94,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Use the carry bit to optimize some forms of setcond.
+
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/m68k/translate.c | 24 ++++++++++--------------
- 1 file changed, 10 insertions(+), 14 deletions(-)
+ tcg/i386/tcg-target.c.inc | 50 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 50 insertions(+)
 
-diff --git a/target/m68k/translate.c b/target/m68k/translate.c
-index e07161d76f..37954d11a6 100644
---- a/target/m68k/translate.c
-+++ b/target/m68k/translate.c
-@@ -1357,8 +1357,7 @@ static void gen_cc_cond(DisasCompare *c, DisasContext *s, int cond)
-     case 14: /* GT (!(Z || (N ^ V))) */
-     case 15: /* LE (Z || (N ^ V)) */
-         c->v1 = tmp = tcg_temp_new();
--        tcg_gen_setcond_i32(TCG_COND_EQ, tmp, QREG_CC_Z, c->v2);
--        tcg_gen_neg_i32(tmp, tmp);
-+        tcg_gen_negsetcond_i32(TCG_COND_EQ, tmp, QREG_CC_Z, c->v2);
-         tmp2 = tcg_temp_new();
-         tcg_gen_xor_i32(tmp2, QREG_CC_N, QREG_CC_V);
-         tcg_gen_or_i32(tmp, tmp, tmp2);
-@@ -1437,9 +1436,8 @@ DISAS_INSN(scc)
-     gen_cc_cond(&c, s, cond);
- 
-     tmp = tcg_temp_new();
--    tcg_gen_setcond_i32(c.tcond, tmp, c.v1, c.v2);
-+    tcg_gen_negsetcond_i32(c.tcond, tmp, c.v1, c.v2);
- 
--    tcg_gen_neg_i32(tmp, tmp);
-     DEST_EA(env, insn, OS_BYTE, tmp, NULL);
- }
- 
-@@ -2771,13 +2769,14 @@ DISAS_INSN(mull)
-             tcg_gen_muls2_i32(QREG_CC_N, QREG_CC_V, src1, DREG(ext, 12));
-             /* QREG_CC_V is -(QREG_CC_V != (QREG_CC_N >> 31)) */
-             tcg_gen_sari_i32(QREG_CC_Z, QREG_CC_N, 31);
--            tcg_gen_setcond_i32(TCG_COND_NE, QREG_CC_V, QREG_CC_V, QREG_CC_Z);
-+            tcg_gen_negsetcond_i32(TCG_COND_NE, QREG_CC_V,
-+                                   QREG_CC_V, QREG_CC_Z);
-         } else {
-             tcg_gen_mulu2_i32(QREG_CC_N, QREG_CC_V, src1, DREG(ext, 12));
-             /* QREG_CC_V is -(QREG_CC_V != 0), use QREG_CC_C as 0 */
--            tcg_gen_setcond_i32(TCG_COND_NE, QREG_CC_V, QREG_CC_V, QREG_CC_C);
-+            tcg_gen_negsetcond_i32(TCG_COND_NE, QREG_CC_V,
-+                                   QREG_CC_V, QREG_CC_C);
-         }
--        tcg_gen_neg_i32(QREG_CC_V, QREG_CC_V);
-         tcg_gen_mov_i32(DREG(ext, 12), QREG_CC_N);
- 
-         tcg_gen_mov_i32(QREG_CC_Z, QREG_CC_N);
-@@ -3346,14 +3345,13 @@ static inline void shift_im(DisasContext *s, uint16_t insn, int opsize)
-         if (!logical && m68k_feature(s->env, M68K_FEATURE_M68K)) {
-             /* if shift count >= bits, V is (reg != 0) */
-             if (count >= bits) {
--                tcg_gen_setcond_i32(TCG_COND_NE, QREG_CC_V, reg, QREG_CC_V);
-+                tcg_gen_negsetcond_i32(TCG_COND_NE, QREG_CC_V, reg, QREG_CC_V);
-             } else {
-                 TCGv t0 = tcg_temp_new();
-                 tcg_gen_sari_i32(QREG_CC_V, reg, bits - 1);
-                 tcg_gen_sari_i32(t0, reg, bits - count - 1);
--                tcg_gen_setcond_i32(TCG_COND_NE, QREG_CC_V, QREG_CC_V, t0);
-+                tcg_gen_negsetcond_i32(TCG_COND_NE, QREG_CC_V, QREG_CC_V, t0);
-             }
--            tcg_gen_neg_i32(QREG_CC_V, QREG_CC_V);
-         }
-     } else {
-         tcg_gen_shri_i32(QREG_CC_C, reg, count - 1);
-@@ -3437,9 +3435,8 @@ static inline void shift_reg(DisasContext *s, uint16_t insn, int opsize)
-             /* Ignore the bits below the sign bit.  */
-             tcg_gen_andi_i64(t64, t64, -1ULL << (bits - 1));
-             /* If any bits remain set, we have overflow.  */
--            tcg_gen_setcondi_i64(TCG_COND_NE, t64, t64, 0);
-+            tcg_gen_negsetcond_i64(TCG_COND_NE, t64, t64, tcg_constant_i64(0));
-             tcg_gen_extrl_i64_i32(QREG_CC_V, t64);
--            tcg_gen_neg_i32(QREG_CC_V, QREG_CC_V);
-         }
-     } else {
-         tcg_gen_shli_i64(t64, t64, 32);
-@@ -5318,9 +5315,8 @@ DISAS_INSN(fscc)
-     gen_fcc_cond(&c, s, cond);
- 
-     tmp = tcg_temp_new();
--    tcg_gen_setcond_i32(c.tcond, tmp, c.v1, c.v2);
-+    tcg_gen_negsetcond_i32(c.tcond, tmp, c.v1, c.v2);
- 
--    tcg_gen_neg_i32(tmp, tmp);
-     DEST_EA(env, insn, OS_BYTE, tmp, NULL);
- }
- 
+diff --git a/tcg/i386/tcg-target.c.inc b/tcg/i386/tcg-target.c.inc
+index 56549ff2a0..e06ac638b0 100644
+--- a/tcg/i386/tcg-target.c.inc
++++ b/tcg/i386/tcg-target.c.inc
+@@ -1528,6 +1528,56 @@ static void tcg_out_setcond(TCGContext *s, int rexw, TCGCond cond,
+                             TCGArg dest, TCGArg arg1, TCGArg arg2,
+                             int const_arg2)
+ {
++    bool inv = false;
++
++    switch (cond) {
++    case TCG_COND_NE:
++        inv = true;
++        /* fall through */
++    case TCG_COND_EQ:
++        /* If arg2 is 0, convert to LTU/GEU vs 1. */
++        if (const_arg2 && arg2 == 0) {
++            arg2 = 1;
++            goto do_ltu;
++        }
++        break;
++
++    case TCG_COND_LEU:
++        inv = true;
++        /* fall through */
++    case TCG_COND_GTU:
++        /* If arg2 is a register, swap for LTU/GEU. */
++        if (!const_arg2) {
++            TCGReg t = arg1;
++            arg1 = arg2;
++            arg2 = t;
++            goto do_ltu;
++        }
++        break;
++
++    case TCG_COND_GEU:
++        inv = true;
++        /* fall through */
++    case TCG_COND_LTU:
++    do_ltu:
++        /*
++         * Relying on the carry bit, use SBB to produce -1 if LTU, 0 if GEU.
++         * We can then use NEG or INC to produce the desired result.
++         * This is always smaller than the SETCC expansion.
++         */
++        tcg_out_cmp(s, rexw, arg1, arg2, const_arg2, true);
++        tgen_arithr(s, ARITH_SBB, dest, dest);              /* T:-1 F:0 */
++        if (inv) {
++            tgen_arithi(s, ARITH_ADD, dest, 1, 0);          /* T:0  F:1 */
++        } else {
++            tcg_out_modrm(s, OPC_GRP3_Ev, EXT3_NEG, dest);  /* T:1  F:0 */
++        }
++        return;
++
++    default:
++        break;
++    }
++
+     tcg_out_cmp(s, rexw, arg1, arg2, const_arg2, false);
+     tcg_out_modrm(s, OPC_SETCC | tcg_cond_to_jcc[cond], 0, dest);
+     tcg_out_ext8u(s, dest, dest);
 -- 
 2.34.1
 
