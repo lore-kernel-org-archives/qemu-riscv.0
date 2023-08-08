@@ -4,85 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8134C001DB
-	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Aug 2023 14:29:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A81D8C001DB
+	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Aug 2023 15:43:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qTNhP-0002Ix-BC; Tue, 08 Aug 2023 10:28:39 -0400
+	id 1qTOrH-00069C-2U; Tue, 08 Aug 2023 11:42:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1qTNhO-0002Ij-Dm
- for qemu-riscv@nongnu.org; Tue, 08 Aug 2023 10:28:38 -0400
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1qTNhM-0003KV-V5
- for qemu-riscv@nongnu.org; Tue, 08 Aug 2023 10:28:38 -0400
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-1bbf0f36ce4so37387025ad.0
- for <qemu-riscv@nongnu.org>; Tue, 08 Aug 2023 07:28:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1691504915; x=1692109715;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=WjIQTdJXCyYEoKEkOcHIrtiJvvJxjdXOQaOVJRDiY1k=;
- b=J1DQaJPbm1esN/0wKMnreNKt0cQ9zasI47tG58herfpIDuhU2gpSaU3R2wtrSyikur
- O6Q3z+Cuz8FOE6DNHYFZk0U6kNOJL8QDNhkGmUYM8ETnX+n3CxzYfXbmcbsxdT4mY9wd
- 5+uwWL9le73zmsE8/4GIweuDcbF1zgs/wpDL6IwRrbAlZjDc8n/3YV+3MxFRVYZK5Rks
- 4KVBfSrKAFHRVGpgEscpi5DyLFH/bHbQFkijQamaNzMH93Z/NPzAGqpO1h9r+UvMfoEp
- OdJ5apydwW9Spbv74Uo1IxkJDYnH+Y+Cadqzw9OxJzj5Kb6Gy6NNmgP2/Z9pBpq8x15O
- Xfxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691504915; x=1692109715;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=WjIQTdJXCyYEoKEkOcHIrtiJvvJxjdXOQaOVJRDiY1k=;
- b=IzO8brmLCr6waoMr3TKVAxHqnMheYbmBmLkVVPO6RKl+fG3MY+jJKXvUytnRpbvm7z
- rWgh7h42DX3PRoxetUT0vjnmw2Y1yCwXm2TojadzTPJ37puU5MLj+VGyOTGF6efdb+Ii
- /X3ogu3Aipruyb4MmPT5fxDrlnbjmDdCoUpjMwakTzZpqHGfdQlc7GIRtYc/RKh89o+f
- lPlfOqXo3AV9TttWYH4D+rZedXhzwLoqMtZEJW5f/x3PYZvEYwJFEB/LeyL72OMpS9XW
- JA26k8Lx9ydMmRtAF83ySt8b6NpOEe55tdF/ZrFr2oKyz7WNWwx5ptz4egGHRyLWt42+
- cxdw==
-X-Gm-Message-State: AOJu0Yz8UBwr27knRoPFpFnZg46fKceD3JX33Q663i1P6nSV0AP3lgWZ
- qGBmFIHGADsYES4gqGBUHQLROA==
-X-Google-Smtp-Source: AGHT+IF6QsHnPBwlCBdps/gUeduLbXkJgG1IL8LRH+zEZzQDG0U4YHT2J6ETa92VkQRmnrnGJf/mSQ==
-X-Received: by 2002:a17:90b:1d88:b0:269:4645:80b9 with SMTP id
- pf8-20020a17090b1d8800b00269464580b9mr7066511pjb.2.1691504915050; 
- Tue, 08 Aug 2023 07:28:35 -0700 (PDT)
-Received: from ?IPV6:2602:47:d490:6901:63dc:2a47:f4bc:4a95?
- ([2602:47:d490:6901:63dc:2a47:f4bc:4a95])
- by smtp.gmail.com with ESMTPSA id
- 2-20020a17090a01c200b00256b67208b1sm11353903pjd.56.2023.08.08.07.28.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Aug 2023 07:28:34 -0700 (PDT)
-Message-ID: <d7cc2724-5fe5-f491-556c-03ab2af0975a@linaro.org>
-Date: Tue, 8 Aug 2023 07:28:32 -0700
+ (Exim 4.90_1) (envelope-from <kbastian@mail.uni-paderborn.de>)
+ id 1qTOrE-00067K-0i; Tue, 08 Aug 2023 11:42:52 -0400
+Received: from collins.uni-paderborn.de ([2001:638:502:c003::14])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <kbastian@mail.uni-paderborn.de>)
+ id 1qTOrB-0000af-S1; Tue, 08 Aug 2023 11:42:51 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=mail.uni-paderborn.de; s=20170601; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=91G9Pk0Exz2mrf4Mv1KaJG1Ne+IHpYla8z7w4QzCQVw=; b=qcsIPBCW/vDZKar83LXCiFUh4Z
+ SaXGG+ZnklQThYtxlVJaYU2kjjY0Mfub+l6ZlvgT3Y0yl+407uRaC0NAzm0aOHBIFj1p36g/995vB
+ ujhAw5ZaBI8JdcytHYayMuFsdzvTUXJJfLFLVrAOBRE9oZwQRWHgZE1jLkIu4wE+jUYA=;
+Date: Tue, 8 Aug 2023 17:42:37 +0200
+From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org, 
+ qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
+Subject: Re: [PATCH 09/24] target/tricore: Replace gen_cond_w with
+ tcg_gen_negsetcond_tl
+Message-ID: <sodhcladibb7xf7ibqdirlwqfmcsj3xabthqheixzldqwhpogw@kujjnqe4aoed>
+References: <20230808031143.50925-1-richard.henderson@linaro.org>
+ <20230808031143.50925-10-richard.henderson@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH] linux-user/riscv: Use abi_ulong for target_ucontext
-Content-Language: en-US
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
-Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
- liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, qemu-riscv@nongnu.org
-References: <20230808093434.2059-1-zhiwei_liu@linux.alibaba.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230808093434.2059-1-zhiwei_liu@linux.alibaba.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62e.google.com
-X-Spam_score_int: -61
-X-Spam_score: -6.2
-X-Spam_bar: ------
-X-Spam_report: (-6.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-4.14,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230808031143.50925-10-richard.henderson@linaro.org>
+X-IMT-Source: Extern
+X-IMT-Spam-Score: 0.0 ()
+X-IMT-rspamd-score: 14
+X-IMT-rspamd-bar: +
+X-PMX-Version: 6.4.9.2830568, Antispam-Engine: 2.7.2.2107409,
+ Antispam-Data: 2023.8.8.153316, AntiVirus-Engine: 6.0.2,
+ AntiVirus-Data: 2023.8.6.602002
+X-IMT-Authenticated-Sender: kbastian@UNI-PADERBORN.DE
+Received-SPF: pass client-ip=2001:638:502:c003::14;
+ envelope-from=kbastian@mail.uni-paderborn.de; helo=collins.uni-paderborn.de
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ SUSPICIOUS_RECIPS=2.51 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,16 +73,19 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 8/8/23 02:34, LIU Zhiwei wrote:
-> We should not use types dependend on host arch for target_ucontext.
-> This bug is found when run rv32 applications.
-> 
-> Signed-off-by: LIU Zhiwei<zhiwei_liu@linux.alibaba.com>
+On Mon, Aug 07, 2023 at 08:11:28PM -0700, Richard Henderson wrote:
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->   linux-user/riscv/signal.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
+>  target/tricore/translate.c | 16 ++++++----------
+>  1 file changed, 6 insertions(+), 10 deletions(-)
+> 
+> diff --git a/target/tricore/translate.c b/target/tricore/translate.c
+> index 1947733870..6ae5ccbf72 100644
+> --- a/target/tricore/translate.c
+> +++ b/target/tricore/translate.c
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 
-r~
+Cheers,
+Bastian
 
