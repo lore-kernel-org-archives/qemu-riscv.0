@@ -4,78 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD91FC001DB
-	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Aug 2023 18:17:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAF4FC001DB
+	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Aug 2023 18:29:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qTRGo-0007jc-8r; Tue, 08 Aug 2023 14:17:26 -0400
+	id 1qTRSY-0003pZ-Jl; Tue, 08 Aug 2023 14:29:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <vineetg@rivosinc.com>)
- id 1qTRGk-0007ij-Fy
- for qemu-riscv@nongnu.org; Tue, 08 Aug 2023 14:17:23 -0400
-Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1qTRSX-0003oY-OW
+ for qemu-riscv@nongnu.org; Tue, 08 Aug 2023 14:29:33 -0400
+Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <vineetg@rivosinc.com>)
- id 1qTRGi-0005fX-9d
- for qemu-riscv@nongnu.org; Tue, 08 Aug 2023 14:17:22 -0400
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-1bc02bd4eafso51018625ad.1
- for <qemu-riscv@nongnu.org>; Tue, 08 Aug 2023 11:17:19 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1qTRSW-0000Am-6a
+ for qemu-riscv@nongnu.org; Tue, 08 Aug 2023 14:29:33 -0400
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-26934bc3059so91929a91.1
+ for <qemu-riscv@nongnu.org>; Tue, 08 Aug 2023 11:29:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1691518638; x=1692123438; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=kquCB3S6DJznCAq/H5AtwqsePfIU1qyDH4Mkk6K35/Y=;
- b=khdZrlcXeaaPKDopC4oHJQ6NWDHGQCTaf5f0xg3eY1ZrbJbW/Hzp1Kcv66ws86YW70
- 4CHXi9tka3naY8eq/GB4wZofDo/KFnmSo1JMIwxPf5vGLI6RnFqX3bxfslJ8NJooRpy7
- +cW53FlgLhzoKVKA2GP0bMITAIF7WOpNrQXhixvoJnsLKJtFndsxfu/HZ96FTltoM6Xy
- /KlD5z9hejQLgUuFs8+tp0lCDg1j6RdbssSpkpjPnu6u4zGfJxcBHFtlywWQ7yCvpE16
- OLmKAUuex+GoOOp7jCeG96B31opyfraMVm4OhVkRyOFlsQ9ufsYAKOvxFCNJtLnXLQJE
- 73DA==
+ d=linaro.org; s=google; t=1691519371; x=1692124171;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=4kHWk1Q/PwN6qB7mVj6UYl8MgVcJoJIge7LSkKO3CLA=;
+ b=l5tDsM4OtOYBiLPKptKxx/NdwtkTcC7xszTzEVjKs69G3R5PptbK/2oHsmyVpNe+2e
+ 1vleMkxIRCpOxVeycMQNBdA3PqQdIuYGx5YHYu/+SODH9ybKWUxBcKFzo3hUFhYMM/0z
+ 1oPUY5PnhBKynlB9mCMu1jt/2Si1ldEKYu9Ps2U/SeJU2yLFTBULRudDhzaqjzsqK2CL
+ d60m4DiQTdWkU70MG1b9aXLasi4c9ETS3+6yslk0SRJ0A1gcyt7qFWkt3vB9qIRRsDrX
+ YkLohBvLVhhW+0Ia4aTdAFNpwcCF+citvyed+hbGNQYcUdCK0yfWpJsgVwsgVq1mwYK1
+ UOBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691518638; x=1692123438;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=kquCB3S6DJznCAq/H5AtwqsePfIU1qyDH4Mkk6K35/Y=;
- b=kqNSE9w6Ggil+iF2QHtGROFst0yOY06fDHwyRb9W2ZBcWPOBw1XmgJmtiXo9KjSh/Q
- nzUNScPoLSFKqB+FmYNJZcQkyu8kWtdKLDn0ObSO7+B5nrZeus7mKN6XiO1NFySfif+J
- qxfqz3hQt5WA9/hoI0apwehHxFm2rBRnvrW4iX5nzSUouKr1Rz2T083UW3fS6mdYI97y
- +Jj55pcqWQiOveB+J778idLKvK8ZHUEGQOczBMIlPQfkIQtHYsIlUDxvwH1zPx9qrIdw
- jxI6QbZBVRbtX5Y8AG7EGgdLS2GT/osCcCSZCUoc5BSoVrFQVTZO+uZyeJ9EKcLHIcZ6
- SOPw==
-X-Gm-Message-State: AOJu0YyXBeNo/rnfBLQj3QyJHUFAIk9Uv6+xMK5bar6rfbnEtaPL3Fag
- D+xvx7QBiJLhYK0Hd3Nja5nCnA==
-X-Google-Smtp-Source: AGHT+IHRNdTnFXFxEC3CcXKnerO5NqxX5uIBofvheXY2HtiNQUyU8T8uDRgT/CNyB1Z4+xuLBGsnGA==
-X-Received: by 2002:a17:902:be0a:b0:1b8:4f93:b210 with SMTP id
- r10-20020a170902be0a00b001b84f93b210mr438848pls.45.1691518638513; 
- Tue, 08 Aug 2023 11:17:18 -0700 (PDT)
-Received: from vineet-framework.hq.rivosinc.com ([50.221.140.188])
+ d=1e100.net; s=20221208; t=1691519371; x=1692124171;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=4kHWk1Q/PwN6qB7mVj6UYl8MgVcJoJIge7LSkKO3CLA=;
+ b=Xm9lEtgRGMNi5TnpKfL0FaL0yxfREIfVPG+3rhYEeCybUDTDT/VGqIGQW1a9GoxDUM
+ DeaQ1gNk208T+VrAQP8DKgGttlF4zf/6bX4Hi+FBKF1xDUK91tus4k9db4wi7Q8iynFs
+ nnMUDuo9B+o7JKM3jnMKawqCBdlmZ4vVNauchpJxkZfpTFk9zTdZTvb+efeponWiE61J
+ pW6VEBrc+b1YYsXMSejqSF5TnF/Q89Z1LpuXLHUaZ35txP4db1Mpk877LBo3GGtvLWcx
+ pW9Fz0/yEaD3wnUBtVZVV7i9ox4GkUG4YKuOgQNiX0Yx9ukfh9Xs0+j8I3f3+AH0I8eb
+ zSPQ==
+X-Gm-Message-State: AOJu0YwPK+idXgC6YWtDXH/HzIveHS6BaTNwUdyNhMGPIX9KuwdtXXZu
+ uRKY8r/YhE+gYl6VLc6gY4vDGQ==
+X-Google-Smtp-Source: AGHT+IEsJgrw/6BA6rQZa9O1U4/sRhMZalF/HQMd48zsbQ+SQIL91virR7oX8XIFzvQtfQMuX+wabw==
+X-Received: by 2002:a17:90a:480a:b0:268:5b19:c35e with SMTP id
+ a10-20020a17090a480a00b002685b19c35emr12847168pjh.6.1691519370676; 
+ Tue, 08 Aug 2023 11:29:30 -0700 (PDT)
+Received: from ?IPV6:2602:47:d490:6901:63dc:2a47:f4bc:4a95?
+ ([2602:47:d490:6901:63dc:2a47:f4bc:4a95])
  by smtp.gmail.com with ESMTPSA id
- e5-20020a170902b78500b001a5fccab02dsm9337248pls.177.2023.08.08.11.17.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Aug 2023 11:17:18 -0700 (PDT)
-From: Vineet Gupta <vineetg@rivosinc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: kito.cheng@gmail.com, Jeff Law <jeffreyalaw@gmail.com>,
- Palmer Dabbelt <palmer@rivosinc.com>, Vineet Gupta <vineetg@rivosinc.com>
-Subject: [PATCH 1/2] riscv: zicond: make non-experimental
-Date: Tue,  8 Aug 2023 11:17:14 -0700
-Message-Id: <20230808181715.436395-1-vineetg@rivosinc.com>
-X-Mailer: git-send-email 2.34.1
+ b11-20020a63714b000000b005633778becasm7086446pgn.41.2023.08.08.11.29.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 08 Aug 2023 11:29:30 -0700 (PDT)
+Message-ID: <0938f9c9-98a4-7238-c644-3eebd8964f87@linaro.org>
+Date: Tue, 8 Aug 2023 11:29:28 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
- envelope-from=vineetg@rivosinc.com; helo=mail-pl1-x635.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH 1/2] riscv: zicond: make non-experimental
+Content-Language: en-US
+To: Vineet Gupta <vineetg@rivosinc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: kito.cheng@gmail.com, Jeff Law <jeffreyalaw@gmail.com>,
+ Palmer Dabbelt <palmer@rivosinc.com>
+References: <20230808181715.436395-1-vineetg@rivosinc.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20230808181715.436395-1-vineetg@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1029.google.com
+X-Spam_score_int: -61
+X-Spam_score: -6.2
+X-Spam_bar: ------
+X-Spam_report: (-6.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-4.14,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -91,39 +99,13 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-zicond is now codegen supported in both llvm and gcc.
+On 8/8/23 11:17, Vineet Gupta wrote:
+> zicond is now codegen supported in both llvm and gcc.
 
-This change allows seamless enabling/testing of zicond in downstream
-projects. e.g. currently riscv-gnu-toolchain parses elf attributes
-to create a cmdline for qemu but fails short of enabling it because of
-the "x-" prefix.
+It is still not in
 
-Signed-off-by: Vineet Gupta <vineetg@rivosinc.com>
----
- target/riscv/cpu.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+https://wiki.riscv.org/display/HOME/Recently+Ratified+Extensions
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 6b93b04453c8..022bd9d01223 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1816,6 +1816,7 @@ static Property riscv_cpu_extensions[] = {
-     DEFINE_PROP_BOOL("zcf", RISCVCPU, cfg.ext_zcf, false),
-     DEFINE_PROP_BOOL("zcmp", RISCVCPU, cfg.ext_zcmp, false),
-     DEFINE_PROP_BOOL("zcmt", RISCVCPU, cfg.ext_zcmt, false),
-+    DEFINE_PROP_BOOL("zicond", RISCVCPU, cfg.ext_zicond, false),
- 
-     /* Vendor-specific custom extensions */
-     DEFINE_PROP_BOOL("xtheadba", RISCVCPU, cfg.ext_xtheadba, false),
-@@ -1832,7 +1833,6 @@ static Property riscv_cpu_extensions[] = {
-     DEFINE_PROP_BOOL("xventanacondops", RISCVCPU, cfg.ext_XVentanaCondOps, false),
- 
-     /* These are experimental so mark with 'x-' */
--    DEFINE_PROP_BOOL("x-zicond", RISCVCPU, cfg.ext_zicond, false),
- 
-     /* ePMP 0.9.3 */
-     DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
--- 
-2.34.1
 
+r~
 
