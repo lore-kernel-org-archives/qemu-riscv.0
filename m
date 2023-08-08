@@ -4,60 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A81D8C001DB
-	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Aug 2023 15:43:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BF4BC001DE
+	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Aug 2023 15:56:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qTOrH-00069C-2U; Tue, 08 Aug 2023 11:42:55 -0400
+	id 1qTP3w-0003KN-Pl; Tue, 08 Aug 2023 11:56:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kbastian@mail.uni-paderborn.de>)
- id 1qTOrE-00067K-0i; Tue, 08 Aug 2023 11:42:52 -0400
-Received: from collins.uni-paderborn.de ([2001:638:502:c003::14])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kbastian@mail.uni-paderborn.de>)
- id 1qTOrB-0000af-S1; Tue, 08 Aug 2023 11:42:51 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=mail.uni-paderborn.de; s=20170601; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=91G9Pk0Exz2mrf4Mv1KaJG1Ne+IHpYla8z7w4QzCQVw=; b=qcsIPBCW/vDZKar83LXCiFUh4Z
- SaXGG+ZnklQThYtxlVJaYU2kjjY0Mfub+l6ZlvgT3Y0yl+407uRaC0NAzm0aOHBIFj1p36g/995vB
- ujhAw5ZaBI8JdcytHYayMuFsdzvTUXJJfLFLVrAOBRE9oZwQRWHgZE1jLkIu4wE+jUYA=;
-Date: Tue, 8 Aug 2023 17:42:37 +0200
-From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1qTP3r-0003Io-SH
+ for qemu-riscv@nongnu.org; Tue, 08 Aug 2023 11:55:57 -0400
+Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1qTP3p-0003y1-7R
+ for qemu-riscv@nongnu.org; Tue, 08 Aug 2023 11:55:55 -0400
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-522382c4840so8271714a12.2
+ for <qemu-riscv@nongnu.org>; Tue, 08 Aug 2023 08:55:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1691510150; x=1692114950;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=aJ0UsCgUCLRkzlKNN3fii+ReD7qN5JFOHoDMNfD8JZw=;
+ b=CXxiYgZdMz2LXSHL4IlP4GaS09u5ib2oVSfpzTenJjGV8m+ijczcaZrhlScwIAglTn
+ Fh7rKSZYZWgGQafVT/CayG9K6TUZtVwWuA8PbmYzogDaEpag7gOFhEHE8a5Sj+LJg0PD
+ Vlu0Cxt3BZKIpPsjW62X8soniMXhQhYanTiclWebJWe/z+cutgAvAE/2bOxeTIdj9BJK
+ uWZ/4wyda2oGXIZH1+ijCAvf52VSVO26qRNXOQk29N43Hl4QVEFQ4HNtiGTy1y+Oh/ja
+ qZqq3uMWhhYSnY7wSRYbKXM3Y+yAuf2Yau+TBFcUicZGili+2VU7XW4RUE0lb4WF8epD
+ iFDQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1691510150; x=1692114950;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=aJ0UsCgUCLRkzlKNN3fii+ReD7qN5JFOHoDMNfD8JZw=;
+ b=bx2nvC4auqfUFB1V6KjCUf8PETqjm5OyhFGCCoA8Mn0jCLR3bfwXKldS0V/EoOszIB
+ 5tvGqgyQ2I0ahaV5aCiIWwpQM0Zhm7A2aQDtaFamQNHx5ICNFmtVR3yJrU6e4TzTmRBv
+ JGljAtaWG2pMRyeiXisqtl851nT4z5Atj6BJieytUUNhDT/Zl6SldnSfgD2xFMyehnTw
+ f0Fg4r8AKEsjY+7WVchMdeGL6ijrRkkNreg44Fw+vXazAveEoW58Z1ZeRtNAKh3yD2xS
+ g27JNLLqz2+HrYh4da1JHUsB4dosnJrfMbSItWYZYSXE7/XuqC4qCsFChhpG85WYUNc7
+ spKQ==
+X-Gm-Message-State: AOJu0YyPsUT4ccF76/h5stLGjZG7RK+jClFqeg7w1AHiLa8qAgwA8cRZ
+ 0z9hx/Hh8iHmnI7g/Vboxj7EyYhNUPYf3zxb9d3gCw==
+X-Google-Smtp-Source: AGHT+IHJKYMuHmEub1RNwIwtkMPh4r4CE2dABsGYUBghBUgPkD70WLTt31emiAcDUZI2nWPdQt4RxKVnEArv/j+YX8g=
+X-Received: by 2002:aa7:dbd3:0:b0:51e:5322:a642 with SMTP id
+ v19-20020aa7dbd3000000b0051e5322a642mr159616edt.27.1691510150265; Tue, 08 Aug
+ 2023 08:55:50 -0700 (PDT)
+MIME-Version: 1.0
+References: <20230808031143.50925-1-richard.henderson@linaro.org>
+ <20230808031143.50925-3-richard.henderson@linaro.org>
+In-Reply-To: <20230808031143.50925-3-richard.henderson@linaro.org>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Tue, 8 Aug 2023 16:55:39 +0100
+Message-ID: <CAFEAcA8ORUejjC3iVdjYSkX1St6ntxXbDPtTC0tuv5C_5rQ8xQ@mail.gmail.com>
+Subject: Re: [PATCH 02/24] tcg: Use tcg_gen_negsetcond_*
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org, 
  qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
-Subject: Re: [PATCH 09/24] target/tricore: Replace gen_cond_w with
- tcg_gen_negsetcond_tl
-Message-ID: <sodhcladibb7xf7ibqdirlwqfmcsj3xabthqheixzldqwhpogw@kujjnqe4aoed>
-References: <20230808031143.50925-1-richard.henderson@linaro.org>
- <20230808031143.50925-10-richard.henderson@linaro.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230808031143.50925-10-richard.henderson@linaro.org>
-X-IMT-Source: Extern
-X-IMT-Spam-Score: 0.0 ()
-X-IMT-rspamd-score: 14
-X-IMT-rspamd-bar: +
-X-PMX-Version: 6.4.9.2830568, Antispam-Engine: 2.7.2.2107409,
- Antispam-Data: 2023.8.8.153316, AntiVirus-Engine: 6.0.2,
- AntiVirus-Data: 2023.8.6.602002
-X-IMT-Authenticated-Sender: kbastian@UNI-PADERBORN.DE
-Received-SPF: pass client-ip=2001:638:502:c003::14;
- envelope-from=kbastian@mail.uni-paderborn.de; helo=collins.uni-paderborn.de
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, RCVD_IN_DNSWL_MED=-2.3,
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::532;
+ envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x532.google.com
+X-Spam_score_int: 4
+X-Spam_score: 0.4
+X-Spam_bar: /
+X-Spam_report: (0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- SUSPICIOUS_RECIPS=2.51 autolearn=ham autolearn_force=no
+ SUSPICIOUS_RECIPS=2.51 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -73,19 +88,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Aug 07, 2023 at 08:11:28PM -0700, Richard Henderson wrote:
+On Tue, 8 Aug 2023 at 04:13, Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->  target/tricore/translate.c | 16 ++++++----------
->  1 file changed, 6 insertions(+), 10 deletions(-)
-> 
-> diff --git a/target/tricore/translate.c b/target/tricore/translate.c
-> index 1947733870..6ae5ccbf72 100644
-> --- a/target/tricore/translate.c
-> +++ b/target/tricore/translate.c
+>  tcg/tcg-op-gvec.c | 6 ++----
+>  tcg/tcg-op.c      | 6 ++----
+>  2 files changed, 4 insertions(+), 8 deletions(-)
+>
+> diff --git a/tcg/tcg-op-gvec.c b/tcg/tcg-op-gvec.c
+> index a062239804..e260a07c61 100644
+> --- a/tcg/tcg-op-gvec.c
+> +++ b/tcg/tcg-op-gvec.c
+> @@ -3692,8 +3692,7 @@ static void expand_cmp_i32(uint32_t dofs, uint32_t aofs, uint32_t bofs,
+>      for (i = 0; i < oprsz; i += 4) {
+>          tcg_gen_ld_i32(t0, cpu_env, aofs + i);
+>          tcg_gen_ld_i32(t1, cpu_env, bofs + i);
+> -        tcg_gen_setcond_i32(cond, t0, t0, t1);
+> -        tcg_gen_neg_i32(t0, t0);
+> +        tcg_gen_negsetcond_i32(cond, t0, t0, t1);
+>          tcg_gen_st_i32(t0, cpu_env, dofs + i);
+>      }
 
-Reviewed-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Is it not possible for the optimizer to notice "you did
+a setcond followed by a neg, let me turn it into negsetcond
+for you" ?
 
-Cheers,
-Bastian
+thanks
+-- PMM
 
