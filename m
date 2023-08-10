@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29C59C001DB
-	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Aug 2023 10:49:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1DB7C001E0
+	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Aug 2023 15:32:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qU3DJ-0004Qz-On; Thu, 10 Aug 2023 06:48:21 -0400
+	id 1qU7dm-0003yH-Kx; Thu, 10 Aug 2023 11:31:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qU3DI-0004Qj-Lw
- for qemu-riscv@nongnu.org; Thu, 10 Aug 2023 06:48:20 -0400
-Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1qU7dg-0003xC-7F
+ for qemu-riscv@nongnu.org; Thu, 10 Aug 2023 11:31:53 -0400
+Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qU3DF-0000pz-NA
- for qemu-riscv@nongnu.org; Thu, 10 Aug 2023 06:48:20 -0400
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-31792ac0fefso694638f8f.2
- for <qemu-riscv@nongnu.org>; Thu, 10 Aug 2023 03:48:17 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1qU7de-00026M-4p
+ for qemu-riscv@nongnu.org; Thu, 10 Aug 2023 11:31:51 -0400
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-99c3d3c3db9so150718366b.3
+ for <qemu-riscv@nongnu.org>; Thu, 10 Aug 2023 08:31:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1691664495; x=1692269295;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=zREiXgKhZWxOySl4V29SG5+DLFHDpfvUC3WQmIKJbn0=;
- b=Q0HupAC/YX8AtNhm/fEDhb6Lcb9+H1mdoca17VRqXCxJFoplSvC2xORJh7dSkTBv5z
- MHnYcuKDbfnuUUEsL2lV1wyrlPBnDZyUwM2ztGkCI3CmrmSoVVKhI5/0RVpun4qFTUz2
- 3EiMv7vQWimfMpT1AU+1ghvkG2hj7IOUjE59i5xp5tMHqM0HgXe984qp7Os2T7QGFzSj
- FgzkcNK2mOTTrUIxPVBlItP2y6tJx1a/uAninJu1pgmBfV3eJ8fMQF4dlaMV+1uYgi6O
- YsKNG0VTuig0mx+h9iu1+wY24vXD1XyO5CT0/flohu6oAHGCgWD1arBaM0ZmL77f/dyV
- YqzQ==
+ d=ventanamicro.com; s=google; t=1691681508; x=1692286308;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=YxqrlqL2dabw4MAMNw9weMs9SAvG9fseBRi2E11WqiU=;
+ b=m6DZvxAUrdtSmrT1nzXTlLAGg++JhOuYH0imXjA7lgNzInUd3XWBwflfBZoYDJOBFK
+ UnUNl+TP9yExjk2yofj9MKFHCN3+4O4zDQsA+DD8yFDzPZOjobvinx3plZcpjNp/INfm
+ iXJsf1QNbvCZD6aLVtfS/zDLM2BkLbL1UAdw1XOQTyibcaGU3A9w1DXKIscvs2nx4wjo
+ Gyz7T1njzrr3KTWuDr2hlvAEFmjKy3XHK0/bGiFIXf0qUc3VMP3pccwhcmmxsGbIkW7+
+ JwJdLv9WDqQRyGvPzLbmhqMCje2ZJr7xeb6wgMVB9dHm2pwobWLG7zN2kXSmXi205b2r
+ N1JA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691664495; x=1692269295;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=zREiXgKhZWxOySl4V29SG5+DLFHDpfvUC3WQmIKJbn0=;
- b=f5JXm0vMCG8grgO6QNzryyEdmAPt/fHNsV/ekXLOSrdFp11DX8XLGjrrGsJ6g6gpaM
- 3n/qeQA+s7qjB2OQ0y2QauP7zNTj+eoK/oy1TwfUVsJTwDE9EMJlJE/6Gf1c1q3Y4feN
- eYDBPpXIjjxcLyH917bGxGwPsWRxK04Bz5acYfL4kGInBU88MZ7qaAyQwZOeR8EzxAdL
- h25IqiLCz7UaqP/pB7Sd5E6bRxDMdRD7W/zRbljTDH2OfOoU40Nh9+7tWGLgRwB7Fj2K
- bi9I+RK3HSzsDqlcOGp2wi+46ZcXbklmEiki37+gx/CMeh/MrvR9f+fAo3HYyVYAoEdn
- LwZA==
-X-Gm-Message-State: AOJu0YyZfJTWHZIrLiQMYYzpsl/odBfYiz26G4/JPJxWzqxDEC93Obsg
- DJtBja3c5ZN3y12DLtavHXh9OA==
-X-Google-Smtp-Source: AGHT+IG+HwwMgrsgOm9JZ0Hr29Jn819s3M9xSfBSZbEVx/RdrpKh5qAK7TJQuyXEGYf1FBD5zkW4+g==
-X-Received: by 2002:adf:f605:0:b0:317:54de:7315 with SMTP id
- t5-20020adff605000000b0031754de7315mr1730141wrp.61.1691664494935; 
- Thu, 10 Aug 2023 03:48:14 -0700 (PDT)
-Received: from [192.168.69.115] ([176.176.158.65])
+ d=1e100.net; s=20221208; t=1691681508; x=1692286308;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YxqrlqL2dabw4MAMNw9weMs9SAvG9fseBRi2E11WqiU=;
+ b=CXw+GY6EsYhj5EPIfGqaoLKREh/gsUoabd4KKZHb08YL48NrFVw4Un49t0djZopf1Y
+ XPGIeHxUUK7lGxdVN0AzcSv/B3S2U4TjaR8Sn9ENyiu9MXyX47e8lkVYecA/vtrMTlz2
+ RIZrCELOLsiGGDtkSr+nC5pcqeGghqDp031kdCJq2LSBnnDg8z8pnVeTJFlMh26SXyYg
+ G5bZ0ZohHQzEcjgMZVoBqbVTXw7pfJxvF7Vx6pSRxR9VG5Ec2jdYuH8F/cXm6cVjek2o
+ YtmsFOWAXCoicnSzOyACuysiHdVAnOTlibfy2VOdbopfJLNpluUYNPBj/GboMxYPeTwn
+ 2+jw==
+X-Gm-Message-State: AOJu0YxaK0IRaCf2llhh+FPts1gcYNYS2hliwxkd6F1iGMgGFaokEPkt
+ rdA/3rQYj334bEQvYNgPAeTyNA==
+X-Google-Smtp-Source: AGHT+IGMMyBbMlIpV+lsycF86IZ8OZX31zj4+MRYhSREnaTjUeh1LDpABSQjLffhv4+c0BPdvFJbBw==
+X-Received: by 2002:a17:906:1ce:b0:966:17b2:5b0b with SMTP id
+ 14-20020a17090601ce00b0096617b25b0bmr2654767ejj.49.1691681508374; 
+ Thu, 10 Aug 2023 08:31:48 -0700 (PDT)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
  by smtp.gmail.com with ESMTPSA id
- b13-20020adfe30d000000b003113ed02080sm1746738wrj.95.2023.08.10.03.48.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 10 Aug 2023 03:48:14 -0700 (PDT)
-Message-ID: <64635d96-26d9-a00c-cf2f-aa92d7162061@linaro.org>
-Date: Thu, 10 Aug 2023 12:48:12 +0200
+ qw25-20020a170906fcb900b009928b4e3b9fsm1073556ejb.114.2023.08.10.08.31.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 10 Aug 2023 08:31:47 -0700 (PDT)
+Date: Thu, 10 Aug 2023 17:31:46 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Richard Bagley <rbagley@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, dbarboza@ventanamicro.com
+Subject: Re: [PATCH] disas/riscv: Further correction to LUI disassembly
+Message-ID: <20230810-c9e1f2783168b48bc07a1aa2@orel>
+References: <20230731183320.410922-1-rbagley@ventanamicro.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.13.0
-Subject: Re: [PATCH] linux-user/riscv: Use abi_ulong for target_ucontext
-Content-Language: en-US
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org,
- Richard Henderson <richard.henderson@linaro.org>
-Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
- liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, qemu-riscv@nongnu.org
-References: <20230808093434.2059-1-zhiwei_liu@linux.alibaba.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230808093434.2059-1-zhiwei_liu@linux.alibaba.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42c.google.com
-X-Spam_score_int: -61
-X-Spam_score: -6.2
-X-Spam_bar: ------
-X-Spam_report: (-6.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-4.14,
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230731183320.410922-1-rbagley@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x62d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -96,35 +95,71 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 8/8/23 11:34, LIU Zhiwei wrote:
-> We should not use types dependend on host arch for target_ucontext.
-> This bug is found when run rv32 applications.
+On Mon, Jul 31, 2023 at 11:33:20AM -0700, Richard Bagley wrote:
+> The recent commit 36df75a0a9 corrected one aspect of LUI disassembly
+> by recovering the immediate argument from the result of LUI with a
+> shift right by 12. However, the shift right will left-fill with the
+> sign. By applying a mask we recover an unsigned representation of the
+> 20-bit field (which includes a sign bit).
 > 
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> Example:
+> 0xfffff000 >> 12 = 0xffffffff
+> 0xfffff000 >> 12 & 0xfffff = 0x000fffff
+> 
+> Fixes: 36df75a0a9 ("riscv/disas: Fix disas output of upper immediates")
+> Signed-off-by: Richard Bagley <rbagley@ventanamicro.com>
 > ---
->   linux-user/riscv/signal.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
+>  disas/riscv.c | 9 ++++++---
+>  1 file changed, 6 insertions(+), 3 deletions(-)
 > 
-> diff --git a/linux-user/riscv/signal.c b/linux-user/riscv/signal.c
-> index eaa168199a..ff8634a272 100644
-> --- a/linux-user/riscv/signal.c
-> +++ b/linux-user/riscv/signal.c
-> @@ -38,8 +38,8 @@ struct target_sigcontext {
->   }; /* cf. riscv-linux:arch/riscv/include/uapi/asm/ptrace.h */
->   
->   struct target_ucontext {
-> -    unsigned long uc_flags;
-> -    struct target_ucontext *uc_link;
-> +    abi_ulong uc_flags;
+> diff --git a/disas/riscv.c b/disas/riscv.c
+> index 4023e3fc65..690eb4a1ac 100644
+> --- a/disas/riscv.c
+> +++ b/disas/riscv.c
+> @@ -4723,9 +4723,12 @@ static void format_inst(char *buf, size_t buflen, size_t tab, rv_decode *dec)
+>              break;
+>          case 'U':
+>              fmt++;
+> -            snprintf(tmp, sizeof(tmp), "%d", dec->imm >> 12);
+> -            append(buf, tmp, buflen);
+> -            if (*fmt == 'o') {
+> +            if (*fmt == 'i') {
+> +                snprintf(tmp, sizeof(tmp), "%d", dec->imm >> 12 & 0xfffff);
 
-Correct.
+Why are we correcting LUI's output, but still outputting sign-extended
+values for AUIPC?
 
-> +    abi_ulong uc_link;
+We can't assemble 'auipc a1, 0xffffffff' or 'auipc a1, -1' without getting
 
-Isn't it 'abi_ptr uc_link' instead?
+ Error: lui expression not in range 0..1048575
 
->       target_stack_t uc_stack;
->       target_sigset_t uc_sigmask;
->       uint8_t   __unused[1024 / 8 - sizeof(target_sigset_t)];
+(and additionally for 0xffffffff)
 
+ Error: value of 00000ffffffff000 too large for field of 4 bytes at 0000000000000000
+
+either.
+
+(I see that the assembler's error messages state 'lui', but I was trying
+'auipc'.)
+
+I'm using as from gnu binutils 2.40.0.20230214.
+
+(And, FWIW, I agree with Richard Henderson that these instructions should
+accept negative values.)
+
+Thanks,
+drew
+
+
+> +                append(buf, tmp, buflen);
+> +            } else if (*fmt == 'o') {
+> +                snprintf(tmp, sizeof(tmp), "%d", dec->imm >> 12);
+> +                append(buf, tmp, buflen);
+>                  while (strlen(buf) < tab * 2) {
+>                      append(buf, " ", buflen);
+>                  }
+> -- 
+> 2.34.1
+> 
+> 
 
