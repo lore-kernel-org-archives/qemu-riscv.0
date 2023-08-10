@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2679C001B0
-	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Aug 2023 17:07:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4963CC001B0
+	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Aug 2023 17:10:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qU98R-0001aw-FD; Thu, 10 Aug 2023 13:07:43 -0400
+	id 1qU9Ai-00052C-GI; Thu, 10 Aug 2023 13:10:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qU98P-0001a6-NH; Thu, 10 Aug 2023 13:07:41 -0400
-Received: from mail-vk1-xa2b.google.com ([2607:f8b0:4864:20::a2b])
+ id 1qU9Ah-0004wo-0e; Thu, 10 Aug 2023 13:10:03 -0400
+Received: from mail-ua1-x92c.google.com ([2607:f8b0:4864:20::92c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qU98M-0006P8-BY; Thu, 10 Aug 2023 13:07:41 -0400
-Received: by mail-vk1-xa2b.google.com with SMTP id
- 71dfb90a1353d-48713d11531so733375e0c.1; 
- Thu, 10 Aug 2023 10:07:37 -0700 (PDT)
+ id 1qU9Af-0006gW-BY; Thu, 10 Aug 2023 13:10:02 -0400
+Received: by mail-ua1-x92c.google.com with SMTP id
+ a1e0cc1a2514c-79aa1f24ba2so337347241.2; 
+ Thu, 10 Aug 2023 10:10:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1691687257; x=1692292057;
+ d=gmail.com; s=20221208; t=1691687400; x=1692292200;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bXNlGR7lWmbb3UExCZW38tnFqs9sBXHoQ8GbAEMXKbA=;
- b=TlqP0MM7fa0QZ4WAwnxUJdGtqW3tu+EC3phcWH9vpphfctWVZeLHdWnBeaSu6TXccn
- 0Zqj0/3RCC5a0lvOlSfKpEbu8rUAut7Gs8YXm147XeViz5zU7K9GyI+Mqsl8nQkYh8zm
- xv/S78wM4U/tbT81oouOmoTo6ntMCJeDWH0loTFfRkmO6DSIb5C11l81uLI6JTY3yb33
- Mj2uo7NS6C0UsksDEnDRVXT15DxDE78UIjv9OdtVgwZJ7iSEqJkqv/5K58MRKeA9db/I
- eX7fF9RCOwkrf1V5o7iWK23j13AcDYwygqli6F8BBYkPkBXe5/4IdngemhBnL7Dn3f27
- ffFA==
+ bh=NWXbUpki0WpFVeqzKegX1vROjVTGZR59+MlQpz04dt0=;
+ b=l9B9locMT5hlmaz7mOkkxdWVD3rAQKZX4NVeT+9szRUaekd9RLR+WVcNk63oBDx1qb
+ CPgWbQJ6XkUvnMCFFdRF7/ZvqaOr46I1iniJCwjWSsoNN+EecYYkzj7pSkhGn5GpeAiB
+ 7BxkvYkYwEz0D53Jk59by90ug1masSI5dD++xQYiiB4SzyCbXUcs3PD5RlYVw8KZQ1uv
+ eriesTw22KFCJcajrRvEyHIJxbK6nndxJ2Olsqp5HNy/9m9urv+tOfFd0hXyLBj+X6VT
+ yda12uF4UeHKkg1Cn+AeYVQKWfDTlUAapp5eqpC64+UvQktFdZsHzWFJ2ZTEwy5HVr1G
+ ShPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691687257; x=1692292057;
+ d=1e100.net; s=20221208; t=1691687400; x=1692292200;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bXNlGR7lWmbb3UExCZW38tnFqs9sBXHoQ8GbAEMXKbA=;
- b=UeUpmTxww867jM4tzR/oMoESqNb3e3XA8VCYHYbVCMMRs7ifv30yT+qzJz8dyMXYYi
- G0tdvwSKiF1//Zxn0NlyRGIbxBB6OdEB+jK3hMsg0FmFL5W8l4Zmg+dk60cT+iNRa/9n
- h3byOAw2tkultu4Y2YdhxYhbHEEtuS7C/gxdsDA6LtoWnrvauWVC54Co7fu7EeiXZLKn
- smKnWv1prfMQTs6+EmZIukd0k8Hi335cuf1SPaG8msXiy4W18XAurZ4iRfInLvfxc9tE
- oPgL3zZyCLj44K8FqlD/eI3+zWh6erXpvzCCx+a+dybF+xd48ATof2bapZMPcCE3EhqF
- zgwg==
-X-Gm-Message-State: AOJu0YzmjcJadABgYj865FJrorqTF72jYDUVB3lqz71AfQsqsAeUpTEa
- IRtVIEldgYa4+r/1qxOrFDfMU8kvcvWvZmllOVI=
-X-Google-Smtp-Source: AGHT+IGdh0cxVPJcpigi4tioVFvJW20neOwgXu13dBbKfd4Ujlvy6To/iwmK53yqj3XTicAG72QoqhJONLw1wM2WCFc=
-X-Received: by 2002:a1f:c114:0:b0:486:4cb9:944f with SMTP id
- r20-20020a1fc114000000b004864cb9944fmr1877183vkf.1.1691687256920; Thu, 10 Aug
- 2023 10:07:36 -0700 (PDT)
+ bh=NWXbUpki0WpFVeqzKegX1vROjVTGZR59+MlQpz04dt0=;
+ b=HgMuQZK76gpIJTDQ87/yzYFQHL4A80i1xH2BWf1g+XvKV4vq9SkC475/VqRLo4mfpq
+ JnyKWpqVf6vsfbCDUU7JDIg4/CEzOUXyxYVXSmH0FEp337To2uX/PNr6bxFjqP+7FOp2
+ nppr7dDz9hI1FoxghPGrXnLv3mXfgyQgNLTG8CkO9qt2VC0Js3F0JKtWWKrocraoJCQz
+ 2uhDMD7hoJPc1ShALbvMR2tqITFqrvvVdty6F6jTu9+SaIwOWnW9+gRcpfqdXCHV4JZR
+ 2+7erhYaU1K837AFOSnhawHIl5H8zh3AM9vfSLF1OIRLDVJ5r8equkh4CKMgT6OHc5X6
+ j46A==
+X-Gm-Message-State: AOJu0Yz61Js/hd3EI4Y4Zcvgn1LbAm3EaMD5vKBgrxkaMoq6UfIEOaQr
+ 04Hh0Z3q4n1VC6YemPpUFlHDqN5HQvN8HKkhxuQ=
+X-Google-Smtp-Source: AGHT+IHaJNqdG8pH0uNryiSg8YQLSmxAMmsrGF1VkAUBFqAADtpKZdlOjbbCDO26NT9eiHE+Aynfb6G+3VZM9cmRj8M=
+X-Received: by 2002:a67:fe12:0:b0:447:925c:a047 with SMTP id
+ l18-20020a67fe12000000b00447925ca047mr1884195vsr.26.1691687400136; Thu, 10
+ Aug 2023 10:10:00 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230802124906.24197-1-rbradford@rivosinc.com>
-In-Reply-To: <20230802124906.24197-1-rbradford@rivosinc.com>
+References: <20230803131424.40744-1-negge@xiph.org>
+ <c8bf0c5f-6cc8-cc1b-9b26-bcb2512bcc87@tls.msk.ru>
+In-Reply-To: <c8bf0c5f-6cc8-cc1b-9b26-bcb2512bcc87@tls.msk.ru>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 10 Aug 2023 13:07:11 -0400
-Message-ID: <CAKmqyKMDb2RAoafBXD5HjL5WEQK1vFrwYdHA3cufCPzFDtoQVw@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Implement WARL behaviour for
- mcountinhibit/mcounteren
-To: Rob Bradford <rbradford@rivosinc.com>
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+Date: Thu, 10 Aug 2023 13:09:33 -0400
+Message-ID: <CAKmqyKPFG8jJsxknYneom2iQ3SWT1RyGcsiDD8SVkT2Jv_Aqew@mail.gmail.com>
+Subject: Re: [PATCH] linux-user/elfload: Set V in ELF_HWCAP for RISC-V
+To: Michael Tokarev <mjt@tls.msk.ru>
+Cc: Nathan Egge <negge@xiph.org>, Palmer Dabbelt <palmer@dabbelt.com>, 
  Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
  Weiwei Li <liweiwei@iscas.ac.cn>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2b;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92c;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -93,67 +93,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Aug 2, 2023 at 8:50=E2=80=AFAM Rob Bradford <rbradford@rivosinc.com=
-> wrote:
+On Tue, Aug 8, 2023 at 2:37=E2=80=AFAM Michael Tokarev <mjt@tls.msk.ru> wro=
+te:
 >
-> These are WARL fields - zero out the bits for unavailable counters and
-> special case the TM bit in mcountinhibit which is hardwired to zero.
-> This patch achieves this by modifying the value written so that any use
-> of the field will see the correctly masked bits.
+> 03.08.2023 16:14, Nathan Egge wrote:
+> > From: "Nathan Egge" <negge@xiph.org>
+> >
+> > Set V bit for hwcap if misa is set.
+> >
+> > Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1793
+> > Signed-off-by: Nathan Egge <negge@xiph.org>
+> > ---
+> >   linux-user/elfload.c | 3 ++-
+> >   1 file changed, 2 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/linux-user/elfload.c b/linux-user/elfload.c
+> > index 861ec07abc..a299ba7300 100644
+> > --- a/linux-user/elfload.c
+> > +++ b/linux-user/elfload.c
+> > @@ -1710,7 +1710,8 @@ static uint32_t get_elf_hwcap(void)
+> >   #define MISA_BIT(EXT) (1 << (EXT - 'A'))
+> >       RISCVCPU *cpu =3D RISCV_CPU(thread_cpu);
+> >       uint32_t mask =3D MISA_BIT('I') | MISA_BIT('M') | MISA_BIT('A')
+> > -                    | MISA_BIT('F') | MISA_BIT('D') | MISA_BIT('C');
+> > +                    | MISA_BIT('F') | MISA_BIT('D') | MISA_BIT('C')
+> > +                    | MISA_BIT('V');
 >
-> Tested by modifying OpenSBI to write max value to these CSRs and upon
-> subsequent read the appropriate number of bits for number of PMUs is
-> enabled and the TM bit is zero in mcountinhibit.
->
-> Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
+> Is smells like a -stable material (incl. 7.2), is it not?
 
-Thanks!
-
-Applied to riscv-to-apply.next
+I think so as well
 
 Alistair
 
-> ---
->  target/riscv/csr.c | 11 +++++++++--
->  1 file changed, 9 insertions(+), 2 deletions(-)
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index ea7585329e..495ff6a9c2 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -1834,8 +1834,11 @@ static RISCVException write_mcountinhibit(CPURISCV=
-State *env, int csrno,
->  {
->      int cidx;
->      PMUCTRState *counter;
-> +    RISCVCPU *cpu =3D env_archcpu(env);
+> Thanks,
 >
-> -    env->mcountinhibit =3D val;
-> +    /* WARL register - disable unavailable counters; TM bit is always 0 =
-*/
-> +    env->mcountinhibit =3D
-> +        val & (cpu->pmu_avail_ctrs | COUNTEREN_CY | COUNTEREN_IR);
->
->      /* Check if any other counter is also monitoring cycles/instructions=
- */
->      for (cidx =3D 0; cidx < RV_MAX_MHPMCOUNTERS; cidx++) {
-> @@ -1858,7 +1861,11 @@ static RISCVException read_mcounteren(CPURISCVStat=
-e *env, int csrno,
->  static RISCVException write_mcounteren(CPURISCVState *env, int csrno,
->                                         target_ulong val)
->  {
-> -    env->mcounteren =3D val;
-> +    RISCVCPU *cpu =3D env_archcpu(env);
-> +
-> +    /* WARL register - disable unavailable counters */
-> +    env->mcounteren =3D val & (cpu->pmu_avail_ctrs | COUNTEREN_CY | COUN=
-TEREN_TM |
-> +                             COUNTEREN_IR);
->      return RISCV_EXCP_NONE;
->  }
->
-> --
-> 2.41.0
->
+> /mjt
 >
 
