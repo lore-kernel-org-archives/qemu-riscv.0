@@ -4,77 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40EF6C001DE
-	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Aug 2023 17:32:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4D46C001DE
+	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Aug 2023 17:44:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qU9W2-0006oR-3n; Thu, 10 Aug 2023 13:32:06 -0400
+	id 1qU9hj-0007Q6-1Z; Thu, 10 Aug 2023 13:44:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qU9Vt-0006j6-LS; Thu, 10 Aug 2023 13:32:02 -0400
-Received: from mail-vs1-xe32.google.com ([2607:f8b0:4864:20::e32])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qU9Vr-0002jc-Q7; Thu, 10 Aug 2023 13:31:57 -0400
-Received: by mail-vs1-xe32.google.com with SMTP id
- ada2fe7eead31-447c7607b72so471028137.1; 
- Thu, 10 Aug 2023 10:31:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1691688714; x=1692293514;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1J0vTa7mHuDVkqX8mKVlHvir8t3IpF57p9K7tWmKFW4=;
- b=I8iraKwITYY2DbdAtZZDA5FGtZuSVtWJNl2JC4Pn69OM6LYetb5gjTd7qMBI73LlyL
- bumSnkZ+wpoteIETI+vLBd7NstTxH74L9qmbJWtjFrzfOCQlz3NyWjK3h1gJeuHhAgbD
- knf+OWg7IVszQvXdxHVwG7Wc1LAIMS4Cb9cruZ/RyaMoBm/gtlCHlAyImrQVY5qWG9/j
- yf2yddIImq7ZpILLUxMwvF59ioIJaUH5pM7g9qOh0/O4vP9pnf2+xrQCwepH0n7chVmW
- vWmBMzWBp1l76PdjtwuhTdpjiX1W9uZVDg47FCRy1XJwRZ/UtsK4PVuOT7SHamxt2Hr7
- QL5w==
+ (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1qU9hg-00079J-92
+ for qemu-riscv@nongnu.org; Thu, 10 Aug 2023 13:44:08 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1qU9hd-0005Ay-Vz
+ for qemu-riscv@nongnu.org; Thu, 10 Aug 2023 13:44:07 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1691689444;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=4opRmKHk32vkF98ZxEahBmO7AB2tpAtqx0ntq3I1l/w=;
+ b=L+wo99N/m5YT+Rx3fpYmasbEL69A6sKl0N7sjmyAmpaiWW87mRYIpMWUwzji+1TXnbwtxG
+ jd+NR89sihA3/zlk8qmLCtdf2y1mF7PWxs1QXVmLHnKeQjG4wG94cUG5AjNpdB7IJIKaiP
+ 7Q+JTdzi8jYnfFoXFjsEndk3FUrdokc=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-349-E4KigzUqPgelby50Bm6T8g-1; Thu, 10 Aug 2023 13:44:02 -0400
+X-MC-Unique: E4KigzUqPgelby50Bm6T8g-1
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-314256aedcbso670491f8f.0
+ for <qemu-riscv@nongnu.org>; Thu, 10 Aug 2023 10:44:02 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691688714; x=1692293514;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1J0vTa7mHuDVkqX8mKVlHvir8t3IpF57p9K7tWmKFW4=;
- b=F7pwMAUX//YCO5ZBwyLR91M66Mc/2IJn6gGMq3pe8jY5/kBKSZT61wCBLQmA31XljW
- KTYFo8V63gw4S0ESDKBuou73LmXBRl7vFJbuSvJb8xON7gS1QW8fX0yGHbeDGeLOvXxz
- Rv6i3FpQFwJDpi2XOj1pc8Fkj+NEDYBgE0TC7+YcTPcGcJ2zIE+gp9JcxDBE+GCUdQKD
- CgsAw+DqJ360MHDitnY1rVkvFzEyJBCJ/5gtBImxz9EBlc2HoeMawKUS2AbkQInd/x2T
- p8d2tCQJzHGgOSR4IbxKMDoc+DrTn27z9xeOhjiMBxGabaRvVXJ4fTayf4TSj5VAC/Jw
- cc7g==
-X-Gm-Message-State: AOJu0Yy8PfdhOczLoKmbg8rp2uS+Zwg8t6G7wCggOOTXlKF95amnvzPO
- 4eEDW2TDNYa++27rAzXNMW0cIBEqunZoZLyZUC0=
-X-Google-Smtp-Source: AGHT+IFoAPatA0tIrSI4vW1yPB0dWeXaKiNCBmjm1qxs6qYbimADXKeW1+iwvcyGKnOEpWGOwdnwnpnH1jNhJEvOAwg=
-X-Received: by 2002:a05:6102:24d:b0:443:7c69:4743 with SMTP id
- a13-20020a056102024d00b004437c694743mr2410949vsq.16.1691688713936; Thu, 10
- Aug 2023 10:31:53 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1691689441; x=1692294241;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=4opRmKHk32vkF98ZxEahBmO7AB2tpAtqx0ntq3I1l/w=;
+ b=ONlCg9MT0IZ6A5R+Xfmw/BzODk0g7uqW0VvuGMuGp3s2dn16qTBY8jUwgCDdhgvRSt
+ CrHOM/vYn6CdwkSWMediv0FGdu7iw9b6cwowh/e9RlqJu78IqQ/SKMf2CBzY9mOEcAc/
+ u1KojYwlhrUR3J44EPqX/kV8D7rxXtbaPZ9l/NNVHznT4N1kMcdR6vNL5WBpZ8t8ikr/
+ L03fe/5jFUkgU2SdpPbIqpeTwfef5XurpWqDUAxhTcYHPEm//nfucBV1XRy5ZLtfhOI0
+ 59hk0o2wlHBTGVZJC4+BiqM4OJSUC88iPOAAKgL6C8U4+JdPIqvF5SBP07PWtZChSfR1
+ jrlA==
+X-Gm-Message-State: AOJu0Yyz8/G/byPfW9DPaQOY2ujxIlAWMdGCZ2/Kr/53cfHbW7ArIXlo
+ LZPO6tjh/z+HEEiI6UFQZ5o3OZzFYFK3Uwo3Z+3CWIjOcVR6KLtJiv6jIuREFi3SO7mFc9ymoLF
+ x5r8E+5h8+/3+msY=
+X-Received: by 2002:a05:6000:1ca:b0:317:f70b:3156 with SMTP id
+ t10-20020a05600001ca00b00317f70b3156mr2892797wrx.28.1691689441347; 
+ Thu, 10 Aug 2023 10:44:01 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHcjzQ0gJVpAYk+Uh2ymMLs/49ALvHbZV8xTwRbJE2DS4pO0UZv3gwsAwNZx9KtQ6u6dKFW4A==
+X-Received: by 2002:a05:6000:1ca:b0:317:f70b:3156 with SMTP id
+ t10-20020a05600001ca00b00317f70b3156mr2892780wrx.28.1691689440966; 
+ Thu, 10 Aug 2023 10:44:00 -0700 (PDT)
+Received: from redhat.com ([2.55.42.146]) by smtp.gmail.com with ESMTPSA id
+ e13-20020a5d500d000000b00317ddccb0d1sm2808612wrt.24.2023.08.10.10.43.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 10 Aug 2023 10:44:00 -0700 (PDT)
+Date: Thu, 10 Aug 2023 13:43:56 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Jason Chien <jason.chien@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Andrey Smirnov <andrew.smirnov@gmail.com>, Greg Kurz <groug@kaod.org>,
+ Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
+ Igor Mammedov <imammedo@redhat.com>, qemu-arm@nongnu.org
+Subject: Re: [PATCH] hw/pci-host: Allow extended config space access for
+ Designware PCIe host
+Message-ID: <20230810134315-mutt-send-email-mst@kernel.org>
+References: <20230809102257.25121-1-jason.chien@sifive.com>
+ <20230809172413-mutt-send-email-mst@kernel.org>
+ <CADr__8ohzCfEYkXz+6u06hDQZNM8q9Cp9eehtcBFhdKtnySPBA@mail.gmail.com>
 MIME-Version: 1.0
-References: <20230728131520.110394-1-dbarboza@ventanamicro.com>
- <20230728131520.110394-3-dbarboza@ventanamicro.com>
-In-Reply-To: <20230728131520.110394-3-dbarboza@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 10 Aug 2023 13:31:28 -0400
-Message-ID: <CAKmqyKMw2=Qbcvr-osegDxiodg+EDYaCJ-_QSeSaS8g6Mbp7Qw@mail.gmail.com>
-Subject: Re: [PATCH 2/8] target/riscv: make CPUCFG() macro public
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e32;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe32.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+In-Reply-To: <CADr__8ohzCfEYkXz+6u06hDQZNM8q9Cp9eehtcBFhdKtnySPBA@mail.gmail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=mst@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -90,89 +107,71 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Jul 28, 2023 at 9:20=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
-> The RISC-V KVM driver uses a CPUCFG() macro that calculates the offset
-> of a certain field in the struct RISCVCPUConfig. We're going to use this
-> macro in target/riscv/cpu.c as well in the next patches. Make it public.
->
-> Rename it to CPU_CFG_OFFSET() for more clarity while we're at it.
->
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+On Fri, Aug 11, 2023 at 01:22:08AM +0800, Jason Chien wrote:
+> As far as I know, the order issue is caused by nested device realization. In
+> this case, realizing TYPE_DESIGNWARE_PCIE_HOST will also
+> realize TYPE_DESIGNWARE_PCIE_ROOT(see designware_pcie_host_realize()).
+> device_set_realized() is the function that realizing a device must go through,
+> and this function first realizes the device by dc->realize() and then realizes
+> the device's child bus by qbus_realize(). Whether there is any child bus of the
+> device may depend on dc->realize(). The realization flow will be like a
+> recursive call to device_set_realized(). More precisely, the flow in this case
+> is: qdev_realize() --> ... --> FIRST device_set_realized() --> FIRST dc->
+> realize() --> ... --> designware_pcie_host_realize() --> qdev_realize() --> ...
+> --> SECOND device_set_realized() --> SECOND dc->realize() --> ... -->
+>  designware_pcie_root_realize() --> ...--> back to the SECOND
+> device_set_realized() --> SECOND qbus_realize() the CHILD bus "dw-pcie" --> ...
+> --> back to the FIRST device_set_realized() --> FIRST qbus_realize() the PARENT
+> bus "pcie".
+> 
+> I also found this patch that solves the same bus issue.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Which patch?
 
-Alistair
+> Do you have any suggestions on the order of realization? Thanks!
 
-> ---
->  target/riscv/cpu.c | 2 +-
->  target/riscv/cpu.h | 2 ++
->  target/riscv/kvm.c | 8 +++-----
->  3 files changed, 6 insertions(+), 6 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 644ce7a018..3e62881d85 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -48,7 +48,7 @@ struct isa_ext_data {
->  };
->
->  #define ISA_EXT_DATA_ENTRY(_name, _min_ver, _prop) \
-> -    {#_name, _min_ver, offsetof(struct RISCVCPUConfig, _prop)}
-> +    {#_name, _min_ver, CPU_CFG_OFFSET(_prop)}
->
->  /*
->   * From vector_helper.c
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 6ea22e0eea..577abcd724 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -62,6 +62,8 @@
->  const char *riscv_get_misa_ext_name(uint32_t bit);
->  const char *riscv_get_misa_ext_description(uint32_t bit);
->
-> +#define CPU_CFG_OFFSET(_prop) offsetof(struct RISCVCPUConfig, _prop)
-> +
->  /* Privileged specification version */
->  enum {
->      PRIV_VERSION_1_10_0 =3D 0,
-> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-> index 9d8a8982f9..9b8565d809 100644
-> --- a/target/riscv/kvm.c
-> +++ b/target/riscv/kvm.c
-> @@ -198,10 +198,8 @@ static void kvm_riscv_update_cpu_misa_ext(RISCVCPU *=
-cpu, CPUState *cs)
->      }
->  }
->
-> -#define CPUCFG(_prop) offsetof(struct RISCVCPUConfig, _prop)
-> -
->  #define KVM_EXT_CFG(_name, _prop, _reg_id) \
-> -    {.name =3D _name, .offset =3D CPUCFG(_prop), \
-> +    {.name =3D _name, .offset =3D CPU_CFG_OFFSET(_prop), \
->       .kvm_reg_id =3D _reg_id}
->
->  static KVMCPUConfig kvm_multi_ext_cfgs[] =3D {
-> @@ -278,13 +276,13 @@ static void kvm_cpu_set_multi_ext_cfg(Object *obj, =
-Visitor *v,
->
->  static KVMCPUConfig kvm_cbom_blocksize =3D {
->      .name =3D "cbom_blocksize",
-> -    .offset =3D CPUCFG(cbom_blocksize),
-> +    .offset =3D CPU_CFG_OFFSET(cbom_blocksize),
->      .kvm_reg_id =3D KVM_REG_RISCV_CONFIG_REG(zicbom_block_size)
->  };
->
->  static KVMCPUConfig kvm_cboz_blocksize =3D {
->      .name =3D "cboz_blocksize",
-> -    .offset =3D CPUCFG(cboz_blocksize),
-> +    .offset =3D CPU_CFG_OFFSET(cboz_blocksize),
->      .kvm_reg_id =3D KVM_REG_RISCV_CONFIG_REG(zicboz_block_size)
->  };
->
-> --
-> 2.41.0
->
->
+
+I see. It's not easy to fix. Worth thinking about but I guess your
+patch is ok for now.
+
+> On Thu, Aug 10, 2023 at 5:24 AM Michael S. Tsirkin <mst@redhat.com> wrote:
+> 
+>     On Wed, Aug 09, 2023 at 10:22:50AM +0000, Jason Chien wrote:
+>     > In pcie_bus_realize(), a root bus is realized as a PCIe bus and a
+>     non-root
+>     > bus is realized as a PCIe bus if its parent bus is a PCIe bus. However,
+>     > the child bus "dw-pcie" is realized before the parent bus "pcie" which is
+>     > the root PCIe bus. Thus, the extended configuration space is not
+>     accessible
+>     > on "dw-pcie". The issue can be resolved by adding the
+>     > PCI_BUS_EXTENDED_CONFIG_SPACE flag to "pcie" before "dw-pcie" is
+>     realized.
+>     >
+>     > Signed-off-by: Jason Chien <jason.chien@sifive.com>
+> 
+>     I think we should fix the order of initialization rather than
+>     hack around it.
+> 
+>     > ---
+>     >  hw/pci-host/designware.c | 1 +
+>     >  1 file changed, 1 insertion(+)
+>     >
+>     > diff --git a/hw/pci-host/designware.c b/hw/pci-host/designware.c
+>     > index 9e183caa48..388d252ee2 100644
+>     > --- a/hw/pci-host/designware.c
+>     > +++ b/hw/pci-host/designware.c
+>     > @@ -694,6 +694,7 @@ static void designware_pcie_host_realize(DeviceState
+>     *dev, Error **errp)
+>     >                                       &s->pci.io,
+>     >                                       0, 4,
+>     >                                       TYPE_PCIE_BUS);
+>     > +    pci->bus->flags |= PCI_BUS_EXTENDED_CONFIG_SPACE;
+>     > 
+>     >      memory_region_init(&s->pci.address_space_root,
+>     >                         OBJECT(s),
+>     > --
+>     > 2.17.1
+> 
+> 
+
 
