@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 603D1C04E69
-	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Aug 2023 17:31:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40EF6C001DE
+	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Aug 2023 17:32:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qU9Uv-00064d-Qi; Thu, 10 Aug 2023 13:30:58 -0400
+	id 1qU9W2-0006oR-3n; Thu, 10 Aug 2023 13:32:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qU9Uk-00061p-0C; Thu, 10 Aug 2023 13:30:53 -0400
-Received: from mail-vk1-xa2f.google.com ([2607:f8b0:4864:20::a2f])
+ id 1qU9Vt-0006j6-LS; Thu, 10 Aug 2023 13:32:02 -0400
+Received: from mail-vs1-xe32.google.com ([2607:f8b0:4864:20::e32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qU9Uh-0002R5-JK; Thu, 10 Aug 2023 13:30:44 -0400
-Received: by mail-vk1-xa2f.google.com with SMTP id
- 71dfb90a1353d-48719fc6b18so468658e0c.1; 
- Thu, 10 Aug 2023 10:30:42 -0700 (PDT)
+ id 1qU9Vr-0002jc-Q7; Thu, 10 Aug 2023 13:31:57 -0400
+Received: by mail-vs1-xe32.google.com with SMTP id
+ ada2fe7eead31-447c7607b72so471028137.1; 
+ Thu, 10 Aug 2023 10:31:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1691688642; x=1692293442;
+ d=gmail.com; s=20221208; t=1691688714; x=1692293514;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=e73qVEAKR2HYIiLRHTV1HycZI9/BjNrFoTfAxcTR6y0=;
- b=jFVDX90O0RyTbdPA3UbQVlQkGU4MuFln96PJEkXxqolxWxv14YlTGK1YvyzvaNG/bu
- 1iyXmEBZNnbLaALuM71B5Abh6MO6gUDFzcLvpzjyBZbYjmJpiO6pES1Moul85FVY15BC
- XJH6sKTjIz1WBhWVVr/DAcuhj32qQ9MHGbjeG5lfqOICPSn4X4FGGF2758JCc6+0djdy
- 3U7tLKpADDoekPpgodVAPWI4bCwKrCUcR6cY2bFosOh+E08aPgo4+BQHUxs3HBHY279q
- +ZhaLxJ1rUEuoW3toL1ffgHEYWKiocg7pKzQAV0eDMhYUUAKZ5bybaxsKTv35gDDMk1t
- PYHw==
+ bh=1J0vTa7mHuDVkqX8mKVlHvir8t3IpF57p9K7tWmKFW4=;
+ b=I8iraKwITYY2DbdAtZZDA5FGtZuSVtWJNl2JC4Pn69OM6LYetb5gjTd7qMBI73LlyL
+ bumSnkZ+wpoteIETI+vLBd7NstTxH74L9qmbJWtjFrzfOCQlz3NyWjK3h1gJeuHhAgbD
+ knf+OWg7IVszQvXdxHVwG7Wc1LAIMS4Cb9cruZ/RyaMoBm/gtlCHlAyImrQVY5qWG9/j
+ yf2yddIImq7ZpILLUxMwvF59ioIJaUH5pM7g9qOh0/O4vP9pnf2+xrQCwepH0n7chVmW
+ vWmBMzWBp1l76PdjtwuhTdpjiX1W9uZVDg47FCRy1XJwRZ/UtsK4PVuOT7SHamxt2Hr7
+ QL5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691688642; x=1692293442;
+ d=1e100.net; s=20221208; t=1691688714; x=1692293514;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=e73qVEAKR2HYIiLRHTV1HycZI9/BjNrFoTfAxcTR6y0=;
- b=Yia1nDIxhrB/nbRSCPdFSeVuz92ocghwMTlHK2dXpm2vN3/kqBIvJh7Io2Euqnno0D
- pPajuv4W98jZqKFCgz96Cxuv8clma3ejCAc/Kff54eDDIE4icHNYrBCio6xlP5DD5xcl
- +VuV77gEiE+y30oNj0YEcUmWRjEHo0qddOm0VGBmmedt0f+QKe6AWXU00OW4daCsUszD
- 4M77VY9FLJ50yYLXmSmXCKEC8FZmi8IHtcAojjPimuZn6Wfn5EVUnSGqHJFuAy+Y1sjb
- 002NFZ4jG5RPJ/R2AMNsUC0yrDZ6o+IaYe6kCJrL0ouayvix5hF4GWGYmZWwM7Dx+vxz
- kpOA==
-X-Gm-Message-State: AOJu0YyrJ3m+61YHZcB2kMEy86T7Rz71aYApIT6CCWxjih0aVKRQmFyv
- Yzfw+mZKkm4FKPefn0U+1EjG9hSV+COwRziLN1E=
-X-Google-Smtp-Source: AGHT+IEx/skVJcMLfQpHRy6zY26wCoGY0rBFUmohy4dri5r2RhFHMUqHKODf8wnTcpxq0noPtWbCw43RByIdanmXEN4=
-X-Received: by 2002:a67:ff93:0:b0:444:bb6c:1188 with SMTP id
- v19-20020a67ff93000000b00444bb6c1188mr2409673vsq.1.1691688642039; Thu, 10 Aug
- 2023 10:30:42 -0700 (PDT)
+ bh=1J0vTa7mHuDVkqX8mKVlHvir8t3IpF57p9K7tWmKFW4=;
+ b=F7pwMAUX//YCO5ZBwyLR91M66Mc/2IJn6gGMq3pe8jY5/kBKSZT61wCBLQmA31XljW
+ KTYFo8V63gw4S0ESDKBuou73LmXBRl7vFJbuSvJb8xON7gS1QW8fX0yGHbeDGeLOvXxz
+ Rv6i3FpQFwJDpi2XOj1pc8Fkj+NEDYBgE0TC7+YcTPcGcJ2zIE+gp9JcxDBE+GCUdQKD
+ CgsAw+DqJ360MHDitnY1rVkvFzEyJBCJ/5gtBImxz9EBlc2HoeMawKUS2AbkQInd/x2T
+ p8d2tCQJzHGgOSR4IbxKMDoc+DrTn27z9xeOhjiMBxGabaRvVXJ4fTayf4TSj5VAC/Jw
+ cc7g==
+X-Gm-Message-State: AOJu0Yy8PfdhOczLoKmbg8rp2uS+Zwg8t6G7wCggOOTXlKF95amnvzPO
+ 4eEDW2TDNYa++27rAzXNMW0cIBEqunZoZLyZUC0=
+X-Google-Smtp-Source: AGHT+IFoAPatA0tIrSI4vW1yPB0dWeXaKiNCBmjm1qxs6qYbimADXKeW1+iwvcyGKnOEpWGOwdnwnpnH1jNhJEvOAwg=
+X-Received: by 2002:a05:6102:24d:b0:443:7c69:4743 with SMTP id
+ a13-20020a056102024d00b004437c694743mr2410949vsq.16.1691688713936; Thu, 10
+ Aug 2023 10:31:53 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230728131520.110394-1-dbarboza@ventanamicro.com>
- <20230728131520.110394-2-dbarboza@ventanamicro.com>
-In-Reply-To: <20230728131520.110394-2-dbarboza@ventanamicro.com>
+ <20230728131520.110394-3-dbarboza@ventanamicro.com>
+In-Reply-To: <20230728131520.110394-3-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 10 Aug 2023 13:30:16 -0400
-Message-ID: <CAKmqyKPPg=9QR+A4AYf6_SFnaDk+3XcP8nuViBb77riuTW_fuA@mail.gmail.com>
-Subject: Re: [PATCH 1/8] target/riscv/cpu.c: use offset in
- isa_ext_is_enabled/update_enabled
+Date: Thu, 10 Aug 2023 13:31:28 -0400
+Message-ID: <CAKmqyKMw2=Qbcvr-osegDxiodg+EDYaCJ-_QSeSaS8g6Mbp7Qw@mail.gmail.com>
+Subject: Re: [PATCH 2/8] target/riscv: make CPUCFG() macro public
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
  palmer@rivosinc.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2f;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e32;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe32.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -91,14 +90,14 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Jul 28, 2023 at 9:18=E2=80=AFAM Daniel Henrique Barboza
+On Fri, Jul 28, 2023 at 9:20=E2=80=AFAM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> We'll have future usage for a function where, given an offset of the
-> struct RISCVCPUConfig, the flag is updated to a certain val.
+> The RISC-V KVM driver uses a CPUCFG() macro that calculates the offset
+> of a certain field in the struct RISCVCPUConfig. We're going to use this
+> macro in target/riscv/cpu.c as well in the next patches. Make it public.
 >
-> Change all existing callers to use edata->ext_enable_offset instead of
-> 'edata'.
+> Rename it to CPU_CFG_OFFSET() for more clarity while we're at it.
 >
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
@@ -107,69 +106,71 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/cpu.c | 18 +++++++++---------
->  1 file changed, 9 insertions(+), 9 deletions(-)
+>  target/riscv/cpu.c | 2 +-
+>  target/riscv/cpu.h | 2 ++
+>  target/riscv/kvm.c | 8 +++-----
+>  3 files changed, 6 insertions(+), 6 deletions(-)
 >
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index b5a2266eef..644ce7a018 100644
+> index 644ce7a018..3e62881d85 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -153,18 +153,17 @@ static const struct isa_ext_data isa_edata_arr[] =
-=3D {
->      ISA_EXT_DATA_ENTRY(xventanacondops, PRIV_VERSION_1_12_0, ext_XVentan=
-aCondOps),
+> @@ -48,7 +48,7 @@ struct isa_ext_data {
 >  };
 >
-> -static bool isa_ext_is_enabled(RISCVCPU *cpu,
-> -                               const struct isa_ext_data *edata)
-> +static bool isa_ext_is_enabled(RISCVCPU *cpu, uint32_t ext_offset)
->  {
-> -    bool *ext_enabled =3D (void *)&cpu->cfg + edata->ext_enable_offset;
-> +    bool *ext_enabled =3D (void *)&cpu->cfg + ext_offset;
+>  #define ISA_EXT_DATA_ENTRY(_name, _min_ver, _prop) \
+> -    {#_name, _min_ver, offsetof(struct RISCVCPUConfig, _prop)}
+> +    {#_name, _min_ver, CPU_CFG_OFFSET(_prop)}
 >
->      return *ext_enabled;
+>  /*
+>   * From vector_helper.c
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 6ea22e0eea..577abcd724 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -62,6 +62,8 @@
+>  const char *riscv_get_misa_ext_name(uint32_t bit);
+>  const char *riscv_get_misa_ext_description(uint32_t bit);
+>
+> +#define CPU_CFG_OFFSET(_prop) offsetof(struct RISCVCPUConfig, _prop)
+> +
+>  /* Privileged specification version */
+>  enum {
+>      PRIV_VERSION_1_10_0 =3D 0,
+> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
+> index 9d8a8982f9..9b8565d809 100644
+> --- a/target/riscv/kvm.c
+> +++ b/target/riscv/kvm.c
+> @@ -198,10 +198,8 @@ static void kvm_riscv_update_cpu_misa_ext(RISCVCPU *=
+cpu, CPUState *cs)
+>      }
 >  }
 >
-> -static void isa_ext_update_enabled(RISCVCPU *cpu,
-> -                                   const struct isa_ext_data *edata, boo=
-l en)
-> +static void isa_ext_update_enabled(RISCVCPU *cpu, uint32_t ext_offset,
-> +                                   bool en)
->  {
-> -    bool *ext_enabled =3D (void *)&cpu->cfg + edata->ext_enable_offset;
-> +    bool *ext_enabled =3D (void *)&cpu->cfg + ext_offset;
+> -#define CPUCFG(_prop) offsetof(struct RISCVCPUConfig, _prop)
+> -
+>  #define KVM_EXT_CFG(_name, _prop, _reg_id) \
+> -    {.name =3D _name, .offset =3D CPUCFG(_prop), \
+> +    {.name =3D _name, .offset =3D CPU_CFG_OFFSET(_prop), \
+>       .kvm_reg_id =3D _reg_id}
 >
->      *ext_enabled =3D en;
->  }
-> @@ -1025,9 +1024,10 @@ static void riscv_cpu_disable_priv_spec_isa_exts(R=
-ISCVCPU *cpu)
+>  static KVMCPUConfig kvm_multi_ext_cfgs[] =3D {
+> @@ -278,13 +276,13 @@ static void kvm_cpu_set_multi_ext_cfg(Object *obj, =
+Visitor *v,
 >
->      /* Force disable extensions if priv spec version does not match */
->      for (i =3D 0; i < ARRAY_SIZE(isa_edata_arr); i++) {
-> -        if (isa_ext_is_enabled(cpu, &isa_edata_arr[i]) &&
-> +        if (isa_ext_is_enabled(cpu, isa_edata_arr[i].ext_enable_offset) =
-&&
->              (env->priv_ver < isa_edata_arr[i].min_version)) {
-> -            isa_ext_update_enabled(cpu, &isa_edata_arr[i], false);
-> +            isa_ext_update_enabled(cpu, isa_edata_arr[i].ext_enable_offs=
-et,
-> +                                   false);
->  #ifndef CONFIG_USER_ONLY
->              warn_report("disabling %s extension for hart 0x" TARGET_FMT_=
-lx
->                          " because privilege spec version does not match"=
-,
-> @@ -2271,7 +2271,7 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, cha=
-r **isa_str,
->      int i;
+>  static KVMCPUConfig kvm_cbom_blocksize =3D {
+>      .name =3D "cbom_blocksize",
+> -    .offset =3D CPUCFG(cbom_blocksize),
+> +    .offset =3D CPU_CFG_OFFSET(cbom_blocksize),
+>      .kvm_reg_id =3D KVM_REG_RISCV_CONFIG_REG(zicbom_block_size)
+>  };
 >
->      for (i =3D 0; i < ARRAY_SIZE(isa_edata_arr); i++) {
-> -        if (isa_ext_is_enabled(cpu, &isa_edata_arr[i])) {
-> +        if (isa_ext_is_enabled(cpu, isa_edata_arr[i].ext_enable_offset))=
- {
->              new =3D g_strconcat(old, "_", isa_edata_arr[i].name, NULL);
->              g_free(old);
->              old =3D new;
+>  static KVMCPUConfig kvm_cboz_blocksize =3D {
+>      .name =3D "cboz_blocksize",
+> -    .offset =3D CPUCFG(cboz_blocksize),
+> +    .offset =3D CPU_CFG_OFFSET(cboz_blocksize),
+>      .kvm_reg_id =3D KVM_REG_RISCV_CONFIG_REG(zicboz_block_size)
+>  };
+>
 > --
 > 2.41.0
 >
