@@ -4,69 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 498B4C001B0
-	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Aug 2023 17:57:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D096C001B0
+	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Aug 2023 18:08:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qU9uK-0006TR-7s; Thu, 10 Aug 2023 13:57:12 -0400
+	id 1qUA4d-0001Tq-05; Thu, 10 Aug 2023 14:07:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qU9uH-0006SR-Og; Thu, 10 Aug 2023 13:57:09 -0400
-Received: from mail-vk1-xa29.google.com ([2607:f8b0:4864:20::a29])
+ id 1qUA4Z-0001Rg-FZ; Thu, 10 Aug 2023 14:07:48 -0400
+Received: from mail-ua1-x92b.google.com ([2607:f8b0:4864:20::92b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qU9uG-0007Ol-DB; Thu, 10 Aug 2023 13:57:09 -0400
-Received: by mail-vk1-xa29.google.com with SMTP id
- 71dfb90a1353d-487203bfbc6so521484e0c.1; 
- Thu, 10 Aug 2023 10:57:07 -0700 (PDT)
+ id 1qUA4X-0001UD-Sk; Thu, 10 Aug 2023 14:07:47 -0400
+Received: by mail-ua1-x92b.google.com with SMTP id
+ a1e0cc1a2514c-79d8edd6d99so412326241.3; 
+ Thu, 10 Aug 2023 11:07:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1691690227; x=1692295027;
+ d=gmail.com; s=20221208; t=1691690863; x=1692295663;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zLqq9DPexGiKualUWwvksyaM8e+rdY8JQTwF3XqAUG8=;
- b=TJCpyeIHzI+QA5q/9vQemidsmW43dbG9NPUU/URGrAcc7XXUII2OE0ujOPSb7Q4CBH
- OXWIegmXMHtVtSsB0DRmGU/W18AS+36JkXEK95HVXyy/viVLzuTL4ozdVi8oiZxBY1aj
- RhvlYH5aHdeCxfpQxc8yvlUPAQ4Ti/YeIpJ1shVww+JTbTrvz7oRDeVHAxod/Gxc5k94
- 9x2WnnBZ0v5ONZk5Y/Z70oFcqKUX5L8mkAW2VgGtS9rMlOH++fGTQLFYg33QsjHiH/7/
- yw4KbApLQMQo/a03xTtvNEmOy1m0JznV/rkdkZol/aOW8eG0YIZ/+qlg6WpvHmMZyI1d
- /SQA==
+ bh=zS2ThlXGqny3AbetbYMTzqcXdKeTl1w8/AdLmIEWc5I=;
+ b=bepIRWkvnUXE+UEhWS2hwbAi2PSbHQk4NTvh6v+8YsJ5Rvc8mWjU9dlXhp8FufeQpo
+ B05+yW0d5ZPEH3/JPREA2uSUSVvGPXywBSeO7btOyu9TVyjJUAUFzzDlIEVPKlTEqfeI
+ AZdSdvaghAoOC8nKpQAogR6YoFBDDh5Ch54i49NqMBHPMJVOzn60xdVpjL68H/Ufz/H0
+ SsdaGRdmpdTex5l7aqlHdJe5GZwMSN4olE6eaqEMWhH77EHTCIuGG7iVTxTgPUYiUWmg
+ TNYAmjlgavQtx5TGZ/f1iguDj6CYZVlw0Nwy+TK3hr6kxeDskzvgDCMSVHprgzcyuES7
+ Gpog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691690227; x=1692295027;
+ d=1e100.net; s=20221208; t=1691690863; x=1692295663;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zLqq9DPexGiKualUWwvksyaM8e+rdY8JQTwF3XqAUG8=;
- b=BCXnUDBsJ9ENH1DwkHlKLVlaQkT0W1g7stK611jiZe3oFlkQHnVGSUOJmhtokIlHoV
- gSIU7t1S39e/2xj6f7xRL0Tc0FzX7Xa9vyFGsuCknEgCl1QJXeUnykFgJzctbMkNTxhk
- lP7EqqX6W/SDbEuY0dqTAJeHXwMbd6UJscptUCkTOaKBoeU1NIMRWPxm3uT5Td9sNTpf
- znSHXB9BvRL2un4t1q7B3lmnXFGemgqPWQY+hMHJMgZ9epqaJ3Xzf4FHMBjkVTjvsrzS
- kFvjenPvtSfH9Cxdj37NhcxPucsjgB9SjOuWorucvmbY4DhAmcNRsYD+NB689PNn8q36
- g+PQ==
-X-Gm-Message-State: AOJu0YwN0F7Hj+C0ZIT0dLemDP3eADH90pPnDUvxCDxK50n7OrhY+BaS
- JtNdiY2QTmqxBAOdPe8b2K4aEGk63QDMoZ1OySo=
-X-Google-Smtp-Source: AGHT+IEL58RM++JljJM8nkS4JTkpTDdrBvi0U1TobyB1vXBc29BwBzF0X8W5lJ9eeBJ2UFY8dLnSdxkYi9odnY2R8z0=
-X-Received: by 2002:a1f:5e53:0:b0:487:19be:7d46 with SMTP id
- s80-20020a1f5e53000000b0048719be7d46mr3236439vkb.13.1691690227132; Thu, 10
- Aug 2023 10:57:07 -0700 (PDT)
+ bh=zS2ThlXGqny3AbetbYMTzqcXdKeTl1w8/AdLmIEWc5I=;
+ b=F08C0/YSbM/EUZRdgQjsMZELfVJWGMI2ZtYO7SIOy9DCX1K89ULSQ439nbYQUSR/Se
+ NDV7OGwkoMVmAO8qQAimsqcCQHuBvWjM2N5aIbi36aZdmn5KWtc+/T8JjSUubRb6ie6t
+ MI1wv3yihfZ7OuZ18ELk5T4rz0oIayJzzdBUwZ+xEPR/LUx6yGNXhho2KF2JyPhuYebU
+ 2YZ5fU14/GyXiyQQzvtoghljxgiicMxlKMpFBLAoI+QJm9H4JaEGKMRzDOjq/NLiztAc
+ 7cw9EuEgR2WxeOK8YHWlh7YaFvm0bq5tb1jbz428Ivnvrm30br1EdWG20K+EhUVNAJ3C
+ R+GA==
+X-Gm-Message-State: AOJu0Yy0VDZsBKDDO+oOTkvf8PPr8Xp9UOF2FY+SbEeCiitYXicoQkLV
+ 7VuAhWyNnBa0Ic55j9vbBe1I1ln+tMPzjjLhsX0=
+X-Google-Smtp-Source: AGHT+IESbLKdVjU1l34RucakmSp4hnxEvsiIFcicQyOTT/qnRMixt7OvX3e64/NkKKuXQzKb5Own33uvj0lNF1Oq1XM=
+X-Received: by 2002:a67:ba19:0:b0:443:6cb3:ea61 with SMTP id
+ l25-20020a67ba19000000b004436cb3ea61mr2814241vsn.18.1691690863050; Thu, 10
+ Aug 2023 11:07:43 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230727220927.62950-1-dbarboza@ventanamicro.com>
- <20230727220927.62950-12-dbarboza@ventanamicro.com>
-In-Reply-To: <20230727220927.62950-12-dbarboza@ventanamicro.com>
+References: <20230808181715.436395-1-vineetg@rivosinc.com>
+ <20230808181715.436395-2-vineetg@rivosinc.com>
+ <ff43edc3-f160-e57d-deb1-185601ed5b7d@ventanamicro.com>
+ <1aa3bdff-0db4-c589-8863-56bbea825fda@rivosinc.com>
+In-Reply-To: <1aa3bdff-0db4-c589-8863-56bbea825fda@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 10 Aug 2023 13:56:40 -0400
-Message-ID: <CAKmqyKNR4UCmQTpJrSgMA2V=M=fOAvOxSqUWDO_oDEKirHHcWg@mail.gmail.com>
-Subject: Re: [PATCH v6 11/12] avocado, risc-v: add opensbi tests for 'max' CPU
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
+Date: Thu, 10 Aug 2023 14:07:17 -0400
+Message-ID: <CAKmqyKP2jQ1TYFNjMJNJxGqxHgq5fe5RhBhJDiPE1DoBXpf0gw@mail.gmail.com>
+Subject: Re: [PATCH 2/2] riscv: zicond: make default
+To: Vineet Gupta <vineetg@rivosinc.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, 
+ kito.cheng@gmail.com, Jeff Law <jeffreyalaw@gmail.com>, 
+ Palmer Dabbelt <palmer@rivosinc.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liweiwei@iscas.ac.cn>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a29;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa29.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92b;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92b.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -90,49 +95,84 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jul 27, 2023 at 6:33=E2=80=AFPM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Tue, Aug 8, 2023 at 6:10=E2=80=AFPM Vineet Gupta <vineetg@rivosinc.com> =
+wrote:
 >
-> Add smoke tests to ensure that we'll not break the 'max' CPU type when
-> adding new ratified extensions to be enabled.
 >
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>
+> On 8/8/23 14:06, Daniel Henrique Barboza wrote:
+> > (CCing Alistair and other reviewers)
+> >
+> > On 8/8/23 15:17, Vineet Gupta wrote:
+> >> Again this helps with better testing and something qemu has been doing
+> >> with newer features anyways.
+> >>
+> >> Signed-off-by: Vineet Gupta <vineetg@rivosinc.com>
+> >> ---
+> >
+> > Even if we can reach a consensus about removing the experimental (x-
+> > prefix) status
+> > from an extension that is Frozen instead of ratified, enabling stuff
+> > in the default
+> > CPUs because it's easier to test is something we would like to avoid.
+> > The rv64
+> > CPU has a random set of extensions enabled for the most different and
+> > undocumented
+> > reasons, and users don't know what they'll get because we keep beefing
+> > up the
+> > generic CPUs arbitrarily.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+The idea was to enable "most" extensions for the virt machine. It's a
+bit wishy-washy, but the idea was to enable as much as possible by
+default on the virt machine, as long as it doesn't conflict. The goal
+being to allow users to get the "best" experience as all their
+favourite extensions are enabled.
+
+It's harder to do in practice, so we are in a weird state where users
+don't know what is and isn't enabled.
+
+We probably want to revisit this. We should try to enable what is
+useful for users and make it clear what is and isn't enabled. I'm not
+clear on how best to do that though.
+
+Again, I think this comes back to we need to version the virt machine.
+I might do that as a starting point, that allows us to make changes in
+a clear way.
+
+>
+> I understand this position given the arbitrary nature of gazillion
+> extensions. However pragmatically things like bitmanip and zicond are so
+> fundamental it would be strange for designs to not have them, in a few
+> years. Besides these don't compete or conflict with other extensions.
+> But on face value it is indeed possible for vendors to drop them for
+> various reasons or no-reasons.
+>
+> But having the x- dropped is good enough for our needs as there's
+> already mechanisms to enable the toggles from elf attributes.
+>
+> >
+> > Starting on QEMU 8.2 we'll have a 'max' CPU type that will enable all
+> > non-experimental
+> > and non-vendor extensions by default, making it easier for tooling to
+> > test new
+> > features/extensions. All tooling should consider changing their
+> > scripts to use the
+> > 'max' CPU when it's available.
+>
+> That would be great.
+
+The max CPU helps, but I do feel that the default should allow users
+to experience as many RISC-V extensions/features as practical.
 
 Alistair
 
-> ---
->  tests/avocado/riscv_opensbi.py | 16 ++++++++++++++++
->  1 file changed, 16 insertions(+)
 >
-> diff --git a/tests/avocado/riscv_opensbi.py b/tests/avocado/riscv_opensbi=
-.py
-> index bfff9cc3c3..15fd57fe51 100644
-> --- a/tests/avocado/riscv_opensbi.py
-> +++ b/tests/avocado/riscv_opensbi.py
-> @@ -61,3 +61,19 @@ def test_riscv64_virt(self):
->          :avocado: tags=3Dmachine:virt
->          """
->          self.boot_opensbi()
-> +
-> +    def test_riscv32_virt_maxcpu(self):
-> +        """
-> +        :avocado: tags=3Darch:riscv32
-> +        :avocado: tags=3Dmachine:virt
-> +        :avocado: tags=3Dcpu:max
-> +        """
-> +        self.boot_opensbi()
-> +
-> +    def test_riscv64_virt_maxcpu(self):
-> +        """
-> +        :avocado: tags=3Darch:riscv64
-> +        :avocado: tags=3Dmachine:virt
-> +        :avocado: tags=3Dcpu:max
-> +        """
-> +        self.boot_opensbi()
-> --
-> 2.41.0
+> >
+> > For now, I fear that gcc and friends will still need to enable
+> > 'zicond' in the command
+> > line via 'zicond=3Dtrue'.  Thanks,
 >
+> Thx,
+> -Vineet
 >
 
