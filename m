@@ -4,94 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4D46C001DE
-	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Aug 2023 17:44:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6701C001E0
+	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Aug 2023 17:45:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qU9hj-0007Q6-1Z; Thu, 10 Aug 2023 13:44:11 -0400
+	id 1qU9gq-0004vN-GU; Thu, 10 Aug 2023 13:43:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1qU9hg-00079J-92
- for qemu-riscv@nongnu.org; Thu, 10 Aug 2023 13:44:08 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1qU9hd-0005Ay-Vz
- for qemu-riscv@nongnu.org; Thu, 10 Aug 2023 13:44:07 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1691689444;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=4opRmKHk32vkF98ZxEahBmO7AB2tpAtqx0ntq3I1l/w=;
- b=L+wo99N/m5YT+Rx3fpYmasbEL69A6sKl0N7sjmyAmpaiWW87mRYIpMWUwzji+1TXnbwtxG
- jd+NR89sihA3/zlk8qmLCtdf2y1mF7PWxs1QXVmLHnKeQjG4wG94cUG5AjNpdB7IJIKaiP
- 7Q+JTdzi8jYnfFoXFjsEndk3FUrdokc=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-349-E4KigzUqPgelby50Bm6T8g-1; Thu, 10 Aug 2023 13:44:02 -0400
-X-MC-Unique: E4KigzUqPgelby50Bm6T8g-1
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-314256aedcbso670491f8f.0
- for <qemu-riscv@nongnu.org>; Thu, 10 Aug 2023 10:44:02 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1qU9go-0004lp-Tq; Thu, 10 Aug 2023 13:43:14 -0400
+Received: from mail-vk1-xa29.google.com ([2607:f8b0:4864:20::a29])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1qU9gn-00056S-5K; Thu, 10 Aug 2023 13:43:14 -0400
+Received: by mail-vk1-xa29.google.com with SMTP id
+ 71dfb90a1353d-487359fa94eso345742e0c.1; 
+ Thu, 10 Aug 2023 10:43:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1691689391; x=1692294191;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LB+aVHj0tVb/+i3ZaY26GQreUrjdW7QfX5oNkoGEzow=;
+ b=rk7mtzsq5YgqQmvpQ21IGv9ewGRuj8yuT1nEuIVuSUs2A/NyjkMNiIq10YUq7MhPYE
+ zqiiK+OwA7+R2mY6VuJZTLW5wHYjZm+0bLUrEYmNSqwIiDMnCuMoTFOCf6Vh1+HLIF+0
+ RwtDju3ST6DHCoW+JgWlXboWsmm2xN1mXBX0fsm9amg4YGZVWb/h8V7D5/iox4XAteLb
+ /RR+KLUxI/RLw4h4yYbSmJOlxZ3Sc7mFh5zSUWDlbFllI+ApcJJszJ50+AfPAkW056lI
+ DnNDzDBNrCgSRzHHzJ1N9q1kQ64tjkDnwfoEUSq11sKQljSPIGVj/6XBrTjPG0kNNA6H
+ n92Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691689441; x=1692294241;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=4opRmKHk32vkF98ZxEahBmO7AB2tpAtqx0ntq3I1l/w=;
- b=ONlCg9MT0IZ6A5R+Xfmw/BzODk0g7uqW0VvuGMuGp3s2dn16qTBY8jUwgCDdhgvRSt
- CrHOM/vYn6CdwkSWMediv0FGdu7iw9b6cwowh/e9RlqJu78IqQ/SKMf2CBzY9mOEcAc/
- u1KojYwlhrUR3J44EPqX/kV8D7rxXtbaPZ9l/NNVHznT4N1kMcdR6vNL5WBpZ8t8ikr/
- L03fe/5jFUkgU2SdpPbIqpeTwfef5XurpWqDUAxhTcYHPEm//nfucBV1XRy5ZLtfhOI0
- 59hk0o2wlHBTGVZJC4+BiqM4OJSUC88iPOAAKgL6C8U4+JdPIqvF5SBP07PWtZChSfR1
- jrlA==
-X-Gm-Message-State: AOJu0Yyz8/G/byPfW9DPaQOY2ujxIlAWMdGCZ2/Kr/53cfHbW7ArIXlo
- LZPO6tjh/z+HEEiI6UFQZ5o3OZzFYFK3Uwo3Z+3CWIjOcVR6KLtJiv6jIuREFi3SO7mFc9ymoLF
- x5r8E+5h8+/3+msY=
-X-Received: by 2002:a05:6000:1ca:b0:317:f70b:3156 with SMTP id
- t10-20020a05600001ca00b00317f70b3156mr2892797wrx.28.1691689441347; 
- Thu, 10 Aug 2023 10:44:01 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHcjzQ0gJVpAYk+Uh2ymMLs/49ALvHbZV8xTwRbJE2DS4pO0UZv3gwsAwNZx9KtQ6u6dKFW4A==
-X-Received: by 2002:a05:6000:1ca:b0:317:f70b:3156 with SMTP id
- t10-20020a05600001ca00b00317f70b3156mr2892780wrx.28.1691689440966; 
- Thu, 10 Aug 2023 10:44:00 -0700 (PDT)
-Received: from redhat.com ([2.55.42.146]) by smtp.gmail.com with ESMTPSA id
- e13-20020a5d500d000000b00317ddccb0d1sm2808612wrt.24.2023.08.10.10.43.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Aug 2023 10:44:00 -0700 (PDT)
-Date: Thu, 10 Aug 2023 13:43:56 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Jason Chien <jason.chien@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Peter Maydell <peter.maydell@linaro.org>,
- Andrey Smirnov <andrew.smirnov@gmail.com>, Greg Kurz <groug@kaod.org>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
- Igor Mammedov <imammedo@redhat.com>, qemu-arm@nongnu.org
-Subject: Re: [PATCH] hw/pci-host: Allow extended config space access for
- Designware PCIe host
-Message-ID: <20230810134315-mutt-send-email-mst@kernel.org>
-References: <20230809102257.25121-1-jason.chien@sifive.com>
- <20230809172413-mutt-send-email-mst@kernel.org>
- <CADr__8ohzCfEYkXz+6u06hDQZNM8q9Cp9eehtcBFhdKtnySPBA@mail.gmail.com>
+ d=1e100.net; s=20221208; t=1691689391; x=1692294191;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=LB+aVHj0tVb/+i3ZaY26GQreUrjdW7QfX5oNkoGEzow=;
+ b=MputPKnxRFntghvOEOxGg0wLNy8vH7Zasv/PTw+01TkxuTre2ffzIHaj3vopcm0pql
+ 9BOvwLXdWCqkaoB92By/BGUK6SBBg40U4udmgIEtOsJxYwoaD9eXrHNJbgkQDdvpGgrI
+ YZvPKo+6u2lIht9gcKmf08zh53grGqNOchyrQ8eOziyirSqW444xlSwEaKH83KyyRM6y
+ qokioSZjgyP6RB7P53zOpsJNIMq85PU0r0Oqu5T6F4GxqqkmCDUQt5pKv51PI6/tMxcv
+ J2U45D9jpPbnH+AOb9s253Jme5FOp7zk3VhiqTzokxm6s/sQjHfA5Loo77R9e69GLna3
+ IxKA==
+X-Gm-Message-State: AOJu0YyUu5S+xIOqyIQYV9HGuswibOGdAR/8HPYuY8R7u+O+pQ5LK2YX
+ oDF1CFzX+rJmppLkZ8BhfbnClUQoeYYhJGptnlc=
+X-Google-Smtp-Source: AGHT+IEm96+7h0NS9AYghC5T6CRt7IipjmPGdI8oOFLl2W0inEyd7MOx3D9/fJhPhaRGHZYp2p2T+eZHOAHyjto8TgA=
+X-Received: by 2002:a67:ee53:0:b0:443:6c48:4d49 with SMTP id
+ g19-20020a67ee53000000b004436c484d49mr1714663vsp.10.1691689391617; Thu, 10
+ Aug 2023 10:43:11 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CADr__8ohzCfEYkXz+6u06hDQZNM8q9Cp9eehtcBFhdKtnySPBA@mail.gmail.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=mst@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <20230727220927.62950-1-dbarboza@ventanamicro.com>
+ <20230727220927.62950-4-dbarboza@ventanamicro.com>
+In-Reply-To: <20230727220927.62950-4-dbarboza@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 10 Aug 2023 13:42:45 -0400
+Message-ID: <CAKmqyKOPXV=AfaW_Ot2TpBR8L5_GXb_H1LS5RuOkPore8FbD3Q@mail.gmail.com>
+Subject: Re: [PATCH v6 03/12] target/riscv/cpu.c: split kvm prop handling to
+ its own helper
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a29;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa29.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,71 +91,130 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Aug 11, 2023 at 01:22:08AM +0800, Jason Chien wrote:
-> As far as I know, the order issue is caused by nested device realization. In
-> this case, realizing TYPE_DESIGNWARE_PCIE_HOST will also
-> realize TYPE_DESIGNWARE_PCIE_ROOT(see designware_pcie_host_realize()).
-> device_set_realized() is the function that realizing a device must go through,
-> and this function first realizes the device by dc->realize() and then realizes
-> the device's child bus by qbus_realize(). Whether there is any child bus of the
-> device may depend on dc->realize(). The realization flow will be like a
-> recursive call to device_set_realized(). More precisely, the flow in this case
-> is: qdev_realize() --> ... --> FIRST device_set_realized() --> FIRST dc->
-> realize() --> ... --> designware_pcie_host_realize() --> qdev_realize() --> ...
-> --> SECOND device_set_realized() --> SECOND dc->realize() --> ... -->
->  designware_pcie_root_realize() --> ...--> back to the SECOND
-> device_set_realized() --> SECOND qbus_realize() the CHILD bus "dw-pcie" --> ...
-> --> back to the FIRST device_set_realized() --> FIRST qbus_realize() the PARENT
-> bus "pcie".
-> 
-> I also found this patch that solves the same bus issue.
+On Thu, Jul 27, 2023 at 6:39=E2=80=AFPM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> Future patches will split the existing Property arrays even further, and
+> the existing code in riscv_cpu_add_user_properties() will start to scale
+> bad with it because it's dealing with KVM constraints mixed in with TCG
+> constraints. We're going to pay a high price to share a couple of common
+> lines of code between the two.
+>
+> Create a new riscv_cpu_add_kvm_properties() that will be forked from
+> riscv_cpu_add_user_properties() if we're running KVM. The helper
+> includes all properties that a KVM CPU will add. The rest of
+> riscv_cpu_add_user_properties() body will then be relieved from having
+> to deal with KVM constraints.
+>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
 
-Which patch?
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-> Do you have any suggestions on the order of realization? Thanks!
+Alistair
 
-
-I see. It's not easy to fix. Worth thinking about but I guess your
-patch is ok for now.
-
-> On Thu, Aug 10, 2023 at 5:24 AM Michael S. Tsirkin <mst@redhat.com> wrote:
-> 
->     On Wed, Aug 09, 2023 at 10:22:50AM +0000, Jason Chien wrote:
->     > In pcie_bus_realize(), a root bus is realized as a PCIe bus and a
->     non-root
->     > bus is realized as a PCIe bus if its parent bus is a PCIe bus. However,
->     > the child bus "dw-pcie" is realized before the parent bus "pcie" which is
->     > the root PCIe bus. Thus, the extended configuration space is not
->     accessible
->     > on "dw-pcie". The issue can be resolved by adding the
->     > PCI_BUS_EXTENDED_CONFIG_SPACE flag to "pcie" before "dw-pcie" is
->     realized.
->     >
->     > Signed-off-by: Jason Chien <jason.chien@sifive.com>
-> 
->     I think we should fix the order of initialization rather than
->     hack around it.
-> 
->     > ---
->     >  hw/pci-host/designware.c | 1 +
->     >  1 file changed, 1 insertion(+)
->     >
->     > diff --git a/hw/pci-host/designware.c b/hw/pci-host/designware.c
->     > index 9e183caa48..388d252ee2 100644
->     > --- a/hw/pci-host/designware.c
->     > +++ b/hw/pci-host/designware.c
->     > @@ -694,6 +694,7 @@ static void designware_pcie_host_realize(DeviceState
->     *dev, Error **errp)
->     >                                       &s->pci.io,
->     >                                       0, 4,
->     >                                       TYPE_PCIE_BUS);
->     > +    pci->bus->flags |= PCI_BUS_EXTENDED_CONFIG_SPACE;
->     > 
->     >      memory_region_init(&s->pci.address_space_root,
->     >                         OBJECT(s),
->     > --
->     > 2.17.1
-> 
-> 
-
+> ---
+>  target/riscv/cpu.c | 65 ++++++++++++++++++++++++++++++----------------
+>  1 file changed, 42 insertions(+), 23 deletions(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 2fa2581742..f1a292d967 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1881,6 +1881,46 @@ static void cpu_set_cfg_unavailable(Object *obj, V=
+isitor *v,
+>  }
+>  #endif
+>
+> +#ifndef CONFIG_USER_ONLY
+> +static void riscv_cpu_add_kvm_unavail_prop(Object *obj, const char *prop=
+_name)
+> +{
+> +    /* Check if KVM created the property already */
+> +    if (object_property_find(obj, prop_name)) {
+> +        return;
+> +    }
+> +
+> +    /*
+> +     * Set the default to disabled for every extension
+> +     * unknown to KVM and error out if the user attempts
+> +     * to enable any of them.
+> +     */
+> +    object_property_add(obj, prop_name, "bool",
+> +                        NULL, cpu_set_cfg_unavailable,
+> +                        NULL, (void *)prop_name);
+> +}
+> +
+> +static void riscv_cpu_add_kvm_properties(Object *obj)
+> +{
+> +    Property *prop;
+> +    DeviceState *dev =3D DEVICE(obj);
+> +
+> +    kvm_riscv_init_user_properties(obj);
+> +    riscv_cpu_add_misa_properties(obj);
+> +
+> +    for (prop =3D riscv_cpu_extensions; prop && prop->name; prop++) {
+> +        riscv_cpu_add_kvm_unavail_prop(obj, prop->name);
+> +    }
+> +
+> +    for (int i =3D 0; i < ARRAY_SIZE(riscv_cpu_options); i++) {
+> +        /* Check if KVM created the property already */
+> +        if (object_property_find(obj, riscv_cpu_options[i].name)) {
+> +            continue;
+> +        }
+> +        qdev_property_add_static(dev, &riscv_cpu_options[i]);
+> +    }
+> +}
+> +#endif
+> +
+>  /*
+>   * Add CPU properties with user-facing flags.
+>   *
+> @@ -1896,39 +1936,18 @@ static void riscv_cpu_add_user_properties(Object =
+*obj)
+>      riscv_add_satp_mode_properties(obj);
+>
+>      if (kvm_enabled()) {
+> -        kvm_riscv_init_user_properties(obj);
+> +        riscv_cpu_add_kvm_properties(obj);
+> +        return;
+>      }
+>  #endif
+>
+>      riscv_cpu_add_misa_properties(obj);
+>
+>      for (prop =3D riscv_cpu_extensions; prop && prop->name; prop++) {
+> -#ifndef CONFIG_USER_ONLY
+> -        if (kvm_enabled()) {
+> -            /* Check if KVM created the property already */
+> -            if (object_property_find(obj, prop->name)) {
+> -                continue;
+> -            }
+> -
+> -            /*
+> -             * Set the default to disabled for every extension
+> -             * unknown to KVM and error out if the user attempts
+> -             * to enable any of them.
+> -             */
+> -            object_property_add(obj, prop->name, "bool",
+> -                                NULL, cpu_set_cfg_unavailable,
+> -                                NULL, (void *)prop->name);
+> -            continue;
+> -        }
+> -#endif
+>          qdev_property_add_static(dev, prop);
+>      }
+>
+>      for (int i =3D 0; i < ARRAY_SIZE(riscv_cpu_options); i++) {
+> -        /* Check if KVM created the property already */
+> -        if (object_property_find(obj, riscv_cpu_options[i].name)) {
+> -            continue;
+> -        }
+>          qdev_property_add_static(dev, &riscv_cpu_options[i]);
+>      }
+>  }
+> --
+> 2.41.0
+>
+>
 
