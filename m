@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8CF6C001B0
-	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Aug 2023 17:05:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2679C001B0
+	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Aug 2023 17:07:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qU95W-0007UX-09; Thu, 10 Aug 2023 13:04:42 -0400
+	id 1qU98R-0001aw-FD; Thu, 10 Aug 2023 13:07:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qU95S-0007RI-3n; Thu, 10 Aug 2023 13:04:38 -0400
-Received: from mail-oo1-xc30.google.com ([2607:f8b0:4864:20::c30])
+ id 1qU98P-0001a6-NH; Thu, 10 Aug 2023 13:07:41 -0400
+Received: from mail-vk1-xa2b.google.com ([2607:f8b0:4864:20::a2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qU95P-0005YU-Qi; Thu, 10 Aug 2023 13:04:37 -0400
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-56c96982829so943964eaf.0; 
- Thu, 10 Aug 2023 10:04:31 -0700 (PDT)
+ id 1qU98M-0006P8-BY; Thu, 10 Aug 2023 13:07:41 -0400
+Received: by mail-vk1-xa2b.google.com with SMTP id
+ 71dfb90a1353d-48713d11531so733375e0c.1; 
+ Thu, 10 Aug 2023 10:07:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1691687070; x=1692291870;
+ d=gmail.com; s=20221208; t=1691687257; x=1692292057;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rLbpsZgNZJw0qnTsdZe1hynL5U2DSL77G2+EImjfiBk=;
- b=GXWoFo2PhW2QUFw5EFoBTlYRRv06quKwpvPF7D7Sf4TKmKfceXKWGgcI3grbdWKfnX
- +hu7Cw0HOFmpBl+eGJPlbxF5HVmcIJsDL8FtrTqM98Vu3o+0TApaqgh2AFcLMdkR1S0u
- HkMuxWlYHiQEoXXEpYNVk6RP3ArvwTlyK2CWlrV5G5s+SmVFtDKI9V2GB/62xz7b7cIc
- ZgJWowVeIXnR+McYozEE2UQ5BdKM5slD831ZSCojhtlo6YCoHY4thV1PI1VEQFaFAowF
- S/4v3A4+tv3zU8Ml8HXhnanV+ia0ch15TfAEaQgYfG99RZ2KA+rqjh19uyfREZCLoahl
- bjbA==
+ bh=bXNlGR7lWmbb3UExCZW38tnFqs9sBXHoQ8GbAEMXKbA=;
+ b=TlqP0MM7fa0QZ4WAwnxUJdGtqW3tu+EC3phcWH9vpphfctWVZeLHdWnBeaSu6TXccn
+ 0Zqj0/3RCC5a0lvOlSfKpEbu8rUAut7Gs8YXm147XeViz5zU7K9GyI+Mqsl8nQkYh8zm
+ xv/S78wM4U/tbT81oouOmoTo6ntMCJeDWH0loTFfRkmO6DSIb5C11l81uLI6JTY3yb33
+ Mj2uo7NS6C0UsksDEnDRVXT15DxDE78UIjv9OdtVgwZJ7iSEqJkqv/5K58MRKeA9db/I
+ eX7fF9RCOwkrf1V5o7iWK23j13AcDYwygqli6F8BBYkPkBXe5/4IdngemhBnL7Dn3f27
+ ffFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691687070; x=1692291870;
+ d=1e100.net; s=20221208; t=1691687257; x=1692292057;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rLbpsZgNZJw0qnTsdZe1hynL5U2DSL77G2+EImjfiBk=;
- b=lqh3a2iP6bAD7TVc0VApG8OLhd3JXPb/CTH5pEeqy7L6PYhynMMs5AlLaCyZ7NXmwA
- yWL3PVo31hye7474C/VB2Rjbek/0bVvoXL3US3dpX2WbxF/vgiWoJ2bqUovbYYZw7fcN
- vPLBk98NGcPnT8ZuR4/zsV8nJpKJ+VqZ2JKD3TLUVc6YechIg7UgYRkXotyzi15QoIcu
- Ixr6I1NMWjarPGc7XJ3r72l/9aao+cXY2ErcJBT2EwkKdanNQv/X9J0DsuZT5d3bV4C/
- s9Jav0UJQkewRm8TUsrYmoi0GGMngqL16TE4N7DIGIPF9NwLw1m6KglihN2x8G9U+cQR
- XaZA==
-X-Gm-Message-State: AOJu0YxFRdAohTj4UvYlxypjcQOvIJP9gPB+Q1uBgJZFvYHsJTRYR7ep
- XjkUkABYNQe+TXUH9LLZZZGFgTUpWBJrSXRSiwE=
-X-Google-Smtp-Source: AGHT+IGU4r60gtV+Q5AHXlinWPNPOcLvN5V9hKsnMcoxBIEpFNLY+lHubsZLIR+uEKZpHSO+/58X86NKD76DRUPFHYA=
-X-Received: by 2002:a05:6358:3426:b0:13a:2d76:e6dd with SMTP id
- h38-20020a056358342600b0013a2d76e6ddmr3896842rwd.31.1691687070122; Thu, 10
- Aug 2023 10:04:30 -0700 (PDT)
+ bh=bXNlGR7lWmbb3UExCZW38tnFqs9sBXHoQ8GbAEMXKbA=;
+ b=UeUpmTxww867jM4tzR/oMoESqNb3e3XA8VCYHYbVCMMRs7ifv30yT+qzJz8dyMXYYi
+ G0tdvwSKiF1//Zxn0NlyRGIbxBB6OdEB+jK3hMsg0FmFL5W8l4Zmg+dk60cT+iNRa/9n
+ h3byOAw2tkultu4Y2YdhxYhbHEEtuS7C/gxdsDA6LtoWnrvauWVC54Co7fu7EeiXZLKn
+ smKnWv1prfMQTs6+EmZIukd0k8Hi335cuf1SPaG8msXiy4W18XAurZ4iRfInLvfxc9tE
+ oPgL3zZyCLj44K8FqlD/eI3+zWh6erXpvzCCx+a+dybF+xd48ATof2bapZMPcCE3EhqF
+ zgwg==
+X-Gm-Message-State: AOJu0YzmjcJadABgYj865FJrorqTF72jYDUVB3lqz71AfQsqsAeUpTEa
+ IRtVIEldgYa4+r/1qxOrFDfMU8kvcvWvZmllOVI=
+X-Google-Smtp-Source: AGHT+IGdh0cxVPJcpigi4tioVFvJW20neOwgXu13dBbKfd4Ujlvy6To/iwmK53yqj3XTicAG72QoqhJONLw1wM2WCFc=
+X-Received: by 2002:a1f:c114:0:b0:486:4cb9:944f with SMTP id
+ r20-20020a1fc114000000b004864cb9944fmr1877183vkf.1.1691687256920; Thu, 10 Aug
+ 2023 10:07:36 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230802124906.24197-1-rbradford@rivosinc.com>
 In-Reply-To: <20230802124906.24197-1-rbradford@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 10 Aug 2023 13:04:04 -0400
-Message-ID: <CAKmqyKP6haPc7qGrL833ftPPg44_B501t28no05DK=2q7rYJag@mail.gmail.com>
+Date: Thu, 10 Aug 2023 13:07:11 -0400
+Message-ID: <CAKmqyKMDb2RAoafBXD5HjL5WEQK1vFrwYdHA3cufCPzFDtoQVw@mail.gmail.com>
 Subject: Re: [PATCH] target/riscv: Implement WARL behaviour for
  mcountinhibit/mcounteren
 To: Rob Bradford <rbradford@rivosinc.com>
@@ -68,8 +68,8 @@ Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c30;
- envelope-from=alistair23@gmail.com; helo=mail-oo1-xc30.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2b;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2b.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -107,7 +107,9 @@ On Wed, Aug 2, 2023 at 8:50=E2=80=AFAM Rob Bradford <rbradford@rivosinc.com=
 >
 > Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
