@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F52BC001B0
-	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Aug 2023 14:36:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5374AC001DB
+	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Aug 2023 14:42:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qUTEx-0001Aj-Qq; Fri, 11 Aug 2023 10:35:47 -0400
+	id 1qUTL8-0003JK-BH; Fri, 11 Aug 2023 10:42:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qUTEv-0001AK-Kq; Fri, 11 Aug 2023 10:35:45 -0400
-Received: from mail-ua1-x92d.google.com ([2607:f8b0:4864:20::92d])
+ id 1qUTL5-0003IV-Ep; Fri, 11 Aug 2023 10:42:07 -0400
+Received: from mail-ua1-x932.google.com ([2607:f8b0:4864:20::932])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qUTEs-0006kA-EZ; Fri, 11 Aug 2023 10:35:45 -0400
-Received: by mail-ua1-x92d.google.com with SMTP id
- a1e0cc1a2514c-79d93e7ba34so1177936241.1; 
- Fri, 11 Aug 2023 07:35:40 -0700 (PDT)
+ id 1qUTL3-0007jO-Oy; Fri, 11 Aug 2023 10:42:07 -0400
+Received: by mail-ua1-x932.google.com with SMTP id
+ a1e0cc1a2514c-796d78b3f68so668204241.0; 
+ Fri, 11 Aug 2023 07:42:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1691764540; x=1692369340;
+ d=gmail.com; s=20221208; t=1691764924; x=1692369724;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2hi/KHNzwHwycVXHqpzSUCJ9uGJ4er2ucHtA+BbYpYk=;
- b=WpjlsJkoyoF6XNJ5O2sQISEGEmmMvDi/DA2Ia80URaWdja6orlPSVTYafUhT9NgRrC
- U6k3ctl8OSaJR6M5t0kokrwgcCkEsCUcR/16OIqM7pccFIP5nQ4LxZYSQMD3VGAtAmRa
- 3xVbUWL8AJdEhMC80Et3aVxc1t5fjhcxCNwQRdIjsLbiCNy66I4SO45XQZsS6uRuhGoW
- KD2rNt6H198GP+JosR2xPOg5PgUweafEeNO6/9cHQhrEHTrJk25GU51rrzzz4AuIkM53
- rC9zAeruQCNTx9/GUgiMY5wFxqw6D0Y9cUMDPF3GEfzwIozEtHxWSKAImHGmokDoM2BS
- a37w==
+ bh=SONaOQZW7L+yqFL/v+zcKUCopJxCp+8+YOxTa4H97wo=;
+ b=aXfSf7WUJivcSWC7APEPZ0bz9md0JgJnA8IeYSKER1/HcuSHATkaR32H77gmR/CxXU
+ p3Vf7sTIyrcjGvPMHD7cxWbrLcSWvMQCzKuoo5iA+WGm5+R5owGrNrg6JYo7tFXJnH6n
+ IfggSwtqc9nI9hdeVG9GDe3Y9q/f9buvkfUaRygTF5EVS0AaD6GYDoF2B1REiFjQCZ0W
+ W7igmhXv0V/dWwT7jeykl80wScvy4ix0OYrhM5LQMxSt/ELeqfqQwtgMDshsdIKaahwD
+ nAz8bh1NjvnvZiOlGq7CNzvzWbTnpK8vc7lEaJrZGZoVaCR4Lt8BdZcqBt7bOX1EbMpK
+ pMZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691764540; x=1692369340;
+ d=1e100.net; s=20221208; t=1691764924; x=1692369724;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2hi/KHNzwHwycVXHqpzSUCJ9uGJ4er2ucHtA+BbYpYk=;
- b=UG5QbD92EixJxaVDNmOqVmWW/vmJ50PG8dWvxxHt202aerINU3GQOHU7zWOg7I2N5k
- C6kuKr1lT7+Ed1Qedq00zxq2phf9xf8XMgfUgWt+oY3sf9/Ose7FQSBHvgFnJpN8RNPD
- SWKI0Hie5MpFLXvjEQXPY1FYxB0pG71oKESBpYkrX13cCpENexaFdW8HMvlBOTjLaFU2
- V2PjqjBb9tO2Bs+tv/Di0KjR1UuRAw0pQnAd5/qdGL0Im+RdNWerf43zc4pxk2y5JoUp
- nUgAgIgTFSb8v1wQqTtxhP7yReB7TgSmh3GqjcsELzWnpQaA6mYnXpaSlhD7WyClZ6fy
- FOuw==
-X-Gm-Message-State: AOJu0YzihjewZ5SdLEAXYterGGcgCiS0YKvkVcrpikVgTOlrgOhyMp+x
- e1uuoRt4zy8mUIZFNfr2vi77JtyBoDXObQSvPHI=
-X-Google-Smtp-Source: AGHT+IH1fo8WPkjFE4Pxm2W6/Ai/a+jYXsh0HaBUHCcPP0viIEJm7YoxkBLS5/m6RHmba6rMZBYrKoh7OZUXPlwJAPA=
-X-Received: by 2002:a05:6102:7ac:b0:447:80bb:2104 with SMTP id
- x12-20020a05610207ac00b0044780bb2104mr1541822vsg.9.1691764540083; Fri, 11 Aug
- 2023 07:35:40 -0700 (PDT)
+ bh=SONaOQZW7L+yqFL/v+zcKUCopJxCp+8+YOxTa4H97wo=;
+ b=V0Jt1VLKB/2a6vq97zi+jvbJgxa0dxURDGhC9+hit1gErvs16SQ/2W7uFebqh1ko07
+ cXTfVcGnWAGbBqAzgXgUymZkkbl2AdTPcXg+ijI+O2GENTCC5Bj/E9rkyFoCOTGSU0PH
+ bc1jADqPFNyvIF1Lu1HFMc9VQcd8zGTEirMhbE/k+pPojJuy0g228tOT0f5BBpKf/g/w
+ 5aBAYg5p/fnpKWMgpUulLXxyOsEvnxS729qsObvW9K5zUqaey8WM52Cb86qrITM5gSYz
+ aiF+XLwG3U8ORGULD8+VHWLdCvvvUxxCEb7z/7yVDg7EGyZvlrJyL3zcEfQFb4ZNrgGo
+ osTQ==
+X-Gm-Message-State: AOJu0YzDoTqfR8uQvoQ9ymg7bnZgi6qKSgaXCjBjrZT1XC0Nkvhx3dEp
+ 4R2o995d47zrflcY+RFVBzVuPkDsUPdcDF6sKXk=
+X-Google-Smtp-Source: AGHT+IFuMOg5CT+HABusmy4hkatgnIMRnBzhEMov0akgQPDpSNB2AQzwBEnK/1J0nVbLJAQ81HBXhtPC+Wl6ekQlUUE=
+X-Received: by 2002:a67:b102:0:b0:447:a1f7:aeb0 with SMTP id
+ w2-20020a67b102000000b00447a1f7aeb0mr1622633vsl.32.1691764924429; Fri, 11 Aug
+ 2023 07:42:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230811055438.1945-1-zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20230811055438.1945-1-zhiwei_liu@linux.alibaba.com>
+References: <20230727102439.22554-1-yongxuan.wang@sifive.com>
+In-Reply-To: <20230727102439.22554-1-yongxuan.wang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 11 Aug 2023 10:35:14 -0400
-Message-ID: <CAKmqyKOL4Oe0ZK2a8NTHL=aw=TGraBunza_xgOx4YPLPZySK7g@mail.gmail.com>
-Subject: Re: [PATCH v2] linux-user/riscv: Use abi type for target_ucontext
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: qemu-devel@nongnu.org, richard.henderson@linaro.org, 
- Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com, 
- liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, qemu-riscv@nongnu.org, 
- philmd@linaro.org
+Date: Fri, 11 Aug 2023 10:41:38 -0400
+Message-ID: <CAKmqyKNGpT=_gfbwxkmkyQj+m7uHHSBEBWdRAm20SQQ+HeGwGg@mail.gmail.com>
+Subject: Re: [PATCH v7 0/5] Add RISC-V KVM AIA Support
+To: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, rkanwal@rivosinc.com, 
+ anup@brainfault.org, dbarboza@ventanamicro.com, ajones@ventanamicro.com, 
+ atishp@atishpatra.org, vincent.chen@sifive.com, greentime.hu@sifive.com, 
+ frank.chang@sifive.com, jim.shu@sifive.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92d;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::932;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x932.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -90,15 +90,15 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Aug 11, 2023 at 1:57=E2=80=AFAM LIU Zhiwei <zhiwei_liu@linux.alibab=
-a.com> wrote:
+On Thu, Jul 27, 2023 at 7:49=E2=80=AFAM Yong-Xuan Wang <yongxuan.wang@sifiv=
+e.com> wrote:
 >
-> We should not use types dependend on host arch for target_ucontext.
-> This bug is found when run rv32 applications.
+> This series adds support for KVM AIA in RISC-V architecture.
 >
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> In order to test these patches, we require Linux with KVM AIA support whi=
+ch can
+> be found in the riscv_kvm_aia_hwaccel_v1 branch at
+> https://github.com/avpatel/linux.git
 
 Thanks!
 
@@ -106,29 +106,58 @@ Applied to riscv-to-apply.next
 
 Alistair
 
+>
 > ---
+> v7:
+> - fix compiler warning in PATCH3
+> - rename the "kvm-aia" property to "riscv-aia" and add it as a RISC-V KVM
+> accelerator property. also move this setting from PATCH5 to PATCH3 in the=
+ code.
+>
+> v6:
+> - fix alignment
+> - add hart index to the error message of ISMIC address setting in PATCH3
+>
+> v5:
+> - remove the linux-header update patch since the riscv-to-apply.next QEMU=
+ has
+> synced up to Linux 6.5-rc1 headers.
+> - create the APLIC and IMSIC FDT helper functions in PATCH1
+> - add the irqfd support in PATCH3
+> - fix the comments and refine the code
+>
+> v4:
+> - update the linux header by the scripts/update-linux-headers.sh in PATCH=
+1
+> - remove the checking for "aplic_m" before creating S-mode APLIC device i=
+n PATCH2
+> - add more setting when we initialize the KVM AIA chip in PATCH4
+> - fix msi message delivery and the APLIC devices emulation in PATCH5
+> - fix the AIA devices mapping with NUMA enabled in PATCH6
+> - add "kvm-aia" parameter to sepecify the KVM AIA mode in PATCH6
+>
+> v3:
+> - fix typo
+> - tag the linux-header patch as placeholder
+>
 > v2:
-> - Use abi_ptr instead of abi_ulong for uc_link. (Suggest by Philippe Math=
-ieu-Daud=C3=A9)
-> ---
->  linux-user/riscv/signal.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+> - rebase to riscv-to-apply.next
+> - update the linux header by the scripts/update-linux-headers.sh
 >
-> diff --git a/linux-user/riscv/signal.c b/linux-user/riscv/signal.c
-> index eaa168199a..f989f7f51f 100644
-> --- a/linux-user/riscv/signal.c
-> +++ b/linux-user/riscv/signal.c
-> @@ -38,8 +38,8 @@ struct target_sigcontext {
->  }; /* cf. riscv-linux:arch/riscv/include/uapi/asm/ptrace.h */
+> Yong-Xuan Wang (5):
+>   target/riscv: support the AIA device emulation with KVM enabled
+>   target/riscv: check the in-kernel irqchip support
+>   target/riscv: Create an KVM AIA irqchip
+>   target/riscv: update APLIC and IMSIC to support KVM AIA
+>   target/riscv: select KVM AIA in riscv virt machine
 >
->  struct target_ucontext {
-> -    unsigned long uc_flags;
-> -    struct target_ucontext *uc_link;
-> +    abi_ulong uc_flags;
-> +    abi_ptr uc_link;
->      target_stack_t uc_stack;
->      target_sigset_t uc_sigmask;
->      uint8_t   __unused[1024 / 8 - sizeof(target_sigset_t)];
+>  hw/intc/riscv_aplic.c    |  56 ++++--
+>  hw/intc/riscv_imsic.c    |  25 ++-
+>  hw/riscv/virt.c          | 372 ++++++++++++++++++++-------------------
+>  target/riscv/kvm.c       | 196 ++++++++++++++++++++-
+>  target/riscv/kvm_riscv.h |   4 +
+>  5 files changed, 454 insertions(+), 199 deletions(-)
+>
 > --
 > 2.17.1
 >
