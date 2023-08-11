@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8541EC001DB
-	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Aug 2023 12:08:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33C76C0015E
+	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Aug 2023 12:09:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qUQwN-00041R-Qa; Fri, 11 Aug 2023 08:08:28 -0400
+	id 1qUQxE-0004TM-KV; Fri, 11 Aug 2023 08:09:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1qUQw6-0003wF-PZ
- for qemu-riscv@nongnu.org; Fri, 11 Aug 2023 08:08:15 -0400
-Received: from mail-lj1-x22f.google.com ([2a00:1450:4864:20::22f])
+ id 1qUQxD-0004Qq-DK
+ for qemu-riscv@nongnu.org; Fri, 11 Aug 2023 08:09:19 -0400
+Received: from mail-lf1-x12a.google.com ([2a00:1450:4864:20::12a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1qUQw3-0002ul-7Y
- for qemu-riscv@nongnu.org; Fri, 11 Aug 2023 08:08:08 -0400
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-2b9dc1bff38so28677771fa.1
- for <qemu-riscv@nongnu.org>; Fri, 11 Aug 2023 05:08:06 -0700 (PDT)
+ id 1qUQx9-00037H-EL
+ for qemu-riscv@nongnu.org; Fri, 11 Aug 2023 08:09:19 -0400
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-4fe457ec6e7so3068028e87.3
+ for <qemu-riscv@nongnu.org>; Fri, 11 Aug 2023 05:09:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1691755685; x=1692360485;
+ d=linaro.org; s=google; t=1691755752; x=1692360552;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ndQEBja9XdSNCO3BDSnJc/BVCJ7aH9kI+WenktxzA8o=;
- b=giPLu4gu3lWYuAaVRJbmMefAG1G6H9QxIXDdgL5msg5Mhl3UVKe/yP14dxX5N7eRn+
- b9t5XsXeBJgAMP5XI6GmOaCWaQrX1pN2rCL+J7fGHsDT20krk0UOh/8uB4oEBMcOsyaC
- G78nCXTWY+AMUj1oVZ2KgmQnplmezVjs9sbMvH0gWRkYvf8PQxNOexe9QHLWg1SJg2nB
- t37rgYMt6xerxDn0fqqCGGhiW4FVkChB77AdFlFPZ8sz3n5bHlBbxUn2GSToxu2X2IJu
- bOGtIRAqLN1xoH9UFMGq+tqJ/uz6z7bk4SxcVhgpaSrHr3vkgYLFV30VjpmME2BbiSR6
- pZeg==
+ bh=f519i4IzIrPT4DfUdbMMnoDh8gDWGEPx3By6NW7ZTfE=;
+ b=RiQ5NBTk7I6KOk426n6c8ooaY88cB33mL83tS7nPJ5I6knRk/IHHFBqGtBqJLVBSoG
+ wVGcbwJi5xJMEanS1TgDVqPsIMiMYqY4yJnBqyTXzPqEh/7V9aocOT1IyVix0gbyBmA6
+ /oDEDVc6xGqAUdE+4eUsWwcsfc25RXcLmtELvg+sqQUsg2zshP2/IPWE6XugCKBx8qMn
+ +LA7T5aF13B53YJuF9ZdqN3vE9002XZXPrCf21G0oB7PApl9uPf7y/r6voqn5FTso/HK
+ GPPGF0LqtJwkUzEu+S3HnFQk/2E4/OEowx/p5LuNSdJvzosmmSfTvhwXqjlWyKX0mHGx
+ jV5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691755685; x=1692360485;
+ d=1e100.net; s=20221208; t=1691755752; x=1692360552;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ndQEBja9XdSNCO3BDSnJc/BVCJ7aH9kI+WenktxzA8o=;
- b=b/M8p0sqlYmkQffPUz6D5+Bjlf6yz5t5HnGbiRCY6unvkGQsl6vq0Asg2zzt3sNkIx
- Z7alvDrlsRfF4Ua0hr+OaJmFVTWqLGsmVuFUwShRvbtIFTeMEFUdgroEkJuaEdo0wSIB
- HdglatYyNfwezC0Z2c24dLRb63YwDRI1lrwT9buI9WLzlLdeQ4uQVBpE9PH0nd7XOXVS
- NsjGqLXFwoxFTcroBg+sOSW+ESmZ13WgFhWG8d5LxN1nrkqYndx3vIHjM2gO4+RyjeRM
- 8DcInJH9bH1G5i4IODQi0X89wIwEy2SHyxBi7y0tJF0XaAakmhqwHUxmLRM5VrS5NJZB
- 76+g==
-X-Gm-Message-State: AOJu0YyKt+U9PDyC3NdTW1W7PeuNX6Hu9LLAkU1Vk7fRXfTXvy79NgbH
- KAXKPtlUEDUTcEzEoHBg1O74cvUO5p+JBWrZ4eu4dg==
-X-Google-Smtp-Source: AGHT+IEA3ApV7WKGjVUrpMODHQIn9x4YWsIlLu2rOojH1j+IXhkePB/JZWLCjUKUbjECGZRx60PVMfoGd/jA7YJnKco=
-X-Received: by 2002:a05:6512:1320:b0:4fd:d3aa:e425 with SMTP id
- x32-20020a056512132000b004fdd3aae425mr1381540lfu.27.1691755685028; Fri, 11
- Aug 2023 05:08:05 -0700 (PDT)
+ bh=f519i4IzIrPT4DfUdbMMnoDh8gDWGEPx3By6NW7ZTfE=;
+ b=A8UKazA4Cnmtqe5b6a5p22iFjF3aIuGifty26X62B8Y1Wvflb/qVwD1bAtLlbCSeS4
+ f9ojamQhXklvfA/mfP0JmR37jycmedil4TerZtym3a3ygGG91qspmcsSk/0I7dzyx9uL
+ amC6iU/fcDyTO9PJlcy/R3VXBuIU3gH+MluiP+euanQI2mLQWYmkJegpf0G/kZ2IyjZw
+ uhj7SNwO4x9im5wcvm90QksssyAY5uYMRrSjiO9dPhLDbXUlSwoYPpr3goElJiRD7NdS
+ hGpeUVhOKB44MJ3ZMwSWa5X341SusXgIYJHAP4uK830y1LLH/5zHpLhQ7/bPr7Y43iE8
+ G1bA==
+X-Gm-Message-State: AOJu0YzMUDtHgQZLVjhEFuzhBvNnqPwcdZjBUeNklV+LYnsHAjMp2Vjo
+ GWqeYDw7fH0x5OLAyDPZZfmxA0RKo3Gz0VDJzP/JhA==
+X-Google-Smtp-Source: AGHT+IGhFxWfle4GG6E3Tti92i2irn8GAMObTk3ein2Eova+CF3E0ZFijGQ5DPRVzavxE/T31Q5rLKgAsepdGQ/RkgY=
+X-Received: by 2002:a05:6512:b84:b0:4fb:96f3:2f4 with SMTP id
+ b4-20020a0565120b8400b004fb96f302f4mr1432995lfv.51.1691755752212; Fri, 11 Aug
+ 2023 05:09:12 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230808031143.50925-1-richard.henderson@linaro.org>
- <20230808031143.50925-22-richard.henderson@linaro.org>
-In-Reply-To: <20230808031143.50925-22-richard.henderson@linaro.org>
+ <20230808031143.50925-23-richard.henderson@linaro.org>
+In-Reply-To: <20230808031143.50925-23-richard.henderson@linaro.org>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Fri, 11 Aug 2023 13:07:54 +0100
-Message-ID: <CAFEAcA8kDbOkbV3227OJ8xodkFmH+nDTZrEDzXGf4Piaeo-ypg@mail.gmail.com>
-Subject: Re: [PATCH 21/24] tcg/i386: Use CMP+SBB in tcg_out_setcond
+Date: Fri, 11 Aug 2023 13:09:01 +0100
+Message-ID: <CAFEAcA_u7vtVRz3XqFULH=a+iXVGvu-XERg482jh5OhhRrf7cg@mail.gmail.com>
+Subject: Re: [PATCH 22/24] tcg/i386: Clear dest first in tcg_out_setcond if
+ possible
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org, 
  qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::22f;
- envelope-from=peter.maydell@linaro.org; helo=mail-lj1-x22f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::12a;
+ envelope-from=peter.maydell@linaro.org; helo=mail-lf1-x12a.google.com
 X-Spam_score_int: 4
 X-Spam_score: 0.4
 X-Spam_bar: /
@@ -91,9 +92,11 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On Tue, 8 Aug 2023 at 04:16, Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
-> Use the carry bit to optimize some forms of setcond.
+> Using XOR first is both smaller and more efficient,
+> though cannot be applied if it clobbers an input.
 >
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
 
 Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 
