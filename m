@@ -4,77 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FC1FC04E69
-	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Aug 2023 08:26:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7469EC001B0
+	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Aug 2023 09:55:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qUNT5-0007vb-FC; Fri, 11 Aug 2023 04:25:59 -0400
+	id 1qUOro-00029D-AV; Fri, 11 Aug 2023 05:55:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qUNT4-0007vB-5W
- for qemu-riscv@nongnu.org; Fri, 11 Aug 2023 04:25:58 -0400
-Received: from mail-wr1-x442.google.com ([2a00:1450:4864:20::442])
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1qUOrn-00028j-7i
+ for qemu-riscv@nongnu.org; Fri, 11 Aug 2023 05:55:35 -0400
+Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qUNT2-0006y3-EH
- for qemu-riscv@nongnu.org; Fri, 11 Aug 2023 04:25:57 -0400
-Received: by mail-wr1-x442.google.com with SMTP id
- ffacd0b85a97d-317c1845a07so1555957f8f.2
- for <qemu-riscv@nongnu.org>; Fri, 11 Aug 2023 01:25:55 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1qUOrl-0000sW-Mp
+ for qemu-riscv@nongnu.org; Fri, 11 Aug 2023 05:55:34 -0400
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5236a9788a7so2363727a12.0
+ for <qemu-riscv@nongnu.org>; Fri, 11 Aug 2023 02:55:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1691742354; x=1692347154;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=EIoEt7e12qXekBmQEPcabfMiNapP5mbwygSwiLINSSI=;
- b=Gv2J5NeItyMdgIv56m/UQMK8CT4pDIEhfZFIMhH6CMlaEPuN/l2BFM4NOaqyZNa/yo
- 2I4B3u2Hr12ZFwL4D23LzJK1Mpkdkn1ibNKmTpC5XPuHr64E9oGR/ZMTia58jF/oJ8ZJ
- xrtnw7ZOmZ0RpLsQpFfFmY10sHhxTwwhut3xbzWqokgIBsxxrXnvs5lwtsi5xBP2eilk
- xXdRVeGC3MPXUVOvmf6k56CPXe8LEfacH/wOBktRinsPBm+Ml9BiULJ/G8KwOfTCGlHk
- lixPAe9DVewM++2P+grl+c8MzRUbiFM2zurzbxfu1ZNiQu093UQ08l6S5YFsLj9KSI50
- KJEw==
+ d=linaro.org; s=google; t=1691747731; x=1692352531;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=tOBooZ3v+WXGtRHmSt+Sm6Zx4Er6lpKedMxrO3X7A2A=;
+ b=tyANfAmDWFl7VeuGbAi2agHqDPUuCqKXygOMVL69CAsYlkUKTRjYLiMsoeWNdIw6Sw
+ L8t+N/1sLeNPinMTsaaTPvf2oRrLM8aeD4+ouwjPovwQa3IJXN5DOMNnok2F5jSWD1sq
+ IR4jUl++noLqUmij53aZqHTBKKqIPmhC1NRbTH8mvhmd5zFIJ+iNiBi9E5yAGiGyUjzi
+ pzcNhVHr0X4qpknbE2hSMgPC/HXnPsRHRoGpcd4RYfVjyKcIS7OgjTURFMTxycl9bgA8
+ oKxzoPHVBFNTeg/QMmZjCFhG7A8rPh/JPpYcOvrTt07tn3/kWUHOUGTaLsjO/vdeKRhz
+ 772g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691742354; x=1692347154;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EIoEt7e12qXekBmQEPcabfMiNapP5mbwygSwiLINSSI=;
- b=fAnF+6OQsLFQlOYVRJyL5RN3uPT+dQlAOyQUMrzuEvRSCLUyJSb52dcPLsaOQgCmG8
- TIxjwhNKsst3WqtO79Umj6ZBj+Bdjzvw5Cbv92gJExqIEqE+OSGll11B24tXZP8Wb30q
- fABYVyv3ofZ2lIJRUPDFk+Xp+PpiuxMSZWdXKb5a735OTVeDWGIZINwaYF/a6YIcKpnw
- BwKLc7YGcEBdMPwZBFK+FehDFsJWRtw2sv8aUcsE0/DGuJ3SPOozLlv+5Mo/4kX3iTZt
- oUtKCqwnIOuIe/SFO4/F1UXPjnBekpFlAn3x3lFBXtrhn9csDVFiKK0RcokT4L4qvVPp
- MmWQ==
-X-Gm-Message-State: AOJu0YwNeJnX1EFaoq3KAPcdylJLih44ipYHuKgfRH/OlF7lzMxvqZH6
- GbAf9STOT9PDB9ilpIUPiYzVHQ==
-X-Google-Smtp-Source: AGHT+IGHgDSGkXBGxD39wiezrvmPVBNhXhE18QC9QefkAyO6R/zMHLh5/sEf1XXkrF0QSmCCqpfEOw==
-X-Received: by 2002:a5d:55cc:0:b0:317:3f0e:8cb1 with SMTP id
- i12-20020a5d55cc000000b003173f0e8cb1mr770939wrw.45.1691742353815; 
- Fri, 11 Aug 2023 01:25:53 -0700 (PDT)
-Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
- by smtp.gmail.com with ESMTPSA id
- a9-20020a5d5089000000b0031434c08bb7sm4669985wrt.105.2023.08.11.01.25.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Aug 2023 01:25:53 -0700 (PDT)
-Date: Fri, 11 Aug 2023 10:25:52 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Palmer Dabbelt <palmer@rivosinc.com>
-Cc: rbagley@ventanamicro.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Alistair Francis <Alistair.Francis@wdc.com>, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, 
- zhiwei_liu@linux.alibaba.com, dbarboza@ventanamicro.com
-Subject: Re: [PATCH] disas/riscv: Further correction to LUI disassembly
-Message-ID: <20230811-bc15b48d336b79d9ec1f0936@orel>
-References: <20230810-c9e1f2783168b48bc07a1aa2@orel>
- <mhng-a6344a0c-8820-41b5-a015-b82b261b463d@palmer-ri-x1c9>
- <20230810-e160f9edae60ded9d2606b8b@orel>
+ d=1e100.net; s=20221208; t=1691747731; x=1692352531;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=tOBooZ3v+WXGtRHmSt+Sm6Zx4Er6lpKedMxrO3X7A2A=;
+ b=MtWVPkPSZfpQAy+PtpXYJL5vAQJ7eIHLFhb+0aZbDbD55oz1j5Jsb2brRfOpaFWnCz
+ MrlFNqmBLs5U9hPsIJG3gxW6CfmMrwqY/RdDQalPprU+0IJQiyjB7Bv9xmYE4XlMTXCu
+ ovevFf1YmDDC37As3Njbp2Gi4wEQTImFrBX/ICILQt/dHiD4Y0qOvENGt0flFqGvi0Eh
+ RVy2f9+AXwqc4+7tkHKeha9JiyCQ21DbzZj91dgdLc3F8uO83pXoGeANRKk9vt8JoQnf
+ TelNuaK0E2TDJGtyk1f+tyyC9oyJMKm8dfCcjDgEuDRF4T1+ZIt1HzqswlLcGH/F/dWU
+ 7GcQ==
+X-Gm-Message-State: AOJu0Yy1whEkEBHN4l3zX/bOBSjqZVWXy39/2DSdGv4/+kpAF890KPw+
+ beuGEU7SuGS5u5SQrd+zLPR/ynovvp4i98JEyr69Hw==
+X-Google-Smtp-Source: AGHT+IHQPu5RK4YO64vpSUAn7XGgqNVfr/xMF1s6z0nUewvLKBx31w4ycq9DChthkfxv9NHkD0R5ZWtR7ra4T/yW6tc=
+X-Received: by 2002:aa7:d3d3:0:b0:522:1bdd:d41a with SMTP id
+ o19-20020aa7d3d3000000b005221bddd41amr1261414edr.4.1691747731314; Fri, 11 Aug
+ 2023 02:55:31 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230810-e160f9edae60ded9d2606b8b@orel>
-Received-SPF: pass client-ip=2a00:1450:4864:20::442;
- envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x442.google.com
+References: <20230809102257.25121-1-jason.chien@sifive.com>
+ <20230810135050-mutt-send-email-mst@kernel.org>
+In-Reply-To: <20230810135050-mutt-send-email-mst@kernel.org>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Fri, 11 Aug 2023 10:55:20 +0100
+Message-ID: <CAFEAcA_B5W5CX7-C_a7iWTL87kpcLsGEjAsqs5t54sgjTKi3Eg@mail.gmail.com>
+Subject: Re: [PATCH] hw/pci-host: Allow extended config space access for
+ Designware PCIe host
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: Jason Chien <jason.chien@sifive.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, 
+ Andrey Smirnov <andrew.smirnov@gmail.com>, Greg Kurz <groug@kaod.org>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Igor Mammedov <imammedo@redhat.com>, qemu-arm@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::530;
+ envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x530.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,70 +92,26 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Aug 10, 2023 at 06:27:50PM +0200, Andrew Jones wrote:
-> On Thu, Aug 10, 2023 at 09:12:42AM -0700, Palmer Dabbelt wrote:
-> > On Thu, 10 Aug 2023 08:31:46 PDT (-0700), ajones@ventanamicro.com wrote:
-> > > On Mon, Jul 31, 2023 at 11:33:20AM -0700, Richard Bagley wrote:
-> > > > The recent commit 36df75a0a9 corrected one aspect of LUI disassembly
-> > > > by recovering the immediate argument from the result of LUI with a
-> > > > shift right by 12. However, the shift right will left-fill with the
-> > > > sign. By applying a mask we recover an unsigned representation of the
-> > > > 20-bit field (which includes a sign bit).
-> > > > 
-> > > > Example:
-> > > > 0xfffff000 >> 12 = 0xffffffff
-> > > > 0xfffff000 >> 12 & 0xfffff = 0x000fffff
-> > > > 
-> > > > Fixes: 36df75a0a9 ("riscv/disas: Fix disas output of upper immediates")
-> > > > Signed-off-by: Richard Bagley <rbagley@ventanamicro.com>
-> > > > ---
-> > > >  disas/riscv.c | 9 ++++++---
-> > > >  1 file changed, 6 insertions(+), 3 deletions(-)
-> > > > 
-> > > > diff --git a/disas/riscv.c b/disas/riscv.c
-> > > > index 4023e3fc65..690eb4a1ac 100644
-> > > > --- a/disas/riscv.c
-> > > > +++ b/disas/riscv.c
-> > > > @@ -4723,9 +4723,12 @@ static void format_inst(char *buf, size_t buflen, size_t tab, rv_decode *dec)
-> > > >              break;
-> > > >          case 'U':
-> > > >              fmt++;
-> > > > -            snprintf(tmp, sizeof(tmp), "%d", dec->imm >> 12);
-> > > > -            append(buf, tmp, buflen);
-> > > > -            if (*fmt == 'o') {
-> > > > +            if (*fmt == 'i') {
-> > > > +                snprintf(tmp, sizeof(tmp), "%d", dec->imm >> 12 & 0xfffff);
-> > > 
-> > > Why are we correcting LUI's output, but still outputting sign-extended
-> > > values for AUIPC?
-> > > 
-> > > We can't assemble 'auipc a1, 0xffffffff' or 'auipc a1, -1' without getting
-> > > 
-> > >  Error: lui expression not in range 0..1048575
-> > > 
-> > > (and additionally for 0xffffffff)
-> > > 
-> > >  Error: value of 00000ffffffff000 too large for field of 4 bytes at 0000000000000000
-> > > 
-> > > either.
-> > > 
-> > > (I see that the assembler's error messages state 'lui', but I was trying
-> > > 'auipc'.)
-> > > 
-> > > I'm using as from gnu binutils 2.40.0.20230214.
-> > > 
-> > > (And, FWIW, I agree with Richard Henderson that these instructions should
-> > > accept negative values.)
-> > 
-> > I'm kind of lost here, and you saying binutils rejects this syntax?  If
-> > that's the case it's probably just an oversight, can you file a bug in
-> > binutils land so folks can see?
-> 
-> Will do.
+On Thu, 10 Aug 2023 at 18:51, Michael S. Tsirkin <mst@redhat.com> wrote:
 >
+> On Wed, Aug 09, 2023 at 10:22:50AM +0000, Jason Chien wrote:
+> > In pcie_bus_realize(), a root bus is realized as a PCIe bus and a non-root
+> > bus is realized as a PCIe bus if its parent bus is a PCIe bus. However,
+> > the child bus "dw-pcie" is realized before the parent bus "pcie" which is
+> > the root PCIe bus. Thus, the extended configuration space is not accessible
+> > on "dw-pcie". The issue can be resolved by adding the
+> > PCI_BUS_EXTENDED_CONFIG_SPACE flag to "pcie" before "dw-pcie" is realized.
+> >
+> > Signed-off-by: Jason Chien <jason.chien@sifive.com>
+>
+>
+> Acked-by: Michael S. Tsirkin <mst@redhat.com>
+>
+> I'm not planning another pull before release, hopefully
+> another maintainer can pick it up? Peter?
 
-https://sourceware.org/bugzilla/show_bug.cgi?id=30746
+At the moment I don't have anything intended for 8.1 either,
+so whoever of us does it it would be a 1-patch pullreq...
 
-Thanks,
-drew
+-- PMM
 
