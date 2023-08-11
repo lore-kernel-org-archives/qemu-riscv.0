@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A59D6C001DE
-	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Aug 2023 15:04:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C89AEB64DD
+	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Aug 2023 15:05:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qUTgm-0005Ck-0P; Fri, 11 Aug 2023 11:04:32 -0400
+	id 1qUThS-0006Ii-5G; Fri, 11 Aug 2023 11:05:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qUTgk-0005Bw-DQ; Fri, 11 Aug 2023 11:04:30 -0400
-Received: from mail-oa1-x2b.google.com ([2001:4860:4864:20::2b])
+ id 1qUThP-000694-Ka; Fri, 11 Aug 2023 11:05:11 -0400
+Received: from mail-ot1-x335.google.com ([2607:f8b0:4864:20::335])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qUTgi-00054C-R6; Fri, 11 Aug 2023 11:04:30 -0400
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-1c2bf6bb0c0so462428fac.1; 
- Fri, 11 Aug 2023 08:04:28 -0700 (PDT)
+ id 1qUThM-0005M2-S5; Fri, 11 Aug 2023 11:05:11 -0400
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-6bd04558784so1990425a34.3; 
+ Fri, 11 Aug 2023 08:05:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1691766267; x=1692371067;
+ d=gmail.com; s=20221208; t=1691766306; x=1692371106;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=M7ZYWuDNF5HchHmTGafTINgpoVw4rOZIAy0Jb/pTWHk=;
- b=UvR916DJ3qw88qXFdZovZoUh1Ae/0Gz5KyeoUF4U2V+UDpF/POxzmzJegQzojP+55C
- sHi9+ZE6gzY604wikCZgwArZBCSTxYklLQmZfQFN0YESkJA3JGo1+JfbXg6hfDV60E9g
- qypCeMbMa2VJ3+9615ZZp/1rykVQBjxXq4jY0kq6mzdhS+nFAKx2V97M08wJ3KOuIHvP
- 4NRrtwlq+mthKkKEsqtdsZnSSbHDEjkbxe4xBBdBsNbOHZShcDH48v8/Sku3A+eAuwlC
- QMVwO+DQ+JHYvbybj/b9HF8GmB0vROdJSKz1mdAxJd0evGa/JABvo1JClSbqvi9DSHJG
- YITA==
+ bh=z2EbjJc+YnTnjgh1jHU6d45VESS5TDp+uOoS2J3cUo4=;
+ b=ZgJeEnFj5ElN6TkPmfpvXakXkDjTtXWvl+1Gqlq+Ht1JLTXt+h34OzsLUANY9Btpli
+ tPmGvV1voy2CK8thCnSYUarZudUWtWLO6Hzu9cML/sgOvlb6mulzXTCzn8sPvfF28Jvh
+ 7htXRo9AR72YV79WH793U0I1fJeC4TqxgKayEvpCJ0psoXI1R31ICEM0rkttEahMuo7W
+ 8Lmb/R29d+LW3BIVvj/2FHBv1vqBzeZnuIrWIBptREDKf3ukYE5ejnp3NObMm3x5Zwd2
+ ObhkAaJOiEVvD9bx6yvALhYz2Me9SLBRuouO7kjn4/aD4paA9s3EvH6oLZ6DX/+5tbJU
+ Tmhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691766267; x=1692371067;
+ d=1e100.net; s=20221208; t=1691766306; x=1692371106;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=M7ZYWuDNF5HchHmTGafTINgpoVw4rOZIAy0Jb/pTWHk=;
- b=jgt47rqmwzntAmZVq8rn9/BmQ+/cftZTyjh+/o9TqJcDt66fMJXdCqtYF0GXLSFuC+
- elyzPxpzXfrcqCBfcRsNB6gW4MwQLjDwXNkty9gra4k5IkiitdcFXG7lcxQzdTowxGAU
- 2ZCpiPtxIrRmf1PrKZb3rkDVasSleoeMwA29XnEPx2ozHkCHvTSK4llQl7JgZflSBvv5
- qX7Es4Ev+zkrLvyiMFHxYC0EzsvGUi7iyHCJM6dGHcpMOKZXfcVrQqSxStnoFb1Fzg0M
- RfEAvl0/Nej+hq+O3jkB3HhpFxsNZm602MoKbDZdePJA6/htNK+SH2INQJCyqvdcYMb7
- Hu0w==
-X-Gm-Message-State: AOJu0YwcavFOfiQDSAfXqNRdhnOwTkop6hzZi8DRVFlu1nbuGomFmjMa
- 6RXTXBbes98gDFd7ucVlU4DFzfysfgVmdie6eKWI0oyKD5XdfA==
-X-Google-Smtp-Source: AGHT+IFnC6473NcyIhZ/v4JmPtAC0czRcEmZzrzfMDpXbeW+3YV9mRLVFH2gWD48ANfDh1sMwVAS9e8+lg4GGaHTBbs=
-X-Received: by 2002:a05:6870:514:b0:1bf:a1e:45b6 with SMTP id
- j20-20020a056870051400b001bf0a1e45b6mr2050699oao.47.1691766267332; Fri, 11
- Aug 2023 08:04:27 -0700 (PDT)
+ bh=z2EbjJc+YnTnjgh1jHU6d45VESS5TDp+uOoS2J3cUo4=;
+ b=N7+b3l8ljmIe7zF2swY3mb89b3kRWKo2TRzKPkhIiif6JPT8212fzqjQPWJTAWe3Zp
+ uZ3Vg/n0UmqTVw+aOgbGgSOpVIPhfFxs8YZqzCKjTQDQ3lSVyrzT6VgcBv8jz/UCmhWa
+ BKkypMI4ThSEGagtd8hK2d8ocfkVq0nboBkMD8zQdgGdW9AjpQ/cjMe0sJLA3GpR0MY7
+ qXkSmpldpvSK5OoUOZwL8XUYmT4toc0I2Q9OHS7r28uf8LdgI2mW1FdPzvXtcK2WUcYW
+ lQUr7lwwEhFfI+R7VPXpVgITnVr77r9vn4+8qCfcSi1LA22DNBaxz+ux35H+Ej5+BYYz
+ /Xvw==
+X-Gm-Message-State: AOJu0Yx31FGMFj8fHv7moydlb631To7RJNe6SVIGmblUosw7ozjxhV33
+ yJRPKh4hfBCN57greMdfCdCQXgNvJ6NWAaGpM1KZgbG6hQtb1A==
+X-Google-Smtp-Source: AGHT+IGs5AtkWXXh/ZgQmQpJK66oxDAMZnipUkxD5k/m2nPk/bbAHTk/SEIr/S83ZEbhh6eLiWyaPOUWKb2UgCFRP2U=
+X-Received: by 2002:a05:6358:78a:b0:139:5a46:ea7e with SMTP id
+ n10-20020a056358078a00b001395a46ea7emr2337968rwj.28.1691766305223; Fri, 11
+ Aug 2023 08:05:05 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230728131520.110394-1-dbarboza@ventanamicro.com>
- <20230728131520.110394-7-dbarboza@ventanamicro.com>
-In-Reply-To: <20230728131520.110394-7-dbarboza@ventanamicro.com>
+ <20230728131520.110394-8-dbarboza@ventanamicro.com>
+In-Reply-To: <20230728131520.110394-8-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 11 Aug 2023 11:04:01 -0400
-Message-ID: <CAKmqyKNuznxVHeDaEPmrSWh=92GBh_c57Q0pJheU2xaN6RF3_g@mail.gmail.com>
-Subject: Re: [PATCH 6/8] target/riscv: use isa_ext_update_enabled() in
- init_max_cpu_extensions()
+Date: Fri, 11 Aug 2023 11:04:39 -0400
+Message-ID: <CAKmqyKMQOhrj-G48usr8MHjURGhxxFC84J41Zu-yo6bpNecBhQ@mail.gmail.com>
+Subject: Re: [PATCH 7/8] target/riscv/cpu.c: honor user choice in
+ cpu_cfg_ext_auto_update()
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
  palmer@rivosinc.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2001:4860:4864:20::2b;
- envelope-from=alistair23@gmail.com; helo=mail-oa1-x2b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::335;
+ envelope-from=alistair23@gmail.com; helo=mail-ot1-x335.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -91,19 +91,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Jul 28, 2023 at 9:51=E2=80=AFAM Daniel Henrique Barboza
+On Fri, Jul 28, 2023 at 10:32=E2=80=AFAM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> Before adding support to detect if an extension was user set we need to
-> handle how we're enabling extensions in riscv_init_max_cpu_extensions().
-> object_property_set_bool() calls the set() callback for the property,
-> and we're going to use this callback to set the 'multi_ext_user_opts'
-> hash.
+> Add a new cpu_cfg_ext_is_user_set() helper to check if an extension was
+> set by the user in the command line. Use it inside
+> cpu_cfg_ext_auto_update() to verify if the user set a certain extension
+> and, if that's the case, do not change its value.
 >
-> This means that, as is today, all extensions we're setting for the 'max'
-> CPU will be seen as user set in the future. Let's change set_bool() to
-> isa_ext_update_enabled() that will just enable/disable the flag on a
-> certain offset.
+> This will make us honor user choice instead of overwriting the values.
+> Users will then be informed whether they're using an incompatible set of
+> extensions instead of QEMU setting a magic value that works.
+>
+> For example, we'll now error out if the user explictly set 'zce' to true
+> and 'zca' to false:
+>
+> $ ./build/qemu-system-riscv64 -M virt -cpu rv64,zce=3Dtrue,zca=3Dfalse -n=
+ographic
+> qemu-system-riscv64: Zcf/Zcd/Zcb/Zcmp/Zcmt extensions require Zca extensi=
+on
+>
+> This didn't happen before because we were enabling 'zca' if 'zce' was ena=
+bled
+> regardless if the user explictly set 'zca' to false.
 >
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
@@ -112,50 +122,39 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/cpu.c | 19 +++++++++----------
->  1 file changed, 9 insertions(+), 10 deletions(-)
+>  target/riscv/cpu.c | 10 ++++++++++
+>  1 file changed, 10 insertions(+)
 >
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index b588f6969f..a40dc865a0 100644
+> index a40dc865a0..644d0fdad2 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -2096,25 +2096,24 @@ static void riscv_init_max_cpu_extensions(Object =
-*obj)
->      set_misa(env, env->misa_mxl, env->misa_ext | RVG | RVJ | RVV);
->
->      for (int i =3D 0; i < ARRAY_SIZE(riscv_cpu_extensions); i++) {
-> -        object_property_set_bool(obj, riscv_cpu_extensions[i].name,
-> -                                 true, NULL);
-> +        isa_ext_update_enabled(cpu, riscv_cpu_extensions[i].offset, true=
-);
->      }
->
->      /* set vector version */
->      env->vext_ver =3D VEXT_VERSION_1_00_0;
->
->      /* Zfinx is not compatible with F. Disable it */
-> -    object_property_set_bool(obj, "zfinx", false, NULL);
-> -    object_property_set_bool(obj, "zdinx", false, NULL);
-> -    object_property_set_bool(obj, "zhinx", false, NULL);
-> -    object_property_set_bool(obj, "zhinxmin", false, NULL);
-> +    isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_zfinx), false);
-> +    isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_zdinx), false);
-> +    isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_zhinx), false);
-> +    isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_zhinxmin), false);
->
-> -    object_property_set_bool(obj, "zce", false, NULL);
-> -    object_property_set_bool(obj, "zcmp", false, NULL);
-> -    object_property_set_bool(obj, "zcmt", false, NULL);
-> +    isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_zce), false);
-> +    isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_zcmp), false);
-> +    isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_zcmt), false);
->
->      if (env->misa_mxl !=3D MXL_RV32) {
-> -        object_property_set_bool(obj, "zcf", false, NULL);
-> +        isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_zcf), false);
->      }
+> @@ -187,6 +187,12 @@ static int cpu_cfg_ext_get_min_version(uint32_t ext_=
+offset)
+>      return PRIV_VERSION_1_10_0;
 >  }
 >
+> +static bool cpu_cfg_ext_is_user_set(uint32_t ext_offset)
+> +{
+> +    return g_hash_table_contains(multi_ext_user_opts,
+> +                                 GUINT_TO_POINTER(ext_offset));
+> +}
+> +
+>  static void cpu_cfg_ext_auto_update(RISCVCPU *cpu, uint32_t ext_offset,
+>                                      bool value)
+>  {
+> @@ -198,6 +204,10 @@ static void cpu_cfg_ext_auto_update(RISCVCPU *cpu, u=
+int32_t ext_offset,
+>          return;
+>      }
+>
+> +    if (cpu_cfg_ext_is_user_set(ext_offset)) {
+> +        return;
+> +    }
+> +
+>      if (value && env->priv_ver !=3D PRIV_VERSION_LATEST) {
+>          /* Do not enable it if priv_ver is older than min_version */
+>          min_version =3D cpu_cfg_ext_get_min_version(ext_offset);
 > --
 > 2.41.0
 >
