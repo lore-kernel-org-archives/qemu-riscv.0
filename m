@@ -4,69 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5374AC001DB
-	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Aug 2023 14:42:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3355C001DB
+	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Aug 2023 14:45:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qUTL8-0003JK-BH; Fri, 11 Aug 2023 10:42:10 -0400
+	id 1qUTOM-0004LP-IX; Fri, 11 Aug 2023 10:45:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qUTL5-0003IV-Ep; Fri, 11 Aug 2023 10:42:07 -0400
-Received: from mail-ua1-x932.google.com ([2607:f8b0:4864:20::932])
+ id 1qUTO5-0004Ir-RJ; Fri, 11 Aug 2023 10:45:19 -0400
+Received: from mail-vs1-xe2e.google.com ([2607:f8b0:4864:20::e2e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qUTL3-0007jO-Oy; Fri, 11 Aug 2023 10:42:07 -0400
-Received: by mail-ua1-x932.google.com with SMTP id
- a1e0cc1a2514c-796d78b3f68so668204241.0; 
- Fri, 11 Aug 2023 07:42:05 -0700 (PDT)
+ id 1qUTO4-0000BG-0n; Fri, 11 Aug 2023 10:45:13 -0400
+Received: by mail-vs1-xe2e.google.com with SMTP id
+ ada2fe7eead31-44757af136cso901081137.3; 
+ Fri, 11 Aug 2023 07:45:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1691764924; x=1692369724;
+ d=gmail.com; s=20221208; t=1691765110; x=1692369910;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SONaOQZW7L+yqFL/v+zcKUCopJxCp+8+YOxTa4H97wo=;
- b=aXfSf7WUJivcSWC7APEPZ0bz9md0JgJnA8IeYSKER1/HcuSHATkaR32H77gmR/CxXU
- p3Vf7sTIyrcjGvPMHD7cxWbrLcSWvMQCzKuoo5iA+WGm5+R5owGrNrg6JYo7tFXJnH6n
- IfggSwtqc9nI9hdeVG9GDe3Y9q/f9buvkfUaRygTF5EVS0AaD6GYDoF2B1REiFjQCZ0W
- W7igmhXv0V/dWwT7jeykl80wScvy4ix0OYrhM5LQMxSt/ELeqfqQwtgMDshsdIKaahwD
- nAz8bh1NjvnvZiOlGq7CNzvzWbTnpK8vc7lEaJrZGZoVaCR4Lt8BdZcqBt7bOX1EbMpK
- pMZA==
+ bh=X6T1SOl1IfZ8wDw78HyUfaG3CNvePKuFXv9k1AVxFjE=;
+ b=okD6YhyXRb3PN5AS5xqifny0EfJDmcLKZajyCPb3/Dga+cxOiKfoVC/bVbJ68uduHP
+ Ildk7+mU9lMtQlF3LfEikU9Vl3PIIqObWGACppQrOim+Oz2ThMmzihuC0mD0yXjDRYKK
+ 7P4qQu0vIvzCn/krxCe4l4kRAXrtiSrd7W+3toinpxvNRefYGJEDDMMhgv1i1sG2t9pX
+ p8w/XM6vkKf5FhdcuLi2e7EN8btQoWtz6cTuBbeWyIGT0Zs3SQCn3Su4RCpctHNuapSh
+ 2lrdsmAkxmT17BNu1uD9SI3wbwui9XveGdg9GU5PK/CPBU4Rdx4/qNtyCCubMksPzJfO
+ WAfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691764924; x=1692369724;
+ d=1e100.net; s=20221208; t=1691765110; x=1692369910;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=SONaOQZW7L+yqFL/v+zcKUCopJxCp+8+YOxTa4H97wo=;
- b=V0Jt1VLKB/2a6vq97zi+jvbJgxa0dxURDGhC9+hit1gErvs16SQ/2W7uFebqh1ko07
- cXTfVcGnWAGbBqAzgXgUymZkkbl2AdTPcXg+ijI+O2GENTCC5Bj/E9rkyFoCOTGSU0PH
- bc1jADqPFNyvIF1Lu1HFMc9VQcd8zGTEirMhbE/k+pPojJuy0g228tOT0f5BBpKf/g/w
- 5aBAYg5p/fnpKWMgpUulLXxyOsEvnxS729qsObvW9K5zUqaey8WM52Cb86qrITM5gSYz
- aiF+XLwG3U8ORGULD8+VHWLdCvvvUxxCEb7z/7yVDg7EGyZvlrJyL3zcEfQFb4ZNrgGo
- osTQ==
-X-Gm-Message-State: AOJu0YzDoTqfR8uQvoQ9ymg7bnZgi6qKSgaXCjBjrZT1XC0Nkvhx3dEp
- 4R2o995d47zrflcY+RFVBzVuPkDsUPdcDF6sKXk=
-X-Google-Smtp-Source: AGHT+IFuMOg5CT+HABusmy4hkatgnIMRnBzhEMov0akgQPDpSNB2AQzwBEnK/1J0nVbLJAQ81HBXhtPC+Wl6ekQlUUE=
-X-Received: by 2002:a67:b102:0:b0:447:a1f7:aeb0 with SMTP id
- w2-20020a67b102000000b00447a1f7aeb0mr1622633vsl.32.1691764924429; Fri, 11 Aug
- 2023 07:42:04 -0700 (PDT)
+ bh=X6T1SOl1IfZ8wDw78HyUfaG3CNvePKuFXv9k1AVxFjE=;
+ b=dQQkBbXjois8jJEHjn+nqKt1lsT5djwrF6qusABBoZ8O6OG25GViDeCSfe0obQE3rl
+ d0EgdJw929crrXhIL1bOv1Ye0N6wXa3/RVvSrTRNcCfM+DW7QupRa81G0Iz2EYFKi2B2
+ ja61oEijgIWjuHTngYGKVgCd/AsF0/893TDgJ7CdOsIKP79KxsEFFfyiUaWmcrCBRzet
+ TrRby/1+pjKb641wwNWGPg1Cen0ULJVp4Akrvbta4ho66CBUN4WFUgZ9uzhWPyNz51+b
+ S9VnIJfib5H+hP+LegDGPfX9ZAdMcEsTJfUvPY5u70R5jVSz2qGzMNCzB+OWYjbm/Axi
+ qqww==
+X-Gm-Message-State: AOJu0Yyij7yHva9HfyR5HS+vg5rhMsqCOxRGd6JiJyfXjgVyUAFlaAv7
+ iRzrQRqS2BOzA4L4OSHWNhnIfVhmJNmBhPYTT9w=
+X-Google-Smtp-Source: AGHT+IEXHFQrvsQE9XyfRkVoISWKpAtfmNSHQSfmtluGBWj0RrtcjuzgmejAMNMS5M6Bt5ceWR1TmCqhVJxTGl78hig=
+X-Received: by 2002:a67:e882:0:b0:447:4fbe:1802 with SMTP id
+ x2-20020a67e882000000b004474fbe1802mr1714136vsn.17.1691765110277; Fri, 11 Aug
+ 2023 07:45:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230727102439.22554-1-yongxuan.wang@sifive.com>
-In-Reply-To: <20230727102439.22554-1-yongxuan.wang@sifive.com>
+References: <20230727-groom-decline-2c57ce42841c@spud>
+In-Reply-To: <20230727-groom-decline-2c57ce42841c@spud>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 11 Aug 2023 10:41:38 -0400
-Message-ID: <CAKmqyKNGpT=_gfbwxkmkyQj+m7uHHSBEBWdRAm20SQQ+HeGwGg@mail.gmail.com>
-Subject: Re: [PATCH v7 0/5] Add RISC-V KVM AIA Support
-To: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, rkanwal@rivosinc.com, 
- anup@brainfault.org, dbarboza@ventanamicro.com, ajones@ventanamicro.com, 
- atishp@atishpatra.org, vincent.chen@sifive.com, greentime.hu@sifive.com, 
- frank.chang@sifive.com, jim.shu@sifive.com
+Date: Fri, 11 Aug 2023 10:44:44 -0400
+Message-ID: <CAKmqyKP-h=1s7tV_2vkGET8xwfmeqPsFh=+TmBWPHFVMkNYWLQ@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv: virt: Fix riscv,pmu DT node path
+To: Conor Dooley <conor@kernel.org>
+Cc: qemu-riscv@nongnu.org, Conor Dooley <conor.dooley@microchip.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::932;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x932.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2e;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2e.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -90,76 +92,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jul 27, 2023 at 7:49=E2=80=AFAM Yong-Xuan Wang <yongxuan.wang@sifiv=
-e.com> wrote:
+On Thu, Jul 27, 2023 at 10:37=E2=80=AFAM Conor Dooley <conor@kernel.org> wr=
+ote:
 >
-> This series adds support for KVM AIA in RISC-V architecture.
+> From: Conor Dooley <conor.dooley@microchip.com>
 >
-> In order to test these patches, we require Linux with KVM AIA support whi=
-ch can
-> be found in the riscv_kvm_aia_hwaccel_v1 branch at
-> https://github.com/avpatel/linux.git
+> On a dtb dumped from the virt machine, dt-validate complains:
+> soc: pmu: {'riscv,event-to-mhpmcounters': [[1, 1, 524281], [2, 2, 524284]=
+, [65561, 65561, 524280], [65563, 65563, 524280], [65569, 65569, 524280]], =
+'compatible': ['riscv,pmu']} should not be valid under {'type': 'object'}
+>         from schema $id: http://devicetree.org/schemas/simple-bus.yaml#
+> That's pretty cryptic, but running the dtb back through dtc produces
+> something a lot more reasonable:
+> Warning (simple_bus_reg): /soc/pmu: missing or empty reg/ranges property
+>
+> Moving the riscv,pmu node out of the soc bus solves the problem.
+>
+> Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
->
 > ---
-> v7:
-> - fix compiler warning in PATCH3
-> - rename the "kvm-aia" property to "riscv-aia" and add it as a RISC-V KVM
-> accelerator property. also move this setting from PATCH5 to PATCH3 in the=
- code.
+> CC: Palmer Dabbelt <palmer@dabbelt.com>
+> CC: Alistair Francis <alistair.francis@wdc.com>
+> CC: Bin Meng <bin.meng@windriver.com>
+> CC: Weiwei Li <liweiwei@iscas.ac.cn>
+> CC: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> CC: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+> CC: qemu-riscv@nongnu.org
+> CC: qemu-devel@nongnu.org
+> ---
+>  hw/riscv/virt.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> v6:
-> - fix alignment
-> - add hart index to the error message of ISMIC address setting in PATCH3
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index d90286dc46..25dcc2616e 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -732,7 +732,7 @@ static void create_fdt_pmu(RISCVVirtState *s)
+>      MachineState *ms =3D MACHINE(s);
+>      RISCVCPU hart =3D s->soc[0].harts[0];
 >
-> v5:
-> - remove the linux-header update patch since the riscv-to-apply.next QEMU=
- has
-> synced up to Linux 6.5-rc1 headers.
-> - create the APLIC and IMSIC FDT helper functions in PATCH1
-> - add the irqfd support in PATCH3
-> - fix the comments and refine the code
->
-> v4:
-> - update the linux header by the scripts/update-linux-headers.sh in PATCH=
-1
-> - remove the checking for "aplic_m" before creating S-mode APLIC device i=
-n PATCH2
-> - add more setting when we initialize the KVM AIA chip in PATCH4
-> - fix msi message delivery and the APLIC devices emulation in PATCH5
-> - fix the AIA devices mapping with NUMA enabled in PATCH6
-> - add "kvm-aia" parameter to sepecify the KVM AIA mode in PATCH6
->
-> v3:
-> - fix typo
-> - tag the linux-header patch as placeholder
->
-> v2:
-> - rebase to riscv-to-apply.next
-> - update the linux header by the scripts/update-linux-headers.sh
->
-> Yong-Xuan Wang (5):
->   target/riscv: support the AIA device emulation with KVM enabled
->   target/riscv: check the in-kernel irqchip support
->   target/riscv: Create an KVM AIA irqchip
->   target/riscv: update APLIC and IMSIC to support KVM AIA
->   target/riscv: select KVM AIA in riscv virt machine
->
->  hw/intc/riscv_aplic.c    |  56 ++++--
->  hw/intc/riscv_imsic.c    |  25 ++-
->  hw/riscv/virt.c          | 372 ++++++++++++++++++++-------------------
->  target/riscv/kvm.c       | 196 ++++++++++++++++++++-
->  target/riscv/kvm_riscv.h |   4 +
->  5 files changed, 454 insertions(+), 199 deletions(-)
->
+> -    pmu_name =3D g_strdup_printf("/soc/pmu");
+> +    pmu_name =3D g_strdup_printf("/pmu");
+>      qemu_fdt_add_subnode(ms->fdt, pmu_name);
+>      qemu_fdt_setprop_string(ms->fdt, pmu_name, "compatible", "riscv,pmu"=
+);
+>      riscv_pmu_generate_fdt_node(ms->fdt, hart.cfg.pmu_num, pmu_name);
 > --
-> 2.17.1
+> 2.39.2
 >
 >
 
