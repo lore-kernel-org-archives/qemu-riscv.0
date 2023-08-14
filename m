@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A40B5C001DB
-	for <qemu-riscv@archiver.kernel.org>; Mon, 14 Aug 2023 13:30:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17271C001DB
+	for <qemu-riscv@archiver.kernel.org>; Mon, 14 Aug 2023 13:31:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qVXe8-0001wp-NH; Mon, 14 Aug 2023 09:30:14 -0400
+	id 1qVXfn-0003CA-NP; Mon, 14 Aug 2023 09:31:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qVXe1-0001qV-2t
- for qemu-riscv@nongnu.org; Mon, 14 Aug 2023 09:30:07 -0400
-Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
+ id 1qVXfk-00035e-09
+ for qemu-riscv@nongnu.org; Mon, 14 Aug 2023 09:31:52 -0400
+Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qVXdz-0000bS-Iv
- for qemu-riscv@nongnu.org; Mon, 14 Aug 2023 09:30:04 -0400
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-31965c94001so2045483f8f.3
- for <qemu-riscv@nongnu.org>; Mon, 14 Aug 2023 06:30:03 -0700 (PDT)
+ id 1qVXfh-00013y-9V
+ for qemu-riscv@nongnu.org; Mon, 14 Aug 2023 09:31:51 -0400
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-3fe8a158fcbso25576315e9.2
+ for <qemu-riscv@nongnu.org>; Mon, 14 Aug 2023 06:31:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692019802; x=1692624602;
+ d=linaro.org; s=google; t=1692019908; x=1692624708;
  h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
  :subject:cc:to:from:user-agent:references:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zVxJFYXPoi/9OovzEtC5taLwJr0dwdS7vpv9hJv9G4U=;
- b=NF9rTpvP4/oSGzXf0pglurSQjWZ38wUDTV38xpDWipxWCcbYhtuTZ9cIDNZVluxpQi
- aH2xG6OWmk31vVQDtzFkmNaRa1E09BwjgDQhxF2R+APsJZ57jTYWaMjdjsM1VSdHNj9j
- gEJptwCppcF2spXUOdxv6Cs0Jhgs39IdIBaLhk4b60Rq+ZwIZnDDb94r6DvBupGv3fYo
- HujiEgp4+z47egJ/B0NDUXpDJefpNKpTjMwTpMfGTU+Jb/soRYEjIWG2u9+uBP45cMKb
- 1j9Xfiyn1s01Lm78jg8IZCs58PRec8rexDBoMRirjopM3p7m06YGZ+RNuuL0ob6obz05
- sOaw==
+ bh=Vs2QjtUGO+bw4EAVkeNm+Yz0kX8uc/v3djpoSR26/1c=;
+ b=RmF2seqmbHlodwFCtAGROCdTZpv3AoWhhUPL7i6lO6S+owEMotRFr+V1b9+RIFdBkI
+ V3TCXmWddTlONAlB2P7xeEDuZG1OOwzOR2Fe3f654nSuEv4P9URtgYwUyUQV4vE52lxq
+ I3ZX7u6cuTwgzU6rYL+Yg2yB8IKCh7izTYHCso16TRd6NFyJb/6lNGTQ3VZsfzECYS35
+ E+SnIFbZHVfLTFT6RnfY0YJ2YVKILgUkNMJtLTmvumX6jkGa1NdmhnoX14LMaVnmY7Ss
+ Wjg80789bQt+/hVtHmwz/q1kz96OLrKK/gCZl+nD66OAbHwsb8njPdebeCC2y+yzfxTJ
+ as+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692019802; x=1692624602;
+ d=1e100.net; s=20221208; t=1692019908; x=1692624708;
  h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
  :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=zVxJFYXPoi/9OovzEtC5taLwJr0dwdS7vpv9hJv9G4U=;
- b=hONXURlthbKS4jDtugzb+83sRcr7jFbtH/3/4y/mcGeStpyyYzqECan1zdFsYVJP0E
- d8FJRrwDiYbw4SoNj8UFMsTo32iqSlHwSfUeqaVNaj42gPjTSypDc0gaxFbOywPkJTFD
- KIgpztLC9g8iiaadxFaVCup1oe/xZGhnfcNs5It6042FKzNh0HjJ0KIUrqeIP9KhJfxm
- E5ncTJsoc/LYjfFn89p/jhfC3EtXzxLeknw2ImTbpNsrNSMcvhrDxzZP265g5dHldYPs
- TO6UEFTcxoP/XSoij2HyNWbFkOeowJeZN69pYNSt58h+LKEf3hNEeZ1+FP3lps14pkKs
- UTSg==
-X-Gm-Message-State: AOJu0YyngA37tYT7DQJgDWaFRpPLjqECNwLgtfvPmSrCNV/lbGdiCtje
- bu+LqquzWEikddWMbUt5hkpHtQ==
-X-Google-Smtp-Source: AGHT+IFmGced8Zo7QoTy1BHJ7aK7BGsutRTeOWtY2o6wD0A7qawLcTRLt70hwQewPQfg+M8a+rRbWg==
-X-Received: by 2002:adf:ce11:0:b0:313:ea84:147a with SMTP id
- p17-20020adfce11000000b00313ea84147amr7071849wrn.64.1692019802251; 
- Mon, 14 Aug 2023 06:30:02 -0700 (PDT)
+ bh=Vs2QjtUGO+bw4EAVkeNm+Yz0kX8uc/v3djpoSR26/1c=;
+ b=Z9SyEl1VQo+aqD8uHis+ybCAjk5EU4NqhRM9YkZ6Sgr9qhV6tOT5l12vUZJI3RWjYX
+ 4CNOKRZyka6uKia9oPlwYsM4MZhB+ShLoOA6yzcsuAI8UYttkxm70IIucogxaqbyvgjp
+ DeqhybtU/3LVDOAcuWfGFoypeASynvDZftXlr9gO3JIxJ0iXT4OwqWVWNmNY+CbZQmvd
+ c11XjSOlqb3yUr9QylLxmIvSVCg0XIx0m++xYUsBc8aWYlbL259paZ6AXC8JHKdWJ9lR
+ dcUQlZsjvZenP8bnbaXAJN04DqRFTE8TMuijbO1pA1PGyEfyfI1gvZa22ILqZN2BSMli
+ gIIA==
+X-Gm-Message-State: AOJu0YyFqCZqiv1l9JDAqOhH3Q3nRwzU/9KlzpEDovPZeaEN2zPWTVB0
+ mN5055fFqE4H2MrcG1nN9kA4DQ==
+X-Google-Smtp-Source: AGHT+IHlZCtJc47Wtr/r+dgICLJDet6bQQ2diQu5ESIyHRbmUP+FP9tTHF0Uep9z+4/PZGLD59Tw4w==
+X-Received: by 2002:a1c:f707:0:b0:3fe:1deb:82 with SMTP id
+ v7-20020a1cf707000000b003fe1deb0082mr7656301wmh.7.1692019907733; 
+ Mon, 14 Aug 2023 06:31:47 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- b10-20020a5d550a000000b0031801aa34e2sm14596487wrv.9.2023.08.14.06.30.01
+ q9-20020a1ce909000000b003fc04d13242sm17368158wmc.0.2023.08.14.06.31.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Aug 2023 06:30:01 -0700 (PDT)
+ Mon, 14 Aug 2023 06:31:47 -0700 (PDT)
 Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 9836A1FFBB;
- Mon, 14 Aug 2023 14:30:01 +0100 (BST)
+ by zen.linaroharston (Postfix) with ESMTP id E3E181FFBB;
+ Mon, 14 Aug 2023 14:31:46 +0100 (BST)
 References: <20230731084354.115015-1-akihiko.odaki@daynix.com>
- <20230731084354.115015-14-akihiko.odaki@daynix.com>
+ <20230731084354.115015-15-akihiko.odaki@daynix.com>
 User-agent: mu4e 1.11.14; emacs 29.1.50
 From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: Akihiko Odaki <akihiko.odaki@daynix.com>
@@ -95,15 +95,16 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>, Thomas Huth <thuth@redhat.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, Max Filippov
  <jcmvbkbc@gmail.com>, qemu-devel@nongnu.org, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
-Subject: Re: [RFC PATCH 13/24] hw/core/cpu: Remove gdb_get_dynamic_xml member
-Date: Mon, 14 Aug 2023 14:29:53 +0100
-In-reply-to: <20230731084354.115015-14-akihiko.odaki@daynix.com>
-Message-ID: <87fs4lrbty.fsf@linaro.org>
+Subject: Re: [RFC PATCH 14/24] gdbstub: Add members to identify registers to
+ GDBFeature
+Date: Mon, 14 Aug 2023 14:30:49 +0100
+In-reply-to: <20230731084354.115015-15-akihiko.odaki@daynix.com>
+Message-ID: <87bkf9rbr1.fsf@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -129,11 +130,75 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 Akihiko Odaki <akihiko.odaki@daynix.com> writes:
 
-> This function is no longer used.
+> These members will be used to help plugins to identify registers.
+
+I'm wary of exposing gdb'isms directly to plugins. However making stuff
+easier for the gdbstub internals is ok. I shall reserve judgement until
+I've read the rest of the series.
+
+
+> The added members in instances of GDBFeature dynamically generated by
+> CPUs will be filled in later changes.
 >
 > Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-
-Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+> ---
+>  include/exec/gdbstub.h  |  2 ++
+>  scripts/feature_to_c.py | 14 +++++++++++++-
+>  2 files changed, 15 insertions(+), 1 deletion(-)
+>
+> diff --git a/include/exec/gdbstub.h b/include/exec/gdbstub.h
+> index 9b3da5b257..6da4af9612 100644
+> --- a/include/exec/gdbstub.h
+> +++ b/include/exec/gdbstub.h
+> @@ -13,6 +13,8 @@
+>  typedef struct GDBFeature {
+>      const char *xmlname;
+>      const char *xml;
+> +    const char *name;
+> +    const char * const *regs;
+>      int num_regs;
+>  } GDBFeature;
+>=20=20
+> diff --git a/scripts/feature_to_c.py b/scripts/feature_to_c.py
+> index 8eb8c81cf8..11b1bc05c9 100755
+> --- a/scripts/feature_to_c.py
+> +++ b/scripts/feature_to_c.py
+> @@ -46,7 +46,9 @@ def writeliteral(indent, bytes):
+>          sys.stderr.write(f'unexpected start tag: {element.tag}\n')
+>          exit(1)
+>=20=20
+> +    feature_name =3D element.attrib['name']
+>      regnum =3D 0
+> +    regnames =3D []
+>      regnums =3D []
+>      tags =3D ['feature']
+>      for event, element in events:
+> @@ -63,6 +65,7 @@ def writeliteral(indent, bytes):
+>                  if 'regnum' in element.attrib:
+>                      regnum =3D int(element.attrib['regnum'])
+>=20=20
+> +                regnames.append(element.attrib['name'])
+>                  regnums.append(regnum)
+>                  regnum +=3D 1
+>=20=20
+> @@ -81,6 +84,15 @@ def writeliteral(indent, bytes):
+>      writeliteral(8, bytes(os.path.basename(input), 'utf-8'))
+>      sys.stdout.write(',\n')
+>      writeliteral(8, read)
+> -    sys.stdout.write(f',\n        {num_regs},\n    }},\n')
+> +    sys.stdout.write(',\n')
+> +    writeliteral(8, bytes(feature_name, 'utf-8'))
+> +    sys.stdout.write(',\n        (const char * const []) {\n')
+> +
+> +    for index, regname in enumerate(regnames):
+> +        sys.stdout.write(f'            [{regnums[index] - base_reg}] =3D=
+\n')
+> +        writeliteral(16, bytes(regname, 'utf-8'))
+> +        sys.stdout.write(',\n')
+> +
+> +    sys.stdout.write(f'        }},\n        {num_regs},\n    }},\n')
+>=20=20
+>  sys.stdout.write('    { NULL }\n};\n')
 
 
 --=20
