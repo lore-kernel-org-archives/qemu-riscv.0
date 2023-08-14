@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A06FFC001DB
-	for <qemu-riscv@archiver.kernel.org>; Mon, 14 Aug 2023 11:45:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26775C10F1A
+	for <qemu-riscv@archiver.kernel.org>; Mon, 14 Aug 2023 11:57:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qVW0E-0004WU-O2; Mon, 14 Aug 2023 07:44:54 -0400
+	id 1qVWC9-0007Nh-7S; Mon, 14 Aug 2023 07:57:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qVW0C-0004VP-Pf
- for qemu-riscv@nongnu.org; Mon, 14 Aug 2023 07:44:52 -0400
-Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
+ id 1qVWC7-0007Lu-H8
+ for qemu-riscv@nongnu.org; Mon, 14 Aug 2023 07:57:11 -0400
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qVW0A-0004zz-Kj
- for qemu-riscv@nongnu.org; Mon, 14 Aug 2023 07:44:52 -0400
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-3fe32016bc8so37827545e9.1
- for <qemu-riscv@nongnu.org>; Mon, 14 Aug 2023 04:44:49 -0700 (PDT)
+ id 1qVWC4-00006T-P0
+ for qemu-riscv@nongnu.org; Mon, 14 Aug 2023 07:57:11 -0400
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-3fe5695b180so37932335e9.2
+ for <qemu-riscv@nongnu.org>; Mon, 14 Aug 2023 04:57:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692013489; x=1692618289;
+ d=linaro.org; s=google; t=1692014227; x=1692619027;
  h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
  :subject:cc:to:from:user-agent:references:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8FZFiFIXsz8UnJfsIP9ylKoEjoVeLGdB+Io7rdRixes=;
- b=M2jvErsIgjc+KDW5GD5ogH/sun0xIzpAEGpJOiLl9ZzAHHUb6UacfWqhHCla78bAyj
- ThFlxfsWKhfmtM2qQad/0jHpROCtC07TogmxdauuO+EIXM/5DcPr0WZocjAjwYnquuUt
- u6f6VAj1YTjSX27/pv/+EqHx2rZmTFPDTtAfG2OfHyL1dqgHgQce3JnjNm3TVgCbUS0n
- +Z6aqtF0ldyKhiUvpIo5CHUmGwhys3SqMdPkgVCm/usbYeiZHk1UnDni4grSlSinNP1i
- MNeC+HLq3cFgC8xNs0i8SqERiyqsaqtT4Ly/hFgMZrWaGDcMZvNBGkZ7Z8p1sOy32bGp
- +rfw==
+ bh=RapFB08NRw3liAGm5BCvJ4FzoIfRnC+vfELaP/SRV98=;
+ b=ETdIm6oGbLcqEsHe4FN8Zonk3xe471L1lYmB/OiBNzU7hv6o/hJhrXrlpji470dOLy
+ BJHHB3B4UAfjnlAUwUyQibnX2T7Yp6pjJZBp8YHsOQEgncl46RzyWwbgDgbRHEJUB9nV
+ jzJMpqsLpm21PtPI5WMLKELiXNedaK2tp8C2L6U1yB/mqyEHaZ/e8/7W59KPDeUDOLC9
+ 8i4kHI9BQ0IbgOe34H+w+1qkMorv1P7C0KT6iZN1adPf5rESzFcykW18P4vHHv5eqDm7
+ dD/weOC8zj+ZgSLOWuyAVWGDYYmuUOYGAhyU+JT//i8gXXuDA8Bnc5yGtboSo/1r2WTe
+ u4rg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692013489; x=1692618289;
+ d=1e100.net; s=20221208; t=1692014227; x=1692619027;
  h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
  :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=8FZFiFIXsz8UnJfsIP9ylKoEjoVeLGdB+Io7rdRixes=;
- b=d2o6I8QAFI+hD5shTZ8oiqR1/6IC0Er7woEmQxqkm3p2a19Td2kv7semir4b9jEGEu
- cOQimXZUaUv5FmiPmK/PMaZI+MA8Xg9I4ZCUTRaRg+mVicFHta0qxvN8ltLmqDLqF42z
- Ft7t4g68A/9mCd5rDx3eqCuC4uLYHTfhzdLn8U+AwSSzGtdDsrkAkLhTqoGUHAe05orX
- B+ys8+pYXe5K9CuOolspRo8bhfVeE3Si+mHux7QW93HDCsui+JCSXXs7EdPuvuS46xsy
- fiqrbM+IW5RLYKUgPwbOAf6dKEiqv/e2qrRd61EKKkCridNzSzdHKvq0BRlOzIex3vuY
- 0AuA==
-X-Gm-Message-State: AOJu0Yyj/L8yMGQS2Us8WApZ14OT5qcr87oHvs+NIEmC7Qku4CIWnXsX
- Vcsx1JzSvTG5Zc20hAkRD3sMbA==
-X-Google-Smtp-Source: AGHT+IGqfpvTFtRhZm2xPRLjEgD8b0yg7J+av9sJxJ0orm/+Updpj246TB07Veo1Vyv0c9RI0Z4uPw==
+ bh=RapFB08NRw3liAGm5BCvJ4FzoIfRnC+vfELaP/SRV98=;
+ b=VWMyWgGq1aaGaP2V7ax33cnUptipi8Lzb/fVyZAT/Jx+ABeiKAxevv2pBUcknmpnLo
+ V4vi/+xDR7q7CvbIm2ZjA8rGNmNImRj4pqqC2ecls+j7YyvteF6ZT/dNHZitHfY8BPZR
+ nQ6oZuTtBLQaQJMmN+l53rybrc5OpLFME0feyrNbv2IklUDs1yopMsNuxhmA3sFNdTxO
+ yTz+gBPjTzInMOSonX3wElwJy8+4F1Riq/fxE50qqypBEfUwmZ65HwCc5xWoH60BHdOy
+ HTwCpP4GLq8awWzuBtZbyWc9uMbt4mS/2sOnLoKNt4f17NomA+L92vpTQ89gA5+8ktrx
+ oz5Q==
+X-Gm-Message-State: AOJu0YwAbgtu+GdGPHi1tx5x1r/ZBa0ADKUv3jZ3JGzUhgiPyBkpufi5
+ JbeEuv7zPU9yzInCPzkG5OEygg==
+X-Google-Smtp-Source: AGHT+IHMkXvW5Y6pUhQtcqSExZsCq2jcLbmqRfzXgCJMjsloQHXZbiRKNXCTZNHZqx/T21Uv3apPEw==
 X-Received: by 2002:a1c:7c05:0:b0:3f8:fc2a:c7eb with SMTP id
- x5-20020a1c7c05000000b003f8fc2ac7ebmr6988361wmc.5.1692013488761; 
- Mon, 14 Aug 2023 04:44:48 -0700 (PDT)
+ x5-20020a1c7c05000000b003f8fc2ac7ebmr7009053wmc.5.1692014226820; 
+ Mon, 14 Aug 2023 04:57:06 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- v22-20020a1cf716000000b003fe23b10fdfsm17221694wmh.36.2023.08.14.04.44.48
+ v14-20020a1cf70e000000b003fe24441e23sm14095038wmh.24.2023.08.14.04.57.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Aug 2023 04:44:48 -0700 (PDT)
+ Mon, 14 Aug 2023 04:57:06 -0700 (PDT)
 Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id C05701FFBB;
- Mon, 14 Aug 2023 12:44:47 +0100 (BST)
+ by zen.linaroharston (Postfix) with ESMTP id 052581FFBB;
+ Mon, 14 Aug 2023 12:57:06 +0100 (BST)
 References: <20230731084354.115015-1-akihiko.odaki@daynix.com>
- <20230731084354.115015-4-akihiko.odaki@daynix.com>
+ <20230731084354.115015-5-akihiko.odaki@daynix.com>
 User-agent: mu4e 1.11.14; emacs 29.1.50
 From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: Akihiko Odaki <akihiko.odaki@daynix.com>
@@ -95,22 +95,22 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>, Thomas Huth <thuth@redhat.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, Max Filippov
  <jcmvbkbc@gmail.com>, qemu-devel@nongnu.org, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
-Subject: Re: [RFC PATCH 03/24] gdbstub: Add num_regs member to GDBFeature
-Date: Mon, 14 Aug 2023 12:44:43 +0100
-In-reply-to: <20230731084354.115015-4-akihiko.odaki@daynix.com>
-Message-ID: <87cyzpsv9s.fsf@linaro.org>
+Subject: Re: [RFC PATCH 04/24] gdbstub: Introduce gdb_find_static_feature()
+Date: Mon, 14 Aug 2023 12:56:38 +0100
+In-reply-to: <20230731084354.115015-5-akihiko.odaki@daynix.com>
+Message-ID: <878radsupa.fsf@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -129,11 +129,45 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 Akihiko Odaki <akihiko.odaki@daynix.com> writes:
 
-> Currently the number of registers exposed to GDB is written as magic
-> numbers in code. Derive the number of registers GDB actually see from
-> XML files to replace the magic numbers in code later.
+> This function is useful to determine the number of registers exposed to
+> GDB from the XML name.
 >
 > Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+> ---
+>  include/exec/gdbstub.h |  2 ++
+>  gdbstub/gdbstub.c      | 13 +++++++++++++
+>  2 files changed, 15 insertions(+)
+>
+> diff --git a/include/exec/gdbstub.h b/include/exec/gdbstub.h
+> index 22e5add5b1..3115dc21c0 100644
+> --- a/include/exec/gdbstub.h
+> +++ b/include/exec/gdbstub.h
+> @@ -34,6 +34,8 @@ void gdb_register_coprocessor(CPUState *cpu,
+>   */
+>  int gdbserver_start(const char *port_or_device);
+>=20=20
+> +const GDBFeature *gdb_find_static_feature(const char *xmlname);
+> +
+>  void gdb_set_stop_cpu(CPUState *cpu);
+>=20=20
+>  /**
+> diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
+> index fad70200d8..6d9cef5b95 100644
+> --- a/gdbstub/gdbstub.c
+> +++ b/gdbstub/gdbstub.c
+> @@ -414,6 +414,19 @@ static const char *get_feature_xml(const char *p, co=
+nst char **newp,
+>      return name ? gdb_features[i].xml : NULL;
+>  }
+>=20=20
+> +const GDBFeature *gdb_find_static_feature(const char *xmlname)
+> +{
+> +    const GDBFeature *feature;
+> +
+> +    for (feature =3D gdb_features; feature->xmlname; feature++) {
+> +        if (!strcmp(feature->xmlname, xmlname)) {
+
+I'd prefer g_strcmp0(feature->xmlname, xmlname) =3D=3D 0 but either way:
 
 Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
 
