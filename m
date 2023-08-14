@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0C0BC001B0
-	for <qemu-riscv@archiver.kernel.org>; Mon, 14 Aug 2023 14:59:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08D92C001B0
+	for <qemu-riscv@archiver.kernel.org>; Mon, 14 Aug 2023 15:16:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qVZ2P-0007nW-LI; Mon, 14 Aug 2023 10:59:21 -0400
+	id 1qVZIO-0006Ck-9m; Mon, 14 Aug 2023 11:15:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qVZ2O-0007ms-HL
- for qemu-riscv@nongnu.org; Mon, 14 Aug 2023 10:59:20 -0400
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ id 1qVZHi-0005tU-4e
+ for qemu-riscv@nongnu.org; Mon, 14 Aug 2023 11:15:15 -0400
+Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qVZ2M-0005Et-19
- for qemu-riscv@nongnu.org; Mon, 14 Aug 2023 10:59:20 -0400
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-3fe5c0e57d2so39967785e9.0
- for <qemu-riscv@nongnu.org>; Mon, 14 Aug 2023 07:59:17 -0700 (PDT)
+ id 1qVZHd-0000Pl-ME
+ for qemu-riscv@nongnu.org; Mon, 14 Aug 2023 11:15:09 -0400
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-31972944f30so1267029f8f.0
+ for <qemu-riscv@nongnu.org>; Mon, 14 Aug 2023 08:15:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692025156; x=1692629956;
+ d=linaro.org; s=google; t=1692026104; x=1692630904;
  h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
  :subject:cc:to:from:user-agent:references:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sKziK/xFndoa9bUcpBoOg/LkGNa2BGBXIRbHsDBSlsY=;
- b=cAgURWfztegoOaIqaLUGU95vvfmlR9OSIwiQIeAIoMO1eWPDKR+t27X02HlIXbIITy
- aanuABpttkq/Oyq61qjnxUKHYLdgvHgotTr3+oXckfJAtLB2vEs5EF5fxhsHtteFa8Vy
- lwRjZwGzQ90GoeS/BFbqJX7KsifNmQKV+uzXTQ/S+1QWDRqBg4/jtg3A6BBVOIBdz6Y+
- MKzkWdAON4meiSknHwKEY3iBn3TEToEFvtefHTuxZNSuk7P3o2Ax904wXa6NhuzjGTSJ
- ml/Tg+vcq1RpKL6OkGx8/KAKe+rZywRgHSuzghzY+Ii2/6Pk9BiMZims/kdKqrooaO40
- eM2A==
+ bh=bCN8NA+Uoy5p+H9hDRQ5V8pY3hTD9tUcZiQ2xG7Ty80=;
+ b=zjwh3VMS+gwRIIbqdMCxo7SBLj5exUl5XdP4Yq05LIEODcg4eJcwQhdztKHnlBU4UR
+ 3FLlPEUn3YDZq+HPY6YnGIyh/cXP0lNtfxfZ9UTdxiYTfSPdxagVaeWDLPQt/ZjH47zp
+ LxRBYTmxlZevXrl7IMTf4RHhG0hc8rOIGfGgIZGgt0GLtGgqeLAkmTfiUrj8GItnVVpU
+ 71bfyvEtvynIU44IYZ0NBG+ynv8nFOK9FcgOGO7ZfWtonR9IXAUTm2M16GL4imIjyIsu
+ 1c/FvCz9kyFzQCNHko6puMjhEVpRwoWQGgdnVygXZA+nO3sLdtJIu0thiryk8XNIj6YE
+ PF5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692025156; x=1692629956;
+ d=1e100.net; s=20221208; t=1692026104; x=1692630904;
  h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
  :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=sKziK/xFndoa9bUcpBoOg/LkGNa2BGBXIRbHsDBSlsY=;
- b=kVYdln2IP3k9vew1PleEbOL8KEIeR3Hy6S32Vvzj7YLvaV7DQsvSmS9fXJbwUXJLdw
- Xct2GTuJda9dhVjYpR2j9YuwVBYtP3Su7DyV0yNqS4EGTVWlc6b/Q2dyGDSQHq68Q7n6
- 4T0UyTWbM7/gP1kGe0JcImRRzRLkAMiLC8J4mO6sgcIMjS8/OA/X4I5FhQEGjsgpmlsL
- 3Dl2I6ZQEKN0PYM+XFyXYJDaaRqcG1xBTgaXmLv0docG7T/5KMuouXhZsRnq3tSybODX
- a2BA5P6TRVBRBDjsnOGZEyXKPimu/JdUDDm9ibrR1bOqPLW57tuMwaRwRb6B5AnUbLG6
- ObLA==
-X-Gm-Message-State: AOJu0YzYZ7S4SbZITd/apdW/V8YdWxcSQkrPbow5HKD+bpQmulD+EaEd
- KdIez/bHp+jSAfFI7w/CESj3JQ==
-X-Google-Smtp-Source: AGHT+IGvpfzK93iZxKBG1xPuwbXbwZOjEKLI0AKtIH+FTiEQDRStEYjJPsFcPMvQ+BKCZH9R5rXuJQ==
-X-Received: by 2002:a05:600c:2258:b0:3fe:2f80:8394 with SMTP id
- a24-20020a05600c225800b003fe2f808394mr7434195wmm.15.1692025156168; 
- Mon, 14 Aug 2023 07:59:16 -0700 (PDT)
+ bh=bCN8NA+Uoy5p+H9hDRQ5V8pY3hTD9tUcZiQ2xG7Ty80=;
+ b=k7Hgwk2UTBeoeQnO8TsUP30F2i8VA9x4QsNY+bbrwuOVBunQfaWtBBS4AxfJdVitwS
+ jKIjIB9FRE/FnT5m/SmHcjuRBrgRNASG+LlzTmhxa4wo3jH3t9kfUbULfbv6H6ymiHIa
+ ZY9WT1I05lX3GjjKffFqwCqYWC4wRoNUBb2idrBvYOGZgt9k1rO6lTSEgJUhtFeaRiZ3
+ f2D0oYb1Z22pgLA/kyt3WDuV2tVrbsxS2PYuSHoBOd8k0PE4rABa4NEikfRREq/h5019
+ 9iN/AB8w7GV42YhQvn9/0Kh2h4Vu+pqU/3h0cGsUa9At5Rof1LqXgstyX7RY56YSzGVo
+ an3g==
+X-Gm-Message-State: AOJu0YykW4ZrKszREVePz5ZJC3xF9XO0c8VZc+WvzrxvFg5s9ZsL3oXP
+ TZwloqpTtZ2DRlQB4hg+hJpM8g==
+X-Google-Smtp-Source: AGHT+IEeBUi/NHrK5K7RBlCJ9nwEIyIbPV+T97q4hGidMS3lDd5USjkzT6GzRiYGiDbKiEBQspPJGA==
+X-Received: by 2002:adf:ed8f:0:b0:317:60f2:c08b with SMTP id
+ c15-20020adfed8f000000b0031760f2c08bmr7849484wro.31.1692026103714; 
+ Mon, 14 Aug 2023 08:15:03 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- v2-20020a5d6102000000b003141e629cb6sm14506898wrt.101.2023.08.14.07.59.15
+ v22-20020a1cf716000000b003fe23b10fdfsm17785682wmh.36.2023.08.14.08.15.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Aug 2023 07:59:15 -0700 (PDT)
+ Mon, 14 Aug 2023 08:15:03 -0700 (PDT)
 Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 5B5381FFBB;
- Mon, 14 Aug 2023 15:59:15 +0100 (BST)
+ by zen.linaroharston (Postfix) with ESMTP id CE78B1FFBB;
+ Mon, 14 Aug 2023 16:15:02 +0100 (BST)
 References: <20230731084354.115015-1-akihiko.odaki@daynix.com>
- <20230731084354.115015-16-akihiko.odaki@daynix.com>
+ <20230731084354.115015-22-akihiko.odaki@daynix.com>
 User-agent: mu4e 1.11.14; emacs 29.1.50
 From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: Akihiko Odaki <akihiko.odaki@daynix.com>
@@ -95,15 +95,15 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>, Thomas Huth <thuth@redhat.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, Max Filippov
  <jcmvbkbc@gmail.com>, qemu-devel@nongnu.org, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
-Subject: Re: [RFC PATCH 15/24] target/arm: Fill new members of GDBFeature
-Date: Mon, 14 Aug 2023 15:56:59 +0100
-In-reply-to: <20230731084354.115015-16-akihiko.odaki@daynix.com>
-Message-ID: <87350lr7p8.fsf@linaro.org>
+Subject: Re: [RFC PATCH 21/24] plugins: Allow to read registers
+Date: Mon, 14 Aug 2023 16:05:16 +0100
+In-reply-to: <20230731084354.115015-22-akihiko.odaki@daynix.com>
+Message-ID: <87y1idpseh.fsf@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x330.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::430;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x430.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -129,243 +129,161 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 Akihiko Odaki <akihiko.odaki@daynix.com> writes:
 
-> These members will be used to help plugins to identify registers.
+> It is based on GDB protocol to ensure interface stability.
+
+See comments bellow.
+
+> The timing of the vcpu init hook is also changed so that the hook will
+> get called after GDB features are initialized.
+
+This might be worth splitting to a separate patch for cleaner bisecting.
+
 >
 > Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 > ---
->  target/arm/gdbstub.c   | 46 +++++++++++++++++++++++++++---------------
->  target/arm/gdbstub64.c | 42 +++++++++++++++++++++++++-------------
->  2 files changed, 58 insertions(+), 30 deletions(-)
+>  include/qemu/qemu-plugin.h   | 65 ++++++++++++++++++++++++++++++++++--
+>  cpu.c                        | 11 ------
+>  hw/core/cpu-common.c         | 10 ++++++
+>  plugins/api.c                | 40 ++++++++++++++++++++++
+>  plugins/qemu-plugins.symbols |  2 ++
+>  5 files changed, 114 insertions(+), 14 deletions(-)
 >
-> diff --git a/target/arm/gdbstub.c b/target/arm/gdbstub.c
-> index 100a6eed15..56d24028f6 100644
-> --- a/target/arm/gdbstub.c
-> +++ b/target/arm/gdbstub.c
-> @@ -270,6 +270,7 @@ static void arm_gen_one_feature_sysreg(GString *s,
->      g_string_append_printf(s, " regnum=3D\"%d\"", regnum);
->      g_string_append_printf(s, " group=3D\"cp_regs\"/>");
->      dyn_feature->data.cpregs.keys[dyn_feature->desc.num_regs] =3D ri_key;
-> +    ((const char **)dyn_feature->desc.regs)[dyn_feature->desc.num_regs] =
-=3D ri->name;
->      dyn_feature->desc.num_regs++;
->  }
+> diff --git a/include/qemu/qemu-plugin.h b/include/qemu/qemu-plugin.h
+> index 50a9957279..214b12bfd6 100644
+> --- a/include/qemu/qemu-plugin.h
+> +++ b/include/qemu/qemu-plugin.h
+> @@ -11,6 +11,7 @@
+>  #ifndef QEMU_QEMU_PLUGIN_H
+>  #define QEMU_QEMU_PLUGIN_H
 >=20=20
-> @@ -316,6 +317,8 @@ static GDBFeature *arm_gen_dynamic_sysreg_feature(CPU=
-State *cs, int base_reg)
->      DynamicGDBFeatureInfo *dyn_feature =3D &cpu->dyn_sysreg_feature;
->      gsize num_regs =3D g_hash_table_size(cpu->cp_regs);
+> +#include <glib.h>
+>  #include <inttypes.h>
+>  #include <stdbool.h>
+>  #include <stddef.h>
+> @@ -51,7 +52,7 @@ typedef uint64_t qemu_plugin_id_t;
 >=20=20
-> +    dyn_feature->desc.name =3D "org.qemu.gdb.arm.sys.regs";
-> +    dyn_feature->desc.regs =3D g_new(const char *, num_regs);
+>  extern QEMU_PLUGIN_EXPORT int qemu_plugin_version;
+>=20=20
+> -#define QEMU_PLUGIN_VERSION 1
+> +#define QEMU_PLUGIN_VERSION 2
+>=20=20
+>  /**
+>   * struct qemu_info_t - system information for plugins
+> @@ -218,8 +219,8 @@ struct qemu_plugin_insn;
+>   * @QEMU_PLUGIN_CB_R_REGS: callback reads the CPU's regs
+>   * @QEMU_PLUGIN_CB_RW_REGS: callback reads and writes the CPU's regs
+>   *
+> - * Note: currently unused, plugins cannot read or change system
+> - * register state.
+> + * Note: currently QEMU_PLUGIN_CB_RW_REGS is unused, plugins cannot chan=
+ge
+> + * system register state.
+>   */
+>  enum qemu_plugin_cb_flags {
+>      QEMU_PLUGIN_CB_NO_REGS,
+> @@ -664,4 +665,62 @@ uint64_t qemu_plugin_end_code(void);
+>   */
+>  uint64_t qemu_plugin_entry_code(void);
+>=20=20
+> +/**
+> + * struct qemu_plugin_register_file_t - register information
+> + *
+> + * This structure identifies registers. The identifiers included in this
+> + * structure are identical with names used in GDB's standard target feat=
+ures
+> + * with some extensions. For details, see:
+> + *
+> https://sourceware.org/gdb/onlinedocs/gdb/Standard-Target-Features.html
 
-AIUI this means we now have an array of register names which mirrors the
-names embedded in the XML. This smells like a few steps away from just
-abstracting the whole XML away from the targets and generating them
-inside gdbstub when we need them. As per my stalled attempt I referenced
-earlier.
+I'm not super keen on baking GDB-isms into the plugin register
+interface.
 
+> + *
+> + * A register is uniquely identified with the combination of a feature n=
+ame
+> + * and a register name or a register number. It is recommended to derive
+> + * register numbers from feature names and register names each time a ne=
+w vcpu
+> + * starts.
 
->      dyn_feature->desc.num_regs =3D 0;
->      dyn_feature->data.cpregs.keys =3D g_new(uint32_t, num_regs);
->      g_string_printf(s, "<?xml version=3D\"1.0\"?>");
-> @@ -418,30 +421,34 @@ static int arm_gdb_set_m_systemreg(CPUARMState *env=
-, uint8_t *buf, int reg)
->  }
->=20=20
->  static GDBFeature *arm_gen_dynamic_m_systemreg_feature(CPUState *cs,
-> -                                                       int orig_base_reg)
-> +                                                       int base_reg)
->  {
->      ARMCPU *cpu =3D ARM_CPU(cs);
->      CPUARMState *env =3D &cpu->env;
->      GString *s =3D g_string_new(NULL);
-> -    int base_reg =3D orig_base_reg;
-> -    int i;
-> +    const char **regs =3D g_new(const char *, ARRAY_SIZE(m_sysreg_def));
-> +    int i =3D 0;
-> +    int j;
->=20=20
->      g_string_printf(s, "<?xml version=3D\"1.0\"?>");
->      g_string_append_printf(s, "<!DOCTYPE target SYSTEM \"gdb-target.dtd\=
-">");
->      g_string_append_printf(s, "<feature name=3D\"org.gnu.gdb.arm.m-syste=
-m\">\n");
->=20=20
-> -    for (i =3D 0; i < ARRAY_SIZE(m_sysreg_def); i++) {
-> -        if (arm_feature(env, m_sysreg_def[i].feature)) {
-> +    for (j =3D 0; j < ARRAY_SIZE(m_sysreg_def); j++) {
-> +        if (arm_feature(env, m_sysreg_def[j].feature)) {
-> +            regs[i] =3D m_sysreg_def[j].name;
->              g_string_append_printf(s,
->                  "<reg name=3D\"%s\" bitsize=3D\"32\" regnum=3D\"%d\"/>\n=
-",
-> -                m_sysreg_def[i].name, base_reg++);
-> +                m_sysreg_def[j].name, base_reg + i++);
->          }
->      }
->=20=20
->      g_string_append_printf(s, "</feature>");
-> +    cpu->dyn_m_systemreg_feature.desc.name =3D "org.gnu.gdb.arm.m-system=
-";
->      cpu->dyn_m_systemreg_feature.desc.xmlname =3D "arm-m-system.xml";
->      cpu->dyn_m_systemreg_feature.desc.xml =3D g_string_free(s, false);
-> -    cpu->dyn_m_systemreg_feature.desc.num_regs =3D base_reg - orig_base_=
-reg;
-> +    cpu->dyn_m_systemreg_feature.desc.regs =3D regs;
-> +    cpu->dyn_m_systemreg_feature.desc.num_regs =3D i;
->=20=20
->      return &cpu->dyn_m_systemreg_feature.desc;
->  }
-> @@ -462,30 +469,37 @@ static int arm_gdb_set_m_secextreg(CPUARMState *env=
-, uint8_t *buf, int reg)
->  }
->=20=20
->  static GDBFeature *arm_gen_dynamic_m_secextreg_feature(CPUState *cs,
-> -                                                       int orig_base_reg)
-> +                                                       int base_reg)
->  {
->      ARMCPU *cpu =3D ARM_CPU(cs);
->      GString *s =3D g_string_new(NULL);
-> -    int base_reg =3D orig_base_reg;
-> -    int i;
-> +    const char **regs =3D g_new(const char *, ARRAY_SIZE(m_sysreg_def) *=
- 2);
-> +    int i =3D 0;
-> +    int j;
->=20=20
->      g_string_printf(s, "<?xml version=3D\"1.0\"?>");
->      g_string_append_printf(s, "<!DOCTYPE target SYSTEM \"gdb-target.dtd\=
-">");
->      g_string_append_printf(s, "<feature name=3D\"org.gnu.gdb.arm.secext\=
-">\n");
->=20=20
-> -    for (i =3D 0; i < ARRAY_SIZE(m_sysreg_def); i++) {
-> +    for (j =3D 0; j < ARRAY_SIZE(m_sysreg_def); j++) {
-> +        regs[i] =3D g_strconcat(m_sysreg_def[j].name, "_ns", NULL);
->          g_string_append_printf(s,
-> -            "<reg name=3D\"%s_ns\" bitsize=3D\"32\" regnum=3D\"%d\"/>\n",
-> -            m_sysreg_def[i].name, base_reg++);
-> +            "<reg name=3D\"%s\" bitsize=3D\"32\" regnum=3D\"%d\"/>\n",
-> +            regs[i], base_reg + i);
-> +        i++;
-> +        regs[i] =3D g_strconcat(m_sysreg_def[j].name, "_s", NULL);
->          g_string_append_printf(s,
-> -            "<reg name=3D\"%s_s\" bitsize=3D\"32\" regnum=3D\"%d\"/>\n",
-> -            m_sysreg_def[i].name, base_reg++);
-> +            "<reg name=3D\"%s\" bitsize=3D\"32\" regnum=3D\"%d\"/>\n",
-> +            regs[i], base_reg + i);
-> +        i++;
->      }
->=20=20
->      g_string_append_printf(s, "</feature>");
-> +    cpu->dyn_m_secextreg_feature.desc.name =3D "org.gnu.gdb.arm.secext";
->      cpu->dyn_m_secextreg_feature.desc.xmlname =3D "arm-m-secext.xml";
->      cpu->dyn_m_secextreg_feature.desc.xml =3D g_string_free(s, false);
-> -    cpu->dyn_m_secextreg_feature.desc.num_regs =3D base_reg - orig_base_=
-reg;
-> +    cpu->dyn_m_secextreg_feature.desc.regs =3D regs;
-> +    cpu->dyn_m_secextreg_feature.desc.num_regs =3D i;
->=20=20
->      return &cpu->dyn_m_secextreg_feature.desc;
->  }
-> diff --git a/target/arm/gdbstub64.c b/target/arm/gdbstub64.c
-> index 20483ef9bc..c5ed7c0aa3 100644
-> --- a/target/arm/gdbstub64.c
-> +++ b/target/arm/gdbstub64.c
-> @@ -316,15 +316,21 @@ static void output_vector_union_type(GString *s, in=
-t reg_width,
->      g_string_append(s, "</union>");
->  }
->=20=20
-> -GDBFeature *arm_gen_dynamic_svereg_feature(CPUState *cs, int orig_base_r=
-eg)
-> +GDBFeature *arm_gen_dynamic_svereg_feature(CPUState *cs, int base_reg)
->  {
->      ARMCPU *cpu =3D ARM_CPU(cs);
->      GString *s =3D g_string_new(NULL);
->      DynamicGDBFeatureInfo *info =3D &cpu->dyn_svereg_feature;
-> +    const char **regs;
->      int reg_width =3D cpu->sve_max_vq * 128;
->      int pred_width =3D cpu->sve_max_vq * 16;
-> -    int base_reg =3D orig_base_reg;
-> -    int i;
-> +    int i =3D 0;
-> +    int j;
+Do you have examples of clashing register names from different feature
+sets?=20
+
+> + *
+> + * To derive the register number from a feature name and a register name,
+> + * first look up qemu_plugin_register_file_t with the feature name, and =
+then
+> + * look up the register name in its @regs. The sum of the @base_reg and =
+the
+> + * index in the @reg is the register number.
+> + *
+> + * Note that @regs may have holes; some elements of @regs may be NULL.
+> + */
+> +typedef struct qemu_plugin_register_file_t {
+> +    /** @name: feature name */
+> +    const char *name;
+> +    /** @regs: register names */
+> +    const char * const *regs;
+> +    /** @base_reg: the base identified number */
+> +    int base_reg;
+> +    /** @num_regs: the number of elements in @regs */
+> +    int num_regs;
+> +} qemu_plugin_register_file_t;
 > +
-> +    info->desc.name =3D "org.gnu.gdb.aarch64.sve";
-> +    info->desc.num_regs =3D 32 + 16 + 4;
-> +    regs =3D g_new(const char *, info->desc.num_regs);
-> +    info->desc.regs =3D regs;
->=20=20
->      g_string_printf(s, "<?xml version=3D\"1.0\"?>");
->      g_string_append_printf(s, "<!DOCTYPE target SYSTEM \"gdb-target.dtd\=
-">");
-> @@ -339,44 +345,52 @@ GDBFeature *arm_gen_dynamic_svereg_feature(CPUState=
- *cs, int orig_base_reg)
->                             pred_width / 8);
->=20=20
->      /* Define the vector registers. */
-> -    for (i =3D 0; i < 32; i++) {
-> +    for (j =3D 0; j < 32; j++) {
-> +        regs[i] =3D g_strdup_printf("z%d", j);
->          g_string_append_printf(s,
-> -                               "<reg name=3D\"z%d\" bitsize=3D\"%d\""
-> +                               "<reg name=3D\"%s\" bitsize=3D\"%d\""
->                                 " regnum=3D\"%d\" type=3D\"svev\"/>",
-> -                               i, reg_width, base_reg++);
-> +                               regs[i], reg_width, base_reg + i);
-> +        i++;
->      }
->=20=20
->      /* fpscr & status registers */
-> +    regs[i] =3D "fpsr";
->      g_string_append_printf(s, "<reg name=3D\"fpsr\" bitsize=3D\"32\""
->                             " regnum=3D\"%d\" group=3D\"float\""
-> -                           " type=3D\"int\"/>", base_reg++);
-> +                           " type=3D\"int\"/>", base_reg + i++);
-> +    regs[i] =3D "fpcr";
->      g_string_append_printf(s, "<reg name=3D\"fpcr\" bitsize=3D\"32\""
->                             " regnum=3D\"%d\" group=3D\"float\""
-> -                           " type=3D\"int\"/>", base_reg++);
-> +                           " type=3D\"int\"/>", base_reg + i++);
->=20=20
->      /* Define the predicate registers. */
-> -    for (i =3D 0; i < 16; i++) {
-> +    for (j =3D 0; j < 16; j++) {
-> +        regs[i] =3D g_strdup_printf("p%d", j);
->          g_string_append_printf(s,
-> -                               "<reg name=3D\"p%d\" bitsize=3D\"%d\""
-> +                               "<reg name=3D\"%s\" bitsize=3D\"%d\""
->                                 " regnum=3D\"%d\" type=3D\"svep\"/>",
-> -                               i, pred_width, base_reg++);
-> +                               regs[i], pred_width, base_reg + i);
-> +        i++;
->      }
-> +    regs[i] =3D "ffr";
->      g_string_append_printf(s,
->                             "<reg name=3D\"ffr\" bitsize=3D\"%d\""
->                             " regnum=3D\"%d\" group=3D\"vector\""
->                             " type=3D\"svep\"/>",
-> -                           pred_width, base_reg++);
-> +                           pred_width, base_reg + i++);
->=20=20
->      /* Define the vector length pseudo-register. */
-> +    regs[i] =3D "vg";
->      g_string_append_printf(s,
->                             "<reg name=3D\"vg\" bitsize=3D\"64\""
->                             " regnum=3D\"%d\" type=3D\"int\"/>",
-> -                           base_reg++);
-> +                           base_reg + i++);
->=20=20
->      g_string_append_printf(s, "</feature>");
->=20=20
->      info->desc.xmlname =3D "sve-registers.xml";
->      info->desc.xml =3D g_string_free(s, false);
-> -    info->desc.num_regs =3D base_reg - orig_base_reg;
-> +    assert(info->desc.num_regs =3D=3D i);
->      return &info->desc;
->  }
+> +/**
+> + * qemu_plugin_get_register_files() - returns register information
+> + *
+> + * @vcpu_index: the index of the vcpu context
+> + * @size: the pointer to the variable to hold the number of returned ele=
+ments
+> + *
+> + * Returns an array of qemu_plugin_register_file_t. The user should g_fr=
+ee()
+> + * the array once no longer needed.
+> + */
+> +qemu_plugin_register_file_t *
+> +qemu_plugin_get_register_files(unsigned int vcpu_index, int *size);
 
+I think I'd rather have a simpler interface that returns an anonymous
+handle to the plugin. For example:
+
+  struct qemu_plugin_register;
+  struct qemu_plugin_register qemu_plugin_find_register(const char *name);
+
+> +
+> +/**
+> + * qemu_plugin_read_register() - read register
+> + *
+> + * @buf: the byte array to append the read register content to.
+> + * @reg: the register identifier determined with
+> + *       qemu_plugin_get_register_files().
+> + *
+> + * This function is only available in a context that register read acces=
+s is
+> + * explicitly requested.
+> + *
+> + * Returns the size of the read register. The content of @buf is in targ=
+et byte
+> + * order.
+> + */
+> +int qemu_plugin_read_register(GByteArray *buf, int reg);
+
+and this then becomes:
+
+  int qemu_plugin_read_register(GByteArray *buf, struct qemu_plugin_registe=
+r);
+
+in practice these can become anonymous pointers which hide the
+implementation details from the plugin itself. Then the details of
+mapping the register to a gdb regnum can be kept in the plugin code
+keeping us free to further re-factor the code as we go.
+
+The plugin code works quite hard to try and avoid leaking implementation
+details to plugins so as not to tie QEMU's hands in re-factoring. While
+the interface provided is technically GDB's, not QEMUs I don't think its
+a particularly nice one to expose.
+
+<snip>
 
 --=20
 Alex Benn=C3=A9e
