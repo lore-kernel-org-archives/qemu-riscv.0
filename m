@@ -4,89 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AFEBC0015E
-	for <qemu-riscv@archiver.kernel.org>; Sat, 12 Aug 2023 17:22:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42095C04A94
+	for <qemu-riscv@archiver.kernel.org>; Mon, 14 Aug 2023 10:48:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qUsJ3-0002b2-AB; Sat, 12 Aug 2023 13:21:41 -0400
+	id 1qVV7X-000744-7F; Mon, 14 Aug 2023 06:48:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1qUsJ2-0002ad-0f
- for qemu-riscv@nongnu.org; Sat, 12 Aug 2023 13:21:40 -0400
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1qVV7Q-00071r-Tp
+ for qemu-riscv@nongnu.org; Mon, 14 Aug 2023 06:48:16 -0400
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1qUsJ0-0005s3-Iv
- for qemu-riscv@nongnu.org; Sat, 12 Aug 2023 13:21:39 -0400
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-1bc7b25c699so19158685ad.1
- for <qemu-riscv@nongnu.org>; Sat, 12 Aug 2023 10:21:37 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1qVV7O-00088m-NS
+ for qemu-riscv@nongnu.org; Mon, 14 Aug 2023 06:48:15 -0400
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-31768ce2e81so3759526f8f.1
+ for <qemu-riscv@nongnu.org>; Mon, 14 Aug 2023 03:48:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1691860897; x=1692465697;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
- :cc:subject:date:message-id:reply-to;
- bh=qgGV57KQZlsGuw7nOMq3rUWdVKpJCr3aEv1Ya80Jna4=;
- b=og5s3SpllX6zV8B7cxgLlmiVR8Hp7F5rw+jKBo720yUPawYj17boLjt95XFLW7ivxD
- VfSxABq5TyKrMZSfKTuvMAW+8MZeeH6s6GcAjJdvmBITj5b1C5nkBRk3NzhxrwgrkYFV
- z+YheJKmRY3RvVRKW9KLd6tikdY3Xv6UKRps7TSNuRsPQu6eyIMpJsFwlUQHSLnTGUtQ
- gs7/iUthPWiHj6mjoJLHDkJe0y+InlOREvCpunn9Bc7o9rbSJcFkg+il558QY4tdE+py
- HRMNJ/cqtRl49a4YOX/9TaCyuX57DAE+J5N4/LLS1M8jjt8nAxwFwv01LGbMCxRzKgBW
- JPTA==
+ d=linaro.org; s=google; t=1692010092; x=1692614892;
+ h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
+ :subject:cc:to:from:user-agent:references:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LxLZKLEQvAnUN36RxqNEU5N+4uqPL2AVJzYAPj86+RI=;
+ b=M3u9bcbnJoK04BcqSxunO51l34VCc6L2R0h/fE9LT+taN10e5RZsMrrvdWOGjt7pcs
+ Pv4dxZ4Iz4KO8QQ8HPPQGtNPxlzkurdua1dm2HpbrDNWTnbP5hkjTcNeprqa+bV8IJjv
+ qbPDGwnU01bXJk1riwSvFKqOTsz7tj9iG1jkeiVNXJwfH4TDr4z4ixLJvCIRunccOSNO
+ QUdhn7eYglhWF2lUqCqkFuBo5n+nW8O3bqGwSj0iwv49zr6w6/FvWA52hdVHtv0PATco
+ sgs09Q82d8S7AzHKcIOiCVWwtdLLd99UAhw1DdyZy5bs5WeVZj+ZrBQ0DQ2on2owvI95
+ kMXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691860897; x=1692465697;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qgGV57KQZlsGuw7nOMq3rUWdVKpJCr3aEv1Ya80Jna4=;
- b=eBLuCsCPKGWR901Cix4AmA+b29kmGTF9Uo0qZuB0tHBoa9dEQ4KYtwF0zOfldtI1Jc
- lsUp0mT/WkmM46ECl6WuPNPoyGPmEATZV80rCLbzue5qDLBHuauJGQbDfQOVEPlsmNXP
- 2qlFNUxP/31ghDc/UwboBg+44oMN30L1EBXWn4JM6M1OVAPdNILK3421PezxUXbjT9L2
- KOXDgo1wxd6auFfluf1c3iGolgHfStyioSPFiCTinERrkGOVaPLC0IFltvttMLKcoDkE
- HhKZwt8Hj/4oM4a5/dVjQMzohpGBVq/Vce9LqKStZNkgfnTDSPJ6ZKcp1uOlEypvXzZY
- SKNA==
-X-Gm-Message-State: AOJu0YxKLq96Sy4c95Xru99J/AHRdXrvS65A9iNr4kR+sCsZ9yt4iNC+
- t9fsmYmzlnK07+d8JTR0iFXjfg==
-X-Google-Smtp-Source: AGHT+IF/ka1nn6iWasDDqklnimtouNg1lxrdjhHY+9XPk4JgAWc306PEILwwouZMoI2iJ6vI6a6WoQ==
-X-Received: by 2002:a17:902:d352:b0:1b8:a812:7bc2 with SMTP id
- l18-20020a170902d35200b001b8a8127bc2mr4457207plk.8.1691860896715; 
- Sat, 12 Aug 2023 10:21:36 -0700 (PDT)
-Received: from ?IPV6:2602:47:d483:7301:a229:715e:62f0:756f?
- ([2602:47:d483:7301:a229:715e:62f0:756f])
+ d=1e100.net; s=20221208; t=1692010092; x=1692614892;
+ h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
+ :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=LxLZKLEQvAnUN36RxqNEU5N+4uqPL2AVJzYAPj86+RI=;
+ b=HWITw81krbbi4M0sZEOqt76vioip6FEjimhzeV0OUndMDeAtVSZmstWEXwSlznW5XK
+ DnEMnLQcozHoydhzxxMNa7g7Nqez4wWM1cAPsfmtfqKcfPjzj1RUjT0t9EA0Fie+J+iN
+ zeU9yZdOTvIzbY1gx6wkKdOOPAPr27QrDuGRUdz0xspGwr844ZdRunH1e/0HmICBfHom
+ CKPxLcF2yIorZYQdC9yFFvrN73CxiuPYlvMKjC8YKrXY+gmuLJKN/ZY6BrkxOwnLCukV
+ THztYwq/n4ts8ab0S86ksuFrZj6r1sw+IKsR7iCAaq8DBZMaaOVIflL5tpgoBKsdgQaI
+ ueHg==
+X-Gm-Message-State: AOJu0Yy3yxbPgb8uJpEvkngvdfY+NIj6LYZ4gS2QrkLTkI4aZqVseh76
+ x1igWB6a3L9hYtfb1NOiWZ/nKQ==
+X-Google-Smtp-Source: AGHT+IGQo+tuIJ3DnJhsDNmYaXwCtHh+LZxMnxNWzqYxjXCGD3b0eQqiMAkylRtFvcpJQEMjyIacOA==
+X-Received: by 2002:a5d:4411:0:b0:317:7081:34c7 with SMTP id
+ z17-20020a5d4411000000b00317708134c7mr6798273wrq.44.1692010092418; 
+ Mon, 14 Aug 2023 03:48:12 -0700 (PDT)
+Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- jh3-20020a170903328300b001b866472e8dsm6145738plb.241.2023.08.12.10.21.35
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 12 Aug 2023 10:21:36 -0700 (PDT)
-Message-ID: <3264dbe3-0c33-742c-5c5c-beedb57f5e84@linaro.org>
-Date: Sat, 12 Aug 2023 10:21:33 -0700
+ r7-20020a5d4947000000b003197a4b0f68sm2171393wrs.7.2023.08.14.03.48.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 14 Aug 2023 03:48:12 -0700 (PDT)
+Received: from zen (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id 6AFBA1FFBB;
+ Mon, 14 Aug 2023 11:48:11 +0100 (BST)
+References: <20230731084354.115015-1-akihiko.odaki@daynix.com>
+ <20230731084354.115015-2-akihiko.odaki@daynix.com>
+User-agent: mu4e 1.11.14; emacs 29.1.50
+From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Akihiko Odaki <akihiko.odaki@daynix.com>
+Cc: Paolo Bonzini <pbonzini@redhat.com>, Thomas Huth <thuth@redhat.com>,
+ Alexandre Iooss <erdnaxe@crans.org>, Mahmoud Mandour
+ <ma.mandourr@gmail.com>, Eduardo Habkost <eduardo@habkost.net>, Marcel
+ Apfelbaum <marcel.apfelbaum@gmail.com>, Philippe =?utf-8?Q?Mathieu-Daud?=
+ =?utf-8?Q?=C3=A9?=
+ <philmd@linaro.org>, Yanan Wang <wangyanan55@huawei.com>, Richard
+ Henderson <richard.henderson@linaro.org>, =?utf-8?Q?Marc-Andr=C3=A9?=
+ Lureau <marcandre.lureau@redhat.com>, =?utf-8?Q?Daniel_P=2E_Berrang=C3=A9?=
+ <berrange@redhat.com>,
+ John Snow <jsnow@redhat.com>, Cleber Rosa <crosa@redhat.com>, Peter
+ Maydell <peter.maydell@linaro.org>, Michael Rolnik <mrolnik@gmail.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Brian Cain
+ <bcain@quicinc.com>, Song Gao <gaosong@loongson.cn>, Xiaojuan Yang
+ <yangxiaojuan@loongson.cn>, Laurent Vivier <laurent@vivier.eu>, Aurelien
+ Jarno <aurelien@aurel32.net>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>, Chris Wulff
+ <crwulff@gmail.com>, Marek Vasut <marex@denx.de>, Stafford Horne
+ <shorne@gmail.com>, Daniel Henrique Barboza <danielhb413@gmail.com>,
+ =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@kaod.org>, David Gibson
+ <david@gibson.dropbear.id.au>, Greg Kurz <groug@kaod.org>, Nicholas Piggin
+ <npiggin@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
+ <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>, Weiwei Li
+ <liweiwei@iscas.ac.cn>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>, David Hildenbrand
+ <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>, Mark Cave-Ayland
+ <mark.cave-ayland@ilande.co.uk>, Artyom Tarasenko <atar4qemu@gmail.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, Max Filippov
+ <jcmvbkbc@gmail.com>, qemu-devel@nongnu.org, qemu-arm@nongnu.org,
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
+Subject: Re: [RFC PATCH 01/24] contrib/plugins: Use GRWLock in execlog
+Date: Mon, 14 Aug 2023 11:48:06 +0100
+In-reply-to: <20230731084354.115015-2-akihiko.odaki@daynix.com>
+Message-ID: <87leedsxw4.fsf@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH 20/24] tcg/i386: Add cf parameter to tcg_out_cmp
-From: Richard Henderson <richard.henderson@linaro.org>
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
- qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
-References: <20230808031143.50925-1-richard.henderson@linaro.org>
- <20230808031143.50925-21-richard.henderson@linaro.org>
- <CAFEAcA-N-QWQXcHgMNnXTr+Bmf7fhdSKYQwS-kkWGdR+UHvT-Q@mail.gmail.com>
- <CAFEAcA9xsPHOeorJvjfO7mrpX_TfYHMNcMHi3dyt41+CktyXsg@mail.gmail.com>
- <6a116d10-5e01-30f8-fbd6-30c062fcccc5@linaro.org>
-Content-Language: en-US
-In-Reply-To: <6a116d10-5e01-30f8-fbd6-30c062fcccc5@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x630.google.com
-X-Spam_score_int: -5
-X-Spam_score: -0.6
-X-Spam_bar: /
-X-Spam_report: (-0.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.972,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- SUSPICIOUS_RECIPS=2.51 autolearn=no autolearn_force=no
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42a.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,16 +126,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 8/11/23 08:06, Richard Henderson wrote:
-> Basically, test sets SZ flags, where cmp sets SZCO.  I want to add an optimizaton using C, 
-> so "cmp 0,x" should not be silently replaced by "test x,x".
 
-This patch can be dropped entirely.
+Akihiko Odaki <akihiko.odaki@daynix.com> writes:
 
-TEST clears C (which cmp vs 0 would also do).  I was mis-remembering INC/DEC which leave C 
-unchanged and thus uninitialized wrt the current operation.
+> execlog had the following comment:
+>> As we could have multiple threads trying to do this we need to
+>> serialise the expansion under a lock. Threads accessing already
+>> created entries can continue without issue even if the ptr array
+>> gets reallocated during resize.
+>
+> However, when the ptr array gets reallocated, the other threads may have
+> a stale reference to the old buffer. This results in use-after-free.
+>
+> Use GRWLock to properly fix this issue.
+>
+> Fixes: 3d7caf145e ("contrib/plugins: add execlog to log instruction execu=
+tion and memory access")
+> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 
+Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
 
-r~
-
+--=20
+Alex Benn=C3=A9e
+Virtualisation Tech Lead @ Linaro
 
