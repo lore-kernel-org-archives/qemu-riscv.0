@@ -4,76 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E01A0C001B0
-	for <qemu-riscv@archiver.kernel.org>; Tue, 15 Aug 2023 22:39:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED168C001B0
+	for <qemu-riscv@archiver.kernel.org>; Tue, 15 Aug 2023 22:39:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qW2g5-0004wh-De; Tue, 15 Aug 2023 18:38:17 -0400
+	id 1qW2fi-0004np-BB; Tue, 15 Aug 2023 18:37:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qW2g4-0004wY-Fz
- for qemu-riscv@nongnu.org; Tue, 15 Aug 2023 18:38:16 -0400
-Received: from mail-oi1-x22e.google.com ([2607:f8b0:4864:20::22e])
+ id 1qW2fh-0004nN-Ch
+ for qemu-riscv@nongnu.org; Tue, 15 Aug 2023 18:37:53 -0400
+Received: from mail-oi1-x230.google.com ([2607:f8b0:4864:20::230])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qW2g0-0006F6-66
- for qemu-riscv@nongnu.org; Tue, 15 Aug 2023 18:38:14 -0400
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-3a7781225b4so4802289b6e.3
- for <qemu-riscv@nongnu.org>; Tue, 15 Aug 2023 15:38:11 -0700 (PDT)
+ id 1qW2fe-00063G-GC
+ for qemu-riscv@nongnu.org; Tue, 15 Aug 2023 18:37:53 -0400
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-3a36b52b4a4so3507599b6e.1
+ for <qemu-riscv@nongnu.org>; Tue, 15 Aug 2023 15:37:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1692139089; x=1692743889;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ijcnw0rMIsKYXNXEvhEuvRumM2r6rsE7c0XzS7gCaHg=;
- b=DtVGE+mLabqVmDycHoVn79gzSgGqukBsAts6o+ue4DjGcJM1Z4AkYf16WvrZ/ws7Z4
- xMhkqSpkF1X/DLw1SlHBdU1x7Qlxsm8/11qV//93rxsh+VwVKTFgsiICO3UB/9e/Lb4H
- Xw5MSwgRKNEshSEssHkLUA4dexxDrtXZpg5BXN7U/UKTnEWrT1w+BFgnZxluIU9fXpGa
- kS5nvphlEXSUUA5l+ZL5U2sbigm0rbac2KNnmbad9xRY9zhrLDBsyenylXVFUKoHHM8r
- 7JbQGuAsG2q4QhIsIv7atBHQHggQFizLOeFTd4ACni+5+QGPZhmREXBhtE22xLgfjMpV
- 75zA==
+ d=ventanamicro.com; s=google; t=1692139069; x=1692743869;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=vKvdPYBo/eYvGoFGQPH1dJXkILK25zl12QO612SILUE=;
+ b=P4eFMsMCWcAp8Gn4vQLKenBvBNXtpowHMQcw9NZ0BDQFzWXW55UIr1RfXJtQOmqwFT
+ WCvv8LTaOCcfdz1ycISKckp0h97WkzvtorhV6cRHnT9pWkic4FXx0dGl65+pK5BRWRzd
+ /8o5kZBOLHBWEj57yxZf2QIJAth2PZsC65fNqPsyLSAtKSGjGmmGUsn0BAlFXkV00be+
+ LQFX8BlfkEQ820J7zo1a/CI61bKzuBam00zcW7VTuGONQTe8Em+W269sUthjY5YY2wXk
+ dJgtYTBUzUil0QWfYhjZdUHIGAB1c+qP+7o+aEDTy+pDFH0u54r7f5WSxlV5yoTsgA3N
+ fF6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692139089; x=1692743889;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Ijcnw0rMIsKYXNXEvhEuvRumM2r6rsE7c0XzS7gCaHg=;
- b=ePI40PHkRYAuoD/wX8u19EsY+3JVYjTXmjF4d3VZpecaUi6nYqxeXRHLA9xPZhM+2S
- bfD2mQSIhjaHdAPfhcFn7kJylH3NMLzO01zI+Qywlu5QM4PP82h81qQIhWEtQqzUxhne
- d+QiK0GkQbLZd1zj2WY9faZ1xE9Md3mJhTDmGppqg4JDqtYoXxCPWRIMkRtcTUp/+dkn
- uKb4jNN78r3gFswDrFTqXz5hHHXASaQVIbGhYZPMnle5vuHCf+7CVU92GzgPisyMoGNG
- ZTi8WXPmZ5+SyhS/6/K7IkAJMOU/pg0YSutxo6dSWSXoppFJHysqryoOuv13pbVgGcx4
- e70w==
-X-Gm-Message-State: AOJu0YzvJrFUJu7kasO4UZVJc/QZUiL4/TA/Rn7n77R0sZBFbRSyo2W7
- KaJ0MP2rHM6l1lHIRi1BfKdJsw==
-X-Google-Smtp-Source: AGHT+IFbdTJ27FOLUrzs9ga7Qp9PZL1hC79zrqiuWxsD+ATyuOthaStDJdKK+XJ4XjSl4LfBpVFvuQ==
-X-Received: by 2002:a05:6808:11c5:b0:3a4:317d:eb7c with SMTP id
- p5-20020a05680811c500b003a4317deb7cmr116747oiv.0.1692139089645; 
- Tue, 15 Aug 2023 15:38:09 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692139069; x=1692743869;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vKvdPYBo/eYvGoFGQPH1dJXkILK25zl12QO612SILUE=;
+ b=K+U20eFEsj+iXLmmnfENZxi5dNIqFn49s9KkVA4p2SjkMkemOOkhlIRXcYORHeBoEr
+ YPrVmiJBE8CmXcNoyyF+Tq4+H4dV8zP7jcFRuG+WTHI1TDHzf+1Jb15z/fwfD5X/D2rg
+ FzYWDrrMr0zWrVOucjt+ySDFA9O1svZrkwW/hfZIcl+dKkc1vkWGje9y2KjQksN+DzcL
+ ZBvZg4/u0EmvskfvwDjgD+eZywQyBc0Rh6ztOS6VKo2RKI+0GYPhjOLMNjuP3bnSONCx
+ 5W974kmDnIlksEbWU1ZMBfoa+lZkxon8nTWGr9S8b2dN+YgBaBMbcsy3FugYvRkY1g3F
+ a+hg==
+X-Gm-Message-State: AOJu0Yy65OlCHMmtB/85G1E1yA0ml3oPSbmme92fAiVTlSGHflNJru74
+ 9HSM052xXGStlp0m6RyZHhoRvA==
+X-Google-Smtp-Source: AGHT+IHgNzJpHRGTK2oYuCbwU1YpiwXF8uRP3j/4/UN2YDsiuV6ASblNuDWCu6Tx/4SnNqVcG3P+Eg==
+X-Received: by 2002:a05:6808:1701:b0:3a7:495c:4ccc with SMTP id
+ bc1-20020a056808170100b003a7495c4cccmr2340592oib.20.1692139068850; 
+ Tue, 15 Aug 2023 15:37:48 -0700 (PDT)
 Received: from grind.. (189-69-160-189.dial-up.telesp.net.br. [189.69.160.189])
  by smtp.gmail.com with ESMTPSA id
- be15-20020a056808218f00b003a40b3fce01sm5903418oib.10.2023.08.15.15.38.07
+ be15-20020a056808218f00b003a40b3fce01sm5903418oib.10.2023.08.15.15.37.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Aug 2023 15:38:09 -0700 (PDT)
+ Tue, 15 Aug 2023 15:37:48 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v8 07/12] target/riscv/cpu.c: add
- riscv_cpu_add_qdev_prop_array()
-Date: Tue, 15 Aug 2023 19:37:36 -0300
-Message-ID: <20230815223741.433763-8-dbarboza@ventanamicro.com>
+Subject: [PATCH v8 00/12] riscv: add 'max' CPU, deprecate 'any'
+Date: Tue, 15 Aug 2023 19:37:29 -0300
+Message-ID: <20230815223741.433763-1-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230815223741.433763-1-dbarboza@ventanamicro.com>
-References: <20230815223741.433763-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::230;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x230.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,66 +92,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The code inside riscv_cpu_add_user_properties() became quite repetitive
-after recent changes. Add a helper to hide the repetition away.
+Hi,
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/cpu.c | 27 +++++++++++----------------
- 1 file changed, 11 insertions(+), 16 deletions(-)
+In this version we replaced the macros added in patch 7 and 8 with
+regular functions instead.
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 520c5c9f96..a0c14d1a0c 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1883,6 +1883,13 @@ static void cpu_set_cfg_unavailable(Object *obj, Visitor *v,
- }
- #endif
- 
-+static void riscv_cpu_add_qdev_prop_array(DeviceState *dev, Property *array)
-+{
-+    for (Property *prop = array; prop && prop->name; prop++) {
-+        qdev_property_add_static(dev, prop);
-+    }
-+}
-+
- #ifndef CONFIG_USER_ONLY
- static void riscv_cpu_add_kvm_unavail_prop(Object *obj, const char *prop_name)
- {
-@@ -1939,7 +1946,6 @@ static void riscv_cpu_add_kvm_properties(Object *obj)
-  */
- static void riscv_cpu_add_user_properties(Object *obj)
- {
--    Property *prop;
-     DeviceState *dev = DEVICE(obj);
- 
- #ifndef CONFIG_USER_ONLY
-@@ -1953,21 +1959,10 @@ static void riscv_cpu_add_user_properties(Object *obj)
- 
-     riscv_cpu_add_misa_properties(obj);
- 
--    for (prop = riscv_cpu_extensions; prop && prop->name; prop++) {
--        qdev_property_add_static(dev, prop);
--    }
--
--    for (prop = riscv_cpu_options; prop && prop->name; prop++) {
--        qdev_property_add_static(dev, prop);
--    }
--
--    for (prop = riscv_cpu_vendor_exts; prop && prop->name; prop++) {
--        qdev_property_add_static(dev, prop);
--    }
--
--    for (prop = riscv_cpu_experimental_exts; prop && prop->name; prop++) {
--        qdev_property_add_static(dev, prop);
--    }
-+    riscv_cpu_add_qdev_prop_array(dev, riscv_cpu_extensions);
-+    riscv_cpu_add_qdev_prop_array(dev, riscv_cpu_options);
-+    riscv_cpu_add_qdev_prop_array(dev, riscv_cpu_vendor_exts);
-+    riscv_cpu_add_qdev_prop_array(dev, riscv_cpu_experimental_exts);
- }
- 
- static Property riscv_cpu_properties[] = {
+Patches missing acks: 4,7,8
+
+Changes from v7:
+- patch 7:
+  - add riscv_cpu_add_qdev_prop_array() function instead of a macro
+- patch 8:
+  - add riscv_cpu_add_kvm_unavail_prop_array() function instead of a
+    macro
+- v7 link: https://lore.kernel.org/qemu-riscv/20230815201559.398643-1-dbarboza@ventanamicro.com/
+
+Daniel Henrique Barboza (12):
+  target/riscv/cpu.c: split CPU options from riscv_cpu_extensions[]
+  target/riscv/cpu.c: skip 'bool' check when filtering KVM props
+  target/riscv/cpu.c: split kvm prop handling to its own helper
+  target/riscv: add DEFINE_PROP_END_OF_LIST() to riscv_cpu_options[]
+  target/riscv/cpu.c: split vendor exts from riscv_cpu_extensions[]
+  target/riscv/cpu.c: split non-ratified exts from
+    riscv_cpu_extensions[]
+  target/riscv/cpu.c: add riscv_cpu_add_qdev_prop_array()
+  target/riscv/cpu.c: add riscv_cpu_add_kvm_unavail_prop_array()
+  target/riscv/cpu.c: limit cfg->vext_spec log message
+  target/riscv: add 'max' CPU type
+  avocado, risc-v: add opensbi tests for 'max' CPU
+  target/riscv: deprecate the 'any' CPU type
+
+ docs/about/deprecated.rst      |  12 +++
+ target/riscv/cpu-qom.h         |   1 +
+ target/riscv/cpu.c             | 192 +++++++++++++++++++++++++--------
+ tests/avocado/riscv_opensbi.py |  16 +++
+ 4 files changed, 178 insertions(+), 43 deletions(-)
+
 -- 
 2.41.0
 
