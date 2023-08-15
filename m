@@ -4,81 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C110DC001E0
-	for <qemu-riscv@archiver.kernel.org>; Tue, 15 Aug 2023 20:39:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68662C001E0
+	for <qemu-riscv@archiver.kernel.org>; Tue, 15 Aug 2023 20:44:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qW0mo-0006T2-P9; Tue, 15 Aug 2023 16:37:06 -0400
+	id 1qW0tw-0004mw-PR; Tue, 15 Aug 2023 16:44:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qW0mn-0006Sa-EN
- for qemu-riscv@nongnu.org; Tue, 15 Aug 2023 16:37:05 -0400
-Received: from mail-ot1-x331.google.com ([2607:f8b0:4864:20::331])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1qW0tr-0004mQ-7Z
+ for qemu-riscv@nongnu.org; Tue, 15 Aug 2023 16:44:24 -0400
+Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qW0ml-00012Z-7Q
- for qemu-riscv@nongnu.org; Tue, 15 Aug 2023 16:37:05 -0400
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-6bc9d16c317so4646204a34.1
- for <qemu-riscv@nongnu.org>; Tue, 15 Aug 2023 13:37:01 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1qW0tm-0002js-Kj
+ for qemu-riscv@nongnu.org; Tue, 15 Aug 2023 16:44:21 -0400
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-26b44247123so2249819a91.2
+ for <qemu-riscv@nongnu.org>; Tue, 15 Aug 2023 13:44:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1692131821; x=1692736621;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8deuqh5eHIj2FHewW59VdrgAhpra1h/RLuoM54JKMYw=;
- b=kHemkt5j0IGNn9s/7QzEEpMm0Egdiu4YUexfAMjVGVWL4yBHcuzuEQsNBK0PthWllo
- k3lfa63xiEa9HYrOJaFBnuOJMpm6nq7I6fAf7Rn87uVjX03OPTRxTG3kqGp5y0O5Y3Qv
- W7MRBCqv0LaEQPKUgtrbFMVX+kb4G61HD1YlgqVuHoOJIkPIBmB6StigVj/1s3yi2OwI
- xYnNSlZGa0OdED9R3PwzqWnI5rJIlZmeyPsrGiT8Fzx1QV/OCkipR3knLAvHBNzPL51Z
- FcQXiE61/a69XJeljxYFWm2RZ6ECNq448DcAiDDGCPycXFtGe5FrXSqfQ9GcZvMuz0hP
- EFwA==
+ d=linaro.org; s=google; t=1692132257; x=1692737057;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=GLNKHWLL+cK6cxqTiAkkS23VjKuvUUnHa+prI3StVQQ=;
+ b=kOhch6PcX5NpXGF44AUsjBGrf09iZ7d6WwFdfEbcClHnsiwBn6OYVrlNZ8079dECAX
+ x88q/b+cHLR+D1hxCvkWcyh1xvFMVdJbn3Np5RQyBTWH+LyohHecc9f8+R/h95lLXcOJ
+ UgeVv+k4r7YVYGfuBydDTrwaheAKs+3nWbXzZWS2VWVWvZS8Sky1mZQO2/GDb698NUwL
+ cdUMcoyKhiFdsK5pI9pkYPvdyUCBQHAT0uACJzjTagq5fRfZJOpr8r8mDqItZhK5FLGE
+ EGnnah2UDF4QAGsdFm95K0dBmiYD32eg2IFRzt7OzS2g/rGzPjugu+FYcDgKYunKskou
+ WJGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692131821; x=1692736621;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=8deuqh5eHIj2FHewW59VdrgAhpra1h/RLuoM54JKMYw=;
- b=FUu2afs2Pnb/1Lgl46LqxjeZVP/LGhuqDLm3TAUZ3B+FaW5KDgkKO/OsZyy5Ma7MPi
- iFjSwH8J/dVnWIHYP6Yn2924Dsfl5w11F1wJ+dSKS0g3B0ei/ziLgiE0afkpkHXWId/x
- h2GMxtROFtmO4mnZhDQ6+6991gw36Y+TZ8uMyuokLmk32a4L66FGV2e8YybAgF5UT5pX
- r60qq9PtegbpQux3heSoc+k4SV/48srYaCBAWSXh0T97Xv3gflPXtEYe6IXoMtsm+yVT
- iWHYEzQ3VTLIAVnaBF9pcwBKJN4Qh3PgAVTZAGJlEEnbY1T77JGWB9oa5xypPENVR2Ef
- odDg==
-X-Gm-Message-State: AOJu0Yxg1/hjfAgk+aTUh0N+R80EfxzBhKSnHN29eJa0zh2V0xWaPsUm
- Rz5Ea7Zw4nA2U6QFHBgaJuMJkw==
-X-Google-Smtp-Source: AGHT+IG8EkLOb53fUZIR+9+KBVDsZ3bVH+gGWI2/6Gi0CvtnyppoXtkno1q7TFloP8W7Exetdffjxw==
-X-Received: by 2002:a9d:4815:0:b0:6b9:304a:e778 with SMTP id
- c21-20020a9d4815000000b006b9304ae778mr14130748otf.34.1692131820999; 
- Tue, 15 Aug 2023 13:37:00 -0700 (PDT)
-Received: from grind.. (189-69-160-189.dial-up.telesp.net.br. [189.69.160.189])
+ d=1e100.net; s=20221208; t=1692132257; x=1692737057;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=GLNKHWLL+cK6cxqTiAkkS23VjKuvUUnHa+prI3StVQQ=;
+ b=B2du4FAwHEqED54Ofq34NKcmxRbGgnVg5GnfcRF2NBKDJVfPf+sXca85e1pYnSj9MD
+ k4SAqc0PLKTXYDpMQ2EW8pH5HZuWWf54utDlUI1bbqYlwsOlEM9TKfMsJHch7DuiFlcc
+ 8dilFSZgsnduQBkCfWKK9aGd8BPZev40GEh3QMZcOihzt/3tHRK6BPZnRRjikUihAHHf
+ nEV3DLdM3CClVh9apUy6ZzLUChdpBDUpY9GJxF/b7DYHipT0TzNk38XVosdwek85Z5WP
+ 2/bTptDUm8Pps2uAIX8LiRcKTilvMPStCKZ2ioRkr8nx7ZlPWmur0kmOpvx/LTFbaFSm
+ 4CrA==
+X-Gm-Message-State: AOJu0YybkUwbsGdQRDRdJLhXgbUCA6ylfE7qZHbjrspMspNXzE7Ow+2W
+ TctV6oV7FCD5uC/6ZeBxuzdpog==
+X-Google-Smtp-Source: AGHT+IEktaLQJoWK/hH1JfzoVpanzSV8hKJztF7GsxR25+t7qKa/irschiw171NMMHwJxA4AjlYwfw==
+X-Received: by 2002:a17:90b:3105:b0:268:e31b:decd with SMTP id
+ gc5-20020a17090b310500b00268e31bdecdmr11398736pjb.11.1692132256776; 
+ Tue, 15 Aug 2023 13:44:16 -0700 (PDT)
+Received: from ?IPV6:2602:47:d483:7301:8d06:f27b:d26c:91c1?
+ ([2602:47:d483:7301:8d06:f27b:d26c:91c1])
  by smtp.gmail.com with ESMTPSA id
- v15-20020a0568301bcf00b006b94fb2762asm5526849ota.23.2023.08.15.13.36.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Aug 2023 13:37:00 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v2 7/8] target/riscv/cpu.c: honor user choice in
- cpu_cfg_ext_auto_update()
-Date: Tue, 15 Aug 2023 17:36:34 -0300
-Message-ID: <20230815203635.400179-8-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230815203635.400179-1-dbarboza@ventanamicro.com>
-References: <20230815203635.400179-1-dbarboza@ventanamicro.com>
+ 6-20020a17090a1a4600b0026943a8468dsm588423pjl.18.2023.08.15.13.44.15
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 15 Aug 2023 13:44:16 -0700 (PDT)
+Message-ID: <40ec95c2-7775-4a40-f73a-8f92d3cfb00c@linaro.org>
+Date: Tue, 15 Aug 2023 13:44:14 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::331;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x331.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH v7 07/12] target/riscv/cpu.c: add
+ ADD_CPU_QDEV_PROPERTIES_ARRAY() macro
+Content-Language: en-US
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
+References: <20230815201559.398643-1-dbarboza@ventanamicro.com>
+ <20230815201559.398643-8-dbarboza@ventanamicro.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20230815201559.398643-8-dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1030.google.com
+X-Spam_score_int: -30
+X-Spam_score: -3.1
+X-Spam_bar: ---
+X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.045,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -96,59 +100,20 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add a new cpu_cfg_ext_is_user_set() helper to check if an extension was
-set by the user in the command line. Use it inside
-cpu_cfg_ext_auto_update() to verify if the user set a certain extension
-and, if that's the case, do not change its value.
+On 8/15/23 13:15, Daniel Henrique Barboza wrote:
+> @@ -1883,6 +1883,13 @@ static void cpu_set_cfg_unavailable(Object *obj, Visitor *v,
+>   }
+>   #endif
+>   
+> +#define ADD_CPU_QDEV_PROPERTIES_ARRAY(_dev, _array) \
+> +    do { \
+> +        for (Property *prop = _array; prop && prop->name; prop++) { \
+> +            qdev_property_add_static(_dev, prop); \
+> +        } \
+> +    } while (0)
 
-This will make us honor user choice instead of overwriting the values.
-Users will then be informed whether they're using an incompatible set of
-extensions instead of QEMU setting a magic value that works.
+Any reason not to make this a proper function?
 
-For example, we'll now error out if the user explictly set 'zce' to true
-and 'zca' to false:
 
-$ ./build/qemu-system-riscv64 -M virt -cpu rv64,zce=true,zca=false -nographic
-qemu-system-riscv64: Zcf/Zcd/Zcb/Zcmp/Zcmt extensions require Zca extension
-
-This didn't happen before because we were enabling 'zca' if 'zce' was enabled
-regardless if the user explictly set 'zca' to false.
-
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 52c9b04cd5..d779660739 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -185,6 +185,12 @@ static int cpu_cfg_ext_get_min_version(uint32_t ext_offset)
-     return PRIV_VERSION_1_10_0;
- }
- 
-+static bool cpu_cfg_ext_is_user_set(uint32_t ext_offset)
-+{
-+    return g_hash_table_contains(multi_ext_user_opts,
-+                                 GUINT_TO_POINTER(ext_offset));
-+}
-+
- static void cpu_cfg_ext_auto_update(RISCVCPU *cpu, uint32_t ext_offset,
-                                     bool value)
- {
-@@ -196,6 +202,10 @@ static void cpu_cfg_ext_auto_update(RISCVCPU *cpu, uint32_t ext_offset,
-         return;
-     }
- 
-+    if (cpu_cfg_ext_is_user_set(ext_offset)) {
-+        return;
-+    }
-+
-     if (value && env->priv_ver != PRIV_VERSION_LATEST) {
-         /* Do not enable it if priv_ver is older than min_version */
-         min_version = cpu_cfg_ext_get_min_version(ext_offset);
--- 
-2.41.0
-
+r~
 
