@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E9A7C04E69
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Aug 2023 14:55:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3799C001B0
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Aug 2023 14:55:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qWHvy-0005Dp-5N; Wed, 16 Aug 2023 10:55:42 -0400
+	id 1qWHug-0000qL-FO; Wed, 16 Aug 2023 10:54:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qWHvw-00056A-EE
- for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 10:55:40 -0400
-Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
+ id 1qWHuZ-0000Wi-9t
+ for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 10:54:16 -0400
+Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qWHvu-0002KJ-63
- for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 10:55:40 -0400
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-68879c7f5easo897388b3a.1
- for <qemu-riscv@nongnu.org>; Wed, 16 Aug 2023 07:55:37 -0700 (PDT)
+ id 1qWHuW-0001fk-L7
+ for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 10:54:15 -0400
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-51b4ef5378bso4934599a12.1
+ for <qemu-riscv@nongnu.org>; Wed, 16 Aug 2023 07:54:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1692197737; x=1692802537;
+ d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1692197651; x=1692802451;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0qn3f+dV41vakExUKDLgOPwYM5dZMF/vR3FB6T+MC1c=;
- b=2L6AVfTz8CvAuULFJ42gQy1cf81eTocVTR9UQPe1fZA45I6oVAj44sl+BwBrM78/VK
- HUFfz3K443rrxYfy5KN2ngwKcKC60/Ui3zZs/BoXrxAm1ocq4NC8GNYkfB6hdnzL0BHI
- /JKw/tUOcQSKCGXzNY5SHv2+yb1j5/evBRsoonu7IYBSSQfgCQQRrPly2NlcwYhWru4Q
- 7hbwGsWwzSuKfjdmsPQPoDZC5iUPONhwx357Qu+/XtVOcIzPKuuE1JigqsYBC1mYMU3r
- yCaOe62NjZTsz6SmSOS8kJCn0auKsjtQ4xYc837Bix9YbhG7UrntGc9K+RBD5XFKXdBm
- IkDA==
+ bh=06lruvuER2JmmjzWPkvhn7tl3HrqMHtHO/EfWEPYAug=;
+ b=Rx1Bfyqj41542uex+VPI4aGu0lvRXaDqdWplXr2QPoOr85I2DcJhaNpSiwxIYeDrXX
+ zUae+GVMeLTr+pjLfabmWIbPOOU8pwCi//v2P8wGVrzy8AFGpwnu4A1I67TSwxeBMY3C
+ g7tiuCMwMCrBS5xzp2F5NQUDCAgPH2MND5jID2UAjO4YxKWNWTwjZYHfcl+bAzY84Cp4
+ DbHKZvbKIm4+zGfTal9r71hx49SE+BSGlSrna4veZvC1d1n+JCI/cDT/2ZqCyBXKVWmB
+ ZTvqRwFzShAddVWv+lKADLAgIdVKensSPNoEGMx2ATXi4xpBqzHeN8tpvQGpX7rXJ7uR
+ xurA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692197737; x=1692802537;
+ d=1e100.net; s=20221208; t=1692197651; x=1692802451;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0qn3f+dV41vakExUKDLgOPwYM5dZMF/vR3FB6T+MC1c=;
- b=KMyvmcWPCdrEea2HBPxsZN32HrBpnkolF/br01BmrQ7TdVmTu/T7Rlm5hbOsuJf55T
- /IdCSckVRflRt07MXkEsNj6mlzHIcgz6Bnoq0QPtQSNoTqL63limUoVfALRslbNmz53i
- 7AUhoqIpLdMXY0shSgCBVvFaSxEKUZfNt8yaZ5qOADV/ZbDVSZ4O/HILomyG7S1UMfED
- AEDheDv+ziIn/6qQMEA7f2ImGa6o34mSzKu2PVEH6zXfkKzmu9wyCj0baCn7xkQWYFTA
- B7v1G2SbKy+xcLgl2JS10ruddWGzq13S2d/qpG4Sh+dXCCw5IfKxPfmiodDuvnrW+P9A
- 4Zlg==
-X-Gm-Message-State: AOJu0Ywya+RgIEV1l/kxo+qa940+4eSG6qYtFS7eFaEKCgOln77S8XVo
- 8WuVD4wyDdqGSNRWI3vzzuyHhg==
-X-Google-Smtp-Source: AGHT+IHaIIuGZ2gUrulonpwa65Nz3Io06fPnbVxiGrNLkLfEmh35nLZt8QKhsSDdZF7/OhNxd0e1YQ==
-X-Received: by 2002:a05:6a20:9189:b0:134:2b31:e2a9 with SMTP id
- v9-20020a056a20918900b001342b31e2a9mr2356825pzd.0.1692197737066; 
- Wed, 16 Aug 2023 07:55:37 -0700 (PDT)
+ bh=06lruvuER2JmmjzWPkvhn7tl3HrqMHtHO/EfWEPYAug=;
+ b=Fuub2vyUOOy+pobjC7DAoQmUyuVdxzqqi59owbVSWAxU6PxC9TdHu0oB3rBL1/3IRX
+ Cq5IYI8/aj5xMpieVaZw14FRxN1MASHnZwnFBpy+Ae9QLWSOWSpJuZLV2O0gYPkIAcEm
+ BmZG37MpMxl7g/02V+kG/KFs/drh34IZ1wmrYbIc1sgR+zvpLusU+h7owAgDNR3Xw9wL
+ vI+lfWzzoPo3giGwNfAc8t5hI5PpXqcta4cBQhUbAeWQ0ncSskPkGOK5PPx3qitTJlbX
+ ZEkEVKOO5Cx/quLBBOf/apDTRVuD8K6X+0ZmTYaS0Ue+W2vvYvzz+SCLamUDFd7HAfBw
+ i8fg==
+X-Gm-Message-State: AOJu0YyDXrqQOZeTs24xucE3fkmKW3XW5MOlp8qLo4ioq58Xtfj5qCWa
+ by8R9QGUYV3Ss+8GxW3KfVMh6w==
+X-Google-Smtp-Source: AGHT+IGNi1WnSDyEFaWSAnuE5JXmQGx9lONzm6CcNOGws+VTx0jUXZ9NMfg/hTFNrnDcImP1TBnYwA==
+X-Received: by 2002:a05:6a20:7f8f:b0:134:8d7f:f4d9 with SMTP id
+ d15-20020a056a207f8f00b001348d7ff4d9mr3395955pzj.52.1692197651399; 
+ Wed, 16 Aug 2023 07:54:11 -0700 (PDT)
 Received: from alarm.flets-east.jp ([2400:4050:a840:1e00:78d2:b862:10a7:d486])
  by smtp.gmail.com with ESMTPSA id
- fk26-20020a056a003a9a00b0068892c40253sm1156568pfb.216.2023.08.16.07.55.27
+ fk26-20020a056a003a9a00b0068892c40253sm1156568pfb.216.2023.08.16.07.54.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Aug 2023 07:55:36 -0700 (PDT)
+ Wed, 16 Aug 2023 07:54:11 -0700 (PDT)
 From: Akihiko Odaki <akihiko.odaki@daynix.com>
 To: 
 Cc: Paolo Bonzini <pbonzini@redhat.com>,
@@ -98,22 +98,22 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
  qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, Anton Kochkov <anton.kochkov@proton.me>,
  Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH v4 21/25] cpu: Call plugin hooks only when ready
-Date: Wed, 16 Aug 2023 23:51:42 +0900
-Message-ID: <20230816145155.21049-22-akihiko.odaki@daynix.com>
+Subject: [PATCH v4 12/25] gdbstub: Use GDBFeature for GDBRegisterState
+Date: Wed, 16 Aug 2023 23:51:33 +0900
+Message-ID: <20230816145155.21049-13-akihiko.odaki@daynix.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230816145155.21049-1-akihiko.odaki@daynix.com>
 References: <20230816145155.21049-1-akihiko.odaki@daynix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::42d;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x42d.google.com
+Received-SPF: none client-ip=2607:f8b0:4864:20::534;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pg1-x534.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=ham autolearn_force=no
+ SPF_NONE=0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -129,81 +129,77 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The initialization and exit hooks will not affect the state of vCPU,
-but they may depend on the state of vCPU. Therefore, it's better to
-call plugin hooks after the vCPU state is fully initialized and before
-it gets uninitialized.
+Simplify GDBRegisterState by replacing num_regs and xml members with
+one member that points to GDBFeature.
 
 Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 ---
- cpu.c                | 11 -----------
- hw/core/cpu-common.c | 10 ++++++++++
- 2 files changed, 10 insertions(+), 11 deletions(-)
+ gdbstub/gdbstub.c | 14 ++++++--------
+ 1 file changed, 6 insertions(+), 8 deletions(-)
 
-diff --git a/cpu.c b/cpu.c
-index 1c948d1161..2552c85249 100644
---- a/cpu.c
-+++ b/cpu.c
-@@ -42,7 +42,6 @@
- #include "hw/core/accel-cpu.h"
- #include "trace/trace-root.h"
- #include "qemu/accel.h"
--#include "qemu/plugin.h"
+diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
+index 7fa4b8b51f..7a4775633e 100644
+--- a/gdbstub/gdbstub.c
++++ b/gdbstub/gdbstub.c
+@@ -47,10 +47,9 @@
  
- uintptr_t qemu_host_page_size;
- intptr_t qemu_host_page_mask;
-@@ -148,11 +147,6 @@ void cpu_exec_realizefn(CPUState *cpu, Error **errp)
-     /* Wait until cpu initialization complete before exposing cpu. */
-     cpu_list_add(cpu);
+ typedef struct GDBRegisterState {
+     int base_reg;
+-    int num_regs;
+     gdb_get_reg_cb get_reg;
+     gdb_set_reg_cb set_reg;
+-    const char *xml;
++    const GDBFeature *feature;
+     struct GDBRegisterState *next;
+ } GDBRegisterState;
  
--    /* Plugin initialization must wait until cpu_index assigned. */
--    if (tcg_enabled()) {
--        qemu_plugin_vcpu_init_hook(cpu);
--    }
--
- #ifdef CONFIG_USER_ONLY
-     assert(qdev_get_vmsd(DEVICE(cpu)) == NULL ||
-            qdev_get_vmsd(DEVICE(cpu))->unmigratable);
-@@ -179,11 +173,6 @@ void cpu_exec_unrealizefn(CPUState *cpu)
-     }
- #endif
- 
--    /* Call the plugin hook before clearing cpu->cpu_index in cpu_list_remove */
--    if (tcg_enabled()) {
--        qemu_plugin_vcpu_exit_hook(cpu);
--    }
--
-     cpu_list_remove(cpu);
-     /*
-      * Now that the vCPU has been removed from the RCU list, we can call
-diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
-index 549f52f46f..e06a70007a 100644
---- a/hw/core/cpu-common.c
-+++ b/hw/core/cpu-common.c
-@@ -211,6 +211,11 @@ static void cpu_common_realizefn(DeviceState *dev, Error **errp)
-         cpu_resume(cpu);
+@@ -390,7 +389,7 @@ static const char *get_feature_xml(const char *p, const char **newp,
+             pstrcat(buf, buf_sz, "\"/>");
+             for (r = cpu->gdb_regs; r; r = r->next) {
+                 pstrcat(buf, buf_sz, "<xi:include href=\"");
+-                pstrcat(buf, buf_sz, r->xml);
++                pstrcat(buf, buf_sz, r->feature->xmlname);
+                 pstrcat(buf, buf_sz, "\"/>");
+             }
+             pstrcat(buf, buf_sz, "</target>");
+@@ -497,7 +496,7 @@ static int gdb_read_register(CPUState *cpu, GByteArray *buf, int reg)
      }
  
-+    /* Plugin initialization must wait until the cpu is fully realized. */
-+    if (tcg_enabled()) {
-+        qemu_plugin_vcpu_init_hook(cpu);
-+    }
-+
-     /* NOTE: latest generic point where the cpu is fully realized */
- }
+     for (r = cpu->gdb_regs; r; r = r->next) {
+-        if (r->base_reg <= reg && reg < r->base_reg + r->num_regs) {
++        if (r->base_reg <= reg && reg < r->base_reg + r->feature->num_regs) {
+             return r->get_reg(env, buf, reg - r->base_reg);
+         }
+     }
+@@ -515,7 +514,7 @@ static int gdb_write_register(CPUState *cpu, uint8_t *mem_buf, int reg)
+     }
  
-@@ -218,6 +223,11 @@ static void cpu_common_unrealizefn(DeviceState *dev)
- {
-     CPUState *cpu = CPU(dev);
+     for (r = cpu->gdb_regs; r; r = r->next) {
+-        if (r->base_reg <= reg && reg < r->base_reg + r->num_regs) {
++        if (r->base_reg <= reg && reg < r->base_reg + r->feature->num_regs) {
+             return r->set_reg(env, mem_buf, reg - r->base_reg);
+         }
+     }
+@@ -538,17 +537,16 @@ void gdb_register_coprocessor(CPUState *cpu,
+     p = &cpu->gdb_regs;
+     while (*p) {
+         /* Check for duplicates.  */
+-        if (strcmp((*p)->xml, feature->xmlname) == 0)
++        if ((*p)->feature == feature)
+             return;
+         p = &(*p)->next;
+     }
  
-+    /* Call the plugin hook before clearing the cpu is fully unrealized */
-+    if (tcg_enabled()) {
-+        qemu_plugin_vcpu_exit_hook(cpu);
-+    }
-+
-     /* NOTE: latest generic point before the cpu is fully unrealized */
-     cpu_exec_unrealizefn(cpu);
- }
+     s = g_new0(GDBRegisterState, 1);
+     s->base_reg = cpu->gdb_num_regs;
+-    s->num_regs = feature->num_regs;
+     s->get_reg = get_reg;
+     s->set_reg = set_reg;
+-    s->xml = feature->xml;
++    s->feature = feature;
+ 
+     /* Add to end of list.  */
+     cpu->gdb_num_regs += feature->num_regs;
 -- 
 2.41.0
 
