@@ -4,117 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F9F2C04A6A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Aug 2023 13:52:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 900F5C001E0
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Aug 2023 14:19:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qWGwU-0004Tf-9j; Wed, 16 Aug 2023 09:52:14 -0400
+	id 1qWHN6-0000Vb-6f; Wed, 16 Aug 2023 10:19:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qWGwK-0004Nl-B1
- for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 09:52:01 -0400
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qWGwF-0004RI-0C
- for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 09:51:57 -0400
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1bc3d94d40fso55149385ad.3
- for <qemu-riscv@nongnu.org>; Wed, 16 Aug 2023 06:51:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1692193913; x=1692798713;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=mZPCtM4gFlUO1eqBWQfyY/Y18ssOpc6HOYefevkB3hs=;
- b=E60lamU47sZQxI2mdxzaxIpzQ585cW73J6EcnIGUtt0mZ/TNXdyWMp2/dzxmLzyAfE
- Mu9LEylJIpAXxmDtu/izPvlfN/2tTaEfobzongnhiN/H75mF1tZM5KtcMx7wvcKqdGi6
- q22Oz6PXtIByw2bMo+CyND45GwR4JhJ74HXkvd2h5zmd7Py98uy4BGoGPVopqHtB8LSs
- AeH0zL/KiendIdwPw+xkOFfAHbOK7N/mIXRFAl63WX+dt3nS24h8J5RTTAORqtZfdL8r
- bZDS5s0hCOOkaMA5VCy1sdeKYT7TyloC8v5VknLg8AjYzAnMerp5cNFZ1K4wWw822ChR
- HS8g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692193913; x=1692798713;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=mZPCtM4gFlUO1eqBWQfyY/Y18ssOpc6HOYefevkB3hs=;
- b=J1YajC2IBNikJ0vrrJzqesB2Ovgxa4z0wYwO6oSkPgc8jwpIkX9ybuv/dEIO+7Y/UD
- gb74Ihn4/DexmuTSiRm9+Hxr4nU11rN4ayROw/WrvawAgOPlPN3l3o1PdBbBNEV/2sHa
- hJgrD2y+jBWyNGngIHkPhXILrEAzEbzzVgNnj1UJkf4fYdzEjlIsKIp+8/g7MBmek8Ip
- vaw90l2bgU53Vk2huOBs4G2uinLBzFbzln3MHA4/HKD9bfMbfX5pOL284purgMAmJqvl
- +g4j3ug8nTKNUIrBBI9D0sREPmEKE2T9MmKZJYYtyIjI5rOPPtZtU0bPIabU4FtABlWI
- FMhQ==
-X-Gm-Message-State: AOJu0YxsxlxFhqtp+dO1loLIzEdJKKYm5Y676kaWqXn8KbX3wbptoezJ
- 3LV6j0LB6Er43BpF6QGPpZ6qNg==
-X-Google-Smtp-Source: AGHT+IF76m2gteYuU/ME8SyVTBxUSaRFmuZxrPHwMaaIRkLTBOKQwLw0o3YjJK7lICXb524S6ruUtA==
-X-Received: by 2002:a17:902:bc89:b0:1bd:af7e:965d with SMTP id
- bb9-20020a170902bc8900b001bdaf7e965dmr2060152plb.51.1692193912914; 
- Wed, 16 Aug 2023 06:51:52 -0700 (PDT)
-Received: from ?IPV6:2400:4050:a840:1e00:78d2:b862:10a7:d486?
- ([2400:4050:a840:1e00:78d2:b862:10a7:d486])
- by smtp.gmail.com with ESMTPSA id
- 8-20020a17090a034800b00262e485156esm14092117pjf.57.2023.08.16.06.51.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 16 Aug 2023 06:51:52 -0700 (PDT)
-Message-ID: <b1b4843e-038c-43ac-8aa0-b95312b0806a@daynix.com>
-Date: Wed, 16 Aug 2023 22:51:43 +0900
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1qWHN2-0000VM-S9; Wed, 16 Aug 2023 10:19:37 -0400
+Received: from smtp81.cstnet.cn ([159.226.251.81] helo=cstnet.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1qWHMy-0002FM-ON; Wed, 16 Aug 2023 10:19:36 -0400
+Received: from localhost.localdomain (unknown [180.165.241.204])
+ by APP-03 (Coremail) with SMTP id rQCowABXX6Pm2txkcCeuAA--.19126S2;
+ Wed, 16 Aug 2023 22:19:19 +0800 (CST)
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
+ Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH v2] target/riscv: Update CSR bits name for svadu extension
+Date: Wed, 16 Aug 2023 22:19:16 +0800
+Message-Id: <20230816141916.66898-1-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 12/24] gdbstub: Simplify XML lookup
-Content-Language: en-US
-To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-Cc: Paolo Bonzini <pbonzini@redhat.com>, Thomas Huth <thuth@redhat.com>,
- Alexandre Iooss <erdnaxe@crans.org>, Mahmoud Mandour
- <ma.mandourr@gmail.com>, Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Yanan Wang <wangyanan55@huawei.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- John Snow <jsnow@redhat.com>, Cleber Rosa <crosa@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>, Michael Rolnik
- <mrolnik@gmail.com>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Brian Cain <bcain@quicinc.com>, Song Gao <gaosong@loongson.cn>,
- Xiaojuan Yang <yangxiaojuan@loongson.cn>, Laurent Vivier
- <laurent@vivier.eu>, Aurelien Jarno <aurelien@aurel32.net>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Chris Wulff <crwulff@gmail.com>, Marek Vasut <marex@denx.de>,
- Stafford Horne <shorne@gmail.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
- David Gibson <david@gibson.dropbear.id.au>, Greg Kurz <groug@kaod.org>,
- Nicholas Piggin <npiggin@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Max Filippov <jcmvbkbc@gmail.com>, qemu-devel@nongnu.org,
- qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- qemu-s390x@nongnu.org
-References: <20230731084354.115015-1-akihiko.odaki@daynix.com>
- <20230731084354.115015-13-akihiko.odaki@daynix.com>
- <87jztxrbv0.fsf@linaro.org>
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <87jztxrbv0.fsf@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::62d;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pl1-x62d.google.com
+X-CM-TRANSID: rQCowABXX6Pm2txkcCeuAA--.19126S2
+X-Coremail-Antispam: 1UD129KBjvJXoW3Xw1fKFyUXFW7Cr47Gr4kZwb_yoW7ArW3pF
+ W5Ga9rJ395JF97Xan3Ar4Yg3W8Jws5CwsxZw4q9a1kZFW5GrWrJasrtws8AryUWFW8Jr10
+ 9w45Ar13Ar4kZ3JanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUkK14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
+ Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
+ I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
+ 4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628v
+ n2kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F4
+ 0E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFyl
+ IxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxV
+ AFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j
+ 6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Jr0_GrUvcSsGvfC2KfnxnUUI43ZEXa7VUbXdbU
+ UUUUU==
+X-Originating-IP: [180.165.241.204]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.81; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -130,98 +75,158 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2023/08/14 22:27, Alex Bennée wrote:
-> 
-> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
-> 
->> Now we know all instances of GDBFeature that is used in CPU so we can
->> traverse them to find XML. This removes the need for a CPU-specific
->> lookup function for dynamic XMLs.
->>
->> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
->> ---
->>   gdbstub/gdbstub.c | 28 +++++++++-------------------
->>   1 file changed, 9 insertions(+), 19 deletions(-)
->>
->> diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
->> index 182efe7e0f..e5bb2c89ba 100644
->> --- a/gdbstub/gdbstub.c
->> +++ b/gdbstub/gdbstub.c
->> @@ -354,8 +354,7 @@ static const char *get_feature_xml(const char *p, const char **newp,
->>                                      GDBProcess *process)
->>   {
->>       size_t len;
->> -    int i;
->> -    const char *name;
->> +    GDBRegisterState *r;
->>       CPUState *cpu = gdb_get_first_cpu_in_process(process);
->>       CPUClass *cc = CPU_GET_CLASS(cpu);
->>   
->> @@ -364,15 +363,12 @@ static const char *get_feature_xml(const char *p, const char **newp,
->>           len++;
->>       *newp = p + len;
->>   
->> -    name = NULL;
->>       if (strncmp(p, "target.xml", len) == 0) {
->>           char *buf = process->target_xml;
->>           const size_t buf_sz = sizeof(process->target_xml);
->>   
->>           /* Generate the XML description for this CPU.  */
->>           if (!buf[0]) {
->> -            GDBRegisterState *r;
->> -
->>               pstrcat(buf, buf_sz,
->>                       "<?xml version=\"1.0\"?>"
->>                       "<!DOCTYPE target SYSTEM \"gdb-target.dtd\">"
->> @@ -389,28 +385,22 @@ static const char *get_feature_xml(const char *p, const char **newp,
->>               pstrcat(buf, buf_sz, "\"/>");
->>               for (r = cpu->gdb_regs; r; r = r->next) {
->>                   pstrcat(buf, buf_sz, "<xi:include href=\"");
->> -                pstrcat(buf, buf_sz, r->feature->xml);
->> +                pstrcat(buf, buf_sz, r->feature->xmlname);
->>                   pstrcat(buf, buf_sz, "\"/>");
->>               }
->>               pstrcat(buf, buf_sz, "</target>");
->>           }
->>           return buf;
->>       }
-> 
-> It would be nice to modernise this code before adding to it. The static
-> target_xml buffer and use of pstrcat could be replaced by GString code
-> that is less sketchy.
+The Svadu specification updated the name of the *envcfg bit from
+HADE to ADUE.
 
-I saw you did that yourself. Nevertheless I included my own 
-implementation for the suggestion in v3. It uses 
-g_markup_printf_escaped() for extra caution and better readability (i.e. 
-the xi:include tags are written in a format: <xi:include href=\"%s\"/>).
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+---
 
-> 
-> 
->> -    if (cc->gdb_get_dynamic_xml) {
->> -        char *xmlname = g_strndup(p, len);
->> -        const char *xml = cc->gdb_get_dynamic_xml(cpu, xmlname);
->> -
->> -        g_free(xmlname);
->> -        if (xml) {
->> -            return xml;
->> -        }
->> +    if (strncmp(p, cc->gdb_core_feature->xmlname, len) == 0) {
->> +        return cc->gdb_core_feature->xml;
->>       }
->> -    for (i = 0; ; i++) {
->> -        name = gdb_features[i].xmlname;
->> -        if (!name || (strncmp(name, p, len) == 0 && strlen(name) == len))
->> -            break;
->> +    for (r = cpu->gdb_regs; r; r = r->next) {
->> +        if (strncmp(p, r->feature->xmlname, len) == 0) {
->> +            return r->feature->xml;
->> +        }
->>       }
->> -    return name ? gdb_features[i].xml : NULL;
->> +    return NULL;
->>   }
->>   
->>   const GDBFeature *gdb_find_static_feature(const char *xmlname)
-> 
-> 
+v2:
+* rename hade variable name to adue suggested by Daniel
+
+ target/riscv/cpu.c        |  4 ++--
+ target/riscv/cpu_bits.h   |  8 ++++----
+ target/riscv/cpu_helper.c |  6 +++---
+ target/riscv/csr.c        | 12 ++++++------
+ 4 files changed, 15 insertions(+), 15 deletions(-)
+
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 6b93b04453..f04a985d55 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -875,9 +875,9 @@ static void riscv_cpu_reset_hold(Object *obj)
+     env->two_stage_lookup = false;
+ 
+     env->menvcfg = (cpu->cfg.ext_svpbmt ? MENVCFG_PBMTE : 0) |
+-                   (cpu->cfg.ext_svadu ? MENVCFG_HADE : 0);
++                   (cpu->cfg.ext_svadu ? MENVCFG_ADUE : 0);
+     env->henvcfg = (cpu->cfg.ext_svpbmt ? HENVCFG_PBMTE : 0) |
+-                   (cpu->cfg.ext_svadu ? HENVCFG_HADE : 0);
++                   (cpu->cfg.ext_svadu ? HENVCFG_ADUE : 0);
+ 
+     /* Initialized default priorities of local interrupts. */
+     for (i = 0; i < ARRAY_SIZE(env->miprio); i++) {
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 59f0ffd9e1..1c2ffae883 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -745,12 +745,12 @@ typedef enum RISCVException {
+ #define MENVCFG_CBIE                       (3UL << 4)
+ #define MENVCFG_CBCFE                      BIT(6)
+ #define MENVCFG_CBZE                       BIT(7)
+-#define MENVCFG_HADE                       (1ULL << 61)
++#define MENVCFG_ADUE                       (1ULL << 61)
+ #define MENVCFG_PBMTE                      (1ULL << 62)
+ #define MENVCFG_STCE                       (1ULL << 63)
+ 
+ /* For RV32 */
+-#define MENVCFGH_HADE                      BIT(29)
++#define MENVCFGH_ADUE                      BIT(29)
+ #define MENVCFGH_PBMTE                     BIT(30)
+ #define MENVCFGH_STCE                      BIT(31)
+ 
+@@ -763,12 +763,12 @@ typedef enum RISCVException {
+ #define HENVCFG_CBIE                       MENVCFG_CBIE
+ #define HENVCFG_CBCFE                      MENVCFG_CBCFE
+ #define HENVCFG_CBZE                       MENVCFG_CBZE
+-#define HENVCFG_HADE                       MENVCFG_HADE
++#define HENVCFG_ADUE                       MENVCFG_ADUE
+ #define HENVCFG_PBMTE                      MENVCFG_PBMTE
+ #define HENVCFG_STCE                       MENVCFG_STCE
+ 
+ /* For RV32 */
+-#define HENVCFGH_HADE                       MENVCFGH_HADE
++#define HENVCFGH_ADUE                       MENVCFGH_ADUE
+ #define HENVCFGH_PBMTE                      MENVCFGH_PBMTE
+ #define HENVCFGH_STCE                       MENVCFGH_STCE
+ 
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 9f611d89bb..3a02079290 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -861,11 +861,11 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+     }
+ 
+     bool pbmte = env->menvcfg & MENVCFG_PBMTE;
+-    bool hade = env->menvcfg & MENVCFG_HADE;
++    bool adue = env->menvcfg & MENVCFG_ADUE;
+ 
+     if (first_stage && two_stage && env->virt_enabled) {
+         pbmte = pbmte && (env->henvcfg & HENVCFG_PBMTE);
+-        hade = hade && (env->henvcfg & HENVCFG_HADE);
++        adue = adue && (env->henvcfg & HENVCFG_ADUE);
+     }
+ 
+     int ptshift = (levels - 1) * ptidxbits;
+@@ -1026,7 +1026,7 @@ restart:
+ 
+     /* Page table updates need to be atomic with MTTCG enabled */
+     if (updated_pte != pte && !is_debug) {
+-        if (!hade) {
++        if (!adue) {
+             return TRANSLATE_FAIL;
+         }
+ 
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index ea7585329e..b4c66dc8ca 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -1951,7 +1951,7 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+     if (riscv_cpu_mxl(env) == MXL_RV64) {
+         mask |= (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
+                 (cfg->ext_sstc ? MENVCFG_STCE : 0) |
+-                (cfg->ext_svadu ? MENVCFG_HADE : 0);
++                (cfg->ext_svadu ? MENVCFG_ADUE : 0);
+     }
+     env->menvcfg = (env->menvcfg & ~mask) | (val & mask);
+ 
+@@ -1971,7 +1971,7 @@ static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
+     const RISCVCPUConfig *cfg = riscv_cpu_cfg(env);
+     uint64_t mask = (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
+                     (cfg->ext_sstc ? MENVCFG_STCE : 0) |
+-                    (cfg->ext_svadu ? MENVCFG_HADE : 0);
++                    (cfg->ext_svadu ? MENVCFG_ADUE : 0);
+     uint64_t valh = (uint64_t)val << 32;
+ 
+     env->menvcfg = (env->menvcfg & ~mask) | (valh & mask);
+@@ -2023,7 +2023,7 @@ static RISCVException read_henvcfg(CPURISCVState *env, int csrno,
+      * henvcfg.stce is read_only 0 when menvcfg.stce = 0
+      * henvcfg.hade is read_only 0 when menvcfg.hade = 0
+      */
+-    *val = env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_HADE) |
++    *val = env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE) |
+                            env->menvcfg);
+     return RISCV_EXCP_NONE;
+ }
+@@ -2040,7 +2040,7 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+     }
+ 
+     if (riscv_cpu_mxl(env) == MXL_RV64) {
+-        mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_HADE);
++        mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE);
+     }
+ 
+     env->henvcfg = (env->henvcfg & ~mask) | (val & mask);
+@@ -2058,7 +2058,7 @@ static RISCVException read_henvcfgh(CPURISCVState *env, int csrno,
+         return ret;
+     }
+ 
+-    *val = (env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_HADE) |
++    *val = (env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE) |
+                             env->menvcfg)) >> 32;
+     return RISCV_EXCP_NONE;
+ }
+@@ -2067,7 +2067,7 @@ static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
+                                      target_ulong val)
+ {
+     uint64_t mask = env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE |
+-                                    HENVCFG_HADE);
++                                    HENVCFG_ADUE);
+     uint64_t valh = (uint64_t)val << 32;
+     RISCVException ret;
+ 
+-- 
+2.25.1
+
 
