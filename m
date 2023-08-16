@@ -4,112 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 527B4C001E0
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Aug 2023 15:12:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83CCBC04E69
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Aug 2023 16:27:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qWIBd-0006Vk-EV; Wed, 16 Aug 2023 11:11:53 -0400
+	id 1qWJMw-0004e2-Cm; Wed, 16 Aug 2023 12:27:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qWIBb-0006VI-Jk
- for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 11:11:51 -0400
-Received: from mail-oi1-x233.google.com ([2607:f8b0:4864:20::233])
+ id 1qWJMt-0004dA-DA
+ for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 12:27:35 -0400
+Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qWIBZ-0006GA-CK
- for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 11:11:51 -0400
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-3a741f46fadso5642620b6e.0
- for <qemu-riscv@nongnu.org>; Wed, 16 Aug 2023 08:11:49 -0700 (PDT)
+ id 1qWJMr-0005pl-0p
+ for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 12:27:35 -0400
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-6887ccba675so701955b3a.3
+ for <qemu-riscv@nongnu.org>; Wed, 16 Aug 2023 09:27:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1692198708; x=1692803508;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=hEU3dFmLOGxf0aPW9ITZrVwFlm7H6G41V9IogAXUhfg=;
- b=OFqOqlQoRXKD4t5nRwTaPlXEpfwku5Cw0gzzR1M919EGe0Z0LX0c4qiPMV9FejaLc3
- OOoztCVACQmIVbyPftACFo1hYVVxQpHHS0/z3R9721qSXEX44orLZpcygzXvHrxc8iE/
- 7E32Kz7eANye2Ah6YPGDBNCu0uDhUJRBv8BL7Eac/VyxNqtDhE8yFd6XUo39XVjepNcr
- W2fC1Xsn12KrdWn0vPiaKvTxBhGy/N9NHWc6XiBV/P4iO9nrk/V6ThmhedOvSQtjwGcL
- pGVxa8Rt+2V250YSJQqVcT2bfWCHy4NiiZTwPpyJIjBk6LTT8jT773pszuqmS6nfXpIh
- 6GOw==
+ d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1692203251; x=1692808051;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=QKXYA/unXvJ21h5G46LAyvoXNN/dpDZXMSW6PifdaOI=;
+ b=qLcGYm4XVa6F60ZcnZpp1xhKx2Whi0zAH8n5j7o2rd3gTDs77zvoYXqjcWkcBBabuE
+ SXB11MlA0mG7iUXrwwV4UBC8j9vBepE7r9z0ugs6sxP6UZld0FPrLJHQQ6kz1Xd3PQPP
+ 7CJYOojuSPMJj50Ol+44sWrxGg9bUwinTOdccK9FmdslaCzI3h7oFwwDaew1uvBfosXE
+ GPNLpkGutC9rlp1qToNNtUBE1tyuS3u/BcKIpS+SWCtfdJTzWCpiSex1BjPoRijaYMOO
+ bXkZbJeqBmZAZobO791dAPt6ktSPPuyY+8pPK4K8WtdFI+l82tpRbfDl2PgSYxKbXH3X
+ JSkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692198708; x=1692803508;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hEU3dFmLOGxf0aPW9ITZrVwFlm7H6G41V9IogAXUhfg=;
- b=Iub4rBHUbSUHC/tGtFVkJlNqcuS0hi7QzN71/y+utnoDam+zXtKIIJx8dCYWHd+xyZ
- i9HunOfBgzKjB9FaeDRHjAwDAZtJ10tNRO11OyFm7WQW3BbA/DkO85pxTVe8hyBl1+Fx
- IQiaPWh3opAVzLjNJxIWYm35hNKCmDfkc8wkztvg2awBsFFrq0bv7fwu6fnSJ9QPTvt2
- OCwrgv19lXQFuQQl8ZojMwg30HgeCjO2OsSedBUw3u6fcMgMlt/RU14z6FykzcQNWJR1
- /1YpTHYcwpraqt1uZU8UyXg+Vj2ofDWXIN7TX9ldx2l6xfVp2/HlOdSoOub9I9I7BCV8
- G4WA==
-X-Gm-Message-State: AOJu0YwYFTP76kbnsrjI5edUqzUvKq5jUTUQXQrjsy7NdW0TgyuUKX1l
- AME2mzlH0AV/PJgqdLqwK4ngbg==
-X-Google-Smtp-Source: AGHT+IHYO1WNOfWm/5h18/YpTTaV11QaqcX4jo99s1nzLeeMnAL7r6TQ0+INirHDbb67ZYs11pMGgA==
-X-Received: by 2002:a05:6808:200f:b0:3a4:8590:90f2 with SMTP id
- q15-20020a056808200f00b003a4859090f2mr3342939oiw.47.1692198708388; 
- Wed, 16 Aug 2023 08:11:48 -0700 (PDT)
-Received: from ?IPV6:2400:4050:a840:1e00:78d2:b862:10a7:d486?
- ([2400:4050:a840:1e00:78d2:b862:10a7:d486])
+ d=1e100.net; s=20221208; t=1692203251; x=1692808051;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=QKXYA/unXvJ21h5G46LAyvoXNN/dpDZXMSW6PifdaOI=;
+ b=eo0LRCP/d9VDj1pbU/AGjhnFuWcgdsDXkU2KEavRP5aMi8vcqM1gdYRCug12/YmGcC
+ WA+vXYrSyo3vXbVVVFqGN3AqqAc5q0Z6KJYq6eS7wkYmL73k05pAMXTZQShVO2bBz7uE
+ pNq9SLgGE3FvM+1W9ayKxkWbSXpNxyP2R5Ns9QwlHf3cIAa4clDGJQDuiXLAQaAbZoB9
+ RFVOfwUxVjt0+SJ3RQv1Grh/+enpN0x1MB8p33wHP+zQXaSatrGY2viXpnztYtX02EvZ
+ P3YLyCy75MHdVMoeiAQrtcH6ySYLIJRZ+/PL4YBpn2BrvOuJtGvJGEBa3YTfoSoR+ONb
+ VUYw==
+X-Gm-Message-State: AOJu0YwTOvYN51jWj22sn6gZPvsVkXfO90rBlpW3o+YGffhxtZeTddjj
+ CJcZ5VDHtuKyfe8BAo0xnwhkdA==
+X-Google-Smtp-Source: AGHT+IEVTkOhwaVk4m3TlS+FchD7zGKPWsC6MzSpnYPvGeb5jHzXh+eqnWx9CbtWoVH9+QL752ZBCg==
+X-Received: by 2002:a05:6a20:7faa:b0:13d:7aa3:aa72 with SMTP id
+ d42-20020a056a207faa00b0013d7aa3aa72mr2796827pzj.5.1692203251593; 
+ Wed, 16 Aug 2023 09:27:31 -0700 (PDT)
+Received: from alarm.flets-east.jp ([2400:4050:a840:1e00:78d2:b862:10a7:d486])
  by smtp.gmail.com with ESMTPSA id
- s10-20020a639e0a000000b005633311c70dsm10919319pgd.32.2023.08.16.08.11.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 16 Aug 2023 08:11:48 -0700 (PDT)
-Message-ID: <5fb9ec6f-f8b5-4cf3-8179-ebb496b06862@daynix.com>
-Date: Thu, 17 Aug 2023 00:11:39 +0900
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 15/24] target/arm: Fill new members of GDBFeature
-Content-Language: en-US
-To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-Cc: Paolo Bonzini <pbonzini@redhat.com>, Thomas Huth <thuth@redhat.com>,
- Alexandre Iooss <erdnaxe@crans.org>, Mahmoud Mandour
- <ma.mandourr@gmail.com>, Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Yanan Wang <wangyanan55@huawei.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- John Snow <jsnow@redhat.com>, Cleber Rosa <crosa@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>, Michael Rolnik
- <mrolnik@gmail.com>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Brian Cain <bcain@quicinc.com>, Song Gao <gaosong@loongson.cn>,
- Xiaojuan Yang <yangxiaojuan@loongson.cn>, Laurent Vivier
- <laurent@vivier.eu>, Aurelien Jarno <aurelien@aurel32.net>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Chris Wulff <crwulff@gmail.com>, Marek Vasut <marex@denx.de>,
- Stafford Horne <shorne@gmail.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
- David Gibson <david@gibson.dropbear.id.au>, Greg Kurz <groug@kaod.org>,
- Nicholas Piggin <npiggin@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Max Filippov <jcmvbkbc@gmail.com>, qemu-devel@nongnu.org,
- qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- qemu-s390x@nongnu.org
-References: <20230731084354.115015-1-akihiko.odaki@daynix.com>
- <20230731084354.115015-16-akihiko.odaki@daynix.com>
- <87350lr7p8.fsf@linaro.org> <f41aae27-8538-46b5-93fa-67de41602077@daynix.com>
- <87r0o3ni57.fsf@linaro.org>
+ e24-20020aa78c58000000b006829969e3b0sm11209906pfd.85.2023.08.16.09.27.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 16 Aug 2023 09:27:31 -0700 (PDT)
 From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <87r0o3ni57.fsf@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: 
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Weiwei Li <liweiwei@iscas.ac.cn>, Bin Meng <bin.meng@windriver.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Akihiko Odaki <akihiko.odaki@daynix.com>
+Subject: [PATCH] target/riscv: Allocate itrigger timers only once
+Date: Thu, 17 Aug 2023 01:27:13 +0900
+Message-ID: <20230816162717.44125-1-akihiko.odaki@daynix.com>
+X-Mailer: git-send-email 2.41.0
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::233;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-oi1-x233.google.com
+Received-SPF: none client-ip=2607:f8b0:4864:20::42f;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x42f.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -131,61 +95,97 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2023/08/17 0:03, Alex Bennée wrote:
-> 
-> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
-> 
->> On 2023/08/14 23:56, Alex Bennée wrote:
->>> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
->>>
->>>> These members will be used to help plugins to identify registers.
->>>>
->>>> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
->>>> ---
->>>>    target/arm/gdbstub.c   | 46 +++++++++++++++++++++++++++---------------
->>>>    target/arm/gdbstub64.c | 42 +++++++++++++++++++++++++-------------
->>>>    2 files changed, 58 insertions(+), 30 deletions(-)
->>>>
->>>> diff --git a/target/arm/gdbstub.c b/target/arm/gdbstub.c
->>>> index 100a6eed15..56d24028f6 100644
->>>> --- a/target/arm/gdbstub.c
->>>> +++ b/target/arm/gdbstub.c
->>>> @@ -270,6 +270,7 @@ static void arm_gen_one_feature_sysreg(GString *s,
->>>>        g_string_append_printf(s, " regnum=\"%d\"", regnum);
->>>>        g_string_append_printf(s, " group=\"cp_regs\"/>");
->>>>        dyn_feature->data.cpregs.keys[dyn_feature->desc.num_regs] = ri_key;
->>>> +    ((const char **)dyn_feature->desc.regs)[dyn_feature->desc.num_regs] = ri->name;
->>>>        dyn_feature->desc.num_regs++;
->>>>    }
->>>>    @@ -316,6 +317,8 @@ static GDBFeature
->>>> *arm_gen_dynamic_sysreg_feature(CPUState *cs, int base_reg)
->>>>        DynamicGDBFeatureInfo *dyn_feature = &cpu->dyn_sysreg_feature;
->>>>        gsize num_regs = g_hash_table_size(cpu->cp_regs);
->>>>    +    dyn_feature->desc.name = "org.qemu.gdb.arm.sys.regs";
->>>> +    dyn_feature->desc.regs = g_new(const char *, num_regs);
->>> AIUI this means we now have an array of register names which mirrors
->>> the
->>> names embedded in the XML. This smells like a few steps away from just
->>> abstracting the whole XML away from the targets and generating them
->>> inside gdbstub when we need them. As per my stalled attempt I referenced
->>> earlier.
->>
->> The abstraction is strictly limited for identifiers. Most plugin
->> should already have some knowledge of how registers are used. For
->> example, a plugin that tracks stack frame for RISC-V should know sp is
->> the stack pointer register. Similarly, a cycle simulator plugin should
->> know how registers are used in a program. Only identifiers matter in
->> such cases.
->>
->> I'm definitely *not* in favor of abstracting the whole XML for
->> plugins. It will be too hard to maintain ABI compatibility when a new
->> attribute emerges, for example.
-> 
-> No I agree the XML shouldn't go near the plugins. I was just looking to
-> avoid having an XML builder for every target.
+riscv_trigger_init() had been called on reset events that can happen
+several times for a CPU and it allocated timers for itrigger. If old
+timers were present, they were simply overwritten by the new timers,
+resulting in a memory leak.
 
-Oh, I see. It's done in v4 with patch "gdbstub: Introduce 
-GDBFeatureBuilder".
+Divide riscv_trigger_init() into two functions, namely
+riscv_trigger_realize() and riscv_trigger_reset() and call them in
+appropriate timing. The timer allocation will happen only once for a
+CPU in riscv_trigger_realize().
 
-> 
+Fixes: 5a4ae64cac ("target/riscv: Add itrigger support when icount is enabled")
+Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+---
+ target/riscv/debug.h |  3 ++-
+ target/riscv/cpu.c   |  8 +++++++-
+ target/riscv/debug.c | 15 ++++++++++++---
+ 3 files changed, 21 insertions(+), 5 deletions(-)
+
+diff --git a/target/riscv/debug.h b/target/riscv/debug.h
+index c471748d5a..7edc31e7cc 100644
+--- a/target/riscv/debug.h
++++ b/target/riscv/debug.h
+@@ -143,7 +143,8 @@ void riscv_cpu_debug_excp_handler(CPUState *cs);
+ bool riscv_cpu_debug_check_breakpoint(CPUState *cs);
+ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp);
+ 
+-void riscv_trigger_init(CPURISCVState *env);
++void riscv_trigger_realize(CPURISCVState *env);
++void riscv_trigger_reset(CPURISCVState *env);
+ 
+ bool riscv_itrigger_enabled(CPURISCVState *env);
+ void riscv_itrigger_update_priv(CPURISCVState *env);
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index e12b6ef7f6..3bc3f96a58 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -904,7 +904,7 @@ static void riscv_cpu_reset_hold(Object *obj)
+ 
+ #ifndef CONFIG_USER_ONLY
+     if (cpu->cfg.debug) {
+-        riscv_trigger_init(env);
++        riscv_trigger_reset(env);
+     }
+ 
+     if (kvm_enabled()) {
+@@ -1475,6 +1475,12 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+ 
+     riscv_cpu_register_gdb_regs_for_features(cs);
+ 
++#ifndef CONFIG_USER_ONLY
++    if (cpu->cfg.debug) {
++        riscv_trigger_realize(&cpu->env);
++    }
++#endif
++
+     qemu_init_vcpu(cs);
+     cpu_reset(cs);
+ 
+diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+index 75ee1c4971..1c44403205 100644
+--- a/target/riscv/debug.c
++++ b/target/riscv/debug.c
+@@ -903,7 +903,17 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
+     return false;
+ }
+ 
+-void riscv_trigger_init(CPURISCVState *env)
++void riscv_trigger_realize(CPURISCVState *env)
++{
++    int i;
++
++    for (i = 0; i < RV_MAX_TRIGGERS; i++) {
++        env->itrigger_timer[i] = timer_new_ns(QEMU_CLOCK_VIRTUAL,
++                                              riscv_itrigger_timer_cb, env);
++    }
++}
++
++void riscv_trigger_reset(CPURISCVState *env)
+ {
+     target_ulong tdata1 = build_tdata1(env, TRIGGER_TYPE_AD_MATCH, 0, 0);
+     int i;
+@@ -928,7 +938,6 @@ void riscv_trigger_init(CPURISCVState *env)
+         env->tdata3[i] = 0;
+         env->cpu_breakpoint[i] = NULL;
+         env->cpu_watchpoint[i] = NULL;
+-        env->itrigger_timer[i] = timer_new_ns(QEMU_CLOCK_VIRTUAL,
+-                                              riscv_itrigger_timer_cb, env);
++        timer_del(env->itrigger_timer[i]);
+     }
+ }
+-- 
+2.41.0
+
 
