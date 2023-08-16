@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E06BAC04A6A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Aug 2023 13:46:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23D03C04A6A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Aug 2023 13:47:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qWGlT-0004mQ-U1; Wed, 16 Aug 2023 09:40:47 -0400
+	id 1qWGnH-000819-LR; Wed, 16 Aug 2023 09:42:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qWGlI-0004hH-SB
- for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 09:40:36 -0400
-Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
+ id 1qWGn4-0007EF-OK
+ for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 09:42:28 -0400
+Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qWGlE-0000gY-Ky
- for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 09:40:36 -0400
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-68890d565b5so438324b3a.2
- for <qemu-riscv@nongnu.org>; Wed, 16 Aug 2023 06:40:19 -0700 (PDT)
+ id 1qWGn1-0001W0-3U
+ for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 09:42:25 -0400
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-6887ccba675so515538b3a.3
+ for <qemu-riscv@nongnu.org>; Wed, 16 Aug 2023 06:42:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1692193219; x=1692798019;
+ d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1692193340; x=1692798140;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nZll0H6CXaAKys7cBNNrlAZQAX9ewDlJMrzDsStORGc=;
- b=Y4Z3JSLbbqp6hcAm2g65/9NPsKe+m5HP5VKCqWSvbY/ILGUWUrwDCcyAJnEXpW/X2E
- Vm7PQ66C34wKVMqRTr+wBcFKMvDgGkkZbOPgLrPNT+RWdIqrgqV0/wdowOSRjQuLH93s
- tpFgNBJBYW7XCVjdxSsYRLWDyDrjq804ox7Ghbg3GwOa9o+rhgvukqhyoF7AVyv8k+/m
- pA4rGVOYxZegGiavhU6F9cNzPdL6vH+FNK4iXBXcVm0A/LsoZ/wju97U8t6FXNU6QNQg
- sR1mjzJanLGKi0yGKcv7k06zES/gRCJMxEBqsTTbhH/sryAzFhWe9wrjoMonriw49Aun
- besw==
+ bh=LoU2pS/znq+kjt+yrgvrxMpANXrwQzKAPttvmhpfpts=;
+ b=dL0piSXXpBJvuNXShqVnu09g1FrmM45clKUEBwID7vM0Z9U06VBkhTlyPwVmE9naWP
+ oazBoP9wnM5Pthb6ZpU4+w4b5SKxa+vljLaQgZ/mbEiePaUTqGK3Hh8CEWA66PgXlb3x
+ Td972ZLI3rJ2IWpzjMEFkKzRQagAkSORs0uoayv967cE6aPZLc6kDRLYVXM0d0z4Jwgc
+ 2UkvnHqhzA8eQ9snjyeUpuSmVLyi+Jm+E0IxjH5B6L2rpP+5QOVV8gMdNUzvvAoh3SeX
+ tbehLN4Y5EGzwLvwOfN7o29dbhaHHnSlyPTmAHbvA6V4+vRFamvOrZx4fbXJatEFx6Tj
+ Goug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692193219; x=1692798019;
+ d=1e100.net; s=20221208; t=1692193340; x=1692798140;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=nZll0H6CXaAKys7cBNNrlAZQAX9ewDlJMrzDsStORGc=;
- b=IRPsKz07kkNDP5V5k58LNnhxoFZqSQCZ1SlYEEx4VJKOpRc32WOMa6o9+geEFqA395
- M5vgbbZq0kb9B5z1AKFY4ttL0yi5V+ZiNkFu/ZplBkRRXLASKrI2MCyVjYlQKbyPNJwn
- qgXixU6zifyzB4sk5UYZTtduHFebf6lANe1XS2vEpRtCpfLB27Ir0Va2MLsdM/WhkKi3
- wSAhTuqbp3Y31XiPk+JMT/YukMjjsFkZxFfk5SOcnHieCQLi04LH6YnfVQhLb+pHV1eO
- SeeUbNnKjeGbIjsDLBV4CmJnTcjy2T+0QFTHEAcqJNLsomXmgfKrP6ZBCGjSM6v+8kEd
- leSQ==
-X-Gm-Message-State: AOJu0YycMbxBqZN2XqXej3L4BAFmhmgWtg9qMLrW5yfkNOvHX63XJpFd
- R+fYmSKZQ4Oe5/xeCwOGLftiJw==
-X-Google-Smtp-Source: AGHT+IH2Qr0VtfkmLBVF4SUA4/1JXblF7+YhrxctQPDO4368U0x1iYdOjTpgRfUqhAp2aGWIa5/0Qg==
-X-Received: by 2002:a05:6a21:3d86:b0:131:5995:340 with SMTP id
- bj6-20020a056a213d8600b0013159950340mr1857560pzc.20.1692193218657; 
- Wed, 16 Aug 2023 06:40:18 -0700 (PDT)
+ bh=LoU2pS/znq+kjt+yrgvrxMpANXrwQzKAPttvmhpfpts=;
+ b=hSA+8LBEmX4kPme/xIrw1k1UuCsgAk7b/Puf81LtdWwsGPJ80nfMrEQLBB32TH7SJ/
+ /f5Sq3Zm0zB4Zq7A3p/U9vx2tGGjittkesab/oqCogiItNNmxuQoVmphh07POSyHzdZW
+ D3c8pMvLeoUY9s7Wt7OxKMfksEmouCMQWl1vgQvUaGde3C0gDtT2BO03pr3vdJxUxSFv
+ IQ8bHr1NSqDpuBOlI9kktOI45MuJAaaxpJSIC/XHZt1v8hIZSrkE+XVwoIIAwA1gMLWj
+ FTQ/D/3b+7RXP/+UXAsth/n+L23qYPJA+EuKAM0B2MSyXvi0g/Xjet7tCk0aqEPFqsRk
+ 9+qg==
+X-Gm-Message-State: AOJu0YzVfkElisqn+wsvb2T0/63kP89NZXvWzwFGFi3dsXo6+IpPoUtJ
+ 9w+tOuvAbUNGFnqWLRGBBd/lRA==
+X-Google-Smtp-Source: AGHT+IFLp2aEC2TKIdJM1ahnC1nevUCd8qPpGWVeOoVFE918g8rIKGLF3x7hTxd7IWZjmNejkW0fRA==
+X-Received: by 2002:a05:6a21:35c8:b0:143:51ee:b142 with SMTP id
+ ba8-20020a056a2135c800b0014351eeb142mr1735537pzc.59.1692193340436; 
+ Wed, 16 Aug 2023 06:42:20 -0700 (PDT)
 Received: from alarm.flets-east.jp ([2400:4050:a840:1e00:78d2:b862:10a7:d486])
  by smtp.gmail.com with ESMTPSA id
- k3-20020a637b43000000b0056601f864aesm928355pgn.2.2023.08.16.06.40.09
+ k3-20020a637b43000000b0056601f864aesm928355pgn.2.2023.08.16.06.42.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Aug 2023 06:40:18 -0700 (PDT)
+ Wed, 16 Aug 2023 06:42:20 -0700 (PDT)
 From: Akihiko Odaki <akihiko.odaki@daynix.com>
 To: 
 Cc: Paolo Bonzini <pbonzini@redhat.com>,
@@ -98,23 +98,23 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
  qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, Anton Kochkov <anton.kochkov@proton.me>,
  Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH v3 01/25] contrib/plugins: Use GRWLock in execlog
-Date: Wed, 16 Aug 2023 22:39:11 +0900
-Message-ID: <20230816133938.18310-2-akihiko.odaki@daynix.com>
+Subject: [PATCH v3 14/25] gdbstub: Dynamically allocate target.xml buffer
+Date: Wed, 16 Aug 2023 22:39:24 +0900
+Message-ID: <20230816133938.18310-15-akihiko.odaki@daynix.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230816133938.18310-1-akihiko.odaki@daynix.com>
 References: <20230816133938.18310-1-akihiko.odaki@daynix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::435;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x435.google.com
+Received-SPF: none client-ip=2607:f8b0:4864:20::42e;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x42e.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=ham autolearn_force=no
+ SPF_NONE=0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -130,85 +130,113 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-execlog had the following comment:
-> As we could have multiple threads trying to do this we need to
-> serialise the expansion under a lock. Threads accessing already
-> created entries can continue without issue even if the ptr array
-> gets reallocated during resize.
+There is no guarantee that target.xml fits in 1024 bytes, and the fixed
+buffer length requires tedious buffer overflow check. Dynamically
+allocate the target.xml buffer to resolve these problems.
 
-However, when the ptr array gets reallocated, the other threads may have
-a stale reference to the old buffer. This results in use-after-free.
-
-Use GRWLock to properly fix this issue.
-
-Fixes: 3d7caf145e ("contrib/plugins: add execlog to log instruction execution and memory access")
+Suggested-by: Alex Bennée <alex.bennee@linaro.org>
 Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- contrib/plugins/execlog.c | 16 ++++++++++------
- 1 file changed, 10 insertions(+), 6 deletions(-)
+ gdbstub/internals.h |  2 +-
+ gdbstub/gdbstub.c   | 44 ++++++++++++++++++++++++--------------------
+ gdbstub/softmmu.c   |  2 +-
+ 3 files changed, 26 insertions(+), 22 deletions(-)
 
-diff --git a/contrib/plugins/execlog.c b/contrib/plugins/execlog.c
-index 7129d526f8..ce67acf145 100644
---- a/contrib/plugins/execlog.c
-+++ b/contrib/plugins/execlog.c
-@@ -19,7 +19,7 @@ QEMU_PLUGIN_EXPORT int qemu_plugin_version = QEMU_PLUGIN_VERSION;
+diff --git a/gdbstub/internals.h b/gdbstub/internals.h
+index f2b46cce41..4876ebd74f 100644
+--- a/gdbstub/internals.h
++++ b/gdbstub/internals.h
+@@ -33,7 +33,7 @@ typedef struct GDBProcess {
+     uint32_t pid;
+     bool attached;
  
- /* Store last executed instruction on each vCPU as a GString */
- static GPtrArray *last_exec;
--static GMutex expand_array_lock;
-+static GRWLock expand_array_lock;
+-    char target_xml[1024];
++    char *target_xml;
+ } GDBProcess;
  
- static GPtrArray *imatches;
- static GArray *amatches;
-@@ -28,18 +28,16 @@ static GArray *amatches;
-  * Expand last_exec array.
-  *
-  * As we could have multiple threads trying to do this we need to
-- * serialise the expansion under a lock. Threads accessing already
-- * created entries can continue without issue even if the ptr array
-- * gets reallocated during resize.
-+ * serialise the expansion under a lock.
-  */
- static void expand_last_exec(int cpu_index)
- {
--    g_mutex_lock(&expand_array_lock);
-+    g_rw_lock_writer_unlock(&expand_array_lock);
-     while (cpu_index >= last_exec->len) {
-         GString *s = g_string_new(NULL);
-         g_ptr_array_add(last_exec, s);
+ enum RSState {
+diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
+index c2ce970c98..452b5bf0ef 100644
+--- a/gdbstub/gdbstub.c
++++ b/gdbstub/gdbstub.c
+@@ -366,33 +366,37 @@ static const char *get_feature_xml(const char *p, const char **newp,
+ 
+     name = NULL;
+     if (strncmp(p, "target.xml", len) == 0) {
+-        char *buf = process->target_xml;
+-        const size_t buf_sz = sizeof(process->target_xml);
+-
+         /* Generate the XML description for this CPU.  */
+-        if (!buf[0]) {
++        if (!process->target_xml) {
++            g_autoptr(GPtrArray) a = g_ptr_array_new_with_free_func(g_free);
+             GDBRegisterState *r;
+ 
+-            pstrcat(buf, buf_sz,
+-                    "<?xml version=\"1.0\"?>"
+-                    "<!DOCTYPE target SYSTEM \"gdb-target.dtd\">"
+-                    "<target>");
++            g_ptr_array_add(
++                a,
++                g_strdup("<?xml version=\"1.0\"?>"
++                         "<!DOCTYPE target SYSTEM \"gdb-target.dtd\">"
++                         "<target>"));
+             if (cc->gdb_arch_name) {
+-                pstrcat(buf, buf_sz, "<architecture>");
+-                pstrcat(buf, buf_sz, cc->gdb_arch_name(cpu));
+-                pstrcat(buf, buf_sz, "</architecture>");
++                g_ptr_array_add(
++                    a,
++                    g_markup_printf_escaped("<architecture>%s</architecture>",
++                                            cc->gdb_arch_name(cpu)));
+             }
+-            pstrcat(buf, buf_sz, "<xi:include href=\"");
+-            pstrcat(buf, buf_sz, cc->gdb_core_feature->xmlname);
+-            pstrcat(buf, buf_sz, "\"/>");
++            g_ptr_array_add(
++                a,
++                g_markup_printf_escaped("<xi:include href=\"%s\"/>",
++                                        cc->gdb_core_feature->xmlname));
+             for (r = cpu->gdb_regs; r; r = r->next) {
+-                pstrcat(buf, buf_sz, "<xi:include href=\"");
+-                pstrcat(buf, buf_sz, r->feature->xmlname);
+-                pstrcat(buf, buf_sz, "\"/>");
++                g_ptr_array_add(
++                    a,
++                    g_markup_printf_escaped("<xi:include href=\"%s\"/>",
++                                            r->feature->xmlname));
+             }
+-            pstrcat(buf, buf_sz, "</target>");
++            g_ptr_array_add(a, g_strdup("</target>"));
++            g_ptr_array_add(a, NULL);
++            process->target_xml = g_strjoinv(NULL, (void *)a->pdata);
+         }
+-        return buf;
++        return process->target_xml;
      }
--    g_mutex_unlock(&expand_array_lock);
-+    g_rw_lock_writer_unlock(&expand_array_lock);
+     if (cc->gdb_get_dynamic_xml) {
+         char *xmlname = g_strndup(p, len);
+@@ -2270,6 +2274,6 @@ void gdb_create_default_process(GDBState *s)
+     process = &s->processes[s->process_num - 1];
+     process->pid = pid;
+     process->attached = false;
+-    process->target_xml[0] = '\0';
++    process->target_xml = NULL;
  }
  
- /**
-@@ -51,8 +49,10 @@ static void vcpu_mem(unsigned int cpu_index, qemu_plugin_meminfo_t info,
-     GString *s;
+diff --git a/gdbstub/softmmu.c b/gdbstub/softmmu.c
+index f509b7285d..5282324764 100644
+--- a/gdbstub/softmmu.c
++++ b/gdbstub/softmmu.c
+@@ -293,7 +293,7 @@ static int find_cpu_clusters(Object *child, void *opaque)
+         assert(cluster->cluster_id != UINT32_MAX);
+         process->pid = cluster->cluster_id + 1;
+         process->attached = false;
+-        process->target_xml[0] = '\0';
++        process->target_xml = NULL;
  
-     /* Find vCPU in array */
-+    g_rw_lock_reader_lock(&expand_array_lock);
-     g_assert(cpu_index < last_exec->len);
-     s = g_ptr_array_index(last_exec, cpu_index);
-+    g_rw_lock_reader_unlock(&expand_array_lock);
- 
-     /* Indicate type of memory access */
-     if (qemu_plugin_mem_is_store(info)) {
-@@ -80,10 +80,14 @@ static void vcpu_insn_exec(unsigned int cpu_index, void *udata)
-     GString *s;
- 
-     /* Find or create vCPU in array */
-+    g_rw_lock_reader_lock(&expand_array_lock);
-     if (cpu_index >= last_exec->len) {
-+        g_rw_lock_reader_unlock(&expand_array_lock);
-         expand_last_exec(cpu_index);
-+        g_rw_lock_reader_lock(&expand_array_lock);
+         return 0;
      }
-     s = g_ptr_array_index(last_exec, cpu_index);
-+    g_rw_lock_reader_unlock(&expand_array_lock);
- 
-     /* Print previous instruction in cache */
-     if (s->len) {
 -- 
 2.41.0
 
