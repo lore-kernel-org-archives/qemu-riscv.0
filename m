@@ -4,89 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0555BC001E0
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Aug 2023 15:05:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FF0FC04A6A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Aug 2023 15:08:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qWI56-0006N2-1a; Wed, 16 Aug 2023 11:05:08 -0400
+	id 1qWHwV-0007Sk-Gs; Wed, 16 Aug 2023 10:56:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qWI51-00066C-Jq
- for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 11:05:03 -0400
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
+ id 1qWHwR-0007Ag-Np
+ for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 10:56:12 -0400
+Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qWI4v-0004Ot-FA
- for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 11:05:01 -0400
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-1bdc8081147so28538415ad.1
- for <qemu-riscv@nongnu.org>; Wed, 16 Aug 2023 08:04:56 -0700 (PDT)
+ id 1qWHwN-0002XD-JV
+ for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 10:56:11 -0400
+Received: by mail-pf1-x434.google.com with SMTP id
+ d2e1a72fcca58-68842ebdcf7so2387348b3a.0
+ for <qemu-riscv@nongnu.org>; Wed, 16 Aug 2023 07:56:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1692198295; x=1692803095;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=spCUFVdjDT/l80JdlzLeqn0kF7ADg+0QZ3H7hNfAWdc=;
- b=nYSVqIQIMq0Bjo+CIrgdDde3EJPJuj/MJ9uTwbDZ6RyfEyxCU7M4X7UBFiGs9qcrMC
- VeoxXj9CK5JBYNjr8yerHF/vFCd7Ojr5q3tGrYvYLPmJmtxfk9krsjYHD7JYjJyADOid
- HxzTpMBO7TucX0pjBONox8wJqz2c7WGZotTTOqiup/9oIna6tF0JVMFHqj1S8H9TMWaC
- d+yBzLYyU88We5hYKlsegfpWmKQbi1wnv83N1wjNSGA4sxHfGS3PnnWEYxSriceQgWQu
- ddHFa9+TucrohYT71IsRI0v3nQyHm8SMePXDc+4muaZvX9FxaZjVKfCbozWAffO0z8+T
- VWFA==
+ d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1692197766; x=1692802566;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3o76KcQlFp/MuUPscQNwseGhYtySE7hW349U50r8SMs=;
+ b=ECQssLGShkIKdoxhZZy+LMWwlFqzcHtixQxWIMYm/BPslYVE6MlU4GZhw3MNDXuZ9z
+ WgTVohXHGd3s7Osjiq8VtBmd1ehLOZ+Lcck+3DergPXyd7OEOXfTVCQfH1SLt3/bWrse
+ EOeRQvrMwHLxs/tj15RZ8wQrYSzwNh0hy7hp189kvrqwewMsv4jMN/fNIcmgeYfg7pGI
+ HbQ++YqfVJpORyNTZPPAXzBTx/IF4obY8Au80rf06+Q+BhYYew7CNTlcAj9uMPQr0w2C
+ ivi/42OGXK1MoeC3yoEzFx5k2zwhcUV25Ss2YSGm5fVtf7Q8eJ8Llc0gO4wpzmtaHafn
+ oMPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692198295; x=1692803095;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=spCUFVdjDT/l80JdlzLeqn0kF7ADg+0QZ3H7hNfAWdc=;
- b=SQQOr09Jq7VK+MJZuT446RbFYFuvV2P1CKQ6LJXdozrT8RJCE7YxhdXhAkSoK/hVd4
- Lbu256Y9EHhvg+qwhDmRyZcSircqKxmEcbBTWTn62jkiqV39ykzdijhiIlStnGSf09l7
- T6yUqg76RW3kl2vadXmIWdbgTwC6Djtu9nBFaYoFww0FFmYvE3Z754eTXqOY5JpqR7RK
- GZ46e13d6mQQSFrNwvqe5iAMV8tOe4lf+k3lQ6hLvMfoUJ2gjdnAf298qD9BLBJVVrlg
- qn3sZieLXtgZ/iLP+AeLlCK2lWvcFNpeMMrmqBFzgDVmYqssTNWCzt4p5pYvyduVNp85
- /COQ==
-X-Gm-Message-State: AOJu0Yz3iHK67s2wFNjN+wU1ZU4Iwxug7FiFpA8m+gHjx+H22PczfVgz
- OH3IQEeXbKfRVg7ZOLs3TXts3g==
-X-Google-Smtp-Source: AGHT+IGqXgAIw6g805RTzCsYUKME2etnxfetoohdotLB6/EfbqsYWmEFcmJOdy2UTTkeqcKF6VxSbg==
-X-Received: by 2002:a17:90a:648e:b0:268:3ca4:6152 with SMTP id
- h14-20020a17090a648e00b002683ca46152mr3023992pjj.15.1692198295212; 
- Wed, 16 Aug 2023 08:04:55 -0700 (PDT)
-Received: from ?IPV6:2400:4050:a840:1e00:78d2:b862:10a7:d486?
- ([2400:4050:a840:1e00:78d2:b862:10a7:d486])
+ d=1e100.net; s=20221208; t=1692197766; x=1692802566;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3o76KcQlFp/MuUPscQNwseGhYtySE7hW349U50r8SMs=;
+ b=CZC6lzkmbOfjZGopDUwEQcrIoDeJjA32QAmVS3VHqddi9M9MSQxiOTmgmvg3sdEyuV
+ 6ccevouuY+qVIjrW8uisj9nNdufitMdsY6OwB8/7XX1fDheEiKpP+Bo9h6LQsZpWk6JK
+ RsgqOuIiXoenUFuMh/sMYfM+w/QMnNW7/kSF9pU8OOVLSSVp2ErUy+jtqTpAkBZhspYh
+ HqbDhX34mSD/Z7CKjHQode/PSAE5I1Kox7CbrHlHm0mO75HoNGJlTxKWw0umKhgoUqon
+ jw8RNJEGpx8i1h5O2eMHLg/0lZsVFoO/ZYkKr/Ea3U/9S1+zaYw0QHm7gCWF1vrX8fDh
+ hNRg==
+X-Gm-Message-State: AOJu0YxD3D0iaAOpUAbSsqDNngLkUBYrYnUp2wjFt41I1le87zx+vSwM
+ 3BbvNWskKD4IQZqOtw5idJ8LbQ==
+X-Google-Smtp-Source: AGHT+IFuJWXKBYrZNfpQaIXVCLG0U/O4pHpCtQJ7JkWj+6RHSYVf1WjURL0J7PYM9I6jSgpFz0yl7g==
+X-Received: by 2002:a05:6a00:10d2:b0:687:5c3f:d834 with SMTP id
+ d18-20020a056a0010d200b006875c3fd834mr2605176pfu.11.1692197766339; 
+ Wed, 16 Aug 2023 07:56:06 -0700 (PDT)
+Received: from alarm.flets-east.jp ([2400:4050:a840:1e00:78d2:b862:10a7:d486])
  by smtp.gmail.com with ESMTPSA id
- b22-20020a17090a8c9600b0026d034f6badsm691307pjo.38.2023.08.16.08.04.46
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 16 Aug 2023 08:04:54 -0700 (PDT)
-Message-ID: <1e77c6b2-646d-42de-9ed5-df60a3c7d3b8@daynix.com>
-Date: Thu, 17 Aug 2023 00:04:44 +0900
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 24/24] contrib/plugins: Add cc plugin
-Content-Language: en-US
-To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-Cc: Paolo Bonzini <pbonzini@redhat.com>, Thomas Huth <thuth@redhat.com>,
- Alexandre Iooss <erdnaxe@crans.org>, Mahmoud Mandour
- <ma.mandourr@gmail.com>, Eduardo Habkost <eduardo@habkost.net>,
+ fk26-20020a056a003a9a00b0068892c40253sm1156568pfb.216.2023.08.16.07.55.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 16 Aug 2023 07:56:05 -0700 (PDT)
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
+To: 
+Cc: Paolo Bonzini <pbonzini@redhat.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Thomas Huth <thuth@redhat.com>, Alexandre Iooss <erdnaxe@crans.org>,
+ Mahmoud Mandour <ma.mandourr@gmail.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Yanan Wang <wangyanan55@huawei.com>,
  Richard Henderson <richard.henderson@linaro.org>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
  John Snow <jsnow@redhat.com>, Cleber Rosa <crosa@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>, Michael Rolnik
- <mrolnik@gmail.com>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Michael Rolnik <mrolnik@gmail.com>,
+ "Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
  Brian Cain <bcain@quicinc.com>, Song Gao <gaosong@loongson.cn>,
- Xiaojuan Yang <yangxiaojuan@loongson.cn>, Laurent Vivier
- <laurent@vivier.eu>, Aurelien Jarno <aurelien@aurel32.net>,
+ Xiaojuan Yang <yangxiaojuan@loongson.cn>,
+ Laurent Vivier <laurent@vivier.eu>, Aurelien Jarno <aurelien@aurel32.net>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
  Chris Wulff <crwulff@gmail.com>, Marek Vasut <marex@denx.de>,
  Stafford Horne <shorne@gmail.com>,
  Daniel Henrique Barboza <danielhb413@gmail.com>,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
  David Gibson <david@gibson.dropbear.id.au>, Greg Kurz <groug@kaod.org>,
  Nicholas Piggin <npiggin@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -99,16 +96,18 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>, Thomas Huth <thuth@redhat.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-devel@nongnu.org,
  qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- qemu-s390x@nongnu.org
-References: <20230731084354.115015-1-akihiko.odaki@daynix.com>
- <20230731084354.115015-25-akihiko.odaki@daynix.com>
- <87pm3pprv8.fsf@linaro.org>
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <87pm3pprv8.fsf@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ qemu-s390x@nongnu.org, Anton Kochkov <anton.kochkov@proton.me>,
+ Akihiko Odaki <akihiko.odaki@daynix.com>
+Subject: [PATCH v4 24/25] plugins: Support C++
+Date: Wed, 16 Aug 2023 23:51:45 +0900
+Message-ID: <20230816145155.21049-25-akihiko.odaki@daynix.com>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20230816145155.21049-1-akihiko.odaki@daynix.com>
+References: <20230816145155.21049-1-akihiko.odaki@daynix.com>
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::62e;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pl1-x62e.google.com
+Received-SPF: none client-ip=2607:f8b0:4864:20::434;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x434.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -130,58 +129,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2023/08/15 0:23, Alex Bennée wrote:
-> 
-> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
-> 
->> This demonstrates how to write a plugin in C++.
->>
->> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
->> ---
->>   docs/devel/tcg-plugins.rst |  8 ++++++++
->>   configure                  | 15 ++++++++++++---
->>   contrib/plugins/Makefile   |  5 +++++
->>   contrib/plugins/cc.cc      | 15 +++++++++++++++
->>   tests/tcg/Makefile.target  |  3 +++
->>   5 files changed, 43 insertions(+), 3 deletions(-)
->>   create mode 100644 contrib/plugins/cc.cc
->>
->> diff --git a/docs/devel/tcg-plugins.rst b/docs/devel/tcg-plugins.rst
->> index c9f8b27590..0a11f8036c 100644
->> --- a/docs/devel/tcg-plugins.rst
->> +++ b/docs/devel/tcg-plugins.rst
->> @@ -584,6 +584,14 @@ The plugin has a number of arguments, all of them are optional:
->>     configuration arguments implies ``l2=on``.
->>     (default: N = 2097152 (2MB), B = 64, A = 16)
->>   
->> +- contrib/plugins/cc.cc
->> +
->> +cc plugin demonstrates how to write a plugin in C++. It simply outputs
->> +"hello, world" to the plugin log::
->> +
->> +  $ qemu-system-arm $(QEMU_ARGS) \
->> +    -plugin ./contrib/plugins/libcc.so -d plugin
->> +
-> 
-> I'm going to assume this is useful because you have some out of tree C++
-> plugins? I'd drop the last two patches for now until there is a slightly
-> more compelling use case.
+Make qemu-plugin.h consumable for C++ platform.
 
-The out-of-tree plugin is mentioned in the cover letter and available at:
-https://github.com/shioya-lab/sniper/tree/akihikodaki/bb/frontend/qemu-frontend
+Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+---
+ include/qemu/qemu-plugin.h | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-This plugin emits a trace of execution for use in Sniper simulator. I 
-believe it's useful for other people doing microarchitecture research 
-since processor simulation infrastructure is often written in C++.
+diff --git a/include/qemu/qemu-plugin.h b/include/qemu/qemu-plugin.h
+index 214b12bfd6..8637e3d8cf 100644
+--- a/include/qemu/qemu-plugin.h
++++ b/include/qemu/qemu-plugin.h
+@@ -16,6 +16,8 @@
+ #include <stdbool.h>
+ #include <stddef.h>
+ 
++G_BEGIN_DECLS
++
+ /*
+  * For best performance, build the plugin with -fvisibility=hidden so that
+  * QEMU_PLUGIN_LOCAL is implicit. Then, just mark qemu_plugin_install with
+@@ -723,4 +725,6 @@ qemu_plugin_get_register_files(unsigned int vcpu_index, int *size);
+  */
+ int qemu_plugin_read_register(GByteArray *buf, int reg);
+ 
++G_END_DECLS
++
+ #endif /* QEMU_QEMU_PLUGIN_H */
+-- 
+2.41.0
 
-> 
-> The C++ compiler detection moved into meson in b485458e00 (configure,
-> meson: move C++ compiler detection to meson.build) so I don't think
-> there is currently a compelling reason to bring this back into
-> configure.
-> 
-
-It is necessary because TCG tests use Makefile and config-host.mak is 
-emitted by configure. We can remove C++ detection from configure when 
-TCG tests or the config-host.mak generation migrate to Meson.
 
