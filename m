@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C969C001B0
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Aug 2023 13:49:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87514C001B0
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Aug 2023 13:50:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qWGo7-0003Km-Pw; Wed, 16 Aug 2023 09:43:31 -0400
+	id 1qWGp7-00053r-Vf; Wed, 16 Aug 2023 09:44:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qWGo5-0003Hx-HX
- for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 09:43:29 -0400
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
+ id 1qWGol-0004YU-NN
+ for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 09:44:13 -0400
+Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qWGo3-0002F0-7O
- for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 09:43:29 -0400
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-68866e64bceso1396746b3a.3
- for <qemu-riscv@nongnu.org>; Wed, 16 Aug 2023 06:43:26 -0700 (PDT)
+ id 1qWGoh-0002Ob-KR
+ for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 09:44:11 -0400
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-68706b39c4cso4750812b3a.2
+ for <qemu-riscv@nongnu.org>; Wed, 16 Aug 2023 06:44:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1692193406; x=1692798206;
+ d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1692193443; x=1692798243;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0qn3f+dV41vakExUKDLgOPwYM5dZMF/vR3FB6T+MC1c=;
- b=s6ES09GXwAd0fqEkEwKu0lX63fhQI9WnvlcsRwm0KOPq4BMPK6+3GGxt2sOrfc4bSN
- mh8Cjgz0SrBGhwDqgfkI1u2h8D8Cb7dV9icQwv+Wn+ALCp/vahe1MQtYDoj1yjZHz2eB
- JjXvhnIpMbDGDBLMdMedb+Ydbo4nYqCHD6/QnHJHkiP/LEe1/gjMx8Nn09EOvTAJnHLw
- h482DyCdO4NgtXe1F/oW7WXnZkREyrsCe9ag2suMUeI8+Dl4oWCCJYKZN8yTPwfSre0w
- 6T5217hBqZRuvb/V8SgnX6x25yaL1Y+yiXUbdcRmH4MvB0bQkGSsXcy8opHyDsVLDA8P
- IsAA==
+ bh=kNR+2DDMQySc8psqEDhnZbBav2KTV36MZCBGyLQQO2o=;
+ b=apjasUECty4E3j3H1yWaQ2ypXdq1EM5noHQtAyFyRpHIcMP4TRKtUC/1XY60F4FFa7
+ /o/R6gD8qU7/9t9bsvMOchXDJ+zatKQFeUkQ2JrbEtYZ8EnRuByS4QhQGc+MhgCAbvbW
+ 2aupMn0dvFec+wHuaetOnIrdn2MNs1wS95We/4KDB0fd/agMWEv2ycQezGVEsU5jHJqs
+ Iq11kjqZdGQIJ2o+eF20sztGK+sGIKMuRI44JTpYajjibD2B8MrU75pdizStXG9Gw39g
+ 8T+pAtqe+RFyGH9CwpPBTNRF7YzL8HM58tluFUbxEWhRnQFIlcoa4S7xrYd6tdKhhpQc
+ 0XFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692193406; x=1692798206;
+ d=1e100.net; s=20221208; t=1692193443; x=1692798243;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0qn3f+dV41vakExUKDLgOPwYM5dZMF/vR3FB6T+MC1c=;
- b=jVMv2Se8ERF8d+4zvog5JJaQoYjsLYoHch2P7Z/ZuWDEtr5UlGzC9PQhUUVcgEsPd8
- ezYu5kqHk4zhA6jBHHkSY8yLBPv2XNBL3UpTeYFIUQEaI8H5I9H8lAdA92Avar2Lesjj
- uvR/RMbm32gf8cU5IC9ulGlQxwv+bhrSdmDC1bloVOovq538s/FvThqtSv+5bDkja6Mg
- ppcPzGRFriWvJRAkcPH5Bo8yAhYIS+ptP1t0LgsqlU+AYMtqYVe4NU8brfC3A36IqJy6
- X2g9G410eoZOIhq3s/LIj76AevRQsz6+N3ZBnzKHDI69chZTZjHeNxENJDPUtuoSPvKr
- i6yg==
-X-Gm-Message-State: AOJu0Yw84qINIB2kuETv2DbCaLi9kZOifYe9H+lqpXy+EwksrmjFrb1a
- 4I7ne23kphl2afP/YPOy3vSung==
-X-Google-Smtp-Source: AGHT+IEE6zg1iisf/BY2GI7OfzNzFpNOMNhKi2CMjEzPXIMNiLOzvHWmfvFey3Dqe/KWNFVdtTdkKg==
-X-Received: by 2002:a05:6a20:3d07:b0:13b:7848:9515 with SMTP id
- y7-20020a056a203d0700b0013b78489515mr2597217pzi.13.1692193405971; 
- Wed, 16 Aug 2023 06:43:25 -0700 (PDT)
+ bh=kNR+2DDMQySc8psqEDhnZbBav2KTV36MZCBGyLQQO2o=;
+ b=AhM4FJIvfgfonnScWs7AhSyHApMtrqAk1RFlMOuzBwHgX3UIKOBv2POHA+m7Ms9Feg
+ qpu8dF/P0oEVaktEuvGY8UApN1crzmFsGvys3Ib6aXBD70tAyaviBHtkwOFayuvvDZjy
+ Ans729C0CnDY3zsx/b0poCqKj69E0dc/JMvmmnKu3jirwsk5KhADuYr02tWJBXyMscQ+
+ 0HFHCJ+blShAvBfBbvTvTcfZLuFvcis2C4ROk2cVr6++KoIJh4sA5ZwkeU+zyRT8RWAt
+ l+gLq1NxzzfLZkfueUC5/HALkSF3i2hInT32Vd24RqHEBZswIzspf9WEcrPWvQjeAZjf
+ 4ixg==
+X-Gm-Message-State: AOJu0Yzgfj8lLPNQ2cvowcc48pCqPxMh34TKlCTFt1V2GOnK0ehAKOlI
+ BtOjAzrXudKBqiH9Ja1/GzNlRA==
+X-Google-Smtp-Source: AGHT+IHrpTXk7bmJEfe0yYLFA3VDDTCbJD8Nw5TkYQRy67Dy8S3RZxehlcveaw6g63mji3enpJP6Cg==
+X-Received: by 2002:a05:6a00:8d1:b0:67a:8f2a:2cb2 with SMTP id
+ s17-20020a056a0008d100b0067a8f2a2cb2mr1985856pfu.20.1692193443324; 
+ Wed, 16 Aug 2023 06:44:03 -0700 (PDT)
 Received: from alarm.flets-east.jp ([2400:4050:a840:1e00:78d2:b862:10a7:d486])
  by smtp.gmail.com with ESMTPSA id
- k3-20020a637b43000000b0056601f864aesm928355pgn.2.2023.08.16.06.43.16
+ k3-20020a637b43000000b0056601f864aesm928355pgn.2.2023.08.16.06.43.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Aug 2023 06:43:25 -0700 (PDT)
+ Wed, 16 Aug 2023 06:44:03 -0700 (PDT)
 From: Akihiko Odaki <akihiko.odaki@daynix.com>
 To: 
 Cc: Paolo Bonzini <pbonzini@redhat.com>,
@@ -98,22 +98,22 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
  qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, Anton Kochkov <anton.kochkov@proton.me>,
  Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH v3 21/25] cpu: Call plugin hooks only when ready
-Date: Wed, 16 Aug 2023 22:39:31 +0900
-Message-ID: <20230816133938.18310-22-akihiko.odaki@daynix.com>
+Subject: [PATCH v3 25/25] contrib/plugins: Add cc plugin
+Date: Wed, 16 Aug 2023 22:39:35 +0900
+Message-ID: <20230816133938.18310-26-akihiko.odaki@daynix.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230816133938.18310-1-akihiko.odaki@daynix.com>
 References: <20230816133938.18310-1-akihiko.odaki@daynix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::432;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x432.google.com
+Received-SPF: none client-ip=2607:f8b0:4864:20::435;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x435.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=unavailable autolearn_force=no
+ SPF_NONE=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -129,81 +129,131 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The initialization and exit hooks will not affect the state of vCPU,
-but they may depend on the state of vCPU. Therefore, it's better to
-call plugin hooks after the vCPU state is fully initialized and before
-it gets uninitialized.
+This demonstrates how to write a plugin in C++.
 
 Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 ---
- cpu.c                | 11 -----------
- hw/core/cpu-common.c | 10 ++++++++++
- 2 files changed, 10 insertions(+), 11 deletions(-)
+ docs/devel/tcg-plugins.rst |  8 ++++++++
+ configure                  | 15 ++++++++++++---
+ contrib/plugins/Makefile   |  5 +++++
+ contrib/plugins/cc.cc      | 17 +++++++++++++++++
+ tests/tcg/Makefile.target  |  3 +++
+ 5 files changed, 45 insertions(+), 3 deletions(-)
+ create mode 100644 contrib/plugins/cc.cc
 
-diff --git a/cpu.c b/cpu.c
-index 1c948d1161..2552c85249 100644
---- a/cpu.c
-+++ b/cpu.c
-@@ -42,7 +42,6 @@
- #include "hw/core/accel-cpu.h"
- #include "trace/trace-root.h"
- #include "qemu/accel.h"
--#include "qemu/plugin.h"
+diff --git a/docs/devel/tcg-plugins.rst b/docs/devel/tcg-plugins.rst
+index c9f8b27590..0a11f8036c 100644
+--- a/docs/devel/tcg-plugins.rst
++++ b/docs/devel/tcg-plugins.rst
+@@ -584,6 +584,14 @@ The plugin has a number of arguments, all of them are optional:
+   configuration arguments implies ``l2=on``.
+   (default: N = 2097152 (2MB), B = 64, A = 16)
  
- uintptr_t qemu_host_page_size;
- intptr_t qemu_host_page_mask;
-@@ -148,11 +147,6 @@ void cpu_exec_realizefn(CPUState *cpu, Error **errp)
-     /* Wait until cpu initialization complete before exposing cpu. */
-     cpu_list_add(cpu);
- 
--    /* Plugin initialization must wait until cpu_index assigned. */
--    if (tcg_enabled()) {
--        qemu_plugin_vcpu_init_hook(cpu);
--    }
--
- #ifdef CONFIG_USER_ONLY
-     assert(qdev_get_vmsd(DEVICE(cpu)) == NULL ||
-            qdev_get_vmsd(DEVICE(cpu))->unmigratable);
-@@ -179,11 +173,6 @@ void cpu_exec_unrealizefn(CPUState *cpu)
-     }
- #endif
- 
--    /* Call the plugin hook before clearing cpu->cpu_index in cpu_list_remove */
--    if (tcg_enabled()) {
--        qemu_plugin_vcpu_exit_hook(cpu);
--    }
--
-     cpu_list_remove(cpu);
-     /*
-      * Now that the vCPU has been removed from the RCU list, we can call
-diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
-index 549f52f46f..e06a70007a 100644
---- a/hw/core/cpu-common.c
-+++ b/hw/core/cpu-common.c
-@@ -211,6 +211,11 @@ static void cpu_common_realizefn(DeviceState *dev, Error **errp)
-         cpu_resume(cpu);
-     }
- 
-+    /* Plugin initialization must wait until the cpu is fully realized. */
-+    if (tcg_enabled()) {
-+        qemu_plugin_vcpu_init_hook(cpu);
-+    }
++- contrib/plugins/cc.cc
 +
-     /* NOTE: latest generic point where the cpu is fully realized */
- }
- 
-@@ -218,6 +223,11 @@ static void cpu_common_unrealizefn(DeviceState *dev)
- {
-     CPUState *cpu = CPU(dev);
- 
-+    /* Call the plugin hook before clearing the cpu is fully unrealized */
-+    if (tcg_enabled()) {
-+        qemu_plugin_vcpu_exit_hook(cpu);
-+    }
++cc plugin demonstrates how to write a plugin in C++. It simply outputs
++"hello, world" to the plugin log::
 +
-     /* NOTE: latest generic point before the cpu is fully unrealized */
-     cpu_exec_unrealizefn(cpu);
- }
++  $ qemu-system-arm $(QEMU_ARGS) \
++    -plugin ./contrib/plugins/libcc.so -d plugin
++
+ API
+ ---
+ 
+diff --git a/configure b/configure
+index 26ec5e4f54..0065b0dfe0 100755
+--- a/configure
++++ b/configure
+@@ -293,10 +293,18 @@ else
+   cc="${CC-${cross_prefix}gcc}"
+ fi
+ 
+-if test -z "${CXX}${cross_prefix}"; then
+-  cxx="c++"
++if test -n "${CXX+x}"; then
++  cxx="$CXX"
+ else
+-  cxx="${CXX-${cross_prefix}g++}"
++  if test -n "${cross_prefix}"; then
++    cxx="${cross_prefix}g++"
++  else
++    cxx="c++"
++  fi
++
++  if ! has "$cxx"; then
++    cxx=
++  fi
+ fi
+ 
+ # Preferred ObjC compiler:
+@@ -1702,6 +1710,7 @@ echo "MESON=$meson" >> $config_host_mak
+ echo "NINJA=$ninja" >> $config_host_mak
+ echo "PKG_CONFIG=${pkg_config}" >> $config_host_mak
+ echo "CC=$cc" >> $config_host_mak
++echo "CXX=$cxx" >> $config_host_mak
+ echo "EXESUF=$EXESUF" >> $config_host_mak
+ 
+ # use included Linux headers
+diff --git a/contrib/plugins/Makefile b/contrib/plugins/Makefile
+index b2b9db9f51..93d86b3d07 100644
+--- a/contrib/plugins/Makefile
++++ b/contrib/plugins/Makefile
+@@ -21,6 +21,9 @@ NAMES += lockstep
+ NAMES += hwprofile
+ NAMES += cache
+ NAMES += drcov
++ifneq ($(CXX),)
++NAMES += cc
++endif
+ 
+ SONAMES := $(addsuffix .so,$(addprefix lib,$(NAMES)))
+ 
+@@ -31,6 +34,8 @@ CFLAGS += -fPIC -Wall
+ CFLAGS += $(if $(CONFIG_DEBUG_TCG), -ggdb -O0)
+ CFLAGS += -I$(SRC_PATH)/include/qemu
+ 
++CXXFLAGS := $(CFLAGS)
++
+ all: $(SONAMES)
+ 
+ %.o: %.c
+diff --git a/contrib/plugins/cc.cc b/contrib/plugins/cc.cc
+new file mode 100644
+index 0000000000..83a5528db0
+--- /dev/null
++++ b/contrib/plugins/cc.cc
+@@ -0,0 +1,17 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++
++#include <qemu-plugin.h>
++
++extern "C" {
++
++QEMU_PLUGIN_EXPORT int qemu_plugin_version = QEMU_PLUGIN_VERSION;
++
++QEMU_PLUGIN_EXPORT int qemu_plugin_install(qemu_plugin_id_t id,
++                                           const qemu_info_t *info, int argc,
++                                           char **argv)
++{
++    qemu_plugin_outs("hello, world\n");
++    return 0;
++}
++
++};
+diff --git a/tests/tcg/Makefile.target b/tests/tcg/Makefile.target
+index 462289f47c..3d7837d3b8 100644
+--- a/tests/tcg/Makefile.target
++++ b/tests/tcg/Makefile.target
+@@ -149,6 +149,9 @@ PLUGIN_SRC=$(SRC_PATH)/tests/plugin
+ PLUGIN_LIB=../../plugin
+ VPATH+=$(PLUGIN_LIB)
+ PLUGINS=$(patsubst %.c, lib%.so, $(notdir $(wildcard $(PLUGIN_SRC)/*.c)))
++ifneq ($(CXX),)
++PLUGINS+=$(patsubst %.cc, lib%.so, $(notdir $(wildcard $(PLUGIN_SRC)/*.cc)))
++endif
+ 
+ # We need to ensure expand the run-plugin-TEST-with-PLUGIN
+ # pre-requistes manually here as we can't use stems to handle it. We
 -- 
 2.41.0
 
