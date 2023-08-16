@@ -4,116 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F61EC001E0
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Aug 2023 15:04:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6AB5C04E69
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Aug 2023 15:04:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qWHuj-0001HS-8o; Wed, 16 Aug 2023 10:54:25 -0400
+	id 1qWI4V-0004WK-Ki; Wed, 16 Aug 2023 11:04:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qWHui-00017I-CM
- for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 10:54:24 -0400
-Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1qWI49-0003tK-Bv
+ for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 11:04:10 -0400
+Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qWHuf-0001k5-Oo
- for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 10:54:24 -0400
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-68879c4cadeso886188b3a.2
- for <qemu-riscv@nongnu.org>; Wed, 16 Aug 2023 07:54:21 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1qWI46-0004He-UW
+ for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 11:04:09 -0400
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-31792ac0fefso5642943f8f.2
+ for <qemu-riscv@nongnu.org>; Wed, 16 Aug 2023 08:04:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1692197660; x=1692802460;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1692198245; x=1692803045;
+ h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
+ :subject:cc:to:from:user-agent:references:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9A/irVSRNTDRyAMd8tbb4ofq2py6oa1gC/mUH/zNkC4=;
- b=wdJ1GcycS0B7jPU3gptHjauMo+4W/Tj0chrY5DQgRnWaQP/mpoIErYTtDcWR7zPG55
- lMacHdkbqypLFQlpNKiIlmr5rMH8VSpV+d8XFGR7O3AV7dWR3gt3R1ZWIwZRwTaMzmHH
- WkF+5rUDNfOPux13mqNhby8eczHgGNIobxD6//gyMxqPdrC0c32JOwXPfd3S4CQ84Vwo
- 9edmmZ7IPWCGL8cRgoBFir/mrIdkAG4IHp3ZVZ0KZebHw/lwM6Bf38a43kDXV69EHZLe
- J1Tn5Y5htppdpsvPlB8dv8WYHKK0X55V1OsvkoTem1uC8mBMpvNQIf+OUJKgPfCoWckF
- Ropg==
+ bh=IO/QbhRZIJZJH3eGs447LJxoGfg7y0DXVsozsZDaaec=;
+ b=QiGxl7fPJ7AJ7ZgBRQ56bouqN5IKLHjgVLgI7o3kCInIqfJtAs05UdGorB444VFEAC
+ oNM3T485msp9EDsJxOi5+Ly+Og5TJkO63/1me5Pui21Nql7zrnaH8hjybwjp71RuLMAG
+ kExgMLdq36ejwBTgL2QADaQiO7K6WhIPrQizzkoc7ZS0z0VdWMRDpNenSmtXqAvL9JiE
+ YrpoIIUFhSSOMN1XD+QoD9vij9d8JQlKmpaPT5MQIzAFfEJCSVyBZ5YbK9RTCavA3ttc
+ Vtg/UHKU0TBVZYDnUd3b9e7E+4GJ2VprEiGZL90HwW7h1dpjrZdCW9BQxZd9jALD6YcX
+ VZHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692197660; x=1692802460;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=9A/irVSRNTDRyAMd8tbb4ofq2py6oa1gC/mUH/zNkC4=;
- b=AP7749kVVozjy9WO0xEVmhJx7iGwgK0trgNG217pw6JtDLYqYH88Z9I8DglsJxx8Yq
- A4DRj8hsWUl/YRhPPjae/REsHrGFMx3zwM8R4AvXqz/N0tJ65aO4HM4SiTKvzwP5zBdj
- +7JAwWg8nKcIfCpbVbuVqzRty3uQWbGJVWiTyTVqmEj01M4g3EBjtrs5kjzQCWtjs2H/
- VCNpQ++6YaWi0w8DE84bYjX19+EfM66fP2bQRrTI7QROs1B+U95cT4ltUY9i3rb7MAvG
- bx4Fq1uUs/J4bX7P1Z2DaDc1LLr0Jrs506mqojzKk5y004pHFiHrwwX0s3WuzLtSShLY
- RFEg==
-X-Gm-Message-State: AOJu0YynX1rxho1fgXA1GcACZFySTLj0329kIXJyh6QCvizJmh9KtxN/
- Kt/PfIlzQOWTEidDthcqmzBbIA==
-X-Google-Smtp-Source: AGHT+IF1l1tQQLztLCAqEGo4eDgTvVDkLuOEZ5c9+BW08dC/LndNeQ5KniawAZF+FOrefPAqPivAXA==
-X-Received: by 2002:a05:6a21:66c5:b0:133:e3e3:dc07 with SMTP id
- ze5-20020a056a2166c500b00133e3e3dc07mr2397513pzb.49.1692197660639; 
- Wed, 16 Aug 2023 07:54:20 -0700 (PDT)
-Received: from alarm.flets-east.jp ([2400:4050:a840:1e00:78d2:b862:10a7:d486])
+ d=1e100.net; s=20221208; t=1692198245; x=1692803045;
+ h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
+ :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=IO/QbhRZIJZJH3eGs447LJxoGfg7y0DXVsozsZDaaec=;
+ b=d2Q+09vzxfOFBis8RQjXP4RTTFZ8DqyJFHJ7jS2VEnSBM4VqjLySH7BInFF/kwOYLZ
+ MKsl1DL3/+kl49yIUMoHswHKrKky6IYHrzA0zamcYf2uiL5ERlNoSY74S5mV7/EHiWsy
+ j8IJwgNGzmgmYzl70WXYkAq4z69o2B0bageKdzdYOFpGqqPY+ntXBKzMYYdVP95qJONe
+ oI60MfNKm+PyB+xbL98gV8MJRzHRH3W2Lx3yOo/PgEJItbGsE1IGmzr5xXE2aaOuDJhH
+ KEM+JPYIdFUvH76sdy9lFxue47lKSYXZZX2C/co3XDnDSnMxMUcwF3BjyWYXtmi72yIo
+ uh+Q==
+X-Gm-Message-State: AOJu0YxtddraKWsFckbQZdPvxktpQk2YbMkRs4v7Bp6r3461xKmMoLQl
+ 8VLXs0wRGutmUnvJNC7oE0/B/A==
+X-Google-Smtp-Source: AGHT+IGfzZUTn0ZVCpw7dP0DounRrSdvJqkh7wjok99nneDrcctuNpkSuMX+ORLHdRdIAUWbbh6LPQ==
+X-Received: by 2002:a5d:4566:0:b0:317:6ef1:7939 with SMTP id
+ a6-20020a5d4566000000b003176ef17939mr2007688wrc.23.1692198245189; 
+ Wed, 16 Aug 2023 08:04:05 -0700 (PDT)
+Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- fk26-20020a056a003a9a00b0068892c40253sm1156568pfb.216.2023.08.16.07.54.11
+ t1-20020a5d5341000000b0031763fd36c4sm21636148wrv.104.2023.08.16.08.04.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Aug 2023 07:54:20 -0700 (PDT)
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-To: 
-Cc: Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Thomas Huth <thuth@redhat.com>, Alexandre Iooss <erdnaxe@crans.org>,
- Mahmoud Mandour <ma.mandourr@gmail.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Yanan Wang <wangyanan55@huawei.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
- John Snow <jsnow@redhat.com>, Cleber Rosa <crosa@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Michael Rolnik <mrolnik@gmail.com>,
- "Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
- Brian Cain <bcain@quicinc.com>, Song Gao <gaosong@loongson.cn>,
- Xiaojuan Yang <yangxiaojuan@loongson.cn>,
- Laurent Vivier <laurent@vivier.eu>, Aurelien Jarno <aurelien@aurel32.net>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Chris Wulff <crwulff@gmail.com>, Marek Vasut <marex@denx.de>,
- Stafford Horne <shorne@gmail.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- David Gibson <david@gibson.dropbear.id.au>, Greg Kurz <groug@kaod.org>,
- Nicholas Piggin <npiggin@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Max Filippov <jcmvbkbc@gmail.com>, qemu-devel@nongnu.org,
- qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- qemu-s390x@nongnu.org, Anton Kochkov <anton.kochkov@proton.me>,
- Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH v4 13/25] hw/core/cpu: Return static value with gdb_arch_name()
-Date: Wed, 16 Aug 2023 23:51:34 +0900
-Message-ID: <20230816145155.21049-14-akihiko.odaki@daynix.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230816145155.21049-1-akihiko.odaki@daynix.com>
-References: <20230816145155.21049-1-akihiko.odaki@daynix.com>
+ Wed, 16 Aug 2023 08:04:04 -0700 (PDT)
+Received: from zen (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id 6E4681FFBB;
+ Wed, 16 Aug 2023 16:04:04 +0100 (BST)
+References: <20230731084354.115015-1-akihiko.odaki@daynix.com>
+ <20230731084354.115015-16-akihiko.odaki@daynix.com>
+ <87350lr7p8.fsf@linaro.org>
+ <f41aae27-8538-46b5-93fa-67de41602077@daynix.com>
+User-agent: mu4e 1.11.14; emacs 29.1.50
+From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>, Akihiko Odaki
+ <akihiko.odaki@daynix.com>
+Cc: Paolo Bonzini <pbonzini@redhat.com>, Thomas Huth <thuth@redhat.com>,
+ Alexandre Iooss <erdnaxe@crans.org>, Mahmoud Mandour
+ <ma.mandourr@gmail.com>, Eduardo Habkost <eduardo@habkost.net>, Marcel
+ Apfelbaum <marcel.apfelbaum@gmail.com>, Philippe =?utf-8?Q?Mathieu-Daud?=
+ =?utf-8?Q?=C3=A9?=
+ <philmd@linaro.org>, Yanan Wang <wangyanan55@huawei.com>, Richard
+ Henderson <richard.henderson@linaro.org>, =?utf-8?Q?Marc-Andr=C3=A9?=
+ Lureau <marcandre.lureau@redhat.com>, =?utf-8?Q?Daniel_P=2E_Berrang=C3=A9?=
+ <berrange@redhat.com>,
+ John Snow <jsnow@redhat.com>, Cleber Rosa <crosa@redhat.com>, Peter
+ Maydell <peter.maydell@linaro.org>, Michael Rolnik <mrolnik@gmail.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Brian Cain
+ <bcain@quicinc.com>, Song Gao <gaosong@loongson.cn>, Xiaojuan Yang
+ <yangxiaojuan@loongson.cn>, Laurent Vivier <laurent@vivier.eu>, Aurelien
+ Jarno <aurelien@aurel32.net>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>, Chris Wulff
+ <crwulff@gmail.com>, Marek Vasut <marex@denx.de>, Stafford Horne
+ <shorne@gmail.com>, Daniel Henrique Barboza <danielhb413@gmail.com>,
+ =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@kaod.org>, David Gibson
+ <david@gibson.dropbear.id.au>, Greg Kurz <groug@kaod.org>, Nicholas Piggin
+ <npiggin@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
+ <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>, Weiwei Li
+ <liweiwei@iscas.ac.cn>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>, David Hildenbrand
+ <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>, Mark Cave-Ayland
+ <mark.cave-ayland@ilande.co.uk>, Artyom Tarasenko <atar4qemu@gmail.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, Max Filippov
+ <jcmvbkbc@gmail.com>, qemu-devel@nongnu.org, qemu-arm@nongnu.org,
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
+Subject: Re: [RFC PATCH 15/24] target/arm: Fill new members of GDBFeature
+Date: Wed, 16 Aug 2023 16:03:31 +0100
+In-reply-to: <f41aae27-8538-46b5-93fa-67de41602077@daynix.com>
+Message-ID: <87r0o3ni57.fsf@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::435;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x435.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::435;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x435.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -129,224 +129,61 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-All implementations of gdb_arch_name() returns dynamic duplicates of
-static strings. It's also unlikely that there will be an implementation
-of gdb_arch_name() that returns a truly dynamic value due to the nature
-of the function returning a well-known identifiers. Qualify the value
-gdb_arch_name() with const and make all of its implementations return
-static strings.
 
-Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
----
- include/hw/core/cpu.h  | 2 +-
- target/ppc/internal.h  | 2 +-
- gdbstub/gdbstub.c      | 4 +---
- target/arm/cpu.c       | 6 +++---
- target/arm/cpu64.c     | 4 ++--
- target/i386/cpu.c      | 6 +++---
- target/loongarch/cpu.c | 4 ++--
- target/ppc/gdbstub.c   | 6 +++---
- target/riscv/cpu.c     | 6 +++---
- target/s390x/cpu.c     | 4 ++--
- target/tricore/cpu.c   | 4 ++--
- 11 files changed, 23 insertions(+), 25 deletions(-)
+Akihiko Odaki <akihiko.odaki@daynix.com> writes:
 
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 84219c1885..09f1aca624 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -165,7 +165,7 @@ struct CPUClass {
-     vaddr (*gdb_adjust_breakpoint)(CPUState *cpu, vaddr addr);
- 
-     const GDBFeature *gdb_core_feature;
--    gchar * (*gdb_arch_name)(CPUState *cpu);
-+    const gchar * (*gdb_arch_name)(CPUState *cpu);
-     const char * (*gdb_get_dynamic_xml)(CPUState *cpu, const char *xmlname);
- 
-     void (*disas_set_info)(CPUState *cpu, disassemble_info *info);
-diff --git a/target/ppc/internal.h b/target/ppc/internal.h
-index 57acb3212c..974b37aa60 100644
---- a/target/ppc/internal.h
-+++ b/target/ppc/internal.h
-@@ -221,7 +221,7 @@ void destroy_ppc_opcodes(PowerPCCPU *cpu);
- 
- /* gdbstub.c */
- void ppc_gdb_init(CPUState *cs, PowerPCCPUClass *ppc);
--gchar *ppc_gdb_arch_name(CPUState *cs);
-+const gchar *ppc_gdb_arch_name(CPUState *cs);
- 
- /**
-  * prot_for_access_type:
-diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-index 7a4775633e..c2ce970c98 100644
---- a/gdbstub/gdbstub.c
-+++ b/gdbstub/gdbstub.c
-@@ -378,11 +378,9 @@ static const char *get_feature_xml(const char *p, const char **newp,
-                     "<!DOCTYPE target SYSTEM \"gdb-target.dtd\">"
-                     "<target>");
-             if (cc->gdb_arch_name) {
--                gchar *arch = cc->gdb_arch_name(cpu);
-                 pstrcat(buf, buf_sz, "<architecture>");
--                pstrcat(buf, buf_sz, arch);
-+                pstrcat(buf, buf_sz, cc->gdb_arch_name(cpu));
-                 pstrcat(buf, buf_sz, "</architecture>");
--                g_free(arch);
-             }
-             pstrcat(buf, buf_sz, "<xi:include href=\"");
-             pstrcat(buf, buf_sz, cc->gdb_core_feature->xmlname);
-diff --git a/target/arm/cpu.c b/target/arm/cpu.c
-index a206ab6b1b..5f07133419 100644
---- a/target/arm/cpu.c
-+++ b/target/arm/cpu.c
-@@ -2281,15 +2281,15 @@ static Property arm_cpu_properties[] = {
-     DEFINE_PROP_END_OF_LIST()
- };
- 
--static gchar *arm_gdb_arch_name(CPUState *cs)
-+static const gchar *arm_gdb_arch_name(CPUState *cs)
- {
-     ARMCPU *cpu = ARM_CPU(cs);
-     CPUARMState *env = &cpu->env;
- 
-     if (arm_feature(env, ARM_FEATURE_IWMMXT)) {
--        return g_strdup("iwmmxt");
-+        return "iwmmxt";
-     }
--    return g_strdup("arm");
-+    return "arm";
- }
- 
- #ifndef CONFIG_USER_ONLY
-diff --git a/target/arm/cpu64.c b/target/arm/cpu64.c
-index 9c2a226159..65f84bfb18 100644
---- a/target/arm/cpu64.c
-+++ b/target/arm/cpu64.c
-@@ -743,9 +743,9 @@ static void aarch64_cpu_finalizefn(Object *obj)
- {
- }
- 
--static gchar *aarch64_gdb_arch_name(CPUState *cs)
-+static const gchar *aarch64_gdb_arch_name(CPUState *cs)
- {
--    return g_strdup("aarch64");
-+    return "aarch64";
- }
- 
- static void aarch64_cpu_class_init(ObjectClass *oc, void *data)
-diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index 069410985f..c1a7667f4a 100644
---- a/target/i386/cpu.c
-+++ b/target/i386/cpu.c
-@@ -5910,12 +5910,12 @@ static void x86_cpu_load_model(X86CPU *cpu, X86CPUModel *model)
-     memset(&env->user_features, 0, sizeof(env->user_features));
- }
- 
--static gchar *x86_gdb_arch_name(CPUState *cs)
-+static const gchar *x86_gdb_arch_name(CPUState *cs)
- {
- #ifdef TARGET_X86_64
--    return g_strdup("i386:x86-64");
-+    return "i386:x86-64";
- #else
--    return g_strdup("i386");
-+    return "i386";
- #endif
- }
- 
-diff --git a/target/loongarch/cpu.c b/target/loongarch/cpu.c
-index b204cb279d..6c76d14e43 100644
---- a/target/loongarch/cpu.c
-+++ b/target/loongarch/cpu.c
-@@ -692,9 +692,9 @@ static const struct SysemuCPUOps loongarch_sysemu_ops = {
- };
- #endif
- 
--static gchar *loongarch_gdb_arch_name(CPUState *cs)
-+static const gchar *loongarch_gdb_arch_name(CPUState *cs)
- {
--    return g_strdup("loongarch64");
-+    return "loongarch64";
- }
- 
- static void loongarch_cpu_class_init(ObjectClass *c, void *data)
-diff --git a/target/ppc/gdbstub.c b/target/ppc/gdbstub.c
-index 70cac919e0..dbdee7d56e 100644
---- a/target/ppc/gdbstub.c
-+++ b/target/ppc/gdbstub.c
-@@ -572,12 +572,12 @@ static int gdb_set_vsx_reg(CPUPPCState *env, uint8_t *mem_buf, int n)
-     return 0;
- }
- 
--gchar *ppc_gdb_arch_name(CPUState *cs)
-+const gchar *ppc_gdb_arch_name(CPUState *cs)
- {
- #if defined(TARGET_PPC64)
--    return g_strdup("powerpc:common64");
-+    return "powerpc:common64";
- #else
--    return g_strdup("powerpc:common");
-+    return "powerpc:common";
- #endif
- }
- 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index ceca40cdd9..86a477bfc0 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1941,17 +1941,17 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_END_OF_LIST(),
- };
- 
--static gchar *riscv_gdb_arch_name(CPUState *cs)
-+static const gchar *riscv_gdb_arch_name(CPUState *cs)
- {
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     CPURISCVState *env = &cpu->env;
- 
-     switch (riscv_cpu_mxl(env)) {
-     case MXL_RV32:
--        return g_strdup("riscv:rv32");
-+        return "riscv:rv32";
-     case MXL_RV64:
-     case MXL_RV128:
--        return g_strdup("riscv:rv64");
-+        return "riscv:rv64";
-     default:
-         g_assert_not_reached();
-     }
-diff --git a/target/s390x/cpu.c b/target/s390x/cpu.c
-index 2a2ff8cbdc..ca356c2b86 100644
---- a/target/s390x/cpu.c
-+++ b/target/s390x/cpu.c
-@@ -284,9 +284,9 @@ static void s390_cpu_initfn(Object *obj)
- #endif
- }
- 
--static gchar *s390_gdb_arch_name(CPUState *cs)
-+static const gchar *s390_gdb_arch_name(CPUState *cs)
- {
--    return g_strdup("s390:64-bit");
-+    return "s390:64-bit";
- }
- 
- static Property s390x_cpu_properties[] = {
-diff --git a/target/tricore/cpu.c b/target/tricore/cpu.c
-index 133a9ac70e..44e3ba6f0e 100644
---- a/target/tricore/cpu.c
-+++ b/target/tricore/cpu.c
-@@ -29,9 +29,9 @@ static inline void set_feature(CPUTriCoreState *env, int feature)
-     env->features |= 1ULL << feature;
- }
- 
--static gchar *tricore_gdb_arch_name(CPUState *cs)
-+static const gchar *tricore_gdb_arch_name(CPUState *cs)
- {
--    return g_strdup("tricore");
-+    return "tricore";
- }
- 
- static void tricore_cpu_set_pc(CPUState *cs, vaddr value)
--- 
-2.41.0
+> On 2023/08/14 23:56, Alex Benn=C3=A9e wrote:
+>> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
+>>=20
+>>> These members will be used to help plugins to identify registers.
+>>>
+>>> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+>>> ---
+>>>   target/arm/gdbstub.c   | 46 +++++++++++++++++++++++++++---------------
+>>>   target/arm/gdbstub64.c | 42 +++++++++++++++++++++++++-------------
+>>>   2 files changed, 58 insertions(+), 30 deletions(-)
+>>>
+>>> diff --git a/target/arm/gdbstub.c b/target/arm/gdbstub.c
+>>> index 100a6eed15..56d24028f6 100644
+>>> --- a/target/arm/gdbstub.c
+>>> +++ b/target/arm/gdbstub.c
+>>> @@ -270,6 +270,7 @@ static void arm_gen_one_feature_sysreg(GString *s,
+>>>       g_string_append_printf(s, " regnum=3D\"%d\"", regnum);
+>>>       g_string_append_printf(s, " group=3D\"cp_regs\"/>");
+>>>       dyn_feature->data.cpregs.keys[dyn_feature->desc.num_regs] =3D ri_=
+key;
+>>> +    ((const char **)dyn_feature->desc.regs)[dyn_feature->desc.num_regs=
+] =3D ri->name;
+>>>       dyn_feature->desc.num_regs++;
+>>>   }
+>>>   @@ -316,6 +317,8 @@ static GDBFeature
+>>> *arm_gen_dynamic_sysreg_feature(CPUState *cs, int base_reg)
+>>>       DynamicGDBFeatureInfo *dyn_feature =3D &cpu->dyn_sysreg_feature;
+>>>       gsize num_regs =3D g_hash_table_size(cpu->cp_regs);
+>>>   +    dyn_feature->desc.name =3D "org.qemu.gdb.arm.sys.regs";
+>>> +    dyn_feature->desc.regs =3D g_new(const char *, num_regs);
+>> AIUI this means we now have an array of register names which mirrors
+>> the
+>> names embedded in the XML. This smells like a few steps away from just
+>> abstracting the whole XML away from the targets and generating them
+>> inside gdbstub when we need them. As per my stalled attempt I referenced
+>> earlier.
+>
+> The abstraction is strictly limited for identifiers. Most plugin
+> should already have some knowledge of how registers are used. For
+> example, a plugin that tracks stack frame for RISC-V should know sp is
+> the stack pointer register. Similarly, a cycle simulator plugin should
+> know how registers are used in a program. Only identifiers matter in
+> such cases.
+>
+> I'm definitely *not* in favor of abstracting the whole XML for
+> plugins. It will be too hard to maintain ABI compatibility when a new
+> attribute emerges, for example.
 
+No I agree the XML shouldn't go near the plugins. I was just looking to
+avoid having an XML builder for every target.
+
+--=20
+Alex Benn=C3=A9e
+Virtualisation Tech Lead @ Linaro
 
