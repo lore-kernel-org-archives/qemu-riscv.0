@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBF93C27C7A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Aug 2023 05:32:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D4C7C2FC04
+	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Aug 2023 05:32:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qWVbj-00075E-5o; Thu, 17 Aug 2023 01:31:44 -0400
+	id 1qWVb3-0006gL-HG; Thu, 17 Aug 2023 01:31:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qWVbP-0006uF-89
- for qemu-riscv@nongnu.org; Thu, 17 Aug 2023 01:31:32 -0400
-Received: from mail-ot1-x329.google.com ([2607:f8b0:4864:20::329])
+ id 1qWVb1-0006cy-Hq
+ for qemu-riscv@nongnu.org; Thu, 17 Aug 2023 01:30:59 -0400
+Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qWVbG-0003rW-VA
- for qemu-riscv@nongnu.org; Thu, 17 Aug 2023 01:31:18 -0400
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-6bcb5df95c5so5939415a34.1
- for <qemu-riscv@nongnu.org>; Wed, 16 Aug 2023 22:31:14 -0700 (PDT)
+ id 1qWVay-0003oO-0k
+ for qemu-riscv@nongnu.org; Thu, 17 Aug 2023 01:30:59 -0400
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-689e8115f8dso266023b3a.3
+ for <qemu-riscv@nongnu.org>; Wed, 16 Aug 2023 22:30:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1692250273; x=1692855073;
+ d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1692250254; x=1692855054;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lqwUBKCsJIu6Kok3irpDq8wqJUl9JGbLYq58wXaDnQ0=;
- b=1gu5/KBtHaxsjhSshR4TffmkUjm9NNZqkA2HPqW47cQkgYgjBIwJ1rEYLhK2dMrbfk
- KCpEEVFKK6kW2W3VBB+K/2m9mjsRav0hCsIBVA7zS3EPEwSTzNh4JfSMfprwnCX1LBGN
- cuYWA8Ft3VtloG2xnFrYOD/lW+NKkKJB3bf3auwbxr5P+1xUiybf4/xgh7Tc8BcnZV2I
- O4SlFoBoybwhodyGt0zAr0kyYpXJ4pc2ehBMvgtq1rionxX9fwEIZYmOf/GGrAS6HvQb
- MuhziZ4+uhHfeXXGLbU/UcXAeSNQdVsUqqhV8hO5r2IW2xoazbF0wKAHyWjlMwpEYQiG
- nvRQ==
+ bh=zdUDfs8nzmH3mudBuoXaYzlsKQKqdd+Qx/2fnT/104s=;
+ b=wCoxPlLo4fJNyJLo2YPAC93pw7yDAGHN3pA4MPGN6WYPvKD2HnfilAuE3YUgmIBIm6
+ 5lFr2VNyCJMV2VjfTAxQ7Du1RQOp5y/PbkiuW33/TjkO4eGZ5qsaCdOfw4sIOHslHYrs
+ IWX0SB8UtnoFnDbzYKFZKtoDYF6Jfv3fjTF68ioItR6MbFGx4y3V+szdf/GmGdrBQxmW
+ 6CKJnk0s+dA2FGE/7YgS7IZ9dnx2GIVU5aS6YTqVFUCHv6zfyr2ccgvNbRwiGLtRH+dn
+ xH2rx6R9AET1rCxyvlCipckj/EK2A8YKQD0PAI89QSRnqxrhI7lMvwkqgMpdSQIS1PqG
+ 4+cQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692250273; x=1692855073;
+ d=1e100.net; s=20221208; t=1692250254; x=1692855054;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lqwUBKCsJIu6Kok3irpDq8wqJUl9JGbLYq58wXaDnQ0=;
- b=kjax9jJRoK4jibXEum64dvf6kGhoiYdVOleTukkOtXZZE8AZvFgRQ36XSCrAnPXcI8
- JPKZ8RU0JnEg1P7EwbtXCsOZ00utq1q783syjAizDjUQL0i+79ICNK9Km09e2MpmAOpP
- ScQU3f+IDgkahKS+uMStvbHDmV+iK7Mas7xpIg4rRpOVxbg9Jo6CkOOfzCqbJDs1/3S6
- +vpllpNqFyf0IQrY2WxzynkcaaWixZbgqR1U6DHiM+eXJbSD55hWwQgJvwvtTw3Lkn/E
- K285tmZIlY3RtFIbOMle+3zLoDeKQbPK9XrWDstOQtIhFIPjH5X2MWhbGmKzDQp/88mU
- fFCw==
-X-Gm-Message-State: AOJu0YyIOQYiDup9KpWS1+Bko8S1XIZcDFJs7hV6U6mRF7M5WgSJzctb
- BOr5NOyX59Qk9vgL1aDsR0eAUw==
-X-Google-Smtp-Source: AGHT+IF3SYiv+QLBhO40iLnk+nijyWoh0NOYk76NZi+ZZu5c10QkTfpkv1zIIUkiZDdBrVJvdZFvKg==
-X-Received: by 2002:a05:6870:4711:b0:1b3:715c:463e with SMTP id
- b17-20020a056870471100b001b3715c463emr4818745oaq.0.1692250273292; 
- Wed, 16 Aug 2023 22:31:13 -0700 (PDT)
+ bh=zdUDfs8nzmH3mudBuoXaYzlsKQKqdd+Qx/2fnT/104s=;
+ b=j46BhLjFqVEqu2G3/kJ2slGF7/XPawn50YiRbXTuzMYX+JItad1BQPPqBvwpPzTlqH
+ cix+W1GOgiLoYvvEAnbn7WHqTuofd364lnvd+qRyOeWSUh05NLSyJop/44yMCyWyhTUW
+ 0Sn+tOqNsZXR16vVQk6LbNojd804VeOI++4haio9WkLi521jcYRFQh2GDXOWGLZ4fcnt
+ gy/zEOO7/dB2eQ4kHdIXR3PZTcTpsV4aQO2nmklTxY3+F37SaF4YNspfkPmgRHI9dBGU
+ UJjvM8bz8N2FnlxnoppXHLt1CGWivmXAyRHfFER8VmjfVkLM/c1ktMNjwlgDcu2EoEbG
+ tERQ==
+X-Gm-Message-State: AOJu0YwJyDlQxITi1aLdVyXsCEm2XfALDt3/3/KwT+fEObWafnjmTSAQ
+ 92CQi/2Dd2bWO0Q8jBZPtKVx4w==
+X-Google-Smtp-Source: AGHT+IH8ewMLpNbX7Glbea2MHyvU0ftrKKP3DE6+d+QyTno7miAfioylqSHTEcBwUZtErBg46+0BBA==
+X-Received: by 2002:a05:6a00:3988:b0:686:24e1:d12e with SMTP id
+ fi8-20020a056a00398800b0068624e1d12emr4202571pfb.30.1692250254546; 
+ Wed, 16 Aug 2023 22:30:54 -0700 (PDT)
 Received: from alarm.flets-east.jp ([2400:4050:a840:1e00:78d2:b862:10a7:d486])
  by smtp.gmail.com with ESMTPSA id
- j18-20020aa783d2000000b00662610cf7a8sm12339407pfn.172.2023.08.16.22.31.04
+ j18-20020aa783d2000000b00662610cf7a8sm12339407pfn.172.2023.08.16.22.30.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Aug 2023 22:31:12 -0700 (PDT)
+ Wed, 16 Aug 2023 22:30:54 -0700 (PDT)
 From: Akihiko Odaki <akihiko.odaki@daynix.com>
 To: 
 Cc: Paolo Bonzini <pbonzini@redhat.com>,
@@ -98,17 +98,17 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
  qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, Anton Kochkov <anton.kochkov@proton.me>,
  Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH v5 03/26] gdbstub: Add num_regs member to GDBFeature
-Date: Thu, 17 Aug 2023 14:29:50 +0900
-Message-ID: <20230817053017.24207-4-akihiko.odaki@daynix.com>
+Subject: [PATCH v5 01/26] contrib/plugins: Use GRWLock in execlog
+Date: Thu, 17 Aug 2023 14:29:48 +0900
+Message-ID: <20230817053017.24207-2-akihiko.odaki@daynix.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230817053017.24207-1-akihiko.odaki@daynix.com>
 References: <20230817053017.24207-1-akihiko.odaki@daynix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::329;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-ot1-x329.google.com
+Received-SPF: none client-ip=2607:f8b0:4864:20::435;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x435.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -130,97 +130,85 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Currently the number of registers exposed to GDB is written as magic
-numbers in code. Derive the number of registers GDB actually see from
-XML files to replace the magic numbers in code later.
+execlog had the following comment:
+> As we could have multiple threads trying to do this we need to
+> serialise the expansion under a lock. Threads accessing already
+> created entries can continue without issue even if the ptr array
+> gets reallocated during resize.
 
+However, when the ptr array gets reallocated, the other threads may have
+a stale reference to the old buffer. This results in use-after-free.
+
+Use GRWLock to properly fix this issue.
+
+Fixes: 3d7caf145e ("contrib/plugins: add execlog to log instruction execution and memory access")
 Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- include/exec/gdbstub.h  |  1 +
- scripts/feature_to_c.py | 46 +++++++++++++++++++++++++++++++++++++++--
- 2 files changed, 45 insertions(+), 2 deletions(-)
+ contrib/plugins/execlog.c | 16 ++++++++++------
+ 1 file changed, 10 insertions(+), 6 deletions(-)
 
-diff --git a/include/exec/gdbstub.h b/include/exec/gdbstub.h
-index 3f08093321..9b484d7eef 100644
---- a/include/exec/gdbstub.h
-+++ b/include/exec/gdbstub.h
-@@ -13,6 +13,7 @@
- typedef struct GDBFeature {
-     const char *xmlname;
-     const char *xml;
-+    int num_regs;
- } GDBFeature;
+diff --git a/contrib/plugins/execlog.c b/contrib/plugins/execlog.c
+index 7129d526f8..82dc2f584e 100644
+--- a/contrib/plugins/execlog.c
++++ b/contrib/plugins/execlog.c
+@@ -19,7 +19,7 @@ QEMU_PLUGIN_EXPORT int qemu_plugin_version = QEMU_PLUGIN_VERSION;
  
+ /* Store last executed instruction on each vCPU as a GString */
+ static GPtrArray *last_exec;
+-static GMutex expand_array_lock;
++static GRWLock expand_array_lock;
  
-diff --git a/scripts/feature_to_c.py b/scripts/feature_to_c.py
-index bcbcb83beb..e04d6b2df7 100755
---- a/scripts/feature_to_c.py
-+++ b/scripts/feature_to_c.py
-@@ -1,7 +1,7 @@
- #!/usr/bin/env python3
- # SPDX-License-Identifier: GPL-2.0-or-later
+ static GPtrArray *imatches;
+ static GArray *amatches;
+@@ -28,18 +28,16 @@ static GArray *amatches;
+  * Expand last_exec array.
+  *
+  * As we could have multiple threads trying to do this we need to
+- * serialise the expansion under a lock. Threads accessing already
+- * created entries can continue without issue even if the ptr array
+- * gets reallocated during resize.
++ * serialise the expansion under a lock.
+  */
+ static void expand_last_exec(int cpu_index)
+ {
+-    g_mutex_lock(&expand_array_lock);
++    g_rw_lock_writer_lock(&expand_array_lock);
+     while (cpu_index >= last_exec->len) {
+         GString *s = g_string_new(NULL);
+         g_ptr_array_add(last_exec, s);
+     }
+-    g_mutex_unlock(&expand_array_lock);
++    g_rw_lock_writer_unlock(&expand_array_lock);
+ }
  
--import os, sys
-+import os, sys, xml.etree.ElementTree
+ /**
+@@ -51,8 +49,10 @@ static void vcpu_mem(unsigned int cpu_index, qemu_plugin_meminfo_t info,
+     GString *s;
  
- def writeliteral(indent, bytes):
-     sys.stdout.write(' ' * indent)
-@@ -39,10 +39,52 @@ def writeliteral(indent, bytes):
-     with open(input, 'rb') as file:
-         read = file.read()
+     /* Find vCPU in array */
++    g_rw_lock_reader_lock(&expand_array_lock);
+     g_assert(cpu_index < last_exec->len);
+     s = g_ptr_array_index(last_exec, cpu_index);
++    g_rw_lock_reader_unlock(&expand_array_lock);
  
-+    parser = xml.etree.ElementTree.XMLPullParser(['start', 'end'])
-+    parser.feed(read)
-+    events = parser.read_events()
-+    event, element = next(events)
-+    if event != 'start':
-+        sys.stderr.write(f'unexpected event: {event}\n')
-+        exit(1)
-+    if element.tag != 'feature':
-+        sys.stderr.write(f'unexpected start tag: {element.tag}\n')
-+        exit(1)
-+
-+    regnum = 0
-+    regnums = []
-+    tags = ['feature']
-+    for event, element in events:
-+        if event == 'end':
-+            if element.tag != tags[len(tags) - 1]:
-+                sys.stderr.write(f'unexpected end tag: {element.tag}\n')
-+                exit(1)
-+
-+            tags.pop()
-+            if element.tag == 'feature':
-+                break
-+        elif event == 'start':
-+            if len(tags) < 2 and element.tag == 'reg':
-+                if 'regnum' in element.attrib:
-+                    regnum = int(element.attrib['regnum'])
-+
-+                regnums.append(regnum)
-+                regnum += 1
-+
-+            tags.append(element.tag)
-+        else:
-+            raise Exception(f'unexpected event: {event}\n')
-+
-+    if len(tags):
-+        sys.stderr.write('unterminated feature tag\n')
-+        exit(1)
-+
-+    base_reg = min(regnums)
-+    num_regs = max(regnums) - base_reg + 1 if len(regnums) else 0
-+
-     sys.stdout.write('    {\n')
-     writeliteral(8, bytes(os.path.basename(input), 'utf-8'))
-     sys.stdout.write(',\n')
-     writeliteral(8, read)
--    sys.stdout.write('\n    },\n')
-+    sys.stdout.write(f',\n        {num_regs},\n    }},\n')
+     /* Indicate type of memory access */
+     if (qemu_plugin_mem_is_store(info)) {
+@@ -80,10 +80,14 @@ static void vcpu_insn_exec(unsigned int cpu_index, void *udata)
+     GString *s;
  
- sys.stdout.write('    { NULL }\n};\n')
+     /* Find or create vCPU in array */
++    g_rw_lock_reader_lock(&expand_array_lock);
+     if (cpu_index >= last_exec->len) {
++        g_rw_lock_reader_unlock(&expand_array_lock);
+         expand_last_exec(cpu_index);
++        g_rw_lock_reader_lock(&expand_array_lock);
+     }
+     s = g_ptr_array_index(last_exec, cpu_index);
++    g_rw_lock_reader_unlock(&expand_array_lock);
+ 
+     /* Print previous instruction in cache */
+     if (s->len) {
 -- 
 2.41.0
 
