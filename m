@@ -4,96 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BCE5C05052
-	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Aug 2023 03:31:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7E09C27C7A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Aug 2023 05:31:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qWTiL-0003au-Vs; Wed, 16 Aug 2023 23:30:26 -0400
+	id 1qWVau-0006ZN-SK; Thu, 17 Aug 2023 01:30:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qWTiJ-0003aV-Tt
- for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 23:30:23 -0400
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1qWVas-0006W8-VC
+ for qemu-riscv@nongnu.org; Thu, 17 Aug 2023 01:30:50 -0400
+Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qWTiF-0005yQ-Lk
- for qemu-riscv@nongnu.org; Wed, 16 Aug 2023 23:30:23 -0400
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-1bdf4752c3cso21188775ad.2
- for <qemu-riscv@nongnu.org>; Wed, 16 Aug 2023 20:30:16 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1qWVao-0003mu-R2
+ for qemu-riscv@nongnu.org; Thu, 17 Aug 2023 01:30:50 -0400
+Received: by mail-pg1-x533.google.com with SMTP id
+ 41be03b00d2f7-565f86ff4d1so945523a12.2
+ for <qemu-riscv@nongnu.org>; Wed, 16 Aug 2023 22:30:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1692243015; x=1692847815;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=da/XbM7V0w3vnnbBvgHoG8bDMtDm3bel7gEPQSFhkIk=;
- b=O/WCX6iChN0fluY6p+BAfYpH8N8hJrzm5+ZBtJKLbeS+RKJkkApkNiA0Y1c0P/JeiT
- 4F0H2CJaPjloxCPtuKLUbX3dIV6VTdjHTU7mWkAVmWBLS/IBf7oXtD7TGVFxSXC1+t9R
- aUs+F8E4ISFzLoPNNYxcaGiwkvUeBp68mI470bfAXcajb2N6MKn2u+ZceN/8bPfgZsPr
- tD7SOHGwD7DJxZ8Nefwiz3PBuHiD7h/wNwMEpOA3tB+ybqBqebDtvv5gUP93+d6oq0ah
- vXDKOweWQLGsqUu/De8jxPaAgI5Tzbu7YiBZuOz0vDgdowEWqQX8D/qPK6Uf9pSWEe0V
- Vxng==
+ d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1692250245; x=1692855045;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=mQyi6gfRgbfl9Ba+HuBYDjs0BflAbozpyrrSa1VYhO8=;
+ b=foDAMsj/Luf3JT0hF77ecWbCMXR62K/pt13rcHFIsAZecLufRI8U+vJeMkICee3tbc
+ A2srfIbdFPgJ9EWMcmJQtXyeGs+nMTAeolhp1KLy0/t+oFI2Xb23lS285rPG5vBfOgjf
+ +6B/Qk7f90KrqSgUxsYyTFoUPVwwLQlKy5zrSKCtl9uhrVf4Kd4zhJV7Uwda19LdJSn9
+ j1g8rwy76DBFRh17khvu/zqyK/V/pnfcSEP/kyVOsrhfpNOLgaX0lQ+ohALH34YgPcVs
+ a1ZV45juk2ebZIHrrOXGBLCjDzMZvt7vZ8zhPB8v2OhHM/F98vnFn48GkJFWpMmu3lp2
+ i7YQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692243015; x=1692847815;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=da/XbM7V0w3vnnbBvgHoG8bDMtDm3bel7gEPQSFhkIk=;
- b=T4e4ul02c+OQo0uSG1WY/EQrpJqf1fDwTn24VB7CgJi5uBBuUkLMsiaA1YaLnY/Pke
- T+FcTfShSL2+MdXHXJWpDWhLq7Kjr/3uXll8A7dpDI57EDHC2qBJYkcUEC7MQ1GgclD1
- oYOpGwEtDN9NwVa5D+c996dM8I9uoLTsHcrCf13Gu/wwwU6ChTF+08j4XVCCaYWAShBr
- Y+h4LetBabVhX9ZbahcKr+cwb8x7JMUgpgELVlwn0S43YZwdOSRbe7aJ7FjUGyksYBS1
- 17he77sWuzJJ2qiir5wpo3nUTzK1908b9Sb8wYBbHAHeuBcXu1NTdNOI9tDSHjz7HRsk
- fPPw==
-X-Gm-Message-State: AOJu0YzDaX6TG9pQyRxKDDE7sFJYB7/IuC/DDZk+YjjW3rykUWV4n31k
- u1X/Y1po9Ai3h3q6wYDcAnuCsQ==
-X-Google-Smtp-Source: AGHT+IFKAMynRfi6DV0Hhz/Q3IivWGk2CXFvnITXxCeyCoIiSskynGowR8ceuFajX33IL8L5isZ+gw==
-X-Received: by 2002:a17:903:26c2:b0:1bd:ed26:d2c6 with SMTP id
- jg2-20020a17090326c200b001bded26d2c6mr3415781plb.4.1692243015363; 
- Wed, 16 Aug 2023 20:30:15 -0700 (PDT)
-Received: from sunil-laptop ([106.51.83.242]) by smtp.gmail.com with ESMTPSA id
- u15-20020a170902e5cf00b001b9d335223csm13860130plf.26.2023.08.16.20.30.10
+ d=1e100.net; s=20221208; t=1692250245; x=1692855045;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=mQyi6gfRgbfl9Ba+HuBYDjs0BflAbozpyrrSa1VYhO8=;
+ b=L20ToEKLSBDcxeETf6XNIvx9+yN/BmAJvJETpeWQNts8HYnaP7WMa4QJltOS7JFMvR
+ GWj6VpVet+rbGWKg8OLNBBBDOJltLBw1vHjSiJQFu/j2e8qKMQxnXpe0bQdkkq8tIs5R
+ pf/h8fFbDq2qlLOsKVkNn+eU+4VKMAVpIjzCaF73ZyQpqM8JJw7jwAM1kpmAQCkMbhnI
+ 3zgXg43qTRc9AmToOSFGT7+3vsBmyurjWmPX0L7XlC1d9btcsV9CLpllaqM2XXZHHlVc
+ EGCatKE9czoP80pmxzoSI9839exQYSVa4W5cbSAg2k2ObAVwlAOh0JjQIGsltMidwmJc
+ 2yvg==
+X-Gm-Message-State: AOJu0YwmYYOv6fmYPgtsx8U9omkzHfp2Y0/K/mR3Uq10XDEDlJ8Q43o9
+ ryucr0M53RgSHgURkaUmy8r+Ng==
+X-Google-Smtp-Source: AGHT+IGfYhrcUvpGzOTYqb82+q9qq2vUi7LvrswIp9J2Txc3w26+L40Re4cMZJpHZ5HqbFY3M4ZlFQ==
+X-Received: by 2002:a05:6a20:729d:b0:13d:ee19:771f with SMTP id
+ o29-20020a056a20729d00b0013dee19771fmr5340005pzk.8.1692250245092; 
+ Wed, 16 Aug 2023 22:30:45 -0700 (PDT)
+Received: from alarm.flets-east.jp ([2400:4050:a840:1e00:78d2:b862:10a7:d486])
+ by smtp.gmail.com with ESMTPSA id
+ j18-20020aa783d2000000b00662610cf7a8sm12339407pfn.172.2023.08.16.22.30.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Aug 2023 20:30:14 -0700 (PDT)
-Date: Thu, 17 Aug 2023 09:00:07 +0530
-From: Sunil V L <sunilvl@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: Igor Mammedov <imammedo@redhat.com>, qemu-devel@nongnu.org,
- qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
- "Michael S . Tsirkin" <mst@redhat.com>, Ani Sinha <anisinha@redhat.com>,
+ Wed, 16 Aug 2023 22:30:44 -0700 (PDT)
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
+To: 
+Cc: Paolo Bonzini <pbonzini@redhat.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Thomas Huth <thuth@redhat.com>, Alexandre Iooss <erdnaxe@crans.org>,
+ Mahmoud Mandour <ma.mandourr@gmail.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Yanan Wang <wangyanan55@huawei.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ John Snow <jsnow@redhat.com>, Cleber Rosa <crosa@redhat.com>,
  Peter Maydell <peter.maydell@linaro.org>,
- Shannon Zhao <shannon.zhaosl@gmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Michael Rolnik <mrolnik@gmail.com>,
+ "Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
+ Brian Cain <bcain@quicinc.com>, Song Gao <gaosong@loongson.cn>,
+ Xiaojuan Yang <yangxiaojuan@loongson.cn>,
+ Laurent Vivier <laurent@vivier.eu>, Aurelien Jarno <aurelien@aurel32.net>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Chris Wulff <crwulff@gmail.com>, Marek Vasut <marex@denx.de>,
+ Stafford Horne <shorne@gmail.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ David Gibson <david@gibson.dropbear.id.au>, Greg Kurz <groug@kaod.org>,
+ Nicholas Piggin <npiggin@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Andrew Jones <ajones@ventanamicro.com>,
- Anup Patel <apatel@ventanamicro.com>
-Subject: Re: [PATCH 01/10] hw/arm/virt-acpi-build.c: Move fw_cfg and virtio
- to common location
-Message-ID: <ZN2UPwkpXez+uwMj@sunil-laptop>
-References: <20230712163943.98994-1-sunilvl@ventanamicro.com>
- <20230712163943.98994-2-sunilvl@ventanamicro.com>
- <20230724171859.212fec62@imammedo.users.ipa.redhat.com>
- <ZL/9XO47yEnaNzyN@sunil-laptop>
- <20230726102546.1cad6113@imammedo.users.ipa.redhat.com>
- <badc96bf-821e-d769-ac40-39600f543e86@ventanamicro.com>
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Max Filippov <jcmvbkbc@gmail.com>, qemu-devel@nongnu.org,
+ qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org, Anton Kochkov <anton.kochkov@proton.me>,
+ Akihiko Odaki <akihiko.odaki@daynix.com>
+Subject: [PATCH v5 00/26] plugins: Allow to read registers
+Date: Thu, 17 Aug 2023 14:29:47 +0900
+Message-ID: <20230817053017.24207-1-akihiko.odaki@daynix.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <badc96bf-821e-d769-ac40-39600f543e86@ventanamicro.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x631.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: none client-ip=2607:f8b0:4864:20::533;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pg1-x533.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,126 +127,156 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Aug 16, 2023 at 03:51:58PM -0300, Daniel Henrique Barboza wrote:
->=20
->=20
-> On 7/26/23 05:25, Igor Mammedov wrote:
-> > On Tue, 25 Jul 2023 22:20:36 +0530
-> > Sunil V L <sunilvl@ventanamicro.com> wrote:
-> >=20
-> > > On Mon, Jul 24, 2023 at 05:18:59PM +0200, Igor Mammedov wrote:
-> > > > On Wed, 12 Jul 2023 22:09:34 +0530
-> > > > Sunil V L <sunilvl@ventanamicro.com> wrote:
-> > > > > The functions which add fw_cfg and virtio to DSDT are same for ARM
-> > > > > and RISC-V. So, instead of duplicating in RISC-V, move them from
-> > > > > hw/arm/virt-acpi-build.c to common aml-build.c.
-> > > > >=20
-> > > > > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-> > > > > ---
-> > > > >   hw/acpi/aml-build.c         | 41 ++++++++++++++++++++++++++++++=
-++++++
-> > > > >   hw/arm/virt-acpi-build.c    | 42 ------------------------------=
--------
-> > > > >   hw/riscv/virt-acpi-build.c  | 16 --------------
-> > > > >   include/hw/acpi/aml-build.h |  6 ++++++
-> > > > >   4 files changed, 47 insertions(+), 58 deletions(-)
-> > > > >=20
-> > > > > diff --git a/hw/acpi/aml-build.c b/hw/acpi/aml-build.c
-> > > >=20
-> > > > patch looks fine modulo,
-> > > > I'd put these into respective device files instead of generic
-> > > > aml-build.c which was intended for basic AML primitives
-> > > > (it 's got polluted over time with device specific functions
-> > > > but that's not the reason to continue doing that).
-> > > >=20
-> > > > Also having those functions along with devices models
-> > > > goes along with self enumerating ACPI devices (currently
-> > > > it works for x86 PCI/ISA device but there is no reason
-> > > > that it can't work with other types as well when
-> > > > I get there)
-> > > Thanks!, Igor. Let me add them to device specific files as per your
-> > > recommendation.
-> > just be careful and build test other targets (while disabling the rest)
-> > at least no to regress them due to build deps. (I'd pick 2 with ACPI
-> > support that use and not uses affected code) and 1 that  uses device
-> > model but doesn't use ACPI at all (if such exists)
->=20
-> Sunil is already aware of it but I'll also mention here since it seems re=
-levant
-> to Igor's point.
->=20
-Thanks! Daniel. Yes, I am aware of the issue and will fix it along with
-Igor's suggestion. I need to fix this irrespective of the approach.
+I and other people in the University of Tokyo, where I research processor
+design, found TCG plugins are very useful for processor design exploration.
 
-Thanks,
-Sunil
->=20
-> This patch breaks i386-softmmu build:
->=20
->=20
-> FAILED: libqemu-i386-softmmu.fa.p/hw_i386_acpi-microvm.c.o
-> cc -m64 -mcx16 -Ilibqemu-i386-softmmu.fa.p -I. -I.. -Itarget/i386 -I../ta=
-rget/i386 -Iqapi -Itrace -Iui -Iui/shader -I/usr/include/pixman-1 -I/usr/in=
-clude/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/sysprof-4 -fdia=
-gnostics-color=3Dauto -Wall -Winvalid-pch -Werror -std=3Dgnu11 -O2 -g -fsta=
-ck-protector-strong -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=3D2 -Wundef -Wwrite=
--strings -Wmissing-prototypes -Wstrict-prototypes -Wredundant-decls -Wold-s=
-tyle-declaration -Wold-style-definition -Wtype-limits -Wformat-security -Wf=
-ormat-y2k -Winit-self -Wignored-qualifiers -Wempty-body -Wnested-externs -W=
-endif-labels -Wexpansion-to-defined -Wimplicit-fallthrough=3D2 -Wmissing-fo=
-rmat-attribute -Wno-missing-include-dirs -Wno-shift-negative-value -Wno-psa=
-bi -isystem /home/danielhb/work/qemu/linux-headers -isystem linux-headers -=
-iquote . -iquote /home/danielhb/work/qemu -iquote /home/danielhb/work/qemu/=
-include -iquote /home/danielhb/work/qemu/host/include/x86_64 -iquote /home/=
-danielhb/work/qemu/host/include/generic -iquote /home/danielhb/work/qemu/tc=
-g/i386 -pthread -D_GNU_SOURCE -D_FILE_OFFSET_BITS=3D64 -D_LARGEFILE_SOURCE =
--fno-strict-aliasing -fno-common -fwrapv -fPIE -isystem../linux-headers -is=
-ystemlinux-headers -DNEED_CPU_H '-DCONFIG_TARGET=3D"i386-softmmu-config-tar=
-get.h"' '-DCONFIG_DEVICES=3D"i386-softmmu-config-devices.h"' -MD -MQ libqem=
-u-i386-softmmu.fa.p/hw_i386_acpi-microvm.c.o -MF libqemu-i386-softmmu.fa.p/=
-hw_i386_acpi-microvm.c.o.d -o libqemu-i386-softmmu.fa.p/hw_i386_acpi-microv=
-m.c.o -c ../hw/i386/acpi-microvm.c
-> ../hw/i386/acpi-microvm.c:48:13: error: conflicting types for =E2=80=98ac=
-pi_dsdt_add_virtio=E2=80=99; have =E2=80=98void(Aml *, MicrovmMachineState =
-*)=E2=80=99
->    48 | static void acpi_dsdt_add_virtio(Aml *scope,
->       |             ^~~~~~~~~~~~~~~~~~~~
-> In file included from /home/danielhb/work/qemu/include/hw/acpi/acpi_aml_i=
-nterface.h:5,
->                  from ../hw/i386/acpi-microvm.c:29:
-> /home/danielhb/work/qemu/include/hw/acpi/aml-build.h:503:6: note: previou=
-s declaration of =E2=80=98acpi_dsdt_add_virtio=E2=80=99 with type =E2=80=98=
-void(Aml *, const MemMapEntry *, uint32_t,  int)=E2=80=99 {aka =E2=80=98voi=
-d(Aml *, const MemMapEntry *, unsigned int,  int)=E2=80=99}
->   503 | void acpi_dsdt_add_virtio(Aml *scope, const MemMapEntry *virtio_m=
-mio_memmap,
->       |      ^~~~~~~~~~~~~~~~~~~~
-> [5/714] Compiling C object libqemu-i386-softmmu.fa.p/hw_i386_kvm_clock.c.o
->=20
-> This happens because the common 'acpi_dsdt_add_virtio' function matches a=
- local
-> function with the same name in hw/i386/acpi-microvm.c. We would need to e=
-ither
-> rename the shared helper or rename the local acpi-microvm function or do =
-something
-> like Igor mentioned to avoid this name collision.
->=20
->=20
-> Thanks,
->=20
-> Daniel
->=20
->=20
->=20
->=20
->=20
->=20
->=20
->=20
-> >=20
-> > >=20
-> > > Thanks!
-> > > Sunil
-> > >=20
-> >=20
+The feature we find missing is the capability to read registers from
+plugins. In this series, I propose to add such a capability by reusing
+gdbstub code.
+
+The reuse of gdbstub code ensures the long-term stability of the TCG plugin
+interface for register access without incurring a burden to maintain yet
+another interface for register access.
+
+This process to add TCG plugin involves four major changes. The first one
+is to add GDBFeature structure that represents a GDB feature, which usually
+includes registers. GDBFeature can be generated from static XML files or
+dynamically generated by architecture-specific code. In fact, this is a
+refactoring independent of the feature this series adds, and potentially
+it's benefitial even without the plugin feature. The plugin feature will
+utilize this new structure to describe registers exposed to plugins.
+
+The second one is to make gdb_read_register/gdb_write_register usable
+outside of gdbstub context.
+
+The third one is to actually make registers readable for plugins.
+
+The last one is to allow to implement a QEMU plugin in C++. A plugin that
+I'll describe later is written in C++.
+
+The below is a summary of patches:
+Patch 01 fixes a bug in execlog plugin.
+Patch [02, 16] introduce GDBFeature.
+Patch 17 adds information useful for plugins to GDBFeature.
+Patch [18, 21] make registers readable outside of gdbstub context.
+Patch [22, 24] add the feature to read registers from plugins.
+Patch [25, 26] make it possible to write plugins in C++.
+
+The execlog plugin will have new options to demonstrate the new feature.
+I also have a plugin that uses this new feature to generate execution
+traces for Sniper processor simulator, which is available at:
+https://github.com/shioya-lab/sniper/tree/akihikodaki/bb
+
+V4 -> V5:
+  Corrected g_rw_lock_writer_lock() call. (Richard Henderson)
+  Replaced abort() with g_assert_not_reached(). (Richard Henderson)
+  Fixed CSR name leak in target/riscv. (Richard Henderson)
+  Removed gdb_has_xml variable.
+
+V3 -> V4:
+  Added execlog changes I forgot to include in the last version.
+
+V2 -> V3:
+  Added patch "hw/core/cpu: Return static value with gdb_arch_name()".
+  Added patch "gdbstub: Dynamically allocate target.xml buffer".
+  (Alex Bennée)
+  Added patch "gdbstub: Introduce GDBFeatureBuilder". (Alex Bennée)
+  Dropped Reviewed-by tags for "target/*: Use GDBFeature for dynamic XML".
+  Changed gdb_find_static_feature() to abort on failure. (Alex Bennée)
+  Changed the execlog plugin to log the register value only when changed.
+  (Alex Bennée)
+  Dropped 0x prefixes for register value logs for conciseness.
+
+V1 -> V2:
+  Added SPDX-License-Identifier: GPL-2.0-or-later. (Philippe Mathieu-Daudé)
+  Split long lines. (Philippe Mathieu-Daudé)
+  Renamed gdb_features to gdb_static_features (Philippe Mathieu-Daudé)
+  Dropped RFC.
+
+Akihiko Odaki (26):
+  contrib/plugins: Use GRWLock in execlog
+  gdbstub: Introduce GDBFeature structure
+  gdbstub: Add num_regs member to GDBFeature
+  gdbstub: Introduce gdb_find_static_feature()
+  target/arm: Move the reference to arm-core.xml
+  hw/core/cpu: Replace gdb_core_xml_file with gdb_core_feature
+  gdbstub: Introduce GDBFeatureBuilder
+  target/arm: Use GDBFeature for dynamic XML
+  target/ppc: Use GDBFeature for dynamic XML
+  target/riscv: Use GDBFeature for dynamic XML
+  gdbstub: Use GDBFeature for gdb_register_coprocessor
+  gdbstub: Use GDBFeature for GDBRegisterState
+  hw/core/cpu: Return static value with gdb_arch_name()
+  gdbstub: Dynamically allocate target.xml buffer
+  gdbstub: Simplify XML lookup
+  hw/core/cpu: Remove gdb_get_dynamic_xml member
+  gdbstub: Add members to identify registers to GDBFeature
+  target/arm: Remove references to gdb_has_xml
+  target/ppc: Remove references to gdb_has_xml
+  gdbstub: Remove gdb_has_xml variable
+  gdbstub: Expose functions to read registers
+  cpu: Call plugin hooks only when ready
+  plugins: Allow to read registers
+  contrib/plugins: Allow to log registers
+  plugins: Support C++
+  contrib/plugins: Add cc plugin
+
+ MAINTAINERS                  |   2 +-
+ docs/devel/tcg-plugins.rst   |  18 +++-
+ configure                    |  15 ++-
+ meson.build                  |   2 +-
+ gdbstub/internals.h          |   2 +-
+ include/exec/gdbstub.h       |  51 +++++++--
+ include/hw/core/cpu.h        |  11 +-
+ include/qemu/qemu-plugin.h   |  69 +++++++++++-
+ target/arm/cpu.h             |  26 ++---
+ target/arm/internals.h       |   2 +-
+ target/ppc/cpu-qom.h         |   3 +-
+ target/ppc/cpu.h             |   3 +-
+ target/ppc/internal.h        |   2 +-
+ target/riscv/cpu.h           |   4 +-
+ target/s390x/cpu.h           |   2 -
+ contrib/plugins/execlog.c    | 150 ++++++++++++++++++++------
+ cpu.c                        |  11 --
+ gdbstub/gdbstub.c            | 198 +++++++++++++++++++++++-----------
+ gdbstub/softmmu.c            |   3 +-
+ gdbstub/user.c               |   1 -
+ hw/core/cpu-common.c         |  10 ++
+ plugins/api.c                |  40 +++++++
+ stubs/gdbstub.c              |   6 +-
+ target/arm/cpu.c             |  12 +--
+ target/arm/cpu64.c           |   8 +-
+ target/arm/gdbstub.c         | 202 +++++++++++++----------------------
+ target/arm/gdbstub64.c       |  90 +++++++---------
+ target/arm/tcg/cpu32.c       |   3 +-
+ target/avr/cpu.c             |   4 +-
+ target/hexagon/cpu.c         |   5 +-
+ target/i386/cpu.c            |  13 ++-
+ target/loongarch/cpu.c       |   8 +-
+ target/loongarch/gdbstub.c   |   2 +-
+ target/m68k/cpu.c            |   7 +-
+ target/m68k/helper.c         |   6 +-
+ target/microblaze/cpu.c      |   9 +-
+ target/ppc/cpu_init.c        |   9 +-
+ target/ppc/gdbstub.c         |  80 ++++----------
+ target/riscv/cpu.c           |  27 ++---
+ target/riscv/gdbstub.c       |  89 +++++++--------
+ target/rx/cpu.c              |   4 +-
+ target/s390x/cpu.c           |   8 +-
+ target/s390x/gdbstub.c       |  28 ++---
+ target/tricore/cpu.c         |   4 +-
+ contrib/plugins/Makefile     |   5 +
+ contrib/plugins/cc.cc        |  17 +++
+ plugins/qemu-plugins.symbols |   2 +
+ scripts/feature_to_c.py      | 102 ++++++++++++++++++
+ scripts/feature_to_c.sh      |  69 ------------
+ tests/tcg/Makefile.target    |   3 +
+ 50 files changed, 825 insertions(+), 622 deletions(-)
+ create mode 100644 contrib/plugins/cc.cc
+ create mode 100755 scripts/feature_to_c.py
+ delete mode 100644 scripts/feature_to_c.sh
+
+-- 
+2.41.0
+
 
