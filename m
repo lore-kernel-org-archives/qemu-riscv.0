@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0AEBEE4993
-	for <qemu-riscv@archiver.kernel.org>; Mon, 21 Aug 2023 19:01:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66C33EE4993
+	for <qemu-riscv@archiver.kernel.org>; Mon, 21 Aug 2023 19:05:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qYA9M-0000ke-DA; Mon, 21 Aug 2023 15:01:18 -0400
+	id 1qYACg-00025M-2J; Mon, 21 Aug 2023 15:04:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qYA9J-0000id-Q1; Mon, 21 Aug 2023 15:01:13 -0400
-Received: from mail-ua1-x92b.google.com ([2607:f8b0:4864:20::92b])
+ id 1qYACd-00024l-8x; Mon, 21 Aug 2023 15:04:39 -0400
+Received: from mail-ua1-x930.google.com ([2607:f8b0:4864:20::930])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qYA9H-0006RL-Iw; Mon, 21 Aug 2023 15:01:13 -0400
-Received: by mail-ua1-x92b.google.com with SMTP id
- a1e0cc1a2514c-76d846a4b85so1179180241.1; 
- Mon, 21 Aug 2023 12:01:10 -0700 (PDT)
+ id 1qYACa-0006jc-Pv; Mon, 21 Aug 2023 15:04:39 -0400
+Received: by mail-ua1-x930.google.com with SMTP id
+ a1e0cc1a2514c-78a5384a5daso858312241.0; 
+ Mon, 21 Aug 2023 12:04:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692644470; x=1693249270;
+ d=gmail.com; s=20221208; t=1692644675; x=1693249475;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jfuV5vCcaHbMFfPNwkE4OdkbJ81M4OGRWiG9Glc+Q1w=;
- b=ZYSOFdqHBkB2QF5cpdl2+swgJ2eSf0xmFbWfIJLGyvUoVviURgS9MQn01MyJOm+w0W
- hoWDK4PmlCmCMYhjPb44NDUpmwuLyGcAmK7pcMeLltBMxSnnYbtDZVMoXt7eNKCvqW5o
- OF3NknlGIQj7p/8XeMdvx4ocflBBJhOHBav72A/JYuc7BrxqN7bVBfTGfghlYsJ7tkoG
- zdKPngU+k/VWXVKhQpuTDIYH5xmZNjYOTXqD/Kx3kKl9qeKaruRP7xgzx1ckJhIlWB69
- NpZQO4MYtEoIA1UACDfRcE3fLwbyPUpHf9/VuvWsumZn/LTelePvfz2L4mJYgpHuXJ0D
- 8fgg==
+ bh=803YHqPe30JU0oVx2FoHvlXUChYTLMQVDnX0jiLNOH4=;
+ b=MKYe8Qrgd4842de/ZU0x0CcpBgo0wwjmgJCWh5v1lzvHEm6c1qaSOFuTB4OR541rbc
+ mrwwRWQquDaVQUHTFgfwwEyGPSuc4nBkrzKGBj7HSvKiom8NULx6L/nZEGZsg9G9DEBi
+ ccWHf5SKftZ++HwbP5Nlv919TO/TtT74Vk8DBx/d/oAGL7fYdQUekidGTZQ62lqK122l
+ 9Ek8JXObjVQrfVhHQZBgZ04MvunaYMdzyT/FQ1rKx6CcqQuaL1g0lglP+z3rf3tGb2i+
+ V4LT0U4mAwRyfnWMttxh9B8iDS2UEVd2x8WyFoithz54+PXO6nWbQs53L8yeAJXPBwWV
+ occA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692644470; x=1693249270;
+ d=1e100.net; s=20221208; t=1692644675; x=1693249475;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jfuV5vCcaHbMFfPNwkE4OdkbJ81M4OGRWiG9Glc+Q1w=;
- b=Ol0Sv6ai5tHU3BpxyNVscPu0qj79q9dh3jJlSDylVkBIA+cJtBthV5fgYwc2BSD9nC
- 4lXEKedwh9LOWTRbbpWID5TwNIpAd8gGOlAEwo3ksr6Ha03wTEzTA8HCDJWq4i9/48kc
- phyWOKqYB4isaf4GdMEiJTNGM2M9UB5EdvFTvzZC5QqGZXNgjrF69NM31RCLaZoxuo2u
- 6t5gallBzOPSVLl5fcaOlXA7daEgUeUCOM+VWUNU+L+LSOEiGvc7GMEd+udqkx4EW1bp
- mcEuhtIUuz5hCWyw7fZBgDDl7E0x4PzhDnlJagN1DOSv0hzDOhVg+v3oj2qv4KlgHmHM
- SZhw==
-X-Gm-Message-State: AOJu0YztUVslBCCbX8A+T6QCLQxg2gnzSMg8DI6+QrSsg5CLa/+XlbZg
- 5SIDYmRGUZxYSZ+QvZ7ElUBvYLCYaNVPNqOSUCLYk8VWmixQyQ==
-X-Google-Smtp-Source: AGHT+IHhTfKGisxJMDKMWi0NkE672kcsExGQ9oNHipRDdy2yv0x7vZUbo6EGauUZlejM77SkpMS87UdXRkPyEii1beA=
-X-Received: by 2002:a67:de89:0:b0:44d:4dd6:7966 with SMTP id
- r9-20020a67de89000000b0044d4dd67966mr3260742vsk.34.1692644469761; Mon, 21 Aug
- 2023 12:01:09 -0700 (PDT)
+ bh=803YHqPe30JU0oVx2FoHvlXUChYTLMQVDnX0jiLNOH4=;
+ b=G++9igLeIHH6L2jvgYVhg2qBCxLT2FGGuKPY44SS269bz7Ve0VpN12LXitOF0mCFvb
+ Pkr2Bph7MaSn8iSF+G2abB3yczwgd0395B4xDbxKJ6SC+52Oyn41UeDQGEn3Seq6hKu6
+ UB6Rn6EjPMrAdarUhPj+gZT9UIEuzB2vjB5Zt/wGu7FQePVcFzRi82ksByNjy1Iv41Ew
+ L6+0PFEuAfAsjP49rPjH2k1v1ktrCn77Vyw9ALPm6k62BkmhLOJGX7SILyOSqEVjkeeI
+ I0tDwDSqXhncUvexVH2zx0QHYjusYLexFmifimIQWoZCbPtmG6m/yKeDgBpGirHUZpAs
+ DEHQ==
+X-Gm-Message-State: AOJu0Yzz+YZfjiLGGq8AC/msZQvUVwBzZVmK6w84vN2mSq9bBYCj2Hd+
+ 6ReqvkWS1ct00rVxip2YdrLNO9hnjrobUJxBySY=
+X-Google-Smtp-Source: AGHT+IHFAUQgRvTgOC09VjglQ8HiWJGYjl0Am+PexC0pNkMUx2ngXu4cj6B2iVEgXxo75/Z0UTg8qUzvc3UoAQw0itQ=
+X-Received: by 2002:a05:6102:34d2:b0:443:7572:598b with SMTP id
+ a18-20020a05610234d200b004437572598bmr3163848vst.13.1692644674968; Mon, 21
+ Aug 2023 12:04:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230818090224.409192-1-chigot@adacore.com>
- <20230818090224.409192-3-chigot@adacore.com>
-In-Reply-To: <20230818090224.409192-3-chigot@adacore.com>
+References: <20230816141916.66898-1-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230816141916.66898-1-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 21 Aug 2023 15:00:43 -0400
-Message-ID: <CAKmqyKN0bFhoqm09K3WfPEpp0DYOiN+eDDmtzPPcZO+vXNx=jg@mail.gmail.com>
-Subject: Re: [PATCH 2/3] hw/char: riscv_htif: replace exit(0) with proper
- shutdown
-To: =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Date: Mon, 21 Aug 2023 15:04:09 -0400
+Message-ID: <CAKmqyKMjzz4KyouTgOUAW2p=8syA-0aDpNibjJgLJCm21ZdOTw@mail.gmail.com>
+Subject: Re: [PATCH v2] target/riscv: Update CSR bits name for svadu extension
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92b;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::930;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x930.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -89,59 +89,180 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Aug 18, 2023 at 5:03=E2=80=AFAM Cl=C3=A9ment Chigot <chigot@adacore=
-.com> wrote:
+On Wed, Aug 16, 2023 at 10:20=E2=80=AFAM Weiwei Li <liweiwei@iscas.ac.cn> w=
+rote:
 >
-> This replaces the exit(0) call by a shutdown request, ensuring a proper
-> cleanup of Qemu. Otherwise, some connections like gdb could be broken
-> without being correctly flushed.
+> The Svadu specification updated the name of the *envcfg bit from
+> HADE to ADUE.
 >
-> Signed-off-by: Cl=C3=A9ment Chigot <chigot@adacore.com>
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
 > ---
->  hw/char/riscv_htif.c | 12 +++++++++++-
->  1 file changed, 11 insertions(+), 1 deletion(-)
 >
-> diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
-> index 37d3ccc76b..c49d20a221 100644
-> --- a/hw/char/riscv_htif.c
-> +++ b/hw/char/riscv_htif.c
-> @@ -31,6 +31,7 @@
->  #include "qemu/error-report.h"
->  #include "exec/address-spaces.h"
->  #include "sysemu/dma.h"
-> +#include "sysemu/runstate.h"
+> v2:
+> * rename hade variable name to adue suggested by Daniel
 >
->  #define RISCV_DEBUG_HTIF 0
->  #define HTIF_DEBUG(fmt, ...)                                            =
-       \
-> @@ -205,7 +206,16 @@ static void htif_handle_tohost_write(HTIFState *s, u=
-int64_t val_written)
->                      g_free(sig_data);
->                  }
+>  target/riscv/cpu.c        |  4 ++--
+>  target/riscv/cpu_bits.h   |  8 ++++----
+>  target/riscv/cpu_helper.c |  6 +++---
+>  target/riscv/csr.c        | 12 ++++++------
+>  4 files changed, 15 insertions(+), 15 deletions(-)
 >
-> -                exit(exit_code);
-> +                /*
-> +                 * Shutdown request is a clean way to stop the QEMU, com=
-pared
-> +                 * to a direct call to exit(). But we can't pass the exi=
-t code
-> +                 * through it so avoid doing that when it can matter.
-> +                 */
-> +                if (exit_code) {
-> +                    exit(exit_code);
-> +                } else {
-> +                    qemu_system_shutdown_request(SHUTDOWN_CAUSE_GUEST_SH=
-UTDOWN);
-> +                }
->              } else {
->                  uint64_t syscall[8];
->                  cpu_physical_memory_read(payload, syscall, sizeof(syscal=
-l));
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 6b93b04453..f04a985d55 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -875,9 +875,9 @@ static void riscv_cpu_reset_hold(Object *obj)
+>      env->two_stage_lookup =3D false;
+>
+>      env->menvcfg =3D (cpu->cfg.ext_svpbmt ? MENVCFG_PBMTE : 0) |
+> -                   (cpu->cfg.ext_svadu ? MENVCFG_HADE : 0);
+> +                   (cpu->cfg.ext_svadu ? MENVCFG_ADUE : 0);
+>      env->henvcfg =3D (cpu->cfg.ext_svpbmt ? HENVCFG_PBMTE : 0) |
+> -                   (cpu->cfg.ext_svadu ? HENVCFG_HADE : 0);
+> +                   (cpu->cfg.ext_svadu ? HENVCFG_ADUE : 0);
+>
+>      /* Initialized default priorities of local interrupts. */
+>      for (i =3D 0; i < ARRAY_SIZE(env->miprio); i++) {
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 59f0ffd9e1..1c2ffae883 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -745,12 +745,12 @@ typedef enum RISCVException {
+>  #define MENVCFG_CBIE                       (3UL << 4)
+>  #define MENVCFG_CBCFE                      BIT(6)
+>  #define MENVCFG_CBZE                       BIT(7)
+> -#define MENVCFG_HADE                       (1ULL << 61)
+> +#define MENVCFG_ADUE                       (1ULL << 61)
+>  #define MENVCFG_PBMTE                      (1ULL << 62)
+>  #define MENVCFG_STCE                       (1ULL << 63)
+>
+>  /* For RV32 */
+> -#define MENVCFGH_HADE                      BIT(29)
+> +#define MENVCFGH_ADUE                      BIT(29)
+>  #define MENVCFGH_PBMTE                     BIT(30)
+>  #define MENVCFGH_STCE                      BIT(31)
+>
+> @@ -763,12 +763,12 @@ typedef enum RISCVException {
+>  #define HENVCFG_CBIE                       MENVCFG_CBIE
+>  #define HENVCFG_CBCFE                      MENVCFG_CBCFE
+>  #define HENVCFG_CBZE                       MENVCFG_CBZE
+> -#define HENVCFG_HADE                       MENVCFG_HADE
+> +#define HENVCFG_ADUE                       MENVCFG_ADUE
+>  #define HENVCFG_PBMTE                      MENVCFG_PBMTE
+>  #define HENVCFG_STCE                       MENVCFG_STCE
+>
+>  /* For RV32 */
+> -#define HENVCFGH_HADE                       MENVCFGH_HADE
+> +#define HENVCFGH_ADUE                       MENVCFGH_ADUE
+>  #define HENVCFGH_PBMTE                      MENVCFGH_PBMTE
+>  #define HENVCFGH_STCE                       MENVCFGH_STCE
+>
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 9f611d89bb..3a02079290 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -861,11 +861,11 @@ static int get_physical_address(CPURISCVState *env,=
+ hwaddr *physical,
+>      }
+>
+>      bool pbmte =3D env->menvcfg & MENVCFG_PBMTE;
+> -    bool hade =3D env->menvcfg & MENVCFG_HADE;
+> +    bool adue =3D env->menvcfg & MENVCFG_ADUE;
+>
+>      if (first_stage && two_stage && env->virt_enabled) {
+>          pbmte =3D pbmte && (env->henvcfg & HENVCFG_PBMTE);
+> -        hade =3D hade && (env->henvcfg & HENVCFG_HADE);
+> +        adue =3D adue && (env->henvcfg & HENVCFG_ADUE);
+>      }
+>
+>      int ptshift =3D (levels - 1) * ptidxbits;
+> @@ -1026,7 +1026,7 @@ restart:
+>
+>      /* Page table updates need to be atomic with MTTCG enabled */
+>      if (updated_pte !=3D pte && !is_debug) {
+> -        if (!hade) {
+> +        if (!adue) {
+>              return TRANSLATE_FAIL;
+>          }
+>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index ea7585329e..b4c66dc8ca 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -1951,7 +1951,7 @@ static RISCVException write_menvcfg(CPURISCVState *=
+env, int csrno,
+>      if (riscv_cpu_mxl(env) =3D=3D MXL_RV64) {
+>          mask |=3D (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
+>                  (cfg->ext_sstc ? MENVCFG_STCE : 0) |
+> -                (cfg->ext_svadu ? MENVCFG_HADE : 0);
+> +                (cfg->ext_svadu ? MENVCFG_ADUE : 0);
+>      }
+>      env->menvcfg =3D (env->menvcfg & ~mask) | (val & mask);
+>
+> @@ -1971,7 +1971,7 @@ static RISCVException write_menvcfgh(CPURISCVState =
+*env, int csrno,
+>      const RISCVCPUConfig *cfg =3D riscv_cpu_cfg(env);
+>      uint64_t mask =3D (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
+>                      (cfg->ext_sstc ? MENVCFG_STCE : 0) |
+> -                    (cfg->ext_svadu ? MENVCFG_HADE : 0);
+> +                    (cfg->ext_svadu ? MENVCFG_ADUE : 0);
+>      uint64_t valh =3D (uint64_t)val << 32;
+>
+>      env->menvcfg =3D (env->menvcfg & ~mask) | (valh & mask);
+> @@ -2023,7 +2023,7 @@ static RISCVException read_henvcfg(CPURISCVState *e=
+nv, int csrno,
+>       * henvcfg.stce is read_only 0 when menvcfg.stce =3D 0
+>       * henvcfg.hade is read_only 0 when menvcfg.hade =3D 0
+>       */
+> -    *val =3D env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_HA=
+DE) |
+> +    *val =3D env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_AD=
+UE) |
+>                             env->menvcfg);
+>      return RISCV_EXCP_NONE;
+>  }
+> @@ -2040,7 +2040,7 @@ static RISCVException write_henvcfg(CPURISCVState *=
+env, int csrno,
+>      }
+>
+>      if (riscv_cpu_mxl(env) =3D=3D MXL_RV64) {
+> -        mask |=3D env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG=
+_HADE);
+> +        mask |=3D env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG=
+_ADUE);
+>      }
+>
+>      env->henvcfg =3D (env->henvcfg & ~mask) | (val & mask);
+> @@ -2058,7 +2058,7 @@ static RISCVException read_henvcfgh(CPURISCVState *=
+env, int csrno,
+>          return ret;
+>      }
+>
+> -    *val =3D (env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_H=
+ADE) |
+> +    *val =3D (env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_A=
+DUE) |
+>                              env->menvcfg)) >> 32;
+>      return RISCV_EXCP_NONE;
+>  }
+> @@ -2067,7 +2067,7 @@ static RISCVException write_henvcfgh(CPURISCVState =
+*env, int csrno,
+>                                       target_ulong val)
+>  {
+>      uint64_t mask =3D env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE |
+> -                                    HENVCFG_HADE);
+> +                                    HENVCFG_ADUE);
+>      uint64_t valh =3D (uint64_t)val << 32;
+>      RISCVException ret;
+>
 > --
 > 2.25.1
 >
