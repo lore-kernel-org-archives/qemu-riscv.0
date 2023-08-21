@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B2D6C678DC
-	for <qemu-riscv@archiver.kernel.org>; Fri, 18 Aug 2023 10:04:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8C4BEE49A6
+	for <qemu-riscv@archiver.kernel.org>; Mon, 21 Aug 2023 16:16:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qWwLP-0001V1-Jy; Fri, 18 Aug 2023 06:04:39 -0400
+	id 1qY7ZT-0000Sd-5r; Mon, 21 Aug 2023 12:16:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chigot@adacore.com>)
- id 1qWwJW-00019A-Jl
- for qemu-riscv@nongnu.org; Fri, 18 Aug 2023 06:02:45 -0400
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1qY7ZR-0000S3-Qi
+ for qemu-riscv@nongnu.org; Mon, 21 Aug 2023 12:16:01 -0400
+Received: from mail-lj1-x233.google.com ([2a00:1450:4864:20::233])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <chigot@adacore.com>)
- id 1qWwJT-0001wc-83
- for qemu-riscv@nongnu.org; Fri, 18 Aug 2023 06:02:41 -0400
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-26b1adbd655so509504a91.1
- for <qemu-riscv@nongnu.org>; Fri, 18 Aug 2023 03:02:38 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1qY7ZB-000571-K9
+ for qemu-riscv@nongnu.org; Mon, 21 Aug 2023 12:16:01 -0400
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-2bba6fc4339so55762111fa.2
+ for <qemu-riscv@nongnu.org>; Mon, 21 Aug 2023 09:15:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=adacore.com; s=google; t=1692352957; x=1692957757;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=31GINzzYQwcFhLtFADq2qE3kGAZ7hCDuvdbkdYG3ZG4=;
- b=Hub7cTPQ4vN50w76b0/v3w79+ptQJrCl5m2gZw4S54f6LDyMQnRe1dFxYjlyteuIwL
- tojbHpYrZeTg9zrdvEfy/Q40IC4Z988yzr4mv9GBu09faLEbQ3nKHUHNEhpuTCdhLf+Y
- snRi7ModfTVBD2V4/QUyUpGm5SZaY62LoWQRsyxuceHAjfGcNaqhErc/nZrJGph1j+EK
- S7+vD8B6ch5NLqRp1Pmh5oWCyzCF8YiVQI2vZV5c2Nd6YGr25aPRBNxuEMhAE6wJRffZ
- aI08Dg7d+4ciBXij0zUg6NotWs2/44I9yxoNnV4UJi2ha0I+rWvebknNBMNL1bABwc5a
- StUQ==
+ d=sifive.com; s=google; t=1692634543; x=1693239343;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=nbaqsHhWhvbRUY2T7mkaRH3NtXhUGBcWkaATiI983q4=;
+ b=lAgRyGotU6p9QI8LrUJL2G87imHRZQQgX3N93WoGlytmZdZAD8Vhex7hIg3R1XHdbz
+ 9iRvBA9CtSSKR3K6Z56zIceeH6Fe08hL0OcimYVNajIQ7NZA3BaddD2Vjy0aVqXnInbD
+ tLF4igc8SrEq1XF8MwkgVIuJ7pTBWtmxCmTohhsm/UnBgdHk7NOLXYApNdpxPaCbzcNN
+ FnZWGiI2RY9eVG1SyMSgh3IAj/PlFb7c2TGHPpx+Dkb1D+pHybjG7sdAbd+tGu/AIkDi
+ pEzAos3m7TttEiWJMQdrn/x7NAzubTITa3Fs896VvkibAv+skZGaOyzj4injwnzniyOb
+ rU5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692352957; x=1692957757;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=31GINzzYQwcFhLtFADq2qE3kGAZ7hCDuvdbkdYG3ZG4=;
- b=UvBoV4f1fvH/2DFl+cHQGRiyhH8SzvUmbh+Ob9Ch9HaiXjzny/gaE3sn/RtP2LJJyd
- kP9EpCPY7LTyMCCuecNg9lF2heCmXUVR/6jZi3Yo55Y+fYrXnqAYXyXBuY4zGNZIqNd8
- vk4WFPsdEP1EwZdKAJ3BspFRXpIR6Ml0ElfF7SwSWCdy3g9cz4MxMhbKz7Mvc7kxUB3M
- Q0o9zu5Ycku5MrRjLb/rzmLS8mzYVicebml6G+06OyhTHZ+q+XVqbcCpNx0+uSJ3WVPS
- uBxMGHhcEr1qEYH1QyIsUMc4FovrthdL3Vv4zTm0AFNWzY3IaQmaDKnM/gOIrFu/546x
- H8ZA==
-X-Gm-Message-State: AOJu0YzFGdiFfW5IFBgNqUa/VUb9AwT/HzeKH94NKN5WGsBhAXXumnRZ
- Y9cLmEqd3fQp82f59k70+Y31xL4igT87vRsaSxtn1A==
-X-Google-Smtp-Source: AGHT+IE6rNpSw5TwL5XaRfZnlR+euKR85FYMHegC0NFntgq5m8KLCkl1WNdKFIZuuqZeZc6Gx1qWZ067g7DCSBI5co0=
-X-Received: by 2002:a17:90b:3d1:b0:26d:506e:24a3 with SMTP id
- go17-20020a17090b03d100b0026d506e24a3mr577997pjb.38.1692352957042; Fri, 18
- Aug 2023 03:02:37 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692634543; x=1693239343;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=nbaqsHhWhvbRUY2T7mkaRH3NtXhUGBcWkaATiI983q4=;
+ b=DrR4d5v0vsaluNRxK+0xgeWKFh17iuI1vkpOgFV9cNZhp+W6aM/nYh7F+5SJltQ2cY
+ GF0B2IuNaEY/MAPzOvNT8siIEGUWDsyIV5b9i3Lw0pOBr6wrA7kW+8J2lfph0QhHlUaC
+ v8YEIL1E1cdjZrK7Ol2Zj9fYgrtzn1Ei5iAQ0d8ETTLZOiiEec5lmXV0rVFql+Yh7ox2
+ PtmkIgqTRVQMBXbXO+o+c2tU44W/sln0zx70ECfGBSzG8sMXpR+2XDWRF4dNGJcIuX63
+ OaSPTInq4IvuKnCwjGAtvxGeLLtvqgHS3coOTQSG/S71WVm4Mssy9g+XlTql9fw0dZGq
+ aXmQ==
+X-Gm-Message-State: AOJu0YxLum+gtO7/vceg5DGkN5psTURw5pCZgIYYTm15GBxLslYnqByu
+ AOjkwoRnDVQLSFr7ZvDmiidFWGFFtM3wz7YOY867dw==
+X-Google-Smtp-Source: AGHT+IEy3nRVK4gX/idDFdi1vCZDPKPtGTa1PNCWfWmRHjq3Y3pYaNVIZqjEhDwVC83+ZkAM8Y5rw2Q/T5kN3FtKtGY=
+X-Received: by 2002:a2e:99d4:0:b0:2bc:b9c7:7ba8 with SMTP id
+ l20-20020a2e99d4000000b002bcb9c77ba8mr3139171ljj.43.1692634543036; Mon, 21
+ Aug 2023 09:15:43 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230818090224.409192-1-chigot@adacore.com>
- <20230818090224.409192-4-chigot@adacore.com>
- <CAFEAcA_1SdA_BH_u01FAYaZkABbCB2EcSf329=-GpZ2canjP7A@mail.gmail.com>
-In-Reply-To: <CAFEAcA_1SdA_BH_u01FAYaZkABbCB2EcSf329=-GpZ2canjP7A@mail.gmail.com>
-From: =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>
-Date: Fri, 18 Aug 2023 12:02:26 +0200
-Message-ID: <CAJ307Ei_nx9T_p105W7hR8JTuosHQ2WXf7Pn=qELG=Y59nt7EA@mail.gmail.com>
-Subject: Re: [PATCH 3/3] gdbstub: replace exit(0) with proper shutdown
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
- envelope-from=chigot@adacore.com; helo=mail-pj1-x1033.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <20230728082502.26439-1-jason.chien@sifive.com>
+ <20230728082502.26439-2-jason.chien@sifive.com>
+ <CAKmqyKMX=Q3+kdaKAJrQHeya7ctnyt0HSt=NUQWUAOj9JEPZ8g@mail.gmail.com>
+In-Reply-To: <CAKmqyKMX=Q3+kdaKAJrQHeya7ctnyt0HSt=NUQWUAOj9JEPZ8g@mail.gmail.com>
+From: Jason Chien <jason.chien@sifive.com>
+Date: Tue, 22 Aug 2023 00:15:31 +0800
+Message-ID: <CADr__8rmCu9F2ktxYGtZfUeD_z+pNVa4KKsZ8XvxxVGmMJfrcw@mail.gmail.com>
+Subject: Re: [PATCH 2/2] hw/intc: Make rtc variable names consistent
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Anup Patel <apatel@ventanamicro.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Andrew Jones <ajones@ventanamicro.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Content-Type: multipart/alternative; boundary="000000000000ac44430603713013"
+Received-SPF: pass client-ip=2a00:1450:4864:20::233;
+ envelope-from=jason.chien@sifive.com; helo=mail-lj1-x233.google.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
+ DKIM_SIGNED=0.1, HTML_MESSAGE=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -90,108 +91,145 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Aug 18, 2023 at 11:10=E2=80=AFAM Peter Maydell <peter.maydell@linar=
-o.org> wrote:
+--000000000000ac44430603713013
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Ping.
+
+On Fri, Aug 11, 2023 at 2:25=E2=80=AFAM Alistair Francis <alistair23@gmail.=
+com>
+wrote:
+
+> On Fri, Jul 28, 2023 at 4:57=E2=80=AFAM Jason Chien <jason.chien@sifive.c=
+om>
+> wrote:
+> >
+> > The variables whose values are given by cpu_riscv_read_rtc() should be
+> named
+> > "rtc". The variables whose value are given by cpu_riscv_read_rtc_raw()
+> > should be named "rtc_r".
+> >
+> > Signed-off-by: Jason Chien <jason.chien@sifive.com>
 >
-> On Fri, 18 Aug 2023 at 10:03, Cl=C3=A9ment Chigot <chigot@adacore.com> wr=
-ote:
-> >
-> > This replaces the exit(0) call by a shutdown request, ensuring a proper
-> > cleanup of Qemu. Otherwise, some connections could be broken without
-> > being correctly flushed.
-> >
-> > Signed-off-by: Cl=C3=A9ment Chigot <chigot@adacore.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+>
+> Alistair
+>
 > > ---
-> >  gdbstub/gdbstub.c |  3 +--
-> >  gdbstub/softmmu.c | 11 +++++++++++
-> >  gdbstub/user.c    |  2 ++
-> >  3 files changed, 14 insertions(+), 2 deletions(-)
+> >  hw/intc/riscv_aclint.c | 6 +++---
+> >  1 file changed, 3 insertions(+), 3 deletions(-)
 > >
-> > diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-> > index 5f28d5cf57..358eed1935 100644
-> > --- a/gdbstub/gdbstub.c
-> > +++ b/gdbstub/gdbstub.c
-> > @@ -1298,7 +1298,6 @@ static void handle_v_kill(GArray *params, void *u=
-ser_ctx)
-> >      gdb_put_packet("OK");
-> >      error_report("QEMU: Terminated via GDBstub");
-> >      gdb_exit(0);
-> > -    exit(0);
-> >  }
+> > diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
+> > index bf77e29a70..25cf7a5d9d 100644
+> > --- a/hw/intc/riscv_aclint.c
+> > +++ b/hw/intc/riscv_aclint.c
+> > @@ -64,13 +64,13 @@ static void
+> riscv_aclint_mtimer_write_timecmp(RISCVAclintMTimerState *mtimer,
+> >      uint64_t next;
+> >      uint64_t diff;
 > >
-> >  static const GdbCmdParseEntry gdb_v_commands_table[] =3D {
-> > @@ -1818,7 +1817,7 @@ static int gdb_handle_packet(const char *line_buf=
-)
-> >          /* Kill the target */
-> >          error_report("QEMU: Terminated via GDBstub");
-> >          gdb_exit(0);
-> > -        exit(0);
-> > +        break;
-> >      case 'D':
-> >          {
-> >              static const GdbCmdParseEntry detach_cmd_desc =3D {
-> > diff --git a/gdbstub/softmmu.c b/gdbstub/softmmu.c
-> > index f509b7285d..9ca7ae10bc 100644
-> > --- a/gdbstub/softmmu.c
-> > +++ b/gdbstub/softmmu.c
-> > @@ -434,6 +434,17 @@ void gdb_exit(int code)
-> >      }
+> > -    uint64_t rtc_r =3D cpu_riscv_read_rtc(mtimer);
+> > +    uint64_t rtc =3D cpu_riscv_read_rtc(mtimer);
 > >
-> >      qemu_chr_fe_deinit(&gdbserver_system_state.chr, true);
-> > +
-> > +    /*
-> > +     * Shutdown request is a clean way to stop the QEMU, compared
-> > +     * to a direct call to exit(). But we can't pass the exit code
-> > +     * through it so avoid doing that when it can matter.
-> > +     */
-> > +    if (code) {
-> > +        exit(code);
-> > +    } else {
-> > +        qemu_system_shutdown_request(SHUTDOWN_CAUSE_GUEST_SHUTDOWN);
-> > +    }
-> >  }
+> >      /* Compute the relative hartid w.r.t the socket */
+> >      hartid =3D hartid - mtimer->hartid_base;
 > >
-> >  /*
-> > diff --git a/gdbstub/user.c b/gdbstub/user.c
-> > index 5b375be1d9..f3d97d621f 100644
-> > --- a/gdbstub/user.c
-> > +++ b/gdbstub/user.c
-> > @@ -113,6 +113,8 @@ void gdb_exit(int code)
-> >          gdb_put_packet(buf);
-> >          gdbserver_state.allow_stop_reply =3D false;
-> >      }
-> > +
-> > +    exit(code);
-> >  }
+> >      mtimer->timecmp[hartid] =3D value;
+> > -    if (mtimer->timecmp[hartid] <=3D rtc_r) {
+> > +    if (mtimer->timecmp[hartid] <=3D rtc) {
+> >          /*
+> >           * If we're setting an MTIMECMP value in the "past",
+> >           * immediately raise the timer interrupt
+> > @@ -81,7 +81,7 @@ static void
+> riscv_aclint_mtimer_write_timecmp(RISCVAclintMTimerState *mtimer,
+> >
+> >      /* otherwise, set up the future timer interrupt */
+> >      qemu_irq_lower(mtimer->timer_irqs[hartid]);
+> > -    diff =3D mtimer->timecmp[hartid] - rtc_r;
+> > +    diff =3D mtimer->timecmp[hartid] - rtc;
+> >      /* back to ns (note args switched in muldiv64) */
+> >      uint64_t ns_diff =3D muldiv64(diff, NANOSECONDS_PER_SECOND,
+> timebase_freq);
+> >
+> > --
+> > 2.17.1
+> >
+> >
 >
-> These are not the only places that call gdb_exit().
-> Notably, qemu_cleanup() calls it, and I'm pretty sure
-> it does not expect that gdb_exit() will either call
-> exit() or qemu_system_shutdown_request(), because it's
-> already in the process of cleaning up and stopping
-> the system.
 
-Indeed, I did miss that. I used to have it directly in
-gdb_handle_packet and in handle_v_kill. But now that the support of
-softmmu and user has been splitted, I thought putting it in gdb_exit
-was a solution.
-However, IIUC the code, the second request will simply be ignored, the
-main loop (where the requests matter) have been already exited.
-I see what I can do anyway to avoid this double request.
+--000000000000ac44430603713013
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> If we send the "we're exiting" report to the gdb process,
-> that ought to be sufficient. If we're not actually managing
-> to send that last packet to gdb because we don't flush
-> the data out to the file descriptor, then it seems to me
-> that the fix ought to be to ensure we do do that flush
-> as part of gdb_exit() not to rearrange or try to avoid
-> all the subsequent calls to exit().
+<div dir=3D"ltr">Ping.</div><br><div class=3D"gmail_quote"><div dir=3D"ltr"=
+ class=3D"gmail_attr">On Fri, Aug 11, 2023 at 2:25=E2=80=AFAM Alistair Fran=
+cis &lt;<a href=3D"mailto:alistair23@gmail.com">alistair23@gmail.com</a>&gt=
+; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px=
+ 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On Fri,=
+ Jul 28, 2023 at 4:57=E2=80=AFAM Jason Chien &lt;<a href=3D"mailto:jason.ch=
+ien@sifive.com" target=3D"_blank">jason.chien@sifive.com</a>&gt; wrote:<br>
+&gt;<br>
+&gt; The variables whose values are given by cpu_riscv_read_rtc() should be=
+ named<br>
+&gt; &quot;rtc&quot;. The variables whose value are given by cpu_riscv_read=
+_rtc_raw()<br>
+&gt; should be named &quot;rtc_r&quot;.<br>
+&gt;<br>
+&gt; Signed-off-by: Jason Chien &lt;<a href=3D"mailto:jason.chien@sifive.co=
+m" target=3D"_blank">jason.chien@sifive.com</a>&gt;<br>
+<br>
+Reviewed-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.co=
+m" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
+<br>
+Alistair<br>
+<br>
+&gt; ---<br>
+&gt;=C2=A0 hw/intc/riscv_aclint.c | 6 +++---<br>
+&gt;=C2=A0 1 file changed, 3 insertions(+), 3 deletions(-)<br>
+&gt;<br>
+&gt; diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c<br>
+&gt; index bf77e29a70..25cf7a5d9d 100644<br>
+&gt; --- a/hw/intc/riscv_aclint.c<br>
+&gt; +++ b/hw/intc/riscv_aclint.c<br>
+&gt; @@ -64,13 +64,13 @@ static void riscv_aclint_mtimer_write_timecmp(RISC=
+VAclintMTimerState *mtimer,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 uint64_t next;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 uint64_t diff;<br>
+&gt;<br>
+&gt; -=C2=A0 =C2=A0 uint64_t rtc_r =3D cpu_riscv_read_rtc(mtimer);<br>
+&gt; +=C2=A0 =C2=A0 uint64_t rtc =3D cpu_riscv_read_rtc(mtimer);<br>
+&gt;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 /* Compute the relative hartid w.r.t the socket */=
+<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 hartid =3D hartid - mtimer-&gt;hartid_base;<br>
+&gt;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 mtimer-&gt;timecmp[hartid] =3D value;<br>
+&gt; -=C2=A0 =C2=A0 if (mtimer-&gt;timecmp[hartid] &lt;=3D rtc_r) {<br>
+&gt; +=C2=A0 =C2=A0 if (mtimer-&gt;timecmp[hartid] &lt;=3D rtc) {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /*<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* If we&#39;re setting an MTIM=
+ECMP value in the &quot;past&quot;,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* immediately raise the timer =
+interrupt<br>
+&gt; @@ -81,7 +81,7 @@ static void riscv_aclint_mtimer_write_timecmp(RISCVA=
+clintMTimerState *mtimer,<br>
+&gt;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 /* otherwise, set up the future timer interrupt */=
+<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 qemu_irq_lower(mtimer-&gt;timer_irqs[hartid]);<br>
+&gt; -=C2=A0 =C2=A0 diff =3D mtimer-&gt;timecmp[hartid] - rtc_r;<br>
+&gt; +=C2=A0 =C2=A0 diff =3D mtimer-&gt;timecmp[hartid] - rtc;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 /* back to ns (note args switched in muldiv64) */<=
+br>
+&gt;=C2=A0 =C2=A0 =C2=A0 uint64_t ns_diff =3D muldiv64(diff, NANOSECONDS_PE=
+R_SECOND, timebase_freq);<br>
+&gt;<br>
+&gt; --<br>
+&gt; 2.17.1<br>
+&gt;<br>
+&gt;<br>
+</blockquote></div>
 
-Here, I'm seeing the symptoms with a gdb connection being closed too
-sharply and a fd not being flush. But looking at the qemu_cleanup(),
-many things could require a proper cleanup which will be skipped by a
-simple exit(0). This could lead to many unexpected side effects.
-
-Thanks,
-Cl=C3=A9ment
+--000000000000ac44430603713013--
 
