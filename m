@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 150D9EE49AE
-	for <qemu-riscv@archiver.kernel.org>; Tue, 22 Aug 2023 18:42:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D1BEEE49B0
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Aug 2023 07:07:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qYWKL-0004D5-JH; Tue, 22 Aug 2023 14:42:07 -0400
+	id 1qYhxP-0006XF-UE; Wed, 23 Aug 2023 03:07:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qYWKH-0004CT-N5; Tue, 22 Aug 2023 14:42:01 -0400
-Received: from mail-vs1-xe30.google.com ([2607:f8b0:4864:20::e30])
+ (Exim 4.90_1) (envelope-from <chigot@adacore.com>)
+ id 1qYhxO-0006Wr-E8
+ for qemu-riscv@nongnu.org; Wed, 23 Aug 2023 03:07:10 -0400
+Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qYWKF-00089E-0D; Tue, 22 Aug 2023 14:42:01 -0400
-Received: by mail-vs1-xe30.google.com with SMTP id
- ada2fe7eead31-44d3e4ad403so1163277137.0; 
- Tue, 22 Aug 2023 11:41:57 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <chigot@adacore.com>)
+ id 1qYhxM-00044J-RK
+ for qemu-riscv@nongnu.org; Wed, 23 Aug 2023 03:07:10 -0400
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-31969580797so4716058f8f.3
+ for <qemu-riscv@nongnu.org>; Wed, 23 Aug 2023 00:07:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692729717; x=1693334517;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=24rQxjJugoljmS1Ea4gOyv3d++Q+Q9bMNHmgnVEIkqw=;
- b=dDwTJgqR0Mw6DkA6F7SsOvgtsc3DSASXvzxaXpxpm0q/HqLXCv9kxJ4PMv/An0haaR
- 7YBc/Xi3fRz2VZl+LJ5uO+ptGuJcZYr2n6Ui3EKz/lWTqOFAraZLSA5Ytq2cLlIeJUl6
- GsnZX9D9nWT5kJjPBKxsgBj2io79WlFyamcyZhegSOhXsC1eoq0ZDmhaHNuKzjlGQX4A
- 90DRWVM/+txCQZdr54lV6ogi40tC/mzRGu2YHpUu0Io+4OqU6C5LeZ+RoPgEHeznEe/g
- ru4/fyFHFlZOH5rnwflggM41Yf7tznYzUEDwFWWyrhehwYdRjrRXXBnaylN70lDb4BTI
- sJ+w==
+ d=adacore.com; s=google; t=1692774427; x=1693379227;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XhD97iO9Cr9UC31aJ5SoAXRsEoQS/yz+IXBL36dUT+0=;
+ b=QkeCfdMVbNKGr09S+IC/2GgrzcZ/sL4AkI1PX7gmq146WTu91SExg51vLQo7S9pp78
+ x6N/rNfc+xfhFnBgT3uLnl9X63A29EFYBWjc+eezcUA0FO8mWnD5MXB3CPoVBc1m6XPH
+ us3/LSUKi0ETSFXRlggh0Spaqig6xmZi5xD3O6V3O9C1m3td7A3p+Z3gTWH7bFswUctb
+ ZAEnDRZF6wfNBJfPYehuHOE0Hs+5v2cG0zTNsysBP8ZuZKNNZDLhvwss1zBDmY4fsFQq
+ RcYHeukIyyDsfG1eSOLPnmlGkC9vWTR/S46wFPrOO6K7lfYtEc/t1HBNOAuxiy8QpDib
+ Wbuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692729717; x=1693334517;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=24rQxjJugoljmS1Ea4gOyv3d++Q+Q9bMNHmgnVEIkqw=;
- b=ZFWOsJAXAAol0h0xz5tqNryFttV2zJdGVDaHvbGLzJmXjWPmuNGteDX7GBrSvnEFA0
- 7FY8zCKrryJzgu21NGOq3RtOpJh0VYyzX74gYtnONM6UsOktGdNQv48el17aOChXsI8l
- 5aSzsy8Z26N11V5JVvZUptuigETcaoa2QdnwTpHbYIvdf2F68VIKEj4Rh3iSnsrqt8VE
- QIfKzE5B+Y/h6uA7FuqpMZS/95/ZEBDf5nBRe6CvU+kWF4F/CPSeQ7GvUvb8CsFZb92V
- FaaMllI52HdmhrwxSwXY3xDPov0xTzlBZG9YKBW8jsdUnPbd/5XMV4eUMRs1Ihoi1/At
- jAaw==
-X-Gm-Message-State: AOJu0YyZFEKSow9AqqRGpvFZqSemAuvcWab0QegLkiJArQbU5RkzMOmz
- pt0gzmVhMNmOdZZQeaWepT47OtUWpAZ8sbDwjj8=
-X-Google-Smtp-Source: AGHT+IGL2xMo0QRk2MAG9DEbjeFpgjMPxioqgra3hTSEtM32guOEgXTfwX2okOQYawKeZgBU/3xFP21XdDRJe04e6y8=
-X-Received: by 2002:a67:e20d:0:b0:44d:95d4:9fa1 with SMTP id
- g13-20020a67e20d000000b0044d95d49fa1mr1489690vsa.17.1692729716898; Tue, 22
- Aug 2023 11:41:56 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692774427; x=1693379227;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=XhD97iO9Cr9UC31aJ5SoAXRsEoQS/yz+IXBL36dUT+0=;
+ b=QP8h2VdwEG9Pyt7TBot6W1paKkRGZYB1p+B6TR32GQ23TuUD/jCQg9bRyt32suFUBZ
+ o7ewyvYklYUhXkaAA91S48sfxms2b/wneiZPcnKj7r+jTpU+ype6iH2SrbMTIAlk8rdw
+ ma+1bKjdUp9/7gigtZYyPD8e/kXfirIMOkeoYLHH1Z5fggNNrl5kd1cmagBn/P15XyLj
+ yOCjOCcs9iBPRVq8FU54vcEmfTGLZfauqnfUwoBb6gmOaNkI1yNIaP3g+1KpRsy3FD3X
+ zuKYC4m8tFzeT6Z0WUd+WRa8HDoc80GWInbyIta2GS3WhSjqIuVYCfLWvHc58JD1HGOz
+ DKPA==
+X-Gm-Message-State: AOJu0YxFisbdGPbMD+vlihW6N9fdgtcysB/iDoVIgT60P1sFwHVdveCl
+ tc389GXrolNwpwRaTcgZZv3+lA==
+X-Google-Smtp-Source: AGHT+IFkgUUI8BS2Ce2Cpm9VkzCGS4qcldZ1sZgkQXpFMBofifVVcTX+vINuY6E6VyA3eHHQmb2siA==
+X-Received: by 2002:adf:f64c:0:b0:319:77dd:61f9 with SMTP id
+ x12-20020adff64c000000b0031977dd61f9mr8845679wrp.35.1692774427389; 
+ Wed, 23 Aug 2023 00:07:07 -0700 (PDT)
+Received: from chigot-Dell.home ([2a01:cb15:8123:8100:d434:6b1d:751:97d0])
+ by smtp.gmail.com with ESMTPSA id
+ o1-20020a5d58c1000000b003180155493esm17750970wrf.67.2023.08.23.00.07.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 23 Aug 2023 00:07:06 -0700 (PDT)
+From: =?UTF-8?q?Cl=C3=A9ment=20Chigot?= <chigot@adacore.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org,
+ =?UTF-8?q?Cl=C3=A9ment=20Chigot?= <chigot@adacore.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v2 2/3] hw/char: riscv_htif: replace exit(0) with proper
+ shutdown
+Date: Wed, 23 Aug 2023 09:07:04 +0200
+Message-Id: <20230823070704.363098-1-chigot@adacore.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20230817152903.694926-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20230817152903.694926-1-dbarboza@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 22 Aug 2023 14:41:30 -0400
-Message-ID: <CAKmqyKPLCuOe-pJiDnbchUS3QMBYHn0wQiGj+F9LT07g2+9v0Q@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: fix satp_mode_finalize() when
- satp_mode.supported = 0
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, Alexandre Ghiti <alexghiti@rivosinc.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e30;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe30.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::431;
+ envelope-from=chigot@adacore.com; helo=mail-wr1-x431.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -90,106 +94,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Aug 17, 2023 at 11:29=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
-> In the same emulated RISC-V host, the 'host' KVM CPU takes 4 times
-> longer to boot than the 'rv64' KVM CPU.
->
-> The reason is an unintended behavior of riscv_cpu_satp_mode_finalize()
-> when satp_mode.supported =3D 0, i.e. when cpu_init() does not set
-> satp_mode_max_supported(). satp_mode_max_from_map(map) does:
->
-> 31 - __builtin_clz(map)
->
-> This means that, if satp_mode.supported =3D 0, satp_mode_supported_max
-> wil be '31 - 32'. But this is C, so satp_mode_supported_max will gladly
-> set it to UINT_MAX (4294967295). After that, if the user didn't set a
-> satp_mode, set_satp_mode_default_map(cpu) will make
->
-> cfg.satp_mode.map =3D cfg.satp_mode.supported
->
-> So satp_mode.map =3D 0. And then satp_mode_map_max will be set to
-> satp_mode_max_from_map(cpu->cfg.satp_mode.map), i.e. also UINT_MAX. The
-> guard "satp_mode_map_max > satp_mode_supported_max" doesn't protect us
-> here since both are UINT_MAX.
->
-> And finally we have 2 loops:
->
->         for (int i =3D satp_mode_map_max - 1; i >=3D 0; --i) {
->
-> Which are, in fact, 2 loops from UINT_MAX -1 to -1. This is where the
-> extra delay when booting the 'host' CPU is coming from.
->
-> Commit 43d1de32f8 already set a precedence for satp_mode.supported =3D 0
-> in a different manner. We're doing the same here. If supported =3D=3D 0,
-> interpret as 'the CPU wants the OS to handle satp mode alone' and skip
-> satp_mode_finalize().
->
-> We'll also put a guard in satp_mode_max_from_map() to assert out if map
-> is 0 since the function is not ready to deal with it.
->
-> Cc: Alexandre Ghiti <alexghiti@rivosinc.com>
-> Fixes: 6f23aaeb9b ("riscv: Allow user to set the satp mode")
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+This replaces the exit(0) call by a shutdown request, ensuring a proper
+cleanup of Qemu. Otherwise, some connections like gdb could be broken
+without being correctly flushed.
 
-Thanks!
+Signed-off-by: Clément Chigot <chigot@adacore.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ hw/char/riscv_htif.c | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
 
-Applied to riscv-to-apply.next
+diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
+index 37d3ccc76b..c49d20a221 100644
+--- a/hw/char/riscv_htif.c
++++ b/hw/char/riscv_htif.c
+@@ -31,6 +31,7 @@
+ #include "qemu/error-report.h"
+ #include "exec/address-spaces.h"
+ #include "sysemu/dma.h"
++#include "sysemu/runstate.h"
+ 
+ #define RISCV_DEBUG_HTIF 0
+ #define HTIF_DEBUG(fmt, ...)                                                   \
+@@ -205,7 +206,16 @@ static void htif_handle_tohost_write(HTIFState *s, uint64_t val_written)
+                     g_free(sig_data);
+                 }
+ 
+-                exit(exit_code);
++                /*
++                 * Shutdown request is a clean way to stop the QEMU, compared
++                 * to a direct call to exit(). But we can't pass the exit code
++                 * through it so avoid doing that when it can matter.
++                 */
++                if (exit_code) {
++                    exit(exit_code);
++                } else {
++                    qemu_system_shutdown_request(SHUTDOWN_CAUSE_GUEST_SHUTDOWN);
++                }
+             } else {
+                 uint64_t syscall[8];
+                 cpu_physical_memory_read(payload, syscall, sizeof(syscall));
+-- 
+2.25.1
 
-Alistair
-
-> ---
->  target/riscv/cpu.c | 23 ++++++++++++++++++++---
->  1 file changed, 20 insertions(+), 3 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index d608026a28..86da93c7bc 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -349,6 +349,17 @@ static uint8_t satp_mode_from_str(const char *satp_m=
-ode_str)
->
->  uint8_t satp_mode_max_from_map(uint32_t map)
->  {
-> +    /*
-> +     * 'map =3D 0' will make us return (31 - 32), which C will
-> +     * happily overflow to UINT_MAX. There's no good result to
-> +     * return if 'map =3D 0' (e.g. returning 0 will be ambiguous
-> +     * with the result for 'map =3D 1').
-> +     *
-> +     * Assert out if map =3D 0. Callers will have to deal with
-> +     * it outside of this function.
-> +     */
-> +    g_assert(map > 0);
-> +
->      /* map here has at least one bit set, so no problem with clz */
->      return 31 - __builtin_clz(map);
->  }
-> @@ -1387,9 +1398,15 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *c=
-pu, Error **errp)
->  static void riscv_cpu_satp_mode_finalize(RISCVCPU *cpu, Error **errp)
->  {
->      bool rv32 =3D riscv_cpu_mxl(&cpu->env) =3D=3D MXL_RV32;
-> -    uint8_t satp_mode_map_max;
-> -    uint8_t satp_mode_supported_max =3D
-> -                        satp_mode_max_from_map(cpu->cfg.satp_mode.suppor=
-ted);
-> +    uint8_t satp_mode_map_max, satp_mode_supported_max;
-> +
-> +    /* The CPU wants the OS to decide which satp mode to use */
-> +    if (cpu->cfg.satp_mode.supported =3D=3D 0) {
-> +        return;
-> +    }
-> +
-> +    satp_mode_supported_max =3D
-> +                    satp_mode_max_from_map(cpu->cfg.satp_mode.supported)=
-;
->
->      if (cpu->cfg.satp_mode.map =3D=3D 0) {
->          if (cpu->cfg.satp_mode.init =3D=3D 0) {
-> --
-> 2.41.0
->
->
 
