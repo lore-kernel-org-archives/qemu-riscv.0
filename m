@@ -4,89 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C175DC27C40
-	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Aug 2023 14:33:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E99EC7113B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Aug 2023 22:15:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qZBN7-0001LM-Te; Thu, 24 Aug 2023 10:31:41 -0400
+	id 1qZIbT-0007hQ-5y; Thu, 24 Aug 2023 18:14:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qZBN4-0001Ax-TQ
- for qemu-riscv@nongnu.org; Thu, 24 Aug 2023 10:31:41 -0400
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qZIbS-0007hA-5o
+ for qemu-riscv@nongnu.org; Thu, 24 Aug 2023 18:14:58 -0400
+Received: from mail-oi1-x22e.google.com ([2607:f8b0:4864:20::22e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qZBN2-0000uE-FT
- for qemu-riscv@nongnu.org; Thu, 24 Aug 2023 10:31:38 -0400
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-1bba48b0bd2so46799275ad.3
- for <qemu-riscv@nongnu.org>; Thu, 24 Aug 2023 07:31:36 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qZIbP-0005xI-Rq
+ for qemu-riscv@nongnu.org; Thu, 24 Aug 2023 18:14:57 -0400
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-3a88ff732aeso597739b6e.0
+ for <qemu-riscv@nongnu.org>; Thu, 24 Aug 2023 15:14:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1692887495; x=1693492295;
+ d=ventanamicro.com; s=google; t=1692915294; x=1693520094;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=M8WlI/tYHPNEXK52UPbxI6DX+BQEBJBMyIzPtqCgaAA=;
- b=cHG4nAl1x38ldT53jxQL5vsVbblPbxn0vp/vVM93LqRnOaItEbNlaazFcVZ0B4mDQE
- zXBWFPb/ewpIUMrGXjLvrdr3DsYH65NAFcXxVVK9N/PiUKcnz9yO0713chXzxp2F+vew
- KGRmFeDzCnJYQwMeIH2TMJaho8PyQ+Zwqx+8r6KX5FhesRR858/aYuDaj0aR4s8T1MzQ
- lqmKwxegeykX3ThpU/bMFBZsJZue4vk0r5wejAaCB6srLAUorw68AF1BOxCQFoOqa7c3
- +IReUqhi/Q7t6TB4i2Fv7nnw6DdtEXaKPDVh08S1igd1mwWI7gSdAmzIgeOZ6My/dM+W
- ZgWw==
+ bh=Z7GGhsp+GgEZfjKLvw+LVSBGm5g6O/+fRFcmgmdrOO8=;
+ b=L2G5m8802YOAZ9rqmSiMQEGI6RxmRULInNJZbOYhSxAUq1r4R0xqXPQZMAtuIvSrot
+ lGfPiRRPYu3dFfNvtltxQjx2Z2MkucUXaspNXAuCQJ8ZtKTALVQSjr3RXr4Y3F4q6TX2
+ 2uP4VRR5JZL8kKzKDV2D8lXqVcnhnjkdqS9EOgYXsKssvAwdWXviRYnCjZOrrmfcjVir
+ mGyH/jklgk3Z/XAKryP6VFWNQKkXXn1bMoW57g6nLFdYe+jDWKx/1fXraHlXGJBLX7UH
+ NBgh2KEZhXLnyEGZjtGk+3uWtckpcEhN4Q+bcApYV+GO7uT1VMt/m9YYrTaB/ce6r7y7
+ lShA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692887495; x=1693492295;
+ d=1e100.net; s=20221208; t=1692915294; x=1693520094;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=M8WlI/tYHPNEXK52UPbxI6DX+BQEBJBMyIzPtqCgaAA=;
- b=j22MrMbJGy0T+mO9VQUwUzNJh/w+9RfxlvT/iztwaKGOgHSevAYFUqtxJDhs0Mb/Zf
- ItLh2pSLm2Nm4CnGSYrvxRiWe9gY+Os3+YUB17l7Dg77QEP1km1XpssU7k/fWlep+STu
- 9azwpsbYYJqBmytcVgHD30g2XaOyF4/00HeTaXQKdKRk+HESuq1cOztVnw1iXuCSEt+0
- 4seNtuBeSLt321MTJ5/X8qGd1mzLL3ugtpj5z75KU0JHyXLdsR4mvt8uDJHHNr96vgYt
- nq9twLa5pS4EnBzWk/OndyW97TrA/jHdFmkbogYS2WtvQAyHLaRZvow+EtX3oBRtjh3f
- OwPA==
-X-Gm-Message-State: AOJu0YzSCicsBJVVg7VhZJMOMs5BVcfDNWKQy5kn+biLueDtS4YR2P9V
- XGHmo4ymKnWGcpzEEc/TDYdw/hmGtItinEXToK8=
-X-Google-Smtp-Source: AGHT+IHZ5HhIMdGYSRjEUy1XN8+oH6pyU//LJ6yWTb7VMWx2mHHtPO+KEU/PUuPkcoqBbJt5rXtKAw==
-X-Received: by 2002:a17:90b:4b4f:b0:262:df1d:8e16 with SMTP id
- mi15-20020a17090b4b4f00b00262df1d8e16mr12628470pjb.33.1692887494991; 
- Thu, 24 Aug 2023 07:31:34 -0700 (PDT)
-Received: from sunil-pc.Dlink ([106.51.191.205])
- by smtp.gmail.com with ESMTPSA id
- n6-20020a17090a2bc600b00262fc3d911esm1666864pje.28.2023.08.24.07.31.28
+ bh=Z7GGhsp+GgEZfjKLvw+LVSBGm5g6O/+fRFcmgmdrOO8=;
+ b=HSPfBQUcKXIDnubc8on8myWpIw3jr/VnZvlhAXtg6QC5zmHIuaXkoPGH1h3/B96DMm
+ y/nvxlRdGBs01MKb3YIdk7h8atQg4ZE7GVos/ljhd1NnTuA2onpNnwO9wbUbtZ7kc432
+ aBaDYRQ1qyYCJAYEELYRFT9zNqjR4L9gMQnGjBlBEHqhzUagUIt+ZdTbJkwahQToBStd
+ 6ppMVjxgXqQNGzfdUKq7Mr9FAATMei0BwrO3FYP6AgjTPB3FD5ktYLAuzHEGXt5/7BwA
+ BhkOTT3ZY0tMbtJqP1FD5zl8omFLLHCn63hxHDpZOAqdaCZwxvZ0THLE3U9AcEWofazX
+ IGyw==
+X-Gm-Message-State: AOJu0YzgYqaTF0sKPdgTTiu+6anSD5WwR3HnRV1ohi7aZNwDS3fSl5UW
+ yKAFy3vsCYlOj/MFTgBrRcXZxg==
+X-Google-Smtp-Source: AGHT+IHS7xr6bS2Xe8yrds+3d0meGMph8xLaBkYB0wnYFGfLZpf31rEDaqtCysW0DpZH0DM0GRVVOA==
+X-Received: by 2002:a05:6808:8d1:b0:3a4:8e62:d9f1 with SMTP id
+ k17-20020a05680808d100b003a48e62d9f1mr596390oij.1.1692915294600; 
+ Thu, 24 Aug 2023 15:14:54 -0700 (PDT)
+Received: from grind.. ([179.93.21.19]) by smtp.gmail.com with ESMTPSA id
+ o129-20020a4a4487000000b00565fcfabab8sm256338ooa.21.2023.08.24.15.14.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 07:31:33 -0700 (PDT)
-From: Sunil V L <sunilvl@ventanamicro.com>
-To: qemu-arm@nongnu.org,
-	qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Shannon Zhao <shannon.zhaosl@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Gerd Hoffmann <kraxel@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Anup Patel <apatel@ventanamicro.com>,
- Andrew Jones <ajones@ventanamicro.com>,
- Atish Kumar Patra <atishp@rivosinc.com>, Haibo Xu <haibo1.xu@intel.com>,
- Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH v2 09/12] hw/pci-host/gpex: Define properties for MMIO ranges
-Date: Thu, 24 Aug 2023 19:59:39 +0530
-Message-Id: <20230824142942.3983650-10-sunilvl@ventanamicro.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230824142942.3983650-1-sunilvl@ventanamicro.com>
-References: <20230824142942.3983650-1-sunilvl@ventanamicro.com>
+ Thu, 24 Aug 2023 15:14:54 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH RESEND v8 03/20] target/riscv/cpu.c: split kvm prop handling
+ to its own helper
+Date: Thu, 24 Aug 2023 19:14:23 -0300
+Message-ID: <20230824221440.484675-4-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20230824221440.484675-1-dbarboza@ventanamicro.com>
+References: <20230824221440.484675-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x631.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::22e;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -109,118 +95,119 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-ACPI DSDT generator needs information like ECAM range, PIO range, 32-bit
-and 64-bit PCI MMIO range etc related to the PCI host bridge. Instead of
-making these values machine specific, create properties for the GPEX host
-bridge with default value 0. During initialization, the firmware can
-initialize these properties with correct values for the platform. This
-basically allows DSDT generator code independent of the machine specific
-memory map accesses.
+Future patches will split the existing Property arrays even further, and
+the existing code in riscv_cpu_add_user_properties() will start to scale
+bad with it because it's dealing with KVM constraints mixed in with TCG
+constraints. We're going to pay a high price to share a couple of common
+lines of code between the two.
 
-Suggested-by: Igor Mammedov <imammedo@redhat.com>
-Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+Create a new riscv_cpu_add_kvm_properties() that will be forked from
+riscv_cpu_add_user_properties() if we're running KVM. The helper
+includes all properties that a KVM CPU will add. The rest of
+riscv_cpu_add_user_properties() body will then be relieved from having
+to deal with KVM constraints.
+
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- hw/pci-host/gpex-acpi.c    | 13 +++++++++++++
- hw/pci-host/gpex.c         | 12 ++++++++++++
- include/hw/pci-host/gpex.h | 28 ++++++++++++++++++++--------
- 3 files changed, 45 insertions(+), 8 deletions(-)
+ target/riscv/cpu.c | 65 ++++++++++++++++++++++++++++++----------------
+ 1 file changed, 42 insertions(+), 23 deletions(-)
 
-diff --git a/hw/pci-host/gpex-acpi.c b/hw/pci-host/gpex-acpi.c
-index 7c7316bc96..0983af3d9e 100644
---- a/hw/pci-host/gpex-acpi.c
-+++ b/hw/pci-host/gpex-acpi.c
-@@ -281,3 +281,16 @@ void acpi_dsdt_add_gpex(Aml *scope, struct GPEXConfig *cfg)
- 
-     crs_range_set_free(&crs_range_set);
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 6aac3ba1d1..a51b946804 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1937,6 +1937,46 @@ static void cpu_set_cfg_unavailable(Object *obj, Visitor *v,
  }
-+
-+void acpi_dsdt_add_gpex_host(Aml *scope, uint32_t irq)
+ #endif
+ 
++#ifndef CONFIG_USER_ONLY
++static void riscv_cpu_add_kvm_unavail_prop(Object *obj, const char *prop_name)
 +{
-+    bool ambig;
-+    Object *obj = object_resolve_path_type("", TYPE_GPEX_HOST, &ambig);
-+
-+    if (!obj || ambig) {
++    /* Check if KVM created the property already */
++    if (object_property_find(obj, prop_name)) {
 +        return;
 +    }
 +
-+    GPEX_HOST(obj)->gpex_cfg.irq = irq;
-+    acpi_dsdt_add_gpex(scope, &GPEX_HOST(obj)->gpex_cfg);
++    /*
++     * Set the default to disabled for every extension
++     * unknown to KVM and error out if the user attempts
++     * to enable any of them.
++     */
++    object_property_add(obj, prop_name, "bool",
++                        NULL, cpu_set_cfg_unavailable,
++                        NULL, (void *)prop_name);
 +}
-diff --git a/hw/pci-host/gpex.c b/hw/pci-host/gpex.c
-index a6752fac5e..41f4e73f6e 100644
---- a/hw/pci-host/gpex.c
-+++ b/hw/pci-host/gpex.c
-@@ -154,6 +154,18 @@ static Property gpex_host_properties[] = {
-      */
-     DEFINE_PROP_BOOL("allow-unmapped-accesses", GPEXHost,
-                      allow_unmapped_accesses, true),
-+    DEFINE_PROP_UINT64(PCI_HOST_ECAM_BASE, GPEXHost, gpex_cfg.ecam.base, 0),
-+    DEFINE_PROP_SIZE(PCI_HOST_ECAM_SIZE, GPEXHost, gpex_cfg.ecam.size, 0),
-+    DEFINE_PROP_UINT64(PCI_HOST_PIO_BASE, GPEXHost, gpex_cfg.pio.base, 0),
-+    DEFINE_PROP_SIZE(PCI_HOST_PIO_SIZE, GPEXHost, gpex_cfg.pio.size, 0),
-+    DEFINE_PROP_UINT64(PCI_HOST_BELOW_4G_MMIO_BASE, GPEXHost,
-+                       gpex_cfg.mmio32.base, 0),
-+    DEFINE_PROP_SIZE(PCI_HOST_BELOW_4G_MMIO_SIZE, GPEXHost,
-+                     gpex_cfg.mmio32.size, 0),
-+    DEFINE_PROP_UINT64(PCI_HOST_ABOVE_4G_MMIO_BASE, GPEXHost,
-+                       gpex_cfg.mmio64.base, 0),
-+    DEFINE_PROP_SIZE(PCI_HOST_ABOVE_4G_MMIO_SIZE, GPEXHost,
-+                     gpex_cfg.mmio64.size, 0),
-     DEFINE_PROP_END_OF_LIST(),
- };
- 
-diff --git a/include/hw/pci-host/gpex.h b/include/hw/pci-host/gpex.h
-index b0240bd768..441c6b8b20 100644
---- a/include/hw/pci-host/gpex.h
-+++ b/include/hw/pci-host/gpex.h
-@@ -40,6 +40,15 @@ struct GPEXRootState {
-     /*< public >*/
- };
- 
-+struct GPEXConfig {
-+    MemMapEntry ecam;
-+    MemMapEntry mmio32;
-+    MemMapEntry mmio64;
-+    MemMapEntry pio;
-+    int         irq;
-+    PCIBus      *bus;
-+};
 +
- struct GPEXHost {
-     /*< private >*/
-     PCIExpressHost parent_obj;
-@@ -55,19 +64,22 @@ struct GPEXHost {
-     int irq_num[GPEX_NUM_IRQS];
- 
-     bool allow_unmapped_accesses;
--};
- 
--struct GPEXConfig {
--    MemMapEntry ecam;
--    MemMapEntry mmio32;
--    MemMapEntry mmio64;
--    MemMapEntry pio;
--    int         irq;
--    PCIBus      *bus;
-+    struct GPEXConfig gpex_cfg;
- };
- 
- int gpex_set_irq_num(GPEXHost *s, int index, int gsi);
- 
- void acpi_dsdt_add_gpex(Aml *scope, struct GPEXConfig *cfg);
-+void acpi_dsdt_add_gpex_host(Aml *scope, uint32_t irq);
++static void riscv_cpu_add_kvm_properties(Object *obj)
++{
++    Property *prop;
++    DeviceState *dev = DEVICE(obj);
 +
-+#define PCI_HOST_PIO_BASE               "pio-base"
-+#define PCI_HOST_PIO_SIZE               "pio-size"
-+#define PCI_HOST_ECAM_BASE              "ecam-base"
-+#define PCI_HOST_ECAM_SIZE              "ecam-size"
-+#define PCI_HOST_BELOW_4G_MMIO_BASE     "below-4g-mmio-base"
-+#define PCI_HOST_BELOW_4G_MMIO_SIZE     "below-4g-mmio-size"
-+#define PCI_HOST_ABOVE_4G_MMIO_BASE     "above-4g-mmio-base"
-+#define PCI_HOST_ABOVE_4G_MMIO_SIZE     "above-4g-mmio-size"
++    kvm_riscv_init_user_properties(obj);
++    riscv_cpu_add_misa_properties(obj);
++
++    for (prop = riscv_cpu_extensions; prop && prop->name; prop++) {
++        riscv_cpu_add_kvm_unavail_prop(obj, prop->name);
++    }
++
++    for (int i = 0; i < ARRAY_SIZE(riscv_cpu_options); i++) {
++        /* Check if KVM created the property already */
++        if (object_property_find(obj, riscv_cpu_options[i].name)) {
++            continue;
++        }
++        qdev_property_add_static(dev, &riscv_cpu_options[i]);
++    }
++}
++#endif
++
+ /*
+  * Add CPU properties with user-facing flags.
+  *
+@@ -1952,39 +1992,18 @@ static void riscv_cpu_add_user_properties(Object *obj)
+     riscv_add_satp_mode_properties(obj);
  
- #endif /* HW_GPEX_H */
+     if (kvm_enabled()) {
+-        kvm_riscv_init_user_properties(obj);
++        riscv_cpu_add_kvm_properties(obj);
++        return;
+     }
+ #endif
+ 
+     riscv_cpu_add_misa_properties(obj);
+ 
+     for (prop = riscv_cpu_extensions; prop && prop->name; prop++) {
+-#ifndef CONFIG_USER_ONLY
+-        if (kvm_enabled()) {
+-            /* Check if KVM created the property already */
+-            if (object_property_find(obj, prop->name)) {
+-                continue;
+-            }
+-
+-            /*
+-             * Set the default to disabled for every extension
+-             * unknown to KVM and error out if the user attempts
+-             * to enable any of them.
+-             */
+-            object_property_add(obj, prop->name, "bool",
+-                                NULL, cpu_set_cfg_unavailable,
+-                                NULL, (void *)prop->name);
+-            continue;
+-        }
+-#endif
+         qdev_property_add_static(dev, prop);
+     }
+ 
+     for (int i = 0; i < ARRAY_SIZE(riscv_cpu_options); i++) {
+-        /* Check if KVM created the property already */
+-        if (object_property_find(obj, riscv_cpu_options[i].name)) {
+-            continue;
+-        }
+         qdev_property_add_static(dev, &riscv_cpu_options[i]);
+     }
+ }
 -- 
-2.39.2
+2.41.0
 
 
