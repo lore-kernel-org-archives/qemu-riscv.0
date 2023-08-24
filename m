@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE336C6FA8F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Aug 2023 22:15:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A3E8C3DA6F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Aug 2023 22:16:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qZIcB-0008EJ-4N; Thu, 24 Aug 2023 18:15:43 -0400
+	id 1qZIbz-0007zx-Aw; Thu, 24 Aug 2023 18:15:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qZIcA-0008Db-G0
- for qemu-riscv@nongnu.org; Thu, 24 Aug 2023 18:15:42 -0400
-Received: from mail-oo1-xc30.google.com ([2607:f8b0:4864:20::c30])
+ id 1qZIbq-0007pA-18
+ for qemu-riscv@nongnu.org; Thu, 24 Aug 2023 18:15:28 -0400
+Received: from mail-ot1-x32b.google.com ([2607:f8b0:4864:20::32b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qZIc8-0006PD-9l
- for qemu-riscv@nongnu.org; Thu, 24 Aug 2023 18:15:42 -0400
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-5717f7b932aso242491eaf.0
- for <qemu-riscv@nongnu.org>; Thu, 24 Aug 2023 15:15:39 -0700 (PDT)
+ id 1qZIbn-0006FZ-Cz
+ for qemu-riscv@nongnu.org; Thu, 24 Aug 2023 18:15:21 -0400
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-6bdcbde9676so267320a34.3
+ for <qemu-riscv@nongnu.org>; Thu, 24 Aug 2023 15:15:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1692915339; x=1693520139;
+ d=ventanamicro.com; s=google; t=1692915318; x=1693520118;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cspFA5PPCZYU+Zq3meKgQwzcujnBqn/XCZwRJ+ak9SY=;
- b=Kszg73MME3mS48mfaD/KXM+CRYhL6DBXp/iAquu95tT8nJuaK2DakKPjUMZymjQEgH
- g0tIPmDqxTaZM+mRAgtcJB18yWPlwXC+KXqBoq3WYRXFvzk+AXK536L4ZZR5ivacnQET
- +yY/lloq6LMEcKv5TjW1dJ5PhUAPsG5DsgEko69c2jdycdLEtPoRrERE4OZmlyrPmPnP
- hXdO3T+Y5S6xMq5leDJp8o451Abc4CJmr3PbangtxXmxiYJuvXO7NBiK/AKR7k424YnF
- jMi1H+vjNX+LVP1TPAdnZJxxhpgWdNcZDDZQKvdRGOoMdwNQr+RfO526dZjt4NTBNGN4
- 8OGA==
+ bh=xfWECJL6/0p2q0YLo0/rd8fdm47jpkcnxFZiic9PgSI=;
+ b=hrYB6c53lor6t5f8C+A5HD2o38Gezd9xRzCdnlM9LeGpYG4ux2PNpeprlOfy5Hq5rv
+ yCjuxefXd/JMt2XI86xDbgxzSNP0/I4FzTBmo0kFdaeOPFJYDhjjf/RTd4uA5oLHa93g
+ 3Gkst29kWHAl8VHkKhIlyVdO1INlXntC+/ao8p7gJNrxSmGUhkbMr6EjGUJBZd/Bb2aB
+ 8rrV510As8QdB2ODE1KcHCdA0kUqU+c6I/Zn9WkSGPl9EVLsnq7DdIchYUt5A3Nw9oyq
+ KTe18s/At9dmvVz7Gbg+Wa4Xqrq7tX0E9/jgPrxjHAK1sfj9dWUblTu41UnjbalPh4of
+ sizw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692915339; x=1693520139;
+ d=1e100.net; s=20221208; t=1692915318; x=1693520118;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cspFA5PPCZYU+Zq3meKgQwzcujnBqn/XCZwRJ+ak9SY=;
- b=W7MHUI5WOD/o6IRAJ8qGbkUsoYxJLd0oCUhKzTD3S28fahaoneQ/D15BFMRFeqhNiD
- QCkeUVC+iWjML+BjMe82dgZUJE/WV9gdDDf5cHf0/clwwq08CT9sN+CwXOTclWYwt3RY
- +lXkeXe4M3yxoUXWhoSd4sri6SmsT3AmhxbSgHJvNBx8SJY4GvFlWNfQ2fHBQAYxA5Al
- BCriStXvZa6MEvC5PIwCNBt4lw5+05FihcpJYW1INRHW5VCY/K4SVwhGGsu/ee7NNZsD
- h0PjTGXW6Pi4aYZ6I/cRQqEWjuyqhRON1fER+V8G46iGkolgQ9hqcqqcdCA/CzliNSe5
- sH0g==
-X-Gm-Message-State: AOJu0YwRTHxaqAPNWP+NjtiBiE6xaxMGbptWTSJ1yjJ/QFExAhi0oSHE
- bzhgCEGCEY0oVsyFGlM6tAbwNA==
-X-Google-Smtp-Source: AGHT+IG33cexRX2eUtfHWPl4ADheRL3kyqyFVfdL/nUKsH5kkoZoTo2+WjSXPwauv9uhazXatxh66g==
-X-Received: by 2002:a4a:92d5:0:b0:566:f8ee:fa67 with SMTP id
- j21-20020a4a92d5000000b00566f8eefa67mr3667082ooh.0.1692915339264; 
- Thu, 24 Aug 2023 15:15:39 -0700 (PDT)
+ bh=xfWECJL6/0p2q0YLo0/rd8fdm47jpkcnxFZiic9PgSI=;
+ b=bDq4Ok0xdf9GbLCadsyJZtIrVPRKtlcaXCJaddQuOMDOwDPGSZUQ/2ASRU1iDOk+zz
+ NAB1dzI40be2maxU1BdeEY2om2Maz5cpRvjRB+nO9KbDEA3V3ZNkQku4i3qejda5m1ik
+ riWhMQxPwgN+ifuPZeH2E/uvxC5/e97aGpvlX+IH0DblsePCs9Y4en0jTB3TT3W6oWQx
+ Iytdl1tzhl9GlISzUUaMSuP0xVpV/slPTu+NyVQzf3JDVmFF/Va/Gyj7sG56mwihjiVL
+ Ywj72jOkKboRBYhyAWRycSa6hTk7z8LbMbnnIuayxrnMGKezcVOn6I6qYndqEuQESy7j
+ /bKQ==
+X-Gm-Message-State: AOJu0Yw5C39ontBvuB0zc8vLhaqFDVdRMTBWMAlRLRJmEO/KE4A3wO69
+ tS2cL6V9LDW9MuM5RJ7dcmtRgQ==
+X-Google-Smtp-Source: AGHT+IGpQmLtF+gcn8UzAN/sGOwsj/T6AZYUhLbN7qRhGkZ1q/gtMCDqJW/pRsWVU6kRNe3BOph0NQ==
+X-Received: by 2002:a05:6870:a109:b0:1b0:3cd4:76d5 with SMTP id
+ m9-20020a056870a10900b001b03cd476d5mr1143777oae.37.1692915318108; 
+ Thu, 24 Aug 2023 15:15:18 -0700 (PDT)
 Received: from grind.. ([179.93.21.19]) by smtp.gmail.com with ESMTPSA id
- o129-20020a4a4487000000b00565fcfabab8sm256338ooa.21.2023.08.24.15.15.36
+ o129-20020a4a4487000000b00565fcfabab8sm256338ooa.21.2023.08.24.15.15.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 15:15:39 -0700 (PDT)
+ Thu, 24 Aug 2023 15:15:17 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH RESEND v8 20/20] target/riscv/cpu.c: consider user option with
- RVG
-Date: Thu, 24 Aug 2023 19:14:40 -0300
-Message-ID: <20230824221440.484675-21-dbarboza@ventanamicro.com>
+Subject: [PATCH RESEND v8 12/20] target/riscv: deprecate the 'any' CPU type
+Date: Thu, 24 Aug 2023 19:14:32 -0300
+Message-ID: <20230824221440.484675-13-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230824221440.484675-1-dbarboza@ventanamicro.com>
 References: <20230824221440.484675-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c30;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc30.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::32b;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x32b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -95,53 +94,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Enabling RVG will enable a set of extensions that we're not checking if
-the user was okay enabling or not. And in this case we want to error
-out, instead of ignoring, otherwise we will be inconsistent enabling RVG
-without all its extensions.
+The 'any' CPU type was introduced in commit dc5bd18fa5725 ("RISC-V CPU
+Core Definition"), being around since the beginning. It's not an easy
+CPU to use: it's undocumented and its name doesn't tell users much about
+what the CPU is supposed to bring. 'git log' doesn't help us either in
+knowing what was the original design of this CPU type.
 
-After this patch, disabling ifencei or icsr while enabling RVG will
-result in error:
+The closest we have is a comment from Alistair [1] where he recalls from
+memory that the 'any' CPU is supposed to behave like the newly added
+'max' CPU. He also suggested that the 'any' CPU should be removed.
 
-$ ./build/qemu-system-riscv64 -M virt -cpu rv64,g=true,Zifencei=false --nographic
-qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifencei
-qemu-system-riscv64: RVG requires Zifencei but user set Zifencei to false
+The default CPUs are rv32 and rv64, so removing the 'any' CPU will have
+impact only on users that might have a script that uses '-cpu any'.
+And those users are better off using the default CPUs or the new 'max'
+CPU.
+
+We would love to just remove the code and be done with it, but one does
+not simply remove a feature in QEMU. We'll put the CPU in quarantine
+first, letting users know that we have the intent of removing it in the
+future.
+
+[1] https://lists.gnu.org/archive/html/qemu-devel/2023-07/msg02891.html
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c | 18 ++++++++++++++++--
- 1 file changed, 16 insertions(+), 2 deletions(-)
+ docs/about/deprecated.rst | 12 ++++++++++++
+ target/riscv/cpu.c        |  5 +++++
+ 2 files changed, 17 insertions(+)
 
+diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
+index 92a2bafd2b..4ced7427ac 100644
+--- a/docs/about/deprecated.rst
++++ b/docs/about/deprecated.rst
+@@ -371,6 +371,18 @@ QEMU's ``vhost`` feature, which would eliminate the high latency costs under
+ which the 9p ``proxy`` backend currently suffers. However as of to date nobody
+ has indicated plans for such kind of reimplementation unfortunately.
+ 
++RISC-V 'any' CPU type ``-cpu any`` (since 8.2)
++^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++
++The 'any' CPU type was introduced back in 2018 and has been around since the
++initial RISC-V QEMU port. Its usage has always been unclear: users don't know
++what to expect from a CPU called 'any', and in fact the CPU does not do anything
++special that aren't already done by the default CPUs rv32/rv64.
++
++After the introduction of the 'max' CPU type RISC-V now has a good coverage
++of generic CPUs: rv32 and rv64 as default CPUs and 'max' as a feature complete
++CPU for both 32 and 64 bit builds. Users are then discouraged to use the 'any'
++CPU type starting in 8.2.
+ 
+ Block device options
+ ''''''''''''''''''''
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index e07b2c73e7..21ebdbf084 100644
+index 8dc85f75bb..913b64264f 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -1155,8 +1155,22 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-           riscv_has_ext(env, RVD) &&
-           cpu->cfg.ext_icsr && cpu->cfg.ext_ifencei)) {
-         warn_report("Setting G will also set IMAFD_Zicsr_Zifencei");
--        cpu->cfg.ext_icsr = true;
--        cpu->cfg.ext_ifencei = true;
-+
-+        if (cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_icsr)) &&
-+            !cpu->cfg.ext_icsr) {
-+            error_setg(errp, "RVG requires Zicsr but user set Zicsr to false");
-+            return;
-+        }
-+
-+        if (cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_ifencei)) &&
-+            !cpu->cfg.ext_ifencei) {
-+            error_setg(errp, "RVG requires Zifencei but user set "
-+                       "Zifencei to false");
-+            return;
-+        }
-+
-+        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_icsr), true);
-+        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_ifencei), true);
+@@ -1522,6 +1522,11 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
+     Error *local_err = NULL;
  
-         env->misa_ext |= RVI | RVM | RVA | RVF | RVD;
-         env->misa_ext_mask |= RVI | RVM | RVA | RVF | RVD;
++    if (object_dynamic_cast(OBJECT(dev), TYPE_RISCV_CPU_ANY) != NULL) {
++        warn_report("The 'any' CPU is deprecated and will be "
++                    "removed in the future.");
++    }
++
+     cpu_exec_realizefn(cs, &local_err);
+     if (local_err != NULL) {
+         error_propagate(errp, local_err);
 -- 
 2.41.0
 
