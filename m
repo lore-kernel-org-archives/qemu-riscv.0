@@ -4,115 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BD55C27C40
-	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Aug 2023 12:38:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65FCEC27C40
+	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Aug 2023 12:40:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qZ9ao-0001pm-Pm; Thu, 24 Aug 2023 08:37:42 -0400
+	id 1qZ9dM-0003za-Ck; Thu, 24 Aug 2023 08:40:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qZ9ak-0001kC-93
- for qemu-riscv@nongnu.org; Thu, 24 Aug 2023 08:37:38 -0400
-Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1qZ9dL-0003zJ-Ru
+ for qemu-riscv@nongnu.org; Thu, 24 Aug 2023 08:40:19 -0400
+Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qZ9ag-0002FI-5d
- for qemu-riscv@nongnu.org; Thu, 24 Aug 2023 08:37:38 -0400
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-3fee8b78097so44988775e9.0
- for <qemu-riscv@nongnu.org>; Thu, 24 Aug 2023 05:37:33 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1qZ9dJ-0002f5-8b
+ for qemu-riscv@nongnu.org; Thu, 24 Aug 2023 08:40:19 -0400
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-68bed28cb22so638278b3a.2
+ for <qemu-riscv@nongnu.org>; Thu, 24 Aug 2023 05:40:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692880652; x=1693485452;
- h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
- :subject:cc:to:from:user-agent:references:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HjImE64TKhfUiC61WaWX4npQQW0zpzGzpdq9SPVc3vI=;
- b=bKrpVje/8H8lsRBVn4IOQ6P9KJjx4+B6fUyFYATirPxcCJntr3frDaiSHf7h1jK2Zj
- JUqTcgZ8lKPPhdV/UgyoYhzsL6/QAxj62v4aBg9g+9PU+qBm/8XzW0PztSJsXknEsGDD
- Axme9t+npzOxiCzADz3l5YRXjlCloKql1mzKomxiHI4eylkBl3Dv7j3HCQfTVG+C0uBH
- zCOk+MdfTfxNd5+dz1mH+mve+YYuhpYsQJ9OdakW20VOupr/sFwAvzlTcGxcMcxzrfhR
- 4b/Ubk6CXgTF16hW/PbkE9oUbjQIizsabiyhkTqTmvHf0leo7erJ+IvRPMu81EV1A7QG
- rB3Q==
+ d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1692880815; x=1693485615;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=AlD0KkcoSMnm2QId2bF2QJsTp5aZ7edM05dvtgmHarY=;
+ b=2GE06rscmgwtSEOK3aKHSpS4LRMu8rmUk/KZrP+bdvhnsQ5jwv+yCCBw+vTaIpyvJs
+ eSAhPdT0etRUNmbGIwTrVaud5pnke26oC2rKhgP5XMuShYlROu6i5CWeJu9cKRMsh+HF
+ LVDLTW5gvwTrqAhH3jSWbxgUefmepNpbAWqA5VL71QSPdG1brHBYiwg40/cAzEm6Bc+g
+ /LU4VTojJSTe9lHX6MSuB7bMG9DTOZA/p7G1WiIdCL3k7SH9O3dokqlQ/F8bL8Gr3tIi
+ 5jQI2PRDCpp2AyPaa9j3yh8mkwolEneLgQmXses061xbGAhHYpw6v/bfBLiTK5ChEbdk
+ orNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692880652; x=1693485452;
- h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
- :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=HjImE64TKhfUiC61WaWX4npQQW0zpzGzpdq9SPVc3vI=;
- b=Cg86JBO4zr5AWX7Q5ORp6+4+aqj1dCpIS6/Pvd9sM/heM83f7EbY4qZNo6yAjrhJ10
- DJ0pnRovns4YgX6J1MbitNTwqPew2J9euFiaxk9zdsK6z8m1OH1bl/kdz9X3cXqgpZYV
- nSJqCsaoH0yEXfXYJPRqR7TrGPn0CoAqDWEX3feqel+8zubMJMzwK7Ks8GfNrSy2kMgi
- asY1zsF/JwKar/h5thtCY9aYTDNbr4Lexkamg1I7kEM/xjbUXqgwXbEUw7DUOEFmZCSB
- h6OfXcn640JatE5V2+ekdfTwHP3blh2SMttpO6TQT6PUqiKJaSJWNXf3GOvc5PZZlUjX
- TviQ==
-X-Gm-Message-State: AOJu0Yyc4oz33ejRzAF80l+jBCxBhMMeQoC448mbA13c2olqHYcdYQQY
- pTBYpFQApIVe5o4iIe1Mc02e1g==
-X-Google-Smtp-Source: AGHT+IEOcfiorEERO7/hB0dZKmb4M8yYpsfdYh1wGWz2ckOHH8CpkNgsrK6scVXeoFxvoZxen9e+7w==
-X-Received: by 2002:a1c:4b0f:0:b0:3fa:934c:8350 with SMTP id
- y15-20020a1c4b0f000000b003fa934c8350mr12369561wma.27.1692880652377; 
- Thu, 24 Aug 2023 05:37:32 -0700 (PDT)
-Received: from zen.linaroharston ([85.9.250.243])
+ d=1e100.net; s=20221208; t=1692880815; x=1693485615;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=AlD0KkcoSMnm2QId2bF2QJsTp5aZ7edM05dvtgmHarY=;
+ b=eXjkn5ubogweOPhAK1xPXmN6yNBXXsO8zo/Drm5kP+YVndU8YXQi1RM9MVQGsJoobb
+ dIQALZuNm5fG/J1lOuGexJH188kRNUbX7+8vfy9eEVPrVG6bO+nJSpqDMaXGh/0CgP+E
+ LgKipa1vJ/Z+9zUKqfdgBb/zRDBgnx8RMYUw2osc130ROlutnA4KpP+4HzUR69BJJPOX
+ muS9DRtZMd3BHcYSsj2OCrMu1wy0p7g1Q7wbDLXZOerbHeiepuaP3mu+wjtlDQzLyIBy
+ Zz9CtjuxFNb5ZTk17lAKj7rGNmpDyhyXAjI1DEN5AnEI/st2r6Sh4wlDDTgzPf7VrSM1
+ ztsw==
+X-Gm-Message-State: AOJu0YymHKtbPfj4GL+8JNYcNNohGlr6f9gkf30SAIhYQalpByIXDwGn
+ TY9s7X8btSh8I5zXTjyZT8nFUw==
+X-Google-Smtp-Source: AGHT+IFjJ+DGBC6A5fjKq/d6Bq4vcJn2uJykLIl0SwHmvdO0JIAHD+Ws+6BTM2E5J1IvXoy2/jTbWQ==
+X-Received: by 2002:a17:90a:dc05:b0:268:a691:412f with SMTP id
+ i5-20020a17090adc0500b00268a691412fmr11837891pjv.39.1692880815202; 
+ Thu, 24 Aug 2023 05:40:15 -0700 (PDT)
+Received: from ?IPV6:2400:4050:a840:1e00:78d2:b862:10a7:d486?
+ ([2400:4050:a840:1e00:78d2:b862:10a7:d486])
  by smtp.gmail.com with ESMTPSA id
- m24-20020a7bca58000000b00401b242e2e6sm419619wml.47.2023.08.24.05.37.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 05:37:31 -0700 (PDT)
-Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 57AC81FFBB;
- Thu, 24 Aug 2023 13:37:31 +0100 (BST)
-References: <20230817053017.24207-1-akihiko.odaki@daynix.com>
-User-agent: mu4e 1.11.14; emacs 29.1.50
-From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Akihiko Odaki <akihiko.odaki@daynix.com>
+ y23-20020a17090a16d700b002680ef05c40sm1609373pje.55.2023.08.24.05.40.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 24 Aug 2023 05:40:14 -0700 (PDT)
+Message-ID: <0a1b665c-31dd-4263-9f67-a75c8aa3fd7d@daynix.com>
+Date: Thu, 24 Aug 2023 21:40:04 +0900
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 00/26] plugins: Allow to read registers
+Content-Language: en-US
+To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
 Cc: Paolo Bonzini <pbonzini@redhat.com>, Thomas Huth <thuth@redhat.com>,
  Alexandre Iooss <erdnaxe@crans.org>, Mahmoud Mandour
- <ma.mandourr@gmail.com>, Eduardo Habkost <eduardo@habkost.net>, Marcel
- Apfelbaum <marcel.apfelbaum@gmail.com>, Philippe =?utf-8?Q?Mathieu-Daud?=
- =?utf-8?Q?=C3=A9?=
- <philmd@linaro.org>, Yanan Wang <wangyanan55@huawei.com>, Richard
- Henderson <richard.henderson@linaro.org>, =?utf-8?Q?Marc-Andr=C3=A9?=
- Lureau
- <marcandre.lureau@redhat.com>, =?utf-8?Q?Daniel_P_=2E_Berrang=C3=A9?=
- <berrange@redhat.com>, John Snow <jsnow@redhat.com>, Cleber Rosa
- <crosa@redhat.com>, Peter Maydell <peter.maydell@linaro.org>, Michael
- Rolnik <mrolnik@gmail.com>, "Edgar E . Iglesias"
- <edgar.iglesias@gmail.com>, Brian Cain <bcain@quicinc.com>, Song Gao
- <gaosong@loongson.cn>, Xiaojuan Yang <yangxiaojuan@loongson.cn>, Laurent
- Vivier <laurent@vivier.eu>, Aurelien Jarno <aurelien@aurel32.net>, Jiaxun
- Yang <jiaxun.yang@flygoat.com>, Aleksandar Rikalo
- <aleksandar.rikalo@syrmia.com>, Chris Wulff <crwulff@gmail.com>, Marek
- Vasut <marex@denx.de>, Stafford Horne <shorne@gmail.com>, Daniel Henrique
- Barboza <danielhb413@gmail.com>, =?utf-8?Q?C=C3=A9dric?= Le Goater
- <clg@kaod.org>, David
- Gibson <david@gibson.dropbear.id.au>, Greg Kurz <groug@kaod.org>, Nicholas
- Piggin <npiggin@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, Alistair
- Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Weiwei Li <liweiwei@iscas.ac.cn>, Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>, Yoshinori Sato
- <ysato@users.sourceforge.jp>, David Hildenbrand <david@redhat.com>, Ilya
- Leoshkevich <iii@linux.ibm.com>, Mark Cave-Ayland
- <mark.cave-ayland@ilande.co.uk>, Artyom Tarasenko <atar4qemu@gmail.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, Max Filippov
- <jcmvbkbc@gmail.com>, qemu-devel@nongnu.org, qemu-arm@nongnu.org,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, Anton
- Kochkov <anton.kochkov@proton.me>
-Subject: Re: [PATCH v5 00/26] plugins: Allow to read registers
-Date: Thu, 24 Aug 2023 13:36:43 +0100
-In-reply-to: <20230817053017.24207-1-akihiko.odaki@daynix.com>
-Message-ID: <87wmxkfwfo.fsf@linaro.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32a.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ <ma.mandourr@gmail.com>, Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Yanan Wang <wangyanan55@huawei.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+ =?UTF-8?Q?Daniel_P_=2E_Berrang=C3=A9?= <berrange@redhat.com>,
+ John Snow <jsnow@redhat.com>, Cleber Rosa <crosa@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>, Michael Rolnik
+ <mrolnik@gmail.com>, "Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
+ Brian Cain <bcain@quicinc.com>, Song Gao <gaosong@loongson.cn>,
+ Xiaojuan Yang <yangxiaojuan@loongson.cn>, Laurent Vivier
+ <laurent@vivier.eu>, Aurelien Jarno <aurelien@aurel32.net>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Chris Wulff <crwulff@gmail.com>, Marek Vasut <marex@denx.de>,
+ Stafford Horne <shorne@gmail.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
+ David Gibson <david@gibson.dropbear.id.au>, Greg Kurz <groug@kaod.org>,
+ Nicholas Piggin <npiggin@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Max Filippov <jcmvbkbc@gmail.com>, qemu-devel@nongnu.org,
+ qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org, Anton Kochkov <anton.kochkov@proton.me>
+References: <20230817053017.24207-1-akihiko.odaki@daynix.com>
+ <87wmxkfwfo.fsf@linaro.org>
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
+In-Reply-To: <87wmxkfwfo.fsf@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: none client-ip=2607:f8b0:4864:20::42f;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x42f.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -128,17 +129,18 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On 2023/08/24 21:36, Alex Bennée wrote:
+> 
+> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
+> 
+>> I and other people in the University of Tokyo, where I research processor
+>> design, found TCG plugins are very useful for processor design
+>> exploration.
+> 
+> This series didn't seem to complete getting to the mailing list. Can you
+> re-post or send the next iteration?
+> 
 
-Akihiko Odaki <akihiko.odaki@daynix.com> writes:
-
-> I and other people in the University of Tokyo, where I research processor
-> design, found TCG plugins are very useful for processor design
-> exploration.
-
-This series didn't seem to complete getting to the mailing list. Can you
-re-post or send the next iteration?
-
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
+I have resent this series and you can find it at:
+https://lore.kernel.org/qemu-devel/20230818033648.8326-1-akihiko.odaki@daynix.com/
 
