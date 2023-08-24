@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3758DC3DA6F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Aug 2023 22:15:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE336C6FA8F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Aug 2023 22:15:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qZIc6-0008BO-UK; Thu, 24 Aug 2023 18:15:38 -0400
+	id 1qZIcB-0008EJ-4N; Thu, 24 Aug 2023 18:15:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qZIc5-00088C-7f
- for qemu-riscv@nongnu.org; Thu, 24 Aug 2023 18:15:37 -0400
-Received: from mail-oo1-xc2a.google.com ([2607:f8b0:4864:20::c2a])
+ id 1qZIcA-0008Db-G0
+ for qemu-riscv@nongnu.org; Thu, 24 Aug 2023 18:15:42 -0400
+Received: from mail-oo1-xc30.google.com ([2607:f8b0:4864:20::c30])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qZIc2-0006Ni-TX
- for qemu-riscv@nongnu.org; Thu, 24 Aug 2023 18:15:36 -0400
-Received: by mail-oo1-xc2a.google.com with SMTP id
- 006d021491bc7-5733bcf6eb6so241087eaf.0
- for <qemu-riscv@nongnu.org>; Thu, 24 Aug 2023 15:15:34 -0700 (PDT)
+ id 1qZIc8-0006PD-9l
+ for qemu-riscv@nongnu.org; Thu, 24 Aug 2023 18:15:42 -0400
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-5717f7b932aso242491eaf.0
+ for <qemu-riscv@nongnu.org>; Thu, 24 Aug 2023 15:15:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1692915334; x=1693520134;
+ d=ventanamicro.com; s=google; t=1692915339; x=1693520139;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pC1HU180dM2eFisZjmPw27yExyf42n/GWB/GzIojS8o=;
- b=fZWtu11amxqgEK2Ileqx9raJs5kVPjQflPKYYUDxu/hfBck2HQYWufUu0oJyMYKeZ+
- VCYTcPYkqTx6UtM7U7vb8vvUrcuNhZC/sVdaH1k1LwipHCbMI5aZIlw8z1X9GdBJy/6u
- DMcrVmKHF/4cI5PyLGezS4eShHlxeKaYX2bfhy6GlOHaD4uGaV15MWhMsboHT7xzwEqz
- qx4w3mEKWXVEgTDAO1YWHjMJMeBzLBAEl+7tENcyFRta5H/iBcCZdxvOfDGxxUMwEy36
- j+u5bPa9lQAvumbFpiZci7eH1O3oO+hZ5xeLamM8kCq05wztvx5cKagbCFl29QNMEfeO
- jW8w==
+ bh=cspFA5PPCZYU+Zq3meKgQwzcujnBqn/XCZwRJ+ak9SY=;
+ b=Kszg73MME3mS48mfaD/KXM+CRYhL6DBXp/iAquu95tT8nJuaK2DakKPjUMZymjQEgH
+ g0tIPmDqxTaZM+mRAgtcJB18yWPlwXC+KXqBoq3WYRXFvzk+AXK536L4ZZR5ivacnQET
+ +yY/lloq6LMEcKv5TjW1dJ5PhUAPsG5DsgEko69c2jdycdLEtPoRrERE4OZmlyrPmPnP
+ hXdO3T+Y5S6xMq5leDJp8o451Abc4CJmr3PbangtxXmxiYJuvXO7NBiK/AKR7k424YnF
+ jMi1H+vjNX+LVP1TPAdnZJxxhpgWdNcZDDZQKvdRGOoMdwNQr+RfO526dZjt4NTBNGN4
+ 8OGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692915334; x=1693520134;
+ d=1e100.net; s=20221208; t=1692915339; x=1693520139;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pC1HU180dM2eFisZjmPw27yExyf42n/GWB/GzIojS8o=;
- b=JWzwtrV1SL4U9Qixg71GNreKSVoxjaju1u6UEM1pALtSSS618XdebTXhWYJG9Tm9ai
- CrbRtEAkp/6f4AH1CZ9h8BNFmcN6YolgBIjRiZFS7O/oUQQK0Xzxrj3nhDvcAUmMMlC5
- HHlU9gAXBSYBfOzfdpvLmqWRA+ebzn8U02a6ViTGD8un1s39omfmh3AtaMSPD5pEpcB/
- DngjNoCmqLWQhA6ha4qoS6FttcX7SLkRYG2CBnaWVM/iUFiZjSWgW1MK86GEqb2cUHXc
- 51/Vp5GnM8cVlFHqmm/q/ypOxkHu/ZPkUba/4NjF1KpFoGI0tzxK/aGQM2PSsw5I3M/f
- jh9Q==
-X-Gm-Message-State: AOJu0YxlvQsGM7qTdC2gYCN8Rxeud6X9fDbcMVCZ/dh5OSyjP+qhu639
- bnP4oY+j6tqqS65FrkqoIRnhyQ==
-X-Google-Smtp-Source: AGHT+IGcsOo5gnfn4Jr+oGuOiMsYm3RwgOd6wO25sjMM4zsdAXrCrvCcTxcP6NRhfQmg5oyQ79029g==
-X-Received: by 2002:a4a:919c:0:b0:572:b659:a236 with SMTP id
- d28-20020a4a919c000000b00572b659a236mr3252332ooh.6.1692915333781; 
- Thu, 24 Aug 2023 15:15:33 -0700 (PDT)
+ bh=cspFA5PPCZYU+Zq3meKgQwzcujnBqn/XCZwRJ+ak9SY=;
+ b=W7MHUI5WOD/o6IRAJ8qGbkUsoYxJLd0oCUhKzTD3S28fahaoneQ/D15BFMRFeqhNiD
+ QCkeUVC+iWjML+BjMe82dgZUJE/WV9gdDDf5cHf0/clwwq08CT9sN+CwXOTclWYwt3RY
+ +lXkeXe4M3yxoUXWhoSd4sri6SmsT3AmhxbSgHJvNBx8SJY4GvFlWNfQ2fHBQAYxA5Al
+ BCriStXvZa6MEvC5PIwCNBt4lw5+05FihcpJYW1INRHW5VCY/K4SVwhGGsu/ee7NNZsD
+ h0PjTGXW6Pi4aYZ6I/cRQqEWjuyqhRON1fER+V8G46iGkolgQ9hqcqqcdCA/CzliNSe5
+ sH0g==
+X-Gm-Message-State: AOJu0YwRTHxaqAPNWP+NjtiBiE6xaxMGbptWTSJ1yjJ/QFExAhi0oSHE
+ bzhgCEGCEY0oVsyFGlM6tAbwNA==
+X-Google-Smtp-Source: AGHT+IG33cexRX2eUtfHWPl4ADheRL3kyqyFVfdL/nUKsH5kkoZoTo2+WjSXPwauv9uhazXatxh66g==
+X-Received: by 2002:a4a:92d5:0:b0:566:f8ee:fa67 with SMTP id
+ j21-20020a4a92d5000000b00566f8eefa67mr3667082ooh.0.1692915339264; 
+ Thu, 24 Aug 2023 15:15:39 -0700 (PDT)
 Received: from grind.. ([179.93.21.19]) by smtp.gmail.com with ESMTPSA id
- o129-20020a4a4487000000b00565fcfabab8sm256338ooa.21.2023.08.24.15.15.31
+ o129-20020a4a4487000000b00565fcfabab8sm256338ooa.21.2023.08.24.15.15.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 15:15:33 -0700 (PDT)
+ Thu, 24 Aug 2023 15:15:39 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH RESEND v8 18/20] target/riscv: use isa_ext_update_enabled() in
- init_max_cpu_extensions()
-Date: Thu, 24 Aug 2023 19:14:38 -0300
-Message-ID: <20230824221440.484675-19-dbarboza@ventanamicro.com>
+Subject: [PATCH RESEND v8 20/20] target/riscv/cpu.c: consider user option with
+ RVG
+Date: Thu, 24 Aug 2023 19:14:40 -0300
+Message-ID: <20230824221440.484675-21-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230824221440.484675-1-dbarboza@ventanamicro.com>
 References: <20230824221440.484675-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c2a;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc2a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c30;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc30.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -95,61 +95,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Before adding support to detect if an extension was user set we need to
-handle how we're enabling extensions in riscv_init_max_cpu_extensions().
-object_property_set_bool() calls the set() callback for the property,
-and we're going to use this callback to set the 'multi_ext_user_opts'
-hash.
+Enabling RVG will enable a set of extensions that we're not checking if
+the user was okay enabling or not. And in this case we want to error
+out, instead of ignoring, otherwise we will be inconsistent enabling RVG
+without all its extensions.
 
-This means that, as is today, all extensions we're setting for the 'max'
-CPU will be seen as user set in the future. Let's change set_bool() to
-isa_ext_update_enabled() that will just enable/disable the flag on a
-certain offset.
+After this patch, disabling ifencei or icsr while enabling RVG will
+result in error:
+
+$ ./build/qemu-system-riscv64 -M virt -cpu rv64,g=true,Zifencei=false --nographic
+qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifencei
+qemu-system-riscv64: RVG requires Zifencei but user set Zifencei to false
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c | 18 +++++++++---------
- 1 file changed, 9 insertions(+), 9 deletions(-)
+ target/riscv/cpu.c | 18 ++++++++++++++++--
+ 1 file changed, 16 insertions(+), 2 deletions(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index adfe671bd4..ae8c35402f 100644
+index e07b2c73e7..21ebdbf084 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -2163,24 +2163,24 @@ static void riscv_init_max_cpu_extensions(Object *obj)
-     set_misa(env, env->misa_mxl, env->misa_ext | RVG | RVJ | RVV);
+@@ -1155,8 +1155,22 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+           riscv_has_ext(env, RVD) &&
+           cpu->cfg.ext_icsr && cpu->cfg.ext_ifencei)) {
+         warn_report("Setting G will also set IMAFD_Zicsr_Zifencei");
+-        cpu->cfg.ext_icsr = true;
+-        cpu->cfg.ext_ifencei = true;
++
++        if (cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_icsr)) &&
++            !cpu->cfg.ext_icsr) {
++            error_setg(errp, "RVG requires Zicsr but user set Zicsr to false");
++            return;
++        }
++
++        if (cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_ifencei)) &&
++            !cpu->cfg.ext_ifencei) {
++            error_setg(errp, "RVG requires Zifencei but user set "
++                       "Zifencei to false");
++            return;
++        }
++
++        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_icsr), true);
++        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_ifencei), true);
  
-     for (prop = riscv_cpu_extensions; prop && prop->name; prop++) {
--        object_property_set_bool(obj, prop->name, true, NULL);
-+        isa_ext_update_enabled(cpu, prop->offset, true);
-     }
- 
-     /* set vector version */
-     env->vext_ver = VEXT_VERSION_1_00_0;
- 
-     /* Zfinx is not compatible with F. Disable it */
--    object_property_set_bool(obj, "zfinx", false, NULL);
--    object_property_set_bool(obj, "zdinx", false, NULL);
--    object_property_set_bool(obj, "zhinx", false, NULL);
--    object_property_set_bool(obj, "zhinxmin", false, NULL);
-+    isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_zfinx), false);
-+    isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_zdinx), false);
-+    isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_zhinx), false);
-+    isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_zhinxmin), false);
- 
--    object_property_set_bool(obj, "zce", false, NULL);
--    object_property_set_bool(obj, "zcmp", false, NULL);
--    object_property_set_bool(obj, "zcmt", false, NULL);
-+    isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_zce), false);
-+    isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_zcmp), false);
-+    isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_zcmt), false);
- 
-     if (env->misa_mxl != MXL_RV32) {
--        object_property_set_bool(obj, "zcf", false, NULL);
-+        isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_zcf), false);
-     }
- }
- 
+         env->misa_ext |= RVI | RVM | RVA | RVF | RVD;
+         env->misa_ext_mask |= RVI | RVM | RVA | RVF | RVD;
 -- 
 2.41.0
 
