@@ -4,82 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E99EC7113B
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E41CC6FA8F
 	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Aug 2023 22:15:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qZIbT-0007hQ-5y; Thu, 24 Aug 2023 18:14:59 -0400
+	id 1qZIbM-0007dW-AW; Thu, 24 Aug 2023 18:14:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qZIbS-0007hA-5o
- for qemu-riscv@nongnu.org; Thu, 24 Aug 2023 18:14:58 -0400
-Received: from mail-oi1-x22e.google.com ([2607:f8b0:4864:20::22e])
+ id 1qZIbL-0007dJ-6y
+ for qemu-riscv@nongnu.org; Thu, 24 Aug 2023 18:14:51 -0400
+Received: from mail-oo1-xc33.google.com ([2607:f8b0:4864:20::c33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qZIbP-0005xI-Rq
- for qemu-riscv@nongnu.org; Thu, 24 Aug 2023 18:14:57 -0400
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-3a88ff732aeso597739b6e.0
- for <qemu-riscv@nongnu.org>; Thu, 24 Aug 2023 15:14:55 -0700 (PDT)
+ id 1qZIbI-0005vp-Et
+ for qemu-riscv@nongnu.org; Thu, 24 Aug 2023 18:14:50 -0400
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-57325fcd970so247433eaf.1
+ for <qemu-riscv@nongnu.org>; Thu, 24 Aug 2023 15:14:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1692915294; x=1693520094;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Z7GGhsp+GgEZfjKLvw+LVSBGm5g6O/+fRFcmgmdrOO8=;
- b=L2G5m8802YOAZ9rqmSiMQEGI6RxmRULInNJZbOYhSxAUq1r4R0xqXPQZMAtuIvSrot
- lGfPiRRPYu3dFfNvtltxQjx2Z2MkucUXaspNXAuCQJ8ZtKTALVQSjr3RXr4Y3F4q6TX2
- 2uP4VRR5JZL8kKzKDV2D8lXqVcnhnjkdqS9EOgYXsKssvAwdWXviRYnCjZOrrmfcjVir
- mGyH/jklgk3Z/XAKryP6VFWNQKkXXn1bMoW57g6nLFdYe+jDWKx/1fXraHlXGJBLX7UH
- NBgh2KEZhXLnyEGZjtGk+3uWtckpcEhN4Q+bcApYV+GO7uT1VMt/m9YYrTaB/ce6r7y7
- lShA==
+ d=ventanamicro.com; s=google; t=1692915286; x=1693520086;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8jhibZdpXIVuFFBL69YnfGXyedV2du86T3CjXRnhyx4=;
+ b=DMvwk6vNW8bohehtSmnWwTyWKzi5WDDBntFLkyDpPSBd3M2UgApZ8XgT8ZZnRWcrP+
+ YCmNt1QnqkTQ7GSP4TkjA9Rpvyoor3lLyVBK5ftSktHC2jqH06oeu90pu71eztBCCkH/
+ mXYv1uc+tM89sgiQwHSu7zkT29oJjIQlCtcpiVihlF6AeJxSqnj+TXNon6uOhBzcIu+h
+ a0WRmJiQzrsf/WJseyMSF8hmy3ZoOwOyN5rJMo+q9JmRqjJb+ra29hMuj8UaSe3WNJk5
+ iOa5yMRTe+0tZmhOv1IFCgXe+I3tChw1n8KVGWm+ZPHIuc4is3Bec0Re1EpCi511ntyq
+ qsKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692915294; x=1693520094;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Z7GGhsp+GgEZfjKLvw+LVSBGm5g6O/+fRFcmgmdrOO8=;
- b=HSPfBQUcKXIDnubc8on8myWpIw3jr/VnZvlhAXtg6QC5zmHIuaXkoPGH1h3/B96DMm
- y/nvxlRdGBs01MKb3YIdk7h8atQg4ZE7GVos/ljhd1NnTuA2onpNnwO9wbUbtZ7kc432
- aBaDYRQ1qyYCJAYEELYRFT9zNqjR4L9gMQnGjBlBEHqhzUagUIt+ZdTbJkwahQToBStd
- 6ppMVjxgXqQNGzfdUKq7Mr9FAATMei0BwrO3FYP6AgjTPB3FD5ktYLAuzHEGXt5/7BwA
- BhkOTT3ZY0tMbtJqP1FD5zl8omFLLHCn63hxHDpZOAqdaCZwxvZ0THLE3U9AcEWofazX
- IGyw==
-X-Gm-Message-State: AOJu0YzgYqaTF0sKPdgTTiu+6anSD5WwR3HnRV1ohi7aZNwDS3fSl5UW
- yKAFy3vsCYlOj/MFTgBrRcXZxg==
-X-Google-Smtp-Source: AGHT+IHS7xr6bS2Xe8yrds+3d0meGMph8xLaBkYB0wnYFGfLZpf31rEDaqtCysW0DpZH0DM0GRVVOA==
-X-Received: by 2002:a05:6808:8d1:b0:3a4:8e62:d9f1 with SMTP id
- k17-20020a05680808d100b003a48e62d9f1mr596390oij.1.1692915294600; 
- Thu, 24 Aug 2023 15:14:54 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692915286; x=1693520086;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=8jhibZdpXIVuFFBL69YnfGXyedV2du86T3CjXRnhyx4=;
+ b=bVsm2IUoeDOvLDmKtUDhS7uRW5pddw93miTiZYtB/c+Gko3uY42FK9SIkEbL9E2IAT
+ M56jdhoEgrnuhoOrER0M//glol1tODbC1I9/OMCkuuGkVRWdTZI80Uofi5rfEze/MTp4
+ d38EeH096HSfnsv8BDyRBznG4xqp3VimZJsyHTAV1ztcOEHMSWdrzmVB5UoeakBnKdU6
+ S6IFLy4yEdR4wtdiu8SjrSzubv+iq/EPlrB+G5h+lHtghZ/Xw0u7Zk8iJMevD5mypBBC
+ SFh45O2QU1BpMdkOX11Rp5E9D48gllYpRiIGDVjE4VeK5bnjq73Lqq1gzJ3V3Du2cQIs
+ MZzA==
+X-Gm-Message-State: AOJu0YyjpI8gJB7fgqVt0FFcTfZy/Hh1RRF8ytyDlex099EvcJkKumo6
+ zaAoSA6BGO+VumFI0qOOjcCzIg==
+X-Google-Smtp-Source: AGHT+IEtNNQvDsTZKGcPvwGOpzlbYPHXdVlrg0cGw1zAXBlKERs6APo97WxQGied2muc90d1e41P5A==
+X-Received: by 2002:a4a:3457:0:b0:56c:7428:4a35 with SMTP id
+ n23-20020a4a3457000000b0056c74284a35mr4116199oof.7.1692915286511; 
+ Thu, 24 Aug 2023 15:14:46 -0700 (PDT)
 Received: from grind.. ([179.93.21.19]) by smtp.gmail.com with ESMTPSA id
- o129-20020a4a4487000000b00565fcfabab8sm256338ooa.21.2023.08.24.15.14.52
+ o129-20020a4a4487000000b00565fcfabab8sm256338ooa.21.2023.08.24.15.14.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 15:14:54 -0700 (PDT)
+ Thu, 24 Aug 2023 15:14:46 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH RESEND v8 03/20] target/riscv/cpu.c: split kvm prop handling
- to its own helper
-Date: Thu, 24 Aug 2023 19:14:23 -0300
-Message-ID: <20230824221440.484675-4-dbarboza@ventanamicro.com>
+Subject: [PATCH RESEND v8 00/20] riscv: 'max' CPU, detect user choice in TCG
+Date: Thu, 24 Aug 2023 19:14:20 -0300
+Message-ID: <20230824221440.484675-1-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230824221440.484675-1-dbarboza@ventanamicro.com>
-References: <20230824221440.484675-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c33;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc33.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,118 +91,63 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Future patches will split the existing Property arrays even further, and
-the existing code in riscv_cpu_add_user_properties() will start to scale
-bad with it because it's dealing with KVM constraints mixed in with TCG
-constraints. We're going to pay a high price to share a couple of common
-lines of code between the two.
+Hi,
 
-Create a new riscv_cpu_add_kvm_properties() that will be forked from
-riscv_cpu_add_user_properties() if we're running KVM. The helper
-includes all properties that a KVM CPU will add. The rest of
-riscv_cpu_add_user_properties() body will then be relieved from having
-to deal with KVM constraints.
+This is a resend of these two patch sets because they no longer apply
+into Alistair's riscv-to-apply.next:
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu.c | 65 ++++++++++++++++++++++++++++++----------------
- 1 file changed, 42 insertions(+), 23 deletions(-)
+[PATCH v8 00/12] riscv: add 'max' CPU, deprecate 'any'
+https://lore.kernel.org/qemu-riscv/20230815223741.433763-1-dbarboza@ventanamicro.com/
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 6aac3ba1d1..a51b946804 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1937,6 +1937,46 @@ static void cpu_set_cfg_unavailable(Object *obj, Visitor *v,
- }
- #endif
- 
-+#ifndef CONFIG_USER_ONLY
-+static void riscv_cpu_add_kvm_unavail_prop(Object *obj, const char *prop_name)
-+{
-+    /* Check if KVM created the property already */
-+    if (object_property_find(obj, prop_name)) {
-+        return;
-+    }
-+
-+    /*
-+     * Set the default to disabled for every extension
-+     * unknown to KVM and error out if the user attempts
-+     * to enable any of them.
-+     */
-+    object_property_add(obj, prop_name, "bool",
-+                        NULL, cpu_set_cfg_unavailable,
-+                        NULL, (void *)prop_name);
-+}
-+
-+static void riscv_cpu_add_kvm_properties(Object *obj)
-+{
-+    Property *prop;
-+    DeviceState *dev = DEVICE(obj);
-+
-+    kvm_riscv_init_user_properties(obj);
-+    riscv_cpu_add_misa_properties(obj);
-+
-+    for (prop = riscv_cpu_extensions; prop && prop->name; prop++) {
-+        riscv_cpu_add_kvm_unavail_prop(obj, prop->name);
-+    }
-+
-+    for (int i = 0; i < ARRAY_SIZE(riscv_cpu_options); i++) {
-+        /* Check if KVM created the property already */
-+        if (object_property_find(obj, riscv_cpu_options[i].name)) {
-+            continue;
-+        }
-+        qdev_property_add_static(dev, &riscv_cpu_options[i]);
-+    }
-+}
-+#endif
-+
- /*
-  * Add CPU properties with user-facing flags.
-  *
-@@ -1952,39 +1992,18 @@ static void riscv_cpu_add_user_properties(Object *obj)
-     riscv_add_satp_mode_properties(obj);
- 
-     if (kvm_enabled()) {
--        kvm_riscv_init_user_properties(obj);
-+        riscv_cpu_add_kvm_properties(obj);
-+        return;
-     }
- #endif
- 
-     riscv_cpu_add_misa_properties(obj);
- 
-     for (prop = riscv_cpu_extensions; prop && prop->name; prop++) {
--#ifndef CONFIG_USER_ONLY
--        if (kvm_enabled()) {
--            /* Check if KVM created the property already */
--            if (object_property_find(obj, prop->name)) {
--                continue;
--            }
--
--            /*
--             * Set the default to disabled for every extension
--             * unknown to KVM and error out if the user attempts
--             * to enable any of them.
--             */
--            object_property_add(obj, prop->name, "bool",
--                                NULL, cpu_set_cfg_unavailable,
--                                NULL, (void *)prop->name);
--            continue;
--        }
--#endif
-         qdev_property_add_static(dev, prop);
-     }
- 
-     for (int i = 0; i < ARRAY_SIZE(riscv_cpu_options); i++) {
--        /* Check if KVM created the property already */
--        if (object_property_find(obj, riscv_cpu_options[i].name)) {
--            continue;
--        }
-         qdev_property_add_static(dev, &riscv_cpu_options[i]);
-     }
- }
+[PATCH v3 0/8] riscv: detecting user choice in TCG extensions
+https://lore.kernel.org/qemu-riscv/20230815224733.434682-1-dbarboza@ventanamicro.com/
+
+
+They're being sent in a single package for convenience. No other changes
+made from their old versions aside from the rebase.
+
+Patches missing acks: 4,7,8
+
+Changes from v7:
+- patch 7:
+  - add riscv_cpu_add_qdev_prop_array() function instead of a macro
+- patch 8:
+  - add riscv_cpu_add_kvm_unavail_prop_array() function instead of a
+    macro
+- v7 link: https://lore.kernel.org/qemu-riscv/20230815201559.398643-1-dbarboza@ventanamicro.com/
+
+Daniel Henrique Barboza (20):
+  target/riscv/cpu.c: split CPU options from riscv_cpu_extensions[]
+  target/riscv/cpu.c: skip 'bool' check when filtering KVM props
+  target/riscv/cpu.c: split kvm prop handling to its own helper
+  target/riscv: add DEFINE_PROP_END_OF_LIST() to riscv_cpu_options[]
+  target/riscv/cpu.c: split non-ratified exts from
+    riscv_cpu_extensions[]
+  target/riscv/cpu.c: split vendor exts from riscv_cpu_extensions[]
+  target/riscv/cpu.c: add riscv_cpu_add_qdev_prop_array()
+  target/riscv/cpu.c: add riscv_cpu_add_kvm_unavail_prop_array()
+  target/riscv/cpu.c: limit cfg->vext_spec log message
+  target/riscv: add 'max' CPU type
+  avocado, risc-v: add opensbi tests for 'max' CPU
+  target/riscv: deprecate the 'any' CPU type
+  target/riscv/cpu.c: use offset in isa_ext_is_enabled/update_enabled
+  target/riscv: make CPUCFG() macro public
+  target/riscv/cpu.c: introduce cpu_cfg_ext_auto_update()
+  target/riscv/cpu.c: use cpu_cfg_ext_auto_update() during realize()
+  target/riscv/cpu.c: introduce RISCVCPUMultiExtConfig
+  target/riscv: use isa_ext_update_enabled() in
+    init_max_cpu_extensions()
+  target/riscv/cpu.c: honor user choice in cpu_cfg_ext_auto_update()
+  target/riscv/cpu.c: consider user option with RVG
+
+ docs/about/deprecated.rst      |  12 +
+ target/riscv/cpu-qom.h         |   1 +
+ target/riscv/cpu.c             | 555 +++++++++++++++++++++++----------
+ target/riscv/cpu.h             |   2 +
+ target/riscv/kvm.c             |   8 +-
+ tests/avocado/riscv_opensbi.py |  16 +
+ 6 files changed, 425 insertions(+), 169 deletions(-)
+
 -- 
 2.41.0
 
