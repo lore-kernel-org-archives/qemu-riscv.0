@@ -4,60 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A537C27C40
-	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Aug 2023 14:30:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0331C6FA8F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Aug 2023 14:31:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qZBMC-00006C-Ua; Thu, 24 Aug 2023 10:30:45 -0400
+	id 1qZBLb-0007pQ-6q; Thu, 24 Aug 2023 10:30:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qZBM9-0008Up-6N
- for qemu-riscv@nongnu.org; Thu, 24 Aug 2023 10:30:42 -0400
-Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031])
+ id 1qZBLZ-0007oF-Mh
+ for qemu-riscv@nongnu.org; Thu, 24 Aug 2023 10:30:05 -0400
+Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qZBM3-0000P5-Hg
- for qemu-riscv@nongnu.org; Thu, 24 Aug 2023 10:30:38 -0400
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-26f9521de4cso1842490a91.0
- for <qemu-riscv@nongnu.org>; Thu, 24 Aug 2023 07:30:35 -0700 (PDT)
+ id 1qZBLX-0008Ny-1f
+ for qemu-riscv@nongnu.org; Thu, 24 Aug 2023 10:30:05 -0400
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-1bdb7b0c8afso42887645ad.3
+ for <qemu-riscv@nongnu.org>; Thu, 24 Aug 2023 07:30:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1692887434; x=1693492234;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qP3Pkjbm6eW/U4aYn+Kgix5mmDk+c87xv3QAatzmioE=;
- b=joTW2Ry1S5pspxRBqCYoliu/BmX+B9iA7CaGLH33LV2xzgyrq2e00jFz5IlcxvjM2g
- TfS+ATDBWG+IiKMgJ5D5TxExfcxIF1A3yQeDSQwtU2p5uOXl+yALvP/Lyuelas6kaRN5
- yoCuC+7vL2pWjelU7GAp1IxjX/y16OBAMUO+9ZpwipAbtZxZj1nGWALfyUpBJ+0Aly4/
- ZuCmYBPPm/nm2k+ki3HfCG/4LBNC96DXEgaZhNEtxnebxEa8lxUHVxPrSPHtSOVw5EW1
- tC34M9Um85KkNueX1XjI9QQE3dn+Cj3noBmlKqXiVLQrE21LHmMy1IWiWae9nwmNXoNx
- aLrA==
+ d=ventanamicro.com; s=google; t=1692887401; x=1693492201;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=MF29GBhTNvUUmI0gukMZgybyAxbxiWyFk7P/UUSYLco=;
+ b=DMupJUrb1jLs+2bSPPXRxtOOLQTa8uU/E/JQMqTqmdXkHY8RHoMwoizqWsiVePod58
+ 4rrMGdk1pkFOXc5zt1f1Xb47rpMZ00EVJhB1iYXxPHSD1xyPO5zIBAkewmALtibo0B/v
+ 84PvcFCTx/WSyKFFf3l/h5gBoMEJsJYWUwJFwp1N+XbjUpNItEnMP2o8MDPuz34GFQJu
+ R0blRo5iTYiLxy4uVPWVOQRr7lxwqWhC2fmYS2gDesv7eTobvfqLpF0YqgvkU36bsbqm
+ ElA4essiBRaa+LcFAibldSsf7mfQG+JX2gsYjlJgrKoGAYTcQTktqexi0XWW6hdy6hcc
+ cu1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692887434; x=1693492234;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qP3Pkjbm6eW/U4aYn+Kgix5mmDk+c87xv3QAatzmioE=;
- b=SPqxZ584I5U8uULT09H3o4MJ/bxxp99cJP3DnanuwI1Cd8kAme8EuGLPXBNu7Wugx6
- 2sjhQWKSznupXVWG5PxAYEHqcCHTDHo2/W+fM0Ni/7EkZSPx5+R7HGUeWehSCRAttaKE
- zFLyKM5gN9jS98mO/pj+PwVsaFAYbcgR5xz2b/NsVOMzVxND9OHsmgkyGr1je467nAMa
- 8YQZlqcXOserp/a/23o5ppjCJUBnEj84CY6Fg+1JV4ZZKnAQXHpl/yNC2DZIEGSdfV7w
- no5oIEzx9WTkxzeLm6a6s7W1QKyGmfhJEq/kplST3xm3AEFFibnvv6KfaqzCj0opCmJ/
- 6NbA==
-X-Gm-Message-State: AOJu0YwXpp9aVwyhjO/vSPLyBwbO0ZWGuGRExw1yIJJCl2QmVwKIyv4v
- xPzuYNOE2p9+yhFfG71qXCc2UQ==
-X-Google-Smtp-Source: AGHT+IEflcAe5EI7tbIKADsmQo76QynTtgSuc+pAuxs49zVx+r3+YZQDem4pg3I3UC+7fkuV1BO3PQ==
-X-Received: by 2002:a17:90b:23c7:b0:26b:17ef:7365 with SMTP id
- md7-20020a17090b23c700b0026b17ef7365mr10929749pjb.48.1692887434318; 
- Thu, 24 Aug 2023 07:30:34 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692887401; x=1693492201;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=MF29GBhTNvUUmI0gukMZgybyAxbxiWyFk7P/UUSYLco=;
+ b=SxLVTRgUBzA7XcnBf9j56hQflnVEq8D13SFq8ZpDO1MG88GV1tjDPe8V19mErzkzIL
+ NM68BZcFCe/9BRqFYtY9AgOS/H6K9QBn0ApMbmUw628+ymUPFAV2bmNPtxqRZ4yaAqFW
+ ENTCDJbwNAw7pZHfgYDxXbgo9reiFnwyumd+zW1TeCq3R1lsWCynrWWHtOvL3f3LDP7r
+ tFjTCP0Mh75UG0xFYDFHqFKqWYiIlGTSNu39Yno2IVGURsiwxjAyd8IwzYWsbZmbczfm
+ +bnXPT9c8/rgzZinqrSnCpzlALMWiOArG6BtgKHxm9kzgdmRAFb7Oy/O/JsPSRHFJ890
+ Q5Zg==
+X-Gm-Message-State: AOJu0YwQ3FVpQdBJKVDMvDtE0xDVOCDmTbCEDXPCkSfCezStBapW7mBQ
+ nj4ja5FVGK7ZisbanwBWeh2bTA==
+X-Google-Smtp-Source: AGHT+IFnMQ18i/W8Q5TPzXMoaqzagKuV2rbEwt2KWuJZ3BP7/EF1BogcqyHBDUHjkITK2G2TqohWbw==
+X-Received: by 2002:a17:90a:e285:b0:268:c7fc:b771 with SMTP id
+ d5-20020a17090ae28500b00268c7fcb771mr11911928pjz.14.1692887400796; 
+ Thu, 24 Aug 2023 07:30:00 -0700 (PDT)
 Received: from sunil-pc.Dlink ([106.51.191.205])
  by smtp.gmail.com with ESMTPSA id
- n6-20020a17090a2bc600b00262fc3d911esm1666864pje.28.2023.08.24.07.30.17
+ n6-20020a17090a2bc600b00262fc3d911esm1666864pje.28.2023.08.24.07.29.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 07:30:24 -0700 (PDT)
+ Thu, 24 Aug 2023 07:29:58 -0700 (PDT)
 From: Sunil V L <sunilvl@ventanamicro.com>
 To: qemu-arm@nongnu.org,
 	qemu-devel@nongnu.org,
@@ -77,17 +76,14 @@ Cc: Shannon Zhao <shannon.zhaosl@gmail.com>,
  Andrew Jones <ajones@ventanamicro.com>,
  Atish Kumar Patra <atishp@rivosinc.com>, Haibo Xu <haibo1.xu@intel.com>,
  Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH v2 03/12] hw/riscv: virt: Make few IMSIC macros and functions
- public
-Date: Thu, 24 Aug 2023 19:59:33 +0530
-Message-Id: <20230824142942.3983650-4-sunilvl@ventanamicro.com>
+Subject: [PATCH v2 00/12] RISC-V: ACPI: Enable AIA, PLIC and update RHCT
+Date: Thu, 24 Aug 2023 19:59:30 +0530
+Message-Id: <20230824142942.3983650-1-sunilvl@ventanamicro.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230824142942.3983650-1-sunilvl@ventanamicro.com>
-References: <20230824142942.3983650-1-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pj1-x1031.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x62a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -110,108 +106,77 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Some macros and static function related to IMSIC are defined in virt.c.
-They are required in virt-acpi-build.c. So, make them public.
+This series primarily enables external interrupt controllers (AIA and PLIC)
+in ACPI tables for RISC-V virt platform. It also updates RHCT with CMO and
+MMU related information.
 
-Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- hw/riscv/virt.c         | 25 +------------------------
- include/hw/riscv/virt.h | 25 +++++++++++++++++++++++++
- 2 files changed, 26 insertions(+), 24 deletions(-)
+Below ECRs for these changes are approved by ASWG and will be
+available in next ACPI spec release.
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 388e52a294..7b65a847e2 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -38,7 +38,6 @@
- #include "kvm_riscv.h"
- #include "hw/intc/riscv_aclint.h"
- #include "hw/intc/riscv_aplic.h"
--#include "hw/intc/riscv_imsic.h"
- #include "hw/intc/sifive_plic.h"
- #include "hw/misc/sifive_test.h"
- #include "hw/platform-bus.h"
-@@ -54,28 +53,6 @@
- #include "hw/acpi/aml-build.h"
- #include "qapi/qapi-visit-common.h"
- 
--/*
-- * The virt machine physical address space used by some of the devices
-- * namely ACLINT, PLIC, APLIC, and IMSIC depend on number of Sockets,
-- * number of CPUs, and number of IMSIC guest files.
-- *
-- * Various limits defined by VIRT_SOCKETS_MAX_BITS, VIRT_CPUS_MAX_BITS,
-- * and VIRT_IRQCHIP_MAX_GUESTS_BITS are tuned for maximum utilization
-- * of virt machine physical address space.
-- */
--
--#define VIRT_IMSIC_GROUP_MAX_SIZE      (1U << IMSIC_MMIO_GROUP_MIN_SHIFT)
--#if VIRT_IMSIC_GROUP_MAX_SIZE < \
--    IMSIC_GROUP_SIZE(VIRT_CPUS_MAX_BITS, VIRT_IRQCHIP_MAX_GUESTS_BITS)
--#error "Can't accomodate single IMSIC group in address space"
--#endif
--
--#define VIRT_IMSIC_MAX_SIZE            (VIRT_SOCKETS_MAX * \
--                                        VIRT_IMSIC_GROUP_MAX_SIZE)
--#if 0x4000000 < VIRT_IMSIC_MAX_SIZE
--#error "Can't accomodate all IMSIC groups in address space"
--#endif
--
- /* KVM AIA only supports APLIC MSI. APLIC Wired is always emulated by QEMU. */
- static bool virt_use_kvm_aia(RISCVVirtState *s)
- {
-@@ -512,7 +489,7 @@ static void create_fdt_socket_plic(RISCVVirtState *s,
-     g_free(plic_cells);
- }
- 
--static uint32_t imsic_num_bits(uint32_t count)
-+uint32_t imsic_num_bits(uint32_t count)
- {
-     uint32_t ret = 0;
- 
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index e5c474b26e..5b03575ed3 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -23,6 +23,7 @@
- #include "hw/riscv/riscv_hart.h"
- #include "hw/sysbus.h"
- #include "hw/block/flash.h"
-+#include "hw/intc/riscv_imsic.h"
- 
- #define VIRT_CPUS_MAX_BITS             9
- #define VIRT_CPUS_MAX                  (1 << VIRT_CPUS_MAX_BITS)
-@@ -127,4 +128,28 @@ enum {
- 
- bool virt_is_acpi_enabled(RISCVVirtState *s);
- void virt_acpi_setup(RISCVVirtState *vms);
-+uint32_t imsic_num_bits(uint32_t count);
-+
-+/*
-+ * The virt machine physical address space used by some of the devices
-+ * namely ACLINT, PLIC, APLIC, and IMSIC depend on number of Sockets,
-+ * number of CPUs, and number of IMSIC guest files.
-+ *
-+ * Various limits defined by VIRT_SOCKETS_MAX_BITS, VIRT_CPUS_MAX_BITS,
-+ * and VIRT_IRQCHIP_MAX_GUESTS_BITS are tuned for maximum utilization
-+ * of virt machine physical address space.
-+ */
-+
-+#define VIRT_IMSIC_GROUP_MAX_SIZE      (1U << IMSIC_MMIO_GROUP_MIN_SHIFT)
-+#if VIRT_IMSIC_GROUP_MAX_SIZE < \
-+    IMSIC_GROUP_SIZE(VIRT_CPUS_MAX_BITS, VIRT_IRQCHIP_MAX_GUESTS_BITS)
-+#error "Can't accomodate single IMSIC group in address space"
-+#endif
-+
-+#define VIRT_IMSIC_MAX_SIZE            (VIRT_SOCKETS_MAX * \
-+                                        VIRT_IMSIC_GROUP_MAX_SIZE)
-+#if 0x4000000 < VIRT_IMSIC_MAX_SIZE
-+#error "Can't accomodate all IMSIC groups in address space"
-+#endif
-+
- #endif
+1) MADT (AIA) - https://drive.google.com/file/d/1oMGPyOD58JaPgMl1pKasT-VKsIKia7zR/view?usp=sharing
+2) RHCT - https://drive.google.com/file/d/1sKbOa8m1UZw1JkquZYe3F1zQBN1xXsaf/view?usp=sharing
+
+First two patches in this series are to migrate a couple of functions from
+ARM architecture to common code so that RISC-V doesn't need to duplicate
+the same.
+
+The patch set is based on Alistair's riscv-to-apply.next branch.
+
+These changes are also available in  riscv_acpi_b2_v2 branch at:
+https://github.com/vlsunil/qemu/
+
+Changes since v1:
+	1) As per Igor's suggestion, migrated fw_cfg and virtio creation
+	   functions to device specific file instead of generic aml-build.c.
+	   Since ACPI is optional, new files are created and enabled for
+	   build only when CONFIG_ACPI is enabled.
+
+	2) As per Igor's suggestion, properties are added to the GPEX PCI
+	   host to indicate MMIO ranges. The platform fw can initialize
+	   these to appropriate values and the DSDT generator can fetch
+	   the information from the host bus itself. This makes the code
+	   generic instead of machine specific.
+
+	3) Added PLIC patch from Haibo.
+
+	4) Rebased to latest riscv-to-apply.next and added RB tags as
+	   appropriate.
+
+
+Sunil V L (12):
+  hw/arm/virt-acpi-build.c: Migrate fw_cfg creation to common location
+  hw/arm/virt-acpi-build.c: Migrate virtio creation to common location
+  hw/riscv: virt: Make few IMSIC macros and functions public
+  hw/riscv/virt-acpi-build.c: Add AIA support in RINTC
+  hw/riscv/virt-acpi-build.c: Add IMSIC in the MADT
+  hw/riscv/virt-acpi-build.c: Add APLIC in the MADT
+  hw/riscv/virt-acpi-build.c: Add CMO information in RHCT
+  hw/riscv/virt-acpi-build.c: Add MMU node in RHCT
+  hw/pci-host/gpex: Define properties for MMIO ranges
+  hw/riscv/virt: Update GPEX MMIO related properties
+  hw/riscv/virt-acpi-build.c: Add IO controllers and devices
+  hw/riscv/virt-acpi-build.c: Add PLIC in MADT
+
+ hw/arm/virt-acpi-build.c        |  48 +----
+ hw/nvram/fw_cfg-acpi.c          |  17 ++
+ hw/nvram/meson.build            |   1 +
+ hw/pci-host/gpex-acpi.c         |  13 ++
+ hw/pci-host/gpex.c              |  12 ++
+ hw/riscv/Kconfig                |   1 +
+ hw/riscv/virt-acpi-build.c      | 342 +++++++++++++++++++++++++++++---
+ hw/riscv/virt.c                 |  72 +++----
+ hw/virtio/meson.build           |   1 +
+ hw/virtio/virtio-acpi.c         |  28 +++
+ include/hw/nvram/fw_cfg_acpi.h  |   9 +
+ include/hw/pci-host/gpex.h      |  28 ++-
+ include/hw/riscv/virt.h         |  26 +++
+ include/hw/virtio/virtio-acpi.h |  11 +
+ 14 files changed, 492 insertions(+), 117 deletions(-)
+ create mode 100644 hw/nvram/fw_cfg-acpi.c
+ create mode 100644 hw/virtio/virtio-acpi.c
+ create mode 100644 include/hw/nvram/fw_cfg_acpi.h
+ create mode 100644 include/hw/virtio/virtio-acpi.h
+
 -- 
 2.39.2
 
