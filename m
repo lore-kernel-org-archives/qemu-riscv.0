@@ -4,27 +4,27 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2A03C71133
-	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Aug 2023 12:19:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56C9EC71133
+	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Aug 2023 12:19:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qZVlM-00017c-Gr; Fri, 25 Aug 2023 08:18:05 -0400
+	id 1qZVlO-00018e-46; Fri, 25 Aug 2023 08:18:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qZVlK-00016j-PG; Fri, 25 Aug 2023 08:18:02 -0400
-Received: from out30-133.freemail.mail.aliyun.com ([115.124.30.133])
+ id 1qZVlN-00018F-Cc; Fri, 25 Aug 2023 08:18:05 -0400
+Received: from out30-119.freemail.mail.aliyun.com ([115.124.30.119])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qZVlG-0003rX-VW; Fri, 25 Aug 2023 08:18:02 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
+ id 1qZVlH-0003rB-V4; Fri, 25 Aug 2023 08:18:05 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R391e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045168;
  MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=15; SR=0;
- TI=SMTPD_---0VqXSP-q_1692965863; 
+ TI=SMTPD_---0VqXSP-4_1692965860; 
 Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VqXSP-q_1692965863) by smtp.aliyun-inc.com;
- Fri, 25 Aug 2023 20:17:43 +0800
+ fp:SMTPD_---0VqXSP-4_1692965860) by smtp.aliyun-inc.com;
+ Fri, 25 Aug 2023 20:17:41 +0800
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 To: qemu-devel@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, eduardo@habkost.net,
@@ -33,17 +33,15 @@ Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, eduardo@habkost.net,
  liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com,
  zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org,
  ajones@ventanamicro.com
-Subject: [RFC PATCH 2/3] target/riscv: Add API list_cpu_props
-Date: Fri, 25 Aug 2023 20:16:50 +0800
-Message-Id: <20230825121651.1534-3-zhiwei_liu@linux.alibaba.com>
+Subject: [RFC PATCH 0/3] Add API for list cpu extensions
+Date: Fri, 25 Aug 2023 20:16:48 +0800
+Message-Id: <20230825121651.1534-1-zhiwei_liu@linux.alibaba.com>
 X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20230825121651.1534-1-zhiwei_liu@linux.alibaba.com>
-References: <20230825121651.1534-1-zhiwei_liu@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.133;
+Received-SPF: pass client-ip=115.124.30.119;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-133.freemail.mail.aliyun.com
+ helo=out30-119.freemail.mail.aliyun.com
 X-Spam_score_int: -98
 X-Spam_score: -9.9
 X-Spam_bar: ---------
@@ -66,84 +64,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This API used for output current configuration for one specified CPU.
-Currently only RISC-V frontend implements this API.
+Some times we want to know what is the really mean of one cpu option.
+For example, in RISC-V, we usually specify a cpu in this way:
+-cpu rv64,v=on
 
-Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
----
- cpu.c                     |  8 ++++++++
+If we don't look into the source code, we can't get the ISA extensions
+of this -cpu command line.
+
+In this patch set, we add one list_cpu_props API for common cores. It
+will output the enabled ISA extensions.
+
+In the near future, I will also list all possible user configurable
+options and all possible extensions for this cpu.
+
+In order to reuse the options parse code, I also add a QemuOptsList
+for cpu.
+
+
+After this patch, we can output the extensions for cpu,
+"""
+ ./qemu-system-riscv64 -cpu rv64,help
+    Enable extension:
+            rv64imafdch_zicbom_zicboz_zicsr_zifencei_zihintpause_zawrs_zfa_zba_zbb_zbc_zbs_sstc_svadu
+"""
+
+Notice currently this patch is only working for RISC-V system mode.
+
+Thanks Andrew Jones for your suggestion!
+
+Todo:
+1) Output all possible user configurable options and all extensions.
+2) Add support for RISC-V linux-user mode
+3) Add support for other archs
+
+
+LIU Zhiwei (3):
+  cpu: Add new API cpu_type_by_name
+  target/riscv: Add API list_cpu_props
+  softmmu/vl: Add qemu_cpu_opts QemuOptsList
+
+ cpu.c                     | 39 +++++++++++++++++++++++++++------------
  include/exec/cpu-common.h |  1 +
+ include/hw/core/cpu.h     | 11 +++++++++++
+ softmmu/vl.c              | 35 +++++++++++++++++++++++++++++++++++
  target/riscv/cpu.c        | 10 ++++++++++
  target/riscv/cpu.h        |  2 ++
- 4 files changed, 21 insertions(+)
+ 6 files changed, 86 insertions(+), 12 deletions(-)
 
-diff --git a/cpu.c b/cpu.c
-index e1a9239d0f..03a313cd72 100644
---- a/cpu.c
-+++ b/cpu.c
-@@ -299,6 +299,14 @@ void list_cpus(void)
- #endif
- }
- 
-+void list_cpu_props(CPUState *cs)
-+{
-+    /* XXX: implement xxx_cpu_list_props for targets that still miss it */
-+#if defined(cpu_list_props)
-+    cpu_list_props(cs);
-+#endif
-+}
-+
- #if defined(CONFIG_USER_ONLY)
- void tb_invalidate_phys_addr(hwaddr addr)
- {
-diff --git a/include/exec/cpu-common.h b/include/exec/cpu-common.h
-index 87dc9a752c..b3160d9218 100644
---- a/include/exec/cpu-common.h
-+++ b/include/exec/cpu-common.h
-@@ -166,5 +166,6 @@ int cpu_memory_rw_debug(CPUState *cpu, vaddr addr,
- 
- /* vl.c */
- void list_cpus(void);
-+void list_cpu_props(CPUState *);
- 
- #endif /* CPU_COMMON_H */
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 6b93b04453..3ea18de06f 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -2226,6 +2226,16 @@ void riscv_cpu_list(void)
-     g_slist_free(list);
- }
- 
-+void riscv_cpu_list_props(CPUState *cs)
-+{
-+    char *enabled_isa;
-+
-+    enabled_isa = riscv_isa_string(RISCV_CPU(cs));
-+    qemu_printf("Enable extension:\n");
-+    qemu_printf("\t%s\n", enabled_isa);
-+    /* TODO: output all user configurable options and all possible extensions */
-+}
-+
- #define DEFINE_CPU(type_name, initfn)      \
-     {                                      \
-         .name = type_name,                 \
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 6ea22e0eea..af1d47605b 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -443,9 +443,11 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-                         bool probe, uintptr_t retaddr);
- char *riscv_isa_string(RISCVCPU *cpu);
- void riscv_cpu_list(void);
-+void riscv_cpu_list_props(CPUState *cs);
- void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp);
- 
- #define cpu_list riscv_cpu_list
-+#define cpu_list_props riscv_cpu_list_props
- #define cpu_mmu_index riscv_cpu_mmu_index
- 
- #ifndef CONFIG_USER_ONLY
 -- 
 2.17.1
 
