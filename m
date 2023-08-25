@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E7EBC3DA66
-	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Aug 2023 13:10:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7212C3DA66
+	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Aug 2023 13:10:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qZWZF-0001l3-Qf; Fri, 25 Aug 2023 09:09:37 -0400
+	id 1qZWZb-00021r-GU; Fri, 25 Aug 2023 09:09:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qZWZA-0001ih-Ph
- for qemu-riscv@nongnu.org; Fri, 25 Aug 2023 09:09:32 -0400
-Received: from mail-ot1-x331.google.com ([2607:f8b0:4864:20::331])
+ id 1qZWZa-00021b-Pa
+ for qemu-riscv@nongnu.org; Fri, 25 Aug 2023 09:09:58 -0400
+Received: from mail-oa1-x2a.google.com ([2001:4860:4864:20::2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qZWZ7-0006yD-Vd
- for qemu-riscv@nongnu.org; Fri, 25 Aug 2023 09:09:32 -0400
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-6bd066b0fd4so643442a34.2
- for <qemu-riscv@nongnu.org>; Fri, 25 Aug 2023 06:09:28 -0700 (PDT)
+ id 1qZWZY-000755-Dk
+ for qemu-riscv@nongnu.org; Fri, 25 Aug 2023 09:09:58 -0400
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-1ccd5b1b9d0so579793fac.1
+ for <qemu-riscv@nongnu.org>; Fri, 25 Aug 2023 06:09:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1692968968; x=1693573768;
+ d=ventanamicro.com; s=google; t=1692968995; x=1693573795;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3vEnujRBMedK459fERI6xs0cZ9g5BeVCTK4ijylJEkY=;
- b=A+Fs9Y1/agCDcKusjmIyP10O+UeloFbaemReY+0AD59NY9T8YRjvT8FBXA/HE+Y6Qr
- 51Jafxdn+xKBu9YgmXAnKd8Dvu1I5CxYUwYkrcXHZNQ32Asfk7rotyZu2Qt9dZ/P+QhR
- Cv2zoTktGlwPD8l1TCtd+kH3nX9K8rCglrIJSl/wvvxz4Li5nascOktL683G8iWHqj4c
- 6m3uxh3DPvejhko3r7vZaGAfAr6taYgXJJVmSyRb+cr4LfsoQcr9+MRZearfie1tbKUP
- 7iq4rKH2V+wMH9heoczXTtcuEuVa+k2Faw9PkFK+TfBZZYSW5ATV+O5vkE6qVK2+gp5j
- omeQ==
+ bh=IewOBMJEnCMngHd0wMHoX0ePwPlGZOCY8AaJCYGxmSw=;
+ b=eNhX3FxGS6IAhOI1PZwGEt3eNSTh64V1Du3xmQiIM6+U+lJfELRGgMryB43lzmmftl
+ o3Tjewng0gC1DzZlR6HpxCVHF8eD1sCLdHZoXg9dkdahqtPhLoT7ASxhyf+9sb2fAiKA
+ 27h3tM/n6ygp6R52mullpur5Qd7+SRE9/4NbuI6wnMVYDT5+Jspros+VWkPyqHYUnbMu
+ o0oogrfTbrBO7YPb8wPVzFqgFisJTt8buy5iUh/Lc1KThisNwkawD1cIJMVCZLDABG3V
+ yw/ipmQ77jDI+i4EFajajLKkJOPxyOuMBONsRRepg4+dHFuLXfm7stugCA0GZmsPXMOb
+ jlzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692968968; x=1693573768;
+ d=1e100.net; s=20221208; t=1692968995; x=1693573795;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3vEnujRBMedK459fERI6xs0cZ9g5BeVCTK4ijylJEkY=;
- b=la2tQZjJ7X6WHyWANkKkqXHg9RLJRK15Wwq83cmVVAZqD1FLJ/iNwUzjDUJod/it+R
- Bg0iktxBLoPywnMkSBab1kY8ykoOt2l4hNRugtU2OFiYOVGVqoBWj0+yTlCIl9oVEFKF
- enq3g9VT7Q4e8NRXrt13BCA/4LyFU04TgLyhb4UJAwBlCPQyIc2WAxyBWxDEH15OEWrW
- zKlqqtv9eu74Tb/YPCeKjpjR9yHzdos5XlTuSjJB3tFQSWZIZNykPjZRcQDksjRQg06u
- gdt+RklFyKt85XQTYzU0Y7MpnEuaqzVFnAeS/HzCF74f0ybJE6/OQ/Xgog50hJ5nbF8N
- o8dA==
-X-Gm-Message-State: AOJu0YwsUY817C9Nkpc8iB73TxY31SVSY2UJ/UYAe4FhtDSzSr6PenOX
- KsIZcW1en40rNDJKAtYZb02yLA==
-X-Google-Smtp-Source: AGHT+IGfkw0mv/ZfcouqEipb0zWUqKhwEEPCwPJnvDNZb1gP5Wlft7KcGL8RP3AtLON3tyBCGWManQ==
-X-Received: by 2002:a05:6870:fb93:b0:1b5:688b:5c24 with SMTP id
- kv19-20020a056870fb9300b001b5688b5c24mr3043648oab.32.1692968968051; 
- Fri, 25 Aug 2023 06:09:28 -0700 (PDT)
+ bh=IewOBMJEnCMngHd0wMHoX0ePwPlGZOCY8AaJCYGxmSw=;
+ b=UotFwV2gkrx5HZFJiupokii3WqynSKKWru5MDplVqU70c5qMaKSNKp+nuSFEz9Zd3P
+ oq085IUd+0C6C1EVGpLA4h2aNDnAtMeRU1KdOCICJqRDShJ6cgYN4Fy47REu9XjUInO5
+ LKdrb00/yLSoiUbCKaMGYMmHmuqSUHYbwFhLBZ2CfSOZyYXDVpbglvcP5P/zub+raXhz
+ L/q3DMK5dzWCNmX5Sz+CcGU79tOMV9bgYS/7ypEkFu14J+a1/cf/4jj/GEOa75/Gybc6
+ Rk8LCDGAOJBR6i1jJ//mDtz/F1soue0S4VkAQndyvQQth3O5/dkc4PQjd6Qx0E+mwX/s
+ Htyg==
+X-Gm-Message-State: AOJu0Yw3RfgayA4AcGEIgx1FB0XFcbaquce1npGANZTB/Rnj2ai2Q/+S
+ fQkiQjO/0WYMHahI0PuE6hsY1LQiTgrQKxE60fA=
+X-Google-Smtp-Source: AGHT+IF8UJ4KhSPCBIqBUpmvZofM7X3N9sU/Pdu0z1YkjaTp7EkBWU5W3g+AijjgS9pcULMrvRW2dg==
+X-Received: by 2002:a05:6870:65a4:b0:1bc:11ec:1752 with SMTP id
+ fp36-20020a05687065a400b001bc11ec1752mr3243979oab.36.1692968995346; 
+ Fri, 25 Aug 2023 06:09:55 -0700 (PDT)
 Received: from grind.. ([179.93.21.19]) by smtp.gmail.com with ESMTPSA id
- ds23-20020a0568705b1700b001c50fb56845sm966189oab.16.2023.08.25.06.09.24
+ ds23-20020a0568705b1700b001c50fb56845sm966189oab.16.2023.08.25.06.09.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Aug 2023 06:09:27 -0700 (PDT)
+ Fri, 25 Aug 2023 06:09:55 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 09/20] target/riscv/cpu.c: mark extensions arrays as 'const'
-Date: Fri, 25 Aug 2023 10:08:42 -0300
-Message-ID: <20230825130853.511782-10-dbarboza@ventanamicro.com>
+Subject: [PATCH 18/20] target/riscv/cpu: move priv spec functions to tcg-cpu.c
+Date: Fri, 25 Aug 2023 10:08:51 -0300
+Message-ID: <20230825130853.511782-19-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230825130853.511782-1-dbarboza@ventanamicro.com>
 References: <20230825130853.511782-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::331;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x331.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::2a;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x2a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -94,95 +94,143 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We'll need to export these arrays to the accelerator classes in the next
-patches. Mark them as 'const' now to minimize changes in the future.
-
-Note that 'riscv_cpu_options' will also be exported, but can't be marked
-as 'const', because the properties are changed via
-qdev_property_add_static().
+Priv spec validation is TCG specific. Move it to the TCG accel class.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- target/riscv/cpu.c | 22 +++++++++++++---------
- 1 file changed, 13 insertions(+), 9 deletions(-)
+ target/riscv/cpu.c         | 39 --------------------------------------
+ target/riscv/cpu.h         |  2 --
+ target/riscv/tcg/tcg-cpu.c | 39 ++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 39 insertions(+), 41 deletions(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index dbf81796d2..4eda853f1d 100644
+index ac5ad4727c..6817f94c2c 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -1381,7 +1381,7 @@ typedef struct RISCVCPUMultiExtConfig {
-     {.name = _name, .offset = CPU_CFG_OFFSET(_prop), \
-      .enabled = _defval}
- 
--static RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
-+static const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
-     /* Defaults for standard extensions */
-     MULTI_EXT_CFG_BOOL("sscofpmf", ext_sscofpmf, false),
-     MULTI_EXT_CFG_BOOL("Zifencei", ext_ifencei, true),
-@@ -1441,7 +1441,7 @@ static RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
-     DEFINE_PROP_END_OF_LIST(),
- };
- 
--static RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[] = {
-+static const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[] = {
-     MULTI_EXT_CFG_BOOL("xtheadba", ext_xtheadba, false),
-     MULTI_EXT_CFG_BOOL("xtheadbb", ext_xtheadbb, false),
-     MULTI_EXT_CFG_BOOL("xtheadbs", ext_xtheadbs, false),
-@@ -1459,7 +1459,7 @@ static RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[] = {
- };
- 
- /* These are experimental so mark with 'x-' */
--static RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] = {
-+static const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] = {
-     MULTI_EXT_CFG_BOOL("x-zicond", ext_zicond, false),
- 
-     /* ePMP 0.9.3 */
-@@ -1532,7 +1532,7 @@ static void cpu_get_multi_ext_cfg(Object *obj, Visitor *v, const char *name,
+@@ -172,22 +172,6 @@ void isa_ext_update_enabled(RISCVCPU *cpu, uint32_t ext_offset, bool en)
+     *ext_enabled = en;
  }
  
- static void cpu_add_multi_ext_prop(Object *cpu_obj,
--                                   RISCVCPUMultiExtConfig *multi_cfg)
-+                                   const RISCVCPUMultiExtConfig *multi_cfg)
- {
-     object_property_add(cpu_obj, multi_cfg->name, "bool",
-                         cpu_get_multi_ext_cfg,
-@@ -1568,9 +1568,11 @@ static void cpu_set_cfg_unavailable(Object *obj, Visitor *v,
- #endif
- 
- static void riscv_cpu_add_multiext_prop_array(Object *obj,
--                                              RISCVCPUMultiExtConfig *array)
-+                                        const RISCVCPUMultiExtConfig *array)
- {
--    for (RISCVCPUMultiExtConfig *prop = array; prop && prop->name; prop++) {
-+    const RISCVCPUMultiExtConfig *prop;
-+
-+    for (prop = array; prop && prop->name; prop++) {
-         cpu_add_multi_ext_prop(obj, prop);
+-int cpu_cfg_ext_get_min_version(uint32_t ext_offset)
+-{
+-    const RISCVIsaExtData *edata;
+-
+-    for (edata = isa_edata_arr; edata && edata->name; edata++) {
+-        if (edata->ext_enable_offset != ext_offset) {
+-            continue;
+-        }
+-
+-        return edata->min_version;
+-    }
+-
+-    /* Default to oldest priv spec if no match found */
+-    return PRIV_VERSION_1_10_0;
+-}
+-
+ const char * const riscv_int_regnames[] = {
+     "x0/zero", "x1/ra",  "x2/sp",  "x3/gp",  "x4/tp",  "x5/t0",   "x6/t1",
+     "x7/t2",   "x8/s0",  "x9/s1",  "x10/a0", "x11/a1", "x12/a2",  "x13/a3",
+@@ -926,29 +910,6 @@ static void riscv_cpu_disas_set_info(CPUState *s, disassemble_info *info)
      }
  }
-@@ -1594,9 +1596,11 @@ static void riscv_cpu_add_kvm_unavail_prop(Object *obj, const char *prop_name)
- }
  
- static void riscv_cpu_add_kvm_unavail_prop_array(Object *obj,
--                                                 RISCVCPUMultiExtConfig *array)
-+                                        const RISCVCPUMultiExtConfig *array)
+-void riscv_cpu_disable_priv_spec_isa_exts(RISCVCPU *cpu)
+-{
+-    CPURISCVState *env = &cpu->env;
+-    const RISCVIsaExtData *edata;
+-
+-    /* Force disable extensions if priv spec version does not match */
+-    for (edata = isa_edata_arr; edata && edata->name; edata++) {
+-        if (isa_ext_is_enabled(cpu, edata->ext_enable_offset) &&
+-            (env->priv_ver < edata->min_version)) {
+-            isa_ext_update_enabled(cpu, edata->ext_enable_offset, false);
+-#ifndef CONFIG_USER_ONLY
+-            warn_report("disabling %s extension for hart 0x" TARGET_FMT_lx
+-                        " because privilege spec version does not match",
+-                        edata->name, env->mhartid);
+-#else
+-            warn_report("disabling %s extension because "
+-                        "privilege spec version does not match",
+-                        edata->name);
+-#endif
+-        }
+-    }
+-}
+-
+ #ifndef CONFIG_USER_ONLY
+ static void riscv_cpu_satp_mode_finalize(RISCVCPU *cpu, Error **errp)
  {
--    for (RISCVCPUMultiExtConfig *prop = array; prop && prop->name; prop++) {
-+    const RISCVCPUMultiExtConfig *prop;
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index d9a17df46a..4254f04684 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -711,9 +711,7 @@ enum riscv_pmu_event_idx {
+ /* used by tcg/tcg-cpu.c*/
+ void isa_ext_update_enabled(RISCVCPU *cpu, uint32_t ext_offset, bool en);
+ bool isa_ext_is_enabled(RISCVCPU *cpu, uint32_t ext_offset);
+-int cpu_cfg_ext_get_min_version(uint32_t ext_offset);
+ void set_misa(CPURISCVState *env, RISCVMXL mxl, uint32_t ext);
+-void riscv_cpu_disable_priv_spec_isa_exts(RISCVCPU *cpu);
+ 
+ typedef struct RISCVCPUMultiExtConfig {
+     const char *name;
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index 8e3f55d3a6..6c91978920 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -97,6 +97,22 @@ const struct TCGCPUOps riscv_tcg_ops = {
+ #endif /* !CONFIG_USER_ONLY */
+ };
+ 
++static int cpu_cfg_ext_get_min_version(uint32_t ext_offset)
++{
++    const RISCVIsaExtData *edata;
 +
-+    for (prop = array; prop && prop->name; prop++) {
-         riscv_cpu_add_kvm_unavail_prop(obj, prop->name);
++    for (edata = isa_edata_arr; edata && edata->name; edata++) {
++        if (edata->ext_enable_offset != ext_offset) {
++            continue;
++        }
++
++        return edata->min_version;
++    }
++
++    /* Default to oldest priv spec if no match found */
++    return PRIV_VERSION_1_10_0;
++}
++
+ static void cpu_cfg_ext_auto_update(RISCVCPU *cpu, uint32_t ext_offset,
+                                     bool value)
+ {
+@@ -220,6 +236,29 @@ static void riscv_cpu_validate_v(CPURISCVState *env, RISCVCPUConfig *cfg,
      }
  }
-@@ -1659,7 +1663,7 @@ static void riscv_init_max_cpu_extensions(Object *obj)
- {
-     RISCVCPU *cpu = RISCV_CPU(obj);
-     CPURISCVState *env = &cpu->env;
--    RISCVCPUMultiExtConfig *prop;
-+    const RISCVCPUMultiExtConfig *prop;
  
-     /* Enable RVG, RVJ and RVV that are disabled by default */
-     set_misa(env, env->misa_mxl, env->misa_ext | RVG | RVJ | RVV);
++static void riscv_cpu_disable_priv_spec_isa_exts(RISCVCPU *cpu)
++{
++    CPURISCVState *env = &cpu->env;
++    const RISCVIsaExtData *edata;
++
++    /* Force disable extensions if priv spec version does not match */
++    for (edata = isa_edata_arr; edata && edata->name; edata++) {
++        if (isa_ext_is_enabled(cpu, edata->ext_enable_offset) &&
++            (env->priv_ver < edata->min_version)) {
++            isa_ext_update_enabled(cpu, edata->ext_enable_offset, false);
++#ifndef CONFIG_USER_ONLY
++            warn_report("disabling %s extension for hart 0x" TARGET_FMT_lx
++                        " because privilege spec version does not match",
++                        edata->name, env->mhartid);
++#else
++            warn_report("disabling %s extension because "
++                        "privilege spec version does not match",
++                        edata->name);
++#endif
++        }
++    }
++}
++
+ /*
+  * Check consistency between chosen extensions while setting
+  * cpu->cfg accordingly.
 -- 
 2.41.0
 
