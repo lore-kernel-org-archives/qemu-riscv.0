@@ -4,84 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E856FC3DA6F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Aug 2023 14:16:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED13DC3DA6F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Aug 2023 15:58:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qZXbM-00084p-FH; Fri, 25 Aug 2023 10:15:52 -0400
+	id 1qZZCT-0000os-9q; Fri, 25 Aug 2023 11:58:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qZXbL-00084Z-Au
- for qemu-riscv@nongnu.org; Fri, 25 Aug 2023 10:15:51 -0400
-Received: from mail-oo1-xc33.google.com ([2607:f8b0:4864:20::c33])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1qZZCS-0000oY-0e
+ for qemu-riscv@nongnu.org; Fri, 25 Aug 2023 11:58:16 -0400
+Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qZXbI-0003ch-V4
- for qemu-riscv@nongnu.org; Fri, 25 Aug 2023 10:15:51 -0400
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-5711f6dff8cso589783eaf.3
- for <qemu-riscv@nongnu.org>; Fri, 25 Aug 2023 07:15:48 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1qZZCP-0004dZ-HA
+ for qemu-riscv@nongnu.org; Fri, 25 Aug 2023 11:58:15 -0400
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-31ad779e6b3so860865f8f.2
+ for <qemu-riscv@nongnu.org>; Fri, 25 Aug 2023 08:58:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1692972947; x=1693577747;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=tyDDdZMp8OmmMAS0JLJ42t5WsWpvoiRAVIj9BGgMdvc=;
- b=PS8+FBtLs7X0rZQc03v2iHwpacZyy7lAJ01aEkakRiXn0EHYc1Ko7ehOtM6jKfclq6
- IhAC616LZLl+8S/j3/MWVyu6STJ8jBGyJfWSYNj/hagC7LCE4bXLmpRR8TPGGb/PdcYk
- A1jbFdd0H6coAvHih9Q5OfxNs4CsUlksVRdLpSA2SfdD90XFPWBfHy5ixuyzhwOaCkDQ
- XizJVdVl9iRWk53fBkb295mxijwK1FFeJ7emo+ROYL9ujDcUk7ep5JDvViVaMio5O5Oe
- njrARh7PfWslm6W8lxy++c9+Z/DH1Qs1k2v3dvHf73eZqSYU+98lCkIN0FzMcTwfghns
- kBBQ==
+ d=ventanamicro.com; s=google; t=1692979091; x=1693583891;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=PU43whOI5M0Ljj16bo1tZ+/MyHVt3Jk6mG3VNQQ+VJ4=;
+ b=cVYgizeQxzBv8oXhiRzP8pcSpIMs13+Iljw/GmfrjPGtFg9tDCdu90wvdSxOOLlB+R
+ l8cG3yobUogeLe5r4+r0KUPfacma823i231WlCm6aklkXxdmlL5umvkzzgV4Ay7lUEeM
+ gRyn89JbpjwsVDAhKAhLbGdhpqVuaUG2/KuB1tVmWmsJAf3kRbOQ/xMhBGpBlJoFfxnb
+ FhavAUi3eMEuJrfKfL3nF8P0+/lJvyKD89SY+XZ/3W9QRIROneXuH19n9n6+IyqTzRri
+ cE/Hn+jgK2L0xmvUAiOq/xKOy7g2iJx9OJa8P+f/rAIMLIB4A6p6DpVONG5jObt9e8W+
+ N/KA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692972947; x=1693577747;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=tyDDdZMp8OmmMAS0JLJ42t5WsWpvoiRAVIj9BGgMdvc=;
- b=GvBSUsAnaOEpL0m5hi3+CZ8T/K54UVbLnsdYnq1tqTSbSZEfiGdjlwXNAZ2IsciOHu
- sxrTj/cgQ7Qs0fOlX5CGfhHNzDK4fk2p+gMtudhBBZlehiffNbTeTPAFUs8RBz+QQ0e6
- 1HnaXqo/RRwvPp/3kbJRgsX4yBYjhsE+mvTBuDDhNJY17Kz4oVX1Rn91kKInF5BvUtgR
- C94iZG23vEOdAHJHTY30c6lfveTfAxOqdqjb3R1gfeseQAFG5te+5+QMl+QJY4hcBpEN
- BqanWv4RK8MW5oj/PXkRIrFRMCBhF0+b39a8lRwf4HS0WnqEtcmYvQVoKpFrgOWJ40y7
- +yNw==
-X-Gm-Message-State: AOJu0YwFiEv8WL6Jz3O/1WuVd+P5GogXm0t13mTVrhE/KQFjhwnIt+wQ
- /PPl62aZg6bJ3s4CPbKUwkuf5A==
-X-Google-Smtp-Source: AGHT+IHnFagtVLmi0YggWyLSorn3ye88nstkxO5hnCa6SZ8ePkt92k8OJezGZUxF0zFNI2+0zoxuhA==
-X-Received: by 2002:a4a:7548:0:b0:56e:14b7:b053 with SMTP id
- g8-20020a4a7548000000b0056e14b7b053mr4666709oof.7.1692972947553; 
- Fri, 25 Aug 2023 07:15:47 -0700 (PDT)
-Received: from [192.168.68.108] ([179.93.21.19])
+ d=1e100.net; s=20221208; t=1692979091; x=1693583891;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PU43whOI5M0Ljj16bo1tZ+/MyHVt3Jk6mG3VNQQ+VJ4=;
+ b=D01hqHb1R//m46sZaMDgTMSot/0uQDT5F9FkAyPJJr72iUs/tw2EMIjwLOS5Nlg5cX
+ g4s7+ISdwyHheUZtk+LFc6H4p1MeGSJwt+tCK31INaCZOoCGwMqQ2/lIR6MNZwcwgIGH
+ tyToq8J+2uXsInk7crcMzlGMWiFPX5LYoK0qFH3F4j4nDukZHJRdiCR/0rZA+24zhT+7
+ TCzsg0BH0HwnGvN2fM/K/jjHgcQZfmr18+UJwZEIgqhQk8Msj4DaxKkx+Yoxbi2nUpgW
+ c/mIs7bVw7b1Ff4ocg30U/kwe+WdPPGcDIx1x+8FBIzcmTUgaDhCDnUZ08+5LSWyyynY
+ k4RQ==
+X-Gm-Message-State: AOJu0YwkOqKLMj1etQohYwv7B/5XTGbmDt1+Nnr7wdYrIRgkICUtKc/5
+ sgN8g1b5cI1Ds2ZRi5FWJzLtdw==
+X-Google-Smtp-Source: AGHT+IF7D/SZBz2DXahTrtUfbMjAhQnluW/PZCkWEZsUZ/1ta8DhR/41gW1QlJni104cBuuccka7iA==
+X-Received: by 2002:a5d:630e:0:b0:31a:dc27:dfd with SMTP id
+ i14-20020a5d630e000000b0031adc270dfdmr13265933wru.6.1692979091562; 
+ Fri, 25 Aug 2023 08:58:11 -0700 (PDT)
+Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
  by smtp.gmail.com with ESMTPSA id
- ay3-20020a056820150300b0055ab0abaf31sm898729oob.19.2023.08.25.07.15.43
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 25 Aug 2023 07:15:47 -0700 (PDT)
-Message-ID: <3c05475f-0eb9-e720-55f4-d21909190be9@ventanamicro.com>
-Date: Fri, 25 Aug 2023 11:15:42 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [RFC PATCH 0/3] Add API for list cpu extensions
-Content-Language: en-US
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
-Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, eduardo@habkost.net,
- marcel.apfelbaum@gmail.com, philmd@linaro.org, wangyanan55@huawei.com,
- richard.henderson@linaro.org, pbonzini@redhat.com, bin.meng@windriver.com,
- liweiwei@iscas.ac.cn, qemu-riscv@nongnu.org, ajones@ventanamicro.com
+ d11-20020a056000114b00b0031c6dc684f8sm2590514wrx.20.2023.08.25.08.58.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 25 Aug 2023 08:58:11 -0700 (PDT)
+Date: Fri, 25 Aug 2023 17:58:09 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: qemu-devel@nongnu.org, Alistair.Francis@wdc.com, palmer@dabbelt.com, 
+ eduardo@habkost.net, marcel.apfelbaum@gmail.com, philmd@linaro.org, 
+ wangyanan55@huawei.com, richard.henderson@linaro.org, pbonzini@redhat.com, 
+ bin.meng@windriver.com, liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, 
+ qemu-riscv@nongnu.org
+Subject: Re: [RFC PATCH 3/3] softmmu/vl: Add qemu_cpu_opts QemuOptsList
+Message-ID: <20230825-b47b84e8d73575d79db91dab@orel>
 References: <20230825121651.1534-1-zhiwei_liu@linux.alibaba.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230825121651.1534-1-zhiwei_liu@linux.alibaba.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c33;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc33.google.com
-X-Spam_score_int: -36
-X-Spam_score: -3.7
-X-Spam_bar: ---
-X-Spam_report: (-3.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.57,
+ <20230825121651.1534-4-zhiwei_liu@linux.alibaba.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230825121651.1534-4-zhiwei_liu@linux.alibaba.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x42b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -99,106 +97,157 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Zhiwei! I have two observations:
-
-- this API doesn't play well with KVM as is. In a KVM environment, asking for the
-enabled extensions of the 'host' CPU returns:
-
-$ ./mnt/qemu/bin/qemu-system-riscv64 -cpu host,help
-Enable extension:
-	rv64imafdch_zicbom_zicboz_zicsr_zifencei_zihintntl_zihintpause_zawrs_zfa_zba_zbb_zbc_zbs_sstc_svadu
-
-This is the same set of extensions enabled in the 'rv64' CPU for TCG. This is
-happening because they're sharing the same code that creates properties.
-
-If I apply these patches on top of the "split TCG/KVM accelerators from cpu.c" I
-sent earlier, this happens:
-
-$ ./mnt/qemu/bin/qemu-system-riscv64 -cpu host,help
-Enable extension:
-	rv64
-
-For TCG only CPUs (vendor CPUs) the API works even on a KVM host, regardless of
-applying on top of riscv-to-apply.next or those accel patches:
-
-$ ./mnt/qemu/bin/qemu-system-riscv64 -cpu veyron-v1,help
-Enable extension:
-	rv64ch_zicbom_zicboz_zicsr_zifencei_zba_zbb_zbc_zbs_smaia_smstateen_ssaia_sscofpmf_sstc_svinval_svnapot_svpbmt_xventanacondops
-
-It seems to me that 'cpu help' doesn't engage the KVM driver accel_init() function.
-If we decide to go ahead with this API we'll need to either figure out if accel-specific
-initialization is possible. If not, we should declare that this API works only for TCG.
-
-
-- I think the presence of the 'cpu help' API limits the command line parsing altogether,
-making cheeky things like this possible:
-
-
-(disabling extensions in the cmd line and asking the extensions)
-$ ./build/qemu-system-riscv64 -cpu veyron-v1,icbom=false,icboz=false,help
-Enable extension:
-	rv64ch_zicbom_zicboz_zicsr_zifencei_zba_zbb_zbc_zbs_smaia_smstateen_ssaia_sscofpmf_sstc_svinval_svnapot_svpbmt_xventanacondops
-
-
-(silly option ignored)
-$ ./build/qemu-system-riscv64 -cpu veyron-v1,lalala=true,help
-Enable extension:
-	rv64ch_zicbom_zicboz_zicsr_zifencei_zba_zbb_zbc_zbs_smaia_smstateen_ssaia_sscofpmf_sstc_svinval_svnapot_svpbmt_xventanacondops
-
-
-This is not a gamebreaker but something to keep in mind when using this API. Thanks,
-
-
-Daniel
-
-
-
-On 8/25/23 09:16, LIU Zhiwei wrote:
-> Some times we want to know what is the really mean of one cpu option.
-> For example, in RISC-V, we usually specify a cpu in this way:
-> -cpu rv64,v=on
+On Fri, Aug 25, 2023 at 08:16:51PM +0800, LIU Zhiwei wrote:
+> This make the cpu works the similar way like the -device option.
 > 
-> If we don't look into the source code, we can't get the ISA extensions
-> of this -cpu command line.
-> 
-> In this patch set, we add one list_cpu_props API for common cores. It
-> will output the enabled ISA extensions.
-> 
-> In the near future, I will also list all possible user configurable
-> options and all possible extensions for this cpu.
-> 
-> In order to reuse the options parse code, I also add a QemuOptsList
-> for cpu.
-> 
-> 
-> After this patch, we can output the extensions for cpu,
+> For device option,
 > """
->   ./qemu-system-riscv64 -cpu rv64,help
->      Enable extension:
->              rv64imafdch_zicbom_zicboz_zicsr_zifencei_zihintpause_zawrs_zfa_zba_zbb_zbc_zbs_sstc_svadu
+> ./qemu-system-riscv64 -device e1000,help
+> e1000 options:
+>   acpi-index=<uint32>    -  (default: 0)
+>   addr=<int32>           - Slot and optional function number, example: 06.0 or 06 (default: -1)
+>   autonegotiation=<bool> - on/off (default: true)
+>   bootindex=<int32>
+>   extra_mac_registers=<bool> - on/off (default: true)
+>   failover_pair_id=<str>
 > """
 > 
-> Notice currently this patch is only working for RISC-V system mode.
+> After this patch, the cpu can output its configurations,
+> """
+> ./qemu-system-riscv64 -cpu rv64,help
+> Enable extension:
+> 	rv64imafdch_zicbom_zicboz_zicsr_zifencei_zihintpause_zawrs_zfa_zba_zbb_zbc_zbs_sstc_svadu
+> """
+
+I recommend we make it more similar to -device and list the properties
+(not just extensions). Besides a listing being easier to read than the
+isa string format, listing properties would also output, e.g.
+
+ cbom_blocksize=<uint16>    -  (default: 64)
+
+which would also be helpful.
+
+Thanks,
+drew
+
 > 
-> Thanks Andrew Jones for your suggestion!
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> ---
+>  cpu.c                 |  2 +-
+>  include/hw/core/cpu.h | 11 +++++++++++
+>  softmmu/vl.c          | 35 +++++++++++++++++++++++++++++++++++
+>  3 files changed, 47 insertions(+), 1 deletion(-)
 > 
-> Todo:
-> 1) Output all possible user configurable options and all extensions.
-> 2) Add support for RISC-V linux-user mode
-> 3) Add support for other archs
-> 
-> 
-> LIU Zhiwei (3):
->    cpu: Add new API cpu_type_by_name
->    target/riscv: Add API list_cpu_props
->    softmmu/vl: Add qemu_cpu_opts QemuOptsList
-> 
->   cpu.c                     | 39 +++++++++++++++++++++++++++------------
->   include/exec/cpu-common.h |  1 +
->   include/hw/core/cpu.h     | 11 +++++++++++
->   softmmu/vl.c              | 35 +++++++++++++++++++++++++++++++++++
->   target/riscv/cpu.c        | 10 ++++++++++
->   target/riscv/cpu.h        |  2 ++
->   6 files changed, 86 insertions(+), 12 deletions(-)
+> diff --git a/cpu.c b/cpu.c
+> index 03a313cd72..712bd02684 100644
+> --- a/cpu.c
+> +++ b/cpu.c
+> @@ -257,7 +257,7 @@ void cpu_exec_initfn(CPUState *cpu)
+>  #endif
+>  }
+>  
+> -static const char *cpu_type_by_name(const char *cpu_model)
+> +const char *cpu_type_by_name(const char *cpu_model)
+>  {
+>      ObjectClass *oc;
+>      const char *cpu_type;
+> diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+> index fdcbe87352..49d41afdfa 100644
+> --- a/include/hw/core/cpu.h
+> +++ b/include/hw/core/cpu.h
+> @@ -657,6 +657,17 @@ CPUState *cpu_create(const char *typename);
+>   */
+>  const char *parse_cpu_option(const char *cpu_option);
+>  
+> +/**
+> + * cpu_type_by_name:
+> + * @cpu_model: The -cpu command line model name.
+> + *
+> + * Looks up type name by the -cpu command line model name
+> + *
+> + * Returns: type name of CPU or prints error and terminates process
+> + *          if an error occurred.
+> + */
+> +const char *cpu_type_by_name(const char *cpu_model);
+> +
+>  /**
+>   * cpu_has_work:
+>   * @cpu: The vCPU to check.
+> diff --git a/softmmu/vl.c b/softmmu/vl.c
+> index b0b96f67fa..bc30f3954d 100644
+> --- a/softmmu/vl.c
+> +++ b/softmmu/vl.c
+> @@ -218,6 +218,15 @@ static struct {
+>      { .driver = "virtio-vga-gl",        .flag = &default_vga       },
+>  };
+>  
+> +static QemuOptsList qemu_cpu_opts = {
+> +    .name = "cpu",
+> +    .implied_opt_name = "cpu_model",
+> +    .head = QTAILQ_HEAD_INITIALIZER(qemu_cpu_opts.head),
+> +    .desc = {
+> +        { /* end of list */ }
+> +    },
+> +};
+> +
+>  static QemuOptsList qemu_rtc_opts = {
+>      .name = "rtc",
+>      .head = QTAILQ_HEAD_INITIALIZER(qemu_rtc_opts.head),
+> @@ -1140,6 +1149,21 @@ static int parse_fw_cfg(void *opaque, QemuOpts *opts, Error **errp)
+>      return 0;
+>  }
+>  
+> +static int cpu_help_func(void *opaque, QemuOpts *opts, Error **errp)
+> +{
+> +    const char *cpu_model, *cpu_type;
+> +    cpu_model = qemu_opt_get(opts, "cpu_model");
+> +    if (!cpu_model) {
+> +        return 1;
+> +    }
+> +    if (!qemu_opt_has_help_opt(opts)) {
+> +        return 0;
+> +    }
+> +    cpu_type = cpu_type_by_name(cpu_model);
+> +    list_cpu_props((CPUState *)object_new(cpu_type));
+> +    return 1;
+> +}
+> +
+>  static int device_help_func(void *opaque, QemuOpts *opts, Error **errp)
+>  {
+>      return qdev_device_help(opts);
+> @@ -2467,6 +2491,11 @@ static void qemu_process_help_options(void)
+>          exit(0);
+>      }
+>  
+> +    if (qemu_opts_foreach(qemu_find_opts("cpu"),
+> +                          cpu_help_func, NULL, NULL)) {
+> +        exit(0);
+> +    }
+> +
+>      if (qemu_opts_foreach(qemu_find_opts("device"),
+>                            device_help_func, NULL, NULL)) {
+>          exit(0);
+> @@ -2680,6 +2709,7 @@ void qemu_init(int argc, char **argv)
+>      qemu_add_drive_opts(&bdrv_runtime_opts);
+>      qemu_add_opts(&qemu_chardev_opts);
+>      qemu_add_opts(&qemu_device_opts);
+> +    qemu_add_opts(&qemu_cpu_opts);
+>      qemu_add_opts(&qemu_netdev_opts);
+>      qemu_add_opts(&qemu_nic_opts);
+>      qemu_add_opts(&qemu_net_opts);
+> @@ -2756,6 +2786,11 @@ void qemu_init(int argc, char **argv)
+>              case QEMU_OPTION_cpu:
+>                  /* hw initialization will check this */
+>                  cpu_option = optarg;
+> +                opts = qemu_opts_parse_noisily(qemu_find_opts("cpu"),
+> +                                               optarg, true);
+> +                if (!opts) {
+> +                    exit(1);
+> +                }
+>                  break;
+>              case QEMU_OPTION_hda:
+>              case QEMU_OPTION_hdb:
+> -- 
+> 2.17.1
 > 
 
