@@ -4,87 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17FD9C3DA6F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Aug 2023 13:47:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E856FC3DA6F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Aug 2023 14:16:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qZX9d-0006Yj-8F; Fri, 25 Aug 2023 09:47:15 -0400
+	id 1qZXbM-00084p-FH; Fri, 25 Aug 2023 10:15:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qZX9L-0006MP-Pg
- for qemu-riscv@nongnu.org; Fri, 25 Aug 2023 09:46:56 -0400
-Received: from mail-oi1-x235.google.com ([2607:f8b0:4864:20::235])
+ id 1qZXbL-00084Z-Au
+ for qemu-riscv@nongnu.org; Fri, 25 Aug 2023 10:15:51 -0400
+Received: from mail-oo1-xc33.google.com ([2607:f8b0:4864:20::c33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qZX9H-0006gu-Rs
- for qemu-riscv@nongnu.org; Fri, 25 Aug 2023 09:46:55 -0400
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-3a9b342c398so207795b6e.3
- for <qemu-riscv@nongnu.org>; Fri, 25 Aug 2023 06:46:51 -0700 (PDT)
+ id 1qZXbI-0003ch-V4
+ for qemu-riscv@nongnu.org; Fri, 25 Aug 2023 10:15:51 -0400
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-5711f6dff8cso589783eaf.3
+ for <qemu-riscv@nongnu.org>; Fri, 25 Aug 2023 07:15:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1692971210; x=1693576010;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=ventanamicro.com; s=google; t=1692972947; x=1693577747;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=jx20pixflgyvDK8YaQtzR0YVsu1/I1hWFSlEFbsUCN4=;
- b=nRoms1wDisiX9ASGGFB5vpZhGHrQ5SC9H9Zkm0sN29mwp3LHMuYOwv43QErbrTYAyW
- Cp7JcoUCr7YFXTATFDceENzReMtUZYcEt1VvW3R1eyQjxq0QsALOSp6oZl2AvDAF3QyD
- iR/Ffoq2Pqzb+YhBwkzZ73XWJKMZ1xUg+A9eryop3GYDJwIoWyNd59Gm5LqgJblmFnMD
- UxLVHFIEWS3C/dJkknWcElbzaPUHMHdQtR8o5WSDLxiEwRlZDweCXtXiArxaEb0dtknK
- eFfl61Ck4Ej8HEi7zsMdo1UIGta2avY//v1vVSEwTPtgMay3vyrPs17p2XOPABxrQHJK
- gWug==
+ bh=tyDDdZMp8OmmMAS0JLJ42t5WsWpvoiRAVIj9BGgMdvc=;
+ b=PS8+FBtLs7X0rZQc03v2iHwpacZyy7lAJ01aEkakRiXn0EHYc1Ko7ehOtM6jKfclq6
+ IhAC616LZLl+8S/j3/MWVyu6STJ8jBGyJfWSYNj/hagC7LCE4bXLmpRR8TPGGb/PdcYk
+ A1jbFdd0H6coAvHih9Q5OfxNs4CsUlksVRdLpSA2SfdD90XFPWBfHy5ixuyzhwOaCkDQ
+ XizJVdVl9iRWk53fBkb295mxijwK1FFeJ7emo+ROYL9ujDcUk7ep5JDvViVaMio5O5Oe
+ njrARh7PfWslm6W8lxy++c9+Z/DH1Qs1k2v3dvHf73eZqSYU+98lCkIN0FzMcTwfghns
+ kBBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692971210; x=1693576010;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20221208; t=1692972947; x=1693577747;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=jx20pixflgyvDK8YaQtzR0YVsu1/I1hWFSlEFbsUCN4=;
- b=j51sM/Y3j1WyA8UOcGSmX1rpx1DQDPAA54hA2da6AH3aFdFW3IM0TreZNxzIQQI5oK
- 88OpwGHNAR/+KKIP2lBZXSFjTSTvyLA5nEtvSXpUnitP3GG1UJbFJ69ZlVo3AnunwSSo
- aJpta3ZPBC5cV9jwJkTjhULkCkgs91P22tEQul/MU+xbTw69y5l2hRJzVLsNEUAosx1l
- QIOHAE2wg9JKxVtX/S40Rnybd8xjjhmNXU5FB0AjzeYLPyKq470F3+flg9niv9wwAsE1
- iMGddLBf48cOS1AKX2BToRY9LiIYEcAFvwK4ntPGVurLBZrLX/cLlXFgRuPyHKrNqfOk
- Rc5A==
-X-Gm-Message-State: AOJu0YxRYJJg72gQHq9Qd3MP53//Cg3p+4g6ekeopy0lkiLxA9x9gnuG
- 4Bf1Jm6muRHOgpWvrFH7FiPlAA==
-X-Google-Smtp-Source: AGHT+IHpUiXXOM+AsxFG+ddtqALH7P7v/vfhJzHq4019jyenxXkFCTDCozD2XJsGEMES/xnb3uqp6Q==
-X-Received: by 2002:a05:6808:901:b0:3a7:82e8:8fd1 with SMTP id
- w1-20020a056808090100b003a782e88fd1mr2667347oih.20.1692971210551; 
- Fri, 25 Aug 2023 06:46:50 -0700 (PDT)
+ bh=tyDDdZMp8OmmMAS0JLJ42t5WsWpvoiRAVIj9BGgMdvc=;
+ b=GvBSUsAnaOEpL0m5hi3+CZ8T/K54UVbLnsdYnq1tqTSbSZEfiGdjlwXNAZ2IsciOHu
+ sxrTj/cgQ7Qs0fOlX5CGfhHNzDK4fk2p+gMtudhBBZlehiffNbTeTPAFUs8RBz+QQ0e6
+ 1HnaXqo/RRwvPp/3kbJRgsX4yBYjhsE+mvTBuDDhNJY17Kz4oVX1Rn91kKInF5BvUtgR
+ C94iZG23vEOdAHJHTY30c6lfveTfAxOqdqjb3R1gfeseQAFG5te+5+QMl+QJY4hcBpEN
+ BqanWv4RK8MW5oj/PXkRIrFRMCBhF0+b39a8lRwf4HS0WnqEtcmYvQVoKpFrgOWJ40y7
+ +yNw==
+X-Gm-Message-State: AOJu0YwFiEv8WL6Jz3O/1WuVd+P5GogXm0t13mTVrhE/KQFjhwnIt+wQ
+ /PPl62aZg6bJ3s4CPbKUwkuf5A==
+X-Google-Smtp-Source: AGHT+IHnFagtVLmi0YggWyLSorn3ye88nstkxO5hnCa6SZ8ePkt92k8OJezGZUxF0zFNI2+0zoxuhA==
+X-Received: by 2002:a4a:7548:0:b0:56e:14b7:b053 with SMTP id
+ g8-20020a4a7548000000b0056e14b7b053mr4666709oof.7.1692972947553; 
+ Fri, 25 Aug 2023 07:15:47 -0700 (PDT)
 Received: from [192.168.68.108] ([179.93.21.19])
  by smtp.gmail.com with ESMTPSA id
- bi25-20020a056808189900b003a48ed3564bsm732525oib.50.2023.08.25.06.46.46
+ ay3-20020a056820150300b0055ab0abaf31sm898729oob.19.2023.08.25.07.15.43
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 25 Aug 2023 06:46:50 -0700 (PDT)
-Message-ID: <18c74a22-c4bc-248e-eeef-3120959cf45a@ventanamicro.com>
-Date: Fri, 25 Aug 2023 10:46:45 -0300
+ Fri, 25 Aug 2023 07:15:47 -0700 (PDT)
+Message-ID: <3c05475f-0eb9-e720-55f4-d21909190be9@ventanamicro.com>
+Date: Fri, 25 Aug 2023 11:15:42 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.13.0
-Subject: Re: [RFC PATCH 2/3] target/riscv: Add API list_cpu_props
+Subject: Re: [RFC PATCH 0/3] Add API for list cpu extensions
+Content-Language: en-US
 To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, eduardo@habkost.net,
  marcel.apfelbaum@gmail.com, philmd@linaro.org, wangyanan55@huawei.com,
  richard.henderson@linaro.org, pbonzini@redhat.com, bin.meng@windriver.com,
  liweiwei@iscas.ac.cn, qemu-riscv@nongnu.org, ajones@ventanamicro.com
 References: <20230825121651.1534-1-zhiwei_liu@linux.alibaba.com>
- <20230825121651.1534-3-zhiwei_liu@linux.alibaba.com>
-Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230825121651.1534-3-zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20230825121651.1534-1-zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::235;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x235.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c33;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc33.google.com
 X-Spam_score_int: -36
 X-Spam_score: -3.7
 X-Spam_bar: ---
 X-Spam_report: (-3.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.57,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,90 +99,106 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Hi Zhiwei! I have two observations:
+
+- this API doesn't play well with KVM as is. In a KVM environment, asking for the
+enabled extensions of the 'host' CPU returns:
+
+$ ./mnt/qemu/bin/qemu-system-riscv64 -cpu host,help
+Enable extension:
+	rv64imafdch_zicbom_zicboz_zicsr_zifencei_zihintntl_zihintpause_zawrs_zfa_zba_zbb_zbc_zbs_sstc_svadu
+
+This is the same set of extensions enabled in the 'rv64' CPU for TCG. This is
+happening because they're sharing the same code that creates properties.
+
+If I apply these patches on top of the "split TCG/KVM accelerators from cpu.c" I
+sent earlier, this happens:
+
+$ ./mnt/qemu/bin/qemu-system-riscv64 -cpu host,help
+Enable extension:
+	rv64
+
+For TCG only CPUs (vendor CPUs) the API works even on a KVM host, regardless of
+applying on top of riscv-to-apply.next or those accel patches:
+
+$ ./mnt/qemu/bin/qemu-system-riscv64 -cpu veyron-v1,help
+Enable extension:
+	rv64ch_zicbom_zicboz_zicsr_zifencei_zba_zbb_zbc_zbs_smaia_smstateen_ssaia_sscofpmf_sstc_svinval_svnapot_svpbmt_xventanacondops
+
+It seems to me that 'cpu help' doesn't engage the KVM driver accel_init() function.
+If we decide to go ahead with this API we'll need to either figure out if accel-specific
+initialization is possible. If not, we should declare that this API works only for TCG.
 
 
-On 8/25/23 09:16, LIU Zhiwei wrote:
-> This API used for output current configuration for one specified CPU.
-> Currently only RISC-V frontend implements this API.
-> 
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-> ---
->   cpu.c                     |  8 ++++++++
->   include/exec/cpu-common.h |  1 +
->   target/riscv/cpu.c        | 10 ++++++++++
->   target/riscv/cpu.h        |  2 ++
->   4 files changed, 21 insertions(+)
-> 
-> diff --git a/cpu.c b/cpu.c
-> index e1a9239d0f..03a313cd72 100644
-> --- a/cpu.c
-> +++ b/cpu.c
-> @@ -299,6 +299,14 @@ void list_cpus(void)
->   #endif
->   }
->   
-> +void list_cpu_props(CPUState *cs)
-> +{
-> +    /* XXX: implement xxx_cpu_list_props for targets that still miss it */
-> +#if defined(cpu_list_props)
-> +    cpu_list_props(cs);
-> +#endif
-> +}
-> +
->   #if defined(CONFIG_USER_ONLY)
->   void tb_invalidate_phys_addr(hwaddr addr)
->   {
-> diff --git a/include/exec/cpu-common.h b/include/exec/cpu-common.h
-> index 87dc9a752c..b3160d9218 100644
-> --- a/include/exec/cpu-common.h
-> +++ b/include/exec/cpu-common.h
-> @@ -166,5 +166,6 @@ int cpu_memory_rw_debug(CPUState *cpu, vaddr addr,
->   
->   /* vl.c */
->   void list_cpus(void);
-> +void list_cpu_props(CPUState *);
->   
->   #endif /* CPU_COMMON_H */
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 6b93b04453..3ea18de06f 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -2226,6 +2226,16 @@ void riscv_cpu_list(void)
->       g_slist_free(list);
->   }
->   
-> +void riscv_cpu_list_props(CPUState *cs)
-> +{
-> +    char *enabled_isa;
-> +
-> +    enabled_isa = riscv_isa_string(RISCV_CPU(cs));
-> +    qemu_printf("Enable extension:\n");
+- I think the presence of the 'cpu help' API limits the command line parsing altogether,
+making cheeky things like this possible:
 
-I suggest "Enabled extensions". LGTM otherwise.
+
+(disabling extensions in the cmd line and asking the extensions)
+$ ./build/qemu-system-riscv64 -cpu veyron-v1,icbom=false,icboz=false,help
+Enable extension:
+	rv64ch_zicbom_zicboz_zicsr_zifencei_zba_zbb_zbc_zbs_smaia_smstateen_ssaia_sscofpmf_sstc_svinval_svnapot_svpbmt_xventanacondops
+
+
+(silly option ignored)
+$ ./build/qemu-system-riscv64 -cpu veyron-v1,lalala=true,help
+Enable extension:
+	rv64ch_zicbom_zicboz_zicsr_zifencei_zba_zbb_zbc_zbs_smaia_smstateen_ssaia_sscofpmf_sstc_svinval_svnapot_svpbmt_xventanacondops
+
+
+This is not a gamebreaker but something to keep in mind when using this API. Thanks,
+
 
 Daniel
 
-> +    qemu_printf("\t%s\n", enabled_isa);
-> +    /* TODO: output all user configurable options and all possible extensions */
-> +}
-> +
->   #define DEFINE_CPU(type_name, initfn)      \
->       {                                      \
->           .name = type_name,                 \
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 6ea22e0eea..af1d47605b 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -443,9 +443,11 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->                           bool probe, uintptr_t retaddr);
->   char *riscv_isa_string(RISCVCPU *cpu);
->   void riscv_cpu_list(void);
-> +void riscv_cpu_list_props(CPUState *cs);
->   void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp);
->   
->   #define cpu_list riscv_cpu_list
-> +#define cpu_list_props riscv_cpu_list_props
->   #define cpu_mmu_index riscv_cpu_mmu_index
->   
->   #ifndef CONFIG_USER_ONLY
+
+
+On 8/25/23 09:16, LIU Zhiwei wrote:
+> Some times we want to know what is the really mean of one cpu option.
+> For example, in RISC-V, we usually specify a cpu in this way:
+> -cpu rv64,v=on
+> 
+> If we don't look into the source code, we can't get the ISA extensions
+> of this -cpu command line.
+> 
+> In this patch set, we add one list_cpu_props API for common cores. It
+> will output the enabled ISA extensions.
+> 
+> In the near future, I will also list all possible user configurable
+> options and all possible extensions for this cpu.
+> 
+> In order to reuse the options parse code, I also add a QemuOptsList
+> for cpu.
+> 
+> 
+> After this patch, we can output the extensions for cpu,
+> """
+>   ./qemu-system-riscv64 -cpu rv64,help
+>      Enable extension:
+>              rv64imafdch_zicbom_zicboz_zicsr_zifencei_zihintpause_zawrs_zfa_zba_zbb_zbc_zbs_sstc_svadu
+> """
+> 
+> Notice currently this patch is only working for RISC-V system mode.
+> 
+> Thanks Andrew Jones for your suggestion!
+> 
+> Todo:
+> 1) Output all possible user configurable options and all extensions.
+> 2) Add support for RISC-V linux-user mode
+> 3) Add support for other archs
+> 
+> 
+> LIU Zhiwei (3):
+>    cpu: Add new API cpu_type_by_name
+>    target/riscv: Add API list_cpu_props
+>    softmmu/vl: Add qemu_cpu_opts QemuOptsList
+> 
+>   cpu.c                     | 39 +++++++++++++++++++++++++++------------
+>   include/exec/cpu-common.h |  1 +
+>   include/hw/core/cpu.h     | 11 +++++++++++
+>   softmmu/vl.c              | 35 +++++++++++++++++++++++++++++++++++
+>   target/riscv/cpu.c        | 10 ++++++++++
+>   target/riscv/cpu.h        |  2 ++
+>   6 files changed, 86 insertions(+), 12 deletions(-)
+> 
 
