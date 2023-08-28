@@ -4,27 +4,27 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E60A8C83F12
-	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Aug 2023 08:49:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 846EAC83F13
+	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Aug 2023 08:50:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qaXwG-0001Zi-4G; Mon, 28 Aug 2023 04:49:36 -0400
+	id 1qaXwR-0002eG-DD; Mon, 28 Aug 2023 04:49:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qaXvv-00016N-9r; Mon, 28 Aug 2023 04:49:18 -0400
-Received: from out30-133.freemail.mail.aliyun.com ([115.124.30.133])
+ id 1qaXwO-0002Kj-Jp; Mon, 28 Aug 2023 04:49:44 -0400
+Received: from out30-130.freemail.mail.aliyun.com ([115.124.30.130])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qaXvr-0000SK-LF; Mon, 28 Aug 2023 04:49:14 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R781e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046051;
+ id 1qaXwL-0000WG-UL; Mon, 28 Aug 2023 04:49:44 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R211e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
  MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=16; SR=0;
- TI=SMTPD_---0VqjBRnm_1693212543; 
+ TI=SMTPD_---0VqiPhtQ_1693212575; 
 Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VqjBRnm_1693212543) by smtp.aliyun-inc.com;
- Mon, 28 Aug 2023 16:49:04 +0800
+ fp:SMTPD_---0VqiPhtQ_1693212575) by smtp.aliyun-inc.com;
+ Mon, 28 Aug 2023 16:49:36 +0800
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 To: qemu-devel@nongnu.org
 Cc: eduardo@habkost.net, marcel.apfelbaum@gmail.com, philmd@linaro.org,
@@ -33,17 +33,17 @@ Cc: eduardo@habkost.net, marcel.apfelbaum@gmail.com, philmd@linaro.org,
  alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  qemu-riscv@nongnu.org
-Subject: [RFC PATCH v2 5/6] target/riscv: Add defalut value for string property
-Date: Mon, 28 Aug 2023 16:45:35 +0800
-Message-Id: <20230828084536.231-6-zhiwei_liu@linux.alibaba.com>
+Subject: [RFC PATCH v2 6/6] linux-user: Move qemu_cpu_opts to cpu.c
+Date: Mon, 28 Aug 2023 16:45:36 +0800
+Message-Id: <20230828084536.231-7-zhiwei_liu@linux.alibaba.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20230828084536.231-1-zhiwei_liu@linux.alibaba.com>
 References: <20230828084536.231-1-zhiwei_liu@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.133;
+Received-SPF: pass client-ip=115.124.30.130;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-133.freemail.mail.aliyun.com
+ helo=out30-130.freemail.mail.aliyun.com
 X-Spam_score_int: -98
 X-Spam_score: -9.9
 X-Spam_bar: ---------
@@ -66,113 +66,168 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Before this patch,
-"""
-qemu-system-riscv64 -device rv64-riscv-cpu,v=true,help
+Make qemu_cpu_opts also works for linux user mode. Notice, currently
+qdev monitor is not included in linux user mode. We just output
+current enabled extentions for RISC-V(without the hint to print all
+properties with -device).
 
-...
-vext_spec=<str>
-...
-
+With this patch,
 """
-
-After this patch,
-"""
-vext_spec=<str>        -  (default: "v1.0")
+qemu-riscv64 -cpu rv64,help
+Enabled extensions:
+	rv64_zicbom_zicboz_zicsr_zifencei_zihintpause_zawrs_zfa_zba_zbb_zbc_zbs_sstc_svadu
 """
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 ---
- hw/core/qdev-prop-internal.h | 2 ++
- hw/core/qdev-properties.c    | 7 +++++++
- include/hw/qdev-properties.h | 8 ++++++++
- target/riscv/cpu.c           | 2 +-
- 4 files changed, 18 insertions(+), 1 deletion(-)
+ cpu.c                     | 24 ++++++++++++++++++++++++
+ include/exec/cpu-common.h |  2 ++
+ linux-user/main.c         | 10 ++++++++++
+ softmmu/vl.c              | 24 ------------------------
+ target/riscv/cpu.c        |  8 +++++---
+ 5 files changed, 41 insertions(+), 27 deletions(-)
 
-diff --git a/hw/core/qdev-prop-internal.h b/hw/core/qdev-prop-internal.h
-index d7b77844fe..f0613b9757 100644
---- a/hw/core/qdev-prop-internal.h
-+++ b/hw/core/qdev-prop-internal.h
-@@ -13,6 +13,8 @@ void qdev_propinfo_get_enum(Object *obj, Visitor *v, const char *name,
- void qdev_propinfo_set_enum(Object *obj, Visitor *v, const char *name,
-                             void *opaque, Error **errp);
+diff --git a/cpu.c b/cpu.c
+index 712bd02684..590d75def0 100644
+--- a/cpu.c
++++ b/cpu.c
+@@ -47,6 +47,30 @@
+ uintptr_t qemu_host_page_size;
+ intptr_t qemu_host_page_mask;
  
-+void qdev_propinfo_set_default_value_string(ObjectProperty *op,
-+                                            const Property *prop);
- void qdev_propinfo_set_default_value_enum(ObjectProperty *op,
-                                           const Property *prop);
- void qdev_propinfo_set_default_value_int(ObjectProperty *op,
-diff --git a/hw/core/qdev-properties.c b/hw/core/qdev-properties.c
-index 357b8761b5..64f70a7292 100644
---- a/hw/core/qdev-properties.c
-+++ b/hw/core/qdev-properties.c
-@@ -96,6 +96,12 @@ static ObjectPropertyAccessor *field_prop_setter(const PropertyInfo *info)
-     return info->set ? field_prop_set : NULL;
- }
- 
-+void qdev_propinfo_set_default_value_string(ObjectProperty *op,
-+                                            const Property *prop)
++QemuOptsList qemu_cpu_opts = {
++    .name = "cpu",
++    .implied_opt_name = "cpu_model",
++    .head = QTAILQ_HEAD_INITIALIZER(qemu_cpu_opts.head),
++    .desc = {
++        { /* end of list */ }
++    },
++};
++
++int cpu_help_func(void *opaque, QemuOpts *opts, Error **errp)
 +{
-+    object_property_set_default_str(op, prop->defval.p);
++    const char *cpu_model, *cpu_type;
++    cpu_model = qemu_opt_get(opts, "cpu_model");
++    if (!cpu_model) {
++        return 1;
++    }
++    if (!qemu_opt_has_help_opt(opts)) {
++        return 0;
++    }
++    cpu_type = cpu_type_by_name(cpu_model);
++    list_cpu_props((CPUState *)object_new(cpu_type));
++    return 1;
 +}
 +
- void qdev_propinfo_get_enum(Object *obj, Visitor *v, const char *name,
-                             void *opaque, Error **errp)
+ #ifndef CONFIG_USER_ONLY
+ static int cpu_common_post_load(void *opaque, int version_id)
  {
-@@ -488,6 +494,7 @@ const PropertyInfo qdev_prop_string = {
-     .release = release_string,
-     .get   = get_string,
-     .set   = set_string,
-+    .set_default_value = qdev_propinfo_set_default_value_string,
+diff --git a/include/exec/cpu-common.h b/include/exec/cpu-common.h
+index b3160d9218..4d385436a5 100644
+--- a/include/exec/cpu-common.h
++++ b/include/exec/cpu-common.h
+@@ -168,4 +168,6 @@ int cpu_memory_rw_debug(CPUState *cpu, vaddr addr,
+ void list_cpus(void);
+ void list_cpu_props(CPUState *);
+ 
++int cpu_help_func(void *opaque, QemuOpts *opts, Error **errp);
++extern QemuOptsList qemu_cpu_opts;
+ #endif /* CPU_COMMON_H */
+diff --git a/linux-user/main.c b/linux-user/main.c
+index 96be354897..c3ef84b1a7 100644
+--- a/linux-user/main.c
++++ b/linux-user/main.c
+@@ -362,6 +362,15 @@ static void handle_arg_cpu(const char *arg)
+         list_cpus();
+         exit(EXIT_FAILURE);
+     }
++    QemuOpts *opts = qemu_opts_parse_noisily(qemu_find_opts("cpu"),
++                                             arg, true);
++    if (!opts) {
++        exit(1);
++    }
++    if (qemu_opts_foreach(qemu_find_opts("cpu"),
++                          cpu_help_func, NULL, NULL)) {
++        exit(0);
++    }
+ }
+ 
+ static void handle_arg_guest_base(const char *arg)
+@@ -720,6 +729,7 @@ int main(int argc, char **argv, char **envp)
+     cpu_model = NULL;
+ 
+     qemu_add_opts(&qemu_trace_opts);
++    qemu_add_opts(&qemu_cpu_opts);
+     qemu_plugin_add_opts();
+ 
+     optind = parse_args(argc, argv);
+diff --git a/softmmu/vl.c b/softmmu/vl.c
+index bc30f3954d..d6a395454a 100644
+--- a/softmmu/vl.c
++++ b/softmmu/vl.c
+@@ -218,15 +218,6 @@ static struct {
+     { .driver = "virtio-vga-gl",        .flag = &default_vga       },
  };
  
- /* --- on/off/auto --- */
-diff --git a/include/hw/qdev-properties.h b/include/hw/qdev-properties.h
-index e1df08876c..8e5651724a 100644
---- a/include/hw/qdev-properties.h
-+++ b/include/hw/qdev-properties.h
-@@ -22,6 +22,7 @@ struct Property {
-     union {
-         int64_t i;
-         uint64_t u;
-+        void *p;
-     } defval;
-     int          arrayoffset;
-     const PropertyInfo *arrayinfo;
-@@ -91,6 +92,11 @@ extern const PropertyInfo qdev_prop_link;
-                 .set_default = true,                                       \
-                 .defval.u  = (_type)_defval)
+-static QemuOptsList qemu_cpu_opts = {
+-    .name = "cpu",
+-    .implied_opt_name = "cpu_model",
+-    .head = QTAILQ_HEAD_INITIALIZER(qemu_cpu_opts.head),
+-    .desc = {
+-        { /* end of list */ }
+-    },
+-};
+-
+ static QemuOptsList qemu_rtc_opts = {
+     .name = "rtc",
+     .head = QTAILQ_HEAD_INITIALIZER(qemu_rtc_opts.head),
+@@ -1149,21 +1140,6 @@ static int parse_fw_cfg(void *opaque, QemuOpts *opts, Error **errp)
+     return 0;
+ }
  
-+#define DEFINE_PROP_STR(_name, _state, _field, _defval, _prop, _type)      \
-+    DEFINE_PROP(_name, _state, _field, _prop, _type,                       \
-+                .set_default = true,                                       \
-+                .defval.p  = (_type)_defval)
-+
- #define DEFINE_PROP_UNSIGNED_NODEFAULT(_name, _state, _field, _prop, _type) \
-     DEFINE_PROP(_name, _state, _field, _prop, _type)
- 
-@@ -171,6 +177,8 @@ extern const PropertyInfo qdev_prop_link;
-     DEFINE_PROP_UNSIGNED(_n, _s, _f, _d, qdev_prop_size, uint64_t)
- #define DEFINE_PROP_STRING(_n, _s, _f)             \
-     DEFINE_PROP(_n, _s, _f, qdev_prop_string, char*)
-+#define DEFINE_PROP_STRING_DEF(_n, _s, _f, _d)             \
-+    DEFINE_PROP_STR(_n, _s, _f, _d, qdev_prop_string, char*)
- #define DEFINE_PROP_ON_OFF_AUTO(_n, _s, _f, _d) \
-     DEFINE_PROP_SIGNED(_n, _s, _f, _d, qdev_prop_on_off_auto, OnOffAuto)
- #define DEFINE_PROP_SIZE32(_n, _s, _f, _d)                       \
+-static int cpu_help_func(void *opaque, QemuOpts *opts, Error **errp)
+-{
+-    const char *cpu_model, *cpu_type;
+-    cpu_model = qemu_opt_get(opts, "cpu_model");
+-    if (!cpu_model) {
+-        return 1;
+-    }
+-    if (!qemu_opt_has_help_opt(opts)) {
+-        return 0;
+-    }
+-    cpu_type = cpu_type_by_name(cpu_model);
+-    list_cpu_props((CPUState *)object_new(cpu_type));
+-    return 1;
+-}
+-
+ static int device_help_func(void *opaque, QemuOpts *opts, Error **errp)
+ {
+     return qdev_device_help(opts);
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 38838cd2c0..edcd34e62b 100644
+index edcd34e62b..e4318fcc46 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -1769,7 +1769,7 @@ static Property riscv_cpu_extensions[] = {
-     DEFINE_PROP_BOOL("sstc", RISCVCPU, cfg.ext_sstc, true),
+@@ -2229,15 +2229,17 @@ void riscv_cpu_list(void)
+ void riscv_cpu_list_props(CPUState *cs)
+ {
+     char *enabled_isa;
+-    RISCVCPU *cpu = RISCV_CPU(cs);
+-    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cpu);
+-    ObjectClass *oc = OBJECT_CLASS(mcc);
  
-     DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
--    DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
-+    DEFINE_PROP_STRING_DEF("vext_spec", RISCVCPU, cfg.vext_spec, "v1.0"),
-     DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
-     DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
+     enabled_isa = riscv_isa_string(RISCV_CPU(cs));
+     qemu_printf("Enabled extensions:\n");
+     qemu_printf("\t%s\n", enabled_isa);
++#ifndef CONFIG_USER_ONLY
++    RISCVCPU *cpu = RISCV_CPU(cs);
++    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cpu);
++    ObjectClass *oc = OBJECT_CLASS(mcc);
+     qemu_printf("To get all configuable options for this cpu, use"
+                 " -device %s,help\n", object_class_get_name(oc));
++#endif
+ }
  
+ #define DEFINE_CPU(type_name, initfn)      \
 -- 
 2.17.1
 
