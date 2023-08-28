@@ -4,75 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B1FAC83F11
-	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Aug 2023 14:58:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ECA7C83F12
+	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Aug 2023 14:58:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qadfx-0004oD-2g; Mon, 28 Aug 2023 10:57:09 -0400
+	id 1qadfR-0003fh-31; Mon, 28 Aug 2023 10:56:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rehn@rivosinc.com>) id 1qadfu-0004ZM-R4
- for qemu-riscv@nongnu.org; Mon, 28 Aug 2023 10:57:06 -0400
-Received: from mail-lf1-x12a.google.com ([2a00:1450:4864:20::12a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qadfP-0003ez-JH
+ for qemu-riscv@nongnu.org; Mon, 28 Aug 2023 10:56:35 -0400
+Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <rehn@rivosinc.com>) id 1qadfr-0000ul-T3
- for qemu-riscv@nongnu.org; Mon, 28 Aug 2023 10:57:06 -0400
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-50043cf2e29so5025081e87.2
- for <qemu-riscv@nongnu.org>; Mon, 28 Aug 2023 07:57:03 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qadfK-0000oV-JG
+ for qemu-riscv@nongnu.org; Mon, 28 Aug 2023 10:56:35 -0400
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-31dca134c83so945037f8f.3
+ for <qemu-riscv@nongnu.org>; Mon, 28 Aug 2023 07:56:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1693234622; x=1693839422; 
- h=mime-version:user-agent:content-transfer-encoding:date:cc:to:from
- :subject:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=DsLmdJs+hmNN+vsbvbOMZLA7s8YzN/0ZTTxJV82lXHo=;
- b=q59AYJnnFcJbY83j3/XU4lj23//IvNKVd7NGHd6wSJ0v1a+lPgtwrO/b79+eiNVJTH
- H7nUNbAM3XOlwInJ4klF7CWXa7sYgfBFstvVZenJ24Jg1d2eb97VNw1vaFerrrF31g2F
- Em+BlWfG1Zjhuwd440RlxFTI7+hgm9HUoulrzVOMsTNaggREpEqK3TJIQisTuHJldki0
- sudT/FjcS0JY+r5azzu7s2R5X/GDngYdQYRWq9GsmRPuNTkJttVMZG4DqicXFtDYMJaU
- OeCVHexYnVnYcSA7STzAg/xpUlc6qn3lm/cj0Vd9fcROq6B6NpfgRGweWchtJYKRP4o+
- SFNA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693234622; x=1693839422;
- h=mime-version:user-agent:content-transfer-encoding:date:cc:to:from
- :subject:message-id:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1693234589; x=1693839389;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DsLmdJs+hmNN+vsbvbOMZLA7s8YzN/0ZTTxJV82lXHo=;
- b=NfICLdhGd6USB2EQ84Ot8YGm+Hw5j6zU3DkWh420RSkkeAjeSct0MdCW+XmgVDSvEe
- ywxfuMCRGI36fOdVLsx0yYcPzgQV8A/pflxReVUyLOL6rXQVNPITh52OyN0T1dRKRt9R
- 1YcHjsLml754PhOHSVl+NnuoT5DTRGybtFksuIoX/eVQczSzQTGP7tqG5Q0RnvrgKAc3
- 3lloSVK14OU0KNZTfxBRs/X/1Ch1N1FUfOCc8jXmKrMlgFknQ7iVMYxwthNFgASgKYSQ
- Db8deO8vmlMTQYVI302VaYDttcBq2n4tg8zqbPGjBzXg/Hj68WuPeI/Rn+Yb5zZCuqNK
- B1ug==
-X-Gm-Message-State: AOJu0YyeqMDCByiJy4fDObotn4W8DjB/OTdPpBGAhsZIg0g957sJVsUq
- ghh/qr6spouYXd+3+1cEDnHLkw==
-X-Google-Smtp-Source: AGHT+IHj3ftls7UK1YTEXQJgX4CfS4t+zgYhLM4tqW9SHqAo/6HV5kGICuoF/itpyzd9If/WSXrivw==
-X-Received: by 2002:a05:6512:1088:b0:4fb:89b3:3373 with SMTP id
- j8-20020a056512108800b004fb89b33373mr21782599lfg.43.1693234621559; 
- Mon, 28 Aug 2023 07:57:01 -0700 (PDT)
-Received: from [192.168.50.45] (h-155-4-92-80.A980.priv.bahnhof.se.
- [155.4.92.80]) by smtp.gmail.com with ESMTPSA id
- 18-20020ac24852000000b0050089b26ea1sm1594968lfy.276.2023.08.28.07.57.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Aug 2023 07:57:00 -0700 (PDT)
-Message-ID: <bc82203b72d7efb30f1b4a8f9eb3d94699799dc8.camel@rivosinc.com>
-Subject: [PATCH] linux-user/riscv: Add new extensions to hwprobe
-From: Robbin Ehn <rehn@rivosinc.com>
+ bh=hMOKghXrfuL2nEVSI0FVVFrCQiH4vRrzALBYVbmWdy0=;
+ b=hLiW3X0tKv0ifK2Iv2M8fQWcZsgferHbAPqoiLS0BbwOb+sxsmHimiuv96YvKWfF7L
+ wurQPiaKyVZcAU+HvrQuGae60pyk6MxR0kOQmy9dbjsi8+VEpUDcr3YGICwd54C/1TPj
+ jwnX1tgaCBTSzztnL8etEpNHLK9P8VhRpl7GEzQTpJgOZU2CtboSh7b/o4pQpA6ij0Pu
+ 7npEvxi9yVdvgeCQ1sIcoUd3yXPMEbmjc3BRnud1KJ5xA85g8JMUx/+ptI2QqZt0fUqh
+ d6WXTbiwgZqbTUkDjIgJP8Rab8vuJ3/A93TrObpCunrpX4PPUYnSJUFoHF8tBJW18/SF
+ R33w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693234589; x=1693839389;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=hMOKghXrfuL2nEVSI0FVVFrCQiH4vRrzALBYVbmWdy0=;
+ b=ZNIWD+3nw9WCRgmDq1Cdug1eaMINE0JkQetjygmhXKHoFSgcoBeV5Miz0rnDbippWC
+ yc09620vdz3Iy71C9UCWJOidgsNStNSsMNVRZGmIugZ3dfcVcHJHcfHDxl8iHvhnxGLN
+ MF2vUtfke+vWtGWMWbdBc0Pot+J29xkPjR0qaF84XYRtLJcEw1gEEMZLkmkeJU6UWqKN
+ lzjHF85hA+Xanij3z5f40WyPOrfxj8XOun8+uHAIlXAj255xs96tq0mxBjb08b7V8prI
+ I4Z1k2oDrSQTG2Ej7fhhmQjHa5N5ukb8uZzXa8ZAUnY8MO5zudnqrKIMTz/UGkSaj1tc
+ 0CDQ==
+X-Gm-Message-State: AOJu0YyKimbclgKp+Ly4Awv59FPs34fqLiZteAIUycmx6h7YBiblGs5U
+ pzi+QvXy78ngEHw3qcyeTwffpA==
+X-Google-Smtp-Source: AGHT+IHmNQaLn6o7jeSGZu1EqQIRovWYhxt64cFIOBFmqkiL0TJ/RPcrB7bR4vIUSYi75ImyBt4pUA==
+X-Received: by 2002:a5d:6103:0:b0:317:53e7:d7c2 with SMTP id
+ v3-20020a5d6103000000b0031753e7d7c2mr18905335wrt.11.1693234589253; 
+ Mon, 28 Aug 2023 07:56:29 -0700 (PDT)
+Received: from m1x-phil.lan ([176.164.201.64])
+ by smtp.gmail.com with ESMTPSA id
+ y6-20020adfd086000000b003179b3fd837sm10803230wrh.33.2023.08.28.07.56.28
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Mon, 28 Aug 2023 07:56:28 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org
-Date: Mon, 28 Aug 2023 16:56:59 +0200
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.48.1-0ubuntu1 
+Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
+ qemu-riscv@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 7/8] target/helper: Remove unnecessary 'qemu/main-loop.h'
+ header
+Date: Mon, 28 Aug 2023 16:55:44 +0200
+Message-ID: <20230828145545.81165-8-philmd@linaro.org>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20230828145545.81165-1-philmd@linaro.org>
+References: <20230828145545.81165-1-philmd@linaro.org>
 MIME-Version: 1.0
-Received-SPF: pass client-ip=2a00:1450:4864:20::12a;
- envelope-from=rehn@rivosinc.com; helo=mail-lf1-x12a.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::435;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x435.google.com
+X-Spam_score_int: 4
+X-Spam_score: 0.4
+X-Spam_bar: /
+X-Spam_report: (0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ SUSPICIOUS_RECIPS=2.51 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -88,53 +95,327 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patch adds the new extensions in
-linux 6.5 to the hwprobe syscall.
+"qemu/main-loop.h" declares functions related to QEMU's
+main loop mutex, which these files don't access. Remove
+the unused "qemu/main-loop.h" header.
 
-And fixes RVC check to OR with correct value.
-The previous variable contains 0 therefore it
-did work.
-
-Signed-off-by: Robbin Ehn <rehn@rivosinc.com>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- linux-user/syscall.c | 14 +++++++++++++-
- 1 file changed, 13 insertions(+), 1 deletion(-)
+ target/riscv/pmu.h                   | 2 --
+ target/arm/ptw.c                     | 1 -
+ target/loongarch/iocsr_helper.c      | 1 -
+ target/loongarch/op_helper.c         | 1 -
+ target/mips/tcg/sysemu/lcsr_helper.c | 1 -
+ target/nios2/op_helper.c             | 1 -
+ target/ppc/int_helper.c              | 1 -
+ target/ppc/machine.c                 | 1 -
+ target/ppc/mem_helper.c              | 1 -
+ target/ppc/mmu_common.c              | 1 -
+ target/ppc/mmu_helper.c              | 1 -
+ target/ppc/power8-pmu.c              | 1 -
+ target/ppc/translate.c               | 1 -
+ target/riscv/csr.c                   | 1 -
+ target/riscv/m128_helper.c           | 1 -
+ target/riscv/op_helper.c             | 1 -
+ target/s390x/tcg/crypto_helper.c     | 1 -
+ target/s390x/tcg/misc_helper.c       | 1 -
+ target/xtensa/dbg_helper.c           | 1 -
+ target/xtensa/fpu_helper.c           | 1 -
+ target/xtensa/mmu_helper.c           | 2 --
+ target/xtensa/op_helper.c            | 2 --
+ target/xtensa/win_helper.c           | 1 -
+ 23 files changed, 26 deletions(-)
 
-diff --git a/linux-user/syscall.c b/linux-user/syscall.c
-index 9353268cc1..c46a0b1493 100644
---- a/linux-user/syscall.c
-+++ b/linux-user/syscall.c
-@@ -9049,6 +9049,10 @@ static int do_getdents64(abi_long dirfd, abi_long ar=
-g2, abi_long count)
- #define RISCV_HWPROBE_KEY_IMA_EXT_0     4
- #define     RISCV_HWPROBE_IMA_FD       (1 << 0)
- #define     RISCV_HWPROBE_IMA_C        (1 << 1)
-+#define     RISCV_HWPROBE_IMA_V        (1 << 2)
-+#define     RISCV_HWPROBE_EXT_ZBA      (1 << 3)
-+#define     RISCV_HWPROBE_EXT_ZBB      (1 << 4)
-+#define     RISCV_HWPROBE_EXT_ZBS      (1 << 5)
-=20
- #define RISCV_HWPROBE_KEY_CPUPERF_0     5
- #define     RISCV_HWPROBE_MISALIGNED_UNKNOWN     (0 << 0)
-@@ -9096,7 +9100,15 @@ static void risc_hwprobe_fill_pairs(CPURISCVState *e=
-nv,
-                     riscv_has_ext(env, RVD) ?
-                     RISCV_HWPROBE_IMA_FD : 0;
-             value |=3D riscv_has_ext(env, RVC) ?
--                     RISCV_HWPROBE_IMA_C : pair->value;
-+                     RISCV_HWPROBE_IMA_C : 0;
-+            value |=3D riscv_has_ext(env, RVV) ?
-+                     RISCV_HWPROBE_IMA_V : 0;
-+            value |=3D cfg->ext_zba ?
-+                     RISCV_HWPROBE_EXT_ZBA : 0;
-+            value |=3D cfg->ext_zbb ?
-+                     RISCV_HWPROBE_EXT_ZBB : 0;
-+            value |=3D cfg->ext_zbs ?
-+                     RISCV_HWPROBE_EXT_ZBS : 0;
-             __put_user(value, &pair->value);
-             break;
-         case RISCV_HWPROBE_KEY_CPUPERF_0:
---=20
-2.39.2
+diff --git a/target/riscv/pmu.h b/target/riscv/pmu.h
+index d2be06a133..2bfb71ba87 100644
+--- a/target/riscv/pmu.h
++++ b/target/riscv/pmu.h
+@@ -17,8 +17,6 @@
+  */
+ 
+ #include "cpu.h"
+-#include "qemu/main-loop.h"
+-#include "exec/exec-all.h"
+ 
+ bool riscv_pmu_ctr_monitor_instructions(CPURISCVState *env,
+                                         uint32_t target_ctr);
+diff --git a/target/arm/ptw.c b/target/arm/ptw.c
+index bfbab26b9b..a4b0172df3 100644
+--- a/target/arm/ptw.c
++++ b/target/arm/ptw.c
+@@ -9,7 +9,6 @@
+ #include "qemu/osdep.h"
+ #include "qemu/log.h"
+ #include "qemu/range.h"
+-#include "qemu/main-loop.h"
+ #include "exec/exec-all.h"
+ #include "cpu.h"
+ #include "internals.h"
+diff --git a/target/loongarch/iocsr_helper.c b/target/loongarch/iocsr_helper.c
+index dda9845d6c..6cd01d5f09 100644
+--- a/target/loongarch/iocsr_helper.c
++++ b/target/loongarch/iocsr_helper.c
+@@ -6,7 +6,6 @@
+  */
+ 
+ #include "qemu/osdep.h"
+-#include "qemu/main-loop.h"
+ #include "cpu.h"
+ #include "qemu/host-utils.h"
+ #include "exec/helper-proto.h"
+diff --git a/target/loongarch/op_helper.c b/target/loongarch/op_helper.c
+index cf84f20aba..fe79c62fa4 100644
+--- a/target/loongarch/op_helper.c
++++ b/target/loongarch/op_helper.c
+@@ -7,7 +7,6 @@
+ 
+ #include "qemu/osdep.h"
+ #include "qemu/log.h"
+-#include "qemu/main-loop.h"
+ #include "cpu.h"
+ #include "qemu/host-utils.h"
+ #include "exec/helper-proto.h"
+diff --git a/target/mips/tcg/sysemu/lcsr_helper.c b/target/mips/tcg/sysemu/lcsr_helper.c
+index 8f97d04313..fb57bcbb78 100644
+--- a/target/mips/tcg/sysemu/lcsr_helper.c
++++ b/target/mips/tcg/sysemu/lcsr_helper.c
+@@ -7,7 +7,6 @@
+  */
+ 
+ #include "qemu/osdep.h"
+-#include "qemu/main-loop.h"
+ #include "cpu.h"
+ #include "internal.h"
+ #include "qemu/host-utils.h"
+diff --git a/target/nios2/op_helper.c b/target/nios2/op_helper.c
+index 0aaf33ffc2..5017457c5e 100644
+--- a/target/nios2/op_helper.c
++++ b/target/nios2/op_helper.c
+@@ -22,7 +22,6 @@
+ #include "cpu.h"
+ #include "exec/helper-proto.h"
+ #include "exec/exec-all.h"
+-#include "qemu/main-loop.h"
+ 
+ void helper_raise_exception(CPUNios2State *env, uint32_t index)
+ {
+diff --git a/target/ppc/int_helper.c b/target/ppc/int_helper.c
+index 834da80fe3..96cdb3c7e3 100644
+--- a/target/ppc/int_helper.c
++++ b/target/ppc/int_helper.c
+@@ -21,7 +21,6 @@
+ #include "cpu.h"
+ #include "internal.h"
+ #include "qemu/host-utils.h"
+-#include "qemu/main-loop.h"
+ #include "qemu/log.h"
+ #include "exec/helper-proto.h"
+ #include "crypto/aes.h"
+diff --git a/target/ppc/machine.c b/target/ppc/machine.c
+index 134b16c625..1270a1f7fc 100644
+--- a/target/ppc/machine.c
++++ b/target/ppc/machine.c
+@@ -7,7 +7,6 @@
+ #include "mmu-hash64.h"
+ #include "migration/cpu.h"
+ #include "qapi/error.h"
+-#include "qemu/main-loop.h"
+ #include "kvm_ppc.h"
+ #include "power8-pmu.h"
+ 
+diff --git a/target/ppc/mem_helper.c b/target/ppc/mem_helper.c
+index 46eae65819..c7535481d6 100644
+--- a/target/ppc/mem_helper.c
++++ b/target/ppc/mem_helper.c
+@@ -21,7 +21,6 @@
+ #include "cpu.h"
+ #include "exec/exec-all.h"
+ #include "qemu/host-utils.h"
+-#include "qemu/main-loop.h"
+ #include "exec/helper-proto.h"
+ #include "helper_regs.h"
+ #include "exec/cpu_ldst.h"
+diff --git a/target/ppc/mmu_common.c b/target/ppc/mmu_common.c
+index 8c000e250d..6ca5d12207 100644
+--- a/target/ppc/mmu_common.c
++++ b/target/ppc/mmu_common.c
+@@ -28,7 +28,6 @@
+ #include "exec/log.h"
+ #include "helper_regs.h"
+ #include "qemu/error-report.h"
+-#include "qemu/main-loop.h"
+ #include "qemu/qemu-print.h"
+ #include "internal.h"
+ #include "mmu-book3s-v3.h"
+diff --git a/target/ppc/mmu_helper.c b/target/ppc/mmu_helper.c
+index d3ea7588f9..f87d35379a 100644
+--- a/target/ppc/mmu_helper.c
++++ b/target/ppc/mmu_helper.c
+@@ -28,7 +28,6 @@
+ #include "exec/log.h"
+ #include "helper_regs.h"
+ #include "qemu/error-report.h"
+-#include "qemu/main-loop.h"
+ #include "qemu/qemu-print.h"
+ #include "internal.h"
+ #include "mmu-book3s-v3.h"
+diff --git a/target/ppc/power8-pmu.c b/target/ppc/power8-pmu.c
+index 2537cded83..cbc5889d91 100644
+--- a/target/ppc/power8-pmu.c
++++ b/target/ppc/power8-pmu.c
+@@ -17,7 +17,6 @@
+ #include "exec/helper-proto.h"
+ #include "qemu/error-report.h"
+ #include "qemu/timer.h"
+-#include "qemu/main-loop.h"
+ #include "hw/ppc/ppc.h"
+ #include "power8-pmu.h"
+ 
+diff --git a/target/ppc/translate.c b/target/ppc/translate.c
+index 49b6a757b7..7111b34030 100644
+--- a/target/ppc/translate.c
++++ b/target/ppc/translate.c
+@@ -26,7 +26,6 @@
+ #include "tcg/tcg-op.h"
+ #include "tcg/tcg-op-gvec.h"
+ #include "qemu/host-utils.h"
+-#include "qemu/main-loop.h"
+ 
+ #include "exec/helper-proto.h"
+ #include "exec/helper-gen.h"
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index ea7585329e..de31818daa 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -23,7 +23,6 @@
+ #include "cpu.h"
+ #include "pmu.h"
+ #include "time_helper.h"
+-#include "qemu/main-loop.h"
+ #include "exec/exec-all.h"
+ #include "exec/tb-flush.h"
+ #include "sysemu/cpu-timers.h"
+diff --git a/target/riscv/m128_helper.c b/target/riscv/m128_helper.c
+index e6a4f6120a..ec14aaa901 100644
+--- a/target/riscv/m128_helper.c
++++ b/target/riscv/m128_helper.c
+@@ -19,7 +19,6 @@
+ 
+ #include "qemu/osdep.h"
+ #include "cpu.h"
+-#include "qemu/main-loop.h"
+ #include "exec/exec-all.h"
+ #include "exec/helper-proto.h"
+ 
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index 7e2f1908ee..5355225d56 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -21,7 +21,6 @@
+ #include "qemu/osdep.h"
+ #include "cpu.h"
+ #include "internals.h"
+-#include "qemu/main-loop.h"
+ #include "exec/exec-all.h"
+ #include "exec/cpu_ldst.h"
+ #include "exec/helper-proto.h"
+diff --git a/target/s390x/tcg/crypto_helper.c b/target/s390x/tcg/crypto_helper.c
+index 762b277884..93aabd236f 100644
+--- a/target/s390x/tcg/crypto_helper.c
++++ b/target/s390x/tcg/crypto_helper.c
+@@ -13,7 +13,6 @@
+  */
+ 
+ #include "qemu/osdep.h"
+-#include "qemu/main-loop.h"
+ #include "qemu/guest-random.h"
+ #include "s390x-internal.h"
+ #include "tcg_s390x.h"
+diff --git a/target/s390x/tcg/misc_helper.c b/target/s390x/tcg/misc_helper.c
+index 576157b1f3..e85658ce22 100644
+--- a/target/s390x/tcg/misc_helper.c
++++ b/target/s390x/tcg/misc_helper.c
+@@ -20,7 +20,6 @@
+ 
+ #include "qemu/osdep.h"
+ #include "qemu/cutils.h"
+-#include "qemu/main-loop.h"
+ #include "cpu.h"
+ #include "s390x-internal.h"
+ #include "qemu/host-utils.h"
+diff --git a/target/xtensa/dbg_helper.c b/target/xtensa/dbg_helper.c
+index ce2a820c60..3e0c9e8e8b 100644
+--- a/target/xtensa/dbg_helper.c
++++ b/target/xtensa/dbg_helper.c
+@@ -27,7 +27,6 @@
+ 
+ #include "qemu/osdep.h"
+ #include "qemu/log.h"
+-#include "qemu/main-loop.h"
+ #include "cpu.h"
+ #include "exec/helper-proto.h"
+ #include "qemu/host-utils.h"
+diff --git a/target/xtensa/fpu_helper.c b/target/xtensa/fpu_helper.c
+index d2a10cc797..381e83ded8 100644
+--- a/target/xtensa/fpu_helper.c
++++ b/target/xtensa/fpu_helper.c
+@@ -27,7 +27,6 @@
+ 
+ #include "qemu/osdep.h"
+ #include "qemu/log.h"
+-#include "qemu/main-loop.h"
+ #include "cpu.h"
+ #include "exec/helper-proto.h"
+ #include "qemu/host-utils.h"
+diff --git a/target/xtensa/mmu_helper.c b/target/xtensa/mmu_helper.c
+index fa66e8e867..12552a3347 100644
+--- a/target/xtensa/mmu_helper.c
++++ b/target/xtensa/mmu_helper.c
+@@ -27,14 +27,12 @@
+ 
+ #include "qemu/osdep.h"
+ #include "qemu/log.h"
+-#include "qemu/main-loop.h"
+ #include "qemu/qemu-print.h"
+ #include "qemu/units.h"
+ #include "cpu.h"
+ #include "exec/helper-proto.h"
+ #include "qemu/host-utils.h"
+ #include "exec/exec-all.h"
+-#include "exec/cpu_ldst.h"
+ 
+ #define XTENSA_MPU_SEGMENT_MASK 0x0000001f
+ #define XTENSA_MPU_ACC_RIGHTS_MASK 0x00000f00
+diff --git a/target/xtensa/op_helper.c b/target/xtensa/op_helper.c
+index 1af7becc54..03e2c1889a 100644
+--- a/target/xtensa/op_helper.c
++++ b/target/xtensa/op_helper.c
+@@ -26,12 +26,10 @@
+  */
+ 
+ #include "qemu/osdep.h"
+-#include "qemu/main-loop.h"
+ #include "cpu.h"
+ #include "exec/helper-proto.h"
+ #include "qemu/host-utils.h"
+ #include "exec/exec-all.h"
+-#include "exec/cpu_ldst.h"
+ #include "qemu/timer.h"
+ 
+ #ifndef CONFIG_USER_ONLY
+diff --git a/target/xtensa/win_helper.c b/target/xtensa/win_helper.c
+index 5a1555360a..ec9ff44db0 100644
+--- a/target/xtensa/win_helper.c
++++ b/target/xtensa/win_helper.c
+@@ -27,7 +27,6 @@
+ 
+ #include "qemu/osdep.h"
+ #include "qemu/log.h"
+-#include "qemu/main-loop.h"
+ #include "cpu.h"
+ #include "exec/helper-proto.h"
+ #include "qemu/host-utils.h"
+-- 
+2.41.0
 
 
