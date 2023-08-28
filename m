@@ -4,27 +4,27 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB65CC83F12
-	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Aug 2023 08:49:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73C28C83F12
+	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Aug 2023 08:49:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qaXux-00089k-J9; Mon, 28 Aug 2023 04:48:15 -0400
+	id 1qaXvW-0000XM-7H; Mon, 28 Aug 2023 04:48:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qaXuw-00088x-70; Mon, 28 Aug 2023 04:48:14 -0400
-Received: from out30-98.freemail.mail.aliyun.com ([115.124.30.98])
+ id 1qaXvO-0000PX-Q2; Mon, 28 Aug 2023 04:48:42 -0400
+Received: from out30-124.freemail.mail.aliyun.com ([115.124.30.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qaXut-0000NS-BQ; Mon, 28 Aug 2023 04:48:13 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R211e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045192;
+ id 1qaXvM-0000QT-G8; Mon, 28 Aug 2023 04:48:42 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R831e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046060;
  MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=16; SR=0;
- TI=SMTPD_---0VqiOAPO_1693212480; 
+ TI=SMTPD_---0Vqix7Bi_1693212511; 
 Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VqiOAPO_1693212480) by smtp.aliyun-inc.com;
- Mon, 28 Aug 2023 16:48:01 +0800
+ fp:SMTPD_---0Vqix7Bi_1693212511) by smtp.aliyun-inc.com;
+ Mon, 28 Aug 2023 16:48:33 +0800
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 To: qemu-devel@nongnu.org
 Cc: eduardo@habkost.net, marcel.apfelbaum@gmail.com, philmd@linaro.org,
@@ -33,17 +33,17 @@ Cc: eduardo@habkost.net, marcel.apfelbaum@gmail.com, philmd@linaro.org,
  alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  qemu-riscv@nongnu.org
-Subject: [RFC PATCH v2 3/6] softmmu/vl: Add qemu_cpu_opts QemuOptsList
-Date: Mon, 28 Aug 2023 16:45:33 +0800
-Message-Id: <20230828084536.231-4-zhiwei_liu@linux.alibaba.com>
+Subject: [RFC PATCH v2 4/6] target/riscv: Add default value for misa property
+Date: Mon, 28 Aug 2023 16:45:34 +0800
+Message-Id: <20230828084536.231-5-zhiwei_liu@linux.alibaba.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20230828084536.231-1-zhiwei_liu@linux.alibaba.com>
 References: <20230828084536.231-1-zhiwei_liu@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.98;
+Received-SPF: pass client-ip=115.124.30.124;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-98.freemail.mail.aliyun.com
+ helo=out30-124.freemail.mail.aliyun.com
 X-Spam_score_int: -98
 X-Spam_score: -9.9
 X-Spam_bar: ---------
@@ -66,143 +66,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This make the cpu works the similar way like the -device option.
+Before this patch,
+"
+qemu-system-riscv64 -device rv64-riscv-cpu,v=true,help
 
-For device option,
-"""
-./qemu-system-riscv64 -device e1000,help
-e1000 options:
-  acpi-index=<uint32>    -  (default: 0)
-  addr=<int32>           - Slot and optional function number, example: 06.0 or 06 (default: -1)
-  autonegotiation=<bool> - on/off (default: true)
-  bootindex=<int32>
-  extra_mac_registers=<bool> - on/off (default: true)
-  failover_pair_id=<str>
-"""
+...
+v=<bool>               - Vector operations
+...
 
-After this patch, the cpu can output its configurations,
-"""
-./qemu-system-riscv64 -cpu rv64,help
-Enable extension:
-	rv64imafdch_zicbom_zicboz_zicsr_zifencei_zihintpause_zawrs_zfa_zba_zbb_zbc_zbs_sstc_svadu
-"""
+"
+
+After this patch,
+"
+v=<bool>               - Vector operations (default: false)
+"
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 ---
- cpu.c                 |  2 +-
- include/hw/core/cpu.h | 11 +++++++++++
- softmmu/vl.c          | 35 +++++++++++++++++++++++++++++++++++
- 3 files changed, 47 insertions(+), 1 deletion(-)
+ target/riscv/cpu.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/cpu.c b/cpu.c
-index 03a313cd72..712bd02684 100644
---- a/cpu.c
-+++ b/cpu.c
-@@ -257,7 +257,7 @@ void cpu_exec_initfn(CPUState *cpu)
- #endif
- }
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index c2f102fae1..38838cd2c0 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1728,6 +1728,7 @@ static void riscv_cpu_add_misa_properties(Object *cpu_obj)
+     int i;
  
--static const char *cpu_type_by_name(const char *cpu_model)
-+const char *cpu_type_by_name(const char *cpu_model)
- {
-     ObjectClass *oc;
-     const char *cpu_type;
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index fdcbe87352..49d41afdfa 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -657,6 +657,17 @@ CPUState *cpu_create(const char *typename);
-  */
- const char *parse_cpu_option(const char *cpu_option);
+     for (i = 0; i < ARRAY_SIZE(misa_ext_cfgs); i++) {
++        ObjectProperty *op;
+         RISCVCPUMisaExtConfig *misa_cfg = &misa_ext_cfgs[i];
+         int bit = misa_cfg->misa_bit;
  
-+/**
-+ * cpu_type_by_name:
-+ * @cpu_model: The -cpu command line model name.
-+ *
-+ * Looks up type name by the -cpu command line model name
-+ *
-+ * Returns: type name of CPU or prints error and terminates process
-+ *          if an error occurred.
-+ */
-+const char *cpu_type_by_name(const char *cpu_model);
-+
- /**
-  * cpu_has_work:
-  * @cpu: The vCPU to check.
-diff --git a/softmmu/vl.c b/softmmu/vl.c
-index b0b96f67fa..bc30f3954d 100644
---- a/softmmu/vl.c
-+++ b/softmmu/vl.c
-@@ -218,6 +218,15 @@ static struct {
-     { .driver = "virtio-vga-gl",        .flag = &default_vga       },
- };
+@@ -1739,14 +1740,13 @@ static void riscv_cpu_add_misa_properties(Object *cpu_obj)
+             continue;
+         }
  
-+static QemuOptsList qemu_cpu_opts = {
-+    .name = "cpu",
-+    .implied_opt_name = "cpu_model",
-+    .head = QTAILQ_HEAD_INITIALIZER(qemu_cpu_opts.head),
-+    .desc = {
-+        { /* end of list */ }
-+    },
-+};
-+
- static QemuOptsList qemu_rtc_opts = {
-     .name = "rtc",
-     .head = QTAILQ_HEAD_INITIALIZER(qemu_rtc_opts.head),
-@@ -1140,6 +1149,21 @@ static int parse_fw_cfg(void *opaque, QemuOpts *opts, Error **errp)
-     return 0;
- }
- 
-+static int cpu_help_func(void *opaque, QemuOpts *opts, Error **errp)
-+{
-+    const char *cpu_model, *cpu_type;
-+    cpu_model = qemu_opt_get(opts, "cpu_model");
-+    if (!cpu_model) {
-+        return 1;
-+    }
-+    if (!qemu_opt_has_help_opt(opts)) {
-+        return 0;
-+    }
-+    cpu_type = cpu_type_by_name(cpu_model);
-+    list_cpu_props((CPUState *)object_new(cpu_type));
-+    return 1;
-+}
-+
- static int device_help_func(void *opaque, QemuOpts *opts, Error **errp)
- {
-     return qdev_device_help(opts);
-@@ -2467,6 +2491,11 @@ static void qemu_process_help_options(void)
-         exit(0);
+-        object_property_add(cpu_obj, misa_cfg->name, "bool",
+-                            cpu_get_misa_ext_cfg,
+-                            cpu_set_misa_ext_cfg,
+-                            NULL, (void *)misa_cfg);
++        op = object_property_add(cpu_obj, misa_cfg->name, "bool",
++                                 cpu_get_misa_ext_cfg,
++                                 cpu_set_misa_ext_cfg,
++                                 NULL, (void *)misa_cfg);
+         object_property_set_description(cpu_obj, misa_cfg->name,
+                                         misa_cfg->description);
+-        object_property_set_bool(cpu_obj, misa_cfg->name,
+-                                 misa_cfg->enabled, NULL);
++        object_property_set_default_bool(op, misa_cfg->enabled);
      }
+ }
  
-+    if (qemu_opts_foreach(qemu_find_opts("cpu"),
-+                          cpu_help_func, NULL, NULL)) {
-+        exit(0);
-+    }
-+
-     if (qemu_opts_foreach(qemu_find_opts("device"),
-                           device_help_func, NULL, NULL)) {
-         exit(0);
-@@ -2680,6 +2709,7 @@ void qemu_init(int argc, char **argv)
-     qemu_add_drive_opts(&bdrv_runtime_opts);
-     qemu_add_opts(&qemu_chardev_opts);
-     qemu_add_opts(&qemu_device_opts);
-+    qemu_add_opts(&qemu_cpu_opts);
-     qemu_add_opts(&qemu_netdev_opts);
-     qemu_add_opts(&qemu_nic_opts);
-     qemu_add_opts(&qemu_net_opts);
-@@ -2756,6 +2786,11 @@ void qemu_init(int argc, char **argv)
-             case QEMU_OPTION_cpu:
-                 /* hw initialization will check this */
-                 cpu_option = optarg;
-+                opts = qemu_opts_parse_noisily(qemu_find_opts("cpu"),
-+                                               optarg, true);
-+                if (!opts) {
-+                    exit(1);
-+                }
-                 break;
-             case QEMU_OPTION_hda:
-             case QEMU_OPTION_hdb:
 -- 
 2.17.1
 
