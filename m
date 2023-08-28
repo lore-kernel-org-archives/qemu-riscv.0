@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FE49C71153
-	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Aug 2023 18:41:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35B91C71153
+	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Aug 2023 21:46:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qahB0-0005VB-PC; Mon, 28 Aug 2023 14:41:26 -0400
+	id 1qak39-0002V3-J4; Mon, 28 Aug 2023 17:45:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1qahAx-0005RC-OI
- for qemu-riscv@nongnu.org; Mon, 28 Aug 2023 14:41:23 -0400
-Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qak38-0002TA-75
+ for qemu-riscv@nongnu.org; Mon, 28 Aug 2023 17:45:30 -0400
+Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1qahAu-00089i-Mj
- for qemu-riscv@nongnu.org; Mon, 28 Aug 2023 14:41:23 -0400
-Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-565e54cb93aso1286322a12.3
- for <qemu-riscv@nongnu.org>; Mon, 28 Aug 2023 11:41:19 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qak34-0007dy-2i
+ for qemu-riscv@nongnu.org; Mon, 28 Aug 2023 17:45:29 -0400
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-3fefe898f76so36252715e9.0
+ for <qemu-riscv@nongnu.org>; Mon, 28 Aug 2023 14:45:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693248079; x=1693852879;
+ d=linaro.org; s=google; t=1693259124; x=1693863924;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=MbiCO1qQfDzgACV48VNmvBD1/zkiRSqRJqDRIe4onpE=;
- b=Sjti6Q1dYyiPvHeqGibSUX3KTOFMLxNCVLeCs1Yqjvy3VnmFu7VdxKhF/OC+76ol8H
- 9X54FJSBWC0ine3mqX9FDBQwYU8VqAGTGM64pNkVUMj6BB8gh4zP/8OVkzWEbv1Lu7oa
- CBVcIiyZdFQlnK3VUgOYNgOargN8zUFFu3217ajSt3jP487bDvT+XCQKAhAYg/65JHgF
- jQsNOHIah4qZghxO5rkZEfE2I346VZaGUFVeEseWT9rS36+AWAn/A3gSYVV7leeAmFFu
- 96nt9ztDycBs3h95+7o0HGEf0N4ORsoAzjcULLH0cPKzk2ZO4HbsBN/YEjC/7h8JQYCj
- MiRQ==
+ bh=/h/vWdv5CmDOL9Cr4FGosR9u+cFVbfE1GllsGXlBpk4=;
+ b=o2VpZ41XfhcHJoU58RphZIm6NHsd5gR6IAkvSmOgL+0B/SBbFJogZeMpPJXPLBQAvg
+ oUbMYl50ma54Fp7bbsc0NaGqyjKMZxAJl0FWxIB/Emgauc61WFOVC/R+nA2SmmJlHx+r
+ duzBi4LvUQUpidXnzhB/1JBPrVcJAiqxFXUbVdbtRJx1hf4DcUhDwURjIeyUnfmWyh1n
+ nqpxEwdy0LtZv3YgbLf+GPO1U/D+eHxRtROEJgIgTYSFac1iZDsAGHjorw9akP/vklMM
+ PSE/nJ5Gh0asqKs3qsBLv7XTgcKidWag6p4jowHLDHi1oa6sB80lJHdT3L7oX+lughPS
+ SzXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693248079; x=1693852879;
+ d=1e100.net; s=20221208; t=1693259124; x=1693863924;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=MbiCO1qQfDzgACV48VNmvBD1/zkiRSqRJqDRIe4onpE=;
- b=OQQa0fzSCjRN4FnkPm6yq3YsaT5z09PlftDajeryBCdJ2d1H7GX6AIsDG6F9P0cIjD
- hLn5uhdCsr5eslfBV+XJo4DID3o+zdaw0bSFEbFtCjOs3yQ/gmqS0xEAOhUtym7omDXb
- tqj4ozh5zjDySWybLVYXZlXFCIHPPLWzvjJxWd7lT7goOK3MjzFUiVjVdxEYcZeWzeAs
- QO/lDAv9nTtpOgRXG3N/4k+t5S83F16AZSbXLXLHBj9SHJR8qEtZGSWNYAeZd54YW/Xj
- gX5FUin40/w8fDiEBuMhTwSqHcPM5Y0O+1YGWzT/KxaYUPmBDBIBjgTYoPU25deJgY5M
- 3Dxg==
-X-Gm-Message-State: AOJu0YyhhW6XWGA6dZ8+bSEosFFklNqJbnQ0LmxpWURjpnQ27W6M27nZ
- z2oG4l/00YzfFXXSdtsULDJ0cA==
-X-Google-Smtp-Source: AGHT+IHSQARfl2Twy4rqRIQeJQaH0LUqrxJlnbCz+ASZYNgQ8ieoiv7AvegiJinmuocXdTvTo5zjxQ==
-X-Received: by 2002:a17:90a:7b83:b0:268:3f6d:9751 with SMTP id
- z3-20020a17090a7b8300b002683f6d9751mr20869989pjc.23.1693248078918; 
- Mon, 28 Aug 2023 11:41:18 -0700 (PDT)
-Received: from [192.168.0.4] ([71.212.131.115])
+ bh=/h/vWdv5CmDOL9Cr4FGosR9u+cFVbfE1GllsGXlBpk4=;
+ b=H2F5bScROQrkV++1BHEXCcV2swHdeNCy8wF5FQja7Z6gKJ+QeITIXo/yJshy9ailEY
+ VfyxnyoMwJ2YRSxVmF+6vzhZVwHPYwgj1ypxF+OHi3mGTULOwgg+TF+D20hmw/Ij9dNF
+ tZozbwSQ2Ru3W/i8BBkPqka+vdEV6/C+dKkV0TkV/8llsOmKrnFvk+k5kR3dIylDcgLJ
+ EdN/RMcoIMAd08CwrrDp5yjvoLUr4kIOk7NUqisr7P15Em7cApHXceqfYmjMpYMMQ8nC
+ W/s34hEE3jF/7XlxFGm9CivfXQLH8FwNG5PLNB4daLKozotk4AuE8n79x4utvkF5/gXE
+ 4Sjg==
+X-Gm-Message-State: AOJu0YyA2bVp2LcGuit4//Tu1U1YOBB/v9gouPd1EeDlI4n/36qoHbIp
+ s/VpnwG5cf0+M9y8QjTnZbaeAA==
+X-Google-Smtp-Source: AGHT+IE1yB9JgC9wIJ+VMTnmilcwsEE32cNGsCd/cij7M2J3X0P8jxfZDnmyEK/YSbYtpyS6ESm/kw==
+X-Received: by 2002:a05:600c:21c5:b0:401:bd2e:49fc with SMTP id
+ x5-20020a05600c21c500b00401bd2e49fcmr6102608wmj.24.1693259124064; 
+ Mon, 28 Aug 2023 14:45:24 -0700 (PDT)
+Received: from [192.168.69.115] ([176.164.201.64])
  by smtp.gmail.com with ESMTPSA id
- q33-20020a17090a17a400b0026d54b2abe9sm7895516pja.37.2023.08.28.11.41.18
+ s16-20020a05600c045000b003fee0741b8csm14982848wmb.23.2023.08.28.14.45.22
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Aug 2023 11:41:18 -0700 (PDT)
-Message-ID: <bba2391a-f4fe-45a4-a4e5-ae66849babc3@linaro.org>
-Date: Mon, 28 Aug 2023 11:41:16 -0700
+ Mon, 28 Aug 2023 14:45:23 -0700 (PDT)
+Message-ID: <ac9fafb6-a751-1503-a5c8-f71c9909a6e2@linaro.org>
+Date: Mon, 28 Aug 2023 23:45:21 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH 8/8] target/mips: Remove unused headers in lcsr_helper.c
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.14.0
+Subject: Re: [PATCH 7/8] target/helper: Remove unnecessary 'qemu/main-loop.h'
+ header
 Content-Language: en-US
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
  qemu-riscv@nongnu.org
 References: <20230828145545.81165-1-philmd@linaro.org>
- <20230828145545.81165-9-philmd@linaro.org>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230828145545.81165-9-philmd@linaro.org>
+ <20230828145545.81165-8-philmd@linaro.org>
+ <37e187bd-a21e-f9a2-ec51-a114cb5083aa@linaro.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+In-Reply-To: <37e187bd-a21e-f9a2-ec51-a114cb5083aa@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -99,16 +98,20 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 8/28/23 07:55, Philippe Mathieu-Daudé wrote:
-> This files only access the address_space_ld/st API, declared
-> in "exec/cpu-all.h", already included by "cpu.h".
+On 28/8/23 20:40, Richard Henderson wrote:
+> On 8/28/23 07:55, Philippe Mathieu-Daudé wrote:
+>> "qemu/main-loop.h" declares functions related to QEMU's
+>> main loop mutex, which these files don't access. Remove
+>> the unused "qemu/main-loop.h" header.
+>>
+>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>> ---
+>>   target/riscv/pmu.h                   | 2 --
+>>   target/xtensa/mmu_helper.c           | 2 --
+>>   target/xtensa/op_helper.c            | 2 --
 > 
-> Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
-> ---
->   target/mips/tcg/sysemu/lcsr_helper.c | 3 ---
->   1 file changed, 3 deletions(-)
+> At least these 3 files do two things.
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+I can compile these files adding '#error' in "qemu/main-loop.h".
 
-r~
 
