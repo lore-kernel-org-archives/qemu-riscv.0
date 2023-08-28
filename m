@@ -4,83 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A09D2C83F12
-	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Aug 2023 16:48:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E53AEC71153
+	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Aug 2023 18:36:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qafOv-0007qH-Cj; Mon, 28 Aug 2023 12:47:41 -0400
+	id 1qah5l-00019G-DC; Mon, 28 Aug 2023 14:36:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qafOu-0007pl-63
- for qemu-riscv@nongnu.org; Mon, 28 Aug 2023 12:47:40 -0400
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1qah5a-00015s-2B
+ for qemu-riscv@nongnu.org; Mon, 28 Aug 2023 14:35:50 -0400
+Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qafOr-0008RV-QL
- for qemu-riscv@nongnu.org; Mon, 28 Aug 2023 12:47:39 -0400
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-401c9525276so12017065e9.1
- for <qemu-riscv@nongnu.org>; Mon, 28 Aug 2023 09:47:37 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1qah5W-0006yh-9j
+ for qemu-riscv@nongnu.org; Mon, 28 Aug 2023 14:35:49 -0400
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-1c1e128135aso7006455ad.3
+ for <qemu-riscv@nongnu.org>; Mon, 28 Aug 2023 11:35:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693241256; x=1693846056;
+ d=linaro.org; s=google; t=1693247741; x=1693852541;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=qnbbpQq+Gu4QPdSgM3C88HLBfJ2eapZvqglT3tZ9USU=;
- b=PPBuyPnHLItxAynwJLpgtTGPyrUEZ8ehORMdLflD+yjwbrKNVjnioJSRjc4oObwylu
- 9AVCbjPuGcCuQ6eH+YppFm+JlsU7liwtey+jlFI0AnNScQG1eumYzqwXv5zaiWSNvlcM
- J8ukJJkb1L2hT7qadyHPL3IqovgABPybXj/Adx4yyfMDOovWe5A7aRVV5YqELJlB73vA
- 5pbLHYh+Uyz415NB32Psbqsj9bxlOisuIZEMuD62GaJACeUiXYdFwnAeqTkX6BiJe/uB
- VEkhPK5nKzhTkNM+F22xmM0fwo4qaT4cAGhozNLc2Xz7jXgVNuoyOPtfr3DXf0JNbyoV
- VBxQ==
+ bh=DVti7M95dfLk1aMxnUxVtVTWgvEsdrY6/v8/RdKAQkI=;
+ b=DjH24GZE34/nPh+6GImWmEdeSGh1CbYXkpKdUGrYG6c/6jdX87ExLbgPbz0ay9E3zZ
+ 2xED8aR5UjaIzbrPUVQpuOOxZzK9q1LHpnIemCxTwCkH2gc6zd+aJ/1FMpku+GpZIf/z
+ Z7s92No/FflAxublFYx5bgmALxGoYrr/w0YHJv/CdsG6t57lipmRywXHt32ndcoj3g/q
+ +yCb5NiujgQ8s3gAaMGMr0vIM9Kv8BJUQYE4VG5ZzdzrbsBoQ3Rol9s24u1Ndb6T4J3C
+ t0oBs5UxmQrNFjAP+sqjxsCjQp01MRO0sFywCR0r+hVivDb3tQ9gND+Ia1iIUzzt9iN4
+ mHRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693241256; x=1693846056;
+ d=1e100.net; s=20221208; t=1693247741; x=1693852541;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qnbbpQq+Gu4QPdSgM3C88HLBfJ2eapZvqglT3tZ9USU=;
- b=EUX2vl2xKGtE8wzgwD6vrupu/w7ShQIv6+U2GDUmsY2Laoya38MhxBJVriqT0urT8F
- Bh5FsUWdh3E+BogibPGeE+SKJnxjm+aV7OiTxiP+pb55t4r2yDhX/96snBN5G/wePl6T
- s4OBbY5pJVBgfvO6pzXQojerReleFehGhIa1TIP3MKLMktP981KZwiRs78xyuP3ODgF9
- eFeYbw3tMfz+lyzqSR06tk0dB/57nlCHGum4c51mDZPFpK+WKgTnyTkQD6JH1zB6vi+6
- +SpiF7vdO+8BzOoojcmtigPA2P5nWyOBJtnvddPPdcjaMyLM10MXizngv+0CWe4+IUFV
- I36A==
-X-Gm-Message-State: AOJu0Yy2vq3elFThqaT9IkZRKwF4bfWC+RNqiGaEtGqsHlUhrD/52DlP
- kpIfM65uqMa/QYDmzL/d1ihFZQ==
-X-Google-Smtp-Source: AGHT+IEzXse2TKvm6TpkhDrKvC8/3PimMxjk58Tf5ZfFM/bZ+LghuaJSYMnQbyyEqn6mIrGMhtK72A==
-X-Received: by 2002:a7b:c445:0:b0:401:cdc1:ac82 with SMTP id
- l5-20020a7bc445000000b00401cdc1ac82mr1476080wmi.9.1693241255787; 
- Mon, 28 Aug 2023 09:47:35 -0700 (PDT)
-Received: from [192.168.69.115] ([176.164.201.64])
+ bh=DVti7M95dfLk1aMxnUxVtVTWgvEsdrY6/v8/RdKAQkI=;
+ b=HarcgtwnajCgcZaJ3yTpGI11MoEAK4Mj+lopo9ZC4DsHOSZpf3xkA3+/DuyziO2sQn
+ B0rts05hSj1PTwVpVC/1jiykCdaeCcS24F0Y1OS7cIOtaLmJ7CQa0oXGB3GPrFhaZ0rv
+ ZTPsT28Yi0PWjxwclUK5BEsASAMwFr6+0AVXI8hNlDe4h6GCg1zYMFyiH+zUngubKFxC
+ mFOEOIkO6DMulLxNOcp/eirUPaXGRTfqNiS5i9a9IjCJs7HKWi6EkL10zJ4pkF7tSwp5
+ eXr415U+HfNF5M2LDoJynSJympIy3k16K+QSy46A1GRqcQ2nMpekNcW+LwsNLBroWjHh
+ GrTQ==
+X-Gm-Message-State: AOJu0YxFfT9k0nvGTu/dNkdOpX5L+89JktQU390unr7zL+nfOJnxmbsB
+ b8tCtE4LYzs5KL79OxmdeHPrRQ==
+X-Google-Smtp-Source: AGHT+IF0xbCRMw2uzJrLg8H5JYH/OyACm5gREghq5Br5iwm9eWo8Qj7chITlP4edFvJgKwkAR9kwaQ==
+X-Received: by 2002:a17:902:e5cc:b0:1c0:aca0:8c44 with SMTP id
+ u12-20020a170902e5cc00b001c0aca08c44mr14329733plf.19.1693247741533; 
+ Mon, 28 Aug 2023 11:35:41 -0700 (PDT)
+Received: from [192.168.0.4] ([71.212.131.115])
  by smtp.gmail.com with ESMTPSA id
- z16-20020a1c4c10000000b003fa96fe2bd9sm14394767wmf.22.2023.08.28.09.47.33
+ i9-20020a17090332c900b001b03f208323sm7677367plr.64.2023.08.28.11.35.40
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Aug 2023 09:47:35 -0700 (PDT)
-Message-ID: <355beacc-19a4-f860-52ec-c421858b40e1@linaro.org>
-Date: Mon, 28 Aug 2023 18:47:31 +0200
+ Mon, 28 Aug 2023 11:35:41 -0700 (PDT)
+Message-ID: <4706ed09-35d3-34e8-0bf8-156c49650a14@linaro.org>
+Date: Mon, 28 Aug 2023 11:35:39 -0700
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.14.0
-Subject: Re: [PATCH 12/20] target/riscv: move KVM only files to kvm subdir
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH 3/8] target/translate: Include missing 'exec/cpu_ldst.h'
+ header
 Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
-References: <20230825130853.511782-1-dbarboza@ventanamicro.com>
- <20230825130853.511782-13-dbarboza@ventanamicro.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230825130853.511782-13-dbarboza@ventanamicro.com>
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
+ qemu-riscv@nongnu.org
+References: <20230828145545.81165-1-philmd@linaro.org>
+ <20230828145545.81165-4-philmd@linaro.org>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20230828145545.81165-4-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x334.google.com
-X-Spam_score_int: -42
-X-Spam_score: -4.3
-X-Spam_bar: ----
-X-Spam_report: (-4.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x635.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.169,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ SUSPICIOUS_RECIPS=2.51 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,62 +100,22 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 25/8/23 15:08, Daniel Henrique Barboza wrote:
-> Move the files to a 'kvm' dir to promote more code separation between
-> accelerators and making our lives easier supporting build options such
-> as --disable-tcg.
+On 8/28/23 07:55, Philippe Mathieu-Daudé wrote:
+> All these files access the CPU LD/ST API declared in "exec/cpu_ldst.h".
 > 
-> Rename kvm.c to kvm-cpu.c to keep it in line with its TCG counterpart.
-> 
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
 > ---
->   hw/riscv/virt.c                       | 2 +-
->   target/riscv/cpu.c                    | 2 +-
->   target/riscv/{kvm.c => kvm/kvm-cpu.c} | 0
->   target/riscv/{ => kvm}/kvm-stub.c     | 0
->   target/riscv/{ => kvm}/kvm_riscv.h    | 0
->   target/riscv/kvm/meson.build          | 2 ++
->   target/riscv/meson.build              | 2 +-
->   7 files changed, 5 insertions(+), 3 deletions(-)
->   rename target/riscv/{kvm.c => kvm/kvm-cpu.c} (100%)
->   rename target/riscv/{ => kvm}/kvm-stub.c (100%)
->   rename target/riscv/{ => kvm}/kvm_riscv.h (100%)
->   create mode 100644 target/riscv/kvm/meson.build
+>   target/avr/helper.c                  | 1 +
+>   target/i386/tcg/fpu_helper.c         | 1 +
+>   target/i386/tcg/sysemu/excp_helper.c | 1 +
+>   target/loongarch/cpu.c               | 1 +
+>   target/mips/tcg/ldst_helper.c        | 1 +
+>   target/mips/tcg/msa_helper.c         | 1 +
+>   target/riscv/op_helper.c             | 1 +
+>   target/riscv/vector_helper.c         | 1 +
+>   8 files changed, 8 insertions(+)
 
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-> +++ b/target/riscv/kvm/meson.build
-> @@ -0,0 +1,2 @@
-> +riscv_ss.add(when: 'CONFIG_KVM', if_true: files('kvm-cpu.c'),
-> +                                 if_false: files('kvm-stub.c'))
-
-Hmm maybe we need to add:
-
--- >8 --
-diff --git a/include/hw/core/accel-cpu.h b/include/hw/core/accel-cpu.h
-index 5dbfd79955..65973b6f2e 100644
---- a/include/hw/core/accel-cpu.h
-+++ b/include/hw/core/accel-cpu.h
-@@ -33,6 +33,7 @@ typedef struct AccelCPUClass {
-      void (*cpu_class_init)(CPUClass *cc);
-      void (*cpu_instance_init)(CPUState *cpu);
-      bool (*cpu_realizefn)(CPUState *cpu, Error **errp);
-+    ResettablePhases cpu_reset;
-  } AccelCPUClass;
----
-
-and here:
-
-  static void kvm_cpu_accel_class_init(ObjectClass *oc, void *data)
-  {
-      AccelCPUClass *acc = ACCEL_CPU_CLASS(oc);
-
-      acc->cpu_instance_init = kvm_cpu_instance_init;
-+    acc->cpu_reset.hold = kvm_riscv_reset_vcpu;
-  }
-
-so then calling some accel_cpu_reset_hold() in riscv_cpu_reset_hold(),
-would call kvm_riscv_reset_vcpu() and we can remove kvm-stub.c.
-
-
-
+r~
 
