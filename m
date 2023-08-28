@@ -4,72 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20360C83F15
-	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Aug 2023 14:57:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6534C83F11
+	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Aug 2023 14:57:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qadem-0003Dk-Vc; Mon, 28 Aug 2023 10:55:56 -0400
+	id 1qadeq-0003ER-7v; Mon, 28 Aug 2023 10:56:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qadek-0003CC-Ph
- for qemu-riscv@nongnu.org; Mon, 28 Aug 2023 10:55:54 -0400
-Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qadeo-0003Do-AI
+ for qemu-riscv@nongnu.org; Mon, 28 Aug 2023 10:55:58 -0400
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qadeg-0000bO-Jw
- for qemu-riscv@nongnu.org; Mon, 28 Aug 2023 10:55:54 -0400
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-31c479ede21so2783633f8f.2
- for <qemu-riscv@nongnu.org>; Mon, 28 Aug 2023 07:55:49 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qadem-0000cU-4Q
+ for qemu-riscv@nongnu.org; Mon, 28 Aug 2023 10:55:58 -0400
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-31c6d17aec4so2807198f8f.1
+ for <qemu-riscv@nongnu.org>; Mon, 28 Aug 2023 07:55:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693234548; x=1693839348;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=LZVBTLQ7o6iqgGaPYrq/8xZ+5YbpKZVyztY/hfXbBKA=;
- b=iwCwnBvrXgGyy+qOsBH4SDCkhiq2Ep9B+bPTEn6CF/XeWdwSja6Ylrw7JBBV6NeQtH
- W+geRXjsEXHE+LFLbO8u53bdG7IRwlrz8NudRt+ZQ4YF+/TonBprtgdGtw+ro02Yjit8
- wtEklxA3P7dBVmmzEtoqYY2+sRnu5YpKGrZNC3klGXYBm0SkhbQ3rO2BVu+FulQQWnYc
- OGqFrNmku0NJurlG9RWwwSrr+RNKnS5mbUtwjTA4QahWnj6lgVua7T5hMf/UbgXpNx5J
- T8EP08lBcNmyWeGegB637iTUOrBh26hkyQGD+4INX4uuwv2+7Xw9vzvLy7BK3ph02zKw
- L3XQ==
+ d=linaro.org; s=google; t=1693234554; x=1693839354;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CDnk9YSeaoJdQRRB9TTsPC8B6FMZ/ZKTWzxCgLttq3Q=;
+ b=RX0Ofg5KAXxE9CDOWpykX8qYJeHS2VRbi9dmFytIAybRaja/e+N1aawJ3Ja7qiw78j
+ uz/xTipwL1cXatc3MLu2VtGxp3fBWQmLGV0EYsWsOpmMVPBL17/wXaMAwTV+4tKvVcO8
+ J2jeyC1jmzJIhk4XCV817THqBF6btaKqOHUSkl4yoYLfl4GiFjYWXHWBjKW6QDvSvThJ
+ Ub6qbwgv+uygkpb+BlSuY3p2UODY94HNZUiLhCeQ/A4valJmrYNhCGBQvRyifhTdbn0K
+ ZPbra76QKYS8rUU6Ki73MUK7dNR9K0P18fZwvRbej4luWpCnOPMaClw7ioMnOj2XW3To
+ b+nA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693234548; x=1693839348;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=LZVBTLQ7o6iqgGaPYrq/8xZ+5YbpKZVyztY/hfXbBKA=;
- b=SJiyrwEBzQZzDJ/6gZpeFPCDJ6yx+sT9/3Og5eB3eO7xku6RjKFGtz0zkcgRkfyD7O
- dDOQBU6oFbUY5UdG5I6lnIOunV4XxUIpFdETRKy2R3jrCTozWyVr71TVYTAWkOuyKH1T
- 6AAKn3vLtwK+gBJdpWapRTorCaNUAXk8kaJcYErzpKRFCQ7oEsDIO4IqxdUnuDtblzOr
- 32N4DpXlIASufZaqdXMwbEmLbX+oBHArKI/09s8rPgb6ycnoC69MsbZ/PE5rf3wJU+4n
- aAESx+K6MJjmZx9idkxwqDePVEa92DshcFZTDmaVm8804cTqodv0Taly1HHWiw+y2ywd
- Mnfw==
-X-Gm-Message-State: AOJu0Yz4fOtsPm0fPvryRHCMLpNtEtt8UgjkdGap2zR28E4aIjMnED0/
- HguzDzFgBXItCHAukFRtJUMsFw==
-X-Google-Smtp-Source: AGHT+IHvT7Jvx6viQJBR+GZNS0C1nXBSC1ECewWN64gAJVcwZsG2809ghisnKj4gfkGfVLTokNO7rw==
-X-Received: by 2002:a05:6000:9:b0:319:8d94:c245 with SMTP id
- h9-20020a056000000900b003198d94c245mr20189722wrx.69.1693234548557; 
- Mon, 28 Aug 2023 07:55:48 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1693234554; x=1693839354;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=CDnk9YSeaoJdQRRB9TTsPC8B6FMZ/ZKTWzxCgLttq3Q=;
+ b=Nzz3sdOMYloASuuDsZ0ukHei/kUXtpiscZc9b28oIPO7LS6LZDwvXkrMXAA1QiZ27d
+ hb2ZSw0MVeK/XCaVzxo4KamPmfkWVa0O+/elQt+FjI4Bh7+oqtEAMRiMpFEaFqQG/JDY
+ 98s62if5ZQGoHo2GYteMXZgPx5hCdkBE5HS4A0LDMgTDBAltHzR7aNOU76OZlnN9xgbu
+ jSy2PtOA9tkFQmTVLTc1t3ZW6k1xMBticswmbXfMIwSKsOv7IclyUE4SD2PNsKhdHC3h
+ V3ml0TVLuTXAxQhtXQk5CaudMSkBLeUZBTElMJkbqkG83GJoYb0FklmImz4J+LnFOP/l
+ Fh0w==
+X-Gm-Message-State: AOJu0YxtP+MTEX4Dvql+neW95WhpjIbr5FyVbQ9K9xzfqTaAKH6hCHvY
+ 3AImJXXMDh9rrf28ZrvW3fcBdA==
+X-Google-Smtp-Source: AGHT+IFtKPqn9H8dM0EcnoJ88txDSTB5+rb0cw/Kq6A6007wcuecFxh2eDDZomlIGJ97V8a625rtdA==
+X-Received: by 2002:a5d:688c:0:b0:31a:dc2e:2db2 with SMTP id
+ h12-20020a5d688c000000b0031adc2e2db2mr18174702wru.49.1693234554675; 
+ Mon, 28 Aug 2023 07:55:54 -0700 (PDT)
 Received: from m1x-phil.lan ([176.164.201.64])
  by smtp.gmail.com with ESMTPSA id
- x4-20020a5d4904000000b0031779a6b451sm10682474wrq.83.2023.08.28.07.55.47
+ z19-20020a05600c221300b003fee9cdf55esm10908709wml.14.2023.08.28.07.55.53
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 28 Aug 2023 07:55:48 -0700 (PDT)
+ Mon, 28 Aug 2023 07:55:54 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
  qemu-riscv@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 0/8] target/translate: Remove unused "exec/cpu_ldst.h" /
- "qemu/main-loop.h"
-Date: Mon, 28 Aug 2023 16:55:37 +0200
-Message-ID: <20230828145545.81165-1-philmd@linaro.org>
+Subject: [PATCH 1/8] target/ppc/pmu: Include missing 'qemu/timer.h' header
+Date: Mon, 28 Aug 2023 16:55:38 +0200
+Message-ID: <20230828145545.81165-2-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20230828145545.81165-1-philmd@linaro.org>
+References: <20230828145545.81165-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::436;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x436.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42c.google.com
 X-Spam_score_int: 4
 X-Spam_score: 0.4
 X-Spam_bar: /
@@ -92,65 +94,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Yet another boring 'header cleanups' series :/
+Since commit c2eff582a3 ("target/ppc: PMU basic cycle count for
+pseries TCG") pmu_update_cycles() uses QEMU_CLOCK_VIRTUAL and
+calls qemu_clock_get_ns(), both defined in "qemu/timer.h".
 
-Philippe Mathieu-Daudé (8):
-  target/ppc/pmu: Include missing 'qemu/timer.h' header
-  target/riscv/pmu: Restrict 'qemu/log.h' include to source
-  target/translate: Include missing 'exec/cpu_ldst.h' header
-  target/translate: Remove unnecessary 'exec/cpu_ldst.h' header
-  target/translate: Restrict 'exec/cpu_ldst.h' to user emulation
-  target/helpers: Remove unnecessary 'exec/cpu_ldst.h' header
-  target/helper: Remove unnecessary 'qemu/main-loop.h' header
-  target/mips: Remove unused headers in lcsr_helper.c
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ target/ppc/power8-pmu.c | 1 +
+ 1 file changed, 1 insertion(+)
 
- include/exec/exec-all.h              | 2 +-
- target/riscv/pmu.h                   | 3 ---
- target/alpha/translate.c             | 1 -
- target/arm/ptw.c                     | 1 -
- target/avr/helper.c                  | 1 +
- target/cris/op_helper.c              | 1 -
- target/hexagon/translate.c           | 1 -
- target/hppa/translate.c              | 1 -
- target/i386/tcg/fpu_helper.c         | 1 +
- target/i386/tcg/sysemu/excp_helper.c | 1 +
- target/loongarch/cpu.c               | 1 +
- target/loongarch/iocsr_helper.c      | 1 -
- target/loongarch/op_helper.c         | 1 -
- target/m68k/translate.c              | 1 -
- target/microblaze/translate.c        | 1 -
- target/mips/tcg/fpu_helper.c         | 1 -
- target/mips/tcg/ldst_helper.c        | 1 +
- target/mips/tcg/msa_helper.c         | 1 +
- target/mips/tcg/sysemu/lcsr_helper.c | 5 -----
- target/nios2/op_helper.c             | 1 -
- target/nios2/translate.c             | 1 -
- target/openrisc/translate.c          | 1 -
- target/ppc/int_helper.c              | 1 -
- target/ppc/machine.c                 | 1 -
- target/ppc/mem_helper.c              | 1 -
- target/ppc/mmu_common.c              | 1 -
- target/ppc/mmu_helper.c              | 1 -
- target/ppc/power8-pmu.c              | 2 +-
- target/ppc/translate.c               | 2 --
- target/riscv/csr.c                   | 1 -
- target/riscv/m128_helper.c           | 1 -
- target/riscv/op_helper.c             | 2 +-
- target/riscv/pmu.c                   | 1 +
- target/riscv/vector_helper.c         | 1 +
- target/s390x/tcg/crypto_helper.c     | 1 -
- target/s390x/tcg/excp_helper.c       | 1 -
- target/s390x/tcg/fpu_helper.c        | 1 -
- target/s390x/tcg/misc_helper.c       | 1 -
- target/sh4/translate.c               | 1 -
- target/sparc/translate.c             | 1 -
- target/xtensa/dbg_helper.c           | 1 -
- target/xtensa/fpu_helper.c           | 1 -
- target/xtensa/mmu_helper.c           | 2 --
- target/xtensa/op_helper.c            | 2 --
- target/xtensa/win_helper.c           | 1 -
- 45 files changed, 11 insertions(+), 46 deletions(-)
-
+diff --git a/target/ppc/power8-pmu.c b/target/ppc/power8-pmu.c
+index 7bb4bf81f7..2537cded83 100644
+--- a/target/ppc/power8-pmu.c
++++ b/target/ppc/power8-pmu.c
+@@ -16,6 +16,7 @@
+ #include "exec/exec-all.h"
+ #include "exec/helper-proto.h"
+ #include "qemu/error-report.h"
++#include "qemu/timer.h"
+ #include "qemu/main-loop.h"
+ #include "hw/ppc/ppc.h"
+ #include "power8-pmu.h"
 -- 
 2.41.0
 
