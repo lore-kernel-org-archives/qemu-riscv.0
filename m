@@ -4,55 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72F10C83F12
-	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Aug 2023 08:48:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB65CC83F12
+	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Aug 2023 08:49:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qaXv4-00008P-Bq; Mon, 28 Aug 2023 04:48:22 -0400
+	id 1qaXux-00089k-J9; Mon, 28 Aug 2023 04:48:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qaXv0-0008QB-HJ; Mon, 28 Aug 2023 04:48:18 -0400
-Received: from out30-97.freemail.mail.aliyun.com ([115.124.30.97])
+ id 1qaXuw-00088x-70; Mon, 28 Aug 2023 04:48:14 -0400
+Received: from out30-98.freemail.mail.aliyun.com ([115.124.30.98])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qaXux-0000PH-N1; Mon, 28 Aug 2023 04:48:18 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R151e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=14; SR=0;
- TI=SMTPD_---0VqjBRTm_1693212486; 
-Received: from 30.221.109.39(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VqjBRTm_1693212486) by smtp.aliyun-inc.com;
- Mon, 28 Aug 2023 16:48:07 +0800
-Message-ID: <11a0292f-5a43-88e2-a06f-6a55a4bc241e@linux.alibaba.com>
-Date: Mon, 28 Aug 2023 16:47:20 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
-Subject: Re: [RFC PATCH 2/3] target/riscv: Add API list_cpu_props
-Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, eduardo@habkost.net,
- marcel.apfelbaum@gmail.com, philmd@linaro.org, wangyanan55@huawei.com,
- richard.henderson@linaro.org, pbonzini@redhat.com, bin.meng@windriver.com,
- liweiwei@iscas.ac.cn, qemu-riscv@nongnu.org, ajones@ventanamicro.com
-References: <20230825121651.1534-1-zhiwei_liu@linux.alibaba.com>
- <20230825121651.1534-3-zhiwei_liu@linux.alibaba.com>
- <18c74a22-c4bc-248e-eeef-3120959cf45a@ventanamicro.com>
+ id 1qaXut-0000NS-BQ; Mon, 28 Aug 2023 04:48:13 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R211e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045192;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=16; SR=0;
+ TI=SMTPD_---0VqiOAPO_1693212480; 
+Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0VqiOAPO_1693212480) by smtp.aliyun-inc.com;
+ Mon, 28 Aug 2023 16:48:01 +0800
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <18c74a22-c4bc-248e-eeef-3120959cf45a@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: qemu-devel@nongnu.org
+Cc: eduardo@habkost.net, marcel.apfelbaum@gmail.com, philmd@linaro.org,
+ wangyanan55@huawei.com, pbonzini@redhat.com, berrange@redhat.com,
+ richard.henderson@linaro.org, laurent@vivier.eu, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ qemu-riscv@nongnu.org
+Subject: [RFC PATCH v2 3/6] softmmu/vl: Add qemu_cpu_opts QemuOptsList
+Date: Mon, 28 Aug 2023 16:45:33 +0800
+Message-Id: <20230828084536.231-4-zhiwei_liu@linux.alibaba.com>
+X-Mailer: git-send-email 2.23.0
+In-Reply-To: <20230828084536.231-1-zhiwei_liu@linux.alibaba.com>
+References: <20230828084536.231-1-zhiwei_liu@linux.alibaba.com>
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.97;
+Received-SPF: pass client-ip=115.124.30.98;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-97.freemail.mail.aliyun.com
-X-Spam_score_int: -102
-X-Spam_score: -10.3
-X-Spam_bar: ----------
-X-Spam_report: (-10.3 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- NICE_REPLY_A=-0.414, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
+ helo=out30-98.freemail.mail.aliyun.com
+X-Spam_score_int: -98
+X-Spam_score: -9.9
+X-Spam_bar: ---------
+X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001,
  USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -69,94 +66,144 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+This make the cpu works the similar way like the -device option.
 
-On 2023/8/25 21:46, Daniel Henrique Barboza wrote:
->
->
-> On 8/25/23 09:16, LIU Zhiwei wrote:
->> This API used for output current configuration for one specified CPU.
->> Currently only RISC-V frontend implements this API.
->>
->> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
->> ---
->>   cpu.c                     |  8 ++++++++
->>   include/exec/cpu-common.h |  1 +
->>   target/riscv/cpu.c        | 10 ++++++++++
->>   target/riscv/cpu.h        |  2 ++
->>   4 files changed, 21 insertions(+)
->>
->> diff --git a/cpu.c b/cpu.c
->> index e1a9239d0f..03a313cd72 100644
->> --- a/cpu.c
->> +++ b/cpu.c
->> @@ -299,6 +299,14 @@ void list_cpus(void)
->>   #endif
->>   }
->>   +void list_cpu_props(CPUState *cs)
->> +{
->> +    /* XXX: implement xxx_cpu_list_props for targets that still miss 
->> it */
->> +#if defined(cpu_list_props)
->> +    cpu_list_props(cs);
->> +#endif
->> +}
->> +
->>   #if defined(CONFIG_USER_ONLY)
->>   void tb_invalidate_phys_addr(hwaddr addr)
->>   {
->> diff --git a/include/exec/cpu-common.h b/include/exec/cpu-common.h
->> index 87dc9a752c..b3160d9218 100644
->> --- a/include/exec/cpu-common.h
->> +++ b/include/exec/cpu-common.h
->> @@ -166,5 +166,6 @@ int cpu_memory_rw_debug(CPUState *cpu, vaddr addr,
->>     /* vl.c */
->>   void list_cpus(void);
->> +void list_cpu_props(CPUState *);
->>     #endif /* CPU_COMMON_H */
->> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> index 6b93b04453..3ea18de06f 100644
->> --- a/target/riscv/cpu.c
->> +++ b/target/riscv/cpu.c
->> @@ -2226,6 +2226,16 @@ void riscv_cpu_list(void)
->>       g_slist_free(list);
->>   }
->>   +void riscv_cpu_list_props(CPUState *cs)
->> +{
->> +    char *enabled_isa;
->> +
->> +    enabled_isa = riscv_isa_string(RISCV_CPU(cs));
->> +    qemu_printf("Enable extension:\n");
->
-> I suggest "Enabled extensions". LGTM otherwise.
+For device option,
+"""
+./qemu-system-riscv64 -device e1000,help
+e1000 options:
+  acpi-index=<uint32>    -  (default: 0)
+  addr=<int32>           - Slot and optional function number, example: 06.0 or 06 (default: -1)
+  autonegotiation=<bool> - on/off (default: true)
+  bootindex=<int32>
+  extra_mac_registers=<bool> - on/off (default: true)
+  failover_pair_id=<str>
+"""
 
-Fixed, thanks.
+After this patch, the cpu can output its configurations,
+"""
+./qemu-system-riscv64 -cpu rv64,help
+Enable extension:
+	rv64imafdch_zicbom_zicboz_zicsr_zifencei_zihintpause_zawrs_zfa_zba_zbb_zbc_zbs_sstc_svadu
+"""
 
-Zhiwei
+Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+---
+ cpu.c                 |  2 +-
+ include/hw/core/cpu.h | 11 +++++++++++
+ softmmu/vl.c          | 35 +++++++++++++++++++++++++++++++++++
+ 3 files changed, 47 insertions(+), 1 deletion(-)
 
->
-> Daniel
->
->> +    qemu_printf("\t%s\n", enabled_isa);
->> +    /* TODO: output all user configurable options and all possible 
->> extensions */
->> +}
->> +
->>   #define DEFINE_CPU(type_name, initfn)      \
->>       {                                      \
->>           .name = type_name,                 \
->> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->> index 6ea22e0eea..af1d47605b 100644
->> --- a/target/riscv/cpu.h
->> +++ b/target/riscv/cpu.h
->> @@ -443,9 +443,11 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr 
->> address, int size,
->>                           bool probe, uintptr_t retaddr);
->>   char *riscv_isa_string(RISCVCPU *cpu);
->>   void riscv_cpu_list(void);
->> +void riscv_cpu_list_props(CPUState *cs);
->>   void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp);
->>     #define cpu_list riscv_cpu_list
->> +#define cpu_list_props riscv_cpu_list_props
->>   #define cpu_mmu_index riscv_cpu_mmu_index
->>     #ifndef CONFIG_USER_ONLY
+diff --git a/cpu.c b/cpu.c
+index 03a313cd72..712bd02684 100644
+--- a/cpu.c
++++ b/cpu.c
+@@ -257,7 +257,7 @@ void cpu_exec_initfn(CPUState *cpu)
+ #endif
+ }
+ 
+-static const char *cpu_type_by_name(const char *cpu_model)
++const char *cpu_type_by_name(const char *cpu_model)
+ {
+     ObjectClass *oc;
+     const char *cpu_type;
+diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+index fdcbe87352..49d41afdfa 100644
+--- a/include/hw/core/cpu.h
++++ b/include/hw/core/cpu.h
+@@ -657,6 +657,17 @@ CPUState *cpu_create(const char *typename);
+  */
+ const char *parse_cpu_option(const char *cpu_option);
+ 
++/**
++ * cpu_type_by_name:
++ * @cpu_model: The -cpu command line model name.
++ *
++ * Looks up type name by the -cpu command line model name
++ *
++ * Returns: type name of CPU or prints error and terminates process
++ *          if an error occurred.
++ */
++const char *cpu_type_by_name(const char *cpu_model);
++
+ /**
+  * cpu_has_work:
+  * @cpu: The vCPU to check.
+diff --git a/softmmu/vl.c b/softmmu/vl.c
+index b0b96f67fa..bc30f3954d 100644
+--- a/softmmu/vl.c
++++ b/softmmu/vl.c
+@@ -218,6 +218,15 @@ static struct {
+     { .driver = "virtio-vga-gl",        .flag = &default_vga       },
+ };
+ 
++static QemuOptsList qemu_cpu_opts = {
++    .name = "cpu",
++    .implied_opt_name = "cpu_model",
++    .head = QTAILQ_HEAD_INITIALIZER(qemu_cpu_opts.head),
++    .desc = {
++        { /* end of list */ }
++    },
++};
++
+ static QemuOptsList qemu_rtc_opts = {
+     .name = "rtc",
+     .head = QTAILQ_HEAD_INITIALIZER(qemu_rtc_opts.head),
+@@ -1140,6 +1149,21 @@ static int parse_fw_cfg(void *opaque, QemuOpts *opts, Error **errp)
+     return 0;
+ }
+ 
++static int cpu_help_func(void *opaque, QemuOpts *opts, Error **errp)
++{
++    const char *cpu_model, *cpu_type;
++    cpu_model = qemu_opt_get(opts, "cpu_model");
++    if (!cpu_model) {
++        return 1;
++    }
++    if (!qemu_opt_has_help_opt(opts)) {
++        return 0;
++    }
++    cpu_type = cpu_type_by_name(cpu_model);
++    list_cpu_props((CPUState *)object_new(cpu_type));
++    return 1;
++}
++
+ static int device_help_func(void *opaque, QemuOpts *opts, Error **errp)
+ {
+     return qdev_device_help(opts);
+@@ -2467,6 +2491,11 @@ static void qemu_process_help_options(void)
+         exit(0);
+     }
+ 
++    if (qemu_opts_foreach(qemu_find_opts("cpu"),
++                          cpu_help_func, NULL, NULL)) {
++        exit(0);
++    }
++
+     if (qemu_opts_foreach(qemu_find_opts("device"),
+                           device_help_func, NULL, NULL)) {
+         exit(0);
+@@ -2680,6 +2709,7 @@ void qemu_init(int argc, char **argv)
+     qemu_add_drive_opts(&bdrv_runtime_opts);
+     qemu_add_opts(&qemu_chardev_opts);
+     qemu_add_opts(&qemu_device_opts);
++    qemu_add_opts(&qemu_cpu_opts);
+     qemu_add_opts(&qemu_netdev_opts);
+     qemu_add_opts(&qemu_nic_opts);
+     qemu_add_opts(&qemu_net_opts);
+@@ -2756,6 +2786,11 @@ void qemu_init(int argc, char **argv)
+             case QEMU_OPTION_cpu:
+                 /* hw initialization will check this */
+                 cpu_option = optarg;
++                opts = qemu_opts_parse_noisily(qemu_find_opts("cpu"),
++                                               optarg, true);
++                if (!opts) {
++                    exit(1);
++                }
+                 break;
+             case QEMU_OPTION_hda:
+             case QEMU_OPTION_hdb:
+-- 
+2.17.1
+
 
