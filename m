@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83AF2C83F14
-	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Aug 2023 22:15:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 768DFC83F11
+	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Aug 2023 22:15:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qakUl-0006AQ-Rh; Mon, 28 Aug 2023 18:14:03 -0400
+	id 1qakUT-0005xU-Uf; Mon, 28 Aug 2023 18:13:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qakUk-00063b-9T
- for qemu-riscv@nongnu.org; Mon, 28 Aug 2023 18:14:02 -0400
-Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qakUP-0005vs-Pn
+ for qemu-riscv@nongnu.org; Mon, 28 Aug 2023 18:13:42 -0400
+Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qakUf-0004Eb-TU
- for qemu-riscv@nongnu.org; Mon, 28 Aug 2023 18:14:02 -0400
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-31dcd553fecso1050318f8f.2
- for <qemu-riscv@nongnu.org>; Mon, 28 Aug 2023 15:13:57 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qakUL-0004A8-T7
+ for qemu-riscv@nongnu.org; Mon, 28 Aug 2023 18:13:41 -0400
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-31dcd553fecso1050105f8f.2
+ for <qemu-riscv@nongnu.org>; Mon, 28 Aug 2023 15:13:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693260836; x=1693865636;
+ d=linaro.org; s=google; t=1693260816; x=1693865616;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UFie4e5LMyCNfAjlAs6VDkMreh5h1iDKK7cod2ZiiFQ=;
- b=gDjAWI8/JSVW8Phd2NrVTwBldvnUm7CP+tV2lTeJqs1EJ7OV2+IaOGrRpoIQGN+WPu
- GQiGS7YrdNkYOL1MaBno4f88roqcnrGWQkOrujEG3AQ7Y9vv3wLZ6lFZ/S1EL8D01Dor
- aKrDrF2rdt0fw6RIXNrJc9MUmS9cTEdHe64Ll8yTQP4/fysu9uBc7qd1pCmN+urlmr9s
- V7CJlr+U67TQubnlYuSJ/urpBpC+RC9lx7SV7KSwpBV2aV4xiwetYp6QLbGiw6wdcTOS
- fq+DOtmT1GdsVrF5j1GAHUTkI4IRNu3lDhtOrYZrFc7Iw/lT6+6eVX3OBN/lRJ0TiYhC
- nbcQ==
+ bh=ssBvu4DzmFM7P1c5RxQ8Yw61cUsLlr2cfwVX7OvTMhs=;
+ b=FVfj+4+7zlv008OcnUNBIkugVojkXIRGj/MkyiPGUTDK7xGCW2UyrKjaDnrR4f7eDm
+ AGpj0a6b+WCSv9bB4uMmBBHUGWJmJDGJ8O5ekawbUNI8FGpknM0N36SYFLjmReI2eAnE
+ QLBIvYh59nvuWFEGVuMp3e+5x4e8TcZbtqDEJi4hC7xZhNqJCj7lHKdxVn7UfoZqHasU
+ NIir8tV8KtjpuUjEi7sWlX+3Y293eDFi7G1Lh8Gq75kWUygx6IeWH0dPABqcDrFweRtb
+ MwiGKPe+yJhhUu2epghQGPy/O+TZyMLYFVCnleONxhXgZ+w6o98SYYGxOUpQaNfIauem
+ yuCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693260836; x=1693865636;
+ d=1e100.net; s=20221208; t=1693260816; x=1693865616;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UFie4e5LMyCNfAjlAs6VDkMreh5h1iDKK7cod2ZiiFQ=;
- b=c9RzSfP6l4vfhrmztExi5jdTiBU+wl4WwusEO4WAhsMl+6nuJBGKUTJK1XoFZhdLTc
- c5oE5SYgDWZPKQJM7hNm2imYsMBzVodB+gc/tYXMDeJnXvAPTNlZQkRdWBkAbB52wDJJ
- ww5pZgN8H/4MK1Heuj6CuBzH2wjg5720pG9mCKj+66URTJdW3lftumoRl33C+ZqnWMjU
- yKcbTUfw7W84mq0i5jGgpTjL7h0MHC4vyqg1QZK2SOtHk1BJDr9YwOYrGVuBN4vctAJ7
- 96v7GCZh07cdqed8CUNFfBckGrtpA3HorfmuI1+gQ7aSAQ1ZRO/aqM63N5jJ4zFQKsiy
- oeSA==
-X-Gm-Message-State: AOJu0Yw2/ST3YP/RMvIRRetLzcmMxGiTq30IMrLldEtYLqZIzfOyI6Pb
- NYDgivNwfHUQ8MM5KCC8x9B9svZqA0Kx4R+Drbk=
-X-Google-Smtp-Source: AGHT+IFoPMMipn1rH8nYfiFenMc8oPaJK/A6aGU6HxAmoOZgt4Os3fKrhqnrW9TqyMFkEqQa05kUwA==
-X-Received: by 2002:adf:ffc9:0:b0:319:52da:8f0b with SMTP id
- x9-20020adfffc9000000b0031952da8f0bmr19894754wrs.17.1693260836611; 
- Mon, 28 Aug 2023 15:13:56 -0700 (PDT)
+ bh=ssBvu4DzmFM7P1c5RxQ8Yw61cUsLlr2cfwVX7OvTMhs=;
+ b=EazLiMNmwiP7u3/vLyocmnINeAqbiW9C0GOAjPKmGnXutmnH6paJKp28JbQAeCFyqH
+ 6GH8/lAJvpuvIxBMeKf0vTbDRze+fhx40DBHyXbazIyJ2jrrMDKFiZoV0f+YzFUl/X00
+ 1NUxieLixigDqMTPEWJiceeOGkb9Pdz/d2QhPrOcDIv6yvQjuqAxZuZozCQq+PwmTovB
+ XqYiKLPC+4aHWhXq3vqDLz7C7N7CClz2YnTrI7e7mQkpSUdJPn7w5fsp/OK2zK+wdGfG
+ hTAtZVz06aQsDHhNCmUHpqTb/76/n6siHT2xofWXoeOTGZaCHgzAlMdGQBkKio3aH73Y
+ mPgQ==
+X-Gm-Message-State: AOJu0YzKdq6wOVXkyj7Qbv8HBVPfXFioT1NwsMTcFUDyBPwIo5qh69Ya
+ 9j6L6RI1W/olbrfB1UZClb4haQ==
+X-Google-Smtp-Source: AGHT+IEMX81yHG83r7twz2cm0MfabEnkcFLiE1JM5uJ0uPdngXPcD/dyhNu9rFluY08BdsWStCEing==
+X-Received: by 2002:adf:ce82:0:b0:317:5f13:5c2f with SMTP id
+ r2-20020adfce82000000b003175f135c2fmr18469381wrn.0.1693260816435; 
+ Mon, 28 Aug 2023 15:13:36 -0700 (PDT)
 Received: from m1x-phil.lan ([176.164.201.64])
  by smtp.gmail.com with ESMTPSA id
- f23-20020a7bcd17000000b003feef82bbefsm11885542wmj.29.2023.08.28.15.13.55
+ f22-20020a5d58f6000000b0031981c500aasm11704824wrd.25.2023.08.28.15.13.34
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 28 Aug 2023 15:13:56 -0700 (PDT)
+ Mon, 28 Aug 2023 15:13:36 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  qemu-ppc@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v2 06/11] target/helpers: Remove unnecessary 'exec/cpu_ldst.h'
+Subject: [PATCH v2 03/11] target/translate: Include missing 'exec/cpu_ldst.h'
  header
-Date: Tue, 29 Aug 2023 00:13:09 +0200
-Message-ID: <20230828221314.18435-7-philmd@linaro.org>
+Date: Tue, 29 Aug 2023 00:13:06 +0200
+Message-ID: <20230828221314.18435-4-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230828221314.18435-1-philmd@linaro.org>
 References: <20230828221314.18435-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::430;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x430.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,118 +96,117 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-These files don't use the CPU ld/st API, remove the unnecessary
-"exec/cpu_ldst.h" header.
+All these files access the CPU LD/ST API declared in "exec/cpu_ldst.h".
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/pmu.h                   | 1 -
- target/cris/op_helper.c              | 1 -
- target/mips/tcg/fpu_helper.c         | 1 -
- target/mips/tcg/sysemu/lcsr_helper.c | 1 -
- target/s390x/tcg/excp_helper.c       | 1 -
- target/s390x/tcg/fpu_helper.c        | 1 -
- target/xtensa/mmu_helper.c           | 1 -
- target/xtensa/op_helper.c            | 1 -
- 8 files changed, 8 deletions(-)
+ target/avr/helper.c                  | 1 +
+ target/i386/tcg/fpu_helper.c         | 1 +
+ target/i386/tcg/sysemu/excp_helper.c | 1 +
+ target/loongarch/cpu.c               | 1 +
+ target/mips/tcg/ldst_helper.c        | 1 +
+ target/mips/tcg/msa_helper.c         | 1 +
+ target/riscv/op_helper.c             | 1 +
+ target/riscv/vector_helper.c         | 1 +
+ 8 files changed, 8 insertions(+)
 
-diff --git a/target/riscv/pmu.h b/target/riscv/pmu.h
-index d2be06a133..60fdd6f42c 100644
---- a/target/riscv/pmu.h
-+++ b/target/riscv/pmu.h
-@@ -18,7 +18,6 @@
- 
+diff --git a/target/avr/helper.c b/target/avr/helper.c
+index e6e7d51487..fdc9884ea0 100644
+--- a/target/avr/helper.c
++++ b/target/avr/helper.c
+@@ -24,6 +24,7 @@
  #include "cpu.h"
- #include "qemu/main-loop.h"
--#include "exec/exec-all.h"
- 
- bool riscv_pmu_ctr_monitor_instructions(CPURISCVState *env,
-                                         uint32_t target_ctr);
-diff --git a/target/cris/op_helper.c b/target/cris/op_helper.c
-index 40cb74ce73..98a9aaf504 100644
---- a/target/cris/op_helper.c
-+++ b/target/cris/op_helper.c
-@@ -24,7 +24,6 @@
- #include "exec/helper-proto.h"
- #include "qemu/host-utils.h"
+ #include "hw/core/tcg-cpu-ops.h"
  #include "exec/exec-all.h"
--#include "exec/cpu_ldst.h"
++#include "exec/cpu_ldst.h"
+ #include "exec/address-spaces.h"
+ #include "exec/helper-proto.h"
  
- //#define CRIS_OP_HELPER_DEBUG
+diff --git a/target/i386/tcg/fpu_helper.c b/target/i386/tcg/fpu_helper.c
+index 6f3741b635..4430d3d380 100644
+--- a/target/i386/tcg/fpu_helper.c
++++ b/target/i386/tcg/fpu_helper.c
+@@ -21,6 +21,7 @@
+ #include <math.h>
+ #include "cpu.h"
+ #include "tcg-cpu.h"
++#include "exec/cpu_ldst.h"
+ #include "exec/helper-proto.h"
+ #include "fpu/softfloat.h"
+ #include "fpu/softfloat-macros.h"
+diff --git a/target/i386/tcg/sysemu/excp_helper.c b/target/i386/tcg/sysemu/excp_helper.c
+index b5f0abffa3..226689a4f2 100644
+--- a/target/i386/tcg/sysemu/excp_helper.c
++++ b/target/i386/tcg/sysemu/excp_helper.c
+@@ -19,6 +19,7 @@
  
-diff --git a/target/mips/tcg/fpu_helper.c b/target/mips/tcg/fpu_helper.c
-index 8ce56ed7c8..45d593de48 100644
---- a/target/mips/tcg/fpu_helper.c
-+++ b/target/mips/tcg/fpu_helper.c
-@@ -25,7 +25,6 @@
+ #include "qemu/osdep.h"
+ #include "cpu.h"
++#include "exec/cpu_ldst.h"
+ #include "exec/exec-all.h"
+ #include "tcg/helper-tcg.h"
+ 
+diff --git a/target/loongarch/cpu.c b/target/loongarch/cpu.c
+index 27fc6e1f33..65f9320e34 100644
+--- a/target/loongarch/cpu.c
++++ b/target/loongarch/cpu.c
+@@ -11,6 +11,7 @@
+ #include "qapi/error.h"
+ #include "qemu/module.h"
+ #include "sysemu/qtest.h"
++#include "exec/cpu_ldst.h"
+ #include "exec/exec-all.h"
+ #include "cpu.h"
+ #include "internals.h"
+diff --git a/target/mips/tcg/ldst_helper.c b/target/mips/tcg/ldst_helper.c
+index c1a8380e34..97056d00a2 100644
+--- a/target/mips/tcg/ldst_helper.c
++++ b/target/mips/tcg/ldst_helper.c
+@@ -24,6 +24,7 @@
+ #include "cpu.h"
+ #include "exec/helper-proto.h"
+ #include "exec/exec-all.h"
++#include "exec/cpu_ldst.h"
+ #include "exec/memop.h"
  #include "internal.h"
- #include "exec/helper-proto.h"
+ 
+diff --git a/target/mips/tcg/msa_helper.c b/target/mips/tcg/msa_helper.c
+index 29b31d70fe..c8597b9e30 100644
+--- a/target/mips/tcg/msa_helper.c
++++ b/target/mips/tcg/msa_helper.c
+@@ -22,6 +22,7 @@
+ #include "internal.h"
+ #include "tcg/tcg.h"
  #include "exec/exec-all.h"
--#include "exec/cpu_ldst.h"
++#include "exec/cpu_ldst.h"
+ #include "exec/helper-proto.h"
+ #include "exec/memop.h"
  #include "fpu/softfloat.h"
- #include "fpu_helper.h"
- 
-diff --git a/target/mips/tcg/sysemu/lcsr_helper.c b/target/mips/tcg/sysemu/lcsr_helper.c
-index 942143d209..8f97d04313 100644
---- a/target/mips/tcg/sysemu/lcsr_helper.c
-+++ b/target/mips/tcg/sysemu/lcsr_helper.c
-@@ -13,7 +13,6 @@
- #include "qemu/host-utils.h"
- #include "exec/helper-proto.h"
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index 9cdb9cdd06..7e2f1908ee 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -23,6 +23,7 @@
+ #include "internals.h"
+ #include "qemu/main-loop.h"
  #include "exec/exec-all.h"
--#include "exec/cpu_ldst.h"
++#include "exec/cpu_ldst.h"
+ #include "exec/helper-proto.h"
  
- #define GET_MEMTXATTRS(cas) \
-         ((MemTxAttrs){.requester_id = env_cpu(cas)->cpu_index})
-diff --git a/target/s390x/tcg/excp_helper.c b/target/s390x/tcg/excp_helper.c
-index b7116d0577..b875bf14e5 100644
---- a/target/s390x/tcg/excp_helper.c
-+++ b/target/s390x/tcg/excp_helper.c
-@@ -23,7 +23,6 @@
+ /* Exceptions processing helpers */
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index bf7e0029a1..bc9e151aa9 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -22,6 +22,7 @@
  #include "cpu.h"
- #include "exec/helper-proto.h"
+ #include "exec/memop.h"
  #include "exec/exec-all.h"
--#include "exec/cpu_ldst.h"
- #include "s390x-internal.h"
- #include "tcg_s390x.h"
- #ifndef CONFIG_USER_ONLY
-diff --git a/target/s390x/tcg/fpu_helper.c b/target/s390x/tcg/fpu_helper.c
-index c329b31261..d8bd5748fa 100644
---- a/target/s390x/tcg/fpu_helper.c
-+++ b/target/s390x/tcg/fpu_helper.c
-@@ -23,7 +23,6 @@
- #include "s390x-internal.h"
- #include "tcg_s390x.h"
- #include "exec/exec-all.h"
--#include "exec/cpu_ldst.h"
++#include "exec/cpu_ldst.h"
  #include "exec/helper-proto.h"
  #include "fpu/softfloat.h"
- 
-diff --git a/target/xtensa/mmu_helper.c b/target/xtensa/mmu_helper.c
-index fa66e8e867..57b75882c4 100644
---- a/target/xtensa/mmu_helper.c
-+++ b/target/xtensa/mmu_helper.c
-@@ -34,7 +34,6 @@
- #include "exec/helper-proto.h"
- #include "qemu/host-utils.h"
- #include "exec/exec-all.h"
--#include "exec/cpu_ldst.h"
- 
- #define XTENSA_MPU_SEGMENT_MASK 0x0000001f
- #define XTENSA_MPU_ACC_RIGHTS_MASK 0x00000f00
-diff --git a/target/xtensa/op_helper.c b/target/xtensa/op_helper.c
-index 1af7becc54..10a2b51f91 100644
---- a/target/xtensa/op_helper.c
-+++ b/target/xtensa/op_helper.c
-@@ -31,7 +31,6 @@
- #include "exec/helper-proto.h"
- #include "qemu/host-utils.h"
- #include "exec/exec-all.h"
--#include "exec/cpu_ldst.h"
- #include "qemu/timer.h"
- 
- #ifndef CONFIG_USER_ONLY
+ #include "tcg/tcg-gvec-desc.h"
 -- 
 2.41.0
 
