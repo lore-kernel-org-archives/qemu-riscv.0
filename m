@@ -4,75 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 994FAC83F12
-	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Aug 2023 12:22:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56FCAC6FA8F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Aug 2023 12:22:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qaxjQ-00088d-Po; Tue, 29 Aug 2023 08:22:05 -0400
+	id 1qaxjO-00087i-6r; Tue, 29 Aug 2023 08:22:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qaxjP-00087o-G9
- for qemu-riscv@nongnu.org; Tue, 29 Aug 2023 08:22:03 -0400
-Received: from mail-oo1-xc32.google.com ([2607:f8b0:4864:20::c32])
+ id 1qaxjM-00087S-Ir
+ for qemu-riscv@nongnu.org; Tue, 29 Aug 2023 08:22:00 -0400
+Received: from mail-ot1-x334.google.com ([2607:f8b0:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qaxjK-0001ND-PQ
- for qemu-riscv@nongnu.org; Tue, 29 Aug 2023 08:22:03 -0400
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-57325fcd970so2721164eaf.1
- for <qemu-riscv@nongnu.org>; Tue, 29 Aug 2023 05:21:58 -0700 (PDT)
+ id 1qaxjF-0001L5-Gu
+ for qemu-riscv@nongnu.org; Tue, 29 Aug 2023 08:21:59 -0400
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-6bcb5df95c5so3241067a34.1
+ for <qemu-riscv@nongnu.org>; Tue, 29 Aug 2023 05:21:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1693311717; x=1693916517;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9cL0Fun4ilnv0euhMcCCgO4wnOC+ky4KYEKADy08jIg=;
- b=lY9vc/9d0lRIMoLhsvz9XCrjqBobkK9DCuvMd1vRWKuKbVJFn2Ec8fXuupQ66RXJr0
- htPA+nqwoN9/7sjiqoZmQEz5WquiRvHhntAD8dkJBlhFKlhxa93XeEQN87WBadvgVUEH
- uroKVPYqkvMYR4ggQkKeZ+oIFb/hdvcSbdq0U8M5p4L7xyqVp6pYZ0esNlJJZJ8/Dr5l
- Sd8aBxyhKDfkJA7W+EaFQeXJMOriZ3alFxGcuXvlcCqM+n+zzEKpi0ieR56OM6EjzjhL
- I/FNqMOMGDx9P48/7oVe02Xwmkw8jXDhB4uQbnT3YdnXCEZ8G4n9kj/r/LDQZPYMlnDz
- 4UTg==
+ d=ventanamicro.com; s=google; t=1693311711; x=1693916511;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=5+hKm/hGHe1RwTMPtHep9ct1mBSIWHV32WOu9vzrmvM=;
+ b=RDmmgD8u3kHAN7JjVLfajGjeVtgWgNi6ZmUzSFD91wxr0phxgfdsylk/3LNzbnrv33
+ gYJmaDlwA3JwMmDufSOx7ELvng6LSLxCRMW7BdNoINCNkT9uG8ApKnx3UjpXVKh4M87H
+ kN+GSO/tuDA+vEcfcXvfbPi8SKr0Hwd9GUTcWQV5eZwE1dy0lAFTBzWP3m+YZzONuirD
+ IJDFJa1rg0eYKNx35aX+ctoe3ca8tGjkzxE7hPB2Mz+d71jV0yPNAaDd1y65cUPyod/V
+ 6grSwZVsey2RYWWKAJkLg0wfzFoTEXzwCt2RYZ9PeehEGBdN3eFs3QcZBPJKbTRR+7yL
+ Agiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693311717; x=1693916517;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=9cL0Fun4ilnv0euhMcCCgO4wnOC+ky4KYEKADy08jIg=;
- b=DtpESVGHVJ7CNSmFsbE3w/8w03K2aLRBwEwvC+iDFixVY2TgnOLb9rYSQLoKaPyi3y
- 5zcCr1mAS/mj4zgnKbEDzEKjooGkrbdq/hx0XMK/V74bY9H4gge70qynKrxyt1RXYqdV
- XYgJGTYNT8WUXwg0Zrxrurr0Nk6Y0Q3yl5gn5V3dHMqVIQ5DDlvzC72UCgpCmwQ4+ydW
- MM7DmnRGIpII/9yaDDhrbRCGn8bL0LGbJwrmkG9H+JJB2ePw/VRc5U6QGvtDtYHuxRyT
- ElmQ9Jia2/PNRne1gA9Q/hyh3GfHo0XgjXgi16234DZ4YosFhG3LP31JPZuyl9DStO/F
- loBQ==
-X-Gm-Message-State: AOJu0YyqG0yCOEU0bpOQwHdYhwvosDdFtGFTyfTyrTpsqz6ID3qWjzfB
- rknZuQSiHm6GS2laN6fMHRDgzQ==
-X-Google-Smtp-Source: AGHT+IH3s8xvMLbnhqPDlOGGLf0ATYLpvAzR/3GjtXkuicLLMqPX53/SbYf+W+h3olCpqyZZ2/WAtQ==
-X-Received: by 2002:a4a:3457:0:b0:56c:7428:4a35 with SMTP id
- n23-20020a4a3457000000b0056c74284a35mr16001727oof.7.1693311717441; 
- Tue, 29 Aug 2023 05:21:57 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1693311711; x=1693916511;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=5+hKm/hGHe1RwTMPtHep9ct1mBSIWHV32WOu9vzrmvM=;
+ b=h6bCvgDHAOfJPxpwxGh5GsEVWjh3MF1abpLPwkMgJob1JCw+5nlqujkBj6GUxXRGiG
+ 0Pv6h7kM8NOwA6gUlGZCPM3iH/Vx2CNSVhIdmlmcxW01E5fh5z32p4/sZ9njtLgUWwQe
+ SMGqvneVyYzu973VUiQ5G4XdYdTf7gP2oPLO1ND8E3O5+05h159gy8E6JKjsLrMTSWf9
+ s8NJwlo90ppRKQM3jSCy2Rj7fjEpHmkjqIkXLtF/K80kFjuTmhnZd1RRHb0rUsdkabVC
+ vO2mu8YJeON9Yi7dGYe8cz6U2/AG1N332rm2Zjra9MGHFs7mtXz7TJsWxlHD96rSdOD/
+ ACgw==
+X-Gm-Message-State: AOJu0YyKF4RrmrilI9EbsNIbQr5Lb9zesHtJgw9CLU6sVglO4y/V/w9i
+ c9o3j+/ueX1RpI8SVYnqRujG4w==
+X-Google-Smtp-Source: AGHT+IFqtiiKklT2oPkTRTg5Djviv/b7uOX6h+MiMmukfQvgv7TQlYaQnKoW7JxXNQNK5n5aKZHA/A==
+X-Received: by 2002:a05:6870:64a0:b0:1b7:38d1:6f98 with SMTP id
+ cz32-20020a05687064a000b001b738d16f98mr15946477oab.38.1693311711636; 
+ Tue, 29 Aug 2023 05:21:51 -0700 (PDT)
 Received: from grind.dc1.ventanamicro.com ([177.94.15.194])
  by smtp.gmail.com with ESMTPSA id
- x7-20020a4a97c7000000b00573320e1241sm5079327ooi.14.2023.08.29.05.21.54
+ x7-20020a4a97c7000000b00573320e1241sm5079327ooi.14.2023.08.29.05.21.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Aug 2023 05:21:57 -0700 (PDT)
+ Tue, 29 Aug 2023 05:21:51 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 2/2] hw/riscv/virt.c: fix non-KVM --enable-debug build
-Date: Tue, 29 Aug 2023 09:21:44 -0300
-Message-ID: <20230829122144.464489-3-dbarboza@ventanamicro.com>
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Yong-Xuan Wang <yongxuan.wang@sifive.com>
+Subject: [PATCH 0/2] riscv: fix --enable-debug in riscv-to-apply.next
+Date: Tue, 29 Aug 2023 09:21:42 -0300
+Message-ID: <20230829122144.464489-1-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230829122144.464489-1-dbarboza@ventanamicro.com>
-References: <20230829122144.464489-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c32;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::334;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x334.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -95,50 +93,24 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-A build with --enable-debug and without KVM will fail as follows:
+Hi,
 
-/usr/bin/ld: libqemu-riscv64-softmmu.fa.p/hw_riscv_virt.c.o: in function `virt_machine_init':
-./qemu/build/../hw/riscv/virt.c:1465: undefined reference to `kvm_riscv_aia_create'
+There is a couple of build problems that sneaked in riscv-to-apply.next
+in the KVM AIA patches. Here's a potential solution for them.
 
-This happens because the code block with "if virt_use_kvm_aia(s)" isn't
-being ignored by the debug build, resulting in an undefined reference to
-a KVM only function.
+Alistair, feel free to squash the fixes in the original commits since
+they're not yet on master.
 
-Add a stub for kvm_riscv_aia_create() in kvm_riscv.h when CONFIG_KVM is
-false. Adding it as an inline instead of using kvm-stubs.c will make it
-easier in the future to remember to add stubs for kvm functions that are
-used in multiple accelerator code.
+Cc: Yong-Xuan Wang <yongxuan.wang@sifive.com>
 
-Fixes: dbdb99948e ("target/riscv: select KVM AIA in riscv virt machine")
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
+Daniel Henrique Barboza (2):
+  hw/intc/riscv_aplic.c fix non-KVM --enable-debug build
+  hw/riscv/virt.c: fix non-KVM --enable-debug build
+
+ hw/intc/riscv_aplic.c    |  2 ++
  target/riscv/kvm_riscv.h | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ 2 files changed, 12 insertions(+)
 
-diff --git a/target/riscv/kvm_riscv.h b/target/riscv/kvm_riscv.h
-index 7d4b7c60e2..01be45cc69 100644
---- a/target/riscv/kvm_riscv.h
-+++ b/target/riscv/kvm_riscv.h
-@@ -22,9 +22,19 @@
- void kvm_riscv_init_user_properties(Object *cpu_obj);
- void kvm_riscv_reset_vcpu(RISCVCPU *cpu);
- void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level);
-+
-+#ifdef CONFIG_KVM
- void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
-                           uint64_t aia_irq_num, uint64_t aia_msi_num,
-                           uint64_t aplic_base, uint64_t imsic_base,
-                           uint64_t guest_num);
-+#else
-+static inline void kvm_riscv_aia_create(MachineState *machine,
-+                                uint64_t group_shift, uint64_t aia_irq_num,
-+                                uint64_t aia_msi_num, uint64_t aplic_base,
-+                                uint64_t imsic_base, uint64_t guest_num) {
-+    g_assert_not_reached();
-+}
-+#endif
- 
- #endif
 -- 
 2.41.0
 
