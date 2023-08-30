@@ -4,91 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83FCDC6FA8F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Aug 2023 01:27:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C300C83F15
+	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Aug 2023 07:35:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qb9z8-0006EI-9k; Tue, 29 Aug 2023 21:27:06 -0400
+	id 1qbFim-0005av-2M; Wed, 30 Aug 2023 03:34:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1qb9z7-0006DZ-46
- for qemu-riscv@nongnu.org; Tue, 29 Aug 2023 21:27:05 -0400
-Received: from mail-ot1-x332.google.com ([2607:f8b0:4864:20::332])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1qb9z4-0007n8-JT
- for qemu-riscv@nongnu.org; Tue, 29 Aug 2023 21:27:04 -0400
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-6b9a2416b1cso4019836a34.2
- for <qemu-riscv@nongnu.org>; Tue, 29 Aug 2023 18:27:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693358821; x=1693963621; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=1nE+CfxcJdZd/pGWeao0xf2/fTExkGSoAXPdRHsR1Vg=;
- b=jjiJSiy/RCg+0XMqLZII1fPdV1o3E072sf/8o1lW8miQeb1lnLOUzlcmJzdtS39W+M
- FrADaYItpGdLzZFZigZO5Wf7HWFR3VS4qrgQKZoNffZZXI0Tr4WSTkhI/mIyeKAGUokC
- AEIIHWCjjfP3T+x01yk8Ds0yqKubOQ5mpQfjP9F8W9m/itcokS9nCXkGrzav4SWciPPA
- p5Tn/3yQKYOF5KUtgbKJUDxmn3Fnfmxhvbr1bBQdtBbHitTVdeM50gzMMcSYw/sB10zc
- 1FNLzPuYoAk5WcwluAkIRO4G494XTC3Gv6ozUlRus44NVyYCVMDbzF9uyS/nSCVcQpk+
- KEOw==
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qbFij-0005Zo-1z
+ for qemu-riscv@nongnu.org; Wed, 30 Aug 2023 03:34:33 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qbFie-0001Ug-JK
+ for qemu-riscv@nongnu.org; Wed, 30 Aug 2023 03:34:31 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1693380866;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=7werSWx5Ui39smoCuUYu82liYHbeojLYi98Cs0wtRFA=;
+ b=D2m/WvmeV+IBTbpEgfsx1PRp6PXG1y+tVBoJwAPFfJCmifLR5N7IPJ2q7ALKCCAKp/Kavh
+ k+KMYBIaT6+RilytaLYBFfbSd2Pd/v4Y6MBT8C7dvKdMN6KsjHA7Afj57ZAYIb8jHnFAJN
+ gsCzMsTIaB7n1R71IqgAe5xiN6ssWBk=
+Received: from mail-ua1-f71.google.com (mail-ua1-f71.google.com
+ [209.85.222.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-455-UwUOyeoAOuakatD-8rIiDw-1; Wed, 30 Aug 2023 03:34:25 -0400
+X-MC-Unique: UwUOyeoAOuakatD-8rIiDw-1
+Received: by mail-ua1-f71.google.com with SMTP id
+ a1e0cc1a2514c-79dd1ba7997so2154758241.3
+ for <qemu-riscv@nongnu.org>; Wed, 30 Aug 2023 00:34:25 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693358821; x=1693963621;
+ d=1e100.net; s=20221208; t=1693380865; x=1693985665;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=1nE+CfxcJdZd/pGWeao0xf2/fTExkGSoAXPdRHsR1Vg=;
- b=gsa9XElS5fespr93S2VZnp5IdPn/MU/NlCvG1AbmkWWqb8a2qmDLny1JwhpGx4qeoL
- HF2T9UOyljfamNbludsUjz1mVs9AFg9iXuBiZVbyiQ6Nk2Ns8JpSQ2WYlK7R0WdPvmYn
- 4CYh5n7JbBPCV0gzVDUYxZscor6AnHftWO1ExHAC0ckmqpY1/x5d0vyOc4UkHIoylRwe
- Wl9SuYwQHAF3ma26ZFMfj2n7I6HIFdsegqyIVOiaJOgYol85T+deMRF9ItXNkNUSmI4o
- dRfMMosOe7w9bJKAyvfQHxih0egBo5twn08C2GRVw9FhaqhWDFK6e6sIHUYaaGweZRZY
- KOfg==
-X-Gm-Message-State: AOJu0YximIqtekpQM995TDiFLv4MWRjiCUDoEwtyWyiakVY07PpkIWOM
- /iWefipEC1bUh2o16G/lir4AJw==
-X-Google-Smtp-Source: AGHT+IHBqCWusJiXAKMM1o0En9jWkfiItaTi9QGRbhlVm/XDuVpWp65YrK+3aW2RChYo4yxRSAVVEA==
-X-Received: by 2002:a05:6870:171a:b0:1c3:c43d:838 with SMTP id
- h26-20020a056870171a00b001c3c43d0838mr941671oae.39.1693358820977; 
- Tue, 29 Aug 2023 18:27:00 -0700 (PDT)
-Received: from [192.168.0.4] ([71.212.131.115])
+ bh=7werSWx5Ui39smoCuUYu82liYHbeojLYi98Cs0wtRFA=;
+ b=alKKtoRXqHKA6e3peDleWK91QlCf7qPYLacrLJ+9OEtEXGixTzcIBZNEIPHa28P10v
+ tsW/m6CQMgQbE4plnhQVuMzRJGKXC7S5pIpb6VID/hKQvTAVx7ZlZCgE99I//jhy9NPq
+ DvNrdraon7ueA0XaSMOygL7Vgms02GLZO23qkKelsVsDc39hlIpcDZDNp7QPt6x0bDCf
+ CAGrItzPsiLCDMh9ZSlrzSsQmUjQYFHdq1nDHyKj3XgwMzWAWkHgDdHsaQjqTgLmm8Y1
+ tvpu5INu+Ehip4s10RLSDHYQyORWMtLFP8qwfpcs2GpHE0eb9hk9yOzKJlxVFO5k70zu
+ WVyQ==
+X-Gm-Message-State: AOJu0YzDgmMLiuRza9bstFFkgPcN7IfsEWRc2clOBH95pLcwwMd3g8wh
+ YWAxauNmSVWAo1k+emtzyYrbhCgIN29sAN59R88bx7eqIcpvUrOBnmfgp9wtnAgOhvWb9H1u1JG
+ 8V0o8JYd3Fk6jQfI=
+X-Received: by 2002:a67:e3bb:0:b0:44d:40b1:926d with SMTP id
+ j27-20020a67e3bb000000b0044d40b1926dmr1535119vsm.32.1693380864842; 
+ Wed, 30 Aug 2023 00:34:24 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGppOSSr3Bml+NVfzokQKmfOYmt1D/03DlnIEeKd1Fx/JL1zvg9+qmvuu2gniv+GCF5nLmO9Q==
+X-Received: by 2002:a67:e3bb:0:b0:44d:40b1:926d with SMTP id
+ j27-20020a67e3bb000000b0044d40b1926dmr1535091vsm.32.1693380864324; 
+ Wed, 30 Aug 2023 00:34:24 -0700 (PDT)
+Received: from ?IPV6:2001:8003:e5b0:9f00:dbbc:1945:6e65:ec5?
+ ([2001:8003:e5b0:9f00:dbbc:1945:6e65:ec5])
  by smtp.gmail.com with ESMTPSA id
- c13-20020a17090abf0d00b0026b4d215627sm195466pjs.21.2023.08.29.18.26.59
+ u11-20020a17090a6a8b00b0026b420ae167sm695187pjj.17.2023.08.30.00.34.13
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Aug 2023 18:26:59 -0700 (PDT)
-Message-ID: <d2f1ad02-eb03-138f-9d08-db676deeed05@linaro.org>
-Date: Tue, 29 Aug 2023 18:26:57 -0700
+ Wed, 30 Aug 2023 00:34:23 -0700 (PDT)
+Message-ID: <a5a61f17-6792-fd53-e48b-aa9ab8fae803@redhat.com>
+Date: Wed, 30 Aug 2023 17:34:12 +1000
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH 2/2] hw/riscv/virt.c: fix non-KVM --enable-debug build
+ Thunderbird/102.12.0
+Subject: Re: [PATCH v2 3/8] machine: Print supported CPU models instead of
+ typenames
+To: Igor Mammedov <imammedo@redhat.com>
+Cc: Richard Henderson <richard.henderson@linaro.org>, qemu-arm@nongnu.org,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org,
+ b.galvani@gmail.com, strahinja.p.jankovic@gmail.com, sundeep.lkml@gmail.com,
+ kfting@nuvoton.com, wuhaotsh@google.com, nieklinnenbank@gmail.com,
+ rad@semihalf.com, quic_llindhol@quicinc.com, marcin.juszkiewicz@linaro.org,
+ eduardo@habkost.net, marcel.apfelbaum@gmail.com, philmd@linaro.org,
+ wangyanan55@huawei.com, laurent@vivier.eu, vijai@behindbytes.com,
+ palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, cohuck@redhat.com, pbonzini@redhat.com,
+ shan.gavin@gmail.com, qemu-ppc@nongnu.org
+References: <20230726003205.1599788-1-gshan@redhat.com>
+ <20230726003205.1599788-4-gshan@redhat.com>
+ <24e54bac-9149-20da-e4cf-5829a6dcb174@linaro.org>
+ <0454c1ad-314c-3df6-d6e9-1a05cb4c4050@redhat.com>
+ <20230727110010.648b61a6@imammedo.users.ipa.redhat.com>
+ <5f26299e-f1e0-a2ab-db83-87011fe524d5@redhat.com>
+ <20230828164637.52c2b5b0@imammedo.users.ipa.redhat.com>
+ <6e637717-b739-3ee8-ac12-a339ea5fb166@redhat.com>
+ <20230829110308.5282936f@imammedo.users.ipa.redhat.com>
+From: Gavin Shan <gshan@redhat.com>
+In-Reply-To: <20230829110308.5282936f@imammedo.users.ipa.redhat.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
-References: <20230829122144.464489-1-dbarboza@ventanamicro.com>
- <20230829122144.464489-3-dbarboza@ventanamicro.com>
- <c0089044-54d2-43ab-6b30-854a4fa3aa4f@linaro.org>
- <72de2f6a-5ede-40f4-5edc-a22d89587e4e@ventanamicro.com>
- <63d099a2-ac5e-1ce9-3663-10e317d7dc5a@linaro.org>
- <40938464-2008-aff3-ffb7-37fbb16615d3@ventanamicro.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <40938464-2008-aff3-ffb7-37fbb16615d3@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::332;
- envelope-from=richard.henderson@linaro.org; helo=mail-ot1-x332.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=gshan@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -32
 X-Spam_score: -3.3
 X-Spam_bar: ---
-X-Spam_report: (-3.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.242,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-3.3 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ NICE_REPLY_A=-1.242, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001,
+ RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,79 +124,283 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 8/29/23 16:51, Daniel Henrique Barboza wrote:
->> The compiler certainly does eliminate 0 && foo(), even at -O0.
+Hi Igor,
+
+On 8/29/23 19:03, Igor Mammedov wrote:
+> On Tue, 29 Aug 2023 16:28:45 +1000
+> Gavin Shan <gshan@redhat.com> wrote:
+>> On 8/29/23 00:46, Igor Mammedov wrote:
+>>> On Mon, 31 Jul 2023 15:07:30 +1000
+>>> Gavin Shan <gshan@redhat.com> wrote:
+>>>> On 7/27/23 19:00, Igor Mammedov wrote:
+>>>>> On Thu, 27 Jul 2023 15:16:18 +1000
+>>>>> Gavin Shan <gshan@redhat.com> wrote:
+>>>>>       
+>>>>>> On 7/27/23 09:08, Richard Henderson wrote:
+>>>>>>> On 7/25/23 17:32, Gavin Shan wrote:
+>>>>>>>> -static const char *q800_machine_valid_cpu_types[] = {
+>>>>>>>> +static const char * const q800_machine_valid_cpu_types[] = {
+>>>>>>>>          M68K_CPU_TYPE_NAME("m68040"),
+>>>>>>>>          NULL
+>>>>>>>>      };
+>>>>>>>> +static const char * const q800_machine_valid_cpu_models[] = {
+>>>>>>>> +    "m68040",
+>>>>>>>> +    NULL
+>>>>>>>> +};
+>>>>>>>
+>>>>>>> I really don't like this replication.
+>>>>>>>          
+>>>>>>
+>>>>>> Right, it's going to be lots of replications, but gives much flexibility.
+>>>>>> There are 21 targets and we don't have fixed pattern for the mapping between
+>>>>>> CPU model name and CPU typename. I'm summarizing the used patterns like below.
+>>>>>>
+>>>>>>       1 All CPU model names are mappinged to fixed CPU typename;
+>>>>>
+>>>>>            plainly spelled it would be: cpu_model name ignored and
+>>>>>            a cpu type is returned anyways.
+>>>>>
+>>>>> I'd make this hard error right away, as "junk in => error out"
+>>>>> it's clearly user error. I think we don't even have to follow
+>>>>> deprecation process for that.
+>>>>>       
+>>>>
+>>>> Right, It's not expected behavior to map ambiguous CPU model names to
+>>>> the fixed CPU typename.
+>>>
+>>> to be nice we can deprecate those and then later remove.
+>>> (while deprecating make those targets accept typenames)
+>>>    
 >>
->> There must be something else going on.
->> Pointer to your tree?
+>> Lets put it aside for now and revisit it later, so that we can focus on
+>> the conversion from the CPU type name to the CPU model name for now.
+>>
+>>>>   
+>>>>>>       2 CPU model name is same to CPU typename;
+>>>>>>       3 CPU model name is alias to CPU typename;
+>>>>>>       4 CPU model name is prefix of CPU typename;
+>>>>>
+>>>>> and some more:
+>>>>>        5. cpu model names aren't names at all sometimes, and some other
+>>>>>           CPU property is used. (ppc)
+>>>>> This one I'd prefer to get rid of and ppc handling more consistent
+>>>>> with other targets, which would need PPC folks to persuaded to drop
+>>>>> PVR lookup.
+>>>>>       
+>>>>
+>>>> I put this into class 3, meaning the PVRs are regarded as aliases to CPU
+>>>> typenames.
+>>>
+>>> with PPC using 'true' aliases, -cpu input is lost after it's translated into typename.
+>>> (same for alpha)
+>>>
+>>> it also adds an extra fun with 'max' cpu model but that boils down to above statement.
+>>> (same for
+>>>     * sh4
+>>>     * cris(in user mode only, but you are making sysemu extension, so it doesn't count)
+>>> )
+>>> For this class of aliases reverse translation won't yield the same
+>>> result as used -cpu. The only option you have is to store -cpu cpu_model
+>>> somewhere (use qemu_opts??, and then fetch it later to print in error message)
+>>>
+>>> x86 has 'aliases' as well, but in reality it creates distinct cpu types
+>>> for each 'alias', so it's possible to do reverse translation.
+>>>    
+>>
+>> It's true that '-cpu input' gets lost in these cases. However, the CPU type
+>> name instead of the CPU model name is printed in the error message when the
+>> CPU type is validated in hw/core/machine.c::machine_run_board_init(). It looks
+>> good to me to print the CPU type name instead of the model name there.
 > 
-> It's this tree:
+> It's the same confusing whether it's type or cpumodel it it doesn't match
+> user provided value.
 > 
-> https://github.com/alistair23/qemu/tree/riscv-to-apply.next
+
+I tend to agree that it's misleading to print the CPU type name in the
+error message in hw/core/machine.c::machine_run_board_init(), where the CPU
+type is validated. qemu_opts may be too heavy for this. It eventually turns
+to a machine's property if @machine_opts_dict is the best place to store
+'-cpu input'. Besides, it doesn't fit for another case very well, where
+current_machine->cpu_type = machine_class->default_cpu_type if '-cpu input'
+isn't provided by user.
+
+For simplicity, how about to add MachineState::cpu_model? It's initialized to
+cpu_model_from_type(machine_class->default_cpu_type) in qemu_init(), or
+g_strdump(model_pieces[0) in parse_cpu_option().
 
 
-Ok, so while -O0 will eliminate 0 && foo(), it doesn't eliminate with bar() && foo(), 
-where bar must be inlined (multiple times in this case) to find the 0.
+>> Another error message is printed when the CPU model specified in '-cpu input'
+>> isn't valid. The CPU model has been printed and it looks good either.
+>>
+>>     # qemu-system-aarch64 -M virt -cpu aaa
+>>     qemu-system-aarch64: unable to find CPU model 'aaa'
+>>
+>> Are there other cases I missed where we need to print the CPU model name, which
+>> is specified by user through '-cpu input'?
+>>
+>>>>>>
+>>>>>>       Target         Categories    suffix-of-CPU-typename
+>>>>>>       -------------------------------------------------------
+>>>>>>       alpha          -234          -alpha-cpu
+>>>>>>       arm            ---4          -arm-cpu
+>>>>>>       avr            -2--
+>>>>>>       cris           --34          -cris-cpu
+>>>>>>       hexagon        ---4          -hexagon-cpu
+>>>>>>       hppa           1---
+>>>>>>       i386           ---4          -i386-cpu
+>>>>>>       loongarch      -2-4          -loongarch-cpu
+>>>>>>       m68k           ---4          -m68k-cpu
+>>>>>>       microblaze     1---
+>>>>>>       mips           ---4          -mips64-cpu  -mips-cpu
+>>>>>>       nios2          1---
+>>>>>>       openrisc       ---4          -or1k-cpu
+>>>>>>       ppc            --34          -powerpc64-cpu  -powerpc-cpu
+>>>>>>       riscv          ---4          -riscv-cpu
+>>>>>>       rx             -2-4          -rx-cpu
+>>>>>>       s390x          ---4          -s390x-cpu
+>>>>>>       sh4            --34          -superh-cpu
+>>>>>>       sparc          -2--
+>>>
+>>> it's case 4
+>>>    
+>>
+>> Yes.
+>>
+>>>>>>       tricore        ---4          -tricore-cpu
+>>>>>>       xtensa         ---4          -xtensa-cpu
+>>>>>>
+>>>>>> There are several options as below. Please let me know which one or something
+>>>>>> else is the best.
+>>>>>>
+>>>>>> (a) Keep what we have and use mc->valid_{cpu_types, cpu_models}[] to track
+>>>>>> the valid CPU typenames and CPU model names.
+>>>>>>
+>>>>>> (b) Introduce CPUClass::model_name_by_typename(). Every target has their own
+>>>>>> implementation to convert CPU typename to CPU model name. The CPU model name
+>>>>>> is parsed from mc->valid_cpu_types[i].
+>>>>>>
+>>>>>>         char *CPUClass::model_by_typename(const char *typename);
+>>>>>>
+>>>>>> (c) As we discussed before, use mc->valid_cpu_type_suffix and mc->valid_cpu_models
+>>>>>> because the CPU type check is currently needed by target arm/m68k/riscv where we
+>>>>>> do have fixed pattern to convert CPU model names to CPU typenames. The CPU typename
+>>>>>> is comprised of CPU model name and suffix. However, it won't be working when the CPU
+>>>>>> type check is required by other target where we have patterns other than this.
+>>>>>
+>>>>> none of above is really good, that's why I was objecting to introducing
+>>>>> reverse type->name mapping. That ends up with increased amount junk,
+>>>>> and it's not because your patches are bad, but because you are trying
+>>>>> to deal with cpu model names (which is a historically evolved mess).
+>>>>> The best from engineering POV would be replacing CPU models with
+>>>>> type names.
+>>>>>
+>>>>> Even though it's a bit radical, I very much prefer replacing
+>>>>> cpu_model names with '-cpu type'usage directly. Making it
+>>>>> consistent with -device/other interfaces and coincidentally that
+>>>>> obsoletes need in reverse name mapping.
+>>>>>
+>>>>> It's painful for end users who will need to change configs/scripts,
+>>>>> but it's one time job. Additionally from QEMU pov, codebase
+>>>>> will be less messy => more maintainable which benefits not only
+>>>>> developers but end-users in the end.
+>>>>>       
+>>>>
+>>>> I have to clarify the type->model mapping has been existing since the
+>>>> model->type mapping was introduced with the help of CPU_RESOLVING_TYPE.
+>>>> I mean the logic has been existing since the existence of CPU_RESOLVING_TYPE,
+>>>> even the code wasn't there.
+>>>>
+>>>> I'm not sure about the idea to switch to '-cpu <cpu-type-name>' since
+>>>> it was rejected by Peter Maydell before. Hope Peter can double confirm
+>>>> for this. For me, the shorter name is beneficial. For example, users
+>>>> needn't to have '-cpu host-arm-cpu' for '-cpu host'.
+>>>>
+>>>>   
+>>>>> [rant:
+>>>>> It's the same story repeating over and over, when it comes to
+>>>>> changing QEMU CLI, which hits resistance wall. But with QEMU
+>>>>> deprecation process we've changed CLI behavior before,
+>>>>> despite of that world didn't cease to exist and users
+>>>>> have adapted to new QEMU and arguably QEMU became a tiny
+>>>>> bit more maintainable since we don't have to deal some
+>>>>> legacy behavior.
+>>>>> ]
+>>>>>       
+>>>>
+>>>> I need more context about 'deprecation process' here. My understanding
+>>>> is both CPU typename and model name will be accepted for a fixed period
+>>>> of time. However, a warning message will be given to indicate that the
+>>>> model name will be obsoleted soon. Eventually, we switch to CPU typename
+>>>> completely. Please correct me if there are anything wrong.
+>>>
+>>> yep, that's the gist of deprecation in this case.
+>>>    
+>>
+>> Ok. Thanks for your confirm.
+>>     
+>>>>> Another idea back in the days was (as a compromise),
+>>>>>     1. keep using keep valid_cpu_types
+>>>>>     2. instead of introducing yet another way to do reverse mapping,
+>>>>>        clean/generalize/make it work everywhere list_cpus (which
+>>>>>        already does that mapping) and then use that to do your thing.
+>>>>>        It will have drawbacks you've listed above, but hopefully
+>>>>>        that will clean up and reuse existing list_cpus.
+>>>>>        (only this time, I'd build it around  query-cpu-model-expansion,
+>>>>>         which output is used by generic list_cpus)
+>>>>>        [and here I'm asking to rewrite directly unrelated QEMU part yet again]
+>>>>>       
+>>>>
+>>>> I'm afraid that list_cpus() is hard to be reused. All available CPU model names
+>>>> are listed by list_cpus(). mc->valid_cpu_types[] are just part of them and variable
+>>>> on basis of boards. Generally speaking, we need a function to do reverse things
+>>>> as to CPUClass::class_by_name(). So I would suggest to introduce CPUClass::model_from_type(),
+>>>> as below. Could you please suggest if it sounds reasonable to you?
+>>>>
+>>>> - CPUClass::class_by_name() is modified to
+>>>>      char *CPUClass::model_to_type(const char *model)
+>>>>
+>>>> - char *CPUClass::type_to_model(const char *type)
+>>>>
+>>>> - CPUClass::type_to_model() is used in cpu_list() for every target when CPU
+>>>>      model name, fetched from CPU type name, is printed in xxx_cpu_list_entry()
+>>>>
+>>>> - CPUClass::type_to_model() is reused in hw/core/machine.c to get the CPU
+>>>>      model name from CPU type names in mc->valid_cpu_types[].
+>>>
+>>> instead of per target hooks (which are atm mostly open-coded in several places)
+>>> how about adding generic handler for cases 2,4:
+>>>     cpu_type_to_model(typename)
+>>>        cpu_suffix = re'-*-cpu'
+>>>        if (class_exists(typename - cpu_suffix))
+>>>            return typename - cpu_suffix
+>>>        else if (class_exists(typename))
+>>>            return typename
+>>>        explode
+>>>
+>>> that should work for translating valid_cpus typenames to cpumodel names
+>>> and once that in place cleanup all open-coded translations with it tree-wide
+>>>
+>>> you can find those easily by:
+>>> git grep _CPU_TYPE_SUFFIX
+>>> git grep query_cpu_definitions
+>>>    
+>>
+>> Thanks for the advice. I think it's enough for now since the CPU type
+>> invalidation is currently done for arm/mips/riscv for now. On these
+>> targets, the CPU type name is always the combination of the CPU model
+>> name and suffix. I will add helper qemu/cpu.c::cpu_model_by_name()
+> 
+> cpu_model_from_type() would be describe what function does better.
+> 
 
-Moreover in the case of
+Agreed, thanks.
 
-> /usr/bin/ld: libqemu-riscv64-softmmu.fa.p/hw_intc_riscv_aplic.c.o: in function 
-> `riscv_kvm_aplic_request':
-> /home/danielhb/work/qemu/build/../hw/intc/riscv_aplic.c:486: undefined reference to 
-> `kvm_set_irq'
+>> as you suggested. Note that, the suffix can be gained by ("-" CPU_RESOLVING_TYPE)
+>>
+>> Yes, the newly added helper cpu_model_by_name() needs to be applied
+>> to targets where query_cpu_definitions and cpu_list are defined.
 
-this one, where foo (aka riscv_kvm_aplic_request) would have to be eliminated as well. 
-But the compiler won't eliminate entire unused functions with -O0.
-
-This seems to do the trick.  Whether it is aesthetically better than what you had with 
-your patches, I will leave to someone else.
-
-
-r~
-
-
-diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-index 592c3ce768..0e22dcaf8a 100644
---- a/hw/intc/riscv_aplic.c
-+++ b/hw/intc/riscv_aplic.c
-@@ -481,10 +481,14 @@ static uint32_t riscv_aplic_idc_claimi(RISCVAPLICState *aplic, 
-uint32_t idc)
-      return topi;
-  }
-
-+#ifdef CONFIG_KVM
-  static void riscv_kvm_aplic_request(void *opaque, int irq, int level)
-  {
-      kvm_set_irq(kvm_state, irq, !!level);
-  }
-+#else
-+#define riscv_kvm_aplic_request  ({ qemu_build_not_reached(); NULL; })
-+#endif
-
-  static void riscv_aplic_request(void *opaque, int irq, int level)
-  {
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 388e52a294..b787ae38c2 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -782,7 +782,7 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry 
-*memmap,
-      }
-
-      /* KVM AIA only has one APLIC instance */
--    if (virt_use_kvm_aia(s)) {
-+    if (kvm_enabled() && virt_use_kvm_aia(s)) {
-          create_fdt_socket_aplic(s, memmap, 0,
-                                  msi_m_phandle, msi_s_phandle, phandle,
-                                  &intc_phandles[0], xplic_phandles,
-@@ -1461,7 +1461,7 @@ static void virt_machine_init(MachineState *machine)
-          }
-      }
-
--    if (virt_use_kvm_aia(s)) {
-+    if (kvm_enabled() && virt_use_kvm_aia(s)) {
-          kvm_riscv_aia_create(machine, IMSIC_MMIO_GROUP_MIN_SHIFT,
-                               VIRT_IRQCHIP_NUM_SOURCES, VIRT_IRQCHIP_NUM_MSIS,
-                               memmap[VIRT_APLIC_S].base,
+Thanks,
+Gavin
 
 
