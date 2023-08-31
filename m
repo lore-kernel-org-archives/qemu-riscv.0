@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1801C83F32
-	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 13:11:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E179BC83F12
+	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 13:12:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qbhL8-0007hn-Dw; Thu, 31 Aug 2023 09:04:02 -0400
+	id 1qbhLT-0008BK-72; Thu, 31 Aug 2023 09:04:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhHD-0005AS-GV
- for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 09:00:01 -0400
-Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhI8-0000aW-2O
+ for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 09:00:56 -0400
+Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhH5-0006Ca-Ad
- for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:59:58 -0400
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3110ab7110aso620300f8f.3
- for <qemu-riscv@nongnu.org>; Thu, 31 Aug 2023 05:59:50 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhI3-0006sO-51
+ for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 09:00:55 -0400
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4018af103bcso4774135e9.1
+ for <qemu-riscv@nongnu.org>; Thu, 31 Aug 2023 06:00:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693486789; x=1694091589; darn=nongnu.org;
+ d=linaro.org; s=google; t=1693486849; x=1694091649; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kvarTMVyPJNAN8F64FPOFchFGECSfRITva9tLBVtfvs=;
- b=tCiZhZgxWgVafbd+FaSzuyf1rt70TG/lynt8nDP3x7UnEnDZVrw+OC0e1/C5vmTv0o
- bubLTtjaUmUIBCNstzaVdYZNDjWsQAy3OzStFWsXNPM7GiC0DmeJXTwwCoi7+8Z/I6EE
- C14f+4JblobPW69agfSbg3Hp24a77NT0nTVXtYWlZK9xkQW0EHHr0A8NKgCMsVYECWju
- yR12QRYHFbH/7sjadn17uN0ynMhuDuXTBqN0fI/dfMx2ejyNj1900y0CtjyPdjC+6VNa
- u1pjHShQJRP6mBiB3aLJRJhIavNx3IwEoomQCfn68N90f8kMlCvBqzK2fgWswPejmQxK
- ZDqA==
+ bh=3i3x9Dz9RPQMfZg42SaVktArQRa8La0Ylbd8e6a9o0U=;
+ b=zEH0iJL+V+rjDrfQxhE5J2nzbDpkMrjFG3D0pu7MwPtKl6ZYCFrmVBc64exOSzoluB
+ yfMsgWGOpMLdkQEkrrA9Oce8Ohn9eWbOt+Dhpn1DrYVdAuuAZ0h22ZgXHtTWsKDhwCHC
+ OLZ9EK520G953eDL0NPCYG0JApVmtXqA7bElZj6GE/0kZIX8y/il0qr9t3pHmFiIVfuO
+ jKFh+s/+pUvBVK9LpTamlM2lJeIa/GQAD3F9zHuiQd35hRl4Maml+ioZ0WotHZG4pkrQ
+ j2DiEpjgiOM1kC/HBo9VuwFTFPq6yxvlsi7o6hrXx93z3m1ab3fmNqt1s76P/5LcGumR
+ hC8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693486789; x=1694091589;
+ d=1e100.net; s=20221208; t=1693486849; x=1694091649;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kvarTMVyPJNAN8F64FPOFchFGECSfRITva9tLBVtfvs=;
- b=Xh1m35Yq3POSjSlVoLfAVsnWYZ/JRiFHB9sRhdedJX3ogm4cUUq/IkDH6Ia/5KcK7+
- qzqyBuURrDxgeLl+UOZajvIMuEKg36pKgv+GEz+k6P4+v0Cpy3WxxaH0eJGf+WgvYgcd
- /bXeRP4pH/CAqXmTqkuPU1fw1MYFbHE3KuJ5YRl16iWqg+CtWWAabBuP0/kQRIBdyuJl
- pvnce4sZ+tN77JQVOI61SMqG+c+jwczMCfwvjmsYYn/+EQcovVjV+jOFoRnwDZ8qA+5W
- Jz9tDCe87z41WZ7pYHQkLwNCsLFyD87zAFOLqVB55rlfAG9IKO1fIk2Dr8wIlXEUTSHX
- r9IA==
-X-Gm-Message-State: AOJu0YwO+hAfMceaINOWCHNveBXhZpAEkuaVocXtrAZrkUf62Dhnu5xG
- a/mHl74Ej7GtjBgYttL5m8vCMg==
-X-Google-Smtp-Source: AGHT+IGNzAVZUwCrNq8F3piYC42JMowMIVEAnQJ9QCzN7DCDXfmtqAzZI1gGOE19bddFlEhJVQEsAg==
-X-Received: by 2002:a05:6000:110a:b0:31a:e87e:103 with SMTP id
- z10-20020a056000110a00b0031ae87e0103mr3499071wrw.48.1693486789792; 
- Thu, 31 Aug 2023 05:59:49 -0700 (PDT)
+ bh=3i3x9Dz9RPQMfZg42SaVktArQRa8La0Ylbd8e6a9o0U=;
+ b=BBTqPmMXhy07uJuzIykYC7BJjzLqT+v4SIcPvaLIvKTJNIRjpKAeHfH0hmGz+pUsxo
+ Xdlfax4d6/LW7z9jtMBTsaMPpY1iiTKqeayeUpqM6JiRQrKvf/XRxRon6fo8LxQqdbSr
+ VTC3jhqaybhixZ6HTrp/DA56B74usF/6zuX+uEvd/3/+uy43YsMq5b5nWswfO3vvWnN1
+ txjdwvFt/+xQv5LjEbevV17zGlUxCQ9fsF5UbZThuTzIlBg2//eugSal2tZyj7Z+/H09
+ jJdkuSpz0okKPxH8h8ghlzmv0Hk48DBaPrUPJPhkvQFjbrQ1lgjlnWgtedVUeQjH5yUW
+ pp/g==
+X-Gm-Message-State: AOJu0YwNTtXhmxFeJ2ojoYob1QDdKt+FM9MC6biioE1luLdbe9ef3l0D
+ 0EqRdsGi+1D1AfH+xaAwtHbAIoCc7szYr9XvVWY=
+X-Google-Smtp-Source: AGHT+IG63RqkQQLx6ClVdxVWGMzticufPFEl54JhCs9R/skP/hLCJLgkikmjQqaryDzkkLzCezMlaQ==
+X-Received: by 2002:a1c:720e:0:b0:400:5962:6aa9 with SMTP id
+ n14-20020a1c720e000000b0040059626aa9mr2085595wmc.11.1693486848995; 
+ Thu, 31 Aug 2023 06:00:48 -0700 (PDT)
 Received: from m1x-phil.lan ([176.187.199.245])
  by smtp.gmail.com with ESMTPSA id
- x16-20020adfffd0000000b0031c8a43712asm2168289wrs.69.2023.08.31.05.59.48
+ q12-20020adffecc000000b00316eb7770b8sm2197901wrs.5.2023.08.31.06.00.47
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 31 Aug 2023 05:59:49 -0700 (PDT)
+ Thu, 31 Aug 2023 06:00:48 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
  qemu-riscv@nongnu.org, qemu-block@nongnu.org,
- Michael Tokarev <mjt@tls.msk.ru>,
+ Alexander Graf <graf@amazon.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Bin Meng <bin.meng@windriver.com>
-Subject: [PULL 30/41] hw/sd: spelling fixes
-Date: Thu, 31 Aug 2023 14:56:32 +0200
-Message-ID: <20230831125646.67855-31-philmd@linaro.org>
+ Akihiko Odaki <akihiko.odaki@daynix.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ Thomas Huth <thuth@redhat.com>
+Subject: [PULL 40/41] build: Only define OS_OBJECT_USE_OBJC with gcc
+Date: Thu, 31 Aug 2023 14:56:42 +0200
+Message-ID: <20230831125646.67855-41-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230831125646.67855-1-philmd@linaro.org>
 References: <20230831125646.67855-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::434;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x434.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::333;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x333.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,42 +100,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Michael Tokarev <mjt@tls.msk.ru>
+From: Alexander Graf <graf@amazon.com>
 
-Signed-off-by: Michael Tokarev <mjt@tls.msk.ru>
-Message-ID: <20230823065335.1919380-18-mjt@tls.msk.ru>
+Recent versions of macOS use clang instead of gcc. The OS_OBJECT_USE_OBJC
+define is only necessary when building with gcc. Let's not define it when
+building with clang.
+
+With this patch, I can successfully include GCD headers in QEMU when
+building with clang.
+
+Signed-off-by: Alexander Graf <graf@amazon.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+Message-ID: <20230830161425.91946-2-graf@amazon.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/sd/sd.c    | 2 +-
- hw/sd/sdhci.c | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ meson.build | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/hw/sd/sd.c b/hw/sd/sd.c
-index 77a717d355..43c374e829 100644
---- a/hw/sd/sd.c
-+++ b/hw/sd/sd.c
-@@ -1224,7 +1224,7 @@ static sd_rsp_type_t sd_normal_command(SDState *sd, SDRequest req)
-         }
-         break;
- 
--    /* Block read commands (Classs 2) */
-+    /* Block read commands (Class 2) */
-     case 16:  /* CMD16:  SET_BLOCKLEN */
-         switch (sd->state) {
-         case sd_transfer_state:
-diff --git a/hw/sd/sdhci.c b/hw/sd/sdhci.c
-index 362c2c86aa..5564765a9b 100644
---- a/hw/sd/sdhci.c
-+++ b/hw/sd/sdhci.c
-@@ -1811,7 +1811,7 @@ usdhc_write(void *opaque, hwaddr offset, uint64_t val, unsigned size)
-          * on i.MX, but since it is not used by QEMU we do not care.
-          *
-          * We don't want to call sdhci_write(.., SDHC_TRNMOD, ...)
--         * here becuase it will result in a call to
-+         * here because it will result in a call to
-          * sdhci_send_command(s) which we don't want.
-          *
-          */
+diff --git a/meson.build b/meson.build
+index ec14079c67..296f6ef1d2 100644
+--- a/meson.build
++++ b/meson.build
+@@ -223,7 +223,9 @@ qemu_ldflags = []
+ if targetos == 'darwin'
+   # Disable attempts to use ObjectiveC features in os/object.h since they
+   # won't work when we're compiling with gcc as a C compiler.
+-  qemu_common_flags += '-DOS_OBJECT_USE_OBJC=0'
++  if compiler.get_id() == 'gcc'
++    qemu_common_flags += '-DOS_OBJECT_USE_OBJC=0'
++  endif
+ elif targetos == 'solaris'
+   # needed for CMSG_ macros in sys/socket.h
+   qemu_common_flags += '-D_XOPEN_SOURCE=600'
 -- 
 2.41.0
 
