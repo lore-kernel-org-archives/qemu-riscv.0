@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 375FDC83F32
-	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 13:16:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB621C83F01
+	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 13:16:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qbhLK-00088v-Bh; Thu, 31 Aug 2023 09:04:14 -0400
+	id 1qbhJO-0004up-BZ; Thu, 31 Aug 2023 09:02:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhHa-0005wZ-BW
- for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 09:00:25 -0400
-Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhG0-0003lx-HB
+ for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:58:46 -0400
+Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhHY-0006aG-0D
- for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 09:00:22 -0400
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-3110ab7110aso620870f8f.3
- for <qemu-riscv@nongnu.org>; Thu, 31 Aug 2023 06:00:19 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhFw-0005fS-7K
+ for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:58:44 -0400
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-401d10e3e54so7222735e9.2
+ for <qemu-riscv@nongnu.org>; Thu, 31 Aug 2023 05:58:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693486818; x=1694091618; darn=nongnu.org;
+ d=linaro.org; s=google; t=1693486718; x=1694091518; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=P4pW4nemJPjYVIP0e99/LIoCEfzLbBmEnwZT8fz868s=;
- b=hJ6sI9/4HSDKBSTO16wg0rTnjWmvUVNfisH6ktdhT9Gh/G+aUqG9kc3uGqnchdfel5
- HBoK547xNHslLv8Unw+u66bczl0KmhJi1jBxgzk1OOsvQGpfI61TyL6fbrbfflnyhybh
- 4aLnVWajOQD3CsdVKoSk62yVfqHM1zPZd3r1D5apTRilU74f+pUftO3sfXSpUxVjNWdR
- HvxZ2Jv8CwTxkgW+TEW6/EABeHm3EauG0vZTZmH/GS4POwRSbSORDM3MbOo+VriES+BD
- M38q93MwaWw3JKXv/sJujxWXxUqDmx542S0/IHxyD2tf/LAU8BcBXMSmHNjb23dbTUmT
- XN2w==
+ bh=lc+zehBV0WTpSARPKJiAuhNqXhUfl1UCHLHXG51mOVw=;
+ b=iKVejxWmiOlaX7GwaZhPI00nnP4mRWxHV5NWtMmhza8vkLICaoFbTz8k/1WUU0RWiy
+ M8JeVs4gAIyD5kk7Oyq3Kaef91CwojZ/e7qJdzBOALnplBBJKtkmiB4v8VMA/49mexq+
+ 431hsYh3t06rueoznQNw51kk7G11tLzB4NQlGc4EUhLD2zp0muQo4ehPsRmSBkyGx1X0
+ elSXlpr+O6NqfVFqVhXKV+7YZzoQNt7lu3B6rcihmzv1DoybQiicBqWLZFDudobHGZTb
+ PUnRE+swSFTxAJn7x7yLGKc9sVdLewRwCj0kDP8LihWaPg0EyBHUkOdqOpWue6Btdfoj
+ 0a1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693486818; x=1694091618;
+ d=1e100.net; s=20221208; t=1693486718; x=1694091518;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=P4pW4nemJPjYVIP0e99/LIoCEfzLbBmEnwZT8fz868s=;
- b=TJSxzmNHcMNDXySeK13GNvV1/loMJreLq334fGpeS6G6N9oufCrYNY/bKD/9JNdhLF
- oItJjz/F3i0bAhNZI266PA7avJ+CzpWm/ApiDgKqME5f940GuSCyYRBM7KWjqbFl5DUe
- g6KirVOcOye3xamw935+IqnpPHSzwvIB3rKn8hTjXNjjIXYl4mvTCy25TP5IBA/UEJOE
- qTSSN6P+oSgyz/yDPUxMbIOVp0bzth7szMDje1cSN+chMEDoMsg4lxncUPA2fRbTsO6q
- RGbir7rG8BfRpthfHUQpP87tz/YDx+yHjh6Ne61b29sSpD5rYmmU0D/Al1GeVSeJ8nUk
- ch8w==
-X-Gm-Message-State: AOJu0YwffpNhCt5VtGd4I3j4C1FZwDIkCJfj5xGH0a2dtL62QE5c4sMl
- fuucf3aboR+P/ECPWw2Xyz+5Hw==
-X-Google-Smtp-Source: AGHT+IHMRgh4uEGvXy36inVdMqMO2SdZ0cczkAdfEZ5cpCBkqfsNCWZjiOdku26vSaBEojoinu+cbg==
-X-Received: by 2002:a5d:6884:0:b0:317:5747:b955 with SMTP id
- h4-20020a5d6884000000b003175747b955mr3642041wru.17.1693486818448; 
- Thu, 31 Aug 2023 06:00:18 -0700 (PDT)
+ bh=lc+zehBV0WTpSARPKJiAuhNqXhUfl1UCHLHXG51mOVw=;
+ b=Nm+64QVjlFMTAH50qRMDvnSV2sy25qGEOwl7uApfBd1tu9NUDi4POW144n83+C4pXV
+ 6VCmo8nbNY8VS4x6XdBQwAm3EHaFWFntMEvaKplGLkdS9rk/mB/fs+J4uEbP6nQ0STyR
+ 2A2cNMs4w4KMzwAs8cH94t5hELOStuZgwVEMZqTbqmifFgvAvzJ51BRkCuSpza7Hy/QK
+ 8FhLXUCsD9eIICSbyy8qoJ4B27XT5ufITLJwEcK6mlxVhpdsRz2s2cCai1ynk0LjMrTS
+ QjtNFmJ4S+p5ZI9crZzcoW67BBz8k8keaEMguZEN10iSmj0YdFuWdIvDTKe98SJ5pg5Q
+ 1q7w==
+X-Gm-Message-State: AOJu0YynJ0P/s8dKj8H65jQCZImsKTHB9rOmxEQY0S+uO0lEbQz7t/H5
+ TGWsjNy2+BnjwF2ODwp2WaeV4Q==
+X-Google-Smtp-Source: AGHT+IFHIqXoKEQbiuBg7afqJJo9eVBwBhJvFfOYZKktiNyv+cfIcQIll4uS99rsvUFjDnNuevW58g==
+X-Received: by 2002:a1c:7215:0:b0:3fe:111a:d1d9 with SMTP id
+ n21-20020a1c7215000000b003fe111ad1d9mr4139380wmc.25.1693486718798; 
+ Thu, 31 Aug 2023 05:58:38 -0700 (PDT)
 Received: from m1x-phil.lan ([176.187.199.245])
  by smtp.gmail.com with ESMTPSA id
- c17-20020adfe711000000b0031773a8e5c4sm2141968wrm.37.2023.08.31.06.00.17
+ e2-20020a05600c218200b003fef5402d2dsm5122852wme.8.2023.08.31.05.58.37
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 31 Aug 2023 06:00:18 -0700 (PDT)
+ Thu, 31 Aug 2023 05:58:38 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
  qemu-riscv@nongnu.org, qemu-block@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Francisco Iglesias <frasse.iglesias@gmail.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [PULL 35/41] util/fifo8: Fix typo in fifo8_push_all() description
-Date: Thu, 31 Aug 2023 14:56:37 +0200
-Message-ID: <20230831125646.67855-36-philmd@linaro.org>
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>
+Subject: [PULL 19/41] chardev/char-fe: Document FEWatchFunc typedef
+Date: Thu, 31 Aug 2023 14:56:21 +0200
+Message-ID: <20230831125646.67855-20-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230831125646.67855-1-philmd@linaro.org>
 References: <20230831125646.67855-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::433;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x433.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x334.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,26 +97,37 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Francisco Iglesias <frasse.iglesias@gmail.com>
-Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20230522153144.30610-2-philmd@linaro.org>
+Acked-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Message-Id: <20230705133139.54419-4-philmd@linaro.org>
 ---
- include/qemu/fifo8.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ include/chardev/char-fe.h | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-diff --git a/include/qemu/fifo8.h b/include/qemu/fifo8.h
-index 28bf2cee57..16be02f361 100644
---- a/include/qemu/fifo8.h
-+++ b/include/qemu/fifo8.h
-@@ -46,7 +46,7 @@ void fifo8_push(Fifo8 *fifo, uint8_t data);
-  * fifo8_push_all:
-  * @fifo: FIFO to push to
-  * @data: data to push
-- * @size: number of bytes to push
-+ * @num: number of bytes to push
-  *
-  * Push a byte array to the FIFO. Behaviour is undefined if the FIFO is full.
-  * Clients are responsible for checking the space left in the FIFO using
+diff --git a/include/chardev/char-fe.h b/include/chardev/char-fe.h
+index 8c420fa36e..0109602d63 100644
+--- a/include/chardev/char-fe.h
++++ b/include/chardev/char-fe.h
+@@ -175,6 +175,20 @@ void qemu_chr_fe_printf(CharBackend *be, const char *fmt, ...)
+     G_GNUC_PRINTF(2, 3);
+ 
+ 
++/**
++ * FEWatchFunc: a #GSourceFunc called when any conditions requested by
++ *              qemu_chr_fe_add_watch() is satisfied.
++ * @do_not_use: depending on the underlying chardev, a GIOChannel or a
++ *              QIOChannel. DO NOT USE!
++ * @cond: bitwise combination of conditions watched and satisfied
++ *              before calling this callback.
++ * @data: user data passed at creation to qemu_chr_fe_add_watch(). Can
++ *              be NULL.
++ *
++ * Returns: G_SOURCE_REMOVE if the GSource should be removed from the
++ *              main loop, or G_SOURCE_CONTINUE to leave the GSource in
++ *              the main loop.
++ */
+ typedef gboolean (*FEWatchFunc)(void *do_not_use, GIOCondition condition, void *data);
+ 
+ /**
 -- 
 2.41.0
 
