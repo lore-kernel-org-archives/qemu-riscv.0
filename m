@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0EBEC83F01
-	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 13:12:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA380C83F12
+	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 13:12:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qbhLS-0008B7-2J; Thu, 31 Aug 2023 09:04:22 -0400
+	id 1qbhKu-0007Dv-U0; Thu, 31 Aug 2023 09:03:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhHp-0006h7-Md
- for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 09:00:39 -0400
-Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhGU-0004Dn-Lm
+ for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:59:18 -0400
+Received: from mail-yw1-x1136.google.com ([2607:f8b0:4864:20::1136])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhHk-0006jP-Fk
- for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 09:00:37 -0400
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-31dcd553fecso589810f8f.2
- for <qemu-riscv@nongnu.org>; Thu, 31 Aug 2023 06:00:31 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhGQ-0005q2-IL
+ for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:59:14 -0400
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-58d41109351so26246757b3.1
+ for <qemu-riscv@nongnu.org>; Thu, 31 Aug 2023 05:59:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693486830; x=1694091630; darn=nongnu.org;
+ d=linaro.org; s=google; t=1693486749; x=1694091549; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eBc3U04Z410g0QX/hz9VaosKX9rxbbm4KG7R96HSrHc=;
- b=vCCOt87MpvjxKtNEt6G91KGv3U4W70z9q5IJUfea/CAw+/ElVIiBoAtjnGFY/S9GiG
- ihBlZ0JTMj21b18QpVNFrb1c4ShTqbdfeU0GdCgecH5U/1X4Xjk4sxHZjywf5caVfilI
- MLLvxleQiV9HBA+lnR99Rd+kADBKy3U9QGmgMgwTjzvOy5qDbBywFBrMOWBLA3HxfcdS
- p9JWItzfOxinf6FjAzfZuUefJEGxfKoHyXw/WDkLHh3CSPbWRDqympC0Zb8woStkEvZc
- IWW1AJSj19pY7bYACsSmFr6LwoKyVClp5Mw3ahNmbGPyhq98S0xzlx9aTnt9+M6g4nD0
- OZqg==
+ bh=GxA/5EXb2SmpDTy3rgcCO3KdbceHG3sLJR7WKjQ1/Y8=;
+ b=KftkL0tURDmv9kk6wv+NzYLaIdWqE3EHoNBlZVZyyBfK0e7qeC0URUkoyrcuSXL67u
+ gHskIagRgXksHntUyFWUixjuthsiVeX8Iv4ScO16vQwAGhgVr0QGLfM/taKNaI67svit
+ X5SnJVos2xL2B3p9H2BYlXMSG68BLsHXhof7LhTS56M+cgSCY3NczSeE98y4+vudfQn0
+ V1BOQkuaIVP/rdAql/Q2khXmMu3i0+0NhsKG9f5Tk7S028xRIzokoXAFxHxTcYZEIr0B
+ ZZ+VlgQw2g7EnpXTzYK3BSDNfXOY8aYznKv3d431BIhkENiniJQt+3CMzGG4/PZ4lo6P
+ kS0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693486830; x=1694091630;
+ d=1e100.net; s=20221208; t=1693486749; x=1694091549;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eBc3U04Z410g0QX/hz9VaosKX9rxbbm4KG7R96HSrHc=;
- b=eArXVF7IWTNzzS39v1CJsrLRv67CR5gn3m4ZR0r888BlRJEThwt03xC7EWQ3RgfKvY
- pVXkPBCtNGducb7Z9hdHeApoSbVXLcvQDTvoORAq8ZMG8Qw6dNIVKFe4rMNUxtWy039K
- IwdFsqdXHBR4VLnEFGU5xl9oRKsbcjikJL0JJk+yjUggdrFMMhqAS7DMhadJqnVPYuMI
- nKgYO0w+CUvt4NWolUK3IrLooHC2or0bBXQ4guu9BvNbdKUKc2WXaS4M1tz0/VR4yTPI
- RzsDdUebyM10pxg6ZIkG5qKUDUzz55q2PRlgp0ya2PqMWb6JkdaYeECXqbZ72+7fNJwr
- RJOw==
-X-Gm-Message-State: AOJu0Yz1nvfD+JjMrkUB1MZdxoITPUjQx+fH1i7yGe7OX+AyuVnqjMTG
- neAOnll+gR788VV7VMPwOUeZEA==
-X-Google-Smtp-Source: AGHT+IFlA+4LBwjUmi9OBhNzgThAD7U46M9OQQNFsPw/2ByT38PA9WuH8p79l69m2NaS0/Yyi+PLVA==
-X-Received: by 2002:adf:f6c7:0:b0:31a:c6b2:8c63 with SMTP id
- y7-20020adff6c7000000b0031ac6b28c63mr3695259wrp.21.1693486830391; 
- Thu, 31 Aug 2023 06:00:30 -0700 (PDT)
+ bh=GxA/5EXb2SmpDTy3rgcCO3KdbceHG3sLJR7WKjQ1/Y8=;
+ b=Pw0StHV+mrGCTlWDnCBeU4Q4QQ8xOYD7lZWIuHNkcUxtZ/BaCXiqKaqb5LTrsvHOC9
+ ALAD6nAvgqKVKIY3E4uTEwcmC7bF8mk0VPIUjdUck74vYaQDus2fLeUhWJ3E9YfUho3A
+ wI7Oy39Zbe9j7h06BCNHXV3xvppJT5Ny/vsLOxGClFuHuIw5AEBJgeuJJdBrBCxAeCdQ
+ YxiJ3gX0RA9Rvq70nxGmtHhv1OV3SZZtNFizy1+5L+iOxWtw5riDiGKesQpnOhqyBLpN
+ 7GV1oKhRkVt2nTlFUQqXbFahdwn/5lBnPITMBxVyOa7C43F49HU66hDSWchgL+pdXaR9
+ f07g==
+X-Gm-Message-State: AOJu0YyrYrHVf3xlYmrCQA1YWIwV1+VHikcy4qVPz3q+ff+y39wg93bF
+ 4S0eBVLK3u8nAqI1UYggotz+Fg==
+X-Google-Smtp-Source: AGHT+IGZURAw3hFpSJjNx80pusv4a+zH+7FD/wa1hmsdENsbIvNg1i+IISlDxc3wVmlX5600ur2vOA==
+X-Received: by 2002:a0d:d6cb:0:b0:58f:bda3:7d9 with SMTP id
+ y194-20020a0dd6cb000000b0058fbda307d9mr2154104ywd.26.1693486748816; 
+ Thu, 31 Aug 2023 05:59:08 -0700 (PDT)
 Received: from m1x-phil.lan ([176.187.199.245])
  by smtp.gmail.com with ESMTPSA id
- e33-20020a5d5961000000b0031433443265sm2162158wri.53.2023.08.31.06.00.28
+ b131-20020a0dd989000000b005772abf6234sm391546ywe.11.2023.08.31.05.59.06
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 31 Aug 2023 06:00:30 -0700 (PDT)
+ Thu, 31 Aug 2023 05:59:08 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
  qemu-riscv@nongnu.org, qemu-block@nongnu.org,
- Michael Tokarev <mjt@tls.msk.ru>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Gerd Hoffmann <kraxel@redhat.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
  Peter Maydell <peter.maydell@linaro.org>,
- Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PULL 37/41] ui: spelling fixes
-Date: Thu, 31 Aug 2023 14:56:39 +0200
-Message-ID: <20230831125646.67855-38-philmd@linaro.org>
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>
+Subject: [PULL 23/41] hw/char/pl011: Remove duplicated PL011_INT_[RT]X
+ definitions
+Date: Thu, 31 Aug 2023 14:56:25 +0200
+Message-ID: <20230831125646.67855-24-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230831125646.67855-1-philmd@linaro.org>
 References: <20230831125646.67855-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1136;
+ envelope-from=philmd@linaro.org; helo=mail-yw1-x1136.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,135 +100,59 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Michael Tokarev <mjt@tls.msk.ru>
+PL011_INT_TX duplicates INT_TX, and PL011_INT_RX INT_RX.
+Follow other register fields definitions from this file,
+keep the shorter form.
 
-Signed-off-by: Michael Tokarev <mjt@tls.msk.ru>
-Message-ID: <20230823065335.1919380-2-mjt@tls.msk.ru>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Message-Id: <20230522153144.30610-6-philmd@linaro.org>
 ---
- include/ui/kbd-state.h     | 2 +-
- include/ui/spice-display.h | 2 +-
- ui/keymaps.h               | 2 +-
- ui/vnc-enc-zywrle.h        | 4 ++--
- ui/sdl2-2d.c               | 2 +-
- ui/sdl2.c                  | 2 +-
- ui/vnc-enc-zrle.c.inc      | 2 +-
- ui/cocoa.m                 | 2 +-
- 8 files changed, 9 insertions(+), 9 deletions(-)
+ hw/char/pl011.c | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
 
-diff --git a/include/ui/kbd-state.h b/include/ui/kbd-state.h
-index eb9067dd53..fb79776128 100644
---- a/include/ui/kbd-state.h
-+++ b/include/ui/kbd-state.h
-@@ -65,7 +65,7 @@ void qkbd_state_key_event(QKbdState *kbd, QKeyCode qcode, bool down);
-  * using qemu_input_event_send_key_delay().
-  *
-  * @kbd: state tracker state.
-- * @delay_ms: the delay in miliseconds.
-+ * @delay_ms: the delay in milliseconds.
-  */
- void qkbd_state_set_delay(QKbdState *kbd, int delay_ms);
+diff --git a/hw/char/pl011.c b/hw/char/pl011.c
+index c3203e5b41..96675f52cc 100644
+--- a/hw/char/pl011.c
++++ b/hw/char/pl011.c
+@@ -48,9 +48,6 @@ DeviceState *pl011_create(hwaddr addr, qemu_irq irq, Chardev *chr)
+     return dev;
+ }
  
-diff --git a/include/ui/spice-display.h b/include/ui/spice-display.h
-index 5aa13664d6..e1a9b36185 100644
---- a/include/ui/spice-display.h
-+++ b/include/ui/spice-display.h
-@@ -42,7 +42,7 @@
- #define NUM_MEMSLOTS_GROUPS 2
- 
- /*
-- * Internal enum to differenciate between options for
-+ * Internal enum to differentiate between options for
-  * io calls that have a sync (old) version and an _async (new)
-  * version:
-  *  QXL_SYNC: use the old version
-diff --git a/ui/keymaps.h b/ui/keymaps.h
-index 6473405485..3d52c0882a 100644
---- a/ui/keymaps.h
-+++ b/ui/keymaps.h
-@@ -44,7 +44,7 @@ typedef struct {
- /* "up" flag */
- #define SCANCODE_UP     0x80
- 
--/* Additional modifiers to use if not catched another way. */
-+/* Additional modifiers to use if not caught another way. */
- #define SCANCODE_SHIFT  0x100
- #define SCANCODE_CTRL   0x200
- #define SCANCODE_ALT    0x400
-diff --git a/ui/vnc-enc-zywrle.h b/ui/vnc-enc-zywrle.h
-index e661ec117d..64fbc90ee7 100644
---- a/ui/vnc-enc-zywrle.h
-+++ b/ui/vnc-enc-zywrle.h
-@@ -485,7 +485,7 @@ static inline void wavelet(int *buf, int width, int height, int level)
- 
- /*
-   RGB <=> YUV conversion stuffs.
--  YUV coversion is explained as following formula in strict meaning:
-+  YUV conversion is explained as following formula in strict meaning:
-   Y =  0.299R + 0.587G + 0.114B (   0<=Y<=255)
-   U = -0.169R - 0.331G + 0.500B (-128<=U<=127)
-   V =  0.500R - 0.419G - 0.081B (-128<=V<=127)
-@@ -539,7 +539,7 @@ static inline void wavelet(int *buf, int width, int height, int level)
-    +------+------+
- 
-  So, we must transfer each sub images individually in strict meaning.
-- But at least ZRLE meaning, following one decompositon image is same as
-+ But at least ZRLE meaning, following one decomposition image is same as
-  avobe individual sub image. I use this format.
-  (Strictly saying, transfer order is reverse(Hxy->Hy->Hx->L)
-   for simplified procedure for any wavelet level.)
-diff --git a/ui/sdl2-2d.c b/ui/sdl2-2d.c
-index bfebbdeaea..06468cd493 100644
---- a/ui/sdl2-2d.c
-+++ b/ui/sdl2-2d.c
-@@ -150,7 +150,7 @@ bool sdl2_2d_check_format(DisplayChangeListener *dcl,
- {
-     /*
-      * We let SDL convert for us a few more formats than,
--     * the native ones. Thes are the ones I have tested.
-+     * the native ones. These are the ones I have tested.
-      */
-     return (format == PIXMAN_x8r8g8b8 ||
-             format == PIXMAN_a8r8g8b8 ||
-diff --git a/ui/sdl2.c b/ui/sdl2.c
-index 0d91b555e3..ea4a92cd36 100644
---- a/ui/sdl2.c
-+++ b/ui/sdl2.c
-@@ -860,7 +860,7 @@ static void sdl2_display_init(DisplayState *ds, DisplayOptions *o)
-     SDL_SetHint(SDL_HINT_VIDEO_X11_NET_WM_BYPASS_COMPOSITOR, "0");
- #endif
- #ifndef CONFIG_WIN32
--    /* QEMU uses its own low level keyboard hook procecure on Windows */
-+    /* QEMU uses its own low level keyboard hook procedure on Windows */
-     SDL_SetHint(SDL_HINT_GRAB_KEYBOARD, "1");
- #endif
- #ifdef SDL_HINT_ALLOW_ALT_TAB_WHILE_GRABBED
-diff --git a/ui/vnc-enc-zrle.c.inc b/ui/vnc-enc-zrle.c.inc
-index c107d8affc..a8ca37d05e 100644
---- a/ui/vnc-enc-zrle.c.inc
-+++ b/ui/vnc-enc-zrle.c.inc
-@@ -110,7 +110,7 @@ static void ZRLE_ENCODE_TILE(VncState *vs, ZRLE_PIXEL *data, int w, int h,
-     ZRLE_PIXEL *end = ptr + h * w;
-     *end = ~*(end-1); /* one past the end is different so the while loop ends */
- 
--    /* Real limit is 127 but we wan't a way to know if there is more than 127 */
-+    /* Real limit is 127 but we want a way to know if there is more than 127 */
-     palette_init(palette, 256, ZRLE_BPP);
- 
-     while (ptr < end) {
-diff --git a/ui/cocoa.m b/ui/cocoa.m
-index 0c2153d17c..4d8989c4eb 100644
---- a/ui/cocoa.m
-+++ b/ui/cocoa.m
-@@ -2045,7 +2045,7 @@ static void cocoa_display_init(DisplayState *ds, DisplayOptions *opts)
- 
-     /*
-      * Create the menu entries which depend on QEMU state (for consoles
--     * and removeable devices). These make calls back into QEMU functions,
-+     * and removable devices). These make calls back into QEMU functions,
-      * which is OK because at this point we know that the second thread
-      * holds the iothread lock and is synchronously waiting for us to
-      * finish.
+-#define PL011_INT_TX 0x20
+-#define PL011_INT_RX 0x10
+-
+ /* Flag Register, UARTFR */
+ #define PL011_FLAG_TXFE 0x80
+ #define PL011_FLAG_RXFF 0x40
+@@ -157,7 +154,7 @@ static uint64_t pl011_read(void *opaque, hwaddr offset,
+             s->flags |= PL011_FLAG_RXFE;
+         }
+         if (s->read_count == s->read_trigger - 1)
+-            s->int_level &= ~ PL011_INT_RX;
++            s->int_level &= ~ INT_RX;
+         trace_pl011_read_fifo(s->read_count);
+         s->rsr = c >> 8;
+         pl011_update(s);
+@@ -262,7 +259,7 @@ static void pl011_write(void *opaque, hwaddr offset,
+         /* XXX this blocks entire thread. Rewrite to use
+          * qemu_chr_fe_write and background I/O callbacks */
+         qemu_chr_fe_write_all(&s->chr, &ch, 1);
+-        s->int_level |= PL011_INT_TX;
++        s->int_level |= INT_TX;
+         pl011_update(s);
+         break;
+     case 1: /* UARTRSR/UARTECR */
+@@ -350,7 +347,7 @@ static void pl011_put_fifo(void *opaque, uint32_t value)
+         s->flags |= PL011_FLAG_RXFF;
+     }
+     if (s->read_count == s->read_trigger) {
+-        s->int_level |= PL011_INT_RX;
++        s->int_level |= INT_RX;
+         pl011_update(s);
+     }
+ }
 -- 
 2.41.0
 
