@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61158C83F12
-	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 13:07:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD82CC83F01
+	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 13:08:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qbhLD-0007oj-Nr; Thu, 31 Aug 2023 09:04:07 -0400
+	id 1qbhI4-00004u-H0; Thu, 31 Aug 2023 09:00:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhGu-0004jX-Rx
- for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:59:42 -0400
-Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1qbhFB-0002xg-OU
+ for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:57:54 -0400
+Received: from mail-ed1-x536.google.com ([2a00:1450:4864:20::536])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhGp-00061X-0S
- for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:59:39 -0400
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3110ab7110aso620051f8f.3
- for <qemu-riscv@nongnu.org>; Thu, 31 Aug 2023 05:59:34 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1qbhF2-0005Lw-GM
+ for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:57:50 -0400
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5298e43bb67so1553576a12.1
+ for <qemu-riscv@nongnu.org>; Thu, 31 Aug 2023 05:57:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693486773; x=1694091573; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sCCxv16p0EiY2aKlOpGL2Z1uWvBgdn7GkvBoQqZSuSQ=;
- b=XrC7DTwUFnqOeLsTkPLW6yUb1NY+iNSk1KXGr8nZ2RaH9ALSGbv8TEdrWPyvqrNDQO
- +by4fiGlpzKWrJKF+hWX/K7c0kP0KNwB9+qjzySDc7ugCtPzej+U/6Sgt2Zxrc31k7qS
- qTudWVCvHzNPH2MsnuB2xWCBJe8T6Y4IOTUlhsjRELeJ/KBGTOfZU3121P/UVZMMOyMs
- t0ld2Ou8gAaH7ONCTJseKxcu46BARghmbTQyeZTyO88TcdqIstCHz0QdslibXzlNYXcC
- eBKT0l87IRq5iJ1j5t9N9+QUSG9q7GtdtM0ULeHPLbQ1jTTRqDo1Rywa6Oy1z1BRnBJ4
- afRg==
+ d=ventanamicro.com; s=google; t=1693486663; x=1694091463; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=uNXW750vA6R1Aa75og4R46d2dzEIu2KoYPCzpFV0L+Y=;
+ b=kzfkFSMLVfFqZbq3SN1yRM7HRO7ip0BgMSNfQID2g1yrH/GizAeXDp/NR6+4fu0diM
+ txnkD3Zh42ACO329rXxxrKWDVqIbDRUkNRVK0/AmFNwhH3vbFgkLj0B4TlJwmS2ONI1z
+ NB5kpiTmoD8nOcLCqbSFKbgJeEXOQxA4KsPuLfKl1tWtn2wL2Qyu0beU2lL9M+Amb574
+ T9ToagGhCcncP+W66YwQCRSUGXvOkkjRxScmsOtPLoNC4eqK1XxxdrdfmTqqS7e/bFAl
+ pT9FCZ4Bv45VIkYDiBLPUBjh6ZKMv3GaZdfBBoMBTwoITaiUOyBPOL6k0tOVZUkgMpp0
+ SwEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693486773; x=1694091573;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=sCCxv16p0EiY2aKlOpGL2Z1uWvBgdn7GkvBoQqZSuSQ=;
- b=evumELm++SnJxJQlKJ2sn3TM/W7KNaoFUZqJo5Ffq7/0frHJHQxi3exzvlnUbktWnF
- ZOqeOb+3ewr0otbeMIcI0AsRmsNRrXAyd035gh6fqIUVg7yZlBF8ha2sPAIb5BQabBAj
- di3E5rb5wOddmydCGts0qygh3JL8NPAb7ppWWHvGX6fkkzekiNiI1rK9d2v9Z2m2/2ka
- BLSN8F0bLrDTIPJPrfG4+L3GPua5XNQj/z5AU5zTP9wsMnFPPpLTNCyt4Dx7niygL41g
- tuenvDWo3iFWFKzXbp3T49n8eGGmeayTqY1Samq2zl8aO3eolNr1cb/HCPhNzfq6JF9d
- c4ww==
-X-Gm-Message-State: AOJu0Ywo5E6fKdtrD2nHmxRQUFJNpFyIEUFxcraPmr2XY07RGCNPL5D5
- rYYRdevdEmEJXOraacgf1FcOrQ==
-X-Google-Smtp-Source: AGHT+IEeC3gq5VJyMXfII0kcH/A4EW7CmvDoRsTVWuxXwQitf9eoymhkncZXtEa22ByiLuh7y3LDCA==
-X-Received: by 2002:adf:f40c:0:b0:315:9e1b:4ea6 with SMTP id
- g12-20020adff40c000000b003159e1b4ea6mr3895600wro.58.1693486773261; 
- Thu, 31 Aug 2023 05:59:33 -0700 (PDT)
-Received: from m1x-phil.lan ([176.187.199.245])
+ d=1e100.net; s=20221208; t=1693486663; x=1694091463;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uNXW750vA6R1Aa75og4R46d2dzEIu2KoYPCzpFV0L+Y=;
+ b=j8P4hVrHuZXK9FM+0ntv7TwGKJc68ImujWnPmyNpogkD7oCNfgGI+ADFBwJTaA5z8I
+ OHVv/2gnbGgyxP8ICRnHRu7TH+vIbonph2DsJWd14GnewPXx5nnlJgtAIxJPmAzCUt2C
+ qV+a1nLeFDATberjIHELIBdZzt8Yk/kAWHZTOC7RFJnKpogveoSIzmhxklkHsGxPMubW
+ PXbWtLm1lqAMBAitoSisoA5m4qHMh9VtAiTdOYkVlAL3CM2QH1/qU8n7+ZeCtUTRey3H
+ sp46SSM+CnZTwcv+5BOZfLvpFa8Wk1zgkrCMv+tNmBZvMP35seTt3HaeP63GrnQVw/QM
+ HPrA==
+X-Gm-Message-State: AOJu0Yww9sh5yPAY/C0MnKp8aFMR/ZcUaRJAwFZ4X7FICRVQR4cUmqMe
+ K+UZLaZNioLrmJNUwWfmRenUB0T4qdiZx74mZME1pA==
+X-Google-Smtp-Source: AGHT+IGMozpbrRYSSEXixFAUWMy4mZ9BM1W5YL/rB95NaCC7EVE9VFJsD51rjmSNZuI/oCjRGI+HSw==
+X-Received: by 2002:a05:6402:2712:b0:523:463d:1ed3 with SMTP id
+ y18-20020a056402271200b00523463d1ed3mr2836997edd.15.1693486663175; 
+ Thu, 31 Aug 2023 05:57:43 -0700 (PDT)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
  by smtp.gmail.com with ESMTPSA id
- b15-20020a5d550f000000b0031c5ce91ad6sm2142636wrv.97.2023.08.31.05.59.32
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 31 Aug 2023 05:59:32 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
- qemu-riscv@nongnu.org, qemu-block@nongnu.org,
- Michael Tokarev <mjt@tls.msk.ru>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- John Snow <jsnow@redhat.com>
-Subject: [PULL 27/41] hw/ide: spelling fixes
-Date: Thu, 31 Aug 2023 14:56:29 +0200
-Message-ID: <20230831125646.67855-28-philmd@linaro.org>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230831125646.67855-1-philmd@linaro.org>
-References: <20230831125646.67855-1-philmd@linaro.org>
+ x26-20020aa7d39a000000b005257f2c057fsm770034edq.33.2023.08.31.05.57.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 31 Aug 2023 05:57:42 -0700 (PDT)
+Date: Thu, 31 Aug 2023 14:57:41 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com
+Subject: Re: [PATCH RESEND v8 06/20] target/riscv/cpu.c: split vendor exts
+ from riscv_cpu_extensions[]
+Message-ID: <20230831-77dbf9fff032d3b5cc1ac73b@orel>
+References: <20230824221440.484675-1-dbarboza@ventanamicro.com>
+ <20230824221440.484675-7-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::435;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x435.google.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230824221440.484675-7-dbarboza@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::536;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x536.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,64 +97,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Michael Tokarev <mjt@tls.msk.ru>
+On Thu, Aug 24, 2023 at 07:14:26PM -0300, Daniel Henrique Barboza wrote:
+> Our goal is to make riscv_cpu_extensions[] hold only ratified,
+> non-vendor extensions.
+> 
+> Create a new riscv_cpu_vendor_exts[] array for them, changing
+> riscv_cpu_add_user_properties() and riscv_cpu_add_kvm_properties()
+> accordingly.
+> 
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/cpu.c | 13 ++++++++++++-
+>  1 file changed, 12 insertions(+), 1 deletion(-)
+> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 78eb2ac6bd..668522db01 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1860,7 +1860,10 @@ static Property riscv_cpu_extensions[] = {
+>      DEFINE_PROP_BOOL("zcmp", RISCVCPU, cfg.ext_zcmp, false),
+>      DEFINE_PROP_BOOL("zcmt", RISCVCPU, cfg.ext_zcmt, false),
+>  
+> -    /* Vendor-specific custom extensions */
+> +    DEFINE_PROP_END_OF_LIST(),
+> +};
+> +
+> +static Property riscv_cpu_vendor_exts[] = {
+>      DEFINE_PROP_BOOL("xtheadba", RISCVCPU, cfg.ext_xtheadba, false),
+>      DEFINE_PROP_BOOL("xtheadbb", RISCVCPU, cfg.ext_xtheadbb, false),
+>      DEFINE_PROP_BOOL("xtheadbs", RISCVCPU, cfg.ext_xtheadbs, false),
+> @@ -1973,6 +1976,10 @@ static void riscv_cpu_add_kvm_properties(Object *obj)
+>          riscv_cpu_add_kvm_unavail_prop(obj, prop->name);
+>      }
+>  
+> +    for (prop = riscv_cpu_vendor_exts; prop && prop->name; prop++) {
+> +        riscv_cpu_add_kvm_unavail_prop(obj, prop->name);
+> +    }
+> +
+>      for (prop = riscv_cpu_experimental_exts; prop && prop->name; prop++) {
+>          riscv_cpu_add_kvm_unavail_prop(obj, prop->name);
+>      }
+> @@ -2017,6 +2024,10 @@ static void riscv_cpu_add_user_properties(Object *obj)
+>          qdev_property_add_static(dev, prop);
+>      }
+>  
+> +    for (prop = riscv_cpu_vendor_exts; prop && prop->name; prop++) {
+> +        qdev_property_add_static(dev, prop);
+> +    }
+> +
+>      for (prop = riscv_cpu_experimental_exts; prop && prop->name; prop++) {
+>          qdev_property_add_static(dev, prop);
+>      }
+> -- 
+> 2.41.0
+> 
+>
 
-Signed-off-by: Michael Tokarev <mjt@tls.msk.ru>
-Message-ID: <20230823065335.1919380-14-mjt@tls.msk.ru>
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
- hw/ide/ahci_internal.h | 4 ++--
- hw/ide/cmd646.c        | 2 +-
- hw/ide/core.c          | 2 +-
- 3 files changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/hw/ide/ahci_internal.h b/hw/ide/ahci_internal.h
-index 2480455372..c244bbd8be 100644
---- a/hw/ide/ahci_internal.h
-+++ b/hw/ide/ahci_internal.h
-@@ -61,13 +61,13 @@ enum AHCIHostReg {
-     AHCI_HOST_REG_CTL        = 1,  /* GHC: global host control */
-     AHCI_HOST_REG_IRQ_STAT   = 2,  /* IS: interrupt status */
-     AHCI_HOST_REG_PORTS_IMPL = 3,  /* PI: bitmap of implemented ports */
--    AHCI_HOST_REG_VERSION    = 4,  /* VS: AHCI spec. version compliancy */
-+    AHCI_HOST_REG_VERSION    = 4,  /* VS: AHCI spec. version compliance */
-     AHCI_HOST_REG_CCC_CTL    = 5,  /* CCC_CTL: CCC Control */
-     AHCI_HOST_REG_CCC_PORTS  = 6,  /* CCC_PORTS: CCC Ports */
-     AHCI_HOST_REG_EM_LOC     = 7,  /* EM_LOC: Enclosure Mgmt Location */
-     AHCI_HOST_REG_EM_CTL     = 8,  /* EM_CTL: Enclosure Mgmt Control */
-     AHCI_HOST_REG_CAP2       = 9,  /* CAP2: host capabilities, extended */
--    AHCI_HOST_REG_BOHC       = 10, /* BOHC: firmare/os handoff ctrl & status */
-+    AHCI_HOST_REG_BOHC       = 10, /* BOHC: firmware/os handoff ctrl & status */
-     AHCI_HOST_REG__COUNT     = 11
- };
- 
-diff --git a/hw/ide/cmd646.c b/hw/ide/cmd646.c
-index cabe9048b1..c0bcfa4414 100644
---- a/hw/ide/cmd646.c
-+++ b/hw/ide/cmd646.c
-@@ -257,7 +257,7 @@ static void pci_cmd646_ide_realize(PCIDevice *dev, Error **errp)
- 
-     pci_conf[CNTRL] = CNTRL_EN_CH0; // enable IDE0
-     if (d->secondary) {
--        /* XXX: if not enabled, really disable the seconday IDE controller */
-+        /* XXX: if not enabled, really disable the secondary IDE controller */
-         pci_conf[CNTRL] |= CNTRL_EN_CH1; /* enable IDE1 */
-     }
- 
-diff --git a/hw/ide/core.c b/hw/ide/core.c
-index de48ff9f86..ee116891ed 100644
---- a/hw/ide/core.c
-+++ b/hw/ide/core.c
-@@ -1698,7 +1698,7 @@ static bool cmd_set_features(IDEState *s, uint8_t cmd)
-                 put_le16(identify_data + 63, 0x07);
-                 put_le16(identify_data + 88, 0x3f);
-                 break;
--            case 0x02: /* sigle word dma mode*/
-+            case 0x02: /* single word dma mode */
-                 put_le16(identify_data + 62, 0x07 | (1 << (val + 8)));
-                 put_le16(identify_data + 63, 0x07);
-                 put_le16(identify_data + 88, 0x3f);
--- 
-2.41.0
-
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
