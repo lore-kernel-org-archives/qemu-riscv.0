@@ -4,77 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43FC7C83F32
-	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 13:16:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09F8CC83F12
+	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 13:16:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qbhWt-0005Oj-Bb; Thu, 31 Aug 2023 09:16:11 -0400
+	id 1qbhI7-0000Tw-E8; Thu, 31 Aug 2023 09:00:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qbhWr-0005Mg-7y
- for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 09:16:09 -0400
-Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhFG-00032n-PQ
+ for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:57:59 -0400
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qbhWn-0003cG-KT
- for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 09:16:08 -0400
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-52a4b62c2f5so997215a12.1
- for <qemu-riscv@nongnu.org>; Thu, 31 Aug 2023 06:16:05 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhFB-0005Of-Hj
+ for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:57:56 -0400
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-3fbd33a57b6so6966675e9.2
+ for <qemu-riscv@nongnu.org>; Thu, 31 Aug 2023 05:57:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1693487764; x=1694092564; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=WGnbmpvXd9Mx77ztVvlz0ONUxaQhQMpn3R0jYR5bsgQ=;
- b=hHUOwfOpRMsd00jQoSn7uOrFVFAb7s9ZupzCqO0xKXTwXYLtPoCfjHOLC4F5oqYJAT
- 4TcD6WkKZPi4oYYNGGSiMH+tyDMtAHxMgtNjYjcYokZDh6CFcw9aw0i7NV1dN8qyV2qT
- uCT5A0y6p9mDqvb0sAhl6jUhVgwOK1SEn+kXrQTYgRddJA3Spkzyy/dPqnFcHt9SZgvJ
- sDpE9CjLVF+uKQzRXoR5mE+jqWRy9IkG+pMBCGtnQVf6L8kqhFUPcuCD+qJkluDSxftE
- H1Xn5So4boS9x4wsyUsdZkx3wY92L3Dm18IBJ8tXwW3xxoDl4fYvqIGtaqJ1wKXXQzXu
- 2/ig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693487764; x=1694092564;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1693486668; x=1694091468; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WGnbmpvXd9Mx77ztVvlz0ONUxaQhQMpn3R0jYR5bsgQ=;
- b=MMzAbItf/kv+tbMqWcHB7rxfpNjDNT9624/AyfXCNuSfPiuDFqG9+CMliSB9/T1uqG
- kgOvyd+Zkmrl2uMjsL+hgrBmNH4HDWXkHHl6lpmjfiNy+1aRxpKNY20c44lVhh07VvQr
- nue11j4XavZbp5IbzH5OfH9QabIXRCLTDW9+xK8pCOerR5KtlhslBkJpLmpxRTJuTAqH
- FQAsH+//N4egBGCxc6Qj9kL/ZpdXiTAk6Kr+Gp2QROm0gj17u4pgq7vPhz/U7MFZMOm4
- 5igHW8j9hFZ7VugMOdwPoxlz+7A8vgxwZu8RF3QAnVNJKZif9HC+TOK7/Ciyj2uiAxNd
- WxDQ==
-X-Gm-Message-State: AOJu0YxSL5yPI7ZE8GhIAL+itiPFoI7KONTi7FlmqX3lnh76mQUy6yyp
- Uist1IdDrC6ascEHbfjA15Wmbg==
-X-Google-Smtp-Source: AGHT+IHEcC0uuQOiGuf7uedPOtHxKczLNjSkcwZOg+wqDvYbEYZNdfw8rd6dHHtC2/LCpBRphFWHAQ==
-X-Received: by 2002:a17:906:5a70:b0:9a5:acf7:cff1 with SMTP id
- my48-20020a1709065a7000b009a5acf7cff1mr3584701ejc.57.1693487763760; 
- Thu, 31 Aug 2023 06:16:03 -0700 (PDT)
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ bh=RGsHEuyFoG4D07fPwCyTopmI6+5DcT12Nv/vCGRvwBA=;
+ b=jAK3cfG84TIOtj2LAh5tqKi6QMHrpgt/Y4R4eOj8QbIhIiKsSL1lfi+rKbgpN6iZjk
+ dV2D+Jz7Y49hBx/OP0UsgNA0Fyh7GDJ63mnIruQmLrMZrRlCQ2qaqd3ozYkt28UQQgjr
+ 1P3B5wkR9XRv+h09TZc04anoAnDb8p6Ub1jD/+X/BrNRnE5hR3D7L3Ks54AICYoj01ys
+ Jup516hQV0zQMzLSEH5uVhBMasEEdy+fs/u6xCTB5FZwtogwRLFh04waMXbXAX7dyrBm
+ RVXtLbGMjLo3qmYXbSUXKljPEYbAeH10Aj5iqBV/xAeLnHC7F1TbvjFpbHELXxSKhZf8
+ 5UOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693486668; x=1694091468;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=RGsHEuyFoG4D07fPwCyTopmI6+5DcT12Nv/vCGRvwBA=;
+ b=KWRbuNR9WiOT3S1kYveUf19eIGh9XRBWrDk31FG41s47QhjY+5K0JJY0gpH/dgf7pi
+ N9uz83LfMpBbJ1YFYUcnXIQNNzIbdZdQ7UfkdfNjBVRp2VV+f88gU5UiOsVA48ALd0Ea
+ Y3kqlgZiW3+ziECrrHXSp5CfyvXoD+kVOIHjmt1VqEmxd76bk5yij+h2+efIm4yGuWvD
+ hjRdxhLqTT6Fwi6pZMsVbMgs4T8wjBfDZNqgnGUNofMgEunh+uPzENinHwiP7pywV7M7
+ s2Fb/5W1sn4NCmgA0VEvt7FiswkgXvxZKoFsC+cNsf9VFuwJmx+9jzl0BNOi/lwLJAVz
+ gpFQ==
+X-Gm-Message-State: AOJu0Yyvm3PjH0lXszgFfVUaEMbcvVyg+Z+z6KRYyLEAVDn7FOwkVN0T
+ 5ho5SLDmpWUabFGo/3e9pPCY0Q==
+X-Google-Smtp-Source: AGHT+IFchwuM8PgXwtvVitQFOAlj/Yyd7/TFYBsqNV6SL8Vm89km1iz/gH6nwnik6/HLFLRvC7+C4Q==
+X-Received: by 2002:a05:600c:ac4:b0:3fe:1b4e:c484 with SMTP id
+ c4-20020a05600c0ac400b003fe1b4ec484mr4008814wmr.5.1693486667797; 
+ Thu, 31 Aug 2023 05:57:47 -0700 (PDT)
+Received: from m1x-phil.lan ([176.187.199.245])
  by smtp.gmail.com with ESMTPSA id
- h21-20020a1709060f5500b009a1be9c29d7sm752188ejj.179.2023.08.31.06.16.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Aug 2023 06:16:03 -0700 (PDT)
-Date: Thu, 31 Aug 2023 15:16:02 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
-Subject: Re: [PATCH RESEND v8 11/20] avocado, risc-v: add opensbi tests for
- 'max' CPU
-Message-ID: <20230831-1c9bd710f47d8bd9eeeb46c8@orel>
-References: <20230824221440.484675-1-dbarboza@ventanamicro.com>
- <20230824221440.484675-12-dbarboza@ventanamicro.com>
+ d9-20020a5d4f89000000b0031c5b380291sm2184139wru.110.2023.08.31.05.57.45
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Thu, 31 Aug 2023 05:57:47 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
+ qemu-riscv@nongnu.org, qemu-block@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Michael Rolnik <mrolnik@gmail.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Eduardo Habkost <eduardo@habkost.net>, Song Gao <gaosong@loongson.cn>,
+ Xiaojuan Yang <yangxiaojuan@loongson.cn>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PULL 10/41] target/translate: Include missing 'exec/cpu_ldst.h'
+ header
+Date: Thu, 31 Aug 2023 14:56:12 +0200
+Message-ID: <20230831125646.67855-11-philmd@linaro.org>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20230831125646.67855-1-philmd@linaro.org>
+References: <20230831125646.67855-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230824221440.484675-12-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::532;
- envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x532.google.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,51 +107,119 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Aug 24, 2023 at 07:14:31PM -0300, Daniel Henrique Barboza wrote:
-> Add smoke tests to ensure that we'll not break the 'max' CPU type when
-> adding new ratified extensions to be enabled.
+All these files access the CPU LD/ST API declared in "exec/cpu_ldst.h".
 
-I'm not really sure what this test proves other than we didn't remove the
-minimally supported set of extensions that opensbi requires to boot. The
-other opensbi tests appear to be ensuring boards can boot, rather than
-cpus.
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Message-Id: <20230828221314.18435-4-philmd@linaro.org>
+---
+ target/avr/helper.c                  | 1 +
+ target/i386/tcg/fpu_helper.c         | 1 +
+ target/i386/tcg/sysemu/excp_helper.c | 1 +
+ target/loongarch/cpu.c               | 1 +
+ target/mips/tcg/ldst_helper.c        | 1 +
+ target/mips/tcg/msa_helper.c         | 1 +
+ target/riscv/op_helper.c             | 1 +
+ target/riscv/vector_helper.c         | 1 +
+ 8 files changed, 8 insertions(+)
 
-Thanks,
-drew
+diff --git a/target/avr/helper.c b/target/avr/helper.c
+index e6e7d51487..fdc9884ea0 100644
+--- a/target/avr/helper.c
++++ b/target/avr/helper.c
+@@ -24,6 +24,7 @@
+ #include "cpu.h"
+ #include "hw/core/tcg-cpu-ops.h"
+ #include "exec/exec-all.h"
++#include "exec/cpu_ldst.h"
+ #include "exec/address-spaces.h"
+ #include "exec/helper-proto.h"
+ 
+diff --git a/target/i386/tcg/fpu_helper.c b/target/i386/tcg/fpu_helper.c
+index 6f3741b635..4430d3d380 100644
+--- a/target/i386/tcg/fpu_helper.c
++++ b/target/i386/tcg/fpu_helper.c
+@@ -21,6 +21,7 @@
+ #include <math.h>
+ #include "cpu.h"
+ #include "tcg-cpu.h"
++#include "exec/cpu_ldst.h"
+ #include "exec/helper-proto.h"
+ #include "fpu/softfloat.h"
+ #include "fpu/softfloat-macros.h"
+diff --git a/target/i386/tcg/sysemu/excp_helper.c b/target/i386/tcg/sysemu/excp_helper.c
+index b5f0abffa3..226689a4f2 100644
+--- a/target/i386/tcg/sysemu/excp_helper.c
++++ b/target/i386/tcg/sysemu/excp_helper.c
+@@ -19,6 +19,7 @@
+ 
+ #include "qemu/osdep.h"
+ #include "cpu.h"
++#include "exec/cpu_ldst.h"
+ #include "exec/exec-all.h"
+ #include "tcg/helper-tcg.h"
+ 
+diff --git a/target/loongarch/cpu.c b/target/loongarch/cpu.c
+index 27fc6e1f33..65f9320e34 100644
+--- a/target/loongarch/cpu.c
++++ b/target/loongarch/cpu.c
+@@ -11,6 +11,7 @@
+ #include "qapi/error.h"
+ #include "qemu/module.h"
+ #include "sysemu/qtest.h"
++#include "exec/cpu_ldst.h"
+ #include "exec/exec-all.h"
+ #include "cpu.h"
+ #include "internals.h"
+diff --git a/target/mips/tcg/ldst_helper.c b/target/mips/tcg/ldst_helper.c
+index c1a8380e34..97056d00a2 100644
+--- a/target/mips/tcg/ldst_helper.c
++++ b/target/mips/tcg/ldst_helper.c
+@@ -24,6 +24,7 @@
+ #include "cpu.h"
+ #include "exec/helper-proto.h"
+ #include "exec/exec-all.h"
++#include "exec/cpu_ldst.h"
+ #include "exec/memop.h"
+ #include "internal.h"
+ 
+diff --git a/target/mips/tcg/msa_helper.c b/target/mips/tcg/msa_helper.c
+index 29b31d70fe..c8597b9e30 100644
+--- a/target/mips/tcg/msa_helper.c
++++ b/target/mips/tcg/msa_helper.c
+@@ -22,6 +22,7 @@
+ #include "internal.h"
+ #include "tcg/tcg.h"
+ #include "exec/exec-all.h"
++#include "exec/cpu_ldst.h"
+ #include "exec/helper-proto.h"
+ #include "exec/memop.h"
+ #include "fpu/softfloat.h"
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index 9cdb9cdd06..7e2f1908ee 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -23,6 +23,7 @@
+ #include "internals.h"
+ #include "qemu/main-loop.h"
+ #include "exec/exec-all.h"
++#include "exec/cpu_ldst.h"
+ #include "exec/helper-proto.h"
+ 
+ /* Exceptions processing helpers */
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index bf7e0029a1..bc9e151aa9 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -22,6 +22,7 @@
+ #include "cpu.h"
+ #include "exec/memop.h"
+ #include "exec/exec-all.h"
++#include "exec/cpu_ldst.h"
+ #include "exec/helper-proto.h"
+ #include "fpu/softfloat.h"
+ #include "tcg/tcg-gvec-desc.h"
+-- 
+2.41.0
 
-> 
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  tests/avocado/riscv_opensbi.py | 16 ++++++++++++++++
->  1 file changed, 16 insertions(+)
-> 
-> diff --git a/tests/avocado/riscv_opensbi.py b/tests/avocado/riscv_opensbi.py
-> index bfff9cc3c3..15fd57fe51 100644
-> --- a/tests/avocado/riscv_opensbi.py
-> +++ b/tests/avocado/riscv_opensbi.py
-> @@ -61,3 +61,19 @@ def test_riscv64_virt(self):
->          :avocado: tags=machine:virt
->          """
->          self.boot_opensbi()
-> +
-> +    def test_riscv32_virt_maxcpu(self):
-> +        """
-> +        :avocado: tags=arch:riscv32
-> +        :avocado: tags=machine:virt
-> +        :avocado: tags=cpu:max
-> +        """
-> +        self.boot_opensbi()
-> +
-> +    def test_riscv64_virt_maxcpu(self):
-> +        """
-> +        :avocado: tags=arch:riscv64
-> +        :avocado: tags=machine:virt
-> +        :avocado: tags=cpu:max
-> +        """
-> +        self.boot_opensbi()
-> -- 
-> 2.41.0
-> 
-> 
 
