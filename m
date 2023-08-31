@@ -4,87 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EEE7C83F10
-	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 09:22:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2AD2C83F10
+	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 10:17:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qbdsd-0002IV-0Z; Thu, 31 Aug 2023 05:22:23 -0400
+	id 1qbekG-0001lD-Ew; Thu, 31 Aug 2023 06:17:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qbdsb-0002Hr-11
- for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 05:22:21 -0400
-Received: from mail-oi1-x234.google.com ([2607:f8b0:4864:20::234])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1qbekE-0001h9-6t
+ for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 06:17:46 -0400
+Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qbdsY-0002oZ-HQ
- for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 05:22:20 -0400
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-3a9b41ffe11so315762b6e.2
- for <qemu-riscv@nongnu.org>; Thu, 31 Aug 2023 02:22:18 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1qbek9-000645-Vk
+ for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 06:17:45 -0400
+Received: by mail-lj1-x243.google.com with SMTP id
+ 38308e7fff4ca-2bd0d135ca3so12522701fa.3
+ for <qemu-riscv@nongnu.org>; Thu, 31 Aug 2023 03:17:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1693473737; x=1694078537; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=aBV9ZJsds9vQgp+8Kc+hM5xtDO43f/8R7u6yMZkaLyk=;
- b=Q8kvDwvi3BAQmt+VE65gVneTOtuTb01PYBSB8+PFDm0hQyo2Sn1hVjSJHLvHp0gnVf
- HAsUddbCdtOqWqvQRkM9OaqKjojR4UpUugpAjZYsQ9FRGhY009aGsLADcCPsGuU9+2UN
- CGf7q+VowP67RM+SirOrw2qf1AZzoZ03V9XrvoeDCfSm774/vXdGJaPDxVXQ5zEo84xm
- 4Drgrbh4a7xWZEhC3o5n+o1epuMwcDPtyoKz+kJ/3Xn4kviAC1MJJp8gbJ55wvyVlkQL
- +qsLzLTijPJYVaavL7hDkDGptBmZV/lEHH8ayjc8Kb7Yv5sXVnvLhMR86BEAU6YDDCzJ
- 9AQw==
+ d=ventanamicro.com; s=google; t=1693477060; x=1694081860; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=W5Kv+jhpnD31nudOXQSXbz+VjLF+EmEAtBRSqSr/qio=;
+ b=pZSqeqUKuSbZtA+46xOSo9UiY6Q2yZwGkg2XFMsWxdtRDEedO/HdcFizgN6NdW6pKO
+ rtGD04MF3mMzYG2AU78Gqq/5lNPyvp5+3B+4Zs0H2TyUGQGQpovthzijI3JzaMGv+Pcm
+ y/hkUmA7BdAlmuhTZDYJqRk2TalPon3uSi6VgC8+ZZh+oGx7/3mtW3+vLFQqLU1dHkz5
+ z3G8y9wjCW8zyL9zEW/9U0eFGo44fstq+L+OoA0W5qENfIlWSDIchPcfO0XXWpGFqS3O
+ iHpZI3tnktY7bEw6DWT0aiIedWJeZqBykGDW06dwyK6dotbtARehDKLJ4F8quFNPbbw1
+ UzQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693473737; x=1694078537;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=aBV9ZJsds9vQgp+8Kc+hM5xtDO43f/8R7u6yMZkaLyk=;
- b=TyMjrfckaMmZqMwS7tN0mHp7f5P7unj9Su0sjPSR7r5Gm4SaHUm03yMU1+VZCJs0M4
- PmE2g/GT9G0Hpy8y87+VTVOLMuFR79TCkFAV6GstPs+3LT8B3R/O1pBZHj4zg0ZK18Xx
- dwD7XKcVqGcnuKtDPXT/nagOCuOhVY/PIUMpn+rCjaDki7Kn1CZQ/lINY3M1O+nI+412
- 52njys+V344rZ6gZ4XM1+tfZ5UbMbKEV4mwg9GjlZbErmk8++FzJI+m3jqeqg63b4Hpk
- RRfvX/hHg7oVceLl88Mfr7AGwL371a3SOR3/k0DCJdKrUUPPvuvP7LlL5d4OaIyhHUOo
- Z2XA==
-X-Gm-Message-State: AOJu0YzrezUAlHhfFWFpVE5doA+9zmCv9m12wBRM476+dr0pMkSVGLM8
- ANWiM2FWA47riZTjr1/z/5QmgA==
-X-Google-Smtp-Source: AGHT+IHoqs8cXDKEK7gwOEWilUeRgKNx+Why4f7WYTBBjCs05GDi1dPVVVG50Hj27AD2GUmgBVVYHA==
-X-Received: by 2002:a05:6808:2903:b0:3a1:e17a:b3fb with SMTP id
- ev3-20020a056808290300b003a1e17ab3fbmr4696650oib.1.1693473737297; 
- Thu, 31 Aug 2023 02:22:17 -0700 (PDT)
-Received: from [192.168.68.108] ([177.94.15.194])
+ d=1e100.net; s=20221208; t=1693477060; x=1694081860;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=W5Kv+jhpnD31nudOXQSXbz+VjLF+EmEAtBRSqSr/qio=;
+ b=YTgQnt4W5imFtml1bhO4xJcmwPtstS2ZuGl8Wva/TpDcEnKr501Q4SLmYNgbjeYkOW
+ IhgO4nXrWXX3FkxNGJgT22fu35nm/4OFGUgYDp9VlGkfxvBF6in825Ea2awLVQHdEMfr
+ FFKLDt0FAhjdhXTLSCnVhSa8bM4CdzW8n7i53SxIo7cGOQSIgz5OL+TURZzBlVuARyCw
+ enm3aqOvRZhnUDQbkhd2hls0aRYPxvaXDZHeGd3jY+GOKiKmCSUxEslftjyZIgZMqOMF
+ 1fvKNBWFOwQ+yny7AT/IiI+ZkSPCZm3+LRDWFOpHD6TMntp0oRTHDNYkXSXNY21564gH
+ hUzQ==
+X-Gm-Message-State: AOJu0YxRFU9cSK7zg0rBPraapMrXbNz/KHGnsX6q88woEcmSI6ORq0n4
+ aKSLBBCgY/HYH9jB6dwz3PAEGA==
+X-Google-Smtp-Source: AGHT+IFmm77ZeHdb1VSILjUhU9gRqkB+Uz3QD+5/hua10XpuOA0zo71XpvnK819VOi4DBIz/99OTQA==
+X-Received: by 2002:a2e:9397:0:b0:2bc:e1a3:fbaa with SMTP id
+ g23-20020a2e9397000000b002bce1a3fbaamr4113925ljh.22.1693477059435; 
+ Thu, 31 Aug 2023 03:17:39 -0700 (PDT)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
  by smtp.gmail.com with ESMTPSA id
- bx33-20020a0568081b2100b003a3b321712fsm501824oib.35.2023.08.31.02.22.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 31 Aug 2023 02:22:17 -0700 (PDT)
-Message-ID: <6064b599-dedb-1871-b666-199aae74b2ba@ventanamicro.com>
-Date: Thu, 31 Aug 2023 06:22:12 -0300
+ r22-20020a170906365600b009a5f1d1564dsm585326ejb.126.2023.08.31.03.17.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 31 Aug 2023 03:17:38 -0700 (PDT)
+Date: Thu, 31 Aug 2023 12:17:37 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com
+Subject: Re: [PATCH 01/20] target/riscv: introduce TCG AccelCPUClass
+Message-ID: <20230831-8468b3a793485bb070b5eb6b@orel>
+References: <20230825130853.511782-1-dbarboza@ventanamicro.com>
+ <20230825130853.511782-2-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH v2 1/2] hw/riscv/virt.c: fix non-KVM --enable-debug build
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
- palmer@rivosinc.com, richard.henderson@linaro.org
-References: <20230830133503.711138-1-dbarboza@ventanamicro.com>
- <20230830133503.711138-2-dbarboza@ventanamicro.com>
- <20230831-d3b40182209cb9054ceaed62@orel>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230831-d3b40182209cb9054ceaed62@orel>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::234;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x234.google.com
-X-Spam_score_int: -32
-X-Spam_score: -3.3
-X-Spam_bar: ---
-X-Spam_report: (-3.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.242,
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230825130853.511782-2-dbarboza@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::243;
+ envelope-from=ajones@ventanamicro.com; helo=mail-lj1-x243.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,156 +96,176 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-On 8/31/23 05:42, Andrew Jones wrote:
-> On Wed, Aug 30, 2023 at 10:35:02AM -0300, Daniel Henrique Barboza wrote:
->> A build with --enable-debug and without KVM will fail as follows:
->>
->> /usr/bin/ld: libqemu-riscv64-softmmu.fa.p/hw_riscv_virt.c.o: in function `virt_machine_init':
->> ./qemu/build/../hw/riscv/virt.c:1465: undefined reference to `kvm_riscv_aia_create'
->>
->> This happens because the code block with "if virt_use_kvm_aia(s)" isn't
->> being ignored by the debug build, resulting in an undefined reference to
->> a KVM only function.
->>
->> Add a 'kvm_enabled()' conditional together with virt_use_kvm_aia() will
->> make the compiler crop the kvm_riscv_aia_create() call entirely from a
->> non-KVM build. Note that adding the 'kvm_enabled()' conditional inside
->> virt_use_kvm_aia() won't fix the build because this function would need
->> to be inlined multiple times to make the compiler zero out the entire
->> block.
->>
->> While we're at it, use kvm_enabled() in all instances where
->> virt_use_kvm_aia() is checked to allow the compiler to elide these other
->> kvm-only instances as well.
->>
->> Suggested-by: Richard Henderson <richard.henderson@linaro.org>
->> Fixes: dbdb99948e ("target/riscv: select KVM AIA in riscv virt machine")
->> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->> ---
->>   hw/riscv/virt.c | 6 +++---
->>   1 file changed, 3 insertions(+), 3 deletions(-)
->>
->> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
->> index 388e52a294..3b259b9305 100644
->> --- a/hw/riscv/virt.c
->> +++ b/hw/riscv/virt.c
->> @@ -782,7 +782,7 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
->>       }
->>   
->>       /* KVM AIA only has one APLIC instance */
->> -    if (virt_use_kvm_aia(s)) {
->> +    if (kvm_enabled() && virt_use_kvm_aia(s)) {
->>           create_fdt_socket_aplic(s, memmap, 0,
->>                                   msi_m_phandle, msi_s_phandle, phandle,
->>                                   &intc_phandles[0], xplic_phandles,
->> @@ -808,7 +808,7 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
->>   
->>       g_free(intc_phandles);
->>   
->> -    if (virt_use_kvm_aia(s)) {
->> +    if (kvm_enabled() && virt_use_kvm_aia(s)) {
->>           *irq_mmio_phandle = xplic_phandles[0];
->>           *irq_virtio_phandle = xplic_phandles[0];
->>           *irq_pcie_phandle = xplic_phandles[0];
->> @@ -1461,7 +1461,7 @@ static void virt_machine_init(MachineState *machine)
->>           }
->>       }
->>   
->> -    if (virt_use_kvm_aia(s)) {
->> +    if (kvm_enabled() && virt_use_kvm_aia(s)) {
->>           kvm_riscv_aia_create(machine, IMSIC_MMIO_GROUP_MIN_SHIFT,
->>                                VIRT_IRQCHIP_NUM_SOURCES, VIRT_IRQCHIP_NUM_MSIS,
->>                                memmap[VIRT_APLIC_S].base,
->> -- 
->> 2.41.0
->>
->>
+On Fri, Aug 25, 2023 at 10:08:34AM -0300, Daniel Henrique Barboza wrote:
+> target/riscv/cpu.c needs to handle all possible accelerators (TCG and
+> KVM at this moment) during both init() and realize() time. This forces
+> us to resort to a lot of "if tcg" and "if kvm" throughout the code,
+> which isn't wrong, but can get cluttered over time. Splitting
+> acceleration specific code from cpu.c to its own file will help to
+> declutter the existing code and it will also make it easier to support
+> KVM/TCG only builds in the future.
 > 
-> I think I'd prefer
+> We'll start by adding a new subdir called 'tcg' and a new file called
+> 'tcg-cpu.c'. This file will be used to introduce a new accelerator class
+> for TCG acceleration in RISC-V, allowing us to center all TCG exclusive
+> code in its file instead of using 'cpu.c' for everything. This design is
+> inpired by the work Claudio Fontana did in x86 a few years ago in commit
+> f5cc5a5c1 ("i386: split cpu accelerators from cpu.c, using
+> AccelCPUClass").
 > 
->   /* We need this inlined for debug (-O0) builds */
->   static inline QEMU_ALWAYS_INLINE bool virt_use_kvm_aia(RISCVVirtState *s)
->   {
->      return kvm_enabled() && kvm_irqchip_in_kernel() && s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC;
->   }
+> To avoid moving too much code at once we'll start by adding the new file
+> and TCG AccelCPUClass declaration. The 'class_init' from the accel class
+> will init 'tcg_ops', relieving the common riscv_cpu_class_init() from
+> doing it.
 > 
-> assuming that works.
+> 'riscv_tcg_ops' is being exported from 'cpu.c' for now to avoid having
+> to deal with moving code and files around right now. We'll focus on
+> decoupling the realize() logic first.
+> 
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>  target/riscv/cpu.c           |  5 +---
+>  target/riscv/cpu.h           |  4 +++
+>  target/riscv/meson.build     |  2 ++
+>  target/riscv/tcg/meson.build |  2 ++
+>  target/riscv/tcg/tcg-cpu.c   | 57 ++++++++++++++++++++++++++++++++++++
+>  5 files changed, 66 insertions(+), 4 deletions(-)
+>  create mode 100644 target/riscv/tcg/meson.build
+>  create mode 100644 target/riscv/tcg/tcg-cpu.c
+> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 21ebdbf084..38dcbc4dd2 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -2275,9 +2275,7 @@ static const struct SysemuCPUOps riscv_sysemu_ops = {
+>  };
+>  #endif
+>  
+> -#include "hw/core/tcg-cpu-ops.h"
+> -
+> -static const struct TCGCPUOps riscv_tcg_ops = {
+> +const struct TCGCPUOps riscv_tcg_ops = {
+>      .initialize = riscv_translate_init,
+>      .synchronize_from_tb = riscv_cpu_synchronize_from_tb,
+>      .restore_state_to_opc = riscv_restore_state_to_opc,
+> @@ -2436,7 +2434,6 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+>  #endif
+>      cc->gdb_arch_name = riscv_gdb_arch_name;
+>      cc->gdb_get_dynamic_xml = riscv_gdb_get_dynamic_xml;
+> -    cc->tcg_ops = &riscv_tcg_ops;
+>  
+>      object_class_property_add(c, "mvendorid", "uint32", cpu_get_mvendorid,
+>                                cpu_set_mvendorid, NULL, NULL);
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 577abcd724..b84b62f84e 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -707,6 +707,10 @@ enum riscv_pmu_event_idx {
+>      RISCV_PMU_EVENT_CACHE_ITLB_PREFETCH_MISS = 0x10021,
+>  };
+>  
+> +/* Export tcg_ops until we move everything to tcg/tcg-cpu.c */
+> +#include "hw/core/tcg-cpu-ops.h"
+> +extern const struct TCGCPUOps riscv_tcg_ops;
+> +
+>  /* CSR function table */
+>  extern riscv_csr_operations csr_ops[CSR_TABLE_SIZE];
+>  
+> diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+> index 660078bda1..f0486183fa 100644
+> --- a/target/riscv/meson.build
+> +++ b/target/riscv/meson.build
+> @@ -38,5 +38,7 @@ riscv_system_ss.add(files(
+>    'riscv-qmp-cmds.c',
+>  ))
+>  
+> +subdir('tcg')
+> +
+>  target_arch += {'riscv': riscv_ss}
+>  target_softmmu_arch += {'riscv': riscv_system_ss}
+> diff --git a/target/riscv/tcg/meson.build b/target/riscv/tcg/meson.build
+> new file mode 100644
+> index 0000000000..061df3d74a
+> --- /dev/null
+> +++ b/target/riscv/tcg/meson.build
+> @@ -0,0 +1,2 @@
+> +riscv_ss.add(when: 'CONFIG_TCG', if_true: files(
+> +  'tcg-cpu.c'))
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> new file mode 100644
+> index 0000000000..1ad27a26aa
+> --- /dev/null
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -0,0 +1,57 @@
+> +/*
+> + * riscv TCG cpu class initialization
+> + *
+> + * Copyright (c) 2023 Ventana Micro Systems Inc.
+> + *
+> + * This library is free software; you can redistribute it and/or
+> + * modify it under the terms of the GNU Lesser General Public
+> + * License as published by the Free Software Foundation; either
+> + * version 2 of the License, or (at your option) any later version.
+> + *
+> + * This library is distributed in the hope that it will be useful,
+> + * but WITHOUT ANY WARRANTY; without even the implied warranty of
+> + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+> + * Lesser General Public License for more details.
+> + *
+> + * You should have received a copy of the GNU Lesser General Public
+> + * License along with this library; if not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#include "qemu/osdep.h"
+> +#include "cpu.h"
+> +#include "qemu/accel.h"
+> +#include "hw/core/accel-cpu.h"
+> +
+> +static void tcg_cpu_init_ops(AccelCPUClass *accel_cpu, CPUClass *cc)
+> +{
+> +    /*
+> +     * All cpus use the same set of operations.
+> +     * riscv_tcg_ops is being imported from cpu.c for now.
+> +     */
+> +    cc->tcg_ops = &riscv_tcg_ops;
+> +}
+> +
+> +static void tcg_cpu_class_init(CPUClass *cc)
+> +{
+> +    cc->init_accel_cpu = tcg_cpu_init_ops;
+> +}
+> +
+> +static void tcg_cpu_accel_class_init(ObjectClass *oc, void *data)
+> +{
+> +    AccelCPUClass *acc = ACCEL_CPU_CLASS(oc);
+> +
+> +    acc->cpu_class_init = tcg_cpu_class_init;
+> +}
+> +
+> +static const TypeInfo tcg_cpu_accel_type_info = {
+> +    .name = ACCEL_CPU_NAME("tcg"),
+> +
+> +    .parent = TYPE_ACCEL_CPU,
+> +    .class_init = tcg_cpu_accel_class_init,
+> +    .abstract = true,
+> +};
 
+need blank line here
 
-I've tried before with 'inline' but not with 'QEMU_ALWAYS_INLINE'. But unfortunately
-it doesn't work too:
+> +static void tcg_cpu_accel_register_types(void)
+> +{
+> +    type_register_static(&tcg_cpu_accel_type_info);
+> +}
+> +type_init(tcg_cpu_accel_register_types);
+> -- 
+> 2.41.0
+> 
+>
 
+Appears to be consistent with target/i386/tcg/tcg-cpu.c, so
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 3b259b9305..a600d81e77 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -77,9 +77,10 @@
-  #endif
-  
-  /* KVM AIA only supports APLIC MSI. APLIC Wired is always emulated by QEMU. */
--static bool virt_use_kvm_aia(RISCVVirtState *s)
-+static inline QEMU_ALWAYS_INLINE bool virt_use_kvm_aia(RISCVVirtState *s)
-  {
--    return kvm_irqchip_in_kernel() && s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC;
-+    return kvm_enabled() && kvm_irqchip_in_kernel() &&
-+           s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC;
-  }
-  
-  static const MemMapEntry virt_memmap[] = {
-@@ -782,7 +783,7 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
-      }
-  
-      /* KVM AIA only has one APLIC instance */
--    if (kvm_enabled() && virt_use_kvm_aia(s)) {
-+    if (virt_use_kvm_aia(s)) {
-          create_fdt_socket_aplic(s, memmap, 0,
-                                  msi_m_phandle, msi_s_phandle, phandle,
-                                  &intc_phandles[0], xplic_phandles,
-@@ -808,7 +809,7 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
-  
-      g_free(intc_phandles);
-  
--    if (kvm_enabled() && virt_use_kvm_aia(s)) {
-+    if (virt_use_kvm_aia(s)) {
-          *irq_mmio_phandle = xplic_phandles[0];
-          *irq_virtio_phandle = xplic_phandles[0];
-          *irq_pcie_phandle = xplic_phandles[0];
-@@ -1461,7 +1462,7 @@ static void virt_machine_init(MachineState *machine)
-          }
-      }
-  
--    if (kvm_enabled() && virt_use_kvm_aia(s)) {
-+    if (virt_use_kvm_aia(s)) {
-          kvm_riscv_aia_create(machine, IMSIC_MMIO_GROUP_MIN_SHIFT,
-                               VIRT_IRQCHIP_NUM_SOURCES, VIRT_IRQCHIP_NUM_MSIS,
-                               memmap[VIRT_APLIC_S].base,
-
-
-Same error:
-
-/libssh.so -lrbd -lrados -lbz2 -lutil -Wl,--end-group
-/usr/bin/ld: libqemu-riscv64-softmmu.fa.p/hw_riscv_virt.c.o: in function `virt_machine_init':
-/home/danielhb/work/qemu/build/../hw/riscv/virt.c:1466: undefined reference to `kvm_riscv_aia_create'
-collect2: error: ld returned 1 exit status
-
-
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
 Thanks,
-
-
-Daniel
-
-
-
-
-> 
-> Either way,
-> 
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-> 
-> Thanks,
-> drew
+drew
 
