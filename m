@@ -4,84 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A615C83F32
-	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 13:08:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCB43C83F12
+	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 13:09:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qbhLe-0008E8-1N; Thu, 31 Aug 2023 09:04:34 -0400
+	id 1qbhOF-0001HO-RH; Thu, 31 Aug 2023 09:07:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qbhKN-0006hZ-Ge
- for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 09:03:15 -0400
-Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qbhKJ-0007UC-Fa
- for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 09:03:15 -0400
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5280ef23593so964637a12.3
- for <qemu-riscv@nongnu.org>; Thu, 31 Aug 2023 06:03:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1693486989; x=1694091789; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=DgboMzHcr+BZbFPxUsAkwt5xa7gabhmrGuTsJtYRfaE=;
- b=eE0EoRx0vduIu7pHbyXih5CLruvRPyvJOvpECrzPx50aFBte00uO4GZlEHtcY91Aye
- mj/ckJZpW6R1vPbFlYakNXCIPZOEMDC1nivPcgTYCE2+9iMKQGIAJBMSx7cde/Fra2UL
- ZT/Hn0soAuH8RTD4nj1XVY6TE3ez6EJ3iZRWbWLCoFnnUNEw+SSJdeiOeFtEc+F3K6zQ
- S+YFNNDu9zTVFOD9OTxQH9p8pk/6smvHtFwbGDjcjxJPDv1OwJ5HBd247SC+LnBse9b4
- uJFnHIgUZgy4oilGNd+m/HUB+KI/rfLEH06sU8raIWbqbp34dpqZ05YHZ8wz4iVgOX3l
- mjug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693486989; x=1694091789;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DgboMzHcr+BZbFPxUsAkwt5xa7gabhmrGuTsJtYRfaE=;
- b=LM7m5sOzw/ZN0DTmUfwuz3bI5llfHwuqAC7DWrcjysXv5cS5njRWtt1R0BWZkH93DP
- hkMYylXdvQQT09iqSN0tPKo5b1LUxMXvwGteEINqGMtU4NRlz8OJlCtRPPUwCFbT01ZT
- ZUS8MibY8WFfjYIIq0L2pfRtqhg4PgmJcVsqg3pOKTasj2qKws/F00w33Fv2vi2ghJmt
- ndlGdNEowGTdmiDU3E4S9Y9t4tDnaRjfF4UywvBg+loI1NGBg208BDgVD1mEJ/GO9EGZ
- sdiuO4Co6BcFYv+v8JsZeciOeY++UP2uGTzwNWclSLmQeMXvPdxdRb46EPUEupb71qsl
- nqFw==
-X-Gm-Message-State: AOJu0YyiTMZipnD4PnekJTsNugReQ7ANNAA09zsE6UOsnT44sIq810D8
- SKimOXfD+m5DFbVkLGQ7xV8wkQ==
-X-Google-Smtp-Source: AGHT+IHs7hgssfeMzmvqobgnd6db+zeDL/JAoFdWDJlLjSc3wOlCFF+WqVSagSokeSzSfQtA7KqhwA==
-X-Received: by 2002:a17:906:cc56:b0:9a1:bcf9:4f92 with SMTP id
- mm22-20020a170906cc5600b009a1bcf94f92mr3694088ejb.8.1693486989218; 
- Thu, 31 Aug 2023 06:03:09 -0700 (PDT)
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
- by smtp.gmail.com with ESMTPSA id
- j22-20020a170906255600b0099cd008c1a4sm741142ejb.136.2023.08.31.06.03.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Aug 2023 06:03:08 -0700 (PDT)
-Date: Thu, 31 Aug 2023 15:03:06 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
-Subject: Re: [PATCH RESEND v8 08/20] target/riscv/cpu.c: add
- riscv_cpu_add_kvm_unavail_prop_array()
-Message-ID: <20230831-a0eb7c29ec39f4c58e492159@orel>
-References: <20230824221440.484675-1-dbarboza@ventanamicro.com>
- <20230824221440.484675-9-dbarboza@ventanamicro.com>
+ (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
+ id 1qbhO9-0001F7-Aj; Thu, 31 Aug 2023 09:07:09 -0400
+Received: from isrv.corpit.ru ([86.62.121.231])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
+ id 1qbhO5-00005s-LP; Thu, 31 Aug 2023 09:07:09 -0400
+Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
+ by isrv.corpit.ru (Postfix) with ESMTP id 9D4461E3BC;
+ Thu, 31 Aug 2023 16:07:27 +0300 (MSK)
+Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
+ by tsrv.corpit.ru (Postfix) with ESMTP id 7D3D424D23;
+ Thu, 31 Aug 2023 16:06:53 +0300 (MSK)
+Message-ID: <cc0e09e8-8ffc-741f-1ac9-5cebe312b684@tls.msk.ru>
+Date: Thu, 31 Aug 2023 16:06:53 +0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230824221440.484675-9-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::529;
- envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x529.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [PULL 39/41] meson: Fix MESONINTROSPECT parsing
+Content-Language: en-US
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
+ qemu-riscv@nongnu.org, qemu-block@nongnu.org,
+ Akihiko Odaki <akihiko.odaki@daynix.com>, Paolo Bonzini
+ <pbonzini@redhat.com>, =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?=
+ <marcandre.lureau@redhat.com>, =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?=
+ <berrange@redhat.com>, Thomas Huth <thuth@redhat.com>,
+ John Snow <jsnow@redhat.com>, Cleber Rosa <crosa@redhat.com>
+References: <20230831125646.67855-1-philmd@linaro.org>
+ <20230831125646.67855-40-philmd@linaro.org>
+From: Michael Tokarev <mjt@tls.msk.ru>
+In-Reply-To: <20230831125646.67855-40-philmd@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=86.62.121.231; envelope-from=mjt@tls.msk.ru;
+ helo=isrv.corpit.ru
+X-Spam_score_int: -103
+X-Spam_score: -10.4
+X-Spam_bar: ----------
+X-Spam_report: (-10.4 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-3.478,
+ RCVD_IN_DNSWL_HI=-5, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,59 +69,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Aug 24, 2023 at 07:14:28PM -0300, Daniel Henrique Barboza wrote:
-> Use a helper in riscv_cpu_add_kvm_properties() to eliminate some of its
-> code repetition.
+31.08.2023 15:56, Philippe Mathieu-Daudé wrote:
+> From: Akihiko Odaki <akihiko.odaki@daynix.com>
 > 
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> The arguments in MESONINTROSPECT are quoted with shlex.quote() so it
+> must be parsed with shlex.split().
+> 
+> Fixes: cf60ccc330 ("cutils: Introduce bundle mechanism")
+> Reported-by: Michael Tokarev <mjt@tls.msk.ru>
+> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+> Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Reviewed-by: Michael Tokarev <mjt@tls.msk.ru>
+> Tested-by: Michael Tokarev <mjt@tls.msk.ru>
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Message-ID: <20230812061540.5398-1-akihiko.odaki@daynix.com>
 > ---
->  target/riscv/cpu.c | 22 +++++++++++-----------
->  1 file changed, 11 insertions(+), 11 deletions(-)
+>   scripts/symlink-install-tree.py | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
 > 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 4608fa2378..d78c2c058f 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1971,6 +1971,14 @@ static void riscv_cpu_add_kvm_unavail_prop(Object *obj, const char *prop_name)
->                          NULL, (void *)prop_name);
->  }
->  
-> +static void riscv_cpu_add_kvm_unavail_prop_array(Object *obj,
-> +                                                 Property *array)
-> +{
-> +    for (Property *prop = array; prop && prop->name; prop++) {
-> +        riscv_cpu_add_kvm_unavail_prop(obj, prop->name);
-> +    }
-> +}
-> +
->  static void riscv_cpu_add_kvm_properties(Object *obj)
->  {
->      Property *prop;
-> @@ -1979,17 +1987,9 @@ static void riscv_cpu_add_kvm_properties(Object *obj)
->      kvm_riscv_init_user_properties(obj);
->      riscv_cpu_add_misa_properties(obj);
->  
-> -    for (prop = riscv_cpu_extensions; prop && prop->name; prop++) {
-> -        riscv_cpu_add_kvm_unavail_prop(obj, prop->name);
-> -    }
-> -
-> -    for (prop = riscv_cpu_vendor_exts; prop && prop->name; prop++) {
-> -        riscv_cpu_add_kvm_unavail_prop(obj, prop->name);
-> -    }
-> -
-> -    for (prop = riscv_cpu_experimental_exts; prop && prop->name; prop++) {
-> -        riscv_cpu_add_kvm_unavail_prop(obj, prop->name);
-> -    }
-> +    riscv_cpu_add_kvm_unavail_prop_array(obj, riscv_cpu_extensions);
-> +    riscv_cpu_add_kvm_unavail_prop_array(obj, riscv_cpu_vendor_exts);
-> +    riscv_cpu_add_kvm_unavail_prop_array(obj, riscv_cpu_experimental_exts);
->  
->      for (prop = riscv_cpu_options; prop && prop->name; prop++) {
->          /* Check if KVM created the property already */
-> -- 
-> 2.41.0
-> 
->
+> diff --git a/scripts/symlink-install-tree.py b/scripts/symlink-install-tree.py
+> index 8ed97e3c94..b72563895c 100644
+> --- a/scripts/symlink-install-tree.py
+> +++ b/scripts/symlink-install-tree.py
+> @@ -4,6 +4,7 @@
+>   import errno
+>   import json
+>   import os
+> +import shlex
+>   import subprocess
+>   import sys
+>   
+> @@ -14,7 +15,7 @@ def destdir_join(d1: str, d2: str) -> str:
+>       return str(PurePath(d1, *PurePath(d2).parts[1:]))
+>   
+>   introspect = os.environ.get('MESONINTROSPECT')
+> -out = subprocess.run([*introspect.split(' '), '--installed'],
+> +out = subprocess.run([*shlex.split(introspect), '--installed'],
+>                        stdout=subprocess.PIPE, check=True).stdout
 
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+This turned out to be wrong on windows.
+
+/mjt
 
