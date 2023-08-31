@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBE82C83F01
-	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 13:10:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 500EAC83F01
+	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 13:11:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qbhLJ-00088h-Jy; Thu, 31 Aug 2023 09:04:13 -0400
+	id 1qbhFN-0003AC-O7; Thu, 31 Aug 2023 08:58:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhGz-0004p9-Ng
- for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:59:49 -0400
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhEk-0002VI-0W
+ for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:57:27 -0400
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhGu-00065d-Il
- for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:59:43 -0400
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-401d10e3e54so7230685e9.2
- for <qemu-riscv@nongnu.org>; Thu, 31 Aug 2023 05:59:39 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhEf-0005CA-3w
+ for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:57:24 -0400
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-31aeedbb264so649741f8f.0
+ for <qemu-riscv@nongnu.org>; Thu, 31 Aug 2023 05:57:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693486779; x=1694091579; darn=nongnu.org;
+ d=linaro.org; s=google; t=1693486639; x=1694091439; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ur9xi937dzz6Bl2U4bEFfYnHfQ2+6Mk7VLbsIy+yiQY=;
- b=p93qFbrXQ6SN01gFC+mCDwinPT864Vc7iDNXuSaBjHtdOEM6rBKil8dKQMPYY2qjUY
- OtECUlmpp0yZSFIxBJB6tJq/vCr3YSyj+aM8gKaY63Yizrw5i60UeqyprRtf2k/ie+Pi
- hYJ86rk0Vu59s3rdEe3YbLm5746nZv6Wn+DU6nN6tsMEARtzQewj2zH+gG7x706l8ADh
- 1di5McuhMV0ZrWI+0aF8QQaq8m2M8XBvqTi2sTkDAaYHIPK/ib4NpVwFh8chxmWXTHOp
- OIO0FiXolg9WGjacQB/aIjGDDUCe/MVhzPzFvOQnGjKUKN7jipPA4ZFZ1WZ/FftdDV9N
- usrw==
+ bh=XdOtrub1S9PyK3Of9msYB/6KGqYXgpPYDD/KQybr13o=;
+ b=aMhBDJp2m1IsfWWNidkZRakyhpS0YH5OC36yEBaEA+F7V8+YPTe0YaDey/LKO+n/Sp
+ 1PuX4AG++droWT+ElFFWh8S4EiZuCjNFHxkf10KWLxjqYFtvkdWvUxCy/TxFF672loaU
+ AD9kCUZy+uQlv+YlE0uvp70ZgEXmcjNiu+nqcJT9EhAGA2jq9YUGrTsMTqvcOlmm+Ne5
+ Fz9/tgH3exrDUGc6038YRDpwAy+YC4KJRiXjUFBBCMXmjjiVonsC6GG8Z9eB2JTY3HaG
+ utHmGsOm7JZWX0cmTo0CoT/9BT4C+xae7Q7ngxzSJNJM6bKt0WMIb/up912jz4J/5SDW
+ ng1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693486779; x=1694091579;
+ d=1e100.net; s=20221208; t=1693486639; x=1694091439;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ur9xi937dzz6Bl2U4bEFfYnHfQ2+6Mk7VLbsIy+yiQY=;
- b=ZQTyRiMBJWDFXjjSRhb4rFNZF/kqV7NipGxAFmetlRA7IO64veU1U1oTXPHexKcNgC
- Kqmks59uLPy+YqPptn48NSD9LQJoTtmn9jjztxfzmiCaU+ksVp3iUu+I6gX9md8DGg0A
- /PQ0MPAbSQwBXEvDfQTHITD8zWjVpZuFgXSPizIs2U+OxiLlHI5sjo/lsTIyMvv28ylc
- tTy5W1J1mVpw3fayj1GnlyJsEjSaaAos/BJEW5VVjWHoHb352PZwD8XKTH2ly5lNxE0n
- VbxkkWs3KufA4d8CgR3+aVEIRdau9TNuHq5fkrFh3+AcStoxCf1VwuwOsqNL2jTTdsix
- F46w==
-X-Gm-Message-State: AOJu0YwlhqKMctG/pEFMhVa2/8fKF8JJcQPViWFcsy82ddsrgEak8eeR
- GfooaSolJeGGmhYmwBHS4bT0BQ==
-X-Google-Smtp-Source: AGHT+IFqinXDk2baO7sSaMza/9NPra0g8C/2PjSHejWBb1jQQgc23npbEqzbt534RZO28ZwbkvpYww==
-X-Received: by 2002:a05:600c:220d:b0:3fc:92:73d6 with SMTP id
- z13-20020a05600c220d00b003fc009273d6mr3971473wml.11.1693486778822; 
- Thu, 31 Aug 2023 05:59:38 -0700 (PDT)
+ bh=XdOtrub1S9PyK3Of9msYB/6KGqYXgpPYDD/KQybr13o=;
+ b=PRh1c7k/KWnByaPTeQktGP52get1tMF1U0Wq15AnmbeyT04nhVzBmKNucedoAE3rWv
+ DBbJtIj39tOfIEZRY1nTJ2QUcstDAH8SLhLG1DfqdprBj5Gbr13xn6OR3kPRNWt19uIy
+ MTrHTeNFZ0+0EaAUG4QkVIvEehQMa8dTGPDpdESCDsxyLb93wJjArFf12aL9HusAWXY/
+ cx1nGbkHAdhhOAPuBgCLY0GHD5flbmXuNq0ZV/EK+DlqJ8o4eZAo+rsrJ003lGKPwAUe
+ Zr0DqAbvy6v3VIp0Ge7mNSvlZ9lstQtdHA5Vg6J6/1noVZtQ/g5V6MMx4bi1t+qTpx3I
+ jqgw==
+X-Gm-Message-State: AOJu0YzRaGIF+wpMSCVzntGXO8aP3Sydw1QdVqm5b+UG/xgPk8CtESoI
+ 10g+DqVLNijYfuibUpxaOeUSsQ==
+X-Google-Smtp-Source: AGHT+IGrbx+32RjExgCYs7rJg7g+9uNDElRySvLl5Qg3Vg6zTeFJ6YBwm2cT7ygOUZA+iXFgLkBiJA==
+X-Received: by 2002:adf:dc8b:0:b0:31a:dd55:e69c with SMTP id
+ r11-20020adfdc8b000000b0031add55e69cmr4260280wrj.60.1693486638982; 
+ Thu, 31 Aug 2023 05:57:18 -0700 (PDT)
 Received: from m1x-phil.lan ([176.187.199.245])
  by smtp.gmail.com with ESMTPSA id
- q9-20020adff789000000b003180027d67asm2141739wrp.19.2023.08.31.05.59.37
+ e5-20020a5d5945000000b003197a4b0f68sm2186305wri.7.2023.08.31.05.57.17
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 31 Aug 2023 05:59:38 -0700 (PDT)
+ Thu, 31 Aug 2023 05:57:18 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
  qemu-riscv@nongnu.org, qemu-block@nongnu.org,
- Michael Tokarev <mjt@tls.msk.ru>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Gerd Hoffmann <kraxel@redhat.com>,
- Alistair Francis <alistair@alistair23.me>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>
-Subject: [PULL 28/41] hw/display: spelling fixes
-Date: Thu, 31 Aug 2023 14:56:30 +0200
-Message-ID: <20230831125646.67855-29-philmd@linaro.org>
+ Richard Henderson <richard.henderson@linaro.org>,
+ Helge Deller <deller@gmx.de>, Jason Wang <jasowang@redhat.com>
+Subject: [PULL 05/41] hw/net/i82596: Include missing 'exec/address-spaces.h'
+ header
+Date: Thu, 31 Aug 2023 14:56:07 +0200
+Message-ID: <20230831125646.67855-6-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230831125646.67855-1-philmd@linaro.org>
 References: <20230831125646.67855-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,85 +97,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Michael Tokarev <mjt@tls.msk.ru>
+hw/net/i82596.c access the global 'address_space_memory'
+calling the ld/st_phys() API. address_space_memory is
+declared in "exec/address-spaces.h". Currently this header
+is indirectly pulled in via another header. Explicitly include
+it to avoid when refactoring unrelated headers:
 
-Signed-off-by: Michael Tokarev <mjt@tls.msk.ru>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Message-ID: <20230823065335.1919380-15-mjt@tls.msk.ru>
+  hw/net/i82596.c:91:23: error: use of undeclared identifier 'address_space_memory'; did you mean 'address_space_destroy'?
+    return ldub_phys(&address_space_memory, addr);
+                      ^~~~~~~~~~~~~~~~~~~~
+                      address_space_destroy
+
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Message-Id: <20230619074153.44268-2-philmd@linaro.org>
 ---
- hw/display/bochs-display.c | 2 +-
- hw/display/qxl.c           | 2 +-
- hw/display/ssd0303.c       | 2 +-
- hw/display/ssd0323.c       | 2 +-
- hw/display/xlnx_dp.c       | 2 +-
- 5 files changed, 5 insertions(+), 5 deletions(-)
+ hw/net/i82596.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/hw/display/bochs-display.c b/hw/display/bochs-display.c
-index e7ec268184..9138e98c3b 100644
---- a/hw/display/bochs-display.c
-+++ b/hw/display/bochs-display.c
-@@ -164,7 +164,7 @@ static int bochs_display_get_mode(BochsDisplayState *s,
-     memset(mode, 0, sizeof(*mode));
-     switch (vbe[VBE_DISPI_INDEX_BPP]) {
-     case 16:
--        /* best effort: support native endianess only */
-+        /* best effort: support native endianness only */
-         mode->format = PIXMAN_r5g6b5;
-         mode->bytepp = 2;
-         break;
-diff --git a/hw/display/qxl.c b/hw/display/qxl.c
-index f1c0eb7dfc..af941fb0c2 100644
---- a/hw/display/qxl.c
-+++ b/hw/display/qxl.c
-@@ -1544,7 +1544,7 @@ static void qxl_create_guest_primary(PCIQXLDevice *qxl, int loadvm,
-     }
- }
- 
--/* return 1 if surface destoy was initiated (in QXL_ASYNC case) or
-+/* return 1 if surface destroy was initiated (in QXL_ASYNC case) or
-  * done (in QXL_SYNC case), 0 otherwise. */
- static int qxl_destroy_primary(PCIQXLDevice *d, qxl_async_io async)
- {
-diff --git a/hw/display/ssd0303.c b/hw/display/ssd0303.c
-index d67b0ad7b5..32b32a3044 100644
---- a/hw/display/ssd0303.c
-+++ b/hw/display/ssd0303.c
-@@ -8,7 +8,7 @@
-  */
- 
- /* The controller can support a variety of different displays, but we only
--   implement one.  Most of the commends relating to brightness and geometry
-+   implement one.  Most of the commands relating to brightness and geometry
-    setup are ignored. */
- 
- #include "qemu/osdep.h"
-diff --git a/hw/display/ssd0323.c b/hw/display/ssd0323.c
-index ab229d32b7..09b1bbed0a 100644
---- a/hw/display/ssd0323.c
-+++ b/hw/display/ssd0323.c
-@@ -8,7 +8,7 @@
-  */
- 
- /* The controller can support a variety of different displays, but we only
--   implement one.  Most of the commends relating to brightness and geometry
-+   implement one.  Most of the commands relating to brightness and geometry
-    setup are ignored. */
- 
- #include "qemu/osdep.h"
-diff --git a/hw/display/xlnx_dp.c b/hw/display/xlnx_dp.c
-index b0828d65aa..822355ecc6 100644
---- a/hw/display/xlnx_dp.c
-+++ b/hw/display/xlnx_dp.c
-@@ -380,7 +380,7 @@ static inline void xlnx_dp_audio_mix_buffer(XlnxDPState *s)
- static void xlnx_dp_audio_callback(void *opaque, int avail)
- {
-     /*
--     * Get some data from the DPDMA and compute these datas.
-+     * Get some data from the DPDMA and compute these data.
-      * Then wait for QEMU's audio subsystem to call this callback.
-      */
-     XlnxDPState *s = XLNX_DP(opaque);
+diff --git a/hw/net/i82596.c b/hw/net/i82596.c
+index ab26f8bea1..6defa9d3a1 100644
+--- a/hw/net/i82596.c
++++ b/hw/net/i82596.c
+@@ -15,6 +15,7 @@
+ #include "hw/irq.h"
+ #include "hw/qdev-properties.h"
+ #include "migration/vmstate.h"
++#include "exec/address-spaces.h"
+ #include "qemu/module.h"
+ #include "trace.h"
+ #include "i82596.h"
 -- 
 2.41.0
 
