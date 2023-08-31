@@ -4,87 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB731C83F32
-	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 13:13:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 492D4C83F12
+	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 13:14:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qbhJ3-0003hI-QB; Thu, 31 Aug 2023 09:01:53 -0400
+	id 1qbhKn-00079b-AR; Thu, 31 Aug 2023 09:03:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhFU-0003DR-4b
- for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:58:13 -0400
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhG8-0003wG-5T
+ for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:58:54 -0400
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhFO-0005Uw-Kc
- for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:58:10 -0400
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-3fee8af9cb9so7632145e9.1
- for <qemu-riscv@nongnu.org>; Thu, 31 Aug 2023 05:58:06 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhG2-0005hf-Qo
+ for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:58:51 -0400
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-401b5516104so7035775e9.2
+ for <qemu-riscv@nongnu.org>; Thu, 31 Aug 2023 05:58:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693486685; x=1694091485; darn=nongnu.org;
+ d=linaro.org; s=google; t=1693486725; x=1694091525; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sO6ZIHVbK+18/xJUsh8T6zEIqxOQUhu4K3Jic6wZRnQ=;
- b=eAfEucj3tx5MHS8XSt0+Y5gnfFbBdtRonS/X6q3aeIuLsFSDo1nkfYrLjdf7JJ3F1d
- xezkHhByE8Wg28C0Wf64ZDYSmVNnG1FOpefo4A8m69NWOxkuc8YmAS63NmzDuMkF6zOF
- zkPU21UcWRZH/rggjJf/+8P+225bbEHW0vX7E26779QET0/n7YDECEaw2ciKV0tVtRlV
- 2gTgv3/dSNEfyESNBsjFnudzeeI65pDKCb+ahff9DraPb0P6ZlwgJ23I13Qly2rVJd1h
- +m1iixHtWHvU6peP+vNa29vJIY96SdYOgJBQx3w0cg9MqJB6ePxfRhkIoSCEZ1xOp/mu
- kxRA==
+ bh=ltDvR2BAZ2X9usEMn+DOp5maTDaOUlNKujgVGnXvoz0=;
+ b=RQWvn9mTH7BAPI1Z4djAcIBodSx0Bth8vAMbZI/6sVBPZ5U9CdNkWHKcImlsBO1zci
+ v080mo36q2Yotz9lXXdR3ddHOlZQ74jLaPCul3VAGq2flLVkumw3Oi0IQBMxgB6inTSN
+ AYmVf6E5nT/cMM0hRzOq8FzAZwKJc7TmAh3mquts90ZIKdOqPa/IT9lsJpiapoKmbR/p
+ TaoqjZgf9xg7iLlo1g2Q0mg1avNIq9e2Tcry2qsZ60Q1Bgw5elHQcfPpWwM9EP5YLgPr
+ 1X7rAOLfLH/GE1+IXSB+pq9M0QnHAqQK5Yj9dwbhl32JPNniEIeuHO8t5iQY9vyMtZTA
+ AbYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693486685; x=1694091485;
+ d=1e100.net; s=20221208; t=1693486725; x=1694091525;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sO6ZIHVbK+18/xJUsh8T6zEIqxOQUhu4K3Jic6wZRnQ=;
- b=LBwVWIjKwWzKdVMdWUUXzL823xbQN6jq4J0O+Cfp957j7mLxE+QHaUKDVC34GH4EGM
- AZFZ9uLhjT0vdqhnsyh15iqcVHj2//WDJ9WIRzX2gZJ1nFUJfVinYKundMvPuWdlIKC9
- 1bpx7Dp62EyqJOonjSjB1wwtdyozsNCGxhgk9KZpAqGX5Z59MMFsAYcJMnDB7oKNl/XY
- L/377zKxWWmIbNBhbTDIqTYlSe9IioB4zhJdvtfcs9KwXtEfBPG5UHBYHUU0nW3ZKCZ/
- ACxi9HhI6vjp9q3ueIB11NgVcdIgnEkjB9ee/8bZuI5Q9gUrAKq0sBkrN8Wks8KYaQMt
- GS0w==
-X-Gm-Message-State: AOJu0YyWCNOnyjmpwruP5PlqfzhHOqks0fI4wEdQBQsT9kXg79+HIyqe
- 3EsQh/RlNRvvOCi15NtR6XWyxA==
-X-Google-Smtp-Source: AGHT+IEm+SuDqgTbS1yZNwTu6hF6uRicfOULaORbf9jp4vcHf3wEA6xYNjdsWBIS9eyE0v4IaCr3xg==
-X-Received: by 2002:a7b:cd0a:0:b0:401:cc0f:f866 with SMTP id
- f10-20020a7bcd0a000000b00401cc0ff866mr4839520wmj.12.1693486685237; 
- Thu, 31 Aug 2023 05:58:05 -0700 (PDT)
+ bh=ltDvR2BAZ2X9usEMn+DOp5maTDaOUlNKujgVGnXvoz0=;
+ b=S6peCL6AWf2SUA6XyKAOP8BKfNdbqMzhRIkxRf3uZ6Btpze5fUGmlFnPLHMpOcC342
+ 5ak5rlDsqwYCFc14EnsRyhaeD21USHVjqXMH1/gku1AMPjZLbg56ImCF3OayfJK3tn26
+ 4e2Lat3XvHh9/a7+2SXZyfNFYkkh2aJDZFcBxR8nko4aQos/HhH4iwSW+8tVCJf1OQ+s
+ ZLtm6SbhG09vo54JMTXgt+eKwhEJubNg0nwoIgC2EAijiGiEPA5aFfb8AdtkoK8Tc/5n
+ QK3TFF+R9ntHHI9E4qSsXRaXQoE43mlNzKkXu+C6qm66jya7mwBvA1fwzFw9U1LaiI7a
+ rabQ==
+X-Gm-Message-State: AOJu0YyWP5dq7sfYBhw8XZPjg17492pTwQYkt8o4jQbEVSlookP3EQ4q
+ v50x/VvONfXnVhLS77fdmUpMvA==
+X-Google-Smtp-Source: AGHT+IEktC/XR1HDchvJ85U0x+gj0dvszfMCRszftWD97X6BEkX+Ym9N9rrEfHbWtF5SqNfZUVi6BQ==
+X-Received: by 2002:a7b:c3d2:0:b0:401:d947:c8a4 with SMTP id
+ t18-20020a7bc3d2000000b00401d947c8a4mr3797191wmj.29.1693486724996; 
+ Thu, 31 Aug 2023 05:58:44 -0700 (PDT)
 Received: from m1x-phil.lan ([176.187.199.245])
  by smtp.gmail.com with ESMTPSA id
- y23-20020a7bcd97000000b003fbc9d178a8sm5168090wmj.4.2023.08.31.05.58.03
+ z8-20020a05600c220800b003fe29dc0ff2sm1930778wml.21.2023.08.31.05.58.43
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 31 Aug 2023 05:58:04 -0700 (PDT)
+ Thu, 31 Aug 2023 05:58:44 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
  qemu-riscv@nongnu.org, qemu-block@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
- Thomas Huth <thuth@redhat.com>, Max Filippov <jcmvbkbc@gmail.com>
-Subject: [PULL 13/41] target/helpers: Remove unnecessary 'exec/cpu_ldst.h'
- header
-Date: Thu, 31 Aug 2023 14:56:15 +0200
-Message-ID: <20230831125646.67855-14-philmd@linaro.org>
+ Alistair Francis <alistair@alistair23.me>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Joel Stanley <joel@jms.id.au>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Laurent Vivier <lvivier@redhat.com>,
+ Amit Shah <amit@kernel.org>, Gerd Hoffmann <kraxel@redhat.com>,
+ "Dr. David Alan Gilbert" <dave@treblig.org>,
+ Markus Armbruster <armbru@redhat.com>, Jason Wang <jasowang@redhat.com>
+Subject: [PULL 20/41] hw/char: Have FEWatchFunc handlers return
+ G_SOURCE_CONTINUE/REMOVE
+Date: Thu, 31 Aug 2023 14:56:22 +0200
+Message-ID: <20230831125646.67855-21-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230831125646.67855-1-philmd@linaro.org>
 References: <20230831125646.67855-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x330.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -107,119 +104,217 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-These files don't use the CPU ld/st API, remove the unnecessary
-"exec/cpu_ldst.h" header.
+GLib recommend to use G_SOURCE_REMOVE / G_SOURCE_CONTINUE
+for GSourceFunc callbacks. Our FEWatchFunc is a GSourceFunc
+returning such value. Use such definitions which are
+"more memorable" [*].
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+[*] https://docs.gtk.org/glib/callback.SourceFunc.html#return-value
+
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Message-Id: <20230828221314.18435-7-philmd@linaro.org>
+Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Message-Id: <20230705133139.54419-5-philmd@linaro.org>
 ---
- target/riscv/pmu.h                   | 1 -
- target/cris/op_helper.c              | 1 -
- target/mips/tcg/fpu_helper.c         | 1 -
- target/mips/tcg/sysemu/lcsr_helper.c | 1 -
- target/s390x/tcg/excp_helper.c       | 1 -
- target/s390x/tcg/fpu_helper.c        | 1 -
- target/xtensa/mmu_helper.c           | 1 -
- target/xtensa/op_helper.c            | 1 -
- 8 files changed, 8 deletions(-)
+ hw/char/cadence_uart.c   | 8 ++++----
+ hw/char/cmsdk-apb-uart.c | 6 +++---
+ hw/char/ibex_uart.c      | 8 ++++----
+ hw/char/nrf51_uart.c     | 4 ++--
+ hw/char/serial.c         | 2 +-
+ hw/char/virtio-console.c | 2 +-
+ hw/usb/redirect.c        | 2 +-
+ monitor/monitor.c        | 2 +-
+ net/vhost-user.c         | 2 +-
+ 9 files changed, 18 insertions(+), 18 deletions(-)
 
-diff --git a/target/riscv/pmu.h b/target/riscv/pmu.h
-index d2be06a133..60fdd6f42c 100644
---- a/target/riscv/pmu.h
-+++ b/target/riscv/pmu.h
-@@ -18,7 +18,6 @@
+diff --git a/hw/char/cadence_uart.c b/hw/char/cadence_uart.c
+index 807e398541..eff0304a18 100644
+--- a/hw/char/cadence_uart.c
++++ b/hw/char/cadence_uart.c
+@@ -307,11 +307,11 @@ static gboolean cadence_uart_xmit(void *do_not_use, GIOCondition cond,
+     /* instant drain the fifo when there's no back-end */
+     if (!qemu_chr_fe_backend_connected(&s->chr)) {
+         s->tx_count = 0;
+-        return FALSE;
++        return G_SOURCE_REMOVE;
+     }
  
- #include "cpu.h"
- #include "qemu/main-loop.h"
--#include "exec/exec-all.h"
+     if (!s->tx_count) {
+-        return FALSE;
++        return G_SOURCE_REMOVE;
+     }
  
- bool riscv_pmu_ctr_monitor_instructions(CPURISCVState *env,
-                                         uint32_t target_ctr);
-diff --git a/target/cris/op_helper.c b/target/cris/op_helper.c
-index 40cb74ce73..98a9aaf504 100644
---- a/target/cris/op_helper.c
-+++ b/target/cris/op_helper.c
-@@ -24,7 +24,6 @@
- #include "exec/helper-proto.h"
- #include "qemu/host-utils.h"
- #include "exec/exec-all.h"
--#include "exec/cpu_ldst.h"
+     ret = qemu_chr_fe_write(&s->chr, s->tx_fifo, s->tx_count);
+@@ -326,12 +326,12 @@ static gboolean cadence_uart_xmit(void *do_not_use, GIOCondition cond,
+                                         cadence_uart_xmit, s);
+         if (!r) {
+             s->tx_count = 0;
+-            return FALSE;
++            return G_SOURCE_REMOVE;
+         }
+     }
  
- //#define CRIS_OP_HELPER_DEBUG
+     uart_update_status(s);
+-    return FALSE;
++    return G_SOURCE_REMOVE;
+ }
  
-diff --git a/target/mips/tcg/fpu_helper.c b/target/mips/tcg/fpu_helper.c
-index 8ce56ed7c8..45d593de48 100644
---- a/target/mips/tcg/fpu_helper.c
-+++ b/target/mips/tcg/fpu_helper.c
-@@ -25,7 +25,6 @@
- #include "internal.h"
- #include "exec/helper-proto.h"
- #include "exec/exec-all.h"
--#include "exec/cpu_ldst.h"
- #include "fpu/softfloat.h"
- #include "fpu_helper.h"
+ static void uart_write_tx_fifo(CadenceUARTState *s, const uint8_t *buf,
+diff --git a/hw/char/cmsdk-apb-uart.c b/hw/char/cmsdk-apb-uart.c
+index f8dc89ee3d..d466cd93de 100644
+--- a/hw/char/cmsdk-apb-uart.c
++++ b/hw/char/cmsdk-apb-uart.c
+@@ -199,7 +199,7 @@ static gboolean uart_transmit(void *do_not_use, GIOCondition cond, void *opaque)
+     s->watch_tag = 0;
  
-diff --git a/target/mips/tcg/sysemu/lcsr_helper.c b/target/mips/tcg/sysemu/lcsr_helper.c
-index 942143d209..8f97d04313 100644
---- a/target/mips/tcg/sysemu/lcsr_helper.c
-+++ b/target/mips/tcg/sysemu/lcsr_helper.c
-@@ -13,7 +13,6 @@
- #include "qemu/host-utils.h"
- #include "exec/helper-proto.h"
- #include "exec/exec-all.h"
--#include "exec/cpu_ldst.h"
+     if (!(s->ctrl & R_CTRL_TX_EN_MASK) || !(s->state & R_STATE_TXFULL_MASK)) {
+-        return FALSE;
++        return G_SOURCE_REMOVE;
+     }
  
- #define GET_MEMTXATTRS(cas) \
-         ((MemTxAttrs){.requester_id = env_cpu(cas)->cpu_index})
-diff --git a/target/s390x/tcg/excp_helper.c b/target/s390x/tcg/excp_helper.c
-index b7116d0577..b875bf14e5 100644
---- a/target/s390x/tcg/excp_helper.c
-+++ b/target/s390x/tcg/excp_helper.c
-@@ -23,7 +23,6 @@
- #include "cpu.h"
- #include "exec/helper-proto.h"
- #include "exec/exec-all.h"
--#include "exec/cpu_ldst.h"
- #include "s390x-internal.h"
- #include "tcg_s390x.h"
- #ifndef CONFIG_USER_ONLY
-diff --git a/target/s390x/tcg/fpu_helper.c b/target/s390x/tcg/fpu_helper.c
-index c329b31261..d8bd5748fa 100644
---- a/target/s390x/tcg/fpu_helper.c
-+++ b/target/s390x/tcg/fpu_helper.c
-@@ -23,7 +23,6 @@
- #include "s390x-internal.h"
- #include "tcg_s390x.h"
- #include "exec/exec-all.h"
--#include "exec/cpu_ldst.h"
- #include "exec/helper-proto.h"
- #include "fpu/softfloat.h"
+     ret = qemu_chr_fe_write(&s->chr, &s->txbuf, 1);
+@@ -215,7 +215,7 @@ static gboolean uart_transmit(void *do_not_use, GIOCondition cond, void *opaque)
+         }
+         /* Transmit pending */
+         trace_cmsdk_apb_uart_tx_pending();
+-        return FALSE;
++        return G_SOURCE_REMOVE;
+     }
  
-diff --git a/target/xtensa/mmu_helper.c b/target/xtensa/mmu_helper.c
-index fa66e8e867..57b75882c4 100644
---- a/target/xtensa/mmu_helper.c
-+++ b/target/xtensa/mmu_helper.c
-@@ -34,7 +34,6 @@
- #include "exec/helper-proto.h"
- #include "qemu/host-utils.h"
- #include "exec/exec-all.h"
--#include "exec/cpu_ldst.h"
+ buffer_drained:
+@@ -227,7 +227,7 @@ buffer_drained:
+         s->intstatus |= R_INTSTATUS_TX_MASK;
+     }
+     cmsdk_apb_uart_update(s);
+-    return FALSE;
++    return G_SOURCE_REMOVE;
+ }
  
- #define XTENSA_MPU_SEGMENT_MASK 0x0000001f
- #define XTENSA_MPU_ACC_RIGHTS_MASK 0x00000f00
-diff --git a/target/xtensa/op_helper.c b/target/xtensa/op_helper.c
-index 1af7becc54..10a2b51f91 100644
---- a/target/xtensa/op_helper.c
-+++ b/target/xtensa/op_helper.c
-@@ -31,7 +31,6 @@
- #include "exec/helper-proto.h"
- #include "qemu/host-utils.h"
- #include "exec/exec-all.h"
--#include "exec/cpu_ldst.h"
- #include "qemu/timer.h"
+ static void uart_cancel_transmit(CMSDKAPBUART *s)
+diff --git a/hw/char/ibex_uart.c b/hw/char/ibex_uart.c
+index f70adb5308..51708c0836 100644
+--- a/hw/char/ibex_uart.c
++++ b/hw/char/ibex_uart.c
+@@ -147,7 +147,7 @@ static gboolean ibex_uart_xmit(void *do_not_use, GIOCondition cond,
+     /* instant drain the fifo when there's no back-end */
+     if (!qemu_chr_fe_backend_connected(&s->chr)) {
+         s->tx_level = 0;
+-        return FALSE;
++        return G_SOURCE_REMOVE;
+     }
  
- #ifndef CONFIG_USER_ONLY
+     if (!s->tx_level) {
+@@ -156,7 +156,7 @@ static gboolean ibex_uart_xmit(void *do_not_use, GIOCondition cond,
+         s->uart_intr_state |= R_INTR_STATE_TX_EMPTY_MASK;
+         s->uart_intr_state &= ~R_INTR_STATE_TX_WATERMARK_MASK;
+         ibex_uart_update_irqs(s);
+-        return FALSE;
++        return G_SOURCE_REMOVE;
+     }
+ 
+     ret = qemu_chr_fe_write(&s->chr, s->tx_fifo, s->tx_level);
+@@ -171,7 +171,7 @@ static gboolean ibex_uart_xmit(void *do_not_use, GIOCondition cond,
+                                         ibex_uart_xmit, s);
+         if (!r) {
+             s->tx_level = 0;
+-            return FALSE;
++            return G_SOURCE_REMOVE;
+         }
+     }
+ 
+@@ -192,7 +192,7 @@ static gboolean ibex_uart_xmit(void *do_not_use, GIOCondition cond,
+     }
+ 
+     ibex_uart_update_irqs(s);
+-    return FALSE;
++    return G_SOURCE_REMOVE;
+ }
+ 
+ static void uart_write_tx_fifo(IbexUartState *s, const uint8_t *buf,
+diff --git a/hw/char/nrf51_uart.c b/hw/char/nrf51_uart.c
+index 3c6f982de9..dfe2276d71 100644
+--- a/hw/char/nrf51_uart.c
++++ b/hw/char/nrf51_uart.c
+@@ -93,13 +93,13 @@ static gboolean uart_transmit(void *do_not_use, GIOCondition cond, void *opaque)
+              */
+             goto buffer_drained;
+         }
+-        return FALSE;
++        return G_SOURCE_REMOVE;
+     }
+ 
+ buffer_drained:
+     s->reg[R_UART_TXDRDY] = 1;
+     s->pending_tx_byte = false;
+-    return FALSE;
++    return G_SOURCE_REMOVE;
+ }
+ 
+ static void uart_cancel_transmit(NRF51UARTState *s)
+diff --git a/hw/char/serial.c b/hw/char/serial.c
+index 270e1b1094..f3094f860f 100644
+--- a/hw/char/serial.c
++++ b/hw/char/serial.c
+@@ -226,7 +226,7 @@ static gboolean serial_watch_cb(void *do_not_use, GIOCondition cond,
+     SerialState *s = opaque;
+     s->watch_tag = 0;
+     serial_xmit(s);
+-    return FALSE;
++    return G_SOURCE_REMOVE;
+ }
+ 
+ static void serial_xmit(SerialState *s)
+diff --git a/hw/char/virtio-console.c b/hw/char/virtio-console.c
+index dd5a02e339..dbe0b28e60 100644
+--- a/hw/char/virtio-console.c
++++ b/hw/char/virtio-console.c
+@@ -45,7 +45,7 @@ static gboolean chr_write_unblocked(void *do_not_use, GIOCondition cond,
+ 
+     vcon->watch = 0;
+     virtio_serial_throttle_port(VIRTIO_SERIAL_PORT(vcon), false);
+-    return FALSE;
++    return G_SOURCE_REMOVE;
+ }
+ 
+ /* Callback function that's called when the guest sends us data */
+diff --git a/hw/usb/redirect.c b/hw/usb/redirect.c
+index 39fbaaab16..4bbf8afb33 100644
+--- a/hw/usb/redirect.c
++++ b/hw/usb/redirect.c
+@@ -278,7 +278,7 @@ static gboolean usbredir_write_unblocked(void *do_not_use, GIOCondition cond,
+     dev->watch = 0;
+     usbredirparser_do_write(dev->parser);
+ 
+-    return FALSE;
++    return G_SOURCE_REMOVE;
+ }
+ 
+ static int usbredir_write(void *priv, uint8_t *data, int count)
+diff --git a/monitor/monitor.c b/monitor/monitor.c
+index dc352f9e9d..941f87815a 100644
+--- a/monitor/monitor.c
++++ b/monitor/monitor.c
+@@ -144,7 +144,7 @@ static gboolean monitor_unblocked(void *do_not_use, GIOCondition cond,
+     QEMU_LOCK_GUARD(&mon->mon_lock);
+     mon->out_watch = 0;
+     monitor_flush_locked(mon);
+-    return FALSE;
++    return G_SOURCE_REMOVE;
+ }
+ 
+ /* Caller must hold mon->mon_lock */
+diff --git a/net/vhost-user.c b/net/vhost-user.c
+index 5993e4afca..12555518e8 100644
+--- a/net/vhost-user.c
++++ b/net/vhost-user.c
+@@ -239,7 +239,7 @@ static gboolean net_vhost_user_watch(void *do_not_use, GIOCondition cond,
+ 
+     qemu_chr_fe_disconnect(&s->chr);
+ 
+-    return TRUE;
++    return G_SOURCE_CONTINUE;
+ }
+ 
+ static void net_vhost_user_event(void *opaque, QEMUChrEvent event);
 -- 
 2.41.0
 
