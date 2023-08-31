@@ -4,76 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCF37C83F12
-	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 13:13:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB731C83F32
+	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 13:13:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qbhS5-0005Fz-EA; Thu, 31 Aug 2023 09:11:14 -0400
+	id 1qbhJ3-0003hI-QB; Thu, 31 Aug 2023 09:01:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qbhS3-0004xG-0y
- for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 09:11:11 -0400
-Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhFU-0003DR-4b
+ for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:58:13 -0400
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qbhRz-0001yn-Hl
- for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 09:11:09 -0400
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-99c4923195dso88589566b.2
- for <qemu-riscv@nongnu.org>; Thu, 31 Aug 2023 06:11:06 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhFO-0005Uw-Kc
+ for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:58:10 -0400
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-3fee8af9cb9so7632145e9.1
+ for <qemu-riscv@nongnu.org>; Thu, 31 Aug 2023 05:58:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1693487465; x=1694092265; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=njvqji7ZYkq9lGMC9uKIVhI5gf1E+Sm34Az4hHBWlJ8=;
- b=dlJR3N3p+c6DvgakgiMLZwooZsqYbxa/cV8fmH8r1EKp1VCsTGknj3UmvoBKk9nF9s
- d73foWh+Em2LBPeXducFGw1GnLDXT3DZmdYcTM8stobKMXSsMW/98PrRHeZOy8gxystt
- HtT8N+W7LebIDv4f/0Vegg/+gIfpnwepyiuyYKDCXDAAeq+IMvLl5ppBAjKiH4r3X65s
- SwuTPjaV87fQTPZFFk2pbyDGVYMdqASsbkX76EfZMtMN66MpSkojz8VMf36OGx7rhwIk
- hePuPpcUCL7HKFat8b1MoGMl+8MbpMx9AKjy2TVYNlvcPdGgFZaI/iBuMiV3yY3A8KZE
- QymQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693487465; x=1694092265;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1693486685; x=1694091485; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=njvqji7ZYkq9lGMC9uKIVhI5gf1E+Sm34Az4hHBWlJ8=;
- b=XvuD3OXZ5IRAqOPxlI+RfwN1+B1kyYLv2aEMC9Calb1qk8GER9AXru9CdRaPQ7JwFO
- SBJD5hU+RfKKQntekh6UJNsJJKF5GhkiDSprg4LKfe9IQGzFpy03YwlfUwOcY3zHLGtw
- +Ka9u/avH/AHf0XZKpvhwCANqHfSPlrqLW7YWSHFY0lgUKhSoVadNgsWxiySyElVgcIw
- Mzd24VZLf8EmYXmfinW8o1hPUq03+xUmUOk8GSKNPqnm8zkJWpLfqyzafnk4hkoyCN7A
- T3bRF+gIXVOPgx+85LxES8H0lVv1Aequ3SwDw3+x827SLTs/yC6/vtgJN9/kwOHXXMD6
- pxrQ==
-X-Gm-Message-State: AOJu0YxNPWRv1qMBYB8/CF8xDMdCmSARO1TxMuWwo0LGVMbsTGPaSkyi
- W+nxM2R4KwjFndTYkryBH2pMtQ==
-X-Google-Smtp-Source: AGHT+IGMdZtDUwjMhwCbFscMlP7UJFPB7vmOPBDFsVpPj+2KLqE9BFt6PkgIH33/M2CrNE1IV/vLuw==
-X-Received: by 2002:a17:906:1d8:b0:99d:ff60:6ff4 with SMTP id
- 24-20020a17090601d800b0099dff606ff4mr4299319ejj.70.1693487465176; 
- Thu, 31 Aug 2023 06:11:05 -0700 (PDT)
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ bh=sO6ZIHVbK+18/xJUsh8T6zEIqxOQUhu4K3Jic6wZRnQ=;
+ b=eAfEucj3tx5MHS8XSt0+Y5gnfFbBdtRonS/X6q3aeIuLsFSDo1nkfYrLjdf7JJ3F1d
+ xezkHhByE8Wg28C0Wf64ZDYSmVNnG1FOpefo4A8m69NWOxkuc8YmAS63NmzDuMkF6zOF
+ zkPU21UcWRZH/rggjJf/+8P+225bbEHW0vX7E26779QET0/n7YDECEaw2ciKV0tVtRlV
+ 2gTgv3/dSNEfyESNBsjFnudzeeI65pDKCb+ahff9DraPb0P6ZlwgJ23I13Qly2rVJd1h
+ +m1iixHtWHvU6peP+vNa29vJIY96SdYOgJBQx3w0cg9MqJB6ePxfRhkIoSCEZ1xOp/mu
+ kxRA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693486685; x=1694091485;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=sO6ZIHVbK+18/xJUsh8T6zEIqxOQUhu4K3Jic6wZRnQ=;
+ b=LBwVWIjKwWzKdVMdWUUXzL823xbQN6jq4J0O+Cfp957j7mLxE+QHaUKDVC34GH4EGM
+ AZFZ9uLhjT0vdqhnsyh15iqcVHj2//WDJ9WIRzX2gZJ1nFUJfVinYKundMvPuWdlIKC9
+ 1bpx7Dp62EyqJOonjSjB1wwtdyozsNCGxhgk9KZpAqGX5Z59MMFsAYcJMnDB7oKNl/XY
+ L/377zKxWWmIbNBhbTDIqTYlSe9IioB4zhJdvtfcs9KwXtEfBPG5UHBYHUU0nW3ZKCZ/
+ ACxi9HhI6vjp9q3ueIB11NgVcdIgnEkjB9ee/8bZuI5Q9gUrAKq0sBkrN8Wks8KYaQMt
+ GS0w==
+X-Gm-Message-State: AOJu0YyWCNOnyjmpwruP5PlqfzhHOqks0fI4wEdQBQsT9kXg79+HIyqe
+ 3EsQh/RlNRvvOCi15NtR6XWyxA==
+X-Google-Smtp-Source: AGHT+IEm+SuDqgTbS1yZNwTu6hF6uRicfOULaORbf9jp4vcHf3wEA6xYNjdsWBIS9eyE0v4IaCr3xg==
+X-Received: by 2002:a7b:cd0a:0:b0:401:cc0f:f866 with SMTP id
+ f10-20020a7bcd0a000000b00401cc0ff866mr4839520wmj.12.1693486685237; 
+ Thu, 31 Aug 2023 05:58:05 -0700 (PDT)
+Received: from m1x-phil.lan ([176.187.199.245])
  by smtp.gmail.com with ESMTPSA id
- f2-20020a1709064dc200b0099c53c4407dsm749542ejw.78.2023.08.31.06.11.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Aug 2023 06:11:04 -0700 (PDT)
-Date: Thu, 31 Aug 2023 15:11:03 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
-Subject: Re: [PATCH RESEND v8 10/20] target/riscv: add 'max' CPU type
-Message-ID: <20230831-8bda2abafcb322586175aa69@orel>
-References: <20230824221440.484675-1-dbarboza@ventanamicro.com>
- <20230824221440.484675-11-dbarboza@ventanamicro.com>
+ y23-20020a7bcd97000000b003fbc9d178a8sm5168090wmj.4.2023.08.31.05.58.03
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Thu, 31 Aug 2023 05:58:04 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
+ qemu-riscv@nongnu.org, qemu-block@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ Thomas Huth <thuth@redhat.com>, Max Filippov <jcmvbkbc@gmail.com>
+Subject: [PULL 13/41] target/helpers: Remove unnecessary 'exec/cpu_ldst.h'
+ header
+Date: Thu, 31 Aug 2023 14:56:15 +0200
+Message-ID: <20230831125646.67855-14-philmd@linaro.org>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20230831125646.67855-1-philmd@linaro.org>
+References: <20230831125646.67855-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230824221440.484675-11-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::62e;
- envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x62e.google.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x330.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,44 +107,120 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Aug 24, 2023 at 07:14:30PM -0300, Daniel Henrique Barboza wrote:
-> The 'max' CPU type is used by tooling to determine what's the most
-> capable CPU a current QEMU version implements. Other archs such as ARM
-> implements this type. Let's add it to RISC-V.
-> 
-> What we consider "most capable CPU" in this context are related to
-> ratified, non-vendor extensions. This means that we want the 'max' CPU
-> to enable all (possible) ratified extensions by default. The reasoning
-> behind this design is (1) vendor extensions can conflict with each other
-> and we won't play favorities deciding which one is default or not and
-> (2) non-ratified extensions are always prone to changes, not being
-> stable enough to be enabled by default.
-> 
-> All this said, we're still not able to enable all ratified extensions
-> due to conflicts between them. Zfinx and all its dependencies aren't
-> enabled because of a conflict with RVF. zce, zcmp and zcmt are also
-> disabled due to RVD conflicts. When running with 64 bits we're also
-> disabling zcf.
-> 
-> MISA bits RVG, RVJ and RVV are also being set manually since they're
-> default disabled.
-> 
-> This is the resulting 'riscv,isa' DT for this new CPU:
-> 
-> rv64imafdcvh_zicbom_zicboz_zicsr_zifencei_zihintpause_zawrs_zfa_
-> zfh_zfhmin_zca_zcb_zcd_zba_zbb_zbc_zbkb_zbkc_zbkx_zbs_zk_zkn_zknd_
-> zkne_zknh_zkr_zks_zksed_zksh_zkt_zve32f_zve64f_zve64d_
-> smstateen_sscofpmf_sstc_svadu_svinval_svnapot_svpbmt
-> 
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  target/riscv/cpu-qom.h |  1 +
->  target/riscv/cpu.c     | 56 ++++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 57 insertions(+)
->
+These files don't use the CPU ld/st API, remove the unnecessary
+"exec/cpu_ldst.h" header.
 
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Message-Id: <20230828221314.18435-7-philmd@linaro.org>
+---
+ target/riscv/pmu.h                   | 1 -
+ target/cris/op_helper.c              | 1 -
+ target/mips/tcg/fpu_helper.c         | 1 -
+ target/mips/tcg/sysemu/lcsr_helper.c | 1 -
+ target/s390x/tcg/excp_helper.c       | 1 -
+ target/s390x/tcg/fpu_helper.c        | 1 -
+ target/xtensa/mmu_helper.c           | 1 -
+ target/xtensa/op_helper.c            | 1 -
+ 8 files changed, 8 deletions(-)
+
+diff --git a/target/riscv/pmu.h b/target/riscv/pmu.h
+index d2be06a133..60fdd6f42c 100644
+--- a/target/riscv/pmu.h
++++ b/target/riscv/pmu.h
+@@ -18,7 +18,6 @@
+ 
+ #include "cpu.h"
+ #include "qemu/main-loop.h"
+-#include "exec/exec-all.h"
+ 
+ bool riscv_pmu_ctr_monitor_instructions(CPURISCVState *env,
+                                         uint32_t target_ctr);
+diff --git a/target/cris/op_helper.c b/target/cris/op_helper.c
+index 40cb74ce73..98a9aaf504 100644
+--- a/target/cris/op_helper.c
++++ b/target/cris/op_helper.c
+@@ -24,7 +24,6 @@
+ #include "exec/helper-proto.h"
+ #include "qemu/host-utils.h"
+ #include "exec/exec-all.h"
+-#include "exec/cpu_ldst.h"
+ 
+ //#define CRIS_OP_HELPER_DEBUG
+ 
+diff --git a/target/mips/tcg/fpu_helper.c b/target/mips/tcg/fpu_helper.c
+index 8ce56ed7c8..45d593de48 100644
+--- a/target/mips/tcg/fpu_helper.c
++++ b/target/mips/tcg/fpu_helper.c
+@@ -25,7 +25,6 @@
+ #include "internal.h"
+ #include "exec/helper-proto.h"
+ #include "exec/exec-all.h"
+-#include "exec/cpu_ldst.h"
+ #include "fpu/softfloat.h"
+ #include "fpu_helper.h"
+ 
+diff --git a/target/mips/tcg/sysemu/lcsr_helper.c b/target/mips/tcg/sysemu/lcsr_helper.c
+index 942143d209..8f97d04313 100644
+--- a/target/mips/tcg/sysemu/lcsr_helper.c
++++ b/target/mips/tcg/sysemu/lcsr_helper.c
+@@ -13,7 +13,6 @@
+ #include "qemu/host-utils.h"
+ #include "exec/helper-proto.h"
+ #include "exec/exec-all.h"
+-#include "exec/cpu_ldst.h"
+ 
+ #define GET_MEMTXATTRS(cas) \
+         ((MemTxAttrs){.requester_id = env_cpu(cas)->cpu_index})
+diff --git a/target/s390x/tcg/excp_helper.c b/target/s390x/tcg/excp_helper.c
+index b7116d0577..b875bf14e5 100644
+--- a/target/s390x/tcg/excp_helper.c
++++ b/target/s390x/tcg/excp_helper.c
+@@ -23,7 +23,6 @@
+ #include "cpu.h"
+ #include "exec/helper-proto.h"
+ #include "exec/exec-all.h"
+-#include "exec/cpu_ldst.h"
+ #include "s390x-internal.h"
+ #include "tcg_s390x.h"
+ #ifndef CONFIG_USER_ONLY
+diff --git a/target/s390x/tcg/fpu_helper.c b/target/s390x/tcg/fpu_helper.c
+index c329b31261..d8bd5748fa 100644
+--- a/target/s390x/tcg/fpu_helper.c
++++ b/target/s390x/tcg/fpu_helper.c
+@@ -23,7 +23,6 @@
+ #include "s390x-internal.h"
+ #include "tcg_s390x.h"
+ #include "exec/exec-all.h"
+-#include "exec/cpu_ldst.h"
+ #include "exec/helper-proto.h"
+ #include "fpu/softfloat.h"
+ 
+diff --git a/target/xtensa/mmu_helper.c b/target/xtensa/mmu_helper.c
+index fa66e8e867..57b75882c4 100644
+--- a/target/xtensa/mmu_helper.c
++++ b/target/xtensa/mmu_helper.c
+@@ -34,7 +34,6 @@
+ #include "exec/helper-proto.h"
+ #include "qemu/host-utils.h"
+ #include "exec/exec-all.h"
+-#include "exec/cpu_ldst.h"
+ 
+ #define XTENSA_MPU_SEGMENT_MASK 0x0000001f
+ #define XTENSA_MPU_ACC_RIGHTS_MASK 0x00000f00
+diff --git a/target/xtensa/op_helper.c b/target/xtensa/op_helper.c
+index 1af7becc54..10a2b51f91 100644
+--- a/target/xtensa/op_helper.c
++++ b/target/xtensa/op_helper.c
+@@ -31,7 +31,6 @@
+ #include "exec/helper-proto.h"
+ #include "qemu/host-utils.h"
+ #include "exec/exec-all.h"
+-#include "exec/cpu_ldst.h"
+ #include "qemu/timer.h"
+ 
+ #ifndef CONFIG_USER_ONLY
+-- 
+2.41.0
 
 
