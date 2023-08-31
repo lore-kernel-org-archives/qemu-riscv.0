@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3182DC6FA8F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Aug 2023 20:55:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D72FC83F10
+	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 08:43:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qbSDS-0000mZ-L6; Wed, 30 Aug 2023 16:55:06 -0400
+	id 1qbdGH-0001eC-Lv; Thu, 31 Aug 2023 04:42:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbSDP-0000li-Tk
- for qemu-riscv@nongnu.org; Wed, 30 Aug 2023 16:55:04 -0400
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1qbdGF-0001c6-1c
+ for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 04:42:43 -0400
+Received: from mail-ed1-x536.google.com ([2a00:1450:4864:20::536])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbSDN-00045t-82
- for qemu-riscv@nongnu.org; Wed, 30 Aug 2023 16:55:03 -0400
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-31dca134c83so3277664f8f.3
- for <qemu-riscv@nongnu.org>; Wed, 30 Aug 2023 13:55:00 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1qbdGA-00033j-U8
+ for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 04:42:41 -0400
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5256d74dab9so644164a12.1
+ for <qemu-riscv@nongnu.org>; Thu, 31 Aug 2023 01:42:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693428899; x=1694033699; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=QTOYn7M3xmkrE7uRIAr8EYGFQiXtdi95iLI3EwpLfTM=;
- b=XYyOGojafzI5/ss45pwphA8Lvj62y2HGul8ags7wxlEUqkv5Sk88qbTpxDmHeoxv+d
- IQ1wZVgUvGdllDFx0+JsRzAboZfXzCbmiiQDICGxB7+jLhty3fbNmUTrkwVfMcUioX5Y
- ySueKpzSExQq3nM5i0s8cOKBnk2vFWCFMEZPZfrWlRN1ZVDKjIlYlqKnCWk7QTpwtRie
- mQYuAp9SRXa83VwmE5UrC3kdTW98gVq1/EPADB84shdmPK3heMSPfd2yCezv7N7EALfu
- WlKtnweNyebqw8O8YKVzu/NauHimzco/UZdZAeB67nQR1BKUrdp3Hn3hvahpng//I+Fj
- dsbg==
+ d=ventanamicro.com; s=google; t=1693471355; x=1694076155; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=gDFKuq03eMCHLbMsGMmFE3EEmuQZaDoeVrm8H+xKAYA=;
+ b=kuMK9sxVZs2g/I6WWyD+MrkIZxsojTXDxNvRUxJB3z/mrLigLPtl7VOfSrCs4zKxBp
+ pfDPnIxQCOLYHzsbokW2P0QemQbT30nateDbZAhyw2Zh/NGecsi5b6JwkJQ1Oe/ItrCQ
+ KWu7JnbjTp3UQNl0k0my8+ELWxodSRo5ZBlIOeuvSuqc16SWaDV6LVh9Lt0291+xPvFr
+ tc7l1st2njVSC0KRWvD/gJmQYTYDBSdCoWpMcn5y7TgFDPL5Iz2OL/z82oqvIvRTxhzP
+ Tq7lQvlW/9dVALWPqUiAHgy8uwpe5zTjB0aahowhjC08hAcpSjDLpHEwfaNyGepwPcEH
+ lycg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693428899; x=1694033699;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=QTOYn7M3xmkrE7uRIAr8EYGFQiXtdi95iLI3EwpLfTM=;
- b=hZhSWjHK6tpdVCoIlREUjmsphX2ytp7t03znX3qNJBlI9BogkVaqcThhSbd1kJGxU7
- Eo5PFXo+09h8HSCaEenV+VbZ3NzJRd934M+RyksR1EUgoyhGw0U+5XipNOxvlIy9rVhU
- zVr45bmOfv7Lpzi/n1ZmpmHL8YK0ZxI2G83Y2oYPyTsCdMVei9eWe2ijbvBYOD5zL7dl
- L0wkbtvAthDG41/vP9XO5P2v8vvrEYPfgZIzB5431V4BmgTwNssRS0wAp/QJXzJcKrCT
- u7zqeoqejPnDBjBMT/+QxJNxzmLUSECfiFOqGy+ZE64GX/N//NKwsSR2y6UB9rkW8Bg8
- JCHg==
-X-Gm-Message-State: AOJu0YwrSAaqQ+j8waLei8TwFKwyEWlc7E0Bo+n1pmCp7t+2UhXnoO/g
- ZjaeGb5kIdrVhBLZ8K2hCv7ZAw==
-X-Google-Smtp-Source: AGHT+IHywk5gdnTQCY26D+n3xPApnnp3rIIrky+CWd223bsAcMj5TOoUjG9x6c5C05FRCDCSoZXSOQ==
-X-Received: by 2002:adf:e686:0:b0:31a:e89a:df0a with SMTP id
- r6-20020adfe686000000b0031ae89adf0amr2402114wrm.45.1693428899174; 
- Wed, 30 Aug 2023 13:54:59 -0700 (PDT)
-Received: from [192.168.69.115] ([176.176.142.89])
+ d=1e100.net; s=20221208; t=1693471355; x=1694076155;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gDFKuq03eMCHLbMsGMmFE3EEmuQZaDoeVrm8H+xKAYA=;
+ b=SZdGtX7yT1m/liWD+LfMJ7OcLO/4JNr1F9s344F4k/0xvrwukWvf0wqfYp7MNipghW
+ ILOZ129vWVwFj7jPRCwDaxMEO1+GUvxf5RV5Rjn5m3pbITykDaEGUhtilCjF+mTLGCsL
+ v6YSw9Yw/eCJR2ovELjyuPEQaIzMogZmYQVa4B8kfbcYQMtcihY0DkvUukGb313ifMnv
+ P63osrkxcIfycdonhhAYx9EgaJBPsE3E/jwAuSEVJYKOqXbWBoh0GblACyKb4LkheHg4
+ mLMZ1osPOOH7dFz5eNtOzErTuETY5XJdjQbF9hmWPMOLtZLA34RX0HmuU1sl0nyNPyiI
+ 7m8A==
+X-Gm-Message-State: AOJu0YyTMPPOFyuuqDYjl/oRAHtpjseblwzPy/ZA9o77Eclqv6vg3fl+
+ sYWwZouVroARDr5L29++Z5t6aA==
+X-Google-Smtp-Source: AGHT+IFlNIql9KDCuMbv4dvHw7Z98i2xQN+mIyYK0TpbDJVvicMDkRI5hb/yxwbUZWfzPMyEGSFSNA==
+X-Received: by 2002:a05:6402:646:b0:526:9c4:bc06 with SMTP id
+ u6-20020a056402064600b0052609c4bc06mr3433979edx.18.1693471355508; 
+ Thu, 31 Aug 2023 01:42:35 -0700 (PDT)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
  by smtp.gmail.com with ESMTPSA id
- b3-20020adfde03000000b0031accc7228asm17561661wrm.34.2023.08.30.13.54.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 30 Aug 2023 13:54:58 -0700 (PDT)
-Message-ID: <34a72862-02a1-327d-ef43-1b47ef2eb865@linaro.org>
-Date: Wed, 30 Aug 2023 22:54:57 +0200
+ e23-20020aa7d7d7000000b00525683f9b2fsm525212eds.5.2023.08.31.01.42.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 31 Aug 2023 01:42:34 -0700 (PDT)
+Date: Thu, 31 Aug 2023 10:42:33 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, richard.henderson@linaro.org
+Subject: Re: [PATCH v2 1/2] hw/riscv/virt.c: fix non-KVM --enable-debug build
+Message-ID: <20230831-d3b40182209cb9054ceaed62@orel>
+References: <20230830133503.711138-1-dbarboza@ventanamicro.com>
+ <20230830133503.711138-2-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.14.0
-Subject: Re: [PATCH 12/20] target/riscv: move KVM only files to kvm subdir
-Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
-References: <20230825130853.511782-1-dbarboza@ventanamicro.com>
- <20230825130853.511782-13-dbarboza@ventanamicro.com>
- <355beacc-19a4-f860-52ec-c421858b40e1@linaro.org>
- <646bd37a-367b-5877-f54d-721f61cbfcd0@ventanamicro.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <646bd37a-367b-5877-f54d-721f61cbfcd0@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x429.google.com
-X-Spam_score_int: -32
-X-Spam_score: -3.3
-X-Spam_bar: ---
-X-Spam_report: (-3.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.242,
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230830133503.711138-2-dbarboza@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::536;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x536.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -98,119 +96,84 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 30/8/23 20:21, Daniel Henrique Barboza wrote:
+On Wed, Aug 30, 2023 at 10:35:02AM -0300, Daniel Henrique Barboza wrote:
+> A build with --enable-debug and without KVM will fail as follows:
 > 
+> /usr/bin/ld: libqemu-riscv64-softmmu.fa.p/hw_riscv_virt.c.o: in function `virt_machine_init':
+> ./qemu/build/../hw/riscv/virt.c:1465: undefined reference to `kvm_riscv_aia_create'
 > 
-> On 8/28/23 13:47, Philippe Mathieu-Daudé wrote:
->> On 25/8/23 15:08, Daniel Henrique Barboza wrote:
->>> Move the files to a 'kvm' dir to promote more code separation between
->>> accelerators and making our lives easier supporting build options such
->>> as --disable-tcg.
->>>
->>> Rename kvm.c to kvm-cpu.c to keep it in line with its TCG counterpart.
->>>
->>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->>> ---
->>>   hw/riscv/virt.c                       | 2 +-
->>>   target/riscv/cpu.c                    | 2 +-
->>>   target/riscv/{kvm.c => kvm/kvm-cpu.c} | 0
->>>   target/riscv/{ => kvm}/kvm-stub.c     | 0
->>>   target/riscv/{ => kvm}/kvm_riscv.h    | 0
->>>   target/riscv/kvm/meson.build          | 2 ++
->>>   target/riscv/meson.build              | 2 +-
->>>   7 files changed, 5 insertions(+), 3 deletions(-)
->>>   rename target/riscv/{kvm.c => kvm/kvm-cpu.c} (100%)
->>>   rename target/riscv/{ => kvm}/kvm-stub.c (100%)
->>>   rename target/riscv/{ => kvm}/kvm_riscv.h (100%)
->>>   create mode 100644 target/riscv/kvm/meson.build
->>
->>
->>> +++ b/target/riscv/kvm/meson.build
->>> @@ -0,0 +1,2 @@
->>> +riscv_ss.add(when: 'CONFIG_KVM', if_true: files('kvm-cpu.c'),
->>> +                                 if_false: files('kvm-stub.c'))
->>
->> Hmm maybe we need to add:
->>
->> -- >8 --
->> diff --git a/include/hw/core/accel-cpu.h b/include/hw/core/accel-cpu.h
->> index 5dbfd79955..65973b6f2e 100644
->> --- a/include/hw/core/accel-cpu.h
->> +++ b/include/hw/core/accel-cpu.h
->> @@ -33,6 +33,7 @@ typedef struct AccelCPUClass {
->>       void (*cpu_class_init)(CPUClass *cc);
->>       void (*cpu_instance_init)(CPUState *cpu);
->>       bool (*cpu_realizefn)(CPUState *cpu, Error **errp);
->> +    ResettablePhases cpu_reset;
->>   } AccelCPUClass;
->> ---
->>
->> and here:
->>
->>   static void kvm_cpu_accel_class_init(ObjectClass *oc, void *data)
->>   {
->>       AccelCPUClass *acc = ACCEL_CPU_CLASS(oc);
->>
->>       acc->cpu_instance_init = kvm_cpu_instance_init;
->> +    acc->cpu_reset.hold = kvm_riscv_reset_vcpu;
->>   }
->>
->> so then calling some accel_cpu_reset_hold() in riscv_cpu_reset_hold(),
->> would call kvm_riscv_reset_vcpu() and we can remove kvm-stub.c.
+> This happens because the code block with "if virt_use_kvm_aia(s)" isn't
+> being ignored by the debug build, resulting in an undefined reference to
+> a KVM only function.
 > 
+> Add a 'kvm_enabled()' conditional together with virt_use_kvm_aia() will
+> make the compiler crop the kvm_riscv_aia_create() call entirely from a
+> non-KVM build. Note that adding the 'kvm_enabled()' conditional inside
+> virt_use_kvm_aia() won't fix the build because this function would need
+> to be inlined multiple times to make the compiler zero out the entire
+> block.
 > 
-> Or we can just remove kvm-stub.c without doing any other changes :)
+> While we're at it, use kvm_enabled() in all instances where
+> virt_use_kvm_aia() is checked to allow the compiler to elide these other
+> kvm-only instances as well.
 > 
-> Just removing it works fine it seems, even with --enable-debug builds. 
-> All functions
-> implemented in the stub are already wrapped in 'if kvm_enabled()' 
-> blocks, so the
-> stub isn't really being used.
+> Suggested-by: Richard Henderson <richard.henderson@linaro.org>
+> Fixes: dbdb99948e ("target/riscv: select KVM AIA in riscv virt machine")
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>  hw/riscv/virt.c | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
 > 
-> I'll take the opportunity to not just remove kvm-stub.c but also add the 
-> non-KVM
-> stubs of all kvm_riscv.h APIs in the header, like you ARM folks are 
-> already doing
-> in kvm_arm.h.  I'll do that in a preliminary patch.
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 388e52a294..3b259b9305 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -782,7 +782,7 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
+>      }
+>  
+>      /* KVM AIA only has one APLIC instance */
+> -    if (virt_use_kvm_aia(s)) {
+> +    if (kvm_enabled() && virt_use_kvm_aia(s)) {
+>          create_fdt_socket_aplic(s, memmap, 0,
+>                                  msi_m_phandle, msi_s_phandle, phandle,
+>                                  &intc_phandles[0], xplic_phandles,
+> @@ -808,7 +808,7 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
+>  
+>      g_free(intc_phandles);
+>  
+> -    if (virt_use_kvm_aia(s)) {
+> +    if (kvm_enabled() && virt_use_kvm_aia(s)) {
+>          *irq_mmio_phandle = xplic_phandles[0];
+>          *irq_virtio_phandle = xplic_phandles[0];
+>          *irq_pcie_phandle = xplic_phandles[0];
+> @@ -1461,7 +1461,7 @@ static void virt_machine_init(MachineState *machine)
+>          }
+>      }
+>  
+> -    if (virt_use_kvm_aia(s)) {
+> +    if (kvm_enabled() && virt_use_kvm_aia(s)) {
+>          kvm_riscv_aia_create(machine, IMSIC_MMIO_GROUP_MIN_SHIFT,
+>                               VIRT_IRQCHIP_NUM_SOURCES, VIRT_IRQCHIP_NUM_MSIS,
+>                               memmap[VIRT_APLIC_S].base,
+> -- 
+> 2.41.0
 > 
-> 
-> Oh, and a side note: I took a quick look at target/arm/kvm-stub.c and how
-> write_kvmstate_to_list() and write_list_to_kvmstate() are being called.
-> 
-> Turns out that this works for me:
-> 
-> [danielhb@grind qemu]$ git diff
-> diff --git a/target/arm/meson.build b/target/arm/meson.build
-> index e645e456da..e524e1114b 100644
-> --- a/target/arm/meson.build
-> +++ b/target/arm/meson.build
-> @@ -8,7 +8,7 @@ arm_ss.add(files(
->   ))
->   arm_ss.add(zlib)
-> 
-> -arm_ss.add(when: 'CONFIG_KVM', if_true: files('hyp_gdbstub.c', 'kvm.c', 
-> 'kvm64.c'), if_false: files('kvm-stub.c'))
-> +arm_ss.add(when: 'CONFIG_KVM', if_true: files('hyp_gdbstub.c', 'kvm.c', 
-> 'kvm64.c'))
->   arm_ss.add(when: 'CONFIG_HVF', if_true: files('hyp_gdbstub.c'))
-> 
->   arm_ss.add(when: 'TARGET_AARCH64', if_true: files(
-> 
-> [danielhb@grind qemu]$ git rm target/arm/kvm-stub.c
-> rm 'target/arm/kvm-stub.c'
-> 
-> [danielhb@grind qemu]$ cd build
-> [danielhb@grind build]$ ../configure --target-list=aarch64-softmmu 
-> --enable-debug && make -j
-> (...)
-> [2724/2725] Generating docs/QEMU manual with a custom command
-> [2725/2725] Generating docs/QEMU man pages with a custom command
-> [danielhb@grind build]$
-> 
-> 
-> I suggest you take a look into target/arm/kvm-stub.c. Seems like you can 
-> just rip it out.
+>
 
-Great news, thanks Daniel!
+I think I'd prefer
 
+ /* We need this inlined for debug (-O0) builds */
+ static inline QEMU_ALWAYS_INLINE bool virt_use_kvm_aia(RISCVVirtState *s)
+ {
+    return kvm_enabled() && kvm_irqchip_in_kernel() && s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC;
+ }
+
+assuming that works.
+
+Either way,
+
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+
+Thanks,
+drew
 
