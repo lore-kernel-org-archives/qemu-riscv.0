@@ -4,85 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AA1CC83F01
-	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 13:10:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBE82C83F01
+	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 13:10:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qbhKU-00070t-Mj; Thu, 31 Aug 2023 09:03:23 -0400
+	id 1qbhLJ-00088h-Jy; Thu, 31 Aug 2023 09:04:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhGs-0004gc-5X
- for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:59:40 -0400
-Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhGz-0004p9-Ng
+ for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:59:49 -0400
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhGo-0005zA-8n
- for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:59:37 -0400
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-31c5cac3ae2so582131f8f.3
- for <qemu-riscv@nongnu.org>; Thu, 31 Aug 2023 05:59:28 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhGu-00065d-Il
+ for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:59:43 -0400
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-401d10e3e54so7230685e9.2
+ for <qemu-riscv@nongnu.org>; Thu, 31 Aug 2023 05:59:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693486768; x=1694091568; darn=nongnu.org;
+ d=linaro.org; s=google; t=1693486779; x=1694091579; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Occ8BC5H/FvkONSrz36OUIh3zPM4NWg3GVGnui/y/PY=;
- b=vV04mWAPJeIR0CGQpZ3qrfQ58XeCAoG0Ny49MobdXAFE6LarKEXdLOmdqe92uyxVxw
- qVSkAVRTrQEA3vxp9QGGcjUaIRbkNb5ia/TCBBxuVYW7EZf5Fvkw0fnOViRbhUphY1gf
- MaguKATs+C81+SC/r33L3Z695he65Iz9gq/uvaKiEjpySStT0UwcUQ/KJ9n7DMtLG/Dc
- Hymiiee2keG+jkvTxirknxquATr2y+vv0IlAbMcq5+/OXTmMH8cReexa1veXEh0dz51P
- qIv0czqYfuBnMyMPOuE1mzKUqzp237XHhGe/dhMQ5o45X9/SkJdsPdDMcqyFVtbg1Cpx
- 7wuA==
+ bh=ur9xi937dzz6Bl2U4bEFfYnHfQ2+6Mk7VLbsIy+yiQY=;
+ b=p93qFbrXQ6SN01gFC+mCDwinPT864Vc7iDNXuSaBjHtdOEM6rBKil8dKQMPYY2qjUY
+ OtECUlmpp0yZSFIxBJB6tJq/vCr3YSyj+aM8gKaY63Yizrw5i60UeqyprRtf2k/ie+Pi
+ hYJ86rk0Vu59s3rdEe3YbLm5746nZv6Wn+DU6nN6tsMEARtzQewj2zH+gG7x706l8ADh
+ 1di5McuhMV0ZrWI+0aF8QQaq8m2M8XBvqTi2sTkDAaYHIPK/ib4NpVwFh8chxmWXTHOp
+ OIO0FiXolg9WGjacQB/aIjGDDUCe/MVhzPzFvOQnGjKUKN7jipPA4ZFZ1WZ/FftdDV9N
+ usrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693486768; x=1694091568;
+ d=1e100.net; s=20221208; t=1693486779; x=1694091579;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Occ8BC5H/FvkONSrz36OUIh3zPM4NWg3GVGnui/y/PY=;
- b=ixoZJB/4HW9XHBDVx4QXQwPB9RA3VnN6EYS/qGtPMI1DELGkiSdvRW4rOEZTC2wkbo
- FDZAjowfXQKJJGa6Uw+5bRUDIcXGCMo/FzcJeoiOvNWZEZn6+ZMngOMBljvWwZbCIPTI
- ckOp//6x9+9vRis+iETYVRGggnFyJZempSImNtJrL8iqu9xkNV9WUJAN5egcvCmWrFs0
- r2vgl+mu/5qtZAXXqgR5uAzHKquwYo1eKrYnmkDcEK1U+unrVeVe0h5kHJ5DOp9/VBpp
- DMHx6pBWk5lCY7lMjMrKKUuOUHALAEXSvz5EqqQzW5HlxTihENTbNAdDg6GpY4bFxhTp
- OYEQ==
-X-Gm-Message-State: AOJu0YzzP8XlZARBOoSMkzzBEISsov5z5mhUZ868hTL6rN2Kn91sqz8i
- oZk3IkjTWcyS3CQJ2L8Uk5AR7A==
-X-Google-Smtp-Source: AGHT+IFSVDt/P5yNxkajecZs4wlfAieIoaOSAgAAJDNxaau3QVZt9rEOGXHa3vptW3RStl32iijQ6A==
-X-Received: by 2002:a5d:6706:0:b0:319:63f3:c0cb with SMTP id
- o6-20020a5d6706000000b0031963f3c0cbmr4341696wru.40.1693486767862; 
- Thu, 31 Aug 2023 05:59:27 -0700 (PDT)
+ bh=ur9xi937dzz6Bl2U4bEFfYnHfQ2+6Mk7VLbsIy+yiQY=;
+ b=ZQTyRiMBJWDFXjjSRhb4rFNZF/kqV7NipGxAFmetlRA7IO64veU1U1oTXPHexKcNgC
+ Kqmks59uLPy+YqPptn48NSD9LQJoTtmn9jjztxfzmiCaU+ksVp3iUu+I6gX9md8DGg0A
+ /PQ0MPAbSQwBXEvDfQTHITD8zWjVpZuFgXSPizIs2U+OxiLlHI5sjo/lsTIyMvv28ylc
+ tTy5W1J1mVpw3fayj1GnlyJsEjSaaAos/BJEW5VVjWHoHb352PZwD8XKTH2ly5lNxE0n
+ VbxkkWs3KufA4d8CgR3+aVEIRdau9TNuHq5fkrFh3+AcStoxCf1VwuwOsqNL2jTTdsix
+ F46w==
+X-Gm-Message-State: AOJu0YwlhqKMctG/pEFMhVa2/8fKF8JJcQPViWFcsy82ddsrgEak8eeR
+ GfooaSolJeGGmhYmwBHS4bT0BQ==
+X-Google-Smtp-Source: AGHT+IFqinXDk2baO7sSaMza/9NPra0g8C/2PjSHejWBb1jQQgc23npbEqzbt534RZO28ZwbkvpYww==
+X-Received: by 2002:a05:600c:220d:b0:3fc:92:73d6 with SMTP id
+ z13-20020a05600c220d00b003fc009273d6mr3971473wml.11.1693486778822; 
+ Thu, 31 Aug 2023 05:59:38 -0700 (PDT)
 Received: from m1x-phil.lan ([176.187.199.245])
  by smtp.gmail.com with ESMTPSA id
- 16-20020a05600c025000b003fee7b67f67sm1901789wmj.31.2023.08.31.05.59.26
+ q9-20020adff789000000b003180027d67asm2141739wrp.19.2023.08.31.05.59.37
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 31 Aug 2023 05:59:27 -0700 (PDT)
+ Thu, 31 Aug 2023 05:59:38 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
  qemu-riscv@nongnu.org, qemu-block@nongnu.org,
  Michael Tokarev <mjt@tls.msk.ru>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Titus Rwantare <titusr@google.com>, Corey Minyard <cminyard@mvista.com>,
- Tyrone Ting <kfting@nuvoton.com>, Hao Wu <wuhaotsh@google.com>
-Subject: [PULL 26/41] hw/i2c: spelling fixes
-Date: Thu, 31 Aug 2023 14:56:28 +0200
-Message-ID: <20230831125646.67855-27-philmd@linaro.org>
+ Gerd Hoffmann <kraxel@redhat.com>,
+ Alistair Francis <alistair@alistair23.me>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>
+Subject: [PULL 28/41] hw/display: spelling fixes
+Date: Thu, 31 Aug 2023 14:56:30 +0200
+Message-ID: <20230831125646.67855-29-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230831125646.67855-1-philmd@linaro.org>
 References: <20230831125646.67855-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,108 +102,82 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 From: Michael Tokarev <mjt@tls.msk.ru>
 
 Signed-off-by: Michael Tokarev <mjt@tls.msk.ru>
-Message-ID: <20230823065335.1919380-14-mjt@tls.msk.ru>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Message-ID: <20230823065335.1919380-15-mjt@tls.msk.ru>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/hw/i2c/npcm7xx_smbus.h | 2 +-
- include/hw/misc/auxbus.h       | 2 +-
- hw/i2c/pm_smbus.c              | 2 +-
- hw/i2c/pmbus_device.c          | 2 +-
- hw/i2c/smbus_slave.c           | 2 +-
- hw/sensor/isl_pmbus_vr.c       | 2 +-
- hw/sensor/max34451.c           | 2 +-
- 7 files changed, 7 insertions(+), 7 deletions(-)
+ hw/display/bochs-display.c | 2 +-
+ hw/display/qxl.c           | 2 +-
+ hw/display/ssd0303.c       | 2 +-
+ hw/display/ssd0323.c       | 2 +-
+ hw/display/xlnx_dp.c       | 2 +-
+ 5 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/include/hw/i2c/npcm7xx_smbus.h b/include/hw/i2c/npcm7xx_smbus.h
-index 3555e6836f..dc45963c0e 100644
---- a/include/hw/i2c/npcm7xx_smbus.h
-+++ b/include/hw/i2c/npcm7xx_smbus.h
-@@ -58,7 +58,7 @@ typedef enum NPCM7xxSMBusStatus {
-  * @sclht: The SCL high time register.
-  * @fif_ctl: The FIFO control register.
-  * @fif_cts: The FIFO control status register.
-- * @fair_per: The fair preriod register.
-+ * @fair_per: The fair period register.
-  * @txf_ctl: The transmit FIFO control register.
-  * @t_out: The SMBus timeout register.
-  * @txf_sts: The transmit FIFO status register.
-diff --git a/include/hw/misc/auxbus.h b/include/hw/misc/auxbus.h
-index b05799d2f7..03cacdee42 100644
---- a/include/hw/misc/auxbus.h
-+++ b/include/hw/misc/auxbus.h
-@@ -106,7 +106,7 @@ void aux_bus_realize(AUXBus *bus);
-  *
-  * Returns the reply of the request.
-  *
-- * @bus Ths bus where the request happen.
-+ * @bus The bus where the request happen.
-  * @cmd The command requested.
-  * @address The 20bits address of the slave.
-  * @len The length of the read or write.
-diff --git a/hw/i2c/pm_smbus.c b/hw/i2c/pm_smbus.c
-index d7eae548cb..9ad6a47739 100644
---- a/hw/i2c/pm_smbus.c
-+++ b/hw/i2c/pm_smbus.c
-@@ -1,6 +1,6 @@
- /*
-  * PC SMBus implementation
-- * splitted from acpi.c
-+ * split from acpi.c
-  *
-  * Copyright (c) 2006 Fabrice Bellard
-  *
-diff --git a/hw/i2c/pmbus_device.c b/hw/i2c/pmbus_device.c
-index 8bc9d5108a..cef51663d0 100644
---- a/hw/i2c/pmbus_device.c
-+++ b/hw/i2c/pmbus_device.c
-@@ -1626,7 +1626,7 @@ static int pmbus_write_data(SMBusDevice *smd, uint8_t *buf, uint8_t len)
+diff --git a/hw/display/bochs-display.c b/hw/display/bochs-display.c
+index e7ec268184..9138e98c3b 100644
+--- a/hw/display/bochs-display.c
++++ b/hw/display/bochs-display.c
+@@ -164,7 +164,7 @@ static int bochs_display_get_mode(BochsDisplayState *s,
+     memset(mode, 0, sizeof(*mode));
+     switch (vbe[VBE_DISPI_INDEX_BPP]) {
+     case 16:
+-        /* best effort: support native endianess only */
++        /* best effort: support native endianness only */
+         mode->format = PIXMAN_r5g6b5;
+         mode->bytepp = 2;
          break;
- 
- passthrough:
--    /* Unimplimented registers get passed to the device */
-+    /* Unimplemented registers get passed to the device */
-     default:
-         if (pmdc->write_data) {
-             ret = pmdc->write_data(pmdev, buf, len);
-diff --git a/hw/i2c/smbus_slave.c b/hw/i2c/smbus_slave.c
-index feb3ec6333..2ef2c7c5f6 100644
---- a/hw/i2c/smbus_slave.c
-+++ b/hw/i2c/smbus_slave.c
-@@ -2,7 +2,7 @@
-  * QEMU SMBus device emulation.
-  *
-  * This code is a helper for SMBus device emulation.  It implements an
-- * I2C device inteface and runs the SMBus protocol from the device
-+ * I2C device interface and runs the SMBus protocol from the device
-  * point of view and maps those to simple calls to emulate.
-  *
-  * Copyright (c) 2007 CodeSourcery.
-diff --git a/hw/sensor/isl_pmbus_vr.c b/hw/sensor/isl_pmbus_vr.c
-index eb344dd5a9..e51269f6b8 100644
---- a/hw/sensor/isl_pmbus_vr.c
-+++ b/hw/sensor/isl_pmbus_vr.c
-@@ -101,7 +101,7 @@ static void isl_pmbus_vr_exit_reset(Object *obj)
+diff --git a/hw/display/qxl.c b/hw/display/qxl.c
+index f1c0eb7dfc..af941fb0c2 100644
+--- a/hw/display/qxl.c
++++ b/hw/display/qxl.c
+@@ -1544,7 +1544,7 @@ static void qxl_create_guest_primary(PCIQXLDevice *qxl, int loadvm,
      }
  }
  
--/* The raa228000 uses different direct mode coefficents from most isl devices */
-+/* The raa228000 uses different direct mode coefficients from most isl devices */
- static void raa228000_exit_reset(Object *obj)
+-/* return 1 if surface destoy was initiated (in QXL_ASYNC case) or
++/* return 1 if surface destroy was initiated (in QXL_ASYNC case) or
+  * done (in QXL_SYNC case), 0 otherwise. */
+ static int qxl_destroy_primary(PCIQXLDevice *d, qxl_async_io async)
  {
-     PMBusDevice *pmdev = PMBUS_DEVICE(obj);
-diff --git a/hw/sensor/max34451.c b/hw/sensor/max34451.c
-index a91d8bd487..9db52ef677 100644
---- a/hw/sensor/max34451.c
-+++ b/hw/sensor/max34451.c
-@@ -734,7 +734,7 @@ static void max34451_init(Object *obj)
+diff --git a/hw/display/ssd0303.c b/hw/display/ssd0303.c
+index d67b0ad7b5..32b32a3044 100644
+--- a/hw/display/ssd0303.c
++++ b/hw/display/ssd0303.c
+@@ -8,7 +8,7 @@
+  */
  
+ /* The controller can support a variety of different displays, but we only
+-   implement one.  Most of the commends relating to brightness and geometry
++   implement one.  Most of the commands relating to brightness and geometry
+    setup are ignored. */
+ 
+ #include "qemu/osdep.h"
+diff --git a/hw/display/ssd0323.c b/hw/display/ssd0323.c
+index ab229d32b7..09b1bbed0a 100644
+--- a/hw/display/ssd0323.c
++++ b/hw/display/ssd0323.c
+@@ -8,7 +8,7 @@
+  */
+ 
+ /* The controller can support a variety of different displays, but we only
+-   implement one.  Most of the commends relating to brightness and geometry
++   implement one.  Most of the commands relating to brightness and geometry
+    setup are ignored. */
+ 
+ #include "qemu/osdep.h"
+diff --git a/hw/display/xlnx_dp.c b/hw/display/xlnx_dp.c
+index b0828d65aa..822355ecc6 100644
+--- a/hw/display/xlnx_dp.c
++++ b/hw/display/xlnx_dp.c
+@@ -380,7 +380,7 @@ static inline void xlnx_dp_audio_mix_buffer(XlnxDPState *s)
+ static void xlnx_dp_audio_callback(void *opaque, int avail)
+ {
      /*
-      * get and set the temperature of the internal temperature sensor in
--     * centidegrees Celcius i.e.: 2500 -> 25.00 C, max is 327.67 C
-+     * centidegrees Celsius i.e.: 2500 -> 25.00 C, max is 327.67 C
+-     * Get some data from the DPDMA and compute these datas.
++     * Get some data from the DPDMA and compute these data.
+      * Then wait for QEMU's audio subsystem to call this callback.
       */
-     for (int i = 0; i < MAX34451_NUM_TEMP_DEVICES; i++) {
-         object_property_add(obj, "temperature[*]", "uint16",
+     XlnxDPState *s = XLNX_DP(opaque);
 -- 
 2.41.0
 
