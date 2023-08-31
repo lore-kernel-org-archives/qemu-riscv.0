@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1B3EC83F33
-	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 12:59:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A543EC83F12
+	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Aug 2023 12:59:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qbhFw-0003d4-PT; Thu, 31 Aug 2023 08:58:42 -0400
+	id 1qbhEO-0002FX-86; Thu, 31 Aug 2023 08:57:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhEu-0002la-7k
- for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:57:39 -0400
-Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1qbhEN-0002Ev-6B
+ for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:57:03 -0400
+Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qbhEo-0005Gh-VG
- for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:57:35 -0400
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-31c7912416bso645029f8f.1
- for <qemu-riscv@nongnu.org>; Thu, 31 Aug 2023 05:57:30 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1qbhEH-00054Z-Hx
+ for qemu-riscv@nongnu.org; Thu, 31 Aug 2023 08:57:02 -0400
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-9a603159f33so79219066b.0
+ for <qemu-riscv@nongnu.org>; Thu, 31 Aug 2023 05:56:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693486649; x=1694091449; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=d7qIBX23XIKc4/u+ga9LSmsROxltOGYIHLrY8CEfGsM=;
- b=nrrWo0pBWhQCoFWyLzBG3zpDc7PkECubeXFH2LUv/r8XvZhKno6x7TWRhp6KCAWrDg
- 7imyMlNCc3X+V1GtGOPlO8oPqtY0Lnk+2ReKAfUimFmqLfb77xAIStpWhrlq7VsYGYEn
- uJyMBeeUfNgWfhwMRlZKlPbyQZUHJgW2mT50vXi68LMJfWy/5J2tJDiOsKV5U7pfTcrN
- YqQnnKLUuFh+PVTtZx+N3XEhj0HtN6pol8HRo6IgKzAnJTjFSZBLQtXmslMZgcrkOPDp
- 6fWwFOci4CDQzRj3i7l72ClL9a2HHF0hemUnzsiN5vdi5lRtyiX58yMzXdcVSANJRI12
- zYjg==
+ d=ventanamicro.com; s=google; t=1693486615; x=1694091415; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=C4l2uMumWMiMt/kZEsLPjsauoaZLoTuUhXl7YwuCku8=;
+ b=annnjPAcwSWI1AohWhYb5du1unH4JvOk0HD249MybjDiHMx07muhDNJte4BBXn5lq2
+ jm32RJsw57e7Kv24XlfOiKPR5kxh7EmTkRpHLLmkY4XGFBDsJVn8LYokL0X52YMvfhHY
+ gn90gtlkZPxhP3mzW+psrV0GO7iUlI4jbWp4562FMsfHHiD6RicSpW2PqgnZm8HIaGmH
+ NvGH+/bMyJVk4uiEAvE0DQpTuFLhP2Kg7Vw6qBjtgPZ5ZL5ZVnMxlgwug7y4cg1uW9ew
+ MGfOInG3cncRbvq2fscSqZ3jmckH6Jtiw4l6Be8sBBZnHg4JsE7DtUexkGD9zRErD4Fp
+ u+Eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693486649; x=1694091449;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=d7qIBX23XIKc4/u+ga9LSmsROxltOGYIHLrY8CEfGsM=;
- b=fqNy0fiFyz+0JBgFivVmfOnoFwFkxSJyYmLHZrbGjKcyoHzOfmbgyhjvyJEUjdhL1O
- K7oPNt+VCBYvvEb0nMT2YXoPEXgrcndyxsjon1XNppiObHVmyuWXJpX02mXgqwhnlDDi
- u7lKCWRnKoFPGnJOG33uIXGAuLNk+kRwCroP4h5jHFX2UkEE2N6sdbE0gc7Oh7eoPadC
- bfHTLLpw2Jk8knSFvQobf6YDZSQHOzPvD7awIWB0qKEFloibhtl8KfyhIRWOFIGGI9k1
- StIIxqIQjVIvvc5MgwVGl/+dwB2QYMhS3HQ5uhQQRACEofQFY3bQYUy2n/1/Q5n3ZDOQ
- FazQ==
-X-Gm-Message-State: AOJu0YxRIA4TSEOzl+CHx9C80pk9TAZjab1ni3pBXy/rp6xI4W1H1te6
- 17GjLUpMnFOHGTfB0BrAijVpWw==
-X-Google-Smtp-Source: AGHT+IHRsE+WVA8b1LU9P0bsCfISvWbCyAj+RIZIU8/fflEDXihd31NSv60ZPok2JAOhIWhiD4T3ww==
-X-Received: by 2002:adf:e788:0:b0:31a:d6cb:7f95 with SMTP id
- n8-20020adfe788000000b0031ad6cb7f95mr3957781wrm.18.1693486649554; 
- Thu, 31 Aug 2023 05:57:29 -0700 (PDT)
-Received: from m1x-phil.lan ([176.187.199.245])
+ d=1e100.net; s=20221208; t=1693486615; x=1694091415;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=C4l2uMumWMiMt/kZEsLPjsauoaZLoTuUhXl7YwuCku8=;
+ b=B3jY6V+cqL8yEMwmICgmma5dNAMT1VcWoD86VfTi6p3BqlhiT3bnjITRLQ8TeStQnY
+ QL1+HFd3Hv2lx0FeSPe17hHBsxxXz8Y7QuzMdI0TliDkmPpyMK9MGmmVvnbGNtTaPuuf
+ pUAHPpdTUGXmdjcEhH6yWaC9hBJVVR5LBVHhMDBRNLs0vpN4l2IAFKNddtdjo9931vyu
+ HGVsidGr9GngjYpJ2rYxFrMZpUTYRFG6z/p+gzyE4fyHM1HS9qx6UTlvTdJCu1a+dWk4
+ 1xQi7qs752jvMvScK2n4LmaEp6FuJSZK04x25Rgjjfz5EjwImm0Fqx8gNhOLI2do7rpH
+ d6Ng==
+X-Gm-Message-State: AOJu0YwnLf/8xTekOGQHn0GL7x24gDwlLghVvRxNfMUS9lQ/7RxNx+UP
+ mKUvl9y0glaR6uU+cIsSrZWYkg==
+X-Google-Smtp-Source: AGHT+IGASl6kuA2BVfANBAG0B2dksMm2RNUJ3l5bd3IUkkOJv2RBpimUn2s+C+4sSyT+Av5Jmeuujw==
+X-Received: by 2002:a17:906:739c:b0:9a5:8269:2c94 with SMTP id
+ f28-20020a170906739c00b009a582692c94mr3381288ejl.57.1693486615538; 
+ Thu, 31 Aug 2023 05:56:55 -0700 (PDT)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
  by smtp.gmail.com with ESMTPSA id
- i5-20020adfefc5000000b0031759e6b43fsm2175456wrp.39.2023.08.31.05.57.28
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 31 Aug 2023 05:57:29 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
- qemu-riscv@nongnu.org, qemu-block@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: [PULL 07/41] exec/address-spaces.h: Remove unuseful 'exec/memory.h'
- include
-Date: Thu, 31 Aug 2023 14:56:09 +0200
-Message-ID: <20230831125646.67855-8-philmd@linaro.org>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230831125646.67855-1-philmd@linaro.org>
-References: <20230831125646.67855-1-philmd@linaro.org>
+ l23-20020a1709060e1700b0097073f1ed84sm737517eji.4.2023.08.31.05.56.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 31 Aug 2023 05:56:55 -0700 (PDT)
+Date: Thu, 31 Aug 2023 14:56:54 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com
+Subject: Re: [PATCH RESEND v8 05/20] target/riscv/cpu.c: split non-ratified
+ exts from riscv_cpu_extensions[]
+Message-ID: <20230831-f7aff5aadae6aa730ee39299@orel>
+References: <20230824221440.484675-1-dbarboza@ventanamicro.com>
+ <20230824221440.484675-6-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::430;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x430.google.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230824221440.484675-6-dbarboza@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::636;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x636.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,33 +97,63 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-"exec/address-spaces.h" declares get_system_io() and
-get_system_memory(), both returning a MemoryRegion pointer.
-MemoryRegion is forward declared in "qemu/typedefs.h", so
-we don't need any declaration from "exec/memory.h" here.
-Remove it.
+On Thu, Aug 24, 2023 at 07:14:25PM -0300, Daniel Henrique Barboza wrote:
+> Create a new riscv_cpu_experimental_exts[] to store the non-ratified
+> extensions properties. Once they are ratified we'll move them back to
+> riscv_cpu_extensions[].
+> 
+> riscv_cpu_add_user_properties() and riscv_cpu_add_kvm_properties() are
+> changed to keep adding non-ratified properties to users.
+> 
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/cpu.c | 14 +++++++++++++-
+>  1 file changed, 13 insertions(+), 1 deletion(-)
+> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 272edaadf0..78eb2ac6bd 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1874,7 +1874,11 @@ static Property riscv_cpu_extensions[] = {
+>      DEFINE_PROP_BOOL("xtheadsync", RISCVCPU, cfg.ext_xtheadsync, false),
+>      DEFINE_PROP_BOOL("xventanacondops", RISCVCPU, cfg.ext_XVentanaCondOps, false),
+>  
+> -    /* These are experimental so mark with 'x-' */
+> +    DEFINE_PROP_END_OF_LIST(),
+> +};
+> +
+> +/* These are experimental so mark with 'x-' */
+> +static Property riscv_cpu_experimental_exts[] = {
+>      DEFINE_PROP_BOOL("x-zicond", RISCVCPU, cfg.ext_zicond, false),
+>  
+>      /* ePMP 0.9.3 */
+> @@ -1969,6 +1973,10 @@ static void riscv_cpu_add_kvm_properties(Object *obj)
+>          riscv_cpu_add_kvm_unavail_prop(obj, prop->name);
+>      }
+>  
+> +    for (prop = riscv_cpu_experimental_exts; prop && prop->name; prop++) {
+> +        riscv_cpu_add_kvm_unavail_prop(obj, prop->name);
+> +    }
+> +
+>      for (prop = riscv_cpu_options; prop && prop->name; prop++) {
+>          /* Check if KVM created the property already */
+>          if (object_property_find(obj, prop->name)) {
+> @@ -2008,6 +2016,10 @@ static void riscv_cpu_add_user_properties(Object *obj)
+>      for (prop = riscv_cpu_options; prop && prop->name; prop++) {
+>          qdev_property_add_static(dev, prop);
+>      }
+> +
+> +    for (prop = riscv_cpu_experimental_exts; prop && prop->name; prop++) {
+> +        qdev_property_add_static(dev, prop);
+> +    }
+>  }
+>  
+>  static Property riscv_cpu_properties[] = {
+> -- 
+> 2.41.0
+> 
+>
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20230619074153.44268-4-philmd@linaro.org>
----
- include/exec/address-spaces.h | 2 --
- 1 file changed, 2 deletions(-)
-
-diff --git a/include/exec/address-spaces.h b/include/exec/address-spaces.h
-index db8bfa9a92..0d0aa61d68 100644
---- a/include/exec/address-spaces.h
-+++ b/include/exec/address-spaces.h
-@@ -19,8 +19,6 @@
-  * you're one of them.
-  */
- 
--#include "exec/memory.h"
--
- #ifndef CONFIG_USER_ONLY
- 
- /* Get the root memory region.  This interface should only be used temporarily
--- 
-2.41.0
-
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
