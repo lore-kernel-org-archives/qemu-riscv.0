@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E79DCA0FE3
-	for <qemu-riscv@archiver.kernel.org>; Fri,  1 Sep 2023 03:10:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AD06CA0FE3
+	for <qemu-riscv@archiver.kernel.org>; Fri,  1 Sep 2023 03:29:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qbuXh-0001Bq-Dt; Thu, 31 Aug 2023 23:09:53 -0400
+	id 1qbuqK-0006Hb-Ms; Thu, 31 Aug 2023 23:29:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qbuXf-0001Ba-UD; Thu, 31 Aug 2023 23:09:51 -0400
-Received: from mail-ua1-x936.google.com ([2607:f8b0:4864:20::936])
+ id 1qbuqJ-0006H8-0R; Thu, 31 Aug 2023 23:29:07 -0400
+Received: from mail-vk1-xa2c.google.com ([2607:f8b0:4864:20::a2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qbuXd-0001xD-Kn; Thu, 31 Aug 2023 23:09:51 -0400
-Received: by mail-ua1-x936.google.com with SMTP id
- a1e0cc1a2514c-7a52a1e2a59so637941241.0; 
- Thu, 31 Aug 2023 20:09:48 -0700 (PDT)
+ id 1qbuqF-0005jy-43; Thu, 31 Aug 2023 23:29:06 -0400
+Received: by mail-vk1-xa2c.google.com with SMTP id
+ 71dfb90a1353d-48cfdfa7893so594174e0c.0; 
+ Thu, 31 Aug 2023 20:29:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693537788; x=1694142588; darn=nongnu.org;
+ d=gmail.com; s=20221208; t=1693538941; x=1694143741; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CVNQ/yceRMs8ZkENG+QMFYa+iVWV2HAOsSXf380enn4=;
- b=bufxwnBM3lPnXo2LyMOxYUzZqQhGiASKSQNyRVDU/u64yWf18r5Q2+5Dg5TFgxbq91
- c/PK0B2xaZcMl1fqpz1r/dSmwcYaY4YZ4Grj9C7RX5xZi+DMEHTuKF3NJunQh046gYwt
- zE76cMEqhD7AQaMazEbvGsQF49zy6iHGnJVZJJDcmBTPAp29UFwaLONi8PfaaD+8ONVt
- 10Q4xdkSizwx2y7NqZf9Xv4SugrPsZXmxU3x7LLZOUp2geIaBoN2+4eH1XNknuruKUSW
- 8upOTT6bXfNB2iUpBkTFF9GU7Y2nJi4ZVPyKYaxhJtmEoO/oXxivh9OlVSzJ8HrvQ95R
- uk7w==
+ bh=3/MSgBWD+EPbsIVobdk/d2izc3D8b+byo0/i5G/Cnqg=;
+ b=rhW/i5kFdZUE47eMWXquX10hOcAe50DcqwcxNKUyJNBV/bey+E4kpgospyXl0blBAT
+ 7yhl8fsgtlpWSWka/l91lShUwHut7ssUuQYV+u7BvRzWoZ7hpoQ69HcgECj46KaUVaId
+ WcqUHTWpXcpcRnTjDMAIbPg+x/zIYPc8mTNAlynuXfV4qdjdyPEl64y3vO9UdIJJDsOa
+ VnBjMAcDSIKfdqwzYV7ieqIJKhdUcCigP0KycGyTyi3W1UphqWswvc4SPI1ivxAnG4no
+ RrKiDnYC/WxhAX2nuDe29G2CV13kvCAyrBeqZudMmR7Ui53scalWEOmq6uCItfPiDX3y
+ opeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693537788; x=1694142588;
+ d=1e100.net; s=20221208; t=1693538941; x=1694143741;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CVNQ/yceRMs8ZkENG+QMFYa+iVWV2HAOsSXf380enn4=;
- b=bx3M1HZ9kNFcZMGIEzcVx+7gx0SN3GZYlvmTRWlfrU5XjDe27HwunMmIvl9sg+W/dI
- WGk9NuNVMiu0Rd2KNlMExRm6uX4zsypTf+IpgC0rm8kBaLoPcTFqL6G+JDaKtnRmWITZ
- LIVhMAqAv1QkPRLpNRiHmFkbzBIJSc+K+75dY/f/K6PQ5SXV5FmZkrzSjTdSog3Q1/+r
- j7bPhfTs1dvsx8iHZx7Q/r+Z0OFOydJVQJTPexiw4yTjaigwshp3gFPSauiTDEJWJ+vR
- ka0tJ/hNGXLI6Ptjnp0mzjPd3bl65YkUsW7fGBPr4FnFxLcRTxg73Dqk1t4FaB21ofeX
- ooiQ==
-X-Gm-Message-State: AOJu0Ywa0wQa85e58kNh7YPsjrtEqE3B/UD+O6QxHQvbzVsNISvdNgb1
- m9k4psi0Dr56tfZOS3N95XaVQ9xz9GGbgsyjn6I=
-X-Google-Smtp-Source: AGHT+IGAnwA+iHDcfeuaarL54Hj6vC2GAFWrhC4BRHBm14Fa2ckOXuJddzlSHf+UpLVY5V4cciMl9uXrEn3paCdhi80=
-X-Received: by 2002:a67:eb55:0:b0:44d:95d4:9fa1 with SMTP id
- x21-20020a67eb55000000b0044d95d49fa1mr1500144vso.17.1693537788211; Thu, 31
- Aug 2023 20:09:48 -0700 (PDT)
+ bh=3/MSgBWD+EPbsIVobdk/d2izc3D8b+byo0/i5G/Cnqg=;
+ b=AxuaZktvnn1PQoVK8TeaMPVxXTRzg2P0bKpMOCwAkJQLuC9VxKYLq+zGKg2QJ5E6l9
+ Dr0ZSPbAXB3+Ch98E85+GdcTxsoAvssAQ5VRii2khbmrUvOmFjIb/gpOWKaNMtDW+9JK
+ X1ET1qZvtwdJ2aEQquXrQJ00hXgU2Psztoa5Q+E6JJvr9pqWYXaxpJ23X4jRVwogAaSF
+ a6wDEcoArq0ksYOpRaTmGEG8c+dDzYXcR6lWIEDDb6wxmLyP0CrCwHE8SF1TumTash7e
+ REmOFwHNV5/oliM8ZrTGicJR0nZVZ9aOwauYu5bNxukWnKti0OnlVd7c9Uw36WyXh1U7
+ TSAw==
+X-Gm-Message-State: AOJu0YyvrAGCk8OLxFCwhjpSxt6bHnXPsbSvLP8PVAkzUNrE5LrDupiO
+ rZhbnA7Aa10IpeLDe0TfiQuWFVSW+c7Z53l7q/o=
+X-Google-Smtp-Source: AGHT+IG8oFzXTvmzT19XvUUG0lv0n+g/7DdhX14XRKA4EHD2A/+rD8TNWzu7HQEnhMsL1T2cd/3h4agadRaxkLEcrOM=
+X-Received: by 2002:a1f:c787:0:b0:48d:2779:a4b with SMTP id
+ x129-20020a1fc787000000b0048d27790a4bmr1488970vkf.2.1693538941667; Thu, 31
+ Aug 2023 20:29:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230816162717.44125-1-akihiko.odaki@daynix.com>
-In-Reply-To: <20230816162717.44125-1-akihiko.odaki@daynix.com>
+References: <20230818034059.9146-1-akihiko.odaki@daynix.com>
+In-Reply-To: <20230818034059.9146-1-akihiko.odaki@daynix.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 1 Sep 2023 13:09:21 +1000
-Message-ID: <CAKmqyKMgfofyXVdZncxHG0KVGztw01TaE2aMDBX+DJtzLztG9A@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Allocate itrigger timers only once
+Date: Fri, 1 Sep 2023 13:28:34 +1000
+Message-ID: <CAKmqyKOsdAkCRKTwPejVV7witk6tWUGh9G=y_Hq6jTnxZxweZA@mail.gmail.com>
+Subject: Re: [PATCH v2] target/riscv: Allocate itrigger timers only once
 To: Akihiko Odaki <akihiko.odaki@daynix.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Weiwei Li <liweiwei@iscas.ac.cn>, 
- Bin Meng <bin.meng@windriver.com>, Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
+Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>, 
+ "open list:All patches CC here" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::936;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x936.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2c;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -92,7 +93,7 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Aug 17, 2023 at 2:28=E2=80=AFAM Akihiko Odaki <akihiko.odaki@daynix=
+On Fri, Aug 18, 2023 at 1:42=E2=80=AFPM Akihiko Odaki <akihiko.odaki@daynix=
 .com> wrote:
 >
 > riscv_trigger_init() had been called on reset events that can happen
@@ -108,8 +109,12 @@ On Thu, Aug 17, 2023 at 2:28=E2=80=AFAM Akihiko Odaki <akihiko.odaki@daynix=
 > Fixes: 5a4ae64cac ("target/riscv: Add itrigger support when icount is ena=
 bled")
 > Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
@@ -120,7 +125,7 @@ Alistair
 >  3 files changed, 21 insertions(+), 5 deletions(-)
 >
 > diff --git a/target/riscv/debug.h b/target/riscv/debug.h
-> index c471748d5a..7edc31e7cc 100644
+> index c471748d5a..5794aa6ee5 100644
 > --- a/target/riscv/debug.h
 > +++ b/target/riscv/debug.h
 > @@ -143,7 +143,8 @@ void riscv_cpu_debug_excp_handler(CPUState *cs);
@@ -129,12 +134,12 @@ Alistair
 >
 > -void riscv_trigger_init(CPURISCVState *env);
 > +void riscv_trigger_realize(CPURISCVState *env);
-> +void riscv_trigger_reset(CPURISCVState *env);
+> +void riscv_trigger_reset_hold(CPURISCVState *env);
 >
 >  bool riscv_itrigger_enabled(CPURISCVState *env);
 >  void riscv_itrigger_update_priv(CPURISCVState *env);
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index e12b6ef7f6..3bc3f96a58 100644
+> index e12b6ef7f6..7e0512dd5f 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
 > @@ -904,7 +904,7 @@ static void riscv_cpu_reset_hold(Object *obj)
@@ -142,7 +147,7 @@ Alistair
 >  #ifndef CONFIG_USER_ONLY
 >      if (cpu->cfg.debug) {
 > -        riscv_trigger_init(env);
-> +        riscv_trigger_reset(env);
+> +        riscv_trigger_reset_hold(env);
 >      }
 >
 >      if (kvm_enabled()) {
@@ -161,7 +166,7 @@ ror **errp)
 >      cpu_reset(cs);
 >
 > diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-> index 75ee1c4971..1c44403205 100644
+> index 75ee1c4971..ddd46b2d3e 100644
 > --- a/target/riscv/debug.c
 > +++ b/target/riscv/debug.c
 > @@ -903,7 +903,17 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, =
@@ -181,7 +186,7 @@ nv);
 > +    }
 > +}
 > +
-> +void riscv_trigger_reset(CPURISCVState *env)
+> +void riscv_trigger_reset_hold(CPURISCVState *env)
 >  {
 >      target_ulong tdata1 =3D build_tdata1(env, TRIGGER_TYPE_AD_MATCH, 0, =
 0);
