@@ -4,84 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C71F7CA0FF6
-	for <qemu-riscv@archiver.kernel.org>; Fri,  1 Sep 2023 19:51:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAF21CA0FF6
+	for <qemu-riscv@archiver.kernel.org>; Fri,  1 Sep 2023 20:09:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qcA6O-0007n5-TP; Fri, 01 Sep 2023 15:46:44 -0400
+	id 1qcAS5-0004ri-Nc; Fri, 01 Sep 2023 16:09:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qcA6N-0007mk-CG
- for qemu-riscv@nongnu.org; Fri, 01 Sep 2023 15:46:43 -0400
-Received: from mail-oo1-xc2f.google.com ([2607:f8b0:4864:20::c2f])
+ id 1qcAS4-0004qs-Jk
+ for qemu-riscv@nongnu.org; Fri, 01 Sep 2023 16:09:08 -0400
+Received: from mail-oo1-xc31.google.com ([2607:f8b0:4864:20::c31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qcA6L-0002vZ-1n
- for qemu-riscv@nongnu.org; Fri, 01 Sep 2023 15:46:43 -0400
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-5738cb00eebso1422728eaf.2
- for <qemu-riscv@nongnu.org>; Fri, 01 Sep 2023 12:46:40 -0700 (PDT)
+ id 1qcAS0-00042Q-D7
+ for qemu-riscv@nongnu.org; Fri, 01 Sep 2023 16:09:08 -0400
+Received: by mail-oo1-xc31.google.com with SMTP id
+ 006d021491bc7-5733aa10291so1489326eaf.3
+ for <qemu-riscv@nongnu.org>; Fri, 01 Sep 2023 13:09:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1693597600; x=1694202400; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wQilM6mPMPBt/et0RgnK1omGUy9pg15ijboQ1qTt70s=;
- b=TLs128JIepnH2tICxi/SNomxHGHfJf2zUwQLT1HrEODgnrsjWH6We0LP2rlz+Yn6EZ
- JiSwD+OTjctx1hyHx6sbsGdgO3YkAWCee/lJHzvPwFGYAWoDwPHFjFaZWwpvRF0xfrB3
- jnTzyYuHc8zSgdwI1iLq2nLBJXROBtbickt7Q2WHmKBg33GpUA6VgsDMRMfBMgXhchu6
- Fz9BrrxL9k05AfqcvKic6kL3FOHiLNuS8NKDAPbZck9VxQbbCTfuy7/v+LamsRv7Ekx8
- W1ydvLkOmhsPlDKjfBfpP09pYytTsKmrB033WHPGlNLJSGcsUFsUVIpc/H8auBl0P43h
- FVug==
+ d=ventanamicro.com; s=google; t=1693598943; x=1694203743; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=vAJsA08M/nhXr+3mDS1vaY4+2RkwaDlwFrDJRFNcigI=;
+ b=l4Jg8vsDnHPeFVQp8bKb3eZYSZQ09a1/y/Q6Xc35YCBzfRBV1s4+GFJ+0u9zc9ta/Z
+ 95cCuV0/4R2oCvSpHavNN0yBSK3SlMORuEyq3LhcQoyGil91uAlrFKC8FM+b3Z+bbd+Q
+ azAKsBSXpVoRfqlaq7OQdIU+0HRANsvnFS3q6gu4Jn26IkrkTF1N3o8Z2tCWmb0qbtIt
+ XtmG7vGdWP4H1wJUTVW7P7AyaaCA5Fg3gwjZFjgtWbmNDpVL8HGk3l8PhNfyt2orEtnx
+ TJzQdhYfJL6BAmHv4GuzljecWPn+qnChR1Vn03vHgfXrTbUG8wWKO7PRuuuFV4Rf4hgD
+ 8N+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693597600; x=1694202400;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wQilM6mPMPBt/et0RgnK1omGUy9pg15ijboQ1qTt70s=;
- b=gLyp7xGUY84g73Ts7gDfi8qfwVgyDijEYsVuYAQWMKQThTQRU6pRvguH0mFYo2kmk/
- T9SkZAYpbE1HqPsm6JFv5jo9RHGD+Fkmyp7DuFG+DVm6YyVgHkjGJ5GUuNKKwXQU2e3l
- YTzgHk4uDL/ru+C/FpAIpp7kNu2+vpvCAZMdrjHBQZnGxG5E2DaSgHHr43V715h8dD7w
- R0/WlzTgW/XhKaoHuSW5iFegRPJh7Mh95x2clzh3BV+ROtaq6ZsxjtXqMiQzTcmy5Hu7
- /BWuTRjlvwo5mZrc0s64lBEhHqH8qbDwXNjlWE5CbspGuPrnI9mZ2JcQ+FDD8fwq6gVG
- 4eOA==
-X-Gm-Message-State: AOJu0YynF6nP2xQvPYGuSuZ5rfU/TpLf28MMEV7ZvHavLFy8OIIedh9s
- Bul26GvljmWRUgGvR1t2fGL3hA==
-X-Google-Smtp-Source: AGHT+IGwtjlRaYqxWuHsAttj4A84skLVst04AHEaIsW/ineDakiWgSxp/hf6PGwSwlPrqefS3mus8g==
-X-Received: by 2002:a4a:92d5:0:b0:571:281a:ef7 with SMTP id
- j21-20020a4a92d5000000b00571281a0ef7mr3450585ooh.7.1693597599961; 
- Fri, 01 Sep 2023 12:46:39 -0700 (PDT)
-Received: from grind.dc1.ventanamicro.com ([177.94.15.194])
+ d=1e100.net; s=20221208; t=1693598943; x=1694203743;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=vAJsA08M/nhXr+3mDS1vaY4+2RkwaDlwFrDJRFNcigI=;
+ b=Azx8i2U5C7IvKPQp8q12DfplZvn3Bd4BrGRrlt+kXxoaNolroLCoRlLYuFJxauJH2R
+ yOAbYIjkB2q5yLqTaNZ8ktRIBxCM7bVhiEx0qY2Nn5kLU6KQDAOw2WGihlUUNYvcgC0M
+ +nwJBw/gQdsw4eKUhiJvsSdxBz/A/G874rzf68yPsmekqGjuC8q+haVaJPQNWocmfGro
+ vVN0X3YP5kz2lkkYA8oL8GI0nyy0FBLBh1XHURPtvMr9OlUmlV5jkRjmugiEgPm4/xZi
+ IuBvhEr3qo5wQQvm4yIfOLQhBaexmXfbNv25PAPDrXfDgR8aF0pEiYgEM0kqS4502M3r
+ UZVQ==
+X-Gm-Message-State: AOJu0YyV1KL6M0PR+dbB5jUdeLQGDMK7Itrm4CssoGhAuDK2ptLouRWX
+ kym4Y+WaxLBdhaoRNjO1U0YiUA==
+X-Google-Smtp-Source: AGHT+IEK3Zkvde1IfTbg43I7m1xi93ITumhkjmEwr+4Nkwp1AUd4tB/+pHd++Yx3AtmEdBMAIGz6Kg==
+X-Received: by 2002:a4a:2553:0:b0:56e:5a8e:654f with SMTP id
+ v19-20020a4a2553000000b0056e5a8e654fmr3911533ooe.8.1693598942902; 
+ Fri, 01 Sep 2023 13:09:02 -0700 (PDT)
+Received: from [192.168.68.108] ([177.94.15.194])
  by smtp.gmail.com with ESMTPSA id
- h187-20020a4a5ec4000000b00565d41ba4d0sm2303002oob.35.2023.09.01.12.46.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Sep 2023 12:46:39 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v9 02/20] target/riscv/cpu.c: skip 'bool' check when filtering
- KVM props
-Date: Fri,  1 Sep 2023 16:46:08 -0300
-Message-ID: <20230901194627.1214811-3-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230901194627.1214811-1-dbarboza@ventanamicro.com>
-References: <20230901194627.1214811-1-dbarboza@ventanamicro.com>
+ h13-20020a4aa9cd000000b0056dbeb283cesm2108297oon.43.2023.09.01.13.09.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 01 Sep 2023 13:09:02 -0700 (PDT)
+Message-ID: <7ef12393-e92e-087e-a2aa-0da25a3229fd@ventanamicro.com>
+Date: Fri, 1 Sep 2023 17:08:59 -0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c2f;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc2f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH 07/20] target/riscv/cpu.c: add .instance_post_init()
+Content-Language: en-US
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
+ palmer@rivosinc.com
+References: <20230825130853.511782-1-dbarboza@ventanamicro.com>
+ <20230825130853.511782-8-dbarboza@ventanamicro.com>
+ <20230831-863a8334e34c5248fa71d7bf@orel>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20230831-863a8334e34c5248fa71d7bf@orel>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c31;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc31.google.com
+X-Spam_score_int: -55
+X-Spam_score: -5.6
+X-Spam_bar: -----
+X-Spam_report: (-5.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-3.478,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,43 +100,140 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-After the introduction of riscv_cpu_options[] all properties in
-riscv_cpu_extensions[] are booleans. This check is now obsolete.
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
----
- target/riscv/cpu.c | 14 ++++----------
- 1 file changed, 4 insertions(+), 10 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index fdbd8eb0b8..db640e7460 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1976,17 +1976,11 @@ static void riscv_cpu_add_user_properties(Object *obj)
-              * Set the default to disabled for every extension
-              * unknown to KVM and error out if the user attempts
-              * to enable any of them.
--             *
--             * We're giving a pass for non-bool properties since they're
--             * not related to the availability of extensions and can be
--             * safely ignored as is.
-              */
--            if (prop->info == &qdev_prop_bool) {
--                object_property_add(obj, prop->name, "bool",
--                                    NULL, cpu_set_cfg_unavailable,
--                                    NULL, (void *)prop->name);
--                continue;
--            }
-+            object_property_add(obj, prop->name, "bool",
-+                                NULL, cpu_set_cfg_unavailable,
-+                                NULL, (void *)prop->name);
-+            continue;
-         }
- #endif
-         qdev_property_add_static(dev, prop);
--- 
-2.41.0
+On 8/31/23 08:00, Andrew Jones wrote:
+> On Fri, Aug 25, 2023 at 10:08:40AM -0300, Daniel Henrique Barboza wrote:
+>> All generic CPUs call riscv_cpu_add_user_properties(). The 'max' CPU
+>> calls riscv_init_max_cpu_extensions(). Both can be moved to a common
+>> instance_post_init() callback, implemented in riscv_cpu_post_init(),
+>> called by all CPUs. The call order then becomes:
+>>
+>> riscv_cpu_init() -> cpu_init() of each CPU -> .instance_post_init()
+>>
+>> A CPU class that wants to add user flags will let us know via the
+>> 'user_extension_properties' property. Likewise, 'cfg.max_features' will
+>> determine if any given CPU, regardless of being the 'max' CPU or not,
+>> wants to enable the maximum amount of extensions.
+>>
+>> In the near future riscv_cpu_post_init() will call the init() function
+>> of the current accelerator, providing a hook for KVM and TCG accel
+>> classes to change the init() process of the CPU.
+>>
+>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>> ---
+>>   target/riscv/cpu.c | 20 +++++++++++++++-----
+>>   1 file changed, 15 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>> index c35d58c64b..f67b782675 100644
+>> --- a/target/riscv/cpu.c
+>> +++ b/target/riscv/cpu.c
+>> @@ -430,8 +430,6 @@ static void riscv_max_cpu_init(Object *obj)
+>>       mlx = MXL_RV32;
+>>   #endif
+>>       set_misa(env, mlx, 0);
+>> -    riscv_cpu_add_user_properties(obj);
+>> -    riscv_init_max_cpu_extensions(obj);
+>>       env->priv_ver = PRIV_VERSION_LATEST;
+>>   #ifndef CONFIG_USER_ONLY
+>>       set_satp_mode_max_supported(RISCV_CPU(obj), mlx == MXL_RV32 ?
+>> @@ -445,7 +443,6 @@ static void rv64_base_cpu_init(Object *obj)
+>>       CPURISCVState *env = &RISCV_CPU(obj)->env;
+>>       /* We set this in the realise function */
+>>       set_misa(env, MXL_RV64, 0);
+>> -    riscv_cpu_add_user_properties(obj);
+>>       /* Set latest version of privileged specification */
+>>       env->priv_ver = PRIV_VERSION_LATEST;
+>>   #ifndef CONFIG_USER_ONLY
+>> @@ -569,7 +566,6 @@ static void rv128_base_cpu_init(Object *obj)
+>>       CPURISCVState *env = &RISCV_CPU(obj)->env;
+>>       /* We set this in the realise function */
+>>       set_misa(env, MXL_RV128, 0);
+>> -    riscv_cpu_add_user_properties(obj);
+>>       /* Set latest version of privileged specification */
+>>       env->priv_ver = PRIV_VERSION_LATEST;
+>>   #ifndef CONFIG_USER_ONLY
+>> @@ -582,7 +578,6 @@ static void rv32_base_cpu_init(Object *obj)
+>>       CPURISCVState *env = &RISCV_CPU(obj)->env;
+>>       /* We set this in the realise function */
+>>       set_misa(env, MXL_RV32, 0);
+>> -    riscv_cpu_add_user_properties(obj);
+>>       /* Set latest version of privileged specification */
+>>       env->priv_ver = PRIV_VERSION_LATEST;
+>>   #ifndef CONFIG_USER_ONLY
+>> @@ -1212,6 +1207,20 @@ static void riscv_cpu_set_irq(void *opaque, int irq, int level)
+>>   }
+>>   #endif /* CONFIG_USER_ONLY */
+>>   
+>> +static void riscv_cpu_post_init(Object *obj)
+>> +{
+>> +    RISCVCPU *cpu = RISCV_CPU(obj);
+>> +    RISCVCPUClass *rcc = RISCV_CPU_GET_CLASS(cpu);
+>> +
+>> +    if (rcc->user_extension_properties) {
+> 
+> It's not yet clear to me why we need 'user_extension_properties'. Can't we
+> just do the 'object_dynamic_cast(obj, TYPE_RISCV_DYNAMIC_CPU) != NULL'
+> check here?
 
+I'll answer here but this also applies for patches 19 and 20.
+
+The idea in my head was to create a flexible way of defining new CPU types in
+the future that doesn't necessarily fits the 3 big molds we have: generic CPUs
+(I'm considering 'max' CPU as a generic CPU on steroids), vendor CPUs and the
+KVM only 'host' CPU. For example, it would be possible to create a vendor-style
+CPU that has all extensions enabled and runs KVM.
+
+This idea is probably better in my head than in reality, and there's a very high
+chance that I'm adding extra stuff in the CPU class and we won't add any new
+'funky' CPU type in the future to justify it.
+
+I'll drop patches 5 and 6 with 'user_extension_properties' and 'max_features'
+flag and do a regular CPU type check in post_init().'tcg_supported' in patch 19
+is indeed a bit silly today since every CPU but 'host' will enable it, so we can
+do a 'cpu is host' kind of check and live without it. We can still throw generic
+errors in all these checks regardless of how we're doing the validation.
+
+Patch 20 has another underlying discussion that I'd rather have there. Thanks,
+
+
+Daniel
+
+
+
+
+
+> 
+>> +        riscv_cpu_add_user_properties(obj);
+>> +    }
+>> +
+>> +    if (cpu->cfg.max_features) {
+> 
+> It's also not yet clear why we need max_features. I can't think of any
+> other models that want max_features besides 'max'. Checking the cpu type
+> here should be sufficient, no?
+> 
+>> +        riscv_init_max_cpu_extensions(obj);
+>> +    }
+>> +}
+>> +
+>>   static void riscv_cpu_init(Object *obj)
+>>   {
+>>       RISCVCPU *cpu = RISCV_CPU(obj);
+>> @@ -2019,6 +2028,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+>>           .instance_size = sizeof(RISCVCPU),
+>>           .instance_align = __alignof__(RISCVCPU),
+>>           .instance_init = riscv_cpu_init,
+>> +        .instance_post_init = riscv_cpu_post_init,
+>>           .abstract = true,
+>>           .class_size = sizeof(RISCVCPUClass),
+>>           .class_init = riscv_cpu_class_init,
+>> -- 
+>> 2.41.0
+>>
+>>
+> 
+> Thanks,
+> drew
 
