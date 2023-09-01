@@ -4,66 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12B96CA0FE1
-	for <qemu-riscv@archiver.kernel.org>; Fri,  1 Sep 2023 02:29:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E79DCA0FE3
+	for <qemu-riscv@archiver.kernel.org>; Fri,  1 Sep 2023 03:10:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qbtuD-0003et-3E; Thu, 31 Aug 2023 22:29:05 -0400
+	id 1qbuXh-0001Bq-Dt; Thu, 31 Aug 2023 23:09:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qbtu6-0003dB-CT; Thu, 31 Aug 2023 22:28:58 -0400
-Received: from mail-vs1-xe2f.google.com ([2607:f8b0:4864:20::e2f])
+ id 1qbuXf-0001Ba-UD; Thu, 31 Aug 2023 23:09:51 -0400
+Received: from mail-ua1-x936.google.com ([2607:f8b0:4864:20::936])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qbtu2-0002TB-MF; Thu, 31 Aug 2023 22:28:56 -0400
-Received: by mail-vs1-xe2f.google.com with SMTP id
- ada2fe7eead31-44d38d91885so737589137.1; 
- Thu, 31 Aug 2023 19:28:54 -0700 (PDT)
+ id 1qbuXd-0001xD-Kn; Thu, 31 Aug 2023 23:09:51 -0400
+Received: by mail-ua1-x936.google.com with SMTP id
+ a1e0cc1a2514c-7a52a1e2a59so637941241.0; 
+ Thu, 31 Aug 2023 20:09:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693535333; x=1694140133; darn=nongnu.org;
+ d=gmail.com; s=20221208; t=1693537788; x=1694142588; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BcwEfdfaKAzY1q71GpFY8RoOlX2asnxOyf6/1C1zFPM=;
- b=k7NGAl1rsebCJPBoiKOB16Ktoiy8+t3i5CysFW2iZtgBeNmUIeB/RReTJc6mCmWfE5
- PwTq/+Kz9zmEHf0Om6OcR0Llq3fA2llxy8dV/UAsq0QZAWZFh2bkChSjeAjN2+k4JK4T
- 9OqWlj4TZ9ES1E3UYhpw+0e2bvqL1MJ/ROFcPNrCVE0+6qeVDlc+QkBxe+0O8L4/GAfl
- 5Ha9J9hmCN0oxn8QAS4ErcqY7EngmHtm31muM7fynPKm6QIIDe350v3c5g7gjSm83OpF
- Cypd7i+/uGZVWMex691WMgN9tCGopcEsu51UeSHQaqI68In6dIDQIZHxDiLOtivtQFX0
- K02Q==
+ bh=CVNQ/yceRMs8ZkENG+QMFYa+iVWV2HAOsSXf380enn4=;
+ b=bufxwnBM3lPnXo2LyMOxYUzZqQhGiASKSQNyRVDU/u64yWf18r5Q2+5Dg5TFgxbq91
+ c/PK0B2xaZcMl1fqpz1r/dSmwcYaY4YZ4Grj9C7RX5xZi+DMEHTuKF3NJunQh046gYwt
+ zE76cMEqhD7AQaMazEbvGsQF49zy6iHGnJVZJJDcmBTPAp29UFwaLONi8PfaaD+8ONVt
+ 10Q4xdkSizwx2y7NqZf9Xv4SugrPsZXmxU3x7LLZOUp2geIaBoN2+4eH1XNknuruKUSW
+ 8upOTT6bXfNB2iUpBkTFF9GU7Y2nJi4ZVPyKYaxhJtmEoO/oXxivh9OlVSzJ8HrvQ95R
+ uk7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693535333; x=1694140133;
+ d=1e100.net; s=20221208; t=1693537788; x=1694142588;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BcwEfdfaKAzY1q71GpFY8RoOlX2asnxOyf6/1C1zFPM=;
- b=TP/LroyB9fi/kVGxn1TJjCM5BLEjcU+bhWrSNIaXOUmnbtor/jkGHO9+eykpQDp+E7
- L4ssFUEHhUvCt7vu8GSnb2Jlms6gqBtJSOFccrHXel9lR+3HXYQRb5zaBIzdfsi1fRRg
- sNpdZTSz4oCcqCiiXUnMYAlTiwj+B4joqbFlZDRRCM7GezyhH08YDCbQInQRJez1vaan
- mQSciv7wuRIYmcD5eSEr5SaX2HdvNxXS5TtD6v9jrCMuqF01znojNzg6idOm5wNMBRZF
- tFknt6UVQN3blyX39ci8PkbRefa6WWzx1Uk4Y8pSPfZYXWYf3FUrWrQuCI8XwyET7BsM
- 8Ozg==
-X-Gm-Message-State: AOJu0YwvND6FqLacFQHLZdETeRFgNC8ZOa00Zr2t0ISGKE+5iM47vWgw
- 1Lq23c3FtusyONGr2RrCz9Z3Uw0qVdJsyGjVBHWEHbRtM4IX8A==
-X-Google-Smtp-Source: AGHT+IFAEtJWFzJMfYBO4jPbb5BVF4ee6UIGRDHruBT17H145OdgxB4iFY4i+2tkFP6lf3d/vdLYhuI+IZfSn3WwmPE=
-X-Received: by 2002:a67:e8cc:0:b0:44e:a216:59a6 with SMTP id
- y12-20020a67e8cc000000b0044ea21659a6mr1713042vsn.4.1693535333300; Thu, 31 Aug
- 2023 19:28:53 -0700 (PDT)
+ bh=CVNQ/yceRMs8ZkENG+QMFYa+iVWV2HAOsSXf380enn4=;
+ b=bx3M1HZ9kNFcZMGIEzcVx+7gx0SN3GZYlvmTRWlfrU5XjDe27HwunMmIvl9sg+W/dI
+ WGk9NuNVMiu0Rd2KNlMExRm6uX4zsypTf+IpgC0rm8kBaLoPcTFqL6G+JDaKtnRmWITZ
+ LIVhMAqAv1QkPRLpNRiHmFkbzBIJSc+K+75dY/f/K6PQ5SXV5FmZkrzSjTdSog3Q1/+r
+ j7bPhfTs1dvsx8iHZx7Q/r+Z0OFOydJVQJTPexiw4yTjaigwshp3gFPSauiTDEJWJ+vR
+ ka0tJ/hNGXLI6Ptjnp0mzjPd3bl65YkUsW7fGBPr4FnFxLcRTxg73Dqk1t4FaB21ofeX
+ ooiQ==
+X-Gm-Message-State: AOJu0Ywa0wQa85e58kNh7YPsjrtEqE3B/UD+O6QxHQvbzVsNISvdNgb1
+ m9k4psi0Dr56tfZOS3N95XaVQ9xz9GGbgsyjn6I=
+X-Google-Smtp-Source: AGHT+IGAnwA+iHDcfeuaarL54Hj6vC2GAFWrhC4BRHBm14Fa2ckOXuJddzlSHf+UpLVY5V4cciMl9uXrEn3paCdhi80=
+X-Received: by 2002:a67:eb55:0:b0:44d:95d4:9fa1 with SMTP id
+ x21-20020a67eb55000000b0044d95d49fa1mr1500144vso.17.1693537788211; Thu, 31
+ Aug 2023 20:09:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <bc82203b72d7efb30f1b4a8f9eb3d94699799dc8.camel@rivosinc.com>
-In-Reply-To: <bc82203b72d7efb30f1b4a8f9eb3d94699799dc8.camel@rivosinc.com>
+References: <20230816162717.44125-1-akihiko.odaki@daynix.com>
+In-Reply-To: <20230816162717.44125-1-akihiko.odaki@daynix.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 1 Sep 2023 12:28:26 +1000
-Message-ID: <CAKmqyKPQN_xNV1sXV=nenQXPzWViUjq9DC-hD52J+GRYjv1CeA@mail.gmail.com>
-Subject: Re: [PATCH] linux-user/riscv: Add new extensions to hwprobe
-To: Robbin Ehn <rehn@rivosinc.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Date: Fri, 1 Sep 2023 13:09:21 +1000
+Message-ID: <CAKmqyKMgfofyXVdZncxHG0KVGztw01TaE2aMDBX+DJtzLztG9A@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Allocate itrigger timers only once
+To: Akihiko Odaki <akihiko.odaki@daynix.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Weiwei Li <liweiwei@iscas.ac.cn>, 
+ Bin Meng <bin.meng@windriver.com>, Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2f;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::936;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x936.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -87,64 +92,112 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Aug 29, 2023 at 12:58=E2=80=AFAM Robbin Ehn <rehn@rivosinc.com> wro=
-te:
+On Thu, Aug 17, 2023 at 2:28=E2=80=AFAM Akihiko Odaki <akihiko.odaki@daynix=
+.com> wrote:
 >
-> This patch adds the new extensions in
-> linux 6.5 to the hwprobe syscall.
+> riscv_trigger_init() had been called on reset events that can happen
+> several times for a CPU and it allocated timers for itrigger. If old
+> timers were present, they were simply overwritten by the new timers,
+> resulting in a memory leak.
 >
-> And fixes RVC check to OR with correct value.
-> The previous variable contains 0 therefore it
-> did work.
+> Divide riscv_trigger_init() into two functions, namely
+> riscv_trigger_realize() and riscv_trigger_reset() and call them in
+> appropriate timing. The timer allocation will happen only once for a
+> CPU in riscv_trigger_realize().
 >
-> Signed-off-by: Robbin Ehn <rehn@rivosinc.com>
+> Fixes: 5a4ae64cac ("target/riscv: Add itrigger support when icount is ena=
+bled")
+> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  linux-user/syscall.c | 14 +++++++++++++-
->  1 file changed, 13 insertions(+), 1 deletion(-)
+>  target/riscv/debug.h |  3 ++-
+>  target/riscv/cpu.c   |  8 +++++++-
+>  target/riscv/debug.c | 15 ++++++++++++---
+>  3 files changed, 21 insertions(+), 5 deletions(-)
 >
-> diff --git a/linux-user/syscall.c b/linux-user/syscall.c
-> index 9353268cc1..c46a0b1493 100644
-> --- a/linux-user/syscall.c
-> +++ b/linux-user/syscall.c
-> @@ -9049,6 +9049,10 @@ static int do_getdents64(abi_long dirfd, abi_long =
-arg2, abi_long count)
->  #define RISCV_HWPROBE_KEY_IMA_EXT_0     4
->  #define     RISCV_HWPROBE_IMA_FD       (1 << 0)
->  #define     RISCV_HWPROBE_IMA_C        (1 << 1)
-> +#define     RISCV_HWPROBE_IMA_V        (1 << 2)
-> +#define     RISCV_HWPROBE_EXT_ZBA      (1 << 3)
-> +#define     RISCV_HWPROBE_EXT_ZBB      (1 << 4)
-> +#define     RISCV_HWPROBE_EXT_ZBS      (1 << 5)
+> diff --git a/target/riscv/debug.h b/target/riscv/debug.h
+> index c471748d5a..7edc31e7cc 100644
+> --- a/target/riscv/debug.h
+> +++ b/target/riscv/debug.h
+> @@ -143,7 +143,8 @@ void riscv_cpu_debug_excp_handler(CPUState *cs);
+>  bool riscv_cpu_debug_check_breakpoint(CPUState *cs);
+>  bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp);
 >
->  #define RISCV_HWPROBE_KEY_CPUPERF_0     5
->  #define     RISCV_HWPROBE_MISALIGNED_UNKNOWN     (0 << 0)
-> @@ -9096,7 +9100,15 @@ static void risc_hwprobe_fill_pairs(CPURISCVState =
-*env,
->                      riscv_has_ext(env, RVD) ?
->                      RISCV_HWPROBE_IMA_FD : 0;
->              value |=3D riscv_has_ext(env, RVC) ?
-> -                     RISCV_HWPROBE_IMA_C : pair->value;
-> +                     RISCV_HWPROBE_IMA_C : 0;
-> +            value |=3D riscv_has_ext(env, RVV) ?
-> +                     RISCV_HWPROBE_IMA_V : 0;
-> +            value |=3D cfg->ext_zba ?
-> +                     RISCV_HWPROBE_EXT_ZBA : 0;
-> +            value |=3D cfg->ext_zbb ?
-> +                     RISCV_HWPROBE_EXT_ZBB : 0;
-> +            value |=3D cfg->ext_zbs ?
-> +                     RISCV_HWPROBE_EXT_ZBS : 0;
->              __put_user(value, &pair->value);
->              break;
->          case RISCV_HWPROBE_KEY_CPUPERF_0:
+> -void riscv_trigger_init(CPURISCVState *env);
+> +void riscv_trigger_realize(CPURISCVState *env);
+> +void riscv_trigger_reset(CPURISCVState *env);
+>
+>  bool riscv_itrigger_enabled(CPURISCVState *env);
+>  void riscv_itrigger_update_priv(CPURISCVState *env);
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index e12b6ef7f6..3bc3f96a58 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -904,7 +904,7 @@ static void riscv_cpu_reset_hold(Object *obj)
+>
+>  #ifndef CONFIG_USER_ONLY
+>      if (cpu->cfg.debug) {
+> -        riscv_trigger_init(env);
+> +        riscv_trigger_reset(env);
+>      }
+>
+>      if (kvm_enabled()) {
+> @@ -1475,6 +1475,12 @@ static void riscv_cpu_realize(DeviceState *dev, Er=
+ror **errp)
+>
+>      riscv_cpu_register_gdb_regs_for_features(cs);
+>
+> +#ifndef CONFIG_USER_ONLY
+> +    if (cpu->cfg.debug) {
+> +        riscv_trigger_realize(&cpu->env);
+> +    }
+> +#endif
+> +
+>      qemu_init_vcpu(cs);
+>      cpu_reset(cs);
+>
+> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+> index 75ee1c4971..1c44403205 100644
+> --- a/target/riscv/debug.c
+> +++ b/target/riscv/debug.c
+> @@ -903,7 +903,17 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, =
+CPUWatchpoint *wp)
+>      return false;
+>  }
+>
+> -void riscv_trigger_init(CPURISCVState *env)
+> +void riscv_trigger_realize(CPURISCVState *env)
+> +{
+> +    int i;
+> +
+> +    for (i =3D 0; i < RV_MAX_TRIGGERS; i++) {
+> +        env->itrigger_timer[i] =3D timer_new_ns(QEMU_CLOCK_VIRTUAL,
+> +                                              riscv_itrigger_timer_cb, e=
+nv);
+> +    }
+> +}
+> +
+> +void riscv_trigger_reset(CPURISCVState *env)
+>  {
+>      target_ulong tdata1 =3D build_tdata1(env, TRIGGER_TYPE_AD_MATCH, 0, =
+0);
+>      int i;
+> @@ -928,7 +938,6 @@ void riscv_trigger_init(CPURISCVState *env)
+>          env->tdata3[i] =3D 0;
+>          env->cpu_breakpoint[i] =3D NULL;
+>          env->cpu_watchpoint[i] =3D NULL;
+> -        env->itrigger_timer[i] =3D timer_new_ns(QEMU_CLOCK_VIRTUAL,
+> -                                              riscv_itrigger_timer_cb, e=
+nv);
+> +        timer_del(env->itrigger_timer[i]);
+>      }
+>  }
 > --
-> 2.39.2
+> 2.41.0
 >
 >
 
