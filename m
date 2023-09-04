@@ -4,108 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F228C83F33
-	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Sep 2023 06:02:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64D31CA0FE3
+	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Sep 2023 07:57:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qd2er-0001XS-Qu; Mon, 04 Sep 2023 02:02:03 -0400
+	id 1qd4RL-0005cm-73; Mon, 04 Sep 2023 03:56:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qd2e5-0001Pw-TY
- for qemu-riscv@nongnu.org; Mon, 04 Sep 2023 02:01:17 -0400
-Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qd4RH-0005cC-KM
+ for qemu-riscv@nongnu.org; Mon, 04 Sep 2023 03:56:03 -0400
+Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qd2e1-0003e2-Nt
- for qemu-riscv@nongnu.org; Mon, 04 Sep 2023 02:01:09 -0400
-Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-573c62b3cd2so59779a12.3
- for <qemu-riscv@nongnu.org>; Sun, 03 Sep 2023 23:01:03 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qd4RE-0003XH-QO
+ for qemu-riscv@nongnu.org; Mon, 04 Sep 2023 03:56:03 -0400
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-4fe15bfb1adso1947412e87.0
+ for <qemu-riscv@nongnu.org>; Mon, 04 Sep 2023 00:56:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1693807262; x=1694412062;
- darn=nongnu.org; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=linaro.org; s=google; t=1693814159; x=1694418959; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=PKX2wX1++1hQlRMPiKnO2ihU7HrlYOE5r5rNNc37le0=;
- b=bMaERcFP5Htmkz6/yglVJIbzX6lmolws0wx9VPJcwYzmqSZkpOcWOjNUSU9AETzxhS
- 4lTOKobIDADlUkU+EkJZF/vGyB1EL916RVDMpEf1seTwawJsWHrwsBdNeRxoPQnK7DQ9
- EQqHYD6THrnZB+ofXv4eWTsZoPsHBNU5OdJDZcN+RHrIUtfFeB34xMynNOjMIhKKyCkF
- 6tAFeAydNCEaRcnBltPsiUc5r/JrOXwskWHUQZ1qtFTqYtNahI9zjzXwOdHzIlStzNVT
- KIZfVeM69/5mUfPcL159FmD15bepvV9eD06N9u9KxM4Su9X7f+CTrZDsdn7bGC5IRAYX
- Ad6A==
+ bh=Aq76xk0R4e1eBtmgWg17QXsRmfYTgAn3YgaI8wjb4iQ=;
+ b=qX6Po0m59Ed6XySJDygyVDjsp91AaB0bpWSfwjaBrV0n8ZvBmeTmqv5/Yor8xjG09X
+ RFwLMxzj43Ml2WNJmUZndpsXMmzEgBIPPbsoVTnyzz7fWOvyqwkPV4hWCR1KSvIpG196
+ pEAZ/WFmPya0ar0FVCShzxGmk0mI4gXEt/QcxDqXK0i+WRp9A16nTtnm0i+rOWFLrSnl
+ uW+nyilCUkuQuUZ7UX3YXAR8In0KiTuwEf8FZgn+u9RiK8RoaU4DWL2XPRuuVCMksCI2
+ JN9bmdQz82xJtz2X+5jOnC63wJrmipnKEotANVt9FFiiUPgA9Y97d6XciOpHKwjmGsdd
+ qDqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693807262; x=1694412062;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20221208; t=1693814159; x=1694418959;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=PKX2wX1++1hQlRMPiKnO2ihU7HrlYOE5r5rNNc37le0=;
- b=WclakbstExh6lDxwcIaBZUEmfq0rdhpM7Nvb1IYeXD/fUMhTjPxJ/oM9Q68DY1v0uP
- 3NP9vZO4b7KZPHZWi5iRwZKQ54o1B0I/2BxMZYP3m58+FMr/LzSyaMnaFN2BruD6DLal
- AWQHlMNyIQ3K5KQeLuhyUjKIZ/J5ORedE/dSzqIGFETlE1mdL++o04qJ32a25oE+EoHt
- PkcSR/Pms39G2HNEVf43Kcza/k3s2z/0mIaFrnA5piKj9YrQ8bcI7vflnYE6d/ITxSKA
- MEoTaZwz1JRgvwx//faCfC76hRXV6h2Yzkpkbo8CVVbb1wks23V54eIODSm/1l1QUe7x
- vOVQ==
-X-Gm-Message-State: AOJu0YxHICEkh18+pbV4aqyixUzqpUqaMRvZGTCshqQUk4eIZsgSs9ze
- josqxHQmYfWiie8FSmZWRIfbZA==
-X-Google-Smtp-Source: AGHT+IGeWiUE/6ZyA1xR5+BfB2DnOzt0Jjn9WjzH3OaZA63fXHBY2XDg8LbblsX1jETDeKa0YBskLQ==
-X-Received: by 2002:a05:6a20:6a1f:b0:137:2f8c:fab0 with SMTP id
- p31-20020a056a206a1f00b001372f8cfab0mr8424857pzk.49.1693807262231; 
- Sun, 03 Sep 2023 23:01:02 -0700 (PDT)
-Received: from ?IPV6:2400:4050:a840:1e00:78d2:b862:10a7:d486?
- ([2400:4050:a840:1e00:78d2:b862:10a7:d486])
+ bh=Aq76xk0R4e1eBtmgWg17QXsRmfYTgAn3YgaI8wjb4iQ=;
+ b=bqwxXh7nBS+ec+J3CgE8Q5WYvfR6psNHMA0038BNmylyfpj8jbA3FrLWk7QLZVvZw3
+ MLQdXmPrb2aUFIeWVX5KRLmufDUvRaxEu5JUOjS9iocZtZSEtOfb2cbahRG/vmN/lYAU
+ Gwu5Uw2Yb0MpmRtICMESr8sYpLaXSDuvwQdi+RDfUwt3l+2s7d/CI0NRuz5AnrqDh6hS
+ e/nPm9zX4WmRVtOoDRvDgU/VbaubDAYL/hepRsl4Rui9eiYhzbvvNG14jGuBzLtsEgoz
+ EdWKJxtlmtR3LqT3BK4TBx+eAxaMTWcE2/usynlZ6H/58PlOMgq8daikZM8VeNdIuQn3
+ X9ig==
+X-Gm-Message-State: AOJu0YwPSfd2EcJFkFlpZnKwMTOI8PIdeCxOVA0Zyufruco+7/g76mfe
+ ELLXH5CYcjW+VAyft5OQmu5Pfg==
+X-Google-Smtp-Source: AGHT+IE7bgauqWqr8GvWqRCYSpx3AdJQRnnkKR1dzTeULsBSedz7wHqtCNN6LPRZ9lq7/QWNrU8qEw==
+X-Received: by 2002:a05:6512:281c:b0:4fd:d172:fc2c with SMTP id
+ cf28-20020a056512281c00b004fdd172fc2cmr7099417lfb.21.1693814158695; 
+ Mon, 04 Sep 2023 00:55:58 -0700 (PDT)
+Received: from [192.168.69.115] ([176.187.209.227])
  by smtp.gmail.com with ESMTPSA id
- i15-20020a63bf4f000000b00565e96d9874sm6076958pgo.89.2023.09.03.23.00.56
+ d25-20020a056402079900b005224f840130sm5378069edy.60.2023.09.04.00.55.57
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 03 Sep 2023 23:01:01 -0700 (PDT)
-Message-ID: <64f2030b-2d56-4ecb-9b8d-fd4f3a8eda68@daynix.com>
-Date: Mon, 4 Sep 2023 15:00:54 +0900
+ Mon, 04 Sep 2023 00:55:58 -0700 (PDT)
+Message-ID: <1a2c4590-532d-a8b8-e77d-1131d6aa88aa@linaro.org>
+Date: Mon, 4 Sep 2023 09:55:56 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/8] hw/core/cpu: Return static value with gdb_arch_name()
-To: Michael Tokarev <mjt@tls.msk.ru>
-Cc: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Mikhail Tyutin <m.tyutin@yadro.com>, Aleksandr Anenkov
- <a.anenkov@yadro.com>, qemu-devel@nongnu.org,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>, Peter Maydell
- <peter.maydell@linaro.org>, Song Gao <gaosong@loongson.cn>,
- Xiaojuan Yang <yangxiaojuan@loongson.cn>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
- David Gibson <david@gibson.dropbear.id.au>, Greg Kurz <groug@kaod.org>,
- Nicholas Piggin <npiggin@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
- Thomas Huth <thuth@redhat.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- "open list:ARM TCG CPUs" <qemu-arm@nongnu.org>,
- "open list:PowerPC TCG CPUs" <qemu-ppc@nongnu.org>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- "open list:S390 TCG CPUs" <qemu-s390x@nongnu.org>
-References: <20230903043030.20708-1-akihiko.odaki@daynix.com>
- <20230903043030.20708-5-akihiko.odaki@daynix.com>
- <fe9021cf-727f-aa8b-c22a-7432ce928fb6@tls.msk.ru>
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.15.0
+Subject: Re: [PATCH v9 04/20] target/riscv: add DEFINE_PROP_END_OF_LIST() to
+ riscv_cpu_options[]
 Content-Language: en-US
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <fe9021cf-727f-aa8b-c22a-7432ce928fb6@tls.msk.ru>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ ajones@ventanamicro.com
+References: <20230901194627.1214811-1-dbarboza@ventanamicro.com>
+ <20230901194627.1214811-5-dbarboza@ventanamicro.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+In-Reply-To: <20230901194627.1214811-5-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::52a;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pg1-x52a.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::12b;
+ envelope-from=philmd@linaro.org; helo=mail-lf1-x12b.google.com
+X-Spam_score_int: -35
+X-Spam_score: -3.6
+X-Spam_bar: ---
+X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.473,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -121,24 +98,43 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2023/09/04 14:54, Michael Tokarev wrote:
-> 03.09.2023 07:30, Akihiko Odaki wrote:
->> All implementations of gdb_arch_name() returns dynamic duplicates of
->> static strings. It's also unlikely that there will be an implementation
->> of gdb_arch_name() that returns a truly dynamic value due to the nature
->> of the function returning a well-known identifiers. Qualify the value
->> gdb_arch_name() with const and make all of its implementations return
->> static strings.
+On 1/9/23 21:46, Daniel Henrique Barboza wrote:
+> Add DEFINE_PROP_END_OF_LIST() and eliminate the ARRAY_SIZE() usage when
+> iterating in the riscv_cpu_options[] array, making it similar to what
+> we already do when working with riscv_cpu_extensions[].
 > 
-> Why it needs to be a function, can't it be a char pointer
-> initialized at the cpu init time?
+> We also have a more sophisticated motivation behind this change. In the
+> future we might need to export riscv_cpu_options[] to other files, and
+> ARRAY_LIST() doesn't work properly in that case because the array size
+> isn't exposed to the header file. Here's a future sight of what we would
+> deal with:
+> 
+> ./target/riscv/kvm.c:1057:5: error: nested extern declaration of 'riscv_cpu_add_misa_properties' [-Werror=nested-externs]
+> n file included from ../target/riscv/kvm.c:19:
+> home/danielhb/work/qemu/include/qemu/osdep.h:473:31: error: invalid application of 'sizeof' to incomplete type 'const RISCVCPUMultiExtConfig[]'
+>   473 | #define ARRAY_SIZE(x) ((sizeof(x) / sizeof((x)[0])) + \
+>       |                               ^
+> ./target/riscv/kvm.c:1047:29: note: in expansion of macro 'ARRAY_SIZE'
+> 1047 |         for (int i = 0; i < ARRAY_SIZE(_array); i++) { \
+>       |                             ^~~~~~~~~~
+> ./target/riscv/kvm.c:1059:5: note: in expansion of macro 'ADD_UNAVAIL_KVM_PROP_ARRAY'
+> 1059 |     ADD_UNAVAIL_KVM_PROP_ARRAY(obj, riscv_cpu_extensions);
+>       |     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+> home/danielhb/work/qemu/include/qemu/osdep.h:473:31: error: invalid application of 'sizeof' to incomplete type 'const RISCVCPUMultiExtConfig[]'
+>   473 | #define ARRAY_SIZE(x) ((sizeof(x) / sizeof((x)[0])) + \
+>       |                               ^
+> ./target/riscv/kvm.c:1047:29: note: in expansion of macro 'ARRAY_SIZE'
+> 1047 |         for (int i = 0; i < ARRAY_SIZE(_array); i++) { \
+> 
+> Homogenize the present and change the future by using
+> DEFINE_PROP_END_OF_LIST() in riscv_cpu_options[].
+> 
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+> ---
+>   target/riscv/cpu.c | 12 +++++++-----
+>   1 file changed, 7 insertions(+), 5 deletions(-)
 
-There is no real reason I guess. Either is fine in my opinion.
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
-> 
-> Reviewed-By: Michael Tokarev <mjt@tls.msk.ru>
-> 
-> (What a huge list of recipients in the Cc..)
-> 
-> /mjt
 
