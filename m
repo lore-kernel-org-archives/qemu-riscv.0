@@ -4,68 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AE05C83F2D
-	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Sep 2023 01:06:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACC22C83F2C
+	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Sep 2023 01:48:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qcy2W-0002Lw-Se; Sun, 03 Sep 2023 21:06:04 -0400
+	id 1qcyhC-0006Cp-SB; Sun, 03 Sep 2023 21:48:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qcy2W-0002K6-C2; Sun, 03 Sep 2023 21:06:04 -0400
-Received: from mail-vk1-xa34.google.com ([2607:f8b0:4864:20::a34])
+ id 1qcyh9-0006Ah-PV; Sun, 03 Sep 2023 21:48:05 -0400
+Received: from mail-ua1-x92d.google.com ([2607:f8b0:4864:20::92d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qcy2U-0006CS-AB; Sun, 03 Sep 2023 21:06:04 -0400
-Received: by mail-vk1-xa34.google.com with SMTP id
- 71dfb90a1353d-48d11ae09c8so45394e0c.3; 
- Sun, 03 Sep 2023 18:06:01 -0700 (PDT)
+ id 1qcyh6-00079u-8R; Sun, 03 Sep 2023 21:48:03 -0400
+Received: by mail-ua1-x92d.google.com with SMTP id
+ a1e0cc1a2514c-7a2785e34b6so283410241.1; 
+ Sun, 03 Sep 2023 18:47:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693789560; x=1694394360; darn=nongnu.org;
+ d=gmail.com; s=20221208; t=1693792078; x=1694396878; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hhZF3qTkFULByk1NWfUfmcuS32MCWkv4inAm72d1hFE=;
- b=TkXdkM+0GMiBbhzGD4TEQQjjeDyxOt/XzBM4FtlqZTBJEPQ9Wy5iVdhL/Lcu8Tx/HE
- LEXt411wNcmFdm0rnYOEw69O9OeHHrMIA0kq3m1oNQ+umBOau8vuu0jfqu2GNj6FOaFk
- ST1oNdUp3mTxmp9aKb8MHKyAbgDnXvw3XWIeqVt3TdAVsXssiWo7W3tfBiioDH71iOJ1
- YJASkRjMrhjO+qjoHdtVSsG1u+qSA51FaDoIxRMeG8qm/Dsdyz1K9yt/hz59I9UYmiCD
- Z1zoEa9Fh8Ia9jLNMifNbV5pbuXs4fEa+gL9TS8Kg1YASmdmXyOXyRSv+NZRdlolhqbu
- sBQA==
+ bh=Yo0fw3L22av76GFoRmD14rHKTTjeSQRP0mWxHTnpQVQ=;
+ b=ANerQKreiAv/NGLSP90G9nFcW7erIaxiKvBhTXiN2BZTZoSrTuzFTDiweV/OYqgEfh
+ aloJfsEDcoKRxN+/O5jjR7y+yqCv9leGTIlYw47Ls41AllpDsea2znB2tBqrO1fzNO4t
+ veZ+ozpJoFQeLfRm4OO7G9MEh2dOv8RttJxDXVZTeazrDF95fnw3SSPxCZrIii3UNJNS
+ zrJHQZo5ZQm/ZD6HT6E7Hck/rTVthTFrCp8PsZw40rZIqDuuqi5K1hIcgrw0y56cjFRT
+ 9La6acsEd0Py9CG6nJ3e5hQKsqoO+iZ9aWw7y4oMVqM3PNNr7QtaVoPbdjZNTqH0xPgB
+ 21JA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693789560; x=1694394360;
+ d=1e100.net; s=20221208; t=1693792078; x=1694396878;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hhZF3qTkFULByk1NWfUfmcuS32MCWkv4inAm72d1hFE=;
- b=R26W01PuLV51zZyBp+TkWQMj1JLnrsxVo9EcCT0luDnbnCIDQyh56QXfQyYaPR0rax
- cE3+xwndgPW//GcpicVxycWkWRuZCi7Li1/Opq3lXC0BTV02qlQtMEbSGVMzf7LQ6j0m
- +hZb5Ql0UX1pnazAJoy/+Xt4zFYZk7BraReDSyA77Tz+LnygW+8L85lS0RawbQ6WacVm
- Q0JY4oH2zSoKXP1j4uK8Sf71YcUJtoaJgFhkv83SWpne6EPE04lYAH8g0VtXkA/ketum
- ZIHU7yeXDoaseTigxwDWYbfLGkCsTAosOut5psZh5LstLFFWElgSPlXH9BmFgK+DN/eu
- eo9g==
-X-Gm-Message-State: AOJu0YzXVW/ZorfOcCipY+Cd8hDd7FI4dxT+HFZ5zqT+olO3o9zpDpHM
- rELIBuIs65AvQ0Qa/UhEIHjjscCE1ztTov7klaQ=
-X-Google-Smtp-Source: AGHT+IHciyD1FkGC8Cp2qOIgcAVnMXNFzSQggHFR2+ROSsUIuAoT+KGlaAV5ZcD1Z7BU29nuyB/RvGskoDuv2ycOSGs=
-X-Received: by 2002:a05:6102:98:b0:44d:47c2:7470 with SMTP id
- t24-20020a056102009800b0044d47c27470mr4705374vsp.34.1693789559769; Sun, 03
- Sep 2023 18:05:59 -0700 (PDT)
+ bh=Yo0fw3L22av76GFoRmD14rHKTTjeSQRP0mWxHTnpQVQ=;
+ b=crp9P5zH0mU2UBr3R9JMRZFsiEX4sY3B5lafIHcbn0bpA7rukhrQYCJapqmf4vFttf
+ Pzo8UN34njEmzA9aG1VqDBbX3yy6r/IwND/G7hKS7Zfb2rdGANhRYTePjYIYHbHVDFoe
+ pGNO8E+/H9O+HpHN8NxxSLkKvnpAo3gCavC3vvXg8u1jIJ4HWD2R7V+nBoUzkHQ0z7tO
+ iLHAezd8kutrI21lrHXJDLPzvVKyF3/p7pEt/Wo5inJFigksQAeGiGXsG6ZvasQt2xrp
+ wKvQOHCtpsthBa9CA0ELg/QBoPRBa9UcZv/q8vSmak7/OhVf0ac5tCGgpZu6Zj0YfPM9
+ OPLw==
+X-Gm-Message-State: AOJu0YyJ87NZA+0gLpipLrMqeCFr8VKJNHRtvgdGMrl63cOomF17vLG5
+ 8jVTz2hpUMDYNoVv+axylmCyXZPEjyOeq5dLoG3sBcJ7hITLrA==
+X-Google-Smtp-Source: AGHT+IHcc1Z9Gudol4MaumGmO5AXgq0gvKemkXmMW2TzscSFHx+/8ho4fDyFBpglHfU+AvCfuLcLzGAu2YpJvGsvG/8=
+X-Received: by 2002:a1f:c581:0:b0:48d:461:d9 with SMTP id
+ v123-20020a1fc581000000b0048d046100d9mr6725184vkf.13.1693792078588; 
+ Sun, 03 Sep 2023 18:47:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230829215046.1430463-1-leon@is.currently.online>
-In-Reply-To: <20230829215046.1430463-1-leon@is.currently.online>
+References: <20230823070735.363197-1-chigot@adacore.com>
+In-Reply-To: <20230823070735.363197-1-chigot@adacore.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 4 Sep 2023 11:05:33 +1000
-Message-ID: <CAKmqyKMcASJUh0pSCV5DOw8HV8TT3=kL+eg_GQtuvu2SR7obmA@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv/pmp.c: respect mseccfg.RLB for pmpaddrX
- changes
-To: leon@is.currently.online
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Leon Schuermann <leons@opentitan.org>
+Date: Mon, 4 Sep 2023 11:47:32 +1000
+Message-ID: <CAKmqyKPuBZxhRT2epuToYmsTpTaaBftTr5Of44Mf-N6jA5333g@mail.gmail.com>
+Subject: Re: [PATCH v2 3/3] gdbstub: replace exit(0) with proper shutdown
+To: =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a34;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92d;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92d.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -89,47 +87,86 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Aug 30, 2023 at 7:50=E2=80=AFAM <leon@is.currently.online> wrote:
+On Wed, Aug 23, 2023 at 5:08=E2=80=AFPM Cl=C3=A9ment Chigot <chigot@adacore=
+.com> wrote:
 >
-> From: Leon Schuermann <leons@opentitan.org>
+> This replaces the exit(0) call by a shutdown request, ensuring a proper
+> cleanup of Qemu. Otherwise, some connections could be broken without
+> being correctly flushed.
 >
-> When the rule-lock bypass (RLB) bit is set in the mseccfg CSR, the PMP
-> configuration lock bits must not apply. While this behavior is
-> implemented for the pmpcfgX CSRs, this bit is not respected for
-> changes to the pmpaddrX CSRs. This patch ensures that pmpaddrX CSR
-> writes work even on locked regions when the global rule-lock bypass is
-> enabled.
->
-> Signed-off-by: Leon Schuermann <leons@opentitan.org>
+> Signed-off-by: Cl=C3=A9ment Chigot <chigot@adacore.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/pmp.c | 4 ++++
->  1 file changed, 4 insertions(+)
+>  gdbstub/gdbstub.c |  3 +--
+>  gdbstub/softmmu.c | 13 +++++++++++++
+>  gdbstub/user.c    |  2 ++
+>  3 files changed, 16 insertions(+), 2 deletions(-)
 >
-> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index 9d8db493e6..5e60c26031 100644
-> --- a/target/riscv/pmp.c
-> +++ b/target/riscv/pmp.c
-> @@ -44,6 +44,10 @@ static inline uint8_t pmp_get_a_field(uint8_t cfg)
->   */
->  static inline int pmp_is_locked(CPURISCVState *env, uint32_t pmp_index)
->  {
-> +    /* mseccfg.RLB is set */
-> +    if (MSECCFG_RLB_ISSET(env)) {
-> +        return 0;
+> diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
+> index 5f28d5cf57..358eed1935 100644
+> --- a/gdbstub/gdbstub.c
+> +++ b/gdbstub/gdbstub.c
+> @@ -1298,7 +1298,6 @@ static void handle_v_kill(GArray *params, void *use=
+r_ctx)
+>      gdb_put_packet("OK");
+>      error_report("QEMU: Terminated via GDBstub");
+>      gdb_exit(0);
+> -    exit(0);
+>  }
+>
+>  static const GdbCmdParseEntry gdb_v_commands_table[] =3D {
+> @@ -1818,7 +1817,7 @@ static int gdb_handle_packet(const char *line_buf)
+>          /* Kill the target */
+>          error_report("QEMU: Terminated via GDBstub");
+>          gdb_exit(0);
+> -        exit(0);
+> +        break;
+>      case 'D':
+>          {
+>              static const GdbCmdParseEntry detach_cmd_desc =3D {
+> diff --git a/gdbstub/softmmu.c b/gdbstub/softmmu.c
+> index f509b7285d..fa9b09537d 100644
+> --- a/gdbstub/softmmu.c
+> +++ b/gdbstub/softmmu.c
+> @@ -434,6 +434,19 @@ void gdb_exit(int code)
+>      }
+>
+>      qemu_chr_fe_deinit(&gdbserver_system_state.chr, true);
+> +
+> +    /*
+> +     * Shutdown request is a clean way to stop the QEMU, compared
+> +     * to a direct call to exit(). But we can't pass the exit code
+> +     * through it so avoid doing that when it can matter.
+> +     * As this function is also called during the cleanup process,
+> +     * avoid sending the request if one is already set.
+> +     */
+> +    if (code) {
+> +        exit(code);
+> +    } else if (!qemu_shutdown_requested_get()) {
+> +        qemu_system_shutdown_request(SHUTDOWN_CAUSE_GUEST_SHUTDOWN);
 > +    }
+>  }
 >
->      if (env->pmp_state.pmp[pmp_index].cfg_reg & PMP_LOCK) {
->          return 1;
+>  /*
+> diff --git a/gdbstub/user.c b/gdbstub/user.c
+> index 5b375be1d9..f3d97d621f 100644
+> --- a/gdbstub/user.c
+> +++ b/gdbstub/user.c
+> @@ -113,6 +113,8 @@ void gdb_exit(int code)
+>          gdb_put_packet(buf);
+>          gdbserver_state.allow_stop_reply =3D false;
+>      }
+> +
+> +    exit(code);
+>  }
 >
-> base-commit: a8fc5165aab02f328ccd148aafec1e59fd1426eb
+>  int gdb_handlesig(CPUState *cpu, int sig)
 > --
-> 2.34.1
+> 2.25.1
+>
 >
 
