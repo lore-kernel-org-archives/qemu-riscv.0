@@ -4,66 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACC22C83F2C
-	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Sep 2023 01:48:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11909C83F2C
+	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Sep 2023 01:49:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qcyhC-0006Cp-SB; Sun, 03 Sep 2023 21:48:06 -0400
+	id 1qcyiI-0006st-K3; Sun, 03 Sep 2023 21:49:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qcyh9-0006Ah-PV; Sun, 03 Sep 2023 21:48:05 -0400
-Received: from mail-ua1-x92d.google.com ([2607:f8b0:4864:20::92d])
+ id 1qcyiH-0006sX-Hl; Sun, 03 Sep 2023 21:49:13 -0400
+Received: from mail-vs1-xe2c.google.com ([2607:f8b0:4864:20::e2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qcyh6-00079u-8R; Sun, 03 Sep 2023 21:48:03 -0400
-Received: by mail-ua1-x92d.google.com with SMTP id
- a1e0cc1a2514c-7a2785e34b6so283410241.1; 
- Sun, 03 Sep 2023 18:47:59 -0700 (PDT)
+ id 1qcyiF-0007HT-9u; Sun, 03 Sep 2023 21:49:13 -0400
+Received: by mail-vs1-xe2c.google.com with SMTP id
+ ada2fe7eead31-44d526f96fcso64203137.1; 
+ Sun, 03 Sep 2023 18:49:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693792078; x=1694396878; darn=nongnu.org;
+ d=gmail.com; s=20221208; t=1693792150; x=1694396950; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Yo0fw3L22av76GFoRmD14rHKTTjeSQRP0mWxHTnpQVQ=;
- b=ANerQKreiAv/NGLSP90G9nFcW7erIaxiKvBhTXiN2BZTZoSrTuzFTDiweV/OYqgEfh
- aloJfsEDcoKRxN+/O5jjR7y+yqCv9leGTIlYw47Ls41AllpDsea2znB2tBqrO1fzNO4t
- veZ+ozpJoFQeLfRm4OO7G9MEh2dOv8RttJxDXVZTeazrDF95fnw3SSPxCZrIii3UNJNS
- zrJHQZo5ZQm/ZD6HT6E7Hck/rTVthTFrCp8PsZw40rZIqDuuqi5K1hIcgrw0y56cjFRT
- 9La6acsEd0Py9CG6nJ3e5hQKsqoO+iZ9aWw7y4oMVqM3PNNr7QtaVoPbdjZNTqH0xPgB
- 21JA==
+ bh=E3/BtvmnnaepakbWlmfOJO9iAnSIKLeU1mrNC/i2kyw=;
+ b=gC2133lD90zrz3/GGxKlZaB8z1TLDo6mlKNMvE94RHtJmWXDpv/mHs0RZaNzl4aZOw
+ CQYIh0oqfAEDZQi9kBvAB62EOIj+waaZSV+2D/IUwFbVflBoiYc4/VjvfzRFQXa4Rmjn
+ p54o05k0Ey8UBKeXLBun68j1LJmyeRZAXwkq1LzceYZQgOMzczopby/y5VKjPsFAiDB7
+ CrTr1tUSBkwqins+UJP798w6ghy4hO+NiQwdsiZSbKXzxiXpR+Q7395RuFNsrEiMfby7
+ h0f0LWtv+YM7lkhOioJAOukhplsn9nWhKB37MJ8m4uQ/7GSqin9HpLc0WRn0dGgw8zQJ
+ KtXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693792078; x=1694396878;
+ d=1e100.net; s=20221208; t=1693792150; x=1694396950;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Yo0fw3L22av76GFoRmD14rHKTTjeSQRP0mWxHTnpQVQ=;
- b=crp9P5zH0mU2UBr3R9JMRZFsiEX4sY3B5lafIHcbn0bpA7rukhrQYCJapqmf4vFttf
- Pzo8UN34njEmzA9aG1VqDBbX3yy6r/IwND/G7hKS7Zfb2rdGANhRYTePjYIYHbHVDFoe
- pGNO8E+/H9O+HpHN8NxxSLkKvnpAo3gCavC3vvXg8u1jIJ4HWD2R7V+nBoUzkHQ0z7tO
- iLHAezd8kutrI21lrHXJDLPzvVKyF3/p7pEt/Wo5inJFigksQAeGiGXsG6ZvasQt2xrp
- wKvQOHCtpsthBa9CA0ELg/QBoPRBa9UcZv/q8vSmak7/OhVf0ac5tCGgpZu6Zj0YfPM9
- OPLw==
-X-Gm-Message-State: AOJu0YyJ87NZA+0gLpipLrMqeCFr8VKJNHRtvgdGMrl63cOomF17vLG5
- 8jVTz2hpUMDYNoVv+axylmCyXZPEjyOeq5dLoG3sBcJ7hITLrA==
-X-Google-Smtp-Source: AGHT+IHcc1Z9Gudol4MaumGmO5AXgq0gvKemkXmMW2TzscSFHx+/8ho4fDyFBpglHfU+AvCfuLcLzGAu2YpJvGsvG/8=
-X-Received: by 2002:a1f:c581:0:b0:48d:461:d9 with SMTP id
- v123-20020a1fc581000000b0048d046100d9mr6725184vkf.13.1693792078588; 
- Sun, 03 Sep 2023 18:47:58 -0700 (PDT)
+ bh=E3/BtvmnnaepakbWlmfOJO9iAnSIKLeU1mrNC/i2kyw=;
+ b=gyLAMfsd7Iut5TxN8iN7N9y6pQx6P6gnackDlWdceU1mFQYa3TFLsNzfLrT6R0jCjl
+ oC9hO7s+Kd5JyOVSaY/W1fsqAQaUaTlNqmKtPYNehZ4lmEhhC35hlAQoM2UKunowpmrf
+ WmalP18GFV6vReqFSCcO9z7E5VPrDNSnVwG/sllCDAl6S4h+YoIBJvOvRqQH1duOXe5+
+ mRRtGo6Zh6kWxalwsmmD2E9b5TJGHdvUoOhqJPn/6AmXWnU35XFXA0y9gwtxrBHW/s2h
+ XcJEZYoujd6P9NySw6xhjTXnFDdBTJpRAe3z5+DT6DG6alT4/627j6CU661n8cx7X/xt
+ viJw==
+X-Gm-Message-State: AOJu0Yw28CtjJozT3dIVPeOMjWXP/dQWbazptkFj28fGMExnNeJKdVUX
+ mCrI3OJMYksL9Hkrp67ikJYZMyvI9pL8bHypq7k=
+X-Google-Smtp-Source: AGHT+IGYjrQ5l3JvmZSGIe6NoMQQ8v7Hb924X247jDv5SePgHKBDe5lBopwVdq6SydagI3BSUVZeomj80syuVINA0+Y=
+X-Received: by 2002:a67:ff02:0:b0:44e:93f4:3c85 with SMTP id
+ v2-20020a67ff02000000b0044e93f43c85mr4694880vsp.12.1693792149884; Sun, 03 Sep
+ 2023 18:49:09 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230823070735.363197-1-chigot@adacore.com>
-In-Reply-To: <20230823070735.363197-1-chigot@adacore.com>
+References: <20230901194627.1214811-1-dbarboza@ventanamicro.com>
+ <20230901194627.1214811-5-dbarboza@ventanamicro.com>
+In-Reply-To: <20230901194627.1214811-5-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 4 Sep 2023 11:47:32 +1000
-Message-ID: <CAKmqyKPuBZxhRT2epuToYmsTpTaaBftTr5Of44Mf-N6jA5333g@mail.gmail.com>
-Subject: Re: [PATCH v2 3/3] gdbstub: replace exit(0) with proper shutdown
-To: =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org
+Date: Mon, 4 Sep 2023 11:48:43 +1000
+Message-ID: <CAKmqyKN+cM+mQ3iTWXctdsRfX+-PTjH00WLSrdke=veh2wQU1g@mail.gmail.com>
+Subject: Re: [PATCH v9 04/20] target/riscv: add DEFINE_PROP_END_OF_LIST() to
+ riscv_cpu_options[]
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, ajones@ventanamicro.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92d;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2c;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -87,86 +91,100 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Aug 23, 2023 at 5:08=E2=80=AFPM Cl=C3=A9ment Chigot <chigot@adacore=
-.com> wrote:
+On Sat, Sep 2, 2023 at 5:50=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
 >
-> This replaces the exit(0) call by a shutdown request, ensuring a proper
-> cleanup of Qemu. Otherwise, some connections could be broken without
-> being correctly flushed.
+> Add DEFINE_PROP_END_OF_LIST() and eliminate the ARRAY_SIZE() usage when
+> iterating in the riscv_cpu_options[] array, making it similar to what
+> we already do when working with riscv_cpu_extensions[].
 >
-> Signed-off-by: Cl=C3=A9ment Chigot <chigot@adacore.com>
+> We also have a more sophisticated motivation behind this change. In the
+> future we might need to export riscv_cpu_options[] to other files, and
+> ARRAY_LIST() doesn't work properly in that case because the array size
+> isn't exposed to the header file. Here's a future sight of what we would
+> deal with:
+>
+> ./target/riscv/kvm.c:1057:5: error: nested extern declaration of 'riscv_c=
+pu_add_misa_properties' [-Werror=3Dnested-externs]
+> n file included from ../target/riscv/kvm.c:19:
+> home/danielhb/work/qemu/include/qemu/osdep.h:473:31: error: invalid appli=
+cation of 'sizeof' to incomplete type 'const RISCVCPUMultiExtConfig[]'
+>  473 | #define ARRAY_SIZE(x) ((sizeof(x) / sizeof((x)[0])) + \
+>      |                               ^
+> ./target/riscv/kvm.c:1047:29: note: in expansion of macro 'ARRAY_SIZE'
+> 1047 |         for (int i =3D 0; i < ARRAY_SIZE(_array); i++) { \
+>      |                             ^~~~~~~~~~
+> ./target/riscv/kvm.c:1059:5: note: in expansion of macro 'ADD_UNAVAIL_KVM=
+_PROP_ARRAY'
+> 1059 |     ADD_UNAVAIL_KVM_PROP_ARRAY(obj, riscv_cpu_extensions);
+>      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+> home/danielhb/work/qemu/include/qemu/osdep.h:473:31: error: invalid appli=
+cation of 'sizeof' to incomplete type 'const RISCVCPUMultiExtConfig[]'
+>  473 | #define ARRAY_SIZE(x) ((sizeof(x) / sizeof((x)[0])) + \
+>      |                               ^
+> ./target/riscv/kvm.c:1047:29: note: in expansion of macro 'ARRAY_SIZE'
+> 1047 |         for (int i =3D 0; i < ARRAY_SIZE(_array); i++) { \
+>
+> Homogenize the present and change the future by using
+> DEFINE_PROP_END_OF_LIST() in riscv_cpu_options[].
+>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  gdbstub/gdbstub.c |  3 +--
->  gdbstub/softmmu.c | 13 +++++++++++++
->  gdbstub/user.c    |  2 ++
->  3 files changed, 16 insertions(+), 2 deletions(-)
+>  target/riscv/cpu.c | 12 +++++++-----
+>  1 file changed, 7 insertions(+), 5 deletions(-)
 >
-> diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-> index 5f28d5cf57..358eed1935 100644
-> --- a/gdbstub/gdbstub.c
-> +++ b/gdbstub/gdbstub.c
-> @@ -1298,7 +1298,6 @@ static void handle_v_kill(GArray *params, void *use=
-r_ctx)
->      gdb_put_packet("OK");
->      error_report("QEMU: Terminated via GDBstub");
->      gdb_exit(0);
-> -    exit(0);
->  }
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 8e6d316500..8662414906 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1922,6 +1922,8 @@ static Property riscv_cpu_options[] =3D {
 >
->  static const GdbCmdParseEntry gdb_v_commands_table[] =3D {
-> @@ -1818,7 +1817,7 @@ static int gdb_handle_packet(const char *line_buf)
->          /* Kill the target */
->          error_report("QEMU: Terminated via GDBstub");
->          gdb_exit(0);
-> -        exit(0);
-> +        break;
->      case 'D':
->          {
->              static const GdbCmdParseEntry detach_cmd_desc =3D {
-> diff --git a/gdbstub/softmmu.c b/gdbstub/softmmu.c
-> index f509b7285d..fa9b09537d 100644
-> --- a/gdbstub/softmmu.c
-> +++ b/gdbstub/softmmu.c
-> @@ -434,6 +434,19 @@ void gdb_exit(int code)
+>      DEFINE_PROP_UINT16("cbom_blocksize", RISCVCPU, cfg.cbom_blocksize, 6=
+4),
+>      DEFINE_PROP_UINT16("cboz_blocksize", RISCVCPU, cfg.cboz_blocksize, 6=
+4),
+> +
+> +    DEFINE_PROP_END_OF_LIST(),
+>  };
+>
+>  #ifndef CONFIG_USER_ONLY
+> @@ -1973,12 +1975,12 @@ static void riscv_cpu_add_kvm_properties(Object *=
+obj)
+>          riscv_cpu_add_kvm_unavail_prop(obj, prop->name);
 >      }
 >
->      qemu_chr_fe_deinit(&gdbserver_system_state.chr, true);
-> +
-> +    /*
-> +     * Shutdown request is a clean way to stop the QEMU, compared
-> +     * to a direct call to exit(). But we can't pass the exit code
-> +     * through it so avoid doing that when it can matter.
-> +     * As this function is also called during the cleanup process,
-> +     * avoid sending the request if one is already set.
-> +     */
-> +    if (code) {
-> +        exit(code);
-> +    } else if (!qemu_shutdown_requested_get()) {
-> +        qemu_system_shutdown_request(SHUTDOWN_CAUSE_GUEST_SHUTDOWN);
-> +    }
->  }
->
->  /*
-> diff --git a/gdbstub/user.c b/gdbstub/user.c
-> index 5b375be1d9..f3d97d621f 100644
-> --- a/gdbstub/user.c
-> +++ b/gdbstub/user.c
-> @@ -113,6 +113,8 @@ void gdb_exit(int code)
->          gdb_put_packet(buf);
->          gdbserver_state.allow_stop_reply =3D false;
+> -    for (int i =3D 0; i < ARRAY_SIZE(riscv_cpu_options); i++) {
+> +    for (prop =3D riscv_cpu_options; prop && prop->name; prop++) {
+>          /* Check if KVM created the property already */
+> -        if (object_property_find(obj, riscv_cpu_options[i].name)) {
+> +        if (object_property_find(obj, prop->name)) {
+>              continue;
+>          }
+> -        qdev_property_add_static(dev, &riscv_cpu_options[i]);
+> +        qdev_property_add_static(dev, prop);
 >      }
-> +
-> +    exit(code);
+>  }
+>  #endif
+> @@ -2009,8 +2011,8 @@ static void riscv_cpu_add_user_properties(Object *o=
+bj)
+>          qdev_property_add_static(dev, prop);
+>      }
+>
+> -    for (int i =3D 0; i < ARRAY_SIZE(riscv_cpu_options); i++) {
+> -        qdev_property_add_static(dev, &riscv_cpu_options[i]);
+> +    for (prop =3D riscv_cpu_options; prop && prop->name; prop++) {
+> +        qdev_property_add_static(dev, prop);
+>      }
 >  }
 >
->  int gdb_handlesig(CPUState *cpu, int sig)
 > --
-> 2.25.1
+> 2.41.0
 >
 >
 
