@@ -4,84 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC553EB8FB8
-	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Sep 2023 10:23:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 704BBEB8FDE
+	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Sep 2023 14:38:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qdph2-0003Le-7G; Wed, 06 Sep 2023 06:23:28 -0400
+	id 1qdtfr-00082l-DT; Wed, 06 Sep 2023 10:38:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qdph0-0003IA-O9
- for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 06:23:26 -0400
-Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qdtfp-0007zs-Ls
+ for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 10:38:29 -0400
+Received: from mail-oa1-x36.google.com ([2001:4860:4864:20::36])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qdpgy-0001ii-Fp
- for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 06:23:26 -0400
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-9a648f9d8e3so469938866b.1
- for <qemu-riscv@nongnu.org>; Wed, 06 Sep 2023 03:23:24 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qdtfm-0006O7-Nx
+ for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 10:38:29 -0400
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-1c4de3b9072so2835427fac.3
+ for <qemu-riscv@nongnu.org>; Wed, 06 Sep 2023 07:38:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693995802; x=1694600602; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=ventanamicro.com; s=google; t=1694011105; x=1694615905; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=txJQvk2EzZdgYgATcIbEr45nHBa1cHGzQixKXDaayhk=;
- b=R/Thw5DU5xI83RIPwwH8xWBXkKz+5tYqcde6PNNPB/DWxgxF2xGFbkYtS39I3vn43j
- /UGnG6KTBRUT8MqJKfZQ8jHWUBR8Dsx8xqbYejMSeqr9gfImbUBUf4WhSR8lYQH2sOg2
- Hmm+TZOjP5N87qRRbzAZQeMvOFVTWoTVHFwXTa2BACWrY9QP4moFJCyUl8zXwpVkjGg4
- VQv0v/xTgZjlrdBD3oci/kNvakr4FemNVHYeEcssRRWElX1feXgdZFLdUAPwd6HG2Dah
- lbQ1YvMni1mbyUcEfPEo06IAFth/TGLlDr9GAjzjdZogqTUMUd+Sq3xYxalKNIjyQ2sP
- 0eoQ==
+ bh=mbX0nONM8qgoPZvtAu/UDvzjCKl5Co97jKzyjqjp66Q=;
+ b=R2EYM9uaD6149ZPBT5vq85XiIGojpGFRVzMFBlJXcQSj9ROXGjMU8uuBxNTc3o6m0G
+ mxa7UP4X/Rqx6042MqPGti2Qnvbfh8uu+JRAmJ0560TFR9jFi8xDVt4vMACOuwFe+wxz
+ xM8a0+7+Ftb5+/fKkzTqjhpfZ3k0iy9YiBrbXjkCmDJm859pH5bMaHbPy+BXNrJbpvab
+ 0sIdqDE18K5IPJWonA39c4bPMRvKJOWosqEPdDJE7jRTHuQxhOSZ6wjhfqy+N4RtdUcJ
+ hg5mij8otD57Am+BVNfQRdpMxlAKXQ2kckyHMlzhFrSrO/okWLaCs19wqpj1kxazS6Yo
+ sE1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693995802; x=1694600602;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20221208; t=1694011105; x=1694615905;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=txJQvk2EzZdgYgATcIbEr45nHBa1cHGzQixKXDaayhk=;
- b=DxIhNiGREUaiooV/njnqkf759IBoZawlAWgT0kkHgK+qIAcxrENPvblrCi6ZI7yIHa
- 7Qoih5Wvnvtfuw/VmFr21ECqYoiDn+MKv97j0h2kUZjRjPVes1SynBHW4Fe4DQYf3t83
- BG6XNIw4WOlY9yUDz0RrQzXw3BsOnhT295wSSzcZBYHphffT3n31mWufHYw4SzPJJc2u
- mz9q/l4CGgHZ3KdIgGG7r7inFKFfOSYi8oHyX9eP4VXGPVwG+NpuIZvFXtRrBludxv7w
- J/bYiKFIkCTTZzrw7PvHajLDwZZe7vwKFU8DdcroBM2jlBPjOFILQeqsnhTKQBDrizw5
- JvnQ==
-X-Gm-Message-State: AOJu0YznMqniBJTzUEyQRrHyVEOdw9IG318P3lz51bXkEYkJSOmpbATG
- exNX1gt1mIPvv1G0RGBaS47LKw==
-X-Google-Smtp-Source: AGHT+IGyPMkiEl+AeR4f3J528bb1zZg3sCqzQFk4uGoNQpQ6RAqEfhWIdaIxfPj7M+zfhdGN6DcIPw==
-X-Received: by 2002:a17:906:32cf:b0:994:4095:3abf with SMTP id
- k15-20020a17090632cf00b0099440953abfmr1953336ejk.14.1693995802403; 
- Wed, 06 Sep 2023 03:23:22 -0700 (PDT)
-Received: from [192.168.69.115] (cou50-h01-176-172-51-223.dsl.sta.abo.bbox.fr.
- [176.172.51.223]) by smtp.gmail.com with ESMTPSA id
- t24-20020a1709064f1800b00992b1c93279sm8804685eju.110.2023.09.06.03.23.20
+ bh=mbX0nONM8qgoPZvtAu/UDvzjCKl5Co97jKzyjqjp66Q=;
+ b=GJA57xJR2AhuJNR/XDcdrWnwtNfIDA8Ck5VMwAlIvk5cnZbEBS2/sZfOiIo8rzfuxQ
+ GVsyuBd4NdUjRQ4Ni60TbQlSGJklxqczKw6FuL2JpFmWfX3kmpy2vgFdrIFmjevdb/fW
+ d2srqZIVkSK27/4xV+cCwgYM6B5U/3SfOEdVUagapO5e/qcet0ANgVTGLf+gaPuwo1JM
+ NchXsn7XlYuWDf/tvpqfVBeWGbDoKsnWiz4jk9NavP/Dbv/ATvPI5jXHZPzZkz/f/SIj
+ +11i0gfPoUtpH4NAKlcam7i6AKOabLXVeMYMUmI0whyBQs+27tgEk7bq0iEgm2+8C4L+
+ fKpA==
+X-Gm-Message-State: AOJu0Yza4OtYTdPIiU+mrPoNxM94TwsWi402Lr8fBlnawkUDKl8ElLmD
+ I7zl5OosNSR9ngWRy24Qa6rX0g==
+X-Google-Smtp-Source: AGHT+IGrFcSco9bx5oGBD/apPv2xUGGUO3fmFg/X4/cvea40mMi8fnqyH1M84icBV4t2zwvzm7DAcg==
+X-Received: by 2002:a05:6870:249d:b0:1b0:57f8:dab4 with SMTP id
+ s29-20020a056870249d00b001b057f8dab4mr19183230oaq.24.1694011105369; 
+ Wed, 06 Sep 2023 07:38:25 -0700 (PDT)
+Received: from [192.168.68.108] ([177.94.15.194])
+ by smtp.gmail.com with ESMTPSA id
+ o20-20020a056870911400b001d1358a6435sm5858763oae.1.2023.09.06.07.38.22
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 06 Sep 2023 03:23:21 -0700 (PDT)
-Message-ID: <f30d8589-8b59-2fd7-c38c-3f79508a4ac6@linaro.org>
-Date: Wed, 6 Sep 2023 12:23:19 +0200
+ Wed, 06 Sep 2023 07:38:24 -0700 (PDT)
+Message-ID: <dfeec126-304f-c4a4-77fb-7bf0927dbd31@ventanamicro.com>
+Date: Wed, 6 Sep 2023 11:38:20 -0300
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.15.0
-Subject: Re: [PATCH v2 10/19] target/riscv: remove kvm-stub.c
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH v2 0/6] target/riscv: Add RISC-V Virtual IRQs and IRQ
+ filtering support
+To: Rajnesh Kanwal <rkanwal@rivosinc.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, atishp@rivosinc.com,
+ apatel@ventanamicro.com
+References: <20230526162308.22892-1-rkanwal@rivosinc.com>
 Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com
-References: <20230906091647.1667171-1-dbarboza@ventanamicro.com>
- <20230906091647.1667171-11-dbarboza@ventanamicro.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230906091647.1667171-11-dbarboza@ventanamicro.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20230526162308.22892-1-rkanwal@rivosinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::630;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x630.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::36;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x36.google.com
 X-Spam_score_int: -35
 X-Spam_score: -3.6
 X-Spam_bar: ---
 X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.473,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,78 +100,76 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 6/9/23 11:16, Daniel Henrique Barboza wrote:
-> This file is not needed for some time now. All the stubs implemented in
-> it (kvm_riscv_reset_vcpu() and kvm_riscv_set_irq()) are wrapped in 'if
-> kvm_enabled()' blocks that the compiler will rip it out in non-KVM
-> builds.
+Hey,
+
+
+What's the latest on this work? It seems that all patches are acked:
+
+https://lore.kernel.org/qemu-riscv/20230526162308.22892-1-rkanwal@rivosinc.com/
+
+
+It'll probably conflict with current Alistair's riscv-to-apply.next though, so
+perhaps Rajnesh could gather the acks and send a rebased version.
+
+
+Thanks,
+
+Daniel
+
+
+On 5/26/23 13:23, Rajnesh Kanwal wrote:
+> This series adds M and HS-mode virtual interrupt and IRQ filtering support.
+> This allows inserting virtual interrupts from M/HS-mode into S/VS-mode
+> using mvien/hvien and mvip/hvip csrs. IRQ filtering is a use case of
+> this change, i-e M-mode can stop delegating an interrupt to S-mode and
+> instead enable it in MIE and receive those interrupts in M-mode and then
+> selectively inject the interrupt using mvien and mvip.
+>              
+> Also, the spec doesn't mandate the interrupt to be actually supported
+> in hardware. Which allows M/HS-mode to assert virtual interrupts to
+> S/VS-mode that have no connection to any real interrupt events.
+>               
+> This is defined as part of the AIA specification [0], "5.3 Interrupt
+> filtering and virtual interrupts for supervisor level" and "6.3.2 Virtual
+> interrupts for VS level".
 > 
-> We'll also add non-KVM stubs for all functions declared in kvm_riscv.h.
-> All stubs are implemented as g_asserted_not_reached(), meaning that we
-> won't support them in non-KVM builds. This is done by other kvm headers
-> like kvm_arm.h and kvm_ppc.h.
-
-Aren't them also protected by kvm_enabled()? Otherwise shouldn't they?
-
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->   target/riscv/kvm-stub.c  | 30 ------------------------------
->   target/riscv/kvm_riscv.h | 31 +++++++++++++++++++++++++++++++
->   target/riscv/meson.build |  2 +-
->   3 files changed, 32 insertions(+), 31 deletions(-)
->   delete mode 100644 target/riscv/kvm-stub.c
-
-
-> diff --git a/target/riscv/kvm_riscv.h b/target/riscv/kvm_riscv.h
-> index f6501e68e2..c9ecd9a967 100644
-> --- a/target/riscv/kvm_riscv.h
-> +++ b/target/riscv/kvm_riscv.h
-> @@ -19,6 +19,7 @@
->   #ifndef QEMU_KVM_RISCV_H
->   #define QEMU_KVM_RISCV_H
->   
-> +#ifdef CONFIG_KVM
->   void kvm_riscv_cpu_add_kvm_properties(Object *obj);
-
-At a glance kvm_riscv_cpu_add_kvm_properties() is.
-Keep the prototype declared (before #ifdef CONFIG_KVM) is enough for the
-compiler to elide it.
-
->   void kvm_riscv_reset_vcpu(RISCVCPU *cpu);
->   void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level);
-> @@ -27,5 +28,35 @@ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
->                             uint64_t aplic_base, uint64_t imsic_base,
->                             uint64_t guest_num);
->   void riscv_kvm_aplic_request(void *opaque, int irq, int level);
-> +#else
-> +static inline void kvm_riscv_cpu_add_kvm_properties(Object *obj)
-> +{
-> +    g_assert_not_reached();
-> +}
-> +
-> +static inline void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
-> +{
-> +    g_assert_not_reached();
-> +}
-> +
-> +static inline void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level)
-> +{
-> +    g_assert_not_reached();
-> +}
-> +
-> +static inline void kvm_riscv_aia_create(MachineState *machine,
-> +                          uint64_t group_shift, uint64_t aia_irq_num,
-> +                          uint64_t aia_msi_num, uint64_t aplic_base,
-> +                          uint64_t imsic_base, uint64_t guest_num)
-> +{
-> +    g_assert_not_reached();
-> +}
-> +
-> +static inline void riscv_kvm_aplic_request(void *opaque, int irq, int level)
-> +{
-> +    g_assert_not_reached();
-> +}
-> +
-> +#endif /* CONFIG_KVM */
-
+> Most of the testing is done by hacking around OpenSBI and linux host.
+> The changes for those can be found at [1] and [2].
+> 
+> It's my first touch on RISC-V qemu IRQ subsystem. Any feedback would
+> be much appreciated.
+> 
+> The change can also be found on github [3].
+> 
+> TODO: This change doesn't support delegating virtual interrupts injected
+> by M-mode to VS-mode by the Hypervisor. This is true for bits 13:63 only.
+> 
+> Thanks
+> Rajnesh
+> 
+> [0]: https://github.com/riscv/riscv-aia/releases/download/1.0-RC4/riscv-interrupts-1.0-RC4.pdf
+> [1]: https://github.com/rajnesh-kanwal/opensbi/tree/dev/rkanwal/irq_filter
+> [2]: https://github.com/rajnesh-kanwal/linux/commits/dev/rkanwal/aia_irq_filter
+> [3]: https://github.com/rajnesh-kanwal/qemu/tree/dev/rkanwal/riscv_irq_filter
+> 
+> v2:
+>   * Move RISCV_EXCP_SEMIHOST to switch case and remove special handling.
+>   * Fix linux-user build.
+> 
+> Rajnesh Kanwal (6):
+>    target/riscv: Without H-mode mask all HS mode inturrupts in mie.
+>    target/riscv: Check for async flag in case of RISCV_EXCP_SEMIHOST.
+>    target/riscv: Set VS* bits to one in mideleg when H-Ext is enabled
+>    target/riscv: Split interrupt logic from riscv_cpu_update_mip.
+>    target/riscv: Add M-mode virtual interrupt and IRQ filtering support.
+>    target/riscv: Add HS-mode virtual interrupt and IRQ filtering support.
+> 
+>   target/riscv/cpu.c        |   9 +-
+>   target/riscv/cpu.h        |  23 ++
+>   target/riscv/cpu_bits.h   |   6 +
+>   target/riscv/cpu_helper.c |  99 +++++---
+>   target/riscv/csr.c        | 477 ++++++++++++++++++++++++++++++++++----
+>   target/riscv/machine.c    |   6 +
+>   6 files changed, 546 insertions(+), 74 deletions(-)
+> 
 
