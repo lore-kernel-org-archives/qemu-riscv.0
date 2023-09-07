@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60C91EE14AA
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 00:42:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77738EE14C3
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 00:42:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qe35p-0000Fn-UY; Wed, 06 Sep 2023 20:41:57 -0400
+	id 1qe361-0001ly-ND; Wed, 06 Sep 2023 20:42:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe35h-0008Fz-OF
- for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:41:51 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe360-0001aG-NQ
+ for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:42:08 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe35e-0002F4-1i
- for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:41:49 -0400
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe35y-0002N5-1R
+ for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:42:08 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1694047305;
+ s=mimecast20190719; t=1694047325;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=wHbk2VGs4Q15Oy7Noy5pNBCnym4i+ZeEk3LlWmCtMZ0=;
- b=W4DayiEW8ItzBKWNfe1CcX6VzLiBK6zQDJRMPfVaX8zI9yGU4ew+9q1zTF3rZj5ij4J6To
- iFFytgVP5o/K5mpR9nj4CEaeXN4KaAwAmO0U7g+NoEqNNyfCbO/6boZmmmUTLzC+9hmRhL
- bZTtSjSF8J29s7EkWr1eOWYqO2XhZi0=
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-645-FKnB5NJDNgGEsjjBzh_jZA-1; Wed, 06 Sep 2023 20:41:42 -0400
-X-MC-Unique: FKnB5NJDNgGEsjjBzh_jZA-1
+ bh=ob7BNmTrNjZIXBVdDPkalGLAk9nNqap53NQ4s6bDNoI=;
+ b=hPODrFfhyVxA4Owctb0mn5ztkrIJJl1hREVRFDxNhgAFA9O2SXZ107DXdaDMBLwahow6Y8
+ Zr44nUyrfLyvkKtG5o/CWa6oa1slLqMQ8/uqWGEqqR2t0zL8XJRTwZLwWzo1bzi/3Rkg0Y
+ XySUnapst14d8B8Kw8yAJ2oW+56iuaE=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-218-HE0fHX6jM4um5lPJK3i6vQ-1; Wed, 06 Sep 2023 20:41:58 -0400
+X-MC-Unique: HE0fHX6jM4um5lPJK3i6vQ-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
  [10.11.54.8])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id DD4B73C1014D;
- Thu,  7 Sep 2023 00:41:40 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 28AB88001EA;
+ Thu,  7 Sep 2023 00:41:56 +0000 (UTC)
 Received: from gshan.redhat.com (unknown [10.64.136.25])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 24B4CC03295;
- Thu,  7 Sep 2023 00:41:25 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 62622C03295;
+ Thu,  7 Sep 2023 00:41:41 +0000 (UTC)
 From: Gavin Shan <gshan@redhat.com>
 To: qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
@@ -64,16 +64,16 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  mark.cave-ayland@ilande.co.uk, atar4qemu@gmail.com,
  kbastian@mail.uni-paderborn.de, jcmvbkbc@gmail.com, pbonzini@redhat.com,
  imammedo@redhat.com, shan.gavin@gmail.com
-Subject: [PATCH v3 19/32] target/xtensa: Improve xtensa_cpu_class_by_name()
-Date: Thu,  7 Sep 2023 10:35:40 +1000
-Message-ID: <20230907003553.1636896-20-gshan@redhat.com>
+Subject: [PATCH v3 20/32] target/hppa: Implement hppa_cpu_list()
+Date: Thu,  7 Sep 2023 10:35:41 +1000
+Message-ID: <20230907003553.1636896-21-gshan@redhat.com>
 In-Reply-To: <20230907003553.1636896-1-gshan@redhat.com>
 References: <20230907003553.1636896-1-gshan@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=gshan@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=gshan@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
@@ -97,35 +97,63 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Improve xtensa_cpu_class_by_name() by merging the condition of
-'@oc == NULL' to object_class_dynamic_cast().
+Implement hppa_cpu_list() to support cpu_list(). With this applied,
+the available CPU model names, same to the CPU type names, are shown
+as below.
+
+  $ ./build/qemu-system-hppa -cpu ?
+  Available CPUs:
+    hppa-cpu
 
 Signed-off-by: Gavin Shan <gshan@redhat.com>
 ---
- target/xtensa/cpu.c | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+ target/hppa/cpu.c | 19 +++++++++++++++++++
+ target/hppa/cpu.h |  3 +++
+ 2 files changed, 22 insertions(+)
 
-diff --git a/target/xtensa/cpu.c b/target/xtensa/cpu.c
-index acaf8c905f..9d682611aa 100644
---- a/target/xtensa/cpu.c
-+++ b/target/xtensa/cpu.c
-@@ -141,11 +141,12 @@ static ObjectClass *xtensa_cpu_class_by_name(const char *cpu_model)
-     typename = g_strdup_printf(XTENSA_CPU_TYPE_NAME("%s"), cpu_model);
-     oc = object_class_by_name(typename);
-     g_free(typename);
--    if (oc == NULL || !object_class_dynamic_cast(oc, TYPE_XTENSA_CPU) ||
--        object_class_is_abstract(oc)) {
--        return NULL;
-+    if (object_class_dynamic_cast(oc, TYPE_XTENSA_CPU) &&
-+        !object_class_is_abstract(oc)) {
-+        return oc;
-     }
--    return oc;
-+
-+    return NULL;
+diff --git a/target/hppa/cpu.c b/target/hppa/cpu.c
+index 11022f9c99..873402bf9c 100644
+--- a/target/hppa/cpu.c
++++ b/target/hppa/cpu.c
+@@ -143,6 +143,25 @@ static void hppa_cpu_realizefn(DeviceState *dev, Error **errp)
+ #endif
  }
  
- static void xtensa_cpu_disas_set_info(CPUState *cs, disassemble_info *info)
++static void hppa_cpu_list_entry(gpointer data, gpointer user_data)
++{
++    const char *typename = object_class_get_name(OBJECT_CLASS(data));
++    char *model = cpu_model_from_type(typename);
++
++    qemu_printf("  %s\n", model);
++    g_free(model);
++}
++
++void hppa_cpu_list(void)
++{
++    GSList *list;
++
++    list = object_class_get_list_sorted(TYPE_HPPA_CPU, false);
++    qemu_printf("Available CPUs:\n");
++    g_slist_foreach(list, hppa_cpu_list_entry, NULL);
++    g_slist_free(list);
++}
++
+ static void hppa_cpu_initfn(Object *obj)
+ {
+     CPUState *cs = CPU(obj);
+diff --git a/target/hppa/cpu.h b/target/hppa/cpu.h
+index fa13694dab..19759f5f62 100644
+--- a/target/hppa/cpu.h
++++ b/target/hppa/cpu.h
+@@ -351,5 +351,8 @@ void hppa_cpu_alarm_timer(void *);
+ int hppa_artype_for_page(CPUHPPAState *env, target_ulong vaddr);
+ #endif
+ G_NORETURN void hppa_dynamic_excp(CPUHPPAState *env, int excp, uintptr_t ra);
++void hppa_cpu_list(void);
++
++#define cpu_list hppa_cpu_list
+ 
+ #endif /* HPPA_CPU_H */
 -- 
 2.41.0
 
