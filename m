@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CDE8EE14C3
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 00:37:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8B8EEE14C3
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 00:37:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qe30z-0002Xo-Nx; Wed, 06 Sep 2023 20:36:57 -0400
+	id 1qe31d-0002uy-2r; Wed, 06 Sep 2023 20:37:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe30y-0002XP-9I
- for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:36:56 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe31W-0002nS-3q
+ for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:37:30 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe30v-0000d8-Uu
- for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:36:56 -0400
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe31R-0000iV-8l
+ for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:37:28 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1694047013;
+ s=mimecast20190719; t=1694047043;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=aY0vCT17ghdT+PeDe1lOFWysje3txmaFbEFFL/ifBWg=;
- b=i3pISO8C22Gsj8krwSbyTHp6MKGV0Leb7+P7vjnFJFQMzOgW7rKW7aINQzrodE/1+qjIlS
- SJoLHFq5Ezm9HhefWkCBqS+oFszL/dlfBtGPi7Ro4ud50wxSAgP3sZ0QxYO5/4dMwCdU9s
- V2/ua2heumNaN7/zMCuJqmh57H3NYh0=
+ bh=qqwxxr4yZoKfnJOBXIlU5BCpSoMY4uKlGYZR7LGfgSg=;
+ b=KsktOQ2PU0/DQsDDf7SHcR/YDbeRYWElOh9rshR8Foqa6bE0mv2lPZNKJ96/gZxxWzzpZo
+ nLz/Nt5F5LTUUnfqixKRdnoccuMVOzgZtI6ZuJr9KR+QatSlnVS2c+D2bqvrJTfFtp0lg3
+ A3htKSlMZWD8ghyJrEtxtXRGu4WlvVI=
 Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
  by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-10-tBh-EfmCMfOYP1VbbrVUlw-1; Wed, 06 Sep 2023 20:36:50 -0400
-X-MC-Unique: tBh-EfmCMfOYP1VbbrVUlw-1
+ us-mta-509-XI9HwlAPPhqqvQixahl3vg-1; Wed, 06 Sep 2023 20:37:20 -0400
+X-MC-Unique: XI9HwlAPPhqqvQixahl3vg-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
  [10.11.54.8])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 8DE263C0EAA5;
- Thu,  7 Sep 2023 00:36:46 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id F0A2538149AB;
+ Thu,  7 Sep 2023 00:37:16 +0000 (UTC)
 Received: from gshan.redhat.com (unknown [10.64.136.25])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 4EF97C03295;
- Thu,  7 Sep 2023 00:36:31 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 4199EC03295;
+ Thu,  7 Sep 2023 00:37:02 +0000 (UTC)
 From: Gavin Shan <gshan@redhat.com>
 To: qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
@@ -64,16 +64,17 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  mark.cave-ayland@ilande.co.uk, atar4qemu@gmail.com,
  kbastian@mail.uni-paderborn.de, jcmvbkbc@gmail.com, pbonzini@redhat.com,
  imammedo@redhat.com, shan.gavin@gmail.com
-Subject: [PATCH v3 01/32] cpu: Add helper cpu_model_from_type()
-Date: Thu,  7 Sep 2023 10:35:22 +1000
-Message-ID: <20230907003553.1636896-2-gshan@redhat.com>
+Subject: [PATCH v3 03/32] target/arm: Use generic helper to show CPU model
+ names
+Date: Thu,  7 Sep 2023 10:35:24 +1000
+Message-ID: <20230907003553.1636896-4-gshan@redhat.com>
 In-Reply-To: <20230907003553.1636896-1-gshan@redhat.com>
 References: <20230907003553.1636896-1-gshan@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=gshan@redhat.com;
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=gshan@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
@@ -81,7 +82,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,71 +98,68 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add helper cpu_model_from_type() to extract the CPU model name from
-the CPU type name in two circumstances: (1) The CPU type name is the
-combination of the CPU model name and suffix. (2) The CPU type name
-is same to the CPU model name.
+For target/arm, the CPU type name can be: (1) the combination of
+the CPU model name and suffix; (2) alias "any" corresponding to
+"max-arm-cpu" when CONFIG_USER_ONLY is enabled. The CPU model names
+have been already shown in cpu_list() and query_cpu_definitions()
+by following (1).
 
-The helper will be used in the subsequent patches to conver the
-CPU type name to the CPU model name.
+Use generic helper cpu_model_from_type() to show the CPU model names.
+The variable @name is renamed to @model in arm_cpu_list_entry() since
+it points to the CPU model name instead of the CPU type name.
 
-Suggested-by: Igor Mammedov <imammedo@redhat.com>
 Signed-off-by: Gavin Shan <gshan@redhat.com>
 ---
- cpu.c                 | 16 ++++++++++++++++
- include/hw/core/cpu.h | 12 ++++++++++++
- 2 files changed, 28 insertions(+)
+ target/arm/arm-qmp-cmds.c |  6 ++----
+ target/arm/helper.c       | 12 +++++-------
+ 2 files changed, 7 insertions(+), 11 deletions(-)
 
-diff --git a/cpu.c b/cpu.c
-index 1c948d1161..a19e33ff96 100644
---- a/cpu.c
-+++ b/cpu.c
-@@ -284,6 +284,22 @@ const char *parse_cpu_option(const char *cpu_option)
-     return cpu_type;
+diff --git a/target/arm/arm-qmp-cmds.c b/target/arm/arm-qmp-cmds.c
+index c8fa524002..51fddaefc3 100644
+--- a/target/arm/arm-qmp-cmds.c
++++ b/target/arm/arm-qmp-cmds.c
+@@ -233,12 +233,10 @@ static void arm_cpu_add_definition(gpointer data, gpointer user_data)
+     ObjectClass *oc = data;
+     CpuDefinitionInfoList **cpu_list = user_data;
+     CpuDefinitionInfo *info;
+-    const char *typename;
++    const char *typename = object_class_get_name(oc);
+ 
+-    typename = object_class_get_name(oc);
+     info = g_malloc0(sizeof(*info));
+-    info->name = g_strndup(typename,
+-                           strlen(typename) - strlen("-" TYPE_ARM_CPU));
++    info->name = cpu_model_from_type(typename);
+     info->q_typename = g_strdup(typename);
+ 
+     QAPI_LIST_PREPEND(*cpu_list, info);
+diff --git a/target/arm/helper.c b/target/arm/helper.c
+index e3f5a7d2bd..7b8257b496 100644
+--- a/target/arm/helper.c
++++ b/target/arm/helper.c
+@@ -9409,17 +9409,15 @@ static void arm_cpu_list_entry(gpointer data, gpointer user_data)
+ {
+     ObjectClass *oc = data;
+     CPUClass *cc = CPU_CLASS(oc);
+-    const char *typename;
+-    char *name;
++    const char *typename = object_class_get_name(oc);
++    char *model = cpu_model_from_type(typename);
+ 
+-    typename = object_class_get_name(oc);
+-    name = g_strndup(typename, strlen(typename) - strlen("-" TYPE_ARM_CPU));
+     if (cc->deprecation_note) {
+-        qemu_printf("  %s (deprecated)\n", name);
++        qemu_printf("  %s (deprecated)\n", model);
+     } else {
+-        qemu_printf("  %s\n", name);
++        qemu_printf("  %s\n", model);
+     }
+-    g_free(name);
++    g_free(model);
  }
  
-+char *cpu_model_from_type(const char *typename)
-+{
-+    const char *suffix = "-" CPU_RESOLVING_TYPE;
-+
-+    if (!object_class_by_name(typename)) {
-+        return NULL;
-+    }
-+
-+    if (strlen(typename) > strlen(suffix) &&
-+        !strcmp(typename + strlen(typename) - strlen(suffix), suffix)) {
-+        return g_strndup(typename, strlen(typename) - strlen(suffix));
-+    }
-+
-+    return g_strdup(typename);
-+}
-+
- void list_cpus(void)
- {
-     /* XXX: implement xxx_cpu_list for targets that still miss it */
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 92a4234439..6e76d95490 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -657,6 +657,18 @@ CPUState *cpu_create(const char *typename);
-  */
- const char *parse_cpu_option(const char *cpu_option);
- 
-+/**
-+ * cpu_model_from_type:
-+ * @typename: The CPU type name
-+ *
-+ * Extract the CPU model name from the CPU type name. The
-+ * CPU type name is either the combination of the CPU model
-+ * name and suffix, or same to the CPU model name.
-+ *
-+ * Returns: CPU model name
-+ */
-+char *cpu_model_from_type(const char *typename);
-+
- /**
-  * cpu_has_work:
-  * @cpu: The vCPU to check.
+ void arm_cpu_list(void)
 -- 
 2.41.0
 
