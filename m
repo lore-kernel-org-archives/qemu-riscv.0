@@ -4,86 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDD0BEC8721
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 12:36:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 604DBEC8722
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 12:55:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qeEFT-0000W3-Fm; Thu, 07 Sep 2023 08:36:44 -0400
+	id 1qeEXh-0000zh-PA; Thu, 07 Sep 2023 08:55:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qeEFQ-0000Vc-RN
- for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 08:36:37 -0400
-Received: from mail-lj1-x22c.google.com ([2a00:1450:4864:20::22c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qeEFO-0002hg-9P
- for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 08:36:36 -0400
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2bb9a063f26so16141511fa.2
- for <qemu-riscv@nongnu.org>; Thu, 07 Sep 2023 05:36:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1694090192; x=1694694992; darn=nongnu.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=URPI3ewrlqRSlnGa6Jr4RVOXCwSPxiiPxFVsL0rbVws=;
- b=l4FSu3aYlRGnrkSu7iHc4cnmROsj9q7lfuGzoIEE65bNWnGsWCP/W0tw2niB3D47OR
- Ms20YMj98WQPQ4QvW8S4XvTyfwkfKkZD8dje2Qol+Crz+8Mm5JKh7UZMi35w656wlmot
- oehuOFDQqdOrJ53e3bYQRud9pEmI5pv+uXa11J7FAmZNt16JJ9Yrp6NqfP+PHkWw3iBK
- NEAN9YKV04rAhIKWz8IwI4UQS2KUWI5Aj1G/y/YDe2ElPILlTIQ01BhebInOkCzirZVT
- clOuqEQBQNazluePfIge/xfz64Mxb8pDci8Dw2+2lFJIzoD7BiyHRWIkP1weAGRujV//
- uTCw==
+ (Exim 4.90_1) (envelope-from <eric.auger@redhat.com>)
+ id 1qeB2c-0008OY-PD
+ for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 05:11:10 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <eric.auger@redhat.com>)
+ id 1qeB2a-0003JU-F3
+ for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 05:11:10 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1694077867;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=eeMgvZVuwwc5tBYGgCkZlXtjtK159QxCYcggUkkSACY=;
+ b=DwrEARz1Nv19JcMe31OHZ+1o8pG4Fp/iu2sMVVXY9KkdMB4IznfErrdUzXj07WvSW3NHgE
+ 1b8vXkRHoUWLjb4B+w1hh5dAvpaJJu2Z0eVx7E7k+647pjsnXf8M52jcGdFG5hsKWAcio8
+ 2oOew0Pan5wta/VUl93M6T/KuhNvN7U=
+Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
+ [209.85.219.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-413-Ku9pJRaUNva0lfN9PKSchQ-1; Thu, 07 Sep 2023 05:11:06 -0400
+X-MC-Unique: Ku9pJRaUNva0lfN9PKSchQ-1
+Received: by mail-qv1-f69.google.com with SMTP id
+ 6a1803df08f44-64abfd83a0cso9446756d6.2
+ for <qemu-riscv@nongnu.org>; Thu, 07 Sep 2023 02:11:06 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694090192; x=1694694992;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=URPI3ewrlqRSlnGa6Jr4RVOXCwSPxiiPxFVsL0rbVws=;
- b=fXjKf7tpgYKatlcd1P+oz9fQfy4/U7o7gxC5cDb8ylf3pUUdZYjo0gi//+Wd1AAo7Z
- 1T/VEYyTeWnFsB3cuNiVvO54gDQv5vqwgMv35YH6YbaVQEEl77jbvQzDf3Wg3qE/1p1s
- nCkcoSH58Ud0kcMqvgF3bml0Jz6NhWA/U1yEE9rl1goxTDy8J9nDMj5sar0oby6nZdYi
- 14VGnQEP7HjQ9M+y77CYJm+ot5KM2GBvhindpSfX7eoZ4DhUh19qTKuzZj4ihlaHCqr/
- V+VU9k7gZoJ2XiRYMhoezL0ojiQ0SM6/NBvmlFKcxy+HiBU3ogCPqwommJyhDBTJos5g
- zK4Q==
-X-Gm-Message-State: AOJu0Yy2vSXmqwMIPsxpOFzlBq49c8MRY7LQS6kc/Lmf4RLqDaAs6rrb
- ly8X3RIgs/6JQkTgu576e/yxGg==
-X-Google-Smtp-Source: AGHT+IGg6qudx3fnNhyo0LxAAdyBTR3oWamzBPLSGP41vkYabBFH45O0YqFTnTonTetC099bYZLrvg==
-X-Received: by 2002:a2e:900e:0:b0:2bc:de11:453b with SMTP id
- h14-20020a2e900e000000b002bcde11453bmr4901230ljg.1.1694090191188; 
- Thu, 07 Sep 2023 05:36:31 -0700 (PDT)
-Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
+ d=1e100.net; s=20221208; t=1694077865; x=1694682665;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:reply-to:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=eeMgvZVuwwc5tBYGgCkZlXtjtK159QxCYcggUkkSACY=;
+ b=OflwgpT3iTPVGXFxjD8PXE8iHe7Xth9p3B4/rAELoiJVKa2zWfcrhPAWofsTJl1BQm
+ NrBNeutxw/DSOzOevtfYYMSN5kf9pJCr785w3uvHAhS6P8yA0TnWxg0ehG4aGpveQ+7T
+ oyxRlvhZS6+vCUJg6Nfs90VNmYNaV5S3go27CDssRtBZnAwrqI1Tz+Lf9XKr9ABzFDUd
+ X4QTvPr03VvH7gXB7hBBWVcWpUZFTzqPkzxSWXtFu8o5qRYFnhV2cjufSuLv7ZnduTSY
+ 8pqexLnc8tFbKarPzL0+PitFvvIOuQgIkjRlM1W4GtZik47My0h0+ml/LZga66OZHvzR
+ Z4Jw==
+X-Gm-Message-State: AOJu0YyGujytFqmeY26rhgAAaYusJH0ELr/w1LibNzW8j5q7R2Cqyt6Q
+ 3urteb9Sn51/LLEzULIgvLU2TRPym/5omcKfd1JCFOEibXjBTL3CP54+E5UpvKjnmQm3oYSFZ1o
+ JO7Nc3tmjTjSX5Ro=
+X-Received: by 2002:a0c:df13:0:b0:639:91ad:64d6 with SMTP id
+ g19-20020a0cdf13000000b0063991ad64d6mr20094929qvl.61.1694077865611; 
+ Thu, 07 Sep 2023 02:11:05 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IE9ekltmz/rY+Gir4DQ4NctVk637hzRIJwLBV6Czjt2uNPeo8oCO+FDZhwhHBEOlkM/jwiesQ==
+X-Received: by 2002:a0c:df13:0:b0:639:91ad:64d6 with SMTP id
+ g19-20020a0cdf13000000b0063991ad64d6mr20094910qvl.61.1694077865347; 
+ Thu, 07 Sep 2023 02:11:05 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:59e:9d80:527b:9dff:feef:3874?
+ ([2a01:e0a:59e:9d80:527b:9dff:feef:3874])
  by smtp.gmail.com with ESMTPSA id
- 12-20020a05600c230c00b00401e32b25adsm2425218wmo.4.2023.09.07.05.36.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Sep 2023 05:36:30 -0700 (PDT)
-Date: Thu, 7 Sep 2023 14:36:29 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, palmer@dabbelt.com, 
- bin.meng@windriver.com, peter.maydell@linaro.org, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Subject: Re: [PATCH v2] docs/devel: Add cross-compiling doc
-Message-ID: <20230907-d272560607f40c00538e4e3f@orel>
-References: <20230907084604.253347-2-ajones@ventanamicro.com>
- <87sf7q1djr.fsf@linaro.org>
- <20230907-6262b40a0a352bdce53999e3@orel>
+ j10-20020a0cf50a000000b0064906cfe430sm6261494qvm.135.2023.09.07.02.11.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 07 Sep 2023 02:11:04 -0700 (PDT)
+Message-ID: <2916216f-39a0-1a27-ad4e-6c664bf4a04e@redhat.com>
+Date: Thu, 7 Sep 2023 11:10:59 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH] hw/riscv: split RAM into low and high memory
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
+ "Wu, Fei" <fei2.wu@intel.com>, Andrew Jones <ajones@ventanamicro.com>
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Andrei Warkentin <andrei.warkentin@intel.com>, qemu-arm
+ <qemu-arm@nongnu.org>, Alex Williamson <alex.williamson@redhat.com>,
+ =?UTF-8?Q?C=c3=a9dric_Le_Goater?= <clg@redhat.com>
+References: <20230731015317.1026996-1-fei2.wu@intel.com>
+ <20230803-3855259bbabb934c247c5607@orel>
+ <d654810c-4f4f-7491-7711-c6076f42dcae@intel.com>
+ <efc85591-fd5e-c6e7-ab3d-220d5ca57aa5@linaro.org>
+From: Eric Auger <eric.auger@redhat.com>
+In-Reply-To: <efc85591-fd5e-c6e7-ab3d-220d5ca57aa5@linaro.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20230907-6262b40a0a352bdce53999e3@orel>
-Received-SPF: pass client-ip=2a00:1450:4864:20::22c;
- envelope-from=ajones@ventanamicro.com; helo=mail-lj1-x22c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=170.10.129.124;
+ envelope-from=eric.auger@redhat.com; helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -35
+X-Spam_score: -3.6
+X-Spam_bar: ---
+X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ NICE_REPLY_A=-1.473, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001,
+ RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Thu, 07 Sep 2023 08:55:28 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -95,85 +116,85 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-To: eric.auger@redhat.com
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Sep 07, 2023 at 02:31:20PM +0200, Andrew Jones wrote:
-> On Thu, Sep 07, 2023 at 11:20:55AM +0100, Alex Benn�e wrote:
-> > 
-> > Andrew Jones <ajones@ventanamicro.com> writes:
-> > 
-> > > Add instructions for how to cross-compile QEMU for RISC-V. The
-> > > file is named generically because there's no reason not to collect
-> > > other architectures steps into the same file, especially because
-> > > several subsections like those for cross-compiling QEMU dependencies
-> > > using meson and a cross-file could be shared. Additionally, other
-> > > approaches to creating sysroots, such as with debootstrap, may be
-> > > documented in this file in the future.
-> > >
-> > > Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
-> > > ---
-> > >  docs/devel/cross-compiling.rst | 221 +++++++++++++++++++++++++++++++++
-> > >  docs/devel/index-build.rst     |   1 +
-> > >  2 files changed, 222 insertions(+)
-> > >  create mode 100644 docs/devel/cross-compiling.rst
-> > >
-> > > diff --git a/docs/devel/cross-compiling.rst b/docs/devel/cross-compiling.rst
-> > > new file mode 100644
-> > > index 000000000000..1b988ba54e4c
-> > > --- /dev/null
-> > > +++ b/docs/devel/cross-compiling.rst
-> > > @@ -0,0 +1,221 @@
-> > > +.. SPDX-License-Identifier: GPL-2.0-or-later
-> > > +
-> > > +====================
-> > > +Cross-compiling QEMU
-> > > +====================
-> > > +
-> > > +Cross-compiling QEMU first requires the preparation of a cross-toolchain
-> > > +and the cross-compiling of QEMU's dependencies. While the steps will be
-> > > +similar across architectures, each architecture will have its own specific
-> > > +recommendations.
-> > 
-> > "some architectures" - most of the cross compile stuff is hidden away by
-> > the build system on systems with appropriate development libraries
-> > installed. I think we would be remiss if we didn't just outline the
-> > common case:
-> > 
-> >    ../configure --cross-prefix=riscv64-linux-gnu-
-> > 
-> > I think we could make it clearer that in most cases you don't need to
-> > prepare and cross-compile a bunch of dependencies lest we send
-> > developers down a rabbit hole.
-> > 
-> > Maybe build-system.rst be updated and this reference it for the common
-> > case?
-> > 
-> 
-> Hi Alex,
-> 
-> tl;dr, I'd welcome instructions helping people get cross-arch development
-> libraries installed without having to build them. I wouldn't make a good
-> author for those instructions, though, since I don't know how.
-> 
-> I'm guessing the dependencies can be installed with a distro's package
-> management, assuming the package management supports cross-arch
-> installation and installing to a specified root directory. I'm on Fedora,
-> so I just tried
-> 
->  $ sudo dnf install --forcearch=aarch64 --installroot=$SYSROOT --releasever=36 glib2-devel
-> 
-> but it wanted to install a huge number of packages, which most people
-> probably wouldn't want to do. Maybe that command isn't what you had in
-> mind or other distros can manage this better. I'm all ears.
+Hi,
+
+On 9/7/23 09:16, Philippe Mathieu-Daudé wrote:
+> Widening Cc to ARM/VFIO.
+>
+> On 4/8/23 11:15, Wu, Fei wrote:
+>> On 8/3/2023 11:07 PM, Andrew Jones wrote:
+>>> On Mon, Jul 31, 2023 at 09:53:17AM +0800, Fei Wu wrote:
+>>>> riscv virt platform's memory started at 0x80000000 and
+>>>> straddled the 4GiB boundary. Curiously enough, this choice
+>>>> of a memory layout will prevent from launching a VM with
+>>>> a bit more than 2000MiB and PCIe pass-thru on an x86 host, due
+>>>> to identity mapping requirements for the MSI doorbell on x86,
+>>>> and these (APIC/IOAPIC) live right below 4GiB.
+>>>>
+>>>> So just split the RAM range into two portions:
+>>>> - 1 GiB range from 0x80000000 to 0xc0000000.
+>>>> - The remainder at 0x100000000
+>>>>
+>>>> ...leaving a hole between the ranges.
+>>>
+>>> Can you elaborate on the use case? Maybe provide details of the host
+>>> system and the QEMU command line? I'm wondering why we didn't have
+>>> any problems with the arm virt machine type. Has nobody tried this
+>>> use case with that? Is the use case something valid for riscv, but
+>>> not arm?
+>>>
+>> Firstly we have to enable pcie passthru on host, find the device groups,
+>> e.g. the vga card, and add their pci ids to host kernel cmdline:
+>>     vfio-pci.ids=10de:0f02,10de:0e08
+>>
+>> then start vm through qemu as follows:
+>> $Q -machine virt -m 4G -smp 4 -nographic \
+>>    -bios /usr/lib/riscv64-linux-gnu/opensbi/generic/fw_jump.elf \
+>>    -kernel ./vmlinuz -initrd initrd.img -append "root=/dev/vda1 rw" \
+>>    -drive
+>> file=ubuntu-22.04.1-preinstalled-server-riscv64+unmatched.img,if=virtio,format=raw
+>>
+>> \
+>>    -device vfio-pci,host=01:00.0 -device vfio-pci,host=01:00.1 \
+>>    -netdev user,id=vnet,hostfwd=:127.0.0.1:2223-:22 -device
+>> virtio-net-pci,netdev=vnet
+>>
+>> Without this patch, qemu exits immediately instead of boots up.
+>>
+>> Just tried pcie passthru on arm, it cannot handle 4G memory either.
+>> $Q -m 4G -smp 4 -cpu max -M virt -nographic \
+>>    -pflash /usr/share/AAVMF/AAVMF_CODE.fd -pflash flash1.img \
+>>    -drive if=none,file=ubuntu-22.04-server-cloudimg-arm64.img,id=hd0 \
+>>    -device virtio-blk-device,drive=hd0 \
+>>    -device vfio-pci,host=01:00.0 -device vfio-pci,host=01:00.1
+>>
+>> qemu-system-aarch64: -device vfio-pci,host=01:00.0: VFIO_MAP_DMA failed:
+>> Invalid argument
+>> qemu-system-aarch64: -device vfio-pci,host=01:00.0: vfio 0000:01:00.0:
+>> failed to setup container for group 11: memory listener initialization
+>> failed: Region mach-virt.ram: vfio_dma_map(0x55de3c2a97f0, 0x40000000,
+>> 0x100000000, 0x7f8fcbe00000) = -22 (Invalid argument)
+
+The collision between the x86 host MSI reserved region [0xfee00000,
+0xfeefffff] and the ARM guest RAM starting at 1GB has also always
+existed. But now this collision is properly detected instead of being
+silenced. People have not really complained about this so far. Since the
+existing guest RAM layout couldn't be changed, I am afraid we couldn't
+do much.
+
+Eric
+>>
+>> Thanks,
+>> Fei.
+>>
+>>> Thanks,
+>>> drew
+>>
+>>
 >
 
-Ah, I just saw your other reply on the original posting. The magic is in
-docker stuff.
-
-I'll look into it, but I'd also make a poor author for anything regarding
-docker :-)
-
-Thanks,
-drew
 
