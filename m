@@ -4,68 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DD77EE14A9
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 03:14:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 464F3EE14D3
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 03:18:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qe5T8-0006ro-6s; Wed, 06 Sep 2023 23:14:10 -0400
+	id 1qe5WX-0008N4-VQ; Wed, 06 Sep 2023 23:17:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qe5T5-0006qz-6I; Wed, 06 Sep 2023 23:14:07 -0400
-Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
+ id 1qe5WU-0008LL-OJ; Wed, 06 Sep 2023 23:17:39 -0400
+Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qe5T2-0000eG-9f; Wed, 06 Sep 2023 23:14:06 -0400
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-522dd6b6438so510958a12.0; 
- Wed, 06 Sep 2023 20:14:02 -0700 (PDT)
+ id 1qe5WS-0001dU-0I; Wed, 06 Sep 2023 23:17:38 -0400
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-52e297c7c39so501547a12.2; 
+ Wed, 06 Sep 2023 20:17:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1694056442; x=1694661242; darn=nongnu.org;
+ d=gmail.com; s=20221208; t=1694056653; x=1694661453; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=45PJVFPIacFs0KbcnFvHcmYK0jaqitootJvgxYJXKW0=;
- b=RzajEqLhFACYs1O3pkPVo++URewpAyqA/A733tfh41lymJTaXRyfgCXevnKFGy527X
- XbcZ4UU95e8Sfdtm1OKjDOYj7qDZEPMJLu5XslvwYyH1LqqeGE3/B6jbYgPDBsh7u6MC
- z072U24+CKqiGc2+us82XFN5OPp8wARHNKoiwppKSvll+TuVYFzRXgVO32TVaBx+N5gv
- 3WDB+UckFhlHzuSBpHh3RPqT+cnTDRXNdslUNZ6rzWEoyNTW2gmdG+fbV9J8ZTXi1GNZ
- I0mOpl1psu6CfnaXWpw3bS4R3gv5EdNcfNkWSgGqcAoLx8uaXVyRCNn6E5SNmbBeuoZC
- mEwA==
+ bh=UHfeFMGTFg/hgxDchx79Q0fAyOOSOOfhkwpVATWZPdo=;
+ b=WGp8QcDRevYOoywWkU3oBI3dCVI9u6HsrucfhVH78JTdtGrdcic4ievLIy5jWqO3fm
+ hSTsJ8S0weMcAp9Cep2oN+Nv/fBsEUhxAz7UvO02x8WO9EpWlYwwgO7gjVEQrXd5oc4Y
+ gjljhkzdEi5Fu2/wc40KUIqIk25Ikl+V+11ghfFI/mkMnQKeqeWEmNofQyJY9Glo615b
+ zhKpfwNNIxgYyHxlVXU200eijoKqVi40ejoVZnFER5f6HAOlhlbGey7yGjmy/zmi2X7x
+ fw54Ukzuzo5A7+sM+pOayIAWlAdG2VFB2gIFgEBLuXlF/Bh5lPAl2KzvE6X35s/MiOoy
+ cnGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694056442; x=1694661242;
+ d=1e100.net; s=20221208; t=1694056653; x=1694661453;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=45PJVFPIacFs0KbcnFvHcmYK0jaqitootJvgxYJXKW0=;
- b=IVHzTjPHql97AfyGOCDJqaCnQV3zyVnQPGqsUO42iYgTi5cA5Yh6maLaE0t2OLw1VQ
- NVUsBdQhJyMnDVKA0xGqILOJ+lNbNXc03w3XZpRN2+VKdi+Q2lWxVMSShG+cU6919zPE
- iwFDOOLH6y8mNaaKlu0dRU581DCEY0xfymkXx+Tpuq1Zxq9rlBhfS5yCllm0G090A0AE
- evMP/HtuW4EGxM7y6HtPzJifpUHaIaXrQgqmY8iJiyvx96qjceJ9xRsQsfM/USc7OrKS
- 20Xx79dWalfJ8OBtC4sCbIBo18MKnrmZseiWMrpcBfqxq6wVJBrzvpoLRPtAKnTzZgye
- ycQg==
-X-Gm-Message-State: AOJu0YzALJ803cYQasFRvxqeG2sKZBvpkSZRan33BQTstmaiZvViCM9o
- DHw6P73y2DUfz2K3Zl9ADviN/DdfJxwh6XsxUEw=
-X-Google-Smtp-Source: AGHT+IF5B4fh2zJ/B/muvMetE8up85f245DbsRuQhvrBwjNFT7ANPpgrHOoWrR3oG7O1jASATB/ttSKIeOHF7IPbZtQ=
-X-Received: by 2002:aa7:dace:0:b0:523:40d0:34d1 with SMTP id
- x14-20020aa7dace000000b0052340d034d1mr3721361eds.4.1694056441479; Wed, 06 Sep
- 2023 20:14:01 -0700 (PDT)
+ bh=UHfeFMGTFg/hgxDchx79Q0fAyOOSOOfhkwpVATWZPdo=;
+ b=NDm+Dmu1WP1fn9HevrDmMuY9/9gyFQfuZUMPSGOaY5mntje4la7tMwaKtoIKj6CAOv
+ ECoQ/PSCrLhBIbcZLE8RbxdETgUxdcZyI8K2irvMOeN6ATLfmMLdiN1FQfCEXIjLqMoY
+ FObNmkpgExdki5kEFoEiRtklWeIQdGHS/CV+1YC8nSn5de4vFTZHlDOteKGZgZePQ7rC
+ vpcntcVGXPKCkdahlEQXLGQ6/ZdvHXb2jTJ/qcZYFl1vOahRrwTXLdD0RnC9G6ZqU/KB
+ HnAg5oSW4Pn/bWo/LJ0od4oqvi7Dlp2JpYcozpB29NISN9BLrQi6UQZSLDnum4S/dxlP
+ oKtQ==
+X-Gm-Message-State: AOJu0YwA9r7AQW5tkfm4skqCH/8nJimHmgE84oSDpvIWe3hgM5jT8vra
+ EDCpUiv6Z4LN0qMmtMlx8y16kx9eF6qiXyhRAKU=
+X-Google-Smtp-Source: AGHT+IEN7FTcXdMzTcE2pWWCWLsMGh/1hXQV88SK9pf1RlmjjStN/aVf4uY2fshEEbC859n24tBsCOgIFJPsnrKC6GU=
+X-Received: by 2002:aa7:d714:0:b0:522:27f1:3c06 with SMTP id
+ t20-20020aa7d714000000b0052227f13c06mr3371477edq.21.1694056653412; Wed, 06
+ Sep 2023 20:17:33 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230726120706.335340-2-ajones@ventanamicro.com>
-In-Reply-To: <20230726120706.335340-2-ajones@ventanamicro.com>
+References: <20230731015317.1026996-1-fei2.wu@intel.com>
+ <ea7d2188-97ad-9563-1b92-cf998f4b1747@ventanamicro.com>
+ <49bbec5d-d0da-55e2-875b-3a8874bc3322@intel.com>
+In-Reply-To: <49bbec5d-d0da-55e2-875b-3a8874bc3322@intel.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 7 Sep 2023 13:13:33 +1000
-Message-ID: <CAKmqyKMbyDn0rZ8tAXCNZvLcVh2dGpkQ9b+WR_6t358kFpUroQ@mail.gmail.com>
-Subject: Re: [PATCH] docs/devel: Add cross-compiling doc
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- palmer@dabbelt.com, bin.meng@windriver.com, peter.maydell@linaro.org, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Date: Thu, 7 Sep 2023 13:17:05 +1000
+Message-ID: <CAKmqyKMtAzt5saCUMd4vXYfgAQibpzQJAhtTSuSb+yeKhcYpfw@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv: split RAM into low and high memory
+To: "Wu, Fei" <fei2.wu@intel.com>, Anup Patel <apatel@ventanamicro.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, palmer@dabbelt.com,
+ alistair.francis@wdc.com, 
+ bin.meng@windriver.com, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Andrei Warkentin <andrei.warkentin@intel.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::531;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x531.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x52c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -89,280 +93,181 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jul 26, 2023 at 10:08=E2=80=AFPM Andrew Jones <ajones@ventanamicro.=
-com> wrote:
+On Thu, Aug 3, 2023 at 10:47=E2=80=AFAM Wu, Fei <fei2.wu@intel.com> wrote:
 >
-> Add instructions for how to cross-compile QEMU for RISC-V. The
-> file is named generically because there's no reason not to collect
-> other architectures steps into the same file, especially because
-> several subsections like those for cross-compiling QEMU dependencies
-> using meson and a cross-file could be shared. Additionally, other
-> approaches to creating sysroots, such as with debootstrap, may be
-> documented in this file in the future.
+> On 8/1/2023 6:46 AM, Daniel Henrique Barboza wrote:
+> >
+> >
+> > On 7/30/23 22:53, Fei Wu wrote:
+> >> riscv virt platform's memory started at 0x80000000 and
+> >> straddled the 4GiB boundary. Curiously enough, this choice
+> >> of a memory layout will prevent from launching a VM with
+> >> a bit more than 2000MiB and PCIe pass-thru on an x86 host, due
+> >> to identity mapping requirements for the MSI doorbell on x86,
+> >> and these (APIC/IOAPIC) live right below 4GiB.
+> >>
+> >> So just split the RAM range into two portions:
+> >> - 1 GiB range from 0x80000000 to 0xc0000000.
+> >> - The remainder at 0x100000000
+> >>
+> >> ...leaving a hole between the ranges.
+> >
+> > I am afraid this breaks some existing distro setups, like Ubuntu. After
+> > this patch
+> > this emulation stopped working:
+> >
+> > ~/work/qemu/build/qemu-system-riscv64 \
+> >     -machine virt -nographic -m 8G -smp 8 \
+> >     -kernel ./uboot-ubuntu/usr/lib/u-boot/qemu-riscv64_smode/uboot.elf =
+\
+> >     -drive file=3Dsnapshot.img,format=3Dqcow2,if=3Dvirtio \
+> >     -netdev bridge,id=3Dbridge1,br=3Dvirbr0 -device
+> > virtio-net-pci,netdev=3Dbridge1
+> >
+> >
+> > This is basically a guest created via the official Canonical tutorial:
+> >
+> > https://wiki.ubuntu.com/RISC-V/QEMU
+> >
+> > The error being thrown:
+> >
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >
+> > Boot HART ID              : 4
+> > Boot HART Domain          : root
+> > Boot HART Priv Version    : v1.12
+> > Boot HART Base ISA        : rv64imafdch
+> > Boot HART ISA Extensions  : time,sstc
+> > Boot HART PMP Count       : 16
+> > Boot HART PMP Granularity : 4
+> > Boot HART PMP Address Bits: 54
+> > Boot HART MHPM Count      : 16
+> > Boot HART MIDELEG         : 0x0000000000001666
+> > Boot HART MEDELEG         : 0x0000000000f0b509
+> >
+> >
+> > U-Boot 2022.07+dfsg-1ubuntu4.2 (Nov 24 2022 - 18:47:41 +0000)
+> >
+> > CPU:
+> > rv64imafdch_zicbom_zicboz_zicsr_zifencei_zihintpause_zawrs_zfa_zca_zcd_=
+zba_zbb_zbc_zbs_sstc_svadu
+> > Model: riscv-virtio,qemu
+> > DRAM:  Unhandled exception: Store/AMO access fault
+> > EPC: 00000000802018b8 RA: 00000000802126a0 TVAL: 00000000ff733f90
+> >
+> > Code: b823 06b2 bc23 06b2 b023 08b2 b423 08b2 (b823 08b2)
+> >
+> >
+> > resetting ...
+> > System reset not supported on this platform
+> > ### ERROR ### Please RESET the board ###
+> > QEMU 8.0.90 monitor - type 'help' for more infor
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >
+> >
+> > Based on the change made I can make an educated guess on what is going
+> > wrong.
+> > We have another board with a similar memory topology you're making here=
+,
+> > the
+> > Microchip Polarfire (microchip_pfsoc.c). We were having some problems
+> > with this
+> > board while trying to consolidate the boot process between all boards i=
+n
+> > hw/riscv/boot.c because of its non-continuous RAM bank. The full story
+> > can be
+> > read in the commit message of 4b402886ac89 ("hw/riscv: change
+> > riscv_compute_fdt_addr()
+> > semantics") but the short version can be seen in riscv_compute_fdt_addr=
+()
+> > from boot.c:
+> >
+> >  - if ram_start is less than 3072MiB, the FDT will be  put at the lowes=
+t
+> > value
+> > between 3072 MiB and the end of that RAM bank;
+> >
+> > - if ram_start is higher than 3072 MiB the FDT will be put at the end o=
+f
+> > the
+> > RAM bank.
+> >
+> > So, after this patch, since riscv_compute_fdt_addr() is being used with
+> > the now
+> > lower RAM bank, the fdt is being put in LOW_MEM - fdt_size for any setu=
+p
+> > that has
+> > more than 1Gb RAM, and this breaks assumptions made by uboot and Ubuntu
+> > and possibly
+> > others that are trying to retrieve the FDT from the gap that you create=
+d
+> > between
+> > low and hi mem in this patch.
+> >
+> > In fact, this same Ubuntu guest I mentioned above will boot if I put
+> > only 1 Gb of RAM
+> > (-m 1Gb). If I try with -m 1.1Gb I reproduce this error. This can be a
+> > validation of
+> > the guess I'm making here: Ubuntu is trying to fetch stuff (probably th=
+e
+> > fdt) from
+> > the gap between the memory areas.
+> >
+> > This change on top of this patch doesn't work either:
+> >
+> > $ git diff
+> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> > index 8fbdc7220c..dfff48d849 100644
+> > --- a/hw/riscv/virt.c
+> > +++ b/hw/riscv/virt.c
+> > @@ -1335,9 +1335,16 @@ static void virt_machine_done(Notifier *notifier=
+,
+> > void *data)
+> >                                           kernel_start_addr, true, NULL=
+);
+> >      }
+> >
+> > -    fdt_load_addr =3D riscv_compute_fdt_addr(memmap[VIRT_DRAM].base,
+> > +    if (machine->ram_size < memmap[VIRT_DRAM].size) {
+> > +        fdt_load_addr =3D riscv_compute_fdt_addr(memmap[VIRT_DRAM].bas=
+e,
+> >                                             memmap[VIRT_DRAM].size,
+> >                                             machine);
+> > +    } else {
+> > +        fdt_load_addr =3D
+> > riscv_compute_fdt_addr(memmap[VIRT_DRAM_HIGH].base,
+> > +                                           memmap[VIRT_DRAM_HIGH].size=
+,
+> > +                                           machine);
+> > +    }
+> > +
+> >
+> > This would put the fdt at the end of the HI RAM for guests with more
+> > than 1Gb of RAM.
+> > This change in fact makes the situation even worse, breaking setups tha=
+t
+> > were working
+> > before with this patch.
+> >
+> > There's a chance that reducing the gap between the RAM banks can make
+> > Ubuntu work
+> > reliably again but now I'm a little cold feet with this change.
+> >
+> >
+> > I think we'll need some kernel/Opensbi folks to weight in here to see i=
+f
+> > there's a
+> > failsafe memory setup that won't break distros out there and allow your
+> > passthrough
+> > to work.
+> >
+> Hi Daniel,
 >
-> Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
+> Do you know who we should talk to? I think it's not uncommon to have
+> seperated multi-range memory, the stack should support this configuration=
+.
 
-I get a warning when building this:
-
-qemu/docs/devel/cross-compiling.rst: WARNING: document isn't included
-in any toctree
-
-Do you mind adding a toc reference to it and sending a v2?
+@Palmer Dabbelt @Anup Patel any ideas?
 
 Alistair
-
-> ---
->  docs/devel/cross-compiling.rst | 221 +++++++++++++++++++++++++++++++++
->  1 file changed, 221 insertions(+)
->  create mode 100644 docs/devel/cross-compiling.rst
->
-> diff --git a/docs/devel/cross-compiling.rst b/docs/devel/cross-compiling.=
-rst
-> new file mode 100644
-> index 000000000000..1b988ba54e4c
-> --- /dev/null
-> +++ b/docs/devel/cross-compiling.rst
-> @@ -0,0 +1,221 @@
-> +.. SPDX-License-Identifier: GPL-2.0-or-later
-> +
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +Cross-compiling QEMU
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +
-> +Cross-compiling QEMU first requires the preparation of a cross-toolchain
-> +and the cross-compiling of QEMU's dependencies. While the steps will be
-> +similar across architectures, each architecture will have its own specif=
-ic
-> +recommendations. This document collects architecture-specific procedures
-> +and hints that may be used to cross-compile QEMU, where typically the ho=
-st
-> +environment is x86.
-> +
-> +RISC-V
-> +=3D=3D=3D=3D=3D=3D
-> +
-> +Toolchain
-> +---------
-> +
-> +Select a root directory for the cross environment
-> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> +
-> +Export an environment variable pointing to a root directory
-> +for the cross environment. For example, ::
-> +
-> +  $ export PREFIX=3D"$HOME/opt/riscv"
-> +
-> +Create a work directory
-> +^^^^^^^^^^^^^^^^^^^^^^^
-> +
-> +Tools and several components will need to be downloaded and built. Creat=
-e
-> +a directory for all the work, ::
-> +
-> +  $ export WORK_DIR=3D"$HOME/work/xqemu"
-> +  $ mkdir -p "$WORK_DIR"
-> +
-> +Select and prepare the toolchain
-> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> +
-> +Select a toolchain such as [riscv-toolchain]_ and follow its instruction=
-s
-> +for building and installing it to ``$PREFIX``, e.g. ::
-> +
-> +  $ cd "$WORK_DIR"
-> +  $ git clone https://github.com/riscv/riscv-gnu-toolchain
-> +  $ cd riscv-gnu-toolchain
-> +  $ ./configure --prefix=3D"$PREFIX"
-> +  $ make -j$(nproc) linux
-> +
-> +Set the ``$CROSS_COMPILE`` environment variable to the prefix of the cro=
-ss
-> +tools and add the tools to ``$PATH``, ::
-> +
-> +$ export CROSS_COMPILE=3Driscv64-unknown-linux-gnu-
-> +$ export PATH=3D"$PREFIX/bin:$PATH"
-> +
-> +Also set ``$SYSROOT``, where all QEMU cross-compiled dependencies will b=
-e
-> +installed. The toolchain installation likely created a 'sysroot' directo=
-ry
-> +at ``$PREFIX/sysroot``, which is the default location for most cross
-> +tools, making it a good location, ::
-> +
-> +  $ mkdir -p "$PREFIX/sysroot"
-> +  $ export SYSROOT=3D"$PREFIX/sysroot"
-> +
-> +Create a pkg-config wrapper
-> +^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> +
-> +The build processes of QEMU and some of its dependencies depend on
-> +pkg-config. Create a wrapper script for it which works for the cross
-> +environment: ::
-> +
-> +  $ cat <<EOF >"$PREFIX/bin/${CROSS_COMPILE}pkg-config"
-> +  #!/bin/sh
-> +
-> +  [ "\$SYSROOT" ] || exit 1
-> +
-> +  export PKG_CONFIG_PATH=3D
-> +  export PKG_CONFIG_LIBDIR=3D"\${SYSROOT}/usr/lib/pkgconfig:\${SYSROOT}/=
-usr/lib64/pkgconfig:\${SYSROOT}/usr/share/pkgconfig"
-> +
-> +  exec pkg-config "\$@"
-> +  EOF
-> +  $ chmod +x "$PREFIX/bin/${CROSS_COMPILE}pkg-config"
-> +
-> +Create a cross-file for meson builds
-> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> +
-> +meson setup, used by some of QEMU's dependencies, needs a "cross-file" t=
-o
-> +configure the cross environment. Create one, ::
-> +
-> +  $ cd "$WORK_DIR"
-> +  $ cat <<EOF >cross_file.txt
-> +  [host_machine]
-> +  system =3D 'linux'
-> +  cpu_family =3D 'riscv64'
-> +  cpu =3D 'riscv64'
-> +  endian =3D 'little'
-> +
-> +  [binaries]
-> +  c =3D '${CROSS_COMPILE}gcc'
-> +  cpp =3D '${CROSS_COMPILE}g++'
-> +  ar =3D '${CROSS_COMPILE}ar'
-> +  ld =3D '${CROSS_COMPILE}ld'
-> +  objcopy =3D '${CROSS_COMPILE}objcopy'
-> +  strip =3D '${CROSS_COMPILE}strip'
-> +  pkgconfig =3D '${CROSS_COMPILE}pkg-config'
-> +  EOF
-> +
-> +Cross-compile dependencies
-> +--------------------------
-> +
-> +glibc
-> +^^^^^
-> +
-> +If [riscv-toolchain]_ was selected for the toolchain then this step is
-> +already complete and glibc has already been installed into ``$SYSROOT``.
-> +Otherwise, cross-compile glibc and install it to ``$SYSROOT``.
-> +
-> +libffi
-> +^^^^^^
-> +
-> +::
-> +
-> +  $ cd "$WORK_DIR"
-> +  $ git clone https://gitlab.freedesktop.org/gstreamer/meson-ports/libff=
-i.git
-> +  $ cd libffi
-> +  $ meson setup --cross-file ../cross_file.txt --prefix=3D"$SYSROOT/usr"=
- _build
-> +  $ ninja -C _build
-> +  $ ninja -C _build install
-> +
-> +*Building libffi seperately avoids a compilation error generated when
-> +building it as a subproject of glib.*
-> +
-> +glib
-> +^^^^
-> +
-> +::
-> +
-> +  $ cd "$WORK_DIR"
-> +  $ git clone https://github.com/GNOME/glib.git
-> +  $ cd glib
-> +  $ meson setup --cross-file ../cross_file.txt --prefix=3D"$SYSROOT/usr"=
- _build
-> +  $ ninja -C _build
-> +  $ ninja -C _build install
-> +
-> +libslirp [optional]
-> +^^^^^^^^^^^^^^^^^^^
-> +
-> +::
-> +
-> +  $ cd "$WORK_DIR"
-> +  $ git clone https://gitlab.com/qemu-project/libslirp.git
-> +  $ cd libslirp
-> +  $ meson setup --cross-file ../cross_file.txt --prefix=3D"$SYSROOT/usr"=
- _build
-> +  $ ninja -C _build
-> +  $ ninja -C _build install
-> +
-> +pixman
-> +^^^^^^
-> +
-> +First ensure the 'libtool' package is installed, e.g.
-> +``sudo dnf install libtool`` or ``sudo apt install libtool``
-> +
-> +::
-> +
-> +  $ cd "$WORK_DIR"
-> +  $ git clone https://gitlab.freedesktop.org/pixman/pixman
-> +  $ cd pixman
-> +  $ ./autogen.sh
-> +  $ ./configure --prefix=3D"$SYSROOT/usr" --host=3Driscv64-unknown-linux=
--gnu
-> +  $ make -j$(nproc)
-> +  $ make install
-> +
-> +Cross-compile QEMU
-> +------------------
-> +
-> +::
-> +
-> +  $ cd "$WORK_DIR"
-> +  $ git clone https://gitlab.com/qemu-project/qemu.git
-> +  $ cd qemu
-> +  $ mkdir -p build/install_dir
-> +  $ cd build
-> +  $ ../configure --target-list=3Driscv64-softmmu --cross-prefix=3D$CROSS=
-_COMPILE --prefix=3D"$PWD/install_dir"
-> +  $ make -j$(nproc)
-> +  $ make install
-> +
-> +*Cross-compiling QEMU with different configurations may require more
-> +dependencies to be built and installed in the sysroot.*
-> +
-> +Running QEMU
-> +------------
-> +
-> +``build/install_dir`` may now be copied to the target and its bin
-> +directory may be added to the target user's PATH. Prior to running
-> +QEMU, ensure all the libraries it depends on are present, ::
-> +
-> +  $ ldd /path/to/bin/qemu-system-riscv64
-> +
-> +For example, it may necessary to install zlib libraries, e.g.
-> +``sudo dnf install zlib-devel`` or ``sudo apt install zlib1g-dev``
-> +
-> +Subsequent QEMU Cross-compiling
-> +-------------------------------
-> +
-> +Unless it's necessary to update and recompile the toolchain or
-> +dependencies, then most steps do not need to be repeated for subsequent
-> +compiles. Simply ensure the toolchain is in ``$PATH``, ``$SYSROOT`` poin=
-ts
-> +at the sysroot, and then follow the QEMU cross-compile steps in
-> +"Cross-compile QEMU". For example, ::
-> +
-> +  $ export PATH=3D"$HOME/opt/riscv/bin:$PATH"
-> +  $ export SYSROOT=3D"$HOME/opt/riscv/sysroot"
-> +  $ cd /path/to/qemu
-> +  $ mkdir -p build/install_dir
-> +  $ cd build
-> +  $ ../configure --target-list=3Driscv64-softmmu --cross-prefix=3Driscv6=
-4-unknown-linux-gnu- --prefix=3D"$PWD/install_dir"
-> +  $ make -j
-> +  $ make install
-> +
-> +References
-> +----------
-> +
-> +.. [riscv-toolchain] https://github.com/riscv/riscv-gnu-toolchain
-> --
-> 2.41.0
->
->
 
