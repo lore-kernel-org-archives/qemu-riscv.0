@@ -4,43 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2039EE14C3
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 00:36:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CDE8EE14C3
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 00:37:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qe30l-0002Iv-UP; Wed, 06 Sep 2023 20:36:43 -0400
+	id 1qe30z-0002Xo-Nx; Wed, 06 Sep 2023 20:36:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe30k-0002E6-J3
- for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:36:42 -0400
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe30y-0002XP-9I
+ for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:36:56 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe30g-0000bq-3J
- for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:36:42 -0400
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe30v-0000d8-Uu
+ for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:36:56 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1694046997;
+ s=mimecast20190719; t=1694047013;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=bkLRxUCM4LiaWE+O0yoFhEV1USIHt+mGWPVf3kWLKPI=;
- b=CEIUD26Jq0qscXyEIBkPg51rk47Ki41UfSG1/ZjnNd3Dlj6cZtwsIiPsNbdNb5gUgj1x1L
- xrm0d4YaWjQ7EU9s80jyzZRO1mkDrTw+BfBjOoIkXCOX+6o25AMV50SUYznLfZFl0Ipwk9
- C1XQ3oTs2wWsTGq4lsGX1KouJ/ztPwQ=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-120-guadNpvFNFGXm9-1qNJkow-1; Wed, 06 Sep 2023 20:36:33 -0400
-X-MC-Unique: guadNpvFNFGXm9-1qNJkow-1
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=aY0vCT17ghdT+PeDe1lOFWysje3txmaFbEFFL/ifBWg=;
+ b=i3pISO8C22Gsj8krwSbyTHp6MKGV0Leb7+P7vjnFJFQMzOgW7rKW7aINQzrodE/1+qjIlS
+ SJoLHFq5Ezm9HhefWkCBqS+oFszL/dlfBtGPi7Ro4ud50wxSAgP3sZ0QxYO5/4dMwCdU9s
+ V2/ua2heumNaN7/zMCuJqmh57H3NYh0=
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-10-tBh-EfmCMfOYP1VbbrVUlw-1; Wed, 06 Sep 2023 20:36:50 -0400
+X-MC-Unique: tBh-EfmCMfOYP1VbbrVUlw-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
  [10.11.54.8])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id CB210800C78;
- Thu,  7 Sep 2023 00:36:30 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 8DE263C0EAA5;
+ Thu,  7 Sep 2023 00:36:46 +0000 (UTC)
 Received: from gshan.redhat.com (unknown [10.64.136.25])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 1A93BC03295;
- Thu,  7 Sep 2023 00:36:10 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 4EF97C03295;
+ Thu,  7 Sep 2023 00:36:31 +0000 (UTC)
 From: Gavin Shan <gshan@redhat.com>
 To: qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
@@ -63,9 +64,11 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  mark.cave-ayland@ilande.co.uk, atar4qemu@gmail.com,
  kbastian@mail.uni-paderborn.de, jcmvbkbc@gmail.com, pbonzini@redhat.com,
  imammedo@redhat.com, shan.gavin@gmail.com
-Subject: [PATCH v3 00/32] Unified CPU type check
-Date: Thu,  7 Sep 2023 10:35:21 +1000
-Message-ID: <20230907003553.1636896-1-gshan@redhat.com>
+Subject: [PATCH v3 01/32] cpu: Add helper cpu_model_from_type()
+Date: Thu,  7 Sep 2023 10:35:22 +1000
+Message-ID: <20230907003553.1636896-2-gshan@redhat.com>
+In-Reply-To: <20230907003553.1636896-1-gshan@redhat.com>
+References: <20230907003553.1636896-1-gshan@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -78,7 +81,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -94,142 +97,71 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-There are two places where the user specified CPU type is checked to see
-if it's supported or allowed by the board: machine_run_board_init() and
-mc->init(). We don't have to maintain two duplicate sets of logic. This
-series intends to move the check to machine_run_board_init().
+Add helper cpu_model_from_type() to extract the CPU model name from
+the CPU type name in two circumstances: (1) The CPU type name is the
+combination of the CPU model name and suffix. (2) The CPU type name
+is same to the CPU model name.
 
-PATCH[01]    Adds a generic helper cpu_model_from_type() to convert CPU
-             type name to CPU model name.
-PATCH[02-19] Uses cpu_model_from_type() in the individual targets
-PATCH[20-23] Implements cpu_list() for the missed targets
-PATCH[24-27] Improves the CPU type validation in machine_run_board_init()
-PATCH[28-32] Validate the CPU type in machine_run_board_init() for the
-             individual boards
+The helper will be used in the subsequent patches to conver the
+CPU type name to the CPU model name.
 
-v1: https://lists.nongnu.org/archive/html/qemu-arm/2023-07/msg00302.html
-v2: https://lists.nongnu.org/archive/html/qemu-arm/2023-07/msg00528.html
+Suggested-by: Igor Mammedov <imammedo@redhat.com>
+Signed-off-by: Gavin Shan <gshan@redhat.com>
+---
+ cpu.c                 | 16 ++++++++++++++++
+ include/hw/core/cpu.h | 12 ++++++++++++
+ 2 files changed, 28 insertions(+)
 
-Testing
-=======
-
-With the following command lines, the output messages are varied before
-and after the series is applied.
-
-  ./build/qemu-system-aarch64            \
-  -accel tcg -machine virt,gic-version=3 \
-  -cpu cortex-a8 -smp maxcpus=2,cpus=1   \
-    :
-
-Before the series is applied:
-
-  qemu-system-aarch64: mach-virt: CPU type cortex-a8-arm-cpu not supported
-
-After the series is applied:
-
-  qemu-system-aarch64: Invalid CPU type: cortex-a8-arm-cpu
-  The valid models are: cortex-a7, cortex-a15, cortex-a35, cortex-a55,
-                        cortex-a72, cortex-a76, a64fx, neoverse-n1,
-                        neoverse-v1, cortex-a53, cortex-a57, max
-
-Changelog
-=========
-v3:
-  * Generic helper cpu_model_from_type()                        (Igor)
-  * Apply cpu_model_from_type() to the individual targets       (Igor)
-  * Implement cpu_list() for the missed targets                 (Gavin)
-  * Remove mc->valid_cpu_models                                 (Richard)
-  * Separate patch to constify mc->validate_cpu_types           (Gavin)
-v2:
-  * Constify mc->valid_cpu_types                                (Richard)
-  * Print the supported CPU models, instead of typenames        (Peter)
-  * Misc improvements for the hleper to do the check            (Igor)
-  * More patches to move the check                              (Marcin)
-
-Gavin Shan (32):
-  cpu: Add helper cpu_model_from_type()
-  target/alpha: Use generic helper to show CPU model names
-  target/arm: Use generic helper to show CPU model names
-  target/avr: Use generic helper to show CPU model names
-  target/cris: Use generic helper to show CPU model names
-  target/hexagon: Use generic helper to show CPU model names
-  target/i386: Use generic helper to show CPU model names
-  target/loongarch: Use generic helper to show CPU model names
-  target/m68k: Use generic helper to show CPU model names
-  target/mips: Use generic helper to show CPU model names
-  target/openrisc: Use generic helper to show CPU model names
-  target/ppc: Use generic helper to show CPU model names
-  target/riscv: Use generic helper to show CPU model names
-  target/rx: Use generic helper to show CPU model names
-  target/s390x: Use generic helper to show CPU model names
-  target/sh4: Use generic helper to show CPU model names
-  target/tricore: Use generic helper to show CPU model names
-  target/sparc: Improve sparc_cpu_class_by_name()
-  target/xtensa: Improve xtensa_cpu_class_by_name()
-  target/hppa: Implement hppa_cpu_list()
-  target/microblaze: Implement microblaze_cpu_list()
-  target/nios2: Implement nios2_cpu_list()
-  Mark cpu_list() supported on all targets
-  machine: Constify MachineClass::valid_cpu_types[i]
-  machine: Use error handling when CPU type is checked
-  machine: Introduce helper is_cpu_type_supported()
-  machine: Print CPU model name instead of CPU type name
-  hw/arm/virt: Check CPU type in machine_run_board_init()
-  hw/arm/virt: Hide host CPU model for tcg
-  hw/arm/sbsa-ref: Check CPU type in machine_run_board_init()
-  hw/arm: Check CPU type in machine_run_board_init()
-  hw/riscv/shakti_c: Check CPU type in machine_run_board_init()
-
- bsd-user/main.c                       |  3 -
- cpu.c                                 | 19 +++++-
- hw/arm/bananapi_m2u.c                 | 12 ++--
- hw/arm/cubieboard.c                   | 12 ++--
- hw/arm/mps2-tz.c                      | 20 ++++--
- hw/arm/mps2.c                         | 25 ++++++--
- hw/arm/msf2-som.c                     | 12 ++--
- hw/arm/musca.c                        | 13 ++--
- hw/arm/npcm7xx_boards.c               | 13 ++--
- hw/arm/orangepi.c                     | 12 ++--
- hw/arm/sbsa-ref.c                     | 21 +------
- hw/arm/virt.c                         | 23 ++-----
- hw/core/machine.c                     | 90 ++++++++++++++++-----------
- hw/m68k/q800.c                        |  2 +-
- hw/riscv/shakti_c.c                   | 11 ++--
- include/hw/boards.h                   |  2 +-
- include/hw/core/cpu.h                 | 12 ++++
- target/alpha/cpu.c                    |  6 +-
- target/arm/arm-qmp-cmds.c             |  6 +-
- target/arm/helper.c                   | 12 ++--
- target/avr/cpu.c                      | 23 +++++--
- target/cris/cpu.c                     |  7 +--
- target/hexagon/cpu.c                  | 12 ++--
- target/hppa/cpu.c                     | 19 ++++++
- target/hppa/cpu.h                     |  3 +
- target/i386/cpu.c                     |  7 +--
- target/loongarch/cpu.c                |  5 +-
- target/loongarch/loongarch-qmp-cmds.c |  3 +-
- target/m68k/helper.c                  | 14 ++---
- target/microblaze/cpu.c               | 20 ++++++
- target/microblaze/cpu.h               |  3 +
- target/mips/cpu-defs.c.inc            |  9 ---
- target/mips/cpu.c                     | 25 +++++++-
- target/mips/sysemu/mips-qmp-cmds.c    |  3 +-
- target/nios2/cpu.c                    | 20 ++++++
- target/nios2/cpu.h                    |  3 +
- target/openrisc/cpu.c                 | 23 +++----
- target/ppc/cpu_init.c                 | 11 ++--
- target/riscv/cpu.c                    | 23 ++++---
- target/riscv/riscv-qmp-cmds.c         |  3 +-
- target/rx/cpu.c                       | 16 +++--
- target/s390x/cpu_models.c             | 18 +++---
- target/s390x/cpu_models_sysemu.c      |  9 ++-
- target/sh4/cpu.c                      | 24 +++----
- target/sparc/cpu.c                    |  7 ++-
- target/tricore/cpu.c                  |  9 +--
- target/tricore/helper.c               | 13 ++--
- target/xtensa/cpu.c                   |  9 +--
- 48 files changed, 397 insertions(+), 270 deletions(-)
-
+diff --git a/cpu.c b/cpu.c
+index 1c948d1161..a19e33ff96 100644
+--- a/cpu.c
++++ b/cpu.c
+@@ -284,6 +284,22 @@ const char *parse_cpu_option(const char *cpu_option)
+     return cpu_type;
+ }
+ 
++char *cpu_model_from_type(const char *typename)
++{
++    const char *suffix = "-" CPU_RESOLVING_TYPE;
++
++    if (!object_class_by_name(typename)) {
++        return NULL;
++    }
++
++    if (strlen(typename) > strlen(suffix) &&
++        !strcmp(typename + strlen(typename) - strlen(suffix), suffix)) {
++        return g_strndup(typename, strlen(typename) - strlen(suffix));
++    }
++
++    return g_strdup(typename);
++}
++
+ void list_cpus(void)
+ {
+     /* XXX: implement xxx_cpu_list for targets that still miss it */
+diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+index 92a4234439..6e76d95490 100644
+--- a/include/hw/core/cpu.h
++++ b/include/hw/core/cpu.h
+@@ -657,6 +657,18 @@ CPUState *cpu_create(const char *typename);
+  */
+ const char *parse_cpu_option(const char *cpu_option);
+ 
++/**
++ * cpu_model_from_type:
++ * @typename: The CPU type name
++ *
++ * Extract the CPU model name from the CPU type name. The
++ * CPU type name is either the combination of the CPU model
++ * name and suffix, or same to the CPU model name.
++ *
++ * Returns: CPU model name
++ */
++char *cpu_model_from_type(const char *typename);
++
+ /**
+  * cpu_has_work:
+  * @cpu: The vCPU to check.
 -- 
 2.41.0
 
