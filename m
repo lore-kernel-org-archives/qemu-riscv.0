@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 733CCEE14D0
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 00:42:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF569EE14C3
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 00:43:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qe36Z-0003N1-Oq; Wed, 06 Sep 2023 20:42:43 -0400
+	id 1qe37F-00068k-PL; Wed, 06 Sep 2023 20:43:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe36M-0002jj-HO
- for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:42:32 -0400
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe37D-0005wz-Ht
+ for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:43:24 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe36G-0002XV-NY
- for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:42:27 -0400
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe37A-0002h7-KH
+ for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:43:22 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1694047340;
+ s=mimecast20190719; t=1694047399;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=mg3kYlTtUJFXrNtJeRlzw2RfhuRF2qfghP+aKgkkZ+E=;
- b=NM0oNfAKUNtctjwl9bVDlPAt2BnW7MtoKyh00jFfrT7NwZlhsT8isK9esjmhAG3Cb8QmIw
- uNETO97ly1Ie6TWUZ1zE85WX0sPsuA0MIU1Fy5ndcXgPJgBCyqm9e8ExQ3nU9GVpwxr3Io
- VpOckxMGykPsp+v1wwtZiiBnM72S8Vg=
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-448-drCx-XxMNoSexSX1dRpybg-1; Wed, 06 Sep 2023 20:42:13 -0400
-X-MC-Unique: drCx-XxMNoSexSX1dRpybg-1
+ bh=A95uT00tK4ZofT9z2bOAoLTdecw9CZjPml3Poj9gRcA=;
+ b=glIoxsp0algVQrxda2YkKpZVAknXuBzPkjNSDfXFphzpjDwRwMoFwwlvx47MvapuReSYjm
+ WeCpXtY3ozcKiICxh4fGVwYLy0MgevtrmF2S6ZgxH/2w+ntLAWbgkDVizejpKpag1Yn0m7
+ TynzoLAEYcwJRMJbjgb2Say45icCoPY=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-190-9Rnv7jvaPaSBzxV0Z-N6gw-1; Wed, 06 Sep 2023 20:43:16 -0400
+X-MC-Unique: 9Rnv7jvaPaSBzxV0Z-N6gw-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
  [10.11.54.8])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 5E97938157AF;
- Thu,  7 Sep 2023 00:42:11 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 3656D101A529;
+ Thu,  7 Sep 2023 00:43:14 +0000 (UTC)
 Received: from gshan.redhat.com (unknown [10.64.136.25])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id A1B96C03295;
- Thu,  7 Sep 2023 00:41:56 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 067B4C03295;
+ Thu,  7 Sep 2023 00:42:58 +0000 (UTC)
 From: Gavin Shan <gshan@redhat.com>
 To: qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
@@ -64,9 +64,9 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  mark.cave-ayland@ilande.co.uk, atar4qemu@gmail.com,
  kbastian@mail.uni-paderborn.de, jcmvbkbc@gmail.com, pbonzini@redhat.com,
  imammedo@redhat.com, shan.gavin@gmail.com
-Subject: [PATCH v3 21/32] target/microblaze: Implement microblaze_cpu_list()
-Date: Thu,  7 Sep 2023 10:35:42 +1000
-Message-ID: <20230907003553.1636896-22-gshan@redhat.com>
+Subject: [PATCH v3 25/32] machine: Use error handling when CPU type is checked
+Date: Thu,  7 Sep 2023 10:35:46 +1000
+Message-ID: <20230907003553.1636896-26-gshan@redhat.com>
 In-Reply-To: <20230907003553.1636896-1-gshan@redhat.com>
 References: <20230907003553.1636896-1-gshan@redhat.com>
 MIME-Version: 1.0
@@ -81,7 +81,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,72 +97,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Implement microblaze_cpu_list() to support cpu_list(). With this applied,
-the available CPU model names, same to the CPU type names, are shown
-as below.
+QEMU will be terminated if the specified CPU type isn't supported
+in machine_run_board_init(). The list of supported CPU type names
+is tracked by mc->valid_cpu_types.
 
-  $ ./build/qemu-system-hppa -cpu ?
-  Available CPUs:
-    microblaze-cpu
+The error handling can be used to propagate error messages, to be
+consistent how the errors are handled for other situations in the
+same function.
 
+No functional change intended.
+
+Suggested-by: Igor Mammedov <imammedo@redhat.com>
 Signed-off-by: Gavin Shan <gshan@redhat.com>
 ---
- target/microblaze/cpu.c | 20 ++++++++++++++++++++
- target/microblaze/cpu.h |  3 +++
- 2 files changed, 23 insertions(+)
+ hw/core/machine.c | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
 
-diff --git a/target/microblaze/cpu.c b/target/microblaze/cpu.c
-index 03c2c4db1f..fc7a5dee5b 100644
---- a/target/microblaze/cpu.c
-+++ b/target/microblaze/cpu.c
-@@ -24,6 +24,7 @@
- #include "qemu/osdep.h"
- #include "qemu/log.h"
- #include "qapi/error.h"
-+#include "qemu/qemu-print.h"
- #include "cpu.h"
- #include "qemu/module.h"
- #include "hw/qdev-properties.h"
-@@ -291,6 +292,25 @@ static void mb_cpu_realizefn(DeviceState *dev, Error **errp)
-     mcc->parent_realize(dev, errp);
- }
+diff --git a/hw/core/machine.c b/hw/core/machine.c
+index da699cf4e1..6d3f8e133f 100644
+--- a/hw/core/machine.c
++++ b/hw/core/machine.c
+@@ -1358,6 +1358,7 @@ void machine_run_board_init(MachineState *machine, const char *mem_path, Error *
+     MachineClass *machine_class = MACHINE_GET_CLASS(machine);
+     ObjectClass *oc = object_class_by_name(machine->cpu_type);
+     CPUClass *cc;
++    Error *local_err = NULL;
  
-+static void microblaze_cpu_list_entry(gpointer data, gpointer user_data)
-+{
-+    const char *typename = object_class_get_name(OBJECT_CLASS(data));
-+    char *model = cpu_model_from_type(typename);
-+
-+    qemu_printf("  %s\n", model);
-+    g_free(model);
-+}
-+
-+void microblaze_cpu_list(void)
-+{
-+    GSList *list;
-+
-+    list = object_class_get_list_sorted(TYPE_MICROBLAZE_CPU, false);
-+    qemu_printf("Available CPUs:\n");
-+    g_slist_foreach(list, microblaze_cpu_list_entry, NULL);
-+    g_slist_free(list);
-+}
-+
- static void mb_cpu_initfn(Object *obj)
- {
-     MicroBlazeCPU *cpu = MICROBLAZE_CPU(obj);
-diff --git a/target/microblaze/cpu.h b/target/microblaze/cpu.h
-index f6cab6ce19..b5775c2966 100644
---- a/target/microblaze/cpu.h
-+++ b/target/microblaze/cpu.h
-@@ -372,6 +372,9 @@ int mb_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
- int mb_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
- int mb_cpu_gdb_read_stack_protect(CPUArchState *cpu, GByteArray *buf, int reg);
- int mb_cpu_gdb_write_stack_protect(CPUArchState *cpu, uint8_t *buf, int reg);
-+void microblaze_cpu_list(void);
-+
-+#define cpu_list microblaze_cpu_list
+     /* This checkpoint is required by replay to separate prior clock
+        reading from the other reads, because timer polling functions query
+@@ -1426,15 +1427,16 @@ void machine_run_board_init(MachineState *machine, const char *mem_path, Error *
  
- static inline uint32_t mb_cpu_read_msr(const CPUMBState *env)
- {
+         if (!machine_class->valid_cpu_types[i]) {
+             /* The user specified CPU is not valid */
+-            error_report("Invalid CPU type: %s", machine->cpu_type);
+-            error_printf("The valid types are: %s",
+-                         machine_class->valid_cpu_types[0]);
++            error_setg(&local_err, "Invalid CPU type: %s", machine->cpu_type);
++            error_append_hint(&local_err, "The valid types are: %s",
++                              machine_class->valid_cpu_types[0]);
+             for (i = 1; machine_class->valid_cpu_types[i]; i++) {
+-                error_printf(", %s", machine_class->valid_cpu_types[i]);
++                error_append_hint(&local_err, ", %s",
++                                  machine_class->valid_cpu_types[i]);
+             }
+-            error_printf("\n");
++            error_append_hint(&local_err, "\n");
+ 
+-            exit(1);
++            error_propagate(errp, local_err);
+         }
+     }
+ 
 -- 
 2.41.0
 
