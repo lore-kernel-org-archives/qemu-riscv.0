@@ -4,68 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DE0FEE14D3
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 04:14:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70A6EEE14D6
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 04:50:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qe6PX-0007gB-2N; Thu, 07 Sep 2023 00:14:31 -0400
+	id 1qe6xk-0006s1-3C; Thu, 07 Sep 2023 00:49:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qe6PV-0007f2-C0; Thu, 07 Sep 2023 00:14:29 -0400
-Received: from mail-vs1-xe2a.google.com ([2607:f8b0:4864:20::e2a])
+ id 1qe6xh-0006rC-Uy; Thu, 07 Sep 2023 00:49:50 -0400
+Received: from mail-vs1-xe2f.google.com ([2607:f8b0:4864:20::e2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qe6PS-0001wV-EE; Thu, 07 Sep 2023 00:14:29 -0400
-Received: by mail-vs1-xe2a.google.com with SMTP id
- ada2fe7eead31-44d4d997dcfso213627137.0; 
- Wed, 06 Sep 2023 21:14:25 -0700 (PDT)
+ id 1qe6xf-0007mO-5c; Thu, 07 Sep 2023 00:49:49 -0400
+Received: by mail-vs1-xe2f.google.com with SMTP id
+ ada2fe7eead31-44e84fbaab9so209389137.1; 
+ Wed, 06 Sep 2023 21:49:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1694060064; x=1694664864; darn=nongnu.org;
+ d=gmail.com; s=20221208; t=1694062185; x=1694666985; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/YGLzkne9IxnlblMwEuFvZCvXmYXq1l/Bytms/2SnD0=;
- b=KnbAtcGzkzg+4ZaS+dWE2vEj+D8whzL01w+EgJfreG3AsKCxzUgC6NC7HY9jmXPxRw
- DF04KjXzcRQcyA9mCArFel32YzfRyYjUjc4R78SxBRVXMtGqgjwgz/dKMgm/+jTv0oQz
- b9D6WlPfc4XLBn2ssQiw3oUmnLZsRicodPYxR9utgNVTLbM3pzL0aeU0ZUe7DUaCNeOY
- fZI1uX8p1bkUSVWHe6w2C7kO8T1xyzaUdI3v7nvgHrkhU7tdwB9m0+AXEBt6FIKBygav
- 7I6NEA+MJ7G+G0iXNoQjmzGpDrU1Jcjfw4TokpWSs+1qa3GPhveANtrEB9kpZ58MfkgX
- qx5Q==
+ bh=lN4jnsOv2w7ZACoJXG0nzAPT4kJdhkNOqI/AZfkM9VA=;
+ b=p1VIZmqzArfNyT1crm1GRLDi8GeeBUL+UrQWQFCwtHx52OIVk0Ai+PM2HoLJJF94S3
+ woLL9KPZ+Aze7iPKkM/EGPBMDOsg875CpbDYxNM8EHIubVuDYazmfHPAb8ob1V7UN+O6
+ FFMgl+CYo9mCXoxkwVQkAGh3hg2TS1H8SMSa7C9H9BvRGDOZktBRgP7XgTQB3tNgRiiW
+ 4YM+FqNsIMkkXrZ6rtX/qj81BAIPBGMwrYQGBqGM1pT+HrAJ0CQcAssaiU2y3DXkiPzx
+ fNLECritn80ZSut21laSlhWNcFqtXnwwqSYNBfbgRpkBv1U19w5Ao/EjPP3ZfkcfFyXr
+ v17w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694060064; x=1694664864;
+ d=1e100.net; s=20221208; t=1694062185; x=1694666985;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/YGLzkne9IxnlblMwEuFvZCvXmYXq1l/Bytms/2SnD0=;
- b=TDeskW/9ZCEFaXfCDfRUEZGrfDfaful9iTs+4JbxBqDT/6EKV0N6sDd8u5wdCW4dua
- X93ZJsb2yK1Cl0fzHAh+LyxmZyRbA/IvihHz3Jdzh3NhjgVQE8SvY//GAeax7Z351Hp0
- Mg2Z6n68FIhHTro9cMtk+PngFQrVmW9cf6Iu9UZBxPzJAVo3to9Lwytbm03c0m87FvH/
- XCnr+DhBM81SDVd1YzvtXNVEwf/XWcGSC2tMRroTiqBsSjGqTpprbdvpKi5HDGOWqTt/
- jwcLhfALyjXr9gfOUtzuqIbpLX9IXjcc7KDFWZRj4K4K2OtrrIRJK5POcwXqgpIKz1N2
- /fRA==
-X-Gm-Message-State: AOJu0YyiS1lxkctqs6lxhbTGLS84cZCVIBv3mS1r4mRNXOhtymInRhto
- o+pHQ9T3VFd5CngTuh9JP3lyxDbYHfmV5hEgOIk=
-X-Google-Smtp-Source: AGHT+IHxwu/XDCC7FD+4eK8uNm4YdYWRgyzuMNtp309qzmRswhaFkgPblXlUk0N6vZRGAw1slmagkp9pszAbSoI87e8=
-X-Received: by 2002:a67:f4d9:0:b0:443:60d7:e1e6 with SMTP id
- s25-20020a67f4d9000000b0044360d7e1e6mr5135205vsn.10.1694060064612; Wed, 06
- Sep 2023 21:14:24 -0700 (PDT)
+ bh=lN4jnsOv2w7ZACoJXG0nzAPT4kJdhkNOqI/AZfkM9VA=;
+ b=jG6VdfpfgosIQJWAwzDODHuKXB+bLpD/W244O3JpgviS/FJ01NVirgYFXaYe4oR+dK
+ D+ckQbAjOVZCf3f8x2hJaAvgrw6s7ok/fm2cw3SlyYaf0bZoLe6nViNoSqCPki4o8iBb
+ Ef0UyZyzWi7Ua/MOfBbUswKmaX/hF/HhiwXnOVsKr3uAqDQ1uBzbrzvsnBPDz3xdt3GN
+ JrIIfTkmTnrGodT2P3/TRrIUK5Hobo6bKUDap4bKlJuF5G6dg2qfu6kuOX2ce+rvjEWt
+ ALTAdEfgeTzFtkSoprikscXTYCTEg/lCZAH5gosgDI8wFlTclkYDhSMoTSWjiCwMpAZQ
+ h2bQ==
+X-Gm-Message-State: AOJu0YyKowjllGbqJQvkAufeNmVrKPkW9z/5XuzWxUxtLjrVWoBLu9aG
+ PvTGNmwIIvNo3XtI7JAK7NpPnRLpzyBjGDvf8nU=
+X-Google-Smtp-Source: AGHT+IEPduJ8Y2Wq7JwY5KcJF7CXypwTOzQiAI6yK0/2OBUW4NgFKqn0lzx9qzzaVR0nKBdBrDUeKz7gOUPJYJchUBE=
+X-Received: by 2002:a67:f4d6:0:b0:44e:eb7:24e0 with SMTP id
+ s22-20020a67f4d6000000b0044e0eb724e0mr5125143vsn.21.1694062185036; Wed, 06
+ Sep 2023 21:49:45 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230901194627.1214811-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20230901194627.1214811-1-dbarboza@ventanamicro.com>
+References: <20230824142942.3983650-1-sunilvl@ventanamicro.com>
+ <20230824142942.3983650-2-sunilvl@ventanamicro.com>
+In-Reply-To: <20230824142942.3983650-2-sunilvl@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 7 Sep 2023 14:13:57 +1000
-Message-ID: <CAKmqyKMm13nDPSmCvqBV5aDwtHjLFxNqKQ5OF2oSR22-mpD85A@mail.gmail.com>
-Subject: Re: [PATCH v9 00/20] riscv: 'max' CPU, detect user choice in TCG
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, ajones@ventanamicro.com
+Date: Thu, 7 Sep 2023 14:49:18 +1000
+Message-ID: <CAKmqyKMROSR_9YaZe4TbDXtbV6apeL-4f7uXCF0wLwPWSKuozA@mail.gmail.com>
+Subject: Re: [PATCH v2 01/12] hw/arm/virt-acpi-build.c: Migrate fw_cfg
+ creation to common location
+To: Sunil V L <sunilvl@ventanamicro.com>
+Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Shannon Zhao <shannon.zhaosl@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>, 
+ "Michael S . Tsirkin" <mst@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
+ Ani Sinha <anisinha@redhat.com>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Gerd Hoffmann <kraxel@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Anup Patel <apatel@ventanamicro.com>, Andrew Jones <ajones@ventanamicro.com>, 
+ Atish Kumar Patra <atishp@rivosinc.com>, Haibo Xu <haibo1.xu@intel.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2a;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2f;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2f.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -89,89 +102,181 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, Sep 2, 2023 at 5:48=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Fri, Aug 25, 2023 at 12:30=E2=80=AFAM Sunil V L <sunilvl@ventanamicro.co=
+m> wrote:
 >
-> Hi,
+> RISC-V also needs to use the same code to create fw_cfg in DSDT. So, avoi=
+d
+> code duplication by moving the code in arm and riscv to a device specific
+> file.
 >
-> This new version contains suggestions made by Andrew Jones in v8.
->
-> Most notable change is the removal of the opensbi.py test in patch 11,
-> which was replaced by a TuxBoot test. It's more suitable to test the
-> integrity of all the extensions enabled by the 'max' CPU.
->
-> The series is available in this branch:
->
-> https://gitlab.com/danielhb/qemu/-/tree/max_cpu_user_choice_v9
->
-> Patches missing acks: 11, 15
->
-> Changes from v8:
-> - patch 7:
->   - add g_assert(array) at the start of riscv_cpu_add_qdev_prop_array()
-> - patch 8:
->   - add g_assert(array) at the start of riscv_cpu_add_kvm_unavail_prop_ar=
-ray()
-> - patch 11:
->   - removed both opensbi.py tests
->   - added 2 'max' cpu tuxboot tests in tuxrun_baselines.py
-> - patch 12:
->   - fixed typos in deprecated.rst
-> - patch 15:
->   - use g_assert_not_reached() at the end of cpu_cfg_ext_get_min_version(=
-)
-> - patch 19:
->   - added comment on top of riscv_cpu_add_misa_properties() explaining wh=
-y
->     we're not implementing user choice support for MISA properties
-> - patch 20:
->   - warn_report() is now called after the G error conditions
-> - v8 link: https://lore.kernel.org/qemu-riscv/20230824221440.484675-1-dba=
-rboza@ventanamicro.com/
->
->
->
-> Daniel Henrique Barboza (20):
->   target/riscv/cpu.c: split CPU options from riscv_cpu_extensions[]
->   target/riscv/cpu.c: skip 'bool' check when filtering KVM props
->   target/riscv/cpu.c: split kvm prop handling to its own helper
->   target/riscv: add DEFINE_PROP_END_OF_LIST() to riscv_cpu_options[]
->   target/riscv/cpu.c: split non-ratified exts from
->     riscv_cpu_extensions[]
->   target/riscv/cpu.c: split vendor exts from riscv_cpu_extensions[]
->   target/riscv/cpu.c: add riscv_cpu_add_qdev_prop_array()
->   target/riscv/cpu.c: add riscv_cpu_add_kvm_unavail_prop_array()
->   target/riscv/cpu.c: limit cfg->vext_spec log message
->   target/riscv: add 'max' CPU type
->   avocado, risc-v: add tuxboot tests for 'max' CPU
->   target/riscv: deprecate the 'any' CPU type
->   target/riscv/cpu.c: use offset in isa_ext_is_enabled/update_enabled
->   target/riscv: make CPUCFG() macro public
->   target/riscv/cpu.c: introduce cpu_cfg_ext_auto_update()
->   target/riscv/cpu.c: use cpu_cfg_ext_auto_update() during realize()
->   target/riscv/cpu.c: introduce RISCVCPUMultiExtConfig
->   target/riscv: use isa_ext_update_enabled() in
->     init_max_cpu_extensions()
->   target/riscv/cpu.c: honor user choice in cpu_cfg_ext_auto_update()
->   target/riscv/cpu.c: consider user option with RVG
+> Suggested-by: Igor Mammedov <imammedo@redhat.com>
+> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  hw/arm/virt-acpi-build.c       | 19 ++-----------------
+>  hw/nvram/fw_cfg-acpi.c         | 17 +++++++++++++++++
+>  hw/nvram/meson.build           |  1 +
+>  hw/riscv/virt-acpi-build.c     | 19 ++-----------------
+>  include/hw/nvram/fw_cfg_acpi.h |  9 +++++++++
+>  5 files changed, 31 insertions(+), 34 deletions(-)
+>  create mode 100644 hw/nvram/fw_cfg-acpi.c
+>  create mode 100644 include/hw/nvram/fw_cfg_acpi.h
 >
->  docs/about/deprecated.rst         |  12 +
->  target/riscv/cpu-qom.h            |   1 +
->  target/riscv/cpu.c                | 564 +++++++++++++++++++++---------
->  target/riscv/cpu.h                |   2 +
->  target/riscv/kvm.c                |   8 +-
->  tests/avocado/tuxrun_baselines.py |  32 ++
->  6 files changed, 450 insertions(+), 169 deletions(-)
+> diff --git a/hw/arm/virt-acpi-build.c b/hw/arm/virt-acpi-build.c
+> index 6b674231c2..b8e725d953 100644
+> --- a/hw/arm/virt-acpi-build.c
+> +++ b/hw/arm/virt-acpi-build.c
+> @@ -35,7 +35,7 @@
+>  #include "target/arm/cpu.h"
+>  #include "hw/acpi/acpi-defs.h"
+>  #include "hw/acpi/acpi.h"
+> -#include "hw/nvram/fw_cfg.h"
+> +#include "hw/nvram/fw_cfg_acpi.h"
+>  #include "hw/acpi/bios-linker-loader.h"
+>  #include "hw/acpi/aml-build.h"
+>  #include "hw/acpi/utils.h"
+> @@ -94,21 +94,6 @@ static void acpi_dsdt_add_uart(Aml *scope, const MemMa=
+pEntry *uart_memmap,
+>      aml_append(scope, dev);
+>  }
 >
+> -static void acpi_dsdt_add_fw_cfg(Aml *scope, const MemMapEntry *fw_cfg_m=
+emmap)
+> -{
+> -    Aml *dev =3D aml_device("FWCF");
+> -    aml_append(dev, aml_name_decl("_HID", aml_string("QEMU0002")));
+> -    /* device present, functioning, decoding, not shown in UI */
+> -    aml_append(dev, aml_name_decl("_STA", aml_int(0xB)));
+> -    aml_append(dev, aml_name_decl("_CCA", aml_int(1)));
+> -
+> -    Aml *crs =3D aml_resource_template();
+> -    aml_append(crs, aml_memory32_fixed(fw_cfg_memmap->base,
+> -                                       fw_cfg_memmap->size, AML_READ_WRI=
+TE));
+> -    aml_append(dev, aml_name_decl("_CRS", crs));
+> -    aml_append(scope, dev);
+> -}
+> -
+>  static void acpi_dsdt_add_flash(Aml *scope, const MemMapEntry *flash_mem=
+map)
+>  {
+>      Aml *dev, *crs;
+> @@ -864,7 +849,7 @@ build_dsdt(GArray *table_data, BIOSLinker *linker, Vi=
+rtMachineState *vms)
+>      if (vmc->acpi_expose_flash) {
+>          acpi_dsdt_add_flash(scope, &memmap[VIRT_FLASH]);
+>      }
+> -    acpi_dsdt_add_fw_cfg(scope, &memmap[VIRT_FW_CFG]);
+> +    fw_cfg_acpi_dsdt_add(scope, &memmap[VIRT_FW_CFG]);
+>      acpi_dsdt_add_virtio(scope, &memmap[VIRT_MMIO],
+>                      (irqmap[VIRT_MMIO] + ARM_SPI_BASE), NUM_VIRTIO_TRANS=
+PORTS);
+>      acpi_dsdt_add_pci(scope, memmap, irqmap[VIRT_PCIE] + ARM_SPI_BASE, v=
+ms);
+> diff --git a/hw/nvram/fw_cfg-acpi.c b/hw/nvram/fw_cfg-acpi.c
+> new file mode 100644
+> index 0000000000..4eeb81bc36
+> --- /dev/null
+> +++ b/hw/nvram/fw_cfg-acpi.c
+> @@ -0,0 +1,17 @@
+> +#include "hw/nvram/fw_cfg_acpi.h"
+> +#include "hw/acpi/aml-build.h"
+> +
+> +void fw_cfg_acpi_dsdt_add(Aml *scope, const MemMapEntry *fw_cfg_memmap)
+> +{
+> +    Aml *dev =3D aml_device("FWCF");
+> +    aml_append(dev, aml_name_decl("_HID", aml_string("QEMU0002")));
+> +    /* device present, functioning, decoding, not shown in UI */
+> +    aml_append(dev, aml_name_decl("_STA", aml_int(0xB)));
+> +    aml_append(dev, aml_name_decl("_CCA", aml_int(1)));
+> +
+> +    Aml *crs =3D aml_resource_template();
+> +    aml_append(crs, aml_memory32_fixed(fw_cfg_memmap->base,
+> +                                       fw_cfg_memmap->size, AML_READ_WRI=
+TE));
+> +    aml_append(dev, aml_name_decl("_CRS", crs));
+> +    aml_append(scope, dev);
+> +}
+> diff --git a/hw/nvram/meson.build b/hw/nvram/meson.build
+> index 988dff6f8e..69e6df5aac 100644
+> --- a/hw/nvram/meson.build
+> +++ b/hw/nvram/meson.build
+> @@ -21,3 +21,4 @@ system_ss.add(when: 'CONFIG_XLNX_EFUSE_ZYNQMP', if_true=
+: files(
+>  system_ss.add(when: 'CONFIG_XLNX_BBRAM', if_true: files('xlnx-bbram.c'))
+>
+>  specific_ss.add(when: 'CONFIG_PSERIES', if_true: files('spapr_nvram.c'))
+> +specific_ss.add(when: 'CONFIG_ACPI', if_true: files('fw_cfg-acpi.c'))
+> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+> index 7331248f59..d8772c2821 100644
+> --- a/hw/riscv/virt-acpi-build.c
+> +++ b/hw/riscv/virt-acpi-build.c
+> @@ -28,6 +28,7 @@
+>  #include "hw/acpi/acpi.h"
+>  #include "hw/acpi/aml-build.h"
+>  #include "hw/acpi/utils.h"
+> +#include "hw/nvram/fw_cfg_acpi.h"
+>  #include "qapi/error.h"
+>  #include "qemu/error-report.h"
+>  #include "sysemu/reset.h"
+> @@ -97,22 +98,6 @@ static void acpi_dsdt_add_cpus(Aml *scope, RISCVVirtSt=
+ate *s)
+>      }
+>  }
+>
+> -static void acpi_dsdt_add_fw_cfg(Aml *scope, const MemMapEntry *fw_cfg_m=
+emmap)
+> -{
+> -    Aml *dev =3D aml_device("FWCF");
+> -    aml_append(dev, aml_name_decl("_HID", aml_string("QEMU0002")));
+> -
+> -    /* device present, functioning, decoding, not shown in UI */
+> -    aml_append(dev, aml_name_decl("_STA", aml_int(0xB)));
+> -    aml_append(dev, aml_name_decl("_CCA", aml_int(1)));
+> -
+> -    Aml *crs =3D aml_resource_template();
+> -    aml_append(crs, aml_memory32_fixed(fw_cfg_memmap->base,
+> -                                       fw_cfg_memmap->size, AML_READ_WRI=
+TE));
+> -    aml_append(dev, aml_name_decl("_CRS", crs));
+> -    aml_append(scope, dev);
+> -}
+> -
+>  /* RHCT Node[N] starts at offset 56 */
+>  #define RHCT_NODE_ARRAY_OFFSET 56
+>
+> @@ -226,7 +211,7 @@ static void build_dsdt(GArray *table_data,
+>      scope =3D aml_scope("\\_SB");
+>      acpi_dsdt_add_cpus(scope, s);
+>
+> -    acpi_dsdt_add_fw_cfg(scope, &memmap[VIRT_FW_CFG]);
+> +    fw_cfg_acpi_dsdt_add(scope, &memmap[VIRT_FW_CFG]);
+>
+>      aml_append(dsdt, scope);
+>
+> diff --git a/include/hw/nvram/fw_cfg_acpi.h b/include/hw/nvram/fw_cfg_acp=
+i.h
+> new file mode 100644
+> index 0000000000..6e2c5f04b7
+> --- /dev/null
+> +++ b/include/hw/nvram/fw_cfg_acpi.h
+> @@ -0,0 +1,9 @@
+> +#ifndef FW_CFG_ACPI_H
+> +#define FW_CFG_ACPI_H
+> +
+> +#include "qemu/osdep.h"
+> +#include "exec/hwaddr.h"
+> +
+> +void fw_cfg_acpi_dsdt_add(Aml *scope, const MemMapEntry *fw_cfg_memmap);
+> +
+> +#endif
 > --
-> 2.41.0
+> 2.39.2
 >
 >
 
