@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57119EE14D3
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 03:02:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D84C9EE14A9
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 03:07:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qe5HF-0001R5-Hx; Wed, 06 Sep 2023 23:01:54 -0400
+	id 1qe5Lx-0003HO-IN; Wed, 06 Sep 2023 23:06:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qe5HC-0001Ql-P4; Wed, 06 Sep 2023 23:01:50 -0400
-Received: from mail-vs1-xe2d.google.com ([2607:f8b0:4864:20::e2d])
+ id 1qe5Lu-0003Gl-O6; Wed, 06 Sep 2023 23:06:43 -0400
+Received: from mail-lf1-x130.google.com ([2a00:1450:4864:20::130])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qe5HA-0006OF-H2; Wed, 06 Sep 2023 23:01:50 -0400
-Received: by mail-vs1-xe2d.google.com with SMTP id
- ada2fe7eead31-44d4d997dcfso199918137.0; 
- Wed, 06 Sep 2023 20:01:46 -0700 (PDT)
+ id 1qe5Lr-00074a-8n; Wed, 06 Sep 2023 23:06:42 -0400
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-501bd7711e8so756705e87.1; 
+ Wed, 06 Sep 2023 20:06:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1694055706; x=1694660506; darn=nongnu.org;
+ d=gmail.com; s=20221208; t=1694055997; x=1694660797; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=p0EC/StpIzdm1vTgCkZbLeaZAszcVz8fC0cOYnfdPDY=;
- b=U2mJ5/AeIYufY/yjMGywfa6cTzK7AHdmG4K5lfKW9UCH66Si/+mkeZARaKn5LPdym0
- zVJp79uBwd5G9z+oa+UtyaRcwj9TohXofX9GlanQHWFGqqVRuCxFZHqKiH8DgItQOZma
- QztMIUuogGRLvsO0CneVY4/WHNQokSFZUaray+/ragd7SJSn6BZbCrXNdeZAN5hI8YZe
- 0xjIqlJf4FGiEe1pQyOTDOMvuM19X9eRKZMChQ7khP4o96cCm4MUfwnu3ORqFxhz2KlQ
- Guj9Oq1tdbad2wV1qdsfJOUooCc5tA4GOU7vdZPzhgw5JzWfBAA3H44BkGS+f4nzojOS
- fvdw==
+ bh=i2hLNecNqI67WEy27RvsyEVYeOLlfaknTaehm/QrlaA=;
+ b=gUaN4LT4wJddFQjD/T9orzIv3ZiwJkrjsR3xN9ky+V9L/yUD10oV/WffXtn7aWjDEZ
+ cspqkmXxdhRE30Ra9wygF9neVTpga1CzHUSQgHe2DvnhHNBrh50QQgAQ9hL+cr4nuGJm
+ HI6bAo/bCMRHneHtrefRWUj3E6hPYITiCmHc3atqTwOm31ECk5AsPkkyB2/xqtOL/UnR
+ eeHk6bZwFBvyefVZ0mgPzAMYHMe6exs5G1nh5xeqQ2fK67aEZ23tvA3rrB2pljqGaqji
+ cq2TJZaIbqfhlcja9E3/myZ0CH/9txfDBply76Xle/dca3kM45V9XnHURJdsytYdhybu
+ GFoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694055706; x=1694660506;
+ d=1e100.net; s=20221208; t=1694055997; x=1694660797;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=p0EC/StpIzdm1vTgCkZbLeaZAszcVz8fC0cOYnfdPDY=;
- b=DeeTe8RoZGIN72VmYlWsZ6HcogKAiIg2UCa0RQqQ5Q6alcrHAKfhMx7VLHUHiHsR7u
- ILBYIhWWZ9KI4Ee5zlBZPx4a1ShS99zTMqEBXPoaJPDXDHvrxJdqmzcAv78qzG4qnybI
- WlyO/qJvJhW30KJWLMpAKFefMbrhuXB0BKZwNdENa6bPHwAdLvjTdtA7G1lEe+MRfQu/
- HP3NPuxbKmbFpk3JL3Ez2afkiWNWdX4bgCCnDPF5GYSBoGg/X9EB079Jq6WQW5qYzAPu
- ioinOmlxNVhLB2WY79H4aN+dF6y7j282DRdlrw8j3eCD3ZPAzcWZRUCPbxGHv5hQvNwR
- +FtQ==
-X-Gm-Message-State: AOJu0Yw8Hi/vwbRIJzFFVG3H8DmGiQtEIBk4zYDGU0Y4vzjsK+Ad3yUp
- oYwAFil4m+DziYr72xRor6+7AyNobPuBZKFwaB8=
-X-Google-Smtp-Source: AGHT+IGA+DLwMCWATDOJPz6RBvLdgB3HYtVdbZVx34H6dZuq3WadI6gwByhsgPHAxHEZHXq00nZGfw+V3fKEwqCrUKI=
-X-Received: by 2002:a67:ec19:0:b0:44d:482a:5443 with SMTP id
- d25-20020a67ec19000000b0044d482a5443mr5132711vso.11.1694055706121; Wed, 06
- Sep 2023 20:01:46 -0700 (PDT)
+ bh=i2hLNecNqI67WEy27RvsyEVYeOLlfaknTaehm/QrlaA=;
+ b=FjG9rdyweKAwE5ZtD9A3jT2lvgVK1aj1h7NHjcNaaxMDEKF/m6owVSxZe8215lTbFQ
+ VPkY+79OVUx3vLucGGEulHFlMJvfp95P7dN+2xA1IpgaNgx7G31LkgGfMaeA0etuiANj
+ uKw04UYSM9clTCPi7gifFX2QBC887Se2Z/UFZ2fngd2FxfLoMJcEnEKrRF46wU3bV5i0
+ NIambN9X8gC4P6LBFQQljflQXdML/mzQNUNpKKdHEbmicMduel+GtaCbyOAyYBDYiFF3
+ li604llI1n4pokFqZ1PsFp4/1Ng8B5tWi95a5NfeiOb/+yQLnRDWxX61vLDYOug/2PHC
+ dgbg==
+X-Gm-Message-State: AOJu0YzdemklhtfsTNLvfUvhH0Kl1kdMGAiaCz2EgFFAv4QUP7H/hZkJ
+ ZnPywTauaMPkFyrUjD5UKg1SQtOLLsTLVcxYdtI=
+X-Google-Smtp-Source: AGHT+IGHTh1XOW9xl3qrCetmWZ7kh2PoAdW7xHncVboBGrGEd3BQ5c7Z/85wcW7kBNX8Bvy46dVNOMV8NMeYFc0xYyg=
+X-Received: by 2002:ac2:5f6a:0:b0:501:bbbb:de1e with SMTP id
+ c10-20020ac25f6a000000b00501bbbbde1emr3411145lfc.6.1694055996479; Wed, 06 Sep
+ 2023 20:06:36 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230808090914.17634-1-nikita.shubin@maquefel.me>
 In-Reply-To: <20230808090914.17634-1-nikita.shubin@maquefel.me>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 7 Sep 2023 13:01:19 +1000
-Message-ID: <CAKmqyKPO6hTfsqz-M-YXM+KeD7LQQoA8CjVd-Z7_w7j4NeWUMA@mail.gmail.com>
+Date: Thu, 7 Sep 2023 13:06:01 +1000
+Message-ID: <CAKmqyKMLW5DJ8PJDiCZcV2PEXfpK2UCrbyOKYT1JHv_d4bOETg@mail.gmail.com>
 Subject: Re: [PATCH v3] target/riscv: don't read CSR in riscv_csrrw_do64
 To: Nikita Shubin <nikita.shubin@maquefel.me>
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
@@ -68,8 +68,8 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2d;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::130;
+ envelope-from=alistair23@gmail.com; helo=mail-lf1-x130.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -109,7 +109,9 @@ ls
 >
 > Signed-off-by: Nikita Shubin <n.shubin@yadro.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
