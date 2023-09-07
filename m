@@ -4,72 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 835DEEB8FB0
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD3E0CA0FF6
 	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 11:28:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qeDAM-0004Tp-Sl; Thu, 07 Sep 2023 07:27:19 -0400
+	id 1qeDAP-0004bX-NC; Thu, 07 Sep 2023 07:27:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <chigot@adacore.com>)
- id 1qeDA7-0004Hc-Qn
- for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 07:27:04 -0400
-Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
+ id 1qeDA8-0004IQ-O1
+ for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 07:27:05 -0400
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <chigot@adacore.com>)
- id 1qeD9z-00063f-FZ
- for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 07:27:02 -0400
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-31c63cd4ec2so844009f8f.0
- for <qemu-riscv@nongnu.org>; Thu, 07 Sep 2023 04:26:53 -0700 (PDT)
+ id 1qeD9z-00063y-Vu
+ for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 07:27:04 -0400
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-31f6ddb3047so714966f8f.1
+ for <qemu-riscv@nongnu.org>; Thu, 07 Sep 2023 04:26:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=adacore.com; s=google; t=1694086012; x=1694690812; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=MlEUK+J9E38UXZ/ZpUlBrPwBJQzGbtWVX57ypSwDeSA=;
- b=FmRWaMgigqGKLHEz7cK0mIbW5xKuTX5u9qf8euCAPm6jtZD7zcjCwHBEeYPzpX3wmH
- iQHqf8eJ0Uwy3mcsfhRUt7GM2NQYLJG5b3LaLwGaa4qKhSRWSScGlqmzMO2G4wdtdGsg
- 20waaBEOvrH8eUqPdZjxs/ZfwzBj5X0Yz3TKGHeuneTBo6eC/+SzLAp6ISJuD/oSA0K3
- e/045hzJUoCINaA1q3Rd8Jue0/Ql+nS/qsRLHo/eEX9lEAyH2P5SakTzdxBfIJ8fOkfN
- 8DywvYuL2+NKoxn8OiOqfHgK9lvG1jgrjduYNiX1nO6JgziVm1HtP+hVu8Ah9ZGks+pB
- l/0w==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=kk4BYECTK9VZ3/Su8VFwEGn9G5CRlLBreIRbOvNSXRI=;
+ b=ake7k+3jlq9Mxja2rILsu+Kq+R1BAvqZkdOe9QtDy2Zx/PDZWGKhcv/35NhT1rcAI8
+ jGbV7ymu9dymGurJ6hme55u4EPHkRAQ3RLZg2IPJzLXOGDEsHZRFAnmvMkmKBMsXka3e
+ DEw6q0r7KqTQQ4Ykq9h4dkD3EgHVeJ4khBnD+6+SEa3U1UX1Fqli4P3cLFUQYn4aTqUY
+ AsevXPwhSPP1uK5UletTHmy8LiFiAdDThdcLYZFaTiXLp0gSHICt5BRcV57GIw7xBRDE
+ ZLxxzZ+W2Gz8xd98rb6EsZ2h646Jn+BoVpEGtfz97i+sr/lLBltjpWgC+dUxEwZVS+F7
+ SfgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1694086012; x=1694690812;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=MlEUK+J9E38UXZ/ZpUlBrPwBJQzGbtWVX57ypSwDeSA=;
- b=IL62T0F2XkeEJLaikp/y2SfkFj87f9dctnqeetkqyr3cOQW0EdRJ5LtSTkXHGkV4DQ
- kqnRssTZMTaGYa2N9H8mZv+oihOHUrRPEUj4p09wKP36leM1MsOw0DHxt2FiEI6f5pDa
- ioaFCxGvcb1WBZwS8ZRDuGmAIZAl3H29RIhFytdkkcJ1Zec6zUhAwqKfyLBQn2I6f6WK
- XWRGG/wt4SF6Ir9njJ+lqBpJQTzVIyFCaQh+0B1gcjxvn4aawpyVnk2gR04c44j78xi+
- 1b4GN1S2zbTaly5TjvukOX6XHZoMDmE2oVWKSlq5TIaRiRNYUsG554mmhLKWY/O8J9NT
- eFsg==
-X-Gm-Message-State: AOJu0YyyYcaGp6W9/OcPyUIs+fGiPtsmNYiWQUzoJlbvxGmNDL0TlB6J
- +zvNs82rpsCvFuYARJoNPHcAUg==
-X-Google-Smtp-Source: AGHT+IEvSXcouZb2MX2BhBBdTen47+yvDGwFfldIMDH93kfCodPJSU78Qoc2xHl9vgAJE5tgaKFoHA==
-X-Received: by 2002:a5d:534c:0:b0:319:71be:9241 with SMTP id
- t12-20020a5d534c000000b0031971be9241mr4757257wrv.25.1694086011648; 
- Thu, 07 Sep 2023 04:26:51 -0700 (PDT)
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=kk4BYECTK9VZ3/Su8VFwEGn9G5CRlLBreIRbOvNSXRI=;
+ b=bV2PMSyIzbwvZ3hKmgYeuwmyWQAopXrjnTlXljHByrYR8e5nmA11agOSaXnzPqLKqB
+ jzBgnwxqTuUjWJshC+RGJ6DVCIcyf0SDSGRGznCZHgrdnVPVOEzTvHeeqFCwGd4pW+s6
+ wFn3Jq89IDq7m7+EQXvYrWWwBcfEzfelYUallw5YFE5SJN5AAx4gHuJksNM12bje0M97
+ ALBQ0vYEvfB6oSIBoDxsM9ePOxl8dAjdOKALsTCnspgMZeL1h3Gpl5SV2ylK3qALYKc5
+ I4GcU3uEMd07aOpkF0Tpyc1EM1uAVL1CmzyXkI9UfXdjqaeqT0ij4hJPxqvkoAng0SSB
+ MwIA==
+X-Gm-Message-State: AOJu0YxzwDga+vwwlGTbYNSKa3fOVG9Nuu/ctXxvFzbM1693IgWRtjIq
+ 63TTbF1lm5adHn3AD9UASXu+PFk1YlBUnhdDk/M=
+X-Google-Smtp-Source: AGHT+IF4z9Slhz4+0IAQf1x4pT9fsld634wp+vlskJqzFSGrXWlIgawZhfT1sZVyivqZWEUagWCc+Q==
+X-Received: by 2002:adf:f38e:0:b0:315:8a13:ef17 with SMTP id
+ m14-20020adff38e000000b003158a13ef17mr4726117wro.65.1694086012429; 
+ Thu, 07 Sep 2023 04:26:52 -0700 (PDT)
 Received: from chigot-Dell.home ([2a01:cb15:8123:8100:c2c3:52c5:8306:a161])
  by smtp.gmail.com with ESMTPSA id
- y3-20020adfe6c3000000b00317909f9985sm22998755wrm.113.2023.09.07.04.26.50
+ y3-20020adfe6c3000000b00317909f9985sm22998755wrm.113.2023.09.07.04.26.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Sep 2023 04:26:51 -0700 (PDT)
+ Thu, 07 Sep 2023 04:26:52 -0700 (PDT)
 From: =?UTF-8?q?Cl=C3=A9ment=20Chigot?= <chigot@adacore.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, peter.maydell@linaro.org, alistair23@gmail.com,
  =?UTF-8?q?Cl=C3=A9ment=20Chigot?= <chigot@adacore.com>
-Subject: [PATCH v3 0/5] Risc-V/gdb: replace exit calls with proper shutdown
-Date: Thu,  7 Sep 2023 13:26:35 +0200
-Message-Id: <20230907112640.292104-1-chigot@adacore.com>
+Subject: [PATCH v3 1/5] softmmu: add means to pass an exit code when
+ requesting a shutdown
+Date: Thu,  7 Sep 2023 13:26:36 +0200
+Message-Id: <20230907112640.292104-2-chigot@adacore.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230907112640.292104-1-chigot@adacore.com>
+References: <20230907112640.292104-1-chigot@adacore.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::436;
- envelope-from=chigot@adacore.com; helo=mail-wr1-x436.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
+ envelope-from=chigot@adacore.com; helo=mail-wr1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -92,42 +96,67 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This series replaces some of the call to exit in hardware used by
-Risc-V boards or made when gdb is requested to exit by shutdown
-requests. Otherwise, the gdb connection can be abruptly disconnected
-resulting in the last gdb packet "Wxx" being not sent.
+As of now, the exit code was either EXIT_FAILURE when a panic shutdown
+was requested or EXIT_SUCCESS otherwise.
+However, some hardware could want to pass more complex exit codes. Thus,
+introduce a new shutdown request function allowing that.
 
-For the gdbstub modification, gdb_exit calls ensure that the "Wxx"
-packet is sent before exiting. However, some features (see
-net/vhost-vdpa.c: vhost_vdpa_cleanup for example) are expecting 
-that a cleanup is being made before exiting. This, it's probably
-safer to follow the same logic here as well.
+Signed-off-by: Clément Chigot <chigot@adacore.com>
+---
+ include/sysemu/runstate.h |  2 ++
+ softmmu/runstate.c        | 12 +++++++++++-
+ 2 files changed, 13 insertions(+), 1 deletion(-)
 
-Difference with v2:
- - Add support to request a shutdown with a specific exit code.
- - Pass the exit code of the main loop to gdb_exit call in qemu_cleanup
- - gdbstub: move the request shutdown in a new new function to avoid
-   having to worry about the request having already been sent.
-
-Clément Chigot (5):
-  softmmu: add means to pass an exit code when requesting a shutdown
-  softmmu: pass the main loop status to gdb "Wxx" packet
-  hw/misc/sifive_test.c: replace exit calls with proper shutdown
-  hw/char: riscv_htif: replace exit calls with proper shutdown
-  gdbstub: replace exit calls with proper shutdown for softmmu
-
- gdbstub/gdbstub.c          |  5 +++--
- gdbstub/softmmu.c          |  6 ++++++
- gdbstub/user.c             |  6 ++++++
- hw/char/riscv_htif.c       |  5 ++++-
- hw/misc/sifive_test.c      |  9 +++++++--
- include/gdbstub/syscalls.h |  9 +++++++++
- include/sysemu/runstate.h  |  2 ++
- include/sysemu/sysemu.h    |  2 +-
- softmmu/main.c             |  2 +-
- softmmu/runstate.c         | 16 +++++++++++++---
- 10 files changed, 52 insertions(+), 10 deletions(-)
-
+diff --git a/include/sysemu/runstate.h b/include/sysemu/runstate.h
+index 7beb29c2e2..1e59e0b12b 100644
+--- a/include/sysemu/runstate.h
++++ b/include/sysemu/runstate.h
+@@ -61,6 +61,8 @@ void qemu_system_wakeup_request(WakeupReason reason, Error **errp);
+ void qemu_system_wakeup_enable(WakeupReason reason, bool enabled);
+ void qemu_register_wakeup_notifier(Notifier *notifier);
+ void qemu_register_wakeup_support(void);
++void qemu_system_shutdown_request_with_code(ShutdownCause reason,
++                                            int exit_code);
+ void qemu_system_shutdown_request(ShutdownCause reason);
+ void qemu_system_powerdown_request(void);
+ void qemu_register_powerdown_notifier(Notifier *notifier);
+diff --git a/softmmu/runstate.c b/softmmu/runstate.c
+index f3bd862818..ee27e26048 100644
+--- a/softmmu/runstate.c
++++ b/softmmu/runstate.c
+@@ -345,6 +345,7 @@ void vm_state_notify(bool running, RunState state)
+ 
+ static ShutdownCause reset_requested;
+ static ShutdownCause shutdown_requested;
++static int shutdown_exit_code = EXIT_SUCCESS;
+ static int shutdown_signal;
+ static pid_t shutdown_pid;
+ static int powerdown_requested;
+@@ -624,6 +625,13 @@ void qemu_system_killed(int signal, pid_t pid)
+     qemu_notify_event();
+ }
+ 
++void qemu_system_shutdown_request_with_code(ShutdownCause reason,
++                                            int exit_code)
++{
++    shutdown_exit_code = exit_code;
++    qemu_system_shutdown_request(reason);
++}
++
+ void qemu_system_shutdown_request(ShutdownCause reason)
+ {
+     trace_qemu_system_shutdown_request(reason);
+@@ -685,7 +693,9 @@ static bool main_loop_should_exit(int *status)
+         if (shutdown_action == SHUTDOWN_ACTION_PAUSE) {
+             vm_stop(RUN_STATE_SHUTDOWN);
+         } else {
+-            if (request == SHUTDOWN_CAUSE_GUEST_PANIC &&
++            if (shutdown_exit_code != EXIT_SUCCESS) {
++                *status = shutdown_exit_code;
++            } else if (request == SHUTDOWN_CAUSE_GUEST_PANIC &&
+                 panic_action == PANIC_ACTION_EXIT_FAILURE) {
+                 *status = EXIT_FAILURE;
+             }
 -- 
 2.25.1
 
