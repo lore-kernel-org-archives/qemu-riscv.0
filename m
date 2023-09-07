@@ -4,86 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45F14EE14DB
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 10:30:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D4E0EB8FB0
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 11:26:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qeCHB-0003RS-Ln; Thu, 07 Sep 2023 06:30:17 -0400
+	id 1qeD9Q-0003Nu-BU; Thu, 07 Sep 2023 07:26:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qeCH2-0003QY-WD
- for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 06:30:09 -0400
-Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qeCGy-0003mE-TR
- for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 06:30:08 -0400
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-401d2e11dacso12719135e9.0
- for <qemu-riscv@nongnu.org>; Thu, 07 Sep 2023 03:30:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694082602; x=1694687402; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
- :subject:cc:to:from:user-agent:references:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hAU/eCijxBZO8nbM/sAU7ipHlJLprGMJlMr6ppg0vZU=;
- b=IAQ42NgKt96wRgTLkzqpKuTsThum/DTe//4HdG0vf+Qz3txnwfrKBZZnBexNLl05tj
- GqEMDEhdAjqc/kOJ+I3TxeA3ef4KSjlIa1HWy1AB2s6y7JqunCsyV3rtTg/oFu18yGPW
- /vBshqdqhw2X4dBsLBzBG5Qy3tFqRwhKqmiyLTE89ZqWcIF43Og4q8B9m1aK5TjJow83
- X0cNbVDxYj8DV0H/WSQhBHZ7Brlgk5IchQLf+tt/Sua4DjUcMv4jHPhQbGToaDd8YHIr
- t5tOmbbLLkzenSN2roZOMZAkl6zjUT8gVe17c0mK31vtjCDbAZMnbRvFC0Rw2bhevfOO
- c6eQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694082602; x=1694687402;
- h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
- :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=hAU/eCijxBZO8nbM/sAU7ipHlJLprGMJlMr6ppg0vZU=;
- b=FZ3vpyle9wGGStaV7g+9EC1Qhj9Eci1LRQ0jc31JdD/FnD85apvH2HShbPkcJU0tp8
- HKnTfejFCBPVf7SqNbj35BqjJ0NK6NVJAZkkII5YkGTqEvqLYAjSzMGpt/2T0I/KzDZj
- Qe4AVWlnMxSMIGkLC4zq4Nkf0GEUPdGAsOboHWUfN6pgGO/eRO2DjZ+NijlFbHs2JgSk
- ESNpqrVrfCvrQOJqaIo05LxWhI3oTICINxMsxzS72HuI7oT+fzg19blF4jCuKbUw8jGD
- ULSa4zMEjuGYOsLjAquokwLKtxaHq/qNyRlqxAQxGxE30fJJ2t80tahPLuqiyueDb3Am
- T/Fw==
-X-Gm-Message-State: AOJu0YyBCwae2GqWswZQG6m4w4nJWs3Kko649ACqcGL6CPhgO6IpwlIi
- kjBJlg/lXVXDssbhrhhmdodR6Q==
-X-Google-Smtp-Source: AGHT+IHCbJgD+rKlDSEVH+m0Qd6NfGAvzzjdbr0A0vzdacpirOQqHY20UaDKVB3I8Q0dTspv3AeRnA==
-X-Received: by 2002:a05:600c:1c1e:b0:401:cf93:3103 with SMTP id
- j30-20020a05600c1c1e00b00401cf933103mr1830651wms.0.1694082601810; 
- Thu, 07 Sep 2023 03:30:01 -0700 (PDT)
-Received: from zen.linaroharston ([85.9.250.243])
- by smtp.gmail.com with ESMTPSA id
- y25-20020a7bcd99000000b0040210a27e29sm2091716wmj.32.2023.09.07.03.30.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Sep 2023 03:30:01 -0700 (PDT)
-Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 67C7C1FFBB;
- Thu,  7 Sep 2023 11:30:00 +0100 (BST)
-References: <20230907084604.253347-2-ajones@ventanamicro.com>
-User-agent: mu4e 1.11.17; emacs 29.1.50
-From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, palmer@dabbelt.com,
- bin.meng@windriver.com, peter.maydell@linaro.org, Daniel Henrique Barboza
- <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Subject: Re: [PATCH v2] docs/devel: Add cross-compiling doc
-Date: Thu, 07 Sep 2023 11:20:55 +0100
-In-reply-to: <20230907084604.253347-2-ajones@ventanamicro.com>
-Message-ID: <87sf7q1djr.fsf@linaro.org>
+ (Exim 4.90_1) (envelope-from <lersek@redhat.com>) id 1qeD9A-0003Ie-It
+ for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 07:26:07 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <lersek@redhat.com>) id 1qeD97-0005TW-TB
+ for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 07:26:04 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1694085960;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type;
+ bh=tOznAspLbWvrWJNx0UF9J7BdMS4ugfYBwqWesHRWmYU=;
+ b=G0Ih0T7pVBRE96BkO4b4mSbCAwdV1jOGsE5Og6e8sug57gFcMNOYR5pR6OIICozDk9Dm13
+ hDSgNvgg62udqgeJ+ATPtWsIuQofHRtzhkub3GJkllBV2ICBsbc7JKYlE6zHJBqF4WvbVm
+ jH/Xx0DRFxAHnoovlBbo6wl5mx/jlyM=
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-600-Tge6idwxPymFgHRAZ3L4gg-1; Thu, 07 Sep 2023 07:25:59 -0400
+X-MC-Unique: Tge6idwxPymFgHRAZ3L4gg-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.1])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 7048F29AB41A;
+ Thu,  7 Sep 2023 11:25:58 +0000 (UTC)
+Received: from [10.39.195.82] (unknown [10.39.195.82])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 141CA40C2070;
+ Thu,  7 Sep 2023 11:25:54 +0000 (UTC)
+Content-Type: multipart/mixed; boundary="------------ZR1m14MDFmAsD0TV80ymdGBL"
+Message-ID: <139b9697-5732-dafa-0942-6d93eed674c7@redhat.com>
+Date: Thu, 7 Sep 2023 13:25:53 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32c.google.com
+Content-Language: en-US
+To: qemu devel list <qemu-devel@nongnu.org>
+Cc: "Richard W.M. Jones" <rjones@redhat.com>,
+ Gerd Hoffmann <kraxel@redhat.com>, Sunil V L <sunilvl@ventanamicro.com>,
+ Andrew Jones <ajones@ventanamicro.com>,
+ "Warkentin, Andrei" <andrei.warkentin@intel.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
+From: Laszlo Ersek <lersek@redhat.com>
+Subject: riscv64 virt board crash upon startup
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.1
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=lersek@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,297 +82,137 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+This is a multi-part message in MIME format.
+--------------ZR1m14MDFmAsD0TV80ymdGBL
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Andrew Jones <ajones@ventanamicro.com> writes:
+This is with QEMU v8.1.0-391-gc152379422a2.
 
-> Add instructions for how to cross-compile QEMU for RISC-V. The
-> file is named generically because there's no reason not to collect
-> other architectures steps into the same file, especially because
-> several subsections like those for cross-compiling QEMU dependencies
-> using meson and a cross-file could be shared. Additionally, other
-> approaches to creating sysroots, such as with debootstrap, may be
-> documented in this file in the future.
->
-> Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
-> ---
->  docs/devel/cross-compiling.rst | 221 +++++++++++++++++++++++++++++++++
->  docs/devel/index-build.rst     |   1 +
->  2 files changed, 222 insertions(+)
->  create mode 100644 docs/devel/cross-compiling.rst
->
-> diff --git a/docs/devel/cross-compiling.rst b/docs/devel/cross-compiling.=
-rst
-> new file mode 100644
-> index 000000000000..1b988ba54e4c
-> --- /dev/null
-> +++ b/docs/devel/cross-compiling.rst
-> @@ -0,0 +1,221 @@
-> +.. SPDX-License-Identifier: GPL-2.0-or-later
-> +
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +Cross-compiling QEMU
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +
-> +Cross-compiling QEMU first requires the preparation of a cross-toolchain
-> +and the cross-compiling of QEMU's dependencies. While the steps will be
-> +similar across architectures, each architecture will have its own specif=
-ic
-> +recommendations.
+I use the command line from (scroll to the bottom):
 
-"some architectures" - most of the cross compile stuff is hidden away by
-the build system on systems with appropriate development libraries
-installed. I think we would be remiss if we didn't just outline the
-common case:
+  https://github.com/tianocore/edk2/commit/49f06b664018
 
-   ../configure --cross-prefix=3Driscv64-linux-gnu-
+(with "-full-screen" removed).
 
-I think we could make it clearer that in most cases you don't need to
-prepare and cross-compile a bunch of dependencies lest we send
-developers down a rabbit hole.
+The crash is as follows:
 
-Maybe build-system.rst be updated and this reference it for the common
-case?
+  Unexpected error in object_property_find_err() at ../../src/upstream/qemu/qom/object.c:1314:
+  qemu: Property 'qemu-fixed-text-console.device' not found
+  Aborted (core dumped)
 
-> This document collects architecture-specific procedures
-> +and hints that may be used to cross-compile QEMU, where typically the ho=
-st
-> +environment is x86.
-> +
-> +RISC-V
-> +=3D=3D=3D=3D=3D=3D
-> +
-> +Toolchain
-> +---------
-> +
-> +Select a root directory for the cross environment
-> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> +
-> +Export an environment variable pointing to a root directory
-> +for the cross environment. For example, ::
-> +
-> +  $ export PREFIX=3D"$HOME/opt/riscv"
-> +
-> +Create a work directory
-> +^^^^^^^^^^^^^^^^^^^^^^^
-> +
-> +Tools and several components will need to be downloaded and built. Create
-> +a directory for all the work, ::
-> +
-> +  $ export WORK_DIR=3D"$HOME/work/xqemu"
-> +  $ mkdir -p "$WORK_DIR"
-> +
-> +Select and prepare the toolchain
-> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> +
-> +Select a toolchain such as [riscv-toolchain]_ and follow its instructions
-> +for building and installing it to ``$PREFIX``, e.g. ::
-> +
-> +  $ cd "$WORK_DIR"
-> +  $ git clone https://github.com/riscv/riscv-gnu-toolchain
-> +  $ cd riscv-gnu-toolchain
-> +  $ ./configure --prefix=3D"$PREFIX"
-> +  $ make -j$(nproc) linux
-> +
-> +Set the ``$CROSS_COMPILE`` environment variable to the prefix of the cro=
-ss
-> +tools and add the tools to ``$PATH``, ::
-> +
-> +$ export CROSS_COMPILE=3Driscv64-unknown-linux-gnu-
-> +$ export PATH=3D"$PREFIX/bin:$PATH"
-> +
-> +Also set ``$SYSROOT``, where all QEMU cross-compiled dependencies will be
-> +installed. The toolchain installation likely created a 'sysroot' directo=
-ry
-> +at ``$PREFIX/sysroot``, which is the default location for most cross
-> +tools, making it a good location, ::
-> +
-> +  $ mkdir -p "$PREFIX/sysroot"
-> +  $ export SYSROOT=3D"$PREFIX/sysroot"
-> +
-> +Create a pkg-config wrapper
-> +^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> +
-> +The build processes of QEMU and some of its dependencies depend on
-> +pkg-config. Create a wrapper script for it which works for the cross
-> +environment: ::
-> +
-> +  $ cat <<EOF >"$PREFIX/bin/${CROSS_COMPILE}pkg-config"
-> +  #!/bin/sh
-> +
-> +  [ "\$SYSROOT" ] || exit 1
-> +
-> +  export PKG_CONFIG_PATH=3D
-> +  export PKG_CONFIG_LIBDIR=3D"\${SYSROOT}/usr/lib/pkgconfig:\${SYSROOT}/=
-usr/lib64/pkgconfig:\${SYSROOT}/usr/share/pkgconfig"
-> +
-> +  exec pkg-config "\$@"
-> +  EOF
-> +  $ chmod +x "$PREFIX/bin/${CROSS_COMPILE}pkg-config"
-> +
-> +Create a cross-file for meson builds
-> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> +
-> +meson setup, used by some of QEMU's dependencies, needs a "cross-file" to
-> +configure the cross environment. Create one, ::
-> +
-> +  $ cd "$WORK_DIR"
-> +  $ cat <<EOF >cross_file.txt
-> +  [host_machine]
-> +  system =3D 'linux'
-> +  cpu_family =3D 'riscv64'
-> +  cpu =3D 'riscv64'
-> +  endian =3D 'little'
-> +
-> +  [binaries]
-> +  c =3D '${CROSS_COMPILE}gcc'
-> +  cpp =3D '${CROSS_COMPILE}g++'
-> +  ar =3D '${CROSS_COMPILE}ar'
-> +  ld =3D '${CROSS_COMPILE}ld'
-> +  objcopy =3D '${CROSS_COMPILE}objcopy'
-> +  strip =3D '${CROSS_COMPILE}strip'
-> +  pkgconfig =3D '${CROSS_COMPILE}pkg-config'
-> +  EOF
-> +
-> +Cross-compile dependencies
-> +--------------------------
-> +
-> +glibc
-> +^^^^^
-> +
-> +If [riscv-toolchain]_ was selected for the toolchain then this step is
-> +already complete and glibc has already been installed into ``$SYSROOT``.
-> +Otherwise, cross-compile glibc and install it to ``$SYSROOT``.
-> +
-> +libffi
-> +^^^^^^
-> +
-> +::
-> +
-> +  $ cd "$WORK_DIR"
-> +  $ git clone https://gitlab.freedesktop.org/gstreamer/meson-ports/libff=
-i.git
-> +  $ cd libffi
-> +  $ meson setup --cross-file ../cross_file.txt --prefix=3D"$SYSROOT/usr"=
- _build
-> +  $ ninja -C _build
-> +  $ ninja -C _build install
-> +
-> +*Building libffi seperately avoids a compilation error generated when
-> +building it as a subproject of glib.*
-> +
-> +glib
-> +^^^^
-> +
-> +::
-> +
-> +  $ cd "$WORK_DIR"
-> +  $ git clone https://github.com/GNOME/glib.git
-> +  $ cd glib
-> +  $ meson setup --cross-file ../cross_file.txt --prefix=3D"$SYSROOT/usr"=
- _build
-> +  $ ninja -C _build
-> +  $ ninja -C _build install
-> +
-> +libslirp [optional]
-> +^^^^^^^^^^^^^^^^^^^
-> +
-> +::
-> +
-> +  $ cd "$WORK_DIR"
-> +  $ git clone https://gitlab.com/qemu-project/libslirp.git
-> +  $ cd libslirp
-> +  $ meson setup --cross-file ../cross_file.txt --prefix=3D"$SYSROOT/usr"=
- _build
-> +  $ ninja -C _build
-> +  $ ninja -C _build install
-> +
-> +pixman
-> +^^^^^^
-> +
-> +First ensure the 'libtool' package is installed, e.g.
-> +``sudo dnf install libtool`` or ``sudo apt install libtool``
-> +
-> +::
-> +
-> +  $ cd "$WORK_DIR"
-> +  $ git clone https://gitlab.freedesktop.org/pixman/pixman
-> +  $ cd pixman
-> +  $ ./autogen.sh
-> +  $ ./configure --prefix=3D"$SYSROOT/usr" --host=3Driscv64-unknown-linux=
--gnu
-> +  $ make -j$(nproc)
-> +  $ make install
-> +
-> +Cross-compile QEMU
-> +------------------
-> +
-> +::
-> +
-> +  $ cd "$WORK_DIR"
-> +  $ git clone https://gitlab.com/qemu-project/qemu.git
-> +  $ cd qemu
-> +  $ mkdir -p build/install_dir
-> +  $ cd build
-> +  $ ../configure --target-list=3Driscv64-softmmu --cross-prefix=3D$CROSS=
-_COMPILE --prefix=3D"$PWD/install_dir"
-> +  $ make -j$(nproc)
-> +  $ make install
-> +
-> +*Cross-compiling QEMU with different configurations may require more
-> +dependencies to be built and installed in the sysroot.*
-> +
-> +Running QEMU
-> +------------
-> +
-> +``build/install_dir`` may now be copied to the target and its bin
-> +directory may be added to the target user's PATH. Prior to running
-> +QEMU, ensure all the libraries it depends on are present, ::
-> +
-> +  $ ldd /path/to/bin/qemu-system-riscv64
-> +
-> +For example, it may necessary to install zlib libraries, e.g.
-> +``sudo dnf install zlib-devel`` or ``sudo apt install zlib1g-dev``
-> +
-> +Subsequent QEMU Cross-compiling
-> +-------------------------------
-> +
-> +Unless it's necessary to update and recompile the toolchain or
-> +dependencies, then most steps do not need to be repeated for subsequent
-> +compiles. Simply ensure the toolchain is in ``$PATH``, ``$SYSROOT`` poin=
-ts
-> +at the sysroot, and then follow the QEMU cross-compile steps in
-> +"Cross-compile QEMU". For example, ::
-> +
-> +  $ export PATH=3D"$HOME/opt/riscv/bin:$PATH"
-> +  $ export SYSROOT=3D"$HOME/opt/riscv/sysroot"
-> +  $ cd /path/to/qemu
-> +  $ mkdir -p build/install_dir
-> +  $ cd build
-> +  $ ../configure --target-list=3Driscv64-softmmu --cross-prefix=3Driscv6=
-4-unknown-linux-gnu- --prefix=3D"$PWD/install_dir"
-> +  $ make -j
-> +  $ make install
-> +
-> +References
-> +----------
-> +
-> +.. [riscv-toolchain] https://github.com/riscv/riscv-gnu-toolchain
-> diff --git a/docs/devel/index-build.rst b/docs/devel/index-build.rst
-> index 57e8d39d9856..d3c85927be24 100644
-> --- a/docs/devel/index-build.rst
-> +++ b/docs/devel/index-build.rst
-> @@ -9,6 +9,7 @@ the basics if you are adding new files and targets to the=
- build.
->     :maxdepth: 3
->=20=20
->     build-system
-> +   cross-compiling
->     kconfig
->     testing
->     acpi-bits
+(Full backtrace attached.)
 
+If I replace the "-device virtio-gpu-pci" option with "-nographic", then
+there is no crash; QEMU launches fine and the guest starts booting fine.
 
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
+I think this is a board-related problem; the riscv virt board code
+likely does not set up the console properly.
+
+Furthermore, I reckon this could be regression. When Sunil's above patch
+was committed to edk2 (2023-06-23), the graphical guest window must have
+worked still.
+
+Laszlo
+--------------ZR1m14MDFmAsD0TV80ymdGBL
+Content-Type: text/plain; charset=UTF-8; name="bt-full.txt"
+Content-Disposition: attachment; filename="bt-full.txt"
+Content-Transfer-Encoding: base64
+
+IzAgIDB4MDAwMDdmZmZmNGVhMTU0YyBpbiBfX3B0aHJlYWRfa2lsbF9pbXBsZW1lbnRhdGlv
+biAoKSBhdCAvbGliNjQvbGliYy5zby42CiMxICAweDAwMDA3ZmZmZjRlNTRkNDYgaW4gcmFp
+c2UgKCkgYXQgL2xpYjY0L2xpYmMuc28uNgojMiAgMHgwMDAwN2ZmZmY0ZTI4N2YzIGluIGFi
+b3J0ICgpIGF0IC9saWI2NC9saWJjLnNvLjYKIzMgIDB4MDAwMDU1NTU1NWZjNGE3NSBpbiBl
+cnJvcl9oYW5kbGUgKGVycnA9MHg1NTU1NTY3ODk3YjggPGVycm9yX2Fib3J0PiwgZXJyPTB4
+NTU1NTU3YWVlODYwKSBhdCAuLi8uLi9zcmMvdXBzdHJlYW0vcWVtdS91dGlsL2Vycm9yLmM6
+NDEKIzQgIDB4MDAwMDU1NTU1NWZjNGJmOCBpbiBlcnJvcl9zZXR2IChlcnJwPTB4NTU1NTU2
+Nzg5N2I4IDxlcnJvcl9hYm9ydD4sIHNyYz0weDU1NTU1NjIwNTA2OCAiLi4vLi4vc3JjL3Vw
+c3RyZWFtL3FlbXUvcW9tL29iamVjdC5jIiwgbGluZT0xMzE0LCBmdW5jPTB4NTU1NTU2MjA1
+OGEwIDxfX2Z1bmNfXy4yMD4gIm9iamVjdF9wcm9wZXJ0eV9maW5kX2VyciIsIGVycl9jbGFz
+cz1FUlJPUl9DTEFTU19HRU5FUklDX0VSUk9SLCBmbXQ9MHg1NTU1NTYyMDU0NTEgIlByb3Bl
+cnR5ICclcy4lcycgbm90IGZvdW5kIiwgYXA9MHg3ZmZmZmZmZmNlMjAsIHN1ZmZpeD0weDAp
+IGF0IC4uLy4uL3NyYy91cHN0cmVhbS9xZW11L3V0aWwvZXJyb3IuYzo4MgogICAgICAgIGVy
+ciA9IDB4NTU1NTU3YWVlODYwCiAgICAgICAgc2F2ZWRfZXJybm8gPSAyCiAgICAgICAgX19Q
+UkVUVFlfRlVOQ1RJT05fXyA9ICJlcnJvcl9zZXR2IgojNSAgMHgwMDAwNTU1NTU1ZmM0ZGNi
+IGluIGVycm9yX3NldGdfaW50ZXJuYWwgKGVycnA9MHg1NTU1NTY3ODk3YjggPGVycm9yX2Fi
+b3J0Piwgc3JjPTB4NTU1NTU2MjA1MDY4ICIuLi8uLi9zcmMvdXBzdHJlYW0vcWVtdS9xb20v
+b2JqZWN0LmMiLCBsaW5lPTEzMTQsIGZ1bmM9MHg1NTU1NTYyMDU4YTAgPF9fZnVuY19fLjIw
+PiAib2JqZWN0X3Byb3BlcnR5X2ZpbmRfZXJyIiwgZm10PTB4NTU1NTU2MjA1NDUxICJQcm9w
+ZXJ0eSAnJXMuJXMnIG5vdCBmb3VuZCIpIGF0IC4uLy4uL3NyYy91cHN0cmVhbS9xZW11L3V0
+aWwvZXJyb3IuYzoxMDUKICAgICAgICBhcCA9IHt7Z3Bfb2Zmc2V0ID0gNDgsIGZwX29mZnNl
+dCA9IDQ4LCBvdmVyZmxvd19hcmdfYXJlYSA9IDB4N2ZmZmZmZmZjZjA4LCByZWdfc2F2ZV9h
+cmVhID0gMHg3ZmZmZmZmZmNlNDB9fQojNiAgMHgwMDAwNTU1NTU1ZGJkMGFlIGluIG9iamVj
+dF9wcm9wZXJ0eV9maW5kX2VyciAob2JqPTB4NTU1NTU2OTY3MmEwLCBuYW1lPTB4NTU1NTU2
+MDgxMTdkICJkZXZpY2UiLCBlcnJwPTB4NTU1NTU2Nzg5N2I4IDxlcnJvcl9hYm9ydD4pIGF0
+IC4uLy4uL3NyYy91cHN0cmVhbS9xZW11L3FvbS9vYmplY3QuYzoxMzE0CiAgICAgICAgcHJv
+cCA9IDB4MAogICAgICAgIF9fZnVuY19fID0gIm9iamVjdF9wcm9wZXJ0eV9maW5kX2VyciIK
+IzcgIDB4MDAwMDU1NTU1NWRiZDM2MSBpbiBvYmplY3RfcHJvcGVydHlfZ2V0IChvYmo9MHg1
+NTU1NTY5NjcyYTAsIG5hbWU9MHg1NTU1NTYwODExN2QgImRldmljZSIsIHY9MHg1NTU1NTZh
+ZDA1ZDAsIGVycnA9MHg1NTU1NTY3ODk3YjggPGVycm9yX2Fib3J0PikgYXQgLi4vLi4vc3Jj
+L3Vwc3RyZWFtL3FlbXUvcW9tL29iamVjdC5jOjEzODkKICAgICAgICBlcnIgPSAweDAKICAg
+ICAgICBwcm9wID0gMHg3ZmZmZjdmZmQwMDAgPF9ydGxkX2xvY2FsPgogICAgICAgIF9fZnVu
+Y19fID0gIm9iamVjdF9wcm9wZXJ0eV9nZXQiCiM4ICAweDAwMDA1NTU1NTVkYzFhNDQgaW4g
+b2JqZWN0X3Byb3BlcnR5X2dldF9xb2JqZWN0IChvYmo9MHg1NTU1NTY5NjcyYTAsIG5hbWU9
+MHg1NTU1NTYwODExN2QgImRldmljZSIsIGVycnA9MHg1NTU1NTY3ODk3YjggPGVycm9yX2Fi
+b3J0PikgYXQgLi4vLi4vc3JjL3Vwc3RyZWFtL3FlbXUvcW9tL3FvbS1xb2JqZWN0LmM6NDAK
+ICAgICAgICByZXQgPSAweDAKICAgICAgICB2ID0gMHg1NTU1NTZhZDA1ZDAKIzkgIDB4MDAw
+MDU1NTU1NWRiZDYzNSBpbiBvYmplY3RfcHJvcGVydHlfZ2V0X3N0ciAob2JqPTB4NTU1NTU2
+OTY3MmEwLCBuYW1lPTB4NTU1NTU2MDgxMTdkICJkZXZpY2UiLCBlcnJwPTB4NTU1NTU2Nzg5
+N2I4IDxlcnJvcl9hYm9ydD4pIGF0IC4uLy4uL3NyYy91cHN0cmVhbS9xZW11L3FvbS9vYmpl
+Y3QuYzoxNDM3CiAgICAgICAgcmV0ID0gMHg3ZmZmZmZmZmQwODAKICAgICAgICBxc3RyaW5n
+ID0gMHg1NTU1NTVkYmRmNWQgPG9iamVjdF9wcm9wZXJ0eV9nZXRfdWludCsyNTI+CiAgICAg
+ICAgcmV0dmFsID0gMHg1NTU1NTdiMjUzYjAgIlwzMDUnXDM3M1wwMDJQVSIKICAgICAgICBf
+X2Z1bmNfXyA9ICJvYmplY3RfcHJvcGVydHlfZ2V0X3N0ciIKIzEwIDB4MDAwMDU1NTU1NWRi
+ZDdjMCBpbiBvYmplY3RfcHJvcGVydHlfZ2V0X2xpbmsgKG9iaj0weDU1NTU1Njk2NzJhMCwg
+bmFtZT0weDU1NTU1NjA4MTE3ZCAiZGV2aWNlIiwgZXJycD0weDU1NTU1Njc4OTdiOCA8ZXJy
+b3JfYWJvcnQ+KSBhdCAuLi8uLi9zcmMvdXBzdHJlYW0vcWVtdS9xb20vb2JqZWN0LmM6MTQ3
+MAogICAgICAgIHN0ciA9IDB4ZjAzNmVkNzY2N2JkOTUwMCA8ZXJyb3I6IENhbm5vdCBhY2Nl
+c3MgbWVtb3J5IGF0IGFkZHJlc3MgMHhmMDM2ZWQ3NjY3YmQ5NTAwPgogICAgICAgIHRhcmdl
+dCA9IDB4NTU1NTU3YjI1M2IwCiAgICAgICAgX19mdW5jX18gPSAib2JqZWN0X3Byb3BlcnR5
+X2dldF9saW5rIgojMTEgMHgwMDAwNTU1NTU1ODg5MmMxIGluIHFlbXVfY29uc29sZV9pc19t
+dWx0aWhlYWQgKGRldj0weDU1NTU1NzE3MzA5MCkgYXQgLi4vLi4vc3JjL3Vwc3RyZWFtL3Fl
+bXUvdWkvY29uc29sZS5jOjIzNzYKICAgICAgICBjb24gPSAweDU1NTU1Njk2NzJhMAogICAg
+ICAgIG9iaiA9IDB4NTU1NTU3MTczMDkwCiAgICAgICAgZiA9IDAKICAgICAgICBoID0gMAoj
+MTIgMHgwMDAwNTU1NTU1ODg5M2E5IGluIHFlbXVfY29uc29sZV9nZXRfbGFiZWwgKGNvbj0w
+eDU1NTU1NmJmN2MwMCkgYXQgLi4vLi4vc3JjL3Vwc3RyZWFtL3FlbXUvdWkvY29uc29sZS5j
+OjI0MDIKICAgICAgICBkZXYgPSAweDU1NTU1NzE3MzA5MAogICAgICAgIG11bHRpaGVhZCA9
+IGZhbHNlCiAgICAgICAgYyA9IDB4NTU1NTU2YmY3YzAwCiMxMyAweDAwMDA1NTU1NTViYTVm
+ZGYgaW4gZ2RfdmNfZ2Z4X2luaXQgKHM9MHg1NTU1NTdhNDU0NTAsIHZjPTB4NTU1NTU3YTQ1
+NGYwLCBjb249MHg1NTU1NTZiZjdjMDAsIGlkeD0wLCBncm91cD0weDAsIHZpZXdfbWVudT0w
+eDU1NTU1N2NlYTU4MCkgYXQgLi4vLi4vc3JjL3Vwc3RyZWFtL3FlbXUvdWkvZ3RrLmM6MjEz
+MAogICAgICAgIHpvb21fdG9fZml0ID0gZmFsc2UKICAgICAgICBpID0gMjE4NDUKIzE0IDB4
+MDAwMDU1NTU1NWJhNjgyOCBpbiBnZF9jcmVhdGVfbWVudV92aWV3IChzPTB4NTU1NTU3YTQ1
+NDUwLCBvcHRzPTB4NTU1NTU2NzVmNTYwIDxkcHk+KSBhdCAuLi8uLi9zcmMvdXBzdHJlYW0v
+cWVtdS91aS9ndGsuYzoyMjk2CiAgICAgICAgZ3JvdXAgPSAweDAKICAgICAgICB2aWV3X21l
+bnUgPSAweDU1NTU1N2NlYTU4MAogICAgICAgIHNlcGFyYXRvciA9IDB4NTU1NTU3Y2VlNmYw
+CiAgICAgICAgY29uID0gMHg1NTU1NTZiZjdjMDAKICAgICAgICB2YyA9IDAKIzE1IDB4MDAw
+MDU1NTU1NWJhNmE5NSBpbiBnZF9jcmVhdGVfbWVudXMgKHM9MHg1NTU1NTdhNDU0NTAsIG9w
+dHM9MHg1NTU1NTY3NWY1NjAgPGRweT4pIGF0IC4uLy4uL3NyYy91cHN0cmVhbS9xZW11L3Vp
+L2d0ay5jOjIzMzYKICAgICAgICBzZXR0aW5ncyA9IDB4N2ZmZmZmZmZkMjcwCiMxNiAweDAw
+MDA1NTU1NTViYTZlZTQgaW4gZ3RrX2Rpc3BsYXlfaW5pdCAoZHM9MHg1NTU1NTY4N2MzOTAs
+IG9wdHM9MHg1NTU1NTY3NWY1NjAgPGRweT4pIGF0IC4uLy4uL3NyYy91cHN0cmVhbS9xZW11
+L3VpL2d0ay5jOjI0MTQKICAgICAgICB2YyA9IDB4NTU1NTU3YTQzZWEwCiAgICAgICAgcyA9
+IDB4NTU1NTU3YTQ1NDUwCiAgICAgICAgd2luZG93X2Rpc3BsYXkgPSAweDU1NTU1NmE5MzEy
+MAogICAgICAgIHRoZW1lID0gMHg1NTU1NTZhZTcxYjAKICAgICAgICBkaXIgPSAweDU1NTU1
+N2IzMzI5MCAiIgogICAgICAgIF9fUFJFVFRZX0ZVTkNUSU9OX18gPSAiZ3RrX2Rpc3BsYXlf
+aW5pdCIKIzE3IDB4MDAwMDU1NTU1NTg4OWY0YSBpbiBxZW11X2Rpc3BsYXlfaW5pdCAoZHM9
+MHg1NTU1NTY4N2MzOTAsIG9wdHM9MHg1NTU1NTY3NWY1NjAgPGRweT4pIGF0IC4uLy4uL3Ny
+Yy91cHN0cmVhbS9xZW11L3VpL2NvbnNvbGUuYzoyNjg2CiAgICAgICAgX19QUkVUVFlfRlVO
+Q1RJT05fXyA9ICJxZW11X2Rpc3BsYXlfaW5pdCIKIzE4IDB4MDAwMDU1NTU1NWIxMDlmMCBp
+biBxZW11X2luaXRfZGlzcGxheXMgKCkgYXQgLi4vLi4vc3JjL3Vwc3RyZWFtL3FlbXUvc29m
+dG1tdS92bC5jOjI1MjEKICAgICAgICBkcyA9IDB4NTU1NTU2ODdjMzkwCiMxOSAweDAwMDA1
+NTU1NTViMTM2NzMgaW4gcWVtdV9pbml0IChhcmdjPTI1LCBhcmd2PTB4N2ZmZmZmZmZkNTY4
+KSBhdCAuLi8uLi9zcmMvdXBzdHJlYW0vcWVtdS9zb2Z0bW11L3ZsLmM6MzY0NAogICAgICAg
+IG9wdHMgPSAweDU1NTU1Njg3ZGNkMAogICAgICAgIGljb3VudF9vcHRzID0gMHgwCiAgICAg
+ICAgYWNjZWxfb3B0cyA9IDB4MAogICAgICAgIG9saXN0ID0gMHg1NTU1NTY4MmNjNzgKICAg
+ICAgICBvcHRpbmQgPSAyNQogICAgICAgIG9wdGFyZyA9IDB4N2ZmZmZmZmZkYzI2ICJ2aXJ0
+aW8tbmV0LXBjaSxuZXRkZXY9bmV0MCIKICAgICAgICBtYWNoaW5lX2NsYXNzID0gMHg1NTU1
+NTZhNThhMzAKICAgICAgICB1c2VyY29uZmlnID0gdHJ1ZQogICAgICAgIHZtc3RhdGVfZHVt
+cF9maWxlID0gMHgwCiAgICAgICAgX19mdW5jX18gPSAicWVtdV9pbml0IgogICAgICAgIF9f
+UFJFVFRZX0ZVTkNUSU9OX18gPSAicWVtdV9pbml0IgojMjAgMHgwMDAwNTU1NTU1ODczOTMz
+IGluIG1haW4gKGFyZ2M9MjUsIGFyZ3Y9MHg3ZmZmZmZmZmQ1NjgpIGF0IC4uLy4uL3NyYy91
+cHN0cmVhbS9xZW11L3NvZnRtbXUvbWFpbi5jOjQ3Cg==
+
+--------------ZR1m14MDFmAsD0TV80ymdGBL--
+
 
