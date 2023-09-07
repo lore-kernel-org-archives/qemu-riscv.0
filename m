@@ -4,79 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ECD9EE14D3
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 06:25:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7591FEE14D0
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 07:18:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qe8Rm-0003za-OD; Thu, 07 Sep 2023 02:24:59 -0400
+	id 1qe9H1-0001m1-SC; Thu, 07 Sep 2023 03:17:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
- id 1qe8Ri-0003z1-Pm
- for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 02:24:56 -0400
-Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qe9Gi-0001kQ-LZ
+ for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 03:17:38 -0400
+Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
- id 1qe8Rd-0005RO-Q4
- for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 02:24:53 -0400
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-1c1e128135aso5011935ad.3
- for <qemu-riscv@nongnu.org>; Wed, 06 Sep 2023 23:24:49 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qe9GP-0000E0-UO
+ for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 03:17:30 -0400
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-401da71b83cso7034245e9.2
+ for <qemu-riscv@nongnu.org>; Thu, 07 Sep 2023 00:16:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1694067888; x=1694672688; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=45JMhq6t+j8AdylZLsjCmKllHxj4NWcg/3JdETtHIwE=;
- b=Npjp03DPgUmkvLmWlVjUNv0dBygwCmrBvA5KYdtBwXeuUa6/VKHh7lJJNHrdJooTA1
- mehW+o8lVFRt9VZzY0Kg7/Q24fG1qQAm3x5PfHSPGclmYpMLO6jeBPQGsO1p9lxYJ+0J
- l4gppQ6kzsxCdzYBdTBv4STQkd6JlbUZrc00kdVrCnqMoWqGbfxE8Xh6BiJk2E+B61mE
- oA8p0w8cI/YxOPVth/ZjQFSuIIjjDcNmeAHA0m6us3yWyFEqH0aphgOYuFILFzS9PlBT
- GxHY6Z3fbd1ErezjgdKQPs3EEeUV3ACgx3JPMVj8jCzFK61zpxkeKn4Nn81OV9dfLdC6
- ap3g==
+ d=linaro.org; s=google; t=1694071007; x=1694675807; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=oc3lHUeurO7vGjxw+biDlYs90UYXbFJj5ipqCgg2zvo=;
+ b=Uoh/cOkXuUSqD2ju+OHRu/w3j+p+ja1GxQ4kNf3xnFsouYg6J6Wn1OtfXOkQJS1Fnp
+ LYFigNtpjyiK4GmcM3ggQl2tsTwI3Z+IrB7hlmMfUXlAN9OdN1KvHETiVRWp7xRUyMZL
+ h7tT5DK5LWktWCZFuAXCY265EI7HxsdFyZmX9Nqj5Yz+JpikwHxTnHwaioBtft4Zk0Im
+ ulDcl+YEbptTwOF4RAtDdz5QNwYZXEoQkmMFjl9aRJzh7mgAl2xLtgs4yq02kSW2MjIB
+ 4EFzxUd2rn8pJ8L27Hmiy1Fa/ogfNicuR2Q7bbd4LH+Ye4g6yqRzo5eXEC3KvivrixDF
+ MhnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694067888; x=1694672688;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=45JMhq6t+j8AdylZLsjCmKllHxj4NWcg/3JdETtHIwE=;
- b=PTqQoZzmJmUtWn4xYqUPUwW08llW0N5vI3VZdnncMEU61A2043oUqSUbmkeW//Vdxb
- lrAVfu0O0QqdGVxHW2mEqfJbrX3w5aaQGTjijE5vCDYNPtw1ppBHOLCgUgm9L7T2elXK
- zrvmWAqX/0NWOo7BBO9wWGzylBm4fKNyj47Ae2+uN4j2VxzJJbO35Cb4DEx4xRMgMeJx
- crEaO2BbHUSqODftraSvSzr/BRgECSzsFc4yxU6n3sewKorAhXXo5X21kBFzYhpPyI4G
- 8dJsn76nwkPSvDGf27LOBPKzPDfNMlLgQiXKb7pmLdVwtgNQHXcOBivwRflZAxlRTKfP
- slDw==
-X-Gm-Message-State: AOJu0YxRao8KMoAfbzFkYjimCHr5HXISSktVcN9JWptyAug0M1ckAWsj
- dOyqTIordWMInGLa0bbmoQDnLYc+zHb4o3dBmRv8PBp8LZk=
-X-Google-Smtp-Source: AGHT+IFsuoJsS/Uy07cXk2ffQF4nkV5Sqd5/cikR519R3VO/JaDlVomwUanKgtZWbl5BVR+Mi7mldw==
-X-Received: by 2002:a17:903:22c7:b0:1b9:c207:1802 with SMTP id
- y7-20020a17090322c700b001b9c2071802mr19409525plg.0.1694067887774; 
- Wed, 06 Sep 2023 23:24:47 -0700 (PDT)
-Received: from mchitale-vm.. ([106.195.11.23])
- by smtp.googlemail.com with ESMTPSA id
- ik21-20020a170902ab1500b001b9f032bb3dsm12299642plb.3.2023.09.06.23.24.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Sep 2023 23:24:47 -0700 (PDT)
-From: Mayuresh Chitale <mchitale@ventanamicro.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Mayuresh Chitale <mchitale@ventanamicro.com>,
-	alistair.francis@wdc.com
-Subject: [PATCH] target/riscv: pmp: Clear pmp/smepmp bits on reset
-Date: Thu,  7 Sep 2023 11:54:40 +0530
-Message-Id: <20230907062440.1174224-1-mchitale@ventanamicro.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20221208; t=1694071007; x=1694675807;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=oc3lHUeurO7vGjxw+biDlYs90UYXbFJj5ipqCgg2zvo=;
+ b=YdCMPJhldub/g/RDxWvhBDlWfJCFWcKt36COXTI91EsDteZT0/OcfvX6PD6KwbJd16
+ n1W4Xyw7S0l7HS8cpRdtV6vHUO+R+r2EwLf3hFmihgIXUOaEcUFZIRbZ6vaz+x063QbT
+ 1UAOvmQ81CtHi7FzTIt8/ovjp8IZTTbi3tTZJp13FSfx9CpjEiD4LG5slUR+0JKuF5Uv
+ lzg1rR4ZYRf92gbHZD8uj3iJqKzGEyd6zo9+7iY2gqVaPdWWLh2P4ZgnhgH4ZI4qUOXc
+ s4pQDY3aECV4wF8qBlCMEKMld7ykUdcWoQ/7kQUL3PX4OcEjyJFKoTPwArjBCcU2abFy
+ 05Dw==
+X-Gm-Message-State: AOJu0YwgqGxW1aelLTZ8m24VCKcJWQVUJwyr04MKbdHf6vv7ksn2+b2s
+ c+blxM3EamVE6hN+mXcFHOt2rA==
+X-Google-Smtp-Source: AGHT+IG4h68aclCHGZHWLvYe8BsVt0cEOYP6Qscq1LUGhKKEQws2mZDhnYrdk49tkNDR/t6+T0MjYQ==
+X-Received: by 2002:a05:6000:881:b0:317:ed01:dc48 with SMTP id
+ cs1-20020a056000088100b00317ed01dc48mr4458248wrb.9.1694071007001; 
+ Thu, 07 Sep 2023 00:16:47 -0700 (PDT)
+Received: from [192.168.69.115] (176-131-222-226.abo.bbox.fr.
+ [176.131.222.226]) by smtp.gmail.com with ESMTPSA id
+ c7-20020a5d4147000000b0031de43fe9bfsm22683297wrq.0.2023.09.07.00.16.44
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 07 Sep 2023 00:16:46 -0700 (PDT)
+Message-ID: <efc85591-fd5e-c6e7-ab3d-220d5ca57aa5@linaro.org>
+Date: Thu, 7 Sep 2023 09:16:43 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
- envelope-from=mchitale@ventanamicro.com; helo=mail-pl1-x62b.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.15.0
+Subject: Re: [PATCH] hw/riscv: split RAM into low and high memory
+Content-Language: en-US
+To: "Wu, Fei" <fei2.wu@intel.com>, Andrew Jones <ajones@ventanamicro.com>
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Andrei Warkentin <andrei.warkentin@intel.com>, qemu-arm
+ <qemu-arm@nongnu.org>, Alex Williamson <alex.williamson@redhat.com>,
+ =?UTF-8?Q?C=c3=a9dric_Le_Goater?= <clg@redhat.com>,
+ Eric Auger <eric.auger@redhat.com>
+References: <20230731015317.1026996-1-fei2.wu@intel.com>
+ <20230803-3855259bbabb934c247c5607@orel>
+ <d654810c-4f4f-7491-7711-c6076f42dcae@intel.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+In-Reply-To: <d654810c-4f4f-7491-7711-c6076f42dcae@intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32d.google.com
+X-Spam_score_int: -35
+X-Spam_score: -3.6
+X-Spam_bar: ---
+X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.473,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -92,74 +101,67 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-As per the Priv and Smepmp specifications, certain bits such as the 'L'
-bit of pmp entries and mseccfg.MML can only be cleared upon reset and it
-is necessary to do so to allow 'M' mode firmware to correctly reinitialize
-the pmp/smpemp state across reboots.
+Widening Cc to ARM/VFIO.
 
-Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
----
- target/riscv/cpu.c | 11 +++++++++++
- target/riscv/pmp.c | 10 ++++++++++
- target/riscv/pmp.h |  1 +
- 3 files changed, 22 insertions(+)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 0843461660..77ed653b8d 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -896,6 +896,17 @@ static void riscv_cpu_reset_hold(Object *obj)
-     }
-     /* mmte is supposed to have pm.current hardwired to 1 */
-     env->mmte |= (EXT_STATUS_INITIAL | MMTE_M_PM_CURRENT);
-+
-+    /*
-+     * Clear mseccfg and unlock all the PMP entries upon reset.
-+     * This is allowed as per the priv and smepmp specifications.
-+     * and is needed to clear stale entries across reboots.
-+     */
-+    if (riscv_cpu_cfg(env)->ext_smepmp) {
-+        env->mseccfg = 0;
-+    }
-+
-+    pmp_unlock_entries(env);
- #endif
-     env->xl = riscv_cpu_mxl(env);
-     riscv_cpu_update_mask(env);
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 3f6c8cf08d..f3eb6e6585 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -131,6 +131,16 @@ static bool pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
-     return false;
- }
- 
-+void pmp_unlock_entries(CPURISCVState *env)
-+{
-+    uint32_t pmp_num = pmp_get_num_rules(env);
-+    int i;
-+
-+    for (i = 0; i < pmp_num; i++) {
-+        env->pmp_state.pmp[i].cfg_reg &= ~PMP_LOCK;
-+    }
-+}
-+
- static void pmp_decode_napot(target_ulong a, target_ulong *sa,
-                              target_ulong *ea)
- {
-diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
-index cf5c99f8e6..2c5ec3cdf1 100644
---- a/target/riscv/pmp.h
-+++ b/target/riscv/pmp.h
-@@ -81,6 +81,7 @@ void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index);
- void pmp_update_rule_nums(CPURISCVState *env);
- uint32_t pmp_get_num_rules(CPURISCVState *env);
- int pmp_priv_to_page_prot(pmp_priv_t pmp_priv);
-+void pmp_unlock_entries(CPURISCVState *env);
- 
- #define MSECCFG_MML_ISSET(env) get_field(env->mseccfg, MSECCFG_MML)
- #define MSECCFG_MMWP_ISSET(env) get_field(env->mseccfg, MSECCFG_MMWP)
--- 
-2.34.1
+On 4/8/23 11:15, Wu, Fei wrote:
+> On 8/3/2023 11:07 PM, Andrew Jones wrote:
+>> On Mon, Jul 31, 2023 at 09:53:17AM +0800, Fei Wu wrote:
+>>> riscv virt platform's memory started at 0x80000000 and
+>>> straddled the 4GiB boundary. Curiously enough, this choice
+>>> of a memory layout will prevent from launching a VM with
+>>> a bit more than 2000MiB and PCIe pass-thru on an x86 host, due
+>>> to identity mapping requirements for the MSI doorbell on x86,
+>>> and these (APIC/IOAPIC) live right below 4GiB.
+>>>
+>>> So just split the RAM range into two portions:
+>>> - 1 GiB range from 0x80000000 to 0xc0000000.
+>>> - The remainder at 0x100000000
+>>>
+>>> ...leaving a hole between the ranges.
+>>
+>> Can you elaborate on the use case? Maybe provide details of the host
+>> system and the QEMU command line? I'm wondering why we didn't have
+>> any problems with the arm virt machine type. Has nobody tried this
+>> use case with that? Is the use case something valid for riscv, but
+>> not arm?
+>>
+> Firstly we have to enable pcie passthru on host, find the device groups,
+> e.g. the vga card, and add their pci ids to host kernel cmdline:
+> 	vfio-pci.ids=10de:0f02,10de:0e08
+> 
+> then start vm through qemu as follows:
+> $Q -machine virt -m 4G -smp 4 -nographic \
+>    -bios /usr/lib/riscv64-linux-gnu/opensbi/generic/fw_jump.elf \
+>    -kernel ./vmlinuz -initrd initrd.img -append "root=/dev/vda1 rw" \
+>    -drive
+> file=ubuntu-22.04.1-preinstalled-server-riscv64+unmatched.img,if=virtio,format=raw
+> \
+>    -device vfio-pci,host=01:00.0 -device vfio-pci,host=01:00.1 \
+>    -netdev user,id=vnet,hostfwd=:127.0.0.1:2223-:22 -device
+> virtio-net-pci,netdev=vnet
+> 
+> Without this patch, qemu exits immediately instead of boots up.
+> 
+> Just tried pcie passthru on arm, it cannot handle 4G memory either.
+> $Q -m 4G -smp 4 -cpu max -M virt -nographic \
+>    -pflash /usr/share/AAVMF/AAVMF_CODE.fd -pflash flash1.img \
+>    -drive if=none,file=ubuntu-22.04-server-cloudimg-arm64.img,id=hd0 \
+>    -device virtio-blk-device,drive=hd0 \
+>    -device vfio-pci,host=01:00.0 -device vfio-pci,host=01:00.1
+> 
+> qemu-system-aarch64: -device vfio-pci,host=01:00.0: VFIO_MAP_DMA failed:
+> Invalid argument
+> qemu-system-aarch64: -device vfio-pci,host=01:00.0: vfio 0000:01:00.0:
+> failed to setup container for group 11: memory listener initialization
+> failed: Region mach-virt.ram: vfio_dma_map(0x55de3c2a97f0, 0x40000000,
+> 0x100000000, 0x7f8fcbe00000) = -22 (Invalid argument)
+> 
+> Thanks,
+> Fei.
+> 
+>> Thanks,
+>> drew
+> 
+> 
 
 
