@@ -4,90 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11BA9EC8722
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 12:30:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8A8CEC8722
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 12:31:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qeE9O-0001rL-Ij; Thu, 07 Sep 2023 08:30:36 -0400
+	id 1qeEAd-0002ec-0F; Thu, 07 Sep 2023 08:31:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qeE9I-0001qc-U9
- for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 08:30:17 -0400
-Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1qeEAQ-0002S1-NR
+ for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 08:31:28 -0400
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qeE93-0006TR-Iu
- for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 08:30:16 -0400
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-52e828ad46bso1190199a12.1
- for <qemu-riscv@nongnu.org>; Thu, 07 Sep 2023 05:30:00 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1qeEAN-0007bo-2z
+ for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 08:31:25 -0400
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-31f737b8b69so372701f8f.3
+ for <qemu-riscv@nongnu.org>; Thu, 07 Sep 2023 05:31:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694089799; x=1694694599; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=2KjSP2EwBUdECeTIgYlH4EXAAjspyPQU/7HbrLq3ph4=;
- b=n1FEWM+5ffwV87CWx4ZxbL31raMVm8kSt+D4zPHHfhQaeGDYKBGqefDURIjsNnD4D2
- GfQDkGUrk58rRR8R3CsenL6Ebe0ktu8YxJ1sd7+QNNW+aGnfWeGOea0yPowwfWUoibUH
- VuWfyengYS6CgwLaH9ho6jlbAgux7EFMqyisQ+uT9h+nVci3tT629fFMrb5IJn0ub9cI
- 4TRJQmjU48HvokqZtaRJ1iOKTuih+l8b+ydLRVjpb3iKqXdpNX9irYXY+VAWcKD0hyFB
- 8iF4/RYpLm6iLCJja0tVZbWWH7NymvG+8ONG+GR7cJHxpgXODLnp1Qt8+eLeDF4ZV6OX
- GmSA==
+ d=ventanamicro.com; s=google; t=1694089880; x=1694694680; darn=nongnu.org;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=lS5AVmG1mGfnRWRcE7iGI0zXLsxr6HHGOJcea+3Df2Q=;
+ b=FrxPSB1N/+8Bc46bI+S6/+Lxaz/3tVnv+PrkChabrkvSqJ+83n7TQJCITkXM1HhXSH
+ c9YpdlXha9UEGvH4rDO0KuIlEtHXeLWovLcKl4yIGQr8bP4UHdssmoPAX+xvOQt8FM1C
+ tyqbHduOQ/vbBEwpA6KYQ85IxgOAw21RWnL/GNbnOev2AVSvIKHx/UEZ5dz5P5CV0u4Z
+ 9kYkfS9O/Toc1/+HI4G4ZGzSfCIpoLxMgpcyOMBdEfp4G2RDlsDXaKxjPX8o6DCA7yKR
+ X+MfnqxMWnQ1kdBbfZNSYCLYhTesN2ATHNPeSLlApZb/UdK0K95aEyr2ZXp6ZefENN17
+ 49vQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694089799; x=1694694599;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20221208; t=1694089880; x=1694694680;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=2KjSP2EwBUdECeTIgYlH4EXAAjspyPQU/7HbrLq3ph4=;
- b=WVuvTRUG78GX1LMt4JsI+JFfYdwc9HQTEjDHmvb4n3Gt8ltdz7ALnavutkMkxQ8Eys
- diTZPKsTup3tB31+F2QkySxx5q+U2wKx5LVnrTE5eKgThTJMSautIF7g7hh9GwU8NLJr
- Hm3whQxNfhVsD738nymC2wfZzHfy9HEzoSDpfkYa47gG1o0g6B2gtstRoT6OHdGjkKvC
- Zc7783ZzG4BpV6Nr4a4yA3/0PoWSAZznrNAC30hEkHSxPJb0n9KvFRdmTCjN3ubX77LE
- ZwLDc1S+yqjht8yV2kvdsTNBtCSrfaQ/QLAtk9dutDutcnam+5PAzi9CezA6r8HZ2zNB
- dhgg==
-X-Gm-Message-State: AOJu0YwhIgOVC4AjJCsp64xFqbPaCOAnFzDTHVB8wUUDFzTry/jLcX5J
- crr01pwW7TrfKvh/WMz8+Aj6+Q==
-X-Google-Smtp-Source: AGHT+IHkgpAVAHwNw+Wz3/117ucGJT9J4Io2vgHOi1nk6iAUleopczSIb+eXIebiWNy51a/YC3PyUg==
-X-Received: by 2002:a17:906:295:b0:9a9:e5bb:edc5 with SMTP id
- 21-20020a170906029500b009a9e5bbedc5mr1023122ejf.65.1694089798795; 
- Thu, 07 Sep 2023 05:29:58 -0700 (PDT)
-Received: from [192.168.69.115] (176-131-222-226.abo.bbox.fr.
- [176.131.222.226]) by smtp.gmail.com with ESMTPSA id
- v14-20020a170906338e00b00992b8d56f3asm10384194eja.105.2023.09.07.05.29.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 07 Sep 2023 05:29:58 -0700 (PDT)
-Message-ID: <1398e971-8115-13e1-6ee4-4c46df0814dc@linaro.org>
-Date: Thu, 7 Sep 2023 14:29:55 +0200
+ bh=lS5AVmG1mGfnRWRcE7iGI0zXLsxr6HHGOJcea+3Df2Q=;
+ b=b1xBHfi3avuvPCJ3jI/lX+cZU6aWskymh52nQkKrwPdPHe/BoDJbw1YxbshhIc9/8U
+ 7+hU/aprkzTKn1m4BCzsEjYfJ9/e3UI7yr1cj21O5cuXyh5s1zysiKXoXaA6t+yUOy5d
+ s3jlYg//4lWvi5NBBtEuqS1WERnDJUCUaRhI/GQIUKa4gzZ7nugbGVOL6Gd9fL52sslQ
+ w1Y/+xrI3L7mWE04CxvGelRkC215VOE4LM0rFZ6cZ+UxeXv26dKeCVjRC4Hcyu3YXNhl
+ pAsJ4fcWOJBUSnEK2v7f/lcCwN6GH4+LSuJ7JsHRL0ArdIyjmgDNXpaKouDFZPthKGTN
+ IH3g==
+X-Gm-Message-State: AOJu0Yw70LOjmSJCN7vpRqHLnkgsnWfU/DpW0TmPiRpaiRZY6CoPhJrm
+ 44sEwrfDKzQ6vZnNio3zotNWtA==
+X-Google-Smtp-Source: AGHT+IFp6REPghLc4J97XMM/U7vMzGvG0saFE+teHjWJQgBLVXiN/jSR4/RbEujqW20zhHcMRTz7yw==
+X-Received: by 2002:adf:f6cc:0:b0:317:5c36:913b with SMTP id
+ y12-20020adff6cc000000b003175c36913bmr4692234wrp.48.1694089880483; 
+ Thu, 07 Sep 2023 05:31:20 -0700 (PDT)
+Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
+ by smtp.gmail.com with ESMTPSA id
+ s12-20020a5d4ecc000000b0031423a8f4f7sm23401316wrv.56.2023.09.07.05.31.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 07 Sep 2023 05:31:19 -0700 (PDT)
+Date: Thu, 7 Sep 2023 14:31:18 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, palmer@dabbelt.com, 
+ bin.meng@windriver.com, peter.maydell@linaro.org, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Subject: Re: [PATCH v2] docs/devel: Add cross-compiling doc
+Message-ID: <20230907-6262b40a0a352bdce53999e3@orel>
+References: <20230907084604.253347-2-ajones@ventanamicro.com>
+ <87sf7q1djr.fsf@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.15.0
-Subject: Re: riscv64 virt board crash upon startup
-Content-Language: en-US
-To: Laszlo Ersek <lersek@redhat.com>, qemu devel list
- <qemu-devel@nongnu.org>, =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?=
- <marcandre.lureau@redhat.com>
-Cc: "Richard W.M. Jones" <rjones@redhat.com>,
- Gerd Hoffmann <kraxel@redhat.com>, Sunil V L <sunilvl@ventanamicro.com>,
- Andrew Jones <ajones@ventanamicro.com>,
- "Warkentin, Andrei" <andrei.warkentin@intel.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
-References: <139b9697-5732-dafa-0942-6d93eed674c7@redhat.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <139b9697-5732-dafa-0942-6d93eed674c7@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::529;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x529.google.com
-X-Spam_score_int: -35
-X-Spam_score: -3.6
-X-Spam_bar: ---
-X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.473,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+In-Reply-To: <87sf7q1djr.fsf@linaro.org>
+Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x42a.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,37 +97,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 7/9/23 13:25, Laszlo Ersek wrote:
-> This is with QEMU v8.1.0-391-gc152379422a2.
+On Thu, Sep 07, 2023 at 11:20:55AM +0100, Alex Bennée wrote:
 > 
-> I use the command line from (scroll to the bottom):
+> Andrew Jones <ajones@ventanamicro.com> writes:
 > 
->    https://github.com/tianocore/edk2/commit/49f06b664018
+> > Add instructions for how to cross-compile QEMU for RISC-V. The
+> > file is named generically because there's no reason not to collect
+> > other architectures steps into the same file, especially because
+> > several subsections like those for cross-compiling QEMU dependencies
+> > using meson and a cross-file could be shared. Additionally, other
+> > approaches to creating sysroots, such as with debootstrap, may be
+> > documented in this file in the future.
+> >
+> > Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
+> > ---
+> >  docs/devel/cross-compiling.rst | 221 +++++++++++++++++++++++++++++++++
+> >  docs/devel/index-build.rst     |   1 +
+> >  2 files changed, 222 insertions(+)
+> >  create mode 100644 docs/devel/cross-compiling.rst
+> >
+> > diff --git a/docs/devel/cross-compiling.rst b/docs/devel/cross-compiling.rst
+> > new file mode 100644
+> > index 000000000000..1b988ba54e4c
+> > --- /dev/null
+> > +++ b/docs/devel/cross-compiling.rst
+> > @@ -0,0 +1,221 @@
+> > +.. SPDX-License-Identifier: GPL-2.0-or-later
+> > +
+> > +====================
+> > +Cross-compiling QEMU
+> > +====================
+> > +
+> > +Cross-compiling QEMU first requires the preparation of a cross-toolchain
+> > +and the cross-compiling of QEMU's dependencies. While the steps will be
+> > +similar across architectures, each architecture will have its own specific
+> > +recommendations.
 > 
-> (with "-full-screen" removed).
+> "some architectures" - most of the cross compile stuff is hidden away by
+> the build system on systems with appropriate development libraries
+> installed. I think we would be remiss if we didn't just outline the
+> common case:
 > 
-> The crash is as follows:
+>    ../configure --cross-prefix=riscv64-linux-gnu-
 > 
->    Unexpected error in object_property_find_err() at ../../src/upstream/qemu/qom/object.c:1314:
->    qemu: Property 'qemu-fixed-text-console.device' not found
->    Aborted (core dumped)
+> I think we could make it clearer that in most cases you don't need to
+> prepare and cross-compile a bunch of dependencies lest we send
+> developers down a rabbit hole.
+> 
+> Maybe build-system.rst be updated and this reference it for the common
+> case?
+> 
 
-Cc'ing Marc-AndrÃ© for commit b208f745a8
-("ui/console: introduce different console objects")
+Hi Alex,
 
-> 
-> (Full backtrace attached.)
-> 
-> If I replace the "-device virtio-gpu-pci" option with "-nographic", then
-> there is no crash; QEMU launches fine and the guest starts booting fine.
-> 
-> I think this is a board-related problem; the riscv virt board code
-> likely does not set up the console properly.
-> 
-> Furthermore, I reckon this could be regression. When Sunil's above patch
-> was committed to edk2 (2023-06-23), the graphical guest window must have
-> worked still.
-> 
-> Laszlo
+tl;dr, I'd welcome instructions helping people get cross-arch development
+libraries installed without having to build them. I wouldn't make a good
+author for those instructions, though, since I don't know how.
 
+I'm guessing the dependencies can be installed with a distro's package
+management, assuming the package management supports cross-arch
+installation and installing to a specified root directory. I'm on Fedora,
+so I just tried
+
+ $ sudo dnf install --forcearch=aarch64 --installroot=$SYSROOT --releasever=36 glib2-devel
+
+but it wanted to install a huge number of packages, which most people
+probably wouldn't want to do. Maybe that command isn't what you had in
+mind or other distros can manage this better. I'm all ears.
+
+Thanks,
+drew
 
