@@ -4,85 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB95FEE14AA
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 00:45:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 784C6EE14AA
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 02:26:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qe394-0004gS-Oj; Wed, 06 Sep 2023 20:45:20 -0400
+	id 1qe4iw-0006Wc-5z; Wed, 06 Sep 2023 22:26:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe38z-0004RF-75
- for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:45:14 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe38w-0003lF-9W
- for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:45:12 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1694047508;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=5MaAI4QaueGmh2GOqWg63+CJNCCKsD3mxcIbrX6dw+c=;
- b=W5OzvtP1qMV4E1JlV5Dxi8Ikg4irMQxqErsKRW6FHnvtNDL4pCgkXYxZ5GW/dMK0nIYPq5
- e/oG+4ycFG1ZSMr+08Ntb7Dtc/BRB6yyUR2DDbyklc/IuNVPXmES4kEe3BXgQwTIOXU1TY
- 7SQDcSF41lgjyvkv/2Vgr7yiCKSDqmI=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-132-AWicWxSUPyO4E1PC8tLffQ-1; Wed, 06 Sep 2023 20:45:04 -0400
-X-MC-Unique: AWicWxSUPyO4E1PC8tLffQ-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
- [10.11.54.8])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 25A6E8015AA;
- Thu,  7 Sep 2023 00:45:02 +0000 (UTC)
-Received: from gshan.redhat.com (unknown [10.64.136.25])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 6069DC03295;
- Thu,  7 Sep 2023 00:44:47 +0000 (UTC)
-From: Gavin Shan <gshan@redhat.com>
-To: qemu-arm@nongnu.org
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
- qemu-s390x@nongnu.org, imp@bsdimp.com, kevans@freebsd.org,
- eduardo@habkost.net, marcel.apfelbaum@gmail.com, philmd@linaro.org,
- wangyanan55@huawei.com, peter.maydell@linaro.org, b.galvani@gmail.com,
- strahinja.p.jankovic@gmail.com, sundeep.lkml@gmail.com, kfting@nuvoton.com,
- wuhaotsh@google.com, nieklinnenbank@gmail.com, rad@semihalf.com,
- quic_llindhol@quicinc.com, marcin.juszkiewicz@linaro.org,
- laurent@vivier.eu, vijai@behindbytes.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- richard.henderson@linaro.org, mrolnik@gmail.com, edgar.iglesias@gmail.com,
- bcain@quicinc.com, gaosong@loongson.cn, yangxiaojuan@loongson.cn,
- aurelien@aurel32.net, jiaxun.yang@flygoat.com,
- aleksandar.rikalo@syrmia.com, chenhuacai@kernel.org, crwulff@gmail.com,
- marex@denx.de, shorne@gmail.com, clg@kaod.org, david@gibson.dropbear.id.au,
- groug@kaod.org, npiggin@gmail.com, ysato@users.sourceforge.jp,
- david@redhat.com, thuth@redhat.com, iii@linux.ibm.com,
- mark.cave-ayland@ilande.co.uk, atar4qemu@gmail.com,
- kbastian@mail.uni-paderborn.de, jcmvbkbc@gmail.com, pbonzini@redhat.com,
- imammedo@redhat.com, shan.gavin@gmail.com
-Subject: [PATCH v3 32/32] hw/riscv/shakti_c: Check CPU type in
- machine_run_board_init()
-Date: Thu,  7 Sep 2023 10:35:53 +1000
-Message-ID: <20230907003553.1636896-33-gshan@redhat.com>
-In-Reply-To: <20230907003553.1636896-1-gshan@redhat.com>
-References: <20230907003553.1636896-1-gshan@redhat.com>
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1qe4iu-0006WJ-Rf; Wed, 06 Sep 2023 22:26:24 -0400
+Received: from mail-vk1-xa31.google.com ([2607:f8b0:4864:20::a31])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1qe4is-0006Q4-11; Wed, 06 Sep 2023 22:26:24 -0400
+Received: by mail-vk1-xa31.google.com with SMTP id
+ 71dfb90a1353d-48d0c7bfc49so264463e0c.0; 
+ Wed, 06 Sep 2023 19:26:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1694053580; x=1694658380; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=juxRsCDNkFTEVk1uQaqw1S8oUpN8LdE7T5F+iUXxlx4=;
+ b=B8rA56CN2traCKO0eW+oSzIDDQNasQMHfMJKrg4Bc3KrdEN41/KvP+pL6DqhtKx3KS
+ rfD6yMeNgfs2UNbUh/u24lcR9i5zZz6NfEQMJ5VM6Mr77zDvpuwj1m3Rr1uKJeChqox/
+ +11rfVfoDK51ss2DjlnVfiGCj5D85MHVfitPC5jE/1/ttXrp1ojc8fg8Tf4GjCU4cjam
+ 1ZP7YXZKA+ShomlSmam36R2NThJc2Ms8XWZ2u6M66kWPYca5vAGfiyJZzLsbOpOJVoLi
+ n0RWOkonRztL/sGEZwVcaDa2pV2YWrc8wujg8q3o3r0aNb3DnB842CZAO21eNiEpPyEh
+ 0Jwg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1694053580; x=1694658380;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=juxRsCDNkFTEVk1uQaqw1S8oUpN8LdE7T5F+iUXxlx4=;
+ b=HHZQCcH4LdN5il67XljZJDDl/ud1u0At44rJ7SsTkRlSfkKUytrB87JZ0sf8WH8Tdz
+ Uat78PaGn2KvjCAnhNLBpvt5QcpmGmwUo1OBN23nWENai1Bnwikbk4g+4uljFomJy+9o
+ LWZ12DTRwTucUyobqFhAUxqZYb5ffnKFwKJjB/e/GgZpgG8O9ojkERc41gvvQxqEQpNB
+ 0+aedBAQx/ePuCS0bWVp5189I37lID1ZB+yiwr1sETjon6RNzpoaDqyEM2JvXyhuA7FL
+ IZrRHI2tgzSN2aqNW8nHaRtc7RsFvduJAhpibxaz6r2h7e6EDLnREUC0X8a3huak2m6r
+ yznA==
+X-Gm-Message-State: AOJu0YzlDz54kz+2zH/1hVaEmfdgYbEsqGjjRAVdeWvwZOk2PdPvER6a
+ pTgVRlQkDm82dwUOxv39Cuzups6Ba/qLdWWryfo=
+X-Google-Smtp-Source: AGHT+IHfIpXHrha2VGr3FO1amMbQZxs/mcM2jDW1EPczkpGnWuP759UjeH1XPcKFjFmnjkQDpTm5Btwjty7gsPzPzLg=
+X-Received: by 2002:a05:6122:250d:b0:48d:969:af8b with SMTP id
+ cl13-20020a056122250d00b0048d0969af8bmr1187798vkb.1.1694053579751; Wed, 06
+ Sep 2023 19:26:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=gshan@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+References: <20230726120706.335340-2-ajones@ventanamicro.com>
+In-Reply-To: <20230726120706.335340-2-ajones@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 7 Sep 2023 12:25:52 +1000
+Message-ID: <CAKmqyKNobj=Lqvrv8epQdqA1YX5DF_zgOhpZruc9FgdJHvoYTw@mail.gmail.com>
+Subject: Re: [PATCH] docs/devel: Add cross-compiling doc
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ palmer@dabbelt.com, bin.meng@windriver.com, peter.maydell@linaro.org, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a31;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa31.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,52 +89,275 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Set mc->valid_cpu_types so that the user specified CPU type can
-be validated in machine_run_board_init(). We needn't to do it
-by ourselves.
+On Wed, Jul 26, 2023 at 10:08=E2=80=AFPM Andrew Jones <ajones@ventanamicro.=
+com> wrote:
+>
+> Add instructions for how to cross-compile QEMU for RISC-V. The
+> file is named generically because there's no reason not to collect
+> other architectures steps into the same file, especially because
+> several subsections like those for cross-compiling QEMU dependencies
+> using meson and a cross-file could be shared. Additionally, other
+> approaches to creating sysroots, such as with debootstrap, may be
+> documented in this file in the future.
+>
+> Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
 
-Signed-off-by: Gavin Shan <gshan@redhat.com>
----
- hw/riscv/shakti_c.c | 11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
-diff --git a/hw/riscv/shakti_c.c b/hw/riscv/shakti_c.c
-index 12ea74b032..fc83ed4db4 100644
---- a/hw/riscv/shakti_c.c
-+++ b/hw/riscv/shakti_c.c
-@@ -28,6 +28,10 @@
- #include "exec/address-spaces.h"
- #include "hw/riscv/boot.h"
- 
-+static const char * const valid_cpu_types[] = {
-+    RISCV_CPU_TYPE_NAME("shakti-c"),
-+    NULL
-+};
- 
- static const struct MemmapEntry {
-     hwaddr base;
-@@ -47,12 +51,6 @@ static void shakti_c_machine_state_init(MachineState *mstate)
-     ShaktiCMachineState *sms = RISCV_SHAKTI_MACHINE(mstate);
-     MemoryRegion *system_memory = get_system_memory();
- 
--    /* Allow only Shakti C CPU for this platform */
--    if (strcmp(mstate->cpu_type, TYPE_RISCV_CPU_SHAKTI_C) != 0) {
--        error_report("This board can only be used with Shakti C CPU");
--        exit(1);
--    }
--
-     /* Initialize SoC */
-     object_initialize_child(OBJECT(mstate), "soc", &sms->soc,
-                             TYPE_RISCV_SHAKTI_SOC);
-@@ -85,6 +83,7 @@ static void shakti_c_machine_class_init(ObjectClass *klass, void *data)
-     mc->desc = "RISC-V Board compatible with Shakti SDK";
-     mc->init = shakti_c_machine_state_init;
-     mc->default_cpu_type = TYPE_RISCV_CPU_SHAKTI_C;
-+    mc->valid_cpu_types = valid_cpu_types;
-     mc->default_ram_id = "riscv.shakti.c.ram";
- }
- 
--- 
-2.41.0
+Alistair
 
+> ---
+>  docs/devel/cross-compiling.rst | 221 +++++++++++++++++++++++++++++++++
+>  1 file changed, 221 insertions(+)
+>  create mode 100644 docs/devel/cross-compiling.rst
+>
+> diff --git a/docs/devel/cross-compiling.rst b/docs/devel/cross-compiling.=
+rst
+> new file mode 100644
+> index 000000000000..1b988ba54e4c
+> --- /dev/null
+> +++ b/docs/devel/cross-compiling.rst
+> @@ -0,0 +1,221 @@
+> +.. SPDX-License-Identifier: GPL-2.0-or-later
+> +
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +Cross-compiling QEMU
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +Cross-compiling QEMU first requires the preparation of a cross-toolchain
+> +and the cross-compiling of QEMU's dependencies. While the steps will be
+> +similar across architectures, each architecture will have its own specif=
+ic
+> +recommendations. This document collects architecture-specific procedures
+> +and hints that may be used to cross-compile QEMU, where typically the ho=
+st
+> +environment is x86.
+> +
+> +RISC-V
+> +=3D=3D=3D=3D=3D=3D
+> +
+> +Toolchain
+> +---------
+> +
+> +Select a root directory for the cross environment
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +Export an environment variable pointing to a root directory
+> +for the cross environment. For example, ::
+> +
+> +  $ export PREFIX=3D"$HOME/opt/riscv"
+> +
+> +Create a work directory
+> +^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +Tools and several components will need to be downloaded and built. Creat=
+e
+> +a directory for all the work, ::
+> +
+> +  $ export WORK_DIR=3D"$HOME/work/xqemu"
+> +  $ mkdir -p "$WORK_DIR"
+> +
+> +Select and prepare the toolchain
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +Select a toolchain such as [riscv-toolchain]_ and follow its instruction=
+s
+> +for building and installing it to ``$PREFIX``, e.g. ::
+> +
+> +  $ cd "$WORK_DIR"
+> +  $ git clone https://github.com/riscv/riscv-gnu-toolchain
+> +  $ cd riscv-gnu-toolchain
+> +  $ ./configure --prefix=3D"$PREFIX"
+> +  $ make -j$(nproc) linux
+> +
+> +Set the ``$CROSS_COMPILE`` environment variable to the prefix of the cro=
+ss
+> +tools and add the tools to ``$PATH``, ::
+> +
+> +$ export CROSS_COMPILE=3Driscv64-unknown-linux-gnu-
+> +$ export PATH=3D"$PREFIX/bin:$PATH"
+> +
+> +Also set ``$SYSROOT``, where all QEMU cross-compiled dependencies will b=
+e
+> +installed. The toolchain installation likely created a 'sysroot' directo=
+ry
+> +at ``$PREFIX/sysroot``, which is the default location for most cross
+> +tools, making it a good location, ::
+> +
+> +  $ mkdir -p "$PREFIX/sysroot"
+> +  $ export SYSROOT=3D"$PREFIX/sysroot"
+> +
+> +Create a pkg-config wrapper
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +The build processes of QEMU and some of its dependencies depend on
+> +pkg-config. Create a wrapper script for it which works for the cross
+> +environment: ::
+> +
+> +  $ cat <<EOF >"$PREFIX/bin/${CROSS_COMPILE}pkg-config"
+> +  #!/bin/sh
+> +
+> +  [ "\$SYSROOT" ] || exit 1
+> +
+> +  export PKG_CONFIG_PATH=3D
+> +  export PKG_CONFIG_LIBDIR=3D"\${SYSROOT}/usr/lib/pkgconfig:\${SYSROOT}/=
+usr/lib64/pkgconfig:\${SYSROOT}/usr/share/pkgconfig"
+> +
+> +  exec pkg-config "\$@"
+> +  EOF
+> +  $ chmod +x "$PREFIX/bin/${CROSS_COMPILE}pkg-config"
+> +
+> +Create a cross-file for meson builds
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +meson setup, used by some of QEMU's dependencies, needs a "cross-file" t=
+o
+> +configure the cross environment. Create one, ::
+> +
+> +  $ cd "$WORK_DIR"
+> +  $ cat <<EOF >cross_file.txt
+> +  [host_machine]
+> +  system =3D 'linux'
+> +  cpu_family =3D 'riscv64'
+> +  cpu =3D 'riscv64'
+> +  endian =3D 'little'
+> +
+> +  [binaries]
+> +  c =3D '${CROSS_COMPILE}gcc'
+> +  cpp =3D '${CROSS_COMPILE}g++'
+> +  ar =3D '${CROSS_COMPILE}ar'
+> +  ld =3D '${CROSS_COMPILE}ld'
+> +  objcopy =3D '${CROSS_COMPILE}objcopy'
+> +  strip =3D '${CROSS_COMPILE}strip'
+> +  pkgconfig =3D '${CROSS_COMPILE}pkg-config'
+> +  EOF
+> +
+> +Cross-compile dependencies
+> +--------------------------
+> +
+> +glibc
+> +^^^^^
+> +
+> +If [riscv-toolchain]_ was selected for the toolchain then this step is
+> +already complete and glibc has already been installed into ``$SYSROOT``.
+> +Otherwise, cross-compile glibc and install it to ``$SYSROOT``.
+> +
+> +libffi
+> +^^^^^^
+> +
+> +::
+> +
+> +  $ cd "$WORK_DIR"
+> +  $ git clone https://gitlab.freedesktop.org/gstreamer/meson-ports/libff=
+i.git
+> +  $ cd libffi
+> +  $ meson setup --cross-file ../cross_file.txt --prefix=3D"$SYSROOT/usr"=
+ _build
+> +  $ ninja -C _build
+> +  $ ninja -C _build install
+> +
+> +*Building libffi seperately avoids a compilation error generated when
+> +building it as a subproject of glib.*
+> +
+> +glib
+> +^^^^
+> +
+> +::
+> +
+> +  $ cd "$WORK_DIR"
+> +  $ git clone https://github.com/GNOME/glib.git
+> +  $ cd glib
+> +  $ meson setup --cross-file ../cross_file.txt --prefix=3D"$SYSROOT/usr"=
+ _build
+> +  $ ninja -C _build
+> +  $ ninja -C _build install
+> +
+> +libslirp [optional]
+> +^^^^^^^^^^^^^^^^^^^
+> +
+> +::
+> +
+> +  $ cd "$WORK_DIR"
+> +  $ git clone https://gitlab.com/qemu-project/libslirp.git
+> +  $ cd libslirp
+> +  $ meson setup --cross-file ../cross_file.txt --prefix=3D"$SYSROOT/usr"=
+ _build
+> +  $ ninja -C _build
+> +  $ ninja -C _build install
+> +
+> +pixman
+> +^^^^^^
+> +
+> +First ensure the 'libtool' package is installed, e.g.
+> +``sudo dnf install libtool`` or ``sudo apt install libtool``
+> +
+> +::
+> +
+> +  $ cd "$WORK_DIR"
+> +  $ git clone https://gitlab.freedesktop.org/pixman/pixman
+> +  $ cd pixman
+> +  $ ./autogen.sh
+> +  $ ./configure --prefix=3D"$SYSROOT/usr" --host=3Driscv64-unknown-linux=
+-gnu
+> +  $ make -j$(nproc)
+> +  $ make install
+> +
+> +Cross-compile QEMU
+> +------------------
+> +
+> +::
+> +
+> +  $ cd "$WORK_DIR"
+> +  $ git clone https://gitlab.com/qemu-project/qemu.git
+> +  $ cd qemu
+> +  $ mkdir -p build/install_dir
+> +  $ cd build
+> +  $ ../configure --target-list=3Driscv64-softmmu --cross-prefix=3D$CROSS=
+_COMPILE --prefix=3D"$PWD/install_dir"
+> +  $ make -j$(nproc)
+> +  $ make install
+> +
+> +*Cross-compiling QEMU with different configurations may require more
+> +dependencies to be built and installed in the sysroot.*
+> +
+> +Running QEMU
+> +------------
+> +
+> +``build/install_dir`` may now be copied to the target and its bin
+> +directory may be added to the target user's PATH. Prior to running
+> +QEMU, ensure all the libraries it depends on are present, ::
+> +
+> +  $ ldd /path/to/bin/qemu-system-riscv64
+> +
+> +For example, it may necessary to install zlib libraries, e.g.
+> +``sudo dnf install zlib-devel`` or ``sudo apt install zlib1g-dev``
+> +
+> +Subsequent QEMU Cross-compiling
+> +-------------------------------
+> +
+> +Unless it's necessary to update and recompile the toolchain or
+> +dependencies, then most steps do not need to be repeated for subsequent
+> +compiles. Simply ensure the toolchain is in ``$PATH``, ``$SYSROOT`` poin=
+ts
+> +at the sysroot, and then follow the QEMU cross-compile steps in
+> +"Cross-compile QEMU". For example, ::
+> +
+> +  $ export PATH=3D"$HOME/opt/riscv/bin:$PATH"
+> +  $ export SYSROOT=3D"$HOME/opt/riscv/sysroot"
+> +  $ cd /path/to/qemu
+> +  $ mkdir -p build/install_dir
+> +  $ cd build
+> +  $ ../configure --target-list=3Driscv64-softmmu --cross-prefix=3Driscv6=
+4-unknown-linux-gnu- --prefix=3D"$PWD/install_dir"
+> +  $ make -j
+> +  $ make install
+> +
+> +References
+> +----------
+> +
+> +.. [riscv-toolchain] https://github.com/riscv/riscv-gnu-toolchain
+> --
+> 2.41.0
+>
+>
 
