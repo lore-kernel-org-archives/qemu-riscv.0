@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE99BEE14D3
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 09:06:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1A05EE14D3
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 09:07:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qeAxe-0003tH-I5; Thu, 07 Sep 2023 05:06:02 -0400
+	id 1qeAzK-0006Gm-NU; Thu, 07 Sep 2023 05:07:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qeAxa-0003no-Dw
- for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 05:05:58 -0400
-Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qeAzH-0006GB-Q3
+ for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 05:07:44 -0400
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qeAxW-0001kn-L8
- for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 05:05:58 -0400
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-9a63b2793ecso81501866b.2
- for <qemu-riscv@nongnu.org>; Thu, 07 Sep 2023 02:05:54 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qeAzE-0002cj-1D
+ for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 05:07:42 -0400
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-401c90ed2ecso8192535e9.0
+ for <qemu-riscv@nongnu.org>; Thu, 07 Sep 2023 02:07:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694077553; x=1694682353; darn=nongnu.org;
+ d=linaro.org; s=google; t=1694077653; x=1694682453; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=sNvlFII/zr6hx3iOeBbwbNkYhLmKfkOrejhoci6C4/E=;
- b=vMUmg0P5VbF5o0QiauRtLFuPYESTjtcNTiXF2A1osGMZltGKsbUpUJYa7FkCFji/tm
- zmNzAn10a7kapXRJ4bGWJTNMAEQXjEEKStOpWj2ms1EvNe7yvBQ2U370lhCUvvSJDsux
- B5lvm1XYFpQckPW7++alJsJ4dV1kkQzflvRNWrls8IVvC56pX8uCBEMbfv6V79ygu0ci
- YinwFHDvDRsY4azwRJOCloKNtElBrm/0pCyZLdh925OwK7yP8iqrAYv/lfb60vXLUr7C
- K5xKeBrrXI5XyLcXptf9JcINQH+MNN8FcDZmJAlyrP+3IZBlV7xF2tUdWYgn4yr4Mnn2
- 3Uhg==
+ bh=e+0LeLWheEZo2jx/tfksWwMPjBz6FAD9QINK4UCiU0s=;
+ b=zp6QgQaBHXOtXQvCv1vaY9xh/fIPXqPGoHZfhlsuSwQ3q5x0hTN17t8vk4usxh97Ik
+ kInnUkLXA+s/lxwgxi5w1aoi+2AON9O48upTFPKjBJ4P6SGd0SgwHR0QxY6YNa00CXHp
+ TUzY0mZ/VmeCaY5hnm0cP+eB8vcOYn4PGKGSncQ+w57gvf9DpBdPgxrn2jTKuwRcLzMs
+ sHc4S0GfhsPhorL19uWlgv6vPWHMTYif8tG86ABue2nZRrauLywFXVbM0HrX5dzTxA5n
+ H47QGAV26wnj5qLUWo6+obmKbbDf3b4+J8hj5MTMmJsKRsAZBfJUncIRvZr5mxHqkpvE
+ 17BQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694077553; x=1694682353;
+ d=1e100.net; s=20221208; t=1694077653; x=1694682453;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=sNvlFII/zr6hx3iOeBbwbNkYhLmKfkOrejhoci6C4/E=;
- b=eO8Wbz75jKsI6XRMy4dUBCnBegthFmd2gtBTLIBbruPlJVnj7Qv8rumG65KFNbtoui
- qNUqx6pSJxnsJSVh6vbyaZjJfwZYohMBKiLLvKMeR1uEEVxSQD/CcI45QoxHZ30b3qZW
- Cm4pqUdbNZn5S3qHzpbDNS7zvfN5RMVRAQFKNvVyssD/K634fjM8AJsY/TTO664BOEtl
- KjhVLCoVpvchqBTvoKheSJnuszAcgOS2zYbWAsXPAjt+qC0WCNPAjkl/rNEo6Bht2EB9
- ep6mQibshZl0wKwpFfORCffSfGoBPjMcy47Qt2CoDZKMGC/LiBN/7fms0vjrM0C0wSj5
- UrPw==
-X-Gm-Message-State: AOJu0YyXrsWZjBZcvLQxdzm0Y+fJIPjpqEcFYmPrum/7zKhEY69z4K1S
- hqR9w4LpqXMiSl3d8opuu1gS6g==
-X-Google-Smtp-Source: AGHT+IF+WYstU7iBgeW8KYOXqDnRYwhgpgv6W3ndRBw2UMus/zS5k7olX3DVrgP0KKlCplDTaqpTPw==
-X-Received: by 2002:a17:906:318c:b0:992:3897:1985 with SMTP id
- 12-20020a170906318c00b0099238971985mr4536976ejy.43.1694077552903; 
- Thu, 07 Sep 2023 02:05:52 -0700 (PDT)
+ bh=e+0LeLWheEZo2jx/tfksWwMPjBz6FAD9QINK4UCiU0s=;
+ b=dfhEVirziR0alHIpmkQ1yOUwm6BoJhP16fKYizlUDHXIFYeRxvi1eMFT7cSAwccxYo
+ KZbeitoV2r3CTyEMqre2e/jTN4BOA2WrSWhlm/A9b81htwq71KqyZCN+/VkFh2uubbWU
+ ELrPgZoIB4P6muE3xXe9DYVSzfFJrvxld0cYejj0fWb8v1vt/bwDuVcN2RlkO/x0MAZI
+ S6EsBKy4oHwdFhJnaCx7+Uegm/WyKOGToC7kU3Twmlu0z0Y/NmFiEY7AGVWLlBKIxMcH
+ 8NZitTjcPHCqs2+MbRyjEu8MVbbCVepItJlrwC26TGC8+p8BjmWeOy1mbAvagfK/BqYg
+ zCKw==
+X-Gm-Message-State: AOJu0YwStg8IwZGzoaT7QMBihlbWaQIQjmnGW5nxBAqRUHUaOKWSyCX2
+ AWyAIUysT6cQVuwutNt+A+Zq46glp1ggjTuM8aw=
+X-Google-Smtp-Source: AGHT+IGyxgw0EZYuHgZyu6Ifx7lIrPV8Awh6kT+c5irEiqwp03f+XVTOM/12OQ4qqtDOa5qLoCIwIw==
+X-Received: by 2002:a7b:c7c7:0:b0:402:cc9a:31a7 with SMTP id
+ z7-20020a7bc7c7000000b00402cc9a31a7mr3997937wmk.19.1694077653219; 
+ Thu, 07 Sep 2023 02:07:33 -0700 (PDT)
 Received: from [192.168.69.115] (176-131-222-226.abo.bbox.fr.
  [176.131.222.226]) by smtp.gmail.com with ESMTPSA id
- t1-20020a170906268100b00993150e5325sm10210741ejc.60.2023.09.07.02.05.47
+ p7-20020a05600c204700b003fed630f560sm1896685wmg.36.2023.09.07.02.07.28
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 07 Sep 2023 02:05:52 -0700 (PDT)
-Message-ID: <6722766b-4bda-38f4-e711-fc9627938d25@linaro.org>
-Date: Thu, 7 Sep 2023 11:05:46 +0200
+ Thu, 07 Sep 2023 02:07:32 -0700 (PDT)
+Message-ID: <c74ace91-b1be-9a12-c428-a59fd4ffcf1a@linaro.org>
+Date: Thu, 7 Sep 2023 11:07:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.15.0
-Subject: Re: [PATCH v3 30/32] hw/arm/sbsa-ref: Check CPU type in
+Subject: Re: [PATCH v3 32/32] hw/riscv/shakti_c: Check CPU type in
  machine_run_board_init()
 Content-Language: en-US
 To: Gavin Shan <gshan@redhat.com>, qemu-arm@nongnu.org
@@ -85,13 +85,13 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  atar4qemu@gmail.com, kbastian@mail.uni-paderborn.de, jcmvbkbc@gmail.com,
  pbonzini@redhat.com, imammedo@redhat.com, shan.gavin@gmail.com
 References: <20230907003553.1636896-1-gshan@redhat.com>
- <20230907003553.1636896-31-gshan@redhat.com>
+ <20230907003553.1636896-33-gshan@redhat.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230907003553.1636896-31-gshan@redhat.com>
+In-Reply-To: <20230907003553.1636896-33-gshan@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x62f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x330.google.com
 X-Spam_score_int: -35
 X-Spam_score: -3.6
 X-Spam_bar: ---
@@ -121,8 +121,8 @@ On 7/9/23 02:35, Gavin Shan wrote:
 > 
 > Signed-off-by: Gavin Shan <gshan@redhat.com>
 > ---
->   hw/arm/sbsa-ref.c | 21 +++------------------
->   1 file changed, 3 insertions(+), 18 deletions(-)
+>   hw/riscv/shakti_c.c | 11 +++++------
+>   1 file changed, 5 insertions(+), 6 deletions(-)
 
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
