@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F415EEE14AA
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 00:40:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C530EE14AA
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 00:40:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qe341-0004QB-4m; Wed, 06 Sep 2023 20:40:05 -0400
+	id 1qe34d-0005XL-Ej; Wed, 06 Sep 2023 20:40:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe33x-0004JJ-Pt
- for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:40:01 -0400
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe34M-00055Z-1h
+ for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:40:29 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe33u-0001JU-I1
- for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:40:01 -0400
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe34A-0001Y7-SX
+ for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:40:25 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1694047198;
+ s=mimecast20190719; t=1694047212;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=NjZw3E7apQj63HRBsTMKeM32ZIpPKyvSIbeJgERsvj4=;
- b=Cx3R85n1NdyB9kwRgfV+2Ao8+kXs6UI8S7j0S/RdjwLN4JgU/dJ1utlreAclJWMkNwPh6p
- qMmnZlF29Zm9ntO2CWnq0PjrTaKERvmnuI93nAw+7bRofjF1iLlzqhblNE4tvfE4LqOMMs
- 1RxEeNv8y88PUasjh0keWqfJXDVTG+0=
+ bh=j5T6POskXSuvPEg0D1DaKzXS3b4ah1wA83nl5zb8FYQ=;
+ b=Jqq9RUhBoVtgJg1fvZM1qg9nzXnYrASb3vxMEclPGO/W6uMmpQ29TJLrnZQeKpvNWiVsfB
+ 1pEr4xrhbWhjahoqq22cHDuO3Hj755yGmAFY2kwqfqVL0i7+bOyfTTJXqEmYNtHOzhHpmb
+ lWi9U6kkZh/aynZcYhuV9KXo2NKU59o=
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-516-td0w1gdDNFudt2Twc0gCpw-1; Wed, 06 Sep 2023 20:39:54 -0400
-X-MC-Unique: td0w1gdDNFudt2Twc0gCpw-1
+ us-mta-46-ZYm2f91uMD6EXVBOHc_XJQ-1; Wed, 06 Sep 2023 20:40:09 -0400
+X-MC-Unique: ZYm2f91uMD6EXVBOHc_XJQ-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
  [10.11.54.8])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 4FB57181792B;
- Thu,  7 Sep 2023 00:39:52 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 8109C89CB03;
+ Thu,  7 Sep 2023 00:40:07 +0000 (UTC)
 Received: from gshan.redhat.com (unknown [10.64.136.25])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 4FDA0C03295;
- Thu,  7 Sep 2023 00:39:37 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id C8BDCC03295;
+ Thu,  7 Sep 2023 00:39:52 +0000 (UTC)
 From: Gavin Shan <gshan@redhat.com>
 To: qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
@@ -64,10 +64,10 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  mark.cave-ayland@ilande.co.uk, atar4qemu@gmail.com,
  kbastian@mail.uni-paderborn.de, jcmvbkbc@gmail.com, pbonzini@redhat.com,
  imammedo@redhat.com, shan.gavin@gmail.com
-Subject: [PATCH v3 12/32] target/ppc: Use generic helper to show CPU model
+Subject: [PATCH v3 13/32] target/riscv: Use generic helper to show CPU model
  names
-Date: Thu,  7 Sep 2023 10:35:33 +1000
-Message-ID: <20230907003553.1636896-13-gshan@redhat.com>
+Date: Thu,  7 Sep 2023 10:35:34 +1000
+Message-ID: <20230907003553.1636896-14-gshan@redhat.com>
 In-Reply-To: <20230907003553.1636896-1-gshan@redhat.com>
 References: <20230907003553.1636896-1-gshan@redhat.com>
 MIME-Version: 1.0
@@ -81,7 +81,6 @@ X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -98,59 +97,90 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-For target/ppc, the CPU type name can be: (1) The combination of
-the CPU model name and suffix; (2) the type name of the class whose
-PVR matches with the specified one; (3) alias of the CPU model, plus
-suffix; (4) MachineClass::default_cpu_type when the CPU model name
-is "max". All the possible information, the CPU model name, aliases
-of the CPU models and PVRs are all shown in ppc_cpu_list_entry().
+For target/riscv, the CPU type name is always the combination of the
+CPU model name and suffix. The CPU model names have been correctly
+shown in riscv_cpu_list_entry() and riscv_cpu_add_definition()
 
-Use generic helper cpu_model_from_type() in ppc_cpu_list_entry(),
-and rename @name to @model since it points to the CPU model name
-instead of the CPU type name.
+Use generic helper cpu_mdoel_from_type() to show the CPU model names
+in the above two functions, and adjusted format of the output from
+riscv_cpu_list_entry() to match with other targets. Besides, the
+function riscv_cpu_class_by_name() is improved by renaming @cpuname
+to @model since it's for the CPU model name, and merging the condtion
+of "@oc == NULL" to object_class_dynamic_cast().
 
 Signed-off-by: Gavin Shan <gshan@redhat.com>
 ---
- target/ppc/cpu_init.c | 11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
+ target/riscv/cpu.c            | 23 +++++++++++++----------
+ target/riscv/riscv-qmp-cmds.c |  3 +--
+ 2 files changed, 14 insertions(+), 12 deletions(-)
 
-diff --git a/target/ppc/cpu_init.c b/target/ppc/cpu_init.c
-index 02b7aad9b0..7281402331 100644
---- a/target/ppc/cpu_init.c
-+++ b/target/ppc/cpu_init.c
-@@ -7019,16 +7019,15 @@ static void ppc_cpu_list_entry(gpointer data, gpointer user_data)
-     PowerPCCPUClass *pcc = POWERPC_CPU_CLASS(oc);
-     DeviceClass *family = DEVICE_CLASS(ppc_cpu_get_family_class(pcc));
-     const char *typename = object_class_get_name(oc);
--    char *name;
-+    char *model;
-     int i;
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 6b93b04453..a525e24c5a 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -612,18 +612,19 @@ static ObjectClass *riscv_cpu_class_by_name(const char *cpu_model)
+ {
+     ObjectClass *oc;
+     char *typename;
+-    char **cpuname;
++    char **model;
  
-     if (unlikely(strcmp(typename, TYPE_HOST_POWERPC_CPU) == 0)) {
-         return;
+-    cpuname = g_strsplit(cpu_model, ",", 1);
+-    typename = g_strdup_printf(RISCV_CPU_TYPE_NAME("%s"), cpuname[0]);
++    model = g_strsplit(cpu_model, ",", 1);
++    typename = g_strdup_printf(RISCV_CPU_TYPE_NAME("%s"), model[0]);
+     oc = object_class_by_name(typename);
+-    g_strfreev(cpuname);
++    g_strfreev(model);
+     g_free(typename);
+-    if (!oc || !object_class_dynamic_cast(oc, TYPE_RISCV_CPU) ||
+-        object_class_is_abstract(oc)) {
+-        return NULL;
++    if (object_class_dynamic_cast(oc, TYPE_RISCV_CPU) &&
++        !object_class_is_abstract(oc)) {
++        return oc;
      }
+-    return oc;
++
++    return NULL;
+ }
  
--    name = g_strndup(typename,
--                     strlen(typename) - strlen(POWERPC_CPU_TYPE_SUFFIX));
--    qemu_printf("PowerPC %-16s PVR %08x\n", name, pcc->pvr);
-+    model = cpu_model_from_type(typename);
-+    qemu_printf("PowerPC %-16s PVR %08x\n", model, pcc->pvr);
-     for (i = 0; ppc_cpu_aliases[i].alias != NULL; i++) {
-         PowerPCCPUAlias *alias = &ppc_cpu_aliases[i];
-         ObjectClass *alias_oc = ppc_cpu_class_by_name(alias->model);
-@@ -7045,10 +7044,10 @@ static void ppc_cpu_list_entry(gpointer data, gpointer user_data)
-                         alias->alias, family->desc);
-         } else {
-             qemu_printf("PowerPC %-16s (alias for %s)\n",
--                        alias->alias, name);
-+                        alias->alias, model);
-         }
-     }
--    g_free(name);
+ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+@@ -2211,9 +2212,10 @@ static gint riscv_cpu_list_compare(gconstpointer a, gconstpointer b)
+ static void riscv_cpu_list_entry(gpointer data, gpointer user_data)
+ {
+     const char *typename = object_class_get_name(OBJECT_CLASS(data));
+-    int len = strlen(typename) - strlen(RISCV_CPU_TYPE_SUFFIX);
++    char *model = cpu_model_from_type(typename);
+ 
+-    qemu_printf("%.*s\n", len, typename);
++    qemu_printf("  %s\n", model);
 +    g_free(model);
  }
  
- void ppc_cpu_list(void)
+ void riscv_cpu_list(void)
+@@ -2222,6 +2224,7 @@ void riscv_cpu_list(void)
+ 
+     list = object_class_get_list(TYPE_RISCV_CPU, false);
+     list = g_slist_sort(list, riscv_cpu_list_compare);
++    qemu_printf("Available CPUs:\n");
+     g_slist_foreach(list, riscv_cpu_list_entry, NULL);
+     g_slist_free(list);
+ }
+diff --git a/target/riscv/riscv-qmp-cmds.c b/target/riscv/riscv-qmp-cmds.c
+index 5ecff1afb3..22f728673f 100644
+--- a/target/riscv/riscv-qmp-cmds.c
++++ b/target/riscv/riscv-qmp-cmds.c
+@@ -35,8 +35,7 @@ static void riscv_cpu_add_definition(gpointer data, gpointer user_data)
+     const char *typename = object_class_get_name(oc);
+     ObjectClass *dyn_class;
+ 
+-    info->name = g_strndup(typename,
+-                           strlen(typename) - strlen("-" TYPE_RISCV_CPU));
++    info->name = cpu_model_from_type(typename);
+     info->q_typename = g_strdup(typename);
+ 
+     dyn_class = object_class_dynamic_cast(oc, TYPE_RISCV_DYNAMIC_CPU);
 -- 
 2.41.0
 
