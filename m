@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F09CEE14D4
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 05:42:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ECD9EE14D3
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 06:25:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qe7mD-0005pB-RT; Thu, 07 Sep 2023 01:42:02 -0400
+	id 1qe8Rm-0003za-OD; Thu, 07 Sep 2023 02:24:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kbastian@mail.uni-paderborn.de>)
- id 1qe7m3-0005oI-Qu; Thu, 07 Sep 2023 01:41:52 -0400
-Received: from nylar.uni-paderborn.de ([2001:638:502:c003::18])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kbastian@mail.uni-paderborn.de>)
- id 1qe7m0-0000CJ-PT; Thu, 07 Sep 2023 01:41:51 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=mail.uni-paderborn.de; s=20170601; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cTSTPkmjDi+a+9GQtEQYhs7YugWkw8lDdmzj/ItHLl8=; b=tQIUnYefwWTT1wdN0vYblOuynF
- 97poRtLWkEVGtOQilPBdZ1ZGoSfw7yVjBwXaBUE7nSDyCxyuBW6Buqke8kVUi26q883jnsGU6ZQuz
- xud7xy+n+hHah27Z9fBBZRG219c0wBHdpgNKvY9nflUtoUExh/uRaQm2BsUloc0AR7ZI=;
-Date: Thu, 7 Sep 2023 07:41:16 +0200
-From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-To: Gavin Shan <gshan@redhat.com>
-Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- qemu-ppc@nongnu.org, qemu-s390x@nongnu.org, imp@bsdimp.com, kevans@freebsd.org,
- eduardo@habkost.net, marcel.apfelbaum@gmail.com, philmd@linaro.org, 
- wangyanan55@huawei.com, peter.maydell@linaro.org, b.galvani@gmail.com, 
- strahinja.p.jankovic@gmail.com, sundeep.lkml@gmail.com, kfting@nuvoton.com,
- wuhaotsh@google.com, 
- nieklinnenbank@gmail.com, rad@semihalf.com, quic_llindhol@quicinc.com, 
- marcin.juszkiewicz@linaro.org, laurent@vivier.eu, vijai@behindbytes.com,
- palmer@dabbelt.com, 
- alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn, 
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- richard.henderson@linaro.org, 
- mrolnik@gmail.com, edgar.iglesias@gmail.com, bcain@quicinc.com,
- gaosong@loongson.cn, 
- yangxiaojuan@loongson.cn, aurelien@aurel32.net, jiaxun.yang@flygoat.com, 
- aleksandar.rikalo@syrmia.com, chenhuacai@kernel.org, crwulff@gmail.com,
- marex@denx.de, 
- shorne@gmail.com, clg@kaod.org, david@gibson.dropbear.id.au, groug@kaod.org, 
- npiggin@gmail.com, ysato@users.sourceforge.jp, david@redhat.com,
- thuth@redhat.com, 
- iii@linux.ibm.com, mark.cave-ayland@ilande.co.uk, atar4qemu@gmail.com, 
- jcmvbkbc@gmail.com, pbonzini@redhat.com, imammedo@redhat.com,
- shan.gavin@gmail.com
-Subject: Re: [PATCH v3 17/32] target/tricore: Use generic helper to show CPU
- model names
-Message-ID: <uiypj3zb47c6drdpigbua3ynzp55msopvfqnynx6cf3m2aep6z@v6xklba5i3ft>
-References: <20230907003553.1636896-1-gshan@redhat.com>
- <20230907003553.1636896-18-gshan@redhat.com>
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1qe8Ri-0003z1-Pm
+ for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 02:24:56 -0400
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1qe8Rd-0005RO-Q4
+ for qemu-riscv@nongnu.org; Thu, 07 Sep 2023 02:24:53 -0400
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1c1e128135aso5011935ad.3
+ for <qemu-riscv@nongnu.org>; Wed, 06 Sep 2023 23:24:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1694067888; x=1694672688; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=45JMhq6t+j8AdylZLsjCmKllHxj4NWcg/3JdETtHIwE=;
+ b=Npjp03DPgUmkvLmWlVjUNv0dBygwCmrBvA5KYdtBwXeuUa6/VKHh7lJJNHrdJooTA1
+ mehW+o8lVFRt9VZzY0Kg7/Q24fG1qQAm3x5PfHSPGclmYpMLO6jeBPQGsO1p9lxYJ+0J
+ l4gppQ6kzsxCdzYBdTBv4STQkd6JlbUZrc00kdVrCnqMoWqGbfxE8Xh6BiJk2E+B61mE
+ oA8p0w8cI/YxOPVth/ZjQFSuIIjjDcNmeAHA0m6us3yWyFEqH0aphgOYuFILFzS9PlBT
+ GxHY6Z3fbd1ErezjgdKQPs3EEeUV3ACgx3JPMVj8jCzFK61zpxkeKn4Nn81OV9dfLdC6
+ ap3g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1694067888; x=1694672688;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=45JMhq6t+j8AdylZLsjCmKllHxj4NWcg/3JdETtHIwE=;
+ b=PTqQoZzmJmUtWn4xYqUPUwW08llW0N5vI3VZdnncMEU61A2043oUqSUbmkeW//Vdxb
+ lrAVfu0O0QqdGVxHW2mEqfJbrX3w5aaQGTjijE5vCDYNPtw1ppBHOLCgUgm9L7T2elXK
+ zrvmWAqX/0NWOo7BBO9wWGzylBm4fKNyj47Ae2+uN4j2VxzJJbO35Cb4DEx4xRMgMeJx
+ crEaO2BbHUSqODftraSvSzr/BRgECSzsFc4yxU6n3sewKorAhXXo5X21kBFzYhpPyI4G
+ 8dJsn76nwkPSvDGf27LOBPKzPDfNMlLgQiXKb7pmLdVwtgNQHXcOBivwRflZAxlRTKfP
+ slDw==
+X-Gm-Message-State: AOJu0YxRao8KMoAfbzFkYjimCHr5HXISSktVcN9JWptyAug0M1ckAWsj
+ dOyqTIordWMInGLa0bbmoQDnLYc+zHb4o3dBmRv8PBp8LZk=
+X-Google-Smtp-Source: AGHT+IFsuoJsS/Uy07cXk2ffQF4nkV5Sqd5/cikR519R3VO/JaDlVomwUanKgtZWbl5BVR+Mi7mldw==
+X-Received: by 2002:a17:903:22c7:b0:1b9:c207:1802 with SMTP id
+ y7-20020a17090322c700b001b9c2071802mr19409525plg.0.1694067887774; 
+ Wed, 06 Sep 2023 23:24:47 -0700 (PDT)
+Received: from mchitale-vm.. ([106.195.11.23])
+ by smtp.googlemail.com with ESMTPSA id
+ ik21-20020a170902ab1500b001b9f032bb3dsm12299642plb.3.2023.09.06.23.24.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 06 Sep 2023 23:24:47 -0700 (PDT)
+From: Mayuresh Chitale <mchitale@ventanamicro.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Mayuresh Chitale <mchitale@ventanamicro.com>,
+	alistair.francis@wdc.com
+Subject: [PATCH] target/riscv: pmp: Clear pmp/smepmp bits on reset
+Date: Thu,  7 Sep 2023 11:54:40 +0530
+Message-Id: <20230907062440.1174224-1-mchitale@ventanamicro.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230907003553.1636896-18-gshan@redhat.com>
-X-IMT-Source: Extern
-X-IMT-rspamd-score: 35
-X-IMT-Spam-Score: 0.0 ()
-X-PMX-Version: 6.4.9.2830568, Antispam-Engine: 2.7.2.2107409,
- Antispam-Data: 2023.9.7.53017, AntiVirus-Engine: 6.0.2,
- AntiVirus-Data: 2023.9.7.602000
-X-IMT-Authenticated-Sender: kbastian@UNI-PADERBORN.DE
-Received-SPF: pass client-ip=2001:638:502:c003::18;
- envelope-from=kbastian@mail.uni-paderborn.de; helo=nylar.uni-paderborn.de
-X-Spam_score_int: -42
-X-Spam_score: -4.3
-X-Spam_bar: ----
-X-Spam_report: (-4.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=mchitale@ventanamicro.com; helo=mail-pl1-x62b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -92,23 +92,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Sep 07, 2023 at 10:35:38AM +1000, Gavin Shan wrote:
-> For target/tricore, the CPU type name is always the combination of the
-> CPU model name and suffix. The CPU model names have been correctly
-> shown in tricore_cpu_list_entry().
-> 
-> Use generic helper cpu_model_from_type() to show the CPU model names
-> in the above function. tricore_cpu_class_by_name() is also improved
-> by merging the condition of '@oc == NULL' to object_class_dynamic_cast().
-> 
-> Signed-off-by: Gavin Shan <gshan@redhat.com>
-> ---
->  target/tricore/cpu.c    |  9 +++++----
->  target/tricore/helper.c | 13 +++++--------
->  2 files changed, 10 insertions(+), 12 deletions(-)
+As per the Priv and Smepmp specifications, certain bits such as the 'L'
+bit of pmp entries and mseccfg.MML can only be cleared upon reset and it
+is necessary to do so to allow 'M' mode firmware to correctly reinitialize
+the pmp/smpemp state across reboots.
 
-Reviewed-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+---
+ target/riscv/cpu.c | 11 +++++++++++
+ target/riscv/pmp.c | 10 ++++++++++
+ target/riscv/pmp.h |  1 +
+ 3 files changed, 22 insertions(+)
 
-Cheers,
-Bastian
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 0843461660..77ed653b8d 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -896,6 +896,17 @@ static void riscv_cpu_reset_hold(Object *obj)
+     }
+     /* mmte is supposed to have pm.current hardwired to 1 */
+     env->mmte |= (EXT_STATUS_INITIAL | MMTE_M_PM_CURRENT);
++
++    /*
++     * Clear mseccfg and unlock all the PMP entries upon reset.
++     * This is allowed as per the priv and smepmp specifications.
++     * and is needed to clear stale entries across reboots.
++     */
++    if (riscv_cpu_cfg(env)->ext_smepmp) {
++        env->mseccfg = 0;
++    }
++
++    pmp_unlock_entries(env);
+ #endif
+     env->xl = riscv_cpu_mxl(env);
+     riscv_cpu_update_mask(env);
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index 3f6c8cf08d..f3eb6e6585 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -131,6 +131,16 @@ static bool pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
+     return false;
+ }
+ 
++void pmp_unlock_entries(CPURISCVState *env)
++{
++    uint32_t pmp_num = pmp_get_num_rules(env);
++    int i;
++
++    for (i = 0; i < pmp_num; i++) {
++        env->pmp_state.pmp[i].cfg_reg &= ~PMP_LOCK;
++    }
++}
++
+ static void pmp_decode_napot(target_ulong a, target_ulong *sa,
+                              target_ulong *ea)
+ {
+diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
+index cf5c99f8e6..2c5ec3cdf1 100644
+--- a/target/riscv/pmp.h
++++ b/target/riscv/pmp.h
+@@ -81,6 +81,7 @@ void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index);
+ void pmp_update_rule_nums(CPURISCVState *env);
+ uint32_t pmp_get_num_rules(CPURISCVState *env);
+ int pmp_priv_to_page_prot(pmp_priv_t pmp_priv);
++void pmp_unlock_entries(CPURISCVState *env);
+ 
+ #define MSECCFG_MML_ISSET(env) get_field(env->mseccfg, MSECCFG_MML)
+ #define MSECCFG_MMWP_ISSET(env) get_field(env->mseccfg, MSECCFG_MMWP)
+-- 
+2.34.1
+
 
