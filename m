@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8E2CEE14C3
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 00:38:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5A73EE14AA
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 00:38:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qe322-0003rg-9u; Wed, 06 Sep 2023 20:38:02 -0400
+	id 1qe31k-0003Mz-Tf; Wed, 06 Sep 2023 20:37:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe31z-0003kv-KD
- for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:37:59 -0400
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe31k-0003Lo-26
+ for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:37:44 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe31w-0000tc-Q6
- for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:37:59 -0400
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe31g-0000p7-PX
+ for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:37:43 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1694047075;
+ s=mimecast20190719; t=1694047060;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=L6nC/3z/zlWDTB7qOj7K7y6G+feGM/w4Yoyg60t+qDY=;
- b=Gox+UuwXVMxgnPmB4/LnqOM5ZJ7UWxnUItd/3G7k4t0Y1VzDx0xnCW0gYgEHYS7EhqM+Fz
- bkvdAj7yYde93D8LLo6m+uCJnj2Nncz4AjsJy+zqyALMNq5GBac3VsEu0x26Q4m1mgi1bH
- GhXzXV9f1ixfvsaDWLrjetXOVZJHK1I=
+ bh=SU2uNXM/JVMRD9b21hRMqUycunFyZR4XoqcrmMGASWU=;
+ b=DJrmRCw/+nkz7zo2/Ou0BioMgBd/bfKF11c8TKWAnfhh7HYO0IDmTx5AFXFJAEhftNqM+d
+ yEXE90e4hRak+YAr+TWcfHuG7JH5lSO8/5R5NHfEMpIOTEOfPTvvh+zwXDex6laEIcEQeT
+ wpVj8vyJBwity3k3YRMqmGxIq3qRbfM=
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-8-fqzMVxcANTe8B2JtGB0eGg-1; Wed, 06 Sep 2023 20:37:51 -0400
-X-MC-Unique: fqzMVxcANTe8B2JtGB0eGg-1
+ us-mta-306-moCBs20vP4ORHGcsMRSneA-1; Wed, 06 Sep 2023 20:37:34 -0400
+X-MC-Unique: moCBs20vP4ORHGcsMRSneA-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
  [10.11.54.8])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id D3D6180C908;
- Thu,  7 Sep 2023 00:37:48 +0000 (UTC)
-Received: from gshan.redhat.com (unknown [10.64.136.25])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id A330BC03295;
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 2A9B98015AA;
  Thu,  7 Sep 2023 00:37:32 +0000 (UTC)
+Received: from gshan.redhat.com (unknown [10.64.136.25])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 740E8C03295;
+ Thu,  7 Sep 2023 00:37:17 +0000 (UTC)
 From: Gavin Shan <gshan@redhat.com>
 To: qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
@@ -64,10 +64,10 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  mark.cave-ayland@ilande.co.uk, atar4qemu@gmail.com,
  kbastian@mail.uni-paderborn.de, jcmvbkbc@gmail.com, pbonzini@redhat.com,
  imammedo@redhat.com, shan.gavin@gmail.com
-Subject: [PATCH v3 05/32] target/cris: Use generic helper to show CPU model
+Subject: [PATCH v3 04/32] target/avr: Use generic helper to show CPU model
  names
-Date: Thu,  7 Sep 2023 10:35:26 +1000
-Message-ID: <20230907003553.1636896-6-gshan@redhat.com>
+Date: Thu,  7 Sep 2023 10:35:25 +1000
+Message-ID: <20230907003553.1636896-5-gshan@redhat.com>
 In-Reply-To: <20230907003553.1636896-1-gshan@redhat.com>
 References: <20230907003553.1636896-1-gshan@redhat.com>
 MIME-Version: 1.0
@@ -98,39 +98,71 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-For target/cris, the CPU type name can be: (1) the combination of
-the CPU model name and suffix; (2) alias "any" corresponding to
-"crisv32-cris-cpu". The CPU model names have been shown correctly
-by following (1).
+For target/avr, the CPU model name is resolved as same to the CPU
+type name in avr_cpu_class_by_name(). Actually, the CPU model name
+is the combination of the CPU model name and suffix.
 
-Use generic helper cpu_model_from_type() to show the CPU model
-names in arm_cpu_list_entry(), and rename @name to @model since
-it's points to the CPU model name instead of the CPU type name.
+Support the resolution from the combination of CPU model name and
+suffix to the CPU type name in avr_cpu_class_by_name(), and use
+the generic helper cpu_model_from_type() to show CPU model names
+in cpu_list(), with adjusted format to match with other targets.
 
 Signed-off-by: Gavin Shan <gshan@redhat.com>
 ---
- target/cris/cpu.c | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+ target/avr/cpu.c | 23 ++++++++++++++++++-----
+ 1 file changed, 18 insertions(+), 5 deletions(-)
 
-diff --git a/target/cris/cpu.c b/target/cris/cpu.c
-index a6a93c2359..420a2f75fb 100644
---- a/target/cris/cpu.c
-+++ b/target/cris/cpu.c
-@@ -122,11 +122,10 @@ static void cris_cpu_list_entry(gpointer data, gpointer user_data)
+diff --git a/target/avr/cpu.c b/target/avr/cpu.c
+index 8f741f258c..cef9f84e32 100644
+--- a/target/avr/cpu.c
++++ b/target/avr/cpu.c
+@@ -157,13 +157,23 @@ static void avr_cpu_initfn(Object *obj)
+ static ObjectClass *avr_cpu_class_by_name(const char *cpu_model)
  {
-     ObjectClass *oc = data;
-     const char *typename = object_class_get_name(oc);
--    char *name;
+     ObjectClass *oc;
++    char *typename;
+ 
+     oc = object_class_by_name(cpu_model);
+-    if (object_class_dynamic_cast(oc, TYPE_AVR_CPU) == NULL ||
+-        object_class_is_abstract(oc)) {
+-        oc = NULL;
++    if (object_class_dynamic_cast(oc, TYPE_AVR_CPU) &&
++        !object_class_is_abstract(oc)) {
++        return oc;
+     }
+-    return oc;
++
++    typename = g_strdup_printf(AVR_CPU_TYPE_NAME("%s"), cpu_model);
++    oc = object_class_by_name(typename);
++    g_free(typename);
++    if (object_class_dynamic_cast(oc, TYPE_AVR_CPU) &&
++        !object_class_is_abstract(oc)) {
++        return oc;
++    }
++
++    return NULL;
+ }
+ 
+ static void avr_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+@@ -366,14 +376,17 @@ typedef struct AVRCPUInfo {
+ static void avr_cpu_list_entry(gpointer data, gpointer user_data)
+ {
+     const char *typename = object_class_get_name(OBJECT_CLASS(data));
 +    char *model = cpu_model_from_type(typename);
  
--    name = g_strndup(typename, strlen(typename) - strlen(CRIS_CPU_TYPE_SUFFIX));
--    qemu_printf("  %s\n", name);
--    g_free(name);
+-    qemu_printf("%s\n", typename);
 +    qemu_printf("  %s\n", model);
 +    g_free(model);
  }
  
- void cris_cpu_list(void)
+ void avr_cpu_list(void)
+ {
+     GSList *list;
+     list = object_class_get_list_sorted(TYPE_AVR_CPU, false);
++    qemu_printf("Available CPUs:\n");
+     g_slist_foreach(list, avr_cpu_list_entry, NULL);
+     g_slist_free(list);
+ }
 -- 
 2.41.0
 
