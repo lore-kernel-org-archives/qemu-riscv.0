@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01900EE14D0
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 00:41:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DBF8EE14AA
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 00:41:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qe353-0006DR-M2; Wed, 06 Sep 2023 20:41:09 -0400
+	id 1qe34d-0005Vq-89; Wed, 06 Sep 2023 20:40:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe34x-00069P-KZ
- for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:41:03 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe34U-0005CD-2G
+ for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:40:36 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe34u-0001tE-4V
- for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:41:03 -0400
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qe34R-0001gV-7U
+ for qemu-riscv@nongnu.org; Wed, 06 Sep 2023 20:40:33 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1694047259;
+ s=mimecast20190719; t=1694047229;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=jKDsmqdKXW/52OHgWrNIrks6OR99NisUwEAqLjed2eQ=;
- b=KSH9WqGUDEez7y0tclAFjhUwlIBqmf+xgoU1Nn4emDxM7KP14xI82vJld93M8rltcC7FFK
- d4p7UJmb3r/H+HoTWjkCb+mt0tLh7F+el+63IVGePxB5v8DcArizCReIU8LFTVhdl9Ijl7
- qYwiHr4BZ14pb24OMEx9i3s6jLfb4Dg=
+ bh=fWJ/ft3wbc3usfLcOUrVN49+l5c6RR5ZXaRCQQU18A8=;
+ b=T+o2M1LigBlLHcqQ1ir1TQlMXU1e22+eSJmj1NZuVX9/HXBkc1LGDBvEagRsKKeawLNRGn
+ k01SEqTEaZminl5c6Av6FW6TBfbpSWXid3je0ZgEkzXJJu+6B3hfSm1fzwcaS7V8FnzX/Q
+ EUJSddzfvj2qN/YuWhXhpFdVHfSxaPg=
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-125-Zrx_wl5zOQCtWyT1uYgbyA-1; Wed, 06 Sep 2023 20:40:55 -0400
-X-MC-Unique: Zrx_wl5zOQCtWyT1uYgbyA-1
+ us-mta-528-9YNVnlXzNw2Q7n2kXAKtng-1; Wed, 06 Sep 2023 20:40:25 -0400
+X-MC-Unique: 9YNVnlXzNw2Q7n2kXAKtng-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
  [10.11.54.8])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 290BD181792B;
- Thu,  7 Sep 2023 00:40:53 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B943D856DED;
+ Thu,  7 Sep 2023 00:40:22 +0000 (UTC)
 Received: from gshan.redhat.com (unknown [10.64.136.25])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 6C8CAC03295;
- Thu,  7 Sep 2023 00:40:38 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 05190C03295;
+ Thu,  7 Sep 2023 00:40:07 +0000 (UTC)
 From: Gavin Shan <gshan@redhat.com>
 To: qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
@@ -64,17 +64,16 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  mark.cave-ayland@ilande.co.uk, atar4qemu@gmail.com,
  kbastian@mail.uni-paderborn.de, jcmvbkbc@gmail.com, pbonzini@redhat.com,
  imammedo@redhat.com, shan.gavin@gmail.com
-Subject: [PATCH v3 16/32] target/sh4: Use generic helper to show CPU model
- names
-Date: Thu,  7 Sep 2023 10:35:37 +1000
-Message-ID: <20230907003553.1636896-17-gshan@redhat.com>
+Subject: [PATCH v3 14/32] target/rx: Use generic helper to show CPU model names
+Date: Thu,  7 Sep 2023 10:35:35 +1000
+Message-ID: <20230907003553.1636896-15-gshan@redhat.com>
 In-Reply-To: <20230907003553.1636896-1-gshan@redhat.com>
 References: <20230907003553.1636896-1-gshan@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=gshan@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=gshan@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
@@ -98,75 +97,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-For target/sh4, the CPU type name can be: (1) the combination of the
-CPU model name and suffix; (2) TYPE_SH7750R_CPU when the CPU model
-name is "any". The CPU model names have been correctly shown in
-superh_cpu_list_entry().
+For target/rx, the CPU type name can be: (1) the combination of the
+CPU model name and suffix; (2) same to the CPU model name. The CPU
+type names have been shown in rx_cpu_list_entry().
 
-Use generic helper cpu_model_from_type() to show the CPU model name
-in the above function. Besides, superh_cpu_class_by_name() is improved
-by avoiding "goto out" and validating the CPU class.
+Use generic helper cpu_model_from_type() to show the CPU model names
+in rx_cpu_list_entry(). Besides, rx_cpu_class_by_name() is improved
+by merging the condition of '@oc == NULL' to object_class_dynamic_cast().
 
 Signed-off-by: Gavin Shan <gshan@redhat.com>
 ---
- target/sh4/cpu.c | 24 +++++++++++++-----------
- 1 file changed, 13 insertions(+), 11 deletions(-)
+ target/rx/cpu.c | 16 ++++++++++------
+ 1 file changed, 10 insertions(+), 6 deletions(-)
 
-diff --git a/target/sh4/cpu.c b/target/sh4/cpu.c
-index 61769ffdfa..ca06e2ce99 100644
---- a/target/sh4/cpu.c
-+++ b/target/sh4/cpu.c
-@@ -125,9 +125,10 @@ static void superh_cpu_disas_set_info(CPUState *cpu, disassemble_info *info)
- static void superh_cpu_list_entry(gpointer data, gpointer user_data)
+diff --git a/target/rx/cpu.c b/target/rx/cpu.c
+index 157e57da0f..ff0ced1f3d 100644
+--- a/target/rx/cpu.c
++++ b/target/rx/cpu.c
+@@ -91,9 +91,11 @@ static void rx_cpu_reset_hold(Object *obj)
+ 
+ static void rx_cpu_list_entry(gpointer data, gpointer user_data)
  {
-     const char *typename = object_class_get_name(OBJECT_CLASS(data));
--    int len = strlen(typename) - strlen(SUPERH_CPU_TYPE_SUFFIX);
+-    ObjectClass *oc = data;
++    const char *typename = object_class_get_name(OBJECT_CLASS(data));
 +    char *model = cpu_model_from_type(typename);
  
--    qemu_printf("%.*s\n", len, typename);
+-    qemu_printf("  %s\n", object_class_get_name(oc));
 +    qemu_printf("  %s\n", model);
 +    g_free(model);
  }
  
- void sh4_cpu_list(void)
-@@ -135,6 +136,7 @@ void sh4_cpu_list(void)
-     GSList *list;
+ void rx_cpu_list(void)
+@@ -111,18 +113,20 @@ static ObjectClass *rx_cpu_class_by_name(const char *cpu_model)
+     char *typename;
  
-     list = object_class_get_list_sorted(TYPE_SUPERH_CPU, false);
-+    qemu_printf("Available CPUs:\n");
-     g_slist_foreach(list, superh_cpu_list_entry, NULL);
-     g_slist_free(list);
- }
-@@ -146,20 +148,20 @@ static ObjectClass *superh_cpu_class_by_name(const char *cpu_model)
- 
-     s = g_ascii_strdown(cpu_model, -1);
-     if (strcmp(s, "any") == 0) {
--        oc = object_class_by_name(TYPE_SH7750R_CPU);
--        goto out;
-+        typename = g_strdup(TYPE_SH7750R_CPU);
-+    } else {
-+        typename = g_strdup_printf(SUPERH_CPU_TYPE_NAME("%s"), s);
+     oc = object_class_by_name(cpu_model);
+-    if (oc != NULL && object_class_dynamic_cast(oc, TYPE_RX_CPU) != NULL &&
++    if (object_class_dynamic_cast(oc, TYPE_RX_CPU) &&
+         !object_class_is_abstract(oc)) {
+         return oc;
      }
- 
--    typename = g_strdup_printf(SUPERH_CPU_TYPE_NAME("%s"), s);
++
+     typename = g_strdup_printf(RX_CPU_TYPE_NAME("%s"), cpu_model);
      oc = object_class_by_name(typename);
+     g_free(typename);
 -    if (oc != NULL && object_class_is_abstract(oc)) {
 -        oc = NULL;
--    }
--
--out:
-     g_free(s);
-     g_free(typename);
--    return oc;
-+    if (object_class_dynamic_cast(oc, TYPE_SUPERH_CPU) &&
++    if (object_class_dynamic_cast(oc, TYPE_RX_CPU) &&
 +        !object_class_is_abstract(oc)) {
 +        return oc;
-+    }
-+
+     }
+ 
+-    return oc;
 +    return NULL;
  }
  
- static void sh7750r_cpu_initfn(Object *obj)
+ static void rx_cpu_realize(DeviceState *dev, Error **errp)
 -- 
 2.41.0
 
