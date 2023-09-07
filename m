@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62619EE14A9
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 03:12:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DD77EE14A9
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Sep 2023 03:14:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qe5RE-0005H7-I2; Wed, 06 Sep 2023 23:12:12 -0400
+	id 1qe5T8-0006ro-6s; Wed, 06 Sep 2023 23:14:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qe5RC-0005GM-Sr; Wed, 06 Sep 2023 23:12:10 -0400
-Received: from mail-lj1-x232.google.com ([2a00:1450:4864:20::232])
+ id 1qe5T5-0006qz-6I; Wed, 06 Sep 2023 23:14:07 -0400
+Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qe5RA-0000FQ-CP; Wed, 06 Sep 2023 23:12:10 -0400
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2bcb0b973a5so8681881fa.3; 
- Wed, 06 Sep 2023 20:12:07 -0700 (PDT)
+ id 1qe5T2-0000eG-9f; Wed, 06 Sep 2023 23:14:06 -0400
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-522dd6b6438so510958a12.0; 
+ Wed, 06 Sep 2023 20:14:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1694056326; x=1694661126; darn=nongnu.org;
+ d=gmail.com; s=20221208; t=1694056442; x=1694661242; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=34vUCi94QBWcecwf+4IRKNKa804Cm0RS/PsizmwHbo8=;
- b=O/WKgcmli8rSdAaaj/ASJQ0lj2IscMcuqadtF1rDVvm57ewU4Te5Jk1ewEIQ93OtIf
- QS7xYxhceO32DYkqWVw5dTliiKbWOBJ3kiFAS0+2gPuhGc08MTvuXLUg9lsYYvo5dEay
- eThhIhGNreIU2TTMnmQMuSYGZFERIN2OEi0biecEYxawb42TmHzl7DijWaVmpvyc2wEO
- Aho0sx1KgvMkLAh1/uYlzzBHDUQVtDCWpyEVBaKxtayTIk39155A7nEGArSqmtRMxf8y
- nejkIoapT/epbtqv/T2pdZ4ur27tX8udhO4yseUj5hoeaNXC1F89WzOaOfKwPTMR1wyp
- Tnug==
+ bh=45PJVFPIacFs0KbcnFvHcmYK0jaqitootJvgxYJXKW0=;
+ b=RzajEqLhFACYs1O3pkPVo++URewpAyqA/A733tfh41lymJTaXRyfgCXevnKFGy527X
+ XbcZ4UU95e8Sfdtm1OKjDOYj7qDZEPMJLu5XslvwYyH1LqqeGE3/B6jbYgPDBsh7u6MC
+ z072U24+CKqiGc2+us82XFN5OPp8wARHNKoiwppKSvll+TuVYFzRXgVO32TVaBx+N5gv
+ 3WDB+UckFhlHzuSBpHh3RPqT+cnTDRXNdslUNZ6rzWEoyNTW2gmdG+fbV9J8ZTXi1GNZ
+ I0mOpl1psu6CfnaXWpw3bS4R3gv5EdNcfNkWSgGqcAoLx8uaXVyRCNn6E5SNmbBeuoZC
+ mEwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694056326; x=1694661126;
+ d=1e100.net; s=20221208; t=1694056442; x=1694661242;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=34vUCi94QBWcecwf+4IRKNKa804Cm0RS/PsizmwHbo8=;
- b=CXtug0KI4+jROumwI8YebaKZ4C7EUjQEzqxpD36VfojwRHlTrG2pzCOmf65IecAT7E
- 7TXFQjJFn3l+zXCe6yXEWB5wLAuIUnoHma3QR2S8y8sFOdVz8rHakCF4F+W1dqCeZpYo
- zdUB1Ajq1ofY+p4UuETPf6kJXzdSh5LCtN7IWXhVuFnvMqYfcKxdDdp+U5oABH0Tnx4g
- bFiiKXMn3bIi03HZ1ref/ADncmhPJYsQt5hRXanXr//A7Gx7/lUdj2EFmgs5h/2z9GWI
- NevbGaV+pvUfuWibL2sCpBIzoBfvjaC2gGwDgZRD+eRuh0CLccV+hPdY/jsiXsKz9mjo
- Cy4w==
-X-Gm-Message-State: AOJu0Yxpl1bNuZouv6RNwZ6FJTozySi1EmYAMsoLACkzuLh69fUOhKVA
- bLIGJu5ZQT0CWmy6c6P2OtA/gARXbVOgDKOJ7SVJlakkH9SWIQ==
-X-Google-Smtp-Source: AGHT+IHp7IOAUU2uQO7RLpddEGGiJHV9Zzt7cGClE0qfK7+8VWQeRTFFULeH6MjuiOw9mmCLFGcjFMeeG0LJn40CZ3s=
-X-Received: by 2002:a19:8c16:0:b0:500:a08e:2fcf with SMTP id
- o22-20020a198c16000000b00500a08e2fcfmr3405346lfd.47.1694056325990; Wed, 06
- Sep 2023 20:12:05 -0700 (PDT)
+ bh=45PJVFPIacFs0KbcnFvHcmYK0jaqitootJvgxYJXKW0=;
+ b=IVHzTjPHql97AfyGOCDJqaCnQV3zyVnQPGqsUO42iYgTi5cA5Yh6maLaE0t2OLw1VQ
+ NVUsBdQhJyMnDVKA0xGqILOJ+lNbNXc03w3XZpRN2+VKdi+Q2lWxVMSShG+cU6919zPE
+ iwFDOOLH6y8mNaaKlu0dRU581DCEY0xfymkXx+Tpuq1Zxq9rlBhfS5yCllm0G090A0AE
+ evMP/HtuW4EGxM7y6HtPzJifpUHaIaXrQgqmY8iJiyvx96qjceJ9xRsQsfM/USc7OrKS
+ 20Xx79dWalfJ8OBtC4sCbIBo18MKnrmZseiWMrpcBfqxq6wVJBrzvpoLRPtAKnTzZgye
+ ycQg==
+X-Gm-Message-State: AOJu0YzALJ803cYQasFRvxqeG2sKZBvpkSZRan33BQTstmaiZvViCM9o
+ DHw6P73y2DUfz2K3Zl9ADviN/DdfJxwh6XsxUEw=
+X-Google-Smtp-Source: AGHT+IF5B4fh2zJ/B/muvMetE8up85f245DbsRuQhvrBwjNFT7ANPpgrHOoWrR3oG7O1jASATB/ttSKIeOHF7IPbZtQ=
+X-Received: by 2002:aa7:dace:0:b0:523:40d0:34d1 with SMTP id
+ x14-20020aa7dace000000b0052340d034d1mr3721361eds.4.1694056441479; Wed, 06 Sep
+ 2023 20:14:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230904161959.1766-1-alvinga@andestech.com>
-In-Reply-To: <20230904161959.1766-1-alvinga@andestech.com>
+References: <20230726120706.335340-2-ajones@ventanamicro.com>
+In-Reply-To: <20230726120706.335340-2-ajones@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 7 Sep 2023 13:11:36 +1000
-Message-ID: <CAKmqyKOXNLUfE_13FH+faq5sDbjxDCFO-7dwKJwfyckC5b13ew@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: update checks on writing pmpcfg for ePMP to
- version 1.0
-To: Alvin Chang <vivahavey@gmail.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, alistair.francis@wdc.com, 
- Alvin Chang <alvinga@andestech.com>
+Date: Thu, 7 Sep 2023 13:13:33 +1000
+Message-ID: <CAKmqyKMbyDn0rZ8tAXCNZvLcVh2dGpkQ9b+WR_6t358kFpUroQ@mail.gmail.com>
+Subject: Re: [PATCH] docs/devel: Add cross-compiling doc
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ palmer@dabbelt.com, bin.meng@windriver.com, peter.maydell@linaro.org, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::232;
- envelope-from=alistair23@gmail.com; helo=mail-lj1-x232.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::531;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x531.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -89,116 +89,280 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Sep 5, 2023 at 2:30=E2=80=AFAM Alvin Chang <vivahavey@gmail.com> wr=
-ote:
+On Wed, Jul 26, 2023 at 10:08=E2=80=AFPM Andrew Jones <ajones@ventanamicro.=
+com> wrote:
 >
-> Current checks on writing pmpcfg for ePMP follows ePMP version 0.9.1.
-> However, ePMP specification has already been ratified, and there are
-> some differences between version 0.9.1 and 1.0. In this commit we update
-> the checks of writing pmpcfg to follow ePMP version 1.0.
+> Add instructions for how to cross-compile QEMU for RISC-V. The
+> file is named generically because there's no reason not to collect
+> other architectures steps into the same file, especially because
+> several subsections like those for cross-compiling QEMU dependencies
+> using meson and a cross-file could be shared. Additionally, other
+> approaches to creating sysroots, such as with debootstrap, may be
+> documented in this file in the future.
 >
-> When mseccfg.MML is set, the constraints to modify PMP rules are:
-> 1. Locked rules cannot be removed or modified until a PMP reset, unless
->    mseccfg.RLB is set.
-> 2. From Smepmp specification version 1.0, chapter 2 section 4b:
->    Adding a rule with executable privileges that either is M-mode-only
->    or a locked Shared-Region is not possible and such pmpcfg writes are
->    ignored, leaving pmpcfg unchanged.
->
-> The commit transfers the value of pmpcfg into the index of the ePMP
-> truth table, and checks the rules by aforementioned specification
-> changes.
->
-> Signed-off-by: Alvin Chang <alvinga@andestech.com>
+> Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
 
-Thanks for the patch!
+I get a warning when building this:
 
-As part of this change we should convert ePMP over to Smepmp and drop
-the experimental status
+qemu/docs/devel/cross-compiling.rst: WARNING: document isn't included
+in any toctree
+
+Do you mind adding a toc reference to it and sending a v2?
 
 Alistair
 
 > ---
->  target/riscv/pmp.c | 51 ++++++++++++++++++++++++++++++++++++++--------
->  1 file changed, 42 insertions(+), 9 deletions(-)
+>  docs/devel/cross-compiling.rst | 221 +++++++++++++++++++++++++++++++++
+>  1 file changed, 221 insertions(+)
+>  create mode 100644 docs/devel/cross-compiling.rst
 >
-> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index a08cd95658..c036ca3e70 100644
-> --- a/target/riscv/pmp.c
-> +++ b/target/riscv/pmp.c
-> @@ -99,16 +99,49 @@ static void pmp_write_cfg(CPURISCVState *env, uint32_=
-t pmp_index, uint8_t val)
->                  locked =3D false;
->              }
->
-> -            /* mseccfg.MML is set */
-> -            if (MSECCFG_MML_ISSET(env)) {
-> -                /* not adding execute bit */
-> -                if ((val & PMP_LOCK) !=3D 0 && (val & PMP_EXEC) !=3D PMP=
-_EXEC) {
-> -                    locked =3D false;
-> -                }
-> -                /* shared region and not adding X bit */
-> -                if ((val & PMP_LOCK) !=3D PMP_LOCK &&
-> -                    (val & 0x7) !=3D (PMP_WRITE | PMP_EXEC)) {
-> +            /*
-> +             * mseccfg.MML is set. Locked rules cannot be removed or mod=
-ified
-> +             * until a PMP reset. Besides, from Smepmp specification ver=
-sion 1.0
-> +             * , chapter 2 section 4b says:
-> +             * Adding a rule with executable privileges that either is
-> +             * M-mode-only or a locked Shared-Region is not possible and=
- such
-> +             * pmpcfg writes are ignored, leaving pmpcfg unchanged.
-> +             */
-> +            if (MSECCFG_MML_ISSET(env) && !pmp_is_locked(env, pmp_index)=
-) {
-> +                /*
-> +                 * Convert the PMP permissions to match the truth table =
-in the
-> +                 * ePMP spec.
-> +                 */
-> +                const uint8_t epmp_operation =3D
-> +                    ((val & PMP_LOCK) >> 4) | ((val & PMP_READ) << 2) |
-> +                    (val & PMP_WRITE) | ((val & PMP_EXEC) >> 2);
+> diff --git a/docs/devel/cross-compiling.rst b/docs/devel/cross-compiling.=
+rst
+> new file mode 100644
+> index 000000000000..1b988ba54e4c
+> --- /dev/null
+> +++ b/docs/devel/cross-compiling.rst
+> @@ -0,0 +1,221 @@
+> +.. SPDX-License-Identifier: GPL-2.0-or-later
 > +
-> +                switch (epmp_operation) {
-> +                /* pmpcfg.L =3D 0. Neither M-mode-only nor locked Shared=
--Region */
-> +                case 0:
-> +                case 1:
-> +                case 2:
-> +                case 3:
-> +                case 4:
-> +                case 5:
-> +                case 6:
-> +                case 7:
-> +                /* pmpcfg.L =3D 1 and pmpcfg.X =3D 0 (but case 10 is not=
- allowed) */
-> +                case 8:
-> +                case 12:
-> +                case 14:
-> +                /* pmpcfg.LRWX =3D 1111 */
-> +                case 15:  /* Read-only locked Shared-Region on all modes=
- */
->                      locked =3D false;
-> +                    break;
-> +                /* Other rules which add new code regions are not allowe=
-d */
-> +                case 9:
-> +                case 10:  /* Execute-only locked Shared-Region on all mo=
-des */
-> +                case 11:
-> +                case 13:
-> +                    break;
-> +                default:
-> +                    g_assert_not_reached();
->                  }
->              }
->          } else {
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +Cross-compiling QEMU
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +Cross-compiling QEMU first requires the preparation of a cross-toolchain
+> +and the cross-compiling of QEMU's dependencies. While the steps will be
+> +similar across architectures, each architecture will have its own specif=
+ic
+> +recommendations. This document collects architecture-specific procedures
+> +and hints that may be used to cross-compile QEMU, where typically the ho=
+st
+> +environment is x86.
+> +
+> +RISC-V
+> +=3D=3D=3D=3D=3D=3D
+> +
+> +Toolchain
+> +---------
+> +
+> +Select a root directory for the cross environment
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +Export an environment variable pointing to a root directory
+> +for the cross environment. For example, ::
+> +
+> +  $ export PREFIX=3D"$HOME/opt/riscv"
+> +
+> +Create a work directory
+> +^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +Tools and several components will need to be downloaded and built. Creat=
+e
+> +a directory for all the work, ::
+> +
+> +  $ export WORK_DIR=3D"$HOME/work/xqemu"
+> +  $ mkdir -p "$WORK_DIR"
+> +
+> +Select and prepare the toolchain
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +Select a toolchain such as [riscv-toolchain]_ and follow its instruction=
+s
+> +for building and installing it to ``$PREFIX``, e.g. ::
+> +
+> +  $ cd "$WORK_DIR"
+> +  $ git clone https://github.com/riscv/riscv-gnu-toolchain
+> +  $ cd riscv-gnu-toolchain
+> +  $ ./configure --prefix=3D"$PREFIX"
+> +  $ make -j$(nproc) linux
+> +
+> +Set the ``$CROSS_COMPILE`` environment variable to the prefix of the cro=
+ss
+> +tools and add the tools to ``$PATH``, ::
+> +
+> +$ export CROSS_COMPILE=3Driscv64-unknown-linux-gnu-
+> +$ export PATH=3D"$PREFIX/bin:$PATH"
+> +
+> +Also set ``$SYSROOT``, where all QEMU cross-compiled dependencies will b=
+e
+> +installed. The toolchain installation likely created a 'sysroot' directo=
+ry
+> +at ``$PREFIX/sysroot``, which is the default location for most cross
+> +tools, making it a good location, ::
+> +
+> +  $ mkdir -p "$PREFIX/sysroot"
+> +  $ export SYSROOT=3D"$PREFIX/sysroot"
+> +
+> +Create a pkg-config wrapper
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +The build processes of QEMU and some of its dependencies depend on
+> +pkg-config. Create a wrapper script for it which works for the cross
+> +environment: ::
+> +
+> +  $ cat <<EOF >"$PREFIX/bin/${CROSS_COMPILE}pkg-config"
+> +  #!/bin/sh
+> +
+> +  [ "\$SYSROOT" ] || exit 1
+> +
+> +  export PKG_CONFIG_PATH=3D
+> +  export PKG_CONFIG_LIBDIR=3D"\${SYSROOT}/usr/lib/pkgconfig:\${SYSROOT}/=
+usr/lib64/pkgconfig:\${SYSROOT}/usr/share/pkgconfig"
+> +
+> +  exec pkg-config "\$@"
+> +  EOF
+> +  $ chmod +x "$PREFIX/bin/${CROSS_COMPILE}pkg-config"
+> +
+> +Create a cross-file for meson builds
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +meson setup, used by some of QEMU's dependencies, needs a "cross-file" t=
+o
+> +configure the cross environment. Create one, ::
+> +
+> +  $ cd "$WORK_DIR"
+> +  $ cat <<EOF >cross_file.txt
+> +  [host_machine]
+> +  system =3D 'linux'
+> +  cpu_family =3D 'riscv64'
+> +  cpu =3D 'riscv64'
+> +  endian =3D 'little'
+> +
+> +  [binaries]
+> +  c =3D '${CROSS_COMPILE}gcc'
+> +  cpp =3D '${CROSS_COMPILE}g++'
+> +  ar =3D '${CROSS_COMPILE}ar'
+> +  ld =3D '${CROSS_COMPILE}ld'
+> +  objcopy =3D '${CROSS_COMPILE}objcopy'
+> +  strip =3D '${CROSS_COMPILE}strip'
+> +  pkgconfig =3D '${CROSS_COMPILE}pkg-config'
+> +  EOF
+> +
+> +Cross-compile dependencies
+> +--------------------------
+> +
+> +glibc
+> +^^^^^
+> +
+> +If [riscv-toolchain]_ was selected for the toolchain then this step is
+> +already complete and glibc has already been installed into ``$SYSROOT``.
+> +Otherwise, cross-compile glibc and install it to ``$SYSROOT``.
+> +
+> +libffi
+> +^^^^^^
+> +
+> +::
+> +
+> +  $ cd "$WORK_DIR"
+> +  $ git clone https://gitlab.freedesktop.org/gstreamer/meson-ports/libff=
+i.git
+> +  $ cd libffi
+> +  $ meson setup --cross-file ../cross_file.txt --prefix=3D"$SYSROOT/usr"=
+ _build
+> +  $ ninja -C _build
+> +  $ ninja -C _build install
+> +
+> +*Building libffi seperately avoids a compilation error generated when
+> +building it as a subproject of glib.*
+> +
+> +glib
+> +^^^^
+> +
+> +::
+> +
+> +  $ cd "$WORK_DIR"
+> +  $ git clone https://github.com/GNOME/glib.git
+> +  $ cd glib
+> +  $ meson setup --cross-file ../cross_file.txt --prefix=3D"$SYSROOT/usr"=
+ _build
+> +  $ ninja -C _build
+> +  $ ninja -C _build install
+> +
+> +libslirp [optional]
+> +^^^^^^^^^^^^^^^^^^^
+> +
+> +::
+> +
+> +  $ cd "$WORK_DIR"
+> +  $ git clone https://gitlab.com/qemu-project/libslirp.git
+> +  $ cd libslirp
+> +  $ meson setup --cross-file ../cross_file.txt --prefix=3D"$SYSROOT/usr"=
+ _build
+> +  $ ninja -C _build
+> +  $ ninja -C _build install
+> +
+> +pixman
+> +^^^^^^
+> +
+> +First ensure the 'libtool' package is installed, e.g.
+> +``sudo dnf install libtool`` or ``sudo apt install libtool``
+> +
+> +::
+> +
+> +  $ cd "$WORK_DIR"
+> +  $ git clone https://gitlab.freedesktop.org/pixman/pixman
+> +  $ cd pixman
+> +  $ ./autogen.sh
+> +  $ ./configure --prefix=3D"$SYSROOT/usr" --host=3Driscv64-unknown-linux=
+-gnu
+> +  $ make -j$(nproc)
+> +  $ make install
+> +
+> +Cross-compile QEMU
+> +------------------
+> +
+> +::
+> +
+> +  $ cd "$WORK_DIR"
+> +  $ git clone https://gitlab.com/qemu-project/qemu.git
+> +  $ cd qemu
+> +  $ mkdir -p build/install_dir
+> +  $ cd build
+> +  $ ../configure --target-list=3Driscv64-softmmu --cross-prefix=3D$CROSS=
+_COMPILE --prefix=3D"$PWD/install_dir"
+> +  $ make -j$(nproc)
+> +  $ make install
+> +
+> +*Cross-compiling QEMU with different configurations may require more
+> +dependencies to be built and installed in the sysroot.*
+> +
+> +Running QEMU
+> +------------
+> +
+> +``build/install_dir`` may now be copied to the target and its bin
+> +directory may be added to the target user's PATH. Prior to running
+> +QEMU, ensure all the libraries it depends on are present, ::
+> +
+> +  $ ldd /path/to/bin/qemu-system-riscv64
+> +
+> +For example, it may necessary to install zlib libraries, e.g.
+> +``sudo dnf install zlib-devel`` or ``sudo apt install zlib1g-dev``
+> +
+> +Subsequent QEMU Cross-compiling
+> +-------------------------------
+> +
+> +Unless it's necessary to update and recompile the toolchain or
+> +dependencies, then most steps do not need to be repeated for subsequent
+> +compiles. Simply ensure the toolchain is in ``$PATH``, ``$SYSROOT`` poin=
+ts
+> +at the sysroot, and then follow the QEMU cross-compile steps in
+> +"Cross-compile QEMU". For example, ::
+> +
+> +  $ export PATH=3D"$HOME/opt/riscv/bin:$PATH"
+> +  $ export SYSROOT=3D"$HOME/opt/riscv/sysroot"
+> +  $ cd /path/to/qemu
+> +  $ mkdir -p build/install_dir
+> +  $ cd build
+> +  $ ../configure --target-list=3Driscv64-softmmu --cross-prefix=3Driscv6=
+4-unknown-linux-gnu- --prefix=3D"$PWD/install_dir"
+> +  $ make -j
+> +  $ make install
+> +
+> +References
+> +----------
+> +
+> +.. [riscv-toolchain] https://github.com/riscv/riscv-gnu-toolchain
 > --
-> 2.34.1
+> 2.41.0
 >
 >
 
