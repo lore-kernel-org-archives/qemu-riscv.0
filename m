@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5848EE14C3
-	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Sep 2023 03:24:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 065E9EB8FDE
+	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Sep 2023 03:33:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qeS6M-0003aW-9d; Thu, 07 Sep 2023 23:24:10 -0400
+	id 1qeSEd-0007Ny-Rw; Thu, 07 Sep 2023 23:32:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qeS6K-0003Zp-Ev; Thu, 07 Sep 2023 23:24:08 -0400
-Received: from out30-97.freemail.mail.aliyun.com ([115.124.30.97])
+ id 1qeSEa-0007De-V0; Thu, 07 Sep 2023 23:32:40 -0400
+Received: from out30-110.freemail.mail.aliyun.com ([115.124.30.110])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qeS6G-0002sa-N0; Thu, 07 Sep 2023 23:24:08 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R121e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046060;
+ id 1qeSEX-00064c-9p; Thu, 07 Sep 2023 23:32:40 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R561e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
  MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=4; SR=0;
- TI=SMTPD_---0VraxpoG_1694143434; 
+ TI=SMTPD_---0VraxtTB_1694143948; 
 Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VraxpoG_1694143434) by smtp.aliyun-inc.com;
- Fri, 08 Sep 2023 11:23:55 +0800
+ fp:SMTPD_---0VraxtTB_1694143948) by smtp.aliyun-inc.com;
+ Fri, 08 Sep 2023 11:32:29 +0800
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, LIU Zhiwei <lzw194868@alibaba-inc.com>,
  LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH] qemu/timer: Add host ticks function for RISC-V
-Date: Fri,  8 Sep 2023 11:23:00 +0800
-Message-Id: <20230908032300.646-1-zhiwei_liu@linux.alibaba.com>
+Subject: [RESEND] qemu/timer: Add host ticks function for RISC-V
+Date: Fri,  8 Sep 2023 11:31:29 +0800
+Message-Id: <20230908033129.694-1-zhiwei_liu@linux.alibaba.com>
 X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.97;
+Received-SPF: pass client-ip=115.124.30.110;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-97.freemail.mail.aliyun.com
+ helo=out30-110.freemail.mail.aliyun.com
 X-Spam_score_int: -98
 X-Spam_score: -9.9
 X-Spam_bar: ---------
@@ -68,7 +68,7 @@ Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
  1 file changed, 19 insertions(+)
 
 diff --git a/include/qemu/timer.h b/include/qemu/timer.h
-index 9a91cb1248..ce0b66d122 100644
+index 9a91cb1248..105767c195 100644
 --- a/include/qemu/timer.h
 +++ b/include/qemu/timer.h
 @@ -979,6 +979,25 @@ static inline int64_t cpu_get_host_ticks(void)
@@ -90,7 +90,7 @@ index 9a91cb1248..ce0b66d122 100644
 +{
 +    int64_t val;
 +
-+    asm volatile("RDCYCLE %0" : "=r"(cc));
++    asm volatile("RDCYCLE %0" : "=r"(val));
 +    return val;
 +}
 +
