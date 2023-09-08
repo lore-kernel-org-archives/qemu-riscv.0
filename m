@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E626EEEB560
-	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Sep 2023 18:29:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD216EEB560
+	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Sep 2023 18:29:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qegC7-0003OU-51; Fri, 08 Sep 2023 14:27:03 -0400
+	id 1qegC1-0003Jy-Ip; Fri, 08 Sep 2023 14:26:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1qegC4-0003MN-1L; Fri, 08 Sep 2023 14:27:00 -0400
-Received: from mail-ej1-x634.google.com ([2a00:1450:4864:20::634])
+ id 1qegBz-0003IS-DB; Fri, 08 Sep 2023 14:26:55 -0400
+Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1qegC1-0006nc-Gf; Fri, 08 Sep 2023 14:26:59 -0400
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-99bf3f59905so288212866b.3; 
- Fri, 08 Sep 2023 11:26:56 -0700 (PDT)
+ id 1qegBw-0006mk-U0; Fri, 08 Sep 2023 14:26:55 -0400
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-99bf1f632b8so300883166b.1; 
+ Fri, 08 Sep 2023 11:26:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1694197615; x=1694802415; darn=nongnu.org;
+ d=gmail.com; s=20221208; t=1694197611; x=1694802411; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oCMPg3srOuNK1zxCrcmJhIPfQWCsaR+9i85+FTGMjt4=;
- b=o93fcAmEhcxP13iEn+QQtJbsETYWpPwSdLdS99bYts2NmtL7pFOqBP60gSc+D35YS9
- G9CyDkSt6Sh8eOuyvrdHIpGme1BpbffwxnVJzMWNGgvqwb7BChnQ/aH3w7TAuksIbKJ1
- ooSOQ9kMUVbr3WQjqCeoKqVIxy1kIO/tdMk7aovG4KXnUhWAEIXqdktLGiErEMdfDfdU
- 0BpXC669wliFHRslSn9djas9RAtAATBbcqIQyEzV8OqehYGa1e1vmguTypHpQUYNhlUR
- PC2I0ct5D1+fl+llI5Huw6WjIi3yxS5kr7QqJC0UrSC08n23OQeFYZONfixNEno1WIpO
- KTIw==
+ bh=xAJzL3UFw1DN5li2iMX/eafl89efIRabG5Xy7FGMFn4=;
+ b=cdpjcFB00WWtJU1kiTf906mqADatAJ2AeRX2/M8DgryRpzm3WyrIE8vAVA9vWZr/+G
+ 4+q4TXW504FkmCbu5WXpRdJ5SjBgrpIM6Z/cbiTWopQUjJTgVmJtROwGk/knL6q/auOw
+ 4Aqfl1RAZkOW84GEZo11YscEuUmvexYEvjUmliC1kTaJcRrd/sO8WHAabIj1bnLigrUU
+ f2GZGCeCj3sHql8xQlrwapxKUDKyfDUzNLeg8bkB407HomEKV7Dk89XVaf2z7GV/aKpk
+ r2Qa44ZDaupxxJQIiKg/CC0Xav2pu9vkgkBp6Mj6h/fYPdfzjqXtgoFDR6ZF7pUTYgKd
+ MXsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694197615; x=1694802415;
+ d=1e100.net; s=20230601; t=1694197611; x=1694802411;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oCMPg3srOuNK1zxCrcmJhIPfQWCsaR+9i85+FTGMjt4=;
- b=eepcZdbudbKVa1AuWVn2jkuDT8ZqovsDdyYVtTrKeds7zTrG/JixhoaC89DhZKFIcm
- 2xdvE3XC2bnsqnSTGyBSLy/unyMs1pipjZIVmJn9f0bRZKBFbOQO3xwhtU/wxMPfqP4g
- UPNb/bhVo3y80buntpS65fWATOgXeSGDiY8PUBm0pu15N4Sw12MR4xHoVOu875EAwA02
- mpm7gYTAUP4umhAo+57HdxrwyewgNzjVr1XcfZ+muWVoMP11aFCyJsCwglnaqyKdtReS
- dg118aO13IqdR/nzDXrCGIt73dB0k1itUvC81Npt+r0mnYr4HyBmAef10HS9JwigI3YL
- 4o7g==
-X-Gm-Message-State: AOJu0Yz7nSMaZbEKmaSUa/ZokqXjD1ku6RJrIuhV9X/SRwrXn/GzeBdP
- +SEUQ/5rCsnJkTAgknRb3SA=
-X-Google-Smtp-Source: AGHT+IFBzWnrWCcA0f2LxybbbsZz//9+hIzWGz/+eD6SFgrLyEtkvHf8Xsu3cA9hjriTeGJFPvZtGg==
-X-Received: by 2002:a17:906:8a6e:b0:9a1:fb4c:3b6c with SMTP id
- hy14-20020a1709068a6e00b009a1fb4c3b6cmr2413319ejc.59.1694197615491; 
- Fri, 08 Sep 2023 11:26:55 -0700 (PDT)
+ bh=xAJzL3UFw1DN5li2iMX/eafl89efIRabG5Xy7FGMFn4=;
+ b=GDC79zFBUbx5oi1Lu5Fu/yHz15j2sH5cD60ZzUt8z2zRu27CYcGXNiQ2M7anYB/LwF
+ +LpxyDRzvNxl1JWVwO6d8NRsBkK2ne1Ny8xaS8vDeAyN6flqL2MBdGXF74FeV/cw63BA
+ XfUzI1FZ6mozug6+roKJeHWxMib/cUgDLKJ+QINAJRoY0KjaB7c6JAMTWddMRv5ffxNo
+ YeCxVlMTPDWc9ybuhnNDaAAvnmnVpJ8lyBneNEhwgI9e4KNcDNVDcYiykMppHSi5eot0
+ 2/SerxZrt2xnc0xwLSEfqOkCdTPogq+m0gEPeGX1fFMLpMcYJRBwDZid5hOJeAILw3t1
+ k52w==
+X-Gm-Message-State: AOJu0YysfIf/DlMArTi6HwK/9csgDXCapFf4lko6wkI+c0DqMlDX0Mdt
+ CtWFVh2bwuXK5Pr+woHjtg4=
+X-Google-Smtp-Source: AGHT+IG9QOjnu7nV5Y94GklMJ5cAtzyE3y5PIsS6yaiVdpILzAHy3+by/uB6VB1Gg+srEm3AhLEC/Q==
+X-Received: by 2002:a17:906:21b:b0:99b:e5c3:2e45 with SMTP id
+ 27-20020a170906021b00b0099be5c32e45mr2813221ejd.28.1694197611143; 
+ Fri, 08 Sep 2023 11:26:51 -0700 (PDT)
 Received: from freya.midgard (broadband-188-255-126-251.ip.moscow.rt.ru.
  [188.255.126.251]) by smtp.gmail.com with ESMTPSA id
- cb22-20020a170906a45600b0099d804da2e9sm1342667ejb.225.2023.09.08.11.26.54
+ cb22-20020a170906a45600b0099d804da2e9sm1342667ejb.225.2023.09.08.11.26.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Sep 2023 11:26:54 -0700 (PDT)
+ Fri, 08 Sep 2023 11:26:50 -0700 (PDT)
 From: Alexey Baturo <baturo.alexey@gmail.com>
 To: 
 Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org, palmer@dabbelt.com,
  Alistair.Francis@wdc.com, zhiwei_liu@linux.alibaba.com,
  sagark@eecs.berkeley.edu, kbastian@mail.uni-paderborn.de,
  qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Subject: [RFC v1 6/8] target/riscv: Add functions to calculate current N
- masked bits for pointer masking
-Date: Fri,  8 Sep 2023 18:26:38 +0000
-Message-Id: <20230908182640.1102270-7-baturo.alexey@gmail.com>
+Subject: [RFC v1 3/8] target/riscv: Add new bits in CSRs for Zjpm 0.6.1
+Date: Fri,  8 Sep 2023 18:26:35 +0000
+Message-Id: <20230908182640.1102270-4-baturo.alexey@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230908182640.1102270-1-baturo.alexey@gmail.com>
 References: <20230908182640.1102270-1-baturo.alexey@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::634;
- envelope-from=baturo.alexey@gmail.com; helo=mail-ej1-x634.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62b;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-ej1-x62b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,106 +96,106 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 Signed-off-by: Alexey Baturo <baturo.alexey@gmail.com>
 ---
- target/riscv/cpu.h        |  6 ++--
- target/riscv/cpu_helper.c | 58 +++++++++++++++++++++++++++++++++++++++
- 2 files changed, 62 insertions(+), 2 deletions(-)
+ target/riscv/cpu_bits.h |  6 ++++++
+ target/riscv/csr.c      |  8 ++++++++
+ target/riscv/pmp.c      |  5 +++++
+ target/riscv/pmp.h      | 12 +++++++-----
+ 4 files changed, 26 insertions(+), 5 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 17d0088cb4..c87c4f26a2 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -91,11 +91,9 @@ typedef enum {
- /* Enum holds maximum for N bits to be ignored depending on privilege level */
- typedef enum {
-     PM_BARE_N_BITS = 16,
--    PM_SV32_N_BITS = 0,
-     PM_SV39_N_BITS = 25,
-     PM_SV48_N_BITS = 16,
-     PM_SV57_N_BITS = 7,
--    PM_SV64_N_BITS = 0,
- } RISCVZjpmMaxNBits;
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 87a741fe66..238f7a13f4 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -714,6 +714,8 @@ typedef enum RISCVException {
+ #define MENVCFG_CBIE                       (3UL << 4)
+ #define MENVCFG_CBCFE                      BIT(6)
+ #define MENVCFG_CBZE                       BIT(7)
++#define MENVCFG_SPMEN                      BIT(8)
++#define MENVCFG_SPMENSELF                  BIT(9)
+ #define MENVCFG_HADE                       (1ULL << 61)
+ #define MENVCFG_PBMTE                      (1ULL << 62)
+ #define MENVCFG_STCE                       (1ULL << 63)
+@@ -727,11 +729,15 @@ typedef enum RISCVException {
+ #define SENVCFG_CBIE                       MENVCFG_CBIE
+ #define SENVCFG_CBCFE                      MENVCFG_CBCFE
+ #define SENVCFG_CBZE                       MENVCFG_CBZE
++#define SENVCFG_UPMEN                      MENVCFG_SPMEN
++#define SENVCFG_UPMENSELF                  MENVCFG_SPMENSELF
  
- #define MMU_USER_IDX 3
-@@ -633,6 +631,10 @@ static inline uint32_t vext_get_vlmax(RISCVCPU *cpu, target_ulong vtype)
- void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
-                           uint64_t *cs_base, uint32_t *pflags);
+ #define HENVCFG_FIOM                       MENVCFG_FIOM
+ #define HENVCFG_CBIE                       MENVCFG_CBIE
+ #define HENVCFG_CBCFE                      MENVCFG_CBCFE
+ #define HENVCFG_CBZE                       MENVCFG_CBZE
++#define HENVCFG_HPMEN                      MENVCFG_SPMEN
++#define HENVCFG_HPMENSELF                  MENVCFG_SPMENSELF
+ #define HENVCFG_HADE                       MENVCFG_HADE
+ #define HENVCFG_PBMTE                      MENVCFG_PBMTE
+ #define HENVCFG_STCE                       MENVCFG_STCE
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index a08285e55d..c7e59168d2 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -1942,6 +1942,10 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+                 (cfg->ext_sstc ? MENVCFG_STCE : 0) |
+                 (cfg->ext_svadu ? MENVCFG_HADE : 0);
+     }
++    if (riscv_cpu_cfg(env)->ext_smnjpm) {
++        /* for zjpm v0.6.1 MENVCFG_SPMENSELF should be always 0 */
++        mask |= MENVCFG_SPMEN;
++    }
+     env->menvcfg = (env->menvcfg & ~mask) | (val & mask);
  
-+void riscv_cpu_update_mask(CPURISCVState *env);
-+RISCVZjpmMaxNBits riscv_cpu_pm_get_n_bits(int satp_mode, int priv_mode);
-+bool riscv_cpu_pm_check_applicable(CPURISCVState *env, int priv_mode);
+     return RISCV_EXCP_NONE;
+@@ -1993,6 +1997,10 @@ static RISCVException write_senvcfg(CPURISCVState *env, int csrno,
+         return ret;
+     }
+ 
++    if (riscv_cpu_cfg(env)->ext_ssnjpm) {
++        /* for zjpm v0.6.1 SENVCFG_UPMENSELF should be always 0 */
++        mask |= SENVCFG_UPMEN;
++    }
+     env->senvcfg = (env->senvcfg & ~mask) | (val & mask);
+     return RISCV_EXCP_NONE;
+ }
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index 9d8db493e6..0db49173ef 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -580,6 +580,11 @@ void mseccfg_csr_write(CPURISCVState *env, target_ulong val)
+         val &= ~(MSECCFG_MMWP | MSECCFG_MML | MSECCFG_RLB);
+     }
+ 
++    if (riscv_cpu_cfg(env)->ext_smmjpm) {
++        /* for zjpm v0.6.1 MSECCFG_MPMENSELF should be always 0 */
++        val &= ~MSECCFG_MPMENSELF;
++    }
 +
- RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
-                            target_ulong *ret_value,
-                            target_ulong new_value, target_ulong write_mask);
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index b3871b0a28..6e68b2fc27 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -144,6 +144,64 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
-     *pflags = flags;
+     env->mseccfg = val;
  }
  
-+/*
-+ * Curernt Zjpm v0.6.1 spec doesn't strictly specify the exact value of N bits.
-+ * It allows it to be dependent on both translation mode and priv level.
-+ * For now let's ignore priv mode and always return max available value.
-+ */
-+RISCVZjpmMaxNBits riscv_cpu_pm_get_n_bits(int satp_mode, int priv_mode)
-+{
-+    switch (satp_mode) {
-+    case VM_1_10_MBARE:
-+        return PM_BARE_N_BITS;
-+    case VM_1_10_SV39:
-+        return PM_SV39_N_BITS;
-+    case VM_1_10_SV48:
-+        return PM_SV48_N_BITS;
-+    case VM_1_10_SV57:
-+        return PM_SV57_N_BITS;
-+    default:
-+        g_assert_not_reached();
-+    }
-+}
-+
-+/* For current priv level check if pointer masking should be applied */
-+bool riscv_cpu_pm_check_applicable(CPURISCVState *env, int priv_mode)
-+{
-+    /* checks if appropriate extension is present and enable bit is set */
-+    switch (priv_mode) {
-+    case PRV_M:
-+        return riscv_cpu_cfg(env)->ext_smmjpm && env->mseccfg & MSECCFG_MPMEN;
-+    case PRV_S:
-+        return riscv_cpu_cfg(env)->ext_smnjpm && env->menvcfg & MENVCFG_SPMEN;
-+    case PRV_U:
-+        return riscv_cpu_cfg(env)->ext_ssnjpm && env->senvcfg & SENVCFG_UPMEN;
-+    default:
-+        g_assert_not_reached();
-+    }
-+    g_assert_not_reached();
-+    return false;
-+}
-+
-+void riscv_cpu_update_mask(CPURISCVState *env)
-+{
-+#ifndef CONFIG_USER_ONLY
-+    int priv_mode = cpu_address_mode(env);
-+    int satp_mode = 0;
-+    if (riscv_cpu_mxl(env) == MXL_RV32) {
-+        satp_mode = get_field(env->satp, SATP32_MODE);
-+    } else {
-+        satp_mode = get_field(env->satp, SATP64_MODE);
-+    }
-+    RISCVZjpmMaxNBits n_bits = riscv_cpu_pm_get_n_bits(satp_mode, priv_mode);
-+    /* in bare mode address is not sign extended */
-+    env->pm_signext = (satp_mode != VM_1_10_MBARE);
-+    /* if pointer masking is applicable set env variable */
-+    bool applicable = riscv_cpu_pm_check_applicable(env, priv_mode);
-+    env->pm_n_bits = applicable ? n_bits : 0;
-+#endif
-+}
-+
- #ifndef CONFIG_USER_ONLY
+diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
+index cf5c99f8e6..e4a58c9974 100644
+--- a/target/riscv/pmp.h
++++ b/target/riscv/pmp.h
+@@ -39,11 +39,13 @@ typedef enum {
+ } pmp_am_t;
  
- /*
+ typedef enum {
+-    MSECCFG_MML   = 1 << 0,
+-    MSECCFG_MMWP  = 1 << 1,
+-    MSECCFG_RLB   = 1 << 2,
+-    MSECCFG_USEED = 1 << 8,
+-    MSECCFG_SSEED = 1 << 9
++    MSECCFG_MML       = 1 << 0,
++    MSECCFG_MMWP      = 1 << 1,
++    MSECCFG_RLB       = 1 << 2,
++    MSECCFG_USEED     = 1 << 8,
++    MSECCFG_SSEED     = 1 << 9,
++    MSECCFG_MPMEN     = 1 << 10,
++    MSECCFG_MPMENSELF = 1 << 11
+ } mseccfg_field_t;
+ 
+ typedef struct {
 -- 
 2.34.1
 
