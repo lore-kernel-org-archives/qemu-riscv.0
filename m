@@ -4,46 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FD08EE8011
-	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Sep 2023 14:31:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E63FEE8010
+	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Sep 2023 14:32:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qecVr-000157-UG; Fri, 08 Sep 2023 10:31:12 -0400
+	id 1qecVs-00015c-Bo; Fri, 08 Sep 2023 10:31:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alvinga@andestech.com>)
- id 1qeVUt-0005rO-Gf; Fri, 08 Sep 2023 03:01:43 -0400
+ id 1qeWEd-0000GR-Ie; Fri, 08 Sep 2023 03:48:59 -0400
 Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
  helo=Atcsqr.andestech.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alvinga@andestech.com>)
- id 1qeVUp-0007f2-S7; Fri, 08 Sep 2023 03:01:43 -0400
-Received: from Atcsqr.andestech.com (localhost [127.0.0.2] (may be forged))
- by Atcsqr.andestech.com with ESMTP id 3886ZFGK094359;
- Fri, 8 Sep 2023 14:35:15 +0800 (+08)
- (envelope-from alvinga@andestech.com)
+ id 1qeWEV-0005WJ-AL; Fri, 08 Sep 2023 03:48:54 -0400
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 3886Z5Gh094341;
- Fri, 8 Sep 2023 14:35:05 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 3887mane027729;
+ Fri, 8 Sep 2023 15:48:36 +0800 (+08)
  (envelope-from alvinga@andestech.com)
 Received: from atctrx.andestech.com (10.0.15.173) by ATCPCS16.andestech.com
  (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; Fri, 8 Sep 2023
- 14:35:02 +0800
+ 15:48:35 +0800
 From: Alvin Chang <alvinga@andestech.com>
 To: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
 CC: <alistair.francis@wdc.com>, Alvin Chang <alvinga@andestech.com>
 Subject: [PATCH v2] target/riscv: update checks on writing pmpcfg for Smepmp
  version 1.0
-Date: Fri, 8 Sep 2023 14:34:56 +0800
-Message-ID: <20230908063456.368804-1-alvinga@andestech.com>
+Date: Fri, 8 Sep 2023 15:48:33 +0800
+Message-ID: <20230908074833.489945-1-alvinga@andestech.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [10.0.15.173]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 3886ZFGK094359
+X-MAIL: Atcsqr.andestech.com 3887mane027729
 Received-SPF: pass client-ip=60.248.80.70; envelope-from=alvinga@andestech.com;
  helo=Atcsqr.andestech.com
 X-Spam_score_int: -8
