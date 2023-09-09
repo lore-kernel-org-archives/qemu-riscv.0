@@ -4,78 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89ED9EEB580
-	for <qemu-riscv@archiver.kernel.org>; Sat,  9 Sep 2023 14:46:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6FE5EC8756
+	for <qemu-riscv@archiver.kernel.org>; Sat,  9 Sep 2023 17:43:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qezDS-0007hG-H5; Sat, 09 Sep 2023 10:45:42 -0400
+	id 1qf1zV-0006Y5-05; Sat, 09 Sep 2023 13:43:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1qezDR-0007h0-C5
- for qemu-riscv@nongnu.org; Sat, 09 Sep 2023 10:45:41 -0400
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1qf1zU-0006Xq-C0
+ for qemu-riscv@nongnu.org; Sat, 09 Sep 2023 13:43:28 -0400
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1qezDN-0007aj-Md
- for qemu-riscv@nongnu.org; Sat, 09 Sep 2023 10:45:41 -0400
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1c34c9cc9b9so22279255ad.3
- for <qemu-riscv@nongnu.org>; Sat, 09 Sep 2023 07:45:36 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1qf1zS-0004SP-4n
+ for qemu-riscv@nongnu.org; Sat, 09 Sep 2023 13:43:28 -0400
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-1c364fb8a4cso28369965ad.1
+ for <qemu-riscv@nongnu.org>; Sat, 09 Sep 2023 10:43:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=dabbelt-com.20230601.gappssmtp.com; s=20230601; t=1694270735; x=1694875535;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:message-id:to:from:cc
- :in-reply-to:subject:date:from:to:cc:subject:date:message-id
- :reply-to; bh=fHWUFP87ZLuSzjEVbbDQ0m6WgnDWRLhKrDRdZuJlQ3s=;
- b=e04EseKoa+UTcwNyawmOc1AFAd5URCFkNKkJ7u3VzD9++MPJGFG57NkqEa12WlcQj+
- TeWGYy/KHi4tcdnKcc2Z5bM7Iseujppe5YI2XGh53Fv2XGc6jAvLnwaF2pvfoFurtmhH
- t81RSob1P+JznAd87t4fC+RPpMP885jM+h6OIhXZ42HEcGNd6pvAXS8Fo2+JCSHjVoVN
- 1gSF2hC4LMmnjgDDTM8qPWxOd8D17xphVCO+XvNwCONkqq9CKXXpU0HI+HjU0IypuLVh
- q98oNZTe3tm2RZ1G1fW3X9cX1k8+vZBZfdqbuKF1RDXfDsCXThNndinSw5WvbwViBI1i
- Cjmw==
+ d=linaro.org; s=google; t=1694281404; x=1694886204; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=9ZZn2/2agRlL7TVUXyFt0PCX86vH0sbbC5R6Ram/MFE=;
+ b=EOPlgQHUy0yegM8mou0lGk7Od+Ta0rrmpfozzp/rv2yyj4bhF2Zelt2ZzKALlLJQ3B
+ e5FSEY30n6N6vrcbeABEUWrJOHJXNUMIVgijbvGc3Dlh1avJPJXKGNtmwybfDMquOLR0
+ v9bIz2JfHz74eTpVKloC228xQ5XxUdnehf9GDT1KEUJ93navSepIY5rgyxD9ZRrPqunf
+ dZA/uI1oXxVs83N0PlWlKZzCP1h/8bg9L7MWI9+HWlrZOW8ObOhRMG8kmWutbYW0Tv1H
+ 0Gnr/nqVV/c88t/FxNpbLZURdRn99S5X3KuYhbt67RxdgeesKysfRQWMyIhWIuZIHjXC
+ tlnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694270735; x=1694875535;
- h=content-transfer-encoding:mime-version:message-id:to:from:cc
- :in-reply-to:subject:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fHWUFP87ZLuSzjEVbbDQ0m6WgnDWRLhKrDRdZuJlQ3s=;
- b=YDHXBDLJ1VHRZT11o6sgawCHOmQYVMAhQcI64f2Ti264UL3cicl2VE3K1b6j5xjDcy
- I0oapOsPYONHAc0MzeLmAimVr/wXEhrRKAh49/aifCXE+kxUY/iBK/HUyxiKCQvQx5OL
- Ae24Yta1INv78PYa/C6aw7EGKEZSwXrynbICgZDYhsyEhIlW2q1seUi8SrsLrjHbiDBk
- jlkAP8Y1CJj+LKZEQJZQlen3ZUt00gdxLOHP0GKAiU339lGquueqRektnBQddeV88AYN
- CITFhdxQqvGER5TwThfsDTEU1A9m1HHR66UyUZ0mAx5l1IZM33EEieCsZnB8ZMiiU6fL
- DH+A==
-X-Gm-Message-State: AOJu0YzsbnKzh2dNmoD6YdgVGRiw+Z/TFxzVrxvzts10hlWd9eyu/5jS
- WO9y4ZW5fy568tV7aq0R2iLzJA==
-X-Google-Smtp-Source: AGHT+IEYiCBxx8fIQBX56DpfbMwy3q4rlFLeyMDG2IeceGfhKnn3nsAOxArAVZoB9FGeRUYDHfgRpg==
-X-Received: by 2002:a17:902:ea85:b0:1c1:fbec:bc1c with SMTP id
- x5-20020a170902ea8500b001c1fbecbc1cmr4928677plb.42.1694270735373; 
- Sat, 09 Sep 2023 07:45:35 -0700 (PDT)
-Received: from localhost ([135.180.227.0]) by smtp.gmail.com with ESMTPSA id
- o3-20020a170902bcc300b001bdcafcf8d3sm3340154pls.69.2023.09.09.07.45.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Sep 2023 07:45:34 -0700 (PDT)
-Date: Sat, 09 Sep 2023 07:45:34 -0700 (PDT)
-X-Google-Original-Date: Sat, 09 Sep 2023 07:45:32 PDT (-0700)
-Subject: Re: [RESEND] qemu/timer: Add host ticks function for RISC-V
-In-Reply-To: <CABgObfa9EehjW=p3mA-qiC8_tmkoYCT4SwF5Vtf+710OvSEw3g@mail.gmail.com>
-CC: atishp@atishpatra.org, zhiwei_liu@linux.alibaba.com, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, lzw194868@alibaba-inc.com
-From: Palmer Dabbelt <palmer@dabbelt.com>
-To: pbonzini@redhat.com
-Message-ID: <mhng-87182386-83b7-4ce7-af3d-f0cc10b292f8@palmer-ri-x1c9>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=palmer@dabbelt.com; helo=mail-pl1-x636.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ d=1e100.net; s=20230601; t=1694281404; x=1694886204;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=9ZZn2/2agRlL7TVUXyFt0PCX86vH0sbbC5R6Ram/MFE=;
+ b=Vmv8oxVWgZeUk++n9HyZxU88a2uROweodHALTgZ5attMDXxFyraTry7pOaqyYSo08U
+ fiKjNylp0Q3ME1Tc8wk3TKJUTq5J4nJa91jpUDQdza1Z6SHZSnfp1vmtcFEi6XQ64zzu
+ SdIoL/QAT3ICa/TTtRDzbgzrP+XtdQORYJ6vdnCx2FPRcR9aqYRZ6znIbwfTUr6SGQYQ
+ hmZwK9jn7fRi7cx9hkDjrTja3tpeYX+QfYXXFyQiqVeePGQf7Q/AH8uJxEW3d7nWLRlU
+ 1a7ryFhVzzDJQL5TEdwPwXhbk8L2J/PfPBmzNnpNPBFLyG/L9ETQXfyc303qTuO3qc64
+ H42Q==
+X-Gm-Message-State: AOJu0Yyc0chK2IaW6/xvRt6x6hzq4tCgPhyR4PNtvLDBjWVnEWEw3ECl
+ DyMVFqqaN5eyrrct51FBswe50g==
+X-Google-Smtp-Source: AGHT+IEzgFefjU7UB8UIbwL7edtzeMNJGxiYvklxp1uulYw+KlqPnkAgHW/dGdIo0nyavaH0UWuQPA==
+X-Received: by 2002:a17:902:a504:b0:1b8:76fc:5bf6 with SMTP id
+ s4-20020a170902a50400b001b876fc5bf6mr5198151plq.43.1694281404542; 
+ Sat, 09 Sep 2023 10:43:24 -0700 (PDT)
+Received: from [192.168.0.4] ([71.212.131.115])
+ by smtp.gmail.com with ESMTPSA id
+ u2-20020a17090341c200b001bb7a736b4csm3477212ple.77.2023.09.09.10.43.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 09 Sep 2023 10:43:23 -0700 (PDT)
+Message-ID: <7dcb92db-b3c6-7236-cccd-fb6dc9d388a9@linaro.org>
+Date: Sat, 9 Sep 2023 10:43:21 -0700
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.0
+Subject: Re: [PATCH] qemu/timer: Add host ticks function for RISC-V
+Content-Language: en-US
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, LIU Zhiwei <lzw194868@alibaba-inc.com>
+References: <20230908032300.646-1-zhiwei_liu@linux.alibaba.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20230908032300.646-1-zhiwei_liu@linux.alibaba.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x633.google.com
+X-Spam_score_int: -35
+X-Spam_score: -3.6
+X-Spam_bar: ---
+X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.473,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -92,50 +96,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, 09 Sep 2023 00:18:02 PDT (-0700), pbonzini@redhat.com wrote:
-> Il sab 9 set 2023, 03:35 Atish Patra <atishp@atishpatra.org> ha scritto:
->
->> On Fri, Sep 8, 2023 at 3:29 AM Paolo Bonzini <pbonzini@redhat.com> wrote:
->> >
->> > Queued, thanks.
->> >
->>
->> I didn't realize it was already queued. Gmail threads failed me this time.
->> @Paolo Bonzini : Can you please drop this one as this will break as
->> soon as the host riscv system
->> has the latest kernel ? I have provided more details in the original
->> thread.
->>
->> https://lists.gnu.org/archive/html/qemu-devel/2023-09/msg01941.html
->
->
-> If you have dynamic clock adjustment, does rdcycle increase with a fixed
-> frequency or does it provide the raw number of clock cycles? If the latter,
-> I agree that it should be provided by perf; but if the frequency is fixed
-> then it would be the same as rdtsc on Intel.
+On 9/7/23 20:23, LIU Zhiwei wrote:
+> From: LIU Zhiwei <lzw194868@alibaba-inc.com>
+> 
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> ---
+>   include/qemu/timer.h | 19 +++++++++++++++++++
+>   1 file changed, 19 insertions(+)
+> 
+> diff --git a/include/qemu/timer.h b/include/qemu/timer.h
+> index 9a91cb1248..ce0b66d122 100644
+> --- a/include/qemu/timer.h
+> +++ b/include/qemu/timer.h
+> @@ -979,6 +979,25 @@ static inline int64_t cpu_get_host_ticks(void)
+>       return cur - ofs;
+>   }
+>   
+> +#elif defined(__riscv) && defined(__riscv_xlen) && __riscv_xlen == 32
+> +static inline int64_t cpu_get_host_ticks(void)
+> +{
+> +    uint32_t lo, hi;
+> +    asm volatile("RDCYCLE %0\n\t"
+> +                 "RDCYCLEH %1"
+> +                 : "=r"(lo), "=r"(hi));
+> +    return lo | (uint64_t)hi << 32;
+> +}
+> +
+> +#elif defined(__riscv) && defined(__riscv_xlen) && __riscv_xlen > 32
+> +static inline int64_t cpu_get_host_ticks(void)
+> +{
+> +    int64_t val;
+> +
+> +    asm volatile("RDCYCLE %0" : "=r"(cc));
+> +    return val;
+> +}
 
-That really depends on exactly how the system is set up, but there are 
-systems for which the rdcycle frequency changes when clock speeds change 
-and thus will produce surprising answers for users trying to use rdcycle 
-as a RTC.  We have rdtime for that, but it has other problems (it's 
-trapped and emulated in M-mode on some systems, so it's slow and noisy).
+__riscv_xlen should never be undefined.
 
-So we're steering folks towards perf where we can, as at least that way 
-we've got a higher-level interface we can use to describe these quirks.
+Don't you need a loop for RDCYCLEH to avoid time going backward?
 
->
-> Paolo
->
->
->>
->> > Paolo
->> >
->> >
->>
->>
->> --
->> Regards,
->> Atish
->>
->>
+     do {
+         asm("rdcycleh %0\n\t"
+             "rdcycle %1\n\t"
+             "rdcycleh %2\n\t"
+             : "=r"(hi), "=r"(lo), "=r"(tmph));
+     } while (unlikely(tmph != hi));
+
+
+r~
 
