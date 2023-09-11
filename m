@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F828EE57DF
-	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Sep 2023 05:55:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7098EE7FF4
+	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Sep 2023 05:58:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qfZtD-0006PR-85; Mon, 11 Sep 2023 01:55:15 -0400
+	id 1qfZvM-0007L4-8a; Mon, 11 Sep 2023 01:57:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qfZt2-0006O9-Rr; Mon, 11 Sep 2023 01:55:04 -0400
-Received: from out30-97.freemail.mail.aliyun.com ([115.124.30.97])
+ id 1qfZvA-0007IH-Sg; Mon, 11 Sep 2023 01:57:16 -0400
+Received: from out30-100.freemail.mail.aliyun.com ([115.124.30.100])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qfZsy-0004IR-UF; Mon, 11 Sep 2023 01:55:04 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R381e4; CH=green; DM=||false|;
+ id 1qfZv7-0004yA-OR; Mon, 11 Sep 2023 01:57:16 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R191e4; CH=green; DM=||false|;
  DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=4; SR=0;
- TI=SMTPD_---0Vrlp4R4_1694411683; 
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=6; SR=0;
+ TI=SMTPD_---0VrlO8m1_1694411823; 
 Received: from 30.221.110.218(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0Vrlp4R4_1694411683) by smtp.aliyun-inc.com;
- Mon, 11 Sep 2023 13:54:44 +0800
-Message-ID: <d98368f6-89f0-9a39-fc20-4cd3afdf4f52@linux.alibaba.com>
-Date: Mon, 11 Sep 2023 13:53:55 +0800
+ fp:SMTPD_---0VrlO8m1_1694411823) by smtp.aliyun-inc.com;
+ Mon, 11 Sep 2023 13:57:04 +0800
+Message-ID: <7e2977aa-2de4-6ba9-af74-03b5619f3eb2@linux.alibaba.com>
+Date: Mon, 11 Sep 2023 13:56:15 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.14.0
-Subject: Re: [PATCH] qemu/timer: Add host ticks function for RISC-V
+Subject: Re: [RESEND] qemu/timer: Add host ticks function for RISC-V
 Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, LIU Zhiwei <lzw194868@alibaba-inc.com>
-References: <20230908032300.646-1-zhiwei_liu@linux.alibaba.com>
- <7dcb92db-b3c6-7236-cccd-fb6dc9d388a9@linaro.org>
+To: Palmer Dabbelt <palmer@dabbelt.com>, pbonzini@redhat.com
+Cc: atishp@atishpatra.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ lzw194868@alibaba-inc.com
+References: <mhng-87182386-83b7-4ce7-af3d-f0cc10b292f8@palmer-ri-x1c9>
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <7dcb92db-b3c6-7236-cccd-fb6dc9d388a9@linaro.org>
+In-Reply-To: <mhng-87182386-83b7-4ce7-af3d-f0cc10b292f8@palmer-ri-x1c9>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.97;
+Received-SPF: pass client-ip=115.124.30.100;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-97.freemail.mail.aliyun.com
+ helo=out30-100.freemail.mail.aliyun.com
 X-Spam_score_int: -113
 X-Spam_score: -11.4
 X-Spam_bar: -----------
@@ -66,58 +66,63 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
-On 2023/9/10 1:43, Richard Henderson wrote:
-> On 9/7/23 20:23, LIU Zhiwei wrote:
->> From: LIU Zhiwei <lzw194868@alibaba-inc.com>
+On 2023/9/9 22:45, Palmer Dabbelt wrote:
+> On Sat, 09 Sep 2023 00:18:02 PDT (-0700), pbonzini@redhat.com wrote:
+>> Il sab 9 set 2023, 03:35 Atish Patra <atishp@atishpatra.org> ha scritto:
 >>
->> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
->> ---
->>   include/qemu/timer.h | 19 +++++++++++++++++++
->>   1 file changed, 19 insertions(+)
+>>> On Fri, Sep 8, 2023 at 3:29 AM Paolo Bonzini <pbonzini@redhat.com> 
+>>> wrote:
+>>> >
+>>> > Queued, thanks.
+>>> >
+>>>
+>>> I didn't realize it was already queued. Gmail threads failed me this 
+>>> time.
+>>> @Paolo Bonzini : Can you please drop this one as this will break as
+>>> soon as the host riscv system
+>>> has the latest kernel ? I have provided more details in the original
+>>> thread.
+>>>
+>>> https://lists.gnu.org/archive/html/qemu-devel/2023-09/msg01941.html
 >>
->> diff --git a/include/qemu/timer.h b/include/qemu/timer.h
->> index 9a91cb1248..ce0b66d122 100644
->> --- a/include/qemu/timer.h
->> +++ b/include/qemu/timer.h
->> @@ -979,6 +979,25 @@ static inline int64_t cpu_get_host_ticks(void)
->>       return cur - ofs;
->>   }
->>   +#elif defined(__riscv) && defined(__riscv_xlen) && __riscv_xlen == 32
->> +static inline int64_t cpu_get_host_ticks(void)
->> +{
->> +    uint32_t lo, hi;
->> +    asm volatile("RDCYCLE %0\n\t"
->> +                 "RDCYCLEH %1"
->> +                 : "=r"(lo), "=r"(hi));
->> +    return lo | (uint64_t)hi << 32;
->> +}
->> +
->> +#elif defined(__riscv) && defined(__riscv_xlen) && __riscv_xlen > 32
->> +static inline int64_t cpu_get_host_ticks(void)
->> +{
->> +    int64_t val;
->> +
->> +    asm volatile("RDCYCLE %0" : "=r"(cc));
->> +    return val;
->> +}
+>>
+>> If you have dynamic clock adjustment, does rdcycle increase with a fixed
+>> frequency or does it provide the raw number of clock cycles? If the 
+>> latter,
+>> I agree that it should be provided by perf; but if the frequency is 
+>> fixed
+>> then it would be the same as rdtsc on Intel.
 >
-> __riscv_xlen should never be undefined.
-OK
+> That really depends on exactly how the system is set up, but there are 
+> systems for which the rdcycle frequency changes when clock speeds 
+> change and thus will produce surprising answers for users trying to 
+> use rdcycle as a RTC.  We have rdtime for that, but it has other 
+> problems (it's trapped and emulated in M-mode on some systems, so it's 
+> slow and noisy).
 >
-> Don't you need a loop for RDCYCLEH to avoid time going backward?
->
->     do {
->         asm("rdcycleh %0\n\t"
->             "rdcycle %1\n\t"
->             "rdcycleh %2\n\t"
->             : "=r"(hi), "=r"(lo), "=r"(tmph));
->     } while (unlikely(tmph != hi));
->
-Yes, I think we should do this for XLEN == 32bits.
+> So we're steering folks towards perf where we can, as at least that 
+> way we've got a higher-level interface we can use to describe these 
+> quirks.
+
+OK. I will send a v2 patch using rdtime.
 
 Thanks,
 Zhiwei
 
 >
-> r~
+>>
+>> Paolo
+>>
+>>
+>>>
+>>> > Paolo
+>>> >
+>>> >
+>>>
+>>>
+>>> -- 
+>>> Regards,
+>>> Atish
+>>>
+>>>
 
