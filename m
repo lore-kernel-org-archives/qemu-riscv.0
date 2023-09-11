@@ -4,85 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D30A3EE7FF4
-	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Sep 2023 09:10:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 598CCEE57DF
+	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Sep 2023 09:43:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qfcwM-0005oV-2x; Mon, 11 Sep 2023 05:10:42 -0400
+	id 1qfdRv-0003aV-Lm; Mon, 11 Sep 2023 05:43:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qfcwH-0005md-Fh
- for qemu-riscv@nongnu.org; Mon, 11 Sep 2023 05:10:37 -0400
-Received: from mail-oa1-x2e.google.com ([2001:4860:4864:20::2e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qfdRp-0003Z9-8B
+ for qemu-riscv@nongnu.org; Mon, 11 Sep 2023 05:43:13 -0400
+Received: from mail-lf1-x133.google.com ([2a00:1450:4864:20::133])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qfcw7-0006pe-0b
- for qemu-riscv@nongnu.org; Mon, 11 Sep 2023 05:10:35 -0400
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-1d5bb38117dso603595fac.3
- for <qemu-riscv@nongnu.org>; Mon, 11 Sep 2023 02:10:26 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qfdRk-0003vT-2C
+ for qemu-riscv@nongnu.org; Mon, 11 Sep 2023 05:43:10 -0400
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-50078eba7afso7295095e87.0
+ for <qemu-riscv@nongnu.org>; Mon, 11 Sep 2023 02:43:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1694423424; x=1695028224; darn=nongnu.org;
+ d=linaro.org; s=google; t=1694425386; x=1695030186; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=v6KL3AQc1fIYMHFWWMJmbaO2tRaCrTHkjxVknVhqafk=;
- b=AOX2CtAIzJz0ymww1MkxNeQtEad7WYozUJddOJZmgWbFu7ChpqifZSUczIlhjuOhkf
- Dx1I4YY9yIvRQed9vjKXcdCPC3vW0pPHiq7mfKlZVLfhATcypu5Bq0saOb+cJjA1xtuE
- jR0cEOTGkm2kDKkPmfa6DmlrTZJ58bs85pWftqNQP2Sq4+mLJiKN8GTRXIMY20KFi5n4
- 1bmKUfew8aXIcdcxBRIxgiBgq9zZarS5sCHgLA4ci6im6JQIht1xORr9tfID/h/LdG7f
- 1qLbKSvh+GqKZF7jiMXck3PXTLY62dlDr7VATTnOAHeqVOIz5Minfev4pwzWaFcaZsyS
- poyQ==
+ bh=jmjKOQuW73CkxyzBkHVYL2o2wQ74q95ptQBD70bJNtg=;
+ b=f2PMyopQmLdegxN/11jahK6fgxWi458StEtOphpE7uf1d5MKvhmZDw8VNQYAyzLcHk
+ ZcSk8W5FQmAPgiXtGygsxyVced55hUK9ByW+Ml7ylsdidM63Yajv1UMyldCeZLBw4xGU
+ THD2KQwXDYBSjDov+BqxirBP1f+fvHHPofDE2zisL431Ldn29y1liAMTLEmPsaNs5KvK
+ Xg0vCr71+ukV3xA33VI1FIGLpxFIy7qPU15zVMgu4HVumA8OesGlItgHONd0TiGYOi+g
+ RrZX7ojocWENrMnBcL95lx+Ryp1rVn5c0JL54WwkYFTwuImCFZigLdgjGlljWZja/1LE
+ hIBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694423424; x=1695028224;
+ d=1e100.net; s=20230601; t=1694425386; x=1695030186;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=v6KL3AQc1fIYMHFWWMJmbaO2tRaCrTHkjxVknVhqafk=;
- b=iR/K03aUEJB5/zb2+nT4nJydrJuAkAVGL8oKqADRfS0MORSn1khCXwgd6dPHRFBMFE
- mInDw51kCzDagkuMDKa+qYVhLwbakujHpwEpiDjJkVszJuulA2phBBBuqsInsB+fuzYp
- XtWjlGxB8WFtHUzOC3wSSskYg/EnrnsL9gTMHJo/OtLJBOP6GobB7eOkkKbKtC9UHsdz
- 9i8o6qH2d/a20u077cezntQ0vBnG98RIVqXPynP905nyp9+Q343duMEBhjTm3UfB+zlZ
- tUm1pBaYcmCbQDe6qO3BhJk0OSHp3HQFu4+A6LYjGS68zTlOdfvLKaEFt0+cHgLtrKkg
- TlbQ==
-X-Gm-Message-State: AOJu0Yyh48PKQ5cmRAnt+rlBzh1t+GpS/3ITQAUBXfQLxKqb/mmp0qnh
- JycyaXSSdTD/Ds1WOu9WTRa2bw==
-X-Google-Smtp-Source: AGHT+IFLwRVq2v68XeNxLaBKQmhhJMNYapU9fQ599+xIvMM/6eBgHoI9kdnJVjHRJ8cmjzLRdmWK8Q==
-X-Received: by 2002:a05:6870:8188:b0:1bb:cb02:7b97 with SMTP id
- k8-20020a056870818800b001bbcb027b97mr10604407oae.37.1694423424204; 
- Mon, 11 Sep 2023 02:10:24 -0700 (PDT)
-Received: from [192.168.68.107] ([177.9.182.82])
- by smtp.gmail.com with ESMTPSA id
- v2-20020a056870e28200b001cd07e1c66dsm3785329oad.6.2023.09.11.02.10.21
+ bh=jmjKOQuW73CkxyzBkHVYL2o2wQ74q95ptQBD70bJNtg=;
+ b=LAaPOM7jbPCDl0iBwNEkNPoUgGmm+E1oHXi3QRLiEfsSWZYQEabWVcrVcJRCYCq2iK
+ DqhZS+abOTfaoaeU61iwYbM510WkYiPrNHavy25lpMwKtmQY8lVtNwFbXQIEqDeTOxoq
+ HckgMesKYgVsE7oZujpxcG7FDX+5NLpx7zEX607bMVnqPMnKxa1SpzCcTiaFSRZyniuM
+ f5sHV30mHJ2g0DoQnnEhKO9SXcWO7XZSkRM+HPqrhSjna6RH3D9cKxzqQeb8u9Ocdom6
+ KVxeB2Y/DI49WypHx1AeZLkVro8oohEwEH9YqI70uWcI7o2pnuijOtjzh6MPt8rn938J
+ chbA==
+X-Gm-Message-State: AOJu0Yynz0gVjltQ2tZhVqJ7WPkKK7puPqQ9nXyrFDJO+TlhVskEh26U
+ Eu0dVAIGo13itqxqkx3NKUhz3w==
+X-Google-Smtp-Source: AGHT+IFLoqhyHG+pHj53Yx1we7ufAk8ESiVUOXjmWvXEuK07T4Vo/rpqF1CLPHFjiSBLlYIKbiFa5g==
+X-Received: by 2002:a2e:9303:0:b0:2bd:b99:ab7e with SMTP id
+ e3-20020a2e9303000000b002bd0b99ab7emr7401965ljh.42.1694425386023; 
+ Mon, 11 Sep 2023 02:43:06 -0700 (PDT)
+Received: from [192.168.69.115] (tfy62-h01-176-171-221-76.dsl.sta.abo.bbox.fr.
+ [176.171.221.76]) by smtp.gmail.com with ESMTPSA id
+ si28-20020a170906cedc00b009786c8249d6sm5134068ejb.175.2023.09.11.02.43.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 11 Sep 2023 02:10:23 -0700 (PDT)
-Message-ID: <e7b5c115-d1b7-313a-3da5-8466a2f6cba3@ventanamicro.com>
-Date: Mon, 11 Sep 2023 06:10:20 -0300
+ Mon, 11 Sep 2023 02:43:05 -0700 (PDT)
+Message-ID: <af78b6c9-14e5-3256-9670-c106f4942140@linaro.org>
+Date: Mon, 11 Sep 2023 11:43:00 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH v9 00/20] riscv: 'max' CPU, detect user choice in TCG
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.15.0
+Subject: Re: [PATCH 3/4] hw/cpu: Introduce CPUClass::cpu_resolving_type field
 Content-Language: en-US
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
- palmer@rivosinc.com, ajones@ventanamicro.com
-References: <20230901194627.1214811-1-dbarboza@ventanamicro.com>
- <CAKmqyKO3FX7tooTMeOh7ENVh+ca3eAYwqC-QV9h+r7615scXSQ@mail.gmail.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <CAKmqyKO3FX7tooTMeOh7ENVh+ca3eAYwqC-QV9h+r7615scXSQ@mail.gmail.com>
+To: Gavin Shan <gshan@redhat.com>, qemu-devel@nongnu.org,
+ David Hildenbrand <david@redhat.com>
+Cc: Chris Wulff <crwulff@gmail.com>,
+ David Gibson <david@gibson.dropbear.id.au>, qemu-s390x@nongnu.org,
+ Weiwei Li <liweiwei@iscas.ac.cn>, qemu-arm@nongnu.org,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Max Filippov <jcmvbkbc@gmail.com>, Nicholas Piggin <npiggin@gmail.com>,
+ Eduardo Habkost <eduardo@habkost.net>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Greg Kurz <groug@kaod.org>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ qemu-ppc@nongnu.org, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Marek Vasut <marex@denx.de>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Michael Rolnik <mrolnik@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
+ Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
+ Aurelien Jarno <aurelien@aurel32.net>, Bin Meng <bin.meng@windriver.com>,
+ Xiaojuan Yang <yangxiaojuan@loongson.cn>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, Song Gao <gaosong@loongson.cn>,
+ Stafford Horne <shorne@gmail.com>, Yanan Wang <wangyanan55@huawei.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Brian Cain <bcain@quicinc.com>,
+ =?UTF-8?Q?C=c3=a9dric_Le_Goater?= <clg@kaod.org>,
+ Thomas Huth <thuth@redhat.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20230908112235.75914-1-philmd@linaro.org>
+ <20230908112235.75914-4-philmd@linaro.org>
+ <87cb0174-c652-aa44-be7c-49e78e0a5003@redhat.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+In-Reply-To: <87cb0174-c652-aa44-be7c-49e78e0a5003@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::2e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x2e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::133;
+ envelope-from=philmd@linaro.org; helo=mail-lf1-x133.google.com
 X-Spam_score_int: -35
 X-Spam_score: -3.6
 X-Spam_bar: ---
 X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.473,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,101 +121,100 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-On 9/10/23 23:34, Alistair Francis wrote:
-> On Sat, Sep 2, 2023 at 5:48 AM Daniel Henrique Barboza
-> <dbarboza@ventanamicro.com> wrote:
->>
->> Hi,
->>
->> This new version contains suggestions made by Andrew Jones in v8.
->>
->> Most notable change is the removal of the opensbi.py test in patch 11,
->> which was replaced by a TuxBoot test. It's more suitable to test the
->> integrity of all the extensions enabled by the 'max' CPU.
->>
->> The series is available in this branch:
->>
->> https://gitlab.com/danielhb/qemu/-/tree/max_cpu_user_choice_v9
->>
->> Patches missing acks: 11, 15
->>
->> Changes from v8:
->> - patch 7:
->>    - add g_assert(array) at the start of riscv_cpu_add_qdev_prop_array()
->> - patch 8:
->>    - add g_assert(array) at the start of riscv_cpu_add_kvm_unavail_prop_array()
->> - patch 11:
->>    - removed both opensbi.py tests
->>    - added 2 'max' cpu tuxboot tests in tuxrun_baselines.py
->> - patch 12:
->>    - fixed typos in deprecated.rst
->> - patch 15:
->>    - use g_assert_not_reached() at the end of cpu_cfg_ext_get_min_version()
->> - patch 19:
->>    - added comment on top of riscv_cpu_add_misa_properties() explaining why
->>      we're not implementing user choice support for MISA properties
->> - patch 20:
->>    - warn_report() is now called after the G error conditions
->> - v8 link: https://lore.kernel.org/qemu-riscv/20230824221440.484675-1-dbarboza@ventanamicro.com/
->>
->>
->>
->> Daniel Henrique Barboza (20):
->>    target/riscv/cpu.c: split CPU options from riscv_cpu_extensions[]
->>    target/riscv/cpu.c: skip 'bool' check when filtering KVM props
->>    target/riscv/cpu.c: split kvm prop handling to its own helper
->>    target/riscv: add DEFINE_PROP_END_OF_LIST() to riscv_cpu_options[]
->>    target/riscv/cpu.c: split non-ratified exts from
->>      riscv_cpu_extensions[]
->>    target/riscv/cpu.c: split vendor exts from riscv_cpu_extensions[]
->>    target/riscv/cpu.c: add riscv_cpu_add_qdev_prop_array()
->>    target/riscv/cpu.c: add riscv_cpu_add_kvm_unavail_prop_array()
->>    target/riscv/cpu.c: limit cfg->vext_spec log message
->>    target/riscv: add 'max' CPU type
->>    avocado, risc-v: add tuxboot tests for 'max' CPU
->>    target/riscv: deprecate the 'any' CPU type
->>    target/riscv/cpu.c: use offset in isa_ext_is_enabled/update_enabled
->>    target/riscv: make CPUCFG() macro public
->>    target/riscv/cpu.c: introduce cpu_cfg_ext_auto_update()
->>    target/riscv/cpu.c: use cpu_cfg_ext_auto_update() during realize()
->>    target/riscv/cpu.c: introduce RISCVCPUMultiExtConfig
->>    target/riscv: use isa_ext_update_enabled() in
->>      init_max_cpu_extensions()
->>    target/riscv/cpu.c: honor user choice in cpu_cfg_ext_auto_update()
->>    target/riscv/cpu.c: consider user option with RVG
+On 11/9/23 01:28, Gavin Shan wrote:
+> Hi Philippe,
 > 
-> This series has some build issues. I was hoping a few simple #ifdef
-> changes would fix it, but it's a little more complex than that
-> unfortunately.
+> On 9/8/23 21:22, Philippe Mathieu-Daudé wrote:
+>> Add a field to return the QOM type name of a CPU class.
+>>
+>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>> ---
+>>   include/hw/core/cpu.h   | 2 ++
+>>   hw/core/cpu-common.c    | 2 +-
+>>   target/alpha/cpu.c      | 1 +
+>>   target/arm/cpu.c        | 1 +
+>>   target/avr/cpu.c        | 1 +
+>>   target/cris/cpu.c       | 1 +
+>>   target/hexagon/cpu.c    | 1 +
+>>   target/hppa/cpu.c       | 1 +
+>>   target/i386/cpu.c       | 1 +
+>>   target/loongarch/cpu.c  | 1 +
+>>   target/m68k/cpu.c       | 1 +
+>>   target/microblaze/cpu.c | 1 +
+>>   target/mips/cpu.c       | 1 +
+>>   target/nios2/cpu.c      | 1 +
+>>   target/openrisc/cpu.c   | 1 +
+>>   target/ppc/cpu_init.c   | 1 +
+>>   target/riscv/cpu.c      | 1 +
+>>   target/rx/cpu.c         | 1 +
+>>   target/s390x/cpu.c      | 1 +
+>>   target/sh4/cpu.c        | 1 +
+>>   target/sparc/cpu.c      | 1 +
+>>   target/tricore/cpu.c    | 1 +
+>>   target/xtensa/cpu.c     | 1 +
+>>   23 files changed, 24 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+>> index 129d179937..e469efd409 100644
+>> --- a/include/hw/core/cpu.h
+>> +++ b/include/hw/core/cpu.h
+>> @@ -100,6 +100,7 @@ struct SysemuCPUOps;
+>>   /**
+>>    * CPUClass:
+>> + * @cpu_resolving_type: CPU QOM type name
+>>    * @class_by_name: Callback to map -cpu command line model name to an
+>>    *                 instantiatable CPU type.
+>>    * @parse_features: Callback to parse command line arguments.
+>> @@ -148,6 +149,7 @@ struct CPUClass {
+>>       DeviceClass parent_class;
+>>       /*< public >*/
+>> +    const char *cpu_resolving_type;
+>>       ObjectClass *(*class_by_name)(const char *cpu_model);
+>>       void (*parse_features)(const char *typename, char *str, Error 
+>> **errp);
 > 
-> I'm going to drop this series, do you mind sending a new version which
-> fixes this and any other build failures:
-> https://gitlab.com/qemu-project/qemu/-/jobs/5045998521
+> The question is why not use CPU_RESOLVING_TYPE directly? It seems 
+> CPU_RESOLVING_TYPE
+> is exactly what you want here.
 
-Sure. I'll wait for the pending PR to be merged first. I'll also take the
-opportunity  to make the CONFIG_KVM change that Phil requested.
+Unfortunately CPU_RESOLVING_TYPE is target-specific, we want
+hw/core/cpu-common.c to be target-agnostic (build once for all
+targets). This is particularly important in the context of
+heterogeneous QEMU, where a single binary will be able to create
+CPUs from different targets.
 
-
-Thanks,
-
-Daniel
-
+> Besides, I guess the changes can be 
+> squeezed into two
+> patches (commits) as below:
 > 
-> Alistair
+> PATCH[1] target/alpha: Tidy up alpha_cpu_class_by_name()
+> PATCH[2] Move the checks (oc == NULL || object_class_is_abstract() || 
+> !object_class_dynamic_cast())
+>           from individual targets to 
+> hw/core/cpu-common.c::cpu_class_by_name()
 > 
->>
->>   docs/about/deprecated.rst         |  12 +
->>   target/riscv/cpu-qom.h            |   1 +
->>   target/riscv/cpu.c                | 564 +++++++++++++++++++++---------
->>   target/riscv/cpu.h                |   2 +
->>   target/riscv/kvm.c                |   8 +-
->>   tests/avocado/tuxrun_baselines.py |  32 ++
->>   6 files changed, 450 insertions(+), 169 deletions(-)
->>
->> --
->> 2.41.0
->>
->>
+> I rebase my series of '[PATCH v3 00/32] Unified CPU type check' on top 
+> of yours. Please
+> let me know if I need to include your patch into my v4 series for 
+> review. In that case,
+> I can include your patches with above changes applied.
+> 
+> Thanks,
+> Gavin
+> 
+>> diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
+>> index c6a0c9390c..2d24261a6a 100644
+>> --- a/hw/core/cpu-common.c
+>> +++ b/hw/core/cpu-common.c
+>> @@ -155,7 +155,7 @@ ObjectClass *cpu_class_by_name(const char 
+>> *typename, const char *cpu_model)
+>>       assert(cpu_model);
+>>       oc = object_class_by_name(typename);
+>>       cc = CPU_CLASS(oc);
+>> -    assert(cc->class_by_name);
+>> +    assert(cc->cpu_resolving_type && cc->class_by_name);
+>>       oc = cc->class_by_name(cpu_model);
+>>       if (oc == NULL || object_class_is_abstract(oc)) {
+>>           return NULL;
+
 
