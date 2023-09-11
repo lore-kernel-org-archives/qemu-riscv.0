@@ -4,116 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78180EEB57E
-	for <qemu-riscv@archiver.kernel.org>; Sun, 10 Sep 2023 23:53:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 762CDEE49A4
+	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Sep 2023 02:35:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qfUEz-00078o-KU; Sun, 10 Sep 2023 19:53:21 -0400
+	id 1qfWlp-0006Fy-OW; Sun, 10 Sep 2023 22:35:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qfUEy-00078N-JT
- for qemu-riscv@nongnu.org; Sun, 10 Sep 2023 19:53:20 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qfUEu-0001Rm-JS
- for qemu-riscv@nongnu.org; Sun, 10 Sep 2023 19:53:20 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1694389995;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ap8jyUrXwHgxdqod+JAjPn4oLiZqDgWz3jFfOIi6xsM=;
- b=DcjQdbMbPYXXhMoPNnEaGvX6K/F4cyNZHR9zWXoPOjlJfKVhSxmtqfU3TFgmjftiRvUyoy
- HD784vHj8ezSHmzqiTcm3Lx05H4+jmOzSmHeFsSQbgw9PC+Vhf036SayodD9ITAOyEb8Qg
- QujCj0lLbnwy4E1KEPwvz2vYPBa0mB0=
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com
- [209.85.210.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-311-74_8j_RKMbqUXzTPuIqONA-1; Sun, 10 Sep 2023 19:53:14 -0400
-X-MC-Unique: 74_8j_RKMbqUXzTPuIqONA-1
-Received: by mail-pf1-f197.google.com with SMTP id
- d2e1a72fcca58-68fb883629aso1286011b3a.3
- for <qemu-riscv@nongnu.org>; Sun, 10 Sep 2023 16:53:14 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1qfWln-00068x-R1; Sun, 10 Sep 2023 22:35:23 -0400
+Received: from mail-vk1-xa2c.google.com ([2607:f8b0:4864:20::a2c])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1qfWll-0004C7-Ey; Sun, 10 Sep 2023 22:35:23 -0400
+Received: by mail-vk1-xa2c.google.com with SMTP id
+ 71dfb90a1353d-49059b1ca83so1291787e0c.2; 
+ Sun, 10 Sep 2023 19:35:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1694399720; x=1695004520; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zrtHV1AlGtL/pSceG5ncefEMU1KPGtIzX0EgrEmjWw8=;
+ b=D1mK8CJ7h7vlF8lR3zbHsf+eE/jupD8AVYhE55WZ9U2wop9qIF56Ts2AUyqdFgY4VK
+ mF0Mzsh/99f95k2f0osPH8xvSsF8jgIHwxJQnLDWKDmENGBCzQBWRsVn9kheUxbKxcRH
+ MjrGBxIKSy7nwNGe7zVLAX97Cz/KMUJWiMV6Ii8HzRuKY2TzNUt2SM3bK5AYNSmLKeZk
+ 34M2eP/+1/WEmsJGhw7/f9N1sd45p8ZS7LyTEc9W1z44yY11+g23QgzJ8/KP5D1D104q
+ yVfxM5/UnTYtvoz9X8R4A1HAyZ4iAFZTraBLGzB9mGB3mgpx1pagXCeboAB12EZI4clr
+ +3IA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694389993; x=1694994793;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ap8jyUrXwHgxdqod+JAjPn4oLiZqDgWz3jFfOIi6xsM=;
- b=FTO7adPdZLM4I/R71L6vEyvtitMmHJRbNbomTIo9IBQLqunqsIVytQ0Ff8gWk3QFR9
- HUX/rlIb3HJkBT9y+vUqFywPnCgqcrlsf1Z62nZka2yILrgywoQvBKdQAAWgni+rU1Gd
- pugIMGz6SWDWuT8tUdkUZxoaEc4SISyWuzBLkiUV0VtkLN+EPqyXt8Q3HyxrYvvZ89jT
- ZDoCE+6vBM8Uqf/3N58v336UefS9ujxr3pSOtmMrgSvj8Z6YBOIfV8DgKUyLMhjqBuuV
- NKC3DPyRzXW8Zoj9g41qoOzPR0yMxp9YaHqagQuLwUd2DqVbr78iCaQhG1MigCtO5WtO
- Nj9A==
-X-Gm-Message-State: AOJu0YwLaINOKnCMnFNTFWfv/gSGIETrUuFv3vbYjYqL/S512hfYEWUO
- T37P46O6RY+SWy+Z4B0+oTAkaibZTY7ZON1kp4BSTIbE0ZeFpTy6CjkhcopSjhJlQr/nedd3a4A
- N2ozdaKPBn6+m2QY=
-X-Received: by 2002:a05:6a00:2301:b0:68a:5877:bfb1 with SMTP id
- h1-20020a056a00230100b0068a5877bfb1mr10313997pfh.20.1694389993500; 
- Sun, 10 Sep 2023 16:53:13 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGLDBUuwMY4+d9ys82hxbkhGiirWTD/Zaq3MUkjBpifVkaU03GyjGaYtt0tO90IjO+1+aeEeA==
-X-Received: by 2002:a05:6a00:2301:b0:68a:5877:bfb1 with SMTP id
- h1-20020a056a00230100b0068a5877bfb1mr10313976pfh.20.1694389993225; 
- Sun, 10 Sep 2023 16:53:13 -0700 (PDT)
-Received: from ?IPV6:2001:8003:e5b0:9f00:dbbc:1945:6e65:ec5?
- ([2001:8003:e5b0:9f00:dbbc:1945:6e65:ec5])
- by smtp.gmail.com with ESMTPSA id
- y20-20020a056a001c9400b0068fcc7f6b00sm80251pfw.74.2023.09.10.16.52.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 10 Sep 2023 16:53:12 -0700 (PDT)
-Message-ID: <a99d2893-de4c-c188-2f27-5130d34a867d@redhat.com>
-Date: Mon, 11 Sep 2023 09:52:53 +1000
+ d=1e100.net; s=20230601; t=1694399720; x=1695004520;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zrtHV1AlGtL/pSceG5ncefEMU1KPGtIzX0EgrEmjWw8=;
+ b=q8CoTmpfJL8pVss8bxHvs/cFC4Eh/Q/yS63cojiHAh7evMWwUQZIN8XDxT38I5ArKt
+ u4ZWM/gPSjGc5mH71XzYpStuXjEG9AYHO/nYjd+WC2CozalJfK6lJrMoc/o9z/S46Y9t
+ 25/N/9kWFDnJ3SqRB//gGT+q/LAe4hly5dR1xNSMhl+emMdmYf7QWE/xwg0DGwuS1s1k
+ ZnhItc9jbPqdVhZX2U8KTqFmhTzc6SXKzMFeTo6U0KCw4Zi85/n+1Qpx9Ghivh/pDLEO
+ X8ErHfSllB2PipXeiPIXMZCX3kBt5cIvdQlkkRJMsZVzs+zWnB0Ha3sicW1voTSxA6xS
+ klqg==
+X-Gm-Message-State: AOJu0Yz7+yaOkpaMQaVkCIS2JF2IdhdikE0bN8ONrXsed4ZrFVT1zeDa
+ hzbVY2rhoq9F71FRje9DhHmCVFOa8FHq1cvcS58=
+X-Google-Smtp-Source: AGHT+IGqaMKblIau5v/BxA659Sdv13F7gvQUzr1Pq8iZBwxPQrj/0Ot5FadVP1jkwH8v6nPoPhz+FZYdHnP8/GWUeYo=
+X-Received: by 2002:a1f:4a41:0:b0:48f:8f80:8bf4 with SMTP id
+ x62-20020a1f4a41000000b0048f8f808bf4mr5262141vka.16.1694399720086; Sun, 10
+ Sep 2023 19:35:20 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Subject: Re: [PATCH v3 27/32] machine: Print CPU model name instead of CPU
- type name
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
- qemu-arm@nongnu.org
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
- qemu-s390x@nongnu.org, imp@bsdimp.com, kevans@freebsd.org,
- eduardo@habkost.net, marcel.apfelbaum@gmail.com, wangyanan55@huawei.com,
- peter.maydell@linaro.org, b.galvani@gmail.com,
- strahinja.p.jankovic@gmail.com, sundeep.lkml@gmail.com, kfting@nuvoton.com,
- wuhaotsh@google.com, nieklinnenbank@gmail.com, rad@semihalf.com,
- quic_llindhol@quicinc.com, marcin.juszkiewicz@linaro.org, laurent@vivier.eu,
- vijai@behindbytes.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, richard.henderson@linaro.org,
- mrolnik@gmail.com, edgar.iglesias@gmail.com, bcain@quicinc.com,
- gaosong@loongson.cn, yangxiaojuan@loongson.cn, aurelien@aurel32.net,
- jiaxun.yang@flygoat.com, aleksandar.rikalo@syrmia.com,
- chenhuacai@kernel.org, crwulff@gmail.com, marex@denx.de, shorne@gmail.com,
- clg@kaod.org, david@gibson.dropbear.id.au, groug@kaod.org,
- npiggin@gmail.com, ysato@users.sourceforge.jp, david@redhat.com,
- thuth@redhat.com, iii@linux.ibm.com, mark.cave-ayland@ilande.co.uk,
- atar4qemu@gmail.com, kbastian@mail.uni-paderborn.de, jcmvbkbc@gmail.com,
- pbonzini@redhat.com, imammedo@redhat.com, shan.gavin@gmail.com
-References: <20230907003553.1636896-1-gshan@redhat.com>
- <20230907003553.1636896-28-gshan@redhat.com>
- <5a87e81c-b28e-d117-7384-38945a2c5b8d@linaro.org>
- <d4aebe17-c077-90ad-2b99-a856b3a4cdcc@redhat.com>
- <a25899be-652a-f104-4efb-f24efcdf2358@linaro.org>
-From: Gavin Shan <gshan@redhat.com>
-In-Reply-To: <a25899be-652a-f104-4efb-f24efcdf2358@linaro.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=gshan@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -35
-X-Spam_score: -3.6
-X-Spam_bar: ---
-X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- NICE_REPLY_A=-1.473, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001,
- RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+References: <20230901194627.1214811-1-dbarboza@ventanamicro.com>
+In-Reply-To: <20230901194627.1214811-1-dbarboza@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 11 Sep 2023 12:34:53 +1000
+Message-ID: <CAKmqyKO3FX7tooTMeOh7ENVh+ca3eAYwqC-QV9h+r7615scXSQ@mail.gmail.com>
+Subject: Re: [PATCH v9 00/20] riscv: 'max' CPU, detect user choice in TCG
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, ajones@ventanamicro.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2c;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2c.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -129,68 +89,93 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 9/8/23 17:56, Philippe Mathieu-Daudé wrote:
-> On 8/9/23 01:49, Gavin Shan wrote:
->> On 9/7/23 19:05, Philippe Mathieu-Daudé wrote:
->>> On 7/9/23 02:35, Gavin Shan wrote:
->>>> The names of supported CPU models instead of CPU types should be
->>>> printed when the user specified CPU type isn't supported, to be
->>>> consistent with the output from '-cpu ?'.
->>>>
->>>> Correct the error messages to print CPU model names instead of CPU
->>>> type names.
->>>>
->>>> Signed-off-by: Gavin Shan <gshan@redhat.com>
->>>> ---
->>>>   hw/core/machine.c | 16 ++++++++++++----
->>>>   1 file changed, 12 insertions(+), 4 deletions(-)
->>>
->>>
->>>> @@ -1373,11 +1374,18 @@ static void is_cpu_type_supported(MachineState *machine, Error **errp)
->>>>           /* The user specified CPU type isn't valid */
->>>>           if (!mc->valid_cpu_types[i]) {
->>>> -            error_setg(errp, "Invalid CPU type: %s", machine->cpu_type);
->>>> -            error_append_hint(errp, "The valid types are: %s",
->>>> -                              mc->valid_cpu_types[0]);
->>>> +            model = cpu_model_from_type(machine->cpu_type);
->>>> +            error_setg(errp, "Invalid CPU type: %s", model);
->>>> +            g_free(model);
->>>> +
->>>> +            model = cpu_model_from_type(mc->valid_cpu_types[0]);
->>>> +            error_append_hint(errp, "The valid types are: %s", model);
->>>> +            g_free(model);
->>>> +
->>>>               for (i = 1; mc->valid_cpu_types[i]; i++) {
->>>> -                error_append_hint(errp, ", %s", mc->valid_cpu_types[i]);
->>>> +                model = cpu_model_from_type(mc->valid_cpu_types[i]);
->>>
->>> cpu_model_from_type() can return NULL:
->>>
->>>   char *cpu_model_from_type(const char *typename)
->>>   {
->>>       const char *suffix = "-" CPU_RESOLVING_TYPE;
->>>
->>>       if (!object_class_by_name(typename)) {
->>>           return NULL;
->>>       }
->>>
->>> Don't we want to skip that case?
->>>
->>>                     if (!model) {
->>>                         continue;
->>>                     }
->>>
->>
->> No, it's intentional. "(null)" will be printed in this specific case so that
->> it can be identified quickly and mc->valid_cpu_types[] need to be fixed by
->> developers.
-> 
-> If you want to help developers, use g_assert().
-> 
+On Sat, Sep 2, 2023 at 5:48=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> Hi,
+>
+> This new version contains suggestions made by Andrew Jones in v8.
+>
+> Most notable change is the removal of the opensbi.py test in patch 11,
+> which was replaced by a TuxBoot test. It's more suitable to test the
+> integrity of all the extensions enabled by the 'max' CPU.
+>
+> The series is available in this branch:
+>
+> https://gitlab.com/danielhb/qemu/-/tree/max_cpu_user_choice_v9
+>
+> Patches missing acks: 11, 15
+>
+> Changes from v8:
+> - patch 7:
+>   - add g_assert(array) at the start of riscv_cpu_add_qdev_prop_array()
+> - patch 8:
+>   - add g_assert(array) at the start of riscv_cpu_add_kvm_unavail_prop_ar=
+ray()
+> - patch 11:
+>   - removed both opensbi.py tests
+>   - added 2 'max' cpu tuxboot tests in tuxrun_baselines.py
+> - patch 12:
+>   - fixed typos in deprecated.rst
+> - patch 15:
+>   - use g_assert_not_reached() at the end of cpu_cfg_ext_get_min_version(=
+)
+> - patch 19:
+>   - added comment on top of riscv_cpu_add_misa_properties() explaining wh=
+y
+>     we're not implementing user choice support for MISA properties
+> - patch 20:
+>   - warn_report() is now called after the G error conditions
+> - v8 link: https://lore.kernel.org/qemu-riscv/20230824221440.484675-1-dba=
+rboza@ventanamicro.com/
+>
+>
+>
+> Daniel Henrique Barboza (20):
+>   target/riscv/cpu.c: split CPU options from riscv_cpu_extensions[]
+>   target/riscv/cpu.c: skip 'bool' check when filtering KVM props
+>   target/riscv/cpu.c: split kvm prop handling to its own helper
+>   target/riscv: add DEFINE_PROP_END_OF_LIST() to riscv_cpu_options[]
+>   target/riscv/cpu.c: split non-ratified exts from
+>     riscv_cpu_extensions[]
+>   target/riscv/cpu.c: split vendor exts from riscv_cpu_extensions[]
+>   target/riscv/cpu.c: add riscv_cpu_add_qdev_prop_array()
+>   target/riscv/cpu.c: add riscv_cpu_add_kvm_unavail_prop_array()
+>   target/riscv/cpu.c: limit cfg->vext_spec log message
+>   target/riscv: add 'max' CPU type
+>   avocado, risc-v: add tuxboot tests for 'max' CPU
+>   target/riscv: deprecate the 'any' CPU type
+>   target/riscv/cpu.c: use offset in isa_ext_is_enabled/update_enabled
+>   target/riscv: make CPUCFG() macro public
+>   target/riscv/cpu.c: introduce cpu_cfg_ext_auto_update()
+>   target/riscv/cpu.c: use cpu_cfg_ext_auto_update() during realize()
+>   target/riscv/cpu.c: introduce RISCVCPUMultiExtConfig
+>   target/riscv: use isa_ext_update_enabled() in
+>     init_max_cpu_extensions()
+>   target/riscv/cpu.c: honor user choice in cpu_cfg_ext_auto_update()
+>   target/riscv/cpu.c: consider user option with RVG
 
-g_assert() wins. It will be included into v4 :)
+This series has some build issues. I was hoping a few simple #ifdef
+changes would fix it, but it's a little more complex than that
+unfortunately.
 
-Thanks,
-Gavin
+I'm going to drop this series, do you mind sending a new version which
+fixes this and any other build failures:
+https://gitlab.com/qemu-project/qemu/-/jobs/5045998521
 
+Alistair
+
+>
+>  docs/about/deprecated.rst         |  12 +
+>  target/riscv/cpu-qom.h            |   1 +
+>  target/riscv/cpu.c                | 564 +++++++++++++++++++++---------
+>  target/riscv/cpu.h                |   2 +
+>  target/riscv/kvm.c                |   8 +-
+>  tests/avocado/tuxrun_baselines.py |  32 ++
+>  6 files changed, 450 insertions(+), 169 deletions(-)
+>
+> --
+> 2.41.0
+>
+>
 
