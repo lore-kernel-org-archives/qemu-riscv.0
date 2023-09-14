@@ -4,42 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CDB4EE0212
-	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Sep 2023 01:23:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D739BEDE98F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Sep 2023 08:08:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qgb4T-0005aT-Ed; Wed, 13 Sep 2023 21:23:05 -0400
+	id 1qghOJ-0001LT-7W; Thu, 14 Sep 2023 04:07:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dilfridge@gentoo.org>)
- id 1qgb4R-0005Zf-7J; Wed, 13 Sep 2023 21:23:03 -0400
-Received: from woodpecker.gentoo.org ([2001:470:ea4a:1:5054:ff:fec7:86e4]
- helo=smtp.gentoo.org)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim 4.90_1) (envelope-from <dilfridge@gentoo.org>)
- id 1qgb4O-0005nq-U6; Wed, 13 Sep 2023 21:23:02 -0400
-From: "Andreas K. Huettel" <dilfridge@gentoo.org>
-To: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Cc: LIU Zhiwei <baxiantai@gmail.com>
-Subject: Re: qemu-riscv32 usermode still broken?
-Date: Thu, 14 Sep 2023 03:22:49 +0200
-Message-ID: <4344798.atdPhlSkOF@pinacolada>
-Organization: Gentoo Linux
-In-Reply-To: <15820654-5d7f-fd66-3d34-da1a55d2a53e@gmail.com>
-References: <10817413.NyiUUSuA9g@pinacolada>
- <15820654-5d7f-fd66-3d34-da1a55d2a53e@gmail.com>
+ (Exim 4.90_1) (envelope-from <nikita.shubin@maquefel.me>)
+ id 1qghOF-0001KM-9i; Thu, 14 Sep 2023 04:07:56 -0400
+Received: from forward501b.mail.yandex.net ([178.154.239.145])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <nikita.shubin@maquefel.me>)
+ id 1qghOC-0006bl-7i; Thu, 14 Sep 2023 04:07:55 -0400
+Received: from mail-nwsmtp-smtp-production-main-87.sas.yp-c.yandex.net
+ (mail-nwsmtp-smtp-production-main-87.sas.yp-c.yandex.net
+ [IPv6:2a02:6b8:c08:9396:0:640:dd2a:0])
+ by forward501b.mail.yandex.net (Yandex) with ESMTP id 137C15E606;
+ Thu, 14 Sep 2023 11:07:46 +0300 (MSK)
+Received: by mail-nwsmtp-smtp-production-main-87.sas.yp-c.yandex.net
+ (smtp/Yandex) with ESMTPSA id e7bUnJIDWmI0-VMRU5piU; 
+ Thu, 14 Sep 2023 11:07:45 +0300
+X-Yandex-Fwd: 1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=maquefel.me; s=mail;
+ t=1694678865; bh=kzBWB1v9vn5aFgl0dNFf2jKKkNdKOiQWqEi58nCywks=;
+ h=Message-Id:Date:In-Reply-To:Cc:Subject:References:To:From;
+ b=akAcXPNoxxyGlCxeesp6mwrlkFuvGzfeAzCpj27FyrUCRoeViZltoBmAMyprqzsyw
+ ywxeFLRBdUVBTZPhjfVV9EzZsALHJHieYz+S5D85wy+5NtcbWQ9o+rI/c8GxHHrRCk
+ nQd+B0r/NPjMj+/F08AsUHe6tRlXn2NyBLA0b2zM=
+Authentication-Results: mail-nwsmtp-smtp-production-main-87.sas.yp-c.yandex.net;
+ dkim=pass header.i=@maquefel.me
+From: Nikita Shubin <nikita.shubin@maquefel.me>
+To: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Sunil V L <sunilvl@ventanamicro.com>
+Cc: Nikita Shubin <n.shubin@yadro.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Subject: [RFC PATCH v2 2/2] hw/riscv: hart: allow other cpu instance
+Date: Thu, 14 Sep 2023 11:07:40 +0300
+Message-Id: <20230914080740.7561-3-nikita.shubin@maquefel.me>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20230914080740.7561-1-nikita.shubin@maquefel.me>
+References: <20230914080740.7561-1-nikita.shubin@maquefel.me>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="nextPart48312231.fMDQidcC6G";
- micalg="pgp-sha512"; protocol="application/pgp-signature"
-Received-SPF: pass client-ip=2001:470:ea4a:1:5054:ff:fec7:86e4;
- envelope-from=dilfridge@gentoo.org; helo=smtp.gentoo.org
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=178.154.239.145;
+ envelope-from=nikita.shubin@maquefel.me; helo=forward501b.mail.yandex.net
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -55,90 +76,71 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---nextPart48312231.fMDQidcC6G
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"; protected-headers="v1"
-From: "Andreas K. Huettel" <dilfridge@gentoo.org>
-Cc: LIU Zhiwei <baxiantai@gmail.com>
-Subject: Re: qemu-riscv32 usermode still broken?
-Date: Thu, 14 Sep 2023 03:22:49 +0200
-Message-ID: <4344798.atdPhlSkOF@pinacolada>
-Organization: Gentoo Linux
-In-Reply-To: <15820654-5d7f-fd66-3d34-da1a55d2a53e@gmail.com>
-MIME-Version: 1.0
+From: Nikita Shubin <n.shubin@yadro.com>
 
-> > https://lists.gnu.org/archive/html/bug-bash/2023-09/msg00119.html
-> > ^ Here I'm trying to find out more.
-> >
-> > Bash tests apparently indicate that argv[0] is overwritten, and that
-> > reading through a pipe or from /dev/tty fails or loses data.
-> >
-> > Apart from the bash testsuite failing, symptoms are as follows:
-> >
-> > * Something seems wrong in the signal handling (?):
->=20
-> If it is wrong for signal handling and for 32-bit, I guess it may be=20
-> fixed by this patch
->=20
-> https://www.mail-archive.com/qemu-devel@nongnu.org/msg981238.html
->=20
-> And this patch has been merged into master branch yesterday.
->=20
-> May be you can have a try based on the master branch.
+Allow using instances derivative from RISCVCPU
 
-I added the patch to 8.0.3 (easier for the moment), and this did
-unfortunately *not* lead to any improvements.=20
+Signed-off-by: Nikita Shubin <n.shubin@yadro.com>
+---
+ hw/riscv/riscv_hart.c         | 20 ++++++++++++--------
+ include/hw/riscv/riscv_hart.h |  2 +-
+ 2 files changed, 13 insertions(+), 9 deletions(-)
 
-More debugging coming (weekend hopefully).
-
-However, in the meantime on the GNU Make tracker Alejandro Colomar
-pointed me to another detail based on my oddities [1]:
-
-> I think [make] it's failing here:
->=20
-> <https://git.savannah.gnu.org/cgit/make.git/tree/src/job.c#n757>
->=20
-> But it's failing with ENOENT, which is not one of the documented
-> errors for wait(2):
-
-So maybe another point to look at would be the origin of the return
-values of wait, and whether that's wired correctly for rv32...
-
-[1] https://savannah.gnu.org/bugs/?64664
-
-
-=2D-=20
-Andreas K. H=FCttel
-dilfridge@gentoo.org
-Gentoo Linux developer
-(council, toolchain, base-system, perl, libreoffice)
---nextPart48312231.fMDQidcC6G
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part.
-Content-Transfer-Encoding: 7Bit
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iQKTBAABCgB9FiEE/Rnm0xsZLuTcY+rT3CsWIV7VQSoFAmUCYGlfFIAAAAAALgAo
-aXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5maWZ0aGhvcnNlbWFuLm5ldEZE
-MTlFNkQzMUIxOTJFRTREQzYzRUFEM0RDMkIxNjIxNUVENTQxMkEACgkQ3CsWIV7V
-QSqoTxAAuqyx+sWRmn0AqgD7Gn2IwpsszmCWUwvJEetQm9br4NatnVXk6Wn0ipqC
-7D8qwCs2xm9KYlVhaJm3cfJ2DCQWEKGNW2egmzFdwtRO8ltG7lRKx4y2FTrZNeuH
-onYEksEH91mnuv5EmQ43dn11YSmrtE2k8jHN0sprMZQ+iukuAxdTpCsLgG3Z42Tb
-vKwoyYlLuFirHZZeXse7Ir7X2KVqW/IUef8/5PIkmV8jfTDN9FONAEE9rn8MQD+e
-VlYbrgs0crRKvgWgxxbdBOP5M64Mp+Z+RWH5cnEMaj4XZ9G6Dd8yZ+c7Gys1pnol
-Tjd28EKeC7sAheAspJqEyMPwqxuisGGo/QpWjzq8mRPhgQSzFxYZlsazGWB0L5dx
-bWK2VFuaFb7dx6N70cF5GH4iJHNcgkma+BB09W6xJLOP7mCwB/mx6BLzI0sC7m4y
-a3lAoELXswt/UvNbJ8OTvDrYdxRohwTcyDjyHCH5kCiKXgQy7oUgjCzVoQGlTiVe
-54QKJlApKamNM+nq6rSRi7ucV9TsdWh7Ip3P3XiWpxtV4lHkibNmo4wb5rT31c36
-MqPP/Agm9+LMxH4KY2SsxBfCSBib0Y8t8UPzUfz4XAdkAyu1MFRRMAjUzCm0Acz9
-fW2djqULqSbdRdhZussK9DNa2EJh3Arrq7X429yGeDSg1C6NelQ=
-=GJMM
------END PGP SIGNATURE-----
-
---nextPart48312231.fMDQidcC6G--
-
-
+diff --git a/hw/riscv/riscv_hart.c b/hw/riscv/riscv_hart.c
+index 613ea2aaa0..020ba18e8b 100644
+--- a/hw/riscv/riscv_hart.c
++++ b/hw/riscv/riscv_hart.c
+@@ -43,24 +43,28 @@ static void riscv_harts_cpu_reset(void *opaque)
+ }
+ 
+ static bool riscv_hart_realize(RISCVHartArrayState *s, int idx,
+-                               char *cpu_type, Error **errp)
++                               char *cpu_type, size_t size, Error **errp)
+ {
+-    object_initialize_child(OBJECT(s), "harts[*]", &s->harts[idx], cpu_type);
+-    qdev_prop_set_uint64(DEVICE(&s->harts[idx]), "resetvec", s->resetvec);
+-    s->harts[idx].env.mhartid = s->hartid_base + idx;
+-    qemu_register_reset(riscv_harts_cpu_reset, &s->harts[idx]);
+-    return qdev_realize(DEVICE(&s->harts[idx]), NULL, errp);
++    RISCVCPU *hart = s->harts[idx];
++    object_initialize_child_internal(OBJECT(s), "harts[*]",
++                                    hart, size, cpu_type);
++    qdev_prop_set_uint64(DEVICE(hart), "resetvec", s->resetvec);
++    hart->env.mhartid = s->hartid_base + idx;
++    qemu_register_reset(riscv_harts_cpu_reset, hart);
++    return qdev_realize(DEVICE(hart), NULL, errp);
+ }
+ 
+ static void riscv_harts_realize(DeviceState *dev, Error **errp)
+ {
+     RISCVHartArrayState *s = RISCV_HART_ARRAY(dev);
++    size_t size = object_type_get_instance_size(s->cpu_type);
+     int n;
+ 
+-    s->harts = g_new0(RISCVCPU, s->num_harts);
++    s->harts = g_new0(RISCVCPU *, s->num_harts);
+ 
+     for (n = 0; n < s->num_harts; n++) {
+-        if (!riscv_hart_realize(s, n, s->cpu_type, errp)) {
++        s->harts[n] = RISCV_CPU(object_new(s->cpu_type));
++        if (!riscv_hart_realize(s, n, s->cpu_type, size, errp)) {
+             return;
+         }
+     }
+diff --git a/include/hw/riscv/riscv_hart.h b/include/hw/riscv/riscv_hart.h
+index 912b4a2682..5f6ef06411 100644
+--- a/include/hw/riscv/riscv_hart.h
++++ b/include/hw/riscv/riscv_hart.h
+@@ -38,7 +38,7 @@ struct RISCVHartArrayState {
+     uint32_t hartid_base;
+     char *cpu_type;
+     uint64_t resetvec;
+-    RISCVCPU *harts;
++    RISCVCPU **harts;
+ };
+ 
+ #endif
+-- 
+2.39.2
 
 
