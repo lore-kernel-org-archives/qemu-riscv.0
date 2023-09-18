@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75EA5CD37B0
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7869CCD13D2
 	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Sep 2023 16:06:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qiGkD-0001qf-7x; Mon, 18 Sep 2023 12:05:05 -0400
+	id 1qiGjU-0007YR-8f; Mon, 18 Sep 2023 12:04:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGjw-0001aj-8p
- for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:04:49 -0400
-Received: from mail-ej1-x634.google.com ([2a00:1450:4864:20::634])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGip-0006Sg-FF
+ for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:03:40 -0400
+Received: from mail-ed1-x52b.google.com ([2a00:1450:4864:20::52b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGju-0004RZ-Ij
- for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:04:47 -0400
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-9a9d82d73f9so582748666b.3
- for <qemu-riscv@nongnu.org>; Mon, 18 Sep 2023 09:04:46 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGin-00043S-IM
+ for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:03:39 -0400
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5310aec4121so1634139a12.2
+ for <qemu-riscv@nongnu.org>; Mon, 18 Sep 2023 09:03:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695053085; x=1695657885; darn=nongnu.org;
+ d=linaro.org; s=google; t=1695053016; x=1695657816; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=y7slh/pNTWelLfh1FzXsOutH1+zxCT/FLHdOf8nTB6I=;
- b=kIaVVI4i6Ci1jWg3hOfeFjm7XJ1cO63lBFsvfE3UQtDL798H136yi6kUxNHRxl0to+
- I+1wRNLqHLnSdK6q2zZ4/Q4/XkstVT/EJYsyO4xPV3GtFYB2AiTv9LzWLKr6aEXGOJGY
- GOOy3L6ePYOSiyg8sYGbR1ooasQBcD7CvSqltkbQTRlJEAuc+eOOgxLzvGe5vXzAqP2G
- qY7bDIRjOGThX6EkFAYRdy/6VjoUPVuklCQBAOZHQXbk9dcC3eLVKF6zUf+IsxFYUjxh
- 7PzyhgFYYYvUk1ciJIFmCQLtsFEQl3KG4ICes7sRhesxh7ZfL7qwf1X+BZdUOJnPbivl
- nRbw==
+ bh=kTBjPJZgBk13UdBUXwIisPTyIoW0XcuNCZty165NaD0=;
+ b=QFuhLp+wh9+g5gFDuBLFnLYe2X4wpVF9jcpDP1fBhMC0HG5Lgo8XwfaZ6KOqwW5VC/
+ BIPXFMYu/wMCwDAp4w1//5OijDv9+41EH1IOLRN/+yaMMAADwqJGctrB9YTC7fPN6tAJ
+ m/dW7vgUVZvYsHMg6dMJnlc88iuk7D4DIaSO7+qBj19+p7+fwK05ZqKWks5RO1jQzwv+
+ A03MpQefzC/ZRpey6EgqZH++C8OXLfk37f4tIp/adk4gu3i5xu0hUgDeeCInJeYfYL/J
+ uaeY0lTV2YNit5RpU0MUaL1nXwmgaPg/pNsQ3s8xXf9txi54uqUTlxiVwlBtAcgvjPoG
+ X2CA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695053085; x=1695657885;
+ d=1e100.net; s=20230601; t=1695053016; x=1695657816;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=y7slh/pNTWelLfh1FzXsOutH1+zxCT/FLHdOf8nTB6I=;
- b=jEMqAEDKMWfR/a+nHSAS0oc6R3K35VnTcloDQ5yHDgDuEplj0eIiNhQ0nylyOArw5C
- uKxuITnX1ApZnbPOum1CeIsGl4bYWDLm13uZU5qN+/owO1REwq8MZri+y0LJm/jmjmBZ
- E8iJ5dwwH/n1SOiCjr2L3W+dCHXguohOqUJCrQ1nyOuSdw3JqjqQoy0HjROlI4K0AASU
- f/meQW02k7jRYun306fHvCHUZTMAaUYBFmzIMeQA6/uFMYglnkW6XMrIY82wbmg+Jnsx
- g9BbywpA9uOqL6Ew4zK39etC47lIYrEUa55Mw8HM/8eUZ3nOR7mRtK+gtK9/+6mJeM6k
- T9Eg==
-X-Gm-Message-State: AOJu0YzMEWTcJqQiE/HHpvYjWZNC3zH7xVfFaEMwjgoOxEFuxdGjewQn
- 35KSAIHDHaC3D0uHUKVW0ZUwkQ==
-X-Google-Smtp-Source: AGHT+IF1uzqoMGcGEAlyaETsh01GEqG5TP+8vhZBqOT31xYKgtT4aKTdO73/67eFYWfUVkYSZ8Rjqw==
-X-Received: by 2002:a17:907:75f1:b0:9a5:cc73:a2a5 with SMTP id
- jz17-20020a17090775f100b009a5cc73a2a5mr6784701ejc.1.1695053085243; 
- Mon, 18 Sep 2023 09:04:45 -0700 (PDT)
+ bh=kTBjPJZgBk13UdBUXwIisPTyIoW0XcuNCZty165NaD0=;
+ b=lKQV8p/yIUF7OSmuOttu9QNLwjtva2G2GNxR/9pQ7x6SjL4IrE6krQLUzGS3/JjR91
+ AVwOSwCRBn4FLo2UF515GgqRmQN+ZgbP2T7aHKFeqZ6uSX3K8udBGVSJoapCqnscJzWA
+ LDWOy3KsUxQ4yEDe4mCUi4GoDY3wmuwo5y2QEwaaopePk1erl8XpNGNiWODybtNtrge7
+ jiMmZjdt/57qe7Dpm06FY3w3rc8xYfuvAvLOq1DL6cqjNXyySIejNHMmo8JzhZn42zo6
+ s/rOZu2rs1Z+Bz7Ixxv1U2S9UlUCuS2G+J+CGzQwiaSnoc94qquGGr5lTZLkG631HI15
+ fVqw==
+X-Gm-Message-State: AOJu0Yw/QEru9OHl2veEk37cN4cWlxixQWksrB9RvvF5sGXCAyugRbj2
+ 4F+xQLKTgF/+tVelW5QYVLEhMg==
+X-Google-Smtp-Source: AGHT+IFq/QL5z5bo/y5y/kDRcLT1d9XsePcCQP72fHn+R4rgmGpcF6OIn0/xzDT8r3fspp9H+r5Uyw==
+X-Received: by 2002:a05:6402:1bc8:b0:530:be79:49e7 with SMTP id
+ ch8-20020a0564021bc800b00530be7949e7mr6068787edb.37.1695053016011; 
+ Mon, 18 Sep 2023 09:03:36 -0700 (PDT)
 Received: from localhost.localdomain
  (static-212-193-78-212.thenetworkfactory.nl. [212.78.193.212])
  by smtp.gmail.com with ESMTPSA id
- lt10-20020a170906fa8a00b009737b8d47b6sm6568567ejb.203.2023.09.18.09.04.43
+ eh16-20020a0564020f9000b005256aaa6e7asm1688491edb.78.2023.09.18.09.03.34
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 18 Sep 2023 09:04:44 -0700 (PDT)
+ Mon, 18 Sep 2023 09:03:35 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>,
@@ -97,19 +97,23 @@ Cc: Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Nicholas Piggin <npiggin@gmail.com>, Greg Kurz <groug@kaod.org>,
  Michael Rolnik <mrolnik@gmail.com>, Eduardo Habkost <eduardo@habkost.net>,
- Markus Armbruster <armbru@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH 20/22] target/s390x: Use s390_realize_cpu_model() as
- verify_accel_features()
-Date: Mon, 18 Sep 2023 18:02:53 +0200
-Message-ID: <20230918160257.30127-21-philmd@linaro.org>
+ Markus Armbruster <armbru@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ xianglai li <lixianglai@loongson.cn>,
+ "Salil Mehta" <salil.mehta@opnsrc.net>,
+ Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
+ Bibo Mao <maobibo@loongson.cn>
+Subject: [PATCH 07/22] exec/cpu: Introduce the CPU address space destruction
+ function
+Date: Mon, 18 Sep 2023 18:02:40 +0200
+Message-ID: <20230918160257.30127-8-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230918160257.30127-1-philmd@linaro.org>
 References: <20230918160257.30127-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::634;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x634.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52b;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x52b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -132,40 +136,109 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-s390_realize_cpu_model() checks if CPU model and definitions
-are compatible with the KVM / TCG accelerators, before realizing
-the vCPU. Use it directly as CPUClass::verify_accel_features()
-handler (called from cpu_exec_realizefn()).
+From: xianglai li <lixianglai@loongson.cn>
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Introduce new function to destroy CPU address space resources
+for cpu hot-(un)plug.
+
+Co-authored-by: "Salil Mehta" <salil.mehta@opnsrc.net>
+Cc: "Salil Mehta" <salil.mehta@opnsrc.net>
+Cc: Xiaojuan Yang <yangxiaojuan@loongson.cn>
+Cc: Song Gao <gaosong@loongson.cn>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: Igor Mammedov <imammedo@redhat.com>
+Cc: Ani Sinha <anisinha@redhat.com>
+Cc: Paolo Bonzini <pbonzini@redhat.com>
+Cc: Richard Henderson <richard.henderson@linaro.org>
+Cc: Eduardo Habkost <eduardo@habkost.net>
+Cc: Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
+Cc: "Philippe Mathieu-Daudé" <philmd@linaro.org>
+Cc: Yanan Wang <wangyanan55@huawei.com>
+Cc: "Daniel P. Berrangé" <berrange@redhat.com>
+Cc: Peter Xu <peterx@redhat.com>
+Cc: David Hildenbrand <david@redhat.com>
+Cc: Bibo Mao <maobibo@loongson.cn>
+Signed-off-by: xianglai li <lixianglai@loongson.cn>
+Message-ID: <3a4fc2a3df4b767c3c296a7da3bc15ca9c251316.1694433326.git.lixianglai@loongson.cn>
 ---
- target/s390x/cpu.c | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
+ include/exec/cpu-common.h |  8 ++++++++
+ include/hw/core/cpu.h     |  1 +
+ softmmu/physmem.c         | 24 ++++++++++++++++++++++++
+ 3 files changed, 33 insertions(+)
 
-diff --git a/target/s390x/cpu.c b/target/s390x/cpu.c
-index 1a44a6d2b2..983dbfe563 100644
---- a/target/s390x/cpu.c
-+++ b/target/s390x/cpu.c
-@@ -231,11 +231,6 @@ static void s390_cpu_realizefn(DeviceState *dev, Error **errp)
-     S390CPUClass *scc = S390_CPU_GET_CLASS(dev);
-     Error *err = NULL;
+diff --git a/include/exec/cpu-common.h b/include/exec/cpu-common.h
+index 41788c0bdd..eb56a228a2 100644
+--- a/include/exec/cpu-common.h
++++ b/include/exec/cpu-common.h
+@@ -120,6 +120,14 @@ size_t qemu_ram_pagesize_largest(void);
+  */
+ void cpu_address_space_init(CPUState *cpu, int asidx,
+                             const char *prefix, MemoryRegion *mr);
++/**
++ * cpu_address_space_destroy:
++ * @cpu: CPU for which address space needs to be destroyed
++ * @asidx: integer index of this address space
++ *
++ * Note that with KVM only one address space is supported.
++ */
++void cpu_address_space_destroy(CPUState *cpu, int asidx);
  
--    /* the model has to be realized before qemu_init_vcpu() due to kvm */
--    if (!s390_realize_cpu_model(cs, &err)) {
--        goto out;
--    }
--
-     cpu_exec_realizefn(cs, &err);
-     if (err != NULL) {
-         goto out;
-@@ -329,6 +324,7 @@ static void s390_cpu_class_init(ObjectClass *oc, void *data)
+ void cpu_physical_memory_rw(hwaddr addr, void *buf,
+                             hwaddr len, bool is_write);
+diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+index 92a4234439..c90cf3a162 100644
+--- a/include/hw/core/cpu.h
++++ b/include/hw/core/cpu.h
+@@ -366,6 +366,7 @@ struct CPUState {
+     QSIMPLEQ_HEAD(, qemu_work_item) work_list;
  
-     scc->reset = s390_cpu_reset;
-     cc->class_by_name = s390_cpu_class_by_name,
-+    cc->verify_accel_features = s390_realize_cpu_model;
-     cc->has_work = s390_cpu_has_work;
-     cc->dump_state = s390_cpu_dump_state;
-     cc->query_cpu_fast = s390_query_cpu_fast;
+     CPUAddressSpace *cpu_ases;
++    int cpu_ases_ref_count;
+     int num_ases;
+     AddressSpace *as;
+     MemoryRegion *memory;
+diff --git a/softmmu/physmem.c b/softmmu/physmem.c
+index 18277ddd67..c75e3e8042 100644
+--- a/softmmu/physmem.c
++++ b/softmmu/physmem.c
+@@ -761,6 +761,7 @@ void cpu_address_space_init(CPUState *cpu, int asidx,
+ 
+     if (!cpu->cpu_ases) {
+         cpu->cpu_ases = g_new0(CPUAddressSpace, cpu->num_ases);
++        cpu->cpu_ases_ref_count = cpu->num_ases;
+     }
+ 
+     newas = &cpu->cpu_ases[asidx];
+@@ -774,6 +775,29 @@ void cpu_address_space_init(CPUState *cpu, int asidx,
+     }
+ }
+ 
++void cpu_address_space_destroy(CPUState *cpu, int asidx)
++{
++    CPUAddressSpace *cpuas;
++
++    assert(asidx < cpu->num_ases);
++    assert(asidx == 0 || !kvm_enabled());
++    assert(cpu->cpu_ases);
++
++    cpuas = &cpu->cpu_ases[asidx];
++    if (tcg_enabled()) {
++        memory_listener_unregister(&cpuas->tcg_as_listener);
++    }
++
++    address_space_destroy(cpuas->as);
++
++    cpu->cpu_ases_ref_count--;
++    if (cpu->cpu_ases_ref_count == 0) {
++        g_free(cpu->cpu_ases);
++        cpu->cpu_ases = NULL;
++    }
++
++}
++
+ AddressSpace *cpu_get_address_space(CPUState *cpu, int asidx)
+ {
+     /* Return the AddressSpace corresponding to the specified index */
 -- 
 2.41.0
 
