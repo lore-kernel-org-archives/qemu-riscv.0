@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6141AC46CA1
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Sep 2023 16:08:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABDAECD37B0
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Sep 2023 16:08:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qiGjg-0000KH-AS; Mon, 18 Sep 2023 12:04:32 -0400
+	id 1qiGkF-0001uP-0Y; Mon, 18 Sep 2023 12:05:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGjV-0007hD-P3
- for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:04:21 -0400
-Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGk5-0001jR-FH
+ for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:05:00 -0400
+Received: from mail-lj1-x232.google.com ([2a00:1450:4864:20::232])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGjU-0004Ke-2J
- for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:04:21 -0400
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-9a9f139cd94so635661666b.2
- for <qemu-riscv@nongnu.org>; Mon, 18 Sep 2023 09:04:19 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGjk-0004P0-W8
+ for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:04:51 -0400
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2bb9a063f26so74557201fa.2
+ for <qemu-riscv@nongnu.org>; Mon, 18 Sep 2023 09:04:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695053058; x=1695657858; darn=nongnu.org;
+ d=linaro.org; s=google; t=1695053075; x=1695657875; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NjaIM1Qc6nHbnxZLIT5jjyB717NwyoCy1EteOD4KAlE=;
- b=t0llDNmNfv8UG/Uz7Bv6Oz3tQavpDDy9Ti61u5vtH5yvyk3IOrlWWqvH94ZYYlU7xF
- EkwwbHMyCBq2p6TZax4+x4M56FfeV9AQA8kz3B8ZLLMYHRL32xp8LPLQ6OcFIm7XPWZQ
- HqXImbNEWR0a1vbL9/WKqKcVZRkB+cF30o8q7POkfy9/6dYevY8FDc/Q7Q6OtPT92kPO
- yoT3qkklnYcu70Q6TmvYboUPHlQklwyhLESAnTMgeO6oChdZJJiY/+wuj3kMZAWRZL4u
- z+D5xF+F1Vb+hj38/xOL2NobShGA6ogToBuI6Ie5UFQMP1XhhiMo5UBpWG7KkFq+Tbde
- 8ftg==
+ bh=CLYCBr4NSqb4Srk/T+P7jn9AmbCAT10Txre246ezJ94=;
+ b=Zi3uk1jy2ZOjCgSultSkYdqb7MNl0gMoYfhwy85tmx2zrC3C8ZljeIe765Cwx+rghY
+ 06Q21koXYPZ1G3tQDE3J/H5ZFsgZy0y3XIwJYXCbucujHzbaRGD9daOlqr8UwUXTFPGt
+ 134R5+eqKwJ7/oSYRpxG1FUtCOsYaFiKvuy3SBvhrf0jYni2CxWbdbw+DVmbjMebQ2jI
+ 2+uARZAtQ/eB74WmQrx3ygpeXvd9YmzQMeOG+BQ0lZECtnNb0r8SXNX+/kYC8op7Um7T
+ akV1rrlI4jyqRVOQ1lXEi63S5MJUXmxd2na2p4tx9ScJrcMCLM8Nw1U0jY8ViKDtD2k6
+ k1+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695053058; x=1695657858;
+ d=1e100.net; s=20230601; t=1695053075; x=1695657875;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NjaIM1Qc6nHbnxZLIT5jjyB717NwyoCy1EteOD4KAlE=;
- b=c8qQe3kCLwHiNye9RvTKLXSqURwELeT3vmPz0F5TE9s92ruJJLj4aVcvl5DPUyE8hC
- DnDGct+UDW5bdmfkenYfBqCNOfYwou2Ykd0kVXcxZqdwvOVzBLPUGOQoPDDpmzAXwA28
- 4tyATLUUdh7y4n4dWwcizpRXAGRsl72yfyPjQtPt1u96nx9+LRk48Bl5/ABT8MJKaJDj
- 6DTTeggBl0MGf76Rnb+PkX7lHO81WESfc7tmiCYAlPoM57MJgC4+eU/0BHp5TQzb0fQ3
- H6WOALR7xijHc3n+3mBP9nMXPWS81c563JLvcbZfgcpOUs0kO3ecr6/VCxKLsqBzDWA7
- p2ZA==
-X-Gm-Message-State: AOJu0YwqtmEKtInOiQrbxQbhimoP6A/p9hqJsgTb0GuWpyJjpnBojaqX
- 95S8IzKKJCWgOfGSC+P1q1ODdw==
-X-Google-Smtp-Source: AGHT+IH1BGqTiq3uZIcjIgDgFSn4hEE/bGsbSKhsdURXDBkyUNQTShuSyFgzOD2PM8QK12Z2NIlVUQ==
-X-Received: by 2002:a17:907:75f1:b0:9a1:da9a:f1c2 with SMTP id
- jz17-20020a17090775f100b009a1da9af1c2mr7861010ejc.11.1695053058645; 
- Mon, 18 Sep 2023 09:04:18 -0700 (PDT)
+ bh=CLYCBr4NSqb4Srk/T+P7jn9AmbCAT10Txre246ezJ94=;
+ b=FygQydZ0yv/IEuonNwGbg/teL7VUTxlwvV+TBgO//VT9CYa9OoDxsCZNAcHXQMpgqM
+ kQTbQOJmsBIKrQvV1hsw1trnzyi7Y5Mdwg5sQbozcL2wzO82d07hLhEW/fsXvrEePkCS
+ OPHrGH5gQvQIqfEXVZsZ7s1+4CjZi9BLAoYSE5GRydvdMHpOXH8+E6r82m7PNnAIJ0Q9
+ hMzJ5B/zIG7XHrkasMcEBhIk+5BP1nwIepnMqyX3w6tHjPs7iBdl0Uf3oWvWrSDdgMFe
+ cqkOMH8GMOAMsws8e0sBNy3YWx3W64DXf6KK4Hvb+SyztWJWnJpKInYfZOzcBkACr4Gi
+ /YaQ==
+X-Gm-Message-State: AOJu0YxWfmi1BYRz0gSAbnY56J08o+7YgSYaTFVu9R/wTtBu4LZ/IoAr
+ VtctkNY3hPmqBqfuc7+Uvtdkog==
+X-Google-Smtp-Source: AGHT+IEszpq6z0T8KHVLe1aYl3TXIxtDx0wMS/QiHJe0YDjbBZ7toGFiwcuS0GxUEQgehFRPXlIxjg==
+X-Received: by 2002:a2e:8046:0:b0:2bc:b821:84ad with SMTP id
+ p6-20020a2e8046000000b002bcb82184admr8047755ljg.16.1695053075234; 
+ Mon, 18 Sep 2023 09:04:35 -0700 (PDT)
 Received: from localhost.localdomain
  (static-212-193-78-212.thenetworkfactory.nl. [212.78.193.212])
  by smtp.gmail.com with ESMTPSA id
- f13-20020a170906390d00b00982a92a849asm6628019eje.91.2023.09.18.09.04.17
+ f10-20020a170906560a00b0099d0c0bb92bsm6569110ejq.80.2023.09.18.09.04.33
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 18 Sep 2023 09:04:18 -0700 (PDT)
+ Mon, 18 Sep 2023 09:04:34 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>,
@@ -98,24 +98,24 @@ Cc: Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>,
  Nicholas Piggin <npiggin@gmail.com>, Greg Kurz <groug@kaod.org>,
  Michael Rolnik <mrolnik@gmail.com>, Eduardo Habkost <eduardo@habkost.net>,
  Markus Armbruster <armbru@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH 15/22] exec/cpu: Introduce CPUClass::verify_accel_features()
-Date: Mon, 18 Sep 2023 18:02:48 +0200
-Message-ID: <20230918160257.30127-16-philmd@linaro.org>
+Subject: [PATCH 18/22] target/s390x: Call s390_cpu_realize_sysemu from
+ s390_realize_cpu_model
+Date: Mon, 18 Sep 2023 18:02:51 +0200
+Message-ID: <20230918160257.30127-19-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230918160257.30127-1-philmd@linaro.org>
 References: <20230918160257.30127-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::632;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x632.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::232;
+ envelope-from=philmd@linaro.org; helo=mail-lj1-x232.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -131,56 +131,83 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Some CPUs need to check the requested features are compatible
-with the requested accelerator. This has to be done *before*
-the accelerator realizes a vCPU.
-Introduce the verify_accel_features() handler and call it
-just before accel_cpu_realizefn().
+s390_cpu_realize_sysemu() runs some checks for the TCG accelerator,
+previous to creating the vCPU. s390_realize_cpu_model() also does
+run some checks for KVM.
+Move the sysemu call to s390_realize_cpu_model(). Having a single
+call before cpu_exec_realizefn() will allow us to factor a
+verify_accel_features() handler out in a pair of commits.
+
+Directly pass a S390CPU* to s390_cpu_realize_sysemu() to simplify.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/hw/core/cpu.h | 4 ++++
- cpu.c                 | 5 +++++
- 2 files changed, 9 insertions(+)
+ target/s390x/s390x-internal.h | 2 +-
+ target/s390x/cpu-sysemu.c     | 3 +--
+ target/s390x/cpu.c            | 6 ------
+ target/s390x/cpu_models.c     | 4 ++++
+ 4 files changed, 6 insertions(+), 9 deletions(-)
 
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index c90cf3a162..1e940f6bb5 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -103,6 +103,9 @@ struct SysemuCPUOps;
-  * @class_by_name: Callback to map -cpu command line model name to an
-  * instantiatable CPU type.
-  * @parse_features: Callback to parse command line arguments.
-+ * @verify_accel_features: Callback to verify if all requested CPU are
-+ *        compatible with the requested accelerator. Called before the
-+ *        accelerator realize a vCPU.
-  * @reset_dump_flags: #CPUDumpFlags to use for reset logging.
-  * @has_work: Callback for checking if there is work to do.
-  * @memory_rw_debug: Callback for GDB memory access.
-@@ -183,6 +186,7 @@ struct CPUClass {
-      * class data that depends on the accelerator, see accel/accel-common.c.
-      */
-     void (*init_accel_cpu)(struct AccelCPUClass *accel_cpu, CPUClass *cc);
-+    bool (*verify_accel_features)(CPUState *cs, Error **errp);
+diff --git a/target/s390x/s390x-internal.h b/target/s390x/s390x-internal.h
+index 825252d728..781ac08458 100644
+--- a/target/s390x/s390x-internal.h
++++ b/target/s390x/s390x-internal.h
+@@ -241,7 +241,7 @@ uint32_t calc_cc(CPUS390XState *env, uint32_t cc_op, uint64_t src, uint64_t dst,
+ unsigned int s390_cpu_halt(S390CPU *cpu);
+ void s390_cpu_unhalt(S390CPU *cpu);
+ void s390_cpu_init_sysemu(Object *obj);
+-bool s390_cpu_realize_sysemu(DeviceState *dev, Error **errp);
++bool s390_cpu_realize_sysemu(S390CPU *cpu, Error **errp);
+ void s390_cpu_finalize(Object *obj);
+ void s390_cpu_class_init_sysemu(CPUClass *cc);
+ void s390_cpu_machine_reset_cb(void *opaque);
+diff --git a/target/s390x/cpu-sysemu.c b/target/s390x/cpu-sysemu.c
+index 8112561e5e..5178736c46 100644
+--- a/target/s390x/cpu-sysemu.c
++++ b/target/s390x/cpu-sysemu.c
+@@ -122,9 +122,8 @@ void s390_cpu_init_sysemu(Object *obj)
+     s390_cpu_set_state(S390_CPU_STATE_STOPPED, cpu);
+ }
  
-     /*
-      * Keep non-pointer data at the end to minimize holes.
-diff --git a/cpu.c b/cpu.c
-index 0769b0b153..84b03c09ac 100644
---- a/cpu.c
-+++ b/cpu.c
-@@ -136,6 +136,11 @@ void cpu_exec_realizefn(CPUState *cpu, Error **errp)
-     /* cache the cpu class for the hotpath */
-     cpu->cc = CPU_GET_CLASS(cpu);
+-bool s390_cpu_realize_sysemu(DeviceState *dev, Error **errp)
++bool s390_cpu_realize_sysemu(S390CPU *cpu, Error **errp)
+ {
+-    S390CPU *cpu = S390_CPU(dev);
+     MachineState *ms = MACHINE(qdev_get_machine());
+     unsigned int max_cpus = ms->smp.max_cpus;
  
-+    if (cpu->cc->verify_accel_features
-+        && !cpu->cc->verify_accel_features(cpu, errp)) {
-+        return false;
-+    }
-+
-     if (!accel_cpu_realizefn(cpu, errp)) {
-         return;
+diff --git a/target/s390x/cpu.c b/target/s390x/cpu.c
+index 416ac6c4e0..7257d4bc19 100644
+--- a/target/s390x/cpu.c
++++ b/target/s390x/cpu.c
+@@ -237,12 +237,6 @@ static void s390_cpu_realizefn(DeviceState *dev, Error **errp)
+         goto out;
      }
+ 
+-#if !defined(CONFIG_USER_ONLY)
+-    if (!s390_cpu_realize_sysemu(dev, &err)) {
+-        goto out;
+-    }
+-#endif
+-
+     cpu_exec_realizefn(cs, &err);
+     if (err != NULL) {
+         goto out;
+diff --git a/target/s390x/cpu_models.c b/target/s390x/cpu_models.c
+index 98f14c09c2..f030be0d55 100644
+--- a/target/s390x/cpu_models.c
++++ b/target/s390x/cpu_models.c
+@@ -612,6 +612,10 @@ void s390_realize_cpu_model(CPUState *cs, Error **errp)
+         cpu->env.cpuid = deposit64(cpu->env.cpuid, CPU_PHYS_ADDR_SHIFT,
+                                    CPU_PHYS_ADDR_BITS, cpu->env.core_id);
+     }
++
++    if (!s390_cpu_realize_sysemu(cpu, &err)) {
++        return;
++    }
+ #endif
+ }
+ 
 -- 
 2.41.0
 
