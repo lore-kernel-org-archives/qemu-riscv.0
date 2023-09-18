@@ -4,74 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA02BCD37B4
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Sep 2023 02:10:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B42A8CD37B0
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Sep 2023 07:23:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qi3iZ-0006XN-19; Sun, 17 Sep 2023 22:10:32 -0400
+	id 1qi8ah-00070B-Bp; Mon, 18 Sep 2023 03:22:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qi3iW-0006Wu-Qh; Sun, 17 Sep 2023 22:10:28 -0400
-Received: from mail-vs1-xe2b.google.com ([2607:f8b0:4864:20::e2b])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qi3iV-0006BT-8l; Sun, 17 Sep 2023 22:10:28 -0400
-Received: by mail-vs1-xe2b.google.com with SMTP id
- ada2fe7eead31-450f68feee2so1399931137.1; 
- Sun, 17 Sep 2023 19:10:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695003026; x=1695607826; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8XpVup53PXb5M+AjtqYbt8ZrhesrxmoaV1xAMZY1H6c=;
- b=JIIyRG66usMvxEYSjeQk8ImOETpc4M2/njQAX9B6GITU+giWAXO6WDsAVEVTFd9Inz
- lRKKAgNRCbb4djQEqD8GmCA+SFiq/9sFeWOpF2iRo0kPJ6zAZS1Wtxlp+CABRzdv8oiv
- Z13YcmeOFwntAan8MU/z5+hr3IcE+z5cM43qfq93BDwlsv24mNQn7cvsOwwKmMZtVJZs
- BuuSpChAbfjnh2QpecZbdjI09cYS4vGiouLEXLYd+t0IR0uF6zx5sOX3jkEpv6SisJSo
- 3+3RXyKuHx0rvYFK7ojD2CQWC6KTyD1yyzlTFTCUMgAWL7kKLCu6CXw4q3SCxh7z3MvT
- 3pLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695003026; x=1695607826;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=8XpVup53PXb5M+AjtqYbt8ZrhesrxmoaV1xAMZY1H6c=;
- b=FiPzGMkgY6Uu+R0XvQb6+0MjnqxMVtnHbvTshhNDGTMwxUaUnac/Pck/vhB+/j5UwA
- pRXTGL9/9X6OIebt86KnoPXlQk08lGPDgw4rVk6GSBskgaJFjouAUnw1L/nNryGXHU1S
- 5ylblRxFsnbXKYAdT3AHJRrS3Rv7fFB5XCjoquPStiplOOloNUvdvnVtiJjRKtvyiTec
- RB3to+yLZwbylxybD58uc3XtBciyXOJO2Hc8qULiHCiBMJOiE8GZlBXk93IQ/cGrKCOn
- 8rSt9L76epDd1wHnErWDDbdhLoYllVhTXJkbF0w3mCRMYq9dnjNevfSfeqTTO+2e9lfZ
- DV2g==
-X-Gm-Message-State: AOJu0YzX75curNEfCeWB/GxDGN8YefKzw5afNqJmdnI0pQUTyrDqYlyx
- uZh386tpc/OWCps9UwFlh7UnrZ2AXn33X/rUUy0=
-X-Google-Smtp-Source: AGHT+IH57nLFoxzXXUmYpv7trVrK86BExCkDV1mXFn7OhcMBqqRJRDuaT8tqX74EEz/7LA5PJAszAmbz6HmXyIHzSNY=
-X-Received: by 2002:a67:eb14:0:b0:44d:476b:3bc0 with SMTP id
- a20-20020a67eb14000000b0044d476b3bc0mr6241948vso.28.1695003025760; Sun, 17
- Sep 2023 19:10:25 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230907112640.292104-1-chigot@adacore.com>
- <20230907112640.292104-6-chigot@adacore.com>
-In-Reply-To: <20230907112640.292104-6-chigot@adacore.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 18 Sep 2023 12:09:59 +1000
-Message-ID: <CAKmqyKNAymAeCOahe8ZMY=zJT_r4O+L1d9Q6joDRthV3jnEXiw@mail.gmail.com>
-Subject: Re: [PATCH v3 5/5] gdbstub: replace exit calls with proper shutdown
- for softmmu
-To: =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org
+ (Exim 4.90_1) (envelope-from <nikita.shubin@maquefel.me>)
+ id 1qi8af-0006zn-HQ; Mon, 18 Sep 2023 03:22:41 -0400
+Received: from forward500a.mail.yandex.net ([178.154.239.80])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <nikita.shubin@maquefel.me>)
+ id 1qi8ab-00015i-GJ; Mon, 18 Sep 2023 03:22:41 -0400
+Received: from mail-nwsmtp-smtp-production-main-52.vla.yp-c.yandex.net
+ (mail-nwsmtp-smtp-production-main-52.vla.yp-c.yandex.net
+ [IPv6:2a02:6b8:c18:1182:0:640:88e4:0])
+ by forward500a.mail.yandex.net (Yandex) with ESMTP id 568E95E822;
+ Mon, 18 Sep 2023 10:22:29 +0300 (MSK)
+Received: by mail-nwsmtp-smtp-production-main-52.vla.yp-c.yandex.net
+ (smtp/Yandex) with ESMTPSA id QMeN6IBDTKo0-s83QSgyM; 
+ Mon, 18 Sep 2023 10:22:28 +0300
+X-Yandex-Fwd: 1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=maquefel.me; s=mail;
+ t=1695021748; bh=SLNNuXl6Kpp232dj1r/WskzeUPLPQp4ohGEkn8q+/Qs=;
+ h=References:Date:In-Reply-To:Cc:To:From:Subject:Message-ID;
+ b=f5kaShdn1RVN2qMqJpuK9zvPx8PfVyrDfxowOp0SY1zEQxBmj7NykyQImZjIK2VDk
+ iVOzqjBbyd4JRje34ncaUJbLtR06plFjjgdNBcA9zUzczbButOa4dxT03LMZl0bn14
+ uA0UjBpBP6zgTNVMhpaOVYmlzbYv11bAK4MhWkg0=
+Authentication-Results: mail-nwsmtp-smtp-production-main-52.vla.yp-c.yandex.net;
+ dkim=pass header.i=@maquefel.me
+Message-ID: <d2319770cefec2662d70bc2517bdb95793b04a18.camel@maquefel.me>
+Subject: Re: [RFC PATCH v2 1/2] hw/riscv: hart: replace array access with
+ qemu_get_cpu()
+From: Nikita Shubin <nikita.shubin@maquefel.me>
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
+ <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>, Weiwei Li
+ <liweiwei@iscas.ac.cn>, Daniel Henrique Barboza
+ <dbarboza@ventanamicro.com>,  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Sunil V L <sunilvl@ventanamicro.com>, Nikita Shubin <n.shubin@yadro.com>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Date: Mon, 18 Sep 2023 13:22:27 +0300
+In-Reply-To: <CAKmqyKN9vBu0aGtov1qy6RvavZ57-c4J+dSwZxZwsiwyQ3gyTQ@mail.gmail.com>
+References: <20230914080740.7561-1-nikita.shubin@maquefel.me>
+ <20230914080740.7561-2-nikita.shubin@maquefel.me>
+ <CAKmqyKN9vBu0aGtov1qy6RvavZ57-c4J+dSwZxZwsiwyQ3gyTQ@mail.gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2b;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2b.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+User-Agent: Evolution 3.46.3 
+MIME-Version: 1.0
+Received-SPF: pass client-ip=178.154.239.80;
+ envelope-from=nikita.shubin@maquefel.me; helo=forward500a.mail.yandex.net
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -89,104 +79,382 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Sep 7, 2023 at 9:26=E2=80=AFPM Cl=C3=A9ment Chigot <chigot@adacore.=
-com> wrote:
->
-> This replaces the exit calls by shutdown requests, ensuring a proper
-> cleanup of Qemu. Features like net/vhost-vdpa.c are expecting
-> qemu_cleanup to be called to remove their last residuals.
->
-> Signed-off-by: Cl=C3=A9ment Chigot <chigot@adacore.com>
+Hello Alistair!
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+On Mon, 2023-09-18 at 11:50 +1000, Alistair Francis wrote:
+> On Thu, Sep 14, 2023 at 6:09=E2=80=AFPM Nikita Shubin
+> <nikita.shubin@maquefel.me> wrote:
+> >=20
+> > From: Nikita Shubin <n.shubin@yadro.com>
+> >=20
+> > Replace all RISCVHartArrayState->harts[idx] with
+> > qemu_get_cpu()/cpu_by_arch_id().
+>=20
+> Thanks for the patch
+>=20
+> Why do we want this change though?
 
-Alistair
+The main reason for these patches is that CPU Instance overloading
+would be nice.
 
-> ---
->  gdbstub/gdbstub.c          | 5 +++--
->  gdbstub/softmmu.c          | 6 ++++++
->  gdbstub/user.c             | 6 ++++++
->  include/gdbstub/syscalls.h | 9 +++++++++
->  4 files changed, 24 insertions(+), 2 deletions(-)
->
-> diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-> index 349d348c7b..1cb6d65306 100644
-> --- a/gdbstub/gdbstub.c
-> +++ b/gdbstub/gdbstub.c
-> @@ -1327,7 +1327,7 @@ static void handle_v_kill(GArray *params, void *use=
-r_ctx)
->      gdb_put_packet("OK");
->      error_report("QEMU: Terminated via GDBstub");
->      gdb_exit(0);
-> -    exit(0);
-> +    gdb_qemu_exit(0);
->  }
->
->  static const GdbCmdParseEntry gdb_v_commands_table[] =3D {
-> @@ -1846,7 +1846,8 @@ static int gdb_handle_packet(const char *line_buf)
->          /* Kill the target */
->          error_report("QEMU: Terminated via GDBstub");
->          gdb_exit(0);
-> -        exit(0);
-> +        gdb_qemu_exit(0);
-> +        break;
->      case 'D':
->          {
->              static const GdbCmdParseEntry detach_cmd_desc =3D {
-> diff --git a/gdbstub/softmmu.c b/gdbstub/softmmu.c
-> index 9f0b8b5497..a5d6e04c79 100644
-> --- a/gdbstub/softmmu.c
-> +++ b/gdbstub/softmmu.c
-> @@ -435,6 +435,12 @@ void gdb_exit(int code)
->      qemu_chr_fe_deinit(&gdbserver_system_state.chr, true);
->  }
->
-> +void gdb_qemu_exit(int code)
-> +{
-> +    qemu_system_shutdown_request_with_code(SHUTDOWN_CAUSE_GUEST_SHUTDOWN=
-,
-> +                                           code);
-> +}
-> +
->  /*
->   * Memory access
->   */
-> diff --git a/gdbstub/user.c b/gdbstub/user.c
-> index 7ab6e5d975..dbe1d9b887 100644
-> --- a/gdbstub/user.c
-> +++ b/gdbstub/user.c
-> @@ -113,6 +113,12 @@ void gdb_exit(int code)
->          gdb_put_packet(buf);
->          gdbserver_state.allow_stop_reply =3D false;
->      }
-> +
-> +}
-> +
-> +void gdb_qemu_exit(int code)
-> +{
-> +    exit(code);
->  }
->
->  int gdb_handlesig(CPUState *cpu, int sig)
-> diff --git a/include/gdbstub/syscalls.h b/include/gdbstub/syscalls.h
-> index 243eaf8ce4..54ff7245a1 100644
-> --- a/include/gdbstub/syscalls.h
-> +++ b/include/gdbstub/syscalls.h
-> @@ -110,4 +110,13 @@ int use_gdb_syscalls(void);
->   */
->  void gdb_exit(int code);
->
-> +/**
-> + * gdb_qemu_exit: ask qemu to exit
-> + * @code: exit code reported
-> + *
-> + * This requests qemu to exit. This function is allowed to return as
-> + * the exit request might be processed asynchronously by qemu backend.
-> + */
-> +void gdb_qemu_exit(int code);
-> +
->  #endif /* _SYSCALLS_H_ */
-> --
-> 2.25.1
->
+Currently it is not possible to overload instance of RISCVCPU,=20
+i.e. something like this:
+
+static const TypeInfo riscv_cpu_type_infos[] =3D {
+     {
+        .name =3D TYPE_ANOTHER_RISCV_CPU,
+        .parent =3D TYPE_RISCV_CPU,
+        .instance_size =3D sizeof(MyCPUState),
+        .instance_init =3D riscv_my_cpu_init,
+    }
+};
+
+i.e. .instance_size !=3D sizeof(RISCVCPU).
+
+Because we have RISCVHartArrayState.harts with exactly=20
+the size of RISCVCPU.
+
+So either we should avoid using RISCVHartArrayState (which is not
+desirable as we can't switch "cpu_type" for existing machines) in such
+case or make RISCVHartArrayState accept arbitrary "cpu_type" size.
+
+The previous attempt looks very ugly, indeed:
+
+```
+static inline RISCVCPU *riscv_array_get_hart(RISCVHartArrayState harts,
+int i)
+{
+	return harts->harts[i];
+}
+```
+
+https://patchwork.kernel.org/project/qemu-devel/patch/20230727080545.7908-1=
+-nikita.shubin@maquefel.me/
+
+So qemu_get_cpu()/cpu_by_arch_id() looks much more cleaner and
+universal.
+
+>=20
+> >=20
+> > cpu_index is guaranteed to be continuus by cpu_get_free_index(), so
+> > they
+> > can be accessed in same order they were added.
+> >=20
+> > "Hart IDs might not necessarily be numbered contiguously in a
+> > multiprocessor system, but at least one hart must have
+> > a hart ID of zero."
+> >=20
+> > This states that hart ID zero should always be present, this makes
+> > using
+> > cpu_by_arch_id(0) safe.
+> >=20
+> > Signed-off-by: Nikita Shubin <n.shubin@yadro.com>
+> > ---
+> > =C2=A0hw/riscv/boot.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 |=C2=A0 6 ++++--
+> > =C2=A0hw/riscv/sifive_u.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=
+=C2=A0 7 +++++--
+> > =C2=A0hw/riscv/spike.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0 | 17 ++++++++++-------
+> > =C2=A0hw/riscv/virt-acpi-build.c |=C2=A0 2 +-
+> > =C2=A0hw/riscv/virt.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 | 17 +++++++++--------
+> > =C2=A05 files changed, 29 insertions(+), 20 deletions(-)
+> >=20
+> > diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> > index 52bf8e67de..041f966e58 100644
+> > --- a/hw/riscv/boot.c
+> > +++ b/hw/riscv/boot.c
+> > @@ -36,7 +36,8 @@
+> >=20
+> > =C2=A0bool riscv_is_32bit(RISCVHartArrayState *harts)
+> > =C2=A0{
+> > -=C2=A0=C2=A0=C2=A0 return harts->harts[0].env.misa_mxl_max =3D=3D MXL_=
+RV32;
+> > +=C2=A0=C2=A0=C2=A0 RISCVCPU *hart =3D RISCV_CPU(cpu_by_arch_id(0));
+> > +=C2=A0=C2=A0=C2=A0 return hart->env.misa_mxl_max =3D=3D MXL_RV32;
+> > =C2=A0}
+> >=20
+> > =C2=A0/*
+> > @@ -385,6 +386,7 @@ void riscv_setup_rom_reset_vec(MachineState
+> > *machine, RISCVHartArrayState *harts
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 uint64_t fdt_load_addr)
+> > =C2=A0{
+> > =C2=A0=C2=A0=C2=A0=C2=A0 int i;
+> > +=C2=A0=C2=A0=C2=A0 RISCVCPU *hart =3D RISCV_CPU(cpu_by_arch_id(0));
+> > =C2=A0=C2=A0=C2=A0=C2=A0 uint32_t start_addr_hi32 =3D 0x00000000;
+> > =C2=A0=C2=A0=C2=A0=C2=A0 uint32_t fdt_load_addr_hi32 =3D 0x00000000;
+> >=20
+> > @@ -414,7 +416,7 @@ void riscv_setup_rom_reset_vec(MachineState
+> > *machine, RISCVHartArrayState *harts
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 reset_vec[4] =3D 0x018=
+2b283;=C2=A0=C2=A0 /*=C2=A0=C2=A0=C2=A0=C2=A0 ld=C2=A0=C2=A0=C2=A0=C2=A0 t0=
+, 24(t0) */
+> > =C2=A0=C2=A0=C2=A0=C2=A0 }
+> >=20
+> > -=C2=A0=C2=A0=C2=A0 if (!harts->harts[0].cfg.ext_icsr) {
+> > +=C2=A0=C2=A0=C2=A0 if (!hart->cfg.ext_icsr) {
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /*
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * The Zicsr exte=
+nsion has been disabled, so let's ensure
+> > we don't
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * run the CSR in=
+struction. Let's fill the address with a
+> > non
+> > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> > index ec76dce6c9..3d09d0ee0e 100644
+> > --- a/hw/riscv/sifive_u.c
+> > +++ b/hw/riscv/sifive_u.c
+> > @@ -168,6 +168,7 @@ static void create_fdt(SiFiveUState *s, const
+> > MemMapEntry *memmap,
+> > =C2=A0=C2=A0=C2=A0=C2=A0 qemu_fdt_setprop_cell(fdt, "/cpus", "#address-=
+cells", 0x1);
+> >=20
+> > =C2=A0=C2=A0=C2=A0=C2=A0 for (cpu =3D ms->smp.cpus - 1; cpu >=3D 0; cpu=
+--) {
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 RISCVCPU *hart;
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int cpu_phandle =3D ph=
+andle++;
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 nodename =3D g_strdup_=
+printf("/cpus/cpu@%d", cpu);
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 char *intc =3D g_strdu=
+p_printf("/cpus/cpu@%d/interrupt-
+> > controller", cpu);
+> > @@ -180,9 +181,11 @@ static void create_fdt(SiFiveUState *s, const
+> > MemMapEntry *memmap,
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 } else {
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 qemu_fdt_setprop_string(fdt, nodename, "mmu-typ=
+e",
+> > "riscv,sv48");
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 }
+> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 isa=
+ =3D riscv_isa_string(&s->soc.u_cpus.harts[cpu - 1]);
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 har=
+t =3D RISCV_CPU(qemu_get_cpu(cpu - 1));
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 isa=
+ =3D riscv_isa_string(hart);
+>=20
+> This doesn't look right. The existing code accesses the
+> u_cpus/e_cpus.
+> The new code doesn't do that. You need to change this offset based on
+> the number of e/u cpus (depending on order).
+>=20
+> Alistair
+>=20
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 } else {
+> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 isa=
+ =3D riscv_isa_string(&s->soc.e_cpus.harts[0]);
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 har=
+t =3D RISCV_CPU(qemu_get_cpu(0));
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 isa=
+ =3D riscv_isa_string(hart);
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qemu_fdt_setprop_strin=
+g(fdt, nodename, "riscv,isa", isa);
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qemu_fdt_setprop_strin=
+g(fdt, nodename, "compatible",
+> > "riscv");
+> > diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> > index 81f7e53aed..f3ec6427a1 100644
+> > --- a/hw/riscv/spike.c
+> > +++ b/hw/riscv/spike.c
+> > @@ -97,29 +97,32 @@ static void create_fdt(SpikeState *s, const
+> > MemMapEntry *memmap,
+> > =C2=A0=C2=A0=C2=A0=C2=A0 qemu_fdt_add_subnode(fdt, "/cpus/cpu-map");
+> >=20
+> > =C2=A0=C2=A0=C2=A0=C2=A0 for (socket =3D (riscv_socket_count(ms) - 1); =
+socket >=3D 0;
+> > socket--) {
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 uint32_t num_harts =3D s->s=
+oc[socket].num_harts;
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 uint32_t hartid_base =3D s-=
+>soc[socket].hartid_base;
+> > +
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 clust_name =3D g_strdu=
+p_printf("/cpus/cpu-map/cluster%d",
+> > socket);
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qemu_fdt_add_subnode(f=
+dt, clust_name);
+> >=20
+> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 clint_cells =3D=C2=A0 g_new=
+0(uint32_t, s->soc[socket].num_harts *
+> > 4);
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 clint_cells =3D=C2=A0 g_new=
+0(uint32_t, num_harts * 4);
+> >=20
+> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 for (cpu =3D s->soc[socket]=
+.num_harts - 1; cpu >=3D 0; cpu--)
+> > {
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 for (cpu =3D num_harts - 1;=
+ cpu >=3D 0; cpu--) {
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int=
+ cpu_index =3D hartid_base + cpu;
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 RIS=
+CVCPU *hart =3D RISCV_CPU(qemu_get_cpu(cpu_index));
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 cpu_phandle =3D phandle++;
+> >=20
+> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 cpu=
+_name =3D g_strdup_printf("/cpus/cpu@%d",
+> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 s->soc[socket].hartid_base + cpu);
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 cpu=
+_name =3D g_strdup_printf("/cpus/cpu@%d", cpu_index);
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 qemu_fdt_add_subnode(fdt, cpu_name);
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 if (is_32_bit) {
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 qemu_fdt_setprop_string(fdt, cpu_name, "mmu-typ=
+e",
+> > "riscv,sv32");
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 } else {
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 qemu_fdt_setprop_string(fdt, cpu_name, "mmu-typ=
+e",
+> > "riscv,sv48");
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 }
+> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 nam=
+e =3D riscv_isa_string(&s->soc[socket].harts[cpu]);
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 nam=
+e =3D riscv_isa_string(hart);
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 qemu_fdt_setprop_string(fdt, cpu_name, "riscv,isa",
+> > name);
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 g_free(name);
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 qemu_fdt_setprop_string(fdt, cpu_name, "compatible",
+> > "riscv");
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 qemu_fdt_setprop_string(fdt, cpu_name, "status",
+> > "okay");
+> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qem=
+u_fdt_setprop_cell(fdt, cpu_name, "reg",
+> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 s->soc[socket].hartid_base + cpu);
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qem=
+u_fdt_setprop_cell(fdt, cpu_name, "reg",
+> > cpu_index);
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 qemu_fdt_setprop_string(fdt, cpu_name, "device_type",
+> > "cpu");
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 riscv_socket_fdt_write_id(ms, cpu_name, socket);
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 qemu_fdt_setprop_cell(fdt, cpu_name, "phandle",
+> > cpu_phandle);
+> > diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-
+> > build.c
+> > index 7331248f59..d885220cc9 100644
+> > --- a/hw/riscv/virt-acpi-build.c
+> > +++ b/hw/riscv/virt-acpi-build.c
+> > @@ -158,7 +158,7 @@ static void build_rhct(GArray *table_data,
+> > =C2=A0=C2=A0=C2=A0=C2=A0 isa_offset =3D table_data->len - table.table_o=
+ffset;
+> > =C2=A0=C2=A0=C2=A0=C2=A0 build_append_int_noprefix(table_data, 0, 2);=
+=C2=A0=C2=A0 /* Type 0 */
+> >=20
+> > -=C2=A0=C2=A0=C2=A0 cpu =3D &s->soc[0].harts[0];
+> > +=C2=A0=C2=A0=C2=A0 cpu =3D RISCV_CPU(cpu_by_arch_id(0));
+> > =C2=A0=C2=A0=C2=A0=C2=A0 isa =3D riscv_isa_string(cpu);
+> > =C2=A0=C2=A0=C2=A0=C2=A0 len =3D 8 + strlen(isa) + 1;
+> > =C2=A0=C2=A0=C2=A0=C2=A0 aligned_len =3D (len % 2) ? (len + 1) : len;
+> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> > index 5edc1d98d2..f3132ecc1b 100644
+> > --- a/hw/riscv/virt.c
+> > +++ b/hw/riscv/virt.c
+> > @@ -239,16 +239,18 @@ static void
+> > create_fdt_socket_cpus(RISCVVirtState *s, int socket,
+> > =C2=A0=C2=A0=C2=A0=C2=A0 uint32_t cpu_phandle;
+> > =C2=A0=C2=A0=C2=A0=C2=A0 MachineState *ms =3D MACHINE(s);
+> > =C2=A0=C2=A0=C2=A0=C2=A0 char *name, *cpu_name, *core_name, *intc_name,=
+ *sv_name;
+> > +=C2=A0=C2=A0=C2=A0 uint32_t num_harts =3D s->soc[socket].num_harts;
+> > +=C2=A0=C2=A0=C2=A0 uint32_t hartid_base =3D s->soc[socket].hartid_base=
+;
+> > =C2=A0=C2=A0=C2=A0=C2=A0 bool is_32_bit =3D riscv_is_32bit(&s->soc[0]);
+> > =C2=A0=C2=A0=C2=A0=C2=A0 uint8_t satp_mode_max;
+> >=20
+> > -=C2=A0=C2=A0=C2=A0 for (cpu =3D s->soc[socket].num_harts - 1; cpu >=3D=
+ 0; cpu--) {
+> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 RISCVCPU *cpu_ptr =3D &s->s=
+oc[socket].harts[cpu];
+> > +=C2=A0=C2=A0=C2=A0 for (cpu =3D num_harts - 1; cpu >=3D 0; cpu--) {
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int cpu_index =3D hartid_ba=
+se + cpu;
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 RISCVCPU *cpu_ptr =3D RISCV=
+_CPU(qemu_get_cpu(cpu_index));
+> >=20
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 cpu_phandle =3D (*phan=
+dle)++;
+> >=20
+> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 cpu_name =3D g_strdup_print=
+f("/cpus/cpu@%d",
+> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 s->=
+soc[socket].hartid_base + cpu);
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 cpu_name =3D g_strdup_print=
+f("/cpus/cpu@%d", cpu_index);
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qemu_fdt_add_subnode(m=
+s->fdt, cpu_name);
+> >=20
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (cpu_ptr->cfg.satp_=
+mode.supported !=3D 0) {
+> > @@ -275,8 +277,7 @@ static void
+> > create_fdt_socket_cpus(RISCVVirtState *s, int socket,
+> >=20
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qemu_fdt_setprop_strin=
+g(ms->fdt, cpu_name, "compatible",
+> > "riscv");
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qemu_fdt_setprop_strin=
+g(ms->fdt, cpu_name, "status",
+> > "okay");
+> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qemu_fdt_setprop_cell(ms->f=
+dt, cpu_name, "reg",
+> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 s->=
+soc[socket].hartid_base + cpu);
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qemu_fdt_setprop_cell(ms->f=
+dt, cpu_name, "reg",
+> > cpu_index);
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qemu_fdt_setprop_strin=
+g(ms->fdt, cpu_name, "device_type",
+> > "cpu");
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 riscv_socket_fdt_write=
+_id(ms, cpu_name, socket);
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qemu_fdt_setprop_cell(=
+ms->fdt, cpu_name, "phandle",
+> > cpu_phandle);
+> > @@ -717,12 +718,12 @@ static void create_fdt_pmu(RISCVVirtState *s)
+> > =C2=A0{
+> > =C2=A0=C2=A0=C2=A0=C2=A0 char *pmu_name;
+> > =C2=A0=C2=A0=C2=A0=C2=A0 MachineState *ms =3D MACHINE(s);
+> > -=C2=A0=C2=A0=C2=A0 RISCVCPU hart =3D s->soc[0].harts[0];
+> > +=C2=A0=C2=A0=C2=A0 RISCVCPU *hart =3D RISCV_CPU(qemu_get_cpu(0));
+> >=20
+> > =C2=A0=C2=A0=C2=A0=C2=A0 pmu_name =3D g_strdup_printf("/pmu");
+> > =C2=A0=C2=A0=C2=A0=C2=A0 qemu_fdt_add_subnode(ms->fdt, pmu_name);
+> > =C2=A0=C2=A0=C2=A0=C2=A0 qemu_fdt_setprop_string(ms->fdt, pmu_name, "co=
+mpatible",
+> > "riscv,pmu");
+> > -=C2=A0=C2=A0=C2=A0 riscv_pmu_generate_fdt_node(ms->fdt, hart.cfg.pmu_n=
+um,
+> > pmu_name);
+> > +=C2=A0=C2=A0=C2=A0 riscv_pmu_generate_fdt_node(ms->fdt, hart->cfg.pmu_=
+num,
+> > pmu_name);
+> >=20
+> > =C2=A0=C2=A0=C2=A0=C2=A0 g_free(pmu_name);
+> > =C2=A0}
+> > --
+> > 2.39.2
+> >=20
+> >=20
+
 
