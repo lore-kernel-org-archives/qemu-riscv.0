@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CF29CD13D2
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Sep 2023 16:06:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB37BCD37B0
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Sep 2023 16:07:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qiGjb-0008NF-Sb; Mon, 18 Sep 2023 12:04:27 -0400
+	id 1qiGja-0008Gx-TS; Mon, 18 Sep 2023 12:04:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGjB-0006vO-SY
- for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:04:03 -0400
-Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGj7-0006lu-97
+ for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:03:57 -0400
+Received: from mail-lf1-x12f.google.com ([2a00:1450:4864:20::12f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGj9-0004AS-4y
- for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:04:01 -0400
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-52bcb8b199aso5801848a12.3
- for <qemu-riscv@nongnu.org>; Mon, 18 Sep 2023 09:03:58 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGj4-00047L-IH
+ for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:03:57 -0400
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-50305abe5f0so3128438e87.2
+ for <qemu-riscv@nongnu.org>; Mon, 18 Sep 2023 09:03:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695053037; x=1695657837; darn=nongnu.org;
+ d=linaro.org; s=google; t=1695053031; x=1695657831; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=I+18fO8c7Dk0qCgNhOL8JkONKbHnDNHi1cgc68a1fr4=;
- b=UsYJ+7hpAjzNQaE52yIQuo+wt63KLjjf1ElQYbCF/BauBdBzwinFwcyE6ORUfS/77s
- noywBnU1i+wuY1jhLfMhBtsXH9lt21+zZzqrKzxIy1Rp/OHh0hCKjUGGffwYw4IM/Yy2
- A9HHrkTMFhBEzpaHt1Q2M8HezFiLdA9H/nJhOwZcxwo2c41CuVLuUFsEYo9B8YEtTRO+
- bUDlR/sUZ643uuULSGDF+jXh3hbGFddVcherUTzKppdOrnMEdMP5qbQ3DPk1Rnte536q
- uQ1QuheJ0BJ3Ac0CNcesRs/8kKyoKJlb0hGP7ZK4cLqMA7I/dXMHX0AleQj/tHtVkVX2
- b81g==
+ bh=dCQpcHiGYl2b5PMw9sHU7Xzs4il9aZ3go8echWC+OUY=;
+ b=FQYTnb2iEsJtLlSXmuBujvnttvgfO0zf1nBecTbg6e06R/UPi6rfb5RPyAmpEzj7o6
+ vfmMniuY+qJGEUf6ihj3bTI4yRlgNxM3Z2fmkhOJlnx2WLNnoxePcFgy4upgbeJ11Zve
+ OAcxC+RhPjRRflhUrIWFg1iydcrxJEHxDt3x4PxrDOceOuS3X0Y8fjThLq/y2LFuG5to
+ pM1z7MTtS6FKWqpqeCocdZkLC6wQie+DUVt7vcXChlwt6XNZEaItb/kAXGYnyY+DDmWI
+ 2DORwyvoad9lugoVC/suAfsnOW0nOXhVGTyvt+bFj/bapJkx5kgxm/3OaSUrEM8y6isU
+ 5LXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695053037; x=1695657837;
+ d=1e100.net; s=20230601; t=1695053031; x=1695657831;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=I+18fO8c7Dk0qCgNhOL8JkONKbHnDNHi1cgc68a1fr4=;
- b=H5C6yJqBIT+IjXsT/ndu9yNOxcCSHVdxbONjvzo0WDd8lczW/Oi5XadP6yUosBXy/j
- zIQYttCM3rQREUARhZ7t0GKX/Vh4pSP3suvU8kCraySjDo64rf+kG3xSHNok0vlgXMry
- AELyLVNsECriW6c1aw8Q3jyxwzpjZT+0rG46qTZku/QT58l2dDLkGG1zgFsrE+nD9mmC
- 1ZujXAPhdPDbj9LW9ffxWreHv1COvDRST9ZBEWSUELtE+xZ9VDqaJTC/ZcWunNUNk2XK
- OxYtQmBh/yFqXVsJV3UGBe6o8bJRmCuTt0JWOGQKepA8E2GYB469pnmmWjcCvj12Vfj6
- lxxQ==
-X-Gm-Message-State: AOJu0Yzv0Efk1GrFoUZBlid3EgC829BPl6hmdISekECGxFQDBN6W5hvb
- xoEbwz0gGLx2ZQ0q6F3hskLGlA==
-X-Google-Smtp-Source: AGHT+IGkFn7qy0jz8oacmoGjjfPL41FojFiYCtkDQb0dCjnyLoNnL5YigEsFHJXz/34UHFIkqAHEBQ==
-X-Received: by 2002:a17:906:74db:b0:9ad:e3f0:f335 with SMTP id
- z27-20020a17090674db00b009ade3f0f335mr6095624ejl.70.1695053037410; 
- Mon, 18 Sep 2023 09:03:57 -0700 (PDT)
+ bh=dCQpcHiGYl2b5PMw9sHU7Xzs4il9aZ3go8echWC+OUY=;
+ b=mlvLm6YUDAwzkMP8OzonaoWg/zw4eOcOLJb0UZzJTMmlIz/Nq3WncYKVwqAxQb8jc/
+ GpDQpqdrQrLsKNbiFbTIYSr4fsfq3JafBOzd70ui2EDlpoA5gQ0NO3/+B5Ae46VV3LRO
+ gNuxDzxOmuWD+njSXPPBx12ADE/SkrqlFl3wJQxYA7xo75nkDrN9E+MUUsuZjAAHhGeD
+ etP+Zd+j67MojmnikiS++U3gyfz+dr1MrE8S2lmLdCJFpfljNpI9wTUY6YFTvOWfU9BQ
+ hMlLsD9aYq7EHo9nZ3/9zCV+wRhlHmCwcmr3uUYplQD3k48hM0N8oQmcnY3r/DGdmcRu
+ Zimg==
+X-Gm-Message-State: AOJu0YwZe5SMRrHv2T3605EA2+NaTliGXnsPPtti4Td0SRZeuIG8CYDc
+ XGIVv4R9WGlfW5PpYYGCr2lm9Q==
+X-Google-Smtp-Source: AGHT+IGy+sW3/rMWVgA+iQsVUNjPLRtt/VMoay0ZFOuWvfTpfSlLeQiHWwG9NxI8+yiSPP5hV5k4jw==
+X-Received: by 2002:a05:6512:3a9:b0:4fe:5860:7abf with SMTP id
+ v9-20020a05651203a900b004fe58607abfmr6929316lfp.13.1695053031505; 
+ Mon, 18 Sep 2023 09:03:51 -0700 (PDT)
 Received: from localhost.localdomain
  (static-212-193-78-212.thenetworkfactory.nl. [212.78.193.212])
  by smtp.gmail.com with ESMTPSA id
- qt11-20020a170906eceb00b009a19fa8d2e9sm6481188ejb.206.2023.09.18.09.03.55
+ n3-20020a50cc43000000b0053132e5ea61sm913803edi.30.2023.09.18.09.03.49
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 18 Sep 2023 09:03:56 -0700 (PDT)
+ Mon, 18 Sep 2023 09:03:51 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>,
@@ -98,18 +98,18 @@ Cc: Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>,
  Nicholas Piggin <npiggin@gmail.com>, Greg Kurz <groug@kaod.org>,
  Michael Rolnik <mrolnik@gmail.com>, Eduardo Habkost <eduardo@habkost.net>,
  Markus Armbruster <armbru@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH 11/22] target/nios2: Create IRQs *after* accelerator vCPU is
+Subject: [PATCH 10/22] target/hppa: Create timer *after* accelerator vCPU is
  realized
-Date: Mon, 18 Sep 2023 18:02:44 +0200
-Message-ID: <20230918160257.30127-12-philmd@linaro.org>
+Date: Mon, 18 Sep 2023 18:02:43 +0200
+Message-ID: <20230918160257.30127-11-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230918160257.30127-1-philmd@linaro.org>
 References: <20230918160257.30127-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::532;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x532.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::12f;
+ envelope-from=philmd@linaro.org; helo=mail-lf1-x12f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -139,43 +139,31 @@ generic API simplification (in few commits).
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/nios2/cpu.c | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+ target/hppa/cpu.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/target/nios2/cpu.c b/target/nios2/cpu.c
-index 7a92fc5f2c..f500ca7ba2 100644
---- a/target/nios2/cpu.c
-+++ b/target/nios2/cpu.c
-@@ -201,14 +201,6 @@ static void nios2_cpu_realizefn(DeviceState *dev, Error **errp)
-     Nios2CPUClass *ncc = NIOS2_CPU_GET_CLASS(dev);
-     Error *local_err = NULL;
+diff --git a/target/hppa/cpu.c b/target/hppa/cpu.c
+index 49082bd2ba..b0d106b6c7 100644
+--- a/target/hppa/cpu.c
++++ b/target/hppa/cpu.c
+@@ -131,8 +131,6 @@ static void hppa_cpu_realizefn(DeviceState *dev, Error **errp)
+         return;
+     }
  
--#ifndef CONFIG_USER_ONLY
--    if (cpu->eic_present) {
--        qdev_init_gpio_in_named(DEVICE(cpu), eic_set_irq, "EIC", 1);
--    } else {
--        qdev_init_gpio_in_named(DEVICE(cpu), iic_set_irq, "IRQ", 32);
--    }
--#endif
+-    acc->parent_realize(dev, errp);
 -
-     cpu_exec_realizefn(cs, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
-@@ -220,6 +212,14 @@ static void nios2_cpu_realizefn(DeviceState *dev, Error **errp)
-     /* We have reserved storage for cpuid; might as well use it. */
-     cpu->env.ctrl[CR_CPUID] = cs->cpu_index;
- 
-+#ifndef CONFIG_USER_ONLY
-+    if (cpu->eic_present) {
-+        qdev_init_gpio_in_named(DEVICE(cpu), eic_set_irq, "EIC", 1);
-+    } else {
-+        qdev_init_gpio_in_named(DEVICE(cpu), iic_set_irq, "IRQ", 32);
-+    }
-+#endif
+ #ifndef CONFIG_USER_ONLY
+     {
+         HPPACPU *cpu = HPPA_CPU(cs);
+@@ -140,6 +138,8 @@ static void hppa_cpu_realizefn(DeviceState *dev, Error **errp)
+                                         hppa_cpu_alarm_timer, cpu);
+     }
+ #endif
 +
-     ncc->parent_realize(dev, errp);
-     cpu_reset(cs);
++    acc->parent_realize(dev, errp);
  }
+ 
+ static void hppa_cpu_initfn(Object *obj)
 -- 
 2.41.0
 
