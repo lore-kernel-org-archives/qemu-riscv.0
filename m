@@ -4,70 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C90C8CD13CF
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Sep 2023 01:17:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42BD9CD13CF
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Sep 2023 01:33:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qi2sl-0003of-9T; Sun, 17 Sep 2023 21:16:59 -0400
+	id 1qi38I-00014l-T8; Sun, 17 Sep 2023 21:33:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qi2sb-0003nj-Jk; Sun, 17 Sep 2023 21:16:51 -0400
-Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b])
+ id 1qi38E-000149-Mc; Sun, 17 Sep 2023 21:32:59 -0400
+Received: from mail-vk1-xa34.google.com ([2607:f8b0:4864:20::a34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qi2sX-0005yT-Px; Sun, 17 Sep 2023 21:16:48 -0400
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-5031ccf004cso262296e87.2; 
- Sun, 17 Sep 2023 18:16:45 -0700 (PDT)
+ id 1qi38D-0008VX-7w; Sun, 17 Sep 2023 21:32:58 -0400
+Received: by mail-vk1-xa34.google.com with SMTP id
+ 71dfb90a1353d-49059b1ca83so1688481e0c.2; 
+ Sun, 17 Sep 2023 18:32:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1694999804; x=1695604604; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1695000776; x=1695605576; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pfjmkizNEHc6f4yKdvNiQXox1H6fHnTAQlyWblbNoV8=;
- b=AjhP9IfRjGjwglEK2U6gf0ZFi3ohTyeBVa2z3oXVY3aquLA7K1mMDeJABbQB0zfAgc
- MttVmdlDXXBlcwWKLvab2B4NTgvj4kj0SMMg6gyn+bgvv0nxkV1S0GNMfRQS0sQLANpb
- QpskMwMYWHlc0nGu3mB6afCS+PcnrwHR0LWxC2JgToI3D+dQKh2G9tw7Mn1mstuHITKM
- HX6Vy+AsrLQ6NBR+2ePMMbml61acbEP2IkDlWab4N8h5ITOci52oaMeA05aNlneN2Clt
- i2xiTeR/chOsOt7SQ4tJcHj78Ld36ibyQTqF83LS/TL+8ygB196ZipeZvjwWMSKtdkYf
- HtUw==
+ bh=76m7cvaZ280Me+UQsTR/RvLt5lIZvpQTxtVlDJmt9Hw=;
+ b=TlvjwHvTutnc/7PZC5aXaEJBrS3/hME6NyrkTRyp9MWCu7fR3OZCAi8UZPTk0YkzMw
+ RmdGm+/Pzo+iNJOCU97UEx6lOKPAt8P9/6JRDsDWFHJqCfOY4UH7e3hTeX+O14VthR3t
+ WwtiHfod45GkhQDxvAz35zVq9cXTaMpdQAjR33bEb7tPveuIa85NPTap6fmVbM5wKtLT
+ yI3oiaq2nBPh2YKrE7/Gvx899cf1XL5h113CY5069NKFFOn5UdReqvocOcrIFv5ASto3
+ jyuViqerRu+1bwwQh9k3FbUc2AB2m4upca8OTWKNZKHZR7CHcFuihRm9oS8kjfRu9DMk
+ C3Qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694999804; x=1695604604;
+ d=1e100.net; s=20230601; t=1695000776; x=1695605576;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pfjmkizNEHc6f4yKdvNiQXox1H6fHnTAQlyWblbNoV8=;
- b=xEVwBEDheliGd21je5NGrb7OyUIJmOneKdNMRKUhanm7PyfWQjFzKYYZzR4rk4mnUA
- AR4nRa0FUvzMCBKsESCxRvI7SnJZoQDl34iDT7i91x3n/4iqRoSx3jitaV9/b+tfjEQ+
- UXPcRaClaZxcPdtmmH76yge5TFv/uQfT9lMnAgXw1qXTVw9K7nCNVgwDnnUhsmtOaG7t
- 8ZLwNjInaQYbCzUTHOcaLCSfugtmNwrtMrDBvwd7uRZYMXYOKqAG1VAFdMnisGfcEru+
- 187EXYsc0v3WyxJ+U+/mL7AnM+hGW3XOOMn5IJ78DHOanHHi/LWIBubcaQldVQPmJO1F
- FGgg==
-X-Gm-Message-State: AOJu0Yyk9gmHmV4II8zMhZRsRBTuj3JbPP8SisUURvRrvVGHeL1P80qT
- 5ZHI0KPO8GoJyIYH2rm4OOVASiKfcJDhyrVNGJo=
-X-Google-Smtp-Source: AGHT+IFODcD01fGwef9mSyVvhtRsaDsL1XEQsgljXIgxzNgdn0wP6qxz8aI1dkCmYrPQlUl6S+iNXJbNUUNB+ttit0s=
-X-Received: by 2002:ac2:5e2f:0:b0:4ff:83b2:42b7 with SMTP id
- o15-20020ac25e2f000000b004ff83b242b7mr5619767lfg.42.1694999803421; Sun, 17
- Sep 2023 18:16:43 -0700 (PDT)
+ bh=76m7cvaZ280Me+UQsTR/RvLt5lIZvpQTxtVlDJmt9Hw=;
+ b=vIo8ntSasXgcjayS3BTriNKWwKZMwgWYiMGW8LwZa/Ytq5RE/icigx6ZcavOn9OThL
+ y7CUddJOZ1gWg9BjeB1aQiFhzFZ+/dktjvW0ir33zBPwx73ooDn/DNjqHr+5rl3DJbt6
+ O2g26TFYYrm+95q/FBAZHHQvYcYakhlIZ90IXsszvLZWZPcKc4ZOQyNHCacIPl1oEZSK
+ A5578KvIlpdzK9GUY1hNC03ZwCO0GILNWxMQLbBBzwGT+BdBWzJ9UDNLYXLIcyXRW9mA
+ w7ZYEocTfnc9Z4xxSQxN8GaLgMe0G9tvv0tGxvKGC95L2Qj3xTltnkkjTasz1qgTJkUG
+ 5Ogg==
+X-Gm-Message-State: AOJu0YxKCk5rA0e4Uza5XMSqmdYV8Hl1YeRzZbGMSBQaTmE39/DrIqSN
+ WNOhKjh6+p1MXmTWQTqXdr9jgOAllDYmTsm6U1H0qTpvg+eL/w==
+X-Google-Smtp-Source: AGHT+IG685SkvgfZ8JTpzXP2z+jnIjxUcyuozAPE2BY7od6XWzbhBtSDzO3SzsYoaZkhRJoiRyaOS8p9T8r5XBpqkxs=
+X-Received: by 2002:a1f:4b81:0:b0:495:bd33:d1f8 with SMTP id
+ y123-20020a1f4b81000000b00495bd33d1f8mr5772881vka.13.1695000775954; Sun, 17
+ Sep 2023 18:32:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <10817413.NyiUUSuA9g@pinacolada>
- <15820654-5d7f-fd66-3d34-da1a55d2a53e@gmail.com>
- <4344798.atdPhlSkOF@pinacolada> <6353228.kQq0lBPeGt@pinacolada>
-In-Reply-To: <6353228.kQq0lBPeGt@pinacolada>
+References: <20230914101751.772576-1-mchitale@ventanamicro.com>
+In-Reply-To: <20230914101751.772576-1-mchitale@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 18 Sep 2023 11:16:15 +1000
-Message-ID: <CAKmqyKP2cSh-U8s9hJfLH1GSsEHXQaL0xjd=s19WCzLdeyOPTA@mail.gmail.com>
-Subject: Re: qemu-riscv32 usermode still broken?
-To: "Andreas K. Huettel" <dilfridge@gentoo.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- LIU Zhiwei <baxiantai@gmail.com>, Alistair Francis <alistair.francis@wdc.com>
+Date: Mon, 18 Sep 2023 11:32:29 +1000
+Message-ID: <CAKmqyKNv+Wk6duL4Ww1QiC30O-W7kyypdd+kh3tjKDzFOy0Ybg@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: pmp: Ignore writes when RW=01
+To: Mayuresh Chitale <mchitale@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::12b;
- envelope-from=alistair23@gmail.com; helo=mail-lf1-x12b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a34;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa34.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -91,82 +87,54 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sun, Sep 17, 2023 at 8:38=E2=80=AFAM Andreas K. Huettel <dilfridge@gento=
-o.org> wrote:
+On Thu, Sep 14, 2023 at 10:35=E2=80=AFPM Mayuresh Chitale
+<mchitale@ventanamicro.com> wrote:
 >
-> Am Donnerstag, 14. September 2023, 03:22:49 CEST schrieb Andreas K. Huett=
-el:
-> > > > https://lists.gnu.org/archive/html/bug-bash/2023-09/msg00119.html
-> > > > ^ Here I'm trying to find out more.
-> > > >
-> > > > Bash tests apparently indicate that argv[0] is overwritten, and tha=
-t
-> > > > reading through a pipe or from /dev/tty fails or loses data.
-> > > >
-> > > > Apart from the bash testsuite failing, symptoms are as follows:
-> > > >
-> > > > * Something seems wrong in the signal handling (?):
-> > >
-> > > If it is wrong for signal handling and for 32-bit, I guess it may be
-> > > fixed by this patch
-> > >
-> > > https://www.mail-archive.com/qemu-devel@nongnu.org/msg981238.html
-> > >
-> > > And this patch has been merged into master branch yesterday.
-> > >
-> > > May be you can have a try based on the master branch.
-> >
-> > I added the patch to 8.0.3 (easier for the moment), and this did
-> > unfortunately *not* lead to any improvements.
+> As per the Priv spec: "The R, W, and X fields form a collective WARL
+> field for which the combinations with R=3D0 and W=3D1 are reserved."
+> However currently such writes are not ignored as ought to be. The
+> combinations with RW=3D01 are allowed only when the Smepmp extension
+> is enabled and mseccfg.MML is set.
 >
-> Also with the patch on top of 8.1.0 no improvement or change.
+> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+> ---
+>  target/riscv/pmp.c | 8 ++++++++
+>  1 file changed, 8 insertions(+)
 >
-> > However, in the meantime on the GNU Make tracker Alejandro Colomar
-> > pointed me to another detail based on my oddities [1]:
-> >
-> > > I think [make] it's failing here:
-> > >
-> > > <https://git.savannah.gnu.org/cgit/make.git/tree/src/job.c#n757>
-> > >
-> > > But it's failing with ENOENT, which is not one of the documented
-> > > errors for wait(2):
-> >
-> > So maybe another point to look at would be the origin of the return
-> > values of wait, and whether that's wired correctly for rv32...
-> >
-> > [1] https://savannah.gnu.org/bugs/?64664
->
-> In the meantime I tried to nail down a reproducible hang in bash on this
-> frankensystem with qemu's gdb interface. This also pointed towards
-> child handling and wait [2].
+> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> index f3eb6e6585..5b430be18c 100644
+> --- a/target/riscv/pmp.c
+> +++ b/target/riscv/pmp.c
+> @@ -119,6 +119,14 @@ static bool pmp_write_cfg(CPURISCVState *env, uint32=
+_t pmp_index, uint8_t val)
+>          if (locked) {
+>              qemu_log_mask(LOG_GUEST_ERROR, "ignoring pmpcfg write - lock=
+ed\n");
+>          } else if (env->pmp_state.pmp[pmp_index].cfg_reg !=3D val) {
+> +            /* If !mseccfg.MML then ignore writes with encoding RW=3D01 =
+*/
+> +            if ((val & PMP_WRITE) && !(val & PMP_READ) &&
+> +                (!riscv_cpu_cfg(env)->ext_smepmp ||
+> +                !MSECCFG_MML_ISSET(env))) {
 
-RV32 only has the time64 wait syscall, so it's possible there is a bug
-there which then wouldn't appear on other arches.
+MSECCFG_MML can only be set if ext_smepmp exists, so I don't think we
+need both checks here
 
-You can see the glibc implementation of wait here [1] to give you an
-idea of how complex it ends up being.
+> +                val &=3D ~(PMP_WRITE | PMP_READ);
+> +                val |=3D env->pmp_state.pmp[pmp_index].cfg_reg &
+> +                       (PMP_WRITE | PMP_READ);
 
-It would be great to get a strace of the failure to narrow down what
-it is. From there it should be not too hard to find and fix.
-
-1: https://github.com/bminor/glibc/blob/bb5bbc20702981c287aa3e44640e7d2f2b9=
-a28cf/sysdeps/unix/sysv/linux/wait4.c#L26
+Why do we restore the previous value? It's a WARL so we should just
+guarantee a legal value (which would be 0x0 I guess)
 
 Alistair
 
->
-> [2] https://lists.gnu.org/archive/html/bug-bash/2023-09/msg00128.html
->
-> Some time ago we already debugged that corner, and Alistair Francis
-> came up with a fix that improved the riscv32 situation back then [3].
-> Maybe that fix was somehow incomplete? Just speculating...
->
-> [3] https://bugs.launchpad.net/qemu/+bug/1906193
->
->
+> +            }
+>              env->pmp_state.pmp[pmp_index].cfg_reg =3D val;
+>              pmp_update_rule_addr(env, pmp_index);
+>              return true;
 > --
-> Andreas K. H=C3=BCttel
-> dilfridge@gentoo.org
-> Gentoo Linux developer
-> (council, toolchain, base-system, perl, libreoffice)
+> 2.34.1
+>
+>
 
