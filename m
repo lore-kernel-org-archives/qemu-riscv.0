@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E06AACD37B4
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Sep 2023 02:07:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA02BCD37B4
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Sep 2023 02:10:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qi3fr-0005CS-JO; Sun, 17 Sep 2023 22:07:43 -0400
+	id 1qi3iZ-0006XN-19; Sun, 17 Sep 2023 22:10:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qi3fq-0005Bp-DQ; Sun, 17 Sep 2023 22:07:42 -0400
-Received: from mail-vk1-xa33.google.com ([2607:f8b0:4864:20::a33])
+ id 1qi3iW-0006Wu-Qh; Sun, 17 Sep 2023 22:10:28 -0400
+Received: from mail-vs1-xe2b.google.com ([2607:f8b0:4864:20::e2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qi3fo-0005gJ-VX; Sun, 17 Sep 2023 22:07:42 -0400
-Received: by mail-vk1-xa33.google.com with SMTP id
- 71dfb90a1353d-493a661d7b6so3312743e0c.1; 
- Sun, 17 Sep 2023 19:07:40 -0700 (PDT)
+ id 1qi3iV-0006BT-8l; Sun, 17 Sep 2023 22:10:28 -0400
+Received: by mail-vs1-xe2b.google.com with SMTP id
+ ada2fe7eead31-450f68feee2so1399931137.1; 
+ Sun, 17 Sep 2023 19:10:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695002859; x=1695607659; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1695003026; x=1695607826; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DyZR0XKHPW3PYKmmxnMrszUUSY7lZUqYxsVy7FTFulc=;
- b=Xva/FnGz4s7aJs80E8jsj1FM+S6ohEUV1rbpybQFtYI7JCI9e17OJW3Gc2YOGB4r3n
- ZXyseg/jc7YG/uL9KFfgcVaIecOKchRaYAxNrC7FyEeJj9wM0Ug9GHAio6Q8ESL10SGO
- 15UPIu5xpUBBKNoLbFJZ5he5WAeliPFB+8VAUDhb4IPBSXT9S0MuVB/sNv7wlfEqWGls
- cFhVbDORIGdC6K+SQY/A1Iuwo7SN2/seAG+siH/CXFMo7+/dLzmQ9bcPfXX4invaJy12
- s9ZsHuuxmGDvJeO+pbUhdPdx88SgUDRoOhwWVvA5g+Dlz4pOs2M0fLsqnmbKO6OysFde
- AwDw==
+ bh=8XpVup53PXb5M+AjtqYbt8ZrhesrxmoaV1xAMZY1H6c=;
+ b=JIIyRG66usMvxEYSjeQk8ImOETpc4M2/njQAX9B6GITU+giWAXO6WDsAVEVTFd9Inz
+ lRKKAgNRCbb4djQEqD8GmCA+SFiq/9sFeWOpF2iRo0kPJ6zAZS1Wtxlp+CABRzdv8oiv
+ Z13YcmeOFwntAan8MU/z5+hr3IcE+z5cM43qfq93BDwlsv24mNQn7cvsOwwKmMZtVJZs
+ BuuSpChAbfjnh2QpecZbdjI09cYS4vGiouLEXLYd+t0IR0uF6zx5sOX3jkEpv6SisJSo
+ 3+3RXyKuHx0rvYFK7ojD2CQWC6KTyD1yyzlTFTCUMgAWL7kKLCu6CXw4q3SCxh7z3MvT
+ 3pLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695002859; x=1695607659;
+ d=1e100.net; s=20230601; t=1695003026; x=1695607826;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DyZR0XKHPW3PYKmmxnMrszUUSY7lZUqYxsVy7FTFulc=;
- b=sU7bzknDhc7yqbnnWA98Kw7gXs6x9IhyfoYZfjdcrh7uuYTx3CoiZ1j3tDx0G3qHUP
- ZQf+MQts5pvrFfSMup+0HLAP+whxLZ+2vFhFShMgX6SuNEwhM9k1cDtoc2LIMrzFKzqz
- xdQU0V5PNxHBbT9A0ZqZtBSDi6KMRPEhwZB3VftIXksoyYmlSflDPNq+7puM3wJJ27Nu
- ftZSgXIa68aZKE9YSH4Fwr+Zb4a4G5gmweqR1K5rcRRjzROhVoG4YCTdnor8FowwHrMi
- s4c+jWmCSWWzSkAUtx1XsYbV3svEl+oixojltV065bkYKuS/L8ZhFVcBX/MwPGGiaqyo
- f+yA==
-X-Gm-Message-State: AOJu0YySgH+Yn7Ntcis4t1RCdWYbduInbyzM+Uqch92KzeX42KI6TS88
- pU5pNz8VdQG89K7cM7yZuxga1AE07RBuYejOp38QT+kt+lw=
-X-Google-Smtp-Source: AGHT+IHIKiJCvUsBpKsAQBFqNfiv9MTBJWi+pFlogjHkJNZICz3OIl0SoCZeo0u/cJ4POQimizJ95q+JQLaAdwjZ0is=
-X-Received: by 2002:a05:6122:420f:b0:495:e18f:67cb with SMTP id
- cm15-20020a056122420f00b00495e18f67cbmr5821102vkb.7.1695002859559; Sun, 17
- Sep 2023 19:07:39 -0700 (PDT)
+ bh=8XpVup53PXb5M+AjtqYbt8ZrhesrxmoaV1xAMZY1H6c=;
+ b=FiPzGMkgY6Uu+R0XvQb6+0MjnqxMVtnHbvTshhNDGTMwxUaUnac/Pck/vhB+/j5UwA
+ pRXTGL9/9X6OIebt86KnoPXlQk08lGPDgw4rVk6GSBskgaJFjouAUnw1L/nNryGXHU1S
+ 5ylblRxFsnbXKYAdT3AHJRrS3Rv7fFB5XCjoquPStiplOOloNUvdvnVtiJjRKtvyiTec
+ RB3to+yLZwbylxybD58uc3XtBciyXOJO2Hc8qULiHCiBMJOiE8GZlBXk93IQ/cGrKCOn
+ 8rSt9L76epDd1wHnErWDDbdhLoYllVhTXJkbF0w3mCRMYq9dnjNevfSfeqTTO+2e9lfZ
+ DV2g==
+X-Gm-Message-State: AOJu0YzX75curNEfCeWB/GxDGN8YefKzw5afNqJmdnI0pQUTyrDqYlyx
+ uZh386tpc/OWCps9UwFlh7UnrZ2AXn33X/rUUy0=
+X-Google-Smtp-Source: AGHT+IH57nLFoxzXXUmYpv7trVrK86BExCkDV1mXFn7OhcMBqqRJRDuaT8tqX74EEz/7LA5PJAszAmbz6HmXyIHzSNY=
+X-Received: by 2002:a67:eb14:0:b0:44d:476b:3bc0 with SMTP id
+ a20-20020a67eb14000000b0044d476b3bc0mr6241948vso.28.1695003025760; Sun, 17
+ Sep 2023 19:10:25 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230907112640.292104-1-chigot@adacore.com>
- <20230907112640.292104-5-chigot@adacore.com>
-In-Reply-To: <20230907112640.292104-5-chigot@adacore.com>
+ <20230907112640.292104-6-chigot@adacore.com>
+In-Reply-To: <20230907112640.292104-6-chigot@adacore.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 18 Sep 2023 12:07:13 +1000
-Message-ID: <CAKmqyKNkWCue1TLgRWVkp+gDDJ80tySfdaj6YBMjhpTQafFQxQ@mail.gmail.com>
-Subject: Re: [PATCH v3 4/5] hw/char: riscv_htif: replace exit calls with
- proper shutdown
+Date: Mon, 18 Sep 2023 12:09:59 +1000
+Message-ID: <CAKmqyKNAymAeCOahe8ZMY=zJT_r4O+L1d9Q6joDRthV3jnEXiw@mail.gmail.com>
+Subject: Re: [PATCH v3 5/5] gdbstub: replace exit calls with proper shutdown
+ for softmmu
 To: =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a33;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa33.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2b;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2b.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -93,10 +93,8 @@ On Thu, Sep 7, 2023 at 9:26=E2=80=AFPM Cl=C3=A9ment Chigot <chigot@adacore.=
 com> wrote:
 >
 > This replaces the exit calls by shutdown requests, ensuring a proper
-> cleanup of Qemu. Otherwise, some connections like gdb could be broken
-> before its final packet ("Wxx") is being sent. This part, being done
-> inside qemu_cleanup function, can be reached only when the main loop
-> exits after a shutdown request.
+> cleanup of Qemu. Features like net/vhost-vdpa.c are expecting
+> qemu_cleanup to be called to remove their last residuals.
 >
 > Signed-off-by: Cl=C3=A9ment Chigot <chigot@adacore.com>
 
@@ -105,35 +103,89 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  hw/char/riscv_htif.c | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
+>  gdbstub/gdbstub.c          | 5 +++--
+>  gdbstub/softmmu.c          | 6 ++++++
+>  gdbstub/user.c             | 6 ++++++
+>  include/gdbstub/syscalls.h | 9 +++++++++
+>  4 files changed, 24 insertions(+), 2 deletions(-)
 >
-> diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
-> index 37d3ccc76b..7e9b6fcc98 100644
-> --- a/hw/char/riscv_htif.c
-> +++ b/hw/char/riscv_htif.c
-> @@ -31,6 +31,7 @@
->  #include "qemu/error-report.h"
->  #include "exec/address-spaces.h"
->  #include "sysemu/dma.h"
-> +#include "sysemu/runstate.h"
+> diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
+> index 349d348c7b..1cb6d65306 100644
+> --- a/gdbstub/gdbstub.c
+> +++ b/gdbstub/gdbstub.c
+> @@ -1327,7 +1327,7 @@ static void handle_v_kill(GArray *params, void *use=
+r_ctx)
+>      gdb_put_packet("OK");
+>      error_report("QEMU: Terminated via GDBstub");
+>      gdb_exit(0);
+> -    exit(0);
+> +    gdb_qemu_exit(0);
+>  }
 >
->  #define RISCV_DEBUG_HTIF 0
->  #define HTIF_DEBUG(fmt, ...)                                            =
-       \
-> @@ -205,7 +206,9 @@ static void htif_handle_tohost_write(HTIFState *s, ui=
-nt64_t val_written)
->                      g_free(sig_data);
->                  }
+>  static const GdbCmdParseEntry gdb_v_commands_table[] =3D {
+> @@ -1846,7 +1846,8 @@ static int gdb_handle_packet(const char *line_buf)
+>          /* Kill the target */
+>          error_report("QEMU: Terminated via GDBstub");
+>          gdb_exit(0);
+> -        exit(0);
+> +        gdb_qemu_exit(0);
+> +        break;
+>      case 'D':
+>          {
+>              static const GdbCmdParseEntry detach_cmd_desc =3D {
+> diff --git a/gdbstub/softmmu.c b/gdbstub/softmmu.c
+> index 9f0b8b5497..a5d6e04c79 100644
+> --- a/gdbstub/softmmu.c
+> +++ b/gdbstub/softmmu.c
+> @@ -435,6 +435,12 @@ void gdb_exit(int code)
+>      qemu_chr_fe_deinit(&gdbserver_system_state.chr, true);
+>  }
 >
-> -                exit(exit_code);
-> +                qemu_system_shutdown_request_with_code(
-> +                    SHUTDOWN_CAUSE_GUEST_SHUTDOWN, exit_code);
-> +                return;
->              } else {
->                  uint64_t syscall[8];
->                  cpu_physical_memory_read(payload, syscall, sizeof(syscal=
-l));
+> +void gdb_qemu_exit(int code)
+> +{
+> +    qemu_system_shutdown_request_with_code(SHUTDOWN_CAUSE_GUEST_SHUTDOWN=
+,
+> +                                           code);
+> +}
+> +
+>  /*
+>   * Memory access
+>   */
+> diff --git a/gdbstub/user.c b/gdbstub/user.c
+> index 7ab6e5d975..dbe1d9b887 100644
+> --- a/gdbstub/user.c
+> +++ b/gdbstub/user.c
+> @@ -113,6 +113,12 @@ void gdb_exit(int code)
+>          gdb_put_packet(buf);
+>          gdbserver_state.allow_stop_reply =3D false;
+>      }
+> +
+> +}
+> +
+> +void gdb_qemu_exit(int code)
+> +{
+> +    exit(code);
+>  }
+>
+>  int gdb_handlesig(CPUState *cpu, int sig)
+> diff --git a/include/gdbstub/syscalls.h b/include/gdbstub/syscalls.h
+> index 243eaf8ce4..54ff7245a1 100644
+> --- a/include/gdbstub/syscalls.h
+> +++ b/include/gdbstub/syscalls.h
+> @@ -110,4 +110,13 @@ int use_gdb_syscalls(void);
+>   */
+>  void gdb_exit(int code);
+>
+> +/**
+> + * gdb_qemu_exit: ask qemu to exit
+> + * @code: exit code reported
+> + *
+> + * This requests qemu to exit. This function is allowed to return as
+> + * the exit request might be processed asynchronously by qemu backend.
+> + */
+> +void gdb_qemu_exit(int code);
+> +
+>  #endif /* _SYSCALLS_H_ */
 > --
 > 2.25.1
 >
