@@ -4,59 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D67FCCD37B0
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Sep 2023 16:03:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C925CD37B0
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Sep 2023 16:04:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qiGii-0006Mb-5v; Mon, 18 Sep 2023 12:03:33 -0400
+	id 1qiGiH-00060U-CS; Mon, 18 Sep 2023 12:03:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGib-0006Fd-5n
- for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:03:27 -0400
-Received: from mail-lj1-x232.google.com ([2a00:1450:4864:20::232])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGiG-0005z0-5m
+ for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:03:04 -0400
+Received: from mail-ej1-x634.google.com ([2a00:1450:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGiY-0003zn-72
- for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:03:24 -0400
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2ba1e9b1fa9so76418411fa.3
- for <qemu-riscv@nongnu.org>; Mon, 18 Sep 2023 09:03:21 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGiD-0003tX-Fl
+ for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:03:03 -0400
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-99c3d3c3db9so635148466b.3
+ for <qemu-riscv@nongnu.org>; Mon, 18 Sep 2023 09:03:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695053000; x=1695657800; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IHtTfQAIBirG1HCAZXzmunPPBo4zEHxiDOOzxMZ7AZo=;
- b=kmxdN70O9UZcO4mkq9CEYddQO5QOshfDtLZewLGQR4168S5eww1T8ZXwV5+xkivE5J
- brtwb+XuEF/0s6wRMFZW5GkVhpAFcRqJnvb0yF3xuhE+9iVZDtQAN0LiSYMCQyruS+lN
- 263VUkYr5v5Iwiq1vf12MuwEqrd/ykboc2UY8aoI5mlUmb8sZJPH/r+K3SHuOkFdTfVP
- S/AuBIpmP7FVBaaNIrtn6ENbhStAVqnwdlb/BvIyIV/056LKflfJIgZRpuEE+DHvWAi9
- cU5duhBw81S/e4yA62+AUoEBi+RxKD9R5KQ9PMBPRyVwTbMoWUpvR3yL0n4zzwCNXn3k
- kB0A==
+ d=linaro.org; s=google; t=1695052979; x=1695657779; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=R37K2a/Smepsc2iyIaDJqnazCMcEJOOAaYAXmsK0XT0=;
+ b=INxTo8EwLN4aLX9q3m3G+o7FAqm3qrBb+iJBMhwSHCc8OPPiM5RYZH+mTSxjH/fnTk
+ Y2itOxsL33IxL2ye/rLFJISCZ7o3Rqq2qqpid9l7Jtrg92/U5SVMQccTUEDzWG4HA0BD
+ ywK6Mp4LD+urqc5nAlJYSs5X46iC6my+91jN81mYjxk1hoaerQXH+j/CJrDW3ygkH+oI
+ ht/hkx5B4iSQK5DMnO05hmaYV+QgZ9uJpEHOA3rR4aabzWqKp3cjb31P+AAweGQp4RxK
+ cpZs1HXsSc6Itm1LbLWjK0s2+Te3MtTdi2TLnssBg8hx1fqGdS+aIMgPfv/hKAgP7l+W
+ 0Prw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695053000; x=1695657800;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=IHtTfQAIBirG1HCAZXzmunPPBo4zEHxiDOOzxMZ7AZo=;
- b=FINTNycsUaeH4uMRBHWqKa8xVGl58MtjeknL5V9DhmBv/xUpOOM6giPuPkS3YbrwFM
- ii4izJkWZiyPpLte6xIY/InYr6lwGoePAfY7yWDNNZIAl7Gnn6p+ByXiWkXrN95TcBEy
- 8BwLoieHv19B3ood0cQTAX2OY90zOIo7iI/KwHP2X9JD7dKsyj4bxVxpwTd41FXbi8UI
- yqtP2zr55SfOI1ZJ3V05M9j0P58kX1dFtAjfB6/6On2zz3/fWOfR01aetT+vKVg1BJJa
- GxASolc2q0qCSmVW1aYQSuxQI11j6hTLOYncJ92ESyDe3fISL6tVuMKzthtFMDdJjcML
- sJPw==
-X-Gm-Message-State: AOJu0Yx4LRTrWnYbvjgUW/HrsUgjcqwWqkgHjTbxLwupWyBn71b53hcU
- UjeWmQN6cpye7AAOh2faW5NWbw==
-X-Google-Smtp-Source: AGHT+IEWZ8OvbK8IRiy/Jhtc4eSQt1wBjNiYifGIN1NUEuxb4lugjSxo6X0cKrO69EMr+Le0e2o0NA==
-X-Received: by 2002:a2e:a178:0:b0:2ba:6519:c50f with SMTP id
- u24-20020a2ea178000000b002ba6519c50fmr8070679ljl.52.1695053000497; 
- Mon, 18 Sep 2023 09:03:20 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695052979; x=1695657779;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=R37K2a/Smepsc2iyIaDJqnazCMcEJOOAaYAXmsK0XT0=;
+ b=PSMmzE4IeWWqxY0Z86wUS80+elrPai2x/j0WigbRS3XL5e71WmMLZoXv5tGeGEiazh
+ 5Jg5QsyfK91YpIayRS7UmTOBVpZHf/NLubqhWzdjqwFSWkqtwR9R2AU/RG22C9qho3YL
+ YhvKwwQHnJSZdevjJb/Cej6ddmUy42ZOWqrvKxKQkfFjRglURiMBUnbaaWXKb7w9tVM2
+ NuMW0xPEA2wHDcH9o6HIr8Bi0XGhDyn8V3qqxPqSy9ycLaVYNoOgmbpP0/B1+C7maudn
+ QYhhF7KllqK/xVJ15jhDn0LmKypWU7UtbwjJWPaySgdab0KktF4Qb+E2L9sf/lIFy6Xg
+ 7h/w==
+X-Gm-Message-State: AOJu0YwDBwAAZKFxJFBmEbe0AQUW73m0BMLqj65nllUpBfT2jeAKzfxq
+ GXlNfbp+hNMpsWWUFEcuZ+yFow==
+X-Google-Smtp-Source: AGHT+IHGtyYBQwLAMwFhSgR4DVjVUaGUpdsvPj2BatAS0H6me1yGIyefW0SsMEvxluQ7CDP796y45Q==
+X-Received: by 2002:a17:907:a0c6:b0:9a1:cb2c:b55c with SMTP id
+ hw6-20020a170907a0c600b009a1cb2cb55cmr6526293ejc.35.1695052978973; 
+ Mon, 18 Sep 2023 09:02:58 -0700 (PDT)
 Received: from localhost.localdomain
  (static-212-193-78-212.thenetworkfactory.nl. [212.78.193.212])
  by smtp.gmail.com with ESMTPSA id
- e7-20020a1709067e0700b0099bd0b5a2bcsm6658963ejr.101.2023.09.18.09.03.18
+ rl20-20020a1709076c1400b009adc81c0c7esm5428731ejc.107.2023.09.18.09.02.57
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 18 Sep 2023 09:03:19 -0700 (PDT)
+ Mon, 18 Sep 2023 09:02:58 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>,
@@ -98,25 +97,23 @@ Cc: Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>,
  Nicholas Piggin <npiggin@gmail.com>, Greg Kurz <groug@kaod.org>,
  Michael Rolnik <mrolnik@gmail.com>, Eduardo Habkost <eduardo@habkost.net>,
  Markus Armbruster <armbru@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [RFC PATCH 04/22] exec/cpu: Never call cpu_reset() before
- cpu_realize()
-Date: Mon, 18 Sep 2023 18:02:37 +0200
-Message-ID: <20230918160257.30127-5-philmd@linaro.org>
+Subject: [PATCH 00/22] exec/cpu: Call cpu_exec_realizefn() once in
+ cpu_common_realize()
+Date: Mon, 18 Sep 2023 18:02:33 +0200
+Message-ID: <20230918160257.30127-1-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230918160257.30127-1-philmd@linaro.org>
-References: <20230918160257.30127-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::232;
- envelope-from=philmd@linaro.org; helo=mail-lj1-x232.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::634;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x634.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -132,276 +129,117 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-QDev instance is expected to be in an unknown state until full
-object realization. Thus we shouldn't call DeviceReset() on an
-unrealized instance. Move the cpu_reset() call from *before*
-the parent realize() handler (effectively cpu_common_realizefn)
-to *after* it.
+Hi,
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
-RFC:
-I haven't audited all the call sites, but plan to do it,
-amending the result to this patch description. This used
-to be a problem on some targets, but as of today's master
-this series pass make check-{qtest,avocado}.
----
- target/arm/cpu.c       | 2 +-
- target/avr/cpu.c       | 2 +-
- target/cris/cpu.c      | 2 +-
- target/hexagon/cpu.c   | 3 +--
- target/i386/cpu.c      | 2 +-
- target/loongarch/cpu.c | 2 +-
- target/m68k/cpu.c      | 2 +-
- target/mips/cpu.c      | 2 +-
- target/nios2/cpu.c     | 2 +-
- target/openrisc/cpu.c  | 2 +-
- target/riscv/cpu.c     | 2 +-
- target/rx/cpu.c        | 2 +-
- target/s390x/cpu.c     | 2 +-
- target/sh4/cpu.c       | 2 +-
- target/tricore/cpu.c   | 2 +-
- 15 files changed, 15 insertions(+), 16 deletions(-)
+TL;DR: This series factor duplicated common code in CPUs
+DeviceRealize() handlers out, moving as a single call in
+cpu_common_realize().
 
-diff --git a/target/arm/cpu.c b/target/arm/cpu.c
-index b9e09a702d..6aca036b85 100644
---- a/target/arm/cpu.c
-+++ b/target/arm/cpu.c
-@@ -2278,9 +2278,9 @@ static void arm_cpu_realizefn(DeviceState *dev, Error **errp)
-     }
- 
-     qemu_init_vcpu(cs);
--    cpu_reset(cs);
- 
-     acc->parent_realize(dev, errp);
-+    cpu_reset(cs);
- }
- 
- static ObjectClass *arm_cpu_class_by_name(const char *cpu_model)
-diff --git a/target/avr/cpu.c b/target/avr/cpu.c
-index 8f741f258c..84d353f30e 100644
---- a/target/avr/cpu.c
-+++ b/target/avr/cpu.c
-@@ -120,9 +120,9 @@ static void avr_cpu_realizefn(DeviceState *dev, Error **errp)
-         return;
-     }
-     qemu_init_vcpu(cs);
--    cpu_reset(cs);
- 
-     mcc->parent_realize(dev, errp);
-+    cpu_reset(cs);
- }
- 
- static void avr_cpu_set_int(void *opaque, int irq, int level)
-diff --git a/target/cris/cpu.c b/target/cris/cpu.c
-index a6a93c2359..079872a5cc 100644
---- a/target/cris/cpu.c
-+++ b/target/cris/cpu.c
-@@ -152,10 +152,10 @@ static void cris_cpu_realizefn(DeviceState *dev, Error **errp)
-         return;
-     }
- 
--    cpu_reset(cs);
-     qemu_init_vcpu(cs);
- 
-     ccc->parent_realize(dev, errp);
-+    cpu_reset(cs);
- }
- 
- #ifndef CONFIG_USER_ONLY
-diff --git a/target/hexagon/cpu.c b/target/hexagon/cpu.c
-index f155936289..7edc32701f 100644
---- a/target/hexagon/cpu.c
-+++ b/target/hexagon/cpu.c
-@@ -346,9 +346,8 @@ static void hexagon_cpu_realize(DeviceState *dev, Error **errp)
-                              "hexagon-hvx.xml", 0);
- 
-     qemu_init_vcpu(cs);
--    cpu_reset(cs);
--
-     mcc->parent_realize(dev, errp);
-+    cpu_reset(cs);
- }
- 
- static void hexagon_cpu_init(Object *obj)
-diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index a23d4795e0..7faaa6915f 100644
---- a/target/i386/cpu.c
-+++ b/target/i386/cpu.c
-@@ -7455,9 +7455,9 @@ static void x86_cpu_realizefn(DeviceState *dev, Error **errp)
-         }
-     }
- #endif /* !CONFIG_USER_ONLY */
--    cpu_reset(cs);
- 
-     xcc->parent_realize(dev, &local_err);
-+    cpu_reset(cs);
- 
- out:
-     if (local_err != NULL) {
-diff --git a/target/loongarch/cpu.c b/target/loongarch/cpu.c
-index 65f9320e34..8029e70e76 100644
---- a/target/loongarch/cpu.c
-+++ b/target/loongarch/cpu.c
-@@ -565,10 +565,10 @@ static void loongarch_cpu_realizefn(DeviceState *dev, Error **errp)
- 
-     loongarch_cpu_register_gdb_regs_for_features(cs);
- 
--    cpu_reset(cs);
-     qemu_init_vcpu(cs);
- 
-     lacc->parent_realize(dev, errp);
-+    cpu_reset(cs);
- }
- 
- #ifndef CONFIG_USER_ONLY
-diff --git a/target/m68k/cpu.c b/target/m68k/cpu.c
-index 70d58471dc..2bc0a62f0e 100644
---- a/target/m68k/cpu.c
-+++ b/target/m68k/cpu.c
-@@ -321,10 +321,10 @@ static void m68k_cpu_realizefn(DeviceState *dev, Error **errp)
- 
-     m68k_cpu_init_gdb(cpu);
- 
--    cpu_reset(cs);
-     qemu_init_vcpu(cs);
- 
-     mcc->parent_realize(dev, errp);
-+    cpu_reset(cs);
- }
- 
- static void m68k_cpu_initfn(Object *obj)
-diff --git a/target/mips/cpu.c b/target/mips/cpu.c
-index 63da1948fd..8d6f633f72 100644
---- a/target/mips/cpu.c
-+++ b/target/mips/cpu.c
-@@ -492,10 +492,10 @@ static void mips_cpu_realizefn(DeviceState *dev, Error **errp)
-     fpu_init(env, env->cpu_model);
-     mvp_init(env);
- 
--    cpu_reset(cs);
-     qemu_init_vcpu(cs);
- 
-     mcc->parent_realize(dev, errp);
-+    cpu_reset(cs);
- }
- 
- static void mips_cpu_initfn(Object *obj)
-diff --git a/target/nios2/cpu.c b/target/nios2/cpu.c
-index bc5cbf81c2..876a6dcad2 100644
---- a/target/nios2/cpu.c
-+++ b/target/nios2/cpu.c
-@@ -217,12 +217,12 @@ static void nios2_cpu_realizefn(DeviceState *dev, Error **errp)
- 
-     realize_cr_status(cs);
-     qemu_init_vcpu(cs);
--    cpu_reset(cs);
- 
-     /* We have reserved storage for cpuid; might as well use it. */
-     cpu->env.ctrl[CR_CPUID] = cs->cpu_index;
- 
-     ncc->parent_realize(dev, errp);
-+    cpu_reset(cs);
- }
- 
- #ifndef CONFIG_USER_ONLY
-diff --git a/target/openrisc/cpu.c b/target/openrisc/cpu.c
-index 61d748cfdc..cd25f1e9d5 100644
---- a/target/openrisc/cpu.c
-+++ b/target/openrisc/cpu.c
-@@ -142,9 +142,9 @@ static void openrisc_cpu_realizefn(DeviceState *dev, Error **errp)
-     }
- 
-     qemu_init_vcpu(cs);
--    cpu_reset(cs);
- 
-     occ->parent_realize(dev, errp);
-+    cpu_reset(cs);
- }
- 
- static void openrisc_cpu_initfn(Object *obj)
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index f227c7664e..7566757346 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1532,9 +1532,9 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
- #endif
- 
-     qemu_init_vcpu(cs);
--    cpu_reset(cs);
- 
-     mcc->parent_realize(dev, errp);
-+    cpu_reset(cs);
- }
- 
- #ifndef CONFIG_USER_ONLY
-diff --git a/target/rx/cpu.c b/target/rx/cpu.c
-index 157e57da0f..c9c8443cbd 100644
---- a/target/rx/cpu.c
-+++ b/target/rx/cpu.c
-@@ -138,9 +138,9 @@ static void rx_cpu_realize(DeviceState *dev, Error **errp)
-     }
- 
-     qemu_init_vcpu(cs);
--    cpu_reset(cs);
- 
-     rcc->parent_realize(dev, errp);
-+    cpu_reset(cs);
- }
- 
- static void rx_cpu_set_irq(void *opaque, int no, int request)
-diff --git a/target/s390x/cpu.c b/target/s390x/cpu.c
-index df167493c3..0f0b11fd73 100644
---- a/target/s390x/cpu.c
-+++ b/target/s390x/cpu.c
-@@ -254,6 +254,7 @@ static void s390_cpu_realizefn(DeviceState *dev, Error **errp)
-     s390_cpu_gdb_init(cs);
-     qemu_init_vcpu(cs);
- 
-+    scc->parent_realize(dev, &err);
-     /*
-      * KVM requires the initial CPU reset ioctl to be executed on the target
-      * CPU thread. CPU hotplug under single-threaded TCG will not work with
-@@ -266,7 +267,6 @@ static void s390_cpu_realizefn(DeviceState *dev, Error **errp)
-         cpu_reset(cs);
-     }
- 
--    scc->parent_realize(dev, &err);
- out:
-     error_propagate(errp, err);
- }
-diff --git a/target/sh4/cpu.c b/target/sh4/cpu.c
-index 61769ffdfa..656d71f74a 100644
---- a/target/sh4/cpu.c
-+++ b/target/sh4/cpu.c
-@@ -228,10 +228,10 @@ static void superh_cpu_realizefn(DeviceState *dev, Error **errp)
-         return;
-     }
- 
--    cpu_reset(cs);
-     qemu_init_vcpu(cs);
- 
-     scc->parent_realize(dev, errp);
-+    cpu_reset(cs);
- }
- 
- static void superh_cpu_initfn(Object *obj)
-diff --git a/target/tricore/cpu.c b/target/tricore/cpu.c
-index 133a9ac70e..a3610aecca 100644
---- a/target/tricore/cpu.c
-+++ b/target/tricore/cpu.c
-@@ -118,10 +118,10 @@ static void tricore_cpu_realizefn(DeviceState *dev, Error **errp)
-     if (tricore_has_feature(env, TRICORE_FEATURE_131)) {
-         set_feature(env, TRICORE_FEATURE_13);
-     }
--    cpu_reset(cs);
-     qemu_init_vcpu(cs);
- 
-     tcc->parent_realize(dev, errp);
-+    cpu_reset(cs);
- }
- 
- 
+In an effort to have most of:
+- CPU core code independant of accelerators
+- CPU core code target agnostic
+- CPU target code independant of accelerators
+- and cpu_reset() called automatically without having to
+  rely on global QEMUResetHandler,
+I'm working on the core CPU code, unfortunately touching
+files in all targets.
+
+I suppose them term "exec" used in various areas of QEMU
+started from what we call today "accel[erators]" [*]. So
+cpu_exec_realizefn() can be read as cpu_accel_realize(),
+or "generic code where an accelerator realizes its internal
+fields on an abstract (target independent) CPU".
+
+This series moves a common pattern used in all target's
+cpu_realize() handlers to the common cpu_exec_realizefn().
+
+Some optional code is used to check CPU requested features
+are compatible with the accelerator possibilities. We
+extracted this code as CPUClass::verify_accel_features()
+handler. Better name welcomed :)
+
+Some targets were calling cpu_reset() *before*
+cpu_common_realizefn(), we moved it *after* (since RESET
+shouldn't happen before REALIZE). I still have to audit
+each target to confirm there are no side effects.
+Besides this cpu_reset() change, the rest should be
+relatively trivial to review, still I'd like feedback
+from the respective target maintainers for the "move HW
+creation after vCPU one" patches.
+
+Regards,
+
+Phil.
+
+Follow-up: Make cpu_reset() accel-agnostic and move it
+           to cpu_common_realize() (not trivial due to
+           KVM run_on_cpu() calls).
+
+[*] If Paolo/Richard confirm, I might post series renaming
+    various APIs s/exec/accel/, because various headers
+    meaning aren't clear to me.
+
+Philippe Mathieu-Daudé (21):
+  target/i386: Only realize existing APIC device
+  hw/intc/apic: Pass CPU using QOM link property
+  target/i386/kvm: Correct comment in kvm_cpu_realize()
+  exec/cpu: Never call cpu_reset() before cpu_realize()
+  exec/cpu: Call qemu_init_vcpu() once in cpu_common_realize()
+  exec/cpu: Call cpu_remove_sync() once in cpu_common_unrealize()
+  exec/cpu: RFC Destroy vCPU address spaces in cpu_common_unrealize()
+  target/arm: Create timers *after* accelerator vCPU is realized
+  target/hppa: Create timer *after* accelerator vCPU is realized
+  target/nios2: Create IRQs *after* accelerator vCPU is realized
+  target/mips: Create clock *after* accelerator vCPU is realized
+  target/xtensa: Create IRQs *after* accelerator vCPU is realized
+  target/sparc: Init CPU environment *after* accelerator vCPU is
+    realized
+  exec/cpu: Introduce CPUClass::verify_accel_features()
+  target/arm: Extract verify_accel_features() from cpu_realize()
+  target/i386: Extract verify_accel_features() from cpu_realize()
+  target/s390x: Call s390_cpu_realize_sysemu from s390_realize_cpu_model
+  target/s390x: Have s390_realize_cpu_model() return a boolean
+  target/s390x: Use s390_realize_cpu_model() as verify_accel_features()
+  exec/cpu: Have cpu_exec_realize() return a boolean
+  exec/cpu: Call cpu_exec_realizefn() once in cpu_common_realize()
+
+xianglai li (1):
+  exec/cpu: Introduce the CPU address space destruction function
+
+ include/exec/cpu-common.h     |  8 ++++
+ include/hw/core/cpu.h         |  7 +++-
+ target/s390x/s390x-internal.h |  4 +-
+ cpu.c                         | 11 ++++-
+ hw/core/cpu-common.c          | 15 +++++++
+ hw/intc/apic_common.c         |  2 +
+ softmmu/physmem.c             | 24 +++++++++++
+ target/alpha/cpu.c            | 10 -----
+ target/arm/cpu.c              | 53 ++++++++++++------------
+ target/avr/cpu.c              | 10 +----
+ target/cris/cpu.c             | 11 +----
+ target/hexagon/cpu.c          | 11 +----
+ target/hppa/cpu.c             | 20 ++-------
+ target/i386/cpu-sysemu.c      | 20 ++++-----
+ target/i386/cpu.c             | 77 ++++++++++++++++++-----------------
+ target/i386/kvm/kvm-cpu.c     |  3 +-
+ target/loongarch/cpu.c        | 11 +----
+ target/m68k/cpu.c             | 11 +----
+ target/microblaze/cpu.c       |  9 ----
+ target/mips/cpu.c             | 27 ++++--------
+ target/nios2/cpu.c            | 20 +++------
+ target/openrisc/cpu.c         | 11 +----
+ target/ppc/cpu_init.c         |  8 ----
+ target/riscv/cpu.c            | 10 +----
+ target/rx/cpu.c               | 11 +----
+ target/s390x/cpu-sysemu.c     |  3 +-
+ target/s390x/cpu.c            | 21 +---------
+ target/s390x/cpu_models.c     | 16 +++++---
+ target/sh4/cpu.c              | 11 +----
+ target/sparc/cpu.c            | 10 -----
+ target/tricore/cpu.c          | 10 +----
+ target/xtensa/cpu.c           | 13 +-----
+ 32 files changed, 189 insertions(+), 299 deletions(-)
+
 -- 
 2.41.0
 
