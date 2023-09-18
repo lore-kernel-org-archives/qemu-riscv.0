@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C937CD37B4
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Sep 2023 02:07:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E06AACD37B4
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Sep 2023 02:07:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qi3fS-0004pn-HE; Sun, 17 Sep 2023 22:07:19 -0400
+	id 1qi3fr-0005CS-JO; Sun, 17 Sep 2023 22:07:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qi3fP-0004pD-2q; Sun, 17 Sep 2023 22:07:15 -0400
-Received: from mail-ua1-x933.google.com ([2607:f8b0:4864:20::933])
+ id 1qi3fq-0005Bp-DQ; Sun, 17 Sep 2023 22:07:42 -0400
+Received: from mail-vk1-xa33.google.com ([2607:f8b0:4864:20::a33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qi3fN-0005eV-Nv; Sun, 17 Sep 2023 22:07:14 -0400
-Received: by mail-ua1-x933.google.com with SMTP id
- a1e0cc1a2514c-7a52a27fe03so1416270241.0; 
- Sun, 17 Sep 2023 19:07:13 -0700 (PDT)
+ id 1qi3fo-0005gJ-VX; Sun, 17 Sep 2023 22:07:42 -0400
+Received: by mail-vk1-xa33.google.com with SMTP id
+ 71dfb90a1353d-493a661d7b6so3312743e0c.1; 
+ Sun, 17 Sep 2023 19:07:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695002832; x=1695607632; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1695002859; x=1695607659; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Z9yo4bA/EbFylbVy0xG2YTrZb4NhJZA9uPC8e22vutI=;
- b=A3kfA51mYvnw6V7rf8XBd7CypiKWcymM3YiK21pqoW+hLjQ/+NsG4Dugc6GHARtr9h
- evycxhhmJEzwTx8O0j0qFKwjkm57sIOOVQOpRJm0NsH8uQ3yR7vyxqeDyJ1Bk8SXHRgW
- 8HJruWVG3EpCFOIcK1cWJ0P+qMjm4Ow9GKEsRea7izOkekI0NdpwXPW0uE0ZmD2lYhKz
- T8Xzj68uQC5Tcu/sf/XF0H24kTvbIo5j7qzzfJWF4Ga7MfNaE2RHIZU0+/BAOAA33r0q
- PTEg481/stbGcgvzC2CcAWqjqfRY4H+l/CVLcr9rMbWHTEansm/BrZKW+h2gf6OQBHmB
- frCg==
+ bh=DyZR0XKHPW3PYKmmxnMrszUUSY7lZUqYxsVy7FTFulc=;
+ b=Xva/FnGz4s7aJs80E8jsj1FM+S6ohEUV1rbpybQFtYI7JCI9e17OJW3Gc2YOGB4r3n
+ ZXyseg/jc7YG/uL9KFfgcVaIecOKchRaYAxNrC7FyEeJj9wM0Ug9GHAio6Q8ESL10SGO
+ 15UPIu5xpUBBKNoLbFJZ5he5WAeliPFB+8VAUDhb4IPBSXT9S0MuVB/sNv7wlfEqWGls
+ cFhVbDORIGdC6K+SQY/A1Iuwo7SN2/seAG+siH/CXFMo7+/dLzmQ9bcPfXX4invaJy12
+ s9ZsHuuxmGDvJeO+pbUhdPdx88SgUDRoOhwWVvA5g+Dlz4pOs2M0fLsqnmbKO6OysFde
+ AwDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695002832; x=1695607632;
+ d=1e100.net; s=20230601; t=1695002859; x=1695607659;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Z9yo4bA/EbFylbVy0xG2YTrZb4NhJZA9uPC8e22vutI=;
- b=SlZG64ElsXuUQOVAKSn4N+mxlaDIidl889+DqehC2on+OnotlvZohi/IubyZj+sF/h
- bYcVB0U9umA1l2noD4dn6+TkFc/lMKlEiIrsAJD0QFahTgpaFEsr230OjxQrEGA9JbI+
- XVRPwlIbVKeVjGbz6DLOXDJ1tAsxEOOCIBECtOf3EDhsxxwC3QuICvRubb2omhiVbf4B
- LRhZuJTHOsyfJeRispKM2pt+rFl8N/lzxgwV4KKpZn/e5pROkHOC/qYNi+1c3AACbn1N
- tL0m5EJDPPXe++nYt2jnAQH40RO0kelOsOQzrDod1CM0Bqz/owMo1uVUNHfwGhxe4LGv
- dEYw==
-X-Gm-Message-State: AOJu0YzhTiSguIfvpDMIi7byHXI5kF0f0xkKRNgpFEmnQHN3u94nu+cl
- NJS+crRK4hiKGVUK75qC3gN0fjhNi70nBg6qOnQ=
-X-Google-Smtp-Source: AGHT+IF3Et2sCw/fr7uiFH2dXglGO69CFJ4SjP8minskuqACI5aJ6/XESY4srh4rS2ZvifRiJu0YkRb+t5Bu0hRKyrA=
-X-Received: by 2002:a05:6102:2418:b0:452:5b16:c290 with SMTP id
- j24-20020a056102241800b004525b16c290mr1878706vsi.7.1695002832370; Sun, 17 Sep
- 2023 19:07:12 -0700 (PDT)
+ bh=DyZR0XKHPW3PYKmmxnMrszUUSY7lZUqYxsVy7FTFulc=;
+ b=sU7bzknDhc7yqbnnWA98Kw7gXs6x9IhyfoYZfjdcrh7uuYTx3CoiZ1j3tDx0G3qHUP
+ ZQf+MQts5pvrFfSMup+0HLAP+whxLZ+2vFhFShMgX6SuNEwhM9k1cDtoc2LIMrzFKzqz
+ xdQU0V5PNxHBbT9A0ZqZtBSDi6KMRPEhwZB3VftIXksoyYmlSflDPNq+7puM3wJJ27Nu
+ ftZSgXIa68aZKE9YSH4Fwr+Zb4a4G5gmweqR1K5rcRRjzROhVoG4YCTdnor8FowwHrMi
+ s4c+jWmCSWWzSkAUtx1XsYbV3svEl+oixojltV065bkYKuS/L8ZhFVcBX/MwPGGiaqyo
+ f+yA==
+X-Gm-Message-State: AOJu0YySgH+Yn7Ntcis4t1RCdWYbduInbyzM+Uqch92KzeX42KI6TS88
+ pU5pNz8VdQG89K7cM7yZuxga1AE07RBuYejOp38QT+kt+lw=
+X-Google-Smtp-Source: AGHT+IHIKiJCvUsBpKsAQBFqNfiv9MTBJWi+pFlogjHkJNZICz3OIl0SoCZeo0u/cJ4POQimizJ95q+JQLaAdwjZ0is=
+X-Received: by 2002:a05:6122:420f:b0:495:e18f:67cb with SMTP id
+ cm15-20020a056122420f00b00495e18f67cbmr5821102vkb.7.1695002859559; Sun, 17
+ Sep 2023 19:07:39 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230907112640.292104-1-chigot@adacore.com>
- <20230907112640.292104-4-chigot@adacore.com>
-In-Reply-To: <20230907112640.292104-4-chigot@adacore.com>
+ <20230907112640.292104-5-chigot@adacore.com>
+In-Reply-To: <20230907112640.292104-5-chigot@adacore.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 18 Sep 2023 12:06:45 +1000
-Message-ID: <CAKmqyKMi5=xGjEH7Jhe_X-+5ScE4QN5XNOdAz_nS0rPZ4dnLLA@mail.gmail.com>
-Subject: Re: [PATCH v3 3/5] hw/misc/sifive_test.c: replace exit calls with
+Date: Mon, 18 Sep 2023 12:07:13 +1000
+Message-ID: <CAKmqyKNkWCue1TLgRWVkp+gDDJ80tySfdaj6YBMjhpTQafFQxQ@mail.gmail.com>
+Subject: Re: [PATCH v3 4/5] hw/char: riscv_htif: replace exit calls with
  proper shutdown
 To: =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::933;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x933.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a33;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa33.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -105,39 +105,35 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  hw/misc/sifive_test.c | 9 +++++++--
->  1 file changed, 7 insertions(+), 2 deletions(-)
+>  hw/char/riscv_htif.c | 5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
 >
-> diff --git a/hw/misc/sifive_test.c b/hw/misc/sifive_test.c
-> index 56df45bfe5..ad688079c4 100644
-> --- a/hw/misc/sifive_test.c
-> +++ b/hw/misc/sifive_test.c
-> @@ -25,6 +25,7 @@
->  #include "qemu/module.h"
->  #include "sysemu/runstate.h"
->  #include "hw/misc/sifive_test.h"
-> +#include "sysemu/sysemu.h"
+> diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
+> index 37d3ccc76b..7e9b6fcc98 100644
+> --- a/hw/char/riscv_htif.c
+> +++ b/hw/char/riscv_htif.c
+> @@ -31,6 +31,7 @@
+>  #include "qemu/error-report.h"
+>  #include "exec/address-spaces.h"
+>  #include "sysemu/dma.h"
+> +#include "sysemu/runstate.h"
 >
->  static uint64_t sifive_test_read(void *opaque, hwaddr addr, unsigned int=
- size)
->  {
-> @@ -39,9 +40,13 @@ static void sifive_test_write(void *opaque, hwaddr add=
-r,
->          int code =3D (val64 >> 16) & 0xffff;
->          switch (status) {
->          case FINISHER_FAIL:
-> -            exit(code);
-> +            qemu_system_shutdown_request_with_code(
-> +                SHUTDOWN_CAUSE_GUEST_PANIC, code);
-> +            return;
->          case FINISHER_PASS:
-> -            exit(0);
-> +            qemu_system_shutdown_request_with_code(
-> +                SHUTDOWN_CAUSE_GUEST_SHUTDOWN, code);
-> +            return;
->          case FINISHER_RESET:
->              qemu_system_reset_request(SHUTDOWN_CAUSE_GUEST_RESET);
->              return;
+>  #define RISCV_DEBUG_HTIF 0
+>  #define HTIF_DEBUG(fmt, ...)                                            =
+       \
+> @@ -205,7 +206,9 @@ static void htif_handle_tohost_write(HTIFState *s, ui=
+nt64_t val_written)
+>                      g_free(sig_data);
+>                  }
+>
+> -                exit(exit_code);
+> +                qemu_system_shutdown_request_with_code(
+> +                    SHUTDOWN_CAUSE_GUEST_SHUTDOWN, exit_code);
+> +                return;
+>              } else {
+>                  uint64_t syscall[8];
+>                  cpu_physical_memory_read(payload, syscall, sizeof(syscal=
+l));
 > --
 > 2.25.1
 >
