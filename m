@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD124CD37B0
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Sep 2023 16:06:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8922DC46CA1
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Sep 2023 16:06:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qiGiN-00066Z-Jr; Mon, 18 Sep 2023 12:03:11 -0400
+	id 1qiGjc-0008Rq-KR; Mon, 18 Sep 2023 12:04:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGiL-00063L-KW
- for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:03:09 -0400
-Received: from mail-lj1-x22f.google.com ([2a00:1450:4864:20::22f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGjM-0007E0-5S
+ for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:04:13 -0400
+Received: from mail-ej1-x634.google.com ([2a00:1450:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGiJ-0003uk-D7
- for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:03:09 -0400
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-2bffd6c1460so25542701fa.3
- for <qemu-riscv@nongnu.org>; Mon, 18 Sep 2023 09:03:05 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGjK-0004GW-6E
+ for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:04:11 -0400
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-9ad810be221so615650866b.2
+ for <qemu-riscv@nongnu.org>; Mon, 18 Sep 2023 09:04:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695052984; x=1695657784; darn=nongnu.org;
+ d=linaro.org; s=google; t=1695053048; x=1695657848; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YY2zRc5UQ1ttBDAhQdzUYI1/2Fa0E28wpiBNWWnnf1g=;
- b=FnnUy8p3UJEhNf0ABVOTbmAvW/NjVrDPuQRIETuh6xi+sd7KoJnS0V0fmh350uZ8j3
- e+YCFUHELkYRTAQMXhJJsfCtqeiAKHxf2xvQg1yb94SdFqwcNfPv4Rv51gTwsUr/bz/J
- kmlWAvlcV0xx5Ox2tlB8agxLfS/Peh7dFqvjYRr3mldvEWrObHza9AB09fpObl0wMPT+
- kBm0OLzyjM0aDrxn7lKF4P4tranS5iM5CjJsg643qrPk5aOgxzdAcbmK0b1/1OPNYnrO
- a5J8loslnssAjGn2PU4SvQZ4BJUZcLMZyPrbtn5yJklISX+MhmIntiyVgI2DA4ZowckQ
- TBiQ==
+ bh=YpBrxdgyPGajszRQj4tnQ2gfsy466T4SLwv71ztnz3k=;
+ b=Gr++Q9e3lQr6z74NJXlK0bU56at5bUOJdk1RCVGeUUFGNElgIe7PLjNloLrsj5l6+2
+ +1qZS4pYX1KN0Kfopgms0o2yuHhP0SM2X7ilt0actOVDOqbwt8sEInO7iLbu2e7kDgBg
+ GLGdP3tflPnNCNs6GCjXdG2pcYx93ie8ofZPAnyTAd30lVgDf2Wmkf86rnrMKCc8Tl/h
+ Q8mjo0I+cpOdgARdt3nlgXU53OD2DbaH60YJMrsa6Ep8naHBcep0AKPIModWH4REYc4u
+ nz4JsT+XgUTI/zq5X08ObVBg1OyVLhPq26rPEdV6eg95pMbn9BpI86RtnmfHHViHC6lN
+ Ozlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695052984; x=1695657784;
+ d=1e100.net; s=20230601; t=1695053048; x=1695657848;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YY2zRc5UQ1ttBDAhQdzUYI1/2Fa0E28wpiBNWWnnf1g=;
- b=HVaOfLCKIIEKe0MUg+KJK6U1oiIOwnr5hQ4mx/6J0FngeGCZ2/9fZ7TQ5MotAZDjOx
- Ew+SX6dZbYz2+U1wrs3ZQhuXe/2WMDuwutwzZXMp89Yqu77Dxw7Xf4VPK7xCAzN542hn
- KHrDT8IBr+Hpp2V2hoTfn+yg/FruHAWRV7q/bgc4rZRhBd02Wrx3jNujJOG0AZlgWxQ7
- ScPUYYayQDJeEcnab8e7+ubpAaa3/nx/f684sBXcGdyj5lSckRYLP8Aic0E5R0E5E38S
- TtlfBF5/P8lEhtby9/mh30h9Nb6KfRix5DbzhtBusaKxeIjUedXdUfaZz+JGzB+YCemR
- A6ug==
-X-Gm-Message-State: AOJu0YxO1I5Z7BJdf6uUX5A5brmKbjNwXXG0ut/2lX5DlHMp49cvRyv6
- ejtgcTzS3djw5ErpijzKSQAQjw==
-X-Google-Smtp-Source: AGHT+IFFWaHmceQaMQCtP1tx1U1BqdKcHKrYFUd0/PUiwjaiOXpmM2RbiU2HoQiVRUd/I863ShUWOQ==
-X-Received: by 2002:a2e:3614:0:b0:2b9:f27f:e491 with SMTP id
- d20-20020a2e3614000000b002b9f27fe491mr9068179lja.42.1695052984526; 
- Mon, 18 Sep 2023 09:03:04 -0700 (PDT)
+ bh=YpBrxdgyPGajszRQj4tnQ2gfsy466T4SLwv71ztnz3k=;
+ b=r7c9yYFVtbjqg5rL+tqtlHafs3MkuBCetnCjQPx93QBhRybfEq9jWi+/uQ8ydTbERT
+ sCH4voBULLyuiO+4EGxgqgZjeo49IUvys/51B/27YWHkAVoAOWoGDggDODQsPewp6kyz
+ RDCsbC+88gJcxjatni4Mmo+dgHnCEFnPc9FhKegTGpeHACtIha8SRwwOTtuiJ4e85ENC
+ XFxDDgzjboidVT07fQ4VEzkYC1dJuDQ0xzNofwWV0kNxFDneIz8blppR3zGr1wC6HVbz
+ ujqf1JpCFHjNzNG8qQe7SRWf/TWExeTDr6O3IELa7JVKXexycaahPuj2VvWa5nFcUiGa
+ tSIw==
+X-Gm-Message-State: AOJu0YxVTN1M/fbzUnvnoDE5DtmWoamvqD8grcG88ydv6Vpd9T4cPRn+
+ dbsS/aGVbSMEa9WRAYc0K01+bQ==
+X-Google-Smtp-Source: AGHT+IG6EnV1NPtLa02ojf1AOOFHw9u/ZZVKTH8rmKjYxc3URy3huazjFDCLq8lcPx0zxuOm3uW8nA==
+X-Received: by 2002:a17:907:2cd8:b0:9a5:c9a4:ba1a with SMTP id
+ hg24-20020a1709072cd800b009a5c9a4ba1amr8408544ejc.59.1695053048266; 
+ Mon, 18 Sep 2023 09:04:08 -0700 (PDT)
 Received: from localhost.localdomain
  (static-212-193-78-212.thenetworkfactory.nl. [212.78.193.212])
  by smtp.gmail.com with ESMTPSA id
- x5-20020a1709065ac500b00993664a9987sm6574017ejs.103.2023.09.18.09.03.02
+ n4-20020a170906088400b009928b4e3b9fsm6613541eje.114.2023.09.18.09.04.06
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 18 Sep 2023 09:03:04 -0700 (PDT)
+ Mon, 18 Sep 2023 09:04:07 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>,
@@ -98,24 +98,25 @@ Cc: Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>,
  Nicholas Piggin <npiggin@gmail.com>, Greg Kurz <groug@kaod.org>,
  Michael Rolnik <mrolnik@gmail.com>, Eduardo Habkost <eduardo@habkost.net>,
  Markus Armbruster <armbru@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH 01/22] target/i386: Only realize existing APIC device
-Date: Mon, 18 Sep 2023 18:02:34 +0200
-Message-ID: <20230918160257.30127-2-philmd@linaro.org>
+Subject: [PATCH 13/22] target/xtensa: Create IRQs *after* accelerator vCPU is
+ realized
+Date: Mon, 18 Sep 2023 18:02:46 +0200
+Message-ID: <20230918160257.30127-14-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230918160257.30127-1-philmd@linaro.org>
 References: <20230918160257.30127-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::22f;
- envelope-from=philmd@linaro.org; helo=mail-lj1-x22f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::634;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x634.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -131,62 +132,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-APIC state is created under a certain condition,
-use the same condition to realize it.
-Having a NULL APIC state is a bug: use assert().
+Architecture specific hardware doesn't have a particular dependency
+on the accelerator vCPU (created with cpu_exec_realizefn), and can
+be initialized *after* the vCPU is realized. Doing so allows further
+generic API simplification (in few commits).
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/i386/cpu-sysemu.c | 9 +++------
- target/i386/cpu.c        | 8 +++++---
- 2 files changed, 8 insertions(+), 9 deletions(-)
+ target/xtensa/cpu.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/target/i386/cpu-sysemu.c b/target/i386/cpu-sysemu.c
-index 2375e48178..6a164d3769 100644
---- a/target/i386/cpu-sysemu.c
-+++ b/target/i386/cpu-sysemu.c
-@@ -272,9 +272,7 @@ void x86_cpu_apic_create(X86CPU *cpu, Error **errp)
-     APICCommonState *apic;
-     APICCommonClass *apic_class = apic_get_class(errp);
+diff --git a/target/xtensa/cpu.c b/target/xtensa/cpu.c
+index 300d19d45c..bbfd2d42a8 100644
+--- a/target/xtensa/cpu.c
++++ b/target/xtensa/cpu.c
+@@ -162,10 +162,6 @@ static void xtensa_cpu_realizefn(DeviceState *dev, Error **errp)
+     XtensaCPUClass *xcc = XTENSA_CPU_GET_CLASS(dev);
+     Error *local_err = NULL;
  
--    if (!apic_class) {
--        return;
--    }
-+    assert(apic_class);
+-#ifndef CONFIG_USER_ONLY
+-    xtensa_irq_init(&XTENSA_CPU(dev)->env);
+-#endif
+-
+     cpu_exec_realizefn(cs, &local_err);
+     if (local_err != NULL) {
+         error_propagate(errp, local_err);
+@@ -174,6 +170,10 @@ static void xtensa_cpu_realizefn(DeviceState *dev, Error **errp)
  
-     cpu->apic_state = DEVICE(object_new_with_class(OBJECT_CLASS(apic_class)));
-     object_property_add_child(OBJECT(cpu), "lapic",
-@@ -293,9 +291,8 @@ void x86_cpu_apic_realize(X86CPU *cpu, Error **errp)
-     APICCommonState *apic;
-     static bool apic_mmio_map_once;
+     cs->gdb_num_regs = xcc->config->gdb_regmap.num_regs;
  
--    if (cpu->apic_state == NULL) {
--        return;
--    }
-+    assert(cpu->apic_state);
++#ifndef CONFIG_USER_ONLY
++    xtensa_irq_init(&XTENSA_CPU(dev)->env);
++#endif
 +
-     qdev_realize(DEVICE(cpu->apic_state), NULL, errp);
+     xcc->parent_realize(dev, errp);
+ }
  
-     /* Map APIC MMIO area */
-diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index b2a20365e1..a23d4795e0 100644
---- a/target/i386/cpu.c
-+++ b/target/i386/cpu.c
-@@ -7448,9 +7448,11 @@ static void x86_cpu_realizefn(DeviceState *dev, Error **errp)
-     }
- 
- #ifndef CONFIG_USER_ONLY
--    x86_cpu_apic_realize(cpu, &local_err);
--    if (local_err != NULL) {
--        goto out;
-+    if (cpu->env.features[FEAT_1_EDX] & CPUID_APIC || ms->smp.cpus > 1) {
-+        x86_cpu_apic_realize(cpu, &local_err);
-+        if (local_err != NULL) {
-+            goto out;
-+        }
-     }
- #endif /* !CONFIG_USER_ONLY */
-     cpu_reset(cs);
 -- 
 2.41.0
 
