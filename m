@@ -4,79 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07D53C46CA1
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Sep 2023 16:10:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96081CD37B0
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Sep 2023 16:34:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qiGjd-0008Ut-Ab; Mon, 18 Sep 2023 12:04:29 -0400
+	id 1qiHCY-0000sV-JP; Mon, 18 Sep 2023 12:34:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGjH-00075p-F4
- for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:04:10 -0400
-Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGjE-0004FM-Af
- for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:04:05 -0400
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-98377c5d53eso596945766b.0
- for <qemu-riscv@nongnu.org>; Mon, 18 Sep 2023 09:04:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695053043; x=1695657843; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DBZjR8eqTRO2FcjHJbn6UW72+cRDsZ12eh5J24aMJRM=;
- b=ULAfeQ4ycNHwmdNM0Zx+K1UE1/p4THoywtr1OeOMxNgw/12Wk6Wxgynq0XWCaRs5U8
- J0IXmB8tTW2i/kj/ZZBMKfE9SuivJ8bshkUrx/cfI9bWsbcPiVyPOEN6gSv1sxa5RneC
- AzM5XAmZegX5MYItdcpBu85T7l6NbYCZCoOys3l2Cmv3y+jVi1AYU+p+jAMKodl2Zo1A
- 9PmgjuJhFVBnJkBtrRTCP6m/IG457DwEFu4GC4kmpuBvV4o1T02fghZvTZU1cWNkHNjA
- BwsClz4xEwEZsbXiSz4gL/hivynqDLdK4h6gta6uKJL/1x7hF2QtaysH+rprPDCPXWOc
- vK9A==
+ (Exim 4.90_1) (envelope-from <david@redhat.com>) id 1qiHCY-0000sE-6o
+ for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:34:22 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <david@redhat.com>) id 1qiHCR-0002Af-MV
+ for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:34:21 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1695054854;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Yqit+L1v57rv4S72epM2gx/7IZWiOioPzhQAQ8pbRdo=;
+ b=Ql4dCmsxUjmRiP07sSItS1BMfs9DPpoqeWHVyCUwTAMgpBgDb3yLu84Bdy5/21WICnc6e1
+ XcLlVxMkNHTvODb8XV1B5+VuxqfdvcjDX6kzenCr1UGIqrFXgvt2YKz/XIvDtqEeBruJk1
+ MVd7Nckg0VUNPyIEwKbg6bSXxHubfh8=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-678-iXYb0a9RNumNsJFy3ELwxA-1; Mon, 18 Sep 2023 12:34:13 -0400
+X-MC-Unique: iXYb0a9RNumNsJFy3ELwxA-1
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-3200597bfc5so1204737f8f.2
+ for <qemu-riscv@nongnu.org>; Mon, 18 Sep 2023 09:34:12 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695053043; x=1695657843;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=DBZjR8eqTRO2FcjHJbn6UW72+cRDsZ12eh5J24aMJRM=;
- b=Z5zp8/+sc6W2IoYKX7KCp+gKkOevwg+apH3p3Pw/+sTYJEEhMbbtp+5I9o7N3lALla
- GQ2TjLXAQ3cm6F36DleYRYyE3I9ZZwJSwQnmmkKvZXCiEkYzYi1pcaNwzQVD4xEjKDFd
- V889fPeVs/MVxIcMVXAZxVkLmkWxacuK7RcVNmoe+EhnJA+grzhfz8ojVP4+5A5grRWC
- Z2431MzFwiNysga5g+HeHjKzQmKnrEilcCDu5pECOfCEVzmKxVeo/biLcbH4HmfICxWE
- BKCNCrd9EdDSr/bGJoLaDQHOJRgaIXxw2aiNrNgbTtbvJ7L61/auNJuz3pyEIj7QZ5Eg
- SWXA==
-X-Gm-Message-State: AOJu0YwBXH+mOE2Fyo8M8Grx7m2xSuXYtwRRcEvDdMFj30uo4EWGzBTl
- S7zHge+KVELNxbAcWespW7lILg==
-X-Google-Smtp-Source: AGHT+IFSQh3aSy8WNfVsJ8gBPwr/UHTrTRJ5GVnUXxcFo9z61kuLhRihhFERCd0BfPS6IwLRcpPE5w==
-X-Received: by 2002:a17:906:209b:b0:9a9:fa50:1fa8 with SMTP id
- 27-20020a170906209b00b009a9fa501fa8mr8796931ejq.40.1695053042868; 
- Mon, 18 Sep 2023 09:04:02 -0700 (PDT)
-Received: from localhost.localdomain
- (static-212-193-78-212.thenetworkfactory.nl. [212.78.193.212])
+ d=1e100.net; s=20230601; t=1695054851; x=1695659651;
+ h=content-transfer-encoding:in-reply-to:organization:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Yqit+L1v57rv4S72epM2gx/7IZWiOioPzhQAQ8pbRdo=;
+ b=l38KXobIfTWfsYR0D0vhcdZGUAJZFEbl2O1cBG8C0+U9myxS5sfJEwwl4E7KREMlrm
+ YvvarncphzJMwYmLPmityKNGaPq/WzAyl0ZqpZDm+Lxr0/JSt9MSfSvU5HsAHZ8dczpy
+ qkGXYpzJEadF87ZaZU8w286ybd35uFAOOqvppYoCnTSLJklky7XczQGUyNIT/X+xYLd9
+ P/vCH9nGtzahLzaoCq9OH5UtfHk4NDTn/AvuJc3oRPh/2d7mxX1e3omk9GiKVl+IYjJj
+ nOOOt9MKNh+0q3xtGXNf7DafCMKei7fKzWVdmTixt5nMdtL3/V7yZh7ACs2T34GQG6ps
+ zj5g==
+X-Gm-Message-State: AOJu0Yy6TnCtg/QdbOdTFTOg2wi0UY5tXIVZb6enHx16GugUzLASvNjC
+ pj0amm3t5rUgETzyruH4IjoWYkfPpvLWZ3fI2onmgBEvKO8AzdoJVTp+99x19/NkDfamBEPm1ax
+ 3l6aJcLT2XtnS//U=
+X-Received: by 2002:a5d:5a15:0:b0:31f:f432:b541 with SMTP id
+ bq21-20020a5d5a15000000b0031ff432b541mr11161241wrb.69.1695054851568; 
+ Mon, 18 Sep 2023 09:34:11 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHR9is0Sfqkz6XHdnT9nxCW466u2UED+wVodAbdwIojm0Dvd+7wdCEx6LhGqy3I2hauHihUlw==
+X-Received: by 2002:a5d:5a15:0:b0:31f:f432:b541 with SMTP id
+ bq21-20020a5d5a15000000b0031ff432b541mr11161214wrb.69.1695054851162; 
+ Mon, 18 Sep 2023 09:34:11 -0700 (PDT)
+Received: from ?IPV6:2003:cb:c702:9d00:cf36:8603:a1f5:d07?
+ (p200300cbc7029d00cf368603a1f50d07.dip0.t-ipconnect.de.
+ [2003:cb:c702:9d00:cf36:8603:a1f5:d07])
  by smtp.gmail.com with ESMTPSA id
- z15-20020a170906240f00b0099bd1ce18fesm6723198eja.10.2023.09.18.09.04.01
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 18 Sep 2023 09:04:02 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org
+ o12-20020adfeacc000000b003176c6e87b1sm4242342wrn.81.2023.09.18.09.34.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 18 Sep 2023 09:34:10 -0700 (PDT)
+Message-ID: <7bc15c25-2147-409b-0cf7-e3f1b56d5283@redhat.com>
+Date: Mon, 18 Sep 2023 18:34:07 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH 18/22] target/s390x: Call s390_cpu_realize_sysemu from
+ s390_realize_cpu_model
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
 Cc: Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>,
- Max Filippov <jcmvbkbc@gmail.com>, David Hildenbrand <david@redhat.com>,
- Peter Xu <peterx@redhat.com>, Anton Johansson <anjo@rev.ng>,
- Peter Maydell <peter.maydell@linaro.org>, kvm@vger.kernel.org,
- Marek Vasut <marex@denx.de>, David Gibson <david@gibson.dropbear.id.au>,
- Brian Cain <bcain@quicinc.com>,
+ Max Filippov <jcmvbkbc@gmail.com>, Peter Xu <peterx@redhat.com>,
+ Anton Johansson <anjo@rev.ng>, Peter Maydell <peter.maydell@linaro.org>,
+ kvm@vger.kernel.org, Marek Vasut <marex@denx.de>,
+ David Gibson <david@gibson.dropbear.id.au>, Brian Cain <bcain@quicinc.com>,
  Yoshinori Sato <ysato@users.sourceforge.jp>,
  "Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
  Claudio Fontana <cfontana@suse.de>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Marcelo Tosatti <mtosatti@redhat.com>, qemu-ppc@nongnu.org,
+ Artyom Tarasenko <atar4qemu@gmail.com>, Marcelo Tosatti
+ <mtosatti@redhat.com>, qemu-ppc@nongnu.org,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Ilya Leoshkevich <iii@linux.ibm.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, Ilya Leoshkevich <iii@linux.ibm.com>,
  Daniel Henrique Barboza <danielhb413@gmail.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ =?UTF-8?Q?C=c3=a9dric_Le_Goater?= <clg@kaod.org>,
  Alistair Francis <alistair.francis@wdc.com>,
  Alessandro Di Federico <ale@rev.ng>, Song Gao <gaosong@loongson.cn>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
@@ -86,37 +100,36 @@ Cc: Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>,
  Luc Michel <luc@lmichel.fr>, Weiwei Li <liweiwei@iscas.ac.cn>,
  Bin Meng <bin.meng@windriver.com>, Stafford Horne <shorne@gmail.com>,
  Xiaojuan Yang <yangxiaojuan@loongson.cn>,
- "Daniel P . Berrange" <berrange@redhat.com>,
- Thomas Huth <thuth@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ "Daniel P . Berrange" <berrange@redhat.com>, Thomas Huth <thuth@redhat.com>,
  qemu-arm@nongnu.org, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
  Bernhard Beschow <shentey@gmail.com>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, qemu-riscv@nongnu.org,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
  Nicholas Piggin <npiggin@gmail.com>, Greg Kurz <groug@kaod.org>,
  Michael Rolnik <mrolnik@gmail.com>, Eduardo Habkost <eduardo@habkost.net>,
  Markus Armbruster <armbru@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH 12/22] target/mips: Create clock *after* accelerator vCPU is
- realized
-Date: Mon, 18 Sep 2023 18:02:45 +0200
-Message-ID: <20230918160257.30127-13-philmd@linaro.org>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230918160257.30127-1-philmd@linaro.org>
 References: <20230918160257.30127-1-philmd@linaro.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+ <20230918160257.30127-19-philmd@linaro.org>
+From: David Hildenbrand <david@redhat.com>
+Organization: Red Hat
+In-Reply-To: <20230918160257.30127-19-philmd@linaro.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::636;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x636.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=david@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -35
+X-Spam_score: -3.6
+X-Spam_bar: ---
+X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ NICE_REPLY_A=-1.473, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001,
+ RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -132,63 +145,93 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Architecture specific hardware doesn't have a particular dependency
-on the accelerator vCPU (created with cpu_exec_realizefn), and can
-be initialized *after* the vCPU is realized. Doing so allows further
-generic API simplification (in few commits).
+On 18.09.23 18:02, Philippe Mathieu-Daudé wrote:
+> s390_cpu_realize_sysemu() runs some checks for the TCG accelerator,
+> previous to creating the vCPU. s390_realize_cpu_model() also does
+> run some checks for KVM.
+> Move the sysemu call to s390_realize_cpu_model(). Having a single
+> call before cpu_exec_realizefn() will allow us to factor a
+> verify_accel_features() handler out in a pair of commits.
+> 
+> Directly pass a S390CPU* to s390_cpu_realize_sysemu() to simplify.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> ---
+>   target/s390x/s390x-internal.h | 2 +-
+>   target/s390x/cpu-sysemu.c     | 3 +--
+>   target/s390x/cpu.c            | 6 ------
+>   target/s390x/cpu_models.c     | 4 ++++
+>   4 files changed, 6 insertions(+), 9 deletions(-)
+> 
+> diff --git a/target/s390x/s390x-internal.h b/target/s390x/s390x-internal.h
+> index 825252d728..781ac08458 100644
+> --- a/target/s390x/s390x-internal.h
+> +++ b/target/s390x/s390x-internal.h
+> @@ -241,7 +241,7 @@ uint32_t calc_cc(CPUS390XState *env, uint32_t cc_op, uint64_t src, uint64_t dst,
+>   unsigned int s390_cpu_halt(S390CPU *cpu);
+>   void s390_cpu_unhalt(S390CPU *cpu);
+>   void s390_cpu_init_sysemu(Object *obj);
+> -bool s390_cpu_realize_sysemu(DeviceState *dev, Error **errp);
+> +bool s390_cpu_realize_sysemu(S390CPU *cpu, Error **errp);
+>   void s390_cpu_finalize(Object *obj);
+>   void s390_cpu_class_init_sysemu(CPUClass *cc);
+>   void s390_cpu_machine_reset_cb(void *opaque);
+> diff --git a/target/s390x/cpu-sysemu.c b/target/s390x/cpu-sysemu.c
+> index 8112561e5e..5178736c46 100644
+> --- a/target/s390x/cpu-sysemu.c
+> +++ b/target/s390x/cpu-sysemu.c
+> @@ -122,9 +122,8 @@ void s390_cpu_init_sysemu(Object *obj)
+>       s390_cpu_set_state(S390_CPU_STATE_STOPPED, cpu);
+>   }
+>   
+> -bool s390_cpu_realize_sysemu(DeviceState *dev, Error **errp)
+> +bool s390_cpu_realize_sysemu(S390CPU *cpu, Error **errp)
+>   {
+> -    S390CPU *cpu = S390_CPU(dev);
+>       MachineState *ms = MACHINE(qdev_get_machine());
+>       unsigned int max_cpus = ms->smp.max_cpus;
+>   
+> diff --git a/target/s390x/cpu.c b/target/s390x/cpu.c
+> index 416ac6c4e0..7257d4bc19 100644
+> --- a/target/s390x/cpu.c
+> +++ b/target/s390x/cpu.c
+> @@ -237,12 +237,6 @@ static void s390_cpu_realizefn(DeviceState *dev, Error **errp)
+>           goto out;
+>       }
+>   
+> -#if !defined(CONFIG_USER_ONLY)
+> -    if (!s390_cpu_realize_sysemu(dev, &err)) {
+> -        goto out;
+> -    }
+> -#endif
+> -
+>       cpu_exec_realizefn(cs, &err);
+>       if (err != NULL) {
+>           goto out;
+> diff --git a/target/s390x/cpu_models.c b/target/s390x/cpu_models.c
+> index 98f14c09c2..f030be0d55 100644
+> --- a/target/s390x/cpu_models.c
+> +++ b/target/s390x/cpu_models.c
+> @@ -612,6 +612,10 @@ void s390_realize_cpu_model(CPUState *cs, Error **errp)
+>           cpu->env.cpuid = deposit64(cpu->env.cpuid, CPU_PHYS_ADDR_SHIFT,
+>                                      CPU_PHYS_ADDR_BITS, cpu->env.core_id);
+>       }
+> +
+> +    if (!s390_cpu_realize_sysemu(cpu, &err)) {
+> +        return;
+> +    }
+>   #endif
+>   }
+>   
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
- target/mips/cpu.c | 28 ++++++++++++++--------------
- 1 file changed, 14 insertions(+), 14 deletions(-)
+That has nothing to do with CPU models and is, therefore, completely 
+misplaced ... :/
 
-diff --git a/target/mips/cpu.c b/target/mips/cpu.c
-index 0aea69aaf9..7c81e6c356 100644
---- a/target/mips/cpu.c
-+++ b/target/mips/cpu.c
-@@ -464,20 +464,6 @@ static void mips_cpu_realizefn(DeviceState *dev, Error **errp)
-     MIPSCPUClass *mcc = MIPS_CPU_GET_CLASS(dev);
-     Error *local_err = NULL;
- 
--    if (!clock_get(cpu->clock)) {
--#ifndef CONFIG_USER_ONLY
--        if (!qtest_enabled()) {
--            g_autofree char *cpu_freq_str = freq_to_str(CPU_FREQ_HZ_DEFAULT);
--
--            warn_report("CPU input clock is not connected to any output clock, "
--                        "using default frequency of %s.", cpu_freq_str);
--        }
--#endif
--        /* Initialize the frequency in case the clock remains unconnected. */
--        clock_set_hz(cpu->clock, CPU_FREQ_HZ_DEFAULT);
--    }
--    mips_cp0_period_set(cpu);
--
-     cpu_exec_realizefn(cs, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
-@@ -492,6 +478,20 @@ static void mips_cpu_realizefn(DeviceState *dev, Error **errp)
-     fpu_init(env, env->cpu_model);
-     mvp_init(env);
- 
-+    if (!clock_get(cpu->clock)) {
-+#ifndef CONFIG_USER_ONLY
-+        if (!qtest_enabled()) {
-+            g_autofree char *cpu_freq_str = freq_to_str(CPU_FREQ_HZ_DEFAULT);
-+
-+            warn_report("CPU input clock is not connected to any output clock, "
-+                        "using default frequency of %s.", cpu_freq_str);
-+        }
-+#endif
-+        /* Initialize the frequency in case the clock remains unconnected. */
-+        clock_set_hz(cpu->clock, CPU_FREQ_HZ_DEFAULT);
-+    }
-+    mips_cp0_period_set(cpu);
-+
-     mcc->parent_realize(dev, errp);
-     cpu_reset(cs);
- }
+Or what am I missing?
+
 -- 
-2.41.0
+Cheers,
+
+David / dhildenb
 
 
