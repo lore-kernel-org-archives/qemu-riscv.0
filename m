@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 090DDCD37B0
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Sep 2023 16:08:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6141AC46CA1
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Sep 2023 16:08:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qiGjg-0000Nl-TQ; Mon, 18 Sep 2023 12:04:33 -0400
+	id 1qiGjg-0000KH-AS; Mon, 18 Sep 2023 12:04:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGjc-0008Nb-18
- for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:04:28 -0400
-Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGjV-0007hD-P3
+ for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:04:21 -0400
+Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGjZ-0004MB-JX
- for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:04:27 -0400
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5310aec4121so1635306a12.2
- for <qemu-riscv@nongnu.org>; Mon, 18 Sep 2023 09:04:25 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qiGjU-0004Ke-2J
+ for qemu-riscv@nongnu.org; Mon, 18 Sep 2023 12:04:21 -0400
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-9a9f139cd94so635661666b.2
+ for <qemu-riscv@nongnu.org>; Mon, 18 Sep 2023 09:04:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695053064; x=1695657864; darn=nongnu.org;
+ d=linaro.org; s=google; t=1695053058; x=1695657858; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=s5SThQE8VrEigaiBVVD1aPn+S9Eqq7fLgyN+q+7eopw=;
- b=iN3Zjls1wmhzBLJG3Osd6MYLOiBOmzWia6GDdHQDWIuLhxbH38pKbhfYlhljmS80HY
- T4zv0c869UyNBAuMeQa63lgwkWjovHlQvWdTrFyzv1kJKK9EwhaGdcx1gYFX5goPOmpl
- fdHq8TLPrYt7JVYvreBsMBli0MVv9n8ncjppXU8kVK2NZvi149SdO+JiFAsMcseBRjnE
- F4BewZrCG5+V08g3A2Pww6b1ZPgWHNPuxl5d765ilVlRqZG5SsDBgMaOdOklBBYe+Dkf
- d8+krUQdz6butreujCzQgCuLi1gwnHGMsHhPV1Ie2+5ee7G9Q1gpqTYgODRGDphrmWL6
- 4HWg==
+ bh=NjaIM1Qc6nHbnxZLIT5jjyB717NwyoCy1EteOD4KAlE=;
+ b=t0llDNmNfv8UG/Uz7Bv6Oz3tQavpDDy9Ti61u5vtH5yvyk3IOrlWWqvH94ZYYlU7xF
+ EkwwbHMyCBq2p6TZax4+x4M56FfeV9AQA8kz3B8ZLLMYHRL32xp8LPLQ6OcFIm7XPWZQ
+ HqXImbNEWR0a1vbL9/WKqKcVZRkB+cF30o8q7POkfy9/6dYevY8FDc/Q7Q6OtPT92kPO
+ yoT3qkklnYcu70Q6TmvYboUPHlQklwyhLESAnTMgeO6oChdZJJiY/+wuj3kMZAWRZL4u
+ z+D5xF+F1Vb+hj38/xOL2NobShGA6ogToBuI6Ie5UFQMP1XhhiMo5UBpWG7KkFq+Tbde
+ 8ftg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695053064; x=1695657864;
+ d=1e100.net; s=20230601; t=1695053058; x=1695657858;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=s5SThQE8VrEigaiBVVD1aPn+S9Eqq7fLgyN+q+7eopw=;
- b=ayO7Wo6JPtaa/PM5I/8kRdh4bb+MaCiwgVyqYNkPrUlT0Cbihi9z/1adUWIoruesiq
- r7x35/cqot3lUDeZwtTmDur4V1ECzMW25brf5mKBhhkAP3iVHl1hEQbB09M+2beElZo0
- BwRiiDDR/c+ZhnlW/Yf8AvJgPunZ89laQq4FPSbm2K0TSA3CzLiVyVZ0nAZRuTRa6XyI
- uIWinB5KBtf3WTNcKkjpJo3eu55/3ncVAMD72yoL5XmPtTz2YsekvjgDrBDb4VOHje5p
- XZoqwvg9ipKa3LAFxXnl4T6LksHGHRK0+pjBGzsjcFQd5X1Hfw/oPTl5V1yv3uwrgfz2
- wGgw==
-X-Gm-Message-State: AOJu0YyTzrVmSHEAwut0R7EXEyQSdH8wsLKZstSaWaysrBhI/HsgAOd/
- QxiUa4qupTnCpziRUWtvNSIn0A==
-X-Google-Smtp-Source: AGHT+IFdhAv8NMQe3eDFfz6fXbmFXmpOAUlZ51p/ozjG+nSdvaZT7LZnHlxk4GI+z0N+RInhKW7YXQ==
-X-Received: by 2002:a17:906:768f:b0:9ad:fb23:21cf with SMTP id
- o15-20020a170906768f00b009adfb2321cfmr4715553ejm.15.1695053064161; 
- Mon, 18 Sep 2023 09:04:24 -0700 (PDT)
+ bh=NjaIM1Qc6nHbnxZLIT5jjyB717NwyoCy1EteOD4KAlE=;
+ b=c8qQe3kCLwHiNye9RvTKLXSqURwELeT3vmPz0F5TE9s92ruJJLj4aVcvl5DPUyE8hC
+ DnDGct+UDW5bdmfkenYfBqCNOfYwou2Ykd0kVXcxZqdwvOVzBLPUGOQoPDDpmzAXwA28
+ 4tyATLUUdh7y4n4dWwcizpRXAGRsl72yfyPjQtPt1u96nx9+LRk48Bl5/ABT8MJKaJDj
+ 6DTTeggBl0MGf76Rnb+PkX7lHO81WESfc7tmiCYAlPoM57MJgC4+eU/0BHp5TQzb0fQ3
+ H6WOALR7xijHc3n+3mBP9nMXPWS81c563JLvcbZfgcpOUs0kO3ecr6/VCxKLsqBzDWA7
+ p2ZA==
+X-Gm-Message-State: AOJu0YwqtmEKtInOiQrbxQbhimoP6A/p9hqJsgTb0GuWpyJjpnBojaqX
+ 95S8IzKKJCWgOfGSC+P1q1ODdw==
+X-Google-Smtp-Source: AGHT+IH1BGqTiq3uZIcjIgDgFSn4hEE/bGsbSKhsdURXDBkyUNQTShuSyFgzOD2PM8QK12Z2NIlVUQ==
+X-Received: by 2002:a17:907:75f1:b0:9a1:da9a:f1c2 with SMTP id
+ jz17-20020a17090775f100b009a1da9af1c2mr7861010ejc.11.1695053058645; 
+ Mon, 18 Sep 2023 09:04:18 -0700 (PDT)
 Received: from localhost.localdomain
  (static-212-193-78-212.thenetworkfactory.nl. [212.78.193.212])
  by smtp.gmail.com with ESMTPSA id
- c26-20020a170906341a00b00993470682e5sm6646928ejb.32.2023.09.18.09.04.22
+ f13-20020a170906390d00b00982a92a849asm6628019eje.91.2023.09.18.09.04.17
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 18 Sep 2023 09:04:23 -0700 (PDT)
+ Mon, 18 Sep 2023 09:04:18 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>,
@@ -98,25 +98,24 @@ Cc: Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>,
  Nicholas Piggin <npiggin@gmail.com>, Greg Kurz <groug@kaod.org>,
  Michael Rolnik <mrolnik@gmail.com>, Eduardo Habkost <eduardo@habkost.net>,
  Markus Armbruster <armbru@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH 16/22] target/arm: Extract verify_accel_features() from
- cpu_realize()
-Date: Mon, 18 Sep 2023 18:02:49 +0200
-Message-ID: <20230918160257.30127-17-philmd@linaro.org>
+Subject: [PATCH 15/22] exec/cpu: Introduce CPUClass::verify_accel_features()
+Date: Mon, 18 Sep 2023 18:02:48 +0200
+Message-ID: <20230918160257.30127-16-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230918160257.30127-1-philmd@linaro.org>
 References: <20230918160257.30127-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::531;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x531.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::632;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -132,120 +131,56 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-When looking at the arm_cpu_realizefn() method, most of the
-code run before the cpu_exec_realizefn() call checks whether
-the requested CPU features are compatible with the requested
-accelerator. Extract this code to a dedicated handler matching
-our recently added CPUClass::verify_accel_features() handler.
+Some CPUs need to check the requested features are compatible
+with the requested accelerator. This has to be done *before*
+the accelerator realizes a vCPU.
+Introduce the verify_accel_features() handler and call it
+just before accel_cpu_realizefn().
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/arm/cpu.c | 41 ++++++++++++++++++++++++-----------------
- 1 file changed, 24 insertions(+), 17 deletions(-)
+ include/hw/core/cpu.h | 4 ++++
+ cpu.c                 | 5 +++++
+ 2 files changed, 9 insertions(+)
 
-diff --git a/target/arm/cpu.c b/target/arm/cpu.c
-index 46d3f70d63..a551383fd3 100644
---- a/target/arm/cpu.c
-+++ b/target/arm/cpu.c
-@@ -1675,19 +1675,10 @@ void arm_cpu_finalize_features(ARMCPU *cpu, Error **errp)
-     }
- }
+diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+index c90cf3a162..1e940f6bb5 100644
+--- a/include/hw/core/cpu.h
++++ b/include/hw/core/cpu.h
+@@ -103,6 +103,9 @@ struct SysemuCPUOps;
+  * @class_by_name: Callback to map -cpu command line model name to an
+  * instantiatable CPU type.
+  * @parse_features: Callback to parse command line arguments.
++ * @verify_accel_features: Callback to verify if all requested CPU are
++ *        compatible with the requested accelerator. Called before the
++ *        accelerator realize a vCPU.
+  * @reset_dump_flags: #CPUDumpFlags to use for reset logging.
+  * @has_work: Callback for checking if there is work to do.
+  * @memory_rw_debug: Callback for GDB memory access.
+@@ -183,6 +186,7 @@ struct CPUClass {
+      * class data that depends on the accelerator, see accel/accel-common.c.
+      */
+     void (*init_accel_cpu)(struct AccelCPUClass *accel_cpu, CPUClass *cc);
++    bool (*verify_accel_features)(CPUState *cs, Error **errp);
  
--static void arm_cpu_realizefn(DeviceState *dev, Error **errp)
-+static bool arm_cpu_verify_accel_features(CPUState *cs, Error **errp)
- {
--    CPUState *cs = CPU(dev);
--    ARMCPU *cpu = ARM_CPU(dev);
--    ARMCPUClass *acc = ARM_CPU_GET_CLASS(dev);
-+    ARMCPU *cpu = ARM_CPU(cs);
-     CPUARMState *env = &cpu->env;
--    int pagebits;
--    Error *local_err = NULL;
--
--    /* Use pc-relative instructions in system-mode */
--#ifndef CONFIG_USER_ONLY
--    cs->tcg_cflags |= CF_PCREL;
--#endif
+     /*
+      * Keep non-pointer data at the end to minimize holes.
+diff --git a/cpu.c b/cpu.c
+index 0769b0b153..84b03c09ac 100644
+--- a/cpu.c
++++ b/cpu.c
+@@ -136,6 +136,11 @@ void cpu_exec_realizefn(CPUState *cpu, Error **errp)
+     /* cache the cpu class for the hotpath */
+     cpu->cc = CPU_GET_CLASS(cpu);
  
-     /* If we needed to query the host kernel for the CPU features
-      * then it's possible that might have failed in the initfn, but
-@@ -1699,10 +1690,13 @@ static void arm_cpu_realizefn(DeviceState *dev, Error **errp)
-         } else {
-             error_setg(errp, "Failed to retrieve host CPU features");
-         }
--        return;
++    if (cpu->cc->verify_accel_features
++        && !cpu->cc->verify_accel_features(cpu, errp)) {
 +        return false;
-     }
- 
- #ifndef CONFIG_USER_ONLY
-+    /* Use pc-relative instructions in system-mode */
-+    cs->tcg_cflags |= CF_PCREL;
++    }
 +
-     /* The NVIC and M-profile CPU are two halves of a single piece of
-      * hardware; trying to use one without the other is a command line
-      * error and will result in segfaults if not caught here.
-@@ -1710,12 +1704,12 @@ static void arm_cpu_realizefn(DeviceState *dev, Error **errp)
-     if (arm_feature(env, ARM_FEATURE_M)) {
-         if (!env->nvic) {
-             error_setg(errp, "This board cannot be used with Cortex-M CPUs");
--            return;
-+            return false;
-         }
-     } else {
-         if (env->nvic) {
-             error_setg(errp, "This board can only be used with Cortex-M CPUs");
--            return;
-+            return false;
-         }
+     if (!accel_cpu_realizefn(cpu, errp)) {
+         return;
      }
- 
-@@ -1733,23 +1727,35 @@ static void arm_cpu_realizefn(DeviceState *dev, Error **errp)
-             error_setg(errp,
-                        "Cannot enable %s when using an M-profile guest CPU",
-                        current_accel_name());
--            return;
-+            return false;
-         }
-         if (cpu->has_el3) {
-             error_setg(errp,
-                        "Cannot enable %s when guest CPU has EL3 enabled",
-                        current_accel_name());
--            return;
-+            return false;
-         }
-         if (cpu->tag_memory) {
-             error_setg(errp,
-                        "Cannot enable %s when guest CPUs has MTE enabled",
-                        current_accel_name());
--            return;
-+            return false;
-         }
-     }
- #endif
- 
-+    return true;
-+}
-+
-+static void arm_cpu_realizefn(DeviceState *dev, Error **errp)
-+{
-+    CPUState *cs = CPU(dev);
-+    ARMCPU *cpu = ARM_CPU(dev);
-+    ARMCPUClass *acc = ARM_CPU_GET_CLASS(dev);
-+    CPUARMState *env = &cpu->env;
-+    int pagebits;
-+    Error *local_err = NULL;
-+
-     cpu_exec_realizefn(cs, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
-@@ -2383,6 +2389,7 @@ static void arm_cpu_class_init(ObjectClass *oc, void *data)
-                                        &acc->parent_phases);
- 
-     cc->class_by_name = arm_cpu_class_by_name;
-+    cc->verify_accel_features = arm_cpu_verify_accel_features;
-     cc->has_work = arm_cpu_has_work;
-     cc->dump_state = arm_cpu_dump_state;
-     cc->set_pc = arm_cpu_set_pc;
 -- 
 2.41.0
 
