@@ -4,54 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69A4BCD54AB
-	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Sep 2023 09:18:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 784CACD54AB
+	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Sep 2023 09:28:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qiWrx-0004OJ-FC; Tue, 19 Sep 2023 05:18:10 -0400
+	id 1qiX1V-0008Ed-SE; Tue, 19 Sep 2023 05:28:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qiWrt-0004LX-1H; Tue, 19 Sep 2023 05:18:07 -0400
-Received: from out30-130.freemail.mail.aliyun.com ([115.124.30.130])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qiWro-0007xQ-TW; Tue, 19 Sep 2023 05:18:03 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R191e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
- TI=SMTPD_---0VsR.LyQ_1695115065; 
-Received: from 30.221.108.237(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VsR.LyQ_1695115065) by smtp.aliyun-inc.com;
- Tue, 19 Sep 2023 17:17:46 +0800
-Message-ID: <65e9cd16-da47-05b4-d056-f8f17f109e6f@linux.alibaba.com>
-Date: Tue, 19 Sep 2023 17:16:55 +0800
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1qiX1T-0008C8-A9; Tue, 19 Sep 2023 05:28:00 -0400
+Received: from mail-ua1-x92f.google.com ([2607:f8b0:4864:20::92f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1qiX1Q-0002Ee-7c; Tue, 19 Sep 2023 05:27:59 -0400
+Received: by mail-ua1-x92f.google.com with SMTP id
+ a1e0cc1a2514c-7a8b522ae46so1226040241.0; 
+ Tue, 19 Sep 2023 02:27:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1695115674; x=1695720474; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=br1J3mPTdbG34BBHAfaxhhTXM5M8+Wwfb2Sv6AF0UkQ=;
+ b=cHbFzBPYiNOxptYW99T0kObCIZ11jOOdpYge5f8P6vppsglT3vJnoMNKIlBDXsONf+
+ bEtZ6qF/pYVKcGw88Zdj48LxvF0BMM1IQiIY0mA9Yomj/FDhd6E7qXHkItzaJ9Ode+ak
+ sEXE8JLYIE7tTLcAytCoFbOzUGuapQh+ZQ4OupuXRpenvVjj1lbXYXzl0pMsoS+JyjLv
+ fTx3HDXOjHsCgDU2g4Rr0Rc81lgLKJtsy1xX0RTV83uytbE6lnuxsG2dGaZKyMvLdas6
+ YPpSMCbV1WdFQ66kHPkGENXBsULZaxAWzWqlwgrtZxRlRNucPDYFb5wwT58oLFFNMLLx
+ 3Ahg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695115674; x=1695720474;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=br1J3mPTdbG34BBHAfaxhhTXM5M8+Wwfb2Sv6AF0UkQ=;
+ b=Q0lZpPPqH0S6Akv3JiH1i0yrE6Xp2ybs1wIg+PocbCvfqVKf4UJuNfvdJ8jl6l7cZp
+ zLbs1+cI9C/8H6SxCOfoqPpwdk6NVz6B2F9OlpVn013+Y+9xq3XRPPS7fGhlt4cbtqK+
+ boXq8oOBR1S7Vytjr42EGA4FfDRhHvzf+f+5HOkTN+cwjMZTL7lck9I0iyr4M22ZowcY
+ I40cuD1W/Q7jpAIFPs7ywMUAqyqhzOA+PWIWlolCdUmoyqH+TL0E4/1H1cPHbb+a533u
+ iSicbPM16cO2fE10USN7U8/9ufh2cIGoKc1Dc0P7CLDutbYsCtQelArTd7J0qasbgQbC
+ A4/Q==
+X-Gm-Message-State: AOJu0YxDEKnmFdtqMKUQr37gDBZCIv+Y46zsnfuKIqnFLjVEJ+wizNQL
+ MRnIccOcmHNVqJmb6niW5wP8+gDaTAHahzI9j5c=
+X-Google-Smtp-Source: AGHT+IFhK1Lgg3RCaMCndKgFEmqx+zcyXXyUC6ngSX7O4lA0OVT7cn/cPyUmMHTdPxoTk+3OBtktcv/DCsJC/hQaL44=
+X-Received: by 2002:a1f:4a41:0:b0:493:7c76:bbac with SMTP id
+ x62-20020a1f4a41000000b004937c76bbacmr9660584vka.2.1695115674571; Tue, 19 Sep
+ 2023 02:27:54 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [PATCH v2 05/19] target/riscv/cpu.c: add .instance_post_init()
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, palmer@rivosinc.com, ajones@ventanamicro.com,
- philmd@linaro.org
-References: <20230906091647.1667171-1-dbarboza@ventanamicro.com>
- <20230906091647.1667171-6-dbarboza@ventanamicro.com>
-Content-Language: en-US
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20230906091647.1667171-6-dbarboza@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=115.124.30.130;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-130.freemail.mail.aliyun.com
-X-Spam_score_int: -113
-X-Spam_score: -11.4
-X-Spam_bar: -----------
-X-Spam_report: (-11.4 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- NICE_REPLY_A=-1.473, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+References: <CAEV2DRqFS+UvqvgrW=6R=ahj+akKcmvH3MtAarJ70RphARMNdQ@mail.gmail.com>
+ <CAKmqyKN_z7Q=mmsp41ycFbgW+N4PRmv4UB4sUrs=i6ziuHywmg@mail.gmail.com>
+ <D9FFB2CE-0F2D-4CFA-B4F8-CCBE33D44339@ventanamicro.com>
+In-Reply-To: <D9FFB2CE-0F2D-4CFA-B4F8-CCBE33D44339@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 19 Sep 2023 19:27:27 +1000
+Message-ID: <CAKmqyKP5cHzYXO5kBTK9qQYOjdWxRqZeRhVrxRWJBLFDFzgoxA@mail.gmail.com>
+Subject: Re: [PATCH v3] target/riscv: update checks on writing pmpcfg for
+ Smepmp
+To: Himanshu Chauhan <hchauhan@ventanamicro.com>
+Cc: Chang Alvin <vivahavey@gmail.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, 
+ alistair.francis@wdc.com, Andrew Jones <ajones@ventanamicro.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92f;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92f.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -67,125 +92,127 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-On 2023/9/6 17:16, Daniel Henrique Barboza wrote:
-> All generic CPUs call riscv_cpu_add_user_properties(). The 'max' CPU
-> calls riscv_init_max_cpu_extensions(). Both can be moved to a common
-> instance_post_init() callback, implemented in riscv_cpu_post_init(),
-> called by all CPUs. The call order then becomes:
+On Tue, Sep 19, 2023 at 3:43=E2=80=AFPM Himanshu Chauhan
+<hchauhan@ventanamicro.com> wrote:
 >
-> riscv_cpu_init() -> cpu_init() of each CPU -> .instance_post_init()
 >
-> In the near future riscv_cpu_post_init() will call the init() function
-> of the current accelerator, providing a hook for KVM and TCG accel
-> classes to change the init() process of the CPU.
 >
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->   target/riscv/cpu.c | 42 ++++++++++++++++++++++++++++++++----------
->   1 file changed, 32 insertions(+), 10 deletions(-)
+> > On 19-Sep-2023, at 10:51 AM, Alistair Francis <alistair23@gmail.com> wr=
+ote:
+> >
+> > On Tue, Sep 19, 2023 at 3:08=E2=80=AFPM Chang Alvin <vivahavey@gmail.co=
+m> wrote:
+> >>
+> >>> -----Original Message-----
+> >>
+> >>> From: Alistair Francis <alistair23@gmail.com>
+> >>
+> >>> Sent: Tuesday, September 19, 2023 12:42 PM
+> >>
+> >>> To: Alvin Che-Chia Chang(=E5=BC=B5=E5=93=B2=E5=98=89) <alvinga@andest=
+ech.com>
+> >>
+> >>> Cc: qemu-riscv@nongnu.org; qemu-devel@nongnu.org;
+> >>
+> >>> alistair.francis@wdc.com; ajones@ventanamicro.com
+> >>
+> >>> Subject: Re: [PATCH v3] target/riscv: update checks on writing pmpcfg=
+ for
+> >>
+> >>> Smepmp to version 1.0
+> >>
+> >>>
+> >>
+> >>> On Fri, Sep 15, 2023 at 6:32=E2=80=AFPM Alvin Chang <alvinga@andestec=
+h.com> wrote:
+> >>
+> >>>>
+> >>
+> >>>> Current checks on writing pmpcfg for Smepmp follows Smepmp version
+> >>
+> >>>> 0.9.1. However, Smepmp specification has already been ratified, and
+> >>
+> >>>> there are some differences between version 0.9.1 and 1.0. In this
+> >>
+> >>>> commit we update the checks of writing pmpcfg to follow Smepmp versi=
+on
+> >>
+> >>>> 1.0.
+> >>
+> >>>>
+> >>
+> >>>> When mseccfg.MML is set, the constraints to modify PMP rules are:
+> >>
+> >>>> 1. Locked rules cannot be removed or modified until a PMP reset, unl=
+ess
+> >>
+> >>>>   mseccfg.RLB is set.
+> >>
+> >>>> 2. From Smepmp specification version 1.0, chapter 2 section 4b:
+> >>
+> >>>>   Adding a rule with executable privileges that either is M-mode-onl=
+y
+> >>
+> >>>>   or a locked Shared-Region is not possible and such pmpcfg writes a=
+re
+> >>
+> >>>>   ignored, leaving pmpcfg unchanged.
+> >>
+> >>>>
+> >>
+> >>>> The commit transfers the value of pmpcfg into the index of the Smepm=
+p
+> >>
+> >>>> truth table, and checks the rules by aforementioned specification
+> >>
+> >>>> changes.
+> >>
+> >>>>
+> >>
+> >>>> Signed-off-by: Alvin Chang <alvinga@andestech.com>
+> >>
+> >>>> ---
+> >>
+> >>>> Changes from v2: Adopt switch case ranges and numerical order.
+> >>
+> >>>>
+> >>
+> >>>> Changes from v1: Convert ePMP over to Smepmp.
+> >>
+> >>>
+> >>
+> >>> Did this part get lost?
+> >>
+> >>>
+> >>
+> >>> Alistair
+> >>
+> >>>
+> >>
+> >>
+> >> Sorry, do you mean that the term "ePMP" should be changed to "Smepmp" =
+in source code?
+> >
+> > We still call it epmp to users and it's still marked as experimental.
+> >
+> > See this line in the QEMU source:
+> >
+> > MULTI_EXT_CFG_BOOL("x-epmp", epmp, false),
+> >
+> > Alistair
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 7569955c7e..4c6d595067 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -427,8 +427,6 @@ static void riscv_max_cpu_init(Object *obj)
->       mlx = MXL_RV32;
->   #endif
->       set_misa(env, mlx, 0);
-> -    riscv_cpu_add_user_properties(obj);
-> -    riscv_init_max_cpu_extensions(obj);
->       env->priv_ver = PRIV_VERSION_LATEST;
->   #ifndef CONFIG_USER_ONLY
->       set_satp_mode_max_supported(RISCV_CPU(obj), mlx == MXL_RV32 ?
-> @@ -442,7 +440,6 @@ static void rv64_base_cpu_init(Object *obj)
->       CPURISCVState *env = &RISCV_CPU(obj)->env;
->       /* We set this in the realise function */
->       set_misa(env, MXL_RV64, 0);
-> -    riscv_cpu_add_user_properties(obj);
->       /* Set latest version of privileged specification */
->       env->priv_ver = PRIV_VERSION_LATEST;
->   #ifndef CONFIG_USER_ONLY
-> @@ -566,7 +563,6 @@ static void rv128_base_cpu_init(Object *obj)
->       CPURISCVState *env = &RISCV_CPU(obj)->env;
->       /* We set this in the realise function */
->       set_misa(env, MXL_RV128, 0);
-> -    riscv_cpu_add_user_properties(obj);
->       /* Set latest version of privileged specification */
->       env->priv_ver = PRIV_VERSION_LATEST;
->   #ifndef CONFIG_USER_ONLY
-> @@ -579,7 +575,6 @@ static void rv32_base_cpu_init(Object *obj)
->       CPURISCVState *env = &RISCV_CPU(obj)->env;
->       /* We set this in the realise function */
->       set_misa(env, MXL_RV32, 0);
-> -    riscv_cpu_add_user_properties(obj);
->       /* Set latest version of privileged specification */
->       env->priv_ver = PRIV_VERSION_LATEST;
->   #ifndef CONFIG_USER_ONLY
-I think we should also remove riscv_cpu_add_user_properties from host 
-cpu init.
-> @@ -1215,6 +1210,37 @@ static void riscv_cpu_set_irq(void *opaque, int irq, int level)
->   }
->   #endif /* CONFIG_USER_ONLY */
->   
-> +static bool riscv_cpu_is_dynamic(Object *cpu_obj)
-> +{
-> +    return object_dynamic_cast(cpu_obj, TYPE_RISCV_DYNAMIC_CPU) != NULL;
-> +}
-> +
-> +static bool riscv_cpu_has_max_extensions(Object *cpu_obj)
-> +{
-> +    return object_dynamic_cast(cpu_obj, TYPE_RISCV_CPU_MAX) != NULL;
-> +}
-> +
-> +static bool riscv_cpu_has_user_properties(Object *cpu_obj)
-> +{
-> +    if (kvm_enabled() &&
-> +        object_dynamic_cast(cpu_obj, TYPE_RISCV_CPU_HOST) != NULL) {
-> +        return true;
-> +    }
-> +
-> +    return riscv_cpu_is_dynamic(cpu_obj);
-> +}
-> +
-> +static void riscv_cpu_post_init(Object *obj)
-> +{
-> +    if (riscv_cpu_has_user_properties(obj)) {
-> +        riscv_cpu_add_user_properties(obj);
+> I had sent a patch to rename epmp to Smepmp
+> https://www.mail-archive.com/qemu-devel@nongnu.org/msg967676.html
 
-Otherwise, we will enter here for host cpu.
+Thanks! That patch has some comments that need a v2. Do you mind sending a =
+v2?
 
-Thanks,
-Zhiwei
+Alistair
 
-> +    }
-> +
-> +    if (riscv_cpu_has_max_extensions(obj)) {
-> +        riscv_init_max_cpu_extensions(obj);
-> +    }
-> +}
-> +
->   static void riscv_cpu_init(Object *obj)
->   {
->       RISCVCPU *cpu = RISCV_CPU(obj);
-> @@ -1770,11 +1796,6 @@ static const struct SysemuCPUOps riscv_sysemu_ops = {
->   };
->   #endif
->   
-> -static bool riscv_cpu_is_dynamic(Object *cpu_obj)
-> -{
-> -    return object_dynamic_cast(cpu_obj, TYPE_RISCV_DYNAMIC_CPU) != NULL;
-> -}
-> -
->   static void cpu_set_mvendorid(Object *obj, Visitor *v, const char *name,
->                                 void *opaque, Error **errp)
->   {
-> @@ -2011,6 +2032,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
->           .instance_size = sizeof(RISCVCPU),
->           .instance_align = __alignof__(RISCVCPU),
->           .instance_init = riscv_cpu_init,
-> +        .instance_post_init = riscv_cpu_post_init,
->           .abstract = true,
->           .class_size = sizeof(RISCVCPUClass),
->           .class_init = riscv_cpu_class_init,
+>
+>
+> Regards
+> Himanshu
+>
+>
 
