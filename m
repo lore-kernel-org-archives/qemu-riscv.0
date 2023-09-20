@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93267C2FC09
-	for <qemu-riscv@archiver.kernel.org>; Wed, 20 Sep 2023 21:38:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D887DC05024
+	for <qemu-riscv@archiver.kernel.org>; Wed, 20 Sep 2023 21:39:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qj4ta-00054J-Vf; Wed, 20 Sep 2023 17:38:06 -0400
+	id 1qj4tU-0004zb-8w; Wed, 20 Sep 2023 17:38:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qj4tZ-00053h-1b
- for qemu-riscv@nongnu.org; Wed, 20 Sep 2023 17:38:06 -0400
-Received: from mail-ot1-x333.google.com ([2607:f8b0:4864:20::333])
+ id 1qj4tT-0004yR-8I
+ for qemu-riscv@nongnu.org; Wed, 20 Sep 2023 17:37:59 -0400
+Received: from mail-ot1-x32c.google.com ([2607:f8b0:4864:20::32c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qj4tX-0006WM-97
- for qemu-riscv@nongnu.org; Wed, 20 Sep 2023 17:38:04 -0400
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-6b9e478e122so209380a34.1
- for <qemu-riscv@nongnu.org>; Wed, 20 Sep 2023 14:38:02 -0700 (PDT)
+ id 1qj4tR-0006VF-FR
+ for qemu-riscv@nongnu.org; Wed, 20 Sep 2023 17:37:59 -0400
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-6c0f2addaefso201201a34.2
+ for <qemu-riscv@nongnu.org>; Wed, 20 Sep 2023 14:37:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1695245882; x=1695850682; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1695245876; x=1695850676; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=V0XSgeSJnnKLgredxyHN7Vr6x9UEJtXe7wlJUBcuLMY=;
- b=FmViiTuiCebDl/Tma63NHbiSMUzU3W16OhUJJ0usxTl9GyY2nQ9DY0FxGP1w0FT4jz
- RSaB8Rre49P+Xbxc6J5fgGmnPWoJIYgQkPJnKJ1qVtM/tu6I/2FFEna89iewQ0UHAO09
- ZtnLZ2X41Zwt+VAV0QlJMWVrmD/ibgItNYLEuKu6T68zgEIa5ck9cGRaAdJogmGExwS1
- YPYIT4qFVxXZxgJ4RrDSLxqSkcaud4v8ZVQvY7pLKs6wDjwop5kbDB9RtjDBZfergTmU
- g5hBxoKso+jLgJUHpxQRu8GwW+RgzkV8Dhl6k8nf9yFGXSL1QzBj7EXomCfah+w/li83
- PEaA==
+ bh=cv6lw/UDU2mmgm0nArWAGoChrZBEcccRRUUgz2CCcZg=;
+ b=lnhfZgVKUqAQZqDFjs9vPNRfHGPQY75g5IF2dGATAvVt15adCVpvbCjrF9diPPWffF
+ okGCzTFBgaTLLqge5fn9bqkd9reOvejK1iTorn+Z1PzmDJaSrdv2n6F2HhfAHCPlOGod
+ UPrKtkpCxscgH5N/rUX7EeiYZJwDtvlxpB6SkqlGTa465Pfb6sddFzt8Zx04girOzBw0
+ XB4ysJ6+PtZLdG4k7uUx9lAZnaciD2mKY/iTXEvovqmxjMYwEXMGtjq7OxasBSR/x0C5
+ 0N1MvvVzMnJiML5wwNJ9qOQqMWFps3U3Y6h5KWiDlEq3Mk7wdAfFTEiWQ67KpVrpasP1
+ mCXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695245882; x=1695850682;
+ d=1e100.net; s=20230601; t=1695245876; x=1695850676;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=V0XSgeSJnnKLgredxyHN7Vr6x9UEJtXe7wlJUBcuLMY=;
- b=mYpulQusRhQUw5Im9mEvLl+3HNVBD6K92INye596nT/+xcrQgtIevaXvL3C3qdTJBt
- ttvt23sjylWVeXOOC7S0OTTVrZfzYOU33LMXBL7SrArY+e2cuGzgNuSY5X1SfBU34SsN
- foD9cWixLrhId1Zp1bc92Qap7pJn/tvZk4EGAp/ODZDk3tC8JYDBEE9NFLan3OWqsKFI
- 0wKS42LwBn742E61tYFnJ/yO2NCATbPPO72s8gjSd++OsVS8piPfKgF3Fn6OlBCRpWV1
- 5V1uSgKYXqaLWcNs8niedPmSDb2eEvaBJD9Z7H/uz++2hhaNb0a3xnyx8Q5WDh0/E51z
- TM1w==
-X-Gm-Message-State: AOJu0YwJSrQGBnWexulrvvDec8KN7MiadVWZiwizZiGpl0fcglcv2QLF
- fVReMqSdZzRLpO65x7bgc6RNNw==
-X-Google-Smtp-Source: AGHT+IEzzchsRo2mkFhzasTHKIvUveQEsbVx4lcK/6d8ZKkKOotGhrfi2itMXitBKEw2lSt94+zkFA==
-X-Received: by 2002:a05:6830:18ee:b0:6bf:f75:1ad6 with SMTP id
- d14-20020a05683018ee00b006bf0f751ad6mr4189872otf.26.1695245882284; 
- Wed, 20 Sep 2023 14:38:02 -0700 (PDT)
+ bh=cv6lw/UDU2mmgm0nArWAGoChrZBEcccRRUUgz2CCcZg=;
+ b=G5NS2x4ahf4acbVJ/jIy7zazkHp6iTfW5Wva8JyJw5XMhcc4f4mrUHxoDC/G8q52UT
+ EdLhyuUvLNigVjJb+BwxMIzIlkVT5/2lHffy1cTIdxFj+2Qmr2QnN2y0MAY5Ww3h7zfb
+ tDmAE1wIbrLJn+xL/PBxt5l7Q4A05T83CFIyXgzCvlzFJvux1BjEb4WX0TYKgrr4Rwj/
+ 2/2FB8zmlcrjAUsIRzcV03SzJN8mSkgh//c4T+QsVo5p2yjFILiOUg8nWvDwPDlkQWL+
+ VLonqE3AOaMOHhSDU6fRvs8EfsZTIwQ+jbQAsAxmu7oua+BkKlLNF7OSyYPbSSgUPKd/
+ qzwg==
+X-Gm-Message-State: AOJu0YyS73fMedfMratt7CZTRvHdFvbo4wgrhlBx3DTxCM0iW1gXmIEL
+ yxQ/YluQaNI3Mzxo6vKd9Sx/qA==
+X-Google-Smtp-Source: AGHT+IGH1U2Cl3nF73fVy93IXIruHU5PN1D7cKqZPa9DPdoMSGfrKsFskZ5J4NzYNkjElOecH2P/xw==
+X-Received: by 2002:a05:6830:128d:b0:6b9:c49f:1af7 with SMTP id
+ z13-20020a056830128d00b006b9c49f1af7mr3930933otp.20.1695245876254; 
+ Wed, 20 Sep 2023 14:37:56 -0700 (PDT)
 Received: from grind.. ([177.94.42.59]) by smtp.gmail.com with ESMTPSA id
- e1-20020a9d7301000000b006b83a36c08bsm64415otk.53.2023.09.20.14.37.59
+ e1-20020a9d7301000000b006b83a36c08bsm64415otk.53.2023.09.20.14.37.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Sep 2023 14:38:01 -0700 (PDT)
+ Wed, 20 Sep 2023 14:37:56 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 4/8] qapi,risc-v: add query-cpu-model-expansion
-Date: Wed, 20 Sep 2023 18:37:39 -0300
-Message-ID: <20230920213743.716265-5-dbarboza@ventanamicro.com>
+Subject: [PATCH 2/8] target/riscv/tcg-cpu.c: add extension properties for all
+ cpus
+Date: Wed, 20 Sep 2023 18:37:37 -0300
+Message-ID: <20230920213743.716265-3-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230920213743.716265-1-dbarboza@ventanamicro.com>
 References: <20230920213743.716265-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::333;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x333.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::32c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x32c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -94,175 +95,184 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This API is used to inspect the characteristics of a given CPU model. It
-also allows users to validate a CPU model with a certain configuration,
-e.g. if "-cpu X,a=3Dtrue,b=3Dfalse" is a valid setup for a given QEMU
-binary. We'll start implementing the first part. The second requires
-more changes in RISC-V CPU boot flow.
+At this moment we do not expose extension properties for vendor CPUs
+because that would allow users to change them via command line. But that
+comes at a cost: if we were to add an API that shows all CPU properties,
+e.g. qmp-query-cpu-model-expansion, we won't be able to show the extension
+state of vendor CPUs.
 
-The implementation is inspired by the existing ARM
-query-cpu-model-expansion impl in target/arm/arm-qmp-cmds.c. We'll
-create a RISCVCPU object with the required model, fetch its existing
-properties, add a couple of relevant boolean options (pmp and mmu) and
-display it to users.
+We have the required machinery to create extension properties for vendor
+CPUs while not allowing users to enable extensions. Disabling existing
+extensions is allowed since it can be useful for debugging.
 
-Here's an usage example:
+Change the set() callback cpu_set_multi_ext_cfg() to allow enabling
+extensions only for generic CPUs. In cpu_add_multi_ext_prop() let's not
+set the default values for the properties if we're not dealing with
+generic CPUs, otherwise the values set in cpu_init() of vendor CPUs will
+be overwritten. And finally, in tcg_cpu_instance_init(), add cpu user
+properties for all CPUs.
 
-./build/qemu-system-riscv64 -S -M virt -display none \
-  -qmp  tcp:localhost:1234,server,wait=3Doff
+For the veyron-v1 CPU, we're now able to disable existing extensions
+like smstateen:
 
-./scripts/qmp/qmp-shell localhost:1234
-Welcome to the QMP low-level shell!
-Connected to QEMU 8.1.50
+$ ./build/qemu-system-riscv64 --nographic -M virt \
+    -cpu veyron-v1,smstateen=false
 
-(QEMU)  query-cpu-model-expansion type=3Dfull model=3D{"name":"rv64"}
-{"return": {"model": {"name": "rv64", "props": {"zicond": false, "x-zvfh": =
-false, "mmu": true, "x-zvfbfwma": false, "x-zvfbfmin": false, "xtheadbs": f=
-alse, "xtheadbb": false, "xtheadba": false, "xtheadmemidx": false, "smstate=
-en": false, "zfinx": false, "Zve64f": false, "Zve32f": false, "x-zvfhmin": =
-false, "xventanacondops": false, "xtheadcondmov": false, "svpbmt": false, "=
-zbs": true, "zbc": true, "zbb": true, "zba": true, "zicboz": true, "xtheadm=
-ac": false, "Zfh": false, "Zfa": true, "zbkx": false, "zbkc": false, "zbkb"=
-: false, "Zve64d": false, "x-zfbfmin": false, "zk": false, "x-epmp": false,=
- "xtheadmempair": false, "zkt": false, "zks": false, "zkr": false, "zkn": f=
-alse, "Zfhmin": false, "zksh": false, "zknh": false, "zkne": false, "zknd":=
- false, "zhinx": false, "Zicsr": true, "sscofpmf": false, "Zihintntl": true=
-, "sstc": true, "xtheadcmo": false, "x-zvbb": false, "zksed": false, "x-zvk=
-ned": false, "xtheadsync": false, "x-zvkg": false, "zhinxmin": false, "svad=
-u": true, "xtheadfmv": false, "x-zvksed": false, "svnapot": false, "pmp": t=
-rue, "x-zvknhb": false, "x-zvknha": false, "xtheadfmemidx": false, "x-zvksh=
-": false, "zdinx": false, "zicbom": true, "Zihintpause": true, "svinval": f=
-alse, "zcf": false, "zce": false, "zcd": false, "zcb": false, "zca": false,=
- "x-ssaia": false, "x-smaia": false, "zmmul": false, "x-zvbc": false, "Zife=
-ncei": true, "zcmt": false, "zcmp": false, "Zawrs": true}}}}
+But setting extensions that the CPU didn't set during cpu_init(), like
+V, is not allowed:
+
+$ ./build/qemu-system-riscv64 --nographic -M virt \
+    -cpu veyron-v1,v=true
+qemu-system-riscv64: can't apply global veyron-v1-riscv-cpu.v=true:
+  'veyron-v1' CPU does not allow enabling extensions
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- qapi/machine-target.json      |  6 ++-
- target/riscv/riscv-qmp-cmds.c | 75 +++++++++++++++++++++++++++++++++++
- 2 files changed, 79 insertions(+), 2 deletions(-)
+ target/riscv/tcg/tcg-cpu.c | 64 +++++++++++++++++++++++++++++---------
+ 1 file changed, 50 insertions(+), 14 deletions(-)
 
-diff --git a/qapi/machine-target.json b/qapi/machine-target.json
-index f0a6b72414..e5630e73aa 100644
---- a/qapi/machine-target.json
-+++ b/qapi/machine-target.json
-@@ -228,7 +228,8 @@
-   'data': { 'model': 'CpuModelInfo' },
-   'if': { 'any': [ 'TARGET_S390X',
-                    'TARGET_I386',
--                   'TARGET_ARM' ] } }
-+                   'TARGET_ARM',
-+                   'TARGET_RISCV' ] } }
-=20
- ##
- # @query-cpu-model-expansion:
-@@ -273,7 +274,8 @@
-   'returns': 'CpuModelExpansionInfo',
-   'if': { 'any': [ 'TARGET_S390X',
-                    'TARGET_I386',
--                   'TARGET_ARM' ] } }
-+                   'TARGET_ARM',
-+                   'TARGET_RISCV' ] } }
-=20
- ##
- # @CpuDefinitionInfo:
-diff --git a/target/riscv/riscv-qmp-cmds.c b/target/riscv/riscv-qmp-cmds.c
-index 5ecff1afb3..2170562e3a 100644
---- a/target/riscv/riscv-qmp-cmds.c
-+++ b/target/riscv/riscv-qmp-cmds.c
-@@ -24,8 +24,12 @@
-=20
- #include "qemu/osdep.h"
-=20
-+#include "qapi/error.h"
- #include "qapi/qapi-commands-machine-target.h"
-+#include "qapi/qmp/qdict.h"
-+#include "qom/qom-qobject.h"
- #include "cpu-qom.h"
-+#include "cpu.h"
-=20
- static void riscv_cpu_add_definition(gpointer data, gpointer user_data)
- {
-@@ -55,3 +59,74 @@ CpuDefinitionInfoList *qmp_query_cpu_definitions(Error *=
-*errp)
-=20
-     return cpu_list;
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index f31aa9bcc4..a90ee63b06 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -549,6 +549,11 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+     riscv_cpu_disable_priv_spec_isa_exts(cpu);
  }
-+
-+static void riscv_obj_add_qdict_prop(Object *obj, QDict *qdict_out,
-+                                     const char *name)
+ 
++static bool riscv_cpu_is_generic(Object *cpu_obj)
 +{
-+    ObjectProperty *prop =3D object_property_find(obj, name);
-+
-+    if (prop) {
-+        QObject *value;
-+
-+        assert(prop->get);
-+        value =3D object_property_get_qobject(obj, name, &error_abort);
-+
-+        qdict_put_obj(qdict_out, name, value);
-+    }
++    return object_dynamic_cast(cpu_obj, TYPE_RISCV_DYNAMIC_CPU) != NULL;
 +}
 +
-+static void riscv_obj_add_multiext_props(Object *obj, QDict *qdict_out,
-+                                         const RISCVCPUMultiExtConfig *arr)
-+{
-+    for (int i =3D 0; arr[i].name !=3D NULL; i++) {
-+        riscv_obj_add_qdict_prop(obj, qdict_out, arr[i].name);
-+    }
-+}
+ /*
+  * We'll get here via the following path:
+  *
+@@ -632,13 +637,27 @@ static void cpu_set_misa_ext_cfg(Object *obj, Visitor *v, const char *name,
+     target_ulong misa_bit = misa_ext_cfg->misa_bit;
+     RISCVCPU *cpu = RISCV_CPU(obj);
+     CPURISCVState *env = &cpu->env;
+-    bool value;
++    bool generic_cpu = riscv_cpu_is_generic(obj);
++    bool prev_val, value;
+ 
+     if (!visit_type_bool(v, name, &value, errp)) {
+         return;
+     }
+ 
++    prev_val = env->misa_ext & misa_bit;
 +
-+CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType=
- type,
-+                                                     CpuModelInfo *model,
-+                                                     Error **errp)
-+{
-+    CpuModelExpansionInfo *expansion_info;
-+    QDict *qdict_out;
-+    ObjectClass *oc;
-+    Object *obj;
-+
-+    if (type !=3D CPU_MODEL_EXPANSION_TYPE_FULL) {
-+        error_setg(errp, "The requested expansion type is not supported");
-+        return NULL;
++    if (value == prev_val) {
++        return;
 +    }
 +
-+    oc =3D cpu_class_by_name(TYPE_RISCV_CPU, model->name);
-+    if (!oc) {
-+        error_setg(errp, "The CPU type '%s' is not a known RISC-V CPU type=
-",
-+                   model->name);
-+        return NULL;
+     if (value) {
++        if (!generic_cpu) {
++            g_autofree char *cpuname = riscv_cpu_get_name(cpu);
++            error_setg(errp, "'%s' CPU does not allow enabling extensions",
++                       cpuname);
++            return;
++        }
++
+         env->misa_ext |= misa_bit;
+         env->misa_ext_mask |= misa_bit;
+     } else {
+@@ -688,6 +707,7 @@ static const RISCVCPUMisaExtConfig misa_ext_cfgs[] = {
+  */
+ static void riscv_cpu_add_misa_properties(Object *cpu_obj)
+ {
++    bool use_def_vals = riscv_cpu_is_generic(cpu_obj);
+     int i;
+ 
+     for (i = 0; i < ARRAY_SIZE(misa_ext_cfgs); i++) {
+@@ -706,7 +726,9 @@ static void riscv_cpu_add_misa_properties(Object *cpu_obj)
+                             cpu_set_misa_ext_cfg,
+                             NULL, (void *)misa_cfg);
+         object_property_set_description(cpu_obj, name, desc);
+-        object_property_set_bool(cpu_obj, name, misa_cfg->enabled, NULL);
++        if (use_def_vals) {
++            object_property_set_bool(cpu_obj, name, misa_cfg->enabled, NULL);
++        }
+     }
+ }
+ 
+@@ -714,17 +736,32 @@ static void cpu_set_multi_ext_cfg(Object *obj, Visitor *v, const char *name,
+                                   void *opaque, Error **errp)
+ {
+     const RISCVCPUMultiExtConfig *multi_ext_cfg = opaque;
+-    bool value;
++    RISCVCPU *cpu = RISCV_CPU(obj);
++    bool generic_cpu = riscv_cpu_is_generic(obj);
++    bool prev_val, value;
+ 
+     if (!visit_type_bool(v, name, &value, errp)) {
+         return;
+     }
+ 
+-    isa_ext_update_enabled(RISCV_CPU(obj), multi_ext_cfg->offset, value);
+-
+     g_hash_table_insert(multi_ext_user_opts,
+                         GUINT_TO_POINTER(multi_ext_cfg->offset),
+                         (gpointer)value);
++
++    prev_val = isa_ext_is_enabled(cpu, multi_ext_cfg->offset);
++
++    if (value == prev_val) {
++        return;
 +    }
 +
-+    obj =3D object_new(object_class_get_name(oc));
-+
-+    expansion_info =3D g_new0(CpuModelExpansionInfo, 1);
-+    expansion_info->model =3D g_malloc0(sizeof(*expansion_info->model));
-+    expansion_info->model->name =3D g_strdup(model->name);
-+
-+    qdict_out =3D qdict_new();
-+
-+    riscv_obj_add_multiext_props(obj, qdict_out, riscv_cpu_extensions);
-+    riscv_obj_add_multiext_props(obj, qdict_out, riscv_cpu_experimental_ex=
-ts);
-+    riscv_obj_add_multiext_props(obj, qdict_out, riscv_cpu_vendor_exts);
-+
-+    /* Add our CPU boolean options too */
-+    riscv_obj_add_qdict_prop(obj, qdict_out, "mmu");
-+    riscv_obj_add_qdict_prop(obj, qdict_out, "pmp");
-+
-+    if (!qdict_size(qdict_out)) {
-+        qobject_unref(qdict_out);
-+    } else {
-+        expansion_info->model->props =3D QOBJECT(qdict_out);
++    if (value && !generic_cpu) {
++        g_autofree char *cpuname = riscv_cpu_get_name(cpu);
++        error_setg(errp, "'%s' CPU does not allow enabling extensions",
++                   cpuname);
++        return;
 +    }
 +
-+    object_unref(obj);
++    isa_ext_update_enabled(cpu, multi_ext_cfg->offset, value);
+ }
+ 
+ static void cpu_get_multi_ext_cfg(Object *obj, Visitor *v, const char *name,
+@@ -739,11 +776,17 @@ static void cpu_get_multi_ext_cfg(Object *obj, Visitor *v, const char *name,
+ static void cpu_add_multi_ext_prop(Object *cpu_obj,
+                                    const RISCVCPUMultiExtConfig *multi_cfg)
+ {
++    bool generic_cpu = riscv_cpu_is_generic(cpu_obj);
 +
-+    return expansion_info;
-+}
---=20
+     object_property_add(cpu_obj, multi_cfg->name, "bool",
+                         cpu_get_multi_ext_cfg,
+                         cpu_set_multi_ext_cfg,
+                         NULL, (void *)multi_cfg);
+ 
++    if (!generic_cpu) {
++        return;
++    }
++
+     /*
+      * Set def val directly instead of using
+      * object_property_set_bool() to save the set()
+@@ -828,20 +871,13 @@ static bool riscv_cpu_has_max_extensions(Object *cpu_obj)
+     return object_dynamic_cast(cpu_obj, TYPE_RISCV_CPU_MAX) != NULL;
+ }
+ 
+-static bool riscv_cpu_has_user_properties(Object *cpu_obj)
+-{
+-    return object_dynamic_cast(cpu_obj, TYPE_RISCV_DYNAMIC_CPU) != NULL;
+-}
+-
+ static void tcg_cpu_instance_init(CPUState *cs)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     Object *obj = OBJECT(cpu);
+ 
+-    if (riscv_cpu_has_user_properties(obj)) {
+-        multi_ext_user_opts = g_hash_table_new(NULL, g_direct_equal);
+-        riscv_cpu_add_user_properties(obj);
+-    }
++    multi_ext_user_opts = g_hash_table_new(NULL, g_direct_equal);
++    riscv_cpu_add_user_properties(obj);
+ 
+     if (riscv_cpu_has_max_extensions(obj)) {
+         riscv_init_max_cpu_extensions(obj);
+-- 
 2.41.0
 
 
