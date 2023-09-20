@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FE97CE79CD
-	for <qemu-riscv@archiver.kernel.org>; Wed, 20 Sep 2023 11:25:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76FFCCE79CD
+	for <qemu-riscv@archiver.kernel.org>; Wed, 20 Sep 2023 11:25:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qivGR-0005hP-CF; Wed, 20 Sep 2023 07:21:03 -0400
+	id 1qivH1-0006oA-2x; Wed, 20 Sep 2023 07:21:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qivGP-0005gS-RB
- for qemu-riscv@nongnu.org; Wed, 20 Sep 2023 07:21:01 -0400
-Received: from mail-ot1-x32c.google.com ([2607:f8b0:4864:20::32c])
+ id 1qivGu-0006mk-4W
+ for qemu-riscv@nongnu.org; Wed, 20 Sep 2023 07:21:33 -0400
+Received: from mail-oo1-xc35.google.com ([2607:f8b0:4864:20::c35])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qivGO-0002De-7H
- for qemu-riscv@nongnu.org; Wed, 20 Sep 2023 07:21:01 -0400
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-6b9a2416b1cso4383807a34.2
- for <qemu-riscv@nongnu.org>; Wed, 20 Sep 2023 04:20:59 -0700 (PDT)
+ id 1qivGs-0002Jc-GQ
+ for qemu-riscv@nongnu.org; Wed, 20 Sep 2023 07:21:31 -0400
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-573249e73f8so4254163eaf.1
+ for <qemu-riscv@nongnu.org>; Wed, 20 Sep 2023 04:21:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1695208859; x=1695813659; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1695208889; x=1695813689; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4iqSa97kifihOyS34EWLsGufneSccwIDqZP7TtE5e2Q=;
- b=EqR9JlfI9e632rfM6pcv9J7pcEcrq2ObyjKoRgiNunArdBqtJ3GyFxg4RWfyId0uJ0
- pEh3t+pDKtg3C6G24yef6FxviOyIo+kKPbuME/HCtZS/3Kp9XqdP1YKy2wxwGt5AAxdx
- ZIgzh3rs+/CGWZ6q8FWH+x5vrJxMCKRu7b9Ox8xsZ6oGnpGspHyPdLhuIWjeTmjS2Gsc
- eiS5mwAfHl3P/RXOg1Ow/HLPNPsqyZezB6Le9wOiYTRL8DYeoEg7pqHoftkOltf7r8AW
- PgBgsqX98h92vjt+EUyPWzVf7qBZYv4UtMPoKEdisFPWSmobg9tqp5+xFjP+QhHDwC3/
- qbQQ==
+ bh=2sZfZHqt2jnUylehekGfpy+3Is34Ky+f68MpC7nUPlE=;
+ b=nVBYR1suCo40nUHlyvQbmrv5NPxxoUzOUtvIWJWMW+UYdeX7wm0xVsNa7gFGgDXhXJ
+ bAxfk4wu/WwKwK3ixbov+lUb2EYA+eh49dpCk7tiSmY0SF+ypwlgqtPuge5aHQ/bDV/Y
+ hYYcu947ZfGGCeKMd2vTCIKweRhQpPC/i3Ca3gHm97YjOC9q4hYz3TvpXfDLTPGJaVLv
+ 933PhLBswchH0sz5A6hApUEN98Dll3HDsERTa3CSJufIyEcM9nNTMLFcMWU9R/bNklDO
+ 1JpZP1NrQw9zJJDBnNgMWUgfpbzCuPTYRIFaMTVp1QGeMmApdKv2SeoGi1T59tPG8sIj
+ DijA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695208859; x=1695813659;
+ d=1e100.net; s=20230601; t=1695208889; x=1695813689;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4iqSa97kifihOyS34EWLsGufneSccwIDqZP7TtE5e2Q=;
- b=JhW/Evtm7mIQCQje6168HuQhCxbNkgDRBGqG5KqhSfbGvXdD5b69Ss8a4OiAaCLGws
- trrsnvL8oJYOD8lEWjGxta1TS19o+A/QCmABblgZ05oskTlZMZ4tWGYT79NBf8AzSVF+
- Jxcn4MtP60mKgrloyKIwO5cf4LfAVCFaxTs1QqLBGQdKv/oZgWwFkuyp/r5DZIX8AHd8
- wxhfaRJKFh67mn0ZRM5Uyohtrc1LW6sadwKpmqMI1+M0VYobTOpyQ6mnwMzac0FBqJb6
- M1riXUVE0KQ77io6FFPNIrJdWVqiCQCHMIm/nCcLcYprCZHoZISHlGbIBBymTWTCiWc0
- eTWg==
-X-Gm-Message-State: AOJu0YzVtCqu8dG0ioOlR0+saBSfGu8JSpfC5pfa9RSqoAOFPhEnTfPv
- pxdNAySR0Nwmhhz881qJYeXfOA==
-X-Google-Smtp-Source: AGHT+IEcb8XdQEI5zLF+FWFQgsPNcu5TX8hZZ0rDFMQ2Y8cqvqZ5fRTQm/XaVHp/s5YOGm0lDL3qAg==
-X-Received: by 2002:a9d:6f06:0:b0:6b9:1af3:3307 with SMTP id
- n6-20020a9d6f06000000b006b91af33307mr2184051otq.17.1695208859263; 
- Wed, 20 Sep 2023 04:20:59 -0700 (PDT)
+ bh=2sZfZHqt2jnUylehekGfpy+3Is34Ky+f68MpC7nUPlE=;
+ b=cUtl8Dhmrds8Z2iE3TcIoH2GjY/EjMOT+CJ+F2JnN7l6h4K4DZh4A4aBLYkMLrHgia
+ Zrg+Yyt38aJoLvHudOWGK0/UbmJyVoTNWONSggAEtQuqqtiFH0/4ABBMeuNWGHgYiaeH
+ y0elO2jG4njC9S1O144SE2AYoUPHX/nEMum7mD9uOOvF2PmtdLyeelW0Rk+oKkSnr2Ov
+ uaoIilgEfvD01CXXG9VV3+l5Cgzr60xX30YJUuskp8Gu71Lakkkfyy/8CSHw0lDq/FuW
+ ugXa/dVYdkKA8uYGFEC9I4hqIvfOs9RLh+Hha3rrjqGqu4kV8te9MPnyENCL8ajbHmwj
+ yQDQ==
+X-Gm-Message-State: AOJu0Yzz5E/mTBfWjMuTe4YIhggTD1knZNnY4mVPuwx4ZQ+1fVQIttK6
+ 3uGtVRhiLt4bTLU3lMPABxQvbA==
+X-Google-Smtp-Source: AGHT+IFSU3C1ewkYbQO7Jb9I++mfmHjae7FRnEHtkjjXwJw0ZDFVrCXnzupXoraRmqqGmP4BYDqbww==
+X-Received: by 2002:a05:6870:4189:b0:1db:71b9:419c with SMTP id
+ y9-20020a056870418900b001db71b9419cmr2423712oac.58.1695208889332; 
+ Wed, 20 Sep 2023 04:21:29 -0700 (PDT)
 Received: from grind.. ([2804:7f0:bcc0:bdf2:b7ba:a476:c0e3:fb59])
  by smtp.gmail.com with ESMTPSA id
- q4-20020a9d7c84000000b006b45be2fdc2sm5863955otn.65.2023.09.20.04.20.56
+ q4-20020a9d7c84000000b006b45be2fdc2sm5863955otn.65.2023.09.20.04.21.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Sep 2023 04:20:59 -0700 (PDT)
+ Wed, 20 Sep 2023 04:21:29 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  philmd@linaro.org, ajones@ventanamicro.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v3 10/19] target/riscv: remove kvm-stub.c
-Date: Wed, 20 Sep 2023 08:20:11 -0300
-Message-ID: <20230920112020.651006-11-dbarboza@ventanamicro.com>
+Subject: [PATCH v3 19/19] target/riscv/cpu: move priv spec functions to
+ tcg-cpu.c
+Date: Wed, 20 Sep 2023 08:20:20 -0300
+Message-ID: <20230920112020.651006-20-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230920112020.651006-1-dbarboza@ventanamicro.com>
 References: <20230920112020.651006-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x32c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c35;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc35.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,67 +97,142 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This file is not needed for some time now. Both kvm_riscv_reset_vcpu()
-and kvm_riscv_set_irq() have public declarations in kvm_riscv.h and are
-wrapped in 'if kvm_enabled()' blocks that the compiler will rip it out
-in non-KVM builds.
+Priv spec validation is TCG specific. Move it to the TCG accel class.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 ---
- target/riscv/kvm-stub.c  | 30 ------------------------------
- target/riscv/meson.build |  2 +-
- 2 files changed, 1 insertion(+), 31 deletions(-)
- delete mode 100644 target/riscv/kvm-stub.c
+ target/riscv/cpu.c         | 38 --------------------------------------
+ target/riscv/cpu.h         |  2 --
+ target/riscv/tcg/tcg-cpu.c | 38 ++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 38 insertions(+), 40 deletions(-)
 
-diff --git a/target/riscv/kvm-stub.c b/target/riscv/kvm-stub.c
-deleted file mode 100644
-index 4e8fc31a21..0000000000
---- a/target/riscv/kvm-stub.c
-+++ /dev/null
-@@ -1,30 +0,0 @@
--/*
-- * QEMU KVM RISC-V specific function stubs
-- *
-- * Copyright (c) 2020 Huawei Technologies Co., Ltd
-- *
-- * This program is free software; you can redistribute it and/or modify it
-- * under the terms and conditions of the GNU General Public License,
-- * version 2 or later, as published by the Free Software Foundation.
-- *
-- * This program is distributed in the hope it will be useful, but WITHOUT
-- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-- * more details.
-- *
-- * You should have received a copy of the GNU General Public License along with
-- * this program.  If not, see <http://www.gnu.org/licenses/>.
-- */
--#include "qemu/osdep.h"
--#include "cpu.h"
--#include "kvm_riscv.h"
--
--void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
--{
--    abort();
--}
--
--void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level)
--{
--    abort();
--}
-diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-index f0486183fa..3323b78b84 100644
---- a/target/riscv/meson.build
-+++ b/target/riscv/meson.build
-@@ -24,7 +24,7 @@ riscv_ss.add(files(
-   'zce_helper.c',
-   'vcrypto_helper.c'
- ))
--riscv_ss.add(when: 'CONFIG_KVM', if_true: files('kvm.c'), if_false: files('kvm-stub.c'))
-+riscv_ss.add(when: 'CONFIG_KVM', if_true: files('kvm.c'))
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index e97ba3df93..eeeb08a35a 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -172,21 +172,6 @@ void isa_ext_update_enabled(RISCVCPU *cpu, uint32_t ext_offset, bool en)
+     *ext_enabled = en;
+ }
  
- riscv_system_ss = ss.source_set()
- riscv_system_ss.add(files(
+-int cpu_cfg_ext_get_min_version(uint32_t ext_offset)
+-{
+-    const RISCVIsaExtData *edata;
+-
+-    for (edata = isa_edata_arr; edata && edata->name; edata++) {
+-        if (edata->ext_enable_offset != ext_offset) {
+-            continue;
+-        }
+-
+-        return edata->min_version;
+-    }
+-
+-    g_assert_not_reached();
+-}
+-
+ const char * const riscv_int_regnames[] = {
+     "x0/zero", "x1/ra",  "x2/sp",  "x3/gp",  "x4/tp",  "x5/t0",   "x6/t1",
+     "x7/t2",   "x8/s0",  "x9/s1",  "x10/a0", "x11/a1", "x12/a2",  "x13/a3",
+@@ -925,29 +910,6 @@ static void riscv_cpu_disas_set_info(CPUState *s, disassemble_info *info)
+     }
+ }
+ 
+-void riscv_cpu_disable_priv_spec_isa_exts(RISCVCPU *cpu)
+-{
+-    CPURISCVState *env = &cpu->env;
+-    const RISCVIsaExtData *edata;
+-
+-    /* Force disable extensions if priv spec version does not match */
+-    for (edata = isa_edata_arr; edata && edata->name; edata++) {
+-        if (isa_ext_is_enabled(cpu, edata->ext_enable_offset) &&
+-            (env->priv_ver < edata->min_version)) {
+-            isa_ext_update_enabled(cpu, edata->ext_enable_offset, false);
+-#ifndef CONFIG_USER_ONLY
+-            warn_report("disabling %s extension for hart 0x" TARGET_FMT_lx
+-                        " because privilege spec version does not match",
+-                        edata->name, env->mhartid);
+-#else
+-            warn_report("disabling %s extension because "
+-                        "privilege spec version does not match",
+-                        edata->name);
+-#endif
+-        }
+-    }
+-}
+-
+ #ifndef CONFIG_USER_ONLY
+ static void riscv_cpu_satp_mode_finalize(RISCVCPU *cpu, Error **errp)
+ {
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 3dfcd0732f..219fe2e9b5 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -711,9 +711,7 @@ enum riscv_pmu_event_idx {
+ /* used by tcg/tcg-cpu.c*/
+ void isa_ext_update_enabled(RISCVCPU *cpu, uint32_t ext_offset, bool en);
+ bool isa_ext_is_enabled(RISCVCPU *cpu, uint32_t ext_offset);
+-int cpu_cfg_ext_get_min_version(uint32_t ext_offset);
+ void riscv_cpu_set_misa(CPURISCVState *env, RISCVMXL mxl, uint32_t ext);
+-void riscv_cpu_disable_priv_spec_isa_exts(RISCVCPU *cpu);
+ 
+ typedef struct RISCVCPUMultiExtConfig {
+     const char *name;
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index c326ab37a2..8c052d6fcd 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -99,6 +99,21 @@ static const struct TCGCPUOps riscv_tcg_ops = {
+ #endif /* !CONFIG_USER_ONLY */
+ };
+ 
++static int cpu_cfg_ext_get_min_version(uint32_t ext_offset)
++{
++    const RISCVIsaExtData *edata;
++
++    for (edata = isa_edata_arr; edata && edata->name; edata++) {
++        if (edata->ext_enable_offset != ext_offset) {
++            continue;
++        }
++
++        return edata->min_version;
++    }
++
++    g_assert_not_reached();
++}
++
+ static void cpu_cfg_ext_auto_update(RISCVCPU *cpu, uint32_t ext_offset,
+                                     bool value)
+ {
+@@ -226,6 +241,29 @@ static void riscv_cpu_validate_v(CPURISCVState *env, RISCVCPUConfig *cfg,
+     }
+ }
+ 
++static void riscv_cpu_disable_priv_spec_isa_exts(RISCVCPU *cpu)
++{
++    CPURISCVState *env = &cpu->env;
++    const RISCVIsaExtData *edata;
++
++    /* Force disable extensions if priv spec version does not match */
++    for (edata = isa_edata_arr; edata && edata->name; edata++) {
++        if (isa_ext_is_enabled(cpu, edata->ext_enable_offset) &&
++            (env->priv_ver < edata->min_version)) {
++            isa_ext_update_enabled(cpu, edata->ext_enable_offset, false);
++#ifndef CONFIG_USER_ONLY
++            warn_report("disabling %s extension for hart 0x" TARGET_FMT_lx
++                        " because privilege spec version does not match",
++                        edata->name, env->mhartid);
++#else
++            warn_report("disabling %s extension because "
++                        "privilege spec version does not match",
++                        edata->name);
++#endif
++        }
++    }
++}
++
+ /*
+  * Check consistency between chosen extensions while setting
+  * cpu->cfg accordingly.
 -- 
 2.41.0
 
