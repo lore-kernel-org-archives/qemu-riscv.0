@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FE11CD495B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Sep 2023 06:29:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4824E7D0C9
+	for <qemu-riscv@archiver.kernel.org>; Fri, 22 Sep 2023 05:21:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qjDC7-0000tm-Us; Thu, 21 Sep 2023 02:29:48 -0400
+	id 1qjYau-0001up-FC; Fri, 22 Sep 2023 01:20:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rkanwal@rivosinc.com>)
- id 1qjDC5-0000gJ-U4
- for qemu-riscv@nongnu.org; Thu, 21 Sep 2023 02:29:46 -0400
-Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1qjYar-0001u3-22; Fri, 22 Sep 2023 01:20:45 -0400
+Received: from mail-ua1-x934.google.com ([2607:f8b0:4864:20::934])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <rkanwal@rivosinc.com>)
- id 1qjDC1-0001sP-TT
- for qemu-riscv@nongnu.org; Thu, 21 Sep 2023 02:29:44 -0400
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-276d611df9aso351340a91.2
- for <qemu-riscv@nongnu.org>; Wed, 20 Sep 2023 23:29:40 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1qjYap-0002fK-99; Fri, 22 Sep 2023 01:20:44 -0400
+Received: by mail-ua1-x934.google.com with SMTP id
+ a1e0cc1a2514c-7a8b839fc0aso598998241.3; 
+ Thu, 21 Sep 2023 22:20:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1695277780; x=1695882580;
- darn=nongnu.org; 
+ d=gmail.com; s=20230601; t=1695360042; x=1695964842; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uCzF4S2wFI2Ebs9o6FsDASnUBQpdNyOa7MyFhuoofcA=;
- b=Lg5VlmA+mvqR2NvXzMFnUNqjqcZxJaKwON3c+n4KJKDEokE9xmW77ZKgzTZa/CXrZP
- W/02V17KfXwrKcqPo01IRO1x++BrmavfqG52Atk2RdQYWSYzF42fHaWI5R3lIpmkAOnE
- mDzXbw5jqTHWD0HH8/Qp2xiNYY/3YPnAIn+XCiA+Oqe7LwiuDQYDNZo7GX7LOLCqyB9C
- 5r3nThA3+Bfw0GysglUbujJb8IYP7+nmKkO0bGxkQ8nPFNqS0Xr80HIAqCHGeWb2yZzm
- mn0JoupLmaI94+iCAHfTWRLUh06CCbjfMNuR1YcG0G6rQh+ouTBHIfP0zkc/vhzv16mZ
- iMMA==
+ bh=IOYu7IxJQJgwiUkdz8BBq8fNYpzJ3Ic9U/Cwu8R82Xo=;
+ b=WWCpiPPK5ouJ1rorZKOsKEPnFj3/FKnisAamsBGJRBFUuNXANLzBWmccrFU2odwUod
+ i7qmmO2jcJlxGEZAxGH5hbLF35fxAW5m9fLtgcaHrCc/eSgqUybiH23PbhbxGSAEpAQr
+ 3Okn6Cbl3AYhbQRyojT/d/3RqLGNOhbm6+7MTCIyOpJ/kR/ffIX4mgMoUueflAC7uS/s
+ J2fYA3hY989f+cgdUbXyaMxqEYFuGl6w3rHOexktaz7KnMsh3V+j2UqIIIhVSmSr+dID
+ 73INuCNJn6IX0Y5CFMDNUHwOGguji0VCcjWCUni9g6l/Zph4ext6ZFkA3xRxPo1Ehz4Z
+ l5PQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695277780; x=1695882580;
+ d=1e100.net; s=20230601; t=1695360042; x=1695964842;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=uCzF4S2wFI2Ebs9o6FsDASnUBQpdNyOa7MyFhuoofcA=;
- b=Px7DeZcn2m8+jn5wd1D5FdlG/E0kjxLlbGQMPmzTqjVf6nfSBZDk8amsPjdkZPHxgJ
- ag2GP5rx2Dgbl44p3RDTR+3eazVXm7KBsFTHoO3Ibj6xpU6D96FZrdI20j0xkya2e2f2
- thUs6oOk1OaR6RTqVDB+akj6s4Rf16UzBbW4PiDwHfavidiO3SvVHtKIy9ioxenRY+G3
- nEFmpE/cXH4jzleA3eNmY/J9DoO9xgRJjXursP0l5hAI/Jrhb8p1DbRLcG9z9Nj3G8+f
- xLG1DyixzgMQhFbjnVJt9ZBaGqy6IAUhmZfLMpnI1k+peUJJb2ZC4s0LzHEg5ZGAGGsb
- 5oFg==
-X-Gm-Message-State: AOJu0YzUj21WIjluyE/l3x/S8AOcdndRwBjlGTskWXrTsciN/6dclCjC
- v42vxj9VhP7mve4RgAxPcouLnMl2N6RMtyKhgzGkLg==
-X-Google-Smtp-Source: AGHT+IHFgxqpWAa3lqqORLlsEbxmtpDDSZwecxWJhozJsIJI9frthz5O4Ipw9ZK40LcLQ/ZlCRz/Wu9TFmVEyGMK3cY=
-X-Received: by 2002:a17:90b:3111:b0:276:f487:e958 with SMTP id
- gc17-20020a17090b311100b00276f487e958mr271588pjb.37.1695277779879; Wed, 20
- Sep 2023 23:29:39 -0700 (PDT)
+ bh=IOYu7IxJQJgwiUkdz8BBq8fNYpzJ3Ic9U/Cwu8R82Xo=;
+ b=gRcFaZu/3lBjJrBYxxF52M6cmPeSPlgDEFYaX3MRDM7r5ymHK0+jTB2TwEvmMFTO+b
+ efcFYxBabofpukyqEUfvVnxscadI9i7Fugtp5PW5abElVRlcPMAB9I0zF+WfkJZp+fUL
+ 9BjrQEcM6cIa6vQOTxUpVp37AjSznXUMseLWxk7Sc1d71maIfiRaclR+0ciRtNnLnid8
+ Gh8Min4XPiq9mN0pAzHa7XnR3s5rYqVjLjb89LPCdgjYwSvf3NLCh/DXP6s+p4gXZ7RY
+ qlFb1TTSY4sNOlPaG6zHLt87B4cXy00hEUwszL7EBOj4nbLfONkKaw68EvW0fIR27bID
+ +lCA==
+X-Gm-Message-State: AOJu0Yz2drvckmX728UlnthVtzYTo1oWZetPPSv7qSLqefImSPxBbU+a
+ f00IVP93U9j1f20oOdsoztMei1/w49DQ7mqfO2mtbbEZ9jcmvQ==
+X-Google-Smtp-Source: AGHT+IE2NMfYPPk71evfqFvMyiitItxCjOecvVAXWDq9byQdyvDfoFrotJ8u6TJDe/P63mXOKQ4D6T5+B5xi+eyvPTY=
+X-Received: by 2002:ac5:cd50:0:b0:499:7022:1237 with SMTP id
+ n16-20020ac5cd50000000b0049970221237mr3927388vkm.8.1695360041652; Thu, 21 Sep
+ 2023 22:20:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230526162308.22892-1-rkanwal@rivosinc.com>
- <dfeec126-304f-c4a4-77fb-7bf0927dbd31@ventanamicro.com>
-In-Reply-To: <dfeec126-304f-c4a4-77fb-7bf0927dbd31@ventanamicro.com>
-From: Rajnesh Kanwal <rkanwal@rivosinc.com>
-Date: Thu, 21 Sep 2023 07:29:28 +0100
-Message-ID: <CAECbVCtKW9An8md8ZwkZe4_ewgFpXbsgfr++h0L0=vGR-J3-LQ@mail.gmail.com>
-Subject: Re: [PATCH v2 0/6] target/riscv: Add RISC-V Virtual IRQs and IRQ
- filtering support
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn, 
- zhiwei_liu@linux.alibaba.com, atishp@rivosinc.com, apatel@ventanamicro.com
+References: <20230907112640.292104-1-chigot@adacore.com>
+ <20230907112640.292104-5-chigot@adacore.com>
+In-Reply-To: <20230907112640.292104-5-chigot@adacore.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 22 Sep 2023 15:20:14 +1000
+Message-ID: <CAKmqyKMnEofVntirOX+a+r26CNjfMqSzTUDbkfRhwkreu7JyMQ@mail.gmail.com>
+Subject: Re: [PATCH v3 4/5] hw/char: riscv_htif: replace exit calls with
+ proper shutdown
+To: =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
- envelope-from=rkanwal@rivosinc.com; helo=mail-pj1-x1034.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+Received-SPF: pass client-ip=2607:f8b0:4864:20::934;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x934.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -92,102 +89,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hey Daniel,
+On Thu, Sep 7, 2023 at 9:26=E2=80=AFPM Cl=C3=A9ment Chigot <chigot@adacore.=
+com> wrote:
+>
+> This replaces the exit calls by shutdown requests, ensuring a proper
+> cleanup of Qemu. Otherwise, some connections like gdb could be broken
+> before its final packet ("Wxx") is being sent. This part, being done
+> inside qemu_cleanup function, can be reached only when the main loop
+> exits after a shutdown request.
+>
+> Signed-off-by: Cl=C3=A9ment Chigot <chigot@adacore.com>
 
-Sorry I was on holiday. There is no new work on this AFAIK. I will
-rebase and send a new version for this shortly.
+Do you mind rebasing this on:
+https://github.com/alistair23/qemu/tree/riscv-to-apply.next
 
-Thanks
-Rajnesh
+Alistair
 
-On Wed, Sep 6, 2023 at 3:38=E2=80=AFPM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+> ---
+>  hw/char/riscv_htif.c | 5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
 >
-> Hey,
+> diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
+> index 37d3ccc76b..7e9b6fcc98 100644
+> --- a/hw/char/riscv_htif.c
+> +++ b/hw/char/riscv_htif.c
+> @@ -31,6 +31,7 @@
+>  #include "qemu/error-report.h"
+>  #include "exec/address-spaces.h"
+>  #include "sysemu/dma.h"
+> +#include "sysemu/runstate.h"
 >
+>  #define RISCV_DEBUG_HTIF 0
+>  #define HTIF_DEBUG(fmt, ...)                                            =
+       \
+> @@ -205,7 +206,9 @@ static void htif_handle_tohost_write(HTIFState *s, ui=
+nt64_t val_written)
+>                      g_free(sig_data);
+>                  }
 >
-> What's the latest on this work? It seems that all patches are acked:
+> -                exit(exit_code);
+> +                qemu_system_shutdown_request_with_code(
+> +                    SHUTDOWN_CAUSE_GUEST_SHUTDOWN, exit_code);
+> +                return;
+>              } else {
+>                  uint64_t syscall[8];
+>                  cpu_physical_memory_read(payload, syscall, sizeof(syscal=
+l));
+> --
+> 2.25.1
 >
-> https://lore.kernel.org/qemu-riscv/20230526162308.22892-1-rkanwal@rivosin=
-c.com/
->
->
-> It'll probably conflict with current Alistair's riscv-to-apply.next thoug=
-h, so
-> perhaps Rajnesh could gather the acks and send a rebased version.
->
->
-> Thanks,
->
-> Daniel
->
->
-> On 5/26/23 13:23, Rajnesh Kanwal wrote:
-> > This series adds M and HS-mode virtual interrupt and IRQ filtering supp=
-ort.
-> > This allows inserting virtual interrupts from M/HS-mode into S/VS-mode
-> > using mvien/hvien and mvip/hvip csrs. IRQ filtering is a use case of
-> > this change, i-e M-mode can stop delegating an interrupt to S-mode and
-> > instead enable it in MIE and receive those interrupts in M-mode and the=
-n
-> > selectively inject the interrupt using mvien and mvip.
-> >
-> > Also, the spec doesn't mandate the interrupt to be actually supported
-> > in hardware. Which allows M/HS-mode to assert virtual interrupts to
-> > S/VS-mode that have no connection to any real interrupt events.
-> >
-> > This is defined as part of the AIA specification [0], "5.3 Interrupt
-> > filtering and virtual interrupts for supervisor level" and "6.3.2 Virtu=
-al
-> > interrupts for VS level".
-> >
-> > Most of the testing is done by hacking around OpenSBI and linux host.
-> > The changes for those can be found at [1] and [2].
-> >
-> > It's my first touch on RISC-V qemu IRQ subsystem. Any feedback would
-> > be much appreciated.
-> >
-> > The change can also be found on github [3].
-> >
-> > TODO: This change doesn't support delegating virtual interrupts injecte=
-d
-> > by M-mode to VS-mode by the Hypervisor. This is true for bits 13:63 onl=
-y.
-> >
-> > Thanks
-> > Rajnesh
-> >
-> > [0]: https://github.com/riscv/riscv-aia/releases/download/1.0-RC4/riscv=
--interrupts-1.0-RC4.pdf
-> > [1]: https://github.com/rajnesh-kanwal/opensbi/tree/dev/rkanwal/irq_fil=
-ter
-> > [2]: https://github.com/rajnesh-kanwal/linux/commits/dev/rkanwal/aia_ir=
-q_filter
-> > [3]: https://github.com/rajnesh-kanwal/qemu/tree/dev/rkanwal/riscv_irq_=
-filter
-> >
-> > v2:
-> >   * Move RISCV_EXCP_SEMIHOST to switch case and remove special handling=
-.
-> >   * Fix linux-user build.
-> >
-> > Rajnesh Kanwal (6):
-> >    target/riscv: Without H-mode mask all HS mode inturrupts in mie.
-> >    target/riscv: Check for async flag in case of RISCV_EXCP_SEMIHOST.
-> >    target/riscv: Set VS* bits to one in mideleg when H-Ext is enabled
-> >    target/riscv: Split interrupt logic from riscv_cpu_update_mip.
-> >    target/riscv: Add M-mode virtual interrupt and IRQ filtering support=
-.
-> >    target/riscv: Add HS-mode virtual interrupt and IRQ filtering suppor=
-t.
-> >
-> >   target/riscv/cpu.c        |   9 +-
-> >   target/riscv/cpu.h        |  23 ++
-> >   target/riscv/cpu_bits.h   |   6 +
-> >   target/riscv/cpu_helper.c |  99 +++++---
-> >   target/riscv/csr.c        | 477 ++++++++++++++++++++++++++++++++++---=
--
-> >   target/riscv/machine.c    |   6 +
-> >   6 files changed, 546 insertions(+), 74 deletions(-)
-> >
 
