@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F03E1CE7A94
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 14:56:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46376CE7A96
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 14:59:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qkmun-0003Kb-KO; Mon, 25 Sep 2023 10:50:26 -0400
+	id 1qkn2t-0008Fp-Ql; Mon, 25 Sep 2023 10:58:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qkmtt-0001pj-90
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:49:32 -0400
-Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
+ id 1qkn2s-0008EN-DZ
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:58:46 -0400
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qkmtU-0008Jc-Kh
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:49:27 -0400
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-405621baba7so36075955e9.0
- for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 07:49:03 -0700 (PDT)
+ id 1qkn2o-0002Bs-Mr
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:58:46 -0400
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-405524e6768so43187615e9.2
+ for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 07:58:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695653343; x=1696258143; darn=nongnu.org;
+ d=linaro.org; s=google; t=1695653921; x=1696258721; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wLqocinDU8rF88Hv8wZBmX599z01GNwfmOcliOqqhzI=;
- b=e98+oy+OEG7KTIBA25if9PLGqWAkqpU5zE+vTUpiOGl/s3Up7rsT2R2Q9g4vf2FgNi
- 42ITVLN6zHkXNPSM/YxGTOa7itRbri4GAF9A2xUw+WW3FuIWl2Y6KR5C5rx6S3JeWo5h
- 7khncJyLFrWTic6j4hrxuuqIUEHSqXpugqCeGpxSo59PyQ0XGSvnMhtWn7PUsGjfqj+Q
- /oOmdKyuu7Qu1mHAIow6pwxbzR0aWKqHak2+DeRqhGlGn9QfSGg8S1htnKuBs7r0H8jT
- IbCWgEEwkRiwh10oYdXOKV2TJHOltfx1Dc+IV9HZ8/wDqetva9qeWFTEBVBtAg2+/eU1
- lPog==
+ bh=jM0GTpB8x8Pq4p+VnmvbtC3PXJVxvgAV0ON8qJJlT10=;
+ b=qlCqC3xYjyDw/7bRVCE+hiWh5B6TGj1Qq3Ix+iSlBYQTl9vq+bYevMNeK9qQ+9JfIJ
+ zrJCA+Hd8IMbGAIGQpsB85R261ST9XmWeHk6rBHo788lotywzs8W7x/XlsiWpUHqLuMY
+ N1bnQVO8w3WY14BhRAizKVJawiLX1yEk9CW9rhrFt/N6dHmXhvXFd/G55QO7NwBhgVkW
+ ZPy+pMlv73lsx5q5iUxcDQ7p7Gl2UePsefkD4JTT6kK/axZSP8qT4nXV8ulOEIKtJRxm
+ 28oFh+jk/HIISseTisAWiX5CNbC6nvHB3sqfedZlxHLGpoMib4EQ6+0P5MbFrJxrl09k
+ nj6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695653343; x=1696258143;
+ d=1e100.net; s=20230601; t=1695653921; x=1696258721;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wLqocinDU8rF88Hv8wZBmX599z01GNwfmOcliOqqhzI=;
- b=WDP5Ug/95pmuqo92SIq5Xsy1WDKReOrl7YH6ki5Qm2mVMyA4EW6XofLGYCdnz6UtT4
- Y7h33jJhWoUmXdlPriEDsh/ZB1n9AdrFTgQLciQ1/QlV2i0XHYxNjgnA78M8vQtf7Nnm
- Rl/71c4iQbuYzGxiLsmrlw4nLx/Pcp0aHqpFZ9xu6/LTVFQn7jIz88iycR9UZkxk+lvK
- k8kwJbr54pklXcHtcmyNpjTglhEGXaR2bBgyjx3LDTHiBwUijTEUreHezJB6N0UcaCC1
- Q2N4pTrIR+DJFrAH7zste8ZpnfAvHbOdo0g7L1ZOT/7SOQld/auZJlzI/omk003E5U3T
- 5k/w==
-X-Gm-Message-State: AOJu0Yy1iTkYor7AwPgEmuOwWHU3rG8iiSKGJYElIfqFw0L8I9uEDVnQ
- m8FOd6RZYGtoGMo8QpRpgpteOA==
-X-Google-Smtp-Source: AGHT+IEYETA/eZMaSgtnwPM5HKHP/hZKHHoWnK5FiEePTnVNoute+VJrf7vqcFSgEFsnlKC66sW72g==
-X-Received: by 2002:a05:600c:2057:b0:405:3a3b:2a9e with SMTP id
- p23-20020a05600c205700b004053a3b2a9emr6883048wmg.9.1695653342956; 
- Mon, 25 Sep 2023 07:49:02 -0700 (PDT)
+ bh=jM0GTpB8x8Pq4p+VnmvbtC3PXJVxvgAV0ON8qJJlT10=;
+ b=Lz+3zu+w4tvuAHNlpcIpWgkHzlztiAQaBOy5sKn9aV3XkV/WKzOlRKg7eBAD68cq0j
+ dv7yc30qIuqKpJAopAHdKACnmrcQ/ZIRRhBNqXqokRx67jwEd28BHrljtINUwtckq1z1
+ 9QKvHpYgBqsuzo1rpmREyR5n7dbzxTfiBpHwzV+pPB8qI1bDY8g3CQtva8juP6qerTrl
+ 7/ouMwN+s+F7dZltIfmgIUaEfgq5iQgISk+81R6Yvj2MdSlBsVj29Pu+ekAJ1ujOe1o6
+ 9UObZ8ZKRuAK95ViOYb9uDEK+ry33qQdKPnYTtNLot0rRdxv5sCsU7nJMvuHgl5BKG05
+ mKdQ==
+X-Gm-Message-State: AOJu0Yw8g3DnVIQ1yVwkMdmWit9jTwYiQtC+gw+4TIHMYkCytUXNl+3f
+ lKBWvy3bvAEDtvfgagfg+Psi6A==
+X-Google-Smtp-Source: AGHT+IF8BA3ifVNy6i7gY71DWPUdbeluWJ79bFNawmMMYbWpuO1wDrk0vftXMDDmYRbTdAoWSBTIsQ==
+X-Received: by 2002:a05:600c:247:b0:401:b6f6:d90c with SMTP id
+ 7-20020a05600c024700b00401b6f6d90cmr6079242wmj.35.1695653921019; 
+ Mon, 25 Sep 2023 07:58:41 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- 3-20020a05600c234300b004013797efb6sm15499567wmq.9.2023.09.25.07.48.58
+ z9-20020a05600c114900b004058e6379d8sm3826355wmz.23.2023.09.25.07.58.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Sep 2023 07:49:00 -0700 (PDT)
+ Mon, 25 Sep 2023 07:58:40 -0700 (PDT)
 Received: from zen.linaroharston (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id E2ADB1FFC7;
- Mon, 25 Sep 2023 15:48:56 +0100 (BST)
+ by zen.linaroharston (Postfix) with ESMTP id 532431FFD1;
+ Mon, 25 Sep 2023 15:48:58 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>,
@@ -92,19 +92,18 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  qemu-arm@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Ilya Leoshkevich <iii@linux.ibm.com>, Laurent Vivier <lvivier@redhat.com>,
  Yoshinori Sato <ysato@users.sourceforge.jp>,
- Leif Lindholm <quic_llindhol@quicinc.com>, Beraldo Leal <bleal@redhat.com>,
- Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH 15/31] hw/core/cpu: Return static value with gdb_arch_name()
-Date: Mon, 25 Sep 2023 15:48:38 +0100
-Message-Id: <20230925144854.1872513-16-alex.bennee@linaro.org>
+ Leif Lindholm <quic_llindhol@quicinc.com>, Beraldo Leal <bleal@redhat.com>
+Subject: [RFC PATCH 27/31] sysemu: add set_virtual_time to accel ops
+Date: Mon, 25 Sep 2023 15:48:50 +0100
+Message-Id: <20230925144854.1872513-28-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230925144854.1872513-1-alex.bennee@linaro.org>
 References: <20230925144854.1872513-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x331.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -127,239 +126,153 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
+We are about to remove direct calls to individual accelerators for
+this information and will need a central point for plugins to hook
+into time changes.
 
-All implementations of gdb_arch_name() returns dynamic duplicates of
-static strings. It's also unlikely that there will be an implementation
-of gdb_arch_name() that returns a truly dynamic value due to the nature
-of the function returning a well-known identifiers. Qualify the value
-gdb_arch_name() with const and make all of its implementations return
-static strings.
-
-Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20230912224107.29669-8-akihiko.odaki@daynix.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
----
- include/hw/core/cpu.h  | 2 +-
- target/ppc/internal.h  | 2 +-
- gdbstub/gdbstub.c      | 3 +--
- target/arm/cpu.c       | 6 +++---
- target/arm/cpu64.c     | 4 ++--
- target/i386/cpu.c      | 6 +++---
- target/loongarch/cpu.c | 8 ++++----
- target/ppc/gdbstub.c   | 6 +++---
- target/riscv/cpu.c     | 6 +++---
- target/s390x/cpu.c     | 4 ++--
- target/tricore/cpu.c   | 4 ++--
- 11 files changed, 25 insertions(+), 26 deletions(-)
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Message-Id: <20230519170454.2353945-5-alex.bennee@linaro.org>
 
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 648b5b3586..5ae479a961 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -164,7 +164,7 @@ struct CPUClass {
-     vaddr (*gdb_adjust_breakpoint)(CPUState *cpu, vaddr addr);
+---
+v2
+  - more kerneldoc annotations
+---
+ include/sysemu/accel-ops.h                    | 18 ++++++++++++-
+ include/sysemu/cpu-timers.h                   | 27 ++++++++++++++++++-
+ softmmu/cpus.c                                | 11 ++++++++
+ ...t-virtual-clock.c => cpus-virtual-clock.c} |  5 ++++
+ stubs/meson.build                             |  2 +-
+ 5 files changed, 60 insertions(+), 3 deletions(-)
+ rename stubs/{cpus-get-virtual-clock.c => cpus-virtual-clock.c} (68%)
+
+diff --git a/include/sysemu/accel-ops.h b/include/sysemu/accel-ops.h
+index 3c1fab4b1e..224e85a649 100644
+--- a/include/sysemu/accel-ops.h
++++ b/include/sysemu/accel-ops.h
+@@ -20,7 +20,12 @@
+ typedef struct AccelOpsClass AccelOpsClass;
+ DECLARE_CLASS_CHECKERS(AccelOpsClass, ACCEL_OPS, TYPE_ACCEL_OPS)
  
-     const char *gdb_core_xml_file;
--    gchar * (*gdb_arch_name)(CPUState *cpu);
-+    const gchar * (*gdb_arch_name)(CPUState *cpu);
-     const char * (*gdb_get_dynamic_xml)(CPUState *cpu, const char *xmlname);
+-/* cpus.c operations interface */
++/**
++ * struct AccelOpsClass - accelerator interfaces
++ *
++ * This structure is used to abstract accelerator differences from the
++ * core CPU code. Not all have to be implemented.
++ */
+ struct AccelOpsClass {
+     /*< private >*/
+     ObjectClass parent_class;
+@@ -43,7 +48,18 @@ struct AccelOpsClass {
  
-     void (*disas_set_info)(CPUState *cpu, disassemble_info *info);
-diff --git a/target/ppc/internal.h b/target/ppc/internal.h
-index 15803bc313..c881c67a8b 100644
---- a/target/ppc/internal.h
-+++ b/target/ppc/internal.h
-@@ -221,7 +221,7 @@ void destroy_ppc_opcodes(PowerPCCPU *cpu);
+     void (*handle_interrupt)(CPUState *cpu, int mask);
  
- /* gdbstub.c */
- void ppc_gdb_init(CPUState *cs, PowerPCCPUClass *ppc);
--gchar *ppc_gdb_arch_name(CPUState *cs);
-+const gchar *ppc_gdb_arch_name(CPUState *cs);
++    /**
++     * @get_virtual_clock: fetch virtual clock
++     * @set_virtual_clock: set virtual clock
++     *
++     * These allow the timer subsystem to defer to the accelerator to
++     * fetch time. The set function is needed if the accelerator wants
++     * to track the changes to time as the timer is warped through
++     * various timer events.
++     */
+     int64_t (*get_virtual_clock)(void);
++    void (*set_virtual_clock)(int64_t time);
++
+     int64_t (*get_elapsed_ticks)(void);
  
- /**
-  * prot_for_access_type:
-diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-index 12f4d07046..9db4af41c1 100644
---- a/gdbstub/gdbstub.c
-+++ b/gdbstub/gdbstub.c
-@@ -380,10 +380,9 @@ static const char *get_feature_xml(const char *p, const char **newp,
-                             "<target>");
+     /* gdbstub hooks */
+diff --git a/include/sysemu/cpu-timers.h b/include/sysemu/cpu-timers.h
+index 2e786fe7fb..31ab2bbd4e 100644
+--- a/include/sysemu/cpu-timers.h
++++ b/include/sysemu/cpu-timers.h
+@@ -84,8 +84,33 @@ int64_t cpu_get_clock(void);
  
-             if (cc->gdb_arch_name) {
--                g_autofree gchar *arch = cc->gdb_arch_name(cpu);
-                 g_string_append_printf(xml,
-                                        "<architecture>%s</architecture>",
--                                       arch);
-+                                       cc->gdb_arch_name(cpu));
-             }
-             g_string_append(xml, "<xi:include href=\"");
-             g_string_append(xml, cc->gdb_core_xml_file);
-diff --git a/target/arm/cpu.c b/target/arm/cpu.c
-index 10fcc61701..408af17bf2 100644
---- a/target/arm/cpu.c
-+++ b/target/arm/cpu.c
-@@ -2320,15 +2320,15 @@ static Property arm_cpu_properties[] = {
-     DEFINE_PROP_END_OF_LIST()
- };
+ void qemu_timer_notify_cb(void *opaque, QEMUClockType type);
  
--static gchar *arm_gdb_arch_name(CPUState *cs)
-+static const gchar *arm_gdb_arch_name(CPUState *cs)
+-/* get the VIRTUAL clock and VM elapsed ticks via the cpus accel interface */
++/**
++ * cpus_get_virtual_clock() - return current virtual clock.
++ *
++ * This is a wrapper around accelerator specific get_virtual_clock()
++ *
++ * Returns: ns of virtual time
++ */
+ int64_t cpus_get_virtual_clock(void);
++
++/**
++ * cpus_set_virtual_clock() - set the virtual clock
++ * @new_time: new value in ns
++ *
++ * This is a wrapper around accelerator specific set_virtual_clock()
++ */
++void cpus_set_virtual_clock(int64_t new_time);
++
++/**
++ * cpus_get_elapsed_ticks() - get elapsed host time
++ *
++ * This is usually the current value of the host tick counter (i.e.
++ * not taking into account guest pauses). However some accelerators
++ * which want to keep elapsed time in sync with virtual time will
++ * return the virtual clock.
++ *
++ * Returns: ticks of elapsed host time (usually ns)
++ */
+ int64_t cpus_get_elapsed_ticks(void);
+ 
+ #endif /* SYSEMU_CPU_TIMERS_H */
+diff --git a/softmmu/cpus.c b/softmmu/cpus.c
+index 0848e0dbdb..b645c462e1 100644
+--- a/softmmu/cpus.c
++++ b/softmmu/cpus.c
+@@ -221,6 +221,17 @@ int64_t cpus_get_virtual_clock(void)
+     return cpu_get_clock();
+ }
+ 
++/*
++ * Signal the new virtual time to the accelerator. This is only needed
++ * by accelerators that need to track the changes as we warp time.
++ */
++void cpus_set_virtual_clock(int64_t new_time)
++{
++    if (cpus_accel && cpus_accel->set_virtual_clock) {
++        cpus_accel->set_virtual_clock(new_time);
++    }
++}
++
+ /*
+  * return the time elapsed in VM between vm_start and vm_stop.  Unless
+  * icount is active, cpus_get_elapsed_ticks() uses units of the host CPU cycle
+diff --git a/stubs/cpus-get-virtual-clock.c b/stubs/cpus-virtual-clock.c
+similarity index 68%
+rename from stubs/cpus-get-virtual-clock.c
+rename to stubs/cpus-virtual-clock.c
+index fd447d53f3..af7c1a1d40 100644
+--- a/stubs/cpus-get-virtual-clock.c
++++ b/stubs/cpus-virtual-clock.c
+@@ -6,3 +6,8 @@ int64_t cpus_get_virtual_clock(void)
  {
-     ARMCPU *cpu = ARM_CPU(cs);
-     CPUARMState *env = &cpu->env;
- 
-     if (arm_feature(env, ARM_FEATURE_IWMMXT)) {
--        return g_strdup("iwmmxt");
-+        return "iwmmxt";
-     }
--    return g_strdup("arm");
-+    return "arm";
+     return cpu_get_clock();
  }
- 
- #ifndef CONFIG_USER_ONLY
-diff --git a/target/arm/cpu64.c b/target/arm/cpu64.c
-index f3d87e001f..8a8cde7c05 100644
---- a/target/arm/cpu64.c
-+++ b/target/arm/cpu64.c
-@@ -781,9 +781,9 @@ static void aarch64_cpu_finalizefn(Object *obj)
- {
- }
- 
--static gchar *aarch64_gdb_arch_name(CPUState *cs)
-+static const gchar *aarch64_gdb_arch_name(CPUState *cs)
- {
--    return g_strdup("aarch64");
-+    return "aarch64";
- }
- 
- static void aarch64_cpu_class_init(ObjectClass *oc, void *data)
-diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index 2589c8e929..993ebc21f6 100644
---- a/target/i386/cpu.c
-+++ b/target/i386/cpu.c
-@@ -5914,12 +5914,12 @@ static void x86_cpu_load_model(X86CPU *cpu, X86CPUModel *model)
-     memset(&env->user_features, 0, sizeof(env->user_features));
- }
- 
--static gchar *x86_gdb_arch_name(CPUState *cs)
-+static const gchar *x86_gdb_arch_name(CPUState *cs)
- {
- #ifdef TARGET_X86_64
--    return g_strdup("i386:x86-64");
-+    return "i386:x86-64";
- #else
--    return g_strdup("i386");
-+    return "i386";
- #endif
- }
- 
-diff --git a/target/loongarch/cpu.c b/target/loongarch/cpu.c
-index fc7f70fbe5..3cc9b2a89d 100644
---- a/target/loongarch/cpu.c
-+++ b/target/loongarch/cpu.c
-@@ -768,9 +768,9 @@ static void loongarch_cpu_class_init(ObjectClass *c, void *data)
- #endif
- }
- 
--static gchar *loongarch32_gdb_arch_name(CPUState *cs)
-+static const gchar *loongarch32_gdb_arch_name(CPUState *cs)
- {
--    return g_strdup("loongarch32");
-+    return "loongarch32";
- }
- 
- static void loongarch32_cpu_class_init(ObjectClass *c, void *data)
-@@ -782,9 +782,9 @@ static void loongarch32_cpu_class_init(ObjectClass *c, void *data)
-     cc->gdb_arch_name = loongarch32_gdb_arch_name;
- }
- 
--static gchar *loongarch64_gdb_arch_name(CPUState *cs)
-+static const gchar *loongarch64_gdb_arch_name(CPUState *cs)
- {
--    return g_strdup("loongarch64");
-+    return "loongarch64";
- }
- 
- static void loongarch64_cpu_class_init(ObjectClass *c, void *data)
-diff --git a/target/ppc/gdbstub.c b/target/ppc/gdbstub.c
-index 2ad11510bf..778ef73bd7 100644
---- a/target/ppc/gdbstub.c
-+++ b/target/ppc/gdbstub.c
-@@ -589,12 +589,12 @@ static int gdb_set_vsx_reg(CPUPPCState *env, uint8_t *mem_buf, int n)
-     return 0;
- }
- 
--gchar *ppc_gdb_arch_name(CPUState *cs)
-+const gchar *ppc_gdb_arch_name(CPUState *cs)
- {
- #if defined(TARGET_PPC64)
--    return g_strdup("powerpc:common64");
-+    return "powerpc:common64";
- #else
--    return g_strdup("powerpc:common");
-+    return "powerpc:common";
- #endif
- }
- 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index f227c7664e..ce35e95f14 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -2008,17 +2008,17 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_END_OF_LIST(),
- };
- 
--static gchar *riscv_gdb_arch_name(CPUState *cs)
-+static const gchar *riscv_gdb_arch_name(CPUState *cs)
- {
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     CPURISCVState *env = &cpu->env;
- 
-     switch (riscv_cpu_mxl(env)) {
-     case MXL_RV32:
--        return g_strdup("riscv:rv32");
-+        return "riscv:rv32";
-     case MXL_RV64:
-     case MXL_RV128:
--        return g_strdup("riscv:rv64");
-+        return "riscv:rv64";
-     default:
-         g_assert_not_reached();
-     }
-diff --git a/target/s390x/cpu.c b/target/s390x/cpu.c
-index df167493c3..cf4b5e43f2 100644
---- a/target/s390x/cpu.c
-+++ b/target/s390x/cpu.c
-@@ -284,9 +284,9 @@ static void s390_cpu_initfn(Object *obj)
- #endif
- }
- 
--static gchar *s390_gdb_arch_name(CPUState *cs)
-+static const gchar *s390_gdb_arch_name(CPUState *cs)
- {
--    return g_strdup("s390:64-bit");
-+    return "s390:64-bit";
- }
- 
- static Property s390x_cpu_properties[] = {
-diff --git a/target/tricore/cpu.c b/target/tricore/cpu.c
-index 133a9ac70e..44e3ba6f0e 100644
---- a/target/tricore/cpu.c
-+++ b/target/tricore/cpu.c
-@@ -29,9 +29,9 @@ static inline void set_feature(CPUTriCoreState *env, int feature)
-     env->features |= 1ULL << feature;
- }
- 
--static gchar *tricore_gdb_arch_name(CPUState *cs)
-+static const gchar *tricore_gdb_arch_name(CPUState *cs)
- {
--    return g_strdup("tricore");
-+    return "tricore";
- }
- 
- static void tricore_cpu_set_pc(CPUState *cs, vaddr value)
++
++void cpus_set_virtual_clock(int64_t new_time)
++{
++    /* do nothing */
++}
+diff --git a/stubs/meson.build b/stubs/meson.build
+index ef6e39a64d..2ea43ee076 100644
+--- a/stubs/meson.build
++++ b/stubs/meson.build
+@@ -5,7 +5,7 @@ stub_ss.add(files('blockdev-close-all-bdrv-states.c'))
+ stub_ss.add(files('change-state-handler.c'))
+ stub_ss.add(files('cmos.c'))
+ stub_ss.add(files('cpu-get-clock.c'))
+-stub_ss.add(files('cpus-get-virtual-clock.c'))
++stub_ss.add(files('cpus-virtual-clock.c'))
+ stub_ss.add(files('qemu-timer-notify-cb.c'))
+ stub_ss.add(files('icount.c'))
+ stub_ss.add(files('dump.c'))
 -- 
 2.39.2
 
