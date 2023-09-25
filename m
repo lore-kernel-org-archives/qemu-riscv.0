@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40676CE7A81
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 14:51:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C73FCE7A81
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 14:52:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qkmtl-0001TP-UL; Mon, 25 Sep 2023 10:49:21 -0400
+	id 1qkmtc-00013o-1i; Mon, 25 Sep 2023 10:49:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qkmti-0001FL-55
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:49:18 -0400
-Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
+ id 1qkmtZ-00011v-1g
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:49:09 -0400
+Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qkmtS-0008Gy-Ru
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:49:17 -0400
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4053c6f0e50so57298935e9.1
- for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 07:49:00 -0700 (PDT)
+ id 1qkmtQ-0008F8-3g
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:49:08 -0400
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-323168869daso3993797f8f.2
+ for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 07:48:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695653339; x=1696258139; darn=nongnu.org;
+ d=linaro.org; s=google; t=1695653337; x=1696258137; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kNHX4JyhoYexAQqB9a7CrjUa8yJRKrNW0ix3Ut30RxE=;
- b=o7okgtlzKM5CdQPEsjYaWC/JCovzE4x9nZPmryzKjLnYr+KwgIO92EBcllUVMpLwTP
- yKnPWH0bXZxePEqYhd9oIhyDONqAjFYEgSnEJNIJhHMylwUhDWNuq3wz1a2gA94Iosqf
- zK0NGvhXonwTmUQK0iqkt/yuQEJTiZIoQ9p9ztLGBJ1OVvJUafe7O3L7URsoNUgdVG+C
- MMOU4aLBkD+pAeVmDmTBsSyJBgcU4yec65/QoVZocVYpOuE5mqAyrd1u7z0Jv6SZ6p8V
- +P+0H5hUHuzDfNJsvFofxv7sqxvAnfW6lj5K4zpte5ZzbFr1SY7KpIkZZqIma2JZM23t
- Ch8g==
+ bh=a52wocQYp8F3YgwPFsZoycBHm5iiCFaISrIdWEZjgl0=;
+ b=eyc5NfulXANc91s9Tt1G7RgSjVsf1tStUjZEcUrdCUVAVu7ftmvg3KSEgKuqF/Ow5i
+ zSvBYd/CKV/+k8olDIjaVS7e4sGkG3R26tMwwfrQIsYuZkOv1uNupC8ILKEyUs6a4oe/
+ 2Hfo5ECZcIeNDMl7r0T48p1eTBn75RjzaK4gw0o5ZsbmmnOS5RmEczJZIR1+WrtMrYNF
+ kawwIP5+uRaraf/Xxxr8zosfQnEHDKzAgDJw5adxIKUe7jBskzd2NEpeY4OWY9ijKGQC
+ vXlB07nsB089shcyzDQ/JU95H1J7ctqJu3MaBv62yI4SHugjJ+0R77w7k37gAEGTqe0s
+ aPdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695653339; x=1696258139;
+ d=1e100.net; s=20230601; t=1695653337; x=1696258137;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kNHX4JyhoYexAQqB9a7CrjUa8yJRKrNW0ix3Ut30RxE=;
- b=QP1b7ZpQjPvCqYoqJq4XooncXaW79lYEBvcud8sNGOAOy2cHBWO9sQlp1KkQWrX2cw
- nkWXw1/5Y/0r830d4wTRdYHcj5wIVk247AbaUpT4mscIk4p03Yvoi/2kfmehxSWkGQ1W
- UAzuhEOrvJEU3ZkHsSadsoEkhacgyVt+D3+COV5xRyIpnSnAIvh2S9zyISXTAP9mS0Qh
- gLWUR9dBdeM6O8xK5XcvCEB0FqJwC3hKtaPQIc+fsFY/YH6Ag1w7NCciKDKnQ8KrXzLl
- knjIL9nW2mUFCfd8e53pf0/Q7eARU4HlHb8TX/n5V2SHhXHQphbms8Fj/u57we6E9vhh
- jwjw==
-X-Gm-Message-State: AOJu0YyPy5h3bheKrghqpcdGRA5iu8sox6s1EC/TWb433vywCjjJAL71
- +I18SuHQXGmH3AJEsgzamg3JKQ==
-X-Google-Smtp-Source: AGHT+IGMr7N7urKQ8V3Sq28hXqy9yAVrCdYa0uBVNGkQ33p+6KFVM9aPbd7eskGG9fS//8pY41zZPg==
-X-Received: by 2002:a05:600c:5192:b0:405:75f0:fd31 with SMTP id
- fa18-20020a05600c519200b0040575f0fd31mr3794870wmb.31.1695653339092; 
- Mon, 25 Sep 2023 07:48:59 -0700 (PDT)
+ bh=a52wocQYp8F3YgwPFsZoycBHm5iiCFaISrIdWEZjgl0=;
+ b=bjLH+Hg+WgVDMP+0ys0EXXAYIi7Se3BU/ymUBg8SCHLUpIHSxH0lkxAhtv9SUvrFJw
+ k3Cm7RT/YZsU8+Jlk/sICOhedUwHu3KHn+pJLMN9fwoawxFOQMUODwuqx0P+/rysRsJW
+ RjNz5Bpy03XdyTViQYksE6jyGydLoluRrA3ke8E4Tc5ryWEmSnmg2tSPVWk1U8ibPunz
+ GBeOpuinVRtVXdw9nKtqMtBua2eRSTw2xlHukgER+1EaoaMYVs+JheXI5uPW3/9Z+Qmv
+ Ctj5weR8FwGOVoXiTpnpp17C+ZEfSVp/Z8lUFgtF008duN5xflEsxTFmKjGOD3kypkR9
+ Lvgw==
+X-Gm-Message-State: AOJu0YzhQy1RWWSqzBG0YSdiAzrKh7YsMKwLlSJs6FJ5X8KFolJF68uz
+ Kr3RovKdweaHokgRhaFHtDGJfA==
+X-Google-Smtp-Source: AGHT+IGOF6KtpG+nISEDvad+Phr3PN8xaLPF7HRn2zImY++RVLmcASBXl6qic08aE8hDUsfJ7OR9dw==
+X-Received: by 2002:a5d:4d46:0:b0:321:62b0:7ad8 with SMTP id
+ a6-20020a5d4d46000000b0032162b07ad8mr6031753wru.16.1695653337268; 
+ Mon, 25 Sep 2023 07:48:57 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- 8-20020a05600c230800b003fe61c33df5sm15386125wmo.3.2023.09.25.07.48.56
+ h12-20020a5d688c000000b0031779a6b451sm11975569wru.83.2023.09.25.07.48.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Sep 2023 07:48:57 -0700 (PDT)
+ Mon, 25 Sep 2023 07:48:55 -0700 (PDT)
 Received: from zen.linaroharston (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 1A8A31FFBB;
- Mon, 25 Sep 2023 15:48:56 +0100 (BST)
+ by zen.linaroharston (Postfix) with ESMTP id 6E5AF1FFBE;
+ Mon, 25 Sep 2023 15:48:55 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>,
@@ -92,19 +92,18 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  qemu-arm@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Ilya Leoshkevich <iii@linux.ibm.com>, Laurent Vivier <lvivier@redhat.com>,
  Yoshinori Sato <ysato@users.sourceforge.jp>,
- Leif Lindholm <quic_llindhol@quicinc.com>, Beraldo Leal <bleal@redhat.com>,
- Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH 09/31] gdbstub: Fix target_xml initialization
-Date: Mon, 25 Sep 2023 15:48:32 +0100
-Message-Id: <20230925144854.1872513-10-alex.bennee@linaro.org>
+ Leif Lindholm <quic_llindhol@quicinc.com>, Beraldo Leal <bleal@redhat.com>
+Subject: [PATCH 03/31] gitlab: shuffle some targets and reduce avocado noise
+Date: Mon, 25 Sep 2023 15:48:26 +0100
+Message-Id: <20230925144854.1872513-4-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230925144854.1872513-1-alex.bennee@linaro.org>
 References: <20230925144854.1872513-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::436;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x436.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -127,33 +126,106 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
+We move a couple of targets out of the avocado runs because there are
+no tests to run. Tricore already has some coverage.  The cris target
+only really has check-tcg tests but its getting harder to find
+anything that packages the compiler.
 
-target_xml is no longer a fixed-length array but a pointer to a
-variable-length memory.
+To reduce the noise of CANCEL messages we also set AVOCADO_TAGS
+appropriately so we filter down the number of tests we attempt.
 
-Fixes: 56e534bd11 ("gdbstub: refactor get_feature_xml")
-Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Message-Id: <20230912224107.29669-2-akihiko.odaki@daynix.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
----
- gdbstub/softmmu.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
-diff --git a/gdbstub/softmmu.c b/gdbstub/softmmu.c
-index 9f0b8b5497..42645d2220 100644
---- a/gdbstub/softmmu.c
-+++ b/gdbstub/softmmu.c
-@@ -292,7 +292,7 @@ static int find_cpu_clusters(Object *child, void *opaque)
-         assert(cluster->cluster_id != UINT32_MAX);
-         process->pid = cluster->cluster_id + 1;
-         process->attached = false;
--        process->target_xml[0] = '\0';
-+        process->target_xml = NULL;
+---
+v2
+  - minor commit reword, no longer attempt to keep cris going
+---
+ .gitlab-ci.d/buildtest.yml | 15 +++++++++++----
+ 1 file changed, 11 insertions(+), 4 deletions(-)
+
+diff --git a/.gitlab-ci.d/buildtest.yml b/.gitlab-ci.d/buildtest.yml
+index aee9101507..25af1bc41e 100644
+--- a/.gitlab-ci.d/buildtest.yml
++++ b/.gitlab-ci.d/buildtest.yml
+@@ -30,6 +30,7 @@ avocado-system-alpine:
+   variables:
+     IMAGE: alpine
+     MAKE_CHECK_ARGS: check-avocado
++    AVOCADO_TAGS: arch:avr arch:loongarch64 arch:mips64 arch:mipsel
  
-         return 0;
-     }
+ build-system-ubuntu:
+   extends:
+@@ -40,8 +41,7 @@ build-system-ubuntu:
+   variables:
+     IMAGE: ubuntu2204
+     CONFIGURE_ARGS: --enable-docs
+-    TARGETS: alpha-softmmu cris-softmmu hppa-softmmu
+-      microblazeel-softmmu mips64el-softmmu
++    TARGETS: alpha-softmmu microblazeel-softmmu mips64el-softmmu
+     MAKE_CHECK_ARGS: check-build
+ 
+ check-system-ubuntu:
+@@ -61,6 +61,7 @@ avocado-system-ubuntu:
+   variables:
+     IMAGE: ubuntu2204
+     MAKE_CHECK_ARGS: check-avocado
++    AVOCADO_TAGS: arch:alpha arch:microblaze arch:mips64el
+ 
+ build-system-debian:
+   extends:
+@@ -72,7 +73,7 @@ build-system-debian:
+     IMAGE: debian-amd64
+     CONFIGURE_ARGS: --with-coroutine=sigaltstack
+     TARGETS: arm-softmmu i386-softmmu riscv64-softmmu sh4eb-softmmu
+-      sparc-softmmu xtensaeb-softmmu
++      sparc-softmmu xtensa-softmmu
+     MAKE_CHECK_ARGS: check-build
+ 
+ check-system-debian:
+@@ -92,6 +93,7 @@ avocado-system-debian:
+   variables:
+     IMAGE: debian-amd64
+     MAKE_CHECK_ARGS: check-avocado
++    AVOCADO_TAGS: arch:arm arch:i386 arch:riscv64 arch:sh4 arch:sparc arch:xtensa
+ 
+ crash-test-debian:
+   extends: .native_test_job_template
+@@ -114,7 +116,7 @@ build-system-fedora:
+   variables:
+     IMAGE: fedora
+     CONFIGURE_ARGS: --disable-gcrypt --enable-nettle --enable-docs
+-    TARGETS: tricore-softmmu microblaze-softmmu mips-softmmu
++    TARGETS: microblaze-softmmu mips-softmmu
+       xtensa-softmmu m68k-softmmu riscv32-softmmu ppc-softmmu sparc64-softmmu
+     MAKE_CHECK_ARGS: check-build
+ 
+@@ -135,6 +137,8 @@ avocado-system-fedora:
+   variables:
+     IMAGE: fedora
+     MAKE_CHECK_ARGS: check-avocado
++    AVOCADO_TAGS: arch:microblaze arch:mips arch:xtensa arch:m68k
++      arch:riscv32 arch:ppc arch:sparc64
+ 
+ crash-test-fedora:
+   extends: .native_test_job_template
+@@ -180,6 +184,8 @@ avocado-system-centos:
+   variables:
+     IMAGE: centos8
+     MAKE_CHECK_ARGS: check-avocado
++    AVOCADO_TAGS: arch:ppc64 arch:or1k arch:390x arch:x86_64 arch:rx
++      arch:sh4 arch:nios2
+ 
+ build-system-opensuse:
+   extends:
+@@ -209,6 +215,7 @@ avocado-system-opensuse:
+   variables:
+     IMAGE: opensuse-leap
+     MAKE_CHECK_ARGS: check-avocado
++    AVOCADO_TAGS: arch:s390x arch:x86_64 arch:aarch64
+ 
+ 
+ # This jobs explicitly disable TCG (--disable-tcg), KVM is detected by
 -- 
 2.39.2
 
