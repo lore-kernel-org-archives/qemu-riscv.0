@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8512CE7A95
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 15:02:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8D85CE7A95
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 15:02:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qkn3P-0000Ky-Hh; Mon, 25 Sep 2023 10:59:19 -0400
+	id 1qkn3O-0000Jw-NW; Mon, 25 Sep 2023 10:59:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qkn35-0008KI-4S
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:59:00 -0400
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ id 1qkn36-0008LJ-BG
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:59:01 -0400
+Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qkn2p-0002C5-TI
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:58:50 -0400
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-405524e6740so43651105e9.1
- for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 07:58:43 -0700 (PDT)
+ id 1qkn2s-0002FE-9F
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:58:59 -0400
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-32172f8a5dbso5537129f8f.3
+ for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 07:58:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695653921; x=1696258721; darn=nongnu.org;
+ d=linaro.org; s=google; t=1695653924; x=1696258724; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DGpqbinWgFdcTh8orlOkSkjWWt1Ye8Jo/m++la5kzCk=;
- b=xO0RVHuo1+8EFKXadIV1xnk7eX9cWjIVRGvb+VBCWxFJkCJcwh+FA7TFVzeFwEhbUr
- M7xpbo+kgNF4QPeoojHwCRCncfxhnJShhL2M+wFvTSeP2uQ3vo6Tts2EBt/JO3LaVAdr
- gj9dnLVUYdhV1tBNqyriGS6bnZjCElXaTjd6N7jDI0pZxAT8o5E0XQwZ7yjo6YrVZj/u
- Vze4A1ecK7XRpP8Tx0fsxpCGuv0fx47iS071lH+ldQMdYr6JeaNrXgEjagehCZFXynoc
- zSkR+Sz0LVpJoRYRSMRP59dwlo7LJRb7aXGgPZrvcmeGcolYADofOyqEJgfBB16qQPO1
- 3+lA==
+ bh=pzgHDvkSEQDHi8J0pZ97uLL1mOaFrktKKPN/mU4z0S8=;
+ b=mzQuBc8APVtviKLxBms2E4zW8c584CMrVl3ikNySRg92S7TcXpecXd1H36fVj7HiPR
+ pF6yJLqEb25mubZMC09MzpGpiOgAmQGBHtxug++86+7caqY9ueAl0JzsQMorAJbA/PPt
+ wmAEBrnLlRb1Tsq/0BCJUT77Iz+iGCQOvxbxC3KfTJGZpBxSS7AikP30NSh+ovhH+ZVw
+ TkBYxRNEah9je01MPtde7BvHhppw1kTWlB6l0uehbabr4dgY4dELac9p0HXJ+PWKBMic
+ Cw1Hpp8NGEH7FyMEYt19x5ypHm/0zt8HBffdySr8kvM2rXhTz5yCEhEE8yrHXmYIhZh2
+ NQWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695653921; x=1696258721;
+ d=1e100.net; s=20230601; t=1695653924; x=1696258724;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DGpqbinWgFdcTh8orlOkSkjWWt1Ye8Jo/m++la5kzCk=;
- b=Tegw98rUPscOjPV5A96ZfybEuB1hhlEO90e9cuCDW4mtVIEQ/CNiX4IHxrsB5XE/JM
- lJOD7Fc1I5aQlLDOcinmuYPL4Hrbw2cHAieOlfaPOSvk/JfB8R0QlT72Ho16Go+SYqPf
- 5yRoqh8kDFsndLTfUMOzmmY8UYaw9a3EqKdfW3gKlJtMqYfLlwPSydl1d4rlO7n4Mq5u
- 1SIx869EEH+jIUr4Bg6DZc5NfXhqbOniXt9bDSTZYdrSfHpNWP0u548Gf0ZA9jBgzQb0
- hJgIEyA33sIOhG3/xpsGEHSEElNquNeKQNqAz53Le9cSIQDcsWI/HrYMMCrLCtVIflbJ
- OHLQ==
-X-Gm-Message-State: AOJu0YwP8n499WNvsp75KMNVDOuLrEClpJAQrgzF2AHbR3QCi2mD1nAo
- 0yYwRUgGiwz0SNvhZ19R7tWoNA==
-X-Google-Smtp-Source: AGHT+IEb+hpsuPjYkc0JIZMBH1wz3xDTFHvAV+RFdtX6oPkfs0s1EF9T4PwglEGeZejoz0zpOAsSzA==
-X-Received: by 2002:a05:600c:2296:b0:405:3455:de37 with SMTP id
- 22-20020a05600c229600b004053455de37mr5597736wmf.1.1695653921200; 
- Mon, 25 Sep 2023 07:58:41 -0700 (PDT)
+ bh=pzgHDvkSEQDHi8J0pZ97uLL1mOaFrktKKPN/mU4z0S8=;
+ b=HoIbVutRGPp/WRx/0EexN75yGvj/5v89Kn7icZvZyx3V4oabdyPMOwM+dKS9q7836H
+ wAMPPZp2TUTvOi6M81l159e7P89klSQsQ2O8qXpiBQLaxv+TFezP/dqSkxMRL2kqLYG6
+ rBdbY2ExbxLnlQIpF1pg4v+5d+ECHlACiEdTsfb0xeqYZKWUm/QeiRwd6rZV4qBa6Ye3
+ MyNh0mxp5znofwd4lyKyYnEcslKS7B4aOdlwLTEs05TUhEaRB8Y8Q+cq0D/QMr7aRIAy
+ 0S6rKxUgrp0AwBgKJX5IAZnASul1SlO216Iy+IvOLb6rk8z6enlXY+pEv1E80860wQLI
+ dIJw==
+X-Gm-Message-State: AOJu0YxcL4nrewhFWy0sHp/yXqoR1BKR/HOS+hBrfcmWKSFdnDhG0pk9
+ VT/e6DVghaObI2xdjWIP64sqkg==
+X-Google-Smtp-Source: AGHT+IEK0Goz+dxJRznfKltKNgQq9qAmubNsDzadXtMcGR/Rnpytq7dHIOItqTM3umFDNRkCiWgnKA==
+X-Received: by 2002:adf:fe49:0:b0:321:6fb0:9a84 with SMTP id
+ m9-20020adffe49000000b003216fb09a84mr6392006wrs.37.1695653924221; 
+ Mon, 25 Sep 2023 07:58:44 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- x6-20020a5d60c6000000b0031f300a4c26sm12038543wrt.93.2023.09.25.07.58.40
+ t7-20020a5d49c7000000b003176aa612b1sm12043674wrs.38.2023.09.25.07.58.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Sep 2023 07:58:40 -0700 (PDT)
+ Mon, 25 Sep 2023 07:58:42 -0700 (PDT)
 Received: from zen.linaroharston (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 926931FFD3;
+ by zen.linaroharston (Postfix) with ESMTP id 73C1E1FFD2;
  Mon, 25 Sep 2023 15:48:58 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -93,18 +93,17 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Ilya Leoshkevich <iii@linux.ibm.com>, Laurent Vivier <lvivier@redhat.com>,
  Yoshinori Sato <ysato@users.sourceforge.jp>,
  Leif Lindholm <quic_llindhol@quicinc.com>, Beraldo Leal <bleal@redhat.com>
-Subject: [RFC PATCH 29/31] sysemu: generalise qtest_warp_clock as
- qemu_clock_advance_virtual_time
-Date: Mon, 25 Sep 2023 15:48:52 +0100
-Message-Id: <20230925144854.1872513-30-alex.bennee@linaro.org>
+Subject: [RFC PATCH 28/31] qtest: use cpu interface in qtest_clock_warp
+Date: Mon, 25 Sep 2023 15:48:51 +0100
+Message-Id: <20230925144854.1872513-29-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230925144854.1872513-1-alex.bennee@linaro.org>
 References: <20230925144854.1872513-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x330.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::431;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x431.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -127,138 +126,72 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Move the key functionality of moving time forward into the clock
-sub-system itself. This will allow us to plumb in time control into
-plugins.
+This generalises the qtest_clock_warp code to use the AccelOps
+handlers for updating its own sense of time. This will make the next
+patch which moves the warp code closer to pure code motion.
 
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20230519170454.2353945-7-alex.bennee@linaro.org>
-
+Acked-by: Thomas Huth <thuth@redhat.com>
+Message-Id: <20230519170454.2353945-6-alex.bennee@linaro.org>
 ---
-v2
-  - rename arg to target_ns
----
- include/qemu/timer.h | 15 +++++++++++++++
- softmmu/qtest.c      | 24 ++----------------------
- util/qemu-timer.c    | 26 ++++++++++++++++++++++++++
- 3 files changed, 43 insertions(+), 22 deletions(-)
+ include/sysemu/qtest.h | 1 +
+ accel/qtest/qtest.c    | 1 +
+ softmmu/qtest.c        | 6 +++---
+ 3 files changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/include/qemu/timer.h b/include/qemu/timer.h
-index 9a91cb1248..aa30f693b0 100644
---- a/include/qemu/timer.h
-+++ b/include/qemu/timer.h
-@@ -245,6 +245,21 @@ bool qemu_clock_run_timers(QEMUClockType type);
-  */
- bool qemu_clock_run_all_timers(void);
+diff --git a/include/sysemu/qtest.h b/include/sysemu/qtest.h
+index 85f05b0e46..e1f69783d6 100644
+--- a/include/sysemu/qtest.h
++++ b/include/sysemu/qtest.h
+@@ -35,5 +35,6 @@ void qtest_server_set_send_handler(void (*send)(void *, const char *),
+ void qtest_server_inproc_recv(void *opaque, const char *buf);
  
-+/**
-+ * qemu_clock_advance_virtual_time(): advance the virtual time tick
-+ * @target_ns: target time in nanoseconds
-+ *
-+ * This function is used where the control of the flow of time has
-+ * been delegated to outside the clock subsystem (be it qtest, icount
-+ * or some other external source). You can ask the clock system to
-+ * return @early at the first expired timer.
-+ *
-+ * Time can only move forward, attempts to reverse time would lead to
-+ * an error.
-+ *
-+ * Returns: new virtual time.
-+ */
-+int64_t qemu_clock_advance_virtual_time(int64_t target_ns);
+ int64_t qtest_get_virtual_clock(void);
++void qtest_set_virtual_clock(int64_t count);
  
- /*
-  * QEMUTimerList
+ #endif
+diff --git a/accel/qtest/qtest.c b/accel/qtest/qtest.c
+index f6056ac836..53182e6c2a 100644
+--- a/accel/qtest/qtest.c
++++ b/accel/qtest/qtest.c
+@@ -52,6 +52,7 @@ static void qtest_accel_ops_class_init(ObjectClass *oc, void *data)
+ 
+     ops->create_vcpu_thread = dummy_start_vcpu_thread;
+     ops->get_virtual_clock = qtest_get_virtual_clock;
++    ops->set_virtual_clock = qtest_set_virtual_clock;
+ };
+ 
+ static const TypeInfo qtest_accel_ops_type = {
 diff --git a/softmmu/qtest.c b/softmmu/qtest.c
-index bac1962efb..72a2ee7a31 100644
+index 35b643a274..bac1962efb 100644
 --- a/softmmu/qtest.c
 +++ b/softmmu/qtest.c
-@@ -336,26 +336,6 @@ void qtest_set_virtual_clock(int64_t count)
+@@ -331,14 +331,14 @@ int64_t qtest_get_virtual_clock(void)
+     return qatomic_read_i64(&qtest_clock_counter);
+ }
+ 
+-static void qtest_set_virtual_clock(int64_t count)
++void qtest_set_virtual_clock(int64_t count)
+ {
      qatomic_set_i64(&qtest_clock_counter, count);
  }
  
--static void qtest_clock_warp(int64_t dest)
--{
--    int64_t clock = cpus_get_virtual_clock();
--    AioContext *aio_context;
--    assert(qtest_enabled());
--    aio_context = qemu_get_aio_context();
--    while (clock < dest) {
--        int64_t deadline = qemu_clock_deadline_ns_all(QEMU_CLOCK_VIRTUAL,
--                                                      QEMU_TIMER_ATTR_ALL);
--        int64_t warp = qemu_soonest_timeout(dest - clock, deadline);
--
--        cpus_set_virtual_clock(cpus_get_virtual_clock() + warp);
--
--        qemu_clock_run_timers(QEMU_CLOCK_VIRTUAL);
--        timerlist_run_timers(aio_context->tlg.tl[QEMU_CLOCK_VIRTUAL]);
--        clock = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
--    }
--    qemu_clock_notify(QEMU_CLOCK_VIRTUAL);
--}
--
- static bool (*process_command_cb)(CharBackend *chr, gchar **words);
- 
- void qtest_set_command_cb(bool (*pc_cb)(CharBackend *chr, gchar **words))
-@@ -754,7 +734,7 @@ static void qtest_process_command(CharBackend *chr, gchar **words)
-             ns = qemu_clock_deadline_ns_all(QEMU_CLOCK_VIRTUAL,
-                                             QEMU_TIMER_ATTR_ALL);
-         }
--        qtest_clock_warp(qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) + ns);
-+        qemu_clock_advance_virtual_time(qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) + ns);
-         qtest_send_prefix(chr);
-         qtest_sendf(chr, "OK %"PRIi64"\n",
-                     (int64_t)qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL));
-@@ -780,7 +760,7 @@ static void qtest_process_command(CharBackend *chr, gchar **words)
-         g_assert(words[1]);
-         ret = qemu_strtoi64(words[1], NULL, 0, &ns);
-         g_assert(ret == 0);
--        qtest_clock_warp(ns);
-+        qemu_clock_advance_virtual_time(ns);
-         qtest_send_prefix(chr);
-         qtest_sendf(chr, "OK %"PRIi64"\n",
-                     (int64_t)qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL));
-diff --git a/util/qemu-timer.c b/util/qemu-timer.c
-index 6a0de33dd2..213114be68 100644
---- a/util/qemu-timer.c
-+++ b/util/qemu-timer.c
-@@ -645,6 +645,11 @@ int64_t qemu_clock_get_ns(QEMUClockType type)
-     }
- }
- 
-+static void qemu_virtual_clock_set_ns(int64_t time)
-+{
-+    return cpus_set_virtual_clock(time);
-+}
-+
- void init_clocks(QEMUTimerListNotifyCB *notify_cb)
+ static void qtest_clock_warp(int64_t dest)
  {
-     QEMUClockType type;
-@@ -675,3 +680,24 @@ bool qemu_clock_run_all_timers(void)
+-    int64_t clock = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
++    int64_t clock = cpus_get_virtual_clock();
+     AioContext *aio_context;
+     assert(qtest_enabled());
+     aio_context = qemu_get_aio_context();
+@@ -347,7 +347,7 @@ static void qtest_clock_warp(int64_t dest)
+                                                       QEMU_TIMER_ATTR_ALL);
+         int64_t warp = qemu_soonest_timeout(dest - clock, deadline);
  
-     return progress;
- }
-+
-+int64_t qemu_clock_advance_virtual_time(int64_t dest)
-+{
-+    int64_t clock = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
-+    AioContext *aio_context;
-+    aio_context = qemu_get_aio_context();
-+    while (clock < dest) {
-+        int64_t deadline = qemu_clock_deadline_ns_all(QEMU_CLOCK_VIRTUAL,
-+                                                      QEMU_TIMER_ATTR_ALL);
-+        int64_t warp = qemu_soonest_timeout(dest - clock, deadline);
-+
-+        qemu_virtual_clock_set_ns(qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) + warp);
-+
-+        qemu_clock_run_timers(QEMU_CLOCK_VIRTUAL);
-+        timerlist_run_timers(aio_context->tlg.tl[QEMU_CLOCK_VIRTUAL]);
-+        clock = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
-+    }
-+    qemu_clock_notify(QEMU_CLOCK_VIRTUAL);
-+
-+    return clock;
-+}
+-        qtest_set_virtual_clock(qtest_get_virtual_clock() + warp);
++        cpus_set_virtual_clock(cpus_get_virtual_clock() + warp);
+ 
+         qemu_clock_run_timers(QEMU_CLOCK_VIRTUAL);
+         timerlist_run_timers(aio_context->tlg.tl[QEMU_CLOCK_VIRTUAL]);
 -- 
 2.39.2
 
