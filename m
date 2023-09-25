@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9263CE7A81
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 14:53:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38EBECE7A94
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 14:53:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qkmuG-0002Sd-1Y; Mon, 25 Sep 2023 10:49:52 -0400
+	id 1qkmuG-0002Up-Ev; Mon, 25 Sep 2023 10:49:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qkmtq-0001c7-05
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:49:26 -0400
-Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
+ id 1qkmth-0001Dt-Fl
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:49:17 -0400
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qkmtU-0008J0-EG
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:49:25 -0400
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-40572aeb73cso31128255e9.3
- for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 07:49:03 -0700 (PDT)
+ id 1qkmtS-0008Hj-RF
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:49:17 -0400
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4054f790190so49800695e9.2
+ for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 07:49:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695653342; x=1696258142; darn=nongnu.org;
+ d=linaro.org; s=google; t=1695653340; x=1696258140; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AwYBjX11kVwleBQYnG52lCtDdSTJ4dxnB89SY/KP3O8=;
- b=UjRPGS3UCbJHCt6ODKJBpBQCRvaNegUrFGp81vd2nfl1F7V1OIJeQRkLA4JU8bBxjz
- SKk69b5a8N2VFPKYR377UwEMWNd0YZUa4rTeOK01ToRQ10S+u/i+RUoVHr/ZdUP73Y4F
- A6dHzR9glkHy3zBVNY2WHi8NEvW/MdVVMVPjyjoEhePU2YhYVrtwAcAzYIEpELLEo/nq
- 8m7qHYsHm49dUzIe/YiNBBUdK3cWPW12HZdHdN8YZEqCjz5lQo0IixodZqLQYcBtCcZa
- 6ff5F50wzp666r8hvYVOhgsPGONKZBkmr2DlRAguUqMi1K/6vAoOdmsDVvblb7pInMLi
- 1eBg==
+ bh=Cd4HdnbICWyITK5Y/4XhPzcPYvpQm5TBhsynKcdayLw=;
+ b=eok3J2nNQVGkHlbMvu8/rmmNvL03GNnzO0/wLfpxZhzhVh/eHjV/0KgjNKWIQ4ysDl
+ 2LUHbrPAtl1zOK5YJ/pdl0n1oC2Jp/eye8mL++JVn5vCE2lciqMoeSxym1cR5rHnTpqo
+ uzkqyLzEpXljHDavZ21Lrn/oW6Tr38aqzd5+epiOK0TSaYVWpLmoyTnaPbgGq+REc+eg
+ zHan06QQYcdj5LZiA9hdtW09BWylX1FbT+gD4scTA1uQtEP7jW09iusDsMzr0jLGGA1g
+ PjwEWSflTc4MYEAIPc0RSG5iSTnxilxgvv9VJETqLLJLPqiilmbNpbV7ehryoC0UctMS
+ CNFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695653342; x=1696258142;
+ d=1e100.net; s=20230601; t=1695653340; x=1696258140;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AwYBjX11kVwleBQYnG52lCtDdSTJ4dxnB89SY/KP3O8=;
- b=Dq7Or5M+zVmIy6BDWfQVtVDsoL55ZBbP4nEckZUWx57CmJV5dOjPyMr2AdyrKYDit/
- XI41NvrtcsL4Lo6Ims9lBBfsOKKRWgJHdzAia3fz1vPRc4YKwWce87lZYWR0oBIhUbhJ
- aqBbg3dWqlI0muV6bUqHnX0zGHDPNm6RvdUWxpVa5pGPxrK+tbupGVR+GM+svY7jqDP5
- TRNK8EZmBOeVG4j1dGtFsNLMMD1uA0SMSob4aRJNrY6IDnqiNSyKfMjj+ARE0CyDnAsp
- f6xBMBN8h1lIxUlf5BHxzkFcHK1+xoHDvB7ZctNzmjiGrLuDt6nZ7kfQnb1y2HfRobZC
- GnqQ==
-X-Gm-Message-State: AOJu0Yxy4LZEyF9QMxVqMj5uNRsTXs0NHkxZHeHSdkuEfzOpeB8sBXkT
- QDI7sBZsDRErFClhpUwZdK7kgg==
-X-Google-Smtp-Source: AGHT+IFfEWWhRGOWllDwvUBwcJYmT874H+l2IMfxtr7TeYA+0ZRRBGEBpEveD7GnIVCqIJ1pBndzvw==
-X-Received: by 2002:a05:6000:1048:b0:31f:e980:df87 with SMTP id
- c8-20020a056000104800b0031fe980df87mr5635374wrx.38.1695653341772; 
- Mon, 25 Sep 2023 07:49:01 -0700 (PDT)
+ bh=Cd4HdnbICWyITK5Y/4XhPzcPYvpQm5TBhsynKcdayLw=;
+ b=hVKjdZ3Bzr4UNiW6nMjOQEPSHP3B+n0DgWtgzV2x+7gVGfb48y231/jV4NUTXm6rHC
+ o7JYnHTUOvtGR61Rgl6YLalWspLl4u/p3BL/XQSscPYmDRtv6yrhK4AjhPCrM/trh8KL
+ MXn8T6iiVgbSwvZ0Zphc7t5LFGDxjggNOLHFb0tFTXBh9Fb1LFdA47ymFDG6LzSf3dWI
+ I0G/eU51c6K20qXQkfroJ4qxHeBZ2wb7u84TEjQ6O8l8AS/YPBaYtQurWD9HM53fR2Qs
+ FCCosPfGLJU7bB0Rj5QOZ4QVOjILQhkq5IeHb9EDkXIuS2JScj4IgAfJoOCugppCDpfy
+ baDg==
+X-Gm-Message-State: AOJu0YzzG0ntuKPTjJUgK/eZ0biZcrY5orRTBsIktVIk8pRb8STcYzeC
+ KPJxW1najfOOqfTZngWHBfSGKg==
+X-Google-Smtp-Source: AGHT+IGIMYocIaDoZ9eRM/8O33TiaHsL2YWIHMFN7tmlUnw5/PDkfYQxbIiSwyzvw88ck/ZVkroehQ==
+X-Received: by 2002:a05:600c:230d:b0:404:6ed9:98d1 with SMTP id
+ 13-20020a05600c230d00b004046ed998d1mr6165003wmo.41.1695653340427; 
+ Mon, 25 Sep 2023 07:49:00 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- s13-20020a5d424d000000b0031753073abcsm11995462wrr.36.2023.09.25.07.48.58
+ v19-20020adf8b53000000b0032318649b21sm6818394wra.31.2023.09.25.07.48.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Sep 2023 07:49:00 -0700 (PDT)
+ Mon, 25 Sep 2023 07:48:57 -0700 (PDT)
 Received: from zen.linaroharston (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id ADF201FFC6;
- Mon, 25 Sep 2023 15:48:56 +0100 (BST)
+ by zen.linaroharston (Postfix) with ESMTP id 8A5F61FFBF;
+ Mon, 25 Sep 2023 15:48:55 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>,
@@ -93,18 +93,19 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Ilya Leoshkevich <iii@linux.ibm.com>, Laurent Vivier <lvivier@redhat.com>,
  Yoshinori Sato <ysato@users.sourceforge.jp>,
  Leif Lindholm <quic_llindhol@quicinc.com>, Beraldo Leal <bleal@redhat.com>,
- Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH 14/31] target/arm: Move the reference to arm-core.xml
-Date: Mon, 25 Sep 2023 15:48:37 +0100
-Message-Id: <20230925144854.1872513-15-alex.bennee@linaro.org>
+ Rabin Vincent <rabinv@axis.com>,
+ "Edgar E . Iglesias" <edgar.iglesias@xilinx.com>
+Subject: [PATCH 04/31] docs: mark CRIS support as deprecated
+Date: Mon, 25 Sep 2023 15:48:27 +0100
+Message-Id: <20230925144854.1872513-5-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230925144854.1872513-1-alex.bennee@linaro.org>
 References: <20230925144854.1872513-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::336;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x336.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -127,47 +128,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
+This might be premature but while streamling the avocado tests I
+realised the only tests we have are "check-tcg" ones. The aging
+fedora-criss-cross image works well enough for developers but can't be
+used in CI as we need supported build platforms to build QEMU.
 
-Some subclasses overwrite gdb_core_xml_file member but others don't.
-Always initialize the member in the subclasses for consistency.
+Does this mean the writing is on the wall for this architecture?
 
-This especially helps for AArch64; in a following change, the file
-specified by gdb_core_xml_file is always looked up even if it's going to
-be overwritten later. Looking up arm-core.xml results in an error as
-it will not be embedded in the AArch64 build.
-
-Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20230912224107.29669-7-akihiko.odaki@daynix.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Cc: Rabin Vincent <rabinv@axis.com>
+Cc: Edgar E. Iglesias <edgar.iglesias@xilinx.com>
 ---
- target/arm/cpu.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ docs/about/deprecated.rst | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/target/arm/cpu.c b/target/arm/cpu.c
-index b9e09a702d..10fcc61701 100644
---- a/target/arm/cpu.c
-+++ b/target/arm/cpu.c
-@@ -2393,7 +2393,6 @@ static void arm_cpu_class_init(ObjectClass *oc, void *data)
-     cc->sysemu_ops = &arm_sysemu_ops;
- #endif
-     cc->gdb_num_core_regs = 26;
--    cc->gdb_core_xml_file = "arm-core.xml";
-     cc->gdb_arch_name = arm_gdb_arch_name;
-     cc->gdb_get_dynamic_xml = arm_gdb_get_dynamic_xml;
-     cc->gdb_stop_before_watchpoint = true;
-@@ -2415,8 +2414,10 @@ static void arm_cpu_instance_init(Object *obj)
- static void cpu_register_class_init(ObjectClass *oc, void *data)
- {
-     ARMCPUClass *acc = ARM_CPU_CLASS(oc);
-+    CPUClass *cc = CPU_CLASS(acc);
+diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
+index dc4da95329..7cfe313aa6 100644
+--- a/docs/about/deprecated.rst
++++ b/docs/about/deprecated.rst
+@@ -399,6 +399,17 @@ Specifying the iSCSI password in plain text on the command line using the
+ used instead, to refer to a ``--object secret...`` instance that provides
+ a password via a file, or encrypted.
  
-     acc->info = data;
-+    cc->gdb_core_xml_file = "arm-core.xml";
- }
++TCG CPUs
++--------
++
++CRIS CPU architecture (since 8.1)
++'''''''''''''''''''''''''''''''''
++
++The CRIS architecture was pulled from Linux in 4.17 and the compiler
++is no longer packaged in any distro making it harder to run the
++``check-tcg`` tests. Unless we can improve the testing situation there
++is a chance the code will bitrot without anyone noticing.
++
+ Backwards compatibility
+ -----------------------
  
- void arm_cpu_register(const ARMCPUInfo *info)
 -- 
 2.39.2
 
