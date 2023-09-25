@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DD31CE7A8B
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 01:38:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B13C0CE7A91
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 01:53:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qkaYJ-0008SF-Ae; Sun, 24 Sep 2023 21:38:23 -0400
+	id 1qkamF-00029g-Vd; Sun, 24 Sep 2023 21:52:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qkaYG-0008Rv-JA; Sun, 24 Sep 2023 21:38:21 -0400
-Received: from mail-ua1-x92d.google.com ([2607:f8b0:4864:20::92d])
+ id 1qkamF-00029O-0g; Sun, 24 Sep 2023 21:52:47 -0400
+Received: from mail-vk1-xa2f.google.com ([2607:f8b0:4864:20::a2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qkaYE-000590-5f; Sun, 24 Sep 2023 21:38:20 -0400
-Received: by mail-ua1-x92d.google.com with SMTP id
- a1e0cc1a2514c-7a7e11a53c3so4645204241.1; 
- Sun, 24 Sep 2023 18:38:17 -0700 (PDT)
+ id 1qkamD-0007ZA-BN; Sun, 24 Sep 2023 21:52:46 -0400
+Received: by mail-vk1-xa2f.google.com with SMTP id
+ 71dfb90a1353d-49966c6fafbso1845195e0c.0; 
+ Sun, 24 Sep 2023 18:52:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695605896; x=1696210696; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1695606764; x=1696211564; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WLl+ksHGoiEIrdf6SLv9WiDZpgheUU1vc2LZXOFxb4o=;
- b=Jk8+LYNSNFFqdxfjp/5eg+RNMpw47L+Eu6xcwWyhFPs3XFTXrUfNO48w54xRjUeZZ2
- 82X1fjTDXr7yBrxHedXXO/q5Q6KkdCEVYk9JMaFLBGXIulLGt4u7Y3UxZa9gK+HGXzPr
- VKQ0YGyyESV5lDb7+5a1sVaQS2ZTsGUqPANRcU6iKoP+pUdkqWenUAVNWrJFVqX2ahFm
- 8NW+5lPXiJyqHEjCkZxhmQ08ap9IeTv8dW2SZIKLWn3yc3TVsOJE4oVZIL/gp+xQWEfi
- fpM2HL3Jy31+d3wF6YiwwNv1CagA8SZfaUKVw7WoPY7ffh3KWwbLINjxnwuuqgxhNqdX
- fThQ==
+ bh=dJGg5UmtZbMsIymT2oHjzGkP39vIjSHXvlqhvQiZqi4=;
+ b=clUWke0WN4BsyUkT2HipyNN1wmXb/1pPBwkPa+YWxTi6I9MhOKRbJUQET6xfNQzaoV
+ d2MpYI6KGCVX0XOU4Ws0B+7V4cCWqEy4tZk6UpFPLedTnRFlMeFhuwODQVzmbVrYU4ON
+ KHyV8cpAy9CypvcDaYujUWWgoZrr9VLq2xrtQcvXEWzGl5uA6AlyY/leGoeINKiwZLNZ
+ H4WyIEcAM30ag07Y2/nYpzqGZL76POkTaWrPoOiGRGucmspUnSSrgGTSETXwGY9u4l4q
+ J2zwQJnVJYWmzPpWnUckPI2VkR1hUapdg9WHUAua5XKzVMWz3Pxnt8cZsoz58CA1EPtk
+ ETTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695605896; x=1696210696;
+ d=1e100.net; s=20230601; t=1695606764; x=1696211564;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WLl+ksHGoiEIrdf6SLv9WiDZpgheUU1vc2LZXOFxb4o=;
- b=eeegJTwFp0HHShzO0UJ7NzD+CGSxAgPci8sWscPaoW4xxo8P2/PuoObCyvWaKef0WS
- 9ruAIBw8jQHbzk0CBUHLZEcoe9eQXX4IBVu/j6JmL1Crb8s8GB45dO7ZjaVkfPhSuyzC
- hqp61MC/3Z0hSjhH4rU5IEmJ3orLRh6ZeMQ3iitd44dm2o9bhzu7MIrwiTYcRzg6ko49
- 9tcIaTtFtwMag0in2qjEKQ9NhLQHlx/xMri/psl9kughBHyDTcutfoWzkIBp94eJ05zU
- NdtKTVg3SVwtjr9NiZkmSarccqLqvlqfbGOhVe2XiSCnH77iCD05gjS0Hh6uiC3NiuPQ
- Wprw==
-X-Gm-Message-State: AOJu0Yz4XbJFKLBk25EzI/fQJF+fwxqxS+6a+ht/u91yp5TyhbOT+wu/
- 9H0rpsbZvIObD01x1GkMp+Or4pbh7cyCUSr++0g=
-X-Google-Smtp-Source: AGHT+IGaEbBqq6AK97kQQzCi8y1jVD+wPmS+7pxiK4bgeMi7MhQBu1KtQ1WHvZV3CJP+yHP6pqPC6RAwUxNgMz2JmNM=
-X-Received: by 2002:a05:6102:2c8:b0:452:74b1:63e0 with SMTP id
- h8-20020a05610202c800b0045274b163e0mr2177367vsh.17.1695605896517; Sun, 24 Sep
- 2023 18:38:16 -0700 (PDT)
+ bh=dJGg5UmtZbMsIymT2oHjzGkP39vIjSHXvlqhvQiZqi4=;
+ b=Lfxe21ghYp+tB49qJ05JI3Ob6VOj8wLSa7YiZ1qOwquEOn5lkcgpmyvjgBcWOnkkgs
+ 6BNml4vuHOBsFCHquXMvqiNZ2jUs/WUPNQpnjS1nxk7v0OV+H1tXlFRNMArkFR3SpaxT
+ yFTKv0BJm4RYJVBs2RdDOa1Nptz90EpSx85Ary9HGLKuRIW1LMtcNGLWkQ8j++ncfQpK
+ SuGBmkKeTJuoez2CAmKostqGSWvQw8FQEuJHXuhYtd0aoPe5VdoOAXBgFG2w4aWCuOa7
+ SZX3Q1ty24v0bGocDRee5/GgKyjS6PPeD6/62ZBPiSIlrS2+P7edwKzJUo+xhmUTeUzE
+ /5mg==
+X-Gm-Message-State: AOJu0Yz2eTiQfpon6oCi8tz76e3sjXBu6jrWso2YS8M/SLSSR2w31KDb
+ l7UIrkInCatCbMCFJrkwn666jEUICc7m8B1527RJ/yuTnL9Vrg==
+X-Google-Smtp-Source: AGHT+IGM4Tkk1vFM6tLhfGqxJ8Cj1dBuXqQFkgb8tiMrkcCpbL3pgwgYzxWIpL4SijKgNUgqEOhNCq7rCFrZlVTf/lk=
+X-Received: by 2002:a05:6122:45a7:b0:49a:1a56:945c with SMTP id
+ de39-20020a05612245a700b0049a1a56945cmr1213210vkb.13.1695606764070; Sun, 24
+ Sep 2023 18:52:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230920112020.651006-1-dbarboza@ventanamicro.com>
- <20230920112020.651006-17-dbarboza@ventanamicro.com>
-In-Reply-To: <20230920112020.651006-17-dbarboza@ventanamicro.com>
+References: <20230924161044.1859672-1-alvinga@andestech.com>
+In-Reply-To: <20230924161044.1859672-1-alvinga@andestech.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 25 Sep 2023 11:37:48 +1000
-Message-ID: <CAKmqyKMPKQJnzftD9xRrL-b+O7unJkJtyr8VAZLZ93RBnDa9_w@mail.gmail.com>
-Subject: Re: [PATCH v3 16/19] target/riscv/cpu.c: make misa_ext_cfgs[] 'const'
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, philmd@linaro.org, ajones@ventanamicro.com
+Date: Mon, 25 Sep 2023 11:52:17 +1000
+Message-ID: <CAKmqyKOKc7OPOpmcn2x20QfGApuOd1t5NypwbJZ7E0kY30CRsQ@mail.gmail.com>
+Subject: Re: [PATCH v4] target/riscv: update checks on writing pmpcfg for
+ Smepmp to version 1.0
+To: Alvin Chang <alvinga@andestech.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, alistair.francis@wdc.com, 
+ ajones@ventanamicro.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92d;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2f;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2f.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -90,92 +89,121 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Sep 20, 2023 at 10:46=E2=80=AFPM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Mon, Sep 25, 2023 at 2:11=E2=80=AFAM Alvin Chang <alvinga@andestech.com>=
+ wrote:
 >
-> The array isn't marked as 'const' because we're initializing their
-> elements in riscv_cpu_add_misa_properties(), 'name' and 'description'
-> fields.
+> Current checks on writing pmpcfg for Smepmp follows Smepmp version
+> 0.9.1. However, Smepmp specification has already been ratified, and
+> there are some differences between version 0.9.1 and 1.0. In this
+> commit we update the checks of writing pmpcfg to follow Smepmp version
+> 1.0.
 >
-> In a closer look we can see that we're not using these 2 fields after
-> creating the MISA properties. And we can create the properties by using
-> riscv_get_misa_ext_name() and riscv_get_misa_ext_description()
-> directly.
+> When mseccfg.MML is set, the constraints to modify PMP rules are:
+> 1. Locked rules cannot be removed or modified until a PMP reset, unless
+>    mseccfg.RLB is set.
+> 2. From Smepmp specification version 1.0, chapter 2 section 4b:
+>    Adding a rule with executable privileges that either is M-mode-only
+>    or a locked Shared-Region is not possible and such pmpcfg writes are
+>    ignored, leaving pmpcfg unchanged.
 >
-> Remove the 'name' and 'description' fields from RISCVCPUMisaExtConfig
-> and make misa_ext_cfgs[] a const array.
+> The commit transfers the value of pmpcfg into the index of the Smepmp
+> truth table, and checks the rules by aforementioned specification
+> changes.
 >
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+> Signed-off-by: Alvin Chang <alvinga@andestech.com>
+> ---
+> Changes from v3: Modify "epmp_operation" to "smepmp_operation".
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+This has the same issue as all the previous versions.
+
+QEMU is currently not shipping with Smepmp support. So updating some
+of the code to support Smepmp is confusing.
+
+As I pointed out for the v3, we currently only support ePMP 0.9.3. So
+that is what the code must work with.
+
+In order for this change to go in, we also need to upgrade QEMU to
+support Smepmp 1.0.
+
+This patch is an attempt to do that:
+https://www.mail-archive.com/qemu-devel@nongnu.org/msg967676.html
+
+You basically need to combine the changes from
+https://www.mail-archive.com/qemu-devel@nongnu.org/msg967676.html into
+this patch. So there is a single patch that updates to Smepmp.
 
 Alistair
 
-> ---
->  target/riscv/cpu.c | 21 ++++++++-------------
->  1 file changed, 8 insertions(+), 13 deletions(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 8616c9e2f5..4875feded7 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1212,8 +1212,6 @@ static void riscv_cpu_init(Object *obj)
->  }
+> Changes from v2: Adopt switch case ranges and numerical order.
 >
->  typedef struct RISCVCPUMisaExtConfig {
-> -    const char *name;
-> -    const char *description;
->      target_ulong misa_bit;
->      bool enabled;
->  } RISCVCPUMisaExtConfig;
-> @@ -1317,7 +1315,7 @@ const char *riscv_get_misa_ext_description(uint32_t=
- bit)
->  #define MISA_CFG(_bit, _enabled) \
->      {.misa_bit =3D _bit, .enabled =3D _enabled}
+> Changes from v1: Convert ePMP over to Smepmp.
 >
-> -static RISCVCPUMisaExtConfig misa_ext_cfgs[] =3D {
-> +static const RISCVCPUMisaExtConfig misa_ext_cfgs[] =3D {
->      MISA_CFG(RVA, true),
->      MISA_CFG(RVC, true),
->      MISA_CFG(RVD, true),
-> @@ -1344,25 +1342,22 @@ void riscv_cpu_add_misa_properties(Object *cpu_ob=
-j)
->      int i;
+>  target/riscv/pmp.c | 40 ++++++++++++++++++++++++++++++++--------
+>  1 file changed, 32 insertions(+), 8 deletions(-)
 >
->      for (i =3D 0; i < ARRAY_SIZE(misa_ext_cfgs); i++) {
-> -        RISCVCPUMisaExtConfig *misa_cfg =3D &misa_ext_cfgs[i];
-> +        const RISCVCPUMisaExtConfig *misa_cfg =3D &misa_ext_cfgs[i];
->          int bit =3D misa_cfg->misa_bit;
-> -
-> -        misa_cfg->name =3D riscv_get_misa_ext_name(bit);
-> -        misa_cfg->description =3D riscv_get_misa_ext_description(bit);
-> +        const char *name =3D riscv_get_misa_ext_name(bit);
-> +        const char *desc =3D riscv_get_misa_ext_description(bit);
+> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> index a08cd95658..2ebf18c941 100644
+> --- a/target/riscv/pmp.c
+> +++ b/target/riscv/pmp.c
+> @@ -99,16 +99,40 @@ static void pmp_write_cfg(CPURISCVState *env, uint32_=
+t pmp_index, uint8_t val)
+>                  locked =3D false;
+>              }
 >
->          /* Check if KVM already created the property */
-> -        if (object_property_find(cpu_obj, misa_cfg->name)) {
-> +        if (object_property_find(cpu_obj, name)) {
->              continue;
->          }
->
-> -        object_property_add(cpu_obj, misa_cfg->name, "bool",
-> +        object_property_add(cpu_obj, name, "bool",
->                              cpu_get_misa_ext_cfg,
->                              cpu_set_misa_ext_cfg,
->                              NULL, (void *)misa_cfg);
-> -        object_property_set_description(cpu_obj, misa_cfg->name,
-> -                                        misa_cfg->description);
-> -        object_property_set_bool(cpu_obj, misa_cfg->name,
-> -                                 misa_cfg->enabled, NULL);
-> +        object_property_set_description(cpu_obj, name, desc);
-> +        object_property_set_bool(cpu_obj, name, misa_cfg->enabled, NULL)=
-;
->      }
->  }
->
+> -            /* mseccfg.MML is set */
+> -            if (MSECCFG_MML_ISSET(env)) {
+> -                /* not adding execute bit */
+> -                if ((val & PMP_LOCK) !=3D 0 && (val & PMP_EXEC) !=3D PMP=
+_EXEC) {
+> +            /*
+> +             * mseccfg.MML is set. Locked rules cannot be removed or mod=
+ified
+> +             * until a PMP reset. Besides, from Smepmp specification ver=
+sion 1.0
+> +             * , chapter 2 section 4b says:
+> +             * Adding a rule with executable privileges that either is
+> +             * M-mode-only or a locked Shared-Region is not possible and=
+ such
+> +             * pmpcfg writes are ignored, leaving pmpcfg unchanged.
+> +             */
+> +            if (MSECCFG_MML_ISSET(env) && !pmp_is_locked(env, pmp_index)=
+) {
+> +                /*
+> +                 * Convert the PMP permissions to match the truth table =
+in the
+> +                 * Smepmp spec.
+> +                 */
+> +                const uint8_t smepmp_operation =3D
+> +                    ((val & PMP_LOCK) >> 4) | ((val & PMP_READ) << 2) |
+> +                    (val & PMP_WRITE) | ((val & PMP_EXEC) >> 2);
+> +
+> +                switch (smepmp_operation) {
+> +                case 0 ... 8:
+>                      locked =3D false;
+> -                }
+> -                /* shared region and not adding X bit */
+> -                if ((val & PMP_LOCK) !=3D PMP_LOCK &&
+> -                    (val & 0x7) !=3D (PMP_WRITE | PMP_EXEC)) {
+> +                    break;
+> +                case 9 ... 11:
+> +                    break;
+> +                case 12:
+> +                    locked =3D false;
+> +                    break;
+> +                case 13:
+> +                    break;
+> +                case 14:
+> +                case 15:
+>                      locked =3D false;
+> +                    break;
+> +                default:
+> +                    g_assert_not_reached();
+>                  }
+>              }
+>          } else {
 > --
-> 2.41.0
+> 2.34.1
 >
 >
 
