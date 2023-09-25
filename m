@@ -4,85 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3811BCE7A81
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 04:32:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1406CE7A81
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 07:47:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qkdFP-0002y0-71; Mon, 25 Sep 2023 00:31:03 -0400
+	id 1qkgIZ-0002JX-IJ; Mon, 25 Sep 2023 03:46:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qkdFN-0002vC-Cv; Mon, 25 Sep 2023 00:31:01 -0400
-Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032])
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1qkgIX-0002JC-Lw
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 03:46:30 -0400
+Received: from mail-qk1-x72f.google.com ([2607:f8b0:4864:20::72f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qkdFD-0007Wc-BZ; Mon, 25 Sep 2023 00:30:53 -0400
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-2773523b2b6so886258a91.2; 
- Sun, 24 Sep 2023 21:30:50 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1qkgIV-0005xw-Pw
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 03:46:29 -0400
+Received: by mail-qk1-x72f.google.com with SMTP id
+ af79cd13be357-7741bffd123so327961385a.0
+ for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 00:46:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695616249; x=1696221049; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=ventanamicro.com; s=google; t=1695627985; x=1696232785; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vbzU6PuAtTUzb6Apd7sQVmg+mcHLI4MPchfruHrfnq4=;
- b=CCFKEMd151qE4fEBGJzbESBuSZAkWVKr+PtMf9CMFlrvvOeVUl08zdymkICfDWmi1m
- fkmdtKFMLwM/MRtoy4QsgnMzyuUeLlyENE/1a2Pq7FNX3pYa61Hm+KuTjnHZd5BP6dUa
- 9qLpyhefA2HMKD44kHQkGjltCv7AtX4piVg9DHNdvaSIyERb3azuA0PmNp1IvMxQhcgO
- CcFRgtcMuvmwuzSLiEj7n2UjaHbox/DOmo4NuBCQVka1LhtebWV6l7P/QrreUpWoQ7Bw
- A2z28qobBjJgGCHoE4rZqxPqyJt4I2p2ZNdCbC8ZxMVtau4/Bv6G86AWz34IrjM905k7
- p+Cw==
+ bh=A2UPM27VgmCT41l3PeXD9ZbgGbjdmzeS9hJ/0foCIGw=;
+ b=f0dYlZdpY79FvbwL27PrtIjRmVrSkhqeWLKtAU1XRgwKDv9hXKJywNnUF1/WX7aMeJ
+ YbPQT739UHr69vxlf0LU7ih7TUhownGVvHMbK4tLi9DkODhVEnIPAvH9Rf0USbZpnKJ3
+ y3nB3mMUQbjDTIaI5q1kkePeFdyYcCGcw/XG0EEjcy0QkXZUgVsCViqbIb9A1VcVGqpN
+ HSneCWT4k6jUEBlQh+X0/PchBkxtHm8FpyzAT5/bthxdrR+JAO+W/87sSSeNIlR4mjC6
+ O8+fQ0R8He6Z8dTi8nr0sxWjLQNi4DamyY7U09k/sFrv7B5oTq5C4lJA9+HRj0qxoRrq
+ on4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695616249; x=1696221049;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1695627985; x=1696232785;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vbzU6PuAtTUzb6Apd7sQVmg+mcHLI4MPchfruHrfnq4=;
- b=odZSudU4tRu7HM6U4eMSdG66LuAOGRVpMhDapRjqvHvt7hW+1ty7UpRRfoPJvs0oxB
- 3nv8IhQ76thq03PgPsE0VV8w9K3P0CVb/NZXLz6+REopvTEipCFsSmiqyiIn0+5gMEbP
- G+1sdsge9XevRvvqUc/yfqHd3gRC9Y+b3HJHee2eHiBSCIQyuO73j8wweRd+lbIT7iOn
- RnjXU83TTPoi+Iyk+KodYgWvXOgyhADJU3BJYosAIqtmK22RbJrB8ka3CHMcrhUjwBdp
- yPve6AW0lE+dvEkdSShU0KD8rRtqRr7+ihymABcjEttGZdQrlVkbGo4UdvWEY8qnmA+U
- sa3g==
-X-Gm-Message-State: AOJu0YyLa03N51P11Pm4X3RhRIYoijO7vj6c7DYsdUQ6wqWSNqnTXZDM
- /bucHS/hPWYuYfBrUgy+qpo=
-X-Google-Smtp-Source: AGHT+IF2MFlbGEMFluAhFsg0/sJ9YANolk5k0QJe81NJ8MLRdR9quSLqHuSpx6rHbxORHb8guZ/tQQ==
-X-Received: by 2002:a17:90a:f016:b0:26d:3ad:7c83 with SMTP id
- bt22-20020a17090af01600b0026d03ad7c83mr3241519pjb.13.1695616249409; 
- Sun, 24 Sep 2023 21:30:49 -0700 (PDT)
-Received: from toolbox.alistair23.me
- (2403-580b-97e8-0-321-6fb2-58f1-a1b1.ip6.aussiebb.net.
- [2403:580b:97e8:0:321:6fb2:58f1:a1b1])
- by smtp.gmail.com with ESMTPSA id
- y14-20020a17090a134e00b00276fef82025sm6002161pjf.35.2023.09.24.21.30.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Sep 2023 21:30:48 -0700 (PDT)
-From: Alistair Francis <alistair23@gmail.com>
-X-Google-Original-From: Alistair Francis <alistair.francis@wdc.com>
-To: david@gibson.dropbear.id.au, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: bmeng.cn@gmail.com, alistair.francis@wdc.com,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, palmer@dabbelt.com,
- alistair23@gmail.com, dbarboza@ventanamicro.com,
- Alistair Francis <Alistair.Francis@wdc.com>, liweiwei@iscas.ac.cn,
- Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH 3/4] target/riscv: vector_helper: Fixup local variables
- shadowing
-Date: Mon, 25 Sep 2023 14:30:22 +1000
-Message-ID: <20230925043023.71448-4-alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230925043023.71448-1-alistair.francis@wdc.com>
-References: <20230925043023.71448-1-alistair.francis@wdc.com>
+ bh=A2UPM27VgmCT41l3PeXD9ZbgGbjdmzeS9hJ/0foCIGw=;
+ b=SKk5p9om6kLdvU11Yv8S2cJrgtgFEtY4HBrzAgGo9TqK4kf0hYbO/v76RPUzEZgkIv
+ tWdKThfPiF46emajoBHeAM5LLbVYNAObrhhLeucSUBCHEkJP4ivMiEccqwwhYHHOzxsx
+ 1Y65IQ3CaROuNZzlQtFabl+umPdrBlgtV6YOMUA7L+AiyEm/k/U1a5INEEoBNzV4cwSP
+ wIp62KUuts30UFh1msz5vG3GjQccaYgIhr8GcoTWmrozXRjdxwMnn8zkopZNg8WySVmO
+ W+iZkfkOTSqHc7rfVvk50C1iI7v9G3v14qJjTboa5FD0H5ZETzOip3qV+hVoAK/gVRsG
+ HqBQ==
+X-Gm-Message-State: AOJu0YyzPPO81g3LUd3dKcE6S6l4TJ+CfC6rDa59k9t8FrO40T+O+vZy
+ 6fzT9T6c07tr5AGoWfdgEbni3QO3ZmOhczOHhKrkEw==
+X-Google-Smtp-Source: AGHT+IFoWTVrsoW9+pi6FS0Oa8v6cjz2FUVEttBUpEst6HvoVX6caw8M3vY1GWN++hTVwaJt3JCCV3Q6x76uJRVcQFw=
+X-Received: by 2002:a05:6214:12c1:b0:656:2696:9947 with SMTP id
+ s1-20020a05621412c100b0065626969947mr5296115qvv.18.1695627985112; Mon, 25 Sep
+ 2023 00:46:25 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
- envelope-from=alistair23@gmail.com; helo=mail-pj1-x1032.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20230907062440.1174224-1-mchitale@ventanamicro.com>
+ <CAKmqyKOTmQ_PJTvCoKJJon_zEkKEsM7AoP7LEz9Dtq4MJR95Ug@mail.gmail.com>
+In-Reply-To: <CAKmqyKOTmQ_PJTvCoKJJon_zEkKEsM7AoP7LEz9Dtq4MJR95Ug@mail.gmail.com>
+From: Mayuresh Chitale <mchitale@ventanamicro.com>
+Date: Mon, 25 Sep 2023 13:15:49 +0530
+Message-ID: <CAN37VV44=CtnjU6iXeCzP466QNb8xzMLwfgQDJtCaYgewas0Zw@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: pmp: Clear pmp/smepmp bits on reset
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::72f;
+ envelope-from=mchitale@ventanamicro.com; helo=mail-qk1-x72f.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -100,49 +89,94 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Local variables shadowing other local variables or parameters make the
-code needlessly hard to understand.  Bugs love to hide in such code.
-Evidence: "[PATCH v3 1/7] migration/rdma: Fix save_page method to fail
-on polling error".
+On Tue, Sep 19, 2023 at 10:10=E2=80=AFAM Alistair Francis <alistair23@gmail=
+.com> wrote:
+>
+> On Thu, Sep 7, 2023 at 4:25=E2=80=AFPM Mayuresh Chitale
+> <mchitale@ventanamicro.com> wrote:
+> >
+> > As per the Priv and Smepmp specifications, certain bits such as the 'L'
+> > bit of pmp entries and mseccfg.MML can only be cleared upon reset and i=
+t
+> > is necessary to do so to allow 'M' mode firmware to correctly reinitial=
+ize
+> > the pmp/smpemp state across reboots.
+> >
+> > Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+> > ---
+> >  target/riscv/cpu.c | 11 +++++++++++
+> >  target/riscv/pmp.c | 10 ++++++++++
+> >  target/riscv/pmp.h |  1 +
+> >  3 files changed, 22 insertions(+)
+> >
+> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > index 0843461660..77ed653b8d 100644
+> > --- a/target/riscv/cpu.c
+> > +++ b/target/riscv/cpu.c
+> > @@ -896,6 +896,17 @@ static void riscv_cpu_reset_hold(Object *obj)
+> >      }
+> >      /* mmte is supposed to have pm.current hardwired to 1 */
+> >      env->mmte |=3D (EXT_STATUS_INITIAL | MMTE_M_PM_CURRENT);
+> > +
+> > +    /*
+> > +     * Clear mseccfg and unlock all the PMP entries upon reset.
+> > +     * This is allowed as per the priv and smepmp specifications.
+> > +     * and is needed to clear stale entries across reboots.
+> > +     */
+> > +    if (riscv_cpu_cfg(env)->ext_smepmp) {
+>
+> Does this compile? ext_smepmp doesn't seem to exist
+It requires the patch below as well:
+https://lists.nongnu.org/archive/html/qemu-riscv/2023-06/msg00122.html
 
-This patch removes the local variable shadowing. Tested by adding:
-
-    --extra-cflags='-Wshadow=local -Wno-error=shadow=local -Wno-error=shadow=compatible-local'
-
-To configure
-
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/vector_helper.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
-
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 3fb05cc3d6..cba02c1320 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -516,7 +516,7 @@ ProbeSuccess:
-                 k++;
-                 continue;
-             }
--            target_ulong addr = base + ((i * nf + k) << log2_esz);
-+            addr = base + ((i * nf + k) << log2_esz);
-             ldst_elem(env, adjust_addr(env, addr), i + k * max_elems, vd, ra);
-             k++;
-         }
-@@ -4791,9 +4791,10 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
-     uint32_t total_elems = vext_get_total_elems(env, desc, esz);          \
-     uint32_t vta = vext_vta(desc);                                        \
-     uint32_t vma = vext_vma(desc);                                        \
--    target_ulong i_max, i;                                                \
-+    target_ulong i_max, i_min, i;                                         \
-                                                                           \
--    i_max = MAX(MIN(s1 < vlmax ? vlmax - s1 : 0, vl), env->vstart);       \
-+    i_min = MIN(s1 < vlmax ? vlmax - s1 : 0, vl);                         \
-+    i_max = MAX(i_min, env->vstart);                                      \
-     for (i = env->vstart; i < i_max; ++i) {                               \
-         if (!vm && !vext_elem_mask(v0, i)) {                              \
-             /* set masked-off elements to 1s */                           \
--- 
-2.41.0
-
+I will rebase and resend it.
+>
+> Alistair
+>
+> > +        env->mseccfg =3D 0;
+> > +    }
+> > +
+> > +    pmp_unlock_entries(env);
+> >  #endif
+> >      env->xl =3D riscv_cpu_mxl(env);
+> >      riscv_cpu_update_mask(env);
+> > diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> > index 3f6c8cf08d..f3eb6e6585 100644
+> > --- a/target/riscv/pmp.c
+> > +++ b/target/riscv/pmp.c
+> > @@ -131,6 +131,16 @@ static bool pmp_write_cfg(CPURISCVState *env, uint=
+32_t pmp_index, uint8_t val)
+> >      return false;
+> >  }
+> >
+> > +void pmp_unlock_entries(CPURISCVState *env)
+> > +{
+> > +    uint32_t pmp_num =3D pmp_get_num_rules(env);
+> > +    int i;
+> > +
+> > +    for (i =3D 0; i < pmp_num; i++) {
+> > +        env->pmp_state.pmp[i].cfg_reg &=3D ~PMP_LOCK;
+> > +    }
+> > +}
+> > +
+> >  static void pmp_decode_napot(target_ulong a, target_ulong *sa,
+> >                               target_ulong *ea)
+> >  {
+> > diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
+> > index cf5c99f8e6..2c5ec3cdf1 100644
+> > --- a/target/riscv/pmp.h
+> > +++ b/target/riscv/pmp.h
+> > @@ -81,6 +81,7 @@ void pmp_update_rule_addr(CPURISCVState *env, uint32_=
+t pmp_index);
+> >  void pmp_update_rule_nums(CPURISCVState *env);
+> >  uint32_t pmp_get_num_rules(CPURISCVState *env);
+> >  int pmp_priv_to_page_prot(pmp_priv_t pmp_priv);
+> > +void pmp_unlock_entries(CPURISCVState *env);
+> >
+> >  #define MSECCFG_MML_ISSET(env) get_field(env->mseccfg, MSECCFG_MML)
+> >  #define MSECCFG_MMWP_ISSET(env) get_field(env->mseccfg, MSECCFG_MMWP)
+> > --
+> > 2.34.1
+> >
+> >
 
