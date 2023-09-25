@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2008ACE7A81
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 14:59:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E840CE7A95
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 15:00:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qkn3N-0000Hv-Sx; Mon, 25 Sep 2023 10:59:17 -0400
+	id 1qkn3O-0000K5-QG; Mon, 25 Sep 2023 10:59:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qkn35-0008Ku-9j
+ id 1qkn35-0008Jt-3l
  for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:59:00 -0400
 Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qkn2r-0002Ep-V2
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:58:56 -0400
+ id 1qkn2q-0002DW-MM
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:58:52 -0400
 Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-405524e6769so26306375e9.1
- for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 07:58:44 -0700 (PDT)
+ 5b1f17b1804b1-40594697600so14368335e9.1
+ for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 07:58:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695653924; x=1696258724; darn=nongnu.org;
+ d=linaro.org; s=google; t=1695653923; x=1696258723; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=y3Mf9pXINv9MNziLLoU9Gq8z0X78btsM4rjGFmiQ41I=;
- b=u+F/DJ7qlRZsnBL0Z1lVSZFqS3G03shccLStBwJcnNPogQ02GjWOXrfo1NqgHwDl4g
- 5DJWr0YtQMLKUCYLPH6DM1KWoJySXqbhzz0Yv1/kd6ZtjXTmhI3sBW/c1CoXVpl57MON
- RKgSSqgPxkrq52i61y3fX78wA+O/J6tG2Q+qHliT5jIWfNh+Qm5UApo7JsS6y2+dcIUM
- ECYy5m5buy9CM1KqXRzZsB41Cw0sU8yGilF6Wh9w0YeJp7k5x+2qkvAk9SBT1IHZFK9M
- dG36KnOYPWXCxRYbVeLqIBmDMor36/pWeqnk1Of4sHtP6ay59/PGYZjlKV/x00H3JrnM
- xAYA==
+ bh=Muj6oq//HewwqFNb1Dn6YA/ZLR4P4d92sjjuFTR9b6Q=;
+ b=DaaegImvntrWM+0vvPKYNhd6sA7GjTl+o5tlz4R6npR2z2/wRgCJfN9C3xiDIRdouo
+ 2XiZGIV9cOJuF+PXI96z6vtYZxtEo4C2r1ctunPk35Z05/jh7MO96U3RnqTgTd5mzN8z
+ qLSk6yNkPtU3z4vGNM/opijPcnxy5kckD/hn8A689cFfKGurS8G+zAp6xPOl3vX8ZzSP
+ E6J8EkcmzOKLjcgA3REr/TGTzUAlfJBre36tM5Q3EHmFBDOIUZvAdIp2LlXBTS/2bACR
+ 9JoaCUgaJKABViZN4eXGhfPJgoxzFaZdhEv+1BdgSQvYTrrpdUaHsBHQKL15HOUjAqyx
+ KVew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695653924; x=1696258724;
+ d=1e100.net; s=20230601; t=1695653923; x=1696258723;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=y3Mf9pXINv9MNziLLoU9Gq8z0X78btsM4rjGFmiQ41I=;
- b=oqvLPsRm2S9H+WNNACzyVZwvnDIpX5BiELuuqQRQUj8lXetuJY5klRm3SsOiT4iDXw
- HE5BqH3l3vilMqPA++9AyYbsYKF2BYSxsK1Q9A6A8EBHDqKOGSoPmf7BBJQUGXokQPu4
- svX6w23PbHoyphBFFL4Sl3+j7wbSrjNra1slPTq+TJIJH3LsivMvUl+RIGsmiXLuFqpy
- 18SVt+iSQY1xlQxRaVbk2v/6tCb3xgxYQpwkhjzSiLMNSHor7BEVh9GnG8ca1r+XynIb
- J2omScdh3bWUyIzwPv/Ghr+PH8qRwIkizDsKYDp5YhqziNCKadGdQ/Eg/GyLMCKboENY
- qLlA==
-X-Gm-Message-State: AOJu0YxDXTvL02jROL41TBBPrFZCyVsuCl2eoCfD/SrJz0a2i8qJqdJ2
- NZXJz0kHqkJeb3jVLpyb8J8mzw==
-X-Google-Smtp-Source: AGHT+IEiLCyOEts8B03mcZSLRA6zd9J8yZxN0E94W2V1sD6BYxfhnegjBU/8FSmvl7Wb9833D6d/DA==
-X-Received: by 2002:a1c:4c12:0:b0:402:e68f:8a4f with SMTP id
- z18-20020a1c4c12000000b00402e68f8a4fmr5500650wmf.0.1695653923892; 
- Mon, 25 Sep 2023 07:58:43 -0700 (PDT)
+ bh=Muj6oq//HewwqFNb1Dn6YA/ZLR4P4d92sjjuFTR9b6Q=;
+ b=v67HXKZ47JruP8i8SOAFsTFOvIlIV9zWuwZuzhX3bAiSZMN462oIB42b+GHaL3Utai
+ oy5/u0QS7tDPNFl8m2meCCB6ldSagGTU+ym1qFWJe6EoivgokNf7/kwaSbigWRVlUs4C
+ 46Y5/txAWwG1tP4SBYRLu+m/61SuNYQODHeuc16eGk1XHnH84DPz7P9BOLs3yJ4Lp9pT
+ 8nwwz6/+yLTucwIZFs70iVqZ8rDUH1W/LzzzoNDuRa6nFA0BCKqpU/AqxLoT1gMImshX
+ TbrM53YERTBFhst3kqUH1RdDzTeNIMjeoieFxouytLy+Aab8u0t3gPAPP1HGSr478az5
+ Pvng==
+X-Gm-Message-State: AOJu0YxfckGAMacKDurX4nieod+bVluJfX/O+qaLIlXvGJDeizSlS8Sx
+ 30UQmxqTCDePZ1m8mXraUnLPSQ==
+X-Google-Smtp-Source: AGHT+IEYe4BJyScK2QsC4DrLMygYlSI2AWvJqT3BPrk0nW+S+4B6rEJ5OFCNAObJvcjpLdn4Gpbl4A==
+X-Received: by 2002:a1c:770c:0:b0:405:3d41:5641 with SMTP id
+ t12-20020a1c770c000000b004053d415641mr6365257wmi.15.1695653922843; 
+ Mon, 25 Sep 2023 07:58:42 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- b12-20020a5d634c000000b0031773a8e5c4sm12054037wrw.37.2023.09.25.07.58.41
+ a3-20020a5d4d43000000b003177074f830sm12214244wru.59.2023.09.25.07.58.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 25 Sep 2023 07:58:42 -0700 (PDT)
 Received: from zen.linaroharston (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id B57851FFD5;
- Mon, 25 Sep 2023 15:48:58 +0100 (BST)
+ by zen.linaroharston (Postfix) with ESMTP id 078DE1FFC8;
+ Mon, 25 Sep 2023 15:48:57 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>,
@@ -92,10 +92,11 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  qemu-arm@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Ilya Leoshkevich <iii@linux.ibm.com>, Laurent Vivier <lvivier@redhat.com>,
  Yoshinori Sato <ysato@users.sourceforge.jp>,
- Leif Lindholm <quic_llindhol@quicinc.com>, Beraldo Leal <bleal@redhat.com>
-Subject: [RFC PATCH 30/31] plugins: add time control API
-Date: Mon, 25 Sep 2023 15:48:53 +0100
-Message-Id: <20230925144854.1872513-31-alex.bennee@linaro.org>
+ Leif Lindholm <quic_llindhol@quicinc.com>, Beraldo Leal <bleal@redhat.com>,
+ Akihiko Odaki <akihiko.odaki@daynix.com>
+Subject: [PATCH 16/31] gdbstub: Use g_markup_printf_escaped()
+Date: Mon, 25 Sep 2023 15:48:39 +0100
+Message-Id: <20230925144854.1872513-17-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230925144854.1872513-1-alex.bennee@linaro.org>
 References: <20230925144854.1872513-1-alex.bennee@linaro.org>
@@ -126,115 +127,72 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Expose the ability to control time through the plugin API. Only one
-plugin can control time so it has to request control when loaded.
-There are probably more corner cases to catch here.
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
 
+g_markup_printf_escaped() is a safer alternative to simple printf() as
+it automatically escapes values.
+
+Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+Message-Id: <20230912224107.29669-9-akihiko.odaki@daynix.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20230519170454.2353945-8-alex.bennee@linaro.org>
-
 ---
-v2
-  - ifdef for SOFTMMU only
-  - fix checkpatch warnings
----
- include/qemu/qemu-plugin.h   | 19 +++++++++++++++++++
- plugins/api.c                | 28 ++++++++++++++++++++++++++++
- plugins/qemu-plugins.symbols |  2 ++
- 3 files changed, 49 insertions(+)
+ gdbstub/gdbstub.c | 36 +++++++++++++++++++++---------------
+ 1 file changed, 21 insertions(+), 15 deletions(-)
 
-diff --git a/include/qemu/qemu-plugin.h b/include/qemu/qemu-plugin.h
-index 50a9957279..898385d92d 100644
---- a/include/qemu/qemu-plugin.h
-+++ b/include/qemu/qemu-plugin.h
-@@ -536,7 +536,26 @@ void qemu_plugin_register_vcpu_mem_inline(struct qemu_plugin_insn *insn,
-                                           enum qemu_plugin_op op, void *ptr,
-                                           uint64_t imm);
+diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
+index 9db4af41c1..a4f2bf3723 100644
+--- a/gdbstub/gdbstub.c
++++ b/gdbstub/gdbstub.c
+@@ -373,28 +373,34 @@ static const char *get_feature_xml(const char *p, const char **newp,
+     if (strncmp(p, "target.xml", len) == 0) {
+         if (!process->target_xml) {
+             GDBRegisterState *r;
+-            GString *xml = g_string_new("<?xml version=\"1.0\"?>");
++            g_autoptr(GPtrArray) xml = g_ptr_array_new_with_free_func(g_free);
  
-+/**
-+ * qemu_plugin_request_time_control() - request the ability to control time
-+ *
-+ * This grants the plugin the ability to control system time. Only one
-+ * plugin can control time so if multiple plugins request the ability
-+ * all but the first will fail.
-+ *
-+ * Returns an opaque handle or NULL if fails
-+ */
-+const void *qemu_plugin_request_time_control(void);
+-            g_string_append(xml,
+-                            "<!DOCTYPE target SYSTEM \"gdb-target.dtd\">"
+-                            "<target>");
++            g_ptr_array_add(
++                xml,
++                g_strdup("<?xml version=\"1.0\"?>"
++                         "<!DOCTYPE target SYSTEM \"gdb-target.dtd\">"
++                         "<target>"));
  
-+/**
-+ * qemu_plugin_update_ns() - update system emulation time
-+ * @handle: opaque handle returned by qemu_plugin_request_time_control()
-+ * @new_time_ns: time in nanoseconds
-+ *
-+ * This allows an appropriately authorised plugin (i.e. holding the
-+ * time control handle) to move system time forward to @new_time_ns.
-+ */
-+void qemu_plugin_update_ns(const void *handle, int64_t new_time_ns);
+             if (cc->gdb_arch_name) {
+-                g_string_append_printf(xml,
+-                                       "<architecture>%s</architecture>",
+-                                       cc->gdb_arch_name(cpu));
++                g_ptr_array_add(
++                    xml,
++                    g_markup_printf_escaped("<architecture>%s</architecture>",
++                                            cc->gdb_arch_name(cpu)));
+             }
+-            g_string_append(xml, "<xi:include href=\"");
+-            g_string_append(xml, cc->gdb_core_xml_file);
+-            g_string_append(xml, "\"/>");
++            g_ptr_array_add(
++                xml,
++                g_markup_printf_escaped("<xi:include href=\"%s\"/>",
++                                        cc->gdb_core_xml_file));
+             for (r = cpu->gdb_regs; r; r = r->next) {
+-                g_string_append(xml, "<xi:include href=\"");
+-                g_string_append(xml, r->xml);
+-                g_string_append(xml, "\"/>");
++                g_ptr_array_add(
++                    xml,
++                    g_markup_printf_escaped("<xi:include href=\"%s\"/>",
++                                            r->xml));
+             }
+-            g_string_append(xml, "</target>");
++            g_ptr_array_add(xml, g_strdup("</target>"));
++            g_ptr_array_add(xml, NULL);
  
- typedef void
- (*qemu_plugin_vcpu_syscall_cb_t)(qemu_plugin_id_t id, unsigned int vcpu_index,
-diff --git a/plugins/api.c b/plugins/api.c
-index 5521b0ad36..a1d413dc2d 100644
---- a/plugins/api.c
-+++ b/plugins/api.c
-@@ -37,6 +37,7 @@
- #include "qemu/osdep.h"
- #include "qemu/plugin.h"
- #include "qemu/log.h"
-+#include "qemu/timer.h"
- #include "tcg/tcg.h"
- #include "exec/exec-all.h"
- #include "exec/ram_addr.h"
-@@ -427,3 +428,30 @@ uint64_t qemu_plugin_entry_code(void)
- #endif
-     return entry;
- }
-+
-+/*
-+ * Time control
-+ */
-+#ifdef CONFIG_SOFTMMU
-+static bool has_control;
-+#endif
-+
-+const void *qemu_plugin_request_time_control(void)
-+{
-+#ifdef CONFIG_SOFTMMU
-+    if (!has_control) {
-+        has_control = true;
-+        return &has_control;
-+    }
-+#endif
-+    return NULL;
-+}
-+
-+void qemu_plugin_update_ns(const void *handle, int64_t new_time)
-+{
-+#ifdef CONFIG_SOFTMMU
-+    if (handle == &has_control) {
-+        qemu_clock_advance_virtual_time(new_time);
-+    }
-+#endif
-+}
-diff --git a/plugins/qemu-plugins.symbols b/plugins/qemu-plugins.symbols
-index 71f6c90549..91b882fecc 100644
---- a/plugins/qemu-plugins.symbols
-+++ b/plugins/qemu-plugins.symbols
-@@ -35,11 +35,13 @@
-   qemu_plugin_register_vcpu_tb_exec_cb;
-   qemu_plugin_register_vcpu_tb_exec_inline;
-   qemu_plugin_register_vcpu_tb_trans_cb;
-+  qemu_plugin_request_time_control;
-   qemu_plugin_reset;
-   qemu_plugin_start_code;
-   qemu_plugin_tb_get_insn;
-   qemu_plugin_tb_n_insns;
-   qemu_plugin_tb_vaddr;
-   qemu_plugin_uninstall;
-+  qemu_plugin_update_ns;
-   qemu_plugin_vcpu_for_each;
- };
+-            process->target_xml = g_string_free(xml, false);
++            process->target_xml = g_strjoinv(NULL, (void *)xml->pdata);
+         }
+         return process->target_xml;
+     }
 -- 
 2.39.2
 
