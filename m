@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8D85CE7A95
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 15:02:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D23CCE7A95
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 15:03:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qkn3O-0000Jw-NW; Mon, 25 Sep 2023 10:59:18 -0400
+	id 1qkn3M-0000EV-Pd; Mon, 25 Sep 2023 10:59:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qkn36-0008LJ-BG
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:59:01 -0400
-Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
+ id 1qkn35-0008KE-3U
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:59:00 -0400
+Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qkn2s-0002FE-9F
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:58:59 -0400
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-32172f8a5dbso5537129f8f.3
- for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 07:58:45 -0700 (PDT)
+ id 1qkn2q-0002D2-AG
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:58:50 -0400
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-32008e339adso6201409f8f.2
+ for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 07:58:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695653924; x=1696258724; darn=nongnu.org;
+ d=linaro.org; s=google; t=1695653922; x=1696258722; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pzgHDvkSEQDHi8J0pZ97uLL1mOaFrktKKPN/mU4z0S8=;
- b=mzQuBc8APVtviKLxBms2E4zW8c584CMrVl3ikNySRg92S7TcXpecXd1H36fVj7HiPR
- pF6yJLqEb25mubZMC09MzpGpiOgAmQGBHtxug++86+7caqY9ueAl0JzsQMorAJbA/PPt
- wmAEBrnLlRb1Tsq/0BCJUT77Iz+iGCQOvxbxC3KfTJGZpBxSS7AikP30NSh+ovhH+ZVw
- TkBYxRNEah9je01MPtde7BvHhppw1kTWlB6l0uehbabr4dgY4dELac9p0HXJ+PWKBMic
- Cw1Hpp8NGEH7FyMEYt19x5ypHm/0zt8HBffdySr8kvM2rXhTz5yCEhEE8yrHXmYIhZh2
- NQWw==
+ bh=54vdWxoInkKQLiHeicKKqmeJW+RARqhkyr/iqwsF+dM=;
+ b=N0JGQ1ACzErPhj5/RVKIZPU3P9/fhZ2N2vT87IdLax6i2mzk8syvv0taLKXvF84ZDu
+ SrcEqRbxC1rwkKCeOsXeQlTWFka7FQTBT1R76QItknkjO35mghSpH9NkwBA3Qcd+bXGe
+ hV5PV/kBtFtAry+toxYcD7SALKDPk9K16G4SxvrQeXwcuZD24vcFWWBgRMCFBCQcur0a
+ a5tcJJQA7E7+hLOk3VglpARWZWP7LkaFRio8q2TSfUVIWk043vukSXxhg0zRU27x6i31
+ cVrq1MLlI95v8pqp9uuVf3Io2oreMXlIfEim1eimN+zTKpuyPmTF1adKIsLB9JJd6ddo
+ ej0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695653924; x=1696258724;
+ d=1e100.net; s=20230601; t=1695653922; x=1696258722;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pzgHDvkSEQDHi8J0pZ97uLL1mOaFrktKKPN/mU4z0S8=;
- b=HoIbVutRGPp/WRx/0EexN75yGvj/5v89Kn7icZvZyx3V4oabdyPMOwM+dKS9q7836H
- wAMPPZp2TUTvOi6M81l159e7P89klSQsQ2O8qXpiBQLaxv+TFezP/dqSkxMRL2kqLYG6
- rBdbY2ExbxLnlQIpF1pg4v+5d+ECHlACiEdTsfb0xeqYZKWUm/QeiRwd6rZV4qBa6Ye3
- MyNh0mxp5znofwd4lyKyYnEcslKS7B4aOdlwLTEs05TUhEaRB8Y8Q+cq0D/QMr7aRIAy
- 0S6rKxUgrp0AwBgKJX5IAZnASul1SlO216Iy+IvOLb6rk8z6enlXY+pEv1E80860wQLI
- dIJw==
-X-Gm-Message-State: AOJu0YxcL4nrewhFWy0sHp/yXqoR1BKR/HOS+hBrfcmWKSFdnDhG0pk9
- VT/e6DVghaObI2xdjWIP64sqkg==
-X-Google-Smtp-Source: AGHT+IEK0Goz+dxJRznfKltKNgQq9qAmubNsDzadXtMcGR/Rnpytq7dHIOItqTM3umFDNRkCiWgnKA==
-X-Received: by 2002:adf:fe49:0:b0:321:6fb0:9a84 with SMTP id
- m9-20020adffe49000000b003216fb09a84mr6392006wrs.37.1695653924221; 
- Mon, 25 Sep 2023 07:58:44 -0700 (PDT)
+ bh=54vdWxoInkKQLiHeicKKqmeJW+RARqhkyr/iqwsF+dM=;
+ b=oQxkNBLPIYVrFLSFBXfFq4eTIJjmNM9dXnUC3sjj0Nf4KbiqR6L3+pbJZ6JFgMgi8x
+ 8m4uBSAPbqxahIqdWwJoDl5+A6ziX6uD6OsRIKOPuTXXsZGJvbA6wVnmJm39E3zRumkT
+ kdin8cxsuTvY+pPRvoMpEYNP3+O2RAEBsKbO/pbRWlNdMkxB67u32whNapIx9wWR2n51
+ kOuSTTdcZ8VW37FUIr1uqX7i/7E7IdHvu3II74DoIfdXSM++LIHe4pWU71qRcJVvyil2
+ gDHjOVOHpdKvPXfO+VtPFenR7R4+stpfglrfykU1H1XY4WG6f2hdN8uv0o0lEFHIpNIH
+ HjVw==
+X-Gm-Message-State: AOJu0YyGcwxLSxINSKvy81bVidAHjYKZlZ4aa5aTZMCOzqrpy0Q1Crx9
+ ZFC7nlfVGSChFV3Xf5aG67YkPg==
+X-Google-Smtp-Source: AGHT+IETYE8gGZUvi5YSKhCE7iA0Eg4AKr99jrnWwLoe6ct7K7zw2dvLkEWkX477WRraNOiMP25uTg==
+X-Received: by 2002:adf:fe85:0:b0:319:f9d6:a769 with SMTP id
+ l5-20020adffe85000000b00319f9d6a769mr5600388wrr.45.1695653922406; 
+ Mon, 25 Sep 2023 07:58:42 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- t7-20020a5d49c7000000b003176aa612b1sm12043674wrs.38.2023.09.25.07.58.41
+ x17-20020a5d6511000000b0031fd849e797sm12075216wru.105.2023.09.25.07.58.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Sep 2023 07:58:42 -0700 (PDT)
+ Mon, 25 Sep 2023 07:58:41 -0700 (PDT)
 Received: from zen.linaroharston (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 73C1E1FFD2;
- Mon, 25 Sep 2023 15:48:58 +0100 (BST)
+ by zen.linaroharston (Postfix) with ESMTP id 3C22E1FFCA;
+ Mon, 25 Sep 2023 15:48:57 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>,
@@ -92,25 +92,26 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  qemu-arm@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Ilya Leoshkevich <iii@linux.ibm.com>, Laurent Vivier <lvivier@redhat.com>,
  Yoshinori Sato <ysato@users.sourceforge.jp>,
- Leif Lindholm <quic_llindhol@quicinc.com>, Beraldo Leal <bleal@redhat.com>
-Subject: [RFC PATCH 28/31] qtest: use cpu interface in qtest_clock_warp
-Date: Mon, 25 Sep 2023 15:48:51 +0100
-Message-Id: <20230925144854.1872513-29-alex.bennee@linaro.org>
+ Leif Lindholm <quic_llindhol@quicinc.com>, Beraldo Leal <bleal@redhat.com>,
+ Akihiko Odaki <akihiko.odaki@daynix.com>
+Subject: [PATCH 18/31] target/ppc: Remove references to gdb_has_xml
+Date: Mon, 25 Sep 2023 15:48:41 +0100
+Message-Id: <20230925144854.1872513-19-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230925144854.1872513-1-alex.bennee@linaro.org>
 References: <20230925144854.1872513-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::431;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x431.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -126,72 +127,68 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This generalises the qtest_clock_warp code to use the AccelOps
-handlers for updating its own sense of time. This will make the next
-patch which moves the warp code closer to pure code motion.
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
 
+GDB has XML support since 6.7 which was released in 2007.
+It's time to remove support for old GDB versions without XML support.
+
+Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+Message-Id: <20230912224107.29669-11-akihiko.odaki@daynix.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Acked-by: Thomas Huth <thuth@redhat.com>
-Message-Id: <20230519170454.2353945-6-alex.bennee@linaro.org>
 ---
- include/sysemu/qtest.h | 1 +
- accel/qtest/qtest.c    | 1 +
- softmmu/qtest.c        | 6 +++---
- 3 files changed, 5 insertions(+), 3 deletions(-)
+ target/ppc/gdbstub.c | 18 ------------------
+ 1 file changed, 18 deletions(-)
 
-diff --git a/include/sysemu/qtest.h b/include/sysemu/qtest.h
-index 85f05b0e46..e1f69783d6 100644
---- a/include/sysemu/qtest.h
-+++ b/include/sysemu/qtest.h
-@@ -35,5 +35,6 @@ void qtest_server_set_send_handler(void (*send)(void *, const char *),
- void qtest_server_inproc_recv(void *opaque, const char *buf);
- 
- int64_t qtest_get_virtual_clock(void);
-+void qtest_set_virtual_clock(int64_t count);
- 
- #endif
-diff --git a/accel/qtest/qtest.c b/accel/qtest/qtest.c
-index f6056ac836..53182e6c2a 100644
---- a/accel/qtest/qtest.c
-+++ b/accel/qtest/qtest.c
-@@ -52,6 +52,7 @@ static void qtest_accel_ops_class_init(ObjectClass *oc, void *data)
- 
-     ops->create_vcpu_thread = dummy_start_vcpu_thread;
-     ops->get_virtual_clock = qtest_get_virtual_clock;
-+    ops->set_virtual_clock = qtest_set_virtual_clock;
- };
- 
- static const TypeInfo qtest_accel_ops_type = {
-diff --git a/softmmu/qtest.c b/softmmu/qtest.c
-index 35b643a274..bac1962efb 100644
---- a/softmmu/qtest.c
-+++ b/softmmu/qtest.c
-@@ -331,14 +331,14 @@ int64_t qtest_get_virtual_clock(void)
-     return qatomic_read_i64(&qtest_clock_counter);
- }
- 
--static void qtest_set_virtual_clock(int64_t count)
-+void qtest_set_virtual_clock(int64_t count)
- {
-     qatomic_set_i64(&qtest_clock_counter, count);
- }
- 
- static void qtest_clock_warp(int64_t dest)
- {
--    int64_t clock = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
-+    int64_t clock = cpus_get_virtual_clock();
-     AioContext *aio_context;
-     assert(qtest_enabled());
-     aio_context = qemu_get_aio_context();
-@@ -347,7 +347,7 @@ static void qtest_clock_warp(int64_t dest)
-                                                       QEMU_TIMER_ATTR_ALL);
-         int64_t warp = qemu_soonest_timeout(dest - clock, deadline);
- 
--        qtest_set_virtual_clock(qtest_get_virtual_clock() + warp);
-+        cpus_set_virtual_clock(cpus_get_virtual_clock() + warp);
- 
-         qemu_clock_run_timers(QEMU_CLOCK_VIRTUAL);
-         timerlist_run_timers(aio_context->tlg.tl[QEMU_CLOCK_VIRTUAL]);
+diff --git a/target/ppc/gdbstub.c b/target/ppc/gdbstub.c
+index 778ef73bd7..ec5731e5d6 100644
+--- a/target/ppc/gdbstub.c
++++ b/target/ppc/gdbstub.c
+@@ -54,12 +54,6 @@ static int ppc_gdb_register_len(int n)
+     case 0 ... 31:
+         /* gprs */
+         return sizeof(target_ulong);
+-    case 32 ... 63:
+-        /* fprs */
+-        if (gdb_has_xml()) {
+-            return 0;
+-        }
+-        return 8;
+     case 66:
+         /* cr */
+     case 69:
+@@ -74,12 +68,6 @@ static int ppc_gdb_register_len(int n)
+     case 68:
+         /* ctr */
+         return sizeof(target_ulong);
+-    case 70:
+-        /* fpscr */
+-        if (gdb_has_xml()) {
+-            return 0;
+-        }
+-        return sizeof(target_ulong);
+     default:
+         return 0;
+     }
+@@ -132,9 +120,6 @@ int ppc_cpu_gdb_read_register(CPUState *cs, GByteArray *buf, int n)
+     if (n < 32) {
+         /* gprs */
+         gdb_get_regl(buf, env->gpr[n]);
+-    } else if (n < 64) {
+-        /* fprs */
+-        gdb_get_reg64(buf, *cpu_fpr_ptr(env, n - 32));
+     } else {
+         switch (n) {
+         case 64:
+@@ -158,9 +143,6 @@ int ppc_cpu_gdb_read_register(CPUState *cs, GByteArray *buf, int n)
+         case 69:
+             gdb_get_reg32(buf, cpu_read_xer(env));
+             break;
+-        case 70:
+-            gdb_get_reg32(buf, env->fpscr);
+-            break;
+         }
+     }
+     mem_buf = buf->data + buf->len - r;
 -- 
 2.39.2
 
