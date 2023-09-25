@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC4AECE7A95
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 15:00:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8009CE7A95
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 15:02:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qkn2s-0008EM-BD; Mon, 25 Sep 2023 10:58:46 -0400
+	id 1qkn3T-0000hP-Fd; Mon, 25 Sep 2023 10:59:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qkn2q-0008Dc-U6
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:58:44 -0400
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
+ id 1qkn37-0008MG-BR
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:59:02 -0400
+Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qkn2o-0002Bb-IW
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:58:44 -0400
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-40572aeb673so33363535e9.0
- for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 07:58:42 -0700 (PDT)
+ id 1qkn2t-0002GG-4t
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:59:01 -0400
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-4054496bde3so47911145e9.1
+ for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 07:58:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695653921; x=1696258721; darn=nongnu.org;
+ d=linaro.org; s=google; t=1695653925; x=1696258725; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aeCFFwXCm+A4QdL8cQip0cKdXWBZunNX9KWO8pZi6hE=;
- b=wmBBpzmvlxnyPj3VQiJZH7Mb3RFKwuZJZo3hPp97bpXDGqOBR9F+W41j3SKzmPRiWA
- VH/OL9LL7/g9SVmHd1srLS0LzrgOfGDT0GbW8Eb4kiL1aRtetTkVEFCwmrtlvTgs5739
- 33Thjx9IttZSIhd4XXZ1QlsaOCfDFsuyEl3TwTuvK8Dudhv1oubGVA2Jzzui2I87JzWV
- wM6uVxvJ8QkyDBqYfAUXHqNG/ksXx+7Z6ANFWLZE3XPKLNKJz3EkHjLuZc7a/L5xkDiP
- wo2Wmkb3W44DeP4WS3IO8lOzWwK8OBGgfgC9xlzBCBzgFSioCsyCPeACgjxu2mQ6Xghc
- gKGw==
+ bh=SQaKCCtPdCExPYstQ0NllKjLPtp/IcVgNdDW/2dG2tw=;
+ b=dhq3eZbIsX6rub1xZBO0zWvFWXHCRafGZ2iHkOIZUsolYzqAJOY3tLjb/dsPUqy+ko
+ WRbLe/L31/BgUX5n39CXgxGmbJUNH6gEp9ZLi9l7WEA29ubHzxlsWC2gSSWDwpwjU+Cz
+ OuT0ZYlPALb0akBXlCQ4TgqRcrYgFDcbxFqNUkzXvGOSZXASM2sPNN6DuOwZ8sPJXmW0
+ ZHPdEa5IBVi6iYnI1tacL1PNzdBRQ5npK9AvOGI2BKpG/GgiCWvd8a019hwXdP0wyjQg
+ 7YfxFtZNfaCCJE6NmBPC38oAqpBoA/yzDnTizyMrRXpCLbAm9o8hiq86vwInnt/2Jx/F
+ hlbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695653921; x=1696258721;
+ d=1e100.net; s=20230601; t=1695653925; x=1696258725;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aeCFFwXCm+A4QdL8cQip0cKdXWBZunNX9KWO8pZi6hE=;
- b=kIu+QcNfryloZyJt+JsrNs3tQof7RrhE3PbuDW8xwhPDV9MLi5WcyWHflvSSxx86rA
- q4OIk3bgW/UcCJStDDxw5HncIJ+WZUrmOGP0ApXlpz9WP5+NFlpB8qK5Xf7FgFU3+xoy
- RVMlvbKDXh2gGA3Cl6iAJSPk/B5Kt7WhLFWWlKzPDperRjC/NrwlP/cpTCKaQfvefB1c
- fb2qgUtTV8Cg6pCRnrAEFPpcytf52OcB4zIHV/R8RzoEhudNVtE8SSuxNQ1m9cBXOoTx
- 1Xy1g6p/fIVU57orOZnzjzdWX8KMZ7e0EUeevar1yjtCjUARWwj+Dg/57GbQZXRtYDBG
- KAkw==
-X-Gm-Message-State: AOJu0Yz2V+BRQGfTKmWh6pB2gemwLToLqgjJbt4HI74U/Nyw7hzHbvWY
- veshwV5j1eB26gEq0KK+A5xsZQ==
-X-Google-Smtp-Source: AGHT+IHFSwhv1ZDVTaQUicchew2LE/1enh8F7w94hdBqCcq21Z5zTqmrgbzfuabMJjszGdjEODPmGA==
-X-Received: by 2002:adf:e4ce:0:b0:321:6414:5869 with SMTP id
- v14-20020adfe4ce000000b0032164145869mr7303953wrm.58.1695653920841; 
- Mon, 25 Sep 2023 07:58:40 -0700 (PDT)
+ bh=SQaKCCtPdCExPYstQ0NllKjLPtp/IcVgNdDW/2dG2tw=;
+ b=xJMPaN3ZTa+2qnjl7EGy6RQTVzllez+hSs+i0/OETs6eo7yY8lsV+tlQik4F7JQFKm
+ Szl1oSmOeSy+GMf5uPZfp2TOBzCYa1Edw9GZd3FoZbT3YG59L6uC3kN56EULCFzLwXx+
+ VM4W3EjuvrX7fQAUVZcScmc/lX3jSYWqQ/uaff3qgogaDJWDZFw830YI4y4BK3lYk/cU
+ QXzq5UooFdKXvo2nOi5WskxxzA9kk5oO3NMLNtTgM9i3wM0V+3w+EB6ARdX5msBGVP7P
+ 4Pbv1CSR/Th3X06aJrfNMUKPMjZ7uw8Em5uRujGsk4q30Ky/9tTBAca55lbYpjwAzoSm
+ Hglg==
+X-Gm-Message-State: AOJu0Yzt7vWxwsBYU0x/pI/bZnbyxgdXzTyj2oGeukQ0SIFRRBv1N4N+
+ NJPdUMkjTQPhTwvZ0DUhYLafuy/lBIxGvfR7Zss=
+X-Google-Smtp-Source: AGHT+IG5H8XpO/i2Pzv7xFgguxMyyEZnV76ynGh3qBvX6EusTMWO25hHy6LCxzc3dFuvZhldDt9ZIw==
+X-Received: by 2002:a05:600c:210a:b0:3fe:1cac:37d5 with SMTP id
+ u10-20020a05600c210a00b003fe1cac37d5mr5768595wml.4.1695653925443; 
+ Mon, 25 Sep 2023 07:58:45 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- d29-20020adfa41d000000b003197869bcd7sm6970991wra.13.2023.09.25.07.58.40
+ t1-20020a1c7701000000b003fe23b10fdfsm15367489wmi.36.2023.09.25.07.58.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Sep 2023 07:58:40 -0700 (PDT)
+ Mon, 25 Sep 2023 07:58:42 -0700 (PDT)
 Received: from zen.linaroharston (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 99E231FFCC;
+ by zen.linaroharston (Postfix) with ESMTP id EC8801FFC2;
  Mon, 25 Sep 2023 15:48:57 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -93,17 +93,17 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Ilya Leoshkevich <iii@linux.ibm.com>, Laurent Vivier <lvivier@redhat.com>,
  Yoshinori Sato <ysato@users.sourceforge.jp>,
  Leif Lindholm <quic_llindhol@quicinc.com>, Beraldo Leal <bleal@redhat.com>
-Subject: [PATCH 21/31] accel/tcg: Add plugin_enabled to DisasContextBase
-Date: Mon, 25 Sep 2023 15:48:44 +0100
-Message-Id: <20230925144854.1872513-22-alex.bennee@linaro.org>
+Subject: [PATCH 24/31] contrib/plugins: fix coverity warning in cache
+Date: Mon, 25 Sep 2023 15:48:47 +0100
+Message-Id: <20230925144854.1872513-25-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230925144854.1872513-1-alex.bennee@linaro.org>
 References: <20230925144854.1872513-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x334.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -126,48 +126,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Richard Henderson <richard.henderson@linaro.org>
+Coverity complains that appends_stats_line can be fed a 0 leading
+to the undefined behaviour of a divide by 0.
 
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20230824181233.1568795-2-richard.henderson@linaro.org>
+Fixes: CID 1519044
+Fixes: CID 1519047
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- include/exec/translator.h | 2 ++
- accel/tcg/translator.c    | 1 +
- 2 files changed, 3 insertions(+)
+ contrib/plugins/cache.c | 18 ++++++++----------
+ 1 file changed, 8 insertions(+), 10 deletions(-)
 
-diff --git a/include/exec/translator.h b/include/exec/translator.h
-index 4e17c4f401..bf5bac260a 100644
---- a/include/exec/translator.h
-+++ b/include/exec/translator.h
-@@ -72,6 +72,7 @@ typedef enum DisasJumpType {
-  * @num_insns: Number of translated instructions (including current).
-  * @max_insns: Maximum number of instructions to be translated in this TB.
-  * @singlestep_enabled: "Hardware" single stepping enabled.
-+ * @plugin_enabled: TCG plugin enabled in this TB.
-  *
-  * Architecture-agnostic disassembly context.
-  */
-@@ -83,6 +84,7 @@ typedef struct DisasContextBase {
-     int num_insns;
-     int max_insns;
-     bool singlestep_enabled;
-+    bool plugin_enabled;
-     void *host_addr[2];
- } DisasContextBase;
+diff --git a/contrib/plugins/cache.c b/contrib/plugins/cache.c
+index 4fca3edd07..9e7ade3b37 100644
+--- a/contrib/plugins/cache.c
++++ b/contrib/plugins/cache.c
+@@ -535,15 +535,13 @@ static void caches_free(Cache **caches)
+     }
+ }
  
-diff --git a/accel/tcg/translator.c b/accel/tcg/translator.c
-index 1a6a5448c8..37f8dadbbd 100644
---- a/accel/tcg/translator.c
-+++ b/accel/tcg/translator.c
-@@ -156,6 +156,7 @@ void translator_loop(CPUState *cpu, TranslationBlock *tb, int *max_insns,
-     tcg_debug_assert(db->is_jmp == DISAS_NEXT);  /* no early exit */
+-static void append_stats_line(GString *line, uint64_t l1_daccess,
+-                              uint64_t l1_dmisses, uint64_t l1_iaccess,
+-                              uint64_t l1_imisses,  uint64_t l2_access,
+-                              uint64_t l2_misses)
++static void append_stats_line(GString *line,
++                              uint64_t l1_daccess, uint64_t l1_dmisses,
++                              uint64_t l1_iaccess, uint64_t l1_imisses,
++                              uint64_t l2_access, uint64_t l2_misses)
+ {
+-    double l1_dmiss_rate, l1_imiss_rate, l2_miss_rate;
+-
+-    l1_dmiss_rate = ((double) l1_dmisses) / (l1_daccess) * 100.0;
+-    l1_imiss_rate = ((double) l1_imisses) / (l1_iaccess) * 100.0;
++    double l1_dmiss_rate = ((double) l1_dmisses) / (l1_daccess) * 100.0;
++    double l1_imiss_rate = ((double) l1_imisses) / (l1_iaccess) * 100.0;
  
-     plugin_enabled = plugin_gen_tb_start(cpu, db, cflags & CF_MEMI_ONLY);
-+    db->plugin_enabled = plugin_enabled;
+     g_string_append_printf(line, "%-14" PRIu64 " %-12" PRIu64 " %9.4lf%%"
+                            "  %-14" PRIu64 " %-12" PRIu64 " %9.4lf%%",
+@@ -554,8 +552,8 @@ static void append_stats_line(GString *line, uint64_t l1_daccess,
+                            l1_imisses,
+                            l1_iaccess ? l1_imiss_rate : 0.0);
  
-     while (true) {
-         *max_insns = ++db->num_insns;
+-    if (use_l2) {
+-        l2_miss_rate =  ((double) l2_misses) / (l2_access) * 100.0;
++    if (l2_access && l2_misses) {
++        double l2_miss_rate =  ((double) l2_misses) / (l2_access) * 100.0;
+         g_string_append_printf(line,
+                                "  %-12" PRIu64 " %-11" PRIu64 " %10.4lf%%",
+                                l2_access,
 -- 
 2.39.2
 
