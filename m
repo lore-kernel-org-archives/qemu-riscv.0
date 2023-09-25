@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E534CE7A81
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 04:31:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF6E5CE7A81
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 04:32:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qkdF5-0002qH-77; Mon, 25 Sep 2023 00:30:43 -0400
+	id 1qkdFR-0002y9-1k; Mon, 25 Sep 2023 00:31:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qkdF3-0002pr-Of; Mon, 25 Sep 2023 00:30:41 -0400
-Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e])
+ id 1qkdFP-0002xg-12; Mon, 25 Sep 2023 00:31:03 -0400
+Received: from mail-pg1-x531.google.com ([2607:f8b0:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qkdF2-0007Vn-97; Mon, 25 Sep 2023 00:30:41 -0400
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-27763d36661so391880a91.3; 
- Sun, 24 Sep 2023 21:30:39 -0700 (PDT)
+ id 1qkdFN-0007Wu-FT; Mon, 25 Sep 2023 00:31:02 -0400
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-578d0dcd4e1so3168539a12.2; 
+ Sun, 24 Sep 2023 21:30:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695616238; x=1696221038; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1695616255; x=1696221055; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xNNI0O3SzKHU7vUAvRWqz/iywCW4aWcpOWziFo+dg/k=;
- b=fo+tZC+N3bkmMktvaNf8zyf0oyxmBCVJ6Bgnqb3E8KYnWG6hhf/0l999xm0uIFcBRt
- Xis9Y19fdvJI80eBSy9Ec9HnVDbGweejqvXtsWlhNnGTzpxjj8tfWFMiHb8intRAjVQI
- FF/ooch+mpdDdd1oBs6Kmcwrf3XjZC+6ftAsa+MZej1fjxA+Aj0ELgAOUIwxxxaTIwTU
- EtHLD1DAhElBOqWvQQ2dyeuR5e0XE3CRmWRx+zILklgysxyLbFDH8giuPX2zNXUeCB3h
- 7LmTki238h9sOUz5viR9jDDrmtUEliFggTQscVxJTjApaJ0wwlExcHiM/CKP5VboxdLo
- mB9w==
+ bh=oAADUFg+k/c4zaXXzz1LwvW/lPNv6yL8UJ70OyvIJA8=;
+ b=jlEoysQhAqYTeSb0+lG4FbE7MAQBc/6K5kZ+j3sKnoU4WxyXhML6+pZa/1l3L0AIJK
+ VEugGjs7NLEXKLW2xMk9y4SBizFbDu6x70f2n4l8dKJBB4r9/dSCpIbwN5QGgXmPLAH+
+ rG0jxKa8JlTb/iU05L9bNNREjYb0arluIYmUOLlrVxw37eCnCM5+60Nv0diHESwnMWAk
+ UI5qGo7O2/b3BVz59YfuZRxTTSqJpmnmYrppNLR7hz/LSHJswv9E3eFlkNhPu7ACwy6t
+ reV+msMVNJgyxLcipByXZcvKeRst6B4Zmqp9c13FyQoIwOn+dycqT6yene8/V8b7/XoX
+ y1JA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695616238; x=1696221038;
+ d=1e100.net; s=20230601; t=1695616255; x=1696221055;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xNNI0O3SzKHU7vUAvRWqz/iywCW4aWcpOWziFo+dg/k=;
- b=McaE2xOtGDU+kApDCNdp6W8MvhM0DjZxnyzWc9EasqPGA9zVGY9RCOl9dIfB6qCD9I
- OeUoRHNJ1HEWGPt0p/Qu0q6zkUXiM5WJ+9SmPKkfIFWMc012NvsY5O2CNFMQ303WSTzH
- xn3GOCVFCE3yO7IRkOtKnkFCezU4LAs9F8bPhujbtQCG3ocZ1y2XJxxEqN+RAcZIS+ki
- TLfAuH4o3LGhzrEfhnPolml2P46c6Gq53vaNdz5pLtfN1t4JMxRT8KgFvszuhhQ9byr0
- BRWxDg0H2Ems0gkM4Ql7hgwAc5keoE9rzMkz3+UtvGUGzUHXpAZ88wmjL3K5oKU4O5kA
- ROqQ==
-X-Gm-Message-State: AOJu0Yxut3cLANhZbNRZ+BJE+foPjmQzyDs9chdSvp/lGhu0dS2PDBjU
- BXuIjIlpBAfD6rT1oAVSN/8=
-X-Google-Smtp-Source: AGHT+IE4cBlFMyevsXFhg/gEMPofdWP6CQjh2d5+cXfcRa03uoYaD3laf9LX2mkQ7bqnT6Ip8lzZQw==
-X-Received: by 2002:a17:90a:4e4e:b0:268:f987:305f with SMTP id
- t14-20020a17090a4e4e00b00268f987305fmr5222831pjl.46.1695616238397; 
- Sun, 24 Sep 2023 21:30:38 -0700 (PDT)
+ bh=oAADUFg+k/c4zaXXzz1LwvW/lPNv6yL8UJ70OyvIJA8=;
+ b=iBdQGfSJN3ZnJ9LqDBCVUaJOO0V2LHap6gYcRcvobMWOAiVoVteXC+q06v3YAuUGoH
+ OaowJ4PhYUfTz0FTnKK19FCuh5ZFKphpBcKp+ZY8HHypbJmErC2A6sm6V0onShVuSgqP
+ 5tTiBeCkojQDSs7xYkjDiMBz73aMyJeqCm7i0TXNgYiFZ2FvX+8yxoM4uzSCZ7SfWs9X
+ DNP31qsIpa7IQyGJRa5T/Mh/HVbpIO7GakSfYgWwhZmrbE3sIJZI5fUcxGnjxjpGbubE
+ CVzSFxRFKM2Vder1ftcBf8EcMF1wod4Ve0GqMI/Ec+1Z91TKW34iwLE8Sa8yYsy0e59w
+ fJ4Q==
+X-Gm-Message-State: AOJu0YyS6T8Q/EWqSJKhTwtb0mZSdEhrldhJj+5j2imKjyl+xEVBk2yZ
+ DL9jqfsq40BgqstB9tperzA=
+X-Google-Smtp-Source: AGHT+IEQ3uqOWrJmW0WREHy+INr2DYbEVzgejDCnr7N+Mt0pFPTNPpOmdMKCSF5RBaw9tP46UELHlQ==
+X-Received: by 2002:a17:90b:1d04:b0:274:7047:aa9f with SMTP id
+ on4-20020a17090b1d0400b002747047aa9fmr3432778pjb.32.1695616254934; 
+ Sun, 24 Sep 2023 21:30:54 -0700 (PDT)
 Received: from toolbox.alistair23.me
  (2403-580b-97e8-0-321-6fb2-58f1-a1b1.ip6.aussiebb.net.
  [2403:580b:97e8:0:321:6fb2:58f1:a1b1])
  by smtp.gmail.com with ESMTPSA id
- y14-20020a17090a134e00b00276fef82025sm6002161pjf.35.2023.09.24.21.30.32
+ y14-20020a17090a134e00b00276fef82025sm6002161pjf.35.2023.09.24.21.30.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Sep 2023 21:30:37 -0700 (PDT)
+ Sun, 24 Sep 2023 21:30:53 -0700 (PDT)
 From: Alistair Francis <alistair23@gmail.com>
 X-Google-Original-From: Alistair Francis <alistair.francis@wdc.com>
 To: david@gibson.dropbear.id.au, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
@@ -66,16 +66,16 @@ Cc: bmeng.cn@gmail.com, alistair.francis@wdc.com,
  alistair23@gmail.com, dbarboza@ventanamicro.com,
  Alistair Francis <Alistair.Francis@wdc.com>, liweiwei@iscas.ac.cn,
  Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH 1/4] hw/riscv: opentitan: Fixup local variables shadowing
-Date: Mon, 25 Sep 2023 14:30:20 +1000
-Message-ID: <20230925043023.71448-2-alistair.francis@wdc.com>
+Subject: [PATCH 4/4] softmmu/device_tree: Fixup local variables shadowing
+Date: Mon, 25 Sep 2023 14:30:23 +1000
+Message-ID: <20230925043023.71448-5-alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230925043023.71448-1-alistair.francis@wdc.com>
 References: <20230925043023.71448-1-alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
- envelope-from=alistair23@gmail.com; helo=mail-pj1-x102e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
+ envelope-from=alistair23@gmail.com; helo=mail-pg1-x531.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -112,22 +112,26 @@ To configure
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- hw/riscv/opentitan.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ softmmu/device_tree.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-index 6a2fcc4ade..436503f1ba 100644
---- a/hw/riscv/opentitan.c
-+++ b/hw/riscv/opentitan.c
-@@ -227,7 +227,7 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
-                                            IRQ_M_TIMER));
+diff --git a/softmmu/device_tree.c b/softmmu/device_tree.c
+index 30aa3aea9f..eb5166ca36 100644
+--- a/softmmu/device_tree.c
++++ b/softmmu/device_tree.c
+@@ -418,9 +418,9 @@ int qemu_fdt_setprop_string_array(void *fdt, const char *node_path,
+     }
+     p = str = g_malloc0(total_len);
+     for (i = 0; i < len; i++) {
+-        int len = strlen(array[i]) + 1;
+-        pstrcpy(p, len, array[i]);
+-        p += len;
++        int offset = strlen(array[i]) + 1;
++        pstrcpy(p, offset, array[i]);
++        p += offset;
+     }
  
-     /* SPI-Hosts */
--    for (int i = 0; i < OPENTITAN_NUM_SPI_HOSTS; ++i) {
-+    for (i = 0; i < OPENTITAN_NUM_SPI_HOSTS; ++i) {
-         dev = DEVICE(&(s->spi_host[i]));
-         if (!sysbus_realize(SYS_BUS_DEVICE(&s->spi_host[i]), errp)) {
-             return;
+     ret = qemu_fdt_setprop(fdt, node_path, prop, str, total_len);
 -- 
 2.41.0
 
