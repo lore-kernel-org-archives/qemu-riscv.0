@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 507A4CE7A97
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 15:00:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC4AECE7A95
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 15:00:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qkn3L-0000Da-EZ; Mon, 25 Sep 2023 10:59:15 -0400
+	id 1qkn2s-0008EM-BD; Mon, 25 Sep 2023 10:58:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qkn35-0008KN-6f
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:59:00 -0400
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ id 1qkn2q-0008Dc-U6
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:58:44 -0400
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qkn2q-0002D9-Q9
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:58:53 -0400
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-405524e6769so26305805e9.1
- for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 07:58:43 -0700 (PDT)
+ id 1qkn2o-0002Bb-IW
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:58:44 -0400
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-40572aeb673so33363535e9.0
+ for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 07:58:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695653922; x=1696258722; darn=nongnu.org;
+ d=linaro.org; s=google; t=1695653921; x=1696258721; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mAyYQkrKbWdgjPeSFpAKf8LHOxPMb7ttiO+d+H3EETQ=;
- b=eRiMNCprFqO+yGRM9oCTiA6Y0gwO4jqNb9dDsE33sA3iQFEIFTtvIUJYpYntOgaWXI
- 1ou0z6vyjLg4xYJj5rhzA0oCbCLvu1xmyJ7jH3L8DnrreZKVPe+9vP4VttZthz9gz3Oz
- CXsOL31lp/vEdZtQelIC4q2LRmsfP+xC56w/HsvqhM2xLXlbsl/gbkNhMOzW1RpWb7n8
- FQdYPfdLoOMHlaiviU04i3ZgJ74Andxm+QmRYvaLNVBcVPrmmnH8sVyqRscRcZu9DokJ
- UixhJvqs/E4KTi8f3BioxfE3fk2GFp9hEJZv55+VxlxMD5Jo93v2LB2ofKulLk+Ff5rZ
- KkxQ==
+ bh=aeCFFwXCm+A4QdL8cQip0cKdXWBZunNX9KWO8pZi6hE=;
+ b=wmBBpzmvlxnyPj3VQiJZH7Mb3RFKwuZJZo3hPp97bpXDGqOBR9F+W41j3SKzmPRiWA
+ VH/OL9LL7/g9SVmHd1srLS0LzrgOfGDT0GbW8Eb4kiL1aRtetTkVEFCwmrtlvTgs5739
+ 33Thjx9IttZSIhd4XXZ1QlsaOCfDFsuyEl3TwTuvK8Dudhv1oubGVA2Jzzui2I87JzWV
+ wM6uVxvJ8QkyDBqYfAUXHqNG/ksXx+7Z6ANFWLZE3XPKLNKJz3EkHjLuZc7a/L5xkDiP
+ wo2Wmkb3W44DeP4WS3IO8lOzWwK8OBGgfgC9xlzBCBzgFSioCsyCPeACgjxu2mQ6Xghc
+ gKGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695653922; x=1696258722;
+ d=1e100.net; s=20230601; t=1695653921; x=1696258721;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mAyYQkrKbWdgjPeSFpAKf8LHOxPMb7ttiO+d+H3EETQ=;
- b=BOAnS7ZhJ0QZHGYqDkw5l/P0Q7Mrj75WAgLWoaEoN2K6NxS3ahg17ikKWXaak1P7X0
- N07Ww0bUfZLz3HgvLcKrPmWbAkj53NUJn6PnXiXuaJ+CdclnuirkE7O3af1waE3yXnwM
- 9J3EJwosP7ghSHMxfznxN0CdCarW6MVZRkLi7BuSbgQDXuFK2iMTb+VMw7cbnOKoHkht
- laA8xaUr/SgsEM1n70Q6x2xJxS7yQLexGyFXpCT8U9I4TdvB6D4Go4tdRFUXKsu+umgs
- 9oQM6cuyfh41YFK7I40wxeuCf/oYWm36HfDHHrJvKarDr00ZYkfOW8DWaV465o5LM1t6
- 5l1Q==
-X-Gm-Message-State: AOJu0Ywt5UWfyrVlwpmc9wGaRXigKjgmXESgJTFppiaphmUTa4/AbXR+
- L2Amvm4YbaGiFq06N6FprmcSnw==
-X-Google-Smtp-Source: AGHT+IH2XfJb3x0zHxvnBuTaxCCHgYT/tdglQoUrYMFI2CY3Q9o2lM+MyL+r+0MoUc7+RKqmMdKqZA==
-X-Received: by 2002:a05:600c:1d8c:b0:405:d70d:1790 with SMTP id
- p12-20020a05600c1d8c00b00405d70d1790mr196064wms.13.1695653922594; 
- Mon, 25 Sep 2023 07:58:42 -0700 (PDT)
+ bh=aeCFFwXCm+A4QdL8cQip0cKdXWBZunNX9KWO8pZi6hE=;
+ b=kIu+QcNfryloZyJt+JsrNs3tQof7RrhE3PbuDW8xwhPDV9MLi5WcyWHflvSSxx86rA
+ q4OIk3bgW/UcCJStDDxw5HncIJ+WZUrmOGP0ApXlpz9WP5+NFlpB8qK5Xf7FgFU3+xoy
+ RVMlvbKDXh2gGA3Cl6iAJSPk/B5Kt7WhLFWWlKzPDperRjC/NrwlP/cpTCKaQfvefB1c
+ fb2qgUtTV8Cg6pCRnrAEFPpcytf52OcB4zIHV/R8RzoEhudNVtE8SSuxNQ1m9cBXOoTx
+ 1Xy1g6p/fIVU57orOZnzjzdWX8KMZ7e0EUeevar1yjtCjUARWwj+Dg/57GbQZXRtYDBG
+ KAkw==
+X-Gm-Message-State: AOJu0Yz2V+BRQGfTKmWh6pB2gemwLToLqgjJbt4HI74U/Nyw7hzHbvWY
+ veshwV5j1eB26gEq0KK+A5xsZQ==
+X-Google-Smtp-Source: AGHT+IHFSwhv1ZDVTaQUicchew2LE/1enh8F7w94hdBqCcq21Z5zTqmrgbzfuabMJjszGdjEODPmGA==
+X-Received: by 2002:adf:e4ce:0:b0:321:6414:5869 with SMTP id
+ v14-20020adfe4ce000000b0032164145869mr7303953wrm.58.1695653920841; 
+ Mon, 25 Sep 2023 07:58:40 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- t18-20020a1c7712000000b00405959469afsm1656915wmi.3.2023.09.25.07.58.40
+ d29-20020adfa41d000000b003197869bcd7sm6970991wra.13.2023.09.25.07.58.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Sep 2023 07:58:41 -0700 (PDT)
+ Mon, 25 Sep 2023 07:58:40 -0700 (PDT)
 Received: from zen.linaroharston (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 139401FFCE;
- Mon, 25 Sep 2023 15:48:58 +0100 (BST)
+ by zen.linaroharston (Postfix) with ESMTP id 99E231FFCC;
+ Mon, 25 Sep 2023 15:48:57 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>,
@@ -93,17 +93,17 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Ilya Leoshkevich <iii@linux.ibm.com>, Laurent Vivier <lvivier@redhat.com>,
  Yoshinori Sato <ysato@users.sourceforge.jp>,
  Leif Lindholm <quic_llindhol@quicinc.com>, Beraldo Leal <bleal@redhat.com>
-Subject: [PATCH 25/31] contrib/plugins: fix coverity warning in lockstep
-Date: Mon, 25 Sep 2023 15:48:48 +0100
-Message-Id: <20230925144854.1872513-26-alex.bennee@linaro.org>
+Subject: [PATCH 21/31] accel/tcg: Add plugin_enabled to DisasContextBase
+Date: Mon, 25 Sep 2023 15:48:44 +0100
+Message-Id: <20230925144854.1872513-22-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230925144854.1872513-1-alex.bennee@linaro.org>
 References: <20230925144854.1872513-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x332.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -126,61 +126,48 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Coverity complains that e don't check for a truncation when copying in
-the path. Bail if we can't copy the whole path into sockaddr.
+From: Richard Henderson <richard.henderson@linaro.org>
 
-Fixes: CID 1519045
-Fixes: CID 1519046
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+Message-Id: <20230824181233.1568795-2-richard.henderson@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- contrib/plugins/lockstep.c | 13 +++++++++++--
- 1 file changed, 11 insertions(+), 2 deletions(-)
+ include/exec/translator.h | 2 ++
+ accel/tcg/translator.c    | 1 +
+ 2 files changed, 3 insertions(+)
 
-diff --git a/contrib/plugins/lockstep.c b/contrib/plugins/lockstep.c
-index 682b11feb2..f0cb8792c6 100644
---- a/contrib/plugins/lockstep.c
-+++ b/contrib/plugins/lockstep.c
-@@ -245,6 +245,7 @@ static void vcpu_tb_trans(qemu_plugin_id_t id, struct qemu_plugin_tb *tb)
- static bool setup_socket(const char *path)
- {
-     struct sockaddr_un sockaddr;
-+    const gsize pathlen = sizeof(sockaddr.sun_path) - 1;
-     int fd;
+diff --git a/include/exec/translator.h b/include/exec/translator.h
+index 4e17c4f401..bf5bac260a 100644
+--- a/include/exec/translator.h
++++ b/include/exec/translator.h
+@@ -72,6 +72,7 @@ typedef enum DisasJumpType {
+  * @num_insns: Number of translated instructions (including current).
+  * @max_insns: Maximum number of instructions to be translated in this TB.
+  * @singlestep_enabled: "Hardware" single stepping enabled.
++ * @plugin_enabled: TCG plugin enabled in this TB.
+  *
+  * Architecture-agnostic disassembly context.
+  */
+@@ -83,6 +84,7 @@ typedef struct DisasContextBase {
+     int num_insns;
+     int max_insns;
+     bool singlestep_enabled;
++    bool plugin_enabled;
+     void *host_addr[2];
+ } DisasContextBase;
  
-     fd = socket(AF_UNIX, SOCK_STREAM, 0);
-@@ -254,7 +255,11 @@ static bool setup_socket(const char *path)
-     }
+diff --git a/accel/tcg/translator.c b/accel/tcg/translator.c
+index 1a6a5448c8..37f8dadbbd 100644
+--- a/accel/tcg/translator.c
++++ b/accel/tcg/translator.c
+@@ -156,6 +156,7 @@ void translator_loop(CPUState *cpu, TranslationBlock *tb, int *max_insns,
+     tcg_debug_assert(db->is_jmp == DISAS_NEXT);  /* no early exit */
  
-     sockaddr.sun_family = AF_UNIX;
--    g_strlcpy(sockaddr.sun_path, path, sizeof(sockaddr.sun_path) - 1);
-+    if (g_strlcpy(sockaddr.sun_path, path, pathlen) >= pathlen) {
-+        perror("bad path");
-+        return false;
-+    }
-+
-     if (bind(fd, (struct sockaddr *)&sockaddr, sizeof(sockaddr)) < 0) {
-         perror("bind socket");
-         close(fd);
-@@ -287,6 +292,7 @@ static bool connect_socket(const char *path)
- {
-     int fd;
-     struct sockaddr_un sockaddr;
-+    const gsize pathlen = sizeof(sockaddr.sun_path) - 1;
+     plugin_enabled = plugin_gen_tb_start(cpu, db, cflags & CF_MEMI_ONLY);
++    db->plugin_enabled = plugin_enabled;
  
-     fd = socket(AF_UNIX, SOCK_STREAM, 0);
-     if (fd < 0) {
-@@ -295,7 +301,10 @@ static bool connect_socket(const char *path)
-     }
- 
-     sockaddr.sun_family = AF_UNIX;
--    g_strlcpy(sockaddr.sun_path, path, sizeof(sockaddr.sun_path) - 1);
-+    if (g_strlcpy(sockaddr.sun_path, path, pathlen) >= pathlen) {
-+        perror("bad path");
-+        return false;
-+    }
- 
-     if (connect(fd, (struct sockaddr *)&sockaddr, sizeof(sockaddr)) < 0) {
-         perror("failed to connect");
+     while (true) {
+         *max_insns = ++db->num_insns;
 -- 
 2.39.2
 
