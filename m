@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46376CE7A96
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 14:59:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46661CE7A95
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 14:59:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qkn2t-0008Fp-Ql; Mon, 25 Sep 2023 10:58:47 -0400
+	id 1qkn3J-0000Ar-VW; Mon, 25 Sep 2023 10:59:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qkn2s-0008EN-DZ
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:58:46 -0400
-Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
+ id 1qkn35-0008Kv-9a
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:59:00 -0400
+Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qkn2o-0002Bs-Mr
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:58:46 -0400
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-405524e6768so43187615e9.2
- for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 07:58:42 -0700 (PDT)
+ id 1qkn2r-0002Eb-K3
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:58:54 -0400
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-40537481094so64524765e9.0
+ for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 07:58:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695653921; x=1696258721; darn=nongnu.org;
+ d=linaro.org; s=google; t=1695653924; x=1696258724; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jM0GTpB8x8Pq4p+VnmvbtC3PXJVxvgAV0ON8qJJlT10=;
- b=qlCqC3xYjyDw/7bRVCE+hiWh5B6TGj1Qq3Ix+iSlBYQTl9vq+bYevMNeK9qQ+9JfIJ
- zrJCA+Hd8IMbGAIGQpsB85R261ST9XmWeHk6rBHo788lotywzs8W7x/XlsiWpUHqLuMY
- N1bnQVO8w3WY14BhRAizKVJawiLX1yEk9CW9rhrFt/N6dHmXhvXFd/G55QO7NwBhgVkW
- ZPy+pMlv73lsx5q5iUxcDQ7p7Gl2UePsefkD4JTT6kK/axZSP8qT4nXV8ulOEIKtJRxm
- 28oFh+jk/HIISseTisAWiX5CNbC6nvHB3sqfedZlxHLGpoMib4EQ6+0P5MbFrJxrl09k
- nj6A==
+ bh=eKXyxkZjkgMHzhbh3Oq/XROWT/WyaO+gDU9Mjp58TiI=;
+ b=v4+LzZ0qKbYpVrBm6g7rdVJQ8kcfUnpsf7UwmNcPdeG0i8DpQt38mJXhXdN/ITGRnG
+ zrFI6EgINpKA3T4dRNzEHwrTS3syn4Ai/GcfIkxAUGtWKYb0VqUTVW1E9Qs/NLokJmk+
+ kLyRC2wPJ0EOc/LpE7YntaKyfRbDusE+6R/yqB7B88ALXPnPQYgAqt/3c3GlcdvdPDfG
+ wXKMTIzVzy/wURDyvciSnr8JFdjkfWFlWvRFYDt93vPUSzmexosIj0dmYweq706Gfg5w
+ g4t5+fJplIs4N5tBzI0qKgZgPojh16fpONsjvzIpaoJR8sK0xSCqfILVepQRL2ou0mJK
+ rgBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695653921; x=1696258721;
+ d=1e100.net; s=20230601; t=1695653924; x=1696258724;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jM0GTpB8x8Pq4p+VnmvbtC3PXJVxvgAV0ON8qJJlT10=;
- b=Lz+3zu+w4tvuAHNlpcIpWgkHzlztiAQaBOy5sKn9aV3XkV/WKzOlRKg7eBAD68cq0j
- dv7yc30qIuqKpJAopAHdKACnmrcQ/ZIRRhBNqXqokRx67jwEd28BHrljtINUwtckq1z1
- 9QKvHpYgBqsuzo1rpmREyR5n7dbzxTfiBpHwzV+pPB8qI1bDY8g3CQtva8juP6qerTrl
- 7/ouMwN+s+F7dZltIfmgIUaEfgq5iQgISk+81R6Yvj2MdSlBsVj29Pu+ekAJ1ujOe1o6
- 9UObZ8ZKRuAK95ViOYb9uDEK+ry33qQdKPnYTtNLot0rRdxv5sCsU7nJMvuHgl5BKG05
- mKdQ==
-X-Gm-Message-State: AOJu0Yw8g3DnVIQ1yVwkMdmWit9jTwYiQtC+gw+4TIHMYkCytUXNl+3f
- lKBWvy3bvAEDtvfgagfg+Psi6A==
-X-Google-Smtp-Source: AGHT+IF8BA3ifVNy6i7gY71DWPUdbeluWJ79bFNawmMMYbWpuO1wDrk0vftXMDDmYRbTdAoWSBTIsQ==
-X-Received: by 2002:a05:600c:247:b0:401:b6f6:d90c with SMTP id
- 7-20020a05600c024700b00401b6f6d90cmr6079242wmj.35.1695653921019; 
- Mon, 25 Sep 2023 07:58:41 -0700 (PDT)
+ bh=eKXyxkZjkgMHzhbh3Oq/XROWT/WyaO+gDU9Mjp58TiI=;
+ b=PbtNpH13TsktDCOACVLPVDOte7Wx8oSAL70s1tX55HNGBAhWiiipVsTT12tJHm/Q0n
+ gdrw32d7hXN6xhcdBgLRqsLe0XPF77bJX6QApeNstGYGpKInilYDfMoOuyEP3locJIX4
+ 1bXbPurNPNUwhq+UEYjKoyGzpJ/p8QRPJ9qOeKcUXwBxIe2EgSDZJiAWni227YZkIzKy
+ 0nrT9dkpbjzPr0t6n9JdvTHzaj+8S8qlufINYY8se+DS5Pn9S2sMAwNjg2JYI0z9przm
+ gmWFbriymWl8e4xq6Cw0p1QQ0NnNmlhJPSklUh/jszMzaYjEcO61pvDHFg6rUQ4TtmXB
+ +y6g==
+X-Gm-Message-State: AOJu0YxxmH7skPg2baZwtMKMU5bHxfqNd1x5ohPabwcacPGZXSJwpLrE
+ HluLuFPUL6EqCvZZSiSNdqGXRg==
+X-Google-Smtp-Source: AGHT+IGWbUjxohdjoGUz1NACjFC7lPrzbzSjOIinfeWPBprq1qiMF15BclJ+KgJx8fxJhUxcDhDCPA==
+X-Received: by 2002:a05:600c:230b:b0:3fe:d448:511a with SMTP id
+ 11-20020a05600c230b00b003fed448511amr6821322wmo.9.1695653923716; 
+ Mon, 25 Sep 2023 07:58:43 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- z9-20020a05600c114900b004058e6379d8sm3826355wmz.23.2023.09.25.07.58.40
+ k12-20020a7bc40c000000b00403038d7652sm12457849wmi.39.2023.09.25.07.58.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Sep 2023 07:58:40 -0700 (PDT)
+ Mon, 25 Sep 2023 07:58:42 -0700 (PDT)
 Received: from zen.linaroharston (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 532431FFD1;
+ by zen.linaroharston (Postfix) with ESMTP id D967B1FFD6;
  Mon, 25 Sep 2023 15:48:58 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -93,17 +93,18 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Ilya Leoshkevich <iii@linux.ibm.com>, Laurent Vivier <lvivier@redhat.com>,
  Yoshinori Sato <ysato@users.sourceforge.jp>,
  Leif Lindholm <quic_llindhol@quicinc.com>, Beraldo Leal <bleal@redhat.com>
-Subject: [RFC PATCH 27/31] sysemu: add set_virtual_time to accel ops
-Date: Mon, 25 Sep 2023 15:48:50 +0100
-Message-Id: <20230925144854.1872513-28-alex.bennee@linaro.org>
+Subject: [RFC PATCH 31/31] contrib/plugins: add iops plugin example for cost
+ modelling
+Date: Mon, 25 Sep 2023 15:48:54 +0100
+Message-Id: <20230925144854.1872513-32-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230925144854.1872513-1-alex.bennee@linaro.org>
 References: <20230925144854.1872513-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::331;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x331.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -126,153 +127,305 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We are about to remove direct calls to individual accelerators for
-this information and will need a central point for plugins to hook
-into time changes.
+This plugin uses the new time control interface to make decisions
+about the state of time during the emulation. The algorithm is
+currently very simple. The user specifies an iops rate which applies
+per core. If the core runs ahead of its allocated execution time the
+plugin sleeps for a bit to let real time catch up. Either way time as
+updated for the emulation as a function of total executed instructions
+with some adjustments for cores that idle.
 
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Message-Id: <20230519170454.2353945-5-alex.bennee@linaro.org>
+Message-Id: <20230519170454.2353945-9-alex.bennee@linaro.org>
 
 ---
 v2
-  - more kerneldoc annotations
+  - fix various style issues
 ---
- include/sysemu/accel-ops.h                    | 18 ++++++++++++-
- include/sysemu/cpu-timers.h                   | 27 ++++++++++++++++++-
- softmmu/cpus.c                                | 11 ++++++++
- ...t-virtual-clock.c => cpus-virtual-clock.c} |  5 ++++
- stubs/meson.build                             |  2 +-
- 5 files changed, 60 insertions(+), 3 deletions(-)
- rename stubs/{cpus-get-virtual-clock.c => cpus-virtual-clock.c} (68%)
+ contrib/plugins/iops.c   | 261 +++++++++++++++++++++++++++++++++++++++
+ contrib/plugins/Makefile |   1 +
+ 2 files changed, 262 insertions(+)
+ create mode 100644 contrib/plugins/iops.c
 
-diff --git a/include/sysemu/accel-ops.h b/include/sysemu/accel-ops.h
-index 3c1fab4b1e..224e85a649 100644
---- a/include/sysemu/accel-ops.h
-+++ b/include/sysemu/accel-ops.h
-@@ -20,7 +20,12 @@
- typedef struct AccelOpsClass AccelOpsClass;
- DECLARE_CLASS_CHECKERS(AccelOpsClass, ACCEL_OPS, TYPE_ACCEL_OPS)
- 
--/* cpus.c operations interface */
-+/**
-+ * struct AccelOpsClass - accelerator interfaces
-+ *
-+ * This structure is used to abstract accelerator differences from the
-+ * core CPU code. Not all have to be implemented.
-+ */
- struct AccelOpsClass {
-     /*< private >*/
-     ObjectClass parent_class;
-@@ -43,7 +48,18 @@ struct AccelOpsClass {
- 
-     void (*handle_interrupt)(CPUState *cpu, int mask);
- 
-+    /**
-+     * @get_virtual_clock: fetch virtual clock
-+     * @set_virtual_clock: set virtual clock
-+     *
-+     * These allow the timer subsystem to defer to the accelerator to
-+     * fetch time. The set function is needed if the accelerator wants
-+     * to track the changes to time as the timer is warped through
-+     * various timer events.
-+     */
-     int64_t (*get_virtual_clock)(void);
-+    void (*set_virtual_clock)(int64_t time);
-+
-     int64_t (*get_elapsed_ticks)(void);
- 
-     /* gdbstub hooks */
-diff --git a/include/sysemu/cpu-timers.h b/include/sysemu/cpu-timers.h
-index 2e786fe7fb..31ab2bbd4e 100644
---- a/include/sysemu/cpu-timers.h
-+++ b/include/sysemu/cpu-timers.h
-@@ -84,8 +84,33 @@ int64_t cpu_get_clock(void);
- 
- void qemu_timer_notify_cb(void *opaque, QEMUClockType type);
- 
--/* get the VIRTUAL clock and VM elapsed ticks via the cpus accel interface */
-+/**
-+ * cpus_get_virtual_clock() - return current virtual clock.
-+ *
-+ * This is a wrapper around accelerator specific get_virtual_clock()
-+ *
-+ * Returns: ns of virtual time
-+ */
- int64_t cpus_get_virtual_clock(void);
-+
-+/**
-+ * cpus_set_virtual_clock() - set the virtual clock
-+ * @new_time: new value in ns
-+ *
-+ * This is a wrapper around accelerator specific set_virtual_clock()
-+ */
-+void cpus_set_virtual_clock(int64_t new_time);
-+
-+/**
-+ * cpus_get_elapsed_ticks() - get elapsed host time
-+ *
-+ * This is usually the current value of the host tick counter (i.e.
-+ * not taking into account guest pauses). However some accelerators
-+ * which want to keep elapsed time in sync with virtual time will
-+ * return the virtual clock.
-+ *
-+ * Returns: ticks of elapsed host time (usually ns)
-+ */
- int64_t cpus_get_elapsed_ticks(void);
- 
- #endif /* SYSEMU_CPU_TIMERS_H */
-diff --git a/softmmu/cpus.c b/softmmu/cpus.c
-index 0848e0dbdb..b645c462e1 100644
---- a/softmmu/cpus.c
-+++ b/softmmu/cpus.c
-@@ -221,6 +221,17 @@ int64_t cpus_get_virtual_clock(void)
-     return cpu_get_clock();
- }
- 
+diff --git a/contrib/plugins/iops.c b/contrib/plugins/iops.c
+new file mode 100644
+index 0000000000..6f8baca6f7
+--- /dev/null
++++ b/contrib/plugins/iops.c
+@@ -0,0 +1,261 @@
 +/*
-+ * Signal the new virtual time to the accelerator. This is only needed
-+ * by accelerators that need to track the changes as we warp time.
++ * iops rate limiting plugin.
++ *
++ * This plugin can be used to restrict the execution of a system to a
++ * particular number of Instructions Per Second (IOPS). This controls
++ * time as seen by the guest so while wall-clock time may be longer
++ * from the guests point of view time will pass at the normal rate.
++ *
++ * This uses the new plugin API which allows the plugin to control
++ * system time.
++ *
++ * Copyright (c) 2023 Linaro Ltd
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
 + */
-+void cpus_set_virtual_clock(int64_t new_time)
++
++#include <stdio.h>
++#include <glib.h>
++#include <qemu-plugin.h>
++
++QEMU_PLUGIN_EXPORT int qemu_plugin_version = QEMU_PLUGIN_VERSION;
++
++#define SLICES 10 /* the number of slices per second we compute delay */
++
++static GMutex global_state_lock;
++
++static uint64_t iops = 1000000;  /* iops rate, per core, per second */
++static uint64_t current_ticks;   /* current global ticks */
++static uint64_t next_check;      /* the next checkpoint for time */
++static bool precise_execution;   /* count every instruction */
++
++static int64_t systime_at_start;  /* time we started the first vCPU */
++
++static const uint64_t nsec_per_sec = 1000000000;
++static const void *time_handle;
++
++/*
++ * We need to track the number of instructions each vCPU has executed
++ * as well as what its current state is. We need to account for time
++ * passing while a vCPU is idle.
++ */
++
++typedef enum {
++    UNKNOWN = 0,
++    CREATED,
++    EXECUTING,
++    IDLE,
++    FINISHED
++} vCPUState;
++
++typedef struct {
++    /* pointer to vcpu counter entry */
++    uint64_t *counter;
++    vCPUState state;
++    /* timestamp when vCPU entered state */
++    uint64_t state_time;
++    /* number of ns vCPU was idle */
++    uint64_t total_idle;
++} vCPUTime;
++
++GArray *vcpus;
++uint64_t *vcpu_counters;
++
++/*
++ * Get the vcpu structure for this vCPU. We don't do any locking here
++ * as only one vCPU will ever access its own structure.
++ */
++static vCPUTime *get_vcpu(int cpu_index)
 +{
-+    if (cpus_accel && cpus_accel->set_virtual_clock) {
-+        cpus_accel->set_virtual_clock(new_time);
++    return &g_array_index(vcpus, vCPUTime, cpu_index);
++}
++
++/*
++ * When emulation is running faster than real time this is the point
++ * we can throttle the execution of a given vCPU. Either way we can
++ * now tell the system to move time forward.
++ */
++static void update_system_time(int64_t vcpu_ticks)
++{
++    int64_t now = g_get_real_time();
++    int64_t real_runtime_ns = now - systime_at_start;
++
++    g_mutex_lock(&global_state_lock);
++    /* now we have the lock double check we are fastest */
++    if (vcpu_ticks > next_check) {
++
++        int64_t tick_runtime_ns = (vcpu_ticks / iops) * nsec_per_sec;
++        if (tick_runtime_ns > real_runtime_ns) {
++            int64_t sleep_us = (tick_runtime_ns - real_runtime_ns) / 1000;
++            g_usleep(sleep_us);
++        }
++
++        /* Having slept we can now move the clocks forward */
++        qemu_plugin_update_ns(time_handle, vcpu_ticks);
++        current_ticks = vcpu_ticks;
++        next_check = iops / SLICES;
++    }
++    g_mutex_unlock(&global_state_lock);
++}
++
++/*
++ * State tracking
++ */
++static void vcpu_init(qemu_plugin_id_t id, unsigned int cpu_index)
++{
++    vCPUTime *vcpu = get_vcpu(cpu_index);
++    vcpu->state = CREATED;
++    vcpu->state_time = *vcpu->counter;
++
++    g_mutex_lock(&global_state_lock);
++    if (!systime_at_start) {
++        systime_at_start = g_get_real_time();
++    }
++    g_mutex_unlock(&global_state_lock);
++}
++
++static void vcpu_idle(qemu_plugin_id_t id, unsigned int cpu_index)
++{
++    vCPUTime *vcpu = get_vcpu(cpu_index);
++    vcpu->state = IDLE;
++    vcpu->state_time = *vcpu->counter;
++
++    /* handle when we are the last vcpu to sleep here */
++}
++
++static void vcpu_resume(qemu_plugin_id_t id, unsigned int cpu_index)
++{
++    vCPUTime *vcpu = get_vcpu(cpu_index);
++
++    /*
++     * Now we need to reset counter to something approximating the
++     * current time, however we only update current_ticks when a block
++     * exceeds next_check. If the vCPU has been asleep for awhile this
++     * will probably do, otherwise lets pick somewhere between
++     * current_ticks and the next_check value.
++     */
++    if (vcpu->state_time < current_ticks) {
++        *vcpu->counter = current_ticks;
++    } else {
++        int64_t window = next_check - vcpu->state_time;
++        *vcpu->counter = next_check - (window / 2);
++    }
++
++    vcpu->state = EXECUTING;
++    vcpu->state_time = *vcpu->counter;
++}
++
++static void vcpu_exit(qemu_plugin_id_t id, unsigned int cpu_index)
++{
++    vCPUTime *vcpu = get_vcpu(cpu_index);
++    vcpu->state = FINISHED;
++    vcpu->state_time = *vcpu->counter;
++}
++
++/*
++ * tb exec
++ */
++static void vcpu_tb_exec(unsigned int cpu_index, void *udata)
++{
++    vCPUTime *vcpu = get_vcpu(cpu_index);
++    uint64_t count = *vcpu->counter;
++
++    count += GPOINTER_TO_UINT(udata);
++
++    if (count >= next_check) {
++        update_system_time(count);
 +    }
 +}
 +
- /*
-  * return the time elapsed in VM between vm_start and vm_stop.  Unless
-  * icount is active, cpus_get_elapsed_ticks() uses units of the host CPU cycle
-diff --git a/stubs/cpus-get-virtual-clock.c b/stubs/cpus-virtual-clock.c
-similarity index 68%
-rename from stubs/cpus-get-virtual-clock.c
-rename to stubs/cpus-virtual-clock.c
-index fd447d53f3..af7c1a1d40 100644
---- a/stubs/cpus-get-virtual-clock.c
-+++ b/stubs/cpus-virtual-clock.c
-@@ -6,3 +6,8 @@ int64_t cpus_get_virtual_clock(void)
- {
-     return cpu_get_clock();
- }
++/*
++ * We have two choices at translation time. In imprecise mode we just
++ * install a tb execution callback with the total number of
++ * instructions in the block. This ignores any partial execution
++ * effects but it reasonably fast. In precise mode we increment a
++ * per-vCPU counter for every execution.
++ */
 +
-+void cpus_set_virtual_clock(int64_t new_time)
++static void vcpu_tb_trans(qemu_plugin_id_t id, struct qemu_plugin_tb *tb)
 +{
-+    /* do nothing */
++    size_t n_insns = qemu_plugin_tb_n_insns(tb);
++    qemu_plugin_register_vcpu_tb_exec_cb(tb, vcpu_tb_exec,
++                                         QEMU_PLUGIN_CB_NO_REGS,
++                                         GUINT_TO_POINTER(n_insns));
 +}
-diff --git a/stubs/meson.build b/stubs/meson.build
-index ef6e39a64d..2ea43ee076 100644
---- a/stubs/meson.build
-+++ b/stubs/meson.build
-@@ -5,7 +5,7 @@ stub_ss.add(files('blockdev-close-all-bdrv-states.c'))
- stub_ss.add(files('change-state-handler.c'))
- stub_ss.add(files('cmos.c'))
- stub_ss.add(files('cpu-get-clock.c'))
--stub_ss.add(files('cpus-get-virtual-clock.c'))
-+stub_ss.add(files('cpus-virtual-clock.c'))
- stub_ss.add(files('qemu-timer-notify-cb.c'))
- stub_ss.add(files('icount.c'))
- stub_ss.add(files('dump.c'))
++
++/**
++ * Install the plugin
++ */
++QEMU_PLUGIN_EXPORT int qemu_plugin_install(qemu_plugin_id_t id,
++                                           const qemu_info_t *info, int argc,
++                                           char **argv)
++{
++    /* This plugin only makes sense for system emulation */
++    if (!info->system_emulation) {
++        fprintf(stderr, "iops plugin only works with system emulation\n");
++        return -1;
++    }
++
++    for (int i = 0; i < argc; i++) {
++        char *opt = argv[i];
++        g_auto(GStrv) tokens = g_strsplit(opt, "=", 2);
++        if (g_strcmp0(tokens[0], "iops") == 0) {
++            iops = g_ascii_strtoull(tokens[1], NULL, 10);
++            if (!iops && errno) {
++                fprintf(stderr, "%s: couldn't parse %s (%s)\n",
++                        __func__, tokens[1], g_strerror(errno));
++                return -1;
++            }
++
++        } else if (g_strcmp0(tokens[0], "precise") == 0) {
++            if (!qemu_plugin_bool_parse(tokens[0], tokens[1],
++                                        &precise_execution)) {
++                fprintf(stderr, "boolean argument parsing failed: %s\n", opt);
++                return -1;
++            }
++        } else {
++            fprintf(stderr, "option parsing failed: %s\n", opt);
++            return -1;
++        }
++    }
++
++    /*
++     * Setup the tracking information we need to run.
++     */
++    vcpus = g_array_new(true, true, sizeof(vCPUTime));
++    g_array_set_size(vcpus, info->system.max_vcpus);
++    vcpu_counters = g_malloc0_n(info->system.max_vcpus, sizeof(uint64_t));
++    for (int i = 0; i < info->system.max_vcpus; i++) {
++        vCPUTime *vcpu = get_vcpu(i);
++        vcpu->counter = &vcpu_counters[i];
++    }
++
++    /*
++     * We are going to check the state of time every slice so set the
++     * first check at t0 + iops/SLICES
++     */
++    next_check = iops / SLICES;
++
++    /*
++     * Only one plugin can request time control, if we don't get the
++     * handle there isn't much we can do.
++     */
++    time_handle = qemu_plugin_request_time_control();
++    if (!time_handle) {
++        fprintf(stderr, "%s: not given permission to control time\n", __func__);
++        return -1;
++    }
++
++    /*
++     * To track time we need to measure how many instructions each
++     * core is executing as well as when each vcpu enters/leaves the
++     */
++    qemu_plugin_register_vcpu_tb_trans_cb(id, vcpu_tb_trans);
++
++    qemu_plugin_register_vcpu_init_cb(id, vcpu_init);
++    qemu_plugin_register_vcpu_idle_cb(id, vcpu_idle);
++    qemu_plugin_register_vcpu_resume_cb(id, vcpu_resume);
++    qemu_plugin_register_vcpu_exit_cb(id, vcpu_exit);
++
++    return 0;
++}
+diff --git a/contrib/plugins/Makefile b/contrib/plugins/Makefile
+index 8ba78c7a32..3f45a46a03 100644
+--- a/contrib/plugins/Makefile
++++ b/contrib/plugins/Makefile
+@@ -21,6 +21,7 @@ NAMES += lockstep
+ NAMES += hwprofile
+ NAMES += cache
+ NAMES += drcov
++NAMES += iops
+ 
+ SONAMES := $(addsuffix .so,$(addprefix lib,$(NAMES)))
+ 
 -- 
 2.39.2
 
