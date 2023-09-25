@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9817ECE7A8B
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 01:27:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2013BCE7A8B
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 01:33:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qkaNn-0003z5-VQ; Sun, 24 Sep 2023 21:27:32 -0400
+	id 1qkaT3-0006BF-Pr; Sun, 24 Sep 2023 21:32:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qkaNi-0003yA-3Z; Sun, 24 Sep 2023 21:27:26 -0400
-Received: from mail-vk1-xa32.google.com ([2607:f8b0:4864:20::a32])
+ id 1qkaT1-0006Ad-HV; Sun, 24 Sep 2023 21:32:55 -0400
+Received: from mail-ua1-x929.google.com ([2607:f8b0:4864:20::929])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qkaNg-0002xs-Cp; Sun, 24 Sep 2023 21:27:25 -0400
-Received: by mail-vk1-xa32.google.com with SMTP id
- 71dfb90a1353d-496a2ff7780so1771443e0c.2; 
- Sun, 24 Sep 2023 18:27:23 -0700 (PDT)
+ id 1qkaSz-0004Il-O2; Sun, 24 Sep 2023 21:32:55 -0400
+Received: by mail-ua1-x929.google.com with SMTP id
+ a1e0cc1a2514c-7a84609acc6so1827961241.3; 
+ Sun, 24 Sep 2023 18:32:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695605242; x=1696210042; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1695605572; x=1696210372; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=48Ub7f9UnW7mdJ9yDNbYZtxrcMpX8HWwPGhLojDu8+U=;
- b=XR/vEkVdWUVpGq4gV1dbsuYXAmyDlapW2wjYVF+fcdurhrFSI31tqL+s4VmJI6U5zS
- tfofuefvjmYaYaqcTFTA9MZP7QYN1KWJm5q8Zn9i90CnTR2O/su0xkQ+ituaWOTkqpi5
- t2L98KCRlYdq1OU0MmLFmS5wXssLkXIMCzGv2yLQ6saUybl1uQmeB48P4FYIMdav2lb1
- 0iwTlNQkKdSaPgZVvl8Rh/7efFjfvehROoQSZRfdcFFnQ6R33xbb5b5Wgs//Y34OSIZi
- vGhBJrxmPaOOS3afnF9IzbFWaMwO0SbwYpJjStM6x5lZZeKezeYs1jHBJmapxyMHriAO
- UnsA==
+ bh=4gsLb5PcS9D8UDeS4T/ZXkgMY0ai8YOIQN/lhiMzQ7Y=;
+ b=IQmBAA0x5mjKkwpN8U+13mlRGA3Kn3bo2F45Q2PHv6yQxV+CYAK0bAFSRtYzdilKoi
+ vsc0AVAIXn9VtbvTCHIxurgv+68CR3hBJ6WACyxEtGSrIIVfSRKcRbjFSgRR8KLNYCfS
+ RaH24Q5p7zwHrIWbnoPpMbkKX49F+HLulOWpxI2ZOqh2v8GYpB9k7egIalSkTskqgyQR
+ Uw6+cTgkPbKIvCBmSl4R2hQNfYBIn9UTayAkcnLXsSmuZOYfnBZzkNj2wEoxiY74X9ix
+ bXHQYhsQitNdKaeNa1i7ImeBT8pFSXX38fyiL+Hj2nN8hUxZ1UWiG+rFhKYTZjyfUDB3
+ AnGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695605242; x=1696210042;
+ d=1e100.net; s=20230601; t=1695605572; x=1696210372;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=48Ub7f9UnW7mdJ9yDNbYZtxrcMpX8HWwPGhLojDu8+U=;
- b=HLWakOCuDCtPIPfSozUnjs0Ll8SBOJOOu55DZskkuURAMaeg8yuZ2XjhY1ZicvINix
- IZ4eUR/JzX5H5GemzOYbZL0Y8k+gCaPXcHKhVPwxN21rqXpnwWn8SBa/M5bjrXtI365r
- VB8ZWLT4i4KTW8/B57iq0hF5n0j7KY8a+Er/nvEdIq1FvrmRQ9LFiog6RGv6Oeg8HJE1
- AWEANmgJGK6QmUVM+iFliDyYd2hpZ6dTo/pMsEVUqsIv8P8R6R4bE2PqCCXRLjwxnBfb
- iUjWUxYTVpgrTXcQwrR/gIrVZTcW1hTHkzmw05XPjv8AfCCYERyzXbizGTI++3tr30qt
- Dlrg==
-X-Gm-Message-State: AOJu0YzC/sK/T9B7jX6k5t0TZX53VTlRNYvj0DMbcDLBpXkq9PNvfPPj
- jYYZbD34ZK5LsBTp4cEX8PfN7K0g9d37mocNq74=
-X-Google-Smtp-Source: AGHT+IE5QXd7oFq8xe50Tb4oQyFwB88DAy5wQq2f6T02ca8oPSGg0BCfo8zARm62UURM7ifXtHGxnVqGGw04+OWIAUE=
-X-Received: by 2002:a05:6102:10c:b0:452:5a4f:21ad with SMTP id
- z12-20020a056102010c00b004525a4f21admr3028806vsq.18.1695605242586; Sun, 24
- Sep 2023 18:27:22 -0700 (PDT)
+ bh=4gsLb5PcS9D8UDeS4T/ZXkgMY0ai8YOIQN/lhiMzQ7Y=;
+ b=SPwLv4Glu1Nko8BUADSkowIX3UhO8Ify/WDS6aWHc+bjBEby76QalT6eAqpfMvg25O
+ VEg79Qio+PkLPPPvfEX7iTevpw34fGmytUGXHFp1l2pAjx1qqAPVF+bbfaBzfxEZ15YX
+ fknR12qOXPsEkt42evminSb+YdbdrulD85/VAzu3+n46+herUhkrSMyzSbf1sHOkT0BC
+ ut20PybMb9jn5SWeD815cWaKN/vFuEwj/AbNWbwND/BQwFpiv0xVOb9MX9VJNS+6bW3F
+ RjY2caLkVkxqMpKasSWrOREwLG1ThsfLICoH+aELQz7Uh6CDqmRvrQElqm+kFqBoUQr9
+ +ztw==
+X-Gm-Message-State: AOJu0Yy/Pi98JuDcgAf7vLf6EQsIMui9Z/mIcX5cjpM5sVa2G+6Kactm
+ BwbAuD2atJmtOFOoo6yD3NEcruv1KwZ9wTL5nrY=
+X-Google-Smtp-Source: AGHT+IEa4vco0hjVXg+mPTX+ALhA9XTWMHCjzTuvbaSeTPTGCK4RYkSfv7Y6qCANb3beZJ6efDr0T5X5EA6bgt4C0WQ=
+X-Received: by 2002:a1f:cc01:0:b0:490:100:abc with SMTP id
+ c1-20020a1fcc01000000b0049001000abcmr2289006vkg.5.1695605572159; 
+ Sun, 24 Sep 2023 18:32:52 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230920112020.651006-1-dbarboza@ventanamicro.com>
- <20230920112020.651006-13-dbarboza@ventanamicro.com>
-In-Reply-To: <20230920112020.651006-13-dbarboza@ventanamicro.com>
+ <20230920112020.651006-14-dbarboza@ventanamicro.com>
+In-Reply-To: <20230920112020.651006-14-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 25 Sep 2023 11:26:55 +1000
-Message-ID: <CAKmqyKO8Oe74y7MCWL_m+rUrv9cC0Q7Zw07i39Xn9Qu-q368AA@mail.gmail.com>
-Subject: Re: [PATCH v3 12/19] target/riscv: move KVM only files to kvm subdir
+Date: Mon, 25 Sep 2023 11:32:25 +1000
+Message-ID: <CAKmqyKMRgLamKXEDh_egqL2+-K8hLVJuO2P-1DGScq99-UJ=pg@mail.gmail.com>
+Subject: Re: [PATCH v3 13/19] target/riscv/kvm: do not use
+ riscv_cpu_add_misa_properties()
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
  palmer@rivosinc.com, philmd@linaro.org, ajones@ventanamicro.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a32;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::929;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x929.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -90,110 +91,157 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Sep 20, 2023 at 9:23=E2=80=AFPM Daniel Henrique Barboza
+On Wed, Sep 20, 2023 at 9:24=E2=80=AFPM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> Move the files to a 'kvm' dir to promote more code separation between
-> accelerators and making our lives easier supporting build options such
-> as --disable-tcg.
+> riscv_cpu_add_misa_properties() is being used to fill the missing KVM
+> MISA properties but it is a TCG helper that was adapted to do so. We'll
+> move it to tcg-cpu.c in the next patches, meaning that KVM needs to fill
+> the remaining MISA properties on its own.
 >
-> Rename kvm.c to kvm-cpu.c to keep it in line with its TCG counterpart.
+> Do not use riscv_cpu_add_misa_properties(). Let's create a new array
+> with all available MISA bits we support that can be read by KVM. The
+> array is zero terminate to allow us to iterate through it without
+> knowing its size.
+>
+> Then, inside kvm_riscv_add_cpu_user_properties(), we'll create all KVM
+> MISA properties as usual and then use this array to add any missing MISA
+> properties with the riscv_cpu_add_kvm_unavail_prop() helper.
+>
+> Note that we're creating misa_bits[], and not using the existing
+> 'riscv_single_letter_exts[]', because the latter is tuned for riscv,isa
+> related functions and it doesn't have all MISA bits we support. Commit
+> 0e2c377023 ("target/riscv: misa to ISA string conversion fix") has the
+> full context.
+>
+> While we're at it, move both satp and the multi-letter extension
+> properties to kvm_riscv_add_cpu_user_properties() as well.
 >
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  hw/intc/riscv_aplic.c                 | 2 +-
->  hw/riscv/virt.c                       | 2 +-
->  target/riscv/cpu.c                    | 2 +-
->  target/riscv/{kvm.c =3D> kvm/kvm-cpu.c} | 0
->  target/riscv/{ =3D> kvm}/kvm_riscv.h    | 0
->  target/riscv/kvm/meson.build          | 1 +
->  target/riscv/meson.build              | 2 +-
->  7 files changed, 5 insertions(+), 4 deletions(-)
->  rename target/riscv/{kvm.c =3D> kvm/kvm-cpu.c} (100%)
->  rename target/riscv/{ =3D> kvm}/kvm_riscv.h (100%)
->  create mode 100644 target/riscv/kvm/meson.build
+>  target/riscv/cpu.c         |  2 ++
+>  target/riscv/cpu.h         |  3 ++-
+>  target/riscv/kvm/kvm-cpu.c | 22 ++++++++++++++--------
+>  3 files changed, 18 insertions(+), 9 deletions(-)
 >
-> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-> index 99aae8ccbe..c677b5cfbb 100644
-> --- a/hw/intc/riscv_aplic.c
-> +++ b/hw/intc/riscv_aplic.c
-> @@ -32,7 +32,7 @@
->  #include "target/riscv/cpu.h"
->  #include "sysemu/sysemu.h"
->  #include "sysemu/kvm.h"
-> -#include "kvm_riscv.h"
-> +#include "kvm/kvm_riscv.h"
->  #include "migration/vmstate.h"
->
->  #define APLIC_MAX_IDC                  (1UL << 14)
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 5edc1d98d2..9de578c756 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -35,7 +35,7 @@
->  #include "hw/riscv/virt.h"
->  #include "hw/riscv/boot.h"
->  #include "hw/riscv/numa.h"
-> -#include "kvm_riscv.h"
-> +#include "kvm/kvm_riscv.h"
->  #include "hw/intc/riscv_aclint.h"
->  #include "hw/intc/riscv_aplic.h"
->  #include "hw/intc/riscv_imsic.h"
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index c8a19be1af..51567c2f12 100644
+> index 51567c2f12..665c21af6a 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -33,7 +33,7 @@
->  #include "fpu/softfloat-helpers.h"
->  #include "sysemu/kvm.h"
->  #include "sysemu/tcg.h"
-> -#include "kvm_riscv.h"
-> +#include "kvm/kvm_riscv.h"
->  #include "tcg/tcg.h"
+> @@ -38,6 +38,8 @@
 >
 >  /* RISC-V CPU definitions */
-> diff --git a/target/riscv/kvm.c b/target/riscv/kvm/kvm-cpu.c
-> similarity index 100%
-> rename from target/riscv/kvm.c
-> rename to target/riscv/kvm/kvm-cpu.c
-> diff --git a/target/riscv/kvm_riscv.h b/target/riscv/kvm/kvm_riscv.h
-> similarity index 100%
-> rename from target/riscv/kvm_riscv.h
-> rename to target/riscv/kvm/kvm_riscv.h
-> diff --git a/target/riscv/kvm/meson.build b/target/riscv/kvm/meson.build
-> new file mode 100644
-> index 0000000000..7e92415091
-> --- /dev/null
-> +++ b/target/riscv/kvm/meson.build
-> @@ -0,0 +1 @@
-> +riscv_ss.add(when: 'CONFIG_KVM', if_true: files('kvm-cpu.c'))
-> diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-> index 3323b78b84..c53962215f 100644
-> --- a/target/riscv/meson.build
-> +++ b/target/riscv/meson.build
-> @@ -24,7 +24,6 @@ riscv_ss.add(files(
->    'zce_helper.c',
->    'vcrypto_helper.c'
->  ))
-> -riscv_ss.add(when: 'CONFIG_KVM', if_true: files('kvm.c'))
+>  static const char riscv_single_letter_exts[] =3D "IEMAFDQCPVH";
+> +const uint32_t misa_bits[] =3D {RVI, RVE, RVM, RVA, RVF, RVD, RVV,
+> +                              RVC, RVS, RVU, RVH, RVJ, RVG, 0};
 >
->  riscv_system_ss =3D ss.source_set()
->  riscv_system_ss.add(files(
-> @@ -39,6 +38,7 @@ riscv_system_ss.add(files(
->  ))
+>  struct isa_ext_data {
+>      const char *name;
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index cb13464ba6..7235eafc1a 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -43,7 +43,7 @@
+>  #define RV(x) ((target_ulong)1 << (x - 'A'))
 >
->  subdir('tcg')
-> +subdir('kvm')
+>  /*
+> - * Consider updating misa_ext_info_arr[] and misa_ext_cfgs[]
+> + * Update misa_bits[], misa_ext_info_arr[] and misa_ext_cfgs[]
+>   * when adding new MISA bits here.
+>   */
+>  #define RVI RV('I')
+> @@ -60,6 +60,7 @@
+>  #define RVJ RV('J')
+>  #define RVG RV('G')
 >
->  target_arch +=3D {'riscv': riscv_ss}
->  target_softmmu_arch +=3D {'riscv': riscv_system_ss}
+> +extern const uint32_t misa_bits[];
+>  const char *riscv_get_misa_ext_name(uint32_t bit);
+>  const char *riscv_get_misa_ext_description(uint32_t bit);
+>
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index 606fdab223..c6615cb807 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -396,6 +396,8 @@ static void kvm_riscv_add_cpu_user_properties(Object =
+*cpu_obj)
+>  {
+>      int i;
+>
+> +    riscv_add_satp_mode_properties(cpu_obj);
+> +
+>      for (i =3D 0; i < ARRAY_SIZE(kvm_misa_ext_cfgs); i++) {
+>          KVMCPUConfig *misa_cfg =3D &kvm_misa_ext_cfgs[i];
+>          int bit =3D misa_cfg->offset;
+> @@ -411,6 +413,11 @@ static void kvm_riscv_add_cpu_user_properties(Object=
+ *cpu_obj)
+>                                          misa_cfg->description);
+>      }
+>
+> +    for (i =3D 0; misa_bits[i] !=3D 0; i++) {
+> +        const char *ext_name =3D riscv_get_misa_ext_name(misa_bits[i]);
+> +        riscv_cpu_add_kvm_unavail_prop(cpu_obj, ext_name);
+> +    }
+> +
+>      for (i =3D 0; i < ARRAY_SIZE(kvm_multi_ext_cfgs); i++) {
+>          KVMCPUConfig *multi_cfg =3D &kvm_multi_ext_cfgs[i];
+>
+> @@ -427,6 +434,10 @@ static void kvm_riscv_add_cpu_user_properties(Object=
+ *cpu_obj)
+>      object_property_add(cpu_obj, "cboz_blocksize", "uint16",
+>                          NULL, kvm_cpu_set_cbomz_blksize,
+>                          NULL, &kvm_cboz_blocksize);
+> +
+> +    riscv_cpu_add_kvm_unavail_prop_array(cpu_obj, riscv_cpu_extensions);
+> +    riscv_cpu_add_kvm_unavail_prop_array(cpu_obj, riscv_cpu_vendor_exts)=
+;
+> +    riscv_cpu_add_kvm_unavail_prop_array(cpu_obj, riscv_cpu_experimental=
+_exts);
+>  }
+>
+>  static int kvm_riscv_get_regs_core(CPUState *cs)
+> @@ -801,7 +812,7 @@ static void kvm_riscv_init_multiext_cfg(RISCVCPU *cpu=
+, KVMScratchCPU *kvmcpu)
+>      }
+>  }
+>
+> -static void riscv_init_user_properties(Object *cpu_obj)
+> +static void riscv_init_kvm_registers(Object *cpu_obj)
+>  {
+>      RISCVCPU *cpu =3D RISCV_CPU(cpu_obj);
+>      KVMScratchCPU kvmcpu;
+> @@ -810,7 +821,6 @@ static void riscv_init_user_properties(Object *cpu_ob=
+j)
+>          return;
+>      }
+>
+> -    kvm_riscv_add_cpu_user_properties(cpu_obj);
+>      kvm_riscv_init_machine_ids(cpu, &kvmcpu);
+>      kvm_riscv_init_misa_ext_mask(cpu, &kvmcpu);
+>      kvm_riscv_init_multiext_cfg(cpu, &kvmcpu);
+> @@ -1324,13 +1334,9 @@ static void kvm_cpu_instance_init(CPUState *cs)
+>      Object *obj =3D OBJECT(RISCV_CPU(cs));
+>      DeviceState *dev =3D DEVICE(obj);
+>
+> -    riscv_init_user_properties(obj);
+> -    riscv_add_satp_mode_properties(obj);
+> -    riscv_cpu_add_misa_properties(obj);
+> +    riscv_init_kvm_registers(obj);
+>
+> -    riscv_cpu_add_kvm_unavail_prop_array(obj, riscv_cpu_extensions);
+> -    riscv_cpu_add_kvm_unavail_prop_array(obj, riscv_cpu_vendor_exts);
+> -    riscv_cpu_add_kvm_unavail_prop_array(obj, riscv_cpu_experimental_ext=
+s);
+> +    kvm_riscv_add_cpu_user_properties(obj);
+>
+>      for (Property *prop =3D riscv_cpu_options; prop && prop->name; prop+=
++) {
+>          /* Check if we have a specific KVM handler for the option */
 > --
 > 2.41.0
 >
