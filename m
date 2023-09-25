@@ -4,74 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BB82CE7A81
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 07:48:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCD49CE7A81
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 09:09:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qkgKe-00036z-Rf; Mon, 25 Sep 2023 03:48:42 -0400
+	id 1qkhaL-000089-9k; Mon, 25 Sep 2023 05:08:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
- id 1qkgKc-00036Z-47
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 03:48:38 -0400
-Received: from mail-vs1-xe34.google.com ([2607:f8b0:4864:20::e34])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qkhaH-00007m-UI
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 05:08:55 -0400
+Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
- id 1qkgKa-0006IM-Je
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 03:48:37 -0400
-Received: by mail-vs1-xe34.google.com with SMTP id
- ada2fe7eead31-452832dbb5dso2449447137.0
- for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 00:48:36 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qkhaE-0003l8-14
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 05:08:52 -0400
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-692b2bdfce9so3713980b3a.3
+ for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 02:08:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1695628115; x=1696232915; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ns556nGWeROzcHpNUUqxQir3WMfmjPXAuwsfnLYZEUI=;
- b=AKH2JissRmmVBv65GvV4a0BKS3AhZ1t1iJMtcurHE5elrUsl/6BTePnX1c8M8VIGdT
- elEZPUPULJmS2979WTp3d4wa7QJJoHZfdsz9vMxbYJWsMK1gLJ/bSmTiy27qei4A6BO8
- zLU6bBcksch0akbsvzdsOAqVOxdLRp2vLOLcHSSThuXU1xZOMwaZz16U5nUvKpXnqL/a
- EEw4MyH1ceXzAyWLF8MfPf47kG8Uqfq0UPsYFE70+VO4TWyPpcmHeaMA3S92f0WBj3my
- aEFK0zHCQIGS2+R7JD7R+gn2miFz+gWbhnX2XhwZAdL91k+eXAQXUUNqyM/gNN3xJppR
- 03xA==
+ d=ventanamicro.com; s=google; t=1695632928; x=1696237728; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=1/SwGyCSvN76EolJiFlZuR+WwGm96y/58SlZGqEmW9k=;
+ b=m6k/9thSBT04hGlwYjiRE59ginkT2p5VZwyixrEF+yIiWc42k4KD7B3nKHcnJyFQJx
+ AIh5NgkLnNRQl6w+m0zWwkWZ1/HTXRgjfNpjDlA+6IwebfqJQ10izthDe9ve3bzWIQOV
+ Ns4BxRI89QvR3i4AVD6Zsgiq8kP9/wDsjTMMmkUnSjKV4RRc9PNl5U/xkrokPHm7/sND
+ H3r/XjPV1SNRRx4Z1MUeb7/A5GQAM7YvBs8/WdfcbeIpkZBVYufZRWhw/lO4+mLNPOXB
+ tCYFf+lTsNilApSTxI4J31HmnWCro9Du+T2pTGYDbDarJmqKMUwaWHEucACbAQvOIRm/
+ sGUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695628115; x=1696232915;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ns556nGWeROzcHpNUUqxQir3WMfmjPXAuwsfnLYZEUI=;
- b=e4Y1yiY1qMWZDhDRnWL6l5MSAk9muK8mi2bRJTDLOCQPeJ6c4JtaKK0gynf/ZHiNJh
- sBrUzekFbQxDV3Sj7wROPZZ7611+OH3bFJX6e3tQV4gLrhvjflJCEoplPxO7qAmkVWoO
- lCTpPwwNJgFIgJra/ooJ3/7HWaF7DnSPEdNzDVzN/CcRKJ2hxB8Zji7gJb4vc7VqaQhs
- ui320nC3S6EN3pDtE1a4odwn8u7XGjfydqmeyvu7l//s+4yP/MsaHTrOg1AlpfNr73Dp
- DdV8yZtj0MS8VPxBHXt/fe8200kFBrFTt1ui8qEKrznofJ/rr5X/0tIdD19vQSjMbESF
- E2kg==
-X-Gm-Message-State: AOJu0YwrygXsRxPOSjbWLDRezmYhxvomYWBNOthEhhg0z+EV/8kMuTpL
- aS3ZzFAe6vGtZ6A1cKjoCOYmTU3kS2EJBjBNVOCTTA==
-X-Google-Smtp-Source: AGHT+IETk5McJL4iuuznvbW6ici95N5VEsFu5MdrXBmNZdzwfkrh4KoOdTgnnrkgE/hpSa6X97rNd8l+Hhyz+7nlsJQ=
-X-Received: by 2002:a67:fc48:0:b0:44d:6256:ac8b with SMTP id
- p8-20020a67fc48000000b0044d6256ac8bmr3427820vsq.4.1695628115321; Mon, 25 Sep
- 2023 00:48:35 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695632928; x=1696237728;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=1/SwGyCSvN76EolJiFlZuR+WwGm96y/58SlZGqEmW9k=;
+ b=t1f4pFlPMpfW5kBNtyXuPf6msIguljRPtpYjTkTCzjTn40qgSLRghGO4qtLl4vEJho
+ vb4vjve/FUTf3pg6h68QKQoC0L+iin6akruKEVCEFH9i+thiu+A2uyieaWhYH29xXgOY
+ GVac2PpyXOgStL5laMMYBzmHwfYzsLOQdcbJGNvZrbjh8g77C77i/PAslHYlUX4yQ4Ri
+ h9zxa07kPhdPaMZfwqvfnXX2AgFnv6XYNYZJhQK4yGGUECIjjUsx0Qu5V/D+pGGjtEXR
+ Z1zKYQkDqClv5XNIVyiooeTS3To7bnM9to+A5MmaYNWH11Btpi71TP2CDc8qy3SCQxVX
+ Ww0w==
+X-Gm-Message-State: AOJu0YyMDqcWzrh+k00RkemFF9uK8NZU9SxJYNgf2EuoymyhjU0uLyaf
+ RdCq/v7E8FuAkHuHq9fzFwMiBw==
+X-Google-Smtp-Source: AGHT+IGrWHten8FonWYEP0qpHu60hSnYmIiZsfzA/cycRwnWHLJElsFdqqrG8nrI871s94if8kTjeQ==
+X-Received: by 2002:a05:6a00:1a8d:b0:691:320:b551 with SMTP id
+ e13-20020a056a001a8d00b006910320b551mr7902122pfv.34.1695632928085; 
+ Mon, 25 Sep 2023 02:08:48 -0700 (PDT)
+Received: from [192.168.68.107] ([177.94.42.59])
+ by smtp.gmail.com with ESMTPSA id
+ fn1-20020a056a002fc100b00692e9bf82fcsm1524743pfb.182.2023.09.25.02.08.44
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 25 Sep 2023 02:08:47 -0700 (PDT)
+Message-ID: <2a3168e9-813f-75fb-51e1-4202042923bf@ventanamicro.com>
+Date: Mon, 25 Sep 2023 06:08:43 -0300
 MIME-Version: 1.0
-References: <20230914101751.772576-1-mchitale@ventanamicro.com>
- <CAKmqyKNv+Wk6duL4Ww1QiC30O-W7kyypdd+kh3tjKDzFOy0Ybg@mail.gmail.com>
-In-Reply-To: <CAKmqyKNv+Wk6duL4Ww1QiC30O-W7kyypdd+kh3tjKDzFOy0Ybg@mail.gmail.com>
-From: Mayuresh Chitale <mchitale@ventanamicro.com>
-Date: Mon, 25 Sep 2023 13:17:59 +0530
-Message-ID: <CAN37VV7AvDk3JtdNDEdTStpTevGrhXYSMScvZKREdZWnKhsz+A@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: pmp: Ignore writes when RW=01
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e34;
- envelope-from=mchitale@ventanamicro.com; helo=mail-vs1-xe34.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH 1/4] hw/riscv: opentitan: Fixup local variables shadowing
+Content-Language: en-US
+To: Alistair Francis <alistair23@gmail.com>, david@gibson.dropbear.id.au,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: bmeng.cn@gmail.com, alistair.francis@wdc.com,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, palmer@dabbelt.com,
+ liweiwei@iscas.ac.cn, Bin Meng <bin.meng@windriver.com>
+References: <20230925043023.71448-1-alistair.francis@wdc.com>
+ <20230925043023.71448-2-alistair.francis@wdc.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20230925043023.71448-2-alistair.francis@wdc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x433.google.com
+X-Spam_score_int: -35
+X-Spam_score: -3.6
+X-Spam_bar: ---
+X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.473,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -89,59 +100,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Sep 18, 2023 at 7:02=E2=80=AFAM Alistair Francis <alistair23@gmail.=
-com> wrote:
->
-> On Thu, Sep 14, 2023 at 10:35=E2=80=AFPM Mayuresh Chitale
-> <mchitale@ventanamicro.com> wrote:
-> >
-> > As per the Priv spec: "The R, W, and X fields form a collective WARL
-> > field for which the combinations with R=3D0 and W=3D1 are reserved."
-> > However currently such writes are not ignored as ought to be. The
-> > combinations with RW=3D01 are allowed only when the Smepmp extension
-> > is enabled and mseccfg.MML is set.
-> >
-> > Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
-> > ---
-> >  target/riscv/pmp.c | 8 ++++++++
-> >  1 file changed, 8 insertions(+)
-> >
-> > diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> > index f3eb6e6585..5b430be18c 100644
-> > --- a/target/riscv/pmp.c
-> > +++ b/target/riscv/pmp.c
-> > @@ -119,6 +119,14 @@ static bool pmp_write_cfg(CPURISCVState *env, uint=
-32_t pmp_index, uint8_t val)
-> >          if (locked) {
-> >              qemu_log_mask(LOG_GUEST_ERROR, "ignoring pmpcfg write - lo=
-cked\n");
-> >          } else if (env->pmp_state.pmp[pmp_index].cfg_reg !=3D val) {
-> > +            /* If !mseccfg.MML then ignore writes with encoding RW=3D0=
-1 */
-> > +            if ((val & PMP_WRITE) && !(val & PMP_READ) &&
-> > +                (!riscv_cpu_cfg(env)->ext_smepmp ||
-> > +                !MSECCFG_MML_ISSET(env))) {
->
-> MSECCFG_MML can only be set if ext_smepmp exists, so I don't think we
-> need both checks here
-Ok.
->
-> > +                val &=3D ~(PMP_WRITE | PMP_READ);
-> > +                val |=3D env->pmp_state.pmp[pmp_index].cfg_reg &
-> > +                       (PMP_WRITE | PMP_READ);
->
-> Why do we restore the previous value? It's a WARL so we should just
-> guarantee a legal value (which would be 0x0 I guess)
-Yes. It can be set to 0x0.
->
-> Alistair
->
-> > +            }
-> >              env->pmp_state.pmp[pmp_index].cfg_reg =3D val;
-> >              pmp_update_rule_addr(env, pmp_index);
-> >              return true;
-> > --
-> > 2.34.1
-> >
-> >
+
+
+On 9/25/23 01:30, Alistair Francis wrote:
+> Local variables shadowing other local variables or parameters make the
+> code needlessly hard to understand.  Bugs love to hide in such code.
+> Evidence: "[PATCH v3 1/7] migration/rdma: Fix save_page method to fail
+> on polling error".
+> 
+> This patch removes the local variable shadowing. Tested by adding:
+> 
+>      --extra-cflags='-Wshadow=local -Wno-error=shadow=local -Wno-error=shadow=compatible-local'
+> 
+> To configure
+> 
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+>   hw/riscv/opentitan.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+> index 6a2fcc4ade..436503f1ba 100644
+> --- a/hw/riscv/opentitan.c
+> +++ b/hw/riscv/opentitan.c
+> @@ -227,7 +227,7 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
+>                                              IRQ_M_TIMER));
+>   
+>       /* SPI-Hosts */
+> -    for (int i = 0; i < OPENTITAN_NUM_SPI_HOSTS; ++i) {
+> +    for (i = 0; i < OPENTITAN_NUM_SPI_HOSTS; ++i) {
+>           dev = DEVICE(&(s->spi_host[i]));
+>           if (!sysbus_realize(SYS_BUS_DEVICE(&s->spi_host[i]), errp)) {
+>               return;
 
