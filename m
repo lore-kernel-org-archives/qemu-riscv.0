@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ECB9CE7A94
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 14:52:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9708DCE7A81
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 14:52:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qkmvz-0005L3-LX; Mon, 25 Sep 2023 10:51:40 -0400
+	id 1qkmvc-0004Xu-T2; Mon, 25 Sep 2023 10:51:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qkmty-0001rR-Ib
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:49:35 -0400
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
+ id 1qkmtt-0001pi-9E
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:49:33 -0400
+Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qkmtX-0008L6-NR
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:49:33 -0400
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-313e742a787so4463418f8f.1
- for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 07:49:07 -0700 (PDT)
+ id 1qkmtT-0008Hc-ML
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:49:27 -0400
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4053cb57f02so53525055e9.1
+ for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 07:49:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695653344; x=1696258144; darn=nongnu.org;
+ d=linaro.org; s=google; t=1695653340; x=1696258140; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vW14u2/R+fXBkgsAVXJeC+s7wkbS5Xjof2Eeqsenrno=;
- b=P07QOw7h7oSiIPedHOIx4ngpU/EA9KM7CHQbbpv6tGCmBqzS5i8MGV2+Rq0OUDAe8W
- varXa11UsGKo3ckBmFqZkrnS5NttRlCWa3pZB05qBNbHcTUaBM8zughgyAtWNb+ZF3qw
- 8EX/Ubl1iVQvRuTiUlevCnHccHKOBvn8ejjOh9aelQTxPJCOS/wGbaSd5GMmU/7fPLyA
- AOm57XbvMtu3HnK4TvNqzCxgUkDIPbQQu65k6m/SFEce3ISw/pHYRRJgPHo/V5FR4BfT
- JvqqDJnXzJXQIfY07fpfTdzvQlEuEL2uUlnAVHot/5FAZ0yHSBz0+ipTTi3m/IhZv8qn
- wEjw==
+ bh=DlEhphEtX0KtQL/e4ae/jun4tEwNOtAavPJ6o58muzg=;
+ b=o/nUgvjAXOP8v2n0hbHEcBWRjMZI4980/xMJyrB9IzV3Mpu9/kPkYsNFQf4Z2f392l
+ CN6cFmmPNhIinKQk3Yr4YOHoht0Ps6NhtxjZzXIXRsmP08/hTWudXOsYZ+VE33/Pd1aO
+ rRWPI/GxAbNBTkZ03tV0cKH2Pio6ybNz8y2HIq11I0cpNRAlp4FtPgdfdjq8WqVp/fuj
+ bXO5VO/0ZOZ9/eJ/ObccQK4YPHB6S9qWEna7ID+TQMubJ5eu8geo8I/Ub8tzStHuzb6p
+ rdO/va++RBpbZxq5MDA4Cpwee1U/mDcgbYYQVF7ulB5NMvVa50aBp4Mwus4M1Bg4UQYg
+ mV3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695653344; x=1696258144;
+ d=1e100.net; s=20230601; t=1695653340; x=1696258140;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vW14u2/R+fXBkgsAVXJeC+s7wkbS5Xjof2Eeqsenrno=;
- b=qKw2d8IaRFljNwtFMKDcg7Q1JOPOE/scWt7Q8kq+OKC4f13RzDW/CvvDhjKEGJazZ+
- mEk6rGF5wwhkTVfM4SdzbSd6Tl3b3O9ngSQXlel8XwbHjqSg7HX96ySCUR7po2LVuz4W
- 48yTHmIQMokHEEERld6pA+e24mm3kNxKV5d+4GZMsfAt1MjyL0NmfKsS4sfGHMJsPUBg
- m6Rb0d9nc/3sRYAigAJYDymPtJ7hwEGDLlV+uX9qBgnrRvf+hBeaXtyi/AmVtZE3X9sH
- fglPhY3rILv+BdKt2qAQdS7F45GySWgolWjyBhSliL8d308nmfDHWB0R5HMc2VDDnEWj
- M21Q==
-X-Gm-Message-State: AOJu0Yy8fvHlkIbLom9LcYdN308PxWIJOvvPIAH/xDGs/sLlSbWl9UZh
- L1yCVIgilqTJeBpX8p0X116eFQ==
-X-Google-Smtp-Source: AGHT+IFoDt+/1YdAyaAs2mIqGW3PYJilqzR3pMEU0y3yKYA/nuwBdpG428Qs2pPLYZN2DO43DVDw7A==
-X-Received: by 2002:a5d:4003:0:b0:321:f74d:ade3 with SMTP id
- n3-20020a5d4003000000b00321f74dade3mr7250450wrp.32.1695653344259; 
- Mon, 25 Sep 2023 07:49:04 -0700 (PDT)
+ bh=DlEhphEtX0KtQL/e4ae/jun4tEwNOtAavPJ6o58muzg=;
+ b=hcXASEQ4J/fP+OrehK//C7QQ6XhdCmv62LYZoL3V0QglguGW1+KqZInVhLuk2Od3K2
+ XmSvAsjCby1pEKEmFJz1F+3RzZS3ZP4BEW33zISPh/9avTqf9vDcnp/alwhx66DHx9j/
+ qMzDpXnrhuT2W39vIz8MP0Sx/PO3xpgV2kKmvCl0fPofukPNfLVzSKrrWyO9/Aosngn/
+ PehC4nIey/dgkczp/88f8YEeiRcnrP4BnqL+Giqz99SB5bo3bYFzUgftBROKQv55fkc8
+ J1fIJXNd5kzU9HwNdTPGEh8BF2EHujEtDOO7n8XpWLQ9TeJFicRvTqt3RsfChfE/rSjl
+ i6BA==
+X-Gm-Message-State: AOJu0Ywc5IUi4RvfonSV+GyS972fPpJSWmVgMBnfB4LOz2ZZ98RP0LlZ
+ NL6vf5Nggk7NeWGyGJBd+W5Q7Q==
+X-Google-Smtp-Source: AGHT+IGhe1u04XO93m5rgLTFr+jl5409HMKnsiFsSpSw9wJkJLs5eAVSrkgDsaznTTLlTJAxliqaUw==
+X-Received: by 2002:a05:600c:22cd:b0:401:b493:f7c1 with SMTP id
+ 13-20020a05600c22cd00b00401b493f7c1mr5917888wmg.35.1695653340198; 
+ Mon, 25 Sep 2023 07:49:00 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- m13-20020a7bcb8d000000b003ff3b964a9asm15334036wmi.39.2023.09.25.07.48.59
+ y23-20020a05600c365700b003fefe70ec9csm15207988wmq.10.2023.09.25.07.48.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Sep 2023 07:49:03 -0700 (PDT)
+ Mon, 25 Sep 2023 07:48:57 -0700 (PDT)
 Received: from zen.linaroharston (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id D21F41FFC1;
- Mon, 25 Sep 2023 15:48:57 +0100 (BST)
+ by zen.linaroharston (Postfix) with ESMTP id 347651FFC3;
+ Mon, 25 Sep 2023 15:48:56 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>,
@@ -93,19 +93,18 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Ilya Leoshkevich <iii@linux.ibm.com>, Laurent Vivier <lvivier@redhat.com>,
  Yoshinori Sato <ysato@users.sourceforge.jp>,
  Leif Lindholm <quic_llindhol@quicinc.com>, Beraldo Leal <bleal@redhat.com>,
- Matt Borgerson <contact@mborgerson.com>
-Subject: [PATCH 23/31] plugins: Set final instruction count in
- plugin_gen_tb_end
-Date: Mon, 25 Sep 2023 15:48:46 +0100
-Message-Id: <20230925144854.1872513-24-alex.bennee@linaro.org>
+ Akihiko Odaki <akihiko.odaki@daynix.com>
+Subject: [PATCH 10/31] gdbstub: Fix target.xml response
+Date: Mon, 25 Sep 2023 15:48:33 +0100
+Message-Id: <20230925144854.1872513-11-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230925144854.1872513-1-alex.bennee@linaro.org>
 References: <20230925144854.1872513-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::432;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x432.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -128,80 +127,32 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Matt Borgerson <contact@mborgerson.com>
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
 
-Translation logic may partially decode an instruction, then abort and
-remove the instruction from the TB. This can happen for example when an
-instruction spans two pages. In this case, plugins may get an incorrect
-result when calling qemu_plugin_tb_n_insns to query for the number of
-instructions in the TB. This patch updates plugin_gen_tb_end to set the
-final instruction count.
+It was failing to return target.xml after the first request.
 
-Signed-off-by: Matt Borgerson <contact@mborgerson.com>
-[AJB: added g_assert to defed API]
+Fixes: 56e534bd11 ("gdbstub: refactor get_feature_xml")
+Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+Message-Id: <20230912224107.29669-3-akihiko.odaki@daynix.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <CADc=-s5RwGViNTR-h5cq3np673W3RRFfhr4vCGJp0EoDUxvhog@mail.gmail.com>
 ---
- include/exec/plugin-gen.h | 4 ++--
- accel/tcg/plugin-gen.c    | 6 +++++-
- accel/tcg/translator.c    | 2 +-
- 3 files changed, 8 insertions(+), 4 deletions(-)
+ gdbstub/gdbstub.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/include/exec/plugin-gen.h b/include/exec/plugin-gen.h
-index 52828781bc..c4552b5061 100644
---- a/include/exec/plugin-gen.h
-+++ b/include/exec/plugin-gen.h
-@@ -20,7 +20,7 @@ struct DisasContextBase;
+diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
+index 349d348c7b..384191bcb0 100644
+--- a/gdbstub/gdbstub.c
++++ b/gdbstub/gdbstub.c
+@@ -396,8 +396,8 @@ static const char *get_feature_xml(const char *p, const char **newp,
+             g_string_append(xml, "</target>");
  
- bool plugin_gen_tb_start(CPUState *cpu, const struct DisasContextBase *db,
-                          bool supress);
--void plugin_gen_tb_end(CPUState *cpu);
-+void plugin_gen_tb_end(CPUState *cpu, size_t num_insns);
- void plugin_gen_insn_start(CPUState *cpu, const struct DisasContextBase *db);
- void plugin_gen_insn_end(void);
- 
-@@ -42,7 +42,7 @@ void plugin_gen_insn_start(CPUState *cpu, const struct DisasContextBase *db)
- static inline void plugin_gen_insn_end(void)
- { }
- 
--static inline void plugin_gen_tb_end(CPUState *cpu)
-+static inline void plugin_gen_tb_end(CPUState *cpu, size_t num_insns)
- { }
- 
- static inline void plugin_gen_disable_mem_helpers(void)
-diff --git a/accel/tcg/plugin-gen.c b/accel/tcg/plugin-gen.c
-index 5c13615112..c0adc9f4b7 100644
---- a/accel/tcg/plugin-gen.c
-+++ b/accel/tcg/plugin-gen.c
-@@ -866,10 +866,14 @@ void plugin_gen_insn_end(void)
-  * do any clean-up here and make sure things are reset in
-  * plugin_gen_tb_start.
-  */
--void plugin_gen_tb_end(CPUState *cpu)
-+void plugin_gen_tb_end(CPUState *cpu, size_t num_insns)
- {
-     struct qemu_plugin_tb *ptb = tcg_ctx->plugin_tb;
- 
-+    /* translator may have removed instructions, update final count */
-+    g_assert(num_insns <= ptb->n);
-+    ptb->n = num_insns;
-+
-     /* collect instrumentation requests */
-     qemu_plugin_tb_trans_cb(cpu, ptb);
- 
-diff --git a/accel/tcg/translator.c b/accel/tcg/translator.c
-index 37f8dadbbd..ff84282fe5 100644
---- a/accel/tcg/translator.c
-+++ b/accel/tcg/translator.c
-@@ -212,7 +212,7 @@ void translator_loop(CPUState *cpu, TranslationBlock *tb, int *max_insns,
-     gen_tb_end(tb, cflags, icount_start_insn, db->num_insns);
- 
-     if (plugin_enabled) {
--        plugin_gen_tb_end(cpu);
-+        plugin_gen_tb_end(cpu, db->num_insns);
+             process->target_xml = g_string_free(xml, false);
+-            return process->target_xml;
+         }
++        return process->target_xml;
      }
- 
-     /* The disas_log hook may use these values rather than recompute.  */
+     /* Is it dynamically generated by the target? */
+     if (cc->gdb_get_dynamic_xml) {
 -- 
 2.39.2
 
