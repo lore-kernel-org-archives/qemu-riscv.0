@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46661CE7A95
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 14:59:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2008ACE7A81
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 14:59:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qkn3J-0000Ar-VW; Mon, 25 Sep 2023 10:59:14 -0400
+	id 1qkn3N-0000Hv-Sx; Mon, 25 Sep 2023 10:59:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qkn35-0008Kv-9a
+ id 1qkn35-0008Ku-9j
  for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:59:00 -0400
-Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qkn2r-0002Eb-K3
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:58:54 -0400
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-40537481094so64524765e9.0
+ id 1qkn2r-0002Ep-V2
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:58:56 -0400
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-405524e6769so26306375e9.1
  for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 07:58:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1695653924; x=1696258724; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eKXyxkZjkgMHzhbh3Oq/XROWT/WyaO+gDU9Mjp58TiI=;
- b=v4+LzZ0qKbYpVrBm6g7rdVJQ8kcfUnpsf7UwmNcPdeG0i8DpQt38mJXhXdN/ITGRnG
- zrFI6EgINpKA3T4dRNzEHwrTS3syn4Ai/GcfIkxAUGtWKYb0VqUTVW1E9Qs/NLokJmk+
- kLyRC2wPJ0EOc/LpE7YntaKyfRbDusE+6R/yqB7B88ALXPnPQYgAqt/3c3GlcdvdPDfG
- wXKMTIzVzy/wURDyvciSnr8JFdjkfWFlWvRFYDt93vPUSzmexosIj0dmYweq706Gfg5w
- g4t5+fJplIs4N5tBzI0qKgZgPojh16fpONsjvzIpaoJR8sK0xSCqfILVepQRL2ou0mJK
- rgBw==
+ bh=y3Mf9pXINv9MNziLLoU9Gq8z0X78btsM4rjGFmiQ41I=;
+ b=u+F/DJ7qlRZsnBL0Z1lVSZFqS3G03shccLStBwJcnNPogQ02GjWOXrfo1NqgHwDl4g
+ 5DJWr0YtQMLKUCYLPH6DM1KWoJySXqbhzz0Yv1/kd6ZtjXTmhI3sBW/c1CoXVpl57MON
+ RKgSSqgPxkrq52i61y3fX78wA+O/J6tG2Q+qHliT5jIWfNh+Qm5UApo7JsS6y2+dcIUM
+ ECYy5m5buy9CM1KqXRzZsB41Cw0sU8yGilF6Wh9w0YeJp7k5x+2qkvAk9SBT1IHZFK9M
+ dG36KnOYPWXCxRYbVeLqIBmDMor36/pWeqnk1Of4sHtP6ay59/PGYZjlKV/x00H3JrnM
+ xAYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1695653924; x=1696258724;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eKXyxkZjkgMHzhbh3Oq/XROWT/WyaO+gDU9Mjp58TiI=;
- b=PbtNpH13TsktDCOACVLPVDOte7Wx8oSAL70s1tX55HNGBAhWiiipVsTT12tJHm/Q0n
- gdrw32d7hXN6xhcdBgLRqsLe0XPF77bJX6QApeNstGYGpKInilYDfMoOuyEP3locJIX4
- 1bXbPurNPNUwhq+UEYjKoyGzpJ/p8QRPJ9qOeKcUXwBxIe2EgSDZJiAWni227YZkIzKy
- 0nrT9dkpbjzPr0t6n9JdvTHzaj+8S8qlufINYY8se+DS5Pn9S2sMAwNjg2JYI0z9przm
- gmWFbriymWl8e4xq6Cw0p1QQ0NnNmlhJPSklUh/jszMzaYjEcO61pvDHFg6rUQ4TtmXB
- +y6g==
-X-Gm-Message-State: AOJu0YxxmH7skPg2baZwtMKMU5bHxfqNd1x5ohPabwcacPGZXSJwpLrE
- HluLuFPUL6EqCvZZSiSNdqGXRg==
-X-Google-Smtp-Source: AGHT+IGWbUjxohdjoGUz1NACjFC7lPrzbzSjOIinfeWPBprq1qiMF15BclJ+KgJx8fxJhUxcDhDCPA==
-X-Received: by 2002:a05:600c:230b:b0:3fe:d448:511a with SMTP id
- 11-20020a05600c230b00b003fed448511amr6821322wmo.9.1695653923716; 
+ bh=y3Mf9pXINv9MNziLLoU9Gq8z0X78btsM4rjGFmiQ41I=;
+ b=oqvLPsRm2S9H+WNNACzyVZwvnDIpX5BiELuuqQRQUj8lXetuJY5klRm3SsOiT4iDXw
+ HE5BqH3l3vilMqPA++9AyYbsYKF2BYSxsK1Q9A6A8EBHDqKOGSoPmf7BBJQUGXokQPu4
+ svX6w23PbHoyphBFFL4Sl3+j7wbSrjNra1slPTq+TJIJH3LsivMvUl+RIGsmiXLuFqpy
+ 18SVt+iSQY1xlQxRaVbk2v/6tCb3xgxYQpwkhjzSiLMNSHor7BEVh9GnG8ca1r+XynIb
+ J2omScdh3bWUyIzwPv/Ghr+PH8qRwIkizDsKYDp5YhqziNCKadGdQ/Eg/GyLMCKboENY
+ qLlA==
+X-Gm-Message-State: AOJu0YxDXTvL02jROL41TBBPrFZCyVsuCl2eoCfD/SrJz0a2i8qJqdJ2
+ NZXJz0kHqkJeb3jVLpyb8J8mzw==
+X-Google-Smtp-Source: AGHT+IEiLCyOEts8B03mcZSLRA6zd9J8yZxN0E94W2V1sD6BYxfhnegjBU/8FSmvl7Wb9833D6d/DA==
+X-Received: by 2002:a1c:4c12:0:b0:402:e68f:8a4f with SMTP id
+ z18-20020a1c4c12000000b00402e68f8a4fmr5500650wmf.0.1695653923892; 
  Mon, 25 Sep 2023 07:58:43 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- k12-20020a7bc40c000000b00403038d7652sm12457849wmi.39.2023.09.25.07.58.41
+ b12-20020a5d634c000000b0031773a8e5c4sm12054037wrw.37.2023.09.25.07.58.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 25 Sep 2023 07:58:42 -0700 (PDT)
 Received: from zen.linaroharston (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id D967B1FFD6;
+ by zen.linaroharston (Postfix) with ESMTP id B57851FFD5;
  Mon, 25 Sep 2023 15:48:58 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -93,18 +93,17 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Ilya Leoshkevich <iii@linux.ibm.com>, Laurent Vivier <lvivier@redhat.com>,
  Yoshinori Sato <ysato@users.sourceforge.jp>,
  Leif Lindholm <quic_llindhol@quicinc.com>, Beraldo Leal <bleal@redhat.com>
-Subject: [RFC PATCH 31/31] contrib/plugins: add iops plugin example for cost
- modelling
-Date: Mon, 25 Sep 2023 15:48:54 +0100
-Message-Id: <20230925144854.1872513-32-alex.bennee@linaro.org>
+Subject: [RFC PATCH 30/31] plugins: add time control API
+Date: Mon, 25 Sep 2023 15:48:53 +0100
+Message-Id: <20230925144854.1872513-31-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230925144854.1872513-1-alex.bennee@linaro.org>
 References: <20230925144854.1872513-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::335;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x335.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -127,305 +126,115 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This plugin uses the new time control interface to make decisions
-about the state of time during the emulation. The algorithm is
-currently very simple. The user specifies an iops rate which applies
-per core. If the core runs ahead of its allocated execution time the
-plugin sleeps for a bit to let real time catch up. Either way time as
-updated for the emulation as a function of total executed instructions
-with some adjustments for cores that idle.
+Expose the ability to control time through the plugin API. Only one
+plugin can control time so it has to request control when loaded.
+There are probably more corner cases to catch here.
 
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20230519170454.2353945-9-alex.bennee@linaro.org>
+Message-Id: <20230519170454.2353945-8-alex.bennee@linaro.org>
 
 ---
 v2
-  - fix various style issues
+  - ifdef for SOFTMMU only
+  - fix checkpatch warnings
 ---
- contrib/plugins/iops.c   | 261 +++++++++++++++++++++++++++++++++++++++
- contrib/plugins/Makefile |   1 +
- 2 files changed, 262 insertions(+)
- create mode 100644 contrib/plugins/iops.c
+ include/qemu/qemu-plugin.h   | 19 +++++++++++++++++++
+ plugins/api.c                | 28 ++++++++++++++++++++++++++++
+ plugins/qemu-plugins.symbols |  2 ++
+ 3 files changed, 49 insertions(+)
 
-diff --git a/contrib/plugins/iops.c b/contrib/plugins/iops.c
-new file mode 100644
-index 0000000000..6f8baca6f7
---- /dev/null
-+++ b/contrib/plugins/iops.c
-@@ -0,0 +1,261 @@
-+/*
-+ * iops rate limiting plugin.
-+ *
-+ * This plugin can be used to restrict the execution of a system to a
-+ * particular number of Instructions Per Second (IOPS). This controls
-+ * time as seen by the guest so while wall-clock time may be longer
-+ * from the guests point of view time will pass at the normal rate.
-+ *
-+ * This uses the new plugin API which allows the plugin to control
-+ * system time.
-+ *
-+ * Copyright (c) 2023 Linaro Ltd
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#include <stdio.h>
-+#include <glib.h>
-+#include <qemu-plugin.h>
-+
-+QEMU_PLUGIN_EXPORT int qemu_plugin_version = QEMU_PLUGIN_VERSION;
-+
-+#define SLICES 10 /* the number of slices per second we compute delay */
-+
-+static GMutex global_state_lock;
-+
-+static uint64_t iops = 1000000;  /* iops rate, per core, per second */
-+static uint64_t current_ticks;   /* current global ticks */
-+static uint64_t next_check;      /* the next checkpoint for time */
-+static bool precise_execution;   /* count every instruction */
-+
-+static int64_t systime_at_start;  /* time we started the first vCPU */
-+
-+static const uint64_t nsec_per_sec = 1000000000;
-+static const void *time_handle;
-+
-+/*
-+ * We need to track the number of instructions each vCPU has executed
-+ * as well as what its current state is. We need to account for time
-+ * passing while a vCPU is idle.
-+ */
-+
-+typedef enum {
-+    UNKNOWN = 0,
-+    CREATED,
-+    EXECUTING,
-+    IDLE,
-+    FINISHED
-+} vCPUState;
-+
-+typedef struct {
-+    /* pointer to vcpu counter entry */
-+    uint64_t *counter;
-+    vCPUState state;
-+    /* timestamp when vCPU entered state */
-+    uint64_t state_time;
-+    /* number of ns vCPU was idle */
-+    uint64_t total_idle;
-+} vCPUTime;
-+
-+GArray *vcpus;
-+uint64_t *vcpu_counters;
-+
-+/*
-+ * Get the vcpu structure for this vCPU. We don't do any locking here
-+ * as only one vCPU will ever access its own structure.
-+ */
-+static vCPUTime *get_vcpu(int cpu_index)
-+{
-+    return &g_array_index(vcpus, vCPUTime, cpu_index);
-+}
-+
-+/*
-+ * When emulation is running faster than real time this is the point
-+ * we can throttle the execution of a given vCPU. Either way we can
-+ * now tell the system to move time forward.
-+ */
-+static void update_system_time(int64_t vcpu_ticks)
-+{
-+    int64_t now = g_get_real_time();
-+    int64_t real_runtime_ns = now - systime_at_start;
-+
-+    g_mutex_lock(&global_state_lock);
-+    /* now we have the lock double check we are fastest */
-+    if (vcpu_ticks > next_check) {
-+
-+        int64_t tick_runtime_ns = (vcpu_ticks / iops) * nsec_per_sec;
-+        if (tick_runtime_ns > real_runtime_ns) {
-+            int64_t sleep_us = (tick_runtime_ns - real_runtime_ns) / 1000;
-+            g_usleep(sleep_us);
-+        }
-+
-+        /* Having slept we can now move the clocks forward */
-+        qemu_plugin_update_ns(time_handle, vcpu_ticks);
-+        current_ticks = vcpu_ticks;
-+        next_check = iops / SLICES;
-+    }
-+    g_mutex_unlock(&global_state_lock);
-+}
-+
-+/*
-+ * State tracking
-+ */
-+static void vcpu_init(qemu_plugin_id_t id, unsigned int cpu_index)
-+{
-+    vCPUTime *vcpu = get_vcpu(cpu_index);
-+    vcpu->state = CREATED;
-+    vcpu->state_time = *vcpu->counter;
-+
-+    g_mutex_lock(&global_state_lock);
-+    if (!systime_at_start) {
-+        systime_at_start = g_get_real_time();
-+    }
-+    g_mutex_unlock(&global_state_lock);
-+}
-+
-+static void vcpu_idle(qemu_plugin_id_t id, unsigned int cpu_index)
-+{
-+    vCPUTime *vcpu = get_vcpu(cpu_index);
-+    vcpu->state = IDLE;
-+    vcpu->state_time = *vcpu->counter;
-+
-+    /* handle when we are the last vcpu to sleep here */
-+}
-+
-+static void vcpu_resume(qemu_plugin_id_t id, unsigned int cpu_index)
-+{
-+    vCPUTime *vcpu = get_vcpu(cpu_index);
-+
-+    /*
-+     * Now we need to reset counter to something approximating the
-+     * current time, however we only update current_ticks when a block
-+     * exceeds next_check. If the vCPU has been asleep for awhile this
-+     * will probably do, otherwise lets pick somewhere between
-+     * current_ticks and the next_check value.
-+     */
-+    if (vcpu->state_time < current_ticks) {
-+        *vcpu->counter = current_ticks;
-+    } else {
-+        int64_t window = next_check - vcpu->state_time;
-+        *vcpu->counter = next_check - (window / 2);
-+    }
-+
-+    vcpu->state = EXECUTING;
-+    vcpu->state_time = *vcpu->counter;
-+}
-+
-+static void vcpu_exit(qemu_plugin_id_t id, unsigned int cpu_index)
-+{
-+    vCPUTime *vcpu = get_vcpu(cpu_index);
-+    vcpu->state = FINISHED;
-+    vcpu->state_time = *vcpu->counter;
-+}
-+
-+/*
-+ * tb exec
-+ */
-+static void vcpu_tb_exec(unsigned int cpu_index, void *udata)
-+{
-+    vCPUTime *vcpu = get_vcpu(cpu_index);
-+    uint64_t count = *vcpu->counter;
-+
-+    count += GPOINTER_TO_UINT(udata);
-+
-+    if (count >= next_check) {
-+        update_system_time(count);
-+    }
-+}
-+
-+/*
-+ * We have two choices at translation time. In imprecise mode we just
-+ * install a tb execution callback with the total number of
-+ * instructions in the block. This ignores any partial execution
-+ * effects but it reasonably fast. In precise mode we increment a
-+ * per-vCPU counter for every execution.
-+ */
-+
-+static void vcpu_tb_trans(qemu_plugin_id_t id, struct qemu_plugin_tb *tb)
-+{
-+    size_t n_insns = qemu_plugin_tb_n_insns(tb);
-+    qemu_plugin_register_vcpu_tb_exec_cb(tb, vcpu_tb_exec,
-+                                         QEMU_PLUGIN_CB_NO_REGS,
-+                                         GUINT_TO_POINTER(n_insns));
-+}
-+
+diff --git a/include/qemu/qemu-plugin.h b/include/qemu/qemu-plugin.h
+index 50a9957279..898385d92d 100644
+--- a/include/qemu/qemu-plugin.h
++++ b/include/qemu/qemu-plugin.h
+@@ -536,7 +536,26 @@ void qemu_plugin_register_vcpu_mem_inline(struct qemu_plugin_insn *insn,
+                                           enum qemu_plugin_op op, void *ptr,
+                                           uint64_t imm);
+ 
 +/**
-+ * Install the plugin
++ * qemu_plugin_request_time_control() - request the ability to control time
++ *
++ * This grants the plugin the ability to control system time. Only one
++ * plugin can control time so if multiple plugins request the ability
++ * all but the first will fail.
++ *
++ * Returns an opaque handle or NULL if fails
 + */
-+QEMU_PLUGIN_EXPORT int qemu_plugin_install(qemu_plugin_id_t id,
-+                                           const qemu_info_t *info, int argc,
-+                                           char **argv)
++const void *qemu_plugin_request_time_control(void);
+ 
++/**
++ * qemu_plugin_update_ns() - update system emulation time
++ * @handle: opaque handle returned by qemu_plugin_request_time_control()
++ * @new_time_ns: time in nanoseconds
++ *
++ * This allows an appropriately authorised plugin (i.e. holding the
++ * time control handle) to move system time forward to @new_time_ns.
++ */
++void qemu_plugin_update_ns(const void *handle, int64_t new_time_ns);
+ 
+ typedef void
+ (*qemu_plugin_vcpu_syscall_cb_t)(qemu_plugin_id_t id, unsigned int vcpu_index,
+diff --git a/plugins/api.c b/plugins/api.c
+index 5521b0ad36..a1d413dc2d 100644
+--- a/plugins/api.c
++++ b/plugins/api.c
+@@ -37,6 +37,7 @@
+ #include "qemu/osdep.h"
+ #include "qemu/plugin.h"
+ #include "qemu/log.h"
++#include "qemu/timer.h"
+ #include "tcg/tcg.h"
+ #include "exec/exec-all.h"
+ #include "exec/ram_addr.h"
+@@ -427,3 +428,30 @@ uint64_t qemu_plugin_entry_code(void)
+ #endif
+     return entry;
+ }
++
++/*
++ * Time control
++ */
++#ifdef CONFIG_SOFTMMU
++static bool has_control;
++#endif
++
++const void *qemu_plugin_request_time_control(void)
 +{
-+    /* This plugin only makes sense for system emulation */
-+    if (!info->system_emulation) {
-+        fprintf(stderr, "iops plugin only works with system emulation\n");
-+        return -1;
++#ifdef CONFIG_SOFTMMU
++    if (!has_control) {
++        has_control = true;
++        return &has_control;
 +    }
-+
-+    for (int i = 0; i < argc; i++) {
-+        char *opt = argv[i];
-+        g_auto(GStrv) tokens = g_strsplit(opt, "=", 2);
-+        if (g_strcmp0(tokens[0], "iops") == 0) {
-+            iops = g_ascii_strtoull(tokens[1], NULL, 10);
-+            if (!iops && errno) {
-+                fprintf(stderr, "%s: couldn't parse %s (%s)\n",
-+                        __func__, tokens[1], g_strerror(errno));
-+                return -1;
-+            }
-+
-+        } else if (g_strcmp0(tokens[0], "precise") == 0) {
-+            if (!qemu_plugin_bool_parse(tokens[0], tokens[1],
-+                                        &precise_execution)) {
-+                fprintf(stderr, "boolean argument parsing failed: %s\n", opt);
-+                return -1;
-+            }
-+        } else {
-+            fprintf(stderr, "option parsing failed: %s\n", opt);
-+            return -1;
-+        }
-+    }
-+
-+    /*
-+     * Setup the tracking information we need to run.
-+     */
-+    vcpus = g_array_new(true, true, sizeof(vCPUTime));
-+    g_array_set_size(vcpus, info->system.max_vcpus);
-+    vcpu_counters = g_malloc0_n(info->system.max_vcpus, sizeof(uint64_t));
-+    for (int i = 0; i < info->system.max_vcpus; i++) {
-+        vCPUTime *vcpu = get_vcpu(i);
-+        vcpu->counter = &vcpu_counters[i];
-+    }
-+
-+    /*
-+     * We are going to check the state of time every slice so set the
-+     * first check at t0 + iops/SLICES
-+     */
-+    next_check = iops / SLICES;
-+
-+    /*
-+     * Only one plugin can request time control, if we don't get the
-+     * handle there isn't much we can do.
-+     */
-+    time_handle = qemu_plugin_request_time_control();
-+    if (!time_handle) {
-+        fprintf(stderr, "%s: not given permission to control time\n", __func__);
-+        return -1;
-+    }
-+
-+    /*
-+     * To track time we need to measure how many instructions each
-+     * core is executing as well as when each vcpu enters/leaves the
-+     */
-+    qemu_plugin_register_vcpu_tb_trans_cb(id, vcpu_tb_trans);
-+
-+    qemu_plugin_register_vcpu_init_cb(id, vcpu_init);
-+    qemu_plugin_register_vcpu_idle_cb(id, vcpu_idle);
-+    qemu_plugin_register_vcpu_resume_cb(id, vcpu_resume);
-+    qemu_plugin_register_vcpu_exit_cb(id, vcpu_exit);
-+
-+    return 0;
++#endif
++    return NULL;
 +}
-diff --git a/contrib/plugins/Makefile b/contrib/plugins/Makefile
-index 8ba78c7a32..3f45a46a03 100644
---- a/contrib/plugins/Makefile
-+++ b/contrib/plugins/Makefile
-@@ -21,6 +21,7 @@ NAMES += lockstep
- NAMES += hwprofile
- NAMES += cache
- NAMES += drcov
-+NAMES += iops
- 
- SONAMES := $(addsuffix .so,$(addprefix lib,$(NAMES)))
- 
++
++void qemu_plugin_update_ns(const void *handle, int64_t new_time)
++{
++#ifdef CONFIG_SOFTMMU
++    if (handle == &has_control) {
++        qemu_clock_advance_virtual_time(new_time);
++    }
++#endif
++}
+diff --git a/plugins/qemu-plugins.symbols b/plugins/qemu-plugins.symbols
+index 71f6c90549..91b882fecc 100644
+--- a/plugins/qemu-plugins.symbols
++++ b/plugins/qemu-plugins.symbols
+@@ -35,11 +35,13 @@
+   qemu_plugin_register_vcpu_tb_exec_cb;
+   qemu_plugin_register_vcpu_tb_exec_inline;
+   qemu_plugin_register_vcpu_tb_trans_cb;
++  qemu_plugin_request_time_control;
+   qemu_plugin_reset;
+   qemu_plugin_start_code;
+   qemu_plugin_tb_get_insn;
+   qemu_plugin_tb_n_insns;
+   qemu_plugin_tb_vaddr;
+   qemu_plugin_uninstall;
++  qemu_plugin_update_ns;
+   qemu_plugin_vcpu_for_each;
+ };
 -- 
 2.39.2
 
