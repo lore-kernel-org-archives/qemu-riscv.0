@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09DBBCE7AB4
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9330DCE7AB1
 	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 18:00:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qkpq8-0000fM-6r; Mon, 25 Sep 2023 13:57:48 -0400
+	id 1qkpqW-0001xf-Uq; Mon, 25 Sep 2023 13:58:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qkpq5-0000ef-S3
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 13:57:46 -0400
-Received: from mail-pg1-x52c.google.com ([2607:f8b0:4864:20::52c])
+ id 1qkpqV-0001qk-G6
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 13:58:11 -0400
+Received: from mail-pg1-x532.google.com ([2607:f8b0:4864:20::532])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qkpq2-0002Co-QC
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 13:57:44 -0400
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-578a62c088cso6003701a12.1
- for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 10:57:41 -0700 (PDT)
+ id 1qkpqT-0002Hs-3R
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 13:58:10 -0400
+Received: by mail-pg1-x532.google.com with SMTP id
+ 41be03b00d2f7-578a6bb11ecso4494951a12.0
+ for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 10:58:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1695664660; x=1696269460; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1695664687; x=1696269487; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Z7GMyJI5zNoOowXtT9uNjVqEjhxMht1XFHvsgI/HHa0=;
- b=FlYau+qWeKMtHxGgFTbiF+noJLFv2DQEmH3o2KZGr1p+xTXJGaN/TstC2u/iRxJaqO
- rK6JdFBgtEzrt2FCxRK5Jq+nKoznlEX8dWdPe40qck+YsMEBhHlLECLSxh+/HoSE7Hgo
- iglr9n0xp9iBBveOMFrs5dnWGUE/UKnzAyyf6I/mOSTfyPqHuN8Yhhe6ektTYztW2b7w
- 5RxZ8y06hF2BVjiKJ7CQ4Tihlq+aOkzK6EcIu8s03kCTE9aiR5eout+sVJk/sKRXTo2A
- rZwTMyu2I3dWv/IZm0/zuGjznAxpOSQCfpQj93mgX+LeoQHef2mKQTXNMOzT6ahWxhSR
- 7Hag==
+ bh=kho0Cg0LudHauk4flCAc4GR46StMyKT+p69RKBrUZjA=;
+ b=TuAc9lUw78I8Umh+U+WAPyfh4tTOargMRagftdz3XlqF5QUMZd5SyEA76CLd5E8TSy
+ FAKUJolBG5ui3vX83+O6ztZcfnZFIoNMYoz2SJCsGmxIhYxUlp0Kw3ikgRpw9ZKaptJl
+ nyrmS1+kSht0ppEpsi0Mz1tdnUOJuK8WF1eJ224Ca7x+WBB8sCiiLtXzJymr/ro8P+Dr
+ 8J4TNm7SGi9Lx8ONkIJbHJed2Zw89NLo8SNaTYpKVJLIekAwOYBmZd8dXzeBCTWug698
+ m8XntON379DDfa3di1bXtZgF91GWoBl29CKrQcU11PLTwR8e0/krwTOR047+kHXZ+X84
+ WBrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695664660; x=1696269460;
+ d=1e100.net; s=20230601; t=1695664687; x=1696269487;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Z7GMyJI5zNoOowXtT9uNjVqEjhxMht1XFHvsgI/HHa0=;
- b=O+C/upA9Or9TKTgIZJYNScvjwq/X+hCCXbTvX5EUffqzMJA7F+H/PfRy2e3w2gopKb
- sFHgeYaqBLTdZvZz2k9gCPb0it7f5eXAe4e/CKMJzwiQcuw9dE1Pge6V5vemtoAvqL1n
- lb2GLqXsUUVg/qCWZF7IJYSrT4/Z7noIzqZCyGjIePo7oQp3H+9xbZ3ubPRx0C7InzNG
- rBcEa8s+XYzEsHF3+7L2dF6s7FOoano4abOpu4L09zfxgLCRPy9nlcdSD3gKlp5dquCc
- dCwzfQSpoCrcM425eJyBpydlsLfyeHX+IcQxfl7P3LMM18/ERimKgn83pVI6lbgkFFCl
- qtwg==
-X-Gm-Message-State: AOJu0YwMAY6lXrgxYhqycRzpZQogsHB0pLFs4qVF4pH0TdOdWCtiP2aG
- x8VyThXL2fE2WsBlTUnnB9gPMw==
-X-Google-Smtp-Source: AGHT+IHYsPjUv5g4HAOamzZzaDRkrwpy+AtfGCbmTVxR+QrDAdaO9z4GOkf9M4G3eTD5Yx365mHMyw==
-X-Received: by 2002:a17:90a:ad43:b0:276:eadf:11af with SMTP id
- w3-20020a17090aad4300b00276eadf11afmr475871pjv.7.1695664660476; 
- Mon, 25 Sep 2023 10:57:40 -0700 (PDT)
+ bh=kho0Cg0LudHauk4flCAc4GR46StMyKT+p69RKBrUZjA=;
+ b=vYBGv3cCd7UPuolcGkQsv+gwEVDFiKnxLZIIWsMhPh4AGjnWE70keetE4G/+AsUWFg
+ A8EgyBr2x2OfXRbycNQ2x9zwrxWL1sDYA+t8ZKnkFOp7+IG3VOvoAqQohlQ1z4UtHBER
+ QPXbBkwRp4LsMiwGYwkg05dojucLLjKfAqEEEKT/v6k6NS0oS/OV7QplnoaIzRrkERMS
+ uygiXwYHY3fu0lDMTtYLz3nGmpaB5jHLGjPNaz+psIzWLYOg7VuS6RLOxb/Lipw+dIA7
+ f9bRab0bL7oJHar4a+DrhL+Zz2mswP5id9fwr6Hu1Q9GfVDoMVybj/Oyy042rCNB8C3k
+ fxJQ==
+X-Gm-Message-State: AOJu0YyZj5YxGNPwGVvBR02wrVGre/uNiRuVKvftH6WSon7Xc8kb4vMG
+ klKky0/MC3lfYt8rDr+Ybhualw==
+X-Google-Smtp-Source: AGHT+IEzTxiECIFJJgUUVcif2Pdv9fbcVAo+g9k+6dapo42/BMn8UjabhBrAkCr2/Clnk89+aPp4BA==
+X-Received: by 2002:a17:90a:728e:b0:274:6503:26d with SMTP id
+ e14-20020a17090a728e00b002746503026dmr4901847pjg.33.1695664687605; 
+ Mon, 25 Sep 2023 10:58:07 -0700 (PDT)
 Received: from grind.. ([177.94.42.59]) by smtp.gmail.com with ESMTPSA id
- i3-20020a17090a65c300b00262ca945cecsm3312722pjs.54.2023.09.25.10.57.37
+ i3-20020a17090a65c300b00262ca945cecsm3312722pjs.54.2023.09.25.10.58.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Sep 2023 10:57:40 -0700 (PDT)
+ Mon, 25 Sep 2023 10:58:07 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Andrew Jones <ajones@ventanamicro.com>
-Subject: [PATCH v4 08/19] target/riscv: move riscv_cpu_add_kvm_properties() to
- kvm.c
-Date: Mon, 25 Sep 2023 14:56:58 -0300
-Message-ID: <20230925175709.35696-9-dbarboza@ventanamicro.com>
+Subject: [PATCH v4 17/19] target/riscv/tcg: move
+ riscv_cpu_add_misa_properties() to tcg-cpu.c
+Date: Mon, 25 Sep 2023 14:57:07 -0300
+Message-ID: <20230925175709.35696-18-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230925175709.35696-1-dbarboza@ventanamicro.com>
 References: <20230925175709.35696-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::532;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x532.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,104 +96,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We'll introduce the KVM accelerator class with a 'cpu_instance_init'
-implementation that is going to be invoked during the common
-riscv_cpu_post_init() (via accel_cpu_instance_init()). This
-instance_init will execute KVM exclusive code that TCG doesn't care
-about, such as adding KVM specific properties, initing registers using a
-KVM scratch CPU and so on.
+All code related to MISA TCG properties is also moved.
 
-The core of the forementioned cpu_instance_init impl is the current
-riscv_cpu_add_kvm_properties() that is being used by the common code via
-riscv_cpu_add_user_properties() in cpu.c. Move it to kvm.c, together
-will all the relevant artifacts, exporting and renaming it to
-kvm_riscv_cpu_add_kvm_properties() so cpu.c can keep using it for now.
-
-To make this work we'll need to export riscv_cpu_extensions,
-riscv_cpu_vendor_exts and riscv_cpu_experimental_exts from cpu.c as
-well. The TCG accelerator will also need to access those in the near
-future so this export will benefit us in the long run.
+At this point, all TCG properties handling is done in tcg-cpu.c, all KVM
+properties handling is done in kvm-cpu.c.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c       | 85 +++-------------------------------------
- target/riscv/cpu.h       | 14 +++++++
- target/riscv/kvm.c       | 68 +++++++++++++++++++++++++++++++-
- target/riscv/kvm_riscv.h |  3 --
- 4 files changed, 86 insertions(+), 84 deletions(-)
+ target/riscv/cpu.c         | 90 --------------------------------------
+ target/riscv/cpu.h         |  1 -
+ target/riscv/tcg/tcg-cpu.c | 90 ++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 90 insertions(+), 91 deletions(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 048a2dbc77..0dc9b3201d 100644
+index 4875feded7..46263e55d5 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -1370,7 +1370,7 @@ static RISCVCPUMisaExtConfig misa_ext_cfgs[] = {
-  * change MISA bits during realize() (RVG enables MISA
-  * bits but the user is warned about it).
-  */
--static void riscv_cpu_add_misa_properties(Object *cpu_obj)
-+void riscv_cpu_add_misa_properties(Object *cpu_obj)
- {
-     int i;
- 
-@@ -1397,17 +1397,11 @@ static void riscv_cpu_add_misa_properties(Object *cpu_obj)
-     }
+@@ -1211,47 +1211,6 @@ static void riscv_cpu_init(Object *obj)
+ #endif /* CONFIG_USER_ONLY */
  }
  
--typedef struct RISCVCPUMultiExtConfig {
--    const char *name;
--    uint32_t offset;
+-typedef struct RISCVCPUMisaExtConfig {
+-    target_ulong misa_bit;
 -    bool enabled;
--} RISCVCPUMultiExtConfig;
+-} RISCVCPUMisaExtConfig;
 -
- #define MULTI_EXT_CFG_BOOL(_name, _prop, _defval) \
-     {.name = _name, .offset = CPU_CFG_OFFSET(_prop), \
-      .enabled = _defval}
- 
--static const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
-+const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
-     /* Defaults for standard extensions */
-     MULTI_EXT_CFG_BOOL("sscofpmf", ext_sscofpmf, false),
-     MULTI_EXT_CFG_BOOL("Zifencei", ext_ifencei, true),
-@@ -1469,7 +1463,7 @@ static const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
-     DEFINE_PROP_END_OF_LIST(),
- };
- 
--static const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[] = {
-+const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[] = {
-     MULTI_EXT_CFG_BOOL("xtheadba", ext_xtheadba, false),
-     MULTI_EXT_CFG_BOOL("xtheadbb", ext_xtheadbb, false),
-     MULTI_EXT_CFG_BOOL("xtheadbs", ext_xtheadbs, false),
-@@ -1487,7 +1481,7 @@ static const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[] = {
- };
- 
- /* These are experimental so mark with 'x-' */
--static const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] = {
-+const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] = {
-     /* ePMP 0.9.3 */
-     MULTI_EXT_CFG_BOOL("x-epmp", epmp, false),
-     MULTI_EXT_CFG_BOOL("x-smaia", ext_smaia, false),
-@@ -1513,7 +1507,7 @@ static const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] = {
-     DEFINE_PROP_END_OF_LIST(),
- };
- 
--static Property riscv_cpu_options[] = {
-+Property riscv_cpu_options[] = {
-     DEFINE_PROP_UINT8("pmu-num", RISCVCPU, cfg.pmu_num, 16),
- 
-     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
-@@ -1586,75 +1580,6 @@ static void riscv_cpu_add_multiext_prop_array(Object *obj,
-     }
- }
- 
--#ifdef CONFIG_KVM
--static void cpu_set_cfg_unavailable(Object *obj, Visitor *v,
--                                    const char *name,
--                                    void *opaque, Error **errp)
+-static void cpu_set_misa_ext_cfg(Object *obj, Visitor *v, const char *name,
+-                                 void *opaque, Error **errp)
 -{
--    const char *propname = opaque;
+-    const RISCVCPUMisaExtConfig *misa_ext_cfg = opaque;
+-    target_ulong misa_bit = misa_ext_cfg->misa_bit;
+-    RISCVCPU *cpu = RISCV_CPU(obj);
+-    CPURISCVState *env = &cpu->env;
 -    bool value;
 -
 -    if (!visit_type_bool(v, name, &value, errp)) {
@@ -201,110 +137,119 @@ index 048a2dbc77..0dc9b3201d 100644
 -    }
 -
 -    if (value) {
--        error_setg(errp, "extension %s is not available with KVM",
--                   propname);
+-        env->misa_ext |= misa_bit;
+-        env->misa_ext_mask |= misa_bit;
+-    } else {
+-        env->misa_ext &= ~misa_bit;
+-        env->misa_ext_mask &= ~misa_bit;
 -    }
 -}
 -
--static void riscv_cpu_add_kvm_unavail_prop(Object *obj, const char *prop_name)
+-static void cpu_get_misa_ext_cfg(Object *obj, Visitor *v, const char *name,
+-                                 void *opaque, Error **errp)
 -{
--    /* Check if KVM created the property already */
--    if (object_property_find(obj, prop_name)) {
--        return;
--    }
+-    const RISCVCPUMisaExtConfig *misa_ext_cfg = opaque;
+-    target_ulong misa_bit = misa_ext_cfg->misa_bit;
+-    RISCVCPU *cpu = RISCV_CPU(obj);
+-    CPURISCVState *env = &cpu->env;
+-    bool value;
 -
--    /*
--     * Set the default to disabled for every extension
--     * unknown to KVM and error out if the user attempts
--     * to enable any of them.
--     */
--    object_property_add(obj, prop_name, "bool",
--                        NULL, cpu_set_cfg_unavailable,
--                        NULL, (void *)prop_name);
+-    value = env->misa_ext & misa_bit;
+-
+-    visit_type_bool(v, name, &value, errp);
 -}
 -
--static void riscv_cpu_add_kvm_unavail_prop_array(Object *obj,
--                                        const RISCVCPUMultiExtConfig *array)
--{
--    const RISCVCPUMultiExtConfig *prop;
--
--    g_assert(array);
--
--    for (prop = array; prop && prop->name; prop++) {
--        riscv_cpu_add_kvm_unavail_prop(obj, prop->name);
--    }
--}
--
--void kvm_riscv_cpu_add_kvm_properties(Object *obj)
--{
--    Property *prop;
--    DeviceState *dev = DEVICE(obj);
--
--    kvm_riscv_init_user_properties(obj);
--    riscv_cpu_add_misa_properties(obj);
--
--    riscv_cpu_add_kvm_unavail_prop_array(obj, riscv_cpu_extensions);
--    riscv_cpu_add_kvm_unavail_prop_array(obj, riscv_cpu_vendor_exts);
--    riscv_cpu_add_kvm_unavail_prop_array(obj, riscv_cpu_experimental_exts);
--
--    for (prop = riscv_cpu_options; prop && prop->name; prop++) {
--        /* Check if KVM created the property already */
--        if (object_property_find(obj, prop->name)) {
--            continue;
--        }
--        qdev_property_add_static(dev, prop);
--    }
--}
--#endif
--
- /*
-  * Add CPU properties with user-facing flags.
-  *
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index b2e558f730..9dc4113812 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -22,6 +22,7 @@
- 
- #include "hw/core/cpu.h"
- #include "hw/registerfields.h"
-+#include "hw/qdev-properties.h"
- #include "exec/cpu-defs.h"
- #include "qemu/cpu-float.h"
- #include "qom/object.h"
-@@ -713,6 +714,19 @@ bool isa_ext_is_enabled(RISCVCPU *cpu, uint32_t ext_offset);
- int cpu_cfg_ext_get_min_version(uint32_t ext_offset);
- void riscv_cpu_disable_priv_spec_isa_exts(RISCVCPU *cpu);
- 
-+typedef struct RISCVCPUMultiExtConfig {
-+    const char *name;
-+    uint32_t offset;
-+    bool enabled;
-+} RISCVCPUMultiExtConfig;
-+
-+extern const RISCVCPUMultiExtConfig riscv_cpu_extensions[];
-+extern const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[];
-+extern const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[];
-+extern Property riscv_cpu_options[];
-+
-+void riscv_cpu_add_misa_properties(Object *cpu_obj);
-+
- /* CSR function table */
- extern riscv_csr_operations csr_ops[CSR_TABLE_SIZE];
- 
-diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-index 31d2ede4b6..e682a70311 100644
---- a/target/riscv/kvm.c
-+++ b/target/riscv/kvm.c
-@@ -345,6 +345,52 @@ static void kvm_riscv_update_cpu_cfg_isa_ext(RISCVCPU *cpu, CPUState *cs)
-     }
+ typedef struct misa_ext_info {
+     const char *name;
+     const char *description;
+@@ -1312,55 +1271,6 @@ const char *riscv_get_misa_ext_description(uint32_t bit)
+     return val;
  }
  
-+static void cpu_set_cfg_unavailable(Object *obj, Visitor *v,
-+                                    const char *name,
-+                                    void *opaque, Error **errp)
+-#define MISA_CFG(_bit, _enabled) \
+-    {.misa_bit = _bit, .enabled = _enabled}
+-
+-static const RISCVCPUMisaExtConfig misa_ext_cfgs[] = {
+-    MISA_CFG(RVA, true),
+-    MISA_CFG(RVC, true),
+-    MISA_CFG(RVD, true),
+-    MISA_CFG(RVF, true),
+-    MISA_CFG(RVI, true),
+-    MISA_CFG(RVE, false),
+-    MISA_CFG(RVM, true),
+-    MISA_CFG(RVS, true),
+-    MISA_CFG(RVU, true),
+-    MISA_CFG(RVH, true),
+-    MISA_CFG(RVJ, false),
+-    MISA_CFG(RVV, false),
+-    MISA_CFG(RVG, false),
+-};
+-
+-/*
+- * We do not support user choice tracking for MISA
+- * extensions yet because, so far, we do not silently
+- * change MISA bits during realize() (RVG enables MISA
+- * bits but the user is warned about it).
+- */
+-void riscv_cpu_add_misa_properties(Object *cpu_obj)
+-{
+-    int i;
+-
+-    for (i = 0; i < ARRAY_SIZE(misa_ext_cfgs); i++) {
+-        const RISCVCPUMisaExtConfig *misa_cfg = &misa_ext_cfgs[i];
+-        int bit = misa_cfg->misa_bit;
+-        const char *name = riscv_get_misa_ext_name(bit);
+-        const char *desc = riscv_get_misa_ext_description(bit);
+-
+-        /* Check if KVM already created the property */
+-        if (object_property_find(cpu_obj, name)) {
+-            continue;
+-        }
+-
+-        object_property_add(cpu_obj, name, "bool",
+-                            cpu_get_misa_ext_cfg,
+-                            cpu_set_misa_ext_cfg,
+-                            NULL, (void *)misa_cfg);
+-        object_property_set_description(cpu_obj, name, desc);
+-        object_property_set_bool(cpu_obj, name, misa_cfg->enabled, NULL);
+-    }
+-}
+-
+ #define MULTI_EXT_CFG_BOOL(_name, _prop, _defval) \
+     {.name = _name, .offset = CPU_CFG_OFFSET(_prop), \
+      .enabled = _defval}
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 01cbcbe119..aba8192c74 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -726,7 +726,6 @@ extern const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[];
+ extern const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[];
+ extern Property riscv_cpu_options[];
+ 
+-void riscv_cpu_add_misa_properties(Object *cpu_obj);
+ void riscv_add_satp_mode_properties(Object *obj);
+ 
+ /* CSR function table */
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index ac3cf4c035..8065572703 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -580,6 +580,96 @@ static bool tcg_cpu_realizefn(CPUState *cs, Error **errp)
+     return true;
+ }
+ 
++typedef struct RISCVCPUMisaExtConfig {
++    target_ulong misa_bit;
++    bool enabled;
++} RISCVCPUMisaExtConfig;
++
++static void cpu_set_misa_ext_cfg(Object *obj, Visitor *v, const char *name,
++                                 void *opaque, Error **errp)
 +{
-+    const char *propname = opaque;
++    const RISCVCPUMisaExtConfig *misa_ext_cfg = opaque;
++    target_ulong misa_bit = misa_ext_cfg->misa_bit;
++    RISCVCPU *cpu = RISCV_CPU(obj);
++    CPURISCVState *env = &cpu->env;
 +    bool value;
 +
 +    if (!visit_type_bool(v, name, &value, errp)) {
@@ -312,94 +257,80 @@ index 31d2ede4b6..e682a70311 100644
 +    }
 +
 +    if (value) {
-+        error_setg(errp, "extension %s is not available with KVM",
-+                   propname);
++        env->misa_ext |= misa_bit;
++        env->misa_ext_mask |= misa_bit;
++    } else {
++        env->misa_ext &= ~misa_bit;
++        env->misa_ext_mask &= ~misa_bit;
 +    }
 +}
 +
-+static void riscv_cpu_add_kvm_unavail_prop(Object *obj, const char *prop_name)
++static void cpu_get_misa_ext_cfg(Object *obj, Visitor *v, const char *name,
++                                 void *opaque, Error **errp)
 +{
-+    /* Check if KVM created the property already */
-+    if (object_property_find(obj, prop_name)) {
-+        return;
-+    }
++    const RISCVCPUMisaExtConfig *misa_ext_cfg = opaque;
++    target_ulong misa_bit = misa_ext_cfg->misa_bit;
++    RISCVCPU *cpu = RISCV_CPU(obj);
++    CPURISCVState *env = &cpu->env;
++    bool value;
 +
-+    /*
-+     * Set the default to disabled for every extension
-+     * unknown to KVM and error out if the user attempts
-+     * to enable any of them.
-+     */
-+    object_property_add(obj, prop_name, "bool",
-+                        NULL, cpu_set_cfg_unavailable,
-+                        NULL, (void *)prop_name);
++    value = env->misa_ext & misa_bit;
++
++    visit_type_bool(v, name, &value, errp);
 +}
 +
-+static void riscv_cpu_add_kvm_unavail_prop_array(Object *obj,
-+                                        const RISCVCPUMultiExtConfig *array)
++#define MISA_CFG(_bit, _enabled) \
++    {.misa_bit = _bit, .enabled = _enabled}
++
++static const RISCVCPUMisaExtConfig misa_ext_cfgs[] = {
++    MISA_CFG(RVA, true),
++    MISA_CFG(RVC, true),
++    MISA_CFG(RVD, true),
++    MISA_CFG(RVF, true),
++    MISA_CFG(RVI, true),
++    MISA_CFG(RVE, false),
++    MISA_CFG(RVM, true),
++    MISA_CFG(RVS, true),
++    MISA_CFG(RVU, true),
++    MISA_CFG(RVH, true),
++    MISA_CFG(RVJ, false),
++    MISA_CFG(RVV, false),
++    MISA_CFG(RVG, false),
++};
++
++/*
++ * We do not support user choice tracking for MISA
++ * extensions yet because, so far, we do not silently
++ * change MISA bits during realize() (RVG enables MISA
++ * bits but the user is warned about it).
++ */
++static void riscv_cpu_add_misa_properties(Object *cpu_obj)
 +{
-+    const RISCVCPUMultiExtConfig *prop;
++    int i;
 +
-+    g_assert(array);
++    for (i = 0; i < ARRAY_SIZE(misa_ext_cfgs); i++) {
++        const RISCVCPUMisaExtConfig *misa_cfg = &misa_ext_cfgs[i];
++        int bit = misa_cfg->misa_bit;
++        const char *name = riscv_get_misa_ext_name(bit);
++        const char *desc = riscv_get_misa_ext_description(bit);
 +
-+    for (prop = array; prop && prop->name; prop++) {
-+        riscv_cpu_add_kvm_unavail_prop(obj, prop->name);
-+    }
-+}
-+
- static void kvm_riscv_add_cpu_user_properties(Object *cpu_obj)
- {
-     int i;
-@@ -754,7 +800,7 @@ static void kvm_riscv_init_multiext_cfg(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
-     }
- }
- 
--void kvm_riscv_init_user_properties(Object *cpu_obj)
-+static void riscv_init_user_properties(Object *cpu_obj)
- {
-     RISCVCPU *cpu = RISCV_CPU(cpu_obj);
-     KVMScratchCPU kvmcpu;
-@@ -1272,6 +1318,26 @@ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
-     kvm_msi_via_irqfd_allowed = kvm_irqfds_enabled();
- }
- 
-+void kvm_riscv_cpu_add_kvm_properties(Object *obj)
-+{
-+    DeviceState *dev = DEVICE(obj);
-+
-+    riscv_init_user_properties(obj);
-+    riscv_cpu_add_misa_properties(obj);
-+
-+    riscv_cpu_add_kvm_unavail_prop_array(obj, riscv_cpu_extensions);
-+    riscv_cpu_add_kvm_unavail_prop_array(obj, riscv_cpu_vendor_exts);
-+    riscv_cpu_add_kvm_unavail_prop_array(obj, riscv_cpu_experimental_exts);
-+
-+    for (Property *prop = riscv_cpu_options; prop && prop->name; prop++) {
-+        /* Check if KVM created the property already */
-+        if (object_property_find(obj, prop->name)) {
++        /* Check if KVM already created the property */
++        if (object_property_find(cpu_obj, name)) {
 +            continue;
 +        }
-+        qdev_property_add_static(dev, prop);
++
++        object_property_add(cpu_obj, name, "bool",
++                            cpu_get_misa_ext_cfg,
++                            cpu_set_misa_ext_cfg,
++                            NULL, (void *)misa_cfg);
++        object_property_set_description(cpu_obj, name, desc);
++        object_property_set_bool(cpu_obj, name, misa_cfg->enabled, NULL);
 +    }
 +}
 +
- static void riscv_host_cpu_init(Object *obj)
+ static void cpu_set_multi_ext_cfg(Object *obj, Visitor *v, const char *name,
+                                   void *opaque, Error **errp)
  {
-     CPURISCVState *env = &RISCV_CPU(obj)->env;
-diff --git a/target/riscv/kvm_riscv.h b/target/riscv/kvm_riscv.h
-index 44b850a046..da9630c4af 100644
---- a/target/riscv/kvm_riscv.h
-+++ b/target/riscv/kvm_riscv.h
-@@ -19,10 +19,7 @@
- #ifndef QEMU_KVM_RISCV_H
- #define QEMU_KVM_RISCV_H
- 
--/* Temporarily implemented in cpu.c */
- void kvm_riscv_cpu_add_kvm_properties(Object *obj);
--
--void kvm_riscv_init_user_properties(Object *cpu_obj);
- void kvm_riscv_reset_vcpu(RISCVCPU *cpu);
- void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level);
- void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
 -- 
 2.41.0
 
