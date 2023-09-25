@@ -4,68 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 630DECE7A8B
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 03:30:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDF10CE7A89
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 04:30:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qkcJ4-0002OB-KN; Sun, 24 Sep 2023 23:30:46 -0400
+	id 1qkdF1-0002pS-TT; Mon, 25 Sep 2023 00:30:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qkcIx-0002NA-0T; Sun, 24 Sep 2023 23:30:43 -0400
-Received: from mail-ua1-x92d.google.com ([2607:f8b0:4864:20::92d])
+ id 1qkdF0-0002p0-2L; Mon, 25 Sep 2023 00:30:38 -0400
+Received: from mail-pg1-x52f.google.com ([2607:f8b0:4864:20::52f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qkcIv-00030w-7B; Sun, 24 Sep 2023 23:30:38 -0400
-Received: by mail-ua1-x92d.google.com with SMTP id
- a1e0cc1a2514c-79a2216a2d1so2015942241.2; 
- Sun, 24 Sep 2023 20:30:35 -0700 (PDT)
+ id 1qkdEw-0007V5-Hm; Mon, 25 Sep 2023 00:30:37 -0400
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-578a3069f1eso3433199a12.1; 
+ Sun, 24 Sep 2023 21:30:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695612635; x=1696217435; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=G9T+UpR7HZxXOs7aXxZ2OXpsfKV6MonZgK7TngX6oB4=;
- b=gRdfs9wae7FSw5JnFnd8aRXC0ELOmGbMgtzn23JFGYHe0i+pffGYjKzay36IuzmJ74
- F1Ux1hKcVzNmc9A6PZPjPu0ASPhR4n5CvQu6rTOUSTpBzNli2E0aKQBe1I9TQ6qo/imy
- Oa7x8yUv5i3zH4fz+y4l90tu07LMuuK6e0Bzund/RGxUnhM0JN0Lce7KdtUfabp6b6PW
- Nt7EuDRMQmnDeEOOSfHis1QQ5N9c9z89TJsQAzjUCRHCH561vcEA7wTTiKJ3Txs9HL9q
- Ji0rVj7mZtEbHW3lh33jJ8+bnGPVZDqVWbwHcysMkF3eRene4mAX/crTjkSIoIILek9Y
- TrRA==
+ d=gmail.com; s=20230601; t=1695616232; x=1696221032; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=W3yybX3dRFoORug1HysTE/1Zuv/08SYd9d+hOJaZiLI=;
+ b=Og+lxxqlEe0jWDhh+eDJG7oFRteNpkxvIQvkSFP3JLLrMR074bs/UB0jUFZTpyUyxi
+ sWeqGOO3VxxFBL0PxdHp8hUYKsYDp4byYYUZ1Ekzo3+MDFbrwGGMY7Xk32klkJcjwjAG
+ IFMwtRBWxjZ9rYoIrMWyDgL6jwe3IdUn+NVYHJvKpDORshzLC0qGWZpW5uDVM0vbieKs
+ FKGESyzk96H9nu0uwSxAj4+UIjMGEIXeC8pSVENYQkUvpT5LtNHYsYuMHci7+DeqkPTw
+ +onQIq3shikSULxJ3z+EuXLlZWy54xJiwcNpw2EnkMpoPiswqzBRxJUT62tbuIkv5PvT
+ aNIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695612635; x=1696217435;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=G9T+UpR7HZxXOs7aXxZ2OXpsfKV6MonZgK7TngX6oB4=;
- b=rDhDKcvv9IsOWoaRA2dhz/gqKlFgWcYxwN15Q0BTRNZzbzHfMLRK18mcd1mvTM01SE
- Eu5SMUJu7RtCdwfaJkyI2SGURysjB0GxZbejvPnl10eqyVi2RwZF0pJlgDQYTOnby3ir
- a/3mQIljiDDT1/SIevGhkMKGwJEPzLxtkhDJ7DfFxlOPRkiN3DXiyJ5AeviJrrZeqXN0
- r28kOiadx8ffRgcR7O0MyrRlAlpgJPkrYkcqW3061pMVZH86gQPyYiPPk7QPAgquisFt
- Gz42aYMkB7FepiUw7mKJec0MomC0NHuSum6HgwiR4e1v3mdD1UNpenbjnHZFGelIjhlT
- gUyQ==
-X-Gm-Message-State: AOJu0YwCCE5sD/CtI1rMraqCYvEq9JyF7mb8RAc1gCyuVGCHwB+OQ2P7
- 8+L5m+wRkL2b1v3PAYFxapxhA9G6EtkyYuiC2jk=
-X-Google-Smtp-Source: AGHT+IFPJc7/GfZHWZEOJc9wXuvaw77sVkOZiT8MbQ2yd8k8Svl9OiVNe2NLkx+Oy4DCrepsDKTd8FdSt2BhJZwB5Z0=
-X-Received: by 2002:a05:6102:134f:b0:450:f3aa:f405 with SMTP id
- j15-20020a056102134f00b00450f3aaf405mr2812372vsl.17.1695612635058; Sun, 24
- Sep 2023 20:30:35 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230920112020.651006-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20230920112020.651006-1-dbarboza@ventanamicro.com>
+ d=1e100.net; s=20230601; t=1695616232; x=1696221032;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=W3yybX3dRFoORug1HysTE/1Zuv/08SYd9d+hOJaZiLI=;
+ b=oY3ZvROXKHWI2uGVCVDier4vPNy9xrI/QGmxCz19aYcq9OFDTWt9olLRo5zRBVurN4
+ EiPCN+ssGIZcJ+GSpUGmOY8yEy1bM9uK64BVyd0UEhab6saGOiGi/YAyuYWNdri0q9Hn
+ UkNvK979QSofvrzc8rfxxzlTIyF6cGNoeDANBBU5/EOjts0/zY32qli5UaJ7/kSGqIJf
+ nQ/CN0jazvxTyqIYYkq8tjD+XXP2/y3/AhW5rZ8jymKE2beOA3PvHXWaylv72mHpUHq8
+ 9vEQGWfm7i/YpQmhK0Hvrx6INU98OHUvh+kdKxmakGdjPzCmnfTM3dr/51qeDK71r0v/
+ ikzQ==
+X-Gm-Message-State: AOJu0YxzXmg8ayAbu6ut6oKUQMWQraaJndd29A/YvCyWpB7vv8OHaCuw
+ im2SnmJFqyHwjQDuI91II0RQn8zPs0DPQg==
+X-Google-Smtp-Source: AGHT+IFkN/P2I8oja1vvL4eiViV8MCy70j/k0Dy3vsFaL+/OcYkwdeZvOYCctWO/2cXdp0ps6fGjkg==
+X-Received: by 2002:a05:6a21:a59e:b0:14c:ad99:22a9 with SMTP id
+ gd30-20020a056a21a59e00b0014cad9922a9mr4702502pzc.32.1695616232492; 
+ Sun, 24 Sep 2023 21:30:32 -0700 (PDT)
+Received: from toolbox.alistair23.me
+ (2403-580b-97e8-0-321-6fb2-58f1-a1b1.ip6.aussiebb.net.
+ [2403:580b:97e8:0:321:6fb2:58f1:a1b1])
+ by smtp.gmail.com with ESMTPSA id
+ y14-20020a17090a134e00b00276fef82025sm6002161pjf.35.2023.09.24.21.30.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 24 Sep 2023 21:30:31 -0700 (PDT)
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 25 Sep 2023 13:30:08 +1000
-Message-ID: <CAKmqyKNaimFBiiRBdrt137fcD0fh+oepSOi5zgfKL9nrWmSCsw@mail.gmail.com>
-Subject: Re: [PATCH v3 00/19] riscv: split TCG/KVM accelerators from cpu.c
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, philmd@linaro.org, ajones@ventanamicro.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92d;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92d.google.com
+X-Google-Original-From: Alistair Francis <alistair.francis@wdc.com>
+To: david@gibson.dropbear.id.au, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: bmeng.cn@gmail.com, alistair.francis@wdc.com,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, palmer@dabbelt.com,
+ alistair23@gmail.com, dbarboza@ventanamicro.com,
+ Alistair Francis <Alistair.Francis@wdc.com>, liweiwei@iscas.ac.cn,
+ Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH 0/4] RISC-V: Work towards enabling -Wshadow=local
+Date: Mon, 25 Sep 2023 14:30:19 +1000
+Message-ID: <20230925043023.71448-1-alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.41.0
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52f;
+ envelope-from=alistair23@gmail.com; helo=mail-pg1-x52f.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -89,79 +97,30 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Sep 20, 2023 at 9:26=E2=80=AFPM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
-> Hi,
->
-> In this version we changed patch 10 (remove kvm-stub.c) as suggested by
-> Phil to not include non-KVM stubs in kvm_riscv.h. A change in patch 05
-> requested by Zhiwei was also made.
->
-> Patches based on Alistair's riscv-to-apply.next.
->
-> Patches missing acks: patch 10
->
-> Changes from v2:
-> - patch 05:
->   - remove riscv_cpu_add_user_properties() from riscv_host_cpu_init()
-> - patch 10:
->   - do not add non-KVM stubs in kvm_riscv.h
-> - v2 link: https://lore.kernel.org/qemu-riscv/20230906091647.1667171-1-db=
-arboza@ventanamicro.com/
->
-> Daniel Henrique Barboza (19):
->   target/riscv: introduce TCG AccelCPUClass
->   target/riscv: move riscv_cpu_realize_tcg() to TCG::cpu_realizefn()
->   target/riscv: move riscv_cpu_validate_set_extensions() to tcg-cpu.c
->   target/riscv: move riscv_tcg_ops to tcg-cpu.c
->   target/riscv/cpu.c: add .instance_post_init()
->   target/riscv: move 'host' CPU declaration to kvm.c
->   target/riscv/cpu.c: mark extensions arrays as 'const'
->   target/riscv: move riscv_cpu_add_kvm_properties() to kvm.c
->   target/riscv: make riscv_add_satp_mode_properties() public
->   target/riscv: remove kvm-stub.c
->   target/riscv: introduce KVM AccelCPUClass
->   target/riscv: move KVM only files to kvm subdir
->   target/riscv/kvm: do not use riscv_cpu_add_misa_properties()
->   target/riscv/cpu.c: export set_misa()
->   target/riscv/tcg: introduce tcg_cpu_instance_init()
->   target/riscv/cpu.c: make misa_ext_cfgs[] 'const'
->   target/riscv/tcg: move riscv_cpu_add_misa_properties() to tcg-cpu.c
->   target/riscv/cpu.c: export isa_edata_arr[]
->   target/riscv/cpu: move priv spec functions to tcg-cpu.c
+Local variables shadowing other local variables or parameters make the
+code needlessly hard to understand.  Bugs love to hide in such code.
+Evidence: "[PATCH v3 1/7] migration/rdma: Fix save_page method to fail
+on polling error".
 
-Thanks!
+This patch removes the local variable shadowing. Tested by adding:
 
-Applied to riscv-to-apply.next
+    --extra-cflags='-Wshadow=local -Wno-error=shadow=local -Wno-error=shadow=compatible-local'
 
-Alistair
+To configure
 
->
->  hw/intc/riscv_aplic.c                 |   2 +-
->  hw/riscv/virt.c                       |   2 +-
->  target/riscv/cpu.c                    | 988 ++------------------------
->  target/riscv/cpu.h                    |  30 +-
->  target/riscv/csr.c                    |   1 +
->  target/riscv/kvm-stub.c               |  30 -
->  target/riscv/{kvm.c =3D> kvm/kvm-cpu.c} | 120 +++-
->  target/riscv/{ =3D> kvm}/kvm_riscv.h    |   4 -
->  target/riscv/kvm/meson.build          |   1 +
->  target/riscv/meson.build              |   4 +-
->  target/riscv/tcg/meson.build          |   2 +
->  target/riscv/tcg/tcg-cpu.c            | 883 +++++++++++++++++++++++
->  target/riscv/tcg/tcg-cpu.h            |  27 +
->  13 files changed, 1113 insertions(+), 981 deletions(-)
->  delete mode 100644 target/riscv/kvm-stub.c
->  rename target/riscv/{kvm.c =3D> kvm/kvm-cpu.c} (91%)
->  rename target/riscv/{ =3D> kvm}/kvm_riscv.h (89%)
->  create mode 100644 target/riscv/kvm/meson.build
->  create mode 100644 target/riscv/tcg/meson.build
->  create mode 100644 target/riscv/tcg/tcg-cpu.c
->  create mode 100644 target/riscv/tcg/tcg-cpu.h
->
-> --
-> 2.41.0
->
->
+Alistair Francis (4):
+  hw/riscv: opentitan: Fixup local variables shadowing
+  target/riscv: cpu: Fixup local variables shadowing
+  target/riscv: vector_helper: Fixup local variables shadowing
+  softmmu/device_tree: Fixup local variables shadowing
+
+ hw/riscv/opentitan.c         | 2 +-
+ softmmu/device_tree.c        | 6 +++---
+ target/riscv/cpu.c           | 4 ++--
+ target/riscv/vector_helper.c | 7 ++++---
+ 4 files changed, 10 insertions(+), 9 deletions(-)
+
+-- 
+2.41.0
+
 
