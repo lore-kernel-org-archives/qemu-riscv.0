@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38EBECE7A94
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 14:53:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB161CE7A81
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 14:54:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qkmuG-0002Up-Ev; Mon, 25 Sep 2023 10:49:52 -0400
+	id 1qkmti-0001Gq-Kp; Mon, 25 Sep 2023 10:49:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qkmth-0001Dt-Fl
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:49:17 -0400
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
+ id 1qkmte-00018O-8E
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:49:14 -0400
+Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qkmtS-0008Hj-RF
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:49:17 -0400
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-4054f790190so49800695e9.2
- for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 07:49:01 -0700 (PDT)
+ id 1qkmtQ-0008Gf-Ht
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 10:49:13 -0400
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-32172a50356so6204526f8f.0
+ for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 07:49:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695653340; x=1696258140; darn=nongnu.org;
+ d=linaro.org; s=google; t=1695653339; x=1696258139; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Cd4HdnbICWyITK5Y/4XhPzcPYvpQm5TBhsynKcdayLw=;
- b=eok3J2nNQVGkHlbMvu8/rmmNvL03GNnzO0/wLfpxZhzhVh/eHjV/0KgjNKWIQ4ysDl
- 2LUHbrPAtl1zOK5YJ/pdl0n1oC2Jp/eye8mL++JVn5vCE2lciqMoeSxym1cR5rHnTpqo
- uzkqyLzEpXljHDavZ21Lrn/oW6Tr38aqzd5+epiOK0TSaYVWpLmoyTnaPbgGq+REc+eg
- zHan06QQYcdj5LZiA9hdtW09BWylX1FbT+gD4scTA1uQtEP7jW09iusDsMzr0jLGGA1g
- PjwEWSflTc4MYEAIPc0RSG5iSTnxilxgvv9VJETqLLJLPqiilmbNpbV7ehryoC0UctMS
- CNFA==
+ bh=r13on7w2SbSnXhlFRAWqdY9M0P6WFpp9T5fLln0Y27E=;
+ b=F4f2h3MQJTmQe8AoqU2a+I/zOiPXPbyL3Cty1t62Bmv5uUkwjjzVVTqUD6AoGIQx3V
+ cefY9wbmB8uN/1aAB2AuLgHSdIOtBsv4JVbwN4YlE32eGeZQA0gXDRkOz2a5bvzIm+kG
+ hS4tULvDkO09gdDkpjGVwEU7WIzQWLBZrsyyxXBodFULmBvNxLIG9CgIOEFYJtbsaxp6
+ VbmXvHNWntaUZmHIoJiLk9N4fxwwvhH3qj+locgYE4Naw8/hkVmWpY4JZcxR/dImC2tG
+ qfE6TVzP+bZuis/SIo5WoNehknm7jlI7TcKrMb/l+bfkvy1+H8jsoA9JElwxPSAIB8cW
+ 7wRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695653340; x=1696258140;
+ d=1e100.net; s=20230601; t=1695653339; x=1696258139;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Cd4HdnbICWyITK5Y/4XhPzcPYvpQm5TBhsynKcdayLw=;
- b=hVKjdZ3Bzr4UNiW6nMjOQEPSHP3B+n0DgWtgzV2x+7gVGfb48y231/jV4NUTXm6rHC
- o7JYnHTUOvtGR61Rgl6YLalWspLl4u/p3BL/XQSscPYmDRtv6yrhK4AjhPCrM/trh8KL
- MXn8T6iiVgbSwvZ0Zphc7t5LFGDxjggNOLHFb0tFTXBh9Fb1LFdA47ymFDG6LzSf3dWI
- I0G/eU51c6K20qXQkfroJ4qxHeBZ2wb7u84TEjQ6O8l8AS/YPBaYtQurWD9HM53fR2Qs
- FCCosPfGLJU7bB0Rj5QOZ4QVOjILQhkq5IeHb9EDkXIuS2JScj4IgAfJoOCugppCDpfy
- baDg==
-X-Gm-Message-State: AOJu0YzzG0ntuKPTjJUgK/eZ0biZcrY5orRTBsIktVIk8pRb8STcYzeC
- KPJxW1najfOOqfTZngWHBfSGKg==
-X-Google-Smtp-Source: AGHT+IGIMYocIaDoZ9eRM/8O33TiaHsL2YWIHMFN7tmlUnw5/PDkfYQxbIiSwyzvw88ck/ZVkroehQ==
-X-Received: by 2002:a05:600c:230d:b0:404:6ed9:98d1 with SMTP id
- 13-20020a05600c230d00b004046ed998d1mr6165003wmo.41.1695653340427; 
- Mon, 25 Sep 2023 07:49:00 -0700 (PDT)
+ bh=r13on7w2SbSnXhlFRAWqdY9M0P6WFpp9T5fLln0Y27E=;
+ b=ELy4vsTYrwFglelLbCyddlmOgpx88mbJTyyy/pwhsumokpa8WwTek4MXyOOmDVbkGA
+ hKzhmwKthHQgQuMIvkSVDn68kTAUojw+ghfkFUIa13ZRf6MC+o7fXSnN1GLov8HeEtcf
+ iPirifinLZeouSA9QzwWh4W1s9sFE083ELU+ARSEz+X/TOBtUKwVUH7k3hsQm7tBcexh
+ 1PashgUq+al6dETXzCNFxvxDDsrPHRLzUXxVYYsLrGSJpB+lH/lWZrQ05foihOC06AhS
+ o/wAB1Jry6P4Hlq9/c60Mb9baYGzCoY+FRc/RhxK3+M7Qb5aIM2kqRFsb/1D5hr8di4p
+ QSyA==
+X-Gm-Message-State: AOJu0YyJ9nv5Ix2/vWlMMOqCnQLzowblyYPjeFxCP7hgS5yEa6uL/jqr
+ kYUcWrompzppC+b1wRHdo2LVfw==
+X-Google-Smtp-Source: AGHT+IE3kyYs4YdsaciWtbu3ns+G9H7zM0tAc4x8OuL+AXjRejIOFYblrX6yxmTWrGqVvOb2xZxPUg==
+X-Received: by 2002:a05:6000:185:b0:321:8d08:855e with SMTP id
+ p5-20020a056000018500b003218d08855emr5684333wrx.24.1695653338893; 
+ Mon, 25 Sep 2023 07:48:58 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- v19-20020adf8b53000000b0032318649b21sm6818394wra.31.2023.09.25.07.48.55
+ f18-20020a5d58f2000000b00317b0155502sm12047215wrd.8.2023.09.25.07.48.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 25 Sep 2023 07:48:57 -0700 (PDT)
 Received: from zen.linaroharston (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 8A5F61FFBF;
+ by zen.linaroharston (Postfix) with ESMTP id A6FCC1FFC0;
  Mon, 25 Sep 2023 15:48:55 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -92,20 +92,19 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  qemu-arm@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Ilya Leoshkevich <iii@linux.ibm.com>, Laurent Vivier <lvivier@redhat.com>,
  Yoshinori Sato <ysato@users.sourceforge.jp>,
- Leif Lindholm <quic_llindhol@quicinc.com>, Beraldo Leal <bleal@redhat.com>,
- Rabin Vincent <rabinv@axis.com>,
- "Edgar E . Iglesias" <edgar.iglesias@xilinx.com>
-Subject: [PATCH 04/31] docs: mark CRIS support as deprecated
-Date: Mon, 25 Sep 2023 15:48:27 +0100
-Message-Id: <20230925144854.1872513-5-alex.bennee@linaro.org>
+ Leif Lindholm <quic_llindhol@quicinc.com>, Beraldo Leal <bleal@redhat.com>
+Subject: [PATCH 05/31] tests/docker: make docker engine choice entirely
+ configure driven
+Date: Mon, 25 Sep 2023 15:48:28 +0100
+Message-Id: <20230925144854.1872513-6-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230925144854.1872513-1-alex.bennee@linaro.org>
 References: <20230925144854.1872513-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::436;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x436.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -128,42 +127,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This might be premature but while streamling the avocado tests I
-realised the only tests we have are "check-tcg" ones. The aging
-fedora-criss-cross image works well enough for developers but can't be
-used in CI as we need supported build platforms to build QEMU.
-
-Does this mean the writing is on the wall for this architecture?
+Since 0b1a649047 (tests/docker: use direct RUNC call to build
+containers) we ended up with the potential for the remaining docker.py
+script calls to deviate from the direct RUNC calls. Fix this by
+dropping the use of ENGINE in the makefile and rely entirely on what
+we detect at configure time.
 
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Cc: Rabin Vincent <rabinv@axis.com>
-Cc: Edgar E. Iglesias <edgar.iglesias@xilinx.com>
 ---
- docs/about/deprecated.rst | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ configure                     | 1 -
+ tests/docker/Makefile.include | 7 ++-----
+ 2 files changed, 2 insertions(+), 6 deletions(-)
 
-diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
-index dc4da95329..7cfe313aa6 100644
---- a/docs/about/deprecated.rst
-+++ b/docs/about/deprecated.rst
-@@ -399,6 +399,17 @@ Specifying the iSCSI password in plain text on the command line using the
- used instead, to refer to a ``--object secret...`` instance that provides
- a password via a file, or encrypted.
+diff --git a/configure b/configure
+index e08127045d..707132a3ae 100755
+--- a/configure
++++ b/configure
+@@ -1694,7 +1694,6 @@ if test -n "$gdb_bin"; then
+ fi
  
-+TCG CPUs
-+--------
-+
-+CRIS CPU architecture (since 8.1)
-+'''''''''''''''''''''''''''''''''
-+
-+The CRIS architecture was pulled from Linux in 4.17 and the compiler
-+is no longer packaged in any distro making it harder to run the
-+``check-tcg`` tests. Unless we can improve the testing situation there
-+is a chance the code will bitrot without anyone noticing.
-+
- Backwards compatibility
- -----------------------
+ if test "$container" != no; then
+-    echo "ENGINE=$container" >> $config_host_mak
+     echo "RUNC=$runc" >> $config_host_mak
+ fi
+ echo "SUBDIRS=$subdirs" >> $config_host_mak
+diff --git a/tests/docker/Makefile.include b/tests/docker/Makefile.include
+index dfabafab92..035d272be9 100644
+--- a/tests/docker/Makefile.include
++++ b/tests/docker/Makefile.include
+@@ -17,8 +17,7 @@ endif
+ DOCKER_REGISTRY := $(if $(REGISTRY),$(REGISTRY),$(DOCKER_DEFAULT_REGISTRY))
  
+ RUNC ?= docker
+-ENGINE ?= auto
+-DOCKER_SCRIPT=$(SRC_PATH)/tests/docker/docker.py --engine $(ENGINE)
++DOCKER_SCRIPT=$(SRC_PATH)/tests/docker/docker.py --engine $(RUNC)
+ 
+ CUR_TIME := $(shell date +%Y-%m-%d-%H.%M.%S.$$$$)
+ DOCKER_SRC_COPY := $(BUILD_DIR)/docker-src.$(CUR_TIME)
+@@ -158,7 +157,7 @@ $(foreach i,$(filter-out $(DOCKER_PARTIAL_IMAGES),$(DOCKER_IMAGES)), \
+ )
+ 
+ docker:
+-	@echo 'Build QEMU and run tests inside Docker or Podman containers'
++	@echo 'Build QEMU and run tests inside $(RUNC) containers'
+ 	@echo
+ 	@echo 'Available targets:'
+ 	@echo
+@@ -198,8 +197,6 @@ docker:
+ 	@echo '    EXECUTABLE=<path>    Include executable in image.'
+ 	@echo '    EXTRA_FILES="<path> [... <path>]"'
+ 	@echo '                         Include extra files in image.'
+-	@echo '    ENGINE=auto/docker/podman'
+-	@echo '                         Specify which container engine to run.'
+ 	@echo '    REGISTRY=url         Cache builds from registry (default:$(DOCKER_REGISTRY))'
+ 
+ docker-help: docker
 -- 
 2.39.2
 
