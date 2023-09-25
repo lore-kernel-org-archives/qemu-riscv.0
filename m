@@ -4,67 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93B51CE7A81
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 09:10:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E280CE7A89
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 09:10:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qkhbO-0001Fm-88; Mon, 25 Sep 2023 05:10:02 -0400
+	id 1qkhbl-00024d-Bh; Mon, 25 Sep 2023 05:10:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qkhbH-0001CF-D1
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 05:09:56 -0400
-Received: from mail-oi1-x22d.google.com ([2607:f8b0:4864:20::22d])
+ id 1qkhbj-0001ys-Pe
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 05:10:23 -0400
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qkhbF-0003pI-NZ
- for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 05:09:55 -0400
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-3ade5687e97so3641088b6e.1
- for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 02:09:53 -0700 (PDT)
+ id 1qkhbZ-0003sz-Ef
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 05:10:23 -0400
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-1c5db4925f9so40870925ad.1
+ for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 02:10:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1695632992; x=1696237792; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1695633012; x=1696237812; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=R6mrOAlwo1p8ahDvSLbCoD8rFWhJis1cZL1M9xDC96A=;
- b=VH6JXDrsOcRzG3+pLf7RYeOEaYNs8a+CTSIqpoNta6DJq5rL4IYJKF7uZ1Iwz0Noip
- VTTqBfUhl2q8Dx2eeay+UpQIIyprmBKbtCFmlwGe5TY0pER2oQKfNTHvzKv7/erHiW45
- IvPToS5CJIqBEXEe8IHrQbuzinH1p0iDbbP+x7NH6UcxirbZOXZ340I5PSB3up4LS3R2
- gM1+cvEy6eA4yxxkyCe83bt3okIo28vanYW7jRjrwEOGvDiaszMwanhNuhZP6aLcSmP7
- /cjNgAXrSjvzkcBFApmIlJxuYzsSovY6XIX7yCvCeL3beCYqegDeXWsM/c4jiCtNAO5F
- eIYw==
+ bh=O38GvyaXHhJBPd7xO5xDy5lq5AXI2yQBS/AUzdXdE0Q=;
+ b=RDHkXLN5JR9RBMwnfORcRhIQOtrM/mPYPWzaD7VYTHc61dC+oWkUCqxWCj+KiTvYeB
+ tiaf0n1KQoUPJYfza1JcjsnuBwUFg06iGWDVlU8wHkgYItt7fuwdWj2qwU5WQ4XoMAhz
+ gee72XUXNhDXQK1M3fInvqIBpRamINESQN9CUjK1zelf+rj8WPPQScfptSHPoVd3e6lt
+ tpb655yV4DsK4v1L/21pXE3PWQ1qBxQEPbjHSf1Y23Szl0XGkZ4hB8vA0rmabopNtjwI
+ mA2zn1p7PKJxm2NAdNHv7eYpgm/77jca7VWnJo8AuqDQ3teU5SsxEEUhQKKyOC8t6b9K
+ nR9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695632992; x=1696237792;
+ d=1e100.net; s=20230601; t=1695633012; x=1696237812;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=R6mrOAlwo1p8ahDvSLbCoD8rFWhJis1cZL1M9xDC96A=;
- b=KWBne7BgOvG40S8BZh6OSf02kXhuNWOyZ1I0wrFW/ZffLvHd0ImVnNSsJN5FaGxFIM
- yuGJIPHYhqkYPHL6PPoq0rP2KUDn9xb0JggklWEO44QrJqc07crTxeDjuNdeg3QaXLsb
- WN/hA8qubvOcZeI8B+9uUwxLri+sJ1YCDTaUZ9iq0nvzXukqLB0wgkEQEliPsgcN6vm1
- lAZrKNLD91MKmMf0wO8tUNmDEiJ11HJ6PKgaNUkxI/t/dWrvqaZEvR+vBnYhF8rQPsSj
- P7jkRs2wPNNLdhZWPGa9ewcmMiypUmT89gbeB0YUONieZijbm5uEh/iMkoIRVRRsRRHB
- y8Rg==
-X-Gm-Message-State: AOJu0YxDY12vtkNpklvG1fwUTkT6aEMra0JxCpCQH+miryfQBey3vKtX
- 3XaEKqu8VYzmjPcDaOswI0pFAg==
-X-Google-Smtp-Source: AGHT+IFQxJu8v9NMqWXBzPh/Npc+NRMXtT9c8mTULaYrAOoLAfRVatx5wdzn6/d9tvW5X30j6ops4A==
-X-Received: by 2002:a05:6808:1788:b0:3a7:146d:85b5 with SMTP id
- bg8-20020a056808178800b003a7146d85b5mr8078460oib.52.1695632992350; 
- Mon, 25 Sep 2023 02:09:52 -0700 (PDT)
+ bh=O38GvyaXHhJBPd7xO5xDy5lq5AXI2yQBS/AUzdXdE0Q=;
+ b=MSvvHUfzZTTem+LZJYMDjC4dKSfIjWeRiRNail5NdXq5OmEfNjSY1z9PE09Ru6FwNo
+ dQsBNiOYSUzr1qePoQgjI9Hro4H3hNk8PAVgk5C4dnkGt0l01d8nKiWpmO6ZptOZXjCB
+ PyWNqFfJAJ6RQWxRoz0Lo05oVVgBBHZUE0ezLO3BR9Q/zM6aBKySohEKTJgKsrkr2b1U
+ lqNW+su8rH1R9F+7puYNh/9wPBl2b2J3QUn5275/s4ZKdDWcwFze0nWJYppOBjcyUkca
+ LJCDQtkVfEi39C5d5l/bvOlmBBO4cnTjL9/fu8+M9yBSCSJDDl7MxgQtrSyHZG5Pfjb9
+ zOEQ==
+X-Gm-Message-State: AOJu0Yx5yfKRqZrmry++HIEEuFuIumrj5B+fUvodpWPCR8X9kLAR+KFc
+ 51PmJxNAG+aQAhZEab4QDrdFTw==
+X-Google-Smtp-Source: AGHT+IGwKH7fHBLly4Jd8DJu+PqInZw7sZXmmkjHk6aeUJHfa+lSIyKNKqZvQ7xCprsoMWLKhXrz4g==
+X-Received: by 2002:a17:902:da8e:b0:1bc:1e17:6d70 with SMTP id
+ j14-20020a170902da8e00b001bc1e176d70mr11371777plx.24.1695633011976; 
+ Mon, 25 Sep 2023 02:10:11 -0700 (PDT)
 Received: from [192.168.68.107] ([177.94.42.59])
  by smtp.gmail.com with ESMTPSA id
- g1-20020a62e301000000b0068fb4f5f38fsm7538400pfh.30.2023.09.25.02.09.49
+ h8-20020a170902748800b001b895336435sm1958426pll.21.2023.09.25.02.10.09
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 25 Sep 2023 02:09:52 -0700 (PDT)
-Message-ID: <4212ecac-54b5-9ccc-3e92-6f84271cf884@ventanamicro.com>
-Date: Mon, 25 Sep 2023 06:09:48 -0300
+ Mon, 25 Sep 2023 02:10:11 -0700 (PDT)
+Message-ID: <592ab03d-3849-5075-c755-55125382e58c@ventanamicro.com>
+Date: Mon, 25 Sep 2023 06:10:07 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.1
-Subject: Re: [PATCH 3/4] target/riscv: vector_helper: Fixup local variables
- shadowing
+Subject: Re: [PATCH 4/4] softmmu/device_tree: Fixup local variables shadowing
 Content-Language: en-US
 To: Alistair Francis <alistair23@gmail.com>, david@gibson.dropbear.id.au,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
@@ -72,20 +71,20 @@ Cc: bmeng.cn@gmail.com, alistair.francis@wdc.com,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, palmer@dabbelt.com,
  liweiwei@iscas.ac.cn, Bin Meng <bin.meng@windriver.com>
 References: <20230925043023.71448-1-alistair.francis@wdc.com>
- <20230925043023.71448-4-alistair.francis@wdc.com>
+ <20230925043023.71448-5-alistair.francis@wdc.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230925043023.71448-4-alistair.francis@wdc.com>
+In-Reply-To: <20230925043023.71448-5-alistair.francis@wdc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22d;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x630.google.com
 X-Spam_score_int: -35
 X-Spam_score: -3.6
 X-Spam_bar: ---
 X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.473,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -120,33 +119,24 @@ On 9/25/23 01:30, Alistair Francis wrote:
 
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
->   target/riscv/vector_helper.c | 7 ++++---
->   1 file changed, 4 insertions(+), 3 deletions(-)
+>   softmmu/device_tree.c | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
 > 
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 3fb05cc3d6..cba02c1320 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -516,7 +516,7 @@ ProbeSuccess:
->                   k++;
->                   continue;
->               }
-> -            target_ulong addr = base + ((i * nf + k) << log2_esz);
-> +            addr = base + ((i * nf + k) << log2_esz);
->               ldst_elem(env, adjust_addr(env, addr), i + k * max_elems, vd, ra);
->               k++;
->           }
-> @@ -4791,9 +4791,10 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
->       uint32_t total_elems = vext_get_total_elems(env, desc, esz);          \
->       uint32_t vta = vext_vta(desc);                                        \
->       uint32_t vma = vext_vma(desc);                                        \
-> -    target_ulong i_max, i;                                                \
-> +    target_ulong i_max, i_min, i;                                         \
->                                                                             \
-> -    i_max = MAX(MIN(s1 < vlmax ? vlmax - s1 : 0, vl), env->vstart);       \
-> +    i_min = MIN(s1 < vlmax ? vlmax - s1 : 0, vl);                         \
-> +    i_max = MAX(i_min, env->vstart);                                      \
->       for (i = env->vstart; i < i_max; ++i) {                               \
->           if (!vm && !vext_elem_mask(v0, i)) {                              \
->               /* set masked-off elements to 1s */                           \
+> diff --git a/softmmu/device_tree.c b/softmmu/device_tree.c
+> index 30aa3aea9f..eb5166ca36 100644
+> --- a/softmmu/device_tree.c
+> +++ b/softmmu/device_tree.c
+> @@ -418,9 +418,9 @@ int qemu_fdt_setprop_string_array(void *fdt, const char *node_path,
+>       }
+>       p = str = g_malloc0(total_len);
+>       for (i = 0; i < len; i++) {
+> -        int len = strlen(array[i]) + 1;
+> -        pstrcpy(p, len, array[i]);
+> -        p += len;
+> +        int offset = strlen(array[i]) + 1;
+> +        pstrcpy(p, offset, array[i]);
+> +        p += offset;
+>       }
+>   
+>       ret = qemu_fdt_setprop(fdt, node_path, prop, str, total_len);
 
