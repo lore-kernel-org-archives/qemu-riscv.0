@@ -4,101 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A7EACE7AA8
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 17:18:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB701CE7AB3
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Sep 2023 17:57:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qkpDq-0000V9-PB; Mon, 25 Sep 2023 13:18:14 -0400
+	id 1qkppm-0000ZR-UM; Mon, 25 Sep 2023 13:57:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <edgar.iglesias@gmail.com>)
- id 1qkpDo-0000Tu-8k; Mon, 25 Sep 2023 13:18:12 -0400
-Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qkppl-0000Yv-Ed
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 13:57:25 -0400
+Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <edgar.iglesias@gmail.com>)
- id 1qkpDm-0003dK-9z; Mon, 25 Sep 2023 13:18:12 -0400
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-533c5d10dc7so4666931a12.3; 
- Mon, 25 Sep 2023 10:18:08 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qkppj-0002AB-Dz
+ for qemu-riscv@nongnu.org; Mon, 25 Sep 2023 13:57:25 -0400
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-1c60778a3bfso31460535ad.1
+ for <qemu-riscv@nongnu.org>; Mon, 25 Sep 2023 10:57:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695662287; x=1696267087; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=J7i4KFEZ3VCP5ao6donJP8NRNxv/HImiLAsDiEO+CNs=;
- b=ejyfV+J4lexhaOdsynJ1EAVU8xl0Xs/gAegWTcFye5z2LsFVJh498rPPVGDcNtVy0W
- iomGvz+ilhKKXyRtxRTEY6Gpw3rlGsqYaMfOoM1wncEiqXMHdHLh1bdM4Vf/1ySMOlXM
- F+OB57hthwbw2yom7TfuRIxG1MYkmY11x/lKJITw/DXl7JJUDY2TJ4ynBKUUIyzyiG1n
- 8a220yk6YT7vKu/BoEsbgZydkeezMBpMqvkCk2CUgrQOGt7HVmc0WpWmyTmP8ZV8fU9T
- DHs1rMqPeb7GNyPPQxYWFsKTkgHY2nB4wJHhsbw0vKaNe/kA7eiSt+MdM3th9VLg4SyI
- 2a8g==
+ d=ventanamicro.com; s=google; t=1695664642; x=1696269442; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vvYfHSfqGjzJzjhxgz67b1ioP9Sb4vSPyH/KcYL/z1w=;
+ b=cMmDwQTzcmlYT/7N/38Zk9ImfcbJQG6kB4Kf5JqpF5N1gAAD3DI3yA8l3Gm8ii7UH1
+ vBlx8nzKE1sXOPhfOpPMjS+VAw1NZQLF5ekg+WB4Zb8cp1nNbtxbqoVWoLFtNkNP8OHh
+ wsUqku3fD2uk3Q+Cu6gq/QCtvK+uzz2JM7AAoK2ZsYjJJ2nW1LHHPjNDCUmdekDGLvgB
+ Ds2ynXl3slWvGvi66R/swCkmHi+ar4gCsS3Lxqw7xucWU7UERbgeE0OdssbFpZ4zDU88
+ HXefesNmqcROzD7I7SGC4rL+clRk5ul0F2fRdBCLy3EOazHhpMjaakzdCyCJFrHIqT6M
+ T/Mg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695662287; x=1696267087;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=J7i4KFEZ3VCP5ao6donJP8NRNxv/HImiLAsDiEO+CNs=;
- b=FuEpM9aPZe9lG5435Ie7CSk06+4afIAu0itizwrfK9V9e8sUoGM/oXXo44z9vFw9bJ
- EMKw2MrXq/65OszVh5t4Q6mDy4LD2q/qscsypzqOeRBiDCG01+YOxCAgS2YMsbMpa/x1
- 0Cawf9f8m+/eNHL6RnTSGbbD4ekokwFtAE4aQm3/peo2CbpoDw2/VPiRYNZc/MlIR+bb
- MmI/r967mT5Gr3CQbk6eQ8qAdgZLQq4odpiKRcv2wslh3k0gwiMgKkd3kIRbbkkRTXtW
- TATh0b//1QrnfvbK+s+iCIuiLw4sL1WRv6oDXbHx8ylaCLMW9V4+9atEKFgSLzsZFiLO
- lNbQ==
-X-Gm-Message-State: AOJu0YxTWL8JQqetQL9+u/CXLVQkEFapp0XgRAt4bTGbj7uh2OCz92Vp
- yjvuU6BC93faPFGfzHYkjD3JZ2qnuquq6OzmT18=
-X-Google-Smtp-Source: AGHT+IHId3K4ZlyRzAJu2r7w01srVv7LxA32JQH7GqoUjVrYfGGNqXF3V8Fv4352u0A+BA+WTOGy9U10f/cQsC6uWqo=
-X-Received: by 2002:a05:6402:b5b:b0:533:d1cd:62c5 with SMTP id
- bx27-20020a0564020b5b00b00533d1cd62c5mr4789176edb.17.1695662286812; Mon, 25
- Sep 2023 10:18:06 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695664642; x=1696269442;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vvYfHSfqGjzJzjhxgz67b1ioP9Sb4vSPyH/KcYL/z1w=;
+ b=U7yzC5GyOkFUBMdHMG5/q4CyIQgTwKd7WO4JHUIcX/IxXQoJZRsvMDI8rZ+NJ32Doc
+ 7GIbmPgJEIJn4ThpRTfq+VvfIvKmvA9eRQtRECYOqzq9OPvRTMnFQHfJtptI3x3cacMH
+ 05onIE+2d1rFTslc5isIHvKsKPmy39+6aD1VdDs6fwwnngVnkFCni45X/KLT3qvh+Uqi
+ Gkqf12boGksb51+KYsJueSfR9wwOv0iCct4pDyD/CmBbqk3RVZxisehubVMoSmwLkIKO
+ QVZJgy6sF1hlISPzBT+MZcr16s4J2AKOcBIp8r3DCgdHZH59pE/0SowSMHX5nKBSgUvr
+ 5zKQ==
+X-Gm-Message-State: AOJu0YxRP8CbJlTrgBYRLNbtl8/5KZdNqoKbpippiwGUILinuUcFioqR
+ ZJtQr/Uv9LKnVRiPfQF4OAZqlQ==
+X-Google-Smtp-Source: AGHT+IHIkbqVGfWdHdE1gZ4HHr8HSre88z+m9EBEUs0mUeyckAIsza9XHDf7eGTNtstii1XOSIPxnA==
+X-Received: by 2002:a17:90b:3588:b0:274:6cc9:ec69 with SMTP id
+ mm8-20020a17090b358800b002746cc9ec69mr6057606pjb.49.1695664641688; 
+ Mon, 25 Sep 2023 10:57:21 -0700 (PDT)
+Received: from grind.. ([177.94.42.59]) by smtp.gmail.com with ESMTPSA id
+ i3-20020a17090a65c300b00262ca945cecsm3312722pjs.54.2023.09.25.10.57.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 Sep 2023 10:57:21 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Andrew Jones <ajones@ventanamicro.com>
+Subject: [PATCH v4 02/19] target/riscv: move riscv_cpu_realize_tcg() to
+ TCG::cpu_realizefn()
+Date: Mon, 25 Sep 2023 14:56:52 -0300
+Message-ID: <20230925175709.35696-3-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20230925175709.35696-1-dbarboza@ventanamicro.com>
+References: <20230925175709.35696-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-References: <20230925144854.1872513-1-alex.bennee@linaro.org>
- <20230925144854.1872513-5-alex.bennee@linaro.org>
- <ZRG1g/2hWi8+AzNn@redhat.com> <878r8urxxc.fsf@linaro.org>
-In-Reply-To: <878r8urxxc.fsf@linaro.org>
-From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
-Date: Mon, 25 Sep 2023 19:17:55 +0200
-Message-ID: <CAJy5ezoucKM=VvYsHeFep7r0i1PV_JUCgq6gs4JJQVHqq3Yz3Q@mail.gmail.com>
-Subject: Re: [PATCH 04/31] docs: mark CRIS support as deprecated
-To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
-Cc: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
- Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
- John Snow <jsnow@redhat.com>, libvir-list@redhat.com, 
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- qemu-s390x@nongnu.org, Song Gao <gaosong@loongson.cn>, 
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Weiwei Li <liweiwei@iscas.ac.cn>, Nicholas Piggin <npiggin@gmail.com>, 
- Radoslaw Biernacki <rad@semihalf.com>, Eduardo Habkost <eduardo@habkost.net>,
- Cleber Rosa <crosa@redhat.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, Mahmoud Mandour <ma.mandourr@gmail.com>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Thomas Huth <thuth@redhat.com>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Bin Meng <bin.meng@windriver.com>, 
- Alexandre Iooss <erdnaxe@crans.org>, Xiaojuan Yang <yangxiaojuan@loongson.cn>,
- qemu-ppc@nongnu.org, 
- David Hildenbrand <david@redhat.com>, Yanan Wang <wangyanan55@huawei.com>, 
- Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
- qemu-arm@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>, Ilya Leoshkevich <iii@linux.ibm.com>, 
- Laurent Vivier <lvivier@redhat.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>, 
- Leif Lindholm <quic_llindhol@quicinc.com>, Beraldo Leal <bleal@redhat.com>, 
- Rabin Vincent <rabinv@axis.com>
-Content-Type: multipart/alternative; boundary="00000000000043bf2a060632243a"
-Received-SPF: pass client-ip=2a00:1450:4864:20::52a;
- envelope-from=edgar.iglesias@gmail.com; helo=mail-ed1-x52a.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -115,166 +96,350 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---00000000000043bf2a060632243a
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+riscv_cpu_realize_tcg() was added to allow TCG cpus to have a different
+realize() path during the common riscv_cpu_realize(), making it a good
+choice to start moving TCG exclusive code to tcg-cpu.c.
 
-On Mon, Sep 25, 2023 at 7:00=E2=80=AFPM Alex Benn=C3=A9e <alex.bennee@linar=
-o.org> wrote:
+Rename it to tcg_cpu_realizefn() and assign it as a implementation of
+accel::cpu_realizefn(). tcg_cpu_realizefn() will then be called during
+riscv_cpu_realize() via cpu_exec_realizefn(). We'll use a similar
+approach with KVM in the near future.
 
->
-> Daniel P. Berrang=C3=A9 <berrange@redhat.com> writes:
->
-> > On Mon, Sep 25, 2023 at 03:48:27PM +0100, Alex Benn=C3=A9e wrote:
-> >> This might be premature but while streamling the avocado tests I
-> >> realised the only tests we have are "check-tcg" ones. The aging
-> >> fedora-criss-cross image works well enough for developers but can't be
-> >> used in CI as we need supported build platforms to build QEMU.
-> >>
-> >> Does this mean the writing is on the wall for this architecture?
-> >>
-> >> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
-> >> Cc: Rabin Vincent <rabinv@axis.com>
-> >> Cc: Edgar E. Iglesias <edgar.iglesias@xilinx.com>
-> >> ---
-> >>  docs/about/deprecated.rst | 11 +++++++++++
-> >>  1 file changed, 11 insertions(+)
-> >>
-> >> diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
-> >> index dc4da95329..7cfe313aa6 100644
-> >> --- a/docs/about/deprecated.rst
-> >> +++ b/docs/about/deprecated.rst
-> >> @@ -399,6 +399,17 @@ Specifying the iSCSI password in plain text on th=
-e
-> command line using the
-> >>  used instead, to refer to a ``--object secret...`` instance that
-> provides
-> >>  a password via a file, or encrypted.
-> >>
-> >> +TCG CPUs
-> >> +--------
-> >> +
-> >> +CRIS CPU architecture (since 8.1)
-> >> +'''''''''''''''''''''''''''''''''
-> >> +
-> >> +The CRIS architecture was pulled from Linux in 4.17 and the compiler
-> >> +is no longer packaged in any distro making it harder to run the
-> >> +``check-tcg`` tests. Unless we can improve the testing situation ther=
-e
-> >> +is a chance the code will bitrot without anyone noticing.
-> >
-> > Deprecated is generally a warning that we intend to delete the
-> > feature.   If we're just going to relegate it to untested
-> > status (what I'd call "tier 3" quality), then we should document
-> > that elsewhere.  I don't mind which way we go.
->
-> We do have reasonably good coverage with tests/tcg/cris but of course
-> without a compiler we can't build them.
->
-> Both nios2 and microblaze have build-toolchain scripts which can be used
-> to re-create containers. However my preference is having pre-built
-> toolchains hosted by others like we do for loongarch, hexagon, xtensa
-> and tricore. Then the docker image can simply curl them into an image.
->
->
-Yeah, I guess it's time to deprecate it...
+riscv_cpu_validate_set_extensions() is too big and with too many
+dependencies to be moved in this same patch. We'll do that next.
 
-Cheers,
-Edgar
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+---
+ target/riscv/cpu.c         | 128 -----------------------------------
+ target/riscv/tcg/tcg-cpu.c | 133 +++++++++++++++++++++++++++++++++++++
+ 2 files changed, 133 insertions(+), 128 deletions(-)
 
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index e72c49c881..030629294f 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -23,9 +23,7 @@
+ #include "qemu/log.h"
+ #include "cpu.h"
+ #include "cpu_vendorid.h"
+-#include "pmu.h"
+ #include "internals.h"
+-#include "time_helper.h"
+ #include "exec/exec-all.h"
+ #include "qapi/error.h"
+ #include "qapi/visitor.h"
+@@ -1064,29 +1062,6 @@ static void riscv_cpu_validate_v(CPURISCVState *env, RISCVCPUConfig *cfg,
+     }
+ }
+ 
+-static void riscv_cpu_validate_priv_spec(RISCVCPU *cpu, Error **errp)
+-{
+-    CPURISCVState *env = &cpu->env;
+-    int priv_version = -1;
+-
+-    if (cpu->cfg.priv_spec) {
+-        if (!g_strcmp0(cpu->cfg.priv_spec, "v1.12.0")) {
+-            priv_version = PRIV_VERSION_1_12_0;
+-        } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.11.0")) {
+-            priv_version = PRIV_VERSION_1_11_0;
+-        } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.10.0")) {
+-            priv_version = PRIV_VERSION_1_10_0;
+-        } else {
+-            error_setg(errp,
+-                       "Unsupported privilege spec version '%s'",
+-                       cpu->cfg.priv_spec);
+-            return;
+-        }
+-
+-        env->priv_ver = priv_version;
+-    }
+-}
+-
+ static void riscv_cpu_disable_priv_spec_isa_exts(RISCVCPU *cpu)
+ {
+     CPURISCVState *env = &cpu->env;
+@@ -1111,33 +1086,6 @@ static void riscv_cpu_disable_priv_spec_isa_exts(RISCVCPU *cpu)
+     }
+ }
+ 
+-static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu, Error **errp)
+-{
+-    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cpu);
+-    CPUClass *cc = CPU_CLASS(mcc);
+-    CPURISCVState *env = &cpu->env;
+-
+-    /* Validate that MISA_MXL is set properly. */
+-    switch (env->misa_mxl_max) {
+-#ifdef TARGET_RISCV64
+-    case MXL_RV64:
+-    case MXL_RV128:
+-        cc->gdb_core_xml_file = "riscv-64bit-cpu.xml";
+-        break;
+-#endif
+-    case MXL_RV32:
+-        cc->gdb_core_xml_file = "riscv-32bit-cpu.xml";
+-        break;
+-    default:
+-        g_assert_not_reached();
+-    }
+-
+-    if (env->misa_mxl_max != env->misa_mxl) {
+-        error_setg(errp, "misa_mxl_max must be equal to misa_mxl");
+-        return;
+-    }
+-}
+-
+ /*
+  * Check consistency between chosen extensions while setting
+  * cpu->cfg accordingly.
+@@ -1511,74 +1459,6 @@ static void riscv_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
+ #endif
+ }
+ 
+-static void riscv_cpu_validate_misa_priv(CPURISCVState *env, Error **errp)
+-{
+-    if (riscv_has_ext(env, RVH) && env->priv_ver < PRIV_VERSION_1_12_0) {
+-        error_setg(errp, "H extension requires priv spec 1.12.0");
+-        return;
+-    }
+-}
+-
+-static void riscv_cpu_realize_tcg(DeviceState *dev, Error **errp)
+-{
+-    RISCVCPU *cpu = RISCV_CPU(dev);
+-    CPURISCVState *env = &cpu->env;
+-    Error *local_err = NULL;
+-
+-    if (object_dynamic_cast(OBJECT(dev), TYPE_RISCV_CPU_HOST)) {
+-        error_setg(errp, "'host' CPU is not compatible with TCG acceleration");
+-        return;
+-    }
+-
+-    riscv_cpu_validate_misa_mxl(cpu, &local_err);
+-    if (local_err != NULL) {
+-        error_propagate(errp, local_err);
+-        return;
+-    }
+-
+-    riscv_cpu_validate_priv_spec(cpu, &local_err);
+-    if (local_err != NULL) {
+-        error_propagate(errp, local_err);
+-        return;
+-    }
+-
+-    riscv_cpu_validate_misa_priv(env, &local_err);
+-    if (local_err != NULL) {
+-        error_propagate(errp, local_err);
+-        return;
+-    }
+-
+-    if (cpu->cfg.epmp && !cpu->cfg.pmp) {
+-        /*
+-         * Enhanced PMP should only be available
+-         * on harts with PMP support
+-         */
+-        error_setg(errp, "Invalid configuration: EPMP requires PMP support");
+-        return;
+-    }
+-
+-    riscv_cpu_validate_set_extensions(cpu, &local_err);
+-    if (local_err != NULL) {
+-        error_propagate(errp, local_err);
+-        return;
+-    }
+-
+-#ifndef CONFIG_USER_ONLY
+-    CPU(dev)->tcg_cflags |= CF_PCREL;
+-
+-    if (cpu->cfg.ext_sstc) {
+-        riscv_timer_init(cpu);
+-    }
+-
+-    if (cpu->cfg.pmu_num) {
+-        if (!riscv_pmu_init(cpu, cpu->cfg.pmu_num) && cpu->cfg.ext_sscofpmf) {
+-            cpu->pmu_timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
+-                                          riscv_pmu_timer_cb, cpu);
+-        }
+-     }
+-#endif
+-}
+-
+ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+ {
+     CPUState *cs = CPU(dev);
+@@ -1597,14 +1477,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+         return;
+     }
+ 
+-    if (tcg_enabled()) {
+-        riscv_cpu_realize_tcg(dev, &local_err);
+-        if (local_err != NULL) {
+-            error_propagate(errp, local_err);
+-            return;
+-        }
+-    }
+-
+     riscv_cpu_finalize_features(cpu, &local_err);
+     if (local_err != NULL) {
+         error_propagate(errp, local_err);
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index 795a8f06b2..5904cf7354 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -18,10 +18,142 @@
+  */
+ 
+ #include "qemu/osdep.h"
++#include "exec/exec-all.h"
+ #include "cpu.h"
++#include "pmu.h"
++#include "time_helper.h"
++#include "qapi/error.h"
+ #include "qemu/accel.h"
+ #include "hw/core/accel-cpu.h"
+ 
++
++static void riscv_cpu_validate_misa_priv(CPURISCVState *env, Error **errp)
++{
++    if (riscv_has_ext(env, RVH) && env->priv_ver < PRIV_VERSION_1_12_0) {
++        error_setg(errp, "H extension requires priv spec 1.12.0");
++        return;
++    }
++}
++
++static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu, Error **errp)
++{
++    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cpu);
++    CPUClass *cc = CPU_CLASS(mcc);
++    CPURISCVState *env = &cpu->env;
++
++    /* Validate that MISA_MXL is set properly. */
++    switch (env->misa_mxl_max) {
++#ifdef TARGET_RISCV64
++    case MXL_RV64:
++    case MXL_RV128:
++        cc->gdb_core_xml_file = "riscv-64bit-cpu.xml";
++        break;
++#endif
++    case MXL_RV32:
++        cc->gdb_core_xml_file = "riscv-32bit-cpu.xml";
++        break;
++    default:
++        g_assert_not_reached();
++    }
++
++    if (env->misa_mxl_max != env->misa_mxl) {
++        error_setg(errp, "misa_mxl_max must be equal to misa_mxl");
++        return;
++    }
++}
++
++static void riscv_cpu_validate_priv_spec(RISCVCPU *cpu, Error **errp)
++{
++    CPURISCVState *env = &cpu->env;
++    int priv_version = -1;
++
++    if (cpu->cfg.priv_spec) {
++        if (!g_strcmp0(cpu->cfg.priv_spec, "v1.12.0")) {
++            priv_version = PRIV_VERSION_1_12_0;
++        } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.11.0")) {
++            priv_version = PRIV_VERSION_1_11_0;
++        } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.10.0")) {
++            priv_version = PRIV_VERSION_1_10_0;
++        } else {
++            error_setg(errp,
++                       "Unsupported privilege spec version '%s'",
++                       cpu->cfg.priv_spec);
++            return;
++        }
++
++        env->priv_ver = priv_version;
++    }
++}
++
++/*
++ * We'll get here via the following path:
++ *
++ * riscv_cpu_realize()
++ *   -> cpu_exec_realizefn()
++ *      -> tcg_cpu_realizefn() (via accel_cpu_realizefn())
++ */
++static bool tcg_cpu_realizefn(CPUState *cs, Error **errp)
++{
++    RISCVCPU *cpu = RISCV_CPU(cs);
++    CPURISCVState *env = &cpu->env;
++    Error *local_err = NULL;
++
++    if (object_dynamic_cast(OBJECT(cpu), TYPE_RISCV_CPU_HOST)) {
++        error_setg(errp, "'host' CPU is not compatible with TCG acceleration");
++        return false;
++    }
++
++    riscv_cpu_validate_misa_mxl(cpu, &local_err);
++    if (local_err != NULL) {
++        error_propagate(errp, local_err);
++        return false;
++    }
++
++    riscv_cpu_validate_priv_spec(cpu, &local_err);
++    if (local_err != NULL) {
++        error_propagate(errp, local_err);
++        return false;
++    }
++
++    riscv_cpu_validate_misa_priv(env, &local_err);
++    if (local_err != NULL) {
++        error_propagate(errp, local_err);
++        return false;
++    }
++
++    if (cpu->cfg.epmp && !cpu->cfg.pmp) {
++        /*
++         * Enhanced PMP should only be available
++         * on harts with PMP support
++         */
++        error_setg(errp, "Invalid configuration: EPMP requires PMP support");
++        return false;
++    }
++
++    riscv_cpu_validate_set_extensions(cpu, &local_err);
++    if (local_err != NULL) {
++        error_propagate(errp, local_err);
++        return false;
++    }
++
++#ifndef CONFIG_USER_ONLY
++    CPU(cs)->tcg_cflags |= CF_PCREL;
++
++    if (cpu->cfg.ext_sstc) {
++        riscv_timer_init(cpu);
++    }
++
++    if (cpu->cfg.pmu_num) {
++        if (!riscv_pmu_init(cpu, cpu->cfg.pmu_num) && cpu->cfg.ext_sscofpmf) {
++            cpu->pmu_timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
++                                          riscv_pmu_timer_cb, cpu);
++        }
++     }
++#endif
++
++    return true;
++}
++
+ static void tcg_cpu_init_ops(AccelCPUClass *accel_cpu, CPUClass *cc)
+ {
+     /*
+@@ -41,6 +173,7 @@ static void tcg_cpu_accel_class_init(ObjectClass *oc, void *data)
+     AccelCPUClass *acc = ACCEL_CPU_CLASS(oc);
+ 
+     acc->cpu_class_init = tcg_cpu_class_init;
++    acc->cpu_realizefn = tcg_cpu_realizefn;
+ }
+ 
+ static const TypeInfo tcg_cpu_accel_type_info = {
+-- 
+2.41.0
 
-> --
-> Alex Benn=C3=A9e
-> Virtualisation Tech Lead @ Linaro
->
->
-
---00000000000043bf2a060632243a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><div class=3D"gmail_quote"><div=
- dir=3D"ltr" class=3D"gmail_attr">On Mon, Sep 25, 2023 at 7:00=E2=80=AFPM A=
-lex Benn=C3=A9e &lt;<a href=3D"mailto:alex.bennee@linaro.org">alex.bennee@l=
-inaro.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
-=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
--left:1ex"><br>
-Daniel P. Berrang=C3=A9 &lt;<a href=3D"mailto:berrange@redhat.com" target=
-=3D"_blank">berrange@redhat.com</a>&gt; writes:<br>
-<br>
-&gt; On Mon, Sep 25, 2023 at 03:48:27PM +0100, Alex Benn=C3=A9e wrote:<br>
-&gt;&gt; This might be premature but while streamling the avocado tests I<b=
-r>
-&gt;&gt; realised the only tests we have are &quot;check-tcg&quot; ones. Th=
-e aging<br>
-&gt;&gt; fedora-criss-cross image works well enough for developers but can&=
-#39;t be<br>
-&gt;&gt; used in CI as we need supported build platforms to build QEMU.<br>
-&gt;&gt; <br>
-&gt;&gt; Does this mean the writing is on the wall for this architecture?<b=
-r>
-&gt;&gt; <br>
-&gt;&gt; Signed-off-by: Alex Benn=C3=A9e &lt;<a href=3D"mailto:alex.bennee@=
-linaro.org" target=3D"_blank">alex.bennee@linaro.org</a>&gt;<br>
-&gt;&gt; Cc: Rabin Vincent &lt;<a href=3D"mailto:rabinv@axis.com" target=3D=
-"_blank">rabinv@axis.com</a>&gt;<br>
-&gt;&gt; Cc: Edgar E. Iglesias &lt;<a href=3D"mailto:edgar.iglesias@xilinx.=
-com" target=3D"_blank">edgar.iglesias@xilinx.com</a>&gt;<br>
-&gt;&gt; ---<br>
-&gt;&gt;=C2=A0 docs/about/deprecated.rst | 11 +++++++++++<br>
-&gt;&gt;=C2=A0 1 file changed, 11 insertions(+)<br>
-&gt;&gt; <br>
-&gt;&gt; diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst=
-<br>
-&gt;&gt; index dc4da95329..7cfe313aa6 100644<br>
-&gt;&gt; --- a/docs/about/deprecated.rst<br>
-&gt;&gt; +++ b/docs/about/deprecated.rst<br>
-&gt;&gt; @@ -399,6 +399,17 @@ Specifying the iSCSI password in plain text o=
-n the command line using the<br>
-&gt;&gt;=C2=A0 used instead, to refer to a ``--object secret...`` instance =
-that provides<br>
-&gt;&gt;=C2=A0 a password via a file, or encrypted.<br>
-&gt;&gt;=C2=A0 <br>
-&gt;&gt; +TCG CPUs<br>
-&gt;&gt; +--------<br>
-&gt;&gt; +<br>
-&gt;&gt; +CRIS CPU architecture (since 8.1)<br>
-&gt;&gt; +&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;=
-&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;=
-&#39;&#39;&#39;&#39;&#39;<br>
-&gt;&gt; +<br>
-&gt;&gt; +The CRIS architecture was pulled from Linux in 4.17 and the compi=
-ler<br>
-&gt;&gt; +is no longer packaged in any distro making it harder to run the<b=
-r>
-&gt;&gt; +``check-tcg`` tests. Unless we can improve the testing situation =
-there<br>
-&gt;&gt; +is a chance the code will bitrot without anyone noticing.<br>
-&gt;<br>
-&gt; Deprecated is generally a warning that we intend to delete the<br>
-&gt; feature.=C2=A0 =C2=A0If we&#39;re just going to relegate it to unteste=
-d<br>
-&gt; status (what I&#39;d call &quot;tier 3&quot; quality), then we should =
-document<br>
-&gt; that elsewhere.=C2=A0 I don&#39;t mind which way we go.<br>
-<br>
-We do have reasonably good coverage with tests/tcg/cris but of course<br>
-without a compiler we can&#39;t build them.<br>
-<br>
-Both nios2 and microblaze have build-toolchain scripts which can be used<br=
->
-to re-create containers. However my preference is having pre-built<br>
-toolchains hosted by others like we do for loongarch, hexagon, xtensa<br>
-and tricore. Then the docker image can simply curl them into an image.<br>
-<br></blockquote><div><br></div><div>Yeah, I guess it&#39;s time to depreca=
-te it...</div><div><br></div><div>Cheers,</div><div>Edgar</div><div>=C2=A0<=
-/div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bo=
-rder-left:1px solid rgb(204,204,204);padding-left:1ex">
--- <br>
-Alex Benn=C3=A9e<br>
-Virtualisation Tech Lead @ Linaro<br>
-<br>
-</blockquote></div></div>
-
---00000000000043bf2a060632243a--
 
