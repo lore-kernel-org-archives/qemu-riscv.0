@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7310DE7D27E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7977E8181E
 	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Sep 2023 19:50:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qlE4R-0003ry-85; Tue, 26 Sep 2023 15:50:11 -0400
+	id 1qlE4L-0003ps-MB; Tue, 26 Sep 2023 15:50:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qlE4P-0003rN-Pc
- for qemu-riscv@nongnu.org; Tue, 26 Sep 2023 15:50:09 -0400
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ id 1qlE4K-0003pU-GO
+ for qemu-riscv@nongnu.org; Tue, 26 Sep 2023 15:50:04 -0400
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qlE4N-0001Wx-Ty
- for qemu-riscv@nongnu.org; Tue, 26 Sep 2023 15:50:09 -0400
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1c4194f769fso69777425ad.3
- for <qemu-riscv@nongnu.org>; Tue, 26 Sep 2023 12:50:07 -0700 (PDT)
+ id 1qlE4I-0001In-Nk
+ for qemu-riscv@nongnu.org; Tue, 26 Sep 2023 15:50:04 -0400
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1c724577e1fso14555ad.0
+ for <qemu-riscv@nongnu.org>; Tue, 26 Sep 2023 12:50:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1695757806; x=1696362606; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1695757801; x=1696362601; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=s/ZboQFWxlADhWHzZ32NFd1Ok47zMwa/Fy7pwD6f5Rw=;
- b=e8S0kFC+tdQbsWvdBjzEnL3WWOh0CL2T95ygBVXcLUC7jhucnKS2+j7JPsYMRjaxjx
- 56brchfGJLpDOCOfWHG0LM8wBgTsCfYzo/3+Jdk2dfmH/7lOjQReR5MooUbqGnKfBlFu
- fVOJYkOP+HbeZ5yDVRNUNAcKXBXn7zZpXTpDW2kLi1BpNNcdT/CQwhZNanwWdQiGR9SY
- NKjrDSM33OystpYWiF1J0nRJFTe2RMZJKUytgKIaXtH0kxqLo7iCWgYvlayLL5eREmWE
- 7sbCRlxUBWJPf1gkKoYXjA84jBdZ/zYlgxFSg8K7f4nbUhMgJjl0QxoDGKkVJlFLp4LB
- 9C1w==
+ bh=uJTj/yG05+kNxL5qN2Z68Ih6ZRkTJzsbo+tX9aImP4Q=;
+ b=SALLpOS3aCNOpKq52a5B2TPRCFIk7SNmZy/KG52tv1lVYqSA2tBL1IhoHPpL2lHyys
+ mgzjmJPDOHkh9Tex+xFsSsA9OsdD5UdY9+yNu6NZbRmxBSdLBBiwiPHC6d/EDyzSTx6u
+ Y9t2AB2WRoYnouews96EGtNlWL8OOY4OIGe/9YwHfEJ/ZBzZOSRAJ4RQzn/jfdtEZyve
+ vrGK9aYfaHQoqz94svSIfuuRPBQ79iEfo+XxxxDkWZzaIqXzJfDufWDjXbMPVqU9yy7G
+ YQFHzPRSgSfcMfokuzsQjssgHmRhf6VlHxFL6y75d7dXcIoO1bpqAy0xh5MQjxo7eU5X
+ 4Yzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695757806; x=1696362606;
+ d=1e100.net; s=20230601; t=1695757801; x=1696362601;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=s/ZboQFWxlADhWHzZ32NFd1Ok47zMwa/Fy7pwD6f5Rw=;
- b=B3HkGmxE/hts+VE+KCSpqJM+3lsa+G7vY8VBFc9+VcIenOAaOzz3AAh4PCTdKV5t4x
- WAkEpiZQydKYDwTorKX5/89KQiua1hCy1FuCf5LQrOnIpACcrjoMQJ8PTAtZj2Fsli92
- l0JNEt0TfoBjE0qmgRrEgKBt/kxUjgLLgK78Cj91RuzCkawCjQbQ4i3kgQtswvs+7otI
- QtcobJ/t9LiXpVsqdojuKdjJDfLVB+6v/EbWUyoKBQ+367fPegLi/jHQZy85nUheb1h1
- F5d0hM//cVi+M0GXR+4nEMVXss2AU30BHLsX4iOh2jkGg1WBpA7OxHtpWxIZICT2WYmr
- pNQA==
-X-Gm-Message-State: AOJu0Yz1TIUDb1L3kQ1Z6CiBlw2eH5aDqwmNjpJlLvmUpgepymmgXae4
- c+XGCv8JYRJFmDkCi8DMLc3SXA==
-X-Google-Smtp-Source: AGHT+IFv7Jz7JXpv3krEIsY4h2J88+yQVC+QJDpGifjVQicIcIUOzjugiJWGFmciYbcr4ACMyUuyXQ==
-X-Received: by 2002:a17:903:2352:b0:1c3:e130:18f1 with SMTP id
- c18-20020a170903235200b001c3e13018f1mr9485663plh.20.1695757806572; 
- Tue, 26 Sep 2023 12:50:06 -0700 (PDT)
+ bh=uJTj/yG05+kNxL5qN2Z68Ih6ZRkTJzsbo+tX9aImP4Q=;
+ b=g2cVum3wk4pMyj1ALfK8qg2Wqa1/0BAwaKgCBYuJMqpPbJqjM8FETmScllqZIhKdIz
+ bmgXZ4eelZNZ3UWUw2fQG8xDMg/2ApGJTIJkVGrI6htVNLBtRDy1yHXh1HG3xqnndBA1
+ n4CDNzThcWTyNDooy6mLvIaAAqu8meciO4YQvYUTqUiYKz4nlkmffLyHbOLP8NeFbr0v
+ MPQlPUXCRabLfg25rEuBNhSfYjIiSsiN28IFj34DJDZcfPad0WMnjEYfe+53oDcMb5N5
+ kjSfTLzNUU+ksXFpKHlx3m7w5c4TO5t8QMeEAtmhvxSilxUCTDNf+svWfgE3VQxACS1h
+ qOaw==
+X-Gm-Message-State: AOJu0YweZnZeoVUqn5378y+ur2I2Os10kyiaf+2cPeZfVzbRDZ+OfVAV
+ Zy37jZDFRjv/qtJQM4g47rru7A==
+X-Google-Smtp-Source: AGHT+IFzvAAydcNlqALCblWijRPuPjEyYaJ93BTyHW1tJFMx6r5iowFi9SHz6io+sysr2eJENYwRiw==
+X-Received: by 2002:a17:902:a988:b0:1c5:d8a3:8781 with SMTP id
+ bh8-20020a170902a98800b001c5d8a38781mr10768899plb.55.1695757801054; 
+ Tue, 26 Sep 2023 12:50:01 -0700 (PDT)
 Received: from grind.. ([177.94.42.59]) by smtp.gmail.com with ESMTPSA id
- l6-20020a170902f68600b001c41e1e9ca7sm11386010plg.215.2023.09.26.12.50.04
+ l6-20020a170902f68600b001c41e1e9ca7sm11386010plg.215.2023.09.26.12.49.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Sep 2023 12:50:06 -0700 (PDT)
+ Tue, 26 Sep 2023 12:50:00 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 3/6] target/riscv: add rva22u64 profile definition
-Date: Tue, 26 Sep 2023 16:49:47 -0300
-Message-ID: <20230926194951.183767-4-dbarboza@ventanamicro.com>
+Subject: [PATCH 1/6] target/riscv/cpu.c: add zicntr extension flag
+Date: Tue, 26 Sep 2023 16:49:45 -0300
+Message-ID: <20230926194951.183767-2-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230926194951.183767-1-dbarboza@ventanamicro.com>
 References: <20230926194951.183767-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -94,88 +94,77 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The rva22U64 profile, described in:
+zicntr is the Base Counters and Timers extension described in chapter 12
+of the unprivileged spec. It describes support for RDCYCLE, RDTIME and
+RDINSTRET.
 
-https://github.com/riscv/riscv-profiles/blob/main/profiles.adoc#rva22-profiles
+QEMU already implements it way before it was a discrete extension.
+zicntr is part of the RVA22 profile, so let's add it to QEMU to make the
+future profile implementation flag complete.
 
-Contains a set of CPU extensions aimed for 64-bit userspace
-applications. Enabling this set to be enabled via a single user flag
-makes it convenient to enable a predictable set of features for the CPU,
-giving users more predicability when running/testing their workloads.
-
-QEMU implements all possible extensions of this profile. The exception
-is Zicbop (Cache-Block Prefetch Operations) that is not available since
-QEMU RISC-V does not implement a cache model. For this same reason all
-the so called 'synthetic extensions' described in the profile that are
-cache related are ignored (Za64rs, Zic64b, Ziccif, Ziccrse, Ziccamoa,
-Zicclsm).
-
-An abstraction called RISCVCPUProfile is created to store the profile.
-'ext_offsets' contains mandatory extensions that QEMU supports. Same
-thing with the 'misa_ext' mask. Optional extensions must be enabled
-manually in the command line if desired.
-
-The design here is to use the common target/riscv/cpu.c file to store
-the profile declaration and export it to the accelerator files. Each
-accelerator is then responsible to expose it (or not) to users and how
-to enable the extensions.
-
-Next patches will implement the profile for TCG and KVM.
+Given than it represents an already existing feature, default it to
+'true'. Change the realize() time validation to disable it in case its
+dependency (icsr) isn't present.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- target/riscv/cpu.c | 16 ++++++++++++++++
- target/riscv/cpu.h | 10 ++++++++++
- 2 files changed, 26 insertions(+)
+ target/riscv/cpu.c         | 7 +++++++
+ target/riscv/cpu_cfg.h     | 1 +
+ target/riscv/tcg/tcg-cpu.c | 4 ++++
+ 3 files changed, 12 insertions(+)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index b3befccf89..c83807f179 100644
+index 521bb88538..8783a415b1 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -1376,6 +1376,22 @@ Property riscv_cpu_options[] = {
-     DEFINE_PROP_END_OF_LIST(),
- };
+@@ -79,6 +79,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zicbom, PRIV_VERSION_1_12_0, ext_icbom),
+     ISA_EXT_DATA_ENTRY(zicboz, PRIV_VERSION_1_12_0, ext_icboz),
+     ISA_EXT_DATA_ENTRY(zicond, PRIV_VERSION_1_12_0, ext_zicond),
++    ISA_EXT_DATA_ENTRY(zicntr, PRIV_VERSION_1_12_0, ext_icntr),
+     ISA_EXT_DATA_ENTRY(zicsr, PRIV_VERSION_1_10_0, ext_icsr),
+     ISA_EXT_DATA_ENTRY(zifencei, PRIV_VERSION_1_10_0, ext_ifencei),
+     ISA_EXT_DATA_ENTRY(zihintntl, PRIV_VERSION_1_10_0, ext_zihintntl),
+@@ -1265,6 +1266,12 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+     MULTI_EXT_CFG_BOOL("svnapot", ext_svnapot, false),
+     MULTI_EXT_CFG_BOOL("svpbmt", ext_svpbmt, false),
  
-+/* Optional extensions left out: RVV, zfh, zkn, zks */
-+const RISCVCPUProfile RVA22U64 = {
-+    .name = "rva22u64",
-+    .misa_ext = RVM | RVA | RVF | RVD | RVC,
-+    .ext_offsets = {
-+        CPU_CFG_OFFSET(ext_icsr), CPU_CFG_OFFSET(ext_zihintpause),
-+        CPU_CFG_OFFSET(ext_zba), CPU_CFG_OFFSET(ext_zbb),
-+        CPU_CFG_OFFSET(ext_zbs), CPU_CFG_OFFSET(ext_zfhmin),
-+        CPU_CFG_OFFSET(ext_zkt), CPU_CFG_OFFSET(ext_icntr),
-+        CPU_CFG_OFFSET(ext_ihpm), CPU_CFG_OFFSET(ext_icbom),
-+        CPU_CFG_OFFSET(ext_icboz),
++    /*
++     * Always default true - we'll disable it during
++     * realize() if needed.
++     */
++    MULTI_EXT_CFG_BOOL("zicntr", ext_icntr, true),
 +
-+        RISCV_PROFILE_EXT_LIST_END
+     MULTI_EXT_CFG_BOOL("zba", ext_zba, true),
+     MULTI_EXT_CFG_BOOL("zbb", ext_zbb, true),
+     MULTI_EXT_CFG_BOOL("zbc", ext_zbc, true),
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index 0e6a0f245c..671b8c7cb8 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -62,6 +62,7 @@ struct RISCVCPUConfig {
+     bool ext_zksh;
+     bool ext_zkt;
+     bool ext_ifencei;
++    bool ext_icntr;
+     bool ext_icsr;
+     bool ext_icbom;
+     bool ext_icboz;
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index a90ee63b06..ce0fde0f5d 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -542,6 +542,10 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zksh), true);
+     }
+ 
++    if (cpu->cfg.ext_icntr && !cpu->cfg.ext_icsr) {
++        cpu->cfg.ext_icntr = false;
 +    }
-+};
 +
- static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
- 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 3f11e69223..615946b919 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -66,6 +66,16 @@ const char *riscv_get_misa_ext_description(uint32_t bit);
- 
- #define CPU_CFG_OFFSET(_prop) offsetof(struct RISCVCPUConfig, _prop)
- 
-+typedef struct riscv_cpu_profile {
-+    const char *name;
-+    uint32_t misa_ext;
-+    const int32_t ext_offsets[];
-+} RISCVCPUProfile;
-+
-+#define RISCV_PROFILE_EXT_LIST_END -1
-+
-+extern const RISCVCPUProfile RVA22U64;
-+
- /* Privileged specification version */
- enum {
-     PRIV_VERSION_1_10_0 = 0,
+     /*
+      * Disable isa extensions based on priv spec after we
+      * validated and set everything we need.
 -- 
 2.41.0
 
