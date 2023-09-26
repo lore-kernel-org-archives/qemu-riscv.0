@@ -4,84 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28EC4E7E656
-	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Sep 2023 17:49:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E018E7E657
+	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Sep 2023 18:32:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qlCAx-0002oq-Bo; Tue, 26 Sep 2023 13:48:47 -0400
+	id 1qlCqE-0002tr-IR; Tue, 26 Sep 2023 14:31:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qlCAv-0002oU-Ia
- for qemu-riscv@nongnu.org; Tue, 26 Sep 2023 13:48:45 -0400
-Received: from mail-vk1-xa2f.google.com ([2607:f8b0:4864:20::a2f])
+ id 1qlCqC-0002tU-Rs
+ for qemu-riscv@nongnu.org; Tue, 26 Sep 2023 14:31:24 -0400
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qlCAs-0000vX-7n
- for qemu-riscv@nongnu.org; Tue, 26 Sep 2023 13:48:43 -0400
-Received: by mail-vk1-xa2f.google.com with SMTP id
- 71dfb90a1353d-495c9eb8911so3433385e0c.2
- for <qemu-riscv@nongnu.org>; Tue, 26 Sep 2023 10:48:41 -0700 (PDT)
+ id 1qlCqB-0003vr-2I
+ for qemu-riscv@nongnu.org; Tue, 26 Sep 2023 14:31:24 -0400
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-1c1e3a4a06fso66417575ad.3
+ for <qemu-riscv@nongnu.org>; Tue, 26 Sep 2023 11:31:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1695750520; x=1696355320; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Pvi4I09t+o9jEwk0h3e6se7nQVKAKaEgqHeIGnrQVEo=;
- b=UDNHLM+JmyfScUfCLdPwhmax7mbvSJVgsXV3J7ARODdaMJ8yopuO4vuF5R8+yGbwEz
- UKAYl/0EE+eWCRZBnNkeUatRWZQ7yfk9lV3sjCH59xaM8h9QRHPwr3EtN/ylslTcS8kJ
- 00sTRu3Qgaws+kVJWfnF3xDWADeuFd9g98QTkmaTa5Hwb6kM5kmdfIZi22ImkR//fjFX
- pTXiSKLqBx42vhM8gsBhIN7MgsAV1r3cBegK3ZZmBjKlXFPaakRvXeYetkGX+VNm8yVf
- lo3pwmHMgNlhnKx987oqvXYSfwppL8TER4tNXE8MG24QyMyL/iMMG3MeD8ZBY/EuYa6o
- ricg==
+ d=ventanamicro.com; s=google; t=1695753081; x=1696357881; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=aXCHNDVDepsxqJNyAcCCDvKoiDps3kH2QRPqtAc07a0=;
+ b=OMheRVuLk7Dgi4ismCXyaSFKhbm0OcPhxQuheJqRfRUffvSAwBI90LYpmNyjs42aEF
+ RJbxByDHgD+n/hL6RosDMiy9YDlqCQr/67zSadelSZDOGM1U5WgVXr36xs1RZvrXNIqY
+ /f1MX8LqMtlxAxg/r37LwASZtvSHgcmFEHqUQY6G7qyxcjUs+8LPyZd37Q3F115gFZPs
+ aIohnXl6y3EYRfoWKbF65actQckq9PHwdoIp/H0ml1ga1KL/DAvgkz9kTUEDgKSGnftA
+ pmi+JVr0l3VaMhMPa1nK8MsUoFYlLtFImVjDb6nQK8u45zBugDav209R2HfeClLrIKYf
+ sdaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695750520; x=1696355320;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Pvi4I09t+o9jEwk0h3e6se7nQVKAKaEgqHeIGnrQVEo=;
- b=a/hTkR1C61OLP60ZBqr+egFCIv1PSnaos0jXmfclis13BuTO/DgdwOdiOd9vngYI3J
- cA8FLE8XUvs8niXyFnDsCXKSd7Y6HA+XtVwYd8eSoo/w08/8/9Wt//A7dvh3WijQ1BUJ
- HV/ulArMYrDyoUBk4w2LMUfw758VLjgTkQI6yWLOm+FUd8pYa0WNQRHsHk1t+RJOeU25
- qq4GvFE8uCqbrxREgo156Wk86rQGMWwhipGDuR5KGN80ijbD7RUJx1oEyYCHfSjr1yCP
- d7XwPZnkTmcQyksGBOB+f3foeAZS8onjm2bo8QhXPutKy1VpAA3ymBBCv9hnzJFDO3GW
- A92g==
-X-Gm-Message-State: AOJu0YynnBbzcUHIkkACcb0PlOngsajEC1qBVeMOxmlp5SJAsylvPN+d
- prEsn777igdJ69SBsmZLdOAVZA==
-X-Google-Smtp-Source: AGHT+IEAZ/Zc/6YVPwFGv2i65nOfSC5ZwqmsQ5AkNm2hhCrfe6bGrUrkQvqwNm+ruVO+Y/MC70rLLQ==
-X-Received: by 2002:a1f:4cc6:0:b0:495:cace:d59c with SMTP id
- z189-20020a1f4cc6000000b00495caced59cmr6923419vka.0.1695750520330; 
- Tue, 26 Sep 2023 10:48:40 -0700 (PDT)
-Received: from [192.168.68.107] ([177.94.42.59])
- by smtp.gmail.com with ESMTPSA id
- m18-20020aa78a12000000b0068a2d78890csm10237523pfa.68.2023.09.26.10.48.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 26 Sep 2023 10:48:39 -0700 (PDT)
-Message-ID: <b8f80cf3-fcc6-c4b4-7603-592162a09710@ventanamicro.com>
-Date: Tue, 26 Sep 2023 14:48:36 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [PATCH 0/8] riscv: query-cpu-model-expansion API
+ d=1e100.net; s=20230601; t=1695753081; x=1696357881;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=aXCHNDVDepsxqJNyAcCCDvKoiDps3kH2QRPqtAc07a0=;
+ b=QliQ2Fvn71qW9txyqSB3hGEgwtOkB13KAtfU9j2Bo28FFZ3aOw0vRzMrR/vPROtgxC
+ rwBleJdrZbfhGl7kaM3bjnsvmwe+HU3FGGOrOf2hgc6mamvng9Hrk04qwTZzxB92a+P2
+ 0CdG2BNFbjmrFxqabJpiPkuTR5vrLkvXcz5CJlnrmyFBeLXguJWJR31SXU+lrCAYJBYA
+ 6+TYdcvLO/amRKYITl6kq2ohn6dZHQByHAvfGGRu2n9wXkB7LSreqOX6E1JbdMD7/ljI
+ 0vz53EzGCF755qMc+5VLLmGHn29tUkZWvxyON6nLPI00l7p9hqFO5fGm3LU6blN/ndqJ
+ S5LA==
+X-Gm-Message-State: AOJu0YzUNPWudJwGIGk8ws1uPZyu1etEpUY2QouuL9LtoVR7SSfyphkm
+ HmVauRYhzw4vM7WodBx5yiW0/A==
+X-Google-Smtp-Source: AGHT+IHPse/dx31nmYQOasFDWMBjIHr7iqdtZ9AIO1pYTZ53Eh9hn1H/pwHJMLu53YpM8dSYOx3Daw==
+X-Received: by 2002:a17:902:6b44:b0:1c5:bea4:8537 with SMTP id
+ g4-20020a1709026b4400b001c5bea48537mr7305828plt.15.1695753081506; 
+ Tue, 26 Sep 2023 11:31:21 -0700 (PDT)
+Received: from grind.. ([177.94.42.59]) by smtp.gmail.com with ESMTPSA id
+ u6-20020a170902b28600b001c61acd5bd2sm4715800plr.112.2023.09.26.11.31.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 26 Sep 2023 11:31:21 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
-References: <20230920213743.716265-1-dbarboza@ventanamicro.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230920213743.716265-1-dbarboza@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2f;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-vk1-xa2f.google.com
-X-Spam_score_int: -35
-X-Spam_score: -3.6
-X-Spam_bar: ---
-X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.473,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH 2/2] target/riscv/tcg-cpu.c: add extension properties for all
+ cpus
+Date: Tue, 26 Sep 2023 15:31:09 -0300
+Message-ID: <20230926183109.165878-3-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20230926183109.165878-1-dbarboza@ventanamicro.com>
+References: <20230926183109.165878-1-dbarboza@ventanamicro.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x631.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,91 +95,184 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-SGksDQoNCkknbGwgc3BsaXQgcGF0Y2hlcyAxIGFuZCAyIGFuZCBzZW5kIHRob3NlIHN0YW5k
-YWxvbmUuIEZpcnN0IGJlY2F1c2UgdGhleQ0KY2FuIHN0YW5kIG9uIGl0cyBvd24uIFNlY29u
-ZCBiZWNhdXNlIHBhdGNoIDIgaW4gcGFydGljdWxhciBpcyBnb2luZyB0byBiZQ0KYSBwcmVy
-ZXF1aXNpdGUgZm9yIHRoZSBwcm9maWxlIHN1cHBvcnQgd29yay4NCg0KDQpUaGFua3MsDQoN
-CkRhbmllbA0KDQoNCk9uIDkvMjAvMjMgMTg6MzcsIERhbmllbCBIZW5yaXF1ZSBCYXJib3ph
-IHdyb3RlOg0KPiBCYXNlZC1vbjogMjAyMzA5MjAxMTIwMjAuNjUxMDA2LTEtZGJhcmJvemFA
-dmVudGFuYW1pY3JvLmNvbQ0KPiAoIltQQVRDSCB2MyAwMC8xOV0gcmlzY3Y6IHNwbGl0IFRD
-Ry9LVk0gYWNjZWxlcmF0b3JzIGZyb20gY3B1LmMiKQ0KPiANCj4gSGksDQo+IA0KPiBUaGUg
-cGFyZW50IHNlcmllcyBpcyBpbiBhIG1vcmUgc3RhYmxlIHN0YXRlIHNvIEkgZGVjaWRlZCB0
-byBnbyBhaGVhZA0KPiBhbmQgcG9zdCB0aGlzIHdvcmsuDQo+IA0KPiBUaGlzIHNlcmllcyBp
-bXBsZW1lbnRzIHF1ZXJ5LWNwdS1tb2RlbC1leHBhbnNpb24gZm9yIFJJU0MtVi4gVGhlDQo+
-IGltcGxlbWVudGF0aW9uIHdhcyBiYXNlZCBvbiB0aGUgQVJNIHZlcnNpb24gb2YgdGhlIHNh
-bWUgQVBJIGluDQo+IHRhcmdldC9hcm0vYXJtLXFtcC1jbWRzLmMuDQo+IA0KPiBBIGNvdXBs
-ZSBvZiBjaGFuZ2VzIHdlcmUgbWFkZSBpbiB0aGUgZmlyc3QgMyBwYXRjaGVzLiBUaGUgbW9z
-dCBpbXBhY3RmdWwNCj4gaXMgaW4gcGF0Y2ggMiwgd2hlcmUgd2UncmUgbm93IGV4cG9zaW5n
-IGV4dGVuc2lvbiBwcm9wZXJ0aWVzIGZvciB2ZW5kb3INCj4gQ1BVcy4gVGhpcyB3YXMgZG9u
-ZSB0byBhbGxvdyB0aGUgQVBJIHRvIHJldHJpZXZlIHRoZSBleHRlbnNpb24gc3RhdGUgZm9y
-DQo+IHRob3NlIENQVXMsIHdoaWNoIHdlcmUgb3RoZXJ3aXNlIGhpZGRlbiBpbnNpZGUgY3B1
-LT5jZmcuIFRoZSByZXN1bHQgaXMNCj4gdGhhdCB1c2VycyB3aWxsIGhhdmUgYSBsaXR0bGUg
-bW9yZSBwb3dlciBiZWNhdXNlIHdlJ3JlIG5vdyBhbGxvd2luZw0KPiB2ZW5kb3IgQ1BVIGV4
-dGVuc2lvbnMgdG8gYmUgZGlzYWJsZWQuIEVuYWJsaW5nIGV4dGVuc2lvbnMgZm9yIHRob3Nl
-IENQVXMNCj4gaXMgc3RpbGwgZm9yYmlkZGVuLiBQYXRjaCAyIGNvbW1pdCBtc2cgZ2l2ZXMg
-bW9yZSBkZXRhaWxzIG9uIHdoYXQgaXMgbm93DQo+IHBvc3NpYmxlIHRvIGRvLg0KPiANCj4g
-VGhlIGZpcnN0IDMgcGF0Y2hlcyBjYW4gYmUgcHVzaGVkL21lcmdlZCBzZXBhcmF0ZWx5IGZy
-b20gdGhlIEFQSSBzaW5jZQ0KPiB0aGV5IGNhbiBzdGFuZCBvbiB0aGVpciBvd24uDQo+IA0K
-PiBBIHNtYWxsIHR3ZWFrIGluIHRoZSBleHRlbnNpb24gdmFsaWRhdGlvbiBpbiB0aGUgVENH
-IGRyaXZlciB3YXMgYWxzbw0KPiBuZWVkZWQuIFdlJ3JlIG5vdyBjZW50cmFsaXppbmcgYWxs
-IGV4dGVuc2lvbiB2YWxpZGF0aW9uIGluDQo+IGZpbmFsaXplX2ZlYXR1cmVzKCksIGFuZCBl
-eHBvcnRpbmcgZmluYWxpemVfZmVhdHVyZXMoKSB0byBiZSB1c2FibGUgYnkNCj4gdGhlIG5l
-dyBBUEkuIFRoaXMgd2lsbCBhbGxvdyB1cyB0byB2YWxpZGF0ZSBtb2RlbCBwcm9wZXJ0aWVz
-IGFuZCByZXBvcnQNCj4gYmFjayBpZiB0aGUgZGVzaXJlZCBtb2RlbCBpcyB2YWxpZCBvciBu
-b3QuDQo+IA0KPiBUaGlzIHNlcmllcyBjYW4gYmUgdGVzdGVkIGRpcmVjdGx5IHVzaW5nIHRo
-aXMgYnJhbmNoOg0KPiANCj4gaHR0cHM6Ly9naXRsYWIuY29tL2RhbmllbGhiL3FlbXUvLS90
-cmVlL3FtcC1jcHUtZXhwYW5zaW9uX3YxDQo+IA0KPiANCj4gSGVyZSdzIGFuIHVzYWdlIGV4
-YW1wbGUuIExhdW5jaCBRRU1VIHdpdGggIi1TIiB0byBiZSBhYmxlIHRvIGlzc3VlIFFNUA0K
-PiBxdWVyeSBjb21tYW5kcyBiZWZvcmUgdGhlIG1hY2hpbmUgc3RhcnRzOg0KPiANCj4gJCAu
-L2J1aWxkL3FlbXUtc3lzdGVtLXJpc2N2NjQgLVMgLU0gdmlydCAtZGlzcGxheSBub25lIC1x
-bXAgIHRjcDpsb2NhbGhvc3Q6MTIzNCxzZXJ2ZXIsd2FpdD1vZmYNCj4gDQo+IFRoZW4gdXNl
-IFFNUCB0byBhY2Nlc3MgdGhlIEFQSToNCj4gDQo+ICQgLi9zY3JpcHRzL3FtcC9xbXAtc2hl
-bGwgbG9jYWxob3N0OjEyMzQNCj4gV2VsY29tZSB0byB0aGUgUU1QIGxvdy1sZXZlbCBzaGVs
-bCENCj4gQ29ubmVjdGVkIHRvIFFFTVUgOC4xLjUwDQo+IA0KPiAoUUVNVSkgIHF1ZXJ5LWNw
-dS1tb2RlbC1leHBhbnNpb24gdHlwZT1mdWxsIG1vZGVsPXsibmFtZSI6InJ2NjQifQ0KPiB7
-InJldHVybiI6IHsibW9kZWwiOiB7Im5hbWUiOiAicnY2NCIsICJwcm9wcyI6IHsiemljb25k
-IjogZmFsc2UsICJ4LXp2ZmgiOiBmYWxzZSwgIm1tdSI6IHRydWUsICJ4LXp2ZmJmd21hIjog
-ZmFsc2UsICJ4LXp2ZmJmbWluIjogZmFsc2UsICJ4dGhlYWRicyI6IGZhbHNlLCAieHRoZWFk
-YmIiOiBmYWxzZSwgInh0aGVhZGJhIjogZmFsc2UsICJ4dGhlYWRtZW1pZHgiOiBmYWxzZSwg
-InNtc3RhdGVlbiI6IGZhbHNlLCAiemZpbngiOiBmYWxzZSwgIlp2ZTY0ZiI6IGZhbHNlLCAi
-WnZlMzJmIjogZmFsc2UsICJ4LXp2ZmhtaW4iOiBmYWxzZSwgInh2ZW50YW5hY29uZG9wcyI6
-IGZhbHNlLCAieHRoZWFkY29uZG1vdiI6IGZhbHNlLCAic3ZwYm10IjogZmFsc2UsICJ6YnMi
-OiB0cnVlLCAiemJjIjogdHJ1ZSwgInpiYiI6IHRydWUsICJ6YmEiOiB0cnVlLCAiemljYm96
-IjogdHJ1ZSwgInh0aGVhZG1hYyI6IGZhbHNlLCAiWmZoIjogZmFsc2UsICJaZmEiOiB0cnVl
-LCAiemJreCI6IGZhbHNlLCAiemJrYyI6IGZhbHNlLCAiemJrYiI6IGZhbHNlLCAiWnZlNjRk
-IjogZmFsc2UsICJ4LXpmYmZtaW4iOiBmYWxzZSwgInprIjogZmFsc2UsICJ4LWVwbXAiOiBm
-YWxzZSwgInh0aGVhZG1lbXBhaXIiOiBmYWxzZSwgInprdCI6IGZhbHNlLCAiemtzIjogZmFs
-c2UsICJ6a3IiOiBmYWxzZSwgInprbiI6IGZhbHNlLCAiWmZobWluIjogZmFsc2UsICJ6a3No
-IjogZmFsc2UsICJ6a25oIjogZmFsc2UsICJ6a25lIjogZmFsc2UsICJ6a25kIjogZmFsc2Us
-ICJ6aGlueCI6IGZhbHNlLCAiWmljc3IiOiB0cnVlLCAic3Njb2ZwbWYiOiBmYWxzZSwgIlpp
-aGludG50bCI6IHRydWUsICJzc3RjIjogdHJ1ZSwgInh0aGVhZGNtbyI6IGZhbHNlLCAieC16
-dmJiIjogZmFsc2UsICJ6a3NlZCI6IGZhbHNlLCAieC16dmtuZWQiOiBmYWxzZSwgInh0aGVh
-ZHN5bmMiOiBmYWxzZSwgIngtenZrZyI6IGZhbHNlLCAiemhpbnhtaW4iOiBmYWxzZSwgInN2
-YWR1IjogdHJ1ZSwgInh0aGVhZGZtdiI6IGZhbHNlLCAieC16dmtzZWQiOiBmYWxzZSwgInN2
-bmFwb3QiOiBmYWxzZSwgInBtcCI6IHRydWUsICJ4LXp2a25oYiI6IGZhbHNlLCAieC16dmtu
-aGEiOiBmYWxzZSwgInh0aGVhZGZtZW1pZHgiOiBmYWxzZSwgIngtenZrc2giOiBmYWxzZSwg
-InpkaW54IjogZmFsc2UsICJ6aWNib20iOiB0cnVlLCAiWmloaW50cGF1c2UiOiB0cnVlLCAi
-c3ZpbnZhbCI6IGZhbHNlLCAiemNmIjogZmFsc2UsICJ6Y2UiOiBmYWxzZSwgInpjZCI6IGZh
-bHNlLCAiemNiIjogZmFsc2UsICJ6Y2EiOiBmYWxzZSwgIngtc3NhaWEiOiBmYWxzZSwgIngt
-c21haWEiOiBmYWxzZSwgInptbXVsIjogZmFsc2UsICJ4LXp2YmMiOiBmYWxzZSwgIlppZmVu
-Y2VpIjogdHJ1ZSwgInpjbXQiOiBmYWxzZSwgInpjbXAiOiBmYWxzZSwgIlphd3JzIjogdHJ1
-ZX19fX0NCj4gDQo+IA0KPiANCj4gRGFuaWVsIEhlbnJpcXVlIEJhcmJvemEgKDgpOg0KPiAg
-ICB0YXJnZXQvcmlzY3Y6IGFkZCByaXNjdl9jcHVfZ2V0X25hbWUoKQ0KPiAgICB0YXJnZXQv
-cmlzY3YvdGNnLWNwdS5jOiBhZGQgZXh0ZW5zaW9uIHByb3BlcnRpZXMgZm9yIGFsbCBjcHVz
-DQo+ICAgIHRhcmdldC9yaXNjdi9rdm0va3ZtLWNwdS5jOiBhZGQgbWlzc2luZyBwcm9wZXJ0
-eSBnZXR0ZXJzKCkNCj4gICAgcWFwaSxyaXNjLXY6IGFkZCBxdWVyeS1jcHUtbW9kZWwtZXhw
-YW5zaW9uDQo+ICAgIHRhcmdldC9yaXNjdi90Y2c6IGFkZCB0Y2dfY3B1X2ZpbmFsaXplX2Zl
-YXR1cmVzKCkNCj4gICAgdGFyZ2V0L3Jpc2N2OiBoYW5kbGUgY3VzdG9tIHByb3BzIGluIHFt
-cF9xdWVyeV9jcHVfbW9kZWxfZXhwYW5zaW9uDQo+ICAgIHRhcmdldC9yaXNjdjogYWRkIHJp
-c2N2X2NwdV9hY2NlbGVyYXRvcl9jb21wYXRpYmxlKCkNCj4gICAgdGFyZ2V0L3Jpc2N2L3Jp
-c2N2LXFtcC1jbWRzLmM6IGNoZWNrIENQVSBhY2NlbCBpbg0KPiAgICAgIHF1ZXJ5LWNwdS1t
-b2RlbC1leHBhbnNpb24NCj4gDQo+ICAgcWFwaS9tYWNoaW5lLXRhcmdldC5qc29uICAgICAg
-fCAgIDYgKy0NCj4gICB0YXJnZXQvcmlzY3YvY3B1LmMgICAgICAgICAgICB8ICAzOCArKysr
-KysrLQ0KPiAgIHRhcmdldC9yaXNjdi9jcHUuaCAgICAgICAgICAgIHwgICAzICsNCj4gICB0
-YXJnZXQvcmlzY3Yva3ZtL2t2bS1jcHUuYyAgICB8ICA0MCArKysrKysrKy0NCj4gICB0YXJn
-ZXQvcmlzY3YvcmlzY3YtcW1wLWNtZHMuYyB8IDE2MCArKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrDQo+ICAgdGFyZ2V0L3Jpc2N2L3RjZy90Y2ctY3B1LmMgICAgfCAxMjIg
-KysrKysrKysrKysrKysrKysrLS0tLS0tLS0NCj4gICB0YXJnZXQvcmlzY3YvdGNnL3RjZy1j
-cHUuaCAgICB8ICAgMiArDQo+ICAgNyBmaWxlcyBjaGFuZ2VkLCAzMjcgaW5zZXJ0aW9ucygr
-KSwgNDQgZGVsZXRpb25zKC0pDQo+IA0K
+At this moment we do not expose extension properties for vendor CPUs
+because that would allow users to change them via command line. The
+drawback is that if we were to add an API that shows all CPU properties,
+e.g. qmp-query-cpu-model-expansion, we won't be able to show extensions
+state of vendor CPUs.
+
+We have the required machinery to create extension properties for vendor
+CPUs while not allowing users to enable extensions. Disabling existing
+extensions is allowed since it can be useful for debugging.
+
+Change the set() callback cpu_set_multi_ext_cfg() to allow enabling
+extensions only for generic CPUs. In cpu_add_multi_ext_prop() let's not
+set the default values for the properties if we're not dealing with
+generic CPUs, otherwise the values set in cpu_init() of vendor CPUs will
+be overwritten. And finally, in tcg_cpu_instance_init(), add cpu user
+properties for all CPUs.
+
+For the veyron-v1 CPU, we're now able to disable existing extensions
+like smstateen:
+
+$ ./build/qemu-system-riscv64 --nographic -M virt \
+    -cpu veyron-v1,smstateen=false
+
+But setting extensions that the CPU didn't set during cpu_init(), like
+V, is not allowed:
+
+$ ./build/qemu-system-riscv64 --nographic -M virt \
+    -cpu veyron-v1,v=true
+qemu-system-riscv64: can't apply global veyron-v1-riscv-cpu.v=true:
+  'veyron-v1' CPU does not allow enabling extensions
+
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ target/riscv/tcg/tcg-cpu.c | 64 +++++++++++++++++++++++++++++---------
+ 1 file changed, 50 insertions(+), 14 deletions(-)
+
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index f31aa9bcc4..a90ee63b06 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -549,6 +549,11 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+     riscv_cpu_disable_priv_spec_isa_exts(cpu);
+ }
+ 
++static bool riscv_cpu_is_generic(Object *cpu_obj)
++{
++    return object_dynamic_cast(cpu_obj, TYPE_RISCV_DYNAMIC_CPU) != NULL;
++}
++
+ /*
+  * We'll get here via the following path:
+  *
+@@ -632,13 +637,27 @@ static void cpu_set_misa_ext_cfg(Object *obj, Visitor *v, const char *name,
+     target_ulong misa_bit = misa_ext_cfg->misa_bit;
+     RISCVCPU *cpu = RISCV_CPU(obj);
+     CPURISCVState *env = &cpu->env;
+-    bool value;
++    bool generic_cpu = riscv_cpu_is_generic(obj);
++    bool prev_val, value;
+ 
+     if (!visit_type_bool(v, name, &value, errp)) {
+         return;
+     }
+ 
++    prev_val = env->misa_ext & misa_bit;
++
++    if (value == prev_val) {
++        return;
++    }
++
+     if (value) {
++        if (!generic_cpu) {
++            g_autofree char *cpuname = riscv_cpu_get_name(cpu);
++            error_setg(errp, "'%s' CPU does not allow enabling extensions",
++                       cpuname);
++            return;
++        }
++
+         env->misa_ext |= misa_bit;
+         env->misa_ext_mask |= misa_bit;
+     } else {
+@@ -688,6 +707,7 @@ static const RISCVCPUMisaExtConfig misa_ext_cfgs[] = {
+  */
+ static void riscv_cpu_add_misa_properties(Object *cpu_obj)
+ {
++    bool use_def_vals = riscv_cpu_is_generic(cpu_obj);
+     int i;
+ 
+     for (i = 0; i < ARRAY_SIZE(misa_ext_cfgs); i++) {
+@@ -706,7 +726,9 @@ static void riscv_cpu_add_misa_properties(Object *cpu_obj)
+                             cpu_set_misa_ext_cfg,
+                             NULL, (void *)misa_cfg);
+         object_property_set_description(cpu_obj, name, desc);
+-        object_property_set_bool(cpu_obj, name, misa_cfg->enabled, NULL);
++        if (use_def_vals) {
++            object_property_set_bool(cpu_obj, name, misa_cfg->enabled, NULL);
++        }
+     }
+ }
+ 
+@@ -714,17 +736,32 @@ static void cpu_set_multi_ext_cfg(Object *obj, Visitor *v, const char *name,
+                                   void *opaque, Error **errp)
+ {
+     const RISCVCPUMultiExtConfig *multi_ext_cfg = opaque;
+-    bool value;
++    RISCVCPU *cpu = RISCV_CPU(obj);
++    bool generic_cpu = riscv_cpu_is_generic(obj);
++    bool prev_val, value;
+ 
+     if (!visit_type_bool(v, name, &value, errp)) {
+         return;
+     }
+ 
+-    isa_ext_update_enabled(RISCV_CPU(obj), multi_ext_cfg->offset, value);
+-
+     g_hash_table_insert(multi_ext_user_opts,
+                         GUINT_TO_POINTER(multi_ext_cfg->offset),
+                         (gpointer)value);
++
++    prev_val = isa_ext_is_enabled(cpu, multi_ext_cfg->offset);
++
++    if (value == prev_val) {
++        return;
++    }
++
++    if (value && !generic_cpu) {
++        g_autofree char *cpuname = riscv_cpu_get_name(cpu);
++        error_setg(errp, "'%s' CPU does not allow enabling extensions",
++                   cpuname);
++        return;
++    }
++
++    isa_ext_update_enabled(cpu, multi_ext_cfg->offset, value);
+ }
+ 
+ static void cpu_get_multi_ext_cfg(Object *obj, Visitor *v, const char *name,
+@@ -739,11 +776,17 @@ static void cpu_get_multi_ext_cfg(Object *obj, Visitor *v, const char *name,
+ static void cpu_add_multi_ext_prop(Object *cpu_obj,
+                                    const RISCVCPUMultiExtConfig *multi_cfg)
+ {
++    bool generic_cpu = riscv_cpu_is_generic(cpu_obj);
++
+     object_property_add(cpu_obj, multi_cfg->name, "bool",
+                         cpu_get_multi_ext_cfg,
+                         cpu_set_multi_ext_cfg,
+                         NULL, (void *)multi_cfg);
+ 
++    if (!generic_cpu) {
++        return;
++    }
++
+     /*
+      * Set def val directly instead of using
+      * object_property_set_bool() to save the set()
+@@ -828,20 +871,13 @@ static bool riscv_cpu_has_max_extensions(Object *cpu_obj)
+     return object_dynamic_cast(cpu_obj, TYPE_RISCV_CPU_MAX) != NULL;
+ }
+ 
+-static bool riscv_cpu_has_user_properties(Object *cpu_obj)
+-{
+-    return object_dynamic_cast(cpu_obj, TYPE_RISCV_DYNAMIC_CPU) != NULL;
+-}
+-
+ static void tcg_cpu_instance_init(CPUState *cs)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     Object *obj = OBJECT(cpu);
+ 
+-    if (riscv_cpu_has_user_properties(obj)) {
+-        multi_ext_user_opts = g_hash_table_new(NULL, g_direct_equal);
+-        riscv_cpu_add_user_properties(obj);
+-    }
++    multi_ext_user_opts = g_hash_table_new(NULL, g_direct_equal);
++    riscv_cpu_add_user_properties(obj);
+ 
+     if (riscv_cpu_has_max_extensions(obj)) {
+         riscv_init_max_cpu_extensions(obj);
+-- 
+2.41.0
+
 
