@@ -4,70 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5DE7E8180F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Sep 2023 01:37:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA5CCE8180F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Sep 2023 01:39:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qkx11-0003Em-JD; Mon, 25 Sep 2023 21:37:31 -0400
+	id 1qkx34-0005Ip-M5; Mon, 25 Sep 2023 21:39:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qkx0z-0003E7-Pi; Mon, 25 Sep 2023 21:37:29 -0400
-Received: from mail-vk1-xa34.google.com ([2607:f8b0:4864:20::a34])
+ id 1qkx33-0005IM-CD; Mon, 25 Sep 2023 21:39:37 -0400
+Received: from mail-vs1-xe2d.google.com ([2607:f8b0:4864:20::e2d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qkx0w-0002IJ-Q1; Mon, 25 Sep 2023 21:37:29 -0400
-Received: by mail-vk1-xa34.google.com with SMTP id
- 71dfb90a1353d-496d3e18f19so2821746e0c.2; 
- Mon, 25 Sep 2023 18:37:25 -0700 (PDT)
+ id 1qkx31-0002fy-Ok; Mon, 25 Sep 2023 21:39:37 -0400
+Received: by mail-vs1-xe2d.google.com with SMTP id
+ ada2fe7eead31-44ee3a547adso3181901137.2; 
+ Mon, 25 Sep 2023 18:39:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695692245; x=1696297045; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1695692374; x=1696297174; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zZ331SJE+QcYT4vlmOAbC+DmBvFavHFPf4g80xDNcww=;
- b=ghj2KIcSzStmGiUTzsbDZIJ9wpTx51oGbekZsFZt4offGmRp7UikAHWlZS3nHUxgWa
- y40/xPGWZnQTdsIHzlMz84kQOSHOfIbvbgTJTrjpcjKjiEKh2xHs3g3c3X81Tap2Xkn2
- 1ixYZXgKNjkjkPme+vd+49n0LCNvOT5GPT31M+JmJzjbMnB6RY4z4ln03HvrOxv6TbEO
- 8KbFnDKfkMqcTW1eunSa8WHGTwRsGGyKDcq0GH86xWILYX3LGWUKPp2+bGz+R734Er/2
- VbgV9P47T52ThXv9QF8kItWUgcPwVVpH6P0NIOYM0sH8y/1RdVY69/KGt3l+T4Mr8pz7
- mZFw==
+ bh=Edih9qW7HETeoFZkZ9/w7uCjY8X16grU3S/ONqMsy64=;
+ b=Cu7T1MeMfJXvcVCQjN7ztMdUH687TXlqplWZ5+LMtZJ6cfFbuOYURaeuIhXaqALciN
+ tq898O6CQuonwrK5lVaLRg6dfzaJHNUijE6ryRVUOJ93fIkwK5R9ezfEOBc3+f164kFE
+ w/hp5hscW0hVd05AVnMFVNCJOie8UuvX13s6p8D49MQXA6K49YmsG175xW+fbzFY2yc9
+ bDibBG7KBqV0S205TBBDDg+ke3Ycuosm95YTMcTB+A31AvXvEl2XQSA2XbfZvs8icotV
+ A/4R7DvLnivlsz1o+7DdaBf9KMf+zG4NTmu4jX90Mq0d5Qv9MI/xISJs88B0d9ciAfCw
+ 5B9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695692245; x=1696297045;
+ d=1e100.net; s=20230601; t=1695692374; x=1696297174;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zZ331SJE+QcYT4vlmOAbC+DmBvFavHFPf4g80xDNcww=;
- b=gaQP2pi56Uu/dJyhFGU0WoGoP7Mq8ABoGIbKKl9umKWM6MSKUdM02PNTnwcJ6KVOAE
- Pb2ap6lVGk08QkINoUWgfsKxa3PXG/hbRa+ONLksNNh57mLJ6u9KKPI4YIRDjeUJ3vTk
- Bo2vnV3d2Xv9/U86rxi6SXDjN5OOr6xinltjx+JkPwCVdH+GM9VQmcbDsLANZO9loahs
- 3z6IbhQKMFYzZDEROLbBBx27CNRtTgFHVxM7rCSfCSiLPEoFZmQ76ZBiVpyRqkx1UvTM
- JipLLCd+GqglFXoZpMhSNkMz3VocC02o4Wnlho+Bxk3ejZYh6BAfKb7dOTBFP+ga7gc7
- VQdw==
-X-Gm-Message-State: AOJu0YyUhCxIPe/F4qm/v9E8y6dMOweN0gVqdXmDHnB1ej5bEX+pGnDj
- kmV2jpPLPH3Ao3qJS/JAhA+EYCnfPuQyI/6tGwQa5ea2gHE=
-X-Google-Smtp-Source: AGHT+IGSaygFK+IBnpkCXl3a/M8mZ1im7ov3hb4JtWdUvPDdEjVU8JvAg3f2urOPyZsMWE9r82SnZ/Lxk1Ly1SW/eqI=
-X-Received: by 2002:a1f:4dc3:0:b0:48f:dc94:1b37 with SMTP id
- a186-20020a1f4dc3000000b0048fdc941b37mr4399834vkb.5.1695692244656; Mon, 25
- Sep 2023 18:37:24 -0700 (PDT)
+ bh=Edih9qW7HETeoFZkZ9/w7uCjY8X16grU3S/ONqMsy64=;
+ b=Fj4KkpRM+Rc3CpvCLMH6PodFNfqvD024SHs11Ofn0iIH3vm8c53oVyTDhbpL8m7xS2
+ hZqRKYizIcH/OpuGhFMegPeDQEvOVifrr5xEedLxNwxDsA7zrqd5B+jlVkeKDsZZUaxa
+ WpBtyIwuDWkQ7zzI9Bzkkil+U+Zm47cPy+IzhDZD8POHvPbV7K2s3joyzm4BPyVdpd8c
+ 7naSB+iB5uwAdJHSCoUJcssLVmk1JnlTFXSiiuOUiX+klmKx1tiWBoqDN8Itkj51kj1Z
+ De9EEc0LsmIXRIKhdrGgMSUXYkKN2t4dqN4HzD2AdqtlfC+VA00zcsrPyYqVoaFeoplD
+ Y3aw==
+X-Gm-Message-State: AOJu0YzphNzUnEOd+IMDx6Tic0Pjpwa6mrYt6f/90Pdv2J/fLrJmljgO
+ y3vUCj4RYYA4paJwhuRq9a2sW9vf1GRwbyOOHr8=
+X-Google-Smtp-Source: AGHT+IHg0SqdmJ0sd4++JeCxb2Z7w/DsNg2ikDUMpzuNWewxGNxFpPfRtRhqUS4hd0ufORiLubA9jp5H7ew9Sa6c7PQ=
+X-Received: by 2002:a67:fa16:0:b0:452:cfeb:1607 with SMTP id
+ i22-20020a67fa16000000b00452cfeb1607mr6133975vsq.5.1695692374216; Mon, 25 Sep
+ 2023 18:39:34 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230925175709.35696-1-dbarboza@ventanamicro.com>
- <20230925175709.35696-3-dbarboza@ventanamicro.com>
-In-Reply-To: <20230925175709.35696-3-dbarboza@ventanamicro.com>
+In-Reply-To: <20230925175709.35696-1-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 26 Sep 2023 11:36:57 +1000
-Message-ID: <CAKmqyKMH5FVh6q8YjR+KKqfN0e94_FfYJHT48FoiuTzL7FH2GQ@mail.gmail.com>
-Subject: Re: [PATCH v4 02/19] target/riscv: move riscv_cpu_realize_tcg() to
- TCG::cpu_realizefn()
+Date: Tue, 26 Sep 2023 11:39:07 +1000
+Message-ID: <CAKmqyKMX61GOqy2SKhwPFnkiz2VWES519dAUwneNHWpn-8OhCw@mail.gmail.com>
+Subject: Re: [PATCH v4 00/19] riscv: split TCG/KVM accelerators from cpu.c
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, Andrew Jones <ajones@ventanamicro.com>
+ palmer@rivosinc.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a34;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2d;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2d.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -91,372 +89,72 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Sep 26, 2023 at 5:09=E2=80=AFAM Daniel Henrique Barboza
+On Tue, Sep 26, 2023 at 3:58=E2=80=AFAM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> riscv_cpu_realize_tcg() was added to allow TCG cpus to have a different
-> realize() path during the common riscv_cpu_realize(), making it a good
-> choice to start moving TCG exclusive code to tcg-cpu.c.
+> Hi,
 >
-> Rename it to tcg_cpu_realizefn() and assign it as a implementation of
-> accel::cpu_realizefn(). tcg_cpu_realizefn() will then be called during
-> riscv_cpu_realize() via cpu_exec_realizefn(). We'll use a similar
-> approach with KVM in the near future.
+> This new version has a simple copyright change in the tcg-cpu.c file,
+> patch 01, suggested by Alistair in v3. No other changes made.
 >
-> riscv_cpu_validate_set_extensions() is too big and with too many
-> dependencies to be moved in this same patch. We'll do that next.
+> All patches acked/reviewed.
 >
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> Changes from v3:
+> - patch 1:
+>   - use cpu.c copyright notice in tcg-cpu.c
+> - v3 link: https://lore.kernel.org/qemu-riscv/20230920112020.651006-1-dba=
+rboza@ventanamicro.com/
+>
+> Daniel Henrique Barboza (19):
+>   target/riscv: introduce TCG AccelCPUClass
+>   target/riscv: move riscv_cpu_realize_tcg() to TCG::cpu_realizefn()
+>   target/riscv: move riscv_cpu_validate_set_extensions() to tcg-cpu.c
+>   target/riscv: move riscv_tcg_ops to tcg-cpu.c
+>   target/riscv/cpu.c: add .instance_post_init()
+>   target/riscv: move 'host' CPU declaration to kvm.c
+>   target/riscv/cpu.c: mark extensions arrays as 'const'
+>   target/riscv: move riscv_cpu_add_kvm_properties() to kvm.c
+>   target/riscv: make riscv_add_satp_mode_properties() public
+>   target/riscv: remove kvm-stub.c
+>   target/riscv: introduce KVM AccelCPUClass
+>   target/riscv: move KVM only files to kvm subdir
+>   target/riscv/kvm: do not use riscv_cpu_add_misa_properties()
+>   target/riscv/cpu.c: export set_misa()
+>   target/riscv/tcg: introduce tcg_cpu_instance_init()
+>   target/riscv/cpu.c: make misa_ext_cfgs[] 'const'
+>   target/riscv/tcg: move riscv_cpu_add_misa_properties() to tcg-cpu.c
+>   target/riscv/cpu.c: export isa_edata_arr[]
+>   target/riscv/cpu: move priv spec functions to tcg-cpu.c
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
->  target/riscv/cpu.c         | 128 -----------------------------------
->  target/riscv/tcg/tcg-cpu.c | 133 +++++++++++++++++++++++++++++++++++++
->  2 files changed, 133 insertions(+), 128 deletions(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index e72c49c881..030629294f 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -23,9 +23,7 @@
->  #include "qemu/log.h"
->  #include "cpu.h"
->  #include "cpu_vendorid.h"
-> -#include "pmu.h"
->  #include "internals.h"
-> -#include "time_helper.h"
->  #include "exec/exec-all.h"
->  #include "qapi/error.h"
->  #include "qapi/visitor.h"
-> @@ -1064,29 +1062,6 @@ static void riscv_cpu_validate_v(CPURISCVState *en=
-v, RISCVCPUConfig *cfg,
->      }
->  }
+>  hw/intc/riscv_aplic.c                 |   2 +-
+>  hw/riscv/virt.c                       |   2 +-
+>  target/riscv/cpu.c                    | 988 ++------------------------
+>  target/riscv/cpu.h                    |  30 +-
+>  target/riscv/csr.c                    |   1 +
+>  target/riscv/kvm-stub.c               |  30 -
+>  target/riscv/{kvm.c =3D> kvm/kvm-cpu.c} | 120 +++-
+>  target/riscv/{ =3D> kvm}/kvm_riscv.h    |   4 -
+>  target/riscv/kvm/meson.build          |   1 +
+>  target/riscv/meson.build              |   4 +-
+>  target/riscv/tcg/meson.build          |   2 +
+>  target/riscv/tcg/tcg-cpu.c            | 883 +++++++++++++++++++++++
+>  target/riscv/tcg/tcg-cpu.h            |  27 +
+>  13 files changed, 1113 insertions(+), 981 deletions(-)
+>  delete mode 100644 target/riscv/kvm-stub.c
+>  rename target/riscv/{kvm.c =3D> kvm/kvm-cpu.c} (91%)
+>  rename target/riscv/{ =3D> kvm}/kvm_riscv.h (89%)
+>  create mode 100644 target/riscv/kvm/meson.build
+>  create mode 100644 target/riscv/tcg/meson.build
+>  create mode 100644 target/riscv/tcg/tcg-cpu.c
+>  create mode 100644 target/riscv/tcg/tcg-cpu.h
 >
-> -static void riscv_cpu_validate_priv_spec(RISCVCPU *cpu, Error **errp)
-> -{
-> -    CPURISCVState *env =3D &cpu->env;
-> -    int priv_version =3D -1;
-> -
-> -    if (cpu->cfg.priv_spec) {
-> -        if (!g_strcmp0(cpu->cfg.priv_spec, "v1.12.0")) {
-> -            priv_version =3D PRIV_VERSION_1_12_0;
-> -        } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.11.0")) {
-> -            priv_version =3D PRIV_VERSION_1_11_0;
-> -        } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.10.0")) {
-> -            priv_version =3D PRIV_VERSION_1_10_0;
-> -        } else {
-> -            error_setg(errp,
-> -                       "Unsupported privilege spec version '%s'",
-> -                       cpu->cfg.priv_spec);
-> -            return;
-> -        }
-> -
-> -        env->priv_ver =3D priv_version;
-> -    }
-> -}
-> -
->  static void riscv_cpu_disable_priv_spec_isa_exts(RISCVCPU *cpu)
->  {
->      CPURISCVState *env =3D &cpu->env;
-> @@ -1111,33 +1086,6 @@ static void riscv_cpu_disable_priv_spec_isa_exts(R=
-ISCVCPU *cpu)
->      }
->  }
->
-> -static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu, Error **errp)
-> -{
-> -    RISCVCPUClass *mcc =3D RISCV_CPU_GET_CLASS(cpu);
-> -    CPUClass *cc =3D CPU_CLASS(mcc);
-> -    CPURISCVState *env =3D &cpu->env;
-> -
-> -    /* Validate that MISA_MXL is set properly. */
-> -    switch (env->misa_mxl_max) {
-> -#ifdef TARGET_RISCV64
-> -    case MXL_RV64:
-> -    case MXL_RV128:
-> -        cc->gdb_core_xml_file =3D "riscv-64bit-cpu.xml";
-> -        break;
-> -#endif
-> -    case MXL_RV32:
-> -        cc->gdb_core_xml_file =3D "riscv-32bit-cpu.xml";
-> -        break;
-> -    default:
-> -        g_assert_not_reached();
-> -    }
-> -
-> -    if (env->misa_mxl_max !=3D env->misa_mxl) {
-> -        error_setg(errp, "misa_mxl_max must be equal to misa_mxl");
-> -        return;
-> -    }
-> -}
-> -
->  /*
->   * Check consistency between chosen extensions while setting
->   * cpu->cfg accordingly.
-> @@ -1511,74 +1459,6 @@ static void riscv_cpu_finalize_features(RISCVCPU *=
-cpu, Error **errp)
->  #endif
->  }
->
-> -static void riscv_cpu_validate_misa_priv(CPURISCVState *env, Error **err=
-p)
-> -{
-> -    if (riscv_has_ext(env, RVH) && env->priv_ver < PRIV_VERSION_1_12_0) =
-{
-> -        error_setg(errp, "H extension requires priv spec 1.12.0");
-> -        return;
-> -    }
-> -}
-> -
-> -static void riscv_cpu_realize_tcg(DeviceState *dev, Error **errp)
-> -{
-> -    RISCVCPU *cpu =3D RISCV_CPU(dev);
-> -    CPURISCVState *env =3D &cpu->env;
-> -    Error *local_err =3D NULL;
-> -
-> -    if (object_dynamic_cast(OBJECT(dev), TYPE_RISCV_CPU_HOST)) {
-> -        error_setg(errp, "'host' CPU is not compatible with TCG accelera=
-tion");
-> -        return;
-> -    }
-> -
-> -    riscv_cpu_validate_misa_mxl(cpu, &local_err);
-> -    if (local_err !=3D NULL) {
-> -        error_propagate(errp, local_err);
-> -        return;
-> -    }
-> -
-> -    riscv_cpu_validate_priv_spec(cpu, &local_err);
-> -    if (local_err !=3D NULL) {
-> -        error_propagate(errp, local_err);
-> -        return;
-> -    }
-> -
-> -    riscv_cpu_validate_misa_priv(env, &local_err);
-> -    if (local_err !=3D NULL) {
-> -        error_propagate(errp, local_err);
-> -        return;
-> -    }
-> -
-> -    if (cpu->cfg.epmp && !cpu->cfg.pmp) {
-> -        /*
-> -         * Enhanced PMP should only be available
-> -         * on harts with PMP support
-> -         */
-> -        error_setg(errp, "Invalid configuration: EPMP requires PMP suppo=
-rt");
-> -        return;
-> -    }
-> -
-> -    riscv_cpu_validate_set_extensions(cpu, &local_err);
-> -    if (local_err !=3D NULL) {
-> -        error_propagate(errp, local_err);
-> -        return;
-> -    }
-> -
-> -#ifndef CONFIG_USER_ONLY
-> -    CPU(dev)->tcg_cflags |=3D CF_PCREL;
-> -
-> -    if (cpu->cfg.ext_sstc) {
-> -        riscv_timer_init(cpu);
-> -    }
-> -
-> -    if (cpu->cfg.pmu_num) {
-> -        if (!riscv_pmu_init(cpu, cpu->cfg.pmu_num) && cpu->cfg.ext_sscof=
-pmf) {
-> -            cpu->pmu_timer =3D timer_new_ns(QEMU_CLOCK_VIRTUAL,
-> -                                          riscv_pmu_timer_cb, cpu);
-> -        }
-> -     }
-> -#endif
-> -}
-> -
->  static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->  {
->      CPUState *cs =3D CPU(dev);
-> @@ -1597,14 +1477,6 @@ static void riscv_cpu_realize(DeviceState *dev, Er=
-ror **errp)
->          return;
->      }
->
-> -    if (tcg_enabled()) {
-> -        riscv_cpu_realize_tcg(dev, &local_err);
-> -        if (local_err !=3D NULL) {
-> -            error_propagate(errp, local_err);
-> -            return;
-> -        }
-> -    }
-> -
->      riscv_cpu_finalize_features(cpu, &local_err);
->      if (local_err !=3D NULL) {
->          error_propagate(errp, local_err);
-> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> index 795a8f06b2..5904cf7354 100644
-> --- a/target/riscv/tcg/tcg-cpu.c
-> +++ b/target/riscv/tcg/tcg-cpu.c
-> @@ -18,10 +18,142 @@
->   */
->
->  #include "qemu/osdep.h"
-> +#include "exec/exec-all.h"
->  #include "cpu.h"
-> +#include "pmu.h"
-> +#include "time_helper.h"
-> +#include "qapi/error.h"
->  #include "qemu/accel.h"
->  #include "hw/core/accel-cpu.h"
->
-> +
-> +static void riscv_cpu_validate_misa_priv(CPURISCVState *env, Error **err=
-p)
-> +{
-> +    if (riscv_has_ext(env, RVH) && env->priv_ver < PRIV_VERSION_1_12_0) =
-{
-> +        error_setg(errp, "H extension requires priv spec 1.12.0");
-> +        return;
-> +    }
-> +}
-> +
-> +static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu, Error **errp)
-> +{
-> +    RISCVCPUClass *mcc =3D RISCV_CPU_GET_CLASS(cpu);
-> +    CPUClass *cc =3D CPU_CLASS(mcc);
-> +    CPURISCVState *env =3D &cpu->env;
-> +
-> +    /* Validate that MISA_MXL is set properly. */
-> +    switch (env->misa_mxl_max) {
-> +#ifdef TARGET_RISCV64
-> +    case MXL_RV64:
-> +    case MXL_RV128:
-> +        cc->gdb_core_xml_file =3D "riscv-64bit-cpu.xml";
-> +        break;
-> +#endif
-> +    case MXL_RV32:
-> +        cc->gdb_core_xml_file =3D "riscv-32bit-cpu.xml";
-> +        break;
-> +    default:
-> +        g_assert_not_reached();
-> +    }
-> +
-> +    if (env->misa_mxl_max !=3D env->misa_mxl) {
-> +        error_setg(errp, "misa_mxl_max must be equal to misa_mxl");
-> +        return;
-> +    }
-> +}
-> +
-> +static void riscv_cpu_validate_priv_spec(RISCVCPU *cpu, Error **errp)
-> +{
-> +    CPURISCVState *env =3D &cpu->env;
-> +    int priv_version =3D -1;
-> +
-> +    if (cpu->cfg.priv_spec) {
-> +        if (!g_strcmp0(cpu->cfg.priv_spec, "v1.12.0")) {
-> +            priv_version =3D PRIV_VERSION_1_12_0;
-> +        } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.11.0")) {
-> +            priv_version =3D PRIV_VERSION_1_11_0;
-> +        } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.10.0")) {
-> +            priv_version =3D PRIV_VERSION_1_10_0;
-> +        } else {
-> +            error_setg(errp,
-> +                       "Unsupported privilege spec version '%s'",
-> +                       cpu->cfg.priv_spec);
-> +            return;
-> +        }
-> +
-> +        env->priv_ver =3D priv_version;
-> +    }
-> +}
-> +
-> +/*
-> + * We'll get here via the following path:
-> + *
-> + * riscv_cpu_realize()
-> + *   -> cpu_exec_realizefn()
-> + *      -> tcg_cpu_realizefn() (via accel_cpu_realizefn())
-> + */
-> +static bool tcg_cpu_realizefn(CPUState *cs, Error **errp)
-> +{
-> +    RISCVCPU *cpu =3D RISCV_CPU(cs);
-> +    CPURISCVState *env =3D &cpu->env;
-> +    Error *local_err =3D NULL;
-> +
-> +    if (object_dynamic_cast(OBJECT(cpu), TYPE_RISCV_CPU_HOST)) {
-> +        error_setg(errp, "'host' CPU is not compatible with TCG accelera=
-tion");
-> +        return false;
-> +    }
-> +
-> +    riscv_cpu_validate_misa_mxl(cpu, &local_err);
-> +    if (local_err !=3D NULL) {
-> +        error_propagate(errp, local_err);
-> +        return false;
-> +    }
-> +
-> +    riscv_cpu_validate_priv_spec(cpu, &local_err);
-> +    if (local_err !=3D NULL) {
-> +        error_propagate(errp, local_err);
-> +        return false;
-> +    }
-> +
-> +    riscv_cpu_validate_misa_priv(env, &local_err);
-> +    if (local_err !=3D NULL) {
-> +        error_propagate(errp, local_err);
-> +        return false;
-> +    }
-> +
-> +    if (cpu->cfg.epmp && !cpu->cfg.pmp) {
-> +        /*
-> +         * Enhanced PMP should only be available
-> +         * on harts with PMP support
-> +         */
-> +        error_setg(errp, "Invalid configuration: EPMP requires PMP suppo=
-rt");
-> +        return false;
-> +    }
-> +
-> +    riscv_cpu_validate_set_extensions(cpu, &local_err);
-> +    if (local_err !=3D NULL) {
-> +        error_propagate(errp, local_err);
-> +        return false;
-> +    }
-> +
-> +#ifndef CONFIG_USER_ONLY
-> +    CPU(cs)->tcg_cflags |=3D CF_PCREL;
-> +
-> +    if (cpu->cfg.ext_sstc) {
-> +        riscv_timer_init(cpu);
-> +    }
-> +
-> +    if (cpu->cfg.pmu_num) {
-> +        if (!riscv_pmu_init(cpu, cpu->cfg.pmu_num) && cpu->cfg.ext_sscof=
-pmf) {
-> +            cpu->pmu_timer =3D timer_new_ns(QEMU_CLOCK_VIRTUAL,
-> +                                          riscv_pmu_timer_cb, cpu);
-> +        }
-> +     }
-> +#endif
-> +
-> +    return true;
-> +}
-> +
->  static void tcg_cpu_init_ops(AccelCPUClass *accel_cpu, CPUClass *cc)
->  {
->      /*
-> @@ -41,6 +173,7 @@ static void tcg_cpu_accel_class_init(ObjectClass *oc, =
-void *data)
->      AccelCPUClass *acc =3D ACCEL_CPU_CLASS(oc);
->
->      acc->cpu_class_init =3D tcg_cpu_class_init;
-> +    acc->cpu_realizefn =3D tcg_cpu_realizefn;
->  }
->
->  static const TypeInfo tcg_cpu_accel_type_info =3D {
 > --
 > 2.41.0
 >
