@@ -4,85 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ED7FE75451
-	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Oct 2023 11:53:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8F74E75452
+	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Oct 2023 12:26:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qndy7-0000Wi-TY; Tue, 03 Oct 2023 07:53:39 -0400
+	id 1qneTG-0004wT-KA; Tue, 03 Oct 2023 08:25:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qndy6-0000W3-G2
- for qemu-riscv@nongnu.org; Tue, 03 Oct 2023 07:53:38 -0400
-Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qneTF-0004vg-0N
+ for qemu-riscv@nongnu.org; Tue, 03 Oct 2023 08:25:49 -0400
+Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qndy4-0007lR-Qv
- for qemu-riscv@nongnu.org; Tue, 03 Oct 2023 07:53:38 -0400
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-405361bb9f7so7508745e9.2
- for <qemu-riscv@nongnu.org>; Tue, 03 Oct 2023 04:53:36 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qneTD-0006gd-8M
+ for qemu-riscv@nongnu.org; Tue, 03 Oct 2023 08:25:48 -0400
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-565334377d0so618632a12.2
+ for <qemu-riscv@nongnu.org>; Tue, 03 Oct 2023 05:25:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696334015; x=1696938815; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=EeVvwXrfxYvI/4qSiiegLJHCdhD76KziI3t7RkZApWI=;
- b=Aduh2A5msSlsNU9aVoUPDY+2sq2B8FJ1E7OW5gR7nuDgC124yQCoQRAn84x2ZNdJcC
- 9S6Xc2yTnIPsG939ZMKlFGi2GDMwX/apvUIc/D7rQ2R5LN/v8vf7bU4HnfxxNGAgBn2s
- 0FBdCPc+5D3qu+0IjT3Y05iiSpQi9yU2od5Gx/EfBvuyMy1vbNfiLJTxhUrVb27udjZi
- iBTm60N6xLYRtxxYOmOLKdZlBxgQziwD5UanpgHN7FCdSLHiKIYogpr9xBAr61YAMZ3d
- I9zGMZS/kqLJmimZYQx2hXltplrCUako3Xyf0sOLplwSZrB7TSORw/hmId/cm2Z4VpUS
- AQxg==
+ d=ventanamicro.com; s=google; t=1696335945; x=1696940745; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=bosaUuegrcxoWj3ggOi+Hiu7LSbWQp61k7fb4NEy06c=;
+ b=WXUJP3BdvVToreyykn03By9KND2MNpqGBfkjr1FMoc4+AGpI87+xU2AmeMA+XEO3mk
+ U574DHpvXiASrBi3cNRVKUpImdFWDDjZk2D4REOz+IvDNF27fd/jXI+XTxNzH5ulHbGK
+ yTZ1kESOFcOXFGVDFSN9fH5J5I4R9JzexvNEDbDDbgGqnAoLESyScbrznj29iuaOhAo+
+ d43Wikh6Ur4LSRskV1B9lTKFfPKnSSvi5k5M1C3u09nAn0pj7ran7QrYBew9fh78nYlj
+ Hf3kfRZGgGDu4wADOpdMhoHkXQRasl78MULg4UmmgPkSubd3XBizyBBF3dOK95ezgTn2
+ VhJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696334015; x=1696938815;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=EeVvwXrfxYvI/4qSiiegLJHCdhD76KziI3t7RkZApWI=;
- b=I9v3ZZX5eH8hBVqw/BSc9no/gCuYlfxJpAJu/uYqHHU1c6eRoBHOC9nrfcWG3/O6Dt
- IzOH+yVXMsBponxC+zi41QZit8SvTdU+Fdk/6FYsdrZ7Hu1GBrkJs654VDQyXnjNNM+f
- iGRRGMPTeoxxuiC3fm6SpBjjHPzzbWYiD6iTTB2yHoYKRo7YS8ebPmbu+eEv63QqrkQX
- m9ugeO8tIhhGbhfkCqbPMjpEF43D4zTVUFoVIvtVsbvRSRnKc7va2SGR0MtQZ6Zx1u1Z
- rey16L+0oKDlq0TXzhQ3gLOL7f2+nTBSl9+vF8BSPGVdn+y7lZ9v6fQvjAvGolpl8KfA
- xFFA==
-X-Gm-Message-State: AOJu0YwN40b2A95Tx/Y53t9LA/YwY7JKc3tSoDeSxMDkoLVhDyM+8ndn
- 0Oekz3Mex1Y3zrasYlIaVwmZQA==
-X-Google-Smtp-Source: AGHT+IHQp40VaVMij32qBMMaFPOFigpSBci+CbJReOUzjzhZAGvDIUXN8oZEXGjheWDzcsvDzv9/oQ==
-X-Received: by 2002:a7b:cd0a:0:b0:403:787:e878 with SMTP id
- f10-20020a7bcd0a000000b004030787e878mr12642960wmj.21.1696334015078; 
- Tue, 03 Oct 2023 04:53:35 -0700 (PDT)
-Received: from [192.168.69.115] (176-131-222-246.abo.bbox.fr.
- [176.131.222.246]) by smtp.gmail.com with ESMTPSA id
- z6-20020a1c4c06000000b003fe2a40d287sm1126369wmf.1.2023.10.03.04.53.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Oct 2023 04:53:34 -0700 (PDT)
-Message-ID: <f20c039c-64cd-8530-ef49-bfaa853adc4a@linaro.org>
-Date: Tue, 3 Oct 2023 13:53:32 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.15.1
-Subject: Re: [PATCH 1/2] target/riscv/kvm: improve 'init_multiext_cfg' error
- msg
-Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+ d=1e100.net; s=20230601; t=1696335945; x=1696940745;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bosaUuegrcxoWj3ggOi+Hiu7LSbWQp61k7fb4NEy06c=;
+ b=LtWZ8ifzK5pTdELEYjYeCB/n6hm6aafuZlTxicxVJkFhitZUbkyV8JmsGqLv4C/QQ7
+ W4rBG0bzWqJ6Ic6ln5Ir6Fx/mz+mEiWQNJ27szQ6/kMznfyHk2c4t/AghJ52Lc6P8GnT
+ +zRCzLCmXy4o/azFotZFHo3yHjtjMHwmQzkBNYaJo4Muk+46dD9nAD0a8JByzS7m4SHg
+ vXC1lMsYx9E5Mul6tJwMkjWZ3QJym8tf6Z+JZCl6u8nbAtHDven+FiPo+lduEwsEVg1e
+ 1sec3+ZQtXDpwNwWlYj809CcTThQ5O6nUkAdd9gnRKtbg7pAoeP6fqvXR0oah4FWQbCs
+ +keg==
+X-Gm-Message-State: AOJu0YwQJ7DObFvZGpLxTzZ0+XsbmhSGh1/XzsLV0NKp1LrTYORy1lw5
+ l7/E4USW0XVf9YqUikNhNQKGdQ==
+X-Google-Smtp-Source: AGHT+IGyfTxLPhcm6cR/3kJauEHWB2PFmnl82xFK9A9HF9G/uXgUSmXU7IpOr1+vJ4BVZQCqtLsd5g==
+X-Received: by 2002:a05:6a20:441c:b0:14d:16c:2d20 with SMTP id
+ ce28-20020a056a20441c00b0014d016c2d20mr17674942pzb.44.1696335945415; 
+ Tue, 03 Oct 2023 05:25:45 -0700 (PDT)
+Received: from grind.. ([177.94.15.124]) by smtp.gmail.com with ESMTPSA id
+ q8-20020a170902dac800b001c44c8d857esm1404450plx.120.2023.10.03.05.25.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 03 Oct 2023 05:25:44 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com, Markus Armbruster <armbru@redhat.com>
-References: <20231003113259.771539-1-dbarboza@ventanamicro.com>
- <20231003113259.771539-2-dbarboza@ventanamicro.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20231003113259.771539-2-dbarboza@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32b.google.com
-X-Spam_score_int: -31
-X-Spam_score: -3.2
-X-Spam_bar: ---
-X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.09,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ "Paul A . Clarke" <pclarke@ventanamicro.com>,
+ Andrew Jones <ajones@ventanamicro.com>
+Subject: [PATCH] target/riscv/tcg: remove RVG warning
+Date: Tue,  3 Oct 2023 09:25:39 -0300
+Message-ID: <20231003122539.775932-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.41.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x535.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,57 +93,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Daniel,
+Vendor CPUs that set RVG are displaying user warnings about other
+extensions that RVG must enable, one warning per CPU. E.g.:
 
-On 3/10/23 13:32, Daniel Henrique Barboza wrote:
-> Our error message is returning the value of 'ret', which will be always
-> -1 in case of error, and will not be that useful:
-> 
-> qemu-system-riscv64: Unable to read ISA_EXT KVM register ssaia, error -1
-> 
-> Improve the error message by outputting 'errno' instead of 'ret'. Use
-> strerrorname_np() to output the error name instead of the error code.
-> This will give us what we need to know right away:
-> 
-> qemu-system-riscv64: Unable to read ISA_EXT KVM register ssaia, error code: ENOENT
-> 
-> Use "error_setg(&error_fatal, ..." since it'll both print the error and
-> do an exit(EXIT_FAILURE) in one single call, allowing us to remove
-> error_report() and exit().
-> 
-> Finally, given that we're going to exit(1) in this condition instead of
-> attempting to recover, remove the 'kvm_riscv_destroy_scratch_vcpu()'
-> call.
-> 
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->   target/riscv/kvm/kvm-cpu.c | 7 +++----
->   1 file changed, 3 insertions(+), 4 deletions(-)
-> 
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index c6615cb807..847cb2876a 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -791,10 +791,9 @@ static void kvm_riscv_init_multiext_cfg(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
->                   multi_ext_cfg->supported = false;
->                   val = false;
->               } else {
-> -                error_report("Unable to read ISA_EXT KVM register %s, "
-> -                             "error %d", multi_ext_cfg->name, ret);
-> -                kvm_riscv_destroy_scratch_vcpu(kvmcpu);
-> -                exit(EXIT_FAILURE);
-> +                error_setg(&error_fatal, "Unable to read ISA_EXT "
+$ ./build/qemu-system-riscv64 -smp 8 -M virt -cpu veyron-v1 -nographic
+qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifencei
+qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifencei
+qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifencei
+qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifencei
+qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifencei
+qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifencei
+qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifencei
+qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifencei
 
-See the documentation added in include/qapi/error.h by commit
-10303f04b9 ("error: Improve documentation some more"):
+This happens because we decided a while ago that, for simplicity, vendor
+CPUs could set RVG instead of setting each G extension individually in
+their cpu_init(). Our warning isn't taking that into account, and we're
+bugging users with a warning that we're causing ourselves.
 
-   * Please don't error_setg(&error_fatal, ...), use error_report() and
-   * exit(), because that's more obvious.
+In a closer look we conclude that this warning is not warranted in any
+other circumstance since we're just following the ISA [1], which states
+in chapter 24:
 
-> +                           "KVM register %s, error code: %s",
-> +                           multi_ext_cfg->name, strerrorname_np(errno));
->               }
->           } else {
->               multi_ext_cfg->supported = true;
+"One goal of the RISC-V project is that it be used as a stable software
+development target. For this purpose, we define a combination of a base
+ISA (RV32I or RV64I) plus selected standard extensions (IMAFD, Zicsr,
+Zifencei) as a 'general-purpose' ISA, and we use the abbreviation G for
+the IMAFDZicsr Zifencei combination of instruction-set extensions."
+
+With this in mind, enabling IMAFD_Zicsr_Zifencei if the user explicitly
+enables 'G' is an expected behavior and the warning is unneeded. Any
+user caught by surprise should refer to the ISA.
+
+Remove the warning when handling RVG.
+
+[1] https://github.com/riscv/riscv-isa-manual/releases/download/Ratified-IMAFDQC/riscv-spec-20191213.pdf
+
+Reported-by: Paul A. Clarke <pclarke@ventanamicro.com>
+Suggested-by: Andrew Jones <ajones@ventanamicro.com>
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ target/riscv/tcg/tcg-cpu.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index 08b806dc07..f50ce57602 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -293,7 +293,6 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+             return;
+         }
+ 
+-        warn_report("Setting G will also set IMAFD_Zicsr_Zifencei");
+         cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_icsr), true);
+         cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_ifencei), true);
+ 
+-- 
+2.41.0
 
 
