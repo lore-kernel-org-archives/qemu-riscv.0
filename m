@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8F74E75452
-	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Oct 2023 12:26:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4EE0E75458
+	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Oct 2023 12:51:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qneTG-0004wT-KA; Tue, 03 Oct 2023 08:25:50 -0400
+	id 1qnesG-0007dC-Qy; Tue, 03 Oct 2023 08:51:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qneTF-0004vg-0N
- for qemu-riscv@nongnu.org; Tue, 03 Oct 2023 08:25:49 -0400
-Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
+ (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
+ id 1qnesF-0007cm-Qa
+ for qemu-riscv@nongnu.org; Tue, 03 Oct 2023 08:51:39 -0400
+Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qneTD-0006gd-8M
- for qemu-riscv@nongnu.org; Tue, 03 Oct 2023 08:25:48 -0400
-Received: by mail-pg1-x535.google.com with SMTP id
- 41be03b00d2f7-565334377d0so618632a12.2
- for <qemu-riscv@nongnu.org>; Tue, 03 Oct 2023 05:25:46 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
+ id 1qnes9-000490-S2
+ for qemu-riscv@nongnu.org; Tue, 03 Oct 2023 08:51:39 -0400
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-31f71b25a99so926521f8f.2
+ for <qemu-riscv@nongnu.org>; Tue, 03 Oct 2023 05:51:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1696335945; x=1696940745; darn=nongnu.org;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1696337491; x=1696942291;
+ darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=bosaUuegrcxoWj3ggOi+Hiu7LSbWQp61k7fb4NEy06c=;
- b=WXUJP3BdvVToreyykn03By9KND2MNpqGBfkjr1FMoc4+AGpI87+xU2AmeMA+XEO3mk
- U574DHpvXiASrBi3cNRVKUpImdFWDDjZk2D4REOz+IvDNF27fd/jXI+XTxNzH5ulHbGK
- yTZ1kESOFcOXFGVDFSN9fH5J5I4R9JzexvNEDbDDbgGqnAoLESyScbrznj29iuaOhAo+
- d43Wikh6Ur4LSRskV1B9lTKFfPKnSSvi5k5M1C3u09nAn0pj7ran7QrYBew9fh78nYlj
- Hf3kfRZGgGDu4wADOpdMhoHkXQRasl78MULg4UmmgPkSubd3XBizyBBF3dOK95ezgTn2
- VhJA==
+ bh=GvyQiCIBd0KJPsZf47fDj2Cg3EaKAeHwpM+pW5lcdp8=;
+ b=CQ1Rl5GbaH0Oy8x/R0I4d5uMnbKVPUOusF1aM0CcyrdK4NNtQnQRRVFD/3stupZ750
+ 5KDxazcOsLZNQnoc6cJRpvpLt9p8ADm57lHnhX0HBjuK55EIJLXB4lmG6F7+iZ5vvZbI
+ tsgASPYtrs0c8OOmLlkcnucY49TG2psdnu4PdFeenEmPrsWc8ggBd6N50Tp1AgZ8/TLI
+ 38c/wBoaLZo6o4D2EmnnX5yaxZQPpLcIj/Nri79WfzWAb0n1PbNovi/DoTYvlQbyAlbj
+ QnwOi08pbQH2OMdcj9s4C8d+MBcKL+8W6RDIAOuPM6thikF1kQspMOYDRVURgkBDpWxy
+ X5EQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696335945; x=1696940745;
+ d=1e100.net; s=20230601; t=1696337491; x=1696942291;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=bosaUuegrcxoWj3ggOi+Hiu7LSbWQp61k7fb4NEy06c=;
- b=LtWZ8ifzK5pTdELEYjYeCB/n6hm6aafuZlTxicxVJkFhitZUbkyV8JmsGqLv4C/QQ7
- W4rBG0bzWqJ6Ic6ln5Ir6Fx/mz+mEiWQNJ27szQ6/kMznfyHk2c4t/AghJ52Lc6P8GnT
- +zRCzLCmXy4o/azFotZFHo3yHjtjMHwmQzkBNYaJo4Muk+46dD9nAD0a8JByzS7m4SHg
- vXC1lMsYx9E5Mul6tJwMkjWZ3QJym8tf6Z+JZCl6u8nbAtHDven+FiPo+lduEwsEVg1e
- 1sec3+ZQtXDpwNwWlYj809CcTThQ5O6nUkAdd9gnRKtbg7pAoeP6fqvXR0oah4FWQbCs
- +keg==
-X-Gm-Message-State: AOJu0YwQJ7DObFvZGpLxTzZ0+XsbmhSGh1/XzsLV0NKp1LrTYORy1lw5
- l7/E4USW0XVf9YqUikNhNQKGdQ==
-X-Google-Smtp-Source: AGHT+IGyfTxLPhcm6cR/3kJauEHWB2PFmnl82xFK9A9HF9G/uXgUSmXU7IpOr1+vJ4BVZQCqtLsd5g==
-X-Received: by 2002:a05:6a20:441c:b0:14d:16c:2d20 with SMTP id
- ce28-20020a056a20441c00b0014d016c2d20mr17674942pzb.44.1696335945415; 
- Tue, 03 Oct 2023 05:25:45 -0700 (PDT)
-Received: from grind.. ([177.94.15.124]) by smtp.gmail.com with ESMTPSA id
- q8-20020a170902dac800b001c44c8d857esm1404450plx.120.2023.10.03.05.25.42
+ bh=GvyQiCIBd0KJPsZf47fDj2Cg3EaKAeHwpM+pW5lcdp8=;
+ b=vm1AvqsjG57opusq9PNPBpDQdoAppsSqv42rE8pp6E4xAb9f9NejoXl3QzehGHA/OT
+ bpf+snRoFhGQvlYDHFXiW6ajWV3nYEC936mEFhBmDL7EVmekONGVUPaUrFx9oygVZDxk
+ YKc+ue/LlkAoCALN4jd0/qpsPkVKcXwqrGwM4+Zs8FdBBpJajLTH/NjZDgo1XD9aKX0C
+ dz3IOsbJ5i4EFcxp56Eu/FLJmBFb0wUPu6q6S2hzpqcaeAHykUt+Ap1zRdkwaVEB8w3M
+ +/Sa/jwFt+XB512UjtV8XA5EXyi2gENZ08ujboFvhFn3s3m6L8v9oW6eqMCUftACnkxL
+ fykQ==
+X-Gm-Message-State: AOJu0Yy/vGWujRuNG2LkcvughP00vwIX05FRx8j+GgxZfXHhXVCjek96
+ z6iB20zeRGxmwNjJF3g/jBXWUQ==
+X-Google-Smtp-Source: AGHT+IFcteaJ7+xvfSelbR4Fk9sHoinOu6xdYju/HxO045bcon/F7fgO066sKqMV+Ywsd1aSKZVPlQ==
+X-Received: by 2002:adf:f4c4:0:b0:322:6201:6049 with SMTP id
+ h4-20020adff4c4000000b0032262016049mr10676540wrp.39.1696337491436; 
+ Tue, 03 Oct 2023 05:51:31 -0700 (PDT)
+Received: from rockhopper.ba.rivosinc.com (214.11.169.217.in-addr.arpa.
+ [217.169.11.214]) by smtp.gmail.com with ESMTPSA id
+ l21-20020a7bc455000000b0040531f5c51asm1240335wmi.5.2023.10.03.05.51.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Oct 2023 05:25:44 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+ Tue, 03 Oct 2023 05:51:31 -0700 (PDT)
+From: Rob Bradford <rbradford@rivosinc.com>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- "Paul A . Clarke" <pclarke@ventanamicro.com>,
- Andrew Jones <ajones@ventanamicro.com>
-Subject: [PATCH] target/riscv/tcg: remove RVG warning
-Date: Tue,  3 Oct 2023 09:25:39 -0300
-Message-ID: <20231003122539.775932-1-dbarboza@ventanamicro.com>
+Cc: qemu-riscv@nongnu.org, atishp@rivosinc.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ Rob Bradford <rbradford@rivosinc.com>
+Subject: [PATCH 0/3] Support discontinuous PMU counters
+Date: Tue,  3 Oct 2023 13:49:34 +0100
+Message-ID: <20231003125107.34859-1-rbradford@rivosinc.com>
 X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x535.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Received-SPF: pass client-ip=2a00:1450:4864:20::436;
+ envelope-from=rbradford@rivosinc.com; helo=mail-wr1-x436.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -93,61 +93,24 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Vendor CPUs that set RVG are displaying user warnings about other
-extensions that RVG must enable, one warning per CPU. E.g.:
+Currently the available PMU counters start at HPM3 and run through to
+the number specified by the "pmu-num" property. There is no
+requirement in the specification that the available counters be
+continously numbered. This series add suppport for specifying a
+discountinuous range of counters though a "pmu-mask" property.
 
-$ ./build/qemu-system-riscv64 -smp 8 -M virt -cpu veyron-v1 -nographic
-qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifencei
-qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifencei
-qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifencei
-qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifencei
-qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifencei
-qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifencei
-qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifencei
-qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifencei
+Rob Bradford (3):
+  target/riscv: Propagate error from PMU setup
+  target/riscv: Support discontinuous PMU counters
+  target/riscv: Don't assume PMU counters are continuous
 
-This happens because we decided a while ago that, for simplicity, vendor
-CPUs could set RVG instead of setting each G extension individually in
-their cpu_init(). Our warning isn't taking that into account, and we're
-bugging users with a warning that we're causing ourselves.
+ target/riscv/cpu.c     |  9 ++++++++-
+ target/riscv/cpu_cfg.h |  1 +
+ target/riscv/csr.c     |  5 +++--
+ target/riscv/pmu.c     | 32 +++++++++++++++++++++-----------
+ target/riscv/pmu.h     |  3 ++-
+ 5 files changed, 35 insertions(+), 15 deletions(-)
 
-In a closer look we conclude that this warning is not warranted in any
-other circumstance since we're just following the ISA [1], which states
-in chapter 24:
-
-"One goal of the RISC-V project is that it be used as a stable software
-development target. For this purpose, we define a combination of a base
-ISA (RV32I or RV64I) plus selected standard extensions (IMAFD, Zicsr,
-Zifencei) as a 'general-purpose' ISA, and we use the abbreviation G for
-the IMAFDZicsr Zifencei combination of instruction-set extensions."
-
-With this in mind, enabling IMAFD_Zicsr_Zifencei if the user explicitly
-enables 'G' is an expected behavior and the warning is unneeded. Any
-user caught by surprise should refer to the ISA.
-
-Remove the warning when handling RVG.
-
-[1] https://github.com/riscv/riscv-isa-manual/releases/download/Ratified-IMAFDQC/riscv-spec-20191213.pdf
-
-Reported-by: Paul A. Clarke <pclarke@ventanamicro.com>
-Suggested-by: Andrew Jones <ajones@ventanamicro.com>
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/tcg/tcg-cpu.c | 1 -
- 1 file changed, 1 deletion(-)
-
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 08b806dc07..f50ce57602 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -293,7 +293,6 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-             return;
-         }
- 
--        warn_report("Setting G will also set IMAFD_Zicsr_Zifencei");
-         cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_icsr), true);
-         cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_ifencei), true);
- 
 -- 
 2.41.0
 
