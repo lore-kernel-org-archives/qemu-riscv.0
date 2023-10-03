@@ -4,77 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E511AE7AD41
-	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Oct 2023 13:22:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7F92E7AD43
+	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Oct 2023 13:26:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qnfLg-0001fC-9r; Tue, 03 Oct 2023 09:22:04 -0400
+	id 1qnfP6-0005vb-9t; Tue, 03 Oct 2023 09:25:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qnfLe-0001eR-MW
- for qemu-riscv@nongnu.org; Tue, 03 Oct 2023 09:22:02 -0400
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qnfP4-0005rH-96
+ for qemu-riscv@nongnu.org; Tue, 03 Oct 2023 09:25:34 -0400
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qnfLb-0002do-KM
- for qemu-riscv@nongnu.org; Tue, 03 Oct 2023 09:22:02 -0400
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-1c5cd27b1acso6595115ad.2
- for <qemu-riscv@nongnu.org>; Tue, 03 Oct 2023 06:21:59 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qnfP2-0003DV-F8
+ for qemu-riscv@nongnu.org; Tue, 03 Oct 2023 09:25:33 -0400
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-405361bb94eso9553815e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 03 Oct 2023 06:25:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1696339318; x=1696944118; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=AehOG6GcucbJUsRSBJkdd1sV17cpGm9nmpjLlYi2tG0=;
- b=T8CYlJczPwxK0JiqQoD1P5aNKfaDhuDQwtlu9ZkwioZ4T6Y6ktq7QMyp7GfexiQIaE
- d1osyiqcKgukr/t1oHffXFFApSI4vQnq1I/N3XvpG4VTuEG138l1PVFw98bRhYuRXfU+
- s3Y8a//HRcofBTwUFCbNgBc0JCucf3IT2x6gIVaWGlLI9JPN1cjTvgvL9/wYgE1kB1Kk
- HLLDhFa/8KKL74Xh4dRsybAXQIelWUw1lmKulxz7R40ILfrW3UrWwz20mPU4TWe+XzFX
- geBJznveyVodZz5naK26nnzGHqH3Yx9VL1ytjkfGTUai3qVea0/hYG/0FJa4dcIa4Yyw
- /56w==
+ d=linaro.org; s=google; t=1696339530; x=1696944330; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=b9EKo/m7U4EHVQlsRnB/t3McfyOJ+8zxrsmJXyTxX70=;
+ b=Wc/RmjVTh48Wl4lQt4zqVOuuVryu82iiPHhO5bS/3qhkxmdvl4kC2Zd51JDHzZSZZC
+ ySJnitXKyr8aCxm83pCV0osyDROZQ9nbdStTQYhV6MuQ47MM+UpaouHXKE4pobNBGOkJ
+ zHRv0+kdau8QkVIwjiUoiDxBzf3u4WnY3xP3XgbZR793u32P/FMDgUXYI5RhMrs4L1PL
+ lOJqBXdOOd3tvhTGcIt3DeF/vqeUL/oOkbpfqubj0WvkUABogT1gmw6R1SYZFbDuZ6jb
+ fiuqiQzJyO3evp26Udkn6cwhYS0hmShgZC+T1lp89iKpxUNyGBI6ZlZaflbJ8ZL0yDeK
+ QL+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696339318; x=1696944118;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=AehOG6GcucbJUsRSBJkdd1sV17cpGm9nmpjLlYi2tG0=;
- b=a+bdUGnrUUbWZeuEvFalFB1YBMzXP5g8c2wOFgcASjsKpqjaQUWsx5x0p4wYwNynHY
- 0FpZXoqlmJKdabXCJFS3vZ8VXQRghquDZRJtSSo0hALsjsbq/OmT4m6bKv7CsP5DnfYQ
- c56f/WfCLYBW5aGZl4kK05VTZm6DdP3vTvrJk+qrBUHouk6a89Binpxfam4f+R26Vt5B
- G2k/P7XnGLQzaxlnD/0i7G1kjzwbJx3OCeezzw4EGl7y3i+egPBJDSzCkNapr5uWv4mE
- eebSKdjff0X3rY8Z1/L6VpOgXMG4L9e+ml0SG1YUMAUWQ/gBql8n7lTQj8VoWF/S/oIt
- UNkQ==
-X-Gm-Message-State: AOJu0Yxyy5BC0//9Y3ST+iM0XVsoSMCjGQQmurXqhAgQd3q2yvUyNV8n
- ZGgJj3qGh5PZEIrW440Wsa8YYA==
-X-Google-Smtp-Source: AGHT+IGbtlulHcTvEXpgHVNaH0DD4S3Z7PniNaVOdmtWOwMZ431SYya9ST9BsJEF+0i6okiWkCKO5Q==
-X-Received: by 2002:a17:902:e5c5:b0:1c4:56a7:b632 with SMTP id
- u5-20020a170902e5c500b001c456a7b632mr16669823plf.52.1696339317841; 
- Tue, 03 Oct 2023 06:21:57 -0700 (PDT)
-Received: from grind.. ([177.94.15.124]) by smtp.gmail.com with ESMTPSA id
- u11-20020a17090282cb00b001bf11cf2e21sm1491777plz.210.2023.10.03.06.21.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Oct 2023 06:21:57 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
+ d=1e100.net; s=20230601; t=1696339530; x=1696944330;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=b9EKo/m7U4EHVQlsRnB/t3McfyOJ+8zxrsmJXyTxX70=;
+ b=DNbBHXs8pq5Za+JkxMHStWXfbFW+SSYf9+2K7HGyeYiu5c/cIItUsNvAdWmhcB0HLa
+ T6gwC1WMM5Lf02gOWs9X+s+uXDfflBlxKC7W0pj7UELZvNuV6geKe+/yBsplS2CYi/GH
+ 4zwKhpK9+Xqp5BHRfnO9cyaKUBf953xfDkjCyZnR1q9r7OdNiKzhc4D5xv/J9/dM40N9
+ ygIDHslp1csEt9qm/EaMY9YcWCU1DuAVSMlQfzcXDteOihpXBuFndx9nVM5eC0483udC
+ jdwB3OqZCn7Kyfb7cuzcG3xAX83tyGT7QipW4/gVpLtBb+/UrY2WZ24l9uGZZ/V+kJB7
+ c+fQ==
+X-Gm-Message-State: AOJu0YzILYvZUNd1/AmY/odbFRm0ZVvkbMdXNm3kguyuKLpWs9TkBBkd
+ GOWoBtcvKG6XF3cgGEOaWD9JQ0QM0+cUHnVGZGQ+KA==
+X-Google-Smtp-Source: AGHT+IFq/np3a3QICu6ak5G3P5O6TsQtDP1Ui3Jjchdu4E6/uG3kG2vWCTAI7mo7T11KJC8rkguQaQ==
+X-Received: by 2002:a7b:ce16:0:b0:406:4501:9095 with SMTP id
+ m22-20020a7bce16000000b0040645019095mr13747249wmc.40.1696339530534; 
+ Tue, 03 Oct 2023 06:25:30 -0700 (PDT)
+Received: from [192.168.69.115] (176-131-222-246.abo.bbox.fr.
+ [176.131.222.246]) by smtp.gmail.com with ESMTPSA id
+ z20-20020a7bc7d4000000b004064e3b94afsm9480975wmk.4.2023.10.03.06.25.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 03 Oct 2023 06:25:29 -0700 (PDT)
+Message-ID: <d6bd1212-5613-28a4-1cf2-ef5208a4c434@linaro.org>
+Date: Tue, 3 Oct 2023 15:25:27 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.15.1
+Subject: Re: [PATCH v2 1/2] target/riscv/kvm: improve 'init_multiext_cfg'
+ error msg
+Content-Language: en-US
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v2 0/2] riscv, kvm: support KVM_GET_REG_LIST
-Date: Tue,  3 Oct 2023 10:21:46 -0300
-Message-ID: <20231003132148.797921-1-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.41.0
-MIME-Version: 1.0
+ ajones@ventanamicro.com
+References: <20231003132148.797921-1-dbarboza@ventanamicro.com>
+ <20231003132148.797921-2-dbarboza@ventanamicro.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+In-Reply-To: <20231003132148.797921-2-dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x631.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32e.google.com
+X-Spam_score_int: -31
+X-Spam_score: -3.2
+X-Spam_bar: ---
+X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.09,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -92,26 +98,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+On 3/10/23 15:21, Daniel Henrique Barboza wrote:
+> Our error message is returning the value of 'ret', which will be always
+> -1 in case of error, and will not be that useful:
+> 
+> qemu-system-riscv64: Unable to read ISA_EXT KVM register ssaia, error -1
+> 
+> Improve the error message by outputting 'errno' instead of 'ret'. Use
+> strerrorname_np() to output the error name instead of the error code.
+> This will give us what we need to know right away:
+> 
+> qemu-system-riscv64: Unable to read ISA_EXT KVM register ssaia, error code: ENOENT
+> 
+> Given that we're going to exit(1) in this condition instead of
+> attempting to recover, remove the 'kvm_riscv_destroy_scratch_vcpu()'
+> call.
+> 
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>   target/riscv/kvm/kvm-cpu.c | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
 
-In this new version all instances of "error_setg(&error_fatal, ..." were
-replaced with error_report() and exit(1), as suggested by Phil in v1.
-
-No other changes made.
-
-Changes from v1:
-- patches 1 and 2:
-  - replace 'error_setg(&error_fatal" with error_report() and exit(1)
-- v1 link: https://lore.kernel.org/qemu-riscv/20231003113259.771539-1-dbarboza@ventanamicro.com/
-
-Daniel Henrique Barboza (2):
-  target/riscv/kvm: improve 'init_multiext_cfg' error msg
-  target/riscv/kvm: support KVM_GET_REG_LIST
-
- target/riscv/kvm/kvm-cpu.c | 100 +++++++++++++++++++++++++++++++++++--
- 1 file changed, 97 insertions(+), 3 deletions(-)
-
--- 
-2.41.0
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
