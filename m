@@ -4,84 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE716E8FDDE
-	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Oct 2023 09:11:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00A9CE8FDDD
+	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Oct 2023 09:12:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qnxso-0005kJ-FN; Wed, 04 Oct 2023 05:09:30 -0400
+	id 1qnxqe-0001P3-Pd; Wed, 04 Oct 2023 05:07:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qnxr6-00033s-D3
- for qemu-riscv@nongnu.org; Wed, 04 Oct 2023 05:07:51 -0400
-Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qnxqP-0000I6-UK
+ for qemu-riscv@nongnu.org; Wed, 04 Oct 2023 05:07:02 -0400
+Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qnxr2-0007ax-2G
- for qemu-riscv@nongnu.org; Wed, 04 Oct 2023 05:07:43 -0400
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-405505b07dfso3820845e9.0
- for <qemu-riscv@nongnu.org>; Wed, 04 Oct 2023 02:07:38 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qnxqE-0007NX-VR
+ for qemu-riscv@nongnu.org; Wed, 04 Oct 2023 05:07:00 -0400
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-9b6559cbd74so352206666b.1
+ for <qemu-riscv@nongnu.org>; Wed, 04 Oct 2023 02:06:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696410457; x=1697015257; darn=nongnu.org;
+ d=linaro.org; s=google; t=1696410409; x=1697015209; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GE4K3cclxwdi11+MNGgub3UZQqTqPuI5wyHW+6dSmuM=;
- b=TqEQCMgHz18wD82Tf0wrBjhWk942g3Mgb+VaSCTMIdBnzY7ZLE4EHRa4JePMq63SGZ
- Zz/AW9ID0Z64Pr88rYqP20bELCJMZxabfHPlIZU7v+rmlT6u9pcu+4rCY98STQbvNxM0
- BrM0gmu/WkcudsQDBZWc24h7P/u5PgYYnMnVRKl+rBYmd/d4d4UpmeHqgkm1/QHiTlrM
- 3I/fZ060+zsDIm3yrZsfuDdBKmEk/GF+J3CdR3flIBWu+NeA2hDg9z0pKrCFK7R67l+f
- tnY2jeM0wS5CgEcOcMQ2IWgRQkO1GlaOz6zZ2Ij9wVUiG2y543OS4DzU8Xvy0zyUYbzs
- vkBg==
+ bh=exSuT9/NnjvYPrvMnYoWAEzddFkaInk4+sF0o57vHQY=;
+ b=QFtTkXr39MXhGql1oowRP/XgYpTTlL9cv9BKNOehi6x+T8wtXBPN4p7cUPqSyh1LRp
+ LtBFtI29VRRYAfprAmQTxGP7iIbMC1QPJW3jqD1oXtPn5Eowl0RnMBR4CxJfd6ItaS56
+ Z0r6IEJfhPoIU2PBWjMLgrf+ehiqAweUgjzaHlR8/u/DYCHRDVt0gmg/QeZxFfXqnMJz
+ NI4TdtfJ62yDJnSdoPdxyRxYiSc6z50AQHjS8Y6odHngU76m2yryiGSTX7et93SKC6XO
+ vdJj2BxEsAPKocLcY5vVBMh2RsyBlQ4B3lRQTq3HSVsHRcoWIGyVT4OlWZesgcog75dt
+ l5OA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696410457; x=1697015257;
+ d=1e100.net; s=20230601; t=1696410409; x=1697015209;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GE4K3cclxwdi11+MNGgub3UZQqTqPuI5wyHW+6dSmuM=;
- b=m6hHbixpGrDZMTj8L7ubOc5q7eyYaLYDPJ+BNOqy3/T++7OFxxLj81mntpKdvVwwgy
- nJuijEtG/5S7GnglFzn1BuDjDaSkJdBWsLK6tD5YbQD5jPEiBN8+bcDOOZaekS26u+B9
- tWxh6s0b5EG4f3IDQSY1lbfIJNOnkkHyr1Nd7jrdUsPN8106Of3JnaNERBjOVCJtP6P3
- 16iJ8imGYnZuhJVLNaxkV/mV5QIIuQUUYONZVtAoOYI/ypvgzgQJip+QLvUfXDIAtWB4
- pcYOcjq0iJV3PI1eM5fylgJfgEFtjKUMTVY/x77srf398nQCDRIhgif931TV+O74qUDV
- u1Mg==
-X-Gm-Message-State: AOJu0YxEP9hEpF9+mtYNep5BSHW5ACYfPr/FyOZ9/bnqiYansRw9HJlM
- 2DO+5lmvSr3aEFDY+iCC5DkhZw==
-X-Google-Smtp-Source: AGHT+IF1cHzFnGdZVNQfZbRno2PlvcoBteHctrjAqAgcO/STSaFZRQ2G4M0UGUwXnQJ/RbbcKCCRQQ==
-X-Received: by 2002:a7b:cc07:0:b0:406:51a0:17ea with SMTP id
- f7-20020a7bcc07000000b0040651a017eamr1229546wmh.10.1696410457632; 
- Wed, 04 Oct 2023 02:07:37 -0700 (PDT)
+ bh=exSuT9/NnjvYPrvMnYoWAEzddFkaInk4+sF0o57vHQY=;
+ b=XQ83WEot7ktBSr68RUoLjgB4RZt3Ln2VxXZ0Ljy5yL31PD7miY9Zpg6/7eU4/nHmHo
+ kQdRp/HZCuj7ujxH0PKhFPHd9XsLLG15gFXLuXQH3kC2LyE0Qw1ayYuCk3cgXDqTkjBK
+ lAo/iYWiqwwCrNvkoVxGuXD44AEH7jdldNNSXs12yOxCllcFQNv/f6z2VGJUwRETlMd0
+ URiZVIwPqMGY8R3qeM6ZtinQIkTXvuzy4TX7SAOGuJrn7Fog8ZhkULiuWb85gbLgh2xb
+ 0Xgx0u9RCTLGnyC/oGokLCi7LIjmeuC2vvH9eBCH/gTxE5z3DazFPxC4Uo8Pz02Ykf3B
+ h4cQ==
+X-Gm-Message-State: AOJu0Yw5+JWZFBsbFIuyv7wHZjdAGO4CGUg9NPQYNZjuwy4ys2UtLX0q
+ JfJn+2e0oGiRi/aHj691QDGvVA==
+X-Google-Smtp-Source: AGHT+IHk/MNCNP1hSn2wP1C4tfXybRQGCpaPc50YEr2384IeglMQ0LyoObxoYLaU7hOwZaigDollCA==
+X-Received: by 2002:a17:906:518e:b0:9ad:8a29:f26a with SMTP id
+ y14-20020a170906518e00b009ad8a29f26amr1556091ejk.63.1696410409209; 
+ Wed, 04 Oct 2023 02:06:49 -0700 (PDT)
 Received: from m1x-phil.lan (5ep85-h01-176-173-163-52.dslam.bbox.fr.
  [176.173.163.52]) by smtp.gmail.com with ESMTPSA id
- m10-20020a7bce0a000000b00405953973c3sm984629wmc.6.2023.10.04.02.07.36
+ k1-20020a05600c0b4100b00405442edc69sm977268wmr.14.2023.10.04.02.06.47
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 04 Oct 2023 02:07:37 -0700 (PDT)
+ Wed, 04 Oct 2023 02:06:48 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-ppc@nongnu.org,
  qemu-s390x@nongnu.org, qemu-arm@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH 11/13] meson: Rename softmmu_mods -> system_mods
-Date: Wed,  4 Oct 2023 11:06:26 +0200
-Message-ID: <20231004090629.37473-12-philmd@linaro.org>
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Yanan Wang <wangyanan55@huawei.com>
+Subject: [PATCH 03/13] cpu: Correct invalid mentions of 'softmmu' by
+ 'system-mode'
+Date: Wed,  4 Oct 2023 11:06:18 +0200
+Message-ID: <20231004090629.37473-4-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231004090629.37473-1-philmd@linaro.org>
 References: <20231004090629.37473-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::632;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,63 +99,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-See commit de6cd7599b ("meson: Replace softmmu_ss -> system_ss")
-for rationale.
-
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- meson.build | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ cpu.c                | 2 +-
+ hw/core/cpu-common.c | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meson.build b/meson.build
-index 21a1bc03f8..8890dc5748 100644
---- a/meson.build
-+++ b/meson.build
-@@ -3496,7 +3496,7 @@ modinfo_generate = find_program('scripts/modinfo-generate.py')
- modinfo_files = []
- 
- block_mods = []
--softmmu_mods = []
-+system_mods = []
- foreach d, list : modules
-   if not (d == 'block' ? have_block : have_system)
-     continue
-@@ -3510,7 +3510,7 @@ foreach d, list : modules
-       if d == 'block'
-         block_mods += sl
-       else
--        softmmu_mods += sl
-+        system_mods += sl
-       endif
-       if module_ss.sources() != []
-         # FIXME: Should use sl.extract_all_objects(recursive: true) as
-@@ -3554,7 +3554,7 @@ foreach d, list : target_modules
-                                 include_directories: target_inc,
-                                 c_args: c_args,
-                                 pic: true)
--            softmmu_mods += sl
-+            system_mods += sl
-             # FIXME: Should use sl.extract_all_objects(recursive: true) too.
-             modinfo_files += custom_target(module_name + '.modinfo',
-                                            output: module_name + '.modinfo',
-@@ -3597,7 +3597,7 @@ block_syms = custom_target('block.syms', output: 'block.syms',
-                              capture: true,
-                              command: [undefsym, nm, '@INPUT@'])
- qemu_syms = custom_target('qemu.syms', output: 'qemu.syms',
--                             input: [libqemuutil, softmmu_mods],
-+                             input: [libqemuutil, system_mods],
-                              capture: true,
-                              command: [undefsym, nm, '@INPUT@'])
- 
-@@ -3682,7 +3682,7 @@ common_ss.add(hwcore)
- ###########
- 
- emulator_modules = []
--foreach m : block_mods + softmmu_mods
-+foreach m : block_mods + system_mods
-   emulator_modules += shared_module(m.name(),
-                 build_by_default: true,
-                 name_prefix: '',
+diff --git a/cpu.c b/cpu.c
+index 0769b0b153..8cb6790142 100644
+--- a/cpu.c
++++ b/cpu.c
+@@ -209,7 +209,7 @@ static Property cpu_common_props[] = {
+                      prctl_unalign_sigbus, false),
+ #else
+     /*
+-     * Create a memory property for softmmu CPU object, so users can
++     * Create a memory property for system CPU object, so users can
+      * wire up its memory.  The default if no link is set up is to use
+      * the system address space.
+      */
+diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
+index ced66c2b34..f04d59c8d5 100644
+--- a/hw/core/cpu-common.c
++++ b/hw/core/cpu-common.c
+@@ -228,8 +228,8 @@ static void cpu_common_initfn(Object *obj)
+     cpu->cpu_index = UNASSIGNED_CPU_INDEX;
+     cpu->cluster_index = UNASSIGNED_CLUSTER_INDEX;
+     cpu->gdb_num_regs = cpu->gdb_num_g_regs = cc->gdb_num_core_regs;
+-    /* *-user doesn't have configurable SMP topology */
+-    /* the default value is changed by qemu_init_vcpu() for softmmu */
++    /* user-mode doesn't have configurable SMP topology */
++    /* the default value is changed by qemu_init_vcpu() for system-mode */
+     cpu->nr_cores = 1;
+     cpu->nr_threads = 1;
+     cpu->cflags_next_tb = -1;
 -- 
 2.41.0
 
