@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ED0EE7B61D
-	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Oct 2023 13:50:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CED79E7B61D
+	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Oct 2023 13:54:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qo2GL-0006XG-0r; Wed, 04 Oct 2023 09:50:05 -0400
+	id 1qo2K6-0001OA-84; Wed, 04 Oct 2023 09:53:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1qo2G8-0006Nt-M4
- for qemu-riscv@nongnu.org; Wed, 04 Oct 2023 09:49:55 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1qo2Jz-0001GX-IB
+ for qemu-riscv@nongnu.org; Wed, 04 Oct 2023 09:53:52 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1qo2G4-0000Oh-Ly
- for qemu-riscv@nongnu.org; Wed, 04 Oct 2023 09:49:51 -0400
-Received: from mail-ua1-f71.google.com (mail-ua1-f71.google.com
- [209.85.222.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-132-SuxX3XNuMhy-Cb_O13jJcQ-1; Wed, 04 Oct 2023 09:49:44 -0400
-X-MC-Unique: SuxX3XNuMhy-Cb_O13jJcQ-1
-Received: by mail-ua1-f71.google.com with SMTP id
- a1e0cc1a2514c-7b349dd2467so143757241.2
- for <qemu-riscv@nongnu.org>; Wed, 04 Oct 2023 06:49:44 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696427384; x=1697032184;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=04v1Y2ap8PgeFJZuk9aFB8ktqtsNW3EnF+uSxtf2btw=;
- b=Qx6DJJJZc2+iaDgk0WmmfFrVSINmGbk+6io9MVNbDVU0dDAi+N+PXdh0Rfbo6BK2iL
- ESHvOneyvfJWtbIwd1PvGCdAGFC/53jaYXTkVvz38uuu0GxfGfwmWMpJqYv1AWEH4hii
- Fib9F+5+IOxh+UVgk9W7Zx6QorGmL478adthbT+N1wzl15jx3Pz7wEzy/c8V0Hc7S50B
- X/KzJbNKp8oKk+xbI5RNI1f87sueYLXP3HIon+IT/lcCqY1KqBNFRPUM44YbZ7OGhU+V
- KDJ5bL4zKw4s9ZztN68dc1R+i6VhuX2GFc6FLU5+mN9+rcKYdWoAhsZ6E70ktMFK9Mej
- 5y3w==
-X-Gm-Message-State: AOJu0Yx+89XlXEzhYmJNXzF8Z5UXpcXBprxCfwz2MT7PLU0EBXQ1Ao4j
- 15+zf0LIefZuS5aRcFsR2/tfr5NghXyafVX9vnTvcw35tqMPPxTpvz7EHRFuXzTrWejE8Bfv5St
- /J3PqLFtraeJJB/AzJdMu/1wQt/Brc14=
-X-Received: by 2002:a05:6102:34f1:b0:44e:8353:e86a with SMTP id
- bi17-20020a05610234f100b0044e8353e86amr1908484vsb.24.1696427383859; 
- Wed, 04 Oct 2023 06:49:43 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFrrKqP+M5hrFXvi1zNunZl8wvLusbFwWv65LHWYfzcwWNA4Hj78RFJqBabd8Ty1apI5MjzBX8iD8qCBHpNWVA=
-X-Received: by 2002:a05:6102:34f1:b0:44e:8353:e86a with SMTP id
- bi17-20020a05610234f100b0044e8353e86amr1908439vsb.24.1696427383128; Wed, 04
- Oct 2023 06:49:43 -0700 (PDT)
-MIME-Version: 1.0
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1qo2Jl-0002lX-L0
+ for qemu-riscv@nongnu.org; Wed, 04 Oct 2023 09:53:51 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1696427617;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=0dfRZbA01YJUiuxNKBFFhz/y+zEEaB2FKPcBYc0j6bA=;
+ b=UpPG/ZQqbqif09cGE0SSsgWH9qf1rnhWL/a/9G2CTk1wv1n7FrWrJ9QxFPygQ6QtZgpCLU
+ SZPiSt+M+88aZ1dY6rW7tbH3+2iv/l9fpb4PESpwn8XFvf1Q294cdBCAXuproSNP1sraJC
+ x6y2WQQZqyym6wGsA/v1AW98nWX752Q=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-253-9PvPRIP2NemlBKvVWsW91w-1; Wed, 04 Oct 2023 09:53:34 -0400
+X-MC-Unique: 9PvPRIP2NemlBKvVWsW91w-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.5])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 4017D18312C1;
+ Wed,  4 Oct 2023 13:53:33 +0000 (UTC)
+Received: from redhat.com (unknown [10.42.28.44])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 1621D63F20;
+ Wed,  4 Oct 2023 13:53:31 +0000 (UTC)
+Date: Wed, 4 Oct 2023 14:53:29 +0100
+From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+To: Paolo Bonzini <pbonzini@redhat.com>
+Cc: Claudio Fontana <cfontana@suse.de>, Thomas Huth <thuth@redhat.com>,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
+ qemu-s390x@nongnu.org, qemu-arm@nongnu.org
+Subject: Re: [PATCH 00/13] misc: Rename 'softmmu' -> 'system'
+Message-ID: <ZR1uWXEqcyPxsV3g@redhat.com>
 References: <20231004090629.37473-1-philmd@linaro.org>
  <ZR1bjpEi5HdFp2xj@redhat.com>
  <85be2979-c0ca-3eb4-dae9-bbabf256c201@redhat.com>
  <00b2ec16-162e-9204-3a04-f45e0edeeb15@suse.de>
-In-Reply-To: <00b2ec16-162e-9204-3a04-f45e0edeeb15@suse.de>
-From: Paolo Bonzini <pbonzini@redhat.com>
-Date: Wed, 4 Oct 2023 15:49:31 +0200
-Message-ID: <CABgObfZBTZZvcSPcMSRLWscyEz7B-2h9g28FJx7t7Ggux6E9cA@mail.gmail.com>
-Subject: Re: [PATCH 00/13] misc: Rename 'softmmu' -> 'system'
-To: Claudio Fontana <cfontana@suse.de>
-Cc: Thomas Huth <thuth@redhat.com>,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, 
- qemu-s390x@nongnu.org, qemu-arm@nongnu.org
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=pbonzini@redhat.com;
+ <CABgObfZBTZZvcSPcMSRLWscyEz7B-2h9g28FJx7t7Ggux6E9cA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CABgObfZBTZZvcSPcMSRLWscyEz7B-2h9g28FJx7t7Ggux6E9cA@mail.gmail.com>
+User-Agent: Mutt/2.2.9 (2022-11-12)
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.5
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ SPF_HELO_NONE=0.001,
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -90,47 +87,53 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Oct 4, 2023 at 3:41=E2=80=AFPM Claudio Fontana <cfontana@suse.de> w=
-rote:
->
-> On 10/4/23 14:37, Thomas Huth wrote:
-> > On 04/10/2023 14.33, Daniel P. Berrang=C3=A9 wrote:
-> >> Am I mis-understanding what you mean by 'finishes' here, as
-> >> I see many references to softmmu remaining
-> >> In particular under configs/
-> >>
-> >> I was also hoping it meant that we'd be changing configure
-> >> to allow
-> >>
-> >>      configure --target-list=3Dx86_64-system
-> >>      configure --target-list=3Dx86_64-vm
-> >>
-> >> for less typing
+On Wed, Oct 04, 2023 at 03:49:31PM +0200, Paolo Bonzini wrote:
+> On Wed, Oct 4, 2023 at 3:41 PM Claudio Fontana <cfontana@suse.de> wrote:
 > >
-> > Maybe we should also bikeshed about the naming first... "system" is a q=
-uite
-> > overloaded word in this context already, and "vm" sounds rather like
-> > hardware-accelerated stuff ... what about using something like "sysemu"=
-? Or
-> > "fullsys" for "full system emulation" (in contrast to "user space"-only
-> > emulation)?
+> > On 10/4/23 14:37, Thomas Huth wrote:
+> > > On 04/10/2023 14.33, Daniel P. Berrangé wrote:
+> > >> Am I mis-understanding what you mean by 'finishes' here, as
+> > >> I see many references to softmmu remaining
+> > >> In particular under configs/
+> > >>
+> > >> I was also hoping it meant that we'd be changing configure
+> > >> to allow
+> > >>
+> > >>      configure --target-list=x86_64-system
+> > >>      configure --target-list=x86_64-vm
+> > >>
+> > >> for less typing
+> > >
+> > > Maybe we should also bikeshed about the naming first... "system" is a quite
+> > > overloaded word in this context already, and "vm" sounds rather like
+> > > hardware-accelerated stuff ... what about using something like "sysemu"? Or
+> > > "fullsys" for "full system emulation" (in contrast to "user space"-only
+> > > emulation)?
+> 
+> I agree that changing other remnants should be done right
+> after this patch, for example $softmmu in configure. Changing
+> all targets is a very large and very user-visible change, it is
+> required but it should be planned very well.
+> 
+> As to the actual target names, I think system is the only
+> consistent choice since we have --enable/--disable-system
+> (as pointed out by Claudio) and qemu-system-*.  sysemu
+> may make a little more sense in the codebase (we have
+> include/sysemu after all), but maybe that ship has sailed
+> since we have many occurrences of "system", for example
+> system_ss and other related sourcesets.
 
-I agree that changing other remnants should be done right
-after this patch, for example $softmmu in configure. Changing
-all targets is a very large and very user-visible change, it is
-required but it should be planned very well.
+Yep, I agree with that view now, lets stick with 'system'.
 
-As to the actual target names, I think system is the only
-consistent choice since we have --enable/--disable-system
-(as pointed out by Claudio) and qemu-system-*.  sysemu
-may make a little more sense in the codebase (we have
-include/sysemu after all), but maybe that ship has sailed
-since we have many occurrences of "system", for example
-system_ss and other related sourcesets.
-
-Paolo
+With regards,
+Daniel
+-- 
+|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
+|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
+|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
 
 
