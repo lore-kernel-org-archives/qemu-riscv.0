@@ -4,73 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3333E7B601
-	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Oct 2023 12:34:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4908E7B604
+	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Oct 2023 12:37:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qo14K-0002M6-KU; Wed, 04 Oct 2023 08:33:36 -0400
+	id 1qo17z-0001gj-1r; Wed, 04 Oct 2023 08:37:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1qo14C-00028U-QD
- for qemu-riscv@nongnu.org; Wed, 04 Oct 2023 08:33:30 -0400
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1qo17x-0001fR-3N
+ for qemu-riscv@nongnu.org; Wed, 04 Oct 2023 08:37:21 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1qo14A-00005Y-Gz
- for qemu-riscv@nongnu.org; Wed, 04 Oct 2023 08:33:28 -0400
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1qo17v-00011o-J8
+ for qemu-riscv@nongnu.org; Wed, 04 Oct 2023 08:37:20 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1696422806;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
+ s=mimecast20190719; t=1696423038;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ihODOrbA60WdNjWuy5YbID0afwvWWeY+G74+NEikqAg=;
- b=SIQ4DrULxVV++gJk8Va3q+zOHnY9Q84jJbQn/qble2dnU+MKmnHbHF3Irn9jMgfVGWynEH
- DL6AlIP/jddk24F3u+OJg2BGs5wn0vmCAEBIAnVfU86bQYD7SVMSDOafYFZ68HnPUZzMzT
- U2I59nQ23JwK5E5cC3WrUlFhSwN1CDA=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-270-bhW9QaQaMVGk4BUHhxh50g-1; Wed, 04 Oct 2023 08:33:22 -0400
-X-MC-Unique: bhW9QaQaMVGk4BUHhxh50g-1
-Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
- [10.11.54.10])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 6C05118175B3;
- Wed,  4 Oct 2023 12:33:22 +0000 (UTC)
-Received: from redhat.com (unknown [10.42.28.44])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 3B6DC4A9B0A;
- Wed,  4 Oct 2023 12:33:21 +0000 (UTC)
-Date: Wed, 4 Oct 2023 13:33:18 +0100
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Thomas Huth <thuth@redhat.com>, qemu-ppc@nongnu.org,
+ bh=QAi0IIFmd1uLGA69a3sYX8NgxiuutGABC52gw0w1l+k=;
+ b=bafEZAcfb+GQfELsVOqZd3VHtUd6K6aJ2QK2JeWWprl4my5UEzJN8HmVn3reBIoEtBGk1g
+ HOD55v2xUzIcPwgsMinXGTxJrutQd9/In44Tv/oFqytnGtf24wjW1qmnh9oABup+cUAjox
+ pH0zY9zZnXdp/pDIu3C545lrW0LhBZ4=
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
+ [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-180-4pYor9u9NNeAI2aMuUrgVA-1; Wed, 04 Oct 2023 08:37:17 -0400
+X-MC-Unique: 4pYor9u9NNeAI2aMuUrgVA-1
+Received: by mail-qk1-f198.google.com with SMTP id
+ af79cd13be357-7740c35073bso253379985a.3
+ for <qemu-riscv@nongnu.org>; Wed, 04 Oct 2023 05:37:17 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696423037; x=1697027837;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=QAi0IIFmd1uLGA69a3sYX8NgxiuutGABC52gw0w1l+k=;
+ b=p2H8/d9UfmsKBuwJa3oxR2VAALaKhhKnL5gVvcwgE/vRMzEIYRscblrVJivsLPxihT
+ ZmUFHBBY61CUakqcCJdhJ4+LJFnV1ixr/D+0PF3My4jVkeFiXYC0IrqOJ+dhY9FpapeK
+ FA520OLAOar+UyCXWGUXZeLTfkBgKgbOkRs0LSSEyezVmT9JaLXjsjrOL4R1Oy2uSSb/
+ aw7+wvdhoBrsGRn7/nbats2h7uW13BnbLuItspjsyJJABJLtef05p8OympWPV2hTb1Wz
+ SkLXgWmyBV/qezwnAe5gR1I1MZ++Qb4B1AmXpNanuDvMjEkMS0COKTUk4+DtaaBe/iUl
+ inJA==
+X-Gm-Message-State: AOJu0YwDEqfJhXjkkgUUqWDg9kIpAc5K1whaE4OwsxzrkzNy7FrXU+V+
+ JIe0posbMS49C81y1/rbxLPXl4ZEXr74XwkSZprtpACmLPrIYkHMZrpha9kpPMlfhzVHlH1I72U
+ 9nzI7X5iy2HcEjfs=
+X-Received: by 2002:a05:622a:30c:b0:417:f9e1:664f with SMTP id
+ q12-20020a05622a030c00b00417f9e1664fmr2064829qtw.36.1696423037206; 
+ Wed, 04 Oct 2023 05:37:17 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHEIEGPh3VjHBS2G5OxAuSF9eExLVpg8FiVDNgJE9L4xs9bmKUgF0JBLq/AWSHfMT+tUsI1ig==
+X-Received: by 2002:a05:622a:30c:b0:417:f9e1:664f with SMTP id
+ q12-20020a05622a030c00b00417f9e1664fmr2064814qtw.36.1696423036930; 
+ Wed, 04 Oct 2023 05:37:16 -0700 (PDT)
+Received: from [10.200.209.159] (nat-pool-str-u.redhat.com. [149.14.88.107])
+ by smtp.gmail.com with ESMTPSA id
+ b6-20020ac87546000000b00419792c1be7sm1179462qtr.30.2023.10.04.05.37.15
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 04 Oct 2023 05:37:16 -0700 (PDT)
+Message-ID: <85be2979-c0ca-3eb4-dae9-bbabf256c201@redhat.com>
+Date: Wed, 4 Oct 2023 14:37:14 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH 00/13] misc: Rename 'softmmu' -> 'system'
+To: =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  qemu-s390x@nongnu.org, qemu-arm@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>
-Subject: Re: [PATCH 00/13] misc: Rename 'softmmu' -> 'system'
-Message-ID: <ZR1bjpEi5HdFp2xj@redhat.com>
 References: <20231004090629.37473-1-philmd@linaro.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+ <ZR1bjpEi5HdFp2xj@redhat.com>
+From: Thomas Huth <thuth@redhat.com>
+In-Reply-To: <ZR1bjpEi5HdFp2xj@redhat.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20231004090629.37473-1-philmd@linaro.org>
-User-Agent: Mutt/2.2.9 (2022-11-12)
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.10
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+X-Spam_score_int: -35
+X-Spam_score: -3.6
+X-Spam_bar: ---
+X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ NICE_REPLY_A=-1.528, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001,
+ RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -83,219 +105,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Oct 04, 2023 at 11:06:15AM +0200, Philippe Mathieu-Daudé wrote:
-> This series finishes the cleanup which remove the confusion
-> of using 'softmmu' when we really mean 'system emulation',
-> as opposition to 'user emulation'.
-
-Am I mis-understanding what you mean by 'finishes' here, as
-I see many references to softmmu remaining
-
-  $ git grep softmmu | wc -l
-  270
-
-In particular under configs/
-
-I was also hoping it meant that we'd be changing configure
-to allow
-
-    configure --target-list=x86_64-system
-
-though the lazy side of me would like
-
-    configure --target-list=x86_64-vm
-
-for less typing
-
+On 04/10/2023 14.33, Daniel P. Berrangé wrote:
+> On Wed, Oct 04, 2023 at 11:06:15AM +0200, Philippe Mathieu-Daudé wrote:
+>> This series finishes the cleanup which remove the confusion
+>> of using 'softmmu' when we really mean 'system emulation',
+>> as opposition to 'user emulation'.
 > 
-> Now that Richard posted its "tcg: Allow softmmu for user-only"
-> series, this is particularly relevant:
-> https://lore.kernel.org/qemu-devel/20231003174356.1602279-1-richard.henderson@linaro.org/
+> Am I mis-understanding what you mean by 'finishes' here, as
+> I see many references to softmmu remaining
 > 
-> Philippe Mathieu-Daudé (13):
->   softmmu/trace-events: Fix a typo
->   travis-ci: Correct invalid mentions of 'softmmu' by 'system'
->   cpu: Correct invalid mentions of 'softmmu' by 'system-mode'
->   fuzz: Correct invalid mentions of 'softmmu' by 'system'
->   tcg: Correct invalid mentions of 'softmmu' by 'system-mode'
->   accel: Rename accel_softmmu* -> accel_system*
->   gdbstub: Rename 'softmmu' -> 'system'
->   semihosting: Rename softmmu_FOO_user() -> uaccess_FOO_user()
->   target/i386: Rename i386_softmmu_kvm_ss -> i386_kvm_ss
->   hw/virtio/meson: Rename softmmu_virtio_ss -> system_virtio_ss
->   meson: Rename softmmu_mods -> system_mods
->   meson: Rename target_softmmu_arch -> target_system_arch
->   system: Rename softmmu/ directory as system/
+>    $ git grep softmmu | wc -l
+>    270
 > 
->  MAINTAINERS                                   | 44 +++++++++----------
->  docs/devel/build-system.rst                   |  4 +-
->  docs/devel/qtest.rst                          |  2 +-
->  docs/devel/testing.rst                        |  2 +-
->  tests/tcg/s390x/pgm-specification.mak         |  2 +-
->  meson.build                                   | 22 +++++-----
->  accel/{accel-softmmu.h => accel-system.h}     |  6 +--
->  gdbstub/internals.h                           |  4 +-
->  include/qemu/atomic128.h                      |  4 +-
->  .../{softmmu-uaccess.h => uaccess.h}          | 24 +++++-----
->  include/sysemu/runstate-action.h              |  2 +-
->  include/tcg/tcg-op-common.h                   |  2 +-
->  softmmu/trace.h                               |  1 -
->  {softmmu => system}/timers-state.h            |  0
->  system/trace.h                                |  1 +
->  tests/qtest/fuzz/fuzz.h                       |  4 +-
->  accel/accel-common.c                          |  2 +-
->  accel/{accel-softmmu.c => accel-system.c}     |  6 +--
->  accel/tcg/user-exec.c                         |  2 +-
->  cpu.c                                         |  2 +-
->  gdbstub/{softmmu.c => system.c}               |  2 +-
->  hw/core/cpu-common.c                          |  4 +-
->  semihosting/arm-compat-semi.c                 |  4 +-
->  semihosting/config.c                          |  2 +-
->  semihosting/guestfd.c                         |  2 +-
->  semihosting/syscalls.c                        |  2 +-
->  semihosting/uaccess.c                         | 14 +++---
->  stubs/semihost.c                              |  4 +-
->  {softmmu => system}/arch_init.c               |  0
->  {softmmu => system}/async-teardown.c          |  0
->  {softmmu => system}/balloon.c                 |  0
->  {softmmu => system}/bootdevice.c              |  0
->  {softmmu => system}/cpu-throttle.c            |  0
->  {softmmu => system}/cpu-timers.c              |  0
->  {softmmu => system}/cpus.c                    |  0
->  {softmmu => system}/datadir.c                 |  0
->  {softmmu => system}/device_tree.c             |  0
->  {softmmu => system}/dirtylimit.c              |  0
->  {softmmu => system}/dma-helpers.c             |  0
->  {softmmu => system}/globals.c                 |  0
->  {softmmu => system}/icount.c                  |  0
->  {softmmu => system}/ioport.c                  |  0
->  {softmmu => system}/main.c                    |  0
->  {softmmu => system}/memory.c                  |  2 +-
->  {softmmu => system}/memory_mapping.c          |  0
->  {softmmu => system}/physmem.c                 |  6 ++-
->  {softmmu => system}/qdev-monitor.c            |  0
->  {softmmu => system}/qemu-seccomp.c            |  0
->  {softmmu => system}/qtest.c                   |  0
->  {softmmu => system}/rtc.c                     |  0
->  {softmmu => system}/runstate-action.c         |  0
->  {softmmu => system}/runstate-hmp-cmds.c       |  0
->  {softmmu => system}/runstate.c                |  0
->  {softmmu => system}/tpm-hmp-cmds.c            |  0
->  {softmmu => system}/tpm.c                     |  0
->  {softmmu => system}/vl.c                      |  0
->  {softmmu => system}/watchpoint.c              |  0
->  target/m68k/m68k-semi.c                       |  2 +-
->  target/mips/tcg/sysemu/mips-semi.c            |  2 +-
->  target/nios2/nios2-semi.c                     |  2 +-
->  target/riscv/vector_helper.c                  |  2 +-
->  tcg/region.c                                  |  4 +-
->  tcg/tcg.c                                     | 11 ++---
->  tests/qtest/fuzz/fuzz.c                       |  2 +-
->  tests/tcg/multiarch/system/memory.c           |  4 +-
->  tcg/aarch64/tcg-target.c.inc                  |  4 +-
->  tcg/arm/tcg-target.c.inc                      |  2 +-
->  tcg/i386/tcg-target.c.inc                     |  2 +-
->  tcg/loongarch64/tcg-target.c.inc              |  4 +-
->  tcg/mips/tcg-target.c.inc                     |  4 +-
->  tcg/ppc/tcg-target.c.inc                      |  4 +-
->  tcg/riscv/tcg-target.c.inc                    |  4 +-
->  tcg/s390x/tcg-target.c.inc                    |  4 +-
->  tcg/sparc64/tcg-target.c.inc                  |  4 +-
->  .travis.yml                                   |  4 +-
->  accel/meson.build                             |  2 +-
->  accel/stubs/meson.build                       | 10 ++---
->  gdbstub/meson.build                           | 10 ++---
->  gdbstub/trace-events                          |  2 +-
->  hw/virtio/meson.build                         | 22 +++++-----
->  scripts/checkpatch.pl                         |  2 +-
->  scripts/coverity-scan/COMPONENTS.md           |  2 +-
->  scripts/get_maintainer.pl                     |  2 +-
->  {softmmu => system}/meson.build               |  0
->  {softmmu => system}/trace-events              |  2 +-
->  target/alpha/meson.build                      |  2 +-
->  target/arm/meson.build                        |  2 +-
->  target/avr/meson.build                        |  2 +-
->  target/cris/meson.build                       |  2 +-
->  target/hppa/meson.build                       |  2 +-
->  target/i386/kvm/meson.build                   | 10 ++---
->  target/i386/meson.build                       |  2 +-
->  target/loongarch/meson.build                  |  2 +-
->  target/m68k/meson.build                       |  2 +-
->  target/microblaze/meson.build                 |  2 +-
->  target/mips/meson.build                       |  2 +-
->  target/nios2/meson.build                      |  2 +-
->  target/openrisc/meson.build                   |  2 +-
->  target/ppc/meson.build                        |  2 +-
->  target/riscv/meson.build                      |  2 +-
->  target/rx/meson.build                         |  2 +-
->  target/s390x/meson.build                      |  2 +-
->  target/sh4/meson.build                        |  2 +-
->  target/sparc/meson.build                      |  2 +-
->  target/tricore/meson.build                    |  2 +-
->  target/xtensa/meson.build                     |  2 +-
->  tcg/meson.build                               |  6 +--
->  tests/tcg/Makefile.target                     |  2 +-
->  tests/tcg/multiarch/gdbstub/interrupt.py      |  2 +-
->  tests/tcg/multiarch/gdbstub/memory.py         |  2 +-
->  tests/tcg/s390x/pgm-specification-softmmu.S   |  2 +-
->  tests/tcg/s390x/softmmu.ld                    |  2 +-
->  tests/tcg/xtensa/Makefile.softmmu-target      |  2 +-
->  tests/tcg/xtensaeb/Makefile.softmmu-target    |  2 +-
->  tests/unit/meson.build                        |  2 +-
->  115 files changed, 188 insertions(+), 181 deletions(-)
->  rename accel/{accel-softmmu.h => accel-system.h} (77%)
->  rename include/semihosting/{softmmu-uaccess.h => uaccess.h} (75%)
->  delete mode 100644 softmmu/trace.h
->  rename {softmmu => system}/timers-state.h (100%)
->  create mode 100644 system/trace.h
->  rename accel/{accel-softmmu.c => accel-system.c} (96%)
->  rename gdbstub/{softmmu.c => system.c} (99%)
->  rename {softmmu => system}/arch_init.c (100%)
->  rename {softmmu => system}/async-teardown.c (100%)
->  rename {softmmu => system}/balloon.c (100%)
->  rename {softmmu => system}/bootdevice.c (100%)
->  rename {softmmu => system}/cpu-throttle.c (100%)
->  rename {softmmu => system}/cpu-timers.c (100%)
->  rename {softmmu => system}/cpus.c (100%)
->  rename {softmmu => system}/datadir.c (100%)
->  rename {softmmu => system}/device_tree.c (100%)
->  rename {softmmu => system}/dirtylimit.c (100%)
->  rename {softmmu => system}/dma-helpers.c (100%)
->  rename {softmmu => system}/globals.c (100%)
->  rename {softmmu => system}/icount.c (100%)
->  rename {softmmu => system}/ioport.c (100%)
->  rename {softmmu => system}/main.c (100%)
->  rename {softmmu => system}/memory.c (99%)
->  rename {softmmu => system}/memory_mapping.c (100%)
->  rename {softmmu => system}/physmem.c (99%)
->  rename {softmmu => system}/qdev-monitor.c (100%)
->  rename {softmmu => system}/qemu-seccomp.c (100%)
->  rename {softmmu => system}/qtest.c (100%)
->  rename {softmmu => system}/rtc.c (100%)
->  rename {softmmu => system}/runstate-action.c (100%)
->  rename {softmmu => system}/runstate-hmp-cmds.c (100%)
->  rename {softmmu => system}/runstate.c (100%)
->  rename {softmmu => system}/tpm-hmp-cmds.c (100%)
->  rename {softmmu => system}/tpm.c (100%)
->  rename {softmmu => system}/vl.c (100%)
->  rename {softmmu => system}/watchpoint.c (100%)
->  rename {softmmu => system}/meson.build (100%)
->  rename {softmmu => system}/trace-events (99%)
+> In particular under configs/
 > 
-> -- 
-> 2.41.0
+> I was also hoping it meant that we'd be changing configure
+> to allow
 > 
+>      configure --target-list=x86_64-system
 > 
+> though the lazy side of me would like
+> 
+>      configure --target-list=x86_64-vm
+> 
+> for less typing
 
-With regards,
-Daniel
--- 
-|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
-|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
-|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
+Maybe we should also bikeshed about the naming first... "system" is a quite 
+overloaded word in this context already, and "vm" sounds rather like 
+hardware-accelerated stuff ... what about using something like "sysemu"? Or 
+"fullsys" for "full system emulation" (in contrast to "user space"-only 
+emulation)?
+
+  Thomas
 
 
