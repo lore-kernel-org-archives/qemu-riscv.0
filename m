@@ -4,85 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BEC3E7C4D0
-	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Oct 2023 15:24:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AF40E936F1
+	for <qemu-riscv@archiver.kernel.org>; Thu,  5 Oct 2023 01:46:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qo3jE-00029W-6N; Wed, 04 Oct 2023 11:24:00 -0400
+	id 1qoDR0-0004UE-Ho; Wed, 04 Oct 2023 21:45:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qo3jC-000297-Tk
- for qemu-riscv@nongnu.org; Wed, 04 Oct 2023 11:23:58 -0400
-Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1qoDQv-0004Sn-Cq; Wed, 04 Oct 2023 21:45:47 -0400
+Received: from mail-vs1-xe2e.google.com ([2607:f8b0:4864:20::e2e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qo3jA-0006z9-TW
- for qemu-riscv@nongnu.org; Wed, 04 Oct 2023 11:23:58 -0400
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-406650da82bso21524115e9.3
- for <qemu-riscv@nongnu.org>; Wed, 04 Oct 2023 08:23:56 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1qoDQt-0005hL-9B; Wed, 04 Oct 2023 21:45:45 -0400
+Received: by mail-vs1-xe2e.google.com with SMTP id
+ ada2fe7eead31-4525dd7f9d0so194961137.3; 
+ Wed, 04 Oct 2023 18:45:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696433035; x=1697037835; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
- :subject:cc:to:from:user-agent:references:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1696470341; x=1697075141; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JNBRBArcAlhVpIBuXhlmFFCPwlURTQAesQHQuoOacgc=;
- b=KTjgAS1yWivUzipA0jInc2uXZhqTeWh+MkMxHpV4IQwW3RnDmDAqdOb+Y6PymiNxxc
- rLdOkV12RXyuwFx6lRJ3ndlpg/c4dci0NDKVwT4i3/SZ9zecRvXrIGzLeVY96kWovU9b
- DnaO/0ax++mEBt/mg3HmzrT/gryQQBN/tsVjE5Ffn1qH5/R5eIDugNK/UG7UWpyA2U0z
- hmxoNiuAdNalcRHuaL9kYpfkddfbaftCMg2yGp881blhlC9P1qvIwc89uIF8RLiwzjGC
- GHE8M71lbW4uioaAewWP2bdI+S337XTurbvpnqLWNNNi0WHj1nVCUX8VL06Wdnh1jsGU
- pJOQ==
+ bh=n9d4judrISOnFbc3H46tgC8UqBGA5egJwhcka51ND+o=;
+ b=B1KWmraoqMd95QrkC+8sJBhpLP0857eT3HWT7ZZmXV2jEAjTPCghyOgE5gZOlR2A7p
+ GNfa6TJj/gpB6m+EpyuKl13N+FhgkBRrdlY5NV9lDXc4jFJTv00T1BnRs9EppQ88ghSC
+ HzQvYlFI/3NTl6Yj9nbGHrpxTye3nNn9ZFtko42J/MjbV0NgAzQczC5Xz9Am4d73LXb3
+ xbAyN01I61jZ6vfeSttBOQ4QzsFypZWdib8Dv93/FX4oBXUIaajyTMfiARYYYSiCHPxS
+ 7+JiIpLJyeUq0fwh7fJzTK2hPK+60z5O9SyW1zpe6gijRm+N2lyMk5WCq+gTkzOOIYht
+ rInQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696433035; x=1697037835;
- h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
- :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=JNBRBArcAlhVpIBuXhlmFFCPwlURTQAesQHQuoOacgc=;
- b=neS+ntqY+MZsAKrkO1qcBaUKCMelvCUTj8WC6/ER9oNvAIG1XFGiZKY/HCjgoOo+Wf
- /rYfGv/qQJxGNhifOo/LwXs0xGOxXeuQ00TaTBmJ0fJua2NVVUdRuy7a12UF/hPAmnzo
- ni7+vYZZpw1XmxzT/MmUQXuVx/P/XLiuisd9O/eDeV4kXQMNnEURvuOL2HCdAcbJK/QI
- fKZ+xWP5mYvKXTStHbE5X5lPYtrb33hbqn+xwO95YscND/Vb+wrpEEyvHMcOEVTtbvQZ
- LZ03oEo5W37gU7mB1hlhWT6f+uCuvt+c0t3SBtYYIQfw2xdjQjpqrHAqpcVcK6f4xRLF
- Svxw==
-X-Gm-Message-State: AOJu0YwFBUZ+wWaHBQz0qgwN0H+7bnWNoOpDDRIRlb3x5llCxsZHhpgR
- ESwmXKKva60eCNLmGnyQ2XNzGw==
-X-Google-Smtp-Source: AGHT+IH0iM8nQzfT+7DudeZdl0xc4jiB9vdJlPRlz3eMYY50aQxiIDQg5H+7f1JSQlUCDsI3OTWdOw==
-X-Received: by 2002:a1c:7910:0:b0:401:c0ef:c287 with SMTP id
- l16-20020a1c7910000000b00401c0efc287mr2903233wme.27.1696433035197; 
- Wed, 04 Oct 2023 08:23:55 -0700 (PDT)
-Received: from zen.linaroharston ([85.9.250.243])
- by smtp.gmail.com with ESMTPSA id
- i5-20020adffdc5000000b0031fb91f23e9sm4281936wrs.43.2023.10.04.08.23.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Oct 2023 08:23:54 -0700 (PDT)
-Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 193871FFBB;
- Wed,  4 Oct 2023 16:23:54 +0100 (BST)
-References: <20231004090629.37473-1-philmd@linaro.org>
- <20231004090629.37473-8-philmd@linaro.org>
-User-agent: mu4e 1.11.21; emacs 29.1.50
-From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Thomas Huth
- <thuth@redhat.com>, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
- qemu-arm@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>
-Subject: Re: [PATCH 07/13] gdbstub: Rename 'softmmu' -> 'system'
-Date: Wed, 04 Oct 2023 16:23:48 +0100
-In-reply-to: <20231004090629.37473-8-philmd@linaro.org>
-Message-ID: <874jj6h0mt.fsf@linaro.org>
+ d=1e100.net; s=20230601; t=1696470341; x=1697075141;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=n9d4judrISOnFbc3H46tgC8UqBGA5egJwhcka51ND+o=;
+ b=JzK+HqCeZoOPArHFkdKKjhxaXKWvADOwtLirI6ofj1C8zdCst/jd7QUflbrNRbehr5
+ O3r+9llplaA7GSwxKQrHS9hfaE7pMLYstkgtNtdGocZbrcXT5qajEIxLKM9Q+VL6+LSK
+ +o1wyQY1a89CLzJ4XHBO2i7i4lrCX1X76F5ouQh+W6Xw1VlvlzQPmraQs6YhuKwP8/X/
+ aHFf8uvecvOyeFQ2pn/oZvHRmp5gA6r59+ucMBwf8Xuf8rF2qK4lVOl9gshyvbFB/1L5
+ c9LsWn80D4apTYuzdzKiMxkmGzFprk9+MvuxpjvyrSI3OSHS5n7SOxcmplM3+obXpTYW
+ sdFQ==
+X-Gm-Message-State: AOJu0Yw2Y07+riSisyvmoS1pp1Qk479G1iBSOOQedfZ1ERaZ9PhxsBZa
+ nGZXKNS1J4uKRpQTOQHVIK3JCu3r4tHU+0DYzRWdeTul0x4=
+X-Google-Smtp-Source: AGHT+IHgjoBZ7umppmyNahZ1kjvn9/NQrb1WXd4z1azRe8CKcOks5taPP+417tFqNPnetBFgb+lYM8nk7BbPEh+pGoM=
+X-Received: by 2002:a67:f701:0:b0:452:81b3:4b07 with SMTP id
+ m1-20020a67f701000000b0045281b34b07mr3489179vso.17.1696470341053; Wed, 04 Oct
+ 2023 18:45:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+References: <20231003071427.188697-1-chigot@adacore.com>
+In-Reply-To: <20231003071427.188697-1-chigot@adacore.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 5 Oct 2023 11:45:14 +1000
+Message-ID: <CAKmqyKP6OKbfvg4FCG2m3ORrSXRh-a-tQKR+aZgRUK+bvyX7HA@mail.gmail.com>
+Subject: Re: [PATCH v4 0/5] Risc-V/gdb: replace exit calls with proper shutdown
+To: =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2e;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2e.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -100,123 +87,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> writes:
-
-> We have gdbstub/user.c for user emulation code,
-> use gdbstub/system.c for system emulation part.
+On Tue, Oct 3, 2023 at 5:14=E2=80=AFPM Cl=C3=A9ment Chigot <chigot@adacore.=
+com> wrote:
 >
-> Rename s/softmmu/system/ in meson and few comments.
+> This series replaces some of the call to exit in hardware used by
+> Risc-V boards. Otherwise, the gdb connection can be abruptly
+> disconnected resulting in the last gdb packet "Wxx" being not sent.
 >
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-
-Acked-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
-
-> ---
->  gdbstub/internals.h             |  4 ++--
->  gdbstub/{softmmu.c =3D> system.c} |  2 +-
->  gdbstub/meson.build             | 10 +++++-----
->  gdbstub/trace-events            |  2 +-
->  4 files changed, 9 insertions(+), 9 deletions(-)
->  rename gdbstub/{softmmu.c =3D> system.c} (99%)
+> For the gdbstub modification, gdb_exit calls ensure that the "Wxx"
+> packet is sent before exiting. However, some features (see
+> net/vhost-vdpa.c: vhost_vdpa_cleanup for example) are expecting
+> that a cleanup is being made before exiting. This, it's probably
+> safer to follow the same logic here as well.
 >
-> diff --git a/gdbstub/internals.h b/gdbstub/internals.h
-> index fee243081f..f7fd1bede5 100644
-> --- a/gdbstub/internals.h
-> +++ b/gdbstub/internals.h
-> @@ -103,7 +103,7 @@ static inline int tohex(int v)
->  }
->=20=20
->  /*
-> - * Connection helpers for both softmmu and user backends
-> + * Connection helpers for both system and user backends
->   */
->=20=20
->  void gdb_put_strbuf(void);
-> @@ -229,7 +229,7 @@ void gdb_breakpoint_remove_all(CPUState *cs);
->   * @is_write: is it a write operation
->   *
->   * This function is specialised depending on the mode we are running
-> - * in. For softmmu guests we can switch the interpretation of the
-> + * in. For system guests we can switch the interpretation of the
->   * address to a physical address.
->   */
->  int gdb_target_memory_rw_debug(CPUState *cs, hwaddr addr,
-> diff --git a/gdbstub/softmmu.c b/gdbstub/system.c
-> similarity index 99%
-> rename from gdbstub/softmmu.c
-> rename to gdbstub/system.c
-> index 9f0b8b5497..189975b1d6 100644
-> --- a/gdbstub/softmmu.c
-> +++ b/gdbstub/system.c
-> @@ -104,7 +104,7 @@ static void gdb_chr_event(void *opaque, QEMUChrEvent =
-event)
->  }
->=20=20
->  /*
-> - * In softmmu mode we stop the VM and wait to send the syscall packet
-> + * In system-mode we stop the VM and wait to send the syscall packet
->   * until notification that the CPU has stopped. This must be done
->   * because if the packet is sent now the reply from the syscall
->   * request could be received while the CPU is still in the running
-> diff --git a/gdbstub/meson.build b/gdbstub/meson.build
-> index a5a1f4e433..e5bccba34e 100644
-> --- a/gdbstub/meson.build
-> +++ b/gdbstub/meson.build
-> @@ -1,6 +1,6 @@
->  #
->  # The main gdbstub still relies on per-build definitions of various
-> -# types. The bits pushed to softmmu/user.c try to use guest agnostic
-> +# types. The bits pushed to system/user.c try to use guest agnostic
->  # types such as hwaddr.
->  #
->=20=20
-> @@ -12,7 +12,7 @@ gdb_system_ss =3D ss.source_set()
->=20=20
->  # We build two versions of gdbstub, one for each mode
->  gdb_user_ss.add(files('gdbstub.c', 'user.c'))
-> -gdb_system_ss.add(files('gdbstub.c', 'softmmu.c'))
-> +gdb_system_ss.add(files('gdbstub.c', 'system.c'))
->=20=20
->  gdb_user_ss =3D gdb_user_ss.apply(config_targetos, strict: false)
->  gdb_system_ss =3D gdb_system_ss.apply(config_targetos, strict: false)
-> @@ -23,15 +23,15 @@ libgdb_user =3D static_library('gdb_user',
->                               c_args: '-DCONFIG_USER_ONLY',
->                               build_by_default: false)
->=20=20
-> -libgdb_softmmu =3D static_library('gdb_softmmu',
-> +libgdb_system =3D static_library('gdb_system',
->                                  gdb_system_ss.sources() + genh,
->                                  name_suffix: 'fa',
->                                  build_by_default: false)
->=20=20
->  gdb_user =3D declare_dependency(link_whole: libgdb_user)
->  user_ss.add(gdb_user)
-> -gdb_softmmu =3D declare_dependency(link_whole: libgdb_softmmu)
-> -system_ss.add(gdb_softmmu)
-> +gdb_system =3D declare_dependency(link_whole: libgdb_system)
-> +system_ss.add(gdb_system)
->=20=20
->  common_ss.add(files('syscalls.c'))
->=20=20
-> diff --git a/gdbstub/trace-events b/gdbstub/trace-events
-> index 7bc79a73c4..4fd126a38c 100644
-> --- a/gdbstub/trace-events
-> +++ b/gdbstub/trace-events
-> @@ -28,5 +28,5 @@ gdbstub_err_checksum_invalid(uint8_t ch) "got invalid c=
-ommand checksum digit: 0x
->  gdbstub_err_checksum_incorrect(uint8_t expected, uint8_t got) "got comma=
-nd packet with incorrect checksum, expected=3D0x%02x, received=3D0x%02x"
->  gdbstub_err_unexpected_runpkt(uint8_t ch) "unexpected packet (0x%02x) wh=
-ile target running"
->=20=20
-> -# softmmu.c
-> +# system.c
->  gdbstub_hit_watchpoint(const char *type, int cpu_gdb_index, uint64_t vad=
-dr) "Watchpoint hit, type=3D\"%s\" cpu=3D%d, vaddr=3D0x%" PRIx64 ""
+> Difference with v3:
+>  - Rebase on riscv-to-apply
+>
+> Cl=C3=A9ment Chigot (5):
+>   softmmu: add means to pass an exit code when requesting a shutdown
+>   softmmu: pass the main loop status to gdb "Wxx" packet
+>   hw/misc/sifive_test.c: replace exit calls with proper shutdown
+>   hw/char: riscv_htif: replace exit calls with proper shutdown
+>   gdbstub: replace exit calls with proper shutdown for softmmu
 
+Thanks!
 
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
+Applied to riscv-to-apply.next
+
+Alistair
+
+>
+>  gdbstub/gdbstub.c          |  5 +++--
+>  gdbstub/softmmu.c          |  6 ++++++
+>  gdbstub/user.c             |  6 ++++++
+>  hw/char/riscv_htif.c       |  5 ++++-
+>  hw/misc/sifive_test.c      |  9 +++++++--
+>  include/gdbstub/syscalls.h |  9 +++++++++
+>  include/sysemu/runstate.h  |  2 ++
+>  include/sysemu/sysemu.h    |  2 +-
+>  softmmu/main.c             |  2 +-
+>  softmmu/runstate.c         | 16 +++++++++++++---
+>  10 files changed, 52 insertions(+), 10 deletions(-)
+>
+> --
+> 2.25.1
+>
 
