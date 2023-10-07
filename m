@@ -4,83 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FEC3E95A60
-	for <qemu-riscv@archiver.kernel.org>; Sat,  7 Oct 2023 12:08:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0122E95A62
+	for <qemu-riscv@archiver.kernel.org>; Sat,  7 Oct 2023 17:14:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qp66Y-00054T-At; Sat, 07 Oct 2023 08:08:22 -0400
+	id 1qpAt0-0003o4-Bn; Sat, 07 Oct 2023 13:14:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qp66T-0004uA-E0
- for qemu-riscv@nongnu.org; Sat, 07 Oct 2023 08:08:17 -0400
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
+ id 1qpAsw-0003ng-MO
+ for qemu-riscv@nongnu.org; Sat, 07 Oct 2023 13:14:40 -0400
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qp66R-0004l6-HK
- for qemu-riscv@nongnu.org; Sat, 07 Oct 2023 08:08:17 -0400
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-1c77449a6daso25982095ad.0
- for <qemu-riscv@nongnu.org>; Sat, 07 Oct 2023 05:08:15 -0700 (PDT)
+ id 1qpAsu-00060j-Hf
+ for qemu-riscv@nongnu.org; Sat, 07 Oct 2023 13:14:38 -0400
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-1c737d61a00so25797145ad.3
+ for <qemu-riscv@nongnu.org>; Sat, 07 Oct 2023 10:14:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1696680494; x=1697285294; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=JAmbIQwcH9HLmVeduHvcJCUylx4zP99ezMrphN+yjDU=;
- b=j2VdRfVbTz2k8zgJPj2qH/j5yQXNT7uvsM2W1j0k4J6A+XlT88zVOu2fMSbLQgKqfq
- U7KjmznKSxPNV0kQT2MTJIbpZvMgvmNWNNQtiYMqq0S+eb65M3E8IP9cqbDyDXBGexyk
- csy3WYtlsN7lP80O+IOk/aIprLNE3dxvHbB2OfXryZbt3avcvy3gEc7zIEih7lwzv/2z
- sgTkA5hgoJmLwjVoqa4GoZVFsYSaQgWSan72TiPWaW1oqqCNyV8tvMQIqkhTmisYAuSe
- trCirlvrThtl0O+tTg+WEI1gdw14nISUXTL6l/eorkh+LUMp0y9AC2hmN/YFsCxCBQfG
- /Kjg==
+ d=ventanamicro.com; s=google; t=1696698874; x=1697303674; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=NUuYFJR1IAfH5lrvaFKMoLWkNnK1kNklfRB/5SG4LAg=;
+ b=muVE1Blh2LbDTJWy1y8KocrhpFerKIFP3AVX+4ZQsiW6IafBWinZY9C5mNbTRagE+N
+ 8LUGFcVfZBkKcAMs6cLEawDbMCaQvYZpE8QLcfnvVSQVpB/yUezAwQo69NrAa+6xOYFL
+ GR9blfwlJProz1Ft+VZAZctnp/1mDTIhUTXLTTFr1VTDL7aTGCsa4CgpMg8bvbBw4nSh
+ m/n57dEB/XyV4S6BtR1syHLXz6hGoVjGxkD5qE8fKc6O6Spr5ZGIcZRdXG0/XLvuJjOx
+ QyM60bekklA4Hqbiz9AxDDOCvpSTcDVMOBGFT0MjUhDGtFvR+HxUjkVS7oLq4lsBIC3+
+ q4EA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696680494; x=1697285294;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=JAmbIQwcH9HLmVeduHvcJCUylx4zP99ezMrphN+yjDU=;
- b=vwBRgEyHADYn10GnAYrcKPkOGHmCIK4nixtn5ppYhHa6twf4m6tBLAzOc25x63u1ZW
- 6XW0BDEse/8V5Nux79Ixe7DMzre58BBaOlARdlhOqkHzb40VWNYanj6MC6p596Besg25
- /tr+LGi3WDxUgzc/6os8IAaahFMY57hWiC4oQ49a6xI0u6VaNeSMSYRwQKW1PBHIn58F
- aMInXspp4iEroMqVocksdUAxik5C6131gOLgfIHRlMyPkxMRbk4Y8msa6wCvU+nPgp96
- imHKLxvGM4ThvkWzisj5eqtYIPnl3Qtybn0mAz18Aev5CHfrsjptY4p76AR3VveLQDEL
- fYeA==
-X-Gm-Message-State: AOJu0YwR9rhHwi4aq4Hedm8oxf4bU4pXunrfeQSGyw0VCrBetBJiitb7
- SJNsfsoW56JBJMwBBbpYRM76gQ==
-X-Google-Smtp-Source: AGHT+IEXovl5lGaUqqDhwFSClsH4W5JV2RSHuDNttvZC0RFXfOmywo8hzisrhL+Ev1h0l4b4bjRHAg==
-X-Received: by 2002:a17:902:e885:b0:1b0:f8:9b2d with SMTP id
- w5-20020a170902e88500b001b000f89b2dmr13584681plg.29.1696680493593; 
- Sat, 07 Oct 2023 05:08:13 -0700 (PDT)
-Received: from [192.168.68.107] ([177.94.42.196])
- by smtp.gmail.com with ESMTPSA id
- w9-20020a170902e88900b001bf11cf2e21sm5673419plg.210.2023.10.07.05.08.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 07 Oct 2023 05:08:13 -0700 (PDT)
-Message-ID: <893138bf-af9f-b216-b230-960903c9013c@ventanamicro.com>
-Date: Sat, 7 Oct 2023 09:08:08 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [PATCH] target/riscv: Use a direct cast for better performance
-To: "Richard W.M. Jones" <rjones@redhat.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
- pbonzini@redhat.com
-References: <20231007090232.3329594-1-rjones@redhat.com>
-Content-Language: en-US
+ d=1e100.net; s=20230601; t=1696698874; x=1697303674;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=NUuYFJR1IAfH5lrvaFKMoLWkNnK1kNklfRB/5SG4LAg=;
+ b=DTYDFo1peTnpAeqeJ2ctMtnWAhYSSrVKk9u2y6bzuZ7XsxiLjuM5LkcN9YWoTaK9tl
+ SVKQYyOSmKzzeA8cOWt9V5YLv/dpZ6nXRffyUz9Ig2ztNE27fpPvp0ljGHdUlNel3PRq
+ uobsC+L+amGmm7oslIBLhLd6qtFijqAOvVPE/JqmnsHKytWiid6lW2Uu9sOcrsZKiwTz
+ eYEtZEPlna3GOLBtwG7wbyc+fyzHhoX96xwc7t6BEYyXINOoRpM7h+MPJ0PmTNSQEqew
+ DluCIhcuxnuYpxz4Ov6efVsmS4Im3jCbZEU9qPqpjx+FjGw7RQwPdQpw41RvtSTyFcWS
+ XBxA==
+X-Gm-Message-State: AOJu0YyRNfRSeuuaYwBSw1G6CxKWcWysre+WPYZYr/JwTgY0ve2AK+zT
+ 4udRjBr6/pYFD2BHHkxROUP/tA==
+X-Google-Smtp-Source: AGHT+IG/48wX96jQhNqbPcCV9ilXE3rAwT1nwZ6mW0Ll/qIbH5FWuoY1ZR34tkgVYC1F7jTBgltZtQ==
+X-Received: by 2002:a17:903:1c8:b0:1c8:a63a:2087 with SMTP id
+ e8-20020a17090301c800b001c8a63a2087mr431119plh.65.1696698873914; 
+ Sat, 07 Oct 2023 10:14:33 -0700 (PDT)
+Received: from grind.. ([177.94.42.196]) by smtp.gmail.com with ESMTPSA id
+ ix3-20020a170902f80300b001b06c106844sm6131064plb.151.2023.10.07.10.14.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 07 Oct 2023 10:14:33 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20231007090232.3329594-1-rjones@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x630.google.com
-X-Spam_score_int: -26
-X-Spam_score: -2.7
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH] target/riscv: deprecate capital 'Z' CPU properties
+Date: Sat,  7 Oct 2023 14:14:27 -0300
+Message-ID: <20231007171427.1210117-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.41.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.644,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -98,48 +91,207 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+At this moment there are eleven CPU extension properties that starts
+with capital 'Z': Zifencei, Zicsr, Zihintntl, Zihintpause, Zawrs, Zfa,
+Zfh, Zfhmin, Zve32f, Zve64f and Zve64d. All other extensions are named
+with lower-case letters.
 
+We want all properties to be named with lower-case letters since it's
+consistent with the riscv-isa string that we create in the FDT. Having
+these 11 properties to be exceptions can be confusing.
 
-On 10/7/23 06:02, Richard W.M. Jones wrote:
-> RISCV_CPU(cs) uses a checked cast.  When QOM cast debugging is enabled
-> this adds about 5% total overhead when emulating RV64 on x86-64 host.
-> 
-> Using a RISC-V guest with 16 vCPUs, 16 GB of guest RAM, virtio-blk
-> disk.  The guest has a copy of the qemu source tree.  The test
-> involves compiling the qemu source tree with 'make clean; time make -j16'.
-> 
-> Before making this change the compile step took 449 & 447 seconds over
-> two consecutive runs.
-> 
-> After making this change, 428 & 422 seconds.
-> 
-> The saving is about 5%.
-> 
-> Thanks: Paolo Bonzini
-> Signed-off-by: Richard W.M. Jones <rjones@redhat.com>
-> ---
+Deprecate all of them. Create their lower-case counterpart to be used as
+maintained CPU properties. When trying to use any deprecated property a
+warning message will be displayed, recommending users to switch to the
+lower-case variant:
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+./build/qemu-system-riscv64 -M virt -cpu rv64,Zifencei=true --nographic
+qemu-system-riscv64: warning: CPU property 'Zifencei' is deprecated. Please use 'zifencei' instead
 
+This will give users some time to change their scripts before we remove
+the capital 'Z' properties entirely.
 
->   target/riscv/cpu_helper.c | 6 +++++-
->   1 file changed, 5 insertions(+), 1 deletion(-)
-> 
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 3a02079290..6174d99fb2 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -66,7 +66,11 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
->                             uint64_t *cs_base, uint32_t *pflags)
->   {
->       CPUState *cs = env_cpu(env);
-> -    RISCVCPU *cpu = RISCV_CPU(cs);
-> +    /*
-> +     * Using the checked cast RISCV_CPU(cs) imposes ~ 5% overhead when
-> +     * qemu cast debugging is enabled, so use a direct cast instead.
-> +     */
-> +    RISCVCPU *cpu = (RISCVCPU *)cs;
->       RISCVExtStatus fs, vs;
->       uint32_t flags = 0;
->   
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ docs/about/deprecated.rst  | 23 ++++++++++++++++++++++
+ target/riscv/cpu.c         | 39 +++++++++++++++++++++++++++-----------
+ target/riscv/cpu.h         |  1 +
+ target/riscv/tcg/tcg-cpu.c | 31 +++++++++++++++++++++++++++++-
+ 4 files changed, 82 insertions(+), 12 deletions(-)
+
+diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
+index 694b878f36..331f10f930 100644
+--- a/docs/about/deprecated.rst
++++ b/docs/about/deprecated.rst
+@@ -378,6 +378,29 @@ of generic CPUs: rv32 and rv64 as default CPUs and 'max' as a feature complete
+ CPU for both 32 and 64 bit builds. Users are then discouraged to use the 'any'
+ CPU type starting in 8.2.
+ 
++RISC-V CPU properties which start with with capital 'Z' (since 8.2)
++^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++
++All RISC-V CPU properties which start with capital 'Z' are being deprecated
++starting in 8.2. The reason is that they were wrongly added with capital 'Z'
++in the past. CPU properties were later added with lower-case names, which
++is the format we want to use from now on.
++
++Users which try to use these deprecated properties will receive a warning
++recommending to switch to their stable counterparts:
++
++- "Zifencei" should be replaced with "zifencei"
++- "Zicsr" should be replaced with "zicsr"
++- "Zihintntl" should be replaced with "zihintntl"
++- "Zihintpause" should be replaced with "zihintpause"
++- "Zawrs" should be replaced with "zawrs"
++- "Zfa" should be replaced with "zfa"
++- "Zfh" should be replaced with "zfh"
++- "Zfhmin" should be replaced with "zfhmin"
++- "Zve32f" should be replaced with "zve32f"
++- "Zve64f" should be replaced with "zve64f"
++- "Zve64d" should be replaced with "zve64d"
++
+ Block device options
+ ''''''''''''''''''''
+ 
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 521bb88538..1cdc3d2609 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1246,17 +1246,17 @@ const char *riscv_get_misa_ext_description(uint32_t bit)
+ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+     /* Defaults for standard extensions */
+     MULTI_EXT_CFG_BOOL("sscofpmf", ext_sscofpmf, false),
+-    MULTI_EXT_CFG_BOOL("Zifencei", ext_ifencei, true),
+-    MULTI_EXT_CFG_BOOL("Zicsr", ext_icsr, true),
+-    MULTI_EXT_CFG_BOOL("Zihintntl", ext_zihintntl, true),
+-    MULTI_EXT_CFG_BOOL("Zihintpause", ext_zihintpause, true),
+-    MULTI_EXT_CFG_BOOL("Zawrs", ext_zawrs, true),
+-    MULTI_EXT_CFG_BOOL("Zfa", ext_zfa, true),
+-    MULTI_EXT_CFG_BOOL("Zfh", ext_zfh, false),
+-    MULTI_EXT_CFG_BOOL("Zfhmin", ext_zfhmin, false),
+-    MULTI_EXT_CFG_BOOL("Zve32f", ext_zve32f, false),
+-    MULTI_EXT_CFG_BOOL("Zve64f", ext_zve64f, false),
+-    MULTI_EXT_CFG_BOOL("Zve64d", ext_zve64d, false),
++    MULTI_EXT_CFG_BOOL("zifencei", ext_ifencei, true),
++    MULTI_EXT_CFG_BOOL("zicsr", ext_icsr, true),
++    MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
++    MULTI_EXT_CFG_BOOL("zihintpause", ext_zihintpause, true),
++    MULTI_EXT_CFG_BOOL("zawrs", ext_zawrs, true),
++    MULTI_EXT_CFG_BOOL("zfa", ext_zfa, true),
++    MULTI_EXT_CFG_BOOL("zfh", ext_zfh, false),
++    MULTI_EXT_CFG_BOOL("zfhmin", ext_zfhmin, false),
++    MULTI_EXT_CFG_BOOL("zve32f", ext_zve32f, false),
++    MULTI_EXT_CFG_BOOL("zve64f", ext_zve64f, false),
++    MULTI_EXT_CFG_BOOL("zve64d", ext_zve64d, false),
+     MULTI_EXT_CFG_BOOL("sstc", ext_sstc, true),
+ 
+     MULTI_EXT_CFG_BOOL("smstateen", ext_smstateen, false),
+@@ -1349,6 +1349,23 @@ const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] = {
+     DEFINE_PROP_END_OF_LIST(),
+ };
+ 
++/* Deprecated entries marked for future removal */
++const RISCVCPUMultiExtConfig riscv_cpu_deprecated_exts[] = {
++    MULTI_EXT_CFG_BOOL("Zifencei", ext_ifencei, true),
++    MULTI_EXT_CFG_BOOL("Zicsr", ext_icsr, true),
++    MULTI_EXT_CFG_BOOL("Zihintntl", ext_zihintntl, true),
++    MULTI_EXT_CFG_BOOL("Zihintpause", ext_zihintpause, true),
++    MULTI_EXT_CFG_BOOL("Zawrs", ext_zawrs, true),
++    MULTI_EXT_CFG_BOOL("Zfa", ext_zfa, true),
++    MULTI_EXT_CFG_BOOL("Zfh", ext_zfh, false),
++    MULTI_EXT_CFG_BOOL("Zfhmin", ext_zfhmin, false),
++    MULTI_EXT_CFG_BOOL("Zve32f", ext_zve32f, false),
++    MULTI_EXT_CFG_BOOL("Zve64f", ext_zve64f, false),
++    MULTI_EXT_CFG_BOOL("Zve64d", ext_zve64d, false),
++
++    DEFINE_PROP_END_OF_LIST(),
++};
++
+ Property riscv_cpu_options[] = {
+     DEFINE_PROP_UINT8("pmu-num", RISCVCPU, cfg.pmu_num, 16),
+ 
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 3f11e69223..e98f5de32e 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -722,6 +722,7 @@ typedef struct RISCVCPUMultiExtConfig {
+ extern const RISCVCPUMultiExtConfig riscv_cpu_extensions[];
+ extern const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[];
+ extern const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[];
++extern const RISCVCPUMultiExtConfig riscv_cpu_deprecated_exts[];
+ extern Property riscv_cpu_options[];
+ 
+ typedef struct isa_ext_data {
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index 08b806dc07..00676593f7 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -732,6 +732,25 @@ static void riscv_cpu_add_misa_properties(Object *cpu_obj)
+     }
+ }
+ 
++static bool cpu_ext_is_deprecated(const char *ext_name)
++{
++    return isupper(ext_name[0]);
++}
++
++/*
++ * String will be allocated in the heap. Caller is responsible
++ * for freeing it.
++ */
++static char *cpu_ext_to_lower(const char *ext_name)
++{
++    char *ret = g_malloc0(strlen(ext_name) + 1);
++
++    strcpy(ret, ext_name);
++    ret[0] = tolower(ret[0]);
++
++    return ret;
++}
++
+ static void cpu_set_multi_ext_cfg(Object *obj, Visitor *v, const char *name,
+                                   void *opaque, Error **errp)
+ {
+@@ -744,6 +763,13 @@ static void cpu_set_multi_ext_cfg(Object *obj, Visitor *v, const char *name,
+         return;
+     }
+ 
++    if (cpu_ext_is_deprecated(multi_ext_cfg->name)) {
++        g_autofree char *lower = cpu_ext_to_lower(multi_ext_cfg->name);
++
++        warn_report("CPU property '%s' is deprecated. Please use '%s' instead",
++                    multi_ext_cfg->name, lower);
++    }
++
+     g_hash_table_insert(multi_ext_user_opts,
+                         GUINT_TO_POINTER(multi_ext_cfg->offset),
+                         (gpointer)value);
+@@ -777,13 +803,14 @@ static void cpu_add_multi_ext_prop(Object *cpu_obj,
+                                    const RISCVCPUMultiExtConfig *multi_cfg)
+ {
+     bool generic_cpu = riscv_cpu_is_generic(cpu_obj);
++    bool deprecated_ext = cpu_ext_is_deprecated(multi_cfg->name);
+ 
+     object_property_add(cpu_obj, multi_cfg->name, "bool",
+                         cpu_get_multi_ext_cfg,
+                         cpu_set_multi_ext_cfg,
+                         NULL, (void *)multi_cfg);
+ 
+-    if (!generic_cpu) {
++    if (!generic_cpu || deprecated_ext) {
+         return;
+     }
+ 
+@@ -826,6 +853,8 @@ static void riscv_cpu_add_user_properties(Object *obj)
+     riscv_cpu_add_multiext_prop_array(obj, riscv_cpu_vendor_exts);
+     riscv_cpu_add_multiext_prop_array(obj, riscv_cpu_experimental_exts);
+ 
++    riscv_cpu_add_multiext_prop_array(obj, riscv_cpu_deprecated_exts);
++
+     for (Property *prop = riscv_cpu_options; prop && prop->name; prop++) {
+         qdev_property_add_static(DEVICE(obj), prop);
+     }
+-- 
+2.41.0
+
 
