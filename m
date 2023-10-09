@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E55E1E95A8E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Oct 2023 01:20:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFCEAE95A8F
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Oct 2023 01:21:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qpew9-000775-W5; Sun, 08 Oct 2023 21:19:58 -0400
+	id 1qpext-0007v5-Uj; Sun, 08 Oct 2023 21:21:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qpew4-00075x-Gl; Sun, 08 Oct 2023 21:19:52 -0400
-Received: from mail-vs1-xe2a.google.com ([2607:f8b0:4864:20::e2a])
+ id 1qpexr-0007uQ-Ud; Sun, 08 Oct 2023 21:21:43 -0400
+Received: from mail-vs1-xe2c.google.com ([2607:f8b0:4864:20::e2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qpew2-00017e-T6; Sun, 08 Oct 2023 21:19:52 -0400
-Received: by mail-vs1-xe2a.google.com with SMTP id
- ada2fe7eead31-4577c1ae94fso191586137.1; 
- Sun, 08 Oct 2023 18:19:49 -0700 (PDT)
+ id 1qpexq-0001rI-9K; Sun, 08 Oct 2023 21:21:43 -0400
+Received: by mail-vs1-xe2c.google.com with SMTP id
+ ada2fe7eead31-4547428694dso1497638137.3; 
+ Sun, 08 Oct 2023 18:21:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696814389; x=1697419189; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1696814501; x=1697419301; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1ScgV5jtLC6P4IwNV4ss6RkdnJde867FddL1FkBrxdA=;
- b=OLrZBSbY4aT32O4MtFItr2gtjiRVcWcvA/oJTPG4urV7QchY4Fx8+GIa5wfTBFlsdE
- Qg277GKDF0DvN1Fl1/19MRb+qlilPwMSbyW4rb34yLypXuuufQRfc2w5i8QWYwvP7IZZ
- jUPQv4QSTMONZd1iNzbxhYLrz7rSJTITUFIdeZt84brFxoaWdhd2GH2nneblKlV9tagH
- 3AyXOFnjwvJqRtdh9wLY7UD7Vrh7E6tf9wtwn8uQJzSCJIUJaTD0mxEN67WW1irfAlHz
- d2RAwC8VnOGqNAHZWnwHYHZvyYrM2quBIUgEk8Q+tbhi66SVyEO9ykS61NrtAwoh/vKB
- TkRg==
+ bh=qKGfdpwjxoalMZ1onRt05LIH5tcVGNzrRCN6jW5qKZA=;
+ b=HOjuI5IfILsMB6IBdjWkz3T7ci4fcKaVyephTEzSOaGVTUTpFo88GQLWWqlN/LcGpW
+ qWiyOynk19tCW6NEdjchg6IUuH5UdQthdIQvIhFXxEsn5oQ7uX68hWLKpXnNEW4mlIvN
+ 4M0PWvygbfUDCQnz6OUhism24Q+/Ldi1XM8EN0WRwgoO+/4R5vB9W0+anP2VUh0C+3ND
+ Oar+qAVslt1SpxcrRDYaLUjMC2hUfZNxAZaXmXRNBzaljbp66TAj0IrrSJwkM/1HhxHM
+ tM5vGk1WfgcDGy2nLuwPl3H5jVuThU5IN2WmsZf9yTtvemSrSqKubnsYE9oMD4g08pd7
+ MTXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696814389; x=1697419189;
+ d=1e100.net; s=20230601; t=1696814501; x=1697419301;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1ScgV5jtLC6P4IwNV4ss6RkdnJde867FddL1FkBrxdA=;
- b=e1Y3Y95GWcYR4ght9DvyzMWABLX0RQBxNWL1lQbfkfKiK4sP+sVknGx3Pcg25lo/HO
- Bpu88LdOwb5rXYwO3vnmMdrfzxpHuZkwJJewJCU1EtlBGzXOVb3nXzSL0a8OZqfSZjn1
- 5Ycc5WzhDy/PtF+aIeQPlN4EYr/uDUg6NmGuEPjQEUpvuT876Q8ufWGiobXiHbOQatWU
- sy4H5eKq5BMt1aVyMAZbtUsxaikC0UkZ8rEk733xVYK3hBPBvvhp9ZB1YuyZtavEf4xb
- 5auWVNCflZeFHM0HjPdxoLqOTVq9g8MdIdBflkn9Au4PvISmCMglxFJfAzB2aNVoE2MN
- Ycqg==
-X-Gm-Message-State: AOJu0YzEFaP29TQ/gjqIXL4hqrSuwW3x1jnJLEq5XhtAA2rrFYoo6x+/
- dATA7UHraPyS0Ev58CXrY76dBHXCBDcgA0LKJi4=
-X-Google-Smtp-Source: AGHT+IEDWvmXYXHkuygmrUPioQJR4hcU6SS3zqHVGALp3yfY7zrc4O0hORJWdcwa6A59rj9oNXHHZUy2g7JhS5p18iQ=
-X-Received: by 2002:a05:6102:4bca:b0:457:4645:a339 with SMTP id
- id10-20020a0561024bca00b004574645a339mr11246091vsb.1.1696814389007; Sun, 08
- Oct 2023 18:19:49 -0700 (PDT)
+ bh=qKGfdpwjxoalMZ1onRt05LIH5tcVGNzrRCN6jW5qKZA=;
+ b=MVv+pKtCHSHzQiX6HzJ19P5bh9G9OM85y2VuB9Z8zmKtB1pL2VfCIGxMojY44GJuZG
+ M7OwBSfo5NKguMKwNwj2sEnGxe6hSoUhWRVSVsl8MSuAlgLlCKunSB2MKiG61NNR0dlW
+ sOH1qX2TyJSVpU4Q6Ag4WrO5obxEmZcysMKvLh4MFKzvxFRk6KXl0jvgAqvDtLCThyeu
+ kcQwxBvu2OOgY2Bs0YkHx1lb1ol9ooAnSfrEQbKnb1zn+se0Sm7M0rK7r5mm8QF1WyVw
+ 0hNPNp+qIuTfgOOiewM0H8CIuzzvOm2OaN5kYBGXFfaisAXglDzVgJ6/Vzi//lJxSd9R
+ szcw==
+X-Gm-Message-State: AOJu0Yw0S2Mj5rZU5jW90pRbLasHydOwF5okOaDsXAuxXk3f99jR+2im
+ NqWgBk/JIBh3U2BpLohM0AgXQXynyELqbdZ5EQS+Ll/whNZnAw==
+X-Google-Smtp-Source: AGHT+IEppYM5o1rSajAasaqm7mO0m+NvLRjnTD0xB4k/BW6MMm9QuMIey5H9Eab4dHCflD64YtMpf7EJ6LmmoyE6yc4=
+X-Received: by 2002:a67:c510:0:b0:457:670b:1810 with SMTP id
+ e16-20020a67c510000000b00457670b1810mr2933805vsk.31.1696814500177; Sun, 08
+ Oct 2023 18:21:40 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231003122539.775932-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20231003122539.775932-1-dbarboza@ventanamicro.com>
+References: <20230907112640.292104-1-chigot@adacore.com>
+ <20230907112640.292104-5-chigot@adacore.com>
+ <CAKmqyKMnEofVntirOX+a+r26CNjfMqSzTUDbkfRhwkreu7JyMQ@mail.gmail.com>
+ <CAJ307EizmMZDP2ujNkd7EduNf5aLb7khUXtfhZHPo+_yvzk7PA@mail.gmail.com>
+In-Reply-To: <CAJ307EizmMZDP2ujNkd7EduNf5aLb7khUXtfhZHPo+_yvzk7PA@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 9 Oct 2023 11:19:22 +1000
-Message-ID: <CAKmqyKN9SU+Nu=x_=O7tdcDws1MV3vFMNK2EsYjydVvxuv7cGQ@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv/tcg: remove RVG warning
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, "Paul A . Clarke" <pclarke@ventanamicro.com>, 
- Andrew Jones <ajones@ventanamicro.com>
+Date: Mon, 9 Oct 2023 11:21:13 +1000
+Message-ID: <CAKmqyKNKEYJsnoWoDZvmnA8knHWeBSEB7NgWBVyg6JP+MLhT5Q@mail.gmail.com>
+Subject: Re: [PATCH v3 4/5] hw/char: riscv_htif: replace exit calls with
+ proper shutdown
+To: =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2a;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2c;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -90,83 +91,73 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Oct 3, 2023 at 10:26=E2=80=AFPM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Mon, Oct 2, 2023 at 7:32=E2=80=AFPM Cl=C3=A9ment Chigot <chigot@adacore.=
+com> wrote:
 >
-> Vendor CPUs that set RVG are displaying user warnings about other
-> extensions that RVG must enable, one warning per CPU. E.g.:
+> On Fri, Sep 22, 2023 at 7:20=E2=80=AFAM Alistair Francis <alistair23@gmai=
+l.com> wrote:
+> >
+> > On Thu, Sep 7, 2023 at 9:26=E2=80=AFPM Cl=C3=A9ment Chigot <chigot@adac=
+ore.com> wrote:
+> > >
+> > > This replaces the exit calls by shutdown requests, ensuring a proper
+> > > cleanup of Qemu. Otherwise, some connections like gdb could be broken
+> > > before its final packet ("Wxx") is being sent. This part, being done
+> > > inside qemu_cleanup function, can be reached only when the main loop
+> > > exits after a shutdown request.
+> > >
+> > > Signed-off-by: Cl=C3=A9ment Chigot <chigot@adacore.com>
+> >
+> > Do you mind rebasing this on:
+> > https://github.com/alistair23/qemu/tree/riscv-to-apply.next
 >
-> $ ./build/qemu-system-riscv64 -smp 8 -M virt -cpu veyron-v1 -nographic
-> qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifence=
-i
-> qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifence=
-i
-> qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifence=
-i
-> qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifence=
-i
-> qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifence=
-i
-> qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifence=
-i
-> qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifence=
-i
-> qemu-system-riscv64: warning: Setting G will also set IMAFD_Zicsr_Zifence=
-i
->
-> This happens because we decided a while ago that, for simplicity, vendor
-> CPUs could set RVG instead of setting each G extension individually in
-> their cpu_init(). Our warning isn't taking that into account, and we're
-> bugging users with a warning that we're causing ourselves.
->
-> In a closer look we conclude that this warning is not warranted in any
-> other circumstance since we're just following the ISA [1], which states
-> in chapter 24:
->
-> "One goal of the RISC-V project is that it be used as a stable software
-> development target. For this purpose, we define a combination of a base
-> ISA (RV32I or RV64I) plus selected standard extensions (IMAFD, Zicsr,
-> Zifencei) as a 'general-purpose' ISA, and we use the abbreviation G for
-> the IMAFDZicsr Zifencei combination of instruction-set extensions."
->
-> With this in mind, enabling IMAFD_Zicsr_Zifencei if the user explicitly
-> enables 'G' is an expected behavior and the warning is unneeded. Any
-> user caught by surprise should refer to the ISA.
->
-> Remove the warning when handling RVG.
->
-> [1] https://github.com/riscv/riscv-isa-manual/releases/download/Ratified-=
-IMAFDQC/riscv-spec-20191213.pdf
->
-> Reported-by: Paul A. Clarke <pclarke@ventanamicro.com>
-> Suggested-by: Andrew Jones <ajones@ventanamicro.com>
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Thanks for the review.
+> Just a quick question on the procedure side, is there any special tag
+> or something to say in the cover letter to state that it has been
+> rebased on riscv-to-apply instead of the usual master?
 
-Thanks!
+You can use the "Based-on" tag. There is some more details here:
 
-Applied to riscv-to-apply.next
+https://www.qemu.org/docs/master/devel/submitting-a-patch.html#id33
 
 Alistair
 
-> ---
->  target/riscv/tcg/tcg-cpu.c | 1 -
->  1 file changed, 1 deletion(-)
 >
-> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> index 08b806dc07..f50ce57602 100644
-> --- a/target/riscv/tcg/tcg-cpu.c
-> +++ b/target/riscv/tcg/tcg-cpu.c
-> @@ -293,7 +293,6 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu,=
- Error **errp)
->              return;
->          }
+> Cl=C3=A9ment
 >
-> -        warn_report("Setting G will also set IMAFD_Zicsr_Zifencei");
->          cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_icsr), true);
->          cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_ifencei), true);
->
-> --
-> 2.41.0
->
->
+> > Alistair
+> >
+> > > ---
+> > >  hw/char/riscv_htif.c | 5 ++++-
+> > >  1 file changed, 4 insertions(+), 1 deletion(-)
+> > >
+> > > diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
+> > > index 37d3ccc76b..7e9b6fcc98 100644
+> > > --- a/hw/char/riscv_htif.c
+> > > +++ b/hw/char/riscv_htif.c
+> > > @@ -31,6 +31,7 @@
+> > >  #include "qemu/error-report.h"
+> > >  #include "exec/address-spaces.h"
+> > >  #include "sysemu/dma.h"
+> > > +#include "sysemu/runstate.h"
+> > >
+> > >  #define RISCV_DEBUG_HTIF 0
+> > >  #define HTIF_DEBUG(fmt, ...)                                        =
+           \
+> > > @@ -205,7 +206,9 @@ static void htif_handle_tohost_write(HTIFState *s=
+, uint64_t val_written)
+> > >                      g_free(sig_data);
+> > >                  }
+> > >
+> > > -                exit(exit_code);
+> > > +                qemu_system_shutdown_request_with_code(
+> > > +                    SHUTDOWN_CAUSE_GUEST_SHUTDOWN, exit_code);
+> > > +                return;
+> > >              } else {
+> > >                  uint64_t syscall[8];
+> > >                  cpu_physical_memory_read(payload, syscall, sizeof(sy=
+scall));
+> > > --
+> > > 2.25.1
+> > >
 
