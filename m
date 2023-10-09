@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96015CD610D
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Oct 2023 16:47:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E832CD610E
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Oct 2023 16:47:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qptPL-0003kh-Ao; Mon, 09 Oct 2023 12:47:03 -0400
+	id 1qptPK-0003hZ-RA; Mon, 09 Oct 2023 12:47:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qptOo-0003An-Pf
- for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:46:35 -0400
-Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
+ id 1qptOj-000371-7X
+ for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:46:32 -0400
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qptOi-0003XZ-87
- for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:46:29 -0400
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-3296b49c546so2831951f8f.3
- for <qemu-riscv@nongnu.org>; Mon, 09 Oct 2023 09:46:15 -0700 (PDT)
+ id 1qptOY-0003Vy-VF
+ for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:46:24 -0400
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-40572aeb73cso43626215e9.3
+ for <qemu-riscv@nongnu.org>; Mon, 09 Oct 2023 09:46:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696869975; x=1697474775; darn=nongnu.org;
+ d=linaro.org; s=google; t=1696869973; x=1697474773; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mAyYQkrKbWdgjPeSFpAKf8LHOxPMb7ttiO+d+H3EETQ=;
- b=J5Lr0jclW7J339kIM66DlxNeLzBa14n1qo/PBMaOl7bsS/yXRn5HTmqlsmNAxv3W3X
- zJsN4TNXJpddqyAfjfSlhP6HeWThSqZpTrrCZX2ucIrOqGMsnaui8L8/DA4yA0Vu/r9P
- M6bksoVSx8CYFS3zgaXaV44EJZ5fY+Dp9agVP9UZNuEwmNwqI2x2p+msvC0luwHe3igG
- VQ1xjqLT4txAGAbGuo+onm7vGMcMdx3VyJa97gRaxtJnfTCYXEtBl6p4VBYXekTzMF5Q
- jf3gqth3dkBEqlt2239J1f8K8RwIUnFFZsvAQrv2HeKFcxaLwqkcY7cZRzDrYp230fRg
- eexw==
+ bh=VWYhOQMznQlDFerIuEfFly6GjEqfzxxsRGSOgMHMHjQ=;
+ b=B1S01vsqV3ds4VPMz0moge7l9PDi7dmPCEtIX5Mz15oqpKERvHdC/yiStZ3MCRh4wi
+ +MWs+Wf3u5iEAZypYYi6SMxugZkNHNghLmj+xPcHeWdgt1WUAERDTgq/zxR0PbNeiFUc
+ D9hZWBqnhNeKhPpRTN1TSMczfUlMMd1kYN8hj5sdF24ENHbT0NJE5DIJuzv5zvqpOB6k
+ hZYPY9wuDLZat/4STwgQdxeY6l6heTj2ED9vWhvBlNbFRMe24+sbKb4X7DPpVpnwKC61
+ gQLysqcK65by1KD9a2uDR4vFBzkDY/rqkRfHwgmvwInN19bE6zuPkDp8tdGI7yybj9Aj
+ MbvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696869975; x=1697474775;
+ d=1e100.net; s=20230601; t=1696869973; x=1697474773;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mAyYQkrKbWdgjPeSFpAKf8LHOxPMb7ttiO+d+H3EETQ=;
- b=JNeQQA3PlSf31FkM8ojB4hRqCeGxZ7HmVpj9eIXX2H/Fkg54qqCc1GBNds1DazCaIZ
- kwLvyt6wbonvn2orEFXIyKmfinMkOAq9WzAIia0DpTed0ZStaKlc2xyiU0pLjHY1DEbO
- rqHfMG4+Oeump+9M/ocU9lloDj83A2x+KamhG0A7W3IqUplfhbSRbwznqUqSyHdNi3CR
- 0eUR19UFHFUb+0f8gRyvqPlgfoSmeAs8Yq8s0fds7+CXiXknDCBBIIcqY3Ird+ztMqU9
- l50b9uKOGNAuNtWU+U+eldFJ+T48Oh4djh+wBrdpjHXBWc6HXHK43x6qF8BmwmrHQF1W
- ImfA==
-X-Gm-Message-State: AOJu0YyMUhvA5z3k6eQSBT9adOL6Xv5ZV/ZvReQ+rYjviEGoMfHM5ki8
- TUj2wmVL33X2ZiGf9Hwqq4cWIw==
-X-Google-Smtp-Source: AGHT+IHod6U6EmD0nkVFnhvY4XK4tB1NiixxHOl20O7cWXHyguHNdEJPEGeH5hB5HvD2bZ31su0fHQ==
-X-Received: by 2002:adf:b34a:0:b0:329:6c6a:c733 with SMTP id
- k10-20020adfb34a000000b003296c6ac733mr7480553wrd.58.1696869974897; 
- Mon, 09 Oct 2023 09:46:14 -0700 (PDT)
+ bh=VWYhOQMznQlDFerIuEfFly6GjEqfzxxsRGSOgMHMHjQ=;
+ b=ka317gAratYwMz16LnmlHy5nFeJsnFwfRzf7RYUxa/bEMVggdf6HxkvseqelINorrs
+ KJda4o3t0Sg7M0wTaptFriosB94NLVuCTOkYwBGrXVfvkDp/NcTvzYQU3loeJroFMnwC
+ O2sps3D63APb3Ou3ovOBK9uXNGcpJi9KCIXsTRMKxgniAig7ymB/ryAlu2Rf3jHTtaOk
+ DgsOMEgGxpmK3EzQ3I++AgGu+uJ5kG9DaUPMc4JeIp+8FHg2ftQWm79m/M64MqPzNaZ8
+ YfUtZD0QrO8FSi8JVU1dqxVUvdpqYIL2J8HJc3OZ+X5aUMgwiIFku/+xVp07t9AreyXI
+ Y0nA==
+X-Gm-Message-State: AOJu0YxFI9y+673NKdOkpzcwQd8b3CTeQrVXXtEqbVp8KcGKIABuCche
+ z9kk+hCve0wFEi7ZCbGxfVGS4A==
+X-Google-Smtp-Source: AGHT+IFDo1mXfvOFFQQGZsFStyZ0Mbpg00kojG/B3T3b+ezfFFXNs8Fh4fnFJ8f+KtWcZo0no5J/XA==
+X-Received: by 2002:a05:600c:231a:b0:3fe:f667:4e4c with SMTP id
+ 26-20020a05600c231a00b003fef6674e4cmr14363217wmo.12.1696869973250; 
+ Mon, 09 Oct 2023 09:46:13 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- t11-20020a5d534b000000b003232380ffd5sm10082444wrv.106.2023.10.09.09.46.12
+ v16-20020a1cf710000000b003fefaf299b6sm11633283wmh.38.2023.10.09.09.46.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Oct 2023 09:46:13 -0700 (PDT)
+ Mon, 09 Oct 2023 09:46:11 -0700 (PDT)
 Received: from zen.linaroharston (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id ED3E71FFCF;
+ by zen.linaroharston (Postfix) with ESMTP id 0DA6B1FFC8;
  Mon,  9 Oct 2023 17:41:07 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -90,18 +90,19 @@ Cc: Thomas Huth <thuth@redhat.com>, Xiaojuan Yang <yangxiaojuan@loongson.cn>,
  Song Gao <gaosong@loongson.cn>,
  Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>, qemu-s390x@nongnu.org,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 24/25] contrib/plugins: fix coverity warning in lockstep
-Date: Mon,  9 Oct 2023 17:41:03 +0100
-Message-Id: <20231009164104.369749-25-alex.bennee@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Akihiko Odaki <akihiko.odaki@daynix.com>
+Subject: [PATCH 16/25] target/arm: Remove references to gdb_has_xml
+Date: Mon,  9 Oct 2023 17:40:55 +0100
+Message-Id: <20231009164104.369749-17-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231009164104.369749-1-alex.bennee@linaro.org>
 References: <20231009164104.369749-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x329.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -124,61 +125,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Coverity complains that e don't check for a truncation when copying in
-the path. Bail if we can't copy the whole path into sockaddr.
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
 
-Fixes: CID 1519045
-Fixes: CID 1519046
+GDB has XML support since 6.7 which was released in 2007.
+It's time to remove support for old GDB versions without XML support.
+
+Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+Acked-by: Alex Bennée <alex.bennee@linaro.org>
+Message-Id: <20230912224107.29669-10-akihiko.odaki@daynix.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- contrib/plugins/lockstep.c | 13 +++++++++++--
- 1 file changed, 11 insertions(+), 2 deletions(-)
+ target/arm/gdbstub.c | 32 ++------------------------------
+ 1 file changed, 2 insertions(+), 30 deletions(-)
 
-diff --git a/contrib/plugins/lockstep.c b/contrib/plugins/lockstep.c
-index 682b11feb2..f0cb8792c6 100644
---- a/contrib/plugins/lockstep.c
-+++ b/contrib/plugins/lockstep.c
-@@ -245,6 +245,7 @@ static void vcpu_tb_trans(qemu_plugin_id_t id, struct qemu_plugin_tb *tb)
- static bool setup_socket(const char *path)
- {
-     struct sockaddr_un sockaddr;
-+    const gsize pathlen = sizeof(sockaddr.sun_path) - 1;
-     int fd;
- 
-     fd = socket(AF_UNIX, SOCK_STREAM, 0);
-@@ -254,7 +255,11 @@ static bool setup_socket(const char *path)
+diff --git a/target/arm/gdbstub.c b/target/arm/gdbstub.c
+index 8fc8351df7..b7ace24bfc 100644
+--- a/target/arm/gdbstub.c
++++ b/target/arm/gdbstub.c
+@@ -46,21 +46,7 @@ int arm_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+         /* Core integer register.  */
+         return gdb_get_reg32(mem_buf, env->regs[n]);
      }
- 
-     sockaddr.sun_family = AF_UNIX;
--    g_strlcpy(sockaddr.sun_path, path, sizeof(sockaddr.sun_path) - 1);
-+    if (g_strlcpy(sockaddr.sun_path, path, pathlen) >= pathlen) {
-+        perror("bad path");
-+        return false;
-+    }
-+
-     if (bind(fd, (struct sockaddr *)&sockaddr, sizeof(sockaddr)) < 0) {
-         perror("bind socket");
-         close(fd);
-@@ -287,6 +292,7 @@ static bool connect_socket(const char *path)
- {
-     int fd;
-     struct sockaddr_un sockaddr;
-+    const gsize pathlen = sizeof(sockaddr.sun_path) - 1;
- 
-     fd = socket(AF_UNIX, SOCK_STREAM, 0);
-     if (fd < 0) {
-@@ -295,7 +301,10 @@ static bool connect_socket(const char *path)
+-    if (n < 24) {
+-        /* FPA registers.  */
+-        if (gdb_has_xml()) {
+-            return 0;
+-        }
+-        return gdb_get_zeroes(mem_buf, 12);
+-    }
+-    switch (n) {
+-    case 24:
+-        /* FPA status register.  */
+-        if (gdb_has_xml()) {
+-            return 0;
+-        }
+-        return gdb_get_reg32(mem_buf, 0);
+-    case 25:
++    if (n == 25) {
+         /* CPSR, or XPSR for M-profile */
+         if (arm_feature(env, ARM_FEATURE_M)) {
+             return gdb_get_reg32(mem_buf, xpsr_read(env));
+@@ -100,21 +86,7 @@ int arm_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+         env->regs[n] = tmp;
+         return 4;
      }
- 
-     sockaddr.sun_family = AF_UNIX;
--    g_strlcpy(sockaddr.sun_path, path, sizeof(sockaddr.sun_path) - 1);
-+    if (g_strlcpy(sockaddr.sun_path, path, pathlen) >= pathlen) {
-+        perror("bad path");
-+        return false;
-+    }
- 
-     if (connect(fd, (struct sockaddr *)&sockaddr, sizeof(sockaddr)) < 0) {
-         perror("failed to connect");
+-    if (n < 24) { /* 16-23 */
+-        /* FPA registers (ignored).  */
+-        if (gdb_has_xml()) {
+-            return 0;
+-        }
+-        return 12;
+-    }
+-    switch (n) {
+-    case 24:
+-        /* FPA status register (ignored).  */
+-        if (gdb_has_xml()) {
+-            return 0;
+-        }
+-        return 4;
+-    case 25:
++    if (n == 25) {
+         /* CPSR, or XPSR for M-profile */
+         if (arm_feature(env, ARM_FEATURE_M)) {
+             /*
 -- 
 2.39.2
 
