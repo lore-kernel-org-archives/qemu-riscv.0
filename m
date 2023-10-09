@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5ED4CD610A
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Oct 2023 16:44:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B14C1CD610A
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Oct 2023 16:44:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qptKY-0006gM-38; Mon, 09 Oct 2023 12:42:07 -0400
+	id 1qptM7-0001Yd-39; Mon, 09 Oct 2023 12:43:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qptJs-0005Cf-PV
- for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:41:32 -0400
-Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
+ id 1qptK8-0005Zw-Nc
+ for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:41:41 -0400
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qptJd-0001UC-O6
- for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:41:23 -0400
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-3296b3f03e5so2909263f8f.2
- for <qemu-riscv@nongnu.org>; Mon, 09 Oct 2023 09:41:08 -0700 (PDT)
+ id 1qptJi-0001Yb-GC
+ for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:41:40 -0400
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-40566f89f6eso47858425e9.3
+ for <qemu-riscv@nongnu.org>; Mon, 09 Oct 2023 09:41:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696869668; x=1697474468; darn=nongnu.org;
+ d=linaro.org; s=google; t=1696869671; x=1697474471; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xV3BG4Srg5Y6VlVNbacPBEYIMzi3RrER9K0pSz3VkxM=;
- b=eF3apVqq8Ng5x3HHsV4PHv31k7V0oFlnnjQFxUAxIQik1J+YJ+QKNCIGpYN9NRKrD5
- fQ33QxIeCAp63MS0uRFn3YFrSCbu6vCFmg2oF+8qjhAdXzPKEVrR0DifEJd0eygmdbCT
- ObHB7xvmeAn9nhDwnTU0Jg3Ujzjv3rnIcZOkJ83oXkIPPpgRhxaR+4MR2fD3b716nflr
- tkkJHz+OYpMzotjh77ufiEiG+XT9Z2NDExNMzRjZ6Flpo1REwdevtPmA/JgagtU5GuVG
- tZUpdVxjFcvb0dnXAKoO01ewqdVz/Gxsh/CYf5rtV4xnqt3ieJj1XWqmgQLEF0rXgcY5
- Mhjg==
+ bh=LG2NkApx4TVidHIbE463d0CCb2MX5UuJ0CO2x3DfXcM=;
+ b=VHPcBfdx2L7ZbR58IPP7pSCrU/Nmybk9SLs6Ki0CEKuojLFfqOlYL23ZzZ7tqGQbCW
+ /MAHfJugVKRxbeZzuWfGerDQtP/fZpMYvdS++h59+ZPRUcvPIBmza4MOvqRyPBBNkSCh
+ UC/nPXejCTfGMetaocCKw4A1R44WBByHO+619EbgFZjtu39O8wORv1KnODf8jBXZ3P5X
+ QTbVPCzmz3Pa3VNam5EVh2o6NdkKxMq07n6nL3EG4PugSXeHml9GhrnCJvEE0R1UNKPD
+ hqxgrX32/MjK1oAuDZLjtpMVKQySnODoG2xnvm4t1YyZELgWdmvFeyXV1fGZu+IsFIiI
+ xKHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696869668; x=1697474468;
+ d=1e100.net; s=20230601; t=1696869671; x=1697474471;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xV3BG4Srg5Y6VlVNbacPBEYIMzi3RrER9K0pSz3VkxM=;
- b=rNczPcdAkvInnU3x84Oxfufe56XrGkivF85HdZWY4MA7GbHRNWDzL2NLCcdu0JHBlU
- efj/Its1ym540b5TffEOdSUZL0hmFQBPaK1/WZnyfiaXpv7X75BLzzs/XArYi9BOvht1
- FpUzB6Li7utplSVffmLo0UQ5rZKza3g488O4c7aJ0DdzH9ekoHlJJw5zvf74889FXkKN
- LtjbXT2QqtZ35PF1h9nQ4DEtit5n+7M7GuaJBp3WTKVXX2uh98BichhrbeN7TN0LxUO2
- 4N6bMz1q/8FfkcQwQ9cxWRqG6A04nlAfApvEb+i4mX+clz+GyDnA95dLv0Sj20+ZdRav
- QAxA==
-X-Gm-Message-State: AOJu0YzRi5nStMQfekCeBB/KzAa/RcAnkKbrxHztyvRab7/Xa7E+Iyes
- 6WyWle/a3L5R71NfQ7Hyl0UCqA==
-X-Google-Smtp-Source: AGHT+IFC51Vu8VXrrK/+1vJLgLMr+v+quykmAChEzmAYsCctp7+nGso2awQsaSJ968wZLfjo2BzydQ==
-X-Received: by 2002:adf:a19d:0:b0:329:6b8e:c16 with SMTP id
- u29-20020adfa19d000000b003296b8e0c16mr7005776wru.35.1696869667711; 
- Mon, 09 Oct 2023 09:41:07 -0700 (PDT)
+ bh=LG2NkApx4TVidHIbE463d0CCb2MX5UuJ0CO2x3DfXcM=;
+ b=UgGXRlpgIUbQmHQPxWoX5Y6xlSpvszn6PIS8gt4wngbElnI7inv03HUbwMTDz30eHr
+ X4xoa4aq4XHFKSPaJLjlansbPiJ2LX4hJxg4+ppljNbzJf2dOyVWW8AKbVzYxM1Zy9FI
+ 3yfnI6asoZZReJPZZ0NEc+qQb47ySBdFM79PTlbvMK/NhyU3IMJszzitxrgvbN24zq0P
+ InkzwOcEYScVctx+RUd4od5+qSQoNyOto9eXReALBkl+L9emt70ofyXCzvCXimBJECwR
+ DfIOBW1frfFBvXj6AJyhpfTRoAOnCjdLRQN4tY1GWjl/JjwZ2y56CFK8s9KbeMm4k8Uu
+ ZAvw==
+X-Gm-Message-State: AOJu0Yy707lS8RYGrvWaUPe4DzrQkoYsNXdASiS3mYhP5EOTjWj3S4QS
+ wDxboPs080pbgISnrKqJ4kFUGQ==
+X-Google-Smtp-Source: AGHT+IGcNimySsZb4tRiTGZiBWvhHnCHB+7wD1cnjYSQnpkGj8cm3mJFteeRK3/s4GEngyCKv1VjFQ==
+X-Received: by 2002:a1c:7218:0:b0:401:d803:6243 with SMTP id
+ n24-20020a1c7218000000b00401d8036243mr13668682wmc.32.1696869671310; 
+ Mon, 09 Oct 2023 09:41:11 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- q14-20020adfcb8e000000b003296b488961sm9530042wrh.31.2023.10.09.09.41.05
+ i2-20020a05600c290200b004063d8b43e7sm13939902wmd.48.2023.10.09.09.41.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Oct 2023 09:41:06 -0700 (PDT)
+ Mon, 09 Oct 2023 09:41:07 -0700 (PDT)
 Received: from zen.linaroharston (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 4707B1FFBD;
- Mon,  9 Oct 2023 17:41:05 +0100 (BST)
+ by zen.linaroharston (Postfix) with ESMTP id 2BB891FFC3;
+ Mon,  9 Oct 2023 17:41:06 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Thomas Huth <thuth@redhat.com>, Xiaojuan Yang <yangxiaojuan@loongson.cn>,
@@ -90,19 +90,19 @@ Cc: Thomas Huth <thuth@redhat.com>, Xiaojuan Yang <yangxiaojuan@loongson.cn>,
  Song Gao <gaosong@loongson.cn>,
  Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>, qemu-s390x@nongnu.org,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 02/25] tests/avocado: remove flaky test marking for
- test_sbsaref_edk2_firmware
-Date: Mon,  9 Oct 2023 17:40:41 +0100
-Message-Id: <20231009164104.369749-3-alex.bennee@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Akihiko Odaki <akihiko.odaki@daynix.com>
+Subject: [PATCH 09/25] gdbstub: Fix target.xml response
+Date: Mon,  9 Oct 2023 17:40:48 +0100
+Message-Id: <20231009164104.369749-10-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231009164104.369749-1-alex.bennee@linaro.org>
 References: <20231009164104.369749-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::430;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x430.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x331.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -125,41 +125,32 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-After testing locally I decided to revert a5754847e0 (tests/avocado: Disable the
-test_sbsaref_edk2_firmware by default) as the test seems pretty
-stable:
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
 
-   env QEMU_TEST_FLAKY_TESTS=1 retry.py -n 50 -c -- \
-     ./tests/venv/bin/avocado run \
-     ./tests/avocado/machine_aarch64_sbsaref.py:Aarch64SbsarefMachine.test_sbsaref_edk2_firmware
+It was failing to return target.xml after the first request.
 
-yields:
-
-  Results summary:
-  0: 50 times (100.00%), avg time 2.064 (0.04 varience/0.19 deviation)
-  Ran command 50 times, 50 passes
-
-Maybe f0ec14c78c (tests/avocado: Fix console data loss) has made it
-more reliable?
-
+Fixes: 56e534bd11 ("gdbstub: refactor get_feature_xml")
+Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+Message-Id: <20230912224107.29669-3-akihiko.odaki@daynix.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Cc: Thomas Huth <thuth@redhat.com>
 ---
- tests/avocado/machine_aarch64_sbsaref.py | 1 -
- 1 file changed, 1 deletion(-)
+ gdbstub/gdbstub.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tests/avocado/machine_aarch64_sbsaref.py b/tests/avocado/machine_aarch64_sbsaref.py
-index b272053eaf..bdd1efc768 100644
---- a/tests/avocado/machine_aarch64_sbsaref.py
-+++ b/tests/avocado/machine_aarch64_sbsaref.py
-@@ -75,7 +75,6 @@ def fetch_firmware(self):
-             "sbsa-ref",
-         )
+diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
+index 8eea21450c..4f3762fccf 100644
+--- a/gdbstub/gdbstub.c
++++ b/gdbstub/gdbstub.c
+@@ -396,8 +396,8 @@ static const char *get_feature_xml(const char *p, const char **newp,
+             g_string_append(xml, "</target>");
  
--    @skipUnless(os.getenv('QEMU_TEST_FLAKY_TESTS'), 'Test is not reliable')
-     def test_sbsaref_edk2_firmware(self):
-         """
-         :avocado: tags=cpu:cortex-a57
+             process->target_xml = g_string_free(xml, false);
+-            return process->target_xml;
+         }
++        return process->target_xml;
+     }
+     /* Is it dynamically generated by the target? */
+     if (cc->gdb_get_dynamic_xml) {
 -- 
 2.39.2
 
