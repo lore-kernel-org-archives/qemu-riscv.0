@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42147CD610B
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Oct 2023 16:43:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25215CD610A
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Oct 2023 16:43:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qptLf-00089C-Bx; Mon, 09 Oct 2023 12:43:15 -0400
+	id 1qptMF-0001rd-8i; Mon, 09 Oct 2023 12:43:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qptK4-0005OW-52
- for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:41:37 -0400
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
+ id 1qptKF-0005pE-B9
+ for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:41:48 -0400
+Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qptJg-0001Wt-Ft
- for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:41:30 -0400
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4065dea9a33so46024855e9.3
- for <qemu-riscv@nongnu.org>; Mon, 09 Oct 2023 09:41:11 -0700 (PDT)
+ id 1qptJj-0001Zv-PL
+ for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:41:46 -0400
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-32799639a2aso4705629f8f.3
+ for <qemu-riscv@nongnu.org>; Mon, 09 Oct 2023 09:41:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696869670; x=1697474470; darn=nongnu.org;
+ d=linaro.org; s=google; t=1696869673; x=1697474473; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kNHX4JyhoYexAQqB9a7CrjUa8yJRKrNW0ix3Ut30RxE=;
- b=Td5guE2RPTMNdyZTQzZUcI77K5oCS1CwjUIA7yICrXN2HJqRdEzSZBLsE4HWTw2xbd
- Y/NX9X5jUJXURijIVTdrROB9O2e98JbwvSxTS4lTJ5aDOoa+fwV0h+9JjHeVUzZBxGXT
- v93E8QLzKm9rynwuT2mt+nkmXQouYgq7y5u1t4Hq9JAsvB4vl1WHJJQeF4wpZOi1ywSk
- xhF7L9uNJ5UPF/CzNG5LOvl8ksGFLg1oWeKF6jwSlRsPhpX+/taurfHM8JzJHoOUjFSE
- lF4+1X1z17fJRDh6QKQ45PiR5WxeR26WGtvlzYcv/3uDHD69SH0NnARr05DtsB5i0ElR
- npew==
+ bh=BxLMY5+XDlEqW//GnK/X2YXdg2+UhZNarbeVkfRpn9o=;
+ b=Ngrkyp0w1ib/WMYkG6Luw8PlnOwYhwT1tT3fyV/R22vGjWXmfTHps9FBL8V9PYMrDv
+ LwBOdbm8NY7l+NcgtGFbd99ev037qDQbG3ZO/wG6z6C+b+7ZM3Ed8CRglEOxJJmroRNS
+ UhzFejCnY0A8/DV/3PBbMGg2HhCrcsplz4DLoBHpkL43Iy5eBRU5k59VsuDJzUkMsNzw
+ 5d6LyEfd1x+wq30VpMk4tSeN6MBSunesoD2+p0e1IqC5esyRoAxDIKYhmP22wBQ4KMCe
+ 6jM4Xg8sjOqDOUVrOA7ScKHRrO6u6Ke82l9XvwaMArFtgw45EEoZdUSjiplgnrtxmM6q
+ DoAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696869670; x=1697474470;
+ d=1e100.net; s=20230601; t=1696869673; x=1697474473;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kNHX4JyhoYexAQqB9a7CrjUa8yJRKrNW0ix3Ut30RxE=;
- b=KrYDf5g5OxrbvUZPtCHPHDlH9zxZicTuV/hCizypirDRUBneVAquI7uO/GLdE7R+xg
- p6FT+6TDRmO1Q/mgaNewsrypQflellfQiDrRvZbN63MTv6PK77lhpXkOcads1REYkoDW
- TDGcolekAD6byo58xP6JCbVTD9wft6Sg74daJeboVqhgO1K9WLVW+eFL8cHg2wvfy+H4
- Z1MXNkd4Pb7YpdoFymhW1tOB2YlgYg1qcnHbmczQE9qWkdR21a2plwkFI1im4+S5K8pe
- pAZvJnXVpByNl4Zp38UAZe10lGwse5+OGnPb51fWNyW036+CVm0fDPGmFTo3LvHGnXFv
- qMSw==
-X-Gm-Message-State: AOJu0YwUdpJGBWRzbVyZtAbB78JzEuSPwJOm3tbqrrDD5zZksBeAK/aw
- aRxrHk2OoHLrKX1QnccV9+rpoA==
-X-Google-Smtp-Source: AGHT+IEZzzazV8rQyOOoyQLJ7Uxqh6UC8+1qjne8WqehmY2jmS1dp8on60ZHA68rYHTOIzLc3O8VoA==
-X-Received: by 2002:a05:6000:12cd:b0:320:976:f942 with SMTP id
- l13-20020a05600012cd00b003200976f942mr14088178wrx.7.1696869670278; 
- Mon, 09 Oct 2023 09:41:10 -0700 (PDT)
+ bh=BxLMY5+XDlEqW//GnK/X2YXdg2+UhZNarbeVkfRpn9o=;
+ b=XdfeB0XFjmATcsdYuHSO6w/0wFBg3ECnU5JBWJS15rw/mjv8Er/RaSzE4FGxh7ZHRG
+ RGxp32lT1ks2+76cAJGWaMiIgJsQ+viYjsoIc9+DGm4RFI7kjhy+tYprCt5//opjKYOn
+ 5F07i/FGdilGZGSzJyxhx+Dk4PHjR98UiXoZSRBA3I5cou34+YozSQOiFUrm8ArWYRTB
+ vIPUcDzCqjERAQxnoWBQNQHIVSbTQu1A4UBNy8RNL1RQXLL8/3Nls2G1n1UqQv+PsH4i
+ 8ns1Hh7jd77P9unfjX1nJs+jwB0j5xdCe6vcQgF7MpTzGXG7XqKDxU/sQVxaSyzHREzd
+ 39Sw==
+X-Gm-Message-State: AOJu0YyeWxroIe2MF9OvJ7a5Ld6lE3pvFDp+MWTHo1HilQDqJ+v/Yg0S
+ JPWHe2UkPAH6vzz6ttRM4tHrWA==
+X-Google-Smtp-Source: AGHT+IHp41fYjgOAnF5lB5Gy4eo71sHuPq39ciYyf+3e2jnm9IMeLhhNVUeUBfbmSne0pHK/JuMEFA==
+X-Received: by 2002:a5d:4dcc:0:b0:319:785a:fce5 with SMTP id
+ f12-20020a5d4dcc000000b00319785afce5mr13247438wru.38.1696869672794; 
+ Mon, 09 Oct 2023 09:41:12 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- d12-20020a5d538c000000b0032769103ae9sm10094218wrv.69.2023.10.09.09.41.06
+ t4-20020a5d6904000000b0032710f5584fsm10040929wru.25.2023.10.09.09.41.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Oct 2023 09:41:07 -0700 (PDT)
+ Mon, 09 Oct 2023 09:41:11 -0700 (PDT)
 Received: from zen.linaroharston (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 13F561FFBB;
+ by zen.linaroharston (Postfix) with ESMTP id 9E32D1FFBE;
  Mon,  9 Oct 2023 17:41:06 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -92,17 +92,17 @@ Cc: Thomas Huth <thuth@redhat.com>, Xiaojuan Yang <yangxiaojuan@loongson.cn>,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH 08/25] gdbstub: Fix target_xml initialization
-Date: Mon,  9 Oct 2023 17:40:47 +0100
-Message-Id: <20231009164104.369749-9-alex.bennee@linaro.org>
+Subject: [PATCH 13/25] target/arm: Move the reference to arm-core.xml
+Date: Mon,  9 Oct 2023 17:40:52 +0100
+Message-Id: <20231009164104.369749-14-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231009164104.369749-1-alex.bennee@linaro.org>
 References: <20231009164104.369749-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -127,31 +127,45 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Akihiko Odaki <akihiko.odaki@daynix.com>
 
-target_xml is no longer a fixed-length array but a pointer to a
-variable-length memory.
+Some subclasses overwrite gdb_core_xml_file member but others don't.
+Always initialize the member in the subclasses for consistency.
 
-Fixes: 56e534bd11 ("gdbstub: refactor get_feature_xml")
+This especially helps for AArch64; in a following change, the file
+specified by gdb_core_xml_file is always looked up even if it's going to
+be overwritten later. Looking up arm-core.xml results in an error as
+it will not be embedded in the AArch64 build.
+
 Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Message-Id: <20230912224107.29669-2-akihiko.odaki@daynix.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Message-Id: <20230912224107.29669-7-akihiko.odaki@daynix.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- gdbstub/softmmu.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/arm/cpu.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/gdbstub/softmmu.c b/gdbstub/softmmu.c
-index 9f0b8b5497..42645d2220 100644
---- a/gdbstub/softmmu.c
-+++ b/gdbstub/softmmu.c
-@@ -292,7 +292,7 @@ static int find_cpu_clusters(Object *child, void *opaque)
-         assert(cluster->cluster_id != UINT32_MAX);
-         process->pid = cluster->cluster_id + 1;
-         process->attached = false;
--        process->target_xml[0] = '\0';
-+        process->target_xml = NULL;
+diff --git a/target/arm/cpu.c b/target/arm/cpu.c
+index 831295d7cd..b65e8cfea3 100644
+--- a/target/arm/cpu.c
++++ b/target/arm/cpu.c
+@@ -2392,7 +2392,6 @@ static void arm_cpu_class_init(ObjectClass *oc, void *data)
+     cc->sysemu_ops = &arm_sysemu_ops;
+ #endif
+     cc->gdb_num_core_regs = 26;
+-    cc->gdb_core_xml_file = "arm-core.xml";
+     cc->gdb_arch_name = arm_gdb_arch_name;
+     cc->gdb_get_dynamic_xml = arm_gdb_get_dynamic_xml;
+     cc->gdb_stop_before_watchpoint = true;
+@@ -2414,8 +2413,10 @@ static void arm_cpu_instance_init(Object *obj)
+ static void cpu_register_class_init(ObjectClass *oc, void *data)
+ {
+     ARMCPUClass *acc = ARM_CPU_CLASS(oc);
++    CPUClass *cc = CPU_CLASS(acc);
  
-         return 0;
-     }
+     acc->info = data;
++    cc->gdb_core_xml_file = "arm-core.xml";
+ }
+ 
+ void arm_cpu_register(const ARMCPUInfo *info)
 -- 
 2.39.2
 
