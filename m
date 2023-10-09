@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEF37CD610A
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Oct 2023 16:44:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70316CD610B
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Oct 2023 16:44:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qptLl-0008Mp-8g; Mon, 09 Oct 2023 12:43:23 -0400
+	id 1qptM5-0001Ue-P8; Mon, 09 Oct 2023 12:43:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qptK6-0005SN-Bj
- for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:41:39 -0400
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ id 1qptK7-0005U6-H7
+ for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:41:40 -0400
+Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qptJi-0001Yn-5m
- for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:41:38 -0400
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-405361bb94eso48089135e9.0
+ id 1qptJi-0001Yx-FC
+ for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:41:39 -0400
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-317c3ac7339so4333122f8f.0
  for <qemu-riscv@nongnu.org>; Mon, 09 Oct 2023 09:41:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696869671; x=1697474471; darn=nongnu.org;
+ d=linaro.org; s=google; t=1696869672; x=1697474472; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=afBvhFP6609M8IIBIfYpGDboWuF4PMsRTHYI59b4V3Q=;
- b=rErH+6+0l/ISFuO0OexmgT1kCYMLzyk65gpd9n3pBI2bxbkWccpqEpVWDYZ2Z66eCM
- DeJS4iv3CwGTaPrlLICCVZp+7wky0ghFr/JoqMQmbIjIsv4gcDeHP4ZhWvMhNSyZ7P3n
- 4DPadmPvsxlVnAY7BDQ5EpHlgEgmfJBaaxu397FHI8yaRYoeIZjqbwRL0KteRr25/vMw
- TgFEgeTwceDmGtIxlyyllNt5li2bxObLvWYAzQlktW2K2JZLkawQ2Z++cFPZFDgjP1hH
- KTH4qg0+7H4MJs1d3dHCXHbPZkbM1qRQYa+TDuy5CO7RShUMl27qjVRsTqu8YXM3ZytX
- XizA==
+ bh=Tmt0on2gqtEUKqiKbv0NO0bzg7ahn0zMA7M5ykdCtXI=;
+ b=nQ3BtYUrsDG4eC7icXQBGSgYaktbDSljfKELum9im5SPogudEDbsk9EUI0fUWhBdgN
+ ym2PlVAfk1UfgaEbUsV/efmx1hZSVBt7ujF5XWrkoCVMOt92y5R8lsEF7qJaAVsu9RWT
+ ah8uuu+i/ciAWRwWupvXSynC0bbkJNoFvyAJ5C629FyEwxRVYKtT6cmuOeJnyE+uw6bn
+ He4IWOdXSrMNTajrb/innpLulnZbnWpgHcjTGD33Tzy7hhq3482Geapt25L12uFyx1mw
+ pQaptDZAJHHdPKyecrhjnzBbs+78x5WXbu1Ffbjht9SWwLWDN084rt8RSbkJ70P6pd3m
+ KFZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696869671; x=1697474471;
+ d=1e100.net; s=20230601; t=1696869672; x=1697474472;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=afBvhFP6609M8IIBIfYpGDboWuF4PMsRTHYI59b4V3Q=;
- b=xAOTnne5JiqoLj3Uqa4e1s2w29QndcQj/r5WvpMn+TzS7Xgd3I0Why2vX2ih/Tjpyc
- GUbbpd7iRDQJvk1ASx4ld9UBt7NFUAGLMQX66n6eWtat0uY27mPxOYdGhRf7yTcRLxD3
- H1V3NanOZygwwR3WIuzi1Q8u3fT/hhXLGRr4Mv08ymJUv0AoBwKPely1YHpa6DLoqIx5
- +82PXyo7Yr6hbvndgX7mzNrnk9ptoh6C/eQeK923EetYoGqKw7qpW69+leyVG6B8rQMD
- 4EZ7HJ/NxTpab3ANfxMffTwzRRKBUbo4izPhBTMictxCfPKbAQ8BHt/R4E+0CWwMNaXO
- J10w==
-X-Gm-Message-State: AOJu0Yz6SktCJhNDjHkXa8CVQhkxJH/Foi/wPrQrz2BjQJKoBEYFiXUP
- micocyG2m/7OD5p0Ui8spExolg==
-X-Google-Smtp-Source: AGHT+IFgxGrx+X4uoHTxWDjGTegwrSLm6y12Mg63MWId7xQUDVdFnzrgoqqSoNFfwsvsNzZRFelteQ==
-X-Received: by 2002:a5d:4d8c:0:b0:323:36a3:8ca with SMTP id
- b12-20020a5d4d8c000000b0032336a308camr14258615wru.28.1696869671541; 
+ bh=Tmt0on2gqtEUKqiKbv0NO0bzg7ahn0zMA7M5ykdCtXI=;
+ b=Vgb4Tp87VHkKHgw6JgDU0hocxrWbXVXfT1uVjDaevSu8jpMB+tOquZ7gXASwkFbZbn
+ 3yDjcty33E/heWvfONv7WIFxHMunGMqRJmUQK6vy7+Uz2GyaUW6uwzknYhF1C7m8u4sH
+ USbHW0GEQZzkxHCGzS8AERUjnbY8j2oJORJpDoqHYG+dGgR/c/DANti+8w8EnfTEfbVo
+ GICbMFzkpajX5xicjWmf1n5IyRy7KGvUVIqoj3zzhZRfXFAveKef34BkpKM+HqM1tE+O
+ dVuayUb+DhLM/6llJnQ83h03dsIKa2nhiisEIYAWUqU5vrh2OgqFSCGrX1cKh1tu0bhp
+ P71w==
+X-Gm-Message-State: AOJu0YxacuKkKGaA7yFJyhcjFv+wZ8TjYOJ2G3GCjtCJb25oDIfmzlnL
+ hVcnEvprPUZuH0RlO96i+fBtpA==
+X-Google-Smtp-Source: AGHT+IEBcJZlt7k9UJZtnfKkrhPX34EZwmKZ0uA+bAYWlstu0IVImsa4NJE0HP1p8JOe+yMPHyYISw==
+X-Received: by 2002:adf:e8ca:0:b0:31f:e1b4:583d with SMTP id
+ k10-20020adfe8ca000000b0031fe1b4583dmr15722756wrn.56.1696869671738; 
  Mon, 09 Oct 2023 09:41:11 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- n20-20020adf8b14000000b003296b62d413sm9694532wra.82.2023.10.09.09.41.07
+ k21-20020adfb355000000b003296b913bbesm9541932wrd.12.2023.10.09.09.41.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 09 Oct 2023 09:41:07 -0700 (PDT)
 Received: from zen.linaroharston (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 446EA1FFBC;
- Mon,  9 Oct 2023 17:41:06 +0100 (BST)
+ by zen.linaroharston (Postfix) with ESMTP id EF1351FFC2;
+ Mon,  9 Oct 2023 17:41:05 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Thomas Huth <thuth@redhat.com>, Xiaojuan Yang <yangxiaojuan@loongson.cn>,
@@ -90,19 +90,18 @@ Cc: Thomas Huth <thuth@redhat.com>, Xiaojuan Yang <yangxiaojuan@loongson.cn>,
  Song Gao <gaosong@loongson.cn>,
  Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>, qemu-s390x@nongnu.org,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH 10/25] plugins: Check if vCPU is realized
-Date: Mon,  9 Oct 2023 17:40:49 +0100
-Message-Id: <20231009164104.369749-11-alex.bennee@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 07/25] configure: remove gcc version suffixes
+Date: Mon,  9 Oct 2023 17:40:46 +0100
+Message-Id: <20231009164104.369749-8-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231009164104.369749-1-alex.bennee@linaro.org>
 References: <20231009164104.369749-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x330.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -125,34 +124,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
+The modern packaging of cross GCC's doesn't need the explicit version
+number at the end.
 
-The created member of CPUState tells if the vCPU thread is started, and
-will be always false for the user space emulation that manages threads
-independently. Use the realized member of DeviceState, which is valid
-for both of the system and user space emulation.
-
-Fixes: 54cb65d858 ("plugin: add core code")
-Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Message-Id: <20230912224107.29669-4-akihiko.odaki@daynix.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- plugins/core.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ configure | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/plugins/core.c b/plugins/core.c
-index 3c4e26c7ed..fcd33a2bff 100644
---- a/plugins/core.c
-+++ b/plugins/core.c
-@@ -64,7 +64,7 @@ static void plugin_cpu_update__locked(gpointer k, gpointer v, gpointer udata)
-     CPUState *cpu = container_of(k, CPUState, cpu_index);
-     run_on_cpu_data mask = RUN_ON_CPU_HOST_ULONG(*plugin.mask);
- 
--    if (cpu->created) {
-+    if (DEVICE(cpu)->realized) {
-         async_run_on_cpu(cpu, plugin_cpu_update__async, mask);
-     } else {
-         plugin_cpu_update__async(cpu, mask);
+diff --git a/configure b/configure
+index ebad155d9e..e83872571d 100755
+--- a/configure
++++ b/configure
+@@ -1334,7 +1334,7 @@ probe_target_compiler() {
+         # We don't have any bigendian build tools so we only use this for AArch64
+         container_image=debian-arm64-cross
+         container_cross_prefix=aarch64-linux-gnu-
+-        container_cross_cc=${container_cross_prefix}gcc-10
++        container_cross_cc=${container_cross_prefix}gcc
+         ;;
+       alpha)
+         container_image=debian-alpha-cross
+@@ -1397,7 +1397,7 @@ probe_target_compiler() {
+       ppc)
+         container_image=debian-powerpc-test-cross
+         container_cross_prefix=powerpc-linux-gnu-
+-        container_cross_cc=${container_cross_prefix}gcc-10
++        container_cross_cc=${container_cross_prefix}gcc
+         ;;
+       ppc64|ppc64le)
+         container_image=debian-powerpc-test-cross
 -- 
 2.39.2
 
