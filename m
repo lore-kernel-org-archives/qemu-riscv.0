@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5179CD610E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Oct 2023 16:47:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82235CD610A
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Oct 2023 16:47:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qptPH-0003SY-Mz; Mon, 09 Oct 2023 12:47:01 -0400
+	id 1qptPP-0004Cs-7i; Mon, 09 Oct 2023 12:47:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qptOi-00036g-Hl
- for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:46:29 -0400
-Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
+ id 1qptOw-0003Bq-Ab
+ for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:46:52 -0400
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qptOX-0003VW-VD
- for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:46:18 -0400
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-40566f8a093so44238545e9.3
- for <qemu-riscv@nongnu.org>; Mon, 09 Oct 2023 09:46:13 -0700 (PDT)
+ id 1qptOk-0003Wv-3O
+ for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:46:36 -0400
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-323168869daso4697378f8f.2
+ for <qemu-riscv@nongnu.org>; Mon, 09 Oct 2023 09:46:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696869972; x=1697474772; darn=nongnu.org;
+ d=linaro.org; s=google; t=1696869974; x=1697474774; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6tkbJLFSKCFqBt7eF2KdGUHAT+NPxj+IrJR+AQ70tYE=;
- b=gEPQOFgw6dKwgtTEQ9yulODQCWAXuTWPL+7uRcgBQZF/79MclLHI1M0+rpZ9XROpA5
- m+hbLUrwTUILYo1/di4SSAW3V9nn5HUpX/xwcXzCpyy0/zDqmpB4njTQqCBoL/4c+2qQ
- b25gNrxbpAgH0abvd0dd4ftG148D1BOEifGlWyRrm/WaWg3XZ9kxjV41k4bklyIriT3a
- jLGXO5DvyxidagQ+8ygKVooUqLj3veElresb6WOE2JYQyaVS9yZHC1TG9FzyrccXXb5i
- L9HR9NptkjujN5DHLoo/a3NoYUINZA7P7XT6BAFJs13dRgylkpQbbcrdGraENPFeNuX2
- F0kQ==
+ bh=2rjltn9M+XXAIv6I9KIZqs861Zafbf86k+j+c8/sLis=;
+ b=PmwVZoChq7YroltJUmKbcaVmPxkvnXuGyo85zP/J+kGJCzu5Z05kuYogSwpG7h7C7A
+ 1lN/Q4lu6rtDGcktzEIHh4AyoLau6XRVNBGqX34XjTUjqbiTUm44SnOO6Zg+k3xRMpoJ
+ k0YwGMWeQiFfy+fiNrzhUol+qN5gF0eBk2p5fkypOCn24//CPDps7E5YjOgCGyABhrwy
+ 9fUjDyGdILq3N7txhCMQrMWIuTABNXlr5+YkYuX9r/YQQwqzOilBgbbtL6KirULDUNlf
+ 6wSRPLytlJlPS/6jJLhXXpYd+q5w8K1HOlr/Yf5Gydr3lrO7iyCgSbtwofVQ28xz2Sim
+ eJoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696869972; x=1697474772;
+ d=1e100.net; s=20230601; t=1696869974; x=1697474774;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6tkbJLFSKCFqBt7eF2KdGUHAT+NPxj+IrJR+AQ70tYE=;
- b=hz3F3ZaJ+p+6LuCYy2KNMvq5a3Tn3oVOh1OltbMli5dC/d9Z5m28EyYkJJw8+fxyDj
- cB5fApYYDFpFVD+BdsX2KN460gd+7QN4KtQXVbm/nWe3O3yAfW/qw1JkJnih1OZQhexo
- sUcINImZ2lmNbfA3yZ49uGjnW5u4vMKijx2X8YZvUwk7f4Uq3eiIQuqlUamcff5DZ4vT
- P9EHdT9SqsyUNuca2PoD6HVvspR9lQe/tti2ucik1Cj3TcqY1WGgeRLFG3whU3J7KwL+
- OcRLO298vleyAwocYeMf4MlTRiB7klRdFHjDrK3Raeim5j7vhr8XGgMCG8AwWqj8tLt1
- MOjQ==
-X-Gm-Message-State: AOJu0YwWaKqpVIrG/6VcwURQsJmq7XJX2z1K39T4JlTVVWSM6N0Kqcsb
- /Cdh5nKbebeusWJl9JTLFkyliA==
-X-Google-Smtp-Source: AGHT+IHZJ3e+XH3QUR/HfE+G2KEXXVVPur/X2H6IVt+cLncEkTEfjNCKzXsdR1U3LLXERWjDzWPGug==
-X-Received: by 2002:a05:600c:2054:b0:3fe:687a:abb8 with SMTP id
- p20-20020a05600c205400b003fe687aabb8mr14478186wmg.7.1696869972151; 
- Mon, 09 Oct 2023 09:46:12 -0700 (PDT)
+ bh=2rjltn9M+XXAIv6I9KIZqs861Zafbf86k+j+c8/sLis=;
+ b=uCeHe+c75x9QJwsYvEauOd6gpR0JIqqo3IJ7hgKYNqBYmtcPTr2+Yp3UN0LbKit+Dl
+ //RR3k0KGQ3lI2EhN8gpkPt7zMtFkGmrdk6Vu3l1GYwn4l5GJglOLr2tQu9h3bhEqvEd
+ 2kyvGMBm1RKBJ0Ug+kdGT3pEHxuNlZdUjKznfbr6debuNaC6OgNQBMka3WE6Kj1iMRGa
+ 77QVJbXYL/6SnVZYUlthQWrjesr1Vzqqn+0sGQ843Z1sMM/FEmxYjsgStzDMQdry+Mli
+ WNqelfBy7IUSatfciInLy8sZRc9m1OfXMg26+Z5hNhVcNaExZcmBi1gfzO0VRIWm6KdO
+ dwOw==
+X-Gm-Message-State: AOJu0YxaTSXXjLDz/+Rs+OMkq4Fdb/eZ585gztT3DMkWORW1024bFxfy
+ nICGEIFA4FzbUF5ns9EaOdnS9g==
+X-Google-Smtp-Source: AGHT+IHvYVP6ggxyRMNblubV/NESfR3QHoZbN7ZpRFlI2XVeB1yP0VZX12OJv0X4ALSUED/ED8S/0Q==
+X-Received: by 2002:adf:e892:0:b0:31f:a503:c05c with SMTP id
+ d18-20020adfe892000000b0031fa503c05cmr14688817wrm.38.1696869973891; 
+ Mon, 09 Oct 2023 09:46:13 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- n16-20020a05600c3b9000b0040684abb623sm14062506wms.24.2023.10.09.09.46.11
+ h11-20020a056000000b00b00325a59b2080sm10147151wrx.97.2023.10.09.09.46.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Oct 2023 09:46:11 -0700 (PDT)
+ Mon, 09 Oct 2023 09:46:13 -0700 (PDT)
 Received: from zen.linaroharston (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 122C11FFD0;
- Mon,  9 Oct 2023 17:41:08 +0100 (BST)
+ by zen.linaroharston (Postfix) with ESMTP id BC80A1FFCE;
+ Mon,  9 Oct 2023 17:41:07 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Thomas Huth <thuth@redhat.com>, Xiaojuan Yang <yangxiaojuan@loongson.cn>,
@@ -90,18 +90,20 @@ Cc: Thomas Huth <thuth@redhat.com>, Xiaojuan Yang <yangxiaojuan@loongson.cn>,
  Song Gao <gaosong@loongson.cn>,
  Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>, qemu-s390x@nongnu.org,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 25/25] contrib/plugins: fix coverity warning in hotblocks
-Date: Mon,  9 Oct 2023 17:41:04 +0100
-Message-Id: <20231009164104.369749-26-alex.bennee@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Matt Borgerson <contact@mborgerson.com>
+Subject: [PATCH 22/25] plugins: Set final instruction count in
+ plugin_gen_tb_end
+Date: Mon,  9 Oct 2023 17:41:01 +0100
+Message-Id: <20231009164104.369749-23-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231009164104.369749-1-alex.bennee@linaro.org>
 References: <20231009164104.369749-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -124,29 +126,80 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Coverity complains that we have an unbalance use of mutex leading to
-potential deadlocks.
+From: Matt Borgerson <contact@mborgerson.com>
 
-Fixes: CID 1519048
+Translation logic may partially decode an instruction, then abort and
+remove the instruction from the TB. This can happen for example when an
+instruction spans two pages. In this case, plugins may get an incorrect
+result when calling qemu_plugin_tb_n_insns to query for the number of
+instructions in the TB. This patch updates plugin_gen_tb_end to set the
+final instruction count.
+
+Signed-off-by: Matt Borgerson <contact@mborgerson.com>
+[AJB: added g_assert to defed API]
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Message-Id: <CADc=-s5RwGViNTR-h5cq3np673W3RRFfhr4vCGJp0EoDUxvhog@mail.gmail.com>
 ---
- contrib/plugins/hotblocks.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ include/exec/plugin-gen.h | 4 ++--
+ accel/tcg/plugin-gen.c    | 6 +++++-
+ accel/tcg/translator.c    | 2 +-
+ 3 files changed, 8 insertions(+), 4 deletions(-)
 
-diff --git a/contrib/plugins/hotblocks.c b/contrib/plugins/hotblocks.c
-index 6b74d25fea..4de1b13494 100644
---- a/contrib/plugins/hotblocks.c
-+++ b/contrib/plugins/hotblocks.c
-@@ -69,8 +69,8 @@ static void plugin_exit(qemu_plugin_id_t id, void *p)
-         }
+diff --git a/include/exec/plugin-gen.h b/include/exec/plugin-gen.h
+index 52828781bc..c4552b5061 100644
+--- a/include/exec/plugin-gen.h
++++ b/include/exec/plugin-gen.h
+@@ -20,7 +20,7 @@ struct DisasContextBase;
  
-         g_list_free(it);
--        g_mutex_unlock(&lock);
+ bool plugin_gen_tb_start(CPUState *cpu, const struct DisasContextBase *db,
+                          bool supress);
+-void plugin_gen_tb_end(CPUState *cpu);
++void plugin_gen_tb_end(CPUState *cpu, size_t num_insns);
+ void plugin_gen_insn_start(CPUState *cpu, const struct DisasContextBase *db);
+ void plugin_gen_insn_end(void);
+ 
+@@ -42,7 +42,7 @@ void plugin_gen_insn_start(CPUState *cpu, const struct DisasContextBase *db)
+ static inline void plugin_gen_insn_end(void)
+ { }
+ 
+-static inline void plugin_gen_tb_end(CPUState *cpu)
++static inline void plugin_gen_tb_end(CPUState *cpu, size_t num_insns)
+ { }
+ 
+ static inline void plugin_gen_disable_mem_helpers(void)
+diff --git a/accel/tcg/plugin-gen.c b/accel/tcg/plugin-gen.c
+index d31c9993ea..39b3c9351f 100644
+--- a/accel/tcg/plugin-gen.c
++++ b/accel/tcg/plugin-gen.c
+@@ -866,10 +866,14 @@ void plugin_gen_insn_end(void)
+  * do any clean-up here and make sure things are reset in
+  * plugin_gen_tb_start.
+  */
+-void plugin_gen_tb_end(CPUState *cpu)
++void plugin_gen_tb_end(CPUState *cpu, size_t num_insns)
+ {
+     struct qemu_plugin_tb *ptb = tcg_ctx->plugin_tb;
+ 
++    /* translator may have removed instructions, update final count */
++    g_assert(num_insns <= ptb->n);
++    ptb->n = num_insns;
++
+     /* collect instrumentation requests */
+     qemu_plugin_tb_trans_cb(cpu, ptb);
+ 
+diff --git a/accel/tcg/translator.c b/accel/tcg/translator.c
+index c5da7b32a5..575b9812ad 100644
+--- a/accel/tcg/translator.c
++++ b/accel/tcg/translator.c
+@@ -210,7 +210,7 @@ void translator_loop(CPUState *cpu, TranslationBlock *tb, int *max_insns,
+     gen_tb_end(tb, cflags, icount_start_insn, db->num_insns);
+ 
+     if (plugin_enabled) {
+-        plugin_gen_tb_end(cpu);
++        plugin_gen_tb_end(cpu, db->num_insns);
      }
-+    g_mutex_unlock(&lock);
  
-     qemu_plugin_outs(report->str);
- }
+     /* The disas_log hook may use these values rather than recompute.  */
 -- 
 2.39.2
 
