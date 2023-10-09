@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0336DCD610B
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Oct 2023 16:48:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA65BCD610D
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Oct 2023 16:49:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qptPQ-0004O5-OK; Mon, 09 Oct 2023 12:47:08 -0400
+	id 1qptPZ-0005Qa-PI; Mon, 09 Oct 2023 12:47:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qptP3-0003E3-DG
+ id 1qptP4-0003EA-NS
  for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:46:55 -0400
-Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
+Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qptOl-0003WP-Bl
- for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:46:44 -0400
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-4064867903cso47900575e9.2
- for <qemu-riscv@nongnu.org>; Mon, 09 Oct 2023 09:46:14 -0700 (PDT)
+ id 1qptOl-0003YS-DN
+ for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:46:46 -0400
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-406618d0992so46441535e9.0
+ for <qemu-riscv@nongnu.org>; Mon, 09 Oct 2023 09:46:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696869973; x=1697474773; darn=nongnu.org;
+ d=linaro.org; s=google; t=1696869976; x=1697474776; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=N/BY4Yx13cWmH/QDWd4SZAmL532vLBHSSsqb5C4YehM=;
- b=gZQlEySB2gTqve2R4v/XmkPBPwIX7moLYj9in3SlByJhdIxnbMH9AEgMLdQXMTJ2Xc
- gqvsk++Tx7mZrLv+LQ3Ufci1riqcDo/M+ax14RMpREbDMYCkIhPapuaN5ul+R3x8Hvyt
- 6/Qv7cT+X6OePkQcgvYmKbHjplpInn3ydiS/tHEOGT4JTQzOsS3h4HmOL98ZEZnp+S1L
- i6pe6tWiURIOMIpOmsEXqMjTww6T/Y4xYVRGOc1R5jwe1QMPQaSkR/2LRlUiofZE8JLS
- N8lm6i/NpBvhxxIuMd/NyBdlzzL0I5J+S0rBaIkMYTHlSDBUhpoRiQOJFruF+BURsPQa
- V+nA==
+ bh=w3ROVyIhpC0GPMfeuVN5EYglrfPgYOoqOKnIvGWt/mA=;
+ b=DqEG4XIETsVSEoWV4aQGkHkbPIXUkAXiQawn3mP4nQvqz5J1GTjE/IE09ac83Nrb5N
+ u9+P6b5Tcavf1BWspx30L+6ndLFhvgRIWQorDA41tFOgdVOME6tGzL4qIg5sMwsOTgFq
+ B1Ublj0yrB6xcvIhebJYyFSh4jpGAqW/qavMOFWYaACN6nhtuMYbf7fW1qRV/ZpLci5H
+ 6F4cbMSlYyk9W6A7T+/r0l6R4d1CFvA0TARQ4KmTJ4y649o+BOJm5JOiJfocqVYAuF7l
+ WaHQumwdAEy1ly9YDRgHA0pCRS94XOtwJbzKkCy7RxpuVAuMxl607OFG9y5dtcpA7T4a
+ sCIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696869973; x=1697474773;
+ d=1e100.net; s=20230601; t=1696869976; x=1697474776;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=N/BY4Yx13cWmH/QDWd4SZAmL532vLBHSSsqb5C4YehM=;
- b=q27WWz081aeB3NwEvRv2SimsQ/0k2cZnZrfsmHhfliiQ3VQSU5VZX6xvPAh/JUdpsu
- HfB43NjQWu83B/8CqdiVJpH14EorCcSChGMjvTco0kioJTv2hE/8Fz9m5hS0lU5KQxoS
- T6lY61BMwEyZ0laixKiEcSmiU9ltl04f3iHHx5LFMIB86bTGEC/LceINWcPjM0JBBLuH
- Ky0DYsYV+ZaCFr3opupSH4g4cyP0AW5v62FnWnK0WZRkWko4R1D7oApqcrI4B93tS9em
- MR5VCRUcP2byMm/nsq8d4WRY7UBCPkH2pVWj+w5A+vasksrqhks7v2WmrxlSvUViYRPz
- 7RLg==
-X-Gm-Message-State: AOJu0Yz1DvCxIyIribaxZLDEjH7U87Imgl7EhgEyKIAG5GnwMQbrVGN9
- JyBmqNw1woECXFF65Aa4mBUi4Q==
-X-Google-Smtp-Source: AGHT+IFqldlgnqN3jgu1alUf3POF5hhU2Ykvir4ajPIebSISlXbelhquj4K9A3V5nk/cref4PeNXgA==
-X-Received: by 2002:a1c:7917:0:b0:3fb:feb0:6f40 with SMTP id
- l23-20020a1c7917000000b003fbfeb06f40mr14863202wme.11.1696869973491; 
- Mon, 09 Oct 2023 09:46:13 -0700 (PDT)
+ bh=w3ROVyIhpC0GPMfeuVN5EYglrfPgYOoqOKnIvGWt/mA=;
+ b=u529FRF+//9huc3NOiK7KanNaK8QgUiJE5un540kjrC5uiJKX2na/yLHSVusmYu8oV
+ BXL7d/pYBe37Y9DJFpZX5jk7veJZVC00dEJT4lwLorJmmIPY6fdhwohyoeWJ6lZ6Waxe
+ AJS7nSzkt5QE/icu+ZHiLw4i8bzFAmB1OXrVoy26gdswGF+Rf1SnDG9YhnBG9HhoprIh
+ 3mQCo/3mhHBbM29Mq3l7PuMisGwDnRokl8kLgzzDkfZRb9kjOep8HakPd6yiGlOClYib
+ JzC+/5mird/TnGKghsHX1WHTTlGnVZ8MzbA1FTlxY17c8G3ndtG0voo1YvkjNP5a1d5I
+ cjzQ==
+X-Gm-Message-State: AOJu0YyhhH1apWUzNd5hkzSYXHARNenbuGM/zrx+jQm2ct2n3Jl26bKC
+ vTPWpf+SeeI0gHCKZJqwHzL9Ag==
+X-Google-Smtp-Source: AGHT+IH1/87Qy/bZG9g8wfs69vJT7EMeM0AosuHs/VDPfrf9GXJF5P+RbaMV7HWiKRuQKdw9oWg4ZQ==
+X-Received: by 2002:a05:600c:c9:b0:406:4d8f:9fee with SMTP id
+ u9-20020a05600c00c900b004064d8f9feemr14580820wmm.24.1696869975868; 
+ Mon, 09 Oct 2023 09:46:15 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- b6-20020adfee86000000b0031f300a4c26sm10071422wro.93.2023.10.09.09.46.11
+ x11-20020a05600c21cb00b00405bbfd5d16sm11774930wmj.7.2023.10.09.09.46.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Oct 2023 09:46:12 -0700 (PDT)
+ Mon, 09 Oct 2023 09:46:13 -0700 (PDT)
 Received: from zen.linaroharston (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 433DE1FFCA;
+ by zen.linaroharston (Postfix) with ESMTP id 82E6B1FFCC;
  Mon,  9 Oct 2023 17:41:07 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -90,19 +90,18 @@ Cc: Thomas Huth <thuth@redhat.com>, Xiaojuan Yang <yangxiaojuan@loongson.cn>,
  Song Gao <gaosong@loongson.cn>,
  Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>, qemu-s390x@nongnu.org,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH 18/25] gdbstub: Remove gdb_has_xml variable
-Date: Mon,  9 Oct 2023 17:40:57 +0100
-Message-Id: <20231009164104.369749-19-alex.bennee@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 20/25] accel/tcg: Add plugin_enabled to DisasContextBase
+Date: Mon,  9 Oct 2023 17:40:59 +0100
+Message-Id: <20231009164104.369749-21-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231009164104.369749-1-alex.bennee@linaro.org>
 References: <20231009164104.369749-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::333;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x333.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -125,92 +124,48 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
+From: Richard Henderson <richard.henderson@linaro.org>
 
-GDB has XML support since 6.7 which was released in 2007.
-It's time to remove support for old GDB versions without XML support.
-
-Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Message-Id: <20230912224107.29669-12-akihiko.odaki@daynix.com>
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+Message-Id: <20230824181233.1568795-2-richard.henderson@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- gdbstub/internals.h    |  2 --
- include/exec/gdbstub.h |  8 --------
- gdbstub/gdbstub.c      | 15 ---------------
- 3 files changed, 25 deletions(-)
+ include/exec/translator.h | 2 ++
+ accel/tcg/translator.c    | 1 +
+ 2 files changed, 3 insertions(+)
 
-diff --git a/gdbstub/internals.h b/gdbstub/internals.h
-index fee243081f..7128c4aa85 100644
---- a/gdbstub/internals.h
-+++ b/gdbstub/internals.h
-@@ -32,8 +32,6 @@ enum {
- typedef struct GDBProcess {
-     uint32_t pid;
-     bool attached;
--
--    /* If gdb sends qXfer:features:read:target.xml this will be populated */
-     char *target_xml;
- } GDBProcess;
+diff --git a/include/exec/translator.h b/include/exec/translator.h
+index 9d9e980819..6d3f59d095 100644
+--- a/include/exec/translator.h
++++ b/include/exec/translator.h
+@@ -73,6 +73,7 @@ typedef enum DisasJumpType {
+  * @max_insns: Maximum number of instructions to be translated in this TB.
+  * @singlestep_enabled: "Hardware" single stepping enabled.
+  * @saved_can_do_io: Known value of cpu->neg.can_do_io, or -1 for unknown.
++ * @plugin_enabled: TCG plugin enabled in this TB.
+  *
+  * Architecture-agnostic disassembly context.
+  */
+@@ -85,6 +86,7 @@ typedef struct DisasContextBase {
+     int max_insns;
+     bool singlestep_enabled;
+     int8_t saved_can_do_io;
++    bool plugin_enabled;
+     void *host_addr[2];
+ } DisasContextBase;
  
-diff --git a/include/exec/gdbstub.h b/include/exec/gdbstub.h
-index 705be2c5d7..1a01c35f8e 100644
---- a/include/exec/gdbstub.h
-+++ b/include/exec/gdbstub.h
-@@ -45,14 +45,6 @@ int gdbserver_start(const char *port_or_device);
- 
- void gdb_set_stop_cpu(CPUState *cpu);
- 
--/**
-- * gdb_has_xml() - report of gdb supports modern target descriptions
-- *
-- * This will report true if the gdb negotiated qXfer:features:read
-- * target descriptions.
-- */
--bool gdb_has_xml(void);
--
- /* in gdbstub-xml.c, generated by scripts/feature_to_c.py */
- extern const GDBFeature gdb_static_features[];
- 
-diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-index 3dc847f835..62608a5389 100644
---- a/gdbstub/gdbstub.c
-+++ b/gdbstub/gdbstub.c
-@@ -349,11 +349,6 @@ static CPUState *gdb_get_cpu(uint32_t pid, uint32_t tid)
+diff --git a/accel/tcg/translator.c b/accel/tcg/translator.c
+index e7abcd86c1..c5da7b32a5 100644
+--- a/accel/tcg/translator.c
++++ b/accel/tcg/translator.c
+@@ -158,6 +158,7 @@ void translator_loop(CPUState *cpu, TranslationBlock *tb, int *max_insns,
+     } else {
+         plugin_enabled = plugin_gen_tb_start(cpu, db, false);
      }
- }
++    db->plugin_enabled = plugin_enabled;
  
--bool gdb_has_xml(void)
--{
--    return !!gdb_get_cpu_process(gdbserver_state.g_cpu)->target_xml;
--}
--
- static const char *get_feature_xml(const char *p, const char **newp,
-                                    GDBProcess *process)
- {
-@@ -1086,11 +1081,6 @@ static void handle_set_reg(GArray *params, void *user_ctx)
- {
-     int reg_size;
- 
--    if (!gdb_get_cpu_process(gdbserver_state.g_cpu)->target_xml) {
--        gdb_put_packet("");
--        return;
--    }
--
-     if (params->len != 2) {
-         gdb_put_packet("E22");
-         return;
-@@ -1107,11 +1097,6 @@ static void handle_get_reg(GArray *params, void *user_ctx)
- {
-     int reg_size;
- 
--    if (!gdb_get_cpu_process(gdbserver_state.g_cpu)->target_xml) {
--        gdb_put_packet("");
--        return;
--    }
--
-     if (!params->len) {
-         gdb_put_packet("E14");
-         return;
+     while (true) {
+         *max_insns = ++db->num_insns;
 -- 
 2.39.2
 
