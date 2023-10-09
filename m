@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 521E9CD610B
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Oct 2023 16:47:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4A9ECD610B
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Oct 2023 16:47:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qptPO-00047O-BG; Mon, 09 Oct 2023 12:47:06 -0400
+	id 1qptPd-0005yj-MW; Mon, 09 Oct 2023 12:47:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qptOj-00036w-6B
- for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:46:29 -0400
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
+ id 1qptPF-0003Ly-Er
+ for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:46:59 -0400
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qptOY-0003Vb-1D
- for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:46:21 -0400
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-31fa15f4cc6so4716945f8f.2
- for <qemu-riscv@nongnu.org>; Mon, 09 Oct 2023 09:46:13 -0700 (PDT)
+ id 1qptOl-0003VN-D8
+ for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:46:56 -0400
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-40566f89f6eso47937005e9.3
+ for <qemu-riscv@nongnu.org>; Mon, 09 Oct 2023 09:46:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1696869972; x=1697474772; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AXsIaPlw697csDZKVxpgSKxnEOgDlwUYCcbw2vSXSnQ=;
- b=xkdCj8Uqt9yM9Aacw+1muk2ltnN41WTP4IrjswDWZe/SeLZisqGbV1PO5kyiCD1pxB
- bDES4OgaXLYEV6EtTccdVFvF/veE7lH/JE4/pWr/XK2YRBK7w1c3/lZr4OhpXe4mPDiD
- 2KpxwaKKg8MH4F6ahyQRU0MOCUYaQ0gkylIfrKnSNIYXGsd0C6qqiAvzsdwMwunrry0O
- eXSzhhXSn6MmKujl+LeZhUJ1QWd59pU2GPsOFIkq2ylVcRZkAVn/SK9XEx1QkrIV7fSf
- c9ijlBPdluiMFl7qsy3pBYyoGYBSOxiIgO+QMx56VN18GsgzZQNTLZXsZMiTe4q+d+y+
- 12+A==
+ bh=e5StG+rhxOIhMaXsnxTS3HFTjNGO8160fFaP+7NtskE=;
+ b=HDCSE4lMeW6mi1SD6Bat9CQhsT8IWC1hw/KZeTQ4YVDEfSgfGZt1vM4QS8iEtK0HYq
+ YB2WZjHwfqwY6wEOesYLkdkx+YAkiI2od3w/7Fn3lCf4yOIvmPqk2tbLMNDWdtT4eUtR
+ kTZLNoi9l9bBMLvQS1Jqblbply9+5ifHN7dN/mLkanrKdj8rdgdqtGDoJ14vjD8W9wfj
+ nz+9xQO3Ulr1mqOqLrJXocTl8AT+uKslKaZhpgmvdOSGxAkjrpC8ScrQp4ZH1LkPTxiy
+ +E9YOOMF9FDfsLs4CDyPTk2yeCZL7dQ35+q2GM0Gl5LmlAocaGPUBU8jaNJ/jY/COCG7
+ Iu2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1696869972; x=1697474772;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AXsIaPlw697csDZKVxpgSKxnEOgDlwUYCcbw2vSXSnQ=;
- b=Hu4y3Fig87Qda2iSZXurRmg7n6XTeya+zNxs3lddHkZBjkS2OpxdRWu6nNZR2KmDbr
- TxxCWVwObbsx0TsdC3Zyvq27cI2fHyeFTTv3Xp8CIyq9hWSgr1Yvr3JZKqOqwu3amHxQ
- HulQJFORDIPUOTU40EQbXjKEctGgw8xJpiUlYqUAa3GhhuUkEaDLybMxfNE1aUrmJzQo
- TQqdSTYPRfGDX7PXC1ULoB68bFlaB0OL3eBFEbs8kp3zjczmDwEuRqtR4Tq53XEFeSjs
- UdEupkZCUNEHlpMjbx1/BZ2CcJv2O+7kfJMeN+xgYElm71Q4lGnK2TzuSEGmtXcpnerE
- Vytw==
-X-Gm-Message-State: AOJu0YwZtc2x+2WW/UYVQrdc+L8OUgT9kOQzWsIQY/7hxdtlLogycKpN
- c5Zplr7VIrLAlOX+L3vjpxnPcg==
-X-Google-Smtp-Source: AGHT+IFVAlSAXPJ4iA6QXsv8ovWSjbBxh55y7Wr5lmBTEnh476/JO49iZS/guKgxTrZx9wMzzjNRqA==
-X-Received: by 2002:adf:e8ca:0:b0:324:7a6b:d504 with SMTP id
- k10-20020adfe8ca000000b003247a6bd504mr16038626wrn.4.1696869972395; 
- Mon, 09 Oct 2023 09:46:12 -0700 (PDT)
+ bh=e5StG+rhxOIhMaXsnxTS3HFTjNGO8160fFaP+7NtskE=;
+ b=vzZGXsCzEtFPQBYUUBjsmHXI7BmRdcMdJoOaRZADx22bwGYQ8TmWREM8uwjPA8QeWW
+ hfxVvZlre0B8Tl4CYSFdIdVjfZSo8ibrR7JKr9LUpKNZc12ekgZvzxxBeoSg1PrM1WEJ
+ 1SBiVc2TPp7UjfvAs4iSn7vmCQMEjnUFvHPYpBc0akBnwXJlWqzlfclJp5LKJENXab4I
+ RH5wE78b4OMrJl+b8sWEXk3tkSdk450+s57id0+A5ZwQKEWnsPRwhxM+sxwfs23nQkSb
+ 8hvnhjbSxAFhHBTzFllx7vSdU99bfZrCi2QSZJQNTbJmvHyEWIOIo/KZr0h72LMdwd5C
+ dn+w==
+X-Gm-Message-State: AOJu0Yzu233GTMNHX0YUUof+9Fa9sIRElP3JWrZYKeaBBqbpmKsr0EOi
+ s4Rn+YCvrZd0wojI8oO9/he1zQ==
+X-Google-Smtp-Source: AGHT+IGt3rG52toScdPKwaFZdST+tt6KfdXW4DMaQwkSGNmirI047WxBMGlleTcnfRunYPz+aiz9DQ==
+X-Received: by 2002:a1c:ed17:0:b0:406:7d74:a29e with SMTP id
+ l23-20020a1ced17000000b004067d74a29emr14087044wmh.19.1696869971896; 
+ Mon, 09 Oct 2023 09:46:11 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- g7-20020a056000118700b003143c9beeaesm10086534wrx.44.2023.10.09.09.46.11
+ m16-20020a7bca50000000b004064ac107cfsm11787284wml.39.2023.10.09.09.46.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 09 Oct 2023 09:46:11 -0700 (PDT)
 Received: from zen.linaroharston (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 61B151FFCB;
+ by zen.linaroharston (Postfix) with ESMTP id 9D8CB1FFCD;
  Mon,  9 Oct 2023 17:41:07 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -90,19 +90,18 @@ Cc: Thomas Huth <thuth@redhat.com>, Xiaojuan Yang <yangxiaojuan@loongson.cn>,
  Song Gao <gaosong@loongson.cn>,
  Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>, qemu-s390x@nongnu.org,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH 19/25] gdbstub: Replace gdb_regs with an array
-Date: Mon,  9 Oct 2023 17:40:58 +0100
-Message-Id: <20231009164104.369749-20-alex.bennee@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 21/25] target/sh4: Disable decode_gusa when plugins enabled
+Date: Mon,  9 Oct 2023 17:41:00 +0100
+Message-Id: <20231009164104.369749-22-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231009164104.369749-1-alex.bennee@linaro.org>
 References: <20231009164104.369749-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::432;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x432.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -125,117 +124,82 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
+From: Richard Henderson <richard.henderson@linaro.org>
 
-An array is a more appropriate data structure than a list for gdb_regs
-since it is initialized only with append operation and read-only after
-initialization.
-
-Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Message-Id: <20230912224107.29669-13-akihiko.odaki@daynix.com>
-[AJB: fixed a checkpatch violation]
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+Message-Id: <20230824181233.1568795-3-richard.henderson@linaro.org>
+[AJB: fixed s/cpu_env/tcg_env/ during re-base]
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- include/hw/core/cpu.h |  2 +-
- gdbstub/gdbstub.c     | 35 +++++++++++++++++++++--------------
- 2 files changed, 22 insertions(+), 15 deletions(-)
+ target/sh4/translate.c | 41 +++++++++++++++++++++++++++++------------
+ 1 file changed, 29 insertions(+), 12 deletions(-)
 
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 7b8347ed5a..3968369554 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -502,7 +502,7 @@ struct CPUState {
+diff --git a/target/sh4/translate.c b/target/sh4/translate.c
+index cbd8dfc02f..220a06bdce 100644
+--- a/target/sh4/translate.c
++++ b/target/sh4/translate.c
+@@ -1816,6 +1816,18 @@ static void decode_opc(DisasContext * ctx)
+ }
  
-     CPUJumpCache *tb_jmp_cache;
- 
--    struct GDBRegisterState *gdb_regs;
-+    GArray *gdb_regs;
-     int gdb_num_regs;
-     int gdb_num_g_regs;
-     QTAILQ_ENTRY(CPUState) node;
-diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-index 62608a5389..b1532118d1 100644
---- a/gdbstub/gdbstub.c
-+++ b/gdbstub/gdbstub.c
-@@ -51,7 +51,6 @@ typedef struct GDBRegisterState {
-     gdb_get_reg_cb get_reg;
-     gdb_set_reg_cb set_reg;
-     const char *xml;
--    struct GDBRegisterState *next;
- } GDBRegisterState;
- 
- GDBState gdbserver_state;
-@@ -386,7 +385,8 @@ static const char *get_feature_xml(const char *p, const char **newp,
-                 xml,
-                 g_markup_printf_escaped("<xi:include href=\"%s\"/>",
-                                         cc->gdb_core_xml_file));
--            for (r = cpu->gdb_regs; r; r = r->next) {
-+            for (guint i = 0; i < cpu->gdb_regs->len; i++) {
-+                r = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
-                 g_ptr_array_add(
-                     xml,
-                     g_markup_printf_escaped("<xi:include href=\"%s\"/>",
-@@ -430,7 +430,8 @@ static int gdb_read_register(CPUState *cpu, GByteArray *buf, int reg)
-         return cc->gdb_read_register(cpu, buf, reg);
-     }
- 
--    for (r = cpu->gdb_regs; r; r = r->next) {
-+    for (guint i = 0; i < cpu->gdb_regs->len; i++) {
-+        r = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
-         if (r->base_reg <= reg && reg < r->base_reg + r->num_regs) {
-             return r->get_reg(env, buf, reg - r->base_reg);
-         }
-@@ -448,7 +449,8 @@ static int gdb_write_register(CPUState *cpu, uint8_t *mem_buf, int reg)
-         return cc->gdb_write_register(cpu, mem_buf, reg);
-     }
- 
--    for (r = cpu->gdb_regs; r; r = r->next) {
-+    for (guint i = 0; i < cpu->gdb_regs->len; i++) {
-+        r =  &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
-         if (r->base_reg <= reg && reg < r->base_reg + r->num_regs) {
-             return r->set_reg(env, mem_buf, reg - r->base_reg);
-         }
-@@ -461,17 +463,23 @@ void gdb_register_coprocessor(CPUState *cpu,
-                               int num_regs, const char *xml, int g_pos)
- {
-     GDBRegisterState *s;
--    GDBRegisterState **p;
--
--    p = &cpu->gdb_regs;
--    while (*p) {
--        /* Check for duplicates.  */
--        if (strcmp((*p)->xml, xml) == 0)
--            return;
--        p = &(*p)->next;
-+    guint i;
+ #ifdef CONFIG_USER_ONLY
++/*
++ * Restart with the EXCLUSIVE bit set, within a TB run via
++ * cpu_exec_step_atomic holding the exclusive lock.
++ */
++static void gen_restart_exclusive(DisasContext *ctx)
++{
++    ctx->envflags |= TB_FLAG_GUSA_EXCLUSIVE;
++    gen_save_cpu_state(ctx, false);
++    gen_helper_exclusive(tcg_env);
++    ctx->base.is_jmp = DISAS_NORETURN;
++}
 +
-+    if (cpu->gdb_regs) {
-+        for (i = 0; i < cpu->gdb_regs->len; i++) {
-+            /* Check for duplicates.  */
-+            s = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
-+            if (strcmp(s->xml, xml) == 0) {
-+                return;
-+            }
+ /* For uniprocessors, SH4 uses optimistic restartable atomic sequences.
+    Upon an interrupt, a real kernel would simply notice magic values in
+    the registers and reset the PC to the start of the sequence.
+@@ -2149,12 +2161,7 @@ static void decode_gusa(DisasContext *ctx, CPUSH4State *env)
+     qemu_log_mask(LOG_UNIMP, "Unrecognized gUSA sequence %08x-%08x\n",
+                   pc, pc_end);
+ 
+-    /* Restart with the EXCLUSIVE bit set, within a TB run via
+-       cpu_exec_step_atomic holding the exclusive lock.  */
+-    ctx->envflags |= TB_FLAG_GUSA_EXCLUSIVE;
+-    gen_save_cpu_state(ctx, false);
+-    gen_helper_exclusive(tcg_env);
+-    ctx->base.is_jmp = DISAS_NORETURN;
++    gen_restart_exclusive(ctx);
+ 
+     /* We're not executing an instruction, but we must report one for the
+        purposes of accounting within the TB.  We might as well report the
+@@ -2242,12 +2249,22 @@ static void sh4_tr_translate_insn(DisasContextBase *dcbase, CPUState *cs)
+ #ifdef CONFIG_USER_ONLY
+     if (unlikely(ctx->envflags & TB_FLAG_GUSA_MASK)
+         && !(ctx->envflags & TB_FLAG_GUSA_EXCLUSIVE)) {
+-        /* We're in an gUSA region, and we have not already fallen
+-           back on using an exclusive region.  Attempt to parse the
+-           region into a single supported atomic operation.  Failure
+-           is handled within the parser by raising an exception to
+-           retry using an exclusive region.  */
+-        decode_gusa(ctx, env);
++        /*
++         * We're in an gUSA region, and we have not already fallen
++         * back on using an exclusive region.  Attempt to parse the
++         * region into a single supported atomic operation.  Failure
++         * is handled within the parser by raising an exception to
++         * retry using an exclusive region.
++         *
++         * Parsing the region in one block conflicts with plugins,
++         * so always use exclusive mode if plugins enabled.
++         */
++        if (ctx->base.plugin_enabled) {
++            gen_restart_exclusive(ctx);
++            ctx->base.pc_next += 2;
++        } else {
++            decode_gusa(ctx, env);
 +        }
-+    } else {
-+        cpu->gdb_regs = g_array_new(false, false, sizeof(GDBRegisterState));
-+        i = 0;
+         return;
      }
- 
--    s = g_new0(GDBRegisterState, 1);
-+    g_array_set_size(cpu->gdb_regs, i + 1);
-+    s = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
-     s->base_reg = cpu->gdb_num_regs;
-     s->num_regs = num_regs;
-     s->get_reg = get_reg;
-@@ -480,7 +488,6 @@ void gdb_register_coprocessor(CPUState *cpu,
- 
-     /* Add to end of list.  */
-     cpu->gdb_num_regs += num_regs;
--    *p = s;
-     if (g_pos) {
-         if (g_pos != s->base_reg) {
-             error_report("Error: Bad gdb register numbering for '%s', "
+ #endif
 -- 
 2.39.2
 
