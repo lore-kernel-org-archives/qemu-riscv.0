@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4A9ECD610B
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Oct 2023 16:47:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FA90CD610B
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Oct 2023 16:48:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qptPd-0005yj-MW; Mon, 09 Oct 2023 12:47:21 -0400
+	id 1qptPT-0004eT-6w; Mon, 09 Oct 2023 12:47:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qptPF-0003Ly-Er
- for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:46:59 -0400
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
+ id 1qptP3-0003E7-Qy
+ for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:46:55 -0400
+Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qptOl-0003VN-D8
- for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:46:56 -0400
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-40566f89f6eso47937005e9.3
- for <qemu-riscv@nongnu.org>; Mon, 09 Oct 2023 09:46:14 -0700 (PDT)
+ id 1qptOl-0003Z4-Cq
+ for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:46:45 -0400
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4064867903cso47901235e9.2
+ for <qemu-riscv@nongnu.org>; Mon, 09 Oct 2023 09:46:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696869972; x=1697474772; darn=nongnu.org;
+ d=linaro.org; s=google; t=1696869976; x=1697474776; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=e5StG+rhxOIhMaXsnxTS3HFTjNGO8160fFaP+7NtskE=;
- b=HDCSE4lMeW6mi1SD6Bat9CQhsT8IWC1hw/KZeTQ4YVDEfSgfGZt1vM4QS8iEtK0HYq
- YB2WZjHwfqwY6wEOesYLkdkx+YAkiI2od3w/7Fn3lCf4yOIvmPqk2tbLMNDWdtT4eUtR
- kTZLNoi9l9bBMLvQS1Jqblbply9+5ifHN7dN/mLkanrKdj8rdgdqtGDoJ14vjD8W9wfj
- nz+9xQO3Ulr1mqOqLrJXocTl8AT+uKslKaZhpgmvdOSGxAkjrpC8ScrQp4ZH1LkPTxiy
- +E9YOOMF9FDfsLs4CDyPTk2yeCZL7dQ35+q2GM0Gl5LmlAocaGPUBU8jaNJ/jY/COCG7
- Iu2Q==
+ bh=54vdWxoInkKQLiHeicKKqmeJW+RARqhkyr/iqwsF+dM=;
+ b=gGSX6fyXLKxe5f/lt/YRLEKujMia7z4hd7yRP9qwOd6O92V2nFQe/pOZardhizG+fb
+ gLFcq3+gf8WVpdfaJqu8yTUnNYim8yiMHpIlGb7RwS8QZeb4lDtIcuCtTgptudtW7FKX
+ OaQVfSP5RXdeA8+lgOK42PwEwPJCG5A4FctyVkO38A2TKxCJi9R4SDLq0WiQNVXM2XXF
+ uUlkmaBox6OjZEv6zA5FMGgcpht1430EMCAWSDj+OLRWQVH/r1EEoqb1/KvPx4dtLHmV
+ d68uHqEWwvlxQs/AcMGM2QEkByNR+4sNmlgDRevjG+NBWiwMULQ1NeKNYwY2EfRzmocZ
+ aoxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696869972; x=1697474772;
+ d=1e100.net; s=20230601; t=1696869976; x=1697474776;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=e5StG+rhxOIhMaXsnxTS3HFTjNGO8160fFaP+7NtskE=;
- b=vzZGXsCzEtFPQBYUUBjsmHXI7BmRdcMdJoOaRZADx22bwGYQ8TmWREM8uwjPA8QeWW
- hfxVvZlre0B8Tl4CYSFdIdVjfZSo8ibrR7JKr9LUpKNZc12ekgZvzxxBeoSg1PrM1WEJ
- 1SBiVc2TPp7UjfvAs4iSn7vmCQMEjnUFvHPYpBc0akBnwXJlWqzlfclJp5LKJENXab4I
- RH5wE78b4OMrJl+b8sWEXk3tkSdk450+s57id0+A5ZwQKEWnsPRwhxM+sxwfs23nQkSb
- 8hvnhjbSxAFhHBTzFllx7vSdU99bfZrCi2QSZJQNTbJmvHyEWIOIo/KZr0h72LMdwd5C
- dn+w==
-X-Gm-Message-State: AOJu0Yzu233GTMNHX0YUUof+9Fa9sIRElP3JWrZYKeaBBqbpmKsr0EOi
- s4Rn+YCvrZd0wojI8oO9/he1zQ==
-X-Google-Smtp-Source: AGHT+IGt3rG52toScdPKwaFZdST+tt6KfdXW4DMaQwkSGNmirI047WxBMGlleTcnfRunYPz+aiz9DQ==
-X-Received: by 2002:a1c:ed17:0:b0:406:7d74:a29e with SMTP id
- l23-20020a1ced17000000b004067d74a29emr14087044wmh.19.1696869971896; 
- Mon, 09 Oct 2023 09:46:11 -0700 (PDT)
+ bh=54vdWxoInkKQLiHeicKKqmeJW+RARqhkyr/iqwsF+dM=;
+ b=jC5zi6BZ/zqt0LKW5klam27j5lowMpJvwemNvPFPA+59VOwSNRak+TwCiI0yqTyNn3
+ 3S1B3O6BbPW1RjEnBlTWXwK33EgstCDZCe9sJMlaDpMSgaJiJeifUHmVtUm66UD7lPBs
+ caEKjHDiTvt8ZWjVAi7DJmph3Bv4UcZtNKOG5JYER0vM7N1WmHXj6a6K+GHKaz3YlMp0
+ bN3s2mIbSIdrz+LPGES7JfffQIjGtIz+Ea8/hsI4OJ8xjpCBXb7g4DFcPTcKIE+nK8ZO
+ pXISEKFH698dVIwnPRte56hy3g5Jvchu5lH0ESylaOL+N+/ngt2chauuR7bUhKjjErb3
+ VkFA==
+X-Gm-Message-State: AOJu0YzGHqni+JpG4b/5q/Je68LrsjVzkd7iMZy2VkVTX3T92oyjcCsS
+ pipS11TqCbGn0q39SvdEt56wRg==
+X-Google-Smtp-Source: AGHT+IG+VeXWkvAeELLizDA+7nLTk3jWt2nNJh35de6iE9D81R1Xd0fMrSOGt7lIfcCl5vsoBq4pHQ==
+X-Received: by 2002:a05:6000:4d2:b0:322:dbe8:e18f with SMTP id
+ h18-20020a05600004d200b00322dbe8e18fmr15952672wri.46.1696869976074; 
+ Mon, 09 Oct 2023 09:46:16 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- m16-20020a7bca50000000b004064ac107cfsm11787284wml.39.2023.10.09.09.46.11
+ r18-20020adfe692000000b0031912c0ffebsm10119250wrm.23.2023.10.09.09.46.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Oct 2023 09:46:11 -0700 (PDT)
+ Mon, 09 Oct 2023 09:46:13 -0700 (PDT)
 Received: from zen.linaroharston (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 9D8CB1FFCD;
+ by zen.linaroharston (Postfix) with ESMTP id 2634E1FFC9;
  Mon,  9 Oct 2023 17:41:07 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -90,18 +90,19 @@ Cc: Thomas Huth <thuth@redhat.com>, Xiaojuan Yang <yangxiaojuan@loongson.cn>,
  Song Gao <gaosong@loongson.cn>,
  Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>, qemu-s390x@nongnu.org,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 21/25] target/sh4: Disable decode_gusa when plugins enabled
-Date: Mon,  9 Oct 2023 17:41:00 +0100
-Message-Id: <20231009164104.369749-22-alex.bennee@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Akihiko Odaki <akihiko.odaki@daynix.com>
+Subject: [PATCH 17/25] target/ppc: Remove references to gdb_has_xml
+Date: Mon,  9 Oct 2023 17:40:56 +0100
+Message-Id: <20231009164104.369749-18-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231009164104.369749-1-alex.bennee@linaro.org>
 References: <20231009164104.369749-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -124,82 +125,68 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Richard Henderson <richard.henderson@linaro.org>
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
 
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20230824181233.1568795-3-richard.henderson@linaro.org>
-[AJB: fixed s/cpu_env/tcg_env/ during re-base]
+GDB has XML support since 6.7 which was released in 2007.
+It's time to remove support for old GDB versions without XML support.
+
+Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+Message-Id: <20230912224107.29669-11-akihiko.odaki@daynix.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- target/sh4/translate.c | 41 +++++++++++++++++++++++++++++------------
- 1 file changed, 29 insertions(+), 12 deletions(-)
+ target/ppc/gdbstub.c | 18 ------------------
+ 1 file changed, 18 deletions(-)
 
-diff --git a/target/sh4/translate.c b/target/sh4/translate.c
-index cbd8dfc02f..220a06bdce 100644
---- a/target/sh4/translate.c
-+++ b/target/sh4/translate.c
-@@ -1816,6 +1816,18 @@ static void decode_opc(DisasContext * ctx)
- }
- 
- #ifdef CONFIG_USER_ONLY
-+/*
-+ * Restart with the EXCLUSIVE bit set, within a TB run via
-+ * cpu_exec_step_atomic holding the exclusive lock.
-+ */
-+static void gen_restart_exclusive(DisasContext *ctx)
-+{
-+    ctx->envflags |= TB_FLAG_GUSA_EXCLUSIVE;
-+    gen_save_cpu_state(ctx, false);
-+    gen_helper_exclusive(tcg_env);
-+    ctx->base.is_jmp = DISAS_NORETURN;
-+}
-+
- /* For uniprocessors, SH4 uses optimistic restartable atomic sequences.
-    Upon an interrupt, a real kernel would simply notice magic values in
-    the registers and reset the PC to the start of the sequence.
-@@ -2149,12 +2161,7 @@ static void decode_gusa(DisasContext *ctx, CPUSH4State *env)
-     qemu_log_mask(LOG_UNIMP, "Unrecognized gUSA sequence %08x-%08x\n",
-                   pc, pc_end);
- 
--    /* Restart with the EXCLUSIVE bit set, within a TB run via
--       cpu_exec_step_atomic holding the exclusive lock.  */
--    ctx->envflags |= TB_FLAG_GUSA_EXCLUSIVE;
--    gen_save_cpu_state(ctx, false);
--    gen_helper_exclusive(tcg_env);
--    ctx->base.is_jmp = DISAS_NORETURN;
-+    gen_restart_exclusive(ctx);
- 
-     /* We're not executing an instruction, but we must report one for the
-        purposes of accounting within the TB.  We might as well report the
-@@ -2242,12 +2249,22 @@ static void sh4_tr_translate_insn(DisasContextBase *dcbase, CPUState *cs)
- #ifdef CONFIG_USER_ONLY
-     if (unlikely(ctx->envflags & TB_FLAG_GUSA_MASK)
-         && !(ctx->envflags & TB_FLAG_GUSA_EXCLUSIVE)) {
--        /* We're in an gUSA region, and we have not already fallen
--           back on using an exclusive region.  Attempt to parse the
--           region into a single supported atomic operation.  Failure
--           is handled within the parser by raising an exception to
--           retry using an exclusive region.  */
--        decode_gusa(ctx, env);
-+        /*
-+         * We're in an gUSA region, and we have not already fallen
-+         * back on using an exclusive region.  Attempt to parse the
-+         * region into a single supported atomic operation.  Failure
-+         * is handled within the parser by raising an exception to
-+         * retry using an exclusive region.
-+         *
-+         * Parsing the region in one block conflicts with plugins,
-+         * so always use exclusive mode if plugins enabled.
-+         */
-+        if (ctx->base.plugin_enabled) {
-+            gen_restart_exclusive(ctx);
-+            ctx->base.pc_next += 2;
-+        } else {
-+            decode_gusa(ctx, env);
-+        }
-         return;
+diff --git a/target/ppc/gdbstub.c b/target/ppc/gdbstub.c
+index 778ef73bd7..ec5731e5d6 100644
+--- a/target/ppc/gdbstub.c
++++ b/target/ppc/gdbstub.c
+@@ -54,12 +54,6 @@ static int ppc_gdb_register_len(int n)
+     case 0 ... 31:
+         /* gprs */
+         return sizeof(target_ulong);
+-    case 32 ... 63:
+-        /* fprs */
+-        if (gdb_has_xml()) {
+-            return 0;
+-        }
+-        return 8;
+     case 66:
+         /* cr */
+     case 69:
+@@ -74,12 +68,6 @@ static int ppc_gdb_register_len(int n)
+     case 68:
+         /* ctr */
+         return sizeof(target_ulong);
+-    case 70:
+-        /* fpscr */
+-        if (gdb_has_xml()) {
+-            return 0;
+-        }
+-        return sizeof(target_ulong);
+     default:
+         return 0;
      }
- #endif
+@@ -132,9 +120,6 @@ int ppc_cpu_gdb_read_register(CPUState *cs, GByteArray *buf, int n)
+     if (n < 32) {
+         /* gprs */
+         gdb_get_regl(buf, env->gpr[n]);
+-    } else if (n < 64) {
+-        /* fprs */
+-        gdb_get_reg64(buf, *cpu_fpr_ptr(env, n - 32));
+     } else {
+         switch (n) {
+         case 64:
+@@ -158,9 +143,6 @@ int ppc_cpu_gdb_read_register(CPUState *cs, GByteArray *buf, int n)
+         case 69:
+             gdb_get_reg32(buf, cpu_read_xer(env));
+             break;
+-        case 70:
+-            gdb_get_reg32(buf, env->fpscr);
+-            break;
+         }
+     }
+     mem_buf = buf->data + buf->len - r;
 -- 
 2.39.2
 
