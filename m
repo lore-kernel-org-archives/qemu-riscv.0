@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7C3EE9371D
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Oct 2023 22:26:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70662E81E18
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Oct 2023 22:41:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qpyh6-0007e3-TL; Mon, 09 Oct 2023 18:25:44 -0400
+	id 1qpywI-0001ju-3O; Mon, 09 Oct 2023 18:41:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <roman@roolebo.dev>) id 1qpyTd-0003qo-UQ
- for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 18:11:49 -0400
-Received: from mail-lf1-x135.google.com ([2a00:1450:4864:20::135])
+ (Exim 4.90_1) (envelope-from <roman@roolebo.dev>) id 1qpywG-0001i8-PQ
+ for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 18:41:24 -0400
+Received: from mail-lf1-x129.google.com ([2a00:1450:4864:20::129])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <roman@roolebo.dev>) id 1qpyTZ-0001mi-IZ
- for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 18:11:49 -0400
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-503397ee920so6276009e87.1
- for <qemu-riscv@nongnu.org>; Mon, 09 Oct 2023 15:11:44 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <roman@roolebo.dev>) id 1qpywF-0008Rc-7A
+ for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 18:41:24 -0400
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-504b84d59cbso6664432e87.3
+ for <qemu-riscv@nongnu.org>; Mon, 09 Oct 2023 15:41:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=roolebo.dev; s=mail; t=1696889503; x=1697494303; darn=nongnu.org;
+ d=roolebo.dev; s=mail; t=1696891281; x=1697496081; darn=nongnu.org;
  h=in-reply-to:content-transfer-encoding:content-disposition
  :mime-version:references:message-id:subject:cc:to:from:date:from:to
  :cc:subject:date:message-id:reply-to;
- bh=nJy0hce/YrY23lL4GVCRdbFPgnpYuOHyHRvZoD67NIs=;
- b=Qp+JFLxd31Zbcwwv0scwQzvZVl6DRYKk0rFcRmpYhOEphGCbpWGm/2V6jRnkaPelLd
- YM5xDAgmSsevpuK1CZVDdI1DOLuBxTL4Fp/kDYVbtm3u1vVRTvfKwR9Tx9uKRVRJmQtE
- Ge35mMpUC9MKTil1N85QR8XNOgyBkIi3e4suoOzU8+05ZYnRw5Dnx15nCWi6WGO2EFTq
- WcAuLFELR5o642HIIXOU1Hch+1pf/RrspXotELwu6K3rlGOHY4P2gzjScDFDcJfTWdGo
- an6agRozInWRA8ocI/DnLsS2I3hDk0CAZZTeOzg9LMuTa9+LbZskFxwlhvJ0gBduFYxn
- rotg==
+ bh=63JRvopVxTzbYjYF0p1oEt+aEjewWFFf5DMgWxLKsuc=;
+ b=dHnF4VtBCREPdHNds2buZFgjZnHI4tOHYCbYGr34/IMopxMTh5CWeK7snaUZtvgfxa
+ VvdvSUiqE5OtoT1MyT8V3UqxpHP9LdY3/u11ChER6ESEjUFFhD0lW3exyoCVX6tU3jRE
+ 5z6e0pzSo6yEqx1tALw/bqNIfL+QsHTwotsGDBKUsk4+okK2PJjeexLcAQZ31yeMRuur
+ p0P/JASxbwINsuhSz8y2oCy6Hn+NNW9CLoUe+OVXxTKwhaweM+sBECuDYe3qq4I63W2S
+ FGT0KNfYM9l6KkY8t81jPGvEa3akgyeatROV3gTC0ANUHXoU0eigYdZOkfF3zwiXDuLV
+ d41Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696889503; x=1697494303;
+ d=1e100.net; s=20230601; t=1696891281; x=1697496081;
  h=in-reply-to:content-transfer-encoding:content-disposition
  :mime-version:references:message-id:subject:cc:to:from:date
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=nJy0hce/YrY23lL4GVCRdbFPgnpYuOHyHRvZoD67NIs=;
- b=nGx+aoMepTRf97AgTcomW/893rnvA7ESuW14UpiCfQnS6bBstaMzgdW2LF41cFOsdq
- AB3Ecx5BppQqmbQGh3OUKT7oQQyqvk1IUrafvKahkQR4HXyyYWkokqlFCM5wX1Vy2d1O
- 4cm9kRKWV22Q4NhagOfT9878tRG7luvlI/V2iIRkpY6Fa5+ehFf3S8XKCSml0o1orcNX
- bN4zdfOnqFrk3SNpsR5khw0npeZJHU1iupNCRJuozS14qI1EaGout/dTNnNJUxFqGIm2
- OJCGk0JwXiCz8T0gzqjK1ZD4gXkwH5J8vTtsELn7petjsax+qCB2xtPcyu70lU8B5uMV
- bexw==
-X-Gm-Message-State: AOJu0YwHQNhTNZSG0kNKXgkUI1+WNa+8BNwiw4d912oPC/XTguD7uWXR
- Lh7jDr+3/yFpjvSj5eJiPxQJjg==
-X-Google-Smtp-Source: AGHT+IEQZJ6+hZs6o+jHiOoe2HZ60A/G1wZUI4gX36JdY+mej1GgSheBuqpnr1bggyP0p8HRwIvWqQ==
-X-Received: by 2002:a05:6512:250c:b0:503:1b83:e352 with SMTP id
- be12-20020a056512250c00b005031b83e352mr17216392lfb.52.1696889503024; 
- Mon, 09 Oct 2023 15:11:43 -0700 (PDT)
+ bh=63JRvopVxTzbYjYF0p1oEt+aEjewWFFf5DMgWxLKsuc=;
+ b=XqgcN65W60XjfEc8PhkiNlm40t3ZBc12dZpMPHCSupT5d8IWP+HnLB4XV/SG0LPb6W
+ yxssdrWfDI1wxoLleeYr4OJQzLIJIUfeGDkP3RCoR1FkMgidbQTAiiKB3w48GC1+0pgO
+ v8T4lfjqL2QJPGq8AF0Tu1gWmkN3zimQdTMnzCA+ipnUiTJO6M9CJJ+f1PWplnr1JHnz
+ xScoo/cbuOCL3a0ByOu6LE+M8/1cBOqz7ciDoVHfH7JrL8sK7Q3aUPgUPshVb2esGaSe
+ WVfn6HvzSzBrO1Fvy/BfCOGZIj6vv0g6HB4JBIP7WZE7woTCxBzmnvVU/e0E1qhY2tnn
+ RHXg==
+X-Gm-Message-State: AOJu0YxYLd5GXCxw0BoKx9JezEyUCCsa+fg/2nKV6fopIcRyNInSx4wX
+ /8aDnYHbVTE0H9tEjMF8Hx7nag==
+X-Google-Smtp-Source: AGHT+IFk6UylV9E97y/hgkYNBPIOrrHYH5JyI2duIm4+sYcCcbh1TZ9QY+nS5w6/50XF1GfPfsY68w==
+X-Received: by 2002:a05:6512:758:b0:503:59d:fbff with SMTP id
+ c24-20020a056512075800b00503059dfbffmr5825067lfs.2.1696891281365; 
+ Mon, 09 Oct 2023 15:41:21 -0700 (PDT)
 Received: from localhost (95-25-87-177.broadband.corbina.ru. [95.25.87.177])
  by smtp.gmail.com with ESMTPSA id
- m23-20020ac24257000000b0050420eff124sm1553302lfl.152.2023.10.09.15.11.42
+ p16-20020a19f010000000b00500b19152cbsm1578228lfc.8.2023.10.09.15.41.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Oct 2023 15:11:42 -0700 (PDT)
-Date: Tue, 10 Oct 2023 01:11:41 +0300
+ Mon, 09 Oct 2023 15:41:20 -0700 (PDT)
+Date: Tue, 10 Oct 2023 01:41:19 +0300
 From: Roman Bolshakov <roman@roolebo.dev>
 To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, David Hildenbrand <david@redhat.com>,
@@ -73,18 +73,18 @@ Cc: qemu-devel@nongnu.org, David Hildenbrand <david@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Thomas Huth <thuth@redhat.com>, Roman Bolshakov <rbolshakov@ddn.com>,
  Nicholas Piggin <npiggin@gmail.com>
-Subject: Re: [PATCH 5/6] target/i386/hvf: Use x86_cpu in
- simulate_[rdmsr|wrmsr]()
-Message-ID: <ZSR6nS2k1n8PGjTc@roolebo.dev>
+Subject: Re: [PATCH 6/6] target/i386: Use env_archcpu() in
+ simulate_[rdmsr/wrmsr]()
+Message-ID: <ZSSBjyb1v75yefyg@roolebo.dev>
 References: <20231009110239.66778-1-philmd@linaro.org>
- <20231009110239.66778-6-philmd@linaro.org>
+ <20231009110239.66778-7-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20231009110239.66778-6-philmd@linaro.org>
-Received-SPF: none client-ip=2a00:1450:4864:20::135;
- envelope-from=roman@roolebo.dev; helo=mail-lf1-x135.google.com
+In-Reply-To: <20231009110239.66778-7-philmd@linaro.org>
+Received-SPF: none client-ip=2a00:1450:4864:20::129;
+ envelope-from=roman@roolebo.dev; helo=mail-lf1-x129.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -93,7 +93,6 @@ X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_NONE=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Mon, 09 Oct 2023 18:25:44 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -108,15 +107,22 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Oct 09, 2023 at 01:02:38PM +0200, Philippe Mathieu-Daudé wrote:
-> We already have 'x86_cpu = X86_CPU(cpu)'. Use the variable
-> instead of doing another QOM cast with X86_CPU().
+On Mon, Oct 09, 2023 at 01:02:39PM +0200, Philippe Mathieu-Daudé wrote:
 > 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> simulate_rdmsr/simulate_rdmsr(CPUX86State
+> 
+
+Hi Philippe, the above is likely a typo. The subject may also be changed to
+target/i386/hvf.
+
+> RFC: Not even build-tested.
+>
+
+The patch compiles and works fine. Besides the nits,
 
 Reviewed-by: Roman Bolshakov <roman@roolebo.dev>
+Tested-by: Roman Bolshakov <roman@roolebo.dev>
 
---
-Regards,
+Thanks,
 Roman
 
