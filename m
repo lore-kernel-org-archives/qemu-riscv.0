@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37CBFCD610A
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Oct 2023 16:45:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86C1CCD610A
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Oct 2023 16:46:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qptLy-0000Ur-1M; Mon, 09 Oct 2023 12:43:34 -0400
+	id 1qptM1-0000z2-EA; Mon, 09 Oct 2023 12:43:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qptK4-0005OT-3A
- for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:41:37 -0400
-Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
+ id 1qptKE-0005ob-IE
+ for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:41:47 -0400
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qptJf-0001WM-CT
- for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:41:31 -0400
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-31427ddd3fbso4561274f8f.0
- for <qemu-riscv@nongnu.org>; Mon, 09 Oct 2023 09:41:10 -0700 (PDT)
+ id 1qptJj-0001bL-P6
+ for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 12:41:46 -0400
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-405497850dbso44370455e9.0
+ for <qemu-riscv@nongnu.org>; Mon, 09 Oct 2023 09:41:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696869670; x=1697474470; darn=nongnu.org;
+ d=linaro.org; s=google; t=1696869674; x=1697474474; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZDyM/F5z2PX4t5z6swT9o+aFYE3lKyvYgeKJZjudJGU=;
- b=KVQF/6OJtZAecL7Rj9FJcNABY7chR/mxJjK+dGdtIo0/03mTQADhHPyjiJGYdhXJgg
- pX+r2v2Z8GYmszKqIi44bOHSFBSjCFPe8yEk+v+gS3SRujX4TpQEnTIU6mnfJpaHicw9
- U5f/ObeP+5fylPdSLGNVoHstdQNuvTdgaqw9qFm4Az7zyUgeD4Cf8Rkvi85Lg3oB/2it
- OEvBn/AzWmNCflgMe8bGLPxptazUF3oL8J09RZB0laaTFFkJoRajPanRSqBLembdEooJ
- WOdLm5wSTbxNqmctCr7AA4Y9rbOUn1nXEsJvd+3OmSnG7GPIE2xWG9BGC+VBsstTbwfn
- a88g==
+ bh=SQaKCCtPdCExPYstQ0NllKjLPtp/IcVgNdDW/2dG2tw=;
+ b=NE8ompUW6GgsAgWOO72/RgzPIQ6pQyPmamEeqmKAppzqJ9KKV3F2Qa5PreMGRyM+Ij
+ nzv+5TtXFRJcSqDj1HWWFDfZzpLNYG/88PhStLlkltHxR/ecz7Bo2U9uZbWHAM6LMnuS
+ e3mV7/XZLalUMxXjKNpTM3HhBdUXyEPdeimKlPvNTR+j0l1E7z7ws8nqOMp+uQFxlvte
+ JLQscbD5u87UFQhbFi/csdjKYHeF0DShQ/8LraoIfLab3a9gE78jVDVkHnDLVzCTk16p
+ gu5AhYbvg3hZ/IZMbSIEek8yXSKQ6RbX3ZlHTVjVgfTGsNFVDHco2rqVK8hwZB+a9h+u
+ ajGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696869670; x=1697474470;
+ d=1e100.net; s=20230601; t=1696869674; x=1697474474;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZDyM/F5z2PX4t5z6swT9o+aFYE3lKyvYgeKJZjudJGU=;
- b=WeXzXpIt2ixvyQxe+F6NPtOUNYDIBaffCeDwCv9nAm+nK33m2/nEF6ePS4157seu6Y
- eBUma3jbFIM38rAssiYe433V+dVxznlUHH9O9ZSZwmvvw80LoeKX/W22TwedkR0bZd4Y
- ikWq8Dtk2MzsaNjpp42HGlyhQ1cBQJkoOBATN2ZBO2OjCp9k+zzXy5VJUupoVE0ydhYH
- i9tjLz4qwhfRpARkwu66u5+EmS4Gdc0ZOguNWctSDGKNP2iPIXzx0jHf5bHF18D8FK6a
- Q/3TsP9aGn9NG2MkMaPiTCd+YDFf2GFl2mPIRK1HGm5nDPZT8vRVEHb7+qQgjvXBfBv/
- Ul5A==
-X-Gm-Message-State: AOJu0YyzqvHSNDiGf+yyS3mLJ5o6ZzAhlBSD547bNN7lMwsjuiH8JQEc
- rdQ0MHhPSlAiwjiQ0QtW8+PlNA==
-X-Google-Smtp-Source: AGHT+IFbzMb9dBVLvXKeQVvKU1l2iZlF5Ezmak2MWAKzXM+bLqo+Drt1j9SVzaXM9FIi8STfjf/nKA==
-X-Received: by 2002:adf:f845:0:b0:31f:e74d:c82a with SMTP id
- d5-20020adff845000000b0031fe74dc82amr13985515wrq.31.1696869669785; 
- Mon, 09 Oct 2023 09:41:09 -0700 (PDT)
+ bh=SQaKCCtPdCExPYstQ0NllKjLPtp/IcVgNdDW/2dG2tw=;
+ b=SBLCtoyizIT5q8eQB22x4Kz77Rs/HaYQx3cOqDzKWMMBQm3c3kDzEQmLjruoDlu1UG
+ 5vms+dmYTuRCzzlZJBVp65c7jPPSHeAgqtyai516gMIgR47B/j0+uMUzj1XkgLeCQ364
+ X25RZmIePhbk3R1u9iIfuuLaZ4QY7K2yezO6RqBq+tNLO7d6RCnbX0eMTMUTIfJCn95o
+ 2NxQhmoDE+mM2KOAdZeTFgfYubdvKnCOValaX5ZcbxOuPiOJreIw0qzZd1uPGaL8hfHQ
+ pd9Eu0wAtnHg0kGYKUHdsnheimVQpgApjmZl+JcXrrUAbD+DPx0sSixkoiFCwmPpRd5+
+ oyMw==
+X-Gm-Message-State: AOJu0Yy7UVTrdyzOpLJZpJ8ncxlfykjcLF+4it2/8jES1ikgvLJesFGu
+ cdi41c24tm4e9LTEXcUmhTZMhQ==
+X-Google-Smtp-Source: AGHT+IHM2CYEhLRn6igwx5Zj7Km+x/QT2Gzuuk+SwZDSsJZg+w4BxF3aVLup1v7ul5ctwWB+ghWSrQ==
+X-Received: by 2002:a05:600c:210b:b0:405:1dbd:f77 with SMTP id
+ u11-20020a05600c210b00b004051dbd0f77mr13591872wml.31.1696869674023; 
+ Mon, 09 Oct 2023 09:41:14 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- t11-20020a5d534b000000b003232380ffd5sm10071994wrv.106.2023.10.09.09.41.06
+ m7-20020a05600c280700b004047ac770d1sm13913102wmb.8.2023.10.09.09.41.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Oct 2023 09:41:07 -0700 (PDT)
+ Mon, 09 Oct 2023 09:41:11 -0700 (PDT)
 Received: from zen.linaroharston (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id D6C7A1FFC1;
- Mon,  9 Oct 2023 17:41:05 +0100 (BST)
+ by zen.linaroharston (Postfix) with ESMTP id D4BE31FFBD;
+ Mon,  9 Oct 2023 17:41:07 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Thomas Huth <thuth@redhat.com>, Xiaojuan Yang <yangxiaojuan@loongson.cn>,
@@ -91,17 +91,17 @@ Cc: Thomas Huth <thuth@redhat.com>, Xiaojuan Yang <yangxiaojuan@loongson.cn>,
  Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>, qemu-s390x@nongnu.org,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 06/25] configure: allow user to override docker engine
-Date: Mon,  9 Oct 2023 17:40:45 +0100
-Message-Id: <20231009164104.369749-7-alex.bennee@linaro.org>
+Subject: [PATCH 23/25] contrib/plugins: fix coverity warning in cache
+Date: Mon,  9 Oct 2023 17:41:02 +0100
+Message-Id: <20231009164104.369749-24-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231009164104.369749-1-alex.bennee@linaro.org>
 References: <20231009164104.369749-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::335;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x335.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -124,61 +124,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-If you have both engines installed but one is broken you are stuck
-with the automagic. Allow the user to override the engine for this
-case.
+Coverity complains that appends_stats_line can be fed a 0 leading
+to the undefined behaviour of a divide by 0.
 
+Fixes: CID 1519044
+Fixes: CID 1519047
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- configure | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ contrib/plugins/cache.c | 18 ++++++++----------
+ 1 file changed, 8 insertions(+), 10 deletions(-)
 
-diff --git a/configure b/configure
-index 707132a3ae..ebad155d9e 100755
---- a/configure
-+++ b/configure
-@@ -180,6 +180,7 @@ fi
- # some defaults, based on the host environment
+diff --git a/contrib/plugins/cache.c b/contrib/plugins/cache.c
+index 4fca3edd07..9e7ade3b37 100644
+--- a/contrib/plugins/cache.c
++++ b/contrib/plugins/cache.c
+@@ -535,15 +535,13 @@ static void caches_free(Cache **caches)
+     }
+ }
  
- # default parameters
-+container_engine="auto"
- cpu=""
- cross_compile="no"
- cross_prefix=""
-@@ -787,6 +788,8 @@ for opt do
-   ;;
-   --disable-containers) use_containers="no"
-   ;;
-+  --container-engine=*) container_engine="$optarg"
-+  ;;
-   --gdb=*) gdb_bin="$optarg"
-   ;;
-   # everything else has the same name in configure and meson
-@@ -921,6 +924,7 @@ Advanced options (experts only):
-   --enable-plugins
-                            enable plugins via shared library loading
-   --disable-containers     don't use containers for cross-building
-+  --container-engine=TYPE  which container engine to use [$container_engine]
-   --gdb=GDB-path           gdb to use for gdbstub tests [$gdb_bin]
- EOF
-   meson_options_help
-@@ -1195,14 +1199,14 @@ fi
- container="no"
- runc=""
- if test $use_containers = "yes" && (has "docker" || has "podman"); then
--    case $($python "$source_path"/tests/docker/docker.py probe) in
-+    case $($python "$source_path"/tests/docker/docker.py --engine "$container_engine" probe) in
-         *docker) container=docker ;;
-         podman) container=podman ;;
-         no) container=no ;;
-     esac
-     if test "$container" != "no"; then
-         docker_py="$python $source_path/tests/docker/docker.py --engine $container"
--        runc=$($python "$source_path"/tests/docker/docker.py probe)
-+        runc=$container
-     fi
- fi
+-static void append_stats_line(GString *line, uint64_t l1_daccess,
+-                              uint64_t l1_dmisses, uint64_t l1_iaccess,
+-                              uint64_t l1_imisses,  uint64_t l2_access,
+-                              uint64_t l2_misses)
++static void append_stats_line(GString *line,
++                              uint64_t l1_daccess, uint64_t l1_dmisses,
++                              uint64_t l1_iaccess, uint64_t l1_imisses,
++                              uint64_t l2_access, uint64_t l2_misses)
+ {
+-    double l1_dmiss_rate, l1_imiss_rate, l2_miss_rate;
+-
+-    l1_dmiss_rate = ((double) l1_dmisses) / (l1_daccess) * 100.0;
+-    l1_imiss_rate = ((double) l1_imisses) / (l1_iaccess) * 100.0;
++    double l1_dmiss_rate = ((double) l1_dmisses) / (l1_daccess) * 100.0;
++    double l1_imiss_rate = ((double) l1_imisses) / (l1_iaccess) * 100.0;
  
+     g_string_append_printf(line, "%-14" PRIu64 " %-12" PRIu64 " %9.4lf%%"
+                            "  %-14" PRIu64 " %-12" PRIu64 " %9.4lf%%",
+@@ -554,8 +552,8 @@ static void append_stats_line(GString *line, uint64_t l1_daccess,
+                            l1_imisses,
+                            l1_iaccess ? l1_imiss_rate : 0.0);
+ 
+-    if (use_l2) {
+-        l2_miss_rate =  ((double) l2_misses) / (l2_access) * 100.0;
++    if (l2_access && l2_misses) {
++        double l2_miss_rate =  ((double) l2_misses) / (l2_access) * 100.0;
+         g_string_append_printf(line,
+                                "  %-12" PRIu64 " %-11" PRIu64 " %10.4lf%%",
+                                l2_access,
 -- 
 2.39.2
 
