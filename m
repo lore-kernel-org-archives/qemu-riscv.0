@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFE27E95A8E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Oct 2023 11:04:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D1DDE95A8E
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Oct 2023 11:05:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qpo34-00074w-K1; Mon, 09 Oct 2023 07:03:42 -0400
+	id 1qpo2n-0006WF-8W; Mon, 09 Oct 2023 07:03:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qpo2k-0006Qg-Pq
- for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 07:03:24 -0400
-Received: from mail-ed1-x536.google.com ([2a00:1450:4864:20::536])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qpo2S-0006IL-FB
+ for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 07:03:06 -0400
+Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qpo2g-0003QS-8j
- for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 07:03:20 -0400
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5334d78c5f6so7559857a12.2
- for <qemu-riscv@nongnu.org>; Mon, 09 Oct 2023 04:03:16 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qpo2M-0003N1-PD
+ for qemu-riscv@nongnu.org; Mon, 09 Oct 2023 07:03:01 -0400
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-522bd411679so7164676a12.0
+ for <qemu-riscv@nongnu.org>; Mon, 09 Oct 2023 04:02:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696849395; x=1697454195; darn=nongnu.org;
+ d=linaro.org; s=google; t=1696849376; x=1697454176; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1+J1wI69+igLibXDQf0PHgHIzLfY8D41JYZfyX16+G8=;
- b=ecKA4V1F9DPFs2cwjQ8AZKNzG4WOYVOH9X1FZpaV4IShxeIXvgSeDINqWXqYU8N/bq
- Lx5Qd0nQfPmG7MmfQmYO96C45YrDzxFuFxUYRc4VFXrg8otxwpYjRP9hymX7vntH3BfI
- /ibdVEnZDFTMpVDi25+7p+hsOZAHp2TYOXfmKepyt8bHJAFrTmHr0CO6D8pCwzFtJXnm
- XaLPjI3Cvnpo8QLaPGrS6/drLMWgSMrtfFGRQdzA2ZOrp7VL4Ba8JN20H1T4zWL1qOFH
- RLXYQEKdVvQKnqaHewoUAJK93xXY4USRW5a0kF2krnJdxT2kgw+VHICVQs7qSo1zkwRZ
- N8jg==
+ bh=Y/GrMBIMGrTYySZAmzh8zKw+DxTy0unUed7WlZuT/J4=;
+ b=INvojKDd9QmyIFhMnCKSaTj9DMmu6US/JLwSPhix28eesJzzWNjkIn7qwuhhkdXXyX
+ Ob6jpY7ZgBjZa3bi9nZm5K7gDQVP5nD12ICTszBcSmNXQvZh5k9Gm5IWfyP+ZUoqftvf
+ D66xReS5plsakXH5RP7QQPJVqfWNRBzFAT6qPsnj3K1dp2eSs6IeG/6QZtJJ6wn8rabZ
+ i+OcfQwgvY5NNm+2p4jCM/N1NUKREWBqdEX02hgrR9gTct5GbKR7SUikKzSQ/NPLPLGM
+ pkJbn1TV1aB4GeGk4u5K42ObbYMD90V2spFT0CgNa2xNTlWNpuA8Ib6u9FFyd83ZafWM
+ CChA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696849395; x=1697454195;
+ d=1e100.net; s=20230601; t=1696849376; x=1697454176;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1+J1wI69+igLibXDQf0PHgHIzLfY8D41JYZfyX16+G8=;
- b=LBaaVUAGvX//xU53i3tx+KDKRGD4uJna44PVt6Idd/3vZO8ACTG+PhNE+hZRylTdvw
- cDA6RUx5vodp4EWX+P8xMAPiRjH23IZpkjhpd+6wmZnRlQ1839H/bQBm27FgmSkSca3O
- SpM6Ofh7Sn+sT7z0kzb+ZPOJiPYcVFSNytOwavWecqHR1Vfrs4ggBLb2pjwqA60F/P+U
- LtdJROPGTZXV+FIL+g72cDA3jWUkgBFsSDXjXGDVP6iq+5AOIQ0iIXF+2flargsW/0au
- RZXxamFDMKGAf5bSzTcCJO3/x9+9qeD7rNtun2rLXv8+SFWf7S2Jw+bpjZTsAQASlnKy
- xsvw==
-X-Gm-Message-State: AOJu0YzLHkBVxoOkMoIU02JIIapVvpe4VF4oKjZJQzmGv7IKXftO01uI
- Yl6c6Fv5R4MVI7Sp5xAAM4CGEA==
-X-Google-Smtp-Source: AGHT+IEnwQIfXK0PSpcUquHgDcrZc+NXC/pJVOCtuYwXpIu5y20njwFFRWuyfel+p9KZo0y0JdqV8Q==
-X-Received: by 2002:a17:906:3081:b0:9ae:73ca:bbad with SMTP id
- 1-20020a170906308100b009ae73cabbadmr13579817ejv.43.1696849395170; 
- Mon, 09 Oct 2023 04:03:15 -0700 (PDT)
+ bh=Y/GrMBIMGrTYySZAmzh8zKw+DxTy0unUed7WlZuT/J4=;
+ b=qGTlKyGsbk5nXlxpK/C8X+ycPPpGsfmOMfTy4rMWNg38N0UUdh67I3XmY5a+DVq9/R
+ hfFknDYpPvYDxfyhFZQ99wwe+p61b5MmqYfdNZHnz9+IniM2NFap7eEI/fCV37Pm5gQ7
+ O+EV5Wjsx6Ye62S9f551+0NMRyyPk5LFL5qEd8qOmAqcmYwKMe796PtmkCTYDmDJfotg
+ usnGR1V3hZdh3ldTuy7hzMykaIyCt8zkocRURyhyx39SkvQcDaDl7SOKvawcQs/I3Obo
+ 9B7ke9u7z1VygY/p2PHhZm6L/5+Kkx7BKRNUf5scfq0f6OZCPZ4Wyu01053NhaTXVNsj
+ z4oA==
+X-Gm-Message-State: AOJu0Yxuxrrcsp6WxMI+GBmIcv8TjyYIAedZ1JGGvkut8WPSirT8oAFR
+ PBUZKdzjgC+79EXl+Cpx/OkN/g==
+X-Google-Smtp-Source: AGHT+IGnINi+5cyo8pytak7nK9KzZnXI8RvYmk+G5v7/14aCQY1lgL7JuC76CZ9aUHM4aRNzwjspoQ==
+X-Received: by 2002:a17:906:845c:b0:9b8:f17a:fbc3 with SMTP id
+ e28-20020a170906845c00b009b8f17afbc3mr11624536ejy.64.1696849375915; 
+ Mon, 09 Oct 2023 04:02:55 -0700 (PDT)
 Received: from m1x-phil.lan (thr44-h01-176-170-217-185.dsl.sta.abo.bbox.fr.
  [176.170.217.185]) by smtp.gmail.com with ESMTPSA id
- n17-20020a170906379100b009b957d5237asm6543236ejc.80.2023.10.09.04.03.13
+ y18-20020a170906559200b009ad75d318ffsm6699191ejp.17.2023.10.09.04.02.53
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 09 Oct 2023 04:03:14 -0700 (PDT)
+ Mon, 09 Oct 2023 04:02:55 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: David Hildenbrand <david@redhat.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
@@ -72,18 +72,19 @@ Cc: David Hildenbrand <david@redhat.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
  Richard Henderson <richard.henderson@linaro.org>,
  Thomas Huth <thuth@redhat.com>, Roman Bolshakov <rbolshakov@ddn.com>,
  Nicholas Piggin <npiggin@gmail.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 5/6] target/i386/hvf: Use x86_cpu in simulate_[rdmsr|wrmsr]()
-Date: Mon,  9 Oct 2023 13:02:38 +0200
-Message-ID: <20231009110239.66778-6-philmd@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ "Richard W . M . Jones" <rjones@redhat.com>
+Subject: [PATCH 2/6] target/riscv: Use env_archcpu() in [check_]nanbox()
+Date: Mon,  9 Oct 2023 13:02:35 +0200
+Message-ID: <20231009110239.66778-3-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231009110239.66778-1-philmd@linaro.org>
 References: <20231009110239.66778-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::536;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x536.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x52e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,36 +107,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We already have 'x86_cpu = X86_CPU(cpu)'. Use the variable
-instead of doing another QOM cast with X86_CPU().
+When CPUArchState* is available (here CPURISCVState*), we
+can use the fast env_archcpu() macro to get ArchCPU* (here
+RISCVCPU*). The QOM cast RISCV_CPU() macro will be slower
+when building with --enable-qom-cast-debug.
 
+Inspired-by: Richard W.M. Jones <rjones@redhat.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/i386/hvf/x86_emu.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ target/riscv/internals.h | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/target/i386/hvf/x86_emu.c b/target/i386/hvf/x86_emu.c
-index ccda568478..af1f205ecf 100644
---- a/target/i386/hvf/x86_emu.c
-+++ b/target/i386/hvf/x86_emu.c
-@@ -676,7 +676,7 @@ void simulate_rdmsr(struct CPUState *cpu)
-         val = rdtscp() + rvmcs(cpu->accel->fd, VMCS_TSC_OFFSET);
-         break;
-     case MSR_IA32_APICBASE:
--        val = cpu_get_apic_base(X86_CPU(cpu)->apic_state);
-+        val = cpu_get_apic_base(x86_cpu->apic_state);
-         break;
-     case MSR_IA32_UCODE_REV:
-         val = x86_cpu->ucode_rev;
-@@ -776,7 +776,7 @@ void simulate_wrmsr(struct CPUState *cpu)
-     case MSR_IA32_TSC:
-         break;
-     case MSR_IA32_APICBASE:
--        cpu_set_apic_base(X86_CPU(cpu)->apic_state, data);
-+        cpu_set_apic_base(x86_cpu->apic_state, data);
-         break;
-     case MSR_FSBASE:
-         wvmcs(cpu->accel->fd, VMCS_GUEST_FS_BASE, data);
+diff --git a/target/riscv/internals.h b/target/riscv/internals.h
+index b5f823c7ec..8239ae83cc 100644
+--- a/target/riscv/internals.h
++++ b/target/riscv/internals.h
+@@ -87,7 +87,7 @@ enum {
+ static inline uint64_t nanbox_s(CPURISCVState *env, float32 f)
+ {
+     /* the value is sign-extended instead of NaN-boxing for zfinx */
+-    if (RISCV_CPU(env_cpu(env))->cfg.ext_zfinx) {
++    if (env_archcpu(env)->cfg.ext_zfinx) {
+         return (int32_t)f;
+     } else {
+         return f | MAKE_64BIT_MASK(32, 32);
+@@ -97,7 +97,7 @@ static inline uint64_t nanbox_s(CPURISCVState *env, float32 f)
+ static inline float32 check_nanbox_s(CPURISCVState *env, uint64_t f)
+ {
+     /* Disable NaN-boxing check when enable zfinx */
+-    if (RISCV_CPU(env_cpu(env))->cfg.ext_zfinx) {
++    if (env_archcpu(env)->cfg.ext_zfinx) {
+         return (uint32_t)f;
+     }
+ 
+@@ -113,7 +113,7 @@ static inline float32 check_nanbox_s(CPURISCVState *env, uint64_t f)
+ static inline uint64_t nanbox_h(CPURISCVState *env, float16 f)
+ {
+     /* the value is sign-extended instead of NaN-boxing for zfinx */
+-    if (RISCV_CPU(env_cpu(env))->cfg.ext_zfinx) {
++    if (env_archcpu(env)->cfg.ext_zfinx) {
+         return (int16_t)f;
+     } else {
+         return f | MAKE_64BIT_MASK(16, 48);
+@@ -123,7 +123,7 @@ static inline uint64_t nanbox_h(CPURISCVState *env, float16 f)
+ static inline float16 check_nanbox_h(CPURISCVState *env, uint64_t f)
+ {
+     /* Disable nanbox check when enable zfinx */
+-    if (RISCV_CPU(env_cpu(env))->cfg.ext_zfinx) {
++    if (env_archcpu(env)->cfg.ext_zfinx) {
+         return (uint16_t)f;
+     }
+ 
 -- 
 2.41.0
 
