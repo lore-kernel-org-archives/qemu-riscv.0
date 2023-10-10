@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14A02CD80B0
-	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Oct 2023 11:58:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46A4ACD80B7
+	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Oct 2023 12:01:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qqBN1-0007f4-CV; Tue, 10 Oct 2023 07:57:51 -0400
+	id 1qqBQ7-0002wh-Du; Tue, 10 Oct 2023 08:01:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qqBMy-0007aR-0f
- for qemu-riscv@nongnu.org; Tue, 10 Oct 2023 07:57:48 -0400
-Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qqBPj-0002hW-Lk
+ for qemu-riscv@nongnu.org; Tue, 10 Oct 2023 08:00:47 -0400
+Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qqBMv-0000PJ-SE
- for qemu-riscv@nongnu.org; Tue, 10 Oct 2023 07:57:47 -0400
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-53da72739c3so401627a12.3
- for <qemu-riscv@nongnu.org>; Tue, 10 Oct 2023 04:57:45 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qqBPh-0001LV-1v
+ for qemu-riscv@nongnu.org; Tue, 10 Oct 2023 08:00:39 -0400
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-9a6190af24aso966276066b.0
+ for <qemu-riscv@nongnu.org>; Tue, 10 Oct 2023 05:00:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696939064; x=1697543864; darn=nongnu.org;
+ d=linaro.org; s=google; t=1696939233; x=1697544033; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=xGeU3cXek8o+T1iEneqtkwd23YAA4t01QHHMZH8DEJ4=;
- b=WK3HMFjN109RcUB9XOH3tVzX8ybTg31aWtL5sP19p1F7gb1v0Ds9vwx1+1TZYsIOgw
- P+GTOKyY4opFL2bXLO8Hwadup8POIQq32QOZTPH1JXnyF5Je0qCaBfcfj3pCQCIymOLU
- oH9epFwzfh07xeUwUFm3oC4zN9PNB/Vs6buLx6BA/58a3hDMVGFPPX4t9XJZwFYrj79F
- 2Nw0gI1yyVRLrEwCzpnrn5OV6+PGUuKTEvSyIuIrQoTQpPUgOzJj+piLCR91dUi5lkTw
- ZaJ0YdMvE7rvV8nRkjKM4efC+B/YMGlVntsIkBjktOvBAV4a44Z5ipOzJai0+tyKZcx/
- hdnA==
+ bh=e/VU4sSDcsunTSShOCZItFXGeYVcyUHw7YLpSt9d9YQ=;
+ b=pqmJCjjikhEBOXPGt5vGqxVALf/725aOP1Gmzfd0OvGIg7lztT+9zYyPqcw4MmzrYJ
+ 71RFsQ9IFoCcpwSHP2VM+Rk5se7zyO7kpiiAiHZT5p9QGdg6k2OYdVWxM0sTE638M4bm
+ Fr4mzdW1Ba03WqGk0hp4wec5gqgDFuH7PiE5y9EuQGBt+p/StiF9ohtvHMfraTwXk1Cc
+ Z5QaYZSaKmujETFD9A1PTqaOtf6Rt4Wf0PpjgmYRFXzPR3kSUE5zkvGonDnYl2hcc1yG
+ qltNciOnhD8UxP2gJIbSVJ+1lzaUa3Nb1hGAZ4cUKKju3jEqY5zx9imCqEvqZqt+lDkv
+ m/Ig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696939064; x=1697543864;
+ d=1e100.net; s=20230601; t=1696939233; x=1697544033;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xGeU3cXek8o+T1iEneqtkwd23YAA4t01QHHMZH8DEJ4=;
- b=RJPGWK4c3XX1KnElhnsgJ9BtR2XegyN2ObHcy1DvEfUImpqBCjGGuzMPfaJE8pjFLd
- tehtVupjNvlGRM5xRQ+hX+HZ/anf3iucx6EEirIYSiwPSzCRbWYJekUO0B65EVbX0Pn7
- LG/Ghk77dhJ8mS133rQtt2rKE7bTcbLBUs3iYWZos+iETpYbGtHbOtviDXnpxiVc+KyU
- es97wZns3biyIDCqbwPfWGh4j529snKyVXxf2a73EbBMGcrYLrTIleX80MA8jIL1tZXk
- knAWzJAl2SQRFj5NSn0z793qveo6vWXRPOKCtLhbdjQIXXH1STgvFf3DZOaTQCa9P1Bx
- ENbQ==
-X-Gm-Message-State: AOJu0YwF7D0di7YtcxwJbvIEgfTiDXPVdiisYk4s3YbzGtCWoKScqO18
- Gze/p6iUbhfW/ifOYyBOV/SXKg==
-X-Google-Smtp-Source: AGHT+IGU0HbB2cfpV+3WoSB2ZrZhhAuNnOoSXIqzOSH1LZXoMzi1T3GTxxcY1fZiB57PKnTRiAgF3w==
-X-Received: by 2002:a17:906:538f:b0:9a2:1ce5:1243 with SMTP id
- g15-20020a170906538f00b009a21ce51243mr16947130ejo.60.1696939064299; 
- Tue, 10 Oct 2023 04:57:44 -0700 (PDT)
+ bh=e/VU4sSDcsunTSShOCZItFXGeYVcyUHw7YLpSt9d9YQ=;
+ b=JFoLpV39My57gzTNfD8Qk6DwSS6xcZMwh/0HQ+6UBB0GpjcfJcfBJ3q2W9KitEx7+h
+ q9Qb80xsTCXW0OGizProSBmNzfOxP0BJrzJRbIIpD8h+thSOzDDc/UnErFwXPnQ2FB7c
+ 1G6eYB8iqwrVKT2VMdzr5oo0o1wcDrahnr2lPtvwKCgNH7Yvehe+a0EzT3TeP77/mcFH
+ /J33aYApRs7xb030T7qoSF814d4vik+DY8Ryxkh3t6eLlLFvLXc5JuyN5B07x9VBLlkd
+ sMLvfTgfXZYj96NMliVzgOvOCuPIdnxrfqnO5h+05NuCeEkUKCnEgPdkImUnvoA5EEGs
+ +BSw==
+X-Gm-Message-State: AOJu0YypXLZqXaYeHSFv5xmsEGWJ+UJF+rUcU3oa4PiTAy5DN1YQkxH1
+ Pna3HZ4xNwy4maychf1HQFS5lg==
+X-Google-Smtp-Source: AGHT+IHjqlnZyuoUGLy/z+F7vPd+t49tWXIPGQ4iwTVJZwE8gIHMluJ56cJ0jjE9z0IRpIBuRjBPXQ==
+X-Received: by 2002:a17:907:7790:b0:9b9:facb:d950 with SMTP id
+ ky16-20020a170907779000b009b9facbd950mr9906577ejc.72.1696939233509; 
+ Tue, 10 Oct 2023 05:00:33 -0700 (PDT)
 Received: from [192.168.69.115]
  (aif79-h01-176-172-113-148.dsl.sta.abo.bbox.fr. [176.172.113.148])
  by smtp.gmail.com with ESMTPSA id
- lf18-20020a170906ae5200b009ae5e46210asm8362356ejb.99.2023.10.10.04.57.40
+ ks8-20020a170906f84800b0099b6becb107sm8466800ejb.95.2023.10.10.05.00.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Oct 2023 04:57:43 -0700 (PDT)
-Message-ID: <89cbf1ea-8c4e-a582-68c9-ab7844554b49@linaro.org>
-Date: Tue, 10 Oct 2023 13:57:40 +0200
+ Tue, 10 Oct 2023 05:00:33 -0700 (PDT)
+Message-ID: <ec633e3d-d6a1-4e91-bfb1-85f064dc420e@linaro.org>
+Date: Tue, 10 Oct 2023 14:00:29 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.15.1
-Subject: Re: [PATCH 07/25] configure: remove gcc version suffixes
+Subject: Re: [PATCH 25/25] contrib/plugins: fix coverity warning in hotblocks
 Content-Language: en-US
 To: =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
  qemu-devel@nongnu.org
@@ -91,13 +91,13 @@ Cc: Thomas Huth <thuth@redhat.com>, Xiaojuan Yang <yangxiaojuan@loongson.cn>,
  Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>, qemu-s390x@nongnu.org,
  =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>
 References: <20231009164104.369749-1-alex.bennee@linaro.org>
- <20231009164104.369749-8-alex.bennee@linaro.org>
+ <20231009164104.369749-26-alex.bennee@linaro.org>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20231009164104.369749-8-alex.bennee@linaro.org>
+In-Reply-To: <20231009164104.369749-26-alex.bennee@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x52e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x62f.google.com
 X-Spam_score_int: -53
 X-Spam_score: -5.4
 X-Spam_bar: -----
@@ -120,15 +120,18 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 9/10/23 18:40, Alex Bennée wrote:
-> The modern packaging of cross GCC's doesn't need the explicit version
-> number at the end.
+On 9/10/23 18:41, Alex Bennée wrote:
+> Coverity complains that we have an unbalance use of mutex leading to
+> potential deadlocks.
 > 
+> Fixes: CID 1519048
+
+Fixes: a208ba09bd ("tests/plugin: add a hotblocks plugin")
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+
 > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 > ---
->   configure | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
-
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>   contrib/plugins/hotblocks.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 
 
