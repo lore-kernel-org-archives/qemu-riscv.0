@@ -4,85 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FB3ACD8CA9
-	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Oct 2023 16:32:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BD2ACD8CA9
+	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Oct 2023 16:49:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qqFeC-0002Ap-AH; Tue, 10 Oct 2023 12:31:52 -0400
+	id 1qqFum-0002Si-Bv; Tue, 10 Oct 2023 12:49:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1qqFeB-0002AL-F6
- for qemu-riscv@nongnu.org; Tue, 10 Oct 2023 12:31:51 -0400
-Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
+ id 1qqFuk-0002S0-CP
+ for qemu-riscv@nongnu.org; Tue, 10 Oct 2023 12:48:58 -0400
+Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1qqFe9-0000mL-R4
- for qemu-riscv@nongnu.org; Tue, 10 Oct 2023 12:31:51 -0400
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-690bd59322dso4362124b3a.3
- for <qemu-riscv@nongnu.org>; Tue, 10 Oct 2023 09:31:49 -0700 (PDT)
+ id 1qqFuh-0004mY-0r
+ for qemu-riscv@nongnu.org; Tue, 10 Oct 2023 12:48:57 -0400
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-1c0ecb9a075so37546945ad.2
+ for <qemu-riscv@nongnu.org>; Tue, 10 Oct 2023 09:48:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696955508; x=1697560308; darn=nongnu.org;
+ d=linaro.org; s=google; t=1696956533; x=1697561333; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=vB+QmkraRtZCsi89Zf4K6tayTUTJ0Cs24dgBq9pAp9k=;
- b=MlsYdXxn90UyRj2oemHWved1rsjq34VgEEgyZR9w/P9T0571yOxNHAU9BaYTxoWBrQ
- ds0UV4SnUr7fohccoXsuMORRPyBr7KPKazaTYprkRvhlOV4OfXNGvLGyPjfosn7s2GMY
- cTCF0M4E0+L4FlzpEs8LZjd1SNxXvE01RTiKcbD5Afz73y444V6in1rKNh/aDO5TAAmO
- FmX/As0JbXcJX8O6YguxY/bPk77njn7z2eOJD60dUPEChjK5VJAM20IVBoc7Q9u49tOI
- +43paeewzqzJRr0hIj/6ZtpCxkMudaJsBKQT9q/nU0LwAXCh8huz7piJ7ZwNdEkKxOuw
- CYIQ==
+ bh=TuYqLaIKIhucI88JlrhEjY0cytVk7nf2wWm13ybe4pY=;
+ b=ymR095Rgbfd1Nv5BD/+W0YDqZ4kBHUCbXUIyjxkx8zFYPLKPooTNC0XxPPXRurJACp
+ mIF6PSK0YE2+5nj1qe6+HdHhYP0PTscOCotPvJVNEP0TYA8Q5hqdwwU5SDVXvtoaVfnc
+ BKhUgrFBsHQ9LR53CFMeGzmw8ED6XEyZ/9BYaU/ghPgt+X5Pf/mGEjG0eJ/vWJKk35a6
+ BeKXbJ3klnFAxMKBod6mAZLzwXm0YbJwB795f/It7fmj6+sIma+lEOP1AVGThWdMAEcO
+ NB0ChVFhxH1liRtoM7m7sEhyXrsoMZLdFFawOECORi0kDatFZqpUxO4zVH3a0i+/uvO1
+ CAnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696955508; x=1697560308;
+ d=1e100.net; s=20230601; t=1696956533; x=1697561333;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=vB+QmkraRtZCsi89Zf4K6tayTUTJ0Cs24dgBq9pAp9k=;
- b=MMXcgf/jl9zssAtrLDdLck52ogR8LtXSc7pYdovYHucSGSuvM5hnsHD7o+pDukWHF2
- QUkQgSHz+HNoTlS3tCFM3Mw1iqLr5Ep06rggg+Fysjiw0RkD2KZWKpROeKgU2/Hq7zPE
- pC87ApM2q/vPe7Y/TujTaLn6VuF31Xtv6Dnb0N2uY669Uwy02c/xCfNzhKsPXKK5OI7i
- SaY+mBSUWftnjwSuKSyV44mh8IWqxSza4VZbi7AEPVV1MzEAhWuyInet+DTp9JNn5W8Y
- fwfmxai359EPbgA1VpGI+RMCArwmY1s7J4ECCSS6JXOrV+axEjvBfqRbQI/CdI7ZKQmS
- c6OA==
-X-Gm-Message-State: AOJu0YwB9Y//Ggr4FCwxs7nCO3QXNfd9DgVGBJbYE7FKpAXMNC+s1ApK
- l4YdhSHtXTbjkFeWnlmzooOt9A==
-X-Google-Smtp-Source: AGHT+IEhgdZ3OLyrnBc+K591gDtfc4ZG2+l2n5aLhau5uScWBR5rAAeRfzg2vgDh3/isfXZYAqhQuA==
-X-Received: by 2002:a05:6a20:9189:b0:153:b16e:8db1 with SMTP id
- v9-20020a056a20918900b00153b16e8db1mr19064107pzd.10.1696955508114; 
- Tue, 10 Oct 2023 09:31:48 -0700 (PDT)
+ bh=TuYqLaIKIhucI88JlrhEjY0cytVk7nf2wWm13ybe4pY=;
+ b=nR7YdzvkWGYcjwzzWxkHfXXfXNJzfrk5f3c750oSw7Vf5OVWpfVfklK0vflKqYbIrZ
+ D1ok9VQ4r7Asyeh7g0fZ+LQfjp/rTIe6ma1cfmnvSNzQ/WrvFV46gmaz0HgvWM7gxNdO
+ Y9W5tlSLm8C3PG72owgy2ggCigOJFBt76GN2bn4tp7gRUFOiKOIHNS3f7sFE1+2eY8kl
+ ovVPHryKEzMHU9kCEr3J++wdSLaFIjXP4MhBSDb21vV27P/zK5bx/AaBJT63FPQInDrT
+ 5a+BhJZhNxsn4ilifZhugvV0gsQimiStAZggnF2qJI+fw8GFqrF3ARj9zIy7j/Hdob1X
+ nKRQ==
+X-Gm-Message-State: AOJu0Yy1Xqt7SJWsD5ArASj8GqfDLD15DI5wXoUuaRMGBsdojY2DB6Nq
+ J8dkII0NTWnhh5O8W7xKFOOz2A==
+X-Google-Smtp-Source: AGHT+IG9c0F1jz3X+OZWLAtQUIedsi61kYyzn+hNoqOTOL7CozFTlrwMFOE0zybDv0bH6sX2T/CrLA==
+X-Received: by 2002:a17:903:11c7:b0:1c7:36ff:1ffd with SMTP id
+ q7-20020a17090311c700b001c736ff1ffdmr19119161plh.61.1696956533158; 
+ Tue, 10 Oct 2023 09:48:53 -0700 (PDT)
 Received: from ?IPV6:2607:fb90:b763:d52:6ee3:1cf3:f2d2:e12d?
  ([2607:fb90:b763:d52:6ee3:1cf3:f2d2:e12d])
  by smtp.gmail.com with ESMTPSA id
- h18-20020a170902eed200b001c5bcc9d916sm340376plb.176.2023.10.10.09.31.46
+ jk17-20020a170903331100b001c9bc811d59sm1532862plb.307.2023.10.10.09.48.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Oct 2023 09:31:47 -0700 (PDT)
-Message-ID: <71193623-d5fc-44f9-8fe3-325b33c85c58@linaro.org>
-Date: Tue, 10 Oct 2023 09:31:43 -0700
+ Tue, 10 Oct 2023 09:48:52 -0700 (PDT)
+Message-ID: <a2e69691-d3e7-4bdb-b2a3-c3f4b07f731c@linaro.org>
+Date: Tue, 10 Oct 2023 09:48:48 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: Use a direct cast for better performance
+Subject: Re: [PATCH v3] target/riscv: Use env_archcpu for better performance
 Content-Language: en-US
 To: "Richard W.M. Jones" <rjones@redhat.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, pbonzini@redhat.com
-References: <20231007090232.3329594-1-rjones@redhat.com>
+ zhiwei_liu@linux.alibaba.com, pbonzini@redhat.com, philmd@linaro.org
+References: <20231009124859.3373696-1-rjones@redhat.com>
+ <20231009124859.3373696-2-rjones@redhat.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20231007090232.3329594-1-rjones@redhat.com>
+In-Reply-To: <20231009124859.3373696-2-rjones@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42d.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,7 +99,7 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 10/7/23 02:02, Richard W.M. Jones wrote:
+On 10/9/23 05:48, Richard W.M. Jones wrote:
 > RISCV_CPU(cs) uses a checked cast.  When QOM cast debugging is enabled
 > this adds about 5% total overhead when emulating RV64 on x86-64 host.
 > 
@@ -109,34 +110,18 @@ On 10/7/23 02:02, Richard W.M. Jones wrote:
 > Before making this change the compile step took 449 & 447 seconds over
 > two consecutive runs.
 > 
-> After making this change, 428 & 422 seconds.
+> After making this change: 428 & 421 seconds.
 > 
-> The saving is about 5%.
+> The saving is over 5%.
 > 
 > Thanks: Paolo Bonzini
+> Thanks: Philippe Mathieu-Daudé
 > Signed-off-by: Richard W.M. Jones <rjones@redhat.com>
 > ---
->   target/riscv/cpu_helper.c | 6 +++++-
->   1 file changed, 5 insertions(+), 1 deletion(-)
-> 
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 3a02079290..6174d99fb2 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -66,7 +66,11 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
->                             uint64_t *cs_base, uint32_t *pflags)
->   {
->       CPUState *cs = env_cpu(env);
-> -    RISCVCPU *cpu = RISCV_CPU(cs);
-> +    /*
-> +     * Using the checked cast RISCV_CPU(cs) imposes ~ 5% overhead when
-> +     * qemu cast debugging is enabled, so use a direct cast instead.
-> +     */
-> +    RISCVCPU *cpu = (RISCVCPU *)cs;
+>   target/riscv/cpu_helper.c | 3 +--
+>   1 file changed, 1 insertion(+), 2 deletions(-)
 
-RISCVCPU *cpu = env_archcpu(env);
-
-and avoid "CPUState *cs" entirely.
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 
 r~
