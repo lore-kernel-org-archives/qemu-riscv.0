@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71168CD6911
-	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Oct 2023 09:30:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01F7FCD6911
+	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Oct 2023 09:30:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qq93Q-00087W-Oz; Tue, 10 Oct 2023 05:29:29 -0400
+	id 1qq94D-0000kV-Ml; Tue, 10 Oct 2023 05:30:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qq93O-00084D-Cq
- for qemu-riscv@nongnu.org; Tue, 10 Oct 2023 05:29:26 -0400
-Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qq946-0000c9-LL
+ for qemu-riscv@nongnu.org; Tue, 10 Oct 2023 05:30:10 -0400
+Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qq93M-0007fH-SD
- for qemu-riscv@nongnu.org; Tue, 10 Oct 2023 05:29:26 -0400
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-52bd9ddb741so9541995a12.0
- for <qemu-riscv@nongnu.org>; Tue, 10 Oct 2023 02:29:23 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qq941-0007u9-0X
+ for qemu-riscv@nongnu.org; Tue, 10 Oct 2023 05:30:09 -0400
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-9a6190af24aso941543566b.0
+ for <qemu-riscv@nongnu.org>; Tue, 10 Oct 2023 02:30:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696930162; x=1697534962; darn=nongnu.org;
+ d=linaro.org; s=google; t=1696930202; x=1697535002; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=z/h9w6SijQxndRm+za3Ly8qK6pPEviCCn5/tSqn0iYo=;
- b=tJz8Q6I0K8tDuHIQBbH0FB1OKuWSKyxIhcF+OAbynC/K/5uVKMCW1974zvY0MIbNAz
- yaUljvuTYRd+oAqE1wYqVy72Cv9P4dbrNpSQOHU3oxFNI9zKZ61UEZMTnkl87zw1wsA4
- gZ8sBqNhn8JMzezqIMttXBMRmMX+P2FYdLFoZkMBbtG/Lncy9ulMUjyE0IsGRoUUzLCi
- CsjgjMTA4JZIyA3DJsQgsiiqloxPHRX1PKjTiDl4uSC+F+wY96p44eunN4JBYW+WZgII
- jSJe+3d5uV6YeaB3nBIuRbWg+W32n2Mo6KW4gkXP7r5q8gcz0MaZr4Y6cbqlU4osWkwM
- m7Bg==
+ bh=nwvgJq8V3A4EcSBga8/aE9oI0VJyJynq/QeqcrvxjMA=;
+ b=M/FBDsV3WEJI1A2p7uD+1WX1INrQn74vsji79O3GzNBLd5NxGjckQwL2nQW4LNdcK+
+ JhX/5mkw60VTHUphOuVX8EzKukuFoEXbFtLmajNwVqt9We1amZbgYTlK1ljtTrvbA3Rb
+ svxMHhw2VsaKbUOrQ2QRLKQVadpNk+7oVDD3i5zdEl+5ZMhE7qUrkRSKDQd3UOerHJQb
+ MqHErIuRuDmkoLc2MuJOVjrVi1lv4FiYc+Jqc3m0C7x0qUh51cAvOTV/4JyDi3ZGnnuX
+ 5KDmSfmU8UAjLPmXDqORq9t6cEpSumxiVkb3YfegWbwcblTWWvjfLQAJaymhj0XMmrxE
+ vt0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696930162; x=1697534962;
+ d=1e100.net; s=20230601; t=1696930202; x=1697535002;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=z/h9w6SijQxndRm+za3Ly8qK6pPEviCCn5/tSqn0iYo=;
- b=nXs+Cyem6D+/kaBcQZvG1xaSTX13IkJ8BOQvA9B1doaoRfmfYByH+E4B0122tKuw0H
- xXoLX88E/zDum1RCURuNQOYDSIVcw/hYCtX9ZGFZE5TEjcXagOnr74mLqyE4CQsqyBde
- JnZ6J5b0wzyUMZvhQssdn5yr/jBEDPdJE0W1NqwXAJR/pTxfPiSsSlhR0tvlQgurPIWi
- tJslyOHEHdUDc+DEj1geqsHIKlouGS77XoZ/O6S7EyKCR3GdxEhuFh+6BiQvJhl9cTjP
- d0ay/U6z+dLle4bX3DpB8MCvY7aUJDrLZCoWMlWNBsV/qkWr4p6shLj8UP8HALYwM985
- 9IzA==
-X-Gm-Message-State: AOJu0YwscHd8+nDAC2yqEvdhQFgaY7Wr67/7Kf6gpilFgQbuKatbvQPC
- oxDSjtSWJ8dLHEOsGnCyIcswmg==
-X-Google-Smtp-Source: AGHT+IHtCFL28iOP4rdz1lOZE87miCxhQsus46HKFgxjpXjQCmHxv6qn+NSy7kEfIaPmxHjQZ3cF0A==
-X-Received: by 2002:a05:6402:20c:b0:532:bc4d:9076 with SMTP id
- t12-20020a056402020c00b00532bc4d9076mr14272749edv.19.1696930162369; 
- Tue, 10 Oct 2023 02:29:22 -0700 (PDT)
+ bh=nwvgJq8V3A4EcSBga8/aE9oI0VJyJynq/QeqcrvxjMA=;
+ b=kq1NDh/4XMeDL4TvjYTYLuTtIT1EbkjaufRlcpHTjhaEbF/l3cV4wsevoF/QssC0Gb
+ xj6znPnEINXrhm0ba1VdXdjx/8TGvyCQbWC+XQDPILUyprbZFzkieLKcSjANy9KNs2pC
+ aDbFfZD5XTqJ0kv8TOSlNarNJF3NPEkxlZOPPhSwgoh3GOx0xONU+70Lpvjfg0eY52iV
+ ItW5+FeL3WOJbCHGk20LcM6XUm1YKvr/IptsVFS7XN3GIaM6Byy/yVNvl5wWRcS8fNiG
+ qLhB1Ikq+DpdJgDUNtaMKm1R9vlyflv2G6dc7PAmpNsBVKquBkiBbQ1AJnzVb3lLmaX4
+ KeWQ==
+X-Gm-Message-State: AOJu0YxNBvAChhIaYkgUzWoHDPDvmvZmypD58OnWraXWJiN0puFkShmo
+ NaeOH9JseJrX9jyKauMcVNa+kQ==
+X-Google-Smtp-Source: AGHT+IH4/C4D6JfPun4dMXVKZAGAn9crmf37YYJDsdbEGK20EOz0gS74xCscGbGx9qvPr9SAuMR6ww==
+X-Received: by 2002:a17:907:7790:b0:9b9:facb:d950 with SMTP id
+ ky16-20020a170907779000b009b9facbd950mr9601202ejc.72.1696930202689; 
+ Tue, 10 Oct 2023 02:30:02 -0700 (PDT)
 Received: from m1x-phil.lan (aif79-h01-176-172-113-148.dsl.sta.abo.bbox.fr.
  [176.172.113.148]) by smtp.gmail.com with ESMTPSA id
- n19-20020a056402515300b0053495596f42sm7389833edd.30.2023.10.10.02.29.18
+ v19-20020a1709064e9300b00988e953a586sm8108187eju.61.2023.10.10.02.29.58
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 10 Oct 2023 02:29:22 -0700 (PDT)
+ Tue, 10 Oct 2023 02:30:02 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: David Hildenbrand <david@redhat.com>,
@@ -89,24 +89,24 @@ Cc: David Hildenbrand <david@redhat.com>,
  Eduardo Habkost <eduardo@habkost.net>, Brian Cain <bcain@quicinc.com>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  Aurelien Jarno <aurelien@aurel32.net>, qemu-s390x@nongnu.org
-Subject: [PATCH 02/18] target/ppc: Remove CPU_RESOLVING_TYPE from 'cpu-qom.h'
-Date: Tue, 10 Oct 2023 11:28:44 +0200
-Message-ID: <20231010092901.99189-3-philmd@linaro.org>
+Subject: [PATCH 07/18] target/nios2: Declare QOM definitions in 'cpu-qom.h'
+Date: Tue, 10 Oct 2023 11:28:49 +0200
+Message-ID: <20231010092901.99189-8-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231010092901.99189-1-philmd@linaro.org>
 References: <20231010092901.99189-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::530;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x530.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::630;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x630.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -122,47 +122,102 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-CPU_RESOLVING_TYPE is a per-target definition, and is
-irrelevant for other targets. Move it to "cpu.h".
+"target/foo/cpu.h" contains the target specific declarations.
+
+A heterogeneous setup need to access target agnostic declarations
+(at least the QOM ones, to instantiate the objects).
+
+Our convention is to add such target agnostic QOM declarations in
+the "target/foo/cpu-qom.h" header.
+
+Extract QOM definitions from "cpu.h" to "cpu-qom.h".
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/ppc/cpu-qom.h | 3 +--
- target/ppc/cpu.h     | 2 ++
- 2 files changed, 3 insertions(+), 2 deletions(-)
+ target/nios2/cpu-qom.h | 32 ++++++++++++++++++++++++++++++++
+ target/nios2/cpu.h     | 22 +---------------------
+ 2 files changed, 33 insertions(+), 21 deletions(-)
+ create mode 100644 target/nios2/cpu-qom.h
 
-diff --git a/target/ppc/cpu-qom.h b/target/ppc/cpu-qom.h
-index be33786bd8..41df51269b 100644
---- a/target/ppc/cpu-qom.h
-+++ b/target/ppc/cpu-qom.h
-@@ -1,5 +1,5 @@
- /*
-- * QEMU PowerPC CPU
-+ * QEMU PowerPC CPU QOM header (target agnostic)
-  *
-  * Copyright (c) 2012 SUSE LINUX Products GmbH
-  *
-@@ -33,7 +33,6 @@ OBJECT_DECLARE_CPU_TYPE(PowerPCCPU, PowerPCCPUClass, POWERPC_CPU)
- 
- #define POWERPC_CPU_TYPE_SUFFIX "-" TYPE_POWERPC_CPU
- #define POWERPC_CPU_TYPE_NAME(model) model POWERPC_CPU_TYPE_SUFFIX
--#define CPU_RESOLVING_TYPE TYPE_POWERPC_CPU
- 
- #define TYPE_HOST_POWERPC_CPU POWERPC_CPU_TYPE_NAME("host")
- 
-diff --git a/target/ppc/cpu.h b/target/ppc/cpu.h
-index 30392ebeee..492fdecaf3 100644
---- a/target/ppc/cpu.h
-+++ b/target/ppc/cpu.h
-@@ -27,6 +27,8 @@
- #include "qom/object.h"
- #include "hw/registerfields.h"
- 
-+#define CPU_RESOLVING_TYPE TYPE_POWERPC_CPU
+diff --git a/target/nios2/cpu-qom.h b/target/nios2/cpu-qom.h
+new file mode 100644
+index 0000000000..0bcf2c724f
+--- /dev/null
++++ b/target/nios2/cpu-qom.h
+@@ -0,0 +1,32 @@
++/*
++ * QEMU Nios II CPU QOM header (target agnostic)
++ *
++ * Copyright (c) 2012 Chris Wulff <crwulff@gmail.com>
++ *
++ * SPDX-License-Identifier: LGPL-2.1-or-later
++ */
 +
- #define TCG_GUEST_DEFAULT_MO 0
++#ifndef QEMU_NIOS2_CPU_QOM_H
++#define QEMU_NIOS2_CPU_QOM_H
++
++#include "hw/core/cpu.h"
++#include "qom/object.h"
++
++#define TYPE_NIOS2_CPU "nios2-cpu"
++
++OBJECT_DECLARE_CPU_TYPE(Nios2CPU, Nios2CPUClass, NIOS2_CPU)
++
++/**
++ * Nios2CPUClass:
++ * @parent_phases: The parent class' reset phase handlers.
++ *
++ * A Nios2 CPU model.
++ */
++struct Nios2CPUClass {
++    CPUClass parent_class;
++
++    DeviceRealize parent_realize;
++    ResettablePhases parent_phases;
++};
++
++#endif
+diff --git a/target/nios2/cpu.h b/target/nios2/cpu.h
+index 70b6377a4f..e19e12b2a6 100644
+--- a/target/nios2/cpu.h
++++ b/target/nios2/cpu.h
+@@ -21,35 +21,15 @@
+ #ifndef NIOS2_CPU_H
+ #define NIOS2_CPU_H
  
- #define TARGET_PAGE_BITS_64K 16
++#include "cpu-qom.h"
+ #include "exec/cpu-defs.h"
+-#include "hw/core/cpu.h"
+ #include "hw/registerfields.h"
+-#include "qom/object.h"
+ 
+ typedef struct CPUArchState CPUNios2State;
+ #if !defined(CONFIG_USER_ONLY)
+ #include "mmu.h"
+ #endif
+ 
+-#define TYPE_NIOS2_CPU "nios2-cpu"
+-
+-OBJECT_DECLARE_CPU_TYPE(Nios2CPU, Nios2CPUClass, NIOS2_CPU)
+-
+-/**
+- * Nios2CPUClass:
+- * @parent_phases: The parent class' reset phase handlers.
+- *
+- * A Nios2 CPU model.
+- */
+-struct Nios2CPUClass {
+-    /*< private >*/
+-    CPUClass parent_class;
+-    /*< public >*/
+-
+-    DeviceRealize parent_realize;
+-    ResettablePhases parent_phases;
+-};
+-
+ #define TARGET_HAS_ICE 1
+ 
+ /* Configuration options for Nios II */
 -- 
 2.41.0
 
