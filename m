@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4944FCD80AE
-	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Oct 2023 11:36:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2431CCD80B5
+	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Oct 2023 11:38:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qqB0x-0004HF-QV; Tue, 10 Oct 2023 07:35:04 -0400
+	id 1qqB4D-0008Ua-Pb; Tue, 10 Oct 2023 07:38:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qqB0R-0003wU-P3; Tue, 10 Oct 2023 07:34:32 -0400
-Received: from out30-124.freemail.mail.aliyun.com ([115.124.30.124])
+ id 1qqB3m-0007oU-8I; Tue, 10 Oct 2023 07:38:00 -0400
+Received: from out30-112.freemail.mail.aliyun.com ([115.124.30.112])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qqB0O-0002Aw-K3; Tue, 10 Oct 2023 07:34:31 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R201e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045176;
+ id 1qqB3j-00048w-57; Tue, 10 Oct 2023 07:37:57 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R561e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
  MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=43; SR=0;
- TI=SMTPD_---0VtsewtW_1696937651; 
+ TI=SMTPD_---0Vtsm3Mn_1696937857; 
 Received: from 30.221.98.57(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VtsewtW_1696937651) by smtp.aliyun-inc.com;
- Tue, 10 Oct 2023 19:34:13 +0800
-Message-ID: <bbf67862-f1ce-443f-81fc-f56d3466ef08@linux.alibaba.com>
-Date: Tue, 10 Oct 2023 19:33:11 +0800
+ fp:SMTPD_---0Vtsm3Mn_1696937857) by smtp.aliyun-inc.com;
+ Tue, 10 Oct 2023 19:37:39 +0800
+Message-ID: <22ebaf0b-4272-481a-bfaf-5bd2d5f3fd56@linux.alibaba.com>
+Date: Tue, 10 Oct 2023 19:36:38 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 10/18] target/riscv: Inline target specific
- TYPE_RISCV_CPU_BASE definition
+Subject: Re: [PATCH 03/18] target/riscv: Remove CPU_RESOLVING_TYPE from
+ 'cpu-qom.h'
 Content-Language: en-US
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
@@ -63,14 +63,14 @@ Cc: David Hildenbrand <david@redhat.com>, "Michael S. Tsirkin"
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  Aurelien Jarno <aurelien@aurel32.net>, qemu-s390x@nongnu.org
 References: <20231010092901.99189-1-philmd@linaro.org>
- <20231010092901.99189-11-philmd@linaro.org>
+ <20231010092901.99189-4-philmd@linaro.org>
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20231010092901.99189-11-philmd@linaro.org>
+In-Reply-To: <20231010092901.99189-4-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.124;
+Received-SPF: pass client-ip=115.124.30.112;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-124.freemail.mail.aliyun.com
+ helo=out30-112.freemail.mail.aliyun.com
 X-Spam_score_int: -98
 X-Spam_score: -9.9
 X-Spam_bar: ---------
@@ -95,88 +95,43 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 2023/10/10 17:28, Philippe Mathieu-Daudé wrote:
-> TYPE_RISCV_CPU_BASE depends on the TARGET_RISCV32/TARGET_RISCV64
-> definitions which are target specific. Such target specific
-> definition taints "cpu-qom.h".
->
-> Since "cpu-qom.h" must be target agnostic, remove its target
-> specific definition uses by inlining TYPE_RISCV_CPU_BASE in the
-> two machines using it.
->
-> "target/riscv/cpu-qom.h" is now fully target agnostic.
+> CPU_RESOLVING_TYPE is a per-target definition, and is
+> irrelevant for other targets. Move it to "cpu.h".
 >
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->   target/riscv/cpu-qom.h | 8 +-------
->   hw/riscv/spike.c       | 8 +++++++-
->   hw/riscv/virt.c        | 8 +++++++-
->   3 files changed, 15 insertions(+), 9 deletions(-)
+>   target/riscv/cpu-qom.h | 1 -
+>   target/riscv/cpu.h     | 2 ++
+>   2 files changed, 2 insertions(+), 1 deletion(-)
 >
 > diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
-> index 8cb67b84a4..f607687384 100644
+> index 04af50983e..8cb67b84a4 100644
 > --- a/target/riscv/cpu-qom.h
 > +++ b/target/riscv/cpu-qom.h
-> @@ -1,5 +1,5 @@
->   /*
-> - * QEMU RISC-V CPU QOM header
-> + * QEMU RISC-V CPU QOM header (target agnostic)
->    *
->    * Copyright (c) 2023 Ventana Micro Systems Inc.
->    *
-> @@ -43,12 +43,6 @@
->   #define TYPE_RISCV_CPU_VEYRON_V1        RISCV_CPU_TYPE_NAME("veyron-v1")
->   #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
+> @@ -27,7 +27,6 @@
 >   
-> -#if defined(TARGET_RISCV32)
-> -# define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE32
-> -#elif defined(TARGET_RISCV64)
-> -# define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE64
-> -#endif
-> -
->   typedef struct CPUArchState CPURISCVState;
+>   #define RISCV_CPU_TYPE_SUFFIX "-" TYPE_RISCV_CPU
+>   #define RISCV_CPU_TYPE_NAME(name) (name RISCV_CPU_TYPE_SUFFIX)
+> -#define CPU_RESOLVING_TYPE TYPE_RISCV_CPU
 >   
->   OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
-> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index 81f7e53aed..eae49da6d6 100644
-> --- a/hw/riscv/spike.c
-> +++ b/hw/riscv/spike.c
-> @@ -349,7 +349,13 @@ static void spike_machine_class_init(ObjectClass *oc, void *data)
->       mc->init = spike_board_init;
->       mc->max_cpus = SPIKE_CPUS_MAX;
->       mc->is_default = true;
-> -    mc->default_cpu_type = TYPE_RISCV_CPU_BASE;
-> +#if defined(TARGET_RISCV32)
-> +    mc->default_cpu_type = TYPE_RISCV_CPU_BASE32;
-> +#elif defined(TARGET_RISCV64)
-> +    mc->default_cpu_type = TYPE_RISCV_CPU_BASE64;
-> +#else
-> +#error unsupported target
-> +#endif
->       mc->possible_cpu_arch_ids = riscv_numa_possible_cpu_arch_ids;
->       mc->cpu_index_to_instance_props = riscv_numa_cpu_index_to_props;
->       mc->get_default_cpu_node_id = riscv_numa_get_default_cpu_node_id;
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 5edc1d98d2..620a4e5f07 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -1685,7 +1685,13 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
->       mc->desc = "RISC-V VirtIO board";
->       mc->init = virt_machine_init;
->       mc->max_cpus = VIRT_CPUS_MAX;
-> -    mc->default_cpu_type = TYPE_RISCV_CPU_BASE;
-> +#if defined(TARGET_RISCV32)
-> +    mc->default_cpu_type = TYPE_RISCV_CPU_BASE32;
-> +#elif defined(TARGET_RISCV64)
-> +    mc->default_cpu_type = TYPE_RISCV_CPU_BASE64;
-> +#else
-> +#error unsupported target
-> +#endif
+>   #define TYPE_RISCV_CPU_ANY              RISCV_CPU_TYPE_NAME("any")
+>   #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index ef9cf21c0c..374b813f20 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -31,6 +31,8 @@
+>   #include "qapi/qapi-types-common.h"
+>   #include "cpu-qom.h"
+>   
+> +#define CPU_RESOLVING_TYPE TYPE_RISCV_CPU
 
 Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
 Zhiwei
 
->       mc->pci_allow_0_address = true;
->       mc->possible_cpu_arch_ids = riscv_numa_possible_cpu_arch_ids;
->       mc->cpu_index_to_instance_props = riscv_numa_cpu_index_to_props;
+> +
+>   #define TCG_GUEST_DEFAULT_MO 0
+>   
+>   /*
 
