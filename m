@@ -4,74 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3323CD98D9
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Oct 2023 01:07:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 587A4CD98D9
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Oct 2023 01:10:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qqNgK-00073j-Qg; Tue, 10 Oct 2023 21:06:36 -0400
+	id 1qqNjc-0008Jc-LB; Tue, 10 Oct 2023 21:10:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qqNgJ-00073E-F2; Tue, 10 Oct 2023 21:06:35 -0400
-Received: from mail-vk1-xa34.google.com ([2607:f8b0:4864:20::a34])
+ id 1qqNja-0008H7-Cf; Tue, 10 Oct 2023 21:09:58 -0400
+Received: from mail-ua1-x92c.google.com ([2607:f8b0:4864:20::92c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qqNgH-0007DC-GD; Tue, 10 Oct 2023 21:06:35 -0400
-Received: by mail-vk1-xa34.google.com with SMTP id
- 71dfb90a1353d-49d39f07066so2086188e0c.0; 
- Tue, 10 Oct 2023 18:06:32 -0700 (PDT)
+ id 1qqNjY-00081s-Sq; Tue, 10 Oct 2023 21:09:58 -0400
+Received: by mail-ua1-x92c.google.com with SMTP id
+ a1e0cc1a2514c-7ab8696d047so2517131241.1; 
+ Tue, 10 Oct 2023 18:09:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696986392; x=1697591192; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1696986594; x=1697591394; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nBjij6sJWlx3sLQgLWYHVmF+0OHgcs2jngrrysGLBhw=;
- b=U+VMLUQhzD7df2KXE7QjLAgDIbgvpTkFe6mp9Md74hR8K4Chm6mhS9wtI+F0f95gYa
- 16U+FYi9VPoJS9fhRzymP4DT0YH2iXuWtf+sm2qlHZUo0dElZgPtTMUp6MyUCuH3Vl3d
- F7f+Y3NCGq7VAzCVeMS7JgsflIXDTnKhF0rQlYPGLSFXyUcTC44j3rTkryDDUHxVcxs2
- d87ir0RQoEfsQ52hZIeDZvJe7vHiHQeRfiAsegPncYGWZ3R4BZWCtUJ3SsyElOc2TZP3
- IvDsUhDQmdy05pbSq/8/PD1qCmnH1Jt6C69YJeFTyZv6lZLJHzOgX85yCsOx2vTJQcj6
- NYZw==
+ bh=pR5z9zdu0dZKgj+qvBJagisnAwc0nesOdy0gVBV0wOw=;
+ b=FUGWhI9c/sRjvWVEfMHah/Rb0epmUh1xH0ZyTwQYGzXC49ldywZK/SE0lmtABlcJib
+ 22GneL09iQQ/jvCpfoD23DwRLnqNhGC6wayV1WGOr8A5uL+LNdD7JYLOMbODvdOZgrP4
+ s1RDh4kUAx1STjKcktE5lURp4vcfuCOpwYLigo98Z/HV+ppb7URKmje0WB404c9ngs5l
+ DHzDiC0cZ893iCdJ6NIREK9MxilKDveDMr9ltnYUV5mzxTXVyHE++28p1rxEAHr7CVs+
+ 0l2H3rIBezXSY9ADQbDtx6Fc+Qg8MByjDy1fP8An3Nj5F4LdrGc6tDFPHd1ohAHwfeM/
+ ri4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696986392; x=1697591192;
+ d=1e100.net; s=20230601; t=1696986594; x=1697591394;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=nBjij6sJWlx3sLQgLWYHVmF+0OHgcs2jngrrysGLBhw=;
- b=j+tAE74Onnnx1dLWYFo2NpWipiPwFBnIc78i5ddE6gma+zZurLtRhiUjFiGb9/isvQ
- EIKqpSOgyohcCrRam5+4FPqF4Hu0KoFQGRVUbN8NhxHOiKXb7NHaZbmpQWjZEfVtdvCA
- bdG3e+2SSs4MX+C+Fu4+b3AEKfkxMeiOD6n0eCi43of2BLrxzz1GqBykFXPsDQyV9ZAc
- vl0ldrzcsUDL6aEgCIsOROTxL1RHt1jlFyIXAgDEiA/6KLsuJ7fpERw9mvU6ss9Hw4DW
- mo6s7Aom8SkmO5uHNjXb/1BNXkNV1smWqSIk+bF94++5L6nvLAyQiT1UhWj5dj+lk/9t
- z5Ig==
-X-Gm-Message-State: AOJu0YzKK2jqe5LRbIdWrvWd2fuGLuCsnHJc0PIP9BcKbcLu1yCHEu5E
- jikH3JL1JRxLUHdkg3D9stVIiDPkgvjUxWvg0Ek=
-X-Google-Smtp-Source: AGHT+IHEPWw3sFKU/1tfi08UjALoFIWUa5m9thnVxy8ZcSfelUxq62TGhvHb90qZsa2oYQ08FPKdjJyr+J4RN8pZNbM=
-X-Received: by 2002:a1f:4b85:0:b0:49d:d73e:5d07 with SMTP id
- y127-20020a1f4b85000000b0049dd73e5d07mr11962833vka.16.1696986391675; Tue, 10
- Oct 2023 18:06:31 -0700 (PDT)
+ bh=pR5z9zdu0dZKgj+qvBJagisnAwc0nesOdy0gVBV0wOw=;
+ b=nciMI+SvSyUKsjakKpKaF9n6IEMs5TqG0rte0ySRE6mKSnic35XFX7+dn/xfxRfupx
+ Lrm68LzmXJ5qYpTr5SgJ5pzdrI22z+kK1xkQ9hoUmrJHy+ljpJj49HLBoayoj5oABnNj
+ 61794tbSvYrW8sAasHaNoIP/HPZWeRfnFoIhbvzxFwnDjpK7Hy7gUtv1nKPNO52PktL1
+ KD+gFvrgdBYGfxnzSVLMFQWMNkVRIPZ6aqULhUYrY+MumMi5zOYHeslXbRaqzT8+yADD
+ otZsJZvqKHiNY8CUZ6I3uy36tz+Oq1T6iCMKQTOcrXRH51ORcTPSPQpbhcNklR+8qA39
+ 1ksg==
+X-Gm-Message-State: AOJu0YywUCzdn9X2U0SYHVDzE1E50NDMXj3q16q9VeSVeeSO0XmYOoWv
+ LP/G7k6qDOWomWmEHi39Ws3Jk3+coDvtZeMZL14=
+X-Google-Smtp-Source: AGHT+IGxIV8+Tlhs659REf95Yv3rgY7ufjqN84yopsW4rxTYfC3L7ZXQjmlyes1JXJiNU+7KlUTFuwOCH6grHhZVuIA=
+X-Received: by 2002:a05:6102:300d:b0:452:8ad7:4882 with SMTP id
+ s13-20020a056102300d00b004528ad74882mr18526073vsa.34.1696986594583; Tue, 10
+ Oct 2023 18:09:54 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231003125107.34859-1-rbradford@rivosinc.com>
- <20231003125107.34859-3-rbradford@rivosinc.com>
- <CAHBxVyHYJjvADsHPCJeheU4_8s1=DfyeApPyV8QpuPnTm2F=Gw@mail.gmail.com>
- <d2a170aeb3f05614c3801c1819afbbddc3ff4f37.camel@rivosinc.com>
- <CAKmqyKNrmnUTHxx_wYe0V6sL0M10hkwOGYakGw1E6pu17YyMKQ@mail.gmail.com>
- <CAHBxVyEO4bPLKM4d90mhM9k33hf2L2zdFk7qDtenv3-2d8YNfg@mail.gmail.com>
-In-Reply-To: <CAHBxVyEO4bPLKM4d90mhM9k33hf2L2zdFk7qDtenv3-2d8YNfg@mail.gmail.com>
+References: <20231009124859.3373696-1-rjones@redhat.com>
+ <20231009124859.3373696-2-rjones@redhat.com>
+In-Reply-To: <20231009124859.3373696-2-rjones@redhat.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 11 Oct 2023 11:06:05 +1000
-Message-ID: <CAKmqyKP1BqTjd0S1g7Zj9SitvuaS_LHy_0GWC--txrWdRjRCaQ@mail.gmail.com>
-Subject: Re: [PATCH 2/3] target/riscv: Support discontinuous PMU counters
-To: Atish Kumar Patra <atishp@rivosinc.com>
-Cc: Rob Bradford <rbradford@rivosinc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, 
- palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
- liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
+Date: Wed, 11 Oct 2023 11:09:27 +1000
+Message-ID: <CAKmqyKPdk7TfiLxFkE1wP4YCmxtw5TbaH=sE5aBuEvXwZZFzDA@mail.gmail.com>
+Subject: Re: [PATCH v3] target/riscv: Use env_archcpu for better performance
+To: "Richard W.M. Jones" <rjones@redhat.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn, 
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, pbonzini@redhat.com, 
+ philmd@linaro.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a34;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92c;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -95,165 +91,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Oct 10, 2023 at 4:00=E2=80=AFAM Atish Kumar Patra <atishp@rivosinc.=
-com> wrote:
+On Mon, Oct 9, 2023 at 10:50=E2=80=AFPM Richard W.M. Jones <rjones@redhat.c=
+om> wrote:
 >
-> On Sun, Oct 8, 2023 at 5:58=E2=80=AFPM Alistair Francis <alistair23@gmail=
-.com> wrote:
-> >
-> > On Wed, Oct 4, 2023 at 7:36=E2=80=AFPM Rob Bradford <rbradford@rivosinc=
-.com> wrote:
-> > >
-> > > Hi Atish,
-> > >
-> > > On Tue, 2023-10-03 at 13:25 -0700, Atish Kumar Patra wrote:
-> > > > On Tue, Oct 3, 2023 at 5:51=E2=80=AFAM Rob Bradford <rbradford@rivo=
-sinc.com>
-> > > > wrote:
-> > > > >
-> > > > > There is no requirement that the enabled counters in the platform
-> > > > > are
-> > > > > continuously numbered. Add a "pmu-mask" property that, if
-> > > > > specified, can
-> > > > > be used to specify the enabled PMUs. In order to avoid ambiguity =
-if
-> > > > > "pmu-mask" is specified then "pmu-num" must also match the number
-> > > > > of
-> > > > > bits set in the mask.
-> > > > >
-> > > > > Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
-> > > > > ---
-> > > > >  target/riscv/cpu.c     |  1 +
-> > > > >  target/riscv/cpu_cfg.h |  1 +
-> > > > >  target/riscv/pmu.c     | 15 +++++++++++++--
-> > > > >  3 files changed, 15 insertions(+), 2 deletions(-)
-> > > > >
-> > > > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > > > > index 9d79c20c1a..b89b006a76 100644
-> > > > > --- a/target/riscv/cpu.c
-> > > > > +++ b/target/riscv/cpu.c
-> > > > > @@ -1817,6 +1817,7 @@ static void
-> > > > > riscv_cpu_add_misa_properties(Object *cpu_obj)
-> > > > >  static Property riscv_cpu_extensions[] =3D {
-> > > > >      /* Defaults for standard extensions */
-> > > > >      DEFINE_PROP_UINT8("pmu-num", RISCVCPU, cfg.pmu_num, 16),
-> > > > > +    DEFINE_PROP_UINT32("pmu-mask", RISCVCPU, cfg.pmu_mask, 0),
-> > > > >      DEFINE_PROP_BOOL("sscofpmf", RISCVCPU, cfg.ext_sscofpmf,
-> > > > > false),
-> > > > >      DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true=
-),
-> > > > >      DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
-> > > > > diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> > > > > index 0e6a0f245c..40f7d970bc 100644
-> > > > > --- a/target/riscv/cpu_cfg.h
-> > > > > +++ b/target/riscv/cpu_cfg.h
-> > > > > @@ -124,6 +124,7 @@ struct RISCVCPUConfig {
-> > > > >      bool ext_XVentanaCondOps;
-> > > > >
-> > > > >      uint8_t pmu_num;
-> > > > > +    uint32_t pmu_mask;
-> > > > >      char *priv_spec;
-> > > > >      char *user_spec;
-> > > > >      char *bext_spec;
-> > > > > diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
-> > > > > index 13801ccb78..f97e25a1f6 100644
-> > > > > --- a/target/riscv/pmu.c
-> > > > > +++ b/target/riscv/pmu.c
-> > > > > @@ -437,6 +437,13 @@ int riscv_pmu_setup_timer(CPURISCVState *env=
-,
-> > > > > uint64_t value, uint32_t ctr_idx)
-> > > > >  void riscv_pmu_init(RISCVCPU *cpu, Error **errp)
-> > > > >  {
-> > > > >      uint8_t pmu_num =3D cpu->cfg.pmu_num;
-> > > > > +    uint32_t pmu_mask =3D cpu->cfg.pmu_mask;
-> > > > > +
-> > > > > +    if (pmu_mask && ctpop32(pmu_mask) !=3D pmu_num) {
-> > > > > +        error_setg(errp, "Mismatch between number of enabled
-> > > > > counters in "
-> > > > > +                         "\"pmu-mask\" and \"pmu-num\"");
-> > > > > +        return;
-> > > > > +    }
-> > > > >
-> > > >
-> > > > Is that necessary for the default case? I am thinking of marking
-> > > > pmu-num as deprecated and pmu-mask
-> > > > as the preferred way of doing things as it is more flexible. There =
-is
-> > > > no real benefit carrying both.
-> > > > The default pmu-mask value will change in that case.
-> > > > We can just overwrite pmu-num with ctpop32(pmu_mask) if pmu-mask is
-> > > > available. Thoughts ?
-> > > >
-> > >
-> > > I agree it makes sense to me that there is only one way for the user =
-to
-> > > adjust the PMU count. However i'm not sure how we can handle the
-> > > transition if we choose to deprecate "pmu-num".
-> > >
-> > > If we change the default "pmu-mask" to MAKE_32BIT_MASK(3, 16) then th=
-at
-> > > value in the config will always be set - you propose that we overwrit=
-e
-> > > "pmu-num" with the popcount of that property. But that will break if
-> >
-> > Couldn't we deprecate "pmu-num" and then throw an error if both are
-> > set? Then we can migrate away from "pmu-num"
-> >
+> RISCV_CPU(cs) uses a checked cast.  When QOM cast debugging is enabled
+> this adds about 5% total overhead when emulating RV64 on x86-64 host.
 >
-> Yeah. pmu-num should be only available as a command line property and
-> marked deprecated.
-> If only pmu-num is set, it gets converted to a mask and throws a warning
-> that this is a deprecated property.
-> If only the pmu-mask is set, nothing additional is needed. These
-> patches are sufficient.
-> If nothing is set, the pmu-mask will be set to MAKE_32BIT_MASK(3, 16).
+> Using a RISC-V guest with 16 vCPUs, 16 GB of guest RAM, virtio-blk
+> disk.  The guest has a copy of the qemu source tree.  The test
+> involves compiling the qemu source tree with 'make clean; time make -j16'=
+.
+>
+> Before making this change the compile step took 449 & 447 seconds over
+> two consecutive runs.
+>
+> After making this change: 428 & 421 seconds.
+>
+> The saving is over 5%.
+>
+> Thanks: Paolo Bonzini
+> Thanks: Philippe Mathieu-Daud=C3=A9
+> Signed-off-by: Richard W.M. Jones <rjones@redhat.com>
 
-That all sounds good to me, and if both are set we can throw an error.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
-> If a CPU init code uses pmu-num, we should change it to mask. The upstrea=
-m code
-> doesn't have any other usage. Any downstream user will have to move
-> away from pmu-num
-> once this series is merged.
+> ---
+>  target/riscv/cpu_helper.c | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
 >
-> > Alistair
-> >
-> > > the user has an existing setup that changes the value of "pmu-num"
-> > > (either as a property at runtime or in the CPU init code).
-> > >
-> > > One option would be to not make the mask configurable as property and
-> > > make choosing the layout of the counters something that the specialis=
-ed
-> > > CPU init can choose to do.
-> > >
-> > > Cheers,
-> > >
-> > > Rob
-> > >
-> > > > >      if (pmu_num > (RV_MAX_MHPMCOUNTERS - 3)) {
-> > > > >          error_setg(errp, "Number of counters exceeds maximum
-> > > > > available");
-> > > > > @@ -449,6 +456,10 @@ void riscv_pmu_init(RISCVCPU *cpu, Error
-> > > > > **errp)
-> > > > >          return;
-> > > > >      }
-> > > > >
-> > > > > -    /* Create a bitmask of available programmable counters */
-> > > > > -    cpu->pmu_avail_ctrs =3D MAKE_32BIT_MASK(3, pmu_num);
-> > > > > +    /* Create a bitmask of available programmable counters if no=
-ne
-> > > > > supplied */
-> > > > > +    if (pmu_mask) {
-> > > > > +        cpu->pmu_avail_ctrs =3D pmu_mask;
-> > > > > +    } else {
-> > > > > +        cpu->pmu_avail_ctrs =3D MAKE_32BIT_MASK(3, pmu_num);
-> > > > > +    }
-> > > > >  }
-> > > > > --
-> > > > > 2.41.0
-> > > > >
-> > >
-> > >
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 3a02079290..8c28241c18 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -65,8 +65,7 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch=
+)
+>  void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+>                            uint64_t *cs_base, uint32_t *pflags)
+>  {
+> -    CPUState *cs =3D env_cpu(env);
+> -    RISCVCPU *cpu =3D RISCV_CPU(cs);
+> +    RISCVCPU *cpu =3D env_archcpu(env);
+>      RISCVExtStatus fs, vs;
+>      uint32_t flags =3D 0;
+>
+> --
+> 2.41.0
+>
+>
 
