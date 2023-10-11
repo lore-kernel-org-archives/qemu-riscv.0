@@ -4,95 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E436CD98D9
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Oct 2023 01:04:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3323CD98D9
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Oct 2023 01:07:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qqNe3-0005Jj-BJ; Tue, 10 Oct 2023 21:04:15 -0400
+	id 1qqNgK-00073j-Qg; Tue, 10 Oct 2023 21:06:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qqNe2-0005E5-Ew; Tue, 10 Oct 2023 21:04:14 -0400
-Received: from mail-vk1-xa35.google.com ([2607:f8b0:4864:20::a35])
+ id 1qqNgJ-00073E-F2; Tue, 10 Oct 2023 21:06:35 -0400
+Received: from mail-vk1-xa34.google.com ([2607:f8b0:4864:20::a34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qqNe0-0006d7-S3; Tue, 10 Oct 2023 21:04:14 -0400
-Received: by mail-vk1-xa35.google.com with SMTP id
- 71dfb90a1353d-49d0a704ac7so2372426e0c.1; 
- Tue, 10 Oct 2023 18:04:10 -0700 (PDT)
+ id 1qqNgH-0007DC-GD; Tue, 10 Oct 2023 21:06:35 -0400
+Received: by mail-vk1-xa34.google.com with SMTP id
+ 71dfb90a1353d-49d39f07066so2086188e0c.0; 
+ Tue, 10 Oct 2023 18:06:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696986249; x=1697591049; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1696986392; x=1697591192; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aqO5ka7tR9qZcNKmHJAXn+ExW6wHOnY5HZ1B8d6xlA0=;
- b=WC1HpB0u6CSTXVOy6Nx4S53Ebuk+vN5a+I4PbpjWR7iVMQVm1FgguDO5Ran/SPsEPZ
- MBELeL9YXN7ccWlgq3OgM2USTdtEMMCHcoXIZWMoJ/1axZp9mIE2f9ayL7UO3KQ2+gUW
- 5GZYoIfMzFGQv+6Q+7ddrB6zkkd+xPjfnY91r6Vut87NTre7dVlhahi3oBCVIV0mIybZ
- jjIHJozxAmsmSxOrLH0JPdMTXCYyd+PBedINvglwsODWf7BMZnInsCUVOulLmWW0P/Eh
- aWmogBXZwGev/SPL65PZfxw/+T9/9/kRMAglqHmJmxoiZFdlFam7eWGHRDwKb/McjucH
- YWtg==
+ bh=nBjij6sJWlx3sLQgLWYHVmF+0OHgcs2jngrrysGLBhw=;
+ b=U+VMLUQhzD7df2KXE7QjLAgDIbgvpTkFe6mp9Md74hR8K4Chm6mhS9wtI+F0f95gYa
+ 16U+FYi9VPoJS9fhRzymP4DT0YH2iXuWtf+sm2qlHZUo0dElZgPtTMUp6MyUCuH3Vl3d
+ F7f+Y3NCGq7VAzCVeMS7JgsflIXDTnKhF0rQlYPGLSFXyUcTC44j3rTkryDDUHxVcxs2
+ d87ir0RQoEfsQ52hZIeDZvJe7vHiHQeRfiAsegPncYGWZ3R4BZWCtUJ3SsyElOc2TZP3
+ IvDsUhDQmdy05pbSq/8/PD1qCmnH1Jt6C69YJeFTyZv6lZLJHzOgX85yCsOx2vTJQcj6
+ NYZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696986249; x=1697591049;
+ d=1e100.net; s=20230601; t=1696986392; x=1697591192;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aqO5ka7tR9qZcNKmHJAXn+ExW6wHOnY5HZ1B8d6xlA0=;
- b=KO/8zy7AyqaFhhQRp4daBvo3bWksdtuLAXf/4C2SCvDeSuzbeHK/+F0jOofFImv5O5
- hu2Xz5muFgNSbMcv2zCRwByL0xQIXQPGo6djfdtsFwBqGX8kgv6u066KEC5uvbZaRraz
- KGSKHLPFzVA2PbsyMF49yWXI2Cc7ZER8HjSJoQP0xcEgwTmlHpBHmN4cIdy5ys4W6qbl
- vfG4XNojTYqXliOu94ZrG5mLzSE+8ZaotmLmJjme/OaGIBWjELUHMOvDHsuTP0G4fkVo
- BDjjNUs6rmdIO60xSYYVOfTf1OC9Y7hcs8lpNIvlCntDOcPzSJ2X3nWravZnjmOTXE8o
- lKww==
-X-Gm-Message-State: AOJu0YxV/vaessP4oAy/IQ3Wh9rHzJ8StCYV+pFl71zU2y0Z+Z0dvQBV
- C/Nedu7kMdokOZjDuuCMFAkeHirhbUXZ6u7vf3o=
-X-Google-Smtp-Source: AGHT+IE+dECs0/kWr7vwAr7Wy9VndFb7DLF3LT2g8gzD4c35dqPtmKLYacBfQzZPQpjsSy45eTmlKRIHhMi98CmdBdM=
-X-Received: by 2002:a1f:c9c1:0:b0:49d:3e4c:6168 with SMTP id
- z184-20020a1fc9c1000000b0049d3e4c6168mr15264409vkf.7.1696986249500; Tue, 10
- Oct 2023 18:04:09 -0700 (PDT)
+ bh=nBjij6sJWlx3sLQgLWYHVmF+0OHgcs2jngrrysGLBhw=;
+ b=j+tAE74Onnnx1dLWYFo2NpWipiPwFBnIc78i5ddE6gma+zZurLtRhiUjFiGb9/isvQ
+ EIKqpSOgyohcCrRam5+4FPqF4Hu0KoFQGRVUbN8NhxHOiKXb7NHaZbmpQWjZEfVtdvCA
+ bdG3e+2SSs4MX+C+Fu4+b3AEKfkxMeiOD6n0eCi43of2BLrxzz1GqBykFXPsDQyV9ZAc
+ vl0ldrzcsUDL6aEgCIsOROTxL1RHt1jlFyIXAgDEiA/6KLsuJ7fpERw9mvU6ss9Hw4DW
+ mo6s7Aom8SkmO5uHNjXb/1BNXkNV1smWqSIk+bF94++5L6nvLAyQiT1UhWj5dj+lk/9t
+ z5Ig==
+X-Gm-Message-State: AOJu0YzKK2jqe5LRbIdWrvWd2fuGLuCsnHJc0PIP9BcKbcLu1yCHEu5E
+ jikH3JL1JRxLUHdkg3D9stVIiDPkgvjUxWvg0Ek=
+X-Google-Smtp-Source: AGHT+IHEPWw3sFKU/1tfi08UjALoFIWUa5m9thnVxy8ZcSfelUxq62TGhvHb90qZsa2oYQ08FPKdjJyr+J4RN8pZNbM=
+X-Received: by 2002:a1f:4b85:0:b0:49d:d73e:5d07 with SMTP id
+ y127-20020a1f4b85000000b0049dd73e5d07mr11962833vka.16.1696986391675; Tue, 10
+ Oct 2023 18:06:31 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231009164104.369749-1-alex.bennee@linaro.org>
- <20231009164104.369749-17-alex.bennee@linaro.org>
-In-Reply-To: <20231009164104.369749-17-alex.bennee@linaro.org>
+References: <20231003125107.34859-1-rbradford@rivosinc.com>
+ <20231003125107.34859-3-rbradford@rivosinc.com>
+ <CAHBxVyHYJjvADsHPCJeheU4_8s1=DfyeApPyV8QpuPnTm2F=Gw@mail.gmail.com>
+ <d2a170aeb3f05614c3801c1819afbbddc3ff4f37.camel@rivosinc.com>
+ <CAKmqyKNrmnUTHxx_wYe0V6sL0M10hkwOGYakGw1E6pu17YyMKQ@mail.gmail.com>
+ <CAHBxVyEO4bPLKM4d90mhM9k33hf2L2zdFk7qDtenv3-2d8YNfg@mail.gmail.com>
+In-Reply-To: <CAHBxVyEO4bPLKM4d90mhM9k33hf2L2zdFk7qDtenv3-2d8YNfg@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 11 Oct 2023 11:03:42 +1000
-Message-ID: <CAKmqyKN86xUqKMjd6U=2pno962DnMNVVRzfJCycT=S_62+PXVw@mail.gmail.com>
-Subject: Re: [PATCH 16/25] target/arm: Remove references to gdb_has_xml
-To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
-Cc: qemu-devel@nongnu.org, Thomas Huth <thuth@redhat.com>, 
- Xiaojuan Yang <yangxiaojuan@loongson.cn>,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Brad Smith <brad@comstyle.com>, 
- Radoslaw Biernacki <rad@semihalf.com>, David Hildenbrand <david@redhat.com>,
- Cleber Rosa <crosa@redhat.com>, 
- Ilya Leoshkevich <iii@linux.ibm.com>, qemu-riscv@nongnu.org, 
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Alexandre Iooss <erdnaxe@crans.org>, 
- Nicholas Piggin <npiggin@gmail.com>, Bin Meng <bin.meng@windriver.com>, 
- Leif Lindholm <quic_llindhol@quicinc.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Alistair Francis <alistair.francis@wdc.com>, qemu-ppc@nongnu.org, 
- John Snow <jsnow@redhat.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-arm@nongnu.org, Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Peter Maydell <peter.maydell@linaro.org>, Yanan Wang <wangyanan55@huawei.com>, 
- Weiwei Li <liweiwei@iscas.ac.cn>,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Beraldo Leal <bleal@redhat.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Mahmoud Mandour <ma.mandourr@gmail.com>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Song Gao <gaosong@loongson.cn>, 
- Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>, qemu-s390x@nongnu.org, 
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Akihiko Odaki <akihiko.odaki@daynix.com>
+Date: Wed, 11 Oct 2023 11:06:05 +1000
+Message-ID: <CAKmqyKP1BqTjd0S1g7Zj9SitvuaS_LHy_0GWC--txrWdRjRCaQ@mail.gmail.com>
+Subject: Re: [PATCH 2/3] target/riscv: Support discontinuous PMU counters
+To: Atish Kumar Patra <atishp@rivosinc.com>
+Cc: Rob Bradford <rbradford@rivosinc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, 
+ palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
+ liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a35;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa35.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a34;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa34.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -116,81 +95,165 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Oct 10, 2023 at 3:52=E2=80=AFAM Alex Benn=C3=A9e <alex.bennee@linar=
-o.org> wrote:
+On Tue, Oct 10, 2023 at 4:00=E2=80=AFAM Atish Kumar Patra <atishp@rivosinc.=
+com> wrote:
 >
-> From: Akihiko Odaki <akihiko.odaki@daynix.com>
+> On Sun, Oct 8, 2023 at 5:58=E2=80=AFPM Alistair Francis <alistair23@gmail=
+.com> wrote:
+> >
+> > On Wed, Oct 4, 2023 at 7:36=E2=80=AFPM Rob Bradford <rbradford@rivosinc=
+.com> wrote:
+> > >
+> > > Hi Atish,
+> > >
+> > > On Tue, 2023-10-03 at 13:25 -0700, Atish Kumar Patra wrote:
+> > > > On Tue, Oct 3, 2023 at 5:51=E2=80=AFAM Rob Bradford <rbradford@rivo=
+sinc.com>
+> > > > wrote:
+> > > > >
+> > > > > There is no requirement that the enabled counters in the platform
+> > > > > are
+> > > > > continuously numbered. Add a "pmu-mask" property that, if
+> > > > > specified, can
+> > > > > be used to specify the enabled PMUs. In order to avoid ambiguity =
+if
+> > > > > "pmu-mask" is specified then "pmu-num" must also match the number
+> > > > > of
+> > > > > bits set in the mask.
+> > > > >
+> > > > > Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
+> > > > > ---
+> > > > >  target/riscv/cpu.c     |  1 +
+> > > > >  target/riscv/cpu_cfg.h |  1 +
+> > > > >  target/riscv/pmu.c     | 15 +++++++++++++--
+> > > > >  3 files changed, 15 insertions(+), 2 deletions(-)
+> > > > >
+> > > > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > > > > index 9d79c20c1a..b89b006a76 100644
+> > > > > --- a/target/riscv/cpu.c
+> > > > > +++ b/target/riscv/cpu.c
+> > > > > @@ -1817,6 +1817,7 @@ static void
+> > > > > riscv_cpu_add_misa_properties(Object *cpu_obj)
+> > > > >  static Property riscv_cpu_extensions[] =3D {
+> > > > >      /* Defaults for standard extensions */
+> > > > >      DEFINE_PROP_UINT8("pmu-num", RISCVCPU, cfg.pmu_num, 16),
+> > > > > +    DEFINE_PROP_UINT32("pmu-mask", RISCVCPU, cfg.pmu_mask, 0),
+> > > > >      DEFINE_PROP_BOOL("sscofpmf", RISCVCPU, cfg.ext_sscofpmf,
+> > > > > false),
+> > > > >      DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true=
+),
+> > > > >      DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
+> > > > > diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> > > > > index 0e6a0f245c..40f7d970bc 100644
+> > > > > --- a/target/riscv/cpu_cfg.h
+> > > > > +++ b/target/riscv/cpu_cfg.h
+> > > > > @@ -124,6 +124,7 @@ struct RISCVCPUConfig {
+> > > > >      bool ext_XVentanaCondOps;
+> > > > >
+> > > > >      uint8_t pmu_num;
+> > > > > +    uint32_t pmu_mask;
+> > > > >      char *priv_spec;
+> > > > >      char *user_spec;
+> > > > >      char *bext_spec;
+> > > > > diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
+> > > > > index 13801ccb78..f97e25a1f6 100644
+> > > > > --- a/target/riscv/pmu.c
+> > > > > +++ b/target/riscv/pmu.c
+> > > > > @@ -437,6 +437,13 @@ int riscv_pmu_setup_timer(CPURISCVState *env=
+,
+> > > > > uint64_t value, uint32_t ctr_idx)
+> > > > >  void riscv_pmu_init(RISCVCPU *cpu, Error **errp)
+> > > > >  {
+> > > > >      uint8_t pmu_num =3D cpu->cfg.pmu_num;
+> > > > > +    uint32_t pmu_mask =3D cpu->cfg.pmu_mask;
+> > > > > +
+> > > > > +    if (pmu_mask && ctpop32(pmu_mask) !=3D pmu_num) {
+> > > > > +        error_setg(errp, "Mismatch between number of enabled
+> > > > > counters in "
+> > > > > +                         "\"pmu-mask\" and \"pmu-num\"");
+> > > > > +        return;
+> > > > > +    }
+> > > > >
+> > > >
+> > > > Is that necessary for the default case? I am thinking of marking
+> > > > pmu-num as deprecated and pmu-mask
+> > > > as the preferred way of doing things as it is more flexible. There =
+is
+> > > > no real benefit carrying both.
+> > > > The default pmu-mask value will change in that case.
+> > > > We can just overwrite pmu-num with ctpop32(pmu_mask) if pmu-mask is
+> > > > available. Thoughts ?
+> > > >
+> > >
+> > > I agree it makes sense to me that there is only one way for the user =
+to
+> > > adjust the PMU count. However i'm not sure how we can handle the
+> > > transition if we choose to deprecate "pmu-num".
+> > >
+> > > If we change the default "pmu-mask" to MAKE_32BIT_MASK(3, 16) then th=
+at
+> > > value in the config will always be set - you propose that we overwrit=
+e
+> > > "pmu-num" with the popcount of that property. But that will break if
+> >
+> > Couldn't we deprecate "pmu-num" and then throw an error if both are
+> > set? Then we can migrate away from "pmu-num"
+> >
 >
-> GDB has XML support since 6.7 which was released in 2007.
-> It's time to remove support for old GDB versions without XML support.
->
-> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-> Acked-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
-> Message-Id: <20230912224107.29669-10-akihiko.odaki@daynix.com>
-> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+> Yeah. pmu-num should be only available as a command line property and
+> marked deprecated.
+> If only pmu-num is set, it gets converted to a mask and throws a warning
+> that this is a deprecated property.
+> If only the pmu-mask is set, nothing additional is needed. These
+> patches are sufficient.
+> If nothing is set, the pmu-mask will be set to MAKE_32BIT_MASK(3, 16).
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+That all sounds good to me, and if both are set we can throw an error.
 
 Alistair
 
-> ---
->  target/arm/gdbstub.c | 32 ++------------------------------
->  1 file changed, 2 insertions(+), 30 deletions(-)
+> If a CPU init code uses pmu-num, we should change it to mask. The upstrea=
+m code
+> doesn't have any other usage. Any downstream user will have to move
+> away from pmu-num
+> once this series is merged.
 >
-> diff --git a/target/arm/gdbstub.c b/target/arm/gdbstub.c
-> index 8fc8351df7..b7ace24bfc 100644
-> --- a/target/arm/gdbstub.c
-> +++ b/target/arm/gdbstub.c
-> @@ -46,21 +46,7 @@ int arm_cpu_gdb_read_register(CPUState *cs, GByteArray=
- *mem_buf, int n)
->          /* Core integer register.  */
->          return gdb_get_reg32(mem_buf, env->regs[n]);
->      }
-> -    if (n < 24) {
-> -        /* FPA registers.  */
-> -        if (gdb_has_xml()) {
-> -            return 0;
-> -        }
-> -        return gdb_get_zeroes(mem_buf, 12);
-> -    }
-> -    switch (n) {
-> -    case 24:
-> -        /* FPA status register.  */
-> -        if (gdb_has_xml()) {
-> -            return 0;
-> -        }
-> -        return gdb_get_reg32(mem_buf, 0);
-> -    case 25:
-> +    if (n =3D=3D 25) {
->          /* CPSR, or XPSR for M-profile */
->          if (arm_feature(env, ARM_FEATURE_M)) {
->              return gdb_get_reg32(mem_buf, xpsr_read(env));
-> @@ -100,21 +86,7 @@ int arm_cpu_gdb_write_register(CPUState *cs, uint8_t =
-*mem_buf, int n)
->          env->regs[n] =3D tmp;
->          return 4;
->      }
-> -    if (n < 24) { /* 16-23 */
-> -        /* FPA registers (ignored).  */
-> -        if (gdb_has_xml()) {
-> -            return 0;
-> -        }
-> -        return 12;
-> -    }
-> -    switch (n) {
-> -    case 24:
-> -        /* FPA status register (ignored).  */
-> -        if (gdb_has_xml()) {
-> -            return 0;
-> -        }
-> -        return 4;
-> -    case 25:
-> +    if (n =3D=3D 25) {
->          /* CPSR, or XPSR for M-profile */
->          if (arm_feature(env, ARM_FEATURE_M)) {
->              /*
-> --
-> 2.39.2
->
->
+> > Alistair
+> >
+> > > the user has an existing setup that changes the value of "pmu-num"
+> > > (either as a property at runtime or in the CPU init code).
+> > >
+> > > One option would be to not make the mask configurable as property and
+> > > make choosing the layout of the counters something that the specialis=
+ed
+> > > CPU init can choose to do.
+> > >
+> > > Cheers,
+> > >
+> > > Rob
+> > >
+> > > > >      if (pmu_num > (RV_MAX_MHPMCOUNTERS - 3)) {
+> > > > >          error_setg(errp, "Number of counters exceeds maximum
+> > > > > available");
+> > > > > @@ -449,6 +456,10 @@ void riscv_pmu_init(RISCVCPU *cpu, Error
+> > > > > **errp)
+> > > > >          return;
+> > > > >      }
+> > > > >
+> > > > > -    /* Create a bitmask of available programmable counters */
+> > > > > -    cpu->pmu_avail_ctrs =3D MAKE_32BIT_MASK(3, pmu_num);
+> > > > > +    /* Create a bitmask of available programmable counters if no=
+ne
+> > > > > supplied */
+> > > > > +    if (pmu_mask) {
+> > > > > +        cpu->pmu_avail_ctrs =3D pmu_mask;
+> > > > > +    } else {
+> > > > > +        cpu->pmu_avail_ctrs =3D MAKE_32BIT_MASK(3, pmu_num);
+> > > > > +    }
+> > > > >  }
+> > > > > --
+> > > > > 2.41.0
+> > > > >
+> > >
+> > >
 
