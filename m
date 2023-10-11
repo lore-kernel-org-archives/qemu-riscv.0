@@ -4,85 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91A14CD98F8
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Oct 2023 06:15:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E96DCD98F3
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Oct 2023 06:46:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qqSUX-0004ny-Rf; Wed, 11 Oct 2023 02:14:47 -0400
+	id 1qqSym-0002ZZ-NB; Wed, 11 Oct 2023 02:46:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qqSU2-0004ZX-Fh; Wed, 11 Oct 2023 02:14:14 -0400
-Received: from out30-111.freemail.mail.aliyun.com ([115.124.30.111])
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qqSyi-0002YX-DA
+ for qemu-riscv@nongnu.org; Wed, 11 Oct 2023 02:45:57 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qqSTx-0002OT-4U; Wed, 11 Oct 2023 02:14:13 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R771e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=47; SR=0;
- TI=SMTPD_---0VtvF12m_1697004820; 
-Received: from 30.221.100.88(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VtvF12m_1697004820) by smtp.aliyun-inc.com;
- Wed, 11 Oct 2023 14:13:42 +0800
-Message-ID: <c8bcb233-62a8-4ce3-a08d-1da49d896c86@linux.alibaba.com>
-Date: Wed, 11 Oct 2023 14:12:41 +0800
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qqSyg-0001e8-9l
+ for qemu-riscv@nongnu.org; Wed, 11 Oct 2023 02:45:56 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1697006752;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Y6Zf4eUKFYEublX2s8iYoEkuD6AiMv6ZrCpWbA4EEAI=;
+ b=X3bxW8P1FvayEF+SI9EjA/zK5AFDi/m67TbYZFYpzB/o5GSAls/u3xfhZ2R62rkgDEPgro
+ 818qqFsPR7nB0BpvyePVxUe5VlGsxdKjcqM2p01iuiaJ9apoh42YLkFlS/xHLdx5dykNe/
+ 1yvwBcwtXfPBcw48GEshLsEOAVptap8=
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
+ [209.85.214.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-437-Vqi8gZaDN2u8oLDRS_fARg-1; Wed, 11 Oct 2023 02:45:48 -0400
+X-MC-Unique: Vqi8gZaDN2u8oLDRS_fARg-1
+Received: by mail-pl1-f198.google.com with SMTP id
+ d9443c01a7336-1c754c90b4bso53317855ad.2
+ for <qemu-riscv@nongnu.org>; Tue, 10 Oct 2023 23:45:48 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697006747; x=1697611547;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Y6Zf4eUKFYEublX2s8iYoEkuD6AiMv6ZrCpWbA4EEAI=;
+ b=HhQYVl2h2oy8mudnsFyDo4Bc8TuxPz4SsLhAj12tUdiAGdI22AbGpSM2rVo/CoSdcD
+ TfbtGZCxqRQe4URNXi2wlRGOEZwfUIlhpdWXMVvPLIe4BARFV39qCGnR8wGALNZ6SzZg
+ WIHHFsGD7FWC35xD7VWDo1s3sVVIeN2AdmejudSlcQGVeJf0xnJ2ccEFCzFxYbr+rMDA
+ Ck2sNGNBt9qz4DXLdHCPkFshBcoYiiLBb62/lDh/Wop1hvoisDcY9kuarNyNQ2FYmw9v
+ oHFHTJ/AqJU+1QF8xEwE5zktUEyEpGhLpC7TSPZDpt1tillnJOwWQiQoSORDlhpdRM5O
+ +ePQ==
+X-Gm-Message-State: AOJu0YxKGQ6sKY9nE7XlOZ6OlHV8nlMy0iXSj70Hj9uiDrjFiVftfQcR
+ Gl0sylRsmSCyidBLwvb2BZH3WZ7MO0Bco7+rRL/EhOHxYsrPCXijN9sgFMIjQhM7O2jIMieXWwH
+ jaoGEnkslU/XbheE=
+X-Received: by 2002:a17:903:24d:b0:1bd:c7e2:462 with SMTP id
+ j13-20020a170903024d00b001bdc7e20462mr20749228plh.11.1697006747683; 
+ Tue, 10 Oct 2023 23:45:47 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEnb/J7/SbM0B3OEtBg9ALiXiQtVJ9lOvT1wMsLXWKXNthSEk2quIs3Ngnl1b115fIcqBxPqA==
+X-Received: by 2002:a17:903:24d:b0:1bd:c7e2:462 with SMTP id
+ j13-20020a170903024d00b001bdc7e20462mr20749190plh.11.1697006747351; 
+ Tue, 10 Oct 2023 23:45:47 -0700 (PDT)
+Received: from ?IPV6:2001:8003:e5b0:9f00:b890:3e54:96bb:2a15?
+ ([2001:8003:e5b0:9f00:b890:3e54:96bb:2a15])
+ by smtp.gmail.com with ESMTPSA id
+ n12-20020a170902e54c00b001c60c8d6b4asm9706912plf.149.2023.10.10.23.45.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 10 Oct 2023 23:45:46 -0700 (PDT)
+Message-ID: <c24efe4e-88e1-c6e5-9e6c-d809c26e40c8@redhat.com>
+Date: Wed, 11 Oct 2023 16:45:32 +1000
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 04/18] target: Declare FOO_CPU_TYPE_NAME/SUFFIX in
- 'cpu-qom.h'
-Content-Language: en-US
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org, Gavin Shan <gshan@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>, Thomas Huth <thuth@redhat.com>,
- Brian Cain <bcain@quicinc.com>, Markus Armbruster <armbru@redhat.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-Cc: David Hildenbrand <david@redhat.com>, "Michael S. Tsirkin"
- <mst@redhat.com>, Song Gao <gaosong@loongson.cn>,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
- Laurent Vivier <lvivier@redhat.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-arm@nongnu.org,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Paolo Bonzini <pbonzini@redhat.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Nicholas Piggin <npiggin@gmail.com>, qemu-riscv@nongnu.org,
- Bin Meng <bin.meng@windriver.com>, Yanan Wang <wangyanan55@huawei.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>, Marek Vasut
- <marex@denx.de>, Peter Maydell <peter.maydell@linaro.org>,
- qemu-ppc@nongnu.org, Michael Rolnik <mrolnik@gmail.com>,
- Max Filippov <jcmvbkbc@gmail.com>,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH 3/4] hw/cpu: Introduce CPUClass::cpu_resolving_type field
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org, David Hildenbrand <david@redhat.com>
+Cc: Chris Wulff <crwulff@gmail.com>,
+ David Gibson <david@gibson.dropbear.id.au>, qemu-s390x@nongnu.org,
+ Weiwei Li <liweiwei@iscas.ac.cn>, qemu-arm@nongnu.org,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Laurent Vivier <laurent@vivier.eu>, Stafford Horne <shorne@gmail.com>,
- Chris Wulff <crwulff@gmail.com>, Sergio Lopez <slp@redhat.com>,
- Xiaojuan Yang <yangxiaojuan@loongson.cn>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
  Richard Henderson <richard.henderson@linaro.org>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Aurelien Jarno <aurelien@aurel32.net>, qemu-s390x@nongnu.org
-References: <20231010092901.99189-1-philmd@linaro.org>
- <20231010092901.99189-5-philmd@linaro.org>
- <348eaf9c-9fb6-4674-b324-c3f3017f1851@linux.alibaba.com>
- <f8b3cb2c-8e80-19e4-d59f-2ccacff0a413@linaro.org>
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <f8b3cb2c-8e80-19e4-d59f-2ccacff0a413@linaro.org>
+ Max Filippov <jcmvbkbc@gmail.com>, Nicholas Piggin <npiggin@gmail.com>,
+ Eduardo Habkost <eduardo@habkost.net>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Greg Kurz <groug@kaod.org>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ qemu-ppc@nongnu.org, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Marek Vasut <marex@denx.de>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Michael Rolnik <mrolnik@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
+ Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
+ Aurelien Jarno <aurelien@aurel32.net>, Bin Meng <bin.meng@windriver.com>,
+ Xiaojuan Yang <yangxiaojuan@loongson.cn>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, Song Gao <gaosong@loongson.cn>,
+ Stafford Horne <shorne@gmail.com>, Yanan Wang <wangyanan55@huawei.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Brian Cain <bcain@quicinc.com>,
+ =?UTF-8?Q?C=c3=a9dric_Le_Goater?= <clg@kaod.org>,
+ Thomas Huth <thuth@redhat.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20230908112235.75914-1-philmd@linaro.org>
+ <20230908112235.75914-4-philmd@linaro.org>
+ <87cb0174-c652-aa44-be7c-49e78e0a5003@redhat.com>
+ <af78b6c9-14e5-3256-9670-c106f4942140@linaro.org>
+ <35653f53-a977-02ea-28f6-6fe85b1efd5a@redhat.com>
+ <a42dd7a0-e73f-8410-d096-8298da03f70d@redhat.com>
+ <676c81b6-ccaa-51a3-8d1a-65e71a7b2b92@linaro.org>
+From: Gavin Shan <gshan@redhat.com>
+In-Reply-To: <676c81b6-ccaa-51a3-8d1a-65e71a7b2b92@linaro.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.111;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-111.freemail.mail.aliyun.com
-X-Spam_score_int: -98
-X-Spam_score: -9.9
-X-Spam_bar: ---------
-X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=gshan@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -53
+X-Spam_score: -5.4
+X-Spam_bar: -----
+X-Spam_report: (-5.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ NICE_REPLY_A=-3.339, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001,
+ RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,134 +136,105 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Hi Philippe,
 
-On 2023/10/11 11:21, Philippe Mathieu-Daudé wrote:
-> Hi Zhiwei,
->
-> On 11/10/23 04:51, LIU Zhiwei wrote:
->>
->> On 2023/10/10 17:28, Philippe Mathieu-Daudé wrote:
->>> Hegerogeneous code needs access to the FOO_CPU_TYPE_NAME()
->>> macro to resolve target CPU types.
->>
->> Hi Philippe,
->>
->> I don't understand why should we use FOO_CPU_TYPE_NAME macro to 
->> resolve target CPU types? In my opinion, we should pass the
->> CPU typename from command line for heterogeneous case.
->>
->> Could you make it clearer how should we use FOO_CPU_TYPE_NAME macro 
->> to resolve target CPU types in heterogeneous case?
->
-> To be honest I start to feel a bit lost with the "cpu
-> resolving type" design.
->
-> We are not quite there yet to "create from command line"
-> or "create from QMP", so I'm prototyping in plain C.
-> One of my test is:
->
->   #include "target/arm/cpu-qom.h"
->   #include "target/hexagon/cpu-qom.h"
->   ...
->
->   static void
->   my_machine3_init((MachineState *machine)
->   {
->     CPUState cpu[2];
->     ...
->
->     cpu[0] = CPU(object_new(ARM_CPU_TYPE_NAME("cortex-a72")));
->     cpu[1] = CPU(object_new(HEXAGON_CPU_TYPE_NAME("v68")));
->     ...
->   }
->
-> The machine code need access to the per-target
-> FOO_CPU_TYPE_NAME() macros. 
-
-I see what you mean. It works if we will pass the cpu model instead of 
-cpu typename to the machine state(Not yet).
-
-Acked-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-
-Zhiwei
-
-> I'm not sure what each macro
-> expands to is considered stable, so IIUC I can't inline and use:
->
->     cpu[0] = CPU(object_new("cortex-a72-arm-cpu"));
->     cpu[1] = CPU(object_new("v68"-hexagon-cpu));
->
-> That said, maybe I'm mistaken.
->
-> Kinda related discussion with Gavin/Igor:
-> https://lore.kernel.org/qemu-devel/35653f53-a977-02ea-28f6-6fe85b1efd5a@redhat.com/ 
->
-> (related to 
-> https://lore.kernel.org/qemu-devel/20230907003553.1636896-1-gshan@redhat.com/).
->
->>
->> Thanks,
->> Zhiwei
->>
->>> Move the declaration
->>> (along with the required FOO_CPU_TYPE_SUFFIX) to "cpu-qom.h".
+On 10/11/23 13:28, Philippe Mathieu-Daudé wrote:
+> On 25/9/23 02:24, Gavin Shan wrote:
+>> On 9/12/23 08:40, Gavin Shan wrote:
+>>> On 9/11/23 19:43, Philippe Mathieu-Daudé wrote:
+>>>> On 11/9/23 01:28, Gavin Shan wrote:
+>>>>> On 9/8/23 21:22, Philippe Mathieu-Daudé wrote:
+>>>>>> Add a field to return the QOM type name of a CPU class.
+>>>>>>
+>>>>>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>>>>>> ---
+> 
+> 
+>>>>>> diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+>>>>>> index 129d179937..e469efd409 100644
+>>>>>> --- a/include/hw/core/cpu.h
+>>>>>> +++ b/include/hw/core/cpu.h
+>>>>>> @@ -100,6 +100,7 @@ struct SysemuCPUOps;
+>>>>>>   /**
+>>>>>>    * CPUClass:
+>>>>>> + * @cpu_resolving_type: CPU QOM type name
+>>>>>>    * @class_by_name: Callback to map -cpu command line model name to an
+>>>>>>    *                 instantiatable CPU type.
+>>>>>>    * @parse_features: Callback to parse command line arguments.
+>>>>>> @@ -148,6 +149,7 @@ struct CPUClass {
+>>>>>>       DeviceClass parent_class;
+>>>>>>       /*< public >*/
+>>>>>> +    const char *cpu_resolving_type;
+>>>>>>       ObjectClass *(*class_by_name)(const char *cpu_model);
+>>>>>>       void (*parse_features)(const char *typename, char *str, Error **errp);
+>>>>>
+>>>>> The question is why not use CPU_RESOLVING_TYPE directly? It seems CPU_RESOLVING_TYPE
+>>>>> is exactly what you want here.
+>>>>
+>>>> Unfortunately CPU_RESOLVING_TYPE is target-specific, we want
+>>>> hw/core/cpu-common.c to be target-agnostic (build once for all
+>>>> targets). This is particularly important in the context of
+>>>> heterogeneous QEMU, where a single binary will be able to create
+>>>> CPUs from different targets.
+>>>>
 >>>
->>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
->>> ---
->>>   target/alpha/cpu-qom.h   | 5 ++++-
->>>   target/alpha/cpu.h       | 2 --
->>>   target/avr/cpu-qom.h     | 5 ++++-
->>>   target/avr/cpu.h         | 2 --
->>>   target/cris/cpu-qom.h    | 5 ++++-
->>>   target/cris/cpu.h        | 2 --
->>>   target/i386/cpu-qom.h    | 3 +++
->>>   target/i386/cpu.h        | 2 --
->>>   target/m68k/cpu-qom.h    | 5 ++++-
->>>   target/m68k/cpu.h        | 2 --
->>>   target/mips/cpu-qom.h    | 3 +++
->>>   target/mips/cpu.h        | 2 --
->>>   target/rx/cpu-qom.h      | 5 ++++-
->>>   target/rx/cpu.h          | 2 --
->>>   target/s390x/cpu-qom.h   | 5 ++++-
->>>   target/s390x/cpu.h       | 2 --
->>>   target/sh4/cpu-qom.h     | 5 ++++-
->>>   target/sh4/cpu.h         | 2 --
->>>   target/sparc/cpu-qom.h   | 5 ++++-
->>>   target/sparc/cpu.h       | 2 --
->>>   target/tricore/cpu-qom.h | 5 +++++
->>>   target/tricore/cpu.h     | 2 --
->>>   target/xtensa/cpu-qom.h  | 5 ++++-
->>>   target/xtensa/cpu.h      | 2 --
->>>   24 files changed, 47 insertions(+), 33 deletions(-)
+>>> CPU_RESOLVING_TYPE and CPUClass::cpu_resolving_type is duplicate to
+>>> each other. There are two options I can figure out to avoid the
+>>> duplication.
 >>>
->>> diff --git a/target/alpha/cpu-qom.h b/target/alpha/cpu-qom.h
->>> index 1f200724b6..d596d1b69f 100644
->>> --- a/target/alpha/cpu-qom.h
->>> +++ b/target/alpha/cpu-qom.h
->>> @@ -1,5 +1,5 @@
->>>   /*
->>> - * QEMU Alpha CPU
->>> + * QEMU Alpha CPU QOM header (target agnostic)
->>>    *
->>>    * Copyright (c) 2012 SUSE LINUX Products GmbH
->>>    *
->>> @@ -27,6 +27,9 @@
->>>   OBJECT_DECLARE_CPU_TYPE(AlphaCPU, AlphaCPUClass, ALPHA_CPU)
->>> +#define ALPHA_CPU_TYPE_SUFFIX "-" TYPE_ALPHA_CPU
->>> +#define ALPHA_CPU_TYPE_NAME(model) model ALPHA_CPU_TYPE_SUFFIX
->>> +
->>>   /**
->>>    * AlphaCPUClass:
->>>    * @parent_realize: The parent class' realize handler.
->>> diff --git a/target/alpha/cpu.h b/target/alpha/cpu.h
->>> index e2a467ec17..ba0d9e3468 100644
->>> --- a/target/alpha/cpu.h
->>> +++ b/target/alpha/cpu.h
->>> @@ -428,8 +428,6 @@ enum {
->>>   void alpha_translate_init(void);
->>> -#define ALPHA_CPU_TYPE_SUFFIX "-" TYPE_ALPHA_CPU
->>> -#define ALPHA_CPU_TYPE_NAME(model) model ALPHA_CPU_TYPE_SUFFIX
->>>   #define CPU_RESOLVING_TYPE TYPE_ALPHA_CPU
->>>   void alpha_cpu_list(void);
-> [...]
+>>> (a) move cpu_class_by_name() from hw/core/cpu-common.c to cpu.c, so that
+>>>      CPU_RESOLVING_TYPE can be seen. cpu.c::list_cpus() is the example.
+>>>
+>>> (b) remove hw/core/cpu-common.c::cpu_calss_by_name() and squeeze its
+>>>      logic to cpu.c::parse_cpu_option() since there are not too much
+>>>      users for it. target/arm and target/s390 needs some tweaks so that
+>>>      hw/core/cpu-common.c::cpu_calss_by_name() can be removed.
+>>>
+>>>      [gshan@gshan q]$ git grep \ cpu_class_by_name\(
+>>>      cpu.c:    oc = cpu_class_by_name(CPU_RESOLVING_TYPE, model_pieces[0]);
+>>>      target/arm/arm-qmp-cmds.c:    oc = cpu_class_by_name(TYPE_ARM_CPU, model->name);
+>>>      target/s390x/cpu_models_sysemu.c:    oc = cpu_class_by_name(TYPE_S390_CPU, info->name);
+>>>
+>>> When option (b) is taken, this series to have the checks against @oc
+>>> in hw/core/cpu-common.c::cpu_calss_by_name() becomes non-sense. Instead,
+>>> we need the same (and complete) checks in CPUClass::class_by_name() for
+>>> individual targets. Further more, an inline helper can be provided to do
+>>> the check in CPUClass::class_by_name() for individual targets.
+>>>
+>>>     include/hw/core/cpu.h
+>>>
+>>>     static inline bool cpu_class_is_valid(ObjectClass *oc, const char *parent)
+>>>     {
+>>>         if (!object_class_dynamic_cast(oc, parent) ||
+>>>             object_class_is_abstract(oc)) {
+>>>             return false;
+>>>         }
+>>>
+>>>         return true;
+>>>     }
+>>>
+>>
+>> Since my series to make CPU type check unified depends on this series, could
+>> you please share your thoughts? If you don't have bandwidth for this, I can
+>> improve the code based on your thoughts, and include your patches to my series
+>> so that they can be reviewed at once. Please just let me know.
+> 
+> You seem to prove (b) is not useful, so we have to do (a).
+> 
+> Unfortunately at this moment I feel hopeless with this topic.
+> 
+> I don't want to delay your work further. If you find a way to integrate
+> both series, please go ahead. Otherwise let's drop my approach and
+> continue with your previous work.
+> 
+> I apologize I kept you waiting that long.
+> 
+
+Ah, nope, nothing went to wrong here. Thanks for your reply, I will try
+to follow (a) and integrate your patches to my series. Please help to
+review my series when it's posted :)
+
+Thanks,
+Gavin
+
 
