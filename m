@@ -4,83 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18373CD6E7C
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Oct 2023 14:52:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80D35CD6E7D
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Oct 2023 15:34:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qqaYD-0000Ex-Qr; Wed, 11 Oct 2023 10:51:05 -0400
+	id 1qqbEb-0003b9-Fm; Wed, 11 Oct 2023 11:34:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
- id 1qqaYB-0000AV-I2
- for qemu-riscv@nongnu.org; Wed, 11 Oct 2023 10:51:03 -0400
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1qqbEU-0003TA-98
+ for qemu-riscv@nongnu.org; Wed, 11 Oct 2023 11:34:46 -0400
+Received: from mail-qt1-x82a.google.com ([2607:f8b0:4864:20::82a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
- id 1qqaY8-0000VQ-LD
- for qemu-riscv@nongnu.org; Wed, 11 Oct 2023 10:51:03 -0400
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-32329d935d4so6292793f8f.2
- for <qemu-riscv@nongnu.org>; Wed, 11 Oct 2023 07:51:00 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1qqbEQ-0000y6-2L
+ for qemu-riscv@nongnu.org; Wed, 11 Oct 2023 11:34:46 -0400
+Received: by mail-qt1-x82a.google.com with SMTP id
+ d75a77b69052e-419628fb297so57611cf.1
+ for <qemu-riscv@nongnu.org>; Wed, 11 Oct 2023 08:34:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1697035859; x=1697640659;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=ventanamicro.com; s=google; t=1697038481; x=1697643281; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bytYQtr86+xvVw4UcM9bSG9EBrq4aWlnek5rPmUwEro=;
- b=vENiIN/DJqjZN6A4LfXsiiAfzFajOApMgm9hU1P3u7/pD9ZhrVNYj7DSrmAYDUdLC0
- IOfaRDzSlzcPVcS0Ex1onpMbE1tCNSZ1MDpzoAvUT2FGkRWL56qAu4Okwo9iawUnW3F0
- W7Hn92o6jvt2TnDX5Ee4pAk8ZhReoSytPqMk1KVzSkYE3W+A8CSrsNqhZtTuwzz+O4rf
- BZnbmYSDVJ2S6BzVEmMz1xWkd87G3XQaD0kXjX2AxtI2Qsj6P0u+yw3Uk/esYtxfDx3H
- zf8ZQpmYYnPncj6nN0/f9LEN9f7hlD4noomK5riabLwCNJEJ2wQdyd/FCM2YVjLAej2M
- RG8g==
+ bh=qUgTTvatpJ3XxLGD2nR5U17drPlzhAEMt5UHIAR1kSE=;
+ b=YPRMQf3OYxHtkLbcPyigokNb118iugx2li55ff5Mk465uLRSLqDWPHCVQyUpqRXpJH
+ cW4Pwntg7EFX82aN30gTOI60tJCTrh6KXvUbSYF5RoX6RigPrujT4h384zgZGNASzs18
+ vTi2AS5QvnF5Z5DL+EuYivXw6D2BW3n1Rc7qacdplAidx0K34/rmphqUG+JhZM+NPdvI
+ f+T5CXSNhwZSjg1hpLCKVfyGFfjx9YbERrzqT5Mc6xebGKBXNccX3PqYMnM3rp/jgmFP
+ L6hWzWJc07sV01XD0vt4Sf+I4DR/J8Sh9/8n7EwRRPtD6tfs5/yye7yv1PuSnO68EiNT
+ CWpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697035859; x=1697640659;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1697038481; x=1697643281;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bytYQtr86+xvVw4UcM9bSG9EBrq4aWlnek5rPmUwEro=;
- b=RkmtYcPm7OWrk+gw0h68FOqzgIUz0kmjy2RuC1gljtVIaegenkcK6852p5CQhe6ER3
- vUUXe4T07ElowFzD5i4YZHwjPrHl8bKn87JYgrZTnRKpC+vgHCbWrGTUaw3IKg+cVsIM
- cdwzWTgkwhbNzfHKEQbN9bml07+Cm7LkuNUh4MTfZLBY974YLuB2BTbSsnwShY0dY4qH
- +45iT7mwmNE6pThLSW+uY1qifi2zVrbdKoLzDBkWfYazI+EdDrDpA4nJABHAZjjCDShP
- VUjrRyfW5pVhSMTrpLrSrl9EHBr6c5b+KM1tfoo01RjpsU/fTW5abu9dfD3PeN3aMt93
- MaIA==
-X-Gm-Message-State: AOJu0YwFx/xq1b7i1CkdDjIvUYmLFRVga++73zeN/VmHSYrKfEYv5l/n
- FUL8lFC9zY5s/p0ySEv89pExUA==
-X-Google-Smtp-Source: AGHT+IGe2trxy8S1Nk05p/8OP4sAUOYJIdJJKnBdLFEuEMIdWd3O1Y9jHdH7BvfNu2H/5mCl7eEXvQ==
-X-Received: by 2002:adf:ef4a:0:b0:314:2fdd:28ef with SMTP id
- c10-20020adfef4a000000b003142fdd28efmr17551837wrp.18.1697035859016; 
- Wed, 11 Oct 2023 07:50:59 -0700 (PDT)
-Received: from rockhopper.ba.rivosinc.com (214.11.169.217.in-addr.arpa.
- [217.169.11.214]) by smtp.gmail.com with ESMTPSA id
- n16-20020a05600c3b9000b0040684abb623sm19709208wms.24.2023.10.11.07.50.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Oct 2023 07:50:58 -0700 (PDT)
-From: Rob Bradford <rbradford@rivosinc.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, atishp@rivosinc.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- Rob Bradford <rbradford@rivosinc.com>
-Subject: [PATCH v2 3/6] target/riscv: Use existing PMU counter mask in FDT
- generation
-Date: Wed, 11 Oct 2023 15:45:51 +0100
-Message-ID: <20231011145032.81509-4-rbradford@rivosinc.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20231011145032.81509-1-rbradford@rivosinc.com>
-References: <20231011145032.81509-1-rbradford@rivosinc.com>
+ bh=qUgTTvatpJ3XxLGD2nR5U17drPlzhAEMt5UHIAR1kSE=;
+ b=jGlLcrNlG77GcRQth0QwKUU8SbtDBrF5/im+WxH0RWdRmBnNMRBC1mjQmHin1P3loa
+ f2dM7Qq5QiD0czTHb5MHSW5OTK2i5+IDZFwFHfiuZKHLIexRZG3QeGiQ3oNLDXHG0XjQ
+ +7/nwwlIYNG2m7hbeJ7Lv0vCXd/mapKPIGLDwggB9gN+jJnpipI2kKP7ef8Ya/Jp3xzj
+ /HPjlUKCbLd/gYbzwhs8iMWu6sBoM7PKq4Nqj01peZOgdiQpGlIDoI+1boB+C4mPYhPw
+ NWg9yCKp7xzWcYbCU7wwgEM0j33+NWMunvkiMVsz3j9JvjnC1w0T08wlYCbfm+Ohqi6V
+ gtaA==
+X-Gm-Message-State: AOJu0YwmypfzCz7u4BjZiyC2da8BJIRNKf6b9vv93FRMYf39/lNGf0d2
+ jKjbVvHY6n/8XvaCgy00z8H9aJG7Nfqimr5kqVI+EQ==
+X-Google-Smtp-Source: AGHT+IESMWXkg8EbIlKaLHITnwFeGfsDo0dubAcyJtN6whs3fb0SNTtlOasrKukUnLX1g8OMSbK7nY69nyXxmX+ID5Q=
+X-Received: by 2002:ac8:5b11:0:b0:40b:784:a06c with SMTP id
+ m17-20020ac85b11000000b0040b0784a06cmr30195744qtw.0.1697038480641; Wed, 11
+ Oct 2023 08:34:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::432;
- envelope-from=rbradford@rivosinc.com; helo=mail-wr1-x432.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+References: <20230925111025.543094-1-mchitale@ventanamicro.com>
+ <CAKmqyKP5kWQRUHBhHsXOFKuiB+Ac6cJGTRq9sBXsGD9G+1SNZA@mail.gmail.com>
+In-Reply-To: <CAKmqyKP5kWQRUHBhHsXOFKuiB+Ac6cJGTRq9sBXsGD9G+1SNZA@mail.gmail.com>
+From: Mayuresh Chitale <mchitale@ventanamicro.com>
+Date: Wed, 11 Oct 2023 21:04:04 +0530
+Message-ID: <CAN37VV7YBOn0OZ-ih4thwqNdbF9LAo9p9zJOBsWK6QsUXaDi=g@mail.gmail.com>
+Subject: Re: [PATCH v2] target/riscv: pmp: Ignore writes when RW=01
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Alistair Francis <alistair.francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::82a;
+ envelope-from=mchitale@ventanamicro.com; helo=mail-qt1-x82a.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -97,62 +90,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-During the FDT generation use the existing mask containing the enabled
-counters rather then generating a new one. Using the existing mask will
-support the use of discontinuous counters.
-
-Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
----
- hw/riscv/virt.c    | 2 +-
- target/riscv/pmu.c | 6 +-----
- target/riscv/pmu.h | 2 +-
- 3 files changed, 3 insertions(+), 7 deletions(-)
-
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 5edc1d98d2..acdbaf9da5 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -722,7 +722,7 @@ static void create_fdt_pmu(RISCVVirtState *s)
-     pmu_name = g_strdup_printf("/pmu");
-     qemu_fdt_add_subnode(ms->fdt, pmu_name);
-     qemu_fdt_setprop_string(ms->fdt, pmu_name, "compatible", "riscv,pmu");
--    riscv_pmu_generate_fdt_node(ms->fdt, hart.cfg.pmu_num, pmu_name);
-+    riscv_pmu_generate_fdt_node(ms->fdt, hart.pmu_avail_ctrs, pmu_name);
- 
-     g_free(pmu_name);
- }
-diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
-index 13801ccb78..7ddf4977b1 100644
---- a/target/riscv/pmu.c
-+++ b/target/riscv/pmu.c
-@@ -34,13 +34,9 @@
-  * to provide the correct value as well. Heterogeneous PMU per hart is not
-  * supported yet. Thus, number of counters are same across all harts.
-  */
--void riscv_pmu_generate_fdt_node(void *fdt, int num_ctrs, char *pmu_name)
-+void riscv_pmu_generate_fdt_node(void *fdt, uint32_t cmask, char *pmu_name)
- {
-     uint32_t fdt_event_ctr_map[15] = {};
--    uint32_t cmask;
--
--    /* All the programmable counters can map to any event */
--    cmask = MAKE_32BIT_MASK(3, num_ctrs);
- 
-    /*
-     * The event encoding is specified in the SBI specification
-diff --git a/target/riscv/pmu.h b/target/riscv/pmu.h
-index 88e0713296..505fc850d3 100644
---- a/target/riscv/pmu.h
-+++ b/target/riscv/pmu.h
-@@ -28,6 +28,6 @@ void riscv_pmu_init(RISCVCPU *cpu, Error **errp);
- int riscv_pmu_update_event_map(CPURISCVState *env, uint64_t value,
-                                uint32_t ctr_idx);
- int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx);
--void riscv_pmu_generate_fdt_node(void *fdt, int num_counters, char *pmu_name);
-+void riscv_pmu_generate_fdt_node(void *fdt, uint32_t cmask, char *pmu_name);
- int riscv_pmu_setup_timer(CPURISCVState *env, uint64_t value,
-                           uint32_t ctr_idx);
--- 
-2.41.0
-
+On Mon, Oct 9, 2023 at 6:56=E2=80=AFAM Alistair Francis <alistair23@gmail.c=
+om> wrote:
+>
+> On Mon, Sep 25, 2023 at 9:11=E2=80=AFPM Mayuresh Chitale
+> <mchitale@ventanamicro.com> wrote:
+> >
+> > As per the Priv spec: "The R, W, and X fields form a collective WARL
+> > field for which the combinations with R=3D0 and W=3D1 are reserved."
+> > However currently such writes are not ignored as ought to be. The
+> > combinations with RW=3D01 are allowed only when the Smepmp extension
+> > is enabled and mseccfg.MML is set.
+> >
+> > Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+>
+> Do you mind rebasing this on
+> https://github.com/alistair23/qemu/tree/riscv-to-apply.next
+Ok, will do that.
+>
+> Alistair
+>
+> > ---
+> >  target/riscv/pmp.c | 5 +++++
+> >  1 file changed, 5 insertions(+)
+> >
+> > diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> > index 5b14eb511a..8e25f145e0 100644
+> > --- a/target/riscv/pmp.c
+> > +++ b/target/riscv/pmp.c
+> > @@ -120,6 +120,11 @@ static void pmp_write_cfg(CPURISCVState *env, uint=
+32_t pmp_index, uint8_t val)
+> >          if (locked) {
+> >              qemu_log_mask(LOG_GUEST_ERROR, "ignoring pmpcfg write - lo=
+cked\n");
+> >          } else {
+> > +            /* If !mseccfg.MML then ignore writes with encoding RW=3D0=
+1 */
+> > +            if ((val & PMP_WRITE) && !(val & PMP_READ) &&
+> > +                !MSECCFG_MML_ISSET(env)) {
+> > +                val &=3D ~(PMP_WRITE | PMP_READ);
+> > +            }
+> >              env->pmp_state.pmp[pmp_index].cfg_reg =3D val;
+> >              pmp_update_rule(env, pmp_index);
+> >          }
+> > --
+> > 2.34.1
+> >
+> >
 
