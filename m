@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FA7CCD98E0
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Oct 2023 01:00:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8574CD98D9
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Oct 2023 01:02:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qqNaK-0000u0-Li; Tue, 10 Oct 2023 21:00:24 -0400
+	id 1qqNbb-0001oy-Qr; Tue, 10 Oct 2023 21:01:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qqNaJ-0000tc-Vh; Tue, 10 Oct 2023 21:00:24 -0400
-Received: from mail-vk1-xa2e.google.com ([2607:f8b0:4864:20::a2e])
+ id 1qqNbJ-0001me-Q2; Tue, 10 Oct 2023 21:01:29 -0400
+Received: from mail-ua1-x931.google.com ([2607:f8b0:4864:20::931])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qqNaI-0005oT-9j; Tue, 10 Oct 2023 21:00:23 -0400
-Received: by mail-vk1-xa2e.google.com with SMTP id
- 71dfb90a1353d-49d6bd3610cso2074721e0c.1; 
- Tue, 10 Oct 2023 18:00:19 -0700 (PDT)
+ id 1qqNbH-00066g-To; Tue, 10 Oct 2023 21:01:25 -0400
+Received: by mail-ua1-x931.google.com with SMTP id
+ a1e0cc1a2514c-7b07719089aso268749241.0; 
+ Tue, 10 Oct 2023 18:01:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696986019; x=1697590819; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1696986081; x=1697590881; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=++o7UftkOXHi8q803uDAaQvUzbJ0NQP3tioGwwFGfjU=;
- b=eM2HGa5Owl3OUq66klilXQOR0mC+dtctutjW1lzsSF8ofUStEzdnaAiJxyyRMZtJKv
- O5sQsTMWx5Oa6MtQBu2AKfpnDPqQwJpZ+C34BlavJPnXHqYPaB16Wdy8Rx4Eys/H3nJ6
- XkJzc7xEQH313GCyNqAEVbaBXjNAe7OiuUYDn4UxqJarekSljPuMIqp+fPbcwPT4QzlT
- lUhEpOgDkifDk3xF40Kj0PSfJCh1SRPC2vxwW4HneZcvD5OAe2a9A+Yy64uox+VGQulb
- QaOPXyxjcL3+ZurwK5B/ScIl453Se4t0PyqOpDAAcS0WHwThHi4rg7EbEqrmxYicgJsV
- qRmA==
+ bh=qya31W9YBJ8jOwGlDzkTtT3a4oUoppVZSkQ76dfvfI4=;
+ b=h3tV2/y8zxhX5EnZnflRs9v8+sATYROk1r3SUUlffxoXH1v88xUSd1lBe3S0O4teSj
+ gyCJJjA7SWRW4ub3C4kFRdJpyxTuaB3fVtFtCFHu1Nzpv2TLGZqXtVjmylORPC2iD6l8
+ uGPDSXSeli6FCUsFoFQQl8zGrSQV2gqiFKe81FZodTGLGAnfjCOqIMQhHyo+Hoo7uvIf
+ Q7szpFF5Ghr7jJ8MhgdEKltQnLZJa8ET+TjNg1u1tpRumbFKy47OkdQ8RVy9v9At3HPW
+ cTld/T/obtKbzMgfr1akakfHGyCsI7bDAf/mwBvYkRnmazLfFE2W3U86eIhyQ9Yx2VZG
+ 9B+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696986019; x=1697590819;
+ d=1e100.net; s=20230601; t=1696986081; x=1697590881;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=++o7UftkOXHi8q803uDAaQvUzbJ0NQP3tioGwwFGfjU=;
- b=gEiCxjs4WWKLytoM3PX+6Vx+W8bsbTsmYu+OI6/jwlRBcNy5b3wvPJvQiFqgHdxuXU
- cw56wKYvncBYV3Fg8xtzLWgHqgNHA8Wc0TvEV6amKrvNAbDKFWq4zuNOGw8owvIXfh35
- DFiISU/uLEZVD5PkQ4gsVj5wLxp5KrDB+On6HT5GWEREJvgwDMU1LiQqqCQedzN1sqaO
- zaAoIEqs2cAji/UhSlKk1cfSK9v2yh6FrbO2zjgZoOI10DjrpB1jyeSwteaZ/ypxQ6SU
- gzGMfIBZP7e0iI5lc4V86MuLpGfKI7XQHY8PITWt/ZM3ZpfEvZvMb6ToPtwTt6AlR/u9
- oSmQ==
-X-Gm-Message-State: AOJu0Yz48CzaJ4yqKY+noQKdt15I5DuMr53trnWbeqBUhehATv4KesOv
- v73FTneTzx1oYI2gfy9qIWyQjEx4kzzh0I95qsE=
-X-Google-Smtp-Source: AGHT+IGOTekLtXsKXqcaZWKvLoEU95j0yEnCWAbkefEpVHJTMrfRmKg+4u5NpSxd4S2qicxHJJhgrlzrmwmIaho5mrI=
-X-Received: by 2002:a1f:da84:0:b0:49a:bff1:23 with SMTP id
- r126-20020a1fda84000000b0049abff10023mr16645118vkg.5.1696986018847; 
- Tue, 10 Oct 2023 18:00:18 -0700 (PDT)
+ bh=qya31W9YBJ8jOwGlDzkTtT3a4oUoppVZSkQ76dfvfI4=;
+ b=AdhfhEWZ8LVgfyefZsOB/fPqIFrEU9GYCNQ7+ytXhRu5oCNL6oVY0xPRXERNT06Yxx
+ hDPEM8wQ1hqyPUSpIBOIbh0QxUXogCkjVfsjgZgffgVP/3mz9cYb1K9Zvm8YpAB2ntj5
+ GjXR5qvzC4FS+hN47/yPgi27g32MrW0cLd19gjjY4NiUUEMI8J0R/w6sGywV+68fuUSN
+ g++j2L+PyTbuMmV5QozIdkR9hEnFQqcVhSOxRfFC/6SyZ9ufBy9VYsX7B/MjNSIo0K9d
+ m3pBpJvY6qSRR7C4UidN2VzdjEWOZ8cguHlvnUGg2hkLlabj8cdCxcO78hu0gkVWRn7i
+ bauA==
+X-Gm-Message-State: AOJu0Yz2BOYWrSSRr7mVRlaEi0sp1l/4YNFmn/rt/Roj4woD2mAKdEzT
+ e4OfyiWCqqWL/SDylouRHt77ycVVjXqMvdltv0g=
+X-Google-Smtp-Source: AGHT+IGuGBMu+fD2eeIzNW1kyXyJJ68VOmVAx+oSmgAtCubp7HN2WQLRGSI9Xtoi0HeHnLLEfUyvlGbFnInTZH+TSsI=
+X-Received: by 2002:a05:6122:3193:b0:495:f495:bab1 with SMTP id
+ ch19-20020a056122319300b00495f495bab1mr11941489vkb.0.1696986081169; Tue, 10
+ Oct 2023 18:01:21 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231009164104.369749-1-alex.bennee@linaro.org>
- <20231009164104.369749-7-alex.bennee@linaro.org>
-In-Reply-To: <20231009164104.369749-7-alex.bennee@linaro.org>
+ <20231009164104.369749-9-alex.bennee@linaro.org>
+In-Reply-To: <20231009164104.369749-9-alex.bennee@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 11 Oct 2023 10:59:52 +1000
-Message-ID: <CAKmqyKM-93jCM5-Q4+wJJ7Yv1Z2OX6jr8nC3qzSQLFBi5y1gLg@mail.gmail.com>
-Subject: Re: [PATCH 06/25] configure: allow user to override docker engine
+Date: Wed, 11 Oct 2023 11:00:54 +1000
+Message-ID: <CAKmqyKMOSLJ-D2+XPmcYZcBDEFzc+2FypYjb_Kv2qoyeG16oAg@mail.gmail.com>
+Subject: Re: [PATCH 08/25] gdbstub: Fix target_xml initialization
 To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
 Cc: qemu-devel@nongnu.org, Thomas Huth <thuth@redhat.com>, 
  Xiaojuan Yang <yangxiaojuan@loongson.cn>,
@@ -87,11 +87,12 @@ Cc: qemu-devel@nongnu.org, Thomas Huth <thuth@redhat.com>,
  Song Gao <gaosong@loongson.cn>, 
  Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>, qemu-s390x@nongnu.org, 
  =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Akihiko Odaki <akihiko.odaki@daynix.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2e;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::931;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x931.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -115,13 +116,18 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Oct 10, 2023 at 3:52=E2=80=AFAM Alex Benn=C3=A9e <alex.bennee@linar=
+On Tue, Oct 10, 2023 at 4:36=E2=80=AFAM Alex Benn=C3=A9e <alex.bennee@linar=
 o.org> wrote:
 >
-> If you have both engines installed but one is broken you are stuck
-> with the automagic. Allow the user to override the engine for this
-> case.
+> From: Akihiko Odaki <akihiko.odaki@daynix.com>
 >
+> target_xml is no longer a fixed-length array but a pointer to a
+> variable-length memory.
+>
+> Fixes: 56e534bd11 ("gdbstub: refactor get_feature_xml")
+> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> Message-Id: <20230912224107.29669-2-akihiko.odaki@daynix.com>
 > Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -129,59 +135,23 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  configure | 8 ++++++--
->  1 file changed, 6 insertions(+), 2 deletions(-)
+>  gdbstub/softmmu.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/configure b/configure
-> index 707132a3ae..ebad155d9e 100755
-> --- a/configure
-> +++ b/configure
-> @@ -180,6 +180,7 @@ fi
->  # some defaults, based on the host environment
+> diff --git a/gdbstub/softmmu.c b/gdbstub/softmmu.c
+> index 9f0b8b5497..42645d2220 100644
+> --- a/gdbstub/softmmu.c
+> +++ b/gdbstub/softmmu.c
+> @@ -292,7 +292,7 @@ static int find_cpu_clusters(Object *child, void *opa=
+que)
+>          assert(cluster->cluster_id !=3D UINT32_MAX);
+>          process->pid =3D cluster->cluster_id + 1;
+>          process->attached =3D false;
+> -        process->target_xml[0] =3D '\0';
+> +        process->target_xml =3D NULL;
 >
->  # default parameters
-> +container_engine=3D"auto"
->  cpu=3D""
->  cross_compile=3D"no"
->  cross_prefix=3D""
-> @@ -787,6 +788,8 @@ for opt do
->    ;;
->    --disable-containers) use_containers=3D"no"
->    ;;
-> +  --container-engine=3D*) container_engine=3D"$optarg"
-> +  ;;
->    --gdb=3D*) gdb_bin=3D"$optarg"
->    ;;
->    # everything else has the same name in configure and meson
-> @@ -921,6 +924,7 @@ Advanced options (experts only):
->    --enable-plugins
->                             enable plugins via shared library loading
->    --disable-containers     don't use containers for cross-building
-> +  --container-engine=3DTYPE  which container engine to use [$container_e=
-ngine]
->    --gdb=3DGDB-path           gdb to use for gdbstub tests [$gdb_bin]
->  EOF
->    meson_options_help
-> @@ -1195,14 +1199,14 @@ fi
->  container=3D"no"
->  runc=3D""
->  if test $use_containers =3D "yes" && (has "docker" || has "podman"); the=
-n
-> -    case $($python "$source_path"/tests/docker/docker.py probe) in
-> +    case $($python "$source_path"/tests/docker/docker.py --engine "$cont=
-ainer_engine" probe) in
->          *docker) container=3Ddocker ;;
->          podman) container=3Dpodman ;;
->          no) container=3Dno ;;
->      esac
->      if test "$container" !=3D "no"; then
->          docker_py=3D"$python $source_path/tests/docker/docker.py --engin=
-e $container"
-> -        runc=3D$($python "$source_path"/tests/docker/docker.py probe)
-> +        runc=3D$container
->      fi
->  fi
->
+>          return 0;
+>      }
 > --
 > 2.39.2
 >
