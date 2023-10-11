@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D28CCCD98D9
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Oct 2023 00:56:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66CE1CD98E0
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Oct 2023 00:58:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qqNWB-0006RY-9F; Tue, 10 Oct 2023 20:56:07 -0400
+	id 1qqNYR-0007XP-BB; Tue, 10 Oct 2023 20:58:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qqNW6-0006NU-FD; Tue, 10 Oct 2023 20:56:02 -0400
-Received: from mail-ua1-x92f.google.com ([2607:f8b0:4864:20::92f])
+ id 1qqNYP-0007Vu-7l; Tue, 10 Oct 2023 20:58:25 -0400
+Received: from mail-ua1-x92e.google.com ([2607:f8b0:4864:20::92e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qqNW4-0004hA-Du; Tue, 10 Oct 2023 20:56:02 -0400
-Received: by mail-ua1-x92f.google.com with SMTP id
- a1e0cc1a2514c-7ab5150a7b5so277118241.0; 
- Tue, 10 Oct 2023 17:55:58 -0700 (PDT)
+ id 1qqNYN-0005Om-GB; Tue, 10 Oct 2023 20:58:24 -0400
+Received: by mail-ua1-x92e.google.com with SMTP id
+ a1e0cc1a2514c-7b5f0bbe137so699844241.2; 
+ Tue, 10 Oct 2023 17:58:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696985758; x=1697590558; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1696985901; x=1697590701; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MHGrLjRkhYiLrdRBRmqfm98vUBuT0XXmW8P1q1p4PRg=;
- b=h3KpD9mLTfqORL5r0T4sPiKTdlhrYKdew0frDbj4i66HYdU+bWsdLaackOA1cmeSSg
- v5YlHu9oCA5192LrhDN2t3Tydz3Ek19SlP57GERPxPNvsKIWDbzjks//S/gNb5o1Tf04
- 8ZgKkdfjVaMx8IXlmVUF7gATcVCAtre/53YyQoQ4F9+1OW7A6SgtSQwB7wbSu8NiWNbI
- 0C6UN2JcGI+S9oNmwUtTOaoWNgz7544JoY2EAmfsdL6nTCo/bfekPD+cBGpJ86NrsGda
- mF9A0u4Scu2rFP653mEW4qHxDECKtbkXJ1mrISYYBAF+CA9USOxINGQsq+zr8L9DfiJD
- kbqw==
+ bh=A57TM/3+3Y4XB6+NXinNYH6inAvqYR+M0a5QwRks3Bg=;
+ b=Zhvy/5uuCkK19q/3FkBsxk4nOjXJrkik+2wjOYWMjoRGEOMGeyYsbE/r9BvhSxCrge
+ 70SIoU8f490nsXCyPNcpKofSocg8ilnpF29HA/j4aSExJfmsCgO46kSDJNcGFgrde0Uj
+ e8rMAe9S8obt2+qxicS6PBKmz/zYJlHqU+wWpIEzFASG2K3oPMODW9H/ee9C5r+rqcwJ
+ hSsv5nTOzqiBI5IA8qGzBzM3/lnJzAjstIaon6htdP9vI0SV1L8IAF3mlgZWc4+3s4MR
+ I+J+smVU9FMqPFcFpjmqM9W0Qvkqx9BpwFzUk5OyIhIYX1FBrGXj1E+zYOc6mrVJfoJp
+ EZSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696985758; x=1697590558;
+ d=1e100.net; s=20230601; t=1696985901; x=1697590701;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MHGrLjRkhYiLrdRBRmqfm98vUBuT0XXmW8P1q1p4PRg=;
- b=tgWjoH0PXxhdN1ZuqLDp9F9r7E+AQB9CCU2S51bUFjKM2YWoJCdCTHmy42sJocXeoq
- Uhk7rMFafAk2fQBEX1xyG4XIYw8X/sdmnsQ6t/CK4xlthB1pm0YXO9yFSAn8RoWQrYob
- nKKD/e7kvqEAB1ursTq+2UxikxYZcm9qj2B6AywjGRX86F9k5jRjJP1Rkl2MAh8eNSFX
- fI3wcHDm7zpAxPb2r/rr6ecAwyMj+9sJHZRT05qCkZCyYXQq3d8poiMn4dvDpgneeWs1
- Tu7VFis4fTpzSBJ5A3AzRrQdTvUUz54yNs+rrpYasyviMMZ1hIgJNYZzzZQAWpyNhrGP
- GexA==
-X-Gm-Message-State: AOJu0YzHWspheGF/PQ4jGDq13CDE6vhTRn+VfyRUmqNnLYodK2UyIwGa
- gNc+R3E/xyTrvPGC4X0S0pYI34lzziqGKtLbODw=
-X-Google-Smtp-Source: AGHT+IHBzNjhlzia7qZzZCgNYbRewp3Gi3H7+b/6N6QZgbVnveVKuAdMAGjdIhOd9DKwJjp/TZlHo8ToQ6DmXCIZAbU=
-X-Received: by 2002:a05:6102:41a2:b0:452:7341:a098 with SMTP id
- cd34-20020a05610241a200b004527341a098mr10527796vsb.0.1696985757794; Tue, 10
- Oct 2023 17:55:57 -0700 (PDT)
+ bh=A57TM/3+3Y4XB6+NXinNYH6inAvqYR+M0a5QwRks3Bg=;
+ b=gLOrRDLovffsdgNbLtMb5dfvKRHq+rtfGgkSm5xQCVQwAc3eNF6H7h/bP4WbxQbNTg
+ WJGcY1b16TJTAohlOYGPPo7eeb3PmVPIS17BIXTHPaSU+Z0ZOZOIQqzYAl8HuETStN5/
+ vSpMT8psqaoekETkToUBiuIG4SPMcvq+VkE84XiTo1+pzZ7qkElF9mIoKhc+LDSbzMLg
+ h72F+SO6FOe9aMVuyHpYYDf40UPxJiI0fSW4D0KoYLT7CQ1xqDIGbnlSbHn1wJ7dWAhr
+ yB4470xKZIQ0wglYU+ig4yWznw1jU9nCj/L8mzUPzHzpR2jmrP6nSkD1nEsOUfRlYvt0
+ YRYw==
+X-Gm-Message-State: AOJu0YwSXb8KhtMHVoOA43YugHpaTcenzw0XzihGgRFo/0GisqH2jn1I
+ m9cDeR7sdvsN9KPVeJn+wNN1deeSY4BisRUqNkM=
+X-Google-Smtp-Source: AGHT+IF1/cGebYEyPjv1zp7eYAb2uu01zcnezyBsF/1P9pm03X3N0T/+xSZ0wkvVYuuaOpnngMp2DUm51frLL3M8bdk=
+X-Received: by 2002:a05:6102:4a5:b0:44d:5a92:ec40 with SMTP id
+ r5-20020a05610204a500b0044d5a92ec40mr19039711vsa.24.1696985901084; Tue, 10
+ Oct 2023 17:58:21 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231009164104.369749-1-alex.bennee@linaro.org>
- <20231009164104.369749-15-alex.bennee@linaro.org>
-In-Reply-To: <20231009164104.369749-15-alex.bennee@linaro.org>
+ <20231009164104.369749-20-alex.bennee@linaro.org>
+In-Reply-To: <20231009164104.369749-20-alex.bennee@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 11 Oct 2023 10:55:31 +1000
-Message-ID: <CAKmqyKN1BSbHdhXhHQcywp0a-A3L1qdD46yBX_s0dAQDeFxbig@mail.gmail.com>
-Subject: Re: [PATCH 14/25] hw/core/cpu: Return static value with
- gdb_arch_name()
+Date: Wed, 11 Oct 2023 10:57:54 +1000
+Message-ID: <CAKmqyKMa1FU=gvOg8XVsexD6KoF_aZLU7Z=P=dExz3vu4sTEsA@mail.gmail.com>
+Subject: Re: [PATCH 19/25] gdbstub: Replace gdb_regs with an array
 To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
 Cc: qemu-devel@nongnu.org, Thomas Huth <thuth@redhat.com>, 
  Xiaojuan Yang <yangxiaojuan@loongson.cn>,
@@ -92,8 +91,8 @@ Cc: qemu-devel@nongnu.org, Thomas Huth <thuth@redhat.com>,
  Akihiko Odaki <akihiko.odaki@daynix.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92f;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92e;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92e.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -117,21 +116,18 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Oct 10, 2023 at 2:44=E2=80=AFAM Alex Benn=C3=A9e <alex.bennee@linar=
+On Tue, Oct 10, 2023 at 2:47=E2=80=AFAM Alex Benn=C3=A9e <alex.bennee@linar=
 o.org> wrote:
 >
 > From: Akihiko Odaki <akihiko.odaki@daynix.com>
 >
-> All implementations of gdb_arch_name() returns dynamic duplicates of
-> static strings. It's also unlikely that there will be an implementation
-> of gdb_arch_name() that returns a truly dynamic value due to the nature
-> of the function returning a well-known identifiers. Qualify the value
-> gdb_arch_name() with const and make all of its implementations return
-> static strings.
+> An array is a more appropriate data structure than a list for gdb_regs
+> since it is initialized only with append operation and read-only after
+> initialization.
 >
 > Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-> Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
-> Message-Id: <20230912224107.29669-8-akihiko.odaki@daynix.com>
+> Message-Id: <20230912224107.29669-13-akihiko.odaki@daynix.com>
+> [AJB: fixed a checkpatch violation]
 > Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -139,233 +135,112 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  include/hw/core/cpu.h  | 2 +-
->  target/ppc/internal.h  | 2 +-
->  gdbstub/gdbstub.c      | 3 +--
->  target/arm/cpu.c       | 6 +++---
->  target/arm/cpu64.c     | 4 ++--
->  target/i386/cpu.c      | 6 +++---
->  target/loongarch/cpu.c | 8 ++++----
->  target/ppc/gdbstub.c   | 6 +++---
->  target/riscv/cpu.c     | 6 +++---
->  target/s390x/cpu.c     | 4 ++--
->  target/tricore/cpu.c   | 4 ++--
->  11 files changed, 25 insertions(+), 26 deletions(-)
+>  include/hw/core/cpu.h |  2 +-
+>  gdbstub/gdbstub.c     | 35 +++++++++++++++++++++--------------
+>  2 files changed, 22 insertions(+), 15 deletions(-)
 >
 > diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-> index e02bc5980f..7b8347ed5a 100644
+> index 7b8347ed5a..3968369554 100644
 > --- a/include/hw/core/cpu.h
 > +++ b/include/hw/core/cpu.h
-> @@ -165,7 +165,7 @@ struct CPUClass {
->      vaddr (*gdb_adjust_breakpoint)(CPUState *cpu, vaddr addr);
+> @@ -502,7 +502,7 @@ struct CPUState {
 >
->      const char *gdb_core_xml_file;
-> -    gchar * (*gdb_arch_name)(CPUState *cpu);
-> +    const gchar * (*gdb_arch_name)(CPUState *cpu);
->      const char * (*gdb_get_dynamic_xml)(CPUState *cpu, const char *xmlna=
-me);
+>      CPUJumpCache *tb_jmp_cache;
 >
->      void (*disas_set_info)(CPUState *cpu, disassemble_info *info);
-> diff --git a/target/ppc/internal.h b/target/ppc/internal.h
-> index 15803bc313..c881c67a8b 100644
-> --- a/target/ppc/internal.h
-> +++ b/target/ppc/internal.h
-> @@ -221,7 +221,7 @@ void destroy_ppc_opcodes(PowerPCCPU *cpu);
->
->  /* gdbstub.c */
->  void ppc_gdb_init(CPUState *cs, PowerPCCPUClass *ppc);
-> -gchar *ppc_gdb_arch_name(CPUState *cs);
-> +const gchar *ppc_gdb_arch_name(CPUState *cs);
->
->  /**
->   * prot_for_access_type:
+> -    struct GDBRegisterState *gdb_regs;
+> +    GArray *gdb_regs;
+>      int gdb_num_regs;
+>      int gdb_num_g_regs;
+>      QTAILQ_ENTRY(CPUState) node;
 > diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-> index bba2640293..a20169c27b 100644
+> index 62608a5389..b1532118d1 100644
 > --- a/gdbstub/gdbstub.c
 > +++ b/gdbstub/gdbstub.c
-> @@ -380,10 +380,9 @@ static const char *get_feature_xml(const char *p, co=
-nst char **newp,
->                              "<target>");
+> @@ -51,7 +51,6 @@ typedef struct GDBRegisterState {
+>      gdb_get_reg_cb get_reg;
+>      gdb_set_reg_cb set_reg;
+>      const char *xml;
+> -    struct GDBRegisterState *next;
+>  } GDBRegisterState;
 >
->              if (cc->gdb_arch_name) {
-> -                g_autofree gchar *arch =3D cc->gdb_arch_name(cpu);
->                  g_string_append_printf(xml,
->                                         "<architecture>%s</architecture>"=
-,
-> -                                       arch);
-> +                                       cc->gdb_arch_name(cpu));
->              }
->              g_string_append(xml, "<xi:include href=3D\"");
->              g_string_append(xml, cc->gdb_core_xml_file);
-> diff --git a/target/arm/cpu.c b/target/arm/cpu.c
-> index b65e8cfea3..6c6c551573 100644
-> --- a/target/arm/cpu.c
-> +++ b/target/arm/cpu.c
-> @@ -2319,15 +2319,15 @@ static Property arm_cpu_properties[] =3D {
->      DEFINE_PROP_END_OF_LIST()
->  };
->
-> -static gchar *arm_gdb_arch_name(CPUState *cs)
-> +static const gchar *arm_gdb_arch_name(CPUState *cs)
->  {
->      ARMCPU *cpu =3D ARM_CPU(cs);
->      CPUARMState *env =3D &cpu->env;
->
->      if (arm_feature(env, ARM_FEATURE_IWMMXT)) {
-> -        return g_strdup("iwmmxt");
-> +        return "iwmmxt";
+>  GDBState gdbserver_state;
+> @@ -386,7 +385,8 @@ static const char *get_feature_xml(const char *p, con=
+st char **newp,
+>                  xml,
+>                  g_markup_printf_escaped("<xi:include href=3D\"%s\"/>",
+>                                          cc->gdb_core_xml_file));
+> -            for (r =3D cpu->gdb_regs; r; r =3D r->next) {
+> +            for (guint i =3D 0; i < cpu->gdb_regs->len; i++) {
+> +                r =3D &g_array_index(cpu->gdb_regs, GDBRegisterState, i)=
+;
+>                  g_ptr_array_add(
+>                      xml,
+>                      g_markup_printf_escaped("<xi:include href=3D\"%s\"/>=
+",
+> @@ -430,7 +430,8 @@ static int gdb_read_register(CPUState *cpu, GByteArra=
+y *buf, int reg)
+>          return cc->gdb_read_register(cpu, buf, reg);
 >      }
-> -    return g_strdup("arm");
-> +    return "arm";
->  }
 >
->  #ifndef CONFIG_USER_ONLY
-> diff --git a/target/arm/cpu64.c b/target/arm/cpu64.c
-> index 811f3b38c2..1cb9d5b81a 100644
-> --- a/target/arm/cpu64.c
-> +++ b/target/arm/cpu64.c
-> @@ -781,9 +781,9 @@ static void aarch64_cpu_finalizefn(Object *obj)
->  {
->  }
->
-> -static gchar *aarch64_gdb_arch_name(CPUState *cs)
-> +static const gchar *aarch64_gdb_arch_name(CPUState *cs)
->  {
-> -    return g_strdup("aarch64");
-> +    return "aarch64";
->  }
->
->  static void aarch64_cpu_class_init(ObjectClass *oc, void *data)
-> diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-> index 9fad31b8db..c09bab4281 100644
-> --- a/target/i386/cpu.c
-> +++ b/target/i386/cpu.c
-> @@ -5915,12 +5915,12 @@ static void x86_cpu_load_model(X86CPU *cpu, X86CP=
-UModel *model)
->      memset(&env->user_features, 0, sizeof(env->user_features));
->  }
->
-> -static gchar *x86_gdb_arch_name(CPUState *cs)
-> +static const gchar *x86_gdb_arch_name(CPUState *cs)
->  {
->  #ifdef TARGET_X86_64
-> -    return g_strdup("i386:x86-64");
-> +    return "i386:x86-64";
->  #else
-> -    return g_strdup("i386");
-> +    return "i386";
->  #endif
->  }
->
-> diff --git a/target/loongarch/cpu.c b/target/loongarch/cpu.c
-> index 2bea7ca5d5..ef1bf89dac 100644
-> --- a/target/loongarch/cpu.c
-> +++ b/target/loongarch/cpu.c
-> @@ -766,9 +766,9 @@ static void loongarch_cpu_class_init(ObjectClass *c, =
-void *data)
->  #endif
->  }
->
-> -static gchar *loongarch32_gdb_arch_name(CPUState *cs)
-> +static const gchar *loongarch32_gdb_arch_name(CPUState *cs)
->  {
-> -    return g_strdup("loongarch32");
-> +    return "loongarch32";
->  }
->
->  static void loongarch32_cpu_class_init(ObjectClass *c, void *data)
-> @@ -780,9 +780,9 @@ static void loongarch32_cpu_class_init(ObjectClass *c=
-, void *data)
->      cc->gdb_arch_name =3D loongarch32_gdb_arch_name;
->  }
->
-> -static gchar *loongarch64_gdb_arch_name(CPUState *cs)
-> +static const gchar *loongarch64_gdb_arch_name(CPUState *cs)
->  {
-> -    return g_strdup("loongarch64");
-> +    return "loongarch64";
->  }
->
->  static void loongarch64_cpu_class_init(ObjectClass *c, void *data)
-> diff --git a/target/ppc/gdbstub.c b/target/ppc/gdbstub.c
-> index 2ad11510bf..778ef73bd7 100644
-> --- a/target/ppc/gdbstub.c
-> +++ b/target/ppc/gdbstub.c
-> @@ -589,12 +589,12 @@ static int gdb_set_vsx_reg(CPUPPCState *env, uint8_=
-t *mem_buf, int n)
->      return 0;
->  }
->
-> -gchar *ppc_gdb_arch_name(CPUState *cs)
-> +const gchar *ppc_gdb_arch_name(CPUState *cs)
->  {
->  #if defined(TARGET_PPC64)
-> -    return g_strdup("powerpc:common64");
-> +    return "powerpc:common64";
->  #else
-> -    return g_strdup("powerpc:common");
-> +    return "powerpc:common";
->  #endif
->  }
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index ac2b94b6a6..f5572704de 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -2004,17 +2004,17 @@ static Property riscv_cpu_properties[] =3D {
->      DEFINE_PROP_END_OF_LIST(),
->  };
->
-> -static gchar *riscv_gdb_arch_name(CPUState *cs)
-> +static const gchar *riscv_gdb_arch_name(CPUState *cs)
->  {
->      RISCVCPU *cpu =3D RISCV_CPU(cs);
->      CPURISCVState *env =3D &cpu->env;
->
->      switch (riscv_cpu_mxl(env)) {
->      case MXL_RV32:
-> -        return g_strdup("riscv:rv32");
-> +        return "riscv:rv32";
->      case MXL_RV64:
->      case MXL_RV128:
-> -        return g_strdup("riscv:rv64");
-> +        return "riscv:rv64";
->      default:
->          g_assert_not_reached();
+> -    for (r =3D cpu->gdb_regs; r; r =3D r->next) {
+> +    for (guint i =3D 0; i < cpu->gdb_regs->len; i++) {
+> +        r =3D &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
+>          if (r->base_reg <=3D reg && reg < r->base_reg + r->num_regs) {
+>              return r->get_reg(env, buf, reg - r->base_reg);
+>          }
+> @@ -448,7 +449,8 @@ static int gdb_write_register(CPUState *cpu, uint8_t =
+*mem_buf, int reg)
+>          return cc->gdb_write_register(cpu, mem_buf, reg);
 >      }
-> diff --git a/target/s390x/cpu.c b/target/s390x/cpu.c
-> index 4f7599d72c..6093ab0a12 100644
-> --- a/target/s390x/cpu.c
-> +++ b/target/s390x/cpu.c
-> @@ -282,9 +282,9 @@ static void s390_cpu_initfn(Object *obj)
->  #endif
->  }
 >
-> -static gchar *s390_gdb_arch_name(CPUState *cs)
-> +static const gchar *s390_gdb_arch_name(CPUState *cs)
+> -    for (r =3D cpu->gdb_regs; r; r =3D r->next) {
+> +    for (guint i =3D 0; i < cpu->gdb_regs->len; i++) {
+> +        r =3D  &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
+>          if (r->base_reg <=3D reg && reg < r->base_reg + r->num_regs) {
+>              return r->set_reg(env, mem_buf, reg - r->base_reg);
+>          }
+> @@ -461,17 +463,23 @@ void gdb_register_coprocessor(CPUState *cpu,
+>                                int num_regs, const char *xml, int g_pos)
 >  {
-> -    return g_strdup("s390:64-bit");
-> +    return "s390:64-bit";
->  }
+>      GDBRegisterState *s;
+> -    GDBRegisterState **p;
+> -
+> -    p =3D &cpu->gdb_regs;
+> -    while (*p) {
+> -        /* Check for duplicates.  */
+> -        if (strcmp((*p)->xml, xml) =3D=3D 0)
+> -            return;
+> -        p =3D &(*p)->next;
+> +    guint i;
+> +
+> +    if (cpu->gdb_regs) {
+> +        for (i =3D 0; i < cpu->gdb_regs->len; i++) {
+> +            /* Check for duplicates.  */
+> +            s =3D &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
+> +            if (strcmp(s->xml, xml) =3D=3D 0) {
+> +                return;
+> +            }
+> +        }
+> +    } else {
+> +        cpu->gdb_regs =3D g_array_new(false, false, sizeof(GDBRegisterSt=
+ate));
+> +        i =3D 0;
+>      }
 >
->  static Property s390x_cpu_properties[] =3D {
-> diff --git a/target/tricore/cpu.c b/target/tricore/cpu.c
-> index d1477622e6..5ca666ee12 100644
-> --- a/target/tricore/cpu.c
-> +++ b/target/tricore/cpu.c
-> @@ -29,9 +29,9 @@ static inline void set_feature(CPUTriCoreState *env, in=
-t feature)
->      env->features |=3D 1ULL << feature;
->  }
+> -    s =3D g_new0(GDBRegisterState, 1);
+> +    g_array_set_size(cpu->gdb_regs, i + 1);
+> +    s =3D &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
+>      s->base_reg =3D cpu->gdb_num_regs;
+>      s->num_regs =3D num_regs;
+>      s->get_reg =3D get_reg;
+> @@ -480,7 +488,6 @@ void gdb_register_coprocessor(CPUState *cpu,
 >
-> -static gchar *tricore_gdb_arch_name(CPUState *cs)
-> +static const gchar *tricore_gdb_arch_name(CPUState *cs)
->  {
-> -    return g_strdup("tricore");
-> +    return "tricore";
->  }
->
->  static void tricore_cpu_set_pc(CPUState *cs, vaddr value)
+>      /* Add to end of list.  */
+>      cpu->gdb_num_regs +=3D num_regs;
+> -    *p =3D s;
+>      if (g_pos) {
+>          if (g_pos !=3D s->base_reg) {
+>              error_report("Error: Bad gdb register numbering for '%s', "
 > --
 > 2.39.2
 >
