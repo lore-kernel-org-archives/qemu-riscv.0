@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27420CD6E77
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Oct 2023 14:51:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 499E8CD6E7C
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Oct 2023 14:51:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qqaYC-0000CB-9r; Wed, 11 Oct 2023 10:51:04 -0400
+	id 1qqaYE-0000F5-9n; Wed, 11 Oct 2023 10:51:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
- id 1qqaY8-0008Ql-LE
- for qemu-riscv@nongnu.org; Wed, 11 Oct 2023 10:51:00 -0400
-Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
+ id 1qqaYD-0000EQ-I5
+ for qemu-riscv@nongnu.org; Wed, 11 Oct 2023 10:51:05 -0400
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
- id 1qqaY6-0000V2-Kg
- for qemu-riscv@nongnu.org; Wed, 11 Oct 2023 10:51:00 -0400
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4064867903cso70926715e9.2
- for <qemu-riscv@nongnu.org>; Wed, 11 Oct 2023 07:50:58 -0700 (PDT)
+ id 1qqaYB-0000WN-MM
+ for qemu-riscv@nongnu.org; Wed, 11 Oct 2023 10:51:05 -0400
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-40566f89f6eso70914285e9.3
+ for <qemu-riscv@nongnu.org>; Wed, 11 Oct 2023 07:51:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1697035857; x=1697640657;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1697035862; x=1697640662;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sxGT1Wl6J3xowqZP+oPYuTY8pg3VyoUcjhFPxfi6Z1A=;
- b=AmzmyBk/4qj1oq+z0zWK2OJ724Dot1kVhSnkvSSejZhxMNBB/NqQm80dA+X1ka2ANF
- SjK1ETxg12OErS+Nqd3U+5SdCKQQvhOIFerWqTlV7U2yxv58GpLBin4zYQjKq9SoL0lp
- aFZf8lffxGg3NIt+72kTbmFTxr4v1sG6IjSCXtW39i44+d0vmEeMRRURaWdwi++O/X1N
- xwmxaabJy45OavMkHiyHlm9hacQgv1DPSB7TsdoJOeB/DL/8/pOotw6AChW3C8mkH/n0
- uvzqnZKoHeYTWQS5gsVrKkZkC5I5PnE10SU5u48V05UdJRHqCEEyB98MV1UpJBOQNrZb
- 3o3Q==
+ bh=TMIhHtiL1mhVrt3MIZHj1RJ7a5N5jxfuKJrNLAX/qLM=;
+ b=Rdwf0L+xlErGljzQHzz3lEFOsR9yXbOtzisCLbNPzBybx4o8HCPQVX1oTIsFUNv8uG
+ CVzacsdytJSicuRwVFZoPq/Jnk1vvCjUfrHv8XydbHMnwcxMlQLcBwtIzyK5jYBfZ6ip
+ Y60q+M2rpG2DNTuFtV8g7a3EVFfSetjftfiyyIF0ZLkCr10zfs1dtwTpmLw7erMlyncQ
+ i9ul1j69AnVlG59UhrWxmDmdjbQPh703Ep/mwA1PNewzaYIFvWY4ROqYqj3/2Yf5Q58j
+ IWjn+mYQBWlpTxEthu/ochCggSM6eB8ko9R1M4StGRcOnA/yZK7ubqC7y+h05qqWS2mA
+ WFZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697035857; x=1697640657;
+ d=1e100.net; s=20230601; t=1697035862; x=1697640662;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sxGT1Wl6J3xowqZP+oPYuTY8pg3VyoUcjhFPxfi6Z1A=;
- b=RcwV6TUNni3NilxjO/GkbMdWgp9C36/CyYrkvp5YieMA5gGfd1sH/i1A+SzzBZ/HF+
- +oAvkERAyuzsOy/nrpvtym3v1fay1we7fD5Q6ECFwzWK52TtFGfCea3ZZsoogsevwZN5
- K/IjOjm5SRm8riAlRSH9yB76/CdhHAjYdD8yv1Lq5prpysdCvIjryhzKGsn9MnsvF8Ne
- M5L/ZbqwhicRBhFjkhC/JkzB7Bppntr+eq7Sy5LEUkW8ccY8y4UhmrRWsk4jGtOuyC8N
- wdUGeDg3tm1ksntjelxOuuIRQjjSoAsxVLVvUszoprha0uWytdgeBFzLJDs9xwdKeWhj
- 7Lhw==
-X-Gm-Message-State: AOJu0YwnsjXU9NbyN7v+DKx7a7s2yqud6Ru08XIHia2ldYq+ziT3T9gG
- z/P9KD9HN1Oz459RP2HvN9nN+A==
-X-Google-Smtp-Source: AGHT+IH2K9/khvdw8Eg8/MLpYQz5ObAzHtknnFzm1LzmCutq9Lpybu/IXHGtFcNIKfCTEgD8W8T71Q==
-X-Received: by 2002:a05:600c:3799:b0:402:e68f:888e with SMTP id
- o25-20020a05600c379900b00402e68f888emr19929702wmr.4.1697035857353; 
- Wed, 11 Oct 2023 07:50:57 -0700 (PDT)
+ bh=TMIhHtiL1mhVrt3MIZHj1RJ7a5N5jxfuKJrNLAX/qLM=;
+ b=Fwa0H4Ol2vuNAU/WmUVM8o+wXyew3OMqgrrDiaVleurBJcIhbY//uRJgXJr+bABhLH
+ C+mvlOhil9uWYsDpIpOoFXYeYji8FkswU4GWqnslm0iecF1ssZ8anU+4TQ4BF/M4kpQE
+ VTDwM0ZZGVwp0x/WC6f8KidgurKgQ2p1/PeCRBzpnQLUjHe2+l2b/bovKIUDYYk2PoGB
+ 1epRJ49t2W443NA+hYKMDyrfoB0ipEiPJ6w3JvXlfdQuA3X+NZr/l3PpLAKkktN8zn3D
+ Dmn17QncWkfaEVBj6tCX9N6PWomqVWiju/qeMdUTJUWEVfEu7PH3x/EtuDq57xa9hG4C
+ uR7A==
+X-Gm-Message-State: AOJu0YwBlyITj0hRDmUm8rIpO+OlDKrx0AOT4+hBJ3SOBO8KFVCm72lU
+ CO7Itry/x8fCy3bj9jhiee4wcQ==
+X-Google-Smtp-Source: AGHT+IH3nVe3gDHJI4ZNyNYVPrScxEA8neEkmr6cYwmzaUJCqKB6XMZjK8ABI/2evY6uL59Opl5F5w==
+X-Received: by 2002:a05:600c:2107:b0:405:48ba:9c with SMTP id
+ u7-20020a05600c210700b0040548ba009cmr19911060wml.16.1697035862210; 
+ Wed, 11 Oct 2023 07:51:02 -0700 (PDT)
 Received: from rockhopper.ba.rivosinc.com (214.11.169.217.in-addr.arpa.
  [217.169.11.214]) by smtp.gmail.com with ESMTPSA id
- n16-20020a05600c3b9000b0040684abb623sm19709208wms.24.2023.10.11.07.50.56
+ n16-20020a05600c3b9000b0040684abb623sm19709208wms.24.2023.10.11.07.51.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Oct 2023 07:50:57 -0700 (PDT)
+ Wed, 11 Oct 2023 07:51:01 -0700 (PDT)
 From: Rob Bradford <rbradford@rivosinc.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, atishp@rivosinc.com, palmer@dabbelt.com,
  alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  Rob Bradford <rbradford@rivosinc.com>
-Subject: [PATCH v2 2/6] target/riscv: Don't assume PMU counters are continuous
-Date: Wed, 11 Oct 2023 15:45:50 +0100
-Message-ID: <20231011145032.81509-3-rbradford@rivosinc.com>
+Subject: [PATCH v2 5/6] target/riscv: Add "pmu-mask" property to replace
+ "pmu-num"
+Date: Wed, 11 Oct 2023 15:45:53 +0100
+Message-ID: <20231011145032.81509-6-rbradford@rivosinc.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231011145032.81509-1-rbradford@rivosinc.com>
 References: <20231011145032.81509-1-rbradford@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::331;
- envelope-from=rbradford@rivosinc.com; helo=mail-wm1-x331.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=rbradford@rivosinc.com; helo=mail-wm1-x336.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -96,37 +97,115 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Check the PMU available bitmask when checking if a counter is valid
-rather than comparing the index against the number of PMUs.
+Using a mask instead of the number of PMU devices supports the accurate
+emulation of platforms that have a discontinuous set of PMU counters.
+
+Generate a warning if the old property changed from the default but
+still go ahead and use it to generate the mask if the user has changed
+it from the default
 
 Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
 ---
- target/riscv/csr.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ target/riscv/cpu.c     |  5 +++--
+ target/riscv/cpu_cfg.h |  3 ++-
+ target/riscv/machine.c |  2 +-
+ target/riscv/pmu.c     | 14 ++++++++++----
+ 4 files changed, 16 insertions(+), 8 deletions(-)
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 85a31dc420..3e126219ba 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -182,7 +182,8 @@ static RISCVException zcmt(CPURISCVState *env, int csrno)
- #if !defined(CONFIG_USER_ONLY)
- static RISCVException mctr(CPURISCVState *env, int csrno)
- {
--    int pmu_num = riscv_cpu_cfg(env)->pmu_num;
-+    RISCVCPU *cpu = RISCV_CPU(env_cpu(env));
-+    uint32_t pmu_avail_ctrs = cpu->pmu_avail_ctrs;
-     int ctr_index;
-     int base_csrno = CSR_MHPMCOUNTER3;
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index c9d8fc12fe..4d2987e568 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1487,7 +1487,7 @@ static void riscv_cpu_realize_tcg(DeviceState *dev, Error **errp)
+         riscv_timer_init(cpu);
+     }
  
-@@ -191,7 +192,7 @@ static RISCVException mctr(CPURISCVState *env, int csrno)
-         base_csrno += 0x80;
+-    if (cpu->cfg.pmu_num) {
++    if (cpu->cfg.pmu_mask) {
+         riscv_pmu_init(cpu, &local_err);
+         if (local_err != NULL) {
+             error_propagate(errp, local_err);
+@@ -1812,7 +1812,8 @@ static void riscv_cpu_add_misa_properties(Object *cpu_obj)
+ 
+ static Property riscv_cpu_extensions[] = {
+     /* Defaults for standard extensions */
+-    DEFINE_PROP_UINT8("pmu-num", RISCVCPU, cfg.pmu_num, 16),
++    DEFINE_PROP_UINT8("pmu-num", RISCVCPU, cfg.pmu_num, 16), /* Deprecated */
++    DEFINE_PROP_UINT32("pmu-mask", RISCVCPU, cfg.pmu_mask, MAKE_32BIT_MASK(3, 16)),
+     DEFINE_PROP_BOOL("sscofpmf", RISCVCPU, cfg.ext_sscofpmf, false),
+     DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
+     DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index 0e6a0f245c..d273487040 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -123,7 +123,8 @@ struct RISCVCPUConfig {
+     bool ext_xtheadsync;
+     bool ext_XVentanaCondOps;
+ 
+-    uint8_t pmu_num;
++    uint8_t pmu_num; /* Deprecated */
++    uint32_t pmu_mask;
+     char *priv_spec;
+     char *user_spec;
+     char *bext_spec;
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+index c7c862cdd3..9f6e3f7a6d 100644
+--- a/target/riscv/machine.c
++++ b/target/riscv/machine.c
+@@ -313,7 +313,7 @@ static bool pmu_needed(void *opaque)
+ {
+     RISCVCPU *cpu = opaque;
+ 
+-    return cpu->cfg.pmu_num;
++    return (cpu->cfg.pmu_mask > 0);
+ }
+ 
+ static const VMStateDescription vmstate_pmu_ctr_state = {
+diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
+index 360c76f63e..f2d35b4d3b 100644
+--- a/target/riscv/pmu.c
++++ b/target/riscv/pmu.c
+@@ -18,6 +18,7 @@
+ 
+ #include "qemu/osdep.h"
+ #include "qemu/log.h"
++#include "qemu/error-report.h"
+ #include "cpu.h"
+ #include "pmu.h"
+ #include "sysemu/cpu-timers.h"
+@@ -182,7 +183,7 @@ int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx)
+     CPURISCVState *env = &cpu->env;
+     gpointer value;
+ 
+-    if (!cpu->cfg.pmu_num) {
++    if (!cpu->cfg.pmu_mask) {
+         return 0;
      }
-     ctr_index = csrno - base_csrno;
--    if (!pmu_num || ctr_index >= pmu_num) {
-+    if ((BIT(ctr_index) & pmu_avail_ctrs >> 3) == 0) {
-         /* The PMU is not enabled or counter is out of range */
-         return RISCV_EXCP_ILLEGAL_INST;
+     value = g_hash_table_lookup(cpu->pmu_event_ctr_map,
+@@ -432,7 +433,7 @@ void riscv_pmu_init(RISCVCPU *cpu, Error **errp)
+ {
+     uint8_t pmu_num = cpu->cfg.pmu_num;
+ 
+-    if (pmu_num > (RV_MAX_MHPMCOUNTERS - 3)) {
++    if (ctpop32(cpu->cfg.pmu_mask) > (RV_MAX_MHPMCOUNTERS - 3)) {
+         error_setg(errp, "Number of counters exceeds maximum available");
+         return;
      }
+@@ -443,6 +444,11 @@ void riscv_pmu_init(RISCVCPU *cpu, Error **errp)
+         return;
+     }
+ 
+-    /* Create a bitmask of available programmable counters */
+-    cpu->pmu_avail_ctrs = MAKE_32BIT_MASK(3, pmu_num);
++    /* Check if user set it by comparing against default */
++    if (pmu_num != 16) {
++        warn_report("\"pmu-num\" property is deprecated; use \"pmu-mask\"");
++        cpu->cfg.pmu_mask = MAKE_32BIT_MASK(3, pmu_num);
++    }
++
++    cpu->pmu_avail_ctrs = cpu->cfg.pmu_mask;
+ }
 -- 
 2.41.0
 
