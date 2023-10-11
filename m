@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BD97CD98E0
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Oct 2023 01:03:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E436CD98D9
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Oct 2023 01:04:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qqNcg-0002lU-08; Tue, 10 Oct 2023 21:02:50 -0400
+	id 1qqNe3-0005Jj-BJ; Tue, 10 Oct 2023 21:04:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qqNcc-0002k0-Iq; Tue, 10 Oct 2023 21:02:46 -0400
-Received: from mail-vk1-xa34.google.com ([2607:f8b0:4864:20::a34])
+ id 1qqNe2-0005E5-Ew; Tue, 10 Oct 2023 21:04:14 -0400
+Received: from mail-vk1-xa35.google.com ([2607:f8b0:4864:20::a35])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qqNca-0006Ma-TH; Tue, 10 Oct 2023 21:02:46 -0400
-Received: by mail-vk1-xa34.google.com with SMTP id
- 71dfb90a1353d-49ab6c1869dso279577e0c.0; 
- Tue, 10 Oct 2023 18:02:42 -0700 (PDT)
+ id 1qqNe0-0006d7-S3; Tue, 10 Oct 2023 21:04:14 -0400
+Received: by mail-vk1-xa35.google.com with SMTP id
+ 71dfb90a1353d-49d0a704ac7so2372426e0c.1; 
+ Tue, 10 Oct 2023 18:04:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696986162; x=1697590962; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1696986249; x=1697591049; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=az7hRY13AXihgfwT+snngU6CrW6XXZhg5oEBwlyT9c0=;
- b=kzKyK8lvmrqAy5qvGF9AyXvK+iQjCcaPE9318g4wQPsJ95SgKjRKefkRLLwz/ve8oy
- A8hca1mqwTZ4nHhQTgXY+sf/oFw+viwZE9RyCtQg2kS0upjZvVxulLwTx7zTA83fEV3p
- gXKiHiMLmEk2aR2tiOqoPoL/6If51KLi4HJQ7wOUjbQLMjgnUndN6M7qAxm8vUYDAf2y
- JYlBD4A89W6yYx5j9u5qkOgWnSEqMZrw+PQcKRt0Xf2lIT1YnXjvCKRO1fKzBVyJ0RWe
- aqncF70AT9bZKELOlIRo9iH5RxGaArk1x7Si2TA9cemMuWzKJJrWMILaDA0pEd765hV/
- MQvQ==
+ bh=aqO5ka7tR9qZcNKmHJAXn+ExW6wHOnY5HZ1B8d6xlA0=;
+ b=WC1HpB0u6CSTXVOy6Nx4S53Ebuk+vN5a+I4PbpjWR7iVMQVm1FgguDO5Ran/SPsEPZ
+ MBELeL9YXN7ccWlgq3OgM2USTdtEMMCHcoXIZWMoJ/1axZp9mIE2f9ayL7UO3KQ2+gUW
+ 5GZYoIfMzFGQv+6Q+7ddrB6zkkd+xPjfnY91r6Vut87NTre7dVlhahi3oBCVIV0mIybZ
+ jjIHJozxAmsmSxOrLH0JPdMTXCYyd+PBedINvglwsODWf7BMZnInsCUVOulLmWW0P/Eh
+ aWmogBXZwGev/SPL65PZfxw/+T9/9/kRMAglqHmJmxoiZFdlFam7eWGHRDwKb/McjucH
+ YWtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696986162; x=1697590962;
+ d=1e100.net; s=20230601; t=1696986249; x=1697591049;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=az7hRY13AXihgfwT+snngU6CrW6XXZhg5oEBwlyT9c0=;
- b=annkGHFohonuqzrgN+ntAmupZ1aO9Y2q3m6FGsPlh9Yxob2HizCq6/fnKNHZcAgyUk
- u41J31bGqtVKkeUB3j1lO7RaBrf+4wBpIKSrRxXdZ+oi04Xi9xXxHup04C2BiGiTN6P3
- bcfXGgfQhGIf1fOmRcBnRJPscbtcDRoVWBgy3lrO2bI3iVWXvYS3EKPoFyU0KOns/wb6
- h8TB4gqElgi69Fs7g1UdkItdtdGaGjP9wfNe1ukUyn7NUpPWNawnEuM8kh6qLNPjOjHj
- UmcNJ2DA2eWAV3W3vfdmSScI5oyaDQxEaCYey+9EUBBpAOANwIduvt+Dm2cVg2RiNQKj
- BnxQ==
-X-Gm-Message-State: AOJu0YxS1bjPhvdaTp5x3vBd50o7AASjo24dEYIDg+oW09x4Co3+0MlS
- 6akM9e/rv/VSpnvlCC5RrhAjMNU40pk2qc0qSRY=
-X-Google-Smtp-Source: AGHT+IEvf93Yxj4oZz0NTJ8qGczKWc2RXD6w5T6XupZRdUvKXy0nd5u+ck78IiMEVRhfzAPo/g2jvt5NP9aBq6r55FY=
-X-Received: by 2002:a1f:e7c4:0:b0:49a:9f99:bb03 with SMTP id
- e187-20020a1fe7c4000000b0049a9f99bb03mr9918940vkh.1.1696986161996; Tue, 10
- Oct 2023 18:02:41 -0700 (PDT)
+ bh=aqO5ka7tR9qZcNKmHJAXn+ExW6wHOnY5HZ1B8d6xlA0=;
+ b=KO/8zy7AyqaFhhQRp4daBvo3bWksdtuLAXf/4C2SCvDeSuzbeHK/+F0jOofFImv5O5
+ hu2Xz5muFgNSbMcv2zCRwByL0xQIXQPGo6djfdtsFwBqGX8kgv6u066KEC5uvbZaRraz
+ KGSKHLPFzVA2PbsyMF49yWXI2Cc7ZER8HjSJoQP0xcEgwTmlHpBHmN4cIdy5ys4W6qbl
+ vfG4XNojTYqXliOu94ZrG5mLzSE+8ZaotmLmJjme/OaGIBWjELUHMOvDHsuTP0G4fkVo
+ BDjjNUs6rmdIO60xSYYVOfTf1OC9Y7hcs8lpNIvlCntDOcPzSJ2X3nWravZnjmOTXE8o
+ lKww==
+X-Gm-Message-State: AOJu0YxV/vaessP4oAy/IQ3Wh9rHzJ8StCYV+pFl71zU2y0Z+Z0dvQBV
+ C/Nedu7kMdokOZjDuuCMFAkeHirhbUXZ6u7vf3o=
+X-Google-Smtp-Source: AGHT+IE+dECs0/kWr7vwAr7Wy9VndFb7DLF3LT2g8gzD4c35dqPtmKLYacBfQzZPQpjsSy45eTmlKRIHhMi98CmdBdM=
+X-Received: by 2002:a1f:c9c1:0:b0:49d:3e4c:6168 with SMTP id
+ z184-20020a1fc9c1000000b0049d3e4c6168mr15264409vkf.7.1696986249500; Tue, 10
+ Oct 2023 18:04:09 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231009164104.369749-1-alex.bennee@linaro.org>
- <20231009164104.369749-6-alex.bennee@linaro.org>
-In-Reply-To: <20231009164104.369749-6-alex.bennee@linaro.org>
+ <20231009164104.369749-17-alex.bennee@linaro.org>
+In-Reply-To: <20231009164104.369749-17-alex.bennee@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 11 Oct 2023 11:02:15 +1000
-Message-ID: <CAKmqyKPgCd0ej7Jd8v8o-8Y=E_keMCA8v1-iLBrNKEfQn_U3ZA@mail.gmail.com>
-Subject: Re: [PATCH 05/25] tests/docker: make docker engine choice entirely
- configure driven
+Date: Wed, 11 Oct 2023 11:03:42 +1000
+Message-ID: <CAKmqyKN86xUqKMjd6U=2pno962DnMNVVRzfJCycT=S_62+PXVw@mail.gmail.com>
+Subject: Re: [PATCH 16/25] target/arm: Remove references to gdb_has_xml
 To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
 Cc: qemu-devel@nongnu.org, Thomas Huth <thuth@redhat.com>, 
  Xiaojuan Yang <yangxiaojuan@loongson.cn>,
@@ -88,11 +87,12 @@ Cc: qemu-devel@nongnu.org, Thomas Huth <thuth@redhat.com>,
  Song Gao <gaosong@loongson.cn>, 
  Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>, qemu-s390x@nongnu.org, 
  =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Akihiko Odaki <akihiko.odaki@daynix.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a34;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a35;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa35.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -116,86 +116,79 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Oct 10, 2023 at 4:05=E2=80=AFAM Alex Benn=C3=A9e <alex.bennee@linar=
+On Tue, Oct 10, 2023 at 3:52=E2=80=AFAM Alex Benn=C3=A9e <alex.bennee@linar=
 o.org> wrote:
 >
-> Since 0b1a649047 (tests/docker: use direct RUNC call to build
-> containers) we ended up with the potential for the remaining docker.py
-> script calls to deviate from the direct RUNC calls. Fix this by
-> dropping the use of ENGINE in the makefile and rely entirely on what
-> we detect at configure time.
+> From: Akihiko Odaki <akihiko.odaki@daynix.com>
 >
-> We also tweak the RUNC detection so podman users can still run things
-> from the source tree.
+> GDB has XML support since 6.7 which was released in 2007.
+> It's time to remove support for old GDB versions without XML support.
 >
+> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+> Acked-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+> Message-Id: <20230912224107.29669-10-akihiko.odaki@daynix.com>
 > Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
->
 > ---
-> v2
->   - add RUNC stanza suggested by Paolo
-> ---
->  configure                     | 1 -
->  tests/docker/Makefile.include | 9 +++------
->  2 files changed, 3 insertions(+), 7 deletions(-)
+>  target/arm/gdbstub.c | 32 ++------------------------------
+>  1 file changed, 2 insertions(+), 30 deletions(-)
 >
-> diff --git a/configure b/configure
-> index e08127045d..707132a3ae 100755
-> --- a/configure
-> +++ b/configure
-> @@ -1694,7 +1694,6 @@ if test -n "$gdb_bin"; then
->  fi
->
->  if test "$container" !=3D no; then
-> -    echo "ENGINE=3D$container" >> $config_host_mak
->      echo "RUNC=3D$runc" >> $config_host_mak
->  fi
->  echo "SUBDIRS=3D$subdirs" >> $config_host_mak
-> diff --git a/tests/docker/Makefile.include b/tests/docker/Makefile.includ=
-e
-> index dfabafab92..ab68b2dbad 100644
-> --- a/tests/docker/Makefile.include
-> +++ b/tests/docker/Makefile.include
-> @@ -16,9 +16,8 @@ DOCKER_DEFAULT_REGISTRY :=3D registry.gitlab.com/qemu-p=
-roject/qemu
->  endif
->  DOCKER_REGISTRY :=3D $(if $(REGISTRY),$(REGISTRY),$(DOCKER_DEFAULT_REGIS=
-TRY))
->
-> -RUNC ?=3D docker
-> -ENGINE ?=3D auto
-> -DOCKER_SCRIPT=3D$(SRC_PATH)/tests/docker/docker.py --engine $(ENGINE)
-> +RUNC ?=3D $(if $(shell command -v docker), docker, podman)
-> +DOCKER_SCRIPT=3D$(SRC_PATH)/tests/docker/docker.py --engine $(RUNC)
->
->  CUR_TIME :=3D $(shell date +%Y-%m-%d-%H.%M.%S.$$$$)
->  DOCKER_SRC_COPY :=3D $(BUILD_DIR)/docker-src.$(CUR_TIME)
-> @@ -158,7 +157,7 @@ $(foreach i,$(filter-out $(DOCKER_PARTIAL_IMAGES),$(D=
-OCKER_IMAGES)), \
->  )
->
->  docker:
-> -       @echo 'Build QEMU and run tests inside Docker or Podman container=
-s'
-> +       @echo 'Build QEMU and run tests inside $(RUNC) containers'
->         @echo
->         @echo 'Available targets:'
->         @echo
-> @@ -198,8 +197,6 @@ docker:
->         @echo '    EXECUTABLE=3D<path>    Include executable in image.'
->         @echo '    EXTRA_FILES=3D"<path> [... <path>]"'
->         @echo '                         Include extra files in image.'
-> -       @echo '    ENGINE=3Dauto/docker/podman'
-> -       @echo '                         Specify which container engine to=
- run.'
->         @echo '    REGISTRY=3Durl         Cache builds from registry (def=
-ault:$(DOCKER_REGISTRY))'
->
->  docker-help: docker
+> diff --git a/target/arm/gdbstub.c b/target/arm/gdbstub.c
+> index 8fc8351df7..b7ace24bfc 100644
+> --- a/target/arm/gdbstub.c
+> +++ b/target/arm/gdbstub.c
+> @@ -46,21 +46,7 @@ int arm_cpu_gdb_read_register(CPUState *cs, GByteArray=
+ *mem_buf, int n)
+>          /* Core integer register.  */
+>          return gdb_get_reg32(mem_buf, env->regs[n]);
+>      }
+> -    if (n < 24) {
+> -        /* FPA registers.  */
+> -        if (gdb_has_xml()) {
+> -            return 0;
+> -        }
+> -        return gdb_get_zeroes(mem_buf, 12);
+> -    }
+> -    switch (n) {
+> -    case 24:
+> -        /* FPA status register.  */
+> -        if (gdb_has_xml()) {
+> -            return 0;
+> -        }
+> -        return gdb_get_reg32(mem_buf, 0);
+> -    case 25:
+> +    if (n =3D=3D 25) {
+>          /* CPSR, or XPSR for M-profile */
+>          if (arm_feature(env, ARM_FEATURE_M)) {
+>              return gdb_get_reg32(mem_buf, xpsr_read(env));
+> @@ -100,21 +86,7 @@ int arm_cpu_gdb_write_register(CPUState *cs, uint8_t =
+*mem_buf, int n)
+>          env->regs[n] =3D tmp;
+>          return 4;
+>      }
+> -    if (n < 24) { /* 16-23 */
+> -        /* FPA registers (ignored).  */
+> -        if (gdb_has_xml()) {
+> -            return 0;
+> -        }
+> -        return 12;
+> -    }
+> -    switch (n) {
+> -    case 24:
+> -        /* FPA status register (ignored).  */
+> -        if (gdb_has_xml()) {
+> -            return 0;
+> -        }
+> -        return 4;
+> -    case 25:
+> +    if (n =3D=3D 25) {
+>          /* CPSR, or XPSR for M-profile */
+>          if (arm_feature(env, ARM_FEATURE_M)) {
+>              /*
 > --
 > 2.39.2
 >
