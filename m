@@ -4,77 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AF0ECD98E6
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Oct 2023 03:16:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A2E9CD98E9
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Oct 2023 03:21:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qqPhZ-0001CW-Pb; Tue, 10 Oct 2023 23:16:01 -0400
+	id 1qqPn9-0002Qj-Ke; Tue, 10 Oct 2023 23:21:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qqPhX-00019C-Dv; Tue, 10 Oct 2023 23:15:59 -0400
-Received: from mail-vk1-xa2c.google.com ([2607:f8b0:4864:20::a2c])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qqPn7-0002Pm-Ta
+ for qemu-riscv@nongnu.org; Tue, 10 Oct 2023 23:21:45 -0400
+Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qqPhG-0004KY-AE; Tue, 10 Oct 2023 23:15:54 -0400
-Received: by mail-vk1-xa2c.google.com with SMTP id
- 71dfb90a1353d-49a99c43624so2278785e0c.2; 
- Tue, 10 Oct 2023 20:15:41 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qqPn6-0005T4-1a
+ for qemu-riscv@nongnu.org; Tue, 10 Oct 2023 23:21:45 -0400
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-53b962f09e0so5967303a12.0
+ for <qemu-riscv@nongnu.org>; Tue, 10 Oct 2023 20:21:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696994140; x=1697598940; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CK2nr1gMYTvHNX2Eq3ipPyn2oJ3wjGRpjJ84BzG4+8Q=;
- b=SwrFZ9hQSEUuUFKA3rzc+JQ5psqbnj7w5NJAJ0ZKVKLkDfjaloykJTbHKRalxy4NWD
- eMGGicjuWuHz8Z3NkKF+T7FkvSpOF5mE00gIOsCvKDZa/tjDEismUmivYjXixh3yl0eE
- K6soGuSFolegAts45/89ybs+JyT1NwMBIH9XOhMO0BGxR/BW904t7NE6xMY27RtzZXSO
- FHW56e00BUEUeYgQf1N3uavJSPC0ISkWIQNsI9I6g4TJFDKeT4aaFma6SsS3LGzd5+2a
- Xd7Ym1V2STM45eOB41bFZrO7j2p5+oiKuQXV38lhE+oYUC3qHRzCPsyRoAde3tF2+Ca8
- WLAA==
+ d=linaro.org; s=google; t=1696994502; x=1697599302; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Rf5gxsbp430mWT7/Bc31GPupiZtpSrleCvdmHeu8VwU=;
+ b=O3LSbvJGRBxmaMS4VnN/y0/hGA/75g1CJXfvYOQDE1C5MyJ3RQY3Rxp0EmyAF1BvVD
+ fssoX5uCjpzNoP7S+lAYAZh4FARj0IaV+hn9dD1CHmJteJQCf5qEMvjappsSKT6rHaoR
+ 1vBpZZ+QXwBWer2/ixrAMYMbQtv7Dz4HWV5SG9JlpwqVo6VcY6v8gd5KpUVBNpj+S9pP
+ iAnsjbGLKu/PPBAisWJPun/YMc/k5uoRuiB8TSVLZimKQoIY4GSHNVEvC71EiVD1cvx9
+ T0zcrFh1marlG7NLlTanP7uPhXu5iamIaat80LxSV+KiCA7yWo4HSMMAXcSiLWvo7xOQ
+ +zuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696994140; x=1697598940;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CK2nr1gMYTvHNX2Eq3ipPyn2oJ3wjGRpjJ84BzG4+8Q=;
- b=V/JB/1HaxnmaeRRsuUgOvvc8GKkUSIjq1SlzYvMgNXYCNuTeaw/0jLSwvYL2MGUXTu
- TG0vHvfHFqJzDC3dcLqT5DS/Wo/pYa4nOgZJIuGV8vC0k8e122tkzgqGsB1ymPVUKtzx
- NtxvcbFuYngzm1mzayWFq7rmnqybEz1ulP8eTsnppMnk8LyQmYr7RpCJ2O3ciivxbzNG
- BLMFJe9linp5B2Dye7kjfLLiVUhB5y1EB+lUStKCAKtj0M6DdFj2OBoVw4SnnI5hdgCv
- /40Qm8QIY2N1UnEwpGo77W20YdVeddejhcqIqny4ze+HeoLKweQpcTR8IghsKIOWZMPR
- Pj9Q==
-X-Gm-Message-State: AOJu0YxfqJiJvBr6aVwydX+1hJgA9mmsDpHwcoTZA92uk/zye0NH0zsZ
- Sc3yvJZRKTnFshnteER9eDpUoAxzifiPRUGXaAg=
-X-Google-Smtp-Source: AGHT+IFW5z8OzmsKppErqraSoHkZIgZ2suwYkw0Mb+d7eHuhFOH7DWd+wE1pTP3PVOfg3JfJv8+t//B857IrAr768lQ=
-X-Received: by 2002:a1f:c905:0:b0:49a:466c:199e with SMTP id
- z5-20020a1fc905000000b0049a466c199emr14618684vkf.2.1696994140512; Tue, 10 Oct
- 2023 20:15:40 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1696994502; x=1697599302;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Rf5gxsbp430mWT7/Bc31GPupiZtpSrleCvdmHeu8VwU=;
+ b=dP9BClHz2U9GuaBd1IsHAAYgdIAAMKODrd+rjiuPvSn3895ZRhRJIJ9UAAXyW495O8
+ 1hItedQ6m90pUhpmBu0dQmUuydpbULXhBvbZoJbaNZYgxUkJUy8J0we9aHsy4u8sz9/n
+ /dB7cx/5c4WBtTgNCzlg4THkPirZn2khhNkiNbW9HR3s/d39r3+eznHn3uGtt/LCunx9
+ kt0ck7a7pRh+I/v1gWWnZenKVnSnUlH4YgzoP0qt/1fU9nNp9IKouwT5Lf/v/hH7ZF+t
+ x2+DpttniBms65F0xwu5BdIcYyfGfkIVQ/uc2cs8kevWgmyx0JpDTftlbxjeWROOFzu0
+ X7Ng==
+X-Gm-Message-State: AOJu0YzufUsupUtooFuYbOIR/2CY5f6eUFKJKif7NWfG1q0w/N07F/nH
+ RbYqPTX760ky+30Hr9AKJLumQg==
+X-Google-Smtp-Source: AGHT+IFsoEg+3hmwPLtWkPthJP1a4BnRC8wMFOGJDp/mP781dneXsFI+nVjx6QPZh61yK1gcooY3tQ==
+X-Received: by 2002:a05:6402:6d4:b0:533:4c67:c911 with SMTP id
+ n20-20020a05640206d400b005334c67c911mr17781768edy.19.1696994501830; 
+ Tue, 10 Oct 2023 20:21:41 -0700 (PDT)
+Received: from [192.168.69.115] (mdq11-h01-176-173-161-48.dsl.sta.abo.bbox.fr.
+ [176.173.161.48]) by smtp.gmail.com with ESMTPSA id
+ k12-20020a056402048c00b0052ffc2e82f1sm8393286edv.4.2023.10.10.20.21.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 10 Oct 2023 20:21:41 -0700 (PDT)
+Message-ID: <f8b3cb2c-8e80-19e4-d59f-2ccacff0a413@linaro.org>
+Date: Wed, 11 Oct 2023 05:21:37 +0200
 MIME-Version: 1.0
-References: <20230925110747.534238-1-mchitale@ventanamicro.com>
-In-Reply-To: <20230925110747.534238-1-mchitale@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 11 Oct 2023 13:15:13 +1000
-Message-ID: <CAKmqyKOPAG_ocV8ZPW6jpGhZTsPHZp-AbEBVskp78_Ty91JXKg@mail.gmail.com>
-Subject: Re: [PATCH] Add epmp to extensions list and rename it to smepmp
-To: Mayuresh Chitale <mchitale@ventanamicro.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Himanshu Chauhan <hchauhan@ventanamicro.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2c;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2c.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.15.1
+Subject: Re: [PATCH 04/18] target: Declare FOO_CPU_TYPE_NAME/SUFFIX in
+ 'cpu-qom.h'
+Content-Language: en-US
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org,
+ Gavin Shan <gshan@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
+ Thomas Huth <thuth@redhat.com>, Brian Cain <bcain@quicinc.com>,
+ Markus Armbruster <armbru@redhat.com>, Eduardo Habkost
+ <eduardo@habkost.net>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>
+Cc: David Hildenbrand <david@redhat.com>, "Michael S. Tsirkin"
+ <mst@redhat.com>, Song Gao <gaosong@loongson.cn>,
+ =?UTF-8?Q?C=c3=a9dric_Le_Goater?= <clg@kaod.org>,
+ Laurent Vivier <lvivier@redhat.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-arm@nongnu.org,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Paolo Bonzini <pbonzini@redhat.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Nicholas Piggin <npiggin@gmail.com>, qemu-riscv@nongnu.org,
+ Bin Meng <bin.meng@windriver.com>, Yanan Wang <wangyanan55@huawei.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>, Marek Vasut
+ <marex@denx.de>, Peter Maydell <peter.maydell@linaro.org>,
+ qemu-ppc@nongnu.org, Michael Rolnik <mrolnik@gmail.com>,
+ Max Filippov <jcmvbkbc@gmail.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Laurent Vivier <laurent@vivier.eu>, Stafford Horne <shorne@gmail.com>,
+ Chris Wulff <crwulff@gmail.com>, Sergio Lopez <slp@redhat.com>,
+ Xiaojuan Yang <yangxiaojuan@loongson.cn>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, qemu-s390x@nongnu.org
+References: <20231010092901.99189-1-philmd@linaro.org>
+ <20231010092901.99189-5-philmd@linaro.org>
+ <348eaf9c-9fb6-4674-b324-c3f3017f1851@linux.alibaba.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+In-Reply-To: <348eaf9c-9fb6-4674-b324-c3f3017f1851@linux.alibaba.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::534;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x534.google.com
+X-Spam_score_int: -53
+X-Spam_score: -5.4
+X-Spam_bar: -----
+X-Spam_report: (-5.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-3.339,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -90,191 +127,122 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Sep 25, 2023 at 9:08=E2=80=AFPM Mayuresh Chitale
-<mchitale@ventanamicro.com> wrote:
->
-> From: Himanshu Chauhan <hchauhan@ventanamicro.com>
->
-> Smepmp is a ratified extension which qemu refers to as epmp.
-> Rename epmp to smepmp and add it to extension list so that
-> it is added to the isa string.
->
-> Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
-> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
-> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->  target/riscv/cpu.c |  9 +++++----
->  target/riscv/cpu.h |  2 +-
->  target/riscv/csr.c |  6 +++---
->  target/riscv/pmp.c | 12 ++++++------
->  4 files changed, 15 insertions(+), 14 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index befa64528f..0fb01788e7 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -126,6 +126,7 @@ static const struct isa_ext_data isa_edata_arr[] =3D =
-{
->      ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
->      ISA_EXT_DATA_ENTRY(svnapot, PRIV_VERSION_1_12_0, ext_svnapot),
->      ISA_EXT_DATA_ENTRY(svpbmt, PRIV_VERSION_1_12_0, ext_svpbmt),
-> +    ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
->      ISA_EXT_DATA_ENTRY(xtheadba, PRIV_VERSION_1_11_0, ext_xtheadba),
->      ISA_EXT_DATA_ENTRY(xtheadbb, PRIV_VERSION_1_11_0, ext_xtheadbb),
->      ISA_EXT_DATA_ENTRY(xtheadbs, PRIV_VERSION_1_11_0, ext_xtheadbs),
-> @@ -488,7 +489,7 @@ static void rv32_ibex_cpu_init(Object *obj)
->  #ifndef CONFIG_USER_ONLY
->      set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
->  #endif
-> -    cpu->cfg.epmp =3D true;
-> +    cpu->cfg.ext_smepmp =3D true;
->  }
->
->  static void rv32_imafcu_nommu_cpu_init(Object *obj)
-> @@ -1198,12 +1199,12 @@ static void riscv_cpu_realize(DeviceState *dev, E=
-rror **errp)
->          }
->      }
->
-> -    if (cpu->cfg.epmp && !cpu->cfg.pmp) {
-> +    if (cpu->cfg.ext_smepmp && !cpu->cfg.pmp) {
->          /*
->           * Enhanced PMP should only be available
->           * on harts with PMP support
->           */
-> -        error_setg(errp, "Invalid configuration: EPMP requires PMP suppo=
-rt");
-> +        error_setg(errp, "Invalid configuration: Smepmp requires PMP sup=
-port");
->          return;
->      }
->
-> @@ -1560,7 +1561,7 @@ static Property riscv_cpu_extensions[] =3D {
->      DEFINE_PROP_BOOL("x-zcmt", RISCVCPU, cfg.ext_zcmt, false),
->
->      /* ePMP 0.9.3 */
+Hi Zhiwei,
 
-Can you remove this comment?
+On 11/10/23 04:51, LIU Zhiwei wrote:
+> 
+> On 2023/10/10 17:28, Philippe Mathieu-Daudé wrote:
+>> Hegerogeneous code needs access to the FOO_CPU_TYPE_NAME()
+>> macro to resolve target CPU types.
+> 
+> Hi Philippe,
+> 
+> I don't understand why should we use FOO_CPU_TYPE_NAME macro to resolve 
+> target CPU types? In my opinion, we should pass the
+> CPU typename from command line for heterogeneous case.
+> 
+> Could you make it clearer how should we use FOO_CPU_TYPE_NAME macro to 
+> resolve target CPU types in heterogeneous case?
 
-Alistair
+To be honest I start to feel a bit lost with the "cpu
+resolving type" design.
 
-> -    DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
-> +    DEFINE_PROP_BOOL("smepmp", RISCVCPU, cfg.ext_smepmp, false),
->      DEFINE_PROP_BOOL("x-smaia", RISCVCPU, cfg.ext_smaia, false),
->      DEFINE_PROP_BOOL("x-ssaia", RISCVCPU, cfg.ext_ssaia, false),
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index de7e43126a..9b4b012896 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -434,6 +434,7 @@ struct RISCVCPUConfig {
->      bool ext_zvfh;
->      bool ext_zvfhmin;
->      bool ext_smaia;
-> +    bool ext_smepmp;
->      bool ext_ssaia;
->      bool ext_sscofpmf;
->      bool rvv_ta_all_1s;
-> @@ -468,7 +469,6 @@ struct RISCVCPUConfig {
->      uint16_t cboz_blocksize;
->      bool mmu;
->      bool pmp;
-> -    bool epmp;
->      bool debug;
->      bool misa_w;
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 4451bd1263..d9ecc222e7 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -519,9 +519,9 @@ static RISCVException pmp(CPURISCVState *env, int csr=
-no)
->      return RISCV_EXCP_ILLEGAL_INST;
->  }
->
-> -static RISCVException epmp(CPURISCVState *env, int csrno)
-> +static RISCVException smepmp(CPURISCVState *env, int csrno)
->  {
-> -    if (riscv_cpu_cfg(env)->epmp) {
-> +    if (riscv_cpu_cfg(env)->ext_smepmp) {
->          return RISCV_EXCP_NONE;
->      }
->
-> @@ -4337,7 +4337,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
->      [CSR_VSIPH]       =3D { "vsiph",       aia_hmode32, NULL, NULL, rmw_=
-vsiph },
->
->      /* Physical Memory Protection */
-> -    [CSR_MSECCFG]    =3D { "mseccfg",  epmp, read_mseccfg, write_mseccfg=
-,
-> +    [CSR_MSECCFG]    =3D { "mseccfg", smepmp, read_mseccfg, write_mseccf=
-g,
->                           .min_priv_ver =3D PRIV_VERSION_1_11_0          =
- },
->      [CSR_PMPCFG0]    =3D { "pmpcfg0",   pmp, read_pmpcfg,  write_pmpcfg =
- },
->      [CSR_PMPCFG1]    =3D { "pmpcfg1",   pmp, read_pmpcfg,  write_pmpcfg =
- },
-> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index 1f5aca42e8..f498e414f0 100644
-> --- a/target/riscv/pmp.c
-> +++ b/target/riscv/pmp.c
-> @@ -88,7 +88,7 @@ static void pmp_write_cfg(CPURISCVState *env, uint32_t =
-pmp_index, uint8_t val)
->      if (pmp_index < MAX_RISCV_PMPS) {
->          bool locked =3D true;
->
-> -        if (riscv_cpu_cfg(env)->epmp) {
-> +        if (riscv_cpu_cfg(env)->ext_smepmp) {
->              /* mseccfg.RLB is set */
->              if (MSECCFG_RLB_ISSET(env)) {
->                  locked =3D false;
-> @@ -243,7 +243,7 @@ static bool pmp_hart_has_privs_default(CPURISCVState =
-*env, target_ulong addr,
->  {
->      bool ret;
->
-> -    if (riscv_cpu_cfg(env)->epmp) {
-> +    if (riscv_cpu_cfg(env)->ext_smepmp) {
->          if (MSECCFG_MMWP_ISSET(env)) {
->              /*
->               * The Machine Mode Whitelist Policy (mseccfg.MMWP) is set
-> @@ -354,9 +354,9 @@ int pmp_hart_has_privs(CPURISCVState *env, target_ulo=
-ng addr,
->
->          /*
->           * Convert the PMP permissions to match the truth table in the
-> -         * ePMP spec.
-> +         * Smepmp spec.
->           */
-> -        const uint8_t epmp_operation =3D
-> +        const uint8_t smepmp_operation =3D
->              ((env->pmp_state.pmp[i].cfg_reg & PMP_LOCK) >> 4) |
->              ((env->pmp_state.pmp[i].cfg_reg & PMP_READ) << 2) |
->              (env->pmp_state.pmp[i].cfg_reg & PMP_WRITE) |
-> @@ -381,7 +381,7 @@ int pmp_hart_has_privs(CPURISCVState *env, target_ulo=
-ng addr,
->                   * If mseccfg.MML Bit set, do the enhanced pmp priv chec=
-k
->                   */
->                  if (mode =3D=3D PRV_M) {
-> -                    switch (epmp_operation) {
-> +                    switch (smepmp_operation) {
->                      case 0:
->                      case 1:
->                      case 4:
-> @@ -412,7 +412,7 @@ int pmp_hart_has_privs(CPURISCVState *env, target_ulo=
-ng addr,
->                          g_assert_not_reached();
->                      }
->                  } else {
-> -                    switch (epmp_operation) {
-> +                    switch (smepmp_operation) {
->                      case 0:
->                      case 8:
->                      case 9:
-> --
-> 2.34.1
->
->
+We are not quite there yet to "create from command line"
+or "create from QMP", so I'm prototyping in plain C.
+One of my test is:
+
+   #include "target/arm/cpu-qom.h"
+   #include "target/hexagon/cpu-qom.h"
+   ...
+
+   static void
+   my_machine3_init((MachineState *machine)
+   {
+     CPUState cpu[2];
+     ...
+
+     cpu[0] = CPU(object_new(ARM_CPU_TYPE_NAME("cortex-a72")));
+     cpu[1] = CPU(object_new(HEXAGON_CPU_TYPE_NAME("v68")));
+     ...
+   }
+
+The machine code need access to the per-target
+FOO_CPU_TYPE_NAME() macros. I'm not sure what each macro
+expands to is considered stable, so IIUC I can't inline and use:
+
+     cpu[0] = CPU(object_new("cortex-a72-arm-cpu"));
+     cpu[1] = CPU(object_new("v68"-hexagon-cpu));
+
+That said, maybe I'm mistaken.
+
+Kinda related discussion with Gavin/Igor:
+https://lore.kernel.org/qemu-devel/35653f53-a977-02ea-28f6-6fe85b1efd5a@redhat.com/
+(related to 
+https://lore.kernel.org/qemu-devel/20230907003553.1636896-1-gshan@redhat.com/).
+
+> 
+> Thanks,
+> Zhiwei
+> 
+>> Move the declaration
+>> (along with the required FOO_CPU_TYPE_SUFFIX) to "cpu-qom.h".
+>>
+>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>> ---
+>>   target/alpha/cpu-qom.h   | 5 ++++-
+>>   target/alpha/cpu.h       | 2 --
+>>   target/avr/cpu-qom.h     | 5 ++++-
+>>   target/avr/cpu.h         | 2 --
+>>   target/cris/cpu-qom.h    | 5 ++++-
+>>   target/cris/cpu.h        | 2 --
+>>   target/i386/cpu-qom.h    | 3 +++
+>>   target/i386/cpu.h        | 2 --
+>>   target/m68k/cpu-qom.h    | 5 ++++-
+>>   target/m68k/cpu.h        | 2 --
+>>   target/mips/cpu-qom.h    | 3 +++
+>>   target/mips/cpu.h        | 2 --
+>>   target/rx/cpu-qom.h      | 5 ++++-
+>>   target/rx/cpu.h          | 2 --
+>>   target/s390x/cpu-qom.h   | 5 ++++-
+>>   target/s390x/cpu.h       | 2 --
+>>   target/sh4/cpu-qom.h     | 5 ++++-
+>>   target/sh4/cpu.h         | 2 --
+>>   target/sparc/cpu-qom.h   | 5 ++++-
+>>   target/sparc/cpu.h       | 2 --
+>>   target/tricore/cpu-qom.h | 5 +++++
+>>   target/tricore/cpu.h     | 2 --
+>>   target/xtensa/cpu-qom.h  | 5 ++++-
+>>   target/xtensa/cpu.h      | 2 --
+>>   24 files changed, 47 insertions(+), 33 deletions(-)
+>>
+>> diff --git a/target/alpha/cpu-qom.h b/target/alpha/cpu-qom.h
+>> index 1f200724b6..d596d1b69f 100644
+>> --- a/target/alpha/cpu-qom.h
+>> +++ b/target/alpha/cpu-qom.h
+>> @@ -1,5 +1,5 @@
+>>   /*
+>> - * QEMU Alpha CPU
+>> + * QEMU Alpha CPU QOM header (target agnostic)
+>>    *
+>>    * Copyright (c) 2012 SUSE LINUX Products GmbH
+>>    *
+>> @@ -27,6 +27,9 @@
+>>   OBJECT_DECLARE_CPU_TYPE(AlphaCPU, AlphaCPUClass, ALPHA_CPU)
+>> +#define ALPHA_CPU_TYPE_SUFFIX "-" TYPE_ALPHA_CPU
+>> +#define ALPHA_CPU_TYPE_NAME(model) model ALPHA_CPU_TYPE_SUFFIX
+>> +
+>>   /**
+>>    * AlphaCPUClass:
+>>    * @parent_realize: The parent class' realize handler.
+>> diff --git a/target/alpha/cpu.h b/target/alpha/cpu.h
+>> index e2a467ec17..ba0d9e3468 100644
+>> --- a/target/alpha/cpu.h
+>> +++ b/target/alpha/cpu.h
+>> @@ -428,8 +428,6 @@ enum {
+>>   void alpha_translate_init(void);
+>> -#define ALPHA_CPU_TYPE_SUFFIX "-" TYPE_ALPHA_CPU
+>> -#define ALPHA_CPU_TYPE_NAME(model) model ALPHA_CPU_TYPE_SUFFIX
+>>   #define CPU_RESOLVING_TYPE TYPE_ALPHA_CPU
+>>   void alpha_cpu_list(void);
+[...]
 
