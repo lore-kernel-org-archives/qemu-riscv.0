@@ -4,53 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8DABCDB46E
-	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Oct 2023 03:20:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF04DCDB46E
+	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Oct 2023 05:43:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qqmFA-0002wo-9K; Wed, 11 Oct 2023 23:20:12 -0400
+	id 1qqoTF-0003BI-AF; Thu, 12 Oct 2023 01:42:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qqmF8-0002vx-3u; Wed, 11 Oct 2023 23:20:10 -0400
-Received: from out30-113.freemail.mail.aliyun.com ([115.124.30.113])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qqmF5-0002Fc-A7; Wed, 11 Oct 2023 23:20:09 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R201e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046051;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
- TI=SMTPD_---0VtypPR2_1697080795; 
-Received: from 30.221.101.97(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VtypPR2_1697080795) by smtp.aliyun-inc.com;
- Thu, 12 Oct 2023 11:19:56 +0800
-Message-ID: <9a4858e4-f9da-40be-ba0a-4f3f94ce910d@linux.alibaba.com>
-Date: Thu, 12 Oct 2023 11:18:55 +0800
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1qqoTC-00039h-7F
+ for qemu-riscv@nongnu.org; Thu, 12 Oct 2023 01:42:50 -0400
+Received: from mail-oo1-xc33.google.com ([2607:f8b0:4864:20::c33])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1qqoTA-0005T3-QE
+ for qemu-riscv@nongnu.org; Thu, 12 Oct 2023 01:42:49 -0400
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-57e3c2adbf0so310235eaf.2
+ for <qemu-riscv@nongnu.org>; Wed, 11 Oct 2023 22:42:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1697089368; x=1697694168;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+Uw4xHwZQOzopjarI+ACZdG5SPRQpCnWElX2EooooEY=;
+ b=rQpAFrxjB0achPkrsX68cAvJLmEPRuEE1TSrtQb7ZSpbahXfjMUgLwshYU1dPclj1q
+ NFm1MLzjrURfYXM9UgYdtCYTWQwa9wi3jqKrAshbe0IfywipzWq40RTMUebx12ivmdJs
+ /A7Paw/5NISutq5mdu7EnzclhqyJ3o5LtnH2ONoJJhZ4tefFlkv1lEvlvNfU4prbHQdb
+ 286SWGfiY0I/tAEQX7ssGUSzy5CkJ02rR+A4JdWl8MLTkCl7mYcyHn45ZSB7GN0Ro8Ys
+ 7a94h/Wrkx3uaqkpPJ8uf0WArI4u5m5LnfzpQWobvJM+CFsLXDpCDisIrcAEcHkuiqLd
+ FTGw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697089368; x=1697694168;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+Uw4xHwZQOzopjarI+ACZdG5SPRQpCnWElX2EooooEY=;
+ b=OuRXOAQA65Olt93Rc3ledD+867/MJYnxZAkN8xj6UbRooEdDnWFPNBIL4Fw2Cr5ya6
+ t0clbsj5S5qERLNN18j9sO0gGelWzkutkUZOOuiWnU0KshS+vSZ9Y8rUi1yIvx/rXmQ2
+ Slgc2u8ee2qgrYarqDbdSKyAsNxcHTR7KrUsw1kOM1gsKLo08hLg42ce71QV85uux9bC
+ wl6ooq5ulyEzNrp4DtdRFn3PWJF9O18o/AO0Mrv1cH3dKpqLNL22GBQYRDNR2UDaCbeX
+ cSeHp/ggmznvMJECu9kDx4o3SPS9X4udA82W9ZnYVhLzYxgbnK1AnVFD+p0hSnryj4dx
+ 0haA==
+X-Gm-Message-State: AOJu0Yz7dX30uL9tXoXpNbe+2KS/NixKK3y4OTdOhBzF/poFcNttflOL
+ +6ilZs5TQ2NCi/LufCGJK041vw==
+X-Google-Smtp-Source: AGHT+IH9qAzZDUMcnbMbe6wKAcwXz80sQ7JhFvRKesCZ2eUtFdyXq//3m25/PMrh4+SkaTdA5NBhsQ==
+X-Received: by 2002:a05:6358:6f08:b0:132:f294:77fe with SMTP id
+ r8-20020a0563586f0800b00132f29477femr22637169rwn.2.1697089367747; 
+ Wed, 11 Oct 2023 22:42:47 -0700 (PDT)
+Received: from localhost ([157.82.206.10]) by smtp.gmail.com with UTF8SMTPSA id
+ d13-20020aa7814d000000b00690cd981652sm10926835pfn.61.2023.10.11.22.42.44
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 11 Oct 2023 22:42:47 -0700 (PDT)
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
+To: 
+Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Mikhail Tyutin <m.tyutin@yadro.com>,
+ Aleksandr Anenkov <a.anenkov@yadro.com>, qemu-devel@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Akihiko Odaki <akihiko.odaki@daynix.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PATCH 1/4] target/riscv: Remove misa_mxl validation
+Date: Thu, 12 Oct 2023 14:42:16 +0900
+Message-ID: <20231012054223.37870-2-akihiko.odaki@daynix.com>
+X-Mailer: git-send-email 2.42.0
+In-Reply-To: <20231012054223.37870-1-akihiko.odaki@daynix.com>
+References: <20231012054223.37870-1-akihiko.odaki@daynix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/6] target/riscv: Propagate error from PMU setup
-Content-Language: en-US
-To: Rob Bradford <rbradford@rivosinc.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, atishp@rivosinc.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
- dbarboza@ventanamicro.com
-References: <20231011145032.81509-1-rbradford@rivosinc.com>
- <20231011145032.81509-2-rbradford@rivosinc.com>
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20231011145032.81509-2-rbradford@rivosinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=115.124.30.113;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-113.freemail.mail.aliyun.com
-X-Spam_score_int: -98
-X-Spam_score: -9.9
-X-Spam_bar: ---------
-X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: none client-ip=2607:f8b0:4864:20::c33;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-oo1-xc33.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -66,99 +102,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+It is initialized with a simple assignment and there is little room for
+error. In fact, the validation is even more complex.
 
-On 2023/10/11 22:45, Rob Bradford wrote:
-> More closely follow the QEMU style by returning an Error and propagating
-> it there is an error relating to the PMU setup.
->
-> Further simplify the function by removing the num_counters parameter as
-> this is available from the passed in cpu pointer.
->
-> Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->   target/riscv/cpu.c |  8 +++++++-
->   target/riscv/pmu.c | 19 +++++++++----------
->   target/riscv/pmu.h |  3 ++-
->   3 files changed, 18 insertions(+), 12 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index ac2b94b6a6..c9d8fc12fe 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1488,7 +1488,13 @@ static void riscv_cpu_realize_tcg(DeviceState *dev, Error **errp)
->       }
->   
->       if (cpu->cfg.pmu_num) {
-> -        if (!riscv_pmu_init(cpu, cpu->cfg.pmu_num) && cpu->cfg.ext_sscofpmf) {
-> +        riscv_pmu_init(cpu, &local_err);
-> +        if (local_err != NULL) {
-> +            error_propagate(errp, local_err);
-> +            return;
-> +        }
-> +
-> +        if (cpu->cfg.ext_sscofpmf) {
->               cpu->pmu_timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
->                                             riscv_pmu_timer_cb, cpu);
->           }
-> diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
-> index 36f6307d28..13801ccb78 100644
-> --- a/target/riscv/pmu.c
-> +++ b/target/riscv/pmu.c
-> @@ -434,22 +434,21 @@ int riscv_pmu_setup_timer(CPURISCVState *env, uint64_t value, uint32_t ctr_idx)
->   }
->   
->   
-> -int riscv_pmu_init(RISCVCPU *cpu, int num_counters)
-> +void riscv_pmu_init(RISCVCPU *cpu, Error **errp)
->   {
-> -    if (num_counters > (RV_MAX_MHPMCOUNTERS - 3)) {
-> -        return -1;
-> +    uint8_t pmu_num = cpu->cfg.pmu_num;
-> +
-> +    if (pmu_num > (RV_MAX_MHPMCOUNTERS - 3)) {
-> +        error_setg(errp, "Number of counters exceeds maximum available");
-> +        return;
->       }
->   
->       cpu->pmu_event_ctr_map = g_hash_table_new(g_direct_hash, g_direct_equal);
->       if (!cpu->pmu_event_ctr_map) {
-> -        /* PMU support can not be enabled */
-> -        qemu_log_mask(LOG_UNIMP, "PMU events can't be supported\n");
-> -        cpu->cfg.pmu_num = 0;
-> -        return -1;
-> +        error_setg(errp, "Unable to allocate PMU event hash table");
-> +        return;
->       }
->   
->       /* Create a bitmask of available programmable counters */
-> -    cpu->pmu_avail_ctrs = MAKE_32BIT_MASK(3, num_counters);
-> -
-> -    return 0;
-> +    cpu->pmu_avail_ctrs = MAKE_32BIT_MASK(3, pmu_num);
->   }
-> diff --git a/target/riscv/pmu.h b/target/riscv/pmu.h
-> index 2bfb71ba87..88e0713296 100644
-> --- a/target/riscv/pmu.h
-> +++ b/target/riscv/pmu.h
-> @@ -17,13 +17,14 @@
->    */
->   
->   #include "cpu.h"
-> +#include "qapi/error.h"
->   
->   bool riscv_pmu_ctr_monitor_instructions(CPURISCVState *env,
->                                           uint32_t target_ctr);
->   bool riscv_pmu_ctr_monitor_cycles(CPURISCVState *env,
->                                     uint32_t target_ctr);
->   void riscv_pmu_timer_cb(void *priv);
-> -int riscv_pmu_init(RISCVCPU *cpu, int num_counters);
-> +void riscv_pmu_init(RISCVCPU *cpu, Error **errp);
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+---
+ target/riscv/cpu.c | 13 ++-----------
+ 1 file changed, 2 insertions(+), 11 deletions(-)
 
-Zhiwei
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index f5572704de..550b357fb7 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1042,7 +1042,7 @@ static void riscv_cpu_disable_priv_spec_isa_exts(RISCVCPU *cpu)
+     }
+ }
+ 
+-static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu, Error **errp)
++static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu)
+ {
+     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cpu);
+     CPUClass *cc = CPU_CLASS(mcc);
+@@ -1062,11 +1062,6 @@ static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu, Error **errp)
+     default:
+         g_assert_not_reached();
+     }
+-
+-    if (env->misa_mxl_max != env->misa_mxl) {
+-        error_setg(errp, "misa_mxl_max must be equal to misa_mxl");
+-        return;
+-    }
+ }
+ 
+ /*
+@@ -1447,11 +1442,7 @@ static void riscv_cpu_realize_tcg(DeviceState *dev, Error **errp)
+         return;
+     }
+ 
+-    riscv_cpu_validate_misa_mxl(cpu, &local_err);
+-    if (local_err != NULL) {
+-        error_propagate(errp, local_err);
+-        return;
+-    }
++    riscv_cpu_validate_misa_mxl(cpu);
+ 
+     riscv_cpu_validate_priv_spec(cpu, &local_err);
+     if (local_err != NULL) {
+-- 
+2.42.0
 
->   int riscv_pmu_update_event_map(CPURISCVState *env, uint64_t value,
->                                  uint32_t ctr_idx);
->   int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx);
 
