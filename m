@@ -4,44 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3E3BCDB47E
-	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Oct 2023 18:28:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B29BBCDB47E
+	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Oct 2023 18:29:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qrMsd-0000Ap-03; Fri, 13 Oct 2023 14:27:24 -0400
+	id 1qrMuc-0001DG-9t; Fri, 13 Oct 2023 14:29:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <mark.cave-ayland@ilande.co.uk>)
- id 1qrMsR-00009U-B9; Fri, 13 Oct 2023 14:27:11 -0400
+ id 1qrMuW-0001BB-7K; Fri, 13 Oct 2023 14:29:20 -0400
 Received: from mail.ilande.co.uk ([2001:41c9:1:41f::167])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <mark.cave-ayland@ilande.co.uk>)
- id 1qrMsN-0002Cj-6C; Fri, 13 Oct 2023 14:27:11 -0400
+ id 1qrMuU-0002XZ-DA; Fri, 13 Oct 2023 14:29:19 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=ilande.co.uk; s=20220518; h=Subject:Content-Transfer-Encoding:Content-Type:
  In-Reply-To:From:References:Cc:To:MIME-Version:Date:Message-ID:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=B4pVf4fJ2bMdaQZKp5f/S8EyLHtuUJnUFKZUiAmTTog=; b=BEqmhqAWNRh/Lwu4r5dWa7Jjaj
- 6McmjzdZVbdu3lS2eTW741j8cnwi6seN2ER5bcbUW9QE8dMoH1JgV1TDvqVGrewo1+xGy++g3iPQ7
- oQs1sRZQ6ZjBf3dqjURXzOKM10bOzkKGHA+oY2vUU81OyIYCLdBsP2FFw2jwARnPxiWsYnqglLzHc
- 5RMnCr3u5NxDouVqKMHUZ42h6ouRZXbOezXhR+OKazYuluHpDv1Eyf+LayEZe6CsYIrwzy3ZqG9Ys
- f1VuX/Uij3hXI3LQcCk2qjSwH0FyrPD+cr2g6eoD0G0TIoQusOPhKunYXHfHVz5o6Om0j/WRM61hY
- gqQ1kZOp4dAYIl6Q435Lef9wpCRMXEMZ9ewmZJw0UPqBeW4sWXSvFWxXrqYXcaele75tmREO1o+Vw
- Ik2bjnL5X8wqMad29+SpYGpDcCx6OCZCjaQ+SF72k52fkomp21ecyfMf6vqrhDu4HvOy3/JnInAM6
- dFGLK8bdEnu6D2tIHABe6YosUot+VCxOJFnlf+HtuPR4cRz/xsQvKK55hIgcZ/x800tUqzQXgChJv
- TFHfuHlYNOVnomudwJ+CIgta/yZaKfYMxV+YZuNliGAi8aX5govQoiYmno2LiEVACACjxZKMUQ+4B
- NdI86tcbruRJplnUqalws0qSXlEBe4r96XHDqLC/k=;
+ bh=DOULnyGvZXY57WzISjGL9RiSmB6uXeM+PcNpnuA6Ai0=; b=MKTqEGP6haBPw+w0h7M4eBrpBw
+ G/3qf7T5HD88ChSsjtcVE4mspxVaDAZoYjUJ5t25pDUSUKoy8lvHxCym4Ui/hH69e0G+Y3yX1hLq4
+ 9GEnF9eseJgNDtY1c7zr47SrupNaC0gGlg0nefzk3It8rEthMCXbjl8iqWjPaEsqwwqmHKzDsmiz1
+ QGU+4zMsbsFixyWe9FIkYOQu4yZDQPbQcrb5ZABJlqhqOHCr1V0d/IUPztQ2v6uLdbdq3yyGE3ior
+ caXUUi4MH9RaI/QcZdhR9VJTN+LUbp3fmICqWSzQP4fy5r1SS/oq0juGSlpI3GYMG9yr4+FJ44qqI
+ T67GAPITQjqIihWRuvcmij+lQ4GW3XSzBzfFdEVmiStAyVH+vkV1Z58r7cqP+GtQs4CtZoIYsnrlI
+ fOVsmZF1DzI6QLPGOEO0FJRA8XMrxjU7U/sYakK3chL6AEtEu6jXZZdUm87LRVGUSW+H/5hhMKz92
+ whxyNn5j1ru+kZgOFfxiAV3POz2u8a+Mc+S5CKS0hAjBNFqWU3wZjalp5BsqSjPPrJ73QAsBwkG2R
+ UhXDFwiWNxOHBQSd32U1ZzWLVTDP7YCx10PHihOz6rghemV2xx00arJAsENvAkFgIYJJUKgVwOtPH
+ 2RATYEK1eBC6F1PzlznRXyI644ly7FjjDi62x96iQ=;
 Received: from [2a00:23c4:8baf:fd00:1033:b5d6:92a3:359f]
  by mail.ilande.co.uk with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.92) (envelope-from <mark.cave-ayland@ilande.co.uk>)
- id 1qrMr4-0002mm-Oh; Fri, 13 Oct 2023 19:25:50 +0100
-Message-ID: <14b256ef-904a-4ba4-80a6-ca1a33ecaf8c@ilande.co.uk>
-Date: Fri, 13 Oct 2023 19:25:43 +0100
+ id 1qrMtQ-0002of-7R; Fri, 13 Oct 2023 19:28:22 +0100
+Message-ID: <3d47fc1b-ceb5-4f66-9b62-3f4a83052456@ilande.co.uk>
+Date: Fri, 13 Oct 2023 19:28:12 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Content-Language: en-US
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
 Cc: David Hildenbrand <david@redhat.com>, "Michael S. Tsirkin"
@@ -73,8 +74,7 @@ Cc: David Hildenbrand <david@redhat.com>, "Michael S. Tsirkin"
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  Aurelien Jarno <aurelien@aurel32.net>, qemu-s390x@nongnu.org
 References: <20231010092901.99189-1-philmd@linaro.org>
- <20231010092901.99189-15-philmd@linaro.org>
-Content-Language: en-US
+ <20231010092901.99189-19-philmd@linaro.org>
 From: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
 Autocrypt: addr=mark.cave-ayland@ilande.co.uk; keydata=
  xsBNBFQJuzwBCADAYvxrwUh1p/PvUlNFwKosVtVHHplgWi5p29t58QlOUkceZG0DBYSNqk93
@@ -100,13 +100,13 @@ Autocrypt: addr=mark.cave-ayland@ilande.co.uk; keydata=
  Ir6VauZs5Gp25XLrL6bh/SL8aK0BX6y79m5nhfKI1/6qtzHAjtMAjqy8ChPvOqVVVqmGUzFg
  KPsrrIoklWcYHXPyMLj9afispPVR8e0tMKvxzFBWzrWX1mzljbBlnV2n8BIwVXWNbgwpHSsj
  imgcU9TTGC5qd9g=
-In-Reply-To: <20231010092901.99189-15-philmd@linaro.org>
+In-Reply-To: <20231010092901.99189-19-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-SA-Exim-Connect-IP: 2a00:23c4:8baf:fd00:1033:b5d6:92a3:359f
 X-SA-Exim-Mail-From: mark.cave-ayland@ilande.co.uk
-Subject: Re: [PATCH 14/18] target/sparc: Declare CPU QOM types using
- DEFINE_TYPES() macro
+Subject: Re: [PATCH 18/18] target/sparc: Make SPARC_CPU common to new
+ SPARC32_CPU/SPARC64_CPU types
 X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
 X-SA-Exim-Scanned: Yes (on mail.ilande.co.uk)
 Received-SPF: pass client-ip=2001:41c9:1:41f::167;
@@ -132,64 +132,97 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 10/10/2023 10:28, Philippe Mathieu-Daudé wrote:
+On 10/10/2023 10:29, Philippe Mathieu-Daudé wrote:
 
-> When multiple QOM types are registered in the same file,
-> it is simpler to use the the DEFINE_TYPES() macro. In
-> particular because type array declared with such macro
-> are easier to review.
+> "target/foo/cpu-qom.h" can not use any target specific definitions.
 > 
-> In few commits we are going to add more types, so replace
-> the type_register_static() to ease further reviews.
+> Currently "target/sparc/cpu-qom.h" defines TYPE_SPARC_CPU
+> depending on the sparc(32)/sparc64 build type. This doesn't
+> scale in a heterogeneous context where we need to access both
+> types concurrently.
+> 
+> In order to do that, introduce the new SPARC32_CPU / SPARC64_CPU
+> types, both inheriting a common TYPE_SPARC_CPU base type.
+> 
+> Keep the current CPU types registered in sparc_register_cpudef_type()
+> as 32 or 64-bit, depending on the binary built.
 > 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->   target/sparc/cpu.c | 23 +++++++++++++----------
->   1 file changed, 13 insertions(+), 10 deletions(-)
+>   target/sparc/cpu-qom.h |  9 ++++-----
+>   target/sparc/cpu.h     |  3 +++
+>   target/sparc/cpu.c     | 12 +++++++++++-
+>   3 files changed, 18 insertions(+), 6 deletions(-)
 > 
+> diff --git a/target/sparc/cpu-qom.h b/target/sparc/cpu-qom.h
+> index 86b24a254a..d08fbd4ddc 100644
+> --- a/target/sparc/cpu-qom.h
+> +++ b/target/sparc/cpu-qom.h
+> @@ -23,13 +23,12 @@
+>   #include "hw/core/cpu.h"
+>   #include "qom/object.h"
+>   
+> -#ifdef TARGET_SPARC64
+> -#define TYPE_SPARC_CPU "sparc64-cpu"
+> -#else
+>   #define TYPE_SPARC_CPU "sparc-cpu"
+> -#endif
+> +#define TYPE_SPARC32_CPU "sparc32-cpu"
+> +#define TYPE_SPARC64_CPU "sparc64-cpu"
+>   
+> -OBJECT_DECLARE_CPU_TYPE(SPARCCPU, SPARCCPUClass, SPARC_CPU)
+> +OBJECT_DECLARE_CPU_TYPE(SPARC32CPU, SPARCCPUClass, SPARC32_CPU)
+> +OBJECT_DECLARE_CPU_TYPE(SPARC64CPU, SPARCCPUClass, SPARC64_CPU)
+>   
+>   #define SPARC_CPU_TYPE_SUFFIX "-" TYPE_SPARC_CPU
+>   #define SPARC_CPU_TYPE_NAME(model) model SPARC_CPU_TYPE_SUFFIX
+> diff --git a/target/sparc/cpu.h b/target/sparc/cpu.h
+> index 924e83b9ce..0f94e5a442 100644
+> --- a/target/sparc/cpu.h
+> +++ b/target/sparc/cpu.h
+> @@ -12,6 +12,9 @@
+>   #define TARGET_DPREGS 32
+>   #endif
+>   
+> +/* Abstract QOM SPARC CPU, not exposed to other targets */
+> +OBJECT_DECLARE_CPU_TYPE(SPARCCPU, SPARCCPUClass, SPARC_CPU)
+> +
+>   /*#define EXCP_INTERRUPT 0x100*/
+>   
+>   /* Windowed register indexes.  */
 > diff --git a/target/sparc/cpu.c b/target/sparc/cpu.c
-> index 8ba96ae225..1e66413e94 100644
+> index 1e66413e94..7d060ba488 100644
 > --- a/target/sparc/cpu.c
 > +++ b/target/sparc/cpu.c
-> @@ -924,17 +924,21 @@ static void sparc_cpu_class_init(ObjectClass *oc, void *data)
->       cc->tcg_ops = &sparc_tcg_ops;
->   }
->   
-> -static const TypeInfo sparc_cpu_type_info = {
-> -    .name = TYPE_SPARC_CPU,
-> -    .parent = TYPE_CPU,
-> -    .instance_size = sizeof(SPARCCPU),
-> -    .instance_align = __alignof(SPARCCPU),
-> -    .instance_init = sparc_cpu_initfn,
-> -    .abstract = true,
-> -    .class_size = sizeof(SPARCCPUClass),
-> -    .class_init = sparc_cpu_class_init,
-> +static const TypeInfo sparc_cpu_types[] = {
-> +    {
-> +        .name           = TYPE_SPARC_CPU,
-> +        .parent         = TYPE_CPU,
-> +        .instance_size  = sizeof(SPARCCPU),
-> +        .instance_align = __alignof(SPARCCPU),
-> +        .instance_init  = sparc_cpu_initfn,
-> +        .abstract       = true,
-> +        .class_size     = sizeof(SPARCCPUClass),
-> +        .class_init     = sparc_cpu_class_init,
-> +    }
+> @@ -934,6 +934,12 @@ static const TypeInfo sparc_cpu_types[] = {
+>           .abstract       = true,
+>           .class_size     = sizeof(SPARCCPUClass),
+>           .class_init     = sparc_cpu_class_init,
+> +    }, {
+> +        .name           = TYPE_SPARC32_CPU,
+> +        .parent         = TYPE_SPARC_CPU,
+> +    }, {
+> +        .name           = TYPE_SPARC64_CPU,
+> +        .parent         = TYPE_SPARC_CPU,
+>       }
 >   };
 >   
-> +DEFINE_TYPES(sparc_cpu_types)
-> +
->   static void sparc_cpu_cpudef_class_init(ObjectClass *oc, void *data)
->   {
->       SPARCCPUClass *scc = SPARC_CPU_CLASS(oc);
-> @@ -959,7 +963,6 @@ static void sparc_cpu_register_types(void)
->   {
->       int i;
->   
-> -    type_register_static(&sparc_cpu_type_info);
->       for (i = 0; i < ARRAY_SIZE(sparc_defs); i++) {
->           sparc_register_cpudef_type(&sparc_defs[i]);
->       }
+> @@ -950,7 +956,11 @@ static void sparc_register_cpudef_type(const struct sparc_def_t *def)
+>       char *typename = sparc_cpu_type_name(def->name);
+>       TypeInfo ti = {
+>           .name = typename,
+> -        .parent = TYPE_SPARC_CPU,
+> +#ifdef TARGET_SPARC64
+> +        .parent = TYPE_SPARC64_CPU,
+> +#else
+> +        .parent = TYPE_SPARC32_CPU,
+> +#endif
+>           .class_init = sparc_cpu_cpudef_class_init,
+>           .class_data = (void *)def,
+>       };
+
+I do have a long-standing TODO which is to look at better separation between 32-bit 
+and 64-bit SPARC, however for now:
 
 Reviewed-by: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
 
