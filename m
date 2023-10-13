@@ -4,57 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2700ECDB47E
-	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Oct 2023 14:02:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F12DCDB47E
+	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Oct 2023 14:04:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qrIjU-0006ID-Lk; Fri, 13 Oct 2023 10:01:40 -0400
+	id 1qrIl1-0008GZ-Gd; Fri, 13 Oct 2023 10:03:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qrIjJ-00069Z-Mf
- for qemu-riscv@nongnu.org; Fri, 13 Oct 2023 10:01:33 -0400
-Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qrIjp-0006Xg-MU
+ for qemu-riscv@nongnu.org; Fri, 13 Oct 2023 10:02:02 -0400
+Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qrIjF-00026Z-Sz
- for qemu-riscv@nongnu.org; Fri, 13 Oct 2023 10:01:29 -0400
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-98377c5d53eso330844666b.0
- for <qemu-riscv@nongnu.org>; Fri, 13 Oct 2023 07:01:24 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qrIjh-0002DU-Lk
+ for qemu-riscv@nongnu.org; Fri, 13 Oct 2023 10:02:01 -0400
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-53da72739c3so3718474a12.3
+ for <qemu-riscv@nongnu.org>; Fri, 13 Oct 2023 07:01:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697205683; x=1697810483; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=oOgjtdb9ykn+s/ckzJQWD+kkXkgOLw7b9JoigpOQD4w=;
- b=HzC3WO8wtG7sFESF+QEr25Jisfj90aQJIULjEWIbU4JKfJmP6+8yaM9vRD6uCHhI/Y
- iVAyqr7vo/ZbP7UfzbiponUaydg4uO7x44OkIC35hkcSwzf0A5gBTr7CCxStMe5sGHp0
- qO2wbhIKNwEKY2sGu6cHL8ADQbpAznGaybTLTGVXmnCb++IRUPnks/yeprWr2k5m5og5
- eAj5WJHWXTEH9vv04IC/BvVlAcl42QqoUxtN1IFGYqJscpa6ARBSLPP3MqE+EReYjrlx
- QVjMIIQJ7KFK89HSLrRGo6FDnw5xgP+9eOQAqX4u6PGJSOpxzv6t348R3wHHw9k/GA3f
- DBgA==
+ d=linaro.org; s=google; t=1697205711; x=1697810511; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Ct6nqOkWPITqikpho6LzBF9JTwL/xSnZhZ7aKNqCpWg=;
+ b=uu4RGZRGD8JKoiIilgiVEOqLk6vLunYr366a1gSYzH5lZ3t3yOaKrgQXzmTY1MsBEG
+ a9wX2y3pBGNbky+FcLJ3bsicE6sgrPlfUP3EXvhaf0Kg3VGeYqJEBvEcA7Z7kWe76iEj
+ waGcDNMekdzg6KUvmL2CHX2/9xQ9/CCu4fj+nz+sPjJbh50Qcj5v0JYGiQORxYJYSYaI
+ NjThwtS6S0NaPF8nk028CFw3CDue2CcrF2+0dBGJrJUdDGirO4xdENoLURcpwonJ2DQ2
+ o6MJIb1YtXDDv5j1rLEycnwMTOXd2bcJ5SIKI9Orw99G9kVdZFbWT0f8W0/crVu0G4xo
+ EAfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697205683; x=1697810483;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=oOgjtdb9ykn+s/ckzJQWD+kkXkgOLw7b9JoigpOQD4w=;
- b=eGdQzgkTMQWUYWP/uc7k5qMWo0YljE7RXbRgh/zYJevbxpaWHR2TxmLbvtJejx/NHH
- gkwJPA53sjpheYzym2FCR1A4DoDJTajqoOopVIuVXRpwZHq+9+luRiU3L9iMkhzh2xz/
- gVFEbzoI5NJR7qJtUhI3KPaDYaWTLsdbpLfEvZmwmoXtd4P8Bq9VS7FPK7UDRMX/6d+Y
- vFRCRaMvr0jj1ZkOq8CA6JtPxdQPR/bb24+rQtsMCznkLTUavHPTKOUObuMg5fbQNQkG
- VbkH4yCfvFGcaRoGpqZn5FzAzSzV/GBpI7rKovmYn/UX6TXOiGgr6ChAwGy70JisKWlR
- R+8A==
-X-Gm-Message-State: AOJu0YzZu0VLGC+iUD0WugrJWoquw9xaYVZgsSTWc9ncBXxnCF6k2RAF
- YTh7U77NnCA8HXmfilaWltXKAw==
-X-Google-Smtp-Source: AGHT+IFqCw3TcG1ugTqR4cRGr2//B5Ci5LzFIGztGAJ3xbL+vbIsRYqfA/LmkSkxP+cmE0gh0Ege3Q==
-X-Received: by 2002:a17:906:10da:b0:9a9:e393:8bcd with SMTP id
- v26-20020a17090610da00b009a9e3938bcdmr22908914ejv.5.1697205683103; 
- Fri, 13 Oct 2023 07:01:23 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1697205711; x=1697810511;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Ct6nqOkWPITqikpho6LzBF9JTwL/xSnZhZ7aKNqCpWg=;
+ b=ahdPX3HFX6KcGkEtyLwi1pZgjnDj6KdVasvbU1Czh7WioSan875LuJD7ZoefM6jKXH
+ Uy6F0MawGxUUYAy/+YCudwXZv+rJoZqiAWC8gkGPPuukAqcXyii3qLCo1nnM/Q8j8Pmz
+ Rt2Kf6K5LvBkm2PrVyTkXNIvgtUwlC4AuvFJiRkI4iTkUHYNcUYMfTfHzpn1C3gu6FWV
+ xzmaiw0vKcHbelWIFO+36FzGQsxDSRp7GCH52Aid9/4qGG6rIF1YVMuBOZhK58OX+cLo
+ eoyC5kRWAJM6GxKef356VJLl+efurTvLCy7meUVliwQai9gOXr24LzsmZMRo4zpI+fs2
+ zTuA==
+X-Gm-Message-State: AOJu0YwdQRxavJsiVIIlCqhSE3UOYW6HxHE5Ro6bVLFuPmNpfkaZOf03
+ NFUsRVqfYFGUTtaK8IWP46EC4Q==
+X-Google-Smtp-Source: AGHT+IGOPusUHzEY1R72zUpJpEMvm/4R/rTEAMfKCQO/I2/uN+urSywi/N/wufEiFUOgDDrzyCvTYQ==
+X-Received: by 2002:a05:6402:b18:b0:531:1875:bbc8 with SMTP id
+ bm24-20020a0564020b1800b005311875bbc8mr23576375edb.19.1697205711335; 
+ Fri, 13 Oct 2023 07:01:51 -0700 (PDT)
 Received: from m1x-phil.lan ([176.172.118.168])
  by smtp.gmail.com with ESMTPSA id
- n12-20020a170906378c00b0099d45ed589csm12435407ejc.125.2023.10.13.07.01.18
+ bm15-20020a0564020b0f00b005346925a474sm11552152edb.43.2023.10.13.07.01.46
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 13 Oct 2023 07:01:22 -0700 (PDT)
+ Fri, 13 Oct 2023 07:01:50 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Eduardo Habkost <eduardo@habkost.net>,
@@ -88,15 +89,18 @@ Cc: Eduardo Habkost <eduardo@habkost.net>,
  Sergio Lopez <slp@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Ilya Leoshkevich <iii@linux.ibm.com>, Michael Rolnik <mrolnik@gmail.com>
-Subject: [PATCH v2 00/16] target: Make 'cpu-qom.h' really target agnostic
-Date: Fri, 13 Oct 2023 16:00:59 +0200
-Message-ID: <20231013140116.255-1-philmd@linaro.org>
+Subject: [PATCH v2 03/16] target/arm: Move internal declarations from
+ 'cpu-qom.h' to 'cpu.h'
+Date: Fri, 13 Oct 2023 16:01:02 +0200
+Message-ID: <20231013140116.255-4-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20231013140116.255-1-philmd@linaro.org>
+References: <20231013140116.255-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::630;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x630.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::530;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x530.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -119,111 +123,103 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Since v1:
-- Added R-b tags
-- Addressed Richard comments
-- Postponed OBJECT_DECLARE_CPU_TYPE() changes
+These definitions and declarations are only used by
+target/arm/, no need to expose them to generic hw/.
 
-A heterogeneous machine must be able to instantiate CPUs
-from different architectures. In order to do that, the
-common hw/ code has to access to the QOM CPU definitions
-from various architecture.
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ target/arm/cpu-qom.h | 28 ----------------------------
+ target/arm/cpu.h     | 28 ++++++++++++++++++++++++++++
+ 2 files changed, 28 insertions(+), 28 deletions(-)
 
-Those QOM definitions are published in "target/foo/cpu-qom.h".
-All 'cpu-qom.h' must be target agnostic, so hw/ can include
-multiple of them in order to create a heterogeneous machine.
-
-This series strengthen all (except PPC...) target 'cpu-qom.h',
-making them target agnostic.
-
-For various targets it is just a matter of moving definitions
-where they belong (either 'cpu.h' or 'cpu-qom.h').
-
-For few (mips/riscv/sparc/x86) we have to remove the target
-specific definitions (which 'taint' the header as target specific).
-
-For mips/sparc/x86 this implies splitting the base target
-definition by making it explicit to the build type (32 or 64-bit).
-
-PPC is missing because CPU types are currently registered
-indistinctly, and whether a CPU is 32/64 bit can not be detected
-at build time (it is done in each cpu_class_init() handler,
-*after* the type is registered).
-
-Based-on: <20231010074952.79165-1-philmd@linaro.org>
-  Introduce qtest_get_base_arch() / qtest_get_arch_bits()
-
-Philippe Mathieu-Daudé (16):
-  target: Unify QOM style
-  target: Mention 'cpu-qom.h' is target agnostic
-  target/arm: Move internal declarations from 'cpu-qom.h' to 'cpu.h'
-  target/ppc: Remove CPU_RESOLVING_TYPE from 'cpu-qom.h'
-  target/riscv: Remove CPU_RESOLVING_TYPE from 'cpu-qom.h'
-  target: Declare FOO_CPU_TYPE_NAME/SUFFIX in 'cpu-qom.h'
-  target/hexagon: Declare QOM definitions in 'cpu-qom.h'
-  target/loongarch: Declare QOM definitions in 'cpu-qom.h'
-  target/nios2: Declare QOM definitions in 'cpu-qom.h'
-  target/openrisc: Declare QOM definitions in 'cpu-qom.h'
-  target/riscv: Move TYPE_RISCV_CPU_BASE definition to 'cpu.h'
-  target: Move ArchCPUClass definition to 'cpu.h'
-  target/i386: Declare CPU QOM types using DEFINE_TYPES() macro
-  target/mips: Declare CPU QOM types using DEFINE_TYPES() macro
-  target/ppc: Declare CPU QOM types using DEFINE_TYPES() macro
-  target/sparc: Declare CPU QOM types using DEFINE_TYPES() macro
-
- target/alpha/cpu-qom.h      | 21 ++-----------
- target/alpha/cpu.h          | 17 ++++++++---
- target/arm/cpu-qom.h        | 61 +------------------------------------
- target/arm/cpu.h            | 55 +++++++++++++++++++++++++++++++--
- target/avr/cpu-qom.h        | 20 ++----------
- target/avr/cpu.h            | 18 ++++++++---
- target/cris/cpu-qom.h       | 24 ++-------------
- target/cris/cpu.h           | 20 +++++++++---
- target/hexagon/cpu-qom.h    | 27 ++++++++++++++++
- target/hexagon/cpu.h        | 20 ++----------
- target/hppa/cpu-qom.h       | 20 +-----------
- target/hppa/cpu.h           | 16 ++++++++--
- target/i386/cpu-qom.h       | 42 ++-----------------------
- target/i386/cpu.h           | 39 +++++++++++++++++++++---
- target/loongarch/cpu-qom.h  | 23 ++++++++++++++
- target/loongarch/cpu.h      | 14 +--------
- target/m68k/cpu-qom.h       | 21 ++-----------
- target/m68k/cpu.h           | 17 ++++++++---
- target/microblaze/cpu-qom.h | 20 +-----------
- target/microblaze/cpu.h     | 15 +++++++--
- target/mips/cpu-qom.h       | 23 ++------------
- target/mips/cpu.h           | 21 ++++++++++---
- target/nios2/cpu-qom.h      | 18 +++++++++++
- target/nios2/cpu.h          | 11 +------
- target/openrisc/cpu-qom.h   | 21 +++++++++++++
- target/openrisc/cpu.h       | 14 +--------
- target/ppc/cpu-qom.h        |  3 +-
- target/ppc/cpu.h            |  4 +--
- target/riscv/cpu-qom.h      | 26 ++--------------
- target/riscv/cpu.h          | 24 +++++++++++++--
- target/rx/cpu-qom.h         | 20 ++----------
- target/rx/cpu.h             | 18 ++++++++---
- target/s390x/cpu-qom.h      | 41 +++----------------------
- target/s390x/cpu.h          | 34 ++++++++++++++++++---
- target/s390x/cpu_models.h   |  8 ++---
- target/sh4/cpu-qom.h        | 28 ++---------------
- target/sh4/cpu.h            | 24 ++++++++++++---
- target/sparc/cpu-qom.h      | 23 ++------------
- target/sparc/cpu.h          | 22 +++++++++----
- target/tricore/cpu-qom.h    | 15 +++------
- target/tricore/cpu.h        | 10 +++---
- target/xtensa/cpu-qom.h     | 26 ++--------------
- target/xtensa/cpu.h         | 24 +++++++++++----
- target/i386/cpu.c           | 50 ++++++++++++++----------------
- target/mips/cpu.c           | 23 ++++++++------
- target/ppc/cpu_init.c       | 52 ++++++++++++++-----------------
- target/sparc/cpu.c          | 23 ++++++++------
- 47 files changed, 528 insertions(+), 588 deletions(-)
- create mode 100644 target/hexagon/cpu-qom.h
- create mode 100644 target/loongarch/cpu-qom.h
- create mode 100644 target/nios2/cpu-qom.h
- create mode 100644 target/openrisc/cpu-qom.h
-
+diff --git a/target/arm/cpu-qom.h b/target/arm/cpu-qom.h
+index dfb9d5b827..35c3b0924e 100644
+--- a/target/arm/cpu-qom.h
++++ b/target/arm/cpu-qom.h
+@@ -35,9 +35,6 @@ typedef struct ARMCPUInfo {
+     void (*class_init)(ObjectClass *oc, void *data);
+ } ARMCPUInfo;
+ 
+-void arm_cpu_register(const ARMCPUInfo *info);
+-void aarch64_cpu_register(const ARMCPUInfo *info);
+-
+ /**
+  * ARMCPUClass:
+  * @parent_realize: The parent class' realize handler.
+@@ -63,29 +60,4 @@ struct AArch64CPUClass {
+     ARMCPUClass parent_class;
+ };
+ 
+-void register_cp_regs_for_features(ARMCPU *cpu);
+-void init_cpreg_list(ARMCPU *cpu);
+-
+-/* Callback functions for the generic timer's timers. */
+-void arm_gt_ptimer_cb(void *opaque);
+-void arm_gt_vtimer_cb(void *opaque);
+-void arm_gt_htimer_cb(void *opaque);
+-void arm_gt_stimer_cb(void *opaque);
+-void arm_gt_hvtimer_cb(void *opaque);
+-
+-#define ARM_AFF0_SHIFT 0
+-#define ARM_AFF0_MASK  (0xFFULL << ARM_AFF0_SHIFT)
+-#define ARM_AFF1_SHIFT 8
+-#define ARM_AFF1_MASK  (0xFFULL << ARM_AFF1_SHIFT)
+-#define ARM_AFF2_SHIFT 16
+-#define ARM_AFF2_MASK  (0xFFULL << ARM_AFF2_SHIFT)
+-#define ARM_AFF3_SHIFT 32
+-#define ARM_AFF3_MASK  (0xFFULL << ARM_AFF3_SHIFT)
+-#define ARM_DEFAULT_CPUS_PER_CLUSTER 8
+-
+-#define ARM32_AFFINITY_MASK (ARM_AFF0_MASK|ARM_AFF1_MASK|ARM_AFF2_MASK)
+-#define ARM64_AFFINITY_MASK \
+-    (ARM_AFF0_MASK|ARM_AFF1_MASK|ARM_AFF2_MASK|ARM_AFF3_MASK)
+-#define ARM64_AFFINITY_INVALID (~ARM64_AFFINITY_MASK)
+-
+ #endif
+diff --git a/target/arm/cpu.h b/target/arm/cpu.h
+index fb1b08371c..06f92dacb9 100644
+--- a/target/arm/cpu.h
++++ b/target/arm/cpu.h
+@@ -1116,11 +1116,39 @@ struct ArchCPU {
+     uint64_t gt_cntfrq_hz;
+ };
+ 
++/* Callback functions for the generic timer's timers. */
++void arm_gt_ptimer_cb(void *opaque);
++void arm_gt_vtimer_cb(void *opaque);
++void arm_gt_htimer_cb(void *opaque);
++void arm_gt_stimer_cb(void *opaque);
++void arm_gt_hvtimer_cb(void *opaque);
++
+ unsigned int gt_cntfrq_period_ns(ARMCPU *cpu);
+ void gt_rme_post_el_change(ARMCPU *cpu, void *opaque);
+ 
+ void arm_cpu_post_init(Object *obj);
+ 
++void arm_cpu_register(const ARMCPUInfo *info);
++void aarch64_cpu_register(const ARMCPUInfo *info);
++
++void register_cp_regs_for_features(ARMCPU *cpu);
++void init_cpreg_list(ARMCPU *cpu);
++
++#define ARM_AFF0_SHIFT 0
++#define ARM_AFF0_MASK  (0xFFULL << ARM_AFF0_SHIFT)
++#define ARM_AFF1_SHIFT 8
++#define ARM_AFF1_MASK  (0xFFULL << ARM_AFF1_SHIFT)
++#define ARM_AFF2_SHIFT 16
++#define ARM_AFF2_MASK  (0xFFULL << ARM_AFF2_SHIFT)
++#define ARM_AFF3_SHIFT 32
++#define ARM_AFF3_MASK  (0xFFULL << ARM_AFF3_SHIFT)
++#define ARM_DEFAULT_CPUS_PER_CLUSTER 8
++
++#define ARM32_AFFINITY_MASK (ARM_AFF0_MASK|ARM_AFF1_MASK|ARM_AFF2_MASK)
++#define ARM64_AFFINITY_MASK \
++    (ARM_AFF0_MASK|ARM_AFF1_MASK|ARM_AFF2_MASK|ARM_AFF3_MASK)
++#define ARM64_AFFINITY_INVALID (~ARM64_AFFINITY_MASK)
++
+ uint64_t arm_cpu_mp_affinity(int idx, uint8_t clustersz);
+ 
+ #ifndef CONFIG_USER_ONLY
 -- 
 2.41.0
 
