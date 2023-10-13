@@ -4,62 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F671CDB47E
-	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Oct 2023 12:51:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA20CCDB47E
+	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Oct 2023 12:51:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qrHch-0003w9-9R; Fri, 13 Oct 2023 08:50:35 -0400
+	id 1qrHcc-0003na-Dv; Fri, 13 Oct 2023 08:50:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <manos.pitsidianakis@linaro.org>)
- id 1qrDq1-0007jV-Gq
- for qemu-riscv@nongnu.org; Fri, 13 Oct 2023 04:48:07 -0400
-Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
+ id 1qrCwl-0005JD-Jz
+ for qemu-riscv@nongnu.org; Fri, 13 Oct 2023 03:51:01 -0400
+Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <manos.pitsidianakis@linaro.org>)
- id 1qrDpy-0000sh-Ne
- for qemu-riscv@nongnu.org; Fri, 13 Oct 2023 04:48:05 -0400
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-4066241289bso19485875e9.0
- for <qemu-riscv@nongnu.org>; Fri, 13 Oct 2023 01:48:01 -0700 (PDT)
+ id 1qrCwW-0004pE-TL
+ for qemu-riscv@nongnu.org; Fri, 13 Oct 2023 03:50:59 -0400
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-307d20548adso1649744f8f.0
+ for <qemu-riscv@nongnu.org>; Fri, 13 Oct 2023 00:50:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697186880; x=1697791680; darn=nongnu.org;
+ d=linaro.org; s=google; t=1697183442; x=1697788242; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=e0K1jBtbYPIofNLezlaYbU4Faf8tCiIn006y8XKJFbk=;
- b=z7d1uWotc+PQe8iLevP6XQiOc0ku1IyjxuhOxKRHxWOBHjB03O0Zt+zxBb7bu1XXF6
- IjRSJix4ubJLAgQDs0k3zSGBV3JGAAEVuRtKX48pwXflHJpgz5R6EvgzObxHJk7hQHnA
- Ax4iaeNAzKznwSbgVoD19Q88obcH4dZojJXufB+XtRB8tvr2sTo8aPGxk+qTFFaaPUiy
- BzVgbbn3lzqCdbBlgVFmaKlXh0UzlyONnrd7ta+Tk4k1zeEcAWT2FS2+n9XQ6q25wi6P
- x67e2+RReUuo+gTlrdTuiB2EZ35/YjKp04ZPjolqhVvNesWvdZcoG18jwXURdn+OYrJA
- wHjQ==
+ bh=EG1O6Mx5hoCtdrOzDPsTcbmTGnAeTbLpG3HtBfPjsQM=;
+ b=kf9J4zKgDLRIffOLROhbwCheQovcrfYUmYMs5bGCsiI1htcIr5s2dLy701HuuLKCMM
+ 9dnaV9ZMBResmpeACU0q3bykOqD+1arRxIELXjbGAly+2Az0A8ZiQzqtgFzJTI9u/g45
+ uih8P++a/Xnr8aWHV0QwoNvoN8HhRIcijhBB249zbTBNq2d0igqovPkFdVsVaES5xjqE
+ 3qG8OdmKDiPnBXeQ8lk88MWFk1h8eJOntvYMP1h9kWs/LVK6VNSt1VtrCEAX7+OM7hXH
+ LBzxhVt/biXAMrIIJaOcKYmEyVr59gaGUY8VRdkZo6cSdIJgSSdBPMarpgHY7T0rv+19
+ IQFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697186880; x=1697791680;
+ d=1e100.net; s=20230601; t=1697183442; x=1697788242;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=e0K1jBtbYPIofNLezlaYbU4Faf8tCiIn006y8XKJFbk=;
- b=ZHoBKxlcxLE+W+xraJDdiVil7b1QpqVrTlguHycHhIaeimsR3iTEZTc6CSSZGdkHc9
- zKf3zzGqnf8vvKU+bkd6z+ujZ8XHDsXaVtXG9ObvD9TfXYSzLKZZNRTF+M686dYaKMo/
- +VYCbakL0Hl1u6R3ZImaAmYZ4xigvylfSkDW3fNWIz1EPPZfgrvbrsXxuEmkKEmuyFhc
- qAVSsEHpZQ698ij414nhh7HqPtiVPti8oyH3uUciKJDm2Mwe8adPH/9deSF4Srpd573e
- 7IrTc/5RXBfcAKQfH9M0VD5NirTDL13bOQItWtSnxlZU9gpzGPhYphvhB0AMgBbMT4Jx
- Az1w==
-X-Gm-Message-State: AOJu0Yx5n9zzYFvhm9DOz+AN6b+7Oke/OrACFOIjDI3UKjn4WsPRqE11
- WBTLoE5gFZPIjLDb6a4pkCfjDw==
-X-Google-Smtp-Source: AGHT+IEwQ5nnKODekA9VH5wIXZrx+Wv04cX44o2I7QwwozzwhXaREmi4b93sFzbPWXjBMXVUedZazg==
-X-Received: by 2002:a05:600c:2054:b0:402:906:1e87 with SMTP id
- p20-20020a05600c205400b0040209061e87mr22058512wmg.31.1697186880701; 
- Fri, 13 Oct 2023 01:48:00 -0700 (PDT)
+ bh=EG1O6Mx5hoCtdrOzDPsTcbmTGnAeTbLpG3HtBfPjsQM=;
+ b=oemlQ77Yuj1mYOwU2EyJGdzmXR9AS9uOvYk8Z1veqSPQKaKvPoEU1mDcgfSXBBPg9s
+ 2vp/zempbdGEwvqgSlz2Sjo6ZeEJ6qvhT1b8y+pnDl+OnGUpm//nGa4yeBYG4VmSFwQ1
+ WPwDhUg/RpviCnIbS2qtoinkB7EO6TSLYgEpS2242E8Uw2yVV8Ad75I/UXNBags4jyV3
+ 4FDp5pCJscnAB+DFV7CGbnrN5K9XIx255eH53tU7qwndKkOM+XBrhe8E4oCGKSqAo4EV
+ ND5y3DNpHZh6S5Mn1lhZz/JTzFNO+gcMeoEeS8KKldj7NGy1Acm4QGr4N3z7TequWkHM
+ APDQ==
+X-Gm-Message-State: AOJu0Yy9SXlGO5ByPnj5iyxMOkd07qwZlWMlBGvDaDRZg7r3T+iMRtMh
+ HCISqxM9m7pQAyEIOwevy+7mtg==
+X-Google-Smtp-Source: AGHT+IHUhPicEcPhuvLtGuB0RgykwJOEbwhMcHcbPkNqSxxp8L+oJQkKpV1gJ3XyNy4zC/ZHJXFzKA==
+X-Received: by 2002:a05:6000:1379:b0:32d:939d:c7cf with SMTP id
+ q25-20020a056000137900b0032d939dc7cfmr2914562wrz.52.1697183441828; 
+ Fri, 13 Oct 2023 00:50:41 -0700 (PDT)
 Received: from localhost.localdomain (adsl-170.109.242.226.tellas.gr.
  [109.242.226.170]) by smtp.gmail.com with ESMTPSA id
- v10-20020a5d678a000000b0032d9f32b96csm569185wru.62.2023.10.13.01.47.59
+ m8-20020adfa3c8000000b0032d7fde2d3csm7990663wrb.79.2023.10.13.00.50.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Oct 2023 01:48:00 -0700 (PDT)
+ Fri, 13 Oct 2023 00:50:41 -0700 (PDT)
 From: Emmanouil Pitsidianakis <manos.pitsidianakis@linaro.org>
-To: qemu-devel@nongnu.org
+To: qemu-devel@nongnu.org,
+	qemu-arm@nongnu.org,
+	qemu-block@nongnu.org
 Cc: Emmanouil Pitsidianakis <manos.pitsidianakis@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -67,23 +69,23 @@ Cc: Emmanouil Pitsidianakis <manos.pitsidianakis@linaro.org>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [RFC PATCH v3 27/78] target/riscv: add fallthrough pseudo-keyword
-Date: Fri, 13 Oct 2023 11:45:55 +0300
-Message-Id: <b387a1f2114c71be3c88c5bc9d8acb7f53c3b441.1697186560.git.manos.pitsidianakis@linaro.org>
+Subject: [RFC PATCH 27/78] target/riscv: add fallthrough pseudo-keyword
+Date: Fri, 13 Oct 2023 10:47:31 +0300
+Message-Id: <e05d7549f265f8e4d2b250d6dd582979c76e048c.1697183082.git.manos.pitsidianakis@linaro.org>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <cover.1697186560.git.manos.pitsidianakis@linaro.org>
-References: <cover.1697186560.git.manos.pitsidianakis@linaro.org>
+In-Reply-To: <cover.1697183081.git.manos.pitsidianakis@linaro.org>
+References: <cover.1697183081.git.manos.pitsidianakis@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::329;
- envelope-from=manos.pitsidianakis@linaro.org; helo=mail-wm1-x329.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
+ envelope-from=manos.pitsidianakis@linaro.org; helo=mail-wr1-x42e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-Mailman-Approved-At: Fri, 13 Oct 2023 08:50:29 -0400
 X-BeenThere: qemu-riscv@nongnu.org
@@ -114,7 +116,40 @@ diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/t
 index 25cb60558a..98dd2e3cf6 100644
 --- a/target/riscv/insn_trans/trans_rvi.c.inc
 +++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -122,7 +122,7 @@ static TCGCond gen_compare_i128(bool bz, TCGv rl,
+@@ -89,61 +89,61 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
+ static TCGCond gen_compare_i128(bool bz, TCGv rl,
+                                 TCGv al, TCGv ah, TCGv bl, TCGv bh,
+                                 TCGCond cond)
+ {
+     TCGv rh = tcg_temp_new();
+     bool invert = false;
+ 
+     switch (cond) {
+     case TCG_COND_EQ:
+     case TCG_COND_NE:
+         if (bz) {
+             tcg_gen_or_tl(rl, al, ah);
+         } else {
+             tcg_gen_xor_tl(rl, al, bl);
+             tcg_gen_xor_tl(rh, ah, bh);
+             tcg_gen_or_tl(rl, rl, rh);
+         }
+         break;
+ 
+     case TCG_COND_GE:
+     case TCG_COND_LT:
+         if (bz) {
+             tcg_gen_mov_tl(rl, ah);
+         } else {
+             TCGv tmp = tcg_temp_new();
+ 
+             tcg_gen_sub2_tl(rl, rh, al, ah, bl, bh);
+             tcg_gen_xor_tl(rl, rh, ah);
+             tcg_gen_xor_tl(tmp, ah, bh);
+             tcg_gen_and_tl(rl, rl, tmp);
+             tcg_gen_xor_tl(rl, rh, rl);
+         }
+         break;
  
      case TCG_COND_LTU:
          invert = true;
@@ -123,11 +158,41 @@ index 25cb60558a..98dd2e3cf6 100644
      case TCG_COND_GEU:
          {
              TCGv tmp = tcg_temp_new();
+             TCGv zero = tcg_constant_tl(0);
+             TCGv one = tcg_constant_tl(1);
+ 
+             cond = TCG_COND_NE;
+             /* borrow in to second word */
+             tcg_gen_setcond_tl(TCG_COND_LTU, tmp, al, bl);
+             /* seed third word with 1, which will be result */
+             tcg_gen_sub2_tl(tmp, rh, ah, one, tmp, zero);
+             tcg_gen_sub2_tl(tmp, rl, tmp, rh, bh, zero);
+         }
+         break;
+ 
+     default:
+         g_assert_not_reached();
+     }
+ 
+     if (invert) {
+         cond = tcg_invert_cond(cond);
+     }
+     return cond;
+ }
 diff --git a/target/riscv/insn_trans/trans_rvzce.c.inc b/target/riscv/insn_trans/trans_rvzce.c.inc
 index 2d992e14c4..f0bcbb4f72 100644
 --- a/target/riscv/insn_trans/trans_rvzce.c.inc
 +++ b/target/riscv/insn_trans/trans_rvzce.c.inc
-@@ -125,37 +125,37 @@ static uint32_t decode_push_pop_list(DisasContext *ctx, target_ulong rlist)
+@@ -116,52 +116,52 @@ static bool trans_c_sh(DisasContext *ctx, arg_c_sh *a)
+ static uint32_t decode_push_pop_list(DisasContext *ctx, target_ulong rlist)
+ {
+     uint32_t reg_bitmap = 0;
+ 
+     if (has_ext(ctx, RVE) && rlist > 6) {
+         return 0;
+     }
+ 
+     switch (rlist) {
      case 15:
          reg_bitmap |=  1 << (X_Sn + 11) ;
          reg_bitmap |=  1 << (X_Sn + 10) ;
@@ -176,11 +241,32 @@ index 2d992e14c4..f0bcbb4f72 100644
      case 4:
          reg_bitmap |= 1 << xRA;
          break;
+     default:
+         break;
+     }
+ 
+     return reg_bitmap;
+ }
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
 index f0be79bb16..c99e513221 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -446,7 +446,7 @@ static TCGv_i64 get_fpr_hs(DisasContext *ctx, int reg_num)
+@@ -431,26 +431,26 @@ static void gen_set_gpr128(DisasContext *ctx, int reg_num, TCGv rl, TCGv rh)
+ static TCGv_i64 get_fpr_hs(DisasContext *ctx, int reg_num)
+ {
+     if (!ctx->cfg_ptr->ext_zfinx) {
+         return cpu_fpr[reg_num];
+     }
+ 
+     if (reg_num == 0) {
+         return tcg_constant_i64(0);
+     }
+     switch (get_xl(ctx)) {
+     case MXL_RV32:
+ #ifdef TARGET_RISCV32
+     {
+         TCGv_i64 t = tcg_temp_new_i64();
+         tcg_gen_ext_i32_i64(t, cpu_gpr[reg_num]);
          return t;
      }
  #else
@@ -189,7 +275,22 @@ index f0be79bb16..c99e513221 100644
      case MXL_RV64:
          return cpu_gpr[reg_num];
  #endif
-@@ -516,7 +516,7 @@ static void gen_set_fpr_hs(DisasContext *ctx, int reg_num, TCGv_i64 t)
+     default:
+         g_assert_not_reached();
+     }
+ }
+@@ -505,24 +505,24 @@ static TCGv_i64 dest_fpr(DisasContext *ctx, int reg_num)
+ /* assume it is nanboxing (for normal) or sign-extended (for zfinx) */
+ static void gen_set_fpr_hs(DisasContext *ctx, int reg_num, TCGv_i64 t)
+ {
+     if (!ctx->cfg_ptr->ext_zfinx) {
+         tcg_gen_mov_i64(cpu_fpr[reg_num], t);
+         return;
+     }
+     if (reg_num != 0) {
+         switch (get_xl(ctx)) {
+         case MXL_RV32:
+ #ifdef TARGET_RISCV32
              tcg_gen_extrl_i64_i32(cpu_gpr[reg_num], t);
              break;
  #else
@@ -198,6 +299,12 @@ index f0be79bb16..c99e513221 100644
          case MXL_RV64:
              tcg_gen_mov_i64(cpu_gpr[reg_num], t);
              break;
+ #endif
+         default:
+             g_assert_not_reached();
+         }
+     }
+ }
 -- 
 2.39.2
 
