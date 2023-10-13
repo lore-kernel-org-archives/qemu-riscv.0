@@ -4,64 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA20CCDB47E
-	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Oct 2023 12:51:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D42E7CDB47E
+	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Oct 2023 12:51:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qrHcc-0003na-Dv; Fri, 13 Oct 2023 08:50:30 -0400
+	id 1qrHcc-0003og-MD; Fri, 13 Oct 2023 08:50:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <manos.pitsidianakis@linaro.org>)
- id 1qrCwl-0005JD-Jz
- for qemu-riscv@nongnu.org; Fri, 13 Oct 2023 03:51:01 -0400
-Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
+ id 1qrD4c-0001S5-3Y
+ for qemu-riscv@nongnu.org; Fri, 13 Oct 2023 03:59:06 -0400
+Received: from mail-lf1-x12f.google.com ([2a00:1450:4864:20::12f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <manos.pitsidianakis@linaro.org>)
- id 1qrCwW-0004pE-TL
- for qemu-riscv@nongnu.org; Fri, 13 Oct 2023 03:50:59 -0400
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-307d20548adso1649744f8f.0
- for <qemu-riscv@nongnu.org>; Fri, 13 Oct 2023 00:50:42 -0700 (PDT)
+ id 1qrD4O-0006vE-Ak
+ for qemu-riscv@nongnu.org; Fri, 13 Oct 2023 03:59:05 -0400
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-507962561adso1370969e87.0
+ for <qemu-riscv@nongnu.org>; Fri, 13 Oct 2023 00:58:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697183442; x=1697788242; darn=nongnu.org;
+ d=linaro.org; s=google; t=1697183927; x=1697788727; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
  bh=EG1O6Mx5hoCtdrOzDPsTcbmTGnAeTbLpG3HtBfPjsQM=;
- b=kf9J4zKgDLRIffOLROhbwCheQovcrfYUmYMs5bGCsiI1htcIr5s2dLy701HuuLKCMM
- 9dnaV9ZMBResmpeACU0q3bykOqD+1arRxIELXjbGAly+2Az0A8ZiQzqtgFzJTI9u/g45
- uih8P++a/Xnr8aWHV0QwoNvoN8HhRIcijhBB249zbTBNq2d0igqovPkFdVsVaES5xjqE
- 3qG8OdmKDiPnBXeQ8lk88MWFk1h8eJOntvYMP1h9kWs/LVK6VNSt1VtrCEAX7+OM7hXH
- LBzxhVt/biXAMrIIJaOcKYmEyVr59gaGUY8VRdkZo6cSdIJgSSdBPMarpgHY7T0rv+19
- IQFA==
+ b=QW2mCNqinBasE5dDmIEemnALPcV1xlZwvTU7acm6Ed6bgUkkO05ZTW8WLohPhMHJXM
+ 0Z2uako59ZtU1J8rYfFgqoZoqrvxQmwQaJj1wAPQI5iSoV7aP9xLLD1I6I7iMW+0goy+
+ TRsYom1/Do6fdxX2QshOPctCJVC4gOtcqLYXcrg6545wQQNjYzeByA4x3Hl6m5x1x/Ui
+ od/FpYgIdAHexd6Zu+g9ktIGMsJ+Ql498zumIV9lC+F3AcgPAhu5MOgBqrsIpxxn4BkY
+ a/PUt7qrJ7ssToqOojQEfER8A7bZzkw6qgHWw9wuEElJvyqHZ1ZATXcQzw4by4mVZcUa
+ CyTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697183442; x=1697788242;
+ d=1e100.net; s=20230601; t=1697183927; x=1697788727;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
  bh=EG1O6Mx5hoCtdrOzDPsTcbmTGnAeTbLpG3HtBfPjsQM=;
- b=oemlQ77Yuj1mYOwU2EyJGdzmXR9AS9uOvYk8Z1veqSPQKaKvPoEU1mDcgfSXBBPg9s
- 2vp/zempbdGEwvqgSlz2Sjo6ZeEJ6qvhT1b8y+pnDl+OnGUpm//nGa4yeBYG4VmSFwQ1
- WPwDhUg/RpviCnIbS2qtoinkB7EO6TSLYgEpS2242E8Uw2yVV8Ad75I/UXNBags4jyV3
- 4FDp5pCJscnAB+DFV7CGbnrN5K9XIx255eH53tU7qwndKkOM+XBrhe8E4oCGKSqAo4EV
- ND5y3DNpHZh6S5Mn1lhZz/JTzFNO+gcMeoEeS8KKldj7NGy1Acm4QGr4N3z7TequWkHM
- APDQ==
-X-Gm-Message-State: AOJu0Yy9SXlGO5ByPnj5iyxMOkd07qwZlWMlBGvDaDRZg7r3T+iMRtMh
- HCISqxM9m7pQAyEIOwevy+7mtg==
-X-Google-Smtp-Source: AGHT+IHUhPicEcPhuvLtGuB0RgykwJOEbwhMcHcbPkNqSxxp8L+oJQkKpV1gJ3XyNy4zC/ZHJXFzKA==
-X-Received: by 2002:a05:6000:1379:b0:32d:939d:c7cf with SMTP id
- q25-20020a056000137900b0032d939dc7cfmr2914562wrz.52.1697183441828; 
- Fri, 13 Oct 2023 00:50:41 -0700 (PDT)
-Received: from localhost.localdomain (adsl-170.109.242.226.tellas.gr.
- [109.242.226.170]) by smtp.gmail.com with ESMTPSA id
- m8-20020adfa3c8000000b0032d7fde2d3csm7990663wrb.79.2023.10.13.00.50.39
+ b=j33graKzlBNPH8cpFwk5e1lYcWCHbRos39c8S5KwLQnkQmKnWaN89UskrdlVm5FQ8e
+ F1hSe3pK6MgpdcUyyHz5sRNm7cuWyoBiuze0jCaO1r5AyhDVE6yK/c+fLYeZ7Nk79qea
+ 3EoZRTOWs49eFCx2fy23J9OuGSYzv9Fz8opslBacmJICcflb/zKBjSeSv86Z/ogOda8e
+ mQDX07/NfhCplHrSn7nyL3EOu5V7WKD+qJRsdSwHuihmZwSyQhKpUaRR2mE3H3h1M1z4
+ DeuArsAvc23qjOhjZe/evhujnOW2KJbhW21diCzX97+WAwzfnUDILkZNjZ+TF/1c6/XY
+ lECw==
+X-Gm-Message-State: AOJu0YxRV2lPUMaVhjhdiX4YsaerjyYvqhtuRx6fqlsVNKjgoik+CL/V
+ qbzYqpV4S9Hbx2J8ndqL/440Lg==
+X-Google-Smtp-Source: AGHT+IGUWD5fj3RQMtSVDMgXqgWwJzLE5d3708tyKiGcYqVOrRUlbRAr4MziSNMSLL89sc70E7ntdA==
+X-Received: by 2002:a05:6512:1593:b0:503:38ef:eb54 with SMTP id
+ bp19-20020a056512159300b0050338efeb54mr25622284lfb.37.1697183926947; 
+ Fri, 13 Oct 2023 00:58:46 -0700 (PDT)
+Received: from localhost.localdomain (adsl-26.37.6.0.tellas.gr. [37.6.0.26])
+ by smtp.gmail.com with ESMTPSA id
+ a10-20020a05600c224a00b003fe23b10fdfsm1798183wmm.36.2023.10.13.00.58.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Oct 2023 00:50:41 -0700 (PDT)
+ Fri, 13 Oct 2023 00:58:46 -0700 (PDT)
 From: Emmanouil Pitsidianakis <manos.pitsidianakis@linaro.org>
-To: qemu-devel@nongnu.org,
-	qemu-arm@nongnu.org,
-	qemu-block@nongnu.org
+To: qemu-devel@nongnu.org
 Cc: Emmanouil Pitsidianakis <manos.pitsidianakis@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -69,23 +67,23 @@ Cc: Emmanouil Pitsidianakis <manos.pitsidianakis@linaro.org>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [RFC PATCH 27/78] target/riscv: add fallthrough pseudo-keyword
-Date: Fri, 13 Oct 2023 10:47:31 +0300
-Message-Id: <e05d7549f265f8e4d2b250d6dd582979c76e048c.1697183082.git.manos.pitsidianakis@linaro.org>
+Subject: [RFC PATCH v2 27/78] target/riscv: add fallthrough pseudo-keyword
+Date: Fri, 13 Oct 2023 10:56:54 +0300
+Message-Id: <e05d7549f265f8e4d2b250d6dd582979c76e048c.1697183699.git.manos.pitsidianakis@linaro.org>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <cover.1697183081.git.manos.pitsidianakis@linaro.org>
-References: <cover.1697183081.git.manos.pitsidianakis@linaro.org>
+In-Reply-To: <cover.1697183699.git.manos.pitsidianakis@linaro.org>
+References: <cover.1697183699.git.manos.pitsidianakis@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
- envelope-from=manos.pitsidianakis@linaro.org; helo=mail-wr1-x42e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::12f;
+ envelope-from=manos.pitsidianakis@linaro.org; helo=mail-lf1-x12f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-Mailman-Approved-At: Fri, 13 Oct 2023 08:50:29 -0400
 X-BeenThere: qemu-riscv@nongnu.org
