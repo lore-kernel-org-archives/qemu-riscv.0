@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14416CDB482
-	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Oct 2023 06:37:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 232DDCDB47E
+	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Oct 2023 11:01:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qrBnn-0004kd-2P; Fri, 13 Oct 2023 02:37:42 -0400
+	id 1qrFvB-0000BD-Qc; Fri, 13 Oct 2023 07:01:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qrBnk-0004kH-St
- for qemu-riscv@nongnu.org; Fri, 13 Oct 2023 02:37:36 -0400
-Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
+ (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
+ id 1qrFv8-0000AQ-5f
+ for qemu-riscv@nongnu.org; Fri, 13 Oct 2023 07:01:32 -0400
+Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qrBnj-0008AM-Dt
- for qemu-riscv@nongnu.org; Fri, 13 Oct 2023 02:37:36 -0400
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-53dfc28a2afso2990809a12.1
- for <qemu-riscv@nongnu.org>; Thu, 12 Oct 2023 23:37:33 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
+ id 1qrFv3-00025O-PZ
+ for qemu-riscv@nongnu.org; Fri, 13 Oct 2023 07:01:27 -0400
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-40675f06f1fso19796225e9.1
+ for <qemu-riscv@nongnu.org>; Fri, 13 Oct 2023 04:01:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1697179052; x=1697783852; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=JTTktyRt5LJ1ZpecwVd9SqwAsMX9yluoJGv75RIwSN4=;
- b=bCE0GYRl5tpJsRUwP3zWDOgdBRp/3lmHJ9iCtiNn5Tj3YB3QI8U/YubhIn84R6LlJt
- 3FpOEtjUphFu1GC+SVAoL/l5kA+mtKYywGFnFmwkuqco+cf9DomNJZquNPwYA6eAmlxt
- sQ3h2rk+vIHn/OPtbM9M22hTv3fuliqHaTJhvd325QWsphW369eDT+2XTu8EM+39Ku85
- ICXfxCH88Xq8ysTNhdNxx/9oQxwl3ByEOIJGKjjxGs1Sus7IriXD+1GRie7L4U1BEuBE
- KY39WSnl3QQ+e1R2lpwZKZMIiif7ChImyxkcxuMshqkptA4ZxUD5YqNBDCD2nE6tnN0H
- md9w==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1697194884; x=1697799684;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=iQ308IkT3zOq9EntSd1ZUYX5VAgQrSY0/sKbYCybMWU=;
+ b=Tmef132pR9qyHktdTv9WqwDfVqduig6NiCnBXVeERgFmODQL0OtvJOsBkEdxNWktZ1
+ lPeMADYSGQU1AGIsAxGKfFkjBEi2NMB11mpPCvrSsucasxN+LHC8R7i7/KYYyonDGdxu
+ TSnbr6VECmQosalkFL0JXYPIUu0tb50kumYZXAwvHcUVWZ3y7mI66rUmru3vfsHHSFmb
+ v0uIP2vpuXzOSqVRp4C23cpQ0nj4geq5fuR3oJpuXLPPn3WAmULfqaS8EXBsc9p40xxR
+ Pxz0Sgad+eaq0apj+g2h5MsVBYsFK3jRaeVNwP/HrBZOKZQ2iKP+N7miRcdxWTj7Se7f
+ x+sQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697179052; x=1697783852;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JTTktyRt5LJ1ZpecwVd9SqwAsMX9yluoJGv75RIwSN4=;
- b=C0DMiO0VxMw+iMQinSoj0Cv+nGPOT2KjkTYsA2NlN1eWD+eXjJlVjXW+dyd+vyvL/1
- rFxV7M76/UWD+3QvDBSJzV0AMT4PvwnpqGHVH3uhj60RQu/6n2tnFLq6MvobaC9vvf5z
- piKvJVLnIS1x3ZNaE4+7fZqpuQ5lQ2kLUcKu2Iky4PMlYxGeqCW0GMp8RQ/4LnrISI1a
- 0ffWesAxl75JrnHUfGxramTmz7eeYrbCjVz+oVaox3U7hx3oO8suYcg/KOrbKNxiY7gm
- KbvIY1r00XXwX79hzgs+WQ3rLPzhu+7Z9TGGIatv3HuKLsnkx4eDF7HE8260Q9D1hDG7
- jvYg==
-X-Gm-Message-State: AOJu0YyOGtcGoDk6qLn/axFjno2v/3Vb097ZOLwH1gc/YmCImv5z9bvw
- 2AwF9K58GZe+p85/B6+ool0uJ7cw8CZLyJmaGdo=
-X-Google-Smtp-Source: AGHT+IHzDbQq3hD4QRBBpK255an6gEDXtDDdDvzoexPy0olV4UCgceQ/4u4a+IALcOH96VnHM0eFag==
-X-Received: by 2002:aa7:d94e:0:b0:527:fa8d:d40b with SMTP id
- l14-20020aa7d94e000000b00527fa8dd40bmr22102825eds.26.1697179052343; 
- Thu, 12 Oct 2023 23:37:32 -0700 (PDT)
-Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
+ d=1e100.net; s=20230601; t=1697194884; x=1697799684;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=iQ308IkT3zOq9EntSd1ZUYX5VAgQrSY0/sKbYCybMWU=;
+ b=gNE4R8ZyR8t9+HeH7YrhNLzi7315Tc52Kmhtrxtj8o8ZI2fDrgTd1lqfS1RqnsNM0L
+ dfNh5OAffPgaIf813r7s6qnIlR3vac7X8zMQI3/XdIqAKb9AXWxoDOWJCS2TYqzG6fp3
+ 15e1lX5L84N1/I7GHB1LfwX8sIhuI6qeJ2qfwCgDN3vADWIAXUyI/gLh/aMnOWgOI6tB
+ 10t7uRzN+wE782Wki2dGa62J+n7jKdVV79jdfYzqhiDTrdILXN+l2JHDIivZX54JFx4A
+ jgqHu0k0ffgXNphYlat9BG79Sz8LQyLqyv6JfCE0VqFy4xmSVMAbgVC/sxzmywNbHeYD
+ uD+g==
+X-Gm-Message-State: AOJu0YyLZdcusdv56sYjsd9/BOx6w90wv5GxDdivyDR5/ba8WZanRsjV
+ nzogFTwIvwS94F+xPsBQ3OWusQ==
+X-Google-Smtp-Source: AGHT+IFMst30oTzlQBe28yUBdq+Q6/oCYTSUD30EaLVcw/O8qsW4F/BpJ9XZtQys4+XmkSPkMJhnpw==
+X-Received: by 2002:a5d:4e42:0:b0:313:f75b:c552 with SMTP id
+ r2-20020a5d4e42000000b00313f75bc552mr19593918wrt.15.1697194883689; 
+ Fri, 13 Oct 2023 04:01:23 -0700 (PDT)
+Received: from rockhopper.. (214.11.169.217.in-addr.arpa. [217.169.11.214])
  by smtp.gmail.com with ESMTPSA id
- cy7-20020a0564021c8700b0053de19620b9sm2756616edb.2.2023.10.12.23.37.31
+ p8-20020adfce08000000b003271be8440csm20455185wrn.101.2023.10.13.04.01.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Oct 2023 23:37:31 -0700 (PDT)
-Date: Fri, 13 Oct 2023 08:37:30 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
-Subject: Re: [PATCH 0/4] target/riscv: rename ext_i* to ext_zi*
-Message-ID: <20231013-f1376faaa53cd1336bfe7233@orel>
-References: <20231012164604.398496-1-dbarboza@ventanamicro.com>
+ Fri, 13 Oct 2023 04:01:23 -0700 (PDT)
+From: Rob Bradford <rbradford@rivosinc.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, atishp@rivosinc.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ Rob Bradford <rbradford@rivosinc.com>
+Subject: [PATCH v3 0/6] Support discontinuous PMU counters
+Date: Fri, 13 Oct 2023 11:54:42 +0100
+Message-ID: <20231013110111.34619-1-rbradford@rivosinc.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20231012164604.398496-1-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
- envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x52c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
+ envelope-from=rbradford@rivosinc.com; helo=mail-wm1-x32d.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -94,34 +93,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Oct 12, 2023 at 01:46:00PM -0300, Daniel Henrique Barboza wrote:
-> Hi,
-> 
-> This series renames the following internal extensions flags:
-> 
-> ext_ifencei, ext_icsr, ext_icbom, ext_icboz
-> 
-> To add a leading 'z':
-> 
-> ext_zifencei, ext_zicsr, ext_zicbom, ext_zicboz
-> 
-> This was proposed by Andrew Jones. The motivation, in his own words:
-> 
-> "I'd prefer we name the booleans with their 'z' to improve grepping.
-> When one wants to search for uses of zifencei, I imagine they're more
-> likely to do 'grep -i zifencei' than 'grep -i ifencei', particularly
-> because the 's' is maintained for S extensions. "
-> 
-> 
-> Aside from that, these are the only 4 Z-extension flags that don't use a
-> leading 'z' in their name, so there's also the benefit of making
-> everything equal.
->
+Currently the available PMU counters start at HPM3 and run through to
+the number specified by the "pmu-num" property. There is no
+requirement in the specification that the available counters be
+continously numbered. This series add suppport for specifying a
+discountinuous range of counters though a "pmu-mask" property.
 
-For the series,
+v3:
 
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+* Use env_archcpu() in csr.c
+* Re-added check to enforce deprectated "num-pmu" below limit
+* Check that standard counters are not included in mask
+* Remove use of MAKE_32BIT_MASK()
 
-Thanks,
-drew
+v2:
+
+* Use cfg.pmu_mask wherever cfg.pmu_num was used previously
+* Deprecate pmu_num property (warning, comment & updated documentation)
+* Override default pmu_mask value iff pmu_num changed from default
+
+Rob Bradford (6):
+  target/riscv: Propagate error from PMU setup
+  target/riscv: Don't assume PMU counters are continuous
+  target/riscv: Use existing PMU counter mask in FDT generation
+  target/riscv: Add "pmu-mask" property to replace "pmu-num"
+  docs/about/deprecated: Document RISC-V "pmu-num" deprecation
+  target/riscv: Use MAKE_64BIT_MASK instead of custom macro
+
+ docs/about/deprecated.rst | 10 ++++++++++
+ hw/riscv/virt.c           |  2 +-
+ target/riscv/cpu.c        | 13 ++++++++++---
+ target/riscv/cpu_cfg.h    |  3 ++-
+ target/riscv/csr.c        |  5 +++--
+ target/riscv/machine.c    |  2 +-
+ target/riscv/pmu.c        | 41 ++++++++++++++++++++++-----------------
+ target/riscv/pmu.h        |  5 +++--
+ 8 files changed, 53 insertions(+), 28 deletions(-)
+
+-- 
+2.41.0
+
 
