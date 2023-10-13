@@ -4,93 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB969CDB47E
-	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Oct 2023 21:04:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADA7ACDB474
+	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Oct 2023 01:43:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qr2rN-0004mK-55; Thu, 12 Oct 2023 17:04:45 -0400
+	id 1qr7Cf-0004MM-Fs; Thu, 12 Oct 2023 21:43:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qr2rL-0004lq-VM
- for qemu-riscv@nongnu.org; Thu, 12 Oct 2023 17:04:43 -0400
-Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qr2rK-0000Jg-Ea
- for qemu-riscv@nongnu.org; Thu, 12 Oct 2023 17:04:43 -0400
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-690bc3f82a7so1240919b3a.0
- for <qemu-riscv@nongnu.org>; Thu, 12 Oct 2023 14:04:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1697144681; x=1697749481;
- darn=nongnu.org; 
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=6jFwwIOLxO21Mi0Xm1KR9P4n/XAf1CiqiG1pPZSOLGM=;
- b=vydR/Om2CKRfvsWeeU7rDQ32axH1fkBY8xnmDRnDSt08lAsYt7qkgi6gNsY7h2rLza
- QJ4VcIIsISIMWiu+Q+RAebqh+HONA3CjqAz+8sDWASYjG/Uk8t9C51vjmhBCBte/93B+
- zRDHtA0geQScMSnAsX6ve/VxbJWhvjc4xfnRzAuZAE1uRl1y85Rm7ddELITWPlwMAN2q
- c1jSKgJl3JS/A3BpcNKniDS2ojVfEeKBG1a937wtP8wDOkKlWk2LV1gfZPEoZbNAcGW9
- CG37nNgRYC3aD9ZXfOwvRkWubSmgqy6T+jyFF7qIyzfrFf+OkGFp3zGPC5zM0uegIdmR
- lO8A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697144681; x=1697749481;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=6jFwwIOLxO21Mi0Xm1KR9P4n/XAf1CiqiG1pPZSOLGM=;
- b=f6eeujOBD+OdLhGfAbO2LGFCViI5d4zcH+HW2cfQmnUBQvFs22I1WY1b7n0nkCMboc
- IpMsOcDASC80WTF6qPiwbFLLYBWOSPh2Qu0K/Ja/h34X+zKcRIhxikWLDnIV/n1bgrO/
- 00Y3KDgoBpnoIpF9qWlsU0mbiun3UMHI4KFbtYpUQ57fvgDyLrOcgj6Q+9jEyHOOP0dh
- Ra0PaOTZVu9amS912ela2jAkTw2ByszzDlHpFSgQCgi+kVfylNEJBH2mxXYFxCMRllHL
- kMDrZ+5u7s/8J1NpIXV6rVmgcqgWHgJhO6loAAJ0B/eeUbFQBw/sLis6JTDgEN8e2MC7
- 26Mg==
-X-Gm-Message-State: AOJu0YwrEAKMuhVjeEUOGXsZqgxr1tScyWb1OpkkMV6DyeLJsoBZVEEA
- g/DzsJaY6IAnWuE0rYK4DB860A==
-X-Google-Smtp-Source: AGHT+IE8DplvM/uvBlzdfZ780+HB0T16SvxCxT7XOzJiSRkisx2WYTJS8tkjnYF/X5PCG589CZusHA==
-X-Received: by 2002:a05:6a00:1410:b0:693:3c11:4293 with SMTP id
- l16-20020a056a00141000b006933c114293mr24171613pfu.14.1697144680934; 
- Thu, 12 Oct 2023 14:04:40 -0700 (PDT)
-Received: from ?IPV6:2400:4050:a840:1e00:78d2:b862:10a7:d486?
- ([2400:4050:a840:1e00:78d2:b862:10a7:d486])
- by smtp.gmail.com with ESMTPSA id
- a9-20020aa780c9000000b0069266a66a6esm12098425pfn.139.2023.10.12.14.04.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 12 Oct 2023 14:04:40 -0700 (PDT)
-Message-ID: <c5489b2e-866b-4463-ba14-62eb8a6f3c61@daynix.com>
-Date: Fri, 13 Oct 2023 06:04:38 +0900
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1qr7Cd-0004Lw-MI; Thu, 12 Oct 2023 21:42:59 -0400
+Received: from out30-131.freemail.mail.aliyun.com ([115.124.30.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1qr7Ca-0008Kj-Ns; Thu, 12 Oct 2023 21:42:59 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R191e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046060;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=10; SR=0;
+ TI=SMTPD_---0Vu0Cxbi_1697161366; 
+Received: from 30.221.101.97(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0Vu0Cxbi_1697161366) by smtp.aliyun-inc.com;
+ Fri, 13 Oct 2023 09:42:47 +0800
+Message-ID: <5e9662e6-2bbf-4e8d-999a-fc91bbc0c21d@linux.alibaba.com>
+Date: Fri, 13 Oct 2023 09:41:47 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 01/23] target/riscv: Move MISA limits to class
+Subject: Re: [PATCH v2 5/6] target/riscv: Add "pmu-mask" property to replace
+ "pmu-num"
+To: Rob Bradford <rbradford@rivosinc.com>, LIU Zhiwei <baxiantai@gmail.com>,
+ qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, atishp@rivosinc.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
+ dbarboza@ventanamicro.com
+References: <20231011145032.81509-1-rbradford@rivosinc.com>
+ <20231011145032.81509-6-rbradford@rivosinc.com>
+ <e68ea00e-3f7a-4590-beae-6946d9fde671@gmail.com>
+ <95425ae7f47334754aa7b706ba8362c2349d2f48.camel@rivosinc.com>
 Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Mikhail Tyutin <m.tyutin@yadro.com>, Aleksandr Anenkov
- <a.anenkov@yadro.com>, qemu-devel@nongnu.org,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
-References: <20231011070335.14398-1-akihiko.odaki@daynix.com>
- <20231011070335.14398-2-akihiko.odaki@daynix.com>
- <e71bbcc3-25cf-4772-bd52-832a34e366e9@ventanamicro.com>
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <e71bbcc3-25cf-4772-bd52-832a34e366e9@ventanamicro.com>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <95425ae7f47334754aa7b706ba8362c2349d2f48.camel@rivosinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::434;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x434.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=115.124.30.131;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-131.freemail.mail.aliyun.com
+X-Spam_score_int: -98
+X-Spam_score: -9.9
+X-Spam_bar: ---------
+X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,20 +70,165 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2023/10/13 4:10, Daniel Henrique Barboza wrote:
-> 
-> 
-> On 10/11/23 04:02, Akihiko Odaki wrote:
->> MISA limits are common for all instances of a RISC-V CPU class so they
->> are better put into class.
->>
->> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
->> ---
-> 
-> This patch and patches 2 and 3 from this version (v9) got dropped from 
-> the later
-> versions of the series. Can I assume they're not relevant anymore?
 
-Yes, they are replaced with patches in the following series:
-https://patchew.org/QEMU/20231012054223.37870-1-akihiko.odaki@daynix.com/
+On 2023/10/12 20:38, Rob Bradford wrote:
+> On Thu, 2023-10-12 at 17:05 +0800, LIU Zhiwei wrote:
+>>   
+>>
+>>   
+>>   
+>> On 2023/10/11 22:45, Rob Bradford wrote:
+>>   
+>>   
+>>>   
+>>> Using a mask instead of the number of PMU devices supports the
+>>> accurate
+>>> emulation of platforms that have a discontinuous set of PMU
+>>> counters.
+>>>
+>>> Generate a warning if the old property changed from the default but
+>>> still go ahead and use it to generate the mask if the user has
+>>> changed
+>>> it from the default
+>>>
+>>> Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
+>>> ---
+>>>   target/riscv/cpu.c     |  5 +++--
+>>>   target/riscv/cpu_cfg.h |  3 ++-
+>>>   target/riscv/machine.c |  2 +-
+>>>   target/riscv/pmu.c     | 14 ++++++++++----
+>>>   4 files changed, 16 insertions(+), 8 deletions(-)
+>>>
+>>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>>> index c9d8fc12fe..4d2987e568 100644
+>>> --- a/target/riscv/cpu.c
+>>> +++ b/target/riscv/cpu.c
+>>> @@ -1487,7 +1487,7 @@ static void riscv_cpu_realize_tcg(DeviceState
+>>> *dev, Error **errp)
+>>>           riscv_timer_init(cpu);
+>>>       }
+>>>   
+>>> -    if (cpu->cfg.pmu_num) {
+>>> +    if (cpu->cfg.pmu_mask) {
+>>>           riscv_pmu_init(cpu, &local_err);
+>>>           if (local_err != NULL) {
+>>>               error_propagate(errp, local_err);
+>>> @@ -1812,7 +1812,8 @@ static void
+>>> riscv_cpu_add_misa_properties(Object *cpu_obj)
+>>>   
+>>>   static Property riscv_cpu_extensions[] = {
+>>>       /* Defaults for standard extensions */
+>>> -    DEFINE_PROP_UINT8("pmu-num", RISCVCPU, cfg.pmu_num, 16),
+>>> +    DEFINE_PROP_UINT8("pmu-num", RISCVCPU, cfg.pmu_num, 16), /*
+>>> Deprecated */
+>>> +    DEFINE_PROP_UINT32("pmu-mask", RISCVCPU, cfg.pmu_mask,
+>>> MAKE_32BIT_MASK(3, 16)),
+>>>       DEFINE_PROP_BOOL("sscofpmf", RISCVCPU, cfg.ext_sscofpmf,
+>>> false),
+>>>       DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
+>>>       DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
+>>> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+>>> index 0e6a0f245c..d273487040 100644
+>>> --- a/target/riscv/cpu_cfg.h
+>>> +++ b/target/riscv/cpu_cfg.h
+>>> @@ -123,7 +123,8 @@ struct RISCVCPUConfig {
+>>>       bool ext_xtheadsync;
+>>>       bool ext_XVentanaCondOps;
+>>>   
+>>> -    uint8_t pmu_num;
+>>> +    uint8_t pmu_num; /* Deprecated */
+>>> +    uint32_t pmu_mask;
+>>>       char *priv_spec;
+>>>       char *user_spec;
+>>>       char *bext_spec;
+>>> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+>>> index c7c862cdd3..9f6e3f7a6d 100644
+>>> --- a/target/riscv/machine.c
+>>> +++ b/target/riscv/machine.c
+>>> @@ -313,7 +313,7 @@ static bool pmu_needed(void *opaque)
+>>>   {
+>>>       RISCVCPU *cpu = opaque;
+>>>   
+>>> -    return cpu->cfg.pmu_num;
+>>> +    return (cpu->cfg.pmu_mask > 0);
+>>>   }
+>>>   
+>>>   static const VMStateDescription vmstate_pmu_ctr_state = {
+>>> diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
+>>> index 360c76f63e..f2d35b4d3b 100644
+>>> --- a/target/riscv/pmu.c
+>>> +++ b/target/riscv/pmu.c
+>>> @@ -18,6 +18,7 @@
+>>>   
+>>>   #include "qemu/osdep.h"
+>>>   #include "qemu/log.h"
+>>> +#include "qemu/error-report.h"
+>>>   #include "cpu.h"
+>>>   #include "pmu.h"
+>>>   #include "sysemu/cpu-timers.h"
+>>> @@ -182,7 +183,7 @@ int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum
+>>> riscv_pmu_event_idx event_idx)
+>>>       CPURISCVState *env = &cpu->env;
+>>>       gpointer value;
+>>>   
+>>> -    if (!cpu->cfg.pmu_num) {
+>>> +    if (!cpu->cfg.pmu_mask) {
+>>>           return 0;
+>>>       }
+>>>       value = g_hash_table_lookup(cpu->pmu_event_ctr_map,
+>>> @@ -432,7 +433,7 @@ void riscv_pmu_init(RISCVCPU *cpu, Error
+>>> **errp)
+>>>   {
+>>>       uint8_t pmu_num = cpu->cfg.pmu_num;
+>>>   
+>>> -    if (pmu_num > (RV_MAX_MHPMCOUNTERS - 3)) {
+>>> +    if (ctpop32(cpu->cfg.pmu_mask) > (RV_MAX_MHPMCOUNTERS - 3)) {
+>>>   
+>>   
+>>   
+>>>   
+>>>           error_setg(errp, "Number of counters exceeds maximum
+>>> available");
+>>>           return;
+>>>       }
+>>> @@ -443,6 +444,11 @@ void riscv_pmu_init(RISCVCPU *cpu, Error
+>>> **errp)
+>>>           return;
+>>>       }
+>>>   
+>>> -    /* Create a bitmask of available programmable counters */
+>>> -    cpu->pmu_avail_ctrs = MAKE_32BIT_MASK(3, pmu_num);
+>>> +    /* Check if user set it by comparing against default */
+>>> +    if (pmu_num != 16) {
+>>> +        warn_report("\"pmu-num\" property is deprecated; use
+>>> \"pmu-mask\"");
+>>> +        cpu->cfg.pmu_mask = MAKE_32BIT_MASK(3, pmu_num);
+>>> +    }
+>>> +
+>>> +    cpu->pmu_avail_ctrs = cpu->cfg.pmu_mask;
+>>>   
+>>   
+>> How to process the pmu_mask[0:2] no-zero bits? They should not
+>> included into pmu_avail_ctrs.
+>>   
+> Good point, thanks Zhiwei. I think rather than masking those bits it is
+> better to add a check and error out if those bits are set.
+
+Agree.
+
+Thanks,
+Zhiwei
+
+>
+> Cheers,
+>
+> Rob
+>
+>> Zhiwei
+>>   
+>>   
+>>>   
+>>>   }
+>>>   
+>>   
 
