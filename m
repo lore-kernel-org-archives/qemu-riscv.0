@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5767CDB482
-	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Oct 2023 14:05:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8AAFCDB47E
+	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Oct 2023 14:05:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qrIls-000185-LG; Fri, 13 Oct 2023 10:04:09 -0400
+	id 1qrIkL-0007U1-4C; Fri, 13 Oct 2023 10:02:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qrIjw-0006kw-7h
- for qemu-riscv@nongnu.org; Fri, 13 Oct 2023 10:02:10 -0400
-Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qrIjc-0006Se-Uv
+ for qemu-riscv@nongnu.org; Fri, 13 Oct 2023 10:01:49 -0400
+Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qrIjs-0002F7-Jk
- for qemu-riscv@nongnu.org; Fri, 13 Oct 2023 10:02:07 -0400
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-53b32dca0bfso4388003a12.0
- for <qemu-riscv@nongnu.org>; Fri, 13 Oct 2023 07:02:02 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qrIjY-0002Al-VY
+ for qemu-riscv@nongnu.org; Fri, 13 Oct 2023 10:01:48 -0400
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-9b96c3b4be4so325782066b.1
+ for <qemu-riscv@nongnu.org>; Fri, 13 Oct 2023 07:01:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697205721; x=1697810521; darn=nongnu.org;
+ d=linaro.org; s=google; t=1697205702; x=1697810502; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zoUpF/tcrnIyHCTbzMglqeDjmRuZtQK69UeLuQY2xSo=;
- b=iaq4QFiiM79y1DPjBcq/zrbamQ56JbE8OMVsuSMfvxbA1cGszCHXZ3bF1NXaw0j2f+
- ERZR7c3uTHAn3nHUMcMta+EWrfCFoesW9+vhNxc5FumKgYbBUwaAENrnshxQJ6dZJhUM
- CRq1Cmp5SaDZaq7Y3pw7k31XHxSv6lPCtmVU90upivFAeL27fpLA9bP/xk7lOx78k8qw
- PXyQahDvvj9d8lX5dWtbbSzqxdFNTTAVqZW7G+hy/A2JCKEfeXJDIDpYdS2v8nMWTxQv
- Yn0KWnZfTHkHZsYpWS0oMRGtguQ3ftSwtl5gToUVdmIC+rLRz2RFLUXOP8b5HH9yKUwX
- BG0A==
+ bh=Z+CI7CNyKCf2sfXCVGyXf+Xiyom2vjAqTqQsK0XbX6w=;
+ b=LJ9E2vsewDJHLSe9ksPsq9PVCwtPCaja9MLokt31CRJZa41OSe8M6bAPpmRdJU9ow+
+ kPl8rbASSiN6DfJhVSPHWRQ0ynADZGYAKSLnqc4baFdh+LhZbElBc5CWYI21bgT8phRR
+ I2Cg9qnMQox3iW+VvkoU/jUOYVMgWTXdibtQc3i510//qJzsgHBFNBcqvA05wWcvJz4b
+ Z7v1KFnVtlaX+XZg8OUQ7YIoASi6GDNGUKrCm0QF9vDoz+SkffsokZGdXyPRSh00sMBL
+ y5ln73LyTDsJUaXPqA5hxIVTcKpv2voYP8WBtoZwUTyKH/x15rvzi98S+mE9sDWYJAoh
+ 7jHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697205721; x=1697810521;
+ d=1e100.net; s=20230601; t=1697205702; x=1697810502;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zoUpF/tcrnIyHCTbzMglqeDjmRuZtQK69UeLuQY2xSo=;
- b=GrJa90pH2hkK/Q/5K0VBV9Ymry7JxQ11cXwcXJTlUtqn3zP4eipVpFDgA2AgXNAnOK
- YAQlUEfwxxEmTocLY/AcWPfJANVCRITWBUO0yBvppnrjiH3I13HJPgpNTOGHD7mF+AMA
- f5dkD2KlJ70v46ApPCZnkd46fwnU3I6UK5jq8QLDG3lsYA9HMnOMVSRymDBQxpIsPbky
- OdtMDfan2V47B4x3T05IZjHs+ew8fQRY5wEpyOm43qszpsSy2FQ69Yk2KYlMy323rfLt
- BGNLa+G1OpAs6ZmjOVguSwki+w5B8AdohWXeLH+nD/8ddbawMiA9zfcqEqfec/jtH8ps
- SV1w==
-X-Gm-Message-State: AOJu0YyVPdx+G6CHKIHT2Te7wVs6wH5yJLHnFT8x4Nz1lHPT5+ipG3hB
- /XsbkbRMpsn+z6teyvYx0Xy/ng==
-X-Google-Smtp-Source: AGHT+IF0XA2HQYdU0a5D9guwgtyAxteWCI1vO7DXw0FamPA6Jp5pReM2s2N+/AfRVrSKhPjdcBnvLg==
-X-Received: by 2002:a05:6402:5c4:b0:531:14c4:ae30 with SMTP id
- n4-20020a05640205c400b0053114c4ae30mr193149edx.0.1697205721359; 
- Fri, 13 Oct 2023 07:02:01 -0700 (PDT)
+ bh=Z+CI7CNyKCf2sfXCVGyXf+Xiyom2vjAqTqQsK0XbX6w=;
+ b=C+hxFcvtxelG0IS8iY2c5jCSEWLLVjbJEAG9ny6PngF4OdfuF+jBlrvjnanlHvtF9X
+ CJ/hea0SeBp7HbmFp6Ai1QlQag2mNKvwXWcShqAR9P4MCUPAaogCuWECsqtxfO80oNBx
+ kvVa/hsQ+OfR9M7//GgjgknQJgEoxVZShuOBAIzPixbq11dSaTi+jTdevPIH1oBFbXl0
+ 0cAu5awwE3fxBOZaMseuEPeN7HkFEc8aPMF/vGOpPyamZphSKyqlsVZxRr6GxDCz4yAz
+ /sIcJqQDJrPB46BaZoJCvEAUQf6vRhJMa3GEDoP66LBcuWy6aePRWKpt2DDcKoaJcQKj
+ cZgw==
+X-Gm-Message-State: AOJu0Yxpss6Hy+SJk7gxnCqWWpEeYcfzRyACJ38st62JgltNr+h9knRk
+ ui21Pad70g52EM+t/128kMziKQ==
+X-Google-Smtp-Source: AGHT+IFxAJ2mZhFZyRNHIIYV2j60M9eF4SgMSFq1kU+dBZfVJt5JZQLyVzwmHauEjFhgCHn6gS3z7Q==
+X-Received: by 2002:a17:907:2d25:b0:9bd:d405:4e7e with SMTP id
+ gs37-20020a1709072d2500b009bdd4054e7emr1060527ejc.6.1697205701761; 
+ Fri, 13 Oct 2023 07:01:41 -0700 (PDT)
 Received: from m1x-phil.lan ([176.172.118.168])
  by smtp.gmail.com with ESMTPSA id
- l16-20020a056402125000b00536159c6c45sm11321292edw.15.2023.10.13.07.01.56
+ t24-20020a1709066bd800b009b29668fce7sm12367817ejs.113.2023.10.13.07.01.37
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 13 Oct 2023 07:02:00 -0700 (PDT)
+ Fri, 13 Oct 2023 07:01:41 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Eduardo Habkost <eduardo@habkost.net>,
@@ -89,18 +89,17 @@ Cc: Eduardo Habkost <eduardo@habkost.net>,
  Sergio Lopez <slp@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Ilya Leoshkevich <iii@linux.ibm.com>, Michael Rolnik <mrolnik@gmail.com>
-Subject: [PATCH v2 04/16] target/ppc: Remove CPU_RESOLVING_TYPE from
- 'cpu-qom.h'
-Date: Fri, 13 Oct 2023 16:01:03 +0200
-Message-ID: <20231013140116.255-5-philmd@linaro.org>
+Subject: [PATCH v2 02/16] target: Mention 'cpu-qom.h' is target agnostic
+Date: Fri, 13 Oct 2023 16:01:01 +0200
+Message-ID: <20231013140116.255-3-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231013140116.255-1-philmd@linaro.org>
 References: <20231013140116.255-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x52c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::632;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -123,48 +122,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-CPU_RESOLVING_TYPE is a per-target definition, and is
-irrelevant for other targets. Move it to "cpu.h".
+"target/foo/cpu-qom.h" is supposed to be target agnostic
+(include-able by any target). Add such mention in the
+header.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/ppc/cpu-qom.h | 3 +--
- target/ppc/cpu.h     | 2 ++
- 2 files changed, 3 insertions(+), 2 deletions(-)
+ target/arm/cpu-qom.h        | 2 +-
+ target/hppa/cpu-qom.h       | 2 +-
+ target/microblaze/cpu-qom.h | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/target/ppc/cpu-qom.h b/target/ppc/cpu-qom.h
-index 6d39ad451c..a8e0dcf2de 100644
---- a/target/ppc/cpu-qom.h
-+++ b/target/ppc/cpu-qom.h
+diff --git a/target/arm/cpu-qom.h b/target/arm/cpu-qom.h
+index 153865d1bb..dfb9d5b827 100644
+--- a/target/arm/cpu-qom.h
++++ b/target/arm/cpu-qom.h
 @@ -1,5 +1,5 @@
  /*
-- * QEMU PowerPC CPU
-+ * QEMU PowerPC CPU QOM header (target agnostic)
+- * QEMU ARM CPU
++ * QEMU ARM CPU QOM header (target agnostic)
   *
   * Copyright (c) 2012 SUSE LINUX Products GmbH
   *
-@@ -32,7 +32,6 @@ OBJECT_DECLARE_CPU_TYPE(PowerPCCPU, PowerPCCPUClass, POWERPC_CPU)
- 
- #define POWERPC_CPU_TYPE_SUFFIX "-" TYPE_POWERPC_CPU
- #define POWERPC_CPU_TYPE_NAME(model) model POWERPC_CPU_TYPE_SUFFIX
--#define CPU_RESOLVING_TYPE TYPE_POWERPC_CPU
- 
- #define TYPE_HOST_POWERPC_CPU POWERPC_CPU_TYPE_NAME("host")
- 
-diff --git a/target/ppc/cpu.h b/target/ppc/cpu.h
-index cf4629036d..f8101ffa29 100644
---- a/target/ppc/cpu.h
-+++ b/target/ppc/cpu.h
-@@ -27,6 +27,8 @@
- #include "qom/object.h"
- #include "hw/registerfields.h"
- 
-+#define CPU_RESOLVING_TYPE TYPE_POWERPC_CPU
-+
- #define TCG_GUEST_DEFAULT_MO 0
- 
- #define TARGET_PAGE_BITS_64K 16
+diff --git a/target/hppa/cpu-qom.h b/target/hppa/cpu-qom.h
+index 67f12422c4..4b1d48f7ca 100644
+--- a/target/hppa/cpu-qom.h
++++ b/target/hppa/cpu-qom.h
+@@ -1,5 +1,5 @@
+ /*
+- * QEMU HPPA CPU
++ * QEMU HPPA CPU QOM header (target agnostic)
+  *
+  * Copyright (c) 2016 Richard Henderson <rth@twiddle.net>
+  *
+diff --git a/target/microblaze/cpu-qom.h b/target/microblaze/cpu-qom.h
+index 2a734e644d..78f549b57d 100644
+--- a/target/microblaze/cpu-qom.h
++++ b/target/microblaze/cpu-qom.h
+@@ -1,5 +1,5 @@
+ /*
+- * QEMU MicroBlaze CPU
++ * QEMU MicroBlaze CPU QOM header (target agnostic)
+  *
+  * Copyright (c) 2012 SUSE LINUX Products GmbH
+  *
 -- 
 2.41.0
 
