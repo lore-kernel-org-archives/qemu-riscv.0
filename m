@@ -4,70 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4035BCDB484
-	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Oct 2023 05:30:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E520DCDB465
+	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Oct 2023 05:40:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qsGBC-0004xk-IN; Mon, 16 Oct 2023 01:30:14 -0400
+	id 1qsGKt-0008Ca-60; Mon, 16 Oct 2023 01:40:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qsGBA-0004xT-PE; Mon, 16 Oct 2023 01:30:12 -0400
-Received: from mail-vs1-xe2a.google.com ([2607:f8b0:4864:20::e2a])
+ id 1qsGKp-0008Bj-MY; Mon, 16 Oct 2023 01:40:11 -0400
+Received: from mail-vk1-xa30.google.com ([2607:f8b0:4864:20::a30])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qsGB8-0004Fv-Rm; Mon, 16 Oct 2023 01:30:12 -0400
-Received: by mail-vs1-xe2a.google.com with SMTP id
- ada2fe7eead31-4577c1ae94fso1643250137.1; 
- Sun, 15 Oct 2023 22:30:09 -0700 (PDT)
+ id 1qsGKn-0005s7-2X; Mon, 16 Oct 2023 01:40:10 -0400
+Received: by mail-vk1-xa30.google.com with SMTP id
+ 71dfb90a1353d-495eb6e2b80so1064878e0c.1; 
+ Sun, 15 Oct 2023 22:40:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697434209; x=1698039009; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1697434807; x=1698039607; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aTsu6QlrSeFspM8uKeyb6L2Kc7MYBkCIop78wJLVDt4=;
- b=UT6rqBQLCr8dk6JmPorFG1AEWfK6lKCxPePfw+L2m8//Fg/BdGRS3vDBGv2gAmJTYF
- 7lEUnOtPlE4eQgQ5tsLH3VBJi6P4D0QNA8TCCk2WCNzKysq/DpRrFfux9Pk9nNw3iVfr
- LgZMIksGVFP4nM5BR8KoQGGBeO//blfmEgCLDjQMB4YdHr1xyWZWxlQsoZAafadVgAHJ
- AaOmfSr8QN46Vpm9KsVl0Jx836ug5bErr2gOz/GVlVwFsTLMmhNg09DA9MrQ179uJ22O
- gnKfk0u1WHkilAzI4VGJz8nTXNniiX7bedtu6FK/DtDX1CgzgFjSKxI9CjzTTi4Gn2d/
- WIHQ==
+ bh=zE9UwSqwIHGw5aoPS28rfFXvqq3SJsm0lULwwMvhNKM=;
+ b=FttIJ9JIeTe+dCdA289rag6jMHXjdiIsDUvL45otKN7aV/98aS2rVaiPPXMmSHBwix
+ 2+O1hsuxfLEGVhVS2+5LYxxEj2xaedQv9RkOyml0PU9lZTfFBfqDoD+rM0nkhpD/dF3/
+ 1AfHSahNmGVn4zsKCjuFTjGrGpPTbsgu+yyrHioFsUD+lhCeSO/JcHflhhMygb9RWPy+
+ ayFkPAWXf0RnTq6AAld8a1/v+sGZDm9gA5az1xh86v3+LM0OFA1xHEbVk/BSikYjw9VD
+ rF1+mu4X2SATA6GMKeQXJskgIwiYi6eWIJSmcjMcC/U7h2J7JMiXBV3kqfvLVkX6ffaa
+ tq9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697434209; x=1698039009;
+ d=1e100.net; s=20230601; t=1697434807; x=1698039607;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aTsu6QlrSeFspM8uKeyb6L2Kc7MYBkCIop78wJLVDt4=;
- b=rEaD5oSbma+xcIz8g00Dr/2CUyeXQJr77VQwVus+hEkBI4EjAPGky1MQbvFL50RVGH
- 9xJJmmQTW5w+IUVVIbgJNpX3o8kJL6F33iKnbaikX70PD0ktTuFuSAGDW+IeH5VS1IYF
- NJ2qpMlycf+EGtag+eD7PJgvk2YnFyGnFtaWijbwEU6pYQEWK2rowK8UwKt8LYGCdEjr
- 22ywSR3CX6Wp1vGG9a3CD78DVjtlYiOH2j1nnSoz1OBS2V5q3zmhzcfwoex3w2Zuv9IR
- oT0gGYT9fbHVpYDMKzt9n5RR134j3y+Na0XJRmlOK2DpN1jEp7Xr59kzO2X1snZHR9Um
- PdZw==
-X-Gm-Message-State: AOJu0Yx7MLGQvxE0pjgCPV6mLkGfjW7fTC/HMYSrKx4RAfbHe71hS7zr
- 29WXTQkP4EgQ+doODokTcF3OSvseGpKAN5W4GLg=
-X-Google-Smtp-Source: AGHT+IFGX0XYsLD7tSQG34ed8QYWoG/9O4PJ/7gPUTmQJ/utDWO7gq+1SnIHADPABjjyUF6zgP/QeHI60/2KxRCPpeM=
-X-Received: by 2002:a05:6102:4bca:b0:457:4645:a339 with SMTP id
- id10-20020a0561024bca00b004574645a339mr32934480vsb.1.1697434209244; Sun, 15
- Oct 2023 22:30:09 -0700 (PDT)
+ bh=zE9UwSqwIHGw5aoPS28rfFXvqq3SJsm0lULwwMvhNKM=;
+ b=n52SDr/4qib1md9KFlO2BYWrFqUDE+QIqAnlG8akWw5dZ9caSbCp3grann+y5a4C38
+ 5/1UPCBYt7nlRkZ7fWnU/XRhAcodMGEiLb4mU1F9r40tBg/y2ngBD2ETD9kfUxE/rKDR
+ lCV+f/HOzlSbyZ5kx+ozBmYQHx7yMErXU9NRBsMmD5+17N/ZGP0E7hJNuucdKb/I3Qd2
+ YftPN2iUiD/vl0FeV4u3jf7pqv5XZOCSohwPu1BgHkI9QSBC1ZjHuM/2SkcLCJBL4GY7
+ g7EtRqBUoS4i8ehzhHFehmweib/WvAeFA1dPf0WH+qVIa3IVDYzdfwmfJ4EfinLxk+Em
+ UaUQ==
+X-Gm-Message-State: AOJu0YwZRfzuJ4KAFVpY4sSDZs6Xq0QjC4TGcF0AOSbsvckke3bL0qld
+ Z78Bl6NxP69GjuiHX9Rvb8REWBuulDf0SLd3Uwk=
+X-Google-Smtp-Source: AGHT+IFvd2Kr7SsbPP7w4Hlzp4oND99v/UnTM5lXKy9mKgTLonLqZ+B1JXgZxHME5hkKFnzR5ZRBxz7q2/QNo1+7PL4=
+X-Received: by 2002:a05:6122:2208:b0:48f:cd3a:108 with SMTP id
+ bb8-20020a056122220800b0048fcd3a0108mr26247931vkb.12.1697434807321; Sun, 15
+ Oct 2023 22:40:07 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230926184019.166352-1-dbarboza@ventanamicro.com>
- <20230926184019.166352-7-dbarboza@ventanamicro.com>
-In-Reply-To: <20230926184019.166352-7-dbarboza@ventanamicro.com>
+References: <20230808181715.436395-1-vineetg@rivosinc.com>
+ <20230808181715.436395-2-vineetg@rivosinc.com>
+ <ff43edc3-f160-e57d-deb1-185601ed5b7d@ventanamicro.com>
+ <1aa3bdff-0db4-c589-8863-56bbea825fda@rivosinc.com>
+ <CAKmqyKP2jQ1TYFNjMJNJxGqxHgq5fe5RhBhJDiPE1DoBXpf0gw@mail.gmail.com>
+ <20230811-f81889afd0f38ffdc215883d@orel>
+In-Reply-To: <20230811-f81889afd0f38ffdc215883d@orel>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 16 Oct 2023 15:29:42 +1000
-Message-ID: <CAKmqyKMf4gOAkRZ508W5+S+AoKSd5TtqFtuELdWMEihGJQPJHg@mail.gmail.com>
-Subject: Re: [PATCH v2 6/6] target/riscv/riscv-qmp-cmds.c: check CPU accel in
- query-cpu-model-expansion
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
+Date: Mon, 16 Oct 2023 15:39:40 +1000
+Message-ID: <CAKmqyKMsND1oboZTPJXmrYb0y1=44KnHsDbpUJM3KeCuw730dg@mail.gmail.com>
+Subject: Re: [PATCH 2/2] riscv: zicond: make default
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: Vineet Gupta <vineetg@rivosinc.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, 
+ kito.cheng@gmail.com, Jeff Law <jeffreyalaw@gmail.com>, 
+ Palmer Dabbelt <palmer@rivosinc.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liweiwei@iscas.ac.cn>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2a;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a30;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa30.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -91,83 +98,135 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Sep 27, 2023 at 4:42=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Fri, Aug 11, 2023 at 5:01=E2=80=AFPM Andrew Jones <ajones@ventanamicro.c=
+om> wrote:
 >
-> Use the recently added riscv_cpu_accelerator_compatible() to filter
-> unavailable CPUs for a given accelerator. At this moment this is the
-> case for a QEMU built with KVM and TCG support querying a binary running
-> with TCG:
+> On Thu, Aug 10, 2023 at 02:07:17PM -0400, Alistair Francis wrote:
+> > On Tue, Aug 8, 2023 at 6:10=E2=80=AFPM Vineet Gupta <vineetg@rivosinc.c=
+om> wrote:
+> > >
+> > >
+> > >
+> > > On 8/8/23 14:06, Daniel Henrique Barboza wrote:
+> > > > (CCing Alistair and other reviewers)
+> > > >
+> > > > On 8/8/23 15:17, Vineet Gupta wrote:
+> > > >> Again this helps with better testing and something qemu has been d=
+oing
+> > > >> with newer features anyways.
+> > > >>
+> > > >> Signed-off-by: Vineet Gupta <vineetg@rivosinc.com>
+> > > >> ---
+> > > >
+> > > > Even if we can reach a consensus about removing the experimental (x=
+-
+> > > > prefix) status
+> > > > from an extension that is Frozen instead of ratified, enabling stuf=
+f
+> > > > in the default
+> > > > CPUs because it's easier to test is something we would like to avoi=
+d.
+> > > > The rv64
+> > > > CPU has a random set of extensions enabled for the most different a=
+nd
+> > > > undocumented
+> > > > reasons, and users don't know what they'll get because we keep beef=
+ing
+> > > > up the
+> > > > generic CPUs arbitrarily.
+> >
+> > The idea was to enable "most" extensions for the virt machine. It's a
+> > bit wishy-washy, but the idea was to enable as much as possible by
+> > default on the virt machine, as long as it doesn't conflict. The goal
+> > being to allow users to get the "best" experience as all their
+> > favourite extensions are enabled.
+> >
+> > It's harder to do in practice, so we are in a weird state where users
+> > don't know what is and isn't enabled.
+> >
+> > We probably want to revisit this. We should try to enable what is
+> > useful for users and make it clear what is and isn't enabled. I'm not
+> > clear on how best to do that though.
+> >
+> > Again, I think this comes back to we need to version the virt machine.
+> > I might do that as a starting point, that allows us to make changes in
+> > a clear way.
 >
-> qemu-system-riscv64 -S -M virt,accel=3Dtcg -display none
->     -qmp tcp:localhost:1234,server,wait=3Doff
+> While some extensions will impact the machine model, as well as cpu
+> models, versioning the machine model won't help much with ambiguity in
+> cpu model extension support. Daniel's proposal of having a base cpu mode,
+> which, on top, users can explicitly enable what they want (including with
+> profile support which work like a shorthand to enable many extensions at
+> once), is, IMO, the best way for users to know what they get. Also, the
+> 'max' cpu model is the best way to "quickly get as much as possible" for
+> testing. To know what's in 'max', or named cpu models, we need to
+> implement qmp_query_cpu_model_expansion(). Something that could be used
+> from the command line would also be nice, but neither x86 nor arm provide
+> that (they have '-cpu help', but arm doesn't output anything for cpu
+> features and x86 dumps all features out without saying what's enabled for
+> any particular cpu model...)
 >
-> ./qemu/scripts/qmp/qmp-shell localhost:1234
+> I know x86 people have in the past discussed versioning cpu models, but
+> I don't think that should be necessary for riscv with the base+profile
+> approach. A profile would effectively be a versioned cpu model in that
+> case.
 >
-> (QEMU) query-cpu-model-expansion type=3Dfull model=3D{"name":"host"}
-> {"error": {"class": "GenericError", "desc": "'host' CPU not available wit=
-h tcg"}}
->
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Finally, I'd discourage versioning the virt machine type until we need
+> to worry about users creating riscv guest images that they are unwilling
+> to modify, despite wanting to update their QEMU versions. And, even then,
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+What's the problem with versioning the virt machine though?
+
+I'm thinking that in the future we would want to switch from PLIC to
+AIA; change the memory map; or change the default extensions (maybe to
+a profile). All of those would require a versioned virt machine.
+
+I was thinking about doing this now, so we have a base for a few
+releases. So when we do need a change we are ready to go
 
 Alistair
 
-> ---
->  target/riscv/riscv-qmp-cmds.c | 20 ++++++++++++++++++++
->  1 file changed, 20 insertions(+)
+> we should only consider versioning when we're aware of problems for those
+> static guest images, i.e. we introduce a change to the virt machine model
+> which breaks that supported, old guest image. (NB: It was me that
+> advocated to start versioning Arm's virt machine type. In hindsight, I
+> think I may have advocated prematurely. I'm trying not to make that
+> mistake twice!)
 >
-> diff --git a/target/riscv/riscv-qmp-cmds.c b/target/riscv/riscv-qmp-cmds.=
-c
-> index 5b2d186c83..2f2dbae7c8 100644
-> --- a/target/riscv/riscv-qmp-cmds.c
-> +++ b/target/riscv/riscv-qmp-cmds.c
-> @@ -31,6 +31,8 @@
->  #include "qapi/qobject-input-visitor.h"
->  #include "qapi/visitor.h"
->  #include "qom/qom-qobject.h"
-> +#include "sysemu/kvm.h"
-> +#include "sysemu/tcg.h"
->  #include "cpu-qom.h"
->  #include "cpu.h"
+> >
+> > >
+> > > I understand this position given the arbitrary nature of gazillion
+> > > extensions. However pragmatically things like bitmanip and zicond are=
+ so
+> > > fundamental it would be strange for designs to not have them, in a fe=
+w
+> > > years. Besides these don't compete or conflict with other extensions.
+> > > But on face value it is indeed possible for vendors to drop them for
+> > > various reasons or no-reasons.
+> > >
+> > > But having the x- dropped is good enough for our needs as there's
+> > > already mechanisms to enable the toggles from elf attributes.
+> > >
+> > > >
+> > > > Starting on QEMU 8.2 we'll have a 'max' CPU type that will enable a=
+ll
+> > > > non-experimental
+> > > > and non-vendor extensions by default, making it easier for tooling =
+to
+> > > > test new
+> > > > features/extensions. All tooling should consider changing their
+> > > > scripts to use the
+> > > > 'max' CPU when it's available.
+> > >
+> > > That would be great.
+> >
+> > The max CPU helps, but I do feel that the default should allow users
+> > to experience as many RISC-V extensions/features as practical.
+> >
 >
-> @@ -63,6 +65,17 @@ CpuDefinitionInfoList *qmp_query_cpu_definitions(Error=
- **errp)
->      return cpu_list;
->  }
+> If the virt machine type has a default cpu type, then why not set it to
+> 'max'?
 >
-> +static void riscv_check_if_cpu_available(RISCVCPU *cpu, Error **errp)
-> +{
-> +    if (!riscv_cpu_accelerator_compatible(cpu)) {
-> +        g_autofree char *name =3D riscv_cpu_get_name(cpu);
-> +        const char *accel =3D kvm_enabled() ? "kvm" : "tcg";
-> +
-> +        error_setg(errp, "'%s' CPU not available with %s", name, accel);
-> +        return;
-> +    }
-> +}
-> +
->  static void riscv_obj_add_qdict_prop(Object *obj, QDict *qdict_out,
->                                       const char *name)
->  {
-> @@ -161,6 +174,13 @@ CpuModelExpansionInfo *qmp_query_cpu_model_expansion=
-(CpuModelExpansionType type,
->
->      obj =3D object_new(object_class_get_name(oc));
->
-> +    riscv_check_if_cpu_available(RISCV_CPU(obj), &local_err);
-> +    if (local_err !=3D NULL) {
-> +        error_propagate(errp, local_err);
-> +        object_unref(obj);
-> +        return NULL;
-> +    }
-> +
->      if (qdict_in) {
->          riscv_cpuobj_validate_qdict_in(obj, model->props, qdict_in,
->                                         &local_err);
-> --
-> 2.41.0
->
->
+> Thanks,
+> drew
 
