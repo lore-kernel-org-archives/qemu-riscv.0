@@ -4,67 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A264CDB465
-	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Oct 2023 03:50:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BDFCCDB474
+	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Oct 2023 04:07:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qsEcW-0003zd-Tz; Sun, 15 Oct 2023 23:50:20 -0400
+	id 1qsEtA-0006Fc-KI; Mon, 16 Oct 2023 00:07:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qsEcU-0003yj-M8; Sun, 15 Oct 2023 23:50:18 -0400
+ id 1qsEt9-0006FN-FH; Mon, 16 Oct 2023 00:07:31 -0400
 Received: from mail-ua1-x934.google.com ([2607:f8b0:4864:20::934])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qsEcT-0006FJ-6T; Sun, 15 Oct 2023 23:50:18 -0400
+ id 1qsEt7-0000RY-RC; Mon, 16 Oct 2023 00:07:31 -0400
 Received: by mail-ua1-x934.google.com with SMTP id
- a1e0cc1a2514c-7ab5150a7b5so3503869241.0; 
- Sun, 15 Oct 2023 20:50:16 -0700 (PDT)
+ a1e0cc1a2514c-7ae1a075fc5so1654213241.3; 
+ Sun, 15 Oct 2023 21:07:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697428215; x=1698033015; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1697429248; x=1698034048; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tko2mzIux2MS6GKgsFFe42LvhDZXk7nai0rjdXSqA9I=;
- b=L8E1r/kPZvQB1FcL9NDwT08e92Py223U8v3Qjz+3Du1xZAsJQw/WcKqrcLYxDnOA5U
- 28HgoQEc58w6psBbzI0rB2yXda9XosKo5zpfVNMokMfl2yjb+yf/iDp9DNFEzarfFFVF
- ITwOsFUwjdsoCtNOy6aNre0hevWmQ6l+2o2go+3Wvnq6ZofcmmqTqGPAcY30D8ha3u0G
- vk7U3PZBimUPUwDGLOBIl0NjlCD/NeMbhb0im2M1hVYHhQNOvvwZu5aygabHK0o06Bgk
- hJH0MTLQCZi5hMDelNGPtMR2IHQ3XdGP3xF+BTlUM02f7V+oNsTPI5OreggQIEzBq8aE
- WdEg==
+ bh=upMGy8JxWhHSSAFL+5BzrgByGgKwKmVLLUbrPzfjgjU=;
+ b=U7mzhubbbnhYy+hD/ndLMBtK8kA4NaHmJQeunc0no8FgjqBG6A5MHpfBn9m6oDMkf5
+ y/IBjjK14bVFugosUHy6wXVP+0KShnNWbtf+326NvAoTkmKUk++uv633Sn410KWUVjtS
+ k5RkAHgHta0mVxP08llrC/AlFcmWeGSbd5Vykd+Ea5HPvpBg696mXEh7nTH/AY0X0DB3
+ I/JkKgCzvoidcjLPbSHKEavNoraBxWUvFQs/BczmYns9UgfYuz28V9G8A9I3939A7SEp
+ wpw4QplBsm0Tb5ylmTfj3vqpsly+B1JBqAnCflUzYo0FdfZDRpDcvstjBm3pgIuaf0gN
+ a0bA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697428215; x=1698033015;
+ d=1e100.net; s=20230601; t=1697429248; x=1698034048;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tko2mzIux2MS6GKgsFFe42LvhDZXk7nai0rjdXSqA9I=;
- b=T0wfiGrQYr+U9zwcidY2lAWt+C5RgrillZW+wF9iHnLfbGN23zQrri0QrZx6jc9Kjp
- iJqLySdEnl8OC8SeOy0UhJG4vXuppzE5vdgQq3RVhMaB0PMIsCcU9UhnEI2abayxV1YY
- yyks8Mk4YZ0/s186krbmrzrR1wD7hAQbmnN33mQoCGj05rPQvi3Isksuf69Mh51e1YGY
- 4PDLbIn529X/WVwXpn2gFh2GFum5K48zI0NAbAG7ldPE9kgkjhSLACW7SGzz1oQ06RR+
- vl9nC27KaNfhLxIlbLYUY5hQtHYOVFLy4S3WOWgVnHRLOOWEsTeK+HaCQwJmjQP1YhNK
- FUKQ==
-X-Gm-Message-State: AOJu0YwE/0I8K5TRjdFzaJqgci7o1gYHIkJtv86FIYXe6XHET6wMs/L2
- +MHSQJOTrJwW1QZGV7aR0rFkPz6oRzeN4cWIpv8=
-X-Google-Smtp-Source: AGHT+IGSKWmYKskRoW68zYKkltxRfWTidMoLscpgtYKw+9aMpADlggVx0gxJCUcTM6QBFoH7BIi2LRxE1uoT5mdbqAU=
-X-Received: by 2002:a67:c19b:0:b0:454:4484:179c with SMTP id
- h27-20020a67c19b000000b004544484179cmr3439783vsj.7.1697428215580; Sun, 15 Oct
- 2023 20:50:15 -0700 (PDT)
+ bh=upMGy8JxWhHSSAFL+5BzrgByGgKwKmVLLUbrPzfjgjU=;
+ b=ghRdkg0Bb/200nceEH2wFoGV4rsZcS+fAhZ91XeX+Uto3qbcPiV0qikzkFvy/Shu3S
+ 888nS/dVOjyA13ddykxIDPE5JLVu+1sq5SpB2+1NTbxIxPjOdVEhAG5C4BR/eatDq/hg
+ KeoCliZYgR9edbd1M/vY+Yvky1uvIOojGFZpxEl3B2yW8xNlOjtriYey+6EibdfUFhtw
+ ugnSpFjUIwNKhpoEIBJg7int03faxM3UMptl5+nLWWVx0+9e9gc4q1vPwEu4hGhd/zTk
+ 5RLJG1dXlOAEX1rYLbHAMWciMVpVYlNl7Zh40+bVTw5bBUq+/kCHyzfa2mEzXtxF+L2V
+ z1Cg==
+X-Gm-Message-State: AOJu0YzylBc5+AcgYZUT/73kQouYhSKxCdggzR2kIPz7KKwRRHvLTsXX
+ xNf+VfoejoEk7WPuV7FaGN7xjpSIZv85ElZktBwiR17V5pY=
+X-Google-Smtp-Source: AGHT+IEWWq99i3LK9JLaYD68yKOrGeQ2ci5MzhB3MRbObgIEqom5lCmVUPGYIheAIzpuOdi20oCm+yJmQuZBLTPmlgw=
+X-Received: by 2002:a67:fe87:0:b0:452:da3d:e130 with SMTP id
+ b7-20020a67fe87000000b00452da3de130mr25386878vsr.18.1697429248469; Sun, 15
+ Oct 2023 21:07:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231011145032.81509-1-rbradford@rivosinc.com>
- <20231011145032.81509-7-rbradford@rivosinc.com>
-In-Reply-To: <20231011145032.81509-7-rbradford@rivosinc.com>
+References: <20231014033545.15220-1-akihiko.odaki@daynix.com>
+ <20231014033545.15220-2-akihiko.odaki@daynix.com>
+ <597bf4be-207b-400a-be49-bc18900809a0@ventanamicro.com>
+ <CAKmqyKPqk1sURLQNBoH0MeSJVSut72XiN4H0uT=95S953o7Taw@mail.gmail.com>
+ <5670669b-cdfa-4b8f-b02b-b009e7c16540@daynix.com>
+In-Reply-To: <5670669b-cdfa-4b8f-b02b-b009e7c16540@daynix.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 16 Oct 2023 13:49:49 +1000
-Message-ID: <CAKmqyKNV_HWT0MoXOxeNf6VWasDZkpeawrrHtOUuexXmGJMJtA@mail.gmail.com>
-Subject: Re: [PATCH v2 6/6] docs/about/deprecated: Document RISC-V "pmu-num"
- deprecation
-To: Rob Bradford <rbradford@rivosinc.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, atishp@rivosinc.com, 
- palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
- liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
- "reviewer:Incompatible changes" <libvir-list@redhat.com>
+Date: Mon, 16 Oct 2023 14:07:01 +1000
+Message-ID: <CAKmqyKOuupgZV0=eS37mnwnGxiq=c90HFkC7T5MoZDfKAo9VzQ@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] target/riscv: Do not allow MXL_RV32 for
+ TARGET_RISCV64
+To: Akihiko Odaki <akihiko.odaki@daynix.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
+ Mikhail Tyutin <m.tyutin@yadro.com>, Aleksandr Anenkov <a.anenkov@yadro.com>,
+ qemu-devel@nongnu.org, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 Received-SPF: pass client-ip=2607:f8b0:4864:20::934;
@@ -92,47 +101,59 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Oct 12, 2023 at 12:52=E2=80=AFAM Rob Bradford <rbradford@rivosinc.c=
-om> wrote:
+On Mon, Oct 16, 2023 at 1:22=E2=80=AFPM Akihiko Odaki <akihiko.odaki@daynix=
+.com> wrote:
 >
-> This has been replaced by a "pmu-mask" property that provides much more
-> flexibility.
 >
-> Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
-> ---
->  docs/about/deprecated.rst | 10 ++++++++++
->  1 file changed, 10 insertions(+)
 >
-> diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
-> index 8b136320e2..37f3414ef8 100644
-> --- a/docs/about/deprecated.rst
-> +++ b/docs/about/deprecated.rst
-> @@ -361,6 +361,16 @@ Specifying the iSCSI password in plain text on the c=
-ommand line using the
->  used instead, to refer to a ``--object secret...`` instance that provide=
-s
->  a password via a file, or encrypted.
+> On 2023/10/16 10:51, Alistair Francis wrote:
+> > On Sun, Oct 15, 2023 at 4:05=E2=80=AFAM Daniel Henrique Barboza
+> > <dbarboza@ventanamicro.com> wrote:
+> >>
+> >>
+> >>
+> >> On 10/14/23 00:35, Akihiko Odaki wrote:
+> >>> TARGET_RISCV64 does not have riscv-32bit-cpu.xml so it shouldn't acce=
+pt
+> >>> MXL_RV32.
+> >>>
+> >>> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+> >>> ---
+> >>
+> >> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> >>
+> >>
+> >>>    target/riscv/tcg/tcg-cpu.c | 3 ++-
+> >>>    1 file changed, 2 insertions(+), 1 deletion(-)
+> >>>
+> >>> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> >>> index a28918ab30..e0cbc56320 100644
+> >>> --- a/target/riscv/tcg/tcg-cpu.c
+> >>> +++ b/target/riscv/tcg/tcg-cpu.c
+> >>> @@ -161,10 +161,11 @@ static void riscv_cpu_validate_misa_mxl(RISCVCP=
+U *cpu, Error **errp)
+> >>>        case MXL_RV128:
+> >>>            cc->gdb_core_xml_file =3D "riscv-64bit-cpu.xml";
+> >>>            break;
+> >>> -#endif
+> >>> +#elif defined(TARGET_RISCV32)
+> >>>        case MXL_RV32:
+> >>>            cc->gdb_core_xml_file =3D "riscv-32bit-cpu.xml";
+> >>>            break;
+> >>> +#endif
+> >
+> > This isn't the right fix. The idea is that riscv64-softmmu can run
+> > 32-bit CPUs, so we instead should include riscv-32bit-cpu.xml
 >
-> +CPU device properties
-> +'''''''''''''''''''''
-> +
-> +``pmu-num=3Dx`` on RISC-V CPUs (since 8.2)
-> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> +
-> +In order to support more flexible counter configurations this has been
-> +replaced by a ``pmu-mask`` property
+> In that case I can continue working on the previous version of this
+> series, but is it really true? I see no 32-bit CPUs enabled for
+> riscv64-softmmu. Is there a plan to enable them for riscv64-softmmu?
 
-Can we give an example of how to migrate to pmu-mask?
+Yeah....
+
+So last time I tried the 32-bit CPUs didn't work correctly. I didn't
+figure out what the issue was, but the *idea* is to eventually enable
+32-bit CPUs in the 64-bit builds.
 
 Alistair
-
-> +
-> +
->  Backwards compatibility
->  -----------------------
->
-> --
-> 2.41.0
->
->
 
