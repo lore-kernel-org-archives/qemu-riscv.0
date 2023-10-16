@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B96FCCDB474
-	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Oct 2023 04:30:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6DE3CDB465
+	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Oct 2023 04:31:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qsFEu-0002hX-2u; Mon, 16 Oct 2023 00:30:00 -0400
+	id 1qsFFZ-000359-BB; Mon, 16 Oct 2023 00:30:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qsFEs-0002hH-Cg; Mon, 16 Oct 2023 00:29:58 -0400
-Received: from mail-ua1-x934.google.com ([2607:f8b0:4864:20::934])
+ id 1qsFFM-0002tE-7y; Mon, 16 Oct 2023 00:30:30 -0400
+Received: from mail-vs1-xe35.google.com ([2607:f8b0:4864:20::e35])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qsFEg-0003Zt-6u; Mon, 16 Oct 2023 00:29:58 -0400
-Received: by mail-ua1-x934.google.com with SMTP id
- a1e0cc1a2514c-7b5fd0b7522so1079149241.0; 
- Sun, 15 Oct 2023 21:29:45 -0700 (PDT)
+ id 1qsFFK-0003o1-PW; Mon, 16 Oct 2023 00:30:27 -0400
+Received: by mail-vs1-xe35.google.com with SMTP id
+ ada2fe7eead31-457bda4cf32so1260931137.3; 
+ Sun, 15 Oct 2023 21:30:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697430584; x=1698035384; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1697430625; x=1698035425; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qEy4DovLCrf8eRs6Lk95PQUjm9UqkEqTY+nctFaY1tE=;
- b=QUcSfgyMHrfAeO2RvZfQMnhoNqVnbi8QHaZL2FZXMUqvmpiSmkVKx4hzSF4HgP0img
- 1siGPa4dB2WfD9DxjHEKwy7kQkfacrN/Br+UjhdXRoYzYJZPuGuN2bK3Z2ae1J8lTcsv
- FtcW8CDSIe+DmuxZuZbwTo6LhAy9Mpg/c4LlNPZK7jaPNedrTvaxHxOOIa4MhnscTowA
- vgCVYu9Pr+oehled+MNlES9LPlPadSwdfmUBULje/95bwIJo7UWm6JaZq48VLbwtY2mQ
- XGN+LQPMT/FRqMBQXaLCyC4mcvILLeVBAoAa8jkpsnemDQBiLO1uHcgvj8ePmh3LMXD5
- pZRA==
+ bh=yxWDtaoY4Siyh7gy1qHP+6r5pQw9GbC9+s33Ip146uU=;
+ b=JyV9rH3pAC7hE0xyRBRIuM0gSmriW6Z5CuRV7HpAFCnYdaeGM4MG6hq5TveOrSVq29
+ Uy2Mu1KWS9yN1NnFhOwCKLGyuWLopG5akqbeUjjCN4SucP94X0X6pqo46CkI2NPzUy8i
+ IrjphtDo96QKxvv4t7x+11m9v154k8H+PopFwyiGGb9lYE5a0D8ecI7o33Eg/7+zf+iN
+ c0+WcO8a+iI4vs8E5oDXu4oF8J2cS3SGQAJqI/juq+5hhU9P5sNy+9wWC8jRlFd8DeYo
+ kxbkHMvDF2RntT/kX9lFBx7UWVCH2sgB5L24AvD1Eb3KX0GJQzw2jHWit4+yltk/27/L
+ suOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697430584; x=1698035384;
+ d=1e100.net; s=20230601; t=1697430625; x=1698035425;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qEy4DovLCrf8eRs6Lk95PQUjm9UqkEqTY+nctFaY1tE=;
- b=c3XpVr+NwCSkEoXTu7MEOMx9AmpqjYaa6nEfwdrNT4Dn64qcOYR4+tvnwLk2nFFCoJ
- bgcn/cgCN0UaCuJXshiUwK44DQ2hw7YdHweePsGwjwu0zPURYVmcN4+8k4gtvCLZFvFG
- CF7XsHfeqemwJ6MwdFml0c5K7WW4/dC6A0ofVMZ/SPFUYG6+GK3IAdLmEAlClEa0uaP+
- Nev0TbbeOX1MQLfxO1/xTLcY2D/ts7Ame+HpJY6S+B2vFmng/tjP+4f1Hw+5SPwdqNOO
- 3nDeSrjmrcxJhTeSU5s63DHXgdJjtFZ62n886gGu/MPezS0idmrnPwaceXcRPzKZKbyk
- eUFw==
-X-Gm-Message-State: AOJu0Yzr/ITvVbdE6NHSpTUHrjupwKPL4fpS+IxDl72jV/1Y/1vFkJbJ
- 3P0mHpLZNnKlUerByT1VQuBk+zJvWrp1RsI6fHA=
-X-Google-Smtp-Source: AGHT+IGHYF0tVthfaBbx57MB+/DVObq33v5Tj2wryHO4j3qR3FOl7tfBPNHcnGWpZ0XMiiUi+i7zz74dBEDBv/DxhCo=
-X-Received: by 2002:a05:6102:2049:b0:457:eee6:c105 with SMTP id
- q9-20020a056102204900b00457eee6c105mr569156vsr.8.1697430584531; Sun, 15 Oct
- 2023 21:29:44 -0700 (PDT)
+ bh=yxWDtaoY4Siyh7gy1qHP+6r5pQw9GbC9+s33Ip146uU=;
+ b=Ne4vp0Q/nEUTVqrQdR4MDvKfqzu1a+q1NWxEyhpaieQiKw89uG5VShLKCvcjO7hkHo
+ FtKH4m7DZpHRZsfZXeAlz7ocbbkFBBR+CsoVTY/of+ATPz/fzomz5lyIf1oq6RkdNqiz
+ bDr9diiJAvqiIvDBeTwP1IXaoHaO0Dy1ORBGUerQqPTtwthFAV4MgFdXKwr1Qcmh0WkK
+ sFAMA+4msqnu7IFGfMSShCJZTvpe0LRsS8nGi2S+95QFJlyrrg/uvXEEwOIXUBqY2gjs
+ xJ13ea/9gXc13kXPR+SBlRvWYQT9F/J0iWChaOAGv+G7znfEdRMqKOr3GLxlbEtVryFV
+ ySGA==
+X-Gm-Message-State: AOJu0YzxdWsvx2FXKbAG451F8AfQOaQiYrqP69AP81QuviyQt/joYLhj
+ qIoOQlG6pV+Aw/HWXTDgWTKHlOu3lsEbT+X9FOI=
+X-Google-Smtp-Source: AGHT+IE4tXgTXAUHEGoS2+fGkD2YFF9Z7v8YdbPx7UIPPe/B0QdmDQ862HQWUhYKk787wDrzSLtqgFtJQ4nQ5lQBLwQ=
+X-Received: by 2002:a67:e718:0:b0:457:b01c:4ab5 with SMTP id
+ hw24-20020a67e718000000b00457b01c4ab5mr11409844vsb.27.1697430624890; Sun, 15
+ Oct 2023 21:30:24 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231013110111.34619-1-rbradford@rivosinc.com>
- <20231013110111.34619-5-rbradford@rivosinc.com>
-In-Reply-To: <20231013110111.34619-5-rbradford@rivosinc.com>
+ <20231013110111.34619-7-rbradford@rivosinc.com>
+In-Reply-To: <20231013110111.34619-7-rbradford@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 16 Oct 2023 14:29:17 +1000
-Message-ID: <CAKmqyKP+pB7Ed4nMG3EJfxN3_x0+5uu7-7fuAwT+aNbALWtktA@mail.gmail.com>
-Subject: Re: [PATCH v3 4/6] target/riscv: Add "pmu-mask" property to replace
- "pmu-num"
+Date: Mon, 16 Oct 2023 14:29:58 +1000
+Message-ID: <CAKmqyKPEnkB_ZsRY8X2KiGR06PhqvJO-fdsgS3OAqVh=yCGf7Q@mail.gmail.com>
+Subject: Re: [PATCH v3 6/6] target/riscv: Use MAKE_64BIT_MASK instead of
+ custom macro
 To: Rob Bradford <rbradford@rivosinc.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, atishp@rivosinc.com, 
  palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
  liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::934;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x934.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e35;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe35.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -91,144 +91,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Oct 13, 2023 at 11:32=E2=80=AFPM Rob Bradford <rbradford@rivosinc.c=
-om> wrote:
+On Fri, Oct 13, 2023 at 9:04=E2=80=AFPM Rob Bradford <rbradford@rivosinc.co=
+m> wrote:
 >
-> Using a mask instead of the number of PMU devices supports the accurate
-> emulation of platforms that have a discontinuous set of PMU counters.
->
-> Generate a warning if the old property changed from the default but
-> still go ahead and use it to generate the mask if the user has changed
-> it from the default
+> A 32-bit mask can be trivially created using the 64-bit macro so make
+> use of that instead.
 >
 > Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
-> ---
->  target/riscv/cpu.c     |  5 +++--
->  target/riscv/cpu_cfg.h |  3 ++-
->  target/riscv/machine.c |  2 +-
->  target/riscv/pmu.c     | 20 ++++++++++++++++----
->  4 files changed, 22 insertions(+), 8 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index c9d8fc12fe..420673b491 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1487,7 +1487,7 @@ static void riscv_cpu_realize_tcg(DeviceState *dev,=
- Error **errp)
->          riscv_timer_init(cpu);
->      }
->
-> -    if (cpu->cfg.pmu_num) {
-> +    if (cpu->cfg.pmu_mask) {
->          riscv_pmu_init(cpu, &local_err);
->          if (local_err !=3D NULL) {
->              error_propagate(errp, local_err);
-> @@ -1812,7 +1812,8 @@ static void riscv_cpu_add_misa_properties(Object *c=
-pu_obj)
->
->  static Property riscv_cpu_extensions[] =3D {
->      /* Defaults for standard extensions */
-> -    DEFINE_PROP_UINT8("pmu-num", RISCVCPU, cfg.pmu_num, 16),
-> +    DEFINE_PROP_UINT8("pmu-num", RISCVCPU, cfg.pmu_num, 16), /* Deprecat=
-ed */
 
-This will need to be rebased.
-
-You could probably use riscv_cpu_deprecated_exts, but then you also
-need to modify cpu_set_multi_ext_cfg()
-
-> +    DEFINE_PROP_UINT32("pmu-mask", RISCVCPU, cfg.pmu_mask, MAKE_64BIT_MA=
-SK(3, 16)),
->      DEFINE_PROP_BOOL("sscofpmf", RISCVCPU, cfg.ext_sscofpmf, false),
->      DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
->      DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> index 0e6a0f245c..d273487040 100644
-> --- a/target/riscv/cpu_cfg.h
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -123,7 +123,8 @@ struct RISCVCPUConfig {
->      bool ext_xtheadsync;
->      bool ext_XVentanaCondOps;
->
-> -    uint8_t pmu_num;
-> +    uint8_t pmu_num; /* Deprecated */
-> +    uint32_t pmu_mask;
->      char *priv_spec;
->      char *user_spec;
->      char *bext_spec;
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index c7c862cdd3..9f6e3f7a6d 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -313,7 +313,7 @@ static bool pmu_needed(void *opaque)
->  {
->      RISCVCPU *cpu =3D opaque;
->
-> -    return cpu->cfg.pmu_num;
-> +    return (cpu->cfg.pmu_mask > 0);
->  }
->
->  static const VMStateDescription vmstate_pmu_ctr_state =3D {
-> diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
-> index 7ddf4977b1..9253e5f17a 100644
-> --- a/target/riscv/pmu.c
-> +++ b/target/riscv/pmu.c
-> @@ -18,6 +18,7 @@
->
->  #include "qemu/osdep.h"
->  #include "qemu/log.h"
-> +#include "qemu/error-report.h"
->  #include "cpu.h"
->  #include "pmu.h"
->  #include "sysemu/cpu-timers.h"
-> @@ -184,7 +185,7 @@ int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_=
-event_idx event_idx)
->      CPURISCVState *env =3D &cpu->env;
->      gpointer value;
->
-> -    if (!cpu->cfg.pmu_num) {
-> +    if (!cpu->cfg.pmu_mask) {
->          return 0;
->      }
->      value =3D g_hash_table_lookup(cpu->pmu_event_ctr_map,
-> @@ -434,7 +435,13 @@ void riscv_pmu_init(RISCVCPU *cpu, Error **errp)
->  {
->      uint8_t pmu_num =3D cpu->cfg.pmu_num;
->
-> -    if (pmu_num > (RV_MAX_MHPMCOUNTERS - 3)) {
-> +    if (cpu->cfg.pmu_mask & (COUNTEREN_CY | COUNTEREN_TM | COUNTEREN_IR)=
-) {
-> +        error_setg(errp, "\"pmu-mask\" contains invalid bits (0-2) set")=
-;
-> +        return;
-> +    }
-> +
-> +    if (ctpop32(cpu->cfg.pmu_mask) > (RV_MAX_MHPMCOUNTERS - 3) ||
-> +        (pmu_num > RV_MAX_MHPMCOUNTERS - 3)) {
->          error_setg(errp, "Number of counters exceeds maximum available")=
-;
->          return;
->      }
-> @@ -445,6 +452,11 @@ void riscv_pmu_init(RISCVCPU *cpu, Error **errp)
->          return;
->      }
->
-> -    /* Create a bitmask of available programmable counters */
-> -    cpu->pmu_avail_ctrs =3D MAKE_32BIT_MASK(3, pmu_num);
-> +    /* Check if user set it by comparing against default */
-> +    if (pmu_num !=3D 16) {
-
-This won't work if the user sets 16 though
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
-> +        warn_report("\"pmu-num\" property is deprecated; use \"pmu-mask\=
+> ---
+>  target/riscv/pmu.c | 4 +---
+>  1 file changed, 1 insertion(+), 3 deletions(-)
+>
+> diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
+> index 9253e5f17a..052d5b1164 100644
+> --- a/target/riscv/pmu.c
+> +++ b/target/riscv/pmu.c
+> @@ -25,8 +25,6 @@
+>  #include "sysemu/device_tree.h"
+>
+>  #define RISCV_TIMEBASE_FREQ 1000000000 /* 1Ghz */
+> -#define MAKE_32BIT_MASK(shift, length) \
+> -        (((uint32_t)(~0UL) >> (32 - (length))) << (shift))
+>
+>  /*
+>   * To keep it simple, any event can be mapped to any programmable counte=
+rs in
+> @@ -455,7 +453,7 @@ void riscv_pmu_init(RISCVCPU *cpu, Error **errp)
+>      /* Check if user set it by comparing against default */
+>      if (pmu_num !=3D 16) {
+>          warn_report("\"pmu-num\" property is deprecated; use \"pmu-mask\=
 "");
-> +        cpu->cfg.pmu_mask =3D MAKE_32BIT_MASK(3, pmu_num);
-> +    }
-> +
-> +    cpu->pmu_avail_ctrs =3D cpu->cfg.pmu_mask;
->  }
+> -        cpu->cfg.pmu_mask =3D MAKE_32BIT_MASK(3, pmu_num);
+> +        cpu->cfg.pmu_mask =3D MAKE_64BIT_MASK(3, pmu_num);
+>      }
+>
+>      cpu->pmu_avail_ctrs =3D cpu->cfg.pmu_mask;
 > --
 > 2.41.0
 >
