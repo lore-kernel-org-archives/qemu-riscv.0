@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B062CDB465
-	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Oct 2023 03:46:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A264CDB465
+	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Oct 2023 03:50:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qsEYo-00031z-QF; Sun, 15 Oct 2023 23:46:30 -0400
+	id 1qsEcW-0003zd-Tz; Sun, 15 Oct 2023 23:50:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qsEYn-00030z-3c; Sun, 15 Oct 2023 23:46:29 -0400
-Received: from mail-vk1-xa2d.google.com ([2607:f8b0:4864:20::a2d])
+ id 1qsEcU-0003yj-M8; Sun, 15 Oct 2023 23:50:18 -0400
+Received: from mail-ua1-x934.google.com ([2607:f8b0:4864:20::934])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qsEYl-0005Vu-IQ; Sun, 15 Oct 2023 23:46:28 -0400
-Received: by mail-vk1-xa2d.google.com with SMTP id
- 71dfb90a1353d-49b289adca9so1569550e0c.3; 
- Sun, 15 Oct 2023 20:46:26 -0700 (PDT)
+ id 1qsEcT-0006FJ-6T; Sun, 15 Oct 2023 23:50:18 -0400
+Received: by mail-ua1-x934.google.com with SMTP id
+ a1e0cc1a2514c-7ab5150a7b5so3503869241.0; 
+ Sun, 15 Oct 2023 20:50:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697427986; x=1698032786; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1697428215; x=1698033015; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mbB3Ku0FBInv3CsQiiwijSGD2zWc7sbvbA/76if6b6E=;
- b=kZ+X2MGUgsiOreqfueQguq51yqSK7zkD0mgO500ww4ISDrS6WwBDY37xSzqb3d9ghL
- sIvjvNZksDID9uQTIY/bnpjkSAG/2szBwb+iUq1I3SebzWTDtVrqL5a9+jFiy2VgJQqt
- J1nJaST4qY3taUNwsypuPaIDGka0wmtdkLjxTmUrzrIHS6t17yk5Qc/Qxoow5ILBDZrM
- cse93wRdzfAHXkYWSLvnDWJgHvToHOkc0LHtkns+ZfW4PyTQnxOeAqK+xGYG8R+30FUw
- 3PN+a+7Ei/CbMb40mRctit1KVpGLTCzhvY2qxHSjuxZS7r7OWutdAlqVfdc4ortozzMI
- YHkg==
+ bh=tko2mzIux2MS6GKgsFFe42LvhDZXk7nai0rjdXSqA9I=;
+ b=L8E1r/kPZvQB1FcL9NDwT08e92Py223U8v3Qjz+3Du1xZAsJQw/WcKqrcLYxDnOA5U
+ 28HgoQEc58w6psBbzI0rB2yXda9XosKo5zpfVNMokMfl2yjb+yf/iDp9DNFEzarfFFVF
+ ITwOsFUwjdsoCtNOy6aNre0hevWmQ6l+2o2go+3Wvnq6ZofcmmqTqGPAcY30D8ha3u0G
+ vk7U3PZBimUPUwDGLOBIl0NjlCD/NeMbhb0im2M1hVYHhQNOvvwZu5aygabHK0o06Bgk
+ hJH0MTLQCZi5hMDelNGPtMR2IHQ3XdGP3xF+BTlUM02f7V+oNsTPI5OreggQIEzBq8aE
+ WdEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697427986; x=1698032786;
+ d=1e100.net; s=20230601; t=1697428215; x=1698033015;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mbB3Ku0FBInv3CsQiiwijSGD2zWc7sbvbA/76if6b6E=;
- b=wy5tPBRRUaVgFKvQO6nqmP5YgVfd+MHivTPAiYZgrwmTMDBIz1fBm2htuLCALgjUwi
- FZg7VVY7LMD9jeUlveMKoXLKRmoGDmSnK7YY3B8nibhnjAqSIyQlnYvvTs4D6VAAdxE3
- VksJu2SAlYEK7lxZrbo9DguCLuTWGU1fhuOajLfafBu7/A3XNkq4ERNH1aAM5aRhOv0V
- 0WyFDs6XKgppRCgHe/n8BjXqHueHCagP7jXoOC4PFIeHyjeBhRSGTJOrVgj+O+LJC3ba
- 3KRT4k5alO+ruB1qbx6ABU3qiaGjxxXgebAbeX+PMZc+bl/JO6Jo5Dg4YxlCn1F9HN6k
- p4tQ==
-X-Gm-Message-State: AOJu0Ywe8RUtqo4CnXBA28Yxak6d4+BCAkXgoP0cRFdp8TYXPJNhZNmW
- WkVXKQPiizPD4XEsi5MiKZqLH6VADplBLRokV+w=
-X-Google-Smtp-Source: AGHT+IHnsRgb+w29wAcj/ADulZiCFZpEPc2yZVFn2zJ/neK4KnJhkqvd35OiFWBjuGHwtqHOiSl1ddB9wnvwcPGbw28=
-X-Received: by 2002:a1f:e404:0:b0:49a:1a56:945c with SMTP id
- b4-20020a1fe404000000b0049a1a56945cmr27099496vkh.13.1697427986191; Sun, 15
- Oct 2023 20:46:26 -0700 (PDT)
+ bh=tko2mzIux2MS6GKgsFFe42LvhDZXk7nai0rjdXSqA9I=;
+ b=T0wfiGrQYr+U9zwcidY2lAWt+C5RgrillZW+wF9iHnLfbGN23zQrri0QrZx6jc9Kjp
+ iJqLySdEnl8OC8SeOy0UhJG4vXuppzE5vdgQq3RVhMaB0PMIsCcU9UhnEI2abayxV1YY
+ yyks8Mk4YZ0/s186krbmrzrR1wD7hAQbmnN33mQoCGj05rPQvi3Isksuf69Mh51e1YGY
+ 4PDLbIn529X/WVwXpn2gFh2GFum5K48zI0NAbAG7ldPE9kgkjhSLACW7SGzz1oQ06RR+
+ vl9nC27KaNfhLxIlbLYUY5hQtHYOVFLy4S3WOWgVnHRLOOWEsTeK+HaCQwJmjQP1YhNK
+ FUKQ==
+X-Gm-Message-State: AOJu0YwE/0I8K5TRjdFzaJqgci7o1gYHIkJtv86FIYXe6XHET6wMs/L2
+ +MHSQJOTrJwW1QZGV7aR0rFkPz6oRzeN4cWIpv8=
+X-Google-Smtp-Source: AGHT+IGSKWmYKskRoW68zYKkltxRfWTidMoLscpgtYKw+9aMpADlggVx0gxJCUcTM6QBFoH7BIi2LRxE1uoT5mdbqAU=
+X-Received: by 2002:a67:c19b:0:b0:454:4484:179c with SMTP id
+ h27-20020a67c19b000000b004544484179cmr3439783vsj.7.1697428215580; Sun, 15 Oct
+ 2023 20:50:15 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231011145032.81509-1-rbradford@rivosinc.com>
- <20231011145032.81509-5-rbradford@rivosinc.com>
- <89b2bac3-56c1-47e3-92d7-0907d0bf0ecb@linux.alibaba.com>
-In-Reply-To: <89b2bac3-56c1-47e3-92d7-0907d0bf0ecb@linux.alibaba.com>
+ <20231011145032.81509-7-rbradford@rivosinc.com>
+In-Reply-To: <20231011145032.81509-7-rbradford@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 16 Oct 2023 13:45:59 +1000
-Message-ID: <CAKmqyKPBe8dgGCHuy5AWdQAym21ntYvAajsdQ1XZM9bKpXe89A@mail.gmail.com>
-Subject: Re: [PATCH v2 4/6] qemu/bitops.h: Add MAKE_32BIT_MASK macro
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: Rob Bradford <rbradford@rivosinc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, 
- atishp@rivosinc.com, palmer@dabbelt.com, alistair.francis@wdc.com, 
- bin.meng@windriver.com, liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, 
- Richard Henderson <richard.henderson@linaro.org>
+Date: Mon, 16 Oct 2023 13:49:49 +1000
+Message-ID: <CAKmqyKNV_HWT0MoXOxeNf6VWasDZkpeawrrHtOUuexXmGJMJtA@mail.gmail.com>
+Subject: Re: [PATCH v2 6/6] docs/about/deprecated: Document RISC-V "pmu-num"
+ deprecation
+To: Rob Bradford <rbradford@rivosinc.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, atishp@rivosinc.com, 
+ palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
+ liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
+ "reviewer:Incompatible changes" <libvir-list@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2d;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::934;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x934.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -93,63 +92,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Oct 12, 2023 at 6:53=E2=80=AFPM LIU Zhiwei <zhiwei_liu@linux.alibab=
-a.com> wrote:
+On Thu, Oct 12, 2023 at 12:52=E2=80=AFAM Rob Bradford <rbradford@rivosinc.c=
+om> wrote:
 >
+> This has been replaced by a "pmu-mask" property that provides much more
+> flexibility.
 >
-> On 2023/10/11 22:45, Rob Bradford wrote:
-> > Add 32-bit version of mask generating macro and use it in the RISC-V PM=
-U
-> > code.
-> CC Richard
-> > Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
-> > ---
-> >   include/qemu/bitops.h | 3 +++
-> >   target/riscv/pmu.c    | 2 --
-> >   2 files changed, 3 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/include/qemu/bitops.h b/include/qemu/bitops.h
-> > index cb3526d1f4..9b25b2d5e4 100644
-> > --- a/include/qemu/bitops.h
-> > +++ b/include/qemu/bitops.h
-> > @@ -25,6 +25,9 @@
-> >   #define BIT_WORD(nr)            ((nr) / BITS_PER_LONG)
-> >   #define BITS_TO_LONGS(nr)       DIV_ROUND_UP(nr, BITS_PER_BYTE * size=
-of(long))
-> >
-> > +#define MAKE_32BIT_MASK(shift, length) \
-> > +    (((uint32_t)(~0UL) >> (32 - (length))) << (shift))
-> > +
-> >   #define MAKE_64BIT_MASK(shift, length) \
-> >       (((~0ULL) >> (64 - (length))) << (shift))
-> >
-> > diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
-> > index 7ddf4977b1..360c76f63e 100644
-> > --- a/target/riscv/pmu.c
-> > +++ b/target/riscv/pmu.c
-> > @@ -24,8 +24,6 @@
-> >   #include "sysemu/device_tree.h"
-> >
-> >   #define RISCV_TIMEBASE_FREQ 1000000000 /* 1Ghz */
-> > -#define MAKE_32BIT_MASK(shift, length) \
-> > -        (((uint32_t)(~0UL) >> (32 - (length))) << (shift))
-> >
+> Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
+> ---
+>  docs/about/deprecated.rst | 10 ++++++++++
+>  1 file changed, 10 insertions(+)
 >
-> We can always use the MAKE_64BIT_MASK instead of MAKE_32BIT_MASK.  And
-> MAKE_32BIT_MASK only used in target/riscv. I am not sure  whether this
-> patch will be accepted.
+> diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
+> index 8b136320e2..37f3414ef8 100644
+> --- a/docs/about/deprecated.rst
+> +++ b/docs/about/deprecated.rst
+> @@ -361,6 +361,16 @@ Specifying the iSCSI password in plain text on the c=
+ommand line using the
+>  used instead, to refer to a ``--object secret...`` instance that provide=
+s
+>  a password via a file, or encrypted.
+>
+> +CPU device properties
+> +'''''''''''''''''''''
+> +
+> +``pmu-num=3Dx`` on RISC-V CPUs (since 8.2)
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +In order to support more flexible counter configurations this has been
+> +replaced by a ``pmu-mask`` property
 
-Good point, can we use MAKE_64BIT_MASK instead?
+Can we give an example of how to migrate to pmu-mask?
 
 Alistair
 
+> +
+> +
+>  Backwards compatibility
+>  -----------------------
 >
-> Acked-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> --
+> 2.41.0
 >
-> Zhiwei
->
-> >   /*
-> >    * To keep it simple, any event can be mapped to any programmable cou=
-nters in
 >
 
