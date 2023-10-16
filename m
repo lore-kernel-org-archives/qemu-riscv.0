@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6DE3CDB465
-	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Oct 2023 04:31:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EB3DCDB482
+	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Oct 2023 04:35:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qsFFZ-000359-BB; Mon, 16 Oct 2023 00:30:41 -0400
+	id 1qsFKJ-0005eV-4f; Mon, 16 Oct 2023 00:35:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qsFFM-0002tE-7y; Mon, 16 Oct 2023 00:30:30 -0400
-Received: from mail-vs1-xe35.google.com ([2607:f8b0:4864:20::e35])
+ id 1qsFKC-0005cT-HA; Mon, 16 Oct 2023 00:35:28 -0400
+Received: from mail-vk1-xa2c.google.com ([2607:f8b0:4864:20::a2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qsFFK-0003o1-PW; Mon, 16 Oct 2023 00:30:27 -0400
-Received: by mail-vs1-xe35.google.com with SMTP id
- ada2fe7eead31-457bda4cf32so1260931137.3; 
- Sun, 15 Oct 2023 21:30:25 -0700 (PDT)
+ id 1qsFKA-0004Op-C3; Mon, 16 Oct 2023 00:35:28 -0400
+Received: by mail-vk1-xa2c.google.com with SMTP id
+ 71dfb90a1353d-49dd3bb5348so1538586e0c.0; 
+ Sun, 15 Oct 2023 21:35:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697430625; x=1698035425; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1697430924; x=1698035724; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yxWDtaoY4Siyh7gy1qHP+6r5pQw9GbC9+s33Ip146uU=;
- b=JyV9rH3pAC7hE0xyRBRIuM0gSmriW6Z5CuRV7HpAFCnYdaeGM4MG6hq5TveOrSVq29
- Uy2Mu1KWS9yN1NnFhOwCKLGyuWLopG5akqbeUjjCN4SucP94X0X6pqo46CkI2NPzUy8i
- IrjphtDo96QKxvv4t7x+11m9v154k8H+PopFwyiGGb9lYE5a0D8ecI7o33Eg/7+zf+iN
- c0+WcO8a+iI4vs8E5oDXu4oF8J2cS3SGQAJqI/juq+5hhU9P5sNy+9wWC8jRlFd8DeYo
- kxbkHMvDF2RntT/kX9lFBx7UWVCH2sgB5L24AvD1Eb3KX0GJQzw2jHWit4+yltk/27/L
- suOA==
+ bh=VUVZmXgRkLvNNEM/+qQlpx3xxRY+7rsCdlFcJ5vo/LA=;
+ b=IKokSxjM6LgkqHNWhYoGx9qA0G/qYDscB9foJIrIfLBXD0nQJdjSdFuXtQ5ZESHe++
+ UgdpvdmA8hVs+UJwOWTSpmzYJHep0kd/lsxHw3TeaTVj2onDJCzkYhyyIcLsBMHGjFG8
+ GE4lfzTJiVAfhW3IEB5KZDrB6dCT0OfgDemhvKZVOn6j1oUxQLJ1mDVODYIbOysK/7tO
+ pNtH218aD491ynloCnUCcErPZj7mXmzKMqK11f/wrySbZm8/RtQ+e1aIvKp3Rw772raP
+ 4zNDqH/baQd7iTdnlJJyCKopmMaiuwlpzFKI0VzXUOarLuk2uIZcLQK7hZLFAscSsqvJ
+ A6TA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697430625; x=1698035425;
+ d=1e100.net; s=20230601; t=1697430924; x=1698035724;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yxWDtaoY4Siyh7gy1qHP+6r5pQw9GbC9+s33Ip146uU=;
- b=Ne4vp0Q/nEUTVqrQdR4MDvKfqzu1a+q1NWxEyhpaieQiKw89uG5VShLKCvcjO7hkHo
- FtKH4m7DZpHRZsfZXeAlz7ocbbkFBBR+CsoVTY/of+ATPz/fzomz5lyIf1oq6RkdNqiz
- bDr9diiJAvqiIvDBeTwP1IXaoHaO0Dy1ORBGUerQqPTtwthFAV4MgFdXKwr1Qcmh0WkK
- sFAMA+4msqnu7IFGfMSShCJZTvpe0LRsS8nGi2S+95QFJlyrrg/uvXEEwOIXUBqY2gjs
- xJ13ea/9gXc13kXPR+SBlRvWYQT9F/J0iWChaOAGv+G7znfEdRMqKOr3GLxlbEtVryFV
- ySGA==
-X-Gm-Message-State: AOJu0YzxdWsvx2FXKbAG451F8AfQOaQiYrqP69AP81QuviyQt/joYLhj
- qIoOQlG6pV+Aw/HWXTDgWTKHlOu3lsEbT+X9FOI=
-X-Google-Smtp-Source: AGHT+IE4tXgTXAUHEGoS2+fGkD2YFF9Z7v8YdbPx7UIPPe/B0QdmDQ862HQWUhYKk787wDrzSLtqgFtJQ4nQ5lQBLwQ=
-X-Received: by 2002:a67:e718:0:b0:457:b01c:4ab5 with SMTP id
- hw24-20020a67e718000000b00457b01c4ab5mr11409844vsb.27.1697430624890; Sun, 15
- Oct 2023 21:30:24 -0700 (PDT)
+ bh=VUVZmXgRkLvNNEM/+qQlpx3xxRY+7rsCdlFcJ5vo/LA=;
+ b=fqORPxxgY5C9n0X2kWjx5N+WN7WEkUN9a1rHYIMa5CA9s1UUfjpKPHOlvzZ507loqw
+ rcQ7EckZMJd9U6CqcAb1zP5oaEStHDndpOtZs52L5tpm0XomrjJvJrZXY151g58BLkJl
+ wkmmEOpwdRm1mSbH+Kr3TH744TEnQWaEj/cRhDdkAHdannXTanMkC4hxj2rdnrYuB+iP
+ WWwdfpXjYX266cu3JUT57GtjePiLgwFsTMCj1AdLj0rB4CSl9m43zn8xwQS10iQQUgOD
+ 7/IDLINlHCLZPXYvFBQD2BTPi5QsyNa6kdwpB9uJbrYr6ENseVN7JYujNXoTHW9YsdUg
+ JIqQ==
+X-Gm-Message-State: AOJu0Ywdvl8CaDDxuKzluOolWGH5VYtvHuB9hxUuoJM/f2DyDoK5gutQ
+ FGR81OXwZX+p9xe7QVnt8AkJQgArMZgc/Y9CvLQ=
+X-Google-Smtp-Source: AGHT+IEtulP8udkY3zQr79RQyFODHS0NyA327u1rl5/OW4TncZCTmeKv3r1ggFfwwlPBfjDvJ2vFIuG6s+huYycSwB0=
+X-Received: by 2002:a1f:c905:0:b0:49a:466c:199e with SMTP id
+ z5-20020a1fc905000000b0049a466c199emr23884319vkf.2.1697430924375; Sun, 15 Oct
+ 2023 21:35:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231013110111.34619-1-rbradford@rivosinc.com>
- <20231013110111.34619-7-rbradford@rivosinc.com>
-In-Reply-To: <20231013110111.34619-7-rbradford@rivosinc.com>
+References: <20231012164604.398496-1-dbarboza@ventanamicro.com>
+ <20231012164604.398496-2-dbarboza@ventanamicro.com>
+In-Reply-To: <20231012164604.398496-2-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 16 Oct 2023 14:29:58 +1000
-Message-ID: <CAKmqyKPEnkB_ZsRY8X2KiGR06PhqvJO-fdsgS3OAqVh=yCGf7Q@mail.gmail.com>
-Subject: Re: [PATCH v3 6/6] target/riscv: Use MAKE_64BIT_MASK instead of
- custom macro
-To: Rob Bradford <rbradford@rivosinc.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, atishp@rivosinc.com, 
- palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
- liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
+Date: Mon, 16 Oct 2023 14:34:57 +1000
+Message-ID: <CAKmqyKOyQLseELiCwwTDtOJKcFKWCmiZf4NHhX9BYg7fR+OYGA@mail.gmail.com>
+Subject: Re: [PATCH 1/4] target/riscv: rename ext_ifencei to ext_zifencei
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, ajones@ventanamicro.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e35;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe35.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2c;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -91,46 +90,196 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Oct 13, 2023 at 9:04=E2=80=AFPM Rob Bradford <rbradford@rivosinc.co=
-m> wrote:
+On Fri, Oct 13, 2023 at 2:47=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
 >
-> A 32-bit mask can be trivially created using the 64-bit macro so make
-> use of that instead.
+> Add a leading 'z' to improve grepping. When one wants to search for uses
+> of zifencei they're more likely to do 'grep -i zifencei' than 'grep -i
+> ifencei'.
 >
-> Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
+> Suggested-by: Andrew Jones <ajones@ventanamicro.com>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/pmu.c | 4 +---
->  1 file changed, 1 insertion(+), 3 deletions(-)
+>  target/riscv/cpu.c                      | 22 +++++++++++-----------
+>  target/riscv/cpu_cfg.h                  |  2 +-
+>  target/riscv/insn_trans/trans_rvi.c.inc |  2 +-
+>  target/riscv/tcg/tcg-cpu.c              |  8 ++++----
+>  4 files changed, 17 insertions(+), 17 deletions(-)
 >
-> diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
-> index 9253e5f17a..052d5b1164 100644
-> --- a/target/riscv/pmu.c
-> +++ b/target/riscv/pmu.c
-> @@ -25,8 +25,6 @@
->  #include "sysemu/device_tree.h"
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 5425bceac1..caf42ce68d 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -80,7 +80,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
+>      ISA_EXT_DATA_ENTRY(zicboz, PRIV_VERSION_1_12_0, ext_icboz),
+>      ISA_EXT_DATA_ENTRY(zicond, PRIV_VERSION_1_12_0, ext_zicond),
+>      ISA_EXT_DATA_ENTRY(zicsr, PRIV_VERSION_1_10_0, ext_icsr),
+> -    ISA_EXT_DATA_ENTRY(zifencei, PRIV_VERSION_1_10_0, ext_ifencei),
+> +    ISA_EXT_DATA_ENTRY(zifencei, PRIV_VERSION_1_10_0, ext_zifencei),
+>      ISA_EXT_DATA_ENTRY(zihintntl, PRIV_VERSION_1_10_0, ext_zihintntl),
+>      ISA_EXT_DATA_ENTRY(zihintpause, PRIV_VERSION_1_10_0, ext_zihintpause=
+),
+>      ISA_EXT_DATA_ENTRY(zmmul, PRIV_VERSION_1_12_0, ext_zmmul),
+> @@ -382,7 +382,7 @@ static void riscv_any_cpu_init(Object *obj)
+>      env->priv_ver =3D PRIV_VERSION_LATEST;
 >
->  #define RISCV_TIMEBASE_FREQ 1000000000 /* 1Ghz */
-> -#define MAKE_32BIT_MASK(shift, length) \
-> -        (((uint32_t)(~0UL) >> (32 - (length))) << (shift))
+>      /* inherited from parent obj via riscv_cpu_init() */
+> -    cpu->cfg.ext_ifencei =3D true;
+> +    cpu->cfg.ext_zifencei =3D true;
+>      cpu->cfg.ext_icsr =3D true;
+>      cpu->cfg.mmu =3D true;
+>      cpu->cfg.pmp =3D true;
+> @@ -430,7 +430,7 @@ static void rv64_sifive_u_cpu_init(Object *obj)
+>  #endif
 >
->  /*
->   * To keep it simple, any event can be mapped to any programmable counte=
-rs in
-> @@ -455,7 +453,7 @@ void riscv_pmu_init(RISCVCPU *cpu, Error **errp)
->      /* Check if user set it by comparing against default */
->      if (pmu_num !=3D 16) {
->          warn_report("\"pmu-num\" property is deprecated; use \"pmu-mask\=
-"");
-> -        cpu->cfg.pmu_mask =3D MAKE_32BIT_MASK(3, pmu_num);
-> +        cpu->cfg.pmu_mask =3D MAKE_64BIT_MASK(3, pmu_num);
+>      /* inherited from parent obj via riscv_cpu_init() */
+> -    cpu->cfg.ext_ifencei =3D true;
+> +    cpu->cfg.ext_zifencei =3D true;
+>      cpu->cfg.ext_icsr =3D true;
+>      cpu->cfg.mmu =3D true;
+>      cpu->cfg.pmp =3D true;
+> @@ -448,7 +448,7 @@ static void rv64_sifive_e_cpu_init(Object *obj)
+>  #endif
+>
+>      /* inherited from parent obj via riscv_cpu_init() */
+> -    cpu->cfg.ext_ifencei =3D true;
+> +    cpu->cfg.ext_zifencei =3D true;
+>      cpu->cfg.ext_icsr =3D true;
+>      cpu->cfg.pmp =3D true;
+>  }
+> @@ -494,7 +494,7 @@ static void rv64_veyron_v1_cpu_init(Object *obj)
+>
+>      /* Enable ISA extensions */
+>      cpu->cfg.mmu =3D true;
+> -    cpu->cfg.ext_ifencei =3D true;
+> +    cpu->cfg.ext_zifencei =3D true;
+>      cpu->cfg.ext_icsr =3D true;
+>      cpu->cfg.pmp =3D true;
+>      cpu->cfg.ext_icbom =3D true;
+> @@ -566,7 +566,7 @@ static void rv32_sifive_u_cpu_init(Object *obj)
+>  #endif
+>
+>      /* inherited from parent obj via riscv_cpu_init() */
+> -    cpu->cfg.ext_ifencei =3D true;
+> +    cpu->cfg.ext_zifencei =3D true;
+>      cpu->cfg.ext_icsr =3D true;
+>      cpu->cfg.mmu =3D true;
+>      cpu->cfg.pmp =3D true;
+> @@ -584,7 +584,7 @@ static void rv32_sifive_e_cpu_init(Object *obj)
+>  #endif
+>
+>      /* inherited from parent obj via riscv_cpu_init() */
+> -    cpu->cfg.ext_ifencei =3D true;
+> +    cpu->cfg.ext_zifencei =3D true;
+>      cpu->cfg.ext_icsr =3D true;
+>      cpu->cfg.pmp =3D true;
+>  }
+> @@ -602,7 +602,7 @@ static void rv32_ibex_cpu_init(Object *obj)
+>      cpu->cfg.epmp =3D true;
+>
+>      /* inherited from parent obj via riscv_cpu_init() */
+> -    cpu->cfg.ext_ifencei =3D true;
+> +    cpu->cfg.ext_zifencei =3D true;
+>      cpu->cfg.ext_icsr =3D true;
+>      cpu->cfg.pmp =3D true;
+>  }
+> @@ -619,7 +619,7 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)
+>  #endif
+>
+>      /* inherited from parent obj via riscv_cpu_init() */
+> -    cpu->cfg.ext_ifencei =3D true;
+> +    cpu->cfg.ext_zifencei =3D true;
+>      cpu->cfg.ext_icsr =3D true;
+>      cpu->cfg.pmp =3D true;
+>  }
+> @@ -1242,7 +1242,7 @@ const char *riscv_get_misa_ext_description(uint32_t=
+ bit)
+>  const RISCVCPUMultiExtConfig riscv_cpu_extensions[] =3D {
+>      /* Defaults for standard extensions */
+>      MULTI_EXT_CFG_BOOL("sscofpmf", ext_sscofpmf, false),
+> -    MULTI_EXT_CFG_BOOL("zifencei", ext_ifencei, true),
+> +    MULTI_EXT_CFG_BOOL("zifencei", ext_zifencei, true),
+>      MULTI_EXT_CFG_BOOL("zicsr", ext_icsr, true),
+>      MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
+>      MULTI_EXT_CFG_BOOL("zihintpause", ext_zihintpause, true),
+> @@ -1347,7 +1347,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_experimental=
+_exts[] =3D {
+>
+>  /* Deprecated entries marked for future removal */
+>  const RISCVCPUMultiExtConfig riscv_cpu_deprecated_exts[] =3D {
+> -    MULTI_EXT_CFG_BOOL("Zifencei", ext_ifencei, true),
+> +    MULTI_EXT_CFG_BOOL("Zifencei", ext_zifencei, true),
+>      MULTI_EXT_CFG_BOOL("Zicsr", ext_icsr, true),
+>      MULTI_EXT_CFG_BOOL("Zihintntl", ext_zihintntl, true),
+>      MULTI_EXT_CFG_BOOL("Zihintpause", ext_zihintpause, true),
+> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> index 0e6a0f245c..a3f96eb878 100644
+> --- a/target/riscv/cpu_cfg.h
+> +++ b/target/riscv/cpu_cfg.h
+> @@ -61,7 +61,7 @@ struct RISCVCPUConfig {
+>      bool ext_zksed;
+>      bool ext_zksh;
+>      bool ext_zkt;
+> -    bool ext_ifencei;
+> +    bool ext_zifencei;
+>      bool ext_icsr;
+>      bool ext_icbom;
+>      bool ext_icboz;
+> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_=
+trans/trans_rvi.c.inc
+> index 25cb60558a..faf6d65064 100644
+> --- a/target/riscv/insn_trans/trans_rvi.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
+> @@ -799,7 +799,7 @@ static bool trans_fence(DisasContext *ctx, arg_fence =
+*a)
+>
+>  static bool trans_fence_i(DisasContext *ctx, arg_fence_i *a)
+>  {
+> -    if (!ctx->cfg_ptr->ext_ifencei) {
+> +    if (!ctx->cfg_ptr->ext_zifencei) {
+>          return false;
 >      }
 >
->      cpu->pmu_avail_ctrs =3D cpu->cfg.pmu_mask;
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index a28918ab30..9b8f3f54a7 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -278,7 +278,7 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu,=
+ Error **errp)
+>          !(riscv_has_ext(env, RVI) && riscv_has_ext(env, RVM) &&
+>            riscv_has_ext(env, RVA) && riscv_has_ext(env, RVF) &&
+>            riscv_has_ext(env, RVD) &&
+> -          cpu->cfg.ext_icsr && cpu->cfg.ext_ifencei)) {
+> +          cpu->cfg.ext_icsr && cpu->cfg.ext_zifencei)) {
+>
+>          if (cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_icsr)) &&
+>              !cpu->cfg.ext_icsr) {
+> @@ -286,15 +286,15 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cp=
+u, Error **errp)
+>              return;
+>          }
+>
+> -        if (cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_ifencei)) &&
+> -            !cpu->cfg.ext_ifencei) {
+> +        if (cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_zifencei)) &&
+> +            !cpu->cfg.ext_zifencei) {
+>              error_setg(errp, "RVG requires Zifencei but user set "
+>                         "Zifencei to false");
+>              return;
+>          }
+>
+>          cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_icsr), true);
+> -        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_ifencei), true);
+> +        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zifencei), true)=
+;
+>
+>          env->misa_ext |=3D RVI | RVM | RVA | RVF | RVD;
+>          env->misa_ext_mask |=3D RVI | RVM | RVA | RVF | RVD;
 > --
 > 2.41.0
 >
