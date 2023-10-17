@@ -4,90 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A12DCDB482
-	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Oct 2023 19:12:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16CF0CDB474
+	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Oct 2023 22:13:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qspTU-00007z-A5; Tue, 17 Oct 2023 15:11:28 -0400
+	id 1qssJ0-0001eo-Px; Tue, 17 Oct 2023 18:12:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qspSx-0007DN-FU
- for qemu-riscv@nongnu.org; Tue, 17 Oct 2023 15:10:55 -0400
-Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qssIz-0001db-FF
+ for qemu-riscv@nongnu.org; Tue, 17 Oct 2023 18:12:49 -0400
+Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qspSq-00023u-Il
- for qemu-riscv@nongnu.org; Tue, 17 Oct 2023 15:10:55 -0400
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-6b1e46ca282so4531362b3a.2
- for <qemu-riscv@nongnu.org>; Tue, 17 Oct 2023 12:10:48 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qssIx-0002XW-Lq
+ for qemu-riscv@nongnu.org; Tue, 17 Oct 2023 18:12:49 -0400
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-6b20a48522fso3885934b3a.1
+ for <qemu-riscv@nongnu.org>; Tue, 17 Oct 2023 15:12:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1697569846; x=1698174646;
- darn=nongnu.org; 
+ d=ventanamicro.com; s=google; t=1697580766; x=1698185566; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8OSA4UhX0D8SYIioHopq5ymTiI1euSU39+90cHcKE4M=;
- b=htNaqaB2UdhaSarJJ7rYnZxIik2SSy07al2SxzLJ8lYHh101MCH94nmg9TQiaa3iOH
- ZOpOIcw/Q6CTqoBBjvG4u4BhMtzIHC1/J8lyt10/fRCOj9W1WcCFPY3FM0V3pcRkoHnK
- VY+Y6ONCe8xxYSrNhbrehiMu4djC5Iyc6OJ29ZXUk/TXB4IAwgQNNLdMi76fmZVutCk3
- 8rjbHWuITvkenYgXYH9ynESYunpR1cPVvux4WoNEpo+lNAv3gBZ8lBNl6/Dl9d9E/R58
- yPRrGVGIrf+wFAe+lK/aMQeHKObIrexp5W5IHS9Wk6yaLVpQxUZ5nAeCsw+XMj5pjCf9
- 0nKg==
+ bh=Mz7t1eTY2QIkrHe4fc0zNZ5iKeKzZ2HJQpX/CMXgkQk=;
+ b=XvRvS+eCHbNYaXxpYJ6HZNp2tKSBVjqbYSTDd0NJc+I8BjuAtSNHpujP3H3arwOC8c
+ JalXo9mipCATeKGv7Q+ZC/QwVFLHjXxi8HvX/UWvKmhBZjpVBrc27FFEcmNBOvNeCAR0
+ zuHgz6Wo2EvvN2JkSBOLpWc3KA3dR9P+NH9RTT4H3vJlcJdZdovyD+Aih2bWXxAqXR4l
+ 3uHhkCPykIt5FFqWyu0KbXtW9HYUouk+N1tfSyB3DCx/wJCLzVK0Rm3pa1Zc+sdpRrWu
+ HISHON9k6xfSrE3iGjAtypRHnWk9AdyS6QVj8VDoUx7KVBTSDnVur3P82jLhryyJsi7E
+ uMmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697569846; x=1698174646;
+ d=1e100.net; s=20230601; t=1697580766; x=1698185566;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8OSA4UhX0D8SYIioHopq5ymTiI1euSU39+90cHcKE4M=;
- b=ftPjH2KkFB3oaljF/RMM3X86a39SGs2Zf3pO1YViBBFv1Xt1ov5pbDbr7DvcbjvIMK
- ybJ5JgDxNJFiidliPDpnGOIHTifb6+i1/UYs53SEjnPUf01z3AFGymChWrxV/YoheH/1
- 2XqO1rjD40X+gSpu4Cvaj9vLT7t7cOYVeeN9i9iiwBOPKaYqghE3xtn7U/3eCjZkHPwD
- btnzKfm9az4+fgvvTx4C/OVa3J5+TXm2lHWCeRyH13JwCX1atUCx0TQAVos+QPs2ydwy
- nFmW5xl15PbuFFJf43lagFKzmJCJJ6lWKjf6nzahziI5wj9Ez942upa/wBt3eklvMXrE
- esMw==
-X-Gm-Message-State: AOJu0YyvB2CEUb4lbyqwZ8vgHnxLv6l902iXr/slBZjCvGnekfEy1P+J
- sMne98QqyC7GU37yzfMwCAaZ5Q==
-X-Google-Smtp-Source: AGHT+IGuCJhtEgX094hYh5HHLHFPUfWslSe6H7i3KCcIzzhfNo/gFBOdmcWerjItJrEeN4Fg081h1A==
-X-Received: by 2002:a05:6a00:218f:b0:68a:54e5:24e6 with SMTP id
- h15-20020a056a00218f00b0068a54e524e6mr3481594pfi.8.1697569846064; 
- Tue, 17 Oct 2023 12:10:46 -0700 (PDT)
-Received: from localhost ([2400:4050:a840:1e00:78d2:b862:10a7:d486])
- by smtp.gmail.com with UTF8SMTPSA id
- d6-20020aa797a6000000b00690d1269691sm1816301pfq.22.2023.10.17.12.10.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 17 Oct 2023 12:10:45 -0700 (PDT)
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-To: 
-Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Mikhail Tyutin <m.tyutin@yadro.com>,
- Aleksandr Anenkov <a.anenkov@yadro.com>, qemu-devel@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Akihiko Odaki <akihiko.odaki@daynix.com>, John Snow <jsnow@redhat.com>,
- Cleber Rosa <crosa@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
-Subject: [PATCH v13 13/18] gdbstub: Add members to identify registers to
- GDBFeature
-Date: Wed, 18 Oct 2023 04:09:23 +0900
-Message-ID: <20231017190931.16211-14-akihiko.odaki@daynix.com>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231017190931.16211-1-akihiko.odaki@daynix.com>
-References: <20231017190931.16211-1-akihiko.odaki@daynix.com>
+ bh=Mz7t1eTY2QIkrHe4fc0zNZ5iKeKzZ2HJQpX/CMXgkQk=;
+ b=IYcWNeIPVQPz9cgO930gZfKrkgem8G2kofsSH0vBkHXusEjN6eoQXOf+Y0F5eDNdxK
+ jhK33mfYbHqA17dCfPX2jX49Hv4/jIKc//NXdz4CkeQ3ZpGDjXdNd2XC/qf9s3Wk83mF
+ TdIX5irXUPB8QiMAwvbezfKCG9hMtOwdV0XBH/KH44yOi7zUX8G1PlduCbMXtNpvd19Q
+ XnlY0HoldMhGFyApVyM4YN8ryLX6sxN8cvPyu7WDeicH+9zaMHMBp2RkYCy0mYpbGWUn
+ VoxeFi7bV5XYBM12pVAHM6dF6hNOO4z5nQ+n8CN6i1WXouspyVrlwLHJJ+90qWPX4rKr
+ FZFA==
+X-Gm-Message-State: AOJu0YxzUpVDYDJ8mbDOe+8VRZXOo4LTmRDlSBanPmgcaUCNTaukJgkW
+ 9ZGO2y65Gr0IzVHLhmPLlIVTIQ==
+X-Google-Smtp-Source: AGHT+IEN53qaHlNU7pExZudWY85UGLBSioCvEDSs+hXFIb/i6+Gub0uAwNz8ZLCheXhZ986YVhMEeQ==
+X-Received: by 2002:a05:6a00:98a:b0:6b5:608d:64e1 with SMTP id
+ u10-20020a056a00098a00b006b5608d64e1mr3781575pfg.33.1697580766273; 
+ Tue, 17 Oct 2023 15:12:46 -0700 (PDT)
+Received: from grind.dc1.ventanamicro.com ([177.45.186.249])
+ by smtp.gmail.com with ESMTPSA id
+ t13-20020a62d14d000000b006be077531aesm2011023pfl.220.2023.10.17.15.12.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 17 Oct 2023 15:12:45 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH v2 5/6] target/riscv/tcg: add ext_zihpm disable support
+Date: Tue, 17 Oct 2023 19:12:25 -0300
+Message-ID: <20231017221226.136764-6-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20231017221226.136764-1-dbarboza@ventanamicro.com>
+References: <20231017221226.136764-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::42d;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x42d.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x435.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,132 +95,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-These members will be used to help plugins to identify registers.
-The added members in instances of GDBFeature dynamically generated by
-CPUs will be filled in later changes.
+Disabling ext_zihpm does nothing at this moment. Add support to disable
+the hpmcounter3-hpmcounter31 counters if the user disables zihpm.
 
-Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+There is already code in place in target/riscv/csr.c in all predicates
+for these counters (ctr() and mctr()) that disables them if
+cpu->cfg.pmu_num is zero. Thus, setting cpu->cfg.pmu_num to zero if
+'zihpm=false' is enough to disable the extension.
+
+Set cpu->pmu_avail_ctrs mask to zero as well since this is also checked
+to verify if the counters exist.
+
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- include/exec/gdbstub.h  |  3 +++
- gdbstub/gdbstub.c       | 10 ++++++++--
- target/riscv/gdbstub.c  |  4 +---
- scripts/feature_to_c.py | 14 +++++++++++++-
- 4 files changed, 25 insertions(+), 6 deletions(-)
+ target/riscv/tcg/tcg-cpu.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-diff --git a/include/exec/gdbstub.h b/include/exec/gdbstub.h
-index 70e16be79e..229fa382bc 100644
---- a/include/exec/gdbstub.h
-+++ b/include/exec/gdbstub.h
-@@ -13,12 +13,15 @@
- typedef struct GDBFeature {
-     const char *xmlname;
-     const char *xml;
-+    const char *name;
-+    const char * const *regs;
-     int num_regs;
- } GDBFeature;
- 
- typedef struct GDBFeatureBuilder {
-     GDBFeature *feature;
-     GPtrArray *xml;
-+    GPtrArray *regs;
- } GDBFeatureBuilder;
- 
- 
-diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-index 625a3347c3..f8c7f427d7 100644
---- a/gdbstub/gdbstub.c
-+++ b/gdbstub/gdbstub.c
-@@ -417,9 +417,10 @@ void gdb_feature_builder_init(GDBFeatureBuilder *builder, GDBFeature *feature,
- 
-     builder->feature = feature;
-     builder->xml = g_ptr_array_new();
-+    builder->regs = g_ptr_array_new();
-     g_ptr_array_add(builder->xml, header);
-     feature->xmlname = xmlname;
--    feature->num_regs = 0;
-+    feature->name = name;
- }
- 
- void gdb_feature_builder_append_tag(const GDBFeatureBuilder *builder,
-@@ -448,7 +449,9 @@ int gdb_feature_builder_append_reg(const GDBFeatureBuilder *builder,
-             name, bitsize, type);
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index a01b876621..7a4400e2ba 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -549,6 +549,19 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         cpu->cfg.ext_zicntr = false;
      }
  
--    return builder->feature->num_regs++;
-+    g_ptr_array_add(builder->regs, (void *)name);
++    if (cpu->cfg.ext_zihpm && !cpu->cfg.ext_zicsr) {
++        if (cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_zihpm))) {
++            error_setg(errp, "zihpm requires zicsr");
++            return;
++        }
++        cpu->cfg.ext_zihpm = false;
++    }
 +
-+    return builder->regs->len - 1;
- }
- 
- void gdb_feature_builder_end(const GDBFeatureBuilder *builder)
-@@ -463,6 +466,9 @@ void gdb_feature_builder_end(const GDBFeatureBuilder *builder)
-     }
- 
-     g_ptr_array_free(builder->xml, TRUE);
++    if (!cpu->cfg.ext_zihpm) {
++        cpu->cfg.pmu_num = 0;
++        cpu->pmu_avail_ctrs = 0;
++    }
 +
-+    builder->feature->num_regs = builder->regs->len;
-+    builder->feature->regs = (void *)g_ptr_array_free(builder->regs, FALSE);
- }
- 
- const GDBFeature *gdb_find_static_feature(const char *xmlname)
-diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-index aa0824e119..9082b0c6e2 100644
---- a/target/riscv/gdbstub.c
-+++ b/target/riscv/gdbstub.c
-@@ -265,11 +265,9 @@ static GDBFeature *riscv_gen_dynamic_csr_feature(CPUState *cs)
-         }
-         predicate = csr_ops[i].predicate;
-         if (predicate && (predicate(env, i) == RISCV_EXCP_NONE)) {
--            g_autofree char *dynamic_name = NULL;
-             name = csr_ops[i].name;
-             if (!name) {
--                dynamic_name = g_strdup_printf("csr%03x", i);
--                name = dynamic_name;
-+                name = g_strdup_printf("csr%03x", i);
-             }
- 
-             gdb_feature_builder_append_reg(&builder, name, bitsize,
-diff --git a/scripts/feature_to_c.py b/scripts/feature_to_c.py
-index e04d6b2df7..807af0e685 100755
---- a/scripts/feature_to_c.py
-+++ b/scripts/feature_to_c.py
-@@ -50,7 +50,9 @@ def writeliteral(indent, bytes):
-         sys.stderr.write(f'unexpected start tag: {element.tag}\n')
-         exit(1)
- 
-+    feature_name = element.attrib['name']
-     regnum = 0
-+    regnames = []
-     regnums = []
-     tags = ['feature']
-     for event, element in events:
-@@ -67,6 +69,7 @@ def writeliteral(indent, bytes):
-                 if 'regnum' in element.attrib:
-                     regnum = int(element.attrib['regnum'])
- 
-+                regnames.append(element.attrib['name'])
-                 regnums.append(regnum)
-                 regnum += 1
- 
-@@ -85,6 +88,15 @@ def writeliteral(indent, bytes):
-     writeliteral(8, bytes(os.path.basename(input), 'utf-8'))
-     sys.stdout.write(',\n')
-     writeliteral(8, read)
--    sys.stdout.write(f',\n        {num_regs},\n    }},\n')
-+    sys.stdout.write(',\n')
-+    writeliteral(8, bytes(feature_name, 'utf-8'))
-+    sys.stdout.write(',\n        (const char * const []) {\n')
-+
-+    for index, regname in enumerate(regnames):
-+        sys.stdout.write(f'            [{regnums[index] - base_reg}] =\n')
-+        writeliteral(16, bytes(regname, 'utf-8'))
-+        sys.stdout.write(',\n')
-+
-+    sys.stdout.write(f'        }},\n        {num_regs},\n    }},\n')
- 
- sys.stdout.write('    { NULL }\n};\n')
+     /*
+      * Disable isa extensions based on priv spec after we
+      * validated and set everything we need.
 -- 
-2.42.0
+2.41.0
 
 
