@@ -4,74 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67E78CDB47E
-	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Oct 2023 15:45:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8229DCDB47E
+	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Oct 2023 15:45:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qt8j1-0001Ya-4R; Wed, 18 Oct 2023 11:44:47 -0400
+	id 1qt8j3-0001av-OV; Wed, 18 Oct 2023 11:44:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
- id 1qt8iy-0001XY-Vd
- for qemu-riscv@nongnu.org; Wed, 18 Oct 2023 11:44:44 -0400
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
+ id 1qt8j3-0001Zp-1Z
+ for qemu-riscv@nongnu.org; Wed, 18 Oct 2023 11:44:49 -0400
+Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
- id 1qt8ix-0004vz-54
- for qemu-riscv@nongnu.org; Wed, 18 Oct 2023 11:44:44 -0400
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-40839807e82so7549715e9.0
- for <qemu-riscv@nongnu.org>; Wed, 18 Oct 2023 08:44:42 -0700 (PDT)
+ id 1qt8j1-0004xI-Ds
+ for qemu-riscv@nongnu.org; Wed, 18 Oct 2023 11:44:48 -0400
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-507a98517f3so5005941e87.0
+ for <qemu-riscv@nongnu.org>; Wed, 18 Oct 2023 08:44:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1697643881; x=1698248681;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1697643886; x=1698248686;
  darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=BsA4KKgtOM0qliqjEIe/huo0hS3uhQsiMmskyenzp2A=;
- b=mQivgUV5Ru1fw9kmAcelYb1CiUnQ76qzKxF/FZ4bzURhj7nw8+46Cl7Nv9CloaKMB9
- paXgx2+5C6rdcbY2soYfHrKbg0jH9l60xRnlBzmVsezxvUAN0crS0G+nZ39YGdz7W3yd
- eK9+0U605DvuV1Sy4SnCyfv3mISI8Sslpp5wccZtD4Ts8AIf2+Tyud5joqT+Hk4RQNak
- zWSQdcSEk15wScRJxSteANLCTKjFCVVuF0v0qEkNz4IKAhHFdF25dfw3fvOGCkNreptZ
- EqHobe/LmcVjbARTnViFKj+2HIvXiQfXL5XEXvL4eFSFdmziE1UVPFxdOKMlDBnnhmTu
- euVw==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VRqVDcHMqARANKEFhhC2+XL6EbYrppRzGje9U4Xk56c=;
+ b=g/P+GmzWu13jEhwy093JSd4bw5RSv189WKDQbx/8dQFoXzJVxlOLgKOD88LXRToyi0
+ OMdfEB2IeMIPVouNkE6E6bvAHYfTDVdrAEFmnMe7no08nW4dZviWhLFY4cxgWcbZ6moh
+ ZiXR4FsL5tffxcvORwLDQ/P1ynOHM4aC8f1EWzs2YAi02newxah3jEpVrYAPrEyzni33
+ 4AAU6H0+Bt1Ld2RK49dPX6JV269yooZctYvLsJDoKrAGz4yP9dsUdUcNMbg8wqBB4m8c
+ drRHNT0gUV07IN7gveqx084rDCiF+ov4e/bf3dySM4X3xBju9yd5OYXXc68n5uuju05E
+ QyJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697643881; x=1698248681;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=BsA4KKgtOM0qliqjEIe/huo0hS3uhQsiMmskyenzp2A=;
- b=QFBi6SdWvOarNxm/NAY3Rz6LHhe6i/Nplpe1jTGRcO7ZtunBdXnxCWVNYuOXJMAEdA
- gtEFwYdMWf5rXtWSqejTcJtXsFJfCaFuAEWkupTlGoIQevJHTb2Dp148LqK2X3BX7i1P
- bwBaVb1QxCf2DiJMZdhlcokEBZZ8Kp0h6xsVM+x9tC2mHJaUhA61Nx+6C24rWWxQdJXF
- OTplQ5ML1RHax+r4djs3pyFyQfzu2IezC0nwukX/fXzkHtw+vvpOZ/4Sr1c09eHCJpx6
- T2Z8KyUWrvCeT6+J3IWum58VZVGf2l5yg84AyGSUyMiFZ28aGrgguqHVOaXmCFcwrLz8
- Ec9g==
-X-Gm-Message-State: AOJu0Yznw+FGGhWRSjp+0TtnYeDKlpz/0ZO4s6KCbPVdRvQBbzxEAtsp
- wZQTV6fUp8u0povEUR0lnI/eEg==
-X-Google-Smtp-Source: AGHT+IHtaZ213PUGXZkGnX90BWbqjDMrkfbkDf/ooXl+i+v3udxDyEhmDAn0ix2dM56js5oE7KgrWg==
-X-Received: by 2002:a05:600c:1896:b0:405:3be0:c78d with SMTP id
- x22-20020a05600c189600b004053be0c78dmr5208890wmp.3.1697643881365; 
- Wed, 18 Oct 2023 08:44:41 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1697643886; x=1698248686;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=VRqVDcHMqARANKEFhhC2+XL6EbYrppRzGje9U4Xk56c=;
+ b=GlgtE6a4q1zsZN4wASXcdaZiUZ5ryXK0Lohn2VJWLHVYL4Wn6G1G4arVvq30LzDUOr
+ uQ3ic7tUSNRb0lHizSSY8K3F7PS/KMnU+wl0NNsTnTTjN6ItkNvlHxgoi7qLuRKdY99s
+ gS8IJu4v2ApowBTBnK9pSwtLLFQyBdkv0j6QRw9CVE85oE4a1TonMq2ukaPLih3Xh+9d
+ Uj5eIWFC3/X7cWwgaMFPJfQ0dP0849QgdnRWGbcLfmbWcWw1SFJTQTtpoasqwxyrKZ7f
+ 2LF6be/qobTa3vVJD+ETzJz9oSepmI6Lc5UxyrnuE+ZfOBUPPiAUA2vMjaNvRHohaNep
+ loWQ==
+X-Gm-Message-State: AOJu0YzFiXnrYyAdMiGV5m/1UrU2nGjXogo2KNWXHe+7LD9XhMVzA250
+ ujA4jITvmZcwbM8zv61KytdtgA==
+X-Google-Smtp-Source: AGHT+IE7UL5s+pZKTFVXYiEQO8p5f5uiQfM1vEfJj2/7uNU94Vxu0bFd5GytrYU7dbIAC8LyvuUuJw==
+X-Received: by 2002:ac2:5939:0:b0:500:9dd4:2969 with SMTP id
+ v25-20020ac25939000000b005009dd42969mr4176937lfi.59.1697643885813; 
+ Wed, 18 Oct 2023 08:44:45 -0700 (PDT)
 Received: from rockhopper.ba.rivosinc.com (214.11.169.217.in-addr.arpa.
  [217.169.11.214]) by smtp.gmail.com with ESMTPSA id
- b14-20020a05600c4e0e00b0040607da271asm1963580wmq.31.2023.10.18.08.44.40
+ b14-20020a05600c4e0e00b0040607da271asm1963580wmq.31.2023.10.18.08.44.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Oct 2023 08:44:40 -0700 (PDT)
+ Wed, 18 Oct 2023 08:44:45 -0700 (PDT)
 From: Rob Bradford <rbradford@rivosinc.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, atishp@rivosinc.com, palmer@dabbelt.com,
  alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- Rob Bradford <rbradford@rivosinc.com>
-Subject: [PATCH v4 0/6] Support discontinuous PMU counters
-Date: Wed, 18 Oct 2023 16:39:08 +0100
-Message-ID: <20231018154434.17367-1-rbradford@rivosinc.com>
+ Rob Bradford <rbradford@rivosinc.com>,
+ libvir-list@redhat.com (reviewer:Incompatible changes)
+Subject: [PATCH v4 5/6] docs/about/deprecated: Document RISC-V "pmu-num"
+ deprecation
+Date: Wed, 18 Oct 2023 16:39:13 +0100
+Message-ID: <20231018154434.17367-6-rbradford@rivosinc.com>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20231018154434.17367-1-rbradford@rivosinc.com>
+References: <20231018154434.17367-1-rbradford@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=rbradford@rivosinc.com; helo=mail-wm1-x334.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::12b;
+ envelope-from=rbradford@rivosinc.com; helo=mail-lf1-x12b.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -93,52 +98,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Currently the available PMU counters start at HPM3 and run through to
-the number specified by the "pmu-num" property. There is no
-requirement in the specification that the available counters be
-continously numbered. This series add suppport for specifying a
-discountinuous range of counters though a "pmu-mask" property.
+This has been replaced by a "pmu-mask" property that provides much more
+flexibility.
 
-v4:
+Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
+Acked-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+---
+ docs/about/deprecated.rst | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-* Added more R-B tags (just missing from 4 & 5)
-* Added details on how to calculate mask
-* Use custom property for "pmu-num" in order to give deprecation warning 
-* Special case a zero value for "pmu-num"
-
-v3:
-
-* Use env_archcpu() in csr.c
-* Re-added check to enforce deprectated "num-pmu" below limit
-* Check that standard counters are not included in mask
-* Remove use of MAKE_32BIT_MASK()
-
-v2:
-
-* Use cfg.pmu_mask wherever cfg.pmu_num was used previously
-* Deprecate pmu_num property (warning, comment & updated documentation)
-* Override default pmu_mask value iff pmu_num changed from default
-
-
-Rob Bradford (6):
-  target/riscv: Propagate error from PMU setup
-  target/riscv: Don't assume PMU counters are continuous
-  target/riscv: Use existing PMU counter mask in FDT generation
-  target/riscv: Add "pmu-mask" property to replace "pmu-num"
-  docs/about/deprecated: Document RISC-V "pmu-num" deprecation
-  target/riscv: Use MAKE_64BIT_MASK instead of custom macro
-
- docs/about/deprecated.rst  | 12 +++++++++++
- hw/riscv/virt.c            |  2 +-
- target/riscv/cpu.c         | 31 +++++++++++++++++++++++++++-
- target/riscv/cpu_cfg.h     |  3 ++-
- target/riscv/csr.c         |  5 +++--
- target/riscv/machine.c     |  2 +-
- target/riscv/pmu.c         | 41 +++++++++++++++++++++-----------------
- target/riscv/pmu.h         |  5 +++--
- target/riscv/tcg/tcg-cpu.c | 10 ++++++++--
- 9 files changed, 83 insertions(+), 28 deletions(-)
-
+diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
+index 2febd2d12f..857b5d4fc4 100644
+--- a/docs/about/deprecated.rst
++++ b/docs/about/deprecated.rst
+@@ -405,6 +405,18 @@ Specifying the iSCSI password in plain text on the command line using the
+ used instead, to refer to a ``--object secret...`` instance that provides
+ a password via a file, or encrypted.
+ 
++CPU device properties
++'''''''''''''''''''''
++
++``pmu-num=n`` on RISC-V CPUs (since 8.2)
++^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++
++In order to support more flexible counter configurations this has been replaced
++by a ``pmu-mask`` property. If set of counters is continuous then the mask can
++be calculated with ``((2 ^ n) - 1) << 3``. The least significant three bits
++must be left clear.
++
++
+ Backwards compatibility
+ -----------------------
+ 
 -- 
 2.41.0
 
