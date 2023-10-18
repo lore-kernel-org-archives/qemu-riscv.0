@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EED4CDB482
-	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Oct 2023 15:47:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E74E1CDB47E
+	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Oct 2023 19:58:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qt8j5-0001c1-UW; Wed, 18 Oct 2023 11:44:51 -0400
+	id 1qtCfB-0003sN-9l; Wed, 18 Oct 2023 15:57:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
- id 1qt8j3-0001aV-Gj
- for qemu-riscv@nongnu.org; Wed, 18 Oct 2023 11:44:49 -0400
-Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qtCf9-0003s6-Eb
+ for qemu-riscv@nongnu.org; Wed, 18 Oct 2023 15:57:03 -0400
+Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
- id 1qt8j2-0004xc-0L
- for qemu-riscv@nongnu.org; Wed, 18 Oct 2023 11:44:49 -0400
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4064876e8b8so70917535e9.0
- for <qemu-riscv@nongnu.org>; Wed, 18 Oct 2023 08:44:47 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qtCf7-0001dJ-ML
+ for qemu-riscv@nongnu.org; Wed, 18 Oct 2023 15:57:03 -0400
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-27d4372322aso3592078a91.3
+ for <qemu-riscv@nongnu.org>; Wed, 18 Oct 2023 12:57:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1697643886; x=1698248686;
- darn=nongnu.org; 
+ d=ventanamicro.com; s=google; t=1697659020; x=1698263820; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=I1DBZDUvIATC8PHiuhBMUA0lfNpRPy/ZdfO4sG+Ox/Q=;
- b=LCg93uoElhKqlDczVfsR7Y9WA6ipaa4yluALTNH8U8Qo3e2K3VfupqBdkZZLD/KrmE
- Sh0z4e7GhE4upYuP87KzWSi+ejbuSIQmwb3pfYPTKZ7jB2ra2PcLZ+D6M6aTZVy94U8f
- LUfaxF8y9caOzKq5FKgbDnvj2Y+y2s0qgeYnDNDNgM4h/Tlts2GSW9brYLsTbr1V2bRP
- e2lIJa1VSALq92qSKqm+9dlARNcdlcejn4vF5Q798AJkr53B/uMOgQK8ezilv/A6EhL9
- id8ahBNYB0ukVpGjExZ52Duz9xHEwkVmuN1lJc9soSJlPxs8pi5usZrbKFopG2fj0VlS
- Cbyg==
+ bh=goSM+plzgjI6cpvIrsL3gQcrpcnNxW3GYfnrMcJsUz0=;
+ b=kAg7HUqGptswJakkLSOw7stXt1AfH7BhYT2E1PsUZjxlQkhv4Ic1Hv20aURQBng2vb
+ dTogTkl2HMMedleLXKwXte2JYyHVzSGdBbIdonTNW4oDyjwzbMgrcyUwxXTAnCEagYMe
+ xfAVbSwOqn9G7cc0kxZbevydqKO/tY+MHzfM7a+/T4xJTk5BT5f3mZqrgKvlmqzGTyaF
+ /6gt7+rg0dClnw1guQSoThvkbTD09BiEdU6mZurHZInNPl4rflIyR335gUlgIfOf/Yuv
+ 5ssMvcu1bs7fJyh+7EqHRAzVaEBUn2IeI/PAuR+1bchNi1n6w1Tgj8cDxbNuLosTiRja
+ PsFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697643886; x=1698248686;
+ d=1e100.net; s=20230601; t=1697659020; x=1698263820;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=I1DBZDUvIATC8PHiuhBMUA0lfNpRPy/ZdfO4sG+Ox/Q=;
- b=aR7oMrY2KcgkVvDN/V4AkhzEL39WtskGBEwKz6GpNWAVOT0UCsIotln+lqo/6nag7R
- yyZhKlOg19vWfQSP+edczvtxKf0tXoSPWWs1HvhR3by61zHw0QP3yRm/OIC30DfEtSOP
- rQ40OgiWWU3XiHVdZGXbFURgUa2kFcSVtejaoV9sQ1+2dmNZSjptwdyJ0WHm07wDwb2e
- PY9PbCN/qaNbySPwcqVKlCh712Nx2gfp2CZXacqzPiiBbb+rEZ05BxT6JUhoYzT2MgyC
- k96/dVDdYwG2zC3tpxCqWLOcSECnQh7snGjOZcCpzUu2HSBe/04zzod3J2E6UUquoYrz
- JWRg==
-X-Gm-Message-State: AOJu0YwpVITaqCSdrFdObNRxvfv/PavnPsuKe9gCO93wb/6+TlfLtQFh
- zojsz2u8lCrCU8oL4lrd5in2UA==
-X-Google-Smtp-Source: AGHT+IGZ3TyGkOX8y9PV4t89xyq22UXzh1kpPWDTC+4tElTFZMTeUtGjsTL6v5WXgXZ6kwSTstI6Lw==
-X-Received: by 2002:a05:600c:a686:b0:3fc:dd9:91fd with SMTP id
- ip6-20020a05600ca68600b003fc0dd991fdmr4230208wmb.40.1697643886661; 
- Wed, 18 Oct 2023 08:44:46 -0700 (PDT)
-Received: from rockhopper.ba.rivosinc.com (214.11.169.217.in-addr.arpa.
- [217.169.11.214]) by smtp.gmail.com with ESMTPSA id
- b14-20020a05600c4e0e00b0040607da271asm1963580wmq.31.2023.10.18.08.44.45
+ bh=goSM+plzgjI6cpvIrsL3gQcrpcnNxW3GYfnrMcJsUz0=;
+ b=ql9QazW8DW6Jf77nOEEvQsblr4tj1vnuBSATTqtNgp8aAmAFHdhktthfOOWwnL+y0o
+ RbCpeQF+fcD2yuBbX7wJhoUcl7adAF6EJHK8hXMZisfLGle5CyJLEAgewqehoArEpjXk
+ vUkdybYnLEnqIjdPFD+LzVsvYp9CwHbpRwPZMwYUu+xJNxEAfuHcaQVjRXIFwklLONY9
+ z+DVJTGtfyc2jzFWLQcg+LMLn6xW+vJteoNWcKVVyoFXj+UjzD3E4FG4wRxoYtM9j28S
+ AYnZW6gJKmDfzXnqEPCrgrFyhAA3MkamRmDIb4e4cbKPo/uZdavT0IwctGMJQS1OOptj
+ 0tCg==
+X-Gm-Message-State: AOJu0YyZQof3p2eS6W9Wmy8+eX6HOwbGYH/d9OjfN86alBosLNU4Xbjt
+ vcuzjGABQtRBmO0kg3rnEED3Pw==
+X-Google-Smtp-Source: AGHT+IFyfYRuzTlB8SSBkUB1B/AROG625A/LjDrNNGdzsFVvTnjqr7m/6nrykted8jylI0O8QiUM+Q==
+X-Received: by 2002:a17:90a:5886:b0:27c:ed8e:1840 with SMTP id
+ j6-20020a17090a588600b0027ced8e1840mr198371pji.10.1697659020159; 
+ Wed, 18 Oct 2023 12:57:00 -0700 (PDT)
+Received: from grind.dc1.ventanamicro.com ([177.45.186.249])
+ by smtp.gmail.com with ESMTPSA id
+ ku12-20020a17090b218c00b00268b439a0cbsm256359pjb.23.2023.10.18.12.56.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Oct 2023 08:44:46 -0700 (PDT)
-From: Rob Bradford <rbradford@rivosinc.com>
+ Wed, 18 Oct 2023 12:56:59 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, atishp@rivosinc.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- Rob Bradford <rbradford@rivosinc.com>
-Subject: [PATCH v4 6/6] target/riscv: Use MAKE_64BIT_MASK instead of custom
- macro
-Date: Wed, 18 Oct 2023 16:39:14 +0100
-Message-ID: <20231018154434.17367-7-rbradford@rivosinc.com>
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH v3 5/6] target/riscv: add riscv_cpu_accelerator_compatible()
+Date: Wed, 18 Oct 2023 16:56:37 -0300
+Message-ID: <20231018195638.211151-6-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20231018154434.17367-1-rbradford@rivosinc.com>
-References: <20231018154434.17367-1-rbradford@rivosinc.com>
+In-Reply-To: <20231018195638.211151-1-dbarboza@ventanamicro.com>
+References: <20231018195638.211151-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::331;
- envelope-from=rbradford@rivosinc.com; helo=mail-wm1-x331.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x102d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -97,37 +95,95 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-A 32-bit mask can be trivially created using the 64-bit macro so make
-use of that instead.
+Add an API to check if a given CPU is compatible with the current
+accelerator.
 
-Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
+This will allow query-cpu-model-expansion to work properly in conditions
+where QEMU supports both accelerators (TCG and KVM), QEMU is then
+launched using TCG, and the API requests information about a KVM only
+CPU (e.g. 'host' CPU).
+
+KVM doesn't have such restrictions and, at least in theory, all CPUs
+models should work with KVM. We will revisit this API in case we decide
+to restrict the amount of KVM CPUs we support.
+
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/pmu.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ target/riscv/cpu.c         | 9 +++++++++
+ target/riscv/cpu.h         | 1 +
+ target/riscv/tcg/tcg-cpu.c | 7 ++++++-
+ target/riscv/tcg/tcg-cpu.h | 1 +
+ 4 files changed, 17 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
-index 5e89354bb9..81b25ec11a 100644
---- a/target/riscv/pmu.c
-+++ b/target/riscv/pmu.c
-@@ -25,8 +25,6 @@
- #include "sysemu/device_tree.h"
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 02db0834dd..8e0abe33d3 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1063,6 +1063,15 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+     mcc->parent_realize(dev, errp);
+ }
  
- #define RISCV_TIMEBASE_FREQ 1000000000 /* 1Ghz */
--#define MAKE_32BIT_MASK(shift, length) \
--        (((uint32_t)(~0UL) >> (32 - (length))) << (shift))
++bool riscv_cpu_accelerator_compatible(RISCVCPU *cpu)
++{
++    if (tcg_enabled()) {
++        return riscv_cpu_tcg_compatible(cpu);
++    }
++
++    return true;
++}
++
+ #ifndef CONFIG_USER_ONLY
+ static void cpu_riscv_get_satp(Object *obj, Visitor *v, const char *name,
+                                void *opaque, Error **errp)
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 8c9ec59d82..8efc4d83ec 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -758,6 +758,7 @@ char *riscv_cpu_get_name(RISCVCPU *cpu);
  
- /*
-  * To keep it simple, any event can be mapped to any programmable counters in
-@@ -455,7 +453,7 @@ void riscv_pmu_init(RISCVCPU *cpu, Error **errp)
-     if (pmu_num == 0) {
-         cpu->cfg.pmu_mask = 0;
-     } else if (pmu_num != 16) {
--        cpu->cfg.pmu_mask = MAKE_32BIT_MASK(3, pmu_num);
-+        cpu->cfg.pmu_mask = MAKE_64BIT_MASK(3, pmu_num);
+ void riscv_cpu_finalize_features(RISCVCPU *cpu, Error **errp);
+ void riscv_add_satp_mode_properties(Object *obj);
++bool riscv_cpu_accelerator_compatible(RISCVCPU *cpu);
+ 
+ /* CSR function table */
+ extern riscv_csr_operations csr_ops[CSR_TABLE_SIZE];
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index 21a46f2a0e..6771617226 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -581,6 +581,11 @@ void riscv_tcg_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
      }
+ }
  
-     cpu->pmu_avail_ctrs = cpu->cfg.pmu_mask;
++bool riscv_cpu_tcg_compatible(RISCVCPU *cpu)
++{
++    return object_dynamic_cast(OBJECT(cpu), TYPE_RISCV_CPU_HOST) == NULL;
++}
++
+ static bool riscv_cpu_is_generic(Object *cpu_obj)
+ {
+     return object_dynamic_cast(cpu_obj, TYPE_RISCV_DYNAMIC_CPU) != NULL;
+@@ -598,7 +603,7 @@ static bool tcg_cpu_realize(CPUState *cs, Error **errp)
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     Error *local_err = NULL;
+ 
+-    if (object_dynamic_cast(OBJECT(cpu), TYPE_RISCV_CPU_HOST)) {
++    if (!riscv_cpu_tcg_compatible(cpu)) {
+         g_autofree char *name = riscv_cpu_get_name(cpu);
+         error_setg(errp, "'%s' CPU is not compatible with TCG acceleration",
+                    name);
+diff --git a/target/riscv/tcg/tcg-cpu.h b/target/riscv/tcg/tcg-cpu.h
+index aa00fbc253..f7b32417f8 100644
+--- a/target/riscv/tcg/tcg-cpu.h
++++ b/target/riscv/tcg/tcg-cpu.h
+@@ -24,5 +24,6 @@
+ 
+ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp);
+ void riscv_tcg_cpu_finalize_features(RISCVCPU *cpu, Error **errp);
++bool riscv_cpu_tcg_compatible(RISCVCPU *cpu);
+ 
+ #endif
 -- 
 2.41.0
 
