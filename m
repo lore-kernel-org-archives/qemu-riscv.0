@@ -4,90 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 256B5CDB483
-	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Oct 2023 12:19:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0ADBCDB483
+	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Oct 2023 12:23:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qt5WF-0000co-Ux; Wed, 18 Oct 2023 08:19:24 -0400
+	id 1qt5Zz-0005gi-RH; Wed, 18 Oct 2023 08:23:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qt5WE-0000c9-4a
- for qemu-riscv@nongnu.org; Wed, 18 Oct 2023 08:19:22 -0400
-Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
+ id 1qt5Zr-0005ZF-CH
+ for qemu-riscv@nongnu.org; Wed, 18 Oct 2023 08:23:07 -0400
+Received: from mail-ot1-x32d.google.com ([2607:f8b0:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qt5WB-0006bt-FB
- for qemu-riscv@nongnu.org; Wed, 18 Oct 2023 08:19:21 -0400
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-6934202b8bdso5851916b3a.1
- for <qemu-riscv@nongnu.org>; Wed, 18 Oct 2023 05:19:18 -0700 (PDT)
+ id 1qt5Zp-0007Wk-Ly
+ for qemu-riscv@nongnu.org; Wed, 18 Oct 2023 08:23:07 -0400
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-6cd0155de52so831409a34.1
+ for <qemu-riscv@nongnu.org>; Wed, 18 Oct 2023 05:23:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1697631557; x=1698236357;
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1697631784; x=1698236584;
  darn=nongnu.org; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Ct7YXxY5pU2C68suqYIlUv+D3LyDjUFZ3H2SwL++Cho=;
- b=VnuDh7KZhxydGtm8LcYz0XSTA4eIhJGnNcDweAnWjUWafzVrGdwYL2Z2vRbvaQFY2r
- W1S/Bt4j91nNYKYh2xM/GEEi8Gm0DmKhSZaUUTizdaXEgvE6TjHpjKDoTRJ59ozuIIyI
- 2jtz8GS8hYT4is/7eHQIfPKMlbPFGc2vmxVOAyXagS+LnCytpV6RSQDqiYsLe8Dl08gO
- CgJlO0Lz9PuyotZzmDI0/5NmBL5cBx6zCt7TU+XloUMmVhpdgairzRMIyKn/HNho+lKK
- dA89XsZLZht7v0zeq6WMXLc5DTbnMbKoPxBQ9H0ZZ1NcxT3XisyZyihrTW88EIVNfy04
- UbGg==
+ bh=8dvKIBtbuqFbjz2tpsjpo3iSOws3w9vRD80witqbyhg=;
+ b=FnlRZNsWXnFyfD3nRPkWPH6NJ+aMIgVhHHG1KTFDS3msZYmoyrBrh+9z6IOMT3MavS
+ K01qJFvz7rJYntKq7tm/Gu1vLCnB/jppJhymZarYUhsTQIUTswFeaTsWzWxjUAy4KGuo
+ kxtb+Iyy9CtuuOvhAUeMEJ7ecdSNXyKjr8S4pPK+8u98AKVE9j7LqiAF9Wvk8wEPY7ZL
+ U3xNsJOnySgFt6iONFsD0zjHBcviRyIiahywrFLaneSh9Kglblyn8fjRtMENVHzpBqxO
+ 2hdhNkl80S5DS+E+l5NQHatDD4Upji9/jAKNbXNyKHTAN+uR3nXV2/VnZ3zJoDUpyiRi
+ z21A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697631557; x=1698236357;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1697631784; x=1698236584;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Ct7YXxY5pU2C68suqYIlUv+D3LyDjUFZ3H2SwL++Cho=;
- b=OqG0jqdybWB03bRj/iDuoeQOdDcpmW2v7eFuMT4/Z6IHBNNzAznkXOfJno1XzKr0lA
- mDveizG2W4NcBTnKL4ON4I94/oOc2Hcm1N83WyvgpPvIudrf/lIlCSbrhmznmSbGFeZ0
- IVlIjh2WlOK/tJAQCbECK2e8V3nRpKY1v7Ul3H/ofR9FpXi9KyQBvsseRLq2+2pwO/uk
- yFnaSfJDdCfaeh5/PVpUck/A3aHF5OvI5dgj92zq04fiEFx0d7eR2AQ/LYGkOM9Vrahb
- ylhOYfhCgt4Yb3nrB2FfmE0gCd/cYaCa9R1D61kUOFXHdN/Ul8IvKGVI6UWS1mcLF2zw
- kaQQ==
-X-Gm-Message-State: AOJu0Yyg++S2sfivdQy+rNIAnW0W8vU7LaeHpYjqfMw5Hdwuu740qA60
- daTgQROJQOsazIn3aQ+b8ofvJg==
-X-Google-Smtp-Source: AGHT+IHS86QrpcWkgOlghYdoXe/LKfVVYQ38ytcnLlZO8MxPrn97Mw3ldJqZfU7Jbf/uqntgrml2yA==
-X-Received: by 2002:a05:6a21:1ca7:b0:16b:74db:8fde with SMTP id
- sf39-20020a056a211ca700b0016b74db8fdemr4088709pzb.61.1697631557508; 
- Wed, 18 Oct 2023 05:19:17 -0700 (PDT)
+ bh=8dvKIBtbuqFbjz2tpsjpo3iSOws3w9vRD80witqbyhg=;
+ b=nUDkn0XVInRV/JT8WD/IJBS6wZccI/WyWU2AqksLFEe5OD27S2Fc3j8ZlH42lLVtP6
+ i01UfsxwD32wRroiyVjLZK+kPwkTqGGvlPld+6C+PAE1furBViS1DClG6HgwjzLfFGDA
+ W8YllWF0XhWurrojTqYXewxu3/37dDb+LcXt/yLU8hVGZz4C+fF7eKp0k+tFjPg3D+fW
+ BJvsAmNmiP0+hHy5VCEyZXT4puDn0F6BllCHeridFcjW9PJ9V/zB1QnPJu/X3eXXkh5o
+ DHhHC06bVIOCl1q1DI3j8gM9/kjGy1xPgXSQ7oeZ59CyeMPNwrn2Gx+fN+3MDt7KH+uf
+ f5zg==
+X-Gm-Message-State: AOJu0YwBsn1/HqJvagIvOlHPYM+KYq3aLZt07CvBAHBrYd3pJXqL0cJ7
+ yybsTfzesALZlDeirNb3ldlpiA==
+X-Google-Smtp-Source: AGHT+IHRG6dw8TTOysALXeJjnSkC/gBMDyMKqYP+s39J+c/nYy+foGHduF45K4DkYg9tGr/aV7PJMQ==
+X-Received: by 2002:a05:6830:450:b0:6bc:e049:b28f with SMTP id
+ d16-20020a056830045000b006bce049b28fmr5485279otc.34.1697631784538; 
+ Wed, 18 Oct 2023 05:23:04 -0700 (PDT)
 Received: from ?IPV6:2400:4050:a840:1e00:78d2:b862:10a7:d486?
  ([2400:4050:a840:1e00:78d2:b862:10a7:d486])
  by smtp.gmail.com with ESMTPSA id
- m9-20020a170902c44900b001ba066c589dsm3384708plm.137.2023.10.18.05.19.14
+ ei47-20020a056a0080ef00b0068ffb8da107sm3216550pfb.212.2023.10.18.05.23.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Oct 2023 05:19:17 -0700 (PDT)
-Message-ID: <fe9d34fc-8dbb-4c90-a6b4-1539c3b86c0f@daynix.com>
-Date: Wed, 18 Oct 2023 21:19:13 +0900
+ Wed, 18 Oct 2023 05:23:04 -0700 (PDT)
+Message-ID: <06d5e859-02db-4f4b-a31c-e9fb986e97dd@daynix.com>
+Date: Wed, 18 Oct 2023 21:23:00 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] target/riscv: Remove misa_mxl validation
+Subject: Re: [PATCH v4 3/5] target/riscv: Move misa_mxl_max to class
+Content-Language: en-US
 To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 Cc: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Mikhail Tyutin <m.tyutin@yadro.com>, Aleksandr Anenkov
  <a.anenkov@yadro.com>, qemu-devel@nongnu.org,
  =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
+ Fabiano Rosas <farosas@suse.de>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- Richard Henderson <richard.henderson@linaro.org>
-References: <20231012054223.37870-1-akihiko.odaki@daynix.com>
- <20231012054223.37870-2-akihiko.odaki@daynix.com>
- <5147b65f-8211-4355-b667-f450dc189ae3@linux.alibaba.com>
- <64c66917-2e17-47f6-ad0e-a90d7d89eec1@daynix.com>
- <a3fd0789-c09b-4a34-b3d3-d36ac5201750@linux.alibaba.com>
-Content-Language: en-US
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-riscv@nongnu.org
+References: <20231017185406.13381-1-akihiko.odaki@daynix.com>
+ <20231017185406.13381-4-akihiko.odaki@daynix.com>
+ <cc32b55b-adc9-440d-814e-5a124a9ec8af@linux.alibaba.com>
 From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <a3fd0789-c09b-4a34-b3d3-d36ac5201750@linux.alibaba.com>
+In-Reply-To: <cc32b55b-adc9-440d-814e-5a124a9ec8af@linux.alibaba.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::436;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x436.google.com
+Received-SPF: none client-ip=2607:f8b0:4864:20::32d;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-ot1-x32d.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -109,97 +105,76 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2023/10/18 14:53, LIU Zhiwei wrote:
-> +CC Richard
+On 2023/10/18 15:50, LIU Zhiwei wrote:
 > 
-> On 2023/10/17 11:37, Akihiko Odaki wrote:
->> On 2023/10/17 11:29, LIU Zhiwei wrote:
->>>
->>> On 2023/10/12 13:42, Akihiko Odaki wrote:
->>>> It is initialized with a simple assignment and there is little room for
->>>> error. In fact, the validation is even more complex.
->>>>
->>>> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
->>>> ---
->>>>   target/riscv/cpu.c | 13 ++-----------
->>>>   1 file changed, 2 insertions(+), 11 deletions(-)
->>>>
->>>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->>>> index f5572704de..550b357fb7 100644
->>>> --- a/target/riscv/cpu.c
->>>> +++ b/target/riscv/cpu.c
->>>> @@ -1042,7 +1042,7 @@ static void 
->>>> riscv_cpu_disable_priv_spec_isa_exts(RISCVCPU *cpu)
->>>>       }
->>>>   }
->>>> -static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu, Error **errp)
->>>> +static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu)
->>>>   {
->>>>       RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cpu);
->>>>       CPUClass *cc = CPU_CLASS(mcc);
->>>> @@ -1062,11 +1062,6 @@ static void 
->>>> riscv_cpu_validate_misa_mxl(RISCVCPU *cpu, Error **errp)
->>>>       default:
->>>>           g_assert_not_reached();
->>>>       }
->>>> -
->>>> -    if (env->misa_mxl_max != env->misa_mxl) {
->>>> -        error_setg(errp, "misa_mxl_max must be equal to misa_mxl");
->>>> -        return;
->>>> -    }
->>>>   }
->>>>   /*
->>>> @@ -1447,11 +1442,7 @@ static void riscv_cpu_realize_tcg(DeviceState 
->>>> *dev, Error **errp)
->>>>           return;
->>>>       }
->>>> -    riscv_cpu_validate_misa_mxl(cpu, &local_err);
->>>> -    if (local_err != NULL) {
->>>> -        error_propagate(errp, local_err);
->>>> -        return;
->>>> -    }
->>>> +    riscv_cpu_validate_misa_mxl(cpu);
->>>
->>> This it not right.  As we are still working on the supporting for 
->>> MXL32 or SXL32, this validation is needed.
+> On 2023/10/18 2:53, Akihiko Odaki wrote:
+>> misa_mxl_max is common for all instances of a RISC-V CPU class so they
+>> are better put into class.
 >>
->> It's not preventing supporting MXL32 or SXL32. It's removing 
->> env->misa_mxl_max != env->misa_mxl just because it's initialized with 
->> a simple statement:
->> env->misa_mxl_max = env->misa_mxl = mxl;
+>> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+>> ---
+>>   target/riscv/cpu-qom.h     |   1 +
+>>   target/riscv/cpu.h         |   3 +-
+>>   hw/riscv/boot.c            |   2 +-
+>>   target/riscv/cpu.c         | 118 +++++++++++++++++++------------------
+>>   target/riscv/gdbstub.c     |  12 ++--
+>>   target/riscv/kvm/kvm-cpu.c |  10 ++--
+>>   target/riscv/machine.c     |   7 +--
+>>   target/riscv/tcg/tcg-cpu.c |  12 ++--
+>>   target/riscv/translate.c   |   3 +-
+>>   9 files changed, 88 insertions(+), 80 deletions(-)
 >>
->> It makes little sense to have a validation code that is more complex 
->> than the validated code.
->>
->>>
->>> And we can't ensure the all RISC-V cpus have the same misa_mxl_max or 
->>> misa_mxl,   it is not right to move it to class.
->>> For example, in the future, riscv64-softmmu can run 32-bit cpu and 
->>> 64-bit cpu. And maybe in heterogeneous SOC,
->>> we have 32-bit cpu and 64-bit cpu together.
->>
->> This patch series does not touch misa_mxl. We don't need to ensure 
->> that all CPUs have the same misa_mxl_max, but we just need to ensure 
->> that CPUs in the same class do. Creating a heterogeneous SoC is still 
->> possible by combining e.g. TYPE_RISCV_CPU_SIFIVE_E31 and 
->> TYPE_RISCV_CPU_SIFIVE_E51, for example.
+>> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+>> index f3fbe37a2c..33b6d52c90 100644
+>> --- a/target/riscv/cpu-qom.h
+>> +++ b/target/riscv/cpu-qom.h
+>> @@ -68,5 +68,6 @@ struct RISCVCPUClass {
+>>       /*< public >*/
+>>       DeviceRealize parent_realize;
+>>       ResettablePhases parent_phases;
+>> +    uint32_t misa_mxl_max;  /* max mxl for this cpu */
+>>   };
+>>   #endif /* RISCV_CPU_QOM_H */
+>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+>> index f8ffa5ee38..ef10efd1e7 100644
+>> --- a/target/riscv/cpu.h
+>> +++ b/target/riscv/cpu.h
+>> @@ -159,7 +159,6 @@ struct CPUArchState {
+>>       /* RISCVMXL, but uint32_t for vmstate migration */
+>>       uint32_t misa_mxl;      /* current mxl */
+>> -    uint32_t misa_mxl_max;  /* max mxl for this cpu */
+>>       uint32_t misa_ext;      /* current extensions */
+>>       uint32_t misa_ext_mask; /* max ext for this cpu */
+>>       uint32_t xl;            /* current xlen */
+>> @@ -711,7 +710,7 @@ enum riscv_pmu_event_idx {
+>>   /* used by tcg/tcg-cpu.c*/
+>>   void isa_ext_update_enabled(RISCVCPU *cpu, uint32_t ext_offset, bool 
+>> en);
+>>   bool isa_ext_is_enabled(RISCVCPU *cpu, uint32_t ext_offset);
+>> -void riscv_cpu_set_misa(CPURISCVState *env, RISCVMXL mxl, uint32_t ext);
+>> +void riscv_cpu_set_misa_ext(CPURISCVState *env, uint32_t ext);
+>>   typedef struct RISCVCPUMultiExtConfig {
+>>       const char *name;
+>> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+>> index 52bf8e67de..b7cf08f479 100644
+>> --- a/hw/riscv/boot.c
+>> +++ b/hw/riscv/boot.c
+>> @@ -36,7 +36,7 @@
+>>   bool riscv_is_32bit(RISCVHartArrayState *harts)
+>>   {
+>> -    return harts->harts[0].env.misa_mxl_max == MXL_RV32;
+>> +    return RISCV_CPU_GET_CLASS(&harts->harts[0])->misa_mxl_max == 
+>> MXL_RV32;
 > 
-> I see what you mean. It makes sense  to move the misa_mxl_max field from 
-> env to the class struct. The misa_mxl_max  is always be set by  cpu init 
-> or the migration.
+> Hi Akihiko,
 > 
-> The former  is OK. I don't know whether QEMU supports migration from 
-> 32-bit CPU to 64-bit CPU. Otherwise,
+> Can we use the cached CPUClass  in CPUState?  Like
 > 
-> Acked-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> (RISCVCPUClass *)((CPUState *)(&harts->harts[0])->cc)
 
-It doesn't. docs/devel/migration.rst states:
- > For this to work, QEMU has to be launched with the same arguments the
- > two times.  I.e. it can only restore the state in one guest that has
- > the same devices that the one it was saved (this last requirement can
- > be relaxed a bit, but for now we can consider that configuration has
- > to be exactly the same).
+If just casting, you can do:
+(RISCVCPUClass *)((Object *)&harts->harts[0])->class
 
-The corresponding CPUs in two QEMU instances launched with the same 
-arguments will have the same misa_mxl_max values.
+But it removes type safety checks RISCV_CPU_GET_CLASS() provides. This 
+is not a hot path so it's better to keep the checks.
 
