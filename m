@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D7A8CDB47E
-	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Oct 2023 19:58:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6309CDB47E
+	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Oct 2023 19:58:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qtCez-0003p6-D4; Wed, 18 Oct 2023 15:56:53 -0400
+	id 1qtCf2-0003pn-NX; Wed, 18 Oct 2023 15:56:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qtCex-0003nx-5v
- for qemu-riscv@nongnu.org; Wed, 18 Oct 2023 15:56:51 -0400
-Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
+ id 1qtCf0-0003pR-Nn
+ for qemu-riscv@nongnu.org; Wed, 18 Oct 2023 15:56:54 -0400
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qtCev-0001bR-EB
- for qemu-riscv@nongnu.org; Wed, 18 Oct 2023 15:56:50 -0400
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-6b36e1fcea0so4284446b3a.1
- for <qemu-riscv@nongnu.org>; Wed, 18 Oct 2023 12:56:48 -0700 (PDT)
+ id 1qtCey-0001c2-HJ
+ for qemu-riscv@nongnu.org; Wed, 18 Oct 2023 15:56:54 -0400
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1c9d7a98abbso50375705ad.1
+ for <qemu-riscv@nongnu.org>; Wed, 18 Oct 2023 12:56:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1697659008; x=1698263808; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1697659011; x=1698263811; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1OsZGdxkQKkRoawFPcxM1FRe0h/NoG7P+SX3RDkUQ3I=;
- b=pXCXsoHcsZvPhM9BSMjtpiRCw/NoslWHjaMO42XcoM+5o1KcPGmWPJc+1KOIJk3VLI
- 0sqtFXLXaap/aBu4a1N8Vt+/zZ6GvfK0PvHmfTwXcObrGlRehe+Lx4ZHoYn6r7W8Rdxr
- tc3PKd5FG0qvgOY9mhcMZXlxutgpRpvNWSUkcgkNGD/1yD1m3siXlQSNXzqhTXbToMW6
- IbYyv1FsavaEdrMf18/+gg85aTlUGvJfcYAvFzr78MMFbj/jiHd7Wi4Wp+Ovq4lIkeMm
- S9yaJ+L59xf4f1UvHNiYUjHK0HDupWk0lGUyvo85WcVvqpESw/1XJY/qB4Z2HNsCDHzc
- /80A==
+ bh=omkN3GoJPCyp9S7HvmY3Un4l534NY4W4OA1YH82yeVE=;
+ b=XLQOLgqB1UBjPo1WbHliynYyMjTkDYy/QX74vDxnNm91JW+AhlxRRckRQYIriOIEDR
+ V8FTeRn/yvZ1Om/wnF6jVGXbV8Nqp3xJz/RNPGq3R8wQGgc4jk5q+wBI9pAXZ6nbtzD/
+ u0tAyFWZ7pfEWqeENdMbNZ/xAAYSLEWWkch/K0jtiC9uaS5ceOEY21xmZAc+yKryUrC6
+ aLT+gEaJN6L4jSq0DYxuowQNAQiUZkrTvRncGwmGrKR9xCic/dXFb625Aj9Zw8hqQk+G
+ U8lENKs7kvgcRU1uUlN1AxwSA3VooeZooII9qTJ+Qg7yT0uRGXa8n0O6ycgZFFB8vKYt
+ C3mQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697659008; x=1698263808;
+ d=1e100.net; s=20230601; t=1697659011; x=1698263811;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1OsZGdxkQKkRoawFPcxM1FRe0h/NoG7P+SX3RDkUQ3I=;
- b=f4cAzpCcSqgzzuuOgL2cX8bxZxbfRSsSQH7Id2AWnLhGevOEzfDjRqvWTtzzJvopPN
- N9+PiIBo+VAWlgws0ppMyIt4Luw987V4U2GL05DTU+J0x5KiNErLKQCmsks2bF8NZMi2
- sJIlJo85e4GrlC9bi0GEkICTYrIu+9PcKKaQfIvvtGoKUv8L6mgUTejKY04Blft9Uu09
- 9tguFTT5G/rGbViaRFpNgccXj4rrSgQDfRg+uDFtp9xrKzQLsKOvXFS2jnGm7LmE7iMu
- LnXu4xAvhJO1AHXfg+siFqL2CE0yp6VqgTXT5/xDbvIcwK/JtZIBCJtcgKtKaMm8BT43
- MnHQ==
-X-Gm-Message-State: AOJu0YzmmYaDecDIfdKtAK9NGKqMQoFIhAHBUWK6wR2SfZO2mBucwljw
- SL1AQNLEkK1HQIfaEreo02Gu6Q==
-X-Google-Smtp-Source: AGHT+IHZYcDk3bLlbcEkiU54FBovr+CphN628gRiBAdjqlBpBN8JbkIQa0VBxfsaZC7v1kv2uJGClw==
-X-Received: by 2002:a05:6a20:8409:b0:135:1af6:9a01 with SMTP id
- c9-20020a056a20840900b001351af69a01mr259631pzd.8.1697659007829; 
- Wed, 18 Oct 2023 12:56:47 -0700 (PDT)
+ bh=omkN3GoJPCyp9S7HvmY3Un4l534NY4W4OA1YH82yeVE=;
+ b=sv39UE69RTm/FpgTXk3s0J1QiWPRPnRy9tjuEsQlK/o+BetntXj/WymVWMt/66rD4L
+ Q4vgK10a5hokz7xtYot62QVEpobegyqyzfqR6eAPPhKDlgTXe1lsTuJL4/SeudU8yytC
+ zVOJdZ0ohuBVkaZnKVwFskFwvdaz/l0DxPNuVuv1BTqbNoYf0ed1yLTvM0Ly2ixcRbL6
+ 9Db6lQFXGylznDSSg1r5GpTKK1Q2XdcdjQ26d8VNE4m3k2r/H9JhexhUucDi7aj9LrWr
+ tnSdrQXiQIaUjzJDwPczrdCS3o+xZItvbDFsvvwS+ZKxDAjaZiBzg8wSwMQ0J6edDwp5
+ pCng==
+X-Gm-Message-State: AOJu0Yw5LWCcMWNeBBipKNhyH/PsjL9xQfwssMr5yPENSeoxVtfqWj/O
+ +ck3AZrGKtsLzX9oWMoZfuOp8Q==
+X-Google-Smtp-Source: AGHT+IH1401w1hK9CgotOUuflFcKdZIc24LFbK/8mdl2mukkCZm2IaRf/AYN8l3d9EQEdp84740VXg==
+X-Received: by 2002:a17:90a:4008:b0:27d:2054:27b1 with SMTP id
+ u8-20020a17090a400800b0027d205427b1mr182206pjc.32.1697659011025; 
+ Wed, 18 Oct 2023 12:56:51 -0700 (PDT)
 Received: from grind.dc1.ventanamicro.com ([177.45.186.249])
  by smtp.gmail.com with ESMTPSA id
- ku12-20020a17090b218c00b00268b439a0cbsm256359pjb.23.2023.10.18.12.56.45
+ ku12-20020a17090b218c00b00268b439a0cbsm256359pjb.23.2023.10.18.12.56.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Oct 2023 12:56:47 -0700 (PDT)
+ Wed, 18 Oct 2023 12:56:50 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v3 1/6] target/riscv/kvm/kvm-cpu.c: add missing property
- getters()
-Date: Wed, 18 Oct 2023 16:56:33 -0300
-Message-ID: <20231018195638.211151-2-dbarboza@ventanamicro.com>
+Subject: [PATCH v3 2/6] qapi,risc-v: add query-cpu-model-expansion
+Date: Wed, 18 Oct 2023 16:56:34 -0300
+Message-ID: <20231018195638.211151-3-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231018195638.211151-1-dbarboza@ventanamicro.com>
 References: <20231018195638.211151-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42d.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,108 +95,176 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We got along without property getters in the KVM driver because we never
-needed them. But the incoming query-cpu-model-expansion API will use
-property getters and setters to retrieve the CPU characteristics.
+This API is used to inspect the characteristics of a given CPU model. It
+also allows users to validate a CPU model with a certain configuration,
+e.g. if "-cpu X,a=3Dtrue,b=3Dfalse" is a valid setup for a given QEMU
+binary. We'll start implementing the first part. The second requires
+more changes in RISC-V CPU boot flow.
 
-Add the missing getters for the KVM driver for both MISA and
-multi-letter extension properties. We're also adding an special getter
-for absent multi-letter properties that KVM doesn't implement that
-always return false.
+The implementation is inspired by the existing ARM
+query-cpu-model-expansion impl in target/arm/arm-qmp-cmds.c. We'll
+create a RISCVCPU object with the required model, fetch its existing
+properties, add a couple of relevant boolean options (pmp and mmu) and
+display it to users.
+
+Here's an usage example:
+
+./build/qemu-system-riscv64 -S -M virt -display none \
+  -qmp  tcp:localhost:1234,server,wait=3Doff
+
+./scripts/qmp/qmp-shell localhost:1234
+Welcome to the QMP low-level shell!
+Connected to QEMU 8.1.50
+
+(QEMU)  query-cpu-model-expansion type=3Dfull model=3D{"name":"rv64"}
+{"return": {"model": {"name": "rv64", "props": {"zicond": false, "x-zvfh": =
+false, "mmu": true, "x-zvfbfwma": false, "x-zvfbfmin": false, "xtheadbs": f=
+alse, "xtheadbb": false, "xtheadba": false, "xtheadmemidx": false, "smstate=
+en": false, "zfinx": false, "Zve64f": false, "Zve32f": false, "x-zvfhmin": =
+false, "xventanacondops": false, "xtheadcondmov": false, "svpbmt": false, "=
+zbs": true, "zbc": true, "zbb": true, "zba": true, "zicboz": true, "xtheadm=
+ac": false, "Zfh": false, "Zfa": true, "zbkx": false, "zbkc": false, "zbkb"=
+: false, "Zve64d": false, "x-zfbfmin": false, "zk": false, "x-epmp": false,=
+ "xtheadmempair": false, "zkt": false, "zks": false, "zkr": false, "zkn": f=
+alse, "Zfhmin": false, "zksh": false, "zknh": false, "zkne": false, "zknd":=
+ false, "zhinx": false, "Zicsr": true, "sscofpmf": false, "Zihintntl": true=
+, "sstc": true, "xtheadcmo": false, "x-zvbb": false, "zksed": false, "x-zvk=
+ned": false, "xtheadsync": false, "x-zvkg": false, "zhinxmin": false, "svad=
+u": true, "xtheadfmv": false, "x-zvksed": false, "svnapot": false, "pmp": t=
+rue, "x-zvknhb": false, "x-zvknha": false, "xtheadfmemidx": false, "x-zvksh=
+": false, "zdinx": false, "zicbom": true, "Zihintpause": true, "svinval": f=
+alse, "zcf": false, "zce": false, "zcd": false, "zcb": false, "zca": false,=
+ "x-ssaia": false, "x-smaia": false, "zmmul": false, "x-zvbc": false, "Zife=
+ncei": true, "zcmt": false, "zcmp": false, "Zawrs": true}}}}
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/kvm/kvm-cpu.c | 40 +++++++++++++++++++++++++++++++++++---
- 1 file changed, 37 insertions(+), 3 deletions(-)
+ qapi/machine-target.json      |  6 ++-
+ target/riscv/riscv-qmp-cmds.c | 75 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 79 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 5695f2face..cf98071f92 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -140,6 +140,19 @@ static KVMCPUConfig kvm_misa_ext_cfgs[] = {
-     KVM_MISA_CFG(RVM, KVM_RISCV_ISA_EXT_M),
- };
- 
-+static void kvm_cpu_get_misa_ext_cfg(Object *obj, Visitor *v,
-+                                     const char *name,
-+                                     void *opaque, Error **errp)
-+{
-+    KVMCPUConfig *misa_ext_cfg = opaque;
-+    target_ulong misa_bit = misa_ext_cfg->offset;
-+    RISCVCPU *cpu = RISCV_CPU(obj);
-+    CPURISCVState *env = &cpu->env;
-+    bool value = env->misa_ext_mask & misa_bit;
+diff --git a/qapi/machine-target.json b/qapi/machine-target.json
+index f0a6b72414..e5630e73aa 100644
+--- a/qapi/machine-target.json
++++ b/qapi/machine-target.json
+@@ -228,7 +228,8 @@
+   'data': { 'model': 'CpuModelInfo' },
+   'if': { 'any': [ 'TARGET_S390X',
+                    'TARGET_I386',
+-                   'TARGET_ARM' ] } }
++                   'TARGET_ARM',
++                   'TARGET_RISCV' ] } }
+=20
+ ##
+ # @query-cpu-model-expansion:
+@@ -273,7 +274,8 @@
+   'returns': 'CpuModelExpansionInfo',
+   'if': { 'any': [ 'TARGET_S390X',
+                    'TARGET_I386',
+-                   'TARGET_ARM' ] } }
++                   'TARGET_ARM',
++                   'TARGET_RISCV' ] } }
+=20
+ ##
+ # @CpuDefinitionInfo:
+diff --git a/target/riscv/riscv-qmp-cmds.c b/target/riscv/riscv-qmp-cmds.c
+index 5ecff1afb3..2170562e3a 100644
+--- a/target/riscv/riscv-qmp-cmds.c
++++ b/target/riscv/riscv-qmp-cmds.c
+@@ -24,8 +24,12 @@
+=20
+ #include "qemu/osdep.h"
+=20
++#include "qapi/error.h"
+ #include "qapi/qapi-commands-machine-target.h"
++#include "qapi/qmp/qdict.h"
++#include "qom/qom-qobject.h"
+ #include "cpu-qom.h"
++#include "cpu.h"
+=20
+ static void riscv_cpu_add_definition(gpointer data, gpointer user_data)
+ {
+@@ -55,3 +59,74 @@ CpuDefinitionInfoList *qmp_query_cpu_definitions(Error *=
+*errp)
+=20
+     return cpu_list;
+ }
 +
-+    visit_type_bool(v, name, &value, errp);
++static void riscv_obj_add_qdict_prop(Object *obj, QDict *qdict_out,
++                                     const char *name)
++{
++    ObjectProperty *prop =3D object_property_find(obj, name);
++
++    if (prop) {
++        QObject *value;
++
++        assert(prop->get);
++        value =3D object_property_get_qobject(obj, name, &error_abort);
++
++        qdict_put_obj(qdict_out, name, value);
++    }
 +}
 +
- static void kvm_cpu_set_misa_ext_cfg(Object *obj, Visitor *v,
-                                      const char *name,
-                                      void *opaque, Error **errp)
-@@ -244,6 +257,17 @@ static uint32_t kvm_cpu_cfg_get(RISCVCPU *cpu,
-     return *ext_enabled;
- }
- 
-+static void kvm_cpu_get_multi_ext_cfg(Object *obj, Visitor *v,
-+                                      const char *name,
-+                                      void *opaque, Error **errp)
++static void riscv_obj_add_multiext_props(Object *obj, QDict *qdict_out,
++                                         const RISCVCPUMultiExtConfig *arr)
 +{
-+    KVMCPUConfig *multi_ext_cfg = opaque;
-+    RISCVCPU *cpu = RISCV_CPU(obj);
-+    bool value = kvm_cpu_cfg_get(cpu, multi_ext_cfg);
-+
-+    visit_type_bool(v, name, &value, errp);
++    for (int i =3D 0; arr[i].name !=3D NULL; i++) {
++        riscv_obj_add_qdict_prop(obj, qdict_out, arr[i].name);
++    }
 +}
 +
- static void kvm_cpu_set_multi_ext_cfg(Object *obj, Visitor *v,
-                                       const char *name,
-                                       void *opaque, Error **errp)
-@@ -346,6 +370,15 @@ static void kvm_riscv_update_cpu_cfg_isa_ext(RISCVCPU *cpu, CPUState *cs)
-     }
- }
- 
-+static void cpu_get_cfg_unavailable(Object *obj, Visitor *v,
-+                                    const char *name,
-+                                    void *opaque, Error **errp)
++CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType=
+ type,
++                                                     CpuModelInfo *model,
++                                                     Error **errp)
 +{
-+    bool value = false;
++    CpuModelExpansionInfo *expansion_info;
++    QDict *qdict_out;
++    ObjectClass *oc;
++    Object *obj;
 +
-+    visit_type_bool(v, name, &value, errp);
++    if (type !=3D CPU_MODEL_EXPANSION_TYPE_FULL) {
++        error_setg(errp, "The requested expansion type is not supported");
++        return NULL;
++    }
++
++    oc =3D cpu_class_by_name(TYPE_RISCV_CPU, model->name);
++    if (!oc) {
++        error_setg(errp, "The CPU type '%s' is not a known RISC-V CPU type=
+",
++                   model->name);
++        return NULL;
++    }
++
++    obj =3D object_new(object_class_get_name(oc));
++
++    expansion_info =3D g_new0(CpuModelExpansionInfo, 1);
++    expansion_info->model =3D g_malloc0(sizeof(*expansion_info->model));
++    expansion_info->model->name =3D g_strdup(model->name);
++
++    qdict_out =3D qdict_new();
++
++    riscv_obj_add_multiext_props(obj, qdict_out, riscv_cpu_extensions);
++    riscv_obj_add_multiext_props(obj, qdict_out, riscv_cpu_experimental_ex=
+ts);
++    riscv_obj_add_multiext_props(obj, qdict_out, riscv_cpu_vendor_exts);
++
++    /* Add our CPU boolean options too */
++    riscv_obj_add_qdict_prop(obj, qdict_out, "mmu");
++    riscv_obj_add_qdict_prop(obj, qdict_out, "pmp");
++
++    if (!qdict_size(qdict_out)) {
++        qobject_unref(qdict_out);
++    } else {
++        expansion_info->model->props =3D QOBJECT(qdict_out);
++    }
++
++    object_unref(obj);
++
++    return expansion_info;
 +}
-+
- static void cpu_set_cfg_unavailable(Object *obj, Visitor *v,
-                                     const char *name,
-                                     void *opaque, Error **errp)
-@@ -376,7 +409,8 @@ static void riscv_cpu_add_kvm_unavail_prop(Object *obj, const char *prop_name)
-      * to enable any of them.
-      */
-     object_property_add(obj, prop_name, "bool",
--                        NULL, cpu_set_cfg_unavailable,
-+                        cpu_get_cfg_unavailable,
-+                        cpu_set_cfg_unavailable,
-                         NULL, (void *)prop_name);
- }
- 
-@@ -406,7 +440,7 @@ static void kvm_riscv_add_cpu_user_properties(Object *cpu_obj)
-         misa_cfg->description = riscv_get_misa_ext_description(bit);
- 
-         object_property_add(cpu_obj, misa_cfg->name, "bool",
--                            NULL,
-+                            kvm_cpu_get_misa_ext_cfg,
-                             kvm_cpu_set_misa_ext_cfg,
-                             NULL, misa_cfg);
-         object_property_set_description(cpu_obj, misa_cfg->name,
-@@ -422,7 +456,7 @@ static void kvm_riscv_add_cpu_user_properties(Object *cpu_obj)
-         KVMCPUConfig *multi_cfg = &kvm_multi_ext_cfgs[i];
- 
-         object_property_add(cpu_obj, multi_cfg->name, "bool",
--                            NULL,
-+                            kvm_cpu_get_multi_ext_cfg,
-                             kvm_cpu_set_multi_ext_cfg,
-                             NULL, multi_cfg);
-     }
--- 
+--=20
 2.41.0
 
 
