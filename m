@@ -4,83 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E55C5CDB47E
-	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Oct 2023 21:45:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FA6ACDB465
+	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Oct 2023 06:56:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qtELq-0007by-7M; Wed, 18 Oct 2023 17:45:14 -0400
+	id 1qtMws-0006oU-DZ; Thu, 19 Oct 2023 02:56:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qtELp-0007bf-8c
- for qemu-riscv@nongnu.org; Wed, 18 Oct 2023 17:45:13 -0400
-Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434])
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1qtMwq-0006nT-3d
+ for qemu-riscv@nongnu.org; Thu, 19 Oct 2023 02:56:00 -0400
+Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qtELn-00039l-5b
- for qemu-riscv@nongnu.org; Wed, 18 Oct 2023 17:45:13 -0400
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-6b89ab5ddb7so4870890b3a.0
- for <qemu-riscv@nongnu.org>; Wed, 18 Oct 2023 14:45:10 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1qtMwn-0002aO-4y
+ for qemu-riscv@nongnu.org; Thu, 19 Oct 2023 02:55:59 -0400
+Received: by mail-pg1-x536.google.com with SMTP id
+ 41be03b00d2f7-5b837db1b26so823081a12.3
+ for <qemu-riscv@nongnu.org>; Wed, 18 Oct 2023 23:55:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1697665509; x=1698270309; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=wAOEHQ77CDEWxljUHmClboNiozu0PLhNNjRUillm338=;
- b=bV0GImePWIDWXdor+cUJvbjE0xObAkogcd3STfccACZYOvXO/vJN3eG80mlXV5F02k
- vY6kvNnuFrWWLrQUy81KoPVz9Mi7oBug73LMsWj0IL8L+a1yv8nPNoIafiK0P3VsSRAM
- Ads3fiKmQtcvSxZ3Qt6ckJkIAPzfp/htqw4VKroqIHPzviGXtmqhqOxRm3Jwl1ENlmdz
- RxaXwoudkxiFXlSvJy8P9H+qQEIHo7GwyiJlu3AwSW0iI0XKWJPSSei3vrlb3dBphXiE
- nHgxjxdJuxCugfEnQsjDfYUS1MVDYgp73oXJH2JgsaBmR9fk6Ky7IF/fp/xBfkXU0kSc
- cnkw==
+ d=ventanamicro.com; s=google; t=1697698553; x=1698303353; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZdOPRXbiSzI4g7kjdZq1XV+7i81shb/E6Lz8nvVHR8c=;
+ b=d+J2pUCGauNKUUadZOcq4KJz0hpV+duGt+1s2dALgMtTyLMlCHquOJ+r5fvUYFmqmS
+ cwW793DitWgD+/bbmu7/+wNobOtICNc8t8bd4EpYMzFGyuknmo4yAJkMREtpp2otr4uU
+ Xfid3HA9gWtEkUGDT2MQfns/hdqpF5KFUZUwF4zXgoRgUWcC0+kgG5UB3UUkVcrSvn0J
+ PXo2fZenBC9zf/4K9ONFx9xFEPwdrfyLVvc6zSV6pQhAZtb0hejO46ESPU1OsXdw3E+x
+ B75d9zo0j1min33cf2Eo0CxD3+1Orv9Yqn7odp2Qt79nzTbf/uFTSXoiL2xli9+dhnsS
+ IbRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697665509; x=1698270309;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=wAOEHQ77CDEWxljUHmClboNiozu0PLhNNjRUillm338=;
- b=nFVwitbU84Gdrk3zVzE+GqqhcXVm03bwl/WP4Fx/QpuTm4fmNBx7tj1EiMZsvugpeO
- KlbjAVDc822W7soXSt5jjEqhpUhEwMWroqTAOfOLQOIflLzcZj30EpfQ46ia1zcW5E9Y
- /LIebvXIayJCLepkasN58y8C+CwLFP0QG4wwa/a5dDYOTnSbraDLJt52f9IvwdQzQUR/
- E0vAN5VRokTdAmza7KFoZAr+daUgqJJZcn6w6tvyrc09JALh4f1XgABej35VvRDy6xAW
- qnCUc3silsJ4C1UASJ6S1g3QrG7cYqPenjYUlOuLCn/x7+kyJbeg265qzrCZgzZSa/gC
- O/Cw==
-X-Gm-Message-State: AOJu0YwWUz9o5HtCebOkEWVo2+dblNppM4b6xpGsEubqAgiyWf/AwU/d
- pAAgJ9TcdVJnKmd1KEmqZF/k7g==
-X-Google-Smtp-Source: AGHT+IGRtMZ88AXTbtvNiQTkY6yQhFWKVt9MNY4aZ1jEEECFra4l3Yh35fwXEpn84i1xsSE+4ezPeg==
-X-Received: by 2002:a62:798b:0:b0:690:1c1b:aefd with SMTP id
- u133-20020a62798b000000b006901c1baefdmr396359pfc.5.1697665509468; 
- Wed, 18 Oct 2023 14:45:09 -0700 (PDT)
-Received: from [192.168.68.107] ([177.45.186.249])
- by smtp.gmail.com with ESMTPSA id
- t23-20020aa79477000000b006bd9422b279sm3783899pfq.54.2023.10.18.14.45.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Oct 2023 14:45:09 -0700 (PDT)
-Message-ID: <2a2febdb-d42e-4d72-aae1-e630f079f2c2@ventanamicro.com>
-Date: Wed, 18 Oct 2023 18:45:04 -0300
+ d=1e100.net; s=20230601; t=1697698553; x=1698303353;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZdOPRXbiSzI4g7kjdZq1XV+7i81shb/E6Lz8nvVHR8c=;
+ b=o99Bu9Ve5Cxyw/EyR1FBrmroTQkqeLq6UEyFq0O+njJfdagJEuWMDBdf5zrZBEJmEy
+ pjJiqCX6OqsJkmhgp/0LzB7FP1Q+UJnwxrw3nBtF2YCNBFS2qsZj/hNa8a7/o4+lMZnT
+ MWI6jdCeXQ4gzGjAKMbzdtQvQSEr8dLmlH1HuOBimcEYZVRJPnYRNZTcqTpfP6ta67gY
+ zRi4OhEF41PxluqLmZXGfS0nvkZ/YHRhnJuXj13fljLdZ4O10KNO7IQkt8754kNqRgaL
+ q/WTv6XG2GbXZACtyJbsMSZcjqSjmADAFyeAgryypL3MYADMqgMhIkEXoqZTaBjbo3vN
+ tkwQ==
+X-Gm-Message-State: AOJu0YwnOjrSACOi1+6D4Vfhu/VnYAFc29HEuhLpy0WHWOp2Qy2q6M5P
+ cy1Mg5vH8zbLtLUDtPaR/EBXDLHPpgXFh4rhyKB7cIo5
+X-Google-Smtp-Source: AGHT+IH2+tvAGGe1fEiHGmNAysK0aPkhuG2EChaxKFC9NZNkgBDchriKUnWi1R2usuASUxykSvPBDw==
+X-Received: by 2002:a17:90b:4f8d:b0:27d:2abc:f9c1 with SMTP id
+ qe13-20020a17090b4f8d00b0027d2abcf9c1mr1293238pjb.20.1697698553201; 
+ Wed, 18 Oct 2023 23:55:53 -0700 (PDT)
+Received: from ThinkPad-T490.dc1.ventanamicro.com
+ ([2401:4900:5302:9b99:4f57:4dc3:993d:4317])
+ by smtp.googlemail.com with ESMTPSA id
+ em4-20020a17090b014400b0027dafa55306sm882289pjb.40.2023.10.18.23.55.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 18 Oct 2023 23:55:52 -0700 (PDT)
+From: Mayuresh Chitale <mchitale@ventanamicro.com>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: Himanshu Chauhan <hchauhan@ventanamicro.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH v2] Add epmp to extensions list and rename it to smepmp
+Date: Thu, 19 Oct 2023 12:25:46 +0530
+Message-Id: <20231019065546.1431579-1-mchitale@ventanamicro.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 00/10] riscv: RVA22U64 profile support
-Content-Language: en-US
-To: Andrew Jones <ajones@ventanamicro.com>,
- Alistair Francis <alistair23@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
- palmer@rivosinc.com
-References: <20231006132134.1135297-1-dbarboza@ventanamicro.com>
- <CAKmqyKP=4kGpO=8D13iJw7pJSkD9CFary_DHt236+e1GFMAngA@mail.gmail.com>
- <a89189d3-2975-487e-9d2e-bd8ea60feba5@ventanamicro.com>
- <20231016-cf26d23a1fe53ee3b5b68513@orel>
- <CAKmqyKMg0VKRQ_kFLHJQCq19p-Yv4iJqJZF3XGZWxfuYPe3rbQ@mail.gmail.com>
- <20231017-e7a4712137165b59844499e3@orel>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20231017-e7a4712137165b59844499e3@orel>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x434.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::536;
+ envelope-from=mchitale@ventanamicro.com; helo=mail-pg1-x536.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,140 +95,189 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+From: Himanshu Chauhan <hchauhan@ventanamicro.com>
 
+Smepmp is a ratified extension which qemu refers to as epmp.
+Rename epmp to smepmp and add it to extension list so that
+it is added to the isa string.
 
-On 10/17/23 05:08, Andrew Jones wrote:
-> On Tue, Oct 17, 2023 at 01:55:47PM +1000, Alistair Francis wrote:
->> On Mon, Oct 16, 2023 at 7:03 PM Andrew Jones <ajones@ventanamicro.com> wrote:
->>>
->>> On Thu, Oct 12, 2023 at 04:07:50PM -0300, Daniel Henrique Barboza wrote:
->>>>
->>>>
->>>> On 10/11/23 00:01, Alistair Francis wrote:
->>>>> On Sat, Oct 7, 2023 at 12:23 AM Daniel Henrique Barboza
->>>>> <dbarboza@ventanamicro.com> wrote:
->>>>>>
->>>>>> Hi,
->>>>>>
->>>>>> Several design changes were made in this version after the reviews and
->>>>>> feedback in the v1 [1]. The high-level summary is:
->>>>>>
->>>>>> - we'll no longer allow users to set profile flags for vendor CPUs. If
->>>>>>     we're to adhere to the current policy of not allowing users to enable
->>>>>>     extensions for vendor CPUs, the profile support would become a
->>>>>>     glorified way of checking if the vendor CPU happens to support a
->>>>>>     specific profile. If a future vendor CPU supports a profile the CPU
->>>>>>     can declare it manually in its cpu_init() function, the flag will
->>>>>>     still be set, but users can't change it;
->>>>>>
->>>>>> - disabling a profile will now disable all the mandatory extensions from
->>>>>>     the CPU;
->>>>>
->>>>> What happens if you enable one profile and disable a different one?
->>>>
->>>> With this implementation as is the profiles will be evaluated by the order they're
->>>> declared in riscv_cpu_profiles[]. Which isn't exactly ideal since we're exchanging
->>>> a left-to-right ordering in the command line by an arbitrary order that we happened
->>>> to set in the code.
->>>>
->>>> I can make some tweaks to make the profiles sensible to left-to-right order between
->>>> them, while keeping regular extension with higher priority. e.g.:
->>>>
->>>>
->>>> -cpu rv64,zicbom=true,profileA=false,profileB=true,zicboz=false
->>>> -cpu rv64,profileA=false,zicbom=true,zicboz=false,profileB=true
->>>> -cpu rv64,profileA=false,profileB=true,zicbom=true,zicboz=false
->>>>
->>>> These would all do the same thing: "keeping zicbom=true and zicboz=false, disable profileA
->>>> and then enable profile B"
->>>>
->>>> Switching the profiles order would have a different result:
->>>>
->>>> -cpu rv64,profileB=true,profileA=false,zicbom=true,zicboz=false
->>>>
->>>> "keeping zicbom=true and zicboz=false, enable profile B and then disable profile A"
->>>>
->>>>
->>>> I'm happy to hear any other alternative/ideas. We'll either deal with some left-to-right
->>>> ordering w.r.t profiles or deal with an internal profile commit ordering. TBH I think
->>>> it's sensible to demand left-to-right command line ordering for profiles only.
->>>
->>> left-to-right ordering is how the rest of QEMU properties work and scripts
->>> depend on it. For example, one can do -cpu $MODEL,$DEFAULT_PROPS,$MORE_PROPS
->>> where $MORE_PROPS can not only add more props but also override default
->>> props (DEFAULT_PROPS='foo=off', MORE_PROPS='foo=on' - foo will be on).
->>> left-to-right also works with multiple -cpu parameters, i.e. -cpu
->>> $MODEL,$DEFAULT_PROPS -cpu $MODEL,$MY_PROPS will replace default props
->>> with my props.
->>
->> That seems like the way to go then
->>
->>>
->>> I don't think profiles should be treated special with regard to this. They
->>> should behave the same as any property. If one does
->>> profileA=off,profileB=on and there are overlapping extensions then a
->>
->> But what does this mean? What intent is the user saying here?
->>
->> For example if a user says:
->>
->>      RVA22U64=off,RVA24U64=on
->>
->> They only want the extensions that were added in RVA24U64? What about
->> G and the standard extensions?
-> 
-> Disabling a profile is certainly odd, because I wouldn't expect profiles
-> to be used with any CPU type other than a base type, i.e. they should be
-> used to enable extensions on a barebones CPU model, which means setting
-> them off would be noops.  And, if a profile is set off for a cpu model
-> where extensions are set either by the model or by previous profile and
-> extension properties, then it also seems like an odd use, but that's at
-> least consistent with how other properties would work, so I'm not sure we
-> need to forbid it.
+Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
+Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+Changes in v2:
+====
+- Rebase on latest riscv-to-apply.next
+- Remove ePMP version comment
 
-It's weird to add a flag that users can set to 'off' and nothing happens.
+ target/riscv/cpu.c         |  8 +++-----
+ target/riscv/cpu_cfg.h     |  2 +-
+ target/riscv/csr.c         |  6 +++---
+ target/riscv/pmp.c         | 12 ++++++------
+ target/riscv/tcg/tcg-cpu.c |  4 ++--
+ 5 files changed, 15 insertions(+), 17 deletions(-)
 
-That said, I'm considering profile disablement a debug/development option.
-I am thinking about adding a warning when users disables a profile like:
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 2f98ce56e06..dad167833cc 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -133,7 +133,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
+     ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
+     ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
+-    ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, epmp),
++    ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
+     ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
+     ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
+     ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
+@@ -599,12 +599,11 @@ static void rv32_ibex_cpu_init(Object *obj)
+ #ifndef CONFIG_USER_ONLY
+     set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
+ #endif
+-    cpu->cfg.epmp = true;
+-
+     /* inherited from parent obj via riscv_cpu_init() */
+     cpu->cfg.ext_zifencei = true;
+     cpu->cfg.ext_zicsr = true;
+     cpu->cfg.pmp = true;
++    cpu->cfg.ext_smepmp = true;
+ }
+ 
+ static void rv32_imafcu_nommu_cpu_init(Object *obj)
+@@ -1257,6 +1256,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+     MULTI_EXT_CFG_BOOL("zve64d", ext_zve64d, false),
+     MULTI_EXT_CFG_BOOL("sstc", ext_sstc, true),
+ 
++    MULTI_EXT_CFG_BOOL("smepmp", ext_smepmp, false),
+     MULTI_EXT_CFG_BOOL("smstateen", ext_smstateen, false),
+     MULTI_EXT_CFG_BOOL("svadu", ext_svadu, true),
+     MULTI_EXT_CFG_BOOL("svinval", ext_svinval, false),
+@@ -1322,8 +1322,6 @@ const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[] = {
+ 
+ /* These are experimental so mark with 'x-' */
+ const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] = {
+-    /* ePMP 0.9.3 */
+-    MULTI_EXT_CFG_BOOL("x-epmp", epmp, false),
+     MULTI_EXT_CFG_BOOL("x-smaia", ext_smaia, false),
+     MULTI_EXT_CFG_BOOL("x-ssaia", ext_ssaia, false),
+ 
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index 208cac1c7c9..e7ce977189c 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -102,6 +102,7 @@ struct RISCVCPUConfig {
+     bool ext_smaia;
+     bool ext_ssaia;
+     bool ext_sscofpmf;
++    bool ext_smepmp;
+     bool rvv_ta_all_1s;
+     bool rvv_ma_all_1s;
+ 
+@@ -134,7 +135,6 @@ struct RISCVCPUConfig {
+     uint16_t cboz_blocksize;
+     bool mmu;
+     bool pmp;
+-    bool epmp;
+     bool debug;
+     bool misa_w;
+ 
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index a5be1c202c3..f4e0a3962f0 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -524,9 +524,9 @@ static RISCVException pmp(CPURISCVState *env, int csrno)
+     return RISCV_EXCP_ILLEGAL_INST;
+ }
+ 
+-static RISCVException epmp(CPURISCVState *env, int csrno)
++static RISCVException smepmp(CPURISCVState *env, int csrno)
+ {
+-    if (riscv_cpu_cfg(env)->epmp) {
++    if (riscv_cpu_cfg(env)->ext_smepmp) {
+         return RISCV_EXCP_NONE;
+     }
+ 
+@@ -4762,7 +4762,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     [CSR_VSIPH]       = { "vsiph",       aia_hmode32, NULL, NULL, rmw_vsiph },
+ 
+     /* Physical Memory Protection */
+-    [CSR_MSECCFG]    = { "mseccfg",  epmp, read_mseccfg, write_mseccfg,
++    [CSR_MSECCFG]    = { "mseccfg", smepmp, read_mseccfg, write_mseccfg,
+                          .min_priv_ver = PRIV_VERSION_1_11_0           },
+     [CSR_PMPCFG0]    = { "pmpcfg0",   pmp, read_pmpcfg,  write_pmpcfg  },
+     [CSR_PMPCFG1]    = { "pmpcfg1",   pmp, read_pmpcfg,  write_pmpcfg  },
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index 5e60c26031b..21d2489e27e 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -91,7 +91,7 @@ static bool pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
+     if (pmp_index < MAX_RISCV_PMPS) {
+         bool locked = true;
+ 
+-        if (riscv_cpu_cfg(env)->epmp) {
++        if (riscv_cpu_cfg(env)->ext_smepmp) {
+             /* mseccfg.RLB is set */
+             if (MSECCFG_RLB_ISSET(env)) {
+                 locked = false;
+@@ -340,9 +340,9 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+ 
+         /*
+          * Convert the PMP permissions to match the truth table in the
+-         * ePMP spec.
++         * Smepmp spec.
+          */
+-        const uint8_t epmp_operation =
++        const uint8_t smepmp_operation =
+             ((env->pmp_state.pmp[i].cfg_reg & PMP_LOCK) >> 4) |
+             ((env->pmp_state.pmp[i].cfg_reg & PMP_READ) << 2) |
+             (env->pmp_state.pmp[i].cfg_reg & PMP_WRITE) |
+@@ -367,7 +367,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+                  * If mseccfg.MML Bit set, do the enhanced pmp priv check
+                  */
+                 if (mode == PRV_M) {
+-                    switch (epmp_operation) {
++                    switch (smepmp_operation) {
+                     case 0:
+                     case 1:
+                     case 4:
+@@ -398,7 +398,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+                         g_assert_not_reached();
+                     }
+                 } else {
+-                    switch (epmp_operation) {
++                    switch (smepmp_operation) {
+                     case 0:
+                     case 8:
+                     case 9:
+@@ -574,7 +574,7 @@ void mseccfg_csr_write(CPURISCVState *env, target_ulong val)
+         }
+     }
+ 
+-    if (riscv_cpu_cfg(env)->epmp) {
++    if (riscv_cpu_cfg(env)->ext_smepmp) {
+         /* Sticky bits */
+         val |= (env->mseccfg & (MSECCFG_MMWP | MSECCFG_MML));
+         if ((val ^ env->mseccfg) & (MSECCFG_MMWP | MSECCFG_MML)) {
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index bbce254ee13..fce58d4375a 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -591,12 +591,12 @@ static bool tcg_cpu_realize(CPUState *cs, Error **errp)
+         return false;
+     }
+ 
+-    if (cpu->cfg.epmp && !cpu->cfg.pmp) {
++    if (cpu->cfg.ext_smepmp && !cpu->cfg.pmp) {
+         /*
+          * Enhanced PMP should only be available
+          * on harts with PMP support
+          */
+-        error_setg(errp, "Invalid configuration: EPMP requires PMP support");
++        error_setg(errp, "Invalid configuration: Smepmp requires PMP support");
+         return false;
+     }
+ 
+-- 
+2.34.1
 
-"disabling a profile is recommended only for troubleshooting and is discouraged
-for regular use"
-
-And also mention something along those lines in the docs as well.
-
-We might be compelled into implementing profile disablement because it's weird
-otherwise, but we're not obligated to promote it. In fact I want to actively
-discourage it.
-
-
-Thanks,
-
-Daniel
-
-
-> 
->>
->> To me it just seems really strange to have more than 1 profile.
->> Profiles are there to help software and users have common platforms.
->> Why would a user want to mix-n-match them
-> 
-> I think it's possible users will want to describe platforms which are
-> compatible with more than one profile, e.g. RVA22U64=on,RVA24U64=on.
-> 
-> The example I gave Andrea about this was that C may get demoted from
-> mandatory to optional in later profiles. If a platform is built which
-> conforms to an older profile with C and to the later profile where C
-> is only optional, then enabling both profiles will ensure that C is
-> enabled, whereas only enabling the later profile will not, and then
-> C must be added manually after inspecting the older profile to see
-> what will be missed. OIOW, the burden of individual extension management
-> will still be present if only single profiles may be enabled at a time.
-> (And, even if the later profile was a strict superset of the older one,
-> then, if a user wants to explicitly describe a platform which claims
-> compatibility with both profiles, they probably shouldn't be punished
-> for it, even if the resulting extension enablement would be equivalent
-> to only enabling the later profile.)
-> 
-> Thanks,
-> drew
 
