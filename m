@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E40FC41513
-	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Oct 2023 13:29:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E9F8CDB482
+	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Oct 2023 13:29:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qtT4i-0004iW-KM; Thu, 19 Oct 2023 09:28:34 -0400
+	id 1qtT59-0006S8-0K; Thu, 19 Oct 2023 09:28:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qtT4g-0004VG-5E
- for qemu-riscv@nongnu.org; Thu, 19 Oct 2023 09:28:30 -0400
-Received: from mail-il1-x134.google.com ([2607:f8b0:4864:20::134])
+ id 1qtT52-0005fq-1U
+ for qemu-riscv@nongnu.org; Thu, 19 Oct 2023 09:28:52 -0400
+Received: from mail-oo1-xc36.google.com ([2607:f8b0:4864:20::c36])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qtT4d-00074f-KU
- for qemu-riscv@nongnu.org; Thu, 19 Oct 2023 09:28:29 -0400
-Received: by mail-il1-x134.google.com with SMTP id
- e9e14a558f8ab-3576e74ae9dso22114025ab.3
- for <qemu-riscv@nongnu.org>; Thu, 19 Oct 2023 06:28:27 -0700 (PDT)
+ id 1qtT4z-0007Bn-Cl
+ for qemu-riscv@nongnu.org; Thu, 19 Oct 2023 09:28:51 -0400
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-581f78a0206so921852eaf.2
+ for <qemu-riscv@nongnu.org>; Thu, 19 Oct 2023 06:28:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1697722106; x=1698326906; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1697722128; x=1698326928; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tH+rtCHp8sEuHFOScujW6ZyjYvw8dU0f7DGGGfLETEw=;
- b=OI4SeQRdyXlf/OUk5818AlPHXir2au7bPAjQHDK+WxDLxhiN26Fyn/T4elZDKW938/
- llBuTg+/zu9taT3z48aQ0K5cR3Z5o5Xj3BzXAJUmCxwKjuq9yCwE+qgKg2wXkPye0jLT
- oMdD5q8ONlmQOUfdFP3Vg5U2ZQr5i50oM+g+uW69n823n/RrSzK/ZdRXz7mLktTWMgq3
- CENrxQcvfB/ei+OpVcHqUdbwURuL2d52irT1ZFGQMDUODzoDI+G2/hgXr30NB5UvPgHz
- UadonGGf0g+TXNUJoL34eHQG9FhpV15YUi+zHgKWpH5lrZntlAHfYo8RrYlpoDwHu98a
- XWGg==
+ bh=Lbv6Sk5ZH5uzAfxjjvuVIe3nvy5tqV6Y7A+14bnftbI=;
+ b=pPKqVVCC+YyooDYgUGcjkpa1M7lm9YLcrHOQ80KrDe9kggIEaHEj7pM9QssrYvUMMu
+ sEUwA7cRT9B7fmZUc0FFbYaL0watM0+pvYC04Elmu9IAaPsebUQeQ6p1RL6xXUPyd50I
+ JZewWN7uzXrvUbLER3XBYT98CAn+uQ8C1Zm7mWlMLyUgMfDmAgAvBKbf/AHPbfBobr0V
+ okJexOTSIWCZRMsMhP57jU7MyLvyduTl4oW+reXZhaHip4Q7oMzYTTwy94b55nJzut3i
+ tREOQ0OITdDpcCP5/fsemfaeEdnpPYYorNo5y8USkYAtkhKIs0pJERQnKXV4hux6W57k
+ 9RMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697722106; x=1698326906;
+ d=1e100.net; s=20230601; t=1697722128; x=1698326928;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tH+rtCHp8sEuHFOScujW6ZyjYvw8dU0f7DGGGfLETEw=;
- b=clve32OwsBVD5h22QpYkhsgAUScmY50zrun+TrDGeXUx5/D+ZZFpUlrgZmjIdabnHk
- EZZOX79lDWoYvJkRxGK3Rq+uBCvZImZ1YjH0v7t7bs6Nnec6nhyQs80QK8EtcepaT3Rc
- pNlVh+S81TAvOeuKjtzCUCcNfMZa7Ghf7l/zh1Gu+AganRaHTdcRGEPMWRon/h2ZF04u
- 1tZrvjXM7mCp5CRpbfpxTT/kgDExH9ljOLoOY9dxtHqbN798lrNFEFP4RiYeAoE5eHvl
- U8nhhVv6kayPEFaJpzbo1AzJFphpTLsrrIH4c6q5kjoh+wIJ2BNYZttc8im7KrJtls/y
- OZZg==
-X-Gm-Message-State: AOJu0YwJgepyDk5FpS/JnGi9VtN+172zUiqEnQ3ByTXBN0xwmIH2gIG0
- rvSx61VzIQFpRXZx7MkD3W6/3IQR/cOMZxnzy3w=
-X-Google-Smtp-Source: AGHT+IHqBgV1Xim4tVW/3FUv2vyx3rzsErJFGgvrnYuMjVcVqsF8gxnfl8lwpbUYPvu7HSTpfTsO1A==
-X-Received: by 2002:a92:d642:0:b0:357:a04c:31d2 with SMTP id
- x2-20020a92d642000000b00357a04c31d2mr2386117ilp.16.1697722105918; 
- Thu, 19 Oct 2023 06:28:25 -0700 (PDT)
+ bh=Lbv6Sk5ZH5uzAfxjjvuVIe3nvy5tqV6Y7A+14bnftbI=;
+ b=UHnI69BLrZQdxqdV6btVK2o7bvqaLNZZ9Ux/0zPkiFK8nrLLpdIy59AC3IP3ytVFy8
+ E0m4glJTrTmp2WzVdtxe9HBRSKwCB3G8dPyQiO+FflkmfQqttzljc0Tfx7Ui/DpAfAgA
+ HF35FBMrwv1d/s6GuOhGxI2rMN/CYIoUbsQ+moRYXO/TAVCMhLab6YNOOBpD9MYYcLpp
+ BCQA4vRmTQE/BqJZQW6tdZC1KyrUc6SbdoTY6Xd3NTejDRb8GjBoQy70ZEF592INiPmY
+ 4KZ07vgsl25X6LRz4RpBG/k+7h3sDydZoaXXuTc8i37jf506rKmpu7Y7vYPBb4k17TKT
+ qJ1A==
+X-Gm-Message-State: AOJu0YzE3J9UtKlYHxvbk6msLBZuC2uwBMYXh1sGNG+cq1ANopyNBwtC
+ i801A7IsH4052i/F23DdpsRY2rZ4eDkJ+O+B2cY=
+X-Google-Smtp-Source: AGHT+IEscyKvjPW+EoRAQFhw0OTj6n2cbZ7ZpueQDafNhx6bMV8sf+PYxhXgPG7JaWiiyiIGgxy8uA==
+X-Received: by 2002:a05:6358:9f85:b0:139:9fc3:eade with SMTP id
+ fy5-20020a0563589f8500b001399fc3eademr2030306rwb.29.1697722127863; 
+ Thu, 19 Oct 2023 06:28:47 -0700 (PDT)
 Received: from sunil-laptop.dc1.ventanamicro.com
  ([2409:4071:6e8b:3a98:dd76:4e82:7da6:44ab])
  by smtp.gmail.com with ESMTPSA id
- f11-20020a056a00228b00b0068feb378b89sm5273113pfe.171.2023.10.19.06.28.18
+ f11-20020a056a00228b00b0068feb378b89sm5273113pfe.171.2023.10.19.06.28.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Oct 2023 06:28:25 -0700 (PDT)
+ Thu, 19 Oct 2023 06:28:47 -0700 (PDT)
 From: Sunil V L <sunilvl@ventanamicro.com>
 To: qemu-riscv@nongnu.org,
 	qemu-arm@nongnu.org,
@@ -78,16 +78,16 @@ Cc: Shannon Zhao <shannon.zhaosl@gmail.com>,
  Andrew Jones <ajones@ventanamicro.com>,
  Atish Kumar Patra <atishp@rivosinc.com>, Haibo Xu <haibo1.xu@intel.com>,
  Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH v3 09/12] hw/pci-host/gpex: Define properties for MMIO ranges
-Date: Thu, 19 Oct 2023 18:56:45 +0530
-Message-Id: <20231019132648.23703-10-sunilvl@ventanamicro.com>
+Subject: [PATCH v3 12/12] hw/riscv/virt-acpi-build.c: Add PLIC in MADT
+Date: Thu, 19 Oct 2023 18:56:48 +0530
+Message-Id: <20231019132648.23703-13-sunilvl@ventanamicro.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231019132648.23703-1-sunilvl@ventanamicro.com>
 References: <20231019132648.23703-1-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::134;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-il1-x134.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c36;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-oo1-xc36.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -110,117 +110,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-ACPI DSDT generator needs information like ECAM range, PIO range, 32-bit
-and 64-bit PCI MMIO range etc related to the PCI host bridge. Instead of
-making these values machine specific, create properties for the GPEX host
-bridge with default value 0. During initialization, the firmware can
-initialize these properties with correct values for the platform. This
-basically allows DSDT generator code independent of the machine specific
-memory map accesses.
+Add PLIC structures for each socket in the MADT when system is configured
+with PLIC as the external interrupt controller.
 
-Suggested-by: Igor Mammedov <imammedo@redhat.com>
+Signed-off-by: Haibo Xu <haibo1.xu@intel.com>
 Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
 ---
- hw/pci-host/gpex-acpi.c    | 13 +++++++++++++
- hw/pci-host/gpex.c         | 12 ++++++++++++
- include/hw/pci-host/gpex.h | 28 ++++++++++++++++++++--------
- 3 files changed, 45 insertions(+), 8 deletions(-)
+ hw/riscv/virt-acpi-build.c | 29 +++++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
 
-diff --git a/hw/pci-host/gpex-acpi.c b/hw/pci-host/gpex-acpi.c
-index 1092dc3b70..f69413ea2c 100644
---- a/hw/pci-host/gpex-acpi.c
-+++ b/hw/pci-host/gpex-acpi.c
-@@ -281,3 +281,16 @@ void acpi_dsdt_add_gpex(Aml *scope, struct GPEXConfig *cfg)
+diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+index 2f1cc92f75..d1761ddddf 100644
+--- a/hw/riscv/virt-acpi-build.c
++++ b/hw/riscv/virt-acpi-build.c
+@@ -85,6 +85,12 @@ static void riscv_acpi_madt_add_rintc(uint32_t uid,
+                                       arch_ids->cpus[uid].props.node_id,
+                                       local_cpu_id),
+                                   4);
++    } else if (aia_type == VIRT_AIA_TYPE_NONE) {
++        build_append_int_noprefix(entry,
++                                  ACPI_BUILD_INTC_ID(
++                                      arch_ids->cpus[uid].props.node_id,
++                                      2 * local_cpu_id + 1),
++                                  4);
+     } else {
+         build_append_int_noprefix(entry, 0, 4);
+     }
+@@ -513,6 +519,29 @@ static void build_madt(GArray *table_data,
+             build_append_int_noprefix(table_data,
+                                       s->memmap[VIRT_APLIC_S].size, 4);
+         }
++    } else {
++        /* PLICs */
++        for (socket = 0; socket < riscv_socket_count(ms); socket++) {
++            aplic_addr = s->memmap[VIRT_PLIC].base +
++                         s->memmap[VIRT_PLIC].size * socket;
++            gsi_base = VIRT_IRQCHIP_NUM_SOURCES * socket;
++            build_append_int_noprefix(table_data, 0x1B, 1);   /* Type */
++            build_append_int_noprefix(table_data, 36, 1);     /* Length */
++            build_append_int_noprefix(table_data, 1, 1);      /* Version */
++            build_append_int_noprefix(table_data, socket, 1); /* PLIC ID */
++            build_append_int_noprefix(table_data, 0, 8);      /* Hardware ID */
++            /* Total External Interrupt Sources Supported */
++            build_append_int_noprefix(table_data,
++                                      VIRT_IRQCHIP_NUM_SOURCES - 1, 2);
++            build_append_int_noprefix(table_data, 0, 2);     /* Max priority */
++            build_append_int_noprefix(table_data, 0, 4);     /* Flags */
++            /* PLIC Size */
++            build_append_int_noprefix(table_data, s->memmap[VIRT_PLIC].size, 4);
++            /* PLIC Address */
++            build_append_int_noprefix(table_data, aplic_addr, 8);
++            /* Global System Interrupt Vector Base */
++            build_append_int_noprefix(table_data, gsi_base, 4);
++        }
+     }
  
-     crs_range_set_free(&crs_range_set);
- }
-+
-+void acpi_dsdt_add_gpex_host(Aml *scope, uint32_t irq)
-+{
-+    bool ambig;
-+    Object *obj = object_resolve_path_type("", TYPE_GPEX_HOST, &ambig);
-+
-+    if (!obj || ambig) {
-+        return;
-+    }
-+
-+    GPEX_HOST(obj)->gpex_cfg.irq = irq;
-+    acpi_dsdt_add_gpex(scope, &GPEX_HOST(obj)->gpex_cfg);
-+}
-diff --git a/hw/pci-host/gpex.c b/hw/pci-host/gpex.c
-index a6752fac5e..41f4e73f6e 100644
---- a/hw/pci-host/gpex.c
-+++ b/hw/pci-host/gpex.c
-@@ -154,6 +154,18 @@ static Property gpex_host_properties[] = {
-      */
-     DEFINE_PROP_BOOL("allow-unmapped-accesses", GPEXHost,
-                      allow_unmapped_accesses, true),
-+    DEFINE_PROP_UINT64(PCI_HOST_ECAM_BASE, GPEXHost, gpex_cfg.ecam.base, 0),
-+    DEFINE_PROP_SIZE(PCI_HOST_ECAM_SIZE, GPEXHost, gpex_cfg.ecam.size, 0),
-+    DEFINE_PROP_UINT64(PCI_HOST_PIO_BASE, GPEXHost, gpex_cfg.pio.base, 0),
-+    DEFINE_PROP_SIZE(PCI_HOST_PIO_SIZE, GPEXHost, gpex_cfg.pio.size, 0),
-+    DEFINE_PROP_UINT64(PCI_HOST_BELOW_4G_MMIO_BASE, GPEXHost,
-+                       gpex_cfg.mmio32.base, 0),
-+    DEFINE_PROP_SIZE(PCI_HOST_BELOW_4G_MMIO_SIZE, GPEXHost,
-+                     gpex_cfg.mmio32.size, 0),
-+    DEFINE_PROP_UINT64(PCI_HOST_ABOVE_4G_MMIO_BASE, GPEXHost,
-+                       gpex_cfg.mmio64.base, 0),
-+    DEFINE_PROP_SIZE(PCI_HOST_ABOVE_4G_MMIO_SIZE, GPEXHost,
-+                     gpex_cfg.mmio64.size, 0),
-     DEFINE_PROP_END_OF_LIST(),
- };
- 
-diff --git a/include/hw/pci-host/gpex.h b/include/hw/pci-host/gpex.h
-index b0240bd768..441c6b8b20 100644
---- a/include/hw/pci-host/gpex.h
-+++ b/include/hw/pci-host/gpex.h
-@@ -40,6 +40,15 @@ struct GPEXRootState {
-     /*< public >*/
- };
- 
-+struct GPEXConfig {
-+    MemMapEntry ecam;
-+    MemMapEntry mmio32;
-+    MemMapEntry mmio64;
-+    MemMapEntry pio;
-+    int         irq;
-+    PCIBus      *bus;
-+};
-+
- struct GPEXHost {
-     /*< private >*/
-     PCIExpressHost parent_obj;
-@@ -55,19 +64,22 @@ struct GPEXHost {
-     int irq_num[GPEX_NUM_IRQS];
- 
-     bool allow_unmapped_accesses;
--};
- 
--struct GPEXConfig {
--    MemMapEntry ecam;
--    MemMapEntry mmio32;
--    MemMapEntry mmio64;
--    MemMapEntry pio;
--    int         irq;
--    PCIBus      *bus;
-+    struct GPEXConfig gpex_cfg;
- };
- 
- int gpex_set_irq_num(GPEXHost *s, int index, int gsi);
- 
- void acpi_dsdt_add_gpex(Aml *scope, struct GPEXConfig *cfg);
-+void acpi_dsdt_add_gpex_host(Aml *scope, uint32_t irq);
-+
-+#define PCI_HOST_PIO_BASE               "pio-base"
-+#define PCI_HOST_PIO_SIZE               "pio-size"
-+#define PCI_HOST_ECAM_BASE              "ecam-base"
-+#define PCI_HOST_ECAM_SIZE              "ecam-size"
-+#define PCI_HOST_BELOW_4G_MMIO_BASE     "below-4g-mmio-base"
-+#define PCI_HOST_BELOW_4G_MMIO_SIZE     "below-4g-mmio-size"
-+#define PCI_HOST_ABOVE_4G_MMIO_BASE     "above-4g-mmio-base"
-+#define PCI_HOST_ABOVE_4G_MMIO_SIZE     "above-4g-mmio-size"
- 
- #endif /* HW_GPEX_H */
+     acpi_table_end(linker, &table);
 -- 
 2.34.1
 
