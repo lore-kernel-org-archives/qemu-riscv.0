@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B8D9CDB482
-	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Oct 2023 06:57:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B359BCDB465
+	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Oct 2023 06:57:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qtMxj-0007dY-Ex; Thu, 19 Oct 2023 02:56:55 -0400
+	id 1qtMy9-0008Hr-UN; Thu, 19 Oct 2023 02:57:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
- id 1qtMxi-0007bY-02
- for qemu-riscv@nongnu.org; Thu, 19 Oct 2023 02:56:54 -0400
-Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
+ id 1qtMy8-0008DT-Mn
+ for qemu-riscv@nongnu.org; Thu, 19 Oct 2023 02:57:20 -0400
+Received: from mail-vk1-xa32.google.com ([2607:f8b0:4864:20::a32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
- id 1qtMxg-0002lk-8u
- for qemu-riscv@nongnu.org; Thu, 19 Oct 2023 02:56:53 -0400
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-1caad0bcc95so9116895ad.0
- for <qemu-riscv@nongnu.org>; Wed, 18 Oct 2023 23:56:51 -0700 (PDT)
+ id 1qtMy7-0003LV-7c
+ for qemu-riscv@nongnu.org; Thu, 19 Oct 2023 02:57:20 -0400
+Received: by mail-vk1-xa32.google.com with SMTP id
+ 71dfb90a1353d-49ab0641e77so3334195e0c.0
+ for <qemu-riscv@nongnu.org>; Wed, 18 Oct 2023 23:57:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1697698610; x=1698303410; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1697698638; x=1698303438; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=bSf8gEwh2FgjAbvUivUkN713PBcoBMD4z6Ks6W+a29Q=;
- b=H0SaOx02mttbe42V0woHZYipMImxBnr27o5Bx4MwlrihjEWdQ0psYAa7AlY/cSiIot
- tYvb2esi7GgAAzZCKcDIa2UAghr7qkYpubSL1ac2OeCtGLLHhVMhsNXcINSaaqKNaUpm
- 0HLuzVcS9n6pKgT2sRJDzmzZavoncBPrHcz7J6giyBUFINkWconRCy7s3oc4DQxWYtNT
- 8p8QWADErDlD26VN5oYyFSuZEW/qjts6jufFmTOoy8QnofEoljRGBFuPzX6Q1KSyx2s+
- ngoft/l8YsNpW/5MEwMMZt9y8qaq12d6KnW1yi2JC6JwVNVUiDlAi9iiFeCt4LKXeRAp
- 5cyA==
+ bh=13SABzWd+/6ya1JIbLuZWuCeDNwTBBsFb2keX55uldQ=;
+ b=CvyQppM1JAv+Ta/Myw8jtEzh72UDXOUwkKQ34zNMH6rCiu5GBQ+pIcsibIDiZMDeS4
+ DAIucRAKUAu6OI0wjS4zakLzYp1jfa84jJQ9kqDSMLL5SiDDB0ILyC9ht8mZSlK33hzO
+ pIXglLgppR/YExqAevk771kjQ6OpsfGA20nX477Wd4wJUEfHR1gMgcpmdBQm8ykgtWEn
+ 1Hw+0JICVswAF1Xb1RgausQ5JFvW8qPOJXUaKEbtsW0l8jjZMduLjIoiSMKnbF5nFZKn
+ qaYw0GCY7d4c9WAxYxjyxwUcTZRaixYXS4Jzl7Rdghm4LcyeUQHG3iHRZXmIeJ4uYYBx
+ LH3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697698610; x=1698303410;
+ d=1e100.net; s=20230601; t=1697698638; x=1698303438;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=bSf8gEwh2FgjAbvUivUkN713PBcoBMD4z6Ks6W+a29Q=;
- b=kMTADMxeBsLt3bYSkISjTgc+vYMpZnJWEyxJaGFkENEDxP8ReQyx8eH51bm03gJQW6
- jVA9y6ls7N/jTyBC2BC7bZlanD8vqxgqCl5DGG9rxo4eyETkE6+VjjkSO9ukxnFcyA6Y
- UdLKV+lGlRGTcUw1TCOMRvuIagFKorVJghU7FJxR3BVln39Gf8QkjauPPxdsOu3knJRA
- GjQolFIrXz/N6m0yNjK3nDrfQIXJB+QGRnu7XrlfGDapk9pwiKtwyn+j+dpfpfftyOb5
- qisQ6qYtGmZW5EcxtRfN0l6ZWmqy7LQkXGSKUNpy0cTjJiT1s3sb8PSTGeAgFFLqBBmK
- ZipA==
-X-Gm-Message-State: AOJu0Yymj4RpSBJYUlHbIZ3NH7mADpR7YEVOOhStuyalccW+bCcmyY4v
- nB+V/hnLLiGoXFUFo9vTnHC3jUkCZOFRwmUssmBvlw==
-X-Google-Smtp-Source: AGHT+IFfT78Md+9Ka8YH610n8fijuNHYtrhSd2wsQwvV9Luf/wDRs3Y9TaKMFUbYtMkcleFXK68N/g==
-X-Received: by 2002:a17:903:320c:b0:1c9:e072:3398 with SMTP id
- s12-20020a170903320c00b001c9e0723398mr1508799plh.41.1697698610254; 
- Wed, 18 Oct 2023 23:56:50 -0700 (PDT)
+ bh=13SABzWd+/6ya1JIbLuZWuCeDNwTBBsFb2keX55uldQ=;
+ b=wNV/AFr56kWLp3JTwOmQbpgGJ0OOQrC/yWJ8Ss8dkFp0wGqa1ha1pJDmOQ0H560YRI
+ m8ZRDtoc5guVo0aKdtc+VaG9Q9AHgiJWZtBbZPgHkc/54pSN0E3sfo4S8oumH8BAsBmi
+ fjLpz7f1w2Pt//FD2F6sSKiuLoluc4iPiX0ZE96X59zNaKZAKE9JfOL7fE20FOOKzMA8
+ yrGeQXIB0k5Tr54N5NicHoPAdrzG6PhaIrEV15nYpbIY5MoXt9xu/M5QcskjnMrS9mzL
+ gsXzhTHUQ0MjAtp6e8ZI7fmXfqKy7nmvEbK9eg33knrmdrZs58cjpP20f+xlb6BghCr0
+ 5HsQ==
+X-Gm-Message-State: AOJu0Yw0CQnAEd+VyWcfZ+KhoMAJkRNCYk9VdIXtvzz+3FZjQtRLbi5T
+ svj4n+ZBaurLUS5Rjh42ZtjlD2TxleUnuTfUg1v5WQ==
+X-Google-Smtp-Source: AGHT+IGN06vSvTRUwEydkt3ddKCi+fAWRmpVop7IZIuTCspZADtwuJS/LKoYyVMvf0hMVxU2xsf+Tg==
+X-Received: by 2002:a05:6122:2222:b0:496:3906:33e3 with SMTP id
+ bb34-20020a056122222200b00496390633e3mr1107747vkb.15.1697698636336; 
+ Wed, 18 Oct 2023 23:57:16 -0700 (PDT)
 Received: from ThinkPad-T490.dc1.ventanamicro.com
  ([2401:4900:5302:9b99:4f57:4dc3:993d:4317])
  by smtp.googlemail.com with ESMTPSA id
- u8-20020a17090282c800b001b896d0eb3dsm1089917plz.8.2023.10.18.23.56.48
+ k15-20020aa7998f000000b00690bd3c0723sm4507288pfh.99.2023.10.18.23.57.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Oct 2023 23:56:49 -0700 (PDT)
+ Wed, 18 Oct 2023 23:57:16 -0700 (PDT)
 From: Mayuresh Chitale <mchitale@ventanamicro.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
 Cc: Mayuresh Chitale <mchitale@ventanamicro.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v2] target/riscv: pmp: Clear pmp/smepmp bits on reset
-Date: Thu, 19 Oct 2023 12:26:44 +0530
-Message-Id: <20231019065644.1431798-1-mchitale@ventanamicro.com>
+Subject: [PATCH v3] target/riscv: pmp: Ignore writes when RW=01
+Date: Thu, 19 Oct 2023 12:27:05 +0530
+Message-Id: <20231019065705.1431868-1-mchitale@ventanamicro.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
- envelope-from=mchitale@ventanamicro.com; helo=mail-pl1-x62b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a32;
+ envelope-from=mchitale@ventanamicro.com; helo=mail-vk1-xa32.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -93,88 +93,43 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-As per the Priv and Smepmp specifications, certain bits such as the 'L'
-bit of pmp entries and mseccfg.MML can only be cleared upon reset and it
-is necessary to do so to allow 'M' mode firmware to correctly reinitialize
-the pmp/smpemp state across reboots. As required by the spec, also clear
-the 'A' field of pmp entries.
+As per the Priv spec: "The R, W, and X fields form a collective WARL
+field for which the combinations with R=0 and W=1 are reserved."
+However currently such writes are not ignored as ought to be. The
+combinations with RW=01 are allowed only when the Smepmp extension
+is enabled and mseccfg.MML is set.
 
 Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
+Changes in v3:
+====
+- Rebase on latest riscv-to-apply.next
+- Add reviewed-by
 
 Changes in v2:
 ====
-- Rebase on latest riscv-to-apply.next
-- Clear 'A' field.
+- Default RW to 00 in case of an illegal value
 
- target/riscv/cpu.c | 11 +++++++++++
- target/riscv/pmp.c | 10 ++++++++++
- target/riscv/pmp.h |  2 ++
- 3 files changed, 23 insertions(+)
+ target/riscv/pmp.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index dad167833cc..491e0e46e2e 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -883,6 +883,17 @@ static void riscv_cpu_reset_hold(Object *obj)
-     }
-     /* mmte is supposed to have pm.current hardwired to 1 */
-     env->mmte |= (EXT_STATUS_INITIAL | MMTE_M_PM_CURRENT);
-+
-+    /*
-+     * Clear mseccfg and unlock all the PMP entries upon reset.
-+     * This is allowed as per the priv and smepmp specifications
-+     * and is needed to clear stale entries across reboots.
-+     */
-+    if (riscv_cpu_cfg(env)->ext_smepmp) {
-+        env->mseccfg = 0;
-+    }
-+
-+    pmp_unlock_entries(env);
- #endif
-     env->xl = riscv_cpu_mxl(env);
-     riscv_cpu_update_mask(env);
 diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 21d2489e27e..4dfaa28fce2 100644
+index 4dfaa28fce2..162e88a90a6 100644
 --- a/target/riscv/pmp.c
 +++ b/target/riscv/pmp.c
-@@ -135,6 +135,16 @@ static bool pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
-     return false;
- }
- 
-+void pmp_unlock_entries(CPURISCVState *env)
-+{
-+    uint32_t pmp_num = pmp_get_num_rules(env);
-+    int i;
-+
-+    for (i = 0; i < pmp_num; i++) {
-+        env->pmp_state.pmp[i].cfg_reg &= ~(PMP_LOCK | PMP_AMATCH);
-+    }
-+}
-+
- static void pmp_decode_napot(target_ulong a, target_ulong *sa,
-                              target_ulong *ea)
- {
-diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
-index cf5c99f8e68..9af8614cd4f 100644
---- a/target/riscv/pmp.h
-+++ b/target/riscv/pmp.h
-@@ -28,6 +28,7 @@ typedef enum {
-     PMP_READ  = 1 << 0,
-     PMP_WRITE = 1 << 1,
-     PMP_EXEC  = 1 << 2,
-+    PMP_AMATCH = (3 << 3),
-     PMP_LOCK  = 1 << 7
- } pmp_priv_t;
- 
-@@ -81,6 +82,7 @@ void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index);
- void pmp_update_rule_nums(CPURISCVState *env);
- uint32_t pmp_get_num_rules(CPURISCVState *env);
- int pmp_priv_to_page_prot(pmp_priv_t pmp_priv);
-+void pmp_unlock_entries(CPURISCVState *env);
- 
- #define MSECCFG_MML_ISSET(env) get_field(env->mseccfg, MSECCFG_MML)
- #define MSECCFG_MMWP_ISSET(env) get_field(env->mseccfg, MSECCFG_MMWP)
+@@ -123,6 +123,11 @@ static bool pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
+         if (locked) {
+             qemu_log_mask(LOG_GUEST_ERROR, "ignoring pmpcfg write - locked\n");
+         } else if (env->pmp_state.pmp[pmp_index].cfg_reg != val) {
++            /* If !mseccfg.MML then ignore writes with encoding RW=01 */
++            if ((val & PMP_WRITE) && !(val & PMP_READ) &&
++                !MSECCFG_MML_ISSET(env)) {
++                val &= ~(PMP_WRITE | PMP_READ);
++            }
+             env->pmp_state.pmp[pmp_index].cfg_reg = val;
+             pmp_update_rule_addr(env, pmp_index);
+             return true;
 -- 
 2.34.1
 
