@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69E47C001DF
-	for <qemu-riscv@archiver.kernel.org>; Fri, 20 Oct 2023 13:00:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12C39C0032E
+	for <qemu-riscv@archiver.kernel.org>; Fri, 20 Oct 2023 14:09:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qtp5I-0002i3-77; Fri, 20 Oct 2023 08:58:36 -0400
+	id 1qtqBH-0001nk-6V; Fri, 20 Oct 2023 10:08:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1qtkwi-0007nU-UJ; Fri, 20 Oct 2023 04:33:28 -0400
-Received: from mgamail.intel.com ([198.175.65.9])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1qtkwc-0002LX-F0; Fri, 20 Oct 2023 04:33:28 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1697790802; x=1729326802;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=tExpAgCycKkq4Jarc0yvqd7IX/S0VLVWSqHREEBjgwQ=;
- b=cybAQ1mU/3zrFwXyTarWrFZP2ln6ennAbqmCk+cUFxxU4szb8W7ri/pF
- wOMkWvgdrlClYuas9mYC/iIxqCuQL97/m6/LrF34FAc/CSA2msLcYGr/e
- 6d2ebT9DYTWQcYJ8WsPdtJl4SHv4jgWkgsDQiSHsEesuyMgAUfm5/Z1KQ
- 2Jsp9lYFawAFGkLUrUsmz+urY0qTq8GiuEH1IxKakxTC3SlmjaZpbsie9
- hOUhsZwiiJAUJ+/bUfT1HOz2vP9PH+unFBcmZGvvFlBPcHspeFJ308uIx
- sgeNY5vGeyt+VZqG2SkReaowj76pVqjv4iMECs2W4C/vpMFGi/KxSjIYQ A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10868"; a="5064650"
-X-IronPort-AV: E=Sophos;i="6.03,238,1694761200"; 
-   d="scan'208";a="5064650"
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
- by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Oct 2023 01:33:17 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10868"; a="848018758"
-X-IronPort-AV: E=Sophos;i="6.03,238,1694761200"; d="scan'208";a="848018758"
-Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
- ([10.239.160.36])
- by FMSMGA003.fm.intel.com with ESMTP; 20 Oct 2023 01:33:12 -0700
-Date: Fri, 20 Oct 2023 16:44:50 +0800
-From: Zhao Liu <zhao1.liu@intel.com>
-To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, David Hildenbrand <david@redhat.com>,
- Weiwei Li <liweiwei@iscas.ac.cn>, qemu-s390x@nongnu.org,
- Ilya Leoshkevich <iii@linux.ibm.com>, Bin Meng <bin.meng@windriver.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Cameron Esfahani <dirty@apple.com>, qemu-ppc@nongnu.org,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- qemu-riscv@nongnu.org, Max Filippov <jcmvbkbc@gmail.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- =?iso-8859-1?Q?C=E9dric?= Le Goater <clg@kaod.org>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Thomas Huth <thuth@redhat.com>, Roman Bolshakov <rbolshakov@ddn.com>,
- Nicholas Piggin <npiggin@gmail.com>
-Subject: Re: [PATCH 5/6] target/i386/hvf: Use x86_cpu in
- simulate_[rdmsr|wrmsr]()
-Message-ID: <ZTI+Al+V69uMJnfA@intel.com>
-References: <20231009110239.66778-1-philmd@linaro.org>
- <20231009110239.66778-6-philmd@linaro.org>
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qtqBE-0001l7-0h
+ for qemu-riscv@nongnu.org; Fri, 20 Oct 2023 10:08:48 -0400
+Received: from mail-lj1-x22e.google.com ([2a00:1450:4864:20::22e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qtqB9-0000G0-Ek
+ for qemu-riscv@nongnu.org; Fri, 20 Oct 2023 10:08:45 -0400
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2c51388ccebso12815811fa.3
+ for <qemu-riscv@nongnu.org>; Fri, 20 Oct 2023 07:08:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1697810921; x=1698415721; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=mD+mtuR9y47g2JJlaAJDMPPS1KcwIe47DWnTIUKNwuA=;
+ b=heCFkl8EtB0UjrUAKkLnCK1w1wr0WVyv4sDyAV3yYxjziFEXdjTP9Ef6UrMIE/aYL7
+ iXnm2w370Z5thFYkHhBFAjzc3S5aa++o8IAfiE4yn4qiYGp+kWz+OHRAZnDYeKGPrNvk
+ fyShya879YPSRBlZ/8R+OQtsZeLfOeg/ZyPB6vs5FImqtYTjN0EoPEl351xSsc945zk6
+ HQ0YvzFT9P9UYADx+rGKSG9vZEZW0fyREd970qW/cCtVW88sEfq3SLypY+/bWcvDSeAF
+ jPn5cedjyO8jocBVl1ixU+b+QwmOCGcGE0TqvY4QvBSftRM0qvkVBFLQXSYhpkGFcnm8
+ 62tA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697810921; x=1698415721;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=mD+mtuR9y47g2JJlaAJDMPPS1KcwIe47DWnTIUKNwuA=;
+ b=rPYGYgNBLo2gVjJXBOCy974W/xpYhLAGhpbV9zmqQa6hJ6IuWHqudXesT8+7br2uHY
+ OcDa6AbCPA5fbj2Lj+0SEI3xce1dajDpQyOVX9zz+a/CzCXkhXv845OsqpqupcjmJxeV
+ cDePw7uptoUafUs0/For+V+NB6QqQX0kh7WtrQbOZoDHqRrhSyTDXxb5TYlHDXOp1Oem
+ 0yEdkYKYvI9+Hq0W5GbPb8xEziylAUvUXvhRhDUUhfwwLEXwetCjs7UwHXJgcQbdOKwn
+ eRiPlwK/ewbroFoYVg98oTPKswvQQwII+3n+1ozHCEv76zS/HEFBxiZ3zJ5fJuPCrNns
+ zPBQ==
+X-Gm-Message-State: AOJu0YwfJPaDa2s1GjrxTCX4xy0inSdhHom84/6/tkB5Olbx91jk+8TE
+ ByLv7fC4mE3p61EnBLaK0EgMWg==
+X-Google-Smtp-Source: AGHT+IFlzm3BZ1UhJKKsl+ECL4vK7gy0iPgpfNqMN6LsNC4EoQvpOOvAJpxoMfFO2KuQ4ztA73QPUA==
+X-Received: by 2002:a2e:81d6:0:b0:2c5:1553:9129 with SMTP id
+ s22-20020a2e81d6000000b002c515539129mr1696130ljg.35.1697810921523; 
+ Fri, 20 Oct 2023 07:08:41 -0700 (PDT)
+Received: from [192.168.69.115] (tbo33-h01-176-171-212-97.dsl.sta.abo.bbox.fr.
+ [176.171.212.97]) by smtp.gmail.com with ESMTPSA id
+ u1-20020a05600c210100b004068de50c64sm2213225wml.46.2023.10.20.07.08.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 20 Oct 2023 07:08:41 -0700 (PDT)
+Message-ID: <e0c83090-244d-b3cc-7127-39baa879b77d@linaro.org>
+Date: Fri, 20 Oct 2023 16:08:38 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.15.1
+Subject: Re: [PATCH] linux-user/riscv: change default cpu to 'max'
+Content-Language: en-US
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ Richard Henderson <richard.henderson@linaro.org>
+References: <20231020074501.283063-1-dbarboza@ventanamicro.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+In-Reply-To: <20231020074501.283063-1-dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20231009110239.66778-6-philmd@linaro.org>
-Received-SPF: pass client-ip=198.175.65.9; envelope-from=zhao1.liu@intel.com;
- helo=mgamail.intel.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::22e;
+ envelope-from=philmd@linaro.org; helo=mail-lj1-x22e.google.com
+X-Spam_score_int: -53
+X-Spam_score: -5.4
+X-Spam_bar: -----
+X-Spam_report: (-5.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-3.339,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 20 Oct 2023 08:58:30 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,49 +96,24 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Oct 09, 2023 at 01:02:38PM +0200, Philippe Mathieu-Daudé wrote:
-> Date: Mon,  9 Oct 2023 13:02:38 +0200
-> From: Philippe Mathieu-Daudé <philmd@linaro.org>
-> Subject: [PATCH 5/6] target/i386/hvf: Use x86_cpu in
->  simulate_[rdmsr|wrmsr]()
-> X-Mailer: git-send-email 2.41.0
+On 20/10/23 09:45, Daniel Henrique Barboza wrote:
+> Commit f57d5f8004 deprecated the 'any' CPU type but failed to change the
+> default CPU for linux-user. The result is that all linux-users
+> invocations that doesn't specify a different CPU started to show a
+> deprecation warning:
 > 
-> We already have 'x86_cpu = X86_CPU(cpu)'. Use the variable
-> instead of doing another QOM cast with X86_CPU().
+> $ ./build/qemu-riscv64  ./foo-novect.out
+> qemu-riscv64: warning: The 'any' CPU is deprecated and will be removed in the future.
 > 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Change the default CPU for RISC-V linux-user from 'any' to 'max'.
+> 
+> Reported-by: Richard Henderson <richard.henderson@linaro.org>
+> Fixes: f57d5f8004 ("target/riscv: deprecate the 'any' CPU type")
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > ---
->  target/i386/hvf/x86_emu.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+>   linux-user/riscv/target_elf.h | 3 +--
+>   1 file changed, 1 insertion(+), 2 deletions(-)
 
-Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
+Reviewed-by: Philippe Mathieu-DaudÃ© <philmd@linaro.org>
 
-> 
-> diff --git a/target/i386/hvf/x86_emu.c b/target/i386/hvf/x86_emu.c
-> index ccda568478..af1f205ecf 100644
-> --- a/target/i386/hvf/x86_emu.c
-> +++ b/target/i386/hvf/x86_emu.c
-> @@ -676,7 +676,7 @@ void simulate_rdmsr(struct CPUState *cpu)
->          val = rdtscp() + rvmcs(cpu->accel->fd, VMCS_TSC_OFFSET);
->          break;
->      case MSR_IA32_APICBASE:
-> -        val = cpu_get_apic_base(X86_CPU(cpu)->apic_state);
-> +        val = cpu_get_apic_base(x86_cpu->apic_state);
->          break;
->      case MSR_IA32_UCODE_REV:
->          val = x86_cpu->ucode_rev;
-> @@ -776,7 +776,7 @@ void simulate_wrmsr(struct CPUState *cpu)
->      case MSR_IA32_TSC:
->          break;
->      case MSR_IA32_APICBASE:
-> -        cpu_set_apic_base(X86_CPU(cpu)->apic_state, data);
-> +        cpu_set_apic_base(x86_cpu->apic_state, data);
->          break;
->      case MSR_FSBASE:
->          wvmcs(cpu->accel->fd, VMCS_GUEST_FS_BASE, data);
-> -- 
-> 2.41.0
-> 
-> 
-> 
 
