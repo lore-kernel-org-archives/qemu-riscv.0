@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33228C00A98
-	for <qemu-riscv@archiver.kernel.org>; Fri, 20 Oct 2023 12:59:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8774DC001DF
+	for <qemu-riscv@archiver.kernel.org>; Fri, 20 Oct 2023 12:59:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qtp5I-0002nQ-OH; Fri, 20 Oct 2023 08:58:36 -0400
+	id 1qtp5I-0002nU-Nx; Fri, 20 Oct 2023 08:58:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1qtiET-0001yz-M5; Fri, 20 Oct 2023 01:39:38 -0400
-Received: from mgamail.intel.com ([134.134.136.65])
+ id 1qtiHV-0001rD-32; Fri, 20 Oct 2023 01:42:45 -0400
+Received: from mgamail.intel.com ([134.134.136.31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1qtiEQ-0002GN-MP; Fri, 20 Oct 2023 01:39:37 -0400
+ id 1qtiHT-0002l6-At; Fri, 20 Oct 2023 01:42:44 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1697780374; x=1729316374;
+ t=1697780563; x=1729316563;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:content-transfer-encoding:in-reply-to;
- bh=5THOytgmg4oNLebsyKLqtM1EaWFPJeHdlAiScgBgbRM=;
- b=GsdI8XwCljuQMivBuHAJP4mFU1xCZj12cJYEVnG30TySVQh8d0mlj3It
- rVV91FFvdfGgQv8KJFAdaIwgKPvxUlVVVQ4dU0tFHWL30M70sqqtzHCNU
- EHi7lxZhTLYnJ19FTi28d/FsF03Yf1v3L6Qqi6b3OU+obB14leUqPy9hx
- UNA/E+icdNR7oxZbwLJyOTS4jKbx4QtHnsj/Jy2/bRMjL8XwyO1vrfpcr
- 5RgbPApmQdX5krymrKcaQO4gjkl6gElYkSSyd8bMgxDiGoG6PMo1UzmDC
- SuGrmxM3mXV0wp/P+f5kvu+c1k0R61LsP8Vziopf5UJR/kKLBCewvrJ7m A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10868"; a="390315888"
-X-IronPort-AV: E=Sophos;i="6.03,238,1694761200"; d="scan'208";a="390315888"
-Received: from orviesa001.jf.intel.com ([10.64.159.141])
- by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 Oct 2023 22:39:29 -0700
+ bh=M85QpS6g1ScTZoR7bP1pyrEzxvh1oaAtmh24F6M6lv8=;
+ b=kQflDmMZu5R+c2fVpH1NcKS7Ef9bh1UlUPm2QH0uA5KH37dvBBIQxwqh
+ NoVd2lUmRU054P4Js2gqKzVFCgMKWh55+DtDE4aA9VG+6s5v4hi30Dp1/
+ Ewq0HJHNyY/1X9nFsr2Hu2qCSJriPmIW6f6VtCio/676aJSxf+Sdbbp1P
+ K/+tJsI8h3An4dlZ1NPfW4Ff5+l06HOxSQ2C7IQi9ekz4/U/7AcUAZLmO
+ IHPUaxgKiTnZEREY5k4OUZcV7aB+qtN2Qf/24fZk3+KQxAZUlTlq7yGJX
+ 8dUeqV0Wn7PI8HVj3x85/xHbIgeyhnxE/b86rwW5Yj/RBE9FQPE64OAQK Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10868"; a="450659059"
+X-IronPort-AV: E=Sophos;i="6.03,238,1694761200"; d="scan'208";a="450659059"
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+ by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 19 Oct 2023 22:42:38 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.03,238,1694761200"; 
-   d="scan'208";a="5003820"
+X-IronPort-AV: E=McAfee;i="6600,9927,10868"; a="901038638"
+X-IronPort-AV: E=Sophos;i="6.03,238,1694761200"; d="scan'208";a="901038638"
 Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
  ([10.239.160.36])
- by orviesa001.jf.intel.com with ESMTP; 19 Oct 2023 22:38:09 -0700
-Date: Fri, 20 Oct 2023 13:50:57 +0800
+ by fmsmga001.fm.intel.com with ESMTP; 19 Oct 2023 22:40:14 -0700
+Date: Fri, 20 Oct 2023 13:54:00 +0800
 From: Zhao Liu <zhao1.liu@intel.com>
 To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, Eduardo Habkost <eduardo@habkost.net>,
@@ -76,25 +76,27 @@ Cc: qemu-devel@nongnu.org, Eduardo Habkost <eduardo@habkost.net>,
  Chris Wulff <crwulff@gmail.com>, Sergio Lopez <slp@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Ilya Leoshkevich <iii@linux.ibm.com>, Michael Rolnik <mrolnik@gmail.com>
-Subject: Re: [PATCH v2 00/16] target: Make 'cpu-qom.h' really target agnostic
-Message-ID: <ZTIVQfTmkK05fln9@intel.com>
+Subject: Re: [PATCH v2 13/16] target/i386: Declare CPU QOM types using
+ DEFINE_TYPES() macro
+Message-ID: <ZTIV+GyXWGNPW2fX@intel.com>
 References: <20231013140116.255-1-philmd@linaro.org>
+ <20231013140116.255-14-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20231013140116.255-1-philmd@linaro.org>
-Received-SPF: pass client-ip=134.134.136.65; envelope-from=zhao1.liu@intel.com;
+In-Reply-To: <20231013140116.255-14-philmd@linaro.org>
+Received-SPF: pass client-ip=134.134.136.31; envelope-from=zhao1.liu@intel.com;
  helo=mgamail.intel.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 20 Oct 2023 08:58:27 -0400
+X-Mailman-Approved-At: Fri, 20 Oct 2023 08:58:28 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -109,136 +111,117 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Philippe,
-
-On Fri, Oct 13, 2023 at 04:00:59PM +0200, Philippe Mathieu-Daudé wrote:
-> Date: Fri, 13 Oct 2023 16:00:59 +0200
+On Fri, Oct 13, 2023 at 04:01:12PM +0200, Philippe Mathieu-Daudé wrote:
+> Date: Fri, 13 Oct 2023 16:01:12 +0200
 > From: Philippe Mathieu-Daudé <philmd@linaro.org>
-> Subject: [PATCH v2 00/16] target: Make 'cpu-qom.h' really target agnostic
+> Subject: [PATCH v2 13/16] target/i386: Declare CPU QOM types using
+>  DEFINE_TYPES() macro
 > X-Mailer: git-send-email 2.41.0
 > 
-> Since v1:
-> - Added R-b tags
-> - Addressed Richard comments
-> - Postponed OBJECT_DECLARE_CPU_TYPE() changes
+> When multiple QOM types are registered in the same file,
+> it is simpler to use the the DEFINE_TYPES() macro. In
+> particular because type array declared with such macro
+> are easier to review.
 > 
-> A heterogeneous machine must be able to instantiate CPUs
-> from different architectures.
+> In few commits we are going to add more types, so replace
+> the type_register_static() to ease further reviews.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>  target/i386/cpu.c | 50 ++++++++++++++++++++++-------------------------
+>  1 file changed, 23 insertions(+), 27 deletions(-)
 
-Does this mean the different ISA cores in heterogeneous machine?
-And is this case for TCG?
-
-> In order to do that, the
-> common hw/ code has to access to the QOM CPU definitions
-> from various architecture.
-
-About this kind of heterogeneous machine with multiple CPUs, is there
-any initial configuration command line example?
-
-I'm not sure how to configure this case...The main unsure thing is
-whether the configuration is based on the granularity of the CPU
-(by "-cpu") or the granularity of the core device (by "-device
-xxx-core").
-
--Zhao
+Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 
 > 
-> Those QOM definitions are published in "target/foo/cpu-qom.h".
-> All 'cpu-qom.h' must be target agnostic, so hw/ can include
-> multiple of them in order to create a heterogeneous machine.
-> 
-> This series strengthen all (except PPC...) target 'cpu-qom.h',
-> making them target agnostic.
-> 
-> For various targets it is just a matter of moving definitions
-> where they belong (either 'cpu.h' or 'cpu-qom.h').
-> 
-> For few (mips/riscv/sparc/x86) we have to remove the target
-> specific definitions (which 'taint' the header as target specific).
-> 
-> For mips/sparc/x86 this implies splitting the base target
-> definition by making it explicit to the build type (32 or 64-bit).
-> 
-> PPC is missing because CPU types are currently registered
-> indistinctly, and whether a CPU is 32/64 bit can not be detected
-> at build time (it is done in each cpu_class_init() handler,
-> *after* the type is registered).
-> 
-> Based-on: <20231010074952.79165-1-philmd@linaro.org>
->   Introduce qtest_get_base_arch() / qtest_get_arch_bits()
-> 
-> Philippe Mathieu-Daudé (16):
->   target: Unify QOM style
->   target: Mention 'cpu-qom.h' is target agnostic
->   target/arm: Move internal declarations from 'cpu-qom.h' to 'cpu.h'
->   target/ppc: Remove CPU_RESOLVING_TYPE from 'cpu-qom.h'
->   target/riscv: Remove CPU_RESOLVING_TYPE from 'cpu-qom.h'
->   target: Declare FOO_CPU_TYPE_NAME/SUFFIX in 'cpu-qom.h'
->   target/hexagon: Declare QOM definitions in 'cpu-qom.h'
->   target/loongarch: Declare QOM definitions in 'cpu-qom.h'
->   target/nios2: Declare QOM definitions in 'cpu-qom.h'
->   target/openrisc: Declare QOM definitions in 'cpu-qom.h'
->   target/riscv: Move TYPE_RISCV_CPU_BASE definition to 'cpu.h'
->   target: Move ArchCPUClass definition to 'cpu.h'
->   target/i386: Declare CPU QOM types using DEFINE_TYPES() macro
->   target/mips: Declare CPU QOM types using DEFINE_TYPES() macro
->   target/ppc: Declare CPU QOM types using DEFINE_TYPES() macro
->   target/sparc: Declare CPU QOM types using DEFINE_TYPES() macro
-> 
->  target/alpha/cpu-qom.h      | 21 ++-----------
->  target/alpha/cpu.h          | 17 ++++++++---
->  target/arm/cpu-qom.h        | 61 +------------------------------------
->  target/arm/cpu.h            | 55 +++++++++++++++++++++++++++++++--
->  target/avr/cpu-qom.h        | 20 ++----------
->  target/avr/cpu.h            | 18 ++++++++---
->  target/cris/cpu-qom.h       | 24 ++-------------
->  target/cris/cpu.h           | 20 +++++++++---
->  target/hexagon/cpu-qom.h    | 27 ++++++++++++++++
->  target/hexagon/cpu.h        | 20 ++----------
->  target/hppa/cpu-qom.h       | 20 +-----------
->  target/hppa/cpu.h           | 16 ++++++++--
->  target/i386/cpu-qom.h       | 42 ++-----------------------
->  target/i386/cpu.h           | 39 +++++++++++++++++++++---
->  target/loongarch/cpu-qom.h  | 23 ++++++++++++++
->  target/loongarch/cpu.h      | 14 +--------
->  target/m68k/cpu-qom.h       | 21 ++-----------
->  target/m68k/cpu.h           | 17 ++++++++---
->  target/microblaze/cpu-qom.h | 20 +-----------
->  target/microblaze/cpu.h     | 15 +++++++--
->  target/mips/cpu-qom.h       | 23 ++------------
->  target/mips/cpu.h           | 21 ++++++++++---
->  target/nios2/cpu-qom.h      | 18 +++++++++++
->  target/nios2/cpu.h          | 11 +------
->  target/openrisc/cpu-qom.h   | 21 +++++++++++++
->  target/openrisc/cpu.h       | 14 +--------
->  target/ppc/cpu-qom.h        |  3 +-
->  target/ppc/cpu.h            |  4 +--
->  target/riscv/cpu-qom.h      | 26 ++--------------
->  target/riscv/cpu.h          | 24 +++++++++++++--
->  target/rx/cpu-qom.h         | 20 ++----------
->  target/rx/cpu.h             | 18 ++++++++---
->  target/s390x/cpu-qom.h      | 41 +++----------------------
->  target/s390x/cpu.h          | 34 ++++++++++++++++++---
->  target/s390x/cpu_models.h   |  8 ++---
->  target/sh4/cpu-qom.h        | 28 ++---------------
->  target/sh4/cpu.h            | 24 ++++++++++++---
->  target/sparc/cpu-qom.h      | 23 ++------------
->  target/sparc/cpu.h          | 22 +++++++++----
->  target/tricore/cpu-qom.h    | 15 +++------
->  target/tricore/cpu.h        | 10 +++---
->  target/xtensa/cpu-qom.h     | 26 ++--------------
->  target/xtensa/cpu.h         | 24 +++++++++++----
->  target/i386/cpu.c           | 50 ++++++++++++++----------------
->  target/mips/cpu.c           | 23 ++++++++------
->  target/ppc/cpu_init.c       | 52 ++++++++++++++-----------------
->  target/sparc/cpu.c          | 23 ++++++++------
->  47 files changed, 528 insertions(+), 588 deletions(-)
->  create mode 100644 target/hexagon/cpu-qom.h
->  create mode 100644 target/loongarch/cpu-qom.h
->  create mode 100644 target/nios2/cpu-qom.h
->  create mode 100644 target/openrisc/cpu-qom.h
-> 
+> diff --git a/target/i386/cpu.c b/target/i386/cpu.c
+> index 3aab05ddad..81b05d421c 100644
+> --- a/target/i386/cpu.c
+> +++ b/target/i386/cpu.c
+> @@ -4990,13 +4990,6 @@ static void max_x86_cpu_initfn(Object *obj)
+>                              &error_abort);
+>  }
+>  
+> -static const TypeInfo max_x86_cpu_type_info = {
+> -    .name = X86_CPU_TYPE_NAME("max"),
+> -    .parent = TYPE_X86_CPU,
+> -    .instance_init = max_x86_cpu_initfn,
+> -    .class_init = max_x86_cpu_class_init,
+> -};
+> -
+>  static char *feature_word_description(FeatureWordInfo *f, uint32_t bit)
+>  {
+>      assert(f->type == CPUID_FEATURE_WORD || f->type == MSR_FEATURE_WORD);
+> @@ -8018,19 +8011,6 @@ static void x86_cpu_common_class_init(ObjectClass *oc, void *data)
+>      }
+>  }
+>  
+> -static const TypeInfo x86_cpu_type_info = {
+> -    .name = TYPE_X86_CPU,
+> -    .parent = TYPE_CPU,
+> -    .instance_size = sizeof(X86CPU),
+> -    .instance_align = __alignof(X86CPU),
+> -    .instance_init = x86_cpu_initfn,
+> -    .instance_post_init = x86_cpu_post_initfn,
+> -
+> -    .abstract = true,
+> -    .class_size = sizeof(X86CPUClass),
+> -    .class_init = x86_cpu_common_class_init,
+> -};
+> -
+>  /* "base" CPU model, used by query-cpu-model-expansion */
+>  static void x86_cpu_base_class_init(ObjectClass *oc, void *data)
+>  {
+> @@ -8042,22 +8022,38 @@ static void x86_cpu_base_class_init(ObjectClass *oc, void *data)
+>      xcc->ordering = 8;
+>  }
+>  
+> -static const TypeInfo x86_base_cpu_type_info = {
+> -        .name = X86_CPU_TYPE_NAME("base"),
+> -        .parent = TYPE_X86_CPU,
+> -        .class_init = x86_cpu_base_class_init,
+> +static const TypeInfo x86_cpu_types[] = {
+> +    {
+> +        .name           = TYPE_X86_CPU,
+> +        .parent         = TYPE_CPU,
+> +        .abstract       = true,
+> +        .instance_size  = sizeof(X86CPU),
+> +        .instance_align = __alignof(X86CPU),
+> +        .instance_init  = x86_cpu_initfn,
+> +        .instance_post_init = x86_cpu_post_initfn,
+> +        .class_size     = sizeof(X86CPUClass),
+> +        .class_init     = x86_cpu_common_class_init,
+> +    }, {
+> +        .name           = X86_CPU_TYPE_NAME("base"),
+> +        .parent         = TYPE_X86_CPU,
+> +        .class_init     = x86_cpu_base_class_init,
+> +    }, {
+> +        .name           = X86_CPU_TYPE_NAME("max"),
+> +        .parent         = TYPE_X86_CPU,
+> +        .instance_init  = max_x86_cpu_initfn,
+> +        .class_init     = max_x86_cpu_class_init,
+> +    }
+>  };
+>  
+> +DEFINE_TYPES(x86_cpu_types)
+> +
+>  static void x86_cpu_register_types(void)
+>  {
+>      int i;
+>  
+> -    type_register_static(&x86_cpu_type_info);
+>      for (i = 0; i < ARRAY_SIZE(builtin_x86_defs); i++) {
+>          x86_register_cpudef_types(&builtin_x86_defs[i]);
+>      }
+> -    type_register_static(&max_x86_cpu_type_info);
+> -    type_register_static(&x86_base_cpu_type_info);
+>  }
+>  
+>  type_init(x86_cpu_register_types)
 > -- 
 > 2.41.0
+> 
+> 
 > 
 
