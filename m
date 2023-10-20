@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E327ACDB474
-	for <qemu-riscv@archiver.kernel.org>; Fri, 20 Oct 2023 16:41:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A35ECDB474
+	for <qemu-riscv@archiver.kernel.org>; Fri, 20 Oct 2023 16:41:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qtsVc-0003TO-6R; Fri, 20 Oct 2023 12:38:00 -0400
+	id 1qtsWq-0007OZ-Dn; Fri, 20 Oct 2023 12:39:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qtsVF-00035r-0U
- for qemu-riscv@nongnu.org; Fri, 20 Oct 2023 12:37:38 -0400
-Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qtsWi-0006WR-Nx
+ for qemu-riscv@nongnu.org; Fri, 20 Oct 2023 12:39:10 -0400
+Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qtsVB-0002SG-1f
- for qemu-riscv@nongnu.org; Fri, 20 Oct 2023 12:37:36 -0400
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-53dd752685fso1547056a12.3
- for <qemu-riscv@nongnu.org>; Fri, 20 Oct 2023 09:37:22 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qtsWh-0002tr-0T
+ for qemu-riscv@nongnu.org; Fri, 20 Oct 2023 12:39:08 -0400
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-9b9faf05f51so155443666b.2
+ for <qemu-riscv@nongnu.org>; Fri, 20 Oct 2023 09:39:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697819841; x=1698424641; darn=nongnu.org;
+ d=linaro.org; s=google; t=1697819943; x=1698424743; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zp11byryPsUZ+4H8wFI4Zq/E/xqbK9hz7sAlcv7KVqc=;
- b=pLFg/PqwhSxLxyBpw1me7T4KXzVJ/MTeFtyPi8i2DFSvz4V1SOGcmKqQPt3lOh1IKX
- pWHOF3VZ3bOnTtH/6uMNsOwUG44qWCBS+GVl2zoi2J2OIF/APym4TrQBRKhgv0SeavxC
- /JgPk4WEieSKaQGwpnin3b0l+7YnznBXqU9QvgBTyK1EohwGXaMs0VqhjErz60PXtRC/
- WrMzuzxGXSiAXkQenS8xQ5sFducfDLWTa/j6RRtulpWz2M7vIpcCADD5xetMU9rNg14u
- V6cfVEhduT3TmuYTI3Vl3TB4P9epli+zbi77/Hx9fkQTYLCPvK7FmfCOjLOLtID0odvc
- ldqQ==
+ bh=DwpnvxLwaI95t3fo0bAhEO0dcxZPMEfx1RWmGk2WvB8=;
+ b=Xr29MCCKrphnTBEUOCv1rm9Zx2q9loF4d4rUJqbYKPPd+OxCN01x5rMFb5T+ygKQEj
+ BUUaHkZ+Dk+YkbT0bfX8IjuYImBemIvNq7OyMHSG7lkFyzr44VIu8a1og/b4uQPOtsJw
+ 8KeyaWpemNkS5FWfVSbTj92MyyH3FLg6zGz8Uzu4+lTwvg/8eu59vGS4Y9xBS4Rx17ky
+ AkIepag9lUxTi5utxKt5EEu/hdxdfUVpE4z+RhGWRlti6af4KwMSyyOfntXK2t7Yn3/D
+ Se9n83NF/CzaxhHDUTAf3so8Eza2LnmXM7OUKJ7vIOnd8YYCz7VFDFd+HHAhgC6cVkRB
+ rXFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697819841; x=1698424641;
+ d=1e100.net; s=20230601; t=1697819943; x=1698424743;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zp11byryPsUZ+4H8wFI4Zq/E/xqbK9hz7sAlcv7KVqc=;
- b=fpRJ5gcTJp6MYnPsT/snyLg7Yah9A/4HR52CEORHBFnX2U0Ce2cPJgCMWxdmgkH5SM
- VAHEl3v6I1dVsTxoPjSAJo4zMG7dFH8/MZWsWGxIHXv8J8fhI9Ai5+4q80sqmczuTQIG
- neLv86qXZm27DrMuovYP+Id4O8iU5h5p2gyGUfNnPfjqZhjOGCsJMHjr2RL82v8aAnNh
- 4WQk1ZFOSr0ZbGTFvsGsqgpe2MElVb0pMS5wHCCbi3LXBoj0bPc+b196/xpmEMOFOX4/
- sbVHTL30rXalyse/AWAHURzQAl90O99KK5Aj8/L85EfevTrAwXtkb+riaJHtbte6hhSR
- 0fNQ==
-X-Gm-Message-State: AOJu0YxLrf/pJoGP1FaDm4gEwWaydlwExTQy3NHmo514Dhg+6EFtYpYm
- 7B8FQCjLDeIsvyJN44flB1gTvg==
-X-Google-Smtp-Source: AGHT+IEiQRd93j6ORFqt6LLksrDvAtJ4jFmSOqwmG0w/kRCYG+YCyMIOK8p9iSZNmwu/QJv5BPBqFg==
-X-Received: by 2002:a50:d542:0:b0:53f:a4f7:7bfb with SMTP id
- f2-20020a50d542000000b0053fa4f77bfbmr1827246edj.17.1697819841503; 
- Fri, 20 Oct 2023 09:37:21 -0700 (PDT)
+ bh=DwpnvxLwaI95t3fo0bAhEO0dcxZPMEfx1RWmGk2WvB8=;
+ b=suyEu50aDqlzsDxWcEAyZYcuzAL0ClJJPrzKOUvFefH4QjqKRtVYClzDl8yZiSW7N+
+ KGeKA2wDUDluditvyRXWov3XG0G81YBiqmceRXja8jiYnP0pC4g4LwgR9cVr9ZNTW6fO
+ OgYmQ+YBJ1iv80qc+vgM8JYaF8UlhBExTRTnDbKmwDYpjETM+wjU0VaArLaIASeO5mi2
+ FzSKpqNBW8Gf/OoHbKS9cYVGafqfBJ+rSIpT9rCi9IQFDNISckWsKdFQ12aELTA4ES0i
+ Draa292NPtOobB5a+JSvoXI1lPAiFwjwlOgyfQZfwH5MnD+bucQYzmgSI2a5Lx8Tdwoo
+ 7KIg==
+X-Gm-Message-State: AOJu0Ywcsh3nX4YCkPkxXujHwxzeCe+Lyix8xNHUjI7D7reyHWSy6k2A
+ 2KAVBPqE1hmaa50hpWtou9aVcg==
+X-Google-Smtp-Source: AGHT+IExBZusHKFknVzBT00DgnJ+sQMCFL/rUyxfIHrHrCZVWnyLQwtly/bAYRyP1CNICc3Jx8Qc4w==
+X-Received: by 2002:a17:907:80e:b0:9b2:aa2f:ab69 with SMTP id
+ wv14-20020a170907080e00b009b2aa2fab69mr1819995ejb.30.1697819943414; 
+ Fri, 20 Oct 2023 09:39:03 -0700 (PDT)
 Received: from m1x-phil.lan (tbo33-h01-176-171-212-97.dsl.sta.abo.bbox.fr.
  [176.171.212.97]) by smtp.gmail.com with ESMTPSA id
- n15-20020aa7c68f000000b0053eb9af1e15sm1738773edq.77.2023.10.20.09.37.19
+ 16-20020a170906019000b009b2c9476726sm1819672ejb.21.2023.10.20.09.39.01
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 20 Oct 2023 09:37:21 -0700 (PDT)
+ Fri, 20 Oct 2023 09:39:03 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Thomas Huth <thuth@redhat.com>,
@@ -69,18 +69,18 @@ Cc: Thomas Huth <thuth@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Zhao Liu <zhao1.liu@intel.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Song Gao <gaosong@loongson.cn>
-Subject: [PATCH 04/19] cpus: Filter for target specific CPU (loongarch)
-Date: Fri, 20 Oct 2023 18:36:26 +0200
-Message-ID: <20231020163643.86105-5-philmd@linaro.org>
+ Yoshinori Sato <ysato@users.sourceforge.jp>
+Subject: [PATCH 18/19] cpus: Replace first_cpu by qemu_get_cpu(0, TYPE_RX_CPU)
+Date: Fri, 20 Oct 2023 18:36:40 +0200
+Message-ID: <20231020163643.86105-19-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231020163643.86105-1-philmd@linaro.org>
 References: <20231020163643.86105-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::531;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x531.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62b;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x62b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,42 +103,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Enforce qemu_get_cpu() to return LoongArch CPUs in LoongArch
-specific files.
-
 Mechanical change using the following coccinelle script:
 
-  @@ expression index; @@
-  -   qemu_get_cpu(index, NULL)
-  +   qemu_get_cpu(index, TYPE_LOONGARCH_CPU)
+  @@ @@
+  -   first_cpu
+  +   qemu_get_cpu(0, TYPE_RX_CPU)
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/loongarch/virt.c | 4 ++--
+ hw/rx/rx-gdbsim.c | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
-index 902e32a3e3..83ca7d6b98 100644
---- a/hw/loongarch/virt.c
-+++ b/hw/loongarch/virt.c
-@@ -560,7 +560,7 @@ static void loongarch_irq_init(LoongArchMachineState *lams)
-      * +--------+ +---------+ +---------+
-      */
-     for (cpu = 0; cpu < ms->smp.cpus; cpu++) {
--        cpu_state = qemu_get_cpu(cpu, NULL);
-+        cpu_state = qemu_get_cpu(cpu, TYPE_LOONGARCH_CPU);
-         cpudev = DEVICE(cpu_state);
-         lacpu = LOONGARCH_CPU(cpu_state);
-         env = &(lacpu->env);
-@@ -594,7 +594,7 @@ static void loongarch_irq_init(LoongArchMachineState *lams)
-      * cpu_pin[9:2] <= intc_pin[7:0]
-      */
-     for (cpu = 0; cpu < MIN(ms->smp.cpus, EXTIOI_CPUS); cpu++) {
--        cpudev = DEVICE(qemu_get_cpu(cpu, NULL));
-+        cpudev = DEVICE(qemu_get_cpu(cpu, TYPE_LOONGARCH_CPU));
-         for (pin = 0; pin < LS3A_INTC_IP; pin++) {
-             qdev_connect_gpio_out(extioi, (cpu * 8 + pin),
-                                   qdev_get_gpio_in(cpudev, pin + 2));
+diff --git a/hw/rx/rx-gdbsim.c b/hw/rx/rx-gdbsim.c
+index 47c17026c7..091f83cc60 100644
+--- a/hw/rx/rx-gdbsim.c
++++ b/hw/rx/rx-gdbsim.c
+@@ -126,7 +126,7 @@ static void rx_gdbsim_init(MachineState *machine)
+          * the latter half of the SDRAM space.
+          */
+         kernel_offset = machine->ram_size / 2;
+-        rx_load_image(RX_CPU(first_cpu), kernel_filename,
++        rx_load_image(RX_CPU(qemu_get_cpu(0, TYPE_RX_CPU)), kernel_filename,
+                       SDRAM_BASE + kernel_offset, kernel_offset);
+         if (dtb_filename) {
+             ram_addr_t dtb_offset;
+@@ -152,7 +152,7 @@ static void rx_gdbsim_init(MachineState *machine)
+             qemu_register_reset_nosnapshotload(qemu_fdt_randomize_seeds,
+                                 rom_ptr(SDRAM_BASE + dtb_offset, dtb_size));
+             /* Set dtb address to R1 */
+-            RX_CPU(first_cpu)->env.regs[1] = SDRAM_BASE + dtb_offset;
++            RX_CPU(qemu_get_cpu(0, TYPE_RX_CPU))->env.regs[1] = SDRAM_BASE + dtb_offset;
+         }
+     }
+ }
 -- 
 2.41.0
 
