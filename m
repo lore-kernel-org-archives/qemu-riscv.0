@@ -4,97 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14BE1CDB474
-	for <qemu-riscv@archiver.kernel.org>; Fri, 20 Oct 2023 15:57:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B97ADCDB474
+	for <qemu-riscv@archiver.kernel.org>; Fri, 20 Oct 2023 16:37:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qtrsE-00029k-0e; Fri, 20 Oct 2023 11:57:18 -0400
+	id 1qtsUe-000282-Su; Fri, 20 Oct 2023 12:37:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1qtrsA-00027S-9H; Fri, 20 Oct 2023 11:57:14 -0400
-Received: from mgamail.intel.com ([134.134.136.31])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1qtrs5-0006z4-LT; Fri, 20 Oct 2023 11:57:13 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1697817429; x=1729353429;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=eut9DQ0KH5sVbMUaQq3B4rhI7/svi7cLTVzz7f15sMY=;
- b=HYIQoQC0CwbJMNVqEPs7tVYUURi49hK+2jr4mxXURdMwYNNYNEJWhbSm
- Ogw2WbKlTNQAahHik+IfcSSHMynn01KCs4Cz6iRialyEA5xo9vYIpAecr
- WLvMDQMItsNVwHfZzZtQuDot5y2uua2Cr5oNqzxjrFxIN44YKJlHpJd7I
- I7HhEnI7FjXGE8qjb+ewsQiigLpd81Li4GTodOb3Y5jGSdxuflcaQzgJu
- /w0hQ+C40hdeC28gxkN81PzLXTMg4ZNDtp0UlBHIleWpLqA6acseO9ju2
- 24HVNzIulS0LZQt7uE9awX2MaYwV5Wy09fWLHxxF+T6dlAUaTBkb3qBjN w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10869"; a="450751456"
-X-IronPort-AV: E=Sophos;i="6.03,239,1694761200"; d="scan'208";a="450751456"
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
- by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Oct 2023 08:57:04 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10869"; a="848117215"
-X-IronPort-AV: E=Sophos;i="6.03,239,1694761200"; d="scan'208";a="848117215"
-Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
- ([10.239.160.36])
- by FMSMGA003.fm.intel.com with ESMTP; 20 Oct 2023 08:56:53 -0700
-Date: Sat, 21 Oct 2023 00:08:31 +0800
-From: Zhao Liu <zhao1.liu@intel.com>
-To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, Eduardo Habkost <eduardo@habkost.net>,
- Xiaojuan Yang <yangxiaojuan@loongson.cn>,
- "Michael S. Tsirkin" <mst@redhat.com>, qemu-ppc@nongnu.org,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- David Hildenbrand <david@redhat.com>, qemu-s390x@nongnu.org,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Song Gao <gaosong@loongson.cn>, Paolo Bonzini <pbonzini@redhat.com>,
- Stafford Horne <shorne@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Yanan Wang <wangyanan55@huawei.com>, Max Filippov <jcmvbkbc@gmail.com>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- =?iso-8859-1?Q?C=E9dric?= Le Goater <clg@kaod.org>,
- Laurent Vivier <lvivier@redhat.com>,
- Aurelien Jarno <aurelien@aurel32.net>, qemu-riscv@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Bin Meng <bin.meng@windriver.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Nicholas Piggin <npiggin@gmail.com>, qemu-arm@nongnu.org,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Marek Vasut <marex@denx.de>, Laurent Vivier <laurent@vivier.eu>,
- Peter Maydell <peter.maydell@linaro.org>,
- Brian Cain <bcain@quicinc.com>, Thomas Huth <thuth@redhat.com>,
- Chris Wulff <crwulff@gmail.com>, Sergio Lopez <slp@redhat.com>,
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qtsUb-00021w-U3
+ for qemu-riscv@nongnu.org; Fri, 20 Oct 2023 12:36:58 -0400
+Received: from mail-lf1-x129.google.com ([2a00:1450:4864:20::129])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qtsUU-0002Kd-9n
+ for qemu-riscv@nongnu.org; Fri, 20 Oct 2023 12:36:57 -0400
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-507a55302e0so1302714e87.0
+ for <qemu-riscv@nongnu.org>; Fri, 20 Oct 2023 09:36:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1697819808; x=1698424608; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=pI/ALohNTygjWYZJ4KNy3EfaYpASbA7YyWD5BbOrL9M=;
+ b=j4JYzmVS3e9D3QS/gZO/ZVhca/wFwswI8ebdmZ+UN8Y2LQoY2ezKdnZX5l+FC/rDzb
+ ejBC60bK4O++xdhisLElenm7GtVlCF4f9Wgt/Cke2PPl0RKdVJpMkqev7Qa4CAXXiBBD
+ JhZoV4HAd5JC7pEEpH+RBzLNRy9MdMiYB0MfIW9oPV6HJX7BqFY/dEdfg0X8xJibQOgc
+ 7l1aLE5Mz6cKnpA4koeu8fAa4zBb0CyypduamPOjsWQ2rCc9WWAEjmhtcxDhlseUyo/9
+ dFJTw7b73j+U2QgJVn+IouG222mox1mLHKEvYcK6X48eZPXabHoAskfe/Hfiz7EjeHA2
+ 5CMA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697819808; x=1698424608;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pI/ALohNTygjWYZJ4KNy3EfaYpASbA7YyWD5BbOrL9M=;
+ b=Gz/y33WREsTqlgUpxYE/AJOZrKePyNyObtMEb/rWpxbpl4q+ry0RWejGxaj3eVatdJ
+ 3ItfJYK1oh9lcBucxS6sBWVF2NGW/22AT0KLMW1E2fnTB2b5+66Fgq74UCv+pz57HUy3
+ GX7HK8VQH06WrYwOJoMfu+Bay9208uObQYCwuZeHfj0ql/3OUsHifvnQaD/noj+u6jSC
+ TNQhcwk410pSwlW8A8hPzLW3heYW4Kn3FhT2dFbdCPEkxk4PcTzfrnBq4xTOXNxbQRBS
+ 2PK51kGUBYq1yg+dQ9hkvHEnuUlY+vaxN8+s3/VLIiDlUNr5h4M4R/+CsngIkDolegkl
+ A+Hg==
+X-Gm-Message-State: AOJu0YzeZUloYIGFDdFPb8p/Y1G0iswsyTFV9hrgpOAGVdrxhEMe22W0
+ Jgt2WLmJMCGqw/12qjSDfMZXQg==
+X-Google-Smtp-Source: AGHT+IH0HRtoxlheJWXcmfBy89wfyR4Dsk5kkRuvmKyASg/Ju/Aq5DB8mWvv9dxFiHpTNX0LSxHRnw==
+X-Received: by 2002:a05:6512:78f:b0:507:bb8e:b644 with SMTP id
+ x15-20020a056512078f00b00507bb8eb644mr1603987lfr.12.1697819808219; 
+ Fri, 20 Oct 2023 09:36:48 -0700 (PDT)
+Received: from m1x-phil.lan (tbo33-h01-176-171-212-97.dsl.sta.abo.bbox.fr.
+ [176.171.212.97]) by smtp.gmail.com with ESMTPSA id
+ p14-20020ac24ece000000b004fdde1db756sm429709lfr.26.2023.10.20.09.36.45
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Fri, 20 Oct 2023 09:36:47 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Thomas Huth <thuth@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>,
- Ilya Leoshkevich <iii@linux.ibm.com>, Michael Rolnik <mrolnik@gmail.com>
-Subject: Re: [PATCH v2 00/16] target: Make 'cpu-qom.h' really target agnostic
-Message-ID: <ZTKl/y4yxkli1pqy@intel.com>
-References: <20231013140116.255-1-philmd@linaro.org>
- <ZTIVQfTmkK05fln9@intel.com>
- <94280b39-a331-003d-f227-38c3e1b94434@linaro.org>
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>, qemu-arm@nongnu.org,
+ qemu-riscv@nongnu.org, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ qemu-ppc@nongnu.org, Eduardo Habkost <eduardo@habkost.net>,
+ "Michael S. Tsirkin" <mst@redhat.com>, qemu-s390x@nongnu.org,
+ Peter Maydell <peter.maydell@linaro.org>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Zhao Liu <zhao1.liu@intel.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 00/19] cpus: Step toward removing global 'first_cpu'
+Date: Fri, 20 Oct 2023 18:36:22 +0200
+Message-ID: <20231020163643.86105-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <94280b39-a331-003d-f227-38c3e1b94434@linaro.org>
-Received-SPF: pass client-ip=134.134.136.31; envelope-from=zhao1.liu@intel.com;
- helo=mgamail.intel.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::129;
+ envelope-from=philmd@linaro.org; helo=mail-lf1-x129.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -110,85 +99,213 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Philippe,
+Heterogeneous machines have different type of CPU.
+In that context, both 'first_cpu' and qemu_get_cpu(index)
+don't make much sense.
 
-On Fri, Oct 20, 2023 at 01:30:50PM +0200, Philippe Mathieu-Daudé wrote:
-> Date: Fri, 20 Oct 2023 13:30:50 +0200
-> From: Philippe Mathieu-Daudé <philmd@linaro.org>
-> Subject: Re: [PATCH v2 00/16] target: Make 'cpu-qom.h' really target
->  agnostic
-> 
-> Hi Zhao,
-> 
-> On 20/10/23 07:50, Zhao Liu wrote:
-> > Hi Philippe,
-> > 
-> > On Fri, Oct 13, 2023 at 04:00:59PM +0200, Philippe Mathieu-Daudé wrote:
-> > > Date: Fri, 13 Oct 2023 16:00:59 +0200
-> > > From: Philippe Mathieu-Daudé <philmd@linaro.org>
-> > > Subject: [PATCH v2 00/16] target: Make 'cpu-qom.h' really target agnostic
-> > > X-Mailer: git-send-email 2.41.0
-> > > 
-> > > Since v1:
-> > > - Added R-b tags
-> > > - Addressed Richard comments
-> > > - Postponed OBJECT_DECLARE_CPU_TYPE() changes
-> > > 
-> > > A heterogeneous machine must be able to instantiate CPUs
-> > > from different architectures.
-> > 
-> > Does this mean the different ISA cores in heterogeneous machine?
-> 
-> Yes. Currently the ARM target already allows you to do that
-> (multiple ISA cores within the same architecture), see the
-> xlnx-zcu102 and fby35 machines.
+This series first add a 'filter CPU type' argument to
+qemu_get_cpu(), so the behavior respects what we currently
+expect, then replace 'first_cpu' by a qemu_get_cpu(0) call.
 
-Okay, I'll have a look at it.
+Testing pass, but I'm still unsure about performance impact.
 
-> 
-> > And is this case for TCG?
-> 
-> This is *only* for TCG. I expect hardware accel + TCG to be
-> theoretically possible, but no interest has been shown for
-> it. Anyhow this requires heterogeneous TCG as a first step.
+With this series applied, what is left is:
 
-Thanks, got it.
+[OK]
 
-> 
-> > > In order to do that, the
-> > > common hw/ code has to access to the QOM CPU definitions
-> > > from various architecture.
-> > 
-> > About this kind of heterogeneous machine with multiple CPUs, is there
-> > any initial configuration command line example?
-> 
-> I'm prototyping in plain C but our plan is to start with a
-> QMP prototype. Command line configuration is not an option,
-> we decided to ignore it. I'll describe that better in a RFC
-> document I should post soon.
+ -  hw/core/generic-loader.c:127:        s->cpu = qemu_get_cpu(s->cpu_num, NULL);
+ -  linux-user/syscall.c:8990:        if (CPU_NEXT(first_cpu)) {
+ -  monitor/hmp-cmds-target.c:106:        cs = vcpu >= 0 ? qemu_get_cpu(vcpu, NULL) : mon_get_cpu(mon);
+ -  stats/stats-hmp-cmds.c:150:        CPUState *cpu = qemu_get_cpu(cpu_index, NULL);
+ -  system/cpus.c:754:    cpu = qemu_get_cpu(cpu_index, NULL);
 
-Looking forward to your RFC!
+[likely OK, we don't support heterogeneous accelerators]
 
-For accel, I am currently working in this direction (to convert all CPU
-topology levels to devices and to create heterogeneous topology via
-"-device") as the following:
+ -  accel/kvm/kvm-all.c:3581:    kvm_arch_on_sigbus_vcpu(first_cpu, code, addr);
+ -  accel/kvm/kvm-all.c:4255:    if (first_cpu) {
+ -  accel/kvm/kvm-all.c:4258:        query_stats_schema_vcpu(first_cpu, &stats_args);
 
--device cpu-socket,id=sock0 \
--device cpu-die,id=die0,parent=sock0 \
--device cpu-die,id=die1,parent=sock0 \
--device cpu-cluster,id=cluster0,parent=die0 \
--device cpu-cluster,id=cluster1,parent=die0 \
--device x86-intel-core,id=core0,parent=cluster0,threads=3 \
--device x86-intel-atom,id=core1,parent=cluster1,threads=2 \
--device x86-intel-core,id=core2,parent=cluster0,threads=3
+[need some toughts...]
 
-At present, I have a prototype and am sorting out the RFC.
-
-From your description, I understand that we have no conflict.
-Also welcome your thoughts and hope that I can go in the same
-direction with you. ;-)
+ -  accel/tcg/tcg-accel-ops-rr.c:114:        qemu_cond_wait_iothread(first_cpu->halt_cond);
+ -  accel/tcg/tcg-accel-ops-rr.c:200:    while (first_cpu->stopped) {
+ -  accel/tcg/tcg-accel-ops-rr.c:201:        qemu_cond_wait_iothread(first_cpu->halt_cond);
+ -  accel/tcg/tcg-accel-ops-rr.c:212:    cpu = first_cpu;
+ -  accel/tcg/tcg-accel-ops-rr.c:242:            cpu = first_cpu;
+ -  accel/tcg/tcg-accel-ops-rr.c:336:        cpu->thread_id = first_cpu->thread_id;
+ -  accel/tcg/tcg-accel-ops-rr.c:92:    if (!rr_kick_vcpu_timer && CPU_NEXT(first_cpu)) {
+ -  dump/win_dump.c:115:    if (cpu_memory_rw_debug(first_cpu,
+ -  dump/win_dump.c:128:    if (cpu_read_ptr(x64, first_cpu,
+ -  dump/win_dump.c:135:    if (cpu_memory_rw_debug(first_cpu, KiBugcheckData,
+ -  dump/win_dump.c:210:    if (cpu_memory_rw_debug(first_cpu,
+ -  dump/win_dump.c:258:    if (cpu_read_ptr(x64, first_cpu,
+ -  dump/win_dump.c:265:    if (cpu_memory_rw_debug(first_cpu,
+ -  dump/win_dump.c:286:        if (cpu_read_ptr(x64, first_cpu,
+ -  dump/win_dump.c:294:        if (cpu_read_ptr(x64, first_cpu,
+ -  dump/win_dump.c:378:        if (cpu_memory_rw_debug(first_cpu, Context,
+ -  dump/win_dump.c:384:        if (cpu_memory_rw_debug(first_cpu, Context,
+ -  dump/win_dump.c:400:        if (cpu_memory_rw_debug(first_cpu, saved_ctx[i].addr,
+ -  dump/win_dump.c:410:    X86CPU *first_x86_cpu = X86_CPU(first_cpu);
+ -  gdbstub/gdbstub.c:1521:    cc = CPU_GET_CLASS(first_cpu);
+ -  gdbstub/gdbstub.c:298:    CPUState *cpu = first_cpu;
+ -  gdbstub/system.c:338:    if (!first_cpu) {
+ -  hw/acpi/cpu.c:138:            if (!cdev->cpu || cdev->cpu == first_cpu) {
+ -  hw/acpi/cpu.c:150:            if (!cdev->cpu || cdev->cpu == first_cpu) {
+ -  hw/acpi/cpu.c:671:            if (CPU(arch_ids->cpus[i].cpu) != first_cpu) {
+ -  hw/core/generic-loader.c:134:        s->cpu = first_cpu;
+ -  monitor/hmp-cmds-target.c:39:    cpu = qemu_get_cpu(cpu_index, NULL);
+ -  monitor/hmp-cmds-target.c:62:        if (!first_cpu) {
+ -  monitor/hmp-cmds-target.c:65:        monitor_set_cpu(mon, first_cpu->cpu_index);
+ -  monitor/hmp-cmds-target.c:66:        cpu = first_cpu;
+ -  replay/replay-events.c:130:    qemu_cpu_kick(first_cpu);
+ -  system/cpu-timers.c:254:    } else if (first_cpu) {
+ -  system/cpu-timers.c:263:        async_run_on_cpu(first_cpu, do_nothing, RUN_ON_CPU_NULL);
+ -  system/memory_mapping.c:315:    first_paging_enabled_cpu = find_paging_enabled_cpu(first_cpu);
+ -  system/qtest.c:548:            address_space_write(first_cpu->as, ...
+ -  system/qtest.c:553:            address_space_write(first_cpu->as, ...
+ -  system/qtest.c:558:            address_space_write(first_cpu->as, ...
+ -  system/qtest.c:563:            address_space_write(first_cpu->as, ...
+ -  system/qtest.c:582:            address_space_read(first_cpu->as, ...
+ -  system/qtest.c:587:            address_space_read(first_cpu->as, ...
+ -  system/qtest.c:592:            address_space_read(first_cpu->as, ...
+ -  system/qtest.c:596:            address_space_read(first_cpu->as, ...
+ -  system/qtest.c:617:        address_space_read(first_cpu->as, ...
+ -  system/qtest.c:643:        address_space_read(first_cpu->as, ...
+ -  system/qtest.c:678:        address_space_write(first_cpu->as, ...
+ -  system/qtest.c:701:            address_space_write(first_cpu->as, ...
+ -  system/qtest.c:735:        address_space_write(first_cpu->as, ...
+ -  tests/qtest/fuzz/generic_fuzz.c:241:        mr1 = address_space_translate(first_cpu->as,
+ -  tests/qtest/fuzz/qtest_wrappers.c:110:        address_space_read(first_cpu->as, ...
+ -  tests/qtest/fuzz/qtest_wrappers.c:122:        address_space_read(first_cpu->as, ...
+ -  tests/qtest/fuzz/qtest_wrappers.c:134:        address_space_read(first_cpu->as, ...
+ -  tests/qtest/fuzz/qtest_wrappers.c:146:        address_space_read(first_cpu->as, ...
+ -  tests/qtest/fuzz/qtest_wrappers.c:157:        address_space_write(first_cpu->as, ...
+ -  tests/qtest/fuzz/qtest_wrappers.c:167:        address_space_write(first_cpu->as, ...
+ -  tests/qtest/fuzz/qtest_wrappers.c:177:        address_space_write(first_cpu->as, ...
+ -  tests/qtest/fuzz/qtest_wrappers.c:187:        address_space_write(first_cpu->as, ...
+ -  tests/qtest/fuzz/qtest_wrappers.c:197:        address_space_read(first_cpu->as, ...
+ -  tests/qtest/fuzz/qtest_wrappers.c:207:        address_space_read(first_cpu->as, ...
+ -  tests/qtest/fuzz/qtest_wrappers.c:218:        address_space_write(first_cpu->as, ...
+ -  tests/qtest/fuzz/qtest_wrappers.c:229:        address_space_write(first_cpu->as, ...
+ -  tests/qtest/fuzz/qtest_wrappers.c:242:        address_space_write(first_cpu->as, ...
 
 Regards,
-Zhao
+
+Phil.
+
+Based-on: <20231013140116.255-1-philmd@linaro.org>
+          "target: Make 'cpu-qom.h' really target agnostic" v2
+
+Philippe Mathieu-DaudÃ© (19):
+  cpus: Add argument to qemu_get_cpu() to filter CPUs by QOM type
+  cpus: Filter for target specific CPU (generic)
+  cpus: Filter for target specific CPU (arm)
+  cpus: Filter for target specific CPU (loongarch)
+  cpus: Filter for target specific CPU (mips)
+  cpus: Filter for target specific CPU (s390x)
+  cpus: Filter for target specific CPU (riscv)
+  cpus: Filter for target specific CPU (ppc)
+  cpus: Filter for target specific CPU (x86)
+  cpus: Replace first_cpu by qemu_get_cpu(0, TYPE_ARM_CPU)
+  cpus: Replace first_cpu by qemu_get_cpu(0, TYPE_POWERPC_CPU)
+  cpus: Replace first_cpu by qemu_get_cpu(0, TYPE_MIPS_CPU)
+  cpus: Replace first_cpu by qemu_get_cpu(0, TYPE_M68K_CPU)
+  cpus: Replace first_cpu by qemu_get_cpu(0, TYPE_S390X_CPU)
+  cpus: Replace first_cpu by qemu_get_cpu(0, TYPE_RISCV_CPU)
+  cpus: Replace first_cpu by qemu_get_cpu(0, TYPE_TRICORE_CPU)
+  cpus: Replace first_cpu by qemu_get_cpu(0, TYPE_SUPERH_CPU)
+  cpus: Replace first_cpu by qemu_get_cpu(0, TYPE_RX_CPU)
+  cpus: Replace first_cpu by qemu_get_cpu(0, TYPE_X86_CPU)
+
+ include/hw/core/cpu.h               |  3 ++-
+ target/mips/internal.h              |  2 +-
+ cpu-common.c                        |  5 ++++-
+ hw/arm/aspeed.c                     |  5 +++--
+ hw/arm/bananapi_m2u.c               |  3 ++-
+ hw/arm/boot.c                       | 14 +++++++-------
+ hw/arm/exynos4_boards.c             |  6 ++++--
+ hw/arm/fsl-imx7.c                   |  2 +-
+ hw/arm/highbank.c                   |  3 ++-
+ hw/arm/microbit.c                   |  3 ++-
+ hw/arm/mps2-tz.c                    |  3 ++-
+ hw/arm/mps2.c                       |  3 ++-
+ hw/arm/msf2-som.c                   |  3 ++-
+ hw/arm/musca.c                      |  3 ++-
+ hw/arm/netduino2.c                  |  3 ++-
+ hw/arm/netduinoplus2.c              |  2 +-
+ hw/arm/olimex-stm32-h405.c          |  2 +-
+ hw/arm/orangepi.c                   |  3 ++-
+ hw/arm/pxa2xx_gpio.c                |  2 +-
+ hw/arm/realview.c                   |  5 +++--
+ hw/arm/sbsa-ref.c                   |  7 ++++---
+ hw/arm/stellaris.c                  |  3 ++-
+ hw/arm/stm32vldiscovery.c           |  2 +-
+ hw/arm/vexpress.c                   |  5 +++--
+ hw/arm/virt-acpi-build.c            |  2 +-
+ hw/arm/virt.c                       | 25 ++++++++++++++-----------
+ hw/arm/xilinx_zynq.c                |  3 ++-
+ hw/arm/xlnx-versal-virt.c           |  2 +-
+ hw/core/generic-loader.c            |  2 +-
+ hw/cpu/a15mpcore.c                  |  4 ++--
+ hw/cpu/a9mpcore.c                   |  2 +-
+ hw/hyperv/hyperv.c                  |  2 +-
+ hw/i386/kvm/clock.c                 |  4 ++--
+ hw/i386/kvm/xen_evtchn.c            |  8 ++++----
+ hw/i386/kvmvapic.c                  |  3 ++-
+ hw/i386/microvm.c                   |  2 +-
+ hw/i386/pc.c                        |  7 ++++---
+ hw/i386/pc_piix.c                   |  3 ++-
+ hw/i386/x86.c                       |  2 +-
+ hw/intc/arm_gicv3_common.c          |  3 ++-
+ hw/intc/arm_gicv3_cpuif.c           |  2 +-
+ hw/intc/arm_gicv3_kvm.c             |  2 +-
+ hw/intc/m68k_irqc.c                 |  2 +-
+ hw/intc/mips_gic.c                  |  2 +-
+ hw/intc/riscv_aclint.c              |  2 +-
+ hw/intc/sh_intc.c                   |  6 ++++--
+ hw/intc/sifive_plic.c               |  4 ++--
+ hw/isa/lpc_ich9.c                   |  2 +-
+ hw/loongarch/virt.c                 | 10 +++++-----
+ hw/m68k/mcf5206.c                   |  2 +-
+ hw/mips/bootloader.c                |  3 ++-
+ hw/mips/cps.c                       |  5 +++--
+ hw/mips/loongson3_bootp.c           |  2 +-
+ hw/mips/loongson3_virt.c            |  7 ++++---
+ hw/mips/malta.c                     |  2 +-
+ hw/misc/mips_cpc.c                  |  4 ++--
+ hw/ppc/e500.c                       |  4 ++--
+ hw/ppc/ppc.c                        |  4 ++--
+ hw/ppc/ppce500_spin.c               |  2 +-
+ hw/ppc/prep_systemio.c              |  2 +-
+ hw/ppc/spapr.c                      | 11 ++++++-----
+ hw/ppc/spapr_caps.c                 | 10 +++++-----
+ hw/ppc/spapr_rtas.c                 |  2 +-
+ hw/ppc/spapr_vof.c                  |  2 +-
+ hw/ppc/vof.c                        |  3 ++-
+ hw/riscv/boot.c                     |  4 ++--
+ hw/riscv/opentitan.c                |  4 ++--
+ hw/rx/rx-gdbsim.c                   |  4 ++--
+ hw/s390x/ipl.c                      |  4 ++--
+ hw/s390x/s390-virtio-ccw.c          |  2 +-
+ hw/tricore/triboard.c               |  2 +-
+ monitor/hmp-cmds-target.c           |  4 ++--
+ stats/stats-hmp-cmds.c              |  2 +-
+ system/cpus.c                       |  2 +-
+ target/arm/arch_dump.c              |  6 +++---
+ target/i386/arch_dump.c             |  6 +++---
+ target/i386/kvm/kvm.c               |  6 +++---
+ target/i386/kvm/xen-emu.c           | 15 ++++++++-------
+ target/i386/monitor.c               |  2 +-
+ target/i386/tcg/sysemu/fpu_helper.c |  4 ++--
+ target/mips/cpu.c                   |  2 +-
+ target/mips/tcg/sysemu/cp0_helper.c | 10 +++++-----
+ target/mips/tcg/sysemu/tlb_helper.c |  2 +-
+ target/ppc/arch_dump.c              |  4 ++--
+ target/riscv/arch_dump.c            |  4 ++--
+ target/s390x/cpu_models.c           | 10 +++++-----
+ 86 files changed, 199 insertions(+), 163 deletions(-)
+
+-- 
+2.41.0
 
 
