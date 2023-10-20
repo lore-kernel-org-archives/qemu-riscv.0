@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA71DC46CA1
-	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Oct 2023 13:50:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81D9BCDB474
+	for <qemu-riscv@archiver.kernel.org>; Fri, 20 Oct 2023 07:45:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qtTO5-0002Sp-Br; Thu, 19 Oct 2023 09:48:35 -0400
+	id 1qtkC5-0002cG-2h; Fri, 20 Oct 2023 03:45:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qtTNw-0002MS-7e
- for qemu-riscv@nongnu.org; Thu, 19 Oct 2023 09:48:26 -0400
-Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431])
+ id 1qtkC2-0002bi-P8
+ for qemu-riscv@nongnu.org; Fri, 20 Oct 2023 03:45:14 -0400
+Received: from mail-oo1-xc2f.google.com ([2607:f8b0:4864:20::c2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qtTNu-00036j-BO
- for qemu-riscv@nongnu.org; Thu, 19 Oct 2023 09:48:23 -0400
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-6b36e1fcea0so4924681b3a.1
- for <qemu-riscv@nongnu.org>; Thu, 19 Oct 2023 06:48:20 -0700 (PDT)
+ id 1qtkC1-0002oq-2O
+ for qemu-riscv@nongnu.org; Fri, 20 Oct 2023 03:45:14 -0400
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-581e5a9413bso305658eaf.1
+ for <qemu-riscv@nongnu.org>; Fri, 20 Oct 2023 00:45:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1697723299; x=1698328099; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1697787908; x=1698392708; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=yOyWTz8Kx3JTuLtJa3OcB8g3zKWOaO0uiOsmwttm3zM=;
- b=olMe7vXeeOG5evdbbsxjPllVMsKtbXe1zYO8G51amDyJ4mTh3nmAmV5O3nZ5UGNGAy
- ADhuYl0tfz1MnSILcEk0Gu1l/v/+kw6Qx0J80LdF2StajoEyND+FiHTMqmo0DT2gz08O
- W/XnC+gVUeNo9usE6t7/8wRjhZjr3cUg73eBfVVrUNfRe/xi7/SUe4SnZfKkHk1KbjK8
- 9CJUF12u7tO98qNAEAcMuXfkJ8SGCvb57ALsm0GrWgI9QDKjnc7QbStPpgEZSb2xuMlG
- AhyJeGpbZ+24cp/JgLIOOMxAq47R/SIpvg30mCvG3byyQfoQ+n0K83qTp+k1ypJvavaR
- 1ILw==
+ bh=LvEO44krOC11m1g0j0FkwdjEkwOo9erBx/Axdtbc58Y=;
+ b=HIiS/UdAD2NTxN/hbl+/VAtOFDipSOR2yfCU0Xw/QanMCsqY/ZIY9PU2TCt+CA4oD4
+ mt937w+fWoufkXFXycoIt7/+dj2ycurUbUBobQWNSYUD3Gl/30GynASfdOAAtrpBlgMe
+ 1zgdc/fQRimtHqWPrjAkFOiG4fXHtRXXVHtTeGqR9VeXJjbaXevM9wRHPHySXwJmNqCU
+ zWGpVISvlno+YBJg9AvbLNLfnDp+z5zZlp66hTJyZhTcGaH2yIcspJ5m1r9WZ4jhy4rQ
+ frkSxRsBxhXJZJejphjCvO4+qppmauAqY3zFw6Nl/D4907JWzGfdxIRkJnDnWr2lsxyB
+ VwXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697723299; x=1698328099;
+ d=1e100.net; s=20230601; t=1697787908; x=1698392708;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=yOyWTz8Kx3JTuLtJa3OcB8g3zKWOaO0uiOsmwttm3zM=;
- b=rATKQgthHOvIp8KjPIY6j2v2uLHsQw2vEyLDP9Zh++bmgvTfem6iD/W58WdnIGtxFQ
- GXScfiXRy+lWm1kwoc3Px/BQ1TIBWmvPe9mNEDm7Wa9k389WhGtaU5cr7VcdCASh0C89
- bpBqZTYfoW8AlOENDgkKjTvONz9jcLsr8hKiLFsOH0uD3of/OKOScTYQRgKYQ/ypC80W
- adGW3VzdmdSRqiXKF/qxhSE5AaJOIvxBWNEFA2awyJMqQlJRtvGewA8EYiGL66ACP3Q0
- 7vkQY1WGPP63QijQFhlDqaudciEebw/V9Nmom5ctbnjhWrwr6IGoXzrMJCW97c+AegfQ
- 7ogA==
-X-Gm-Message-State: AOJu0YwnCDh3eO4ly9E+rIrnzbwsyJdHy+E9Ztxlxtumg/pGdPUlU1J+
- xiiAe4Fg84rgpau00LrHaKjLFGfTdA6hLM5PvQg=
-X-Google-Smtp-Source: AGHT+IGDqq9NLn+W+Ww4IffXpkHEDj1za97C5SqgqZYElEUdZjIATgXuJbCMZnDZhqaM+rpZG53F7w==
-X-Received: by 2002:a05:6a21:7891:b0:17b:6ef4:68a3 with SMTP id
- bf17-20020a056a21789100b0017b6ef468a3mr2243562pzc.57.1697723299632; 
- Thu, 19 Oct 2023 06:48:19 -0700 (PDT)
+ bh=LvEO44krOC11m1g0j0FkwdjEkwOo9erBx/Axdtbc58Y=;
+ b=hOSFBcko93G/PhaLwAtPHN1iPrtdsLEfer30v0FgUFl1dIQKLQo7BUjIxBtQJVw8+5
+ 7yHAn/6Kr/f+kyoZC09xU0TUzCr5CnXnqaUUhsGWPtvSb7uwZpyfucc7QKZNKRwKCTH+
+ b/ZhwkSIEmrnVb69wldmeBVG0yq3GVmGLchhgJhcB09cPVqO3ccO5XGnvzIl6w+fijLV
+ lc19egWE2XZLGpVyqJ2IYCtcP5rAaIcDcl19W8tNZkX2BT8wgfruYoyBDCWXbw7SpKXW
+ iG3Ppr6EitGaT2VMMzma0Y9XdQp4gpNequIb6xxACTMDDQyAwa5J/pvD0pnxcEljaIQ/
+ qeew==
+X-Gm-Message-State: AOJu0YxlucJbrVgy0NSzW59ZpQy7RtCwjw0WtGfM+cGASm2tBp9X7TJ9
+ noguKat2gavX2so3h4nMPb/4Qw==
+X-Google-Smtp-Source: AGHT+IGe74ejE/7KdbcTTPc7Eac6KVsSqy5gApdtEpFRWhtYeDof/CrPRek/Kc8sote9fquKSd38JA==
+X-Received: by 2002:a05:6358:729:b0:166:d4ec:f616 with SMTP id
+ e41-20020a056358072900b00166d4ecf616mr945986rwj.4.1697787908084; 
+ Fri, 20 Oct 2023 00:45:08 -0700 (PDT)
 Received: from grind.dc1.ventanamicro.com ([177.45.186.249])
  by smtp.gmail.com with ESMTPSA id
- h2-20020a170902f7c200b001bbd1562e75sm1968126plw.55.2023.10.19.06.48.16
+ a6-20020aa79706000000b006b22218cb92sm919756pfg.43.2023.10.20.00.45.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Oct 2023 06:48:19 -0700 (PDT)
+ Fri, 20 Oct 2023 00:45:07 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH] docs/system/riscv: remove core limit from virt machine
-Date: Thu, 19 Oct 2023 10:48:12 -0300
-Message-ID: <20231019134812.241044-1-dbarboza@ventanamicro.com>
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+Subject: [PATCH] linux-user/riscv: change default cpu to 'max'
+Date: Fri, 20 Oct 2023 04:45:01 -0300
+Message-ID: <20231020074501.283063-1-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x431.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c2f;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc2f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -92,29 +93,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The 'virt' RISC-V machine does not have a 8 core limit. The current
-limit is set in include/hw/riscv/virt.h, VIRT_CPUS_MAX, set to 512 at
-this moment.
+Commit f57d5f8004 deprecated the 'any' CPU type but failed to change the
+default CPU for linux-user. The result is that all linux-users
+invocations that doesn't specify a different CPU started to show a
+deprecation warning:
 
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1945
+$ ./build/qemu-riscv64  ./foo-novect.out
+qemu-riscv64: warning: The 'any' CPU is deprecated and will be removed in the future.
+
+Change the default CPU for RISC-V linux-user from 'any' to 'max'.
+
+Reported-by: Richard Henderson <richard.henderson@linaro.org>
+Fixes: f57d5f8004 ("target/riscv: deprecate the 'any' CPU type")
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- docs/system/riscv/virt.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ linux-user/riscv/target_elf.h | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
-index f9a2eac544..f5fa7b8b29 100644
---- a/docs/system/riscv/virt.rst
-+++ b/docs/system/riscv/virt.rst
-@@ -12,7 +12,7 @@ Supported devices
- 
- The ``virt`` machine supports the following devices:
- 
--* Up to 8 generic RV32GC/RV64GC cores, with optional extensions
-+* Up to 512 generic RV32GC/RV64GC cores, with optional extensions
- * Core Local Interruptor (CLINT)
- * Platform-Level Interrupt Controller (PLIC)
- * CFI parallel NOR flash memory
+diff --git a/linux-user/riscv/target_elf.h b/linux-user/riscv/target_elf.h
+index 9dd65652ee..dedd5956f3 100644
+--- a/linux-user/riscv/target_elf.h
++++ b/linux-user/riscv/target_elf.h
+@@ -9,7 +9,6 @@
+ #define RISCV_TARGET_ELF_H
+ static inline const char *cpu_get_model(uint32_t eflags)
+ {
+-    /* TYPE_RISCV_CPU_ANY */
+-    return "any";
++    return "max";
+ }
+ #endif
 -- 
 2.41.0
 
