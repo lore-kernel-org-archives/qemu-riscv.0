@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A35ECDB474
-	for <qemu-riscv@archiver.kernel.org>; Fri, 20 Oct 2023 16:41:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE027CDB474
+	for <qemu-riscv@archiver.kernel.org>; Fri, 20 Oct 2023 16:41:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qtsWq-0007OZ-Dn; Fri, 20 Oct 2023 12:39:16 -0400
+	id 1qtsVg-0003je-4M; Fri, 20 Oct 2023 12:38:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qtsWi-0006WR-Nx
- for qemu-riscv@nongnu.org; Fri, 20 Oct 2023 12:39:10 -0400
-Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qtsVY-0003J1-Id
+ for qemu-riscv@nongnu.org; Fri, 20 Oct 2023 12:37:58 -0400
+Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qtsWh-0002tr-0T
- for qemu-riscv@nongnu.org; Fri, 20 Oct 2023 12:39:08 -0400
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-9b9faf05f51so155443666b.2
- for <qemu-riscv@nongnu.org>; Fri, 20 Oct 2023 09:39:04 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qtsVN-0002WY-N4
+ for qemu-riscv@nongnu.org; Fri, 20 Oct 2023 12:37:51 -0400
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-523100882f2so1512222a12.2
+ for <qemu-riscv@nongnu.org>; Fri, 20 Oct 2023 09:37:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697819943; x=1698424743; darn=nongnu.org;
+ d=linaro.org; s=google; t=1697819863; x=1698424663; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DwpnvxLwaI95t3fo0bAhEO0dcxZPMEfx1RWmGk2WvB8=;
- b=Xr29MCCKrphnTBEUOCv1rm9Zx2q9loF4d4rUJqbYKPPd+OxCN01x5rMFb5T+ygKQEj
- BUUaHkZ+Dk+YkbT0bfX8IjuYImBemIvNq7OyMHSG7lkFyzr44VIu8a1og/b4uQPOtsJw
- 8KeyaWpemNkS5FWfVSbTj92MyyH3FLg6zGz8Uzu4+lTwvg/8eu59vGS4Y9xBS4Rx17ky
- AkIepag9lUxTi5utxKt5EEu/hdxdfUVpE4z+RhGWRlti6af4KwMSyyOfntXK2t7Yn3/D
- Se9n83NF/CzaxhHDUTAf3so8Eza2LnmXM7OUKJ7vIOnd8YYCz7VFDFd+HHAhgC6cVkRB
- rXFg==
+ bh=lIfqIPgjXaT+HDThdwR33vMHRV/AQLZXNgmR/zi6+zY=;
+ b=szzuUPkKTNsnv2t0fwjExL1sKpkTOcPVMA6IXkOmzpnrB6qP9vnhOn1tVPm2tH9Liw
+ vVGMXVNacKwDSP0whtCMpIfFZqkPBvnUFAad1CMTSPI594iBY7OgGZ5ZNMGNa+soJ90o
+ PGPa53g1mBYrM7B4gPIQ7hVFQ53TnhSQHpZ8mKsjga5iiXngbpGjL60qLhTFOtzSVYYd
+ ZWoaejGs8uBW4T4b1C0kCuaMZXG3UlspHvg8iRbbTWMGSlApDQ0hmFhz7+u3JHN1norT
+ s1WTtyy7EaLtLqC1n48tEabRDjTNWRWc+Myh5KMWqdME90L4+B8kvSaJA0NypAluDTqA
+ 7zkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697819943; x=1698424743;
+ d=1e100.net; s=20230601; t=1697819863; x=1698424663;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DwpnvxLwaI95t3fo0bAhEO0dcxZPMEfx1RWmGk2WvB8=;
- b=suyEu50aDqlzsDxWcEAyZYcuzAL0ClJJPrzKOUvFefH4QjqKRtVYClzDl8yZiSW7N+
- KGeKA2wDUDluditvyRXWov3XG0G81YBiqmceRXja8jiYnP0pC4g4LwgR9cVr9ZNTW6fO
- OgYmQ+YBJ1iv80qc+vgM8JYaF8UlhBExTRTnDbKmwDYpjETM+wjU0VaArLaIASeO5mi2
- FzSKpqNBW8Gf/OoHbKS9cYVGafqfBJ+rSIpT9rCi9IQFDNISckWsKdFQ12aELTA4ES0i
- Draa292NPtOobB5a+JSvoXI1lPAiFwjwlOgyfQZfwH5MnD+bucQYzmgSI2a5Lx8Tdwoo
- 7KIg==
-X-Gm-Message-State: AOJu0Ywcsh3nX4YCkPkxXujHwxzeCe+Lyix8xNHUjI7D7reyHWSy6k2A
- 2KAVBPqE1hmaa50hpWtou9aVcg==
-X-Google-Smtp-Source: AGHT+IExBZusHKFknVzBT00DgnJ+sQMCFL/rUyxfIHrHrCZVWnyLQwtly/bAYRyP1CNICc3Jx8Qc4w==
-X-Received: by 2002:a17:907:80e:b0:9b2:aa2f:ab69 with SMTP id
- wv14-20020a170907080e00b009b2aa2fab69mr1819995ejb.30.1697819943414; 
- Fri, 20 Oct 2023 09:39:03 -0700 (PDT)
+ bh=lIfqIPgjXaT+HDThdwR33vMHRV/AQLZXNgmR/zi6+zY=;
+ b=N5UahoXAY+bOdAXhqHkBwnOkmBRgmr8wfvOvkhwyX8p05dGyAeEN+i+FggYK751xKu
+ 1Gn8dgXkjiyDXONdjFL/nNqua9gBsOXM1FdKtaoeHdi2PQch0WVCLsX+CaOxXUn7ZJ2z
+ OambrzqSZBnKnwDQxzfBBOaUXQEjl+HIOEQYIUwSjzyrfwIuH8grEGmYHtSlqfWbnDgI
+ vF62rjJMQjhspop1qWhPslmuAHv0ijlNSAyRPUEcnT1dEHwB26V1yChpmFr2u543+QO/
+ 5MrIDBbpq8rc0RmjEwPdSXnuaGgOIgFcS+K/D8hAu+s03Rw1lTbxAAFzgFs8y7S2/myj
+ tdGw==
+X-Gm-Message-State: AOJu0YwMiZkfZ3OS+5NynSRlgEf1pQdAl2kSvAoHXamMLVbhnf5sNIYR
+ vpFQsirlX3QGjVfM0x7K5cvCvQ==
+X-Google-Smtp-Source: AGHT+IHBVyZvw4f5Hs2t7cng9Y5f77G/O2sVJ7W2ZL6Q5XN2PZL/Jc6G4ofUIv4JkhfUQQT3G+9t1Q==
+X-Received: by 2002:a50:ab12:0:b0:530:7ceb:33c with SMTP id
+ s18-20020a50ab12000000b005307ceb033cmr1872603edc.4.1697819863159; 
+ Fri, 20 Oct 2023 09:37:43 -0700 (PDT)
 Received: from m1x-phil.lan (tbo33-h01-176-171-212-97.dsl.sta.abo.bbox.fr.
  [176.171.212.97]) by smtp.gmail.com with ESMTPSA id
- 16-20020a170906019000b009b2c9476726sm1819672ejb.21.2023.10.20.09.39.01
+ m14-20020a50ef0e000000b0053f0e4e0411sm1747279eds.76.2023.10.20.09.37.40
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 20 Oct 2023 09:39:03 -0700 (PDT)
+ Fri, 20 Oct 2023 09:37:42 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Thomas Huth <thuth@redhat.com>,
@@ -69,18 +69,22 @@ Cc: Thomas Huth <thuth@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Zhao Liu <zhao1.liu@intel.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Yoshinori Sato <ysato@users.sourceforge.jp>
-Subject: [PATCH 18/19] cpus: Replace first_cpu by qemu_get_cpu(0, TYPE_RX_CPU)
-Date: Fri, 20 Oct 2023 18:36:40 +0200
-Message-ID: <20231020163643.86105-19-philmd@linaro.org>
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH 07/19] cpus: Filter for target specific CPU (riscv)
+Date: Fri, 20 Oct 2023 18:36:29 +0200
+Message-ID: <20231020163643.86105-8-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231020163643.86105-1-philmd@linaro.org>
 References: <20231020163643.86105-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62b;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x62b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::535;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x535.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,39 +107,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Enforce qemu_get_cpu() to return RISCV CPUs in RISCV specific files.
+
 Mechanical change using the following coccinelle script:
 
-  @@ @@
-  -   first_cpu
-  +   qemu_get_cpu(0, TYPE_RX_CPU)
+  @@ expression index; @@
+  -   qemu_get_cpu(index, NULL)
+  +   qemu_get_cpu(index, TYPE_RISCV_CPU)
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/rx/rx-gdbsim.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ hw/intc/sifive_plic.c | 2 +-
+ hw/riscv/boot.c       | 2 +-
+ hw/riscv/opentitan.c  | 4 ++--
+ 3 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/hw/rx/rx-gdbsim.c b/hw/rx/rx-gdbsim.c
-index 47c17026c7..091f83cc60 100644
---- a/hw/rx/rx-gdbsim.c
-+++ b/hw/rx/rx-gdbsim.c
-@@ -126,7 +126,7 @@ static void rx_gdbsim_init(MachineState *machine)
-          * the latter half of the SDRAM space.
-          */
-         kernel_offset = machine->ram_size / 2;
--        rx_load_image(RX_CPU(first_cpu), kernel_filename,
-+        rx_load_image(RX_CPU(qemu_get_cpu(0, TYPE_RX_CPU)), kernel_filename,
-                       SDRAM_BASE + kernel_offset, kernel_offset);
-         if (dtb_filename) {
-             ram_addr_t dtb_offset;
-@@ -152,7 +152,7 @@ static void rx_gdbsim_init(MachineState *machine)
-             qemu_register_reset_nosnapshotload(qemu_fdt_randomize_seeds,
-                                 rom_ptr(SDRAM_BASE + dtb_offset, dtb_size));
-             /* Set dtb address to R1 */
--            RX_CPU(first_cpu)->env.regs[1] = SDRAM_BASE + dtb_offset;
-+            RX_CPU(qemu_get_cpu(0, TYPE_RX_CPU))->env.regs[1] = SDRAM_BASE + dtb_offset;
-         }
-     }
- }
+diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
+index 3e2534ac04..ea0e7af16e 100644
+--- a/hw/intc/sifive_plic.c
++++ b/hw/intc/sifive_plic.c
+@@ -499,7 +499,7 @@ DeviceState *sifive_plic_create(hwaddr addr, char *hart_config,
+ 
+     for (i = 0; i < plic->num_addrs; i++) {
+         int cpu_num = plic->addr_config[i].hartid;
+-        CPUState *cpu = qemu_get_cpu(cpu_num, NULL);
++        CPUState *cpu = qemu_get_cpu(cpu_num, TYPE_RISCV_CPU);
+ 
+         if (plic->addr_config[i].mode == PLICMode_M) {
+             qdev_connect_gpio_out(dev, cpu_num - hartid_base + num_harts,
+diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+index ea733b3df1..1d004660d4 100644
+--- a/hw/riscv/boot.c
++++ b/hw/riscv/boot.c
+@@ -49,7 +49,7 @@ char *riscv_plic_hart_config_string(int hart_count)
+     int i;
+ 
+     for (i = 0; i < hart_count; i++) {
+-        CPUState *cs = qemu_get_cpu(i, NULL);
++        CPUState *cs = qemu_get_cpu(i, TYPE_RISCV_CPU);
+         CPURISCVState *env = &RISCV_CPU(cs)->env;
+ 
+         if (kvm_enabled()) {
+diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+index e98361de19..106ef5d2d0 100644
+--- a/hw/riscv/opentitan.c
++++ b/hw/riscv/opentitan.c
+@@ -190,7 +190,7 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
+     sysbus_mmio_map(SYS_BUS_DEVICE(&s->plic), 0, memmap[IBEX_DEV_PLIC].base);
+ 
+     for (i = 0; i < ms->smp.cpus; i++) {
+-        CPUState *cpu = qemu_get_cpu(i, NULL);
++        CPUState *cpu = qemu_get_cpu(i, TYPE_RISCV_CPU);
+ 
+         qdev_connect_gpio_out(DEVICE(&s->plic), ms->smp.cpus + i,
+                               qdev_get_gpio_in(DEVICE(cpu), IRQ_M_EXT));
+@@ -223,7 +223,7 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
+                        0, qdev_get_gpio_in(DEVICE(&s->plic),
+                        IBEX_TIMER_TIMEREXPIRED0_0));
+     qdev_connect_gpio_out(DEVICE(&s->timer), 0,
+-                          qdev_get_gpio_in(DEVICE(qemu_get_cpu(0, NULL)),
++                          qdev_get_gpio_in(DEVICE(qemu_get_cpu(0, TYPE_RISCV_CPU)),
+                                            IRQ_M_TIMER));
+ 
+     /* SPI-Hosts */
 -- 
 2.41.0
 
