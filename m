@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 277F7C001DF
-	for <qemu-riscv@archiver.kernel.org>; Fri, 20 Oct 2023 16:42:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62EDFC001DF
+	for <qemu-riscv@archiver.kernel.org>; Fri, 20 Oct 2023 16:43:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qtsWm-0006ou-2i; Fri, 20 Oct 2023 12:39:12 -0400
+	id 1qtsWn-00071o-As; Fri, 20 Oct 2023 12:39:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qtsWT-0006AI-LD
- for qemu-riscv@nongnu.org; Fri, 20 Oct 2023 12:38:55 -0400
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qtsWb-0006K6-Hz
+ for qemu-riscv@nongnu.org; Fri, 20 Oct 2023 12:39:04 -0400
 Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qtsWR-0002pw-Sq
- for qemu-riscv@nongnu.org; Fri, 20 Oct 2023 12:38:53 -0400
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qtsWZ-0002sP-2D
+ for qemu-riscv@nongnu.org; Fri, 20 Oct 2023 12:39:01 -0400
 Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-99357737980so169876766b.2
- for <qemu-riscv@nongnu.org>; Fri, 20 Oct 2023 09:38:51 -0700 (PDT)
+ a640c23a62f3a-9c75ceea588so157086266b.3
+ for <qemu-riscv@nongnu.org>; Fri, 20 Oct 2023 09:38:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697819929; x=1698424729; darn=nongnu.org;
+ d=linaro.org; s=google; t=1697819936; x=1698424736; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1BNA9y4zfVXlb8HVquuGsJAgjqtZlJA+2+vEQrqSYx0=;
- b=JhPNdTocbTVArUvvsFVJtAW+R6RCySThAfEjg/8Yr0hQHwJ+VCi9TCPhjLhcRrbc80
- 1o5xfXC5MsW5OJv/cQFeKpiVrE14vG1ZCV/3uPgsM0NVZrn55y1NZ4GTnivkzSBqN2p+
- 6wkOJIZZs22/c9E+8kBl6p2HMvI6uLGFjgWyDcMhgRCQAe67j3vRj5A0GND7vW5Hvtue
- smuKcJlR+WeeKsMTH4AesDf/HEyAPoc2eOKXlg4WZ8jPiCzMqXgnjhUxYnXdCLtbShIv
- OZm0Mu2R6uK7egr1dT+qI/K3T2Tt/jMblVOWBzJPlTi8d6hmQdsQOLaRaHfINCS5Vun6
- aHOQ==
+ bh=8m78jGvmF7oKs3bQ1VJX7QX1qGqO5WzM4SQXqj75reU=;
+ b=SvfDSUg4dnWRcEgLtcEvDjOpIsoU1UQjwjSVWFyT37INaabqsKK/7TMoOTN4FxlnEx
+ SaHpXUmb2LuLD512uvREtkrUa6k1t+mrYTHg7pYfRhi9OZ970MA8w957xvr9DteWKD4z
+ S/zkEck5v0IKcFrP+wLR5n0GjbYwn2pIBQM64O/NIlZ7bLlupKrdxjz+JiSxjEfw5H/M
+ q2zB/Ih8XAh73l54TG+kElDZF3ZGnYvG1/fHJuqOVmgIjA0KBAkK7nTlkKoEGEl74dLg
+ 7eeTECeDnN8w/ryFz0Qg119wI8UjOpuYSbOBmsAPWINJIvEpthu2DBHEOXhM0DnsmczO
+ fJqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697819929; x=1698424729;
+ d=1e100.net; s=20230601; t=1697819936; x=1698424736;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1BNA9y4zfVXlb8HVquuGsJAgjqtZlJA+2+vEQrqSYx0=;
- b=AqjEo951LG9I9ZR3MaA42anedMOTTP5IDyf6+oVlUUQ59BFxK9je7jYvjiTHogtJsf
- L/3TB00NGd9zCZl8hqgl3hbfUNniuAKVzMAYzYAW9/ij4ONGgly2HLoAoTZJm/6oCVOg
- TdZZ1ksCaDI1O1r05ThdNONyB6RnRa+KB9lJ546CJMWQnL0tqmzeeuIZD0uR8lGL1IXg
- YGNCiv+0dWzEnG3CBswYYcT3JFhZPIxZXXbygPIamo7cpr8Io8OoFeIqHah3dLh0hoMn
- hH7vhY/Opl+Vjq7POaZXbFGFslBATuzH9Sj+cuUFvVYj8yMT+AmxrU8ORWjLgM3YFPEl
- 42Ig==
-X-Gm-Message-State: AOJu0YySmTzChppWdReRIORx7XRqIRQeI2vjfX0sMD+tmS8aR7ys4+Qu
- wm8vmVniqCHXtmakPCZ6s53dAw==
-X-Google-Smtp-Source: AGHT+IE8pTnTm8kExFSHgwFwuE2r5IXOklMrkIbsOtRt5M7b3C9wUv/hea60CxUNlZq2FBxMZ8uDBQ==
-X-Received: by 2002:a17:906:ee82:b0:9be:39a4:b440 with SMTP id
- wt2-20020a170906ee8200b009be39a4b440mr1971962ejb.76.1697819929604; 
- Fri, 20 Oct 2023 09:38:49 -0700 (PDT)
+ bh=8m78jGvmF7oKs3bQ1VJX7QX1qGqO5WzM4SQXqj75reU=;
+ b=Bji1hy535nXW+Wb7YfzAXkCbOEpKBhcZrk4Q7aWNp+Rq2L5ConFG9i0ia3QGajqFFh
+ FKSyfTFA4L85DPYiaijL/oQUB3fRzImuyBc9m7NyP7kt2EycxKxsg0ytGiqIjZiHUTgv
+ ZpZkZ/AmYzCRU6qyWvl9SbU8FzVGV/jf5F3GZB88gkLqDyfIaMuKHzdIOSubWzSbct4a
+ KCqKYAaiRFPwX2jxwPDJADnTG2HZEkKfpoktkqyoyrzoi6+PG+j44bRPs5seUd2P5jl3
+ x9fU0io/5W9+nAH0MLdt85uS8+7O6l/AtuSi8KmdiSk/9cmwpCURCOzb2ukEc/Jmr5Yx
+ Y3Gw==
+X-Gm-Message-State: AOJu0YziLRg3zIZEUIEnOF7xjAMgXepWuCkeglST2dXv61P7B4f40Jp4
+ SQYbcI4SJKwOSfG1PbvAeZHwxA==
+X-Google-Smtp-Source: AGHT+IE8yq5L7NgEFg2BL5r/TirE3WBnMy42fdTokTdcZFul/3aVleWuW6Vwfoas6PkQGpsaPs5PAA==
+X-Received: by 2002:a17:907:7b82:b0:9b8:7746:f176 with SMTP id
+ ne2-20020a1709077b8200b009b87746f176mr2150472ejc.34.1697819936618; 
+ Fri, 20 Oct 2023 09:38:56 -0700 (PDT)
 Received: from m1x-phil.lan (tbo33-h01-176-171-212-97.dsl.sta.abo.bbox.fr.
  [176.171.212.97]) by smtp.gmail.com with ESMTPSA id
- m2-20020a17090607c200b009c6a4a5ac80sm1776806ejc.169.2023.10.20.09.38.47
+ rh8-20020a17090720e800b009930308425csm1788733ejb.31.2023.10.20.09.38.54
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 20 Oct 2023 09:38:49 -0700 (PDT)
+ Fri, 20 Oct 2023 09:38:56 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Thomas Huth <thuth@redhat.com>,
@@ -69,11 +69,12 @@ Cc: Thomas Huth <thuth@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Zhao Liu <zhao1.liu@intel.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [PATCH 16/19] cpus: Replace first_cpu by qemu_get_cpu(0,
- TYPE_TRICORE_CPU)
-Date: Fri, 20 Oct 2023 18:36:38 +0200
-Message-ID: <20231020163643.86105-17-philmd@linaro.org>
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Magnus Damm <magnus.damm@gmail.com>
+Subject: [PATCH 17/19] cpus: Replace first_cpu by qemu_get_cpu(0,
+ TYPE_SUPERH_CPU)
+Date: Fri, 20 Oct 2023 18:36:39 +0200
+Message-ID: <20231020163643.86105-18-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231020163643.86105-1-philmd@linaro.org>
 References: <20231020163643.86105-1-philmd@linaro.org>
@@ -108,26 +109,34 @@ Mechanical change using the following coccinelle script:
 
   @@ @@
   -   first_cpu
-  +   qemu_get_cpu(0, TYPE_TRICORE_CPU)
+  +   qemu_get_cpu(0, TYPE_SUPERH_CPU)
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/tricore/triboard.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ hw/intc/sh_intc.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/hw/tricore/triboard.c b/hw/tricore/triboard.c
-index 4dba0259cd..1fe6692f97 100644
---- a/hw/tricore/triboard.c
-+++ b/hw/tricore/triboard.c
-@@ -46,7 +46,7 @@ static void tricore_load_kernel(const char *kernel_filename)
-         error_report("no kernel file '%s'", kernel_filename);
-         exit(1);
+diff --git a/hw/intc/sh_intc.c b/hw/intc/sh_intc.c
+index c9b0b0c1ec..be76a96ebc 100644
+--- a/hw/intc/sh_intc.c
++++ b/hw/intc/sh_intc.c
+@@ -44,12 +44,14 @@ void sh_intc_toggle_source(struct intc_source *source,
+         if (source->pending) {
+             source->parent->pending++;
+             if (source->parent->pending == 1) {
+-                cpu_interrupt(first_cpu, CPU_INTERRUPT_HARD);
++                cpu_interrupt(qemu_get_cpu(0, TYPE_SUPERH_CPU),
++                              CPU_INTERRUPT_HARD);
+             }
+         } else {
+             source->parent->pending--;
+             if (source->parent->pending == 0) {
+-                cpu_reset_interrupt(first_cpu, CPU_INTERRUPT_HARD);
++                cpu_reset_interrupt(qemu_get_cpu(0, TYPE_SUPERH_CPU),
++                                    CPU_INTERRUPT_HARD);
+             }
+         }
      }
--    cpu = TRICORE_CPU(first_cpu);
-+    cpu = TRICORE_CPU(qemu_get_cpu(0, TYPE_TRICORE_CPU));
-     env = &cpu->env;
-     env->PC = entry;
- }
 -- 
 2.41.0
 
