@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39A07C001DF
-	for <qemu-riscv@archiver.kernel.org>; Sun, 22 Oct 2023 16:15:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 203CECDB474
+	for <qemu-riscv@archiver.kernel.org>; Sun, 22 Oct 2023 16:15:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qub3E-0000I1-77; Sun, 22 Oct 2023 12:11:40 -0400
+	id 1qub3E-0000J6-Ca; Sun, 22 Oct 2023 12:11:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+88d8721f4af1339c2fab+7364+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1qualX-0005FS-F3; Sun, 22 Oct 2023 11:53:24 -0400
-Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
+ <BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1qual6-0004sH-Q5; Sun, 22 Oct 2023 11:52:56 -0400
+Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+88d8721f4af1339c2fab+7364+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1qualT-0008WM-8v; Sun, 22 Oct 2023 11:53:23 -0400
+ <BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1qual0-0000Ak-20; Sun, 22 Oct 2023 11:52:56 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+ d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=VNjlOw9Lzpr/68VPEyhUsosbr0JH0Sj3vnXB3DE2UGU=; b=Y2hRKEOH6Ds9uWxRws1Kg6CNFB
- ApE/teelN4H4OaNS9SQyP6hMJyNh5wzEHc/mxxFC/mF7+Yil0HSYonuHR2elCqZUFRnE2/3tlS/ir
- SGCOUNcLXiH5W0stnzpO5SKOX5qvHUi0NU8yS/OCoIdjPmwn8zWLmHXM2GxOwk+Iq2UY9Gq1MLArr
- L2NtTPwvAVvaZLyk9HDhDW9X2aDOgglCeSAm+s7Tf0sYj+fUMsuYAJj/AgxM8mB3dxetwKRF37WOU
- CG6oi5QSvtGxisnwoqD0lwgdOMH9nLTI1ajWWIwT6cilePhtUwNhUvXHpo6tUUikL07Gu1qhfb0yR
- vRXNieaA==;
+ bh=yNOslSLwNSZBz1nMauOOhKrz2V+jkfbo6C3leUlOjxc=; b=qCMQkmcTP7rb3M8bOB3UFupqpN
+ tRwB+ghhJpyaQEmzOaJeQ1dP79XOqNqfg0huvnM7ow26NKfUXmic5uKS+/YvO1tMolo5yzgObmLCe
+ VSAxjdAx6YUb1w+luQhfAGo52Qa30yqlc/KjeDetNpVw7yDkMLkTnPPGGqA+dNakoE0/p0tl5guOj
+ sEHBTY1HtLImAXCpdZes3hwZufPdxn/8j/L/aNB473sTCrZ8PsusFl6VzzPK18uP40liO0Vz/bLSM
+ 47MDpU1FqJMgoKghkaCkt79j62+opUuK6BHsyvJDBldhDjBzU6XdYrg3OvhQAsIERmrgeXFMw6oSx
+ i+qkp3/Q==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1quakH-008TGD-0E; Sun, 22 Oct 2023 15:52:05 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1quakI-00DCmj-0W; Sun, 22 Oct 2023 15:52:12 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1quakG-001qYF-1u; Sun, 22 Oct 2023 16:52:04 +0100
+ Linux)) id 1quakH-001qYZ-0P; Sun, 22 Oct 2023 16:52:05 +0100
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -85,20 +85,20 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org
-Subject: [PATCH 01/45] net: add qemu_{configure, create}_nic_device(),
- qemu_find_nic_info()
-Date: Sun, 22 Oct 2023 16:51:16 +0100
-Message-Id: <20231022155200.436340-2-dwmw2@infradead.org>
+Subject: [PATCH 06/45] hw/xen: use qemu_create_nic_bus_devices() to
+ instantiate Xen NICs
+Date: Sun, 22 Oct 2023 16:51:21 +0100
+Message-Id: <20231022155200.436340-7-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231022155200.436340-1-dwmw2@infradead.org>
 References: <20231022155200.436340-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- casper.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1236::1;
- envelope-from=BATV+88d8721f4af1339c2fab+7364+infradead.org+dwmw2@casper.srs.infradead.org;
- helo=casper.infradead.org
+ desiato.infradead.org. See http://www.infradead.org/rpr.html
+Received-SPF: none client-ip=2001:8b0:10b:1:d65d:64ff:fe57:4e05;
+ envelope-from=BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org;
+ helo=desiato.infradead.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -124,105 +124,117 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Most code which directly accesses nd_table[] and nb_nics uses them for
-one of two things. Either "I have created a NIC device and I'd like a
-configuration for it", or "I will create a NIC device *if* there is a
-configuration for it".  With some variants on the theme around whether
-they actually *check* if the model specified in the configuration is
-the right one.
+When instantiating XenBus itself, for each NIC which is configured with
+either the model unspecified, or set to to "xen" or "xen-net-device",
+create a corresponding xen-net-device for it.
 
-Provide functions which perform both of those, allowing platforms to
-be a little more consistent and as a step towards making nd_table[]
-and nb_nics private to the net code.
-
-Also export the qemu_find_nic_info() helper, as some platforms have
-special cases they need to handle.
+Now we can launch emulated Xen guests with '-nic user', and this fixes
+the setup for Xen PV guests, which was previously broken in various
+ways and never actually managed to peer with the netdev.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- include/net/net.h |  7 ++++++-
- net/net.c         | 50 +++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 56 insertions(+), 1 deletion(-)
+ hw/xen/xen-bus.c                    |  4 ++++
+ hw/xen/xen_devconfig.c              | 25 -------------------------
+ hw/xenpv/xen_machine_pv.c           |  9 ---------
+ include/hw/xen/xen-legacy-backend.h |  1 -
+ 4 files changed, 4 insertions(+), 35 deletions(-)
 
-diff --git a/include/net/net.h b/include/net/net.h
-index 2fb1c9181c..56be694c75 100644
---- a/include/net/net.h
-+++ b/include/net/net.h
-@@ -205,7 +205,12 @@ int qemu_show_nic_models(const char *arg, const char *const *models);
- void qemu_check_nic_model(NICInfo *nd, const char *model);
- int qemu_find_nic_model(NICInfo *nd, const char * const *models,
-                         const char *default_model);
--
-+NICInfo *qemu_find_nic_info(const char *typename, bool match_default,
-+                            const char *alias);
-+bool qemu_configure_nic_device(DeviceState *dev, bool match_default,
-+                               const char *alias);
-+DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
-+                                    const char *alias);
- void print_net_client(Monitor *mon, NetClientState *nc);
- void net_socket_rs_init(SocketReadState *rs,
-                         SocketReadStateFinalize *finalize,
-diff --git a/net/net.c b/net/net.c
-index bbe33da176..606816a3b3 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -1072,6 +1072,56 @@ static int net_init_nic(const Netdev *netdev, const char *name,
-     return idx;
+diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
+index 0da2aa219a..194c1b7311 100644
+--- a/hw/xen/xen-bus.c
++++ b/hw/xen/xen-bus.c
+@@ -19,6 +19,7 @@
+ #include "qapi/error.h"
+ #include "qapi/qmp/qdict.h"
+ #include "sysemu/sysemu.h"
++#include "net/net.h"
+ #include "trace.h"
+ 
+ static char *xen_device_get_backend_path(XenDevice *xendev)
+@@ -1134,4 +1135,7 @@ void xen_bus_init(void)
+ 
+     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+     qbus_set_bus_hotplug_handler(bus);
++
++    qemu_create_nic_bus_devices(bus, TYPE_XEN_DEVICE, "xen-net-device",
++                                "xen", "xen-net-device");
  }
+diff --git a/hw/xen/xen_devconfig.c b/hw/xen/xen_devconfig.c
+index 3f77c675c6..2150869f60 100644
+--- a/hw/xen/xen_devconfig.c
++++ b/hw/xen/xen_devconfig.c
+@@ -46,31 +46,6 @@ static int xen_config_dev_all(char *fe, char *be)
  
-+NICInfo *qemu_find_nic_info(const char *typename, bool match_default,
-+                            const char *alias)
-+{
-+    NICInfo *nd;
-+    int i;
-+
-+    for (i = 0; i < nb_nics; i++) {
-+        nd = &nd_table[i];
-+
-+        if (!nd->used || nd->instantiated)
-+            continue;
-+
-+        if ((match_default && !nd->model) || !g_strcmp0(nd->model, typename)
-+            || (alias && !g_strcmp0(nd->model, alias))) {
-+            return nd;
-+        }
-+    }
-+    return NULL;
-+}
-+
-+
-+/* "I have created a device. Please configure it if you can" */
-+bool qemu_configure_nic_device(DeviceState *dev, bool match_default,
-+                               const char *alias)
-+{
-+    NICInfo *nd = qemu_find_nic_info(object_get_typename(OBJECT(dev)),
-+                                     match_default, alias);
-+
-+    if (nd) {
-+        qdev_set_nic_properties(dev, nd);
-+        return true;
-+    }
-+    return false;
-+}
-+
-+/* "Please create a device, if you have a configuration for it" */
-+DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
-+                                    const char *alias)
-+{
-+    NICInfo *nd = qemu_find_nic_info(typename, match_default, alias);
-+    DeviceState *dev;
-+
-+    if (!nd) {
-+        return NULL;
-+    }
-+
-+    dev = qdev_new(typename);
-+    qdev_set_nic_properties(dev, nd);
-+    return dev;
-+}
+ /* ------------------------------------------------------------- */
  
- static int (* const net_client_init_fun[NET_CLIENT_DRIVER__MAX])(
-     const Netdev *netdev,
+-int xen_config_dev_nic(NICInfo *nic)
+-{
+-    char fe[256], be[256];
+-    char mac[20];
+-    int vlan_id = -1;
+-
+-    net_hub_id_for_client(nic->netdev, &vlan_id);
+-    snprintf(mac, sizeof(mac), "%02x:%02x:%02x:%02x:%02x:%02x",
+-             nic->macaddr.a[0], nic->macaddr.a[1], nic->macaddr.a[2],
+-             nic->macaddr.a[3], nic->macaddr.a[4], nic->macaddr.a[5]);
+-    xen_pv_printf(NULL, 1, "config nic %d: mac=\"%s\"\n", vlan_id, mac);
+-    xen_config_dev_dirs("vif", "qnic", vlan_id, fe, be, sizeof(fe));
+-
+-    /* frontend */
+-    xenstore_write_int(fe, "handle",     vlan_id);
+-    xenstore_write_str(fe, "mac",        mac);
+-
+-    /* backend */
+-    xenstore_write_int(be, "handle",     vlan_id);
+-    xenstore_write_str(be, "mac",        mac);
+-
+-    /* common stuff */
+-    return xen_config_dev_all(fe, be);
+-}
+-
+ int xen_config_dev_vfb(int vdev, const char *type)
+ {
+     char fe[256], be[256];
+diff --git a/hw/xenpv/xen_machine_pv.c b/hw/xenpv/xen_machine_pv.c
+index 9f9f137f99..1130d1a147 100644
+--- a/hw/xenpv/xen_machine_pv.c
++++ b/hw/xenpv/xen_machine_pv.c
+@@ -32,8 +32,6 @@
+ 
+ static void xen_init_pv(MachineState *machine)
+ {
+-    int i;
+-
+     setup_xen_backend_ops();
+ 
+     /* Initialize backend core & drivers */
+@@ -62,13 +60,6 @@ static void xen_init_pv(MachineState *machine)
+         vga_interface_created = true;
+     }
+ 
+-    /* configure nics */
+-    for (i = 0; i < nb_nics; i++) {
+-        if (!nd_table[i].model || 0 != strcmp(nd_table[i].model, "xen"))
+-            continue;
+-        xen_config_dev_nic(nd_table + i);
+-    }
+-
+     xen_bus_init();
+ 
+     /* config cleanup hook */
+diff --git a/include/hw/xen/xen-legacy-backend.h b/include/hw/xen/xen-legacy-backend.h
+index fc42146bc2..2cca174778 100644
+--- a/include/hw/xen/xen-legacy-backend.h
++++ b/include/hw/xen/xen-legacy-backend.h
+@@ -81,7 +81,6 @@ extern struct XenDevOps xen_usb_ops;          /* xen-usb.c         */
+ 
+ /* configuration (aka xenbus setup) */
+ void xen_config_cleanup(void);
+-int xen_config_dev_nic(NICInfo *nic);
+ int xen_config_dev_vfb(int vdev, const char *type);
+ int xen_config_dev_vkbd(int vdev);
+ int xen_config_dev_console(int vdev);
 -- 
 2.40.1
 
