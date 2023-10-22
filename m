@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FBB7CDB474
-	for <qemu-riscv@archiver.kernel.org>; Sun, 22 Oct 2023 16:15:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21809CDB474
+	for <qemu-riscv@archiver.kernel.org>; Sun, 22 Oct 2023 16:15:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qub3L-0000gU-4A; Sun, 22 Oct 2023 12:11:47 -0400
+	id 1qub3I-0000aR-Ai; Sun, 22 Oct 2023 12:11:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1qualr-0006G7-Bu; Sun, 22 Oct 2023 11:53:43 -0400
+ id 1qualT-000572-4w; Sun, 22 Oct 2023 11:53:19 -0400
 Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1qualo-0000DH-Hy; Sun, 22 Oct 2023 11:53:43 -0400
+ id 1qualP-0000Mg-W2; Sun, 22 Oct 2023 11:53:17 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=R0yNrkS6frW1oQZmkTvRWBHiXdaYx7yNfr+oe+nR9G0=; b=Yl+NqLLs1Fpsi7bTrer2mD8J7/
- 0fK/W746uQD3qH+Al5qXrecLeGkQ6NFVzzPH0iYrDQ2QqiqZQGWEBSwT/k/Ukyhkw2ZW3A5KkzCfw
- kKXFJhRub4AyxX858qHi2hfSmAx4PnTZBqfyU51SpVV34XrZT/m/aFrtrCfPwk+ggYGiDvRnRUWWl
- G7Jht0AI/58jorLgrkrBQ0BVzX+lVDpc11a7+zGDGs/QRGQXQTLQwtAJU+Tp6nfIcoWrv9VytkfYv
- tXFsfbEIpYKgC/bArWMRQzALeF4wamM9OLEZY/jLDkZG/T/f90xV0gy6LqcjDpg/XTPNnx6BPJvvL
- RsAbWdPA==;
+ bh=4+Mc5UoIk/j59DxPJr9/Bba3Ss0BlZ5eJh5qSsyPoYw=; b=jKJ5VvWEyZleEXgoeqEjZyi1L3
+ F2uGIPRfZhpHac7DvT8dcH7gIWxpe/tRYcLh6a531myfO27mcnhfiU46UoKaXiCyX8XLGtR1CdiVj
+ lCTsZg/ufvzJ5E1RjmOZ+bxSSWGgzoA5UbRs3K8EgeRsYod3r5vMmhKZ3EkWUbwXIyjj/7PuP3qzW
+ rWINlK9wlyTwfAizsWoIWwhkaEp4EraKyMOG38tO68U98yl5KCKzvK08FpngEcsQfD3GNtneUfIMD
+ /xfCnoqcaHNm5gZTtBehY1MvpMR+RyFE4tIdKv3DoushzbI5KZMsI8qV49iJYhVF3DJ61ye4Oaacl
+ p2ZI+F2Q==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1quakM-00DCn6-0P; Sun, 22 Oct 2023 15:52:43 +0000
+ id 1quakJ-00DCmu-24; Sun, 22 Oct 2023 15:53:09 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1quakL-001qbT-0K; Sun, 22 Oct 2023 16:52:09 +0100
+ Linux)) id 1quakJ-001qZj-00; Sun, 22 Oct 2023 16:52:07 +0100
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -85,9 +85,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org
-Subject: [PATCH 45/45] net: make nb_nics and nd_table[] static in net/net.c
-Date: Sun, 22 Oct 2023 16:52:00 +0100
-Message-Id: <20231022155200.436340-46-dwmw2@infradead.org>
+Subject: [PATCH 22/45] hw/arm/aspeed: use qemu_configure_nic_device()
+Date: Sun, 22 Oct 2023 16:51:37 +0100
+Message-Id: <20231022155200.436340-23-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231022155200.436340-1-dwmw2@infradead.org>
 References: <20231022155200.436340-1-dwmw2@infradead.org>
@@ -106,7 +106,7 @@ X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
  SPF_NONE=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sun, 22 Oct 2023 12:11:03 -0400
+X-Mailman-Approved-At: Sun, 22 Oct 2023 12:11:02 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -125,53 +125,36 @@ From: David Woodhouse <dwmw@amazon.co.uk>
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- include/net/net.h | 4 ----
- net/net.c         | 3 +++
- system/globals.c  | 2 --
- 3 files changed, 3 insertions(+), 6 deletions(-)
+ hw/arm/aspeed.c | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/include/net/net.h b/include/net/net.h
-index 290e604f03..5a38766942 100644
---- a/include/net/net.h
-+++ b/include/net/net.h
-@@ -245,10 +245,6 @@ struct NICInfo {
-     int nvectors;
- };
+diff --git a/hw/arm/aspeed.c b/hw/arm/aspeed.c
+index f8ba67531a..945ad97835 100644
+--- a/hw/arm/aspeed.c
++++ b/hw/arm/aspeed.c
+@@ -356,7 +356,6 @@ static void aspeed_machine_init(MachineState *machine)
+     AspeedMachineClass *amc = ASPEED_MACHINE_GET_CLASS(machine);
+     AspeedSoCClass *sc;
+     int i;
+-    NICInfo *nd = &nd_table[0];
  
--extern int nb_nics;
--extern NICInfo nd_table[MAX_NICS];
--extern const char *host_net_devices[];
--
- /* from net.c */
- extern NetClientStateList net_clients;
- bool netdev_is_modern(const char *optstr);
-diff --git a/net/net.c b/net/net.c
-index ed0d638454..9043566abf 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -77,6 +77,9 @@ static NetdevQueue nd_queue = QSIMPLEQ_HEAD_INITIALIZER(nd_queue);
+     object_initialize_child(OBJECT(machine), "soc", &bmc->soc, amc->soc_name);
  
- static GHashTable *nic_model_help;
+@@ -370,10 +369,10 @@ static void aspeed_machine_init(MachineState *machine)
+                              &error_fatal);
  
-+static int nb_nics;
-+static NICInfo nd_table[MAX_NICS];
-+
- /***********************************************************/
- /* network device redirectors */
+     for (i = 0; i < sc->macs_num; i++) {
+-        if ((amc->macs_mask & (1 << i)) && nd->used) {
+-            qemu_check_nic_model(nd, TYPE_FTGMAC100);
+-            qdev_set_nic_properties(DEVICE(&bmc->soc.ftgmac100[i]), nd);
+-            nd++;
++        if ((amc->macs_mask & (1 << i)) &&
++            !qemu_configure_nic_device(DEVICE(&bmc->soc.ftgmac100[i]),
++                                       true, NULL)) {
++            break; /* No configs left; stop asking */
+         }
+     }
  
-diff --git a/system/globals.c b/system/globals.c
-index e83b5428d1..b6d4e72530 100644
---- a/system/globals.c
-+++ b/system/globals.c
-@@ -36,8 +36,6 @@ int display_opengl;
- const char* keyboard_layout;
- bool enable_mlock;
- bool enable_cpu_pm;
--int nb_nics;
--NICInfo nd_table[MAX_NICS];
- int autostart = 1;
- int vga_interface_type = VGA_NONE;
- bool vga_interface_created;
 -- 
 2.40.1
 
