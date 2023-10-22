@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21DECCDB474
-	for <qemu-riscv@archiver.kernel.org>; Sun, 22 Oct 2023 16:14:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FFF4CDB474
+	for <qemu-riscv@archiver.kernel.org>; Sun, 22 Oct 2023 16:15:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qub3R-00010j-Ah; Sun, 22 Oct 2023 12:11:53 -0400
+	id 1qub3A-0000B5-O4; Sun, 22 Oct 2023 12:11:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1quamj-0008FD-IT; Sun, 22 Oct 2023 11:54:40 -0400
+ id 1qual3-0004qU-EZ; Sun, 22 Oct 2023 11:52:53 -0400
 Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1quamf-0000Xj-OH; Sun, 22 Oct 2023 11:54:36 -0400
+ id 1qual0-0000Ag-0N; Sun, 22 Oct 2023 11:52:53 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=zpmWGfDJ4p47YbRsENJiPMvNNVfWBSj9DDCQL7if7Xs=; b=rJQSdHp7neRWdzDMIbjE2Zjypv
- NjPr8rhGdb3D/xMBkHChvhKzva/Hb0vatOBd4vj+sHprPyL3A2lG26OzZQAMzDGQUYKBqozMOkUW1
- Jd3tMTeIPV3NuYNI5VfrMGpi2wFnruhQLJLr8kQ5SUsQBiu3pvZNlPPL+vqwzvizOyNk/bFiB3H0g
- NhH05Um2d33Epcqk2+d8nle+kwoHD8TyASBLJUnxRuc/BILJiNAmL4PNDYzGbflS2jzPO2LTduqKy
- Yay1jg5/nZ5UdWTxshF6kqD22VbrTA+7eQRI8EY5V0fiRJT7MLBsYAxxCZowr3goq/qL/5+9SpQAA
- FLB1oMjQ==;
+ bh=LSOT+i68QAXGw5nmfqnaPDMSr2L9t1MExAWbfT8YrMc=; b=ijBcck6ioqdEnU4sTrfyFOY5N2
+ ZVKetmVBXzhhypRTvqbWn8w7j3+924tcPja/EREQWaQZxiBlVlRIY1zJj+83h0cHvU5vXlXzrrUgG
+ qbXwmSptBmEgxUcAWDbvOi7V9h55IoqA7ftNsiQ3+ilne2HQzjYEl6r9KmuT0shkk3Ro/a+33GP0d
+ riKTACqWHz+JKVwiRng40Iou3FlDpLk1p0O8LTVrixLSoO7thP93piqFETzFUaS1+TVjfUwGgtoP/
+ DqQiw9ykRUCZ31B+0nTsET4RQCijsTMsc4XG0XMUv9czp3pz02o74sgVpQurf1z6xvpldcwygH0yr
+ ncDJw5aA==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1quakJ-00DCmq-21; Sun, 22 Oct 2023 15:53:37 +0000
+ id 1quakI-00DCmk-0T; Sun, 22 Oct 2023 15:52:09 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1quakI-001qZD-0e; Sun, 22 Oct 2023 16:52:06 +0100
+ Linux)) id 1quakH-001qYf-0m; Sun, 22 Oct 2023 16:52:05 +0100
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -85,9 +85,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org
-Subject: [PATCH 15/45] hw/ppc/prep: use pci_init_nic_devices()
-Date: Sun, 22 Oct 2023 16:51:30 +0100
-Message-Id: <20231022155200.436340-16-dwmw2@infradead.org>
+Subject: [PATCH 07/45] hw/alpha/dp264: use pci_init_nic_devices()
+Date: Sun, 22 Oct 2023 16:51:22 +0100
+Message-Id: <20231022155200.436340-8-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231022155200.436340-1-dwmw2@infradead.org>
 References: <20231022155200.436340-1-dwmw2@infradead.org>
@@ -106,7 +106,7 @@ X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
  SPF_NONE=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sun, 22 Oct 2023 12:11:03 -0400
+X-Mailman-Approved-At: Sun, 22 Oct 2023 12:11:02 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -123,38 +123,26 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Previously, the first PCI NIC would be placed in PCI slot 3 and the rest
-would be dynamically assigned. Even if the user overrode the default NIC
-type and made it something other than PCNet.
-
-Now, the first PCNet NIC (that is, anything not explicitly specified
-to be anything different) will go to slot 3 even if it isn't the first
-NIC specified on the commnd line. And anything else will be dynamically
-assigned.
-
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/ppc/prep.c | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+ hw/alpha/dp264.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/hw/ppc/prep.c b/hw/ppc/prep.c
-index 137276bcb9..1a08e74945 100644
---- a/hw/ppc/prep.c
-+++ b/hw/ppc/prep.c
-@@ -336,10 +336,9 @@ static void ibm_40p_init(MachineState *machine)
-         /* XXX: s3-trio at PCI_DEVFN(2, 0) */
-         pci_vga_init(pci_bus);
+diff --git a/hw/alpha/dp264.c b/hw/alpha/dp264.c
+index 03495e1e60..52a1fa310b 100644
+--- a/hw/alpha/dp264.c
++++ b/hw/alpha/dp264.c
+@@ -124,9 +124,7 @@ static void clipper_init(MachineState *machine)
+     pci_vga_init(pci_bus);
  
--        for (i = 0; i < nb_nics; i++) {
--            pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic,
--                                i == 0 ? "3" : NULL);
--        }
-+        /* First PCNET device at PCI_DEVFN(3, 0) */
-+        pci_init_nic_in_slot(pci_bus, mc->default_nic, NULL, "3");
-+        pci_init_nic_devices(pci_bus, mc->default_nic);
-     }
+     /* Network setup.  e1000 is good enough, failing Tulip support.  */
+-    for (i = 0; i < nb_nics; i++) {
+-        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
+-    }
++    pci_init_nic_devices(pci_bus, mc->default_nic);
  
-     /* Prepare firmware configuration for OpenBIOS */
+     /* Super I/O */
+     isa_create_simple(isa_bus, TYPE_SMC37C669_SUPERIO);
 -- 
 2.40.1
 
