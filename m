@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7522EC25B41
-	for <qemu-riscv@archiver.kernel.org>; Sun, 22 Oct 2023 16:13:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9723CCDB474
+	for <qemu-riscv@archiver.kernel.org>; Sun, 22 Oct 2023 16:13:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qub2i-0008KB-Ug; Sun, 22 Oct 2023 12:11:09 -0400
+	id 1qub2i-0008KC-V2; Sun, 22 Oct 2023 12:11:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+88d8721f4af1339c2fab+7364+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1qualZ-0005Hl-1I; Sun, 22 Oct 2023 11:53:25 -0400
-Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
+ <BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1qualq-0006Ew-59; Sun, 22 Oct 2023 11:53:42 -0400
+Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+88d8721f4af1339c2fab+7364+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1qualT-0008WJ-EN; Sun, 22 Oct 2023 11:53:24 -0400
+ <BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1qualo-0000DI-EX; Sun, 22 Oct 2023 11:53:41 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+ d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=FMouo7QQ2KXBuiMSmFA+4AfL0Ua1HAyBapVBTrY+ccg=; b=E0MEqNTVEqlo96r8WBTGAVzqqM
- WOKcOlQeHsyeBbKjvLocphxD2lv+IUnbo81qo4Gi8Ktprvj7QIsyonsqWnzpb6OOPkO6/ISjmBAUT
- 3cOR4aeWvSKwvGx1bye1Sj1ciosiHzjrp3Uw4rmtGQzaE3FyA3smV1/12tjUNgzq7XqBPVZWalOVt
- zBBQ1o1LCIK5OLWeBP+Gg+KhKs+xHPxXY5rvoK8+6ZPH+Fgf0LmxVxU5NvjwvXiYbRqF/dSoVrff7
- J74lSXT7XFrvvrI1CNgBtAVzSR4Re5OKPzgXMgsJdWI1d9DTkWHZUlToq6Yq1BeKTuuVpT9FIp0qK
- 5C/gpQSg==;
+ bh=/KV5xc8ak7d927pW3t3hEXy6twlojUhYJ0gN2lThj4E=; b=oyW5eAI003UeBkAr+yC7rq09K7
+ 7y1lq3JJAioHCDKQTcIYp0Ny5pfKA+SAsJ4fbs77gN794kSYsDTCEnRKq//zLly/7iGHJbLHRpJgl
+ ooRofotv85kQedNJoBIa8sJnGoqd8PF5a2OoUTM3ZkOQulGrUAMmyX0O5z1hclEM0H3FtMCdZHcJV
+ AX0npxWvaw06n9ALcITEe+Jm0XB4ETUvSziTHMe6lEcJIK3+29k4EyHYkUUSu07DcYG5z9i++lToD
+ QoEH4xS7YXHQweg23iH42dbRUqyRzEJD9bUc0GouG/pk5yJpKm/hrQvbxxoh14vXn1jb0m0znXQFb
+ WWG83MNQ==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1quakH-008TGH-DY; Sun, 22 Oct 2023 15:52:05 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1quakM-00DCn4-0T; Sun, 22 Oct 2023 15:52:45 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1quakH-001qYV-01; Sun, 22 Oct 2023 16:52:05 +0100
+ Linux)) id 1quakK-001qbC-2o; Sun, 22 Oct 2023 16:52:08 +0100
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -85,20 +85,19 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org
-Subject: [PATCH 05/45] hw/i386/pc: use qemu_get_nic_info() and
- pci_init_nic_devices()
-Date: Sun, 22 Oct 2023 16:51:20 +0100
-Message-Id: <20231022155200.436340-6-dwmw2@infradead.org>
+Subject: [PATCH 42/45] net: remove qemu_check_nic_model()
+Date: Sun, 22 Oct 2023 16:51:57 +0100
+Message-Id: <20231022155200.436340-43-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231022155200.436340-1-dwmw2@infradead.org>
 References: <20231022155200.436340-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- casper.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1236::1;
- envelope-from=BATV+88d8721f4af1339c2fab+7364+infradead.org+dwmw2@casper.srs.infradead.org;
- helo=casper.infradead.org
+ desiato.infradead.org. See http://www.infradead.org/rpr.html
+Received-SPF: none client-ip=2001:8b0:10b:1:d65d:64ff:fe57:4e05;
+ envelope-from=BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org;
+ helo=desiato.infradead.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -107,7 +106,7 @@ X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
  SPF_NONE=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sun, 22 Oct 2023 12:11:02 -0400
+X-Mailman-Approved-At: Sun, 22 Oct 2023 12:11:03 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -124,75 +123,48 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Eliminate direct access to nd_table[] and nb_nics by processing the the
-ISA NICs first and then calling pci_init_nic_devices() for the test.
-
-It's important to do this *before* the subsequent patch which registers
-the Xen PV network devices, because the code being remove here didn't
-check whether nd->instantiated was already set before using each entry.
-
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/i386/pc.c                | 20 ++++++++++----------
- include/hw/net/ne2000-isa.h |  2 --
- 2 files changed, 10 insertions(+), 12 deletions(-)
+ include/net/net.h |  1 -
+ net/net.c         | 13 -------------
+ 2 files changed, 14 deletions(-)
 
-diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-index bb3854d1d0..e08600cbb3 100644
---- a/hw/i386/pc.c
-+++ b/hw/i386/pc.c
-@@ -652,8 +652,10 @@ static void pc_init_ne2k_isa(ISABus *bus, NICInfo *nd)
- {
-     static int nb_ne2k = 0;
- 
--    if (nb_ne2k == NE2000_NB_MAX)
-+    if (nb_ne2k == NE2000_NB_MAX) {
-+        error_setg(&error_fatal, "maximum number of ISA NE2000 devices exceeded");
-         return;
-+    }
-     isa_ne2000_init(bus, ne2000_io[nb_ne2k],
-                     ne2000_irq[nb_ne2k], nd);
-     nb_ne2k++;
-@@ -1294,19 +1296,17 @@ void pc_basic_device_init(struct PCMachineState *pcms,
- void pc_nic_init(PCMachineClass *pcmc, ISABus *isa_bus, PCIBus *pci_bus)
- {
-     MachineClass *mc = MACHINE_CLASS(pcmc);
--    int i;
-+    bool default_is_ne2k = g_str_equal(mc->default_nic, TYPE_ISA_NE2000);
-+    NICInfo *nd;
- 
-     rom_set_order_override(FW_CFG_ORDER_OVERRIDE_NIC);
--    for (i = 0; i < nb_nics; i++) {
--        NICInfo *nd = &nd_table[i];
--        const char *model = nd->model ? nd->model : mc->default_nic;
- 
--        if (g_str_equal(model, "ne2k_isa")) {
--            pc_init_ne2k_isa(isa_bus, nd);
--        } else {
--            pci_nic_init_nofail(nd, pci_bus, model, NULL);
--        }
-+    while ((nd = qemu_find_nic_info(TYPE_ISA_NE2000, default_is_ne2k, NULL))) {
-+        pc_init_ne2k_isa(isa_bus, nd);
-     }
-+
-+    pci_init_nic_devices(pci_bus, mc->default_nic);
-+
-     rom_reset_order_override();
+diff --git a/include/net/net.h b/include/net/net.h
+index ce830a47d0..1512650190 100644
+--- a/include/net/net.h
++++ b/include/net/net.h
+@@ -202,7 +202,6 @@ int qemu_set_vnet_le(NetClientState *nc, bool is_le);
+ int qemu_set_vnet_be(NetClientState *nc, bool is_be);
+ void qemu_macaddr_default_if_unset(MACAddr *macaddr);
+ int qemu_show_nic_models(const char *arg, const char *const *models);
+-void qemu_check_nic_model(NICInfo *nd, const char *model);
+ int qemu_find_nic_model(NICInfo *nd, const char * const *models,
+                         const char *default_model);
+ NICInfo *qemu_find_nic_info(const char *typename, bool match_default,
+diff --git a/net/net.c b/net/net.c
+index 23fd716b98..bdb31dcb27 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -977,19 +977,6 @@ int qemu_show_nic_models(const char *arg, const char *const *models)
+     return 1;
  }
  
-diff --git a/include/hw/net/ne2000-isa.h b/include/hw/net/ne2000-isa.h
-index af59ee0b02..73bae10ad1 100644
---- a/include/hw/net/ne2000-isa.h
-+++ b/include/hw/net/ne2000-isa.h
-@@ -22,8 +22,6 @@ static inline ISADevice *isa_ne2000_init(ISABus *bus, int base, int irq,
- {
-     ISADevice *d;
- 
--    qemu_check_nic_model(nd, "ne2k_isa");
+-void qemu_check_nic_model(NICInfo *nd, const char *model)
+-{
+-    const char *models[2];
 -
-     d = isa_try_new(TYPE_ISA_NE2000);
-     if (d) {
-         DeviceState *dev = DEVICE(d);
+-    models[0] = model;
+-    models[1] = NULL;
+-
+-    if (qemu_show_nic_models(nd->model, models))
+-        exit(0);
+-    if (qemu_find_nic_model(nd, models, model) < 0)
+-        exit(1);
+-}
+-
+ int qemu_find_nic_model(NICInfo *nd, const char * const *models,
+                         const char *default_model)
+ {
 -- 
 2.40.1
 
