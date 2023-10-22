@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 024FBC25B41
-	for <qemu-riscv@archiver.kernel.org>; Sun, 22 Oct 2023 16:13:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33390C00A8F
+	for <qemu-riscv@archiver.kernel.org>; Sun, 22 Oct 2023 16:13:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qub3C-0000Em-Qh; Sun, 22 Oct 2023 12:11:38 -0400
+	id 1qub3F-0000N2-8m; Sun, 22 Oct 2023 12:11:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1qual4-0004qm-Kf; Sun, 22 Oct 2023 11:52:54 -0400
-Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ <BATV+88d8721f4af1339c2fab+7364+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1quala-0005PP-Df; Sun, 22 Oct 2023 11:53:26 -0400
+Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1qual0-0000Aj-3j; Sun, 22 Oct 2023 11:52:54 -0400
+ <BATV+88d8721f4af1339c2fab+7364+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1qualT-0008WF-Fs; Sun, 22 Oct 2023 11:53:26 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+ d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=U+6sg4mLN1SbL87FQ6lU5ArebVuIAWz70s1SJZ0up+s=; b=C+1jCv8a2E5NH5EGDgCXnwY2uI
- L87za9N87Dj5WdkL1kX7mBtgJ2qk1muuGfDyjXed1LtX+BLrjSXo8jjwTjH+G1dczB07nFtr3CGVr
- tIiWv0q15BIPEcQmCuNR7PmVGaT18VcgoaEcngDVtZHbohpy7wHJETwaJ+fDn79uFhvDw63w/0t7j
- +IFLd7pimtNUSVrSi6B0p1vO3htbTiPzcjS2xUsruZuqwep/+DVqXHCMYKgTwUvA/f7NEaHA3Nap1
- n2Lqy1WS9hznvu9cKone/O0L3V/0SZJ6r2RIixHJCSCyS5Oiw2/NJAvafSQDg72WLAns//dFir7hV
- cAO5a46w==;
+ bh=HOx5IwxtS1QVSZAtDVm2t9NNNk95b57VMhnZXGvMKg0=; b=rv55j5Z641+WrDbx2SDJ+G8W45
+ ThK6O4QWd2R0tV3yylW9YX1BXTxHa+mzeJkXR3A3lKH0df493zAkJ57mL6jU/7u3XoKA1fJ5J6RbG
+ JVvj656r/q0nxqtOFKzVdvDWQLWqjkAcRuTaBBUudP4j+dIWu7mbkjlrsTtBW3YC+wKLwA3RTjIaD
+ v49jTAZqT73USsFXBw5JEDBBkzdTGKOoJ3DfDPDL5PzhuC0Gw9+A4MMSb8zqN5msTNe7q+nFcnLq0
+ d4hOSSRteS05EP/2apLcmjh0HV0eP6CmINCKAM1M9gvQb1cAGRkkK+EO2RPDbPza9dZ054UgstUPg
+ EHKEbNRQ==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1quakK-00DCn1-2s; Sun, 22 Oct 2023 15:52:29 +0000
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1quakJ-008TGT-9k; Sun, 22 Oct 2023 15:52:07 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1quakK-001qac-0C; Sun, 22 Oct 2023 16:52:08 +0100
+ Linux)) id 1quakI-001qZf-2u; Sun, 22 Oct 2023 16:52:06 +0100
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -85,19 +85,19 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org
-Subject: [PATCH 34/45] hw/microblaze: use qemu_configure_nic_device()
-Date: Sun, 22 Oct 2023 16:51:49 +0100
-Message-Id: <20231022155200.436340-35-dwmw2@infradead.org>
+Subject: [PATCH 21/45] hw/arm/allwinner: use qemu_configure_nic_device()
+Date: Sun, 22 Oct 2023 16:51:36 +0100
+Message-Id: <20231022155200.436340-22-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231022155200.436340-1-dwmw2@infradead.org>
 References: <20231022155200.436340-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- desiato.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1:d65d:64ff:fe57:4e05;
- envelope-from=BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org;
- helo=desiato.infradead.org
+ casper.infradead.org. See http://www.infradead.org/rpr.html
+Received-SPF: none client-ip=2001:8b0:10b:1236::1;
+ envelope-from=BATV+88d8721f4af1339c2fab+7364+infradead.org+dwmw2@casper.srs.infradead.org;
+ helo=casper.infradead.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -106,7 +106,7 @@ X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
  SPF_NONE=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sun, 22 Oct 2023 12:11:02 -0400
+X-Mailman-Approved-At: Sun, 22 Oct 2023 12:11:03 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -125,46 +125,98 @@ From: David Woodhouse <dwmw@amazon.co.uk>
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/microblaze/petalogix_ml605_mmu.c      | 3 +--
- hw/microblaze/petalogix_s3adsp1800_mmu.c | 3 +--
- 2 files changed, 2 insertions(+), 4 deletions(-)
+ hw/arm/allwinner-a10.c |  6 +-----
+ hw/arm/allwinner-h3.c  |  6 +-----
+ hw/arm/allwinner-r40.c | 27 ++-------------------------
+ 3 files changed, 4 insertions(+), 35 deletions(-)
 
-diff --git a/hw/microblaze/petalogix_ml605_mmu.c b/hw/microblaze/petalogix_ml605_mmu.c
-index fb7889cf67..0f5fabc32e 100644
---- a/hw/microblaze/petalogix_ml605_mmu.c
-+++ b/hw/microblaze/petalogix_ml605_mmu.c
-@@ -133,7 +133,6 @@ petalogix_ml605_init(MachineState *machine)
-     sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[TIMER_IRQ]);
+diff --git a/hw/arm/allwinner-a10.c b/hw/arm/allwinner-a10.c
+index b0ea3f7f66..57f52871ec 100644
+--- a/hw/arm/allwinner-a10.c
++++ b/hw/arm/allwinner-a10.c
+@@ -142,11 +142,7 @@ static void aw_a10_realize(DeviceState *dev, Error **errp)
+     sysbus_realize(SYS_BUS_DEVICE(&s->dramc), &error_fatal);
+     sysbus_mmio_map(SYS_BUS_DEVICE(&s->dramc), 0, AW_A10_DRAMC_BASE);
  
-     /* axi ethernet and dma initialization. */
--    qemu_check_nic_model(&nd_table[0], "xlnx.axi-ethernet");
-     eth0 = qdev_new("xlnx.axi-ethernet");
-     dma = qdev_new("xlnx.axi-dma");
+-    /* FIXME use qdev NIC properties instead of nd_table[] */
+-    if (nd_table[0].used) {
+-        qemu_check_nic_model(&nd_table[0], TYPE_AW_EMAC);
+-        qdev_set_nic_properties(DEVICE(&s->emac), &nd_table[0]);
+-    }
++    qemu_configure_nic_device(DEVICE(&s->emac), true, NULL);
+     if (!sysbus_realize(SYS_BUS_DEVICE(&s->emac), errp)) {
+         return;
+     }
+diff --git a/hw/arm/allwinner-h3.c b/hw/arm/allwinner-h3.c
+index f05afddf7e..4f102ad082 100644
+--- a/hw/arm/allwinner-h3.c
++++ b/hw/arm/allwinner-h3.c
+@@ -369,11 +369,7 @@ static void allwinner_h3_realize(DeviceState *dev, Error **errp)
+                               "sd-bus");
  
-@@ -145,7 +144,7 @@ petalogix_ml605_init(MachineState *machine)
-                                   "axistream-connected-target", NULL);
-     cs = object_property_get_link(OBJECT(dma),
-                                   "axistream-control-connected-target", NULL);
--    qdev_set_nic_properties(eth0, &nd_table[0]);
-+    qemu_configure_nic_device(eth0, true, NULL);
-     qdev_prop_set_uint32(eth0, "rxmem", 0x1000);
-     qdev_prop_set_uint32(eth0, "txmem", 0x1000);
-     object_property_set_link(OBJECT(eth0), "axistream-connected", ds,
-diff --git a/hw/microblaze/petalogix_s3adsp1800_mmu.c b/hw/microblaze/petalogix_s3adsp1800_mmu.c
-index 505639c298..dad46bd7f9 100644
---- a/hw/microblaze/petalogix_s3adsp1800_mmu.c
-+++ b/hw/microblaze/petalogix_s3adsp1800_mmu.c
-@@ -114,9 +114,8 @@ petalogix_s3adsp1800_init(MachineState *machine)
-     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, TIMER_BASEADDR);
-     sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[TIMER_IRQ]);
+     /* EMAC */
+-    /* FIXME use qdev NIC properties instead of nd_table[] */
+-    if (nd_table[0].used) {
+-        qemu_check_nic_model(&nd_table[0], TYPE_AW_SUN8I_EMAC);
+-        qdev_set_nic_properties(DEVICE(&s->emac), &nd_table[0]);
+-    }
++    qemu_configure_nic_device(DEVICE(&s->emac), true, NULL);
+     object_property_set_link(OBJECT(&s->emac), "dma-memory",
+                              OBJECT(get_system_memory()), &error_fatal);
+     sysbus_realize(SYS_BUS_DEVICE(&s->emac), &error_fatal);
+diff --git a/hw/arm/allwinner-r40.c b/hw/arm/allwinner-r40.c
+index a0d367c60d..4d5661b014 100644
+--- a/hw/arm/allwinner-r40.c
++++ b/hw/arm/allwinner-r40.c
+@@ -294,7 +294,6 @@ static void allwinner_r40_init(Object *obj)
  
--    qemu_check_nic_model(&nd_table[0], "xlnx.xps-ethernetlite");
-     dev = qdev_new("xlnx.xps-ethernetlite");
--    qdev_set_nic_properties(dev, &nd_table[0]);
-+    qemu_configure_nic_device(dev, true, NULL);
-     qdev_prop_set_uint32(dev, "tx-ping-pong", 0);
-     qdev_prop_set_uint32(dev, "rx-ping-pong", 0);
-     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+ static void allwinner_r40_realize(DeviceState *dev, Error **errp)
+ {
+-    const char *r40_nic_models[] = { "gmac", "emac", NULL };
+     AwR40State *s = AW_R40(dev);
+ 
+     /* CPUs */
+@@ -454,31 +453,8 @@ static void allwinner_r40_realize(DeviceState *dev, Error **errp)
+     sysbus_mmio_map(SYS_BUS_DEVICE(&s->dramc), 2,
+                     s->memmap[AW_R40_DEV_DRAMPHY]);
+ 
+-    /* nic support gmac and emac */
+-    for (int i = 0; i < ARRAY_SIZE(r40_nic_models) - 1; i++) {
+-        NICInfo *nic = &nd_table[i];
+-
+-        if (!nic->used) {
+-            continue;
+-        }
+-        if (qemu_show_nic_models(nic->model, r40_nic_models)) {
+-            exit(0);
+-        }
+-
+-        switch (qemu_find_nic_model(nic, r40_nic_models, r40_nic_models[0])) {
+-        case 0: /* gmac */
+-            qdev_set_nic_properties(DEVICE(&s->gmac), nic);
+-            break;
+-        case 1: /* emac */
+-            qdev_set_nic_properties(DEVICE(&s->emac), nic);
+-            break;
+-        default:
+-            exit(1);
+-            break;
+-        }
+-    }
+-
+     /* GMAC */
++    qemu_configure_nic_device(DEVICE(&s->gmac), true, "gmac");
+     object_property_set_link(OBJECT(&s->gmac), "dma-memory",
+                                      OBJECT(get_system_memory()), &error_fatal);
+     sysbus_realize(SYS_BUS_DEVICE(&s->gmac), &error_fatal);
+@@ -487,6 +463,7 @@ static void allwinner_r40_realize(DeviceState *dev, Error **errp)
+                        qdev_get_gpio_in(DEVICE(&s->gic), AW_R40_GIC_SPI_GMAC));
+ 
+     /* EMAC */
++    qemu_configure_nic_device(DEVICE(&s->emac), true, "emac");
+     sysbus_realize(SYS_BUS_DEVICE(&s->emac), &error_fatal);
+     sysbus_mmio_map(SYS_BUS_DEVICE(&s->emac), 0, s->memmap[AW_R40_DEV_EMAC]);
+     sysbus_connect_irq(SYS_BUS_DEVICE(&s->emac), 0,
 -- 
 2.40.1
 
