@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBE07C00A8F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E559DCDB474
 	for <qemu-riscv@archiver.kernel.org>; Sun, 22 Oct 2023 16:13:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qub33-0008Qy-KF; Sun, 22 Oct 2023 12:11:31 -0400
+	id 1qub3H-0000Ya-PK; Sun, 22 Oct 2023 12:11:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+88d8721f4af1339c2fab+7364+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1quakr-0004lZ-DZ; Sun, 22 Oct 2023 11:52:41 -0400
-Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
+ <BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1qual6-0004s3-NU; Sun, 22 Oct 2023 11:52:56 -0400
+Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+88d8721f4af1339c2fab+7364+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1quako-00004s-Fw; Sun, 22 Oct 2023 11:52:41 -0400
+ <BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1quakz-0000Al-Sy; Sun, 22 Oct 2023 11:52:55 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+ d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=KdVChXDyi4Lsk1+zy1mbsIif8KhkEel9PKnAsGBznGU=; b=vNnsctZ71nBlYPw/cwYJqzmKQl
- +4LnT94jVeyGtjJWUdI2onxOdZCqkhNeaRi+pRy6cUhbFLb0u2J+I5IpJsZPGAA8W1Vq5k5DhT7Cm
- U8/waeBSWRqUPZIkY4LVSzsIhFxstb48frzkyqqrseGjUSCwPwNNhW7ukPjq1qNgRUfKoHFnj37zN
- hitcYfFQvtcthqdZkIPa5oVCItjRv9+BhnIQ5L3xgykuS10AwVNEOMQgPSm/g+YJxYB6ZZ4dAXR7S
- Kzf5l34VwI/VdqTKImNsJOPSEIh6UmoX0cc+mBEX2LKmJvzUsOeM398BfMIW+CPJfqp/ujh2wTuUY
- fm5z52MQ==;
+ bh=c0xx8TE45H7mqNibBdaKqXZz525uhIFbtBrVwQI6/yE=; b=mzt9/M2tO54FWw2MlPjMC+HeN0
+ WfmOcNbA9opj8a0JF8uKEDYRY42oUrs9TeoSwMM3kTCW9sh6+/z0peT3bxYnMKENHh6yCfGCdmz4n
+ NR/UwvI2zHAMNeAefZxbihdGHZz7tef6l0wfM7JBuQk2AzbXmyObz25qh3c2EYL4DLREs5TWxRqWk
+ 8pJKExjCH50+duuqU6AxmcWmYkpO8/OUVm0YyQrH73mzL8UqZpCo05m5vv+ejjvUw7YS/X8jsvyMf
+ W7jW/BKVYlmPlTRpS8UVZqnVnTaUzZuGSH6/HzcsEIMNN5mchYLrJv1isqsny3dsOdGUD4zqj3UIo
+ iXnaUfjg==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1quakK-008TGo-RQ; Sun, 22 Oct 2023 15:52:08 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1quakK-00DCmx-2q; Sun, 22 Oct 2023 15:52:30 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1quakK-001qah-0a; Sun, 22 Oct 2023 16:52:08 +0100
+ Linux)) id 1quakJ-001qa9-1a; Sun, 22 Oct 2023 16:52:07 +0100
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -85,26 +85,27 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org
-Subject: [PATCH 35/45] hw/mips: use qemu_create_nic_device()
-Date: Sun, 22 Oct 2023 16:51:50 +0100
-Message-Id: <20231022155200.436340-36-dwmw2@infradead.org>
+Subject: [PATCH 28/45] hw/arm/npcm7xx: use qemu_configure_nic_device,
+ allow emc0/emc1 as aliases
+Date: Sun, 22 Oct 2023 16:51:43 +0100
+Message-Id: <20231022155200.436340-29-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231022155200.436340-1-dwmw2@infradead.org>
 References: <20231022155200.436340-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- casper.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1236::1;
- envelope-from=BATV+88d8721f4af1339c2fab+7364+infradead.org+dwmw2@casper.srs.infradead.org;
- helo=casper.infradead.org
+ desiato.infradead.org. See http://www.infradead.org/rpr.html
+Received-SPF: none client-ip=2001:8b0:10b:1:d65d:64ff:fe57:4e05;
+ envelope-from=BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org;
+ helo=desiato.infradead.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
 X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_MED=-2.3, SPF_NONE=0.001,
+ T_SPF_HELO_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-Mailman-Approved-At: Sun, 22 Oct 2023 12:11:02 -0400
 X-BeenThere: qemu-riscv@nongnu.org
@@ -123,93 +124,80 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-The Jazz and MIPS SIM platforms both instantiate their NIC only if a
-corresponding configuration exists for it. Convert them to use the
-qemu_create_nic_device() function for that.
+Also update the test to specify which device to attach the test socket
+to, and remove the comment lamenting the fact that we can't do so.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/mips/jazz.c    | 16 ++++++----------
- hw/mips/mipssim.c | 13 +++++++------
- 2 files changed, 13 insertions(+), 16 deletions(-)
+ hw/arm/npcm7xx.c               | 16 +++++++++-------
+ tests/qtest/npcm7xx_emc-test.c | 18 ++++--------------
+ 2 files changed, 13 insertions(+), 21 deletions(-)
 
-diff --git a/hw/mips/jazz.c b/hw/mips/jazz.c
-index c32d2b0b0a..b0f4aa2763 100644
---- a/hw/mips/jazz.c
-+++ b/hw/mips/jazz.c
-@@ -114,7 +114,7 @@ static const MemoryRegionOps dma_dummy_ops = {
-     .endianness = DEVICE_NATIVE_ENDIAN,
- };
+diff --git a/hw/arm/npcm7xx.c b/hw/arm/npcm7xx.c
+index 15ff21d047..7124547b50 100644
+--- a/hw/arm/npcm7xx.c
++++ b/hw/arm/npcm7xx.c
+@@ -655,8 +655,9 @@ static void npcm7xx_realize(DeviceState *dev, Error **errp)
  
--static void mips_jazz_init_net(NICInfo *nd, IOMMUMemoryRegion *rc4030_dma_mr,
-+static void mips_jazz_init_net(IOMMUMemoryRegion *rc4030_dma_mr,
-                                DeviceState *rc4030, MemoryRegion *dp8393x_prom)
- {
-     DeviceState *dev;
-@@ -122,10 +122,11 @@ static void mips_jazz_init_net(NICInfo *nd, IOMMUMemoryRegion *rc4030_dma_mr,
-     int checksum, i;
-     uint8_t *prom;
+     /*
+      * EMC Modules. Cannot fail.
+-     * The mapping of the device to its netdev backend works as follows:
+-     * emc[i] = nd_table[i]
++     * Use the available NIC configurations in order, allowing 'emc0' and
++     * 'emc1' to by used as aliases for the model= parameter to override.
++     *
+      * This works around the inability to specify the netdev property for the
+      * emc device: it's not pluggable and thus the -device option can't be
+      * used.
+@@ -664,12 +665,13 @@ static void npcm7xx_realize(DeviceState *dev, Error **errp)
+     QEMU_BUILD_BUG_ON(ARRAY_SIZE(npcm7xx_emc_addr) != ARRAY_SIZE(s->emc));
+     QEMU_BUILD_BUG_ON(ARRAY_SIZE(s->emc) != 2);
+     for (i = 0; i < ARRAY_SIZE(s->emc); i++) {
+-        s->emc[i].emc_num = i;
+         SysBusDevice *sbd = SYS_BUS_DEVICE(&s->emc[i]);
+-        if (nd_table[i].used) {
+-            qemu_check_nic_model(&nd_table[i], TYPE_NPCM7XX_EMC);
+-            qdev_set_nic_properties(DEVICE(sbd), &nd_table[i]);
+-        }
++        char alias[6];
++
++        s->emc[i].emc_num = i;
++        snprintf(alias, sizeof(alias), "%u", i);
++        qemu_configure_nic_device(DEVICE(sbd), true, alias);
++
+         /*
+          * The device exists regardless of whether it's connected to a QEMU
+          * netdev backend. So always instantiate it even if there is no
+diff --git a/tests/qtest/npcm7xx_emc-test.c b/tests/qtest/npcm7xx_emc-test.c
+index b046f1d76a..506f6980d4 100644
+--- a/tests/qtest/npcm7xx_emc-test.c
++++ b/tests/qtest/npcm7xx_emc-test.c
+@@ -225,21 +225,11 @@ static int *packet_test_init(int module_num, GString *cmd_line)
+     g_assert_cmpint(ret, != , -1);
  
--    qemu_check_nic_model(nd, "dp83932");
-+    dev = qemu_create_nic_device("dp8393x", true, "dp82932");
-+    if (!dev) {
-+        return;
-+    }
- 
--    dev = qdev_new("dp8393x");
--    qdev_set_nic_properties(dev, nd);
-     qdev_prop_set_uint8(dev, "it_shift", 2);
-     qdev_prop_set_bit(dev, "big_endian", TARGET_BIG_ENDIAN);
-     object_property_set_link(OBJECT(dev), "dma_mr",
-@@ -314,12 +315,7 @@ static void mips_jazz_init(MachineState *machine,
-     }
- 
-     /* Network controller */
--    if (nb_nics == 1) {
--        mips_jazz_init_net(&nd_table[0], rc4030_dma_mr, rc4030, dp8393x_prom);
--    } else if (nb_nics > 1) {
--        error_report("This machine only supports one NIC");
--        exit(1);
+     /*
+-     * KISS and use -nic. We specify two nics (both emc{0,1}) because there's
+-     * currently no way to specify only emc1: The driver implicitly relies on
+-     * emc[i] == nd_table[i].
++     * KISS and use -nic. The driver accepts 'emc0' and 'emc1' as aliases
++     * in the 'model' field to specify the device to match.
+      */
+-    if (module_num == 0) {
+-        g_string_append_printf(cmd_line,
+-                               " -nic socket,fd=%d,model=" TYPE_NPCM7XX_EMC " "
+-                               " -nic user,model=" TYPE_NPCM7XX_EMC " ",
+-                               test_sockets[1]);
+-    } else {
+-        g_string_append_printf(cmd_line,
+-                               " -nic user,model=" TYPE_NPCM7XX_EMC " "
+-                               " -nic socket,fd=%d,model=" TYPE_NPCM7XX_EMC " ",
+-                               test_sockets[1]);
 -    }
-+    mips_jazz_init_net(rc4030_dma_mr, rc4030, dp8393x_prom);
++    g_string_append_printf(cmd_line, " -nic socket,fd=%d,model=emc%d "
++                           test_sockets[1], module_num);
  
-     /* SCSI adapter */
-     dev = qdev_new(TYPE_SYSBUS_ESP);
-diff --git a/hw/mips/mipssim.c b/hw/mips/mipssim.c
-index 2f951f7fc6..072864f539 100644
---- a/hw/mips/mipssim.c
-+++ b/hw/mips/mipssim.c
-@@ -111,13 +111,15 @@ static void main_cpu_reset(void *opaque)
-     }
- }
- 
--static void mipsnet_init(int base, qemu_irq irq, NICInfo *nd)
-+static void mipsnet_init(int base, qemu_irq irq)
- {
-     DeviceState *dev;
-     SysBusDevice *s;
- 
--    dev = qdev_new("mipsnet");
--    qdev_set_nic_properties(dev, nd);
-+    dev = qemu_create_nic_device("mipsnet", true, NULL);
-+    if (!dev) {
-+        return;
-+    }
- 
-     s = SYS_BUS_DEVICE(dev);
-     sysbus_realize_and_unref(s, &error_fatal);
-@@ -218,9 +220,8 @@ mips_mipssim_init(MachineState *machine)
-                       sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0));
-     }
- 
--    if (nd_table[0].used)
--        /* MIPSnet uses the MIPS CPU INT0, which is interrupt 2. */
--        mipsnet_init(0x4200, env->irq[2], &nd_table[0]);
-+    /* MIPSnet uses the MIPS CPU INT0, which is interrupt 2. */
-+    mipsnet_init(0x4200, env->irq[2]);
- }
- 
- static void mips_mipssim_machine_init(MachineClass *mc)
+     g_test_queue_destroy(packet_test_clear, test_sockets);
+     return test_sockets;
 -- 
 2.40.1
 
