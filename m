@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DB10C25B41
-	for <qemu-riscv@archiver.kernel.org>; Sun, 22 Oct 2023 16:14:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9577AC00A8F
+	for <qemu-riscv@archiver.kernel.org>; Sun, 22 Oct 2023 16:14:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qub33-0008QJ-4E; Sun, 22 Oct 2023 12:11:29 -0400
+	id 1qub3D-0000Fo-AT; Sun, 22 Oct 2023 12:11:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+88d8721f4af1339c2fab+7364+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1quakr-0004lY-BQ; Sun, 22 Oct 2023 11:52:41 -0400
+ id 1qualY-0005H7-S4; Sun, 22 Oct 2023 11:53:24 -0400
 Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+88d8721f4af1339c2fab+7364+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1quako-0008WL-Jv; Sun, 22 Oct 2023 11:52:41 -0400
+ id 1qualT-0008WR-DC; Sun, 22 Oct 2023 11:53:24 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=igB1IK5oOoSe3ijCAJ2HgjOiVoli+QlUFi6e7XmNINs=; b=EREf3ovqvwxCLDPAJdSSJGo8hb
- jFWw5V+pv/dxOYxNE09cjQlFBYkZRiGNFEaNq0xWoMQ8ukbD17hJCPgxQhrfS9FOuBNDYI88H4n0g
- qvQ4qZEbVHh4bReqjkqvACKdqT1egEvJ9wjfWr+zaiO1aEoAo9xZ2ly5p28dOU5L29B9fOUBuOoMk
- faBExO4JLM8DLFu9WEWhkqi9Ge/6ET2MEVMCHwwTiE/hbsPDKhfB9R+8PNUBiR9QWMaY5rS8L9kUQ
- 4xneIGLTe36E0mmAyrXHmj55UnX+36ZPbc2Giyp+nwg6bccD0bdYIGd5tebvlzGZaWR7/SX/I2PDq
- 20Fb1Mmg==;
+ bh=dSwI1h0y4SH0kpqtgw6L1Gm8G2MktnLyUJxVywGZwBA=; b=mY5ncA8vKDZJwpYEQFDiCDsbub
+ fHgnJI7txngbGu+bLv8Ww/hB84od8jtF86VqAGHFXCEvxaPZjDoRZoJeV6PiYNAkyO11Ko9aiMDV8
+ 9KOpskxJPGs79JNvLAnHcNsQDluDR3ydBcND6AeKpT04tMbMSLRzAb499Ik/l0Jzv+Rlky+cl/05Y
+ CvaapmmWi50n0joewZBp0ylKt15DFZD5L35vW/jpErE4JKXm+Imjs69CAi1rij50OrXcl/l0suHiy
+ C9RUAuw6ABEpKOd+M0s9n5GHYQt92fduphuK88Zn1vTrUw5hPVSZmKN9QT2utnbMSOWtyBgrQJ/9L
+ b8T4xEHQ==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1quakJ-008TGa-O6; Sun, 22 Oct 2023 15:52:07 +0000
+ id 1quakJ-008TGS-5c; Sun, 22 Oct 2023 15:52:07 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1quakJ-001qa4-1M; Sun, 22 Oct 2023 16:52:07 +0100
+ Linux)) id 1quakI-001qZX-2D; Sun, 22 Oct 2023 16:52:06 +0100
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -85,9 +85,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org
-Subject: [PATCH 27/45] hw/arm/highbank: use qemu_create_nic_device()
-Date: Sun, 22 Oct 2023 16:51:42 +0100
-Message-Id: <20231022155200.436340-28-dwmw2@infradead.org>
+Subject: [PATCH 19/45] hw/sparc64/sun4u: use pci_init_nic_devices()
+Date: Sun, 22 Oct 2023 16:51:34 +0100
+Message-Id: <20231022155200.436340-20-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231022155200.436340-1-dwmw2@infradead.org>
 References: <20231022155200.436340-1-dwmw2@infradead.org>
@@ -123,40 +123,59 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
+The first sunhme NIC gets placed a function 1 on slot 1 of PCI bus A,
+and the rest are dynamically assigned on PCI bus B.
+
+Previously, any PCI NIC would get the special treatment purely by
+virtue of being first in the list.
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/arm/highbank.c | 12 +++++-------
- 1 file changed, 5 insertions(+), 7 deletions(-)
+ hw/sparc64/sun4u.c | 27 ++++++++-------------------
+ 1 file changed, 8 insertions(+), 19 deletions(-)
 
-diff --git a/hw/arm/highbank.c b/hw/arm/highbank.c
-index f12aacea6b..798e5391dc 100644
---- a/hw/arm/highbank.c
-+++ b/hw/arm/highbank.c
-@@ -296,19 +296,17 @@ static void calxeda_init(MachineState *machine, enum cxmachines machine_id)
+diff --git a/hw/sparc64/sun4u.c b/hw/sparc64/sun4u.c
+index d908a38f73..13e4380f30 100644
+--- a/hw/sparc64/sun4u.c
++++ b/hw/sparc64/sun4u.c
+@@ -642,29 +642,18 @@ static void sun4uv_init(MemoryRegion *address_space_mem,
  
-     sysbus_create_simple(TYPE_SYSBUS_AHCI, 0xffe08000, pic[83]);
+     memset(&macaddr, 0, sizeof(MACAddr));
+     onboard_nic = false;
+-    for (i = 0; i < nb_nics; i++) {
+-        PCIBus *bus;
+-        nd = &nd_table[i];
+-
+-        if (!nd->model || strcmp(nd->model, mc->default_nic) == 0) {
+-            if (!onboard_nic) {
+-                pci_dev = pci_new_multifunction(PCI_DEVFN(1, 1), mc->default_nic);
+-                bus = pci_busA;
+-                memcpy(&macaddr, &nd->macaddr.a, sizeof(MACAddr));
+-                onboard_nic = true;
+-            } else {
+-                pci_dev = pci_new(-1, mc->default_nic);
+-                bus = pci_busB;
+-            }
+-        } else {
+-            pci_dev = pci_new(-1, nd->model);
+-            bus = pci_busB;
+-        }
  
--    if (nd_table[0].used) {
--        qemu_check_nic_model(&nd_table[0], "xgmac");
--        dev = qdev_new("xgmac");
--        qdev_set_nic_properties(dev, &nd_table[0]);
-+    dev = qemu_create_nic_device("xgmac", true, NULL);
-+    if (dev) {
-         sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-         sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, 0xfff50000);
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, pic[77]);
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 1, pic[78]);
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 2, pic[79]);
-+    }
++    nd = qemu_find_nic_info(mc->default_nic, true, NULL);
++    if (nd) {
++        pci_dev = pci_new_multifunction(PCI_DEVFN(1, 1), mc->default_nic);
+         dev = &pci_dev->qdev;
+         qdev_set_nic_properties(dev, nd);
+-        pci_realize_and_unref(pci_dev, bus, &error_fatal);
++        pci_realize_and_unref(pci_dev, pci_busA, &error_fatal);
++
++        memcpy(&macaddr, &nd->macaddr.a, sizeof(MACAddr));
++        onboard_nic = true;
+     }
++    pci_init_nic_devices(pci_busB, mc->default_nic);
  
--        qemu_check_nic_model(&nd_table[1], "xgmac");
--        dev = qdev_new("xgmac");
--        qdev_set_nic_properties(dev, &nd_table[1]);
-+    dev = qemu_create_nic_device("xgmac", true, NULL);
-+    if (dev) {
-         sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-         sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, 0xfff51000);
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, pic[80]);
+     /* If we don't have an onboard NIC, grab a default MAC address so that
+      * we have a valid machine id */
 -- 
 2.40.1
 
