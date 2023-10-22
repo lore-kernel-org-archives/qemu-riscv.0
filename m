@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 173F8CDB474
-	for <qemu-riscv@archiver.kernel.org>; Sun, 22 Oct 2023 16:11:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D05FDCDB474
+	for <qemu-riscv@archiver.kernel.org>; Sun, 22 Oct 2023 16:11:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qub2q-0008Mh-He; Sun, 22 Oct 2023 12:11:16 -0400
+	id 1qub2g-0008Hh-8O; Sun, 22 Oct 2023 12:11:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1qualr-0006GG-Ew; Sun, 22 Oct 2023 11:53:43 -0400
+ id 1qual3-0004qT-EB; Sun, 22 Oct 2023 11:52:53 -0400
 Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1qualp-0000XD-KR; Sun, 22 Oct 2023 11:53:43 -0400
+ id 1quakz-0000Ay-Mc; Sun, 22 Oct 2023 11:52:53 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=GvZd+mCmu6NeCRzPCg8aufDD7tl83G6RcEOJSEC8eMQ=; b=C9RQBDaLCN/hUGMgMuuERfefi6
- Wnmx6kPEVaAqcY/910QB2Iuqp/dlofXdmNWxnJhRfWKVg5AeIW1pFajvtYPRs0cGkVTFYxL48B6qf
- oI6Db4U8ZZhHAaOMI4ZLqaN7bAPPEH6rZUFjVyGp+sBTdppM42m4vlqdQQ/f7+4/Nr85PsIAghKtb
- YcfPpOvfKU9J7dboi9h3a8EA7ldlMem44fYg2U5Pjw2sMMQ9xVkGKP761OB2X4XCrOmrDSRG387xP
- dbIgMUHhwu15mLmK919753XxuZzf3fpGSUAv3vLGcx7HGD4FzF6XjTTP6ZE03iyhWCOKYQkmNBoKS
- TbxcbEpQ==;
+ bh=2pDGewIOozNTKyf2OldMVVayi4C1vxF7TkMEapx75UM=; b=Saf3H/Ddo4P2X21+F943q20V9E
+ IH4TqcgjTFsjy6FVNIy55caMRuYY1nRP+BtW/RvvyJgr0UoPbIHZFEwW4uHroFPneBHdJIm2hTJeQ
+ EfgBJ/nEz1ZUf7fJVSAjQ4uW4Zs3vcf9EJReL0aqNSAHD6M5W9PRr+NZqTh6NUN7wp3jiP2XR4ahd
+ oXwXUMPUjXZdIWZ/vpg7DFiR4nLoRJRJaGt7pDSgzTYCF8H9+CQxzcuRd/XUQ7qxCrT7C+gQ+cjHQ
+ VTHNMfJt2Uy7rTARhSrMQ1IsuYak9yrxEIsGUvuzkT92etZY8lfFqZsNNTNOuW4CE24mb5G7+L+hG
+ kTnCqj+g==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1quakI-00DCmm-0U; Sun, 22 Oct 2023 15:53:23 +0000
+ id 1quakM-00DCn2-0R; Sun, 22 Oct 2023 15:52:37 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1quakH-001qYt-1s; Sun, 22 Oct 2023 16:52:05 +0100
+ Linux)) id 1quakK-001qb4-2G; Sun, 22 Oct 2023 16:52:08 +0100
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -85,9 +85,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org
-Subject: [PATCH 10/45] hw/hppa: use pci_init_nic_devices()
-Date: Sun, 22 Oct 2023 16:51:25 +0100
-Message-Id: <20231022155200.436340-11-dwmw2@infradead.org>
+Subject: [PATCH 40/45] hw/sparc/sun4m: use qemu_configure_nic_device()
+Date: Sun, 22 Oct 2023 16:51:55 +0100
+Message-Id: <20231022155200.436340-41-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231022155200.436340-1-dwmw2@infradead.org>
 References: <20231022155200.436340-1-dwmw2@infradead.org>
@@ -106,7 +106,7 @@ X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
  SPF_NONE=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sun, 22 Oct 2023 12:11:03 -0400
+X-Mailman-Approved-At: Sun, 22 Oct 2023 12:11:02 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -125,26 +125,51 @@ From: David Woodhouse <dwmw@amazon.co.uk>
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/hppa/machine.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ hw/sparc/sun4m.c | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
 
-diff --git a/hw/hppa/machine.c b/hw/hppa/machine.c
-index cf28cb9586..97d9b44c4f 100644
---- a/hw/hppa/machine.c
-+++ b/hw/hppa/machine.c
-@@ -272,10 +272,8 @@ static void machine_hppa_init(MachineState *machine)
-                         qdev_get_gpio_in(lasi_dev, LASI_IRQ_LAN_HPA));
+diff --git a/hw/sparc/sun4m.c b/hw/sparc/sun4m.c
+index 17bf5f2879..259cf2f383 100644
+--- a/hw/sparc/sun4m.c
++++ b/hw/sparc/sun4m.c
+@@ -299,7 +299,7 @@ static void *iommu_init(hwaddr addr, uint32_t version, qemu_irq irq)
+ 
+ static void *sparc32_dma_init(hwaddr dma_base,
+                               hwaddr esp_base, qemu_irq espdma_irq,
+-                              hwaddr le_base, qemu_irq ledma_irq, NICInfo *nd)
++                              hwaddr le_base, qemu_irq ledma_irq)
+ {
+     DeviceState *dma;
+     ESPDMADeviceState *espdma;
+@@ -320,7 +320,7 @@ static void *sparc32_dma_init(hwaddr dma_base,
+ 
+     lance = SYSBUS_PCNET(object_resolve_path_component(
+                          OBJECT(ledma), "lance"));
+-    qdev_set_nic_properties(DEVICE(lance), nd);
++    qemu_configure_nic_device(DEVICE(lance), true, NULL);
+ 
+     sysbus_realize_and_unref(SYS_BUS_DEVICE(dma), &error_fatal);
+     sysbus_mmio_map(SYS_BUS_DEVICE(dma), 0, dma_base);
+@@ -832,7 +832,6 @@ static void sun4m_hw_init(MachineState *machine)
+     unsigned int smp_cpus = machine->smp.cpus;
+     unsigned int max_cpus = machine->smp.max_cpus;
+     HostMemoryBackend *ram_memdev = machine->memdev;
+-    NICInfo *nd = &nd_table[0];
+ 
+     if (machine->ram_size > hwdef->max_mem) {
+         error_report("Too much memory for this machine: %" PRId64 ","
+@@ -893,10 +892,9 @@ static void sun4m_hw_init(MachineState *machine)
+                         hwdef->iommu_pad_base, hwdef->iommu_pad_len);
      }
  
--    for (i = 0; i < nb_nics; i++) {
--        if (!enable_lasi_lan()) {
--            pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
--        }
-+    if (!enable_lasi_lan()) {
-+        pci_init_nic_devices(pci_bus, mc->default_nic);
-     }
+-    qemu_check_nic_model(nd, TYPE_LANCE);
+     sparc32_dma_init(hwdef->dma_base,
+                      hwdef->esp_base, slavio_irq[18],
+-                     hwdef->le_base, slavio_irq[16], nd);
++                     hwdef->le_base, slavio_irq[16]);
  
-     /* PS/2 Keyboard/Mouse */
+     if (graphic_depth != 8 && graphic_depth != 24) {
+         error_report("Unsupported depth: %d", graphic_depth);
 -- 
 2.40.1
 
