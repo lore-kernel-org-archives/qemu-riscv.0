@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7414C00A8F
-	for <qemu-riscv@archiver.kernel.org>; Sun, 22 Oct 2023 16:11:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4617CDB474
+	for <qemu-riscv@archiver.kernel.org>; Sun, 22 Oct 2023 16:11:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qub36-00006a-CU; Sun, 22 Oct 2023 12:11:32 -0400
+	id 1qub2h-0008JO-VH; Sun, 22 Oct 2023 12:11:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1qual3-0004qb-HP; Sun, 22 Oct 2023 11:52:54 -0400
+ id 1qual4-0004ql-GM; Sun, 22 Oct 2023 11:52:54 -0400
 Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1qual0-0000Ai-6Y; Sun, 22 Oct 2023 11:52:53 -0400
+ id 1qual0-0000Ah-4A; Sun, 22 Oct 2023 11:52:54 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=6H4GKDrl3LtGOn+0aF2tgywlevIYDf06qVJKTWuBUKo=; b=pow24CYPDLt1PWCw93p6hwpKP5
- YTBMeSRjPYfBXglbqxoLeuz9N/S9JFiFuaQnZjokSZhHK9B/JSGbY79Y65dCU0yo7/x9FHzWkWlxN
- JJsJ3Wsgx1lWC3E0lOn/wh4KL46CDd9qTHjxgkCGLmetkq6oQCO+yRGjMfXZBLl0+uf45jbpKbEtN
- 13vnWHCIYO5Mv3HVQNpRNV6M061EjFt7lDijaJLyObU2/Y3ZBv61Xk0TZnJagIBzSdc33owqz6+Ij
- KOmMWMt8ybv4f3oFpIOLuY13QcVeFlAulrHVf67l4Ntsm8PNyUIikk3a0zqplTLUXdV560t+oSArT
- C0jUXBrg==;
+ bh=oOd4742xrV3Y0XOyAJZySn8cRLGpoNriHOlI9x39KS0=; b=YbTCMRd7hoqOTnIQMmaut6SKcP
+ hqjRUOF9WHCogZj8TTzREvSMciRu/pS4D+ZFAsDqpL2Tn6+e4+eSO4y/iE57Roq06Hzm9KU4YXvQ6
+ LPQ/D2iTkR5F+NfJfnJYfdMsDcBvvbJE4JYbLyCO7Bdr+BfUoYG8GiVOe/we0qZtLgZLmJkTbWxDk
+ IqF/aZ92jUpOzOX03KVXmNpCy4SHjP/7lFm/mxv8uLPE9IxNSJJyZ3AcB7Dt9XY+kNXlLFrpNuttr
+ v2ObvLfImy1Dru3PDM3/7/Fs8jitvY4M8YMzFmUh5pRxRNuII47bf4cB8Ac02Uhe0Kj7zQy7u8fLr
+ C5+/kwrA==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1quakJ-00DCmt-22; Sun, 22 Oct 2023 15:52:22 +0000
+ id 1quakJ-00DCmr-22; Sun, 22 Oct 2023 15:52:22 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1quakI-001qZb-2Z; Sun, 22 Oct 2023 16:52:06 +0100
+ Linux)) id 1quakI-001qZH-12; Sun, 22 Oct 2023 16:52:06 +0100
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -85,9 +85,10 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org
-Subject: [PATCH 20/45] hw/xtensa/virt: use pci_init_nic_devices()
-Date: Sun, 22 Oct 2023 16:51:35 +0100
-Message-Id: <20231022155200.436340-21-dwmw2@infradead.org>
+Subject: [PATCH 16/45] hw/ppc/spapr: use qemu_get_nic_info() and
+ pci_init_nic_devices()
+Date: Sun, 22 Oct 2023 16:51:31 +0100
+Message-Id: <20231022155200.436340-17-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231022155200.436340-1-dwmw2@infradead.org>
 References: <20231022155200.436340-1-dwmw2@infradead.org>
@@ -123,26 +124,55 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
+Avoid directly referencing nd_table[] by first instantiating any
+spapr-vlan devices using a qemu_get_nic_info() loop, then calling
+pci_init_nic_devices() to do the rest.
+
+No functional change intended.
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/xtensa/virt.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ hw/ppc/spapr.c | 18 +++++-------------
+ 1 file changed, 5 insertions(+), 13 deletions(-)
 
-diff --git a/hw/xtensa/virt.c b/hw/xtensa/virt.c
-index a6cf646e99..5310a88861 100644
---- a/hw/xtensa/virt.c
-+++ b/hw/xtensa/virt.c
-@@ -102,9 +102,7 @@ static void create_pcie(MachineState *ms, CPUXtensaState *env, int irq_base,
+diff --git a/hw/ppc/spapr.c b/hw/ppc/spapr.c
+index cb840676d3..7db6c6641a 100644
+--- a/hw/ppc/spapr.c
++++ b/hw/ppc/spapr.c
+@@ -2775,6 +2775,7 @@ static void spapr_machine_init(MachineState *machine)
+     MemoryRegion *sysmem = get_system_memory();
+     long load_limit, fw_size;
+     Error *resize_hpt_err = NULL;
++    NICInfo *nd;
  
-     pci = PCI_HOST_BRIDGE(dev);
-     if (pci->bus) {
--        for (i = 0; i < nb_nics; i++) {
--            pci_nic_init_nofail(&nd_table[i], pci->bus, mc->default_nic, NULL);
+     if (!filename) {
+         error_report("Could not find LPAR firmware '%s'", bios_name);
+@@ -2982,21 +2983,12 @@ static void spapr_machine_init(MachineState *machine)
+ 
+     phb = spapr_create_default_phb();
+ 
+-    for (i = 0; i < nb_nics; i++) {
+-        NICInfo *nd = &nd_table[i];
+-
+-        if (!nd->model) {
+-            nd->model = g_strdup("spapr-vlan");
 -        }
-+        pci_init_nic_devices(pci->bus, mc->default_nic);
+-
+-        if (g_str_equal(nd->model, "spapr-vlan") ||
+-            g_str_equal(nd->model, "ibmveth")) {
+-            spapr_vlan_create(spapr->vio_bus, nd);
+-        } else {
+-            pci_nic_init_nofail(&nd_table[i], phb->bus, nd->model, NULL);
+-        }
++    while ((nd = qemu_get_nic_info("spapr-vlan", true, "ibmveth"))) {
++        spapr_vlan_create(spapr->vio_bus, nd);
      }
- }
  
++    pci_init_nic_devices(phb->bus, NULL);
++
+     for (i = 0; i <= drive_get_max_bus(IF_SCSI); i++) {
+         spapr_vscsi_create(spapr->vio_bus);
+     }
 -- 
 2.40.1
 
