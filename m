@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 467DBC25B42
-	for <qemu-riscv@archiver.kernel.org>; Sun, 22 Oct 2023 16:12:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D61CC001DF
+	for <qemu-riscv@archiver.kernel.org>; Sun, 22 Oct 2023 16:12:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qub3H-0000YU-ON; Sun, 22 Oct 2023 12:11:43 -0400
+	id 1qub3Q-0000zi-TX; Sun, 22 Oct 2023 12:11:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1qualr-0006GK-Fc; Sun, 22 Oct 2023 11:53:43 -0400
+ id 1quamj-0008FE-In; Sun, 22 Oct 2023 11:54:40 -0400
 Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1qualp-0000XF-IQ; Sun, 22 Oct 2023 11:53:43 -0400
+ id 1quamg-0000Xv-0Q; Sun, 22 Oct 2023 11:54:36 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=CbpypJM+7758idssLucgHt3d8KaEsPzws7dfN1MFAeI=; b=M688D+yehinlotRUrOat5KbGKy
- 829STlbnnKEdhJPqlWBv6O7k1rVZ6XbZ0SV6ItGgSuuyDDCNBoxxb90RS8KfDTw+U8H55dYB5CWa/
- gDsXJhKbrkwfZ4qgGvP7+cXJy0mouWaWRhCAeA7uEWDPTFK9NSijkMiQzVuhAiXPmcKBMS6Npii6p
- DvMqXidNsPhCXAmAsU0WjR5V5HvmERdy9W5lO3kpqniMx6wtF8JX2cNYTa1DKXX8b/5KmeoZSfgSF
- sfWE1FTZXFYXCWvNPnZnkCqUFWeD3+BJ7YiQ1OvWCCtsAk1DTAMWzFffrJr/rwO2KXL8AMJPIxWRN
- Mi9NQvTQ==;
+ bh=W0adFdXMEbi8j4klLNUE97TjOqmUyikyi07uSfzF8bk=; b=qpLAo7x6BHsqRoyzs5LkZJVNpU
+ rTqiz5+Kq2oN/1n+kFGKWDDux3umF5SQIwtEJ9v7BBHiQVLR1Rs0LiuNG7KzjEORDAW18ZjsxHFx1
+ msfIqKZXpZQ6XCKXgGFOx0UssR8BTar+zheMXWCYmiI0eKjaP0RFd3ihZBF8VvbZFIQDWgCAT53Nr
+ WIvL1++L7kuTZhujt3SbsK364oiN7GCurcqrSj1+0kBuQrk774oS0IKc8QvVEF3E8T9w41pygkm7U
+ IkTBTSrjRSFNyGb1MkrMrvWdF6sIRhZbA9j//JaP7l1yDFWkVrcjaRZSkCT9kmW7nK1/1t/vDswLw
+ Qu/TrZKg==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1quakJ-00DCmv-23; Sun, 22 Oct 2023 15:53:21 +0000
+ id 1quakI-00DCml-0V; Sun, 22 Oct 2023 15:53:38 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1quakJ-001qZn-0G; Sun, 22 Oct 2023 16:52:07 +0100
+ Linux)) id 1quakH-001qYo-1T; Sun, 22 Oct 2023 16:52:05 +0100
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -85,9 +85,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org
-Subject: [PATCH 23/45] hw/arm/exynos4: use qemu_create_nic_device()
-Date: Sun, 22 Oct 2023 16:51:38 +0100
-Message-Id: <20231022155200.436340-24-dwmw2@infradead.org>
+Subject: [PATCH 09/45] hw/arm/virt: use pci_init_nic_devices()
+Date: Sun, 22 Oct 2023 16:51:24 +0100
+Message-Id: <20231022155200.436340-10-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231022155200.436340-1-dwmw2@infradead.org>
 References: <20231022155200.436340-1-dwmw2@infradead.org>
@@ -125,26 +125,24 @@ From: David Woodhouse <dwmw@amazon.co.uk>
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/arm/exynos4_boards.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ hw/arm/virt.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/hw/arm/exynos4_boards.c b/hw/arm/exynos4_boards.c
-index ef5bcbc212..b804357e2a 100644
---- a/hw/arm/exynos4_boards.c
-+++ b/hw/arm/exynos4_boards.c
-@@ -76,10 +76,8 @@ static void lan9215_init(uint32_t base, qemu_irq irq)
-     SysBusDevice *s;
+diff --git a/hw/arm/virt.c b/hw/arm/virt.c
+index 15e74249f9..6b43b92b89 100644
+--- a/hw/arm/virt.c
++++ b/hw/arm/virt.c
+@@ -1477,9 +1477,7 @@ static void create_pcie(VirtMachineState *vms)
+     pci->bypass_iommu = vms->default_bus_bypass_iommu;
+     vms->bus = pci->bus;
+     if (vms->bus) {
+-        for (i = 0; i < nb_nics; i++) {
+-            pci_nic_init_nofail(&nd_table[i], pci->bus, mc->default_nic, NULL);
+-        }
++        pci_init_nic_devices(pci->bus, mc->default_nic);
+     }
  
-     /* This should be a 9215 but the 9118 is close enough */
--    if (nd_table[0].used) {
--        qemu_check_nic_model(&nd_table[0], "lan9118");
--        dev = qdev_new(TYPE_LAN9118);
--        qdev_set_nic_properties(dev, &nd_table[0]);
-+    dev = qemu_create_nic_device(TYPE_LAN9118, true, NULL);
-+    if (dev) {
-         qdev_prop_set_uint32(dev, "mode_16bit", 1);
-         s = SYS_BUS_DEVICE(dev);
-         sysbus_realize_and_unref(s, &error_fatal);
+     nodename = vms->pciehb_nodename = g_strdup_printf("/pcie@%" PRIx64, base);
 -- 
 2.40.1
 
