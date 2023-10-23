@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 006A3CDB474
-	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Oct 2023 03:01:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81522CDB474
+	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Oct 2023 03:39:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qulC9-0003UD-Gf; Sun, 22 Oct 2023 23:01:33 -0400
+	id 1qulmW-0001tV-Cr; Sun, 22 Oct 2023 23:39:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qulC7-0003TT-6Z; Sun, 22 Oct 2023 23:01:31 -0400
-Received: from mail-vk1-xa31.google.com ([2607:f8b0:4864:20::a31])
+ id 1qulmT-0001ss-4A; Sun, 22 Oct 2023 23:39:05 -0400
+Received: from mail-vk1-xa36.google.com ([2607:f8b0:4864:20::a36])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qulC5-0008Ow-9L; Sun, 22 Oct 2023 23:01:30 -0400
-Received: by mail-vk1-xa31.google.com with SMTP id
- 71dfb90a1353d-4a8158e8613so1143204e0c.3; 
- Sun, 22 Oct 2023 20:01:28 -0700 (PDT)
+ id 1qulmR-0005hM-62; Sun, 22 Oct 2023 23:39:04 -0400
+Received: by mail-vk1-xa36.google.com with SMTP id
+ 71dfb90a1353d-49ab0641e77so1234525e0c.0; 
+ Sun, 22 Oct 2023 20:39:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698030088; x=1698634888; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1698032341; x=1698637141; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=knQoWeGR7b2Ctgu87wqWxobRWfPB9rMktSOsqOPVdJI=;
- b=R/WheOzMfdFuZ7MyisJZA8Z0p3+wBleuoqniEbV7Rq8plNcz1RvzqJirjuWjdk8MDz
- i94o9YGfj18ycUK2ZsAx2qgVcuG0BPlHTT18zmnpIl3oLPlea+AN52gvl3QEOcixaUyD
- 2bEA7YWvYP62ETmchNxFelDWtguCn36l/gZHYydiKB0B4hLN/DDrMN6CNgOup55DFWf6
- RrOUgflXn+LQyo054UiornzAhuI/lLMxv/XbJEIy8Asqbx6t3iPwY2QufGlQaBMC3FAZ
- yu6biDZ/km4ZuGlTAFObkzcwkltkq3+ZR0hVSfrg166FXx8tlYtzqGP/QQ3JO1ZjUeNO
- 9Ncg==
+ bh=tF1MgKOCFK14ezvXAqnC5iepsOjXwv5RD8H609Y53JM=;
+ b=ULQlcSzXy9sAXnKaKkIryE35+3ZxytV9Wy4IiKju//3tNghsiRtQ5sWlXCTt1eii2l
+ PplzHE7HO7w8/2Sl0sweyuoHHSy93m8634Pon6n6/QCxdJlFZ6FSXQwNoDUpYXG0ChgX
+ qNumVYOn8NmK1/nDqNrR+hRG7QHIuuGA/7vp9jXTuQCtq/kyuGbXfxOUkC/q/kE5ot6D
+ YdD44oWvymnZS52xFHk5O8GBrYYq5BhOIUI0T5T0xjp1k3UwG8XRgTlCv0qq8WLls2L6
+ RaFlcjUV+Xm8qpVeXhu1hHNHijOgzFjNUqgta+vrpo5Ed0kdANVVxd4NR4MKci4lTXPt
+ o2Vg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698030088; x=1698634888;
+ d=1e100.net; s=20230601; t=1698032341; x=1698637141;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=knQoWeGR7b2Ctgu87wqWxobRWfPB9rMktSOsqOPVdJI=;
- b=RsZqYw4xMZGReMTYre2FqktTQyScgBTyU0r2thLaO6vXCWeGuTjYtNw/4Y0V/xvPzW
- 033Ae+YoPrtMgB0P/INXNUCEK++O9bp393JcjnFYCVYTCyheaomDOG9h+JifmOsKdZk0
- TVSc0srDJmH5yZJRVnyOi7h1J62Cg019gwZvhZC4m+2i4L+ePSlaEgZAWipWdGrhxXvv
- f0MHPcVbbuR2AcW/FaQoTR64FZR5RpAZsfdhjUxe8jMEnoaxc8rqnBCzCxB1k5JmY9KQ
- ZCUE0uOnfzCEIAkp8Mg9hCTHkBergvl0PEi+UMONMuW5+RzZvn/izPVRX/RN8HNZ/Fmk
- 1GzQ==
-X-Gm-Message-State: AOJu0YwtC/EkABsf3kjlLMquf4v3ioZe6LQxPtaTXAV0p17Grvd2QO4m
- 3dENvJoC1kfVElmtTCpt4v+Mb3sLUjpM3TAjgus=
-X-Google-Smtp-Source: AGHT+IG4YS0+jYCo1L0QgvFEwinQbnF8CiKdv+aUh4wjL4tkctnHzZXgrPIbApcIeWdDVAIVzCZhNaiJAagSyCMp1ok=
-X-Received: by 2002:a67:e013:0:b0:457:b9da:db12 with SMTP id
- c19-20020a67e013000000b00457b9dadb12mr6682080vsl.12.1698030087831; Sun, 22
- Oct 2023 20:01:27 -0700 (PDT)
+ bh=tF1MgKOCFK14ezvXAqnC5iepsOjXwv5RD8H609Y53JM=;
+ b=TcKn3Q2cZi2UFx023YsADqHzbT+1m5njkYkavViLDkhIX1mfm4MmnWQIOHOtWakxdH
+ oyv5i7mzC4LXMCh1H1eJbsnguLajrk17ck7CSDLspbzsdvFDxf4kxfaVruRnO8z/GbKZ
+ pzUvhNCIWBU4lrCnGr3mKCe1LoIzvNqc39ln+50YOK12+gln6/yc357WOAiMhbl6Co30
+ oqW6Gj4vfVh4/yagoUWfzjQdiCNoaH+5gPYqxXPyvv7D1tzucAVcpOALv3nWGmfiKOar
+ kZXoCtiKqENb4egynfTLDDsVrH2n6IpRZFAh3zZIlb7iJr2N3Vn4r8PvP7KMn8D6tK79
+ Wfng==
+X-Gm-Message-State: AOJu0YwqNEbKjN5kqzyQ/N2Brpxa69scPRXn/XmLFiEH4N0tRE0fk5US
+ kPGNllSLABjtrLMT9ryxoZPGcQN9kGl59Fy9wqk=
+X-Google-Smtp-Source: AGHT+IH671VPJHeSKljhNE1rTb3KfdayIY2x2TBWyjGB5Hg/GwWbBG7cIgsWl3PsB+zIYHLCtZdGR0VWBIyR81TsBeM=
+X-Received: by 2002:a67:ca01:0:b0:457:c46b:8fba with SMTP id
+ z1-20020a67ca01000000b00457c46b8fbamr7437149vsk.5.1698032341511; Sun, 22 Oct
+ 2023 20:39:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231018195638.211151-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20231018195638.211151-1-dbarboza@ventanamicro.com>
+References: <20231017221226.136764-1-dbarboza@ventanamicro.com>
+ <20231017221226.136764-5-dbarboza@ventanamicro.com>
+In-Reply-To: <20231017221226.136764-5-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 23 Oct 2023 13:00:00 +1000
-Message-ID: <CAKmqyKO4ac=OycEDuQv4PZc6+K2s73e=NhVCNbKenhSpeU1YGA@mail.gmail.com>
-Subject: Re: [PATCH v3 0/6] riscv: query-cpu-model-expansion API
+Date: Mon, 23 Oct 2023 13:38:34 +1000
+Message-ID: <CAKmqyKPMzGC7G6hjSG_-nmHQsL0R9ztYtOrUc+_kXZXAHxAnVQ@mail.gmail.com>
+Subject: Re: [PATCH v2 4/6] target/riscv/cpu.c: add zihpm extension flag
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
  palmer@rivosinc.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a31;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa31.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a36;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa36.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -89,140 +90,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Oct 19, 2023 at 7:05=E2=80=AFAM Daniel Henrique Barboza
+On Wed, Oct 18, 2023 at 8:14=E2=80=AFAM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> Hi,
+> zihpm is the Hardware Performance Counters extension described in
+> chapter 12 of the unprivileged spec. It describes support for 29
+> unprivileged performance counters, hpmcounter3-hpmcounter31.
 >
-> This is a re-send of v2 after fixing a trivial conflict with Alistair's
-> riscv-to-apply.next.
+> As with zicntr, QEMU already implements zihpm before it was even an
+> extension. zihpm is also part of the RVA22 profile, so add it to QEMU
+> to complement the future profile implementation.
 >
-> No other changes made. All patches acked.
+> Default it to 'true' for all existing CPUs since it was always present
+> in the code.
 >
-> Changes from v2:
-> - rebased with Alistair's riscv-to-apply.next
-> - v2 link: https://lore.kernel.org/qemu-riscv/20230926184019.166352-1-dba=
-rboza@ventanamicro.com/
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>  target/riscv/cpu.c     | 3 +++
+>  target/riscv/cpu_cfg.h | 1 +
+>  2 files changed, 4 insertions(+)
 >
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index f478245254..c64cd726f4 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -84,6 +84,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
+>      ISA_EXT_DATA_ENTRY(zifencei, PRIV_VERSION_1_10_0, ext_zifencei),
+>      ISA_EXT_DATA_ENTRY(zihintntl, PRIV_VERSION_1_10_0, ext_zihintntl),
+>      ISA_EXT_DATA_ENTRY(zihintpause, PRIV_VERSION_1_10_0, ext_zihintpause=
+),
+> +    ISA_EXT_DATA_ENTRY(zihpm, PRIV_VERSION_1_12_0, ext_zihpm),
+>      ISA_EXT_DATA_ENTRY(zmmul, PRIV_VERSION_1_12_0, ext_zmmul),
+>      ISA_EXT_DATA_ENTRY(zawrs, PRIV_VERSION_1_12_0, ext_zawrs),
+>      ISA_EXT_DATA_ENTRY(zfa, PRIV_VERSION_1_12_0, ext_zfa),
+> @@ -1185,6 +1186,7 @@ static void riscv_cpu_init(Object *obj)
+>       * users disable them.
+>       */
+>      RISCV_CPU(obj)->cfg.ext_zicntr =3D true;
+> +    RISCV_CPU(obj)->cfg.ext_zihpm =3D true;
+>  }
 >
-> --- API usage examples ---
+>  typedef struct misa_ext_info {
+> @@ -1274,6 +1276,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[]=
+ =3D {
+>      MULTI_EXT_CFG_BOOL("svpbmt", ext_svpbmt, false),
 >
-> Launch QEMU with "-S" to be able to issue QMP query commands before the m=
-achine starts:
->
-> $ ./build/qemu-system-riscv64 -S -M virt -display none -qmp  tcp:localhos=
-t:1234,server,wait=3Doff
->
-> Then use QMP to access the API:
->
-> $ ./scripts/qmp/qmp-shell localhost:1234
-> Welcome to the QMP low-level shell!
-> Connected to QEMU 8.1.50
->
-> - Query the default attributes for the 'rv64' CPU:
->
-> (QEMU)  query-cpu-model-expansion type=3Dfull model=3D{"name":"rv64"}
-> {"return": {"model": {"name": "rv64", "props": {"zicond": false, "x-zvfh"=
-: false, "mmu": true, "x-zvfbfwma": false, "x-zvfbfmin": false, "xtheadbs":=
- false, "xtheadbb": false, "xtheadba": false, "xtheadmemidx": false, "smsta=
-teen": false, "zfinx": false, "Zve64f": false, "Zve32f": false, "x-zvfhmin"=
-: false, "xventanacondops": false, "xtheadcondmov": false, "svpbmt": false,=
- "zbs": true, "zbc": true, "zbb": true, "zba": true, "zicboz": true, "xthea=
-dmac": false, "Zfh": false, "Zfa": true, "zbkx": false, "zbkc": false, "zbk=
-b": false, "Zve64d": false, "x-zfbfmin": false, "zk": false, "x-epmp": fals=
-e, "xtheadmempair": false, "zkt": false, "zks": false, "zkr": false, "zkn":=
- false, "Zfhmin": false, "zksh": false, "zknh": false, "zkne": false, "zknd=
-": false, "zhinx": false, "Zicsr": true, "sscofpmf": false, "Zihintntl": tr=
-ue, "sstc": true, "xtheadcmo": false, "x-zvbb": false, "zksed": false, "x-z=
-vkned": false, "xtheadsync": false, "x-zvkg": false, "zhinxmin": false, "sv=
-adu": true, "xtheadfmv": false, "x-zvksed": false, "svnapot": false, "pmp":=
- true, "x-zvknhb": false, "x-zvknha": false, "xtheadfmemidx": false, "x-zvk=
-sh": false, "zdinx": false, "zicbom": true, "Zihintpause": true, "svinval":=
- false, "zcf": false, "zce": false, "zcd": false, "zcb": false, "zca": fals=
-e, "x-ssaia": false, "x-smaia": false, "zmmul": false, "x-zvbc": false, "Zi=
-fencei": true, "zcmt": false, "zcmp": false, "Zawrs": true}}}}
->
-> - Query if the 'rv64' CPU with g=3Dtrue,zifencei=3Dfalse is a valid expan=
-sion:
->
-> (QEMU) query-cpu-model-expansion type=3Dfull model=3D{"name":"rv64","prop=
-s":{"g":true,"zifencei":false}}
-> {"error": {"class": "GenericError", "desc": "RVG requires Zifencei but us=
-er set Zifencei to false"}}
->
-> - Query a model expansion for the 'rv64' CPU with RVV enabled:
->
-> (QEMU) query-cpu-model-expansion type=3Dfull model=3D{"name":"max","props=
-":{"v":true}}
-> {"return": {"model": {"name": "max", "props": {"zicond": true, "x-zvfh": =
-false, "mmu": true, "x-zvfbfwma": false, "x-zvfbfmin": false, "xtheadbs": f=
-alse, "xtheadbb": false, "xtheadba": false, "xtheadmemidx": false, "smstate=
-en": true, "zfinx": false, "x-zvfhmin": false, "zfhmin": true, "xventanacon=
-dops": false, "zicsr": true, "xtheadcondmov": false, "zihintntl": true, "sv=
-pbmt": true, "zbs": true, "zbc": true, "zbb": true, "zba": true, "zicboz": =
-true, "xtheadmac": false, "zbkx": true, "zbkc": true, "zbkb": true, "x-zfbf=
-min": false, "zk": true, "x-epmp": false, "xtheadmempair": false, "zkt": tr=
-ue, "zks": true, "zkr": true, "zkn": true, "zksh": true, "zknh": true, "zkn=
-e": true, "zknd": true, "zhinx": false, "sscofpmf": true, "sstc": true, "zi=
-hintpause": true, "xtheadcmo": false, "x-zvbb": false, "zksed": true, "x-zv=
-kned": false, "xtheadsync": false, "x-zvkg": false, "zhinxmin": false, "zif=
-encei": true, "svadu": true, "xtheadfmv": false, "x-zvksed": false, "zawrs"=
-: true, "svnapot": true, "pmp": true, "x-zvknhb": false, "x-zvknha": false,=
- "xtheadfmemidx": false, "x-zvksh": false, "zdinx": false, "zicbom": true, =
-"zve64f": true, "zve32f": true, "svinval": true, "zcf": false, "zce": false=
-, "zcd": true, "zcb": true, "zca": true, "x-ssaia": false, "x-smaia": false=
-, "zmmul": true, "x-zvbc": false, "zfh": true, "zfa": true, "zcmt": false, =
-"zcmp": false, "zve64d": true}}}}
->
-> - Querying vendor CPUs is also supported:
->
-> (QEMU) query-cpu-model-expansion type=3Dfull model=3D{"name":"veyron-v1"}
-> {"return": {"model": {"name": "veyron-v1", "props": {"zicond": false, "x-=
-zvfh": false, "mmu": true, "x-zvfbfwma": false, "x-zvfbfmin": false, "xthea=
-dbs": false, "xtheadbb": false, "xtheadba": false, "xtheadmemidx": false, "=
-smstateen": true, "zfinx": false, "x-zvfhmin": false, "zfhmin": false, "xve=
-ntanacondops": true, "zicsr": true, "xtheadcondmov": false, "zihintntl": fa=
-lse, "svpbmt": true, "zbs": true, "zbc": true, "zbb": true, "zba": true, "z=
-icboz": true, "xtheadmac": false, "zbkx": false, "zbkc": false, "zbkb": fal=
-se, "x-zfbfmin": false, "zk": false, "x-epmp": false, "xtheadmempair": fals=
-e, "zkt": false, "zks": false, "zkr": false, "zkn": false, "zksh": false, "=
-zknh": false, "zkne": false, "zknd": false, "zhinx": false, "sscofpmf": tru=
-e, "sstc": true, "zihintpause": false, "xtheadcmo": false, "x-zvbb": false,=
- "zksed": false, "x-zvkned": false, "xtheadsync": false, "x-zvkg": false, "=
-zhinxmin": false, "zifencei": true, "svadu": false, "xtheadfmv": false, "x-=
-zvksed": false, "zawrs": false, "svnapot": true, "pmp": true, "x-zvknhb": f=
-alse, "x-zvknha": false, "xtheadfmemidx": false, "x-zvksh": false, "zdinx":=
- false, "zicbom": true, "zve64f": false, "zve32f": false, "svinval": true, =
-"zcf": false, "zce": false, "zcd": false, "zcb": false, "zca": false, "x-ss=
-aia": true, "x-smaia": true, "zmmul": false, "x-zvbc": false, "zfh": false,=
- "zfa": false, "zcmt": false, "zcmp": false, "zve64d": false}}}}
->
->
-> Daniel Henrique Barboza (6):
->   target/riscv/kvm/kvm-cpu.c: add missing property getters()
->   qapi,risc-v: add query-cpu-model-expansion
->   target/riscv/tcg: add tcg_cpu_finalize_features()
->   target/riscv: handle custom props in qmp_query_cpu_model_expansion
->   target/riscv: add riscv_cpu_accelerator_compatible()
->   target/riscv/riscv-qmp-cmds.c: check CPU accel in
->     query-cpu-model-expansion
+>      MULTI_EXT_CFG_BOOL("zicntr", ext_zicntr, true),
+> +    MULTI_EXT_CFG_BOOL("zihpm", ext_zihpm, true),
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Same here. Just make this change after or with the logic to disable
+the extension
 
 Alistair
 
 >
->  qapi/machine-target.json      |   6 +-
->  target/riscv/cpu.c            |  27 +++++-
->  target/riscv/cpu.h            |   2 +
->  target/riscv/kvm/kvm-cpu.c    |  40 ++++++++-
->  target/riscv/riscv-qmp-cmds.c | 160 ++++++++++++++++++++++++++++++++++
->  target/riscv/tcg/tcg-cpu.c    |  70 +++++++++------
->  target/riscv/tcg/tcg-cpu.h    |   2 +
->  7 files changed, 271 insertions(+), 36 deletions(-)
->
+>      MULTI_EXT_CFG_BOOL("zba", ext_zba, true),
+>      MULTI_EXT_CFG_BOOL("zbb", ext_zbb, true),
+> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> index 3c91b63609..173bd7d910 100644
+> --- a/target/riscv/cpu_cfg.h
+> +++ b/target/riscv/cpu_cfg.h
+> @@ -69,6 +69,7 @@ struct RISCVCPUConfig {
+>      bool ext_zicond;
+>      bool ext_zihintntl;
+>      bool ext_zihintpause;
+> +    bool ext_zihpm;
+>      bool ext_smstateen;
+>      bool ext_sstc;
+>      bool ext_svadu;
 > --
 > 2.41.0
 >
