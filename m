@@ -4,81 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE287C004C0
-	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Oct 2023 15:40:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 873D7C25B46
+	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Oct 2023 17:00:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qux1t-0000VN-OF; Mon, 23 Oct 2023 11:39:45 -0400
+	id 1quyHk-0008EF-9c; Mon, 23 Oct 2023 13:00:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qux1s-0000U7-OW
- for qemu-riscv@nongnu.org; Mon, 23 Oct 2023 11:39:44 -0400
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
+ id 1quyHh-0008Cq-6J
+ for qemu-riscv@nongnu.org; Mon, 23 Oct 2023 13:00:09 -0400
+Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qux1q-0003qS-R0
- for qemu-riscv@nongnu.org; Mon, 23 Oct 2023 11:39:44 -0400
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-1c9d3a21f7aso28118375ad.2
- for <qemu-riscv@nongnu.org>; Mon, 23 Oct 2023 08:39:42 -0700 (PDT)
+ id 1quyHe-0002Xo-OQ
+ for qemu-riscv@nongnu.org; Mon, 23 Oct 2023 13:00:08 -0400
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-6b201a93c9cso2649626b3a.0
+ for <qemu-riscv@nongnu.org>; Mon, 23 Oct 2023 10:00:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1698075581; x=1698680381; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kYSIx+rOkHGXCxStD61YohaXjdHGqYOyvAY6qekRpW0=;
- b=AICcmsOj6RDYUNSrdn0OjQ49G6fe1xp7Ie2YALlH2X00d77+9oeZ+JM+VZRgv3RqjA
- TQoRf2Ravij5RXH8luHeUFOGbH3WJN9Rn5a4yntLBS4JRMg6WhFPhTv515llYrs7737N
- qrMjxHVoEYLj92GtEca4iDDpD4+eC4aDyP/JWakBokQ7pMAZ4KS21YhCEe7f+XEfEbpP
- S1+YVgB+Zw+Jt7/GIagtMacYuUUuycv4J+YgdgstoGWO1CS6dCxhS9+x2wploj+jZeFk
- WBrBwzW+AUNPOR9Wnly2zsmE3RvpJcHZ8HuvO8ORDoJi1QGP+nmj8Uxf/43YFxE+kRqS
- +e2g==
+ d=ventanamicro.com; s=google; t=1698080404; x=1698685204; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=tVV5n5FHB1W7modGzywv9Begg+ZwO7nKGsbDd1c0Y6U=;
+ b=AMTzJiHHw+acizhBimiYlDa+HyxdLA1To5hqa9+sRhLMB7oKF0nh+pPybXue2hgK3L
+ XHScTH+Zp2+pu6rljKy9hI5UEriITcXMJzCa3lgeu3DvEYqrMZVPYlUcA9MkT1eRHNiB
+ LqUBUSfjxp82xNxbHi2XWh9X4bP4d+C9sV5ihbsYl7o12Lb3ribo/rbuvR4cVb7wQY9G
+ kVdc+7SI72b7x2+6hh/O8j5C/BVYk+T1LExV2ons5E9Fj+1BDme2faSR0BcxCVgquX++
+ ga+NHhWxi6QiulUD2Wxnf9jUHlGOMU0pbyvw24lsj7X62HRy4S/1XDpn9YNBVLAnlDjt
+ fxJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698075581; x=1698680381;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=kYSIx+rOkHGXCxStD61YohaXjdHGqYOyvAY6qekRpW0=;
- b=urI5/qcoEXzE7+RsHo/vPlXwv4YzigYLsb9pITnYFki3y8uTA8SsaIj+ttUiwgRhjS
- X0WTPsu9n7LO+BXTNKYruBT0vOCyeGCbfvlt3f5aQadn+BrZ0a4eYI/WT6G3rh7yE/pc
- 5BVBk/1i3m3Z0FLHyr0Go1Q6oRkdpXuCTTHwzHJNLFAGAB5WaOLkX95wOFCszn24PyqW
- gf8AZQgeTl3AVm5VF/HH0kZTYhwMhAc3IJV9jTtUS+V1pExlWOdp/UJu7c1/m714O1zR
- i/fdROx1REZU3hXUXWUsaavz/B6MS0og0ZoVkMGwo0YsDjKltYC9zvjm4tvOEwNUYdDG
- FWVQ==
-X-Gm-Message-State: AOJu0YzrrH09iwDmUMI80z7uNXYEGaLAg0A6FVBQcvX1Wakk1+IAPdzj
- N3RCSQ/O8rs+B2EZDCeRQNYx8g==
-X-Google-Smtp-Source: AGHT+IGDOU/b2owV6JXVVBo9UqWmW9DXG2HDzZ6FNjtKtkrPDCdhx282gP9MzmJp809EQIhadaLYDg==
-X-Received: by 2002:a17:902:cec4:b0:1ca:16e8:1b4c with SMTP id
- d4-20020a170902cec400b001ca16e81b4cmr11681037plg.28.1698075581435; 
- Mon, 23 Oct 2023 08:39:41 -0700 (PDT)
-Received: from grind.. ([191.255.2.33]) by smtp.gmail.com with ESMTPSA id
- k20-20020a170902ba9400b001b891259eddsm6053063pls.197.2023.10.23.08.39.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Oct 2023 08:39:41 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v3 3/4] target/riscv: add zihpm extension flag for TCG
-Date: Mon, 23 Oct 2023 12:39:26 -0300
-Message-ID: <20231023153927.435083-4-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20231023153927.435083-1-dbarboza@ventanamicro.com>
-References: <20231023153927.435083-1-dbarboza@ventanamicro.com>
+ d=1e100.net; s=20230601; t=1698080404; x=1698685204;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=tVV5n5FHB1W7modGzywv9Begg+ZwO7nKGsbDd1c0Y6U=;
+ b=nNR3yF7JVJztUZqOktdvLrqIV6zNM6ie+Fd5UBlv1hGRl3Hi81fph8oVPGBTATBrmB
+ Tf06ymejDlRJNAgpW743JHYwbkSHwfwSCPpbZZoo5iCDUuLN0X14bU7NB3BLNNpGESKm
+ ayASk2tj2UkpX741m7Zm6qBLfhNEOQxzKrBzexc10dXnh4Xp/++oDYPl/586mZvXIW0f
+ TxiMRjN0ImqljXS0d9lpwufGx6YSJmNQ4kw+18HmXFh1LL3SwWNZAe8rxlm7HWt/wobX
+ BiWbr6/WAkPi4jy00E+PeBMi6o04I3MTwO/i9FnOOd7525GDeSBHsdvPFXu9YpCGNXTE
+ VPmQ==
+X-Gm-Message-State: AOJu0YxRy2PXIlnJ3ljh/1mpRNVLlAsh3JLs1R6asOHM46Ta2FUFJGuq
+ xN9yWKCc+AfQRa3NZmMYm2o/qA==
+X-Google-Smtp-Source: AGHT+IEv7R8nJ4WTedZcimiuGi840TrSdeIoTirJ799eQHFWJTgLnMiFjrN6D9hSX5H8MB2xV9L08g==
+X-Received: by 2002:aa7:991e:0:b0:6b8:2ef3:331d with SMTP id
+ z30-20020aa7991e000000b006b82ef3331dmr6654445pff.10.1698080404272; 
+ Mon, 23 Oct 2023 10:00:04 -0700 (PDT)
+Received: from [192.168.68.107] ([191.255.2.33])
+ by smtp.gmail.com with ESMTPSA id
+ y9-20020aa78f29000000b006879493aca0sm6383662pfr.26.2023.10.23.10.00.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 23 Oct 2023 10:00:03 -0700 (PDT)
+Message-ID: <0e66af36-bd36-4b42-b901-ed726af207b7@ventanamicro.com>
+Date: Mon, 23 Oct 2023 14:00:00 -0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x631.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 3/6] target/riscv/tcg: add user flag for profile support
+Content-Language: en-US
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
+ palmer@rivosinc.com
+References: <20231020223951.357513-1-dbarboza@ventanamicro.com>
+ <20231020223951.357513-4-dbarboza@ventanamicro.com>
+ <20231023-2018025adea3ffaebbbefe23@orel>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20231023-2018025adea3ffaebbbefe23@orel>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -94,96 +99,126 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-zihpm is the Hardware Performance Counters extension described in
-chapter 12 of the unprivileged spec. It describes support for 29
-unprivileged performance counters, hpmcounter3-hpmcounter31.
 
-As with zicntr, QEMU already implements zihpm before it was even an
-extension. zihpm is also part of the RVA22 profile, so add it to QEMU
-to complement the future profile implementation. Default it to 'true'
-for all existing CPUs since it was always present in the code.
 
-As for disabling it, there is already code in place in
-target/riscv/csr.c in all predicates for these counters (ctr() and
-mctr()) that disables them if cpu->cfg.pmu_num is zero. Thus, setting
-cpu->cfg.pmu_num to zero if 'zihpm=false' is enough to disable the
-extension.
+On 10/23/23 05:16, Andrew Jones wrote:
+> On Fri, Oct 20, 2023 at 07:39:48PM -0300, Daniel Henrique Barboza wrote:
+>> The TCG emulation implements all the extensions described in the
+>> RVA22U64 profile, both mandatory and optional. The mandatory extensions
+>> will be enabled via the profile flag. We'll leave the optional
+>> extensions to be enabled by hand.
+>>
+>> Given that this is the first profile we're implementing in TCG we'll
+>> need some ground work first:
+>>
+>> - all profiles declared in riscv_profiles[] will be exposed to users.
+>> TCG is the main accelerator we're considering when adding profile
+>> support in QEMU, so for now it's safe to assume that all profiles in
+>> riscv_profiles[] will be relevant to TCG;
+>>
+>> - we'll not support user profile settings for vendor CPUs. The flags
+>> will still be exposed but users won't be able to change them. The idea
+>> is that vendor CPUs in the future can enable profiles internally in
+>> their cpu_init() functions, showing to the external world that the CPU
+>> supports a certain profile. But users won't be able to enable/disable
+>> it;
+>>
+>> - Setting a profile to 'true' means 'enable all mandatory extensions of
+>> this profile, setting it to 'false' means disabling all its mandatory
+>> extensions. Disabling a profile is discouraged for regular use and will
+>> issue an user warning. User choices for individual extensions will take
+>> precedence, i.e. enabling a profile will not enable extensions that the
+>> user set to 'false', and vice-versa. This will make us independent of
+>> left-to-right ordering in the QEMU command line, i.e. the following QEMU
+>> command lines:
+>>
+>> -cpu rv64,zicbom=false,rva22u64=true,Zifencei=false
+>> -cpu rv64,zicbom=false,Zifencei=false,rva22u64=true
+>> -cpu rv64,rva22u64=true,zicbom=false,Zifencei=false
+>>
+>> They mean the same thing: "enable all mandatory extensions of the
+>> rva22u64 profile while keeping zicbom and Zifencei disabled".
+> 
+> Hmm, I'm not sure I agree with special-casing profiles like this. I think
+> the left-to-right processing should be consistent for all. I'm also not
+> sure we should always warn when disabling a profile. For example, if a
+> user does
+> 
+>   -cpu rv64,rva22u64=true,rva22u64=false
+> 
+> then they'll get a warning, even though all they're doing is restoring the
+> cpu model. While that looks like an odd thing to do, a script may be
+> adding the rva22u64=true and the rva22u64=false is the user input which
+> undoes what the script did.
 
-Set cpu->pmu_avail_ctrs mask to zero as well since this is also checked
-to verify if the counters exist.
+QEMU options do not work with a "the user enabled then disabled the same option,
+thus it'll count as nothing happened" logic. The last instance of the option will
+overwrite all previous instances. In the example you mentioned above the user would
+disable all mandatory extensions of rva22u64 in the CPU, doesn't matter if the
+same profile was enabled beforehand.
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/cpu.c         |  3 +++
- target/riscv/cpu_cfg.h     |  1 +
- target/riscv/tcg/tcg-cpu.c | 13 +++++++++++++
- 3 files changed, 17 insertions(+)
+Sure, the can put code in place to make this happen, but then this would make
+profiles act different than regular extensions. "-cpu rv64,zicbom=true -cpu rv64,zicbom=false"
+will disable zicbom, it will not preserve the original 'zicbom' rv64 default. If
+we're going to keep left-to-right ordering consistent, this behavior should also
+be consistent as well.
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 69d64ec4ca..f40da4c661 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -85,6 +85,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zifencei, PRIV_VERSION_1_10_0, ext_zifencei),
-     ISA_EXT_DATA_ENTRY(zihintntl, PRIV_VERSION_1_10_0, ext_zihintntl),
-     ISA_EXT_DATA_ENTRY(zihintpause, PRIV_VERSION_1_10_0, ext_zihintpause),
-+    ISA_EXT_DATA_ENTRY(zihpm, PRIV_VERSION_1_12_0, ext_zihpm),
-     ISA_EXT_DATA_ENTRY(zmmul, PRIV_VERSION_1_12_0, ext_zmmul),
-     ISA_EXT_DATA_ENTRY(zawrs, PRIV_VERSION_1_12_0, ext_zawrs),
-     ISA_EXT_DATA_ENTRY(zfa, PRIV_VERSION_1_12_0, ext_zfa),
-@@ -1218,6 +1219,7 @@ static void riscv_cpu_init(Object *obj)
-      * users disable them.
-      */
-     RISCV_CPU(obj)->cfg.ext_zicntr = true;
-+    RISCV_CPU(obj)->cfg.ext_zihpm = true;
- }
- 
- typedef struct misa_ext_info {
-@@ -1308,6 +1310,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
-     MULTI_EXT_CFG_BOOL("svpbmt", ext_svpbmt, false),
- 
-     MULTI_EXT_CFG_BOOL("zicntr", ext_zicntr, true),
-+    MULTI_EXT_CFG_BOOL("zihpm", ext_zihpm, true),
- 
-     MULTI_EXT_CFG_BOOL("zba", ext_zba, true),
-     MULTI_EXT_CFG_BOOL("zbb", ext_zbb, true),
-diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-index 73fd4b3231..6eef4a51ea 100644
---- a/target/riscv/cpu_cfg.h
-+++ b/target/riscv/cpu_cfg.h
-@@ -69,6 +69,7 @@ struct RISCVCPUConfig {
-     bool ext_zicond;
-     bool ext_zihintntl;
-     bool ext_zihintpause;
-+    bool ext_zihpm;
-     bool ext_smstateen;
-     bool ext_sstc;
-     bool ext_svadu;
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index a1e4ed2e24..093bda2e75 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -549,6 +549,19 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         cpu->cfg.ext_zicntr = false;
-     }
- 
-+    if (cpu->cfg.ext_zihpm && !cpu->cfg.ext_zicsr) {
-+        if (cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_zihpm))) {
-+            error_setg(errp, "zihpm requires zicsr");
-+            return;
-+        }
-+        cpu->cfg.ext_zihpm = false;
-+    }
-+
-+    if (!cpu->cfg.ext_zihpm) {
-+        cpu->cfg.pmu_num = 0;
-+        cpu->pmu_avail_ctrs = 0;
-+    }
-+
-     /*
-      * Disable isa extensions based on priv spec after we
-      * validated and set everything we need.
--- 
-2.41.0
 
+As for warnings, I agree that we'll throw warnings even when nothing of notice happened.
+For example:
+
+-cpu rv64,rva22u64=false -cpu rv64,rva22u64=true
+
+This will throw a warning even though the user ended up enabling the extension
+in the end.
+
+
+We can fix it by postponing warnings to realize().
+
+
+> 
+> As far as warnings go, it'd be nice to warn when mandatory profile
+> extensions are disabled from an enabled profile. Doing that might be
+> useful for debug, but users which do it without being aware they're
+> "breaking" the profile may learn from that warning. Note, the warning
+> should only come when the profile is actually enabled and when the
+> extension would actually be disabled, i.e.
+> 
+>   -cpu rv64,rva22u64=true,c=off
+> 
+> should warn
+> 
+>   -cpu rv64,c=off,rva22u64=true
+> 
+> should not warn (rva22u64 overrides c=off since it's to the right)
+> 
+>   -cpu rv64,rva22u64=true,rva22u64=false,c=off
+> 
+> should not warn (rva22u64 is not enabled)
+
+Ack for all the above.
+
+> 
+> And,
+> 
+>   -cpu rv64,rva22u64=true,rva24u64=false
+> 
+> should warn for each extension which is mandatory in both profiles.
+
+The way I'm imagining this happening is to cycle through all profiles during realize(),
+see which ones are enabled, and then warn if the user disabled their mandatory
+extensions. In this example we would warn for all rva22 mandatory extensions
+that were disabled because we disabled rva24, but we won't emit any warnings for
+rva24 mandatory extensions given that the profile is marked as disabled.
+
+
+
+Thanks,
+
+Daniel
+
+
+> 
+> Thanks,
+> drew
 
