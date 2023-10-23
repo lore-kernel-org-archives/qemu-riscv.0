@@ -4,69 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D3ACCDB474
-	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Oct 2023 02:26:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36ED2CDB474
+	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Oct 2023 02:35:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qukdx-0005Co-Vv; Sun, 22 Oct 2023 22:26:14 -0400
+	id 1qukmv-00032G-8Q; Sun, 22 Oct 2023 22:35:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qukdw-0005CS-KA; Sun, 22 Oct 2023 22:26:12 -0400
-Received: from mail-vs1-xe30.google.com ([2607:f8b0:4864:20::e30])
+ id 1qukmt-00031y-AJ; Sun, 22 Oct 2023 22:35:27 -0400
+Received: from mail-vk1-xa32.google.com ([2607:f8b0:4864:20::a32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qukds-00036q-43; Sun, 22 Oct 2023 22:26:12 -0400
-Received: by mail-vs1-xe30.google.com with SMTP id
- ada2fe7eead31-457eebf8e01so982195137.2; 
- Sun, 22 Oct 2023 19:26:07 -0700 (PDT)
+ id 1qukmr-0004j7-Ly; Sun, 22 Oct 2023 22:35:27 -0400
+Received: by mail-vk1-xa32.google.com with SMTP id
+ 71dfb90a1353d-49d6bd3610cso1242595e0c.1; 
+ Sun, 22 Oct 2023 19:35:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698027966; x=1698632766; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1698028524; x=1698633324; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=w+yZDFUEZvI3svLG+K2ZXb+amjFcBvHRbElrL1dBr80=;
- b=FB70rNkEz7PqCkD6LaTJ4bY/rx3L6beBpoO051maGl40KwyWki7LOkR02ynuRuLkI8
- eJdHbxAwDI7ll7HIiFJP1lk62yyLfRhbWTH/EvS8JA4SsJAeWe7fuTxjTfrIOv1w9s14
- V+FHuY3RwkamfOVZnd4+6vjl7uuoUljgPD8vZmD1jsO2+J5eEOnjjw27saEv9fXgc3bW
- 1vHsyfdIl+J0y28/NjVRBg+rktt9rvgy/pxANOgc/dM2/7NaRVtemN+dkofPlX5igAM8
- wuWaYvIqTZUqdMaqcBUnlkOf4K6c2Ujud5sbgUcvKK8dBwR3YsiwsiXDW2ya0PwPMOAv
- gvXA==
+ bh=DXluwi1vyq0LvLxU+daWwG8i3ejzFLn17omiskpJBzA=;
+ b=AtutcUPzQF6jpn5mYuhK6RfocHTAKVi1fRt5xyWOUwKrJLlAYUz+cgt6KaD+DLzXFv
+ kNnFiPGiZwztjbatNaTFOPjq9ywTj3OZltrJPYEWixRNoF4sV+It5WcevIhyYgbidW+q
+ 9jvaxSRNktb2ewcEnlH2lOZ5A0QMs5mRAw1Or1UjvkL/aTEX/+nyqHAqpXHaoJvnb2dY
+ Ny1hmm/UjlxcfVSrSiTMWHyzC9fquIf0MGbs6wsoFO/eTCcdtQe1AghM7kQrP/FtRN8z
+ DtIwrN91XOYM397Y+HvbMLPeJvnp/Sup1lQUAsoAgPuiPbtjA9LkqUgVoeeyjUG0WDh2
+ A7rQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698027966; x=1698632766;
+ d=1e100.net; s=20230601; t=1698028524; x=1698633324;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=w+yZDFUEZvI3svLG+K2ZXb+amjFcBvHRbElrL1dBr80=;
- b=J1APm/rgPlilZPIRplrkw5SNnilPfPWmSdLMwz38bKl5OP3AbD65ypylJwTcQ0OktU
- cnyi5oikUU64+RWsH8d+I2e1uddP8RQY9cy0V+Mrh3mPt0zGNzV2EPUMcPLnFftR0qiz
- oFzuE+HGAGc79EQtV2bPkuaMh0cGCVDSlc8Rbz5xGfn8O9/xMrF/ODj7an900iWxQTRR
- s+4jSn3bO/ezOYNlJdJnzEXjIuVxaonYV8zFFubQoKorgVTT4v+GrFdWM5ODYYkaBCzX
- B+y14gBLxbNEe0QwQAhzL4MPAbSY2FGGOuU6qjWOfQlUQJa1V2/QCXpAzw+EFcTVYVYj
- aGkw==
-X-Gm-Message-State: AOJu0YwfvmW46NZIOAoLsUeTPDMeOtwnA8cyEIp2D7rjK6NG7w43mZPU
- gzuymt69HDBWg6ZKZblnLgrpIEBv+txpdcByvgY=
-X-Google-Smtp-Source: AGHT+IFZsyOVflhMFU3hC0cuCli2H4MR7SHfQFmNhR5vEpdIkHVLrDubMmL9wxqnWaVaL4TTKXF32PmuHxAkwrYUEyo=
-X-Received: by 2002:a67:b849:0:b0:452:690a:fa28 with SMTP id
- o9-20020a67b849000000b00452690afa28mr7183138vsh.23.1698027966555; Sun, 22 Oct
- 2023 19:26:06 -0700 (PDT)
+ bh=DXluwi1vyq0LvLxU+daWwG8i3ejzFLn17omiskpJBzA=;
+ b=Xb9JhE30sbPJaMonNlzATeCfSXFeMDUYuwmSilNnz0TN/eclSDSz4SyPfqjYOX1Yg9
+ qtLUa/xy1qzkL07Wl9Lnmeyzf7zC+PfFf7v8WGC/GA2B7cqppoVizmMiEzJ+kQbGxBoX
+ xBccdpAIMF8Twj4mmiJMFaTLHeGDEzXMMolMWMcP3htxR6RoOPWHw89LnSh+OVMmT/IA
+ vgjTtnOAqVg9+uOj576veIL7S12tGfJvPQkweZak7KQJUKgXxk5TTikgLDE4gS1sH5/J
+ yQ/1eFGNrGJJOZL2rhskfnL0jAs8NcU04arDw5mN4hN+1mdNBDPbEX1i5WRdJr8SZpmX
+ CKPA==
+X-Gm-Message-State: AOJu0YzStCthoH6D9XWI1PQ+S28fGetyhsshx3qMNcBJaH8OQXl6CSJo
+ NCMuUSaKC3iUZSi3tCjQP7ewmt1ArK2bxnNj5OA=
+X-Google-Smtp-Source: AGHT+IEbILoahlp2+BWQWDJdJQyANbtHelRwKSAhDxxlSK42SdeE6ltvrzxm948PfvUr6tSFHr682F5D/WV+Ra8mkkM=
+X-Received: by 2002:a05:6122:3c81:b0:49a:9146:ec02 with SMTP id
+ fy1-20020a0561223c8100b0049a9146ec02mr8181913vkb.1.1698028524242; Sun, 22 Oct
+ 2023 19:35:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231019065546.1431579-1-mchitale@ventanamicro.com>
-In-Reply-To: <20231019065546.1431579-1-mchitale@ventanamicro.com>
+References: <20231019065644.1431798-1-mchitale@ventanamicro.com>
+In-Reply-To: <20231019065644.1431798-1-mchitale@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 23 Oct 2023 12:25:39 +1000
-Message-ID: <CAKmqyKO+zXpjkrP_9nQGcBA+RPfrtnRaOcAu2EDXz+e8SepOJA@mail.gmail.com>
-Subject: Re: [PATCH v2] Add epmp to extensions list and rename it to smepmp
+Date: Mon, 23 Oct 2023 12:34:57 +1000
+Message-ID: <CAKmqyKM-NaWD-_b_V86Np86_j_a+=_221635gFG2shSiV__rhQ@mail.gmail.com>
+Subject: Re: [PATCH v2] target/riscv: pmp: Clear pmp/smepmp bits on reset
 To: Mayuresh Chitale <mchitale@ventanamicro.com>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Himanshu Chauhan <hchauhan@ventanamicro.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+ Alistair Francis <alistair.francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e30;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe30.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a32;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa32.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -90,216 +88,99 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Oct 19, 2023 at 4:56=E2=80=AFPM Mayuresh Chitale
+On Thu, Oct 19, 2023 at 4:57=E2=80=AFPM Mayuresh Chitale
 <mchitale@ventanamicro.com> wrote:
 >
-> From: Himanshu Chauhan <hchauhan@ventanamicro.com>
+> As per the Priv and Smepmp specifications, certain bits such as the 'L'
+> bit of pmp entries and mseccfg.MML can only be cleared upon reset and it
+> is necessary to do so to allow 'M' mode firmware to correctly reinitializ=
+e
+> the pmp/smpemp state across reboots. As required by the spec, also clear
+> the 'A' field of pmp entries.
 >
-> Smepmp is a ratified extension which qemu refers to as epmp.
-> Rename epmp to smepmp and add it to extension list so that
-> it is added to the isa string.
->
-> Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
 > Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
-> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
+>
 > Changes in v2:
 > =3D=3D=3D=3D
 > - Rebase on latest riscv-to-apply.next
-> - Remove ePMP version comment
+> - Clear 'A' field.
 >
->  target/riscv/cpu.c         |  8 +++-----
->  target/riscv/cpu_cfg.h     |  2 +-
->  target/riscv/csr.c         |  6 +++---
->  target/riscv/pmp.c         | 12 ++++++------
->  target/riscv/tcg/tcg-cpu.c |  4 ++--
->  5 files changed, 15 insertions(+), 17 deletions(-)
+>  target/riscv/cpu.c | 11 +++++++++++
+>  target/riscv/pmp.c | 10 ++++++++++
+>  target/riscv/pmp.h |  2 ++
+>  3 files changed, 23 insertions(+)
 >
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 2f98ce56e06..dad167833cc 100644
+> index dad167833cc..491e0e46e2e 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -133,7 +133,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
->      ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
->      ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
->      ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
-> -    ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, epmp),
-> +    ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
->      ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
->      ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
->      ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
-> @@ -599,12 +599,11 @@ static void rv32_ibex_cpu_init(Object *obj)
->  #ifndef CONFIG_USER_ONLY
->      set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
->  #endif
-> -    cpu->cfg.epmp =3D true;
-> -
->      /* inherited from parent obj via riscv_cpu_init() */
->      cpu->cfg.ext_zifencei =3D true;
->      cpu->cfg.ext_zicsr =3D true;
->      cpu->cfg.pmp =3D true;
-> +    cpu->cfg.ext_smepmp =3D true;
->  }
->
->  static void rv32_imafcu_nommu_cpu_init(Object *obj)
-> @@ -1257,6 +1256,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[]=
- =3D {
->      MULTI_EXT_CFG_BOOL("zve64d", ext_zve64d, false),
->      MULTI_EXT_CFG_BOOL("sstc", ext_sstc, true),
->
-> +    MULTI_EXT_CFG_BOOL("smepmp", ext_smepmp, false),
->      MULTI_EXT_CFG_BOOL("smstateen", ext_smstateen, false),
->      MULTI_EXT_CFG_BOOL("svadu", ext_svadu, true),
->      MULTI_EXT_CFG_BOOL("svinval", ext_svinval, false),
-> @@ -1322,8 +1322,6 @@ const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[=
-] =3D {
->
->  /* These are experimental so mark with 'x-' */
->  const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] =3D {
-> -    /* ePMP 0.9.3 */
-> -    MULTI_EXT_CFG_BOOL("x-epmp", epmp, false),
->      MULTI_EXT_CFG_BOOL("x-smaia", ext_smaia, false),
->      MULTI_EXT_CFG_BOOL("x-ssaia", ext_ssaia, false),
->
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> index 208cac1c7c9..e7ce977189c 100644
-> --- a/target/riscv/cpu_cfg.h
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -102,6 +102,7 @@ struct RISCVCPUConfig {
->      bool ext_smaia;
->      bool ext_ssaia;
->      bool ext_sscofpmf;
-> +    bool ext_smepmp;
->      bool rvv_ta_all_1s;
->      bool rvv_ma_all_1s;
->
-> @@ -134,7 +135,6 @@ struct RISCVCPUConfig {
->      uint16_t cboz_blocksize;
->      bool mmu;
->      bool pmp;
-> -    bool epmp;
->      bool debug;
->      bool misa_w;
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index a5be1c202c3..f4e0a3962f0 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -524,9 +524,9 @@ static RISCVException pmp(CPURISCVState *env, int csr=
-no)
->      return RISCV_EXCP_ILLEGAL_INST;
->  }
->
-> -static RISCVException epmp(CPURISCVState *env, int csrno)
-> +static RISCVException smepmp(CPURISCVState *env, int csrno)
->  {
-> -    if (riscv_cpu_cfg(env)->epmp) {
-> +    if (riscv_cpu_cfg(env)->ext_smepmp) {
->          return RISCV_EXCP_NONE;
+> @@ -883,6 +883,17 @@ static void riscv_cpu_reset_hold(Object *obj)
 >      }
->
-> @@ -4762,7 +4762,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
->      [CSR_VSIPH]       =3D { "vsiph",       aia_hmode32, NULL, NULL, rmw_=
-vsiph },
->
->      /* Physical Memory Protection */
-> -    [CSR_MSECCFG]    =3D { "mseccfg",  epmp, read_mseccfg, write_mseccfg=
-,
-> +    [CSR_MSECCFG]    =3D { "mseccfg", smepmp, read_mseccfg, write_mseccf=
-g,
->                           .min_priv_ver =3D PRIV_VERSION_1_11_0          =
- },
->      [CSR_PMPCFG0]    =3D { "pmpcfg0",   pmp, read_pmpcfg,  write_pmpcfg =
- },
->      [CSR_PMPCFG1]    =3D { "pmpcfg1",   pmp, read_pmpcfg,  write_pmpcfg =
- },
+>      /* mmte is supposed to have pm.current hardwired to 1 */
+>      env->mmte |=3D (EXT_STATUS_INITIAL | MMTE_M_PM_CURRENT);
+> +
+> +    /*
+> +     * Clear mseccfg and unlock all the PMP entries upon reset.
+> +     * This is allowed as per the priv and smepmp specifications
+> +     * and is needed to clear stale entries across reboots.
+> +     */
+> +    if (riscv_cpu_cfg(env)->ext_smepmp) {
+> +        env->mseccfg =3D 0;
+> +    }
+> +
+> +    pmp_unlock_entries(env);
+>  #endif
+>      env->xl =3D riscv_cpu_mxl(env);
+>      riscv_cpu_update_mask(env);
 > diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index 5e60c26031b..21d2489e27e 100644
+> index 21d2489e27e..4dfaa28fce2 100644
 > --- a/target/riscv/pmp.c
 > +++ b/target/riscv/pmp.c
-> @@ -91,7 +91,7 @@ static bool pmp_write_cfg(CPURISCVState *env, uint32_t =
-pmp_index, uint8_t val)
->      if (pmp_index < MAX_RISCV_PMPS) {
->          bool locked =3D true;
+> @@ -135,6 +135,16 @@ static bool pmp_write_cfg(CPURISCVState *env, uint32=
+_t pmp_index, uint8_t val)
+>      return false;
+>  }
 >
-> -        if (riscv_cpu_cfg(env)->epmp) {
-> +        if (riscv_cpu_cfg(env)->ext_smepmp) {
->              /* mseccfg.RLB is set */
->              if (MSECCFG_RLB_ISSET(env)) {
->                  locked =3D false;
-> @@ -340,9 +340,9 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ul=
-ong addr,
+> +void pmp_unlock_entries(CPURISCVState *env)
+> +{
+> +    uint32_t pmp_num =3D pmp_get_num_rules(env);
+> +    int i;
+> +
+> +    for (i =3D 0; i < pmp_num; i++) {
+> +        env->pmp_state.pmp[i].cfg_reg &=3D ~(PMP_LOCK | PMP_AMATCH);
+> +    }
+> +}
+> +
+>  static void pmp_decode_napot(target_ulong a, target_ulong *sa,
+>                               target_ulong *ea)
+>  {
+> diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
+> index cf5c99f8e68..9af8614cd4f 100644
+> --- a/target/riscv/pmp.h
+> +++ b/target/riscv/pmp.h
+> @@ -28,6 +28,7 @@ typedef enum {
+>      PMP_READ  =3D 1 << 0,
+>      PMP_WRITE =3D 1 << 1,
+>      PMP_EXEC  =3D 1 << 2,
+> +    PMP_AMATCH =3D (3 << 3),
+>      PMP_LOCK  =3D 1 << 7
+>  } pmp_priv_t;
 >
->          /*
->           * Convert the PMP permissions to match the truth table in the
-> -         * ePMP spec.
-> +         * Smepmp spec.
->           */
-> -        const uint8_t epmp_operation =3D
-> +        const uint8_t smepmp_operation =3D
->              ((env->pmp_state.pmp[i].cfg_reg & PMP_LOCK) >> 4) |
->              ((env->pmp_state.pmp[i].cfg_reg & PMP_READ) << 2) |
->              (env->pmp_state.pmp[i].cfg_reg & PMP_WRITE) |
-> @@ -367,7 +367,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ul=
-ong addr,
->                   * If mseccfg.MML Bit set, do the enhanced pmp priv chec=
-k
->                   */
->                  if (mode =3D=3D PRV_M) {
-> -                    switch (epmp_operation) {
-> +                    switch (smepmp_operation) {
->                      case 0:
->                      case 1:
->                      case 4:
-> @@ -398,7 +398,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ul=
-ong addr,
->                          g_assert_not_reached();
->                      }
->                  } else {
-> -                    switch (epmp_operation) {
-> +                    switch (smepmp_operation) {
->                      case 0:
->                      case 8:
->                      case 9:
-> @@ -574,7 +574,7 @@ void mseccfg_csr_write(CPURISCVState *env, target_ulo=
-ng val)
->          }
->      }
+> @@ -81,6 +82,7 @@ void pmp_update_rule_addr(CPURISCVState *env, uint32_t =
+pmp_index);
+>  void pmp_update_rule_nums(CPURISCVState *env);
+>  uint32_t pmp_get_num_rules(CPURISCVState *env);
+>  int pmp_priv_to_page_prot(pmp_priv_t pmp_priv);
+> +void pmp_unlock_entries(CPURISCVState *env);
 >
-> -    if (riscv_cpu_cfg(env)->epmp) {
-> +    if (riscv_cpu_cfg(env)->ext_smepmp) {
->          /* Sticky bits */
->          val |=3D (env->mseccfg & (MSECCFG_MMWP | MSECCFG_MML));
->          if ((val ^ env->mseccfg) & (MSECCFG_MMWP | MSECCFG_MML)) {
-> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> index bbce254ee13..fce58d4375a 100644
-> --- a/target/riscv/tcg/tcg-cpu.c
-> +++ b/target/riscv/tcg/tcg-cpu.c
-> @@ -591,12 +591,12 @@ static bool tcg_cpu_realize(CPUState *cs, Error **e=
-rrp)
->          return false;
->      }
->
-> -    if (cpu->cfg.epmp && !cpu->cfg.pmp) {
-> +    if (cpu->cfg.ext_smepmp && !cpu->cfg.pmp) {
->          /*
->           * Enhanced PMP should only be available
->           * on harts with PMP support
->           */
-> -        error_setg(errp, "Invalid configuration: EPMP requires PMP suppo=
-rt");
-> +        error_setg(errp, "Invalid configuration: Smepmp requires PMP sup=
-port");
->          return false;
->      }
->
+>  #define MSECCFG_MML_ISSET(env) get_field(env->mseccfg, MSECCFG_MML)
+>  #define MSECCFG_MMWP_ISSET(env) get_field(env->mseccfg, MSECCFG_MMWP)
 > --
 > 2.34.1
 >
