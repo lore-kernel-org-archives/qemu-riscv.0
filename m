@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36ED2CDB474
-	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Oct 2023 02:35:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7C9CCDB474
+	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Oct 2023 02:44:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qukmv-00032G-8Q; Sun, 22 Oct 2023 22:35:29 -0400
+	id 1qukvk-0007PG-NM; Sun, 22 Oct 2023 22:44:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qukmt-00031y-AJ; Sun, 22 Oct 2023 22:35:27 -0400
-Received: from mail-vk1-xa32.google.com ([2607:f8b0:4864:20::a32])
+ id 1qukvj-0007P0-IS; Sun, 22 Oct 2023 22:44:35 -0400
+Received: from mail-vk1-xa35.google.com ([2607:f8b0:4864:20::a35])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qukmr-0004j7-Ly; Sun, 22 Oct 2023 22:35:27 -0400
-Received: by mail-vk1-xa32.google.com with SMTP id
- 71dfb90a1353d-49d6bd3610cso1242595e0c.1; 
- Sun, 22 Oct 2023 19:35:25 -0700 (PDT)
+ id 1qukvh-0005hp-RU; Sun, 22 Oct 2023 22:44:35 -0400
+Received: by mail-vk1-xa35.google.com with SMTP id
+ 71dfb90a1353d-4a8158e8613so1139651e0c.3; 
+ Sun, 22 Oct 2023 19:44:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698028524; x=1698633324; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1698029072; x=1698633872; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DXluwi1vyq0LvLxU+daWwG8i3ejzFLn17omiskpJBzA=;
- b=AtutcUPzQF6jpn5mYuhK6RfocHTAKVi1fRt5xyWOUwKrJLlAYUz+cgt6KaD+DLzXFv
- kNnFiPGiZwztjbatNaTFOPjq9ywTj3OZltrJPYEWixRNoF4sV+It5WcevIhyYgbidW+q
- 9jvaxSRNktb2ewcEnlH2lOZ5A0QMs5mRAw1Or1UjvkL/aTEX/+nyqHAqpXHaoJvnb2dY
- Ny1hmm/UjlxcfVSrSiTMWHyzC9fquIf0MGbs6wsoFO/eTCcdtQe1AghM7kQrP/FtRN8z
- DtIwrN91XOYM397Y+HvbMLPeJvnp/Sup1lQUAsoAgPuiPbtjA9LkqUgVoeeyjUG0WDh2
- A7rQ==
+ bh=h2B6XLR+PgFDNyBUK3FJ5jxVcDnkOQQ08hkqspczkZk=;
+ b=TD41S//g6IQeKMfipjBnuPuXX5LoA/176YF4NfScGqhXYs9KyvQPq7SCYWFzezXCuR
+ 9V5xirHSPdwKFls55HBTnhucKln1aECZ5N6W0Hd0OOPMGYnUhQeQ9vv0FdsbCmTb2WLH
+ +xMCrtPyCIXPikuuSO4wyV/Pnj+VTP0dMmrpSkmBpnixwRcX11g4H+HRYUezhctxoCbR
+ FWgB+zGsBue5T2mXjZR3NVq21WjbSCUimkTG9SSZYOgDdqQ7xNAR+/XJcOhnwbQLXBzw
+ A72fQP+Nsfo6NUCK6EI9CHmeWznB562KzuQdVKNo66yPexBQ+MAENrdlkA0yRg5gNUw7
+ M6wg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698028524; x=1698633324;
+ d=1e100.net; s=20230601; t=1698029072; x=1698633872;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DXluwi1vyq0LvLxU+daWwG8i3ejzFLn17omiskpJBzA=;
- b=Xb9JhE30sbPJaMonNlzATeCfSXFeMDUYuwmSilNnz0TN/eclSDSz4SyPfqjYOX1Yg9
- qtLUa/xy1qzkL07Wl9Lnmeyzf7zC+PfFf7v8WGC/GA2B7cqppoVizmMiEzJ+kQbGxBoX
- xBccdpAIMF8Twj4mmiJMFaTLHeGDEzXMMolMWMcP3htxR6RoOPWHw89LnSh+OVMmT/IA
- vgjTtnOAqVg9+uOj576veIL7S12tGfJvPQkweZak7KQJUKgXxk5TTikgLDE4gS1sH5/J
- yQ/1eFGNrGJJOZL2rhskfnL0jAs8NcU04arDw5mN4hN+1mdNBDPbEX1i5WRdJr8SZpmX
- CKPA==
-X-Gm-Message-State: AOJu0YzStCthoH6D9XWI1PQ+S28fGetyhsshx3qMNcBJaH8OQXl6CSJo
- NCMuUSaKC3iUZSi3tCjQP7ewmt1ArK2bxnNj5OA=
-X-Google-Smtp-Source: AGHT+IEbILoahlp2+BWQWDJdJQyANbtHelRwKSAhDxxlSK42SdeE6ltvrzxm948PfvUr6tSFHr682F5D/WV+Ra8mkkM=
-X-Received: by 2002:a05:6122:3c81:b0:49a:9146:ec02 with SMTP id
- fy1-20020a0561223c8100b0049a9146ec02mr8181913vkb.1.1698028524242; Sun, 22 Oct
- 2023 19:35:24 -0700 (PDT)
+ bh=h2B6XLR+PgFDNyBUK3FJ5jxVcDnkOQQ08hkqspczkZk=;
+ b=vFKLjwFX1oRdZCeMOpwHYQkcTZO7NFD9TIQfD8scY5Wm5MjSEy7a1qzVVBkmBYCNnp
+ MNaGB4hHCXg85ZOxojc52HhCRuhKl1d8Fh86ZbNT+TMqxdb7d+Z3MKwHUxmX5S5aJTPt
+ Moi9m0+LTSUKJ5NiyuMHTXjkkL+TwO+Lagcst4jMbrQW6XfxaylsbxIb0au7FWxm1s23
+ RLStr9/bpmCBZ9t4q1Wfk7uxxne9aJbHcpjaPoXRbHigS9lsaAyU/ZpzBvQcHf9x+kX3
+ Nl26NSumJvvMOG7xPsJVZ8Cb6Krdfb8dOJsKEHJlbzJzU0K31+XIZWelfHh4rcR2ZG9A
+ tZfA==
+X-Gm-Message-State: AOJu0Yx+x+RnKLuKvLWMlpaPJmKFFdbAeykJrZUut1huB/GKxrll2e9n
+ R3HBJ6M1N10ir81de0RYrhkxrrZJ4HREN6B9vC+zOuYP8hQ=
+X-Google-Smtp-Source: AGHT+IFTF33XCHfcSpPmXP/C3sRWMExciSrrwFujKd6F+x/wmeDblJg/JLsH6qy0RaE4RouoL1rscifALfbx7+6yIWA=
+X-Received: by 2002:a67:c204:0:b0:452:62b2:36b with SMTP id
+ i4-20020a67c204000000b0045262b2036bmr7529244vsj.30.1698029071829; Sun, 22 Oct
+ 2023 19:44:31 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231019065644.1431798-1-mchitale@ventanamicro.com>
 In-Reply-To: <20231019065644.1431798-1-mchitale@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 23 Oct 2023 12:34:57 +1000
-Message-ID: <CAKmqyKM-NaWD-_b_V86Np86_j_a+=_221635gFG2shSiV__rhQ@mail.gmail.com>
+Date: Mon, 23 Oct 2023 12:44:05 +1000
+Message-ID: <CAKmqyKNzFeKMiAAjurvhAcoEjOPU=ZF2QyXD6__XcKExQYEeTg@mail.gmail.com>
 Subject: Re: [PATCH v2] target/riscv: pmp: Clear pmp/smepmp bits on reset
 To: Mayuresh Chitale <mchitale@ventanamicro.com>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
  Alistair Francis <alistair.francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a32;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a35;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa35.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -100,7 +100,9 @@ e
 >
 > Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
