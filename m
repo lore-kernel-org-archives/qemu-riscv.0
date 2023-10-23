@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 027D5C0032E
-	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Oct 2023 02:11:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D3ACCDB474
+	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Oct 2023 02:26:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qukPa-000797-4p; Sun, 22 Oct 2023 22:11:22 -0400
+	id 1qukdx-0005Co-Vv; Sun, 22 Oct 2023 22:26:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qukPY-00078q-Il; Sun, 22 Oct 2023 22:11:20 -0400
-Received: from mail-vk1-xa34.google.com ([2607:f8b0:4864:20::a34])
+ id 1qukdw-0005CS-KA; Sun, 22 Oct 2023 22:26:12 -0400
+Received: from mail-vs1-xe30.google.com ([2607:f8b0:4864:20::e30])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qukPW-00006p-Bb; Sun, 22 Oct 2023 22:11:20 -0400
-Received: by mail-vk1-xa34.google.com with SMTP id
- 71dfb90a1353d-49b289adca9so990954e0c.3; 
- Sun, 22 Oct 2023 19:11:17 -0700 (PDT)
+ id 1qukds-00036q-43; Sun, 22 Oct 2023 22:26:12 -0400
+Received: by mail-vs1-xe30.google.com with SMTP id
+ ada2fe7eead31-457eebf8e01so982195137.2; 
+ Sun, 22 Oct 2023 19:26:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698027077; x=1698631877; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1698027966; x=1698632766; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2HzMji1t22696VtL+3BK/jLCQMowgG2gT8gy70K16jo=;
- b=byPmh6rCCafPQe3W6eDnfF7ab39bs4zP34zwbniKzPS36VDtNtoJvP9D8YHY9Iir2w
- FNGlVUdh4EzAHjK9C+ZHX65rtLcQtwj9JMQvU3GfSgCL8NEBYpTSIQHFVtzGwXV0vJH3
- 8vQXT1Yv9lEUYbevgMcFwEIBSQgnJiipJrky+6ubfSoevtJ1HvGhxuukirNSaRSNJZr3
- wT2SUFzu7dmWLI0at5Aq6TjLAr88dz5L8VQ9Hjw5Yi/uIkmR4mjCrapqwdLLC9otC2CY
- q0WAN1Ide11MBPNnfCIaR+FzCr9jjW6Y35tvAuzb5fVCbDL3aA6SNYWLXSCewcpNZdN1
- 8WTQ==
+ bh=w+yZDFUEZvI3svLG+K2ZXb+amjFcBvHRbElrL1dBr80=;
+ b=FB70rNkEz7PqCkD6LaTJ4bY/rx3L6beBpoO051maGl40KwyWki7LOkR02ynuRuLkI8
+ eJdHbxAwDI7ll7HIiFJP1lk62yyLfRhbWTH/EvS8JA4SsJAeWe7fuTxjTfrIOv1w9s14
+ V+FHuY3RwkamfOVZnd4+6vjl7uuoUljgPD8vZmD1jsO2+J5eEOnjjw27saEv9fXgc3bW
+ 1vHsyfdIl+J0y28/NjVRBg+rktt9rvgy/pxANOgc/dM2/7NaRVtemN+dkofPlX5igAM8
+ wuWaYvIqTZUqdMaqcBUnlkOf4K6c2Ujud5sbgUcvKK8dBwR3YsiwsiXDW2ya0PwPMOAv
+ gvXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698027077; x=1698631877;
+ d=1e100.net; s=20230601; t=1698027966; x=1698632766;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2HzMji1t22696VtL+3BK/jLCQMowgG2gT8gy70K16jo=;
- b=iTFOeSUtj6qFhkcfpFpPR2Gi/HTJ/mxnNoV3PfnEdbIauJrI7VRP2IJ4NTXydmqYVV
- Nckx7bM1UnPi+ypDUpUVCNtyOv12mP1qD3dQPQEOxzljQYg6I+UsEeHcRWNfhZG0zCJl
- hiYk15tBhJPnzgJX8E8gt5pqp9Wv2lXtYmK+gEmEMjbI3bROo8Oyv5/uG+YRVtelVCyO
- f9zHv9tTtQutiDhD/kEj154i8/SZz6BFgyzkAYP1JwkhNrK2QmkLCX1yI/Le7i/MATVX
- gduKZta+BSslS+p0ka56z9WJzG41teYHOWcTG3WU+2h/rgWZWhLJzIeX1OSomlf15Tp6
- 6ceA==
-X-Gm-Message-State: AOJu0Yz0rxr48vEr8BADYEy/pGPT/PRhJMTA55sYVgh1DJvSUJprR43f
- 1aCS1TxvT8+y59ULrJQuVShIS/FmsWpENvUuwGU=
-X-Google-Smtp-Source: AGHT+IGPUZ327hd921rktskAppnin2cQkhYUMkp11sB8vj6Hrz9paeGoetSWicKQ6NTLhHQN9OjaekdNKOrpBM6YOk0=
-X-Received: by 2002:a1f:2347:0:b0:4a4:156e:6bd9 with SMTP id
- j68-20020a1f2347000000b004a4156e6bd9mr6434805vkj.5.1698027076703; Sun, 22 Oct
- 2023 19:11:16 -0700 (PDT)
+ bh=w+yZDFUEZvI3svLG+K2ZXb+amjFcBvHRbElrL1dBr80=;
+ b=J1APm/rgPlilZPIRplrkw5SNnilPfPWmSdLMwz38bKl5OP3AbD65ypylJwTcQ0OktU
+ cnyi5oikUU64+RWsH8d+I2e1uddP8RQY9cy0V+Mrh3mPt0zGNzV2EPUMcPLnFftR0qiz
+ oFzuE+HGAGc79EQtV2bPkuaMh0cGCVDSlc8Rbz5xGfn8O9/xMrF/ODj7an900iWxQTRR
+ s+4jSn3bO/ezOYNlJdJnzEXjIuVxaonYV8zFFubQoKorgVTT4v+GrFdWM5ODYYkaBCzX
+ B+y14gBLxbNEe0QwQAhzL4MPAbSY2FGGOuU6qjWOfQlUQJa1V2/QCXpAzw+EFcTVYVYj
+ aGkw==
+X-Gm-Message-State: AOJu0YwfvmW46NZIOAoLsUeTPDMeOtwnA8cyEIp2D7rjK6NG7w43mZPU
+ gzuymt69HDBWg6ZKZblnLgrpIEBv+txpdcByvgY=
+X-Google-Smtp-Source: AGHT+IFZsyOVflhMFU3hC0cuCli2H4MR7SHfQFmNhR5vEpdIkHVLrDubMmL9wxqnWaVaL4TTKXF32PmuHxAkwrYUEyo=
+X-Received: by 2002:a67:b849:0:b0:452:690a:fa28 with SMTP id
+ o9-20020a67b849000000b00452690afa28mr7183138vsh.23.1698027966555; Sun, 22 Oct
+ 2023 19:26:06 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231019065546.1431579-1-mchitale@ventanamicro.com>
 In-Reply-To: <20231019065546.1431579-1-mchitale@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 23 Oct 2023 12:10:50 +1000
-Message-ID: <CAKmqyKOSNnNu9B5Q-O4zY6z_KTSqf4-K03Z7UvLQMv9EVKrS+w@mail.gmail.com>
+Date: Mon, 23 Oct 2023 12:25:39 +1000
+Message-ID: <CAKmqyKO+zXpjkrP_9nQGcBA+RPfrtnRaOcAu2EDXz+e8SepOJA@mail.gmail.com>
 Subject: Re: [PATCH v2] Add epmp to extensions list and rename it to smepmp
 To: Mayuresh Chitale <mchitale@ventanamicro.com>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
@@ -65,8 +65,8 @@ Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a34;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e30;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe30.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -103,7 +103,9 @@ On Thu, Oct 19, 2023 at 4:56=E2=80=AFPM Mayuresh Chitale
 > Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
 > Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
