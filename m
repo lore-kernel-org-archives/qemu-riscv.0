@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CC4AC0032E
-	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Oct 2023 02:55:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64CF2CDB474
+	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Oct 2023 02:56:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qul5P-0001eo-D5; Sun, 22 Oct 2023 22:54:35 -0400
+	id 1qul76-0002Oe-Kx; Sun, 22 Oct 2023 22:56:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qul5N-0001dy-6O; Sun, 22 Oct 2023 22:54:33 -0400
-Received: from mail-vk1-xa31.google.com ([2607:f8b0:4864:20::a31])
+ id 1qul74-0002Nu-SY; Sun, 22 Oct 2023 22:56:18 -0400
+Received: from mail-ua1-x932.google.com ([2607:f8b0:4864:20::932])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qul5L-00075N-G0; Sun, 22 Oct 2023 22:54:32 -0400
-Received: by mail-vk1-xa31.google.com with SMTP id
- 71dfb90a1353d-49d14708479so1240401e0c.2; 
- Sun, 22 Oct 2023 19:54:30 -0700 (PDT)
+ id 1qul73-0007Tb-Et; Sun, 22 Oct 2023 22:56:18 -0400
+Received: by mail-ua1-x932.google.com with SMTP id
+ a1e0cc1a2514c-7b5f7f4e733so1044961241.3; 
+ Sun, 22 Oct 2023 19:56:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698029670; x=1698634470; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1698029776; x=1698634576; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=897cKE31Z8E/zEM4wL2dQxHdaLDF/9RmuPVmbFB0ciw=;
- b=kYq7s9dRxOrjYK387QybYfq+KtBAywit8WJXyOoNpgUod9MrU0BNQULwPJmhcNcX8G
- uaBZkGCrvv/GcRO2VjB3CoRqzoGAU58ytRHXadmACcLOPVSS2rFlAp2fM6Tu5QQya3do
- m72jTkO42RPrq28F322AS4gh/T7O55mFxnlY3gTIQGkK6iSPMHS3BZZlrSPB6RZa8hdx
- GVGbbDCR0fUawp2j8CXXNPm9uwElULz8OzW63eLZnTFiTLfBUqaXl6wuEcpsBkDXNzLN
- wp33zuplzGR3qQNC7D93Fx+BPd5mGL8S93wpedafT6X8K5SlldWZi/3fCVjhedAsxjgk
- HjoA==
+ bh=hSfqs7usZf/qfi0a3As12jXLjtv2Z8EFuTolCKyJcsk=;
+ b=GZbO8gU32h/akgYnz3T1DhFsTIVRND7nLYXZLNa8Y7Jbhq3OUsFzNd/AbiUKRb/o3D
+ R5uIpfxsyqm1v5k90/grN4Gpj9D0XVAUa4Y1USV6V6Agx161A0vyixbNQcqGpj3d0RSS
+ YOoRnSDHFkX5QU7TqnZdNSCjHglbhIu4lR2TKkVJAUAnKspAMUVM/quREpgHKeB0eeis
+ lNAV9SZcN4bsnELifXnSMtMjpPs548I53NhWYNY7bKvYI47tqqP4Z8IuULxT0weEU4KZ
+ OLZzbMe33U4l4WdYH3HRjwDUPqTToXAaM6iOr/4FoWbuvpreDeobTG8XISFCieEX3/JV
+ GH+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698029670; x=1698634470;
+ d=1e100.net; s=20230601; t=1698029776; x=1698634576;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=897cKE31Z8E/zEM4wL2dQxHdaLDF/9RmuPVmbFB0ciw=;
- b=TnPn1XHWKHOQT5G8NTBm16/LtnHr5/CIhizpg0FQVSq/gJdMMR+JV9ptNoPAv8dMzD
- rh99tRnWkzE/R1BHZyFkli8zdyUbCwocTpdOwJdGwXmgrF27KxxgHv9UZf/pfWQccuTd
- 0ETHuvD7031GggpUcw8yADGX/PfgN51NFdvAObRNqWsVj+u3ZCAXyKdW5i9HcSEqjxJ1
- vO8Au4JLNZq6KBACJS4w+A1ZMm+BdDduxdZmAL4CwF+oerp7vJJToyu/4wucMbgLCIdk
- z8oIicXuYvOxL/JYyBJhHKbQgZ8XkrAXT5ZUn3ovplS3Q8snDzVPk8mwJp3lVCXTYqdM
- xp4w==
-X-Gm-Message-State: AOJu0Yyj32b1ILUrewaVKvmPufzHbNgroEmx4BXn8NM+0Ln4YJTM1aIY
- 7Tn2QSb46GvmjcQ8OFknC3/ml4zgwDfQoZYZ87g=
-X-Google-Smtp-Source: AGHT+IHS0QyvW8+/KrVKVQHMziUMVZd0C2l2o3F5ennbToiUXXpzxq0/WXdBVij97lkrJxeMKkc2eKCl6TktZYmuz8o=
-X-Received: by 2002:a1f:1fd1:0:b0:49d:d73e:5d07 with SMTP id
- f200-20020a1f1fd1000000b0049dd73e5d07mr5736126vkf.16.1698029670041; Sun, 22
- Oct 2023 19:54:30 -0700 (PDT)
+ bh=hSfqs7usZf/qfi0a3As12jXLjtv2Z8EFuTolCKyJcsk=;
+ b=XQmhuflFd6RFVyag2WwB4Lj7tBVkkRCVw8O1yzGvBiQD5a21/fyIsBvwkt8nbEuith
+ JI2d2vEy2QyV6/7fAsWklidK29CPsJe9wChB22Xz23DVmRA1c2Gu3wzP0X4ZtPS4LRZd
+ uLJbjqjvg2WHW0KWVRGhuFXuxr8gxxM2EgFkfX67eK0heysNrGZvpjk/VLr0FONGxGUD
+ dUHdyDfPUHjAXGxvl6ECSaF/6kTkg7HOvCmiEPWXE2V/bunnadrsclzhaFTFHhb0ESFQ
+ RQMvGb+Ku7ZWXNL7O4YnkDBmOGyHgBHx7KeURDUvDRWFxagqywgR59X2w803MIXPLH+C
+ +cvQ==
+X-Gm-Message-State: AOJu0YwzOYSzVjqPRLv9hEonEl2dfhC9ADTWNvd6RVfDxnSarUIB3+CY
+ Yka8dL3a+6Pd3dbdxQ2HMfdUZQg288IrXuENZO0=
+X-Google-Smtp-Source: AGHT+IEEy/Lx4fJre1+JNPBhpm8MjvmYcTv6di2LDnTqGu/Ue7WL1OeTx8b3jQ+fwCrqMypV/+C5TlRhVdegu/XqcuA=
+X-Received: by 2002:a05:6102:23ce:b0:458:119:2d93 with SMTP id
+ x14-20020a05610223ce00b0045801192d93mr8845384vsr.33.1698029775770; Sun, 22
+ Oct 2023 19:56:15 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231017221226.136764-1-dbarboza@ventanamicro.com>
- <20231017221226.136764-3-dbarboza@ventanamicro.com>
-In-Reply-To: <20231017221226.136764-3-dbarboza@ventanamicro.com>
+ <20231017221226.136764-4-dbarboza@ventanamicro.com>
+In-Reply-To: <20231017221226.136764-4-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 23 Oct 2023 12:54:03 +1000
-Message-ID: <CAKmqyKPn+t0WH+mztkMfT73Efoch-=21QcV782q8h7S-aaTm4g@mail.gmail.com>
-Subject: Re: [PATCH v2 2/6] target/riscv/tcg: add ext_zicntr disable support
+Date: Mon, 23 Oct 2023 12:55:49 +1000
+Message-ID: <CAKmqyKOTnLWP71Ly5UCY2AjL3+mWTSbHSjxcD9C2oQX1kthKkg@mail.gmail.com>
+Subject: Re: [PATCH v2 3/6] target/riscv/kvm: add zicntr reg
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
  palmer@rivosinc.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a31;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa31.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::932;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x932.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -93,66 +93,34 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On Wed, Oct 18, 2023 at 8:13=E2=80=AFAM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> Support for the zicntr counters are already in place. We need a way to
-> disable them if the user wants to. This is done by restricting access to
-> the CYCLE, TIME, and INSTRET counters via the 'ctr()' predicate when
-> we're about to access them.
+> Add zicntr support in the KVM driver now that QEMU supports it.
 >
-> Disabling zicntr happens via the command line or if its dependency,
-> zicsr, happens to be disabled. We'll check for zicsr during realize() and=
-,
-> in case it's absent, disable zicntr. However, if the user was explicit
-> about having zicntr support, error out instead of disabling it.
+> This reg was added in Linux 6.6.
 >
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-This should come before we expose the property to users though
-
 Alistair
 
 > ---
->  target/riscv/csr.c         | 4 ++++
->  target/riscv/tcg/tcg-cpu.c | 8 ++++++++
->  2 files changed, 12 insertions(+)
+>  target/riscv/kvm/kvm-cpu.c | 1 +
+>  1 file changed, 1 insertion(+)
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index a5be1c202c..05c6a69123 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -122,6 +122,10 @@ static RISCVException ctr(CPURISCVState *env, int cs=
-rno)
->
->      if ((csrno >=3D CSR_CYCLE && csrno <=3D CSR_INSTRET) ||
->          (csrno >=3D CSR_CYCLEH && csrno <=3D CSR_INSTRETH)) {
-> +        if (!riscv_cpu_cfg(env)->ext_zicntr) {
-> +            return RISCV_EXCP_ILLEGAL_INST;
-> +        }
-> +
->          goto skip_ext_pmu_check;
->      }
->
-> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> index bbce254ee1..a01b876621 100644
-> --- a/target/riscv/tcg/tcg-cpu.c
-> +++ b/target/riscv/tcg/tcg-cpu.c
-> @@ -541,6 +541,14 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu=
-, Error **errp)
->          cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zksh), true);
->      }
->
-> +    if (cpu->cfg.ext_zicntr && !cpu->cfg.ext_zicsr) {
-> +        if (cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_zicntr))) {
-> +            error_setg(errp, "zicntr requires zicsr");
-> +            return;
-> +        }
-> +        cpu->cfg.ext_zicntr =3D false;
-> +    }
-> +
->      /*
->       * Disable isa extensions based on priv spec after we
->       * validated and set everything we need.
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index 5695f2face..6c2a92d171 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -215,6 +215,7 @@ static void kvm_riscv_update_cpu_misa_ext(RISCVCPU *c=
+pu, CPUState *cs)
+>  static KVMCPUConfig kvm_multi_ext_cfgs[] =3D {
+>      KVM_EXT_CFG("zicbom", ext_zicbom, KVM_RISCV_ISA_EXT_ZICBOM),
+>      KVM_EXT_CFG("zicboz", ext_zicboz, KVM_RISCV_ISA_EXT_ZICBOZ),
+> +    KVM_EXT_CFG("zicntr", ext_zicntr, KVM_RISCV_ISA_EXT_ZICNTR),
+>      KVM_EXT_CFG("zihintpause", ext_zihintpause, KVM_RISCV_ISA_EXT_ZIHINT=
+PAUSE),
+>      KVM_EXT_CFG("zbb", ext_zbb, KVM_RISCV_ISA_EXT_ZBB),
+>      KVM_EXT_CFG("ssaia", ext_ssaia, KVM_RISCV_ISA_EXT_SSAIA),
 > --
 > 2.41.0
 >
