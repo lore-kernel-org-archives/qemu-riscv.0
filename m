@@ -4,75 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C7C1C0032E
-	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Oct 2023 01:47:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F379CDB474
+	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Oct 2023 02:03:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1quk1k-0005R5-Cg; Sun, 22 Oct 2023 21:46:44 -0400
+	id 1qukHr-0007cM-2W; Sun, 22 Oct 2023 22:03:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1quk1h-0005QE-8h; Sun, 22 Oct 2023 21:46:41 -0400
-Received: from mail-ua1-x931.google.com ([2607:f8b0:4864:20::931])
+ id 1qukHp-0007Qf-4R; Sun, 22 Oct 2023 22:03:21 -0400
+Received: from mail-vs1-xe2b.google.com ([2607:f8b0:4864:20::e2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1quk1e-0004F3-Vx; Sun, 22 Oct 2023 21:46:40 -0400
-Received: by mail-ua1-x931.google.com with SMTP id
- a1e0cc1a2514c-7b67fef3fd4so553723241.1; 
- Sun, 22 Oct 2023 18:46:38 -0700 (PDT)
+ id 1qukHn-0006PQ-7H; Sun, 22 Oct 2023 22:03:20 -0400
+Received: by mail-vs1-xe2b.google.com with SMTP id
+ ada2fe7eead31-457cb2fe3abso1126642137.3; 
+ Sun, 22 Oct 2023 19:03:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698025597; x=1698630397; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1698026598; x=1698631398; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IAyIOIavpd3mO7cIUu3Vj1UNgIis8N7GH0LALQXQd+4=;
- b=NCYRqn/zwDT9wDy3NnZjOpKvYM4KmIwG3noWNTcJ2g5PAg8LPf5zpQpZ/1FjVwSP5b
- WjhqU0nGBnevXr6JOXBnvP8pDQ/NkKxuT2ObchHTTlvTYUOLwb7CSVyYBguZW3QTc3Bj
- V3fs/p+x/haL8WZwppx0wBfa1EDV1Hbg7FWqcLWzN6WogXaWz3FUB7erC7T+kswCG/G/
- U/kYa2MqJCqEHIU3vquRXfc1ShV3Fw1w2EErHHaMgL7Q7gKsgzdZ5NYkdxuK3Oe9HN0n
- 1G16DrT3en4uQNWeygaQ5zWxJwpbNK8OdvASQNAnpDEgCnfbpkYmfcenNwv1trDShM9l
- gFXQ==
+ bh=sNO6YQ53wmtunDNUft8NS8dh2KDQEbFeS41wQYl5C34=;
+ b=BYKWE1GQV5BxCRdvPeWFwCqtMfKgwwPWuEYcMYGT7ibI0IcpNuwZXD4UUXgbCuKHDp
+ tVHso2vVjUI2B4xCOFtF8nmyct3c1sFciHF3d/jc0NgxhVH9+4Kn2BITGuSqCCqwgIp4
+ K5o73k8XJRWCH73lng4jp90v5VSBm1pLJaCH+vRaH4MDzVtGSm6ZM6y5R67SWeWRor9D
+ MN17LgqSye40qEhvqtMNfahoOJCigTG/VG64hKx3lDH8B7zc1jy/WqB8fWXFk5WZjEs5
+ 6aYO9CzZt849A9aCdti/GdbqZL6hKrONzoR0aeQumZnM9bAN4Ccl3BkBdwwZKQiMGXgF
+ 7OwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698025597; x=1698630397;
+ d=1e100.net; s=20230601; t=1698026598; x=1698631398;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IAyIOIavpd3mO7cIUu3Vj1UNgIis8N7GH0LALQXQd+4=;
- b=H0ijMFbMwF74tpb+LDhPP2cFjFc5m0uJsQXNWgRTGGtQFH9jg0OIDhbjxgs44kk9lu
- r91YaggOt+Adx/f8zsKBu5J1UqRoMrxvEKJKekYaOfpH0MFi/HGY9V1/ZopjECnsKLEU
- XtyReuJweplVjtJScusDM5atT3XtkLc+UJoG5l/gKyAJMbYGhd1s0kwoL244b0w5r141
- uP5cfxyXNgvLjslU3VvDrmZdoMZERAI+0wQVItPq96dZyt9gCLJ/PgpzNCsKndhdVOBG
- nnkaiTkZLWjCEoR1xXEIbmPE//2E6K1c5JgiOh4yDQRhMnCqdZXCkuzsVewl+7wpxykm
- dsuQ==
-X-Gm-Message-State: AOJu0Yx2GWlMoHAYwwOOBjggsZ2lSDV94YToQL7YOCIfzt8aAzyQejGF
- 9ofcSqnDR0K3FzRtYtOfKSjRTismM22jJj3M9N8=
-X-Google-Smtp-Source: AGHT+IGz8p45CFqTTfXL+BwVNHA/NPgvFhcKsvQjlHPQM8q3pSkvDoWiqSv08RuTV05wFPEQ6+GOHKtv93dvDIGgUxU=
-X-Received: by 2002:a67:b20d:0:b0:452:6efc:1789 with SMTP id
- b13-20020a67b20d000000b004526efc1789mr4034082vsf.32.1698025597463; Sun, 22
- Oct 2023 18:46:37 -0700 (PDT)
+ bh=sNO6YQ53wmtunDNUft8NS8dh2KDQEbFeS41wQYl5C34=;
+ b=dlOiblzdHYZWCRFKCnKEiJb7bhxLw7I4JU2yim5r1hAvFpSi5RxWfj+o2IX6mOjY2x
+ 2NTs7ieNNpkCvPiyOQ5ej46WMO335xiAXJ3QFNDMckgxJZNEDBXwM31jPWGfBrXDQhbd
+ wuxGg2F5XJ/hjNNPKDie+UQOoV4sxDzs1CBOhCbn+MV99PahkekzCAc3I8k5/xB0CoDs
+ D0LCcXys/KZfR95D6c0aIn4EAvv6vndN1zzL1KHsnkvb6pWu1yZews2mGlnXdzbOeul9
+ mbjcGw/2AgisQNNKciQPB/iBjvoCAK4EUmoVBUoHFX29TGj6iZTLOIK7PnZ28rTnephM
+ wQ3g==
+X-Gm-Message-State: AOJu0YwAbmQ5oDtKr6v/UrrhkHR8813sYjC5JDzAi+3Q2ZPi3GNTCUyP
+ ag7uie8qdDqHOGuB2ZLI0VsiJshbYOaGjbmKuao=
+X-Google-Smtp-Source: AGHT+IECZBed4U7t63/cBX0JjIryn+E6A3FWzM2C+1kKkmheSp1E/yIq6bwuypYWBtoitKmqZq+MqkJgZ3ek6UjLXKE=
+X-Received: by 2002:a67:ae45:0:b0:457:e828:3747 with SMTP id
+ u5-20020a67ae45000000b00457e8283747mr7584568vsh.5.1698026597839; Sun, 22 Oct
+ 2023 19:03:17 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231017190931.16211-1-akihiko.odaki@daynix.com>
- <20231017190931.16211-7-akihiko.odaki@daynix.com>
-In-Reply-To: <20231017190931.16211-7-akihiko.odaki@daynix.com>
+References: <20231018154434.17367-1-rbradford@rivosinc.com>
+ <20231018154434.17367-5-rbradford@rivosinc.com>
+In-Reply-To: <20231018154434.17367-5-rbradford@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 23 Oct 2023 11:46:10 +1000
-Message-ID: <CAKmqyKMGuk8auS9MRj_J8K++hoo5xTkU1vYqbccc_Jo37uLZpg@mail.gmail.com>
-Subject: Re: [PATCH v13 06/18] target/riscv: Use GDBFeature for dynamic XML
-To: Akihiko Odaki <akihiko.odaki@daynix.com>
-Cc: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Mikhail Tyutin <m.tyutin@yadro.com>, Aleksandr Anenkov <a.anenkov@yadro.com>,
- qemu-devel@nongnu.org, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
+Date: Mon, 23 Oct 2023 12:02:50 +1000
+Message-ID: <CAKmqyKOEwa2soJNP9KkhoPxxJaEAsKFAnLQYtpo5+DgBi1XoLg@mail.gmail.com>
+Subject: Re: [PATCH v4 4/6] target/riscv: Add "pmu-mask" property to replace
+ "pmu-num"
+To: Rob Bradford <rbradford@rivosinc.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, atishp@rivosinc.com, 
+ palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
+ liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::931;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x931.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2b;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2b.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -96,247 +91,192 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Oct 18, 2023 at 6:16=E2=80=AFAM Akihiko Odaki <akihiko.odaki@daynix=
-.com> wrote:
+On Thu, Oct 19, 2023 at 1:45=E2=80=AFAM Rob Bradford <rbradford@rivosinc.co=
+m> wrote:
 >
-> In preparation for a change to use GDBFeature as a parameter of
-> gdb_register_coprocessor(), convert the internal representation of
-> dynamic feature from plain XML to GDBFeature.
+> Using a mask instead of the number of PMU devices supports the accurate
+> emulation of platforms that have a discontinuous set of PMU counters.
 >
-> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+> The "pmu-num" property now generates a warning when used by the user on
+> the command line. In order to avoid warning for the default value when
+> the property is not explicitly by the user the property default value
+> cannot be used so the default value must be set during the CPU object
+> initialisation.
+>
+> If the "pmu-num" value is changed from the default then the mask will be
+> generated from that to support the transition to "pmu-mask".
+>
+> Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
+> ---
+>  target/riscv/cpu.c         | 31 ++++++++++++++++++++++++++++++-
+>  target/riscv/cpu_cfg.h     |  3 ++-
+>  target/riscv/machine.c     |  2 +-
+>  target/riscv/pmu.c         | 20 ++++++++++++++++----
+>  target/riscv/tcg/tcg-cpu.c |  2 +-
+>  5 files changed, 50 insertions(+), 8 deletions(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index ac4a6c7eec..1b734d1dde 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1169,6 +1169,11 @@ static void riscv_cpu_post_init(Object *obj)
+>
+>  static void riscv_cpu_init(Object *obj)
+>  {
+> +    RISCVCPU *cpu =3D RISCV_CPU(obj);
+> +
+> +    /* Using property default value would spam deprecation warning */
+> +    cpu->cfg.pmu_num =3D 16;
+> +
+>  #ifndef CONFIG_USER_ONLY
+>      qdev_init_gpio_in(DEVICE(obj), riscv_cpu_set_irq,
+>                        IRQ_LOCAL_MAX + IRQ_LOCAL_GUEST_MAX);
+> @@ -1362,8 +1367,32 @@ const RISCVCPUMultiExtConfig riscv_cpu_deprecated_=
+exts[] =3D {
+>      DEFINE_PROP_END_OF_LIST(),
+>  };
+>
+> +static void prop_pmu_num_set(Object *obj, Visitor *v, const char *name,
+> +                             void *opaque, Error **errp)
+> +{
+> +    RISCVCPU *cpu =3D RISCV_CPU(obj);
+> +
+> +    visit_type_uint8(v, name, &cpu->cfg.pmu_num, errp);
+> +    warn_report("\"pmu-num\" property is deprecated; use \"pmu-mask\"");
+> +}
+> +
+> +static void prop_pmu_num_get(Object *obj, Visitor *v, const char *name,
+> +                             void *opaque, Error **errp)
+> +{
+> +    RISCVCPU *cpu =3D RISCV_CPU(obj);
+> +
+> +    visit_type_uint8(v, name, &cpu->cfg.pmu_num, errp);
+> +}
+> +
+> +const PropertyInfo prop_pmu_num =3D {
+> +    .name =3D "pmu-num",
+> +    .get =3D prop_pmu_num_get,
+> +    .set =3D prop_pmu_num_set,
+> +};
+> +
+>  Property riscv_cpu_options[] =3D {
+> -    DEFINE_PROP_UINT8("pmu-num", RISCVCPU, cfg.pmu_num, 16),
+> +    DEFINE_PROP("pmu-num", RISCVCPU, cfg.pmu_num, prop_pmu_num, uint8_t)=
+, /* Deprecated */
+> +    DEFINE_PROP_UINT32("pmu-mask", RISCVCPU, cfg.pmu_mask, MAKE_64BIT_MA=
+SK(3, 16)),
+>
+>      DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
+>      DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
+> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> index 0e6a0f245c..d273487040 100644
+> --- a/target/riscv/cpu_cfg.h
+> +++ b/target/riscv/cpu_cfg.h
+> @@ -123,7 +123,8 @@ struct RISCVCPUConfig {
+>      bool ext_xtheadsync;
+>      bool ext_XVentanaCondOps;
+>
+> -    uint8_t pmu_num;
+> +    uint8_t pmu_num; /* Deprecated */
+> +    uint32_t pmu_mask;
+>      char *priv_spec;
+>      char *user_spec;
+>      char *bext_spec;
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index c7c862cdd3..9f6e3f7a6d 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -313,7 +313,7 @@ static bool pmu_needed(void *opaque)
+>  {
+>      RISCVCPU *cpu =3D opaque;
+>
+> -    return cpu->cfg.pmu_num;
+> +    return (cpu->cfg.pmu_mask > 0);
+>  }
+>
+>  static const VMStateDescription vmstate_pmu_ctr_state =3D {
+> diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
+> index 7ddf4977b1..5e89354bb9 100644
+> --- a/target/riscv/pmu.c
+> +++ b/target/riscv/pmu.c
+> @@ -18,6 +18,7 @@
+>
+>  #include "qemu/osdep.h"
+>  #include "qemu/log.h"
+> +#include "qemu/error-report.h"
+>  #include "cpu.h"
+>  #include "pmu.h"
+>  #include "sysemu/cpu-timers.h"
+> @@ -184,7 +185,7 @@ int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_=
+event_idx event_idx)
+>      CPURISCVState *env =3D &cpu->env;
+>      gpointer value;
+>
+> -    if (!cpu->cfg.pmu_num) {
+> +    if (!cpu->cfg.pmu_mask) {
+>          return 0;
+>      }
+>      value =3D g_hash_table_lookup(cpu->pmu_event_ctr_map,
+> @@ -434,7 +435,13 @@ void riscv_pmu_init(RISCVCPU *cpu, Error **errp)
+>  {
+>      uint8_t pmu_num =3D cpu->cfg.pmu_num;
+>
+> -    if (pmu_num > (RV_MAX_MHPMCOUNTERS - 3)) {
+> +    if (cpu->cfg.pmu_mask & (COUNTEREN_CY | COUNTEREN_TM | COUNTEREN_IR)=
+) {
+> +        error_setg(errp, "\"pmu-mask\" contains invalid bits (0-2) set")=
+;
+> +        return;
+> +    }
+> +
+> +    if (ctpop32(cpu->cfg.pmu_mask) > (RV_MAX_MHPMCOUNTERS - 3) ||
+> +        (pmu_num > RV_MAX_MHPMCOUNTERS - 3)) {
+>          error_setg(errp, "Number of counters exceeds maximum available")=
+;
+>          return;
+>      }
+> @@ -445,6 +452,11 @@ void riscv_pmu_init(RISCVCPU *cpu, Error **errp)
+>          return;
+>      }
+>
+> -    /* Create a bitmask of available programmable counters */
+> -    cpu->pmu_avail_ctrs =3D MAKE_32BIT_MASK(3, pmu_num);
+> +    if (pmu_num =3D=3D 0) {
+> +        cpu->cfg.pmu_mask =3D 0;
+> +    } else if (pmu_num !=3D 16) {
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+I think it's clearer if this is just an else instead of if not 16
+
+> +        cpu->cfg.pmu_mask =3D MAKE_32BIT_MASK(3, pmu_num);
+> +    }
+
+Also doesn't think mean that the pmu-num prop will override the
+pmu-mask prop? We probably want to do it the other way around.
+
+Does setting pmu_mask directly in prop_pmu_num_set() work? Then we can
+drop pmu_num completely.
 
 Alistair
 
-> ---
->  target/riscv/cpu.h     |  5 +--
->  target/riscv/cpu.c     |  4 +--
->  target/riscv/gdbstub.c | 77 ++++++++++++++++++------------------------
->  3 files changed, 38 insertions(+), 48 deletions(-)
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index ef10efd1e7..4a1683c8ad 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -24,6 +24,7 @@
->  #include "hw/registerfields.h"
->  #include "hw/qdev-properties.h"
->  #include "exec/cpu-defs.h"
-> +#include "exec/gdbstub.h"
->  #include "qemu/cpu-float.h"
->  #include "qom/object.h"
->  #include "qemu/int128.h"
-> @@ -394,8 +395,8 @@ struct ArchCPU {
->
->      CPURISCVState env;
->
-> -    char *dyn_csr_xml;
-> -    char *dyn_vreg_xml;
-> +    GDBFeature dyn_csr_feature;
-> +    GDBFeature dyn_vreg_feature;
->
->      /* Configuration Settings */
->      RISCVCPUConfig cfg;
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 72124e57fd..5e083b5798 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1432,9 +1432,9 @@ static const char *riscv_gdb_get_dynamic_xml(CPUSta=
-te *cs, const char *xmlname)
->      RISCVCPU *cpu =3D RISCV_CPU(cs);
->
->      if (strcmp(xmlname, "riscv-csr.xml") =3D=3D 0) {
-> -        return cpu->dyn_csr_xml;
-> +        return cpu->dyn_csr_feature.xml;
->      } else if (strcmp(xmlname, "riscv-vector.xml") =3D=3D 0) {
-> -        return cpu->dyn_vreg_xml;
-> +        return cpu->dyn_vreg_feature.xml;
->      }
->
->      return NULL;
-> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> index b9528cef5b..b7159f1db8 100644
-> --- a/target/riscv/gdbstub.c
-> +++ b/target/riscv/gdbstub.c
-> @@ -214,13 +214,14 @@ static int riscv_gdb_set_virtual(CPURISCVState *cs,=
- uint8_t *mem_buf, int n)
->      return 0;
->  }
->
-> -static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
-> +static GDBFeature *riscv_gen_dynamic_csr_feature(CPUState *cs)
->  {
->      RISCVCPUClass *mcc =3D RISCV_CPU_GET_CLASS(cs);
->      RISCVCPU *cpu =3D RISCV_CPU(cs);
->      CPURISCVState *env =3D &cpu->env;
-> -    GString *s =3D g_string_new(NULL);
-> +    GDBFeatureBuilder builder;
->      riscv_csr_predicate_fn predicate;
-> +    const char *name;
->      int bitsize =3D 16 << mcc->misa_mxl_max;
->      int i;
->
-> @@ -233,9 +234,8 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, in=
-t base_reg)
->          bitsize =3D 64;
->      }
->
-> -    g_string_printf(s, "<?xml version=3D\"1.0\"?>");
-> -    g_string_append_printf(s, "<!DOCTYPE feature SYSTEM \"gdb-target.dtd=
-\">");
-> -    g_string_append_printf(s, "<feature name=3D\"org.gnu.gdb.riscv.csr\"=
->");
-> +    gdb_feature_builder_init(&builder, &cpu->dyn_csr_feature,
-> +                             "org.gnu.gdb.riscv.csr", "riscv-csr.xml");
->
->      for (i =3D 0; i < CSR_TABLE_SIZE; i++) {
->          if (env->priv_ver < csr_ops[i].min_priv_ver) {
-> @@ -243,72 +243,63 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, =
-int base_reg)
->          }
->          predicate =3D csr_ops[i].predicate;
->          if (predicate && (predicate(env, i) =3D=3D RISCV_EXCP_NONE)) {
-> -            if (csr_ops[i].name) {
-> -                g_string_append_printf(s, "<reg name=3D\"%s\"", csr_ops[=
-i].name);
-> -            } else {
-> -                g_string_append_printf(s, "<reg name=3D\"csr%03x\"", i);
-> +            g_autofree char *dynamic_name =3D NULL;
-> +            name =3D csr_ops[i].name;
-> +            if (!name) {
-> +                dynamic_name =3D g_strdup_printf("csr%03x", i);
-> +                name =3D dynamic_name;
->              }
-> -            g_string_append_printf(s, " bitsize=3D\"%d\"", bitsize);
-> -            g_string_append_printf(s, " regnum=3D\"%d\"/>", base_reg + i=
-);
 > +
-> +            gdb_feature_builder_append_reg(&builder, name, bitsize,
-> +                                           "int", NULL);
->          }
->      }
->
-> -    g_string_append_printf(s, "</feature>");
-> -
-> -    cpu->dyn_csr_xml =3D g_string_free(s, false);
-> +    gdb_feature_builder_end(&builder);
->
->  #if !defined(CONFIG_USER_ONLY)
->      env->debugger =3D false;
->  #endif
->
-> -    return CSR_TABLE_SIZE;
-> +    return &cpu->dyn_csr_feature;
+> +    cpu->pmu_avail_ctrs =3D cpu->cfg.pmu_mask;
 >  }
->
-> -static int ricsv_gen_dynamic_vector_xml(CPUState *cs, int base_reg)
-> +static GDBFeature *ricsv_gen_dynamic_vector_feature(CPUState *cs)
->  {
->      RISCVCPU *cpu =3D RISCV_CPU(cs);
-> -    GString *s =3D g_string_new(NULL);
-> -    g_autoptr(GString) ts =3D g_string_new("");
-> +    GDBFeatureBuilder builder;
->      int reg_width =3D cpu->cfg.vlen;
-> -    int num_regs =3D 0;
->      int i;
->
-> -    g_string_printf(s, "<?xml version=3D\"1.0\"?>");
-> -    g_string_append_printf(s, "<!DOCTYPE target SYSTEM \"gdb-target.dtd\=
-">");
-> -    g_string_append_printf(s, "<feature name=3D\"org.gnu.gdb.riscv.vecto=
-r\">");
-> +    gdb_feature_builder_init(&builder, &cpu->dyn_vreg_feature,
-> +                             "org.gnu.gdb.riscv.vector", "riscv-vector.x=
-ml");
->
->      /* First define types and totals in a whole VL */
->      for (i =3D 0; i < ARRAY_SIZE(vec_lanes); i++) {
->          int count =3D reg_width / vec_lanes[i].size;
-> -        g_string_printf(ts, "%s", vec_lanes[i].id);
-> -        g_string_append_printf(s,
-> -                               "<vector id=3D\"%s\" type=3D\"%s\" count=
-=3D\"%d\"/>",
-> -                               ts->str, vec_lanes[i].gdb_type, count);
-> +        gdb_feature_builder_append_tag(
-> +            &builder, "<vector id=3D\"%s\" type=3D\"%s\" count=3D\"%d\"/=
->",
-> +            vec_lanes[i].id, vec_lanes[i].gdb_type, count);
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index ed3eb991c0..53c52389b9 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -613,7 +613,7 @@ static bool tcg_cpu_realize(CPUState *cs, Error **err=
+p)
+>          riscv_timer_init(cpu);
 >      }
 >
->      /* Define unions */
-> -    g_string_append_printf(s, "<union id=3D\"riscv_vector\">");
-> +    gdb_feature_builder_append_tag(&builder, "<union id=3D\"riscv_vector=
-\">");
->      for (i =3D 0; i < ARRAY_SIZE(vec_lanes); i++) {
-> -        g_string_append_printf(s, "<field name=3D\"%c\" type=3D\"%s\"/>"=
-,
-> -                               vec_lanes[i].suffix,
-> -                               vec_lanes[i].id);
-> +        gdb_feature_builder_append_tag(&builder,
-> +                                       "<field name=3D\"%c\" type=3D\"%s=
-\"/>",
-> +                                       vec_lanes[i].suffix, vec_lanes[i]=
-.id);
->      }
-> -    g_string_append(s, "</union>");
-> +    gdb_feature_builder_append_tag(&builder, "</union>");
->
->      /* Define vector registers */
->      for (i =3D 0; i < 32; i++) {
-> -        g_string_append_printf(s,
-> -                               "<reg name=3D\"v%d\" bitsize=3D\"%d\""
-> -                               " regnum=3D\"%d\" group=3D\"vector\""
-> -                               " type=3D\"riscv_vector\"/>",
-> -                               i, reg_width, base_reg++);
-> -        num_regs++;
-> +        gdb_feature_builder_append_reg(&builder, g_strdup_printf("v%d", =
-i),
-> +                                       reg_width, "riscv_vector", "vecto=
-r");
->      }
->
-> -    g_string_append_printf(s, "</feature>");
-> +    gdb_feature_builder_end(&builder);
->
-> -    cpu->dyn_vreg_xml =3D g_string_free(s, false);
-> -    return num_regs;
-> +    return &cpu->dyn_vreg_feature;
->  }
->
->  void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
-> @@ -324,10 +315,9 @@ void riscv_cpu_register_gdb_regs_for_features(CPUSta=
-te *cs)
->                                   32, "riscv-32bit-fpu.xml", 0);
->      }
->      if (env->misa_ext & RVV) {
-> -        int base_reg =3D cs->gdb_num_regs;
->          gdb_register_coprocessor(cs, riscv_gdb_get_vector,
->                                   riscv_gdb_set_vector,
-> -                                 ricsv_gen_dynamic_vector_xml(cs, base_r=
-eg),
-> +                                 ricsv_gen_dynamic_vector_feature(cs)->n=
-um_regs,
->                                   "riscv-vector.xml", 0);
->      }
->      switch (mcc->misa_mxl_max) {
-> @@ -347,9 +337,8 @@ void riscv_cpu_register_gdb_regs_for_features(CPUStat=
-e *cs)
->      }
->
->      if (cpu->cfg.ext_icsr) {
-> -        int base_reg =3D cs->gdb_num_regs;
->          gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_cs=
-r,
-> -                                 riscv_gen_dynamic_csr_xml(cs, base_reg)=
-,
-> +                                 riscv_gen_dynamic_csr_feature(cs)->num_=
-regs,
->                                   "riscv-csr.xml", 0);
->      }
->  }
+> -    if (cpu->cfg.pmu_num) {
+> +    if (cpu->cfg.pmu_mask) {
+>          riscv_pmu_init(cpu, &local_err);
+>          if (local_err !=3D NULL) {
+>              error_propagate(errp, local_err);
 > --
-> 2.42.0
+> 2.41.0
 >
 >
 
