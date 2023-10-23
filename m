@@ -4,109 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21809CDB474
-	for <qemu-riscv@archiver.kernel.org>; Sun, 22 Oct 2023 16:15:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D382CDB474
+	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Oct 2023 01:11:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qub3I-0000aR-Ai; Sun, 22 Oct 2023 12:11:44 -0400
+	id 1qujTX-0007dc-KJ; Sun, 22 Oct 2023 21:11:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from
- <BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1qualT-000572-4w; Sun, 22 Oct 2023 11:53:19 -0400
-Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from
- <BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1qualP-0000Mg-W2; Sun, 22 Oct 2023 11:53:17 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
- MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
- Reply-To:Content-Type:Content-ID:Content-Description;
- bh=4+Mc5UoIk/j59DxPJr9/Bba3Ss0BlZ5eJh5qSsyPoYw=; b=jKJ5VvWEyZleEXgoeqEjZyi1L3
- F2uGIPRfZhpHac7DvT8dcH7gIWxpe/tRYcLh6a531myfO27mcnhfiU46UoKaXiCyX8XLGtR1CdiVj
- lCTsZg/ufvzJ5E1RjmOZ+bxSSWGgzoA5UbRs3K8EgeRsYod3r5vMmhKZ3EkWUbwXIyjj/7PuP3qzW
- rWINlK9wlyTwfAizsWoIWwhkaEp4EraKyMOG38tO68U98yl5KCKzvK08FpngEcsQfD3GNtneUfIMD
- /xfCnoqcaHNm5gZTtBehY1MvpMR+RyFE4tIdKv3DoushzbI5KZMsI8qV49iJYhVF3DJ61ye4Oaacl
- p2ZI+F2Q==;
-Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1quakJ-00DCmu-24; Sun, 22 Oct 2023 15:53:09 +0000
-Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1quakJ-001qZj-00; Sun, 22 Oct 2023 16:52:07 +0100
-From: David Woodhouse <dwmw2@infradead.org>
-To: qemu-devel@nongnu.org
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Beniamino Galvani <b.galvani@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Strahinja Jankovic <strahinja.p.jankovic@gmail.com>,
- Niek Linnenbank <nieklinnenbank@gmail.com>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- Andrew Jeffery <andrew@aj.id.au>, Joel Stanley <joel@jms.id.au>,
- Igor Mitsyanko <i.mitsyanko@gmail.com>,
- Jean-Christophe Dubois <jcd@tribudubois.net>,
- Andrey Smirnov <andrew.smirnov@gmail.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Rob Herring <robh@kernel.org>, Subbaraya Sundeep <sundeep.lkml@gmail.com>,
- Jan Kiszka <jan.kiszka@web.de>, Tyrone Ting <kfting@nuvoton.com>,
- Hao Wu <wuhaotsh@google.com>, Radoslaw Biernacki <rad@semihalf.com>,
- Leif Lindholm <quic_llindhol@quicinc.com>,
- Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Alistair Francis <alistair@alistair23.me>, Helge Deller <deller@gmx.de>,
- Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Song Gao <gaosong@loongson.cn>, Thomas Huth <huth@tuxfamily.org>,
- Laurent Vivier <laurent@vivier.eu>, Huacai Chen <chenhuacai@kernel.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- =?UTF-8?q?Herv=C3=A9=20Poussineau?= <hpoussin@reactos.org>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Aurelien Jarno <aurelien@aurel32.net>, Jason Wang <jasowang@redhat.com>,
- Jia Liu <proljc@gmail.com>, Stafford Horne <shorne@gmail.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Nicholas Piggin <npiggin@gmail.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Weiwei Li <liweiwei@iscas.ac.cn>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Eric Farman <farman@linux.ibm.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Magnus Damm <magnus.damm@gmail.com>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
- Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
- xen-devel@lists.xenproject.org
-Subject: [PATCH 22/45] hw/arm/aspeed: use qemu_configure_nic_device()
-Date: Sun, 22 Oct 2023 16:51:37 +0100
-Message-Id: <20231022155200.436340-23-dwmw2@infradead.org>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20231022155200.436340-1-dwmw2@infradead.org>
-References: <20231022155200.436340-1-dwmw2@infradead.org>
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1qujTV-0007d8-PZ; Sun, 22 Oct 2023 21:11:21 -0400
+Received: from mail-ua1-x933.google.com ([2607:f8b0:4864:20::933])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1qujTU-0007R3-Cu; Sun, 22 Oct 2023 21:11:21 -0400
+Received: by mail-ua1-x933.google.com with SMTP id
+ a1e0cc1a2514c-7b5fd0b7522so554170241.0; 
+ Sun, 22 Oct 2023 18:11:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1698023478; x=1698628278; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JE+nyMgkE7MsgTQwcTo9RjpvZHiunBt21/B2JI/Xoko=;
+ b=aPC0mJ8kLI0nsaTicV1QDfK7RK7JiD/7yToVGK0ELbTjZAXDinxHaiSaIu654NGJrw
+ 3liLj+uYWGe/wc7hW6TiKgP3Wp4CADN+YXBWi1mEVQTDTva2O9mGTpVWWzegDK353KUe
+ CpTmnjLGhsOxDGH5BrJCaoWHleixThpjNYObt+kQrJ+01D+4pZEDiEKIh20x/7YrvgE0
+ jSPMB7RipVGrST09iRPMcjryK9P8yWuBXjNC8XR//AAXCOni8jAkUG8F4KK7WayXvX6U
+ 7kpovnB4nZ3oReb9PVXGVWWBqZR/NZjReaUPJCAYsnkVb/v9ZFcHg/5cCBK35iN5WRYn
+ GKLg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698023478; x=1698628278;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=JE+nyMgkE7MsgTQwcTo9RjpvZHiunBt21/B2JI/Xoko=;
+ b=eLRWBuJhoHyLUvz3fvvrbhzj3qbiFWw69ozkYC+vGUjcuQw+zk2DdlEgJr0o90oomI
+ 1k6VVCw5pa/4dIgIdAq3sFgiYAB0o+iPQpDm59WYnNq1JcDqllrDHLbp4F4C9bsVU3dX
+ ee2K63ujFjzVZVkVsD0/Cx7PK7Kqx1OwFViGmJaB1ibdVIfsIw+yda0HbGl3D7OA1to9
+ 1Dw/2SLa01Njc/ozoOFQ/7ZoV9nobghLuEtwnIZEopeyePwYN8EjnDk43e5ae1UwPcd5
+ gKFseQ2juO/+Se1HIonIxOpk3YCIALklF+hObIxrolRA4AU5BuxnTkttSQiOMmKshtqL
+ MTdw==
+X-Gm-Message-State: AOJu0YzQtcGh3cm0qyUIvkWt57y4mkpZSuiAPY77+6gslPhyvJajOVcZ
+ IwzKCCugzUk6AAXRXnBwNc7J7oxXsPLFRfUFxLk=
+X-Google-Smtp-Source: AGHT+IF6zaMNg2O7ZL3nBXdN/ZQ9G6ZT4bYeo1L1KI9t5N3+hzN3h2kqDi5bhzmrYnL8Tk/kB5VxzO3uQ5vuvpxmwNs=
+X-Received: by 2002:a67:c012:0:b0:457:bc6c:937b with SMTP id
+ v18-20020a67c012000000b00457bc6c937bmr4270388vsi.18.1698023478601; Sun, 22
+ Oct 2023 18:11:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- desiato.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1:d65d:64ff:fe57:4e05;
- envelope-from=BATV+fd6248c3715d1825373b+7364+infradead.org+dwmw2@desiato.srs.infradead.org;
- helo=desiato.infradead.org
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20231020074501.283063-1-dbarboza@ventanamicro.com>
+In-Reply-To: <20231020074501.283063-1-dbarboza@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 23 Oct 2023 11:10:51 +1000
+Message-ID: <CAKmqyKNh-KzTwdm_yXnHy+G06y+APiWeeWsnGQn+QRgedbefdA@mail.gmail.com>
+Subject: Re: [PATCH] linux-user/riscv: change default cpu to 'max'
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, Richard Henderson <richard.henderson@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::933;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x933.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=ham autolearn_force=no
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sun, 22 Oct 2023 12:11:02 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -121,41 +89,48 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+On Fri, Oct 20, 2023 at 5:46=E2=80=AFPM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> Commit f57d5f8004 deprecated the 'any' CPU type but failed to change the
+> default CPU for linux-user. The result is that all linux-users
+> invocations that doesn't specify a different CPU started to show a
+> deprecation warning:
+>
+> $ ./build/qemu-riscv64  ./foo-novect.out
+> qemu-riscv64: warning: The 'any' CPU is deprecated and will be removed in=
+ the future.
+>
+> Change the default CPU for RISC-V linux-user from 'any' to 'max'.
+>
+> Reported-by: Richard Henderson <richard.henderson@linaro.org>
+> Fixes: f57d5f8004 ("target/riscv: deprecate the 'any' CPU type")
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
----
- hw/arm/aspeed.c | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-diff --git a/hw/arm/aspeed.c b/hw/arm/aspeed.c
-index f8ba67531a..945ad97835 100644
---- a/hw/arm/aspeed.c
-+++ b/hw/arm/aspeed.c
-@@ -356,7 +356,6 @@ static void aspeed_machine_init(MachineState *machine)
-     AspeedMachineClass *amc = ASPEED_MACHINE_GET_CLASS(machine);
-     AspeedSoCClass *sc;
-     int i;
--    NICInfo *nd = &nd_table[0];
- 
-     object_initialize_child(OBJECT(machine), "soc", &bmc->soc, amc->soc_name);
- 
-@@ -370,10 +369,10 @@ static void aspeed_machine_init(MachineState *machine)
-                              &error_fatal);
- 
-     for (i = 0; i < sc->macs_num; i++) {
--        if ((amc->macs_mask & (1 << i)) && nd->used) {
--            qemu_check_nic_model(nd, TYPE_FTGMAC100);
--            qdev_set_nic_properties(DEVICE(&bmc->soc.ftgmac100[i]), nd);
--            nd++;
-+        if ((amc->macs_mask & (1 << i)) &&
-+            !qemu_configure_nic_device(DEVICE(&bmc->soc.ftgmac100[i]),
-+                                       true, NULL)) {
-+            break; /* No configs left; stop asking */
-         }
-     }
- 
--- 
-2.40.1
+Alistair
 
+> ---
+>  linux-user/riscv/target_elf.h | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
+>
+> diff --git a/linux-user/riscv/target_elf.h b/linux-user/riscv/target_elf.=
+h
+> index 9dd65652ee..dedd5956f3 100644
+> --- a/linux-user/riscv/target_elf.h
+> +++ b/linux-user/riscv/target_elf.h
+> @@ -9,7 +9,6 @@
+>  #define RISCV_TARGET_ELF_H
+>  static inline const char *cpu_get_model(uint32_t eflags)
+>  {
+> -    /* TYPE_RISCV_CPU_ANY */
+> -    return "any";
+> +    return "max";
+>  }
+>  #endif
+> --
+> 2.41.0
+>
+>
 
