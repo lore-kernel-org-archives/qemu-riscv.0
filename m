@@ -4,69 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26D92C00A8F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 24 Oct 2023 00:56:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AE1EC00A8F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 24 Oct 2023 11:34:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qv5i1-0008FB-BW; Mon, 23 Oct 2023 20:55:49 -0400
+	id 1qvFfw-0002Qz-Ch; Tue, 24 Oct 2023 07:34:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <vivahavey@gmail.com>)
- id 1qv5hx-0008EP-T2; Mon, 23 Oct 2023 20:55:47 -0400
-Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <vivahavey@gmail.com>)
- id 1qv5hv-0000Zt-Px; Mon, 23 Oct 2023 20:55:45 -0400
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-27d1aee5aa1so2851701a91.0; 
- Mon, 23 Oct 2023 17:55:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698108941; x=1698713741; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=HV5+lPbKKtckfQ0a5BPWFgFxZVTQ5lKqDjaGe+bmBv8=;
- b=TTz4vyRM7ADLRXlXBIpy0FMlQrIXKtlBFSv5cB/c+C94XT7NR9fCvFhvl1Wbpgjwax
- /CV7CQEh+K5NeWOgzSMatt3yWbbW6I3gmLwuwLLQOqEPnnxa2InnTN4GEfr5t+C8Dnsm
- zAFVYuB3MEm7C6+D4xsYpw1B3IAHSR5NufqBmF0cTBgCiYBJ+v6yUNiBq0DZqMF+crwM
- vCKaCUbqd+xiMi7zzCZdY8xC1mm+Q6KsyLqTA2hVxGwciLyxdwTlNcu1xpKlgE0trMHc
- Q3KcZeBalY2yraL6cEQYFdpBoCWycDKWWs+NDMQpd727PFKCD5kMaaOgBLwSSnqNXxYP
- 797Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698108941; x=1698713741;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=HV5+lPbKKtckfQ0a5BPWFgFxZVTQ5lKqDjaGe+bmBv8=;
- b=GdlfNHadektMs8Vs2EgnrdIcPON8TxYZ8R0xFlQVkPiOifakxxhQFnWCWf6jvgkQ8L
- GKpP4CZwFGatuBTlB9XCx9xYHbkfBqEzd1wflniyhjF+ui4OZm57LsUNjp8F2lTkHBZW
- OnhS9cK+/M3DvMHARNG6NKOFLXTU+mTHuQJbsDdhtaSSaTRO7rvBnTtlhrsU9Rdoe48+
- 8lAc8MkP7yH38WDQ4PB488nbaIqIvtFmBuirefCToLMlZFV/DOKdAEoKWUknhfcMBrCI
- nkdj/ibdd/LNj0n3O5QlCr7CDl+fioNtj1aY6F7jG3OcezWpE/soH+39XX34l1VFuNKC
- bDSA==
-X-Gm-Message-State: AOJu0Yzdr1xYZ1k6FFTYazgAKylRweytJfGA7QLPCUcmIUf0RNaEazFa
- LS5Ik2gFD06qku/gy+9NXfd5DMp0nNa4/oZddbk=
-X-Google-Smtp-Source: AGHT+IFXKHNpWPwQkQ/OLQdwmIJ3dYu3ssZlFTqJ+jMMUYjCJXxAZRT7ljIpmIE1PIFoifZrYZ8Hl3/yKqgbU/P4c2k=
-X-Received: by 2002:a17:90b:4f82:b0:274:77b3:64d0 with SMTP id
- qe2-20020a17090b4f8200b0027477b364d0mr18336160pjb.17.1698108940889; Mon, 23
- Oct 2023 17:55:40 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <quic_llindhol@quicinc.com>)
+ id 1qvFff-0002Fh-05; Tue, 24 Oct 2023 07:34:04 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <quic_llindhol@quicinc.com>)
+ id 1qvFfb-0003XM-SE; Tue, 24 Oct 2023 07:34:02 -0400
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 39OBFruY030894; Tue, 24 Oct 2023 11:32:26 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com;
+ h=date : from : to :
+ cc : subject : message-id : references : mime-version : content-type :
+ in-reply-to; s=qcppdkim1; bh=SDdDuTaN4SoAWEpM2HKbvwWC/AnVWG6bKPnln/BNFPM=;
+ b=Nbu7HyH4d39Kp0iB+z//t5OAGEFCvePvI+VCVMlCc+A7pp3g8W6L2lEyt7AwENfe6nHN
+ BrYi2YgU5WbLlrm6dE8GwNVxLUxPgxkTC7gWf3vqjhSe210N6jeS+HZjP5aN9yKaMW+0
+ gE7Els2Ns4ZmsjMkSSrnufM4WwKkLJlV1QSsCJuYhmoMNj4MbZNivxoc4gFAB9nVe/RY
+ /mgRqddLohVGW71+h2kfx/u2OWkX3hK3IyGkqFd8guImMqyUoOGknoNDjFSKRrtaN84p
+ j3u7VrYEz5a6kTH7TL3iJQlF8qKQqVWyxADB7qLLYF6pAU1a3icvvfco/5ptP25ft3eO Rg== 
+Received: from nasanppmta05.qualcomm.com (i-global254.qualcomm.com
+ [199.106.103.254])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3twxw5hgfg-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 24 Oct 2023 11:32:26 +0000
+Received: from nasanex01c.na.qualcomm.com (nasanex01c.na.qualcomm.com
+ [10.45.79.139])
+ by NASANPPMTA05.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 39OBWP59014241
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 24 Oct 2023 11:32:25 GMT
+Received: from qc-i7.hemma.eciton.net (10.80.80.8) by
+ nasanex01c.na.qualcomm.com (10.45.79.139) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.39; Tue, 24 Oct 2023 04:32:11 -0700
+Date: Tue, 24 Oct 2023 12:32:08 +0100
+From: Leif Lindholm <quic_llindhol@quicinc.com>
+To: David Woodhouse <dwmw2@infradead.org>
+CC: <qemu-devel@nongnu.org>, Richard Henderson <richard.henderson@linaro.org>, 
+ Beniamino Galvani <b.galvani@gmail.com>, Peter Maydell
+ <peter.maydell@linaro.org>, Strahinja Jankovic
+ <strahinja.p.jankovic@gmail.com>,
+ Niek Linnenbank <nieklinnenbank@gmail.com>,
+ =?iso-8859-1?Q?C=E9dric?= Le Goater <clg@kaod.org>, Andrew Jeffery
+ <andrew@aj.id.au>, Joel Stanley <joel@jms.id.au>, Igor Mitsyanko
+ <i.mitsyanko@gmail.com>, Jean-Christophe Dubois <jcd@tribudubois.net>,
+ Andrey Smirnov <andrew.smirnov@gmail.com>,
+ Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
+ Rob Herring <robh@kernel.org>, Subbaraya Sundeep <sundeep.lkml@gmail.com>,
+ Jan Kiszka <jan.kiszka@web.de>, Tyrone Ting <kfting@nuvoton.com>,
+ Hao Wu <wuhaotsh@google.com>, Radoslaw Biernacki <rad@semihalf.com>,
+ Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Alistair Francis
+ <alistair@alistair23.me>, Helge Deller <deller@gmx.de>, Paolo Bonzini
+ <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>, "Michael S.
+ Tsirkin" <mst@redhat.com>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Song Gao <gaosong@loongson.cn>, Thomas Huth <huth@tuxfamily.org>, Laurent
+ Vivier <laurent@vivier.eu>, Huacai Chen <chenhuacai@kernel.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, =?iso-8859-1?Q?Herv=E9?= Poussineau
+ <hpoussin@reactos.org>, Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Jason Wang <jasowang@redhat.com>, Jia Liu <proljc@gmail.com>,
+ Stafford Horne <shorne@gmail.com>, Mark Cave-Ayland
+ <mark.cave-ayland@ilande.co.uk>, Nicholas Piggin <npiggin@gmail.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>, David Gibson
+ <david@gibson.dropbear.id.au>, Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Weiwei Li <liweiwei@iscas.ac.cn>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ Halil Pasic <pasic@linux.ibm.com>, Christian Borntraeger
+ <borntraeger@linux.ibm.com>, Eric Farman <farman@linux.ibm.com>, Yoshinori
+ Sato <ysato@users.sourceforge.jp>, Magnus Damm <magnus.damm@gmail.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, Stefano Stabellini
+ <sstabellini@kernel.org>, Anthony Perard <anthony.perard@citrix.com>, Paul
+ Durrant <paul@xen.org>, Max Filippov <jcmvbkbc@gmail.com>,
+ <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
+ <qemu-s390x@nongnu.org>, <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH 08/45] hw/arm/sbsa-ref: use pci_init_nic_devices()
+Message-ID: <ZTerOM9bc5B8v/cc@qc-i7.hemma.eciton.net>
+References: <20231022155200.436340-1-dwmw2@infradead.org>
+ <20231022155200.436340-9-dwmw2@infradead.org>
 MIME-Version: 1.0
-From: Chang Alvin <vivahavey@gmail.com>
-Date: Tue, 24 Oct 2023 08:55:30 +0800
-Message-ID: <CAEV2DRq5i_jQuCv1-L99ru3+0HdOrKBp7B1hk0TKsazEs7k98g@mail.gmail.com>
-Subject: RE: [PATCH v4] target/riscv: update checks on writing pmpcfg for
- Smepmp to version 1.0
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, alistair.francis@wdc.com
-Content-Type: multipart/alternative; boundary="00000000000036324c06086bcc75"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
- envelope-from=vivahavey@gmail.com; helo=mail-pj1-x1031.google.com
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20231022155200.436340-9-dwmw2@infradead.org>
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nasanex01c.na.qualcomm.com (10.45.79.139)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-ORIG-GUID: dizOLerF3W9Ktgo_lllh00WJGa4VFPrs
+X-Proofpoint-GUID: dizOLerF3W9Ktgo_lllh00WJGa4VFPrs
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-10-24_11,2023-10-24_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0
+ spamscore=0 mlxscore=0 bulkscore=0 impostorscore=0 phishscore=0
+ mlxlogscore=781 priorityscore=1501 suspectscore=0 clxscore=1011
+ adultscore=0 malwarescore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.12.0-2310170001 definitions=main-2310240097
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=quic_llindhol@quicinc.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_KAM_HTML_FONT_INVALID=0.01 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -82,572 +135,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---00000000000036324c06086bcc75
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-> On Mon, Sep 25, 2023 at 2:11=E2=80=AFAM Alvin Chang <alvinga@andestech.co=
-m>
-
-> wrote:
-
-> >
-
-> > Current checks on writing pmpcfg for Smepmp follows Smepmp version
-
-> > 0.9.1. However, Smepmp specification has already been ratified, and
-
-> > there are some differences between version 0.9.1 and 1.0. In this
-
-> > commit we update the checks of writing pmpcfg to follow Smepmp version
-
-> > 1.0.
-
-> >
-
-> > When mseccfg.MML is set, the constraints to modify PMP rules are:
-
-> > 1. Locked rules cannot be removed or modified until a PMP reset, unless
-
-> >    mseccfg.RLB is set.
-
-> > 2. From Smepmp specification version 1.0, chapter 2 section 4b:
-
-> >    Adding a rule with executable privileges that either is M-mode-only
-
-> >    or a locked Shared-Region is not possible and such pmpcfg writes are
-
-> >    ignored, leaving pmpcfg unchanged.
-
-> >
-
-> > The commit transfers the value of pmpcfg into the index of the Smepmp
-
-> > truth table, and checks the rules by aforementioned specification
-
-> > changes.
-
-> >
-
-> > Signed-off-by: Alvin Chang <alvinga@andestech.com>
-
-> > ---
-
-> > Changes from v3: Modify "epmp_operation" to "smepmp_operation".
-
->
-
-> This has the same issue as all the previous versions.
-
->
-
-> QEMU is currently not shipping with Smepmp support. So updating some of
-the
-
-> code to support Smepmp is confusing.
-
->
-
-> As I pointed out for the v3, we currently only support ePMP 0.9.3. So
-that is
-
-> what the code must work with.
-
->
-
-> In order for this change to go in, we also need to upgrade QEMU to suppor=
-t
-
-> Smepmp 1.0.
-
->
-
-> This patch is an attempt to do that:
-
-> https://www.mail-archive.com/qemu-devel@nongnu.org/msg967676.html
-
->
-
-> You basically need to combine the changes from
-
-> https://www.mail-archive.com/qemu-devel@nongnu.org/msg967676.html into
-
-> this patch. So there is a single patch that updates to Smepmp.
-
->
-
-> Alistair
-
->
-
-
-Hi Alistair,
-
-
-I saw patches from Mayuresh were merged into riscv-to-apply.next yesterday.
-
-Would you also take a look at this patch?
-
-Thanks!
-
-
-Alvin Chang
-
-
-> >
-
-> > Changes from v2: Adopt switch case ranges and numerical order.
-
-> >
-
-> > Changes from v1: Convert ePMP over to Smepmp.
-
-> >
-
-> >  target/riscv/pmp.c | 40 ++++++++++++++++++++++++++++++++--------
-
-> >  1 file changed, 32 insertions(+), 8 deletions(-)
-
-> >
-
-> > diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c index
-
-> > a08cd95658..2ebf18c941 100644
-
-> > --- a/target/riscv/pmp.c
-
-> > +++ b/target/riscv/pmp.c
-
-> > @@ -99,16 +99,40 @@ static void pmp_write_cfg(CPURISCVState *env,
-
-> uint32_t pmp_index, uint8_t val)
-
-> >                  locked =3D false;
-
-> >              }
-
-> >
-
-> > -            /* mseccfg.MML is set */
-
-> > -            if (MSECCFG_MML_ISSET(env)) {
-
-> > -                /* not adding execute bit */
-
-> > -                if ((val & PMP_LOCK) !=3D 0 && (val & PMP_EXEC) !=3D
-
-> PMP_EXEC) {
-
-> > +            /*
-
-> > +             * mseccfg.MML is set. Locked rules cannot be removed or
-
-> modified
-
-> > +             * until a PMP reset. Besides, from Smepmp specification
-
-> version 1.0
-
-> > +             * , chapter 2 section 4b says:
-
-> > +             * Adding a rule with executable privileges that either is
-
-> > +             * M-mode-only or a locked Shared-Region is not possible
-
-> and such
-
-> > +             * pmpcfg writes are ignored, leaving pmpcfg unchanged.
-
-> > +             */
-
-> > +            if (MSECCFG_MML_ISSET(env) && !pmp_is_locked(env,
-
-> pmp_index)) {
-
-> > +                /*
-
-> > +                 * Convert the PMP permissions to match the truth
-
-> table in the
-
-> > +                 * Smepmp spec.
-
-> > +                 */
-
-> > +                const uint8_t smepmp_operation =3D
-
-> > +                    ((val & PMP_LOCK) >> 4) | ((val & PMP_READ) <<
-
-> 2) |
-
-> > +                    (val & PMP_WRITE) | ((val & PMP_EXEC) >> 2);
-
-> > +
-
-> > +                switch (smepmp_operation) {
-
-> > +                case 0 ... 8:
-
-> >                      locked =3D false;
-
-> > -                }
-
-> > -                /* shared region and not adding X bit */
-
-> > -                if ((val & PMP_LOCK) !=3D PMP_LOCK &&
-
-> > -                    (val & 0x7) !=3D (PMP_WRITE | PMP_EXEC)) {
-
-> > +                    break;
-
-> > +                case 9 ... 11:
-
-> > +                    break;
-
-> > +                case 12:
-
-> > +                    locked =3D false;
-
-> > +                    break;
-
-> > +                case 13:
-
-> > +                    break;
-
-> > +                case 14:
-
-> > +                case 15:
-
-> >                      locked =3D false;
-
-> > +                    break;
-
-> > +                default:
-
-> > +                    g_assert_not_reached();
-
-> >                  }
-
-> >              }
-
-> >          } else {
-
-> > --
-
-> > 2.34.1
-
-> >
-
-> >
-
---00000000000036324c06086bcc75
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,=
-sans-serif"><span lang=3D"EN-US" style=3D"font-size:12pt">&gt; On Mon, Sep =
-25, 2023 at 2:11</span><span lang=3D"EN-US" style=3D"font-size:12pt;font-fa=
-mily:&quot;Times New Roman&quot;,serif">=E2=80=AF</span><span lang=3D"EN-US=
-" style=3D"font-size:12pt">AM Alvin Chang &lt;</span><a href=3D"mailto:alvi=
-nga@andestech.com" target=3D"_blank" style=3D"font-size:12pt"><span lang=3D=
-"EN-US" style=3D"color:windowtext;text-decoration-line:none">alvinga@andest=
-ech.com</span></a><span lang=3D"EN-US" style=3D"font-size:12pt">&gt;</span>=
-<br></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-seri=
-f"><span lang=3D"EN-US">&gt; wrote:</span></p><p style=3D"margin:0cm;font-s=
-ize:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt;</sp=
-an></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif=
-"><span lang=3D"EN-US">&gt; &gt; Current checks on writing pmpcfg for Smepm=
-p follows Smepmp version</span></p><p style=3D"margin:0cm;font-size:12pt;fo=
-nt-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt; 0.9.1. However=
-, Smepmp specification has already been ratified, and</span></p><p style=3D=
-"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN=
--US">&gt; &gt; there are some differences between version 0.9.1 and 1.0. In=
- this</span></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,s=
-ans-serif"><span lang=3D"EN-US">&gt; &gt; commit we update the checks of wr=
-iting pmpcfg to follow Smepmp version</span></p><p style=3D"margin:0cm;font=
--size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt; 1=
-.0.</span></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,san=
-s-serif"><span lang=3D"EN-US">&gt; &gt;</span></p><p style=3D"margin:0cm;fo=
-nt-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt;=
- When mseccfg.MML is set, the constraints to modify PMP rules are:</span></=
-p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><sp=
-an lang=3D"EN-US">&gt; &gt; 1. Locked rules cannot be removed or modified u=
-ntil a PMP reset, unless</span></p><p style=3D"margin:0cm;font-size:12pt;fo=
-nt-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt;=C2=A0=C2=A0=C2=
-=A0 mseccfg.RLB is set.</span></p><p style=3D"margin:0cm;font-size:12pt;fon=
-t-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt; 2. From Smepmp =
-specification version 1.0, chapter 2 section 4b:</span></p><p style=3D"marg=
-in:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">=
-&gt; &gt;=C2=A0=C2=A0=C2=A0 Adding a rule with executable privileges that e=
-ither is M-mode-only</span></p><p style=3D"margin:0cm;font-size:12pt;font-f=
-amily:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt;=C2=A0=C2=A0=C2=A0 =
-or a locked Shared-Region is not possible and such pmpcfg writes are</span>=
-</p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><=
-span lang=3D"EN-US">&gt; &gt;=C2=A0=C2=A0 =C2=A0ignored, leaving pmpcfg unc=
-hanged.</span></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri=
-,sans-serif"><span lang=3D"EN-US">&gt; &gt;</span></p><p style=3D"margin:0c=
-m;font-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; =
-&gt; The commit transfers the value of pmpcfg into the index of the Smepmp<=
-/span></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-se=
-rif"><span lang=3D"EN-US">&gt; &gt; truth table, and checks the rules by af=
-orementioned specification</span></p><p style=3D"margin:0cm;font-size:12pt;=
-font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt; changes.</sp=
-an></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif=
-"><span lang=3D"EN-US">&gt; &gt;</span></p><p style=3D"margin:0cm;font-size=
-:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt; Signed=
--off-by: Alvin Chang &lt;</span><a href=3D"mailto:alvinga@andestech.com" ta=
-rget=3D"_blank"><span lang=3D"EN-US" style=3D"color:windowtext;text-decorat=
-ion-line:none">alvinga@andestech.com</span></a><span lang=3D"EN-US">&gt;</s=
-pan></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-seri=
-f"><span lang=3D"EN-US">&gt; &gt; ---</span></p><p style=3D"margin:0cm;font=
--size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt; C=
-hanges from v3: Modify &quot;epmp_operation&quot; to &quot;smepmp_operation=
-&quot;.</span></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri=
-,sans-serif"><span lang=3D"EN-US">&gt;</span></p><p style=3D"margin:0cm;fon=
-t-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; This =
-has the same issue as all the previous versions.</span></p><p style=3D"marg=
-in:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">=
-&gt;</span></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sa=
-ns-serif"><span lang=3D"EN-US">&gt; QEMU is currently not shipping with Sme=
-pmp support. So updating some of the</span></p><p style=3D"margin:0cm;font-=
-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; code to=
- support Smepmp is confusing.</span></p><p style=3D"margin:0cm;font-size:12=
-pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt;</span></p><p s=
-tyle=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lan=
-g=3D"EN-US">&gt; As I pointed out for the v3, we currently only support ePM=
-P 0.9.3. So that is</span></p><p style=3D"margin:0cm;font-size:12pt;font-fa=
-mily:Calibri,sans-serif"><span lang=3D"EN-US">&gt; what the code must work =
-with.</span></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,s=
-ans-serif"><span lang=3D"EN-US">&gt;</span></p><p style=3D"margin:0cm;font-=
-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; In orde=
-r for this change to go in, we also need to upgrade QEMU to support</span><=
-/p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><s=
-pan lang=3D"EN-US">&gt; Smepmp 1.0.</span></p><p style=3D"margin:0cm;font-s=
-ize:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt;</span></=
-p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><sp=
-an lang=3D"EN-US">&gt; This patch is an attempt to do that:</span></p><p st=
-yle=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=
-=3D"EN-US">&gt;=C2=A0</span><a href=3D"https://www.mail-archive.com/qemu-de=
-vel@nongnu.org/msg967676.html" target=3D"_blank"><span lang=3D"EN-US" style=
-=3D"color:windowtext;text-decoration-line:none">https://www.mail-archive.co=
-m/qemu-devel@nongnu.org/msg967676.html</span></a><span lang=3D"EN-US"></spa=
-n></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"=
-><span lang=3D"EN-US">&gt;</span></p><p style=3D"margin:0cm;font-size:12pt;=
-font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; You basically nee=
-d to combine the changes from</span></p><p style=3D"margin:0cm;font-size:12=
-pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt;=C2=A0</span><a=
- href=3D"https://www.mail-archive.com/qemu-devel@nongnu.org/msg967676.html"=
- target=3D"_blank"><span lang=3D"EN-US" style=3D"color:windowtext;text-deco=
-ration-line:none">https://www.mail-archive.com/qemu-devel@nongnu.org/msg967=
-676.html</span></a><span lang=3D"EN-US">=C2=A0into</span></p><p style=3D"ma=
-rgin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US=
-">&gt; this patch. So there is a single patch that updates to Smepmp.</span=
-></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif">=
-<span lang=3D"EN-US">&gt;</span></p><p style=3D"margin:0cm;font-size:12pt;f=
-ont-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; Alistair</span></p=
-><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><spa=
-n lang=3D"EN-US">&gt;</span></p><p style=3D"margin:0cm;font-size:12pt;font-=
-family:Calibri,sans-serif"><span lang=3D"EN-US"><br></span></p><p style=3D"=
-margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-=
-US">Hi Alistair,</span></p><p style=3D"margin:0cm;font-size:12pt;font-famil=
-y:Calibri,sans-serif"><span lang=3D"EN-US"><br></span></p><p style=3D"margi=
-n:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">I=
- saw patches from Mayuresh were merged into riscv-to-apply.next yesterday.<=
-/span></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-se=
-rif">Would you also take a look at this patch?</p><p style=3D"margin:0cm;fo=
-nt-size:12pt;font-family:Calibri,sans-serif">Thanks!</p><p style=3D"margin:=
-0cm;font-size:12pt;font-family:Calibri,sans-serif"><br></p><p style=3D"marg=
-in:0cm;font-size:12pt;font-family:Calibri,sans-serif">Alvin Chang</p><p sty=
-le=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><br></p><p =
-style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span la=
-ng=3D"EN-US">&gt; &gt;</span></p><p style=3D"margin:0cm;font-size:12pt;font=
--family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt; Changes from v2:=
- Adopt switch case ranges and numerical order.</span></p><p style=3D"margin=
-:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&g=
-t; &gt;</span></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri=
-,sans-serif"><span lang=3D"EN-US">&gt; &gt; Changes from v1: Convert ePMP o=
-ver to Smepmp.</span></p><p style=3D"margin:0cm;font-size:12pt;font-family:=
-Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt;</span></p><p style=3D"ma=
-rgin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US=
-">&gt; &gt;=C2=A0 target/riscv/pmp.c | 40 ++++++++++++++++++++++++++++++++-=
--------</span></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri=
-,sans-serif"><span lang=3D"EN-US">&gt; &gt;=C2=A0 1 file changed, 32 insert=
-ions(+), 8 deletions(-)</span></p><p style=3D"margin:0cm;font-size:12pt;fon=
-t-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt;</span></p><p st=
-yle=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=
-=3D"EN-US">&gt; &gt; diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c i=
-ndex</span></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sa=
-ns-serif"><span lang=3D"EN-US">&gt; &gt; a08cd95658..2ebf18c941 100644</spa=
-n></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"=
-><span lang=3D"EN-US">&gt; &gt; --- a/target/riscv/pmp.c</span></p><p style=
-=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=3D=
-"EN-US">&gt; &gt; +++ b/target/riscv/pmp.c</span></p><p style=3D"margin:0cm=
-;font-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &=
-gt; @@ -99,16 +99,40 @@ static void pmp_write_cfg(CPURISCVState *env,</span=
-></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif">=
-<span lang=3D"EN-US">&gt; uint32_t pmp_index, uint8_t val)</span></p><p sty=
-le=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=
-=3D"EN-US">&gt; &gt;=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 locked =3D false;</span></=
-p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><sp=
-an lang=3D"EN-US">&gt; &gt;=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }</span></p><p style=3D"margin:0cm;font-size=
-:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt;</span>=
-</p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><=
-span lang=3D"EN-US">&gt; &gt; -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 /* mseccfg.MML is set */</span></p><p style=3D"mar=
-gin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US"=
->&gt; &gt; -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 if (MSECCFG_MML_ISSET(env)) {</span></p><p style=3D"margin:0cm;font-siz=
-e:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt; -=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0 /* not adding execute bit */</span></p><p style=3D"margin:0cm;=
-font-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &g=
-t; -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 if ((val &amp; PMP_LOCK) !=3D 0 &amp;&amp; (val &amp;=
- PMP_EXEC) !=3D</span></p><p style=3D"margin:0cm;font-size:12pt;font-family=
-:Calibri,sans-serif"><span lang=3D"EN-US">&gt; PMP_EXEC) {</span></p><p sty=
-le=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=
-=3D"EN-US">&gt; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 /*</span></p><p style=3D"margin:0cm;font-size:12pt;font-fam=
-ily:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt; +=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * mseccfg.MML is set=
-. Locked rules cannot be removed or</span></p><p style=3D"margin:0cm;font-s=
-ize:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; modified=
-</span></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-s=
-erif"><span lang=3D"EN-US">&gt; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * until a PMP reset. Besides, from Sme=
-pmp specification</span></p><p style=3D"margin:0cm;font-size:12pt;font-fami=
-ly:Calibri,sans-serif"><span lang=3D"EN-US">&gt; version 1.0</span></p><p s=
-tyle=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lan=
-g=3D"EN-US">&gt; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 * , chapter 2 section 4b says:</span></p><p style=3D"=
-margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-=
-US">&gt; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0 * Adding a rule with executable privileges that either is</spa=
-n></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"=
-><span lang=3D"EN-US">&gt; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * M-mode-only or a locked Shared-Region is n=
-ot possible</span></p><p style=3D"margin:0cm;font-size:12pt;font-family:Cal=
-ibri,sans-serif"><span lang=3D"EN-US">&gt; and such</span></p><p style=3D"m=
-argin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-U=
-S">&gt; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0 * pmpcfg writes are ignored, leaving pmpcfg unchanged.</span><=
-/p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><s=
-pan lang=3D"EN-US">&gt; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 */</span></p><p style=3D"margin:0cm;font-size:1=
-2pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt; +=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (MSECCFG_MM=
-L_ISSET(env) &amp;&amp; !pmp_is_locked(env,</span></p><p style=3D"margin:0c=
-m;font-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; =
-pmp_index)) {</span></p><p style=3D"margin:0cm;font-size:12pt;font-family:C=
-alibri,sans-serif"><span lang=3D"EN-US">&gt; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /*</span=
-></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif">=
-<span lang=3D"EN-US">&gt; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =C2=A0* Convert the PMP pe=
-rmissions to match the truth</span></p><p style=3D"margin:0cm;font-size:12p=
-t;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; table in the</s=
-pan></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-seri=
-f"><span lang=3D"EN-US">&gt; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * Smepmp spec.</s=
-pan></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-seri=
-f"><span lang=3D"EN-US">&gt; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 */</span></p><p s=
-tyle=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lan=
-g=3D"EN-US">&gt; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 const uint8_t smepmp_operation =3D<=
-/span></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-se=
-rif"><span lang=3D"EN-US">&gt; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 ((val &amp; PMP_LOCK) &gt;&gt; 4) | ((val &amp; PMP_READ) &lt;&lt;</spa=
-n></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"=
-><span lang=3D"EN-US">&gt; 2) |</span></p><p style=3D"margin:0cm;font-size:=
-12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt; +=C2=A0=
-=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0(val &amp; PMP_WRITE) | ((val &amp; PMP=
-_EXEC) &gt;&gt; 2);</span></p><p style=3D"margin:0cm;font-size:12pt;font-fa=
-mily:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt; +</span></p><p styl=
-e=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=
-=3D"EN-US">&gt; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 switch (smepmp_operation) {</span><=
-/p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><s=
-pan lang=3D"EN-US">&gt; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 case 0 ... 8:</span></p><p st=
-yle=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=
-=3D"EN-US">&gt; &gt;=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 lo=
-cked =3D false;</span></p><p style=3D"margin:0cm;font-size:12pt;font-family=
-:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt; -=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }</sp=
-an></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif=
-"><span lang=3D"EN-US">&gt; &gt; -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /* shared region and no=
-t adding X bit */</span></p><p style=3D"margin:0cm;font-size:12pt;font-fami=
-ly:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt; -=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if=
- ((val &amp; PMP_LOCK) !=3D PMP_LOCK &amp;&amp;</span></p><p style=3D"margi=
-n:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&=
-gt; &gt; -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (val &amp; 0x7) !=3D (P=
-MP_WRITE | PMP_EXEC)) {</span></p><p style=3D"margin:0cm;font-size:12pt;fon=
-t-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt; +=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 break;</span></p><p style=3D"margin:0cm;font-si=
-ze:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt; +=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0 case 9 ... 11:</span></p><p style=3D"margin:0cm;font-size:12pt=
-;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt; +=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 break;</span></p><p style=3D"margin:0cm;font=
--size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt; +=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 case 12:</span></p><p style=3D"margin:0cm;font-size:12pt;fo=
-nt-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt; +=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 locked =3D false;</span></p><p style=3D"margin:=
-0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt=
-; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 break;</span></p><p style=
-=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=3D=
-"EN-US">&gt; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 case 13:</span></p><p style=3D"margin:=
-0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt=
-; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 break;</span></p><p style=
-=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=3D=
-"EN-US">&gt; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 case 14:</span></p><p style=3D"margin:=
-0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt=
-; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 case 15:</span></p><p style=3D"margin:0cm;font-siz=
-e:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt;=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 locked =3D false;</span></p><=
-p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span =
-lang=3D"EN-US">&gt; &gt; +=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0break;</s=
-pan></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-seri=
-f"><span lang=3D"EN-US">&gt; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 default:</span></p><p s=
-tyle=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><span lan=
-g=3D"EN-US">&gt; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 g_assert_no=
-t_reached();</span></p><p style=3D"margin:0cm;font-size:12pt;font-family:Ca=
-libri,sans-serif"><span lang=3D"EN-US">&gt; &gt;=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
- }</span></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans=
--serif"><span lang=3D"EN-US">&gt; &gt;=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }</span></p><p style=3D"margin:0=
-cm;font-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt;=
- &gt;=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 } else {</span>=
-</p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-serif"><=
-span lang=3D"EN-US">&gt; &gt; --</span></p><p style=3D"margin:0cm;font-size=
-:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt; 2.34.1=
-</span></p><p style=3D"margin:0cm;font-size:12pt;font-family:Calibri,sans-s=
-erif"><span lang=3D"EN-US">&gt; &gt;</span></p><p style=3D"margin:0cm;font-=
-size:12pt;font-family:Calibri,sans-serif"><span lang=3D"EN-US">&gt; &gt;</s=
-pan></p></div>
-
---00000000000036324c06086bcc75--
+On Sun, Oct 22, 2023 at 16:51:23 +0100, David Woodhouse wrote:
+> From: David Woodhouse <dwmw@amazon.co.uk>
+> 
+> Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+
+Reviewed-by: Leif Lindholm <quic_llindhol@quicinc.com>
+
+> ---
+>  hw/arm/sbsa-ref.c | 4 +---
+>  1 file changed, 1 insertion(+), 3 deletions(-)
+> 
+> diff --git a/hw/arm/sbsa-ref.c b/hw/arm/sbsa-ref.c
+> index 3c7dfcd6dc..582a28ce92 100644
+> --- a/hw/arm/sbsa-ref.c
+> +++ b/hw/arm/sbsa-ref.c
+> @@ -691,9 +691,7 @@ static void create_pcie(SBSAMachineState *sms)
+>  
+>      pci = PCI_HOST_BRIDGE(dev);
+>      if (pci->bus) {
+> -        for (i = 0; i < nb_nics; i++) {
+> -            pci_nic_init_nofail(&nd_table[i], pci->bus, mc->default_nic, NULL);
+> -        }
+> +        pci_init_nic_devices(pci->bus, mc->default_nic);
+>      }
+>  
+>      pci_create_simple(pci->bus, -1, "bochs-display");
+> -- 
+> 2.40.1
+> 
 
