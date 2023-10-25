@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29AAFC0032E
-	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Oct 2023 06:47:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D2B8C0032E
+	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Oct 2023 06:48:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qvXfo-0003Rc-2E; Wed, 25 Oct 2023 02:47:24 -0400
+	id 1qvXgF-0003zx-96; Wed, 25 Oct 2023 02:47:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qvXfZ-0003J2-NK; Wed, 25 Oct 2023 02:47:11 -0400
-Received: from out30-133.freemail.mail.aliyun.com ([115.124.30.133])
+ id 1qvXgC-0003xF-Ms; Wed, 25 Oct 2023 02:47:48 -0400
+Received: from out30-99.freemail.mail.aliyun.com ([115.124.30.99])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qvXfU-0005Xz-RM; Wed, 25 Oct 2023 02:47:08 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045192;
+ id 1qvXgA-0005fa-JY; Wed, 25 Oct 2023 02:47:48 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R161e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046060;
  MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=7; SR=0;
- TI=SMTPD_---0VutV4mR_1698216371; 
+ TI=SMTPD_---0VutV516_1698216413; 
 Received: from 30.198.0.241(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VutV4mR_1698216371) by smtp.aliyun-inc.com;
- Wed, 25 Oct 2023 14:46:53 +0800
-Message-ID: <05dd88ba-0e34-49b5-b096-1b92a2da37c0@linux.alibaba.com>
-Date: Wed, 25 Oct 2023 14:45:55 +0800
+ fp:SMTPD_---0VutV516_1698216413) by smtp.aliyun-inc.com;
+ Wed, 25 Oct 2023 14:47:36 +0800
+Message-ID: <0483f5d2-346a-4b1e-88f3-392605e7a340@linux.alibaba.com>
+Date: Wed, 25 Oct 2023 14:46:38 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 5/6] target/riscv/tcg: add riscv_cpu_write_misa_bit()
+Subject: Re: [PATCH v3 6/6] target/riscv/tcg: handle profile MISA bits
 Content-Language: en-US
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, palmer@rivosinc.com
 References: <20231020223951.357513-1-dbarboza@ventanamicro.com>
- <20231020223951.357513-6-dbarboza@ventanamicro.com>
+ <20231020223951.357513-7-dbarboza@ventanamicro.com>
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20231020223951.357513-6-dbarboza@ventanamicro.com>
+In-Reply-To: <20231020223951.357513-7-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=115.124.30.133;
+Received-SPF: pass client-ip=115.124.30.99;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-133.freemail.mail.aliyun.com
+ helo=out30-99.freemail.mail.aliyun.com
 X-Spam_score_int: -98
 X-Spam_score: -9.9
 X-Spam_bar: ---------
@@ -67,98 +67,57 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 2023/10/21 6:39, Daniel Henrique Barboza wrote:
-> We have two instances of the setting/clearing a MISA bit from
-> env->misa_ext and env->misa_ext_mask pattern. And the next patch will
-> end up adding one more.
+> The profile support is handling multi-letter extensions only. Let's add
+> support for MISA bits as well.
 >
-> Create a helper to avoid code repetition.
+> We'll go through every known MISA bit. If the user set the bit, doesn't
+> matter if to 'true' or 'false', ignore it. If the profile doesn't
+> declare the bit as mandatory, ignore it. Otherwise, set or clear the bit
+> in env->misa_ext and env->misa_ext_mask depending on whether the profile
+> was set to 'true' or 'false'.
 >
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->   target/riscv/tcg/tcg-cpu.c | 44 ++++++++++++++++++++------------------
->   1 file changed, 23 insertions(+), 21 deletions(-)
+>   target/riscv/tcg/tcg-cpu.c | 16 ++++++++++++++++
+>   1 file changed, 16 insertions(+)
 >
 > diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> index 59b75a14ac..ba11d0566d 100644
+> index ba11d0566d..73c7453af6 100644
 > --- a/target/riscv/tcg/tcg-cpu.c
 > +++ b/target/riscv/tcg/tcg-cpu.c
-> @@ -42,6 +42,20 @@ static bool cpu_cfg_ext_is_user_set(uint32_t ext_offset)
+> @@ -42,6 +42,12 @@ static bool cpu_cfg_ext_is_user_set(uint32_t ext_offset)
 >                                    GUINT_TO_POINTER(ext_offset));
 >   }
 >   
-> +static void riscv_cpu_write_misa_bit(RISCVCPU *cpu, uint32_t bit,
-> +                                     bool enabled)
+> +static bool cpu_misa_ext_is_user_set(uint32_t misa_bit)
 > +{
-> +    CPURISCVState *env = &cpu->env;
-> +
-> +    if (enabled) {
-> +        env->misa_ext |= bit;
-> +        env->misa_ext_mask |= bit;
-> +    } else {
-> +        env->misa_ext &= ~bit;
-> +        env->misa_ext_mask &= ~bit;
-> +    }
+> +    return g_hash_table_contains(misa_ext_user_opts,
+> +                                 GUINT_TO_POINTER(misa_bit));
 > +}
 > +
->   static void riscv_cpu_synchronize_from_tb(CPUState *cs,
->                                             const TranslationBlock *tb)
+>   static void riscv_cpu_write_misa_bit(RISCVCPU *cpu, uint32_t bit,
+>                                        bool enabled)
 >   {
-> @@ -680,20 +694,14 @@ static void cpu_set_misa_ext_cfg(Object *obj, Visitor *v, const char *name,
->           return;
->       }
+> @@ -797,6 +803,16 @@ static void cpu_set_profile(Object *obj, Visitor *v, const char *name,
 >   
-> -    if (value) {
-> -        if (!generic_cpu) {
-> -            g_autofree char *cpuname = riscv_cpu_get_name(cpu);
-> -            error_setg(errp, "'%s' CPU does not allow enabling extensions",
-> -                       cpuname);
-> -            return;
-> -        }
-> -
-> -        env->misa_ext |= misa_bit;
-> -        env->misa_ext_mask |= misa_bit;
-> -    } else {
-> -        env->misa_ext &= ~misa_bit;
-> -        env->misa_ext_mask &= ~misa_bit;
-> +    if (value && !generic_cpu) {
-> +        g_autofree char *cpuname = riscv_cpu_get_name(cpu);
-> +        error_setg(errp, "'%s' CPU does not allow enabling extensions",
-> +                   cpuname);
-> +        return;
->       }
+>       profile->enabled = value;
+>   
+> +    for (i = 0; misa_bits[i] != 0; i++) {
+> +        uint32_t bit = misa_bits[i];
 > +
-> +    riscv_cpu_write_misa_bit(cpu, misa_bit, value);
->   }
->   
->   static void cpu_get_misa_ext_cfg(Object *obj, Visitor *v, const char *name,
-> @@ -737,7 +745,6 @@ static const RISCVCPUMisaExtConfig misa_ext_cfgs[] = {
->    */
->   static void riscv_cpu_add_misa_properties(Object *cpu_obj)
->   {
-> -    CPURISCVState *env = &RISCV_CPU(cpu_obj)->env;
->       bool use_def_vals = riscv_cpu_is_generic(cpu_obj);
->       int i;
->   
-> @@ -758,13 +765,8 @@ static void riscv_cpu_add_misa_properties(Object *cpu_obj)
->                               NULL, (void *)misa_cfg);
->           object_property_set_description(cpu_obj, name, desc);
->           if (use_def_vals) {
-> -            if (misa_cfg->enabled) {
-> -                env->misa_ext |= bit;
-> -                env->misa_ext_mask |= bit;
-> -            } else {
-> -                env->misa_ext &= ~bit;
-> -                env->misa_ext_mask &= ~bit;
-> -            }
-> +            riscv_cpu_write_misa_bit(RISCV_CPU(cpu_obj), bit,
-> +                                     misa_cfg->enabled);
+> +        if (cpu_misa_ext_is_user_set(bit) || !(profile->misa_ext & bit)) {
+> +            continue;
+> +        }
+> +
+> +        riscv_cpu_write_misa_bit(cpu, bit, profile->enabled);
+> +    }
+> +
 
 Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
 Zhiwei
 
->           }
->       }
->   }
+>       for (i = 0; profile->ext_offsets[i] != RISCV_PROFILE_EXT_LIST_END; i++) {
+>           ext_offset = profile->ext_offsets[i];
+>   
 
