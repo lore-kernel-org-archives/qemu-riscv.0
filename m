@@ -4,45 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 430FBC0032E
-	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Oct 2023 06:23:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FE1FC25B47
+	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Oct 2023 06:29:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qvXIe-0001lB-VP; Wed, 25 Oct 2023 02:23:28 -0400
+	id 1qvXOj-0004BQ-8G; Wed, 25 Oct 2023 02:29:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qvXIa-0001jy-RC; Wed, 25 Oct 2023 02:23:25 -0400
-Received: from out30-119.freemail.mail.aliyun.com ([115.124.30.119])
+ id 1qvXOh-0004Aw-U6; Wed, 25 Oct 2023 02:29:43 -0400
+Received: from out30-124.freemail.mail.aliyun.com ([115.124.30.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qvXIW-0001IE-Bn; Wed, 25 Oct 2023 02:23:23 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R131e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
+ id 1qvXOe-0002OT-LP; Wed, 25 Oct 2023 02:29:43 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R261e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
  MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=7; SR=0;
- TI=SMTPD_---0VutQvnl_1698214984; 
+ TI=SMTPD_---0VutUeU2_1698215366; 
 Received: from 30.198.0.241(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VutQvnl_1698214984) by smtp.aliyun-inc.com;
- Wed, 25 Oct 2023 14:23:04 +0800
-Message-ID: <5b3078bd-9805-43cc-a7e7-660041477913@linux.alibaba.com>
-Date: Wed, 25 Oct 2023 14:22:06 +0800
+ fp:SMTPD_---0VutUeU2_1698215366) by smtp.aliyun-inc.com;
+ Wed, 25 Oct 2023 14:29:27 +0800
+Message-ID: <3dd247e8-5f4f-411c-9ada-7597cdc1ed0b@linux.alibaba.com>
+Date: Wed, 25 Oct 2023 14:28:29 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/6] target/riscv: add rva22u64 profile definition
+Subject: Re: [PATCH v3 2/6] target/riscv/kvm: add 'rva22u64' flag as
+ unavailable
 Content-Language: en-US
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, palmer@rivosinc.com
 References: <20231020223951.357513-1-dbarboza@ventanamicro.com>
- <20231020223951.357513-2-dbarboza@ventanamicro.com>
+ <20231020223951.357513-3-dbarboza@ventanamicro.com>
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20231020223951.357513-2-dbarboza@ventanamicro.com>
+In-Reply-To: <20231020223951.357513-3-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=115.124.30.119;
+Received-SPF: pass client-ip=115.124.30.124;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-119.freemail.mail.aliyun.com
+ helo=out30-124.freemail.mail.aliyun.com
 X-Spam_score_int: -98
 X-Spam_score: -9.9
 X-Spam_bar: ---------
@@ -67,98 +68,56 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 2023/10/21 6:39, Daniel Henrique Barboza wrote:
-> The rva22U64 profile, described in:
+> KVM does not have the means to support enabling the rva22u64 profile.
+> The main reasons are:
 >
-> https://github.com/riscv/riscv-profiles/blob/main/profiles.adoc#rva22-profiles
+> - we're missing support for some mandatory rva22u64 extensions in the
+>    KVM module;
 >
-> Contains a set of CPU extensions aimed for 64-bit userspace
-> applications. Enabling this set to be enabled via a single user flag
-> makes it convenient to enable a predictable set of features for the CPU,
-> giving users more predicability when running/testing their workloads.
+> - we can't make promises about enabling a profile since it all depends
+>    on host support in the end.
 >
-> QEMU implements all possible extensions of this profile. The exception
-> is Zicbop (Cache-Block Prefetch Operations) that is not available since
-> QEMU RISC-V does not implement a cache model. For this same reason all
-> the so called 'synthetic extensions' described in the profile that are
-> cache related are ignored (Za64rs, Zic64b, Ziccif, Ziccrse, Ziccamoa,
-> Zicclsm).
+> We'll revisit this decision in the future if needed. For now mark the
+> 'rva22u64' profile as unavailable when running a KVM CPU:
 >
-> An abstraction called RISCVCPUProfile is created to store the profile.
-> 'ext_offsets' contains mandatory extensions that QEMU supports. Same
-> thing with the 'misa_ext' mask. Optional extensions must be enabled
-> manually in the command line if desired.
->
-> The design here is to use the common target/riscv/cpu.c file to store
-> the profile declaration and export it to the accelerator files. Each
-> accelerator is then responsible to expose it (or not) to users and how
-> to enable the extensions.
->
-> Next patches will implement the profile for TCG and KVM.
+> $ qemu-system-riscv64 -machine virt,accel=kvm -cpu rv64,rva22u64=true
+> qemu-system-riscv64: can't apply global rv64-riscv-cpu.rva22u64=true:
+>      'rva22u64' is not available with KVM
 >
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> Acked-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->   target/riscv/cpu.c | 20 ++++++++++++++++++++
->   target/riscv/cpu.h | 12 ++++++++++++
->   2 files changed, 32 insertions(+)
+>   target/riscv/kvm/kvm-cpu.c | 7 ++++++-
+>   1 file changed, 6 insertions(+), 1 deletion(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index c64cd726f4..1b75b506c4 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1397,6 +1397,26 @@ Property riscv_cpu_options[] = {
->       DEFINE_PROP_END_OF_LIST(),
->   };
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index 5246fc2bdc..dc14c54ce4 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -360,7 +360,7 @@ static void cpu_set_cfg_unavailable(Object *obj, Visitor *v,
+>       }
 >   
-> +/* Optional extensions left out: RVV, zfh, zkn, zks */
-> +static RISCVCPUProfile RVA22U64 = {
-> +    .name = "rva22u64",
-> +    .misa_ext = RVM | RVA | RVF | RVD | RVC,
+>       if (value) {
+> -        error_setg(errp, "extension %s is not available with KVM",
+> +        error_setg(errp, "'%s' is not available with KVM",
+>                      propname);
+>       }
+>   }
+> @@ -440,6 +440,11 @@ static void kvm_riscv_add_cpu_user_properties(Object *cpu_obj)
+>       riscv_cpu_add_kvm_unavail_prop_array(cpu_obj, riscv_cpu_extensions);
+>       riscv_cpu_add_kvm_unavail_prop_array(cpu_obj, riscv_cpu_vendor_exts);
+>       riscv_cpu_add_kvm_unavail_prop_array(cpu_obj, riscv_cpu_experimental_exts);
+> +
+> +   /* We don't have the needed KVM support for profiles */
+> +    for (i = 0; riscv_profiles[i] != NULL; i++) {
+> +        riscv_cpu_add_kvm_unavail_prop(cpu_obj, riscv_profiles[i]->name);
+> +    }
 
-Why not include RVI?
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
 Zhiwei
 
-> +    .ext_offsets = {
-> +        CPU_CFG_OFFSET(ext_zicsr), CPU_CFG_OFFSET(ext_zihintpause),
-> +        CPU_CFG_OFFSET(ext_zba), CPU_CFG_OFFSET(ext_zbb),
-> +        CPU_CFG_OFFSET(ext_zbs), CPU_CFG_OFFSET(ext_zfhmin),
-> +        CPU_CFG_OFFSET(ext_zkt), CPU_CFG_OFFSET(ext_zicntr),
-> +        CPU_CFG_OFFSET(ext_zihpm), CPU_CFG_OFFSET(ext_zicbom),
-> +        CPU_CFG_OFFSET(ext_zicboz),
-> +
-> +        RISCV_PROFILE_EXT_LIST_END
-> +    }
-> +};
-> +
-> +RISCVCPUProfile *riscv_profiles[] = {
-> +    &RVA22U64, NULL,
-> +};
-> +
->   static Property riscv_cpu_properties[] = {
->       DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
+>   }
 >   
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 7f61e17202..53c1970e0a 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -66,6 +66,18 @@ const char *riscv_get_misa_ext_description(uint32_t bit);
->   
->   #define CPU_CFG_OFFSET(_prop) offsetof(struct RISCVCPUConfig, _prop)
->   
-> +typedef struct riscv_cpu_profile {
-> +    const char *name;
-> +    uint32_t misa_ext;
-> +    bool enabled;
-> +    bool user_set;
-> +    const int32_t ext_offsets[];
-> +} RISCVCPUProfile;
-> +
-> +#define RISCV_PROFILE_EXT_LIST_END -1
-> +
-> +extern RISCVCPUProfile *riscv_profiles[];
-> +
->   /* Privileged specification version */
->   enum {
->       PRIV_VERSION_1_10_0 = 0,
+>   static int kvm_riscv_get_regs_core(CPUState *cs)
 
