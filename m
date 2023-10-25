@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49CC9C0032E
-	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Oct 2023 15:17:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D5E9C0032E
+	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Oct 2023 15:17:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qvfbD-0005n7-8R; Wed, 25 Oct 2023 11:15:11 -0400
+	id 1qvfaZ-0005DQ-MV; Wed, 25 Oct 2023 11:14:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1qvfbA-0005kU-2H
- for qemu-riscv@nongnu.org; Wed, 25 Oct 2023 11:15:08 -0400
-Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
+ id 1qvfaY-00058U-0M
+ for qemu-riscv@nongnu.org; Wed, 25 Oct 2023 11:14:30 -0400
+Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1qvfb8-0003su-Bf
- for qemu-riscv@nongnu.org; Wed, 25 Oct 2023 11:15:07 -0400
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-6bd96cfb99cso4827720b3a.2
- for <qemu-riscv@nongnu.org>; Wed, 25 Oct 2023 08:15:03 -0700 (PDT)
+ id 1qvfaW-0003c0-Ew
+ for qemu-riscv@nongnu.org; Wed, 25 Oct 2023 11:14:29 -0400
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-6b1ef786b7fso5551003b3a.3
+ for <qemu-riscv@nongnu.org>; Wed, 25 Oct 2023 08:14:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1698246903; x=1698851703; darn=nongnu.org;
+ d=sifive.com; s=google; t=1698246867; x=1698851667; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EQxS/JwxHLdYWpzHJADSbmar8UuUNSwycfcLuca+ygU=;
- b=kFCqCkmtn891jpho1ygFtxrCWZROp/b8sg3rz5tg2qLinFt0kZxgvaB8d/rdfJOnlQ
- 5QZ1sPm4ciJ8Y8bi9foJSwo0PXUf0eiA9wVCh23LaNfOq/6f0jZ8r9ZSnvouFMJ+qLuM
- gKuTMoce7cdTPQfjVXe6tCAR22O68CZ9bUpxuh9pcgy+As9CB0VAlY6ohvw9b7kGFUj5
- T0N9QJicN4Qlc8bR/Y3xYrsGuPyWHjTdA/prCll+Wnb/eqJ1hKl+EZArp1ln7Hgznpnb
- TCYWDyFBMUaE09XSr4YGR4elWU4nKKZBML+FW6m+rLFDGI3G4ncG+Hw5LwANthCbtZvE
- nx2w==
+ bh=YI8WGG20prU7E7FZ00x7AWMKsXsfCxZVV/R6Dc9ONDI=;
+ b=VcYMAce0K0bmO9rXWaYVGsdDU7ZihhW2buB7qVVlTpX/OowLkWfk7M0L+TIYjD3VNZ
+ f4Zf5CkPf4Khpu1wDJaw9RhPWMlPEKZm0HO0sre/RyDAV2vI1ofXRf4N77mKqLasLi0D
+ XWfV19LBSY47pBkqzo/t6ybrc6EzSa2aTV84PdKNhS/CocoJz+5yJdqlO/7ANqq/a7bk
+ eJG1+WP5gvQHp+Cmk4r2D4cX09bvvkZ1YHLutFnbiX1N8t7ZvojKobXlnaiMXzLQgs3D
+ lI89kBCIGJb8WUIBLZdfA2c8Ts+NKcQ8heFe8S63CVHUq5OT+W9Zbwl0HiTa/DDtjfB+
+ K4AQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698246903; x=1698851703;
+ d=1e100.net; s=20230601; t=1698246867; x=1698851667;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EQxS/JwxHLdYWpzHJADSbmar8UuUNSwycfcLuca+ygU=;
- b=kowLzF05ABQx+EKUsogIMOMko5m3xjT6kl0MRu3WnMh38J67me0IPSjGUJobbT1zXK
- vgKo+wzuxXvrmw16DhR2wsZpdbu7HDNQ0DG71SRZr/gEV7HoI4U9NjONAXrQ7D/4iL7u
- mAmGYVsOsIa1LWKfDo4UiXqHd5BWBs5xyIj8pf+CU0JYohHFaEOWm7NK5bb6quzsUO20
- a8Fua3/PAiZ2KZWNdgzaphkTBTglBGosplHHd80PE9lyUU1NYZjJMYfLwonwqU38lK7a
- AfQsFyE5DqRoCK+BcWrwDvsOhUD2ZL0V0Ua+IfNoQFpBosivKt0VIZzt9GT4aeppg/S1
- 56OA==
-X-Gm-Message-State: AOJu0Yy+bFqkvvOFcHfUEGkasasBMIRjWXrav/e/44OI8yCALAWAD+AG
- 2iSsPZS1eNDy6uP9kg69uyZ11Q==
-X-Google-Smtp-Source: AGHT+IGBuIN27VxHeU9Z9zDUK+BtKRu1HMiFK3chBLzki+R/08ewJv370qCikaV0MtxCBR8dFgTuqQ==
-X-Received: by 2002:a05:6a20:e195:b0:16b:bbca:4a5d with SMTP id
- ks21-20020a056a20e19500b0016bbbca4a5dmr5448489pzb.62.1698246902874; 
- Wed, 25 Oct 2023 08:15:02 -0700 (PDT)
+ bh=YI8WGG20prU7E7FZ00x7AWMKsXsfCxZVV/R6Dc9ONDI=;
+ b=Al4O3DTda151pi82ZeivP5NjYWnd4HKB+j+wrVyiWKpqLngQ2UDyD/gBrLNq8CTtco
+ tYIx1djGYWoZ/hIeNvRm8YvLZVV5SV8FhfjChcHr2XDobWFmXlk7tEUsdrxsREuOaxsP
+ do+v2db1RXW2D3hH8eG3sLjNBohIA16X3+1D9rmOeU2sfE5wonTtX4rLcTyfHfbGbXXf
+ iUGez1qbaPu22gUm4TaJm/2vtJuCuZp8Jr1h9VPLlO8Mf5LO12CdPSONDBfgr/EweOP2
+ sOpEvPQd+5FUnyti93YYkbJCBNvfTLSEZxJv5P+LG+f4EcVSChhSy67fdgHzJk9945se
+ VSgg==
+X-Gm-Message-State: AOJu0YzuHiedqjC8fQFTI0bjVgMcyzKXZvgQbnhA5Ef+QJ/l6iB908my
+ Bt7WLqTMMEGVF8Tt0EPjyjb7dQ==
+X-Google-Smtp-Source: AGHT+IF5N5eSPEUxRMLdT8Xy6H6goedVq56M3qTwPXnaE2Egoj03Vwnyz6cGOJbhNooeHpnqzpY16Q==
+X-Received: by 2002:a05:6a21:a108:b0:132:ff57:7fab with SMTP id
+ aq8-20020a056a21a10800b00132ff577fabmr5508792pzc.2.1698246867037; 
+ Wed, 25 Oct 2023 08:14:27 -0700 (PDT)
 Received: from duncan.localdomain (125-228-20-175.hinet-ip.hinet.net.
  [125.228.20.175]) by smtp.gmail.com with ESMTPSA id
- w14-20020a63160e000000b005b8ebef9fa0sm2677807pgl.83.2023.10.25.08.15.01
+ w14-20020a63160e000000b005b8ebef9fa0sm2677807pgl.83.2023.10.25.08.14.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Oct 2023 08:15:02 -0700 (PDT)
+ Wed, 25 Oct 2023 08:14:26 -0700 (PDT)
 From: Max Chou <max.chou@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Max Chou <max.chou@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>
-Subject: [PATCH 14/14] disas/riscv: Replace TABs with space
-Date: Wed, 25 Oct 2023 23:13:38 +0800
-Message-Id: <20231025151341.725477-15-max.chou@sifive.com>
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH 05/14] target/riscv: Expose Zvkb extension property
+Date: Wed, 25 Oct 2023 23:13:29 +0800
+Message-Id: <20231025151341.725477-6-max.chou@sifive.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231025151341.725477-1-max.chou@sifive.com>
 References: <20231025151341.725477-1-max.chou@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
- envelope-from=max.chou@sifive.com; helo=mail-pf1-x433.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
+ envelope-from=max.chou@sifive.com; helo=mail-pf1-x430.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -95,42 +98,31 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Replaces TABs with spaces, making sure to have a consistent coding style
-of 4 space indentations.
-
 Signed-off-by: Max Chou <max.chou@sifive.com>
 ---
- disas/riscv.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ target/riscv/cpu.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/disas/riscv.c b/disas/riscv.c
-index 5bfa9390c45..128478a3a09 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -3136,12 +3136,12 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
-                 }
-                 break;
-             case 89:
--		switch (((inst >> 12) & 0b111)) {
-+                switch (((inst >> 12) & 0b111)) {
-                 case 0: op = rv_op_fmvp_d_x; break;
-                 }
-                 break;
-             case 91:
--		switch (((inst >> 12) & 0b111)) {
-+                switch (((inst >> 12) & 0b111)) {
-                 case 0: op = rv_op_fmvp_q_x; break;
-                 }
-                 break;
-@@ -4578,7 +4578,7 @@ static void decode_inst_operands(rv_decode *dec, rv_isa isa)
-         break;
-     case rv_codec_zcmt_jt:
-         dec->imm = operand_tbl_index(inst);
--	break;
-+        break;
-     case rv_codec_fli:
-         dec->rd = operand_rd(inst);
-         dec->imm = operand_rs1(inst);
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 5099c786415..992f8e0f7b0 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -125,6 +125,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zvfbfwma, PRIV_VERSION_1_12_0, ext_zvfbfwma),
+     ISA_EXT_DATA_ENTRY(zvfh, PRIV_VERSION_1_12_0, ext_zvfh),
+     ISA_EXT_DATA_ENTRY(zvfhmin, PRIV_VERSION_1_12_0, ext_zvfhmin),
++    ISA_EXT_DATA_ENTRY(zvkb, PRIV_VERSION_1_12_0, ext_zvkb),
+     ISA_EXT_DATA_ENTRY(zvkg, PRIV_VERSION_1_12_0, ext_zvkg),
+     ISA_EXT_DATA_ENTRY(zvkned, PRIV_VERSION_1_12_0, ext_zvkned),
+     ISA_EXT_DATA_ENTRY(zvknha, PRIV_VERSION_1_12_0, ext_zvknha),
+@@ -1370,6 +1371,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] = {
+     /* Vector cryptography extensions */
+     MULTI_EXT_CFG_BOOL("x-zvbb", ext_zvbb, false),
+     MULTI_EXT_CFG_BOOL("x-zvbc", ext_zvbc, false),
++    MULTI_EXT_CFG_BOOL("x-zvkb", ext_zvkg, false),
+     MULTI_EXT_CFG_BOOL("x-zvkg", ext_zvkg, false),
+     MULTI_EXT_CFG_BOOL("x-zvkned", ext_zvkned, false),
+     MULTI_EXT_CFG_BOOL("x-zvknha", ext_zvknha, false),
 -- 
 2.34.1
 
