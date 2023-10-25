@@ -4,78 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFAACC0032E
-	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Oct 2023 13:52:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FDABC07545
+	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Oct 2023 15:14:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qveHA-0001Nu-TL; Wed, 25 Oct 2023 09:50:25 -0400
+	id 1qvfaJ-00052b-CK; Wed, 25 Oct 2023 11:14:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qveH0-0001HG-Oa
- for qemu-riscv@nongnu.org; Wed, 25 Oct 2023 09:50:16 -0400
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1qvfaE-00051E-5x
+ for qemu-riscv@nongnu.org; Wed, 25 Oct 2023 11:14:11 -0400
+Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qveGy-0002qy-J8
- for qemu-riscv@nongnu.org; Wed, 25 Oct 2023 09:50:14 -0400
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-1caa7597af9so38204725ad.1
- for <qemu-riscv@nongnu.org>; Wed, 25 Oct 2023 06:50:11 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1qvfaB-0003Xv-Kv
+ for qemu-riscv@nongnu.org; Wed, 25 Oct 2023 11:14:09 -0400
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-6ba54c3ed97so5626371b3a.2
+ for <qemu-riscv@nongnu.org>; Wed, 25 Oct 2023 08:14:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1698241810; x=1698846610; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=2HMf3AR10cl+PzngJ1uOsf+MFiWEg4nwUHAbK5K49AI=;
- b=jNK4LIp3DT+EMvB9mLsZ2s2oMlCGl5/j+eN1YEP3MRxdGyek+Va8rmjn2Q36KDghmP
- xREEF5tXCbuBQlpHRmJSKWlohYJrMh/aGOoSrGDxSy6xyn4uDqzIg0bQ2jO5hwOh6GyP
- ZotvIPSQLS4eZ38WVRyxg5uZjDulbyKq6JL2A1qjH82avMTbTU+DYXv1Bxudyc3kkBDZ
- Y7eGP29IspxCQzyKvLdvCl8NLv5gxDcy3+6SPeXjUg5PgsB29eu3UYeHE86sVfwBQBL0
- pZDRQT/pwyriD/e1Cd+HQebz5eguidXMQmjH+tM5+98/0CmlAo8libqjS+/YGXs/nxRb
- yIsg==
+ d=sifive.com; s=google; t=1698246846; x=1698851646; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=61ZMS3NPRFqHZKTu/SPe5ruHdrWMd68xp2LyStvCuls=;
+ b=Y2xMztVz1GhUUYr7hYt+79DIKvkPIKvY2ryCkAyObgrU/ivnB48nq43dTYnUMS5iLF
+ Ir1rEnJjmIZz4i2SRn5Mydv5Kk9LpTZCMcnNuaxGtQojHiCwitSjTiZ4zPuyCCj3ZGA8
+ 9tNEOW6Xz1hX9b0u9kdAvpADaqwBmdD2qEiuekJ8vD064Dyv1h6h7MefcCakItNv9/s3
+ L29eQLZoH5E09W7UAoxNCk1namEaqShuAZwOkxLuC4ol/8egAl7R7/FTcjnK1wYQPzwA
+ U9PFFL1VLA0hkL4EbuIJNsArV2QG/21kEI3zLWY/LTAtDeZP4GIDYqQuaHwliEhGhf02
+ TwvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698241810; x=1698846610;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2HMf3AR10cl+PzngJ1uOsf+MFiWEg4nwUHAbK5K49AI=;
- b=doMiwvh0IHgt82AX/JOScwIp1Q0IbOgcN4h97YW5h4B8Ntv1koNDND/HtX9kjet7wm
- R6QbncRpkCxqx8DWWQAHMU/ocwIrbYjdhOpnskKpE1HzHRYLD1jApKnUrekA+PCqZ852
- FlZJQf1Q0T/EEXdrdDb/YS+85AOP6a6AbIT2wR5wVa0lZuwBt5HGct+SFCW4qjxqatyP
- NnazU21vAT6gWZGnLff4ieT7Y7TeVXPxqalqYfEeQy7OVWbMu9GU3+GHo+kqbJmluacW
- K9Uj7LMzI9c4EwHwzusSzaoXseGLcFr1DY/92mp9mBFQdECqFMvfl2Oihq66CMYlUZFb
- 8FYg==
-X-Gm-Message-State: AOJu0YwisdNGwnQbaws+yt9ZFKNRL3hpYHntf8/+BcQNKiZZF5Ko86qi
- uH9JcRGEZE7AwQ1pBMRuEiGNHA==
-X-Google-Smtp-Source: AGHT+IFHH0y8B38KIQA9MFa59YmUHVZdrEbO2rLwcZ4fSdtZd7HLe1/UNpysMw2SPxUOflL4NQa20w==
-X-Received: by 2002:a17:902:facb:b0:1c9:c46c:71fc with SMTP id
- ld11-20020a170902facb00b001c9c46c71fcmr9590828plb.59.1698241809790; 
- Wed, 25 Oct 2023 06:50:09 -0700 (PDT)
-Received: from grind.. ([191.255.2.33]) by smtp.gmail.com with ESMTPSA id
- jw4-20020a170903278400b001ca485b8515sm9252548plb.91.2023.10.25.06.50.07
+ d=1e100.net; s=20230601; t=1698246846; x=1698851646;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=61ZMS3NPRFqHZKTu/SPe5ruHdrWMd68xp2LyStvCuls=;
+ b=vDKPkGbJeJI+h980pPT32zj+pjSG2Iufu4Am12ibL9wYAgqQYMm9TG26V3iHy7pWi8
+ xFjJb160FsogLrQ6ZrqMF4PI3Ef4bxmA8kqVe7tWrMJY6kOEhnnwAjZiP2EFgMTD5sov
+ yLcdDlgEnpdPk0XVwC30jBHZo09OjB0TBlM65YmDXJPx9AN0gymBxnCrFEXELHEiB0IY
+ LPNiEk8JWiiN3yaiD0HjejX7VJZoVyjFuV/7fgtCWoqGGbkxXcdKRZntjD94Xc9cmJ8T
+ jJbGbLBsjXwL4OdrO9ZsbPF4WWcV0Bw+BNLbD3Y3Yep1zpwNUoukEHXpbOM+E9KZgo0s
+ u+yw==
+X-Gm-Message-State: AOJu0YxmLvF3/1nXFUyQEdYWhDGIMpy8vUxesl8OqvNWt9gbjRDIkDFN
+ skXjhejWWBmPnX2qyGMA5ZObag==
+X-Google-Smtp-Source: AGHT+IEiZaBibfJjXgeYOIzow0HGKRHEHmn10Wvam0gdTpMZaOpjYwWX7CmQSUqlWiU8m+rbFvs/1g==
+X-Received: by 2002:a05:6a00:c82:b0:690:41a1:9b6a with SMTP id
+ a2-20020a056a000c8200b0069041a19b6amr18819599pfv.5.1698246845703; 
+ Wed, 25 Oct 2023 08:14:05 -0700 (PDT)
+Received: from duncan.localdomain (125-228-20-175.hinet-ip.hinet.net.
+ [125.228.20.175]) by smtp.gmail.com with ESMTPSA id
+ w14-20020a63160e000000b005b8ebef9fa0sm2677807pgl.83.2023.10.25.08.14.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Oct 2023 06:50:09 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v4 0/9] RVA22U64 profile support
-Date: Wed, 25 Oct 2023 10:49:52 -0300
-Message-ID: <20231025135001.531224-1-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.41.0
+ Wed, 25 Oct 2023 08:14:05 -0700 (PDT)
+From: Max Chou <max.chou@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Max Chou <max.chou@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Andrew Jones <ajones@ventanamicro.com>
+Subject: [PATCH 01/14] target/riscv: Add cfg property for Zvkt extension
+Date: Wed, 25 Oct 2023 23:13:25 +0800
+Message-Id: <20231025151341.725477-2-max.chou@sifive.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231025151341.725477-1-max.chou@sifive.com>
+References: <20231025151341.725477-1-max.chou@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x631.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
+ envelope-from=max.chou@sifive.com; helo=mail-pf1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -91,78 +99,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Based-on: 20231023153927.435083-1-dbarboza@ventanamicro.com
-("[PATCH v3 0/4] riscv: zicntr/zihpm flags and disable support")
+Vector crypto spec defines the Zvkt extension that included all of the
+instructions of Zvbb & Zvbc extensions and some vector instructions.
 
-Hi,
+Signed-off-by: Max Chou <max.chou@sifive.com>
+---
+ target/riscv/cpu_cfg.h     | 1 +
+ target/riscv/tcg/tcg-cpu.c | 5 +++++
+ 2 files changed, 6 insertions(+)
 
-This version has changes based on feedback from Drew and Zhiwei in v3.
-
-Most notable changes:
-
-- profiles flags now have the same weight as individual extension,
-  meaning that left-to-right ordering will change the resulting
-  configuration;
-
-- warnings are no longer being shown if the user disables a profile.
-  We'll make a documentation note about why disabling a profile is an
-  advanced feature instead of warning users simply because they set a
-  single flag to 'off';
-
-- warnings are being shown if the user disables a mandatory extension of
-  a profile the user is enabling. This will cover the scenario where the
-  user is disabling an extension by mistake or, if it's intentional, the
-  user can safely ignore it;
-
-- RVG is being handled closer to a profile. This is something that we
-  decided to do here, in patch 8, to keep consistent with what we're
-  doing with profiles in patch 9. This means that we're now throwing
-  warnings if the user set g=true and then disabled a G extension
-  (IMAFD_zicsr_zifencei) in the command line. 
-
-Series is based on top of:
-
-[PATCH v3 0/4] riscv: zicntr/zihpm flags and disable support
-
-Patches missing acks: 3, 7, 8, 9
-
-Changes from v3:
-- patch 1:
-  - added RVI in the profile definition
-- patch 3:
-  - removed disable profile warning from set() callback
-  - mandatory extensions from a profile that are enabled/disabled has the same
-    priority as individual extensions that are enabled/disabled. Left-to-right
-    ordering matters for the final result
-- patch 6:
-  - change profile misa bits priority to be the same as regular misa bits set
-    in the command line
-- patch 7 (new):
-  - add hash helpers
-- patch 8 (new):
-  - honor user choice for RVG MISA bits
-- patch 9 (new):
-  - throw user warnings if profile extensions are disabled in the command line 
-- v3 link: https://lore.kernel.org/qemu-riscv/20231020223951.357513-1-dbarboza@ventanamicro.com/
-
-Daniel Henrique Barboza (9):
-  target/riscv: add rva22u64 profile definition
-  target/riscv/kvm: add 'rva22u64' flag as unavailable
-  target/riscv/tcg: add user flag for profile support
-  target/riscv/tcg: add MISA user options hash
-  target/riscv/tcg: add riscv_cpu_write_misa_bit()
-  target/riscv/tcg: handle profile MISA bits
-  target/riscv/tcg: add hash table insert helpers
-  target/riscv/tcg: honor user choice for G MISA bits
-  target/riscv/tcg: warn if profile exts are disabled
-
- target/riscv/cpu.c         |  20 +++
- target/riscv/cpu.h         |  12 ++
- target/riscv/kvm/kvm-cpu.c |   7 +-
- target/riscv/tcg/tcg-cpu.c | 249 ++++++++++++++++++++++++++++++-------
- 4 files changed, 245 insertions(+), 43 deletions(-)
-
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index e7ce977189c..d8d17dedeed 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -94,6 +94,7 @@ struct RISCVCPUConfig {
+     bool ext_zvknhb;
+     bool ext_zvksed;
+     bool ext_zvksh;
++    bool ext_zvkt;
+     bool ext_zmmul;
+     bool ext_zvfbfmin;
+     bool ext_zvfbfwma;
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index c5ff03efce9..b9eaecb699c 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -499,6 +499,11 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         return;
+     }
+ 
++    if (cpu->cfg.ext_zvkt) {
++        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvbb), true);
++        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvbc), true);
++    }
++
+     /*
+      * In principle Zve*x would also suffice here, were they supported
+      * in qemu
 -- 
-2.41.0
+2.34.1
 
 
