@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AF38C07545
-	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Oct 2023 20:14:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA85FC07545
+	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Oct 2023 20:14:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qvkB2-0007wG-1z; Wed, 25 Oct 2023 16:08:28 -0400
+	id 1qvkAR-0007Jr-Gx; Wed, 25 Oct 2023 16:07:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qvkB1-0007vR-0t
- for qemu-riscv@nongnu.org; Wed, 25 Oct 2023 16:08:27 -0400
+ id 1qvkAQ-0007JM-Gd
+ for qemu-riscv@nongnu.org; Wed, 25 Oct 2023 16:07:50 -0400
 Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qvkAz-0003Zl-DJ
- for qemu-riscv@nongnu.org; Wed, 25 Oct 2023 16:08:26 -0400
+ id 1qvkAO-0003S4-Oz
+ for qemu-riscv@nongnu.org; Wed, 25 Oct 2023 16:07:50 -0400
 Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-6b87c1edfd5so121191b3a.1
- for <qemu-riscv@nongnu.org>; Wed, 25 Oct 2023 13:08:25 -0700 (PDT)
+ d2e1a72fcca58-6b6f4c118b7so135457b3a.0
+ for <qemu-riscv@nongnu.org>; Wed, 25 Oct 2023 13:07:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1698264504; x=1698869304; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1698264467; x=1698869267; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JKuvbE8TdjB+iGlQW/1l3BYZ+xnoog3bPhivLZBfhY0=;
- b=Ko2d3XV9F3qS76kFfFA6OBFeDkLwyVqGrps7GlStJ2m5TfpbibZUR0Bw2RPJJhEOcw
- I219Cu6YeF2DfSX7zInpzxW+guNYA1JiIehC+QVr681P5+EUwdz1iXbz3b1eQZf8xS/g
- 4xpMJQn9LnkLFu8obZ93HvJKsJLfj9ZdlIvbDX2blgn70SvDADVwSGqvmYAi9qVxTSSc
- bLJZPHeUpZFXeSFXdglt4HqI5uMkM2VH6lRTF03DktsnWEHAOBPBM+NhsJxKBkj7FO5I
- tcpX9VVFygrF/0bzE8dTiov9w5fcBqrjcTNWqHs6tLz+50gELaHbsn4qL3nYK9jlx5fh
- 5U6g==
+ bh=3MxEnwCcrzZXPmJ6j2nD9uSFRJXenxo4trg/FCDg9Lw=;
+ b=O1juFMM72URwvVsQG+NcVcc9o61Cy1Dke1/9xpH1++vmEsCqZqdij7FrHDyKuazG9N
+ iOskPqLwmSqy8D70llYNMIQLk8OPxsxpxZdWSndxZ/ZN9O8bs83mh2rEIeG/rIr+0D2n
+ Yg3Qy8ygIv9hTw/3et+ik0CUJJYdgqlQlkz6myRxKDps4KMUe+/LSyL/eeS2iUjDY0ge
+ pTZX9XC4Kd3azNFwyTAjuGEfjGWYJ/ql7uBiYuhs9AQl8lROCAEMoyN/Hj66wQ6BqPUT
+ bPbqWiYehyZxJKgUF8MFsVP+e3kGCffjUjPW70kvP6ir2nt/wUPqA/96eoTosv4vIqLt
+ G4pw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698264504; x=1698869304;
+ d=1e100.net; s=20230601; t=1698264467; x=1698869267;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JKuvbE8TdjB+iGlQW/1l3BYZ+xnoog3bPhivLZBfhY0=;
- b=bbanFswCG/sZCZ2fMgQi5aHsPN9tJL/D7LZKXld/JAOylQAt838EsHEi4rJcRghdyB
- 6+RKN3fARBeu/GIi18OyDkqb9CbnIz/lYifErrUYLCZLmmoQ4mx3WZ02H4Pk8cQL9/6M
- +kMbOsJCQxKM9+SjPXBcgPgsrGXzU+BfkCR+han6MTMA/6GZ+jVzWfrUsJp2LqMCecgd
- +LhXX8h0TEpgCpLLTZ16Adg+EEy+8ydtp+g/fyg0Nbat5L9JyKwf2Qr3hA0GpVe7crge
- Qt8+Tny/I6xd1FmKU6fjtjSNH/F/o1wNVJargYmITRclaYIpEY5AS3i3FrplAZRNvzaF
- iLKA==
-X-Gm-Message-State: AOJu0Yz77KCT4aam9BksbJSwi3iz0svMmdaZnPtxiY2FnXdjza3wIfkL
- 7i5KDknhzAYLONlVzbw8LZK8qg==
-X-Google-Smtp-Source: AGHT+IHCERAXyyjCLSQvjQ/GqhKDjGO9mx/nM8jwJgEZeJsO1NiAoC3WJm1Tj5QRZhtbt69VYj3tgA==
-X-Received: by 2002:a62:8458:0:b0:68e:2478:d6c9 with SMTP id
- k85-20020a628458000000b0068e2478d6c9mr12847419pfd.2.1698264504231; 
- Wed, 25 Oct 2023 13:08:24 -0700 (PDT)
+ bh=3MxEnwCcrzZXPmJ6j2nD9uSFRJXenxo4trg/FCDg9Lw=;
+ b=Dm+g3dh/1EjGmVEQtTKadNsLrN6a3BaXszLFWGNvD43yfuzsRYEJ9v7m+hBT/7j+Zn
+ bNdT2XEM7ajc0Px5Hwqrufh/lo8U2ory6nfc/7xpxGd2Gg++NmdvZigTGxxbwj3Zh8gN
+ ogoWvAEBvxwqb1vcgHn9rnYWyGsc67T/bjvb1CQr72/T+Qi+OoAlOA1a97h0mCu69CPF
+ HlWaZ6Fk0SNJNW7FpXKzQWLfk0eujX1FbdqWr8xybaaBftLj5AxY+ne4CARdE5IDYgUo
+ jiHRG0yQK3yb2E+Zd8enM5OiWYORoGlQ33YAs0Ygtq96w+w3DpSZIgpMfO4hg5+inmhB
+ 0snw==
+X-Gm-Message-State: AOJu0YwPD1U4K/T+p7XgjDbatYDpyneFQ6s0C7vWYZTzGPVLXqNpxLPn
+ j9TXGvXsb8KcvP8lxf8bW42z6A==
+X-Google-Smtp-Source: AGHT+IHtOUSHKkSMNNRLZllo+O/NfkZWPkoq+q85BokdoALbBhtLKKCs8Dz5V1H0FGnnikAeoOcnPQ==
+X-Received: by 2002:a05:6a00:1ad4:b0:68f:cc47:fcc8 with SMTP id
+ f20-20020a056a001ad400b0068fcc47fcc8mr14508502pfv.14.1698264467440; 
+ Wed, 25 Oct 2023 13:07:47 -0700 (PDT)
 Received: from sunil-pc.Dlink ([106.51.188.78])
  by smtp.gmail.com with ESMTPSA id
- f1-20020aa79681000000b0068fe7c4148fsm9696768pfk.57.2023.10.25.13.08.18
+ f1-20020aa79681000000b0068fe7c4148fsm9696768pfk.57.2023.10.25.13.07.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Oct 2023 13:08:23 -0700 (PDT)
+ Wed, 25 Oct 2023 13:07:47 -0700 (PDT)
 From: Sunil V L <sunilvl@ventanamicro.com>
 To: qemu-arm@nongnu.org,
 	qemu-devel@nongnu.org,
@@ -78,10 +78,12 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Anup Patel <apatel@ventanamicro.com>,
  Atish Kumar Patra <atishp@rivosinc.com>, Haibo Xu <haibo1.xu@intel.com>,
- Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH v4 10/13] hw/pci-host/gpex: Define properties for MMIO ranges
-Date: Thu, 26 Oct 2023 01:37:10 +0530
-Message-Id: <20231025200713.580814-11-sunilvl@ventanamicro.com>
+ Sunil V L <sunilvl@ventanamicro.com>,
+ Andrew Jones <ajones@ventanamicro.com>
+Subject: [PATCH v4 04/13] hw/riscv: virt: Make few IMSIC macros and functions
+ public
+Date: Thu, 26 Oct 2023 01:37:04 +0530
+Message-Id: <20231025200713.580814-5-sunilvl@ventanamicro.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231025200713.580814-1-sunilvl@ventanamicro.com>
 References: <20231025200713.580814-1-sunilvl@ventanamicro.com>
@@ -111,117 +113,109 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-ACPI DSDT generator needs information like ECAM range, PIO range, 32-bit
-and 64-bit PCI MMIO range etc related to the PCI host bridge. Instead of
-making these values machine specific, create properties for the GPEX
-host bridge with default value 0. During initialization, the firmware
-can initialize these properties with correct values for the platform.
-This basically allows DSDT generator code independent of the machine
-specific memory map accesses.
+Some macros and static function related to IMSIC are defined in virt.c.
+They are required in virt-acpi-build.c. So, make them public.
 
-Suggested-by: Igor Mammedov <imammedo@redhat.com>
 Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 ---
- hw/pci-host/gpex-acpi.c    | 13 +++++++++++++
- hw/pci-host/gpex.c         | 12 ++++++++++++
- include/hw/pci-host/gpex.h | 28 ++++++++++++++++++++--------
- 3 files changed, 45 insertions(+), 8 deletions(-)
+ hw/riscv/virt.c         | 25 +------------------------
+ include/hw/riscv/virt.h | 25 +++++++++++++++++++++++++
+ 2 files changed, 26 insertions(+), 24 deletions(-)
 
-diff --git a/hw/pci-host/gpex-acpi.c b/hw/pci-host/gpex-acpi.c
-index 1092dc3b70..f69413ea2c 100644
---- a/hw/pci-host/gpex-acpi.c
-+++ b/hw/pci-host/gpex-acpi.c
-@@ -281,3 +281,16 @@ void acpi_dsdt_add_gpex(Aml *scope, struct GPEXConfig *cfg)
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 1732c42915..085654ab2f 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -38,7 +38,6 @@
+ #include "kvm/kvm_riscv.h"
+ #include "hw/intc/riscv_aclint.h"
+ #include "hw/intc/riscv_aplic.h"
+-#include "hw/intc/riscv_imsic.h"
+ #include "hw/intc/sifive_plic.h"
+ #include "hw/misc/sifive_test.h"
+ #include "hw/platform-bus.h"
+@@ -54,28 +53,6 @@
+ #include "hw/acpi/aml-build.h"
+ #include "qapi/qapi-visit-common.h"
  
-     crs_range_set_free(&crs_range_set);
+-/*
+- * The virt machine physical address space used by some of the devices
+- * namely ACLINT, PLIC, APLIC, and IMSIC depend on number of Sockets,
+- * number of CPUs, and number of IMSIC guest files.
+- *
+- * Various limits defined by VIRT_SOCKETS_MAX_BITS, VIRT_CPUS_MAX_BITS,
+- * and VIRT_IRQCHIP_MAX_GUESTS_BITS are tuned for maximum utilization
+- * of virt machine physical address space.
+- */
+-
+-#define VIRT_IMSIC_GROUP_MAX_SIZE      (1U << IMSIC_MMIO_GROUP_MIN_SHIFT)
+-#if VIRT_IMSIC_GROUP_MAX_SIZE < \
+-    IMSIC_GROUP_SIZE(VIRT_CPUS_MAX_BITS, VIRT_IRQCHIP_MAX_GUESTS_BITS)
+-#error "Can't accommodate single IMSIC group in address space"
+-#endif
+-
+-#define VIRT_IMSIC_MAX_SIZE            (VIRT_SOCKETS_MAX * \
+-                                        VIRT_IMSIC_GROUP_MAX_SIZE)
+-#if 0x4000000 < VIRT_IMSIC_MAX_SIZE
+-#error "Can't accommodate all IMSIC groups in address space"
+-#endif
+-
+ /* KVM AIA only supports APLIC MSI. APLIC Wired is always emulated by QEMU. */
+ static bool virt_use_kvm_aia(RISCVVirtState *s)
+ {
+@@ -512,7 +489,7 @@ static void create_fdt_socket_plic(RISCVVirtState *s,
+     g_free(plic_cells);
  }
+ 
+-static uint32_t imsic_num_bits(uint32_t count)
++uint32_t imsic_num_bits(uint32_t count)
+ {
+     uint32_t ret = 0;
+ 
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index e5c474b26e..5b03575ed3 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -23,6 +23,7 @@
+ #include "hw/riscv/riscv_hart.h"
+ #include "hw/sysbus.h"
+ #include "hw/block/flash.h"
++#include "hw/intc/riscv_imsic.h"
+ 
+ #define VIRT_CPUS_MAX_BITS             9
+ #define VIRT_CPUS_MAX                  (1 << VIRT_CPUS_MAX_BITS)
+@@ -127,4 +128,28 @@ enum {
+ 
+ bool virt_is_acpi_enabled(RISCVVirtState *s);
+ void virt_acpi_setup(RISCVVirtState *vms);
++uint32_t imsic_num_bits(uint32_t count);
 +
-+void acpi_dsdt_add_gpex_host(Aml *scope, uint32_t irq)
-+{
-+    bool ambig;
-+    Object *obj = object_resolve_path_type("", TYPE_GPEX_HOST, &ambig);
++/*
++ * The virt machine physical address space used by some of the devices
++ * namely ACLINT, PLIC, APLIC, and IMSIC depend on number of Sockets,
++ * number of CPUs, and number of IMSIC guest files.
++ *
++ * Various limits defined by VIRT_SOCKETS_MAX_BITS, VIRT_CPUS_MAX_BITS,
++ * and VIRT_IRQCHIP_MAX_GUESTS_BITS are tuned for maximum utilization
++ * of virt machine physical address space.
++ */
 +
-+    if (!obj || ambig) {
-+        return;
-+    }
++#define VIRT_IMSIC_GROUP_MAX_SIZE      (1U << IMSIC_MMIO_GROUP_MIN_SHIFT)
++#if VIRT_IMSIC_GROUP_MAX_SIZE < \
++    IMSIC_GROUP_SIZE(VIRT_CPUS_MAX_BITS, VIRT_IRQCHIP_MAX_GUESTS_BITS)
++#error "Can't accomodate single IMSIC group in address space"
++#endif
 +
-+    GPEX_HOST(obj)->gpex_cfg.irq = irq;
-+    acpi_dsdt_add_gpex(scope, &GPEX_HOST(obj)->gpex_cfg);
-+}
-diff --git a/hw/pci-host/gpex.c b/hw/pci-host/gpex.c
-index a6752fac5e..41f4e73f6e 100644
---- a/hw/pci-host/gpex.c
-+++ b/hw/pci-host/gpex.c
-@@ -154,6 +154,18 @@ static Property gpex_host_properties[] = {
-      */
-     DEFINE_PROP_BOOL("allow-unmapped-accesses", GPEXHost,
-                      allow_unmapped_accesses, true),
-+    DEFINE_PROP_UINT64(PCI_HOST_ECAM_BASE, GPEXHost, gpex_cfg.ecam.base, 0),
-+    DEFINE_PROP_SIZE(PCI_HOST_ECAM_SIZE, GPEXHost, gpex_cfg.ecam.size, 0),
-+    DEFINE_PROP_UINT64(PCI_HOST_PIO_BASE, GPEXHost, gpex_cfg.pio.base, 0),
-+    DEFINE_PROP_SIZE(PCI_HOST_PIO_SIZE, GPEXHost, gpex_cfg.pio.size, 0),
-+    DEFINE_PROP_UINT64(PCI_HOST_BELOW_4G_MMIO_BASE, GPEXHost,
-+                       gpex_cfg.mmio32.base, 0),
-+    DEFINE_PROP_SIZE(PCI_HOST_BELOW_4G_MMIO_SIZE, GPEXHost,
-+                     gpex_cfg.mmio32.size, 0),
-+    DEFINE_PROP_UINT64(PCI_HOST_ABOVE_4G_MMIO_BASE, GPEXHost,
-+                       gpex_cfg.mmio64.base, 0),
-+    DEFINE_PROP_SIZE(PCI_HOST_ABOVE_4G_MMIO_SIZE, GPEXHost,
-+                     gpex_cfg.mmio64.size, 0),
-     DEFINE_PROP_END_OF_LIST(),
- };
- 
-diff --git a/include/hw/pci-host/gpex.h b/include/hw/pci-host/gpex.h
-index b0240bd768..441c6b8b20 100644
---- a/include/hw/pci-host/gpex.h
-+++ b/include/hw/pci-host/gpex.h
-@@ -40,6 +40,15 @@ struct GPEXRootState {
-     /*< public >*/
- };
- 
-+struct GPEXConfig {
-+    MemMapEntry ecam;
-+    MemMapEntry mmio32;
-+    MemMapEntry mmio64;
-+    MemMapEntry pio;
-+    int         irq;
-+    PCIBus      *bus;
-+};
++#define VIRT_IMSIC_MAX_SIZE            (VIRT_SOCKETS_MAX * \
++                                        VIRT_IMSIC_GROUP_MAX_SIZE)
++#if 0x4000000 < VIRT_IMSIC_MAX_SIZE
++#error "Can't accomodate all IMSIC groups in address space"
++#endif
 +
- struct GPEXHost {
-     /*< private >*/
-     PCIExpressHost parent_obj;
-@@ -55,19 +64,22 @@ struct GPEXHost {
-     int irq_num[GPEX_NUM_IRQS];
- 
-     bool allow_unmapped_accesses;
--};
- 
--struct GPEXConfig {
--    MemMapEntry ecam;
--    MemMapEntry mmio32;
--    MemMapEntry mmio64;
--    MemMapEntry pio;
--    int         irq;
--    PCIBus      *bus;
-+    struct GPEXConfig gpex_cfg;
- };
- 
- int gpex_set_irq_num(GPEXHost *s, int index, int gsi);
- 
- void acpi_dsdt_add_gpex(Aml *scope, struct GPEXConfig *cfg);
-+void acpi_dsdt_add_gpex_host(Aml *scope, uint32_t irq);
-+
-+#define PCI_HOST_PIO_BASE               "pio-base"
-+#define PCI_HOST_PIO_SIZE               "pio-size"
-+#define PCI_HOST_ECAM_BASE              "ecam-base"
-+#define PCI_HOST_ECAM_SIZE              "ecam-size"
-+#define PCI_HOST_BELOW_4G_MMIO_BASE     "below-4g-mmio-base"
-+#define PCI_HOST_BELOW_4G_MMIO_SIZE     "below-4g-mmio-size"
-+#define PCI_HOST_ABOVE_4G_MMIO_BASE     "above-4g-mmio-base"
-+#define PCI_HOST_ABOVE_4G_MMIO_SIZE     "above-4g-mmio-size"
- 
- #endif /* HW_GPEX_H */
+ #endif
 -- 
 2.39.2
 
