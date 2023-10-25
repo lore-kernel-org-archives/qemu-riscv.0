@@ -4,46 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FE1FC25B47
-	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Oct 2023 06:29:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28388C0032E
+	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Oct 2023 06:37:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qvXOj-0004BQ-8G; Wed, 25 Oct 2023 02:29:46 -0400
+	id 1qvXVj-000055-Rq; Wed, 25 Oct 2023 02:37:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qvXOh-0004Aw-U6; Wed, 25 Oct 2023 02:29:43 -0400
-Received: from out30-124.freemail.mail.aliyun.com ([115.124.30.124])
+ id 1qvXVh-0008SQ-BZ; Wed, 25 Oct 2023 02:36:57 -0400
+Received: from out30-130.freemail.mail.aliyun.com ([115.124.30.130])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1qvXOe-0002OT-LP; Wed, 25 Oct 2023 02:29:43 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R261e4; CH=green; DM=||false|;
+ id 1qvXVd-0003mN-JH; Wed, 25 Oct 2023 02:36:56 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R871e4; CH=green; DM=||false|;
  DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
  MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=7; SR=0;
- TI=SMTPD_---0VutUeU2_1698215366; 
+ TI=SMTPD_---0VutXGwi_1698215800; 
 Received: from 30.198.0.241(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VutUeU2_1698215366) by smtp.aliyun-inc.com;
- Wed, 25 Oct 2023 14:29:27 +0800
-Message-ID: <3dd247e8-5f4f-411c-9ada-7597cdc1ed0b@linux.alibaba.com>
-Date: Wed, 25 Oct 2023 14:28:29 +0800
+ fp:SMTPD_---0VutXGwi_1698215800) by smtp.aliyun-inc.com;
+ Wed, 25 Oct 2023 14:36:41 +0800
+Message-ID: <d6b0380b-f738-4e7c-87ad-0ba6ea3c274b@linux.alibaba.com>
+Date: Wed, 25 Oct 2023 14:35:42 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/6] target/riscv/kvm: add 'rva22u64' flag as
- unavailable
+Subject: Re: [PATCH v3 3/6] target/riscv/tcg: add user flag for profile support
 Content-Language: en-US
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, palmer@rivosinc.com
 References: <20231020223951.357513-1-dbarboza@ventanamicro.com>
- <20231020223951.357513-3-dbarboza@ventanamicro.com>
+ <20231020223951.357513-4-dbarboza@ventanamicro.com>
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20231020223951.357513-3-dbarboza@ventanamicro.com>
+In-Reply-To: <20231020223951.357513-4-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=115.124.30.124;
+Received-SPF: pass client-ip=115.124.30.130;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-124.freemail.mail.aliyun.com
+ helo=out30-130.freemail.mail.aliyun.com
 X-Spam_score_int: -98
 X-Spam_score: -9.9
 X-Spam_bar: ---------
@@ -68,56 +67,130 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 2023/10/21 6:39, Daniel Henrique Barboza wrote:
-> KVM does not have the means to support enabling the rva22u64 profile.
-> The main reasons are:
+> The TCG emulation implements all the extensions described in the
+> RVA22U64 profile, both mandatory and optional. The mandatory extensions
+> will be enabled via the profile flag. We'll leave the optional
+> extensions to be enabled by hand.
 >
-> - we're missing support for some mandatory rva22u64 extensions in the
->    KVM module;
+> Given that this is the first profile we're implementing in TCG we'll
+> need some ground work first:
 >
-> - we can't make promises about enabling a profile since it all depends
->    on host support in the end.
+> - all profiles declared in riscv_profiles[] will be exposed to users.
+> TCG is the main accelerator we're considering when adding profile
+> support in QEMU, so for now it's safe to assume that all profiles in
+> riscv_profiles[] will be relevant to TCG;
 >
-> We'll revisit this decision in the future if needed. For now mark the
-> 'rva22u64' profile as unavailable when running a KVM CPU:
+> - we'll not support user profile settings for vendor CPUs. The flags
+> will still be exposed but users won't be able to change them. The idea
+> is that vendor CPUs in the future can enable profiles internally in
+> their cpu_init() functions, showing to the external world that the CPU
+> supports a certain profile. But users won't be able to enable/disable
+> it;
 >
-> $ qemu-system-riscv64 -machine virt,accel=kvm -cpu rv64,rva22u64=true
-> qemu-system-riscv64: can't apply global rv64-riscv-cpu.rva22u64=true:
->      'rva22u64' is not available with KVM
+> - Setting a profile to 'true' means 'enable all mandatory extensions of
+> this profile, setting it to 'false' means disabling all its mandatory
+> extensions. Disabling a profile is discouraged for regular use and will
+> issue an user warning. User choices for individual extensions will take
+> precedence, i.e. enabling a profile will not enable extensions that the
+> user set to 'false', and vice-versa. This will make us independent of
+> left-to-right ordering in the QEMU command line, i.e. the following QEMU
+> command lines:
+>
+> -cpu rv64,zicbom=false,rva22u64=true,Zifencei=false
+> -cpu rv64,zicbom=false,Zifencei=false,rva22u64=true
+> -cpu rv64,rva22u64=true,zicbom=false,Zifencei=false
+>
+> They mean the same thing: "enable all mandatory extensions of the
+> rva22u64 profile while keeping zicbom and Zifencei disabled".
+>
+> For now we'll handle multi-letter extensions only. MISA extensions need
+> additional steps that we'll take care later.
 >
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->   target/riscv/kvm/kvm-cpu.c | 7 ++++++-
->   1 file changed, 6 insertions(+), 1 deletion(-)
+>   target/riscv/tcg/tcg-cpu.c | 59 ++++++++++++++++++++++++++++++++++++++
+>   1 file changed, 59 insertions(+)
 >
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index 5246fc2bdc..dc14c54ce4 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -360,7 +360,7 @@ static void cpu_set_cfg_unavailable(Object *obj, Visitor *v,
->       }
->   
->       if (value) {
-> -        error_setg(errp, "extension %s is not available with KVM",
-> +        error_setg(errp, "'%s' is not available with KVM",
->                      propname);
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index 7a4400e2ba..3dd4783191 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -757,6 +757,63 @@ static void riscv_cpu_add_misa_properties(Object *cpu_obj)
 >       }
 >   }
-> @@ -440,6 +440,11 @@ static void kvm_riscv_add_cpu_user_properties(Object *cpu_obj)
->       riscv_cpu_add_kvm_unavail_prop_array(cpu_obj, riscv_cpu_extensions);
->       riscv_cpu_add_kvm_unavail_prop_array(cpu_obj, riscv_cpu_vendor_exts);
->       riscv_cpu_add_kvm_unavail_prop_array(cpu_obj, riscv_cpu_experimental_exts);
+>   
+> +static void cpu_set_profile(Object *obj, Visitor *v, const char *name,
+> +                            void *opaque, Error **errp)
+> +{
+> +    RISCVCPUProfile *profile = opaque;
+> +    RISCVCPU *cpu = RISCV_CPU(obj);
+> +    bool value;
+> +    int i, ext_offset;
 > +
-> +   /* We don't have the needed KVM support for profiles */
-> +    for (i = 0; riscv_profiles[i] != NULL; i++) {
-> +        riscv_cpu_add_kvm_unavail_prop(cpu_obj, riscv_profiles[i]->name);
+> +    if (object_dynamic_cast(obj, TYPE_RISCV_DYNAMIC_CPU) == NULL) {
+> +        error_setg(errp, "Profile %s only available for generic CPUs",
+> +                   profile->name);
+> +        return;
 > +    }
+> +
+> +    if (!visit_type_bool(v, name, &value, errp)) {
+> +        return;
+> +    }
+> +
+> +    if (!value) {
+> +        warn_report("Disabling the '%s' profile is a debug/development "
+> +                    "tool, not recommended for regular use",
+> +                    profile->name);
+> +    }
+> +
+> +    profile->enabled = value;
+> +
+> +    for (i = 0; profile->ext_offsets[i] != RISCV_PROFILE_EXT_LIST_END; i++) {
+> +        ext_offset = profile->ext_offsets[i];
+> +
+> +        if (cpu_cfg_ext_is_user_set(ext_offset)) {
+> +            continue;
+> +        }
+> +
+> +        isa_ext_update_enabled(cpu, ext_offset, profile->enabled);
+> +    }
+> +}
+> +
+> +static void cpu_get_profile(Object *obj, Visitor *v, const char *name,
+> +                            void *opaque, Error **errp)
+> +{
+> +    RISCVCPUProfile *profile = opaque;
+> +    bool value = profile->enabled;
+> +
+> +    visit_type_bool(v, name, &value, errp);
+> +}
+> +
+> +static void riscv_cpu_add_profiles(Object *cpu_obj)
+> +{
+> +    for (int i = 0; riscv_profiles[i] != NULL; i++) {
+> +        const RISCVCPUProfile *profile = riscv_profiles[i];
+> +
+> +        object_property_add(cpu_obj, profile->name, "bool",
+> +                            cpu_get_profile, cpu_set_profile,
+> +                            NULL, (void *)profile);
+> +    }
+> +}
+> +
+>   static bool cpu_ext_is_deprecated(const char *ext_name)
+>   {
+>       return isupper(ext_name[0]);
+> @@ -880,6 +937,8 @@ static void riscv_cpu_add_user_properties(Object *obj)
+>   
+>       riscv_cpu_add_multiext_prop_array(obj, riscv_cpu_deprecated_exts);
+>   
+> +    riscv_cpu_add_profiles(obj);
+> +
 
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Acked-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
 Zhiwei
 
->   }
->   
->   static int kvm_riscv_get_regs_core(CPUState *cs)
+>       for (Property *prop = riscv_cpu_options; prop && prop->name; prop++) {
+>           qdev_property_add_static(DEVICE(obj), prop);
+>       }
 
