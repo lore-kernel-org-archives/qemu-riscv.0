@@ -4,62 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0A92C0032E
-	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Oct 2023 09:10:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C551BC25B47
+	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Oct 2023 09:33:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qvZtT-00065Q-Sl; Wed, 25 Oct 2023 05:09:39 -0400
+	id 1qvaG1-0005Aj-N6; Wed, 25 Oct 2023 05:32:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
- id 1qvWSk-0006sl-21; Wed, 25 Oct 2023 01:29:50 -0400
-Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
- helo=Atcsqr.andestech.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
- id 1qvWSh-0001Km-UN; Wed, 25 Oct 2023 01:29:49 -0400
-Received: from Atcsqr.andestech.com (localhost [127.0.0.2] (may be forged))
- by Atcsqr.andestech.com with ESMTP id 39P5FnpH024776;
- Wed, 25 Oct 2023 13:15:49 +0800 (+08)
- (envelope-from ethan84@andestech.com)
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 39P5FSdZ024655;
- Wed, 25 Oct 2023 13:15:28 +0800 (+08)
- (envelope-from ethan84@andestech.com)
-Received: from ethan84-VirtualBox.andestech.com (10.0.12.51) by
- ATCPCS16.andestech.com (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; 
- Wed, 25 Oct 2023 13:15:23 +0800
-To: <qemu-devel@nongnu.org>
-CC: Ethan Chen <ethan84@andestech.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
- <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>, Weiwei Li
- <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, "open list:RISC-V TCG CPUs"
- <qemu-riscv@nongnu.org>
-Subject: [PATCH 6/6] hw/riscv/virt: Add IOPMP support
-Date: Wed, 25 Oct 2023 13:14:30 +0800
-Message-ID: <20231025051430.493079-7-ethan84@andestech.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231025051430.493079-1-ethan84@andestech.com>
-References: <20231025051430.493079-1-ethan84@andestech.com>
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1qvaFv-0004NR-SX
+ for qemu-riscv@nongnu.org; Wed, 25 Oct 2023 05:32:51 -0400
+Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1qvaFt-0002Q9-Ml
+ for qemu-riscv@nongnu.org; Wed, 25 Oct 2023 05:32:51 -0400
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-6b77ab73c6fso535884b3a.1
+ for <qemu-riscv@nongnu.org>; Wed, 25 Oct 2023 02:32:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1698226367; x=1698831167;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xS/23XQTZSBycxyMSA8/+0KJZ6Uf9fRlK5j+e680Bxo=;
+ b=HKFm6IJlMPf05MHWAsvWrJOyWVUurgafaQkGP0Kh8f6DPigrl5QKZKz9M3NvSex3fX
+ ZrBjIw1ma1yjlObCczJSgqrkZ09aTKvlcXszmZc5Hs3783zayOgQusFk1B6YF345fKP3
+ C/GgVoRdtL1l5SmU3gZLJJnR3ZhS9Y4PWG4N5zgtkLafTTqkqSOBnoOehOctd4H//YQs
+ 5OfCjWmpRPNW6MO52f7S+ZtFWMI3pb4c5Jnqa8q6bncn5YaTo/A+9uHFFdjptWdj7fFE
+ pRku79KxTSlrz4hf7MprgkKheRwLG8iaof3rUnTCh6PQb43KRisUUCOkZaBCXl/nSOr3
+ sbDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698226367; x=1698831167;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=xS/23XQTZSBycxyMSA8/+0KJZ6Uf9fRlK5j+e680Bxo=;
+ b=e64fUyYoXT/osMLutw207HmEZuMwQ8Sq/joh8CfBHafJp6V3xOgX4HTVptKc+L/EJC
+ /hB6ZIOvnX0nHo9RBjiMnqG3cEYXsMd+91W/ALh0JYqxTYsYFZTChAGGRR9Th6clt4vS
+ AsFWawXPbEtDni4nsTSMOvkGDRjWBqfy9tnp+ZTpDBl06ZncIXyt4PvV9DDH4H6hRPmz
+ A9pokfqSVgy85iexFDwHCN3g5Hc1iOr2d2bIX6UqoOEOkVJW1dJGHcT46x5V855ltwuf
+ /YUUGJ7QEU5Rqj+3yqce0cQCrQlpMc918qkPnS8T0yd2ZPpu+/aSzIgFDo1+ijB2POOl
+ 8jiw==
+X-Gm-Message-State: AOJu0Ywq/D/qfVVC8gpvISp3TOfAfUkJs/Su+fqsCTc5h23xCr00Gdrg
+ OJwu9cLylhRcavMgygkL7t/ASQ==
+X-Google-Smtp-Source: AGHT+IFMxjI4UB/wpgJLDqQ1ZQ9KaAKxxwEdB/0zIJaR4ykc9npOUXetWX0ZlrgSC1Dg2hLJ/ydLNQ==
+X-Received: by 2002:a05:6a00:21d1:b0:68a:5cf8:dae4 with SMTP id
+ t17-20020a056a0021d100b0068a5cf8dae4mr18651863pfj.3.1698226367439; 
+ Wed, 25 Oct 2023 02:32:47 -0700 (PDT)
+Received: from localhost ([157.82.205.15]) by smtp.gmail.com with UTF8SMTPSA id
+ y16-20020aa793d0000000b006b8bb35e313sm8945124pff.103.2023.10.25.02.32.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 25 Oct 2023 02:32:46 -0700 (PDT)
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
+To: 
+Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Mikhail Tyutin <m.tyutin@yadro.com>,
+ Aleksandr Anenkov <a.anenkov@yadro.com>, qemu-devel@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Akihiko Odaki <akihiko.odaki@daynix.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Yanan Wang <wangyanan55@huawei.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Nicholas Piggin <npiggin@gmail.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-arm@nongnu.org,
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org
+Subject: [PATCH v16 12/18] hw/core/cpu: Remove gdb_get_dynamic_xml member
+Date: Wed, 25 Oct 2023 18:31:12 +0900
+Message-ID: <20231025093128.33116-13-akihiko.odaki@daynix.com>
+X-Mailer: git-send-email 2.42.0
+In-Reply-To: <20231025093128.33116-1-akihiko.odaki@daynix.com>
+References: <20231025093128.33116-1-akihiko.odaki@daynix.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.0.12.51]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 39P5FnpH024776
-Received-SPF: pass client-ip=60.248.80.70; envelope-from=ethan84@andestech.com;
- helo=Atcsqr.andestech.com
-X-Spam_score_int: -8
-X-Spam_score: -0.9
-X-Spam_bar: /
-X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9, RDNS_DYNAMIC=0.982,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- TVD_RCVD_IP=0.001 autolearn=no autolearn_force=no
+Received-SPF: none client-ip=2607:f8b0:4864:20::42b;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x42b.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 25 Oct 2023 05:09:38 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,184 +106,184 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Ethan Chen <ethan84@andestech.com>
-From:  Ethan Chen via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-- Add 'iopmp=on' option to enable iopmp
-- Add 'iopmp_cascade=on' option to enable iopmp cascading.
+This function is no longer used.
 
-Signed-off-by: Ethan Chen <ethan84@andestech.com>
+Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- hw/riscv/Kconfig        |  2 ++
- hw/riscv/virt.c         | 72 +++++++++++++++++++++++++++++++++++++++--
- include/hw/riscv/virt.h | 10 +++++-
- 3 files changed, 81 insertions(+), 3 deletions(-)
+ include/hw/core/cpu.h |  4 ----
+ target/arm/cpu.h      |  6 ------
+ target/ppc/cpu.h      |  1 -
+ target/arm/cpu.c      |  1 -
+ target/arm/gdbstub.c  | 18 ------------------
+ target/ppc/cpu_init.c |  3 ---
+ target/ppc/gdbstub.c  | 10 ----------
+ target/riscv/cpu.c    | 14 --------------
+ 8 files changed, 57 deletions(-)
 
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index b6a5eb4452..c30a104aa4 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -45,6 +45,8 @@ config RISCV_VIRT
-     select FW_CFG_DMA
-     select PLATFORM_BUS
-     select ACPI
-+    select ATCDMAC300
-+    select RISCV_IOPMP
+diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+index 11d4b5cd0c..d2e70643f2 100644
+--- a/include/hw/core/cpu.h
++++ b/include/hw/core/cpu.h
+@@ -134,9 +134,6 @@ struct SysemuCPUOps;
+  *           before the insn which triggers a watchpoint rather than after it.
+  * @gdb_arch_name: Optional callback that returns the architecture name known
+  * to GDB. The caller must free the returned string with g_free.
+- * @gdb_get_dynamic_xml: Callback to return dynamically generated XML for the
+- *   gdb stub. Returns a pointer to the XML contents for the specified XML file
+- *   or NULL if the CPU doesn't have a dynamically generated content for it.
+  * @disas_set_info: Setup architecture specific components of disassembly info
+  * @adjust_watchpoint_address: Perform a target-specific adjustment to an
+  * address before attempting to match it against watchpoints.
+@@ -167,7 +164,6 @@ struct CPUClass {
  
- config SHAKTI_C
-     bool
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 9de578c756..d3d4320c73 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -53,6 +53,9 @@
- #include "hw/display/ramfb.h"
- #include "hw/acpi/aml-build.h"
- #include "qapi/qapi-visit-common.h"
-+#include "hw/misc/riscv_iopmp.h"
-+#include "hw/dma/atcdmac300.h"
-+
+     const char *gdb_core_xml_file;
+     const gchar * (*gdb_arch_name)(CPUState *cpu);
+-    const char * (*gdb_get_dynamic_xml)(CPUState *cpu, const char *xmlname);
  
- /*
-  * The virt machine physical address space used by some of the devices
-@@ -97,6 +100,9 @@ static const MemMapEntry virt_memmap[] = {
-     [VIRT_UART0] =        { 0x10000000,         0x100 },
-     [VIRT_VIRTIO] =       { 0x10001000,        0x1000 },
-     [VIRT_FW_CFG] =       { 0x10100000,          0x18 },
-+    [VIRT_IOPMP] =        { 0x10200000,      0x100000 },
-+    [VIRT_IOPMP2] =       { 0x10300000,      0x100000 },
-+    [VIRT_DMAC] =         { 0x10400000,      0x100000 },
-     [VIRT_FLASH] =        { 0x20000000,     0x4000000 },
-     [VIRT_IMSIC_M] =      { 0x24000000, VIRT_IMSIC_MAX_SIZE },
-     [VIRT_IMSIC_S] =      { 0x28000000, VIRT_IMSIC_MAX_SIZE },
-@@ -1527,13 +1533,32 @@ static void virt_machine_init(MachineState *machine)
+     void (*disas_set_info)(CPUState *cpu, disassemble_info *info);
  
-     create_platform_bus(s, mmio_irqchip);
+diff --git a/target/arm/cpu.h b/target/arm/cpu.h
+index 3702ddaab8..0e4f1d7d0c 100644
+--- a/target/arm/cpu.h
++++ b/target/arm/cpu.h
+@@ -1137,12 +1137,6 @@ hwaddr arm_cpu_get_phys_page_attrs_debug(CPUState *cpu, vaddr addr,
+ int arm_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
+ int arm_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
  
--    serial_mm_init(system_memory, memmap[VIRT_UART0].base,
--        0, qdev_get_gpio_in(mmio_irqchip, UART0_IRQ), 399193,
-+    serial_mm_init(system_memory, memmap[VIRT_UART0].base + 0x20,
-+        0x2, qdev_get_gpio_in(DEVICE(mmio_irqchip), UART0_IRQ), 38400,
-         serial_hd(0), DEVICE_LITTLE_ENDIAN);
+-/* Returns the dynamically generated XML for the gdb stub.
+- * Returns a pointer to the XML contents for the specified XML file or NULL
+- * if the XML name doesn't match the predefined one.
+- */
+-const char *arm_gdb_get_dynamic_xml(CPUState *cpu, const char *xmlname);
+-
+ int arm_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cs,
+                              int cpuid, DumpState *s);
+ int arm_cpu_write_elf32_note(WriteCoreDumpFunction f, CPUState *cs,
+diff --git a/target/ppc/cpu.h b/target/ppc/cpu.h
+index 848062bc9f..650e6ece70 100644
+--- a/target/ppc/cpu.h
++++ b/target/ppc/cpu.h
+@@ -1384,7 +1384,6 @@ int ppc_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
+ int ppc_cpu_gdb_write_register_apple(CPUState *cpu, uint8_t *buf, int reg);
+ #ifndef CONFIG_USER_ONLY
+ hwaddr ppc_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+-const char *ppc_gdb_get_dynamic_xml(CPUState *cs, const char *xml_name);
+ #endif
+ int ppc64_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cs,
+                                int cpuid, DumpState *s);
+diff --git a/target/arm/cpu.c b/target/arm/cpu.c
+index 6d9bf6a14e..e7fe11339b 100644
+--- a/target/arm/cpu.c
++++ b/target/arm/cpu.c
+@@ -2392,7 +2392,6 @@ static void arm_cpu_class_init(ObjectClass *oc, void *data)
+     cc->sysemu_ops = &arm_sysemu_ops;
+ #endif
+     cc->gdb_arch_name = arm_gdb_arch_name;
+-    cc->gdb_get_dynamic_xml = arm_gdb_get_dynamic_xml;
+     cc->gdb_stop_before_watchpoint = true;
+     cc->disas_set_info = arm_disas_set_info;
  
-     sysbus_create_simple("goldfish_rtc", memmap[VIRT_RTC].base,
-         qdev_get_gpio_in(mmio_irqchip, RTC_IRQ));
+diff --git a/target/arm/gdbstub.c b/target/arm/gdbstub.c
+index 8d771c5d46..3de9d23079 100644
+--- a/target/arm/gdbstub.c
++++ b/target/arm/gdbstub.c
+@@ -473,24 +473,6 @@ static GDBFeature *arm_gen_dynamic_m_secextreg_feature(CPUState *cs,
+ #endif
+ #endif /* CONFIG_TCG */
  
-+    /* DMAC */
-+    DeviceState *dmac_dev = atcdmac300_create("atcdmac300",
-+        memmap[VIRT_DMAC].base, memmap[VIRT_DMAC].size,
-+        qdev_get_gpio_in(DEVICE(mmio_irqchip), DMAC_IRQ));
-+
-+    if (s->have_iopmp) {
-+        /* IOPMP */
-+        DeviceState *iopmp_dev = iopmp_create(memmap[VIRT_IOPMP].base,
-+            qdev_get_gpio_in(DEVICE(mmio_irqchip), IOPMP_IRQ));
-+        /* DMA with IOPMP */
-+        atcdmac300_connect_iopmp_as(dmac_dev, &(IOPMP(iopmp_dev)->iopmp_as), 0);
-+        if (s->have_iopmp_cascade) {
-+            DeviceState *iopmp_dev2 = iopmp_create(memmap[VIRT_IOPMP2].base,
-+                qdev_get_gpio_in(DEVICE(mmio_irqchip), IOPMP2_IRQ));
-+            cascade_iopmp(iopmp_dev, iopmp_dev2);
-+        }
-+    }
-+
-+
-     for (i = 0; i < ARRAY_SIZE(s->flash); i++) {
-         /* Map legacy -drive if=pflash to machine properties */
-         pflash_cfi01_legacy_drive(s->flash[i],
-@@ -1628,6 +1653,35 @@ static void virt_set_aclint(Object *obj, bool value, Error **errp)
-     s->have_aclint = value;
- }
- 
-+static bool virt_get_iopmp(Object *obj, Error **errp)
-+{
-+    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
-+
-+    return s->have_iopmp;
-+}
-+
-+static void virt_set_iopmp(Object *obj, bool value, Error **errp)
-+{
-+    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
-+
-+    s->have_iopmp = value;
-+}
-+
-+static bool virt_get_iopmp_cascade(Object *obj, Error **errp)
-+{
-+    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
-+
-+    return s->have_iopmp_cascade;
-+}
-+
-+static void virt_set_iopmp_cascade(Object *obj, bool value, Error **errp)
-+{
-+    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
-+
-+    s->have_iopmp_cascade = value;
-+}
-+
-+
- bool virt_is_acpi_enabled(RISCVVirtState *s)
+-const char *arm_gdb_get_dynamic_xml(CPUState *cs, const char *xmlname)
+-{
+-    ARMCPU *cpu = ARM_CPU(cs);
+-
+-    if (strcmp(xmlname, "system-registers.xml") == 0) {
+-        return cpu->dyn_sysreg_feature.desc.xml;
+-    } else if (strcmp(xmlname, "sve-registers.xml") == 0) {
+-        return cpu->dyn_svereg_feature.desc.xml;
+-    } else if (strcmp(xmlname, "arm-m-system.xml") == 0) {
+-        return cpu->dyn_m_systemreg_feature.desc.xml;
+-#ifndef CONFIG_USER_ONLY
+-    } else if (strcmp(xmlname, "arm-m-secext.xml") == 0) {
+-        return cpu->dyn_m_secextreg_feature.desc.xml;
+-#endif
+-    }
+-    return NULL;
+-}
+-
+ void arm_cpu_register_gdb_regs_for_features(ARMCPU *cpu)
  {
-     return s->acpi != ON_OFF_AUTO_OFF;
-@@ -1730,6 +1784,20 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
-                               NULL, NULL);
-     object_class_property_set_description(oc, "acpi",
-                                           "Enable ACPI");
-+
-+    object_class_property_add_bool(oc, "iopmp", virt_get_iopmp,
-+                                   virt_set_iopmp);
-+    object_class_property_set_description(oc, "iopmp",
-+                                          "Set on/off to enable/disable "
-+                                          "iopmp device");
-+
-+    object_class_property_add_bool(oc, "iopmp-cascade",
-+                                   virt_get_iopmp_cascade,
-+                                   virt_set_iopmp_cascade);
-+    object_class_property_set_description(oc, "iopmp-cascade",
-+                                          "Set on/off to enable/disable "
-+                                          "iopmp2 device which is cascaded by "
-+                                          "iopmp1 device");
+     CPUState *cs = CPU(cpu);
+diff --git a/target/ppc/cpu_init.c b/target/ppc/cpu_init.c
+index a0178c3ce8..909d753b02 100644
+--- a/target/ppc/cpu_init.c
++++ b/target/ppc/cpu_init.c
+@@ -7380,9 +7380,6 @@ static void ppc_cpu_class_init(ObjectClass *oc, void *data)
+ #endif
+ 
+     cc->gdb_num_core_regs = 71;
+-#ifndef CONFIG_USER_ONLY
+-    cc->gdb_get_dynamic_xml = ppc_gdb_get_dynamic_xml;
+-#endif
+ #ifdef USE_APPLE_GDB
+     cc->gdb_read_register = ppc_cpu_gdb_read_register_apple;
+     cc->gdb_write_register = ppc_cpu_gdb_write_register_apple;
+diff --git a/target/ppc/gdbstub.c b/target/ppc/gdbstub.c
+index 8ca37b6bf9..f47878a67b 100644
+--- a/target/ppc/gdbstub.c
++++ b/target/ppc/gdbstub.c
+@@ -342,16 +342,6 @@ static void gdb_gen_spr_feature(CPUState *cs)
+ 
+     gdb_feature_builder_end(&builder);
+ }
+-
+-const char *ppc_gdb_get_dynamic_xml(CPUState *cs, const char *xml_name)
+-{
+-    PowerPCCPUClass *pcc = POWERPC_CPU_GET_CLASS(cs);
+-
+-    if (strcmp(xml_name, "power-spr.xml") == 0) {
+-        return pcc->gdb_spr.xml;
+-    }
+-    return NULL;
+-}
+ #endif
+ 
+ #if !defined(CONFIG_USER_ONLY)
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 3ee1e6ae03..ace400db1c 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1427,19 +1427,6 @@ static const gchar *riscv_gdb_arch_name(CPUState *cs)
+     }
  }
  
- static const TypeInfo virt_machine_typeinfo = {
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index e5c474b26e..5fa2944d29 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -54,6 +54,8 @@ struct RISCVVirtState {
+-static const char *riscv_gdb_get_dynamic_xml(CPUState *cs, const char *xmlname)
+-{
+-    RISCVCPU *cpu = RISCV_CPU(cs);
+-
+-    if (strcmp(xmlname, "riscv-csr.xml") == 0) {
+-        return cpu->dyn_csr_feature.xml;
+-    } else if (strcmp(xmlname, "riscv-vector.xml") == 0) {
+-        return cpu->dyn_vreg_feature.xml;
+-    }
+-
+-    return NULL;
+-}
+-
+ #ifndef CONFIG_USER_ONLY
+ static int64_t riscv_get_arch_id(CPUState *cs)
+ {
+@@ -1593,7 +1580,6 @@ static void riscv_cpu_common_class_init(ObjectClass *c, void *data)
+     cc->get_arch_id = riscv_get_arch_id;
+ #endif
+     cc->gdb_arch_name = riscv_gdb_arch_name;
+-    cc->gdb_get_dynamic_xml = riscv_gdb_get_dynamic_xml;
  
-     int fdt_size;
-     bool have_aclint;
-+    bool have_iopmp;
-+    bool have_iopmp_cascade;
-     RISCVVirtAIAType aia_type;
-     int aia_guests;
-     char *oem_id;
-@@ -82,12 +84,18 @@ enum {
-     VIRT_PCIE_MMIO,
-     VIRT_PCIE_PIO,
-     VIRT_PLATFORM_BUS,
--    VIRT_PCIE_ECAM
-+    VIRT_PCIE_ECAM,
-+    VIRT_IOPMP,
-+    VIRT_IOPMP2,
-+    VIRT_DMAC,
- };
- 
- enum {
-     UART0_IRQ = 10,
-     RTC_IRQ = 11,
-+    DMAC_IRQ = 12,
-+    IOPMP_IRQ = 13,
-+    IOPMP2_IRQ = 14,
-     VIRTIO_IRQ = 1, /* 1 to 8 */
-     VIRTIO_COUNT = 8,
-     PCIE_IRQ = 0x20, /* 32 to 35 */
+     object_class_property_add(c, "mvendorid", "uint32", cpu_get_mvendorid,
+                               cpu_set_mvendorid, NULL, NULL);
 -- 
-2.34.1
+2.42.0
 
 
