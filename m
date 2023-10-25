@@ -4,90 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E4E9C0032E
-	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Oct 2023 05:52:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 430FBC0032E
+	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Oct 2023 06:23:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qvWo2-00064B-3v; Wed, 25 Oct 2023 01:51:50 -0400
+	id 1qvXIe-0001lB-VP; Wed, 25 Oct 2023 02:23:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qvWo1-00063u-9V
- for qemu-riscv@nongnu.org; Wed, 25 Oct 2023 01:51:49 -0400
-Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qvWnz-00054U-Aw
- for qemu-riscv@nongnu.org; Wed, 25 Oct 2023 01:51:49 -0400
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-6be840283ceso4369532b3a.3
- for <qemu-riscv@nongnu.org>; Tue, 24 Oct 2023 22:51:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1698213106; x=1698817906;
- darn=nongnu.org; 
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=TBFIow2hH/JaDs5sLq6CgDtHJ0Hj4bpR/MWqGNToE5I=;
- b=oju6cHxRESNgrppMyt2TTJYTQW3YMGPPWu3mZEdOOkpsTtSL8MnwVe+q0Acb3x8u3F
- MHnMLNcfFkTOsRpSW1hcVxtucLJQ5Z4kVgdoE+qpqZPtt2ynI0mJuy8KqNFTld8RsoAR
- VdJRlUa8v+46dgGnMznJfPE8oiurW2QYvciNtTC6rjR/SWXl687gLi2J6hQ/XL3B5Tah
- o5EJUt6+tD4IX8ygClvc2RPHxu9YiiBN/hGKWdQ9znw8JfuBbPcH/ybhmTol3WQXKOsF
- cIC9vYcLQrGrAxinjLcAKFubzHT0OZGGMsudKKRGbcteTaPFLv4psWORsoE3gg3IgzEu
- IGzQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698213106; x=1698817906;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=TBFIow2hH/JaDs5sLq6CgDtHJ0Hj4bpR/MWqGNToE5I=;
- b=lpz/B5LmB4MJAyoaLOP/h+AZlCCxHgy/DuEK7Pr/4ZX+rdiuXDei6tTwGJLTuiqVrN
- tfqxblUZI3cnZcWBXe2MHaEE5FBnMX50fCt1HyrhVk53fhHmHMDDeYOlGKkBKX2j2mi+
- g9gr22alizEF9WV5p5L5IRHdPuTFLG4Zzy1QncF5uZWBhODaTNlFgpr+2UQ9K5GZSafH
- 67KiXpPQqlEzXtZEpiwEQQ5eKDQEFER3zD1b5rZLR+wU1BOPqyYLesZth+0/DRDo4NfK
- oFo/ZNxHvsJFno4GVaAoignw5LEtHrS0DtK/imsAjHyhOj/uMyLToSz9ggvmch7UAlSw
- Z8yw==
-X-Gm-Message-State: AOJu0Yx0KDeI2yPXKgoVoGaUcwTsmFpYlG6tUASP2nIYmH1LhICSCPUX
- WWGnEmgovrxbGH1q86sbcTnLeA==
-X-Google-Smtp-Source: AGHT+IFH+hJwgRuzHSSZmDydjWmFE8I05uJsIV5QOnZiPolNOuuonGfNr98aJ6Yh8Hs2/Mbf8yFSKw==
-X-Received: by 2002:a05:6a21:a592:b0:156:e1ce:d4a1 with SMTP id
- gd18-20020a056a21a59200b00156e1ced4a1mr6355785pzc.9.1698213105816; 
- Tue, 24 Oct 2023 22:51:45 -0700 (PDT)
-Received: from [157.82.204.207] ([157.82.204.207])
- by smtp.gmail.com with ESMTPSA id
- q21-20020a631f55000000b0059b2316be86sm8009719pgm.46.2023.10.24.22.51.43
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 24 Oct 2023 22:51:45 -0700 (PDT)
-Message-ID: <186c2393-0a88-46dc-a215-f9a5edddb47b@daynix.com>
-Date: Wed, 25 Oct 2023 14:51:41 +0900
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1qvXIa-0001jy-RC; Wed, 25 Oct 2023 02:23:25 -0400
+Received: from out30-119.freemail.mail.aliyun.com ([115.124.30.119])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1qvXIW-0001IE-Bn; Wed, 25 Oct 2023 02:23:23 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R131e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=7; SR=0;
+ TI=SMTPD_---0VutQvnl_1698214984; 
+Received: from 30.198.0.241(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0VutQvnl_1698214984) by smtp.aliyun-inc.com;
+ Wed, 25 Oct 2023 14:23:04 +0800
+Message-ID: <5b3078bd-9805-43cc-a7e7-660041477913@linux.alibaba.com>
+Date: Wed, 25 Oct 2023 14:22:06 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v14 00/18] plugins: Allow to read registers
+Subject: Re: [PATCH v3 1/6] target/riscv: add rva22u64 profile definition
 Content-Language: en-US
-To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
-Cc: Mikhail Tyutin <m.tyutin@yadro.com>,
- Aleksandr Anenkov <a.anenkov@yadro.com>, qemu-devel@nongnu.org,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-References: <20231019102657.129512-1-akihiko.odaki@daynix.com>
- <87cyx40wq6.fsf@linaro.org>
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <87cyx40wq6.fsf@linaro.org>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, palmer@rivosinc.com
+References: <20231020223951.357513-1-dbarboza@ventanamicro.com>
+ <20231020223951.357513-2-dbarboza@ventanamicro.com>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20231020223951.357513-2-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::435;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x435.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=115.124.30.119;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-119.freemail.mail.aliyun.com
+X-Spam_score_int: -98
+X-Spam_score: -9.9
+X-Spam_bar: ---------
+X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,29 +65,100 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2023/10/25 2:08, Alex Bennée wrote:
-> 
-> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
-> 
->> Based-on: <20231019101030.128431-1-akihiko.odaki@daynix.com>
->> ("[PATCH v5 0/6] gdbstub and TCG plugin improvements")
->>
->> I and other people in the University of Tokyo, where I research processor
->> design, found TCG plugins are very useful for processor design
->> exploration.
-> 
-> So I reviewed this on top of my gdbstub/next series so needed to make
-> some tweaks as I didn't have the riscv misa_mxl patches from above
-> because there still seems to be some debate about them.
 
-I think we have sorted out major design questions but two patches in 
-"[PATCH v5 0/6] gdbstub and TCG plugin improvements" still have no 
-Reviewed-by or Acked-by. Namely,
-   [PATCH v4 3/5] target/riscv: Move misa_mxl_max to class
-   [PATCH v4 4/5] target/riscv: Validate misa_mxl_max only once
+On 2023/10/21 6:39, Daniel Henrique Barboza wrote:
+> The rva22U64 profile, described in:
+>
+> https://github.com/riscv/riscv-profiles/blob/main/profiles.adoc#rva22-profiles
+>
+> Contains a set of CPU extensions aimed for 64-bit userspace
+> applications. Enabling this set to be enabled via a single user flag
+> makes it convenient to enable a predictable set of features for the CPU,
+> giving users more predicability when running/testing their workloads.
+>
+> QEMU implements all possible extensions of this profile. The exception
+> is Zicbop (Cache-Block Prefetch Operations) that is not available since
+> QEMU RISC-V does not implement a cache model. For this same reason all
+> the so called 'synthetic extensions' described in the profile that are
+> cache related are ignored (Za64rs, Zic64b, Ziccif, Ziccrse, Ziccamoa,
+> Zicclsm).
+>
+> An abstraction called RISCVCPUProfile is created to store the profile.
+> 'ext_offsets' contains mandatory extensions that QEMU supports. Same
+> thing with the 'misa_ext' mask. Optional extensions must be enabled
+> manually in the command line if desired.
+>
+> The design here is to use the common target/riscv/cpu.c file to store
+> the profile declaration and export it to the accelerator files. Each
+> accelerator is then responsible to expose it (or not) to users and how
+> to enable the extensions.
+>
+> Next patches will implement the profile for TCG and KVM.
+>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Acked-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>   target/riscv/cpu.c | 20 ++++++++++++++++++++
+>   target/riscv/cpu.h | 12 ++++++++++++
+>   2 files changed, 32 insertions(+)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index c64cd726f4..1b75b506c4 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1397,6 +1397,26 @@ Property riscv_cpu_options[] = {
+>       DEFINE_PROP_END_OF_LIST(),
+>   };
+>   
+> +/* Optional extensions left out: RVV, zfh, zkn, zks */
+> +static RISCVCPUProfile RVA22U64 = {
+> +    .name = "rva22u64",
+> +    .misa_ext = RVM | RVA | RVF | RVD | RVC,
 
-Can anyone interested in RISC-V look at them?
+Why not include RVI?
 
-Regards,
-Akihiko Odaki
+Zhiwei
+
+> +    .ext_offsets = {
+> +        CPU_CFG_OFFSET(ext_zicsr), CPU_CFG_OFFSET(ext_zihintpause),
+> +        CPU_CFG_OFFSET(ext_zba), CPU_CFG_OFFSET(ext_zbb),
+> +        CPU_CFG_OFFSET(ext_zbs), CPU_CFG_OFFSET(ext_zfhmin),
+> +        CPU_CFG_OFFSET(ext_zkt), CPU_CFG_OFFSET(ext_zicntr),
+> +        CPU_CFG_OFFSET(ext_zihpm), CPU_CFG_OFFSET(ext_zicbom),
+> +        CPU_CFG_OFFSET(ext_zicboz),
+> +
+> +        RISCV_PROFILE_EXT_LIST_END
+> +    }
+> +};
+> +
+> +RISCVCPUProfile *riscv_profiles[] = {
+> +    &RVA22U64, NULL,
+> +};
+> +
+>   static Property riscv_cpu_properties[] = {
+>       DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
+>   
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 7f61e17202..53c1970e0a 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -66,6 +66,18 @@ const char *riscv_get_misa_ext_description(uint32_t bit);
+>   
+>   #define CPU_CFG_OFFSET(_prop) offsetof(struct RISCVCPUConfig, _prop)
+>   
+> +typedef struct riscv_cpu_profile {
+> +    const char *name;
+> +    uint32_t misa_ext;
+> +    bool enabled;
+> +    bool user_set;
+> +    const int32_t ext_offsets[];
+> +} RISCVCPUProfile;
+> +
+> +#define RISCV_PROFILE_EXT_LIST_END -1
+> +
+> +extern RISCVCPUProfile *riscv_profiles[];
+> +
+>   /* Privileged specification version */
+>   enum {
+>       PRIV_VERSION_1_10_0 = 0,
 
