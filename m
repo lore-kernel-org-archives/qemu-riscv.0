@@ -4,85 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC4D9C25B67
-	for <qemu-riscv@archiver.kernel.org>; Thu, 26 Oct 2023 17:10:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4171C25B48
+	for <qemu-riscv@archiver.kernel.org>; Thu, 26 Oct 2023 17:37:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qw3s6-0003M9-Rt; Thu, 26 Oct 2023 13:10:14 -0400
+	id 1qw4I6-00027j-DD; Thu, 26 Oct 2023 13:37:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qw3s6-0003La-37
- for qemu-riscv@nongnu.org; Thu, 26 Oct 2023 13:10:14 -0400
-Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qw3s3-0006XJ-98
- for qemu-riscv@nongnu.org; Thu, 26 Oct 2023 13:10:13 -0400
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-6b1d1099a84so1134911b3a.1
- for <qemu-riscv@nongnu.org>; Thu, 26 Oct 2023 10:10:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1698340209; x=1698945009; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=F0Hs6qbZoi/V166+yHaDFOA8TvmCSR2cRnsvqZ1MD4I=;
- b=pHr6miAtAIzUPsnNJatGRBRYz7R+W8+KvKe++XKK90x5HMOdzJLpqIZwrGGQgiEsan
- MSAEUVVddFKf9cgN7LBvz99wPJ6JxbNiL8nVTR3+uAxxocVYLukGlEa5SjEfwSX4uj97
- 5pacxntzv4aXVaK0xj06mnIHilkNfoYjCXQuniSH48A2EeZCJBK0tTNqqGJyhfSkHXQ4
- 73hm/x9oqzbIqY1XRyIIHRk7di8ESdl2y2xMIuKr222gjA/+BX7MvSqT2IIHuYj0taGI
- 5m4Nq2vZ8PT4/5xvDF0Djdy7qUuiYKUkTHJd2g1cSgsV76u/MWUE8EBAm4wXwjnzmRSw
- mgdA==
+ (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
+ id 1qw4I5-00027F-MP
+ for qemu-riscv@nongnu.org; Thu, 26 Oct 2023 13:37:05 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
+ id 1qw4I3-0001Sr-10
+ for qemu-riscv@nongnu.org; Thu, 26 Oct 2023 13:37:05 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1698341819;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=58DSEKgNjOLGRuYvpzLT7WeIifJBOGKc9mpmnTiMhP0=;
+ b=M67NI3/m9X3BVvRUAqXJhwCj4FzaKq3hxgU/uQp787nj3/avJMQ42pPD4rR8dsP59RKfRV
+ tay5GAHGeXmWXjJuWeJLqbDoUBlkk1R/H4zNPtfZal6cVE9viz1V6AW3F8i/psPzdd74pm
+ R50xKT7G0jj1Rd6BEsSI9GMlzxII36o=
+Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
+ [209.85.219.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-461-PFdD00e2PNeNc2XSwhIoTw-1; Thu, 26 Oct 2023 13:36:58 -0400
+X-MC-Unique: PFdD00e2PNeNc2XSwhIoTw-1
+Received: by mail-qv1-f69.google.com with SMTP id
+ 6a1803df08f44-66d0b251a6aso15158466d6.2
+ for <qemu-riscv@nongnu.org>; Thu, 26 Oct 2023 10:36:58 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698340209; x=1698945009;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=F0Hs6qbZoi/V166+yHaDFOA8TvmCSR2cRnsvqZ1MD4I=;
- b=ONdtUbsD0TwrMLaja151EjL3L2dtDb9DTc8dnkj58cclKqTExHXD3RinCfwEbxojLg
- 34MnBZL76fYgT7Qyt/PmYFZOZUe0fG31PUnpB5t5J1UPXBheTLFBkdZZhxDpGUCZj7Zo
- mLh2/dXkxnNG422SIG5RZgphD1HCgxFLy3aaNlhLZ0PBIOl1HJ8k4ew2ZCE1wkRzpBJk
- Jba0UJdNasPQw1YdS6swVX6JMsvPeEaGRvemlyE3cAbaGd/rzzCBE9VNEXhxt+JzUZED
- mxNyHLGQvd9ePWMBJLrU9rjBPfW9fbK2dP86OoHLychq+ch6O4eTLE6ZYNZikMBmoTIW
- p8hQ==
-X-Gm-Message-State: AOJu0YzKMV4tm5h2PmeI5IL7FXzWuGHEfKo+BxzMFLXEgB6dwBRqbHVM
- YmLa9sgFT1FDq654KMeBin3C+g==
-X-Google-Smtp-Source: AGHT+IH8upnJSORn/tUfuuPqTwaWP23aSETOboJsl83XKg0H8pDvdKnEW8mUmVzVghlkampFjv9JaQ==
-X-Received: by 2002:a05:6a20:a120:b0:17e:4454:edc3 with SMTP id
- q32-20020a056a20a12000b0017e4454edc3mr436380pzk.47.1698340208874; 
- Thu, 26 Oct 2023 10:10:08 -0700 (PDT)
-Received: from [192.168.68.107] ([191.255.2.33])
- by smtp.gmail.com with ESMTPSA id
- m188-20020a6258c5000000b006bdd1ce6915sm11922143pfb.193.2023.10.26.10.10.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 26 Oct 2023 10:10:08 -0700 (PDT)
-Message-ID: <32d9dbae-2d43-4797-8245-c04540649083@ventanamicro.com>
-Date: Thu, 26 Oct 2023 14:10:04 -0300
+ d=1e100.net; s=20230601; t=1698341818; x=1698946618;
+ h=cc:to:subject:message-id:date:in-reply-to:mime-version:references
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=58DSEKgNjOLGRuYvpzLT7WeIifJBOGKc9mpmnTiMhP0=;
+ b=tQpk/4LE6I14h/bg8p+X0e8wCriv+npXqqfKRP6Xf5Lnq6K5xm/OqVae1IVxM/Frjp
+ hIcLiq87oxegCOFs0/BEvRxOiSaUUv1YpJpxuIWJi+zWqNwPT/q478rvQEfH2L6Sud9D
+ 0AYrd52Ju9lAefdcHrTZBGWsiVYsagh5iv9wvh+AwxGlGDHPuK0Ks6MlBfH/n6mR3NOu
+ VDDoaXeg3IioOqrW+ZDZN4BH416+OhsOZnOQJA/fo0r6EdIvRR9LFsy5vKNGhkwEntjO
+ xlcNY0wf7zYOeyvaxdHS/jLPhpwb40SL+Zxay4NrrIgjtZkALwQPLWB4Bhsn5cQJSnrI
+ d98A==
+X-Gm-Message-State: AOJu0Yw4bwLjmPQTQ5VAbJSvDZdQ8QLDtDs1OdJIwhlIKHiXAnNKVBfz
+ quhyM76T9ypNPg3cltW5Tq7JNBIqGaMAxuGRulm5oqq/TceZVmbfNenXeR3DgdHtlyHdfGcdIex
+ wxYZZX9YVQhqlW7I/rX4iVC7QX2bmUV4=
+X-Received: by 2002:ac8:5b87:0:b0:41e:2495:41e1 with SMTP id
+ a7-20020ac85b87000000b0041e249541e1mr300858qta.37.1698341818413; 
+ Thu, 26 Oct 2023 10:36:58 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHihsc5clZC9TicAqwOudHEVtqOcCUBIgei2ku+EvFNATLj0k1T4dxUt2HoVEXuSyTcWZnOZ8/5tpA+02olDdw=
+X-Received: by 2002:ac8:5b87:0:b0:41e:2495:41e1 with SMTP id
+ a7-20020ac85b87000000b0041e249541e1mr300835qta.37.1698341818097; Thu, 26 Oct
+ 2023 10:36:58 -0700 (PDT)
+Received: from 744723338238 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 26 Oct 2023 10:36:57 -0700
+From: Andrea Bolognani <abologna@redhat.com>
+References: <20231020223951.357513-1-dbarboza@ventanamicro.com>
+ <20231020223951.357513-4-dbarboza@ventanamicro.com>
+ <20231023-2018025adea3ffaebbbefe23@orel>
+ <0e66af36-bd36-4b42-b901-ed726af207b7@ventanamicro.com>
+ <20231023-b0eb8f3478a61875a22de747@orel>
+ <CABJz62MN5ha-JH=i+PAu=7hZspV8g85jeAc=hRam0Z1f4fPDEg@mail.gmail.com>
+ <20231026-c8c8065150673a1f48f41dd5@orel>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 01/10] target/riscv/tcg: add 'zic64b' support
-Content-Language: en-US
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com
-References: <20231025234459.581697-1-dbarboza@ventanamicro.com>
- <20231025234459.581697-2-dbarboza@ventanamicro.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20231025234459.581697-2-dbarboza@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x434.google.com
+In-Reply-To: <20231026-c8c8065150673a1f48f41dd5@orel>
+Date: Thu, 26 Oct 2023 10:36:57 -0700
+Message-ID: <CABJz62N0D2x1kP+sPi7xrDMMyG080BesyeAR+6HsnVt0-yi=TQ@mail.gmail.com>
+Subject: Re: [PATCH v3 3/6] target/riscv/tcg: add user flag for profile support
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, 
+ alistair.francis@wdc.com, bmeng@tinylab.org, liweiwei@iscas.ac.cn, 
+ zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=abologna@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,175 +105,128 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Thu, Oct 26, 2023 at 05:14:49PM +0200, Andrew Jones wrote:
+> On Thu, Oct 26, 2023 at 07:36:21AM -0700, Andrea Bolognani wrote:
+> > On Mon, Oct 23, 2023 at 07:35:16PM +0200, Andrew Jones wrote:
+> > > On Mon, Oct 23, 2023 at 02:00:00PM -0300, Daniel Henrique Barboza wrote:
+> > > > On 10/23/23 05:16, Andrew Jones wrote:
+> > > > > Hmm, I'm not sure I agree with special-casing profiles like this. I think
+> > > > > the left-to-right processing should be consistent for all. I'm also not
+> > > > > sure we should always warn when disabling a profile. For example, if a
+> > > > > user does
+> > > > >
+> > > > >   -cpu rv64,rva22u64=true,rva22u64=false
+> > > > >
+> > > > > then they'll get a warning, even though all they're doing is restoring the
+> > > > > cpu model. While that looks like an odd thing to do, a script may be
+> > > > > adding the rva22u64=true and the rva22u64=false is the user input which
+> > > > > undoes what the script did.
+> > > >
+> > > > QEMU options do not work with a "the user enabled then disabled the same option,
+> > > > thus it'll count as nothing happened" logic. The last instance of the option will
+> > > > overwrite all previous instances. In the example you mentioned above the user would
+> > > > disable all mandatory extensions of rva22u64 in the CPU, doesn't matter if the
+> > > > same profile was enabled beforehand.
+> > >
+> > > Yup, I'm aware, but I keep thinking that we'll only be using profiles with
+> > > a base cpu type. If you start with nothing (a base) and then add a profile
+> > > and take the same one away, you shouldn't be taking away anything else. I
+> > > agree that if you use a profile on some cpu type that already enabled a
+> > > bunch of stuff itself, then disabling a profile would potentially remove
+> > > some of those too, but mixing cpu types that have their own extensions and
+> > > profiles seems like a great way to confuse oneself as to what extensions
+> > > will be present.  IOW, we should be adding a base cpu type at the same
+> > > time we're adding these profiles.
+> >
+> > The question that keep bouncing around my head is: why would we even
+> > allow disabling profiles?
+> >
+> > It seems to me that it only makes things more complicated, and I
+> > really can't see the use case for it.
+> >
+> > Enabling additional features on top of a profile? There's obvious
+> > value in that, so that you can model hardware that implements
+> > optional and proprietary extensions. Enabling multiple profiles?
+> > You've convinced me that it's useful. But disabling profiles, I just
+> > don't see it. I believe Alistair was similarly unconvinced.
+>
+> The only value I see in allowing a profile to be disabled is to undo the
+> enabling of the profile by specifying the profile as 'off' to the right of
+> it being specified as 'on'. That may seem pointless, but scripts take
+> advantage of being able to do that. Besides that one possible use case,
+> there isn't much use in disabling profiles, but treating profile
+> properties like every other boolean property makes the UI consistent and
+> should actually simplify the code.
 
-On 10/25/23 20:44, Daniel Henrique Barboza wrote:
-> zic64b is defined in the RVA22U64 profile [1] as a named feature for
-> "Cache blocks must be 64 bytes in size, naturally aligned in the address
-> space".  It's a fantasy name for 64 bytes cache blocks. RVA22U64
-> mandates this feature, meaning that applications using it expects 64
-> bytes cache blocks.
-> 
-> In theory we're already compliant to it since we're using 64 bytes cache
-> block sizes by default, but nothing is stopping users from enabling a
-> profile and changing the cache block size at the same time.
-> 
-> We'll add zic64b as a 'named feature', not a regular extension, in a
-> sense that we won't write it in riscv,isa. It'll be used solely to track
-> whether the user changed cache sizes and if we should warn about it.
-> 
-> zic64b is default to 'true' since we're already using 64 bytes blocks.
-> If any cache block size (cbom_blocksize or cboz_blocksize) is changed to
-> something different than 64, zic64b is set to 'false' and, if zic64b was
-> set to 'true' in the command line, also throw an user warning.
-> 
-> Our profile implementation set mandatory extensions as if users enabled
-> them in the command line, so this logic will extend to the future RVA22U64
-> implementation as well.
+The code might be simpler, but the result is an additional burden on
+the user, as the interactions between the various flags become much
+more nuanced and less intuitive. I'm not convinced the trade-off is a
+worthwhile one.
 
-I talked with Andrew offline. We think that, ***for now***, it's overcomplicated
-and a bit confusing to have these half-extensions to be user set. Most of them
-are internal aspects of the implementation that we're already complying or
-something that do not apply to us (e.g. cache-related features).
+For the script override scenario, fair enough, but once again I feel
+that we're making things much worse in the general case in order to
+cater to a much narrower one. Script authors will naturally learn to
+avoid hardcoding profile enablement once users have reported enough
+failures resulting from that.
 
-We'll not show these flags to users. We'll also add more code in query-cpu-model-expansion
-to expose them, given that they won't be ordinary user flags like the others.
+> > > > > As far as warnings go, it'd be nice to warn when mandatory profile
+> > > > > extensions are disabled from an enabled profile. Doing that might be
+> > > > > useful for debug, but users which do it without being aware they're
+> > > > > "breaking" the profile may learn from that warning. Note, the warning
+> > > > > should only come when the profile is actually enabled and when the
+> > > > > extension would actually be disabled, i.e.
+> > > > >
+> > > > >   -cpu rv64,rva22u64=true,c=off
+> > > > >
+> > > > > should warn
+> > > > >
+> > > > >   -cpu rv64,c=off,rva22u64=true
+> > > > >
+> > > > > should not warn (rva22u64 overrides c=off since it's to the right)
+> > > > >
+> > > > >   -cpu rv64,rva22u64=true,rva22u64=false,c=off
+> > > > >
+> > > > > should not warn (rva22u64 is not enabled)
+> >
+> > I think these should be hard errors, not warnings.
+> >
+> > If you're enabling a profile and then disabling an extension that's
+> > mandatory for that profile, you've invalidated the profile. You've
+> > asked for a configuration that doesn't make any sense: you can't have
+> > a CPU that both implements a profile and lacks one of its mandatory
+> > extensions.
+>
+> Given a platform which implements a profile which mandates extension E and
+> a need to debug E or test behavior where E is [incorrectly] absent, you'll
+> need to expand the profile first, listing each of the other extensions
+> manually. It'd be much faster to specify the profile, take away the
+> extension, and ignore the warning.
 
-As for this patch, we'll not no longer expose zic64b to users. It'll be an internal
-flag that we'll enable or disable based on the blocksizes alone.
+I understand the appeal, I just think that regular users should be
+prevented from stumbling into this kind of expert-level,
+intentionally-broken configuration by mistake.
 
-I emphasized 'for now' at the start because there's always the possibility of having
-to treat these named extensions more like regular expansions, adding them in riscv,isa
-and so on. That's not the case for now, so let's simplify while we can.
+> > QEMU users could easily miss the warning. libvirt users won't see it
+> > at all. It's a user error and it needs to be treated as such IMO.
+>
+> I do agree with the concern that warnings will be missed/ignored. Maybe
+> QEMU needs something like -Werror for stuff like this, i.e.
+>
+>  -cpu rv64,error-on-extension-warnings=on,profile-A=on,extension-of-A=off
+>
+> would error out, but, without the special property, just warn. Or, flip
+> the default behavior around with
+>
+>  -cpu rv64,ignore-extension-errors=on,profile-A=on,extension-of-A=off
+>
+> which would either silently proceed or just warn, but, without the
+> special property, error out. libvirt would default to the error out
+> case, whichever that one is, but also provide an element to turn off
+> erroring-out.
 
+I would be okay with something along these lines.
 
-Thanks,
+-- 
+Andrea Bolognani / Red Hat / Virtualization
 
-Daniel
-
-
-> 
-> [1] https://github.com/riscv/riscv-profiles/releases/download/v1.0/profiles.pdf
-> 
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->   target/riscv/cpu.c         | 12 ++++++++++--
->   target/riscv/cpu.h         |  3 +++
->   target/riscv/cpu_cfg.h     |  1 +
->   target/riscv/tcg/tcg-cpu.c | 26 ++++++++++++++++++++++++++
->   4 files changed, 40 insertions(+), 2 deletions(-)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index f40da4c661..5095f093ba 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1394,6 +1394,12 @@ const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] = {
->       DEFINE_PROP_END_OF_LIST(),
->   };
->   
-> +const RISCVCPUMultiExtConfig riscv_cpu_named_features[] = {
-> +    MULTI_EXT_CFG_BOOL("zic64b", zic64b, true),
-> +
-> +    DEFINE_PROP_END_OF_LIST(),
-> +};
-> +
->   /* Deprecated entries marked for future removal */
->   const RISCVCPUMultiExtConfig riscv_cpu_deprecated_exts[] = {
->       MULTI_EXT_CFG_BOOL("Zifencei", ext_zifencei, true),
-> @@ -1423,8 +1429,10 @@ Property riscv_cpu_options[] = {
->       DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
->       DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
->   
-> -    DEFINE_PROP_UINT16("cbom_blocksize", RISCVCPU, cfg.cbom_blocksize, 64),
-> -    DEFINE_PROP_UINT16("cboz_blocksize", RISCVCPU, cfg.cboz_blocksize, 64),
-> +    DEFINE_PROP_UINT16("cbom_blocksize", RISCVCPU,
-> +                       cfg.cbom_blocksize, CB_DEF_VALUE),
-> +    DEFINE_PROP_UINT16("cboz_blocksize", RISCVCPU,
-> +                       cfg.cboz_blocksize, CB_DEF_VALUE),
->   
->       DEFINE_PROP_END_OF_LIST(),
->   };
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 8efc4d83ec..ee9abe61d6 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -64,6 +64,8 @@ extern const uint32_t misa_bits[];
->   const char *riscv_get_misa_ext_name(uint32_t bit);
->   const char *riscv_get_misa_ext_description(uint32_t bit);
->   
-> +#define CB_DEF_VALUE 64
-> +
->   #define CPU_CFG_OFFSET(_prop) offsetof(struct RISCVCPUConfig, _prop)
->   
->   /* Privileged specification version */
-> @@ -745,6 +747,7 @@ typedef struct RISCVCPUMultiExtConfig {
->   extern const RISCVCPUMultiExtConfig riscv_cpu_extensions[];
->   extern const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[];
->   extern const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[];
-> +extern const RISCVCPUMultiExtConfig riscv_cpu_named_features[];
->   extern const RISCVCPUMultiExtConfig riscv_cpu_deprecated_exts[];
->   extern Property riscv_cpu_options[];
->   
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> index 6eef4a51ea..b6693320d3 100644
-> --- a/target/riscv/cpu_cfg.h
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -107,6 +107,7 @@ struct RISCVCPUConfig {
->       bool ext_smepmp;
->       bool rvv_ta_all_1s;
->       bool rvv_ma_all_1s;
-> +    bool zic64b;
->   
->       uint32_t mvendorid;
->       uint64_t marchid;
-> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> index 093bda2e75..ac5f65a757 100644
-> --- a/target/riscv/tcg/tcg-cpu.c
-> +++ b/target/riscv/tcg/tcg-cpu.c
-> @@ -264,6 +264,27 @@ static void riscv_cpu_disable_priv_spec_isa_exts(RISCVCPU *cpu)
->       }
->   }
->   
-> +static void riscv_cpu_validate_zic64b(RISCVCPU *cpu)
-> +{
-> +    const char *warn = "zic64b set to 'true' but %s is set to %u. "
-> +                       "zic64b changed to 'false'";
-> +    bool send_warn = cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(zic64b));
-> +
-> +    if (cpu->cfg.cbom_blocksize != CB_DEF_VALUE) {
-> +        cpu->cfg.zic64b = false;
-> +        if (send_warn) {
-> +            warn_report(warn, "cbom_blocksize", cpu->cfg.cbom_blocksize);
-> +        }
-> +    }
-> +
-> +    if (cpu->cfg.cboz_blocksize != CB_DEF_VALUE) {
-> +        cpu->cfg.zic64b = false;
-> +        if (send_warn) {
-> +            warn_report(warn, "cboz_blocksize", cpu->cfg.cboz_blocksize);
-> +        }
-> +    }
-> +}
-> +
->   /*
->    * Check consistency between chosen extensions while setting
->    * cpu->cfg accordingly.
-> @@ -394,6 +415,10 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
->           return;
->       }
->   
-> +    if (cpu->cfg.zic64b) {
-> +        riscv_cpu_validate_zic64b(cpu);
-> +    }
-> +
->       if (cpu->cfg.ext_zvfh) {
->           cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvfhmin), true);
->       }
-> @@ -889,6 +914,7 @@ static void riscv_cpu_add_user_properties(Object *obj)
->       riscv_cpu_add_multiext_prop_array(obj, riscv_cpu_extensions);
->       riscv_cpu_add_multiext_prop_array(obj, riscv_cpu_vendor_exts);
->       riscv_cpu_add_multiext_prop_array(obj, riscv_cpu_experimental_exts);
-> +    riscv_cpu_add_multiext_prop_array(obj, riscv_cpu_named_features);
->   
->       riscv_cpu_add_multiext_prop_array(obj, riscv_cpu_deprecated_exts);
->   
 
