@@ -4,75 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A557AC25B6B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 26 Oct 2023 12:26:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B55FC25B48
+	for <qemu-riscv@archiver.kernel.org>; Thu, 26 Oct 2023 12:31:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qvzRg-0003Z4-Ra; Thu, 26 Oct 2023 08:26:42 -0400
+	id 1qvzW6-0004zo-2Y; Thu, 26 Oct 2023 08:31:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qvzR1-0003Mf-OA
- for qemu-riscv@nongnu.org; Thu, 26 Oct 2023 08:26:01 -0400
-Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1qvzW4-0004zN-Jx
+ for qemu-riscv@nongnu.org; Thu, 26 Oct 2023 08:31:12 -0400
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qvzQo-0002Pi-El
- for qemu-riscv@nongnu.org; Thu, 26 Oct 2023 08:25:56 -0400
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-4081ccf69dcso11808185e9.0
- for <qemu-riscv@nongnu.org>; Thu, 26 Oct 2023 05:25:44 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1qvzW2-0006Xq-J8
+ for qemu-riscv@nongnu.org; Thu, 26 Oct 2023 08:31:12 -0400
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-1c9d407bb15so7216715ad.0
+ for <qemu-riscv@nongnu.org>; Thu, 26 Oct 2023 05:31:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1698323143; x=1698927943; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1698323469; x=1698928269; darn=nongnu.org;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TXrAQWcG8F0fl+4+WVR67XkHZG1E3QRjwUGD520B8nY=;
- b=AHOepdEbM8PX/AK3GkphtthjjIaw6B5e4+SWwVcO+ecvrBbGavOaoM7srZtPA69VHX
- 6WAYoCLT+bpiQDoIr/a2SXXI6dhPKLv+0Va1Bb/ir/wQk84uqZTDnUNIzmK2wdFV+2OE
- vudmpp9DOEL/pg6j5oTQsNJhOKlzr2uUWto0IHXFA/paQ5imCdfBGUmu+HijNPj5WlJO
- YPBu2TMyyiDJx4++JJ/x0r+mEdR68eCe1oS+1YjmIWYNZjInDNny8c5EQhAFKxdC/pdC
- QINaVTieBwcqKccQxLl/8m02gFJLcNuH3az/oHiWQsCG7oGpneBlGYRMdMl1JzhqeMSz
- CN8w==
+ bh=qT2vp+gxewl4eJFh380Hgn2+Gi/7MoBdgjxJhKQ4Q9k=;
+ b=brBdChKh+h2GDmqPjlCFbNZX3rJaeaH0kPoZFBY6+jSEE8BQZdctKNaxV0BGcviMyD
+ jqrlUPcfzrfdfM3r5pQNlAacWdY2yVF34RC8rT+S2DJUdQHDglxAbhQP9KQoK8IwMYAZ
+ 3gYBGu6LsJpzczhXYq+H43GUSV9kLNHaw9NJTdBl+bq8T1eOseFc3EO3VkGtcw076fDv
+ 2POXsdDaO1ztadae+zrVsueKTZsFm2vIYPXd2A/Xe2pDawYv302xvLPEC7uZMqbZ9lnx
+ sLyIQUMEjDuNGL+I8nIqhlA2CqyHVthwqG+d2t1nLCcVUvkdT4ms++WS+SIuHOdHohfQ
+ 5OJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698323143; x=1698927943;
+ d=1e100.net; s=20230601; t=1698323469; x=1698928269;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TXrAQWcG8F0fl+4+WVR67XkHZG1E3QRjwUGD520B8nY=;
- b=Kmmio0WAyDniNMFSlEqkd/rqqj+pytgc2BD+HHK9/e6xJLy96hMACkp7a7hsE2lApc
- cKSsOFIZL2DWS3tOWFTGOl9mMIx7R4ByQqYLn12ysmpjDrK1mFi7MXQEC+Byq7mVXxQc
- dZaVaxOcd0Km6tkmTQV8K8KJGIpUDzyebxXesh/o0LL/SyT23L2m+huiMYtRgsVA6gpQ
- G3G/NXfNMBZLsJQ+rqnjvi8AyCi3nrMgILNj/nCRSZTpDnjbOZdIHx1mWAQ/hgzK1Ox8
- FddiC2LWsxT+Nxe4jCF4OfoEcsknABA61N3ap+PbonR27A4EfvDarsbR2L06QKWF0fOn
- 0KmA==
-X-Gm-Message-State: AOJu0YwKBp17EmWigPVcrKquMTP/hLh6SFO+FdIx//ss5M5rui5Kq1Eb
- Il2UDeLA7tBTHTiSqxlVVSGg4A==
-X-Google-Smtp-Source: AGHT+IFzRPqUHurvfX+uiBRDNvf9JCBHt04ZV9IxpGbspn/bkoeTA4fnjWTEtPDXvawLfgMaioAk1A==
-X-Received: by 2002:a05:600c:1713:b0:400:5962:6aa9 with SMTP id
- c19-20020a05600c171300b0040059626aa9mr2749375wmn.11.1698323143228; 
- Thu, 26 Oct 2023 05:25:43 -0700 (PDT)
-Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
- by smtp.gmail.com with ESMTPSA id
- m8-20020a7bcb88000000b0040684abb623sm2407241wmi.24.2023.10.26.05.25.42
+ bh=qT2vp+gxewl4eJFh380Hgn2+Gi/7MoBdgjxJhKQ4Q9k=;
+ b=hmFlMunyrcKmCoPvmC46SdUGolhXdmNR/e5sY6vjOwr84fhAhrOatoaa8fkcuGawHP
+ /6Ju4IgOV24TJK4Vy3tqYpkM5v1T4H6LhxrELGNQRJc1MzjJYCxu82RyxB0LhRuPbQVb
+ d1KizkTn9fYQi6nD/z7tod9gSp1pjvKe/ANcF4f7OFvm+TtI/rXeNSNgpcns1XHnRNBW
+ 7n59IySENe1+LqFwgtaER8skgQkEoAz3rMZk3MkOlsHGJnfoS0LcePR2d4+NRJMADEtw
+ Ym/MeMDqHo9g6cjfBKPdbBU80QM9u6QHysHrmUIcT0vLzgTwi2vqPPbE+4GFrX4KI07/
+ byJA==
+X-Gm-Message-State: AOJu0YwzRWqw8WiSYDpgRSykZmFFXx0dfyaUne+ckxtnUsPdoXzUSGv1
+ /9j+BSbiTjEaFUTOkqkdiK0VTA==
+X-Google-Smtp-Source: AGHT+IFXVFn85bJ4Q2KdCStqxw1KdlbLwY9OM9fqXfmfwk0mQSbPjydFWZ9XPTmnigM3Nl2ZzTliuQ==
+X-Received: by 2002:a17:902:d506:b0:1c2:1068:1f4f with SMTP id
+ b6-20020a170902d50600b001c210681f4fmr19948403plg.17.1698323469022; 
+ Thu, 26 Oct 2023 05:31:09 -0700 (PDT)
+Received: from sunil-laptop ([106.51.188.78]) by smtp.gmail.com with ESMTPSA id
+ q9-20020a170902dac900b001b9c960ffeasm10871782plx.47.2023.10.26.05.31.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Oct 2023 05:25:42 -0700 (PDT)
-Date: Thu, 26 Oct 2023 14:25:41 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
-Subject: Re: [PATCH v5 01/10] target/riscv/tcg: add 'zic64b' support
-Message-ID: <20231026-6aa9cc9273d03e81160a477f@orel>
-References: <20231025234459.581697-1-dbarboza@ventanamicro.com>
- <20231025234459.581697-2-dbarboza@ventanamicro.com>
+ Thu, 26 Oct 2023 05:31:08 -0700 (PDT)
+Date: Thu, 26 Oct 2023 18:00:57 +0530
+From: Sunil V L <sunilvl@ventanamicro.com>
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Shannon Zhao <shannon.zhaosl@gmail.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Gerd Hoffmann <kraxel@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Anup Patel <apatel@ventanamicro.com>,
+ Atish Kumar Patra <atishp@rivosinc.com>, Haibo Xu <haibo1.xu@intel.com>
+Subject: Re: [PATCH v4 01/13] hw/arm/virt-acpi-build.c: Migrate fw_cfg
+ creation to common location
+Message-ID: <ZTpcAXO3GCGYjhNB@sunil-laptop>
+References: <20231025200713.580814-1-sunilvl@ventanamicro.com>
+ <20231025200713.580814-2-sunilvl@ventanamicro.com>
+ <20231026-6b31593481fe2476e49197e5@orel>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20231025234459.581697-2-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::333;
- envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x333.google.com
+In-Reply-To: <20231026-6b31593481fe2476e49197e5@orel>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x634.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -95,97 +110,89 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Oct 25, 2023 at 08:44:50PM -0300, Daniel Henrique Barboza wrote:
-> zic64b is defined in the RVA22U64 profile [1] as a named feature for
-> "Cache blocks must be 64 bytes in size, naturally aligned in the address
-> space".  It's a fantasy name for 64 bytes cache blocks. RVA22U64
-> mandates this feature, meaning that applications using it expects 64
-> bytes cache blocks.
+On Thu, Oct 26, 2023 at 10:15:00AM +0200, Andrew Jones wrote:
+> On Thu, Oct 26, 2023 at 01:37:01AM +0530, Sunil V L wrote:
+> ...
+> > diff --git a/hw/nvram/fw_cfg-acpi.c b/hw/nvram/fw_cfg-acpi.c
+> > new file mode 100644
+> > index 0000000000..eddaffc09b
+> > --- /dev/null
+> > +++ b/hw/nvram/fw_cfg-acpi.c
+> > @@ -0,0 +1,44 @@
+> > +/*
+> > + * Add fw_cfg device in DSDT
+> > + *
+> > + * Copyright (C) 2008-2010  Kevin O'Connor <kevin@koconnor.net>
+> > + * Copyright (C) 2006 Fabrice Bellard
+> > + * Copyright (C) 2013 Red Hat Inc
+> > + *
+> > + * Author: Michael S. Tsirkin <mst@redhat.com>
+> > + *
+> > + * Copyright (c) 2015 HUAWEI TECHNOLOGIES CO.,LTD.
+> > + *
+> > + * Author: Shannon Zhao <zhaoshenglong@huawei.com>
+> > + *
+> > + * This program is free software; you can redistribute it and/or modify
+> > + * it under the terms of the GNU General Public License as published by
+> > + * the Free Software Foundation; either version 2 of the License, or
+> > + * (at your option) any later version.
+> > +
+> > + * This program is distributed in the hope that it will be useful,
+> > + * but WITHOUT ANY WARRANTY; without even the implied warranty of
+> > + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+> > + * GNU General Public License for more details.
+> > +
+> > + * You should have received a copy of the GNU General Public License along
+> > + * with this program; if not, see <http://www.gnu.org/licenses/>.
 > 
-> In theory we're already compliant to it since we're using 64 bytes cache
-> block sizes by default, but nothing is stopping users from enabling a
-> profile and changing the cache block size at the same time.
+> I don't recommend creating new files with the long form GPL instead of an
+> SPDX. I can't find a QEMU SPDX policy to point at, but pretty much every
+> project I work on has been moving towards SPDX, and usually with a format
+> policy. I presume QEMU will either slowly work its way there too or
+> someday do a mass change. New files can participate in an unofficial slow
+> transition now, rather than have to be touched again in a mass change.
 > 
-> We'll add zic64b as a 'named feature', not a regular extension, in a
-> sense that we won't write it in riscv,isa. It'll be used solely to track
-> whether the user changed cache sizes and if we should warn about it.
-> 
-> zic64b is default to 'true' since we're already using 64 bytes blocks.
-> If any cache block size (cbom_blocksize or cboz_blocksize) is changed to
-> something different than 64, zic64b is set to 'false' and, if zic64b was
-> set to 'true' in the command line, also throw an user warning.
-> 
-> Our profile implementation set mandatory extensions as if users enabled
-> them in the command line, so this logic will extend to the future RVA22U64
-> implementation as well.
-> 
-> [1] https://github.com/riscv/riscv-profiles/releases/download/v1.0/profiles.pdf
-> 
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->  target/riscv/cpu.c         | 12 ++++++++++--
->  target/riscv/cpu.h         |  3 +++
->  target/riscv/cpu_cfg.h     |  1 +
->  target/riscv/tcg/tcg-cpu.c | 26 ++++++++++++++++++++++++++
->  4 files changed, 40 insertions(+), 2 deletions(-)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index f40da4c661..5095f093ba 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1394,6 +1394,12 @@ const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] = {
->      DEFINE_PROP_END_OF_LIST(),
->  };
->  
-> +const RISCVCPUMultiExtConfig riscv_cpu_named_features[] = {
-> +    MULTI_EXT_CFG_BOOL("zic64b", zic64b, true),
-> +
-> +    DEFINE_PROP_END_OF_LIST(),
-> +};
-> +
->  /* Deprecated entries marked for future removal */
->  const RISCVCPUMultiExtConfig riscv_cpu_deprecated_exts[] = {
->      MULTI_EXT_CFG_BOOL("Zifencei", ext_zifencei, true),
-> @@ -1423,8 +1429,10 @@ Property riscv_cpu_options[] = {
->      DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
->      DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
->  
-> -    DEFINE_PROP_UINT16("cbom_blocksize", RISCVCPU, cfg.cbom_blocksize, 64),
-> -    DEFINE_PROP_UINT16("cboz_blocksize", RISCVCPU, cfg.cboz_blocksize, 64),
-> +    DEFINE_PROP_UINT16("cbom_blocksize", RISCVCPU,
-> +                       cfg.cbom_blocksize, CB_DEF_VALUE),
-> +    DEFINE_PROP_UINT16("cboz_blocksize", RISCVCPU,
-> +                       cfg.cboz_blocksize, CB_DEF_VALUE),
->  
->      DEFINE_PROP_END_OF_LIST(),
->  };
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 8efc4d83ec..ee9abe61d6 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -64,6 +64,8 @@ extern const uint32_t misa_bits[];
->  const char *riscv_get_misa_ext_name(uint32_t bit);
->  const char *riscv_get_misa_ext_description(uint32_t bit);
->  
-> +#define CB_DEF_VALUE 64
-> +
->  #define CPU_CFG_OFFSET(_prop) offsetof(struct RISCVCPUConfig, _prop)
->  
->  /* Privileged specification version */
-> @@ -745,6 +747,7 @@ typedef struct RISCVCPUMultiExtConfig {
->  extern const RISCVCPUMultiExtConfig riscv_cpu_extensions[];
->  extern const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[];
->  extern const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[];
-> +extern const RISCVCPUMultiExtConfig riscv_cpu_named_features[];
+Sure. Let me update this in the next revision.
 
-We should add a line like
-
-  riscv_obj_add_multiext_props(obj, qdict_out, riscv_cpu_named_features);
-
-to cpu-model-expansion. zic64b is actually exactly what we need there in
-order to describe the blocksize with a boolean, since we don't have any
-way to expose the blocksize right now with that query.
+> ...
+> > diff --git a/include/hw/nvram/fw_cfg_acpi.h b/include/hw/nvram/fw_cfg_acpi.h
+> > new file mode 100644
+> > index 0000000000..1c863df329
+> > --- /dev/null
+> > +++ b/include/hw/nvram/fw_cfg_acpi.h
+> > @@ -0,0 +1,15 @@
+> > +/*
+> > + * ACPI support for fw_cfg
+> > + *
+> > + * SPDX-License-Identifier: GPL-2.0-or-later
+> > + */
+> 
+> While QEMU doesn't appear to have an SPDX policy with formatting rules,
+> I would format this as
+> 
+> /* SPDX-License-Identifier: GPL-2.0-or-later */
+> /*
+>  * ACPI support for fw_cfg
+>  */
+> 
+> And the source file above as
+> 
+> // SPDX-License-Identifier: GPL-2.0-or-later
+> /*
+>  * Add fw_cfg device in DSDT
+>  *
+>  * ...
+>  */
+> 
+> as that is the recommended format for many projects (I think starting
+> with Linux which documents[1] it) and tools have already learned that
+> formatting. QEMU's checkpatch will accept the C99 comment style[2].
+> 
+> [1] https://www.kernel.org/doc/html/latest/process/license-rules.html#license-identifier-syntax
+> [2] commit 8d061278d385 ("checkpatch: allow SPDX-License-Identifier")
+> 
+Thanks for the pointers. Let me update according to this.
 
 Thanks,
-drew
+Sunil
 
