@@ -4,80 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 835BCC25B67
-	for <qemu-riscv@archiver.kernel.org>; Thu, 26 Oct 2023 15:15:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B2D6C25B67
+	for <qemu-riscv@archiver.kernel.org>; Thu, 26 Oct 2023 15:18:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qw24d-0004T1-Pc; Thu, 26 Oct 2023 11:15:05 -0400
+	id 1qw28C-0005gu-Um; Thu, 26 Oct 2023 11:18:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qw24c-0004S2-A4
- for qemu-riscv@nongnu.org; Thu, 26 Oct 2023 11:15:02 -0400
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1qw28B-0005g6-4y
+ for qemu-riscv@nongnu.org; Thu, 26 Oct 2023 11:18:43 -0400
+Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qw24Y-0004sk-Bk
- for qemu-riscv@nongnu.org; Thu, 26 Oct 2023 11:15:01 -0400
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-40891d38e3fso7679975e9.1
- for <qemu-riscv@nongnu.org>; Thu, 26 Oct 2023 08:14:57 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1qw289-0005SX-Gs
+ for qemu-riscv@nongnu.org; Thu, 26 Oct 2023 11:18:42 -0400
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-5aa7fdd1420so829104a12.3
+ for <qemu-riscv@nongnu.org>; Thu, 26 Oct 2023 08:18:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1698333296; x=1698938096; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RpAQ4FzMjSQUl+BEUvIFmQ3xEE0yqE3SoJjU63c1E8s=;
- b=LrGgqGR6Z4TqVAQy1avgk1hgzGdccjzCqUCBul+TVHFhulo++gmOjuiUB1xo1q8G4Y
- A5mbVtELisZBf3LT4pFxDMzdDYrZuVgGESNurE2djm38Lqndj6d5uhOs0aaJw6JXW7kM
- Tz54R+Kw9HmQQDhK2zRObbUUcTs0as1RCZ7OavGPg2tafs0XuxqTp6KCSwlLHlHtcvTu
- jnyXLuXwHoP7h5k/QGm/gUgvrmO3cfB2si1tu+YXDhXEEnWqOy8GJDPQpAe/Vgqadgx9
- hHDBLc4rBffwQoicjgvA0P5hplgFPhtn3i6CLvxfnfyZ+3303FMxoYuG+Xdp4tcimgmZ
- Mwkw==
+ d=sifive.com; s=google; t=1698333519; x=1698938319; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=tgo45F2v/Qe9G4XbyaSiDt48CWp8Ravgjs2/JNux0zI=;
+ b=Pq2qtuWNd3oYEljh7GhsxzAVBFfM67vmh3oEpxN2+w5V/+tWSh5VcPvGii3S76HZzf
+ blSve0HUf3jPZjPR88DZNYjwS0BdWTmXTacaaqhK8+YroMLQui9bmqh+4eLXDW0rzZTL
+ y5iaRbcP4Lm1kgLuRPUufN53NynGKYmUqtOYBccHhIdpsZCWrXCT986j3N73VAOeFKjP
+ WFvcNZ9gUwWEZVwby1vFGeUOQW7gArsxYGo2+qDm4IAmYii3N1I4vz6Db4Y2LfQD8Drr
+ WAghJA8NeIBsM/HLFQxFOmzHg9llGjUf/uuwzLVclMY37jL2HyfO7qVnh8adzPqzSQ9K
+ u7+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698333296; x=1698938096;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RpAQ4FzMjSQUl+BEUvIFmQ3xEE0yqE3SoJjU63c1E8s=;
- b=erqGQY1IEcBIfldJhpYAM7mezvDvJ/UupoKXDsZKYzs0VJIafSL+Q1GDKKRDXX6J2t
- YeOD4ejySzzwKAM+Ty7UFtMnEpWZzGbyY4kpaGamEnNI9a6WslJHjupybgFY2JQr5Fvm
- Up+tV0rccm+iFuIrs1kPe+DJW9q22cbCbCG/j/XoKXWu1DnVHhLyT4l+5Jd0UkkwyIsP
- rt8jPKCSYvmQtsHDEv1fFHYMeG3/ZlWw8S67u2VPjUdfwZOd22GygLzTXDY7JFvHq34k
- 3uK27Ey75YnmQJKeikj0yXzQZlemTw4ZdC6bly2bpyxulxjgxefsPR9AuBtjyjQhnRc0
- zvfg==
-X-Gm-Message-State: AOJu0YzBGvvgtvJl5Ux3IK9zZCbwldeyfqnopRYVtSPjVq5gVd8ymQRK
- UwhDiOTuMHweywf8gKdZaqcoNg==
-X-Google-Smtp-Source: AGHT+IGrH2O7Lgt6gq8wPfs/pCy23UJlCxgw+gVvM6UCeswPGctoOeoEe+y8CH/TMeauCbEXxv6obA==
-X-Received: by 2002:a05:600c:350c:b0:405:3e5e:6698 with SMTP id
- h12-20020a05600c350c00b004053e5e6698mr75819wmq.27.1698333295989; 
- Thu, 26 Oct 2023 08:14:55 -0700 (PDT)
-Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
- by smtp.gmail.com with ESMTPSA id
- g7-20020a05600c4ec700b004064ac107cfsm2864250wmq.39.2023.10.26.08.14.55
+ d=1e100.net; s=20230601; t=1698333519; x=1698938319;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=tgo45F2v/Qe9G4XbyaSiDt48CWp8Ravgjs2/JNux0zI=;
+ b=ZSwRW7qbeNFLUGKp8/nj7BnS/LUx4GPC1Q36zJGZszLMpHxe6QFs576JNeo/ykgs1e
+ p+3l0ftygrEGRBBVKpdbvmwknp8UK+yo4KfKsGX6iRcDWsMcUJEKyO7QItajcYd6ajCi
+ CnJthK6dgZKoymwz30mrCCe92dN58nbr/2z4zExBPYWs4VqaJe3MbrJ6naHW8aTHKgAG
+ 20bHH8sDYxznmr8L9oUNiRx7v3e9aOKfuGVQy/bu1gRw7iUZAB3t8np0Vh/KDw0/D5wX
+ dOFBtUdu4FJWJO6GpPw6takmSEle/qImiY4VAw7ftPXXTIuiAuhJvG6Ele3QHDzPLq+O
+ QMSg==
+X-Gm-Message-State: AOJu0YxGro/P7YgnrmHoiNMZ0Jzkx+0AIXZYXXPDJo1GQlHGbdwCLrBX
+ S3RIfsWQtOeAV0n8gWuf7nQ5aA==
+X-Google-Smtp-Source: AGHT+IEBcZ4ucV+iN8mh6sptL6UX4aOKFMiDogn6b4dkAbHNCAAuVwpujjJ8QfkLK/WZxurN++eIzQ==
+X-Received: by 2002:a17:90a:744a:b0:273:f584:40ca with SMTP id
+ o10-20020a17090a744a00b00273f58440camr15402498pjk.16.1698333519100; 
+ Thu, 26 Oct 2023 08:18:39 -0700 (PDT)
+Received: from duncan.localdomain (125-228-20-175.hinet-ip.hinet.net.
+ [125.228.20.175]) by smtp.gmail.com with ESMTPSA id
+ nv18-20020a17090b1b5200b0027fee011cebsm1326061pjb.10.2023.10.26.08.18.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Oct 2023 08:14:55 -0700 (PDT)
-Date: Thu, 26 Oct 2023 17:14:49 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Andrea Bolognani <abologna@redhat.com>
-Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
-Subject: Re: [PATCH v3 3/6] target/riscv/tcg: add user flag for profile support
-Message-ID: <20231026-c8c8065150673a1f48f41dd5@orel>
-References: <20231020223951.357513-1-dbarboza@ventanamicro.com>
- <20231020223951.357513-4-dbarboza@ventanamicro.com>
- <20231023-2018025adea3ffaebbbefe23@orel>
- <0e66af36-bd36-4b42-b901-ed726af207b7@ventanamicro.com>
- <20231023-b0eb8f3478a61875a22de747@orel>
- <CABJz62MN5ha-JH=i+PAu=7hZspV8g85jeAc=hRam0Z1f4fPDEg@mail.gmail.com>
+ Thu, 26 Oct 2023 08:18:38 -0700 (PDT)
+From: Max Chou <max.chou@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Max Chou <max.chou@sifive.com>
+Subject: [PATCH v2 00/14] Update RISC-V vector crypto to ratified v1.0.0
+Date: Thu, 26 Oct 2023 23:18:07 +0800
+Message-Id: <20231026151828.754279-1-max.chou@sifive.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CABJz62MN5ha-JH=i+PAu=7hZspV8g85jeAc=hRam0Z1f4fPDEg@mail.gmail.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
- envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x32e.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
+ envelope-from=max.chou@sifive.com; helo=mail-pg1-x535.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,111 +91,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Oct 26, 2023 at 07:36:21AM -0700, Andrea Bolognani wrote:
-> On Mon, Oct 23, 2023 at 07:35:16PM +0200, Andrew Jones wrote:
-> > On Mon, Oct 23, 2023 at 02:00:00PM -0300, Daniel Henrique Barboza wrote:
-> > > On 10/23/23 05:16, Andrew Jones wrote:
-> > > > Hmm, I'm not sure I agree with special-casing profiles like this. I think
-> > > > the left-to-right processing should be consistent for all. I'm also not
-> > > > sure we should always warn when disabling a profile. For example, if a
-> > > > user does
-> > > >
-> > > >   -cpu rv64,rva22u64=true,rva22u64=false
-> > > >
-> > > > then they'll get a warning, even though all they're doing is restoring the
-> > > > cpu model. While that looks like an odd thing to do, a script may be
-> > > > adding the rva22u64=true and the rva22u64=false is the user input which
-> > > > undoes what the script did.
-> > >
-> > > QEMU options do not work with a "the user enabled then disabled the same option,
-> > > thus it'll count as nothing happened" logic. The last instance of the option will
-> > > overwrite all previous instances. In the example you mentioned above the user would
-> > > disable all mandatory extensions of rva22u64 in the CPU, doesn't matter if the
-> > > same profile was enabled beforehand.
-> >
-> > Yup, I'm aware, but I keep thinking that we'll only be using profiles with
-> > a base cpu type. If you start with nothing (a base) and then add a profile
-> > and take the same one away, you shouldn't be taking away anything else. I
-> > agree that if you use a profile on some cpu type that already enabled a
-> > bunch of stuff itself, then disabling a profile would potentially remove
-> > some of those too, but mixing cpu types that have their own extensions and
-> > profiles seems like a great way to confuse oneself as to what extensions
-> > will be present.  IOW, we should be adding a base cpu type at the same
-> > time we're adding these profiles.
-> 
-> The question that keep bouncing around my head is: why would we even
-> allow disabling profiles?
-> 
-> It seems to me that it only makes things more complicated, and I
-> really can't see the use case for it.
-> 
-> Enabling additional features on top of a profile? There's obvious
-> value in that, so that you can model hardware that implements
-> optional and proprietary extensions. Enabling multiple profiles?
-> You've convinced me that it's useful. But disabling profiles, I just
-> don't see it. I believe Alistair was similarly unconvinced.
+This patchset updates the RISC-V vector cryptography support to the
+ratified version v1.0.0 (commit 1769c26, released on 2023/10).
 
-The only value I see in allowing a profile to be disabled is to undo the
-enabling of the profile by specifying the profile as 'off' to the right of
-it being specified as 'on'. That may seem pointless, but scripts take
-advantage of being able to do that. Besides that one possible use case,
-there isn't much use in disabling profiles, but treating profile
-properties like every other boolean property makes the UI consistent and
-should actually simplify the code.
+v2:
 
-> 
-> > > > As far as warnings go, it'd be nice to warn when mandatory profile
-> > > > extensions are disabled from an enabled profile. Doing that might be
-> > > > useful for debug, but users which do it without being aware they're
-> > > > "breaking" the profile may learn from that warning. Note, the warning
-> > > > should only come when the profile is actually enabled and when the
-> > > > extension would actually be disabled, i.e.
-> > > >
-> > > >   -cpu rv64,rva22u64=true,c=off
-> > > >
-> > > > should warn
-> > > >
-> > > >   -cpu rv64,c=off,rva22u64=true
-> > > >
-> > > > should not warn (rva22u64 overrides c=off since it's to the right)
-> > > >
-> > > >   -cpu rv64,rva22u64=true,rva22u64=false,c=off
-> > > >
-> > > > should not warn (rva22u64 is not enabled)
-> 
-> I think these should be hard errors, not warnings.
-> 
-> If you're enabling a profile and then disabling an extension that's
-> mandatory for that profile, you've invalidated the profile. You've
-> asked for a configuration that doesn't make any sense: you can't have
-> a CPU that both implements a profile and lacks one of its mandatory
-> extensions.
-> 
+- Fixed the instruction order at disassembler part.
+- Fixed the vror.vi disassembler format.
+- Verified by code examples provided by vector crypto spec repository
+  (riscv-crypto).
+- Rebased to riscv-to-apply.next branch (1f910f3)
 
-Given a platform which implements a profile which mandates extension E and
-a need to debug E or test behavior where E is [incorrectly] absent, you'll
-need to expand the profile first, listing each of the other extensions
-manually. It'd be much faster to specify the profile, take away the
-extension, and ignore the warning.
+v1:
 
-> QEMU users could easily miss the warning. libvirt users won't see it
-> at all. It's a user error and it needs to be treated as such IMO.
+- Support Zvkb, Zvkt, and other shorthand extensions(Zvkn, Zvknc, Zvkng,
+  Zvks, Zvksc, Zvksg).
+- Support the disassembler for vector crypto extensions.
+- Moved vector crypto extensions from experimental extensions to ratified
+  extensions.
+- Replaced TAB indentations with spaces in disas/riscv.c.
 
-I do agree with the concern that warnings will be missed/ignored. Maybe
-QEMU needs something like -Werror for stuff like this, i.e.
 
- -cpu rv64,error-on-extension-warnings=on,profile-A=on,extension-of-A=off
+Max Chou (14):
+  target/riscv: Add cfg property for Zvkt extension
+  target/riscv: Expose Zvkt extension property
+  target/riscv: Add cfg property for Zvkb extension
+  target/riscv: Replace Zvbb checking by Zvkb
+  target/riscv: Expose Zvkb extension property
+  target/riscv: Add cfg properties for Zvkn[c|g] extensions
+  target/riscv: Expose Zvkn[c|g] extnesion properties
+  target/riscv: Add cfg properties for Zvks[c|g] extensions
+  target/riscv: Expose Zvks[c|g] extnesion properties
+  target/riscv: Move vector crypto extensions to riscv_cpu_extensions
+  disas/riscv: Add rv_fmt_vd_vs2_uimm format
+  disas/riscv: Add rv_codec_vror_vi for vror.vi
+  disas/riscv: Add support for vector crypto extensions
+  disas/riscv: Replace TABs with space
 
-would error out, but, without the special property, just warn. Or, flip
-the default behavior around with
+ disas/riscv.c                            | 157 ++++++++++++++++++++++-
+ disas/riscv.h                            |   2 +
+ target/riscv/cpu.c                       |  36 ++++--
+ target/riscv/cpu_cfg.h                   |   8 ++
+ target/riscv/insn_trans/trans_rvvk.c.inc |  37 ++++--
+ target/riscv/tcg/tcg-cpu.c               |  48 ++++++-
+ 6 files changed, 258 insertions(+), 30 deletions(-)
 
- -cpu rv64,ignore-extension-errors=on,profile-A=on,extension-of-A=off
+-- 
+2.34.1
 
-which would either silently proceed or just warn, but, without the
-special property, error out. libvirt would default to the error out
-case, whichever that one is, but also provide an element to turn off
-erroring-out.
-
-Thanks,
-drew
 
