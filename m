@@ -4,97 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D10FCC25B48
-	for <qemu-riscv@archiver.kernel.org>; Thu, 26 Oct 2023 12:39:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14BCCC25B67
+	for <qemu-riscv@archiver.kernel.org>; Thu, 26 Oct 2023 14:36:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qvzds-0007p5-Hw; Thu, 26 Oct 2023 08:39:16 -0400
+	id 1qw1TJ-00009r-8p; Thu, 26 Oct 2023 10:36:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qvzdr-0007oK-0s
- for qemu-riscv@nongnu.org; Thu, 26 Oct 2023 08:39:15 -0400
-Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qvzdo-0003C2-Tl
- for qemu-riscv@nongnu.org; Thu, 26 Oct 2023 08:39:14 -0400
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-6b6f4c118b7so821799b3a.0
- for <qemu-riscv@nongnu.org>; Thu, 26 Oct 2023 05:39:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1698323951; x=1698928751; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Iy/9mK73VgJHKA7x6ZOHag2goOiZmcwGvUW8/QRF3QY=;
- b=KQWv2qENdv3guvQW+Wk8Nj8BMqbkPOD08gxHl52N5aBXVKDWwDa5PRdCiO67ODOmB+
- Ywlzep+Slxj0WbDPpVQgk3f/n2v8aBDMQva81R1lUAJMXGC2OH+Mg2l8VyfJnujYdvlv
- GH8oWWcwBXw7I2Ify+a33kzEYmlIY92U62Uhu5k5wBzCh2wJuX687DAZxdEayuUujeaF
- 6ePnUN9dUzf1+Xvfxs9r9MqCIjWCyXEoXP8M0GYCgejQzE19rCqjfktroTrq3ZKQvCP/
- M1CA9yomlkyRIihq7EbU6oRn3FrGQoxwhT7wzFeYOokoIRQz8lESYTpk0VgCbHL7s9lM
- CUZw==
+ (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
+ id 1qw1TH-00008b-KJ
+ for qemu-riscv@nongnu.org; Thu, 26 Oct 2023 10:36:27 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
+ id 1qw1TF-0006TD-UV
+ for qemu-riscv@nongnu.org; Thu, 26 Oct 2023 10:36:27 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1698330984;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=9NKnS1R0ipxCuX+GlOe6W7MOgkmBECREE3MMX2SBRzU=;
+ b=NC77jNR5YUOrmiA06+xu6q2VYuUUX9llv8A5CFA1yYu/+AhPaTrU4/tGb2//ScYJiysCvH
+ QqigSjH9FXJbT7FJt5ruyq3UPVCG3pTYM4Tdij880Cw6LJ5abHIyfj5huONnKuCLboXz4m
+ Qh3jrnTM5vzT/O9KiyLe4Ioms4XLXvg=
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
+ [209.85.160.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-686-Ml_Q9_SCP4uKGENgG16lqw-1; Thu, 26 Oct 2023 10:36:23 -0400
+X-MC-Unique: Ml_Q9_SCP4uKGENgG16lqw-1
+Received: by mail-qt1-f200.google.com with SMTP id
+ d75a77b69052e-41cb4d6744bso13655781cf.0
+ for <qemu-riscv@nongnu.org>; Thu, 26 Oct 2023 07:36:23 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698323951; x=1698928751;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Iy/9mK73VgJHKA7x6ZOHag2goOiZmcwGvUW8/QRF3QY=;
- b=t+arDvu1bpdfdrvn3tzX6WHqJO6+tYlR/r/V7XzIyy2/bSBiHB5sm2GhR3wklDqT3r
- jlWmCV+JSw3YnOQCQzhWJ6oJjWTqcr8CXxasK1Bn/DH6yuFj516LQJ5GwaAEzzLCXAde
- 3utvnUcepdhhT+AsJqmxTX/Puwm28FCvLqAjY6tYwuiQBiTxFfsf5+QshqRVENydhZn9
- 7c3eYtJZ3K2McbTGDUSMzKN8vMnGcLbx/woUd+cecgzXHZJp2d3XssvrJIHo176OSpk2
- nnvPG1O8D96Agx/GwhJTa/FrevpaCYYnZxq1jXm3Kg8OAHlUU/YMrKGuViVap7xEuwSQ
- 0rew==
-X-Gm-Message-State: AOJu0Yw4nvQhqkCcCxSB17H/yCwtfdBK4EmIXQbATTj1DeCLX3IYJn8d
- WdeuDTi+zrCxHU9iaO/Mj3xEpg==
-X-Google-Smtp-Source: AGHT+IG/AqJazkvK+bwGZFlkIMk6GVHEVVQypWY/YHoP0Ohtfly+wxkaBiv8Xkc4u4Cb5ohZ7BfwCA==
-X-Received: by 2002:a05:6a20:c19c:b0:16b:e89b:fb11 with SMTP id
- bg28-20020a056a20c19c00b0016be89bfb11mr7705923pzb.56.1698323950975; 
- Thu, 26 Oct 2023 05:39:10 -0700 (PDT)
-Received: from sunil-laptop ([106.51.188.78]) by smtp.gmail.com with ESMTPSA id
- nr12-20020a17090b240c00b0027d12b1e29dsm1594762pjb.25.2023.10.26.05.39.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Oct 2023 05:39:10 -0700 (PDT)
-Date: Thu, 26 Oct 2023 18:08:59 +0530
-From: Sunil V L <sunilvl@ventanamicro.com>
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Peter Maydell <peter.maydell@linaro.org>,
- Shannon Zhao <shannon.zhaosl@gmail.com>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Gerd Hoffmann <kraxel@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Anup Patel <apatel@ventanamicro.com>,
- Atish Kumar Patra <atishp@rivosinc.com>, Haibo Xu <haibo1.xu@intel.com>
-Subject: Re: [PATCH v4 05/13] hw/riscv/virt-acpi-build.c: Add AIA support in
- RINTC
-Message-ID: <ZTpd4+/zPtygPyls@sunil-laptop>
-References: <20231025200713.580814-1-sunilvl@ventanamicro.com>
- <20231025200713.580814-6-sunilvl@ventanamicro.com>
- <20231026-e3dba47934601608bc6a8cf8@orel>
+ d=1e100.net; s=20230601; t=1698330983; x=1698935783;
+ h=cc:to:subject:message-id:date:in-reply-to:mime-version:references
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=9NKnS1R0ipxCuX+GlOe6W7MOgkmBECREE3MMX2SBRzU=;
+ b=pbgR9FfFK5u4Qjqm8hdxk2EIL36jgkY4lZHk5NZKCQumyIWRhqLbqdEyyKbzec4hvw
+ mqgas4QOXZxUD8vfv8gSNIh69LqerGxr5h5x8rT7Lu4+v6KTWsv3maz67xC+IfH0YZLc
+ 1noYILYOyxNcUP80q23pVxei2kBGz+MuZjG5+tT/Diw4CLD5q+uQ9SNsdRpyqMwD0E2U
+ 7WdwrBY11IN68X/pb9wenp/KD/DWYbWxIV2ZaP11zkPARvxQuKKdrNWORLEALANz7SiR
+ t6/NSkqnNQJL8UxdC6dFkwk/6AmGTkF5vqb+iTkAnjaYQ8gXclfiu+8jL+w4aDyzNFdj
+ LN4A==
+X-Gm-Message-State: AOJu0Ywm7onkMB+5/KT76YfCrJO8DC3hVl+JEEigAmayzMtqFfPy9vdW
+ wLBh41V3p6Bx6WyRx1gS5D7TMBsZC2+JJ+2D5098x++iHVN++KeAhQKcPLzVEq7SVJjrcjT2tR+
+ DiDEGXVrQsOVCA3jXVpX1t7y13gpKfQ4=
+X-Received: by 2002:ac8:5793:0:b0:405:3dcf:1182 with SMTP id
+ v19-20020ac85793000000b004053dcf1182mr21752406qta.50.1698330982835; 
+ Thu, 26 Oct 2023 07:36:22 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGaMn69lhb4x8rxQWi40nXAzNPjv/zhw1w8dLyAzimsT3VgthZB1BK1AbpSbL8Dhvso4RsQQYhwfyIfNHmGlF0=
+X-Received: by 2002:ac8:5793:0:b0:405:3dcf:1182 with SMTP id
+ v19-20020ac85793000000b004053dcf1182mr21752385qta.50.1698330982569; Thu, 26
+ Oct 2023 07:36:22 -0700 (PDT)
+Received: from 744723338238 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 26 Oct 2023 07:36:21 -0700
+From: Andrea Bolognani <abologna@redhat.com>
+References: <20231020223951.357513-1-dbarboza@ventanamicro.com>
+ <20231020223951.357513-4-dbarboza@ventanamicro.com>
+ <20231023-2018025adea3ffaebbbefe23@orel>
+ <0e66af36-bd36-4b42-b901-ed726af207b7@ventanamicro.com>
+ <20231023-b0eb8f3478a61875a22de747@orel>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20231026-e3dba47934601608bc6a8cf8@orel>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pf1-x42e.google.com
+In-Reply-To: <20231023-b0eb8f3478a61875a22de747@orel>
+Date: Thu, 26 Oct 2023 07:36:21 -0700
+Message-ID: <CABJz62MN5ha-JH=i+PAu=7hZspV8g85jeAc=hRam0Z1f4fPDEg@mail.gmail.com>
+Subject: Re: [PATCH v3 3/6] target/riscv/tcg: add user flag for profile support
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, 
+ alistair.francis@wdc.com, bmeng@tinylab.org, liweiwei@iscas.ac.cn, 
+ zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=abologna@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -110,151 +103,80 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Oct 26, 2023 at 10:46:56AM +0200, Andrew Jones wrote:
-> On Thu, Oct 26, 2023 at 01:37:05AM +0530, Sunil V L wrote:
-> > Update the RINTC structure in MADT with AIA related fields.
-> > 
-> > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-> > Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> > Acked-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
-> >  hw/riscv/virt-acpi-build.c | 66 +++++++++++++++++++++++++++++++++++---
-> >  1 file changed, 62 insertions(+), 4 deletions(-)
-> > 
-> > diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-> > index d8772c2821..073c85f327 100644
-> > --- a/hw/riscv/virt-acpi-build.c
-> > +++ b/hw/riscv/virt-acpi-build.c
-> > @@ -38,6 +38,7 @@
-> >  #include "hw/intc/riscv_aclint.h"
-> >  
-> >  #define ACPI_BUILD_TABLE_SIZE             0x20000
-> > +#define ACPI_BUILD_INTC_ID(socket, index) ((socket << 24) | (index))
-> >  
-> >  typedef struct AcpiBuildState {
-> >      /* Copy of table in RAM (for patching) */
-> > @@ -58,18 +59,42 @@ static void acpi_align_size(GArray *blob, unsigned align)
-> >  }
-> >  
-> >  static void riscv_acpi_madt_add_rintc(uint32_t uid,
-> > +                                      uint32_t local_cpu_id,
-> >                                        const CPUArchIdList *arch_ids,
-> > -                                      GArray *entry)
-> > +                                      GArray *entry,
-> > +                                      RISCVVirtAIAType aia_type,
-> > +                                      uint64_t imsic_addr,
-> > +                                      uint32_t imsic_size)
-> >  {
-> >      uint64_t hart_id = arch_ids->cpus[uid].arch_id;
-> >  
-> >      build_append_int_noprefix(entry, 0x18, 1);       /* Type     */
-> > -    build_append_int_noprefix(entry, 20, 1);         /* Length   */
-> > +    build_append_int_noprefix(entry, 36, 1);         /* Length   */
-> >      build_append_int_noprefix(entry, 1, 1);          /* Version  */
-> >      build_append_int_noprefix(entry, 0, 1);          /* Reserved */
-> >      build_append_int_noprefix(entry, 0x1, 4);        /* Flags    */
-> >      build_append_int_noprefix(entry, hart_id, 8);    /* Hart ID  */
-> >      build_append_int_noprefix(entry, uid, 4);        /* ACPI Processor UID */
-> > +    /* External Interrupt Controller ID */
-> > +    if (aia_type == VIRT_AIA_TYPE_APLIC) {
-> > +        build_append_int_noprefix(entry,
-> > +                                  ACPI_BUILD_INTC_ID(
-> > +                                      arch_ids->cpus[uid].props.node_id,
-> > +                                      local_cpu_id),
-> > +                                  4);
-> > +    } else {
-> > +        build_append_int_noprefix(entry, 0, 4);
-> > +    }
-> > +
-> > +    if (aia_type == VIRT_AIA_TYPE_APLIC_IMSIC) {
-> > +        /* IMSIC Base address */
-> > +        build_append_int_noprefix(entry, imsic_addr, 8);
-> > +        /* IMSIC Size */
-> > +        build_append_int_noprefix(entry, imsic_size, 4);
-> > +    } else {
-> > +        build_append_int_noprefix(entry, 0, 8);
-> > +        build_append_int_noprefix(entry, 0, 4);
-> > +    }
-> >  }
-> >  
-> >  static void acpi_dsdt_add_cpus(Aml *scope, RISCVVirtState *s)
-> > @@ -77,6 +102,11 @@ static void acpi_dsdt_add_cpus(Aml *scope, RISCVVirtState *s)
-> >      MachineClass *mc = MACHINE_GET_CLASS(s);
-> >      MachineState *ms = MACHINE(s);
-> >      const CPUArchIdList *arch_ids = mc->possible_cpu_arch_ids(ms);
-> > +    uint64_t imsic_socket_addr, imsic_addr;
-> > +    uint8_t  guest_index_bits;
-> > +    uint32_t imsic_size, local_cpu_id, socket_id;
-> > +
-> > +    guest_index_bits = imsic_num_bits(s->aia_guests + 1);
-> >  
-> >      for (int i = 0; i < arch_ids->len; i++) {
-> >              Aml *dev;
-> > @@ -87,8 +117,19 @@ static void acpi_dsdt_add_cpus(Aml *scope, RISCVVirtState *s)
-> >              aml_append(dev, aml_name_decl("_UID",
-> >                         aml_int(arch_ids->cpus[i].arch_id)));
-> >  
-> > +            socket_id = arch_ids->cpus[i].props.node_id;
-> > +            local_cpu_id = (arch_ids->cpus[i].arch_id -
-> > +                            riscv_socket_first_hartid(ms, socket_id)) %
-> > +                            riscv_socket_hart_count(ms, socket_id);
-> >              /* build _MAT object */
-> > -            riscv_acpi_madt_add_rintc(i, arch_ids, madt_buf);
-> > +            imsic_socket_addr = s->memmap[VIRT_IMSIC_S].base +
-> > +                                (socket_id * VIRT_IMSIC_GROUP_MAX_SIZE);
-> > +            imsic_addr = imsic_socket_addr +
-> > +                         local_cpu_id * IMSIC_HART_SIZE(guest_index_bits);
-> > +            imsic_size = IMSIC_HART_SIZE(guest_index_bits);
-> > +
-> > +            riscv_acpi_madt_add_rintc(i, local_cpu_id, arch_ids, madt_buf,
-> > +                                      s->aia_type, imsic_addr, imsic_size);
-> >              aml_append(dev, aml_name_decl("_MAT",
-> >                                            aml_buffer(madt_buf->len,
-> >                                            (uint8_t *)madt_buf->data)));
-> > @@ -227,6 +268,7 @@ static void build_dsdt(GArray *table_data,
-> >   * 5.2.12 Multiple APIC Description Table (MADT)
-> >   * REF: https://github.com/riscv-non-isa/riscv-acpi/issues/15
-> >   *      https://drive.google.com/file/d/1R6k4MshhN3WTT-hwqAquu5nX6xSEqK2l/view
-> > + *      https://drive.google.com/file/d/1oMGPyOD58JaPgMl1pKasT-VKsIKia7zR/view
-> >   */
-> >  static void build_madt(GArray *table_data,
-> >                         BIOSLinker *linker,
-> > @@ -235,6 +277,12 @@ static void build_madt(GArray *table_data,
-> >      MachineClass *mc = MACHINE_GET_CLASS(s);
-> >      MachineState *ms = MACHINE(s);
-> >      const CPUArchIdList *arch_ids = mc->possible_cpu_arch_ids(ms);
-> > +    uint64_t imsic_socket_addr, imsic_addr;
-> > +    uint8_t  guest_index_bits;
-> > +    uint32_t imsic_size;
-> > +    uint32_t local_cpu_id, socket_id;
-> > +
-> > +    guest_index_bits = imsic_num_bits(s->aia_guests + 1);
-> >  
-> >      AcpiTable table = { .sig = "APIC", .rev = 6, .oem_id = s->oem_id,
-> >                          .oem_table_id = s->oem_table_id };
-> > @@ -246,7 +294,17 @@ static void build_madt(GArray *table_data,
-> >  
-> >      /* RISC-V Local INTC structures per HART */
-> >      for (int i = 0; i < arch_ids->len; i++) {
-> > -        riscv_acpi_madt_add_rintc(i, arch_ids, table_data);
-> > +        socket_id = arch_ids->cpus[i].props.node_id;
-> > +        local_cpu_id = (arch_ids->cpus[i].arch_id -
-> > +                       riscv_socket_first_hartid(ms, socket_id)) %
-> > +                       riscv_socket_hart_count(ms, socket_id);
-> > +        imsic_socket_addr = s->memmap[VIRT_IMSIC_S].base +
-> > +                            (socket_id * VIRT_IMSIC_GROUP_MAX_SIZE);
-> > +        imsic_addr = imsic_socket_addr +
-> > +                     local_cpu_id * IMSIC_HART_SIZE(guest_index_bits);
-> > +        imsic_size = IMSIC_HART_SIZE(guest_index_bits);
-> > +        riscv_acpi_madt_add_rintc(i, local_cpu_id, arch_ids, table_data,
-> > +                                  s->aia_type, imsic_addr, imsic_size);
-> 
-> All the above new lines identically match the new lines in
-> acpi_dsdt_add_cpus(), so I suggest creating a helper function rather
-> than duplicating them.
-> 
-Makes sense. Let me update in next revision.
+On Mon, Oct 23, 2023 at 07:35:16PM +0200, Andrew Jones wrote:
+> On Mon, Oct 23, 2023 at 02:00:00PM -0300, Daniel Henrique Barboza wrote:
+> > On 10/23/23 05:16, Andrew Jones wrote:
+> > > Hmm, I'm not sure I agree with special-casing profiles like this. I think
+> > > the left-to-right processing should be consistent for all. I'm also not
+> > > sure we should always warn when disabling a profile. For example, if a
+> > > user does
+> > >
+> > >   -cpu rv64,rva22u64=true,rva22u64=false
+> > >
+> > > then they'll get a warning, even though all they're doing is restoring the
+> > > cpu model. While that looks like an odd thing to do, a script may be
+> > > adding the rva22u64=true and the rva22u64=false is the user input which
+> > > undoes what the script did.
+> >
+> > QEMU options do not work with a "the user enabled then disabled the same option,
+> > thus it'll count as nothing happened" logic. The last instance of the option will
+> > overwrite all previous instances. In the example you mentioned above the user would
+> > disable all mandatory extensions of rva22u64 in the CPU, doesn't matter if the
+> > same profile was enabled beforehand.
+>
+> Yup, I'm aware, but I keep thinking that we'll only be using profiles with
+> a base cpu type. If you start with nothing (a base) and then add a profile
+> and take the same one away, you shouldn't be taking away anything else. I
+> agree that if you use a profile on some cpu type that already enabled a
+> bunch of stuff itself, then disabling a profile would potentially remove
+> some of those too, but mixing cpu types that have their own extensions and
+> profiles seems like a great way to confuse oneself as to what extensions
+> will be present.  IOW, we should be adding a base cpu type at the same
+> time we're adding these profiles.
 
-Thanks,
-Sunil
+The question that keep bouncing around my head is: why would we even
+allow disabling profiles?
+
+It seems to me that it only makes things more complicated, and I
+really can't see the use case for it.
+
+Enabling additional features on top of a profile? There's obvious
+value in that, so that you can model hardware that implements
+optional and proprietary extensions. Enabling multiple profiles?
+You've convinced me that it's useful. But disabling profiles, I just
+don't see it. I believe Alistair was similarly unconvinced.
+
+> > > As far as warnings go, it'd be nice to warn when mandatory profile
+> > > extensions are disabled from an enabled profile. Doing that might be
+> > > useful for debug, but users which do it without being aware they're
+> > > "breaking" the profile may learn from that warning. Note, the warning
+> > > should only come when the profile is actually enabled and when the
+> > > extension would actually be disabled, i.e.
+> > >
+> > >   -cpu rv64,rva22u64=true,c=off
+> > >
+> > > should warn
+> > >
+> > >   -cpu rv64,c=off,rva22u64=true
+> > >
+> > > should not warn (rva22u64 overrides c=off since it's to the right)
+> > >
+> > >   -cpu rv64,rva22u64=true,rva22u64=false,c=off
+> > >
+> > > should not warn (rva22u64 is not enabled)
+
+I think these should be hard errors, not warnings.
+
+If you're enabling a profile and then disabling an extension that's
+mandatory for that profile, you've invalidated the profile. You've
+asked for a configuration that doesn't make any sense: you can't have
+a CPU that both implements a profile and lacks one of its mandatory
+extensions.
+
+QEMU users could easily miss the warning. libvirt users won't see it
+at all. It's a user error and it needs to be treated as such IMO.
+
+-- 
+Andrea Bolognani / Red Hat / Virtualization
+
 
