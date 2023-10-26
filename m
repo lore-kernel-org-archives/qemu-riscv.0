@@ -4,82 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AAD4C25B72
-	for <qemu-riscv@archiver.kernel.org>; Thu, 26 Oct 2023 15:22:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C08FDC27C46
+	for <qemu-riscv@archiver.kernel.org>; Thu, 26 Oct 2023 15:22:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qw2AU-0007dZ-6v; Thu, 26 Oct 2023 11:21:06 -0400
+	id 1qw2AW-0007nY-7N; Thu, 26 Oct 2023 11:21:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1qw2AO-0007G0-0z
- for qemu-riscv@nongnu.org; Thu, 26 Oct 2023 11:21:00 -0400
-Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032])
+ id 1qw2AE-00070p-Oj
+ for qemu-riscv@nongnu.org; Thu, 26 Oct 2023 11:20:55 -0400
+Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1qw2AM-0006PU-Cp
- for qemu-riscv@nongnu.org; Thu, 26 Oct 2023 11:20:59 -0400
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-280011e94ddso398192a91.3
- for <qemu-riscv@nongnu.org>; Thu, 26 Oct 2023 08:20:56 -0700 (PDT)
+ id 1qw2A7-0006N8-Ti
+ for qemu-riscv@nongnu.org; Thu, 26 Oct 2023 11:20:50 -0400
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-27d1a03f540so876111a91.1
+ for <qemu-riscv@nongnu.org>; Thu, 26 Oct 2023 08:20:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1698333656; x=1698938456; darn=nongnu.org;
+ d=sifive.com; s=google; t=1698333642; x=1698938442; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HtY6wohCh5Zl2XK1mCujzfBCcmKxx6U2AzlGqef/2aU=;
- b=FnRcBw0MmcCS0YTBUywxK1eusYb2ZmUOLeqbJUCGcLVgHS9jT3EJoZhT3TmSprDY37
- wG09aZOhGcygZjQg2f3w8rCSW887fnvc1Cv0SDvNdub5v+ljrpKWANTbJqbdjVHXwoJP
- qOhtiUA3Oy1oE+9aVsy82jG2WR+r6pqQCIBPKNzWX+uRY87uvWANcOGFUSGiYhNytrYL
- cKB2KilOE85q3xwy3SkEo8YDQ20M3Vc3zCMMC4qUVwoYoft6/upMgYtIHs3sta/iDjtE
- RZO4TKvF+ZDiXnvX/irqW805Ad6kumTk2+PdB+xrE2qK0EmW4zeadLGO1OBp6+fK/tHM
- TIlQ==
+ bh=npJ2K69OOSsKJtanlFl7eXChj2RfZqQfMPOCGuCNX+0=;
+ b=Kg5hh4Tva8E+YXM8uI/6+Y3spNZA8qHzqEobPpz1R5yKTeYzVF/lmmPTMHQojIcgCs
+ 0Kp2YnsThPAZ4VB/zd3MjO9ErVfeDj5eRoPPxrCTHkSpNlSuDG3EG6XqDX8xAIF0DpzL
+ Jo3mGk0/XtnyZLxwUcGCZ4x/bOIlNqWkLNhzcs5paunxAygiCOHqbH9ezG8I/A2rRV3d
+ Q7zIsO9szBT0bsqri5Ztw+Z+wsBDSIpT7/pwyeUEHxR+LMjG2ibjSHS160RiLq4HwzZo
+ 1w/Oi+d+UuzbBGR1CkDI8T1ICcNPeC8tB8EwpyYaSckf+7MvgxdKtLyg9ceFYz1yBzKT
+ L9tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698333656; x=1698938456;
+ d=1e100.net; s=20230601; t=1698333642; x=1698938442;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HtY6wohCh5Zl2XK1mCujzfBCcmKxx6U2AzlGqef/2aU=;
- b=UDBrt+XLeD9Q2lpQpED7zYW7aqUQIdvb5tIWiZiPDbS4IswSpSnxRX6HpxmmQgkeBR
- fVixOpsGKxgB6GOFA8+JGFDYir8khjHS6oHkFbZbwibT61f+qOzdrlzJby17QBw69IW9
- B8zexlluNTOnKD2mOOuVovJrQ6DHAZLwvX9BkyPrwV9biob6r0G71Zv18rNcIjt9S+nB
- 6nVZWn/3F5an5jOcheCGo2AiYDBPN4DVQm3cfEtndjfKLkb0zqLv2LT8MjZZ2XjQjfHF
- wMIHuunkrGUQUQPwAKvYXMDH5Bh0vgvCp7EdeP64vRqwD+nym1K+/RT3isj39+JI/eCs
- kQjA==
-X-Gm-Message-State: AOJu0Yx7prsBkRygLqa1W5+bbTTvRV2VG3ERJfINIn6rYLy3llYorKz2
- H/1SFXhzudVpEw4ri6kEur0PXdIr8SVprrZujOcU8Q==
-X-Google-Smtp-Source: AGHT+IFd6tsrH6go7h2GP8FBCDsaK3ioItIUXlfcC7gc+P0xKIq2B0rZAZeJs3Mx6moSop/o+Ia8+g==
-X-Received: by 2002:a17:90b:398:b0:27d:1df4:26f3 with SMTP id
- ga24-20020a17090b039800b0027d1df426f3mr16447005pjb.15.1698333655811; 
- Thu, 26 Oct 2023 08:20:55 -0700 (PDT)
+ bh=npJ2K69OOSsKJtanlFl7eXChj2RfZqQfMPOCGuCNX+0=;
+ b=i4saoKb03sXymuhjMKnA7cIxCnWVBw8NOE7Ch7Jgh01QiWVdSwTm2bOZOrmNKMVLD0
+ 63IkL8pp2lpY/ucSdqOl1jXLXU1F//COUmAdL9BDVuzBfG0T/LO1b2yo1eEeaMX8hmGy
+ iRO3Q8Njj8629Vm9YFH1W9KXJ407DZhkEXCNC6kAgFry5rEA7gZmSbPEN2TXw+m9M4LK
+ qJsOiSYYAi7pjA9pYjVwcAbWZf/+PWloKpiCwrwp52Ey88wa/+NzlxA1ClxS/xDjoN81
+ 4FXmjg4GANpFMiGY/D9BlUOBTptAJijBABSGSjVP6sTlRyEJTg6AKF1IR1VEvfbgPCB7
+ 1YuA==
+X-Gm-Message-State: AOJu0Yy3JDRuNm+RNYCzpdnI613s479Nzc7Q48PGKDbpaGihKfyb13Ri
+ XLRHuXb/I/JZk/XhaY+gotiNwA==
+X-Google-Smtp-Source: AGHT+IGI7LNSXd4nkD3L9ysinhjWBQc/NBp/PaYV+apL9rb13k2Sr25mVc+IrXjkxPfZIvh/CDPw4Q==
+X-Received: by 2002:a17:90a:7887:b0:274:6839:6a8c with SMTP id
+ x7-20020a17090a788700b0027468396a8cmr15726445pjk.6.1698333642218; 
+ Thu, 26 Oct 2023 08:20:42 -0700 (PDT)
 Received: from duncan.localdomain (125-228-20-175.hinet-ip.hinet.net.
  [125.228.20.175]) by smtp.gmail.com with ESMTPSA id
- nv18-20020a17090b1b5200b0027fee011cebsm1326061pjb.10.2023.10.26.08.20.54
+ nv18-20020a17090b1b5200b0027fee011cebsm1326061pjb.10.2023.10.26.08.20.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Oct 2023 08:20:55 -0700 (PDT)
+ Thu, 26 Oct 2023 08:20:42 -0700 (PDT)
 From: Max Chou <max.chou@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Max Chou <max.chou@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>
-Subject: [PATCH v2 12/14] disas/riscv: Add rv_codec_vror_vi for vror.vi
-Date: Thu, 26 Oct 2023 23:18:19 +0800
-Message-Id: <20231026151828.754279-13-max.chou@sifive.com>
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Andrew Jones <ajones@ventanamicro.com>
+Subject: [PATCH v2 08/14] target/riscv: Add cfg properties for Zvks[c|g]
+ extensions
+Date: Thu, 26 Oct 2023 23:18:15 +0800
+Message-Id: <20231026151828.754279-9-max.chou@sifive.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231026151828.754279-1-max.chou@sifive.com>
 References: <20231026151828.754279-1-max.chou@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
- envelope-from=max.chou@sifive.com; helo=mail-pj1-x1032.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
+ envelope-from=max.chou@sifive.com; helo=mail-pj1-x102a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,66 +100,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add rv_codec_vror_vi for the vector crypto instruction - vror.vi.
-The rotate amount of vror.vi is defined by combining seperated bits.
+Vector crypto spec defines the ShangMi algorithm suite related
+extensions (Zvks, Zvksc, Zvksg) combined by several vector crypto
+extensions.
 
 Signed-off-by: Max Chou <max.chou@sifive.com>
 ---
- disas/riscv.c | 14 +++++++++++++-
- disas/riscv.h |  1 +
- 2 files changed, 14 insertions(+), 1 deletion(-)
+ target/riscv/cpu_cfg.h     |  3 +++
+ target/riscv/tcg/tcg-cpu.c | 17 +++++++++++++++++
+ 2 files changed, 20 insertions(+)
 
-diff --git a/disas/riscv.c b/disas/riscv.c
-index 8e89e1d1157..ec33e447f5b 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -4011,6 +4011,12 @@ static uint32_t operand_vzimm10(rv_inst inst)
-     return (inst << 34) >> 54;
- }
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index fd07aa96a27..7b0ca657a6a 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -99,6 +99,9 @@ struct RISCVCPUConfig {
+     bool ext_zvkn;
+     bool ext_zvknc;
+     bool ext_zvkng;
++    bool ext_zvks;
++    bool ext_zvksc;
++    bool ext_zvksg;
+     bool ext_zmmul;
+     bool ext_zvfbfmin;
+     bool ext_zvfbfwma;
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index e460701a13c..f9023ca75c7 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -519,6 +519,23 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkt), true);
+     }
  
-+static uint32_t operand_vzimm6(rv_inst inst)
-+{
-+    return ((inst << 37) >> 63) << 5 |
-+        ((inst << 44) >> 59);
-+}
++    if (cpu->cfg.ext_zvksc) {
++        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvks), true);
++        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvbc), true);
++    }
 +
- static uint32_t operand_bs(rv_inst inst)
- {
-     return (inst << 32) >> 62;
-@@ -4393,6 +4399,12 @@ static void decode_inst_operands(rv_decode *dec, rv_isa isa)
-         dec->imm = operand_vimm(inst);
-         dec->vm = operand_vm(inst);
-         break;
-+    case rv_codec_vror_vi:
-+        dec->rd = operand_rd(inst);
-+        dec->rs2 = operand_rs2(inst);
-+        dec->imm = operand_vzimm6(inst);
-+        dec->vm = operand_vm(inst);
-+        break;
-     case rv_codec_vsetvli:
-         dec->rd = operand_rd(inst);
-         dec->rs1 = operand_rs1(inst);
-@@ -4677,7 +4689,7 @@ static void format_inst(char *buf, size_t buflen, size_t tab, rv_decode *dec)
-             append(buf, tmp, buflen);
-             break;
-         case 'u':
--            snprintf(tmp, sizeof(tmp), "%u", ((uint32_t)dec->imm & 0b11111));
-+            snprintf(tmp, sizeof(tmp), "%u", ((uint32_t)dec->imm & 0b111111));
-             append(buf, tmp, buflen);
-             break;
-         case 'j':
-diff --git a/disas/riscv.h b/disas/riscv.h
-index b242d73b25e..19e5ed2ce63 100644
---- a/disas/riscv.h
-+++ b/disas/riscv.h
-@@ -152,6 +152,7 @@ typedef enum {
-     rv_codec_v_i,
-     rv_codec_vsetvli,
-     rv_codec_vsetivli,
-+    rv_codec_vror_vi,
-     rv_codec_zcb_ext,
-     rv_codec_zcb_mul,
-     rv_codec_zcb_lb,
++    if (cpu->cfg.ext_zvksg) {
++        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvks), true);
++        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkg), true);
++    }
++
++    if (cpu->cfg.ext_zvks) {
++        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvksed), true);
++        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvksh), true);
++        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkb), true);
++        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkt), true);
++    }
++
+     if (cpu->cfg.ext_zvkt) {
+         cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvbb), true);
+         cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvbc), true);
 -- 
 2.34.1
 
