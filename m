@@ -4,57 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48A13C4332F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 30 Oct 2023 08:17:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E5E8C4332F
+	for <qemu-riscv@archiver.kernel.org>; Mon, 30 Oct 2023 08:48:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qxNS7-00088h-CG; Mon, 30 Oct 2023 04:16:51 -0400
+	id 1qxNx8-0001Fk-Iv; Mon, 30 Oct 2023 04:48:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1qxNS6-00088O-No; Mon, 30 Oct 2023 04:16:50 -0400
-Received: from smtp81.cstnet.cn ([159.226.251.81] helo=cstnet.cn)
- by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1qxNRt-0000xc-0C; Mon, 30 Oct 2023 04:16:50 -0400
-Received: from localhost.localdomain (unknown [180.165.240.175])
- by APP-03 (Coremail) with SMTP id rQCowACn955VZj9l3e2pAQ--.29142S2;
- Mon, 30 Oct 2023 16:16:22 +0800 (CST)
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qxNx4-0001F2-O9
+ for qemu-riscv@nongnu.org; Mon, 30 Oct 2023 04:48:51 -0400
+Received: from mail-lj1-x230.google.com ([2a00:1450:4864:20::230])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qxNx3-0006Oq-76
+ for qemu-riscv@nongnu.org; Mon, 30 Oct 2023 04:48:50 -0400
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-2c50cd16f3bso57734151fa.2
+ for <qemu-riscv@nongnu.org>; Mon, 30 Oct 2023 01:48:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1698655726; x=1699260526; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=BxotMTA7zgaoJrf2veaoR7Z33I7QPF8c1mSn2VHKSOk=;
+ b=c+5dvKovfiD6eCciPimYG18wowUTOe1SF4LMAv2/S00VhIgVRhUhKsZiL+DnObGv1I
+ 56c65iT8JioreoSARq9kt5NL7YiV8IJ5TBBKg3ODPJoMRvkN0RGVS9mitCggXpZ7s8uA
+ tmdDWuznmKDrLz4vHOuVldUCFhLhDC1a64tBAo9KenzItNo9Ul0TsuWRMFaJgZnWt2b6
+ IXaeok5huxie67raBAweCw8MgPmVGE2rdMagAp88X9bAIcFCk17jxHPxeLXko8t+tUkv
+ eOJWEoRGSj34miAMAmQS+ZGK72M06BKrlYRYafSsM86iUU2VLmDH3sJ+FE+01l/7lGfE
+ QXsg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698655726; x=1699260526;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=BxotMTA7zgaoJrf2veaoR7Z33I7QPF8c1mSn2VHKSOk=;
+ b=Ujvr3Wp0yGv9SXkXLoGOHMV2QSjPwD4Sxlr0V0k/Ri78P5hKE3plr0Kyxm4tFhaYsj
+ svK+aISC3QhSkcUqSgeN2yMZVSexSEDNmgdymKNQEw00mOCqqLUPyFvfruX7irpim2No
+ b6tuHPOQ1PaVdLroVgZj1eFQ87IPk3plSsePcOZtiUX3E5UvF0nY10dTnflUTItNTRJM
+ ylAvf5NXe6b+zT4xe5LWtVEqn8nS81D53z9k2gxuzSOUdHLdhFrTBZJ+vrkXA41njswx
+ l9LXQiQ/uOVLf4paiNmKDqjDBh/dTpRkseN1d+pdm7DAKHGCb+R6bgeVlbYzYSCK8sHM
+ zUTA==
+X-Gm-Message-State: AOJu0YzOLom6wYfTQtiypmFmUh2DN7+lRaM5r5clgSqR4aSMC284IcUn
+ FKY8dPIEkdiDvioB+tezZp1HLQ==
+X-Google-Smtp-Source: AGHT+IEYRBxYq89PQveDuqA39ajKsFfBoDrAWvQ9p/N4QrW+1nn/++fBrRFO+fqOcVXVHIP7rs4rzA==
+X-Received: by 2002:a2e:9510:0:b0:2bc:d5f1:b9cf with SMTP id
+ f16-20020a2e9510000000b002bcd5f1b9cfmr7103612ljh.27.1698655726480; 
+ Mon, 30 Oct 2023 01:48:46 -0700 (PDT)
+Received: from [192.168.69.115] ([176.170.212.50])
+ by smtp.gmail.com with ESMTPSA id
+ b10-20020a05600c4e0a00b00402d34ea099sm11993865wmq.29.2023.10.30.01.48.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 30 Oct 2023 01:48:46 -0700 (PDT)
+Message-ID: <9570da29-881e-7e6d-40ec-5cdd2177e664@linaro.org>
+Date: Mon, 30 Oct 2023 09:48:44 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.15.1
+Subject: Re: [PATCH 1/1] MAINTAINERS: update mail address for Weiwei Li
+Content-Language: en-US
+To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- lazyparser@gmail.com, Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: Update mail account
-Date: Mon, 30 Oct 2023 16:16:06 +0800
-Message-Id: <20231030081607.115118-1-liweiwei@iscas.ac.cn>
-X-Mailer: git-send-email 2.25.1
-MIME-Version: 1.0
+ lazyparser@gmail.com, Weiwei Li <liwei1518@gmail.com>
+References: <20231030081607.115118-1-liweiwei@iscas.ac.cn>
+ <20231030081607.115118-2-liweiwei@iscas.ac.cn>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+In-Reply-To: <20231030081607.115118-2-liweiwei@iscas.ac.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: rQCowACn955VZj9l3e2pAQ--.29142S2
-X-Coremail-Antispam: 1UD129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73
- VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UUU5M7AC8VAFwI0_Gr0_Xr1l1xkIjI8I6I8E
- 6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l8cAvFVAK0II2c7xJM28Cjx
- kF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVW5JVW7JwA2z4x0Y4vE2Ix0cI8I
- cVCY1x0267AKxVWxJVW8Jr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87
- Iv6xkF7I0E14v26F4UJVW0owAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAK
- zVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx
- 8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIF
- xwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r
- 1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij
- 64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Jr
- 0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF
- 0xvEx4A2jsIEc7CjxVAFwI0_Jr0_GrUvcSsGvfC2KfnxnUUI43ZEXa7VUbXdbUUUUUU==
-X-Originating-IP: [180.165.240.175]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.81; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
+Received-SPF: pass client-ip=2a00:1450:4864:20::230;
+ envelope-from=philmd@linaro.org; helo=mail-lj1-x230.google.com
+X-Spam_score_int: -50
+X-Spam_score: -5.1
+X-Spam_bar: -----
+X-Spam_report: (-5.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.972,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -71,22 +98,14 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi, all.
-
-I'v left my job at Iscas. The old iscas mail acount will be
-disabled soon. So I'll change to use my personal gmail acount
-(liwei1518@gmail.com) for future reviewer tasks.
-
-Regards,
-Weiwei Li
-
-Weiwei Li (1):
-  MAINTAINERS: update mail address for Weiwei Li
-
- MAINTAINERS | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
--- 
-2.25.1
+On 30/10/23 09:16, Weiwei Li wrote:
+> My Iscas mail account will be disabled soon, change to my personal
+> gmail account.
+> 
+> Signed-off-by: Weiwei Li <liwei1518@gmail.com>
+> ---
+>   MAINTAINERS | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
