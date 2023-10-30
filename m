@@ -4,79 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48EFAC4332F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 30 Oct 2023 11:50:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B336DC4332F
+	for <qemu-riscv@archiver.kernel.org>; Mon, 30 Oct 2023 13:21:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qxQmS-00034m-M4; Mon, 30 Oct 2023 07:50:04 -0400
+	id 1qxSCk-0006bb-9A; Mon, 30 Oct 2023 09:21:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qxQmN-0002ll-JY
- for qemu-riscv@nongnu.org; Mon, 30 Oct 2023 07:49:59 -0400
-Received: from mail-yw1-x1129.google.com ([2607:f8b0:4864:20::1129])
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1qxSCh-0006Yb-Sa
+ for qemu-riscv@nongnu.org; Mon, 30 Oct 2023 09:21:15 -0400
+Received: from mail-pj1-x102b.google.com ([2607:f8b0:4864:20::102b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qxQmJ-0007UB-RT
- for qemu-riscv@nongnu.org; Mon, 30 Oct 2023 07:49:59 -0400
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-5a82f176860so38978377b3.1
- for <qemu-riscv@nongnu.org>; Mon, 30 Oct 2023 04:49:55 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1qxSCd-0002m5-J0
+ for qemu-riscv@nongnu.org; Mon, 30 Oct 2023 09:21:14 -0400
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-28035cf6a30so819059a91.3
+ for <qemu-riscv@nongnu.org>; Mon, 30 Oct 2023 06:21:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1698666594; x=1699271394; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=RubRBpkDYN+zgt1HhJWUW3+Y5mAhtpEvoOUadZhhyf8=;
- b=F9u454B3pHbF0noe0gVO640JKkCKCKaYTVI8Y/v66ITf//SMr/IYv/ZDD4h7Q/mhj5
- TTdgEHXO+2PncKFpkQg/Ml72DtGAANhCpw91gcXhna6mSg9arrSES/VMOqNLt0tSmNQA
- HNTtBecUeB3cI0Bo6xl2W60KNOmmoSAxLc7pJ+Ha0cIBmmeWac+TFbVMDFJym7wMejuZ
- jYPP4QtxrsHVcFqhHgwAPgDsCriuDy979NCLm8QxZ/4V+UJi5iQLitRwWoQ0ElzJBr2o
- Sk3Fp0PlF6ZQkcqCJ7VFJS1iO4zfSuzUOqj2llT5ocojvKXXE3lZroo3QqYyCgaHuV5c
- DkmQ==
+ d=ventanamicro.com; s=google; t=1698672068; x=1699276868; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=761HdFCW1pcQUslCwap5ud8fHzy5Mu/ijaNYkufTzQ0=;
+ b=JJWfDPt2QHQQC6EKhr+k4e9396RHshFZSafbHqQFQ6DUlLOpaFLU0tKSuu3FsJqry7
+ ROX3V6LI4En9Hs1mESc/BK+ZLBxmlC99QQ3jrToPT8TT1orPccS3OUCTYBMEQXi8Pg/d
+ CD3cQHw9gttiCVPSDqiEgSp4NFloPdQrFEPzIRtItFp4IdpJ+xx9O6OrZ7NgbZ0mmrnh
+ GeEQj8bJS6VJCQ7RE30SHxBT1TyHTJwQ0h0bXoSZMncBXZNrxb17o9Av/AGwyuPn7fY4
+ hKoVP8u64jA65DOHmate8eXI9DdFzMUHucR/gt3rubHhit+gaPmbbENA8Qkk/KCl5y8S
+ cGiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698666594; x=1699271394;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=RubRBpkDYN+zgt1HhJWUW3+Y5mAhtpEvoOUadZhhyf8=;
- b=mm2HOc+YumuuAHkzdwZC8Kw0eNutX3q04LkDdXR0qWR8PWsyNLl2VPG0OZYD8fR1Yw
- gCULA27AoH1Gn+rzemPSeYj8yH1qNFExCx0jnndBOny+PRBxVvx612BEvUNzjpPqf+OZ
- fI6WvsNR9GwuofdkO3YYzBUJJ3QpTSwtSDt4h+DkTYdiyOB4mB2e4lkImIqtSeA4zdZg
- RTQXC6xfW+/Fovf9ijkBHv7dMNi3bVT/KiJSZkXBPOryUKikEroizrmRMWwbusfLlS26
- 3N3MpDA+3lIxaHpjj5ORwC6A8jLJ4u0jk7wOYVS7aslBwQTlvEdTo6E319T4koJb3edH
- vu4g==
-X-Gm-Message-State: AOJu0YxdUZQRhYspHGl51nI2Rq9e5zca97Xgkqz6bvXIaBadbLPoQvCb
- auy35R2JKGk9NeFclCGk7r5jOw==
-X-Google-Smtp-Source: AGHT+IHfkZA299R5UO6LjBw0RPNGyeuyX62tLCq11FB0E5nEJgYiKg522a9Ppk+n0AecxDY0tf/blw==
-X-Received: by 2002:a05:690c:fd5:b0:5a8:7ce7:a35e with SMTP id
- dg21-20020a05690c0fd500b005a87ce7a35emr10270487ywb.40.1698666594139; 
- Mon, 30 Oct 2023 04:49:54 -0700 (PDT)
-Received: from [192.168.68.107] ([179.193.10.161])
+ d=1e100.net; s=20230601; t=1698672068; x=1699276868;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=761HdFCW1pcQUslCwap5ud8fHzy5Mu/ijaNYkufTzQ0=;
+ b=VxLhySetqZGn2qAQDLCcqlo6Zs4tI8ROdO6fr75TW5lfyGVNda4WzdNNuNi4BFV6uj
+ 1KKgrDk2uxN+qzvoLELH1s1Ww4wgm54BxxzmWPR/fpkP0iiTHgOb0QKUmYiqRfW59FJa
+ dV+E3AmckT1nBSOeDpXPqaop/rsikEBM3JsTq7fDP4BCdsobjG/OGfPQi3hvIhcrdLyc
+ 9AWBoPnjukZhqAOdY3PSYQ0aa+baIEJ1K01V7X9MdbDItsIC5aDxzcJ/hruCjTA+6LM2
+ bo3ruGqkGowTGWuJ+6KsM6r6O6tSJFnd35N97i/h7aosA/04ciySCMW03jxKdPj3mLJz
+ 6h2Q==
+X-Gm-Message-State: AOJu0YzHu5OJNnEM0roxegWxdmTE1JvCGSkHS1csuACfnG7S7J+Uxtqy
+ QEUnYNhOCJwcnI3bBTcd5S2mCg==
+X-Google-Smtp-Source: AGHT+IHWx3W2IUl2Qj7B5+0sKqY9xyFM/gKT59NnySRClapPLgpGhOcNPcc7EVESbGy78PbId1E80g==
+X-Received: by 2002:a17:90b:11c4:b0:27c:ef18:d270 with SMTP id
+ gv4-20020a17090b11c400b0027cef18d270mr6724205pjb.20.1698672067872; 
+ Mon, 30 Oct 2023 06:21:07 -0700 (PDT)
+Received: from sunil-pc.Dlink ([106.51.188.78])
  by smtp.gmail.com with ESMTPSA id
- j205-20020a8192d6000000b005afa4b9b049sm4210929ywg.42.2023.10.30.04.49.51
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 30 Oct 2023 04:49:53 -0700 (PDT)
-Message-ID: <865593f0-03a1-48db-b634-bf9aca12c445@ventanamicro.com>
-Date: Mon, 30 Oct 2023 08:49:50 -0300
+ 15-20020a17090a000f00b0027ced921e80sm8122412pja.38.2023.10.30.06.21.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 30 Oct 2023 06:21:07 -0700 (PDT)
+From: Sunil V L <sunilvl@ventanamicro.com>
+To: qemu-arm@nongnu.org,
+	qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Shannon Zhao <shannon.zhaosl@gmail.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Gerd Hoffmann <kraxel@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Anup Patel <apatel@ventanamicro.com>,
+ Atish Kumar Patra <atishp@rivosinc.com>, Haibo Xu <haibo1.xu@intel.com>,
+ Sunil V L <sunilvl@ventanamicro.com>
+Subject: [PATCH v5 00/13] RISC-V: ACPI: Enable AIA, PLIC and update RHCT
+Date: Mon, 30 Oct 2023 18:50:45 +0530
+Message-Id: <20231030132058.763556-1-sunilvl@ventanamicro.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 01/12] target/riscv: add zicbop extension flag
-Content-Language: en-US
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
- palmer@rivosinc.com
-References: <20231028085427.707060-1-dbarboza@ventanamicro.com>
- <20231028085427.707060-2-dbarboza@ventanamicro.com>
- <20231028-2d6bf00dddc7bc4a25b32663@orel>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20231028-2d6bf00dddc7bc4a25b32663@orel>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1129;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-yw1-x1129.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102b;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pj1-x102b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,122 +108,93 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+This series primarily enables external interrupt controllers (AIA and PLIC)
+in ACPI tables for RISC-V virt platform. It also updates RHCT with CMO and
+MMU related information.
 
+Below ECRs for these changes are approved by ASWG and will be
+available in next ACPI spec release.
 
-On 10/28/23 06:49, Andrew Jones wrote:
-> On Sat, Oct 28, 2023 at 05:54:16AM -0300, Daniel Henrique Barboza wrote:
->> QEMU already implements zicbom (Cache Block Management Operations) and
->> zicboz (Cache Block Zero Operations). Commit 59cb29d6a5 ("target/riscv:
->> add Zicbop cbo.prefetch{i, r, m} placeholder") added placeholders for
->> what would be the instructions for zicbop (Cache Block Prefetch
->> Operations), which are now no-ops.
->>
->> The RVA22U64 profile mandates zicbop, which means that applications that
->> run with this profile might expect zicbop to be present in the riscv,isa
->> DT and might behave badly if it's absent.
->>
->> Adding zicbop as an extension will make our future RVA22U64
->> implementation more in line with what userspace expects and, if/when
->> cache block prefetch operations became relevant to QEMU, we already have
->> the extension flag to turn then on/off as needed.
->>
->> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->> ---
->>   hw/riscv/virt.c        | 5 +++++
->>   target/riscv/cpu.c     | 3 +++
->>   target/riscv/cpu_cfg.h | 2 ++
->>   3 files changed, 10 insertions(+)
->>
->> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
->> index 1732c42915..99c087240f 100644
->> --- a/hw/riscv/virt.c
->> +++ b/hw/riscv/virt.c
->> @@ -273,6 +273,11 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
->>                                     cpu_ptr->cfg.cboz_blocksize);
->>           }
->>   
->> +        if (cpu_ptr->cfg.ext_zicbop) {
->> +            qemu_fdt_setprop_cell(ms->fdt, cpu_name, "riscv,cbop-block-size",
-> 
-> I think we need to get this node approved by devicetree@vger.kernel.org
-> and merged into [1] first.
-> 
-> [1] Linux repo: Documentation/devicetree/bindings/riscv/cpus.yaml
+1) MADT (AIA) - https://drive.google.com/file/d/1oMGPyOD58JaPgMl1pKasT-VKsIKia7zR/view?usp=sharing
+2) RHCT - https://drive.google.com/file/d/1sKbOa8m1UZw1JkquZYe3F1zQBN1xXsaf/view?usp=sharing
 
-We got an ack from the devicetree folks to add the "riscv,cbop-block-size"
-DT node:
+First two patches in this series are to migrate a couple of functions from
+ARM architecture to common code so that RISC-V doesn't need to duplicate
+the same.
 
-https://lore.kernel.org/linux-devicetree/20231030-attest-unchain-ab99981a5738@spud/
+The patch set is based on Alistair's riscv-to-apply.next branch.
 
+These changes are also available in  riscv_acpi_b2_v5 branch at:
+https://github.com/vlsunil/qemu/
 
-I believe we don't have blockers to proceed with this change then. Thanks,
+Changes since v4:
+	1) Updated copyright for new files as per SPDX format suggested by Drew.
+	2) Updated RINTC patch to avoid code duplication as suggested by Drew.
+	3) Moved mmu offset below cmo in MMU patch as suggested by Drew.
+	4) Updated tags.
 
+Changes since v3:
+	1) Addressed comments from Daniel and Drew.
+	2) Added a new patch in microvm to use common function for virtio in DSDT.
+	3) Rebased to latest riscv-to-apply.next branch and added tags.
 
-Daniel
+Changes since v2:
+        1) Rebased to latest riscv-to-apply.next branch which needed
+           changing ext_icboz to ext_zicboz in CMO patch.
+        2) Fixed node type in MMU node.
+        3) Added latest tags.
 
-> 
->> +                                  cpu_ptr->cfg.cbop_blocksize);
->> +        }
->> +
->>           qemu_fdt_setprop_string(ms->fdt, cpu_name, "compatible", "riscv");
->>           qemu_fdt_setprop_string(ms->fdt, cpu_name, "status", "okay");
->>           qemu_fdt_setprop_cell(ms->fdt, cpu_name, "reg",
->> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> index f40da4c661..6c0050988f 100644
->> --- a/target/riscv/cpu.c
->> +++ b/target/riscv/cpu.c
->> @@ -78,6 +78,7 @@ const uint32_t misa_bits[] = {RVI, RVE, RVM, RVA, RVF, RVD, RVV,
->>    */
->>   const RISCVIsaExtData isa_edata_arr[] = {
->>       ISA_EXT_DATA_ENTRY(zicbom, PRIV_VERSION_1_12_0, ext_zicbom),
->> +    ISA_EXT_DATA_ENTRY(zicbop, PRIV_VERSION_1_12_0, ext_zicbop),
->>       ISA_EXT_DATA_ENTRY(zicboz, PRIV_VERSION_1_12_0, ext_zicboz),
->>       ISA_EXT_DATA_ENTRY(zicond, PRIV_VERSION_1_12_0, ext_zicond),
->>       ISA_EXT_DATA_ENTRY(zicntr, PRIV_VERSION_1_12_0, ext_zicntr),
->> @@ -1336,6 +1337,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
->>       MULTI_EXT_CFG_BOOL("zhinxmin", ext_zhinxmin, false),
->>   
->>       MULTI_EXT_CFG_BOOL("zicbom", ext_zicbom, true),
->> +    MULTI_EXT_CFG_BOOL("zicbop", ext_zicbop, true),
->>       MULTI_EXT_CFG_BOOL("zicboz", ext_zicboz, true),
->>   
->>       MULTI_EXT_CFG_BOOL("zmmul", ext_zmmul, false),
->> @@ -1424,6 +1426,7 @@ Property riscv_cpu_options[] = {
->>       DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
->>   
->>       DEFINE_PROP_UINT16("cbom_blocksize", RISCVCPU, cfg.cbom_blocksize, 64),
->> +    DEFINE_PROP_UINT16("cbop_blocksize", RISCVCPU, cfg.cbop_blocksize, 64),
->>       DEFINE_PROP_UINT16("cboz_blocksize", RISCVCPU, cfg.cboz_blocksize, 64),
->>   
->>       DEFINE_PROP_END_OF_LIST(),
->> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
->> index 6eef4a51ea..2203b4c45b 100644
->> --- a/target/riscv/cpu_cfg.h
->> +++ b/target/riscv/cpu_cfg.h
->> @@ -65,6 +65,7 @@ struct RISCVCPUConfig {
->>       bool ext_zicntr;
->>       bool ext_zicsr;
->>       bool ext_zicbom;
->> +    bool ext_zicbop;
->>       bool ext_zicboz;
->>       bool ext_zicond;
->>       bool ext_zihintntl;
->> @@ -134,6 +135,7 @@ struct RISCVCPUConfig {
->>       uint16_t vlen;
->>       uint16_t elen;
->>       uint16_t cbom_blocksize;
->> +    uint16_t cbop_blocksize;
->>       uint16_t cboz_blocksize;
->>       bool mmu;
->>       bool pmp;
->> -- 
->> 2.41.0
->>
-> 
-> Otherwise,
-> 
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-> 
-> Thanks,
-> drew
+Changes since v1:
+        1) As per Igor's suggestion, migrated fw_cfg and virtio creation
+           functions to device specific file instead of generic aml-build.c.
+           Since ACPI is optional, new files are created and enabled for
+           build only when CONFIG_ACPI is enabled.
+        2) As per Igor's suggestion, properties are added to the GPEX PCI
+           host to indicate MMIO ranges. The platform fw can initialize
+           these to appropriate values and the DSDT generator can fetch
+           the information from the host bus itself. This makes the code
+           generic instead of machine specific.
+        3) Added PLIC patch from Haibo.
+        4) Rebased to latest riscv-to-apply.next and added RB tags as
+           appropriate.
+
+Sunil V L (13):
+  hw/arm/virt-acpi-build.c: Migrate fw_cfg creation to common location
+  hw/arm/virt-acpi-build.c: Migrate virtio creation to common location
+  hw/i386/acpi-microvm.c: Use common function to add virtio in DSDT
+  hw/riscv: virt: Make few IMSIC macros and functions public
+  hw/riscv/virt-acpi-build.c: Add AIA support in RINTC
+  hw/riscv/virt-acpi-build.c: Add IMSIC in the MADT
+  hw/riscv/virt-acpi-build.c: Add APLIC in the MADT
+  hw/riscv/virt-acpi-build.c: Add CMO information in RHCT
+  hw/riscv/virt-acpi-build.c: Add MMU node in RHCT
+  hw/pci-host/gpex: Define properties for MMIO ranges
+  hw/riscv/virt: Update GPEX MMIO related properties
+  hw/riscv/virt-acpi-build.c: Add IO controllers and devices
+  hw/riscv/virt-acpi-build.c: Add PLIC in MADT
+
+ hw/arm/virt-acpi-build.c        |  51 +----
+ hw/i386/acpi-microvm.c          |  15 +-
+ hw/nvram/fw_cfg-acpi.c          |  23 +++
+ hw/nvram/meson.build            |   1 +
+ hw/pci-host/gpex-acpi.c         |  13 ++
+ hw/pci-host/gpex.c              |  12 ++
+ hw/riscv/Kconfig                |   1 +
+ hw/riscv/virt-acpi-build.c      | 323 +++++++++++++++++++++++++++++---
+ hw/riscv/virt.c                 |  72 ++++---
+ hw/virtio/meson.build           |   1 +
+ hw/virtio/virtio-acpi.c         |  32 ++++
+ include/hw/nvram/fw_cfg_acpi.h  |  15 ++
+ include/hw/pci-host/gpex.h      |  28 ++-
+ include/hw/riscv/virt.h         |  26 +++
+ include/hw/virtio/virtio-acpi.h |  16 ++
+ 15 files changed, 498 insertions(+), 131 deletions(-)
+ create mode 100644 hw/nvram/fw_cfg-acpi.c
+ create mode 100644 hw/virtio/virtio-acpi.c
+ create mode 100644 include/hw/nvram/fw_cfg_acpi.h
+ create mode 100644 include/hw/virtio/virtio-acpi.h
+
+-- 
+2.39.2
+
 
