@@ -4,76 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 229E0C4332F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 30 Oct 2023 09:13:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4429C4167B
+	for <qemu-riscv@archiver.kernel.org>; Mon, 30 Oct 2023 10:21:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qxOKL-0000D2-BN; Mon, 30 Oct 2023 05:12:53 -0400
+	id 1qxPOh-0001Ys-KF; Mon, 30 Oct 2023 06:21:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1qxOKI-0000Cf-Cc; Mon, 30 Oct 2023 05:12:50 -0400
-Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1qxOKG-0003SJ-OW; Mon, 30 Oct 2023 05:12:50 -0400
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-9c5b313b3ffso626347266b.0; 
- Mon, 30 Oct 2023 02:12:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698657166; x=1699261966; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VP+R3Q+TYgZJQr2tiX1ZibcvIpQauSNa+wcCC0xO0gU=;
- b=nIr5n5yQr4Eno6jPpvjJqO7BjIHc/9jwt1J2kzuyT2WD4Tz1VfcNoIUv3XZpHCTBvF
- 1Pwq2HEYB/WQrc7OTEJG3/4uhj2tCk3VGIlQLgDQBnpNYnrBtaXx5kot6yFAsAw0E3Zu
- tK8yYUYyz57jaFZDdDoWYp9Kw2l22xjSm6ka7PMJu7ktknSK2n+zZzALOAyge1WdFcca
- EeePxvlTi7MnIxizA6cAfv5pYjPTfVyPd1ImleahsOOdQclJsoOqYfvS5qD0aZUS8Wa5
- bZKI4BVjqYt97Zjj+jkm2+mxw33ZKIdkk/elfNY/nhxi5lrSLWbaphJTa59XiISb35Ks
- VYXg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698657166; x=1699261966;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VP+R3Q+TYgZJQr2tiX1ZibcvIpQauSNa+wcCC0xO0gU=;
- b=IwC7Kz/O5VGARfiSiYA5ZD14tJ4AgaNLuuF/CM7K0bnr7+qGRZ91CiDtbzaJcXoLLt
- SHNPGmfD9qXUk47snZkogJLCvE02DghF3QUYn3GboqbV9bsbaL6NZ1e3793LthJTpoFD
- JQxhvAne3s59z7rn5Te+KSKcU80GL1EmCxC/jvg7UpdFMVD/TkG1ieuwgYNu+EkQW9JW
- BA0z4mpm1fQSjJCxj9Szv5iEittVEuJB8aIzrQKSPc5ifNGP7ZRNj06W9z8br1wUT4a/
- C1LcQnN1UiYlQIrCTdTOLEGYeSco6LAjyzmuzqEz58PK85tq6jtZV88n+F4tX0b1erWO
- xllg==
-X-Gm-Message-State: AOJu0Yzrt/RsBvjKUGpHUddEyZQ+M96LAQVbO+qn/EirHwmy5Vbfbq24
- dbQhWp3RKAlRZi+VJZMyV0jRsFgCrgosDucDKf4=
-X-Google-Smtp-Source: AGHT+IEXCspb3Tj2W/7pGFZowzzrOqKehz/xX+E0RPubUbh4/WWPgGqE4YiW/iuzW+h7gLlbpUgz2m+VQvp0MCQrV4w=
-X-Received: by 2002:a17:907:2d0f:b0:9bf:d65d:dc0f with SMTP id
- gs15-20020a1709072d0f00b009bfd65ddc0fmr8962516ejc.4.1698657166133; Mon, 30
- Oct 2023 02:12:46 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
+ id 1qxPOX-0000v7-R1; Mon, 30 Oct 2023 06:21:20 -0400
+Received: from smtp-relay-canonical-1.canonical.com ([185.125.188.121])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
+ id 1qxPOU-0005ja-Qo; Mon, 30 Oct 2023 06:21:17 -0400
+Received: from LT2ubnt.. (unknown [159.148.28.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id F3A483FBA1; 
+ Mon, 30 Oct 2023 10:21:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1698661270;
+ bh=3GCehRoUQTTLHwBehjbOAMyNSUQP7XzEyuivE4Adaf0=;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
+ b=SShQPQ7JImQZ/z2dnxsd8YLYHKVxN4/e4BfduajtmTFF6QUGKhE11fWXTmvvW97hl
+ t5bwX7segOulBY8AdbLEWgtd030neD+VwoHmpMpgJf4m6cuvNejBn5sE5f3OHEkLWR
+ J/xSnGQVS/hZB+Y1vICkCVkoBaqEMMf3x9lHwKR4/Zxnh5BvxomyDFTOjMtKA/8Cp5
+ KuGRNVKg5cPHEWT8U30fUL5hoXHXqKqu+1iE7MEPhDwZWvvS+GabpotzFvanSSItr5
+ nQdxgt6seJ9q1T7t0K3Evowdb+QnYNLyWTwPKpD6fyM9dT6TluOg2a/aYZNOAFdTqk
+ p11FU3SmdOhCw==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>
+Cc: Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 1/1] target/riscv: correct csr_ops[CSR_MSECCFG]
+Date: Mon, 30 Oct 2023 12:21:05 +0200
+Message-Id: <20231030102105.19501-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-References: <20231030081607.115118-1-liweiwei@iscas.ac.cn>
- <20231030081607.115118-2-liweiwei@iscas.ac.cn>
-In-Reply-To: <20231030081607.115118-2-liweiwei@iscas.ac.cn>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 30 Oct 2023 17:12:36 +0800
-Message-ID: <CAEUhbmX4uV8eymdM4iEEUcRFJwt0C+j_xjCG7cVxJk+HH_NozA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] MAINTAINERS: update mail address for Weiwei Li
-To: Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com, lazyparser@gmail.com, 
- Weiwei Li <liwei1518@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x62a.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=185.125.188.121;
+ envelope-from=heinrich.schuchardt@canonical.com;
+ helo=smtp-relay-canonical-1.canonical.com
+X-Spam_score_int: -48
+X-Spam_score: -4.9
+X-Spam_bar: ----
+X-Spam_report: (-4.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.478,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -90,19 +74,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Oct 30, 2023 at 4:17=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wr=
-ote:
->
-> My Iscas mail account will be disabled soon, change to my personal
-> gmail account.
->
-> Signed-off-by: Weiwei Li <liwei1518@gmail.com>
-> ---
->  MAINTAINERS | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
+The CSR register mseccfg is used by multiple extensions: Smepm and Zkr.
 
-Wish you best of luck on your new journey!
+Consider this when checking the existence of the register.
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Fixes: 77442380ecbe ("target/riscv: rvk: add CSR support for Zkr")
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+v2:
+	rebase on alistair23/riscv-to-apply-next
+---
+ target/riscv/csr.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 4ca96ddd1d..fc26b52c88 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -528,11 +528,14 @@ static RISCVException pmp(CPURISCVState *env, int csrno)
+     return RISCV_EXCP_ILLEGAL_INST;
+ }
+ 
+-static RISCVException smepmp(CPURISCVState *env, int csrno)
++static RISCVException have_mseccfg(CPURISCVState *env, int csrno)
+ {
+     if (riscv_cpu_cfg(env)->ext_smepmp) {
+         return RISCV_EXCP_NONE;
+     }
++    if (riscv_cpu_cfg(env)->ext_zkr) {
++        return RISCV_EXCP_NONE;
++    }
+ 
+     return RISCV_EXCP_ILLEGAL_INST;
+ }
+@@ -4766,7 +4769,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     [CSR_VSIPH]       = { "vsiph",       aia_hmode32, NULL, NULL, rmw_vsiph },
+ 
+     /* Physical Memory Protection */
+-    [CSR_MSECCFG]    = { "mseccfg", smepmp, read_mseccfg, write_mseccfg,
++    [CSR_MSECCFG]    = { "mseccfg",   have_mseccfg, read_mseccfg, write_mseccfg,
+                          .min_priv_ver = PRIV_VERSION_1_11_0           },
+     [CSR_PMPCFG0]    = { "pmpcfg0",   pmp, read_pmpcfg,  write_pmpcfg  },
+     [CSR_PMPCFG1]    = { "pmpcfg1",   pmp, read_pmpcfg,  write_pmpcfg  },
+-- 
+2.40.1
+
 
