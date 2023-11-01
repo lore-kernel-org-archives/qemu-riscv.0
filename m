@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71730C4332F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 31 Oct 2023 20:52:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 945E8C4332F
+	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Nov 2023 00:15:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qxviX-0001ce-K5; Tue, 31 Oct 2023 16:52:05 -0400
+	id 1qxysr-00086A-FJ; Tue, 31 Oct 2023 20:14:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qxviW-0001bv-Oz
- for qemu-riscv@nongnu.org; Tue, 31 Oct 2023 16:52:04 -0400
-Received: from mail-vk1-xa2a.google.com ([2607:f8b0:4864:20::a2a])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1qxysq-00085o-1i; Tue, 31 Oct 2023 20:14:56 -0400
+Received: from mail-vk1-xa2c.google.com ([2607:f8b0:4864:20::a2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qxviU-0001EL-45
- for qemu-riscv@nongnu.org; Tue, 31 Oct 2023 16:52:04 -0400
-Received: by mail-vk1-xa2a.google.com with SMTP id
- 71dfb90a1353d-49d9ef118a5so2527575e0c.1
- for <qemu-riscv@nongnu.org>; Tue, 31 Oct 2023 13:52:01 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1qxyso-0001Qb-FE; Tue, 31 Oct 2023 20:14:55 -0400
+Received: by mail-vk1-xa2c.google.com with SMTP id
+ 71dfb90a1353d-4a4021adbc7so2410725e0c.2; 
+ Tue, 31 Oct 2023 17:14:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1698785519; x=1699390319; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=FR3ujDYIpjULyW/1KYJG1hqQjepS6FGdNIe2vE+WeLg=;
- b=meUJP7DMclhMIw7D+BZ9y43jiDv2mDljPoAOTiuljZV0TRhzy71zm15Z+rgP+CUO+X
- f20TrQcV8qsBXlUFphmFZ0eykZJzNN2i4uE5ygUeWU16VWk4mU0bBX0PUG9t0XUHX1dZ
- bcywNwtlLP9oMwpXrOnmVZIU5DjklOQxoW9wK0x+SyCKg0a5fnRpOES83Dzxb5vwU4Tf
- iatxYLj5DbHwha3K2LL6yExXcDq7a3ITS8kxDLLMwAFXUQhh+22H4MTQfOLsV8HRW6Pp
- g1rMYENBvU2xshWi4hQlS5FrKdZmTyZyq1twMD9arFgYw6dxY0wEhXOFuah2arl2ZzLP
- EzWg==
+ d=gmail.com; s=20230601; t=1698797692; x=1699402492; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=q6yHnGmQZYl1nKZrR2H5xNy9BTToWnEGTTx/awaLIuA=;
+ b=MBWEMCYpFH5qQTByk2ehOVmM4jHBHVO2/uS+R43sOBx4Acs+bEQVNcEdYRbw76WRpB
+ X1omZJepuRXqtcAZ64RYKDCF//2Ubd1Lr1kZGxMbb3dwIEO1e2FB2z7P+TIBLRwi8uCJ
+ Vav4MmUofbzm8gJSZV3k9Np0Ci0DfyapTZYnXm8s8Ws47xWXB1r3zPfeljz2Oryrj2rb
+ SeT7u4ajMUMKQhiFNWzzkaofBmZB356/pTU8RR+q12JNZBvhCjIJ2wrp+pL73vMgW6Z2
+ a8kJexy6NAJgM8WZHuK3GXe6qnMgoJ+HycWDFdYs++4BQn6iJ28fePvFtmmw5IbNm9gd
+ K3YA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698785519; x=1699390319;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=FR3ujDYIpjULyW/1KYJG1hqQjepS6FGdNIe2vE+WeLg=;
- b=PlfTr7jxWm2C+iZ2SJOULRcUjS04lAa2wHn8nFu+ut61korbKg4AD0CME7NA1gxjVJ
- VCn1TMqmPw8DC7aETqJBm6SD62FwC6iQz4gC+J8G62PHGx2hDhVvJ9IUVHdoUnCU9TCn
- IW/W5KlpMuitdaJT/XwOz424XXlKp6dea9diKynpo+aXu+wOZE4e44VgfgOh8o4CC2OE
- z2ulAz3eMUySnuxoeigJs7dTck3BeJIXUiKJYE5CWxsCby/xRsAzCOQkcjbAHYvaq1uM
- e740b/7reZj8gQj67YFZ0hpKEnZTA0Me2kYwm+MtKQEsA/GEoMWDTj75+Vmd+S89SpA+
- KSVQ==
-X-Gm-Message-State: AOJu0YyQgUu/+z4p+zwGA8W88ZfTsSgpDxC1pMIw8RO25ddlbBrWDdhO
- F/AvPON7xyq93m1RGv01Phfgcg==
-X-Google-Smtp-Source: AGHT+IH8XUwnA0miDHEaQBSrPQ9PjnzdPtl4bMXmHrlSlRZHBLV/y/Gy1L9+XQV2MTHfYyBk9Tdjlg==
-X-Received: by 2002:a1f:b201:0:b0:493:3491:ce89 with SMTP id
- b1-20020a1fb201000000b004933491ce89mr9419667vkf.14.1698785519468; 
- Tue, 31 Oct 2023 13:51:59 -0700 (PDT)
-Received: from grind.. ([179.193.10.161]) by smtp.gmail.com with ESMTPSA id
- t8-20020a0cef48000000b00671ab3da5d0sm826408qvs.105.2023.10.31.13.51.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 Oct 2023 13:51:59 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH] target/riscv/kvm: add zicsr, zifencei, zba, zbs, svnapot
-Date: Tue, 31 Oct 2023 17:51:50 -0300
-Message-ID: <20231031205150.208405-1-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.41.0
+ d=1e100.net; s=20230601; t=1698797692; x=1699402492;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=q6yHnGmQZYl1nKZrR2H5xNy9BTToWnEGTTx/awaLIuA=;
+ b=aO36BgwfF9OY7SuzBapRAuv7cRzSCPgMTb3eGBxTB+Vyoh4p45BHX0kLdKLQElLtJF
+ cj0m6GXQk8y2fV4DruNqvULpcLQdixuf6wEEG11bSLgWekTq3Y1V7wgEro7PrQHeiX3I
+ 7RKm1HisDel1yZr/y05cggK4+JUaMJaX4PHj+OP4evMtPwEw5TP1Hom9uLDTB7fj/Nse
+ rEMMWCkcsTwGB/1OfDrfwL337SrcqUWXyPqa6OYlgzG53WFGin0p+zCvQmlxijN/HuCu
+ ZZACy4/HieGI4ZvpDi2LKz+23/IzcG30DuwF8Z5TPFMg1GBmDQEqz/0QvC2n1IOM3She
+ PO9g==
+X-Gm-Message-State: AOJu0YwX+w93zFN2GBYt05didB75qCrjYFa0FF71JM8JuWf1YOOTF3ho
+ XvuOcXEbSh/9gL/4scPHRw8U4PnYwVBIIRUX0x0=
+X-Google-Smtp-Source: AGHT+IGpcKYV1eGTYbohkJGiKpMoMSC/pNDFrSM82pAsLabjlGVvgiR2clfNxTrHrQ7LbrnPV5jnO1RbRZrqMb+fk18=
+X-Received: by 2002:a67:c21b:0:b0:457:bc6c:937c with SMTP id
+ i27-20020a67c21b000000b00457bc6c937cmr14868350vsj.4.1698797692485; Tue, 31
+ Oct 2023 17:14:52 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2a;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-vk1-xa2a.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20231031205150.208405-1-dbarboza@ventanamicro.com>
+In-Reply-To: <20231031205150.208405-1-dbarboza@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 1 Nov 2023 10:14:25 +1000
+Message-ID: <CAKmqyKO-mMiygfsA-Gp424kCDf8eZ7ssX-gRWzCEO7hJnyr-Eg@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv/kvm: add zicsr, zifencei, zba, zbs, svnapot
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, ajones@ventanamicro.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2c;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2c.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -92,36 +89,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-These regs were added in Linux 6.6.
+On Wed, Nov 1, 2023 at 6:53=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> These regs were added in Linux 6.6.
+>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/kvm/kvm-cpu.c | 5 +++++
- 1 file changed, 5 insertions(+)
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index a11c0e4a99..78fa1fa162 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -229,12 +229,17 @@ static KVMCPUConfig kvm_multi_ext_cfgs[] = {
-     KVM_EXT_CFG("zicbom", ext_zicbom, KVM_RISCV_ISA_EXT_ZICBOM),
-     KVM_EXT_CFG("zicboz", ext_zicboz, KVM_RISCV_ISA_EXT_ZICBOZ),
-     KVM_EXT_CFG("zicntr", ext_zicntr, KVM_RISCV_ISA_EXT_ZICNTR),
-+    KVM_EXT_CFG("zicsr", ext_zicsr, KVM_RISCV_ISA_EXT_ZICSR),
-+    KVM_EXT_CFG("zifencei", ext_zifencei, KVM_RISCV_ISA_EXT_ZIFENCEI),
-     KVM_EXT_CFG("zihintpause", ext_zihintpause, KVM_RISCV_ISA_EXT_ZIHINTPAUSE),
-     KVM_EXT_CFG("zihpm", ext_zihpm, KVM_RISCV_ISA_EXT_ZIHPM),
-+    KVM_EXT_CFG("zba", ext_zba, KVM_RISCV_ISA_EXT_ZBA),
-     KVM_EXT_CFG("zbb", ext_zbb, KVM_RISCV_ISA_EXT_ZBB),
-+    KVM_EXT_CFG("zbs", ext_zbs, KVM_RISCV_ISA_EXT_ZBS),
-     KVM_EXT_CFG("ssaia", ext_ssaia, KVM_RISCV_ISA_EXT_SSAIA),
-     KVM_EXT_CFG("sstc", ext_sstc, KVM_RISCV_ISA_EXT_SSTC),
-     KVM_EXT_CFG("svinval", ext_svinval, KVM_RISCV_ISA_EXT_SVINVAL),
-+    KVM_EXT_CFG("svnapot", ext_svnapot, KVM_RISCV_ISA_EXT_SVNAPOT),
-     KVM_EXT_CFG("svpbmt", ext_svpbmt, KVM_RISCV_ISA_EXT_SVPBMT),
- };
- 
--- 
-2.41.0
+Alistair
 
+> ---
+>  target/riscv/kvm/kvm-cpu.c | 5 +++++
+>  1 file changed, 5 insertions(+)
+>
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index a11c0e4a99..78fa1fa162 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -229,12 +229,17 @@ static KVMCPUConfig kvm_multi_ext_cfgs[] =3D {
+>      KVM_EXT_CFG("zicbom", ext_zicbom, KVM_RISCV_ISA_EXT_ZICBOM),
+>      KVM_EXT_CFG("zicboz", ext_zicboz, KVM_RISCV_ISA_EXT_ZICBOZ),
+>      KVM_EXT_CFG("zicntr", ext_zicntr, KVM_RISCV_ISA_EXT_ZICNTR),
+> +    KVM_EXT_CFG("zicsr", ext_zicsr, KVM_RISCV_ISA_EXT_ZICSR),
+> +    KVM_EXT_CFG("zifencei", ext_zifencei, KVM_RISCV_ISA_EXT_ZIFENCEI),
+>      KVM_EXT_CFG("zihintpause", ext_zihintpause, KVM_RISCV_ISA_EXT_ZIHINT=
+PAUSE),
+>      KVM_EXT_CFG("zihpm", ext_zihpm, KVM_RISCV_ISA_EXT_ZIHPM),
+> +    KVM_EXT_CFG("zba", ext_zba, KVM_RISCV_ISA_EXT_ZBA),
+>      KVM_EXT_CFG("zbb", ext_zbb, KVM_RISCV_ISA_EXT_ZBB),
+> +    KVM_EXT_CFG("zbs", ext_zbs, KVM_RISCV_ISA_EXT_ZBS),
+>      KVM_EXT_CFG("ssaia", ext_ssaia, KVM_RISCV_ISA_EXT_SSAIA),
+>      KVM_EXT_CFG("sstc", ext_sstc, KVM_RISCV_ISA_EXT_SSTC),
+>      KVM_EXT_CFG("svinval", ext_svinval, KVM_RISCV_ISA_EXT_SVINVAL),
+> +    KVM_EXT_CFG("svnapot", ext_svnapot, KVM_RISCV_ISA_EXT_SVNAPOT),
+>      KVM_EXT_CFG("svpbmt", ext_svpbmt, KVM_RISCV_ISA_EXT_SVPBMT),
+>  };
+>
+> --
+> 2.41.0
+>
+>
 
