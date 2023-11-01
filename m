@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 945E8C4332F
-	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Nov 2023 00:15:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79814C4332F
+	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Nov 2023 00:18:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qxysr-00086A-FJ; Tue, 31 Oct 2023 20:14:57 -0400
+	id 1qxywA-0000c2-0i; Tue, 31 Oct 2023 20:18:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qxysq-00085o-1i; Tue, 31 Oct 2023 20:14:56 -0400
-Received: from mail-vk1-xa2c.google.com ([2607:f8b0:4864:20::a2c])
+ id 1qxyw8-0000bR-1l; Tue, 31 Oct 2023 20:18:20 -0400
+Received: from mail-vs1-xe2e.google.com ([2607:f8b0:4864:20::e2e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qxyso-0001Qb-FE; Tue, 31 Oct 2023 20:14:55 -0400
-Received: by mail-vk1-xa2c.google.com with SMTP id
- 71dfb90a1353d-4a4021adbc7so2410725e0c.2; 
- Tue, 31 Oct 2023 17:14:53 -0700 (PDT)
+ id 1qxyw6-0002CY-E3; Tue, 31 Oct 2023 20:18:19 -0400
+Received: by mail-vs1-xe2e.google.com with SMTP id
+ ada2fe7eead31-457c82cd87bso2427266137.0; 
+ Tue, 31 Oct 2023 17:18:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698797692; x=1699402492; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1698797897; x=1699402697; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=q6yHnGmQZYl1nKZrR2H5xNy9BTToWnEGTTx/awaLIuA=;
- b=MBWEMCYpFH5qQTByk2ehOVmM4jHBHVO2/uS+R43sOBx4Acs+bEQVNcEdYRbw76WRpB
- X1omZJepuRXqtcAZ64RYKDCF//2Ubd1Lr1kZGxMbb3dwIEO1e2FB2z7P+TIBLRwi8uCJ
- Vav4MmUofbzm8gJSZV3k9Np0Ci0DfyapTZYnXm8s8Ws47xWXB1r3zPfeljz2Oryrj2rb
- SeT7u4ajMUMKQhiFNWzzkaofBmZB356/pTU8RR+q12JNZBvhCjIJ2wrp+pL73vMgW6Z2
- a8kJexy6NAJgM8WZHuK3GXe6qnMgoJ+HycWDFdYs++4BQn6iJ28fePvFtmmw5IbNm9gd
- K3YA==
+ bh=8fL9XykDf10uUILG01Bk75GIVVvt28Xl5B1rpTePyYM=;
+ b=JwFH9mJk5qYGtweM2qbKDjdWAMXga9uYzj+9i/RGSGP8BrqjfE5PZD467cs2vqx+4V
+ AijvJ+BKc5yP3wPeifWrHxHmsaJH5biVrJMO5ejzTWLwpAW7xvnncklYWEdPY2FYUFwe
+ lh2ERN5UccZTmUYn//gUsZYZcpDFcMI73eMxuozrxtQB8TWshX+2taOsocdz93NobzsO
+ pZ88hhZiquVeUJ3Ze6Ubzg3eWjziZLyiYVZRQJ6UzXdGMqfDpm+dStWzXKHuzCO0ccU0
+ DnST63FBGClWKpEn0zt2ZQVxwFBwcQ0MZrGb0J6A8xGiQqFugqf0xN8BGvL7PEwf2elX
+ X0dw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698797692; x=1699402492;
+ d=1e100.net; s=20230601; t=1698797897; x=1699402697;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=q6yHnGmQZYl1nKZrR2H5xNy9BTToWnEGTTx/awaLIuA=;
- b=aO36BgwfF9OY7SuzBapRAuv7cRzSCPgMTb3eGBxTB+Vyoh4p45BHX0kLdKLQElLtJF
- cj0m6GXQk8y2fV4DruNqvULpcLQdixuf6wEEG11bSLgWekTq3Y1V7wgEro7PrQHeiX3I
- 7RKm1HisDel1yZr/y05cggK4+JUaMJaX4PHj+OP4evMtPwEw5TP1Hom9uLDTB7fj/Nse
- rEMMWCkcsTwGB/1OfDrfwL337SrcqUWXyPqa6OYlgzG53WFGin0p+zCvQmlxijN/HuCu
- ZZACy4/HieGI4ZvpDi2LKz+23/IzcG30DuwF8Z5TPFMg1GBmDQEqz/0QvC2n1IOM3She
- PO9g==
-X-Gm-Message-State: AOJu0YwX+w93zFN2GBYt05didB75qCrjYFa0FF71JM8JuWf1YOOTF3ho
- XvuOcXEbSh/9gL/4scPHRw8U4PnYwVBIIRUX0x0=
-X-Google-Smtp-Source: AGHT+IGpcKYV1eGTYbohkJGiKpMoMSC/pNDFrSM82pAsLabjlGVvgiR2clfNxTrHrQ7LbrnPV5jnO1RbRZrqMb+fk18=
-X-Received: by 2002:a67:c21b:0:b0:457:bc6c:937c with SMTP id
- i27-20020a67c21b000000b00457bc6c937cmr14868350vsj.4.1698797692485; Tue, 31
- Oct 2023 17:14:52 -0700 (PDT)
+ bh=8fL9XykDf10uUILG01Bk75GIVVvt28Xl5B1rpTePyYM=;
+ b=vXuisyPQrnRapbgGHLCl0b2UW9cQhUappXvC7XS7H95EkxOAZqV9oPD+t9xWHuzeOV
+ Whu1mbIpodEaCpHPdKI56qkoVT6nCoVCbL6BOas9ihNJKNGetEn7qvI827L6ZMH3Jnej
+ gAk31phPiaSfpqRvegAqA1KL17OeoeLHg9pZDXTCYDn7vbjttp4ooHWJ8KNmcPvTpI4g
+ qZYI2hg4vVGbVrcxTk9L206TqO5MdsmmUF/1hJOVEMr9R0Bd+kVpmcvMlUTIIhVAuv34
+ aQl54WTruI42hGkYM/3W8E1pcXQQSwPaMRON2qSYrLcxwol37ZY1SMp1N/c4ARymFG9L
+ MTPA==
+X-Gm-Message-State: AOJu0YxjhYwWA965FCN60qCS3dmynz8Xod5Ce38bIY6mL7FUtPz0YLlk
+ 5dhy3pIXneLCOI83Jp4TJfqxP6YjK2qeL/BzFMc=
+X-Google-Smtp-Source: AGHT+IGmBkMPRZaewTj5udLoB3kgYS0uWVwgjNoeQolZkDokKhp8rnDL9rgb2clHt/GoG93HDUGkuGpNYKh3i74C1mw=
+X-Received: by 2002:a67:c218:0:b0:44e:99a2:a42 with SMTP id
+ i24-20020a67c218000000b0044e99a20a42mr10113194vsj.11.1698797896809; Tue, 31
+ Oct 2023 17:18:16 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231031205150.208405-1-dbarboza@ventanamicro.com>
 In-Reply-To: <20231031205150.208405-1-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 1 Nov 2023 10:14:25 +1000
-Message-ID: <CAKmqyKO-mMiygfsA-Gp424kCDf8eZ7ssX-gRWzCEO7hJnyr-Eg@mail.gmail.com>
+Date: Wed, 1 Nov 2023 10:17:49 +1000
+Message-ID: <CAKmqyKP3NvjNTLKfPFNxjC_vFu6=C50tDGyrgHw9sPFsY0JmBg@mail.gmail.com>
 Subject: Re: [PATCH] target/riscv/kvm: add zicsr, zifencei, zba, zbs, svnapot
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
@@ -64,8 +64,8 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
  palmer@rivosinc.com, ajones@ventanamicro.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2c;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2e;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2e.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -96,7 +96,9 @@ On Wed, Nov 1, 2023 at 6:53=E2=80=AFAM Daniel Henrique Barboza
 >
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
