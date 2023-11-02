@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 546FCC4332F
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 00:35:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1553EC4332F
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 00:36:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qyLfX-0002z8-5Z; Wed, 01 Nov 2023 20:34:43 -0400
+	id 1qyLcm-0001Wq-MU; Wed, 01 Nov 2023 20:31:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qyLfU-0002hn-ND; Wed, 01 Nov 2023 20:34:40 -0400
-Received: from mail-oo1-xc2e.google.com ([2607:f8b0:4864:20::c2e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qyLfR-00040N-4M; Wed, 01 Nov 2023 20:34:40 -0400
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-5842ea6f4d5so196248eaf.2; 
- Wed, 01 Nov 2023 17:34:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698885274; x=1699490074; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=UWYyC1B0giHCsZW0ITJxiaUXwylVs/gXz4ihPJwzBVA=;
- b=LYJMTsdgbtkFACv9r1LORbZFMjqECD0QcaCp+Un7Z/W55jvGCxOrLIvulswTFEDMdX
- eBDJYmQYnkvnzrerCJNY1C3Euwp7MZnjqzivJg4Vu/TdfrDFnS6BEpDK7YLlVQS5xTec
- aM1Fcv3qYXV8FIjFr+N6AJXdrp+9Du2lqtnVXu93YxDwGeMau2St/mfBxZzILjIG+po9
- XVvfeF1K2ZjKlkUj2DZTKpkSvs4ddJUzrDldCVcRxAwElXEChQwh1EvyHdVUGV7KnZ2w
- 9F0DyNtSjb5JFFfEMP2orv8m1+Md1YksVWKSr7irP72fu5rSwyYc/aTgTnY7TnDoQaBG
- PVmg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698885274; x=1699490074;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=UWYyC1B0giHCsZW0ITJxiaUXwylVs/gXz4ihPJwzBVA=;
- b=AluYcvZTpr4b/6MXbpyqfFJWkjYgnlj88dE3px5D/CF21k+En6H56QlU/fl/1VCTOi
- L/D2o2ljFOuIUPTuWdRjaeyuk9EfFSlWty97N1NYgxfsHr09+ci2wkq7YfbBij3qdB/y
- ly+fQFtGalSM5902LG0PDYkRYpHlDomKGjle2cIJ5iVwL0YxjZFI82iEjwTVJ+w3U5ee
- +t3Ulel/2C5g6p+OiG2HhCbjZOI8TIYgOnZzIEAbJkWWMLOioBb5NdVAv18LC9QgFIds
- G2Ud3tkhuLHBJ+bBykvcLAY62o1k6bvMQyjvoaVz/woWEQY4DrfACKcjcOfIkNGvv+Hl
- 0DAA==
-X-Gm-Message-State: AOJu0Yyp7GK2a+QdXxk6jFcpQeC7soFZgPoqrRboC75Ddb0uwCJ1ml92
- JCtp33EKx36YQyJ4kD+DdUy9cDFYnkTjoA==
-X-Google-Smtp-Source: AGHT+IEARA2Me6CV1XjML1BboWmq3yxQwYlO6vr5OibcWTkw60Z/a3g2SO6xIrro1OGnWtRvJIlThw==
-X-Received: by 2002:a05:6358:7206:b0:169:81be:8ba9 with SMTP id
- h6-20020a056358720600b0016981be8ba9mr9720559rwa.7.1698885274105; 
- Wed, 01 Nov 2023 17:34:34 -0700 (PDT)
-Received: from toolbox.alistair23.me
- (2403-580b-97e8-0-321-6fb2-58f1-a1b1.ip6.aussiebb.net.
- [2403:580b:97e8:0:321:6fb2:58f1:a1b1])
- by smtp.gmail.com with ESMTPSA id
- k187-20020a633dc4000000b0057c29fec795sm411783pga.37.2023.11.01.17.34.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Nov 2023 17:34:33 -0700 (PDT)
-From: Alistair Francis <alistair23@gmail.com>
-X-Google-Original-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: liweiwei@iscas.ac.cn, Alistair Francis <alistair.francis@wdc.com>,
- Alistair Francis <alistair@alistair23.me>,
- Palmer Dabbelt <palmer@dabbelt.com>, alistair23@gmail.com,
- Bin Meng <bin.meng@windriver.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, bmeng.cn@gmail.com
-Subject: [PATCH 0/2] RISC-V: OpenTitan: Fixup ePMP and SPI interrupts
-Date: Thu,  2 Nov 2023 10:34:22 +1000
-Message-ID: <20231102003424.2003428-1-alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.41.0
-Content-Type: text/plain; charset="utf-8"
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qyLcj-0001Au-CC
+ for qemu-riscv@nongnu.org; Wed, 01 Nov 2023 20:31:49 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qyLch-0002er-Cg
+ for qemu-riscv@nongnu.org; Wed, 01 Nov 2023 20:31:49 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1698885106;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=HAmJR97N1p+HFxaLy1sg9/QiaB8n3tU9O4qQ7UKAECs=;
+ b=AFKCQs2IGNHLyyNYcikNKhddZsz2aFeyoM62paPFEHeZ0vxlP/kI9ukD+6ikr55EybBW5k
+ Vwfs+6cKNY3MSTyEIYhEwrs0WDBRztRHX0jkTSHXh8L6E7ce2SE9b6Xo+w5tpHibWwVGsI
+ XJdhaLKKA+v+fgtFx40o1mgJK732SKU=
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-487-GKHcXHFcMUyBz_Y_dcI7mQ-1; Wed,
+ 01 Nov 2023 20:31:43 -0400
+X-MC-Unique: GKHcXHFcMUyBz_Y_dcI7mQ-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.8])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 3ED803826D26;
+ Thu,  2 Nov 2023 00:31:41 +0000 (UTC)
+Received: from gshan.redhat.com (unknown [10.64.136.70])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 19878C0FE05;
+ Thu,  2 Nov 2023 00:31:24 +0000 (UTC)
+From: Gavin Shan <gshan@redhat.com>
+To: qemu-arm@nongnu.org
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
+ qemu-s390x@nongnu.org, philmd@linaro.org, clg@kaod.org,
+ imammedo@redhat.com, imp@bsdimp.com, kevans@freebsd.org,
+ richard.henderson@linaro.org, pbonzini@redhat.com,
+ peter.maydell@linaro.org, b.galvani@gmail.com,
+ strahinja.p.jankovic@gmail.com, sundeep.lkml@gmail.com, kfting@nuvoton.com,
+ wuhaotsh@google.com, nieklinnenbank@gmail.com, rad@semihalf.com,
+ quic_llindhol@quicinc.com, marcin.juszkiewicz@linaro.org,
+ eduardo@habkost.net, marcel.apfelbaum@gmail.com, wangyanan55@huawei.com,
+ laurent@vivier.eu, vijai@behindbytes.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, mrolnik@gmail.com,
+ edgar.iglesias@gmail.com, bcain@quicinc.com, gaosong@loongson.cn,
+ aurelien@aurel32.net, jiaxun.yang@flygoat.com,
+ aleksandar.rikalo@syrmia.com, chenhuacai@kernel.org, crwulff@gmail.com,
+ marex@denx.de, shorne@gmail.com, npiggin@gmail.com,
+ ysato@users.sourceforge.jp, david@redhat.com, thuth@redhat.com,
+ iii@linux.ibm.com, kbastian@mail.uni-paderborn.de, jcmvbkbc@gmail.com,
+ shan.gavin@gmail.com
+Subject: [PATCH v4 23/33] target/nios2: Implement nios2_cpu_list()
+Date: Thu,  2 Nov 2023 10:24:50 +1000
+Message-ID: <20231102002500.1750692-24-gshan@redhat.com>
+In-Reply-To: <20231102002500.1750692-1-gshan@redhat.com>
+References: <20231102002500.1750692-1-gshan@redhat.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c2e;
- envelope-from=alistair23@gmail.com; helo=mail-oo1-xc2e.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.8
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=gshan@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -24
+X-Spam_score: -2.5
+X-Spam_bar: --
+X-Spam_report: (-2.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.393,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,18 +98,72 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Fixup the Ibex CPU priv version so that smepmp/epmp is correctly
-enabled and make a small change to the SPI interrupt generation to
-ensure we don't miss interrupts.
+Implement nios2_cpu_list() to support cpu_list(). With this applied,
+the available CPU model names, same to the CPU type names, are shown
+as below.
 
-Alistair Francis (2):
-  hw/ssi: ibex_spi_host: Clear the interrupt even if disabled
-  target/riscv: cpu: Set the OpenTitan priv to 1.12.0
+  $ ./build/qemu-system-nios2 -cpu ?
+  Available CPUs:
+    nios2-cpu
 
- hw/ssi/ibex_spi_host.c | 6 ++++--
- target/riscv/cpu.c     | 2 +-
- 2 files changed, 5 insertions(+), 3 deletions(-)
+Signed-off-by: Gavin Shan <gshan@redhat.com>
+---
+ target/nios2/cpu.c | 20 ++++++++++++++++++++
+ target/nios2/cpu.h |  3 +++
+ 2 files changed, 23 insertions(+)
 
+diff --git a/target/nios2/cpu.c b/target/nios2/cpu.c
+index 15e499f828..5981418aee 100644
+--- a/target/nios2/cpu.c
++++ b/target/nios2/cpu.c
+@@ -21,6 +21,7 @@
+ #include "qemu/osdep.h"
+ #include "qemu/module.h"
+ #include "qapi/error.h"
++#include "qemu/qemu-print.h"
+ #include "cpu.h"
+ #include "exec/log.h"
+ #include "gdbstub/helpers.h"
+@@ -111,6 +112,25 @@ static void iic_set_irq(void *opaque, int irq, int level)
+ }
+ #endif
+ 
++static void nios2_cpu_list_entry(gpointer data, gpointer user_data)
++{
++    const char *typename = object_class_get_name(OBJECT_CLASS(data));
++    char *model = cpu_model_from_type(typename);
++
++    qemu_printf("  %s\n", model);
++    g_free(model);
++}
++
++void nios2_cpu_list(void)
++{
++    GSList *list;
++
++    list = object_class_get_list_sorted(TYPE_NIOS2_CPU, false);
++    qemu_printf("Available CPUs:\n");
++    g_slist_foreach(list, nios2_cpu_list_entry, NULL);
++    g_slist_free(list);
++}
++
+ static void nios2_cpu_initfn(Object *obj)
+ {
+ #if !defined(CONFIG_USER_ONLY)
+diff --git a/target/nios2/cpu.h b/target/nios2/cpu.h
+index 70b6377a4f..93bf84b620 100644
+--- a/target/nios2/cpu.h
++++ b/target/nios2/cpu.h
+@@ -291,6 +291,9 @@ bool nios2_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+                         MMUAccessType access_type, int mmu_idx,
+                         bool probe, uintptr_t retaddr);
+ #endif
++void nios2_cpu_list(void);
++
++#define cpu_list nios2_cpu_list
+ 
+ typedef CPUNios2State CPUArchState;
+ typedef Nios2CPU ArchCPU;
 -- 
 2.41.0
 
