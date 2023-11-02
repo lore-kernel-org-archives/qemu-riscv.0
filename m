@@ -4,90 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EC98C4167B
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 13:14:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F1ECC4332F
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 13:27:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qyXFM-0000iu-LR; Thu, 02 Nov 2023 08:56:29 -0400
+	id 1qyXCy-0006wV-9E; Thu, 02 Nov 2023 08:54:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qyXFH-0000i5-V5
- for qemu-riscv@nongnu.org; Thu, 02 Nov 2023 08:56:23 -0400
-Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qyXCw-0006wB-8f
+ for qemu-riscv@nongnu.org; Thu, 02 Nov 2023 08:53:58 -0400
+Received: from mail-yw1-x112a.google.com ([2607:f8b0:4864:20::112a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qyXFF-0005cR-U8
- for qemu-riscv@nongnu.org; Thu, 02 Nov 2023 08:56:23 -0400
-Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-6bd73395bceso770712b3a.0
- for <qemu-riscv@nongnu.org>; Thu, 02 Nov 2023 05:56:21 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1qyXCu-00045o-GK
+ for qemu-riscv@nongnu.org; Thu, 02 Nov 2023 08:53:57 -0400
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-5a7af20c488so10868957b3.1
+ for <qemu-riscv@nongnu.org>; Thu, 02 Nov 2023 05:53:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1698929780; x=1699534580; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RotDW/GtWu/s795efn/lt+82Q8L5Ej1qyRZIGLQ1Jcs=;
- b=i9zIniQZsNL7UPpaeWIWxxxxPCpe2k6dyNKLvTzc0wMZJiBQ8KF1RJE4dYeSKXtxEq
- KQLqHUQnfMbaWk0D6juolCsCd2ZgbczRI3N4UWbCnDPv04tneY7WdYe71t9YdlQ/UG+m
- Me3aWMzlmuQKok99emI4GcWDgASepXR9yms0/ta0NZ6hhcOFG2oBR5euYqk+YJHiKjlI
- lCFtz5tNu3AX3LFrNIuKSWb/QHlsxUI0UZ67Nyr0tEb1ZrXMInn+fZnpOzNCW1gIQKiK
- 99LcBOpfOFdPstxmsFpYiuNWy5kNv+9qDUDp8lZdskEFJgrg7hff5ntBbAwf/eHfcKW+
- AJtA==
+ d=ventanamicro.com; s=google; t=1698929634; x=1699534434; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=8mXcjNiyvs0rtaqJ955YaAlAiWk3HrSq/BkjhOLvAaU=;
+ b=pbCm7n0oTQ61vcCCLrROwOm2KeTGhJlpLvzTJ8213KUkmF85K56kJXolTpZLp0iWnN
+ E/D40IBJcmkYbJg7yoLnUrlhyin5tb/Bdlo7gJx3W50I8ibQJL/I6U2cSazahp7qRcQv
+ feYF25J5pkP5ht/oZ7ESlj1WoFWhEv5FY+TT+GU4Aou53sSds5g6j1IcXOvghB4i3mWU
+ 1BEWx1Nl7bRew5je630AUcled305sNOBa3/NXRBLUhFHy4x2CjL+x0PIF+XzBAdUMaSA
+ NOd+ng8HX1MlVVAX+yYcyRPObXDHc8Ozy2AWOg8/xYySIyxmolXF9WgKF8KJfYnkFWuG
+ lwPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698929780; x=1699534580;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RotDW/GtWu/s795efn/lt+82Q8L5Ej1qyRZIGLQ1Jcs=;
- b=mn7n9L7xYXg7i4RXJbyMTUciiVvuL+C8fAuDnA0zp31qbvygNSJBlAYVXOsJX+PC4E
- mE2psIF0F41okTJ7ek0M4zJf8SAzKmtdA1YCoauepaO3wid7kGhmj33zVT2CtG+fSFPg
- WH63JPRRmUOsPZdBv37x0HDv0IJu6REowg1si3XA9+GYDA/2aZaLtx/mPnObgNcYZ4f5
- J4g/BzP10F6fbcwlTMKTX3vkduKra2rThgxmFYiD720k9d5QOrxZZPNM+D1Oyi73wMql
- V9olmQN7Aq2fkFCwX+OpHozj6Ps8QolN9LV7tul0XDtchdlTjvEIVApNQ7dLdBpBKtXY
- 7t0Q==
-X-Gm-Message-State: AOJu0YzHZ3Bp5phex1MzR1l/XNGoo3spAzBMzqPNDr2cHODF/1l90to3
- 5Udq7g2ITQCuogsWlPAwpHAHtA==
-X-Google-Smtp-Source: AGHT+IEUjnOWeSUjA0+adpuSGr13qB7eAaMO2Jg53s4rFogXJCrjDVLY/P242QFCbL0hKyMCxK0nGQ==
-X-Received: by 2002:a05:6a00:3a1c:b0:6c3:415a:5c05 with SMTP id
- fj28-20020a056a003a1c00b006c3415a5c05mr901292pfb.14.1698929780158; 
- Thu, 02 Nov 2023 05:56:20 -0700 (PDT)
-Received: from sunil-laptop ([106.51.188.78]) by smtp.gmail.com with ESMTPSA id
- n27-20020a056a000d5b00b006879493aca0sm2839538pfv.26.2023.11.02.05.56.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Nov 2023 05:56:19 -0700 (PDT)
-Date: Thu, 2 Nov 2023 18:26:07 +0530
-From: Sunil V L <sunilvl@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Peter Maydell <peter.maydell@linaro.org>,
- Shannon Zhao <shannon.zhaosl@gmail.com>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Gerd Hoffmann <kraxel@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Anup Patel <apatel@ventanamicro.com>,
- Atish Kumar Patra <atishp@rivosinc.com>, Haibo Xu <haibo1.xu@intel.com>,
- Andrew Jones <ajones@ventanamicro.com>
-Subject: Re: [PATCH v5 02/13] hw/arm/virt-acpi-build.c: Migrate virtio
- creation to common location
-Message-ID: <ZUOcZ0CS1njX/OcJ@sunil-laptop>
-References: <20231030132058.763556-1-sunilvl@ventanamicro.com>
- <20231030132058.763556-3-sunilvl@ventanamicro.com>
- <fea78511-d3fa-4ad4-860f-419cd1845e1f@ventanamicro.com>
+ d=1e100.net; s=20230601; t=1698929634; x=1699534434;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=8mXcjNiyvs0rtaqJ955YaAlAiWk3HrSq/BkjhOLvAaU=;
+ b=Az8fh+MA4lOXLC2PS4UOvYJlT4Rs0Qp5oXJ1NyulQjVpQcQXzBbsy/hlqrVXcKCDDj
+ M8V36TN8ZeUZPRWtt5w+yum5JMH/JxowFQafiH6NPYqeepJfSptugpU0qK4MRUp0mGtF
+ UBcsGNpfVNUD2dSn+yGHPttzHgVze0qhI0wCyllstKCmSwI+LLmoyo5i4V77TzoV9eyP
+ T12OOwzrGCAy6T+ubbDbFm8fwCH/ajeoqLrsFe05i2Vjxubl5/r7maltA7dNwDsTs1mH
+ zByH2Xx65xSGNkdePS/OBN+vA5Wj4Z4tm8Nlcz9gmEInOt3wc4sgv5VluYvWdMfoIr0H
+ +KDQ==
+X-Gm-Message-State: AOJu0YzVF0mMm6ayPyLBasmdfF5EX75qMrMD1Wn136lQCgZ0g9cxHu7L
+ v5P9t12kPkOTOXceZybJdZTctw==
+X-Google-Smtp-Source: AGHT+IFVucBs5UjBdJclCrG6djGBgF/or4wrvr8+7YxiwyALVB5w1IIq2/rT1hrKTdJvhLejMdQs8g==
+X-Received: by 2002:a25:770a:0:b0:da3:ab41:31f3 with SMTP id
+ s10-20020a25770a000000b00da3ab4131f3mr6032326ybc.8.1698929633877; 
+ Thu, 02 Nov 2023 05:53:53 -0700 (PDT)
+Received: from [192.168.68.107] ([179.193.10.161])
+ by smtp.gmail.com with ESMTPSA id
+ e13-20020a25890d000000b00d814d8dfd69sm1011787ybl.27.2023.11.02.05.53.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 02 Nov 2023 05:53:53 -0700 (PDT)
+Message-ID: <c51fd5aa-22a9-40dd-9463-60ef23fb77c5@ventanamicro.com>
+Date: Thu, 2 Nov 2023 09:53:50 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <fea78511-d3fa-4ad4-860f-419cd1845e1f@ventanamicro.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pf1-x42b.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 03/19] target/riscv/cpu.c: set satp_max_supported in
+ cpu_riscv_set_satp()
+Content-Language: en-US
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
+ palmer@rivosinc.com
+References: <20231101204204.345470-1-dbarboza@ventanamicro.com>
+ <20231101204204.345470-4-dbarboza@ventanamicro.com>
+ <20231102-b74e75db47b353355c6e5d66@orel>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20231102-b74e75db47b353355c6e5d66@orel>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::112a;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-yw1-x112a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -110,73 +100,95 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Nov 02, 2023 at 09:10:05AM -0300, Daniel Henrique Barboza wrote:
-> Alistair, Sunil,
-> 
-> This patch is breaking riscv-to-apply.next build when using 'clang' and
-> --enable-debug:
-> 
-> URCE=600 -DNCURSES_WIDECHAR=1 -DSTRUCT_IOVEC_DEFINED -MD -MQ libcommon.fa.p/hw_virtio_virtio-acpi.c.o -MF libcommon.fa.p/hw_virtio_virtio-acpi.c.o.d -o libcommon.fa.p/hw_virtio_virtio-acpi.c.o -c ../hw/virtio/virtio-acpi.c
-> ../hw/virtio/virtio-acpi.c:14:12: error: variable 'virtio_base' set but not used [-Werror,-Wunused-but-set-variable]
->     hwaddr virtio_base = base;
->            ^
-> 1 error generated.
-> 
-> 
-> Looking at the code:
-> 
-> void virtio_acpi_dsdt_add(Aml *scope, const hwaddr base, const hwaddr size,
->                           uint32_t mmio_irq, long int start_index, int num)
-> {
->     long int i;
->     hwaddr virtio_base = base;  <------
-> 
->     for (i = start_index; i < start_index + num; i++) {
->         uint32_t irq = mmio_irq + i;
->         Aml *dev = aml_device("VR%02u", (unsigned)i);
->         aml_append(dev, aml_name_decl("_HID", aml_string("LNRO0005")));
->         aml_append(dev, aml_name_decl("_UID", aml_int(i)));
->         aml_append(dev, aml_name_decl("_CCA", aml_int(1)));
-> 
->         Aml *crs = aml_resource_template();
->         aml_append(crs, aml_memory32_fixed(base, size, AML_READ_WRITE));
->         aml_append(crs,
->                    aml_interrupt(AML_CONSUMER, AML_LEVEL, AML_ACTIVE_HIGH,
->                                  AML_EXCLUSIVE, &irq, 1));
->         aml_append(dev, aml_name_decl("_CRS", crs));
->         aml_append(scope, dev);
->         virtio_base += size;   <------
->     }
-> }
-> 
-> 'virtio_base' is initialized with 'base', and it is incremented in the loop, but
-> nothing else is done with it.
-> 
-> 
-> This solves it:
-> 
-> 
-> $ git diff
-> diff --git a/hw/virtio/virtio-acpi.c b/hw/virtio/virtio-acpi.c
-> index 682283800f..eaf6028e93 100644
-> --- a/hw/virtio/virtio-acpi.c
-> +++ b/hw/virtio/virtio-acpi.c
-> @@ -11,7 +11,6 @@ void virtio_acpi_dsdt_add(Aml *scope, const hwaddr base, const hwaddr size,
->                            uint32_t mmio_irq, long int start_index, int num)
->  {
->      long int i;
-> -    hwaddr virtio_base = base;
->      for (i = start_index; i < start_index + num; i++) {
->          uint32_t irq = mmio_irq + i;
-> @@ -27,6 +26,5 @@ void virtio_acpi_dsdt_add(Aml *scope, const hwaddr base, const hwaddr size,
->                                   AML_EXCLUSIVE, &irq, 1));
->          aml_append(dev, aml_name_decl("_CRS", crs));
->          aml_append(scope, dev);
-> -        virtio_base += size;
 
-Thanks Daniel for catching this. But proper fix would be to use
-virtio_base. Let me send next version with proper fix. Sorry about this.
+
+On 11/2/23 06:24, Andrew Jones wrote:
+> On Wed, Nov 01, 2023 at 05:41:48PM -0300, Daniel Henrique Barboza wrote:
+>> The setter() for the boolean attributes that set satp_mode (sv32, sv39,
+>> sv48, sv57, sv64) considers that the CPU will always do a
+>> set_satp_mode_max_supported() during cpu_init().
+>>
+>> This is not the case for the KVM 'host' CPU, and we'll add another CPU
+>> that won't set satp_mode_max() during cpu_init(). Users should be able
+>> to set a max_support in these circunstances.
+>>
+>> Allow cpu_riscv_set_satp() to set satp_mode_max_supported if the CPU
+>> didn't set one prior.
+>>
+>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>> ---
+>>   target/riscv/cpu.c | 11 +++++++++++
+>>   1 file changed, 11 insertions(+)
+>>
+>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>> index 822970345c..9f6837ecb7 100644
+>> --- a/target/riscv/cpu.c
+>> +++ b/target/riscv/cpu.c
+>> @@ -1100,6 +1100,7 @@ static void cpu_riscv_get_satp(Object *obj, Visitor *v, const char *name,
+>>   static void cpu_riscv_set_satp(Object *obj, Visitor *v, const char *name,
+>>                                  void *opaque, Error **errp)
+>>   {
+>> +    RISCVCPU *cpu = RISCV_CPU(obj);
+>>       RISCVSATPMap *satp_map = opaque;
+>>       uint8_t satp = satp_mode_from_str(name);
+>>       bool value;
+>> @@ -1108,6 +1109,16 @@ static void cpu_riscv_set_satp(Object *obj, Visitor *v, const char *name,
+>>           return;
+>>       }
+>>   
+>> +    /*
+>> +     * Allow users to set satp max supported if the CPU didn't
+>> +     * set any during cpu_init(). First value set to 'true'
+>> +     * in this case is assumed to be the max supported for
+>> +     * the CPU.
+> 
+> Hmm, doesn't that mean if a user does
+> 
+>   -cpu rv64,sv39=true,sv48=true
+> 
+> then the max is set to sv39 instead of sv48?
+> 
+> I made a mistake in my last review by stating we shouldn't set the max
+> supported satp for rv64i to the maximum satp that TCG supports. I forgot
+> how all of it worked. Setting the _supported_ modes to the maximum that
+> TCG supports makes sense as long as we don't default to any of them for
+> rv64i. So, I think we should return the set_satp_mode_max_supported() to
+> rv64i's definition (passing VM_1_10_SV57 or maybe even VM_1_10_SV64) and
+> then change set_satp_mode_default_map() to error out for rv64i (or maybe
+> for all "bare" type cpus).
+
+Ok, then let's set max supported mode to SV64 (the maximum we allow).
+
+Then we don't need to do anything else - setting a max supported value will allow
+TCG to handle it accordingly with OpenSBI and the kernel, and a suitable satp_mode
+will be picked by them. We can leave finalize() untouched.
+
+I'll make a note in cpu_init() to remind ourselves that we're not setting a default
+satp_mode value, but a *limit* for the satp_mode value the CPU can handle. This can be
+done in the 'rv64i' patch.
+
 
 Thanks,
-Sunil
+
+
+Daniel
+
+
+
+
+> 
+>> +     */
+>> +    if (value && cpu->cfg.satp_mode.supported == 0) {
+>> +        set_satp_mode_max_supported(cpu, satp);
+>> +    }
+>> +
+>>       satp_map->map = deposit32(satp_map->map, satp, 1, value);
+>>       satp_map->init |= 1 << satp;
+>>   }
+>> -- 
+>> 2.41.0
+>>
+> 
+> Thanks,
+> drew
 
