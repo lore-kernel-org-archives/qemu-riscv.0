@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 124DBC4167B
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 17:05:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA5F8C4332F
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 17:05:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qyb5n-0002gn-Ph; Thu, 02 Nov 2023 13:02:51 -0400
+	id 1qyb6h-0003m5-Rr; Thu, 02 Nov 2023 13:03:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qyb5l-0002fn-B9
- for qemu-riscv@nongnu.org; Thu, 02 Nov 2023 13:02:49 -0400
-Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d])
+ id 1qyb6e-0003f9-4H
+ for qemu-riscv@nongnu.org; Thu, 02 Nov 2023 13:03:44 -0400
+Received: from mail-pg1-x532.google.com ([2607:f8b0:4864:20::532])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qyb5j-0003au-Hx
- for qemu-riscv@nongnu.org; Thu, 02 Nov 2023 13:02:49 -0400
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-2809b4d648bso1110502a91.2
- for <qemu-riscv@nongnu.org>; Thu, 02 Nov 2023 10:02:47 -0700 (PDT)
+ id 1qyb6c-0004KS-Fk
+ for qemu-riscv@nongnu.org; Thu, 02 Nov 2023 13:03:43 -0400
+Received: by mail-pg1-x532.google.com with SMTP id
+ 41be03b00d2f7-5aa7172bafdso887161a12.1
+ for <qemu-riscv@nongnu.org>; Thu, 02 Nov 2023 10:03:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1698944566; x=1699549366; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1698944621; x=1699549421; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=q5TZZ2d8UxCfKxtE4X2DjtVxYb81+jhlOCAfFzhomxo=;
- b=NxbOxVTu4kxTxU39RrmOXOxjDliJtQZ7A6UV6XSsUTZozXo4OlEBa1tf616YYNv+Yc
- r8l25mSNGp88RQNROf0d4vJQU4A0kKzkoHGRIl3hw8rn23dvm2ARH9YXMfkUo8Z8Jp0R
- jcwM5jHcuTqkgJhyLLKxWZEB1vuwCSbsLlQi5FjD8qju2sL2G53D865oW/drsfizT4Fx
- 7szRkmBkiYf8G0ds+qYSJrcu//LarWG0CmUOpaasXA4bOjt9QVY8RwYAoD3VWB5qDEnP
- J0GVm/aq93LPfoyFmc3JPfJMN41qrBbOCw8YqIjw64b8UpWldm4JKbOq4vZUCZ0zSk2f
- fEeA==
+ bh=DrhblBc1X8px3wRZafgsKS8Byxr7Fs6wwWdAncaV14Q=;
+ b=LFY8wT0fuje0edTxcEQtKwWR8bmSQ44OEWiPx+/Bb4uqa876A7+yhSGr/fyLBqZ8Gd
+ +OUgTF2xLDZTTaAflmXhpbUyVKTHr/MbK7a6y0gm/xGWPC4IYIEEVw8//iY3iIQaaNZb
+ upj2E7j326U4c06Q9Rzcv7Q773DlS0xPWm3RLgnjK3+CyTzJHAG0IhsqO2oNab5oXUcU
+ I3Gv5/ChwxUOHJyf1i8ukO4hJmCwoQmTMhDZWI1ebLW+p2+IvNCQtLH2STzogC8kghLQ
+ aB7a4venCqYQDZILA67ml46t9ZXybpNxF44bSFrcL0PQLBipDuIUxozc2t1opZ/PcrKk
+ vDYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698944566; x=1699549366;
+ d=1e100.net; s=20230601; t=1698944621; x=1699549421;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=q5TZZ2d8UxCfKxtE4X2DjtVxYb81+jhlOCAfFzhomxo=;
- b=S4x4qnuIH3jH2Lo7RpypBTuSR1I7mTHpBll3VhDfW+Yr2SAwRU45/jADHaFB66qjWf
- V1FCj9sSciqLGLECH2LmTB33guZN8r8Z8aulSmkMlZKxf8EgypikwpwWbq9L4/tFAUDC
- OswiiipNP18QooFZbaa8SOsDWSwTrrpL7N6SLHo6jHub7wBy5wc/8nPgAHae7MgYL2pc
- SDPOxuiBlyFZ5Rp6738XrT/gBtGxozjlkMj/4ifKVoCWn0Zt/p1g4YILuGrgWrV1kXHm
- tyYzdqoTLsF5AzyzVvJSH5jGxbAairFxFO6JABDRrGQDD0jBG5oj/TR16B39PAH2jkgJ
- XC2A==
-X-Gm-Message-State: AOJu0Yy7WmATQVP1kwTL9Pa97x5AW7/ZYUVrem3MQxdvf0Ux7CDdzETY
- h099IUa/KAEe5yyy8vHtBF9byQ==
-X-Google-Smtp-Source: AGHT+IHESd99YdVGT5XKiQTAW8Qg7p5htCaZPPEnmUENWhL2JAK6a7EyIKpCvS5eBCK8TPVdowv1zw==
-X-Received: by 2002:a17:90a:1a17:b0:280:2c55:77c5 with SMTP id
- 23-20020a17090a1a1700b002802c5577c5mr12552172pjk.46.1698944566252; 
- Thu, 02 Nov 2023 10:02:46 -0700 (PDT)
+ bh=DrhblBc1X8px3wRZafgsKS8Byxr7Fs6wwWdAncaV14Q=;
+ b=ecBEuNZrC40nLFawEMnyyy4nDz0RiGS8gZfKf4wThX40xX4JCYkW+X4hr3+1Zi9JIm
+ Tpf3ZXakfpH8v0GWhubZKhuxbRQq5wfG6aU97jgOvU2ZHcPsKe9EFWpPpLh3/H61guO/
+ VNOmXOAAe1+NaSBkuh4n35jvzs7lbLXm+V0IdtULZWDZ8Wcyt7QcWJR4PZXrzOIJ1vN7
+ fXfqu3EadG/ePu/RMYcZnoCPge0FAUyNsO0ynfoNz8MgOUDO6Liauge4IZwP0ghXAKIL
+ JL3ABJYoIeHEKWsaIt5W3jutIPLXrMGIOD7k0AYV1oRQUP6EjBv++yPNupQC7S20lYJ8
+ pqMg==
+X-Gm-Message-State: AOJu0Yy00NyuQfr8SfQ+aiDgpOLCXruW2qEFfMjkIM03h+GTAGPDOyl/
+ kwQiW/i3sPw8E2SAYc7MlhPKLg==
+X-Google-Smtp-Source: AGHT+IG05nJAe2axJdQAQDdzyYfSffqNjYukkyI9p7pBv5Hd/xlfL/Jp/AdJAOIrEmJ5LdBZyFkb3g==
+X-Received: by 2002:a17:90a:1a10:b0:27c:e826:5038 with SMTP id
+ 16-20020a17090a1a1000b0027ce8265038mr15728288pjk.14.1698944621205; 
+ Thu, 02 Nov 2023 10:03:41 -0700 (PDT)
 Received: from sunil-pc.Dlink ([106.51.188.78])
  by smtp.gmail.com with ESMTPSA id
- 18-20020a17090a031200b0026b70d2a8a2sm25098pje.29.2023.11.02.10.02.39
+ 18-20020a17090a031200b0026b70d2a8a2sm25098pje.29.2023.11.02.10.03.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Nov 2023 10:02:45 -0700 (PDT)
+ Thu, 02 Nov 2023 10:03:40 -0700 (PDT)
 From: Sunil V L <sunilvl@ventanamicro.com>
 To: qemu-arm@nongnu.org,
 	qemu-devel@nongnu.org,
@@ -78,19 +78,17 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Anup Patel <apatel@ventanamicro.com>,
  Atish Kumar Patra <atishp@rivosinc.com>, Haibo Xu <haibo1.xu@intel.com>,
- Sunil V L <sunilvl@ventanamicro.com>,
- Andrew Jones <ajones@ventanamicro.com>
-Subject: [PATCH v6 02/13] hw/arm/virt-acpi-build.c: Migrate virtio creation to
- common location
-Date: Thu,  2 Nov 2023 22:32:12 +0530
-Message-Id: <20231102170223.2619260-3-sunilvl@ventanamicro.com>
+ Sunil V L <sunilvl@ventanamicro.com>
+Subject: [PATCH v6 11/13] hw/riscv/virt: Update GPEX MMIO related properties
+Date: Thu,  2 Nov 2023 22:32:21 +0530
+Message-Id: <20231102170223.2619260-12-sunilvl@ventanamicro.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231102170223.2619260-1-sunilvl@ventanamicro.com>
 References: <20231102170223.2619260-1-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pj1-x102d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::532;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pg1-x532.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -113,150 +111,111 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-RISC-V also needs to create the virtio in DSDT in the same way as ARM.
-So, instead of duplicating the code, move this function to the device
-specific file which is common across architectures.
+Update the GPEX host bridge properties related to MMIO ranges with
+values set for the virt machine.
 
 Suggested-by: Igor Mammedov <imammedo@redhat.com>
 Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 Acked-by: Michael S. Tsirkin <mst@redhat.com>
 ---
- hw/arm/virt-acpi-build.c        | 32 ++++----------------------------
- hw/virtio/meson.build           |  1 +
- hw/virtio/virtio-acpi.c         | 32 ++++++++++++++++++++++++++++++++
- include/hw/virtio/virtio-acpi.h | 16 ++++++++++++++++
- 4 files changed, 53 insertions(+), 28 deletions(-)
- create mode 100644 hw/virtio/virtio-acpi.c
- create mode 100644 include/hw/virtio/virtio-acpi.h
+ hw/riscv/virt.c         | 47 ++++++++++++++++++++++++++++-------------
+ include/hw/riscv/virt.h |  1 +
+ 2 files changed, 33 insertions(+), 15 deletions(-)
 
-diff --git a/hw/arm/virt-acpi-build.c b/hw/arm/virt-acpi-build.c
-index dd2e95f0ea..b73ddd0c38 100644
---- a/hw/arm/virt-acpi-build.c
-+++ b/hw/arm/virt-acpi-build.c
-@@ -58,6 +58,7 @@
- #include "migration/vmstate.h"
- #include "hw/acpi/ghes.h"
- #include "hw/acpi/viot.h"
-+#include "hw/virtio/virtio-acpi.h"
- 
- #define ARM_SPI_BASE 32
- 
-@@ -118,32 +119,6 @@ static void acpi_dsdt_add_flash(Aml *scope, const MemMapEntry *flash_memmap)
-     aml_append(scope, dev);
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 085654ab2f..e64886a4d8 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1049,21 +1049,45 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap)
  }
  
--static void acpi_dsdt_add_virtio(Aml *scope,
--                                 const MemMapEntry *virtio_mmio_memmap,
--                                 uint32_t mmio_irq, int num)
--{
--    hwaddr base = virtio_mmio_memmap->base;
--    hwaddr size = virtio_mmio_memmap->size;
--    int i;
--
--    for (i = 0; i < num; i++) {
--        uint32_t irq = mmio_irq + i;
--        Aml *dev = aml_device("VR%02u", i);
--        aml_append(dev, aml_name_decl("_HID", aml_string("LNRO0005")));
--        aml_append(dev, aml_name_decl("_UID", aml_int(i)));
--        aml_append(dev, aml_name_decl("_CCA", aml_int(1)));
--
--        Aml *crs = aml_resource_template();
--        aml_append(crs, aml_memory32_fixed(base, size, AML_READ_WRITE));
--        aml_append(crs,
--                   aml_interrupt(AML_CONSUMER, AML_LEVEL, AML_ACTIVE_HIGH,
--                                 AML_EXCLUSIVE, &irq, 1));
--        aml_append(dev, aml_name_decl("_CRS", crs));
--        aml_append(scope, dev);
--        base += size;
--    }
--}
--
- static void acpi_dsdt_add_pci(Aml *scope, const MemMapEntry *memmap,
-                               uint32_t irq, VirtMachineState *vms)
+ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
+-                                          hwaddr ecam_base, hwaddr ecam_size,
+-                                          hwaddr mmio_base, hwaddr mmio_size,
+-                                          hwaddr high_mmio_base,
+-                                          hwaddr high_mmio_size,
+-                                          hwaddr pio_base,
+-                                          DeviceState *irqchip)
++                                          DeviceState *irqchip,
++                                          RISCVVirtState *s)
  {
-@@ -850,8 +825,9 @@ build_dsdt(GArray *table_data, BIOSLinker *linker, VirtMachineState *vms)
-         acpi_dsdt_add_flash(scope, &memmap[VIRT_FLASH]);
-     }
-     fw_cfg_acpi_dsdt_add(scope, &memmap[VIRT_FW_CFG]);
--    acpi_dsdt_add_virtio(scope, &memmap[VIRT_MMIO],
--                    (irqmap[VIRT_MMIO] + ARM_SPI_BASE), NUM_VIRTIO_TRANSPORTS);
-+    virtio_acpi_dsdt_add(scope, memmap[VIRT_MMIO].base, memmap[VIRT_MMIO].size,
-+                         (irqmap[VIRT_MMIO] + ARM_SPI_BASE),
-+                         0, NUM_VIRTIO_TRANSPORTS);
-     acpi_dsdt_add_pci(scope, memmap, irqmap[VIRT_PCIE] + ARM_SPI_BASE, vms);
-     if (vms->acpi_dev) {
-         build_ged_aml(scope, "\\_SB."GED_DEVICE,
-diff --git a/hw/virtio/meson.build b/hw/virtio/meson.build
-index c0055a7832..9d62097a21 100644
---- a/hw/virtio/meson.build
-+++ b/hw/virtio/meson.build
-@@ -79,3 +79,4 @@ system_ss.add(when: 'CONFIG_ALL', if_true: files('virtio-stub.c'))
- system_ss.add(files('virtio-hmp-cmds.c'))
+     DeviceState *dev;
+     MemoryRegion *ecam_alias, *ecam_reg;
+     MemoryRegion *mmio_alias, *high_mmio_alias, *mmio_reg;
++    hwaddr ecam_base = s->memmap[VIRT_PCIE_ECAM].base;
++    hwaddr ecam_size = s->memmap[VIRT_PCIE_ECAM].size;
++    hwaddr mmio_base = s->memmap[VIRT_PCIE_MMIO].base;
++    hwaddr mmio_size = s->memmap[VIRT_PCIE_MMIO].size;
++    hwaddr high_mmio_base = virt_high_pcie_memmap.base;
++    hwaddr high_mmio_size = virt_high_pcie_memmap.size;
++    hwaddr pio_base = s->memmap[VIRT_PCIE_PIO].base;
++    hwaddr pio_size = s->memmap[VIRT_PCIE_PIO].size;
+     qemu_irq irq;
+     int i;
  
- specific_ss.add_all(when: 'CONFIG_VIRTIO', if_true: specific_virtio_ss)
-+system_ss.add(when: 'CONFIG_ACPI', if_true: files('virtio-acpi.c'))
-diff --git a/hw/virtio/virtio-acpi.c b/hw/virtio/virtio-acpi.c
-new file mode 100644
-index 0000000000..b55905dbc6
---- /dev/null
-+++ b/hw/virtio/virtio-acpi.c
-@@ -0,0 +1,32 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * virtio ACPI Support
-+ *
-+ */
+     dev = qdev_new(TYPE_GPEX_HOST);
+ 
++    /* Set GPEX object properties for the virt machine */
++    object_property_set_uint(OBJECT(GPEX_HOST(dev)), PCI_HOST_ECAM_BASE,
++                            ecam_base, NULL);
++    object_property_set_int(OBJECT(GPEX_HOST(dev)), PCI_HOST_ECAM_SIZE,
++                            ecam_size, NULL);
++    object_property_set_uint(OBJECT(GPEX_HOST(dev)),
++                             PCI_HOST_BELOW_4G_MMIO_BASE,
++                             mmio_base, NULL);
++    object_property_set_int(OBJECT(GPEX_HOST(dev)), PCI_HOST_BELOW_4G_MMIO_SIZE,
++                            mmio_size, NULL);
++    object_property_set_uint(OBJECT(GPEX_HOST(dev)),
++                             PCI_HOST_ABOVE_4G_MMIO_BASE,
++                             high_mmio_base, NULL);
++    object_property_set_int(OBJECT(GPEX_HOST(dev)), PCI_HOST_ABOVE_4G_MMIO_SIZE,
++                            high_mmio_size, NULL);
++    object_property_set_uint(OBJECT(GPEX_HOST(dev)), PCI_HOST_PIO_BASE,
++                            pio_base, NULL);
++    object_property_set_int(OBJECT(GPEX_HOST(dev)), PCI_HOST_PIO_SIZE,
++                            pio_size, NULL);
 +
-+#include "hw/virtio/virtio-acpi.h"
-+#include "hw/acpi/aml-build.h"
-+
-+void virtio_acpi_dsdt_add(Aml *scope, const hwaddr base, const hwaddr size,
-+                          uint32_t mmio_irq, long int start_index, int num)
-+{
-+    long int i;
-+    hwaddr virtio_base = base;
-+
-+    for (i = start_index; i < start_index + num; i++) {
-+        uint32_t irq = mmio_irq + i;
-+        Aml *dev = aml_device("VR%02u", (unsigned)i);
-+        aml_append(dev, aml_name_decl("_HID", aml_string("LNRO0005")));
-+        aml_append(dev, aml_name_decl("_UID", aml_int(i)));
-+        aml_append(dev, aml_name_decl("_CCA", aml_int(1)));
-+
-+        Aml *crs = aml_resource_template();
-+        aml_append(crs, aml_memory32_fixed(virtio_base, size, AML_READ_WRITE));
-+        aml_append(crs,
-+                   aml_interrupt(AML_CONSUMER, AML_LEVEL, AML_ACTIVE_HIGH,
-+                                 AML_EXCLUSIVE, &irq, 1));
-+        aml_append(dev, aml_name_decl("_CRS", crs));
-+        aml_append(scope, dev);
-+        virtio_base += size;
-+    }
-+}
-diff --git a/include/hw/virtio/virtio-acpi.h b/include/hw/virtio/virtio-acpi.h
-new file mode 100644
-index 0000000000..844e102569
---- /dev/null
-+++ b/include/hw/virtio/virtio-acpi.h
-@@ -0,0 +1,16 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * ACPI support for virtio
-+ */
-+
-+#ifndef VIRTIO_ACPI_H
-+#define VIRTIO_ACPI_H
-+
-+#include "qemu/osdep.h"
-+#include "exec/hwaddr.h"
-+
-+void virtio_acpi_dsdt_add(Aml *scope, const hwaddr virtio_mmio_base,
-+                          const hwaddr virtio_mmio_size, uint32_t mmio_irq,
-+                          long int start_index, int num);
-+
-+#endif
+     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+ 
+     ecam_alias = g_new0(MemoryRegion, 1);
+@@ -1094,6 +1118,7 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
+         gpex_set_irq_num(GPEX_HOST(dev), i, PCIE_IRQ + i);
+     }
+ 
++    GPEX_HOST(dev)->gpex_cfg.bus = PCI_HOST_BRIDGE(GPEX_HOST(dev))->bus;
+     return dev;
+ }
+ 
+@@ -1492,15 +1517,7 @@ static void virt_machine_init(MachineState *machine)
+             qdev_get_gpio_in(virtio_irqchip, VIRTIO_IRQ + i));
+     }
+ 
+-    gpex_pcie_init(system_memory,
+-                   memmap[VIRT_PCIE_ECAM].base,
+-                   memmap[VIRT_PCIE_ECAM].size,
+-                   memmap[VIRT_PCIE_MMIO].base,
+-                   memmap[VIRT_PCIE_MMIO].size,
+-                   virt_high_pcie_memmap.base,
+-                   virt_high_pcie_memmap.size,
+-                   memmap[VIRT_PCIE_PIO].base,
+-                   pcie_irqchip);
++    gpex_pcie_init(system_memory, pcie_irqchip, s);
+ 
+     create_platform_bus(s, mmio_irqchip);
+ 
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index 5b03575ed3..f89790fd58 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -61,6 +61,7 @@ struct RISCVVirtState {
+     char *oem_table_id;
+     OnOffAuto acpi;
+     const MemMapEntry *memmap;
++    struct GPEXHost *gpex_host;
+ };
+ 
+ enum {
 -- 
 2.39.2
 
