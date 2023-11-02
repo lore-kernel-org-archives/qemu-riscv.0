@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB706C4332F
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 00:40:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 808C3C4332F
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 00:43:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qyLkV-0006Fj-SK; Wed, 01 Nov 2023 20:39:51 -0400
+	id 1qyLnL-0007Mm-Nd; Wed, 01 Nov 2023 20:42:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qyLkT-0006Em-FB; Wed, 01 Nov 2023 20:39:49 -0400
-Received: from mail-vk1-xa30.google.com ([2607:f8b0:4864:20::a30])
+ id 1qyLnJ-0007K7-0x; Wed, 01 Nov 2023 20:42:45 -0400
+Received: from mail-vs1-xe2c.google.com ([2607:f8b0:4864:20::e2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qyLkR-0005Ub-FN; Wed, 01 Nov 2023 20:39:49 -0400
-Received: by mail-vk1-xa30.google.com with SMTP id
- 71dfb90a1353d-49dd3bb5348so193855e0c.0; 
- Wed, 01 Nov 2023 17:39:46 -0700 (PDT)
+ id 1qyLnH-0006Aa-Em; Wed, 01 Nov 2023 20:42:44 -0400
+Received: by mail-vs1-xe2c.google.com with SMTP id
+ ada2fe7eead31-457bfdc1cdaso154501137.2; 
+ Wed, 01 Nov 2023 17:42:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698885586; x=1699490386; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1698885762; x=1699490562; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eIOEVkg1eEsZP1oNmIbioqZ8i5sfbfNcrhdfHuiIn1w=;
- b=NM6lCQ09YHmrksmT28Bk5lrO2YWQ53t+e8wTE2f7y+AMJB1YtpnQQGvHumUugfJ1MA
- lL1wIUW51jeJ34iMZnMr76ZL4zX+hG38uOaDWMz4Klo8uOWaqYNaT6/wJbAzp6ioJj5S
- YvjWA+vj8wMuWOqwOAPs+uN+VxGDVLa/JnbMgy+e6xEYQwRMsMPwAALO1HZw64pju4gS
- GIRGuzCHFB3117H9C0nhOix1nQTjUAvbWS5Su9hkR0iaWYU5cW43pE19IX3JJFHGx9k6
- /nFcIzq0Xn0AOL4ejIZebZZgRMWIocrc/lTWzUBbJcbetshQjGFWSiP882VZX09jb+X7
- /H6A==
+ bh=TGr8V1CYkEHnpZ1T4IP+W7e+Avcxje/uYG/ln35qPAc=;
+ b=C6zArFl+Ktgi9YDGf515sfkny0RN1srpR7fVnQyHkj2LKGZLW87D3h/rIVrtxPUMfx
+ bAcjbqMxVhRusdgIG4xcLjvSRJfjo4t6the7X7QvnPS/voYGNMgBZ4Uvc6UZ4D7gDWWq
+ B8r6mska/cBdPZmayzj8xpT9BhlunjwX8DJM1l7/U+nTm8P7AF9RBCiyP/P38uNwtt32
+ lI9mEHs7aZQ8uzThRRUiLw5rmLBzG7KDrNnOkr91XQkvxt9VEvKEltjJy9+MsWgsgWiG
+ ZZBn3tjRqKdETFzNjWhcR+hoQ5OgyjrVPV0zWgj51SVFfQ5rtSbdEOckwiXZzEWZXZnS
+ C/Ig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698885586; x=1699490386;
+ d=1e100.net; s=20230601; t=1698885762; x=1699490562;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eIOEVkg1eEsZP1oNmIbioqZ8i5sfbfNcrhdfHuiIn1w=;
- b=xO2E0XRB4hVp3DXfCqRyxKhV5zSxqHV/rgdRn9d480RVT9pIlJVyryKDayDgFV1stw
- 2tqxOtgCmH4tjZ7zSd9wKZKmIWZk43zLzpusDwotYNr0M4pPz5LvKQ8995xeSJEj2JZH
- M/4nc0PpkWfqiZ3mFgWFr7bM31curok7TYhIhoX1NkUgNQHKIvsZcPKS7xyqgYj+mD7G
- /OASlL9u3YIkQoSM1/mrMN/PXLMg2EKJI/xCzgEnnE23qWeo9I+tnODSTjIgx5sdMxIA
- /BrTO5Js6cmoNF8mQjb0Zk0JQ9o17M3Sd+AoqdJZFqtSLEfEXYYITnSVA3b/4f+bEdml
- ZANw==
-X-Gm-Message-State: AOJu0YzpT++0zXLXSIJrzCJnNp5ba94FsvDgoUlA7bPF9uxblmJb27c5
- L9TvLQ9G5KE+EejmhCWMkdAaFUMutHnxdHevUT8=
-X-Google-Smtp-Source: AGHT+IHKSNc/wBwfBvc+N9rmxQgfPuOZuwDhoQdgIfWakY0IDu/JRsVZ7Q5xwMJZjKcmzDCvjzaUJ2k2oCxYgvmGC8w=
-X-Received: by 2002:a1f:2f48:0:b0:49d:9916:5747 with SMTP id
- v69-20020a1f2f48000000b0049d99165747mr16791566vkv.13.1698885585584; Wed, 01
- Nov 2023 17:39:45 -0700 (PDT)
+ bh=TGr8V1CYkEHnpZ1T4IP+W7e+Avcxje/uYG/ln35qPAc=;
+ b=beTuA77EAXKAAOqyq8sZQVSKM5uGuPQH/4TjBiWai/6r9pb7LjkMkH9AsPbgsbc1kZ
+ ihtalCxORjPvVHLfRhfNXPo99fyetthltckcpxsTQkVkIjn8hKCiVbFfvF+TnouElU62
+ aMC19j6h7qUufgXftL5yMPo2c9g/48bj5uqh50gdN3aANdQX0BUQwwWBVj3PwXavtiOG
+ zFeLPTcL5BvZWOietz9sPjXG1qOpPSvRBO2+4ikWdDXzX4Sh0Jx4Pl46wDGvDQvkVsTZ
+ 7qqm7zWIQdCw2t+5a8exig/L2CyLuzuR4mwldYM3SkpqVKMsRFtbQuaMGOzZiLEU6wDD
+ xo8w==
+X-Gm-Message-State: AOJu0YyvK7KrSzxgiEsNYCDrSmMk3DBiOM7ot7ESYMyZ5EiZ5/VSF7Z7
+ c2uQ+9vRy/fiKzptDl1BJnN8sE4mTpaMLsn6X4M=
+X-Google-Smtp-Source: AGHT+IEmH1Glr74Io9LBji4xa4Bc7W6jmgYch/zBM9b+BwifqKAB5DWP6ZSNywK3aJN5bV/hgUwnXOtIKucsQryfr9U=
+X-Received: by 2002:a67:c38e:0:b0:457:a97d:82f with SMTP id
+ s14-20020a67c38e000000b00457a97d082fmr15643818vsj.30.1698885761448; Wed, 01
+ Nov 2023 17:42:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231031154000.18134-1-rbradford@rivosinc.com>
- <20231031154000.18134-5-rbradford@rivosinc.com>
-In-Reply-To: <20231031154000.18134-5-rbradford@rivosinc.com>
+References: <20231030102105.19501-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231030102105.19501-1-heinrich.schuchardt@canonical.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 2 Nov 2023 10:39:18 +1000
-Message-ID: <CAKmqyKNPV0Q2Tse4UjF-tYg4yMGLGM01zXBCm4Cch7mFZyEuMA@mail.gmail.com>
-Subject: Re: [PATCH v5 4/5] target/riscv: Add "pmu-mask" property to replace
- "pmu-num"
-To: Rob Bradford <rbradford@rivosinc.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, atishp@rivosinc.com, 
- palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
- liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
- Weiwei Li <liweiwei@iscas.ac.cn>
+Date: Thu, 2 Nov 2023 10:42:14 +1000
+Message-ID: <CAKmqyKPA9Sk6Bc8K0Z8395x6j4BadHZPmvJcND56tC2oOrnSGg@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] target/riscv: correct csr_ops[CSR_MSECCFG]
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a30;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa30.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2c;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2c.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -92,193 +92,65 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Nov 1, 2023 at 1:41=E2=80=AFAM Rob Bradford <rbradford@rivosinc.com=
-> wrote:
+On Mon, Oct 30, 2023 at 8:22=E2=80=AFPM Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> Using a mask instead of the number of PMU devices supports the accurate
-> emulation of platforms that have a discontinuous set of PMU counters.
+> The CSR register mseccfg is used by multiple extensions: Smepm and Zkr.
 >
-> The "pmu-num" property now generates a warning when used by the user on
-> the command line.
+> Consider this when checking the existence of the register.
 >
-> Rather than storing the value for "pmu-num" convert it directly to the
-> mask if it is specified (overwriting the default "pmu-mask" value)
-> likewise the value is calculated from the mask if the property value is
-> obtained.
->
-> In the unusual situation that both "pmu-mask" and "pmu-num" are provided
-> then then the order on the command line determines which takes
-> precedence (later overwriting earlier.)
->
-> Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
+> Fixes: 77442380ecbe ("target/riscv: rvk: add CSR support for Zkr")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu.c         | 40 +++++++++++++++++++++++++++++++++++++-
->  target/riscv/cpu_cfg.h     |  2 +-
->  target/riscv/machine.c     |  2 +-
->  target/riscv/pmu.c         | 15 +++++++-------
->  target/riscv/tcg/tcg-cpu.c |  2 +-
->  5 files changed, 50 insertions(+), 11 deletions(-)
+> v2:
+>         rebase on alistair23/riscv-to-apply-next
+> ---
+>  target/riscv/csr.c | 7 +++++--
+>  1 file changed, 5 insertions(+), 2 deletions(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index ac4a6c7eec..51accdba5f 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1362,8 +1362,46 @@ const RISCVCPUMultiExtConfig riscv_cpu_deprecated_=
-exts[] =3D {
->      DEFINE_PROP_END_OF_LIST(),
->  };
->
-> +static void prop_pmu_num_set(Object *obj, Visitor *v, const char *name,
-> +                             void *opaque, Error **errp)
-> +{
-> +    RISCVCPU *cpu =3D RISCV_CPU(obj);
-> +    uint8_t pmu_num;
-> +
-> +    visit_type_uint8(v, name, &pmu_num, errp);
-> +
-> +    if (pmu_num > (RV_MAX_MHPMCOUNTERS - 3)) {
-> +        error_setg(errp, "Number of counters exceeds maximum available")=
-;
-> +        return;
-> +    }
-> +
-> +    if (pmu_num =3D=3D 0) {
-> +        cpu->cfg.pmu_mask =3D 0;
-> +    } else {
-> +        cpu->cfg.pmu_mask =3D MAKE_64BIT_MASK(3, pmu_num);
-> +    }
-> +
-> +    warn_report("\"pmu-num\" property is deprecated; use \"pmu-mask\"");
-> +}
-> +
-> +static void prop_pmu_num_get(Object *obj, Visitor *v, const char *name,
-> +                             void *opaque, Error **errp)
-> +{
-> +    RISCVCPU *cpu =3D RISCV_CPU(obj);
-> +    uint8_t pmu_num =3D ctpop32(cpu->cfg.pmu_mask);
-> +
-> +    visit_type_uint8(v, name, &pmu_num, errp);
-> +}
-> +
-> +const PropertyInfo prop_pmu_num =3D {
-> +    .name =3D "pmu-num",
-> +    .get =3D prop_pmu_num_get,
-> +    .set =3D prop_pmu_num_set,
-> +};
-> +
->  Property riscv_cpu_options[] =3D {
-> -    DEFINE_PROP_UINT8("pmu-num", RISCVCPU, cfg.pmu_num, 16),
-> +    DEFINE_PROP_UINT32("pmu-mask", RISCVCPU, cfg.pmu_mask, MAKE_64BIT_MA=
-SK(3, 16)),
-> +    {.name =3D "pmu-num", .info =3D &prop_pmu_num}, /* Deprecated */
->
->      DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
->      DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> index 0e6a0f245c..f4e6f273fc 100644
-> --- a/target/riscv/cpu_cfg.h
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -123,7 +123,7 @@ struct RISCVCPUConfig {
->      bool ext_xtheadsync;
->      bool ext_XVentanaCondOps;
->
-> -    uint8_t pmu_num;
-> +    uint32_t pmu_mask;
->      char *priv_spec;
->      char *user_spec;
->      char *bext_spec;
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index c7c862cdd3..9f6e3f7a6d 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -313,7 +313,7 @@ static bool pmu_needed(void *opaque)
->  {
->      RISCVCPU *cpu =3D opaque;
->
-> -    return cpu->cfg.pmu_num;
-> +    return (cpu->cfg.pmu_mask > 0);
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 4ca96ddd1d..fc26b52c88 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -528,11 +528,14 @@ static RISCVException pmp(CPURISCVState *env, int c=
+srno)
+>      return RISCV_EXCP_ILLEGAL_INST;
 >  }
 >
->  static const VMStateDescription vmstate_pmu_ctr_state =3D {
-> diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
-> index 7ddf4977b1..0e7d58b8a5 100644
-> --- a/target/riscv/pmu.c
-> +++ b/target/riscv/pmu.c
-> @@ -18,14 +18,13 @@
->
->  #include "qemu/osdep.h"
->  #include "qemu/log.h"
-> +#include "qemu/error-report.h"
->  #include "cpu.h"
->  #include "pmu.h"
->  #include "sysemu/cpu-timers.h"
->  #include "sysemu/device_tree.h"
->
->  #define RISCV_TIMEBASE_FREQ 1000000000 /* 1Ghz */
-> -#define MAKE_32BIT_MASK(shift, length) \
-> -        (((uint32_t)(~0UL) >> (32 - (length))) << (shift))
->
->  /*
->   * To keep it simple, any event can be mapped to any programmable counte=
-rs in
-> @@ -184,7 +183,7 @@ int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_=
-event_idx event_idx)
->      CPURISCVState *env =3D &cpu->env;
->      gpointer value;
->
-> -    if (!cpu->cfg.pmu_num) {
-> +    if (!cpu->cfg.pmu_mask) {
->          return 0;
->      }
->      value =3D g_hash_table_lookup(cpu->pmu_event_ctr_map,
-> @@ -432,9 +431,12 @@ int riscv_pmu_setup_timer(CPURISCVState *env, uint64=
-_t value, uint32_t ctr_idx)
->
->  void riscv_pmu_init(RISCVCPU *cpu, Error **errp)
+> -static RISCVException smepmp(CPURISCVState *env, int csrno)
+> +static RISCVException have_mseccfg(CPURISCVState *env, int csrno)
 >  {
-> -    uint8_t pmu_num =3D cpu->cfg.pmu_num;
-> +    if (cpu->cfg.pmu_mask & (COUNTEREN_CY | COUNTEREN_TM | COUNTEREN_IR)=
-) {
-> +        error_setg(errp, "\"pmu-mask\" contains invalid bits (0-2) set")=
-;
-> +        return;
+>      if (riscv_cpu_cfg(env)->ext_smepmp) {
+>          return RISCV_EXCP_NONE;
+>      }
+> +    if (riscv_cpu_cfg(env)->ext_zkr) {
+> +        return RISCV_EXCP_NONE;
 > +    }
 >
-> -    if (pmu_num > (RV_MAX_MHPMCOUNTERS - 3)) {
-> +    if (ctpop32(cpu->cfg.pmu_mask) > (RV_MAX_MHPMCOUNTERS - 3)) {
->          error_setg(errp, "Number of counters exceeds maximum available")=
-;
->          return;
->      }
-> @@ -445,6 +447,5 @@ void riscv_pmu_init(RISCVCPU *cpu, Error **errp)
->          return;
->      }
->
-> -    /* Create a bitmask of available programmable counters */
-> -    cpu->pmu_avail_ctrs =3D MAKE_32BIT_MASK(3, pmu_num);
-> +    cpu->pmu_avail_ctrs =3D cpu->cfg.pmu_mask;
+>      return RISCV_EXCP_ILLEGAL_INST;
 >  }
-> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> index ed3eb991c0..53c52389b9 100644
-> --- a/target/riscv/tcg/tcg-cpu.c
-> +++ b/target/riscv/tcg/tcg-cpu.c
-> @@ -613,7 +613,7 @@ static bool tcg_cpu_realize(CPUState *cs, Error **err=
-p)
->          riscv_timer_init(cpu);
->      }
+> @@ -4766,7 +4769,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
+>      [CSR_VSIPH]       =3D { "vsiph",       aia_hmode32, NULL, NULL, rmw_=
+vsiph },
 >
-> -    if (cpu->cfg.pmu_num) {
-> +    if (cpu->cfg.pmu_mask) {
->          riscv_pmu_init(cpu, &local_err);
->          if (local_err !=3D NULL) {
->              error_propagate(errp, local_err);
+>      /* Physical Memory Protection */
+> -    [CSR_MSECCFG]    =3D { "mseccfg", smepmp, read_mseccfg, write_mseccf=
+g,
+> +    [CSR_MSECCFG]    =3D { "mseccfg",   have_mseccfg, read_mseccfg, writ=
+e_mseccfg,
+>                           .min_priv_ver =3D PRIV_VERSION_1_11_0          =
+ },
+>      [CSR_PMPCFG0]    =3D { "pmpcfg0",   pmp, read_pmpcfg,  write_pmpcfg =
+ },
+>      [CSR_PMPCFG1]    =3D { "pmpcfg1",   pmp, read_pmpcfg,  write_pmpcfg =
+ },
 > --
-> 2.41.0
+> 2.40.1
 >
 >
 
