@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8B78C4167D
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 09:33:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C87BEC4167B
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 09:47:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qyU4B-0002jU-AY; Thu, 02 Nov 2023 05:32:43 -0400
+	id 1qyUIO-0004AO-Ss; Thu, 02 Nov 2023 05:47:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qyU3w-0002g2-8b
- for qemu-riscv@nongnu.org; Thu, 02 Nov 2023 05:32:33 -0400
-Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
+ id 1qyUIK-00049j-9R
+ for qemu-riscv@nongnu.org; Thu, 02 Nov 2023 05:47:22 -0400
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1qyU3t-0004H3-Hj
- for qemu-riscv@nongnu.org; Thu, 02 Nov 2023 05:32:27 -0400
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-533d31a8523so1084066a12.1
- for <qemu-riscv@nongnu.org>; Thu, 02 Nov 2023 02:32:25 -0700 (PDT)
+ id 1qyUII-0003B3-IR
+ for qemu-riscv@nongnu.org; Thu, 02 Nov 2023 05:47:20 -0400
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-32d80ae19f8so409276f8f.2
+ for <qemu-riscv@nongnu.org>; Thu, 02 Nov 2023 02:47:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1698917544; x=1699522344; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1698918437; x=1699523237; darn=nongnu.org;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=SnPPCvpi2vM2hqljmGDoKiz5OCbFVPkaNK+CiwKpp2Q=;
- b=TjNCG0zvlpDX2Kf2X0RqVEGjDw3aT1ISVU8FpjW1a5cacDcvIC8Xq0S2vPc4PEvSnL
- aktKFipTa+hYn2iv0FhKf6AulHLTt/k4NjcYUjeFRgVNqYlFiDjMfptxABtHuoZgljka
- P0kbDdEVZc6NKMG56QHqCvtNLaQ5+9ZeNfc8g0Ct9dyRzL5Ce1GPRVdN9Hq3r1BBOolI
- tV7j5a8UKRiOxfeygKXHrPuxq9ACHWXLsnLpsvcVDV9RSVG6az9GGIuLgbbEQlWGveKL
- O0RhBfP29eavPfKaKdeRkvEKRaKVJMYugzUErx0doTIU+kZDHfeK5n6ahGBHGGNiQZ4O
- pM3Q==
+ bh=OFSsSouQLNlw+sXzdlikhskpcX4CIxBHiRvr/qH4X0w=;
+ b=pBJx0t/EzGFphOgeDFeLhhgsIYgV+ODRQdmyJ26PpQjj1L0TvmQcfzD0mRIgMX35HY
+ llMJ3f6aYdgG3Vzotw18lo5JnqflRimJaNhEAEfMUFGbk3Ihvmpvu2ZVnc8xvSiltocY
+ sOZbwW0RJtBHBNUb8hGbl56QzcNWqNq/r8gGKuJjoq4RoV3K/Tc2DIwbNjrsg2O1odcM
+ dSyAHcUq5x3gsKDkcb9F/ZsTjDWbBrz+KkvTyl0kE2b5bhNgVn1iKA57hQnyTU3eZuDz
+ 2fXdQkAY6wfVlSUPPk2Kh0w1x6kYMiPVCZec/XCU94sxzOaohniBoGC369+aD0ALpSJg
+ pruw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698917544; x=1699522344;
+ d=1e100.net; s=20230601; t=1698918437; x=1699523237;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SnPPCvpi2vM2hqljmGDoKiz5OCbFVPkaNK+CiwKpp2Q=;
- b=IHjjzSF6eyHlSwXD5XVkfGDYMLz5s+5qOAOdtruN9L5joiW99bUukZsLlcKRQhyqHC
- hPw94HC57RE1KF+hochC0Pvry+y+rCTgfrapGh3hpd2gelF5hmnJ2MFuRH6EjLgxWPCd
- 4X/tuF8FyqSGKS1U3H/0XO6S/hN8K57C35GVRoHPE+HfwJRvAvmT5HpsSixJbI3RkpnT
- A33RQrVEv5qafJxxVA3nU9J4iPXysOMbIVVMvYq0FZgp5wcSXR2qK2Jk3Sbz02bZewBg
- obWqAvvB+B0xvFoEVL8zMPIYaEhdUseEjHLKOjh1yPRbrEiZFPMGAlkj+KRC6ApAPfnb
- eX+g==
-X-Gm-Message-State: AOJu0Yx+eBXVGIncE1jVXifFBPHO1Zb0Je4+RsmrZzS9mmpEk6FzYpPv
- 7bd5I8xo/+NYfGWtOYlUqaXzVg==
-X-Google-Smtp-Source: AGHT+IEnhEXS9++c4LlsYMVsr4HrFOIYcr5RbyhqOdgFEeX362IleAGyOux1hHQFiMzSoPVuQ0YrFg==
-X-Received: by 2002:a17:906:ef0e:b0:9d0:4b8f:3da7 with SMTP id
- f14-20020a170906ef0e00b009d04b8f3da7mr4020887ejs.29.1698917544130; 
- Thu, 02 Nov 2023 02:32:24 -0700 (PDT)
+ bh=OFSsSouQLNlw+sXzdlikhskpcX4CIxBHiRvr/qH4X0w=;
+ b=o9Ep9Qfc+LszQQjpndhnThytxz5LtOWWI56iIl4bSQbYJ5aMFa3aTGXpJ6KO84LMkK
+ Xd4rGp8UQWswnOJNrWTRKNxL2kMYUZ8JMWt5vN8xqN1WPEHVzxW5TeHAVMndfHQ3Ohel
+ cLhntkqOkQrKse3xwq782dBlNbUSvrSr0h6mrSARIW2te1x0VVnOSGyv5ZcUpgVStHme
+ vHn0G/Yy9/HUhpbjKpsABvpai50V/KgKBwBXdyPjTmhoOgZA6KBjQW4TIEVxx908EP4R
+ lBqbXjD91u9/e3IDG9gX353urjnW+avvXwrUrdOnzT7rKlVEFVhqJYbOVRMcxfeqGDMw
+ 6W0Q==
+X-Gm-Message-State: AOJu0YxLUvKBi24+brrU41RaYCpW2glKtumbtjAxqYVjgnWQHG/y0xHf
+ DQxDWD3++fkMmPm0r/qphOYzrg==
+X-Google-Smtp-Source: AGHT+IG11Bi/mRBhDfKy0THZJZF2i1G5DvTYq/LLlYx7QWOIjfg/PRvY/W/ZQsjVrv5EUdlTx4Xmfw==
+X-Received: by 2002:a5d:64ad:0:b0:32f:7b89:2675 with SMTP id
+ m13-20020a5d64ad000000b0032f7b892675mr14751252wrp.65.1698918436780; 
+ Thu, 02 Nov 2023 02:47:16 -0700 (PDT)
 Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
  [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
  by smtp.gmail.com with ESMTPSA id
- e24-20020a1709062c1800b009d268e3b801sm902377ejh.37.2023.11.02.02.32.23
+ h11-20020a056000000b00b0031980783d78sm1953618wrx.54.2023.11.02.02.47.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Nov 2023 02:32:23 -0700 (PDT)
-Date: Thu, 2 Nov 2023 10:32:22 +0100
+ Thu, 02 Nov 2023 02:47:16 -0700 (PDT)
+Date: Thu, 2 Nov 2023 10:47:15 +0100
 From: Andrew Jones <ajones@ventanamicro.com>
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
  palmer@rivosinc.com
-Subject: Re: [PATCH v8 04/19] target/riscv/cpu.c: set satp_mode_max MBARE
- during satp_finalize()
-Message-ID: <20231102-30bfbfa066e5b09632fb068e@orel>
+Subject: Re: [PATCH v8 05/19] target/riscv/tcg: update priv_ver on user_set
+ extensions
+Message-ID: <20231102-bdcd40a9183dbbfe6667a304@orel>
 References: <20231101204204.345470-1-dbarboza@ventanamicro.com>
- <20231101204204.345470-5-dbarboza@ventanamicro.com>
+ <20231101204204.345470-6-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20231101204204.345470-5-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::534;
- envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x534.google.com
+In-Reply-To: <20231101204204.345470-6-dbarboza@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,71 +97,90 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Nov 01, 2023 at 05:41:49PM -0300, Daniel Henrique Barboza wrote:
-> KVM CPUs can handle "cpu->cfg.satp_mode.supported == 0" because KVM will
-> make it do internally, not requiring the current SATP support from TCG.
+On Wed, Nov 01, 2023 at 05:41:50PM -0300, Daniel Henrique Barboza wrote:
+> We'll add a new bare CPU type that won't have any default priv_ver. This
+> means that the CPU will default to priv_ver = 0, i.e. 1.10.0.
 > 
-> But other TCG CPUs doesn't deal well with it. We'll assert out before
-> OpenSBI if the CPU doesn't set a default:
+> At the same we'll allow these CPUs to enable extensions at will, but
+> then, if the extension has a priv_ver newer than 1.10, we'll end up
+> disabling it. Users will then need to manually set priv_ver to something
+> other than 1.10 to enable the extensions they want, which is not ideal.
 > 
-> ERROR:../target/riscv/cpu.c:317:satp_mode_max_from_map: assertion failed: (map > 0)
-> Bail out! ERROR:../target/riscv/cpu.c:317:satp_mode_max_from_map: assertion failed: (map > 0)
+> Change the setter() of multi letter extensions to allow user enabled
+> extensions to bump the priv_ver of the CPU. This will make it
+> conveniente for users to enable extensions for CPUs that doesn't set a
+> default priv_ver.
 > 
-> This will be thrown by target/riscv/csr.c, write_satp(), when stepping
-> in validate_vm().
-> 
-> There's no current CPUs affected by it, but next patch will add a new
-> CPU that doesn't have defaults and this assert will be hit.
-> 
-> Change riscv_cpu_satp_mode_finalize() to set satp_mode_max_supported()
-> to MBARE if the CPU happens to not have a max mode set yet.
+> This change does not affect any existing CPU: vendor CPUs does not allow
+> extensions to be enabled, and generic CPUs are already set to priv_ver
+> LATEST.
 > 
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > ---
->  target/riscv/cpu.c | 14 ++++++++++++--
->  1 file changed, 12 insertions(+), 2 deletions(-)
+>  target/riscv/tcg/tcg-cpu.c | 20 ++++++++++++++++++++
+>  1 file changed, 20 insertions(+)
 > 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 9f6837ecb7..f7c1989d14 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -942,9 +942,19 @@ static void riscv_cpu_satp_mode_finalize(RISCVCPU *cpu, Error **errp)
->      bool rv32 = riscv_cpu_mxl(&cpu->env) == MXL_RV32;
->      uint8_t satp_mode_map_max, satp_mode_supported_max;
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index f54069d06f..b88fce98a4 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -114,6 +114,22 @@ static int cpu_cfg_ext_get_min_version(uint32_t ext_offset)
+>      g_assert_not_reached();
+>  }
 >  
-> -    /* The CPU wants the OS to decide which satp mode to use */
->      if (cpu->cfg.satp_mode.supported == 0) {
-> -        return;
-> +        if (kvm_enabled()) {
-> +            /* The CPU wants the OS to decide which satp mode to use */
-> +            return;
-> +        }
+> +static void cpu_validate_multi_ext_priv_ver(CPURISCVState *env,
+> +                                            uint32_t ext_offset)
+> +{
+> +    int ext_priv_ver;
 > +
-> +        /*
-> +         * We do not handle cpu->cfg.satp_mode.supported == 0
-> +         * with TCG yet. Set to MBARE.
-> +         */
-> +        if (tcg_enabled()) {
-> +            set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
-> +        }
+> +    if (env->priv_ver == PRIV_VERSION_LATEST) {
+> +        return;
+> +    }
+> +
+> +    ext_priv_ver = cpu_cfg_ext_get_min_version(ext_offset);
+> +
+> +    if (env->priv_ver < ext_priv_ver) {
+> +        env->priv_ver = ext_priv_ver;
+> +    }
+
+This will ignore user input. If the user, for example, does
+
+ -cpu rv64,priv_spec=v1.10.0,zicbom=on
+
+then, afaict, priv_spec will be silently bumped to 1.12. I think we should
+error out in that case instead. And, we should also error out for
+
+ -cpu rv64,zicbom=on,priv_spec=v1.10.0
+
+which means we should know when priv_spec is either
+
+ - its default value
+ - has been bumped by an extension
+ - has been explicitly set by the user
+
+> +}
+> +
+>  static void cpu_cfg_ext_auto_update(RISCVCPU *cpu, uint32_t ext_offset,
+>                                      bool value)
+>  {
+> @@ -829,6 +845,10 @@ static void cpu_set_multi_ext_cfg(Object *obj, Visitor *v, const char *name,
+>          return;
 >      }
 >  
->      satp_mode_supported_max =
+> +    if (value) {
+> +        cpu_validate_multi_ext_priv_ver(&cpu->env, multi_ext_cfg->offset);
+> +    }
+
+Some misa extensions also have priv spec version dependencies. See
+riscv_cpu_validate_misa_priv()
+
+> +
+>      isa_ext_update_enabled(cpu, multi_ext_cfg->offset, value);
+>  }
+>  
 > -- 
 > 2.41.0
 >
-
-This patch should no longer be necessary if the suggestion I made in the
-previous patch works the way I think it should. But, regarding this patch,
-I do like that the "The CPU wants the OS to decide which satp mode to use"
-comment became specific to KVM, which makes more sense to me. Maybe we
-should just change that comment to something like
-
-/*
- * With some accelerators, such as KVM, the OS dictates which satp mode to
- * use. For those cases, satp_mode.supported is zero and there's nothing
- * to do here.
- */
 
 Thanks,
 drew
