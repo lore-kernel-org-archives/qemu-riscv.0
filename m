@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EACBC4332F
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 22:46:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E45BC4167D
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 22:46:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qygQt-0006LN-GT; Thu, 02 Nov 2023 18:44:59 -0400
+	id 1qygR5-0006RC-1Y; Thu, 02 Nov 2023 18:45:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qygQs-0006Ke-1A
- for qemu-riscv@nongnu.org; Thu, 02 Nov 2023 18:44:58 -0400
-Received: from mail-yw1-x112e.google.com ([2607:f8b0:4864:20::112e])
+ id 1qygR2-0006QE-R3
+ for qemu-riscv@nongnu.org; Thu, 02 Nov 2023 18:45:08 -0400
+Received: from mail-yw1-x1135.google.com ([2607:f8b0:4864:20::1135])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qygQq-00035J-F0
- for qemu-riscv@nongnu.org; Thu, 02 Nov 2023 18:44:57 -0400
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-5ae143e08b1so18104967b3.1
- for <qemu-riscv@nongnu.org>; Thu, 02 Nov 2023 15:44:56 -0700 (PDT)
+ id 1qygR0-0003Ho-If
+ for qemu-riscv@nongnu.org; Thu, 02 Nov 2023 18:45:08 -0400
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-5b383b4184fso18135527b3.1
+ for <qemu-riscv@nongnu.org>; Thu, 02 Nov 2023 15:45:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1698965095; x=1699569895; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1698965105; x=1699569905; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UgRWfBwtayel4L85jalnEfEZ38BIg1pZr2LRgGnFOd0=;
- b=Ts1DmK96R9/fzEkvcNe4FCWRh2qelFGJpelB5PZTkEKKynOCojUR64jr6iF6HUTTeI
- 3E1BFE+Iv2y8YfKBNRX6LJizLvB6wDlvPyeLqmGmok/kSUL4y7nEONPIq2U2hfpOscaR
- Bm3fQZ4UoVIyQQ9Nt/NIYZLSbb9N4Fc5b19nyLtlGox2y9vPpDlhx+RXRVnQ37gMXaWB
- 2ZSjHpsDgNf/m/Vv381v1NKv57T/BHYT8wlZlKSYbHVbmtk59leAOX3QjCt1GGZJvaO9
- +Dng5FoP3OYB5N3K18saLBfiz521uwxgKVlmJJWwiBDWmUUJjZW/mr9S51/Mq5ZTGVt3
- m/Mw==
+ bh=2U3cH+LAAq3k8DDXflF8NQSmZTp10gRR1f8jG2ykAU0=;
+ b=L/FXuMu5txLoxg5IrEGYAIv/qGbvy+JsWUf70rXGmPCKetXipM+zCH+fKCeLRf9ZnF
+ NsV05Cv5qSA6SpkN3gRqjF3FRLKC+jQPlGhGj+YMAzGlt4bWXldxK8YsKkNvAQnauFv3
+ e/X5rWmSOOeD2rm+8fvQxPgTD7wrch29DMdirGqgm2JdnyyPBl23qaigwJpII4kvsDF8
+ R39IVpkq+vCmG0wtX1cDADMXv78JKvGzbCMwdsyBVOJXSbNZJwQf3DnXpzutOr7ydV6F
+ 0/0s0EuJXT5gVbWn/4sYfmsRcJjlxUlhPiripyM38mFANnt2VhPvY00TdMPR1TZvu9E2
+ Fyzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698965095; x=1699569895;
+ d=1e100.net; s=20230601; t=1698965105; x=1699569905;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UgRWfBwtayel4L85jalnEfEZ38BIg1pZr2LRgGnFOd0=;
- b=XTjqnfTgcJ2DPk1bvimd3LW2VsIKkznNw5aRlMgIKBU8aKmzrD9A7OOl7bcL5J++Ij
- c1hhwm3tGei2YoYl9HbLHgWrUbzIxkzM5vV5bCbpMgJjosCggAjvgN36sl7pPiHEhr6q
- fPNdB8nVQXml6dGzmhM3JnZ5SpY2FCYTBPRVqOhmvtlgHogRZzfmPuOeivkyrnMRmWGL
- QJB3EwPHLHVRCllohxAOc2TidsCPYbptOUmi3rnOyXXmxnCwr68cGP66XNEm9UTyli1C
- XUDaV7wyeSjcMI4ynVxkHz11jzv3xYOlU9Hb9+WoyENk9LHoabDKbaBjtEzZyH17s0wM
- NiRA==
-X-Gm-Message-State: AOJu0YwYNybR/b3UcEH/+79hwo6kjyHWlFNXuWO4majaph7PxR+DacEZ
- 2/4xGq8NxCrrKPmb1ASQw30OYA==
-X-Google-Smtp-Source: AGHT+IFX6GxYJH9QBvazUTjmFHogeDaJDBUREZ5C/s32SbnTMThsVN9BsZyV7X0YMRhntG8ZEL3eww==
-X-Received: by 2002:a05:690c:86:b0:5a7:ba53:6544 with SMTP id
- be6-20020a05690c008600b005a7ba536544mr1314006ywb.12.1698965095301; 
- Thu, 02 Nov 2023 15:44:55 -0700 (PDT)
+ bh=2U3cH+LAAq3k8DDXflF8NQSmZTp10gRR1f8jG2ykAU0=;
+ b=RBjbHyWtn8frULIECscyx7rkbY7rSVaBmUKgxSVWgeIRnXT3YWLmIdc23Kw2sgLgNX
+ 1SZmmmXNZpVh13kLp2CcLpiU4LJlWU/IUwIfcMkDpT8QchUeoneSEFMmhz4zMlF+6hO/
+ CJNwFObcBs4250xb6TZM82ri8hm+UjxgV82uzcTadmiqGi7ujcOk+b7jXIrtwJKI/XbJ
+ pjtBV0H5rSOpscYCPrWte8P2SAMm+EgiB9DO0yl8VBZxL4bw/0mPKqJwPLw6oQu/p3Hl
+ kdUnp2PvQ6sjfeF7LslxBk9sBYweJ/mkNcEWyX+qQXvOdtkAec1Xe1tuU+KWEBR8bsSv
+ rElg==
+X-Gm-Message-State: AOJu0Yw90quQwI+A3yhiImRhuNDczwQwzUrggit4/x5RPDva8uaGPnTE
+ a/fFsPrFVx2Q6edl0FytWa6Mhw==
+X-Google-Smtp-Source: AGHT+IHGGLFeclynXxAQ+YoVMo2itxuvX6ZMra83M2zzidJCCSXje8w80O+MhXuqRLrhwOHIESnb3A==
+X-Received: by 2002:a0d:d811:0:b0:59f:b0d9:5df2 with SMTP id
+ a17-20020a0dd811000000b0059fb0d95df2mr1031371ywe.0.1698965105592; 
+ Thu, 02 Nov 2023 15:45:05 -0700 (PDT)
 Received: from grind.. ([179.193.10.161]) by smtp.gmail.com with ESMTPSA id
- ce10-20020a05690c098a00b0059b24bd4f2asm259523ywb.57.2023.11.02.15.44.53
+ ce10-20020a05690c098a00b0059b24bd4f2asm259523ywb.57.2023.11.02.15.45.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Nov 2023 15:44:54 -0700 (PDT)
+ Thu, 02 Nov 2023 15:45:05 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  ajones@ventanamicro.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v9 02/19] target/riscv/tcg: do not use "!generic" CPU checks
-Date: Thu,  2 Nov 2023 19:44:28 -0300
-Message-ID: <20231102224445.527355-3-dbarboza@ventanamicro.com>
+Subject: [PATCH v9 06/19] target/riscv/tcg: add 'zic64b' support
+Date: Thu,  2 Nov 2023 19:44:32 -0300
+Message-ID: <20231102224445.527355-7-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231102224445.527355-1-dbarboza@ventanamicro.com>
 References: <20231102224445.527355-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::112e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-yw1-x112e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1135;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-yw1-x1135.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -95,86 +95,143 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Our current logic in get/setters of MISA and multi-letter extensions
-works because we have only 2 CPU types, generic and vendor, and by using
-"!generic" we're implying that we're talking about vendor CPUs. When adding
-a third CPU type this logic will break so let's handle it beforehand.
+zic64b is defined in the RVA22U64 profile [1] as a named feature for
+"Cache blocks must be 64 bytes in size, naturally aligned in the address
+space". It's a fantasy name for 64 bytes cache blocks. The RVA22U64
+profile mandates this feature, meaning that applications using this
+profile expects 64 bytes cache blocks.
 
-In set_misa_ext_cfg() and set_multi_ext_cfg(), check for "vendor" cpu instead
-of "not generic". The "generic CPU" checks remaining are from
-riscv_cpu_add_misa_properties() and cpu_add_multi_ext_prop() before
-applying default values for the extensions.
+To make the upcoming RVA22U64 implementation complete, we'll zic64b as
+a 'named feature', not a regular extension. This means that:
 
-This leaves us with:
+- it won't be exposed to users;
+- it won't be written in riscv,isa.
 
-- vendor CPUs will not allow extension enablement, all other CPUs will;
+This will be extended to other named extensions in the future, so we're
+creating some common boilerplate for them as well.
 
-- generic CPUs will inherit default values for extensions, all others
-  won't.
+zic64b is default to 'true' since we're already using 64 bytes blocks.
+If any cache block size (cbo{m,p,z}_blocksize) is changed to something
+different than 64, zic64b is set to 'false'.
 
-And now we can add a new, third CPU type, that will allow extensions to
-be enabled and will not inherit defaults, without changing the existing
-logic.
+Our profile implementation will then be able to check the current state
+of zic64b and take the appropriate action (e.g. throw a warning).
+
+[1] https://github.com/riscv/riscv-profiles/releases/download/v1.0/profiles.pdf
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/tcg/tcg-cpu.c | 13 +++++++++----
- 1 file changed, 9 insertions(+), 4 deletions(-)
+ target/riscv/cpu.c         |  6 ++++++
+ target/riscv/cpu.h         |  1 +
+ target/riscv/cpu_cfg.h     |  1 +
+ target/riscv/tcg/tcg-cpu.c | 31 +++++++++++++++++++++++++++++++
+ 4 files changed, 39 insertions(+)
 
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 057dd3d186..4b92f320e0 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1448,6 +1448,12 @@ const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] = {
+     DEFINE_PROP_END_OF_LIST(),
+ };
+ 
++const RISCVCPUMultiExtConfig riscv_cpu_named_features[] = {
++    MULTI_EXT_CFG_BOOL("zic64b", zic64b, true),
++
++    DEFINE_PROP_END_OF_LIST(),
++};
++
+ /* Deprecated entries marked for future removal */
+ const RISCVCPUMultiExtConfig riscv_cpu_deprecated_exts[] = {
+     MULTI_EXT_CFG_BOOL("Zifencei", ext_zifencei, true),
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 8efc4d83ec..bf12f34082 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -745,6 +745,7 @@ typedef struct RISCVCPUMultiExtConfig {
+ extern const RISCVCPUMultiExtConfig riscv_cpu_extensions[];
+ extern const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[];
+ extern const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[];
++extern const RISCVCPUMultiExtConfig riscv_cpu_named_features[];
+ extern const RISCVCPUMultiExtConfig riscv_cpu_deprecated_exts[];
+ extern Property riscv_cpu_options[];
+ 
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index c21e4bcc47..414c4eba77 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -116,6 +116,7 @@ struct RISCVCPUConfig {
+     bool ext_smepmp;
+     bool rvv_ta_all_1s;
+     bool rvv_ma_all_1s;
++    bool zic64b;
+ 
+     uint32_t mvendorid;
+     uint64_t marchid;
 diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 1a3351b142..08f8dded56 100644
+index 0e684ab86f..b0f69c6437 100644
 --- a/target/riscv/tcg/tcg-cpu.c
 +++ b/target/riscv/tcg/tcg-cpu.c
-@@ -654,6 +654,11 @@ static bool riscv_cpu_is_generic(Object *cpu_obj)
-     return object_dynamic_cast(cpu_obj, TYPE_RISCV_DYNAMIC_CPU) != NULL;
+@@ -114,6 +114,19 @@ static int cpu_cfg_ext_get_min_version(uint32_t ext_offset)
+     g_assert_not_reached();
  }
  
-+static bool riscv_cpu_is_vendor(Object *cpu_obj)
++static bool cpu_cfg_offset_is_named_feat(uint32_t ext_offset)
 +{
-+    return object_dynamic_cast(cpu_obj, TYPE_RISCV_VENDOR_CPU) != NULL;
++    const RISCVCPUMultiExtConfig *feat;
++
++    for (feat = riscv_cpu_named_features; feat->name != NULL; feat++) {
++        if (feat->offset == ext_offset) {
++            return true;
++        }
++    }
++
++    return false;
 +}
 +
- /*
-  * We'll get here via the following path:
-  *
-@@ -716,7 +721,7 @@ static void cpu_set_misa_ext_cfg(Object *obj, Visitor *v, const char *name,
-     target_ulong misa_bit = misa_ext_cfg->misa_bit;
-     RISCVCPU *cpu = RISCV_CPU(obj);
-     CPURISCVState *env = &cpu->env;
--    bool generic_cpu = riscv_cpu_is_generic(obj);
-+    bool vendor_cpu = riscv_cpu_is_vendor(obj);
-     bool prev_val, value;
- 
-     if (!visit_type_bool(v, name, &value, errp)) {
-@@ -730,7 +735,7 @@ static void cpu_set_misa_ext_cfg(Object *obj, Visitor *v, const char *name,
-     }
- 
-     if (value) {
--        if (!generic_cpu) {
-+        if (vendor_cpu) {
-             g_autofree char *cpuname = riscv_cpu_get_name(cpu);
-             error_setg(errp, "'%s' CPU does not allow enabling extensions",
-                        cpuname);
-@@ -835,7 +840,7 @@ static void cpu_set_multi_ext_cfg(Object *obj, Visitor *v, const char *name,
+ static void cpu_validate_multi_ext_priv_ver(CPURISCVState *env,
+                                             uint32_t ext_offset)
  {
-     const RISCVCPUMultiExtConfig *multi_ext_cfg = opaque;
-     RISCVCPU *cpu = RISCV_CPU(obj);
--    bool generic_cpu = riscv_cpu_is_generic(obj);
-+    bool vendor_cpu = riscv_cpu_is_vendor(obj);
-     bool prev_val, value;
- 
-     if (!visit_type_bool(v, name, &value, errp)) {
-@@ -859,7 +864,7 @@ static void cpu_set_multi_ext_cfg(Object *obj, Visitor *v, const char *name,
+@@ -123,6 +136,10 @@ static void cpu_validate_multi_ext_priv_ver(CPURISCVState *env,
          return;
      }
  
--    if (value && !generic_cpu) {
-+    if (value && vendor_cpu) {
-         g_autofree char *cpuname = riscv_cpu_get_name(cpu);
-         error_setg(errp, "'%s' CPU does not allow enabling extensions",
-                    cpuname);
++    if (cpu_cfg_offset_is_named_feat(ext_offset)) {
++        return;
++    }
++
+     ext_priv_ver = cpu_cfg_ext_get_min_version(ext_offset);
+ 
+     if (env->priv_ver < ext_priv_ver) {
+@@ -280,6 +297,18 @@ static void riscv_cpu_disable_priv_spec_isa_exts(RISCVCPU *cpu)
+     }
+ }
+ 
++static void riscv_cpu_validate_zic64b(RISCVCPU *cpu)
++{
++    cpu->cfg.zic64b = cpu->cfg.cbom_blocksize == 64 &&
++                      cpu->cfg.cbop_blocksize == 64 &&
++                      cpu->cfg.cboz_blocksize == 64;
++}
++
++static void riscv_cpu_validate_named_features(RISCVCPU *cpu)
++{
++    riscv_cpu_validate_zic64b(cpu);
++}
++
+ /*
+  * Check consistency between chosen extensions while setting
+  * cpu->cfg accordingly.
+@@ -644,6 +673,8 @@ void riscv_tcg_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
+         return;
+     }
+ 
++    riscv_cpu_validate_named_features(cpu);
++
+     if (cpu->cfg.ext_smepmp && !cpu->cfg.pmp) {
+         /*
+          * Enhanced PMP should only be available
 -- 
 2.41.0
 
