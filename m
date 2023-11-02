@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 193BDC4708E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14F32C4167D
 	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 00:37:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qyLeC-0005MK-Tg; Wed, 01 Nov 2023 20:33:21 -0400
+	id 1qyLfP-0002Fv-H7; Wed, 01 Nov 2023 20:34:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qyLe8-0004r4-RI
- for qemu-riscv@nongnu.org; Wed, 01 Nov 2023 20:33:16 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qyLfN-00024n-OB
+ for qemu-riscv@nongnu.org; Wed, 01 Nov 2023 20:34:33 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qyLe2-0003Nz-Pc
- for qemu-riscv@nongnu.org; Wed, 01 Nov 2023 20:33:15 -0400
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qyLfL-0003yx-D5
+ for qemu-riscv@nongnu.org; Wed, 01 Nov 2023 20:34:33 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1698885190;
+ s=mimecast20190719; t=1698885270;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ to:to:cc:cc:mime-version:mime-version:mime-version: content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=B0JDuqsJdI9YJAZOWMXhbpWYHdgys1siLiQPKla5umw=;
- b=I6N05uotHIZMtrhd5zLtUIEbeKjiJ1CzQHf1KjlXlzF5agj4W6nldAh1V/Qcd7R+TaTRu4
- 84qP/f+s7c8gnA1VRepYpeTBeDXDJiptlnjUj1qpcjQNIHueP/pYDTOfYVaJvSZnkH26vf
- A8/7YB/0dLMiiMjqcJrkvBejI3hPfxA=
+ bh=hpeKOnNHDzdleIFAJE8H9OmrGjfXzc6pC5SCT7yL3NQ=;
+ b=bCO58TFGfQAUwpqmqx5hAfYDtl+S47wv6+Lez2RSW6YtDAtaPyFmJjLS5CU3FRK/T4Brff
+ DyDyBjlMlJ/spOnRTH0qmyzj4A+Uav5uWm2DTAsExGzoMJIqOHGNbIVa3or8qv/qytahOu
+ r/iq6sjmbxXUmSTDdL8Oy3k6/HWS+PU=
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-42-cfUejxJEOlqy20sc_zLucA-1; Wed, 01 Nov 2023 20:33:05 -0400
-X-MC-Unique: cfUejxJEOlqy20sc_zLucA-1
+ us-mta-575-32QwqszdMMy1-_97uBo5iQ-1; Wed, 01 Nov 2023 20:34:25 -0400
+X-MC-Unique: 32QwqszdMMy1-_97uBo5iQ-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
  [10.11.54.8])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id D4AEB85A58B;
- Thu,  2 Nov 2023 00:33:02 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 47A1981B560;
+ Thu,  2 Nov 2023 00:34:23 +0000 (UTC)
 Received: from gshan.redhat.com (unknown [10.64.136.70])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 9994CC0FE05;
- Thu,  2 Nov 2023 00:32:47 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id DE972C0FE05;
+ Thu,  2 Nov 2023 00:34:07 +0000 (UTC)
 From: Gavin Shan <gshan@redhat.com>
 To: qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
@@ -64,24 +64,25 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  ysato@users.sourceforge.jp, david@redhat.com, thuth@redhat.com,
  iii@linux.ibm.com, kbastian@mail.uni-paderborn.de, jcmvbkbc@gmail.com,
  shan.gavin@gmail.com
-Subject: [PATCH v4 28/33] machine: Print CPU model name instead of CPU type
- name
-Date: Thu,  2 Nov 2023 10:24:55 +1000
-Message-ID: <20231102002500.1750692-29-gshan@redhat.com>
+Subject: [PATCH v4 33/33] hw/riscv/shakti_c: Check CPU type in
+ machine_run_board_init()
+Date: Thu,  2 Nov 2023 10:25:00 +1000
+Message-ID: <20231102002500.1750692-34-gshan@redhat.com>
 In-Reply-To: <20231102002500.1750692-1-gshan@redhat.com>
 References: <20231102002500.1750692-1-gshan@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.8
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=gshan@redhat.com;
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=gshan@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -24
 X-Spam_score: -2.5
 X-Spam_bar: --
 X-Spam_report: (-2.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.393,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -99,56 +100,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The names of supported CPU models instead of CPU types should be
-printed when the user specified CPU type isn't supported, to be
-consistent with the output from '-cpu ?'.
-
-Correct the error messages to print CPU model names instead of CPU
-type names.
+Set mc->valid_cpu_types so that the user specified CPU type can
+be validated in machine_run_board_init(). We needn't to do it
+by ourselves.
 
 Signed-off-by: Gavin Shan <gshan@redhat.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/core/machine.c | 19 +++++++++++++++----
- 1 file changed, 15 insertions(+), 4 deletions(-)
+ hw/riscv/shakti_c.c | 11 +++++------
+ 1 file changed, 5 insertions(+), 6 deletions(-)
 
-diff --git a/hw/core/machine.c b/hw/core/machine.c
-index 2d78692df1..1dd0f8831b 100644
---- a/hw/core/machine.c
-+++ b/hw/core/machine.c
-@@ -1391,6 +1391,7 @@ static void is_cpu_type_supported(MachineState *machine, Error **errp)
-     MachineClass *mc = MACHINE_GET_CLASS(machine);
-     ObjectClass *oc = object_class_by_name(machine->cpu_type);
-     CPUClass *cc;
-+    char *model;
-     int i;
+diff --git a/hw/riscv/shakti_c.c b/hw/riscv/shakti_c.c
+index 12ea74b032..fc83ed4db4 100644
+--- a/hw/riscv/shakti_c.c
++++ b/hw/riscv/shakti_c.c
+@@ -28,6 +28,10 @@
+ #include "exec/address-spaces.h"
+ #include "hw/riscv/boot.h"
  
-     /*
-@@ -1407,11 +1408,21 @@ static void is_cpu_type_supported(MachineState *machine, Error **errp)
++static const char * const valid_cpu_types[] = {
++    RISCV_CPU_TYPE_NAME("shakti-c"),
++    NULL
++};
  
-         /* The user specified CPU type isn't valid */
-         if (!mc->valid_cpu_types[i]) {
--            error_setg(errp, "Invalid CPU type: %s", machine->cpu_type);
--            error_append_hint(errp, "The valid types are: %s",
--                              mc->valid_cpu_types[0]);
-+            model = cpu_model_from_type(machine->cpu_type);
-+            g_assert(model != NULL);
-+            error_setg(errp, "Invalid CPU type: %s", model);
-+            g_free(model);
-+
-+            model = cpu_model_from_type(mc->valid_cpu_types[0]);
-+            g_assert(model != NULL);
-+            error_append_hint(errp, "The valid types are: %s", model);
-+            g_free(model);
-+
-             for (i = 1; mc->valid_cpu_types[i]; i++) {
--                error_append_hint(errp, ", %s", mc->valid_cpu_types[i]);
-+                model = cpu_model_from_type(mc->valid_cpu_types[i]);
-+                g_assert(model != NULL);
-+                error_append_hint(errp, ", %s", model);
-+                g_free(model);
-             }
+ static const struct MemmapEntry {
+     hwaddr base;
+@@ -47,12 +51,6 @@ static void shakti_c_machine_state_init(MachineState *mstate)
+     ShaktiCMachineState *sms = RISCV_SHAKTI_MACHINE(mstate);
+     MemoryRegion *system_memory = get_system_memory();
  
-             error_append_hint(errp, "\n");
+-    /* Allow only Shakti C CPU for this platform */
+-    if (strcmp(mstate->cpu_type, TYPE_RISCV_CPU_SHAKTI_C) != 0) {
+-        error_report("This board can only be used with Shakti C CPU");
+-        exit(1);
+-    }
+-
+     /* Initialize SoC */
+     object_initialize_child(OBJECT(mstate), "soc", &sms->soc,
+                             TYPE_RISCV_SHAKTI_SOC);
+@@ -85,6 +83,7 @@ static void shakti_c_machine_class_init(ObjectClass *klass, void *data)
+     mc->desc = "RISC-V Board compatible with Shakti SDK";
+     mc->init = shakti_c_machine_state_init;
+     mc->default_cpu_type = TYPE_RISCV_CPU_SHAKTI_C;
++    mc->valid_cpu_types = valid_cpu_types;
+     mc->default_ram_id = "riscv.shakti.c.ram";
+ }
+ 
 -- 
 2.41.0
 
