@@ -4,66 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E9D2C4167D
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 01:49:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 873DAC4332F
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 02:33:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qyMfj-0005ZA-35; Wed, 01 Nov 2023 21:39:00 -0400
+	id 1qyNWP-0006HI-K8; Wed, 01 Nov 2023 22:33:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qyMfX-0004o9-43; Wed, 01 Nov 2023 21:38:51 -0400
-Received: from mail-vk1-xa2e.google.com ([2607:f8b0:4864:20::a2e])
+ id 1qyNWO-0006GJ-10; Wed, 01 Nov 2023 22:33:24 -0400
+Received: from mail-vs1-xe2a.google.com ([2607:f8b0:4864:20::e2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qyMfU-0004Zo-Jm; Wed, 01 Nov 2023 21:38:45 -0400
-Received: by mail-vk1-xa2e.google.com with SMTP id
- 71dfb90a1353d-4a87f9a3961so184195e0c.3; 
- Wed, 01 Nov 2023 18:38:43 -0700 (PDT)
+ id 1qyNWL-0001x1-Qi; Wed, 01 Nov 2023 22:33:23 -0400
+Received: by mail-vs1-xe2a.google.com with SMTP id
+ ada2fe7eead31-457c057bdb5so235992137.0; 
+ Wed, 01 Nov 2023 19:33:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698889123; x=1699493923; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1698892398; x=1699497198; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dNH0CSikb5DVX2eH8UOGhyJ2YnRz7YvLD3jmrY6Jb6g=;
- b=mI10KDdwA946EmKCvnyPZ2MkbiQW5okM/YM4oDjq8fLehhvbCbUbWJfkchNV7B+3oQ
- yhLC62NeQAE+hOCwq9s7diQnRalZLUO/vgJy3nixcwcxSdeAuJ4BAwB2QwTkL2hwdo+g
- y1BBXg6qQq1twgDGpcBELLyJL94MuwV1mYcZnamKmp5GWh+c9e1X4ycgbOwK33VzBy0d
- FNC0rLk9gSDMp9SxeAB3ErsjWDBFvpt2vzVbZvXQVc9/IPjcm6VWGFJUv4s64TnlvwBX
- eSBYi7dL12UUBPIdL3Ht1phDRCnyMJwfGLnHl3BuoWH29kFTk2uzTQZ5QaR/GVu+bEe4
- r8zw==
+ bh=CekvVYo980rWa1iEgw9YjGggCgw0SxyomD0Xh2zyoO8=;
+ b=C+/nkWwbOuSH8oJYFJAFFABmzVdvuL0O8TCmBmGbM9W1joTggouZHBXQBsbNe+gqdW
+ TikISXCB46TdnvEm3OGHMU5uBkYzYya8Qg/InvfUcE+/D7bZxJioa1ArOWaNlxuL4gpI
+ AChVULkaEEBPuLG6ea5P1+CphpEpp4Ivwk5fDV7SaSRWDsZvwKeL34LgvOrKlaIEiGyY
+ oB+MjpY2QIrCqYSgEki1Z2q1bVO3Y0NfXM8xybuD68m7ZcFqdRH1nLFY3QC6ibVlaKBE
+ LqwqVhqvEbZ0N2cQixjmWG6Ascqnf3MhNvjnpsyEMbS923hQBzJOAlHw4L4XmRf6KMfL
+ u0JQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698889123; x=1699493923;
+ d=1e100.net; s=20230601; t=1698892398; x=1699497198;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=dNH0CSikb5DVX2eH8UOGhyJ2YnRz7YvLD3jmrY6Jb6g=;
- b=qtMpLNEkltmSJ1ahfY9KPdk04r8A9JOd/9dEPjBG91vKm3XN8aVs7EN4RewN9czEEw
- /jYpgzz7usFwnGxCTmkS9EjePuYCJER7rNQtoSWS20LBqoQYZQ0litBfrt+NM+MGQWqI
- 7yhRUdD7grUg5xu5cIn/K7SL+db/dPK/E45QbfxXBoe2zWYxk2vMTTVqDYCxifW/gVDV
- DNRMcjXzYIS70GSu2XTIGE1b850UeHqm4w89n4h8sbONtyJ7cLqK2MdrKTz66GAnKTDx
- 1PEc1Zul7FghMFDIRLe319GJ80lL6LpcMIQRpB4PL3a6xJ9cCNdEREXLqkJ4LZk3mvcH
- Qrbg==
-X-Gm-Message-State: AOJu0Yy7ZksMajtIu0mvrJGg7ldAFzZ7s0xgJmyNqSVkpNI6wrSSq9jK
- /wP8v36mbSMSWPT8mihe1dGcoml4EeUDVXct4KJfXQ8Dl4Y=
-X-Google-Smtp-Source: AGHT+IGTxg4CKomgParDvZjvMS3P6gYEcnQY05VaMgBVH1SuVJYj36nE5Tarsk20BLNdkNy+klAw8PUVLQg8ubdH4Og=
-X-Received: by 2002:a05:6122:71b:b0:48d:5be:2899 with SMTP id
- 27-20020a056122071b00b0048d05be2899mr17603327vki.2.1698889122772; Wed, 01 Nov
- 2023 18:38:42 -0700 (PDT)
+ bh=CekvVYo980rWa1iEgw9YjGggCgw0SxyomD0Xh2zyoO8=;
+ b=l6CY7NqbQptezlyw27MbSCp+pbXnLLY1xwC0C5h3itbVN7yHDb93uHNZX5F0VEMmMX
+ vEF1i5PrHlCT1OpPoeinODC8mVCnTId5m5BWfoYk3w3VuzRmppchcC8gnhBiVkVnByY7
+ u7L8X0THgixuwQ4ZwwzNM50QeDK64pusMuFykuXzkZljNFJPZaZEbXSwWCOhOVMcNsra
+ iHnF6VycFiC3+AvvC3yBP5GqPjPUOPXeFsGQnd9YTAyfjGA6LyUzWGTJu6yLwC6O8Xz3
+ J1rW7VA27MjvlKBweK4IJJsB49lx6ZCc3duew8K7JJ0ykPoPCMmaAD+t4x2prZ1M6piM
+ YGfw==
+X-Gm-Message-State: AOJu0YznfxDKcVimy+lwU6zYENrNijmAoBRyjntzjJvRkyrPOt7LBL1D
+ y8AymTiqvcNnPr3CcbgwI7GgnJJRAlFUezxFqbA=
+X-Google-Smtp-Source: AGHT+IGKBU8BL5HaS+Gsb2oYzsy1GC+wvTZ2U3UL9y+8RUyGdQE7uy4nl6RKWGmMPJTmanDLgQRiEu7okiaTEftORpQ=
+X-Received: by 2002:a67:c087:0:b0:457:5eb4:6966 with SMTP id
+ x7-20020a67c087000000b004575eb46966mr17175787vsi.17.1698892398371; Wed, 01
+ Nov 2023 19:33:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231026151828.754279-1-max.chou@sifive.com>
-In-Reply-To: <20231026151828.754279-1-max.chou@sifive.com>
+References: <20231101204204.345470-1-dbarboza@ventanamicro.com>
+ <20231101204204.345470-2-dbarboza@ventanamicro.com>
+In-Reply-To: <20231101204204.345470-2-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 2 Nov 2023 11:38:16 +1000
-Message-ID: <CAKmqyKML9f5x7_0pjmPfYkTZFZ4Fm=0hwA7QGezoxjWMosXjNQ@mail.gmail.com>
-Subject: Re: [PATCH v2 00/14] Update RISC-V vector crypto to ratified v1.0.0
-To: Max Chou <max.chou@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Date: Thu, 2 Nov 2023 12:32:51 +1000
+Message-ID: <CAKmqyKNnKx1hcgpo0supywmkLFFznTeT0zgyTWMMDEsWcK9i+g@mail.gmail.com>
+Subject: Re: [PATCH v8 01/19] target/riscv: create TYPE_RISCV_VENDOR_CPU
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, ajones@ventanamicro.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2e;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2a;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2a.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -87,63 +90,115 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Oct 27, 2023 at 1:19=E2=80=AFAM Max Chou <max.chou@sifive.com> wrot=
-e:
+On Thu, Nov 2, 2023 at 7:53=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
 >
-> This patchset updates the RISC-V vector cryptography support to the
-> ratified version v1.0.0 (commit 1769c26, released on 2023/10).
+> We want to add a new CPU type for bare CPUs that will inherit specific
+> traits of the 2 existing types:
 >
-> v2:
+> - it will allow for extensions to be enabled/disabled, like generic
+>   CPUs;
 >
-> - Fixed the instruction order at disassembler part.
-> - Fixed the vror.vi disassembler format.
-> - Verified by code examples provided by vector crypto spec repository
->   (riscv-crypto).
-> - Rebased to riscv-to-apply.next branch (1f910f3)
+> - it will NOT inherit defaults, like vendor CPUs.
 >
-> v1:
+> We can make this conditions met by adding an explicit type for the
+> existing vendor CPUs and change the existing logic to not imply that
+> "not generic" means vendor CPUs.
 >
-> - Support Zvkb, Zvkt, and other shorthand extensions(Zvkn, Zvknc, Zvkng,
->   Zvks, Zvksc, Zvksg).
-> - Support the disassembler for vector crypto extensions.
-> - Moved vector crypto extensions from experimental extensions to ratified
->   extensions.
-> - Replaced TAB indentations with spaces in disas/riscv.c.
+> Let's add the "vendor" CPU type first.
 >
->
-> Max Chou (14):
->   target/riscv: Add cfg property for Zvkt extension
->   target/riscv: Expose Zvkt extension property
->   target/riscv: Add cfg property for Zvkb extension
->   target/riscv: Replace Zvbb checking by Zvkb
->   target/riscv: Expose Zvkb extension property
->   target/riscv: Add cfg properties for Zvkn[c|g] extensions
->   target/riscv: Expose Zvkn[c|g] extnesion properties
->   target/riscv: Add cfg properties for Zvks[c|g] extensions
->   target/riscv: Expose Zvks[c|g] extnesion properties
->   target/riscv: Move vector crypto extensions to riscv_cpu_extensions
->   disas/riscv: Add rv_fmt_vd_vs2_uimm format
->   disas/riscv: Add rv_codec_vror_vi for vror.vi
->   disas/riscv: Add support for vector crypto extensions
->   disas/riscv: Replace TABs with space
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  target/riscv/cpu-qom.h |  1 +
+>  target/riscv/cpu.c     | 30 +++++++++++++++++++++---------
+>  2 files changed, 22 insertions(+), 9 deletions(-)
 >
->  disas/riscv.c                            | 157 ++++++++++++++++++++++-
->  disas/riscv.h                            |   2 +
->  target/riscv/cpu.c                       |  36 ++++--
->  target/riscv/cpu_cfg.h                   |   8 ++
->  target/riscv/insn_trans/trans_rvvk.c.inc |  37 ++++--
->  target/riscv/tcg/tcg-cpu.c               |  48 ++++++-
->  6 files changed, 258 insertions(+), 30 deletions(-)
+> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+> index f3fbe37a2c..7831e86d37 100644
+> --- a/target/riscv/cpu-qom.h
+> +++ b/target/riscv/cpu-qom.h
+> @@ -24,6 +24,7 @@
 >
+>  #define TYPE_RISCV_CPU "riscv-cpu"
+>  #define TYPE_RISCV_DYNAMIC_CPU "riscv-dynamic-cpu"
+> +#define TYPE_RISCV_VENDOR_CPU "riscv-vendor-cpu"
+>
+>  #define RISCV_CPU_TYPE_SUFFIX "-" TYPE_RISCV_CPU
+>  #define RISCV_CPU_TYPE_NAME(name) (name RISCV_CPU_TYPE_SUFFIX)
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index f40da4c661..822970345c 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1725,6 +1725,13 @@ void riscv_cpu_list(void)
+>          .instance_init =3D initfn               \
+>      }
+>
+> +#define DEFINE_VENDOR_CPU(type_name, initfn) \
+> +    {                                        \
+> +        .name =3D type_name,                   \
+> +        .parent =3D TYPE_RISCV_VENDOR_CPU,     \
+> +        .instance_init =3D initfn              \
+> +    }
+> +
+>  static const TypeInfo riscv_cpu_type_infos[] =3D {
+>      {
+>          .name =3D TYPE_RISCV_CPU,
+> @@ -1742,21 +1749,26 @@ static const TypeInfo riscv_cpu_type_infos[] =3D =
+{
+>          .parent =3D TYPE_RISCV_CPU,
+>          .abstract =3D true,
+>      },
+> +    {
+> +        .name =3D TYPE_RISCV_VENDOR_CPU,
+> +        .parent =3D TYPE_RISCV_CPU,
+> +        .abstract =3D true,
+> +    },
+>      DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_ANY,      riscv_any_cpu_init),
+>      DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_MAX,      riscv_max_cpu_init),
+>  #if defined(TARGET_RISCV32)
+>      DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE32,   rv32_base_cpu_init),
+> -    DEFINE_CPU(TYPE_RISCV_CPU_IBEX,             rv32_ibex_cpu_init),
+> -    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E31,       rv32_sifive_e_cpu_init),
+> -    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E34,       rv32_imafcu_nommu_cpu_in=
+it),
+> -    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U34,       rv32_sifive_u_cpu_init),
+> +    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_IBEX,        rv32_ibex_cpu_init),
+> +    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_E31,  rv32_sifive_e_cpu_init=
+),
+> +    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_E34,  rv32_imafcu_nommu_cpu_=
+init),
+> +    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_U34,  rv32_sifive_u_cpu_init=
+),
+>  #elif defined(TARGET_RISCV64)
+>      DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE64,   rv64_base_cpu_init),
+> -    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rv64_sifive_e_cpu_init),
+> -    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rv64_sifive_u_cpu_init),
+> -    DEFINE_CPU(TYPE_RISCV_CPU_SHAKTI_C,         rv64_sifive_u_cpu_init),
+> -    DEFINE_CPU(TYPE_RISCV_CPU_THEAD_C906,       rv64_thead_c906_cpu_init=
+),
+> -    DEFINE_CPU(TYPE_RISCV_CPU_VEYRON_V1,        rv64_veyron_v1_cpu_init)=
+,
+> +    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_E51,  rv64_sifive_e_cpu_init=
+),
+> +    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_U54,  rv64_sifive_u_cpu_init=
+),
+> +    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SHAKTI_C,    rv64_sifive_u_cpu_init=
+),
+> +    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_THEAD_C906,  rv64_thead_c906_cpu_in=
+it),
+> +    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_VEYRON_V1,   rv64_veyron_v1_cpu_ini=
+t),
+>      DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE128,  rv128_base_cpu_init),
+>  #endif
+>  };
 > --
-> 2.34.1
+> 2.41.0
 >
 >
 
