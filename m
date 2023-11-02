@@ -4,70 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94349C4332F
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 01:44:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E9D2C4167D
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 01:49:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qyMcZ-0008Tv-LG; Wed, 01 Nov 2023 21:35:43 -0400
+	id 1qyMfj-0005ZA-35; Wed, 01 Nov 2023 21:39:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qyMbx-0007NH-Dm; Wed, 01 Nov 2023 21:35:05 -0400
-Received: from mail-ua1-x92c.google.com ([2607:f8b0:4864:20::92c])
+ id 1qyMfX-0004o9-43; Wed, 01 Nov 2023 21:38:51 -0400
+Received: from mail-vk1-xa2e.google.com ([2607:f8b0:4864:20::a2e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qyMbt-0003Hx-No; Wed, 01 Nov 2023 21:35:03 -0400
-Received: by mail-ua1-x92c.google.com with SMTP id
- a1e0cc1a2514c-7b6043d0b82so171530241.1; 
- Wed, 01 Nov 2023 18:35:00 -0700 (PDT)
+ id 1qyMfU-0004Zo-Jm; Wed, 01 Nov 2023 21:38:45 -0400
+Received: by mail-vk1-xa2e.google.com with SMTP id
+ 71dfb90a1353d-4a87f9a3961so184195e0c.3; 
+ Wed, 01 Nov 2023 18:38:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698888900; x=1699493700; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1698889123; x=1699493923; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=d0fEepzzOLobmXkKvkxn5fftan2+46rKuOteSOs4DnA=;
- b=NUE+HgPZZGJbEPblXIQ11LZB7SV4FPlm9keMkwUF1KQ/9nmSEmRkVtmfTfS19OmKpn
- h0+owsv4u21OwXaph5Oxg2dHQlgI6NCwfVoYMnuN4i0NLmujLpl/fghDChM6LPk8bXiP
- MsJLpajRyKhElHuDnUTYom5kbNW71EK1mUZMcJihFRJ6RZljvkPNoIwcV52SkTCkXcFJ
- R2fMVcMX+Jdq4lWCpp+xlqDGG8Waaf/W4IttcODgjr/hcWhypCr9kuCgTpg384216PLW
- 0gmW6YVHRjaYb9ryP6ipxCrxAJXPNbjPfWHLXvgVIndN2KUgtsFlsniDdGxFI615hT41
- Rd0Q==
+ bh=dNH0CSikb5DVX2eH8UOGhyJ2YnRz7YvLD3jmrY6Jb6g=;
+ b=mI10KDdwA946EmKCvnyPZ2MkbiQW5okM/YM4oDjq8fLehhvbCbUbWJfkchNV7B+3oQ
+ yhLC62NeQAE+hOCwq9s7diQnRalZLUO/vgJy3nixcwcxSdeAuJ4BAwB2QwTkL2hwdo+g
+ y1BBXg6qQq1twgDGpcBELLyJL94MuwV1mYcZnamKmp5GWh+c9e1X4ycgbOwK33VzBy0d
+ FNC0rLk9gSDMp9SxeAB3ErsjWDBFvpt2vzVbZvXQVc9/IPjcm6VWGFJUv4s64TnlvwBX
+ eSBYi7dL12UUBPIdL3Ht1phDRCnyMJwfGLnHl3BuoWH29kFTk2uzTQZ5QaR/GVu+bEe4
+ r8zw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698888900; x=1699493700;
+ d=1e100.net; s=20230601; t=1698889123; x=1699493923;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=d0fEepzzOLobmXkKvkxn5fftan2+46rKuOteSOs4DnA=;
- b=Yv9K3xqQlBIgPTQwmVsPmZGU0pFtHp6fx57WbNwexWZR2rL9T4nQsPyiAcUYrE8Ajg
- xKIK2PFnfadMRQqQmwKEzV3WvVOribGxX2wbhHA8ILW0nCVTIeC6Yq67rl5jVKtNhZjy
- B05FOtXwI4fTptxgYdhjx1sBeXIS3RQtIr0q2JWgqbNAxXIgVMS+Y0KgtmoNwcj+PH63
- d1gcyPCiCX/fG/9k+W3NyXMmEVUO83bOrjwqFQ7QORxSwHpq9pcgYap2Lz/f8sMi3H+9
- ty1b0l67JxsW81gzXpe3i2fVILd8QbAYGAkgaDmSxYCay+xy4esxN1NYU85XPm8f0mwf
- ZO0g==
-X-Gm-Message-State: AOJu0YyYToQHlaj1uFjamOHYvXCSMbOrUstEXs6uSGWYfy2q3wAMKNDc
- NdkqGDvMLNwHi45b+BKadv8cnyKTn4H3jswfZxM=
-X-Google-Smtp-Source: AGHT+IGv7KVKTHgGJZHM7tcRclkdxkjvZHG0x7SlYe/lhdftnlco32lrfjz2Ngs87K1PsCLxqn+je/yhmCe6f/zG0n4=
-X-Received: by 2002:a67:c20f:0:b0:457:c8f5:60d9 with SMTP id
- i15-20020a67c20f000000b00457c8f560d9mr16465071vsj.12.1698888899807; Wed, 01
- Nov 2023 18:34:59 -0700 (PDT)
+ bh=dNH0CSikb5DVX2eH8UOGhyJ2YnRz7YvLD3jmrY6Jb6g=;
+ b=qtMpLNEkltmSJ1ahfY9KPdk04r8A9JOd/9dEPjBG91vKm3XN8aVs7EN4RewN9czEEw
+ /jYpgzz7usFwnGxCTmkS9EjePuYCJER7rNQtoSWS20LBqoQYZQ0litBfrt+NM+MGQWqI
+ 7yhRUdD7grUg5xu5cIn/K7SL+db/dPK/E45QbfxXBoe2zWYxk2vMTTVqDYCxifW/gVDV
+ DNRMcjXzYIS70GSu2XTIGE1b850UeHqm4w89n4h8sbONtyJ7cLqK2MdrKTz66GAnKTDx
+ 1PEc1Zul7FghMFDIRLe319GJ80lL6LpcMIQRpB4PL3a6xJ9cCNdEREXLqkJ4LZk3mvcH
+ Qrbg==
+X-Gm-Message-State: AOJu0Yy7ZksMajtIu0mvrJGg7ldAFzZ7s0xgJmyNqSVkpNI6wrSSq9jK
+ /wP8v36mbSMSWPT8mihe1dGcoml4EeUDVXct4KJfXQ8Dl4Y=
+X-Google-Smtp-Source: AGHT+IGTxg4CKomgParDvZjvMS3P6gYEcnQY05VaMgBVH1SuVJYj36nE5Tarsk20BLNdkNy+klAw8PUVLQg8ubdH4Og=
+X-Received: by 2002:a05:6122:71b:b0:48d:5be:2899 with SMTP id
+ 27-20020a056122071b00b0048d05be2899mr17603327vki.2.1698889122772; Wed, 01 Nov
+ 2023 18:38:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231030081607.115118-1-liweiwei@iscas.ac.cn>
- <20231030081607.115118-2-liweiwei@iscas.ac.cn>
-In-Reply-To: <20231030081607.115118-2-liweiwei@iscas.ac.cn>
+References: <20231026151828.754279-1-max.chou@sifive.com>
+In-Reply-To: <20231026151828.754279-1-max.chou@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 2 Nov 2023 11:34:33 +1000
-Message-ID: <CAKmqyKNGK1UacY8--t+GQQeATd_Seo4J-gT-zuQvruFGGT58gg@mail.gmail.com>
-Subject: Re: [PATCH 1/1] MAINTAINERS: update mail address for Weiwei Li
-To: Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com, lazyparser@gmail.com, 
- Weiwei Li <liwei1518@gmail.com>
+Date: Thu, 2 Nov 2023 11:38:16 +1000
+Message-ID: <CAKmqyKML9f5x7_0pjmPfYkTZFZ4Fm=0hwA7QGezoxjWMosXjNQ@mail.gmail.com>
+Subject: Re: [PATCH v2 00/14] Update RISC-V vector crypto to ratified v1.0.0
+To: Max Chou <max.chou@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92c;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2e;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2e.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -91,41 +87,63 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Oct 30, 2023 at 6:17=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wr=
-ote:
+On Fri, Oct 27, 2023 at 1:19=E2=80=AFAM Max Chou <max.chou@sifive.com> wrot=
+e:
 >
-> My Iscas mail account will be disabled soon, change to my personal
-> gmail account.
+> This patchset updates the RISC-V vector cryptography support to the
+> ratified version v1.0.0 (commit 1769c26, released on 2023/10).
 >
-> Signed-off-by: Weiwei Li <liwei1518@gmail.com>
+> v2:
+>
+> - Fixed the instruction order at disassembler part.
+> - Fixed the vror.vi disassembler format.
+> - Verified by code examples provided by vector crypto spec repository
+>   (riscv-crypto).
+> - Rebased to riscv-to-apply.next branch (1f910f3)
+>
+> v1:
+>
+> - Support Zvkb, Zvkt, and other shorthand extensions(Zvkn, Zvknc, Zvkng,
+>   Zvks, Zvksc, Zvksg).
+> - Support the disassembler for vector crypto extensions.
+> - Moved vector crypto extensions from experimental extensions to ratified
+>   extensions.
+> - Replaced TAB indentations with spaces in disas/riscv.c.
+>
+>
+> Max Chou (14):
+>   target/riscv: Add cfg property for Zvkt extension
+>   target/riscv: Expose Zvkt extension property
+>   target/riscv: Add cfg property for Zvkb extension
+>   target/riscv: Replace Zvbb checking by Zvkb
+>   target/riscv: Expose Zvkb extension property
+>   target/riscv: Add cfg properties for Zvkn[c|g] extensions
+>   target/riscv: Expose Zvkn[c|g] extnesion properties
+>   target/riscv: Add cfg properties for Zvks[c|g] extensions
+>   target/riscv: Expose Zvks[c|g] extnesion properties
+>   target/riscv: Move vector crypto extensions to riscv_cpu_extensions
+>   disas/riscv: Add rv_fmt_vd_vs2_uimm format
+>   disas/riscv: Add rv_codec_vror_vi for vror.vi
+>   disas/riscv: Add support for vector crypto extensions
+>   disas/riscv: Replace TABs with space
 
 Thanks!
-
-I hope you can continue working on QEMU :)
 
 Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
->  MAINTAINERS | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index cd8d6b140f..aa5c5d4bff 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -323,7 +323,7 @@ RISC-V TCG CPUs
->  M: Palmer Dabbelt <palmer@dabbelt.com>
->  M: Alistair Francis <alistair.francis@wdc.com>
->  M: Bin Meng <bin.meng@windriver.com>
-> -R: Weiwei Li <liweiwei@iscas.ac.cn>
-> +R: Weiwei Li <liwei1518@gmail.com>
->  R: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->  R: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
->  L: qemu-riscv@nongnu.org
+>  disas/riscv.c                            | 157 ++++++++++++++++++++++-
+>  disas/riscv.h                            |   2 +
+>  target/riscv/cpu.c                       |  36 ++++--
+>  target/riscv/cpu_cfg.h                   |   8 ++
+>  target/riscv/insn_trans/trans_rvvk.c.inc |  37 ++++--
+>  target/riscv/tcg/tcg-cpu.c               |  48 ++++++-
+>  6 files changed, 258 insertions(+), 30 deletions(-)
+>
 > --
-> 2.25.1
+> 2.34.1
 >
 >
 
