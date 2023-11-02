@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E36DC4332F
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 00:37:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9B30C4332F
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 00:37:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qyLf9-0008Uu-HA; Wed, 01 Nov 2023 20:34:20 -0400
+	id 1qyLcj-0001BE-BE; Wed, 01 Nov 2023 20:31:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qyLer-0007qK-6p
- for qemu-riscv@nongnu.org; Wed, 01 Nov 2023 20:34:01 -0400
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qyLcS-0000Mh-GF
+ for qemu-riscv@nongnu.org; Wed, 01 Nov 2023 20:31:36 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qyLep-0003sG-JP
- for qemu-riscv@nongnu.org; Wed, 01 Nov 2023 20:34:00 -0400
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qyLcP-0002Zy-FJ
+ for qemu-riscv@nongnu.org; Wed, 01 Nov 2023 20:31:31 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1698885239;
+ s=mimecast20190719; t=1698885088;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:mime-version: content-type:content-type:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Pyar6xpsjyvGsKlBDyO02CiC2XXHQ42k8KNC4vOWx3s=;
- b=fqHX0eHHhixb35l7p/1Jwsf01B44gklw7L0fzTwdb/4+3Zg3SrdxohELxZWUkw6S9qUOTq
- HpJlH4QdlvAq/4/HfyGCKN4k8KfdeXgPxPpVz48qOsYGG4ZqiOm7AmUp96txparWUJy+u3
- x8EFaRLzJTZFKxZZ4Yy8Cx/gcpTP6Pw=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-533-6GFKdFTSNOyUCXvbJ1r8kw-1; Wed, 01 Nov 2023 20:33:52 -0400
-X-MC-Unique: 6GFKdFTSNOyUCXvbJ1r8kw-1
+ bh=pLcnT8XaANgWdyMfkMq9GxFqvkPqhwonddQ7qZioGQA=;
+ b=HN/mL1dFg+jFL7HHziQJJN2SRC4F5X8gzcRW0O9c5jnPFiKy8hCM2P1SdIwCtl2s6hmwYR
+ v7iBDXc7woh+JIOQ4nfjSzu+odpzRYh3rIyimiY7+vOZbMZD/P3XQqMDJLkOzGwB+Nwvvd
+ rKFgV+2/H6TrYB2/XuIzTS4FzlZSTHo=
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-503-DQxB4sdrPdeSvc8cEyscpw-1; Wed,
+ 01 Nov 2023 20:31:26 -0400
+X-MC-Unique: DQxB4sdrPdeSvc8cEyscpw-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
  [10.11.54.8])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 7B78881B562;
- Thu,  2 Nov 2023 00:33:50 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 819473C0F663;
+ Thu,  2 Nov 2023 00:31:24 +0000 (UTC)
 Received: from gshan.redhat.com (unknown [10.64.136.70])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 54778C0FE05;
- Thu,  2 Nov 2023 00:33:35 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 06DF7C1290F;
+ Thu,  2 Nov 2023 00:31:08 +0000 (UTC)
 From: Gavin Shan <gshan@redhat.com>
 To: qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
@@ -64,15 +64,13 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  ysato@users.sourceforge.jp, david@redhat.com, thuth@redhat.com,
  iii@linux.ibm.com, kbastian@mail.uni-paderborn.de, jcmvbkbc@gmail.com,
  shan.gavin@gmail.com
-Subject: [PATCH v4 31/33] hw/arm/sbsa-ref: Check CPU type in
- machine_run_board_init()
-Date: Thu,  2 Nov 2023 10:24:58 +1000
-Message-ID: <20231102002500.1750692-32-gshan@redhat.com>
+Subject: [PATCH v4 22/33] target/microblaze: Implement microblaze_cpu_list()
+Date: Thu,  2 Nov 2023 10:24:49 +1000
+Message-ID: <20231102002500.1750692-23-gshan@redhat.com>
 In-Reply-To: <20231102002500.1750692-1-gshan@redhat.com>
 References: <20231102002500.1750692-1-gshan@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.8
 Received-SPF: pass client-ip=170.10.129.124; envelope-from=gshan@redhat.com;
@@ -84,7 +82,7 @@ X-Spam_report: (-2.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.393,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,71 +98,72 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Set mc->valid_cpu_types so that the user specified CPU type can
-be validated in machine_run_board_init(). We needn't to do it
-by ourselves.
+Implement microblaze_cpu_list() to support cpu_list(). With this applied,
+the available CPU model names, same to the CPU type names, are shown
+as below.
+
+  $ ./build/qemu-system-hppa -cpu ?
+  Available CPUs:
+    microblaze-cpu
 
 Signed-off-by: Gavin Shan <gshan@redhat.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Leif Lindholm <quic_llindhol@quicinc.com>
 ---
- hw/arm/sbsa-ref.c | 21 +++------------------
- 1 file changed, 3 insertions(+), 18 deletions(-)
+ target/microblaze/cpu.c | 20 ++++++++++++++++++++
+ target/microblaze/cpu.h |  3 +++
+ 2 files changed, 23 insertions(+)
 
-diff --git a/hw/arm/sbsa-ref.c b/hw/arm/sbsa-ref.c
-index bce44690e5..64c321f627 100644
---- a/hw/arm/sbsa-ref.c
-+++ b/hw/arm/sbsa-ref.c
-@@ -144,27 +144,16 @@ static const int sbsa_ref_irqmap[] = {
-     [SBSA_GWDT_WS0] = 16,
- };
+diff --git a/target/microblaze/cpu.c b/target/microblaze/cpu.c
+index bbb3335cad..7d05dd954c 100644
+--- a/target/microblaze/cpu.c
++++ b/target/microblaze/cpu.c
+@@ -24,6 +24,7 @@
+ #include "qemu/osdep.h"
+ #include "qemu/log.h"
+ #include "qapi/error.h"
++#include "qemu/qemu-print.h"
+ #include "cpu.h"
+ #include "qemu/module.h"
+ #include "hw/qdev-properties.h"
+@@ -291,6 +292,25 @@ static void mb_cpu_realizefn(DeviceState *dev, Error **errp)
+     mcc->parent_realize(dev, errp);
+ }
  
--static const char * const valid_cpus[] = {
-+static const char * const valid_cpu_types[] = {
-     ARM_CPU_TYPE_NAME("cortex-a57"),
-     ARM_CPU_TYPE_NAME("cortex-a72"),
-     ARM_CPU_TYPE_NAME("neoverse-n1"),
-     ARM_CPU_TYPE_NAME("neoverse-v1"),
-     ARM_CPU_TYPE_NAME("neoverse-n2"),
-     ARM_CPU_TYPE_NAME("max"),
-+    NULL,
- };
- 
--static bool cpu_type_valid(const char *cpu)
--{
--    int i;
--
--    for (i = 0; i < ARRAY_SIZE(valid_cpus); i++) {
--        if (strcmp(cpu, valid_cpus[i]) == 0) {
--            return true;
--        }
--    }
--    return false;
--}
--
- static uint64_t sbsa_ref_cpu_mp_affinity(SBSAMachineState *sms, int idx)
++static void microblaze_cpu_list_entry(gpointer data, gpointer user_data)
++{
++    const char *typename = object_class_get_name(OBJECT_CLASS(data));
++    char *model = cpu_model_from_type(typename);
++
++    qemu_printf("  %s\n", model);
++    g_free(model);
++}
++
++void microblaze_cpu_list(void)
++{
++    GSList *list;
++
++    list = object_class_get_list_sorted(TYPE_MICROBLAZE_CPU, false);
++    qemu_printf("Available CPUs:\n");
++    g_slist_foreach(list, microblaze_cpu_list_entry, NULL);
++    g_slist_free(list);
++}
++
+ static void mb_cpu_initfn(Object *obj)
  {
-     uint8_t clustersz = ARM_DEFAULT_CPUS_PER_CLUSTER;
-@@ -730,11 +719,6 @@ static void sbsa_ref_init(MachineState *machine)
-     const CPUArchIdList *possible_cpus;
-     int n, sbsa_max_cpus;
+     MicroBlazeCPU *cpu = MICROBLAZE_CPU(obj);
+diff --git a/target/microblaze/cpu.h b/target/microblaze/cpu.h
+index e43c49d4af..d5ad25a866 100644
+--- a/target/microblaze/cpu.h
++++ b/target/microblaze/cpu.h
+@@ -372,6 +372,9 @@ int mb_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
+ int mb_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
+ int mb_cpu_gdb_read_stack_protect(CPUArchState *cpu, GByteArray *buf, int reg);
+ int mb_cpu_gdb_write_stack_protect(CPUArchState *cpu, uint8_t *buf, int reg);
++void microblaze_cpu_list(void);
++
++#define cpu_list microblaze_cpu_list
  
--    if (!cpu_type_valid(machine->cpu_type)) {
--        error_report("sbsa-ref: CPU type %s not supported", machine->cpu_type);
--        exit(1);
--    }
--
-     if (kvm_enabled()) {
-         error_report("sbsa-ref: KVM is not supported for this machine");
-         exit(1);
-@@ -899,6 +883,7 @@ static void sbsa_ref_class_init(ObjectClass *oc, void *data)
-     mc->init = sbsa_ref_init;
-     mc->desc = "QEMU 'SBSA Reference' ARM Virtual Machine";
-     mc->default_cpu_type = ARM_CPU_TYPE_NAME("neoverse-n1");
-+    mc->valid_cpu_types = valid_cpu_types;
-     mc->max_cpus = 512;
-     mc->pci_allow_0_address = true;
-     mc->minimum_page_bits = 12;
+ static inline uint32_t mb_cpu_read_msr(const CPUMBState *env)
+ {
 -- 
 2.41.0
 
