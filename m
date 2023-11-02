@@ -4,35 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13C5EC4332F
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 00:33:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7949BC4332F
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 00:33:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qyLcV-0000Ms-ME; Wed, 01 Nov 2023 20:31:38 -0400
+	id 1qyLa7-0004KG-3v; Wed, 01 Nov 2023 20:29:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qyLcA-0008KU-F4
- for qemu-riscv@nongnu.org; Wed, 01 Nov 2023 20:31:15 -0400
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qyLZR-0003fz-QW
+ for qemu-riscv@nongnu.org; Wed, 01 Nov 2023 20:28:26 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qyLc1-0002UY-2k
- for qemu-riscv@nongnu.org; Wed, 01 Nov 2023 20:31:14 -0400
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-92-XAAj7mhXM_yOBMU9Rmpr2A-1; Wed,
- 01 Nov 2023 20:30:54 -0400
-X-MC-Unique: XAAj7mhXM_yOBMU9Rmpr2A-1
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1qyLZQ-0000rt-95
+ for qemu-riscv@nongnu.org; Wed, 01 Nov 2023 20:28:25 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1698884903;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=VPhNran2hoBlFXd40/qPL20xEjS68JH/z9aQRfZaeHE=;
+ b=dzF3o9x/ZtDx1Vuc9Hme2g/+7aMJ91URHjEmvc8HRfC4ERKvgK/lXkjPB1in2vOR5eCcjY
+ Zjo+T0wUz7V8blliX9ot4RN2s4mEKSFyUJBFRPX420xrGl6BZHsADybn0A0CvxM0Z8qUzF
+ 8wM/sEJ8s3hSSH8oTikHe6iZXJ9JMXY=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-282-QojiIemmMm2So50hgj4d9w-1; Wed, 01 Nov 2023 20:28:18 -0400
+X-MC-Unique: QojiIemmMm2So50hgj4d9w-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
  [10.11.54.8])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id E4F5C28211A5;
- Thu,  2 Nov 2023 00:30:51 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 4590D185A781;
+ Thu,  2 Nov 2023 00:28:16 +0000 (UTC)
 Received: from gshan.redhat.com (unknown [10.64.136.70])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 37A38C1290F;
- Thu,  2 Nov 2023 00:30:35 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id B786AC1290F;
+ Thu,  2 Nov 2023 00:28:01 +0000 (UTC)
 From: Gavin Shan <gshan@redhat.com>
 To: qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
@@ -54,10 +64,10 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  ysato@users.sourceforge.jp, david@redhat.com, thuth@redhat.com,
  iii@linux.ibm.com, kbastian@mail.uni-paderborn.de, jcmvbkbc@gmail.com,
  shan.gavin@gmail.com
-Subject: [PATCH v4 20/33] target/tricore: Use generic helper to show CPU model
+Subject: [PATCH v4 10/33] target/i386: Use generic helper to show CPU model
  names
-Date: Thu,  2 Nov 2023 10:24:47 +1000
-Message-ID: <20231102002500.1750692-21-gshan@redhat.com>
+Date: Thu,  2 Nov 2023 10:24:37 +1000
+Message-ID: <20231102002500.1750692-11-gshan@redhat.com>
 In-Reply-To: <20231102002500.1750692-1-gshan@redhat.com>
 References: <20231102002500.1750692-1-gshan@redhat.com>
 MIME-Version: 1.0
@@ -66,12 +76,13 @@ Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.8
 Received-SPF: pass client-ip=170.10.133.124; envelope-from=gshan@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
+X-Spam_score_int: -24
+X-Spam_score: -2.5
+X-Spam_bar: --
+X-Spam_report: (-2.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.393,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -88,40 +99,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-For target/tricore, the registered CPU type name is always the
+For target/i386, the registered CPU type name is always the
 combination of the CPU model name and suffix. Use cpu_model_from_type()
-to show the CPU model names.
+to convert the CPU type name to the CPU model name.
 
 Signed-off-by: Gavin Shan <gshan@redhat.com>
-Reviewed-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 ---
- target/tricore/helper.c | 13 +++++--------
- 1 file changed, 5 insertions(+), 8 deletions(-)
+ target/i386/cpu.c | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/target/tricore/helper.c b/target/tricore/helper.c
-index 7e5da3cb23..1b5fbd4ab0 100644
---- a/target/tricore/helper.c
-+++ b/target/tricore/helper.c
-@@ -98,14 +98,11 @@ bool tricore_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
- 
- static void tricore_cpu_list_entry(gpointer data, gpointer user_data)
+diff --git a/target/i386/cpu.c b/target/i386/cpu.c
+index fc8484cb5e..f77149ed25 100644
+--- a/target/i386/cpu.c
++++ b/target/i386/cpu.c
+@@ -1744,8 +1744,7 @@ static char *x86_cpu_class_get_model_name(X86CPUClass *cc)
  {
--    ObjectClass *oc = data;
--    const char *typename;
--    char *name;
--
--    typename = object_class_get_name(oc);
--    name = g_strndup(typename, strlen(typename) - strlen("-" TYPE_TRICORE_CPU));
--    qemu_printf("  %s\n", name);
--    g_free(name);
-+    const char *typename = object_class_get_name(OBJECT_CLASS(data));
-+    char *model = cpu_model_from_type(typename);
-+
-+    qemu_printf("  %s\n", model);
-+    g_free(model);
+     const char *class_name = object_class_get_name(OBJECT_CLASS(cc));
+     assert(g_str_has_suffix(class_name, X86_CPU_TYPE_SUFFIX));
+-    return g_strndup(class_name,
+-                     strlen(class_name) - strlen(X86_CPU_TYPE_SUFFIX));
++    return cpu_model_from_type(class_name);
  }
  
- void tricore_cpu_list(void)
+ typedef struct X86CPUVersionDefinition {
+@@ -5547,7 +5546,7 @@ static void x86_cpu_list_entry(gpointer data, gpointer user_data)
+ {
+     ObjectClass *oc = data;
+     X86CPUClass *cc = X86_CPU_CLASS(oc);
+-    g_autofree char *name = x86_cpu_class_get_model_name(cc);
++    g_autofree char *model = x86_cpu_class_get_model_name(cc);
+     g_autofree char *desc = g_strdup(cc->model_description);
+     g_autofree char *alias_of = x86_cpu_class_get_alias_of(cc);
+     g_autofree char *model_id = x86_cpu_class_get_model_id(cc);
+@@ -5571,7 +5570,7 @@ static void x86_cpu_list_entry(gpointer data, gpointer user_data)
+         desc = g_strdup_printf("%s (deprecated)", olddesc);
+     }
+ 
+-    qemu_printf("x86 %-20s  %s\n", name, desc);
++    qemu_printf("x86 %-20s  %s\n", model, desc);
+ }
+ 
+ /* list available CPU models and flags */
 -- 
 2.41.0
 
