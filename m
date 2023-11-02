@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AF6CC4332F
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 00:53:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF763C4332F
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 00:58:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qyLxJ-0007o1-Ig; Wed, 01 Nov 2023 20:53:05 -0400
+	id 1qyM1x-0000ZD-31; Wed, 01 Nov 2023 20:57:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qyLxI-0007na-4x; Wed, 01 Nov 2023 20:53:04 -0400
-Received: from mail-vs1-xe36.google.com ([2607:f8b0:4864:20::e36])
+ id 1qyM1l-0000Ww-TO; Wed, 01 Nov 2023 20:57:46 -0400
+Received: from mail-ua1-x936.google.com ([2607:f8b0:4864:20::936])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qyLxF-0001FL-Iz; Wed, 01 Nov 2023 20:53:03 -0400
-Received: by mail-vs1-xe36.google.com with SMTP id
- ada2fe7eead31-45d235612afso267243137.0; 
- Wed, 01 Nov 2023 17:52:59 -0700 (PDT)
+ id 1qyM1k-00048L-96; Wed, 01 Nov 2023 20:57:41 -0400
+Received: by mail-ua1-x936.google.com with SMTP id
+ a1e0cc1a2514c-7b625ed7208so153560241.1; 
+ Wed, 01 Nov 2023 17:57:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698886379; x=1699491179; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1698886659; x=1699491459; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NFZquteUlaXHsfxdOQR/y+8RRA1Ri+8EpFc3CvUu8RE=;
- b=G6CqH09YDwj37bGZipGDuSFCrKPjxCllHNn9FKJ347DdtoBSWEg6Xp8odrhQNJQ9G6
- Fk4CAhXUDtUwCDJlyy87HlMcCsV5f22sBrjG8tf2QDYAZVipT5lospxSa7ivzSTW6huc
- QYj4DHMYhTEnqzKoktcDuepILbG67FbMbk1btArxuSmE8I7AEr9A5lfgMmfH5fIuh8f7
- Tf+D0acWF5iYuJxxKpu+0/SzYbvwZvfIHv9ENmeXiDBTd42FHJpt5BmiJS8XJ93m+wom
- /dWVk1NjuHkcLs7NRBu/4tZEz13OvZ3vo96vVb+boOATzUiVCzUFp68KZpOfBinesL7b
- Q4SQ==
+ bh=tz6H18i1/sH9qjSt+ZZmvitfuZafOB9LxNaXHX2fgcg=;
+ b=mOsVrHPw4SzflDigGnVWfSsQHf8KYQhlGUNpKpfsLeioVWeDyRk9wzEikNOu/tMwKn
+ U1+BqiORNAF7jxTrm7Wpl20c/dumWCZp4+/INjDE1h0w/0mj/j7KNI3IDQZaBt85rcV0
+ UkImbD1BZULvUrn66jVoghCRgy81g5+bt8REqaZQVx6U2Kly1iNStzKSfzlTlIMXN/xd
+ NARRzRgcmANLc7bhR6pFZe2ZumBVk+kGYZ2tkhvoiUPrGDTDYJli7//XPSkxTvmYRmPr
+ MTmYIp2e2SZFNcl7MzhSrtrLxT4BXDS21cx2mKyThO8rl35j4ntChfwUVnNMODv8/rKi
+ gl7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698886379; x=1699491179;
+ d=1e100.net; s=20230601; t=1698886659; x=1699491459;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NFZquteUlaXHsfxdOQR/y+8RRA1Ri+8EpFc3CvUu8RE=;
- b=Xh29VI7g/ArL6G6ZXrNvA0JgN3mKJgFL0BbtR3uEx1zpND/tcNgDDP5rUQa069imDp
- H8BYd4+prDlUBwjIQGSBWQbVul5u6dEl8894lhCNO2rGzSkH1GBVp/GywAdXzMeJmXRF
- bfchlhs1WlP8Lqtwd0BsQt5Rd6eyKXZIVWxWxYZxFqW441dhvwXBDBrmarg1HS4uOdEX
- rPA1vv7FHPebmbtu8SVr8ybZPhDIWTlHl1qoiJfxmU9dmZWMowe2j7lf3pO42yyuEPQ7
- vMsgSwuP2iK1x1OXGncTCgnYmM18UTkNSTRCj6fmHr0ad9brO8t/4qMnG1zwl+OURcSh
- lbaw==
-X-Gm-Message-State: AOJu0YyBrgD4wZV6B+rEvsX9g9VzNyV/yqt1Ijy7NIGwEB96ZgKWo6xN
- 3e1DHvAE/RiXE538VOBbyI/kWK/VfcNqQXD8QG0=
-X-Google-Smtp-Source: AGHT+IGLjl2FaA0MmvIwc6H+gs4ptDHFfd3+Osdtogcgpk1pyhD29cq4Xpf3ggrwN8pHT48AL2UHYd6wFKav9Zd3IpE=
-X-Received: by 2002:a05:6102:3643:b0:458:2e75:df90 with SMTP id
- s3-20020a056102364300b004582e75df90mr1660054vsu.9.1698886379100; Wed, 01 Nov
- 2023 17:52:59 -0700 (PDT)
+ bh=tz6H18i1/sH9qjSt+ZZmvitfuZafOB9LxNaXHX2fgcg=;
+ b=slQl5GKdcd+KFbk3xnVisXdyiALPDZqa968OxKaXj4aCFG1J56ZCycqlDWGy23x2lP
+ OBmQToCzSvWPfKZOai/h+dKxoTBL5rg2aKYYEa4nhrMNoQkw50gI5HMbaUHBTP1pbsek
+ adgsvXFMSApISRV40ZocPhkKADUkaf4TR9RYcYXUVjWhOX+PzJFBz0DYibTLfGlfshHD
+ Q2YLrYvKcqkCpXvAMsmeZfyFJABVLlXmOTt7QiiC6v6FJbEe4EKlDxDNq8V4qF4y/1Za
+ Cz4njXbLaMxv6fGhG5WxvxDoBpNitoKkrCjRnfMcyxR13oTMJjZmJ7cBXgjLLfHP5cV4
+ 6omw==
+X-Gm-Message-State: AOJu0YyvWF3fFHkfp+N513Y6mwI1EoYbiykY0v1/KHCamxH+9J0/blt1
+ h3q7xSMNGQiAUJrzPvdN7lCO7EVUqPqoU8wTu7Q=
+X-Google-Smtp-Source: AGHT+IEaZJptndvlDqFs+GBkUwRWcigTQeYaKckbWknIv6igS5jLSKkifk/pQ5Xv99tKvdGOj2aCK/T1jmTopBlOA68=
+X-Received: by 2002:a05:6122:71b:b0:48d:5be:2899 with SMTP id
+ 27-20020a056122071b00b0048d05be2899mr17517698vki.2.1698886658801; Wed, 01 Nov
+ 2023 17:57:38 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231026151828.754279-1-max.chou@sifive.com>
- <20231026151828.754279-12-max.chou@sifive.com>
-In-Reply-To: <20231026151828.754279-12-max.chou@sifive.com>
+ <20231026151828.754279-13-max.chou@sifive.com>
+In-Reply-To: <20231026151828.754279-13-max.chou@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 2 Nov 2023 10:52:32 +1000
-Message-ID: <CAKmqyKPgvw_8XCZjVC1Qc3Vf27OkOANj4grj=dpV4Nf27t_ZkA@mail.gmail.com>
-Subject: Re: [PATCH v2 11/14] disas/riscv: Add rv_fmt_vd_vs2_uimm format
+Date: Thu, 2 Nov 2023 10:57:12 +1000
+Message-ID: <CAKmqyKN3=JD6qMf47SgiMwj4QSOJ=FsOhUR9Fjs5yLFmZcBn7A@mail.gmail.com>
+Subject: Re: [PATCH v2 12/14] disas/riscv: Add rv_codec_vror_vi for vror.vi
 To: Max Chou <max.chou@sifive.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e36;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe36.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::936;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x936.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -90,10 +90,11 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Oct 27, 2023 at 1:21=E2=80=AFAM Max Chou <max.chou@sifive.com> wrot=
+On Fri, Oct 27, 2023 at 2:47=E2=80=AFAM Max Chou <max.chou@sifive.com> wrot=
 e:
 >
-> Add rv_fmt_vd_vs2_uimm format for vector crypto instructions.
+> Add rv_codec_vror_vi for the vector crypto instruction - vror.vi.
+> The rotate amount of vror.vi is defined by combining seperated bits.
 >
 > Signed-off-by: Max Chou <max.chou@sifive.com>
 
@@ -102,21 +103,65 @@ Acked-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  disas/riscv.h | 1 +
->  1 file changed, 1 insertion(+)
+>  disas/riscv.c | 14 +++++++++++++-
+>  disas/riscv.h |  1 +
+>  2 files changed, 14 insertions(+), 1 deletion(-)
 >
+> diff --git a/disas/riscv.c b/disas/riscv.c
+> index 8e89e1d1157..ec33e447f5b 100644
+> --- a/disas/riscv.c
+> +++ b/disas/riscv.c
+> @@ -4011,6 +4011,12 @@ static uint32_t operand_vzimm10(rv_inst inst)
+>      return (inst << 34) >> 54;
+>  }
+>
+> +static uint32_t operand_vzimm6(rv_inst inst)
+> +{
+> +    return ((inst << 37) >> 63) << 5 |
+> +        ((inst << 44) >> 59);
+> +}
+> +
+>  static uint32_t operand_bs(rv_inst inst)
+>  {
+>      return (inst << 32) >> 62;
+> @@ -4393,6 +4399,12 @@ static void decode_inst_operands(rv_decode *dec, r=
+v_isa isa)
+>          dec->imm =3D operand_vimm(inst);
+>          dec->vm =3D operand_vm(inst);
+>          break;
+> +    case rv_codec_vror_vi:
+> +        dec->rd =3D operand_rd(inst);
+> +        dec->rs2 =3D operand_rs2(inst);
+> +        dec->imm =3D operand_vzimm6(inst);
+> +        dec->vm =3D operand_vm(inst);
+> +        break;
+>      case rv_codec_vsetvli:
+>          dec->rd =3D operand_rd(inst);
+>          dec->rs1 =3D operand_rs1(inst);
+> @@ -4677,7 +4689,7 @@ static void format_inst(char *buf, size_t buflen, s=
+ize_t tab, rv_decode *dec)
+>              append(buf, tmp, buflen);
+>              break;
+>          case 'u':
+> -            snprintf(tmp, sizeof(tmp), "%u", ((uint32_t)dec->imm & 0b111=
+11));
+> +            snprintf(tmp, sizeof(tmp), "%u", ((uint32_t)dec->imm & 0b111=
+111));
+>              append(buf, tmp, buflen);
+>              break;
+>          case 'j':
 > diff --git a/disas/riscv.h b/disas/riscv.h
-> index 8abb578b515..b242d73b25e 100644
+> index b242d73b25e..19e5ed2ce63 100644
 > --- a/disas/riscv.h
 > +++ b/disas/riscv.h
-> @@ -274,6 +274,7 @@ enum {
->  #define rv_fmt_vd_vs2_fs1_vm          "O\tD,F,4m"
->  #define rv_fmt_vd_vs2_imm_vl          "O\tD,F,il"
->  #define rv_fmt_vd_vs2_imm_vm          "O\tD,F,im"
-> +#define rv_fmt_vd_vs2_uimm            "O\tD,F,u"
->  #define rv_fmt_vd_vs2_uimm_vm         "O\tD,F,um"
->  #define rv_fmt_vd_vs1_vs2_vm          "O\tD,E,Fm"
->  #define rv_fmt_vd_rs1_vs2_vm          "O\tD,1,Fm"
+> @@ -152,6 +152,7 @@ typedef enum {
+>      rv_codec_v_i,
+>      rv_codec_vsetvli,
+>      rv_codec_vsetivli,
+> +    rv_codec_vror_vi,
+>      rv_codec_zcb_ext,
+>      rv_codec_zcb_mul,
+>      rv_codec_zcb_lb,
 > --
 > 2.34.1
 >
