@@ -4,83 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC841C4332F
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 01:01:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79E55C4332F
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Nov 2023 01:02:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qyM5F-0003LN-6E; Wed, 01 Nov 2023 21:01:17 -0400
+	id 1qyM5x-0004fz-1Q; Wed, 01 Nov 2023 21:02:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qyM5D-0003G1-O4; Wed, 01 Nov 2023 21:01:15 -0400
-Received: from mail-ua1-x929.google.com ([2607:f8b0:4864:20::929])
+ id 1qyM5v-0004fO-Q3; Wed, 01 Nov 2023 21:01:59 -0400
+Received: from mail-vk1-xa36.google.com ([2607:f8b0:4864:20::a36])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1qyM5C-0006Rt-0s; Wed, 01 Nov 2023 21:01:15 -0400
-Received: by mail-ua1-x929.google.com with SMTP id
- a1e0cc1a2514c-7b9ff2b6f9bso168420241.3; 
- Wed, 01 Nov 2023 18:01:13 -0700 (PDT)
+ id 1qyM5u-0006Xq-6C; Wed, 01 Nov 2023 21:01:59 -0400
+Received: by mail-vk1-xa36.google.com with SMTP id
+ 71dfb90a1353d-4a19dac27c4so182942e0c.1; 
+ Wed, 01 Nov 2023 18:01:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698886872; x=1699491672; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1698886917; x=1699491717; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Zj/znO6zbfF+ZqPM+8eZF6P1tBCinSxIb/fEHUqxH+4=;
- b=frHdknDl8AxAJ5VWABw+GswuQFQUIQZjqvt2bsYmKyFK0ujUay0WdKYehU82RgOnQW
- UR4eh5vUdyTAXxue1LDAFT32XcibsQ961A3Hns0EcV4ztUB9OWSBiKlDi50Emc5zmJm0
- 0dr6N3Kr5XMHyySw5k+jznMshLrBiO44U/c7yNFvFAuKZqzVBuUN4J84pSL+gXUk4WLO
- Y8OL6fxtc/+OSoQbTRIYa+4zQsjLUqgUe6uGTfw+ZttZllLzn24BC+2p9HRp5i3j+997
- a0FA67WUVX0FlS/4ORlhBvCQ98LBWRmkpLMVXxA08qeiFVxSQusSjEaxYYcLv8SIDrmY
- Yp/w==
+ bh=q092ZBeTjzQvBJNPvec2m+1w27uaIYVwxg3OgbQG0bo=;
+ b=CIcUReQvi3HTk47QdaBClgzzWKowu4Cbs+CwQn9KHghnqQ53BPHg1UCBSPLooZpTFe
+ Wb+WFhGlBtJdZczeWNXUKIz6oK1iACoejekINS6EW4ItJWgkDhIE9AjqpMxQWoPPX/tr
+ FGLcKrAeytQ7FtgMfpypyvUzgPF+lKsTsebRA8JXLQDQE0c8AEbVLtAjGMxz0XxhxwHh
+ 1+EWT2UScvpEp0QMeAP3trPOVGqZzD74TYG225N5RjDuupLaQJNudWs2Qwl4mDbP+AZq
+ ibSxusynVzzr2ptGGWTC84HusLNHqPl1TBqYyXQEku2vjKkvlwexp0A//1iiamp+iXAQ
+ JrKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698886872; x=1699491672;
+ d=1e100.net; s=20230601; t=1698886917; x=1699491717;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Zj/znO6zbfF+ZqPM+8eZF6P1tBCinSxIb/fEHUqxH+4=;
- b=o4MZkbfclDl8LHJiuipNPDF/j4kLpDpNtxTQV8vE0J7KmITEcr6PbKjK8ogCHZTNDR
- U1swCK+J+yoDgUcfx/8qxeD2EzsOiI9QoDfde7SzYo248cFW6zO49Ybki6ARCZCZUdNQ
- w22yUMF7b64lZiCOUivHm2sC8TlKmwNMFHBsJpbUg6cWV3DidzIoX2z8oOGZ+2i3D3TO
- Q1LDyElYI1u2+Vc8Q8v+M/qfk8Keot8d+kbA9A15fFSrQMby2rmaFfaLMfz8U7Y/jONC
- 59RZmNY8u059NFGOdCVA9h8IaUTebtipLQY5WMWq78fQKDI+wPdWaycwNw2Ui0wbXsVm
- ajrw==
-X-Gm-Message-State: AOJu0YxKmwxXxGUsl1rrMIg/W1lDrLwPUTmSGDg25k2k6FfPyodZQC17
- JWzfDkIWsGhoPZ6t/RSlZ4Ts18U82e/xTt3ktEY=
-X-Google-Smtp-Source: AGHT+IHCpA2eszjXV2KczaiKeg3VwdI2wf2mU9TBFay930lrToYcOKwnK/nGT74zd+WraFJg5gFmkYAzmDlQHwNNozA=
-X-Received: by 2002:a67:c092:0:b0:44e:d6c3:51d4 with SMTP id
- x18-20020a67c092000000b0044ed6c351d4mr17870579vsi.18.1698886872275; Wed, 01
- Nov 2023 18:01:12 -0700 (PDT)
+ bh=q092ZBeTjzQvBJNPvec2m+1w27uaIYVwxg3OgbQG0bo=;
+ b=QUzBPl40xYxzCELCJv5ns46OHB+eV4SWOVuhCtShk/y8+zEbbkykZcuXEgjXVKOI0X
+ sCalEUqOSfIdZonB7WlakI990jYnlbm19j9hHmuo3RhIkY0v8pbxv7D+oJzV7Rex/Lie
+ S9Ft5LRNS3ttnK0UOIk1hx04EAU/Q2awk8FelZ3qkmYFcar9nflX5C/KWClDceZG3SRA
+ CoPjB6DSREMSmmQCme33XCFjRm5tygV/1iuSjSvvXk1yoywsszCd33zfpxM4rrdG58uT
+ WC901DjJC+RE6UgAHncH8+qH4IxcjMYFvSaSo3WZQBKsEvmtlVAJMsOLFjIgDPllgYk+
+ /5UA==
+X-Gm-Message-State: AOJu0Yw7pFWWDUUJIGhngdrf0hsDI6l2EV1DTEWOww0HWv1Fdu5DIkac
+ IjjXvI0UfsOUaz+TuIBEM8tK4tgEpPihTmxq+ts=
+X-Google-Smtp-Source: AGHT+IG9B3gzuWlQL78qZ/xUKqs2MyAYyBP1pvodWo8zsh9ChYF20Q0/+oezOh7ObSYY+qxwBBW+qMGqDe89QETiYFc=
+X-Received: by 2002:a67:b008:0:b0:452:5de9:d303 with SMTP id
+ z8-20020a67b008000000b004525de9d303mr16454436vse.30.1698886916504; Wed, 01
+ Nov 2023 18:01:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231030132058.763556-1-sunilvl@ventanamicro.com>
- <20231030132058.763556-10-sunilvl@ventanamicro.com>
-In-Reply-To: <20231030132058.763556-10-sunilvl@ventanamicro.com>
+References: <20231030081607.115118-1-liweiwei@iscas.ac.cn>
+ <20231030081607.115118-2-liweiwei@iscas.ac.cn>
+In-Reply-To: <20231030081607.115118-2-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 2 Nov 2023 11:00:45 +1000
-Message-ID: <CAKmqyKMkby9Sqrae5SYMbm1GmrhGDMrsBbTDqA4dPZbFrUZRiA@mail.gmail.com>
-Subject: Re: [PATCH v5 09/13] hw/riscv/virt-acpi-build.c: Add MMU node in RHCT
-To: Sunil V L <sunilvl@ventanamicro.com>
-Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Peter Maydell <peter.maydell@linaro.org>,
- Shannon Zhao <shannon.zhaosl@gmail.com>, 
- "Michael S . Tsirkin" <mst@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
- Ani Sinha <anisinha@redhat.com>, 
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Gerd Hoffmann <kraxel@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Anup Patel <apatel@ventanamicro.com>,
- Atish Kumar Patra <atishp@rivosinc.com>, Haibo Xu <haibo1.xu@intel.com>, 
- Andrew Jones <ajones@ventanamicro.com>
+Date: Thu, 2 Nov 2023 11:01:29 +1000
+Message-ID: <CAKmqyKPgcynzcRFhmF1R1VBNg4Q2T9r+ymv+F6qv3FzVb+yUqw@mail.gmail.com>
+Subject: Re: [PATCH 1/1] MAINTAINERS: update mail address for Weiwei Li
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com, lazyparser@gmail.com, 
+ Weiwei Li <liwei1518@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::929;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x929.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a36;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa36.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -104,107 +91,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Oct 30, 2023 at 11:23=E2=80=AFPM Sunil V L <sunilvl@ventanamicro.co=
-m> wrote:
+On Mon, Oct 30, 2023 at 6:17=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wr=
+ote:
 >
-> MMU type information is available via MMU node in RHCT. Add this node in
-> RHCT.
+> My Iscas mail account will be disabled soon, change to my personal
+> gmail account.
 >
-> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+> Signed-off-by: Weiwei Li <liwei1518@gmail.com>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  hw/riscv/virt-acpi-build.c | 36 +++++++++++++++++++++++++++++++++++-
->  1 file changed, 35 insertions(+), 1 deletion(-)
+>  MAINTAINERS | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-> index 506d487ede..86c38f7c2b 100644
-> --- a/hw/riscv/virt-acpi-build.c
-> +++ b/hw/riscv/virt-acpi-build.c
-> @@ -152,6 +152,8 @@ static void build_rhct(GArray *table_data,
->      size_t len, aligned_len;
->      uint32_t isa_offset, num_rhct_nodes, cmo_offset =3D 0;
->      RISCVCPU *cpu =3D &s->soc[0].harts[0];
-> +    uint32_t mmu_offset =3D 0;
-> +    uint8_t satp_mode_max;
->      char *isa;
->
->      AcpiTable table =3D { .sig =3D "RHCT", .rev =3D 1, .oem_id =3D s->oe=
-m_id,
-> @@ -171,6 +173,10 @@ static void build_rhct(GArray *table_data,
->          num_rhct_nodes++;
->      }
->
-> +    if (cpu->cfg.satp_mode.supported !=3D 0) {
-> +        num_rhct_nodes++;
-> +    }
-> +
->      /* Number of RHCT nodes*/
->      build_append_int_noprefix(table_data, num_rhct_nodes, 4);
->
-> @@ -226,6 +232,26 @@ static void build_rhct(GArray *table_data,
->          }
->      }
->
-> +    /* MMU node structure */
-> +    if (cpu->cfg.satp_mode.supported !=3D 0) {
-> +        satp_mode_max =3D satp_mode_max_from_map(cpu->cfg.satp_mode.map)=
-;
-> +        mmu_offset =3D table_data->len - table.table_offset;
-> +        build_append_int_noprefix(table_data, 2, 2);    /* Type */
-> +        build_append_int_noprefix(table_data, 8, 2);    /* Length */
-> +        build_append_int_noprefix(table_data, 0x1, 2);  /* Revision */
-> +        build_append_int_noprefix(table_data, 0, 1);    /* Reserved */
-> +        /* MMU Type */
-> +        if (satp_mode_max =3D=3D VM_1_10_SV57) {
-> +            build_append_int_noprefix(table_data, 2, 1);    /* Sv57 */
-> +        } else if (satp_mode_max =3D=3D VM_1_10_SV48) {
-> +            build_append_int_noprefix(table_data, 1, 1);    /* Sv48 */
-> +        } else if (satp_mode_max =3D=3D VM_1_10_SV39) {
-> +            build_append_int_noprefix(table_data, 0, 1);    /* Sv39 */
-> +        } else {
-> +            assert(1);
-> +        }
-> +    }
-> +
->      /* Hart Info Node */
->      for (int i =3D 0; i < arch_ids->len; i++) {
->          len =3D 16;
-> @@ -238,17 +264,25 @@ static void build_rhct(GArray *table_data,
->              num_offsets++;
->          }
->
-> +        if (mmu_offset) {
-> +            len +=3D 4;
-> +            num_offsets++;
-> +        }
-> +
->          build_append_int_noprefix(table_data, len, 2);
->          build_append_int_noprefix(table_data, 0x1, 2); /* Revision */
->          /* Number of offsets */
->          build_append_int_noprefix(table_data, num_offsets, 2);
->          build_append_int_noprefix(table_data, i, 4);   /* ACPI Processor=
- UID */
-> -
->          /* Offsets */
->          build_append_int_noprefix(table_data, isa_offset, 4);
->          if (cmo_offset) {
->              build_append_int_noprefix(table_data, cmo_offset, 4);
->          }
-> +
-> +        if (mmu_offset) {
-> +            build_append_int_noprefix(table_data, mmu_offset, 4);
-> +        }
->      }
->
->      acpi_table_end(linker, &table);
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index cd8d6b140f..aa5c5d4bff 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -323,7 +323,7 @@ RISC-V TCG CPUs
+>  M: Palmer Dabbelt <palmer@dabbelt.com>
+>  M: Alistair Francis <alistair.francis@wdc.com>
+>  M: Bin Meng <bin.meng@windriver.com>
+> -R: Weiwei Li <liweiwei@iscas.ac.cn>
+> +R: Weiwei Li <liwei1518@gmail.com>
+>  R: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>  R: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+>  L: qemu-riscv@nongnu.org
 > --
-> 2.39.2
+> 2.25.1
 >
 >
 
