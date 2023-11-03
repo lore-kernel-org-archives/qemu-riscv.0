@@ -4,60 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE302C4167B
-	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Nov 2023 03:18:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B294C0018A
+	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Nov 2023 03:19:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qykh7-0008WH-K1; Thu, 02 Nov 2023 23:18:01 -0400
+	id 1qykgH-0007ix-WE; Thu, 02 Nov 2023 23:17:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qykh4-0008FV-Ed
- for qemu-riscv@nongnu.org; Thu, 02 Nov 2023 23:17:58 -0400
-Received: from mail-oo1-xc2e.google.com ([2607:f8b0:4864:20::c2e])
+ id 1qykgD-0007hq-CB
+ for qemu-riscv@nongnu.org; Thu, 02 Nov 2023 23:17:07 -0400
+Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1qykh2-00046k-Jn
- for qemu-riscv@nongnu.org; Thu, 02 Nov 2023 23:17:58 -0400
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-5875c300becso690776eaf.0
- for <qemu-riscv@nongnu.org>; Thu, 02 Nov 2023 20:17:56 -0700 (PDT)
+ id 1qykg9-0003Bg-Ox
+ for qemu-riscv@nongnu.org; Thu, 02 Nov 2023 23:17:05 -0400
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-694ed847889so1654589b3a.2
+ for <qemu-riscv@nongnu.org>; Thu, 02 Nov 2023 20:17:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1698981475; x=1699586275; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BsgIu9p85jZ07rKaDYYcGl5EF2P5MOIWw3LEVA7+ZiY=;
- b=Bu0/AVpVMSMGUVtb7yDPzEQb3HDbf+AYdTvEq8+3wFboOHdZamKWyMQX5anzgBHgp8
- sbCjZXc5nWLQiazRYpi/FZzIaCucWt+P9mpa52M7LofgLgOtwo4Ga4mq8KhWkO3o42F9
- 0Fvbh6/n95FI4gTigetAJDqvP5BTWik1oBMsgqpyasVvQVWiT1TprVWyw8I9zouOXOPY
- tcHb37iRySJJTsrc0VjHynpcfyv7R6kTwkP/kA+3OVNcsBkBBiQm9TBCci1jbEhyne2Q
- yizfRCBPwwafyApnje44+Wlr16mY8yWh9y6XqhvwWUEf7rHKujVOlcUk10A8IekigUhc
- TzZg==
+ d=ventanamicro.com; s=google; t=1698981420; x=1699586220; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=pSo8/xWA1h+NiRRDtSfTewm0FT3ASIneHMhutcA3mhY=;
+ b=htzUSw0ZV7BQWb63bnBg0l1vaDbnUG05f8FqNMKqU1lk8I5S+FTYVGKSnOfCJRrwMp
+ j0qoAHca7E//XP93B+M3ENX1ugfu0kRiPu8jBwPVmBM8O1qOvYQ/QJv3jIJlFTA6rgKs
+ nsGgtlGW8qnFhDm5Ub1oE2prUcf4iJt7dP+TMc2oZvdgE47kk1407tMpdUR1jdByw4X4
+ IdxTCH9GfUtEdVqh3uiPZSELyM0zff7c5iiGQfzDDPYMQRFweLbLyxFrciw7qs6hE+C2
+ k1URYdyj4s+JP2Bly3EzyD4PR5nWK6lG/Dhgiqciu4J+691wpbF8kQb7SkKxo5XePvOi
+ JqnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698981475; x=1699586275;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=BsgIu9p85jZ07rKaDYYcGl5EF2P5MOIWw3LEVA7+ZiY=;
- b=H2pJ6Q/I1lSCW8wbz9759uepKpT65buoKd9K6KWMYeEQkwVljRjcak+m+QexeytBmX
- p+IduzDVkaHpJVJBF185fJvAzGD7KrVAXYHE7rdyUTAgsfLNgctosH5LAuSd3GUFb8Qd
- uiAHEcNNxZF5eba7ySWHxo2iUv21fLJKsojOmWeBDmdTFB3B7sJ/w40EUq9i6iZE1ubp
- 7f28NwjX461JnXc4e6Xath0jovudK0to6Qziq8gfo72kxv1wk8b4RYUpmRiq24Q0Ble1
- 1pPmTTCiKaoahS4hdELcnO2ineyGb9sg4QAHdUyca2i6f5CwYIbts0OTiZkM+XLBs36H
- V5ZA==
-X-Gm-Message-State: AOJu0YyLkjdOSzdfXLPgrm8qolhOcADF8580/uZ7zYHLf25JXMdHwAx5
- I87sBABEG0A5sO/UPmPDngggaw==
-X-Google-Smtp-Source: AGHT+IFrRJfeZ9FeNhy99IrXJC7DfVtCqQ+yrjFny+P9GyTiXX9k8T4g96xxDg3kh3F40xOKiREJXA==
-X-Received: by 2002:a05:6358:52cb:b0:169:7320:8265 with SMTP id
- z11-20020a05635852cb00b0016973208265mr17751040rwz.12.1698981474980; 
- Thu, 02 Nov 2023 20:17:54 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1698981420; x=1699586220;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pSo8/xWA1h+NiRRDtSfTewm0FT3ASIneHMhutcA3mhY=;
+ b=iK5fS97Ufwz53vRINyVxyFugDDiSJNHHPVTrC6MyDdhFFpn3GVv7cHAJxhmKrbWa9B
+ pd0aWiHpRAy4jwYb8PYmlgfiosw06cXJYjGZuXqVS4z83oMyRHxQof/J8fBx7Ii/lwPl
+ lQKXOP9XLEtk1vyJ+x1FLg148GWHBDeqopbbXWut6mVZR4FhAxx9/K2qKS9JMNnu6NsY
+ yt3zM4eUE48O9OpA4m3/I3UhDPEgnN3DhfjNT+XCqMxaDbBYtrsLExkk+b++Msu7LK30
+ td3evM1f0DtTK1EPpCAcHjcVeoqGh3I85NtK3k5wL+2dxbOFHsrxsGShpqitEq9rc9Nh
+ arFw==
+X-Gm-Message-State: AOJu0Yz+1s9lSU3EUu1QtCUbfn0oYuaenBwbMa4geepz3ewnh4BiaiLc
+ 8yDr6JMhANY/LFKxhJwhRrHNag==
+X-Google-Smtp-Source: AGHT+IEuO0WlR/5QnZ05uMhD5SWdHMsZ1jo3+MFECyb8xZvdLKGurDjlRoW02UiNtJjvW13yq45Rig==
+X-Received: by 2002:a05:6a20:1453:b0:152:6b63:f1e7 with SMTP id
+ a19-20020a056a20145300b001526b63f1e7mr20008900pzi.1.1698981419699; 
+ Thu, 02 Nov 2023 20:16:59 -0700 (PDT)
 Received: from sunil-pc.Dlink ([106.51.188.78])
  by smtp.gmail.com with ESMTPSA id
- y17-20020a17090aca9100b0027cf4c554dasm499971pjt.11.2023.11.02.20.17.49
+ y17-20020a17090aca9100b0027cf4c554dasm499971pjt.11.2023.11.02.20.16.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Nov 2023 20:17:54 -0700 (PDT)
+ Thu, 02 Nov 2023 20:16:59 -0700 (PDT)
 From: Sunil V L <sunilvl@ventanamicro.com>
 To: qemu-arm@nongnu.org,
 	qemu-devel@nongnu.org,
@@ -78,18 +77,15 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Anup Patel <apatel@ventanamicro.com>,
  Atish Kumar Patra <atishp@rivosinc.com>, Haibo Xu <haibo1.xu@intel.com>,
- Sunil V L <sunilvl@ventanamicro.com>,
- Andrew Jones <ajones@ventanamicro.com>
-Subject: [PATCH v7 09/13] hw/riscv/virt-acpi-build.c: Add MMU node in RHCT
-Date: Fri,  3 Nov 2023 08:46:45 +0530
-Message-Id: <20231103031649.2769834-10-sunilvl@ventanamicro.com>
+ Sunil V L <sunilvl@ventanamicro.com>
+Subject: [PATCH v7 00/13] RISC-V: ACPI: Enable AIA, PLIC and update RHCT
+Date: Fri,  3 Nov 2023 08:46:36 +0530
+Message-Id: <20231103031649.2769834-1-sunilvl@ventanamicro.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20231103031649.2769834-1-sunilvl@ventanamicro.com>
-References: <20231103031649.2769834-1-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c2e;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-oo1-xc2e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pf1-x431.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -112,96 +108,99 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-MMU type information is available via MMU node in RHCT. Add this node in
-RHCT.
+This series primarily enables external interrupt controllers (AIA and PLIC)
+in ACPI tables for RISC-V virt platform. It also updates RHCT with CMO and
+MMU related information.
 
-Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
-Acked-by: Michael S. Tsirkin <mst@redhat.com>
----
- hw/riscv/virt-acpi-build.c | 36 +++++++++++++++++++++++++++++++++++-
- 1 file changed, 35 insertions(+), 1 deletion(-)
+Below ECRs for these changes are approved by ASWG and will be
+available in next ACPI spec release.
 
-diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-index 506d487ede..86c38f7c2b 100644
---- a/hw/riscv/virt-acpi-build.c
-+++ b/hw/riscv/virt-acpi-build.c
-@@ -152,6 +152,8 @@ static void build_rhct(GArray *table_data,
-     size_t len, aligned_len;
-     uint32_t isa_offset, num_rhct_nodes, cmo_offset = 0;
-     RISCVCPU *cpu = &s->soc[0].harts[0];
-+    uint32_t mmu_offset = 0;
-+    uint8_t satp_mode_max;
-     char *isa;
- 
-     AcpiTable table = { .sig = "RHCT", .rev = 1, .oem_id = s->oem_id,
-@@ -171,6 +173,10 @@ static void build_rhct(GArray *table_data,
-         num_rhct_nodes++;
-     }
- 
-+    if (cpu->cfg.satp_mode.supported != 0) {
-+        num_rhct_nodes++;
-+    }
-+
-     /* Number of RHCT nodes*/
-     build_append_int_noprefix(table_data, num_rhct_nodes, 4);
- 
-@@ -226,6 +232,26 @@ static void build_rhct(GArray *table_data,
-         }
-     }
- 
-+    /* MMU node structure */
-+    if (cpu->cfg.satp_mode.supported != 0) {
-+        satp_mode_max = satp_mode_max_from_map(cpu->cfg.satp_mode.map);
-+        mmu_offset = table_data->len - table.table_offset;
-+        build_append_int_noprefix(table_data, 2, 2);    /* Type */
-+        build_append_int_noprefix(table_data, 8, 2);    /* Length */
-+        build_append_int_noprefix(table_data, 0x1, 2);  /* Revision */
-+        build_append_int_noprefix(table_data, 0, 1);    /* Reserved */
-+        /* MMU Type */
-+        if (satp_mode_max == VM_1_10_SV57) {
-+            build_append_int_noprefix(table_data, 2, 1);    /* Sv57 */
-+        } else if (satp_mode_max == VM_1_10_SV48) {
-+            build_append_int_noprefix(table_data, 1, 1);    /* Sv48 */
-+        } else if (satp_mode_max == VM_1_10_SV39) {
-+            build_append_int_noprefix(table_data, 0, 1);    /* Sv39 */
-+        } else {
-+            assert(1);
-+        }
-+    }
-+
-     /* Hart Info Node */
-     for (int i = 0; i < arch_ids->len; i++) {
-         len = 16;
-@@ -238,17 +264,25 @@ static void build_rhct(GArray *table_data,
-             num_offsets++;
-         }
- 
-+        if (mmu_offset) {
-+            len += 4;
-+            num_offsets++;
-+        }
-+
-         build_append_int_noprefix(table_data, len, 2);
-         build_append_int_noprefix(table_data, 0x1, 2); /* Revision */
-         /* Number of offsets */
-         build_append_int_noprefix(table_data, num_offsets, 2);
-         build_append_int_noprefix(table_data, i, 4);   /* ACPI Processor UID */
--
-         /* Offsets */
-         build_append_int_noprefix(table_data, isa_offset, 4);
-         if (cmo_offset) {
-             build_append_int_noprefix(table_data, cmo_offset, 4);
-         }
-+
-+        if (mmu_offset) {
-+            build_append_int_noprefix(table_data, mmu_offset, 4);
-+        }
-     }
- 
-     acpi_table_end(linker, &table);
+1) MADT (AIA) - https://drive.google.com/file/d/1oMGPyOD58JaPgMl1pKasT-VKsIKia7zR/view?usp=sharing
+2) RHCT - https://drive.google.com/file/d/1sKbOa8m1UZw1JkquZYe3F1zQBN1xXsaf/view?usp=sharing
+
+First two patches in this series are to migrate a couple of functions from
+ARM architecture to common code so that RISC-V doesn't need to duplicate
+the same.
+
+The patch set is based on Alistair's riscv-to-apply.next branch.
+
+These changes are also available in  riscv_acpi_b2_v7 branch at:
+https://github.com/vlsunil/qemu/
+
+Changes since v6:
+	1) Fixed the qtest failure issue reported by Daniel in PATCH 2.
+
+Changes since v5:
+	1) Fixed the issue in PATCH 2 reported by Daniel found when built with
+	   clang + --enable-debug.
+
+Changes since v4:
+	1) Updated copyright for new files as per SPDX format suggested by Drew.
+	2) Updated RINTC patch to avoid code duplication as suggested by Drew.
+	3) Moved mmu offset below cmo in MMU patch as suggested by Drew.
+	4) Updated tags.
+
+Changes since v3:
+	1) Addressed comments from Daniel and Drew.
+	2) Added a new patch in microvm to use common function for virtio in DSDT.
+	3) Rebased to latest riscv-to-apply.next branch and added tags.
+
+Changes since v2:
+        1) Rebased to latest riscv-to-apply.next branch which needed
+           changing ext_icboz to ext_zicboz in CMO patch.
+        2) Fixed node type in MMU node.
+        3) Added latest tags.
+
+Changes since v1:
+        1) As per Igor's suggestion, migrated fw_cfg and virtio creation
+           functions to device specific file instead of generic aml-build.c.
+           Since ACPI is optional, new files are created and enabled for
+           build only when CONFIG_ACPI is enabled.
+        2) As per Igor's suggestion, properties are added to the GPEX PCI
+           host to indicate MMIO ranges. The platform fw can initialize
+           these to appropriate values and the DSDT generator can fetch
+           the information from the host bus itself. This makes the code
+           generic instead of machine specific.
+        3) Added PLIC patch from Haibo.
+        4) Rebased to latest riscv-to-apply.next and added RB tags as
+           appropriate.
+
+Sunil V L (13):
+  hw/arm/virt-acpi-build.c: Migrate fw_cfg creation to common location
+  hw/arm/virt-acpi-build.c: Migrate virtio creation to common location
+  hw/i386/acpi-microvm.c: Use common function to add virtio in DSDT
+  hw/riscv: virt: Make few IMSIC macros and functions public
+  hw/riscv/virt-acpi-build.c: Add AIA support in RINTC
+  hw/riscv/virt-acpi-build.c: Add IMSIC in the MADT
+  hw/riscv/virt-acpi-build.c: Add APLIC in the MADT
+  hw/riscv/virt-acpi-build.c: Add CMO information in RHCT
+  hw/riscv/virt-acpi-build.c: Add MMU node in RHCT
+  hw/pci-host/gpex: Define properties for MMIO ranges
+  hw/riscv/virt: Update GPEX MMIO related properties
+  hw/riscv/virt-acpi-build.c: Add IO controllers and devices
+  hw/riscv/virt-acpi-build.c: Add PLIC in MADT
+
+ hw/arm/virt-acpi-build.c        |  51 +----
+ hw/i386/acpi-microvm.c          |  15 +-
+ hw/nvram/fw_cfg-acpi.c          |  23 +++
+ hw/nvram/meson.build            |   1 +
+ hw/pci-host/gpex-acpi.c         |  13 ++
+ hw/pci-host/gpex.c              |  12 ++
+ hw/riscv/Kconfig                |   1 +
+ hw/riscv/virt-acpi-build.c      | 323 +++++++++++++++++++++++++++++---
+ hw/riscv/virt.c                 |  72 ++++---
+ hw/virtio/meson.build           |   1 +
+ hw/virtio/virtio-acpi.c         |  33 ++++
+ include/hw/nvram/fw_cfg_acpi.h  |  15 ++
+ include/hw/pci-host/gpex.h      |  28 ++-
+ include/hw/riscv/virt.h         |  26 +++
+ include/hw/virtio/virtio-acpi.h |  16 ++
+ 15 files changed, 499 insertions(+), 131 deletions(-)
+ create mode 100644 hw/nvram/fw_cfg-acpi.c
+ create mode 100644 hw/virtio/virtio-acpi.c
+ create mode 100644 include/hw/nvram/fw_cfg_acpi.h
+ create mode 100644 include/hw/virtio/virtio-acpi.h
+
 -- 
 2.39.2
 
