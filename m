@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2714C4167D
-	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Nov 2023 13:49:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61917C0018A
+	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Nov 2023 13:49:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qyuVk-0001x3-Q0; Fri, 03 Nov 2023 09:46:56 -0400
+	id 1qyuWT-000358-2a; Fri, 03 Nov 2023 09:47:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qyuVg-0001tv-FK
- for qemu-riscv@nongnu.org; Fri, 03 Nov 2023 09:46:52 -0400
-Received: from mail-yw1-x1133.google.com ([2607:f8b0:4864:20::1133])
+ id 1qyuWN-0002wG-F3
+ for qemu-riscv@nongnu.org; Fri, 03 Nov 2023 09:47:35 -0400
+Received: from mail-yw1-x1135.google.com ([2607:f8b0:4864:20::1135])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1qyuVb-0000tK-O7
- for qemu-riscv@nongnu.org; Fri, 03 Nov 2023 09:46:51 -0400
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-5a8ada42c2aso24429297b3.3
- for <qemu-riscv@nongnu.org>; Fri, 03 Nov 2023 06:46:47 -0700 (PDT)
+ id 1qyuWA-000108-9f
+ for qemu-riscv@nongnu.org; Fri, 03 Nov 2023 09:47:35 -0400
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-5a7c08b7744so24412927b3.3
+ for <qemu-riscv@nongnu.org>; Fri, 03 Nov 2023 06:47:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1699019207; x=1699624007; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1699019241; x=1699624041; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NHN/TG9tOUYcaVdZFuWyzuuk09MWUr6naCVtgHon0jk=;
- b=XPN60IdJZi9NKkvgDaxtYzRNh6oFWAN6hCowZaLlP4SKgxcQA4tLjaPOLgbQjkrPHX
- /xhOucJEtz/JOrThIkN4hU7f2E5skjSC2RrpRt5VpBMrFGacjT8FV+RKd2LUY5gAEdBl
- y0JWwA3KbOEdExEJzaD7iRR0T0NXKXoHKBx0rOEEY3RXBYGhkTf7bLd2MlZa5K2cfYyW
- lluI0girrhUAPSUKvNgZCWWk2a0rADPyX8M4WJXTAl05UbOOBn0TUN4ka3Vzo5xf0YBV
- rjtja6lEU54oV/jnk0t71PSCYKKNSkkIs1mCKiDTkCgENRexpzVOsvVWDorVVoN8mao4
- dLRg==
+ bh=54Kf0rAoudsnnoVt4nlQX6I3ltS6TlxVzrnjj9HiVnE=;
+ b=N5Cw0RNdslJlj7copgGjvG0+xXV2996I3urrUv7hqEIkP41itfkr647XS7IeAIED9j
+ EgxQBRrJfcxsMwNL//3dm9Egun+kIHhXygv1ikwQsgSD8P4l62jDosUGQkETI3CuTZjo
+ a+JJlhLKVbmQQs2laRLzKz3e5SWulxR2NRvrTvn5lTdWrNEYIIkoAF8p8V90Y42fCrUH
+ LKMop0j1KjCbavyDrp++32pSskfRvEGzC5Rh6UuIAzEkrJMUxI4umJpIyKh4agsWhmlA
+ dbXsV4FTvjec3evf2ADb34zKgzVuhlumRlgNJZsxORpmv/TBWwgKqVc4HJiXh0EqF5yv
+ WUeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699019207; x=1699624007;
+ d=1e100.net; s=20230601; t=1699019241; x=1699624041;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NHN/TG9tOUYcaVdZFuWyzuuk09MWUr6naCVtgHon0jk=;
- b=pNGyhjnY6NyR21dO5sHopab5PMfViHsIL6hatH8G9oI4ndurqv4gheTzEIMlAk0GeF
- Y/Hg9oPyAabeN1jyChdWmVD/Vk1GLTZ6wVUprP9ZxKK0PmhjrQ8XBoUTPoUwAVZS5jmH
- axkMSe82mC7MYxvTsm2enqOxoTmG3+b80WdqU0/PDym4WbMlCzPuGL7Nm04QSjUJXj9e
- +5HeDRg/PUENANmZ8tk1gD8lnG0QvLliDUtZlMAK7isEy98iuad4sJnSWl1jltM29qkD
- y5MNdnawM8HuBGJMqxAVvWK6uO8AEPR9ag/+3BtwMR6qIShhWKpxVg0EAdbhQnjGRoLp
- l1TA==
-X-Gm-Message-State: AOJu0Yz2BNwcfyH4lrE4WpMnfjq99MbGUD4fcOxfRsVi4fN9uGZxM5LR
- RJx6x3/61JgQpQMqW2J4r2UjqQ==
-X-Google-Smtp-Source: AGHT+IHtINQxNAK2EPZIoAhhr2v7i93o3SxwqlTSgkgqL9P2iVWrpitAz9xlajW51dZpQeU2jcgn0w==
-X-Received: by 2002:a0d:d387:0:b0:5ae:dff7:6148 with SMTP id
- v129-20020a0dd387000000b005aedff76148mr2382204ywd.48.1699019205332; 
- Fri, 03 Nov 2023 06:46:45 -0700 (PDT)
+ bh=54Kf0rAoudsnnoVt4nlQX6I3ltS6TlxVzrnjj9HiVnE=;
+ b=qMAUnepIIqglVtjg2VUiMnzNH8LeW0uetHR/LhL92k0lkcjJUAuMjnul3cfxglXM98
+ 0K5fwEV6f19FMkhtOdSZYHRh8EzSGJzvbKSBOVdnkLtbnf0Hr2w51bhBLsUSHLy8WBsW
+ riBjk0P+cJXInAjJdBxvBDy1EwaD7YcpDvHimfAZXegPq6rBKF2PlrH5ZbhpF/Lt2wlC
+ vPtWztCwo8NDuqj1W3oTDh3OyJ/GxwFTDNpOdxmu9Q2cbk/agyL6DRMVH+OQ3fc1CWJC
+ NyGUUEHfaEnqAICOKxasyn2wRSd9znV+RTOND9Qyrr2oHHaorRtlJKfTNdt8fDCM7C7b
+ LwTQ==
+X-Gm-Message-State: AOJu0Yzm0wmabecAdPzCq69frCnHmhVVP1NSaTUQRyQP1uO5qDB6qZrf
+ eTG5eRJ/ixir1AIuhHQHAQmCUA==
+X-Google-Smtp-Source: AGHT+IFnqo4oVoO6J/s8Fwr1CagPJDk7Dj5w4nxC/1Npak0Evk5BlmsbeFzWonuSwJhkyJLypMWu/g==
+X-Received: by 2002:a0d:db49:0:b0:5b3:26e1:320d with SMTP id
+ d70-20020a0ddb49000000b005b326e1320dmr2836275ywe.40.1699019241241; 
+ Fri, 03 Nov 2023 06:47:21 -0700 (PDT)
 Received: from grind.. ([179.193.10.161]) by smtp.gmail.com with ESMTPSA id
- j68-20020a0df947000000b00582b239674esm935814ywf.129.2023.11.03.06.46.42
+ j68-20020a0df947000000b00582b239674esm935814ywf.129.2023.11.03.06.47.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Nov 2023 06:46:44 -0700 (PDT)
+ Fri, 03 Nov 2023 06:47:20 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  ajones@ventanamicro.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v10 04/18] target/riscv: add rv64i CPU
-Date: Fri,  3 Nov 2023 10:46:15 -0300
-Message-ID: <20231103134629.561732-5-dbarboza@ventanamicro.com>
+Subject: [PATCH v10 17/18] riscv-qmp-cmds.c: add profile flags in
+ cpu-model-expansion
+Date: Fri,  3 Nov 2023 10:46:28 -0300
+Message-ID: <20231103134629.561732-18-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231103134629.561732-1-dbarboza@ventanamicro.com>
 References: <20231103134629.561732-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1133;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-yw1-x1133.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1135;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-yw1-x1135.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -95,156 +96,83 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We don't have any form of a 'bare bones' CPU. rv64, our default CPUs,
-comes with a lot of defaults. This is fine for most regular uses but
-it's not suitable when more control of what is actually loaded in the
-CPU is required.
+Expose all profile flags for all CPUs when executing
+query-cpu-model-expansion. This will allow callers to quickly determine
+if a certain profile is implemented by a given CPU. This includes vendor
+CPUs - the fact that they don't have profile user flags doesn't mean
+that they don't implement the profile.
 
-A bare-bones CPU would be annoying to deal with if not by profile
-support, a way to load a multitude of extensions with a single flag.
-Profile support is going to be implemented shortly, so let's add a CPU
-for it.
+After this change it's possible to quickly determine if our stock CPUs
+implement the existing rva22u64 profile. Here's a few examples:
 
-The new 'rv64i' CPU will have only RVI loaded. It is inspired in the
-profile specification that dictates, for RVA22U64 [1]:
+ $ ./build/qemu-system-riscv64 -S -M virt -display none
+-qmp tcp:localhost:1234,server,wait=off
 
-"RVA22U64 Mandatory Base
- RV64I is the mandatory base ISA for RVA22U64"
+ $ ./scripts/qmp/qmp-shell localhost:1234
+Welcome to the QMP low-level shell!
+Connected to QEMU 8.1.50
 
-And so it seems that RV64I is the mandatory base ISA for all profiles
-listed in [1], making it an ideal CPU to use with profile support.
+- As expected, the 'max' CPU implements the rva22u64 profile.
 
-rv64i is a CPU of type TYPE_RISCV_BARE_CPU. It has a mix of features
-from pre-existent CPUs:
+(QEMU) query-cpu-model-expansion type=full model={"name":"max"}
+    {"return": {"model":
+        {"name": "rv64", "props": {... "rva22u64": true, ...}}}}
 
-- it allows extensions to be enabled, like generic CPUs;
-- it will not inherit extension defaults, like vendor CPUs.
+- rv64 is missing "zba", "zbb", "zbs", "zkt" and "zfhmin":
 
-This is the minimum extension set to boot OpenSBI and buildroot using
-rv64i:
+query-cpu-model-expansion type=full model={"name":"rv64"}
+    {"return": {"model":
+        {"name": "rv64", "props": {... "rva22u64": false, ...}}}}
 
-./build/qemu-system-riscv64 -nographic -M virt \
-    -cpu rv64i,sv39=true,g=true,c=true,s=true,u=true
+query-cpu-model-expansion type=full model={"name":"rv64",
+    "props":{"zba":true,"zbb":true,"zbs":true,"zkt":true,"zfhmin":true}}
+    {"return": {"model":
+        {"name": "rv64", "props": {... "rva22u64": true, ...}}}}
 
-Our minimal riscv,isa in this case will be:
+We have no vendor CPUs that supports rva22u64 (veyron-v1 is the closest
+- it is missing just 'zkt').
 
- # cat /proc/device-tree/cpus/cpu@0/riscv,isa
-rv64imafdc_zicntr_zicsr_zifencei_zihpm_zca_zcd#
-
-[1] https://github.com/riscv/riscv-profiles/blob/main/profiles.adoc
+In short, aside from the 'max' CPU, we have no CPUs that supports
+rva22u64 by default.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 ---
- target/riscv/cpu-qom.h |  2 ++
- target/riscv/cpu.c     | 46 ++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 48 insertions(+)
+ target/riscv/riscv-qmp-cmds.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
-index 7831e86d37..ea9a752280 100644
---- a/target/riscv/cpu-qom.h
-+++ b/target/riscv/cpu-qom.h
-@@ -25,6 +25,7 @@
- #define TYPE_RISCV_CPU "riscv-cpu"
- #define TYPE_RISCV_DYNAMIC_CPU "riscv-dynamic-cpu"
- #define TYPE_RISCV_VENDOR_CPU "riscv-vendor-cpu"
-+#define TYPE_RISCV_BARE_CPU "riscv-bare-cpu"
- 
- #define RISCV_CPU_TYPE_SUFFIX "-" TYPE_RISCV_CPU
- #define RISCV_CPU_TYPE_NAME(name) (name RISCV_CPU_TYPE_SUFFIX)
-@@ -35,6 +36,7 @@
- #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
- #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
- #define TYPE_RISCV_CPU_BASE128          RISCV_CPU_TYPE_NAME("x-rv128")
-+#define TYPE_RISCV_CPU_RV64I            RISCV_CPU_TYPE_NAME("rv64i")
- #define TYPE_RISCV_CPU_IBEX             RISCV_CPU_TYPE_NAME("lowrisc-ibex")
- #define TYPE_RISCV_CPU_SHAKTI_C         RISCV_CPU_TYPE_NAME("shakti-c")
- #define TYPE_RISCV_CPU_SIFIVE_E31       RISCV_CPU_TYPE_NAME("sifive-e31")
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 4bb677275c..46a5550d72 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -370,6 +370,17 @@ static void set_satp_mode_max_supported(RISCVCPU *cpu,
- /* Set the satp mode to the max supported */
- static void set_satp_mode_default_map(RISCVCPU *cpu)
- {
-+    /*
-+     * Bare CPUs do not default to the max available.
-+     * Users must set a valid satp_mode in the command
-+     * line.
-+     */
-+    if (object_dynamic_cast(OBJECT(cpu), TYPE_RISCV_BARE_CPU) != NULL) {
-+        warn_report("No satp mode set. Defaulting to 'bare'");
-+        cpu->cfg.satp_mode.map = (1 << VM_1_10_MBARE);
-+        return;
-+    }
-+
-     cpu->cfg.satp_mode.map = cpu->cfg.satp_mode.supported;
- }
- #endif
-@@ -552,6 +563,28 @@ static void rv128_base_cpu_init(Object *obj)
-     set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV57);
- #endif
- }
-+
-+static void rv64i_bare_cpu_init(Object *obj)
-+{
-+    CPURISCVState *env = &RISCV_CPU(obj)->env;
-+    riscv_cpu_set_misa(env, MXL_RV64, RVI);
-+
-+    /* Remove the defaults from the parent class */
-+    RISCV_CPU(obj)->cfg.ext_zicntr = false;
-+    RISCV_CPU(obj)->cfg.ext_zihpm = false;
-+
-+    /* Set to QEMU's first supported priv version */
-+    env->priv_ver = PRIV_VERSION_1_10_0;
-+
-+    /*
-+     * Support all available satp_mode settings. The default
-+     * value will be set to MBARE if the user doesn't set
-+     * satp_mode manually (see set_satp_mode_default()).
-+     */
-+#ifndef CONFIG_USER_ONLY
-+    set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV64);
-+#endif
-+}
- #else
- static void rv32_base_cpu_init(Object *obj)
- {
-@@ -1748,6 +1781,13 @@ void riscv_cpu_list(void)
-         .instance_init = initfn              \
+diff --git a/target/riscv/riscv-qmp-cmds.c b/target/riscv/riscv-qmp-cmds.c
+index 5ada279776..205aaabeb9 100644
+--- a/target/riscv/riscv-qmp-cmds.c
++++ b/target/riscv/riscv-qmp-cmds.c
+@@ -116,6 +116,19 @@ static void riscv_obj_add_named_feats_qdict(Object *obj, QDict *qdict_out)
      }
+ }
  
-+#define DEFINE_BARE_CPU(type_name, initfn) \
-+    {                                      \
-+        .name = type_name,                 \
-+        .parent = TYPE_RISCV_BARE_CPU,     \
-+        .instance_init = initfn            \
-+    }
++static void riscv_obj_add_profiles_qdict(Object *obj, QDict *qdict_out)
++{
++    RISCVCPUProfile *profile;
++    QObject *value;
 +
- static const TypeInfo riscv_cpu_type_infos[] = {
-     {
-         .name = TYPE_RISCV_CPU,
-@@ -1770,6 +1810,11 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-         .parent = TYPE_RISCV_CPU,
-         .abstract = true,
-     },
-+    {
-+        .name = TYPE_RISCV_BARE_CPU,
-+        .parent = TYPE_RISCV_CPU,
-+        .abstract = true,
-+    },
-     DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_ANY,      riscv_any_cpu_init),
-     DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_MAX,      riscv_max_cpu_init),
- #if defined(TARGET_RISCV32)
-@@ -1786,6 +1831,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-     DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_THEAD_C906,  rv64_thead_c906_cpu_init),
-     DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_VEYRON_V1,   rv64_veyron_v1_cpu_init),
-     DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE128,  rv128_base_cpu_init),
-+    DEFINE_BARE_CPU(TYPE_RISCV_CPU_RV64I, rv64i_bare_cpu_init),
- #endif
- };
++    for (int i = 0; riscv_profiles[i] != NULL; i++) {
++        profile = riscv_profiles[i];
++        value = QOBJECT(qbool_from_bool(profile->enabled));
++
++        qdict_put_obj(qdict_out, profile->name, value);
++    }
++}
++
+ static void riscv_cpuobj_validate_qdict_in(Object *obj, QObject *props,
+                                            const QDict *qdict_in,
+                                            Error **errp)
+@@ -220,6 +233,7 @@ CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType type,
+     riscv_obj_add_multiext_props(obj, qdict_out, riscv_cpu_experimental_exts);
+     riscv_obj_add_multiext_props(obj, qdict_out, riscv_cpu_vendor_exts);
+     riscv_obj_add_named_feats_qdict(obj, qdict_out);
++    riscv_obj_add_profiles_qdict(obj, qdict_out);
  
+     /* Add our CPU boolean options too */
+     riscv_obj_add_qdict_prop(obj, qdict_out, "mmu");
 -- 
 2.41.0
 
