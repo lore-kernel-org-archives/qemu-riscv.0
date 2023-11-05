@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6411C4332F
-	for <qemu-riscv@archiver.kernel.org>; Sun,  5 Nov 2023 12:17:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83CF6C4332F
+	for <qemu-riscv@archiver.kernel.org>; Sun,  5 Nov 2023 12:41:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qzc4I-0000W5-RD; Sun, 05 Nov 2023 07:17:30 -0500
+	id 1qzcQZ-0007B6-9q; Sun, 05 Nov 2023 07:40:31 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qzc4I-0000Vp-4G
- for qemu-riscv@nongnu.org; Sun, 05 Nov 2023 07:17:30 -0500
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
+ id 1qzcQX-0007AF-DD
+ for qemu-riscv@nongnu.org; Sun, 05 Nov 2023 07:40:30 -0500
+Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1qzc4G-0008Ag-2W
- for qemu-riscv@nongnu.org; Sun, 05 Nov 2023 07:17:29 -0500
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-1cc5fa0e4d5so32396345ad.0
- for <qemu-riscv@nongnu.org>; Sun, 05 Nov 2023 04:17:26 -0800 (PST)
+ id 1qzcQR-0004eJ-6p
+ for qemu-riscv@nongnu.org; Sun, 05 Nov 2023 07:40:29 -0500
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-6c32a20d5dbso2693197b3a.1
+ for <qemu-riscv@nongnu.org>; Sun, 05 Nov 2023 04:40:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1699186646; x=1699791446;
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1699188022; x=1699792822;
  darn=nongnu.org; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=SeSAy6CaTtpqhdSyHQCwmDvDBGSEd3nXyY7i9vBAN/w=;
- b=N/t32aQaYMFPRQLN2tdsOlNfCdQyNfRE3vs6BWUniTsx4mh8fcJ3gU3oCRlpwOPKwj
- wNwSEu/IfL8BbaGeCiGMFdrtc0gh1OB5PSofi1tB8iLPoQFaaa9P5T+ThnXJK71o4SRa
- 0q85bmgyPGTRlJ7ovRfuaHU3h4P9CmKGM6SjdGBnMMIvBmB8jHHFTDEaf9HmJYmpaHSI
- 5su+XQJfYNICsAlBsttaGDh++aZIcwNq9fbrZFQnt1/EBj0gyexlR7NTSj9U0yJR4HxL
- ILyrofGQBD4/PvQkYA2VwI9xcl0opT6mH7A9EmM2iPjEI3kV7ojPdyuwuVMnN1uJK572
- AZHg==
+ bh=Vf6hD4b5DeYyR1VQm5b1bivfW1BFqsDiKGbajuDl/eI=;
+ b=al7MPwgJgvZMMByPCJvNnkwQjV+9ImkL6VCeUOk/p2YSfXu9gGF52ZTymrNJEdpaVK
+ eUhQy/VWmW3Mz+06bWphMyjpXl5oZxxcf2XgvLBG2xS4vM8IAE+PWLBYLc6iWT3nsZBF
+ yoYeU7hu84LTuv55uRn6TFs/XfZDjrhwIO1fWn+ej8oEAGSX8EKGSxZfDP13YqeCWtuy
+ vIncFp4ervHtNyvYTHHqPSVa3aZSStP+CJ9mP7s5lT75W1gZvs1MabLX3QVLVK9XmPQT
+ DX5g0xqSXbsvIhp/V9+uRhVn4OgY0SgBKIB8LykdmW4+VgSU25lsDC/y4v/IzygJtsGw
+ RJaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699186646; x=1699791446;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1699188022; x=1699792822;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=SeSAy6CaTtpqhdSyHQCwmDvDBGSEd3nXyY7i9vBAN/w=;
- b=G3d24+c2xmHGekmS+W5VpJ1plEsjbsqki5X1564ktBgVYFyTBrqhJrQd6b2GIxjXlV
- nan3fuspqhOidjIee3c5O9wo0Gn5LRGBo7B6hvpoXfssJOJPNQqyA7kAY2fyq/492ghQ
- SXUeRNa8yQ2vhQXMS5gjUFwiK3x2faW3v20hIHcXAc9w7NOBw6Xn8sDPZDMm1pqd4GF2
- oApTxPMfih8ie8ODpRFWaokf+chPhmcup2jm4T52O/wt1NWFyvsVX4kWp5x/SUQyHHuK
- N9DygTokKMhwCs1DMxVIZE3rBZiiRW5GGu+PAflF3OU1Oh90ApvAWl36Y3c7F5Q/f+Wi
- tqDQ==
-X-Gm-Message-State: AOJu0YzlhdrR/fs55dwkaG1AHWuq67J11R15fgDrNY48ZoxY7u0zHloz
- Xu9xYo9iRzccSPgiReXbYEhNgA==
-X-Google-Smtp-Source: AGHT+IEddoUQay+8ZE9xXcKrOyoFFrBQzIfOn8VssoA27aSnXsMEhr+vQNdg8V2RXaSSmp0GYw3KfA==
-X-Received: by 2002:a17:903:288b:b0:1c5:6157:f073 with SMTP id
- ku11-20020a170903288b00b001c56157f073mr26337827plb.11.1699186645690; 
- Sun, 05 Nov 2023 04:17:25 -0800 (PST)
+ bh=Vf6hD4b5DeYyR1VQm5b1bivfW1BFqsDiKGbajuDl/eI=;
+ b=Yd/6ywWVVAQT3tuMGyj/e5I1dtK0/f1Zv569+D7gJsDsYb7M9gJJTrtgCET++W7kqj
+ Ies+QLG6R4+L5XPF4aRjvMGlys3MqEx9pxC/n13i0F2xsr+hZ917oKro8lGOLalPtyoo
+ KLLdfqiZ8sKXZLSgTzemfR8H3M603Z2xgp6+JvWhVAaljSVAmdvFNA46myZrhHZCnkD2
+ YlV9TVLy3mcOLwYolPvetdL7VD3ki9Q+6/grbO/n4bW6ib1H074orldMD4C6dsV8C3YY
+ 82Vc7fV4/DWXHDeNS6cxOTVuAgmTpBUf8CLKCYoZhH0rPYtseHMpxRh1y1XlKS10RdXZ
+ OFbg==
+X-Gm-Message-State: AOJu0Yx/8rDrSEKSJSKdaDv/tX909D3aLZw4ITLO73lw8CqhJfnO8r3+
+ BuvM2IyDFrikXRM8BJjyM+XCCQ==
+X-Google-Smtp-Source: AGHT+IEi0KXGbZSe7qwgF+DFcSd7hs7HKWUtrLO8aYPCk34nFrOvK5drPh0J5mkKUj9JCs46tRY81A==
+X-Received: by 2002:a05:6a20:914e:b0:16b:b824:b25c with SMTP id
+ x14-20020a056a20914e00b0016bb824b25cmr22441456pzc.25.1699188021599; 
+ Sun, 05 Nov 2023 04:40:21 -0800 (PST)
 Received: from ?IPV6:2400:4050:a840:1e00:78d2:b862:10a7:d486?
  ([2400:4050:a840:1e00:78d2:b862:10a7:d486])
  by smtp.gmail.com with ESMTPSA id
- i10-20020a170902c94a00b001b8a00d4f7asm4140306pla.9.2023.11.05.04.17.18
+ n1-20020a170902d2c100b001c625acfed0sm4160870plc.44.2023.11.05.04.40.13
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 05 Nov 2023 04:17:25 -0800 (PST)
-Message-ID: <a28e343f-d864-4817-9ef4-75d6f0f1c291@daynix.com>
-Date: Sun, 5 Nov 2023 21:17:16 +0900
+ Sun, 05 Nov 2023 04:40:20 -0800 (PST)
+Message-ID: <e9c6bb21-678e-44d5-b34d-e7a840a1b7b0@daynix.com>
+Date: Sun, 5 Nov 2023 21:40:12 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 06/29] tests/tcg: add an explicit gdbstub register tester
+Subject: Re: [PATCH 24/29] plugins: add an API to read registers
+Content-Language: en-US
 To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -93,22 +94,22 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Bin Meng <bin.meng@windriver.com>, Beraldo Leal <bleal@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>,
- Michael Rolnik <mrolnik@gmail.com>, Luis Machado <luis.machado@linaro.org>
+ Michael Rolnik <mrolnik@gmail.com>
 References: <20231103195956.1998255-1-alex.bennee@linaro.org>
- <20231103195956.1998255-7-alex.bennee@linaro.org>
-Content-Language: en-US
+ <20231103195956.1998255-25-alex.bennee@linaro.org>
 From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <20231103195956.1998255-7-alex.bennee@linaro.org>
+In-Reply-To: <20231103195956.1998255-25-alex.bennee@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::62e;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pl1-x62e.google.com
+Received-SPF: none client-ip=2607:f8b0:4864:20::429;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x429.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ SPF_NONE=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -125,182 +126,91 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 2023/11/04 4:59, Alex Bennée wrote:
-> We already do a couple of "info registers" for specific tests but this
-> is a more comprehensive multiarch test. It also has some output
-> helpful for debugging the gdbstub by showing which XML features are
-> advertised and what the underlying register numbers are.
+> We can only request a list of registers once the vCPU has been
+> initialised so the user needs to use either call the find function on
+> vCPU initialisation or during the translation phase. We don't expose
+> the reg number to the plugin instead hiding it behind an opaque
+> handle. This allows for a bit of future proofing should the internals
+> need to be changed while also being hashed against the CPUClass so we
+> can handle different register sets per-vCPU in hetrogenous situations.
 > 
-> My initial motivation was to see if there are any duplicate register
-> names exposed via the gdbstub while I was reviewing the proposed
-> register interface for TCG plugins.
+> Having an internal state within the plugins also allows us to expand
+> the interface in future (for example providing callbacks on register
+> change if the translator can track changes).
 > 
-> Mismatches between the xml and remote-desc are reported for debugging
-> but do not fail the test.
-> 
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1706
 > Cc: Akihiko Odaki <akihiko.odaki@daynix.com>
-> Cc: Luis Machado <luis.machado@linaro.org>
+> Based-on: <20231025093128.33116-18-akihiko.odaki@daynix.com>
 > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-> Message-Id: <20231012170426.1335442-1-alex.bennee@linaro.org>
 > 
 > ---
-> v2
->    - remove python2 compat bits
->    - add SPDX header, clean up comment lines
->    - fix duplicate check
->    - use field 6 (Rmt Nr) instead of field 1 (Nr) for cross-check
->    - more useful output on finding a duplicates and missing regs
->    - handle non-XML targets cleanly
-> ---
->   tests/tcg/multiarch/Makefile.target           |  11 +-
->   tests/tcg/multiarch/gdbstub/registers.py      | 188 ++++++++++++++++++
->   .../multiarch/system/Makefile.softmmu-target  |  13 +-
->   3 files changed, 210 insertions(+), 2 deletions(-)
->   create mode 100644 tests/tcg/multiarch/gdbstub/registers.py
+> vAJB:
 > 
-> diff --git a/tests/tcg/multiarch/Makefile.target b/tests/tcg/multiarch/Makefile.target
-> index f3bfaf1a22..d31ba8d6ae 100644
-> --- a/tests/tcg/multiarch/Makefile.target
-> +++ b/tests/tcg/multiarch/Makefile.target
-> @@ -93,12 +93,21 @@ run-gdbstub-thread-breakpoint: testthread
->   		--qemu $(QEMU) --qargs "$(QEMU_OPTS)" \
->   		--bin $< --test $(MULTIARCH_SRC)/gdbstub/test-thread-breakpoint.py, \
->   	hitting a breakpoint on non-main thread)
-> +
-> +run-gdbstub-registers: sha512
-> +	$(call run-test, $@, $(GDB_SCRIPT) \
-> +		--gdb $(GDB) \
-> +		--qemu $(QEMU) --qargs "$(QEMU_OPTS)" \
-> +		--bin $< --test $(MULTIARCH_SRC)/gdbstub/registers.py, \
-> +	checking register enumeration)
-> +
->   else
->   run-gdbstub-%:
->   	$(call skip-test, "gdbstub test $*", "need working gdb with $(patsubst -%,,$(TARGET_NAME)) support")
->   endif
->   EXTRA_RUNS += run-gdbstub-sha1 run-gdbstub-qxfer-auxv-read \
-> -	      run-gdbstub-proc-mappings run-gdbstub-thread-breakpoint
-> +	      run-gdbstub-proc-mappings run-gdbstub-thread-breakpoint \
-> +	      run-gdbstub-registers
+> The main difference to Akikio's version is hiding the gdb register
+> detail from the plugin for the reasons described above.
+> ---
+>   include/qemu/qemu-plugin.h   |  52 +++++++++++++++++-
+>   plugins/api.c                | 102 +++++++++++++++++++++++++++++++++++
+>   plugins/qemu-plugins.symbols |   2 +
+>   3 files changed, 154 insertions(+), 2 deletions(-)
+> 
+> diff --git a/include/qemu/qemu-plugin.h b/include/qemu/qemu-plugin.h
+> index 50a9957279..e5c16df5ca 100644
+> --- a/include/qemu/qemu-plugin.h
+> +++ b/include/qemu/qemu-plugin.h
+> @@ -11,6 +11,7 @@
+>   #ifndef QEMU_QEMU_PLUGIN_H
+>   #define QEMU_QEMU_PLUGIN_H
 >   
->   # ARM Compatible Semi Hosting Tests
->   #
-> diff --git a/tests/tcg/multiarch/gdbstub/registers.py b/tests/tcg/multiarch/gdbstub/registers.py
-> new file mode 100644
-> index 0000000000..2aa0c30165
-> --- /dev/null
-> +++ b/tests/tcg/multiarch/gdbstub/registers.py
-> @@ -0,0 +1,188 @@
-> +# Exercise the register functionality by exhaustively iterating
-> +# through all supported registers on the system.
-> +#
-> +# This is launched via tests/guest-debug/run-test.py but you can also
-> +# call it directly if using it for debugging/introspection:
-> +#
-> +# SPDX-License-Identifier: GPL-2.0-or-later
+> +#include <glib.h>
+>   #include <inttypes.h>
+>   #include <stdbool.h>
+>   #include <stddef.h>
+> @@ -218,8 +219,8 @@ struct qemu_plugin_insn;
+>    * @QEMU_PLUGIN_CB_R_REGS: callback reads the CPU's regs
+>    * @QEMU_PLUGIN_CB_RW_REGS: callback reads and writes the CPU's regs
+>    *
+> - * Note: currently unused, plugins cannot read or change system
+> - * register state.
+> + * Note: currently QEMU_PLUGIN_CB_RW_REGS is unused, plugins cannot change
+> + * system register state.
+>    */
+>   enum qemu_plugin_cb_flags {
+>       QEMU_PLUGIN_CB_NO_REGS,
+> @@ -664,4 +665,51 @@ uint64_t qemu_plugin_end_code(void);
+>    */
+>   uint64_t qemu_plugin_entry_code(void);
+>   
+> +/** struct qemu_plugin_register - Opaque handle for a translated instruction */
+> +struct qemu_plugin_register;
 > +
-> +import gdb
-> +import sys
-> +import xml.etree.ElementTree as ET
+> +/**
+> + * typedef qemu_plugin_reg_descriptor - register descriptions
+> + *
+> + * @name: register name
+> + * @handle: opaque handle for retrieving value with qemu_plugin_read_register
+> + * @feature: optional feature descriptor, can be NULL
+> + */
+> +typedef struct {
+> +    char name[32];
+> +    struct qemu_plugin_register *handle;
+> +    const char *feature;
+> +} qemu_plugin_reg_descriptor;
 > +
-> +initial_vlen = 0
+> +/**
+> + * qemu_plugin_find_registers() - return register list
+> + * @vcpu_index: vcpu to query
+> + * @reg_pattern: register name pattern
+> + *
+> + * Returns a GArray of qemu_plugin_reg_descriptor or NULL. Caller
+> + * frees. As the register set of a given vCPU is only available once
+> + * the vCPU is initialised if you want to monitor registers from the
+> + * start you should call this from a qemu_plugin_register_vcpu_init_cb()
+> + * callback.
+> + */
+> +GArray * qemu_plugin_find_registers(unsigned int vcpu_index, const char *reg_pattern);
 
-This seems unused.
-
-> +failcount = 0
-> +
-> +def report(cond, msg):
-> +    "Report success/fail of test."
-> +    if cond:
-> +        print("PASS: %s" % (msg))
-> +    else:
-> +        print("FAIL: %s" % (msg))
-> +        global failcount
-> +        failcount += 1
-
-I suggest using unittest to remove this boilerplate.
-
-> +
-> +
-> +def fetch_xml_regmap():
-> +    """
-> +    Iterate through the XML descriptions and validate.
-> +
-> +    We check for any duplicate registers and report them. Return a
-> +    reg_map hash containing the names, regnums and initial values of
-> +    all registers.
-> +    """
-> +
-> +    # First check the XML descriptions we have sent. Most arches
-> +    # support XML but a few of the ancient ones don't in which case we
-> +    # need to gracefully fail.
-> +
-> +    try:
-> +        xml = gdb.execute("maint print xml-tdesc", False, True)
-> +    except (gdb.error):
-> +        print("SKIP: target does not support XML")
-> +        return None
-> +
-> +    total_regs = 0
-> +    reg_map = {}
-> +    frame = gdb.selected_frame()
-> +
-> +    tree = ET.fromstring(xml)
-> +    for f in tree.findall("feature"):
-> +        name = f.attrib["name"]
-> +        regs = f.findall("reg")
-> +
-> +        total = len(regs)
-> +        total_regs += total
-> +        base = int(regs[0].attrib["regnum"])
-> +        top = int(regs[-1].attrib["regnum"])
-> +
-> +        print(f"feature: {name} has {total} registers from {base} to {top}")
-> +
-> +        for r in regs:
-> +            name = r.attrib["name"]
-> +            regnum = int(r.attrib["regnum"])
-> +            value = frame.read_register(name).__str__()
-
-Does it really need conversion to string?
-
-> +            entry = { "name": name, "initial": value, "regnum": regnum }
-> +
-> +            if name in reg_map:
-> +                report(False, f"duplicate register {entry} vs {reg_map[name]}")
-> +                continue
-> +
-> +            reg_map[name] = entry
-> +
-> +    # Validate we match
-> +    report(total_regs == len(reg_map.keys()),
-> +           f"counted all {total_regs} registers in XML")
-> +
-> +    return reg_map
-> +
-> +def crosscheck_remote_xml(reg_map):
-> +    """
-> +    Cross-check the list of remote-registers with the XML info.
-> +    """
-> +
-> +    remote = gdb.execute("maint print remote-registers", False, True)
-> +    r_regs = remote.split("\n")
-> +
-> +    total_regs = len(reg_map.keys())
-> +    total_r_regs = 0
-> +
-> +    for r in r_regs:
-> +        fields = r.split()
-> +        # Some of the registers reported here are "pseudo" registers that
-> +        # gdb invents based on actual registers so we need to filter them
-> +        # out.
-> +        if len(fields) == 8:
-> +            r_name = fields[0]
-> +            r_regnum = int(fields[6])
-> +
-> +            # check in the XML
-> +            try:
-> +                x_reg = reg_map[r_name]
-> +                x_reg["seen"] = True
-
-Place x_reg["seen"] out of this try block.
+A pattern may be convenient for humans but not for machine. My 
+motivation to introduce the feature is to generate traces consumable by 
+trace-based simulators. Such a plugin needs an exact match of registers.
 
