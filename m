@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3C12C4167D
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 11:37:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D431C4332F
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 11:37:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qzxUt-00030H-Uo; Mon, 06 Nov 2023 06:10:24 -0500
+	id 1qzxUx-000354-1Z; Mon, 06 Nov 2023 06:10:27 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxUN-0002Ag-HR
- for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:09:51 -0500
-Received: from mail-lj1-x235.google.com ([2a00:1450:4864:20::235])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxUU-0002Xs-BF
+ for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:10:01 -0500
+Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxUL-0005dA-2l
- for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:09:51 -0500
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2c501bd6ff1so61029181fa.3
- for <qemu-riscv@nongnu.org>; Mon, 06 Nov 2023 03:09:47 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxUQ-0005gD-Bl
+ for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:09:58 -0500
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-32dff08bbdbso3001348f8f.2
+ for <qemu-riscv@nongnu.org>; Mon, 06 Nov 2023 03:09:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699268986; x=1699873786; darn=nongnu.org;
+ d=linaro.org; s=google; t=1699268993; x=1699873793; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=41ppFX+7R6F7tVGh9dGaG+2Fh2vMVrU15YTc5GYKvbI=;
- b=SyOnp2tZpsddipCQlZ8zG9BViO2b4Tm/7JtvFdWmxXAl2yjQ9ncLVdB44wpReCpj3k
- Or6Lxzjlk5vyVwpPLOMYXDCO/Xct39NCycAtNOTJg5CXI5iRMX3wDK0iKiBBihE7Nj7U
- nf4qoycCrD26gg1rWFIdJvPwvC+so8rgKGoRgxXfAk8bOyIWi6vbOwbiw5e4z/mVpWSa
- qCdTnzxkd1JpDYDZegppF9oxKTpGAQp29Gx7Oezbix1zOmn7DVcZEc3jkT5svGkDWh91
- eBn0PR7t0S6SMsOs3hHUQGm68YYAZVLjly0RYQIrj6xDPJFX78frBWX4WBrBdCdHd8ag
- WJwQ==
+ bh=/UYA9fxIVAJDV/ugwhxZLfTB1YL01/OCPxws1OIhgNw=;
+ b=twhGE9uHJIOhRvFOenLm90pUF25nxRVTWx0JYDpC+/N8YiAOkdiwraE6+tgn+rYhOE
+ coOC2fFY2iqRogMJcZhYSjiMCWA8M83HXCY92NV/p3e6nLzUuMAuimPw4xsTJzfVzUBO
+ MOsHlH6/QcMqPwAl1pMCvYeGP+7wEGDLaYQSV7Al6owAtRxM1sRVh55//r0qpJ+7A05F
+ qFs4KrMlq5gWxF7YGTxFlGXcrsLKaMOnPdXRB9LwHrE3ZMpDY3jbo0zugd2r7NzvtmHB
+ 9tmCTjrUai7KJQQZL345MrzfOt6YSrx0BTlP3gbDNBjDtoApEV0qTbKrCBlgQLcapnD1
+ ZKWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699268986; x=1699873786;
+ d=1e100.net; s=20230601; t=1699268993; x=1699873793;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=41ppFX+7R6F7tVGh9dGaG+2Fh2vMVrU15YTc5GYKvbI=;
- b=kaK1Pz1KkUK+RnQnOEH3dOuOCLDbZVJ/S2AjPf6jrcAJsypxsmM6fiMW6ilsClwMwj
- jiQQsxmuqQgYzmGbUvOuo+U91+e9+aSEmDMpyqbieAyLrrKN/ysDfSwERwmBIjvz5XYw
- DrOGpQVmKHhkLz8GjLlIcJNv/npnpBMR0P3vVNcPdxIvKNuLx5G8nB2I4AjR+SvF7TJK
- CSfYp+ubTVtITlgmNDlgkFvly6IQgR81zrQvnc9xe1LSb7F+YQtpzAjONvKcH0Mbs5qX
- zrsbDdZZHbUxAUUpeO0cZO4lXl+qzsi9xJ8oA+WQydahSdVj5exPBccwOULVkd3lqIAg
- C66Q==
-X-Gm-Message-State: AOJu0Ywn9TeRlB2xr0tfcz6SkF2Fkckw9SmePKDLQKiDme7230r9Uexh
- oy8SuXZ39rMi8XZ4jwYO/KVcgw==
-X-Google-Smtp-Source: AGHT+IGDxDJzV8LF3nVlPJCOzZ9JzcZJLsFS8T/4TpQBPgzwCOrVVhFIKHp0AK1loMGLRLjuvYWbMg==
-X-Received: by 2002:a05:651c:3dc:b0:2c5:14d3:f295 with SMTP id
- f28-20020a05651c03dc00b002c514d3f295mr19960731ljp.35.1699268986606; 
- Mon, 06 Nov 2023 03:09:46 -0800 (PST)
+ bh=/UYA9fxIVAJDV/ugwhxZLfTB1YL01/OCPxws1OIhgNw=;
+ b=XM3twSWxK5qTNlatnx+btlrk9UPn404gLVvmsQIKhwUXU7zEq8wvNzZsF55q9UQh2B
+ X7tT5OInYOF/BUxYPViJMQobJ3Y94CwwE1lQ/TNw/K3Q2NQgQ3HBxdrrvIVdsbPzFDb5
+ aVMsp/tZohX+b42DbTbdBHr2utGKIiYkKrQn+JwZnKdNpDjBRuurAbJKAcPIlVtLI8wr
+ Vr3vyhkkkAF5nevCsFSFOPVWB7Dcv0Pwmbr7ta3eh1LUW3rmYSwWe2+QBi8aj5wvTx4b
+ ZSFqayaoxFyQ0T7MBdtgsTE9zkp0YTPmCVg+VL9PITj7j+l4fArB2IocYHIRZlRdgJId
+ BLvw==
+X-Gm-Message-State: AOJu0YyRoBkYvoTQbKZovPlipNtGCBujm15v4XlVoNhzk5lTIWPANIM/
+ ntOj//giuoGx0+ZrWII+UyOTPQ==
+X-Google-Smtp-Source: AGHT+IEJYwaQv9zhCAnw87q6XL1cNQIMVWd4njIJAfgg35jyjWT0oa+xJ0fh+sg8SmmssH1mUhxHcw==
+X-Received: by 2002:a05:6000:4021:b0:32d:b991:1a71 with SMTP id
+ cp33-20020a056000402100b0032db9911a71mr27821328wrb.0.1699268992895; 
+ Mon, 06 Nov 2023 03:09:52 -0800 (PST)
 Received: from m1x-phil.lan (176-131-220-199.abo.bbox.fr. [176.131.220.199])
  by smtp.gmail.com with ESMTPSA id
- l4-20020adfa384000000b0032d2489a399sm9245951wrb.49.2023.11.06.03.09.44
+ f18-20020a5d58f2000000b0032da4c98ab2sm9102932wrd.35.2023.11.06.03.09.51
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 06 Nov 2023 03:09:46 -0800 (PST)
+ Mon, 06 Nov 2023 03:09:52 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: kvm@vger.kernel.org, qemu-s390x@nongnu.org, qemu-block@nongnu.org,
  qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
- Titus Rwantare <titusr@google.com>, Hao Wu <wuhaotsh@google.com>,
- Corey Minyard <cminyard@mvista.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Tyrone Ting <kfting@nuvoton.com>, Thomas Huth <thuth@redhat.com>,
- Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>
-Subject: [PULL 54/60] tests/qtest: add tests for ADM1266
-Date: Mon,  6 Nov 2023 12:03:26 +0100
-Message-ID: <20231106110336.358-55-philmd@linaro.org>
+ Titus Rwantare <titusr@google.com>, Patrick Venture <venture@google.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PULL 55/60] hw/i2c: pmbus: immediately clear faults on request
+Date: Mon,  6 Nov 2023 12:03:27 +0100
+Message-ID: <20231106110336.358-56-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106110336.358-1-philmd@linaro.org>
 References: <20231106110336.358-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::235;
- envelope-from=philmd@linaro.org; helo=mail-lj1-x235.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::432;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x432.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,174 +97,34 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Titus Rwantare <titusr@google.com>
 
-The ADM1266 can have string fields written by the driver, so
-it's worth specifically testing.
+The probing process of the generic pmbus driver generates
+faults to determine if functions are available. These faults
+were not always cleared resulting in probe failures.
 
-Reviewed-by: Hao Wu <wuhaotsh@google.com>
-Acked-by: Corey Minyard <cminyard@mvista.com>
+Reviewed-by: Patrick Venture <venture@google.com>
 Signed-off-by: Titus Rwantare <titusr@google.com>
-[PMD: Cover file in MAINTAINERS]
-Message-ID: <20231023-staging-pmbus-v3-v4-6-07a8cb7cd20a@google.com>
+Message-ID: <20231023-staging-pmbus-v3-v4-7-07a8cb7cd20a@google.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- MAINTAINERS                |   1 +
- tests/qtest/adm1266-test.c | 122 +++++++++++++++++++++++++++++++++++++
- tests/qtest/meson.build    |   1 +
- 3 files changed, 124 insertions(+)
- create mode 100644 tests/qtest/adm1266-test.c
+ hw/i2c/pmbus_device.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index e6a2f57442..c01c2e6ec0 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -862,6 +862,7 @@ F: hw/*/npcm*
- F: hw/sensor/adm1266.c
- F: include/hw/*/npcm*
- F: tests/qtest/npcm*
-+F: tests/qtest/adm1266-test.c
- F: pc-bios/npcm7xx_bootrom.bin
- F: roms/vbootrom
- F: docs/system/arm/nuvoton.rst
-diff --git a/tests/qtest/adm1266-test.c b/tests/qtest/adm1266-test.c
-new file mode 100644
-index 0000000000..6c312c499f
---- /dev/null
-+++ b/tests/qtest/adm1266-test.c
-@@ -0,0 +1,122 @@
-+/*
-+ * Analog Devices ADM1266 Cascadable Super Sequencer with Margin Control and
-+ * Fault Recording with PMBus
-+ *
-+ * Copyright 2022 Google LLC
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
+diff --git a/hw/i2c/pmbus_device.c b/hw/i2c/pmbus_device.c
+index 3bce39e84e..481e158380 100644
+--- a/hw/i2c/pmbus_device.c
++++ b/hw/i2c/pmbus_device.c
+@@ -1244,6 +1244,11 @@ static int pmbus_write_data(SMBusDevice *smd, uint8_t *buf, uint8_t len)
+     pmdev->in_buf = buf;
+ 
+     pmdev->code = buf[0]; /* PMBus command code */
 +
-+#include "qemu/osdep.h"
-+#include <math.h>
-+#include "hw/i2c/pmbus_device.h"
-+#include "libqtest-single.h"
-+#include "libqos/qgraph.h"
-+#include "libqos/i2c.h"
-+#include "qapi/qmp/qdict.h"
-+#include "qapi/qmp/qnum.h"
-+#include "qemu/bitops.h"
++    if (pmdev->code == PMBUS_CLEAR_FAULTS) {
++        pmbus_clear_faults(pmdev);
++    }
 +
-+#define TEST_ID "adm1266-test"
-+#define TEST_ADDR (0x12)
-+
-+#define ADM1266_BLACKBOX_CONFIG                 0xD3
-+#define ADM1266_PDIO_CONFIG                     0xD4
-+#define ADM1266_READ_STATE                      0xD9
-+#define ADM1266_READ_BLACKBOX                   0xDE
-+#define ADM1266_SET_RTC                         0xDF
-+#define ADM1266_GPIO_SYNC_CONFIGURATION         0xE1
-+#define ADM1266_BLACKBOX_INFORMATION            0xE6
-+#define ADM1266_PDIO_STATUS                     0xE9
-+#define ADM1266_GPIO_STATUS                     0xEA
-+
-+/* Defaults */
-+#define ADM1266_OPERATION_DEFAULT               0x80
-+#define ADM1266_CAPABILITY_DEFAULT              0xA0
-+#define ADM1266_CAPABILITY_NO_PEC               0x20
-+#define ADM1266_PMBUS_REVISION_DEFAULT          0x22
-+#define ADM1266_MFR_ID_DEFAULT                  "ADI"
-+#define ADM1266_MFR_ID_DEFAULT_LEN              32
-+#define ADM1266_MFR_MODEL_DEFAULT               "ADM1266-A1"
-+#define ADM1266_MFR_MODEL_DEFAULT_LEN           32
-+#define ADM1266_MFR_REVISION_DEFAULT            "25"
-+#define ADM1266_MFR_REVISION_DEFAULT_LEN        8
-+#define TEST_STRING_A                           "a sample"
-+#define TEST_STRING_B                           "b sample"
-+#define TEST_STRING_C                           "rev c"
-+
-+static void compare_string(QI2CDevice *i2cdev, uint8_t reg,
-+                           const char *test_str)
-+{
-+    uint8_t len = i2c_get8(i2cdev, reg);
-+    char i2c_str[SMBUS_DATA_MAX_LEN] = {0};
-+
-+    i2c_read_block(i2cdev, reg, (uint8_t *)i2c_str, len);
-+    g_assert_cmpstr(i2c_str, ==, test_str);
-+}
-+
-+static void write_and_compare_string(QI2CDevice *i2cdev, uint8_t reg,
-+                                     const char *test_str, uint8_t len)
-+{
-+    char buf[SMBUS_DATA_MAX_LEN] = {0};
-+    buf[0] = len;
-+    strncpy(buf + 1, test_str, len);
-+    i2c_write_block(i2cdev, reg, (uint8_t *)buf, len + 1);
-+    compare_string(i2cdev, reg, test_str);
-+}
-+
-+static void test_defaults(void *obj, void *data, QGuestAllocator *alloc)
-+{
-+    uint16_t i2c_value;
-+    QI2CDevice *i2cdev = (QI2CDevice *)obj;
-+
-+    i2c_value = i2c_get8(i2cdev, PMBUS_OPERATION);
-+    g_assert_cmphex(i2c_value, ==, ADM1266_OPERATION_DEFAULT);
-+
-+    i2c_value = i2c_get8(i2cdev, PMBUS_REVISION);
-+    g_assert_cmphex(i2c_value, ==, ADM1266_PMBUS_REVISION_DEFAULT);
-+
-+    compare_string(i2cdev, PMBUS_MFR_ID, ADM1266_MFR_ID_DEFAULT);
-+    compare_string(i2cdev, PMBUS_MFR_MODEL, ADM1266_MFR_MODEL_DEFAULT);
-+    compare_string(i2cdev, PMBUS_MFR_REVISION, ADM1266_MFR_REVISION_DEFAULT);
-+}
-+
-+/* test r/w registers */
-+static void test_rw_regs(void *obj, void *data, QGuestAllocator *alloc)
-+{
-+    QI2CDevice *i2cdev = (QI2CDevice *)obj;
-+
-+    /* empty strings */
-+    i2c_set8(i2cdev, PMBUS_MFR_ID, 0);
-+    compare_string(i2cdev, PMBUS_MFR_ID, "");
-+
-+    i2c_set8(i2cdev, PMBUS_MFR_MODEL, 0);
-+    compare_string(i2cdev, PMBUS_MFR_MODEL, "");
-+
-+    i2c_set8(i2cdev, PMBUS_MFR_REVISION, 0);
-+    compare_string(i2cdev, PMBUS_MFR_REVISION, "");
-+
-+    /* test strings */
-+    write_and_compare_string(i2cdev, PMBUS_MFR_ID, TEST_STRING_A,
-+                             sizeof(TEST_STRING_A));
-+    write_and_compare_string(i2cdev, PMBUS_MFR_ID, TEST_STRING_B,
-+                             sizeof(TEST_STRING_B));
-+    write_and_compare_string(i2cdev, PMBUS_MFR_ID, TEST_STRING_C,
-+                             sizeof(TEST_STRING_C));
-+}
-+
-+static void adm1266_register_nodes(void)
-+{
-+    QOSGraphEdgeOptions opts = {
-+        .extra_device_opts = "id=" TEST_ID ",address=0x12"
-+    };
-+    add_qi2c_address(&opts, &(QI2CAddress) { TEST_ADDR });
-+
-+    qos_node_create_driver("adm1266", i2c_device_create);
-+    qos_node_consumes("adm1266", "i2c-bus", &opts);
-+
-+    qos_add_test("test_defaults", "adm1266", test_defaults, NULL);
-+    qos_add_test("test_rw_regs", "adm1266", test_rw_regs, NULL);
-+}
-+
-+libqos_init(adm1266_register_nodes);
-diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
-index c9945e69b1..47dabf91d0 100644
---- a/tests/qtest/meson.build
-+++ b/tests/qtest/meson.build
-@@ -241,6 +241,7 @@ qos_test_ss = ss.source_set()
- qos_test_ss.add(
-   'ac97-test.c',
-   'adm1272-test.c',
-+  'adm1266-test.c',
-   'ds1338-test.c',
-   'e1000-test.c',
-   'eepro100-test.c',
+     if (len == 1) { /* Single length writes are command codes only */
+         return 0;
+     }
 -- 
 2.41.0
 
