@@ -4,99 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 281EEC4332F
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 11:35:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3200C4167D
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 11:35:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qzxSf-0005SA-2B; Mon, 06 Nov 2023 06:08:05 -0500
+	id 1qzxPf-0007iL-2F; Mon, 06 Nov 2023 06:04:59 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxSd-0005Q4-GR
- for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:08:03 -0500
-Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxPc-0007YB-P1
+ for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:04:56 -0500
+Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxSb-0004y5-8j
- for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:08:03 -0500
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-32ded3eb835so3068899f8f.0
- for <qemu-riscv@nongnu.org>; Mon, 06 Nov 2023 03:08:00 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxPW-0003si-KH
+ for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:04:56 -0500
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-32fb95dfe99so1770551f8f.2
+ for <qemu-riscv@nongnu.org>; Mon, 06 Nov 2023 03:04:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699268880; x=1699873680; darn=nongnu.org;
+ d=linaro.org; s=google; t=1699268689; x=1699873489; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KMjbC2xJWHxNTrhQC1HW/27kz6qe7U3LIUpfEfCgflY=;
- b=wc/dWq27vCi614hlxzXlIAdHnViZMW4pvLIyjQaA5AWDQn6nIhEqPQ9f3afNAaOr1M
- 0GxVpNeM6QiCoohTKjln9qlInYsAzllFxlc9Gc8yMPLTF2weH1yh5dbFiswHCxJlcBra
- 10CEib5FCDxuVO7DeRTcm3RuYq6hQ9BA4dDLkshVQ/ZUt3BHkOJr8EzNKijV5IdgvaGR
- dHyiumD30iztTAppXRvhZQpXKkU/xzQGEkX84uRR555CVbM6ixZLtMX8bfHkjMPGQrFF
- eKd+6uyuzDUxWBmXYxjQXyrXIl29ZlnkyczdlMTll/Xt58xQ7J+WnaeEqYimkB6McILj
- v9Gg==
+ bh=5wOkrsA8z2Hole9awlJYsNuk4oh7gPmhIjtphAMJsw8=;
+ b=psKUUSqMM8ZoFWJVSptQ91bZmUqMy3eKvQR+vkfVVJASMZ6TX7ck1cwxyW1w1TVK/O
+ C5vHfnjkObntjoWCbljkPBfte8X0jRh43QG3Urah8dHg6i1JN21OtMfyCQveCVteLvDh
+ qKsejHokN32O7+BVs09cpsjkRS1JDpr2zW8Phi29nBymILPmRSVArK+spZZFqqFvsWAh
+ wgWCf6RnzItfbC9oaFMUVfq5PlqarUxBbzEdOHKJE14YVD9XgRVbZ6Msy3/ux60eFFUA
+ oTtIbjn85np/qpSAdrsKrJe2i8Qu+oa5mvMeVjP/IbsO4dq7NG/uJmz2qkFJK8QvimnA
+ IvEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699268880; x=1699873680;
+ d=1e100.net; s=20230601; t=1699268689; x=1699873489;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KMjbC2xJWHxNTrhQC1HW/27kz6qe7U3LIUpfEfCgflY=;
- b=DorVPwpmJCZ3TgQzCit3NCyBXHJ31kE54QLNjT+yFm4fVHmIZcLRyY7pFEAr5P8OW1
- HW/BoXJCMGAjcsvYg8tzhUkerzyOPa9PRjyhECkeZ6IvHFQJVnclk+r7ug9SA8qnfBis
- 67kjLS+TrdyphYrcQmk/y3Ius8bnHxR/uNKoSWSFOkVgaBq7rVgjBUpGZhUJrp8opFVX
- Ay+fChSlFkJsXC/JagzjJV9xZn9eZ4AF8xDHRoKwWU14gk3yywHVEoJInGqidHSLbelQ
- kNCMGt1bQNSK2zHSieQ/5JI62MZXJNV94WmPxkms4Eqr/I4IRlWU/9rWBwa0Iju9YwXq
- 97Eg==
-X-Gm-Message-State: AOJu0YyfIRPE418Zv5dQJT/0wLM6ZJbSridfvuIFT3AhqX9TDBsaRyy6
- Yf9H43lFDw8ki5TUFGbFmZlvew==
-X-Google-Smtp-Source: AGHT+IH9X2GE3xs55/ZsOwgF8AvUm+DWjmmM+7ejsJtn9NBM/K//H0bsohOzSfHKuAoPE0hD1kKuBQ==
-X-Received: by 2002:a5d:47a9:0:b0:32f:96c6:8bb with SMTP id
- 9-20020a5d47a9000000b0032f96c608bbmr13753845wrb.7.1699268879845; 
- Mon, 06 Nov 2023 03:07:59 -0800 (PST)
+ bh=5wOkrsA8z2Hole9awlJYsNuk4oh7gPmhIjtphAMJsw8=;
+ b=u+T/PWalCNGPCGS2O16VgPacvNbBYeH6/eOnylY0cSe6IiEd68YOdeiXKdK8/pNSXr
+ T5/S77DW2lh3OXAWusUyro9xvv7pXqO4S9H1I2KrCL8tuZItXmO50ehwCNO1m+srIiI5
+ 88Md0+xTjA3r+3A8jucEFL2HrG9FiGm17of0wXC3T9J76ziczO8h2DqYE5wCUGDFeeEf
+ 4s1h/S2eiw3cWne0LYrC+ZH2AhZDHhTC/4oQrDHHBoWkAUntvS16LgEZDgzfTmlZ+vA2
+ EDv22qU2q3vQzQUOkZHHMPI5Rbet6PoXwEuQGbk0rpHJrAuB1j7KVGhu5JxUxV7TJjev
+ 6uHg==
+X-Gm-Message-State: AOJu0YzmsX7xI0FWPg3bXm2E5vodg+oTwVZd1Y7+9jeTxuG4frFQOBcF
+ f5tpS1H2Xw4gisJkZAckKg+A8w==
+X-Google-Smtp-Source: AGHT+IECfFst9YsrR74+b52RmZLy9M9KXPMfA+PoNFzuGn/ZVvte53NMfTf9ib4YmQOSoxKMcxtfzw==
+X-Received: by 2002:a05:6000:18a9:b0:32f:9a39:777f with SMTP id
+ b9-20020a05600018a900b0032f9a39777fmr15067192wri.62.1699268689108; 
+ Mon, 06 Nov 2023 03:04:49 -0800 (PST)
 Received: from m1x-phil.lan (176-131-220-199.abo.bbox.fr. [176.131.220.199])
  by smtp.gmail.com with ESMTPSA id
- l4-20020a5d5604000000b0032f78feb826sm9106145wrv.104.2023.11.06.03.07.56
+ z2-20020a5d6402000000b0032d9caeab0fsm9209526wru.77.2023.11.06.03.04.47
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 06 Nov 2023 03:07:59 -0800 (PST)
+ Mon, 06 Nov 2023 03:04:48 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: kvm@vger.kernel.org, qemu-s390x@nongnu.org, qemu-block@nongnu.org,
  qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Richard Henderson <richard.henderson@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Michael Rolnik <mrolnik@gmail.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Brian Cain <bcain@quicinc.com>, Song Gao <gaosong@loongson.cn>,
- Laurent Vivier <laurent@vivier.eu>, Stafford Horne <shorne@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Max Filippov <jcmvbkbc@gmail.com>
-Subject: [PULL 38/60] hw/cpu: Call object_class_is_abstract() once in
- cpu_class_by_name()
-Date: Mon,  6 Nov 2023 12:03:10 +0100
-Message-ID: <20231106110336.358-39-philmd@linaro.org>
+ Peter Maydell <peter.maydell@linaro.org>
+Subject: [PULL 10/60] target/arm: Move internal declarations from 'cpu-qom.h'
+ to 'cpu.h'
+Date: Mon,  6 Nov 2023 12:02:42 +0100
+Message-ID: <20231106110336.358-11-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106110336.358-1-philmd@linaro.org>
 References: <20231106110336.358-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::435;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x435.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -112,272 +97,118 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Let CPUClass::class_by_name() handlers to return abstract classes,
-and filter them once in the public cpu_class_by_name() method.
+These definitions and declarations are only used by
+target/arm/, no need to expose them to generic hw/.
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20230908112235.75914-3-philmd@linaro.org>
+Message-Id: <20231013140116.255-4-philmd@linaro.org>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Message-Id: <c48c9829-3dfa-79cf-3042-454fda0d00dc@linaro.org>
 ---
- include/hw/core/cpu.h  |  7 ++++---
- hw/core/cpu-common.c   | 14 +++++++++++---
- target/alpha/cpu.c     |  3 +--
- target/arm/cpu.c       |  3 +--
- target/avr/cpu.c       |  3 +--
- target/cris/cpu.c      |  3 +--
- target/hexagon/cpu.c   |  3 +--
- target/loongarch/cpu.c |  3 +--
- target/m68k/cpu.c      |  3 +--
- target/openrisc/cpu.c  |  3 +--
- target/riscv/cpu.c     |  3 +--
- target/rx/cpu.c        |  6 +-----
- target/sh4/cpu.c       |  3 ---
- target/tricore/cpu.c   |  3 +--
- target/xtensa/cpu.c    |  3 +--
- 15 files changed, 27 insertions(+), 36 deletions(-)
+ target/arm/cpu-qom.h   | 28 ----------------------------
+ target/arm/cpu.h       | 22 ++++++++++++++++++++++
+ target/arm/internals.h |  6 ++++++
+ 3 files changed, 28 insertions(+), 28 deletions(-)
 
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 6373aa4501..5d6f8dca43 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -102,7 +102,7 @@ struct SysemuCPUOps;
+diff --git a/target/arm/cpu-qom.h b/target/arm/cpu-qom.h
+index dfb9d5b827..35c3b0924e 100644
+--- a/target/arm/cpu-qom.h
++++ b/target/arm/cpu-qom.h
+@@ -35,9 +35,6 @@ typedef struct ARMCPUInfo {
+     void (*class_init)(ObjectClass *oc, void *data);
+ } ARMCPUInfo;
+ 
+-void arm_cpu_register(const ARMCPUInfo *info);
+-void aarch64_cpu_register(const ARMCPUInfo *info);
+-
  /**
-  * CPUClass:
-  * @class_by_name: Callback to map -cpu command line model name to an
-- * instantiatable CPU type.
-+ *                 instantiatable CPU type.
-  * @parse_features: Callback to parse command line arguments.
-  * @reset_dump_flags: #CPUDumpFlags to use for reset logging.
-  * @has_work: Callback for checking if there is work to do.
-@@ -772,9 +772,10 @@ void cpu_reset(CPUState *cpu);
-  * @typename: The CPU base type.
-  * @cpu_model: The model string without any parameters.
-  *
-- * Looks up a CPU #ObjectClass matching name @cpu_model.
-+ * Looks up a concrete CPU #ObjectClass matching name @cpu_model.
-  *
-- * Returns: A #CPUClass or %NULL if not matching class is found.
-+ * Returns: A concrete #CPUClass or %NULL if no matching class is found
-+ *          or if the matching class is abstract.
-  */
- ObjectClass *cpu_class_by_name(const char *typename, const char *cpu_model);
+  * ARMCPUClass:
+  * @parent_realize: The parent class' realize handler.
+@@ -63,29 +60,4 @@ struct AArch64CPUClass {
+     ARMCPUClass parent_class;
+ };
  
-diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
-index baa6d28b64..d4112b8919 100644
---- a/hw/core/cpu-common.c
-+++ b/hw/core/cpu-common.c
-@@ -146,10 +146,18 @@ static bool cpu_common_has_work(CPUState *cs)
+-void register_cp_regs_for_features(ARMCPU *cpu);
+-void init_cpreg_list(ARMCPU *cpu);
+-
+-/* Callback functions for the generic timer's timers. */
+-void arm_gt_ptimer_cb(void *opaque);
+-void arm_gt_vtimer_cb(void *opaque);
+-void arm_gt_htimer_cb(void *opaque);
+-void arm_gt_stimer_cb(void *opaque);
+-void arm_gt_hvtimer_cb(void *opaque);
+-
+-#define ARM_AFF0_SHIFT 0
+-#define ARM_AFF0_MASK  (0xFFULL << ARM_AFF0_SHIFT)
+-#define ARM_AFF1_SHIFT 8
+-#define ARM_AFF1_MASK  (0xFFULL << ARM_AFF1_SHIFT)
+-#define ARM_AFF2_SHIFT 16
+-#define ARM_AFF2_MASK  (0xFFULL << ARM_AFF2_SHIFT)
+-#define ARM_AFF3_SHIFT 32
+-#define ARM_AFF3_MASK  (0xFFULL << ARM_AFF3_SHIFT)
+-#define ARM_DEFAULT_CPUS_PER_CLUSTER 8
+-
+-#define ARM32_AFFINITY_MASK (ARM_AFF0_MASK|ARM_AFF1_MASK|ARM_AFF2_MASK)
+-#define ARM64_AFFINITY_MASK \
+-    (ARM_AFF0_MASK|ARM_AFF1_MASK|ARM_AFF2_MASK|ARM_AFF3_MASK)
+-#define ARM64_AFFINITY_INVALID (~ARM64_AFFINITY_MASK)
+-
+ #endif
+diff --git a/target/arm/cpu.h b/target/arm/cpu.h
+index 2f7ab22169..4a86c8f831 100644
+--- a/target/arm/cpu.h
++++ b/target/arm/cpu.h
+@@ -1116,11 +1116,33 @@ struct ArchCPU {
+     uint64_t gt_cntfrq_hz;
+ };
  
- ObjectClass *cpu_class_by_name(const char *typename, const char *cpu_model)
- {
--    CPUClass *cc = CPU_CLASS(object_class_by_name(typename));
-+    ObjectClass *oc;
-+    CPUClass *cc;
++/* Callback functions for the generic timer's timers. */
++void arm_gt_ptimer_cb(void *opaque);
++void arm_gt_vtimer_cb(void *opaque);
++void arm_gt_htimer_cb(void *opaque);
++void arm_gt_stimer_cb(void *opaque);
++void arm_gt_hvtimer_cb(void *opaque);
++
+ unsigned int gt_cntfrq_period_ns(ARMCPU *cpu);
+ void gt_rme_post_el_change(ARMCPU *cpu, void *opaque);
  
--    assert(cpu_model && cc->class_by_name);
--    return cc->class_by_name(cpu_model);
-+    oc = object_class_by_name(typename);
-+    cc = CPU_CLASS(oc);
-+    assert(cc->class_by_name);
-+    assert(cpu_model);
-+    oc = cc->class_by_name(cpu_model);
-+    if (oc == NULL || object_class_is_abstract(oc)) {
-+        return NULL;
-+    }
-+    return oc;
+ void arm_cpu_post_init(Object *obj);
+ 
++#define ARM_AFF0_SHIFT 0
++#define ARM_AFF0_MASK  (0xFFULL << ARM_AFF0_SHIFT)
++#define ARM_AFF1_SHIFT 8
++#define ARM_AFF1_MASK  (0xFFULL << ARM_AFF1_SHIFT)
++#define ARM_AFF2_SHIFT 16
++#define ARM_AFF2_MASK  (0xFFULL << ARM_AFF2_SHIFT)
++#define ARM_AFF3_SHIFT 32
++#define ARM_AFF3_MASK  (0xFFULL << ARM_AFF3_SHIFT)
++#define ARM_DEFAULT_CPUS_PER_CLUSTER 8
++
++#define ARM32_AFFINITY_MASK (ARM_AFF0_MASK | ARM_AFF1_MASK | ARM_AFF2_MASK)
++#define ARM64_AFFINITY_MASK \
++    (ARM_AFF0_MASK | ARM_AFF1_MASK | ARM_AFF2_MASK | ARM_AFF3_MASK)
++#define ARM64_AFFINITY_INVALID (~ARM64_AFFINITY_MASK)
++
+ uint64_t arm_cpu_mp_affinity(int idx, uint8_t clustersz);
+ 
+ #ifndef CONFIG_USER_ONLY
+diff --git a/target/arm/internals.h b/target/arm/internals.h
+index c837506e44..143d57c0fe 100644
+--- a/target/arm/internals.h
++++ b/target/arm/internals.h
+@@ -183,6 +183,12 @@ static inline int r14_bank_number(int mode)
+     return (mode == ARM_CPU_MODE_HYP) ? BANK_USRSYS : bank_number(mode);
  }
  
- static void cpu_common_parse_features(const char *typename, char *features,
-diff --git a/target/alpha/cpu.c b/target/alpha/cpu.c
-index fae2cb6ec7..39cf841b3e 100644
---- a/target/alpha/cpu.c
-+++ b/target/alpha/cpu.c
-@@ -126,8 +126,7 @@ static ObjectClass *alpha_cpu_class_by_name(const char *cpu_model)
-     int i;
++void arm_cpu_register(const ARMCPUInfo *info);
++void aarch64_cpu_register(const ARMCPUInfo *info);
++
++void register_cp_regs_for_features(ARMCPU *cpu);
++void init_cpreg_list(ARMCPU *cpu);
++
+ void arm_cpu_register_gdb_regs_for_features(ARMCPU *cpu);
+ void arm_translate_init(void);
  
-     oc = object_class_by_name(cpu_model);
--    if (oc != NULL && object_class_dynamic_cast(oc, TYPE_ALPHA_CPU) != NULL &&
--        !object_class_is_abstract(oc)) {
-+    if (oc != NULL && object_class_dynamic_cast(oc, TYPE_ALPHA_CPU) != NULL) {
-         return oc;
-     }
- 
-diff --git a/target/arm/cpu.c b/target/arm/cpu.c
-index df6496b019..25e9d2ae7b 100644
---- a/target/arm/cpu.c
-+++ b/target/arm/cpu.c
-@@ -2401,8 +2401,7 @@ static ObjectClass *arm_cpu_class_by_name(const char *cpu_model)
-     oc = object_class_by_name(typename);
-     g_strfreev(cpuname);
-     g_free(typename);
--    if (!oc || !object_class_dynamic_cast(oc, TYPE_ARM_CPU) ||
--        object_class_is_abstract(oc)) {
-+    if (!oc || !object_class_dynamic_cast(oc, TYPE_ARM_CPU)) {
-         return NULL;
-     }
-     return oc;
-diff --git a/target/avr/cpu.c b/target/avr/cpu.c
-index 14d8b9d1f0..44de1e18d1 100644
---- a/target/avr/cpu.c
-+++ b/target/avr/cpu.c
-@@ -157,8 +157,7 @@ static ObjectClass *avr_cpu_class_by_name(const char *cpu_model)
-     ObjectClass *oc;
- 
-     oc = object_class_by_name(cpu_model);
--    if (object_class_dynamic_cast(oc, TYPE_AVR_CPU) == NULL ||
--        object_class_is_abstract(oc)) {
-+    if (object_class_dynamic_cast(oc, TYPE_AVR_CPU) == NULL) {
-         oc = NULL;
-     }
-     return oc;
-diff --git a/target/cris/cpu.c b/target/cris/cpu.c
-index be4a44c218..675b73ac04 100644
---- a/target/cris/cpu.c
-+++ b/target/cris/cpu.c
-@@ -95,8 +95,7 @@ static ObjectClass *cris_cpu_class_by_name(const char *cpu_model)
-     typename = g_strdup_printf(CRIS_CPU_TYPE_NAME("%s"), cpu_model);
-     oc = object_class_by_name(typename);
-     g_free(typename);
--    if (oc != NULL && (!object_class_dynamic_cast(oc, TYPE_CRIS_CPU) ||
--                       object_class_is_abstract(oc))) {
-+    if (oc != NULL && !object_class_dynamic_cast(oc, TYPE_CRIS_CPU)) {
-         oc = NULL;
-     }
-     return oc;
-diff --git a/target/hexagon/cpu.c b/target/hexagon/cpu.c
-index 1adc11b713..9d1ffc3b4b 100644
---- a/target/hexagon/cpu.c
-+++ b/target/hexagon/cpu.c
-@@ -63,8 +63,7 @@ static ObjectClass *hexagon_cpu_class_by_name(const char *cpu_model)
-     oc = object_class_by_name(typename);
-     g_strfreev(cpuname);
-     g_free(typename);
--    if (!oc || !object_class_dynamic_cast(oc, TYPE_HEXAGON_CPU) ||
--        object_class_is_abstract(oc)) {
-+    if (!oc || !object_class_dynamic_cast(oc, TYPE_HEXAGON_CPU)) {
-         return NULL;
-     }
-     return oc;
-diff --git a/target/loongarch/cpu.c b/target/loongarch/cpu.c
-index ef1bf89dac..06d1b9bb95 100644
---- a/target/loongarch/cpu.c
-+++ b/target/loongarch/cpu.c
-@@ -648,8 +648,7 @@ static ObjectClass *loongarch_cpu_class_by_name(const char *cpu_model)
-         }
-     }
- 
--    if (object_class_dynamic_cast(oc, TYPE_LOONGARCH_CPU)
--        && !object_class_is_abstract(oc)) {
-+    if (object_class_dynamic_cast(oc, TYPE_LOONGARCH_CPU)) {
-         return oc;
-     }
-     return NULL;
-diff --git a/target/m68k/cpu.c b/target/m68k/cpu.c
-index 538d9473c2..11c7e0a790 100644
---- a/target/m68k/cpu.c
-+++ b/target/m68k/cpu.c
-@@ -111,8 +111,7 @@ static ObjectClass *m68k_cpu_class_by_name(const char *cpu_model)
-     typename = g_strdup_printf(M68K_CPU_TYPE_NAME("%s"), cpu_model);
-     oc = object_class_by_name(typename);
-     g_free(typename);
--    if (oc != NULL && (object_class_dynamic_cast(oc, TYPE_M68K_CPU) == NULL ||
--                       object_class_is_abstract(oc))) {
-+    if (oc != NULL && object_class_dynamic_cast(oc, TYPE_M68K_CPU) == NULL) {
-         return NULL;
-     }
-     return oc;
-diff --git a/target/openrisc/cpu.c b/target/openrisc/cpu.c
-index f5a3d5273b..1173260017 100644
---- a/target/openrisc/cpu.c
-+++ b/target/openrisc/cpu.c
-@@ -164,8 +164,7 @@ static ObjectClass *openrisc_cpu_class_by_name(const char *cpu_model)
-     typename = g_strdup_printf(OPENRISC_CPU_TYPE_NAME("%s"), cpu_model);
-     oc = object_class_by_name(typename);
-     g_free(typename);
--    if (oc != NULL && (!object_class_dynamic_cast(oc, TYPE_OPENRISC_CPU) ||
--                       object_class_is_abstract(oc))) {
-+    if (oc != NULL && !object_class_dynamic_cast(oc, TYPE_OPENRISC_CPU)) {
-         return NULL;
-     }
-     return oc;
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index ac4a6c7eec..63624e8b76 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -636,8 +636,7 @@ static ObjectClass *riscv_cpu_class_by_name(const char *cpu_model)
-     oc = object_class_by_name(typename);
-     g_strfreev(cpuname);
-     g_free(typename);
--    if (!oc || !object_class_dynamic_cast(oc, TYPE_RISCV_CPU) ||
--        object_class_is_abstract(oc)) {
-+    if (!oc || !object_class_dynamic_cast(oc, TYPE_RISCV_CPU)) {
-         return NULL;
-     }
-     return oc;
-diff --git a/target/rx/cpu.c b/target/rx/cpu.c
-index 4d0d3a0c8c..9cc9d9d15e 100644
---- a/target/rx/cpu.c
-+++ b/target/rx/cpu.c
-@@ -111,16 +111,12 @@ static ObjectClass *rx_cpu_class_by_name(const char *cpu_model)
-     char *typename;
- 
-     oc = object_class_by_name(cpu_model);
--    if (oc != NULL && object_class_dynamic_cast(oc, TYPE_RX_CPU) != NULL &&
--        !object_class_is_abstract(oc)) {
-+    if (oc != NULL && object_class_dynamic_cast(oc, TYPE_RX_CPU) != NULL) {
-         return oc;
-     }
-     typename = g_strdup_printf(RX_CPU_TYPE_NAME("%s"), cpu_model);
-     oc = object_class_by_name(typename);
-     g_free(typename);
--    if (oc != NULL && object_class_is_abstract(oc)) {
--        oc = NULL;
--    }
- 
-     return oc;
- }
-diff --git a/target/sh4/cpu.c b/target/sh4/cpu.c
-index 788e41fea6..a8ec98b134 100644
---- a/target/sh4/cpu.c
-+++ b/target/sh4/cpu.c
-@@ -152,9 +152,6 @@ static ObjectClass *superh_cpu_class_by_name(const char *cpu_model)
- 
-     typename = g_strdup_printf(SUPERH_CPU_TYPE_NAME("%s"), s);
-     oc = object_class_by_name(typename);
--    if (oc != NULL && object_class_is_abstract(oc)) {
--        oc = NULL;
--    }
- 
- out:
-     g_free(s);
-diff --git a/target/tricore/cpu.c b/target/tricore/cpu.c
-index 5ca666ee12..034e01c189 100644
---- a/target/tricore/cpu.c
-+++ b/target/tricore/cpu.c
-@@ -132,8 +132,7 @@ static ObjectClass *tricore_cpu_class_by_name(const char *cpu_model)
-     typename = g_strdup_printf(TRICORE_CPU_TYPE_NAME("%s"), cpu_model);
-     oc = object_class_by_name(typename);
-     g_free(typename);
--    if (!oc || !object_class_dynamic_cast(oc, TYPE_TRICORE_CPU) ||
--        object_class_is_abstract(oc)) {
-+    if (!oc || !object_class_dynamic_cast(oc, TYPE_TRICORE_CPU)) {
-         return NULL;
-     }
-     return oc;
-diff --git a/target/xtensa/cpu.c b/target/xtensa/cpu.c
-index ea1dae7390..e20fe87bf2 100644
---- a/target/xtensa/cpu.c
-+++ b/target/xtensa/cpu.c
-@@ -141,8 +141,7 @@ static ObjectClass *xtensa_cpu_class_by_name(const char *cpu_model)
-     typename = g_strdup_printf(XTENSA_CPU_TYPE_NAME("%s"), cpu_model);
-     oc = object_class_by_name(typename);
-     g_free(typename);
--    if (oc == NULL || !object_class_dynamic_cast(oc, TYPE_XTENSA_CPU) ||
--        object_class_is_abstract(oc)) {
-+    if (oc == NULL || !object_class_dynamic_cast(oc, TYPE_XTENSA_CPU)) {
-         return NULL;
-     }
-     return oc;
 -- 
 2.41.0
 
