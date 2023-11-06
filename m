@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3200C4167D
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 11:35:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3C12C4167D
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 11:37:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qzxPf-0007iL-2F; Mon, 06 Nov 2023 06:04:59 -0500
+	id 1qzxUt-00030H-Uo; Mon, 06 Nov 2023 06:10:24 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxPc-0007YB-P1
- for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:04:56 -0500
-Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxUN-0002Ag-HR
+ for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:09:51 -0500
+Received: from mail-lj1-x235.google.com ([2a00:1450:4864:20::235])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxPW-0003si-KH
- for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:04:56 -0500
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-32fb95dfe99so1770551f8f.2
- for <qemu-riscv@nongnu.org>; Mon, 06 Nov 2023 03:04:50 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxUL-0005dA-2l
+ for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:09:51 -0500
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2c501bd6ff1so61029181fa.3
+ for <qemu-riscv@nongnu.org>; Mon, 06 Nov 2023 03:09:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699268689; x=1699873489; darn=nongnu.org;
+ d=linaro.org; s=google; t=1699268986; x=1699873786; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5wOkrsA8z2Hole9awlJYsNuk4oh7gPmhIjtphAMJsw8=;
- b=psKUUSqMM8ZoFWJVSptQ91bZmUqMy3eKvQR+vkfVVJASMZ6TX7ck1cwxyW1w1TVK/O
- C5vHfnjkObntjoWCbljkPBfte8X0jRh43QG3Urah8dHg6i1JN21OtMfyCQveCVteLvDh
- qKsejHokN32O7+BVs09cpsjkRS1JDpr2zW8Phi29nBymILPmRSVArK+spZZFqqFvsWAh
- wgWCf6RnzItfbC9oaFMUVfq5PlqarUxBbzEdOHKJE14YVD9XgRVbZ6Msy3/ux60eFFUA
- oTtIbjn85np/qpSAdrsKrJe2i8Qu+oa5mvMeVjP/IbsO4dq7NG/uJmz2qkFJK8QvimnA
- IvEg==
+ bh=41ppFX+7R6F7tVGh9dGaG+2Fh2vMVrU15YTc5GYKvbI=;
+ b=SyOnp2tZpsddipCQlZ8zG9BViO2b4Tm/7JtvFdWmxXAl2yjQ9ncLVdB44wpReCpj3k
+ Or6Lxzjlk5vyVwpPLOMYXDCO/Xct39NCycAtNOTJg5CXI5iRMX3wDK0iKiBBihE7Nj7U
+ nf4qoycCrD26gg1rWFIdJvPwvC+so8rgKGoRgxXfAk8bOyIWi6vbOwbiw5e4z/mVpWSa
+ qCdTnzxkd1JpDYDZegppF9oxKTpGAQp29Gx7Oezbix1zOmn7DVcZEc3jkT5svGkDWh91
+ eBn0PR7t0S6SMsOs3hHUQGm68YYAZVLjly0RYQIrj6xDPJFX78frBWX4WBrBdCdHd8ag
+ WJwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699268689; x=1699873489;
+ d=1e100.net; s=20230601; t=1699268986; x=1699873786;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5wOkrsA8z2Hole9awlJYsNuk4oh7gPmhIjtphAMJsw8=;
- b=u+T/PWalCNGPCGS2O16VgPacvNbBYeH6/eOnylY0cSe6IiEd68YOdeiXKdK8/pNSXr
- T5/S77DW2lh3OXAWusUyro9xvv7pXqO4S9H1I2KrCL8tuZItXmO50ehwCNO1m+srIiI5
- 88Md0+xTjA3r+3A8jucEFL2HrG9FiGm17of0wXC3T9J76ziczO8h2DqYE5wCUGDFeeEf
- 4s1h/S2eiw3cWne0LYrC+ZH2AhZDHhTC/4oQrDHHBoWkAUntvS16LgEZDgzfTmlZ+vA2
- EDv22qU2q3vQzQUOkZHHMPI5Rbet6PoXwEuQGbk0rpHJrAuB1j7KVGhu5JxUxV7TJjev
- 6uHg==
-X-Gm-Message-State: AOJu0YzmsX7xI0FWPg3bXm2E5vodg+oTwVZd1Y7+9jeTxuG4frFQOBcF
- f5tpS1H2Xw4gisJkZAckKg+A8w==
-X-Google-Smtp-Source: AGHT+IECfFst9YsrR74+b52RmZLy9M9KXPMfA+PoNFzuGn/ZVvte53NMfTf9ib4YmQOSoxKMcxtfzw==
-X-Received: by 2002:a05:6000:18a9:b0:32f:9a39:777f with SMTP id
- b9-20020a05600018a900b0032f9a39777fmr15067192wri.62.1699268689108; 
- Mon, 06 Nov 2023 03:04:49 -0800 (PST)
+ bh=41ppFX+7R6F7tVGh9dGaG+2Fh2vMVrU15YTc5GYKvbI=;
+ b=kaK1Pz1KkUK+RnQnOEH3dOuOCLDbZVJ/S2AjPf6jrcAJsypxsmM6fiMW6ilsClwMwj
+ jiQQsxmuqQgYzmGbUvOuo+U91+e9+aSEmDMpyqbieAyLrrKN/ysDfSwERwmBIjvz5XYw
+ DrOGpQVmKHhkLz8GjLlIcJNv/npnpBMR0P3vVNcPdxIvKNuLx5G8nB2I4AjR+SvF7TJK
+ CSfYp+ubTVtITlgmNDlgkFvly6IQgR81zrQvnc9xe1LSb7F+YQtpzAjONvKcH0Mbs5qX
+ zrsbDdZZHbUxAUUpeO0cZO4lXl+qzsi9xJ8oA+WQydahSdVj5exPBccwOULVkd3lqIAg
+ C66Q==
+X-Gm-Message-State: AOJu0Ywn9TeRlB2xr0tfcz6SkF2Fkckw9SmePKDLQKiDme7230r9Uexh
+ oy8SuXZ39rMi8XZ4jwYO/KVcgw==
+X-Google-Smtp-Source: AGHT+IGDxDJzV8LF3nVlPJCOzZ9JzcZJLsFS8T/4TpQBPgzwCOrVVhFIKHp0AK1loMGLRLjuvYWbMg==
+X-Received: by 2002:a05:651c:3dc:b0:2c5:14d3:f295 with SMTP id
+ f28-20020a05651c03dc00b002c514d3f295mr19960731ljp.35.1699268986606; 
+ Mon, 06 Nov 2023 03:09:46 -0800 (PST)
 Received: from m1x-phil.lan (176-131-220-199.abo.bbox.fr. [176.131.220.199])
  by smtp.gmail.com with ESMTPSA id
- z2-20020a5d6402000000b0032d9caeab0fsm9209526wru.77.2023.11.06.03.04.47
+ l4-20020adfa384000000b0032d2489a399sm9245951wrb.49.2023.11.06.03.09.44
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 06 Nov 2023 03:04:48 -0800 (PST)
+ Mon, 06 Nov 2023 03:09:46 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: kvm@vger.kernel.org, qemu-s390x@nongnu.org, qemu-block@nongnu.org,
  qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
+ Titus Rwantare <titusr@google.com>, Hao Wu <wuhaotsh@google.com>,
+ Corey Minyard <cminyard@mvista.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>
-Subject: [PULL 10/60] target/arm: Move internal declarations from 'cpu-qom.h'
- to 'cpu.h'
-Date: Mon,  6 Nov 2023 12:02:42 +0100
-Message-ID: <20231106110336.358-11-philmd@linaro.org>
+ Tyrone Ting <kfting@nuvoton.com>, Thomas Huth <thuth@redhat.com>,
+ Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>
+Subject: [PULL 54/60] tests/qtest: add tests for ADM1266
+Date: Mon,  6 Nov 2023 12:03:26 +0100
+Message-ID: <20231106110336.358-55-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106110336.358-1-philmd@linaro.org>
 References: <20231106110336.358-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::435;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x435.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::235;
+ envelope-from=philmd@linaro.org; helo=mail-lj1-x235.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,118 +98,176 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-These definitions and declarations are only used by
-target/arm/, no need to expose them to generic hw/.
+From: Titus Rwantare <titusr@google.com>
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20231013140116.255-4-philmd@linaro.org>
+The ADM1266 can have string fields written by the driver, so
+it's worth specifically testing.
+
+Reviewed-by: Hao Wu <wuhaotsh@google.com>
+Acked-by: Corey Minyard <cminyard@mvista.com>
+Signed-off-by: Titus Rwantare <titusr@google.com>
+[PMD: Cover file in MAINTAINERS]
+Message-ID: <20231023-staging-pmbus-v3-v4-6-07a8cb7cd20a@google.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Message-Id: <c48c9829-3dfa-79cf-3042-454fda0d00dc@linaro.org>
 ---
- target/arm/cpu-qom.h   | 28 ----------------------------
- target/arm/cpu.h       | 22 ++++++++++++++++++++++
- target/arm/internals.h |  6 ++++++
- 3 files changed, 28 insertions(+), 28 deletions(-)
+ MAINTAINERS                |   1 +
+ tests/qtest/adm1266-test.c | 122 +++++++++++++++++++++++++++++++++++++
+ tests/qtest/meson.build    |   1 +
+ 3 files changed, 124 insertions(+)
+ create mode 100644 tests/qtest/adm1266-test.c
 
-diff --git a/target/arm/cpu-qom.h b/target/arm/cpu-qom.h
-index dfb9d5b827..35c3b0924e 100644
---- a/target/arm/cpu-qom.h
-+++ b/target/arm/cpu-qom.h
-@@ -35,9 +35,6 @@ typedef struct ARMCPUInfo {
-     void (*class_init)(ObjectClass *oc, void *data);
- } ARMCPUInfo;
- 
--void arm_cpu_register(const ARMCPUInfo *info);
--void aarch64_cpu_register(const ARMCPUInfo *info);
--
- /**
-  * ARMCPUClass:
-  * @parent_realize: The parent class' realize handler.
-@@ -63,29 +60,4 @@ struct AArch64CPUClass {
-     ARMCPUClass parent_class;
- };
- 
--void register_cp_regs_for_features(ARMCPU *cpu);
--void init_cpreg_list(ARMCPU *cpu);
--
--/* Callback functions for the generic timer's timers. */
--void arm_gt_ptimer_cb(void *opaque);
--void arm_gt_vtimer_cb(void *opaque);
--void arm_gt_htimer_cb(void *opaque);
--void arm_gt_stimer_cb(void *opaque);
--void arm_gt_hvtimer_cb(void *opaque);
--
--#define ARM_AFF0_SHIFT 0
--#define ARM_AFF0_MASK  (0xFFULL << ARM_AFF0_SHIFT)
--#define ARM_AFF1_SHIFT 8
--#define ARM_AFF1_MASK  (0xFFULL << ARM_AFF1_SHIFT)
--#define ARM_AFF2_SHIFT 16
--#define ARM_AFF2_MASK  (0xFFULL << ARM_AFF2_SHIFT)
--#define ARM_AFF3_SHIFT 32
--#define ARM_AFF3_MASK  (0xFFULL << ARM_AFF3_SHIFT)
--#define ARM_DEFAULT_CPUS_PER_CLUSTER 8
--
--#define ARM32_AFFINITY_MASK (ARM_AFF0_MASK|ARM_AFF1_MASK|ARM_AFF2_MASK)
--#define ARM64_AFFINITY_MASK \
--    (ARM_AFF0_MASK|ARM_AFF1_MASK|ARM_AFF2_MASK|ARM_AFF3_MASK)
--#define ARM64_AFFINITY_INVALID (~ARM64_AFFINITY_MASK)
--
- #endif
-diff --git a/target/arm/cpu.h b/target/arm/cpu.h
-index 2f7ab22169..4a86c8f831 100644
---- a/target/arm/cpu.h
-+++ b/target/arm/cpu.h
-@@ -1116,11 +1116,33 @@ struct ArchCPU {
-     uint64_t gt_cntfrq_hz;
- };
- 
-+/* Callback functions for the generic timer's timers. */
-+void arm_gt_ptimer_cb(void *opaque);
-+void arm_gt_vtimer_cb(void *opaque);
-+void arm_gt_htimer_cb(void *opaque);
-+void arm_gt_stimer_cb(void *opaque);
-+void arm_gt_hvtimer_cb(void *opaque);
+diff --git a/MAINTAINERS b/MAINTAINERS
+index e6a2f57442..c01c2e6ec0 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -862,6 +862,7 @@ F: hw/*/npcm*
+ F: hw/sensor/adm1266.c
+ F: include/hw/*/npcm*
+ F: tests/qtest/npcm*
++F: tests/qtest/adm1266-test.c
+ F: pc-bios/npcm7xx_bootrom.bin
+ F: roms/vbootrom
+ F: docs/system/arm/nuvoton.rst
+diff --git a/tests/qtest/adm1266-test.c b/tests/qtest/adm1266-test.c
+new file mode 100644
+index 0000000000..6c312c499f
+--- /dev/null
++++ b/tests/qtest/adm1266-test.c
+@@ -0,0 +1,122 @@
++/*
++ * Analog Devices ADM1266 Cascadable Super Sequencer with Margin Control and
++ * Fault Recording with PMBus
++ *
++ * Copyright 2022 Google LLC
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
 +
- unsigned int gt_cntfrq_period_ns(ARMCPU *cpu);
- void gt_rme_post_el_change(ARMCPU *cpu, void *opaque);
- 
- void arm_cpu_post_init(Object *obj);
- 
-+#define ARM_AFF0_SHIFT 0
-+#define ARM_AFF0_MASK  (0xFFULL << ARM_AFF0_SHIFT)
-+#define ARM_AFF1_SHIFT 8
-+#define ARM_AFF1_MASK  (0xFFULL << ARM_AFF1_SHIFT)
-+#define ARM_AFF2_SHIFT 16
-+#define ARM_AFF2_MASK  (0xFFULL << ARM_AFF2_SHIFT)
-+#define ARM_AFF3_SHIFT 32
-+#define ARM_AFF3_MASK  (0xFFULL << ARM_AFF3_SHIFT)
-+#define ARM_DEFAULT_CPUS_PER_CLUSTER 8
++#include "qemu/osdep.h"
++#include <math.h>
++#include "hw/i2c/pmbus_device.h"
++#include "libqtest-single.h"
++#include "libqos/qgraph.h"
++#include "libqos/i2c.h"
++#include "qapi/qmp/qdict.h"
++#include "qapi/qmp/qnum.h"
++#include "qemu/bitops.h"
 +
-+#define ARM32_AFFINITY_MASK (ARM_AFF0_MASK | ARM_AFF1_MASK | ARM_AFF2_MASK)
-+#define ARM64_AFFINITY_MASK \
-+    (ARM_AFF0_MASK | ARM_AFF1_MASK | ARM_AFF2_MASK | ARM_AFF3_MASK)
-+#define ARM64_AFFINITY_INVALID (~ARM64_AFFINITY_MASK)
++#define TEST_ID "adm1266-test"
++#define TEST_ADDR (0x12)
 +
- uint64_t arm_cpu_mp_affinity(int idx, uint8_t clustersz);
- 
- #ifndef CONFIG_USER_ONLY
-diff --git a/target/arm/internals.h b/target/arm/internals.h
-index c837506e44..143d57c0fe 100644
---- a/target/arm/internals.h
-+++ b/target/arm/internals.h
-@@ -183,6 +183,12 @@ static inline int r14_bank_number(int mode)
-     return (mode == ARM_CPU_MODE_HYP) ? BANK_USRSYS : bank_number(mode);
- }
- 
-+void arm_cpu_register(const ARMCPUInfo *info);
-+void aarch64_cpu_register(const ARMCPUInfo *info);
++#define ADM1266_BLACKBOX_CONFIG                 0xD3
++#define ADM1266_PDIO_CONFIG                     0xD4
++#define ADM1266_READ_STATE                      0xD9
++#define ADM1266_READ_BLACKBOX                   0xDE
++#define ADM1266_SET_RTC                         0xDF
++#define ADM1266_GPIO_SYNC_CONFIGURATION         0xE1
++#define ADM1266_BLACKBOX_INFORMATION            0xE6
++#define ADM1266_PDIO_STATUS                     0xE9
++#define ADM1266_GPIO_STATUS                     0xEA
 +
-+void register_cp_regs_for_features(ARMCPU *cpu);
-+void init_cpreg_list(ARMCPU *cpu);
++/* Defaults */
++#define ADM1266_OPERATION_DEFAULT               0x80
++#define ADM1266_CAPABILITY_DEFAULT              0xA0
++#define ADM1266_CAPABILITY_NO_PEC               0x20
++#define ADM1266_PMBUS_REVISION_DEFAULT          0x22
++#define ADM1266_MFR_ID_DEFAULT                  "ADI"
++#define ADM1266_MFR_ID_DEFAULT_LEN              32
++#define ADM1266_MFR_MODEL_DEFAULT               "ADM1266-A1"
++#define ADM1266_MFR_MODEL_DEFAULT_LEN           32
++#define ADM1266_MFR_REVISION_DEFAULT            "25"
++#define ADM1266_MFR_REVISION_DEFAULT_LEN        8
++#define TEST_STRING_A                           "a sample"
++#define TEST_STRING_B                           "b sample"
++#define TEST_STRING_C                           "rev c"
 +
- void arm_cpu_register_gdb_regs_for_features(ARMCPU *cpu);
- void arm_translate_init(void);
- 
++static void compare_string(QI2CDevice *i2cdev, uint8_t reg,
++                           const char *test_str)
++{
++    uint8_t len = i2c_get8(i2cdev, reg);
++    char i2c_str[SMBUS_DATA_MAX_LEN] = {0};
++
++    i2c_read_block(i2cdev, reg, (uint8_t *)i2c_str, len);
++    g_assert_cmpstr(i2c_str, ==, test_str);
++}
++
++static void write_and_compare_string(QI2CDevice *i2cdev, uint8_t reg,
++                                     const char *test_str, uint8_t len)
++{
++    char buf[SMBUS_DATA_MAX_LEN] = {0};
++    buf[0] = len;
++    strncpy(buf + 1, test_str, len);
++    i2c_write_block(i2cdev, reg, (uint8_t *)buf, len + 1);
++    compare_string(i2cdev, reg, test_str);
++}
++
++static void test_defaults(void *obj, void *data, QGuestAllocator *alloc)
++{
++    uint16_t i2c_value;
++    QI2CDevice *i2cdev = (QI2CDevice *)obj;
++
++    i2c_value = i2c_get8(i2cdev, PMBUS_OPERATION);
++    g_assert_cmphex(i2c_value, ==, ADM1266_OPERATION_DEFAULT);
++
++    i2c_value = i2c_get8(i2cdev, PMBUS_REVISION);
++    g_assert_cmphex(i2c_value, ==, ADM1266_PMBUS_REVISION_DEFAULT);
++
++    compare_string(i2cdev, PMBUS_MFR_ID, ADM1266_MFR_ID_DEFAULT);
++    compare_string(i2cdev, PMBUS_MFR_MODEL, ADM1266_MFR_MODEL_DEFAULT);
++    compare_string(i2cdev, PMBUS_MFR_REVISION, ADM1266_MFR_REVISION_DEFAULT);
++}
++
++/* test r/w registers */
++static void test_rw_regs(void *obj, void *data, QGuestAllocator *alloc)
++{
++    QI2CDevice *i2cdev = (QI2CDevice *)obj;
++
++    /* empty strings */
++    i2c_set8(i2cdev, PMBUS_MFR_ID, 0);
++    compare_string(i2cdev, PMBUS_MFR_ID, "");
++
++    i2c_set8(i2cdev, PMBUS_MFR_MODEL, 0);
++    compare_string(i2cdev, PMBUS_MFR_MODEL, "");
++
++    i2c_set8(i2cdev, PMBUS_MFR_REVISION, 0);
++    compare_string(i2cdev, PMBUS_MFR_REVISION, "");
++
++    /* test strings */
++    write_and_compare_string(i2cdev, PMBUS_MFR_ID, TEST_STRING_A,
++                             sizeof(TEST_STRING_A));
++    write_and_compare_string(i2cdev, PMBUS_MFR_ID, TEST_STRING_B,
++                             sizeof(TEST_STRING_B));
++    write_and_compare_string(i2cdev, PMBUS_MFR_ID, TEST_STRING_C,
++                             sizeof(TEST_STRING_C));
++}
++
++static void adm1266_register_nodes(void)
++{
++    QOSGraphEdgeOptions opts = {
++        .extra_device_opts = "id=" TEST_ID ",address=0x12"
++    };
++    add_qi2c_address(&opts, &(QI2CAddress) { TEST_ADDR });
++
++    qos_node_create_driver("adm1266", i2c_device_create);
++    qos_node_consumes("adm1266", "i2c-bus", &opts);
++
++    qos_add_test("test_defaults", "adm1266", test_defaults, NULL);
++    qos_add_test("test_rw_regs", "adm1266", test_rw_regs, NULL);
++}
++
++libqos_init(adm1266_register_nodes);
+diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
+index c9945e69b1..47dabf91d0 100644
+--- a/tests/qtest/meson.build
++++ b/tests/qtest/meson.build
+@@ -241,6 +241,7 @@ qos_test_ss = ss.source_set()
+ qos_test_ss.add(
+   'ac97-test.c',
+   'adm1272-test.c',
++  'adm1266-test.c',
+   'ds1338-test.c',
+   'e1000-test.c',
+   'eepro100-test.c',
 -- 
 2.41.0
 
