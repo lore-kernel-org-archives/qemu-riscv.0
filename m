@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0B84C4332F
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 11:09:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6321FC4332F
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 11:10:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qzxTU-0007GK-1y; Mon, 06 Nov 2023 06:08:56 -0500
+	id 1qzxQd-0001GT-43; Mon, 06 Nov 2023 06:06:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxTQ-0006xC-MC
- for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:08:53 -0500
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxQT-000128-DT
+ for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:05:49 -0500
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxTM-0005FG-Lo
- for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:08:52 -0500
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-32ddfb38c02so2776532f8f.3
- for <qemu-riscv@nongnu.org>; Mon, 06 Nov 2023 03:08:47 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxQR-0004KB-0L
+ for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:05:49 -0500
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-32fdc5be26dso56590f8f.2
+ for <qemu-riscv@nongnu.org>; Mon, 06 Nov 2023 03:05:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699268927; x=1699873727; darn=nongnu.org;
+ d=linaro.org; s=google; t=1699268745; x=1699873545; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0yFelocR66jYXowauowrhR0mUeB3U99cidSOqtYw+Cg=;
- b=VMAjPMAS6edt0sctsVploARAsqA0Ru+q2aYkZUJg8afRfE8EWtEuWrDGq26/dzGwFz
- VDUiJtUOoXnBUWlSvPQ87n7RBWM6JiyvZYicIeFVDzkxeC02d+KM6nbmAImbDcPtxW15
- C915m5/KkYkYOyKMnM9k0wrwz9e21qKQ2lUZdIXf56+hS4SUXb8dxatM6ba6ts3HIWbt
- s6Hul5Eg6veHwB0X1UqX3e99NPRxh8W45tTMJS33yp+3NhqUmpe/oY/95Dywhk/FLUct
- Ci/HqLNYfghAa2H3IE8JlfqTGBfesvG++hT/bmF4YyieHKfi0/Jyq5r6/666FbHjxucx
- lAsw==
+ bh=9TEM4y15WADC11ywrbeYDwNqe54vVpabH+nFuXXR9vo=;
+ b=DDcTivuoAhQfj6RSh7yuR+7K2AVdOWgiSRdgQmx7FHUn6x1zjVndhc/DZ5JguQjKSv
+ Zvm0vYst6JDUfzK8vte64voW1t4XR27Y/KQmk/uF8v4+BqztEWRyy1K9IYhKwUwLZafd
+ gp4O97zNJz17/D79eT5mq44TvCzLUtt8WGshgY+1hiJplCe+Z/SjpNBTcPyI/VizUyOI
+ azAlqlnFQ8UQIGf/H5fgEQtRO83SCdZpedowVPMVWeulvnM7XN2CwdmFRKYRz0KfpjKi
+ 9Ox+iOaXwobN6/nD2b6/6LXIvMkVjHeJ4QMtP7lwSxPClbGTKErtHQZXfX3aPjwfJP9Q
+ XxrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699268927; x=1699873727;
+ d=1e100.net; s=20230601; t=1699268745; x=1699873545;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0yFelocR66jYXowauowrhR0mUeB3U99cidSOqtYw+Cg=;
- b=O9nWpUqEO61FFkbml7ajkc4ImwMxY94AccdyzmcJTAY4id5oCBoSzVy+2OsrTu12tf
- fJTpUWyCfw0Ntb5kSugSKaQa5ckb/7Vb8fuw9ktHwWr7rGD8AFwPYt1dhvFwEkmY1crI
- SY5/5gR6/qoIGJ3is77HolnJ47a6igI2ALBXCh1Klilhy1JZzRPHxfYz9E4UwWVQKAmC
- HcIDMuPCST15ojqU1pMW/PSXwO370Em6ZiySDzF77OhOxghY+FQmiZ0Wr8rkOmXle/OZ
- rG2oBsYPNxwfYxmdwo8EOsOUO96F6C7L9dp6oWF/A0BMVENknEF33ZFy8MRe1u4oAvqT
- C4cA==
-X-Gm-Message-State: AOJu0Ywfc7tTrqDuVg9OCyP55YAhwbyjgGlc5SZWrd+YR0G3BH07aLK2
- aNOlvccFu7YuOZdADHZyACgVRA==
-X-Google-Smtp-Source: AGHT+IGgL0F1g9v6gQaqWqalE046qIpD1vXiY6eu81D5A7cfp1tnEC2cOxrnm8DtADlNcX3GEcp3bw==
-X-Received: by 2002:a5d:6c6f:0:b0:32f:8085:7411 with SMTP id
- r15-20020a5d6c6f000000b0032f80857411mr21345810wrz.24.1699268927044; 
- Mon, 06 Nov 2023 03:08:47 -0800 (PST)
+ bh=9TEM4y15WADC11ywrbeYDwNqe54vVpabH+nFuXXR9vo=;
+ b=uVkR45kqvEy/W5It/QC1+go9VJXLqbd+pF5Q3t+i/Uvqp2x3GoapnkZ7AkreC7HmTM
+ Vhz31oR7q0fOibdtofK37SSVTbNPVQhBpeQeOicfz7EVGfiK6RiyQ24M46Z5qWb8G3K5
+ ioeEQJEksYqMbOq4CLvUz80SdvNSmVS96P+fmQwT8DP7iA87Ddh/k2ejARlFP3/m3NHV
+ e6VL1rknTXpFTmghrkt1F13mS23hT9m2j/H4BlMBDqc535+ZUL0tVaGUdSD4AiPchPW3
+ ynCSZFfrHPLTshMAgmS/NP9TmER1qjk3TzCHps7QvCTZA/ZRBbkLQo4BrzkdyxpZYRUW
+ Q3Fg==
+X-Gm-Message-State: AOJu0Yxg8/p7B/wCGnWn+5cO1oYI1Q/pt2O2yZOhzyniOlGmnwYrJk0v
+ /a/dceA0JsAVbgjpTmMPE4i3UQ==
+X-Google-Smtp-Source: AGHT+IGOZ/6VrX2QMc3mxuvaPC+0EbE+IDekhwAIoTOTC+UFQrQ0DCYUI0TONme61tWRfDpdV25NAA==
+X-Received: by 2002:a05:6000:1c0f:b0:32f:ba72:e80b with SMTP id
+ ba15-20020a0560001c0f00b0032fba72e80bmr6504480wrb.54.1699268744791; 
+ Mon, 06 Nov 2023 03:05:44 -0800 (PST)
 Received: from m1x-phil.lan (176-131-220-199.abo.bbox.fr. [176.131.220.199])
  by smtp.gmail.com with ESMTPSA id
- g8-20020a5d4888000000b0032f7cc56509sm1544640wrq.98.2023.11.06.03.08.44
+ c12-20020adffb0c000000b0032fc5f5abafsm6040847wrr.96.2023.11.06.03.05.42
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 06 Nov 2023 03:08:46 -0800 (PST)
+ Mon, 06 Nov 2023 03:05:44 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: kvm@vger.kernel.org, qemu-s390x@nongnu.org, qemu-block@nongnu.org,
  qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
- Zhuocheng Ding <zhuocheng.ding@intel.com>, Zhao Liu <zhao1.liu@intel.com>,
- Babu Moger <babu.moger@amd.com>, Yongwei Ma <yongwei.ma@intel.com>,
- "Michael S . Tsirkin" <mst@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: [PULL 45/60] system/cpus: Fix CPUState.nr_cores' calculation
-Date: Mon,  6 Nov 2023 12:03:17 +0100
-Message-ID: <20231106110336.358-46-philmd@linaro.org>
+ LIU Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
+ Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PULL 18/60] target/riscv: Move TYPE_RISCV_CPU_BASE definition to
+ 'cpu.h'
+Date: Mon,  6 Nov 2023 12:02:50 +0100
+Message-ID: <20231106110336.358-19-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106110336.358-1-philmd@linaro.org>
 References: <20231106110336.358-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x429.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,149 +101,68 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Zhuocheng Ding <zhuocheng.ding@intel.com>
+TYPE_RISCV_CPU_BASE depends on the TARGET_RISCV32/TARGET_RISCV64
+definitions which are target specific. Such target specific
+definition taints "cpu-qom.h".
 
-From CPUState.nr_cores' comment, it represents "number of cores within
-this CPU package".
+Since "cpu-qom.h" must be target agnostic, remove its target
+specific definition uses by moving TYPE_RISCV_CPU_BASE to
+"target/riscv/cpu.h".
 
-After 003f230e37d7 ("machine: Tweak the order of topology members in
-struct CpuTopology"), the meaning of smp.cores changed to "the number of
-cores in one die", but this commit missed to change CPUState.nr_cores'
-calculation, so that CPUState.nr_cores became wrong and now it
-misses to consider numbers of clusters and dies.
+"target/riscv/cpu-qom.h" is now fully target agnostic.
+Add a comment clarifying that in the header.
 
-At present, only i386 is using CPUState.nr_cores.
-
-But as for i386, which supports die level, the uses of CPUState.nr_cores
-are very confusing:
-
-Early uses are based on the meaning of "cores per package" (before die
-is introduced into i386), and later uses are based on "cores per die"
-(after die's introduction).
-
-This difference is due to that commit a94e1428991f ("target/i386: Add
-CPUID.1F generation support for multi-dies PCMachine") misunderstood
-that CPUState.nr_cores means "cores per die" when calculated
-CPUID.1FH.01H:EBX. After that, the changes in i386 all followed this
-wrong understanding.
-
-With the influence of 003f230e37d7 and a94e1428991f, for i386 currently
-the result of CPUState.nr_cores is "cores per die", thus the original
-uses of CPUState.cores based on the meaning of "cores per package" are
-wrong when multiple dies exist:
-1. In cpu_x86_cpuid() of target/i386/cpu.c, CPUID.01H:EBX[bits 23:16] is
-   incorrect because it expects "cpus per package" but now the
-   result is "cpus per die".
-2. In cpu_x86_cpuid() of target/i386/cpu.c, for all leaves of CPUID.04H:
-   EAX[bits 31:26] is incorrect because they expect "cpus per package"
-   but now the result is "cpus per die". The error not only impacts the
-   EAX calculation in cache_info_passthrough case, but also impacts other
-   cases of setting cache topology for Intel CPU according to cpu
-   topology (specifically, the incoming parameter "num_cores" expects
-   "cores per package" in encode_cache_cpuid4()).
-3. In cpu_x86_cpuid() of target/i386/cpu.c, CPUID.0BH.01H:EBX[bits
-   15:00] is incorrect because the EBX of 0BH.01H (core level) expects
-   "cpus per package", which may be different with 1FH.01H (The reason
-   is 1FH can support more levels. For QEMU, 1FH also supports die,
-   1FH.01H:EBX[bits 15:00] expects "cpus per die").
-4. In cpu_x86_cpuid() of target/i386/cpu.c, when CPUID.80000001H is
-   calculated, here "cpus per package" is expected to be checked, but in
-   fact, now it checks "cpus per die". Though "cpus per die" also works
-   for this code logic, this isn't consistent with AMD's APM.
-5. In cpu_x86_cpuid() of target/i386/cpu.c, CPUID.80000008H:ECX expects
-   "cpus per package" but it obtains "cpus per die".
-6. In simulate_rdmsr() of target/i386/hvf/x86_emu.c, in
-   kvm_rdmsr_core_thread_count() of target/i386/kvm/kvm.c, and in
-   helper_rdmsr() of target/i386/tcg/sysemu/misc_helper.c,
-   MSR_CORE_THREAD_COUNT expects "cpus per package" and "cores per
-   package", but in these functions, it obtains "cpus per die" and
-   "cores per die".
-
-On the other hand, these uses are correct now (they are added in/after
-a94e1428991f):
-1. In cpu_x86_cpuid() of target/i386/cpu.c, topo_info.cores_per_die
-   meets the actual meaning of CPUState.nr_cores ("cores per die").
-2. In cpu_x86_cpuid() of target/i386/cpu.c, vcpus_per_socket (in CPUID.
-   04H's calculation) considers number of dies, so it's correct.
-3. In cpu_x86_cpuid() of target/i386/cpu.c, CPUID.1FH.01H:EBX[bits
-   15:00] needs "cpus per die" and it gets the correct result, and
-   CPUID.1FH.02H:EBX[bits 15:00] gets correct "cpus per package".
-
-When CPUState.nr_cores is correctly changed to "cores per package" again
-, the above errors will be fixed without extra work, but the "currently"
-correct cases will go wrong and need special handling to pass correct
-"cpus/cores per die" they want.
-
-Fix CPUState.nr_cores' calculation to fit the original meaning "cores
-per package", as well as changing calculation of topo_info.cores_per_die,
-vcpus_per_socket and CPUID.1FH.
-
-Fixes: a94e1428991f ("target/i386: Add CPUID.1F generation support for multi-dies PCMachine")
-Fixes: 003f230e37d7 ("machine: Tweak the order of topology members in struct CpuTopology")
-Signed-off-by: Zhuocheng Ding <zhuocheng.ding@intel.com>
-Co-developed-by: Zhao Liu <zhao1.liu@intel.com>
-Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
-Tested-by: Babu Moger <babu.moger@amd.com>
-Tested-by: Yongwei Ma <yongwei.ma@intel.com>
-Acked-by: Michael S. Tsirkin <mst@redhat.com>
-Message-ID: <20231024090323.1859210-4-zhao1.liu@linux.intel.com>
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Message-Id: <20231013140116.255-12-philmd@linaro.org>
 ---
- system/cpus.c     | 2 +-
- target/i386/cpu.c | 9 ++++-----
- 2 files changed, 5 insertions(+), 6 deletions(-)
+ target/riscv/cpu-qom.h | 8 +-------
+ target/riscv/cpu.h     | 6 ++++++
+ 2 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/system/cpus.c b/system/cpus.c
-index 952f15868c..a444a747f0 100644
---- a/system/cpus.c
-+++ b/system/cpus.c
-@@ -631,7 +631,7 @@ void qemu_init_vcpu(CPUState *cpu)
- {
-     MachineState *ms = MACHINE(qdev_get_machine());
+diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+index b78169093f..76efb614a6 100644
+--- a/target/riscv/cpu-qom.h
++++ b/target/riscv/cpu-qom.h
+@@ -1,5 +1,5 @@
+ /*
+- * QEMU RISC-V CPU QOM header
++ * QEMU RISC-V CPU QOM header (target agnostic)
+  *
+  * Copyright (c) 2023 Ventana Micro Systems Inc.
+  *
+@@ -44,12 +44,6 @@
+ #define TYPE_RISCV_CPU_VEYRON_V1        RISCV_CPU_TYPE_NAME("veyron-v1")
+ #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
  
--    cpu->nr_cores = ms->smp.cores;
-+    cpu->nr_cores = machine_topo_get_cores_per_socket(ms);
-     cpu->nr_threads =  ms->smp.threads;
-     cpu->stopped = true;
-     cpu->random_seed = qemu_guest_random_seed_thread_part1();
-diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index fc8484cb5e..358d9c0a65 100644
---- a/target/i386/cpu.c
-+++ b/target/i386/cpu.c
-@@ -6019,7 +6019,7 @@ void cpu_x86_cpuid(CPUX86State *env, uint32_t index, uint32_t count,
-     X86CPUTopoInfo topo_info;
+-#if defined(TARGET_RISCV32)
+-# define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE32
+-#elif defined(TARGET_RISCV64)
+-# define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE64
+-#endif
+-
+ typedef struct CPUArchState CPURISCVState;
  
-     topo_info.dies_per_pkg = env->nr_dies;
--    topo_info.cores_per_die = cs->nr_cores;
-+    topo_info.cores_per_die = cs->nr_cores / env->nr_dies;
-     topo_info.threads_per_core = cs->nr_threads;
+ OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 144cc94cce..d832696418 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -34,6 +34,12 @@
  
-     /* Calculate & apply limits for different index ranges */
-@@ -6095,8 +6095,7 @@ void cpu_x86_cpuid(CPUX86State *env, uint32_t index, uint32_t count,
-              */
-             if (*eax & 31) {
-                 int host_vcpus_per_cache = 1 + ((*eax & 0x3FFC000) >> 14);
--                int vcpus_per_socket = env->nr_dies * cs->nr_cores *
--                                       cs->nr_threads;
-+                int vcpus_per_socket = cs->nr_cores * cs->nr_threads;
-                 if (cs->nr_cores > 1) {
-                     *eax &= ~0xFC000000;
-                     *eax |= (pow2ceil(cs->nr_cores) - 1) << 26;
-@@ -6273,12 +6272,12 @@ void cpu_x86_cpuid(CPUX86State *env, uint32_t index, uint32_t count,
-             break;
-         case 1:
-             *eax = apicid_die_offset(&topo_info);
--            *ebx = cs->nr_cores * cs->nr_threads;
-+            *ebx = topo_info.cores_per_die * topo_info.threads_per_core;
-             *ecx |= CPUID_TOPOLOGY_LEVEL_CORE;
-             break;
-         case 2:
-             *eax = apicid_pkg_offset(&topo_info);
--            *ebx = env->nr_dies * cs->nr_cores * cs->nr_threads;
-+            *ebx = cs->nr_cores * cs->nr_threads;
-             *ecx |= CPUID_TOPOLOGY_LEVEL_DIE;
-             break;
-         default:
+ #define CPU_RESOLVING_TYPE TYPE_RISCV_CPU
+ 
++#if defined(TARGET_RISCV32)
++# define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE32
++#elif defined(TARGET_RISCV64)
++# define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE64
++#endif
++
+ #define TCG_GUEST_DEFAULT_MO 0
+ 
+ /*
 -- 
 2.41.0
 
