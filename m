@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADB32C4332F
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 19:57:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7FF1C0018A
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 19:57:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r05gG-0005vF-TO; Mon, 06 Nov 2023 14:54:40 -0500
+	id 1r05gN-00065K-Bf; Mon, 06 Nov 2023 14:54:47 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1r05g3-0005av-KH; Mon, 06 Nov 2023 14:54:27 -0500
+ id 1r05g5-0005dS-SB; Mon, 06 Nov 2023 14:54:29 -0500
 Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1r05fz-00066m-3c; Mon, 06 Nov 2023 14:54:27 -0500
+ id 1r05fy-00066d-RO; Mon, 06 Nov 2023 14:54:29 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=mKejtkSe+nFfQ0aoeWucod44zhEmF2o9bYQegdFzkdU=; b=Rk23+bVe1uIucZnhqpW349FZ+y
- COtS9j6HVINOASM87trkyxdyoXEKEExBGPZCo0r51i8vE9fdkBU4t5bDpimD0Z9xRnYrg+35a3s3n
- VEw62xkWw34eQptQZjbrnUCSIAzgj18Wr6p7Tw1s13pPMK5m8cgESyzOJZ6CAebER98ZMDSzDMTF8
- 74m6OdxEHV2vTDtEsI9QtKc2jf2BGO77UaO9Tg7nOSZp4PWRa99idqW/BK0F9M5ou8UHXCaW4X0DP
- lZyWMgICBLhH1K5EaV8GegsYRSnlz+aymO6vQeWf9ko0nNiWSzNq6EZgQhXxAA730V15hB+c/yvRB
- TRQacxNw==;
+ bh=iPxcn58/AAKxiN1dNS5rnN7sTmuNEYb7/WSBfAbgKcA=; b=fPGcPwmGo3ugBewrtdrZNE+JjU
+ IwQ8TwjJlCXqIs5LwqTUGVc9/cjiKknmyIEDT8XxwIrT5cPra8FZ3SGi4c9tjn5lLxKxRNuNGYGar
+ w1D2e/9a2V+oNL8N50mzzkxfwmNlamjQ2pM+ZtXueIvd0maGoIm3DeYJwwGCs7DJy6tfxTA4jSYem
+ TSbdlbAV5GbWKYb9P4fQ/BSwnX6Bzek/8as7+KqwDyeBmcCscLtX8AQ0pGrbNdzqZA3uf1pIeT9pA
+ pSboYoNmaWKquUAxmRErJYeQ+7GUOc+1Ye5kiDOo0GsdXjJv7ZV+c5NaNobxqMEWsovVXhVwyLih6
+ UIgzKYsA==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1r05fa-007taO-Kr; Mon, 06 Nov 2023 19:53:59 +0000
+ id 1r05fc-007tae-3G; Mon, 06 Nov 2023 19:54:00 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r05fa-001GNn-33; Mon, 06 Nov 2023 19:53:58 +0000
+ Hat Linux)) id 1r05fc-001GOs-10; Mon, 06 Nov 2023 19:54:00 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -85,9 +85,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.3 v2 18/46] hw/sh4/r2d: use pci_init_nic_devices()
-Date: Mon,  6 Nov 2023 19:49:23 +0000
-Message-ID: <20231106195352.301038-19-dwmw2@infradead.org>
+Subject: [PATCH for-8.3 v2 32/46] hw/m68k/mcf5208: use qemu_create_nic_device()
+Date: Mon,  6 Nov 2023 19:49:37 +0000
+Message-ID: <20231106195352.301038-33-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
 References: <20231106195352.301038-1-dwmw2@infradead.org>
@@ -122,42 +122,56 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Previously, the first PCI NIC would be assigned to slot 2 even if the
-user override the model and made it something other than an rtl8139
-which is the default. Everything else would be dynamically assigned.
-
-Now, the first rtl8139 gets slot 2 and everything else is dynamic.
-
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Yoshinori Sato <ysato@users.sourceforge.jp>
 ---
- hw/sh4/r2d.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ hw/m68k/mcf5208.c | 20 ++++++--------------
+ 1 file changed, 6 insertions(+), 14 deletions(-)
 
-diff --git a/hw/sh4/r2d.c b/hw/sh4/r2d.c
-index 4944994e9c..e9f316a6ce 100644
---- a/hw/sh4/r2d.c
-+++ b/hw/sh4/r2d.c
-@@ -240,7 +240,6 @@ static void r2d_init(MachineState *machine)
-     MemoryRegion *sdram = g_new(MemoryRegion, 1);
-     qemu_irq *irq;
-     DriveInfo *dinfo;
--    int i;
+diff --git a/hw/m68k/mcf5208.c b/hw/m68k/mcf5208.c
+index d22d8536db..c1a5bde571 100644
+--- a/hw/m68k/mcf5208.c
++++ b/hw/m68k/mcf5208.c
+@@ -206,16 +206,16 @@ static void mcf5208_sys_init(MemoryRegion *address_space, qemu_irq *pic)
+     }
+ }
+ 
+-static void mcf_fec_init(MemoryRegion *sysmem, NICInfo *nd, hwaddr base,
+-                         qemu_irq *irqs)
++static void mcf_fec_init(MemoryRegion *sysmem, hwaddr base, qemu_irq *irqs)
+ {
      DeviceState *dev;
-     SysBusDevice *busdev;
-     MemoryRegion *address_space_mem = get_system_memory();
-@@ -309,9 +308,8 @@ static void r2d_init(MachineState *machine)
-                           0x555, 0x2aa, 0);
+     SysBusDevice *s;
+     int i;
  
-     /* NIC: rtl8139 on-board, and 2 slots. */
--    for (i = 0; i < nb_nics; i++)
--        pci_nic_init_nofail(&nd_table[i], pci_bus,
--                            mc->default_nic, i == 0 ? "2" : NULL);
-+    pci_init_nic_in_slot(pci_bus, mc->default_nic, NULL, "2");
-+    pci_init_nic_devices(pci_bus, mc->default_nic);
+-    qemu_check_nic_model(nd, TYPE_MCF_FEC_NET);
+-    dev = qdev_new(TYPE_MCF_FEC_NET);
+-    qdev_set_nic_properties(dev, nd);
++    dev = qemu_create_nic_device(TYPE_MCF_FEC_NET, true, NULL);
++    if (!dev) {
++        return;
++    }
  
-     /* USB keyboard */
-     usb_create_simple(usb_bus_find(-1), "usb-kbd");
+     s = SYS_BUS_DEVICE(dev);
+     sysbus_realize_and_unref(s, &error_fatal);
+@@ -267,17 +267,9 @@ static void mcf5208evb_init(MachineState *machine)
+ 
+     mcf5208_sys_init(address_space_mem, pic);
+ 
+-    if (nb_nics > 1) {
+-        error_report("Too many NICs");
+-        exit(1);
+-    }
+-    if (nd_table[0].used) {
+-        mcf_fec_init(address_space_mem, &nd_table[0],
+-                     0xfc030000, pic + 36);
+-    }
++    mcf_fec_init(address_space_mem, 0xfc030000, pic + 36);
+ 
+     g_free(pic);
+-
+     /*  0xfc000000 SCM.  */
+     /*  0xfc004000 XBS.  */
+     /*  0xfc008000 FlexBus CS.  */
 -- 
 2.41.0
 
