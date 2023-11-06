@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97F6CC4332F
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 20:06:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF412C4332F
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 20:07:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r05hP-0000Yx-U2; Mon, 06 Nov 2023 14:55:52 -0500
+	id 1r05gA-0005lH-4m; Mon, 06 Nov 2023 14:54:34 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1r05gq-0006MO-8C; Mon, 06 Nov 2023 14:55:16 -0500
+ id 1r05g1-0005Xk-MS; Mon, 06 Nov 2023 14:54:25 -0500
 Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1r05gj-00065k-Gu; Mon, 06 Nov 2023 14:55:14 -0500
+ id 1r05fy-00065d-9L; Mon, 06 Nov 2023 14:54:25 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=U9HaIssH58wcf3kdA9UwHwQ4m5fDVnktA3V3gnm0GPk=; b=STONSx2GTmWGB8ZjHot2dssO0q
- ZMbNmU2Aj1xfjeFjVptjUHGMDCNfmHEeHiXWrQOeGrnuu4lIAPs47AXJus1Mdu1b/yvv7nkzLbvVK
- ggOliQYM8trHhpghqfnshlFXUBurYa15bwTXwDV3BE3QNhUM1RRXjsaCYdWvCD577kfCxiuN2aO+f
- 7v+SVNTdzneSbb6q+s9U7CQeQGjFztXIms64KzOd+TeG2LGgs++svtU2rYaqkr8euM4niKQ5dRvxP
- LQ5G8dnY53KfUZOUICk7e70f4dliDqjMJTJK4taT0nTYbxVOhd16CEO1gqhuq4IYh+zPQX7anYyVG
- WQAnuMWQ==;
+ bh=9F94s85N161zpHncvzHPgHeV1YSdfSxyasD9KuzjSZQ=; b=bgZYgx5/6fVBDmshDfQfGpcoJa
+ hEcGronT1Mrlm/GMtUt25KwxrxYJq5G9pAKwgZVawUSKTyL/pPZGyahE6hBfZ8QQN7r8xXvu2Sr5c
+ U0CtRd6bWjvZ32F0V9KEuxtlOUxQzw2vkpRjJaIyJUEEdpZ4AvNgaS+5aEPqljEsOj4WNuuZSXgKn
+ g17T87x+Cq1NKfAAT6rwTs3/6JnKwG51uBAN1i9bUNBIO4ZyV4BrnS28Ah+9zvJkb2KltpBfxMke/
+ mI4hd3/a9SrEmVGQK+xZjpZUFZJ7DmCM9Bk4p0Xj4I4wxYtIPNQuGDzuDS8usmtXrsph43j8pPj+V
+ I7YADE3g==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1r05fa-00AkFb-1y; Mon, 06 Nov 2023 19:53:59 +0000
+ id 1r05fb-00AkFi-2f; Mon, 06 Nov 2023 19:54:00 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r05fZ-001GMo-1x; Mon, 06 Nov 2023 19:53:57 +0000
+ Hat Linux)) id 1r05fa-001GNZ-1y; Mon, 06 Nov 2023 19:53:58 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -85,10 +85,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.3 v2 04/46] hw/pci: add pci_init_nic_devices(),
- pci_init_nic_in_slot()
-Date: Mon,  6 Nov 2023 19:49:09 +0000
-Message-ID: <20231106195352.301038-5-dwmw2@infradead.org>
+Subject: [PATCH for-8.3 v2 15/46] hw/ppc/prep: use pci_init_nic_devices()
+Date: Mon,  6 Nov 2023 19:49:20 +0000
+Message-ID: <20231106195352.301038-16-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
 References: <20231106195352.301038-1-dwmw2@infradead.org>
@@ -123,91 +122,46 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-The loop over nd_table[] to add PCI NICs is repeated in quite a few
-places. Add a helper function to do it.
+Previously, the first PCI NIC would be placed in PCI slot 3 and the rest
+would be dynamically assigned. Even if the user overrode the default NIC
+type and made it something other than PCNet.
 
-Some platforms also try to instantiate a specific model in a specific
-slot, to match the real hardware. Add pci_init_nic_in_slot() for that
-purpose.
+Now, the first PCNet NIC (that is, anything not explicitly specified
+to be anything different) will go to slot 3 even if it isn't the first
+NIC specified on the commnd line. And anything else will be dynamically
+assigned.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- hw/pci/pci.c         | 45 ++++++++++++++++++++++++++++++++++++++++++++
- include/hw/pci/pci.h |  4 +++-
- 2 files changed, 48 insertions(+), 1 deletion(-)
+ hw/ppc/prep.c | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
 
-diff --git a/hw/pci/pci.c b/hw/pci/pci.c
-index 885c04b6f5..5703266c0b 100644
---- a/hw/pci/pci.c
-+++ b/hw/pci/pci.c
-@@ -1925,6 +1925,51 @@ PCIDevice *pci_nic_init_nofail(NICInfo *nd, PCIBus *rootbus,
-     return pci_dev;
- }
+diff --git a/hw/ppc/prep.c b/hw/ppc/prep.c
+index 137276bcb9..1a6cd05c61 100644
+--- a/hw/ppc/prep.c
++++ b/hw/ppc/prep.c
+@@ -241,7 +241,6 @@ static void ibm_40p_init(MachineState *machine)
+     ISADevice *isa_dev;
+     ISABus *isa_bus;
+     void *fw_cfg;
+-    int i;
+     uint32_t kernel_base = 0, initrd_base = 0;
+     long kernel_size = 0, initrd_size = 0;
+     char boot_device;
+@@ -336,10 +335,9 @@ static void ibm_40p_init(MachineState *machine)
+         /* XXX: s3-trio at PCI_DEVFN(2, 0) */
+         pci_vga_init(pci_bus);
  
-+void pci_init_nic_devices(PCIBus *bus, const char *default_model)
-+{
-+    qemu_create_nic_bus_devices(&bus->qbus, TYPE_PCI_DEVICE, default_model,
-+                                "virtio", "virtio-net-pci");
-+}
-+
-+bool pci_init_nic_in_slot(PCIBus *rootbus, const char *model,
-+                          const char *alias, const char *devaddr)
-+{
-+    NICInfo *nd = qemu_find_nic_info(model, true, alias);
-+    int dom, busnr, devfn;
-+    PCIDevice *pci_dev;
-+    unsigned slot;
-+    PCIBus *bus;
-+
-+    if (!nd) {
-+        return false;
-+    }
-+
-+    if (!devaddr || pci_parse_devaddr(devaddr, &dom, &busnr, &slot, NULL) < 0) {
-+        error_report("Invalid PCI device address %s for device %s",
-+                     devaddr, model);
-+        exit(1);
-+    }
-+
-+    if (dom != 0) {
-+        error_report("No support for non-zero PCI domains");
-+        exit(1);
-+    }
-+
-+    devfn = PCI_DEVFN(slot, 0);
-+
-+    bus = pci_find_bus_nr(rootbus, busnr);
-+    if (!bus) {
-+        error_report("Invalid PCI device address %s for device %s",
-+                     devaddr, model);
-+        exit(1);
-+    }
-+
-+    pci_dev = pci_new(devfn, model);
-+    qdev_set_nic_properties(&pci_dev->qdev, nd);
-+    pci_realize_and_unref(pci_dev, bus, &error_fatal);
-+    return true;
-+}
-+
- PCIDevice *pci_vga_init(PCIBus *bus)
- {
-     vga_interface_created = true;
-diff --git a/include/hw/pci/pci.h b/include/hw/pci/pci.h
-index ea5aff118b..684d49bdcd 100644
---- a/include/hw/pci/pci.h
-+++ b/include/hw/pci/pci.h
-@@ -317,7 +317,9 @@ void pci_device_reset(PCIDevice *dev);
- PCIDevice *pci_nic_init_nofail(NICInfo *nd, PCIBus *rootbus,
-                                const char *default_model,
-                                const char *default_devaddr);
--
-+void pci_init_nic_devices(PCIBus *bus, const char *default_model);
-+bool pci_init_nic_in_slot(PCIBus *rootbus, const char *default_model,
-+                          const char *alias, const char *devaddr);
- PCIDevice *pci_vga_init(PCIBus *bus);
+-        for (i = 0; i < nb_nics; i++) {
+-            pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic,
+-                                i == 0 ? "3" : NULL);
+-        }
++        /* First PCNET device at PCI_DEVFN(3, 0) */
++        pci_init_nic_in_slot(pci_bus, mc->default_nic, NULL, "3");
++        pci_init_nic_devices(pci_bus, mc->default_nic);
+     }
  
- static inline PCIBus *pci_get_bus(const PCIDevice *dev)
+     /* Prepare firmware configuration for OpenBIOS */
 -- 
 2.41.0
 
