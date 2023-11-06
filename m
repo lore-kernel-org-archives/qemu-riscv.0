@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FA2BC4167B
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 11:10:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FF0FC4332F
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 11:10:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qzxSy-0005w4-66; Mon, 06 Nov 2023 06:08:24 -0500
+	id 1qzxPM-0006mb-CY; Mon, 06 Nov 2023 06:04:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxSu-0005mO-Jx
- for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:08:21 -0500
-Received: from mail-lf1-x130.google.com ([2a00:1450:4864:20::130])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxPE-0006Wa-QN
+ for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:04:32 -0500
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxSi-00052n-41
- for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:08:20 -0500
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-5079f3f3d7aso5730639e87.1
- for <qemu-riscv@nongnu.org>; Mon, 06 Nov 2023 03:08:07 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxPB-0003n7-3u
+ for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:04:32 -0500
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-40790b0a224so32901025e9.0
+ for <qemu-riscv@nongnu.org>; Mon, 06 Nov 2023 03:04:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699268886; x=1699873686; darn=nongnu.org;
+ d=linaro.org; s=google; t=1699268667; x=1699873467; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HIk2D2Zy+mW9KoNQEGhLCqqc6EXwTlAoiLD308KY354=;
- b=RgyfapfMcytcQ+YEAkeayqktvYkCBkNiDgGvVvQv0k3a6qSsIhXak2imbPArQIxSTU
- iPYEPdFHcDKIopb8dTtranHH21Bt0OjFAycIYZC6vgTuSF13aahax4as7/n8Q8KWP54N
- jppwKu/wm+HlsBXpFM6UhLkZZ9p9Ppj42CVub/qh7jgAausQj5KeiHuShRyqXLtPMBiG
- lAcgjYTNdrYZChW5CN7QLNu5KDaGxX+jJ2v5yETEet4zYS7K3uQcEfXh2/WvuxSBZD5h
- /h1sslupvJTwXaTWGcXMu50RdTaSD8w7SruINj0ZXXDJJ43jIPFU30iVLQHeRC4OfMMh
- NKBw==
+ bh=599/Bj9mord/rWtxWCsNHAuRNbZVNvVu72yn9cQly6g=;
+ b=Yxgy1zQGP+Iyqy4ROUU1gtZZj/ITd4ikqfV+CeUXLztYdTcbVzE8Xu5D8BEJYXX0ce
+ e5AunMIoSvXr/bXwcQklmj4zO6DV09oUeLNUONgBDGne8vciEdyUAh/jDCPhYRGE8hx3
+ sHd+eICPeJyVa8zkAVecr0kmjFx+Ccn0n1wb/CCUJ9oJu9kIzADrHSuHhdw8vd8ZD1d1
+ ur8KpY8ig5uVRs6idcm6ilzo7JAobdbkTeB6xl3F55zeAqPRJH3qbHGe/X8ngfkZ+ZjD
+ 3OPzDOsDMZKj7g8fmOayBVOc7M2em+xgu6rqFs542gBd7lblBobpFACwCaDKiWEOZSXm
+ H5xg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699268886; x=1699873686;
+ d=1e100.net; s=20230601; t=1699268667; x=1699873467;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HIk2D2Zy+mW9KoNQEGhLCqqc6EXwTlAoiLD308KY354=;
- b=g3Q+1tO5noJon19FgsVs2MfOW2nSJkSHZWSaYwnj/2VC/V/dPqQQ0ph6xnikEwoRp7
- RAm3XdspVILCM/wGoJsejUqmqme4zyfRu9h2uwbCIaq5UqRSdbI7W0sQVy7Wmlocs+O9
- IgS07UsIHJY0QQeWGYJeBrdlN1FsmgapZ/e6M2U881CqNLiS5sw51YXRu73OdI58bGAM
- Oq/KvC/e9bOA4SV6qztwoJI50+SBYVf6pjQtdYfQsmPK6YI42vfnAGs5lrxA7sIpmJ1j
- nKnHj+LiPgxr7hGmBUGoxBycjohwngl7JUpoY2IlN6eDCqsbYvyElcKK8T+4MYdYvOWS
- n7TA==
-X-Gm-Message-State: AOJu0Yw5Thj54iw5MLjvi8srI8SVJEw36+MgXsm8vsZhP8LiXdc1aJcm
- XeF/09lxnhaqzyVFI+un84XRZQ==
-X-Google-Smtp-Source: AGHT+IHZzmpQpLISMOVN4u8fENAFmlJt/0w7I/6I45Xn+9+eLmWD1LIrIZlJ/g4SCbq5k1SLfQZs3Q==
-X-Received: by 2002:a2e:7c15:0:b0:2c5:5926:de52 with SMTP id
- x21-20020a2e7c15000000b002c55926de52mr22771440ljc.53.1699268886360; 
- Mon, 06 Nov 2023 03:08:06 -0800 (PST)
+ bh=599/Bj9mord/rWtxWCsNHAuRNbZVNvVu72yn9cQly6g=;
+ b=U17Mtncb7bPXlaET0Em6kEWZNu3euTDSKunMw0PfpNj0iuVf8jUMwOocTV2xJFJYz7
+ XH9OWdGU+PUEh0P6EZTWDMAkW9YA2N/0iCdlW5Pa4eWOuZssd8MUmYCkzbo7hfUdcPY9
+ F6ACrPHf+cbexwfrbd70bUsrl7kVYYKWM/MKO4jnnNt9qKD4WVr3J8pLRvVaIgvvRMwd
+ vRzYend1tqBP3aHN6n+VZzZ/hwLLBlmQf7mZpWV2N70XPVfr2MOxPTfHXjM4kTc7xntw
+ RH6tjaFvMVroalHmLW6TXGm+sCH3JNMYC+Pk5ReHZnFccv74Ukg5FvhR5fcdrv3uZc5k
+ YDUg==
+X-Gm-Message-State: AOJu0Yxc6DpZ15y0LAxPaWJFUfi74oxi+cDJfJ1a5I9WHRM8TX824n0P
+ szVyHxviA2YiT4X454qop8OoeA==
+X-Google-Smtp-Source: AGHT+IEzp/mPbFUy8SkmetAAoTy+TS+vDzZzjoAJkoCTBAmaD/KNwWEWoOROTPCc4oN0cNW9yDLu/w==
+X-Received: by 2002:a05:600c:488a:b0:408:3c8f:afd9 with SMTP id
+ j10-20020a05600c488a00b004083c8fafd9mr22199866wmp.3.1699268667013; 
+ Mon, 06 Nov 2023 03:04:27 -0800 (PST)
 Received: from m1x-phil.lan (176-131-220-199.abo.bbox.fr. [176.131.220.199])
  by smtp.gmail.com with ESMTPSA id
- a1-20020a05600c348100b003fe1fe56202sm12104665wmq.33.2023.11.06.03.08.04
+ s7-20020a05600c45c700b003fc16ee2864sm11816561wmo.48.2023.11.06.03.04.25
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 06 Nov 2023 03:08:06 -0800 (PST)
+ Mon, 06 Nov 2023 03:04:26 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: kvm@vger.kernel.org, qemu-s390x@nongnu.org, qemu-block@nongnu.org,
  qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Anton Johansson <anjo@rev.ng>,
  Richard Henderson <richard.henderson@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>
-Subject: [PULL 39/60] exec/cpu: Have cpu_exec_realize() return a boolean
-Date: Mon,  6 Nov 2023 12:03:11 +0100
-Message-ID: <20231106110336.358-40-philmd@linaro.org>
+ Paolo Bonzini <pbonzini@redhat.com>
+Subject: [PULL 07/60] accel/tcg: Factor tcg_cpu_reset_hold() out
+Date: Mon,  6 Nov 2023 12:02:39 +0100
+Message-ID: <20231106110336.358-8-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106110336.358-1-philmd@linaro.org>
 References: <20231106110336.358-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::130;
- envelope-from=philmd@linaro.org; helo=mail-lf1-x130.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,60 +97,116 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Following the example documented since commit e3fe3988d7 ("error:
-Document Error API usage rules"), have cpu_exec_realizefn()
-return a boolean indicating whether an error is set or not.
+Factor the TCG specific code from cpu_common_reset_hold() to
+tcg_cpu_reset_hold() within tcg-accel-ops.c. Since this file
+is sysemu specific, we can inline tcg_flush_softmmu_tlb(),
+removing its declaration in "exec/cpu-common.h".
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Anton Johansson <anjo@rev.ng>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20230918160257.30127-22-philmd@linaro.org>
+Message-Id: <20230918104153.24433-4-philmd@linaro.org>
 ---
- include/hw/core/cpu.h | 2 +-
- cpu-target.c          | 6 ++++--
- 2 files changed, 5 insertions(+), 3 deletions(-)
+ include/exec/cpu-common.h | 2 --
+ accel/stubs/tcg-stub.c    | 4 ----
+ accel/tcg/tcg-accel-ops.c | 8 ++++++++
+ accel/tcg/translate-all.c | 8 --------
+ hw/core/cpu-common.c      | 5 -----
+ 5 files changed, 8 insertions(+), 19 deletions(-)
 
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 5d6f8dca43..eb943efb8f 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -1152,7 +1152,7 @@ G_NORETURN void cpu_abort(CPUState *cpu, const char *fmt, ...)
- /* $(top_srcdir)/cpu.c */
- void cpu_class_init_props(DeviceClass *dc);
- void cpu_exec_initfn(CPUState *cpu);
--void cpu_exec_realizefn(CPUState *cpu, Error **errp);
-+bool cpu_exec_realizefn(CPUState *cpu, Error **errp);
- void cpu_exec_unrealizefn(CPUState *cpu);
- void cpu_exec_reset_hold(CPUState *cpu);
+diff --git a/include/exec/cpu-common.h b/include/exec/cpu-common.h
+index f700071d12..41115d8919 100644
+--- a/include/exec/cpu-common.h
++++ b/include/exec/cpu-common.h
+@@ -45,8 +45,6 @@ void cpu_list_lock(void);
+ void cpu_list_unlock(void);
+ unsigned int cpu_list_generation_id_get(void);
  
-diff --git a/cpu-target.c b/cpu-target.c
-index 79363ae370..f3e1ad8bcd 100644
---- a/cpu-target.c
-+++ b/cpu-target.c
-@@ -131,13 +131,13 @@ const VMStateDescription vmstate_cpu_common = {
- };
- #endif
+-void tcg_flush_softmmu_tlb(CPUState *cs);
+-
+ void tcg_iommu_init_notifier_list(CPUState *cpu);
+ void tcg_iommu_free_notifier_list(CPUState *cpu);
  
--void cpu_exec_realizefn(CPUState *cpu, Error **errp)
-+bool cpu_exec_realizefn(CPUState *cpu, Error **errp)
+diff --git a/accel/stubs/tcg-stub.c b/accel/stubs/tcg-stub.c
+index a9e7a2d5b4..8a496a2a6f 100644
+--- a/accel/stubs/tcg-stub.c
++++ b/accel/stubs/tcg-stub.c
+@@ -22,10 +22,6 @@ void tlb_set_dirty(CPUState *cpu, vaddr vaddr)
  {
-     /* cache the cpu class for the hotpath */
-     cpu->cc = CPU_GET_CLASS(cpu);
- 
-     if (!accel_cpu_common_realize(cpu, errp)) {
--        return;
-+        return false;
-     }
- 
-     /* Wait until cpu initialization complete before exposing cpu. */
-@@ -159,6 +159,8 @@ void cpu_exec_realizefn(CPUState *cpu, Error **errp)
-         vmstate_register(NULL, cpu->cpu_index, cpu->cc->sysemu_ops->legacy_vmsd, cpu);
-     }
- #endif /* CONFIG_USER_ONLY */
-+
-+    return true;
  }
  
- void cpu_exec_unrealizefn(CPUState *cpu)
+-void tcg_flush_jmp_cache(CPUState *cpu)
+-{
+-}
+-
+ int probe_access_flags(CPUArchState *env, vaddr addr, int size,
+                        MMUAccessType access_type, int mmu_idx,
+                        bool nonfault, void **phost, uintptr_t retaddr)
+diff --git a/accel/tcg/tcg-accel-ops.c b/accel/tcg/tcg-accel-ops.c
+index 7ddb05c332..1b57290682 100644
+--- a/accel/tcg/tcg-accel-ops.c
++++ b/accel/tcg/tcg-accel-ops.c
+@@ -78,6 +78,13 @@ int tcg_cpus_exec(CPUState *cpu)
+     return ret;
+ }
+ 
++static void tcg_cpu_reset_hold(CPUState *cpu)
++{
++    tcg_flush_jmp_cache(cpu);
++
++    tlb_flush(cpu);
++}
++
+ /* mask must never be zero, except for A20 change call */
+ void tcg_handle_interrupt(CPUState *cpu, int mask)
+ {
+@@ -206,6 +213,7 @@ static void tcg_accel_ops_init(AccelOpsClass *ops)
+         }
+     }
+ 
++    ops->cpu_reset_hold = tcg_cpu_reset_hold;
+     ops->supports_guest_debug = tcg_supports_guest_debug;
+     ops->insert_breakpoint = tcg_insert_breakpoint;
+     ops->remove_breakpoint = tcg_remove_breakpoint;
+diff --git a/accel/tcg/translate-all.c b/accel/tcg/translate-all.c
+index 8cb6ad3511..27e8152f0a 100644
+--- a/accel/tcg/translate-all.c
++++ b/accel/tcg/translate-all.c
+@@ -800,11 +800,3 @@ void tcg_flush_jmp_cache(CPUState *cpu)
+         qatomic_set(&jc->array[i].tb, NULL);
+     }
+ }
+-
+-/* This is a wrapper for common code that can not use CONFIG_SOFTMMU */
+-void tcg_flush_softmmu_tlb(CPUState *cs)
+-{
+-#ifdef CONFIG_SOFTMMU
+-    tlb_flush(cs);
+-#endif
+-}
+diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
+index 7d266c36ac..baa6d28b64 100644
+--- a/hw/core/cpu-common.c
++++ b/hw/core/cpu-common.c
+@@ -27,7 +27,6 @@
+ #include "qemu/main-loop.h"
+ #include "exec/log.h"
+ #include "exec/cpu-common.h"
+-#include "exec/tb-flush.h"
+ #include "qemu/error-report.h"
+ #include "qemu/qemu-print.h"
+ #include "sysemu/tcg.h"
+@@ -138,10 +137,6 @@ static void cpu_common_reset_hold(Object *obj)
+     cpu->cflags_next_tb = -1;
+ 
+     cpu_exec_reset_hold(cpu);
+-    if (tcg_enabled()) {
+-        tcg_flush_jmp_cache(cpu);
+-        tcg_flush_softmmu_tlb(cpu);
+-    }
+ }
+ 
+ static bool cpu_common_has_work(CPUState *cs)
 -- 
 2.41.0
 
