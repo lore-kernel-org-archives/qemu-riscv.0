@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C2DAC4332F
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 20:09:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAF0EC4167B
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 20:09:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r05iZ-0003Me-3s; Mon, 06 Nov 2023 14:57:03 -0500
+	id 1r05hM-00007j-Gv; Mon, 06 Nov 2023 14:55:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1r05gy-0006OL-3F; Mon, 06 Nov 2023 14:55:25 -0500
+ id 1r05gy-0006OM-3Q; Mon, 06 Nov 2023 14:55:25 -0500
 Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1r05gn-00066l-VO; Mon, 06 Nov 2023 14:55:21 -0500
+ id 1r05gn-00066j-IS; Mon, 06 Nov 2023 14:55:20 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=54+9O4MqgKMWNsVDV15P7KT3O3JFiZ0ZmbsNt5OSIo4=; b=uNNnb4D/Jn1NaKTOnlwcXQoBXr
- a7fpJfDZDugOPHlTeDJm5R48ox/KWkG8Kq4VkoW7MrTotDiXX/DNpR8Lx0OIXTa/wlniktk7vXmfZ
- dHj8fjR/z8Yert6javbL8WnB15z9bB7adrZkTchjktVEBMCdmcasEitmq3xKy5xZoKnog4LvVBdId
- gVI2G1ARrSNVDtX1PsfPalbOtKhwBGGDEjoobpG7heQ4S3MtgTVZP7KUMi9uX7qnJBCY4WT97Q0hh
- U8N4avC/qXHuGQuPqJSQ2fsHmTqLfcJSfOEFwq8K+TIzHHPFbtH22DRt5MHxbLdfAwAEyyUd639pH
- CmTmGuNw==;
+ bh=vZowVkCjMFbp95UJRr5lu+JPxdNb9doXjcXZRlmZdv8=; b=Y/rkI5F0NcvCFoLbktSjr9lD+p
+ JghtzoFzu1jDfHij1/EbcuKd66GBWDMTanBgalqLdoTiZOA/Vs2zIKMhAwjpEWhC+ogI3P5/QnQCW
+ ee3GrAB/elUOQ5ZswbLXnTB04HdYuoyZ0IZ7KB3LfvtHV92kmes+GTH4SFL+BHuFQiu3iKxL3hk09
+ ao5Od0E02mZsu2PxliLHdwYKYf7QvlXUrSJLbvKvuGmlm4k6bho2IPdG20Ysp2YAFS9TM3WOSH94j
+ 0W9WhgZJl96jwmHF+1r7uuYiuvxpYSbQ3efgbg4ED59wjEdGIKiLh2g8faL+E72DdJnyM+9+xJoXV
+ 9yAC6hug==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1r05fZ-007taE-M3; Mon, 06 Nov 2023 19:53:58 +0000
+ id 1r05fd-007tb3-6F; Mon, 06 Nov 2023 19:54:02 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r05fZ-001GN4-37; Mon, 06 Nov 2023 19:53:57 +0000
+ Hat Linux)) id 1r05fd-001GPu-1Y; Mon, 06 Nov 2023 19:54:01 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -85,9 +85,10 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.3 v2 08/46] hw/arm/sbsa-ref: use pci_init_nic_devices()
-Date: Mon,  6 Nov 2023 19:49:13 +0000
-Message-ID: <20231106195352.301038-9-dwmw2@infradead.org>
+Subject: [PATCH for-8.3 v2 45/46] net: remove qemu_show_nic_models(),
+ qemu_find_nic_model()
+Date: Mon,  6 Nov 2023 19:49:50 +0000
+Message-ID: <20231106195352.301038-46-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
 References: <20231106195352.301038-1-dwmw2@infradead.org>
@@ -122,27 +123,90 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Leif Lindholm <quic_llindhol@quicinc.com>
----
- hw/arm/sbsa-ref.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+These old functions can be removed now too. Let net_param_nic() print
+the full set of network devices directly, and also make it note that a
+list more specific to this platform/config will be available by using
+'-nic model=help' instead.
 
-diff --git a/hw/arm/sbsa-ref.c b/hw/arm/sbsa-ref.c
-index bce44690e5..7ad8e1fcea 100644
---- a/hw/arm/sbsa-ref.c
-+++ b/hw/arm/sbsa-ref.c
-@@ -689,9 +689,7 @@ static void create_pcie(SBSAMachineState *sms)
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+---
+ include/net/net.h |  3 ---
+ net/net.c         | 39 ++++++---------------------------------
+ 2 files changed, 6 insertions(+), 36 deletions(-)
+
+diff --git a/include/net/net.h b/include/net/net.h
+index 1512650190..290e604f03 100644
+--- a/include/net/net.h
++++ b/include/net/net.h
+@@ -201,9 +201,6 @@ void qemu_set_vnet_hdr_len(NetClientState *nc, int len);
+ int qemu_set_vnet_le(NetClientState *nc, bool is_le);
+ int qemu_set_vnet_be(NetClientState *nc, bool is_be);
+ void qemu_macaddr_default_if_unset(MACAddr *macaddr);
+-int qemu_show_nic_models(const char *arg, const char *const *models);
+-int qemu_find_nic_model(NICInfo *nd, const char * const *models,
+-                        const char *default_model);
+ NICInfo *qemu_find_nic_info(const char *typename, bool match_default,
+                             const char *alias);
+ bool qemu_configure_nic_device(DeviceState *dev, bool match_default,
+diff --git a/net/net.c b/net/net.c
+index ffc722069f..a3532a71a5 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -962,38 +962,6 @@ GPtrArray *qemu_get_nic_models(const char *device_type)
+     return nic_models;
+ }
  
-     pci = PCI_HOST_BRIDGE(dev);
-     if (pci->bus) {
--        for (i = 0; i < nb_nics; i++) {
--            pci_nic_init_nofail(&nd_table[i], pci->bus, mc->default_nic, NULL);
--        }
-+        pci_init_nic_devices(pci->bus, mc->default_nic);
-     }
- 
-     pci_create_simple(pci->bus, -1, "bochs-display");
+-int qemu_show_nic_models(const char *arg, const char *const *models)
+-{
+-    int i;
+-
+-    if (!arg || !is_help_option(arg)) {
+-        return 0;
+-    }
+-
+-    printf("Available NIC models:\n");
+-    for (i = 0 ; models[i]; i++) {
+-        printf("%s\n", models[i]);
+-    }
+-    return 1;
+-}
+-
+-int qemu_find_nic_model(NICInfo *nd, const char * const *models,
+-                        const char *default_model)
+-{
+-    int i;
+-
+-    if (!nd->model)
+-        nd->model = g_strdup(default_model);
+-
+-    for (i = 0 ; models[i]; i++) {
+-        if (strcmp(nd->model, models[i]) == 0)
+-            return i;
+-    }
+-
+-    error_report("Unsupported NIC model: %s", nd->model);
+-    return -1;
+-}
+-
+ static int net_init_nic(const Netdev *netdev, const char *name,
+                         NetClientState *peer, Error **errp)
+ {
+@@ -1776,9 +1744,14 @@ static int net_param_nic(void *dummy, QemuOpts *opts, Error **errp)
+         }
+         if (is_help_option(type)) {
+             GPtrArray *nic_models = qemu_get_nic_models(TYPE_DEVICE);
++            int i;
+             show_netdevs();
+             printf("\n");
+-            qemu_show_nic_models(type, (const char **)nic_models->pdata);
++            printf("Supported NIC models "
++                   "(use -nic model=help for a filtered list):\n");
++            for (i = 0 ; nic_models->pdata[i]; i++) {
++                printf("%s\n", (char *)nic_models->pdata[i]);
++            }
+             g_ptr_array_free(nic_models, true);
+             exit(0);
+         }
 -- 
 2.41.0
 
