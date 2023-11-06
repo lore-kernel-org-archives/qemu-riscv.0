@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92865C4167B
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 20:00:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43843C4167D
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 20:00:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r05gQ-00068G-Tr; Mon, 06 Nov 2023 14:54:51 -0500
+	id 1r05hg-0001eG-HK; Mon, 06 Nov 2023 14:56:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1r05g7-0005hS-IQ; Mon, 06 Nov 2023 14:54:31 -0500
-Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
+ <BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1r05gy-0006ON-32; Mon, 06 Nov 2023 14:55:25 -0500
+Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1r05g0-00066o-22; Mon, 06 Nov 2023 14:54:31 -0500
+ <BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1r05gj-00065h-RV; Mon, 06 Nov 2023 14:55:21 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
- Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
- To:From:Reply-To:Content-ID:Content-Description;
- bh=WZmVL1uI/KotgdQhXO/qrZTP/dohS1pm8NaUzNrIdIE=; b=nv6FvVLjCIrbFr+0UrcGp1qnHZ
- j8eZtUiloNyLV0p1HBnbUW3cQA8b3Ad9kga46jhIwPt+7DNjSjq91AetVDsNzVWurXkc032ybq1cE
- ndRNvWJ4wo7eQLok0W4yWtMBv7cdAqvtge6WiUHZ3UyrQBo44ihqFXo7OxqI7PWDGPNoc7p9WQYme
- 4PQJtIywrHXUUkH4K+Ssyufegy11RZx/ogCOTJ06D4svHb90SfbDwab44b5ZV0YXbhjXOUbC9uQuU
- QL4J2f8mqAaxsJJJyZz0JvhN+OETvwULHgUoTDvqyODAJb8821GAXA9ZUr78ZA2sv3chD4cHetanC
- Zkp1ElpQ==;
+ d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+ MIME-Version:Message-ID:Date:Subject:Cc:To:From:Reply-To:Content-Type:
+ Content-ID:Content-Description:In-Reply-To:References;
+ bh=jfinUFME5vHgG0Hbc71s2Ph9qUPDyCq4yqkHSCiEdHI=; b=jAOxbBAoA6i6Q/nEXwkPy1P9eC
+ y5hTfCm8qwuZJ6nM0xe1W399aMtfkEkugYUJ49a86HBs823Uj6BL2YOyqjmPv3Qz6LaFAuseWtYvJ
+ L89r3xUM8WrfA+Sc5Fh/5Mz9hbplclnf0qtTyhf2ismJKuHMTX6oYJhXZljjefnLNSHpld+ESvPAe
+ 5O07/Q2bhmvkTz6K4YWKRArEP0ofp9HH+EZ7d95ccWaXYEMhb8V6NfNFGEOPVBMLxL7Co46GpuzyA
+ m5WbQSbDPuY10d42/i4KG0Jr8yrAhOXalsvY0tWxalP5bGE1kR1PD91XNrabizOHB7HFACbeZoGrw
+ 45CGG2Mg==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1r05fZ-007taC-BY; Mon, 06 Nov 2023 19:53:58 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1r05fa-00AkFY-1t; Mon, 06 Nov 2023 19:54:03 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r05fZ-001GMj-1Z; Mon, 06 Nov 2023 19:53:57 +0000
+ Hat Linux)) id 1r05fZ-001GMY-0f; Mon, 06 Nov 2023 19:53:57 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -85,20 +85,18 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.3 v2 03/46] net: add qemu_create_nic_bus_devices()
-Date: Mon,  6 Nov 2023 19:49:08 +0000
-Message-ID: <20231106195352.301038-4-dwmw2@infradead.org>
+Subject: [PATCH for-8.3 v2 00/46] Rework matching of network devices to -nic
+ options
+Date: Mon,  6 Nov 2023 19:49:05 +0000
+Message-ID: <20231106195352.301038-1-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
-References: <20231106195352.301038-1-dwmw2@infradead.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- casper.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1236::1;
- envelope-from=BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org;
- helo=casper.infradead.org
+ desiato.infradead.org. See http://www.infradead.org/rpr.html
+Received-SPF: none client-ip=2001:8b0:10b:1:d65d:64ff:fe57:4e05;
+ envelope-from=BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@desiato.srs.infradead.org;
+ helo=desiato.infradead.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -121,99 +119,196 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+In https://lore.kernel.org/qemu-devel/20231019154020.99080-20-dwmw2@infradead.org/
+I lamented that the default NIC creation seemed fairly hackish but "that
+isn't a yak I want to shave today."
 
-This will instantiate any NICs which live on a given bus type. Each bus
-is allowed *one* substitution (for PCI it's virtio → virtio-net-pci, for
-Xen it's xen → xen-net-device; no point in overengineering it unless we
-actually want more).
+Yet here we are...
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Paul Durrant <paul@xen.org>
----
- include/net/net.h |  3 +++
- net/net.c         | 53 +++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 56 insertions(+)
+Most platforms iterating directly over the nd_table[] are doing one of 
+two things. Either they are creating the NIC for their platform and want
+to find a matching -nic configuration for it, if such exists. Or they
+are only going to create that platform NIC if a matching config *does*
+exist.
 
-diff --git a/include/net/net.h b/include/net/net.h
-index 56be694c75..ce830a47d0 100644
---- a/include/net/net.h
-+++ b/include/net/net.h
-@@ -211,6 +211,9 @@ bool qemu_configure_nic_device(DeviceState *dev, bool match_default,
-                                const char *alias);
- DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
-                                     const char *alias);
-+void qemu_create_nic_bus_devices(BusState *bus, const char *parent_type,
-+                                 const char *default_model,
-+                                 const char *alias, const char *alias_target);
- void print_net_client(Monitor *mon, NetClientState *nc);
- void net_socket_rs_init(SocketReadState *rs,
-                         SocketReadStateFinalize *finalize,
-diff --git a/net/net.c b/net/net.c
-index 807220e630..73621795cb 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -1208,6 +1208,59 @@ DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
-     return dev;
- }
- 
-+void qemu_create_nic_bus_devices(BusState *bus, const char *parent_type,
-+                                 const char *default_model,
-+                                 const char *alias, const char *alias_target)
-+{
-+    GPtrArray *nic_models = qemu_get_nic_models(parent_type);
-+    const char *model;
-+    DeviceState *dev;
-+    NICInfo *nd;
-+    int i;
-+
-+    if (nic_model_help) {
-+        if (alias_target) {
-+            add_nic_model_help(alias_target, alias);
-+        }
-+        for (i = 0; i < nic_models->len - 1; i++) {
-+            add_nic_model_help(nic_models->pdata[i], NULL);
-+        }
-+    }
-+
-+    /* Drop the NULL terminator which would make g_str_equal() unhappy */
-+    nic_models->len--;
-+
-+    for (i = 0; i < nb_nics; i++) {
-+        nd = &nd_table[i];
-+
-+        if (!nd->used || nd->instantiated) {
-+            continue;
-+        }
-+
-+        model = nd->model ? nd->model : default_model;
-+        if (!model) {
-+            continue;
-+        }
-+
-+        /* Each bus type is allowed *one* substitution */
-+        if (g_str_equal(model, alias)) {
-+            model = alias_target;
-+        }
-+
-+        if (!g_ptr_array_find_with_equal_func(nic_models, model,
-+                                              g_str_equal, NULL)) {
-+            /* This NIC does not live on this bus. */
-+            continue;
-+        }
-+
-+        dev = qdev_new(model);
-+        qdev_set_nic_properties(dev, nd);
-+        qdev_realize_and_unref(dev, bus, &error_fatal);
-+    }
-+
-+    g_ptr_array_free(nic_models, true);
-+}
-+
- static int (* const net_client_init_fun[NET_CLIENT_DRIVER__MAX])(
-     const Netdev *netdev,
-     const char *name,
--- 
-2.41.0
+All of those can be converted to the new qemu_configure_nic_device()
+and qemu_create_nic_device() functions. The latter of which will call
+qdev_new() to create the device (and apply the config) if a matching
+NIC config does exist for it. The existing behaviour of each platform
+has been preserved for now, despite it being apparently fairly random.
+
+PCI and indeed XenBus can use a qemu_create_nic_bus_devices() which will 
+create all NICs that live on a given bus type. That covers most 
+platforms, but some PCI platforms do something special with the first 
+NIC of a given type, placing it in the slot where it would have been on 
+the real hardware. There were various inconsistencies in the way the 
+platforms did so, and whether they cared what model the NIC was. Those 
+subtle behavioural changes I *have* allowed to change, and now the 
+pci_init_nic_slot() function will pick the first NIC that the user 
+specified which isn't explicitly *not* the default type, and put that
+in the specified slot.
+
+The tests for npcm7xx used to lament that they had to instantiate both
+NICs even when they wanted to test only the second, because there was
+no way to specify which hardware devices gets which configuration. I
+made that untrue, by allowing 'emc0' and 'emc1' aliases, and fixed up
+the test accordingly.
+
+There are one or two special cases which want to do special things with
+the MAC address of the primary NIC, to set up a system identification
+(or force it to use an Apple OUI, in the case of m68k/q400). All those
+work out relatively cleanly too.
+
+And I can clean up the ugly patch which fixed up the Xen network device 
+handling, and replace it with a simple call to the new 
+qemu_create_nic_bus_devices() function.
+
+I suspect that we can remove the pci_init_nic_devices() from platform
+code and just do it later, except for platforms which *care* which
+PCI bus the dynamic devices go on (is that just sun4u which puts its
+primary NIC onto a different bus?).
+
+Finally, while we're at it, clean up -nic model=help to only print
+the device models which are actually usable on the given platform
+rather than just listing them *all*.
+
+And now we can make nd_table[] and nb_nics static in net/net.c because
+nothing else has any business poking at them directly.
+
+
+ v2: Some build fixes after better coverage testing, revert the Xen fix
+     in this series because I'm putting the less invasive hack into 8.2
+     (hopefully).
+
+David Woodhouse (46):
+      net: add qemu_{configure,create}_nic_device(), qemu_find_nic_info()
+      net: report list of available models according to platform
+      net: add qemu_create_nic_bus_devices()
+      hw/pci: add pci_init_nic_devices(), pci_init_nic_in_slot()
+      hw/i386/pc: use qemu_get_nic_info() and pci_init_nic_devices()
+      hw/xen: use qemu_create_nic_bus_devices() to instantiate Xen NICs
+      hw/alpha/dp264: use pci_init_nic_devices()
+      hw/arm/sbsa-ref: use pci_init_nic_devices()
+      hw/arm/virt: use pci_init_nic_devices()
+      hw/hppa: use pci_init_nic_devices()
+      hw/loongarch: use pci_init_nic_devices()
+      hw/mips/fuloong2e: use pci_init_nic_devices()
+      hw/mips/malta: use pci_init_nic_devices()
+      hw/mips/loongson3_virt: use pci_init_nic_devices()
+      hw/ppc/prep: use pci_init_nic_devices()
+      hw/ppc/spapr: use qemu_get_nic_info() and pci_init_nic_devices()
+      hw/ppc: use pci_init_nic_devices()
+      hw/sh4/r2d: use pci_init_nic_devices()
+      hw/sparc64/sun4u: use pci_init_nic_devices()
+      hw/xtensa/virt: use pci_init_nic_devices()
+      hw/arm/allwinner: use qemu_configure_nic_device()
+      hw/arm/aspeed: use qemu_configure_nic_device()
+      hw/arm/exynos4: use qemu_create_nic_device()
+      hw/arm/fsl: use qemu_configure_nic_device()
+      hw/net/smc91c111: use qemu_configure_nic_device()
+      hw/net/lan9118: use qemu_configure_nic_device()
+      hw/arm/highbank: use qemu_create_nic_device()
+      hw/arm/npcm7xx: use qemu_configure_nic_device, allow emc0/emc1 as aliases
+      hw/arm/stellaris: use qemu_find_nic_info()
+      hw/arm: use qemu_configure_nic_device()
+      hw/net/etraxfs-eth: use qemu_configure_nic_device()
+      hw/m68k/mcf5208: use qemu_create_nic_device()
+      hw/m68k/q800: use qemu_find_nic_info()
+      hw/microblaze: use qemu_configure_nic_device()
+      hw/mips/mipssim: use qemu_create_nic_device()
+      hw/mips/jazz: use qemu_find_nic_info()
+      hw/net/lasi_i82596: use qemu_configure_nic_device()
+      hw/openrisc/openrisc_sim: use qemu_create_nic_device()
+      hw/riscv: use qemu_configure_nic_device()
+      hw/s390x/s390-virtio-ccw: use qemu_create_nic_device()
+      hw/sparc/sun4m: use qemu_find_nic_info()
+      hw/xtensa/xtfpga: use qemu_create_nic_device()
+      net: remove qemu_check_nic_model()
+      hw/pci: remove pci_nic_init_nofail()
+      net: remove qemu_show_nic_models(), qemu_find_nic_model()
+      net: make nb_nics and nd_table[] static in net/net.c
+
+
+ hw/alpha/dp264.c                         |   4 +-
+ hw/arm/allwinner-a10.c                   |   6 +-
+ hw/arm/allwinner-h3.c                    |   6 +-
+ hw/arm/allwinner-r40.c                   |  27 +---
+ hw/arm/aspeed.c                          |   9 +-
+ hw/arm/exynos4_boards.c                  |   6 +-
+ hw/arm/fsl-imx25.c                       |   2 +-
+ hw/arm/fsl-imx6.c                        |   2 +-
+ hw/arm/fsl-imx6ul.c                      |   2 +-
+ hw/arm/fsl-imx7.c                        |   2 +-
+ hw/arm/gumstix.c                         |   6 +-
+ hw/arm/highbank.c                        |  12 +-
+ hw/arm/integratorcp.c                    |   5 +-
+ hw/arm/kzm.c                             |   4 +-
+ hw/arm/mainstone.c                       |   3 +-
+ hw/arm/mps2-tz.c                         |   8 +-
+ hw/arm/mps2.c                            |   2 +-
+ hw/arm/msf2-soc.c                        |   6 +-
+ hw/arm/musicpal.c                        |   3 +-
+ hw/arm/npcm7xx.c                         |  16 +-
+ hw/arm/realview.c                        |  25 ++-
+ hw/arm/sbsa-ref.c                        |   4 +-
+ hw/arm/stellaris.c                       |  30 +++-
+ hw/arm/versatilepb.c                     |  15 +-
+ hw/arm/vexpress.c                        |   4 +-
+ hw/arm/virt.c                            |   4 +-
+ hw/arm/xilinx_zynq.c                     |  11 +-
+ hw/arm/xlnx-versal.c                     |   7 +-
+ hw/arm/xlnx-zynqmp.c                     |   8 +-
+ hw/cris/axis_dev88.c                     |   9 +-
+ hw/hppa/machine.c                        |   7 +-
+ hw/i386/pc.c                             |  33 ++--
+ hw/i386/pc_piix.c                        |   2 +-
+ hw/i386/pc_q35.c                         |   2 +-
+ hw/loongarch/virt.c                      |   4 +-
+ hw/m68k/mcf5208.c                        |  20 +--
+ hw/m68k/q800.c                           |  29 ++--
+ hw/microblaze/petalogix_ml605_mmu.c      |   3 +-
+ hw/microblaze/petalogix_s3adsp1800_mmu.c |   3 +-
+ hw/mips/fuloong2e.c                      |  16 +-
+ hw/mips/jazz.c                           |  15 +-
+ hw/mips/loongson3_virt.c                 |   4 +-
+ hw/mips/malta.c                          |  15 +-
+ hw/mips/mipssim.c                        |  13 +-
+ hw/net/etraxfs_eth.c                     |   5 +-
+ hw/net/lan9118.c                         |   5 +-
+ hw/net/lasi_i82596.c                     |   3 +-
+ hw/net/smc91c111.c                       |   5 +-
+ hw/openrisc/openrisc_sim.c               |  18 +--
+ hw/pci/pci.c                             |  73 +++------
+ hw/ppc/e500.c                            |   4 +-
+ hw/ppc/mac_newworld.c                    |   4 +-
+ hw/ppc/mac_oldworld.c                    |   4 +-
+ hw/ppc/ppc440_bamboo.c                   |  14 +-
+ hw/ppc/prep.c                            |   8 +-
+ hw/ppc/spapr.c                           |  18 +--
+ hw/riscv/microchip_pfsoc.c               |  14 +-
+ hw/riscv/sifive_u.c                      |   7 +-
+ hw/s390x/s390-virtio-ccw.c               |  11 +-
+ hw/sh4/r2d.c                             |   6 +-
+ hw/sparc/sun4m.c                         |  20 ++-
+ hw/sparc64/sun4u.c                       |  27 +---
+ hw/xen/xen-bus.c                         |   6 +-
+ hw/xen/xen_devconfig.c                   |  25 ---
+ hw/xenpv/xen_machine_pv.c                |   9 --
+ hw/xtensa/virt.c                         |   4 +-
+ hw/xtensa/xtfpga.c                       |  13 +-
+ include/hw/cris/etraxfs.h                |   2 +-
+ include/hw/i386/pc.h                     |   4 +-
+ include/hw/net/lan9118.h                 |   2 +-
+ include/hw/net/ne2000-isa.h              |   2 -
+ include/hw/net/smc91c111.h               |   2 +-
+ include/hw/pci/pci.h                     |   7 +-
+ include/hw/xen/xen-bus.h                 |   2 +-
+ include/hw/xen/xen-legacy-backend.h      |   1 -
+ include/net/net.h                        |  18 +--
+ net/net.c                                | 253 +++++++++++++++++++++++++------
+ system/globals.c                         |   2 -
+ tests/qtest/npcm7xx_emc-test.c           |  18 +--
+ 79 files changed, 479 insertions(+), 551 deletions(-)
+
 
 
