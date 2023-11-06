@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEA91C4332F
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 11:11:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D020C4332F
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 11:13:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qzxOo-00067e-Vr; Mon, 06 Nov 2023 06:04:07 -0500
+	id 1qzxQC-0000IE-3a; Mon, 06 Nov 2023 06:05:33 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxOm-000645-Jz
- for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:04:04 -0500
-Received: from mail-lj1-x22e.google.com ([2a00:1450:4864:20::22e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxQ7-0000EE-Lv
+ for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:05:27 -0500
+Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxOk-0003gJ-8W
- for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:04:04 -0500
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-2c50fbc218bso53602571fa.3
- for <qemu-riscv@nongnu.org>; Mon, 06 Nov 2023 03:04:01 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxQ5-0004FK-TP
+ for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:05:27 -0500
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-32f9268bf8cso2602556f8f.0
+ for <qemu-riscv@nongnu.org>; Mon, 06 Nov 2023 03:05:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699268640; x=1699873440; darn=nongnu.org;
+ d=linaro.org; s=google; t=1699268724; x=1699873524; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OPtEnXMJWXTavrW+hTGrjLz6IdGpJzROhuSvymabGIo=;
- b=p9co09EvtEhyV+0iMFvP8l/SD6Zri4nNAVsabpDWHywl4jXrqKB48H3ttuYAKNrMFy
- LQ1VkvMJEYiEWlOMZauNo763B0962SlMVQ+YqXHuA/6lhz6jBZ+/3QUZRDM4ZSXTYnMC
- ESKPz+t+8v0S+8t+UVtw4tYcmJeTf7rIPB4exwjgWSBglgYwktNRwX9fTubURCf+eOSK
- CBjmG2kMoFf4rlH6XFR2N70fhK3pjbqBv7KulUNcm+UoiLVD7V5D/xH2CIxL37ghkM9b
- aM8QVK4xi0qHMsZGSCaDzwMEAsLl5arOzatiiOGbvYtXpsvE0b2boP12YIRhiWTgbyAv
- cu1A==
+ bh=JXuP88BtphoINz4Bov6u/pkpdXdezQqYli4OVAIpAZI=;
+ b=E6sFIdPbRUgtedzhm31+W27IgBnLNqA870oNNPo7xpe2Epet+mWfdOg0Ozzfm/AeGZ
+ 8xnBNQQUHMZ0cSAZMIhp9Os5+jL8+vdnSJ0LRguG3tiBnrZrVq+0EmA1LoCyGMwqO4td
+ 1n7+ukVgLh2RSJSh/G2c9AP1R5Lh6wRtkz9J+s0NP7U0afk3lyn4S6/cZUY/s+OeBWIX
+ 9M6KLaCjTloEWlurqMztSiXJDvD9Xo9Vzt/1aGG9WB5U+IzJVItIAKMWL8Lyuwsoa0ck
+ vicMop8uV3SNmsW69MgTWUsjRWwjFPBkfeoAPK+W9W7s6JagXP0yclD9bpQ9juGR1Amy
+ 6JUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699268640; x=1699873440;
+ d=1e100.net; s=20230601; t=1699268724; x=1699873524;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OPtEnXMJWXTavrW+hTGrjLz6IdGpJzROhuSvymabGIo=;
- b=qEX3T4kFl4tif/mlBqi5F/+bWBU4g3q/qJnI0SSV6skLDxKJSCccxhUS76jjpW/SmZ
- Z3P6bjHSpmNIsF7I+RHnJ3gRqbwCginIhevuIB9tEtH1iz7LCP8eIoSyiBLQOmfzG2ul
- z/SrNHCCGdE4vsVFRdTPfGD2E/fz8XYXOGQTxiQwUlYrgUW3KaSq4lfDzqkOaRfLFjI1
- qxXG3jQR+U3NDEPIC/jMci112l79zABKu3G2zaEtzOKq9H62NQSITFPbCaQQ7X8RpXvm
- RRi06ZFndc0hksskVl1cQ4xh1FyjvjQzqGCDB5PtXBPJGTyJxBMDsJK8mrRzocCIQzrV
- Ce/w==
-X-Gm-Message-State: AOJu0YywobdzY67VckaevSs1Z8AXf0rmV1z4Vb27KkNWKTMxDJ/J4M+r
- 1Tjh+vSQgnEApzOv0FyGdG4kvA==
-X-Google-Smtp-Source: AGHT+IHnmaFN+GKLxd2N49xPwJp/PkOfW8YFcpTs0zHKDnkUPvcBfxvj2jLWyUiBIPgGTifMjl5zjg==
-X-Received: by 2002:a05:6512:1282:b0:505:6ede:20a9 with SMTP id
- u2-20020a056512128200b005056ede20a9mr26978590lfs.65.1699268640437; 
- Mon, 06 Nov 2023 03:04:00 -0800 (PST)
+ bh=JXuP88BtphoINz4Bov6u/pkpdXdezQqYli4OVAIpAZI=;
+ b=tJajRrGLZ1PDj4ZyBGizzogpaOhOhaqqC99C0xsgt59emdbqrIwkK9OUtf4l7rEiAR
+ etJEAq3MFKxShWnkM9IDM3lsTnQbHUqILZ4VZaVcB2VxhJKSshR6Abm/u0CeLAkoc0T+
+ KOhZy8yQMgd6X05DXv53EbvInQQ+2r4pTaxhdVSfoqhsohLEPd87QQ7UYvdLvZ4PT0YK
+ K0XUj76kzBz3bGE1TqKg0wQZyZXQqjYT+HqCwo5VxvRdW8TQezsnP8fAY4+OCS6tnDeG
+ evQL5EhVC8hxZ3HMQ5ZaKem0CMfZEtSikb1Ikle3Bch/RMd9eNbPHl0huVfmaDNqFQdo
+ sjtQ==
+X-Gm-Message-State: AOJu0YwNRc/6xp1eu2deyntPr9wWlYfxBBBZSj3tR9ZBgI59UuZl8o91
+ EvBEoRFQUlFoVYzlalLw5m4BKeTBMin3p6Kib3Y=
+X-Google-Smtp-Source: AGHT+IHaBHUQklVP9Pu5QT4vT7r66jTjw7Yf4RVyFH1CKsmkdCj1+2Bfzei9MwaofGzJpViR1lgQOw==
+X-Received: by 2002:adf:e6c4:0:b0:32f:adaf:be86 with SMTP id
+ y4-20020adfe6c4000000b0032fadafbe86mr8820884wrm.16.1699268724027; 
+ Mon, 06 Nov 2023 03:05:24 -0800 (PST)
 Received: from m1x-phil.lan (176-131-220-199.abo.bbox.fr. [176.131.220.199])
  by smtp.gmail.com with ESMTPSA id
- l10-20020adff48a000000b0032fdcbfb093sm19447wro.81.2023.11.06.03.03.58
+ f6-20020a5d5686000000b0032f7eaa6e43sm9161653wrv.79.2023.11.06.03.05.22
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 06 Nov 2023 03:04:00 -0800 (PST)
+ Mon, 06 Nov 2023 03:05:23 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: kvm@vger.kernel.org, qemu-s390x@nongnu.org, qemu-block@nongnu.org,
  qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Thomas Huth <thuth@redhat.com>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Beraldo Leal <bleal@redhat.com>
-Subject: [PULL 03/60] tests/vm/ubuntu.aarch64: Correct comment about TCG
- specific delay
-Date: Mon,  6 Nov 2023 12:02:35 +0100
-Message-ID: <20231106110336.358-4-philmd@linaro.org>
+ Song Gao <gaosong@loongson.cn>,
+ Richard Henderson <richard.henderson@linaro.org>
+Subject: [PULL 15/60] target/loongarch: Declare QOM definitions in 'cpu-qom.h'
+Date: Mon,  6 Nov 2023 12:02:47 +0100
+Message-ID: <20231106110336.358-16-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106110336.358-1-philmd@linaro.org>
 References: <20231106110336.358-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::22e;
- envelope-from=philmd@linaro.org; helo=mail-lj1-x22e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,32 +96,92 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Wether we use a software MMU or not to set the SSH timeout
-isn't really relevant. What we want to know is if we use
-a hardware or software accelerator (TCG).
-Replace the 'softmmu' mention by 'TCG'.
+"target/foo/cpu.h" contains the target specific declarations.
 
+A heterogeneous setup need to access target agnostic declarations
+(at least the QOM ones, to instantiate the objects).
+
+Our convention is to add such target agnostic QOM declarations in
+the "target/foo/cpu-qom.h" header.
+Add a comment clarifying that in the header.
+
+Extract QOM definitions from "cpu.h" to "cpu-qom.h".
+
+Reviewed-by: Song Gao <gaosong@loongson.cn>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20231002145104.52193-2-philmd@linaro.org>
+Message-Id: <20231013140116.255-9-philmd@linaro.org>
 ---
- tests/vm/ubuntu.aarch64 | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/loongarch/cpu-qom.h | 24 ++++++++++++++++++++++++
+ target/loongarch/cpu.h     | 10 +---------
+ 2 files changed, 25 insertions(+), 9 deletions(-)
+ create mode 100644 target/loongarch/cpu-qom.h
 
-diff --git a/tests/vm/ubuntu.aarch64 b/tests/vm/ubuntu.aarch64
-index 666947393b..eeda281f87 100755
---- a/tests/vm/ubuntu.aarch64
-+++ b/tests/vm/ubuntu.aarch64
-@@ -25,7 +25,7 @@ DEFAULT_CONFIG = {
-                      "apt-get install -y libfdt-dev pkg-config language-pack-en ninja-build",
-     # We increase beyond the default time since during boot
-     # it can take some time (many seconds) to log into the VM
--    # especially using softmmu.
-+    # especially using TCG.
-     'ssh_timeout'  : 60,
- }
+diff --git a/target/loongarch/cpu-qom.h b/target/loongarch/cpu-qom.h
+new file mode 100644
+index 0000000000..82c86d146d
+--- /dev/null
++++ b/target/loongarch/cpu-qom.h
+@@ -0,0 +1,24 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * QEMU LoongArch CPU QOM header (target agnostic)
++ *
++ * Copyright (c) 2021 Loongson Technology Corporation Limited
++ */
++
++#ifndef LOONGARCH_CPU_QOM_H
++#define LOONGARCH_CPU_QOM_H
++
++#include "hw/core/cpu.h"
++#include "qom/object.h"
++
++#define TYPE_LOONGARCH_CPU "loongarch-cpu"
++#define TYPE_LOONGARCH32_CPU "loongarch32-cpu"
++#define TYPE_LOONGARCH64_CPU "loongarch64-cpu"
++
++OBJECT_DECLARE_CPU_TYPE(LoongArchCPU, LoongArchCPUClass,
++                        LOONGARCH_CPU)
++
++#define LOONGARCH_CPU_TYPE_SUFFIX "-" TYPE_LOONGARCH_CPU
++#define LOONGARCH_CPU_TYPE_NAME(model) model LOONGARCH_CPU_TYPE_SUFFIX
++
++#endif
+diff --git a/target/loongarch/cpu.h b/target/loongarch/cpu.h
+index 8f0e9f0182..c8839f4cff 100644
+--- a/target/loongarch/cpu.h
++++ b/target/loongarch/cpu.h
+@@ -17,6 +17,7 @@
+ #include "exec/memory.h"
+ #endif
+ #include "cpu-csr.h"
++#include "cpu-qom.h"
  
+ #define IOCSRF_TEMP             0
+ #define IOCSRF_NODECNT          1
+@@ -381,13 +382,6 @@ struct ArchCPU {
+     const char *dtb_compatible;
+ };
+ 
+-#define TYPE_LOONGARCH_CPU "loongarch-cpu"
+-#define TYPE_LOONGARCH32_CPU "loongarch32-cpu"
+-#define TYPE_LOONGARCH64_CPU "loongarch64-cpu"
+-
+-OBJECT_DECLARE_CPU_TYPE(LoongArchCPU, LoongArchCPUClass,
+-                        LOONGARCH_CPU)
+-
+ /**
+  * LoongArchCPUClass:
+  * @parent_realize: The parent class' realize handler.
+@@ -478,8 +472,6 @@ void loongarch_cpu_list(void);
+ 
+ #include "exec/cpu-all.h"
+ 
+-#define LOONGARCH_CPU_TYPE_SUFFIX "-" TYPE_LOONGARCH_CPU
+-#define LOONGARCH_CPU_TYPE_NAME(model) model LOONGARCH_CPU_TYPE_SUFFIX
+ #define CPU_RESOLVING_TYPE TYPE_LOONGARCH_CPU
+ 
+ #endif /* LOONGARCH_CPU_H */
 -- 
 2.41.0
 
