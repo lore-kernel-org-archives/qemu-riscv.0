@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF412C4332F
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 20:07:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C2DAC4332F
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 20:09:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r05gA-0005lH-4m; Mon, 06 Nov 2023 14:54:34 -0500
+	id 1r05iZ-0003Me-3s; Mon, 06 Nov 2023 14:57:03 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1r05g1-0005Xk-MS; Mon, 06 Nov 2023 14:54:25 -0500
-Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ <BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1r05gy-0006OL-3F; Mon, 06 Nov 2023 14:55:25 -0500
+Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1r05fy-00065d-9L; Mon, 06 Nov 2023 14:54:25 -0500
+ <BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1r05gn-00066l-VO; Mon, 06 Nov 2023 14:55:21 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+ d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=9F94s85N161zpHncvzHPgHeV1YSdfSxyasD9KuzjSZQ=; b=bgZYgx5/6fVBDmshDfQfGpcoJa
- hEcGronT1Mrlm/GMtUt25KwxrxYJq5G9pAKwgZVawUSKTyL/pPZGyahE6hBfZ8QQN7r8xXvu2Sr5c
- U0CtRd6bWjvZ32F0V9KEuxtlOUxQzw2vkpRjJaIyJUEEdpZ4AvNgaS+5aEPqljEsOj4WNuuZSXgKn
- g17T87x+Cq1NKfAAT6rwTs3/6JnKwG51uBAN1i9bUNBIO4ZyV4BrnS28Ah+9zvJkb2KltpBfxMke/
- mI4hd3/a9SrEmVGQK+xZjpZUFZJ7DmCM9Bk4p0Xj4I4wxYtIPNQuGDzuDS8usmtXrsph43j8pPj+V
- I7YADE3g==;
+ bh=54+9O4MqgKMWNsVDV15P7KT3O3JFiZ0ZmbsNt5OSIo4=; b=uNNnb4D/Jn1NaKTOnlwcXQoBXr
+ a7fpJfDZDugOPHlTeDJm5R48ox/KWkG8Kq4VkoW7MrTotDiXX/DNpR8Lx0OIXTa/wlniktk7vXmfZ
+ dHj8fjR/z8Yert6javbL8WnB15z9bB7adrZkTchjktVEBMCdmcasEitmq3xKy5xZoKnog4LvVBdId
+ gVI2G1ARrSNVDtX1PsfPalbOtKhwBGGDEjoobpG7heQ4S3MtgTVZP7KUMi9uX7qnJBCY4WT97Q0hh
+ U8N4avC/qXHuGQuPqJSQ2fsHmTqLfcJSfOEFwq8K+TIzHHPFbtH22DRt5MHxbLdfAwAEyyUd639pH
+ CmTmGuNw==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1r05fb-00AkFi-2f; Mon, 06 Nov 2023 19:54:00 +0000
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1r05fZ-007taE-M3; Mon, 06 Nov 2023 19:53:58 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r05fa-001GNZ-1y; Mon, 06 Nov 2023 19:53:58 +0000
+ Hat Linux)) id 1r05fZ-001GN4-37; Mon, 06 Nov 2023 19:53:57 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -85,19 +85,19 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.3 v2 15/46] hw/ppc/prep: use pci_init_nic_devices()
-Date: Mon,  6 Nov 2023 19:49:20 +0000
-Message-ID: <20231106195352.301038-16-dwmw2@infradead.org>
+Subject: [PATCH for-8.3 v2 08/46] hw/arm/sbsa-ref: use pci_init_nic_devices()
+Date: Mon,  6 Nov 2023 19:49:13 +0000
+Message-ID: <20231106195352.301038-9-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
 References: <20231106195352.301038-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- desiato.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1:d65d:64ff:fe57:4e05;
- envelope-from=BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@desiato.srs.infradead.org;
- helo=desiato.infradead.org
+ casper.infradead.org. See http://www.infradead.org/rpr.html
+Received-SPF: none client-ip=2001:8b0:10b:1236::1;
+ envelope-from=BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org;
+ helo=casper.infradead.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -122,46 +122,27 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Previously, the first PCI NIC would be placed in PCI slot 3 and the rest
-would be dynamically assigned. Even if the user overrode the default NIC
-type and made it something other than PCNet.
-
-Now, the first PCNet NIC (that is, anything not explicitly specified
-to be anything different) will go to slot 3 even if it isn't the first
-NIC specified on the commnd line. And anything else will be dynamically
-assigned.
-
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Leif Lindholm <quic_llindhol@quicinc.com>
 ---
- hw/ppc/prep.c | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
+ hw/arm/sbsa-ref.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/hw/ppc/prep.c b/hw/ppc/prep.c
-index 137276bcb9..1a6cd05c61 100644
---- a/hw/ppc/prep.c
-+++ b/hw/ppc/prep.c
-@@ -241,7 +241,6 @@ static void ibm_40p_init(MachineState *machine)
-     ISADevice *isa_dev;
-     ISABus *isa_bus;
-     void *fw_cfg;
--    int i;
-     uint32_t kernel_base = 0, initrd_base = 0;
-     long kernel_size = 0, initrd_size = 0;
-     char boot_device;
-@@ -336,10 +335,9 @@ static void ibm_40p_init(MachineState *machine)
-         /* XXX: s3-trio at PCI_DEVFN(2, 0) */
-         pci_vga_init(pci_bus);
+diff --git a/hw/arm/sbsa-ref.c b/hw/arm/sbsa-ref.c
+index bce44690e5..7ad8e1fcea 100644
+--- a/hw/arm/sbsa-ref.c
++++ b/hw/arm/sbsa-ref.c
+@@ -689,9 +689,7 @@ static void create_pcie(SBSAMachineState *sms)
  
+     pci = PCI_HOST_BRIDGE(dev);
+     if (pci->bus) {
 -        for (i = 0; i < nb_nics; i++) {
--            pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic,
--                                i == 0 ? "3" : NULL);
+-            pci_nic_init_nofail(&nd_table[i], pci->bus, mc->default_nic, NULL);
 -        }
-+        /* First PCNET device at PCI_DEVFN(3, 0) */
-+        pci_init_nic_in_slot(pci_bus, mc->default_nic, NULL, "3");
-+        pci_init_nic_devices(pci_bus, mc->default_nic);
++        pci_init_nic_devices(pci->bus, mc->default_nic);
      }
  
-     /* Prepare firmware configuration for OpenBIOS */
+     pci_create_simple(pci->bus, -1, "bochs-display");
 -- 
 2.41.0
 
