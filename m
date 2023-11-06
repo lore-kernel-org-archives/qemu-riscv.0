@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BFD9C4332F
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 19:59:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92865C4167B
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 20:00:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r05hk-0001l7-Nb; Mon, 06 Nov 2023 14:56:12 -0500
+	id 1r05gQ-00068G-Tr; Mon, 06 Nov 2023 14:54:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1r05gy-0006OP-3Y; Mon, 06 Nov 2023 14:55:25 -0500
+ id 1r05g7-0005hS-IQ; Mon, 06 Nov 2023 14:54:31 -0500
 Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1r05gm-00066x-SX; Mon, 06 Nov 2023 14:55:20 -0500
+ id 1r05g0-00066o-22; Mon, 06 Nov 2023 14:54:31 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
- MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
- Reply-To:Content-Type:Content-ID:Content-Description;
- bh=uVqD0N8xPMjrBJQgjiJIoni6BiAb3d/o4YlG390jwak=; b=roICQBHrd89cGUxxnVQ4SGclNs
- XDjywuqCAUA3rIR1ANWkBnG8pvsdilTtU1Shmu14Xh+Dlja1cu83/djrGY4S3Brgit+tJ175Yxw72
- qHussyQYr2ufcgB2kP3CwPwt5erN4ypQ8VYgQk9vlxWBH8Y3bG/SHHsmKBhgCrf4CDQte6PSsVbha
- BCxmvRH90iYXqsb4Dn+lUOWkYiBtjqO6gfKekI1FW4QmW4AmoU83zuRoaUao53crzpCx6K6cl20aT
- 9so4T+ODmprdAaxd2nTr/MdJfd5BZ4v0402+Ux9u5VnzUrkeIPJktgn+lvga+phr+nXUtuYczzq1F
- 3y7Vlc7Q==;
+ Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
+ To:From:Reply-To:Content-ID:Content-Description;
+ bh=WZmVL1uI/KotgdQhXO/qrZTP/dohS1pm8NaUzNrIdIE=; b=nv6FvVLjCIrbFr+0UrcGp1qnHZ
+ j8eZtUiloNyLV0p1HBnbUW3cQA8b3Ad9kga46jhIwPt+7DNjSjq91AetVDsNzVWurXkc032ybq1cE
+ ndRNvWJ4wo7eQLok0W4yWtMBv7cdAqvtge6WiUHZ3UyrQBo44ihqFXo7OxqI7PWDGPNoc7p9WQYme
+ 4PQJtIywrHXUUkH4K+Ssyufegy11RZx/ogCOTJ06D4svHb90SfbDwab44b5ZV0YXbhjXOUbC9uQuU
+ QL4J2f8mqAaxsJJJyZz0JvhN+OETvwULHgUoTDvqyODAJb8821GAXA9ZUr78ZA2sv3chD4cHetanC
+ Zkp1ElpQ==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1r05fb-007tab-VU; Mon, 06 Nov 2023 19:54:00 +0000
+ id 1r05fZ-007taC-BY; Mon, 06 Nov 2023 19:53:58 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r05fc-001GOe-0A; Mon, 06 Nov 2023 19:54:00 +0000
+ Hat Linux)) id 1r05fZ-001GMj-1Z; Mon, 06 Nov 2023 19:53:57 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -85,13 +85,14 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.3 v2 29/46] hw/arm/stellaris: use qemu_find_nic_info()
-Date: Mon,  6 Nov 2023 19:49:34 +0000
-Message-ID: <20231106195352.301038-30-dwmw2@infradead.org>
+Subject: [PATCH for-8.3 v2 03/46] net: add qemu_create_nic_bus_devices()
+Date: Mon,  6 Nov 2023 19:49:08 +0000
+Message-ID: <20231106195352.301038-4-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
 References: <20231106195352.301038-1-dwmw2@infradead.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
  casper.infradead.org. See http://www.infradead.org/rpr.html
@@ -122,77 +123,96 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Rather than just using qemu_configure_nic_device(), populate the MAC
-address in the system-registers device by peeking at the NICInfo before
-it's assigned to the device.
-
-Generate the MAC address early, if there is no matching -nic option.
-Otherwise the MAC address wouldn't be generated until net_client_init1()
-runs.
+This will instantiate any NICs which live on a given bus type. Each bus
+is allowed *one* substitution (for PCI it's virtio → virtio-net-pci, for
+Xen it's xen → xen-net-device; no point in overengineering it unless we
+actually want more).
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- hw/arm/stellaris.c | 30 ++++++++++++++++++++++--------
- 1 file changed, 22 insertions(+), 8 deletions(-)
+ include/net/net.h |  3 +++
+ net/net.c         | 53 +++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 56 insertions(+)
 
-diff --git a/hw/arm/stellaris.c b/hw/arm/stellaris.c
-index dd90f686bf..fdf15aab63 100644
---- a/hw/arm/stellaris.c
-+++ b/hw/arm/stellaris.c
-@@ -1027,7 +1027,8 @@ static void stellaris_init(MachineState *ms, stellaris_board_info *board)
-     DeviceState *ssys_dev;
-     int i;
-     int j;
--    const uint8_t *macaddr;
-+    NICInfo *nd;
-+    MACAddr mac;
+diff --git a/include/net/net.h b/include/net/net.h
+index 56be694c75..ce830a47d0 100644
+--- a/include/net/net.h
++++ b/include/net/net.h
+@@ -211,6 +211,9 @@ bool qemu_configure_nic_device(DeviceState *dev, bool match_default,
+                                const char *alias);
+ DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
+                                     const char *alias);
++void qemu_create_nic_bus_devices(BusState *bus, const char *parent_type,
++                                 const char *default_model,
++                                 const char *alias, const char *alias_target);
+ void print_net_client(Monitor *mon, NetClientState *nc);
+ void net_socket_rs_init(SocketReadState *rs,
+                         SocketReadStateFinalize *finalize,
+diff --git a/net/net.c b/net/net.c
+index 807220e630..73621795cb 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -1208,6 +1208,59 @@ DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
+     return dev;
+ }
  
-     MemoryRegion *sram = g_new(MemoryRegion, 1);
-     MemoryRegion *flash = g_new(MemoryRegion, 1);
-@@ -1050,12 +1051,22 @@ static void stellaris_init(MachineState *ms, stellaris_board_info *board)
-      * need its sysclk output.
-      */
-     ssys_dev = qdev_new(TYPE_STELLARIS_SYS);
--    /* Most devices come preprogrammed with a MAC address in the user data. */
--    macaddr = nd_table[0].macaddr.a;
++void qemu_create_nic_bus_devices(BusState *bus, const char *parent_type,
++                                 const char *default_model,
++                                 const char *alias, const char *alias_target)
++{
++    GPtrArray *nic_models = qemu_get_nic_models(parent_type);
++    const char *model;
++    DeviceState *dev;
++    NICInfo *nd;
++    int i;
 +
-+    /*
-+     * Most devices come preprogrammed with a MAC address in the user data.
-+     * Generate a MAC address now, if there isn't a matching -nic for it.
-+     */
-+    nd = qemu_find_nic_info("stellaris_enet", true, "stellaris");
-+    if (nd) {
-+        memcpy(mac.a, nd->macaddr.a, sizeof(mac.a));
-+    } else {
-+        qemu_macaddr_default_if_unset(&mac);
++    if (nic_model_help) {
++        if (alias_target) {
++            add_nic_model_help(alias_target, alias);
++        }
++        for (i = 0; i < nic_models->len - 1; i++) {
++            add_nic_model_help(nic_models->pdata[i], NULL);
++        }
 +    }
 +
-     qdev_prop_set_uint32(ssys_dev, "user0",
--                         macaddr[0] | (macaddr[1] << 8) | (macaddr[2] << 16));
-+                         mac.a[0] | (mac.a[1] << 8) | (mac.a[2] << 16));
-     qdev_prop_set_uint32(ssys_dev, "user1",
--                         macaddr[3] | (macaddr[4] << 8) | (macaddr[5] << 16));
-+                         mac.a[3] | (mac.a[4] << 8) | (mac.a[5] << 16));
-     qdev_prop_set_uint32(ssys_dev, "did0", board->did0);
-     qdev_prop_set_uint32(ssys_dev, "did1", board->did1);
-     qdev_prop_set_uint32(ssys_dev, "dc0", board->dc0);
-@@ -1267,10 +1278,13 @@ static void stellaris_init(MachineState *ms, stellaris_board_info *board)
-     if (board->dc4 & (1 << 28)) {
-         DeviceState *enet;
- 
--        qemu_check_nic_model(&nd_table[0], "stellaris");
--
-         enet = qdev_new("stellaris_enet");
--        qdev_set_nic_properties(enet, &nd_table[0]);
-+        if (nd) {
-+            qdev_set_nic_properties(enet, nd);
-+        } else {
-+            qdev_prop_set_macaddr(enet, "mac", mac.a);
++    /* Drop the NULL terminator which would make g_str_equal() unhappy */
++    nic_models->len--;
++
++    for (i = 0; i < nb_nics; i++) {
++        nd = &nd_table[i];
++
++        if (!nd->used || nd->instantiated) {
++            continue;
 +        }
 +
-         sysbus_realize_and_unref(SYS_BUS_DEVICE(enet), &error_fatal);
-         sysbus_mmio_map(SYS_BUS_DEVICE(enet), 0, 0x40048000);
-         sysbus_connect_irq(SYS_BUS_DEVICE(enet), 0, qdev_get_gpio_in(nvic, 42));
++        model = nd->model ? nd->model : default_model;
++        if (!model) {
++            continue;
++        }
++
++        /* Each bus type is allowed *one* substitution */
++        if (g_str_equal(model, alias)) {
++            model = alias_target;
++        }
++
++        if (!g_ptr_array_find_with_equal_func(nic_models, model,
++                                              g_str_equal, NULL)) {
++            /* This NIC does not live on this bus. */
++            continue;
++        }
++
++        dev = qdev_new(model);
++        qdev_set_nic_properties(dev, nd);
++        qdev_realize_and_unref(dev, bus, &error_fatal);
++    }
++
++    g_ptr_array_free(nic_models, true);
++}
++
+ static int (* const net_client_init_fun[NET_CLIENT_DRIVER__MAX])(
+     const Netdev *netdev,
+     const char *name,
 -- 
 2.41.0
 
