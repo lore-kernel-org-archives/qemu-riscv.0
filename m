@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA7C5C4332F
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 19:59:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB76FC4332F
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 19:59:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r05hc-0001T6-Cp; Mon, 06 Nov 2023 14:56:04 -0500
+	id 1r05gR-00068M-Iz; Mon, 06 Nov 2023 14:54:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1r05gy-0006OK-2u; Mon, 06 Nov 2023 14:55:25 -0500
+ id 1r05g7-0005gw-7Z; Mon, 06 Nov 2023 14:54:31 -0500
 Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1r05gn-00066i-V9; Mon, 06 Nov 2023 14:55:22 -0500
+ id 1r05g0-00066v-0s; Mon, 06 Nov 2023 14:54:30 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=IRrS1Ip1Y1CS4Hz1ksfmSuWNiYQxa0GsEECWORyCCB4=; b=fUutKnPvhKKYNvPnaUSytK4Drp
- wIw63I9XKRhaK8DOjjloQB8quEVxhSV+OUywFeqHPnHW92zLDm/qClFUq0I426fxoCizket/1f2/1
- Pu1dxOWpnrPUrfydMjmyfwwL0e1koDvdIfEPwgK/hBjxovrWSY8VbkYrLfMDizwr6mFWlT8IMUaqM
- yXIa8MwsmIl9y7bjKwp/S5LWH73qH6GZr9diDz6/lJyjujD0+xuIjutKsuLRaLi55f4fSX/GJ2whN
- RmTarm+G02AnuZm54FvhFzuVAhNtho6uEMoKHgVnwm+qUVo1Pqy0h6css3kUKXUKqPlB/0lNP9mhI
- TshVueXQ==;
+ bh=Z8O29x0pWQhZMVbX+dyJJms7pdOJv3y/EsgO2DOPUaY=; b=teESO/RtJYYuQVVx1IuFV0fYHO
+ QYkJ+WGnPXZGnQb1cse22y5yOxa7n7e0Kz9gFUDvPXwOrQ9QSYu4Ovjg0hvBHAzorWNmcxX8W8dC0
+ x87OOZSgAuxGCv05xk2sxU/hWkqL0IJNMWnplS8QUNwg4DDtGsMhPKdCNYRhSn6/w/mEAsw80nSGO
+ Yhpresf2n6tgaRnolyiqGAYkjI4+MQu9W54FKMH8udpcer0iA4y8o8+GsniLtFQBClqEJHf0SN35I
+ Qc3+cijtHnuNn01n3lUiCUsvyaNlcvNMpoPx6tLeT2rU/MhC43rFjcvlYrZ+/d5dzyzaxOxLw8cOS
+ 2rB2sH3w==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1r05fZ-007taG-R7; Mon, 06 Nov 2023 19:53:58 +0000
+ id 1r05fd-007tb4-AH; Mon, 06 Nov 2023 19:54:02 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r05fa-001GN8-0B; Mon, 06 Nov 2023 19:53:58 +0000
+ Hat Linux)) id 1r05fd-001GPy-1n; Mon, 06 Nov 2023 19:54:01 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -85,9 +85,10 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.3 v2 09/46] hw/arm/virt: use pci_init_nic_devices()
-Date: Mon,  6 Nov 2023 19:49:14 +0000
-Message-ID: <20231106195352.301038-10-dwmw2@infradead.org>
+Subject: [PATCH for-8.3 v2 46/46] net: make nb_nics and nd_table[] static in
+ net/net.c
+Date: Mon,  6 Nov 2023 19:49:51 +0000
+Message-ID: <20231106195352.301038-47-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
 References: <20231106195352.301038-1-dwmw2@infradead.org>
@@ -124,24 +125,53 @@ From: David Woodhouse <dwmw@amazon.co.uk>
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/arm/virt.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ include/net/net.h | 4 ----
+ net/net.c         | 3 +++
+ system/globals.c  | 2 --
+ 3 files changed, 3 insertions(+), 6 deletions(-)
 
-diff --git a/hw/arm/virt.c b/hw/arm/virt.c
-index 92085d2d8f..61706bfcfc 100644
---- a/hw/arm/virt.c
-+++ b/hw/arm/virt.c
-@@ -1481,9 +1481,7 @@ static void create_pcie(VirtMachineState *vms)
-     pci->bypass_iommu = vms->default_bus_bypass_iommu;
-     vms->bus = pci->bus;
-     if (vms->bus) {
--        for (i = 0; i < nb_nics; i++) {
--            pci_nic_init_nofail(&nd_table[i], pci->bus, mc->default_nic, NULL);
--        }
-+        pci_init_nic_devices(pci->bus, mc->default_nic);
-     }
+diff --git a/include/net/net.h b/include/net/net.h
+index 290e604f03..5a38766942 100644
+--- a/include/net/net.h
++++ b/include/net/net.h
+@@ -245,10 +245,6 @@ struct NICInfo {
+     int nvectors;
+ };
  
-     nodename = vms->pciehb_nodename = g_strdup_printf("/pcie@%" PRIx64, base);
+-extern int nb_nics;
+-extern NICInfo nd_table[MAX_NICS];
+-extern const char *host_net_devices[];
+-
+ /* from net.c */
+ extern NetClientStateList net_clients;
+ bool netdev_is_modern(const char *optstr);
+diff --git a/net/net.c b/net/net.c
+index a3532a71a5..957daad58d 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -77,6 +77,9 @@ static NetdevQueue nd_queue = QSIMPLEQ_HEAD_INITIALIZER(nd_queue);
+ 
+ static GHashTable *nic_model_help;
+ 
++static int nb_nics;
++static NICInfo nd_table[MAX_NICS];
++
+ /***********************************************************/
+ /* network device redirectors */
+ 
+diff --git a/system/globals.c b/system/globals.c
+index e83b5428d1..b6d4e72530 100644
+--- a/system/globals.c
++++ b/system/globals.c
+@@ -36,8 +36,6 @@ int display_opengl;
+ const char* keyboard_layout;
+ bool enable_mlock;
+ bool enable_cpu_pm;
+-int nb_nics;
+-NICInfo nd_table[MAX_NICS];
+ int autostart = 1;
+ int vga_interface_type = VGA_NONE;
+ bool vga_interface_created;
 -- 
 2.41.0
 
