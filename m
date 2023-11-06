@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92569C4332F
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 20:02:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DA3FC4332F
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 20:02:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r05hb-0001KV-Td; Mon, 06 Nov 2023 14:56:04 -0500
+	id 1r05gD-0005ok-Vl; Mon, 06 Nov 2023 14:54:38 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1r05gy-0006OS-4Y; Mon, 06 Nov 2023 14:55:25 -0500
+ id 1r05g3-0005aP-7z; Mon, 06 Nov 2023 14:54:27 -0500
 Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1r05gn-00066b-K6; Mon, 06 Nov 2023 14:55:22 -0500
+ id 1r05fy-00066w-NI; Mon, 06 Nov 2023 14:54:26 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=5bcCMvV82e1Sve2BVcG15Kkp2UpIXLhocOoMJ70sRvM=; b=MkbWAP53t45zN+J3OWeTYLRWqY
- IxlT+triXTTst7xf9SvNcu8e8o7Y0xaQ4Ne6iu1sC6cAx4OcKM5enOL97HpiQYuuSwPUIVIF+5TdK
- MtcKcGgKJ3l5ADxs/LybZam94ZFFFa9iaUGNCykVTVjEFYxwZuyI4Bqgmtz7xhrpJh8nXM7ojZdSr
- uoG91AJ6DjX9JRGuYnwh0gBz5OP/QET0xcxH8+d91nQT+Z0g5ZEonDhQuPKD5idwhniGeKgJcqRRZ
- qBTybWjW24MrUYxXRNdxTR2jofI8qvQoAw3+ygenrcCyriRs/Lu1txhaK9XjnuhVc+hfjrtDrBAd3
- 91AbXCAA==;
+ bh=L5VhMhMWWBNBbH2l848PbF3Scoxc1bNY0ufdNZIbk1U=; b=iGwdZ+aCxnLlfra+boD9l6BbR5
+ ZecLaYSnhd2Mj6VGcRr5cKFp3OHC4upiyzuowHAzrNm+l9PPjYHAkA4bsuk85Y4nKk52kzr3+zyEd
+ WnS0EyMGlN6ZDfyfDTmHT/OpldPg+ZJbZZPEcHW5jilZh/O9C382WNiPYOg9DNJ13rHwCLDxJFCPm
+ Y+L4+sh6q+geRp+KAezyv3Z+Nb5xjuNyuOBLWRC7q+PqKSiqxSUwzaBCQGXmBFP4ccIZe+YhY+YYX
+ TdkNjwVq2/Gm1+kB1qfNHER9XVHZDiq28bZA9sEfSnKDxSIznvYI5NHm4VScCILsu+ZnzaauwqDEy
+ 7knI7PNw==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1r05fa-007taN-LN; Mon, 06 Nov 2023 19:53:59 +0000
+ id 1r05fc-007tah-BC; Mon, 06 Nov 2023 19:54:01 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r05fa-001GNj-2g; Mon, 06 Nov 2023 19:53:58 +0000
+ Hat Linux)) id 1r05fc-001GP5-1u; Mon, 06 Nov 2023 19:54:00 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -85,9 +85,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.3 v2 17/46] hw/ppc: use pci_init_nic_devices()
-Date: Mon,  6 Nov 2023 19:49:22 +0000
-Message-ID: <20231106195352.301038-18-dwmw2@infradead.org>
+Subject: [PATCH for-8.3 v2 35/46] hw/mips/mipssim: use qemu_create_nic_device()
+Date: Mon,  6 Nov 2023 19:49:40 +0000
+Message-ID: <20231106195352.301038-36-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
 References: <20231106195352.301038-1-dwmw2@infradead.org>
@@ -122,91 +122,50 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
+The MIPS SIM platform instantiates its NIC only if a corresponding
+configuration exists for it. Use qemu_create_nic_device() function for
+that.
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/ppc/e500.c          |  4 +---
- hw/ppc/mac_newworld.c  |  4 +---
- hw/ppc/mac_oldworld.c  |  4 +---
- hw/ppc/ppc440_bamboo.c | 14 +++++---------
- 4 files changed, 8 insertions(+), 18 deletions(-)
+ hw/mips/mipssim.c | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
 
-diff --git a/hw/ppc/e500.c b/hw/ppc/e500.c
-index e04114fb3c..f62eeb3411 100644
---- a/hw/ppc/e500.c
-+++ b/hw/ppc/e500.c
-@@ -1075,9 +1075,7 @@ void ppce500_init(MachineState *machine)
+diff --git a/hw/mips/mipssim.c b/hw/mips/mipssim.c
+index 4f743f37eb..d930526fd6 100644
+--- a/hw/mips/mipssim.c
++++ b/hw/mips/mipssim.c
+@@ -110,13 +110,15 @@ static void main_cpu_reset(void *opaque)
+     }
+ }
  
-     if (pci_bus) {
-         /* Register network interfaces. */
--        for (i = 0; i < nb_nics; i++) {
--            pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
--        }
-+        pci_init_nic_devices(pci_bus, mc->default_nic);
+-static void mipsnet_init(int base, qemu_irq irq, NICInfo *nd)
++static void mipsnet_init(int base, qemu_irq irq)
+ {
+     DeviceState *dev;
+     SysBusDevice *s;
+ 
+-    dev = qdev_new("mipsnet");
+-    qdev_set_nic_properties(dev, nd);
++    dev = qemu_create_nic_device("mipsnet", true, NULL);
++    if (!dev) {
++        return;
++    }
+ 
+     s = SYS_BUS_DEVICE(dev);
+     sysbus_realize_and_unref(s, &error_fatal);
+@@ -217,9 +219,8 @@ mips_mipssim_init(MachineState *machine)
+                       sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0));
      }
  
-     /* Register spinning region */
-diff --git a/hw/ppc/mac_newworld.c b/hw/ppc/mac_newworld.c
-index 535710314a..b36dbaf2b6 100644
---- a/hw/ppc/mac_newworld.c
-+++ b/hw/ppc/mac_newworld.c
-@@ -444,9 +444,7 @@ static void ppc_core99_init(MachineState *machine)
-         graphic_depth = 15;
-     }
+-    if (nd_table[0].used)
+-        /* MIPSnet uses the MIPS CPU INT0, which is interrupt 2. */
+-        mipsnet_init(0x4200, env->irq[2], &nd_table[0]);
++    /* MIPSnet uses the MIPS CPU INT0, which is interrupt 2. */
++    mipsnet_init(0x4200, env->irq[2]);
+ }
  
--    for (i = 0; i < nb_nics; i++) {
--        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
--    }
-+    pci_init_nic_devices(pci_bus, mc->default_nic);
- 
-     /* The NewWorld NVRAM is not located in the MacIO device */
-     if (kvm_enabled() && qemu_real_host_page_size() > 4096) {
-diff --git a/hw/ppc/mac_oldworld.c b/hw/ppc/mac_oldworld.c
-index 9acc7adfc9..1981d3d8f6 100644
---- a/hw/ppc/mac_oldworld.c
-+++ b/hw/ppc/mac_oldworld.c
-@@ -277,9 +277,7 @@ static void ppc_heathrow_init(MachineState *machine)
- 
-     pci_vga_init(pci_bus);
- 
--    for (i = 0; i < nb_nics; i++) {
--        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
--    }
-+    pci_init_nic_devices(pci_bus, mc->default_nic);
- 
-     /* MacIO IDE */
-     ide_drive_get(hd, ARRAY_SIZE(hd));
-diff --git a/hw/ppc/ppc440_bamboo.c b/hw/ppc/ppc440_bamboo.c
-index a189942de4..c75c3083e6 100644
---- a/hw/ppc/ppc440_bamboo.c
-+++ b/hw/ppc/ppc440_bamboo.c
-@@ -161,7 +161,6 @@ static void bamboo_init(MachineState *machine)
-     DeviceState *uicdev;
-     SysBusDevice *uicsbd;
-     int success;
--    int i;
- 
-     if (kvm_enabled()) {
-         error_report("machine %s does not support the KVM accelerator",
-@@ -234,14 +233,11 @@ static void bamboo_init(MachineState *machine)
-     }
- 
-     if (pcibus) {
--        /* Register network interfaces. */
--        for (i = 0; i < nb_nics; i++) {
--            /*
--             * There are no PCI NICs on the Bamboo board, but there are
--             * PCI slots, so we can pick whatever default model we want.
--             */
--            pci_nic_init_nofail(&nd_table[i], pcibus, mc->default_nic, NULL);
--        }
-+        /*
-+         * There are no PCI NICs on the Bamboo board, but there are
-+         * PCI slots, so we can pick whatever default model we want.
-+         */
-+        pci_init_nic_devices(pcibus, mc->default_nic);
-     }
- 
-     /* Load kernel. */
+ static void mips_mipssim_machine_init(MachineClass *mc)
 -- 
 2.41.0
 
