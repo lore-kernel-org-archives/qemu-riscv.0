@@ -4,61 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D47DEC4332F
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 01:57:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E123C4167B
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 07:18:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qzorn-0001oh-NM; Sun, 05 Nov 2023 20:57:27 -0500
+	id 1qztrz-0007OO-GX; Mon, 06 Nov 2023 02:17:59 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
- id 1qzorj-0001nu-MY; Sun, 05 Nov 2023 20:57:23 -0500
-Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
- helo=Atcsqr.andestech.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
- id 1qzorg-0002QH-Kz; Sun, 05 Nov 2023 20:57:23 -0500
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 3A61ur3x094826;
- Mon, 6 Nov 2023 09:56:53 +0800 (+08)
- (envelope-from ethan84@andestech.com)
-Received: from ethan84-VirtualBox (10.0.12.51) by ATCPCS16.andestech.com
- (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; Mon, 6 Nov 2023
- 09:56:50 +0800
-Date: Mon, 6 Nov 2023 09:56:45 +0800
-To: Peter Maydell <peter.maydell@linaro.org>
-CC: Peter Xu <peterx@redhat.com>, <qemu-devel@nongnu.org>,
- <richard.henderson@linaro.org>, <pbonzini@redhat.com>,
- <palmer@dabbelt.com>, <alistair.francis@wdc.com>,
- <in.meng@windriver.com>, <liweiwei@iscas.ac.cn>,
- <dbarboza@ventanamicro.com>, <hiwei_liu@linux.alibaba.com>,
- <qemu-riscv@nongnu.org>, <david@redhat.com>
-Subject: Re: [PATCH v2 1/4] exec/memattrs: Add iopmp source id, start
- address, end address to MemTxAttrs
-Message-ID: <ZUhH3Rulnj64whB4@ethan84-VirtualBox>
-References: <20231102094015.208588-1-ethan84@andestech.com>
- <20231102094015.208588-2-ethan84@andestech.com>
- <ZUOo3fGmqM/gVyTR@x1n>
- <CAFEAcA86B-V0gFLhE9rPK2kG=XeFw7OJ4C==8g2i_WHSLW_HYQ@mail.gmail.com>
- <ZURpIyjhraORROn5@ethan84-VirtualBox>
- <CAFEAcA-1dJnsDyZpf2Dy9XuAdp6CFWSFCzV7eceUJ6RyFLaVPA@mail.gmail.com>
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qztrw-0007LI-83
+ for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 02:17:56 -0500
+Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qztrt-0005PX-E1
+ for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 02:17:55 -0500
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-32ddfb38c02so2641078f8f.3
+ for <qemu-riscv@nongnu.org>; Sun, 05 Nov 2023 23:17:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1699255072; x=1699859872; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=hodLEJrIrf1SgrJbrg7bPvIrnsFm+jWdxqkcAuAiGj8=;
+ b=nGju9Cg+nxKNJaQaET2IBil0SW6qEqnZvG+HpkiZ/GeFyO1QxUBcciWYhkxkxUs5/7
+ E7rFYA7A0lKDe43Mnv9qwY58hCSeNYHgLUuQ0Lw8x72xnZflEafBAoM4Wiw9a1WeegJI
+ kikLHYfFP51XTy+BqOt7NOvK9fNopTAZuLNu0Yj32vytJHWb6oI22GkVfxS/DypsnuhE
+ jsWQM9xQUI+AdlK07sxaCiMlKxahElw42c8LWsB1ee9n9CQpY9NA8Cn04dJOL4HQP+E6
+ VeAsBmxV3O/FuzBO+ni1Amae74Se7KvD5TIwOhTnlwsJ0/hgXwYGEtTVq+cr75ScpixF
+ hllg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699255072; x=1699859872;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=hodLEJrIrf1SgrJbrg7bPvIrnsFm+jWdxqkcAuAiGj8=;
+ b=CTNHCOiEXILndlX4XO/QDlxC8zErV/l2ED13L5fgPrnACbI4V8DLHpd2U2pWC7X7cE
+ 1Q1b9NueXLZfscOWxfHAt7vmvvjbvPTtwfjIo8JY3bJ9C6Z/TcqZC/7Mb8cXqx8+O6/j
+ tF6xlat2o+z0YZ0qQdjW6Kwf1r8XUPg5SjbmHdCdxRLGSeowbOYeXDZMGLD5PIDbpKq6
+ a2ZABjrcGEKQrGc89VTfaBOkrb9d3HCBf4O8WjSKCxrd8+p6yz90pO4ZKxycCW9wA6rm
+ BZ/ofHg8sfKSqRaIoAtL4IfX++th9md5gk1TsbTkuePaH6kgPJDWmJPhTyy3e/QYsylr
+ mLNA==
+X-Gm-Message-State: AOJu0Yw1VBmW0Nv2OQbv2k+3ilqAa5tT3Q6rc+stck24PURMfODUPkvi
+ mTckVlZPC3C4TlD+v4EgQ9RTvg==
+X-Google-Smtp-Source: AGHT+IH6Cg8HyarQaOAQwf1SPNguXE+Um7TXykdkOaoat4ioeBPWEFr32qCxi8hfH4f072Y/uiiTkA==
+X-Received: by 2002:a5d:47c4:0:b0:32f:c5ea:72ac with SMTP id
+ o4-20020a5d47c4000000b0032fc5ea72acmr5258933wrc.46.1699255071432; 
+ Sun, 05 Nov 2023 23:17:51 -0800 (PST)
+Received: from [192.168.69.115] (176-131-220-199.abo.bbox.fr.
+ [176.131.220.199]) by smtp.gmail.com with ESMTPSA id
+ d18-20020adfa352000000b0032fb9c5aa24sm8066371wrb.93.2023.11.05.23.17.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 05 Nov 2023 23:17:51 -0800 (PST)
+Message-ID: <6c39fdb9-1a77-3982-3ea5-00f58ca15e2c@linaro.org>
+Date: Mon, 6 Nov 2023 08:17:45 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <CAFEAcA-1dJnsDyZpf2Dy9XuAdp6CFWSFCzV7eceUJ6RyFLaVPA@mail.gmail.com>
-User-Agent: Mutt/2.1.4 (2021-12-11)
-X-Originating-IP: [10.0.12.51]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 3A61ur3x094826
-Received-SPF: pass client-ip=60.248.80.70; envelope-from=ethan84@andestech.com;
- helo=Atcsqr.andestech.com
-X-Spam_score_int: -8
-X-Spam_score: -0.9
-X-Spam_bar: /
-X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9, RDNS_DYNAMIC=0.982,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001, TVD_RCVD_IP=0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.15.1
+Subject: Re: [PATCH v2 02/16] target: Mention 'cpu-qom.h' is target agnostic
+Content-Language: en-US
+To: Zhao Liu <zhao1.liu@intel.com>
+Cc: qemu-devel@nongnu.org, Eduardo Habkost <eduardo@habkost.net>,
+ Xiaojuan Yang <yangxiaojuan@loongson.cn>, "Michael S. Tsirkin"
+ <mst@redhat.com>, qemu-ppc@nongnu.org,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ David Hildenbrand <david@redhat.com>, qemu-s390x@nongnu.org,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Song Gao <gaosong@loongson.cn>,
+ Paolo Bonzini <pbonzini@redhat.com>, Stafford Horne <shorne@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Yanan Wang <wangyanan55@huawei.com>, Max Filippov <jcmvbkbc@gmail.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ =?UTF-8?Q?C=c3=a9dric_Le_Goater?= <clg@kaod.org>,
+ Laurent Vivier <lvivier@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>,
+ qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Bin Meng <bin.meng@windriver.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Nicholas Piggin <npiggin@gmail.com>, qemu-arm@nongnu.org,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Marek Vasut <marex@denx.de>,
+ Laurent Vivier <laurent@vivier.eu>, Peter Maydell
+ <peter.maydell@linaro.org>, Brian Cain <bcain@quicinc.com>,
+ Thomas Huth <thuth@redhat.com>, Chris Wulff <crwulff@gmail.com>,
+ Sergio Lopez <slp@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Ilya Leoshkevich <iii@linux.ibm.com>, Michael Rolnik <mrolnik@gmail.com>
+References: <20231013140116.255-1-philmd@linaro.org>
+ <20231013140116.255-3-philmd@linaro.org> <ZTIo4NpORQvvRcED@intel.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+In-Reply-To: <ZTIo4NpORQvvRcED@intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42e.google.com
+X-Spam_score_int: -51
+X-Spam_score: -5.2
+X-Spam_bar: -----
+X-Spam_report: (-5.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-3.137,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -71,66 +121,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Ethan Chen <ethan84@andestech.com>
-From:  Ethan Chen via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Nov 03, 2023 at 10:34:28AM +0000, Peter Maydell wrote:
-> On Fri, 3 Nov 2023 at 03:29, Ethan Chen <ethan84@andestech.com> wrote:
-> >
-> > On Thu, Nov 02, 2023 at 01:53:05PM +0000, Peter Maydell wrote:
-> > > On Thu, 2 Nov 2023 at 13:49, Peter Xu <peterx@redhat.com> wrote:
-> > > >
-> > > > On Thu, Nov 02, 2023 at 05:40:12PM +0800, Ethan Chen wrote:
-> > > > > Signed-off-by: Ethan Chen <ethan84@andestech.com>
-> > > > > ---
-> > > > >  include/exec/memattrs.h | 6 ++++++
-> > > > >  1 file changed, 6 insertions(+)
-> > > > >
-> > > > > diff --git a/include/exec/memattrs.h b/include/exec/memattrs.h
-> > > > > index d04170aa27..fc15e5d7d3 100644
-> > > > > --- a/include/exec/memattrs.h
-> > > > > +++ b/include/exec/memattrs.h
-> > > > > @@ -64,6 +64,12 @@ typedef struct MemTxAttrs {
-> > > > >      unsigned int target_tlb_bit0 : 1;
-> > > > >      unsigned int target_tlb_bit1 : 1;
-> > > > >      unsigned int target_tlb_bit2 : 1;
-> > > > > +
-> > > > > +    /* IOPMP support up to 65535 sources */
-> > > > > +    unsigned int iopmp_sid:16;
-> > > >
-> > > > There's MemTxAttrs.requester_id, SID for pci, same length.  Reuse it?
-> > > >
-> > > > > +    /* Transaction infomation for IOPMP */
-> > > > > +    unsigned long long iopmp_start_addr;
-> > > > > +    unsigned long long iopmp_end_addr;
-> > > >
-> > > > PS: encoding addresses into memattrs is.. strange, but since I know nothing
-> > > > about iopmp, I'll leave that for other reviewers.
-> > > >
-> > > > Currently MemTxAttrs are passed as a whole int on the stack, if it keeps
-> > > > growing we may start to consider a pointer, but need to check the side
-> > > > effects of unexpected fields modified within a call.
-> > >
-> > > Yeah, this struct is intended to model the various attributes that
-> > > get passed around on the bus alongside data in real hardware.
-> > > I'm pretty sure no real hardware is passing around start and
-> > > end transaction addresses on its bus with every read and
-> > > write, which suggests that we should be doing this some other
-> > > way than adding these fields to the MemTxAttrs struct.
-> >
-> > For AXI bus ADDR, LEN, SIZE are signals in read/write address channel.
-> > IOPMP will check that start address = ADDR,
-> > and end address = ADDR + LEN * SIZE.
+On 20/10/23 09:14, Zhao Liu wrote:
+> Hi Philippe,
 > 
-> Yes, but you don't pass the start and end address on the AXI
-> bus, so they don't go in QEMU's MemTxAttrs either.
+> On Fri, Oct 13, 2023 at 04:01:01PM +0200, Philippe Mathieu-Daudé wrote:
+>> Date: Fri, 13 Oct 2023 16:01:01 +0200
+>> From: Philippe Mathieu-Daudé <philmd@linaro.org>
+>> Subject: [PATCH v2 02/16] target: Mention 'cpu-qom.h' is target agnostic
+>> X-Mailer: git-send-email 2.41.0
+>>
+>> "target/foo/cpu-qom.h" is supposed to be target agnostic
+>> (include-able by any target). Add such mention in the
+>> header.
+>>
+>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+>> ---
+>>   target/arm/cpu-qom.h        | 2 +-
+>>   target/hppa/cpu-qom.h       | 2 +-
+>>   target/microblaze/cpu-qom.h | 2 +-
+>>   3 files changed, 3 insertions(+), 3 deletions(-)
+> 
+> Why not mention this description for other qom-cpu.h in this series,
+> e.g., target/i386/cpu-qom.h.
 
-I will add those AXI bus signals to MemTxAttrs instead of using start and end
-address in next revision.
+OK, will add a comment in each patch.
 
-Thanks,
-Ethan Chen
+> Otherwise,
+> 
+> Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
+
+Thanks!
 
 
