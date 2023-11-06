@@ -4,103 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6CD3C4332F
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 17:37:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6B78C4332F
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 19:55:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r03XO-00033s-Sy; Mon, 06 Nov 2023 12:37:22 -0500
+	id 1r05gU-00068b-1Z; Mon, 06 Nov 2023 14:54:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1r03XM-000336-Uc
- for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 12:37:21 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from
+ <BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1r05gF-0005sG-GF; Mon, 06 Nov 2023 14:54:39 -0500
+Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1r03XK-0004mN-6y
- for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 12:37:20 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1699292237;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=8Yc7PeFCU0CsA+AOy0eU/7WBanKWsxZ4xWf9S01nHrs=;
- b=PqItE9SfP+d7p/G1n+JiF2wjcOEklcfJRCaA5SWCJjuMMPFgN3Zu4uuDW/2EA5dis6u7rX
- 9m74m4G2cx79mZ+SymHdNsb1EnypYZNB9RmZcStlUzZu8+Adoe9baYXUMhj+RIzaxlSn+I
- 5wIGrw1FALLdmV77xHlEY0/kEYouxRs=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-507-VR6frOaPO2iZhACVD_PV8w-1; Mon, 06 Nov 2023 12:37:16 -0500
-X-MC-Unique: VR6frOaPO2iZhACVD_PV8w-1
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-4090181eec2so29937715e9.1
- for <qemu-riscv@nongnu.org>; Mon, 06 Nov 2023 09:37:16 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699292235; x=1699897035;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8Yc7PeFCU0CsA+AOy0eU/7WBanKWsxZ4xWf9S01nHrs=;
- b=xU4PkW27zsAK9jEMJzz78dF/RsrMBeoiXHZEz72kwBakFdTP03qRyTXrOY1FVTyLpZ
- snyFWZF0ofy5fzMy+JY6Dv4oHXxkhFuvh6IMn6K4E5IATA0NgYNEZB7/lsMUMAIWfPDE
- 0T2l3KGUkyy2sY4g4x9hnMGPCu8kCu+3syIth4jfz9uX+ZGCCe9otHPDrp21tWgvGf+E
- DTclMjDXhzP8cTRc8LGW/5TSAF0323tC2YR2yzeMZZJ1cMDMSBVHmL9JlaGMtF9q+b9w
- IZm56yxGlVdC/G7LP+TrviguhhkHubG+nAdPh+1FZWeArcBkD5IJUsnUpNW94KdCAZhG
- sfbg==
-X-Gm-Message-State: AOJu0Yy4/yrs3Du+Th3tZt7vXCP81XA7mctcWLlZ8Pfyk/4t8TS2nW7s
- IjCarktfzaKYUn9IU2UUo6QLl9FJY3NHHta/oKaNQrA920UaGrQ6TK2IXIEDtGpUDhLdNtkOpWe
- kCrQIPEQOnfwDd7I=
-X-Received: by 2002:a05:600c:458f:b0:409:136:469f with SMTP id
- r15-20020a05600c458f00b004090136469fmr324856wmo.38.1699292235057; 
- Mon, 06 Nov 2023 09:37:15 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEHdxUlE7xACG9wivuVjItA2jDc4nUuugk+E6Dw0ezUTl90BQfT35vT1iylr9lBahHyKyboxg==
-X-Received: by 2002:a05:600c:458f:b0:409:136:469f with SMTP id
- r15-20020a05600c458f00b004090136469fmr324822wmo.38.1699292234614; 
- Mon, 06 Nov 2023 09:37:14 -0800 (PST)
-Received: from redhat.com ([5.102.242.158]) by smtp.gmail.com with ESMTPSA id
- a11-20020a05600c348b00b0040813e14b49sm13297482wmq.30.2023.11.06.09.37.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Nov 2023 09:37:14 -0800 (PST)
-Date: Mon, 6 Nov 2023 12:37:09 -0500
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Sunil V L <sunilvl@ventanamicro.com>
-Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ (Exim 4.90_1) (envelope-from
+ <BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1r05fy-00066h-Tw; Mon, 06 Nov 2023 14:54:39 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+ MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
+ Reply-To:Content-Type:Content-ID:Content-Description;
+ bh=zmRxefaOlZ1QCUdKZwdqB/DEaAmsXLMPcBmPIeG+a8A=; b=CULtrOgTvy2P+uj3GUT44YcvX5
+ Oa6Y9aiFioc+wiiL3dwrqXBdUNnksVq5ypvQ8/iMRfKOBx30TQhHQ4xdg8TcHy3QzBAAzuWa5p5E6
+ nAIseoMtwSdN7oulDwRDgsx4hWFaqLK5k21qgGeYz33T+m+tv9KF+lE8wc6IX/1xdg+bkhfP7LsXT
+ vj6e+cD+9NazieNKE7mcE+KO7hcPrgfrRPO9WXY1UF5Z3DYohZxea8vDJmI0JNHzzwwWHoEFHJIfy
+ /kpmpy6SbXnR/74ud8Czsbx3eS7b9jlYt0PS+b1R9fy6omZBi0VOBU5iT8gXsk8z74k/wRowc2fWB
+ KZa17tGQ==;
+Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1r05fb-007tac-T3; Mon, 06 Nov 2023 19:54:00 +0000
+Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
+ Hat Linux)) id 1r05fc-001GOn-0l; Mon, 06 Nov 2023 19:54:00 +0000
+From: David Woodhouse <dwmw2@infradead.org>
+To: qemu-devel@nongnu.org
+Cc: Richard Henderson <richard.henderson@linaro.org>,
+ Beniamino Galvani <b.galvani@gmail.com>,
  Peter Maydell <peter.maydell@linaro.org>,
- Shannon Zhao <shannon.zhaosl@gmail.com>,
- Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
+ Strahinja Jankovic <strahinja.p.jankovic@gmail.com>,
+ Niek Linnenbank <nieklinnenbank@gmail.com>,
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ Andrew Jeffery <andrew@codeconstruct.com.au>,
+ Joel Stanley <joel@jms.id.au>, Igor Mitsyanko <i.mitsyanko@gmail.com>,
+ Jean-Christophe Dubois <jcd@tribudubois.net>,
+ Andrey Smirnov <andrew.smirnov@gmail.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Rob Herring <robh@kernel.org>, Subbaraya Sundeep <sundeep.lkml@gmail.com>,
+ Jan Kiszka <jan.kiszka@web.de>, Tyrone Ting <kfting@nuvoton.com>,
+ Hao Wu <wuhaotsh@google.com>, Radoslaw Biernacki <rad@semihalf.com>,
+ Leif Lindholm <quic_llindhol@quicinc.com>,
+ Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Alistair Francis <alistair@alistair23.me>, Helge Deller <deller@gmx.de>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
- Gerd Hoffmann <kraxel@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
+ Song Gao <gaosong@loongson.cn>, Thomas Huth <huth@tuxfamily.org>,
+ Laurent Vivier <laurent@vivier.eu>, Huacai Chen <chenhuacai@kernel.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ =?UTF-8?q?Herv=C3=A9=20Poussineau?= <hpoussin@reactos.org>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, Jason Wang <jasowang@redhat.com>,
+ Jia Liu <proljc@gmail.com>, Stafford Horne <shorne@gmail.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Nicholas Piggin <npiggin@gmail.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Weiwei Li <liweiwei@iscas.ac.cn>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Anup Patel <apatel@ventanamicro.com>,
- Atish Kumar Patra <atishp@rivosinc.com>, Haibo Xu <haibo1.xu@intel.com>
-Subject: Re: [PATCH v7 10/13] hw/pci-host/gpex: Define properties for MMIO
- ranges
-Message-ID: <20231106123605-mutt-send-email-mst@kernel.org>
-References: <20231103031649.2769834-1-sunilvl@ventanamicro.com>
- <20231103031649.2769834-11-sunilvl@ventanamicro.com>
+ David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Eric Farman <farman@linux.ibm.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Magnus Damm <magnus.damm@gmail.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
+ Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
+ xen-devel@lists.xenproject.org
+Subject: [PATCH for-8.3 v2 31/46] hw/net/etraxfs-eth: use
+ qemu_configure_nic_device()
+Date: Mon,  6 Nov 2023 19:49:36 +0000
+Message-ID: <20231106195352.301038-32-dwmw2@infradead.org>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
+References: <20231106195352.301038-1-dwmw2@infradead.org>
 MIME-Version: 1.0
-In-Reply-To: <20231103031649.2769834-11-sunilvl@ventanamicro.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=mst@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
+Content-Transfer-Encoding: 8bit
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
+ casper.infradead.org. See http://www.infradead.org/rpr.html
+Received-SPF: none client-ip=2001:8b0:10b:1236::1;
+ envelope-from=BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org;
+ helo=casper.infradead.org
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -116,127 +120,75 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Nov 03, 2023 at 08:46:46AM +0530, Sunil V L wrote:
-> ACPI DSDT generator needs information like ECAM range, PIO range, 32-bit
-> and 64-bit PCI MMIO range etc related to the PCI host bridge. Instead of
-> making these values machine specific, create properties for the GPEX
-> host bridge with default value 0. During initialization, the firmware
-> can initialize these properties with correct values for the platform.
-> This basically allows DSDT generator code independent of the machine
-> specific memory map accesses.
-> 
-> Suggested-by: Igor Mammedov <imammedo@redhat.com>
-> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-> Acked-by: Alistair Francis <alistair.francis@wdc.com>
-> Acked-by: Michael S. Tsirkin <mst@redhat.com>
-> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->  hw/pci-host/gpex-acpi.c    | 13 +++++++++++++
->  hw/pci-host/gpex.c         | 12 ++++++++++++
->  include/hw/pci-host/gpex.h | 28 ++++++++++++++++++++--------
->  3 files changed, 45 insertions(+), 8 deletions(-)
-> 
-> diff --git a/hw/pci-host/gpex-acpi.c b/hw/pci-host/gpex-acpi.c
-> index 1092dc3b70..f69413ea2c 100644
-> --- a/hw/pci-host/gpex-acpi.c
-> +++ b/hw/pci-host/gpex-acpi.c
-> @@ -281,3 +281,16 @@ void acpi_dsdt_add_gpex(Aml *scope, struct GPEXConfig *cfg)
->  
->      crs_range_set_free(&crs_range_set);
->  }
-> +
-> +void acpi_dsdt_add_gpex_host(Aml *scope, uint32_t irq)
-> +{
-> +    bool ambig;
-> +    Object *obj = object_resolve_path_type("", TYPE_GPEX_HOST, &ambig);
-> +
-> +    if (!obj || ambig) {
-> +        return;
-> +    }
-> +
-> +    GPEX_HOST(obj)->gpex_cfg.irq = irq;
-> +    acpi_dsdt_add_gpex(scope, &GPEX_HOST(obj)->gpex_cfg);
-> +}
-> diff --git a/hw/pci-host/gpex.c b/hw/pci-host/gpex.c
-> index a6752fac5e..41f4e73f6e 100644
-> --- a/hw/pci-host/gpex.c
-> +++ b/hw/pci-host/gpex.c
-> @@ -154,6 +154,18 @@ static Property gpex_host_properties[] = {
->       */
->      DEFINE_PROP_BOOL("allow-unmapped-accesses", GPEXHost,
->                       allow_unmapped_accesses, true),
-> +    DEFINE_PROP_UINT64(PCI_HOST_ECAM_BASE, GPEXHost, gpex_cfg.ecam.base, 0),
-> +    DEFINE_PROP_SIZE(PCI_HOST_ECAM_SIZE, GPEXHost, gpex_cfg.ecam.size, 0),
-> +    DEFINE_PROP_UINT64(PCI_HOST_PIO_BASE, GPEXHost, gpex_cfg.pio.base, 0),
-> +    DEFINE_PROP_SIZE(PCI_HOST_PIO_SIZE, GPEXHost, gpex_cfg.pio.size, 0),
-> +    DEFINE_PROP_UINT64(PCI_HOST_BELOW_4G_MMIO_BASE, GPEXHost,
-> +                       gpex_cfg.mmio32.base, 0),
-> +    DEFINE_PROP_SIZE(PCI_HOST_BELOW_4G_MMIO_SIZE, GPEXHost,
-> +                     gpex_cfg.mmio32.size, 0),
-> +    DEFINE_PROP_UINT64(PCI_HOST_ABOVE_4G_MMIO_BASE, GPEXHost,
-> +                       gpex_cfg.mmio64.base, 0),
-> +    DEFINE_PROP_SIZE(PCI_HOST_ABOVE_4G_MMIO_SIZE, GPEXHost,
-> +                     gpex_cfg.mmio64.size, 0),
->      DEFINE_PROP_END_OF_LIST(),
->  };
->  
-> diff --git a/include/hw/pci-host/gpex.h b/include/hw/pci-host/gpex.h
-> index b0240bd768..441c6b8b20 100644
-> --- a/include/hw/pci-host/gpex.h
-> +++ b/include/hw/pci-host/gpex.h
-> @@ -40,6 +40,15 @@ struct GPEXRootState {
->      /*< public >*/
->  };
->  
-> +struct GPEXConfig {
-> +    MemMapEntry ecam;
-> +    MemMapEntry mmio32;
-> +    MemMapEntry mmio64;
-> +    MemMapEntry pio;
-> +    int         irq;
-> +    PCIBus      *bus;
-> +};
-> +
->  struct GPEXHost {
->      /*< private >*/
->      PCIExpressHost parent_obj;
-> @@ -55,19 +64,22 @@ struct GPEXHost {
->      int irq_num[GPEX_NUM_IRQS];
->  
->      bool allow_unmapped_accesses;
-> -};
->  
-> -struct GPEXConfig {
-> -    MemMapEntry ecam;
-> -    MemMapEntry mmio32;
-> -    MemMapEntry mmio64;
-> -    MemMapEntry pio;
-> -    int         irq;
-> -    PCIBus      *bus;
-> +    struct GPEXConfig gpex_cfg;
->  };
->  
->  int gpex_set_irq_num(GPEXHost *s, int index, int gsi);
->  
->  void acpi_dsdt_add_gpex(Aml *scope, struct GPEXConfig *cfg);
-> +void acpi_dsdt_add_gpex_host(Aml *scope, uint32_t irq);
-> +
-> +#define PCI_HOST_PIO_BASE               "pio-base"
-> +#define PCI_HOST_PIO_SIZE               "pio-size"
-> +#define PCI_HOST_ECAM_BASE              "ecam-base"
-> +#define PCI_HOST_ECAM_SIZE              "ecam-size"
-> +#define PCI_HOST_BELOW_4G_MMIO_BASE     "below-4g-mmio-base"
-> +#define PCI_HOST_BELOW_4G_MMIO_SIZE     "below-4g-mmio-size"
-> +#define PCI_HOST_ABOVE_4G_MMIO_BASE     "above-4g-mmio-base"
-> +#define PCI_HOST_ABOVE_4G_MMIO_SIZE     "above-4g-mmio-size"
+From: David Woodhouse <dwmw@amazon.co.uk>
 
-If there's no reason to allow users to tweak these directly
-then I think we should prefix these with "x-" so users know
-we don't commit to these as a stable API. Right?
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+---
+ hw/cris/axis_dev88.c      | 9 ++++-----
+ hw/net/etraxfs_eth.c      | 5 ++---
+ include/hw/cris/etraxfs.h | 2 +-
+ 3 files changed, 7 insertions(+), 9 deletions(-)
 
-
->  #endif /* HW_GPEX_H */
-> -- 
-> 2.39.2
+diff --git a/hw/cris/axis_dev88.c b/hw/cris/axis_dev88.c
+index d82050d927..5556634921 100644
+--- a/hw/cris/axis_dev88.c
++++ b/hw/cris/axis_dev88.c
+@@ -308,15 +308,14 @@ void axisdev88_init(MachineState *machine)
+ 
+     /* Add the two ethernet blocks.  */
+     dma_eth = g_malloc0(sizeof dma_eth[0] * 4); /* Allocate 4 channels.  */
+-    etraxfs_eth_init(&nd_table[0], 0x30034000, 1, &dma_eth[0], &dma_eth[1]);
+-    if (nb_nics > 1) {
+-        etraxfs_eth_init(&nd_table[1], 0x30036000, 2, &dma_eth[2], &dma_eth[3]);
+-    }
+ 
++    etraxfs_eth_init(0x30034000, 1, &dma_eth[0], &dma_eth[1]);
+     /* The DMA Connector block is missing, hardwire things for now.  */
+     etraxfs_dmac_connect_client(etraxfs_dmac, 0, &dma_eth[0]);
+     etraxfs_dmac_connect_client(etraxfs_dmac, 1, &dma_eth[1]);
+-    if (nb_nics > 1) {
++
++    if (qemu_find_nic_info("etraxfs-eth", true, "fseth")) {
++        etraxfs_eth_init(0x30036000, 2, &dma_eth[2], &dma_eth[3]);
+         etraxfs_dmac_connect_client(etraxfs_dmac, 6, &dma_eth[2]);
+         etraxfs_dmac_connect_client(etraxfs_dmac, 7, &dma_eth[3]);
+     }
+diff --git a/hw/net/etraxfs_eth.c b/hw/net/etraxfs_eth.c
+index 1b82aec794..ab60eaac04 100644
+--- a/hw/net/etraxfs_eth.c
++++ b/hw/net/etraxfs_eth.c
+@@ -646,15 +646,14 @@ static void etraxfs_eth_class_init(ObjectClass *klass, void *data)
+ 
+ /* Instantiate an ETRAXFS Ethernet MAC.  */
+ DeviceState *
+-etraxfs_eth_init(NICInfo *nd, hwaddr base, int phyaddr,
++etraxfs_eth_init(hwaddr base, int phyaddr,
+                  struct etraxfs_dma_client *dma_out,
+                  struct etraxfs_dma_client *dma_in)
+ {
+     DeviceState *dev;
+-    qemu_check_nic_model(nd, "fseth");
+ 
+     dev = qdev_new("etraxfs-eth");
+-    qdev_set_nic_properties(dev, nd);
++    qemu_configure_nic_device(dev, true, "fseth");
+     qdev_prop_set_uint32(dev, "phyaddr", phyaddr);
+ 
+     /*
+diff --git a/include/hw/cris/etraxfs.h b/include/hw/cris/etraxfs.h
+index 467b529dc0..012c4e9974 100644
+--- a/include/hw/cris/etraxfs.h
++++ b/include/hw/cris/etraxfs.h
+@@ -31,7 +31,7 @@
+ #include "hw/sysbus.h"
+ #include "qapi/error.h"
+ 
+-DeviceState *etraxfs_eth_init(NICInfo *nd, hwaddr base, int phyaddr,
++DeviceState *etraxfs_eth_init(hwaddr base, int phyaddr,
+                               struct etraxfs_dma_client *dma_out,
+                               struct etraxfs_dma_client *dma_in);
+ 
+-- 
+2.41.0
 
 
