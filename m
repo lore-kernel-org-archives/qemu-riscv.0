@@ -4,103 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0198FC4332F
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 09:33:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2132EC4332F
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 10:35:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qzvyV-0002L7-V4; Mon, 06 Nov 2023 04:32:51 -0500
+	id 1qzwwe-0007WB-Lq; Mon, 06 Nov 2023 05:35:01 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qzvyT-0002JA-Pm
- for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 04:32:49 -0500
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1qzwwd-0007Vm-Fa
+ for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 05:34:59 -0500
+Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1qzvyQ-00048f-Au
- for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 04:32:49 -0500
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-32dc9ff4a8fso2448149f8f.1
- for <qemu-riscv@nongnu.org>; Mon, 06 Nov 2023 01:32:44 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1qzwwY-0006ZX-N4
+ for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 05:34:59 -0500
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-53d8320f0easo7022517a12.3
+ for <qemu-riscv@nongnu.org>; Mon, 06 Nov 2023 02:34:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699263163; x=1699867963; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tYM9JZy0pWxgWplcpiN4Gaka112GVkBHgig4rCH1hkw=;
- b=nLfculsvuqyuA9PUxT96Qe+ll2COk935xRrG7TjN6vLrG9GP/a111CQeWlONnjkviU
- 4xAQDe2MX6tU3SlPLFvjCMtLsbEEBnhR3wUPp5Pb0BeDlbei1O2eYUW2B32D8T7HKif8
- xFPpS+yX+6MjUKKc+mIlm9VX2TJ+6fnxKQLskloqjDkFYCXvK7wZlkEJwntq0qOv9acE
- HS9eWV2FRdM0C7PpUFnL2v6ghh8asH9XXpThvQ+l1aCMz7Rd+LmoOEmwCwtSWMPvUld6
- q7/xuOKYE6mHYCzbofjV6AxQSEBtNQ8AOty9ATOOy6WYfRn4JoUTq/GEeD+HOVpXIOMl
- f6sA==
+ d=linaro.org; s=google; t=1699266892; x=1699871692; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Zbf7X3lNTx2tNFEjIoUycJCq05+us145GWumPbZLqPo=;
+ b=Y4z+b9MNT+SZ4VJ58HuzmE32iaoatKl+Fp9ZEtm86N1+PdMBRTCxi/HxNFXhaohG0e
+ QGkClznNIlPuo/RAd4e9hgGVwGJMXwO3FREEAIIWBSJlc9F7+XEAZ9BIojF4YLHYUFBA
+ U+nekbG7LHgtw4w8oJMFhB2lXm2Ur/wO9tygpjXAmRY+yMZe4gKB7zhQOj51XQAiY8SQ
+ rOkvQaU11BX8N1OChpJVViVasg7EI8HzH2iml1cNnaLwPWexhjNw/WSTvzIrfjf5rHYm
+ X/bVIs+vPT52517eA8us/1tMdq5qFZkkVUKyVIDe0RtjGINdY0c9AkJQOkPK/BUguSGr
+ 2/rQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699263163; x=1699867963;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=tYM9JZy0pWxgWplcpiN4Gaka112GVkBHgig4rCH1hkw=;
- b=DkqvZ+jFx4GfHGVd3yxOUmXzm/4yh9fspA0QCXeNJWmvnPi04iDU6s2ZU2i5Ck18jH
- Mdf95g7GWG8Joug01tvYzW33Jor78EUVcSdaRJOpSAo7G2JY0xuVMWRflHXnblz13h4x
- 41xJLp+K8h8kHc+fCOjM0dw0qekaklakIx50zfaJG/YbZMHYALEFjcma/f0BNC8pqlkF
- nQ+H8WQsGKk0QJP8f8o/4UsTLxrLhIXjEo7Fnh0jhfJIEFHwRL06WsT69slgJErsz5tM
- xrsCJ2w/+gldUhMYckvIdALAuWJq8Y/3KyAW2zsokaJ9Z2x1zsplZVrzrWIM716va62k
- e1Hw==
-X-Gm-Message-State: AOJu0YxNa2lYx4hxX2Q4aYlMmidvGv0po+1yosHEpwNbZvpDFRRCUgY6
- weeLuMU85oVXTy0UNMPuWZBj4w==
-X-Google-Smtp-Source: AGHT+IFmnIYvxOkcyLPyFr0wEydB1Nrmj420bzHdRtHey8P35rLtoqOldBy6VxdZuqEw4C2joK3YDQ==
-X-Received: by 2002:a05:6000:18a9:b0:32f:c5f1:61df with SMTP id
- b9-20020a05600018a900b0032fc5f161dfmr4670898wri.20.1699263163490; 
- Mon, 06 Nov 2023 01:32:43 -0800 (PST)
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- s11-20020a5d424b000000b0032da40fd7bdsm8960826wrr.24.2023.11.06.01.32.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Nov 2023 01:32:43 -0800 (PST)
-Received: from draig (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id A895B5F79F;
- Mon,  6 Nov 2023 09:32:42 +0000 (GMT)
-From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org, Akihiko Odaki <akihiko.odaki@daynix.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,  "Edgar E. Iglesias"
- <edgar.iglesias@gmail.com>,  Song Gao <gaosong@loongson.cn>,
- qemu-arm@nongnu.org,  =?utf-8?Q?Marc-Andr=C3=A9?= Lureau
- <marcandre.lureau@redhat.com>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,  Weiwei Li
- <liweiwei@iscas.ac.cn>,  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>,  Daniel Henrique Barboza
- <danielhb413@gmail.com>,  Yanan Wang <wangyanan55@huawei.com>,
- =?utf-8?Q?C=C3=A9dric?= Le
- Goater <clg@kaod.org>,  Paolo Bonzini <pbonzini@redhat.com>,  David
- Hildenbrand <david@redhat.com>,  Brian Cain <bcain@quicinc.com>,
- qemu-ppc@nongnu.org,  Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-riscv@nongnu.org,  Eduardo Habkost <eduardo@habkost.net>,  Philippe
- =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,  Alistair Francis
- <alistair.francis@wdc.com>,  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Cleber Rosa <crosa@redhat.com>,  qemu-s390x@nongnu.org,  Laurent Vivier
- <laurent@vivier.eu>,  Yoshinori Sato <ysato@users.sourceforge.jp>,
- Nicholas Piggin <npiggin@gmail.com>,  Thomas Huth <thuth@redhat.com>,
- John Snow <jsnow@redhat.com>,  Alexandre Iooss <erdnaxe@crans.org>,
- Daniel P. =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Mahmoud Mandour
- <ma.mandourr@gmail.com>,  Daniel Henrique Barboza
- <dbarboza@ventanamicro.com>,  Bin Meng <bin.meng@windriver.com>,  Beraldo
- Leal <bleal@redhat.com>,  Richard Henderson
- <richard.henderson@linaro.org>,  Michael Rolnik <mrolnik@gmail.com>,
- Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: Re: [PATCH 13/29] target/riscv: Use GDBFeature for dynamic XML
-In-Reply-To: <20231103195956.1998255-14-alex.bennee@linaro.org> ("Alex
- =?utf-8?Q?Benn=C3=A9e=22's?= message of "Fri, 3 Nov 2023 19:59:40 +0000 (2
- days, 13 hours, 31 minutes ago)")
-References: <20231103195956.1998255-1-alex.bennee@linaro.org>
- <20231103195956.1998255-14-alex.bennee@linaro.org>
-User-Agent: mu4e 1.11.24; emacs 29.1
-Date: Mon, 06 Nov 2023 09:32:42 +0000
-Message-ID: <87a5rrdy6d.fsf@draig.linaro.org>
+ d=1e100.net; s=20230601; t=1699266892; x=1699871692;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Zbf7X3lNTx2tNFEjIoUycJCq05+us145GWumPbZLqPo=;
+ b=wq9B0UjwAwnoXHVkPiYrYC33OVr+nQI54I+Oeu3llGQPEqX7Fn0CB5Mn3j4111c0FO
+ sbJ8vH6EsEum1kvaiwDi793BGX+H6f8QwtcFyEXLF5CnA1l3ecDeDTC3SvlO7F+sse20
+ ml0tey/7ipE5lOSbTvEEr7lfK2T8OJckGm7yyji/H87Ei4ZsDXBSf/fIffgBW6Eb8hxb
+ KQxeBiNAfTmD9whf4EiyWKgOoPm/PDhvZ+cxdkHnG/f9v8pXUx5Mm1LjHmKVYjNl65Bt
+ 2Ev5tUcnAeNUj/AHk/RQNtaclzy1xMW+AgasiDjgJfGXgVlaYdNiVBZxARw7Xlq9Lt0g
+ lr3g==
+X-Gm-Message-State: AOJu0YxFK2iwgeBeT7DvuKexVv1PRvX8YqrKNciRX1x85cq1EnZY0TT4
+ HwY+JchDA6CY0JYUyfefPNJ3cxhrIPHP/Es2tzw3Pg==
+X-Google-Smtp-Source: AGHT+IHaHCV25nWbJsj5oQ3tVP2gHlxGX6zufRNMUQmB+qyq2YsAh09utPl2UZJMiIsrRGRxBd0W5MHKrmi3zW1b0ns=
+X-Received: by 2002:a05:6402:1a39:b0:540:e598:a35f with SMTP id
+ be25-20020a0564021a3900b00540e598a35fmr24343605edb.5.1699266892345; Mon, 06
+ Nov 2023 02:34:52 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x429.google.com
+References: <20231102094015.208588-1-ethan84@andestech.com>
+ <20231102094015.208588-2-ethan84@andestech.com> <ZUOo3fGmqM/gVyTR@x1n>
+ <CAFEAcA86B-V0gFLhE9rPK2kG=XeFw7OJ4C==8g2i_WHSLW_HYQ@mail.gmail.com>
+ <ZURpIyjhraORROn5@ethan84-VirtualBox>
+ <CAFEAcA-1dJnsDyZpf2Dy9XuAdp6CFWSFCzV7eceUJ6RyFLaVPA@mail.gmail.com>
+ <ZUhH3Rulnj64whB4@ethan84-VirtualBox>
+In-Reply-To: <ZUhH3Rulnj64whB4@ethan84-VirtualBox>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Mon, 6 Nov 2023 10:34:41 +0000
+Message-ID: <CAFEAcA_z1VCyeUFNMDSsxp-UYRLoMm-4=oo86JkJ3fmjoWdq_w@mail.gmail.com>
+Subject: Re: [PATCH v2 1/4] exec/memattrs: Add iopmp source id, start address, 
+ end address to MemTxAttrs
+To: Ethan Chen <ethan84@andestech.com>
+Cc: Peter Xu <peterx@redhat.com>, qemu-devel@nongnu.org,
+ richard.henderson@linaro.org, 
+ pbonzini@redhat.com, palmer@dabbelt.com, alistair.francis@wdc.com, 
+ in.meng@windriver.com, liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, 
+ hiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, david@redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
+ envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x52c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -123,264 +96,65 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Alex Benn=C3=A9e <alex.bennee@linaro.org> writes:
-
-> From: Akihiko Odaki <akihiko.odaki@daynix.com>
+On Mon, 6 Nov 2023 at 01:57, Ethan Chen <ethan84@andestech.com> wrote:
 >
-> In preparation for a change to use GDBFeature as a parameter of
-> gdb_register_coprocessor(), convert the internal representation of
-> dynamic feature from plain XML to GDBFeature.
+> On Fri, Nov 03, 2023 at 10:34:28AM +0000, Peter Maydell wrote:
+> > On Fri, 3 Nov 2023 at 03:29, Ethan Chen <ethan84@andestech.com> wrote:
+> > >
+> > > On Thu, Nov 02, 2023 at 01:53:05PM +0000, Peter Maydell wrote:
+> > > > On Thu, 2 Nov 2023 at 13:49, Peter Xu <peterx@redhat.com> wrote:
+> > > > >
+> > > > > On Thu, Nov 02, 2023 at 05:40:12PM +0800, Ethan Chen wrote:
+> > > > > > Signed-off-by: Ethan Chen <ethan84@andestech.com>
+> > > > > > ---
+> > > > > >  include/exec/memattrs.h | 6 ++++++
+> > > > > >  1 file changed, 6 insertions(+)
+> > > > > >
+> > > > > > diff --git a/include/exec/memattrs.h b/include/exec/memattrs.h
+> > > > > > index d04170aa27..fc15e5d7d3 100644
+> > > > > > --- a/include/exec/memattrs.h
+> > > > > > +++ b/include/exec/memattrs.h
+> > > > > > @@ -64,6 +64,12 @@ typedef struct MemTxAttrs {
+> > > > > >      unsigned int target_tlb_bit0 : 1;
+> > > > > >      unsigned int target_tlb_bit1 : 1;
+> > > > > >      unsigned int target_tlb_bit2 : 1;
+> > > > > > +
+> > > > > > +    /* IOPMP support up to 65535 sources */
+> > > > > > +    unsigned int iopmp_sid:16;
+> > > > >
+> > > > > There's MemTxAttrs.requester_id, SID for pci, same length.  Reuse it?
+> > > > >
+> > > > > > +    /* Transaction infomation for IOPMP */
+> > > > > > +    unsigned long long iopmp_start_addr;
+> > > > > > +    unsigned long long iopmp_end_addr;
+> > > > >
+> > > > > PS: encoding addresses into memattrs is.. strange, but since I know nothing
+> > > > > about iopmp, I'll leave that for other reviewers.
+> > > > >
+> > > > > Currently MemTxAttrs are passed as a whole int on the stack, if it keeps
+> > > > > growing we may start to consider a pointer, but need to check the side
+> > > > > effects of unexpected fields modified within a call.
+> > > >
+> > > > Yeah, this struct is intended to model the various attributes that
+> > > > get passed around on the bus alongside data in real hardware.
+> > > > I'm pretty sure no real hardware is passing around start and
+> > > > end transaction addresses on its bus with every read and
+> > > > write, which suggests that we should be doing this some other
+> > > > way than adding these fields to the MemTxAttrs struct.
+> > >
+> > > For AXI bus ADDR, LEN, SIZE are signals in read/write address channel.
+> > > IOPMP will check that start address = ADDR,
+> > > and end address = ADDR + LEN * SIZE.
+> >
+> > Yes, but you don't pass the start and end address on the AXI
+> > bus, so they don't go in QEMU's MemTxAttrs either.
 >
-> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-> Message-Id: <20231025093128.33116-7-akihiko.odaki@daynix.com>
-> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+> I will add those AXI bus signals to MemTxAttrs instead of using start and end
+> address in next revision.
 
-I bisected the following failure:
+What AXI bus signals? You already get address and size in the
+actual memory transaction, they don't need to go in the MemTxAttrs.
 
- ./qemu-riscv64 -g 1234 ./tests/tcg/riscv64-linux-user/sha512
-
-and:
-
- gdb-multiarch ./tests/tcg/riscv64-linux-user/sha512 -ex "target remote loc=
-alhost:1234" -x ../../tests/tcg/multiarch/gdbstub/registers.py
-
-gives:
-
-warning: Architecture rejected target-supplied description
-Ignoring packet error, continuing...
-Ignoring packet error, continuing...
-Ignoring packet error, continuing...
-Ignoring packet error, continuing...
-
-> ---
->  target/riscv/cpu.h     |  5 +--
->  target/riscv/cpu.c     |  4 +--
->  target/riscv/gdbstub.c | 79 +++++++++++++++++++-----------------------
->  3 files changed, 40 insertions(+), 48 deletions(-)
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index f8ffa5ee38..73ec1d3b79 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -24,6 +24,7 @@
->  #include "hw/registerfields.h"
->  #include "hw/qdev-properties.h"
->  #include "exec/cpu-defs.h"
-> +#include "exec/gdbstub.h"
->  #include "qemu/cpu-float.h"
->  #include "qom/object.h"
->  #include "qemu/int128.h"
-> @@ -395,8 +396,8 @@ struct ArchCPU {
->=20=20
->      CPURISCVState env;
->=20=20
-> -    char *dyn_csr_xml;
-> -    char *dyn_vreg_xml;
-> +    GDBFeature dyn_csr_feature;
-> +    GDBFeature dyn_vreg_feature;
->=20=20
->      /* Configuration Settings */
->      RISCVCPUConfig cfg;
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index ac4a6c7eec..5200fba9b9 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1421,9 +1421,9 @@ static const char *riscv_gdb_get_dynamic_xml(CPUSta=
-te *cs, const char *xmlname)
->      RISCVCPU *cpu =3D RISCV_CPU(cs);
->=20=20
->      if (strcmp(xmlname, "riscv-csr.xml") =3D=3D 0) {
-> -        return cpu->dyn_csr_xml;
-> +        return cpu->dyn_csr_feature.xml;
->      } else if (strcmp(xmlname, "riscv-vector.xml") =3D=3D 0) {
-> -        return cpu->dyn_vreg_xml;
-> +        return cpu->dyn_vreg_feature.xml;
->      }
->=20=20
->      return NULL;
-> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> index 524bede865..a3ac0212d1 100644
-> --- a/target/riscv/gdbstub.c
-> +++ b/target/riscv/gdbstub.c
-> @@ -212,12 +212,13 @@ static int riscv_gdb_set_virtual(CPURISCVState *cs,=
- uint8_t *mem_buf, int n)
->      return 0;
->  }
->=20=20
-> -static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
-> +static GDBFeature *riscv_gen_dynamic_csr_feature(CPUState *cs, int base_=
-reg)
->  {
->      RISCVCPU *cpu =3D RISCV_CPU(cs);
->      CPURISCVState *env =3D &cpu->env;
-> -    GString *s =3D g_string_new(NULL);
-> +    GDBFeatureBuilder builder;
->      riscv_csr_predicate_fn predicate;
-> +    const char *name;
->      int bitsize =3D 16 << env->misa_mxl_max;
->      int i;
->=20=20
-> @@ -230,9 +231,9 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, in=
-t base_reg)
->          bitsize =3D 64;
->      }
->=20=20
-> -    g_string_printf(s, "<?xml version=3D\"1.0\"?>");
-> -    g_string_append_printf(s, "<!DOCTYPE feature SYSTEM \"gdb-target.dtd=
-\">");
-> -    g_string_append_printf(s, "<feature name=3D\"org.gnu.gdb.riscv.csr\"=
->");
-> +    gdb_feature_builder_init(&builder, &cpu->dyn_csr_feature,
-> +                             "org.gnu.gdb.riscv.csr", "riscv-csr.xml",
-> +                             base_reg);
->=20=20
->      for (i =3D 0; i < CSR_TABLE_SIZE; i++) {
->          if (env->priv_ver < csr_ops[i].min_priv_ver) {
-> @@ -240,72 +241,64 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, =
-int base_reg)
->          }
->          predicate =3D csr_ops[i].predicate;
->          if (predicate && (predicate(env, i) =3D=3D RISCV_EXCP_NONE)) {
-> -            if (csr_ops[i].name) {
-> -                g_string_append_printf(s, "<reg name=3D\"%s\"", csr_ops[=
-i].name);
-> -            } else {
-> -                g_string_append_printf(s, "<reg name=3D\"csr%03x\"", i);
-> +            g_autofree char *dynamic_name =3D NULL;
-> +            name =3D csr_ops[i].name;
-> +            if (!name) {
-> +                dynamic_name =3D g_strdup_printf("csr%03x", i);
-> +                name =3D dynamic_name;
->              }
-> -            g_string_append_printf(s, " bitsize=3D\"%d\"", bitsize);
-> -            g_string_append_printf(s, " regnum=3D\"%d\"/>", base_reg + i=
-);
-> +
-> +            gdb_feature_builder_append_reg(&builder, name, bitsize, i,
-> +                                           "int", NULL);
->          }
->      }
->=20=20
-> -    g_string_append_printf(s, "</feature>");
-> -
-> -    cpu->dyn_csr_xml =3D g_string_free(s, false);
-> +    gdb_feature_builder_end(&builder);
->=20=20
->  #if !defined(CONFIG_USER_ONLY)
->      env->debugger =3D false;
->  #endif
->=20=20
-> -    return CSR_TABLE_SIZE;
-> +    return &cpu->dyn_csr_feature;
->  }
->=20=20
-> -static int ricsv_gen_dynamic_vector_xml(CPUState *cs, int base_reg)
-> +static GDBFeature *ricsv_gen_dynamic_vector_feature(CPUState *cs, int ba=
-se_reg)
->  {
->      RISCVCPU *cpu =3D RISCV_CPU(cs);
-> -    GString *s =3D g_string_new(NULL);
-> -    g_autoptr(GString) ts =3D g_string_new("");
-> +    GDBFeatureBuilder builder;
->      int reg_width =3D cpu->cfg.vlen;
-> -    int num_regs =3D 0;
->      int i;
->=20=20
-> -    g_string_printf(s, "<?xml version=3D\"1.0\"?>");
-> -    g_string_append_printf(s, "<!DOCTYPE target SYSTEM \"gdb-target.dtd\=
-">");
-> -    g_string_append_printf(s, "<feature name=3D\"org.gnu.gdb.riscv.vecto=
-r\">");
-> +    gdb_feature_builder_init(&builder, &cpu->dyn_vreg_feature,
-> +                             "org.gnu.gdb.riscv.vector", "riscv-vector.x=
-ml",
-> +                             base_reg);
->=20=20
->      /* First define types and totals in a whole VL */
->      for (i =3D 0; i < ARRAY_SIZE(vec_lanes); i++) {
->          int count =3D reg_width / vec_lanes[i].size;
-> -        g_string_printf(ts, "%s", vec_lanes[i].id);
-> -        g_string_append_printf(s,
-> -                               "<vector id=3D\"%s\" type=3D\"%s\" count=
-=3D\"%d\"/>",
-> -                               ts->str, vec_lanes[i].gdb_type, count);
-> +        gdb_feature_builder_append_tag(
-> +            &builder, "<vector id=3D\"%s\" type=3D\"%s\" count=3D\"%d\"/=
->",
-> +            vec_lanes[i].id, vec_lanes[i].gdb_type, count);
->      }
->=20=20
->      /* Define unions */
-> -    g_string_append_printf(s, "<union id=3D\"riscv_vector\">");
-> +    gdb_feature_builder_append_tag(&builder, "<union id=3D\"riscv_vector=
-\">");
->      for (i =3D 0; i < ARRAY_SIZE(vec_lanes); i++) {
-> -        g_string_append_printf(s, "<field name=3D\"%c\" type=3D\"%s\"/>",
-> -                               vec_lanes[i].suffix,
-> -                               vec_lanes[i].id);
-> +        gdb_feature_builder_append_tag(&builder,
-> +                                       "<field name=3D\"%c\" type=3D\"%s=
-\"/>",
-> +                                       vec_lanes[i].suffix, vec_lanes[i]=
-.id);
->      }
-> -    g_string_append(s, "</union>");
-> +    gdb_feature_builder_append_tag(&builder, "</union>");
->=20=20
->      /* Define vector registers */
->      for (i =3D 0; i < 32; i++) {
-> -        g_string_append_printf(s,
-> -                               "<reg name=3D\"v%d\" bitsize=3D\"%d\""
-> -                               " regnum=3D\"%d\" group=3D\"vector\""
-> -                               " type=3D\"riscv_vector\"/>",
-> -                               i, reg_width, base_reg++);
-> -        num_regs++;
-> +        gdb_feature_builder_append_reg(&builder, g_strdup_printf("v%d", =
-i),
-> +                                       reg_width, i, "riscv_vector", "ve=
-ctor");
->      }
->=20=20
-> -    g_string_append_printf(s, "</feature>");
-> +    gdb_feature_builder_end(&builder);
->=20=20
-> -    cpu->dyn_vreg_xml =3D g_string_free(s, false);
-> -    return num_regs;
-> +    return &cpu->dyn_vreg_feature;
->  }
->=20=20
->  void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
-> @@ -320,10 +313,9 @@ void riscv_cpu_register_gdb_regs_for_features(CPUSta=
-te *cs)
->                                   32, "riscv-32bit-fpu.xml", 0);
->      }
->      if (env->misa_ext & RVV) {
-> -        int base_reg =3D cs->gdb_num_regs;
->          gdb_register_coprocessor(cs, riscv_gdb_get_vector,
->                                   riscv_gdb_set_vector,
-> -                                 ricsv_gen_dynamic_vector_xml(cs, base_r=
-eg),
-> +                                 ricsv_gen_dynamic_vector_feature(cs, cs=
-->gdb_num_regs)->num_regs,
->                                   "riscv-vector.xml", 0);
->      }
->      switch (env->misa_mxl_max) {
-> @@ -343,9 +335,8 @@ void riscv_cpu_register_gdb_regs_for_features(CPUStat=
-e *cs)
->      }
->=20=20
->      if (cpu->cfg.ext_icsr) {
-> -        int base_reg =3D cs->gdb_num_regs;
->          gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_cs=
-r,
-> -                                 riscv_gen_dynamic_csr_xml(cs, base_reg),
-> +                                 riscv_gen_dynamic_csr_feature(cs, cs->g=
-db_num_regs)->num_regs,
->                                   "riscv-csr.xml", 0);
->      }
->  }
-
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
+thanks
+-- PMM
 
