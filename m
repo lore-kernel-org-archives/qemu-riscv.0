@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1CCEC4708E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 19:55:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFA75C4167B
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 19:56:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r05gF-0005sZ-Jb; Mon, 06 Nov 2023 14:54:39 -0500
+	id 1r05hW-0000t0-Mn; Mon, 06 Nov 2023 14:55:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1r05g3-0005aE-29; Mon, 06 Nov 2023 14:54:27 -0500
-Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ <BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1r05gy-0006OR-3u; Mon, 06 Nov 2023 14:55:25 -0500
+Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1r05fx-00065i-RI; Mon, 06 Nov 2023 14:54:26 -0500
+ <BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1r05gn-00066u-UM; Mon, 06 Nov 2023 14:55:21 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+ d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=6llESs8/oOse6Qm5wJ5lTY9fMB0QkZmfTge4Rjf6G8M=; b=buYUSYgObmiJkgEwvOBOxICL5m
- Bu6dMQKL5r8EhzkrGEb6+QQLWhg4/ivpdi4hYISAKXzzl84UBkMxM8nA9pLswCfwEoDVSPEJMtJPS
- EobPO3/gZvrfN7EDLA3nJRcnsc1B+SNMzoJ9gpDbQOgvvyxCdFzM821lKBfrfAv9Epn/H0ylfjXsX
- o1vuclcKrn33Xg2SnDEzyMrNKJghJcdDfgLR69P38aiPUYnxsOieXhd8i91CuR4hgZoSLvwd20pBa
- UJKSMbQ3YOL87CNsct14MZJgcgnyv4BHk+8Mbr8CZLSJajVwO26WGABsw3+99noLxbwxJqhY2MbC2
- +d5TIpng==;
+ bh=53sT3CeDc9xXHXsxnlVgayDW0vZ6KE0BHHmNTnQfdBU=; b=HCwjrtiiJKiyFyU3x/NClKXi9b
+ xvqGzELhrV7zmvpEhf70Qpc4Dv6Bo5o9kSmwVqFA/llaL/c2omY3KrJD96KvgRTOK8UqFxoTc5vLU
+ HYxEf0aCK3PtGeFMO2Vkokgksqk9hPvQseo+afAp3kFPYf0yPdwUqzW346DhK6YVcENrldih7xm7x
+ x0xgLqtgoOLOOlb6WY9heOhN98STW7gpFvgVWOUeuI8AQIfC+OyhKGIejtt0Vqq8iefPcJVNVp9lD
+ lTBFgycuq+gi7+El6wIselkcLZRb9qGT/Z8QbjzGdnywxijjdBfaJ27zt09wtODTP4FCDxXeJWoxH
+ ecMm0sOQ==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1r05fe-00AkGF-0J; Mon, 06 Nov 2023 19:54:03 +0000
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1r05fa-007taP-Qm; Mon, 06 Nov 2023 19:53:59 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r05fd-001GPd-0F; Mon, 06 Nov 2023 19:54:01 +0000
+ Hat Linux)) id 1r05fb-001GNs-08; Mon, 06 Nov 2023 19:53:59 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -85,19 +85,19 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.3 v2 41/46] hw/sparc/sun4m: use qemu_find_nic_info()
-Date: Mon,  6 Nov 2023 19:49:46 +0000
-Message-ID: <20231106195352.301038-42-dwmw2@infradead.org>
+Subject: [PATCH for-8.3 v2 19/46] hw/sparc64/sun4u: use pci_init_nic_devices()
+Date: Mon,  6 Nov 2023 19:49:24 +0000
+Message-ID: <20231106195352.301038-20-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
 References: <20231106195352.301038-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- desiato.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1:d65d:64ff:fe57:4e05;
- envelope-from=BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@desiato.srs.infradead.org;
- helo=desiato.infradead.org
+ casper.infradead.org. See http://www.infradead.org/rpr.html
+Received-SPF: none client-ip=2001:8b0:10b:1236::1;
+ envelope-from=BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org;
+ helo=casper.infradead.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -122,81 +122,59 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Obtain the MAC address from the NIC configuration if there is one, or
-generate one explicitly so that it can be placed in the PROM.
+The first sunhme NIC gets placed a function 1 on slot 1 of PCI bus A,
+and the rest are dynamically assigned on PCI bus B.
+
+Previously, any PCI NIC would get the special treatment purely by
+virtue of being first in the list.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/sparc/sun4m.c | 20 ++++++++++++++------
- 1 file changed, 14 insertions(+), 6 deletions(-)
+ hw/sparc64/sun4u.c | 27 ++++++++-------------------
+ 1 file changed, 8 insertions(+), 19 deletions(-)
 
-diff --git a/hw/sparc/sun4m.c b/hw/sparc/sun4m.c
-index 17bf5f2879..75b0c0ff7a 100644
---- a/hw/sparc/sun4m.c
-+++ b/hw/sparc/sun4m.c
-@@ -299,13 +299,15 @@ static void *iommu_init(hwaddr addr, uint32_t version, qemu_irq irq)
+diff --git a/hw/sparc64/sun4u.c b/hw/sparc64/sun4u.c
+index c871170378..be06278f7d 100644
+--- a/hw/sparc64/sun4u.c
++++ b/hw/sparc64/sun4u.c
+@@ -642,29 +642,18 @@ static void sun4uv_init(MemoryRegion *address_space_mem,
  
- static void *sparc32_dma_init(hwaddr dma_base,
-                               hwaddr esp_base, qemu_irq espdma_irq,
--                              hwaddr le_base, qemu_irq ledma_irq, NICInfo *nd)
-+                              hwaddr le_base, qemu_irq ledma_irq,
-+                              MACAddr *mac)
- {
-     DeviceState *dma;
-     ESPDMADeviceState *espdma;
-     LEDMADeviceState *ledma;
-     SysBusESPState *esp;
-     SysBusPCNetState *lance;
-+    NICInfo *nd = qemu_find_nic_info("lance", true, NULL);
+     memset(&macaddr, 0, sizeof(MACAddr));
+     onboard_nic = false;
+-    for (i = 0; i < nb_nics; i++) {
+-        PCIBus *bus;
+-        nd = &nd_table[i];
+-
+-        if (!nd->model || strcmp(nd->model, mc->default_nic) == 0) {
+-            if (!onboard_nic) {
+-                pci_dev = pci_new_multifunction(PCI_DEVFN(1, 1), mc->default_nic);
+-                bus = pci_busA;
+-                memcpy(&macaddr, &nd->macaddr.a, sizeof(MACAddr));
+-                onboard_nic = true;
+-            } else {
+-                pci_dev = pci_new(-1, mc->default_nic);
+-                bus = pci_busB;
+-            }
+-        } else {
+-            pci_dev = pci_new(-1, nd->model);
+-            bus = pci_busB;
+-        }
  
-     dma = qdev_new(TYPE_SPARC32_DMA);
-     espdma = SPARC32_ESPDMA_DEVICE(object_resolve_path_component(
-@@ -320,7 +322,14 @@ static void *sparc32_dma_init(hwaddr dma_base,
- 
-     lance = SYSBUS_PCNET(object_resolve_path_component(
-                          OBJECT(ledma), "lance"));
--    qdev_set_nic_properties(DEVICE(lance), nd);
-+
++    nd = qemu_find_nic_info(mc->default_nic, true, NULL);
 +    if (nd) {
-+        qdev_set_nic_properties(DEVICE(lance), nd);
-+        memcpy(mac->a, nd->macaddr.a, sizeof(mac->a));
-+    } else {
-+        qemu_macaddr_default_if_unset(mac);
-+        qdev_prop_set_macaddr(DEVICE(lance), "mac", mac->a);
-+    }
- 
-     sysbus_realize_and_unref(SYS_BUS_DEVICE(dma), &error_fatal);
-     sysbus_mmio_map(SYS_BUS_DEVICE(dma), 0, dma_base);
-@@ -832,7 +841,7 @@ static void sun4m_hw_init(MachineState *machine)
-     unsigned int smp_cpus = machine->smp.cpus;
-     unsigned int max_cpus = machine->smp.max_cpus;
-     HostMemoryBackend *ram_memdev = machine->memdev;
--    NICInfo *nd = &nd_table[0];
-+    MACAddr hostid;
- 
-     if (machine->ram_size > hwdef->max_mem) {
-         error_report("Too much memory for this machine: %" PRId64 ","
-@@ -893,10 +902,9 @@ static void sun4m_hw_init(MachineState *machine)
-                         hwdef->iommu_pad_base, hwdef->iommu_pad_len);
++        pci_dev = pci_new_multifunction(PCI_DEVFN(1, 1), mc->default_nic);
+         dev = &pci_dev->qdev;
+         qdev_set_nic_properties(dev, nd);
+-        pci_realize_and_unref(pci_dev, bus, &error_fatal);
++        pci_realize_and_unref(pci_dev, pci_busA, &error_fatal);
++
++        memcpy(&macaddr, &nd->macaddr.a, sizeof(MACAddr));
++        onboard_nic = true;
      }
++    pci_init_nic_devices(pci_busB, mc->default_nic);
  
--    qemu_check_nic_model(nd, TYPE_LANCE);
-     sparc32_dma_init(hwdef->dma_base,
-                      hwdef->esp_base, slavio_irq[18],
--                     hwdef->le_base, slavio_irq[16], nd);
-+                     hwdef->le_base, slavio_irq[16], &hostid);
- 
-     if (graphic_depth != 8 && graphic_depth != 24) {
-         error_report("Unsupported depth: %d", graphic_depth);
-@@ -1048,7 +1056,7 @@ static void sun4m_hw_init(MachineState *machine)
-                                     machine->initrd_filename,
-                                     machine->ram_size, &initrd_size);
- 
--    nvram_init(nvram, (uint8_t *)&nd->macaddr, machine->kernel_cmdline,
-+    nvram_init(nvram, hostid.a, machine->kernel_cmdline,
-                machine->boot_config.order, machine->ram_size, kernel_size,
-                graphic_width, graphic_height, graphic_depth,
-                hwdef->nvram_machine_id, "Sun4m");
+     /* If we don't have an onboard NIC, grab a default MAC address so that
+      * we have a valid machine id */
 -- 
 2.41.0
 
