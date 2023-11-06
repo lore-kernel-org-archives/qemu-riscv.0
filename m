@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AA5CC4332F
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 19:57:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9662AC4167B
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 19:58:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r05gO-00067t-VZ; Mon, 06 Nov 2023 14:54:49 -0500
+	id 1r05g5-0005d2-Fa; Mon, 06 Nov 2023 14:54:29 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1r05g7-0005gv-6y; Mon, 06 Nov 2023 14:54:31 -0500
+ id 1r05g0-0005Ww-KS; Mon, 06 Nov 2023 14:54:24 -0500
 Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1r05fy-00065c-8v; Mon, 06 Nov 2023 14:54:30 -0500
+ id 1r05fx-00065o-SL; Mon, 06 Nov 2023 14:54:24 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=Q6WJzrf/gsQj4hekd5E3jTDYvSsFsIQ40+J5PbVDAlw=; b=hN6jXJARRmz2GcvDSca7kv1iBF
- MD6IM83m3OlMumoHTu1tfa5Hh5TNwVAO2zuzdBV7ya9YTeAksrYH2KAvYWnvU5vZc9PtViL6FYuLD
- 4rVMwVE/8xp2ESjC7pSdGhtZQW+Racktv0Jg7A9rDfvVCHY0fIMZ1JypA3E44pMAOX3VMdt2PSWfU
- M2S/w5oq+ePOvVJq+1b+kHHcURRQ4CafaKAjihmSN/viVnhW+oLS/NDdiSmLhxkF316u0LnDdceA6
- 3GnYTj3WXakTIuiyW6b2gdCJ2powAIsP/BxehtWnuN5+wA/bsvIwgA1DgVBkiJqDtFpodoETq8VrF
- szF2/wkA==;
+ bh=lQGkWaXlk0kHJQOu4VM9UyFsuEmDTGHLTrgFw2PSPLc=; b=M76NPgkCYn+13IEfnWOpGFyHqC
+ TrrbmTHCT04fTedllyOjCpCNMndbfiKzftDnT+OKNyY1NkCYQyeAe3nnU+nJHOM/PqxcxQ37qTWWC
+ LG9lJFgdiJxBfeVjJWwF4wSvM0o6fKz6QNmBFb+tM521TGVpXl5A6dDlgh7zCzsoCYlvi+6HHxln+
+ 9Jab/Ojr9pjujlwIUn7m9mG1IoTXZC7y3vdg8jDeeXFqHrdNh5PVCLVBVgGttoeybhNwE9ByQBoSB
+ 9Ev80pQZCwSMEWEUUOj0yzda1SlfY6tj7W9y6pnVhFjYF2jbF7/oMxl25FSZeM0xgT8dU3DqupTyy
+ AvfgROSw==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1r05fe-00AkGA-0M; Mon, 06 Nov 2023 19:54:03 +0000
+ id 1r05fa-00AkFZ-1z; Mon, 06 Nov 2023 19:53:59 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r05fc-001GPF-2Q; Mon, 06 Nov 2023 19:54:00 +0000
+ Hat Linux)) id 1r05fZ-001GMb-14; Mon, 06 Nov 2023 19:53:57 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -85,10 +85,10 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.3 v2 37/46] hw/net/lasi_i82596: use
- qemu_configure_nic_device()
-Date: Mon,  6 Nov 2023 19:49:42 +0000
-Message-ID: <20231106195352.301038-38-dwmw2@infradead.org>
+Subject: [PATCH for-8.3 v2 01/46] net: add qemu_{configure,
+ create}_nic_device(), qemu_find_nic_info()
+Date: Mon,  6 Nov 2023 19:49:06 +0000
+Message-ID: <20231106195352.301038-2-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
 References: <20231106195352.301038-1-dwmw2@infradead.org>
@@ -123,28 +123,107 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
----
- hw/net/lasi_i82596.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+Most code which directly accesses nd_table[] and nb_nics uses them for
+one of two things. Either "I have created a NIC device and I'd like a
+configuration for it", or "I will create a NIC device *if* there is a
+configuration for it".  With some variants on the theme around whether
+they actually *check* if the model specified in the configuration is
+the right one.
 
-diff --git a/hw/net/lasi_i82596.c b/hw/net/lasi_i82596.c
-index e37f7fabe9..c4c197aaa8 100644
---- a/hw/net/lasi_i82596.c
-+++ b/hw/net/lasi_i82596.c
-@@ -125,11 +125,10 @@ SysBusI82596State *lasi_82596_init(MemoryRegion *addr_space,
-     static const MACAddr HP_MAC = {
-         .a = { 0x08, 0x00, 0x09, 0xef, 0x34, 0xf6 } };
+Provide functions which perform both of those, allowing platforms to
+be a little more consistent and as a step towards making nd_table[]
+and nb_nics private to the net code.
+
+Also export the qemu_find_nic_info() helper, as some platforms have
+special cases they need to handle.
+
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Paul Durrant <paul@xen.org>
+---
+ include/net/net.h |  7 ++++++-
+ net/net.c         | 51 +++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 57 insertions(+), 1 deletion(-)
+
+diff --git a/include/net/net.h b/include/net/net.h
+index 2fb1c9181c..56be694c75 100644
+--- a/include/net/net.h
++++ b/include/net/net.h
+@@ -205,7 +205,12 @@ int qemu_show_nic_models(const char *arg, const char *const *models);
+ void qemu_check_nic_model(NICInfo *nd, const char *model);
+ int qemu_find_nic_model(NICInfo *nd, const char * const *models,
+                         const char *default_model);
+-
++NICInfo *qemu_find_nic_info(const char *typename, bool match_default,
++                            const char *alias);
++bool qemu_configure_nic_device(DeviceState *dev, bool match_default,
++                               const char *alias);
++DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
++                                    const char *alias);
+ void print_net_client(Monitor *mon, NetClientState *nc);
+ void net_socket_rs_init(SocketReadState *rs,
+                         SocketReadStateFinalize *finalize,
+diff --git a/net/net.c b/net/net.c
+index bbe33da176..f8b4973a1e 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -1072,6 +1072,57 @@ static int net_init_nic(const Netdev *netdev, const char *name,
+     return idx;
+ }
  
--    qemu_check_nic_model(&nd_table[0], TYPE_LASI_82596);
-     dev = qdev_new(TYPE_LASI_82596);
-     s = SYSBUS_I82596(dev);
-     s->state.irq = lan_irq;
--    qdev_set_nic_properties(dev, &nd_table[0]);
-+    qemu_configure_nic_device(dev, true, NULL);
-     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-     s->state.conf.macaddr = HP_MAC; /* set HP MAC prefix */
++NICInfo *qemu_find_nic_info(const char *typename, bool match_default,
++                            const char *alias)
++{
++    NICInfo *nd;
++    int i;
++
++    for (i = 0; i < nb_nics; i++) {
++        nd = &nd_table[i];
++
++        if (!nd->used || nd->instantiated) {
++            continue;
++        }
++
++        if ((match_default && !nd->model) || !g_strcmp0(nd->model, typename)
++            || (alias && !g_strcmp0(nd->model, alias))) {
++            return nd;
++        }
++    }
++    return NULL;
++}
++
++
++/* "I have created a device. Please configure it if you can" */
++bool qemu_configure_nic_device(DeviceState *dev, bool match_default,
++                               const char *alias)
++{
++    NICInfo *nd = qemu_find_nic_info(object_get_typename(OBJECT(dev)),
++                                     match_default, alias);
++
++    if (nd) {
++        qdev_set_nic_properties(dev, nd);
++        return true;
++    }
++    return false;
++}
++
++/* "Please create a device, if you have a configuration for it" */
++DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
++                                    const char *alias)
++{
++    NICInfo *nd = qemu_find_nic_info(typename, match_default, alias);
++    DeviceState *dev;
++
++    if (!nd) {
++        return NULL;
++    }
++
++    dev = qdev_new(typename);
++    qdev_set_nic_properties(dev, nd);
++    return dev;
++}
  
+ static int (* const net_client_init_fun[NET_CLIENT_DRIVER__MAX])(
+     const Netdev *netdev,
 -- 
 2.41.0
 
