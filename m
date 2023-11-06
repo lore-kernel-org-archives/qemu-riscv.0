@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6321FC4332F
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 11:10:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3458C4167D
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 11:10:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qzxQd-0001GT-43; Mon, 06 Nov 2023 06:06:00 -0500
+	id 1qzxS3-0004Go-BB; Mon, 06 Nov 2023 06:07:27 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxQT-000128-DT
- for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:05:49 -0500
-Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxS2-0004FB-Kl
+ for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:07:26 -0500
+Received: from mail-lj1-x230.google.com ([2a00:1450:4864:20::230])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxQR-0004KB-0L
- for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:05:49 -0500
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-32fdc5be26dso56590f8f.2
- for <qemu-riscv@nongnu.org>; Mon, 06 Nov 2023 03:05:46 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxRw-0004hL-R6
+ for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:07:26 -0500
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-2c514cbbe7eso61224521fa.1
+ for <qemu-riscv@nongnu.org>; Mon, 06 Nov 2023 03:07:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699268745; x=1699873545; darn=nongnu.org;
+ d=linaro.org; s=google; t=1699268839; x=1699873639; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9TEM4y15WADC11ywrbeYDwNqe54vVpabH+nFuXXR9vo=;
- b=DDcTivuoAhQfj6RSh7yuR+7K2AVdOWgiSRdgQmx7FHUn6x1zjVndhc/DZ5JguQjKSv
- Zvm0vYst6JDUfzK8vte64voW1t4XR27Y/KQmk/uF8v4+BqztEWRyy1K9IYhKwUwLZafd
- gp4O97zNJz17/D79eT5mq44TvCzLUtt8WGshgY+1hiJplCe+Z/SjpNBTcPyI/VizUyOI
- azAlqlnFQ8UQIGf/H5fgEQtRO83SCdZpedowVPMVWeulvnM7XN2CwdmFRKYRz0KfpjKi
- 9Ox+iOaXwobN6/nD2b6/6LXIvMkVjHeJ4QMtP7lwSxPClbGTKErtHQZXfX3aPjwfJP9Q
- XxrA==
+ bh=S8/5vIGDLKMGAXYMu1UZsIS0RjKQzcO4h+Duvu/oNU4=;
+ b=T/Wo+Xn8U0u/8Pu1u7PgUN2SrXwHUG4+yDMEJVtknA2Ms426kFrCl5kkQqS0pOgPKn
+ j4RT2uWEU7UtbTY7xrxW1jhG/kf3nb98Y3+ulGjjyTELu8/PiAOwvW16XWzUGN9L/xtm
+ /retS4fJySK7pDKsXpj5Kk1IvxWvaGnYK1THsh4DqTzg7O+a80olhdVDZZY4tcwy4hXB
+ 1KO3imu7EwikGTbYUjNsq4CkyYZeGvkbUYjGVr0Fk2jOk4M/muDLysLoTmvFRM8LDaHr
+ p17lkxdtLNlV9IpgCZ3vb0wSwS/fKGOjTImrhmouAulqp2wkbB0ZnBK8Dke8Bi60alwD
+ uMJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699268745; x=1699873545;
+ d=1e100.net; s=20230601; t=1699268839; x=1699873639;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9TEM4y15WADC11ywrbeYDwNqe54vVpabH+nFuXXR9vo=;
- b=uVkR45kqvEy/W5It/QC1+go9VJXLqbd+pF5Q3t+i/Uvqp2x3GoapnkZ7AkreC7HmTM
- Vhz31oR7q0fOibdtofK37SSVTbNPVQhBpeQeOicfz7EVGfiK6RiyQ24M46Z5qWb8G3K5
- ioeEQJEksYqMbOq4CLvUz80SdvNSmVS96P+fmQwT8DP7iA87Ddh/k2ejARlFP3/m3NHV
- e6VL1rknTXpFTmghrkt1F13mS23hT9m2j/H4BlMBDqc535+ZUL0tVaGUdSD4AiPchPW3
- ynCSZFfrHPLTshMAgmS/NP9TmER1qjk3TzCHps7QvCTZA/ZRBbkLQo4BrzkdyxpZYRUW
- Q3Fg==
-X-Gm-Message-State: AOJu0Yxg8/p7B/wCGnWn+5cO1oYI1Q/pt2O2yZOhzyniOlGmnwYrJk0v
- /a/dceA0JsAVbgjpTmMPE4i3UQ==
-X-Google-Smtp-Source: AGHT+IGOZ/6VrX2QMc3mxuvaPC+0EbE+IDekhwAIoTOTC+UFQrQ0DCYUI0TONme61tWRfDpdV25NAA==
-X-Received: by 2002:a05:6000:1c0f:b0:32f:ba72:e80b with SMTP id
- ba15-20020a0560001c0f00b0032fba72e80bmr6504480wrb.54.1699268744791; 
- Mon, 06 Nov 2023 03:05:44 -0800 (PST)
+ bh=S8/5vIGDLKMGAXYMu1UZsIS0RjKQzcO4h+Duvu/oNU4=;
+ b=MgI/MJ1Gt5Yxk50iOy7AamPVldPD2xnhJi2ejWo5R8T5tfcdEqToxdmZ7cJCKIJf4N
+ wvLlwtZHsVPL3Yg2UpYf17Ovoxhyv3yvY5i7vKdXJfoXImBra0HnqB1vJCMPk05qaG8A
+ XQ+1NAmXvfKrh4dXB+8new2Rncc178ptIlCvwAMYyAzgvALvzGJRnfH00mmuWykIuE1M
+ BeRZOViO5GDO1f/A0QC+sd/WVa20iYT2sNsjnoAM3xwzWKrqRuC+GTtor+PVGxTqc9S3
+ rCL1ERk1KPLoSUEXGP9EUAstBD+BvFmccsL1E3k0RJ+fHCD/g59saoiC19fv30TiYAtq
+ Dzbg==
+X-Gm-Message-State: AOJu0YwtZE/wigWvupwxXLwe1ondy8OHXlFaHkn5G+CW+coAvy2DCe5i
+ AOpqpiTdKBqGkdKsOHBH3ZBGbEG/HV3sGZdUz6g=
+X-Google-Smtp-Source: AGHT+IGUmAjl7n06mFubnd+gEr0baz8hJiaRcQUniE2ytONQaxbr97H+8iARFxziBtFUQ6m1v/mnVw==
+X-Received: by 2002:a2e:940e:0:b0:2c6:e46e:9849 with SMTP id
+ i14-20020a2e940e000000b002c6e46e9849mr10927288ljh.15.1699268838970; 
+ Mon, 06 Nov 2023 03:07:18 -0800 (PST)
 Received: from m1x-phil.lan (176-131-220-199.abo.bbox.fr. [176.131.220.199])
  by smtp.gmail.com with ESMTPSA id
- c12-20020adffb0c000000b0032fc5f5abafsm6040847wrr.96.2023.11.06.03.05.42
+ v9-20020a05600c470900b003feea62440bsm11701095wmo.43.2023.11.06.03.07.17
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 06 Nov 2023 03:05:44 -0800 (PST)
+ Mon, 06 Nov 2023 03:07:18 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: kvm@vger.kernel.org, qemu-s390x@nongnu.org, qemu-block@nongnu.org,
  qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- LIU Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
- Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PULL 18/60] target/riscv: Move TYPE_RISCV_CPU_BASE definition to
- 'cpu.h'
-Date: Mon,  6 Nov 2023 12:02:50 +0100
-Message-ID: <20231106110336.358-19-philmd@linaro.org>
+ Michael Tokarev <mjt@tls.msk.ru>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>
+Subject: [PULL 32/60] sysemu/kvm: Restrict kvmppc_get_radix_page_info() to ppc
+ targets
+Date: Mon,  6 Nov 2023 12:03:04 +0100
+Message-ID: <20231106110336.358-33-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106110336.358-1-philmd@linaro.org>
 References: <20231106110336.358-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::230;
+ envelope-from=philmd@linaro.org; helo=mail-lj1-x230.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,68 +99,55 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-TYPE_RISCV_CPU_BASE depends on the TARGET_RISCV32/TARGET_RISCV64
-definitions which are target specific. Such target specific
-definition taints "cpu-qom.h".
+kvm_get_radix_page_info() is only defined for ppc targets (in
+target/ppc/kvm.c). The declaration is not useful in other targets,
+reduce its scope.
+Rename using the 'kvmppc_' prefix following other declarations
+from target/ppc/kvm_ppc.h.
 
-Since "cpu-qom.h" must be target agnostic, remove its target
-specific definition uses by moving TYPE_RISCV_CPU_BASE to
-"target/riscv/cpu.h".
-
-"target/riscv/cpu-qom.h" is now fully target agnostic.
-Add a comment clarifying that in the header.
-
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Suggested-by: Michael Tokarev <mjt@tls.msk.ru>
+Reviewed-by: Daniel Henrique Barboza <danielhb413@gmail.com>
+Message-Id: <20231003070427.69621-2-philmd@linaro.org>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20231013140116.255-12-philmd@linaro.org>
 ---
- target/riscv/cpu-qom.h | 8 +-------
- target/riscv/cpu.h     | 6 ++++++
- 2 files changed, 7 insertions(+), 7 deletions(-)
+ include/sysemu/kvm.h | 1 -
+ target/ppc/kvm.c     | 4 ++--
+ 2 files changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
-index b78169093f..76efb614a6 100644
---- a/target/riscv/cpu-qom.h
-+++ b/target/riscv/cpu-qom.h
-@@ -1,5 +1,5 @@
- /*
-- * QEMU RISC-V CPU QOM header
-+ * QEMU RISC-V CPU QOM header (target agnostic)
-  *
-  * Copyright (c) 2023 Ventana Micro Systems Inc.
-  *
-@@ -44,12 +44,6 @@
- #define TYPE_RISCV_CPU_VEYRON_V1        RISCV_CPU_TYPE_NAME("veyron-v1")
- #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
+diff --git a/include/sysemu/kvm.h b/include/sysemu/kvm.h
+index 80b69d88f6..d614878164 100644
+--- a/include/sysemu/kvm.h
++++ b/include/sysemu/kvm.h
+@@ -521,7 +521,6 @@ int kvm_set_one_reg(CPUState *cs, uint64_t id, void *source);
+  * Returns: 0 on success, or a negative errno on failure.
+  */
+ int kvm_get_one_reg(CPUState *cs, uint64_t id, void *target);
+-struct ppc_radix_page_info *kvm_get_radix_page_info(void);
  
--#if defined(TARGET_RISCV32)
--# define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE32
--#elif defined(TARGET_RISCV64)
--# define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE64
--#endif
--
- typedef struct CPUArchState CPURISCVState;
+ /* Notify resamplefd for EOI of specific interrupts. */
+ void kvm_resample_fd_notify(int gsi);
+diff --git a/target/ppc/kvm.c b/target/ppc/kvm.c
+index d0e2dcdc77..9b1abe2fc4 100644
+--- a/target/ppc/kvm.c
++++ b/target/ppc/kvm.c
+@@ -268,7 +268,7 @@ static void kvm_get_smmu_info(struct kvm_ppc_smmu_info *info, Error **errp)
+                      "KVM failed to provide the MMU features it supports");
+ }
  
- OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 144cc94cce..d832696418 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -34,6 +34,12 @@
+-struct ppc_radix_page_info *kvm_get_radix_page_info(void)
++static struct ppc_radix_page_info *kvmppc_get_radix_page_info(void)
+ {
+     KVMState *s = KVM_STATE(current_accel());
+     struct ppc_radix_page_info *radix_page_info;
+@@ -2368,7 +2368,7 @@ static void kvmppc_host_cpu_class_init(ObjectClass *oc, void *data)
+     }
  
- #define CPU_RESOLVING_TYPE TYPE_RISCV_CPU
+ #if defined(TARGET_PPC64)
+-    pcc->radix_page_info = kvm_get_radix_page_info();
++    pcc->radix_page_info = kvmppc_get_radix_page_info();
  
-+#if defined(TARGET_RISCV32)
-+# define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE32
-+#elif defined(TARGET_RISCV64)
-+# define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE64
-+#endif
-+
- #define TCG_GUEST_DEFAULT_MO 0
- 
- /*
+     if ((pcc->pvr & 0xffffff00) == CPU_POWERPC_POWER9_DD1) {
+         /*
 -- 
 2.41.0
 
