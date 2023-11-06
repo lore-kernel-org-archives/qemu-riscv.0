@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9E9EC4332F
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 20:01:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAA82C4167D
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 20:01:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r05g2-0005Z5-DR; Mon, 06 Nov 2023 14:54:26 -0500
+	id 1r05hP-0000YB-PG; Mon, 06 Nov 2023 14:55:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1r05g0-0005Ws-Dw; Mon, 06 Nov 2023 14:54:24 -0500
-Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ <BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1r05gt-0006Ne-54; Mon, 06 Nov 2023 14:55:23 -0500
+Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1r05fy-00065R-8d; Mon, 06 Nov 2023 14:54:24 -0500
+ <BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1r05gm-00066c-Sb; Mon, 06 Nov 2023 14:55:17 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+ d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=pKyWLUeZ8sfmO5fyN4MlL6OrMrKB7GvrujedGo0ZyJE=; b=FoOapH2CsU3eZJM6l0DOL3I9As
- RpfM/XGmr7wrYSCXubkQvzBZGS2+BXXde3H/WcPFI8WMFziPPdtSWcZPfp9Vj4CJQQPe0Igx9+5oA
- 4XzYvOGT9XEfI7UiL1FMSLnqYdEtwkxjVIjwMUIzGRMd+BfBdjtZy3TuvTO1l5/HRnTJ68Y3OSSH+
- uwDnF3Tl7oIiBvEdXzfQc177sJ5TJqgvW9/a4FbpqmMnjAjLX0fhGKofbwglkd6Q96QI0HtMN9sif
- 37RFpI1G9osLb1B63SPQOEClME+mn0NyoO4Qo5eD7y+Rjh0lda8KU3hEH2zILm7fIUgjCQSaI81zk
- N1wN70dA==;
+ bh=6GcIfEqXlcnmmpl6cCrOJJoCYIHAK8lem5JXl9qMtnE=; b=QgCulFrknk++puvIc8xv05TqtR
+ ADnGU4Ge42C6n3KqRuee9qIvAs4ZgXlXooWWLWMPSbZ/lpLi9+wE9xe6GVO/4BsLlBskszEcJDK6u
+ b3d3S2TxMQMhgXjUfJSAK3IwaTpeS/1SRYzaDnHN9cZiwTGqPEWhM1EqUxQvMij3D08njv1hf5zLa
+ E/lM25PmshZs8n2z0u4s3k7l0k1+QXsNOATEHgXW/QoH3JjQt3ZgoUN3i4Gchyr+zQsq5GJvdqmij
+ X3sRfxM531p1pPRUzK4tX06o2kILA2Ha9sZbaHB9lPivmaGLCN9QJ0WqbYR+xL7WDMzqWR4T7rmwY
+ KJ2AyMOQ==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1r05fc-00AkFz-36; Mon, 06 Nov 2023 19:54:01 +0000
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1r05fb-007taR-5p; Mon, 06 Nov 2023 19:53:59 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1r05fb-001GOH-1v; Mon, 06 Nov 2023 19:53:59 +0000
+ Hat Linux)) id 1r05fb-001GO5-1B; Mon, 06 Nov 2023 19:53:59 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -85,19 +85,20 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.3 v2 24/46] hw/arm/fsl: use qemu_configure_nic_device()
-Date: Mon,  6 Nov 2023 19:49:29 +0000
-Message-ID: <20231106195352.301038-25-dwmw2@infradead.org>
+Subject: [PATCH for-8.3 v2 22/46] hw/arm/aspeed: use
+ qemu_configure_nic_device()
+Date: Mon,  6 Nov 2023 19:49:27 +0000
+Message-ID: <20231106195352.301038-23-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106195352.301038-1-dwmw2@infradead.org>
 References: <20231106195352.301038-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- desiato.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1:d65d:64ff:fe57:4e05;
- envelope-from=BATV+aa7b7dce24b49c47a83c+7379+infradead.org+dwmw2@desiato.srs.infradead.org;
- helo=desiato.infradead.org
+ casper.infradead.org. See http://www.infradead.org/rpr.html
+Received-SPF: none client-ip=2001:8b0:10b:1236::1;
+ envelope-from=BATV+7ad6dfa9aff48d363c6b+7379+infradead.org+dwmw2@casper.srs.infradead.org;
+ helo=casper.infradead.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -124,64 +125,36 @@ From: David Woodhouse <dwmw@amazon.co.uk>
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/arm/fsl-imx25.c  | 2 +-
- hw/arm/fsl-imx6.c   | 2 +-
- hw/arm/fsl-imx6ul.c | 2 +-
- hw/arm/fsl-imx7.c   | 2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+ hw/arm/aspeed.c | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/hw/arm/fsl-imx25.c b/hw/arm/fsl-imx25.c
-index 24c4374590..28084d2e5a 100644
---- a/hw/arm/fsl-imx25.c
-+++ b/hw/arm/fsl-imx25.c
-@@ -170,7 +170,7 @@ static void fsl_imx25_realize(DeviceState *dev, Error **errp)
+diff --git a/hw/arm/aspeed.c b/hw/arm/aspeed.c
+index cc59176563..bed5e4f40b 100644
+--- a/hw/arm/aspeed.c
++++ b/hw/arm/aspeed.c
+@@ -356,7 +356,6 @@ static void aspeed_machine_init(MachineState *machine)
+     AspeedMachineClass *amc = ASPEED_MACHINE_GET_CLASS(machine);
+     AspeedSoCClass *sc;
+     int i;
+-    NICInfo *nd = &nd_table[0];
+ 
+     bmc->soc = ASPEED_SOC(object_new(amc->soc_name));
+     object_property_add_child(OBJECT(machine), "soc", OBJECT(bmc->soc));
+@@ -371,10 +370,10 @@ static void aspeed_machine_init(MachineState *machine)
+                              &error_fatal);
+ 
+     for (i = 0; i < sc->macs_num; i++) {
+-        if ((amc->macs_mask & (1 << i)) && nd->used) {
+-            qemu_check_nic_model(nd, TYPE_FTGMAC100);
+-            qdev_set_nic_properties(DEVICE(&bmc->soc->ftgmac100[i]), nd);
+-            nd++;
++        if ((amc->macs_mask & (1 << i)) &&
++            !qemu_configure_nic_device(DEVICE(&bmc->soc->ftgmac100[i]),
++                                       true, NULL)) {
++            break; /* No configs left; stop asking */
+         }
      }
  
-     object_property_set_uint(OBJECT(&s->fec), "phy-num", s->phy_num, &err);
--    qdev_set_nic_properties(DEVICE(&s->fec), &nd_table[0]);
-+    qemu_configure_nic_device(DEVICE(&s->fec), true, NULL);
- 
-     if (!sysbus_realize(SYS_BUS_DEVICE(&s->fec), errp)) {
-         return;
-diff --git a/hw/arm/fsl-imx6.c b/hw/arm/fsl-imx6.c
-index 4fa7f0b95e..273bc79283 100644
---- a/hw/arm/fsl-imx6.c
-+++ b/hw/arm/fsl-imx6.c
-@@ -380,7 +380,7 @@ static void fsl_imx6_realize(DeviceState *dev, Error **errp)
-     }
- 
-     object_property_set_uint(OBJECT(&s->eth), "phy-num", s->phy_num, &err);
--    qdev_set_nic_properties(DEVICE(&s->eth), &nd_table[0]);
-+    qemu_configure_nic_device(DEVICE(&s->eth), true, NULL);
-     if (!sysbus_realize(SYS_BUS_DEVICE(&s->eth), errp)) {
-         return;
-     }
-diff --git a/hw/arm/fsl-imx6ul.c b/hw/arm/fsl-imx6ul.c
-index e37b69a5e1..ca3dd439ec 100644
---- a/hw/arm/fsl-imx6ul.c
-+++ b/hw/arm/fsl-imx6ul.c
-@@ -442,7 +442,7 @@ static void fsl_imx6ul_realize(DeviceState *dev, Error **errp)
-                                  s->phy_num[i], &error_abort);
-         object_property_set_uint(OBJECT(&s->eth[i]), "tx-ring-num",
-                                  FSL_IMX6UL_ETH_NUM_TX_RINGS, &error_abort);
--        qdev_set_nic_properties(DEVICE(&s->eth[i]), &nd_table[i]);
-+        qemu_configure_nic_device(DEVICE(&s->eth[i]), true, NULL);
-         sysbus_realize(SYS_BUS_DEVICE(&s->eth[i]), &error_abort);
- 
-         sysbus_mmio_map(SYS_BUS_DEVICE(&s->eth[i]), 0,
-diff --git a/hw/arm/fsl-imx7.c b/hw/arm/fsl-imx7.c
-index 474cfdc87c..1acbe065db 100644
---- a/hw/arm/fsl-imx7.c
-+++ b/hw/arm/fsl-imx7.c
-@@ -446,7 +446,7 @@ static void fsl_imx7_realize(DeviceState *dev, Error **errp)
-                                  s->phy_num[i], &error_abort);
-         object_property_set_uint(OBJECT(&s->eth[i]), "tx-ring-num",
-                                  FSL_IMX7_ETH_NUM_TX_RINGS, &error_abort);
--        qdev_set_nic_properties(DEVICE(&s->eth[i]), &nd_table[i]);
-+        qemu_configure_nic_device(DEVICE(&s->eth[i]), true, NULL);
-         sysbus_realize(SYS_BUS_DEVICE(&s->eth[i]), &error_abort);
- 
-         sysbus_mmio_map(SYS_BUS_DEVICE(&s->eth[i]), 0, FSL_IMX7_ENETn_ADDR[i]);
 -- 
 2.41.0
 
