@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52764C4332F
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 11:04:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A31EC4167D
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Nov 2023 11:05:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1qzxPF-0006aI-Jk; Mon, 06 Nov 2023 06:04:33 -0500
+	id 1qzxPD-0006QI-Jw; Mon, 06 Nov 2023 06:04:31 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxPD-0006N0-8G
- for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:04:31 -0500
-Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxOy-0006B8-7U
+ for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:04:19 -0500
+Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxP5-0003lo-8s
- for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:04:29 -0500
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-40850b244beso33437505e9.2
- for <qemu-riscv@nongnu.org>; Mon, 06 Nov 2023 03:04:21 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1qzxOq-0003iS-OR
+ for qemu-riscv@nongnu.org; Mon, 06 Nov 2023 06:04:11 -0500
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-32d9d8284abso2666735f8f.3
+ for <qemu-riscv@nongnu.org>; Mon, 06 Nov 2023 03:04:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699268660; x=1699873460; darn=nongnu.org;
+ d=linaro.org; s=google; t=1699268647; x=1699873447; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vBU4Pso0gSsGUJn6Y+tUxfBbchAwyEFBu11FifHIio4=;
- b=Z8lKU3NJxTdKZ97dZh4jm5cl3iptXXrfEQq5bveHNK1z7hyV+t8aIUkPg5Rj41AfZU
- zTSwHWjrJDnAhfhCm45HyKVLLU2VM1//YbFunZyw5PLCxjruO9ZaLAxTNc8szuKheh9w
- YuNlwcPjfyP5vjyZWC5QSwQ3WHh2XodaiYLI8DENc/3PVstRfc6A0mVez8ar6mqoXQKY
- xCdJ41dHgWkSofHqomJ34PdhUfJ5rsTpMz68RNw2JbSuuCKw9KqsY8JYBXW4C0LfBDdm
- pyIvdxdgNts8nWZI7MAsS/KJCNdXM4ophvBrhllPFmDRnVqcNuvTk85sRph0K22k01oa
- aq5w==
+ bh=th3yfEu9dsqZLmfk3I95d9IkQeEp24N2k4ODPshVYkY=;
+ b=C3qkbzKHqKUp/q4CUgwwYnzNK8GmiuJJTQTYaoQ39Nk3RCg/Y4jsM7Bx3MjCxMZhx8
+ /caCjzgDW403J9uBXQXQOzBgKpt0PWTLxmZydvhNSBglbdlZ85S/h73ZO6unbJcC4qYL
+ jKopi56eaxG2EORedykf5TVdzGeHILjSCz/X1MKkCcp1yuXX2+lMe8Uofw3zEXFf2BvA
+ fyeq0vuq6637lm59BRlhfeobpX6/V/oS5UCSFGHS8LaZ8Olv+swqDNNiUrEebmchQkiH
+ 73YGL8x6peeAYPpmTp93T9bdaEiiVO+AeYXejDrJn5a5Xjou9V1oOjEf9RJLw1E7Qbsv
+ qOPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699268660; x=1699873460;
+ d=1e100.net; s=20230601; t=1699268647; x=1699873447;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vBU4Pso0gSsGUJn6Y+tUxfBbchAwyEFBu11FifHIio4=;
- b=qYRZOfb9P8MDtknKyuKpxNxpnhce1AoZjYvRll4EvSr5QMRBYRnrTlZ3XPbMmtRK2e
- 21cII9ydPJ3oWt/eJDN/Rh19u1/zdmJfPP494nleV41MhflG/5wiUGhABjsitNcq88VW
- nN7rdfiuLsUwROB2uNNnmrVoLGpC8FOyRclsBBbOL+QC2J3irLCze0fA/P0sujzqMeyw
- yvJ2F2VuBbggBuIr3n0lP9Y4td7aGZU0SL+24Zo6FdjHZ7BzFo7rS6sufeBSK+kWYiul
- rNBJ6lBmnEoZJDnK2HR1IO+23R513QABxlFeGgSvpcBoR7fzfylMnETvLPJBp7lEs0x3
- Ek1A==
-X-Gm-Message-State: AOJu0YxXYEemGp8L8PRi0AymUDvNRr5GSra9qr7ge5cfdleVlu/Bx6kf
- bWtZ309yzd6QrW5BDlMx43XKDA==
-X-Google-Smtp-Source: AGHT+IFNaWNTXm6/JgnRLDfhCwlt529RJlrSNb5hfX6nFr1uBzGpsDlgEDrmBYL8mOG8EZ2XGLOTgg==
-X-Received: by 2002:a05:600c:1906:b0:408:3b8d:f7e8 with SMTP id
- j6-20020a05600c190600b004083b8df7e8mr24996294wmq.33.1699268660546; 
- Mon, 06 Nov 2023 03:04:20 -0800 (PST)
+ bh=th3yfEu9dsqZLmfk3I95d9IkQeEp24N2k4ODPshVYkY=;
+ b=arRlbALRWlhCurjVvBSLOpufks0WzNRDqboTpX6Z3/bmBrrcAAg3paKJxaG+MFH9Kl
+ OGVV5kugy2zn+AbzmyhFE10Umn98WkTvoSRQu3HbazJFUzojPnWymUE/89Ea/3K4o7RW
+ MeIyErwA+o2Ptwd5rz/nMm9eagIZt5ecA0fqkuVcC05U2er2TZ8/iR29UUo0ut93MPpT
+ 5tDVbP6o9XC6HzKf0QAqs2+F0IHcjrkZIfGvZ69T8OubFj60I+8C1QFHrlAWpk+Oy29b
+ LxXqDML0t9SOn4z2Z4yv6LyPADdehAreqF5gq8RpEeJNmv2Prs3MOn6ttmlez65YsKUS
+ qnrg==
+X-Gm-Message-State: AOJu0Yy+08CZv9lyF62zC0la9Mvpu8dwrLaiFNB59BXCzKWWR4PZaVJ/
+ p9Ez15Qd72HpPe2q7hfrPdE7UA==
+X-Google-Smtp-Source: AGHT+IHAXSkBUxdCa+OOuf1KcH7iclZXA5c2IEfRwgd7qngftXdgZjVXH3qTMwMRLHD15LdpD+DqZg==
+X-Received: by 2002:adf:fd82:0:b0:32d:9a87:b7a with SMTP id
+ d2-20020adffd82000000b0032d9a870b7amr17402964wrr.50.1699268646998; 
+ Mon, 06 Nov 2023 03:04:06 -0800 (PST)
 Received: from m1x-phil.lan (176-131-220-199.abo.bbox.fr. [176.131.220.199])
  by smtp.gmail.com with ESMTPSA id
- g20-20020a05600c4ed400b003fee8793911sm12010027wmq.44.2023.11.06.03.04.18
+ k13-20020a5d6e8d000000b003196b1bb528sm9094731wrz.64.2023.11.06.03.04.05
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 06 Nov 2023 03:04:20 -0800 (PST)
+ Mon, 06 Nov 2023 03:04:06 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: kvm@vger.kernel.org, qemu-s390x@nongnu.org, qemu-block@nongnu.org,
  qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Anton Johansson <anjo@rev.ng>,
  Richard Henderson <richard.henderson@linaro.org>,
- Riku Voipio <riku.voipio@iki.fi>, Paolo Bonzini <pbonzini@redhat.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>
-Subject: [PULL 06/60] accel: Introduce cpu_exec_reset_hold()
-Date: Mon,  6 Nov 2023 12:02:38 +0100
-Message-ID: <20231106110336.358-7-philmd@linaro.org>
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
+Subject: [PULL 04/60] tests/unit/test-seccomp: Remove mentions of softmmu in
+ test names
+Date: Mon,  6 Nov 2023 12:02:36 +0100
+Message-ID: <20231106110336.358-5-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231106110336.358-1-philmd@linaro.org>
 References: <20231106110336.358-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,93 +97,73 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Introduce cpu_exec_reset_hold() which call an accelerator
-specific AccelOpsClass::cpu_reset_hold() handler.
-
-Define a stub on TCG user emulation, because CPU reset is
-irrelevant there.
+Wether we are using a software MMU or not is irrelevant for the
+seccomp facility. The facility is restricted to system emulation,
+but such detail isn't really helpful, so directly drop the
+'softmmu' mention from the test names.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Anton Johansson <anjo@rev.ng>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20230918104153.24433-3-philmd@linaro.org>
+Message-Id: <20231002145104.52193-3-philmd@linaro.org>
 ---
- include/hw/core/cpu.h      | 1 +
- include/sysemu/accel-ops.h | 1 +
- accel/tcg/user-exec-stub.c | 4 ++++
- hw/core/cpu-common.c       | 1 +
- system/cpus.c              | 7 +++++++
- 5 files changed, 14 insertions(+)
+ tests/unit/test-seccomp.c | 24 ++++++++++++------------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 18593db5b2..6373aa4501 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -1153,6 +1153,7 @@ void cpu_class_init_props(DeviceClass *dc);
- void cpu_exec_initfn(CPUState *cpu);
- void cpu_exec_realizefn(CPUState *cpu, Error **errp);
- void cpu_exec_unrealizefn(CPUState *cpu);
-+void cpu_exec_reset_hold(CPUState *cpu);
+diff --git a/tests/unit/test-seccomp.c b/tests/unit/test-seccomp.c
+index f02c79cafd..bab93fd6da 100644
+--- a/tests/unit/test-seccomp.c
++++ b/tests/unit/test-seccomp.c
+@@ -229,26 +229,26 @@ int main(int argc, char **argv)
+     g_test_init(&argc, &argv, NULL);
+     if (can_play_with_seccomp()) {
+ #ifdef SYS_fork
+-        g_test_add_func("/softmmu/seccomp/sys-fork/on",
++        g_test_add_func("/seccomp/sys-fork/on",
+                         test_seccomp_sys_fork_on);
+-        g_test_add_func("/softmmu/seccomp/sys-fork/on-nospawn",
++        g_test_add_func("/seccomp/sys-fork/on-nospawn",
+                         test_seccomp_sys_fork_on_nospawn);
+-        g_test_add_func("/softmmu/seccomp/sys-fork/off",
++        g_test_add_func("/seccomp/sys-fork/off",
+                         test_seccomp_sys_fork_off);
+ #endif
  
- /**
-  * target_words_bigendian:
-diff --git a/include/sysemu/accel-ops.h b/include/sysemu/accel-ops.h
-index 3c1fab4b1e..ef91fc28bb 100644
---- a/include/sysemu/accel-ops.h
-+++ b/include/sysemu/accel-ops.h
-@@ -30,6 +30,7 @@ struct AccelOpsClass {
-     void (*ops_init)(AccelOpsClass *ops);
+-        g_test_add_func("/softmmu/seccomp/fork/on",
++        g_test_add_func("/seccomp/fork/on",
+                         test_seccomp_fork_on);
+-        g_test_add_func("/softmmu/seccomp/fork/on-nospawn",
++        g_test_add_func("/seccomp/fork/on-nospawn",
+                         test_seccomp_fork_on_nospawn);
+-        g_test_add_func("/softmmu/seccomp/fork/off",
++        g_test_add_func("/seccomp/fork/off",
+                         test_seccomp_fork_off);
  
-     bool (*cpus_are_resettable)(void);
-+    void (*cpu_reset_hold)(CPUState *cpu);
+-        g_test_add_func("/softmmu/seccomp/thread/on",
++        g_test_add_func("/seccomp/thread/on",
+                         test_seccomp_thread_on);
+-        g_test_add_func("/softmmu/seccomp/thread/on-nospawn",
++        g_test_add_func("/seccomp/thread/on-nospawn",
+                         test_seccomp_thread_on_nospawn);
+-        g_test_add_func("/softmmu/seccomp/thread/off",
++        g_test_add_func("/seccomp/thread/off",
+                         test_seccomp_thread_off);
  
-     void (*create_vcpu_thread)(CPUState *cpu); /* MANDATORY NON-NULL */
-     void (*kick_vcpu_thread)(CPUState *cpu);
-diff --git a/accel/tcg/user-exec-stub.c b/accel/tcg/user-exec-stub.c
-index 2dc6fd9c4e..4fbe2dbdc8 100644
---- a/accel/tcg/user-exec-stub.c
-+++ b/accel/tcg/user-exec-stub.c
-@@ -14,6 +14,10 @@ void qemu_init_vcpu(CPUState *cpu)
- {
- }
- 
-+void cpu_exec_reset_hold(CPUState *cpu)
-+{
-+}
-+
- /* User mode emulation does not support record/replay yet.  */
- 
- bool replay_exception(void)
-diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
-index 29c917c5dc..7d266c36ac 100644
---- a/hw/core/cpu-common.c
-+++ b/hw/core/cpu-common.c
-@@ -137,6 +137,7 @@ static void cpu_common_reset_hold(Object *obj)
-     cpu->crash_occurred = false;
-     cpu->cflags_next_tb = -1;
- 
-+    cpu_exec_reset_hold(cpu);
-     if (tcg_enabled()) {
-         tcg_flush_jmp_cache(cpu);
-         tcg_flush_softmmu_tlb(cpu);
-diff --git a/system/cpus.c b/system/cpus.c
-index 0848e0dbdb..952f15868c 100644
---- a/system/cpus.c
-+++ b/system/cpus.c
-@@ -201,6 +201,13 @@ bool cpus_are_resettable(void)
-     return true;
- }
- 
-+void cpu_exec_reset_hold(CPUState *cpu)
-+{
-+    if (cpus_accel->cpu_reset_hold) {
-+        cpus_accel->cpu_reset_hold(cpu);
-+    }
-+}
-+
- int64_t cpus_get_virtual_clock(void)
- {
-     /*
+         if (doit_sched() == 0) {
+@@ -256,11 +256,11 @@ int main(int argc, char **argv)
+              * musl doesn't impl sched_setscheduler, hence
+              * we check above if it works first
+              */
+-            g_test_add_func("/softmmu/seccomp/sched/on",
++            g_test_add_func("/seccomp/sched/on",
+                             test_seccomp_sched_on);
+-            g_test_add_func("/softmmu/seccomp/sched/on-nores",
++            g_test_add_func("/seccomp/sched/on-nores",
+                             test_seccomp_sched_on_nores);
+-            g_test_add_func("/softmmu/seccomp/sched/off",
++            g_test_add_func("/seccomp/sched/off",
+                             test_seccomp_sched_off);
+         }
+     }
 -- 
 2.41.0
 
