@@ -4,87 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA71BC4167D
-	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Nov 2023 12:28:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE04DC4167B
+	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Nov 2023 12:28:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r0L9t-0006TX-4z; Tue, 07 Nov 2023 07:26:18 -0500
+	id 1r0L8t-0005PP-IS; Tue, 07 Nov 2023 07:25:16 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r0L9Q-00067i-FV
- for qemu-riscv@nongnu.org; Tue, 07 Nov 2023 07:25:54 -0500
-Received: from mail-lf1-x12a.google.com ([2a00:1450:4864:20::12a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r0L8q-0005Hb-F2
+ for qemu-riscv@nongnu.org; Tue, 07 Nov 2023 07:25:12 -0500
+Received: from mail-lf1-x129.google.com ([2a00:1450:4864:20::129])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r0L97-00052k-41
- for qemu-riscv@nongnu.org; Tue, 07 Nov 2023 07:25:44 -0500
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-507f1c29f25so7361740e87.1
- for <qemu-riscv@nongnu.org>; Tue, 07 Nov 2023 04:25:28 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r0L8Z-0004eP-TK
+ for qemu-riscv@nongnu.org; Tue, 07 Nov 2023 07:25:11 -0500
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-50930f126b1so6921396e87.3
+ for <qemu-riscv@nongnu.org>; Tue, 07 Nov 2023 04:24:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699359927; x=1699964727; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oCI52AvMWABS83lFYxVvO8TS7PMofgyHZSbSztgXemQ=;
- b=f02lqKVvoZtJeGUnWhd2Fw7uQwcMI/NqvHCM4UKR1+MwOPJZnJsP0AtneWO1Xv4GIn
- nE2J5CkQdr/yOnc3kNQGBHFij0MxucQKc8BtpbpglzU66H2gRyFqLXJpTz/r9tfLyIZb
- MlQQcSJW6QX9Fwn+UWQEdaKcWXgIHah+Cf/44FkK953serGSE3aSWN0kJnEtp67CsMtG
- Yso14n4sF3ja/xYAXSvW1xkxNLxyt4kwXBkYgUtzlWF92sCYjynE4Evl3Z1QJUaxDxcp
- A+5f3TkiFXxT7P2iaDEh1AdwfrB6ftVJ+OkjddWFNzGHwwaFPp06HBlZC/n74VlytMtr
- P4fQ==
+ d=linaro.org; s=google; t=1699359885; x=1699964685; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=lq6opU8T8PFx7ZTVJ6rMapkVwbiBhNf+MD9y3Tusqoc=;
+ b=hCxY7qm9Xo2XttNsPVLA08mmXt/7WKlQjqIaQNrpGAG4V/K7IRNIau9UcTQXnuzd9U
+ eYmnk8slq7t9lgqd5sSZu17KZuZm4YR0ryw+o8MMlDfKowC6yyNxKBP5K2i0xlCnysg1
+ mDeoRztmHjJgdVAnZx4mPgkhPDuHBnBs2Y6ryFwA880rYLjwXb++vfTrEtn9S7NUL8So
+ 6B7Yg0dQpKJL0atAvGZ4NUNPCgxddFb0aAarLoTcLFD2MzaaRuGl8beZQW2BoqoS5oQM
+ CrR7jLRASPSn8Sa31jxLqnJoC6+ThQb6veCqsqQ7MDMfRckC5Y/ab/VAkxoo0UJVkDw9
+ gHtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699359927; x=1699964727;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=oCI52AvMWABS83lFYxVvO8TS7PMofgyHZSbSztgXemQ=;
- b=PzHIxcz9vGpZlNtZWuQtpPIul1f9V2+U21smedR2Ax+Wer0ZtbmhbrObA2ePqqEaeA
- BTdr144EX2jdVuZoTaHvJkAQBFLnLrfFdmjTv+joRVkRv3DAnnG5ko6+BBfvnsjVqzUp
- E7WSnRM1YrKNwlnUix3gDxoiWF/sayaIWyZjbEUzkPyGJ4RWDl6a5FXdUNRgfvPQR1d3
- ZfXePZ0Ta07tpa9ij+hdnkwvjU8tVGgGmsEP9hZN7unMWQ6C6UHbE4M/REJNG5S356Vc
- CI9SrIvb/bQ0hkBZpl2F3GgWtb9YfTASFwUYI4gbB6rH9VW2jERISegSHzqDrxS7jYeJ
- dNbg==
-X-Gm-Message-State: AOJu0YyCr2XeskXqSCm192dZ75XeY7pEpXwYqNzQrJPPLqeGN2UFNsRs
- u+lLN8qP6c3Z7/EL/R3P5GgBYQ==
-X-Google-Smtp-Source: AGHT+IEUCLU8RDu5qr1NEEmclItaDvStxQekoPqHOoGyY8zlkqPDp2//Jp3dimkvP18y9tz2tkd9OQ==
-X-Received: by 2002:a05:6512:3caa:b0:509:f6b:1de1 with SMTP id
- h42-20020a0565123caa00b005090f6b1de1mr28646589lfv.12.1699359927307; 
- Tue, 07 Nov 2023 04:25:27 -0800 (PST)
+ d=1e100.net; s=20230601; t=1699359885; x=1699964685;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=lq6opU8T8PFx7ZTVJ6rMapkVwbiBhNf+MD9y3Tusqoc=;
+ b=vmH2dVvVbzf32D+Bh7o6nAn1NXi/fkSpz4bh34jrydp4SMvvW0eXmlzRxYuC56UXbj
+ G/TEeVP6ft4lPgF7nedCL0cx3UD5funCroe7+OVpjZikFB3+LE+oKbbtatehYc6TeZW3
+ L1B7N237HHnPdaOzEGx0WgyozP2oqq9746sJTgps3nxeU2RRkXA5Hg4D6CjFMMtAEoGz
+ 9TZMJUKOqwtigyhSTnH4Fg/stydfa047cq84t96fYDrAygsAIfd8OLM3SCe2TO01LANe
+ SLxs4CnJKJWz8HTZrw8l5IihPEngADNenOpsk+spoOQvtKg8lTBiPvfQPDQDzfRiEOAW
+ G/2w==
+X-Gm-Message-State: AOJu0YyuicpYkNddCGNOWJx1O4Jj+g91XKLJd5L9vJZNIs66lyMYtSEX
+ ZKNGdQz8dsqYYxtLwFn49k/Amw==
+X-Google-Smtp-Source: AGHT+IHQRTmhrKQSB6dLQq6uCZuMravr2Twfde1HqEidHH1aB+/3ae/ouErFXVhtG1eGn859yaEoCA==
+X-Received: by 2002:a05:6512:324a:b0:4fa:5e76:7ad4 with SMTP id
+ c10-20020a056512324a00b004fa5e767ad4mr20672697lfr.10.1699359885076; 
+ Tue, 07 Nov 2023 04:24:45 -0800 (PST)
 Received: from m1x-phil.lan ([176.187.216.69])
  by smtp.gmail.com with ESMTPSA id
- m17-20020adff391000000b0032cc35c2ef7sm2235837wro.29.2023.11.07.04.25.25
+ r16-20020a05600c459000b003fefaf299b6sm15683258wmo.38.2023.11.07.04.24.43
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 07 Nov 2023 04:25:26 -0800 (PST)
+ Tue, 07 Nov 2023 04:24:44 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-block@nongnu.org,
  qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Thomas Huth <thuth@redhat.com>, Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Eric Farman <farman@linux.ibm.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>
-Subject: [PULL 42/75] hw/s390x/css: Have css_do_sic() take S390CPU instead of
- CPUS390XState
-Date: Tue,  7 Nov 2023 13:24:32 +0100
-Message-ID: <20231107122442.58674-8-philmd@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PULL 00/75] Misc HW/UI patches for 2023-11-07
+Date: Tue,  7 Nov 2023 13:24:25 +0100
+Message-ID: <20231107122442.58674-1-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20231107122442.58674-1-philmd@linaro.org>
-References: <20231107122442.58674-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::12a;
- envelope-from=philmd@linaro.org; helo=mail-lf1-x12a.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::129;
+ envelope-from=philmd@linaro.org; helo=mail-lf1-x129.google.com
+X-Spam_score_int: 4
+X-Spam_score: 0.4
+X-Spam_bar: /
+X-Spam_report: (0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001, SUSPICIOUS_RECIPS=2.51,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,80 +91,319 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-"hw/s390x/css.h" is a header used by target-agnostic objects
-(such hw/s390x/virtio-ccw-gpu.c), thus can not use target-specific
-types, such CPUS390XState.
+The following changes since commit bb541a7068d2eee51a9abbe2dedcdf27298b1872:
 
-Have css_do_sic() take S390CPU a pointer, which is target-agnostic.
+  Merge tag 'pull-pa-20231106' of https://gitlab.com/rth7680/qemu into staging (2023-11-07 15:01:17 +0800)
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Thomas Huth <thuth@redhat.com>
-Message-Id: <20231106114500.5269-2-philmd@linaro.org>
----
- include/hw/s390x/css.h         | 2 +-
- hw/s390x/css.c                 | 3 ++-
- target/s390x/kvm/kvm.c         | 2 +-
- target/s390x/tcg/misc_helper.c | 3 ++-
- 4 files changed, 6 insertions(+), 4 deletions(-)
+are available in the Git repository at:
 
-diff --git a/include/hw/s390x/css.h b/include/hw/s390x/css.h
-index 75e5381613..ba72ee3dd2 100644
---- a/include/hw/s390x/css.h
-+++ b/include/hw/s390x/css.h
-@@ -233,7 +233,7 @@ typedef enum {
- } CssIoAdapterType;
- 
- void css_adapter_interrupt(CssIoAdapterType type, uint8_t isc);
--int css_do_sic(CPUS390XState *env, uint8_t isc, uint16_t mode);
-+int css_do_sic(S390CPU *cpu, uint8_t isc, uint16_t mode);
- uint32_t css_get_adapter_id(CssIoAdapterType type, uint8_t isc);
- void css_register_io_adapters(CssIoAdapterType type, bool swap, bool maskable,
-                               uint8_t flags, Error **errp);
-diff --git a/hw/s390x/css.c b/hw/s390x/css.c
-index 95d1b3a3ce..bcedec2fc8 100644
---- a/hw/s390x/css.c
-+++ b/hw/s390x/css.c
-@@ -644,8 +644,9 @@ void css_conditional_io_interrupt(SubchDev *sch)
-     }
- }
- 
--int css_do_sic(CPUS390XState *env, uint8_t isc, uint16_t mode)
-+int css_do_sic(S390CPU *cpu, uint8_t isc, uint16_t mode)
- {
-+    CPUS390XState *env = &cpu->env;
-     S390FLICState *fs = s390_get_flic();
-     S390FLICStateClass *fsc = s390_get_flic_class(fs);
-     int r;
-diff --git a/target/s390x/kvm/kvm.c b/target/s390x/kvm/kvm.c
-index 0f0e784b2a..1ddad0bec1 100644
---- a/target/s390x/kvm/kvm.c
-+++ b/target/s390x/kvm/kvm.c
-@@ -1358,7 +1358,7 @@ static int kvm_sic_service_call(S390CPU *cpu, struct kvm_run *run)
- 
-     mode = env->regs[r1] & 0xffff;
-     isc = (env->regs[r3] >> 27) & 0x7;
--    r = css_do_sic(env, isc, mode);
-+    r = css_do_sic(cpu, isc, mode);
-     if (r) {
-         kvm_s390_program_interrupt(cpu, -r);
-     }
-diff --git a/target/s390x/tcg/misc_helper.c b/target/s390x/tcg/misc_helper.c
-index e85658ce22..56c7f00cf9 100644
---- a/target/s390x/tcg/misc_helper.c
-+++ b/target/s390x/tcg/misc_helper.c
-@@ -761,10 +761,11 @@ void HELPER(stpcifc)(CPUS390XState *env, uint32_t r1, uint64_t fiba,
- 
- void HELPER(sic)(CPUS390XState *env, uint64_t r1, uint64_t r3)
- {
-+    S390CPU *cpu = env_archcpu(env);
-     int r;
- 
-     qemu_mutex_lock_iothread();
--    r = css_do_sic(env, (r3 >> 27) & 0x7, r1 & 0xffff);
-+    r = css_do_sic(cpu, (r3 >> 27) & 0x7, r1 & 0xffff);
-     qemu_mutex_unlock_iothread();
-     /* css_do_sic() may actually return a PGM_xxx value to inject */
-     if (r) {
+  https://github.com/philmd/qemu.git tags/misc-cpus-20231107
+
+for you to fetch changes up to 95a40c44501b5e3b8d1922ea37f30142981b2b34:
+
+  dump: Add close fd on error return to avoid resource leak (2023-11-07 13:08:49 +0100)
+
+Few checkpatch warnings in target/i386/hvf/x86_emu.c are deliberately ignored.
+
+----------------------------------------------------------------
+Misc hardware patch queue
+
+HW emulation:
+- PMBus fixes and tests (Titus)
+- IDE fixes and tests (Fiona)
+- New ADM1266 sensor (Titus)
+- Better error propagation in PCI-ISA i82378 (Philippe)
+- Declare SD model QOM types using DEFINE_TYPES macro (Philippe)
+
+Topology:
+- Fix CPUState::nr_cores calculation (Zhuocheng Ding and Zhao Liu)
+
+Monitor:
+- Synchronize CPU state in 'info lapic' (Dongli Zhang)
+
+QOM:
+- Have 'cpu-qom.h' target-agnostic (Philippe)
+- Move ArchCPUClass definition to each target's cpu.h (Philippe)
+- Call object_class_is_abstract once in cpu_class_by_name (Philippe)
+
+UI:
+- Use correct key names in titles on MacOS / SDL2 (Adrian)
+
+MIPS:
+- Fix MSA BZ/BNZ and TX79 LQ/SQ opcodes (Philippe)
+
+Nios2:
+- Create IRQs *after* vCPU is realized (Philippe)
+
+PPC:
+- Restrict KVM objects to system emulation (Philippe)
+- Move target-specific definitions out of 'cpu-qom.h' (Philippe)
+
+S390X:
+- Make hw/s390x/css.h and hw/s390x/sclp.h headers target agnostic (Philippe)
+
+X86:
+- HVF & KVM cleanups (Philippe)
+
+Various targets:
+- Use env_archcpu() to optimize (Philippe)
+
+Misc:
+- Few global variable shadowing removed (Philippe)
+- Introduce cpu_exec_reset_hold and factor tcg_cpu_reset_hold out (Philippe)
+- Remove few more 'softmmu' mentions (Philippe)
+- Fix and cleanup in vl.c (Akihiko & Marc-André)
+- Resource leak fix in dump (Zongmin Zhou)
+- MAINTAINERS updates (Thomas, Daniel)
+
+----------------------------------------------------------------
+
+Adrian Wowk (1):
+  ui/sdl2: use correct key names in win title on mac
+
+Akihiko Odaki (1):
+  vl: Free machine list
+
+Daniel P. Berrangé (1):
+  MAINTAINERS: update libvirt devel mailing list address
+
+Dongli Zhang (1):
+  target/i386/monitor: synchronize cpu state for lapic info
+
+Fiona Ebner (2):
+  hw/ide: reset: cancel async DMA operation before resetting state
+  tests/qtest: ahci-test: add test exposing reset issue with pending
+    callback
+
+Marc-André Lureau (1):
+  vl: constify default_list
+
+Philippe Mathieu-Daudé (51):
+  tests/vm/ubuntu.aarch64: Correct comment about TCG specific delay
+  tests/unit/test-seccomp: Remove mentions of softmmu in test names
+  accel/tcg: Declare tcg_flush_jmp_cache() in 'exec/tb-flush.h'
+  accel: Introduce cpu_exec_reset_hold()
+  accel/tcg: Factor tcg_cpu_reset_hold() out
+  target: Unify QOM style
+  target: Mention 'cpu-qom.h' is target agnostic
+  target/arm: Move internal declarations from 'cpu-qom.h' to 'cpu.h'
+  target/ppc: Remove CPU_RESOLVING_TYPE from 'cpu-qom.h'
+  target/riscv: Remove CPU_RESOLVING_TYPE from 'cpu-qom.h'
+  target: Declare FOO_CPU_TYPE_NAME/SUFFIX in 'cpu-qom.h'
+  target/hexagon: Declare QOM definitions in 'cpu-qom.h'
+  target/loongarch: Declare QOM definitions in 'cpu-qom.h'
+  target/nios2: Declare QOM definitions in 'cpu-qom.h'
+  target/openrisc: Declare QOM definitions in 'cpu-qom.h'
+  target/riscv: Move TYPE_RISCV_CPU_BASE definition to 'cpu.h'
+  target/ppc: Use env_archcpu() in helper_book3s_msgsndp()
+  target/riscv: Use env_archcpu() in [check_]nanbox()
+  target/s390x: Use env_archcpu() in handle_diag_308()
+  target/xtensa: Use env_archcpu() in update_c[compare|count]()
+  target/i386/hvf: Use x86_cpu in simulate_[rdmsr|wrmsr]()
+  target/i386/hvf: Use env_archcpu() in simulate_[rdmsr/wrmsr]()
+  target/i386/hvf: Use CPUState typedef
+  target/i386/hvf: Rename 'CPUState *cpu' variable as 'cs'
+  target/i386/hvf: Rename 'X86CPU *x86_cpu' variable as 'cpu'
+  target/i386/kvm: Correct comment in kvm_cpu_realize()
+  target/mips: Fix MSA BZ/BNZ opcodes displacement
+  target/mips: Fix TX79 LQ/SQ opcodes
+  sysemu/kvm: Restrict kvmppc_get_radix_page_info() to ppc targets
+  hw/ppc/e500: Restrict ppce500_init_mpic_kvm() to KVM
+  target/ppc: Restrict KVM objects to system emulation
+  target/ppc: Prohibit target specific KVM prototypes on user emulation
+  target/ppc: Define powerpc_pm_insn_t in 'internal.h'
+  target/ppc: Move ppc_cpu_class_by_name() declaration to 'cpu.h'
+  target/ppc: Move PowerPCCPUClass definition to 'cpu.h'
+  target/ppc: Move powerpc_excp_t definition to 'cpu.h'
+  target/ppc: Move powerpc_mmu_t definition to 'cpu.h'
+  target/ppc: Move powerpc_input_t definition to 'cpu.h'
+  hw/s390x/css: Have css_do_sic() take S390CPU instead of CPUS390XState
+  hw/s390x/sclp: Have sclp_service_call[_protected]() take S390CPU*
+  target/s390x/cpu: Restrict cpu_get_tb_cpu_state() definition to TCG
+  target/s390x/cpu: Restrict CPUS390XState declaration to 'cpu.h'
+  target/nios2: Create IRQs *after* accelerator vCPU is realized
+  target: Move ArchCPUClass definition to 'cpu.h'
+  target/alpha: Tidy up alpha_cpu_class_by_name()
+  hw/cpu: Call object_class_is_abstract() once in cpu_class_by_name()
+  exec/cpu: Have cpu_exec_realize() return a boolean
+  hw/cpu: Clean up global variable shadowing
+  hw/loader: Clean up global variable shadowing in rom_add_file()
+  hw/isa/i82378: Propagate error if PC_SPEAKER device creation failed
+  hw/sd: Declare QOM types using DEFINE_TYPES() macro
+
+Thomas Huth (4):
+  MAINTAINERS: Add include/hw/timer/tmu012.h to the SH4 R2D section
+  MAINTAINERS: Add the CAN documentation file to the CAN section
+  MAINTAINERS: Add include/hw/xtensa/mx_pic.h to the XTFPGA machine
+    section
+  MAINTAINERS: Add more guest-agent related files to the corresponding
+    section
+
+Titus Rwantare (8):
+  hw/i2c: pmbus add support for block receive
+  hw/i2c: pmbus: add vout mode bitfields
+  hw/i2c: pmbus: add fan support
+  hw/i2c: pmbus: add VCAP register
+  hw/sensor: add ADM1266 device model
+  tests/qtest: add tests for ADM1266
+  hw/i2c: pmbus: immediately clear faults on request
+  hw/i2c: pmbus: reset page register for out of range reads
+
+Zhao Liu (3):
+  hw/i386: Fix comment style in topology.h
+  tests/unit: Rename test-x86-cpuid.c to test-x86-topo.c
+  hw/cpu: Update the comments of nr_cores and nr_dies
+
+Zhuocheng Ding (1):
+  system/cpus: Fix CPUState.nr_cores' calculation
+
+Zongmin Zhou (1):
+  dump: Add close fd on error return to avoid resource leak
+
+ MAINTAINERS                                   |  12 +-
+ include/exec/cpu-common.h                     |   3 -
+ include/exec/tb-flush.h                       |   2 +
+ include/hw/core/cpu.h                         |  20 +-
+ include/hw/i2c/pmbus_device.h                 |  17 ++
+ include/hw/i386/topology.h                    |  33 +--
+ include/hw/loader.h                           |   2 +-
+ include/hw/ppc/ppc.h                          |   2 +-
+ include/hw/s390x/css.h                        |   2 +-
+ include/hw/s390x/sclp.h                       |   5 +-
+ include/sysemu/accel-ops.h                    |   1 +
+ include/sysemu/kvm.h                          |   1 -
+ target/alpha/cpu-qom.h                        |  21 +-
+ target/alpha/cpu.h                            |  17 +-
+ target/arm/cpu-qom.h                          |  61 +----
+ target/arm/cpu.h                              |  49 +++-
+ target/arm/internals.h                        |   6 +
+ target/avr/cpu-qom.h                          |  20 +-
+ target/avr/cpu.h                              |  18 +-
+ target/cris/cpu-qom.h                         |  24 +-
+ target/cris/cpu.h                             |  20 +-
+ target/hexagon/cpu-qom.h                      |  27 ++
+ target/hexagon/cpu.h                          |  20 +-
+ target/hppa/cpu-qom.h                         |  20 +-
+ target/hppa/cpu.h                             |  16 +-
+ target/i386/cpu-qom.h                         |  42 +--
+ target/i386/cpu.h                             |  43 ++-
+ target/i386/hvf/x86_emu.h                     |   4 +-
+ target/loongarch/cpu-qom.h                    |  23 ++
+ target/loongarch/cpu.h                        |  14 +-
+ target/m68k/cpu-qom.h                         |  21 +-
+ target/m68k/cpu.h                             |  17 +-
+ target/microblaze/cpu-qom.h                   |  20 +-
+ target/microblaze/cpu.h                       |  15 +-
+ target/mips/cpu-qom.h                         |  23 +-
+ target/mips/cpu.h                             |  21 +-
+ target/nios2/cpu-qom.h                        |  18 ++
+ target/nios2/cpu.h                            |  11 +-
+ target/openrisc/cpu-qom.h                     |  21 ++
+ target/openrisc/cpu.h                         |  14 +-
+ target/ppc/cpu-qom.h                          | 164 +----------
+ target/ppc/cpu.h                              | 145 +++++++++-
+ target/ppc/internal.h                         |   9 +
+ target/ppc/kvm_ppc.h                          |   4 +
+ target/riscv/cpu-qom.h                        |  26 +-
+ target/riscv/cpu.h                            |  26 +-
+ target/riscv/internals.h                      |   8 +-
+ target/rx/cpu-qom.h                           |  20 +-
+ target/rx/cpu.h                               |  18 +-
+ target/s390x/cpu-qom.h                        |  41 +--
+ target/s390x/cpu.h                            |  45 +++-
+ target/s390x/cpu_models.h                     |   8 +-
+ target/sh4/cpu-qom.h                          |  28 +-
+ target/sh4/cpu.h                              |  24 +-
+ target/sparc/cpu-qom.h                        |  23 +-
+ target/sparc/cpu.h                            |  22 +-
+ target/tricore/cpu-qom.h                      |  15 +-
+ target/tricore/cpu.h                          |  10 +-
+ target/xtensa/cpu-qom.h                       |  26 +-
+ target/xtensa/cpu.h                           |  24 +-
+ target/mips/tcg/msa.decode                    |   4 +-
+ target/mips/tcg/tx79.decode                   |   2 +-
+ accel/stubs/tcg-stub.c                        |   4 -
+ accel/tcg/cputlb.c                            |   1 +
+ accel/tcg/tcg-accel-ops.c                     |   9 +
+ accel/tcg/translate-all.c                     |   8 -
+ accel/tcg/user-exec-stub.c                    |   4 +
+ bsd-user/main.c                               |   2 +-
+ cpu-common.c                                  |   6 +-
+ cpu-target.c                                  |   6 +-
+ dump/dump.c                                   |   1 +
+ hw/core/cpu-common.c                          |  19 +-
+ hw/core/loader.c                              |   4 +-
+ hw/i2c/pmbus_device.c                         | 237 +++++++++++++++-
+ hw/ide/core.c                                 |  14 +-
+ hw/isa/i82378.c                               |   4 +-
+ hw/ppc/e500.c                                 |   4 +
+ hw/s390x/css.c                                |   3 +-
+ hw/s390x/sclp.c                               |   7 +-
+ hw/sd/aspeed_sdhci.c                          |  19 +-
+ hw/sd/bcm2835_sdhost.c                        |  33 +--
+ hw/sd/cadence_sdhci.c                         |  21 +-
+ hw/sd/core.c                                  |  19 +-
+ hw/sd/npcm7xx_sdhci.c                         |  21 +-
+ hw/sd/pl181.c                                 |  35 ++-
+ hw/sd/pxa2xx_mmci.c                           |  35 ++-
+ hw/sd/sd.c                                    |  37 ++-
+ hw/sd/sdhci-pci.c                             |  25 +-
+ hw/sd/ssi-sd.c                                |  19 +-
+ hw/sensor/adm1266.c                           | 254 ++++++++++++++++++
+ linux-user/main.c                             |   2 +-
+ plugins/core.c                                |   1 -
+ system/cpus.c                                 |   9 +-
+ system/vl.c                                   |   5 +-
+ target/alpha/cpu.c                            |  10 +-
+ target/arm/cpu.c                              |   3 +-
+ target/avr/cpu.c                              |   3 +-
+ target/cris/cpu.c                             |   3 +-
+ target/hexagon/cpu.c                          |   3 +-
+ target/i386/cpu.c                             |   9 +-
+ target/i386/hvf/hvf.c                         |   4 +-
+ target/i386/hvf/x86_emu.c                     | 111 ++++----
+ target/i386/kvm/kvm-cpu.c                     |   1 +
+ target/i386/monitor.c                         |   5 +
+ target/loongarch/cpu.c                        |   3 +-
+ target/m68k/cpu.c                             |   3 +-
+ target/nios2/cpu.c                            |  16 +-
+ target/openrisc/cpu.c                         |   3 +-
+ target/ppc/excp_helper.c                      |   2 +-
+ target/ppc/kvm-stub.c                         |  19 --
+ target/ppc/kvm.c                              |   4 +-
+ target/riscv/cpu.c                            |   3 +-
+ target/rx/cpu.c                               |   6 +-
+ target/s390x/cpu_models.c                     |   2 +-
+ target/s390x/diag.c                           |   2 +-
+ target/s390x/kvm/kvm.c                        |   6 +-
+ target/s390x/tcg/misc_helper.c                |   5 +-
+ target/sh4/cpu.c                              |   3 -
+ target/tricore/cpu.c                          |   3 +-
+ target/xtensa/cpu.c                           |   3 +-
+ target/xtensa/op_helper.c                     |   4 +-
+ tests/qtest/adm1266-test.c                    | 122 +++++++++
+ tests/qtest/ahci-test.c                       |  86 +++++-
+ tests/qtest/max34451-test.c                   |  24 ++
+ tests/unit/test-seccomp.c                     |  24 +-
+ .../{test-x86-cpuid.c => test-x86-topo.c}     |   2 +-
+ ui/sdl2.c                                     |   8 +
+ hw/arm/Kconfig                                |   1 +
+ hw/sensor/Kconfig                             |   5 +
+ hw/sensor/meson.build                         |   1 +
+ target/ppc/meson.build                        |   2 +-
+ tests/qtest/meson.build                       |   1 +
+ tests/unit/meson.build                        |   4 +-
+ tests/vm/ubuntu.aarch64                       |   2 +-
+ 134 files changed, 1722 insertions(+), 1085 deletions(-)
+ create mode 100644 target/hexagon/cpu-qom.h
+ create mode 100644 target/loongarch/cpu-qom.h
+ create mode 100644 target/nios2/cpu-qom.h
+ create mode 100644 target/openrisc/cpu-qom.h
+ create mode 100644 hw/sensor/adm1266.c
+ delete mode 100644 target/ppc/kvm-stub.c
+ create mode 100644 tests/qtest/adm1266-test.c
+ rename tests/unit/{test-x86-cpuid.c => test-x86-topo.c} (99%)
+
 -- 
 2.41.0
 
