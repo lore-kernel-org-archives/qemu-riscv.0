@@ -4,86 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50CA0C4167B
-	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Nov 2023 12:29:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6782AC4332F
+	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Nov 2023 12:29:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r0L9v-0006co-Su; Tue, 07 Nov 2023 07:26:19 -0500
+	id 1r0LAT-00087e-Sr; Tue, 07 Nov 2023 07:26:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r0L9K-00064C-RN
- for qemu-riscv@nongnu.org; Tue, 07 Nov 2023 07:25:49 -0500
-Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r0L9m-0006M3-66
+ for qemu-riscv@nongnu.org; Tue, 07 Nov 2023 07:26:13 -0500
+Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r0L91-0004vL-KI
- for qemu-riscv@nongnu.org; Tue, 07 Nov 2023 07:25:41 -0500
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4083f613272so48429375e9.1
- for <qemu-riscv@nongnu.org>; Tue, 07 Nov 2023 04:25:22 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r0L9e-0005E3-Vo
+ for qemu-riscv@nongnu.org; Tue, 07 Nov 2023 07:26:07 -0500
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-9dd3f4a0f5aso607177066b.1
+ for <qemu-riscv@nongnu.org>; Tue, 07 Nov 2023 04:26:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699359921; x=1699964721; darn=nongnu.org;
+ d=linaro.org; s=google; t=1699359960; x=1699964760; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=g4cBhoinmiIEOsb8jCdcceaN6JxCpOf4XdeJF400+y0=;
- b=hXsEyFg6eqEJIcw44ySSreJrmPVDQXSDoL50JWIkZd62bWCUWTZIGNxHtVexR2D9Io
- JeywT/gO5swBPzaPeI/PTypY8278J376Jvx0sZexilBE/BBdfG0co35HLZu8SQVS6EEm
- cW9jjk0Rne6uFZZKHddK88xgMpAmYnsZWIkJMTkEpflR9SUKiHYz9MtuJWLZpsgpG1wU
- 9XlY9Vsq6xEjACXepCNhKdF25dnSsSbMtKDB65TPGCM4kbdJRIhVbyIL0Nlud8PW21XE
- 4nRueoVsCV/UabaQ0obCT7FW41aHeM8XtoFKLkrUpCXJbQ6G2GiKFXssct5MKcgQoVhJ
- zHBg==
+ bh=Ha90/Hq7XHS9/aRysWmfk7kygcTDZa2YjrZy/ilrJOc=;
+ b=uDhY9spH/6Ai8iwOvLh4uZ2XM8p1UnqFJtJ43ozut29LJJMrAO/EB4fQ0vKt64B4+b
+ IgJ+n5gCJoYGp6tpyh+EqonU/udVQrxnG2cbuOidbLaGkIWm3S5Kp6dHuEUiBERQaPHX
+ lJYjbaSo5C4G4rD1BOReL6QQWwzpdF0LfOPkQevRaje/cPndYGz7k/79i5xhCzrik4Ko
+ mGq31brLTWsqpIQ6F7oLjz8muJUNqiGAfJnBKeeZdTmdxLIfssdomQAwwtkhYO/3Qy8D
+ T+QKtRSPtvfjXjt0bR4aRx0YBuokBYN3sG5u8qnZe01K9L+QHBCOTeiFVUWhZk2paSsz
+ IJcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699359921; x=1699964721;
+ d=1e100.net; s=20230601; t=1699359960; x=1699964760;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=g4cBhoinmiIEOsb8jCdcceaN6JxCpOf4XdeJF400+y0=;
- b=sONAvbolD8mcOzBnrbgX2U4oMft2SCfOtnhT57CvinQ5mKzZf7yj+JyLrTBLVWKH+E
- 2GScpAH4vw5oW4gsiiF3Ra7WCT/qoo2tYJgcYG2p/M/za1YJb2IpCXEw8Yly1igsPs/G
- n9hIUMYqMCd574abiMRgYgfThHwH81+AzDWjMMJ/lpXJXuO5NMR2tlP1JpWz3L5iIdmJ
- qPFAEI4O42I4iW2UgBFlQoGP7kauf3eoU2tLRXFW3IlpD0hah0wyPcQCmR+2Y5eTBZ2E
- 61yI28GPlWSpJNfIUoIyPvIbtzZiioNbsGBzqMnMAPVwmkIIcrjeK5Sz6xhswf76zxlG
- DgqQ==
-X-Gm-Message-State: AOJu0YxYTpPXff5ayRuQnCivQsNCV4vnbIPijoaaVDwaDJZ+Xj0K46Jh
- aEjXn7wRpT8VHVzAa/G4W61ajMOpvAbz00kRFHk=
-X-Google-Smtp-Source: AGHT+IEo95bN9dOylI8qF1cvFsMAFDLsUMzoXztRW2XMmXeNrFi+8lYAALC2D0Tm8+PRV2RvxoXfJw==
-X-Received: by 2002:a5d:588f:0:b0:32f:7e1d:f039 with SMTP id
- n15-20020a5d588f000000b0032f7e1df039mr23964336wrf.46.1699359921327; 
- Tue, 07 Nov 2023 04:25:21 -0800 (PST)
+ bh=Ha90/Hq7XHS9/aRysWmfk7kygcTDZa2YjrZy/ilrJOc=;
+ b=SFIYPSzDFakTTRV4m/Ze7nReqQL3inLX6stvO4IrG0lYIuM/HV4mi7jeyFU+vFuAPR
+ MTKu+HmWfh0hTheo1c+SOq1UILRsOrc4myyu8X32ia0nyO3rqr8Cf5NSJxGV/pbgqgsD
+ MeIe0DX6UaEKYRdGidIrzQVjW81XS6pTRLyWWvnS12Ix3fFfHQU8NxpRWblMphKF7uzU
+ Det4vVzgDrpNzBSC7S3+nTDGaNDUMDIJMiS8y0uTiQeydk+4ND16hHh+KfGBesXiZDvM
+ dLKFMOG2ewhEqZdCXdRlU7Y5HE793GR9WouA4Kpy1Dq2Lyr60yYjrk7QM4Aj3H4YAz3Y
+ CstA==
+X-Gm-Message-State: AOJu0YziS0k69ZesegSWBVZEf9ScMcPql27d0g6lu9/Jhyd9pk289wHi
+ 7M4XLO/l5xjP5Sl9nvVxBQvBOrXUZhcrmmYdznk=
+X-Google-Smtp-Source: AGHT+IGg3rwygxtdxxt3q4bGOXOdrXVavL102HTHH9Lvr4AFm30SPraxSKFny38NHWp2wMPM8mFHNg==
+X-Received: by 2002:a17:907:9603:b0:9d3:f436:6807 with SMTP id
+ gb3-20020a170907960300b009d3f4366807mr17965607ejc.42.1699359960111; 
+ Tue, 07 Nov 2023 04:26:00 -0800 (PST)
 Received: from m1x-phil.lan ([176.187.216.69])
  by smtp.gmail.com with ESMTPSA id
- k4-20020a5d6d44000000b0032dc1fc84f2sm2241399wri.46.2023.11.07.04.25.19
+ g7-20020a1709064e4700b0099d798a6bb5sm981057ejw.67.2023.11.07.04.25.57
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 07 Nov 2023 04:25:20 -0800 (PST)
+ Tue, 07 Nov 2023 04:25:59 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-block@nongnu.org,
  qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Ani Sinha <anisinha@redhat.com>, Warner Losh <imp@bsdimp.com>,
+ Kyle Evans <kevans@freebsd.org>,
  Richard Henderson <richard.henderson@linaro.org>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- Nicholas Piggin <npiggin@gmail.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>
-Subject: [PULL 41/75] target/ppc: Move powerpc_input_t definition to 'cpu.h'
-Date: Tue,  7 Nov 2023 13:24:31 +0100
-Message-ID: <20231107122442.58674-7-philmd@linaro.org>
+ Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Yanan Wang <wangyanan55@huawei.com>, Laurent Vivier <laurent@vivier.eu>,
+ David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ Thomas Huth <thuth@redhat.com>
+Subject: [PULL 51/75] hw/cpu: Clean up global variable shadowing
+Date: Tue,  7 Nov 2023 13:24:37 +0100
+Message-ID: <20231107122442.58674-13-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231107122442.58674-1-philmd@linaro.org>
 References: <20231107122442.58674-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::331;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
-X-Spam_action: no action
+Received-SPF: pass client-ip=2a00:1450:4864:20::632;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x632.google.com
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -98,81 +94,127 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The powerpc_input_t definition is only used by target/ppc/, no need
-to expose it. Restrict it by moving it to "target/ppc/cpu.h".
+Fix:
+
+  hw/core/machine.c:1302:22: error: declaration shadows a variable in the global scope [-Werror,-Wshadow]
+      const CPUArchId *cpus = possible_cpus->cpus;
+                       ^
+  hw/core/numa.c:69:17: error: declaration shadows a variable in the global scope [-Werror,-Wshadow]
+      uint16List *cpus = NULL;
+                  ^
+  hw/acpi/aml-build.c:2005:20: error: declaration shadows a variable in the global scope [-Werror,-Wshadow]
+      CPUArchIdList *cpus = ms->possible_cpus;
+                     ^
+  hw/core/machine-smp.c:77:14: error: declaration shadows a variable in the global scope [-Werror,-Wshadow]
+      unsigned cpus    = config->has_cpus ? config->cpus : 0;
+               ^
+  include/hw/core/cpu.h:589:17: note: previous declaration is here
+  extern CPUTailQ cpus;
+                  ^
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Cédric Le Goater <clg@kaod.org>
-Message-Id: <20231013125630.95116-8-philmd@linaro.org>
+Reviewed-by: Ani Sinha <anisinha@redhat.com>
+Message-Id: <20231010115048.11856-2-philmd@linaro.org>
 ---
- target/ppc/cpu-qom.h | 21 ---------------------
- target/ppc/cpu.h     | 20 ++++++++++++++++++++
- 2 files changed, 20 insertions(+), 21 deletions(-)
+ include/hw/core/cpu.h     | 8 ++++----
+ bsd-user/main.c           | 2 +-
+ cpu-common.c              | 6 +++---
+ linux-user/main.c         | 2 +-
+ target/s390x/cpu_models.c | 2 +-
+ 5 files changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/target/ppc/cpu-qom.h b/target/ppc/cpu-qom.h
-index c35374e15f..0241609efe 100644
---- a/target/ppc/cpu-qom.h
-+++ b/target/ppc/cpu-qom.h
-@@ -35,27 +35,6 @@ OBJECT_DECLARE_CPU_TYPE(PowerPCCPU, PowerPCCPUClass, POWERPC_CPU)
- 
- #define TYPE_HOST_POWERPC_CPU POWERPC_CPU_TYPE_NAME("host")
- 
--/*****************************************************************************/
--/* Input pins model                                                          */
--typedef enum powerpc_input_t powerpc_input_t;
--enum powerpc_input_t {
--    PPC_FLAGS_INPUT_UNKNOWN = 0,
--    /* PowerPC 6xx bus                  */
--    PPC_FLAGS_INPUT_6xx,
--    /* BookE bus                        */
--    PPC_FLAGS_INPUT_BookE,
--    /* PowerPC 405 bus                  */
--    PPC_FLAGS_INPUT_405,
--    /* PowerPC 970 bus                  */
--    PPC_FLAGS_INPUT_970,
--    /* PowerPC POWER7 bus               */
--    PPC_FLAGS_INPUT_POWER7,
--    /* PowerPC POWER9 bus               */
--    PPC_FLAGS_INPUT_POWER9,
--    /* Freescale RCPU bus               */
--    PPC_FLAGS_INPUT_RCPU,
--};
--
- #ifndef CONFIG_USER_ONLY
- typedef struct PPCTimebase {
-     uint64_t guest_timebase;
-diff --git a/target/ppc/cpu.h b/target/ppc/cpu.h
-index d859c45a2e..f8101ffa29 100644
---- a/target/ppc/cpu.h
-+++ b/target/ppc/cpu.h
-@@ -261,6 +261,26 @@ static inline bool mmu_is_64bit(powerpc_mmu_t mmu_model)
-     return mmu_model & POWERPC_MMU_64;
+diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+index eb943efb8f..77893d7b81 100644
+--- a/include/hw/core/cpu.h
++++ b/include/hw/core/cpu.h
+@@ -586,13 +586,13 @@ static inline CPUArchState *cpu_env(CPUState *cpu)
  }
  
-+/*****************************************************************************/
-+/* Input pins model                                                          */
-+typedef enum powerpc_input_t {
-+    PPC_FLAGS_INPUT_UNKNOWN = 0,
-+    /* PowerPC 6xx bus                  */
-+    PPC_FLAGS_INPUT_6xx,
-+    /* BookE bus                        */
-+    PPC_FLAGS_INPUT_BookE,
-+    /* PowerPC 405 bus                  */
-+    PPC_FLAGS_INPUT_405,
-+    /* PowerPC 970 bus                  */
-+    PPC_FLAGS_INPUT_970,
-+    /* PowerPC POWER7 bus               */
-+    PPC_FLAGS_INPUT_POWER7,
-+    /* PowerPC POWER9 bus               */
-+    PPC_FLAGS_INPUT_POWER9,
-+    /* Freescale RCPU bus               */
-+    PPC_FLAGS_INPUT_RCPU,
-+} powerpc_input_t;
-+
- #define PPC_INPUT(env) ((env)->bus_model)
+ typedef QTAILQ_HEAD(CPUTailQ, CPUState) CPUTailQ;
+-extern CPUTailQ cpus;
++extern CPUTailQ cpus_queue;
  
- /*****************************************************************************/
+-#define first_cpu        QTAILQ_FIRST_RCU(&cpus)
++#define first_cpu        QTAILQ_FIRST_RCU(&cpus_queue)
+ #define CPU_NEXT(cpu)    QTAILQ_NEXT_RCU(cpu, node)
+-#define CPU_FOREACH(cpu) QTAILQ_FOREACH_RCU(cpu, &cpus, node)
++#define CPU_FOREACH(cpu) QTAILQ_FOREACH_RCU(cpu, &cpus_queue, node)
+ #define CPU_FOREACH_SAFE(cpu, next_cpu) \
+-    QTAILQ_FOREACH_SAFE_RCU(cpu, &cpus, node, next_cpu)
++    QTAILQ_FOREACH_SAFE_RCU(cpu, &cpus_queue, node, next_cpu)
+ 
+ extern __thread CPUState *current_cpu;
+ 
+diff --git a/bsd-user/main.c b/bsd-user/main.c
+index c402fadf46..e6014f517e 100644
+--- a/bsd-user/main.c
++++ b/bsd-user/main.c
+@@ -118,7 +118,7 @@ void fork_end(int child)
+          */
+         CPU_FOREACH_SAFE(cpu, next_cpu) {
+             if (cpu != thread_cpu) {
+-                QTAILQ_REMOVE_RCU(&cpus, cpu, node);
++                QTAILQ_REMOVE_RCU(&cpus_queue, cpu, node);
+             }
+         }
+         mmap_fork_end(child);
+diff --git a/cpu-common.c b/cpu-common.c
+index 45c745ecf6..c81fd72d16 100644
+--- a/cpu-common.c
++++ b/cpu-common.c
+@@ -73,7 +73,7 @@ static int cpu_get_free_index(void)
+     return max_cpu_index;
+ }
+ 
+-CPUTailQ cpus = QTAILQ_HEAD_INITIALIZER(cpus);
++CPUTailQ cpus_queue = QTAILQ_HEAD_INITIALIZER(cpus_queue);
+ static unsigned int cpu_list_generation_id;
+ 
+ unsigned int cpu_list_generation_id_get(void)
+@@ -90,7 +90,7 @@ void cpu_list_add(CPUState *cpu)
+     } else {
+         assert(!cpu_index_auto_assigned);
+     }
+-    QTAILQ_INSERT_TAIL_RCU(&cpus, cpu, node);
++    QTAILQ_INSERT_TAIL_RCU(&cpus_queue, cpu, node);
+     cpu_list_generation_id++;
+ }
+ 
+@@ -102,7 +102,7 @@ void cpu_list_remove(CPUState *cpu)
+         return;
+     }
+ 
+-    QTAILQ_REMOVE_RCU(&cpus, cpu, node);
++    QTAILQ_REMOVE_RCU(&cpus_queue, cpu, node);
+     cpu->cpu_index = UNASSIGNED_CPU_INDEX;
+     cpu_list_generation_id++;
+ }
+diff --git a/linux-user/main.c b/linux-user/main.c
+index 0c23584a96..0cdaf30d34 100644
+--- a/linux-user/main.c
++++ b/linux-user/main.c
+@@ -156,7 +156,7 @@ void fork_end(int child)
+            Discard information about the parent threads.  */
+         CPU_FOREACH_SAFE(cpu, next_cpu) {
+             if (cpu != thread_cpu) {
+-                QTAILQ_REMOVE_RCU(&cpus, cpu, node);
++                QTAILQ_REMOVE_RCU(&cpus_queue, cpu, node);
+             }
+         }
+         qemu_init_cpu_list();
+diff --git a/target/s390x/cpu_models.c b/target/s390x/cpu_models.c
+index 4dead48650..5c455d00c0 100644
+--- a/target/s390x/cpu_models.c
++++ b/target/s390x/cpu_models.c
+@@ -757,7 +757,7 @@ void s390_set_qemu_cpu_model(uint16_t type, uint8_t gen, uint8_t ec_ga,
+     const S390CPUDef *def = s390_find_cpu_def(type, gen, ec_ga, NULL);
+ 
+     g_assert(def);
+-    g_assert(QTAILQ_EMPTY_RCU(&cpus));
++    g_assert(QTAILQ_EMPTY_RCU(&cpus_queue));
+ 
+     /* build the CPU model */
+     s390_qemu_cpu_model.def = def;
 -- 
 2.41.0
 
