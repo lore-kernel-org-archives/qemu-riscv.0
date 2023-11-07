@@ -4,83 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BA33C4332F
-	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Nov 2023 08:51:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC6ABC4332F
+	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Nov 2023 09:51:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r0Hnw-0003hV-Ll; Tue, 07 Nov 2023 03:51:33 -0500
+	id 1r0Ik7-0008JW-TP; Tue, 07 Nov 2023 04:51:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r0Hnn-0003bj-IA
- for qemu-riscv@nongnu.org; Tue, 07 Nov 2023 03:51:16 -0500
-Received: from mail-lf1-x131.google.com ([2a00:1450:4864:20::131])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1r0Ik5-0008IX-SX
+ for qemu-riscv@nongnu.org; Tue, 07 Nov 2023 04:51:29 -0500
+Received: from mail-yw1-x112c.google.com ([2607:f8b0:4864:20::112c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r0Hnl-0003O0-8N
- for qemu-riscv@nongnu.org; Tue, 07 Nov 2023 03:51:15 -0500
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-507a62d4788so7280766e87.0
- for <qemu-riscv@nongnu.org>; Tue, 07 Nov 2023 00:51:11 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1r0Iju-00074J-HG
+ for qemu-riscv@nongnu.org; Tue, 07 Nov 2023 04:51:26 -0500
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-5a82c2eb50cso59479587b3.2
+ for <qemu-riscv@nongnu.org>; Tue, 07 Nov 2023 01:51:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699347070; x=1699951870; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=TrSZHFiJAA/AwU7WufUuWN5MLuX6xE725trQkA5y2eI=;
- b=WeHrMOiTJxp0PJHD/V3JJDHN5cQNdf7TtOVnDLHUnvX7MTVuGL+lY6H0uz4mWNPlav
- 0es55CkpjQTim+PEOWKV8KsJ+J+KEf19S8fiZTohcmPDV0JPeULRdMRWnEzBmVooHAM7
- w6B50zO9eAZB5fSC2rtKFnYLB62Zd1MCGF4aGeM/yA/02QZb2LX1Q8qvT+bRgMbJSJ0r
- XuxD0R8VoCzYCqVP5pAXI2NmtEFpO/M5c6s31noJF6lcIW/prZHeugh21Y/oYjpDC9zX
- ooAhX1HPCrNIwBvL4Yc01qfbdKUdnfhkPE+0D5aLN06XLgj2B6Pt6Zxn1lKc6U1ja/k4
- bW1Q==
+ d=ventanamicro.com; s=google; t=1699350677; x=1699955477; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=80v6yP4QAb/eXkBqA6nw6mTc6HYaYv/UJIOSjzOiz50=;
+ b=mF3kJSyXuk1I2sldZfmchH7Jc33ixWZfGFqxPK8XSYFSuz1E1J+BS4RigPRZujM5hH
+ EixIwA5wJmLM5CIQT1eQxqsDWcgNR1cxFPVEQkaQuUXUVB/BS5GTtdThDoOCHPiY+7+Y
+ k8pFOjoXRnxC99jGcMu4HqzTbqBH3HA2cyXtajmf0X31mcTFMaqlBzleKMRTx0+YnYjf
+ MdW8usrgC7E6Ftfkd8ENC0fE2j+74cIudpvnHU6G4UhYUaU/84ZWRc1vAfP9FLdTuwH5
+ mpp8v/4CMgNJGu1mnyB/vduvZp7vokbJkETQ3X6Z8Vfaj7cDdM+WsWX77ox3zRDKRHy1
+ gKGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699347070; x=1699951870;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1699350677; x=1699955477;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=TrSZHFiJAA/AwU7WufUuWN5MLuX6xE725trQkA5y2eI=;
- b=QDvTXRvX2MKi+r49WXMkfjAsGLjBwiILzHHldRuQfJ4T3BK/rGS4yJExBWm5nFq9H4
- tVaBA022UChQSjHX8Iz3fYhTXRQ3MRZmgwpXR9PQQcOLl0A2zNHVN7ogicSMjy33UflD
- W6SpuTpZ+w3K8ROpxPHLg7idigB2XCVqgoXTYXuEQHbaof73XA+quPeFo9IcgY/BpPvb
- wTzkKBUtMNAe2bJkd5ub9UQ/mBMqbpXGNhTrq92F5UWx/A71298dsKP+Aqvq2D+kXe5v
- ptMjVBBcEy5P1+QeYMpDV4w4jGjrabml8Dg8sGRWLml/ga/3lU6BwbRhilnUdCR1GeN1
- Vvgg==
-X-Gm-Message-State: AOJu0YyGcKBlA69+WAY4kr/kPo0MXJPzd2xdbWVGS/7RohpLxGrIl8/0
- Ma+cMydkUuUGiivefJDSKDcRkQ==
-X-Google-Smtp-Source: AGHT+IHoMv3nExW5cDVokGdoq6qHnq/PG7wEVoZ88hDscpByiKlLR2kw/aP+0d8R4Aw18DTMIGQT9Q==
-X-Received: by 2002:ac2:4c43:0:b0:509:4aae:f2b1 with SMTP id
- o3-20020ac24c43000000b005094aaef2b1mr13277690lfk.8.1699347069952; 
- Tue, 07 Nov 2023 00:51:09 -0800 (PST)
-Received: from [192.168.69.115] ([176.187.216.69])
+ bh=80v6yP4QAb/eXkBqA6nw6mTc6HYaYv/UJIOSjzOiz50=;
+ b=JE0EHUNn3mOA/0GkSSMkrLjoO3vTVemVi5wLzSOaN59IlLHz+n5HYZbmIpx8bOF9Lf
+ hkUAbMw6qI9Qmsky0bLcO+b+6P7M4VFg/ked6adPp6fmtZw5/l1PyIPLwQxS8Cy7nI5a
+ itoniMDug/w9+nx4bDSvJBg+BtrMlW1HdKy4DLnIsATWHpHhMJMXSQxmnuWGgVb7r0LF
+ +xSgyXP764xalz5vc9FPj+UF/lFb98c2Ma3QTp/45HpntZeAH/TrG7Eh3rKPsEZi78uz
+ 3CLYwZgDybhXJKChNSTbnsRIpr1I5eFgs4k65EL0fQ3oSGC8XtAlkOhH3P0iEk/MA0kZ
+ CwEg==
+X-Gm-Message-State: AOJu0Yz4ZxTncolzQuKJ/1kkMIXscPmvtdiUA31qk056CaJlQFA1snt7
+ fvyJXNSgAgpusBXdg4N3+8n8vA==
+X-Google-Smtp-Source: AGHT+IFfmGWpoIIpWXjG0r1G/A14QesymrhATJVLsoZZZeH9TCpF7o1Y8aNQw5JUSBD+8a8CVacSLQ==
+X-Received: by 2002:a81:8393:0:b0:5a7:b797:d1e4 with SMTP id
+ t141-20020a818393000000b005a7b797d1e4mr9914213ywf.21.1699350677088; 
+ Tue, 07 Nov 2023 01:51:17 -0800 (PST)
+Received: from [192.168.68.107] ([179.193.10.161])
  by smtp.gmail.com with ESMTPSA id
- z6-20020a5d4406000000b003196b1bb528sm1705437wrq.64.2023.11.07.00.51.08
+ bt13-20020a05690c072d00b005a82f14b8dbsm5327968ywb.49.2023.11.07.01.51.14
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 07 Nov 2023 00:51:09 -0800 (PST)
-Message-ID: <009d27a1-79ba-43de-b732-b5a86aa4f7d9@linaro.org>
-Date: Tue, 7 Nov 2023 09:51:07 +0100
+ Tue, 07 Nov 2023 01:51:16 -0800 (PST)
+Message-ID: <e768af9e-9e48-4b37-aa77-ee865e56717c@ventanamicro.com>
+Date: Tue, 7 Nov 2023 06:51:12 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PULL 00/60] Misc HW/UI patches for 2023-11-06
+Subject: Re: [PATCH] target/riscv: don't enable Zfa by default
+To: Jerry ZJ <jerry.zhangjian@sifive.com>, alistair.francis@wdc.com,
+ palmer@dabbelt.com, frank.chang@sifive.com, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+References: <20231106111440.59995-1-jerry.zhangjian@sifive.com>
+ <c2901c07-9eef-449c-857a-6d2553aeb170@ventanamicro.com>
+ <b1df8107-d0f1-4827-94bd-3f8c7cd3ea57@Spark>
+ <0fbc4857-d9b3-4327-8a00-3fb277f05ef5@ventanamicro.com>
+ <258be47f-97be-4308-bed5-dc34ef7ff954@Spark>
 Content-Language: en-US
-To: Stefan Hajnoczi <stefanha@gmail.com>
-Cc: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-s390x@nongnu.org,
- qemu-block@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
- qemu-arm@nongnu.org
-References: <20231106110336.358-1-philmd@linaro.org>
- <CAJSP0QXN5LQ_56do2MOAXyHWwqstYPDEDgptN4h464mW7wnjqA@mail.gmail.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <CAJSP0QXN5LQ_56do2MOAXyHWwqstYPDEDgptN4h464mW7wnjqA@mail.gmail.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <258be47f-97be-4308-bed5-dc34ef7ff954@Spark>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::131;
- envelope-from=philmd@linaro.org; helo=mail-lf1-x131.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::112c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-yw1-x112c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,167 +100,120 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 7/11/23 02:39, Stefan Hajnoczi wrote:
-> On Mon, 6 Nov 2023 at 19:03, Philippe Mathieu-Daudé <philmd@linaro.org> wrote:
->>
->> The following changes since commit d762bf97931b58839316b68a570eecc6143c9e3e:
->>
->>    Merge tag 'pull-target-arm-20231102' of https://git.linaro.org/people/pmaydell/qemu-arm into staging (2023-11-03 10:04:12 +0800)
->>
->> are available in the Git repository at:
->>
->>    https://github.com/philmd/qemu.git tags/misc-cpus-20231106
->>
->> for you to fetch changes up to a81b438ac3933419910cbdf2e2e8d87681de611e:
->>
->>    ui/sdl2: use correct key names in win title on mac (2023-11-06 11:07:32 +0100)
->>
->> Few checkpatch warnings in target/i386/hvf/x86_emu.c are deliberately ignored.
->> ----------------------------------------------------------------
->> Misc hardware patch queue
->>
->> HW emulation:
->> - PMBus fixes and tests (Titus)
->> - IDE fixes and tests (Fiona)
->> - New ADM1266 sensor (Titus)
->> - Better error propagation in PCI-ISA i82378 (Philippe)
->>
->> Topology:
->> - Fix CPUState::nr_cores calculation (Zhuocheng Ding and Zhao Liu)
->>
->> Monitor:
->> - Synchronize CPU state in 'info lapic' (Dongli Zhang)
->>
->> QOM:
->> - Have 'cpu-qom.h' target-agnostic (Philippe)
->> - Call object_class_is_abstract once in cpu_class_by_name (Philippe)
->>
->> UI:
->> - Use correct key names in titles on MacOS / SDL2 (Adrian)
->>
->> MIPS:
->> - Fix MSA BZ/BNZ and TX79 LQ/SQ opcodes (Philippe)
->>
->> Nios2:
->> - Create IRQs *after* vCPU is realized (Philippe)
->>
->> PPC:
->> - Restrict KVM objects to system emulation (Philippe)
->>
->> X86:
->> - HVF & KVM cleanups (Philippe)
->>
->> Various targets:
->> - Use env_archcpu() to optimize (Philippe)
->>
->> Misc:
->> - Few global variable shadowing removed (Philippe)
->> - Introduce cpu_exec_reset_hold and factor tcg_cpu_reset_hold out (Philippe)
->> - Remove few more 'softmmu' mentions (Philippe)
->> - Fix and cleanup in vl.c (Akihiko & Marc-André)
->> - MAINTAINERS updates (Thomas, Daniel)
->>
->> ----------------------------------------------------------------
->>
->> Adrian Wowk (1):
->>    ui/sdl2: use correct key names in win title on mac
->>
->> Akihiko Odaki (1):
->>    vl: Free machine list
->>
->> Daniel P. Berrangé (1):
->>    MAINTAINERS: update libvirt devel mailing list address
->>
->> Dongli Zhang (1):
->>    target/i386/monitor: synchronize cpu state for lapic info
->>
->> Fiona Ebner (2):
->>    hw/ide: reset: cancel async DMA operation before resetting state
->>    tests/qtest: ahci-test: add test exposing reset issue with pending
->>      callback
->>
->> Marc-André Lureau (1):
->>    vl: constify default_list
->>
->> Philippe Mathieu-Daudé (39):
->>    tests/vm/ubuntu.aarch64: Correct comment about TCG specific delay
->>    tests/unit/test-seccomp: Remove mentions of softmmu in test names
->>    accel/tcg: Declare tcg_flush_jmp_cache() in 'exec/tb-flush.h'
->>    accel: Introduce cpu_exec_reset_hold()
->>    accel/tcg: Factor tcg_cpu_reset_hold() out
->>    target: Unify QOM style
->>    target: Mention 'cpu-qom.h' is target agnostic
->>    target/arm: Move internal declarations from 'cpu-qom.h' to 'cpu.h'
->>    target/ppc: Remove CPU_RESOLVING_TYPE from 'cpu-qom.h'
->>    target/riscv: Remove CPU_RESOLVING_TYPE from 'cpu-qom.h'
->>    target: Declare FOO_CPU_TYPE_NAME/SUFFIX in 'cpu-qom.h'
->>    target/hexagon: Declare QOM definitions in 'cpu-qom.h'
->>    target/loongarch: Declare QOM definitions in 'cpu-qom.h'
->>    target/nios2: Declare QOM definitions in 'cpu-qom.h'
->>    target/openrisc: Declare QOM definitions in 'cpu-qom.h'
->>    target/riscv: Move TYPE_RISCV_CPU_BASE definition to 'cpu.h'
->>    target/ppc: Use env_archcpu() in helper_book3s_msgsndp()
->>    target/riscv: Use env_archcpu() in [check_]nanbox()
->>    target/s390x: Use env_archcpu() in handle_diag_308()
->>    target/xtensa: Use env_archcpu() in update_c[compare|count]()
->>    target/i386/hvf: Use x86_cpu in simulate_[rdmsr|wrmsr]()
->>    target/i386/hvf: Use env_archcpu() in simulate_[rdmsr/wrmsr]()
->>    target/i386/hvf: Use CPUState typedef
->>    target/i386/hvf: Rename 'CPUState *cpu' variable as 'cs'
->>    target/i386/hvf: Rename 'X86CPU *x86_cpu' variable as 'cpu'
->>    target/i386/kvm: Correct comment in kvm_cpu_realize()
->>    target/mips: Fix MSA BZ/BNZ opcodes displacement
->>    target/mips: Fix TX79 LQ/SQ opcodes
->>    sysemu/kvm: Restrict kvmppc_get_radix_page_info() to ppc targets
->>    hw/ppc/e500: Restrict ppce500_init_mpic_kvm() to KVM
->>    target/ppc: Restrict KVM objects to system emulation
->>    target/ppc: Prohibit target specific KVM prototypes on user emulation
->>    target/nios2: Create IRQs *after* accelerator vCPU is realized
->>    target/alpha: Tidy up alpha_cpu_class_by_name()
->>    hw/cpu: Call object_class_is_abstract() once in cpu_class_by_name()
->>    exec/cpu: Have cpu_exec_realize() return a boolean
->>    hw/cpu: Clean up global variable shadowing
-> 
-> Please take a look at the following CI failure:
-> 
-> cc -m64 -mcx16 -Ilibqemu-arm-bsd-user.fa.p -I. -I.. -Itarget/arm
-> -I../target/arm -I../common-user/host/x86_64 -I../bsd-user/include
-> -Ibsd-user/freebsd -I../bsd-user/freebsd -I../bsd-user/host/x86_64
-> -Ibsd-user -I../bsd-user -I../bsd-user/arm -Iqapi -Itrace -Iui
-> -Iui/shader -I/usr/local/include/capstone
-> -I/usr/local/include/glib-2.0 -I/usr/local/lib/glib-2.0/include
-> -I/usr/local/include -fcolor-diagnostics -Wall -Winvalid-pch -Werror
-> -std=gnu11 -O2 -g -fstack-protector-strong -Wundef -Wwrite-strings
-> -Wmissing-prototypes -Wstrict-prototypes -Wredundant-decls
-> -Wold-style-definition -Wtype-limits -Wformat-security -Wformat-y2k
-> -Winit-self -Wignored-qualifiers -Wempty-body -Wnested-externs
-> -Wendif-labels -Wexpansion-to-defined -Wmissing-format-attribute
-> -Wno-initializer-overrides -Wno-missing-include-dirs
-> -Wno-shift-negative-value -Wno-string-plus-int
-> -Wno-typedef-redefinition -Wno-tautological-type-limit-compare
-> -Wno-psabi -Wno-gnu-variable-sized-type-not-at-end -Wthread-safety
-> -iquote . -iquote /tmp/cirrus-ci-build -iquote
-> /tmp/cirrus-ci-build/include -iquote
-> /tmp/cirrus-ci-build/host/include/x86_64 -iquote
-> /tmp/cirrus-ci-build/host/include/generic -iquote
-> /tmp/cirrus-ci-build/tcg/i386 -pthread -D_GNU_SOURCE
-> -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -fno-strict-aliasing
-> -fno-common -fwrapv -fPIE -DNEED_CPU_H
-> '-DCONFIG_TARGET="arm-bsd-user-config-target.h"'
-> '-DCONFIG_DEVICES="arm-bsd-user-config-devices.h"' -MD -MQ
-> libqemu-arm-bsd-user.fa.p/bsd-user_main.c.o -MF
-> libqemu-arm-bsd-user.fa.p/bsd-user_main.c.o.d -o
-> libqemu-arm-bsd-user.fa.p/bsd-user_main.c.o -c ../bsd-user/main.c
-> ../bsd-user/main.c:121:36: error: use of undeclared identifier 'cpus';
-> did you mean 'cpu'?
-> QTAILQ_REMOVE_RCU(&cpus, cpu, node);
-> ^~~~
-> cpu
-> 
-> https://gitlab.com/qemu-project/qemu/-/jobs/5472832586
 
-Hmm for some reason the Cirrus jobs aren't running anymore in
-my GitLab namespace, sorry for not catching that trivial leftover.
 
-Phil.
+On 11/6/23 23:53, Jerry ZJ wrote:
+> Use use mode QEMU can reproduce this
+> Reproduce steps
+> 
+> Compile: riscv64-unknown-elf-clang -march=rv32imac_zicsr_zifencei_zba_zbb ./test.c -o hello_rv32imac
+> 
+> Run: qemu-riscv32 -cpu rv32,g=false,f=false,v=false,d=false,e=false,h=false,c=true,m=true,i=true,a=true,Zicsr=true,Zifencei=true,zmmul=true,zba=true,zbb=true ./hello_rv32imac
+
+I'll definitely send patches to add a 'rv32i' CPU after seeing the amount of
+X=false you're having to use here. You'll be doing something like:
+
+qemu-riscv32 -cpu rv32i,c=true,m=true,a=true,Zicsr=true,Zifencei=true,zmmul=true,zba=true,zbb=true ./hello_rv32imac
+
+I.e. you'll only enable what you need. You won't have to disable defaults you
+don't want. I can put you in the CC if you want to give it a shot.
+
+> 
+> Then you will get the following error message:
+> qemu-riscv32: Zfa extension requires F extension
+> 
+> Since Zfa has just been ratified, I suppose disabling it by default makes sense and will not break anything that exists.
+
+Please elaborate a bit more in the commit msg (feel free to add the command line you
+sent) about how inconvenient it is to deal with having to disable 'zfa' when you want
+'F' disabled. I'll ack it.
+
+
+Thanks,
+
+Daniel
+
+> 
+> Best Regards,
+> Jerry ZJ
+> *SiFive Inc. Taiwan*
+> On Nov 7, 2023 at 00:38 +0800, Daniel Henrique Barboza <dbarboza@ventanamicro.com>, wrote:
+>>
+>>
+>> On 11/6/23 12:21, Jerry ZJ wrote:
+>>> We do have some cases that failed. SiFive e-series cores (https://static.dev.sifive.com/SiFive-E21-Manual-v1p0.pdf <https://static.dev.sifive.com/SiFive-E21-Manual-v1p0.pdf>) do not have F extension (For example: rv32imc_zicsr_zifencei_zba_zbb). When we use the corresponding extension options to configure QEMU, i.e., rv32, i=true, m=true, a=true, c=true, Zicsr=true, Zifencei=true, zba=true, zbb=true, the QEMU will have the following error.
+>>> Zfa extension requires F extension
+>>
+>> Can you send your whole command line? I'm unable to reproduce it here. This
+>> will boot:
+>>
+>> ./build/qemu-system-riscv32 -M virt -cpu rv32,i=true,m=true,a=true,c=true,zicsr=true,zifencei=true,zba=true,zbb=true --nographic
+>>
+>>
+>> In a side note, we have a new CPU type (still pending, not yet queue) called
+>> "rv64i", which comes only with 'RVI' enabled and nothing else - no defaults,
+>> nothing.
+>>
+>> I believe this use case you testing here would benefit from a "rv32i" CPU that
+>> does the same but for 32 bits. Then you can specify the whole CPU and not worry
+>> about hidden defaults. Does that makes sense?
+>>
+>>>
+>>> IMHO, we should not enable Zfa extension by default, especially when Zfa requires F to be enabled implicitly.
+>>
+>> If the rv32 use case you mentioned is really breaking because of zfa and
+>> Fm, I'm fine with disabling zfa because it's now a bug. We just need a
+>> reproducer.
+>>
+>>
+>> Thanks,
+>>
+>> Daniel
+>>
+>>>
+>>> Best Regards,
+>>> Jerry ZJ
+>>> *SiFive Inc. Taiwan*
+>>> On Nov 6, 2023 at 22:55 +0800, Daniel Henrique Barboza <dbarboza@ventanamicro.com>, wrote:
+>>>>
+>>>>
+>>>> On 11/6/23 08:14, Jerry Zhang Jian wrote:
+>>>>> - Zfa requires F, we should not assume all CPUs have F extension
+>>>>> support.
+>>>>
+>>>> We do not have a case where this happen, do we? The default CPUs have F
+>>>> enabled (see misa_ext_cfgs[] in target/riscv/tcg/tcg-cpu.c), so zfa being
+>>>> enable isn't a problem for them. Vendor CPUs might not have F enabled, but
+>>>> they don't use the default values for extensions, so they're not affected.
+>>>> Having zfa enabled by default does not hurt the default CPU setups we have.
+>>>>
+>>>> I am not a fan of these defaults for rv64 and so on, but once we set them to
+>>>> 'true' people can complain if we set them to 'false' because it might break
+>>>> existing configs in the wild. We need a strong case (i.e. a bug) to do so.
+>>>>
+>>>>
+>>>> Thanks,
+>>>>
+>>>> Daniel
+>>>>
+>>>>
+>>>>>
+>>>>> Signed-off-by: Jerry Zhang Jian <jerry.zhangjian@sifive.com>
+>>>>> ---
+>>>>> target/riscv/cpu.c | 2 +-
+>>>>> 1 file changed, 1 insertion(+), 1 deletion(-)
+>>>>>
+>>>>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>>>>> index ac4a6c7eec..c9f11509c8 100644
+>>>>> --- a/target/riscv/cpu.c
+>>>>> +++ b/target/riscv/cpu.c
+>>>>> @@ -1247,7 +1247,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+>>>>> MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
+>>>>> MULTI_EXT_CFG_BOOL("zihintpause", ext_zihintpause, true),
+>>>>> MULTI_EXT_CFG_BOOL("zawrs", ext_zawrs, true),
+>>>>> - MULTI_EXT_CFG_BOOL("zfa", ext_zfa, true),
+>>>>> + MULTI_EXT_CFG_BOOL("zfa", ext_zfa, false),
+>>>>> MULTI_EXT_CFG_BOOL("zfh", ext_zfh, false),
+>>>>> MULTI_EXT_CFG_BOOL("zfhmin", ext_zfhmin, false),
+>>>>> MULTI_EXT_CFG_BOOL("zve32f", ext_zve32f, false),
 
