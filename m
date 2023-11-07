@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 678B8C4167D
-	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Nov 2023 12:29:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50CA0C4167B
+	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Nov 2023 12:29:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r0LAQ-0007vG-Jl; Tue, 07 Nov 2023 07:26:50 -0500
+	id 1r0L9v-0006co-Su; Tue, 07 Nov 2023 07:26:19 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r0L9g-0006H2-EQ
- for qemu-riscv@nongnu.org; Tue, 07 Nov 2023 07:26:09 -0500
-Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r0L9K-00064C-RN
+ for qemu-riscv@nongnu.org; Tue, 07 Nov 2023 07:25:49 -0500
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r0L9Q-00058w-TA
- for qemu-riscv@nongnu.org; Tue, 07 Nov 2023 07:26:01 -0500
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5437269a661so13019347a12.0
- for <qemu-riscv@nongnu.org>; Tue, 07 Nov 2023 04:25:47 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r0L91-0004vL-KI
+ for qemu-riscv@nongnu.org; Tue, 07 Nov 2023 07:25:41 -0500
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-4083f613272so48429375e9.1
+ for <qemu-riscv@nongnu.org>; Tue, 07 Nov 2023 04:25:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699359945; x=1699964745; darn=nongnu.org;
+ d=linaro.org; s=google; t=1699359921; x=1699964721; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TWjAMfnV0kRvK1CF0UWrM+tNZeOmTMW+hMb8e74FNo4=;
- b=eqhVJ7QuIvRb24GOGl+EQ+FTM9OPsBLY1YX8cGVCFtxsmHl1M9a8vkkNqHAv/4UcGV
- P59d7lK8IfXfxZkgdIJwkmfq+V4SxFdkRZ0O1xOZlUOPK3zvSup4I7XRPopEq7uH0BhF
- Z36mo0SLrsDJVpI4t+z8ly0zDZx6KBzbd5njFPLzVFNFVeNuHzjNR7BORETtp5qBLjsX
- OfSsRglpidGONn28eVgLEeihWQLFcTT67MeZ7z7F8UvNbe4wYj+z6nyRF0NLKEm4W01R
- 7lcuPfB9LGmFpKtesZcV54xe5CswzTMKI/oRWZJbcwdlvhBVU//h8V5+fqoFiq8L2uyj
- jBmw==
+ bh=g4cBhoinmiIEOsb8jCdcceaN6JxCpOf4XdeJF400+y0=;
+ b=hXsEyFg6eqEJIcw44ySSreJrmPVDQXSDoL50JWIkZd62bWCUWTZIGNxHtVexR2D9Io
+ JeywT/gO5swBPzaPeI/PTypY8278J376Jvx0sZexilBE/BBdfG0co35HLZu8SQVS6EEm
+ cW9jjk0Rne6uFZZKHddK88xgMpAmYnsZWIkJMTkEpflR9SUKiHYz9MtuJWLZpsgpG1wU
+ 9XlY9Vsq6xEjACXepCNhKdF25dnSsSbMtKDB65TPGCM4kbdJRIhVbyIL0Nlud8PW21XE
+ 4nRueoVsCV/UabaQ0obCT7FW41aHeM8XtoFKLkrUpCXJbQ6G2GiKFXssct5MKcgQoVhJ
+ zHBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699359945; x=1699964745;
+ d=1e100.net; s=20230601; t=1699359921; x=1699964721;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TWjAMfnV0kRvK1CF0UWrM+tNZeOmTMW+hMb8e74FNo4=;
- b=sFmPHCaAxxv2K5Hpr8xB5LW0MMTH1p/7DDjXg5vi5fYZ7LyGES6e98LUY+ggQG7yhd
- VafZGX1CQ/Yy4APtmQyz1uSBfteueRutYuMG9yOi+qJWA+DoYe+M419h3JslYvP3jJEm
- OU3jzTVg6tmTF6jxyRVlb1FDL553WhgcM/K2ARPX1UOKOjAMjUJDi3OXB9YOv2c/+4uZ
- G9d184SweCHxckj1RS2+sbK1pKh3L8UKRfl6dVqvaoLmFpl53KToJ5/LvmZKWePkLbJF
- dNU9v3faDHzhlnyqzuGEP0nzZynd7FrV2kUXgc9CBMUmHyzET9LJEJlVWQikWzV7JRJS
- Kekg==
-X-Gm-Message-State: AOJu0YzE54oTGdPm84jwNLp/9jHQzUoAuqMC5nzyUAfeyrnchtuVuBoq
- Uolz0cXJKXq5YzLsVujMcJJkCQ==
-X-Google-Smtp-Source: AGHT+IGZJdask+fi03EA8Mp4RnGJsuJPZ2tfZ6T/ZCgR3M1/MRVims0ImI0ewYQuiDr0hvwHAB2CYA==
-X-Received: by 2002:a17:907:26c4:b0:9dd:ebab:2bc5 with SMTP id
- bp4-20020a17090726c400b009ddebab2bc5mr2059350ejc.7.1699359944935; 
- Tue, 07 Nov 2023 04:25:44 -0800 (PST)
+ bh=g4cBhoinmiIEOsb8jCdcceaN6JxCpOf4XdeJF400+y0=;
+ b=sONAvbolD8mcOzBnrbgX2U4oMft2SCfOtnhT57CvinQ5mKzZf7yj+JyLrTBLVWKH+E
+ 2GScpAH4vw5oW4gsiiF3Ra7WCT/qoo2tYJgcYG2p/M/za1YJb2IpCXEw8Yly1igsPs/G
+ n9hIUMYqMCd574abiMRgYgfThHwH81+AzDWjMMJ/lpXJXuO5NMR2tlP1JpWz3L5iIdmJ
+ qPFAEI4O42I4iW2UgBFlQoGP7kauf3eoU2tLRXFW3IlpD0hah0wyPcQCmR+2Y5eTBZ2E
+ 61yI28GPlWSpJNfIUoIyPvIbtzZiioNbsGBzqMnMAPVwmkIIcrjeK5Sz6xhswf76zxlG
+ DgqQ==
+X-Gm-Message-State: AOJu0YxYTpPXff5ayRuQnCivQsNCV4vnbIPijoaaVDwaDJZ+Xj0K46Jh
+ aEjXn7wRpT8VHVzAa/G4W61ajMOpvAbz00kRFHk=
+X-Google-Smtp-Source: AGHT+IEo95bN9dOylI8qF1cvFsMAFDLsUMzoXztRW2XMmXeNrFi+8lYAALC2D0Tm8+PRV2RvxoXfJw==
+X-Received: by 2002:a5d:588f:0:b0:32f:7e1d:f039 with SMTP id
+ n15-20020a5d588f000000b0032f7e1df039mr23964336wrf.46.1699359921327; 
+ Tue, 07 Nov 2023 04:25:21 -0800 (PST)
 Received: from m1x-phil.lan ([176.187.216.69])
  by smtp.gmail.com with ESMTPSA id
- s4-20020a1709062ec400b009c3f8f46c22sm986892eji.77.2023.11.07.04.25.43
+ k4-20020a5d6d44000000b0032dc1fc84f2sm2241399wri.46.2023.11.07.04.25.19
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 07 Nov 2023 04:25:44 -0800 (PST)
+ Tue, 07 Nov 2023 04:25:20 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-block@nongnu.org,
  qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Thomas Huth <thuth@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>,
- David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>
-Subject: [PULL 45/75] target/s390x/cpu: Restrict CPUS390XState declaration to
- 'cpu.h'
-Date: Tue,  7 Nov 2023 13:24:35 +0100
-Message-ID: <20231107122442.58674-11-philmd@linaro.org>
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ Nicholas Piggin <npiggin@gmail.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>
+Subject: [PULL 41/75] target/ppc: Move powerpc_input_t definition to 'cpu.h'
+Date: Tue,  7 Nov 2023 13:24:31 +0100
+Message-ID: <20231107122442.58674-7-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231107122442.58674-1-philmd@linaro.org>
 References: <20231107122442.58674-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52a;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x52a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -98,53 +98,81 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-"target/s390x/cpu-qom.h" has to be target-agnostic. However, it
-currently declares CPUS390XState, which is target-specific.
-Move that declaration to "cpu.h".
+The powerpc_input_t definition is only used by target/ppc/, no need
+to expose it. Restrict it by moving it to "target/ppc/cpu.h".
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Thomas Huth <thuth@redhat.com>
-Message-Id: <20231106114500.5269-5-philmd@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Cédric Le Goater <clg@kaod.org>
+Message-Id: <20231013125630.95116-8-philmd@linaro.org>
 ---
- target/s390x/cpu-qom.h | 2 --
- target/s390x/cpu.h     | 4 ++--
- 2 files changed, 2 insertions(+), 4 deletions(-)
+ target/ppc/cpu-qom.h | 21 ---------------------
+ target/ppc/cpu.h     | 20 ++++++++++++++++++++
+ 2 files changed, 20 insertions(+), 21 deletions(-)
 
-diff --git a/target/s390x/cpu-qom.h b/target/s390x/cpu-qom.h
-index fcd70daddf..ccf126b7a9 100644
---- a/target/s390x/cpu-qom.h
-+++ b/target/s390x/cpu-qom.h
-@@ -33,8 +33,6 @@ OBJECT_DECLARE_CPU_TYPE(S390CPU, S390CPUClass, S390_CPU)
- typedef struct S390CPUModel S390CPUModel;
- typedef struct S390CPUDef S390CPUDef;
+diff --git a/target/ppc/cpu-qom.h b/target/ppc/cpu-qom.h
+index c35374e15f..0241609efe 100644
+--- a/target/ppc/cpu-qom.h
++++ b/target/ppc/cpu-qom.h
+@@ -35,27 +35,6 @@ OBJECT_DECLARE_CPU_TYPE(PowerPCCPU, PowerPCCPUClass, POWERPC_CPU)
  
--typedef struct CPUArchState CPUS390XState;
--
- typedef enum cpu_reset_type {
-     S390_CPU_RESET_NORMAL,
-     S390_CPU_RESET_INITIAL,
-diff --git a/target/s390x/cpu.h b/target/s390x/cpu.h
-index 110902fa3c..942589c597 100644
---- a/target/s390x/cpu.h
-+++ b/target/s390x/cpu.h
-@@ -55,7 +55,7 @@ typedef struct PSW {
-     uint64_t addr;
- } PSW;
+ #define TYPE_HOST_POWERPC_CPU POWERPC_CPU_TYPE_NAME("host")
  
--struct CPUArchState {
-+typedef struct CPUArchState {
-     uint64_t regs[16];     /* GP registers */
-     /*
-      * The floating point registers are part of the vector registers.
-@@ -157,7 +157,7 @@ struct CPUArchState {
-     /* currently processed sigp order */
-     uint8_t sigp_order;
- 
+-/*****************************************************************************/
+-/* Input pins model                                                          */
+-typedef enum powerpc_input_t powerpc_input_t;
+-enum powerpc_input_t {
+-    PPC_FLAGS_INPUT_UNKNOWN = 0,
+-    /* PowerPC 6xx bus                  */
+-    PPC_FLAGS_INPUT_6xx,
+-    /* BookE bus                        */
+-    PPC_FLAGS_INPUT_BookE,
+-    /* PowerPC 405 bus                  */
+-    PPC_FLAGS_INPUT_405,
+-    /* PowerPC 970 bus                  */
+-    PPC_FLAGS_INPUT_970,
+-    /* PowerPC POWER7 bus               */
+-    PPC_FLAGS_INPUT_POWER7,
+-    /* PowerPC POWER9 bus               */
+-    PPC_FLAGS_INPUT_POWER9,
+-    /* Freescale RCPU bus               */
+-    PPC_FLAGS_INPUT_RCPU,
 -};
-+} CPUS390XState;
+-
+ #ifndef CONFIG_USER_ONLY
+ typedef struct PPCTimebase {
+     uint64_t guest_timebase;
+diff --git a/target/ppc/cpu.h b/target/ppc/cpu.h
+index d859c45a2e..f8101ffa29 100644
+--- a/target/ppc/cpu.h
++++ b/target/ppc/cpu.h
+@@ -261,6 +261,26 @@ static inline bool mmu_is_64bit(powerpc_mmu_t mmu_model)
+     return mmu_model & POWERPC_MMU_64;
+ }
  
- static inline uint64_t *get_freg(CPUS390XState *cs, int nr)
- {
++/*****************************************************************************/
++/* Input pins model                                                          */
++typedef enum powerpc_input_t {
++    PPC_FLAGS_INPUT_UNKNOWN = 0,
++    /* PowerPC 6xx bus                  */
++    PPC_FLAGS_INPUT_6xx,
++    /* BookE bus                        */
++    PPC_FLAGS_INPUT_BookE,
++    /* PowerPC 405 bus                  */
++    PPC_FLAGS_INPUT_405,
++    /* PowerPC 970 bus                  */
++    PPC_FLAGS_INPUT_970,
++    /* PowerPC POWER7 bus               */
++    PPC_FLAGS_INPUT_POWER7,
++    /* PowerPC POWER9 bus               */
++    PPC_FLAGS_INPUT_POWER9,
++    /* Freescale RCPU bus               */
++    PPC_FLAGS_INPUT_RCPU,
++} powerpc_input_t;
++
+ #define PPC_INPUT(env) ((env)->bus_model)
+ 
+ /*****************************************************************************/
 -- 
 2.41.0
 
