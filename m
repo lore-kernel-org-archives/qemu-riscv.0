@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D503C4332F
-	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Nov 2023 12:28:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B4F6C4332F
+	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Nov 2023 12:28:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r0LB1-0001Mw-0V; Tue, 07 Nov 2023 07:27:28 -0500
+	id 1r0LAO-0007fK-Fp; Tue, 07 Nov 2023 07:26:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r0LA5-00079y-4t
- for qemu-riscv@nongnu.org; Tue, 07 Nov 2023 07:26:29 -0500
-Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r0L9d-0006Fx-EL
+ for qemu-riscv@nongnu.org; Tue, 07 Nov 2023 07:26:04 -0500
+Received: from mail-lj1-x234.google.com ([2a00:1450:4864:20::234])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r0L9v-0005KB-Ov
- for qemu-riscv@nongnu.org; Tue, 07 Nov 2023 07:26:28 -0500
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-9dd6dc9c00cso575912766b.3
- for <qemu-riscv@nongnu.org>; Tue, 07 Nov 2023 04:26:19 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r0L9I-00057P-SA
+ for qemu-riscv@nongnu.org; Tue, 07 Nov 2023 07:25:59 -0500
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-2c50906f941so80327581fa.2
+ for <qemu-riscv@nongnu.org>; Tue, 07 Nov 2023 04:25:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699359978; x=1699964778; darn=nongnu.org;
+ d=linaro.org; s=google; t=1699359939; x=1699964739; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=G5jwu7f17a+yqtzy4C256uds7gVdP2jJyZeTSPjjH48=;
- b=mzdkjLFAtNlSHmxJWhBWOxnfd+bp2pQOClHzjs0mj/rdTVg4Ea7/LfIobDvBYYJCo9
- C9E4JaDH974mCL4duZb8BXCRyfnbUrQuNo8Z/+cVy5PfyT3zpIRCFuuZl2sVjLSEg+rF
- 4/qzHmZe89N20Is8dyfZpgT4AH8b93WohCCkxXB4quzCzdWVbGPZBLPQiVMydEy2Gbn+
- t2ATShzJh8L4D6te8R0mrzkwUWLtTvuLOcrzRf1u7h7DpRPWcxnNL5Q7yAbsUSytGZ89
- v7xSmg8H4aYlip5PleiGnthU1lE24rbtl1mO9hJBuFdElnMp7h3xKzFEwa8B+EsOxZTB
- gF+Q==
+ bh=uzHw9gxC37cDWskQ8Q09i1BaQBpN31WzD4SH6IynXXc=;
+ b=CvKBMHhBGXTLC6ew4HjO2vX1SrgW4YEzhsR/cEtPTzKXNJGY/F87F7afNw0jSdQvRX
+ ibvrxSO27zkrDE0gafJSNnh5tpCD6+K2nT31rLFKbA0QpkwwvHEt/6xnwr2OuhEzZiS3
+ dEzudWcDJhSga5FzeRVYsaienTSX0lWUuVQufwpRnBW0e3JJJm6Wbps9hEQBmKCb89AC
+ d7v0mwBUq6qTzXS+1L/CDJLlkxDq9cj2bKHm7/DgAMBvb0CX70thTkiZhwetqGRYYHOP
+ CdJTSQ1nMBc2ZaHN1Q2irxZAEL8dph4kDEQvNqKLmeChXXMnb+zA3N85CwHsiijJ3qe+
+ 0wzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699359978; x=1699964778;
+ d=1e100.net; s=20230601; t=1699359939; x=1699964739;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=G5jwu7f17a+yqtzy4C256uds7gVdP2jJyZeTSPjjH48=;
- b=OxJGdfTJby0dP8PXQDs0LfRofRzwM3Ej5MmVVjhVxWPhz2dRRrz3Q7fIXcvPxV966Q
- ktie+op7iSYwOcs/HrZGQG8u4vlDPtql6NuNflerr9YtjT9W/ZkJNWYnKbWbCiyhj/qk
- fa/hYKBRHeKsTQhFsiDI3DuvRbNEgyhW2K6snpG/0vdGlhZHgCXTh0EyHwhXLxyGiDPx
- RBQlHg5t9lY1Syva77EWXxKtdm7iwRF+ZPU/NEq8sSjQfxYJZSpufRIn/zYgQUR3qFh+
- +PrsnO5lt5GqQSXpmHW/+cWjtdc2GxqR//Zfe0VdFlIvToHHIH34HAMvCRA8BqPB200M
- Y4ng==
-X-Gm-Message-State: AOJu0YzDb463qAOgwIO1eLYW0HOwA5sJsUxWdR+etSL/mMGSTGkiuyVf
- dWU5vyzop0npNp6w36/a2/Q+fA==
-X-Google-Smtp-Source: AGHT+IF1bAmhsZy7a81GGB/OM2OIgpR0Z5xrK8Sglh0M+mSuV2WJ+N7GENwlcn1z45jcWBghWUvEBw==
-X-Received: by 2002:a17:907:724e:b0:9be:5ab2:73c0 with SMTP id
- ds14-20020a170907724e00b009be5ab273c0mr16879801ejc.8.1699359977901; 
- Tue, 07 Nov 2023 04:26:17 -0800 (PST)
+ bh=uzHw9gxC37cDWskQ8Q09i1BaQBpN31WzD4SH6IynXXc=;
+ b=e/jysCS6D4iD0wCXoajceLepXVRmnMKzPcQhDFbDu/j2r/PRl0/AgnJaTVokLDijtz
+ PIW+EuuLUV0nk+3SZjGPUA1zy8LjU6TJCHHdEjQB7dB3mVi8JpZOfJsjWMqcdsCrED80
+ 8t3lHoM74SVAUWobdiB57HkcOPodJrDKMRo8xeXrBhToq2BStSRuLEe/veFbBj3+Dl5D
+ +puy6Z/yWOxeKNBtv1m1eKJYHkRakEhwzUC9sYJSdAmN/3IQ9CGC6Zk9hKEhFK7tKWqy
+ oKlsqxEwtRW4mx9ZvgDR2K9vBVnxoGcX3s/uRvH5lhAJfdJa3aQMSpx1ArL3Oi7ieixS
+ VmBQ==
+X-Gm-Message-State: AOJu0Yzg1bZrRQW4ISRpRrNzSx9RnZOI2kMN/ALa+jmMm7WQGklWLlGR
+ wyMXRFSALFJVNl3INpkI/DcKvQ==
+X-Google-Smtp-Source: AGHT+IHYS2sWYgS68pTucc6D2gT5/C0id0v/lkcQcfo8MWiVRRZXBiRLiYanm65MPWc8YdA86y3qKg==
+X-Received: by 2002:a2e:3910:0:b0:2bc:d8cb:59fe with SMTP id
+ g16-20020a2e3910000000b002bcd8cb59femr22459267lja.8.1699359938985; 
+ Tue, 07 Nov 2023 04:25:38 -0800 (PST)
 Received: from m1x-phil.lan ([176.187.216.69])
  by smtp.gmail.com with ESMTPSA id
- md5-20020a170906ae8500b009ad7fc17b2asm989795ejb.224.2023.11.07.04.26.16
+ l26-20020a05600c1d1a00b003fef5e76f2csm12701908wms.0.2023.11.07.04.25.37
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 07 Nov 2023 04:26:17 -0800 (PST)
+ Tue, 07 Nov 2023 04:25:38 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-block@nongnu.org,
  qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
- Thomas Huth <thuth@redhat.com>, Konstantin Kostiuk <kkostiuk@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PULL 73/75] MAINTAINERS: Add more guest-agent related files to the
- corresponding section
-Date: Tue,  7 Nov 2023 13:24:40 +0100
-Message-ID: <20231107122442.58674-16-philmd@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Thomas Huth <thuth@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>
+Subject: [PULL 44/75] target/s390x/cpu: Restrict cpu_get_tb_cpu_state()
+ definition to TCG
+Date: Tue,  7 Nov 2023 13:24:34 +0100
+Message-ID: <20231107122442.58674-10-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231107122442.58674-1-philmd@linaro.org>
 References: <20231107122442.58674-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x62d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::234;
+ envelope-from=philmd@linaro.org; helo=mail-lj1-x234.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,37 +98,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Thomas Huth <thuth@redhat.com>
+cpu_get_tb_cpu_state() is TCG specific. Another accelerator
+calling it would be a bug, so restrict the definition to TCG,
+along with "tcg_s390x.h" header inclusion.
 
-contrib/systemd/qemu-guest-agent.service, tests/data/test-qga-config
-and tests/data/test-qga-os-release belong to the guest agent, so make
-sure that these files are covered here, too.
-
-Signed-off-by: Thomas Huth <thuth@redhat.com>
-Reviewed-by: Konstantin Kostiuk <kkostiuk@redhat.com>
-Message-ID: <20231107101811.14189-1-thuth@redhat.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+Message-Id: <20231106114500.5269-4-philmd@linaro.org>
 ---
- MAINTAINERS | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ target/s390x/cpu.h | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 2a9354e695..bc69253a25 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -3145,10 +3145,11 @@ M: Michael Roth <michael.roth@amd.com>
- M: Konstantin Kostiuk <kkostiuk@redhat.com>
- S: Maintained
- F: qga/
-+F: contrib/systemd/qemu-guest-agent.service
- F: docs/interop/qemu-ga.rst
- F: docs/interop/qemu-ga-ref.rst
- F: scripts/qemu-guest-agent/
--F: tests/unit/test-qga.c
-+F: tests/*/test-qga*
- T: git https://github.com/mdroth/qemu.git qga
+diff --git a/target/s390x/cpu.h b/target/s390x/cpu.h
+index 38d7197f4c..110902fa3c 100644
+--- a/target/s390x/cpu.h
++++ b/target/s390x/cpu.h
+@@ -29,7 +29,6 @@
+ #include "cpu_models.h"
+ #include "exec/cpu-defs.h"
+ #include "qemu/cpu-float.h"
+-#include "tcg/tcg_s390x.h"
+ #include "qapi/qapi-types-machine-common.h"
  
- QEMU Guest Agent Win32
+ #define ELF_MACHINE_UNAME "S390X"
+@@ -383,6 +382,10 @@ static inline int cpu_mmu_index(CPUS390XState *env, bool ifetch)
+ #endif
+ }
+ 
++#ifdef CONFIG_TCG
++
++#include "tcg/tcg_s390x.h"
++
+ static inline void cpu_get_tb_cpu_state(CPUS390XState *env, vaddr *pc,
+                                         uint64_t *cs_base, uint32_t *flags)
+ {
+@@ -405,6 +408,8 @@ static inline void cpu_get_tb_cpu_state(CPUS390XState *env, vaddr *pc,
+     }
+ }
+ 
++#endif /* CONFIG_TCG */
++
+ /* PER bits from control register 9 */
+ #define PER_CR9_EVENT_BRANCH           0x80000000
+ #define PER_CR9_EVENT_IFETCH           0x40000000
 -- 
 2.41.0
 
