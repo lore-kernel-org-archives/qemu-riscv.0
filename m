@@ -4,100 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E01EC4332F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Nov 2023 09:28:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09A10C4332F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Nov 2023 17:26:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r1NoE-0000Ee-7f; Fri, 10 Nov 2023 04:28:14 -0500
+	id 1r1VGl-0002yW-3Q; Fri, 10 Nov 2023 12:26:11 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from
- <BATV+29e7849af3f7cdd1dde9+7383+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1r1NoA-0000CF-1z; Fri, 10 Nov 2023 04:28:10 -0500
-Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from
- <BATV+29e7849af3f7cdd1dde9+7383+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1r1Nnn-0004jK-Vu; Fri, 10 Nov 2023 04:28:09 -0500
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
- In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=oO9LT3DPNTa4fkoiugIprfdxPX0wXCW4JpFpWpowqbI=; b=luy+1wfXgEor99SuHzUEZO6CAS
- I1JYZ4rzm6Fp4oXEoecPhckhi6m5rcN+/69GmG2uY4vEKt3sQGLFVfcpkaCzoaWunxtaIYcwZslmp
- gcDV4rBotUyXhUIwsFOYEE58eyErrwTpSCGbuQb6S4+UqVkRYKXiRSZFsXPoGIm6jJmZMOj013lXn
- nltEF9q0B/m8YA7o30yy0SVFwLLRCm8dw8c+88Y2YZ/qPKjW2OuaNFIiyr8vTa7zu0KILxzUVNx5o
- 6Q3F+tueA1beApIZyv64zLTTKwdiolCXrjC41WwOZsjffXrzOU6KLVuWM6XfrlSQZWxE4Z1HlXeQm
- dl6GNp5A==;
-Received: from [2001:8b0:10b:5:18d3:34d5:5849:7b74]
- (helo=u3832b3a9db3152.ant.amazon.com)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1r1NnY-00CbTG-GE; Fri, 10 Nov 2023 09:27:33 +0000
-Message-ID: <941df87a4a1173c3498343d84d13a1d82aefd3a0.camel@infradead.org>
-Subject: Re: [PATCH for-8.3 v2 05/46] hw/i386/pc: use qemu_get_nic_info()
- and pci_init_nic_devices()
-From: David Woodhouse <dwmw2@infradead.org>
-To: Philippe =?ISO-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>, 
- qemu-devel@nongnu.org, Bernhard Beschow <shentey@gmail.com>, Markus
- Armbruster <armbru@redhat.com>
-Cc: Richard Henderson <richard.henderson@linaro.org>, Beniamino Galvani
- <b.galvani@gmail.com>, Peter Maydell <peter.maydell@linaro.org>, Strahinja
- Jankovic <strahinja.p.jankovic@gmail.com>, Niek Linnenbank
- <nieklinnenbank@gmail.com>,  =?ISO-8859-1?Q?C=E9dric?= Le Goater
- <clg@kaod.org>, Andrew Jeffery <andrew@codeconstruct.com.au>, Joel Stanley
- <joel@jms.id.au>, Igor Mitsyanko <i.mitsyanko@gmail.com>, Jean-Christophe
- Dubois <jcd@tribudubois.net>, Andrey Smirnov <andrew.smirnov@gmail.com>,
- Rob Herring <robh@kernel.org>, Subbaraya Sundeep <sundeep.lkml@gmail.com>,
- Jan Kiszka <jan.kiszka@web.de>, Tyrone Ting <kfting@nuvoton.com>, Hao Wu
- <wuhaotsh@google.com>, Radoslaw Biernacki <rad@semihalf.com>, Leif Lindholm
- <quic_llindhol@quicinc.com>, Marcin Juszkiewicz
- <marcin.juszkiewicz@linaro.org>,  "Edgar E. Iglesias"
- <edgar.iglesias@gmail.com>, Alistair Francis <alistair@alistair23.me>,
- Helge Deller <deller@gmx.de>,  "Michael S. Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Paolo Bonzini
- <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>, Song Gao
- <gaosong@loongson.cn>, Thomas Huth <huth@tuxfamily.org>, Laurent Vivier
- <laurent@vivier.eu>, Huacai Chen <chenhuacai@kernel.org>, Jiaxun Yang
- <jiaxun.yang@flygoat.com>, =?ISO-8859-1?Q?Herv=E9?= Poussineau
- <hpoussin@reactos.org>, Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>, 
- Aurelien Jarno <aurelien@aurel32.net>, Jason Wang <jasowang@redhat.com>,
- Jia Liu <proljc@gmail.com>, Stafford Horne <shorne@gmail.com>, Mark
- Cave-Ayland <mark.cave-ayland@ilande.co.uk>, Nicholas Piggin
- <npiggin@gmail.com>, Daniel Henrique Barboza <danielhb413@gmail.com>, David
- Gibson <david@gibson.dropbear.id.au>, Harsh Prateek Bora
- <harshpb@linux.ibm.com>, Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt
- <palmer@dabbelt.com>, Weiwei Li <liweiwei@iscas.ac.cn>, Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>, David Hildenbrand <david@redhat.com>, Ilya
- Leoshkevich <iii@linux.ibm.com>, Halil Pasic <pasic@linux.ibm.com>, 
- Christian Borntraeger <borntraeger@linux.ibm.com>, Eric Farman
- <farman@linux.ibm.com>, Yoshinori Sato <ysato@users.sourceforge.jp>, Magnus
- Damm <magnus.damm@gmail.com>, Artyom Tarasenko <atar4qemu@gmail.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Anthony Perard
- <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>, Max Filippov
- <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org, qemu-ppc@nongnu.org, 
- qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, xen-devel@lists.xenproject.org
-Date: Fri, 10 Nov 2023 09:27:31 +0000
-In-Reply-To: <34e2c0c6-4e04-486a-8e1f-4afdc461a5d4@linaro.org>
-References: <20231106195352.301038-1-dwmw2@infradead.org>
- <20231106195352.301038-6-dwmw2@infradead.org>
- <34e2c0c6-4e04-486a-8e1f-4afdc461a5d4@linaro.org>
-Content-Type: multipart/signed; micalg="sha-256";
- protocol="application/pkcs7-signature"; 
- boundary="=-PA5ixZaqSq1wPm2X84kJ"
-User-Agent: Evolution 3.44.4-0ubuntu2 
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1r1VGj-0002wH-Ng
+ for qemu-riscv@nongnu.org; Fri, 10 Nov 2023 12:26:09 -0500
+Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1r1VGh-00023U-MP
+ for qemu-riscv@nongnu.org; Fri, 10 Nov 2023 12:26:09 -0500
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-28039ee1587so1879029a91.2
+ for <qemu-riscv@nongnu.org>; Fri, 10 Nov 2023 09:26:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1699637166; x=1700241966; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=tlkVxuFd/0Fmo5OLApeh3jNXix52/hAaPFJnMyxswes=;
+ b=iqNZsAvOa9i4aw9mQO1E4u2HkpKI3aITS/Dc0KTgFjcNyo6BuYLe+l2Qg6Ydnrt0i+
+ KYB6dBhe9p4ml629N0zalPlsHggw6a1oqhwIGbfixPFk5r2JCA5U0tO1P7ZrjTg6oAOa
+ lqyNfI+jcBjeIiff+RsvfLaUHmtg34jSmw7/Yj7LhyqK7TjPWDd/piWJol5pfS5P3VRB
+ EKxaCHMy0I9F+AG7eDbDDXMjZqWNnzZg8rNLHoMSL86hqqNA3WQqKLJPrBD1E2ZBPHcq
+ yEnObiGSX6Mj5zMBowhTP+ThQzWuEGQjbWsL6t/BB5zlFdTievCq2yIiSmiV2A8KJW0C
+ 6qpw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699637166; x=1700241966;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=tlkVxuFd/0Fmo5OLApeh3jNXix52/hAaPFJnMyxswes=;
+ b=UeL1SKpc4jE4uTo84v9oYrGGbafNVKZFnraqYaP8+LK6hJYXrNAvXhGwmIFHUrOYHr
+ eosHaANONavz8ycKMSN6+gXUfAOB8HPq9qVbMlu4rKeoxMLNlx3rqEX7D0NHW5pvJkEi
+ zD2+QxgQ9j2SxUfJg0TaArR3qaozlKx0maKeTGN14RKPWCgDfpQl8mXW/j+wbMmDOEzR
+ iWbBkU0kd/MC+Y9HuvZ0KGb5GKTz/iyEGOWPk3GNZO8G0wsymzdQl1+wpr3w9Qjup82B
+ 2VCUINS8okJvoxSW9tOX3jd9NCCfQ4BX1Y3NIpt1tEFw/Si0p/al+qN1Wqh05dLB+h9U
+ 3npg==
+X-Gm-Message-State: AOJu0YwKADKaFdDi8/jUQT9DHQkUSIEk7rrDq1dZ0XxmZ7KVgKlTPOtM
+ 8dS6pdhK03xglFIFJ1tJD5etfA==
+X-Google-Smtp-Source: AGHT+IEY4lom6almW4AAyUR632p8zgAxhXKxyhVK5ztL0g3zD8soD+0Fmm1n92Ka1sSvDFHAnfhCLw==
+X-Received: by 2002:a17:90a:5d86:b0:281:3a4a:2e61 with SMTP id
+ t6-20020a17090a5d8600b002813a4a2e61mr5078030pji.14.1699637165761; 
+ Fri, 10 Nov 2023 09:26:05 -0800 (PST)
+Received: from grind.. (201-69-66-14.dial-up.telesp.net.br. [201.69.66.14])
+ by smtp.gmail.com with ESMTPSA id
+ p19-20020a17090b011300b00282eb74ec9esm1853362pjz.51.2023.11.10.09.26.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 10 Nov 2023 09:26:05 -0800 (PST)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH for-8.2] hw/riscv/virt.c: do create_fdt() earlier,
+ add finalize_fdt()
+Date: Fri, 10 Nov 2023 14:25:59 -0300
+Message-ID: <20231110172559.73209-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- casper.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1236::1;
- envelope-from=BATV+29e7849af3f7cdd1dde9+7383+infradead.org+dwmw2@casper.srs.infradead.org;
- helo=casper.infradead.org
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x1033.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -114,222 +93,159 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Commit 49554856f0 fixed a problem, where TPM devices were not appearing
+in the FDT, by delaying the FDT creation up until virt_machine_done().
+This create a side effect (see gitlab #1925) - devices that need access
+to the '/chosen' FDT node during realize() stopped working because, at
+that point, we don't have a FDT.
 
---=-PA5ixZaqSq1wPm2X84kJ
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+This happens because our FDT creation is monolithic, but it doesn't need
+to be. We can add the needed FDT components for realize() time and, at
+the same time, do another FDT round where we account for dynamic sysbus
+devices.  In other words, the problem fixed by 49554856f0 could also be
+fixed by postponing only create_fdt_sockets() and its dependencies,
+leaving everything else from create_fdt() to be done during init().
 
-On Fri, 2023-11-10 at 08:40 +0100, Philippe Mathieu-Daud=C3=A9 wrote:
-> Hi David,
->=20
-> +Markus/Bernhard
->=20
-> On 6/11/23 20:49, David Woodhouse wrote:
-> > From: David Woodhouse <dwmw@amazon.co.uk>
-> >=20
-> > Eliminate direct access to nd_table[] and nb_nics by processing the the
-> > Xen and ISA NICs first and then calling pci_init_nic_devices() for the
-> > rest.
-> >=20
-> > Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-> > Reviewed-by: Paul Durrant <paul@xen.org>
-> > ---
-> > =C2=A0 hw/i386/pc.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 26 ++++++++++++++++----------
-> > =C2=A0 include/hw/net/ne2000-isa.h |=C2=A0 2 --
-> > =C2=A0 2 files changed, 16 insertions(+), 12 deletions(-)
-> >=20
-> > diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-> > index c2bc3fa52d..4078d2d231 100644
-> > --- a/hw/i386/pc.c
-> > +++ b/hw/i386/pc.c
-> > @@ -652,8 +652,11 @@ static void pc_init_ne2k_isa(ISABus *bus, NICInfo =
-*nd)
-> > =C2=A0 {
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 static int nb_ne2k =3D 0;
-> > =C2=A0=20
-> > -=C2=A0=C2=A0=C2=A0 if (nb_ne2k =3D=3D NE2000_NB_MAX)
-> > +=C2=A0=C2=A0=C2=A0 if (nb_ne2k =3D=3D NE2000_NB_MAX) {
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 error_setg(&error_fatal,
->=20
-> In the context of dynamically created machines I'd rather have
-> this function,
->=20
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 "maximum number of ISA NE2000 devic=
-es exceeded");
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return;
-> > +=C2=A0=C2=A0=C2=A0 }
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 isa_ne2000_init(bus, ne2000_io[nb_ne2k],
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ne2000_irq[nb_ne2=
-k], nd);
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 nb_ne2k++;
-> > @@ -1291,23 +1294,26 @@ void pc_nic_init(PCMachineClass *pcmc, ISABus *=
-isa_bus, PCIBus *pci_bus,
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 BusState *xen_bus)
-> > =C2=A0 {
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 MachineClass *mc =3D MACHINE_CLASS(pcmc)=
-;
-> > -=C2=A0=C2=A0=C2=A0 int i;
-> > +=C2=A0=C2=A0=C2=A0 bool default_is_ne2k =3D g_str_equal(mc->default_ni=
-c, TYPE_ISA_NE2000);
-> > +=C2=A0=C2=A0=C2=A0 NICInfo *nd;
-> > =C2=A0=20
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 rom_set_order_override(FW_CFG_ORDER_OVER=
-RIDE_NIC);
-> > -=C2=A0=C2=A0=C2=A0 for (i =3D 0; i < nb_nics; i++) {
-> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 NICInfo *nd =3D &nd_table[i=
-];
-> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 const char *model =3D nd->m=
-odel ? nd->model : mc->default_nic;
-> > =C2=A0=20
-> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (xen_bus && (!nd->model =
-|| g_str_equal(model, "xen-net-device"))) {
-> > +=C2=A0=C2=A0=C2=A0 if (xen_bus) {
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 while (nc =3D qemu_find_nic=
-_info("xen-net-device", true, NULL)) {
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 DeviceState *dev =3D qdev_new("xen-net-device");
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 qdev_set_nic_properties(dev, nd);
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 qdev_realize_and_unref(dev, xen_bus, &error_fatal);
->=20
-> and this one non-fatal (primarily for API example). But this is pending
-> on a discussion on another thread, see:
-> https://lore.kernel.org/qemu-devel/c1322f3b-2ae2-4ca7-9a76-a2a434dc8315@l=
-inaro.org/
-> so no changed requested so far.
+Split the FDT creation in two parts:
 
-Thanks for the reference.
+- create_fdt(), now moved back to virt_machine_init(), will create FDT
+  nodes that doesn't depend on additional (dynamic) devices from the
+  sysbus;
 
-I'm happy to make pc_init_ne2k_isa() and even pc_nic_init() take an
-'Error **' argument and use that instead of &error_fatal... and for the
-*caller* to pass &error_fatal for now until/unless that discussion is
-resolved? Not sure it helps much?
+- a new finalize_fdt() step is added, where create_fdt_sockets() and
+  friends is executed, accounting for the dynamic sysbus devices that
+  were added during realize().
 
-Then again... I do not favour the "my caller cannot *currently*
-handle/propagate an error therefore I won't bother to return one
-coherently" approach. That leads to someone else thinking "my callee
-does not return an error coherently therefore I won't bother to handle
-it", and nothing ever gets fixed.
+This will make both use cases happy: TPM devices are still working as
+intended, and devices such as 'guest-loader' have a FDT to work on
+during realize().
 
-I'll go fix it to take an errp argument.
+Fixes: 49554856f0 ("riscv: Generate devicetree only after machine initialization is complete")
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1925
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ hw/riscv/virt.c | 71 +++++++++++++++++++++++++++++--------------------
+ 1 file changed, 42 insertions(+), 29 deletions(-)
 
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index c7fc97e273..d2eac24156 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -962,7 +962,6 @@ static void create_fdt_uart(RISCVVirtState *s, const MemMapEntry *memmap,
+         qemu_fdt_setprop_cells(ms->fdt, name, "interrupts", UART0_IRQ, 0x4);
+     }
+ 
+-    qemu_fdt_add_subnode(ms->fdt, "/chosen");
+     qemu_fdt_setprop_string(ms->fdt, "/chosen", "stdout-path", name);
+     g_free(name);
+ }
+@@ -1023,11 +1022,29 @@ static void create_fdt_fw_cfg(RISCVVirtState *s, const MemMapEntry *memmap)
+     g_free(nodename);
+ }
+ 
+-static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap)
++static void finalize_fdt(RISCVVirtState *s)
+ {
+-    MachineState *ms = MACHINE(s);
+     uint32_t phandle = 1, irq_mmio_phandle = 1, msi_pcie_phandle = 1;
+     uint32_t irq_pcie_phandle = 1, irq_virtio_phandle = 1;
++
++    create_fdt_sockets(s, virt_memmap, &phandle, &irq_mmio_phandle,
++                       &irq_pcie_phandle, &irq_virtio_phandle,
++                       &msi_pcie_phandle);
++
++    create_fdt_virtio(s, virt_memmap, irq_virtio_phandle);
++
++    create_fdt_pcie(s, virt_memmap, irq_pcie_phandle, msi_pcie_phandle);
++
++    create_fdt_reset(s, virt_memmap, &phandle);
++
++    create_fdt_uart(s, virt_memmap, irq_mmio_phandle);
++
++    create_fdt_rtc(s, virt_memmap, irq_mmio_phandle);
++}
++
++static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap)
++{
++    MachineState *ms = MACHINE(s);
+     uint8_t rng_seed[32];
+ 
+     ms->fdt = create_device_tree(&s->fdt_size);
+@@ -1047,28 +1064,16 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap)
+     qemu_fdt_setprop_cell(ms->fdt, "/soc", "#size-cells", 0x2);
+     qemu_fdt_setprop_cell(ms->fdt, "/soc", "#address-cells", 0x2);
+ 
+-    create_fdt_sockets(s, memmap, &phandle, &irq_mmio_phandle,
+-                       &irq_pcie_phandle, &irq_virtio_phandle,
+-                       &msi_pcie_phandle);
+-
+-    create_fdt_virtio(s, memmap, irq_virtio_phandle);
+-
+-    create_fdt_pcie(s, memmap, irq_pcie_phandle, msi_pcie_phandle);
+-
+-    create_fdt_reset(s, memmap, &phandle);
+-
+-    create_fdt_uart(s, memmap, irq_mmio_phandle);
+-
+-    create_fdt_rtc(s, memmap, irq_mmio_phandle);
+-
+-    create_fdt_flash(s, memmap);
+-    create_fdt_fw_cfg(s, memmap);
+-    create_fdt_pmu(s);
++    qemu_fdt_add_subnode(ms->fdt, "/chosen");
+ 
+     /* Pass seed to RNG */
+     qemu_guest_getrandom_nofail(rng_seed, sizeof(rng_seed));
+     qemu_fdt_setprop(ms->fdt, "/chosen", "rng-seed",
+                      rng_seed, sizeof(rng_seed));
++
++    create_fdt_flash(s, memmap);
++    create_fdt_fw_cfg(s, memmap);
++    create_fdt_pmu(s);
+ }
+ 
+ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
+@@ -1257,15 +1262,12 @@ static void virt_machine_done(Notifier *notifier, void *data)
+     uint64_t kernel_entry = 0;
+     BlockBackend *pflash_blk0;
+ 
+-    /* load/create device tree */
+-    if (machine->dtb) {
+-        machine->fdt = load_device_tree(machine->dtb, &s->fdt_size);
+-        if (!machine->fdt) {
+-            error_report("load_device_tree() failed");
+-            exit(1);
+-        }
+-    } else {
+-        create_fdt(s, memmap);
++    /*
++     * An user provided dtb must include everything, including
++     * dynamic sysbus devices. Our FDT needs to be finalized.
++     */
++    if (machine->dtb == NULL) {
++        finalize_fdt(s);
+     }
+ 
+     /*
+@@ -1541,6 +1543,17 @@ static void virt_machine_init(MachineState *machine)
+     }
+     virt_flash_map(s, system_memory);
+ 
++    /* load/create device tree */
++    if (machine->dtb) {
++        machine->fdt = load_device_tree(machine->dtb, &s->fdt_size);
++        if (!machine->fdt) {
++            error_report("load_device_tree() failed");
++            exit(1);
++        }
++    } else {
++        create_fdt(s, memmap);
++    }
++
+     s->machine_done.notify = virt_machine_done;
+     qemu_add_machine_init_done_notifier(&s->machine_done);
+ }
+-- 
+2.41.0
 
---=-PA5ixZaqSq1wPm2X84kJ
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Transfer-Encoding: base64
-
-MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCEkQw
-ggYQMIID+KADAgECAhBNlCwQ1DvglAnFgS06KwZPMA0GCSqGSIb3DQEBDAUAMIGIMQswCQYDVQQG
-EwJVUzETMBEGA1UECBMKTmV3IEplcnNleTEUMBIGA1UEBxMLSmVyc2V5IENpdHkxHjAcBgNVBAoT
-FVRoZSBVU0VSVFJVU1QgTmV0d29yazEuMCwGA1UEAxMlVVNFUlRydXN0IFJTQSBDZXJ0aWZpY2F0
-aW9uIEF1dGhvcml0eTAeFw0xODExMDIwMDAwMDBaFw0zMDEyMzEyMzU5NTlaMIGWMQswCQYDVQQG
-EwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVyMRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYD
-VQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMTNVNlY3RpZ28gUlNBIENsaWVudCBBdXRoZW50
-aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
-AQEAyjztlApB/975Rrno1jvm2pK/KxBOqhq8gr2+JhwpKirSzZxQgT9tlC7zl6hn1fXjSo5MqXUf
-ItMltrMaXqcESJuK8dtK56NCSrq4iDKaKq9NxOXFmqXX2zN8HHGjQ2b2Xv0v1L5Nk1MQPKA19xeW
-QcpGEGFUUd0kN+oHox+L9aV1rjfNiCj3bJk6kJaOPabPi2503nn/ITX5e8WfPnGw4VuZ79Khj1YB
-rf24k5Ee1sLTHsLtpiK9OjG4iQRBdq6Z/TlVx/hGAez5h36bBJMxqdHLpdwIUkTqT8se3ed0PewD
-ch/8kHPo5fZl5u1B0ecpq/sDN/5sCG52Ds+QU5O5EwIDAQABo4IBZDCCAWAwHwYDVR0jBBgwFoAU
-U3m/WqorSs9UgOHYm8Cd8rIDZsswHQYDVR0OBBYEFAnA8vwL2pTbX/4r36iZQs/J4K0AMA4GA1Ud
-DwEB/wQEAwIBhjASBgNVHRMBAf8ECDAGAQH/AgEAMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEF
-BQcDBDARBgNVHSAECjAIMAYGBFUdIAAwUAYDVR0fBEkwRzBFoEOgQYY/aHR0cDovL2NybC51c2Vy
-dHJ1c3QuY29tL1VTRVJUcnVzdFJTQUNlcnRpZmljYXRpb25BdXRob3JpdHkuY3JsMHYGCCsGAQUF
-BwEBBGowaDA/BggrBgEFBQcwAoYzaHR0cDovL2NydC51c2VydHJ1c3QuY29tL1VTRVJUcnVzdFJT
-QUFkZFRydXN0Q0EuY3J0MCUGCCsGAQUFBzABhhlodHRwOi8vb2NzcC51c2VydHJ1c3QuY29tMA0G
-CSqGSIb3DQEBDAUAA4ICAQBBRHUAqznCFfXejpVtMnFojADdF9d6HBA4kMjjsb0XMZHztuOCtKF+
-xswhh2GqkW5JQrM8zVlU+A2VP72Ky2nlRA1GwmIPgou74TZ/XTarHG8zdMSgaDrkVYzz1g3nIVO9
-IHk96VwsacIvBF8JfqIs+8aWH2PfSUrNxP6Ys7U0sZYx4rXD6+cqFq/ZW5BUfClN/rhk2ddQXyn7
-kkmka2RQb9d90nmNHdgKrwfQ49mQ2hWQNDkJJIXwKjYA6VUR/fZUFeCUisdDe/0ABLTI+jheXUV1
-eoYV7lNwNBKpeHdNuO6Aacb533JlfeUHxvBz9OfYWUiXu09sMAviM11Q0DuMZ5760CdO2VnpsXP4
-KxaYIhvqPqUMWqRdWyn7crItNkZeroXaecG03i3mM7dkiPaCkgocBg0EBYsbZDZ8bsG3a08LwEsL
-1Ygz3SBsyECa0waq4hOf/Z85F2w2ZpXfP+w8q4ifwO90SGZZV+HR/Jh6rEaVPDRF/CEGVqR1hiuQ
-OZ1YL5ezMTX0ZSLwrymUE0pwi/KDaiYB15uswgeIAcA6JzPFf9pLkAFFWs1QNyN++niFhsM47qod
-x/PL+5jR87myx5uYdBEQkkDc+lKB1Wct6ucXqm2EmsaQ0M95QjTmy+rDWjkDYdw3Ms6mSWE3Bn7i
-5ZgtwCLXgAIe5W8mybM2JzCCBhQwggT8oAMCAQICEQDGvhmWZ0DEAx0oURL6O6l+MA0GCSqGSIb3
-DQEBCwUAMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVyMRAwDgYD
-VQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMTNVNlY3RpZ28g
-UlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBMB4XDTIyMDEwNzAw
-MDAwMFoXDTI1MDEwNjIzNTk1OVowJDEiMCAGCSqGSIb3DQEJARYTZHdtdzJAaW5mcmFkZWFkLm9y
-ZzCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBALQ3GpC2bomUqk+91wLYBzDMcCj5C9m6
-oZaHwvmIdXftOgTbCJXADo6G9T7BBAebw2JV38EINgKpy/ZHh7htyAkWYVoFsFPrwHounto8xTsy
-SSePMiPlmIdQ10BcVSXMUJ3Juu16GlWOnAMJY2oYfEzmE7uT9YgcBqKCo65pTFmOnR/VVbjJk4K2
-xE34GC2nAdUQkPFuyaFisicc6HRMOYXPuF0DuwITEKnjxgNjP+qDrh0db7PAjO1D4d5ftfrsf+kd
-RR4gKVGSk8Tz2WwvtLAroJM4nXjNPIBJNT4w/FWWc/5qPHJy2U+eITZ5LLE5s45mX2oPFknWqxBo
-bQZ8a9dsZ3dSPZBvE9ZrmtFLrVrN4eo1jsXgAp1+p7bkfqd3BgBEmfsYWlBXO8rVXfvPgLs32VdV
-NZxb/CDWPqBsiYv0Hv3HPsz07j5b+/cVoWqyHDKzkaVbxfq/7auNVRmPB3v5SWEsH8xi4Bez2V9U
-KxfYCnqsjp8RaC2/khxKt0A552Eaxnz/4ly/2C7wkwTQnBmdlFYhAflWKQ03Ufiu8t3iBE3VJbc2
-5oMrglj7TRZrmKq3CkbFnX0fyulB+kHimrt6PIWn7kgyl9aelIl6vtbhMA+l0nfrsORMa4kobqQ5
-C5rveVgmcIad67EDa+UqEKy/GltUwlSh6xy+TrK1tzDvAgMBAAGjggHMMIIByDAfBgNVHSMEGDAW
-gBQJwPL8C9qU21/+K9+omULPyeCtADAdBgNVHQ4EFgQUzMeDMcimo0oz8o1R1Nver3ZVpSkwDgYD
-VR0PAQH/BAQDAgWgMAwGA1UdEwEB/wQCMAAwHQYDVR0lBBYwFAYIKwYBBQUHAwQGCCsGAQUFBwMC
-MEAGA1UdIAQ5MDcwNQYMKwYBBAGyMQECAQEBMCUwIwYIKwYBBQUHAgEWF2h0dHBzOi8vc2VjdGln
-by5jb20vQ1BTMFoGA1UdHwRTMFEwT6BNoEuGSWh0dHA6Ly9jcmwuc2VjdGlnby5jb20vU2VjdGln
-b1JTQUNsaWVudEF1dGhlbnRpY2F0aW9uYW5kU2VjdXJlRW1haWxDQS5jcmwwgYoGCCsGAQUFBwEB
-BH4wfDBVBggrBgEFBQcwAoZJaHR0cDovL2NydC5zZWN0aWdvLmNvbS9TZWN0aWdvUlNBQ2xpZW50
-QXV0aGVudGljYXRpb25hbmRTZWN1cmVFbWFpbENBLmNydDAjBggrBgEFBQcwAYYXaHR0cDovL29j
-c3Auc2VjdGlnby5jb20wHgYDVR0RBBcwFYETZHdtdzJAaW5mcmFkZWFkLm9yZzANBgkqhkiG9w0B
-AQsFAAOCAQEAyW6MUir5dm495teKqAQjDJwuFCi35h4xgnQvQ/fzPXmtR9t54rpmI2TfyvcKgOXp
-qa7BGXNFfh1JsqexVkIqZP9uWB2J+uVMD+XZEs/KYNNX2PvIlSPrzIB4Z2wyIGQpaPLlYflrrVFK
-v9CjT2zdqvy2maK7HKOQRt3BiJbVG5lRiwbbygldcALEV9ChWFfgSXvrWDZspnU3Gjw/rMHrGnql
-Htlyebp3pf3fSS9kzQ1FVtVIDrL6eqhTwJxe+pXSMMqFiN0whpBtXdyDjzBtQTaZJ7zTT/vlehc/
-tDuqZwGHm/YJy883Ll+GP3NvOkgaRGWEuYWJJ6hFCkXYjyR9IzCCBhQwggT8oAMCAQICEQDGvhmW
-Z0DEAx0oURL6O6l+MA0GCSqGSIb3DQEBCwUAMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3Jl
-YXRlciBNYW5jaGVzdGVyMRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0
-ZWQxPjA8BgNVBAMTNVNlY3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJl
-IEVtYWlsIENBMB4XDTIyMDEwNzAwMDAwMFoXDTI1MDEwNjIzNTk1OVowJDEiMCAGCSqGSIb3DQEJ
-ARYTZHdtdzJAaW5mcmFkZWFkLm9yZzCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBALQ3
-GpC2bomUqk+91wLYBzDMcCj5C9m6oZaHwvmIdXftOgTbCJXADo6G9T7BBAebw2JV38EINgKpy/ZH
-h7htyAkWYVoFsFPrwHounto8xTsySSePMiPlmIdQ10BcVSXMUJ3Juu16GlWOnAMJY2oYfEzmE7uT
-9YgcBqKCo65pTFmOnR/VVbjJk4K2xE34GC2nAdUQkPFuyaFisicc6HRMOYXPuF0DuwITEKnjxgNj
-P+qDrh0db7PAjO1D4d5ftfrsf+kdRR4gKVGSk8Tz2WwvtLAroJM4nXjNPIBJNT4w/FWWc/5qPHJy
-2U+eITZ5LLE5s45mX2oPFknWqxBobQZ8a9dsZ3dSPZBvE9ZrmtFLrVrN4eo1jsXgAp1+p7bkfqd3
-BgBEmfsYWlBXO8rVXfvPgLs32VdVNZxb/CDWPqBsiYv0Hv3HPsz07j5b+/cVoWqyHDKzkaVbxfq/
-7auNVRmPB3v5SWEsH8xi4Bez2V9UKxfYCnqsjp8RaC2/khxKt0A552Eaxnz/4ly/2C7wkwTQnBmd
-lFYhAflWKQ03Ufiu8t3iBE3VJbc25oMrglj7TRZrmKq3CkbFnX0fyulB+kHimrt6PIWn7kgyl9ae
-lIl6vtbhMA+l0nfrsORMa4kobqQ5C5rveVgmcIad67EDa+UqEKy/GltUwlSh6xy+TrK1tzDvAgMB
-AAGjggHMMIIByDAfBgNVHSMEGDAWgBQJwPL8C9qU21/+K9+omULPyeCtADAdBgNVHQ4EFgQUzMeD
-Mcimo0oz8o1R1Nver3ZVpSkwDgYDVR0PAQH/BAQDAgWgMAwGA1UdEwEB/wQCMAAwHQYDVR0lBBYw
-FAYIKwYBBQUHAwQGCCsGAQUFBwMCMEAGA1UdIAQ5MDcwNQYMKwYBBAGyMQECAQEBMCUwIwYIKwYB
-BQUHAgEWF2h0dHBzOi8vc2VjdGlnby5jb20vQ1BTMFoGA1UdHwRTMFEwT6BNoEuGSWh0dHA6Ly9j
-cmwuc2VjdGlnby5jb20vU2VjdGlnb1JTQUNsaWVudEF1dGhlbnRpY2F0aW9uYW5kU2VjdXJlRW1h
-aWxDQS5jcmwwgYoGCCsGAQUFBwEBBH4wfDBVBggrBgEFBQcwAoZJaHR0cDovL2NydC5zZWN0aWdv
-LmNvbS9TZWN0aWdvUlNBQ2xpZW50QXV0aGVudGljYXRpb25hbmRTZWN1cmVFbWFpbENBLmNydDAj
-BggrBgEFBQcwAYYXaHR0cDovL29jc3Auc2VjdGlnby5jb20wHgYDVR0RBBcwFYETZHdtdzJAaW5m
-cmFkZWFkLm9yZzANBgkqhkiG9w0BAQsFAAOCAQEAyW6MUir5dm495teKqAQjDJwuFCi35h4xgnQv
-Q/fzPXmtR9t54rpmI2TfyvcKgOXpqa7BGXNFfh1JsqexVkIqZP9uWB2J+uVMD+XZEs/KYNNX2PvI
-lSPrzIB4Z2wyIGQpaPLlYflrrVFKv9CjT2zdqvy2maK7HKOQRt3BiJbVG5lRiwbbygldcALEV9Ch
-WFfgSXvrWDZspnU3Gjw/rMHrGnqlHtlyebp3pf3fSS9kzQ1FVtVIDrL6eqhTwJxe+pXSMMqFiN0w
-hpBtXdyDjzBtQTaZJ7zTT/vlehc/tDuqZwGHm/YJy883Ll+GP3NvOkgaRGWEuYWJJ6hFCkXYjyR9
-IzGCBMcwggTDAgEBMIGsMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVz
-dGVyMRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMT
-NVNlY3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBAhEA
-xr4ZlmdAxAMdKFES+jupfjANBglghkgBZQMEAgEFAKCCAeswGAYJKoZIhvcNAQkDMQsGCSqGSIb3
-DQEHATAcBgkqhkiG9w0BCQUxDxcNMjMxMTEwMDkyNzMxWjAvBgkqhkiG9w0BCQQxIgQgKViPcPHp
-Ywn6K8TDcOwEANHfIwp+5w84tfoqSyOXQwgwgb0GCSsGAQQBgjcQBDGBrzCBrDCBljELMAkGA1UE
-BhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4GA1UEBxMHU2FsZm9yZDEYMBYG
-A1UEChMPU2VjdGlnbyBMaW1pdGVkMT4wPAYDVQQDEzVTZWN0aWdvIFJTQSBDbGllbnQgQXV0aGVu
-dGljYXRpb24gYW5kIFNlY3VyZSBFbWFpbCBDQQIRAMa+GZZnQMQDHShREvo7qX4wgb8GCyqGSIb3
-DQEJEAILMYGvoIGsMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVy
-MRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMTNVNl
-Y3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBAhEAxr4Z
-lmdAxAMdKFES+jupfjANBgkqhkiG9w0BAQEFAASCAgAuM4SPZi0m/p2En7ZBhDMPlG2wj3rjCIkn
-DwrnLTDZERqKWfnmYRhPJ8kqmbESz/9jdtGry6vJ5njgLwf/54Q5bX8LlVfKe+gwh55OlRYfbjoR
-kNrmPq9YJwm//LfBqoOTorPwMtjZga0bR7mY/uRfz1v3uJH4f+GZQHLkJsLh3MLNBWJFngN2udB5
-qYU7gvqzj+FRi/pPPfjcj2sePKGwpEML5RSTOZ36nIfWx98IkzghR1ebqaxKkQh+fJAOSgnfXgeZ
-KCZP4/zs44iUa9jsiRRh9x9QB5cX1BmL7UKtp3bsj45kkrkyxjjVatK/KQfM++B4Ly6dcFuRkF7/
-JnT/r7433nly3XAXNMZDsn+Q2pSljwEqVrs3rk2F6hzT0s6RvvmLlsYKnUNFBP1o6qx0IIEh05Gt
-AmDsHuHiJoBuSw5oHw8K2pvmDBN1/fafSZ7rtDWt9T+UWajeJrJwWbhlw5mwX8b2aUTTMKzNx0DV
-Y3X2JcOnBhWMzF4S+69XN6Gvp0XoHpZV4Yopm6Iks4/ROszNICmYIXeFhK1QCQVGmtXESErcDuOm
-00lHRfJdUdmuhkfORWsEpUzPiaji+lMTIPwU4ODS9bs13y2QOmLCdRr5qRDO4sE33zfLVui31y3O
-GWuFKKiLIbFD5WajaIrErPCkUIp5D4IRQnaKIfZLZwAAAAAAAA==
-
-
---=-PA5ixZaqSq1wPm2X84kJ--
 
