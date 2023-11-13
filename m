@@ -4,91 +4,152 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18DDDC4332F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Nov 2023 09:57:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7D99C4332F
+	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Nov 2023 14:39:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r2TgD-00051i-08; Mon, 13 Nov 2023 04:56:29 -0500
+	id 1r2Y67-0006V6-Vh; Mon, 13 Nov 2023 09:39:34 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1r2Tg4-000500-Ob
- for qemu-riscv@nongnu.org; Mon, 13 Nov 2023 04:56:21 -0500
-Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1r2Tfw-0005Vq-LY
- for qemu-riscv@nongnu.org; Mon, 13 Nov 2023 04:56:20 -0500
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-9c53e8b7cf4so630211266b.1
- for <qemu-riscv@nongnu.org>; Mon, 13 Nov 2023 01:56:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=vrull.eu; s=google; t=1699869371; x=1700474171; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=iB7fJ0gWQ/iabhlhIhHFNNkXK5uKgJMYdkpTFw7eBpY=;
- b=clLCLodta6XvbP7pxBR8+o9oIuDkrEHHHSRYGyyz/j6rqYIR8ipdR3jhDeDh66XaIL
- Rpr5jRW0KwsmO2w8H4tFAVwFwDszokrviz2rjkDlpl84Va+njokWtuDaF4MzoS+f2XWC
- PFkg1s3MYCMMpk/JrCZZDTrYHQi+0eiTUPDSIkAFIWd9ezVbrwyiCpG/wN9sHGjUVc5M
- 6rDyLN1ekKufC1nuX8GwTD5ngiWHHjWGvNYcTeTxSg3Kj9gP7gi+ZLa1Vg+CA5/3K148
- xaFy85BPk1sEevJ3I7pUAuRRB61908lD6f0Jcf7g7rQFTSxJA8VfYyfS0IuyF1nTLy/i
- /9rQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699869371; x=1700474171;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=iB7fJ0gWQ/iabhlhIhHFNNkXK5uKgJMYdkpTFw7eBpY=;
- b=P+vgwUB1KKdAONkqeKAHIO66khmkxGKYrzKv99llqqHEFZYjF0SwSLy6IQg1Mo1pY0
- 5RfvObPRlC0FBx/+lYAk/b8QwqjrNHBpv5lhOk/CzRnrO5wy9NITwz7B5uwSL9smshSa
- sUV9v+JIGE0xXn6mYNCBFCkdCvP6IZ2OCk5z6eO5pzJ4SbyCC2ea6+tEQDw/fGYPXSq3
- 2JPkhzUplJYpo9R33zfwwoulwcPaFk12nuljYULaQeJMW6G4pcZORNLVaCZ4/c5qcsUN
- QlKH57L+CQk196NIW886tsaFw3dqGENDUb/q9zB5MYQJ44efDB3rcTCQh/RIVdqp2uNR
- jLbA==
-X-Gm-Message-State: AOJu0YyGvFwVcfH5GnAgPrym7amVVEgY1ygulu5jVsJuJT7ru8JSxzpV
- 5qXZpA38nBz0UZkLMKj97N3pKrSTVuzAreGpjiQ=
-X-Google-Smtp-Source: AGHT+IGwwfO967eP37t2S+yYCQilcSkds0fv7zRJGCtrvHbt96K1FadWFwm237h6m0aNFkmI6RDV7g==
-X-Received: by 2002:a17:906:7754:b0:9db:9c5e:a9c5 with SMTP id
- o20-20020a170906775400b009db9c5ea9c5mr3971106ejn.33.1699869370748; 
- Mon, 13 Nov 2023 01:56:10 -0800 (PST)
-Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
- [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
- a11-20020a170906190b00b0098d2d219649sm3807321eje.174.2023.11.13.01.56.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Nov 2023 01:56:09 -0800 (PST)
-From: Christoph Muellner <christoph.muellner@vrull.eu>
-To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Cc: Palmer Dabbelt <palmer@rivosinc.com>,
- =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [RFC PATCH 1/2] RISC-V: Add support for Ztso
-Date: Mon, 13 Nov 2023 10:56:02 +0100
-Message-ID: <20231113095605.1131443-2-christoph.muellner@vrull.eu>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20231113095605.1131443-1-christoph.muellner@vrull.eu>
-References: <20231113095605.1131443-1-christoph.muellner@vrull.eu>
+ (Exim 4.90_1) (envelope-from <LeoHou@canaan-creative.com>)
+ id 1r2OWX-0003Kq-BF; Sun, 12 Nov 2023 23:26:09 -0500
+Received: from mail-sh0chn02on20614.outbound.protection.partner.outlook.cn
+ ([2406:e500:4420:2::614]
+ helo=CHN02-SH0-obe.outbound.protection.partner.outlook.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <LeoHou@canaan-creative.com>)
+ id 1r2OWL-0005Ya-2C; Sun, 12 Nov 2023 23:26:09 -0500
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=g+wtcu0pX09UqBnXSQ+tlb0Vz2W3AKkFerjEWqDOaT+4ElvZCUOw+ta/0pggoH3XOHXT1ibD/4U3v23y2DUq1woxoXg49xhtIX24R5j0W7KLr+le2iMTC7Bp+OVeCHv9A8Kx8Hu1wogqJ7CviXJ9M5anN7iRiW3pMYo0NpExh8Bf1vW+2cZtqFM4pg6hsBQwFmY/0Vopxm6H7IGdBZE+YUvXkG8ijuv3C/aQv0+sXYKk+fhQTa4yEw9xa9Vs7iCp723kWNM6FBlof2iM/HVssATwDxRoGOGnFtQAOv1BNjcp7714HyspdqM9SGRq8zqzrjSSFDJ8Rtjp1IdE4kEKUg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=zp80onDPaHatJBjSG5Zh1k1dfAt1pG8QpWi3imVsBDs=;
+ b=BcLrSP3xWkDGO53Iu55kvsFhHqQ6LgJ0sHtHQryrbCiL5lYaeplb34P716Z8q4elVtOj1U8wkLxFDk8XrWLHsSDOjElZ3n2nuBEqgBQms8MJs0QDBgtz94U7g3cNGG0/wXCPevw7wyRtAqzqdFihh3UiwnNY4pmF0e6KYm6LLZVIkoatcsySRz+vXoQGvnczXbUU5jdQJ3LxMKkZRjoa8/KKzAlkech8WHWu7N+IW4YQBH0hJzAMKAo1BA3H7dR1EdV7i9NBLV+lxV6fZfxuDxcVf76HDxXRWMITY+K+Aq1iP1U7SpyC9TY1psHiPBJ3/mvKzo/VO3/zmVPJvvdpVQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=canaan-creative.com; dmarc=pass action=none
+ header.from=canaan-creative.com; dkim=pass header.d=canaan-creative.com;
+ arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canaan-creative.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=zp80onDPaHatJBjSG5Zh1k1dfAt1pG8QpWi3imVsBDs=;
+ b=fOYAA91wCVFgotDHEVfP+y601YjsFmFPIRxXmNIHy+UslaWaMQJbu5DihL3eJxi3S/fvDU+EIKTHo7TwWbx1XIl0cEcG1Iju0lf6TzVrO5x2Ikx5IhtMbRpnpQQVnNT+E4MNqCPBYS4JvGm2jPtpbgCIJraYvMonCrvtot3qRc3HkFhrKz6Je30sG9IJXN8ICV/Al+J+kEP/l/IaKDNiridX8k32n7FVznbMc04IbkQpwWdhZAmpEo2Mw/0ApMgdIFtpHjliUym5Z5yOXw9/uYK3xmMa58thGT8HW5klY1Bs8EcN2/qePDZ17b3mqm3qDeWL+V7kE8XgeMsGgwq/1w==
+Received: from BJSPR01MB0627.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c211:d::14) by BJSPR01MB0497.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c211:e::13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6933.38; Mon, 13 Nov
+ 2023 04:25:43 +0000
+Received: from BJSPR01MB0627.CHNPR01.prod.partner.outlook.cn
+ ([fe80::16f1:3381:bdd6:efc7]) by
+ BJSPR01MB0627.CHNPR01.prod.partner.outlook.cn ([fe80::16f1:3381:bdd6:efc7%5])
+ with mapi id 15.20.6933.038; Mon, 13 Nov 2023 04:25:43 +0000
+From: LeoHou <LeoHou@canaan-creative.com>
+To: =?utf-8?B?UGhpbGlwcGUgTWF0aGlldS1EYXVkw6k=?= <philmd@linaro.org>, Dongxue
+ Zhang <elta.era@gmail.com>
+CC: Alistair Francis <alistair.francis@wdc.com>, Anup Patel
+ <apatel@ventanamicro.com>, Bin Meng <bin.meng@windriver.com>, Daniel Henrique
+ Barboza <dbarboza@ventanamicro.com>, =?utf-8?B?5L6v6Iux5LmQ?=
+ <houyingle@canaan-creative.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>, Palmer Dabbelt
+ <palmer@dabbelt.com>, Palmer Dabbelt <palmer@rivosinc.com>, Weiwei Li
+ <liweiwei@iscas.ac.cn>, QEMU Developers <qemu-devel@nongnu.org>, qemu-riscv
+ <qemu-riscv@nongnu.org>, =?utf-8?B?5byg5Lic6Zuq?=
+ <zhangdongxue@canaan-creative.com>, "leohou1402@gmail.com"
+ <leohou1402@gmail.com>
+Subject: Re: [PATCH 1/1] hw/intc/riscv_aclint:Change the way to get CPUState
+ from hard-base to pu_index
+Thread-Topic: [PATCH 1/1] hw/intc/riscv_aclint:Change the way to get CPUState
+ from hard-base to pu_index
+Thread-Index: AQHaErOXvFKdUra6MUCnagOpDbQODbBxRzYAgADVewCABY63LA==
+Date: Mon, 13 Nov 2023 04:25:43 +0000
+Message-ID: <BJSPR01MB062758831AA8BF73856F5DFC95B3A@BJSPR01MB0627.CHNPR01.prod.partner.outlook.cn>
+References: <cover.1699496263.git.houyingle@canaan-creative.com>
+ <6d1d8cc8c2b37b145e4a826095619097fa4a34d5.1699496263.git.houyingle@canaan-creative.com>
+ <CAEomy4TmM0ShGkuV2mprB8Xm0Kn62ZWZA7Gnfvt07pioY9fCCA@mail.gmail.com>
+ <bf0c7c6d-a940-4968-ab18-4af6125b8d0b@linaro.org>
+In-Reply-To: <bf0c7c6d-a940-4968-ab18-4af6125b8d0b@linaro.org>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=canaan-creative.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: BJSPR01MB0627:EE_|BJSPR01MB0497:EE_
+x-ms-office365-filtering-correlation-id: 6b93aeaf-137a-401b-e5fc-08dbe4009a0a
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: g4OVSqwm8E/A8V+aOw1AhOZf7W4YXY70FNYyVhzFiA9LwZA6ZouHyKeKOSLnGE4L9t6El8Yz+PtjaMi/A4jGBZV+VjCzIH44MnMUWZx2t1uKq3/SBLA5kxXPAnvj0JAS5vv21MeH+c6Hfk8JZw5F8q6stTWfFR+D1aRbR889jcTLNiwaYdXvWDU3LKLfdOpjbK+g1SxoShJBK2VDaxjYTjqSnyFKbunefDjWgAWxyNz8sDermB7bU9BrwLb2cJX9HhuOwdTKfnGweBRvnDhavVolrmyhDaKrdkXdHUfYJmuIA+/XZXd2jCCnFR3RSRN2EdV/uDwcHv22qKQWTt2fZ7UULoRvJr3Ghi3DiOOlFCtYtRL5gt2dIpn7lRDlz3OgstlfTrvWPEw3C47XFsq0lankxB3G7Yq/wU+US5p47V1Oslz0XToSfYQ6tXF3r9jb9n9CUedLjmhDwQfvbro1Jc2MQ+AsiWZKC/QhkkGu7iwdwe6vQobAwjTKJU9JsC9t6OBRYwzIBfNO0kZvK/CKfBUj+gZqgtdaR9//JdOMetHIOUhXINNCzBRX70g+tn4oKW1q7XhOV+fpEn1H8NmJoA==
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BJSPR01MB0627.CHNPR01.prod.partner.outlook.cn; PTR:;
+ CAT:NONE;
+ SFS:(13230031)(136003)(346002)(396003)(366004)(39830400003)(230922051799003)(64100799003)(186009)(451199024)(1800799009)(38100700002)(7416002)(41300700001)(2906002)(41320700001)(33656002)(38070700009)(40180700001)(122000001)(40160700002)(66476007)(110136005)(54906003)(66946007)(71200400001)(66556008)(26005)(64756008)(76116006)(66446008)(86362001)(5660300002)(7696005)(9686003)(966005)(53546011)(55016003)(508600001)(8936002)(4326008)(8676002)(83380400001)(43043002);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?Q2RtU1RxLzRhelMxeU5WcmpzQ044MnBZN3J3RUxibXdtSkN5a3NHN1lTS3pr?=
+ =?utf-8?B?VGVtaFV6NVVVN2NhakxUUDJXMnhZVmFmb3BJUk04SDcrekxYbGZtNjFla1VX?=
+ =?utf-8?B?dHkreXVXSzA3WEhoYWZhbTZDOW9zTDIzSVQwakZhY2NDZXd3TFdWMVdCdTVn?=
+ =?utf-8?B?K2R6R3hmOHBNMUVYTHkrdnJDS1QxUk96RnlhakozRGdmWWhLQ3RaU0U0bHJQ?=
+ =?utf-8?B?S0NYMzVTRDRWZTcxa2pGdHVDTDVzNVF1aTI1cUd4MzFRc0R4NjArZmpjUWpK?=
+ =?utf-8?B?SGhpeHdWRDJ3NjdxdXVNZjhCcURWWTZwL0JNTWxRbFdsODNvSzAvVmJoWU5p?=
+ =?utf-8?B?MExwNjF6NjNucFRIS1piNEJBK3JKZTIrbWNORlRHcW1YazdzaHVuSjNId3Np?=
+ =?utf-8?B?OE5rTnlSTldLU0RhQW4vTjd0aWtnTjVPWnZuTXRLSXI5N3V2bWJPdEhOcGcy?=
+ =?utf-8?B?enJQTG5aalQwNnYzbXNpd285VGYzMlRMcHdPSzhJclBRZDlyT0UyMzRxNEtm?=
+ =?utf-8?B?Ym5ZaXU1WTFKSnh6UjlteXZvSlE5Z0RJUnhza09GV2VLeDd2NVh1OVRieHhw?=
+ =?utf-8?B?MWVNcVRmb2ZpZGhaajBPZWI5UEIyOUNnUCswbEMzR0tZNUU5ckp5TzNRN2V3?=
+ =?utf-8?B?UktmNHB5RUVwc25zWjJ1ZjdYbEJBRFBSYU9uTE0wK09iMjliOWdkUzZxZkhn?=
+ =?utf-8?B?eGNIc0d0clNKOHEwYStMMDRqVlNkZmtKNFQ4a1ZPRVljQmVCNUljNTVmMG9u?=
+ =?utf-8?B?ZVFuUUx3ZGxBSzdEMjRHRmx1OVRCWGF6ZGx5NmkreUJkeWFUZ2hMaExIQlZ1?=
+ =?utf-8?B?NnNJNmVUbVQxVE5QQ05xRTQ4VG5yNUhSbmk1T3Z0UGxsaU5jZWF0VW9pRHdy?=
+ =?utf-8?B?cm1KZU9YWnZvUkZ1Ykhld1NVMC9zSEtNQmVIeU5OVlBWQU5KNUFrSjMvNTRG?=
+ =?utf-8?B?WjJqNFZKc211NUgyb0liQVl2MFJ2YWJsTTB4V08vdlBjcTJXT2VOcjhqTUVJ?=
+ =?utf-8?B?dzlQWC90NTNtSnZ2bWx4OXlFSFFxWk4xalZndlVObkpNYnppbm1TckMzc25X?=
+ =?utf-8?B?Q0licUt6V1krUlZrMCs4S3Z5S1dHTFNZOTJrMnBKQ2FJcFd5RjhpWVA1cXd1?=
+ =?utf-8?B?SHZ5Qm4xYk1rakZtNVJ6eGxrNnluQ1ZLaDhLU250Rkd1OGttanF2ZExTcERL?=
+ =?utf-8?B?K05hZHNLMmhlc0VBUVpJTmdTQVZpZzJsWFZKY0EvQ0hqTlFNeW4zVllPOEVs?=
+ =?utf-8?B?UC9ZTXhBR0R0bnlLTmM0eVBjd080UFpvaFRXZE4yZ1ZpNTlVT1RzTTZ5WHBr?=
+ =?utf-8?B?QzNMUlN5Yys2THptRTYwY3BKRytHMlUyckJEeTl0RzFoOVBoZ21Hc0l4dDQ4?=
+ =?utf-8?B?U0g2UEN2ZENHUGZFZ2ZlQ0ZRSEpkWG0rRUdtdUdlcUVKK2lvYVpoSTh6alVN?=
+ =?utf-8?B?NmRpRXFiY2NKY2M5Vmw1ODhkQXhteVJlb3VzRm4rQjk1NXZRQ3VTTFhDTkd4?=
+ =?utf-8?B?cy8xdXJ5Y2NQMXF2RGhBbzBRWjFGbHZsdTdaMzdpYkt3MjZDV3ZSNGdBaW5Y?=
+ =?utf-8?B?Qkk5WG1KNjhFTnowUCs3aW9yVTZxaHdrQVRlL2ExdHdjUzFreFNVVHNJNVJh?=
+ =?utf-8?B?QWY4RnNpUEhaSGhiNUR3VzFBeHppV2phUExZSVdIU3JWM3N5eDVUTE1TZUJj?=
+ =?utf-8?B?SW9XR2dGbDBVd2JBbUUzcG4wK01jV0w4dHVkUXcxNXFHN3JobzFGcFY3blVm?=
+ =?utf-8?B?U1VnemhyWFN2N1ZOdlRvQm5ZMWkrczFRNHZ4S0NUVlNMSmFvZlVvTGVwNnJq?=
+ =?utf-8?B?K3Ztd0IwMmdVK20rclA4aGhDOWJuaUJXdmJJdXU5a1ZVN21Vc3VrNWttMXJi?=
+ =?utf-8?B?NXloSFdGYnZXemxsNGt4MmdGWVgwQURMSmNmMDFtTi80K2lSTjV1SElsQjJq?=
+ =?utf-8?B?RTJvWHdkQmJzRXhsVHNxZzRTK2l6MmltNVVidUZxYmlqc2ljeERoeitnUzJw?=
+ =?utf-8?B?Z0EwcW9nNU5yUmhZb2JZZmw5cVJTMm1JcEpPSE13V2lRcndUNC9lMWJYNTB2?=
+ =?utf-8?B?elAyT3RPaHRZWlFTZDh1SzhWSHVDbExGdXZrSFNVRHkrbHFXdW83K0lzTldB?=
+ =?utf-8?Q?sqBD5FPD1G6Ft4mv7gSKYtXZc?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::629;
- envelope-from=christoph.muellner@vrull.eu; helo=mail-ej1-x629.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+X-OriginatorOrg: canaan-creative.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BJSPR01MB0627.CHNPR01.prod.partner.outlook.cn
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6b93aeaf-137a-401b-e5fc-08dbe4009a0a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Nov 2023 04:25:43.8057 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: fb9be9d7-8f56-4a62-b26e-3018a3e771a5
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: jIxMO8z1XyxDlyZieVY8uuG76QysnTOaxLktGMCdUjxIoX5dKuxLtSb/AoEwB3ywP/TWJULw2tpnnZAlYgcYspS9lJPRQVePUjMZta4Jam0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BJSPR01MB0497
+Received-SPF: permerror client-ip=2406:e500:4420:2::614;
+ envelope-from=LeoHou@canaan-creative.com;
+ helo=CHN02-SH0-obe.outbound.protection.partner.outlook.cn
+X-Spam_score_int: -8
+X-Spam_score: -0.9
+X-Spam_bar: /
+X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FORGED_SPF_HELO=1.199,
+ SPF_HELO_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01,
+ T_SPF_PERMERROR=0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Mon, 13 Nov 2023 09:39:25 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -103,182 +164,54 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Palmer Dabbelt <palmer@rivosinc.com>
-
-The Ztso extension is already ratified, this adds it as a CPU property
-and adds various fences throughout the port in order to allow TSO
-targets to function on weaker hosts.  We need no fences for AMOs as
-they're already SC, the placess we need barriers are described.
-These fences are placed in the RISC-V backend rather than TCG as is
-planned for x86-on-arm64 because RISC-V allows heterogenous (and
-likely soon dynamic) hart memory models.
-
-Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
-Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
----
- target/riscv/cpu.c                      |  2 ++
- target/riscv/cpu_cfg.h                  |  1 +
- target/riscv/insn_trans/trans_rva.c.inc | 11 ++++++++---
- target/riscv/insn_trans/trans_rvi.c.inc | 16 ++++++++++++++--
- target/riscv/insn_trans/trans_rvv.c.inc | 20 ++++++++++++++++++++
- target/riscv/translate.c                |  3 +++
- 6 files changed, 48 insertions(+), 5 deletions(-)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 83c7c0cf07..b446e553b1 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -118,6 +118,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zksed, PRIV_VERSION_1_12_0, ext_zksed),
-     ISA_EXT_DATA_ENTRY(zksh, PRIV_VERSION_1_12_0, ext_zksh),
-     ISA_EXT_DATA_ENTRY(zkt, PRIV_VERSION_1_12_0, ext_zkt),
-+    ISA_EXT_DATA_ENTRY(ztso, PRIV_VERSION_1_12_0, ext_ztso),
-     ISA_EXT_DATA_ENTRY(zvbb, PRIV_VERSION_1_12_0, ext_zvbb),
-     ISA_EXT_DATA_ENTRY(zvbc, PRIV_VERSION_1_12_0, ext_zvbc),
-     ISA_EXT_DATA_ENTRY(zve32f, PRIV_VERSION_1_10_0, ext_zve32f),
-@@ -1336,6 +1337,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
-     MULTI_EXT_CFG_BOOL("zksed", ext_zksed, false),
-     MULTI_EXT_CFG_BOOL("zksh", ext_zksh, false),
-     MULTI_EXT_CFG_BOOL("zkt", ext_zkt, false),
-+    MULTI_EXT_CFG_BOOL("ztso", ext_ztso, false),
- 
-     MULTI_EXT_CFG_BOOL("zdinx", ext_zdinx, false),
-     MULTI_EXT_CFG_BOOL("zfinx", ext_zfinx, false),
-diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-index f4605fb190..a0f951d9c1 100644
---- a/target/riscv/cpu_cfg.h
-+++ b/target/riscv/cpu_cfg.h
-@@ -70,6 +70,7 @@ struct RISCVCPUConfig {
-     bool ext_zihintntl;
-     bool ext_zihintpause;
-     bool ext_zihpm;
-+    bool ext_ztso;
-     bool ext_smstateen;
-     bool ext_sstc;
-     bool ext_svadu;
-diff --git a/target/riscv/insn_trans/trans_rva.c.inc b/target/riscv/insn_trans/trans_rva.c.inc
-index 5f194a447b..85c7e31f2a 100644
---- a/target/riscv/insn_trans/trans_rva.c.inc
-+++ b/target/riscv/insn_trans/trans_rva.c.inc
-@@ -28,7 +28,11 @@ static bool gen_lr(DisasContext *ctx, arg_atomic *a, MemOp mop)
-         tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
-     }
-     tcg_gen_qemu_ld_tl(load_val, src1, ctx->mem_idx, mop);
--    if (a->aq) {
-+    /*
-+     * TSO defines AMOs as acquire+release-RCsc, but does not define LR/SC as
-+     * AMOs.  Instead treat them like loads.
-+     */
-+    if (a->aq || ctx->ztso) {
-         tcg_gen_mb(TCG_MO_ALL | TCG_BAR_LDAQ);
-     }
- 
-@@ -64,9 +68,10 @@ static bool gen_sc(DisasContext *ctx, arg_atomic *a, MemOp mop)
-     gen_set_label(l1);
-     /*
-      * Address comparison failure.  However, we still need to
--     * provide the memory barrier implied by AQ/RL.
-+     * provide the memory barrier implied by AQ/RL/TSO.
-      */
--    tcg_gen_mb(TCG_MO_ALL + a->aq * TCG_BAR_LDAQ + a->rl * TCG_BAR_STRL);
-+    TCGBar bar_strl = (ctx->ztso || a->rl) ? TCG_BAR_STRL : 0;
-+    tcg_gen_mb(TCG_MO_ALL + a->aq * TCG_BAR_LDAQ + bar_strl);
-     gen_set_gpr(ctx, a->rd, tcg_constant_tl(1));
- 
-     gen_set_label(l2);
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index faf6d65064..ad40d3e87f 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -266,12 +266,20 @@ static bool gen_load_i128(DisasContext *ctx, arg_lb *a, MemOp memop)
- 
- static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
- {
-+    bool out;
-+
-     decode_save_opc(ctx);
-     if (get_xl(ctx) == MXL_RV128) {
--        return gen_load_i128(ctx, a, memop);
-+        out = gen_load_i128(ctx, a, memop);
-     } else {
--        return gen_load_tl(ctx, a, memop);
-+        out = gen_load_tl(ctx, a, memop);
-+    }
-+
-+    if (ctx->ztso) {
-+        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_LDAQ);
-     }
-+
-+    return out;
- }
- 
- static bool trans_lb(DisasContext *ctx, arg_lb *a)
-@@ -328,6 +336,10 @@ static bool gen_store_tl(DisasContext *ctx, arg_sb *a, MemOp memop)
-     TCGv addr = get_address(ctx, a->rs1, a->imm);
-     TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
- 
-+    if (ctx->ztso) {
-+        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
-+    }
-+
-     tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
-     return true;
- }
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 78bd363310..76e63fcbca 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -636,8 +636,28 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1, uint32_t data,
-     tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
-     tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));
- 
-+    /*
-+     * According to the specification
-+     *
-+     *   Additionally, if the Ztso extension is implemented, then vector memory
-+     *   instructions in the V extension and Zve family of extensions follow
-+     *   RVTSO at the instruction level.  The Ztso extension does not
-+     *   strengthen the ordering of intra-instruction element accesses.
-+     *
-+     * as a result neither ordered nor unordered accesses from the V
-+     * instructions need ordering within the loop but we do still need barriers
-+     * around the loop.
-+     */
-+    if (is_store && s->ztso) {
-+        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
-+    }
-+
-     fn(dest, mask, base, tcg_env, desc);
- 
-+    if (!is_store && s->ztso) {
-+        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_LDAQ);
-+    }
-+
-     if (!is_store) {
-         mark_vs_dirty(s);
-     }
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index f0be79bb16..ab56051d6d 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -109,6 +109,8 @@ typedef struct DisasContext {
-     /* PointerMasking extension */
-     bool pm_mask_enabled;
-     bool pm_base_enabled;
-+    /* Ztso */
-+    bool ztso;
-     /* Use icount trigger for native debug */
-     bool itrigger;
-     /* FRM is known to contain a valid value. */
-@@ -1194,6 +1196,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
-     ctx->cs = cs;
-     ctx->pm_mask_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_MASK_ENABLED);
-     ctx->pm_base_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_BASE_ENABLED);
-+    ctx->ztso = cpu->cfg.ext_ztso;
-     ctx->itrigger = FIELD_EX32(tb_flags, TB_FLAGS, ITRIGGER);
-     ctx->zero = tcg_constant_tl(0);
-     ctx->virt_inst_excp = false;
--- 
-2.41.0
-
+T24gOS8xMS8yMyAyMzoyNiwgUGhpbGlwcGUgTWF0aGlldS1EYXVkw6kgIHdyb3RlOgrCoAo+SGkg
+TGVvLAo+Cj5GaXJzdCwgSSBjYW4ndCBmaW5kIHlvdXIgcGF0Y2ggaW4gbXkgbWFpbGJveCwgc28g
+SSdtIHJlcGx5aW5nIHRvCj5Eb25neHVlJ3MgcmV2aWV3Lgo+Cj5PbiA5LzExLzIzIDAzOjQxLCBE
+b25neHVlIFpoYW5nIHdyb3RlOgo+PiBSZXZpZXdlZC1ieTogRG9uZ3h1ZSBaaGFuZyA8emhhbmdk
+b25neHVlQGNhbmFhbi1jcmVhdGl2ZS5jb20+Cj4+IAo+PiAKPj4+IE9uIFRodSwgTm92IDksIDIw
+MjMgYXQgMTA6MjLigK9BTSBMZW8gSG91IDxMZW9Ib3VAY2FuYWFuLWNyZWF0aXZlLmNvbT4gd3Jv
+dGU6Cj4+Pgo+Pj4gRnJvbTogTGVvIEhvdSA8aG91eWluZ2xlQGNhbmFhbi1jcmVhdGl2ZS5jb20+
+Cj4+Pgo+Pj4gY3B1X2J5X2FyY2hfaWQoKSB1c2VzIGhhcnRpZC1iYXNlIGFzIHRoZSBpbmRleCB0
+byBvYnRhaW4gdGhlIGNvcnJlc3BvbmRpbmcgQ1BVU3RhdGUgc3RydWN0dXJlIHZhcmlhYmxlLgo+
+Pj4gcWVtdV9nZXRfY3B1KCkgdXNlcyBjcHVfaW5kZXggYXMgdGhlIGluZGV4IHRvIG9idGFpbiB0
+aGUgY29ycmVzcG9uZGluZyBDUFVTdGF0ZSBzdHJ1Y3R1cmUgdmFyaWFibGUuCj4+Pgo+Pj4gSW4g
+aGV0ZXJvZ2VuZW91cyBDUFUgb3IgbXVsdGktc29ja2V0IHNjZW5hcmlvcywgbXVsdGlwbGUgYWNs
+aW50IG5lZWRzIHRvIGJlIGluc3RhbnRpYXRlZCwKPj4+IGFuZCB0aGUgaGFydGlkLWJhc2Ugb2Yg
+ZWFjaCBjcHUgYm91bmQgYnkgYWNsaW50IGNhbiBzdGFydCBmcm9tIDAuIElmIGNwdV9ieV9hcmNo
+X2lkKCkgaXMgc3RpbGwgdXNlZAo+Pj4gaW4gdGhpcyBjYXNlLCBhbGwgYWNsaW50IHdpbGwgYmlu
+ZCB0byB0aGUgZWFybGllc3QgaW5pdGlhbGl6ZWQgaGFydCB3aXRoIGhhcnRpZC1iYXNlIDAgYW5k
+IGNhdXNlIGNvbmZsaWN0cy4KPj4+Cj4+PiBTbyB3aXRoIGNwdV9pbmRleCBhcyB0aGUgaW5kZXgs
+IHVzZSBxZW11X2dldF9jcHUoKSB0byBnZXQgdGhlIENQVVN0YXRlIHN0cnVjdCB2YXJpYWJsZSwK
+Pj4+IGFuZCBjb25uZWN0IHRoZSBhY2xpbnQgaW50ZXJydXB0IGxpbmUgdG8gdGhlIGhhcnQgb2Yg
+dGhlIENQVSBpbmRleGVkIHdpdGggY3B1X2luZGV4Cj4+PiAodGhlIGNvcnJlc3BvbmRpbmcgaGFy
+dGlkLWJhc2UgY2FuIHN0YXJ0IGF0IDApLiBJdCdzIG1vcmUgcmVhc29uYWJsZS4KPj4+Cj4+PiBT
+aWduZWQtb2ZmLWJ5OiBMZW8gSG91IDxob3V5aW5nbGVAY2FuYWFuLWNyZWF0aXZlLmNvbT4KPj4+
+IC0tLQo+Pj7CoMKgIGh3L2ludGMvcmlzY3ZfYWNsaW50LmMgfCAxNiArKysrKysrKy0tLS0tLS0t
+Cj4+PsKgwqAgMSBmaWxlIGNoYW5nZWQsIDggaW5zZXJ0aW9ucygrKSwgOCBkZWxldGlvbnMoLSkK
+Pj4+Cj4+PmRpZmYgLS1naXQgYS9ody9pbnRjL3Jpc2N2X2FjbGludC5jIGIvaHcvaW50Yy9yaXNj
+dl9hY2xpbnQuYwo+Pj4gaW5kZXggYWIxYTBiNGIzYS4uYmU4ZjUzOWZjYiAxMDA2NDQKPj4+IC0t
+LSBhL2h3L2ludGMvcmlzY3ZfYWNsaW50LmMKPj4+ICsrKyBiL2h3L2ludGMvcmlzY3ZfYWNsaW50
+LmMKPj4+IEBAIC0xMzAsNyArMTMwLDcgQEAgc3RhdGljIHVpbnQ2NF90IHJpc2N2X2FjbGludF9t
+dGltZXJfcmVhZCh2b2lkICpvcGFxdWUsIGh3YWRkciBhZGRyLAo+Pj7CoMKgwqDCoMKgwqDCoMKg
+wqDCoCBhZGRyIDwgKG10aW1lci0+dGltZWNtcF9iYXNlICsgKG10aW1lci0+bnVtX2hhcnRzIDw8
+IDMpKSkgewo+Pj7CoMKgwqDCoMKgwqDCoMKgwqDCoCBzaXplX3QgaGFydGlkID0gbXRpbWVyLT5o
+YXJ0aWRfYmFzZSArCj4+PsKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqAgKChhZGRyIC0gbXRpbWVyLT50aW1lY21wX2Jhc2UpID4+IDMpOwo+Pj4gLcKg
+wqDCoMKgwqDCoMKgIENQVVN0YXRlICpjcHUgPSBjcHVfYnlfYXJjaF9pZChoYXJ0aWQpOwo+Pj4g
+K8KgwqDCoMKgwqDCoMKgIENQVVN0YXRlICpjcHUgPSBxZW11X2dldF9jcHUoaGFydGlkKTsKPgo+
+VGhlcmUgaXMgc29tZSBjb2RlIHNtZWxsIGhlcmUuIHFlbXVfZ2V0X2NwdSgpIHNob3VsZG4ndCBi
+ZSBjYWxsZWQgYnkKPmRldmljZSBtb2RlbHMsIGJ1dCBvbmx5IGJ5IGFjY2VsZXJhdG9ycy4KClll
+cywgcWVtdV9nZXRfY3B1KCkgaXMgZGVzaWduZWQgdG8gYmUgY2FsbGVkIGJ5IGFjY2VsZXJhdG9y
+cy4KQnV0IHRoZXJlIGlzIGN1cnJlbnRseSBubyBuZXcgQVBJIHRvIHN1cHBvcnQgbXVsdGktc29j
+a2V0IGFuZApoZXRlcm9nZW5lb3VzIHByb2Nlc3NvciBhcmNoaXRlY3R1cmVz77yMYW5kIHNpZml2
+ZV9wbGljIGhhcyBiZWVuCmRlc2lnbmVkIHdpdGggcWVtdV9nZXRfY3B1KCkuClBsZWFzZSByZWZl
+ciB0bzoKWzFdIGh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL3FlbXUtZGV2ZWwvMTUxOTY4MzQ4MC0z
+MzIwMS0xNi1naXQtc2VuZC1lbWFpbC1tamNAc2lmaXZlLmNvbS8KWzJdIGh0dHBzOi8vbG9yZS5r
+ZXJuZWwub3JnL3FlbXUtZGV2ZWwvMjAyMDA4MjUxODQ4MzYuMTI4MjM3MS0zLWFsaXN0YWlyLmZy
+YW5jaXNAd2RjLmNvbS8KCgo+TWF5YmUgdGhlIHRpbWVyIHNob3VsZCBnZXQgYSBsaW5rIG9mIHRo
+ZSBoYXJ0IGFycmF5IGl0IGJlbG9uZ3MgdG8sCj5hbmQgb2Zmc2V0IHRvIHRoaXMgYXJyYXkgYmFz
+ZSBoYXJ0aWQ/CgpUaGUgc2FtZSBwcm9ibGVtIGV4aXN0cyBub3Qgb25seSB3aXRoIHRpbWVyLCBi
+dXQgYWxzbyB3aXRoIGFjbGludC4KVGhlcmUgbmVlZHMgdG8gYmUgYSBnZW5lcmFsIGFwcHJvYWNo
+IHRvIHRoaXMgcHJvYmxlbS4KCgo+SSdtIGdvaW5nIHRvCj5OQUNLCj50aGlzIHBhdGNoIHVudGls
+IGZ1cnRoZXIgcmV2aWV3IC8gY2xhcmlmaWNhdGlvbnMuCgpSZWdhcmRzLAoKTGVvIEhvdS4=
 
