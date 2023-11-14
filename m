@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C00E3C4332F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Nov 2023 00:06:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 537D1C4332F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Nov 2023 00:06:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r33LH-0006yY-Ms; Tue, 14 Nov 2023 19:01:15 -0500
+	id 1r33Ii-0000hh-Bq; Tue, 14 Nov 2023 18:58:36 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33LG-0006wr-Ce
- for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 19:01:14 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33If-0000Ya-CE
+ for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 18:58:33 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33LE-0008Ap-I4
- for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 19:01:14 -0500
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33Ic-00072J-SB
+ for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 18:58:33 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1700006471;
+ s=mimecast20190719; t=1700006308;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=0JKVE1tNQHe7HZrYYkE3+B5JLznaJL8/Teyenc6nWOw=;
- b=Jo1BAYCl3TMs+60/3FScWYp/JOuiCD8OawNLVfEI2UFDKR36nnvsQV8iEuzS80tfMafjcC
- F1EVA5wm4VPeLUCwQ5vx7ASnS//JoRr+CGOOmtevowFc2lchFl8BASenndzQO4q5WBZz8Y
- Yy1vDTxAz2AtILj6v+BaS4J5JyLi35I=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-94-Nzf8L9myM8ijDlmutLpGOA-1; Tue, 14 Nov 2023 19:01:07 -0500
-X-MC-Unique: Nzf8L9myM8ijDlmutLpGOA-1
+ bh=LiBQ8HNskbnGJakIHTbXcUveCafNXtneVERt1nHqLFo=;
+ b=APuOwy2u6AuKd34eMLoHqys4e7ByknDFFHysteY5wjHkLkf9kn0zKCeSe5Rufxb79+zKAy
+ E6/ErYQIS3NgDETbk1qRoOxSpFEdtvGmKrFzzR2QBgSBEsqeJ/zcMoBHFSz2Rn18P4YOBb
+ VSzL8YbUqtxOe/9VNS51MnJf00R7Tyk=
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-147-SZ7MPvCIOgCBq8QawagQkw-1; Tue,
+ 14 Nov 2023 18:58:21 -0500
+X-MC-Unique: SZ7MPvCIOgCBq8QawagQkw-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
  [10.11.54.8])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 457F1866DCC;
- Wed, 15 Nov 2023 00:01:02 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 00A7129ABA0F;
+ Tue, 14 Nov 2023 23:58:20 +0000 (UTC)
 Received: from gshan.redhat.com (unknown [10.64.136.44])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 18A95C15887;
- Wed, 15 Nov 2023 00:00:48 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 56771C15885;
+ Tue, 14 Nov 2023 23:58:07 +0000 (UTC)
 From: Gavin Shan <gshan@redhat.com>
 To: qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
@@ -61,23 +61,23 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  chenhuacai@kernel.org, shorne@gmail.com, npiggin@gmail.com, clg@kaod.org,
  ysato@users.sourceforge.jp, kbastian@mail.uni-paderborn.de,
  jcmvbkbc@gmail.com, shan.gavin@gmail.com
-Subject: [PATCH v5 18/31] target/rx: Use generic cpu_list()
-Date: Wed, 15 Nov 2023 09:56:15 +1000
-Message-ID: <20231114235628.534334-19-gshan@redhat.com>
+Subject: [PATCH v5 06/31] cpu: Add generic cpu_list()
+Date: Wed, 15 Nov 2023 09:56:03 +1000
+Message-ID: <20231114235628.534334-7-gshan@redhat.com>
 In-Reply-To: <20231114235628.534334-1-gshan@redhat.com>
 References: <20231114235628.534334-1-gshan@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.8
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=gshan@redhat.com;
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=gshan@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -95,67 +95,92 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Before it's applied:
+Add generic cpu_list() to replace the individual target's implementation
+in the subsequent commits. Currently, there are 3 targets with no cpu_list()
+implementation: microblaze and nios2. With this applied, those two targets
+switch to the generic cpu_list().
 
-[gshan@gshan q]$ ./build/qemu-system-rx -cpu ?
+[gshan@gshan q]$ ./build/qemu-system-microblaze -cpu ?
 Available CPUs:
-  rx62n-rx-cpu
+  microblaze-cpu
 
-After it's applied:
-
-[gshan@gshan q]$ ./build/qemu-system-rx -cpu ?
+[gshan@gshan q]$ ./build/qemu-system-nios2 -cpu ?
 Available CPUs:
-  rx62n
+  nios2-cpu
 
+Suggested-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Gavin Shan <gshan@redhat.com>
 ---
- target/rx/cpu.c | 16 ----------------
- target/rx/cpu.h |  3 ---
- 2 files changed, 19 deletions(-)
+ bsd-user/main.c |  5 +----
+ cpu-target.c    | 29 ++++++++++++++++++++++++++---
+ 2 files changed, 27 insertions(+), 7 deletions(-)
 
-diff --git a/target/rx/cpu.c b/target/rx/cpu.c
-index dd5561c8eb..f984e888f6 100644
---- a/target/rx/cpu.c
-+++ b/target/rx/cpu.c
-@@ -89,22 +89,6 @@ static void rx_cpu_reset_hold(Object *obj)
-     set_flush_inputs_to_zero(1, &env->fp_status);
+diff --git a/bsd-user/main.c b/bsd-user/main.c
+index e6014f517e..4de226d211 100644
+--- a/bsd-user/main.c
++++ b/bsd-user/main.c
+@@ -378,10 +378,7 @@ int main(int argc, char **argv)
+         } else if (!strcmp(r, "cpu")) {
+             cpu_model = argv[optind++];
+             if (is_help_option(cpu_model)) {
+-                /* XXX: implement xxx_cpu_list for targets that still miss it */
+-#if defined(cpu_list)
+-                cpu_list();
+-#endif
++                list_cpus();
+                 exit(1);
+             }
+         } else if (!strcmp(r, "B")) {
+diff --git a/cpu-target.c b/cpu-target.c
+index c078c0e91b..acfc654b95 100644
+--- a/cpu-target.c
++++ b/cpu-target.c
+@@ -24,6 +24,7 @@
+ #include "hw/qdev-core.h"
+ #include "hw/qdev-properties.h"
+ #include "qemu/error-report.h"
++#include "qemu/qemu-print.h"
+ #include "migration/vmstate.h"
+ #ifdef CONFIG_USER_ONLY
+ #include "qemu.h"
+@@ -283,12 +284,34 @@ const char *parse_cpu_option(const char *cpu_option)
+     return cpu_type;
  }
  
--static void rx_cpu_list_entry(gpointer data, gpointer user_data)
--{
--    ObjectClass *oc = data;
--
--    qemu_printf("  %s\n", object_class_get_name(oc));
--}
--
--void rx_cpu_list(void)
--{
--    GSList *list;
--    list = object_class_get_list_sorted(TYPE_RX_CPU, false);
--    qemu_printf("Available CPUs:\n");
--    g_slist_foreach(list, rx_cpu_list_entry, NULL);
--    g_slist_free(list);
--}
--
- static ObjectClass *rx_cpu_class_by_name(const char *cpu_model)
++#ifndef cpu_list
++static void cpu_list_entry(gpointer data, gpointer user_data)
++{
++    CPUClass *cc = CPU_CLASS(OBJECT_CLASS(data));
++    const char *typename = object_class_get_name(OBJECT_CLASS(data));
++    g_autofree char *model = cpu_model_from_type(typename);
++
++    if (cc->deprecation_note) {
++        qemu_printf("  %s (deprecated)\n", model);
++    } else {
++        qemu_printf("  %s\n", model);
++    }
++}
++
++static void cpu_list(void)
++{
++    GSList *list;
++
++    list = object_class_get_list_sorted(TYPE_CPU, false);
++    qemu_printf("Available CPUs:\n");
++    g_slist_foreach(list, cpu_list_entry, NULL);
++    g_slist_free(list);
++}
++#endif
++
+ void list_cpus(void)
  {
-     ObjectClass *oc;
-diff --git a/target/rx/cpu.h b/target/rx/cpu.h
-index e931e77e85..65f9cd2d0a 100644
---- a/target/rx/cpu.h
-+++ b/target/rx/cpu.h
-@@ -139,11 +139,8 @@ int rx_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
- int rx_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
+-    /* XXX: implement xxx_cpu_list for targets that still miss it */
+-#if defined(cpu_list)
+     cpu_list();
+-#endif
+ }
  
- void rx_translate_init(void);
--void rx_cpu_list(void);
- void rx_cpu_unpack_psw(CPURXState *env, uint32_t psw, int rte);
- 
--#define cpu_list rx_cpu_list
--
- #include "exec/cpu-all.h"
- 
- #define CPU_INTERRUPT_SOFT CPU_INTERRUPT_TGT_INT_0
+ #if defined(CONFIG_USER_ONLY)
 -- 
 2.41.0
 
