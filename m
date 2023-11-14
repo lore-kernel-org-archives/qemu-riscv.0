@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E82BBC3DA79
-	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Nov 2023 00:03:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E3FAC4332F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Nov 2023 00:03:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r33Lz-0007M5-8B; Tue, 14 Nov 2023 19:02:02 -0500
+	id 1r33K6-0004d4-VC; Tue, 14 Nov 2023 19:00:06 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33Ls-0007Gi-BE
- for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 19:01:54 -0500
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33Js-0004SI-Ih
+ for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 18:59:48 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33Lb-0008D3-NT
- for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 19:01:50 -0500
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33Jf-0007Ph-OT
+ for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 18:59:47 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1700006495;
+ s=mimecast20190719; t=1700006374;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=PVpSfOoz03h777B/rb6Tl132+Io9+3dWRLTS26mmxwY=;
- b=BZO18xtf4Po+tDD7ZJfb9+JN79F1rcPml8lJ8Aj2JlBfSM6lz3Ac/WnEkGZRNpxx+5Kebf
- JDG5JNAB56kYVgsydqDf3IGXTXox3hCuqrm3gKq4IyBNoSV82eo+YrUMgbNN7NRCPtJNoL
- jTnNfGL3oNkicQgAezovFANGe8T/fxI=
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-373-kDujcUSEPguZ7CIxUmsmhQ-1; Tue,
- 14 Nov 2023 19:01:31 -0500
-X-MC-Unique: kDujcUSEPguZ7CIxUmsmhQ-1
+ bh=PwMztkO73N/CczTrLEnz5dB16TLg0zyhFk70FFGOseI=;
+ b=hI9ylpiAgKP2SxTU2f0ROpKQG1bOMEt2H4RYxT0XE3Qsq9xA4NekTVmdOmU59VhWgkvfTW
+ MYrQYmUH2QyV6qRwBUBnrbt5W+jgB2ctJeiena5A0JupsZwtpWkooXeuxY7If/1tRBLsFb
+ 0ZBAulz2H5ZwcM6wcTSLqhy9Jve1rGM=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-693-8rihQODPP6SQi6Y7AsiVCw-1; Tue, 14 Nov 2023 18:59:30 -0500
+X-MC-Unique: 8rihQODPP6SQi6Y7AsiVCw-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
  [10.11.54.8])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 722323800083;
- Wed, 15 Nov 2023 00:01:29 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id ED98F811E7D;
+ Tue, 14 Nov 2023 23:59:28 +0000 (UTC)
 Received: from gshan.redhat.com (unknown [10.64.136.44])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 9DA01C15887;
- Wed, 15 Nov 2023 00:01:16 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id AF103C15885;
+ Tue, 14 Nov 2023 23:59:16 +0000 (UTC)
 From: Gavin Shan <gshan@redhat.com>
 To: qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
@@ -61,9 +61,9 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  chenhuacai@kernel.org, shorne@gmail.com, npiggin@gmail.com, clg@kaod.org,
  ysato@users.sourceforge.jp, kbastian@mail.uni-paderborn.de,
  jcmvbkbc@gmail.com, shan.gavin@gmail.com
-Subject: [PATCH v5 20/31] target/tricore: Use generic cpu_list()
-Date: Wed, 15 Nov 2023 09:56:17 +1000
-Message-ID: <20231114235628.534334-21-gshan@redhat.com>
+Subject: [PATCH v5 11/31] target/hexagon: Use generic cpu_list()
+Date: Wed, 15 Nov 2023 09:56:08 +1000
+Message-ID: <20231114235628.534334-12-gshan@redhat.com>
 In-Reply-To: <20231114235628.534334-1-gshan@redhat.com>
 References: <20231114235628.534334-1-gshan@redhat.com>
 MIME-Version: 1.0
@@ -72,13 +72,12 @@ Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.8
 Received-SPF: pass client-ip=170.10.129.124; envelope-from=gshan@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
+ DKIM_SIGNED=0.1, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,67 +95,65 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 No changes in the output from the following command.
 
-[gshan@gshan q]$ ./build/qemu-system-tricore -cpu ?
+[gshan@gshan q]$ ./build/qemu-hexagon -cpu ?
 Available CPUs:
-  tc1796
-  tc1797
-  tc27x
-  tc37x
+  v67
+  v68
+  v69
+  v71
+  v73
 
 Signed-off-by: Gavin Shan <gshan@redhat.com>
 ---
- target/tricore/cpu.h    |  4 ----
- target/tricore/helper.c | 22 ----------------------
- 2 files changed, 26 deletions(-)
+ target/hexagon/cpu.c | 20 --------------------
+ target/hexagon/cpu.h |  3 ---
+ 2 files changed, 23 deletions(-)
 
-diff --git a/target/tricore/cpu.h b/target/tricore/cpu.h
-index de3ab53a83..2d4446cea5 100644
---- a/target/tricore/cpu.h
-+++ b/target/tricore/cpu.h
-@@ -246,10 +246,6 @@ void fpu_set_state(CPUTriCoreState *env);
+diff --git a/target/hexagon/cpu.c b/target/hexagon/cpu.c
+index aa48f5fe89..c0cd739e15 100644
+--- a/target/hexagon/cpu.c
++++ b/target/hexagon/cpu.c
+@@ -32,26 +32,6 @@ static void hexagon_v69_cpu_init(Object *obj) { }
+ static void hexagon_v71_cpu_init(Object *obj) { }
+ static void hexagon_v73_cpu_init(Object *obj) { }
  
- #define MMU_USER_IDX 2
- 
--void tricore_cpu_list(void);
--
--#define cpu_list tricore_cpu_list
--
- static inline int cpu_mmu_index(CPUTriCoreState *env, bool ifetch)
- {
-     return 0;
-diff --git a/target/tricore/helper.c b/target/tricore/helper.c
-index 7e5da3cb23..174f666e1e 100644
---- a/target/tricore/helper.c
-+++ b/target/tricore/helper.c
-@@ -96,28 +96,6 @@ bool tricore_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-     }
- }
- 
--static void tricore_cpu_list_entry(gpointer data, gpointer user_data)
+-static void hexagon_cpu_list_entry(gpointer data, gpointer user_data)
 -{
 -    ObjectClass *oc = data;
--    const char *typename;
--    char *name;
--
--    typename = object_class_get_name(oc);
--    name = g_strndup(typename, strlen(typename) - strlen("-" TYPE_TRICORE_CPU));
+-    char *name = g_strdup(object_class_get_name(oc));
+-    if (g_str_has_suffix(name, HEXAGON_CPU_TYPE_SUFFIX)) {
+-        name[strlen(name) - strlen(HEXAGON_CPU_TYPE_SUFFIX)] = '\0';
+-    }
 -    qemu_printf("  %s\n", name);
 -    g_free(name);
 -}
 -
--void tricore_cpu_list(void)
+-void hexagon_cpu_list(void)
 -{
 -    GSList *list;
--
--    list = object_class_get_list_sorted(TYPE_TRICORE_CPU, false);
+-    list = object_class_get_list_sorted(TYPE_HEXAGON_CPU, false);
 -    qemu_printf("Available CPUs:\n");
--    g_slist_foreach(list, tricore_cpu_list_entry, NULL);
+-    g_slist_foreach(list, hexagon_cpu_list_entry, NULL);
 -    g_slist_free(list);
 -}
 -
- void fpu_set_state(CPUTriCoreState *env)
+ static ObjectClass *hexagon_cpu_class_by_name(const char *cpu_model)
  {
-     switch (extract32(env->PSW, 24, 2)) {
+     ObjectClass *oc;
+diff --git a/target/hexagon/cpu.h b/target/hexagon/cpu.h
+index 7d16083c6a..5c11ae3445 100644
+--- a/target/hexagon/cpu.h
++++ b/target/hexagon/cpu.h
+@@ -37,9 +37,6 @@
+ 
+ #define CPU_RESOLVING_TYPE TYPE_HEXAGON_CPU
+ 
+-void hexagon_cpu_list(void);
+-#define cpu_list hexagon_cpu_list
+-
+ #define MMU_USER_IDX 0
+ 
+ typedef struct {
 -- 
 2.41.0
 
