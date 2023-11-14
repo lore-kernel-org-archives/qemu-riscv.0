@@ -4,50 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63482C4332F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Nov 2023 02:24:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22C51C4167B
+	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Nov 2023 09:44:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r2j5Q-0005YI-RT; Mon, 13 Nov 2023 21:23:32 -0500
+	id 1r2py1-0003tm-IC; Tue, 14 Nov 2023 04:44:21 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alvinga@andestech.com>)
- id 1r2j5O-0005XY-T3; Mon, 13 Nov 2023 21:23:30 -0500
-Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
- helo=Atcsqr.andestech.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alvinga@andestech.com>)
- id 1r2j5L-0001qn-VD; Mon, 13 Nov 2023 21:23:30 -0500
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 3AE2N9fY043538;
- Tue, 14 Nov 2023 10:23:09 +0800 (+08)
- (envelope-from alvinga@andestech.com)
-Received: from alvinga-VirtualBox.andestech.com (10.0.13.65) by
- ATCPCS16.andestech.com (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; 
- Tue, 14 Nov 2023 10:23:07 +0800
-To: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
-CC: <alistair.francis@wdc.com>, <liweiwei@iscas.ac.cn>, Alvin Chang
- <alvinga@andestech.com>
-Subject: [PATCH v5] target/riscv: update checks on writing pmpcfg for Smepmp
- to version 1.0
-Date: Tue, 14 Nov 2023 10:22:54 +0800
-Message-ID: <20231114022254.294711-1-alvinga@andestech.com>
-X-Mailer: git-send-email 2.34.1
+ (Exim 4.90_1) (envelope-from <chigot@adacore.com>)
+ id 1r2py0-0003sv-3Z
+ for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 04:44:20 -0500
+Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <chigot@adacore.com>)
+ id 1r2pxy-0000Hh-Gs
+ for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 04:44:19 -0500
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-32f8441dfb5so3715916f8f.0
+ for <qemu-riscv@nongnu.org>; Tue, 14 Nov 2023 01:44:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=adacore.com; s=google; t=1699955056; x=1700559856; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=qJ/efZbCiQemSximKvzfq2Gui9gap7qWDg5sC5a5QwI=;
+ b=GP5WEjhGxG9Q2r1ZMAUwMLBWetyNtnaErIrxbpu0lt9/9uBEjOwxux44VTIGO90NQV
+ PRuiZJ90JgkNpk6qubtFcOO3xWBmtbAA/hFFYcw4KA3HDOtO1q3njrWHPVxubGCZa6sV
+ SFjgKz6WKnCvHZXGBRrbuYCNKyh9ozGaiazczXYRxnkbP4YCzr7TSRjOKMScbSWUx0rM
+ Af2/2OSkemiLUvojVQGOhsT8EJuzyMKF1dF3vzrMv7/1FVvHP63ZVvvFOCk/V9zTtZID
+ tqmXHBCDJiER7g/fSTNwcCXCtlLH9JjWNSseKcAs0T59uchO+HrOhPnDqMhGLYXglzyn
+ 2D6w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699955056; x=1700559856;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=qJ/efZbCiQemSximKvzfq2Gui9gap7qWDg5sC5a5QwI=;
+ b=HySfPc0WNp/iGZ5Vhp8GNIFqg1RFI0B39fOQCJUoXUTqIlcDNxRN1YAnIRpb8zfQmx
+ Zg/81RLJ+0/35qk3MCcUWddpM2PYNYmDjoDcQU5G5bAZzpKHiirRZZKMB0tacipSbLWH
+ Vi0qzAFrf5nqmVQL4XVknsfg66z1j5GNr/hxEPbPTxiPogh5AT4iOriGiApABkqQpiCa
+ 6RcAPsKto1OFJOq+LVWjvF8muVhMpXpcQM7S+RrcxAmjKjS+nfoDczXnZjYv8H21j0yF
+ y0LwsSokdjplHuEx3MMlt3dIXyE4snnvonVuCIyesDmR3I3DVRXSQST5Ea2Xx6OcbABX
+ 0Dqw==
+X-Gm-Message-State: AOJu0YzniFJ3Zd/KiUA2IuCRwwLJmSEkPF+mJfpqcdPYTSpZWcyPnyp3
+ tqJ/TMv1o17eMKTTMeKPAQ8ltw==
+X-Google-Smtp-Source: AGHT+IGiM/Nh/j+d2t3pxHn9Gi2WkiBwSrnKOV/a6fHyTkXKsvbGzzK+nYJmewkKNMuDsLs4C/R9/A==
+X-Received: by 2002:a5d:49c4:0:b0:32d:bc6e:7f0d with SMTP id
+ t4-20020a5d49c4000000b0032dbc6e7f0dmr5586674wrs.18.1699955056515; 
+ Tue, 14 Nov 2023 01:44:16 -0800 (PST)
+Received: from chigot-Dell.telnowedge.local
+ (lmontsouris-659-1-24-67.w81-250.abo.wanadoo.fr. [81.250.175.67])
+ by smtp.gmail.com with ESMTPSA id
+ f15-20020a5d50cf000000b0032f78feb826sm7336471wrt.104.2023.11.14.01.44.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 14 Nov 2023 01:44:15 -0800 (PST)
+From: =?UTF-8?q?Cl=C3=A9ment=20Chigot?= <chigot@adacore.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, dbarboza@ventanamicro.com,
+ =?UTF-8?q?Cl=C3=A9ment=20Chigot?= <chigot@adacore.com>
+Subject: [PATCH] target/riscv: don't verify ISA compatibility for zicntr and
+ zihpm
+Date: Tue, 14 Nov 2023 10:44:12 +0100
+Message-Id: <20231114094412.413408-1-chigot@adacore.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.0.13.65]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 3AE2N9fY043538
-Received-SPF: pass client-ip=60.248.80.70; envelope-from=alvinga@andestech.com;
- helo=Atcsqr.andestech.com
-X-Spam_score_int: -8
-X-Spam_score: -0.9
-X-Spam_bar: /
-X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9, RDNS_DYNAMIC=0.982,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001, TVD_RCVD_IP=0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::430;
+ envelope-from=chigot@adacore.com; helo=mail-wr1-x430.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -60,96 +91,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Alvin Chang <alvinga@andestech.com>
-From:  Alvin Chang via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Current checks on writing pmpcfg for Smepmp follows Smepmp version
-0.9.1. However, Smepmp specification has already been ratified, and
-there are some differences between version 0.9.1 and 1.0. In this
-commit we update the checks of writing pmpcfg to follow Smepmp version
-1.0.
+The extensions zicntr and zihpm were officially added in the privilege
+instruction set specification 1.12. However, QEMU has been implemented
+them long before it and thus they are forced to be on during the cpu
+initialization to ensure compatibility (see riscv_cpu_init).
+riscv_cpu_disable_priv_spec_isa_exts was not updated when the above
+behavior was introduced, resulting in these extensions to be disabled
+after all.
 
-When mseccfg.MML is set, the constraints to modify PMP rules are:
-1. Locked rules cannot be removed or modified until a PMP reset, unless
-   mseccfg.RLB is set.
-2. From Smepmp specification version 1.0, chapter 2 section 4b:
-   Adding a rule with executable privileges that either is M-mode-only
-   or a locked Shared-Region is not possible and such pmpcfg writes are
-   ignored, leaving pmpcfg unchanged.
-
-The commit transfers the value of pmpcfg into the index of the Smepmp
-truth table, and checks the rules by aforementioned specification
-changes.
-
-Signed-off-by: Alvin Chang <alvinga@andestech.com>
+Signed-off-by: Clément Chigot <chigot@adacore.com>
 ---
-Changes from v4: Rebase on master.
+ target/riscv/tcg/tcg-cpu.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-Changes from v3: Modify "epmp_operation" to "smepmp_operation".
-
-Changes from v2: Adopt switch case ranges and numerical order.
-
-Changes from v1: Convert ePMP over to Smepmp.
-
- target/riscv/pmp.c | 40 ++++++++++++++++++++++++++++++++--------
- 1 file changed, 32 insertions(+), 8 deletions(-)
-
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 162e88a90a..4069514069 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -102,16 +102,40 @@ static bool pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
-                 locked = false;
-             }
- 
--            /* mseccfg.MML is set */
--            if (MSECCFG_MML_ISSET(env)) {
--                /* not adding execute bit */
--                if ((val & PMP_LOCK) != 0 && (val & PMP_EXEC) != PMP_EXEC) {
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index 08adad304d..8a35683a34 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -250,6 +250,15 @@ static void riscv_cpu_disable_priv_spec_isa_exts(RISCVCPU *cpu)
+     for (edata = isa_edata_arr; edata && edata->name; edata++) {
+         if (isa_ext_is_enabled(cpu, edata->ext_enable_offset) &&
+             (env->priv_ver < edata->min_version)) {
 +            /*
-+             * mseccfg.MML is set. Locked rules cannot be removed or modified
-+             * until a PMP reset. Besides, from Smepmp specification version 1.0
-+             * , chapter 2 section 4b says:
-+             * Adding a rule with executable privileges that either is
-+             * M-mode-only or a locked Shared-Region is not possible and such
-+             * pmpcfg writes are ignored, leaving pmpcfg unchanged.
++             * These two extensions are always enabled as they were supported
++             * by QEMU before they were added as extensions in the ISA.
 +             */
-+            if (MSECCFG_MML_ISSET(env) && !pmp_is_locked(env, pmp_index)) {
-+                /*
-+                 * Convert the PMP permissions to match the truth table in the
-+                 * Smepmp spec.
-+                 */
-+                const uint8_t smepmp_operation =
-+                    ((val & PMP_LOCK) >> 4) | ((val & PMP_READ) << 2) |
-+                    (val & PMP_WRITE) | ((val & PMP_EXEC) >> 2);
++            if (!strcmp(edata->name, "zicntr") ||
++                !strcmp(edata->name, "zihpm")) {
++                continue;
++            }
 +
-+                switch (smepmp_operation) {
-+                case 0 ... 8:
-                     locked = false;
--                }
--                /* shared region and not adding X bit */
--                if ((val & PMP_LOCK) != PMP_LOCK &&
--                    (val & 0x7) != (PMP_WRITE | PMP_EXEC)) {
-+                    break;
-+                case 9 ... 11:
-+                    break;
-+                case 12:
-+                    locked = false;
-+                    break;
-+                case 13:
-+                    break;
-+                case 14:
-+                case 15:
-                     locked = false;
-+                    break;
-+                default:
-+                    g_assert_not_reached();
-                 }
-             }
-         } else {
+             isa_ext_update_enabled(cpu, edata->ext_enable_offset, false);
+ #ifndef CONFIG_USER_ONLY
+             warn_report("disabling %s extension for hart 0x" TARGET_FMT_lx
 -- 
-2.34.1
+2.25.1
 
 
