@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D3F9C4332F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Nov 2023 00:04:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EC16C4332F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Nov 2023 00:04:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r33JM-00026m-SE; Tue, 14 Nov 2023 18:59:16 -0500
+	id 1r33O3-0002nk-SH; Tue, 14 Nov 2023 19:04:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33JI-0001uH-Ng
- for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 18:59:13 -0500
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33O2-0002mJ-1P
+ for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 19:04:06 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33JH-0007Df-4J
- for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 18:59:12 -0500
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33Ne-0008U0-IW
+ for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 19:04:04 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1700006350;
+ s=mimecast20190719; t=1700006618;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ to:to:cc:cc:mime-version:mime-version:mime-version: content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=DHJG04+lgyfqTN74zgkyn2sc/y+9a361YMftbYRBCT4=;
- b=d4HqycfVRT/yvYuggwJAdnWFXFBYPYb06l7NGt8xBMY7UghQzzRQVXsIleznyISM8gghR3
- n41fLg7SPMbqHvvzUbh9VEFqdSSIS41TL9MWTo6nwbc1u+VLbBNWl1/A5We/JgXM8wrxxt
- 0kx3oDtaRX6uSYXNtCdSKqjo20Lin5c=
+ bh=R5YZzvC94fhlNvw99fKSNCgXvKmL1c8FqVP4lZp8vgg=;
+ b=h3WMtRu/8XdKBa02WeJB0ykLl0kdOPX5rwcXsHAphel2Q2sN7QqKaL/KrwrcuWczAsujSZ
+ nKhLYTjp38c4FPspEjhn41//C3HMgupHIs+g7gSUnJvrc5Q14L81UgSwy2wkt64eMsRPbz
+ R4SUVXlENDT4o87pKjKIitcsFKL9YfY=
 Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
  by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-688-30zIy3b1OdyUs-lUcbxZPQ-1; Tue,
- 14 Nov 2023 18:59:04 -0500
-X-MC-Unique: 30zIy3b1OdyUs-lUcbxZPQ-1
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-102-Cae6pnPZPeCKEWLWfoWxZQ-1; Tue,
+ 14 Nov 2023 19:03:32 -0500
+X-MC-Unique: Cae6pnPZPeCKEWLWfoWxZQ-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
  [10.11.54.8])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id EDFA63C000A8;
- Tue, 14 Nov 2023 23:59:02 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 52F9D38476A2;
+ Wed, 15 Nov 2023 00:03:30 +0000 (UTC)
 Received: from gshan.redhat.com (unknown [10.64.136.44])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 58C0BC15885;
- Tue, 14 Nov 2023 23:58:50 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 73561C15885;
+ Wed, 15 Nov 2023 00:03:17 +0000 (UTC)
 From: Gavin Shan <gshan@redhat.com>
 To: qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
@@ -61,13 +61,15 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  chenhuacai@kernel.org, shorne@gmail.com, npiggin@gmail.com, clg@kaod.org,
  ysato@users.sourceforge.jp, kbastian@mail.uni-paderborn.de,
  jcmvbkbc@gmail.com, shan.gavin@gmail.com
-Subject: [PATCH v5 09/31] target/avr: Use generic cpu_list()
-Date: Wed, 15 Nov 2023 09:56:06 +1000
-Message-ID: <20231114235628.534334-10-gshan@redhat.com>
+Subject: [PATCH v5 29/31] hw/arm/sbsa-ref: Check CPU type in
+ machine_run_board_init()
+Date: Wed, 15 Nov 2023 09:56:26 +1000
+Message-ID: <20231114235628.534334-30-gshan@redhat.com>
 In-Reply-To: <20231114235628.534334-1-gshan@redhat.com>
 References: <20231114235628.534334-1-gshan@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.8
 Received-SPF: pass client-ip=170.10.133.124; envelope-from=gshan@redhat.com;
@@ -75,11 +77,10 @@ Received-SPF: pass client-ip=170.10.133.124; envelope-from=gshan@redhat.com;
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01,
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,73 +96,72 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Before it's applied:
-
-[gshan@gshan q]$ ./build/qemu-system-avr -cpu ?
-avr5-avr-cpu
-avr51-avr-cpu
-avr6-avr-cpu
-
-After it's applied:
-
-[gshan@gshan q]$ ./build/qemu-system-avr -cpu ?
-Available CPUs:
-  avr5
-  avr51
-  avr6
+Set mc->valid_cpu_types so that the user specified CPU type can
+be validated in machine_run_board_init(). We needn't to do it
+by ourselves.
 
 Signed-off-by: Gavin Shan <gshan@redhat.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Leif Lindholm <quic_llindhol@quicinc.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/avr/cpu.c | 15 ---------------
- target/avr/cpu.h |  2 --
- 2 files changed, 17 deletions(-)
+ hw/arm/sbsa-ref.c | 21 +++------------------
+ 1 file changed, 3 insertions(+), 18 deletions(-)
 
-diff --git a/target/avr/cpu.c b/target/avr/cpu.c
-index a36cc48aae..76fc4cdaf2 100644
---- a/target/avr/cpu.c
-+++ b/target/avr/cpu.c
-@@ -354,21 +354,6 @@ typedef struct AVRCPUInfo {
- } AVRCPUInfo;
+diff --git a/hw/arm/sbsa-ref.c b/hw/arm/sbsa-ref.c
+index f3c9704693..31bee595f8 100644
+--- a/hw/arm/sbsa-ref.c
++++ b/hw/arm/sbsa-ref.c
+@@ -145,27 +145,16 @@ static const int sbsa_ref_irqmap[] = {
+     [SBSA_GWDT_WS0] = 16,
+ };
  
+-static const char * const valid_cpus[] = {
++static const char * const valid_cpu_types[] = {
+     ARM_CPU_TYPE_NAME("cortex-a57"),
+     ARM_CPU_TYPE_NAME("cortex-a72"),
+     ARM_CPU_TYPE_NAME("neoverse-n1"),
+     ARM_CPU_TYPE_NAME("neoverse-v1"),
+     ARM_CPU_TYPE_NAME("neoverse-n2"),
+     ARM_CPU_TYPE_NAME("max"),
++    NULL,
+ };
  
--static void avr_cpu_list_entry(gpointer data, gpointer user_data)
+-static bool cpu_type_valid(const char *cpu)
 -{
--    const char *typename = object_class_get_name(OBJECT_CLASS(data));
+-    int i;
 -
--    qemu_printf("%s\n", typename);
+-    for (i = 0; i < ARRAY_SIZE(valid_cpus); i++) {
+-        if (strcmp(cpu, valid_cpus[i]) == 0) {
+-            return true;
+-        }
+-    }
+-    return false;
 -}
 -
--void avr_cpu_list(void)
--{
--    GSList *list;
--    list = object_class_get_list_sorted(TYPE_AVR_CPU, false);
--    g_slist_foreach(list, avr_cpu_list_entry, NULL);
--    g_slist_free(list);
--}
+ static uint64_t sbsa_ref_cpu_mp_affinity(SBSAMachineState *sms, int idx)
+ {
+     uint8_t clustersz = ARM_DEFAULT_CPUS_PER_CLUSTER;
+@@ -733,11 +722,6 @@ static void sbsa_ref_init(MachineState *machine)
+     const CPUArchIdList *possible_cpus;
+     int n, sbsa_max_cpus;
+ 
+-    if (!cpu_type_valid(machine->cpu_type)) {
+-        error_report("sbsa-ref: CPU type %s not supported", machine->cpu_type);
+-        exit(1);
+-    }
 -
- #define DEFINE_AVR_CPU_TYPE(model, initfn) \
-     { \
-         .parent = TYPE_AVR_CPU, \
-diff --git a/target/avr/cpu.h b/target/avr/cpu.h
-index 8a17862737..02750a7ccd 100644
---- a/target/avr/cpu.h
-+++ b/target/avr/cpu.h
-@@ -181,7 +181,6 @@ static inline void set_avr_feature(CPUAVRState *env, int feature)
-     env->features |= (1U << feature);
- }
- 
--#define cpu_list avr_cpu_list
- #define cpu_mmu_index avr_cpu_mmu_index
- 
- static inline int avr_cpu_mmu_index(CPUAVRState *env, bool ifetch)
-@@ -191,7 +190,6 @@ static inline int avr_cpu_mmu_index(CPUAVRState *env, bool ifetch)
- 
- void avr_cpu_tcg_init(void);
- 
--void avr_cpu_list(void);
- int cpu_avr_exec(CPUState *cpu);
- 
- enum {
+     if (kvm_enabled()) {
+         error_report("sbsa-ref: KVM is not supported for this machine");
+         exit(1);
+@@ -902,6 +886,7 @@ static void sbsa_ref_class_init(ObjectClass *oc, void *data)
+     mc->init = sbsa_ref_init;
+     mc->desc = "QEMU 'SBSA Reference' ARM Virtual Machine";
+     mc->default_cpu_type = ARM_CPU_TYPE_NAME("neoverse-n1");
++    mc->valid_cpu_types = valid_cpu_types;
+     mc->max_cpus = 512;
+     mc->pci_allow_0_address = true;
+     mc->minimum_page_bits = 12;
 -- 
 2.41.0
 
