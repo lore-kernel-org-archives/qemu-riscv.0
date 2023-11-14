@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E220C3DA7A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B830C41535
 	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Nov 2023 00:04:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r33L3-0006gh-8C; Tue, 14 Nov 2023 19:01:01 -0500
+	id 1r33NE-0000mm-VL; Tue, 14 Nov 2023 19:03:16 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33Kz-0006Z4-Hy
- for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 19:00:57 -0500
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33ND-0000iE-Dz
+ for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 19:03:16 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33Kx-00089E-Uh
- for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 19:00:57 -0500
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33NC-0008Qs-0n
+ for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 19:03:15 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1700006455;
+ s=mimecast20190719; t=1700006593;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=wUkDl7u9899MYESb13PAFS29ws9vFs4bZMIq95JlN7c=;
- b=JSk/e+FMHHPxU6L+47PremeCMfjAsUg5kh+KYi3Tb9RcZWo1rQbxdjjLJgKekLHvJVgcw7
- C1ZQ2RI+vVOA03vdKflKudrYiIt2Sn27fygUMYsnaxAloqUt5YBNUrDdJciJKmzAC7VxWX
- KtOQsYZxN6CxchzWDfzuJBkB4AqMV8Y=
+ bh=0Qk6/QajLgnGyyzUHhMPIDBeq8Pe5C9hI3Ifb+WIAuI=;
+ b=UwoRT+KNHbvcuPoUgfvvqIuwzdQp4UH9LnMCOZJExGI+gV5tqIBd6cKZp/EpK3NwhnfC26
+ JwI98mzL3NP55e3m06GHTTalIsU5rv2F+tT2LreNRH2L1Zw1sO5mnpjrnoimCWgZDwyzi6
+ Dt0ifu5fpfk5yLpXyrBP4d+5yLUu5lo=
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-493-6ltCtMh2OmmI-a8RYMiZiw-1; Tue, 14 Nov 2023 19:00:50 -0500
-X-MC-Unique: 6ltCtMh2OmmI-a8RYMiZiw-1
+ us-mta-251-FgyyvxepODesgtqxvhF8lg-1; Tue, 14 Nov 2023 19:03:05 -0500
+X-MC-Unique: FgyyvxepODesgtqxvhF8lg-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
  [10.11.54.8])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 94747101A590;
- Wed, 15 Nov 2023 00:00:48 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id A335E85A58B;
+ Wed, 15 Nov 2023 00:03:03 +0000 (UTC)
 Received: from gshan.redhat.com (unknown [10.64.136.44])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 712ADC15885;
- Wed, 15 Nov 2023 00:00:35 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id E6562C15885;
+ Wed, 15 Nov 2023 00:02:50 +0000 (UTC)
 From: Gavin Shan <gshan@redhat.com>
 To: qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
@@ -61,9 +61,9 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  chenhuacai@kernel.org, shorne@gmail.com, npiggin@gmail.com, clg@kaod.org,
  ysato@users.sourceforge.jp, kbastian@mail.uni-paderborn.de,
  jcmvbkbc@gmail.com, shan.gavin@gmail.com
-Subject: [PATCH v5 17/31] target/riscv: Use generic cpu_list()
-Date: Wed, 15 Nov 2023 09:56:14 +1000
-Message-ID: <20231114235628.534334-18-gshan@redhat.com>
+Subject: [PATCH v5 27/31] hw/arm/virt: Hide host CPU model for tcg
+Date: Wed, 15 Nov 2023 09:56:24 +1000
+Message-ID: <20231114235628.534334-28-gshan@redhat.com>
 In-Reply-To: <20231114235628.534334-1-gshan@redhat.com>
 References: <20231114235628.534334-1-gshan@redhat.com>
 MIME-Version: 1.0
@@ -95,93 +95,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Before it's applied:
+The 'host' CPU model isn't available until KVM or HVF is enabled.
+For example, the following error messages are seen when the guest
+is started with option '-cpu cortex-a8' on tcg after the next commit
+is applied to check the CPU type in machine_run_board_init().
 
-[gshan@gshan q]$ ./build/qemu-system-riscv64 -cpu ?
-any
-max
-rv64
-shakti-c
-sifive-e51
-sifive-u54
-thead-c906
-veyron-v1
-x-rv128
+  ERROR:../hw/core/machine.c:1423:is_cpu_type_supported: \
+  assertion failed: (model != NULL)
+  Bail out! ERROR:../hw/core/machine.c:1423:is_cpu_type_supported: \
+  assertion failed: (model != NULL)
+  Aborted (core dumped)
 
-After it's applied:
+Hide 'host' CPU model until KVM or HVF is enabled. With this applied,
+the valid CPU models can be shown.
 
-[gshan@gshan q]$ ./build/qemu-system-riscv64 -cpu ?
-Available CPUs:
-  any
-  max
-  rv64
-  shakti-c
-  sifive-e51
-  sifive-u54
-  thead-c906
-  veyron-v1
-  x-rv128
+  qemu-system-aarch64: Invalid CPU type: cortex-a8
+  The valid types are: cortex-a7, cortex-a15, cortex-a35, \
+  cortex-a55, cortex-a72, cortex-a76, cortex-a710, a64fx, \
+  neoverse-n1, neoverse-v1, neoverse-n2, cortex-a53,      \
+  cortex-a57, max
 
 Signed-off-by: Gavin Shan <gshan@redhat.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/cpu.c | 29 -----------------------------
- target/riscv/cpu.h |  2 --
- 2 files changed, 31 deletions(-)
+ hw/arm/virt.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 523e9a16ea..22d7422c89 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1733,35 +1733,6 @@ char *riscv_isa_string(RISCVCPU *cpu)
-     return isa_str;
- }
+diff --git a/hw/arm/virt.c b/hw/arm/virt.c
+index be2856c018..668c0d3194 100644
+--- a/hw/arm/virt.c
++++ b/hw/arm/virt.c
+@@ -220,7 +220,9 @@ static const char *valid_cpus[] = {
+ #endif
+     ARM_CPU_TYPE_NAME("cortex-a53"),
+     ARM_CPU_TYPE_NAME("cortex-a57"),
++#if defined(CONFIG_KVM) || defined(CONFIG_HVF)
+     ARM_CPU_TYPE_NAME("host"),
++#endif
+     ARM_CPU_TYPE_NAME("max"),
+ };
  
--static gint riscv_cpu_list_compare(gconstpointer a, gconstpointer b)
--{
--    ObjectClass *class_a = (ObjectClass *)a;
--    ObjectClass *class_b = (ObjectClass *)b;
--    const char *name_a, *name_b;
--
--    name_a = object_class_get_name(class_a);
--    name_b = object_class_get_name(class_b);
--    return strcmp(name_a, name_b);
--}
--
--static void riscv_cpu_list_entry(gpointer data, gpointer user_data)
--{
--    const char *typename = object_class_get_name(OBJECT_CLASS(data));
--    int len = strlen(typename) - strlen(RISCV_CPU_TYPE_SUFFIX);
--
--    qemu_printf("%.*s\n", len, typename);
--}
--
--void riscv_cpu_list(void)
--{
--    GSList *list;
--
--    list = object_class_get_list(TYPE_RISCV_CPU, false);
--    list = g_slist_sort(list, riscv_cpu_list_compare);
--    g_slist_foreach(list, riscv_cpu_list_entry, NULL);
--    g_slist_free(list);
--}
--
- #define DEFINE_CPU(type_name, initfn)      \
-     {                                      \
-         .name = type_name,                 \
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index bf58b0f0b5..965a44c853 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -490,9 +490,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-                         MMUAccessType access_type, int mmu_idx,
-                         bool probe, uintptr_t retaddr);
- char *riscv_isa_string(RISCVCPU *cpu);
--void riscv_cpu_list(void);
- 
--#define cpu_list riscv_cpu_list
- #define cpu_mmu_index riscv_cpu_mmu_index
- 
- #ifndef CONFIG_USER_ONLY
 -- 
 2.41.0
 
