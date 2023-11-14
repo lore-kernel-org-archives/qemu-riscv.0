@@ -4,109 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0AB6C4332F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Nov 2023 23:47:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91F1BC072A2
+	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Nov 2023 02:12:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r2gdn-0003BH-3X; Mon, 13 Nov 2023 18:46:51 -0500
+	id 1r2isL-0001QC-Oh; Mon, 13 Nov 2023 21:10:01 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r2gdm-000397-2p
- for qemu-riscv@nongnu.org; Mon, 13 Nov 2023 18:46:50 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r2gdY-0005z6-Py
- for qemu-riscv@nongnu.org; Mon, 13 Nov 2023 18:46:49 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1699919195;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=sGUuKvwBfQnuZThD6dwFXx+pkZQdA2vvt9ZH1MIF/ao=;
- b=GsE7r42No6Co2mnFRQiqZNwFDF0kIVY6pW7wo363L8AInUecoFeRmkgCJuWKmmmOLiHF+K
- Ql9UbWuquW5Khfh4AGo0P5LUBnUJsTZQ4evBmDiRFtwVA1Ts0JCsN/rH9rm5LthANBmBWz
- pkQP3sP9NBz9pkl8vEGqGayIvQdzpns=
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-14-fp6cU848Oz2iWZb9kNflNA-1; Mon, 13 Nov 2023 18:46:32 -0500
-X-MC-Unique: fp6cU848Oz2iWZb9kNflNA-1
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-1cc29f3afe0so53689595ad.2
- for <qemu-riscv@nongnu.org>; Mon, 13 Nov 2023 15:46:32 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <osy86dev@gmail.com>)
+ id 1r2isJ-0001PO-Sx; Mon, 13 Nov 2023 21:09:59 -0500
+Received: from mail-pj1-f47.google.com ([209.85.216.47])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <osy86dev@gmail.com>)
+ id 1r2isH-0007c0-Kr; Mon, 13 Nov 2023 21:09:59 -0500
+Received: by mail-pj1-f47.google.com with SMTP id
+ 98e67ed59e1d1-280137f1a1bso4036895a91.1; 
+ Mon, 13 Nov 2023 18:09:56 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699919191; x=1700523991;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=sGUuKvwBfQnuZThD6dwFXx+pkZQdA2vvt9ZH1MIF/ao=;
- b=U+7HHRS71NlTG1kEPeh6XpgV757VV+JCPzX2ZdSxVGeUGs6pyXIipSpLHICf/g8QxG
- ukrnrmZZF4ltjyFFD5d8MrP7UiFkT9/VeWuKGJ16RqlDEsab9ttB8DtAWRFMOsKv4os4
- yS/kCGittQDIehAWqsktD51nFZI4VGZ33ksZ3owIZxSI26swviym3D/v0GjCb8P+7Gcr
- pc9NTQqOMtBSdONXEs053OLyeC6znufTil8vI8+1TLRNRrkFAYuieK/OfB5wa8Jo0Xf4
- lH4ScrnMg45LD/QVW/Noy3qLX3SWoqlgtW/8VllZ8t52cijHdEDX0dqzvxKzHQYMmYj5
- VkxA==
-X-Gm-Message-State: AOJu0YyDvzDe3X6yH2itmTStiQSnegOQSG4aEF/uPIjDRFLQJMUw7boN
- 8PKQU9x0hhr8IjLEvYN3U3mOgpSOl3YINMoM56pZ999wm9KWTHNDaFgo1GDlDPjsAgHIQSp5N07
- CjYCeNEPXlt1vBGc=
-X-Received: by 2002:a17:902:e88c:b0:1ca:a290:4c0c with SMTP id
- w12-20020a170902e88c00b001caa2904c0cmr934958plg.16.1699919191200; 
- Mon, 13 Nov 2023 15:46:31 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IG+XNhuOhuh6GAkDOQZ6sJdClr4KK87Ig/JgqIUZkHNc22NaSNuNfvfCi3oQPVXsttOQ3uH9g==
-X-Received: by 2002:a17:902:e88c:b0:1ca:a290:4c0c with SMTP id
- w12-20020a170902e88c00b001caa2904c0cmr934885plg.16.1699919190654; 
- Mon, 13 Nov 2023 15:46:30 -0800 (PST)
-Received: from ?IPV6:2001:8003:e5b0:9f00:b890:3e54:96bb:2a15?
- ([2001:8003:e5b0:9f00:b890:3e54:96bb:2a15])
+ d=1e100.net; s=20230601; t=1699927795; x=1700532595;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vbiTVookckMidOOPTQoozqrFKatQNEIrxbgSipaZNzQ=;
+ b=YIb/U7QRIuSOxEy8XAJ1oVMHU29J8IgXXHNvd0f8m9TgjOluxCp12pUZ/wnuz/iRWy
+ gA7eq2qtJzJ1B3GIPJfF6fk7AP1Dhkv8MAgF58yqq9ISEQPqT/yyM++Mgdj0aqulXAw3
+ pxBMCDMfTtQwHtiu1zbCOSkQRFYPmbB+05/62K5A3TazDNBoRgPOjZfxTuR7iszcvb9W
+ IYHlmITrGmFQsvdfXIU4fhQiov+vCjfnM6bNsalODUb+0ZMP9whx3c44MO//xxCifMEq
+ lU/gvRfkVTMjRHI1AXVtEoj8oaDjRV8tVuhVyqIFTzkOoOwo+h+e6By88RIaVaydnmJR
+ lG4g==
+X-Gm-Message-State: AOJu0YzlM+PyaNA8MZy0j5i7sy1inI3KdJNqLNdDBbDHQfeOGf18jA4E
+ RCBzxlATfS1DqnkXGU7XDdhL0QXw9HGfWA==
+X-Google-Smtp-Source: AGHT+IFdTtkzpsoKW3Fe1LOu/M7OSElelByuspKsf3YdFVCzYwaqTQsWxRKZ3ZOAejve9K8boy936w==
+X-Received: by 2002:a17:90b:3b88:b0:27d:1051:83c4 with SMTP id
+ pc8-20020a17090b3b8800b0027d105183c4mr6314581pjb.12.1699927795268; 
+ Mon, 13 Nov 2023 18:09:55 -0800 (PST)
+Received: from localhost.localdomain ([2601:642:4c01:2f7:5d09:c219:9099:a639])
  by smtp.gmail.com with ESMTPSA id
- ba12-20020a170902720c00b001c60d0a6d84sm4535699plb.127.2023.11.13.15.46.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 13 Nov 2023 15:46:30 -0800 (PST)
-Message-ID: <0dbc478c-45f9-44e8-a938-de71fed6c3ec@redhat.com>
-Date: Tue, 14 Nov 2023 09:46:12 +1000
+ g13-20020a17090ae58d00b0027d12b1e29dsm6175362pjz.25.2023.11.13.18.09.52
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Mon, 13 Nov 2023 18:09:54 -0800 (PST)
+From: Joelle van Dyne <j@getutm.app>
+To: qemu-devel@nongnu.org
+Cc: Joelle van Dyne <j@getutm.app>, Stefan Berger <stefanb@linux.ibm.com>,
+ Stefan Berger <stefanb@linux.vnet.ibm.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
+ Ani Sinha <anisinha@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>, Song Gao <gaosong@loongson.cn>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ qemu-arm@nongnu.org (open list:ARM TCG CPUs),
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PATCH v5 11/14] tpm_crb_sysbus: introduce TPM CRB SysBus device
+Date: Mon, 13 Nov 2023 18:09:21 -0800
+Message-ID: <20231114020927.62315-12-j@getutm.app>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20231114020927.62315-1-j@getutm.app>
+References: <20231114020927.62315-1-j@getutm.app>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 02/33] hw/cpu: Call object_class_is_abstract() once in
- cpu_class_by_name()
-To: Igor Mammedov <imammedo@redhat.com>
-Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- qemu-ppc@nongnu.org, qemu-s390x@nongnu.org, philmd@linaro.org, clg@kaod.org,
- imp@bsdimp.com, kevans@freebsd.org, richard.henderson@linaro.org,
- pbonzini@redhat.com, peter.maydell@linaro.org, b.galvani@gmail.com,
- strahinja.p.jankovic@gmail.com, sundeep.lkml@gmail.com, kfting@nuvoton.com,
- wuhaotsh@google.com, nieklinnenbank@gmail.com, rad@semihalf.com,
- quic_llindhol@quicinc.com, marcin.juszkiewicz@linaro.org,
- eduardo@habkost.net, marcel.apfelbaum@gmail.com, wangyanan55@huawei.com,
- laurent@vivier.eu, vijai@behindbytes.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, mrolnik@gmail.com,
- edgar.iglesias@gmail.com, bcain@quicinc.com, gaosong@loongson.cn,
- aurelien@aurel32.net, jiaxun.yang@flygoat.com, aleksandar.rikalo@syrmia.com,
- chenhuacai@kernel.org, crwulff@gmail.com, marex@denx.de, shorne@gmail.com,
- npiggin@gmail.com, ysato@users.sourceforge.jp, david@redhat.com,
- thuth@redhat.com, iii@linux.ibm.com, kbastian@mail.uni-paderborn.de,
- jcmvbkbc@gmail.com, shan.gavin@gmail.com
-References: <20231102002500.1750692-1-gshan@redhat.com>
- <20231102002500.1750692-3-gshan@redhat.com>
- <20231106154029.0354f0ed@imammedo.users.ipa.redhat.com>
-From: Gavin Shan <gshan@redhat.com>
-In-Reply-To: <20231106154029.0354f0ed@imammedo.users.ipa.redhat.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=gshan@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -5
-X-Spam_score: -0.6
-X-Spam_bar: /
-X-Spam_report: (-0.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_SORBS_WEB=1.5, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=209.85.216.47; envelope-from=osy86dev@gmail.com;
+ helo=mail-pj1-f47.google.com
+X-Spam_score_int: -13
+X-Spam_score: -1.4
+X-Spam_bar: -
+X-Spam_report: (-1.4 / 5.0 requ) BAYES_00=-1.9,
+ FREEMAIL_FORGED_FROMDOMAIN=0.249, FREEMAIL_FROM=0.001,
+ HEADER_FROM_DIFFERENT_DOMAINS=0.249, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -122,316 +92,416 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+This SysBus variant of the CRB interface supports dynamically locating
+the MMIO interface so that Virt machines can use it. This interface
+is currently the only one supported by QEMU that works on Windows 11
+ARM64 as 'tpm-tis-device' does not work with current Windows drivers.
+We largely follow that device as a template.
 
-On 11/7/23 00:40, Igor Mammedov wrote:
-> On Thu,  2 Nov 2023 10:24:29 +1000
-> Gavin Shan <gshan@redhat.com> wrote:
-> 
->> From: Philippe Mathieu-Daudé <philmd@linaro.org>
->>
->> Let CPUClass::class_by_name() handlers to return abstract classes,
->> and filter them once in the public cpu_class_by_name() method.
->>
->> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
->> Reviewed-by: Gavin Shan <gshan@redhat.com>
->> ---
->>   hw/core/cpu-common.c   | 8 +++++++-
->>   include/hw/core/cpu.h  | 7 ++++---
->>   target/alpha/cpu.c     | 2 +-
->>   target/arm/cpu.c       | 3 +--
->>   target/avr/cpu.c       | 3 +--
->>   target/cris/cpu.c      | 3 +--
->>   target/hexagon/cpu.c   | 3 +--
->>   target/loongarch/cpu.c | 3 +--
->>   target/m68k/cpu.c      | 3 +--
->>   target/openrisc/cpu.c  | 3 +--
->>   target/riscv/cpu.c     | 3 +--
->>   target/rx/cpu.c        | 5 +----
->>   target/sh4/cpu.c       | 3 ---
->>   target/tricore/cpu.c   | 3 +--
->>   target/xtensa/cpu.c    | 3 +--
->>   15 files changed, 23 insertions(+), 32 deletions(-)
->>
->> diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
->> index bab8942c30..bca0323e9f 100644
->> --- a/hw/core/cpu-common.c
->> +++ b/hw/core/cpu-common.c
->> @@ -150,9 +150,15 @@ static bool cpu_common_has_work(CPUState *cs)
->>   ObjectClass *cpu_class_by_name(const char *typename, const char *cpu_model)
->>   {
->>       CPUClass *cc = CPU_CLASS(object_class_by_name(typename));
->> +    ObjectClass *oc;
->>   
->>       assert(cpu_model && cc->class_by_name);
->> -    return cc->class_by_name(cpu_model);
->> +    oc = cc->class_by_name(cpu_model);
->> +    if (oc && !object_class_is_abstract(oc)) {
->> +        return oc;
->> +    }
->> +
->> +    return NULL;
->>   }
->>   
->>   static void cpu_common_parse_features(const char *typename, char *features,
->> diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
->> index 18593db5b2..ee85aafdf5 100644
->> --- a/include/hw/core/cpu.h
->> +++ b/include/hw/core/cpu.h
->> @@ -102,7 +102,7 @@ struct SysemuCPUOps;
->>   /**
->>    * CPUClass:
->>    * @class_by_name: Callback to map -cpu command line model name to an
->> - * instantiatable CPU type.
->> + *                 instantiatable CPU type.
->>    * @parse_features: Callback to parse command line arguments.
->>    * @reset_dump_flags: #CPUDumpFlags to use for reset logging.
->>    * @has_work: Callback for checking if there is work to do.
->> @@ -772,9 +772,10 @@ void cpu_reset(CPUState *cpu);
->>    * @typename: The CPU base type.
->>    * @cpu_model: The model string without any parameters.
->>    *
->> - * Looks up a CPU #ObjectClass matching name @cpu_model.
->> + * Looks up a concrete CPU #ObjectClass matching name @cpu_model.
->>    *
->> - * Returns: A #CPUClass or %NULL if not matching class is found.
->> + * Returns: A concrete #CPUClass or %NULL if no matching class is found
->> + *          or if the matching class is abstract.
->>    */
->>   ObjectClass *cpu_class_by_name(const char *typename, const char *cpu_model);
->>   
->> diff --git a/target/alpha/cpu.c b/target/alpha/cpu.c
->> index c7ae4d6a41..9436859c7b 100644
->> --- a/target/alpha/cpu.c
->> +++ b/target/alpha/cpu.c
->> @@ -126,7 +126,7 @@ static ObjectClass *alpha_cpu_class_by_name(const char *cpu_model)
->>       int i;
->>   
->>       oc = object_class_by_name(cpu_model);
->> -    if (oc != NULL && object_class_dynamic_cast(oc, TYPE_ALPHA_CPU) != NULL &&
-> I'd split 'oc != NULL &&' into a separate patch
-> 
+To try out this device with Windows 11 before OVMF is updated, you
+will need to modify `sysbus-fdt.c` and change the added line from:
 
-Agree. It's a good idea, but this patch has been merged as:
+```c
+    TYPE_BINDING(TYPE_TPM_CRB_SYSBUS, no_fdt_node),
+```
 
-3a9d0d7b64 hw/cpu: Call object_class_is_abstract() once in cpu_class_by_name()
+to
 
->> +    if (object_class_dynamic_cast(oc, TYPE_ALPHA_CPU) &&
->>           !object_class_is_abstract(oc)) {
-> 
-> stray abstract check leftover??
-> 
+```c
+    TYPE_BINDING(TYPE_TPM_CRB_SYSBUS, add_tpm_tis_fdt_node),
+```
 
-Nope, It's intentional. We will fall back to @alpha_cpu_aliases if the
-CPU class corresponding to @cpu_model is abstract.
+This change was not included because it can confuse Linux (although
+from testing, it seems like Linux is able to properly ignore the
+device from the TPM TIS driver and recognize it from the ACPI device
+in the TPM CRB driver). A proper fix would require OVMF to recognize
+the ACPI device and not depend on the FDT node for recognizing TPM.
 
->>           return oc;
->>       }
->> diff --git a/target/arm/cpu.c b/target/arm/cpu.c
->> index 954328d72a..8c622d6b59 100644
->> --- a/target/arm/cpu.c
->> +++ b/target/arm/cpu.c
->> @@ -2399,8 +2399,7 @@ static ObjectClass *arm_cpu_class_by_name(const char *cpu_model)
->>       oc = object_class_by_name(typename);
->>       g_strfreev(cpuname);
->>       g_free(typename);
->> -    if (!oc || !object_class_dynamic_cast(oc, TYPE_ARM_CPU) ||
->> -        object_class_is_abstract(oc)) {
->> +    if (!object_class_dynamic_cast(oc, TYPE_ARM_CPU)) {
->>           return NULL;
->>       }
->>       return oc;
->> diff --git a/target/avr/cpu.c b/target/avr/cpu.c
->> index 14d8b9d1f0..113d522f75 100644
->> --- a/target/avr/cpu.c
->> +++ b/target/avr/cpu.c
->> @@ -157,8 +157,7 @@ static ObjectClass *avr_cpu_class_by_name(const char *cpu_model)
->>       ObjectClass *oc;
->>   
->>       oc = object_class_by_name(cpu_model);
->> -    if (object_class_dynamic_cast(oc, TYPE_AVR_CPU) == NULL ||
->> -        object_class_is_abstract(oc)) {
->> +    if (!object_class_dynamic_cast(oc, TYPE_AVR_CPU)) {
->>           oc = NULL;
->>       }
->>       return oc;
->> diff --git a/target/cris/cpu.c b/target/cris/cpu.c
->> index be4a44c218..1cb431cd46 100644
->> --- a/target/cris/cpu.c
->> +++ b/target/cris/cpu.c
->> @@ -95,8 +95,7 @@ static ObjectClass *cris_cpu_class_by_name(const char *cpu_model)
->>       typename = g_strdup_printf(CRIS_CPU_TYPE_NAME("%s"), cpu_model);
->>       oc = object_class_by_name(typename);
->>       g_free(typename);
->> -    if (oc != NULL && (!object_class_dynamic_cast(oc, TYPE_CRIS_CPU) ||
->> -                       object_class_is_abstract(oc))) {
->> +    if (!object_class_dynamic_cast(oc, TYPE_CRIS_CPU)) {
->>           oc = NULL;
->>       }
->>       return oc;
->> diff --git a/target/hexagon/cpu.c b/target/hexagon/cpu.c
->> index 1adc11b713..bd5adb7acd 100644
->> --- a/target/hexagon/cpu.c
->> +++ b/target/hexagon/cpu.c
->> @@ -63,8 +63,7 @@ static ObjectClass *hexagon_cpu_class_by_name(const char *cpu_model)
->>       oc = object_class_by_name(typename);
->>       g_strfreev(cpuname);
->>       g_free(typename);
->> -    if (!oc || !object_class_dynamic_cast(oc, TYPE_HEXAGON_CPU) ||
->> -        object_class_is_abstract(oc)) {
->> +    if (!object_class_dynamic_cast(oc, TYPE_HEXAGON_CPU)) {
->>           return NULL;
->>       }
->>       return oc;
->> diff --git a/target/loongarch/cpu.c b/target/loongarch/cpu.c
->> index ef1bf89dac..06d1b9bb95 100644
->> --- a/target/loongarch/cpu.c
->> +++ b/target/loongarch/cpu.c
->> @@ -648,8 +648,7 @@ static ObjectClass *loongarch_cpu_class_by_name(const char *cpu_model)
->>           }
->>       }
->>   
->> -    if (object_class_dynamic_cast(oc, TYPE_LOONGARCH_CPU)
->> -        && !object_class_is_abstract(oc)) {
->> +    if (object_class_dynamic_cast(oc, TYPE_LOONGARCH_CPU)) {
->>           return oc;
->>       }
->>       return NULL;
->> diff --git a/target/m68k/cpu.c b/target/m68k/cpu.c
->> index 538d9473c2..fe381cc5d3 100644
->> --- a/target/m68k/cpu.c
->> +++ b/target/m68k/cpu.c
->> @@ -111,8 +111,7 @@ static ObjectClass *m68k_cpu_class_by_name(const char *cpu_model)
->>       typename = g_strdup_printf(M68K_CPU_TYPE_NAME("%s"), cpu_model);
->>       oc = object_class_by_name(typename);
->>       g_free(typename);
->> -    if (oc != NULL && (object_class_dynamic_cast(oc, TYPE_M68K_CPU) == NULL ||
->> -                       object_class_is_abstract(oc))) {
->> +    if (!object_class_dynamic_cast(oc, TYPE_M68K_CPU)) {
->>           return NULL;
->>       }
->>       return oc;
->> diff --git a/target/openrisc/cpu.c b/target/openrisc/cpu.c
->> index f5a3d5273b..cc94f37e77 100644
->> --- a/target/openrisc/cpu.c
->> +++ b/target/openrisc/cpu.c
->> @@ -164,8 +164,7 @@ static ObjectClass *openrisc_cpu_class_by_name(const char *cpu_model)
->>       typename = g_strdup_printf(OPENRISC_CPU_TYPE_NAME("%s"), cpu_model);
->>       oc = object_class_by_name(typename);
->>       g_free(typename);
->> -    if (oc != NULL && (!object_class_dynamic_cast(oc, TYPE_OPENRISC_CPU) ||
->> -                       object_class_is_abstract(oc))) {
->> +    if (!object_class_dynamic_cast(oc, TYPE_OPENRISC_CPU)) {
->>           return NULL;
->>       }
->>       return oc;
->> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> index ac4a6c7eec..018bad6f82 100644
->> --- a/target/riscv/cpu.c
->> +++ b/target/riscv/cpu.c
->> @@ -636,8 +636,7 @@ static ObjectClass *riscv_cpu_class_by_name(const char *cpu_model)
->>       oc = object_class_by_name(typename);
->>       g_strfreev(cpuname);
->>       g_free(typename);
->> -    if (!oc || !object_class_dynamic_cast(oc, TYPE_RISCV_CPU) ||
->> -        object_class_is_abstract(oc)) {
->> +    if (!object_class_dynamic_cast(oc, TYPE_RISCV_CPU)) {
->>           return NULL;
->>       }
->>       return oc;
->> diff --git a/target/rx/cpu.c b/target/rx/cpu.c
->> index 4d0d3a0c8c..0063837e93 100644
->> --- a/target/rx/cpu.c
->> +++ b/target/rx/cpu.c
->> @@ -111,16 +111,13 @@ static ObjectClass *rx_cpu_class_by_name(const char *cpu_model)
->>       char *typename;
->>   
->>       oc = object_class_by_name(cpu_model);
->> -    if (oc != NULL && object_class_dynamic_cast(oc, TYPE_RX_CPU) != NULL &&
->> +    if (object_class_dynamic_cast(oc, TYPE_RX_CPU) &&
->>           !object_class_is_abstract(oc)) {
-> 
-> ditto wrt strays
-> 
+The command line to try out this device with SWTPM is:
 
-Same as above. It's intentional. We will fall back to @cpu_model-rx-cpu if
-the CPU class corresponding to @cpu_model is abstract. The point is we don't
-want rx_cpu_class_by_name() returns an abstract CPU class in the middle. The
-last returned CPU class will be validated by cpu_class_by_name() like below.
+```
+$ qemu-system-aarch64 \
+    -chardev socket,id=chrtpm0,path=tpm.sock \
+    -tpmdev emulator,id=tpm0,chardev=chrtpm0 \
+    -device tpm-crb-device,tpmdev=tpm0
+```
 
-ObjectClass *cpu_class_by_name(const char *typename, const char *cpu_model)
-{
-     :
-     if (oc == NULL || object_class_is_abstract(oc)) {
-         return NULL;
+along with SWTPM:
+
+```
+$ swtpm \
+    --ctrl type=unixio,path=tpm.sock,terminate \
+    --tpmstate backend-uri=file://tpm.data \
+    --tpm2
+```
+
+Signed-off-by: Joelle van Dyne <j@getutm.app>
+Reviewed-by: Stefan Berger <stefanb@linux.ibm.com>
+---
+ docs/specs/tpm.rst      |   1 +
+ include/sysemu/tpm.h    |   3 +
+ hw/acpi/aml-build.c     |   7 +-
+ hw/arm/virt.c           |   1 +
+ hw/core/sysbus-fdt.c    |   1 +
+ hw/loongarch/virt.c     |   1 +
+ hw/riscv/virt.c         |   1 +
+ hw/tpm/tpm_crb_sysbus.c | 162 ++++++++++++++++++++++++++++++++++++++++
+ hw/arm/Kconfig          |   1 +
+ hw/loongarch/Kconfig    |   1 +
+ hw/riscv/Kconfig        |   1 +
+ hw/tpm/Kconfig          |   5 ++
+ hw/tpm/meson.build      |   3 +
+ 13 files changed, 187 insertions(+), 1 deletion(-)
+ create mode 100644 hw/tpm/tpm_crb_sysbus.c
+
+diff --git a/docs/specs/tpm.rst b/docs/specs/tpm.rst
+index 2bc29c9804..95aeb49220 100644
+--- a/docs/specs/tpm.rst
++++ b/docs/specs/tpm.rst
+@@ -46,6 +46,7 @@ operating system.
+ QEMU files related to TPM CRB interface:
+  - ``hw/tpm/tpm_crb.c``
+  - ``hw/tpm/tpm_crb_common.c``
++ - ``hw/tpm/tpm_crb_sysbus.c``
+ 
+ SPAPR interface
+ ---------------
+diff --git a/include/sysemu/tpm.h b/include/sysemu/tpm.h
+index ffd300e607..bab30fa546 100644
+--- a/include/sysemu/tpm.h
++++ b/include/sysemu/tpm.h
+@@ -49,6 +49,7 @@ struct TPMIfClass {
+ #define TYPE_TPM_TIS_ISA            "tpm-tis"
+ #define TYPE_TPM_TIS_SYSBUS         "tpm-tis-device"
+ #define TYPE_TPM_CRB                "tpm-crb"
++#define TYPE_TPM_CRB_SYSBUS         "tpm-crb-device"
+ #define TYPE_TPM_SPAPR              "tpm-spapr"
+ #define TYPE_TPM_TIS_I2C            "tpm-tis-i2c"
+ 
+@@ -58,6 +59,8 @@ struct TPMIfClass {
+     object_dynamic_cast(OBJECT(chr), TYPE_TPM_TIS_SYSBUS)
+ #define TPM_IS_CRB(chr)                             \
+     object_dynamic_cast(OBJECT(chr), TYPE_TPM_CRB)
++#define TPM_IS_CRB_SYSBUS(chr)                      \
++    object_dynamic_cast(OBJECT(chr), TYPE_TPM_CRB_SYSBUS)
+ #define TPM_IS_SPAPR(chr)                           \
+     object_dynamic_cast(OBJECT(chr), TYPE_TPM_SPAPR)
+ #define TPM_IS_TIS_I2C(chr)                      \
+diff --git a/hw/acpi/aml-build.c b/hw/acpi/aml-build.c
+index af66bde0f5..acc654382e 100644
+--- a/hw/acpi/aml-build.c
++++ b/hw/acpi/aml-build.c
+@@ -31,6 +31,7 @@
+ #include "hw/pci/pci_bus.h"
+ #include "hw/pci/pci_bridge.h"
+ #include "qemu/cutils.h"
++#include "qom/object.h"
+ 
+ static GArray *build_alloc_array(void)
+ {
+@@ -2218,7 +2219,7 @@ void build_tpm2(GArray *table_data, BIOSLinker *linker, GArray *tcpalog,
+ {
+     uint8_t start_method_params[12] = {};
+     unsigned log_addr_offset;
+-    uint64_t control_area_start_address;
++    uint64_t baseaddr, control_area_start_address;
+     TPMIf *tpmif = tpm_find();
+     uint32_t start_method;
+     AcpiTable table = { .sig = "TPM2", .rev = 4,
+@@ -2236,6 +2237,10 @@ void build_tpm2(GArray *table_data, BIOSLinker *linker, GArray *tcpalog,
+     } else if (TPM_IS_CRB(tpmif)) {
+         control_area_start_address = TPM_CRB_ADDR_CTRL;
+         start_method = TPM2_START_METHOD_CRB;
++    } else if (TPM_IS_CRB_SYSBUS(tpmif)) {
++        baseaddr = object_property_get_uint(OBJECT(tpmif), "x-baseaddr", NULL);
++        control_area_start_address = baseaddr + A_CRB_CTRL_REQ;
++        start_method = TPM2_START_METHOD_CRB;
+     } else {
+         g_assert_not_reached();
      }
-     return oc;
-}
-
-
->>           return oc;
->>       }
->>       typename = g_strdup_printf(RX_CPU_TYPE_NAME("%s"), cpu_model);
->>       oc = object_class_by_name(typename);
->>       g_free(typename);
->> -    if (oc != NULL && object_class_is_abstract(oc)) {
->> -        oc = NULL;
->> -    }
->>   
->>       return oc;
->>   }
->> diff --git a/target/sh4/cpu.c b/target/sh4/cpu.c
->> index 788e41fea6..a8ec98b134 100644
->> --- a/target/sh4/cpu.c
->> +++ b/target/sh4/cpu.c
->> @@ -152,9 +152,6 @@ static ObjectClass *superh_cpu_class_by_name(const char *cpu_model)
->>   
->>       typename = g_strdup_printf(SUPERH_CPU_TYPE_NAME("%s"), s);
->>       oc = object_class_by_name(typename);
->> -    if (oc != NULL && object_class_is_abstract(oc)) {
->> -        oc = NULL;
->> -    }
-> 
-> Why they do not do
->      object_class_dynamic_cast(oc, TYPE_ABSTRACT_FOO_CPU)
-> here, do we really need this dynamic cast elsewhere at all?
-> 
-
-I think it was missed at the beginning. We need to ensure the class is a CPU class
-here. It's not harmful at least.
-
->>   out:
->>       g_free(s);
->> diff --git a/target/tricore/cpu.c b/target/tricore/cpu.c
->> index 5ca666ee12..47e1c272cf 100644
->> --- a/target/tricore/cpu.c
->> +++ b/target/tricore/cpu.c
->> @@ -132,8 +132,7 @@ static ObjectClass *tricore_cpu_class_by_name(const char *cpu_model)
->>       typename = g_strdup_printf(TRICORE_CPU_TYPE_NAME("%s"), cpu_model);
->>       oc = object_class_by_name(typename);
->>       g_free(typename);
->> -    if (!oc || !object_class_dynamic_cast(oc, TYPE_TRICORE_CPU) ||
->> -        object_class_is_abstract(oc)) {
->> +    if (!object_class_dynamic_cast(oc, TYPE_TRICORE_CPU)) {
->>           return NULL;
->>       }
->>       return oc;
->> diff --git a/target/xtensa/cpu.c b/target/xtensa/cpu.c
->> index ea1dae7390..5d1c090467 100644
->> --- a/target/xtensa/cpu.c
->> +++ b/target/xtensa/cpu.c
->> @@ -141,8 +141,7 @@ static ObjectClass *xtensa_cpu_class_by_name(const char *cpu_model)
->>       typename = g_strdup_printf(XTENSA_CPU_TYPE_NAME("%s"), cpu_model);
->>       oc = object_class_by_name(typename);
->>       g_free(typename);
->> -    if (oc == NULL || !object_class_dynamic_cast(oc, TYPE_XTENSA_CPU) ||
->> -        object_class_is_abstract(oc)) {
->> +    if (!object_class_dynamic_cast(oc, TYPE_XTENSA_CPU)) {
->>           return NULL;
->>       }
->>       return oc;
-> 
-
-Thanks,
-Gavin
+diff --git a/hw/arm/virt.c b/hw/arm/virt.c
+index 36e2506420..e6152a2f51 100644
+--- a/hw/arm/virt.c
++++ b/hw/arm/virt.c
+@@ -2955,6 +2955,7 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
+     machine_class_allow_dynamic_sysbus_dev(mc, TYPE_VFIO_PLATFORM);
+ #ifdef CONFIG_TPM
+     machine_class_allow_dynamic_sysbus_dev(mc, TYPE_TPM_TIS_SYSBUS);
++    machine_class_allow_dynamic_sysbus_dev(mc, TYPE_TPM_CRB_SYSBUS);
+ #endif
+     mc->block_default_type = IF_VIRTIO;
+     mc->no_cdrom = 1;
+diff --git a/hw/core/sysbus-fdt.c b/hw/core/sysbus-fdt.c
+index eebcd28f9a..9c783f88eb 100644
+--- a/hw/core/sysbus-fdt.c
++++ b/hw/core/sysbus-fdt.c
+@@ -493,6 +493,7 @@ static const BindingEntry bindings[] = {
+ #endif
+ #ifdef CONFIG_TPM
+     TYPE_BINDING(TYPE_TPM_TIS_SYSBUS, add_tpm_tis_fdt_node),
++    TYPE_BINDING(TYPE_TPM_CRB_SYSBUS, no_fdt_node),
+ #endif
+     TYPE_BINDING(TYPE_RAMFB_DEVICE, no_fdt_node),
+     TYPE_BINDING("", NULL), /* last element */
+diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
+index feed0f8bbf..9d5ad2bc8e 100644
+--- a/hw/loongarch/virt.c
++++ b/hw/loongarch/virt.c
+@@ -1114,6 +1114,7 @@ static void loongarch_class_init(ObjectClass *oc, void *data)
+     machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RAMFB_DEVICE);
+ #ifdef CONFIG_TPM
+     machine_class_allow_dynamic_sysbus_dev(mc, TYPE_TPM_TIS_SYSBUS);
++    machine_class_allow_dynamic_sysbus_dev(mc, TYPE_TPM_CRB_SYSBUS);
+ #endif
+ }
+ 
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index c7fc97e273..4cce0b14ab 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1702,6 +1702,7 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
+     machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RAMFB_DEVICE);
+ #ifdef CONFIG_TPM
+     machine_class_allow_dynamic_sysbus_dev(mc, TYPE_TPM_TIS_SYSBUS);
++    machine_class_allow_dynamic_sysbus_dev(mc, TYPE_TPM_CRB_SYSBUS);
+ #endif
+ 
+ 
+diff --git a/hw/tpm/tpm_crb_sysbus.c b/hw/tpm/tpm_crb_sysbus.c
+new file mode 100644
+index 0000000000..7edeae3665
+--- /dev/null
++++ b/hw/tpm/tpm_crb_sysbus.c
+@@ -0,0 +1,162 @@
++/*
++ * tpm_crb_sysbus.c - QEMU's TPM CRB interface emulator
++ *
++ * Copyright (c) 2018 Red Hat, Inc.
++ *
++ * Authors:
++ *   Marc-André Lureau <marcandre.lureau@redhat.com>
++ *   Joelle van Dyne <j@getutm.app>
++ *
++ * This work is licensed under the terms of the GNU GPL, version 2 or later.
++ * See the COPYING file in the top-level directory.
++ *
++ * tpm_crb is a device for TPM 2.0 Command Response Buffer (CRB) Interface
++ * as defined in TCG PC Client Platform TPM Profile (PTP) Specification
++ * Family “2.0” Level 00 Revision 01.03 v22
++ */
++
++#include "qemu/osdep.h"
++#include "hw/acpi/acpi_aml_interface.h"
++#include "hw/acpi/tpm.h"
++#include "hw/qdev-properties.h"
++#include "migration/vmstate.h"
++#include "tpm_prop.h"
++#include "hw/sysbus.h"
++#include "qapi/visitor.h"
++#include "qom/object.h"
++#include "sysemu/tpm_util.h"
++#include "trace.h"
++#include "tpm_crb.h"
++
++struct TPMCRBStateSysBus {
++    /*< private >*/
++    SysBusDevice parent_obj;
++
++    /*< public >*/
++    TPMCRBState state;
++    uint64_t baseaddr;
++    uint64_t size;
++};
++
++OBJECT_DECLARE_SIMPLE_TYPE(TPMCRBStateSysBus, TPM_CRB_SYSBUS)
++
++static void tpm_crb_sysbus_request_completed(TPMIf *ti, int ret)
++{
++    TPMCRBStateSysBus *s = TPM_CRB_SYSBUS(ti);
++
++    return tpm_crb_request_completed(&s->state, ret);
++}
++
++static enum TPMVersion tpm_crb_sysbus_get_tpm_version(TPMIf *ti)
++{
++    TPMCRBStateSysBus *s = TPM_CRB_SYSBUS(ti);
++
++    return tpm_crb_get_version(&s->state);
++}
++
++static int tpm_crb_sysbus_pre_save(void *opaque)
++{
++    TPMCRBStateSysBus *s = opaque;
++
++    return tpm_crb_pre_save(&s->state);
++}
++
++static const VMStateDescription vmstate_tpm_crb_sysbus = {
++    .name = "tpm-crb-sysbus",
++    .pre_save = tpm_crb_sysbus_pre_save,
++    .fields = (VMStateField[]) {
++        VMSTATE_END_OF_LIST(),
++    }
++};
++
++static Property tpm_crb_sysbus_properties[] = {
++    DEFINE_PROP_TPMBE("tpmdev", TPMCRBStateSysBus, state.tpmbe),
++    DEFINE_PROP_UINT64("x-baseaddr", TPMCRBStateSysBus,
++                       baseaddr, TPM_CRB_ADDR_BASE),
++    DEFINE_PROP_UINT64("x-size", TPMCRBStateSysBus,
++                       size, TPM_CRB_ADDR_SIZE),
++    DEFINE_PROP_END_OF_LIST(),
++};
++
++static void tpm_crb_sysbus_initfn(Object *obj)
++{
++    TPMCRBStateSysBus *s = TPM_CRB_SYSBUS(obj);
++
++    tpm_crb_init_memory(obj, &s->state, NULL);
++
++    vmstate_register_ram(&s->state.mmio, DEVICE(obj));
++
++    sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->state.mmio);
++}
++
++static void tpm_crb_sysbus_reset(DeviceState *dev)
++{
++    TPMCRBStateSysBus *s = TPM_CRB_SYSBUS(dev);
++
++    return tpm_crb_reset(&s->state, s->baseaddr);
++}
++
++static void tpm_crb_sysbus_realizefn(DeviceState *dev, Error **errp)
++{
++    TPMCRBStateSysBus *s = TPM_CRB_SYSBUS(dev);
++
++    if (!tpm_find()) {
++        error_setg(errp, "at most one TPM device is permitted");
++        return;
++    }
++
++    if (!s->state.tpmbe) {
++        error_setg(errp, "'tpmdev' property is required");
++        return;
++    }
++
++    if (tpm_crb_sysbus_get_tpm_version(TPM_IF(s)) != TPM_VERSION_2_0) {
++        error_setg(errp, "TPM CRB only supports TPM 2.0 backends");
++        return;
++    }
++}
++
++static void build_tpm_crb_sysbus_aml(AcpiDevAmlIf *adev, Aml *scope)
++{
++    TPMCRBStateSysBus *s = TPM_CRB_SYSBUS(adev);
++
++    tpm_crb_build_aml(TPM_IF(adev), scope, s->baseaddr, s->size, false);
++}
++
++static void tpm_crb_sysbus_class_init(ObjectClass *klass, void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(klass);
++    TPMIfClass *tc = TPM_IF_CLASS(klass);
++    AcpiDevAmlIfClass *adevc = ACPI_DEV_AML_IF_CLASS(klass);
++
++    device_class_set_props(dc, tpm_crb_sysbus_properties);
++    dc->vmsd  = &vmstate_tpm_crb_sysbus;
++    tc->model = TPM_MODEL_TPM_CRB;
++    dc->realize = tpm_crb_sysbus_realizefn;
++    dc->user_creatable = true;
++    dc->reset = tpm_crb_sysbus_reset;
++    tc->request_completed = tpm_crb_sysbus_request_completed;
++    tc->get_version = tpm_crb_sysbus_get_tpm_version;
++    set_bit(DEVICE_CATEGORY_MISC, dc->categories);
++    adevc->build_dev_aml = build_tpm_crb_sysbus_aml;
++}
++
++static const TypeInfo tpm_crb_sysbus_info = {
++    .name = TYPE_TPM_CRB_SYSBUS,
++    .parent = TYPE_SYS_BUS_DEVICE,
++    .instance_size = sizeof(TPMCRBStateSysBus),
++    .instance_init = tpm_crb_sysbus_initfn,
++    .class_init  = tpm_crb_sysbus_class_init,
++    .interfaces = (InterfaceInfo[]) {
++        { TYPE_TPM_IF },
++        { TYPE_ACPI_DEV_AML_IF },
++        { }
++    }
++};
++
++static void tpm_crb_sysbus_register(void)
++{
++    type_register_static(&tpm_crb_sysbus_info);
++}
++
++type_init(tpm_crb_sysbus_register)
+diff --git a/hw/arm/Kconfig b/hw/arm/Kconfig
+index 3ada335a24..f524994fd3 100644
+--- a/hw/arm/Kconfig
++++ b/hw/arm/Kconfig
+@@ -5,6 +5,7 @@ config ARM_VIRT
+     imply VFIO_AMD_XGBE
+     imply VFIO_PLATFORM
+     imply VFIO_XGMAC
++    imply TPM_CRB_SYSBUS
+     imply TPM_TIS_SYSBUS
+     imply TPM_TIS_I2C
+     imply NVDIMM
+diff --git a/hw/loongarch/Kconfig b/hw/loongarch/Kconfig
+index 25da190ffc..70544f3ce5 100644
+--- a/hw/loongarch/Kconfig
++++ b/hw/loongarch/Kconfig
+@@ -6,6 +6,7 @@ config LOONGARCH_VIRT
+     imply PCI_DEVICES
+     imply NVDIMM
+     imply TPM_TIS_SYSBUS
++    imply TPM_CRB_SYSBUS
+     select SERIAL
+     select VIRTIO_PCI
+     select PLATFORM_BUS
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index b6a5eb4452..d824cb58f9 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -29,6 +29,7 @@ config RISCV_VIRT
+     imply PCI_DEVICES
+     imply VIRTIO_VGA
+     imply TEST_DEVICES
++    imply TPM_CRB_SYSBUS
+     imply TPM_TIS_SYSBUS
+     select RISCV_NUMA
+     select GOLDFISH_RTC
+diff --git a/hw/tpm/Kconfig b/hw/tpm/Kconfig
+index a46663288c..28139c456a 100644
+--- a/hw/tpm/Kconfig
++++ b/hw/tpm/Kconfig
+@@ -25,6 +25,11 @@ config TPM_CRB
+     depends on TPM && PC
+     select TPM_BACKEND
+ 
++config TPM_CRB_SYSBUS
++    bool
++    depends on TPM
++    select TPM_BACKEND
++
+ config TPM_SPAPR
+     bool
+     default y
+diff --git a/hw/tpm/meson.build b/hw/tpm/meson.build
+index 3060ac05e8..f2536c99e3 100644
+--- a/hw/tpm/meson.build
++++ b/hw/tpm/meson.build
+@@ -5,6 +5,9 @@ system_ss.add(when: 'CONFIG_TPM_TIS_SYSBUS', if_true: files('tpm-sysbus.c'))
+ system_ss.add(when: 'CONFIG_TPM_TIS_I2C', if_true: files('tpm_tis_i2c.c'))
+ system_ss.add(when: 'CONFIG_TPM_CRB', if_true: files('tpm_crb.c'))
+ system_ss.add(when: 'CONFIG_TPM_CRB', if_true: files('tpm_crb_common.c'))
++system_ss.add(when: 'CONFIG_TPM_CRB_SYSBUS', if_true: files('tpm_crb_sysbus.c'))
++system_ss.add(when: 'CONFIG_TPM_CRB_SYSBUS', if_true: files('tpm_crb_common.c'))
++system_ss.add(when: 'CONFIG_TPM_CRB_SYSBUS', if_true: files('tpm-sysbus.c'))
+ system_ss.add(when: 'CONFIG_TPM_TIS', if_true: files('tpm_ppi.c'))
+ system_ss.add(when: 'CONFIG_TPM_CRB', if_true: files('tpm_ppi.c'))
+ 
+-- 
+2.41.0
 
 
