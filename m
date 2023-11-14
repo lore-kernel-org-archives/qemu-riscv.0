@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 442A0C54F9E
-	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Nov 2023 23:59:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98AF0C54FAF
+	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Nov 2023 23:59:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r33Iu-0001CU-IJ; Tue, 14 Nov 2023 18:58:48 -0500
+	id 1r33Ha-000814-I1; Tue, 14 Nov 2023 18:57:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33Is-00012h-6K
- for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 18:58:46 -0500
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33HY-00080L-Im
+ for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 18:57:24 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33In-00073j-SK
- for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 18:58:45 -0500
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33HV-0006m6-TK
+ for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 18:57:24 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1700006319;
+ s=mimecast20190719; t=1700006240;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=rZKg1/2JlTQ35ZjVGKYHI5rgb9pxMB3aE/K4wIwjIL8=;
- b=cV4F9KAF55Zc3N4Lf6A9/8WCGmtRoegVC8mtA2tIPQN2urIIKoYpkmmbdQrxfBRCHUTQNp
- e+B+LuxiJ2ei3ulsTbGt3f5LKPUUnNo2c9aG8pCrUyAREhGzZwrc7RTy7lf1Z3NCJKFHu/
- bSCiROhwEeT54W4Z370cuT3pYfOot4M=
+ bh=fAEKFsnvxg6qMTnNDpGnLRRSZq8eMGOmCV91a2WmeRM=;
+ b=CFGS/t/SPvI2KSMQd1Zt/s47bggioaRg8EDgIZ0W/SehIydkUUKxy9k3awJ22Rc20wjrvo
+ o6g8qDoaBP/CizfDVS5p3LB8PhRuevHdy1sxSEtN8ffCTRrguRxVcyfGjIKC36dzj5nT+k
+ j4BetOm7aU2PEPcMupqILS7RgkO1CRw=
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-689-7FEO49NsPPuaobwdMDOacA-1; Tue, 14 Nov 2023 18:58:34 -0500
-X-MC-Unique: 7FEO49NsPPuaobwdMDOacA-1
+ us-mta-185-aGwmbNiuOS2K-hn9yFnC6w-1; Tue, 14 Nov 2023 18:57:14 -0500
+X-MC-Unique: aGwmbNiuOS2K-hn9yFnC6w-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
  [10.11.54.8])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 03AB2185A782;
- Tue, 14 Nov 2023 23:58:33 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id E7189185A781;
+ Tue, 14 Nov 2023 23:57:12 +0000 (UTC)
 Received: from gshan.redhat.com (unknown [10.64.136.44])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 797EBC15885;
- Tue, 14 Nov 2023 23:58:20 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 44E62C15885;
+ Tue, 14 Nov 2023 23:57:00 +0000 (UTC)
 From: Gavin Shan <gshan@redhat.com>
 To: qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
@@ -61,9 +61,9 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  chenhuacai@kernel.org, shorne@gmail.com, npiggin@gmail.com, clg@kaod.org,
  ysato@users.sourceforge.jp, kbastian@mail.uni-paderborn.de,
  jcmvbkbc@gmail.com, shan.gavin@gmail.com
-Subject: [PATCH v5 07/31] target/alpha: Use generic cpu_list()
-Date: Wed, 15 Nov 2023 09:56:04 +1000
-Message-ID: <20231114235628.534334-8-gshan@redhat.com>
+Subject: [PATCH v5 01/31] target/alpha: Remove 'ev67' CPU class
+Date: Wed, 15 Nov 2023 09:55:58 +1000
+Message-ID: <20231114235628.534334-2-gshan@redhat.com>
 In-Reply-To: <20231114235628.534334-1-gshan@redhat.com>
 References: <20231114235628.534334-1-gshan@redhat.com>
 MIME-Version: 1.0
@@ -95,85 +95,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Before it's applied:
-
-[gshan@gshan q]$ ./build/qemu-system-alpha -cpu ?
-Available CPUs:
-  ev4-alpha-cpu
-  ev5-alpha-cpu
-  ev56-alpha-cpu
-  ev6-alpha-cpu
-  ev67-alpha-cpu
-  ev68-alpha-cpu
-  pca56-alpha-cpu
-
-After it's applied:
-
-[gshan@gshan q]$ ./build/qemu-system-alpha -cpu ?
-Available CPUs:
-  ev4
-  ev5
-  ev56
-  ev6
-  ev67
-  ev68
-  pca56
+'ev67' CPU class will be returned to match everything, which makes
+no sense as mentioned in the comments. Remove the logic to fall
+back to 'ev67' CPU class to match everything.
 
 Signed-off-by: Gavin Shan <gshan@redhat.com>
 ---
- target/alpha/cpu.c | 17 -----------------
- target/alpha/cpu.h |  3 ---
- 2 files changed, 20 deletions(-)
+ target/alpha/cpu.c | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
 
 diff --git a/target/alpha/cpu.c b/target/alpha/cpu.c
-index c19257d765..cece69bfa6 100644
+index 39cf841b3e..91fe8ae095 100644
 --- a/target/alpha/cpu.c
 +++ b/target/alpha/cpu.c
-@@ -87,23 +87,6 @@ static void alpha_cpu_realizefn(DeviceState *dev, Error **errp)
-     acc->parent_realize(dev, errp);
- }
- 
--static void alpha_cpu_list_entry(gpointer data, gpointer user_data)
--{
--    ObjectClass *oc = data;
+@@ -141,11 +141,8 @@ static ObjectClass *alpha_cpu_class_by_name(const char *cpu_model)
+     typename = g_strdup_printf(ALPHA_CPU_TYPE_NAME("%s"), cpu_model);
+     oc = object_class_by_name(typename);
+     g_free(typename);
 -
--    qemu_printf("  %s\n", object_class_get_name(oc));
--}
--
--void alpha_cpu_list(void)
--{
--    GSList *list;
--
--    list = object_class_get_list_sorted(TYPE_ALPHA_CPU, false);
--    qemu_printf("Available CPUs:\n");
--    g_slist_foreach(list, alpha_cpu_list_entry, NULL);
--    g_slist_free(list);
--}
--
- /* Models */
- typedef struct AlphaCPUAlias {
-     const char *alias;
-diff --git a/target/alpha/cpu.h b/target/alpha/cpu.h
-index d672e911dd..ce806587ca 100644
---- a/target/alpha/cpu.h
-+++ b/target/alpha/cpu.h
-@@ -292,8 +292,6 @@ void alpha_cpu_dump_state(CPUState *cs, FILE *f, int flags);
- int alpha_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
- int alpha_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
+-    /* TODO: remove match everything nonsense */
+-    if (!oc || object_class_is_abstract(oc)) {
+-        /* Default to ev67; no reason not to emulate insns by default. */
+-        oc = object_class_by_name(ALPHA_CPU_TYPE_NAME("ev67"));
++    if (!oc || !object_class_dynamic_cast(oc, TYPE_ALPHA_CPU)) {
++        return NULL;
+     }
  
--#define cpu_list alpha_cpu_list
--
- #include "exec/cpu-all.h"
- 
- enum {
-@@ -441,7 +439,6 @@ void alpha_translate_init(void);
- 
- #define CPU_RESOLVING_TYPE TYPE_ALPHA_CPU
- 
--void alpha_cpu_list(void);
- G_NORETURN void dynamic_excp(CPUAlphaState *, uintptr_t, int, int);
- G_NORETURN void arith_excp(CPUAlphaState *, uintptr_t, int, uint64_t);
- 
+     return oc;
 -- 
 2.41.0
 
