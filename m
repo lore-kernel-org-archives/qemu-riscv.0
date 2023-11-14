@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BB1FC47DA7
-	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Nov 2023 00:02:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E82BBC3DA79
+	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Nov 2023 00:03:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r33Kg-0005hO-HM; Tue, 14 Nov 2023 19:00:38 -0500
+	id 1r33Lz-0007M5-8B; Tue, 14 Nov 2023 19:02:02 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33Ke-0005SE-IG
- for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 19:00:36 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33Ls-0007Gi-BE
+ for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 19:01:54 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33KM-0007vC-Ob
- for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 19:00:29 -0500
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33Lb-0008D3-NT
+ for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 19:01:50 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1700006418;
+ s=mimecast20190719; t=1700006495;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=MQ6OO5BRPdbvEJMn2gMZcE2xIKykdClZQVBu6Oydv2k=;
- b=anpY9jgEkVeQuT+oHecwP0WdmIgXWExF/ubNIm6kQ6EUJlB+zRfWXQ7OMAoHNPDp6c/aT/
- by48s/2SF5ZNd/ebLx3LVzZht30p2KHntVzCUb4UiWK3vPO/u1HL9IsQmyS5O4G2JmIj7E
- XA+NzqS7Uvbiod9epekDLSig3+H8GAU=
+ bh=PVpSfOoz03h777B/rb6Tl132+Io9+3dWRLTS26mmxwY=;
+ b=BZO18xtf4Po+tDD7ZJfb9+JN79F1rcPml8lJ8Aj2JlBfSM6lz3Ac/WnEkGZRNpxx+5Kebf
+ JDG5JNAB56kYVgsydqDf3IGXTXox3hCuqrm3gKq4IyBNoSV82eo+YrUMgbNN7NRCPtJNoL
+ jTnNfGL3oNkicQgAezovFANGe8T/fxI=
 Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
  by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-658-FeZK4i5GM7ChY_OZroJnlg-1; Tue,
- 14 Nov 2023 19:00:11 -0500
-X-MC-Unique: FeZK4i5GM7ChY_OZroJnlg-1
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-373-kDujcUSEPguZ7CIxUmsmhQ-1; Tue,
+ 14 Nov 2023 19:01:31 -0500
+X-MC-Unique: kDujcUSEPguZ7CIxUmsmhQ-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
  [10.11.54.8])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id E0C073800083;
- Wed, 15 Nov 2023 00:00:08 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 722323800083;
+ Wed, 15 Nov 2023 00:01:29 +0000 (UTC)
 Received: from gshan.redhat.com (unknown [10.64.136.44])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 4E9C8C15885;
- Tue, 14 Nov 2023 23:59:56 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 9DA01C15887;
+ Wed, 15 Nov 2023 00:01:16 +0000 (UTC)
 From: Gavin Shan <gshan@redhat.com>
 To: qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
@@ -61,16 +61,16 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  chenhuacai@kernel.org, shorne@gmail.com, npiggin@gmail.com, clg@kaod.org,
  ysato@users.sourceforge.jp, kbastian@mail.uni-paderborn.de,
  jcmvbkbc@gmail.com, shan.gavin@gmail.com
-Subject: [PATCH v5 14/31] target/m68k: Use generic cpu_list()
-Date: Wed, 15 Nov 2023 09:56:11 +1000
-Message-ID: <20231114235628.534334-15-gshan@redhat.com>
+Subject: [PATCH v5 20/31] target/tricore: Use generic cpu_list()
+Date: Wed, 15 Nov 2023 09:56:17 +1000
+Message-ID: <20231114235628.534334-21-gshan@redhat.com>
 In-Reply-To: <20231114235628.534334-1-gshan@redhat.com>
 References: <20231114235628.534334-1-gshan@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.8
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=gshan@redhat.com;
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=gshan@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
@@ -94,114 +94,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Before it's applied:
+No changes in the output from the following command.
 
-[gshan@gshan q]$ ./build/qemu-system-m68k -cpu ?
-cfv4e
-m5206
-m5208
-m68000
-m68010
-m68020
-m68030
-m68040
-m68060
-any
-
-After it's applied:
-
-[gshan@gshan q]$ ./build/qemu-system-m68k -cpu ?
+[gshan@gshan q]$ ./build/qemu-system-tricore -cpu ?
 Available CPUs:
-  any
-  cfv4e
-  m5206
-  m5208
-  m68000
-  m68010
-  m68020
-  m68030
-  m68040
-  m68060
+  tc1796
+  tc1797
+  tc27x
+  tc37x
 
 Signed-off-by: Gavin Shan <gshan@redhat.com>
 ---
- target/m68k/cpu.h    |  4 ----
- target/m68k/helper.c | 40 ----------------------------------------
- 2 files changed, 44 deletions(-)
+ target/tricore/cpu.h    |  4 ----
+ target/tricore/helper.c | 22 ----------------------
+ 2 files changed, 26 deletions(-)
 
-diff --git a/target/m68k/cpu.h b/target/m68k/cpu.h
-index 6cfc696d2b..d13427b0fe 100644
---- a/target/m68k/cpu.h
-+++ b/target/m68k/cpu.h
-@@ -556,8 +556,6 @@ static inline bool m68k_feature(CPUM68KState *env, int feature)
-     return (env->features & BIT_ULL(feature)) != 0;
+diff --git a/target/tricore/cpu.h b/target/tricore/cpu.h
+index de3ab53a83..2d4446cea5 100644
+--- a/target/tricore/cpu.h
++++ b/target/tricore/cpu.h
+@@ -246,10 +246,6 @@ void fpu_set_state(CPUTriCoreState *env);
+ 
+ #define MMU_USER_IDX 2
+ 
+-void tricore_cpu_list(void);
+-
+-#define cpu_list tricore_cpu_list
+-
+ static inline int cpu_mmu_index(CPUTriCoreState *env, bool ifetch)
+ {
+     return 0;
+diff --git a/target/tricore/helper.c b/target/tricore/helper.c
+index 7e5da3cb23..174f666e1e 100644
+--- a/target/tricore/helper.c
++++ b/target/tricore/helper.c
+@@ -96,28 +96,6 @@ bool tricore_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+     }
  }
  
--void m68k_cpu_list(void);
--
- void register_m68k_insns (CPUM68KState *env);
- 
- enum {
-@@ -576,8 +574,6 @@ enum {
- 
- #define CPU_RESOLVING_TYPE TYPE_M68K_CPU
- 
--#define cpu_list m68k_cpu_list
--
- /* MMU modes definitions */
- #define MMU_KERNEL_IDX 0
- #define MMU_USER_IDX 1
-diff --git a/target/m68k/helper.c b/target/m68k/helper.c
-index 0a1544cd68..14508dfa11 100644
---- a/target/m68k/helper.c
-+++ b/target/m68k/helper.c
-@@ -29,46 +29,6 @@
- 
- #define SIGNBIT (1u << 31)
- 
--/* Sort alphabetically, except for "any". */
--static gint m68k_cpu_list_compare(gconstpointer a, gconstpointer b)
+-static void tricore_cpu_list_entry(gpointer data, gpointer user_data)
 -{
--    ObjectClass *class_a = (ObjectClass *)a;
--    ObjectClass *class_b = (ObjectClass *)b;
--    const char *name_a, *name_b;
--
--    name_a = object_class_get_name(class_a);
--    name_b = object_class_get_name(class_b);
--    if (strcmp(name_a, "any-" TYPE_M68K_CPU) == 0) {
--        return 1;
--    } else if (strcmp(name_b, "any-" TYPE_M68K_CPU) == 0) {
--        return -1;
--    } else {
--        return strcasecmp(name_a, name_b);
--    }
--}
--
--static void m68k_cpu_list_entry(gpointer data, gpointer user_data)
--{
--    ObjectClass *c = data;
+-    ObjectClass *oc = data;
 -    const char *typename;
 -    char *name;
 -
--    typename = object_class_get_name(c);
--    name = g_strndup(typename, strlen(typename) - strlen("-" TYPE_M68K_CPU));
--    qemu_printf("%s\n", name);
+-    typename = object_class_get_name(oc);
+-    name = g_strndup(typename, strlen(typename) - strlen("-" TYPE_TRICORE_CPU));
+-    qemu_printf("  %s\n", name);
 -    g_free(name);
 -}
 -
--void m68k_cpu_list(void)
+-void tricore_cpu_list(void)
 -{
 -    GSList *list;
 -
--    list = object_class_get_list(TYPE_M68K_CPU, false);
--    list = g_slist_sort(list, m68k_cpu_list_compare);
--    g_slist_foreach(list, m68k_cpu_list_entry, NULL);
+-    list = object_class_get_list_sorted(TYPE_TRICORE_CPU, false);
+-    qemu_printf("Available CPUs:\n");
+-    g_slist_foreach(list, tricore_cpu_list_entry, NULL);
 -    g_slist_free(list);
 -}
 -
- static int cf_fpu_gdb_get_reg(CPUM68KState *env, GByteArray *mem_buf, int n)
+ void fpu_set_state(CPUTriCoreState *env)
  {
-     if (n < 8) {
+     switch (extract32(env->PSW, 24, 2)) {
 -- 
 2.41.0
 
