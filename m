@@ -4,86 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DD70C4332F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Nov 2023 17:51:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9CA2C54F8C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Nov 2023 23:58:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r2xYY-0008TS-0r; Tue, 14 Nov 2023 12:50:35 -0500
+	id 1r33Hk-00082n-Js; Tue, 14 Nov 2023 18:57:36 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1r2xYX-0008T5-2y
- for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 12:50:33 -0500
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1r2xYT-0006z0-TG
- for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 12:50:31 -0500
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-1cc394f4cdfso44300465ad.0
- for <qemu-riscv@nongnu.org>; Tue, 14 Nov 2023 09:50:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1699984227; x=1700589027; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=b8g4aEzC7MDrvie62XuhD4OwHUARoyUTJrBmidINrEA=;
- b=XG4xAUXtWKSxfr5o/i0HXLYYO82DukMvp/VLiEL3wTW3Gk+jLfyofokAcmD0O6QPsD
- +LJOCYLa+pZHzzxm1EELdg4Li68brBPFOrthxP8WHyfQGOxQai5iuG3KTpFORJvwvFoY
- Cw0zsnEAxwVglZtB1G23CPeNpvGFLRxyCL8liiBAvQ28q5vWuhTWVStZwTvjhSjHA5yc
- 0QJtRbBRadzbRbE2RGf3kkYT/fg4UsvbqEZIcHkcT5G4mpZcUnvJfpJf4XFXJf1otJ3O
- tajKmxCeWSoPK2XRj4C5budJbNsZoJuPEibIIfNRE9MlqHoRgGhZ4CuZcL9nolqAosIq
- IXfg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699984227; x=1700589027;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=b8g4aEzC7MDrvie62XuhD4OwHUARoyUTJrBmidINrEA=;
- b=TR3b6y7wSIX4Cy2Djn6RJam1zb1ErYQs6Cn8v9ZOXOAsGUW+z2AcTjGimbP2hezl+o
- PurVczo0YkzYulg2/nPYz+cEAaGT/oIMBxLM6asTtdOVJewelxjxtB96Au1DuJF4LezX
- VVGzq3V9S9UxPkGiCnBMPJLB0XibmMLlo4SNSCTnb9qMpv4Ot632gk4p4COO3jG2zBqD
- wRpg6ZB724pSXMpHAKFCu6IuJ9hsLPd1UutASj0Uvxo/LnQrCopmYo8ZwXZ/bwBEWaye
- DuzIFKoh/jLVAHwTa68hBWHcP+vIb7kOHy5/oFt0R0LygiGXH8YgRX0bPA5LuFzBY4LY
- W2Vg==
-X-Gm-Message-State: AOJu0YwFaOqo0yPLAfD/2vzGIXjukfurV3B98Vw+u52fVTI6bgDOOueB
- o+Ew4YFyVzIwWIXF+cNVN9hKow==
-X-Google-Smtp-Source: AGHT+IHrsUaNqq7GmSH/FArq9RtXh2AdM/kH2o6gLTMp08p01KbsXrj6GHaudqdxHxNKeuiA4KBM0A==
-X-Received: by 2002:a17:902:da89:b0:1cc:3932:4a95 with SMTP id
- j9-20020a170902da8900b001cc39324a95mr3610401plx.62.1699984227546; 
- Tue, 14 Nov 2023 09:50:27 -0800 (PST)
-Received: from [192.168.68.109] ([152.250.131.148])
- by smtp.gmail.com with ESMTPSA id
- jf14-20020a170903268e00b001b89891bfc4sm5919677plb.199.2023.11.14.09.50.23
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 14 Nov 2023 09:50:27 -0800 (PST)
-Message-ID: <21de33ac-5f9c-46c6-bca0-3de2116e71a6@ventanamicro.com>
-Date: Tue, 14 Nov 2023 14:50:21 -0300
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33Hj-000826-Ac
+ for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 18:57:35 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33Hh-0006nO-Oy
+ for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 18:57:35 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1700006253;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=HjR+mV8IECSGVtRW/YEIv2k6pZHa6Lsbyk/hz9urYhM=;
+ b=S6pJjecDF4UFKISrZAVOHAB6CTP1YeRK81iairaGEJAeTuVX0rikJlk6rrMYlkir0AFoQt
+ +/N5OnjMkWMdUVzioKUz8/VDjTLNNc+rBTnoryWhkg+nTEdClDuAWzNWZ2V/itqYOuFEKq
+ tQm24TtigGLrXSI8RmG9gbNqDqbUJrs=
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-558-EA0TRCVeMFOH4WV3NOy7RQ-1; Tue,
+ 14 Nov 2023 18:57:28 -0500
+X-MC-Unique: EA0TRCVeMFOH4WV3NOy7RQ-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.8])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 348C11C18CC5;
+ Tue, 14 Nov 2023 23:57:26 +0000 (UTC)
+Received: from gshan.redhat.com (unknown [10.64.136.44])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 77CF4C15885;
+ Tue, 14 Nov 2023 23:57:13 +0000 (UTC)
+From: Gavin Shan <gshan@redhat.com>
+To: qemu-arm@nongnu.org
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
+ imp@bsdimp.com, kevans@freebsd.org, richard.henderson@linaro.org,
+ pbonzini@redhat.com, peter.maydell@linaro.org, imammedo@redhat.com,
+ philmd@linaro.org, b.galvani@gmail.com, strahinja.p.jankovic@gmail.com,
+ sundeep.lkml@gmail.com, kfting@nuvoton.com, wuhaotsh@google.com,
+ nieklinnenbank@gmail.com, rad@semihalf.com, quic_llindhol@quicinc.com,
+ marcin.juszkiewicz@linaro.org, eduardo@habkost.net,
+ marcel.apfelbaum@gmail.com, wangyanan55@huawei.com, laurent@vivier.eu,
+ vijai@behindbytes.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, mrolnik@gmail.com, edgar.iglesias@gmail.com,
+ bcain@quicinc.com, gaosong@loongson.cn, aurelien@aurel32.net,
+ jiaxun.yang@flygoat.com, aleksandar.rikalo@syrmia.com,
+ chenhuacai@kernel.org, shorne@gmail.com, npiggin@gmail.com, clg@kaod.org,
+ ysato@users.sourceforge.jp, kbastian@mail.uni-paderborn.de,
+ jcmvbkbc@gmail.com, shan.gavin@gmail.com
+Subject: [PATCH v5 02/31] target/hppa: Remove object_class_is_abstract()
+Date: Wed, 15 Nov 2023 09:55:59 +1000
+Message-ID: <20231114235628.534334-3-gshan@redhat.com>
+In-Reply-To: <20231114235628.534334-1-gshan@redhat.com>
+References: <20231114235628.534334-1-gshan@redhat.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/4] hw/riscv/virt: Add IOPMP support
-Content-Language: en-US
-To: Ethan Chen <ethan84@andestech.com>, qemu-devel@nongnu.org
-Cc: peter.maydell@linaro.org, edgar.iglesias@gmail.com,
- richard.henderson@linaro.org, pbonzini@redhat.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, in.meng@windriver.com, liweiwei@iscas.ac.cn,
- hiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, peterx@redhat.com,
- david@redhat.com
-References: <20231114094705.109146-1-ethan84@andestech.com>
- <20231114094705.109146-5-ethan84@andestech.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20231114094705.109146-5-ethan84@andestech.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62c.google.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.8
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=gshan@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -100,192 +95,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+No need to check if @oc is abstract because it has been covered
+by cpu_class_by_name().
 
+Signed-off-by: Gavin Shan <gshan@redhat.com>
+---
+ target/hppa/cpu.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-On 11/14/23 06:47, Ethan Chen wrote:
-> - Add 'iopmp=on' option to enable a iopmp device and a dma device
->   connect to the iopmp device
-> - Add 'iopmp_cascade=on' option to enable iopmp cascading.
-> 
-> Signed-off-by: Ethan Chen <ethan84@andestech.com>
-> ---
->   hw/riscv/Kconfig        |  2 ++
->   hw/riscv/virt.c         | 72 +++++++++++++++++++++++++++++++++++++++--
->   include/hw/riscv/virt.h | 10 +++++-
->   3 files changed, 81 insertions(+), 3 deletions(-)
-> 
-> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> index b6a5eb4452..c30a104aa4 100644
-> --- a/hw/riscv/Kconfig
-> +++ b/hw/riscv/Kconfig
-> @@ -45,6 +45,8 @@ config RISCV_VIRT
->       select FW_CFG_DMA
->       select PLATFORM_BUS
->       select ACPI
-> +    select ATCDMAC300
-> +    select RISCV_IOPMP
->   
->   config SHAKTI_C
->       bool
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index c7fc97e273..3e23ee3afc 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -53,6 +53,8 @@
->   #include "hw/display/ramfb.h"
->   #include "hw/acpi/aml-build.h"
->   #include "qapi/qapi-visit-common.h"
-> +#include "hw/misc/riscv_iopmp.h"
-> +#include "hw/dma/atcdmac300.h"
->   
->   /*
->    * The virt machine physical address space used by some of the devices
-> @@ -97,6 +99,9 @@ static const MemMapEntry virt_memmap[] = {
->       [VIRT_UART0] =        { 0x10000000,         0x100 },
->       [VIRT_VIRTIO] =       { 0x10001000,        0x1000 },
->       [VIRT_FW_CFG] =       { 0x10100000,          0x18 },
-> +    [VIRT_IOPMP] =        { 0x10200000,      0x100000 },
-> +    [VIRT_IOPMP2] =       { 0x10300000,      0x100000 },
-> +    [VIRT_DMAC] =         { 0x10400000,      0x100000 },
->       [VIRT_FLASH] =        { 0x20000000,     0x4000000 },
->       [VIRT_IMSIC_M] =      { 0x24000000, VIRT_IMSIC_MAX_SIZE },
->       [VIRT_IMSIC_S] =      { 0x28000000, VIRT_IMSIC_MAX_SIZE },
-> @@ -1527,13 +1532,33 @@ static void virt_machine_init(MachineState *machine)
->   
->       create_platform_bus(s, mmio_irqchip);
->   
-> -    serial_mm_init(system_memory, memmap[VIRT_UART0].base,
-> -        0, qdev_get_gpio_in(mmio_irqchip, UART0_IRQ), 399193,
-> +    serial_mm_init(system_memory, memmap[VIRT_UART0].base + 0x20,
-> +        0x2, qdev_get_gpio_in(mmio_irqchip, UART0_IRQ), 38400,
->           serial_hd(0), DEVICE_LITTLE_ENDIAN);
+diff --git a/target/hppa/cpu.c b/target/hppa/cpu.c
+index 04de1689d7..fc4d2abad7 100644
+--- a/target/hppa/cpu.c
++++ b/target/hppa/cpu.c
+@@ -163,7 +163,6 @@ static ObjectClass *hppa_cpu_class_by_name(const char *cpu_model)
+     ObjectClass *oc = object_class_by_name(typename);
+ 
+     if (oc &&
+-        !object_class_is_abstract(oc) &&
+         object_class_dynamic_cast(oc, TYPE_HPPA_CPU)) {
+         return oc;
+     }
+-- 
+2.41.0
 
-It would be good to have some variables/macros to hold these literals like '0x20'
-since they aren't self-explanatory when reading the code.
-
->   
->       sysbus_create_simple("goldfish_rtc", memmap[VIRT_RTC].base,
->           qdev_get_gpio_in(mmio_irqchip, RTC_IRQ));
->   
-> +    /* DMAC */
-> +    DeviceState *dmac_dev = atcdmac300_create("atcdmac300",
-> +        memmap[VIRT_DMAC].base, memmap[VIRT_DMAC].size,
-> +        qdev_get_gpio_in(DEVICE(mmio_irqchip), DMAC_IRQ));
-> +
-> +    if (s->have_iopmp) {
-> +        /* IOPMP */
-> +        DeviceState *iopmp_dev = iopmp_create(memmap[VIRT_IOPMP].base,
-> +            qdev_get_gpio_in(DEVICE(mmio_irqchip), IOPMP_IRQ));
-> +        /* DMA with IOPMP */
-> +        atcdmac300_connect_iopmp(dmac_dev, &(IOPMP(iopmp_dev)->iopmp_as),
-> +            (StreamSink *)&(IOPMP(iopmp_dev)->transaction_info_sink), 0);
-> +        if (s->have_iopmp_cascade) {
-> +            DeviceState *iopmp_dev2 = iopmp_create(memmap[VIRT_IOPMP2].base,
-> +                qdev_get_gpio_in(DEVICE(mmio_irqchip), IOPMP2_IRQ));
-> +            cascade_iopmp(iopmp_dev, iopmp_dev2);
-> +        }
-> +    }
-> +
-> +
-
-Extra blank line.
-
-Everything else LGTM. Thanks,
-
-
-Daniel
-
->       for (i = 0; i < ARRAY_SIZE(s->flash); i++) {
->           /* Map legacy -drive if=pflash to machine properties */
->           pflash_cfi01_legacy_drive(s->flash[i],
-> @@ -1628,6 +1653,35 @@ static void virt_set_aclint(Object *obj, bool value, Error **errp)
->       s->have_aclint = value;
->   }
->   
-> +static bool virt_get_iopmp(Object *obj, Error **errp)
-> +{
-> +    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
-> +
-> +    return s->have_iopmp;
-> +}
-> +
-> +static void virt_set_iopmp(Object *obj, bool value, Error **errp)
-> +{
-> +    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
-> +
-> +    s->have_iopmp = value;
-> +}
-> +
-> +static bool virt_get_iopmp_cascade(Object *obj, Error **errp)
-> +{
-> +    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
-> +
-> +    return s->have_iopmp_cascade;
-> +}
-> +
-> +static void virt_set_iopmp_cascade(Object *obj, bool value, Error **errp)
-> +{
-> +    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
-> +
-> +    s->have_iopmp_cascade = value;
-> +}
-> +
-> +
->   bool virt_is_acpi_enabled(RISCVVirtState *s)
->   {
->       return s->acpi != ON_OFF_AUTO_OFF;
-> @@ -1730,6 +1784,20 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
->                                 NULL, NULL);
->       object_class_property_set_description(oc, "acpi",
->                                             "Enable ACPI");
-> +
-> +    object_class_property_add_bool(oc, "iopmp", virt_get_iopmp,
-> +                                   virt_set_iopmp);
-> +    object_class_property_set_description(oc, "iopmp",
-> +                                          "Set on/off to enable/disable "
-> +                                          "iopmp device");
-> +
-> +    object_class_property_add_bool(oc, "iopmp-cascade",
-> +                                   virt_get_iopmp_cascade,
-> +                                   virt_set_iopmp_cascade);
-> +    object_class_property_set_description(oc, "iopmp-cascade",
-> +                                          "Set on/off to enable/disable "
-> +                                          "iopmp2 device which is cascaded by "
-> +                                          "iopmp1 device");
->   }
->   
->   static const TypeInfo virt_machine_typeinfo = {
-> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-> index e5c474b26e..5fa2944d29 100644
-> --- a/include/hw/riscv/virt.h
-> +++ b/include/hw/riscv/virt.h
-> @@ -54,6 +54,8 @@ struct RISCVVirtState {
->   
->       int fdt_size;
->       bool have_aclint;
-> +    bool have_iopmp;
-> +    bool have_iopmp_cascade;
->       RISCVVirtAIAType aia_type;
->       int aia_guests;
->       char *oem_id;
-> @@ -82,12 +84,18 @@ enum {
->       VIRT_PCIE_MMIO,
->       VIRT_PCIE_PIO,
->       VIRT_PLATFORM_BUS,
-> -    VIRT_PCIE_ECAM
-> +    VIRT_PCIE_ECAM,
-> +    VIRT_IOPMP,
-> +    VIRT_IOPMP2,
-> +    VIRT_DMAC,
->   };
->   
->   enum {
->       UART0_IRQ = 10,
->       RTC_IRQ = 11,
-> +    DMAC_IRQ = 12,
-> +    IOPMP_IRQ = 13,
-> +    IOPMP2_IRQ = 14,
->       VIRTIO_IRQ = 1, /* 1 to 8 */
->       VIRTIO_COUNT = 8,
->       PCIE_IRQ = 0x20, /* 32 to 35 */
 
