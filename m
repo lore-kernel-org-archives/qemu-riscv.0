@@ -4,82 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CFD4C4332F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Nov 2023 00:09:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A1E4C4332F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Nov 2023 01:52:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r33MZ-0008Mw-Oz; Tue, 14 Nov 2023 19:02:35 -0500
+	id 1r354T-0004YS-5r; Tue, 14 Nov 2023 20:52:01 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33MX-0008KL-LZ
- for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 19:02:33 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
+ id 1r354R-0004YE-Jw; Tue, 14 Nov 2023 20:51:59 -0500
+Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
+ helo=Atcsqr.andestech.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r33MV-0008Kr-Ko
- for qemu-riscv@nongnu.org; Tue, 14 Nov 2023 19:02:33 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1700006551;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Lu8QJO9KDwDOmzdkBAnOVeCD39qe2P6zlwVvhT3kRpk=;
- b=b42MN9qaOmyedamA8+o7qStAsBHCMLvWmEmPpY6H+FSqVYETll3bqsf/CBa/iy5YJW0PXS
- t4EWOZIHCmu536UlQEd9h5sUWxpce9AdRizRQa1qM2RhO/yaQdUM7gsKSxJgxVlEWfGOXY
- FKmzYvp2zqowLP70t3rL8AFNL0AlDTo=
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-15-k69DLkiQM4WTVbvicLwblA-1; Tue,
- 14 Nov 2023 19:02:25 -0500
-X-MC-Unique: k69DLkiQM4WTVbvicLwblA-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
- [10.11.54.8])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 66B2B38476A4;
- Wed, 15 Nov 2023 00:02:23 +0000 (UTC)
-Received: from gshan.redhat.com (unknown [10.64.136.44])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 93C3DC15885;
- Wed, 15 Nov 2023 00:02:10 +0000 (UTC)
-From: Gavin Shan <gshan@redhat.com>
-To: qemu-arm@nongnu.org
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
- imp@bsdimp.com, kevans@freebsd.org, richard.henderson@linaro.org,
- pbonzini@redhat.com, peter.maydell@linaro.org, imammedo@redhat.com,
- philmd@linaro.org, b.galvani@gmail.com, strahinja.p.jankovic@gmail.com,
- sundeep.lkml@gmail.com, kfting@nuvoton.com, wuhaotsh@google.com,
- nieklinnenbank@gmail.com, rad@semihalf.com, quic_llindhol@quicinc.com,
- marcin.juszkiewicz@linaro.org, eduardo@habkost.net,
- marcel.apfelbaum@gmail.com, wangyanan55@huawei.com, laurent@vivier.eu,
- vijai@behindbytes.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, mrolnik@gmail.com, edgar.iglesias@gmail.com,
- bcain@quicinc.com, gaosong@loongson.cn, aurelien@aurel32.net,
- jiaxun.yang@flygoat.com, aleksandar.rikalo@syrmia.com,
- chenhuacai@kernel.org, shorne@gmail.com, npiggin@gmail.com, clg@kaod.org,
- ysato@users.sourceforge.jp, kbastian@mail.uni-paderborn.de,
- jcmvbkbc@gmail.com, shan.gavin@gmail.com
-Subject: [PATCH v5 24/31] machine: Use error handling when CPU type is checked
-Date: Wed, 15 Nov 2023 09:56:21 +1000
-Message-ID: <20231114235628.534334-25-gshan@redhat.com>
-In-Reply-To: <20231114235628.534334-1-gshan@redhat.com>
-References: <20231114235628.534334-1-gshan@redhat.com>
+ (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
+ id 1r354O-0001q7-GB; Tue, 14 Nov 2023 20:51:59 -0500
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 3AF1pTL7078770;
+ Wed, 15 Nov 2023 09:51:29 +0800 (+08)
+ (envelope-from ethan84@andestech.com)
+Received: from ethan84-VirtualBox (10.0.12.51) by ATCPCS16.andestech.com
+ (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; Wed, 15 Nov 2023
+ 09:51:30 +0800
+Date: Wed, 15 Nov 2023 09:51:24 +0800
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+CC: <qemu-devel@nongnu.org>, <peter.maydell@linaro.org>,
+ <edgar.iglesias@gmail.com>, <richard.henderson@linaro.org>,
+ <pbonzini@redhat.com>, <palmer@dabbelt.com>,
+ <alistair.francis@wdc.com>, <in.meng@windriver.com>,
+ <liweiwei@iscas.ac.cn>, <hiwei_liu@linux.alibaba.com>,
+ <qemu-riscv@nongnu.org>, <peterx@redhat.com>, <david@redhat.com>
+Subject: Re: [PATCH v3 4/4] hw/riscv/virt: Add IOPMP support
+Message-ID: <ZVQkHJcBwFOsGj5f@ethan84-VirtualBox>
+References: <20231114094705.109146-1-ethan84@andestech.com>
+ <20231114094705.109146-5-ethan84@andestech.com>
+ <21de33ac-5f9c-46c6-bca0-3de2116e71a6@ventanamicro.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.8
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=gshan@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <21de33ac-5f9c-46c6-bca0-3de2116e71a6@ventanamicro.com>
+User-Agent: Mutt/2.1.4 (2021-12-11)
+X-Originating-IP: [10.0.12.51]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 3AF1pTL7078770
+Received-SPF: pass client-ip=60.248.80.70; envelope-from=ethan84@andestech.com;
+ helo=Atcsqr.andestech.com
+X-Spam_score_int: -8
+X-Spam_score: -0.9
+X-Spam_bar: /
+X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9, RDNS_DYNAMIC=0.982,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001, TVD_RCVD_IP=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -92,61 +67,197 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-to:  Ethan Chen <ethan84@andestech.com>
+From:  Ethan Chen via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-QEMU will be terminated if the specified CPU type isn't supported
-in machine_run_board_init(). The list of supported CPU type names
-is tracked by mc->valid_cpu_types.
+On Tue, Nov 14, 2023 at 02:50:21PM -0300, Daniel Henrique Barboza wrote:
+> 
+> 
+> On 11/14/23 06:47, Ethan Chen wrote:
+> > - Add 'iopmp=on' option to enable a iopmp device and a dma device
+> >   connect to the iopmp device
+> > - Add 'iopmp_cascade=on' option to enable iopmp cascading.
+> > 
+> > Signed-off-by: Ethan Chen <ethan84@andestech.com>
+> > ---
+> >   hw/riscv/Kconfig        |  2 ++
+> >   hw/riscv/virt.c         | 72 +++++++++++++++++++++++++++++++++++++++--
+> >   include/hw/riscv/virt.h | 10 +++++-
+> >   3 files changed, 81 insertions(+), 3 deletions(-)
+> > 
+> > diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> > index b6a5eb4452..c30a104aa4 100644
+> > --- a/hw/riscv/Kconfig
+> > +++ b/hw/riscv/Kconfig
+> > @@ -45,6 +45,8 @@ config RISCV_VIRT
+> >       select FW_CFG_DMA
+> >       select PLATFORM_BUS
+> >       select ACPI
+> > +    select ATCDMAC300
+> > +    select RISCV_IOPMP
+> >   config SHAKTI_C
+> >       bool
+> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> > index c7fc97e273..3e23ee3afc 100644
+> > --- a/hw/riscv/virt.c
+> > +++ b/hw/riscv/virt.c
+> > @@ -53,6 +53,8 @@
+> >   #include "hw/display/ramfb.h"
+> >   #include "hw/acpi/aml-build.h"
+> >   #include "qapi/qapi-visit-common.h"
+> > +#include "hw/misc/riscv_iopmp.h"
+> > +#include "hw/dma/atcdmac300.h"
+> >   /*
+> >    * The virt machine physical address space used by some of the devices
+> > @@ -97,6 +99,9 @@ static const MemMapEntry virt_memmap[] = {
+> >       [VIRT_UART0] =        { 0x10000000,         0x100 },
+> >       [VIRT_VIRTIO] =       { 0x10001000,        0x1000 },
+> >       [VIRT_FW_CFG] =       { 0x10100000,          0x18 },
+> > +    [VIRT_IOPMP] =        { 0x10200000,      0x100000 },
+> > +    [VIRT_IOPMP2] =       { 0x10300000,      0x100000 },
+> > +    [VIRT_DMAC] =         { 0x10400000,      0x100000 },
+> >       [VIRT_FLASH] =        { 0x20000000,     0x4000000 },
+> >       [VIRT_IMSIC_M] =      { 0x24000000, VIRT_IMSIC_MAX_SIZE },
+> >       [VIRT_IMSIC_S] =      { 0x28000000, VIRT_IMSIC_MAX_SIZE },
+> > @@ -1527,13 +1532,33 @@ static void virt_machine_init(MachineState *machine)
+> >       create_platform_bus(s, mmio_irqchip);
+> > -    serial_mm_init(system_memory, memmap[VIRT_UART0].base,
+> > -        0, qdev_get_gpio_in(mmio_irqchip, UART0_IRQ), 399193,
+> > +    serial_mm_init(system_memory, memmap[VIRT_UART0].base + 0x20,
+> > +        0x2, qdev_get_gpio_in(mmio_irqchip, UART0_IRQ), 38400,
+> >           serial_hd(0), DEVICE_LITTLE_ENDIAN);
+> 
+> It would be good to have some variables/macros to hold these literals like '0x20'
+> since they aren't self-explanatory when reading the code.
 
-The error handling can be used to propagate error messages, to be
-consistent how the errors are handled for other situations in the
-same function.
+Sorry that this is my mistake. These two lines should not be modified.
 
-No functional change intended.
+> 
+> >       sysbus_create_simple("goldfish_rtc", memmap[VIRT_RTC].base,
+> >           qdev_get_gpio_in(mmio_irqchip, RTC_IRQ));
+> > +    /* DMAC */
+> > +    DeviceState *dmac_dev = atcdmac300_create("atcdmac300",
+> > +        memmap[VIRT_DMAC].base, memmap[VIRT_DMAC].size,
+> > +        qdev_get_gpio_in(DEVICE(mmio_irqchip), DMAC_IRQ));
+> > +
+> > +    if (s->have_iopmp) {
+> > +        /* IOPMP */
+> > +        DeviceState *iopmp_dev = iopmp_create(memmap[VIRT_IOPMP].base,
+> > +            qdev_get_gpio_in(DEVICE(mmio_irqchip), IOPMP_IRQ));
+> > +        /* DMA with IOPMP */
+> > +        atcdmac300_connect_iopmp(dmac_dev, &(IOPMP(iopmp_dev)->iopmp_as),
+> > +            (StreamSink *)&(IOPMP(iopmp_dev)->transaction_info_sink), 0);
+> > +        if (s->have_iopmp_cascade) {
+> > +            DeviceState *iopmp_dev2 = iopmp_create(memmap[VIRT_IOPMP2].base,
+> > +                qdev_get_gpio_in(DEVICE(mmio_irqchip), IOPMP2_IRQ));
+> > +            cascade_iopmp(iopmp_dev, iopmp_dev2);
+> > +        }
+> > +    }
+> > +
+> > +
+> 
+> Extra blank line.
+> 
+> Everything else LGTM. Thanks,
+> 
+> 
+> Daniel
 
-Suggested-by: Igor Mammedov <imammedo@redhat.com>
-Signed-off-by: Gavin Shan <gshan@redhat.com>
----
- hw/core/machine.c | 14 ++++++++------
- 1 file changed, 8 insertions(+), 6 deletions(-)
+I will fix the issue you mentioned.
 
-diff --git a/hw/core/machine.c b/hw/core/machine.c
-index 0c17398141..5b45dbbbd5 100644
---- a/hw/core/machine.c
-+++ b/hw/core/machine.c
-@@ -1394,6 +1394,7 @@ void machine_run_board_init(MachineState *machine, const char *mem_path, Error *
-     MachineClass *machine_class = MACHINE_GET_CLASS(machine);
-     ObjectClass *oc = object_class_by_name(machine->cpu_type);
-     CPUClass *cc;
-+    Error *local_err = NULL;
- 
-     /* This checkpoint is required by replay to separate prior clock
-        reading from the other reads, because timer polling functions query
-@@ -1466,15 +1467,16 @@ void machine_run_board_init(MachineState *machine, const char *mem_path, Error *
- 
-         if (!machine_class->valid_cpu_types[i]) {
-             /* The user specified CPU is not valid */
--            error_report("Invalid CPU type: %s", machine->cpu_type);
--            error_printf("The valid types are: %s",
--                         machine_class->valid_cpu_types[0]);
-+            error_setg(&local_err, "Invalid CPU type: %s", machine->cpu_type);
-+            error_append_hint(&local_err, "The valid types are: %s",
-+                              machine_class->valid_cpu_types[0]);
-             for (i = 1; machine_class->valid_cpu_types[i]; i++) {
--                error_printf(", %s", machine_class->valid_cpu_types[i]);
-+                error_append_hint(&local_err, ", %s",
-+                                  machine_class->valid_cpu_types[i]);
-             }
--            error_printf("\n");
-+            error_append_hint(&local_err, "\n");
- 
--            exit(1);
-+            error_propagate(errp, local_err);
-         }
-     }
- 
--- 
-2.41.0
+Thanks,
+Ethan Chen
 
+> 
+> >       for (i = 0; i < ARRAY_SIZE(s->flash); i++) {
+> >           /* Map legacy -drive if=pflash to machine properties */
+> >           pflash_cfi01_legacy_drive(s->flash[i],
+> > @@ -1628,6 +1653,35 @@ static void virt_set_aclint(Object *obj, bool value, Error **errp)
+> >       s->have_aclint = value;
+> >   }
+> > +static bool virt_get_iopmp(Object *obj, Error **errp)
+> > +{
+> > +    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
+> > +
+> > +    return s->have_iopmp;
+> > +}
+> > +
+> > +static void virt_set_iopmp(Object *obj, bool value, Error **errp)
+> > +{
+> > +    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
+> > +
+> > +    s->have_iopmp = value;
+> > +}
+> > +
+> > +static bool virt_get_iopmp_cascade(Object *obj, Error **errp)
+> > +{
+> > +    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
+> > +
+> > +    return s->have_iopmp_cascade;
+> > +}
+> > +
+> > +static void virt_set_iopmp_cascade(Object *obj, bool value, Error **errp)
+> > +{
+> > +    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
+> > +
+> > +    s->have_iopmp_cascade = value;
+> > +}
+> > +
+> > +
+> >   bool virt_is_acpi_enabled(RISCVVirtState *s)
+> >   {
+> >       return s->acpi != ON_OFF_AUTO_OFF;
+> > @@ -1730,6 +1784,20 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
+> >                                 NULL, NULL);
+> >       object_class_property_set_description(oc, "acpi",
+> >                                             "Enable ACPI");
+> > +
+> > +    object_class_property_add_bool(oc, "iopmp", virt_get_iopmp,
+> > +                                   virt_set_iopmp);
+> > +    object_class_property_set_description(oc, "iopmp",
+> > +                                          "Set on/off to enable/disable "
+> > +                                          "iopmp device");
+> > +
+> > +    object_class_property_add_bool(oc, "iopmp-cascade",
+> > +                                   virt_get_iopmp_cascade,
+> > +                                   virt_set_iopmp_cascade);
+> > +    object_class_property_set_description(oc, "iopmp-cascade",
+> > +                                          "Set on/off to enable/disable "
+> > +                                          "iopmp2 device which is cascaded by "
+> > +                                          "iopmp1 device");
+> >   }
+> >   static const TypeInfo virt_machine_typeinfo = {
+> > diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+> > index e5c474b26e..5fa2944d29 100644
+> > --- a/include/hw/riscv/virt.h
+> > +++ b/include/hw/riscv/virt.h
+> > @@ -54,6 +54,8 @@ struct RISCVVirtState {
+> >       int fdt_size;
+> >       bool have_aclint;
+> > +    bool have_iopmp;
+> > +    bool have_iopmp_cascade;
+> >       RISCVVirtAIAType aia_type;
+> >       int aia_guests;
+> >       char *oem_id;
+> > @@ -82,12 +84,18 @@ enum {
+> >       VIRT_PCIE_MMIO,
+> >       VIRT_PCIE_PIO,
+> >       VIRT_PLATFORM_BUS,
+> > -    VIRT_PCIE_ECAM
+> > +    VIRT_PCIE_ECAM,
+> > +    VIRT_IOPMP,
+> > +    VIRT_IOPMP2,
+> > +    VIRT_DMAC,
+> >   };
+> >   enum {
+> >       UART0_IRQ = 10,
+> >       RTC_IRQ = 11,
+> > +    DMAC_IRQ = 12,
+> > +    IOPMP_IRQ = 13,
+> > +    IOPMP2_IRQ = 14,
+> >       VIRTIO_IRQ = 1, /* 1 to 8 */
+> >       VIRTIO_COUNT = 8,
+> >       PCIE_IRQ = 0x20, /* 32 to 35 */
 
