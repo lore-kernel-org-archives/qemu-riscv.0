@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC8AEC54FB9
-	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Nov 2023 16:09:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 339B3C54FB9
+	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Nov 2023 16:21:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r3eul-0007hd-AH; Thu, 16 Nov 2023 11:08:23 -0500
+	id 1r3f6y-0006pU-12; Thu, 16 Nov 2023 11:21:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r3euj-0007h0-PR
- for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 11:08:21 -0500
-Received: from mail-lj1-x234.google.com ([2a00:1450:4864:20::234])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r3f6w-0006og-6c
+ for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 11:20:58 -0500
+Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r3euf-0001AB-W4
- for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 11:08:21 -0500
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-2c72e275d96so12696651fa.2
- for <qemu-riscv@nongnu.org>; Thu, 16 Nov 2023 08:08:17 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r3f6t-0000rN-Dd
+ for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 11:20:57 -0500
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-32da7ac5c4fso727989f8f.1
+ for <qemu-riscv@nongnu.org>; Thu, 16 Nov 2023 08:20:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700150896; x=1700755696; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ d=linaro.org; s=google; t=1700151652; x=1700756452; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:references:cc:to:from
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Bbt3Z6ihV8TA3zjJcKpw5cDUTO6AlSytICD8fk5xQeQ=;
- b=gc03RLABEXrarFnZ8LA+RJWLFtbQkEAzccCL8lAXTPPJ/H8A3kMXDguc9z9Z4dijLf
- kbEcC2s/Bkj0bJDgXWeCRJaZKxrQwmFhk0NTvGIxscaKXxH9uzGTDscFJsMxDTk9V2Qf
- ZwqI0FRl36nJKq4/VY6dzIrCa1Cmu0/GQyT7nRzOy0kDe1F9ycWBQ5B9hacUF7sMAUvV
- nVOjIBwzMJdn+ZnD3Sks0tY76UQBLiCjhiGq5OgYkPaCui0T/a8Cjkm12llRDxVinl2E
- ZRDeO52QdnNqla528gxvh4SMvM+bqf7BZlPnXBkqK7zyshhh9M1YN1AppBCtTNs0veeb
- Jgeg==
+ bh=zU0y/oNPBlXNKcCKBdzv6P0WXp12W1o/8xvu9k23CBM=;
+ b=Yy1gmrnTty4pzUgP3ZdAa1oMxBGi1bqVzDsHmJl5UFZ2Rok+U8jpv9Ett2KIB8HF7A
+ L4i1MCOxY3j6PnqhQWVGcaIFoWU2e32C3NSLV/MaMVU/PV7DZKjjdyxQveC8upITwB67
+ x+4HWz8/E29LyighsVyFbxQZj8EW0cY5dE9jbw/o9iN4vxVfQFloLVO1hWhx6wuNwc0X
+ 1Uqff6RwuzmfZZvfABVLEAoq36yFjugYsCC3Qx9f2YxgedNa65f6YNGSXGEwxs/hxvpR
+ +cMeywP2QNHJpk/7uMNKEE8ct0PFSPMdc2tbvu1oZwQAzo1/0580kytjKbmyw0tDcQsI
+ Mydg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700150896; x=1700755696;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ d=1e100.net; s=20230601; t=1700151652; x=1700756452;
+ h=content-transfer-encoding:in-reply-to:references:cc:to:from
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Bbt3Z6ihV8TA3zjJcKpw5cDUTO6AlSytICD8fk5xQeQ=;
- b=J3EQ1j3H6GulaEDln+gr/FJ6gI32dH9NG+emE9fsl6cGlp/v08epYhAyGnKUu7Bh/p
- OveiJQUDqDTCG8UjK0YMtixgWBjiV7pGt+Ly0TGBzQiLGVNQTrZ9+u4O8HmmUdtsX1T+
- Tuxza8X+JXh+VO9kFidzaWwlbtbcfiXL0NU2mvSb3CpUSnbLlUzNy0DFAgMyzxoe55KZ
- MA+EGp+631bH2ip4IjgvxS29RgPIMayqAr77bHV2ee6dfiGrqKmVZ3VsyuRnfofy7Kpy
- CD/1llXflPvVngLiKyhZSvHuCQX+Dh7jk29wtGnpdkGFSiqO1wubJYTRRsAu2xJOyJ3c
- 3diQ==
-X-Gm-Message-State: AOJu0YxmB6RZOIQAy/J+D7J1pkuiGFaH8gSj2x2qNXtIZjdaGOI12dNq
- f2VZynigYKj3TC/t48utYPubPg==
-X-Google-Smtp-Source: AGHT+IHnKVTf3wkdeY89d1vkwnb/JryKdw9OT+Zg7iJ+beWhg7xwa9qleI0kR336xkKrChw+J4QEvg==
-X-Received: by 2002:a05:651c:1422:b0:2c6:eb44:2e12 with SMTP id
- u34-20020a05651c142200b002c6eb442e12mr6895205lje.43.1700150895898; 
- Thu, 16 Nov 2023 08:08:15 -0800 (PST)
+ bh=zU0y/oNPBlXNKcCKBdzv6P0WXp12W1o/8xvu9k23CBM=;
+ b=AIdMAgVZ7Sc/MZVPCkbdmCz0OAYrxyqyS0Hx+pZGzP+fKlrQq303pDvGxprY+vYpP+
+ lok/vnG2VYArS1i9v46GAFxHgnahW24JEVOZ0eoBx6HmUvD+Ste11RlNBBXFOVvt4MuO
+ bd1AQanbJgB8wizF2y3PDYK+tGhr+4BfpvIupI4sGC9logDvTaCe027TN1qNev9UeNl4
+ XwQgWnOthtQwbUB4zgvrZZh7yGIBHCWxkYT11pqnKQ1kNMVaSjmTPmPMCsZmJFcCO4XH
+ mab28RVgg2UtNlvJexs7hBT4QKV1Mi1KhZqkYN3kwXKbcsxvHX1DVqy7yF5AvpuLxN2k
+ O/BQ==
+X-Gm-Message-State: AOJu0YzxH7g1mgmQkZSGDYJ1XEK8kw0X7GxpY9uddba/HO5GZz+JQXMY
+ XXuVofkT1nefNRmcm++bjwbrbQ==
+X-Google-Smtp-Source: AGHT+IGFWnnT2ucR8Qe9SSsf9y3OPbtxZ4Zx0BEfVq92Hg2nUJAGZdWYFisO0MI97lnvOpGQX48qJw==
+X-Received: by 2002:a05:6000:1845:b0:32f:7fb0:de13 with SMTP id
+ c5-20020a056000184500b0032f7fb0de13mr12173865wri.5.1700151652383; 
+ Thu, 16 Nov 2023 08:20:52 -0800 (PST)
 Received: from [192.168.69.100] ([176.187.220.205])
  by smtp.gmail.com with ESMTPSA id
- az23-20020a05600c601700b004054dcbf92asm4353398wmb.20.2023.11.16.08.08.12
+ d16-20020adfe850000000b0032fb17c65desm14099905wrn.19.2023.11.16.08.20.49
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Nov 2023 08:08:15 -0800 (PST)
-Message-ID: <d7a80e9e-9ffd-476c-ac98-a92838e11b5e@linaro.org>
-Date: Thu, 16 Nov 2023 17:08:11 +0100
+ Thu, 16 Nov 2023 08:20:51 -0800 (PST)
+Message-ID: <78526851-6d44-4c18-97b8-57462fb42ab7@linaro.org>
+Date: Thu, 16 Nov 2023 17:20:48 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 03/31] cpu: Call object_class_dynamic_cast() once in
- cpu_class_by_name()
+Subject: Re: [PATCH v5 00/31] Unified CPU type check
 Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: Gavin Shan <gshan@redhat.com>, qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  imp@bsdimp.com, kevans@freebsd.org, richard.henderson@linaro.org,
@@ -80,13 +80,12 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  ysato@users.sourceforge.jp, kbastian@mail.uni-paderborn.de,
  jcmvbkbc@gmail.com, shan.gavin@gmail.com
 References: <20231114235628.534334-1-gshan@redhat.com>
- <20231114235628.534334-4-gshan@redhat.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20231114235628.534334-4-gshan@redhat.com>
+ <efc49f7b-70f5-4ce9-8179-79e8a6abd732@linaro.org>
+In-Reply-To: <efc49f7b-70f5-4ce9-8179-79e8a6abd732@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::234;
- envelope-from=philmd@linaro.org; helo=mail-lj1-x234.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -109,36 +108,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 15/11/23 00:56, Gavin Shan wrote:
-> From: Philippe Mathieu-Daudé <philmd@linaro.org>
+On 16/11/23 14:35, Philippe Mathieu-Daudé wrote:
+> Hi Gavin,
 > 
-> For all targets, the CPU class returned from CPUClass::class_by_name()
-> and object_class_dynamic_cast(oc, CPU_RESOLVING_TYPE) need to be
-> compatible. Lets apply the check in cpu_class_by_name() for once,
-> instead of having the check in CPUClass::class_by_name() for individual
-> target.
+> On 15/11/23 00:55, Gavin Shan wrote:
+>> There are two places where the user specified CPU type is checked to see
+>> if it's supported or allowed by the board: machine_run_board_init() and
+>> mc->init(). We don't have to maintain two duplicate sets of logic. This
+>> series intends to move the check to machine_run_board_init() so that we
+>> have unified CPU type check.
 > 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> Reviewed-by: Gavin Shan <gshan@redhat.com>
-> Reviewed-by: Igor Mammedov <imammedo@redhat.com>
+> 
+>> Gavin Shan (30):
+>>    target/alpha: Remove 'ev67' CPU class
+>>    target/hppa: Remove object_class_is_abstract()
+>>    target: Remove 'oc == NULL' check
+>>    cpu: Add helper cpu_model_from_type()
+>>    cpu: Add generic cpu_list()
+>>    target/alpha: Use generic cpu_list()
+>>    target/arm: Use generic cpu_list()
+>>    target/avr: Use generic cpu_list()
+>>    target/cris: Use generic cpu_list()
+>>    target/hexagon: Use generic cpu_list()
+>>    target/hppa: Use generic cpu_list()
+>>    target/loongarch: Use generic cpu_list()
+>>    target/m68k: Use generic cpu_list()
+>>    target/mips: Use generic cpu_list()
+>>    target/openrisc: Use generic cpu_list()
+>>    target/riscv: Use generic cpu_list()
+>>    target/rx: Use generic cpu_list()
+>>    target/sh4: Use generic cpu_list()
+>>    target/tricore: Use generic cpu_list()
+>>    target/xtensa: Use generic cpu_list()
+>>    target: Use generic cpu_model_from_type()
+>>    machine: Constify MachineClass::valid_cpu_types[i]
+> 
+> I'm queuing patches 1-3 & 5-23 to my cpus-next tree. No need to
+> repost them, please base them on my tree. I'll follow up with the
+> branch link when I finish my testing and push it.
 
-Gavin, this patch is missing your S-o-b tag. Do you mind responding to
-this email with it? Thanks!
+Here are these patches queued:
 
-> ---
->   hw/core/cpu-common.c   | 8 +++++---
->   target/alpha/cpu.c     | 3 ---
->   target/arm/cpu.c       | 4 +---
->   target/avr/cpu.c       | 8 +-------
->   target/cris/cpu.c      | 4 +---
->   target/hexagon/cpu.c   | 4 +---
->   target/hppa/cpu.c      | 7 +------
->   target/loongarch/cpu.c | 8 +-------
->   target/m68k/cpu.c      | 4 +---
->   target/openrisc/cpu.c  | 4 +---
->   target/riscv/cpu.c     | 4 +---
->   target/tricore/cpu.c   | 4 +---
->   target/xtensa/cpu.c    | 4 +---
->   13 files changed, 16 insertions(+), 50 deletions(-)
+   https://github.com/philmd/qemu.git branches/cpus-next
 
+I might queue more patches before the 9.0 merge window opens.
+
+Regards,
+
+Phil.
 
