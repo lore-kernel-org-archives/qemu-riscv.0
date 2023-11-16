@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90E3EC197A0
-	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Nov 2023 07:54:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A8EBC47071
+	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Nov 2023 07:55:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r3XCT-0005py-VM; Thu, 16 Nov 2023 02:54:12 -0500
+	id 1r3XDQ-0007NI-Pu; Thu, 16 Nov 2023 02:55:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r3XCP-0005fX-Qp
- for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 02:54:06 -0500
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r3XDP-0007Hb-OD
+ for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 02:55:07 -0500
+Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r3XCB-0001Ie-C7
- for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 02:54:04 -0500
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-40859dee28cso4130145e9.0
- for <qemu-riscv@nongnu.org>; Wed, 15 Nov 2023 23:53:49 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r3XDK-0001Vj-A8
+ for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 02:55:07 -0500
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-32fa7d15f4eso371286f8f.3
+ for <qemu-riscv@nongnu.org>; Wed, 15 Nov 2023 23:55:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700121229; x=1700726029; darn=nongnu.org;
+ d=linaro.org; s=google; t=1700121300; x=1700726100; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=bRfQ6Fok2eTonPLBPNc1tqXnMZnV+oCGWm5xG6hbQnY=;
- b=O5/p+DDU04Ujp6kmbQV/U3QlfeYwyZ87+hgETiR/2UP3jiBUv6BDwBZKmk7phHTr4B
- koFwBEcFrta71NIty0+g+B84zLbw0PnQhpH+OHbrVnM9QrzkJhsLmzMpMLaEwr1AYgBn
- DG/ym2+Del0So83Zh/MZQGyDdTBEA5OfSDXqzeb0BriVmOtUFbEfmMQubglKyRKfS4rV
- KtijaRagX5LUPTu72wwsj3PYPeVuZJwOE3fC/5FwkCaGguen1pv8MACLvGlAIoQPu5xr
- ZgGVvs7u2aXEsuHGAZhIP7kJcSvxqwUuLXct02EcVYG4O8BQ245D6tRE/I4iAaSOu7WU
- Pnrg==
+ bh=Xq4/PxYKKGerN15tuKWfbBlxgYYQcz5v17kAaUTTr4U=;
+ b=Kgidu7OVKpT+I/nvV2ZwXR1ugp5DWoEJ+4yePJaTiXFojsqv+uRwe4jgklrulmGa+k
+ OUYXH+X9iFjl+sPRnF3Y5/wY9Wg2DDWuE/8iom+4id0YpyPP7pfszzKJpPFSeAg4zeFt
+ 2dbQDJNEQ15qn+cVY55PsbHOWZ2XRflfXmBofuwWq0ooEy72tfb3DSr8Ui9/EXv6tQYn
+ EgRjr3+79LzRX3A34qZ8ath92Sf7z5xz6ql97PqU0joXNzteNCUrG7wM/8AtnUcn8Cba
+ aqJBFkvaIiV7SOqHth2ROoPGLOzqDLkiB5ImhD4KzoQablJFiBI8RizBdHx10pL3z927
+ xXVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700121229; x=1700726029;
+ d=1e100.net; s=20230601; t=1700121300; x=1700726100;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=bRfQ6Fok2eTonPLBPNc1tqXnMZnV+oCGWm5xG6hbQnY=;
- b=n3HkbqbS3v/Qbxpp+HfgRnY/JqmkYtvl3PPyLIGHIBWyFyUPc2O2JMptNIWG2aMFHF
- vjh+m2O+WAZyDCQluKkaNgMD2ZKIXGjhn2SvcZ7APDyt+3hEOzbjsRqLeZxGVhCPWum/
- VF4c8Clbae3Ya8xwNLoLmd+L+Ia3noVSVIloMurxY0bcGOAFBzFeqk8sB69yZLnjZyvv
- ajsKDH0m0J4ynCqjv8nSTUxti+86SFFa+DdCxH7O3UZ0hq6qnZBTbLQMaGvrKQAY1Pot
- 84Pcx3oCjp/zqLcHbOo92mET4fCMMUPV5FyHoAzR8cjkka2skzIceWr1YRTsc9CWU+7h
- HxAQ==
-X-Gm-Message-State: AOJu0YwbFk4sZjUrxVn6DW8n3zwkLBOZeX3zHNam1QNTKlLIeKwGPOOz
- SKlJ+t28LYSMFptcVyCwb8ro7Q==
-X-Google-Smtp-Source: AGHT+IFZGpUdGuuqbBwtsY6CGbZ7EyuMYWfYjxDB/ZCgCpSP7mokGRyzZOU8p7pz9XcJY6wo6gfgEw==
-X-Received: by 2002:a05:600c:4f4a:b0:40a:4432:6b01 with SMTP id
- m10-20020a05600c4f4a00b0040a44326b01mr12410764wmq.20.1700121228896; 
- Wed, 15 Nov 2023 23:53:48 -0800 (PST)
+ bh=Xq4/PxYKKGerN15tuKWfbBlxgYYQcz5v17kAaUTTr4U=;
+ b=L0La7UqlqQvuu8a44zJKgQkrsskwnZdNiUx5dM2r7sfLNIIieotWcGk5YYKLCIBKV6
+ BWWyzVBjg8yBP45iykhHLNwtItXQZP4i64Tj3v7Dmwpb9XlfgkZMwSJ7eW/povbtqMct
+ ID3kKZJIcNETXYT9hyF8b16Fg3mnPBS4RdGOABifFhbuMQS8l14dknTnPVfZruSfSSGB
+ cs26fKoErGtPtn5CTxeE2Kg9ozsAKHKBHG5B+lL3JjIcRI28TxdmoqcFCz5n1ihvflw0
+ 4c/3tPbU2r1shhS7atV0DT+/bbrW9RdN1vh6Ua3hY5jT8fyCta4S7SWpka3Z3RtXwTwz
+ fiVA==
+X-Gm-Message-State: AOJu0YzdxxvJ4GgjtZIf+50KaNCDhbmuVVVY8h5RzGd0mtPsYD31kR4f
+ 1T2hudDQxBqdo5ZLPllWe37PkA==
+X-Google-Smtp-Source: AGHT+IGhMIp2OyXueSUS7HRilCVAf/zEcGZF3g6foVnHhw7X2NSL0U0bcGVs9tHxk0b4CSnbYNQmiQ==
+X-Received: by 2002:adf:b312:0:b0:32d:9d3a:d8c0 with SMTP id
+ j18-20020adfb312000000b0032d9d3ad8c0mr9170922wrd.60.1700121300532; 
+ Wed, 15 Nov 2023 23:55:00 -0800 (PST)
 Received: from [192.168.69.100] ([176.187.220.205])
  by smtp.gmail.com with ESMTPSA id
- m4-20020a056000024400b0032fb0e2087asm12582889wrz.82.2023.11.15.23.53.44
+ m4-20020a056000024400b0032fb0e2087asm12582889wrz.82.2023.11.15.23.54.56
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 15 Nov 2023 23:53:48 -0800 (PST)
-Message-ID: <2858cbe4-8c5e-4712-a744-b318b301f922@linaro.org>
-Date: Thu, 16 Nov 2023 08:53:44 +0100
+ Wed, 15 Nov 2023 23:55:00 -0800 (PST)
+Message-ID: <ad2b735e-9e98-4a1d-a1e2-9a189d703122@linaro.org>
+Date: Thu, 16 Nov 2023 08:54:56 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 15/31] target/mips: Use generic cpu_list()
+Subject: Re: [PATCH v5 18/31] target/rx: Use generic cpu_list()
 Content-Language: en-US
 To: Gavin Shan <gshan@redhat.com>, qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
@@ -79,19 +79,20 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  ysato@users.sourceforge.jp, kbastian@mail.uni-paderborn.de,
  jcmvbkbc@gmail.com, shan.gavin@gmail.com
 References: <20231114235628.534334-1-gshan@redhat.com>
- <20231114235628.534334-16-gshan@redhat.com>
+ <20231114235628.534334-19-gshan@redhat.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20231114235628.534334-16-gshan@redhat.com>
+In-Reply-To: <20231114235628.534334-19-gshan@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::431;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x431.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -110,86 +111,21 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On 15/11/23 00:56, Gavin Shan wrote:
 > Before it's applied:
 > 
-> [gshan@gshan q]$ ./build/qemu-system-mips64 -cpu ?
-> MIPS '4Kc'
-> MIPS '4Km'
-> MIPS '4KEcR1'
-> MIPS 'XBurstR1'
-> MIPS '4KEmR1'
-> MIPS '4KEc'
-> MIPS '4KEm'
-> MIPS '24Kc'
-> MIPS '24KEc'
-> MIPS '24Kf'
-> MIPS '34Kf'
-> MIPS '74Kf'
-> MIPS 'XBurstR2'
-> MIPS 'M14K'
-> MIPS 'M14Kc'
-> MIPS 'P5600'
-> MIPS 'mips32r6-generic'
-> MIPS 'I7200'
-> MIPS 'R4000'
-> MIPS 'VR5432'
-> MIPS '5Kc'
-> MIPS '5Kf'
-> MIPS '20Kc'
-> MIPS 'MIPS64R2-generic'
-> MIPS '5KEc'
-> MIPS '5KEf'
-> MIPS 'I6400'
-> MIPS 'I6500'
-> MIPS 'Loongson-2E'
-> MIPS 'Loongson-2F'
-> MIPS 'Loongson-3A1000'
-> MIPS 'Loongson-3A4000'
-> MIPS 'mips64dspr2'
-> MIPS 'Octeon68XX'
+> [gshan@gshan q]$ ./build/qemu-system-rx -cpu ?
+> Available CPUs:
+>    rx62n-rx-cpu
 > 
 > After it's applied:
 > 
-> [gshan@gshan q]$ ./build/qemu-system-mips64 -cpu ?
+> [gshan@gshan q]$ ./build/qemu-system-rx -cpu ?
 > Available CPUs:
->    20Kc
->    24Kc
->    24KEc
->    24Kf
->    34Kf
->    4Kc
->    4KEc
->    4KEcR1
->    4KEm
->    4KEmR1
->    4Km
->    5Kc
->    5KEc
->    5KEf
->    5Kf
->    74Kf
->    I6400
->    I6500
->    I7200
->    Loongson-2E
->    Loongson-2F
->    Loongson-3A1000
->    Loongson-3A4000
->    M14K
->    M14Kc
->    mips32r6-generic
->    mips64dspr2
->    MIPS64R2-generic
->    Octeon68XX
->    P5600
->    R4000
->    VR5432
->    XBurstR1
->    XBurstR2
+>    rx62n
 > 
 > Signed-off-by: Gavin Shan <gshan@redhat.com>
 > ---
->   target/mips/cpu-defs.c.inc | 9 ---------
->   target/mips/cpu.h          | 4 ----
->   2 files changed, 13 deletions(-)
+>   target/rx/cpu.c | 16 ----------------
+>   target/rx/cpu.h |  3 ---
+>   2 files changed, 19 deletions(-)
 
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
