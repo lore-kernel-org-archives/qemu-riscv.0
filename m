@@ -4,65 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6617C197A0
-	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Nov 2023 07:51:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82779C197A0
+	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Nov 2023 07:52:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r3X9f-0007KV-LT; Thu, 16 Nov 2023 02:51:15 -0500
+	id 1r3XAE-0001jc-TQ; Thu, 16 Nov 2023 02:51:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r3X9d-00075Q-R6
- for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 02:51:14 -0500
-Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r3XAA-0001Zo-P1
+ for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 02:51:47 -0500
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r3X9a-0000YZ-Q4
- for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 02:51:12 -0500
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-32fbf271346so339551f8f.1
- for <qemu-riscv@nongnu.org>; Wed, 15 Nov 2023 23:51:10 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r3XA9-0000gw-5f
+ for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 02:51:46 -0500
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-32f7c80ab33so360699f8f.0
+ for <qemu-riscv@nongnu.org>; Wed, 15 Nov 2023 23:51:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700121069; x=1700725869; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
+ d=linaro.org; s=google; t=1700121104; x=1700725904; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=imm3XmsJBY7QdQDipdQqcYQNZts8WUb83R3yaIZiVOY=;
- b=qIDg3aM1PhXCE3bkGWrRb9uoKzK4GfHcmXlTp+/dXNqvmGSBdvztVM13MbU4jcyx3s
- oI/tjx9h5wTLEOhV4p7xDaC77s/veZgBw9uC3K81Ht97wrPWPdc06iIp6WzefEeHfhfa
- D3M9/3tlf/ysOV7WFUbVuFam1YMSbhH5Ai4XqfriQ7GR25Z0I8Qnun+w38R9QPMVF4DH
- P3YMhHZyMMAdXQ8GXnKFnFvsmB4jAT9bVX4NIr5ILjPvv5A2GtC2rW+hljoJNulFCLla
- /Go6Ct78hExi68cKSl2vEjHCRzmA632epnnUzOfVE0DI7cusyJZH318M6sdU6M/JuJVs
- 3kCg==
+ bh=fGPIIo+oWgUbTH02UBSRyk9mwsyIl/36Lb2JEBEbS7Y=;
+ b=nbaH0u6a19VXMxC2NNTg9W5+SM+go8s8spLW/LOqqnPgdVwNwgIDk1iipArc2MSGFf
+ CjmHyMTMa94gsJTJqX3IGNKbJ6ENUWaIYqzJC9gOLtEb9z8yZKVDRN0Nkwyz1BBYnQ9a
+ dow3S3yXggP6T9hP/Ul0yM4aDpZ21/KR7opE01ZxWa4gbpggfRRKcUhhNs10I3GbKWu5
+ LTYt1i1WsPZQQSRujSyWpqHH0vTGydIAJBiq1ze0o4BU3afWSbp+t8WHnyKCeOkGZFwu
+ SF0FtqU9SYvhqCNaP7TteWAQ0tqpGqgBN+aVgRMC7OFYMcTWr368sHA9vu7NRJXxr+/t
+ MyaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700121069; x=1700725869;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
+ d=1e100.net; s=20230601; t=1700121104; x=1700725904;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=imm3XmsJBY7QdQDipdQqcYQNZts8WUb83R3yaIZiVOY=;
- b=UogxavmpNQRRuCN5qy/UlMZQrwVY+vs9RhfK/u2JOXfR9Xr3QfP4kuRvjcR3aS0PJW
- hHLrEQSyWlgdFHrTZMggWf19+4055yfyPdovfcnBYhxWhJa1E1KcXxntkkgs5vX+fJMG
- /WDeA9WhEquyBG6Kgyan4ngPTSdYAaXlK+GzhCM7TXnokH3FS5lhhOzHBNA6c5BoSq1h
- 0WU7/s0N9fyYp2kR/wEEdyM+hIzZPKeUA3tFt0RmArZZf2ZRAbrFqwwBfP758BekHn13
- 5AMBSh2xlFQB9pj1UWDASM4FjVcy48kjRUHqwaEo9Yma6rk1gNsJTwCeZlvb9aIz0mMy
- ZVBQ==
-X-Gm-Message-State: AOJu0Yx7vQpH2Bjg2+t8pZbpBKoAd7xNs9y2Y7w0SSLLAjnuOqJxO9Tc
- tTS9X2SfVzAI0tusgDeugWoA/wgILEenA79DZBc=
-X-Google-Smtp-Source: AGHT+IFcX1LLFmdNgHCNHwlK2ODHL3cK+XCbzkfi3elzg1To0kDsXyUUJCoW5n2efj1JupkbGiY+Bg==
-X-Received: by 2002:a05:6000:1378:b0:32f:c369:6aff with SMTP id
- q24-20020a056000137800b0032fc3696affmr1003052wrz.28.1700121069127; 
- Wed, 15 Nov 2023 23:51:09 -0800 (PST)
+ bh=fGPIIo+oWgUbTH02UBSRyk9mwsyIl/36Lb2JEBEbS7Y=;
+ b=ltDaB+ribCuOi9ucE8fTXlpL8c4tXl++wG/IGRep8sTZsEI1F7tA4Wvqd0UOGi3rNM
+ iQvFGf8LROlSKspDdJ14HsBFQh+lY4mnze3/LfT908yhfWm/e/u4I4eySXcESVx1EpKA
+ 0jL9h7i9Z7JX9eYubELqJtdEkAE1TC2p0CoauWJKNKvvL2XsB/dEBHM57pN5MpK9voMd
+ TtZ05aiLueE8zCD30Wnmz9QB6Ec92CZxbSGBbbk4diOzkAIvG6UxCsATTz8yzSzwp0xa
+ wU2VnK9vF13HZxyyRePR67FNW02U3VYAgk3y+YZEitzCnmTT8hA3/jbFwjswpaNXzBY6
+ Ps8A==
+X-Gm-Message-State: AOJu0YycnUqiKjbLy3mQtMqrVNcCuWZ5ELWN5JsuJZAr7btw0THg8Di9
+ bifab9f/Y/C708qGcc7NtBq6KA==
+X-Google-Smtp-Source: AGHT+IFaw+qaF9TAlYNqCmSBQ1ddepFKfbYNwb3dbHrKLcMqAvRgE4EtE4FBmShMA35PuoZQif20aA==
+X-Received: by 2002:adf:e685:0:b0:32d:9541:b1e3 with SMTP id
+ r5-20020adfe685000000b0032d9541b1e3mr8930365wrm.26.1700121103683; 
+ Wed, 15 Nov 2023 23:51:43 -0800 (PST)
 Received: from [192.168.69.100] ([176.187.220.205])
  by smtp.gmail.com with ESMTPSA id
- m4-20020a056000024400b0032fb0e2087asm12582889wrz.82.2023.11.15.23.51.04
+ m4-20020a056000024400b0032fb0e2087asm12582889wrz.82.2023.11.15.23.51.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 15 Nov 2023 23:51:08 -0800 (PST)
-Message-ID: <55922c30-be4b-459d-835b-819e1dcd2437@linaro.org>
-Date: Thu, 16 Nov 2023 08:51:03 +0100
+ Wed, 15 Nov 2023 23:51:43 -0800 (PST)
+Message-ID: <1ade7285-7f0b-406e-9d8f-8386da038087@linaro.org>
+Date: Thu, 16 Nov 2023 08:51:39 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 06/31] cpu: Add generic cpu_list()
+Subject: Re: [PATCH v5 08/31] target/arm: Use generic cpu_list()
 Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: Gavin Shan <gshan@redhat.com>, qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  imp@bsdimp.com, kevans@freebsd.org, richard.henderson@linaro.org,
@@ -80,13 +79,13 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  ysato@users.sourceforge.jp, kbastian@mail.uni-paderborn.de,
  jcmvbkbc@gmail.com, shan.gavin@gmail.com
 References: <20231114235628.534334-1-gshan@redhat.com>
- <20231114235628.534334-7-gshan@redhat.com>
- <80da2d00-0d96-4252-b2aa-f7859e44bece@linaro.org>
-In-Reply-To: <80da2d00-0d96-4252-b2aa-f7859e44bece@linaro.org>
+ <20231114235628.534334-9-gshan@redhat.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20231114235628.534334-9-gshan@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::430;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x430.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -109,89 +108,66 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 16/11/23 08:39, Philippe Mathieu-Daudé wrote:
-> Hi Gavin,
+On 15/11/23 00:56, Gavin Shan wrote:
+> No changes of the output from the following command before and
+> after it's applied.
 > 
-> On 15/11/23 00:56, Gavin Shan wrote:
->> Add generic cpu_list() to replace the individual target's implementation
->> in the subsequent commits. Currently, there are 3 targets with no 
->> cpu_list()
->> implementation: microblaze and nios2. With this applied, those two 
->> targets
->> switch to the generic cpu_list().
->>
->> [gshan@gshan q]$ ./build/qemu-system-microblaze -cpu ?
->> Available CPUs:
->>    microblaze-cpu
->>
->> [gshan@gshan q]$ ./build/qemu-system-nios2 -cpu ?
->> Available CPUs:
->>    nios2-cpu
->>
->> Suggested-by: Richard Henderson <richard.henderson@linaro.org>
->> Signed-off-by: Gavin Shan <gshan@redhat.com>
->> ---
->>   bsd-user/main.c |  5 +----
->>   cpu-target.c    | 29 ++++++++++++++++++++++++++---
->>   2 files changed, 27 insertions(+), 7 deletions(-)
+> [gshan@gshan q]$ ./build/qemu-system-aarch64 -cpu ?
+> Available CPUs:
+>    a64fx
+>    arm1026
+>    arm1136
+>    arm1136-r2
+>    arm1176
+>    arm11mpcore
+>    arm926
+>    arm946
+>    cortex-a15
+>    cortex-a35
+>    cortex-a53
+>    cortex-a55
+>    cortex-a57
+>    cortex-a7
+>    cortex-a710
+>    cortex-a72
+>    cortex-a76
+>    cortex-a8
+>    cortex-a9
+>    cortex-m0
+>    cortex-m3
+>    cortex-m33
+>    cortex-m4
+>    cortex-m55
+>    cortex-m7
+>    cortex-r5
+>    cortex-r52
+>    cortex-r5f
+>    max
+>    neoverse-n1
+>    neoverse-n2
+>    neoverse-v1
+>    pxa250
+>    pxa255
+>    pxa260
+>    pxa261
+>    pxa262
+>    pxa270-a0
+>    pxa270-a1
+>    pxa270
+>    pxa270-b0
+>    pxa270-b1
+>    pxa270-c0
+>    pxa270-c5
+>    sa1100
+>    sa1110
+>    ti925t
 > 
-> 
->> diff --git a/cpu-target.c b/cpu-target.c
->> index c078c0e91b..acfc654b95 100644
->> --- a/cpu-target.c
->> +++ b/cpu-target.c
->> @@ -24,6 +24,7 @@
->>   #include "hw/qdev-core.h"
->>   #include "hw/qdev-properties.h"
->>   #include "qemu/error-report.h"
->> +#include "qemu/qemu-print.h"
->>   #include "migration/vmstate.h"
->>   #ifdef CONFIG_USER_ONLY
->>   #include "qemu.h"
->> @@ -283,12 +284,34 @@ const char *parse_cpu_option(const char 
->> *cpu_option)
->>       return cpu_type;
->>   }
->> +#ifndef cpu_list
->> +static void cpu_list_entry(gpointer data, gpointer user_data)
->> +{
->> +    CPUClass *cc = CPU_CLASS(OBJECT_CLASS(data));
->> +    const char *typename = object_class_get_name(OBJECT_CLASS(data));
->> +    g_autofree char *model = cpu_model_from_type(typename);
->> +
->> +    if (cc->deprecation_note) {
->> +        qemu_printf("  %s (deprecated)\n", model);
->> +    } else {
->> +        qemu_printf("  %s\n", model);
->> +    }
->> +}
->> +
->> +static void cpu_list(void)
->> +{
->> +    GSList *list;
->> +
->> +    list = object_class_get_list_sorted(TYPE_CPU, false);
->> +    qemu_printf("Available CPUs:\n");
-> 
-> Since this output will likely be displayed a lot, IMHO it is worth
-> doing a first pass to get the number of available CPUs. If it is 1,
-> print using singular but even better smth like:
-> 
->         "This machine can only be used with the following CPU:"
+> Signed-off-by: Gavin Shan <gshan@redhat.com>
+> ---
+>   target/arm/cpu.h    |  3 ---
+>   target/arm/helper.c | 46 ---------------------------------------------
+>   2 files changed, 49 deletions(-)
 
-Hmm I missed this code is common to user/system emulation.
-
-System helper could be clever by using the intersection of cpu_list()
-and MachineClass::valid_cpu_types[] sets.
-
-> That said, this can be done later on top, so:
-> Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> 
->> +    g_slist_foreach(list, cpu_list_entry, NULL);
->> +    g_slist_free(list);
->> +}
->> +#endif
-> 
-> 
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
