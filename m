@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96708C47071
-	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Nov 2023 07:52:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F6CAC54FB9
+	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Nov 2023 07:53:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r3XAx-0003OO-Dg; Thu, 16 Nov 2023 02:52:35 -0500
+	id 1r3XBF-00043K-Iv; Thu, 16 Nov 2023 02:52:56 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r3XAv-0003Hn-UC
- for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 02:52:34 -0500
-Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r3XBA-0003rm-1P
+ for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 02:52:48 -0500
+Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r3XAt-000166-UW
- for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 02:52:33 -0500
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-32db188e254so347164f8f.0
- for <qemu-riscv@nongnu.org>; Wed, 15 Nov 2023 23:52:31 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r3XB8-00018C-GB
+ for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 02:52:47 -0500
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-32fe1a29010so328435f8f.0
+ for <qemu-riscv@nongnu.org>; Wed, 15 Nov 2023 23:52:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700121150; x=1700725950; darn=nongnu.org;
+ d=linaro.org; s=google; t=1700121165; x=1700725965; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=RWuu26MSVGnxWPCs7sTkKg1s6DMwMXLKcNAVvmmemuA=;
- b=C1Rjbf77dHn7VDnPNdzsFTRzcBf/JArl6VQAS0fK08lZ16csccE8LMi57ZppmHtj6j
- 8WjZL1uO3Cb5ZDueBvVg5Yvhxm06vzRgLdg39fnmOC2+Sn1aP3XvVlUnQflHhBESry9E
- xaIUuLwoJpTzME9GroNNdaIshAnOnT3KV34RrrYJd8qsBC0GLwS/N2+LX13Cdsk9k3Gn
- H4KVjxsXy0Gh55Nu39jlbHGbggSCKfycE93pEXV3mEteFhYLZFSVoN15vUdk9MfVtK1j
- zxdPz//uqXtITrruWMrPQOul8DU5jX3/b7/rq3J9BPJECRhgCjzcnVTosSTgoctsgN7g
- saUA==
+ bh=bVBLTPcn6P6YOOV5bkUTIF63TSWbVHO4Z9N2cS8rcho=;
+ b=hiyJxWYkN7eOiYsE5ASuQ8qHQlJE5/kirDv1XOyRVbaWjiviJ2yesR1vW5qig7uGwN
+ +84hOJLdOGfS4BGFimpU9i9xCubbZhoHDXL8QSUBTAqPq+PkkrxbRVSiHsUIigPzM6G9
+ q/0kVGUMQ7PsSNlt8F0V5fn+YckPRZePVqdQaLelk8o09Mwz7XXQCEfaJ91S2MhBib4R
+ LpcRpK03xs3RIev6qeZ19n2h8d4Uv3rRsDEUb105nV5Va5kgpwsjozqCFRvjXolpSZJK
+ A9WF+nnxtlaBS++7+GMPSC7GDVg4UJJfm7qc1BIKo0BK5YBZTEfrd/lGyKy7l/WLVWeM
+ fKeQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700121150; x=1700725950;
+ d=1e100.net; s=20230601; t=1700121165; x=1700725965;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=RWuu26MSVGnxWPCs7sTkKg1s6DMwMXLKcNAVvmmemuA=;
- b=BeWwOe4CD3cjKyWu37Sz43n1kc+hhNnhArcKKeHw8oxssn2gYW1b1PPJ6QchUBoRV9
- rOrm8omnqMCVkvhRvpGyAXb27TQLNTEvbLK4fJtisWHdjmkirDvLH2pKOjw3sWXMYjoP
- eWvjfpmqq86ezu/elEFhwzzVUjbp/t1ceOu4ZR7Ct3f16fiqITH15h3xpYrXmt5utYlW
- wRMPX7CxQWTJ3Lrew203T1h0L3R+AglcqfSxqVeWtCPZVSB0cybrZTSH9LVXPztoNIy8
- mx5gFF1aTc/cjUfRAE7uoyDH6PKwLBaG9nilibaOnsvqSJ0/2uPN73FB127kWIyudDTr
- XL6Q==
-X-Gm-Message-State: AOJu0YxkYHMDVllKNlKUFbKE5tJc3UvKy85huDsm5aJgURWdNe5FOkC4
- d/dcPIsmv+ffATRxp4zQ7BasSg==
-X-Google-Smtp-Source: AGHT+IFUA+xqyZQcJV/cmZGtjOamkdJGdlBtHGcfaRM+ALmFAnmEsEs+zIKN9UCep9Gs4sRWm17eVw==
-X-Received: by 2002:a5d:59a6:0:b0:32d:b2e0:ed76 with SMTP id
- p6-20020a5d59a6000000b0032db2e0ed76mr13720275wrr.49.1700121150443; 
- Wed, 15 Nov 2023 23:52:30 -0800 (PST)
+ bh=bVBLTPcn6P6YOOV5bkUTIF63TSWbVHO4Z9N2cS8rcho=;
+ b=KrzoJ8TBVVNUdGTSFh/8GzT6xw2proYKwRVMCKFI8pqELF7+t4gnadXbIHF0RRHf7V
+ cUd7DES9RB8lREJ0HZmw4B+MDo86Rc4JtOm4IdKDlq3LGCWjzSMLhmW9ZVX7LtrZQkGc
+ 3a0QGtK9pnQ98zHKrLBgiksifqUZCXvI3p/eQtBwzS7zPWGLZtAjNyPfCnG8B0pUbjPk
+ Xnf0A+AsmEQATQNMKR6c9wnR28VUgZtElLSGJME4xVfUq/p7Kvn9nhu9+xHorlVvymH7
+ ppIqh9dCnNP5r+jwei9XZBwa1EycaajU1PkasdSZvkQcHww6OcIxbx1F/DLCpct2AHOw
+ rhiA==
+X-Gm-Message-State: AOJu0YwYLOugbo/q2u60YN8KZd53uSZhzaNYg4S1T1AthxKss8S/fEKM
+ MzryvJCJ2ryvF9/Cszpztxw17A==
+X-Google-Smtp-Source: AGHT+IHBqojRmgSEo7XDl6FQ5KXswCIsBgJj3xDChttMYF8d3Pg82whdOyGWEDc+THsYTYhF/GPezQ==
+X-Received: by 2002:a05:6000:2c1:b0:32f:c750:6ebc with SMTP id
+ o1-20020a05600002c100b0032fc7506ebcmr11761156wry.71.1700121165106; 
+ Wed, 15 Nov 2023 23:52:45 -0800 (PST)
 Received: from [192.168.69.100] ([176.187.220.205])
  by smtp.gmail.com with ESMTPSA id
- m4-20020a056000024400b0032fb0e2087asm12582889wrz.82.2023.11.15.23.52.26
+ m4-20020a056000024400b0032fb0e2087asm12582889wrz.82.2023.11.15.23.52.41
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 15 Nov 2023 23:52:30 -0800 (PST)
-Message-ID: <2aa0fcb3-8118-4eb9-8f8c-a9a56b9f732b@linaro.org>
-Date: Thu, 16 Nov 2023 08:52:26 +0100
+ Wed, 15 Nov 2023 23:52:44 -0800 (PST)
+Message-ID: <e76fa4a3-a768-477d-a67d-cc8ba5d777d7@linaro.org>
+Date: Thu, 16 Nov 2023 08:52:41 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 10/31] target/cris: Use generic cpu_list()
+Subject: Re: [PATCH v5 11/31] target/hexagon: Use generic cpu_list()
 Content-Language: en-US
 To: Gavin Shan <gshan@redhat.com>, qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
@@ -79,13 +79,13 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  ysato@users.sourceforge.jp, kbastian@mail.uni-paderborn.de,
  jcmvbkbc@gmail.com, shan.gavin@gmail.com
 References: <20231114235628.534334-1-gshan@redhat.com>
- <20231114235628.534334-11-gshan@redhat.com>
+ <20231114235628.534334-12-gshan@redhat.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20231114235628.534334-11-gshan@redhat.com>
+In-Reply-To: <20231114235628.534334-12-gshan@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::434;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x434.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -109,33 +109,21 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 15/11/23 00:56, Gavin Shan wrote:
-> Before it's applied:
+> No changes in the output from the following command.
 > 
-> [gshan@gshan q]$ ./build/qemu-system-cris -cpu ?
+> [gshan@gshan q]$ ./build/qemu-hexagon -cpu ?
 > Available CPUs:
->    crisv8
->    crisv9
->    crisv10
->    crisv11
->    crisv17
->    crisv32
-> 
-> After it's applied:
-> 
-> [gshan@gshan q]$ ./build/qemu-system-cris -cpu ?
-> Available CPUs:
->    crisv10
->    crisv11
->    crisv17
->    crisv32
->    crisv8
->    crisv9
+>    v67
+>    v68
+>    v69
+>    v71
+>    v73
 > 
 > Signed-off-by: Gavin Shan <gshan@redhat.com>
 > ---
->   target/cris/cpu.c | 38 --------------------------------------
->   target/cris/cpu.h |  3 ---
->   2 files changed, 41 deletions(-)
+>   target/hexagon/cpu.c | 20 --------------------
+>   target/hexagon/cpu.h |  3 ---
+>   2 files changed, 23 deletions(-)
 
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
