@@ -4,95 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 339B3C54FB9
-	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Nov 2023 16:21:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBD03C47071
+	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Nov 2023 18:33:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r3f6y-0006pU-12; Thu, 16 Nov 2023 11:21:00 -0500
+	id 1r3hAt-0004a0-KX; Thu, 16 Nov 2023 13:33:11 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r3f6w-0006og-6c
- for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 11:20:58 -0500
-Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1r3hAk-0004IZ-Jx
+ for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 13:33:02 -0500
+Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r3f6t-0000rN-Dd
- for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 11:20:57 -0500
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-32da7ac5c4fso727989f8f.1
- for <qemu-riscv@nongnu.org>; Thu, 16 Nov 2023 08:20:53 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1r3hAi-0002ZD-6a
+ for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 13:33:02 -0500
+Received: by mail-pg1-x533.google.com with SMTP id
+ 41be03b00d2f7-5bd33abbb90so831270a12.2
+ for <qemu-riscv@nongnu.org>; Thu, 16 Nov 2023 10:32:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700151652; x=1700756452; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
+ d=ventanamicro.com; s=google; t=1700159578; x=1700764378; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=zU0y/oNPBlXNKcCKBdzv6P0WXp12W1o/8xvu9k23CBM=;
- b=Yy1gmrnTty4pzUgP3ZdAa1oMxBGi1bqVzDsHmJl5UFZ2Rok+U8jpv9Ett2KIB8HF7A
- L4i1MCOxY3j6PnqhQWVGcaIFoWU2e32C3NSLV/MaMVU/PV7DZKjjdyxQveC8upITwB67
- x+4HWz8/E29LyighsVyFbxQZj8EW0cY5dE9jbw/o9iN4vxVfQFloLVO1hWhx6wuNwc0X
- 1Uqff6RwuzmfZZvfABVLEAoq36yFjugYsCC3Qx9f2YxgedNa65f6YNGSXGEwxs/hxvpR
- +cMeywP2QNHJpk/7uMNKEE8ct0PFSPMdc2tbvu1oZwQAzo1/0580kytjKbmyw0tDcQsI
- Mydg==
+ bh=VZ6GM2dKcS6mkSmOYBXd+y+aSuA3VKtwauyHooCA7zM=;
+ b=FYxPfUnaQbtD9nX6/3zIW1dZf74NYsSJKijLcfxmdBbgL4uogDy0UylSkt32HTcfvV
+ DRUcfNrjhiwK82DVdqyAFvvAG0tkuqbC0Bp6ZdUEprdPAEzXYQAcfoLL9UqUApGXyoNv
+ P3TDb5+4fSnE4IAmQLE+HWdvasp6bCDzQs6wFzG2JkGckFZRWaHGCgkScocSon6UaJxL
+ IlkCnPG9QbZLMNhaUq0icvw/2qki/eFkskaCk81pPv18NDsO6l5ARGbB78hZSrc5tISX
+ KQpSSbe1PDE8X1r0HGn/dQXPljCP5+GqoUjz7MARM/FODb04Q6/TwJaHHeHHenjE86c1
+ TTUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700151652; x=1700756452;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
+ d=1e100.net; s=20230601; t=1700159578; x=1700764378;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=zU0y/oNPBlXNKcCKBdzv6P0WXp12W1o/8xvu9k23CBM=;
- b=AIdMAgVZ7Sc/MZVPCkbdmCz0OAYrxyqyS0Hx+pZGzP+fKlrQq303pDvGxprY+vYpP+
- lok/vnG2VYArS1i9v46GAFxHgnahW24JEVOZ0eoBx6HmUvD+Ste11RlNBBXFOVvt4MuO
- bd1AQanbJgB8wizF2y3PDYK+tGhr+4BfpvIupI4sGC9logDvTaCe027TN1qNev9UeNl4
- XwQgWnOthtQwbUB4zgvrZZh7yGIBHCWxkYT11pqnKQ1kNMVaSjmTPmPMCsZmJFcCO4XH
- mab28RVgg2UtNlvJexs7hBT4QKV1Mi1KhZqkYN3kwXKbcsxvHX1DVqy7yF5AvpuLxN2k
- O/BQ==
-X-Gm-Message-State: AOJu0YzxH7g1mgmQkZSGDYJ1XEK8kw0X7GxpY9uddba/HO5GZz+JQXMY
- XXuVofkT1nefNRmcm++bjwbrbQ==
-X-Google-Smtp-Source: AGHT+IGFWnnT2ucR8Qe9SSsf9y3OPbtxZ4Zx0BEfVq92Hg2nUJAGZdWYFisO0MI97lnvOpGQX48qJw==
-X-Received: by 2002:a05:6000:1845:b0:32f:7fb0:de13 with SMTP id
- c5-20020a056000184500b0032f7fb0de13mr12173865wri.5.1700151652383; 
- Thu, 16 Nov 2023 08:20:52 -0800 (PST)
-Received: from [192.168.69.100] ([176.187.220.205])
+ bh=VZ6GM2dKcS6mkSmOYBXd+y+aSuA3VKtwauyHooCA7zM=;
+ b=Po4Wy0uG42u+zOmh3nYz0MX/+6sxZ3SuUJP86m6jy/kLEZItH6+BQeObo7fwrdTkZT
+ SGvr/uQoI2oWkMHucCcAN+hltwPdIHh78tFiAwqU9OkPhx9ZDqwrd6R85x2aHvh26ojW
+ X37olaUNGVgi3C/5lV7ic98f0DxRNMBsvt4+53wqcpCeGh3nwIkqJa4P1L7Yy1OQj4se
+ bv6zD2eBYJSP79Ew4jx7Vi/TrLIS1BYO95gBmzKUqkLgqzU2wek1nPUAl5etha3tKvNn
+ E0kM3Mt9fwk1Ki78SzDm+4ay1BTs5BDOp7V3MoqDzURBhnUAKqboqbgIIjI5mWuaSpm2
+ 2ADg==
+X-Gm-Message-State: AOJu0Yz62pvLANXOx1hHrSlI5pjXOKOZXuDYFye5GiTPhTq1DVmGNiiB
+ t0AjHxybvIoUfSJN0hbs9qPOYw==
+X-Google-Smtp-Source: AGHT+IHRrtIFZTvM013J6SRW+W20a8RhF86w+Xx8dmb86TgIdCxmZSiyI5afZXbi8W3nE/c6z+sTPg==
+X-Received: by 2002:a05:6a20:1611:b0:188:39e:9054 with SMTP id
+ l17-20020a056a20161100b00188039e9054mr26520pzj.6.1700159578637; 
+ Thu, 16 Nov 2023 10:32:58 -0800 (PST)
+Received: from ?IPV6:2804:7f0:bdcd:fb00:6501:2693:db52:c621?
+ ([2804:7f0:bdcd:fb00:6501:2693:db52:c621])
  by smtp.gmail.com with ESMTPSA id
- d16-20020adfe850000000b0032fb17c65desm14099905wrn.19.2023.11.16.08.20.49
+ m63-20020a625842000000b006bdd1ce6915sm36435pfb.193.2023.11.16.10.32.55
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Nov 2023 08:20:51 -0800 (PST)
-Message-ID: <78526851-6d44-4c18-97b8-57462fb42ab7@linaro.org>
-Date: Thu, 16 Nov 2023 17:20:48 +0100
+ Thu, 16 Nov 2023 10:32:58 -0800 (PST)
+Message-ID: <e97bf3de-12d8-42ca-b728-4f9edcbc50e2@ventanamicro.com>
+Date: Thu, 16 Nov 2023 15:32:54 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 00/31] Unified CPU type check
+Subject: Re: [PATCH] Fix SiFive E CLINT clock frequency (#1978)
 Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: Gavin Shan <gshan@redhat.com>, qemu-arm@nongnu.org
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
- imp@bsdimp.com, kevans@freebsd.org, richard.henderson@linaro.org,
- pbonzini@redhat.com, peter.maydell@linaro.org, imammedo@redhat.com,
- b.galvani@gmail.com, strahinja.p.jankovic@gmail.com, sundeep.lkml@gmail.com,
- kfting@nuvoton.com, wuhaotsh@google.com, nieklinnenbank@gmail.com,
- rad@semihalf.com, quic_llindhol@quicinc.com, marcin.juszkiewicz@linaro.org,
- eduardo@habkost.net, marcel.apfelbaum@gmail.com, wangyanan55@huawei.com,
- laurent@vivier.eu, vijai@behindbytes.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, mrolnik@gmail.com,
- edgar.iglesias@gmail.com, bcain@quicinc.com, gaosong@loongson.cn,
- aurelien@aurel32.net, jiaxun.yang@flygoat.com, aleksandar.rikalo@syrmia.com,
- chenhuacai@kernel.org, shorne@gmail.com, npiggin@gmail.com, clg@kaod.org,
- ysato@users.sourceforge.jp, kbastian@mail.uni-paderborn.de,
- jcmvbkbc@gmail.com, shan.gavin@gmail.com
-References: <20231114235628.534334-1-gshan@redhat.com>
- <efc49f7b-70f5-4ce9-8179-79e8a6abd732@linaro.org>
-In-Reply-To: <efc49f7b-70f5-4ce9-8179-79e8a6abd732@linaro.org>
+To: =?UTF-8?Q?Rom=C3=A1n_C=C3=A1rdenas?= <rcardenas.rod@gmail.com>,
+ qemu-devel@nongnu.org
+Cc: qemu-trivial@nongnu.org, Alistair.Francis@wdc.com,
+ bin.meng@windriver.com, palmer@dabbelt.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org
+References: <20231116120702.53170-1-rcardenas.rod@gmail.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20231116120702.53170-1-rcardenas.rod@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::533;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x533.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,52 +99,54 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 16/11/23 14:35, Philippe Mathieu-Daudé wrote:
-> Hi Gavin,
+I believe you forgot to add your Signed-off-by tag. Without it we can't accept
+the patch hehe
+
+Since you'll need to send another version with the S-o-b, please change the commit
+title to
+
+"riscv: Fix SiFive E CLINT clock frequency"
+
+That way other people will quickly identify which sub-tree this patch belongs. The Gitlab
+bug number you put it in the end of the commit msg in a tag:
+
+On 11/16/23 09:07, Román Cárdenas wrote:
+> If you check the manual of SiFive E310 (https://cdn.sparkfun.com/assets/7/f/0/2/7/fe310-g002-manual-v19p05.pdf?_gl=1*w2ieef*_ga*MTcyNDI2MjM0Ny4xNjk2ODcwNTM3*_ga_T369JS7J9N*MTY5Njg3MDUzNy4xLjAuMTY5Njg3MDUzNy42MC4wLjA.), you can see in Figure 1 that the CLINT is connected to the real time clock, which also feeds the AON peripheral (they share the same clock).
 > 
-> On 15/11/23 00:55, Gavin Shan wrote:
->> There are two places where the user specified CPU type is checked to see
->> if it's supported or allowed by the board: machine_run_board_init() and
->> mc->init(). We don't have to maintain two duplicate sets of logic. This
->> series intends to move the check to machine_run_board_init() so that we
->> have unified CPU type check.
+> In page 43, the docs also say that the timer registers of the CLINT count ticks from the rtcclk.
 > 
+> I am currently playing with bare metal applications both in QEMU and a physical SiFive E310 board and I confirm that the CLINT clock in the physical board runs at 32.768 kHz. In QEMU, the same app produces a completely different outcome, as sometimes a new CLINT interrupt is triggered before finishing other tasks.
 > 
->> Gavin Shan (30):
->>    target/alpha: Remove 'ev67' CPU class
->>    target/hppa: Remove object_class_is_abstract()
->>    target: Remove 'oc == NULL' check
->>    cpu: Add helper cpu_model_from_type()
->>    cpu: Add generic cpu_list()
->>    target/alpha: Use generic cpu_list()
->>    target/arm: Use generic cpu_list()
->>    target/avr: Use generic cpu_list()
->>    target/cris: Use generic cpu_list()
->>    target/hexagon: Use generic cpu_list()
->>    target/hppa: Use generic cpu_list()
->>    target/loongarch: Use generic cpu_list()
->>    target/m68k: Use generic cpu_list()
->>    target/mips: Use generic cpu_list()
->>    target/openrisc: Use generic cpu_list()
->>    target/riscv: Use generic cpu_list()
->>    target/rx: Use generic cpu_list()
->>    target/sh4: Use generic cpu_list()
->>    target/tricore: Use generic cpu_list()
->>    target/xtensa: Use generic cpu_list()
->>    target: Use generic cpu_model_from_type()
->>    machine: Constify MachineClass::valid_cpu_types[i]
+> You can check issue #1978 on GitLab for more information.
+>
+
+Like this:
+
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1978
+
+
+The rest of the commit msg and the code looks good to me. Thanks,
+
+
+
+Daniel
+
+  
+> ---
+>   hw/riscv/sifive_e.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> I'm queuing patches 1-3 & 5-23 to my cpus-next tree. No need to
-> repost them, please base them on my tree. I'll follow up with the
-> branch link when I finish my testing and push it.
-
-Here are these patches queued:
-
-   https://github.com/philmd/qemu.git branches/cpus-next
-
-I might queue more patches before the 9.0 merge window opens.
-
-Regards,
-
-Phil.
+> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+> index 0d37adc542..87d9602383 100644
+> --- a/hw/riscv/sifive_e.c
+> +++ b/hw/riscv/sifive_e.c
+> @@ -225,7 +225,7 @@ static void sifive_e_soc_realize(DeviceState *dev, Error **errp)
+>               RISCV_ACLINT_SWI_SIZE,
+>           RISCV_ACLINT_DEFAULT_MTIMER_SIZE, 0, ms->smp.cpus,
+>           RISCV_ACLINT_DEFAULT_MTIMECMP, RISCV_ACLINT_DEFAULT_MTIME,
+> -        RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ, false);
+> +        SIFIVE_E_LFCLK_DEFAULT_FREQ, false);
+>       sifive_e_prci_create(memmap[SIFIVE_E_DEV_PRCI].base);
+>   
+>       /* AON */
 
