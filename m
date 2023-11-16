@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29E44C197A0
-	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Nov 2023 23:14:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C86C1C54E76
+	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Nov 2023 23:27:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r3lYk-0003mj-1r; Thu, 16 Nov 2023 18:14:06 -0500
+	id 1r3llU-0005l8-SL; Thu, 16 Nov 2023 18:27:16 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r3lYi-0003m3-M9
- for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 18:14:04 -0500
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r3llR-0005kE-Np
+ for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 18:27:13 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r3lYf-0002d3-Kg
- for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 18:14:04 -0500
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r3llO-00039A-Vi
+ for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 18:27:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1700176440;
+ s=mimecast20190719; t=1700177229;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=uhX49lsCrLvnu60dw4Rb1gmQVUOoYKUwb+Zbt/YIRWs=;
- b=Abj9oAhqS4dKEjV3xbC+jD6DNhJex2A3sBki2r9VtvDFi3l9MqMhBihLBlHVyW7SH1ZwE1
- ZHXz8kkJO4Hh87/1YV2rcF7GSRRB7U5g0ByfcJzfo/T6BDHFDlkq/Jflf1pAcBbt45UqTM
- 5H2a+jFTd9PPAIleg7ehM4R81+2vUb8=
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=bsVUf95nsvz8HsXCQuGgq3Eei7P+SUSqTDa5H9h4TAs=;
+ b=GncoRWWWLsKVCCvVH2ZjTj6G7kf2P/ROh2kX7psMEccwp0nM/CfLy1/+8dG5z1Wdx9e+Ma
+ aQEhKAEZw+jGiAYr4zrx7Ir4pb5qSh7cZveMzotMnhM+Plns5SjOZtO6pdcZ8FaJderb2l
+ yGWPwnP4Bix5HdeL1NCuxhLZFwZ6i6A=
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com
+ [209.85.215.200]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-531-wROIU0xbPdqv7NQ2Eyf0mg-1; Thu, 16 Nov 2023 18:13:58 -0500
-X-MC-Unique: wROIU0xbPdqv7NQ2Eyf0mg-1
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-1cc23f2226bso15570875ad.2
- for <qemu-riscv@nongnu.org>; Thu, 16 Nov 2023 15:13:58 -0800 (PST)
+ us-mta-379-h4F1ie2oPCume-vbQMHD1Q-1; Thu, 16 Nov 2023 18:27:08 -0500
+X-MC-Unique: h4F1ie2oPCume-vbQMHD1Q-1
+Received: by mail-pg1-f200.google.com with SMTP id
+ 41be03b00d2f7-5c19a2f606dso1556768a12.3
+ for <qemu-riscv@nongnu.org>; Thu, 16 Nov 2023 15:27:07 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700176437; x=1700781237;
+ d=1e100.net; s=20230601; t=1700177227; x=1700782027;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=uhX49lsCrLvnu60dw4Rb1gmQVUOoYKUwb+Zbt/YIRWs=;
- b=sgxLbQQIzfzlc9HlQpBAUs79mwBYCezFpOb5dD9CtTVxhd8XeO/qbfwyaWy4GhXtPG
- qNXv2IP6HgUPRdETTmVhX7w+qm1801qxNysEAwffIzPm1/G+EgeKu7myE1r8ngo9AGFM
- DFMhh8mhAEiWckePK6ZCWqbugVs85iidBjSS4LoG6trQCvGpSPQFDbOYTZ41K9Vowwt2
- vWF2AqqiDR59JrA1XKE/mJAqJH4WuMan9o0bQf+cTvcb9zYY9Ocv9Nm4wbzPbP+s553S
- 6vKKW4Qbt8JYikvhnnY28Lg97E1ki63UPVyZmPLr6y9WJvPOn9fsjRkPEdLPfHudUL4M
- YNiA==
-X-Gm-Message-State: AOJu0YxLOYFya9KzLVvFs1D/+Qcmjx/FtSe/+SHyKAF3sPEwpvtpa8CH
- mkabEIB3xlUxjNAKnQ0+laVF4QSvHXyKePrRrxKByAk8ss7H5//BJCN6LIzhxSqg6bRGHYX0Pk8
- mwLzAw4Th0uyj5J4=
-X-Received: by 2002:a17:902:f544:b0:1cc:4146:9eb0 with SMTP id
- h4-20020a170902f54400b001cc41469eb0mr11890989plf.57.1700176437607; 
- Thu, 16 Nov 2023 15:13:57 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGTzNOnMUgzoONjPAFvDlwVae7gNn9JR1MSRQO8ewU+K1vYK/NxBMswQpT1PoPrJXR/xW/pcg==
-X-Received: by 2002:a17:902:f544:b0:1cc:4146:9eb0 with SMTP id
- h4-20020a170902f54400b001cc41469eb0mr11890936plf.57.1700176437262; 
- Thu, 16 Nov 2023 15:13:57 -0800 (PST)
+ bh=bsVUf95nsvz8HsXCQuGgq3Eei7P+SUSqTDa5H9h4TAs=;
+ b=e4rMhNETASXKba3SOW/WlFSXb6SRYlaXu8LXaoHQ9KbG4mwt4Gi0WQI5cS6LX4ETPY
+ 5L3gwCBY43Dxo/cC0DAQ7ZGhTyloZ4TEaOZGbw9+93g7EBuRu3zcN/nFHyINIiDsKaIf
+ IKwWxiYgiGZhOgxZ2xvxd/CmU2eDKqVGP15b/njOQawR4wyj5nQ2xFrmgmIdgNiSTdYS
+ XNNFa5pP7LaW9t5MD7pp0C/F8NM1S2eiO94ViGYvUutWUMFes+DNdf7lnxJnYfgHyPkQ
+ wAOwC4y6w9MywLc/Sir3zfiDE4u+7JR1+KH2zQfjGjLRJpOg+y3KXCbcfAVQe9xkMdbe
+ HkuA==
+X-Gm-Message-State: AOJu0YxtBUSWZW/NOCMWePHBbN9NBZI/cJ/AUUAoGKKz94TWqxKQxeVd
+ TN7tv2e+rywy1KGts8zl9lbfpjPBPcD92WWkfNClo8ClhyvAO1cBT+m9hL194ySjE54tiNrEwDs
+ gZYg6qacQi5Krdoc=
+X-Received: by 2002:a17:902:ecc8:b0:1cc:3875:e654 with SMTP id
+ a8-20020a170902ecc800b001cc3875e654mr12056114plh.26.1700177227034; 
+ Thu, 16 Nov 2023 15:27:07 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IE3vxHbcjnWTgT6Z/kSUD7c/8W3id7f/D5dsO7xEi1omqLkh+Epr9AU49QKPClN+smHHORp+w==
+X-Received: by 2002:a17:902:ecc8:b0:1cc:3875:e654 with SMTP id
+ a8-20020a170902ecc800b001cc3875e654mr12056063plh.26.1700177226745; 
+ Thu, 16 Nov 2023 15:27:06 -0800 (PST)
 Received: from ?IPV6:2001:8003:e5b0:9f00:b890:3e54:96bb:2a15?
  ([2001:8003:e5b0:9f00:b890:3e54:96bb:2a15])
  by smtp.gmail.com with ESMTPSA id
- w20-20020a170902d71400b001c726147a45sm184151ply.190.2023.11.16.15.13.42
+ d8-20020a170903230800b001cc0e3a29a8sm202183plh.89.2023.11.16.15.26.52
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Nov 2023 15:13:56 -0800 (PST)
-Message-ID: <41f9dd8e-eb57-47b6-b159-328024bc339d@redhat.com>
-Date: Fri, 17 Nov 2023 09:13:39 +1000
+ Thu, 16 Nov 2023 15:27:06 -0800 (PST)
+Message-ID: <7252553e-9ab3-4c8e-a867-55c57d0178ba@redhat.com>
+Date: Fri, 17 Nov 2023 09:26:50 +1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 03/31] cpu: Call object_class_dynamic_cast() once in
- cpu_class_by_name()
+Subject: Re: [PATCH v5 00/31] Unified CPU type check
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
@@ -88,10 +87,10 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  ysato@users.sourceforge.jp, kbastian@mail.uni-paderborn.de,
  jcmvbkbc@gmail.com, shan.gavin@gmail.com
 References: <20231114235628.534334-1-gshan@redhat.com>
- <20231114235628.534334-4-gshan@redhat.com>
- <d7a80e9e-9ffd-476c-ac98-a92838e11b5e@linaro.org>
+ <efc49f7b-70f5-4ce9-8179-79e8a6abd732@linaro.org>
+ <78526851-6d44-4c18-97b8-57462fb42ab7@linaro.org>
 From: Gavin Shan <gshan@redhat.com>
-In-Reply-To: <d7a80e9e-9ffd-476c-ac98-a92838e11b5e@linaro.org>
+In-Reply-To: <78526851-6d44-4c18-97b8-57462fb42ab7@linaro.org>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
@@ -99,14 +98,14 @@ Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=170.10.129.124; envelope-from=gshan@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -6
-X-Spam_score: -0.7
-X-Spam_bar: /
-X-Spam_report: (-0.7 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.117,
+X-Spam_score_int: -21
+X-Spam_score: -2.2
+X-Spam_bar: --
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.117,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_SORBS_WEB=1.5, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -124,46 +123,32 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 Hi Phil,
 
-On 11/17/23 02:08, Philippe Mathieu-Daudé wrote:
-> On 15/11/23 00:56, Gavin Shan wrote:
->> From: Philippe Mathieu-Daudé <philmd@linaro.org>
+On 11/17/23 02:20, Philippe Mathieu-Daudé wrote:
+> On 16/11/23 14:35, Philippe Mathieu-Daudé wrote:
 >>
->> For all targets, the CPU class returned from CPUClass::class_by_name()
->> and object_class_dynamic_cast(oc, CPU_RESOLVING_TYPE) need to be
->> compatible. Lets apply the check in cpu_class_by_name() for once,
->> instead of having the check in CPUClass::class_by_name() for individual
->> target.
->>
->> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
->> Reviewed-by: Gavin Shan <gshan@redhat.com>
->> Reviewed-by: Igor Mammedov <imammedo@redhat.com>
+>> I'm queuing patches 1-3 & 5-23 to my cpus-next tree. No need to
+>> repost them, please base them on my tree. I'll follow up with the
+>> branch link when I finish my testing and push it.
 > 
-> Gavin, this patch is missing your S-o-b tag. Do you mind responding to
-> this email with it? Thanks!
+> Here are these patches queued:
+> 
+>    https://github.com/philmd/qemu.git branches/cpus-next
+> 
+> I might queue more patches before the 9.0 merge window opens.
 > 
 
-Yes, please add my s-o-b if you need:
+Thanks for queuing these patches, but I don't see 'cpus-next' branch
+in the repository. Please let me know if I checked out the code properly.
 
-Signed-off-by: Gavin Shan <gshan@redhat.com>
+$ git clone https://github.com/philmd/qemu.git philmd
+$ cd philmd
+$ git branch
+* staging
+$ git branch -a | grep cpus-next
+$ echo $?
+1
 
 Thanks,
 Gavin
-
->> ---
->>   hw/core/cpu-common.c   | 8 +++++---
->>   target/alpha/cpu.c     | 3 ---
->>   target/arm/cpu.c       | 4 +---
->>   target/avr/cpu.c       | 8 +-------
->>   target/cris/cpu.c      | 4 +---
->>   target/hexagon/cpu.c   | 4 +---
->>   target/hppa/cpu.c      | 7 +------
->>   target/loongarch/cpu.c | 8 +-------
->>   target/m68k/cpu.c      | 4 +---
->>   target/openrisc/cpu.c  | 4 +---
->>   target/riscv/cpu.c     | 4 +---
->>   target/tricore/cpu.c   | 4 +---
->>   target/xtensa/cpu.c    | 4 +---
->>   13 files changed, 16 insertions(+), 50 deletions(-)
-> 
 
 
