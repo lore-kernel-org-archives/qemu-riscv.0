@@ -4,86 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBD03C47071
-	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Nov 2023 18:33:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29E44C197A0
+	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Nov 2023 23:14:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r3hAt-0004a0-KX; Thu, 16 Nov 2023 13:33:11 -0500
+	id 1r3lYk-0003mj-1r; Thu, 16 Nov 2023 18:14:06 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1r3hAk-0004IZ-Jx
- for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 13:33:02 -0500
-Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1r3hAi-0002ZD-6a
- for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 13:33:02 -0500
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-5bd33abbb90so831270a12.2
- for <qemu-riscv@nongnu.org>; Thu, 16 Nov 2023 10:32:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1700159578; x=1700764378; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=VZ6GM2dKcS6mkSmOYBXd+y+aSuA3VKtwauyHooCA7zM=;
- b=FYxPfUnaQbtD9nX6/3zIW1dZf74NYsSJKijLcfxmdBbgL4uogDy0UylSkt32HTcfvV
- DRUcfNrjhiwK82DVdqyAFvvAG0tkuqbC0Bp6ZdUEprdPAEzXYQAcfoLL9UqUApGXyoNv
- P3TDb5+4fSnE4IAmQLE+HWdvasp6bCDzQs6wFzG2JkGckFZRWaHGCgkScocSon6UaJxL
- IlkCnPG9QbZLMNhaUq0icvw/2qki/eFkskaCk81pPv18NDsO6l5ARGbB78hZSrc5tISX
- KQpSSbe1PDE8X1r0HGn/dQXPljCP5+GqoUjz7MARM/FODb04Q6/TwJaHHeHHenjE86c1
- TTUA==
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r3lYi-0003m3-M9
+ for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 18:14:04 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r3lYf-0002d3-Kg
+ for qemu-riscv@nongnu.org; Thu, 16 Nov 2023 18:14:04 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1700176440;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=uhX49lsCrLvnu60dw4Rb1gmQVUOoYKUwb+Zbt/YIRWs=;
+ b=Abj9oAhqS4dKEjV3xbC+jD6DNhJex2A3sBki2r9VtvDFi3l9MqMhBihLBlHVyW7SH1ZwE1
+ ZHXz8kkJO4Hh87/1YV2rcF7GSRRB7U5g0ByfcJzfo/T6BDHFDlkq/Jflf1pAcBbt45UqTM
+ 5H2a+jFTd9PPAIleg7ehM4R81+2vUb8=
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
+ [209.85.214.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-531-wROIU0xbPdqv7NQ2Eyf0mg-1; Thu, 16 Nov 2023 18:13:58 -0500
+X-MC-Unique: wROIU0xbPdqv7NQ2Eyf0mg-1
+Received: by mail-pl1-f197.google.com with SMTP id
+ d9443c01a7336-1cc23f2226bso15570875ad.2
+ for <qemu-riscv@nongnu.org>; Thu, 16 Nov 2023 15:13:58 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700159578; x=1700764378;
+ d=1e100.net; s=20230601; t=1700176437; x=1700781237;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=VZ6GM2dKcS6mkSmOYBXd+y+aSuA3VKtwauyHooCA7zM=;
- b=Po4Wy0uG42u+zOmh3nYz0MX/+6sxZ3SuUJP86m6jy/kLEZItH6+BQeObo7fwrdTkZT
- SGvr/uQoI2oWkMHucCcAN+hltwPdIHh78tFiAwqU9OkPhx9ZDqwrd6R85x2aHvh26ojW
- X37olaUNGVgi3C/5lV7ic98f0DxRNMBsvt4+53wqcpCeGh3nwIkqJa4P1L7Yy1OQj4se
- bv6zD2eBYJSP79Ew4jx7Vi/TrLIS1BYO95gBmzKUqkLgqzU2wek1nPUAl5etha3tKvNn
- E0kM3Mt9fwk1Ki78SzDm+4ay1BTs5BDOp7V3MoqDzURBhnUAKqboqbgIIjI5mWuaSpm2
- 2ADg==
-X-Gm-Message-State: AOJu0Yz62pvLANXOx1hHrSlI5pjXOKOZXuDYFye5GiTPhTq1DVmGNiiB
- t0AjHxybvIoUfSJN0hbs9qPOYw==
-X-Google-Smtp-Source: AGHT+IHRrtIFZTvM013J6SRW+W20a8RhF86w+Xx8dmb86TgIdCxmZSiyI5afZXbi8W3nE/c6z+sTPg==
-X-Received: by 2002:a05:6a20:1611:b0:188:39e:9054 with SMTP id
- l17-20020a056a20161100b00188039e9054mr26520pzj.6.1700159578637; 
- Thu, 16 Nov 2023 10:32:58 -0800 (PST)
-Received: from ?IPV6:2804:7f0:bdcd:fb00:6501:2693:db52:c621?
- ([2804:7f0:bdcd:fb00:6501:2693:db52:c621])
+ bh=uhX49lsCrLvnu60dw4Rb1gmQVUOoYKUwb+Zbt/YIRWs=;
+ b=sgxLbQQIzfzlc9HlQpBAUs79mwBYCezFpOb5dD9CtTVxhd8XeO/qbfwyaWy4GhXtPG
+ qNXv2IP6HgUPRdETTmVhX7w+qm1801qxNysEAwffIzPm1/G+EgeKu7myE1r8ngo9AGFM
+ DFMhh8mhAEiWckePK6ZCWqbugVs85iidBjSS4LoG6trQCvGpSPQFDbOYTZ41K9Vowwt2
+ vWF2AqqiDR59JrA1XKE/mJAqJH4WuMan9o0bQf+cTvcb9zYY9Ocv9Nm4wbzPbP+s553S
+ 6vKKW4Qbt8JYikvhnnY28Lg97E1ki63UPVyZmPLr6y9WJvPOn9fsjRkPEdLPfHudUL4M
+ YNiA==
+X-Gm-Message-State: AOJu0YxLOYFya9KzLVvFs1D/+Qcmjx/FtSe/+SHyKAF3sPEwpvtpa8CH
+ mkabEIB3xlUxjNAKnQ0+laVF4QSvHXyKePrRrxKByAk8ss7H5//BJCN6LIzhxSqg6bRGHYX0Pk8
+ mwLzAw4Th0uyj5J4=
+X-Received: by 2002:a17:902:f544:b0:1cc:4146:9eb0 with SMTP id
+ h4-20020a170902f54400b001cc41469eb0mr11890989plf.57.1700176437607; 
+ Thu, 16 Nov 2023 15:13:57 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGTzNOnMUgzoONjPAFvDlwVae7gNn9JR1MSRQO8ewU+K1vYK/NxBMswQpT1PoPrJXR/xW/pcg==
+X-Received: by 2002:a17:902:f544:b0:1cc:4146:9eb0 with SMTP id
+ h4-20020a170902f54400b001cc41469eb0mr11890936plf.57.1700176437262; 
+ Thu, 16 Nov 2023 15:13:57 -0800 (PST)
+Received: from ?IPV6:2001:8003:e5b0:9f00:b890:3e54:96bb:2a15?
+ ([2001:8003:e5b0:9f00:b890:3e54:96bb:2a15])
  by smtp.gmail.com with ESMTPSA id
- m63-20020a625842000000b006bdd1ce6915sm36435pfb.193.2023.11.16.10.32.55
+ w20-20020a170902d71400b001c726147a45sm184151ply.190.2023.11.16.15.13.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Nov 2023 10:32:58 -0800 (PST)
-Message-ID: <e97bf3de-12d8-42ca-b728-4f9edcbc50e2@ventanamicro.com>
-Date: Thu, 16 Nov 2023 15:32:54 -0300
+ Thu, 16 Nov 2023 15:13:56 -0800 (PST)
+Message-ID: <41f9dd8e-eb57-47b6-b159-328024bc339d@redhat.com>
+Date: Fri, 17 Nov 2023 09:13:39 +1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Fix SiFive E CLINT clock frequency (#1978)
+Subject: Re: [PATCH v5 03/31] cpu: Call object_class_dynamic_cast() once in
+ cpu_class_by_name()
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-arm@nongnu.org
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
+ imp@bsdimp.com, kevans@freebsd.org, richard.henderson@linaro.org,
+ pbonzini@redhat.com, peter.maydell@linaro.org, imammedo@redhat.com,
+ b.galvani@gmail.com, strahinja.p.jankovic@gmail.com, sundeep.lkml@gmail.com,
+ kfting@nuvoton.com, wuhaotsh@google.com, nieklinnenbank@gmail.com,
+ rad@semihalf.com, quic_llindhol@quicinc.com, marcin.juszkiewicz@linaro.org,
+ eduardo@habkost.net, marcel.apfelbaum@gmail.com, wangyanan55@huawei.com,
+ laurent@vivier.eu, vijai@behindbytes.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, mrolnik@gmail.com,
+ edgar.iglesias@gmail.com, bcain@quicinc.com, gaosong@loongson.cn,
+ aurelien@aurel32.net, jiaxun.yang@flygoat.com, aleksandar.rikalo@syrmia.com,
+ chenhuacai@kernel.org, shorne@gmail.com, npiggin@gmail.com, clg@kaod.org,
+ ysato@users.sourceforge.jp, kbastian@mail.uni-paderborn.de,
+ jcmvbkbc@gmail.com, shan.gavin@gmail.com
+References: <20231114235628.534334-1-gshan@redhat.com>
+ <20231114235628.534334-4-gshan@redhat.com>
+ <d7a80e9e-9ffd-476c-ac98-a92838e11b5e@linaro.org>
+From: Gavin Shan <gshan@redhat.com>
+In-Reply-To: <d7a80e9e-9ffd-476c-ac98-a92838e11b5e@linaro.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Language: en-US
-To: =?UTF-8?Q?Rom=C3=A1n_C=C3=A1rdenas?= <rcardenas.rod@gmail.com>,
- qemu-devel@nongnu.org
-Cc: qemu-trivial@nongnu.org, Alistair.Francis@wdc.com,
- bin.meng@windriver.com, palmer@dabbelt.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org
-References: <20231116120702.53170-1-rcardenas.rod@gmail.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20231116120702.53170-1-rcardenas.rod@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::533;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x533.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=gshan@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -6
+X-Spam_score: -0.7
+X-Spam_bar: /
+X-Spam_report: (-0.7 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.117,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_SORBS_WEB=1.5, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,54 +122,48 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-I believe you forgot to add your Signed-off-by tag. Without it we can't accept
-the patch hehe
+Hi Phil,
 
-Since you'll need to send another version with the S-o-b, please change the commit
-title to
-
-"riscv: Fix SiFive E CLINT clock frequency"
-
-That way other people will quickly identify which sub-tree this patch belongs. The Gitlab
-bug number you put it in the end of the commit msg in a tag:
-
-On 11/16/23 09:07, Román Cárdenas wrote:
-> If you check the manual of SiFive E310 (https://cdn.sparkfun.com/assets/7/f/0/2/7/fe310-g002-manual-v19p05.pdf?_gl=1*w2ieef*_ga*MTcyNDI2MjM0Ny4xNjk2ODcwNTM3*_ga_T369JS7J9N*MTY5Njg3MDUzNy4xLjAuMTY5Njg3MDUzNy42MC4wLjA.), you can see in Figure 1 that the CLINT is connected to the real time clock, which also feeds the AON peripheral (they share the same clock).
+On 11/17/23 02:08, Philippe Mathieu-Daudé wrote:
+> On 15/11/23 00:56, Gavin Shan wrote:
+>> From: Philippe Mathieu-Daudé <philmd@linaro.org>
+>>
+>> For all targets, the CPU class returned from CPUClass::class_by_name()
+>> and object_class_dynamic_cast(oc, CPU_RESOLVING_TYPE) need to be
+>> compatible. Lets apply the check in cpu_class_by_name() for once,
+>> instead of having the check in CPUClass::class_by_name() for individual
+>> target.
+>>
+>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>> Reviewed-by: Gavin Shan <gshan@redhat.com>
+>> Reviewed-by: Igor Mammedov <imammedo@redhat.com>
 > 
-> In page 43, the docs also say that the timer registers of the CLINT count ticks from the rtcclk.
+> Gavin, this patch is missing your S-o-b tag. Do you mind responding to
+> this email with it? Thanks!
 > 
-> I am currently playing with bare metal applications both in QEMU and a physical SiFive E310 board and I confirm that the CLINT clock in the physical board runs at 32.768 kHz. In QEMU, the same app produces a completely different outcome, as sometimes a new CLINT interrupt is triggered before finishing other tasks.
+
+Yes, please add my s-o-b if you need:
+
+Signed-off-by: Gavin Shan <gshan@redhat.com>
+
+Thanks,
+Gavin
+
+>> ---
+>>   hw/core/cpu-common.c   | 8 +++++---
+>>   target/alpha/cpu.c     | 3 ---
+>>   target/arm/cpu.c       | 4 +---
+>>   target/avr/cpu.c       | 8 +-------
+>>   target/cris/cpu.c      | 4 +---
+>>   target/hexagon/cpu.c   | 4 +---
+>>   target/hppa/cpu.c      | 7 +------
+>>   target/loongarch/cpu.c | 8 +-------
+>>   target/m68k/cpu.c      | 4 +---
+>>   target/openrisc/cpu.c  | 4 +---
+>>   target/riscv/cpu.c     | 4 +---
+>>   target/tricore/cpu.c   | 4 +---
+>>   target/xtensa/cpu.c    | 4 +---
+>>   13 files changed, 16 insertions(+), 50 deletions(-)
 > 
-> You can check issue #1978 on GitLab for more information.
->
 
-Like this:
-
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1978
-
-
-The rest of the commit msg and the code looks good to me. Thanks,
-
-
-
-Daniel
-
-  
-> ---
->   hw/riscv/sifive_e.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-> index 0d37adc542..87d9602383 100644
-> --- a/hw/riscv/sifive_e.c
-> +++ b/hw/riscv/sifive_e.c
-> @@ -225,7 +225,7 @@ static void sifive_e_soc_realize(DeviceState *dev, Error **errp)
->               RISCV_ACLINT_SWI_SIZE,
->           RISCV_ACLINT_DEFAULT_MTIMER_SIZE, 0, ms->smp.cpus,
->           RISCV_ACLINT_DEFAULT_MTIMECMP, RISCV_ACLINT_DEFAULT_MTIME,
-> -        RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ, false);
-> +        SIFIVE_E_LFCLK_DEFAULT_FREQ, false);
->       sifive_e_prci_create(memmap[SIFIVE_E_DEV_PRCI].base);
->   
->       /* AON */
 
