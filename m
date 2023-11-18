@@ -4,85 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4E16C072A2
-	for <qemu-riscv@archiver.kernel.org>; Fri, 17 Nov 2023 10:15:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5768C2BB3F
+	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Nov 2023 06:41:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r3vsw-0006ba-MR; Fri, 17 Nov 2023 05:15:39 -0500
+	id 1r4F1I-0000Yk-GJ; Sat, 18 Nov 2023 01:41:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1r3vsj-0006TA-6B
- for qemu-riscv@nongnu.org; Fri, 17 Nov 2023 05:15:27 -0500
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1r3vsf-00022i-8b
- for qemu-riscv@nongnu.org; Fri, 17 Nov 2023 05:15:24 -0500
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-1ce611682f6so1999165ad.1
- for <qemu-riscv@nongnu.org>; Fri, 17 Nov 2023 02:15:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1700216108; x=1700820908; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=BYYmNehUUhi33mj3OOW7nG7/+uUkFUiFSW8Tj2ElYyk=;
- b=j5mFwzP/j5VhLZgYsU8onOALZdg7ZimkneAjoi00Izn8JACB5YGX/r/T8aLKHT2Szm
- P5UzHfUBVQnd9RstUhqXxmm/3PDb8VAG5aVf4PcN29OyKRky3DUVwCg0MGEQdsqHBQvw
- GK9IzZEJDY29QtZxdNnJAxwsZil2EaN46Li8tsVxl32tdw60A7hZ9UfwsOQ7ouJ7lm36
- T++xTjCq9zDL9OnzZ0F4vjC3/pzPNTH+/7ZxAjoqXX/qS57DhE26+t5MjKFa78JAJalp
- 6Oq6vaJcOBb2mDatqSkb5hgNPRho5KoMaPuhLV8kHcYGh41k0CO1O17dACj5tuTAJ4zb
- uSnQ==
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r4F1A-0000XQ-KV
+ for qemu-riscv@nongnu.org; Sat, 18 Nov 2023 01:41:25 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r4F16-00065C-Sp
+ for qemu-riscv@nongnu.org; Sat, 18 Nov 2023 01:41:23 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1700289676;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=UnpuoslZpH27s0YVxL2DOtr7qbZMS0LnrfN9VuXqNhs=;
+ b=ch62wGsIrGEsH/co9+zVX+94Z//Fn8ZJPy+xVSZdVKdLUM+RXVjiD/xAKjmLAqbQHk1PdL
+ 6navSfMjjsJMLFwS7bk9wvwwECAeJCW8PS/VYlbWK5fcrp9Ibl2z7kVATyQqJYmvhowzAx
+ 0a1TWjUzkT0CPSxDIQ7XcUt0jetxhfo=
+Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
+ [209.85.210.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-384-SRmFjQd5NcCJW48iCwZQYg-1; Sat, 18 Nov 2023 01:41:14 -0500
+X-MC-Unique: SRmFjQd5NcCJW48iCwZQYg-1
+Received: by mail-pf1-f198.google.com with SMTP id
+ d2e1a72fcca58-6bfd5856509so3799401b3a.1
+ for <qemu-riscv@nongnu.org>; Fri, 17 Nov 2023 22:41:14 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700216108; x=1700820908;
+ d=1e100.net; s=20230601; t=1700289673; x=1700894473;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=BYYmNehUUhi33mj3OOW7nG7/+uUkFUiFSW8Tj2ElYyk=;
- b=oi3wMVY44iiSlQnFy2Q/JbrqgA2Ljuh/eAZsROAuoRdwKkdgYPVe0lmkFzcWtOAl4h
- P/lPLHs6fRZ521DPgV4rsaWcikSzTXBO+nQGOx+TPq/SyTRuO4apo3pTg3Z/Vomy3Gi9
- qR7YuOIzbKq2xLvIrVr2VBs3jC87FCxDxJpJKFV4HuBv2uqzWHVmiOBjy+VNKug7Ngkd
- hJzhY/Z4QEF4zflU1zzp6HRTCoOKewjhTaKJeqtZIMaCkunOjRV+DvcwUMcvowY0XXwq
- KPlpq9U3905wRUsqze5nNd8fZKkSzNQ9/QnL6222nopPDQsro2vIJF0o789qGwJX1vCJ
- 8ZYw==
-X-Gm-Message-State: AOJu0YxUgs6iX/ikhUv1p0Z2PaEOD1Pjdp8ljKL2I0fhbLhY/a4QHR9v
- ohWpEZfTs0dl0nGrvtezINlDCg==
-X-Google-Smtp-Source: AGHT+IGvP54bSMrkyjknLOhepa7O/vqrMa1t+9/Zu6ERJWD5vMzDQI5kISuWp7dGl5IBec1Akb4SNQ==
-X-Received: by 2002:a17:902:9894:b0:1cc:e66:3732 with SMTP id
- s20-20020a170902989400b001cc0e663732mr11523276plp.19.1700216108017; 
- Fri, 17 Nov 2023 02:15:08 -0800 (PST)
-Received: from [192.168.68.109] ([152.250.131.148])
+ bh=UnpuoslZpH27s0YVxL2DOtr7qbZMS0LnrfN9VuXqNhs=;
+ b=Iiz5iZfULest/SaiWeKJra+Hx3IMnTkrMbZ2ROsZObUYpEGXKHq1r1VH5cja+sM5E4
+ LigBj7LLLILQAqp6/aPigtWjWU6xHN8bLArDbqWtXybmgQe2AvWyUkUI19NUnIVdjYCC
+ pcWtxR6xk/seyH3EgRWIZcqnSHW7xAJHVEAuqISoDzx4LwCkwU/J6TLIDIoL9j8GnBI5
+ k+hNVyrvSV1bwGDPduN8P0vvSaIz6pNYeNFPaJa0d5KqukcsPNPLWaaMPzlOGuhrcCQW
+ 4Y4TcAqtkemw6Lz7xVIEgIvlYL617W/guUCcu+X0ThBA6se0s6keouUVQgY3JCfuCDPW
+ 8c3g==
+X-Gm-Message-State: AOJu0YxP7TpnIYNyaJ6oAhwEKiMZY7BRxlS49QU0hn+KWxMdE9NqGRif
+ IEarplj5B9hSxbxzb6YErDD1W0vbqUH2WvfzAq3+WFFD1rb5ejcGz1rvXn1nIKHFa3JQRFtfaUp
+ czyFq3cr3+xgqUp8=
+X-Received: by 2002:a05:6a00:1886:b0:6b6:5ed4:dd42 with SMTP id
+ x6-20020a056a00188600b006b65ed4dd42mr2251997pfh.31.1700289673281; 
+ Fri, 17 Nov 2023 22:41:13 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFb8zeud0zSNkXCyNWKb08LrvZ4xkXxIY2zoqDcsZlUpRxfVBXVfvp3HnySFCFjNkWXQI3MxQ==
+X-Received: by 2002:a05:6a00:1886:b0:6b6:5ed4:dd42 with SMTP id
+ x6-20020a056a00188600b006b65ed4dd42mr2251911pfh.31.1700289671951; 
+ Fri, 17 Nov 2023 22:41:11 -0800 (PST)
+Received: from ?IPV6:2001:8003:e5b0:9f00:b890:3e54:96bb:2a15?
+ ([2001:8003:e5b0:9f00:b890:3e54:96bb:2a15])
  by smtp.gmail.com with ESMTPSA id
- l14-20020a170902f68e00b001ca4ad86357sm1051036plg.227.2023.11.17.02.15.05
+ s19-20020aa78293000000b006b22218cb92sm2365475pfm.43.2023.11.17.22.40.56
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 17 Nov 2023 02:15:07 -0800 (PST)
-Message-ID: <62bcbb0c-7d24-4363-b068-51fb12aa96d0@ventanamicro.com>
-Date: Fri, 17 Nov 2023 07:15:03 -0300
+ Fri, 17 Nov 2023 22:41:11 -0800 (PST)
+Message-ID: <e638c40b-fbf9-4495-93aa-1443877b553f@redhat.com>
+Date: Sat, 18 Nov 2023 16:40:54 +1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] riscv: Fix SiFive E CLINT clock frequency
+Subject: Re: [PATCH v5 00/31] Unified CPU type check
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-arm@nongnu.org
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
+ imp@bsdimp.com, kevans@freebsd.org, richard.henderson@linaro.org,
+ pbonzini@redhat.com, peter.maydell@linaro.org, imammedo@redhat.com,
+ b.galvani@gmail.com, strahinja.p.jankovic@gmail.com, sundeep.lkml@gmail.com,
+ kfting@nuvoton.com, wuhaotsh@google.com, nieklinnenbank@gmail.com,
+ rad@semihalf.com, quic_llindhol@quicinc.com, marcin.juszkiewicz@linaro.org,
+ eduardo@habkost.net, marcel.apfelbaum@gmail.com, wangyanan55@huawei.com,
+ laurent@vivier.eu, vijai@behindbytes.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, mrolnik@gmail.com,
+ edgar.iglesias@gmail.com, bcain@quicinc.com, gaosong@loongson.cn,
+ aurelien@aurel32.net, jiaxun.yang@flygoat.com, aleksandar.rikalo@syrmia.com,
+ chenhuacai@kernel.org, shorne@gmail.com, npiggin@gmail.com, clg@kaod.org,
+ ysato@users.sourceforge.jp, kbastian@mail.uni-paderborn.de,
+ jcmvbkbc@gmail.com, shan.gavin@gmail.com
+References: <20231114235628.534334-1-gshan@redhat.com>
+ <efc49f7b-70f5-4ce9-8179-79e8a6abd732@linaro.org>
+ <78526851-6d44-4c18-97b8-57462fb42ab7@linaro.org>
+ <7252553e-9ab3-4c8e-a867-55c57d0178ba@redhat.com>
+ <ebaa5c70-e410-465a-a94e-1a254506a81e@linaro.org>
+From: Gavin Shan <gshan@redhat.com>
+In-Reply-To: <ebaa5c70-e410-465a-a94e-1a254506a81e@linaro.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Language: en-US
-To: =?UTF-8?Q?Rom=C3=A1n_C=C3=A1rdenas?= <rcardenas.rod@gmail.com>,
- qemu-devel@nongnu.org
-Cc: qemu-trivial@nongnu.org, Alistair.Francis@wdc.com,
- bin.meng@windriver.com, palmer@dabbelt.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org
-References: <20231117082840.55705-1-rcardenas.rod@gmail.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20231117082840.55705-1-rcardenas.rod@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x633.google.com
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=gshan@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,46 +124,46 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
-
-On 11/17/23 05:28, Román Cárdenas wrote:
-> If you check the manual of SiFive E310 (https://cdn.sparkfun.com/assets/7/f/0/2/7/fe310-g002-manual-v19p05.pdf),
-> you can see in Figure 1 that the CLINT is connected to the real time clock, which also feeds the AON peripheral (they share the same clock).
-> In page 43, the docs also say that the timer registers of the CLINT count ticks from the rtcclk.
+On 11/17/23 17:34, Philippe Mathieu-Daudé wrote:
+> On 17/11/23 00:26, Gavin Shan wrote:
+>> On 11/17/23 02:20, Philippe Mathieu-Daudé wrote:
+>>> On 16/11/23 14:35, Philippe Mathieu-Daudé wrote:
+>>>>
+>>>> I'm queuing patches 1-3 & 5-23 to my cpus-next tree. No need to
+>>>> repost them, please base them on my tree. I'll follow up with the
+>>>> branch link when I finish my testing and push it.
+>>>
+>>> Here are these patches queued:
+>>>
+>>>    https://github.com/philmd/qemu.git branches/cpus-next
 > 
-> I am currently playing with bare metal applications both in QEMU and a physical SiFive E310 board and
-> I confirm that the CLINT clock in the physical board runs at 32.768 kHz.
-> In QEMU, the same app produces a completely different outcome, as sometimes a new CLINT interrupt is triggered before finishing other tasks.
+> Oops, no clue why I wrote github instead of gitlab, sorry =)
 > 
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1978
+
+No worries, Phil.
+
+>>> I might queue more patches before the 9.0 merge window opens.
+>>>
+>>
+>> Thanks for queuing these patches, but I don't see 'cpus-next' branch
+>> in the repository. Please let me know if I checked out the code properly.
+>>
+>> $ git clone https://github.com/philmd/qemu.git philmd
+>> $ cd philmd
+>> $ git branch
+>> * staging
+>> $ git branch -a | grep cpus-next
+>> $ echo $?
+>> 1
 > 
-> Signed-off-by: Román Cárdenas <rcardenas.rod@gmail.com>
-> ---
-
-
-As I said in an earlier version, it would be nice if someone from Sifive could give
-an ACK/NACK for this change.
-
-For now:
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
-
-
-
->   hw/riscv/sifive_e.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+> No need to clone, you can use in your current cloned repository:
 > 
-> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-> index 0d37adc542..87d9602383 100644
-> --- a/hw/riscv/sifive_e.c
-> +++ b/hw/riscv/sifive_e.c
-> @@ -225,7 +225,7 @@ static void sifive_e_soc_realize(DeviceState *dev, Error **errp)
->               RISCV_ACLINT_SWI_SIZE,
->           RISCV_ACLINT_DEFAULT_MTIMER_SIZE, 0, ms->smp.cpus,
->           RISCV_ACLINT_DEFAULT_MTIMECMP, RISCV_ACLINT_DEFAULT_MTIME,
-> -        RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ, false);
-> +        SIFIVE_E_LFCLK_DEFAULT_FREQ, false);
->       sifive_e_prci_create(memmap[SIFIVE_E_DEV_PRCI].base);
->   
->       /* AON */
+>    $ git fetch https://gitlab.com/philmd/qemu.git cpus-next:cpus-next
+> 
+
+Thanks. It worked for me.
+
+Thanks,
+Gavin
+
 
