@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD722C5ACB3
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EE31C54E76
 	for <qemu-riscv@archiver.kernel.org>; Mon, 20 Nov 2023 00:31:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r4s9O-0005LK-Mg; Sun, 19 Nov 2023 19:28:30 -0500
+	id 1r4s9g-0005Q1-M7; Sun, 19 Nov 2023 19:28:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r4s9N-0005Ka-DI
- for qemu-riscv@nongnu.org; Sun, 19 Nov 2023 19:28:29 -0500
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r4s9e-0005P9-Vl
+ for qemu-riscv@nongnu.org; Sun, 19 Nov 2023 19:28:46 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r4s9K-00019a-Hb
- for qemu-riscv@nongnu.org; Sun, 19 Nov 2023 19:28:28 -0500
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r4s9d-0001EH-IZ
+ for qemu-riscv@nongnu.org; Sun, 19 Nov 2023 19:28:46 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1700440105;
+ s=mimecast20190719; t=1700440123;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Lu8QJO9KDwDOmzdkBAnOVeCD39qe2P6zlwVvhT3kRpk=;
- b=fuQFwbHeMJr4e0+71LoYmZxZUvV8sXCK3nDeK+Wqf2GWoKZTG9rJamg5/lpdMxMcne4T7q
- 13z+RvHttXNwTiIKw8kATp7F46Lu9GaJx2hWbZ0CaBGJQ2q8BiuHAPjJNK79248c9o2Oik
- NVIzUEsQC2K3ZcE+smchJo94q92QLDk=
+ bh=0Qk6/QajLgnGyyzUHhMPIDBeq8Pe5C9hI3Ifb+WIAuI=;
+ b=LqEAKr5JDIKtgsnqDZkhGi6QjlhkOm+Iee5Q9dZgxR0ejmHYGFugDRbRSRUkD5sOyLBrv0
+ H5GR4unaZ2Cy6xXccgxRLJS92ccYeNDNlEbp2Pb4WlUkfIYWQ781TrvmUSfWSYeuRhkpPa
+ oDM4hxiThOOsZL4ykJNPL1vS6eZMXbc=
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-335-rebdYtjzMGeUx6JSz-WLuA-1; Sun, 19 Nov 2023 19:28:16 -0500
-X-MC-Unique: rebdYtjzMGeUx6JSz-WLuA-1
+ us-mta-491-AftiCdGgOAWGqHEpeCoQIg-1; Sun, 19 Nov 2023 19:28:40 -0500
+X-MC-Unique: AftiCdGgOAWGqHEpeCoQIg-1
 Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
  [10.11.54.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 6ECB88007B3;
- Mon, 20 Nov 2023 00:28:15 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 1D0B1101A529;
+ Mon, 20 Nov 2023 00:28:39 +0000 (UTC)
 Received: from gshan.redhat.com (unknown [10.64.136.87])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 2F3E240C6EB9;
- Mon, 20 Nov 2023 00:28:07 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 89CE540C6EB9;
+ Mon, 20 Nov 2023 00:28:31 +0000 (UTC)
 From: Gavin Shan <gshan@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org,
@@ -54,9 +54,9 @@ Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org,
  vijai@behindbytes.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
  zhiwei_liu@linux.alibaba.com, shan.gavin@gmail.com
-Subject: [PATCH v6 1/8] machine: Use error handling when CPU type is checked
-Date: Mon, 20 Nov 2023 10:27:17 +1000
-Message-ID: <20231120002724.986326-2-gshan@redhat.com>
+Subject: [PATCH v6 4/8] hw/arm/virt: Hide host CPU model for tcg
+Date: Mon, 20 Nov 2023 10:27:20 +1000
+Message-ID: <20231120002724.986326-5-gshan@redhat.com>
 In-Reply-To: <20231120002724.986326-1-gshan@redhat.com>
 References: <20231120002724.986326-1-gshan@redhat.com>
 MIME-Version: 1.0
@@ -88,56 +88,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-QEMU will be terminated if the specified CPU type isn't supported
-in machine_run_board_init(). The list of supported CPU type names
-is tracked by mc->valid_cpu_types.
+The 'host' CPU model isn't available until KVM or HVF is enabled.
+For example, the following error messages are seen when the guest
+is started with option '-cpu cortex-a8' on tcg after the next commit
+is applied to check the CPU type in machine_run_board_init().
 
-The error handling can be used to propagate error messages, to be
-consistent how the errors are handled for other situations in the
-same function.
+  ERROR:../hw/core/machine.c:1423:is_cpu_type_supported: \
+  assertion failed: (model != NULL)
+  Bail out! ERROR:../hw/core/machine.c:1423:is_cpu_type_supported: \
+  assertion failed: (model != NULL)
+  Aborted (core dumped)
 
-No functional change intended.
+Hide 'host' CPU model until KVM or HVF is enabled. With this applied,
+the valid CPU models can be shown.
 
-Suggested-by: Igor Mammedov <imammedo@redhat.com>
+  qemu-system-aarch64: Invalid CPU type: cortex-a8
+  The valid types are: cortex-a7, cortex-a15, cortex-a35, \
+  cortex-a55, cortex-a72, cortex-a76, cortex-a710, a64fx, \
+  neoverse-n1, neoverse-v1, neoverse-n2, cortex-a53,      \
+  cortex-a57, max
+
 Signed-off-by: Gavin Shan <gshan@redhat.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- hw/core/machine.c | 14 ++++++++------
- 1 file changed, 8 insertions(+), 6 deletions(-)
+ hw/arm/virt.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/hw/core/machine.c b/hw/core/machine.c
-index 0c17398141..5b45dbbbd5 100644
---- a/hw/core/machine.c
-+++ b/hw/core/machine.c
-@@ -1394,6 +1394,7 @@ void machine_run_board_init(MachineState *machine, const char *mem_path, Error *
-     MachineClass *machine_class = MACHINE_GET_CLASS(machine);
-     ObjectClass *oc = object_class_by_name(machine->cpu_type);
-     CPUClass *cc;
-+    Error *local_err = NULL;
- 
-     /* This checkpoint is required by replay to separate prior clock
-        reading from the other reads, because timer polling functions query
-@@ -1466,15 +1467,16 @@ void machine_run_board_init(MachineState *machine, const char *mem_path, Error *
- 
-         if (!machine_class->valid_cpu_types[i]) {
-             /* The user specified CPU is not valid */
--            error_report("Invalid CPU type: %s", machine->cpu_type);
--            error_printf("The valid types are: %s",
--                         machine_class->valid_cpu_types[0]);
-+            error_setg(&local_err, "Invalid CPU type: %s", machine->cpu_type);
-+            error_append_hint(&local_err, "The valid types are: %s",
-+                              machine_class->valid_cpu_types[0]);
-             for (i = 1; machine_class->valid_cpu_types[i]; i++) {
--                error_printf(", %s", machine_class->valid_cpu_types[i]);
-+                error_append_hint(&local_err, ", %s",
-+                                  machine_class->valid_cpu_types[i]);
-             }
--            error_printf("\n");
-+            error_append_hint(&local_err, "\n");
- 
--            exit(1);
-+            error_propagate(errp, local_err);
-         }
-     }
+diff --git a/hw/arm/virt.c b/hw/arm/virt.c
+index be2856c018..668c0d3194 100644
+--- a/hw/arm/virt.c
++++ b/hw/arm/virt.c
+@@ -220,7 +220,9 @@ static const char *valid_cpus[] = {
+ #endif
+     ARM_CPU_TYPE_NAME("cortex-a53"),
+     ARM_CPU_TYPE_NAME("cortex-a57"),
++#if defined(CONFIG_KVM) || defined(CONFIG_HVF)
+     ARM_CPU_TYPE_NAME("host"),
++#endif
+     ARM_CPU_TYPE_NAME("max"),
+ };
  
 -- 
 2.41.0
