@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CB31C54E76
-	for <qemu-riscv@archiver.kernel.org>; Mon, 20 Nov 2023 00:30:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3F02C54E76
+	for <qemu-riscv@archiver.kernel.org>; Mon, 20 Nov 2023 00:30:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r4s9Q-0005Lc-T2; Sun, 19 Nov 2023 19:28:32 -0500
+	id 1r4s9q-0005TA-9P; Sun, 19 Nov 2023 19:28:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r4s9Q-0005LR-1u
- for qemu-riscv@nongnu.org; Sun, 19 Nov 2023 19:28:32 -0500
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r4s9o-0005Rs-2t
+ for qemu-riscv@nongnu.org; Sun, 19 Nov 2023 19:28:56 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r4s9O-0001Ah-EI
- for qemu-riscv@nongnu.org; Sun, 19 Nov 2023 19:28:31 -0500
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r4s9m-0001GM-EM
+ for qemu-riscv@nongnu.org; Sun, 19 Nov 2023 19:28:55 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1700440109;
+ s=mimecast20190719; t=1700440133;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ to:to:cc:cc:mime-version:mime-version:mime-version: content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=UxakRTy3gKLVb7rdpCW1DoGIz3YW8eabCrYNAMZunnI=;
- b=QwhGYudDRSYDuTkiM9JwCXlBn0DSBc2sYkqnZ/1/FO09dkrqo0QUweAhU6lrkkTfZ3AeVH
- hdbILb1GiIyFdFqD+2BtMVSdia91pHk7fSqJys52jknrjFw9gK17wiroC6dCYZAjBD8vns
- yhjUpnIiXYW2YTF5uYL/wEPbO5srVTs=
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-554-kjIk2BgMNTeyegkSr5VBug-1; Sun,
- 19 Nov 2023 19:28:24 -0500
-X-MC-Unique: kjIk2BgMNTeyegkSr5VBug-1
+ bh=yMxLzo5Dk1Vn/s3l6DJ5ta6DNvy5+Zb0FdxR9YcyjbE=;
+ b=Eb5+drVCLom9MlIYXqjwyhDTvsEdj9IgPnCy5IjXaHWOM1O894cygd+wcsqicKxtC37FTX
+ Jmm4cjkwoxRx38brtIHfiJjxRPHxeiV1gEDeRBlUU+rqTDay3XL49lDbHhAr54ynzajPDs
+ DgsVxBIApb/R5GCnT3ZZ03p7EzkGw/E=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-660--RN0IpfTOY-_oiBRG5VH7w-1; Sun, 19 Nov 2023 19:28:48 -0500
+X-MC-Unique: -RN0IpfTOY-_oiBRG5VH7w-1
 Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
  [10.11.54.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 141C52806664;
- Mon, 20 Nov 2023 00:28:23 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 1D6C6185A797;
+ Mon, 20 Nov 2023 00:28:47 +0000 (UTC)
 Received: from gshan.redhat.com (unknown [10.64.136.87])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id E75EC40C6EB9;
- Mon, 20 Nov 2023 00:28:15 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 95A5B40C6EB9;
+ Mon, 20 Nov 2023 00:28:39 +0000 (UTC)
 From: Gavin Shan <gshan@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org,
@@ -54,13 +54,14 @@ Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org,
  vijai@behindbytes.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
  zhiwei_liu@linux.alibaba.com, shan.gavin@gmail.com
-Subject: [PATCH v6 2/8] machine: Introduce helper is_cpu_type_supported()
-Date: Mon, 20 Nov 2023 10:27:18 +1000
-Message-ID: <20231120002724.986326-3-gshan@redhat.com>
+Subject: [PATCH v6 5/8] hw/arm/virt: Check CPU type in machine_run_board_init()
+Date: Mon, 20 Nov 2023 10:27:21 +1000
+Message-ID: <20231120002724.986326-6-gshan@redhat.com>
 In-Reply-To: <20231120002724.986326-1-gshan@redhat.com>
 References: <20231120002724.986326-1-gshan@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.2
 Received-SPF: pass client-ip=170.10.133.124; envelope-from=gshan@redhat.com;
@@ -72,7 +73,7 @@ X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -88,134 +89,113 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The logic, to check if the specified CPU type is supported in
-machine_run_board_init(), is independent enough. Factor it out into
-helper is_cpu_type_supported(). machine_run_board_init() looks a bit
-clean with this. Since we're here, @machine_class is renamed to @mc
-to avoid multiple line spanning of code. The error messages and comments
-are tweaked a bit either.
-
-No functional change intended.
+Set mc->valid_cpu_types so that the user specified CPU type can be
+validated in machine_run_board_init(). We needn't to do the check
+by ourselves.
 
 Signed-off-by: Gavin Shan <gshan@redhat.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
-v6: 'const MachineState *' in is_cpu_type_supported()     (Phil)
-    Clearer hint if only one valid CPU is supported       (Phil)
+v6: Move valid_cpu_types[] to virt_machine_class_init()    (Phil)
 ---
- hw/core/machine.c | 88 +++++++++++++++++++++++++++--------------------
- 1 file changed, 50 insertions(+), 38 deletions(-)
+ hw/arm/virt.c | 62 +++++++++++++++++++--------------------------------
+ 1 file changed, 23 insertions(+), 39 deletions(-)
 
-diff --git a/hw/core/machine.c b/hw/core/machine.c
-index 5b45dbbbd5..d19aec11a3 100644
---- a/hw/core/machine.c
-+++ b/hw/core/machine.c
-@@ -1387,13 +1387,57 @@ out:
-     return r;
- }
+diff --git a/hw/arm/virt.c b/hw/arm/virt.c
+index 668c0d3194..04f9f5fa56 100644
+--- a/hw/arm/virt.c
++++ b/hw/arm/virt.c
+@@ -204,40 +204,6 @@ static const int a15irqmap[] = {
+     [VIRT_PLATFORM_BUS] = 112, /* ...to 112 + PLATFORM_BUS_NUM_IRQS -1 */
+ };
  
-+static void is_cpu_type_supported(const MachineState *machine, Error **errp)
-+{
-+    MachineClass *mc = MACHINE_GET_CLASS(machine);
-+    ObjectClass *oc = object_class_by_name(machine->cpu_type);
-+    CPUClass *cc;
-+    int i;
-+
-+    /*
-+     * Check if the user specified CPU type is supported when the valid
-+     * CPU types have been determined. Note that the user specified CPU
-+     * type is provided through '-cpu' option.
-+     */
-+    if (mc->valid_cpu_types && machine->cpu_type) {
-+        for (i = 0; mc->valid_cpu_types[i]; i++) {
-+            if (object_class_dynamic_cast(oc, mc->valid_cpu_types[i])) {
-+                break;
-+            }
-+        }
-+
-+        /* The user specified CPU type isn't valid */
-+        if (!mc->valid_cpu_types[i]) {
-+            error_setg(errp, "Invalid CPU type: %s", machine->cpu_type);
-+            if (!mc->valid_cpu_types[1]) {
-+                error_append_hint(errp, "The only valid type is: %s",
-+                                  mc->valid_cpu_types[0]);
-+            } else {
-+                error_append_hint(errp, "The valid types are: %s",
-+                                  mc->valid_cpu_types[0]);
-+            }
-+
-+            for (i = 1; mc->valid_cpu_types[i]; i++) {
-+                error_append_hint(errp, ", %s", mc->valid_cpu_types[i]);
-+            }
-+
-+            error_append_hint(errp, "\n");
-+            return;
-+        }
-+    }
-+
-+    /* Check if CPU type is deprecated and warn if so */
-+    cc = CPU_CLASS(oc);
-+    if (cc && cc->deprecation_note) {
-+        warn_report("CPU model %s is deprecated -- %s",
-+                    machine->cpu_type, cc->deprecation_note);
-+    }
-+}
- 
- void machine_run_board_init(MachineState *machine, const char *mem_path, Error **errp)
- {
-     ERRP_GUARD();
-     MachineClass *machine_class = MACHINE_GET_CLASS(machine);
--    ObjectClass *oc = object_class_by_name(machine->cpu_type);
--    CPUClass *cc;
-     Error *local_err = NULL;
- 
-     /* This checkpoint is required by replay to separate prior clock
-@@ -1449,42 +1493,10 @@ void machine_run_board_init(MachineState *machine, const char *mem_path, Error *
-         machine->ram = machine_consume_memdev(machine, machine->memdev);
-     }
- 
--    /* If the machine supports the valid_cpu_types check and the user
--     * specified a CPU with -cpu check here that the user CPU is supported.
--     */
--    if (machine_class->valid_cpu_types && machine->cpu_type) {
--        int i;
+-static const char *valid_cpus[] = {
+-#ifdef CONFIG_TCG
+-    ARM_CPU_TYPE_NAME("cortex-a7"),
+-    ARM_CPU_TYPE_NAME("cortex-a15"),
+-    ARM_CPU_TYPE_NAME("cortex-a35"),
+-    ARM_CPU_TYPE_NAME("cortex-a55"),
+-    ARM_CPU_TYPE_NAME("cortex-a72"),
+-    ARM_CPU_TYPE_NAME("cortex-a76"),
+-    ARM_CPU_TYPE_NAME("cortex-a710"),
+-    ARM_CPU_TYPE_NAME("a64fx"),
+-    ARM_CPU_TYPE_NAME("neoverse-n1"),
+-    ARM_CPU_TYPE_NAME("neoverse-v1"),
+-    ARM_CPU_TYPE_NAME("neoverse-n2"),
+-#endif
+-    ARM_CPU_TYPE_NAME("cortex-a53"),
+-    ARM_CPU_TYPE_NAME("cortex-a57"),
+-#if defined(CONFIG_KVM) || defined(CONFIG_HVF)
+-    ARM_CPU_TYPE_NAME("host"),
+-#endif
+-    ARM_CPU_TYPE_NAME("max"),
+-};
 -
--        for (i = 0; machine_class->valid_cpu_types[i]; i++) {
--            if (object_class_dynamic_cast(oc,
--                                          machine_class->valid_cpu_types[i])) {
--                /* The user specified CPU is in the valid field, we are
--                 * good to go.
--                 */
--                break;
--            }
--        }
+-static bool cpu_type_valid(const char *cpu)
+-{
+-    int i;
 -
--        if (!machine_class->valid_cpu_types[i]) {
--            /* The user specified CPU is not valid */
--            error_setg(&local_err, "Invalid CPU type: %s", machine->cpu_type);
--            error_append_hint(&local_err, "The valid types are: %s",
--                              machine_class->valid_cpu_types[0]);
--            for (i = 1; machine_class->valid_cpu_types[i]; i++) {
--                error_append_hint(&local_err, ", %s",
--                                  machine_class->valid_cpu_types[i]);
--            }
--            error_append_hint(&local_err, "\n");
--
--            error_propagate(errp, local_err);
+-    for (i = 0; i < ARRAY_SIZE(valid_cpus); i++) {
+-        if (strcmp(cpu, valid_cpus[i]) == 0) {
+-            return true;
 -        }
 -    }
+-    return false;
+-}
 -
--    /* Check if CPU type is deprecated and warn if so */
--    cc = CPU_CLASS(oc);
--    if (cc && cc->deprecation_note) {
--        warn_report("CPU model %s is deprecated -- %s", machine->cpu_type,
--                    cc->deprecation_note);
-+    /* Check if the CPU type is supported */
-+    is_cpu_type_supported(machine, &local_err);
-+    if (local_err) {
-+        error_propagate(errp, local_err);
-     }
+ static void create_randomness(MachineState *ms, const char *node)
+ {
+     struct {
+@@ -2041,11 +2007,6 @@ static void machvirt_init(MachineState *machine)
+     unsigned int smp_cpus = machine->smp.cpus;
+     unsigned int max_cpus = machine->smp.max_cpus;
  
-     if (machine->cgs) {
+-    if (!cpu_type_valid(machine->cpu_type)) {
+-        error_report("mach-virt: CPU type %s not supported", machine->cpu_type);
+-        exit(1);
+-    }
+-
+     possible_cpus = mc->possible_cpu_arch_ids(machine);
+ 
+     /*
+@@ -2939,6 +2900,28 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
+ {
+     MachineClass *mc = MACHINE_CLASS(oc);
+     HotplugHandlerClass *hc = HOTPLUG_HANDLER_CLASS(oc);
++    static const char * const valid_cpu_types[] = {
++#ifdef CONFIG_TCG
++        ARM_CPU_TYPE_NAME("cortex-a7"),
++        ARM_CPU_TYPE_NAME("cortex-a15"),
++        ARM_CPU_TYPE_NAME("cortex-a35"),
++        ARM_CPU_TYPE_NAME("cortex-a55"),
++        ARM_CPU_TYPE_NAME("cortex-a72"),
++        ARM_CPU_TYPE_NAME("cortex-a76"),
++        ARM_CPU_TYPE_NAME("cortex-a710"),
++        ARM_CPU_TYPE_NAME("a64fx"),
++        ARM_CPU_TYPE_NAME("neoverse-n1"),
++        ARM_CPU_TYPE_NAME("neoverse-v1"),
++        ARM_CPU_TYPE_NAME("neoverse-n2"),
++#endif
++        ARM_CPU_TYPE_NAME("cortex-a53"),
++        ARM_CPU_TYPE_NAME("cortex-a57"),
++#if defined(CONFIG_KVM) || defined(CONFIG_HVF)
++        ARM_CPU_TYPE_NAME("host"),
++#endif
++        ARM_CPU_TYPE_NAME("max"),
++        NULL
++    };
+ 
+     mc->init = machvirt_init;
+     /* Start with max_cpus set to 512, which is the maximum supported by KVM.
+@@ -2965,6 +2948,7 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
+ #else
+     mc->default_cpu_type = ARM_CPU_TYPE_NAME("max");
+ #endif
++    mc->valid_cpu_types = valid_cpu_types;
+     mc->get_default_cpu_node_id = virt_get_default_cpu_node_id;
+     mc->kvm_type = virt_kvm_type;
+     assert(!mc->get_hotplug_handler);
 -- 
 2.41.0
 
