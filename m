@@ -4,100 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5768C2BB3F
-	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Nov 2023 06:41:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CB31C54E76
+	for <qemu-riscv@archiver.kernel.org>; Mon, 20 Nov 2023 00:30:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r4F1I-0000Yk-GJ; Sat, 18 Nov 2023 01:41:32 -0500
+	id 1r4s9Q-0005Lc-T2; Sun, 19 Nov 2023 19:28:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r4F1A-0000XQ-KV
- for qemu-riscv@nongnu.org; Sat, 18 Nov 2023 01:41:25 -0500
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r4s9Q-0005LR-1u
+ for qemu-riscv@nongnu.org; Sun, 19 Nov 2023 19:28:32 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r4F16-00065C-Sp
- for qemu-riscv@nongnu.org; Sat, 18 Nov 2023 01:41:23 -0500
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r4s9O-0001Ah-EI
+ for qemu-riscv@nongnu.org; Sun, 19 Nov 2023 19:28:31 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1700289676;
+ s=mimecast20190719; t=1700440109;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=UnpuoslZpH27s0YVxL2DOtr7qbZMS0LnrfN9VuXqNhs=;
- b=ch62wGsIrGEsH/co9+zVX+94Z//Fn8ZJPy+xVSZdVKdLUM+RXVjiD/xAKjmLAqbQHk1PdL
- 6navSfMjjsJMLFwS7bk9wvwwECAeJCW8PS/VYlbWK5fcrp9Ibl2z7kVATyQqJYmvhowzAx
- 0a1TWjUzkT0CPSxDIQ7XcUt0jetxhfo=
-Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
- [209.85.210.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-384-SRmFjQd5NcCJW48iCwZQYg-1; Sat, 18 Nov 2023 01:41:14 -0500
-X-MC-Unique: SRmFjQd5NcCJW48iCwZQYg-1
-Received: by mail-pf1-f198.google.com with SMTP id
- d2e1a72fcca58-6bfd5856509so3799401b3a.1
- for <qemu-riscv@nongnu.org>; Fri, 17 Nov 2023 22:41:14 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700289673; x=1700894473;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=UnpuoslZpH27s0YVxL2DOtr7qbZMS0LnrfN9VuXqNhs=;
- b=Iiz5iZfULest/SaiWeKJra+Hx3IMnTkrMbZ2ROsZObUYpEGXKHq1r1VH5cja+sM5E4
- LigBj7LLLILQAqp6/aPigtWjWU6xHN8bLArDbqWtXybmgQe2AvWyUkUI19NUnIVdjYCC
- pcWtxR6xk/seyH3EgRWIZcqnSHW7xAJHVEAuqISoDzx4LwCkwU/J6TLIDIoL9j8GnBI5
- k+hNVyrvSV1bwGDPduN8P0vvSaIz6pNYeNFPaJa0d5KqukcsPNPLWaaMPzlOGuhrcCQW
- 4Y4TcAqtkemw6Lz7xVIEgIvlYL617W/guUCcu+X0ThBA6se0s6keouUVQgY3JCfuCDPW
- 8c3g==
-X-Gm-Message-State: AOJu0YxP7TpnIYNyaJ6oAhwEKiMZY7BRxlS49QU0hn+KWxMdE9NqGRif
- IEarplj5B9hSxbxzb6YErDD1W0vbqUH2WvfzAq3+WFFD1rb5ejcGz1rvXn1nIKHFa3JQRFtfaUp
- czyFq3cr3+xgqUp8=
-X-Received: by 2002:a05:6a00:1886:b0:6b6:5ed4:dd42 with SMTP id
- x6-20020a056a00188600b006b65ed4dd42mr2251997pfh.31.1700289673281; 
- Fri, 17 Nov 2023 22:41:13 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFb8zeud0zSNkXCyNWKb08LrvZ4xkXxIY2zoqDcsZlUpRxfVBXVfvp3HnySFCFjNkWXQI3MxQ==
-X-Received: by 2002:a05:6a00:1886:b0:6b6:5ed4:dd42 with SMTP id
- x6-20020a056a00188600b006b65ed4dd42mr2251911pfh.31.1700289671951; 
- Fri, 17 Nov 2023 22:41:11 -0800 (PST)
-Received: from ?IPV6:2001:8003:e5b0:9f00:b890:3e54:96bb:2a15?
- ([2001:8003:e5b0:9f00:b890:3e54:96bb:2a15])
- by smtp.gmail.com with ESMTPSA id
- s19-20020aa78293000000b006b22218cb92sm2365475pfm.43.2023.11.17.22.40.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 17 Nov 2023 22:41:11 -0800 (PST)
-Message-ID: <e638c40b-fbf9-4495-93aa-1443877b553f@redhat.com>
-Date: Sat, 18 Nov 2023 16:40:54 +1000
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 00/31] Unified CPU type check
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-arm@nongnu.org
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
- imp@bsdimp.com, kevans@freebsd.org, richard.henderson@linaro.org,
- pbonzini@redhat.com, peter.maydell@linaro.org, imammedo@redhat.com,
- b.galvani@gmail.com, strahinja.p.jankovic@gmail.com, sundeep.lkml@gmail.com,
- kfting@nuvoton.com, wuhaotsh@google.com, nieklinnenbank@gmail.com,
- rad@semihalf.com, quic_llindhol@quicinc.com, marcin.juszkiewicz@linaro.org,
- eduardo@habkost.net, marcel.apfelbaum@gmail.com, wangyanan55@huawei.com,
- laurent@vivier.eu, vijai@behindbytes.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, mrolnik@gmail.com,
- edgar.iglesias@gmail.com, bcain@quicinc.com, gaosong@loongson.cn,
- aurelien@aurel32.net, jiaxun.yang@flygoat.com, aleksandar.rikalo@syrmia.com,
- chenhuacai@kernel.org, shorne@gmail.com, npiggin@gmail.com, clg@kaod.org,
- ysato@users.sourceforge.jp, kbastian@mail.uni-paderborn.de,
- jcmvbkbc@gmail.com, shan.gavin@gmail.com
-References: <20231114235628.534334-1-gshan@redhat.com>
- <efc49f7b-70f5-4ce9-8179-79e8a6abd732@linaro.org>
- <78526851-6d44-4c18-97b8-57462fb42ab7@linaro.org>
- <7252553e-9ab3-4c8e-a867-55c57d0178ba@redhat.com>
- <ebaa5c70-e410-465a-a94e-1a254506a81e@linaro.org>
+ bh=UxakRTy3gKLVb7rdpCW1DoGIz3YW8eabCrYNAMZunnI=;
+ b=QwhGYudDRSYDuTkiM9JwCXlBn0DSBc2sYkqnZ/1/FO09dkrqo0QUweAhU6lrkkTfZ3AeVH
+ hdbILb1GiIyFdFqD+2BtMVSdia91pHk7fSqJys52jknrjFw9gK17wiroC6dCYZAjBD8vns
+ yhjUpnIiXYW2YTF5uYL/wEPbO5srVTs=
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-554-kjIk2BgMNTeyegkSr5VBug-1; Sun,
+ 19 Nov 2023 19:28:24 -0500
+X-MC-Unique: kjIk2BgMNTeyegkSr5VBug-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 141C52806664;
+ Mon, 20 Nov 2023 00:28:23 +0000 (UTC)
+Received: from gshan.redhat.com (unknown [10.64.136.87])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id E75EC40C6EB9;
+ Mon, 20 Nov 2023 00:28:15 +0000 (UTC)
 From: Gavin Shan <gshan@redhat.com>
-In-Reply-To: <ebaa5c70-e410-465a-a94e-1a254506a81e@linaro.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org,
+ richard.henderson@linaro.org, imammedo@redhat.com, b.galvani@gmail.com,
+ strahinja.p.jankovic@gmail.com, kfting@nuvoton.com, wuhaotsh@google.com,
+ nieklinnenbank@gmail.com, rad@semihalf.com, quic_llindhol@quicinc.com,
+ marcin.juszkiewicz@linaro.org, eduardo@habkost.net,
+ marcel.apfelbaum@gmail.com, philmd@linaro.org, wangyanan55@huawei.com,
+ vijai@behindbytes.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, shan.gavin@gmail.com
+Subject: [PATCH v6 2/8] machine: Introduce helper is_cpu_type_supported()
+Date: Mon, 20 Nov 2023 10:27:18 +1000
+Message-ID: <20231120002724.986326-3-gshan@redhat.com>
+In-Reply-To: <20231120002724.986326-1-gshan@redhat.com>
+References: <20231120002724.986326-1-gshan@redhat.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.2
 Received-SPF: pass client-ip=170.10.133.124; envelope-from=gshan@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
@@ -105,9 +70,9 @@ X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -123,47 +88,135 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+The logic, to check if the specified CPU type is supported in
+machine_run_board_init(), is independent enough. Factor it out into
+helper is_cpu_type_supported(). machine_run_board_init() looks a bit
+clean with this. Since we're here, @machine_class is renamed to @mc
+to avoid multiple line spanning of code. The error messages and comments
+are tweaked a bit either.
 
-On 11/17/23 17:34, Philippe Mathieu-Daudé wrote:
-> On 17/11/23 00:26, Gavin Shan wrote:
->> On 11/17/23 02:20, Philippe Mathieu-Daudé wrote:
->>> On 16/11/23 14:35, Philippe Mathieu-Daudé wrote:
->>>>
->>>> I'm queuing patches 1-3 & 5-23 to my cpus-next tree. No need to
->>>> repost them, please base them on my tree. I'll follow up with the
->>>> branch link when I finish my testing and push it.
->>>
->>> Here are these patches queued:
->>>
->>>    https://github.com/philmd/qemu.git branches/cpus-next
-> 
-> Oops, no clue why I wrote github instead of gitlab, sorry =)
-> 
+No functional change intended.
 
-No worries, Phil.
+Signed-off-by: Gavin Shan <gshan@redhat.com>
+---
+v6: 'const MachineState *' in is_cpu_type_supported()     (Phil)
+    Clearer hint if only one valid CPU is supported       (Phil)
+---
+ hw/core/machine.c | 88 +++++++++++++++++++++++++++--------------------
+ 1 file changed, 50 insertions(+), 38 deletions(-)
 
->>> I might queue more patches before the 9.0 merge window opens.
->>>
->>
->> Thanks for queuing these patches, but I don't see 'cpus-next' branch
->> in the repository. Please let me know if I checked out the code properly.
->>
->> $ git clone https://github.com/philmd/qemu.git philmd
->> $ cd philmd
->> $ git branch
->> * staging
->> $ git branch -a | grep cpus-next
->> $ echo $?
->> 1
-> 
-> No need to clone, you can use in your current cloned repository:
-> 
->    $ git fetch https://gitlab.com/philmd/qemu.git cpus-next:cpus-next
-> 
-
-Thanks. It worked for me.
-
-Thanks,
-Gavin
+diff --git a/hw/core/machine.c b/hw/core/machine.c
+index 5b45dbbbd5..d19aec11a3 100644
+--- a/hw/core/machine.c
++++ b/hw/core/machine.c
+@@ -1387,13 +1387,57 @@ out:
+     return r;
+ }
+ 
++static void is_cpu_type_supported(const MachineState *machine, Error **errp)
++{
++    MachineClass *mc = MACHINE_GET_CLASS(machine);
++    ObjectClass *oc = object_class_by_name(machine->cpu_type);
++    CPUClass *cc;
++    int i;
++
++    /*
++     * Check if the user specified CPU type is supported when the valid
++     * CPU types have been determined. Note that the user specified CPU
++     * type is provided through '-cpu' option.
++     */
++    if (mc->valid_cpu_types && machine->cpu_type) {
++        for (i = 0; mc->valid_cpu_types[i]; i++) {
++            if (object_class_dynamic_cast(oc, mc->valid_cpu_types[i])) {
++                break;
++            }
++        }
++
++        /* The user specified CPU type isn't valid */
++        if (!mc->valid_cpu_types[i]) {
++            error_setg(errp, "Invalid CPU type: %s", machine->cpu_type);
++            if (!mc->valid_cpu_types[1]) {
++                error_append_hint(errp, "The only valid type is: %s",
++                                  mc->valid_cpu_types[0]);
++            } else {
++                error_append_hint(errp, "The valid types are: %s",
++                                  mc->valid_cpu_types[0]);
++            }
++
++            for (i = 1; mc->valid_cpu_types[i]; i++) {
++                error_append_hint(errp, ", %s", mc->valid_cpu_types[i]);
++            }
++
++            error_append_hint(errp, "\n");
++            return;
++        }
++    }
++
++    /* Check if CPU type is deprecated and warn if so */
++    cc = CPU_CLASS(oc);
++    if (cc && cc->deprecation_note) {
++        warn_report("CPU model %s is deprecated -- %s",
++                    machine->cpu_type, cc->deprecation_note);
++    }
++}
+ 
+ void machine_run_board_init(MachineState *machine, const char *mem_path, Error **errp)
+ {
+     ERRP_GUARD();
+     MachineClass *machine_class = MACHINE_GET_CLASS(machine);
+-    ObjectClass *oc = object_class_by_name(machine->cpu_type);
+-    CPUClass *cc;
+     Error *local_err = NULL;
+ 
+     /* This checkpoint is required by replay to separate prior clock
+@@ -1449,42 +1493,10 @@ void machine_run_board_init(MachineState *machine, const char *mem_path, Error *
+         machine->ram = machine_consume_memdev(machine, machine->memdev);
+     }
+ 
+-    /* If the machine supports the valid_cpu_types check and the user
+-     * specified a CPU with -cpu check here that the user CPU is supported.
+-     */
+-    if (machine_class->valid_cpu_types && machine->cpu_type) {
+-        int i;
+-
+-        for (i = 0; machine_class->valid_cpu_types[i]; i++) {
+-            if (object_class_dynamic_cast(oc,
+-                                          machine_class->valid_cpu_types[i])) {
+-                /* The user specified CPU is in the valid field, we are
+-                 * good to go.
+-                 */
+-                break;
+-            }
+-        }
+-
+-        if (!machine_class->valid_cpu_types[i]) {
+-            /* The user specified CPU is not valid */
+-            error_setg(&local_err, "Invalid CPU type: %s", machine->cpu_type);
+-            error_append_hint(&local_err, "The valid types are: %s",
+-                              machine_class->valid_cpu_types[0]);
+-            for (i = 1; machine_class->valid_cpu_types[i]; i++) {
+-                error_append_hint(&local_err, ", %s",
+-                                  machine_class->valid_cpu_types[i]);
+-            }
+-            error_append_hint(&local_err, "\n");
+-
+-            error_propagate(errp, local_err);
+-        }
+-    }
+-
+-    /* Check if CPU type is deprecated and warn if so */
+-    cc = CPU_CLASS(oc);
+-    if (cc && cc->deprecation_note) {
+-        warn_report("CPU model %s is deprecated -- %s", machine->cpu_type,
+-                    cc->deprecation_note);
++    /* Check if the CPU type is supported */
++    is_cpu_type_supported(machine, &local_err);
++    if (local_err) {
++        error_propagate(errp, local_err);
+     }
+ 
+     if (machine->cgs) {
+-- 
+2.41.0
 
 
