@@ -4,69 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 646F6C54FB9
-	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Nov 2023 04:02:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0E14C54FB9
+	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Nov 2023 04:26:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r5Hy7-0005ES-NV; Mon, 20 Nov 2023 23:02:35 -0500
+	id 1r5ILI-0002ai-Ry; Mon, 20 Nov 2023 23:26:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1r5Hy5-0005E4-VT; Mon, 20 Nov 2023 23:02:33 -0500
-Received: from mail-vs1-xe33.google.com ([2607:f8b0:4864:20::e33])
+ id 1r5ILH-0002Zy-9K; Mon, 20 Nov 2023 23:26:31 -0500
+Received: from mail-vs1-xe30.google.com ([2607:f8b0:4864:20::e30])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1r5Hy3-0002cG-Kc; Mon, 20 Nov 2023 23:02:32 -0500
-Received: by mail-vs1-xe33.google.com with SMTP id
- ada2fe7eead31-462a1a2717aso637430137.1; 
- Mon, 20 Nov 2023 20:02:30 -0800 (PST)
+ id 1r5ILE-00025z-3u; Mon, 20 Nov 2023 23:26:31 -0500
+Received: by mail-vs1-xe30.google.com with SMTP id
+ ada2fe7eead31-45d8c405696so1640145137.3; 
+ Mon, 20 Nov 2023 20:26:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700539350; x=1701144150; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1700540786; x=1701145586; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6bPsWICPaCWfLqzjk2/caBtMdMcOM9AyhHrdzcrzirs=;
- b=lGFitA/uBplhJ5PGd9mCKBm2QDCBJkhUb8LX/gcqpbXz9JuPgsm2g3tzfRxAWMipng
- bwkk8SKakGFxaYdqDH7VXLxszAz7wo1GhNUPmRRwHdzy9dvSOreCBDW9bg/XHjyKuagx
- EMVyi6QXQqiU8ZFJGpNHoyzz9phXfq8L7zCW8gewAEB8HK5mYaj+2kLZqSYhCxPhZeXw
- eOuLIPLvr10cX7P+k3DI5F10ptpcFJm3TXZrIZkmggxEkrwDDxwmIYLMS0B6VEdnwGQR
- JPefXKK7flCbuAwcwjlxRzDwWrsbBCTDDMXBCCpzaiyLHPniBrI7Q4GqNF2avY9IQ6xu
- HLCg==
+ bh=RyAv/uSSPONDME3+CIEDqeepL72DvtLeIwRR29X76AQ=;
+ b=YVKP0rNdEQXwkJr3AD6I9qkWtrZtIl++SEwicFX5thg6C1nRJJyNXbj1d7ui+aA5Zy
+ 1NvkBKY9awt/14CZsj+HO1W50xAKWeBxgIPcSaccFQSIB7otNVtJgEjevODcMeLPYN20
+ iyu5TTs6udgsOu+YLImXhPtrAjJmR6bnUS13SrVscfwLnRRYvMvrWha8SUzxswlgPbq3
+ 02hXydXvojC8hyHNWjhEbqE8CdWL2V1sgZAnH2jJOkGol1s5W2kLWj2OBsq+ydQZPaxT
+ 4+stU11y1WAYBkrk/ZBazsaj3dUkR40IIHvBTMfT6/W46ygA3Zx/0PcVjigCnYs+kgN2
+ 06xw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700539350; x=1701144150;
+ d=1e100.net; s=20230601; t=1700540786; x=1701145586;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6bPsWICPaCWfLqzjk2/caBtMdMcOM9AyhHrdzcrzirs=;
- b=VctjMP9c/+aTvvlLCiIJENh6c2ugraCArmjPw5W8/T4d814Lua51vCsaH5l8yrVc5Y
- 3fiKrCSY6DTQVJ6wknwbbdjKJ7sexMyUbVLA9rr1bIzNyDzjQnNgjyMvnjnQoE8M+wtP
- L7O/DSgTqJpVUf/zUJtxodJBfIEs4zPqW0UIim2veqtwxXPjuPWSw0jCnWBEC0zcPEL5
- LcDF+zvn6rA9x2Ce7Azo14cPQxfGcMFOoiiX7Cheu7x0Utf6NHIk3Tw9k1FdLVFVzCG+
- aj81aSutc4Go1L9QulFuPwtpTZeX0Ul0S+OhV+pWKuBBf8nXFV7HBT6XyajJb8hW0YgG
- Ndpw==
-X-Gm-Message-State: AOJu0Yz9Yn9WMMB7FwVY4QrhLKDLNSEwQvgQWdBwexgeP4snK2WGc9qZ
- 1g0V/FaxPUDUvYDz2fi8lQ5U2Jn8tjX8UKb6Vks=
-X-Google-Smtp-Source: AGHT+IFAF7tHsr4hZShBUachnW4OIBjX7JCXQtaODUvBsrUk1wvsaiPnDBrF95jU7Bkwk7VxH3Fm+rxY8n6exSOIWjo=
-X-Received: by 2002:a05:6102:4743:b0:45f:3a78:ca20 with SMTP id
- ej3-20020a056102474300b0045f3a78ca20mr9221269vsb.0.1700539349857; Mon, 20 Nov
- 2023 20:02:29 -0800 (PST)
+ bh=RyAv/uSSPONDME3+CIEDqeepL72DvtLeIwRR29X76AQ=;
+ b=CLQIWLe1xQvPky3txYuK6/OdcpXVH6iXm3Ak4tqeySAfJA6EzD2QYqBySeoot83MF+
+ UFoxxW6SMd8oCXBKIl2YSx8Ee3OUtzVARrNYxr1YPaa0rsGaeHRcedS7OmWJPhTNaSDI
+ 1t6WVxOewVoINKifoTiFQEcIjy7TXhNIUV28iNW3iVoJDvfYhwgP/IKGjdV3wn15Y8zi
+ t9SYn3Q7htozSOUbi1bBCcwDOHc/e+X1eMJ09hZTGLUlQPSG63a10xtMQGw+XNcvBzTS
+ Dr3Um/b802Ts6jhBkddQ5HvZfo5qxAuEG1AyQwcSOjqjLZiKT5c2cV/DGjPEN9pzISUs
+ jItQ==
+X-Gm-Message-State: AOJu0YxbCoVVMJgCnIq7CTYC9Jb4ChucVF02BjeJ1TvzrZsXHAJEpbUo
+ 6APtqXrMfsQ6dG7JJkMfpkxIMYaGRSyIu4J+mTM=
+X-Google-Smtp-Source: AGHT+IFF50HLYXQKqBpy6ml2EVABWbVLX8rBEz6FSywpjvR+yOumuxGbrGa6YoAm3uzrCupnXQ5Q9gURSFAcRH6m/EY=
+X-Received: by 2002:a67:c189:0:b0:45f:c608:296b with SMTP id
+ h9-20020a67c189000000b0045fc608296bmr8123946vsj.27.1700540786115; Mon, 20 Nov
+ 2023 20:26:26 -0800 (PST)
 MIME-Version: 1.0
-References: <20231117082840.55705-1-rcardenas.rod@gmail.com>
-In-Reply-To: <20231117082840.55705-1-rcardenas.rod@gmail.com>
+References: <cover.1699496263.git.houyingle@canaan-creative.com>
+ <6d1d8cc8c2b37b145e4a826095619097fa4a34d5.1699496263.git.houyingle@canaan-creative.com>
+ <CAEomy4TmM0ShGkuV2mprB8Xm0Kn62ZWZA7Gnfvt07pioY9fCCA@mail.gmail.com>
+ <bf0c7c6d-a940-4968-ab18-4af6125b8d0b@linaro.org>
+ <BJSPR01MB062758831AA8BF73856F5DFC95B3A@BJSPR01MB0627.CHNPR01.prod.partner.outlook.cn>
+ <3bd74930-f445-47b2-bb76-8451aa7b995a@linaro.org>
+In-Reply-To: <3bd74930-f445-47b2-bb76-8451aa7b995a@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 21 Nov 2023 14:02:03 +1000
-Message-ID: <CAKmqyKPeE=ZHdH2w8-DT1k0jX4gSmBAOY7tMt014y6Zft6Zt7Q@mail.gmail.com>
-Subject: Re: [PATCH] riscv: Fix SiFive E CLINT clock frequency
-To: =?UTF-8?B?Um9tw6FuIEPDoXJkZW5hcw==?= <rcardenas.rod@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-trivial@nongnu.org, Alistair.Francis@wdc.com, 
- bin.meng@windriver.com, palmer@dabbelt.com, liwei1518@gmail.com, 
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
- qemu-riscv@nongnu.org
+Date: Tue, 21 Nov 2023 14:25:59 +1000
+Message-ID: <CAKmqyKPpW2gF0CyhvzcvhtjkeXTBppG9Qz5fZzshR1=n0+yZ=w@mail.gmail.com>
+Subject: Re: [PATCH 1/1] hw/intc/riscv_aclint:Change the way to get CPUState
+ from hard-base to pu_index
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+Cc: LeoHou <LeoHou@canaan-creative.com>, Dongxue Zhang <elta.era@gmail.com>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Anup Patel <apatel@ventanamicro.com>, Bin Meng <bin.meng@windriver.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ =?UTF-8?B?5L6v6Iux5LmQ?= <houyingle@canaan-creative.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Palmer Dabbelt <palmer@rivosinc.com>, 
+ Weiwei Li <liweiwei@iscas.ac.cn>, QEMU Developers <qemu-devel@nongnu.org>, 
+ qemu-riscv <qemu-riscv@nongnu.org>,
+ =?UTF-8?B?5byg5Lic6Zuq?= <zhangdongxue@canaan-creative.com>, 
+ "leohou1402@gmail.com" <leohou1402@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e33;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe33.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e30;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe30.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -90,52 +104,124 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Nov 17, 2023 at 6:31=E2=80=AFPM Rom=C3=A1n C=C3=A1rdenas <rcardenas=
-.rod@gmail.com> wrote:
+On Mon, Nov 20, 2023 at 10:17=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
+<philmd@linaro.org> wrote:
 >
-> If you check the manual of SiFive E310 (https://cdn.sparkfun.com/assets/7=
-/f/0/2/7/fe310-g002-manual-v19p05.pdf),
-> you can see in Figure 1 that the CLINT is connected to the real time cloc=
-k, which also feeds the AON peripheral (they share the same clock).
-> In page 43, the docs also say that the timer registers of the CLINT count=
- ticks from the rtcclk.
->
-> I am currently playing with bare metal applications both in QEMU and a ph=
-ysical SiFive E310 board and
-> I confirm that the CLINT clock in the physical board runs at 32.768 kHz.
-> In QEMU, the same app produces a completely different outcome, as sometim=
-es a new CLINT interrupt is triggered before finishing other tasks.
->
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1978
->
-> Signed-off-by: Rom=C3=A1n C=C3=A1rdenas <rcardenas.rod@gmail.com>
+> On 13/11/23 05:25, LeoHou wrote:
+> > On 9/11/23 23:26, Philippe Mathieu-Daud=C3=A9  wrote:
+> >
+> >> Hi Leo,
+> >>
+> >> First, I can't find your patch in my mailbox, so I'm replying to
+> >> Dongxue's review.
 
-Thanks!
+I also can't find the original patch
 
-Applied to riscv-to-apply.next
+> >>
+> >> On 9/11/23 03:41, Dongxue Zhang wrote:
+> >>> Reviewed-by: Dongxue Zhang <zhangdongxue@canaan-creative.com>
+> >>>
+> >>>
+> >>>> On Thu, Nov 9, 2023 at 10:22=E2=80=AFAM Leo Hou <LeoHou@canaan-creat=
+ive.com> wrote:
+> >>>>
+> >>>> From: Leo Hou <houyingle@canaan-creative.com>
+> >>>>
+> >>>> cpu_by_arch_id() uses hartid-base as the index to obtain the corresp=
+onding CPUState structure variable.
+> >>>> qemu_get_cpu() uses cpu_index as the index to obtain the correspondi=
+ng CPUState structure variable.
+> >>>>
+> >>>> In heterogeneous CPU or multi-socket scenarios, multiple aclint need=
+s to be instantiated,
+> >>>> and the hartid-base of each cpu bound by aclint can start from 0. If=
+ cpu_by_arch_id() is still used
+
+This doesn't sound right
+
+cpu_by_arch_id() calls riscv_get_arch_id() to compare against the id.
+
+riscv_get_arch_id() just returns the mhartid.
+
+From the RISC-V priv spec on mhartid:
+
+Hart IDs might not necessarily be numbered contiguously in a
+multiprocessor system, but at least one hart must have a hart ID of
+zero. Hart IDs must be unique within the execution environment.
+
+So no two harts should have the same ID. So only a single aclint
+should have a hartid-base of 0.
+
+From a quick look I couldn't see where we set mhartid though, so it's
+possible we just don't set it or set it correctly. In which case that
+is the bug to be fixed.
 
 Alistair
 
-> ---
->  hw/riscv/sifive_e.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> >>>> in this case, all aclint will bind to the earliest initialized hart =
+with hartid-base 0 and cause conflicts.
+> >>>>
+> >>>> So with cpu_index as the index, use qemu_get_cpu() to get the CPUSta=
+te struct variable,
+> >>>> and connect the aclint interrupt line to the hart of the CPU indexed=
+ with cpu_index
+> >>>> (the corresponding hartid-base can start at 0). It's more reasonable=
+.
+> >>>>
+> >>>> Signed-off-by: Leo Hou <houyingle@canaan-creative.com>
+> >>>> ---
+> >>>>     hw/intc/riscv_aclint.c | 16 ++++++++--------
+> >>>>     1 file changed, 8 insertions(+), 8 deletions(-)
+> >>>>
+> >>>> diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
+> >>>> index ab1a0b4b3a..be8f539fcb 100644
+> >>>> --- a/hw/intc/riscv_aclint.c
+> >>>> +++ b/hw/intc/riscv_aclint.c
+> >>>> @@ -130,7 +130,7 @@ static uint64_t riscv_aclint_mtimer_read(void *o=
+paque, hwaddr addr,
+> >>>>             addr < (mtimer->timecmp_base + (mtimer->num_harts << 3))=
+) {
+> >>>>             size_t hartid =3D mtimer->hartid_base +
+> >>>>                             ((addr - mtimer->timecmp_base) >> 3);
+> >>>> -        CPUState *cpu =3D cpu_by_arch_id(hartid);
+> >>>> +        CPUState *cpu =3D qemu_get_cpu(hartid);
+> >>
+> >> There is some code smell here. qemu_get_cpu() shouldn't be called by
+> >> device models, but only by accelerators.
+> >
+> > Yes, qemu_get_cpu() is designed to be called by accelerators.
+> > But there is currently no new API to support multi-socket and
+> > heterogeneous processor architectures=EF=BC=8Cand sifive_plic has been
+> > designed with qemu_get_cpu().
+> > Please refer to:
+> > [1] https://lore.kernel.org/qemu-devel/1519683480-33201-16-git-send-ema=
+il-mjc@sifive.com/
+> > [2] https://lore.kernel.org/qemu-devel/20200825184836.1282371-3-alistai=
+r.francis@wdc.com/
+> >
+> >
+> >> Maybe the timer should get a link of the hart array it belongs to,
+> >> and offset to this array base hartid?
+> >
+> > The same problem exists not only with timer, but also with aclint.
+> > There needs to be a general approach to this problem.
 >
-> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-> index 0d37adc542..87d9602383 100644
-> --- a/hw/riscv/sifive_e.c
-> +++ b/hw/riscv/sifive_e.c
-> @@ -225,7 +225,7 @@ static void sifive_e_soc_realize(DeviceState *dev, Er=
-ror **errp)
->              RISCV_ACLINT_SWI_SIZE,
->          RISCV_ACLINT_DEFAULT_MTIMER_SIZE, 0, ms->smp.cpus,
->          RISCV_ACLINT_DEFAULT_MTIMECMP, RISCV_ACLINT_DEFAULT_MTIME,
-> -        RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ, false);
-> +        SIFIVE_E_LFCLK_DEFAULT_FREQ, false);
->      sifive_e_prci_create(memmap[SIFIVE_E_DEV_PRCI].base);
+> Right. However since there is no heterogeneous support in QEMU
+> at present, we don't need this patch in the next release.
 >
->      /* AON */
-> --
-> 2.39.3 (Apple Git-145)
+> So I'd rather wait and work on a correct fix. Up to the maintainer.
+>
+> Regards,
+>
+> Phil.
+>
+> >> I'm going to
+> >> NACK
+> >> this patch until further review / clarifications.
+> >
+> > Regards,
+> >
+> > Leo Hou.
 >
 >
 
