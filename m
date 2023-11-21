@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E30C6C5ACB3
-	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Nov 2023 03:41:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72E41C5ACB3
+	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Nov 2023 03:44:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r5Hcw-00073D-BT; Mon, 20 Nov 2023 22:40:42 -0500
+	id 1r5Hg0-0007tO-Lf; Mon, 20 Nov 2023 22:43:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1r5Hcm-00071T-Ln; Mon, 20 Nov 2023 22:40:34 -0500
-Received: from mail-vs1-xe2b.google.com ([2607:f8b0:4864:20::e2b])
+ id 1r5Hfr-0007sa-UR; Mon, 20 Nov 2023 22:43:44 -0500
+Received: from mail-vk1-xa2f.google.com ([2607:f8b0:4864:20::a2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1r5Hch-00068i-GP; Mon, 20 Nov 2023 22:40:29 -0500
-Received: by mail-vs1-xe2b.google.com with SMTP id
- ada2fe7eead31-462a978c470so389807137.2; 
- Mon, 20 Nov 2023 19:40:26 -0800 (PST)
+ id 1r5Hfq-0006ck-13; Mon, 20 Nov 2023 22:43:43 -0500
+Received: by mail-vk1-xa2f.google.com with SMTP id
+ 71dfb90a1353d-4ac459d7962so3001063e0c.1; 
+ Mon, 20 Nov 2023 19:43:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700538026; x=1701142826; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1700538218; x=1701143018; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YsvfmkwbkOWtfjfP0vdeXgJ8yWZPDqANGzEUMkzDFk0=;
- b=GKLRoVsOUb4sf02r5m7W+FtvxubJC4cF+s82rhmS18in431X7Me/5d2I2SAeKv0Dpr
- xnEe/kkGUPdyMMwmtr4Uy4HG/NXgw9v7h7haWOjlZDfqahLfC/Csgqy7oT9uyEd6YuX7
- KudnJgJF0/vKCziuclSEaHwcWrcx+I1CywqkgjERSQXX/HNQMpzFT7FKq92Qc5/I/mHs
- tSbv6EwsCgf81vrDFzHHYljHlFW/Cp2JZzsnOdXlAHHrfgVvZRpRinhkY5NCLOuCBT/H
- 8TV8ts8ZiouYaAFtly5UZ4U6wCV1tLS9JQDcu1cC79ge+Ces0qGflfDb+gbGs0y4kx96
- Q4Aw==
+ bh=45UMSoz4sYxEioNPZLqNCmHoFl3qz9OvdCeplSuj5zc=;
+ b=kBuJcANgA9UjQYu2WfiIY41wBaxXcVTh6BAOdz5jl9TtI/nVrVfzUi4lY6HU2QTduT
+ euku32uKumQZj5PUTvcH8s4O9tPOcUc3Dp3iaKL/JHqOujSWv7sg20a5SriUqiJWNaE4
+ Xrr4H2rAWkv6HtcVq/4mO6AIgpWmnj6CrOpvjF44OZ+oqnNk/X0vZTmic/MZJVT9EmcA
+ yeAACMTpbLk6dmqkgOBaMEpI2EPXcnDL7l9WgjuwxrXXrWkfsslMVFYhl14lKNxQpxwC
+ Ewgn/PtpUP9ucKGgu8MagOIrHAvVGBx8gHrV9UGiZaRH4+/4ZD3woaTO9GHOvI40LHV+
+ djNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700538026; x=1701142826;
+ d=1e100.net; s=20230601; t=1700538218; x=1701143018;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YsvfmkwbkOWtfjfP0vdeXgJ8yWZPDqANGzEUMkzDFk0=;
- b=EPG6H5ZIcxkL+pQCfHeXp2XBboUD/B8aLrYxrE52dPCWR7y5HpqYhP0Zdc6iACFR2d
- wgBuQ5/kcGqNisBATse+feT2iVlGypbd4Zc5GFaraakpg2DfeQDfIC52P17p/Xs2meIU
- W6sx5+95ptRZpL9FhPSlP31oSbpGS91yL1tL/FsqU1zLClkbuFC28Ji47GrnPWYv3EK5
- vgUT+K3js2OTIAVL/bx4tlD0ZIYNeksG4J6TQTDqYgDMQsreJBLqnX7t4khuaO1trIA/
- XaD7QP+1voY46gT6ggiGL7rBh1AzXSpNUSJEi/RWnPKoog7G6pVjaJ0bsXbjKmhjmEbe
- UnNw==
-X-Gm-Message-State: AOJu0YwKsyPcrz82VeltgR+SFl6pqnJX1oHzdyT/PH1bzhx4DTr8p0iK
- 0aHu9FdSymV3gfHqkPLH0WpOdjWs156VOl9dm4I=
-X-Google-Smtp-Source: AGHT+IG2Ag/ulWnnJBdUQ5x4VqTAHIVAUogsAzMYq7ut+XbgO/DUPw34F2SVD43EFyUxIblUuRzmaoBC1XpRepne1pk=
-X-Received: by 2002:a05:6102:4695:b0:460:f36e:beee with SMTP id
- dw21-20020a056102469500b00460f36ebeeemr4420744vsb.30.1700538025814; Mon, 20
- Nov 2023 19:40:25 -0800 (PST)
+ bh=45UMSoz4sYxEioNPZLqNCmHoFl3qz9OvdCeplSuj5zc=;
+ b=wbtrO78dXlc3KUp88lVrAFJ/EFIVdbFONAHjSPp5UMIaQnxmMhh5AKKvwtrCCZe088
+ T4G1zPV3jm30aOQ0pA7SJn9pDBNgO9pHLelbXkv4cavi9Zt1zpfOqkWSlRFqv0HMY0rF
+ 1tJf21JNQM5GvWI53ebTEVLXnVeHaijDQvHLoeNvmnWFFqwlKML3jkwALggciBBPwWeA
+ 7M/TrjnW1R4fFhTwvmWg9NswOS3z0R1aeJZGaW6JIO9Ila2VggSyYp4cKcfoOreBhmxG
+ vXtRxyO6H2jTYyJyeXqNLyWmfct3Ua4hhsrw75TmIDF8pjzhxo5t+zBs5Ag2grJraSd+
+ T/QA==
+X-Gm-Message-State: AOJu0YwILCp04IpG3+n6KbnTSvjf2/jUWoCYhwbkyeYsBhreWD15ujy5
+ 24ThaNxqeGuqelfEV77qkPyBQMwwZMjgRQfI5DU=
+X-Google-Smtp-Source: AGHT+IE4TF4a8bvlrt0dv6cEpILmwzydp1mdIuDAbycy9+5NMDVWZWDdJxY4MQxBRCXdAJV/sYYFJqjaH8j3p8SLdrY=
+X-Received: by 2002:a05:6122:2216:b0:4ac:2054:6a27 with SMTP id
+ bb22-20020a056122221600b004ac20546a27mr1688471vkb.2.1700538218252; Mon, 20
+ Nov 2023 19:43:38 -0800 (PST)
 MIME-Version: 1.0
-References: <20231110172559.73209-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20231110172559.73209-1-dbarboza@ventanamicro.com>
+References: <20231114123913.536194-1-chigot@adacore.com>
+In-Reply-To: <20231114123913.536194-1-chigot@adacore.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 21 Nov 2023 13:39:59 +1000
-Message-ID: <CAKmqyKM_Y35O-t=QFg=-G7GXrA-rOe2T6wht4Ph-OBbX3+UFMA@mail.gmail.com>
-Subject: Re: [PATCH for-8.2] hw/riscv/virt.c: do create_fdt() earlier,
- add finalize_fdt()
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
+Date: Tue, 21 Nov 2023 13:43:11 +1000
+Message-ID: <CAKmqyKNN8bapFOPo1hGQUOmKf0p=DsOi3Ms9qMNwBK_vV-fDdg@mail.gmail.com>
+Subject: Re: [PATCH v2] target/riscv: don't verify ISA compatibility for
+ zicntr and zihpm
+To: =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, dbarboza@ventanamicro.com, 
+ alistair.francis@wdc.com, palmer@dabbelt.com, bmeng@tinylab.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2b;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2f;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2f.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -90,176 +89,56 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, Nov 11, 2023 at 3:26=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Wed, Nov 15, 2023 at 12:46=E2=80=AFAM Cl=C3=A9ment Chigot <chigot@adacor=
+e.com> wrote:
 >
-> Commit 49554856f0 fixed a problem, where TPM devices were not appearing
-> in the FDT, by delaying the FDT creation up until virt_machine_done().
-> This create a side effect (see gitlab #1925) - devices that need access
-> to the '/chosen' FDT node during realize() stopped working because, at
-> that point, we don't have a FDT.
+> The extensions zicntr and zihpm were officially added in the privilege
+> instruction set specification 1.12. However, QEMU has been implemented
+> them long before it and thus they are forced to be on during the cpu
+> initialization to ensure compatibility (see riscv_cpu_init).
+> riscv_cpu_disable_priv_spec_isa_exts was not updated when the above
+> behavior was introduced, resulting in these extensions to be disabled
+> after all.
 >
-> This happens because our FDT creation is monolithic, but it doesn't need
-> to be. We can add the needed FDT components for realize() time and, at
-> the same time, do another FDT round where we account for dynamic sysbus
-> devices.  In other words, the problem fixed by 49554856f0 could also be
-> fixed by postponing only create_fdt_sockets() and its dependencies,
-> leaving everything else from create_fdt() to be done during init().
->
-> Split the FDT creation in two parts:
->
-> - create_fdt(), now moved back to virt_machine_init(), will create FDT
->   nodes that doesn't depend on additional (dynamic) devices from the
->   sysbus;
->
-> - a new finalize_fdt() step is added, where create_fdt_sockets() and
->   friends is executed, accounting for the dynamic sysbus devices that
->   were added during realize().
->
-> This will make both use cases happy: TPM devices are still working as
-> intended, and devices such as 'guest-loader' have a FDT to work on
-> during realize().
->
-> Fixes: 49554856f0 ("riscv: Generate devicetree only after machine initial=
-ization is complete")
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1925
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Signed-off-by: Cl=C3=A9ment Chigot <chigot@adacore.com>
+> Fixes: c004099330 ("target/riscv: add zicntr extension flag for TCG")
+> Fixes: 0824121660 ("target/riscv: add zihpm extension flag for TCG")
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  hw/riscv/virt.c | 71 +++++++++++++++++++++++++++++--------------------
->  1 file changed, 42 insertions(+), 29 deletions(-)
+>  target/riscv/tcg/tcg-cpu.c | 9 +++++++++
+>  1 file changed, 9 insertions(+)
 >
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index c7fc97e273..d2eac24156 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -962,7 +962,6 @@ static void create_fdt_uart(RISCVVirtState *s, const =
-MemMapEntry *memmap,
->          qemu_fdt_setprop_cells(ms->fdt, name, "interrupts", UART0_IRQ, 0=
-x4);
->      }
->
-> -    qemu_fdt_add_subnode(ms->fdt, "/chosen");
->      qemu_fdt_setprop_string(ms->fdt, "/chosen", "stdout-path", name);
->      g_free(name);
->  }
-> @@ -1023,11 +1022,29 @@ static void create_fdt_fw_cfg(RISCVVirtState *s, =
-const MemMapEntry *memmap)
->      g_free(nodename);
->  }
->
-> -static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap)
-> +static void finalize_fdt(RISCVVirtState *s)
->  {
-> -    MachineState *ms =3D MACHINE(s);
->      uint32_t phandle =3D 1, irq_mmio_phandle =3D 1, msi_pcie_phandle =3D=
- 1;
->      uint32_t irq_pcie_phandle =3D 1, irq_virtio_phandle =3D 1;
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index 08adad304d..8a35683a34 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -250,6 +250,15 @@ static void riscv_cpu_disable_priv_spec_isa_exts(RIS=
+CVCPU *cpu)
+>      for (edata =3D isa_edata_arr; edata && edata->name; edata++) {
+>          if (isa_ext_is_enabled(cpu, edata->ext_enable_offset) &&
+>              (env->priv_ver < edata->min_version)) {
+> +            /*
+> +             * These two extensions are always enabled as they were supp=
+orted
+> +             * by QEMU before they were added as extensions in the ISA.
+> +             */
+> +            if (!strcmp(edata->name, "zicntr") ||
+> +                !strcmp(edata->name, "zihpm")) {
+> +                continue;
+> +            }
 > +
-> +    create_fdt_sockets(s, virt_memmap, &phandle, &irq_mmio_phandle,
-> +                       &irq_pcie_phandle, &irq_virtio_phandle,
-> +                       &msi_pcie_phandle);
-> +
-> +    create_fdt_virtio(s, virt_memmap, irq_virtio_phandle);
-> +
-> +    create_fdt_pcie(s, virt_memmap, irq_pcie_phandle, msi_pcie_phandle);
-> +
-> +    create_fdt_reset(s, virt_memmap, &phandle);
-> +
-> +    create_fdt_uart(s, virt_memmap, irq_mmio_phandle);
-> +
-> +    create_fdt_rtc(s, virt_memmap, irq_mmio_phandle);
-> +}
-> +
-> +static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap)
-> +{
-> +    MachineState *ms =3D MACHINE(s);
->      uint8_t rng_seed[32];
->
->      ms->fdt =3D create_device_tree(&s->fdt_size);
-> @@ -1047,28 +1064,16 @@ static void create_fdt(RISCVVirtState *s, const M=
-emMapEntry *memmap)
->      qemu_fdt_setprop_cell(ms->fdt, "/soc", "#size-cells", 0x2);
->      qemu_fdt_setprop_cell(ms->fdt, "/soc", "#address-cells", 0x2);
->
-> -    create_fdt_sockets(s, memmap, &phandle, &irq_mmio_phandle,
-> -                       &irq_pcie_phandle, &irq_virtio_phandle,
-> -                       &msi_pcie_phandle);
-> -
-> -    create_fdt_virtio(s, memmap, irq_virtio_phandle);
-> -
-> -    create_fdt_pcie(s, memmap, irq_pcie_phandle, msi_pcie_phandle);
-> -
-> -    create_fdt_reset(s, memmap, &phandle);
-> -
-> -    create_fdt_uart(s, memmap, irq_mmio_phandle);
-> -
-> -    create_fdt_rtc(s, memmap, irq_mmio_phandle);
-> -
-> -    create_fdt_flash(s, memmap);
-> -    create_fdt_fw_cfg(s, memmap);
-> -    create_fdt_pmu(s);
-> +    qemu_fdt_add_subnode(ms->fdt, "/chosen");
->
->      /* Pass seed to RNG */
->      qemu_guest_getrandom_nofail(rng_seed, sizeof(rng_seed));
->      qemu_fdt_setprop(ms->fdt, "/chosen", "rng-seed",
->                       rng_seed, sizeof(rng_seed));
-> +
-> +    create_fdt_flash(s, memmap);
-> +    create_fdt_fw_cfg(s, memmap);
-> +    create_fdt_pmu(s);
->  }
->
->  static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
-> @@ -1257,15 +1262,12 @@ static void virt_machine_done(Notifier *notifier,=
- void *data)
->      uint64_t kernel_entry =3D 0;
->      BlockBackend *pflash_blk0;
->
-> -    /* load/create device tree */
-> -    if (machine->dtb) {
-> -        machine->fdt =3D load_device_tree(machine->dtb, &s->fdt_size);
-> -        if (!machine->fdt) {
-> -            error_report("load_device_tree() failed");
-> -            exit(1);
-> -        }
-> -    } else {
-> -        create_fdt(s, memmap);
-> +    /*
-> +     * An user provided dtb must include everything, including
-> +     * dynamic sysbus devices. Our FDT needs to be finalized.
-> +     */
-> +    if (machine->dtb =3D=3D NULL) {
-> +        finalize_fdt(s);
->      }
->
->      /*
-> @@ -1541,6 +1543,17 @@ static void virt_machine_init(MachineState *machin=
-e)
->      }
->      virt_flash_map(s, system_memory);
->
-> +    /* load/create device tree */
-> +    if (machine->dtb) {
-> +        machine->fdt =3D load_device_tree(machine->dtb, &s->fdt_size);
-> +        if (!machine->fdt) {
-> +            error_report("load_device_tree() failed");
-> +            exit(1);
-> +        }
-> +    } else {
-> +        create_fdt(s, memmap);
-> +    }
-> +
->      s->machine_done.notify =3D virt_machine_done;
->      qemu_add_machine_init_done_notifier(&s->machine_done);
->  }
+>              isa_ext_update_enabled(cpu, edata->ext_enable_offset, false)=
+;
+>  #ifndef CONFIG_USER_ONLY
+>              warn_report("disabling %s extension for hart 0x" TARGET_FMT_=
+lx
 > --
-> 2.41.0
+> 2.25.1
 >
 >
 
