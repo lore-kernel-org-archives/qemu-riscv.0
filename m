@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 176E6C61D92
-	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Nov 2023 12:55:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CD4FC61D92
+	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Nov 2023 14:11:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r5QHf-0006kH-JQ; Tue, 21 Nov 2023 07:55:19 -0500
+	id 1r5RSi-0000oL-D2; Tue, 21 Nov 2023 09:10:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1r5QHe-0006jj-B1
- for qemu-riscv@nongnu.org; Tue, 21 Nov 2023 07:55:18 -0500
-Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
+ (Exim 4.90_1) (envelope-from <jerry.shih@sifive.com>)
+ id 1r5LE6-0005Ow-3j
+ for qemu-riscv@nongnu.org; Tue, 21 Nov 2023 02:31:18 -0500
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1r5QHb-0004PT-9U
- for qemu-riscv@nongnu.org; Tue, 21 Nov 2023 07:55:18 -0500
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-27ff83feb29so4758242a91.3
- for <qemu-riscv@nongnu.org>; Tue, 21 Nov 2023 04:55:14 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <jerry.shih@sifive.com>)
+ id 1r5LE2-0007zg-5t
+ for qemu-riscv@nongnu.org; Tue, 21 Nov 2023 02:31:17 -0500
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-1ce5e76912aso31941765ad.2
+ for <qemu-riscv@nongnu.org>; Mon, 20 Nov 2023 23:31:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1700571314; x=1701176114; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=a+VFY9n6L1rNfogGRXqT4uK3iW80vJ4m0prIcuKT1uw=;
- b=AknBubc0PFMM6o8Be+JGHPsoNq8LMp82nN/Z/08BJbP8Cxi0E9AF7MB61DtMlotySI
- g4pwL69/IcJye1PMKYYbdxbp33+vyXDGW8p3c3L5zA0SADZc/YRtCSg0N55PgZ6l/6OP
- PkDjtpiZWadDs2qvk+QHdqBSvOv+je5IC1TLanzm8SE0xKybhyHOJJ5ecjaapU8DpTMX
- qIprb2yKDsj8kqzn1fOErtsVp6v6gROnVN+Dwr0JAfmMBk2CeR0OLdqeiX9o+/QMF+Hj
- RJtT+5HFAlBAXg99MelFBiZ79A8jL1PNuT2Cb2Eu/wk+1wo6hJ6Al/BQGiQO7CRkfXcP
- ms5w==
+ d=sifive.com; s=google; t=1700551871; x=1701156671; darn=nongnu.org;
+ h=to:references:message-id:content-transfer-encoding:cc:date
+ :in-reply-to:from:subject:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xRPBn/BflE4dkZBZDND2XdKcCkvqNu9HIsx7jpMAmPQ=;
+ b=EOEzvGHXnWoLzZ/DxI+hd1/4pt5i92yk5dK72Yscvxfu8b2aN6U0uXBQ+TnyGIUZc8
+ wGDV2+p2GgLF7B1vM29LU7+4B5xiQ5BhnR4sfZWSV5KluGh8vFBLTAu6AFYoIHvVOg0H
+ IttwA4WvDrKYkckv2rSnzf7i/Pw11LcVXRjwpTGmx5Fnd/D3bdAaRQutxEDQmh5T03NC
+ QUH0fX3kUQZNgTtttA/ISQy6ti1vA3cnZ4vlCrlmSTk033zj+ZJTQZmNNIlmwb5kUjWB
+ J+lsXAmOhPVxhAzzMnj5AHpCWF4HPEx4cZBRMV4MC+2JqZ/6yM4pn5la2SEl/n+gJbaA
+ /irA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700571314; x=1701176114;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=a+VFY9n6L1rNfogGRXqT4uK3iW80vJ4m0prIcuKT1uw=;
- b=Re2ueMuNxizQtX2+6IuOf7Rj/Sn8rLI6SV3ryM4EZdUH1CVUwl55B9u7VY9ndjvm6t
- UekUuqLtWF6EtO877pC5x20tmAPIxJKrvcG74Pm/X1RLXaEjTJ+E5Kde3a1h6pqlgeHd
- RE8hALmNxN7a1ObvkcrhFyefehFbwAPF6jjoGQEUePDQJoKsBBDy8vMyYaukmjCKzZaZ
- MKLA6/U3ujeGN0NZPOq44oQDZ6PgPp7ftZQuNDqE24GkmUmRNHIhtdq9/H0mUQcbwhoE
- t3Uabij/nYR6UJ7rEBeQpmRrlaIDKYvYyCRUUHCHmhlpTs8HCpWcR3Ac/SQdeYWznIIB
- HSOQ==
-X-Gm-Message-State: AOJu0YwJW1PAkHQeIbtlGWOjWLyKcfJsx8Oj5fqoHkdEP9rVR6tizsWw
- aRraqLCQKZFMa7QinfGSqurMhw==
-X-Google-Smtp-Source: AGHT+IF1NIoZfqWb3lYNuIVSRnq/LdfZWuSHDHgFgvL7CMVA5YH3wJv91iXO/SpeSfViXgV+t5ixwQ==
-X-Received: by 2002:a17:90b:3a86:b0:27c:fc2a:a178 with SMTP id
- om6-20020a17090b3a8600b0027cfc2aa178mr12118205pjb.9.1700571313872; 
- Tue, 21 Nov 2023 04:55:13 -0800 (PST)
-Received: from [192.168.68.109] ([152.250.131.119])
+ d=1e100.net; s=20230601; t=1700551871; x=1701156671;
+ h=to:references:message-id:content-transfer-encoding:cc:date
+ :in-reply-to:from:subject:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=xRPBn/BflE4dkZBZDND2XdKcCkvqNu9HIsx7jpMAmPQ=;
+ b=HORv8rW1wPHkb7ORDrw9v6yf54ZeuAbsRX++72xrZ1TDfAVFms7X+64KYH1/ASG8hb
+ 8zuKIXRkHXmU7jbaIpJX/Ob01yKRwdD32hlMZUQY2np5Uve0Zp5TyECj/YH1v4UqLvPC
+ g8jwvSAPY0hB6r1jd0r03wAoaZyCyYcGFbgZhJ3lFYT9Dx4cHcvWG5TXJ4Z0jp5TvVV9
+ 8NZhrmMqLrTn0ECSTopN9HK4JQFReaJdqi92qBP245fLBg2RcRWpFI7sjsQmKa44QSWU
+ paDqKXe/fMigjHtuy7P1/JsMimGO0OgaVPUzJEgxKWk1hiCiHY763moeXoLcDx5Vs2Eu
+ cFOw==
+X-Gm-Message-State: AOJu0Yx5kuEEN4ZRBlGzKiB1MNfNAjoODKaep/yeD38w76L5OqvLwY6V
+ sBMXlHeGW84xvYTP678hK7UEfA==
+X-Google-Smtp-Source: AGHT+IFovYncqjUiIfxyWgaYQDAg1MsFp2X3XfaPlCkPgAKMPY0EGd/KM7XtJi/fKoofYd1BjOhMGg==
+X-Received: by 2002:a17:902:720c:b0:1cf:31c4:3a7 with SMTP id
+ ba12-20020a170902720c00b001cf31c403a7mr10671321plb.30.1700551870927; 
+ Mon, 20 Nov 2023 23:31:10 -0800 (PST)
+Received: from ?IPv6:2402:7500:4ce:5aed:a527:c932:f992:cf2d?
+ ([2402:7500:4ce:5aed:a527:c932:f992:cf2d])
  by smtp.gmail.com with ESMTPSA id
- x10-20020a17090aa38a00b0028328057c67sm7027577pjp.45.2023.11.21.04.55.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 21 Nov 2023 04:55:13 -0800 (PST)
-Message-ID: <96f2695c-2950-45db-ae21-44b0d5558ee2@ventanamicro.com>
-Date: Tue, 21 Nov 2023 09:55:11 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] target/riscv/cpu_helper.c: Fix mxr bit behavior
-Content-Language: en-US
-To: Ivan Klokov <ivan.klokov@syntacore.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com
-References: <20231121071757.7178-1-ivan.klokov@syntacore.com>
- <20231121071757.7178-3-ivan.klokov@syntacore.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20231121071757.7178-3-ivan.klokov@syntacore.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x102c.google.com
+ ja14-20020a170902efce00b001cf5d0e7e05sm3423200plb.109.2023.11.20.23.31.08
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 20 Nov 2023 23:31:10 -0800 (PST)
+Content-Type: text/plain;
+	charset=us-ascii
+Mime-Version: 1.0 (Mac OS X Mail 11.5 \(3445.9.7\))
+Subject: Re: [PATCH v10 08/18] target/riscv: add rva22u64 profile definition
+From: Jerry Shih <jerry.shih@sifive.com>
+In-Reply-To: <20231103134629.561732-9-dbarboza@ventanamicro.com>
+Date: Tue, 21 Nov 2023 15:31:06 +0800
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
+ palmer@rivosinc.com, ajones@ventanamicro.com
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <E6D278C8-C7ED-4C81-B2BE-DA93D0B143E0@sifive.com>
+References: <20231103134629.561732-1-dbarboza@ventanamicro.com>
+ <20231103134629.561732-9-dbarboza@ventanamicro.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+X-Mailer: Apple Mail (2.3445.9.7)
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=jerry.shih@sifive.com; helo=mail-pl1-x62d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -83,6 +85,7 @@ X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Tue, 21 Nov 2023 09:10:47 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -97,69 +100,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Nov 3, 2023, at 21:46, Daniel Henrique Barboza =
+<dbarboza@ventanamicro.com> wrote:
+> QEMU implements all possible extensions of this profile. All the so
+> called 'synthetic extensions' described in the profile that are cache
+> related are ignored/assumed enabled (Za64rs, Zic64b, Ziccif, Ziccrse,
+> Ziccamoa, Zicclsm) since we do not implement a cache model.
 
+> +/*
+> + * RVA22U64 defines some 'named features' or 'synthetic extensions'
+> + * that are cache related: Za64rs, Zic64b, Ziccif, Ziccrse, Ziccamoa
+> + * and Zicclsm. We do not implement caching in QEMU so we'll consider
+> + * all these named features as always enabled.
+> + *
+> + * There's no riscv,isa update for them (nor for zic64b, despite it
+> + * having a cfg offset) at this moment.
+> + */
+> +static RISCVCPUProfile RVA22U64 =3D {
+> +    .name =3D "rva22u64",
+> +    .misa_ext =3D RVI | RVM | RVA | RVF | RVD | RVC | RVU,
+> +    .ext_offsets =3D {
+> +        CPU_CFG_OFFSET(ext_zicsr), CPU_CFG_OFFSET(ext_zihintpause),
+> +        CPU_CFG_OFFSET(ext_zba), CPU_CFG_OFFSET(ext_zbb),
+> +        CPU_CFG_OFFSET(ext_zbs), CPU_CFG_OFFSET(ext_zfhmin),
+> +        CPU_CFG_OFFSET(ext_zkt), CPU_CFG_OFFSET(ext_zicntr),
+> +        CPU_CFG_OFFSET(ext_zihpm), CPU_CFG_OFFSET(ext_zicbom),
+> +        CPU_CFG_OFFSET(ext_zicbop), CPU_CFG_OFFSET(ext_zicboz),
 
-On 11/21/23 04:17, Ivan Klokov wrote:
-> According to RISCV Specification sect 9.5 on two stage translation when
-> V=1 the vsstatus(mstatus in QEMU's terms) field MXR, which makes
-> execute-only pages readable, only overrides VS-stage page protection.
-> Setting MXR at HS-level(mstatus_hs), however, overrides both VS-stage
-> and G-stage execute-only permissions.
-> 
-> The hypervisor extension changes the behavior of MXR\MPV\MPRV bits.
-> Due to RISCV Specification sect. 9.4.1 when MPRV=1, explicit memory
-> accesses are translated and protected, and endianness is applied, as
-> though the current virtualization mode were set to MPV and the current
-> nominal privilege mode were set to MPP. vsstatus.MXR makes readable
-> those pages marked executable at the VS translation stage.
-> 
-> Fixes: 36a18664ba ("target/riscv: Implement second stage MMU")
-> 
-> Signed-off-by: Ivan Klokov <ivan.klokov@syntacore.com>
-> ---
+Hi Daniel,
 
+If the cache related extensions are `ignored/assumed enabled`, why don't
+we export them in `riscv,isa`?
+If we try to check the RVA22 profile in linux kernel running with qemu, =
+the
+isa string is not match RVA22 profile.
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
->   target/riscv/cpu_helper.c | 24 ++++++++++++++++++++----
->   1 file changed, 20 insertions(+), 4 deletions(-)
-> 
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 9ff0952e46..e7e23b34f4 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -1032,13 +1032,29 @@ restart:
->           prot |= PAGE_WRITE;
->       }
->       if (pte & PTE_X) {
-> -        bool mxr;
-> +        bool mxr = false;
->   
-> -        if (first_stage == true) {
-> +        /*
-> +         * Use mstatus for first stage or for the second stage without
-> +         * virt_enabled (MPRV+MPV)
-> +         */
-> +        if (first_stage || !env->virt_enabled) {
->               mxr = get_field(env->mstatus, MSTATUS_MXR);
-> -        } else {
-> -            mxr = get_field(env->vsstatus, MSTATUS_MXR);
->           }
-> +
-> +        /* MPRV+MPV case, check VSSTATUS */
-> +        if (first_stage && two_stage && !env->virt_enabled) {
-> +            mxr |= get_field(env->vsstatus, MSTATUS_MXR);
-> +        }
-> +
-> +        /*
-> +         * Setting MXR at HS-level overrides both VS-stage and G-stage
-> +         * execute-only permissions
-> +         */
-> +        if (env->virt_enabled) {
-> +            mxr |= get_field(env->mstatus_hs, MSTATUS_MXR);
-> +        }
-> +
->           if (mxr) {
->               prot |= PAGE_READ;
->           }
+Thanks,
+Jerry=20=
 
