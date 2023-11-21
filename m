@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CB6BC5ACB3
-	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Nov 2023 04:45:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEA79C54FB9
+	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Nov 2023 05:23:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r5Id9-0006Zu-V9; Mon, 20 Nov 2023 23:45:01 -0500
+	id 1r5JDm-0007OE-OQ; Tue, 21 Nov 2023 00:22:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1r5Id6-0006XO-Kp; Mon, 20 Nov 2023 23:44:56 -0500
-Received: from mail-vs1-xe32.google.com ([2607:f8b0:4864:20::e32])
+ id 1r5JDk-0007Nk-TT; Tue, 21 Nov 2023 00:22:48 -0500
+Received: from mail-ua1-x933.google.com ([2607:f8b0:4864:20::933])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1r5Id4-0006jD-UF; Mon, 20 Nov 2023 23:44:56 -0500
-Received: by mail-vs1-xe32.google.com with SMTP id
- ada2fe7eead31-462ac0f82e3so323045137.0; 
- Mon, 20 Nov 2023 20:44:54 -0800 (PST)
+ id 1r5JDj-0008O1-4f; Tue, 21 Nov 2023 00:22:48 -0500
+Received: by mail-ua1-x933.google.com with SMTP id
+ a1e0cc1a2514c-7bae0c07007so1222298241.1; 
+ Mon, 20 Nov 2023 21:22:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700541893; x=1701146693; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1700544165; x=1701148965; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qDXJkcUjY9jheYpanOMTtzm4HcEyyA0Tvq22+8P3kYU=;
- b=WOoHG1x0Ezs/uJUxH91Ac8H83bzjnBYI2Nt0KkT7RjbgDhHlpXu6CuphBwxPCj7SwD
- PCkqIDrK6yCNLecPRZYEbuNimddddQ343b707DjXg+SMAkkE4Or+qW35edOs/Vm+rID0
- rZA4uB805wteGjiD6qNRSF3DcKJq6yX7P34xBQ5K0K5FnxZTD/Ss1KU7c4k4MXCJpoWM
- OgpnYvGF2T1IXPi9S/waO/p9l9seG7ltJXpRTADbppKa/T45qI5KO5PtXCcgRY1zzIz1
- HOJ+Fs0jPaBW8cuneNH87vxO7nNJhjajYupyiKNeFJAgAXmtfo1VIJqRb8rmK60oKfGT
- N2BA==
+ bh=XbEIDadxjWfk1FoP17FgwYft/fonaxXafjG1RHYflbE=;
+ b=iIv3pbnjSsE2zaCEs2ENIUsSFpX65JxyulVu1D8HxGU4XAtcmqViKTnO8UGKVN3LMq
+ QFtTV8YQB3bz9u45BY0bevXPjB4/kM2YOt+jnumnn6JPLROzQ4pYWlddBQlap1xV0uNh
+ OQQA7tdC9geMXG8fSpXN9tSj8BQkT6rBYCdQkW/xx+/XssWpMKbm0BVjqYueobBHkQwQ
+ W7ojN1qh2afW2o1p7Qbx+ulm+oEF+dtdSxyTmfSUXLgTUUueiUan0DQ1RY3VzmHAXdWQ
+ 6KuCFTbOYdXvOC/Drn1CueF2l6wTB5EUnx9Mk1b2HrTXw9NdA9/GabihMvL+JjeSGlCn
+ 9DDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700541893; x=1701146693;
+ d=1e100.net; s=20230601; t=1700544165; x=1701148965;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qDXJkcUjY9jheYpanOMTtzm4HcEyyA0Tvq22+8P3kYU=;
- b=VJ5M1oVMgWLOJAabqUBYWajXlURKkqJM6tgADq3GX3KLIt1ohuLGxbRF0XgjbqlwKH
- hOwWAs0Vbg9HqpMb1g0+jnTNRfW8PQXUd2VQbm6/3oaVC325uoq1t0KS2jWxtCdYg37L
- 9URPkJbOJT0EB+14dIeGD3RSQiwFlwotA+LPLBFoClXFobqALg87vS3cegbTKCFdf00R
- 1C1SlAExdTElEo3TQgx9+7vvGr5TICZHGyB829bG0JiuZbK2ZV28cz+4mgFBPZJYMgWe
- WUCluaFfFQoMI8BsfhRq5kpld2Wq1GVONbL07DyOP2FwL1ggx3oxBZlZzp5pfp3HPxAX
- ePFQ==
-X-Gm-Message-State: AOJu0Yz1qOHuw8vfiYNS0M6KmUN+cYYXtx8wcbj/ANStnjdkjN0atmIk
- Vv0A7iJocHbXfO2x/rcLQwmWkWzmwV+Vj4Sk7FV+OatTxJYahg==
-X-Google-Smtp-Source: AGHT+IFDCuBwgrcJt1Ihjizu1b3wCaU+4FFBTZItvDgciMuIU8S88sStlvhs4ZPFdk6bXwqhAlMpYsR6OSqCVQtsLMw=
-X-Received: by 2002:a05:6102:1085:b0:462:9efa:77a0 with SMTP id
- s5-20020a056102108500b004629efa77a0mr5125226vsr.11.1700541893433; Mon, 20 Nov
- 2023 20:44:53 -0800 (PST)
+ bh=XbEIDadxjWfk1FoP17FgwYft/fonaxXafjG1RHYflbE=;
+ b=NS1n/cHxmxCnvIwJUt490H7qhE6sNYE/dy7DNbC9HTYkiIlH30e6yf3LTDYLkFSg5c
+ x8XfGkjVlvfX6QKSsqlG4WdRO+bo0GmKDUYT34NX3U89/Gohmy4K25b+w1Uu9OU29TM5
+ 4IKkeL/Q2hEz4CSyqNC5u9tk6o7+wueKGZfgv+yozmW6EeSbNBocTYCjZotkscoi9ZFS
+ P0sam5B98k/cakjPHtEpFJaR6xb2T7CZOmyfs75DWWBlw5eRAgr/Oi5Be1ud+FUDP+0u
+ 38Mp6cVBHLBW8e/ws4oThHvFGUO0Usinmc8zPV0e1tYFZ8COSuFzd25+DzstTsfBvE5k
+ y1qg==
+X-Gm-Message-State: AOJu0YxJLdeH/CpJ4tuM+Xx4ME+j6uyeLm7Vz54Z2lHb9m/i70PU5ril
+ 4vPMzNTW4SzrX9v+nIw9Jm0mJa/DpiqUg7LAQtw=
+X-Google-Smtp-Source: AGHT+IHqo00CpEfbyHb8g9CP69QSkuY6KdstymYWdVdDE42a7R1DJipzz1N/CQuo+HvTh05E4w76j9MiqWB/RnikHjo=
+X-Received: by 2002:a67:fb98:0:b0:462:8cc4:1333 with SMTP id
+ n24-20020a67fb98000000b004628cc41333mr5221239vsr.27.1700544165594; Mon, 20
+ Nov 2023 21:22:45 -0800 (PST)
 MIME-Version: 1.0
-References: <20231120120609.37960-1-ivan.klokov@syntacore.com>
- <20231120120609.37960-2-ivan.klokov@syntacore.com>
-In-Reply-To: <20231120120609.37960-2-ivan.klokov@syntacore.com>
+References: <20231114094705.109146-1-ethan84@andestech.com>
+ <20231114094705.109146-5-ethan84@andestech.com>
+In-Reply-To: <20231114094705.109146-5-ethan84@andestech.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 21 Nov 2023 14:44:26 +1000
-Message-ID: <CAKmqyKOK5m8DewTx=JphWLUtrr9LK29R1BUN72qoUGc26FuEpg@mail.gmail.com>
-Subject: Re: [PATCH 1/2] target/riscv/cpu_helper.c: Invalid exception on MMU
- translation stage
-To: Ivan Klokov <ivan.klokov@syntacore.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com, 
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
+Date: Tue, 21 Nov 2023 15:22:18 +1000
+Message-ID: <CAKmqyKNTcec+QLPLyWRtF4k5DQzNEK_aVmJY28fUGgXTrvWcyw@mail.gmail.com>
+Subject: Re: [PATCH v3 4/4] hw/riscv/virt: Add IOPMP support
+To: Ethan Chen <ethan84@andestech.com>
+Cc: qemu-devel@nongnu.org, peter.maydell@linaro.org, edgar.iglesias@gmail.com, 
+ richard.henderson@linaro.org, pbonzini@redhat.com, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, in.meng@windriver.com, liweiwei@iscas.ac.cn, 
+ dbarboza@ventanamicro.com, hiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, 
+ peterx@redhat.com, david@redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e32;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::933;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x933.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -91,94 +92,197 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Nov 20, 2023 at 11:19=E2=80=AFPM Ivan Klokov <ivan.klokov@syntacore=
-.com> wrote:
+On Tue, Nov 14, 2023 at 7:48=E2=80=AFPM Ethan Chen via <qemu-devel@nongnu.o=
+rg> wrote:
 >
-> According to RISCV priveleged spec sect. 5.3.2 Virtual Address Translatio=
-n Process
-> access-fault exceptions may raise only after PMA/PMP check. Current imple=
-mentation
-> generates an acces-fault for mbare mode even if there were no PMA/PMP err=
-ors.
-> This patch removes the erroneous MMU mode check and generates an access-f=
-ault
-> exception based on the pmp_violation flag only.
->
-> Signed-off-by: Ivan Klokov <ivan.klokov@syntacore.com>
+> - Add 'iopmp=3Don' option to enable a iopmp device and a dma device
+>  connect to the iopmp device
+> - Add 'iopmp_cascade=3Don' option to enable iopmp cascading.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Can we document these in docs/system/riscv/virt.rst
 
 Alistair
 
+>
+> Signed-off-by: Ethan Chen <ethan84@andestech.com>
 > ---
->  target/riscv/cpu_helper.c | 30 +++++++-----------------------
->  1 file changed, 7 insertions(+), 23 deletions(-)
+>  hw/riscv/Kconfig        |  2 ++
+>  hw/riscv/virt.c         | 72 +++++++++++++++++++++++++++++++++++++++--
+>  include/hw/riscv/virt.h | 10 +++++-
+>  3 files changed, 81 insertions(+), 3 deletions(-)
 >
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index b7af69de53..9ff0952e46 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -1143,47 +1143,31 @@ static void raise_mmu_exception(CPURISCVState *en=
-v, target_ulong address,
->                                  bool two_stage_indirect)
+> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> index b6a5eb4452..c30a104aa4 100644
+> --- a/hw/riscv/Kconfig
+> +++ b/hw/riscv/Kconfig
+> @@ -45,6 +45,8 @@ config RISCV_VIRT
+>      select FW_CFG_DMA
+>      select PLATFORM_BUS
+>      select ACPI
+> +    select ATCDMAC300
+> +    select RISCV_IOPMP
+>
+>  config SHAKTI_C
+>      bool
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index c7fc97e273..3e23ee3afc 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -53,6 +53,8 @@
+>  #include "hw/display/ramfb.h"
+>  #include "hw/acpi/aml-build.h"
+>  #include "qapi/qapi-visit-common.h"
+> +#include "hw/misc/riscv_iopmp.h"
+> +#include "hw/dma/atcdmac300.h"
+>
+>  /*
+>   * The virt machine physical address space used by some of the devices
+> @@ -97,6 +99,9 @@ static const MemMapEntry virt_memmap[] =3D {
+>      [VIRT_UART0] =3D        { 0x10000000,         0x100 },
+>      [VIRT_VIRTIO] =3D       { 0x10001000,        0x1000 },
+>      [VIRT_FW_CFG] =3D       { 0x10100000,          0x18 },
+> +    [VIRT_IOPMP] =3D        { 0x10200000,      0x100000 },
+> +    [VIRT_IOPMP2] =3D       { 0x10300000,      0x100000 },
+> +    [VIRT_DMAC] =3D         { 0x10400000,      0x100000 },
+>      [VIRT_FLASH] =3D        { 0x20000000,     0x4000000 },
+>      [VIRT_IMSIC_M] =3D      { 0x24000000, VIRT_IMSIC_MAX_SIZE },
+>      [VIRT_IMSIC_S] =3D      { 0x28000000, VIRT_IMSIC_MAX_SIZE },
+> @@ -1527,13 +1532,33 @@ static void virt_machine_init(MachineState *machi=
+ne)
+>
+>      create_platform_bus(s, mmio_irqchip);
+>
+> -    serial_mm_init(system_memory, memmap[VIRT_UART0].base,
+> -        0, qdev_get_gpio_in(mmio_irqchip, UART0_IRQ), 399193,
+> +    serial_mm_init(system_memory, memmap[VIRT_UART0].base + 0x20,
+> +        0x2, qdev_get_gpio_in(mmio_irqchip, UART0_IRQ), 38400,
+>          serial_hd(0), DEVICE_LITTLE_ENDIAN);
+>
+>      sysbus_create_simple("goldfish_rtc", memmap[VIRT_RTC].base,
+>          qdev_get_gpio_in(mmio_irqchip, RTC_IRQ));
+>
+> +    /* DMAC */
+> +    DeviceState *dmac_dev =3D atcdmac300_create("atcdmac300",
+> +        memmap[VIRT_DMAC].base, memmap[VIRT_DMAC].size,
+> +        qdev_get_gpio_in(DEVICE(mmio_irqchip), DMAC_IRQ));
+> +
+> +    if (s->have_iopmp) {
+> +        /* IOPMP */
+> +        DeviceState *iopmp_dev =3D iopmp_create(memmap[VIRT_IOPMP].base,
+> +            qdev_get_gpio_in(DEVICE(mmio_irqchip), IOPMP_IRQ));
+> +        /* DMA with IOPMP */
+> +        atcdmac300_connect_iopmp(dmac_dev, &(IOPMP(iopmp_dev)->iopmp_as)=
+,
+> +            (StreamSink *)&(IOPMP(iopmp_dev)->transaction_info_sink), 0)=
+;
+> +        if (s->have_iopmp_cascade) {
+> +            DeviceState *iopmp_dev2 =3D iopmp_create(memmap[VIRT_IOPMP2]=
+.base,
+> +                qdev_get_gpio_in(DEVICE(mmio_irqchip), IOPMP2_IRQ));
+> +            cascade_iopmp(iopmp_dev, iopmp_dev2);
+> +        }
+> +    }
+> +
+> +
+>      for (i =3D 0; i < ARRAY_SIZE(s->flash); i++) {
+>          /* Map legacy -drive if=3Dpflash to machine properties */
+>          pflash_cfi01_legacy_drive(s->flash[i],
+> @@ -1628,6 +1653,35 @@ static void virt_set_aclint(Object *obj, bool valu=
+e, Error **errp)
+>      s->have_aclint =3D value;
+>  }
+>
+> +static bool virt_get_iopmp(Object *obj, Error **errp)
+> +{
+> +    RISCVVirtState *s =3D RISCV_VIRT_MACHINE(obj);
+> +
+> +    return s->have_iopmp;
+> +}
+> +
+> +static void virt_set_iopmp(Object *obj, bool value, Error **errp)
+> +{
+> +    RISCVVirtState *s =3D RISCV_VIRT_MACHINE(obj);
+> +
+> +    s->have_iopmp =3D value;
+> +}
+> +
+> +static bool virt_get_iopmp_cascade(Object *obj, Error **errp)
+> +{
+> +    RISCVVirtState *s =3D RISCV_VIRT_MACHINE(obj);
+> +
+> +    return s->have_iopmp_cascade;
+> +}
+> +
+> +static void virt_set_iopmp_cascade(Object *obj, bool value, Error **errp=
+)
+> +{
+> +    RISCVVirtState *s =3D RISCV_VIRT_MACHINE(obj);
+> +
+> +    s->have_iopmp_cascade =3D value;
+> +}
+> +
+> +
+>  bool virt_is_acpi_enabled(RISCVVirtState *s)
 >  {
->      CPUState *cs =3D env_cpu(env);
-> -    int page_fault_exceptions, vm;
-> -    uint64_t stap_mode;
-> -
-> -    if (riscv_cpu_mxl(env) =3D=3D MXL_RV32) {
-> -        stap_mode =3D SATP32_MODE;
-> -    } else {
-> -        stap_mode =3D SATP64_MODE;
-> -    }
-> -
-> -    if (first_stage) {
-> -        vm =3D get_field(env->satp, stap_mode);
-> -    } else {
-> -        vm =3D get_field(env->hgatp, stap_mode);
-> -    }
-> -
-> -    page_fault_exceptions =3D vm !=3D VM_1_10_MBARE && !pmp_violation;
+>      return s->acpi !=3D ON_OFF_AUTO_OFF;
+> @@ -1730,6 +1784,20 @@ static void virt_machine_class_init(ObjectClass *o=
+c, void *data)
+>                                NULL, NULL);
+>      object_class_property_set_description(oc, "acpi",
+>                                            "Enable ACPI");
+> +
+> +    object_class_property_add_bool(oc, "iopmp", virt_get_iopmp,
+> +                                   virt_set_iopmp);
+> +    object_class_property_set_description(oc, "iopmp",
+> +                                          "Set on/off to enable/disable =
+"
+> +                                          "iopmp device");
+> +
+> +    object_class_property_add_bool(oc, "iopmp-cascade",
+> +                                   virt_get_iopmp_cascade,
+> +                                   virt_set_iopmp_cascade);
+> +    object_class_property_set_description(oc, "iopmp-cascade",
+> +                                          "Set on/off to enable/disable =
+"
+> +                                          "iopmp2 device which is cascad=
+ed by "
+> +                                          "iopmp1 device");
+>  }
 >
->      switch (access_type) {
->      case MMU_INST_FETCH:
->          if (env->virt_enabled && !first_stage) {
->              cs->exception_index =3D RISCV_EXCP_INST_GUEST_PAGE_FAULT;
->          } else {
-> -            cs->exception_index =3D page_fault_exceptions ?
-> -                RISCV_EXCP_INST_PAGE_FAULT : RISCV_EXCP_INST_ACCESS_FAUL=
-T;
-> +            cs->exception_index =3D pmp_violation ?
-> +                RISCV_EXCP_INST_ACCESS_FAULT : RISCV_EXCP_INST_PAGE_FAUL=
-T;
->          }
->          break;
->      case MMU_DATA_LOAD:
->          if (two_stage && !first_stage) {
->              cs->exception_index =3D RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT;
->          } else {
-> -            cs->exception_index =3D page_fault_exceptions ?
-> -                RISCV_EXCP_LOAD_PAGE_FAULT : RISCV_EXCP_LOAD_ACCESS_FAUL=
-T;
-> +            cs->exception_index =3D pmp_violation ?
-> +                RISCV_EXCP_LOAD_ACCESS_FAULT : RISCV_EXCP_LOAD_PAGE_FAUL=
-T;
->          }
->          break;
->      case MMU_DATA_STORE:
->          if (two_stage && !first_stage) {
->              cs->exception_index =3D RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FA=
-ULT;
->          } else {
-> -            cs->exception_index =3D page_fault_exceptions ?
-> -                RISCV_EXCP_STORE_PAGE_FAULT :
-> -                RISCV_EXCP_STORE_AMO_ACCESS_FAULT;
-> +            cs->exception_index =3D pmp_violation ?
-> +                RISCV_EXCP_STORE_AMO_ACCESS_FAULT :
-> +                RISCV_EXCP_STORE_PAGE_FAULT;
->          }
->          break;
->      default:
+>  static const TypeInfo virt_machine_typeinfo =3D {
+> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+> index e5c474b26e..5fa2944d29 100644
+> --- a/include/hw/riscv/virt.h
+> +++ b/include/hw/riscv/virt.h
+> @@ -54,6 +54,8 @@ struct RISCVVirtState {
+>
+>      int fdt_size;
+>      bool have_aclint;
+> +    bool have_iopmp;
+> +    bool have_iopmp_cascade;
+>      RISCVVirtAIAType aia_type;
+>      int aia_guests;
+>      char *oem_id;
+> @@ -82,12 +84,18 @@ enum {
+>      VIRT_PCIE_MMIO,
+>      VIRT_PCIE_PIO,
+>      VIRT_PLATFORM_BUS,
+> -    VIRT_PCIE_ECAM
+> +    VIRT_PCIE_ECAM,
+> +    VIRT_IOPMP,
+> +    VIRT_IOPMP2,
+> +    VIRT_DMAC,
+>  };
+>
+>  enum {
+>      UART0_IRQ =3D 10,
+>      RTC_IRQ =3D 11,
+> +    DMAC_IRQ =3D 12,
+> +    IOPMP_IRQ =3D 13,
+> +    IOPMP2_IRQ =3D 14,
+>      VIRTIO_IRQ =3D 1, /* 1 to 8 */
+>      VIRTIO_COUNT =3D 8,
+>      PCIE_IRQ =3D 0x20, /* 32 to 35 */
 > --
 > 2.34.1
 >
