@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72F66C5ACB3
-	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Nov 2023 05:39:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46461C5ACB3
+	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Nov 2023 05:41:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r5JTv-0006ef-TQ; Tue, 21 Nov 2023 00:39:31 -0500
+	id 1r5JUt-00078t-SZ; Tue, 21 Nov 2023 00:40:31 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1r5JTt-0006du-6R; Tue, 21 Nov 2023 00:39:29 -0500
-Received: from mail-vs1-xe29.google.com ([2607:f8b0:4864:20::e29])
+ id 1r5JUr-00070U-3W; Tue, 21 Nov 2023 00:40:29 -0500
+Received: from mail-ua1-x92a.google.com ([2607:f8b0:4864:20::92a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1r5JTp-0005PT-15; Tue, 21 Nov 2023 00:39:28 -0500
-Received: by mail-vs1-xe29.google.com with SMTP id
- ada2fe7eead31-45db499e2faso1510816137.1; 
- Mon, 20 Nov 2023 21:39:24 -0800 (PST)
+ id 1r5JUo-0005rx-5U; Tue, 21 Nov 2023 00:40:28 -0500
+Received: by mail-ua1-x92a.google.com with SMTP id
+ a1e0cc1a2514c-7c1a1f61875so1406458241.2; 
+ Mon, 20 Nov 2023 21:40:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700545163; x=1701149963; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1700545224; x=1701150024; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IqlfdV6kSJktnymTzY41tlNtwGZ2iQw9uBT3YF4cHN4=;
- b=gUbx9I5wT/pWRJr8YqB9/ryjtfS02wtv0f9h+pbMtuqMJQhIBFsVDMw7AoUBbeX2cY
- LIWmbVgL3KoMtHTGr6ylf5fjVdPR1gk2Wavr47xvp89IK2tK6aa/ErwiY1BfNfRVfZT9
- v+4y70cle8zV+PyLnmN8jBoD7qimz13zAQFoFyEdZoiz40oS3fvmaiee2W7mRr42xc+E
- RIVILFp9uCPYpb0pNiC5vWzccHPPjabo+MOUmEz4JS/rQ2goWku+GOygfKFL+5HKneEY
- E4aPU4+ownZcNCAoEerfZObEuvm2/Y73P7hok8mE2vX8M3Es8js+nP6/YvvefbS+9Udh
- jJgg==
+ bh=enfyq7EqMvjf/lJk6iBcMLz2zHZ0SXuSaWfzj6HOoko=;
+ b=UowRiVHWUaKLbVCWEeaXTBuWoDL5WGgJ1L2s9IXI28bfyY0FUehYCkWe3kA9Yk/bYj
+ qJaFpRS+k6ywCEvW1vm1z41eXs0e+j25l7AYxO5c43/J2vykK8V6d5KF0eVbMMSJR0fm
+ ECzjyjVEg2BPYXn/cypHHmI565yPDIXEpBBvZ2X1biNXdKqvrfgdrE9cwZiRJ58P2LAX
+ EgSMd7g6HdKniIl6ENmivay1u4tApy4LyzlmQGfCsarUPM4nOj8gdLxzBcuL6jKytfpu
+ 671JnUb5oJs/xv2wxIx1iRZCHZO3GJfNzlsZBTRyIskNQyJdfv4URyP4tdC6dVAiqpjU
+ +Jaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700545163; x=1701149963;
+ d=1e100.net; s=20230601; t=1700545224; x=1701150024;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IqlfdV6kSJktnymTzY41tlNtwGZ2iQw9uBT3YF4cHN4=;
- b=l8btczk7mg38dMzyNP04FJwK7Q2CYQEJ0CrUGRjRdoUO6+v5n3Sjc0DjUGVQ45Yk45
- jIK7Rgz/LuiPpnkQwmCmCJbh8YQEonQUq4nIZdgO+qAESs057nYgaLmixDDUMx5j2B79
- EjpBAZxm3evdTuVWVoyAEBlqDp3oxDuUi0nWkV1p/8a5pXwD8ARv9qePbyhjnabGUU7Q
- 7++SQH2ON6s5zFAFAMAmU8Hf+Lh8LdaT6yaB3fYTQkzcO9xn/QXWh4pkyziaT8gu2Xj5
- 5MnYa+xAnTTIBkdYymV1aPHgJ6nYdxOZkgIFvlD/NExg5SdJyqF9dRK9WfvSneC05Kmr
- Bpjg==
-X-Gm-Message-State: AOJu0YwQClDqx6Qj/0qOtWJ8JRbhg44hU6+NbKtmaRDEebyPI6VdgHuV
- UiQryyXAeJ9cOBwsrE5lvZ96JloSVW3l66r4tiJUZvq1FxXruLBE
-X-Google-Smtp-Source: AGHT+IHj9gbRhZ9yw7X5Lu/37LpBoo4B3wXdpzWI8BXyOcnl7wn7gcUN0FJE4+CKvZ3/hjz8LcIhKFoqOTnllsZK6vA=
-X-Received: by 2002:a05:6102:1043:b0:462:91ff:f1 with SMTP id
- h3-20020a056102104300b0046291ff00f1mr3528120vsq.1.1700545163240; Mon, 20 Nov
- 2023 21:39:23 -0800 (PST)
+ bh=enfyq7EqMvjf/lJk6iBcMLz2zHZ0SXuSaWfzj6HOoko=;
+ b=gffs6mdQa9r7lfKKLskofaCD6uP9ifTKv6+QeJriq32XO/SSLhB1f07QHrQOJJZQui
+ ndijfmNWJaThYK5g3LqfOoNm7QjZrZbLpRVwje41FAhXL749Y37m6nChJ7DQ2/Uo7uDB
+ faoYzOLJl15lOOgXkhepM/til/cSkpvkfQS+BZaSZbtRSgNkjHuvOZgZEjnYuC+is4Tj
+ rlzhGrfN6/KlktP4xW28F1nlERKHM+U3QYNOkT7z0JCVp/3SZocZDRllLLPzaEFWOnLn
+ 6Rzz8IVkbS/fqoi+bB3g0+NTaodVQQ8gw8u/7XKBG1p/SD8Rvy/Mp2B6Muxw9ikcPRLp
+ FJNQ==
+X-Gm-Message-State: AOJu0YwXu6PiBPz/ADFRoHTNptKM5dp6ycDIuLIO50bjynS1Ofek/iqw
+ OuME26ol8LYDKGIfUNn+7b7TbGP5WjmSOYBVSXo=
+X-Google-Smtp-Source: AGHT+IHGJpFa8w4GhLFKfJUILef2q4Me7tzTj4Tn67nQgO7vfi54Ewj7Cdzg8n3EULKeRWE6ChmvmLn8jOpoPTzz8Co=
+X-Received: by 2002:a67:b14a:0:b0:461:d92:e64c with SMTP id
+ z10-20020a67b14a000000b004610d92e64cmr9303577vsl.16.1700545224434; Mon, 20
+ Nov 2023 21:40:24 -0800 (PST)
 MIME-Version: 1.0
 References: <20231114094705.109146-1-ethan84@andestech.com>
- <20231114094705.109146-3-ethan84@andestech.com>
-In-Reply-To: <20231114094705.109146-3-ethan84@andestech.com>
+ <20231114094705.109146-4-ethan84@andestech.com>
+In-Reply-To: <20231114094705.109146-4-ethan84@andestech.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 21 Nov 2023 15:38:56 +1000
-Message-ID: <CAKmqyKMTE5X43wRArLmYD2E5W+ebj_d6fmF_1UUQFDEewaChgw@mail.gmail.com>
-Subject: Re: [PATCH v3 2/4] Add RISC-V IOPMP support
+Date: Tue, 21 Nov 2023 15:39:57 +1000
+Message-ID: <CAKmqyKN1uSR7ZejgTivTAhwGJ0bek4sdC+9RujXAqa4qj1Tdgw@mail.gmail.com>
+Subject: Re: [PATCH v3 3/4] hw/dma: Add Andes ATCDMAC300 support
 To: Ethan Chen <ethan84@andestech.com>
 Cc: qemu-devel@nongnu.org, peter.maydell@linaro.org, edgar.iglesias@gmail.com, 
  richard.henderson@linaro.org, pbonzini@redhat.com, palmer@dabbelt.com, 
@@ -67,8 +67,8 @@ Cc: qemu-devel@nongnu.org, peter.maydell@linaro.org, edgar.iglesias@gmail.com,
  peterx@redhat.com, david@redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e29;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe29.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92a;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92a.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -92,69 +92,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Nov 14, 2023 at 7:48=E2=80=AFPM Ethan Chen via <qemu-devel@nongnu.o=
+On Tue, Nov 14, 2023 at 7:49=E2=80=AFPM Ethan Chen via <qemu-devel@nongnu.o=
 rg> wrote:
 >
-> Support specification Version 1.0.0-draft4 rapid-k model.
 
-Thanks for the patch.
+What is an "ATCDMAC300"? Can you provide more context?
 
-Can you add some more information here. It would be great if you can
-link to the spec and explain the implementation a little bit
+Alistair
 
->
+
 > Signed-off-by: Ethan Chen <ethan84@andestech.com>
 > ---
->  hw/misc/Kconfig                               |   4 +
->  hw/misc/meson.build                           |   1 +
->  hw/misc/riscv_iopmp.c                         | 967 ++++++++++++++++++
->  include/hw/misc/riscv_iopmp.h                 | 342 +++++++
->  .../hw/misc/riscv_iopmp_transaction_info.h    |  28 +
->  5 files changed, 1342 insertions(+)
->  create mode 100644 hw/misc/riscv_iopmp.c
->  create mode 100644 include/hw/misc/riscv_iopmp.h
->  create mode 100644 include/hw/misc/riscv_iopmp_transaction_info.h
+>  hw/dma/Kconfig              |   4 +
+>  hw/dma/atcdmac300.c         | 566 ++++++++++++++++++++++++++++++++++++
+>  hw/dma/meson.build          |   1 +
+>  include/hw/dma/atcdmac300.h | 180 ++++++++++++
+>  4 files changed, 751 insertions(+)
+>  create mode 100644 hw/dma/atcdmac300.c
+>  create mode 100644 include/hw/dma/atcdmac300.h
 >
-> diff --git a/hw/misc/Kconfig b/hw/misc/Kconfig
-> index cc8a8c1418..953569e682 100644
-> --- a/hw/misc/Kconfig
-> +++ b/hw/misc/Kconfig
-> @@ -200,4 +200,8 @@ config IOSB
->  config XLNX_VERSAL_TRNG
+> diff --git a/hw/dma/Kconfig b/hw/dma/Kconfig
+> index 98fbb1bb04..a1d335b52f 100644
+> --- a/hw/dma/Kconfig
+> +++ b/hw/dma/Kconfig
+> @@ -30,3 +30,7 @@ config SIFIVE_PDMA
+>  config XLNX_CSU_DMA
 >      bool
->
-> +config RISCV_IOPMP
+>      select REGISTER
+> +
+> +config ATCDMAC300
 > +    bool
 > +    select STREAM
-> +
->  source macio/Kconfig
-> diff --git a/hw/misc/meson.build b/hw/misc/meson.build
-> index 36c20d5637..86b81e1690 100644
-> --- a/hw/misc/meson.build
-> +++ b/hw/misc/meson.build
-> @@ -35,6 +35,7 @@ system_ss.add(when: 'CONFIG_SIFIVE_E_PRCI', if_true: fi=
-les('sifive_e_prci.c'))
->  system_ss.add(when: 'CONFIG_SIFIVE_E_AON', if_true: files('sifive_e_aon.=
-c'))
->  system_ss.add(when: 'CONFIG_SIFIVE_U_OTP', if_true: files('sifive_u_otp.=
-c'))
->  system_ss.add(when: 'CONFIG_SIFIVE_U_PRCI', if_true: files('sifive_u_prc=
-i.c'))
-> +specific_ss.add(when: 'CONFIG_RISCV_IOPMP', if_true: files('riscv_iopmp.=
-c'))
->
->  subdir('macio')
->
-> diff --git a/hw/misc/riscv_iopmp.c b/hw/misc/riscv_iopmp.c
+> diff --git a/hw/dma/atcdmac300.c b/hw/dma/atcdmac300.c
 > new file mode 100644
-> index 0000000000..99d0a554dd
+> index 0000000000..bc6012f44e
 > --- /dev/null
-> +++ b/hw/misc/riscv_iopmp.c
-> @@ -0,0 +1,967 @@
+> +++ b/hw/dma/atcdmac300.c
+> @@ -0,0 +1,566 @@
 > +/*
-> + * QEMU RISC-V IOPMP (Input Output Physical Memory Protection)
+> + * Andes ATCDMAC300 (Andes Technology DMA Controller)
 > + *
-> + * Copyright (c) 2023 Andes Tech. Corp.
+> + * Copyright (c) 2022 Andes Tech. Corp.
 > + *
 > + * This program is free software; you can redistribute it and/or modify =
 it
@@ -170,1038 +148,609 @@ T
 > + *
 > + * You should have received a copy of the GNU General Public License alo=
 ng with
-> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + * this program.  If not, see <http://www.gnu.org/licenses/>
+> + *
 > + */
 > +
 > +#include "qemu/osdep.h"
-> +#include "qemu/log.h"
 > +#include "qapi/error.h"
-> +#include "trace.h"
-> +#include "exec/exec-all.h"
-> +#include "exec/address-spaces.h"
-> +#include "hw/qdev-properties.h"
-> +#include "hw/sysbus.h"
-> +#include "hw/misc/riscv_iopmp.h"
-> +#include "memory.h"
+> +#include "hw/dma/atcdmac300.h"
 > +#include "hw/irq.h"
+> +#include "hw/qdev-properties.h"
+> +#include "qemu/log.h"
+> +#include "qemu/module.h"
+> +#include "exec/memattrs.h"
+> +#include "exec/address-spaces.h"
+> +#include "hw/stream.h"
+> +#include "hw/misc/riscv_iopmp_transaction_info.h"
 > +
-> +#define TYPE_IOPMP_IOMMU_MEMORY_REGION "iopmp-iommu-memory-region"
-> +#define TYPE_IOPMP_TRASACTION_INFO_SINK "iopmp_transaction_info_sink"
-> +
-> +DECLARE_INSTANCE_CHECKER(Iopmp_StreamSink, IOPMP_TRASACTION_INFO_SINK,
-> +                         TYPE_IOPMP_TRASACTION_INFO_SINK)
+> +/* #define DEBUG_ANDES_ATCDMAC300 */
 > +#define LOGGE(x...) qemu_log_mask(LOG_GUEST_ERROR, x)
 > +#define xLOG(x...)
 > +#define yLOG(x...) qemu_log(x)
-> +#ifdef DEBUG_RISCV_IOPMP
+> +#ifdef DEBUG_ANDES_ATCDMAC300
 > +  #define LOG(x...) yLOG(x)
 > +#else
 > +  #define LOG(x...) xLOG(x)
 > +#endif
-
-We should use QEMU's trace features instead of debug macros. You can
-see more details in the QEMU docs:
-https://www.qemu.org/docs/master/devel/tracing.html
-
 > +
 > +#define MEMTX_IOPMP_STALL (1 << 3)
 > +
-> +
-> +static void iopmp_decode_napot(target_ulong a, target_ulong *sa,
-> +                               target_ulong *ea)
+> +static void atcdmac300_dma_int_stat_update(ATCDMAC300State *s, int statu=
+s,
+> +                                           int ch)
 > +{
-> +    /*
-> +     * aaaa...aaa0   8-byte NAPOT range
-> +     * aaaa...aa01   16-byte NAPOT range
-> +     * aaaa...a011   32-byte NAPOT range
-> +     * ...
-> +     * aa01...1111   2^XLEN-byte NAPOT range
-> +     * a011...1111   2^(XLEN+1)-byte NAPOT range
-> +     * 0111...1111   2^(XLEN+2)-byte NAPOT range
-> +     *  1111...1111   Reserved
-> +     */
-> +
-> +    a =3D (a << 2) | 0x3;
-> +    *sa =3D a & (a + 1);
-> +    *ea =3D a | (a + 1);
+> +    s->IntStatus |=3D (1 << (status + ch));
 > +}
 > +
-> +static void iopmp_update_rule(IopmpState *s, uint32_t entry_index)
+> +static void atcdmac300_dma_reset_chan(ATCDMAC300State *s, int ch)
 > +{
-> +    uint8_t this_cfg =3D s->regs.entry[entry_index].cfg_reg;
-> +    target_ulong this_addr =3D s->regs.entry[entry_index].addr_reg;
-> +    target_ulong prev_addr =3D 0u;
-> +    target_ulong sa =3D 0u;
-> +    target_ulong ea =3D 0u;
-> +
-> +    if (entry_index >=3D 1u) {
-> +        prev_addr =3D s->regs.entry[entry_index - 1].addr_reg;
+> +    if (s) {
+> +        s->chan[ch].ChnCtrl &=3D ~(1 << CHAN_CTL_ENABLE);
+> +        s->ChEN &=3D ~(1 << ch);
 > +    }
-> +
-> +    switch (iopmp_get_field(this_cfg, ENTRY_CFG_A)) {
-> +    case IOPMP_AMATCH_OFF:
-> +        sa =3D 0u;
-> +        ea =3D -1;
-> +        break;
-> +
-> +    case IOPMP_AMATCH_TOR:
-> +        sa =3D (prev_addr) << 2; /* shift up from [xx:0] to [xx+2:2] */
-> +        ea =3D ((this_addr) << 2) - 1u;
-> +        if (sa > ea) {
-> +            sa =3D ea =3D 0u;
-> +        }
-> +        break;
-> +
-> +    case IOPMP_AMATCH_NA4:
-> +        sa =3D this_addr << 2; /* shift up from [xx:0] to [xx+2:2] */
-> +        ea =3D (sa + 4u) - 1u;
-> +        break;
-> +
-> +    case IOPMP_AMATCH_NAPOT:
-> +        iopmp_decode_napot(this_addr, &sa, &ea);
-> +        break;
-> +
-> +    default:
-> +        sa =3D 0u;
-> +        ea =3D 0u;
-> +        break;
-> +    }
-> +
-> +    s->entry_addr[entry_index].sa =3D sa;
-> +    s->entry_addr[entry_index].ea =3D ea;
 > +}
 > +
-> +static uint64_t iopmp_read(void *opaque, hwaddr addr, unsigned size)
+> +static void atcdmac300_dma_reset(ATCDMAC300State *s)
 > +{
-> +    IopmpState *s =3D IOPMP(opaque);
-> +    uint32_t rz =3D 0;
-> +    uint32_t is_stall =3D 0;
-> +    uint32_t sid;
-> +    switch (addr) {
-> +    case IOPMP_VERSION ... IOPMP_USER_CFG0 + 16 * (IOPMP_MAX_ENTRY_NUM -=
- 1):
-> +        switch (addr) {
-> +        case IOPMP_VERSION:
-> +            rz =3D VENDER_ANDES << VERSION_VENDOR |
-> +                 SPECVER_1_0_0_DRAFT4 << VERSION_SPECVER;
-> +            break;
-> +        case IOPMP_IMP:
-> +            rz =3D IMPID_1_0_0_DRAFT4_0;
-> +            break;
-> +        case IOPMP_HWCFG0: /* RO */
-> +            rz =3D s->sid_num << HWCFG0_SID_NUM |
-> +                 s->entry_num << HWCFG0_ENTRY_NUM;
-> +            break;
-> +        case IOPMP_HWCFG1:
-> +            rz =3D s->model << HWCFG1_MODEL | TOR_EN << HWCFG1_TOR_EN |
-> +                 s->sps_en << HWCFG1_SPS_EN |
-> +                 USER_CFG_EN << HWCFG1_USER_CFG_EN |
-> +                 s->prient_prog << HWCFG1_PRIENT_PROG |
-> +                 s->sid_transl_en << HWCFG1_SID_TRANSL_EN |
-> +                 s->sid_transl_prog << HWCFG1_SID_TRANSL_PROG |
-> +                 s->md_num << HWCFG1_MD_NUM |
-> +                 s->enable << HWCFG1_ENABLE;
-> +            break;
-> +        case IOPMP_HWCFG2:
-> +            rz =3D s->prio_entry << HWCFG2_PRIO_ENTRY |
-> +                 s->sid_transl << HWCFG2_SID_TRANSL;
-> +            break;
-> +        case IOPMP_ENTRYOFFSET:
-> +            rz =3D IOPMP_ENTRY_ADDR0;
-> +            break;
-> +        case IOPMP_ERRREACT:
-> +            rz =3D s->regs.errreact;
-> +            break;
-> +        case IOPMP_MDSTALL:
-> +            if (s->md_stall_stat) {
-> +                is_stall =3D 1;
-> +            }
-> +            rz =3D iopmp_get_field(s->regs.mdstall, MDSTALL_MD) | is_sta=
-ll;
-> +            break;
-> +        case IOPMP_MDSTALLH:
-> +            rz =3D s->regs.mdstall >> 32;
-> +            break;
-> +        case IOPMP_SIDSCP:
-> +            sid =3D iopmp_get_field(s->regs.sidscp, SIDSCP_SID);
-> +            if (sid < s->sid_num) {
-> +                rz =3D sid | (s->sidscp_op[sid]) << SIDSCP_STAT;
-> +            } else {
-> +                rz =3D sid | 3 << SIDSCP_STAT;
-> +            }
-> +            break;
-> +        case IOPMP_MDLCK:
-> +            rz =3D s->regs.mdlck & UINT32_MAX;
-> +            break;
-> +        case IOPMP_MDLCKH:
-> +            rz =3D s->regs.mdlck >> 32;
-> +            break;
-> +        case IOPMP_MDCFGLCK:
-> +            rz =3D s->regs.mdcfglck;
-> +            break;
-> +        case IOPMP_ENTRYLCK:
-> +            rz =3D s->regs.entrylck;
-> +            break;
-> +        case IOPMP_ERR_REQADDR:
-> +            rz =3D s->regs.err_reqaddr & UINT32_MAX;
-> +            break;
-> +        case IOPMP_ERR_REQADDRH:
-> +            rz =3D s->regs.err_reqaddr >> 32;
-> +            break;
-> +        case IOPMP_ERR_REQSID:
-> +            rz =3D s->regs.err_reqsid;
-> +            break;
-> +        case IOPMP_ERR_REQINFO:
-> +            rz =3D s->regs.err_reqinfo;
-> +            break;
+> +    int ch;
+> +    for (ch =3D 0; ch < ATCDMAC300_MAX_CHAN; ch++) {
+> +        atcdmac300_dma_reset_chan(s, ch);
+> +    }
+> +}
 > +
-> +        default:
-> +            if (addr >=3D IOPMP_MDCFG0 &&
-> +                addr < IOPMP_MDCFG0 + 4 * (s->md_num - 1)) {
-> +                int offset =3D addr - IOPMP_MDCFG0;
-> +                int idx =3D offset >> 2;
-> +                if (idx =3D=3D 0) {
-> +                    if (offset =3D=3D 0) {
-> +                        rz =3D s->regs.mdcfg[idx];
-> +                    } else {
-> +                        LOGGE("%s: Bad addr %x\n", __func__, (int)addr);
-> +                    }
-> +                } else {
-> +                    /* Only MDCFG0 is implemented */
-> +                    LOGGE("%s: Bad addr %x\n", __func__, (int)addr);
-> +                }
-> +            } else if (addr >=3D IOPMP_SRCMD_EN0 &&
-> +                       addr < IOPMP_SRCMD_WH0 + 32 * (s->sid_num - 1)) {
-> +                int offset =3D addr - IOPMP_SRCMD_EN0;
-> +                int idx =3D offset >> 5;
-> +                offset &=3D 0x1f;
-> +                if (offset =3D=3D 0) {
-> +                    rz =3D s->regs.srcmd_en[idx] & UINT32_MAX;
-> +                } else if (offset =3D=3D 4) {
-> +                    rz =3D s->regs.srcmd_en[idx] >> 32;
-> +                } else if (offset =3D=3D 8) {
-> +                    rz =3D s->regs.srcmd_r[idx] & UINT32_MAX;
-> +                } else if (offset =3D=3D 12) {
-> +                    rz =3D s->regs.srcmd_r[idx] >> 32;
-> +                } else if (offset =3D=3D 16) {
-> +                    rz =3D s->regs.srcmd_w[idx] & UINT32_MAX;
-> +                } else if (offset =3D=3D 24) {
-> +                    rz =3D s->regs.srcmd_w[idx] >> 32;
-> +                } else {
-> +                    LOGGE("%s: Bad addr %x\n", __func__, (int)addr);
-> +                }
-> +            } else if (addr >=3D IOPMP_ENTRY_ADDR0 &&
-> +                       addr < IOPMP_USER_CFG0 + 16 * (s->entry_num - 1))=
- {
-> +                int offset =3D addr - IOPMP_ENTRY_ADDR0;
-> +                int idx =3D offset >> 4;
-> +                offset &=3D 0xf;
-> +                if (offset =3D=3D 0) {
-> +                    rz =3D s->regs.entry[idx].addr_reg & UINT32_MAX;
-> +                } else if (offset =3D=3D 4) {
-> +                    rz =3D s->regs.entry[idx].addr_reg >> 32;
-> +                } else if (offset =3D=3D 8) {
-> +                    rz =3D s->regs.entry[idx].cfg_reg;
-> +                } else if (offset =3D=3D 12) {
-> +                    /* Not supported user customized permission*/
-> +                    rz =3D 0;
-> +                } else {
-> +                    LOGGE("%s: Bad addr %x\n", __func__, (int)addr);
-> +                }
-> +            } else {
-> +                LOGGE("%s: Bad addr %x\n", __func__, (int)addr);
-> +            }
-> +            break;
-> +        }
-> +        LOG("\e[95m%s: addr %08x, value %08x\e[0m\n", __func__, (int)add=
-r,
-> +            (int)rz);
+> +static uint64_t atcdmac300_read(void *opaque, hwaddr offset, unsigned si=
+ze)
+> +{
+> +    ATCDMAC300State *s =3D opaque;
+> +    int ch =3D 0;
+> +    uint64_t result =3D 0;
+> +
+> +    if (offset >=3D 0x40) {
+> +        ch =3D ATCDMAC300_GET_CHAN(offset);
+> +        offset =3D ATCDMAC300_GET_OFF(offset, ch);
+> +    }
+> +
+> +    switch (offset) {
+> +    case ATCDMAC300_DMA_CFG:
+> +        result =3D s->DMACfg;
+> +        break;
+> +    case ATCDMAC300_DMAC_CTRL:
+> +        break;
+> +    case ATCDMAC300_CHN_ABT:
+> +        break;
+> +    case ATCDMAC300_INT_STATUS:
+> +        result =3D s->IntStatus;
+> +        break;
+> +    case ATCDMAC300_CHAN_ENABLE:
+> +        result =3D s->ChEN;
+> +        break;
+> +    case ATCDMAC300_CHAN_CTL:
+> +        result =3D s->chan[ch].ChnCtrl;
 > +        break;
 > +    default:
-> +        LOGGE("%s: Bad addr %x\n", __func__, (int)addr);
-> +    }
-> +
-> +    return rz;
-> +}
-> +
-> +static void
-> +iopmp_write(void *opaque, hwaddr addr, uint64_t value, unsigned size)
-> +{
-> +    IopmpState *s =3D IOPMP(opaque);
-> +    int value_f;
-> +    int reg_f;
-> +    uint32_t sid, op;
-> +
-> +    switch (addr) {
-> +    case IOPMP_VERSION ... IOPMP_USER_CFG0 + 16 * (IOPMP_MAX_ENTRY_NUM -=
- 1):
-> +        switch (addr) {
-> +        case IOPMP_VERSION: /* RO */
-> +            break;
-> +        case IOPMP_IMP: /* RO */
-> +            break;
-> +        case IOPMP_HWCFG0: /* RO */
-> +            break;
-> +        case IOPMP_HWCFG1:
-> +            if (iopmp_get_field(value, HWCFG1_PRIENT_PROG)) {
-> +                /* W1C */
-> +                s->prient_prog =3D 0;
-> +            }
-> +            if (iopmp_get_field(value, HWCFG1_SID_TRANSL_PROG)) {
-> +                /* W1C */
-> +                s->sid_transl_prog =3D 0;
-> +            }
-> +            if (iopmp_get_field(value, HWCFG1_ENABLE)) {
-> +                /* W1S */
-> +                s->enable =3D 1;
-> +            }
-> +            break;
-> +        case IOPMP_HWCFG2:
-> +            if (s->prient_prog) {
-> +                s->prio_entry =3D iopmp_get_field(value, HWCFG2_PRIO_ENT=
-RY);
-> +            }
-> +            if (s->sid_transl_en && s->sid_transl_prog) {
-> +                s->sid_transl =3D iopmp_get_field(value, HWCFG2_SID_TRAN=
-SL);
-> +            }
-> +            break;
-> +        case IOPMP_ERRREACT:
-> +            if (!iopmp_get_field(s->regs.errreact, ERRREACT_L)) {
-> +                    iopmp_set_field32(&s->regs.errreact, ERRREACT_L,
-> +                                    iopmp_get_field(value, ERRREACT_L));
-> +                if (iopmp_get_field(value, ERRREACT_IP)) {
-> +                    iopmp_set_field32(&s->regs.errreact, ERRREACT_IP, 0)=
-;
-> +                }
-> +                iopmp_set_field32(&s->regs.errreact, ERRREACT_IE,
-> +                                iopmp_get_field(value, ERRREACT_IE));
-> +                iopmp_set_field32(&s->regs.errreact, ERRREACT_IRE,
-> +                                iopmp_get_field(value, ERRREACT_IRE));
-> +                iopmp_set_field32(&s->regs.errreact, ERRREACT_RRE,
-> +                                iopmp_get_field(value, ERRREACT_RRE));
-> +                iopmp_set_field32(&s->regs.errreact, ERRREACT_IWE,
-> +                                iopmp_get_field(value, ERRREACT_IWE));
-> +                iopmp_set_field32(&s->regs.errreact, ERRREACT_RWE,
-> +                                iopmp_get_field(value, ERRREACT_RWE));
-> +                iopmp_set_field32(&s->regs.errreact, ERRREACT_PEE,
-> +                                iopmp_get_field(value, ERRREACT_PEE));
-> +                iopmp_set_field32(&s->regs.errreact, ERRREACT_RPE,
-> +                                iopmp_get_field(value, ERRREACT_RPE));
-> +            } else {
-> +                if (iopmp_get_field(value, ERRREACT_IP)) {
-> +                    iopmp_set_field32(&s->regs.errreact, ERRREACT_IP, 0)=
-;
-> +                }
-> +            }
-> +            break;
-> +        case IOPMP_MDSTALL:
-> +            iopmp_set_field64(&s->regs.mdstall, MDSTALL, value);
-> +            break;
-> +        case IOPMP_MDSTALLH:
-> +            iopmp_set_field64(&s->regs.mdstall, MDSTALLH, value);
-> +            break;
-> +        case IOPMP_SIDSCP:
-> +            sid =3D iopmp_get_field(value, SIDSCP_SID);
-> +            op =3D iopmp_get_field(value, SIDSCP_OP);
-> +            if (sid < s->sid_num) {
-> +                if (op !=3D SIDSCP_OP_QUERY) {
-> +                    s->sidscp_op[sid] =3D op;
-> +                    s->regs.sidscp =3D value;
-> +                }
-> +            } else {
-> +                s->regs.sidscp =3D sid | (0x3 << SIDSCP_OP);
-> +            }
-> +            break;
-> +        case IOPMP_MDLCK:
-> +            if (!(s->regs.mdlck & (1 << MDLCK_L))) {
-> +                s->regs.mdlck =3D value |
-> +                                (s->regs.mdstall & ~(uint64_t)UINT32_MAX=
-);
-> +            }
-> +            break;
-> +        case IOPMP_MDLCKH:
-> +             if (!(s->regs.mdlck & (1 << MDLCK_L))) {
-> +                s->regs.mdlck =3D (uint64_t)value << 32 |
-> +                                (s->regs.mdstall & UINT32_MAX);
-> +            }
-> +            break;
-> +        case IOPMP_MDCFGLCK:
-> +            if (!iopmp_get_field(s->regs.mdcfglck, MDCFGLCK_L)) {
-> +                value_f =3D iopmp_get_field(value, MDCFGLCK_F);
-> +                reg_f =3D iopmp_get_field(s->regs.mdcfglck, MDCFGLCK_F);
-> +                if (value_f > reg_f) {
-> +                    iopmp_set_field32(&s->regs.mdcfglck, MDCFGLCK_F, val=
-ue_f);
-> +                }
-> +                iopmp_set_field32(&s->regs.mdcfglck, MDCFGLCK_L,
-> +                          iopmp_get_field(value, MDCFGLCK_L));
-> +            }
-> +            break;
-> +        case IOPMP_ENTRYLCK:
-> +            if (!(iopmp_get_field(s->regs.entrylck, ENTRYLCK_L))) {
-> +                value_f =3D iopmp_get_field(value, ENTRYLCK_F);
-> +                reg_f =3D iopmp_get_field(s->regs.entrylck, ENTRYLCK_F);
-> +                if (value_f > reg_f) {
-> +                    iopmp_set_field32(&s->regs.entrylck, ENTRYLCK_F, val=
-ue_f);
-> +                }
-> +                iopmp_set_field32(&s->regs.entrylck, ENTRYLCK_F,
-> +                          iopmp_get_field(value, ENTRYLCK_F));
-> +            }
-> +        case IOPMP_ERR_REQADDR: /* RO */
-> +            break;
-> +        case IOPMP_ERR_REQADDRH: /* RO */
-> +            break;
-> +        case IOPMP_ERR_REQSID: /* RO */
-> +            break;
-> +        case IOPMP_ERR_REQINFO: /* RO */
-> +            break;
-> +
-> +        default:
-> +            if (addr >=3D IOPMP_MDCFG0 &&
-> +                addr < IOPMP_MDCFG0 + 4 * (s->md_num - 1)) {
-> +                int offset =3D addr - IOPMP_MDCFG0;
-> +                int idx =3D offset >> 2;
-> +                /* RO in rapid-k model */
-> +                if (idx > 0) {
-> +                    LOGGE("%s: Bad addr %x\n", __func__, (int)addr);
-> +                }
-> +            } else if (addr >=3D IOPMP_SRCMD_EN0 &&
-> +                       addr < IOPMP_SRCMD_WH0 + 32 * (s->sid_num - 1)) {
-> +                int offset =3D addr - IOPMP_SRCMD_EN0;
-> +                int idx =3D offset >> 5;
-> +                offset &=3D 0x1f;
-> +                if (offset % 4) {
-> +                    LOGGE("%s: Bad addr %x\n", __func__, (int)addr);
-> +                } else if (iopmp_get_field(s->regs.srcmd_en[idx],
-> +                                           SRCMD_EN_L) =3D=3D 0) {
-> +                    if (offset =3D=3D 0) {
-> +                        iopmp_set_field64(&s->regs.srcmd_en[idx], SRCMD_=
-EN_MD,
-> +                                        iopmp_get_field(value, SRCMD_EN_=
-MD));
-> +                        iopmp_set_field64(&s->regs.srcmd_en[idx], SRCMD_=
-EN_L,
-> +                                        iopmp_get_field(value, SRCMD_EN_=
-L));
-> +                    } else if (offset =3D=3D 4) {
-> +                        iopmp_set_field64(&s->regs.srcmd_en[idx], SRCMD_=
-ENH_MDH,
-> +                                        value);
-> +                    } else if (offset =3D=3D 8 && s->sps_en) {
-> +                        iopmp_set_field64(&s->regs.srcmd_r[idx], SRCMD_R=
-_MD,
-> +                                            iopmp_get_field(value, SRCMD=
-_R_MD));
-> +                    } else if (offset =3D=3D 12 && s->sps_en) {
-> +                        iopmp_set_field64(&s->regs.srcmd_r[idx], SRCMD_R=
-H_MDH,
-> +                                        value);
-> +                    } else if (offset =3D=3D 16 && s->sps_en) {
-> +                        iopmp_set_field64(&s->regs.srcmd_w[idx], SRCMD_W=
-_MD,
-> +                                        iopmp_get_field(value, SRCMD_W_M=
-D));
-> +                    } else if (offset =3D=3D 24 && s->sps_en) {
-> +                        iopmp_set_field64(&s->regs.srcmd_w[idx], SRCMD_W=
-H_MDH,
-> +                                          value);
-> +                    }
-> +                }
-> +            } else if (addr >=3D IOPMP_ENTRY_ADDR0 &&
-> +                       addr < IOPMP_USER_CFG0 + 16 * (s->entry_num - 1))=
- {
-> +                int offset =3D addr - IOPMP_ENTRY_ADDR0;
-> +                int idx =3D offset >> 4;
-> +                offset &=3D 0xf;
-> +                if (offset =3D=3D 0) {
-> +                    iopmp_set_field64(&s->regs.entry[idx].addr_reg,
-> +                                      ENTRY_ADDR_ADDR, value);
-> +                } else if (offset =3D=3D 4) {
-> +                    iopmp_set_field64(&s->regs.entry[idx].addr_reg,
-> +                                      ENTRY_ADDRH_ADDRH, value);
-> +                } else if (offset =3D=3D 8) {
-> +                    s->regs.entry[idx].cfg_reg =3D value;
-> +                } else if (offset =3D=3D 12) {
-> +                    /* Not supported user customized permission*/
-> +                    ;
-> +                } else {
-> +                    LOGGE("%s: Bad addr %x\n", __func__, (int)addr);
-> +                }
-> +                iopmp_update_rule(s, idx);
-> +            } else {
-> +                LOGGE("%s: Bad addr %x\n", __func__, (int)addr);
-> +            }
-> +            /* If IOPMP permission of any addr has been changed, */
-> +            /* flush TLB pages. */
-> +            tlb_flush_all_cpus_synced(current_cpu);
-> +            break;
-> +        }
-> +        LOG("\e[95m%s: addr %08x, value %08x\e[0m\n", __func__, (int)add=
-r,
-> +            (int)rz);
+> +        LOGGE("%s: Bad offset 0x%" HWADDR_PRIX "\n",
+> +              __func__, offset);
 > +        break;
-> +    default:
-> +        LOGGE("%s: Bad addr %x\n", __func__, (int)addr);
 > +    }
-> +}
 > +
-> +/* Match entry in memory domain */
-> +static int match_entry_md(IopmpState *s, int md_idx, hwaddr s_addr,
-> +                          hwaddr e_addr, int *entry_idx)
-> +{
-> +    int entry_idx_s, entry_idx_e;
-> +    int result =3D ENTRY_NO_HIT;
-> +    int i =3D 0;
-> +    entry_idx_s =3D md_idx * s->regs.mdcfg[0];
-> +    entry_idx_e =3D (md_idx + 1) * s->regs.mdcfg[0];
-> +    if (entry_idx_s >=3D s->entry_num) {
-> +        return result;
-> +    }
-> +    if (entry_idx_e > s->entry_num) {
-> +        entry_idx_e =3D s->entry_num;
-> +    }
-> +    i =3D entry_idx_s;
-> +    while (i < entry_idx_e) {
-> +        if (s_addr >=3D s->entry_addr[i].sa && s_addr <=3D s->entry_addr=
-[i].ea) {
-> +            /* check end address */
-> +            if (e_addr >=3D s->entry_addr[i].sa &&
-> +                e_addr <=3D s->entry_addr[i].ea) {
-> +                *entry_idx =3D i;
-> +                return ENTRY_HIT;
-> +            } else if (i >=3D s->prio_entry) {
-> +                /* record result and continue for non-prio_entry */
-> +                result =3D ENTRY_PAR_HIT;
-> +                continue;
-> +            } else {
-> +                return ENTRY_PAR_HIT;
-> +            }
-> +        }
-> +        i++;
-> +    }
+> +    LOG("### atcdmac300_read()=3D0x%lx, val=3D0x%lx\n", offset, result);
 > +    return result;
 > +}
 > +
-> +static int match_entry(IopmpState *s, int sid, hwaddr s_addr, hwaddr e_a=
-ddr,
-> +                       int *match_md_idx, int *match_entry_idx)
+> +static void transaction_info_push(StreamSink *sink, uint8_t *buf,
+> +                                bool eop)
 > +{
-> +    int cur_result =3D ENTRY_NO_HIT;
-> +    int result =3D ENTRY_NO_HIT;
-> +    uint64_t srcmd_en =3D s->regs.srcmd_en[sid] >> 1;
-> +    for (int md_idx =3D 0; md_idx < s->md_num; md_idx++) {
-> +        if (srcmd_en & (1ULL << md_idx)) {
-> +            cur_result =3D match_entry_md(s, md_idx, s_addr, e_addr,
-> +                                        match_entry_idx);
-> +            if (cur_result =3D=3D ENTRY_HIT) {
-> +                *match_md_idx =3D md_idx;
-> +                return cur_result;
-> +            }
-> +            if (cur_result > result) {
-> +                result =3D cur_result;
-> +            }
-> +        }
+> +    if (sink =3D=3D NULL) {
+> +        /* Do nothing if address stream is not support*/
+> +        return;
 > +    }
-> +    return result;
-> +}
-> +
-> +static bool check_md_stall(IopmpState *s, int md_idx)
-> +{
-> +    uint64_t md_selected =3D iopmp_get_field(s->regs.mdstall, MDSTALL_MD=
-) &
-> +                           (1 << md_idx);
-> +    if (iopmp_get_field(s->regs.mdstall, MDSTALL_EXEMPT)) {
-> +        return !md_selected;
-> +    } else {
-> +        return md_selected;
-> +    }
-> +}
-> +
-> +static inline bool check_sidscp_stall(IopmpState *s, int sid)
-> +{
-> +    return s->sidscp_op[sid] =3D=3D SIDSCP_OP_STALL;
-> +}
-> +
-> +static void iopmp_error_reaction(IopmpState *s, uint32_t id, hwaddr star=
-t,
-> +                                 hwaddr end, uint32_t info)
-> +{
-> +    if (start =3D=3D s->prev_error_info[id].start_addr &&
-> +        end =3D=3D s->prev_error_info[id].end_addr &&
-> +        info =3D=3D s->prev_error_info[id].reqinfo) {
-> +            /* skip following error */
+> +    if (eop) {
+> +        while (stream_push(sink, buf, sizeof(iopmp_transaction_info), tr=
+ue)
+> +               =3D=3D 0) {
 > +            ;
+> +        }
 > +    } else {
-> +        s->prev_error_info[id].start_addr =3D start;
-> +        s->prev_error_info[id].end_addr =3D end;
-> +        s->prev_error_info[id].reqinfo =3D info;
-> +        if (!iopmp_get_field(s->regs.errreact, ERRREACT_IP)) {
-> +            iopmp_set_field32(&s->regs.errreact, ERRREACT_IP, 1);
-> +            s->regs.err_reqsid =3D id;
-> +            s->regs.err_reqaddr =3D start;
-> +            s->regs.err_reqinfo =3D info;
-> +
-> +            if (iopmp_get_field(info, ERR_REQINFO_TYPE) =3D=3D ERR_REQIN=
-FO_TYPE_READ
-> +               && iopmp_get_field(s->regs.errreact, ERRREACT_IE) &&
-> +               iopmp_get_field(s->regs.errreact, ERRREACT_IRE)) {
-> +                qemu_set_irq(s->irq, 1);
-> +            }
-> +            if (iopmp_get_field(info, ERR_REQINFO_TYPE) =3D=3D
-> +                ERR_REQINFO_TYPE_WRITE &&
-> +                iopmp_get_field(s->regs.errreact, ERRREACT_IE) &&
-> +                iopmp_get_field(s->regs.errreact, ERRREACT_IWE)) {
-> +                qemu_set_irq(s->irq, 1);
-> +            }
+> +        while (stream_push(sink, buf, sizeof(iopmp_transaction_info), fa=
+lse)
+> +               =3D=3D 0) {
+> +            ;
 > +        }
 > +    }
 > +}
 > +
-> +static IOMMUTLBEntry iopmp_translate(IOMMUMemoryRegion *iommu, hwaddr ad=
-dr,
-> +                                     IOMMUAccessFlags flags, int iommu_i=
-dx)
+> +static MemTxResult dma_iopmp_read(ATCDMAC300State *s, hwaddr addr, void =
+*buf,
+> +                                  hwaddr len,
+> +                                  iopmp_transaction_info *transaction)
 > +{
-> +    bool is_stalled =3D false;
-> +    int sid =3D iommu_idx;
-> +    IopmpState *s =3D IOPMP(container_of(iommu, IopmpState, iommu));
-> +    hwaddr start_addr, end_addr;
-> +    if (s->transaction_state[sid].supported) {
-> +        /* get transaction_state if device supported */
-> +        start_addr =3D s->transaction_state[sid].start_addr;
-> +        end_addr =3D s->transaction_state[sid].end_addr;
-> +        if (addr > end_addr || addr < start_addr ||
-> +            !s->transaction_state[sid].running) {
-> +            error_report("transaction_state error.");
-> +            exit(1);
+> +    MemTxResult result;
+> +    if (s->iopmp_as) {
+> +        if (s->iopmp_address_sink) {
+> +            transaction_info_push(s->iopmp_address_sink,
+> +                                (uint8_t *)transaction, false);
 > +        }
-> +    } else {
-> +        start_addr =3D addr;
-> +        end_addr =3D addr;
+> +        MemTxAttrs dma_attrs =3D {.requester_id =3D s->sid};
+> +        result =3D address_space_rw(s->iopmp_as, addr, dma_attrs,
+> +                                buf, len, false);
+> +        if (s->iopmp_address_sink) {
+> +            transaction_info_push(s->iopmp_address_sink,
+> +                                (uint8_t *)transaction, true);
+> +            return result;
+> +        }
 > +    }
-> +    IOMMUTLBEntry entry =3D {
-> +        .target_as =3D &s->downstream_as,
-> +        .iova =3D addr,
-> +        .translated_addr =3D addr,
-> +        .addr_mask =3D (~(hwaddr)0),
-> +        .perm =3D IOMMU_NONE,
-> +    };
-> +    int entry_idx =3D -1;
-> +    int md_idx =3D -1;
-> +    int result =3D match_entry(s, sid, start_addr, end_addr, &md_idx, &e=
-ntry_idx);
-> +    int srcmd_rw;
-> +    if (result =3D=3D ENTRY_HIT) {
-> +        is_stalled =3D check_md_stall(s, md_idx) || check_sidscp_stall(s=
-, sid);
-> +        if (is_stalled) {
-> +            s->md_stall_stat |=3D (1 << md_idx);
-> +            entry.target_as =3D &s->stall_io_as;
-> +            entry.perm =3D IOMMU_RW;
-> +            return entry;
-> +        } else {
-> +            s->md_stall_stat &=3D ~(1 << md_idx);
+> +    cpu_physical_memory_read(addr, buf, len);
+> +    return MEMTX_OK;
+> +}
+> +
+> +static MemTxResult dma_iopmp_write(ATCDMAC300State *s, hwaddr addr, void=
+ *buf,
+> +                                   hwaddr len,
+> +                                   iopmp_transaction_info *transaction)
+> +{
+> +    MemTxResult result =3D 0;
+> +    if (s->iopmp_as) {
+> +        if (s->iopmp_address_sink) {
+> +            transaction_info_push(s->iopmp_address_sink,
+> +                                (uint8_t *)transaction, false);
 > +        }
-> +        entry.perm =3D s->regs.entry[entry_idx].cfg_reg & 0x7;
-> +        if (s->sps_en) {
-> +            /* do not affect x permission */
-> +            srcmd_rw =3D 0x4 | ((s->regs.srcmd_r[sid] >>
-> +                              (md_idx + SRCMD_R_MD)) & 0x1);
-> +            srcmd_rw |=3D ((s->regs.srcmd_w[sid] >>
-> +                         (md_idx + SRCMD_W_MD)) & 0x1) << 1;
-> +            entry.perm &=3D srcmd_rw;
+> +        MemTxAttrs dma_attrs =3D {.requester_id =3D s->sid};
+> +        result =3D address_space_rw(s->iopmp_as, addr, dma_attrs,
+> +                                  buf, len, true);
+> +        if (s->iopmp_address_sink) {
+> +            transaction_info_push(s->iopmp_address_sink,
+> +                                (uint8_t *)transaction, true);
+> +            return result;
 > +        }
-> +        if ((entry.perm & flags) =3D=3D 0) {
-> +            /* permission denied */
-> +            iopmp_error_reaction(s, sid, start_addr, end_addr,
-> +                                 (entry_idx << ERR_REQINFO_EID) |
-> +                                 ((flags - 1) << ERR_REQINFO_TYPE));
-> +            entry.target_as =3D &s->blocked_io_as;
-> +            entry.perm =3D IOMMU_RW;
-> +        } else {
-> +            entry.addr_mask =3D s->entry_addr[entry_idx].ea -
-> +                              s->entry_addr[entry_idx].sa;
-> +            /* clear error info */
-> +            s->prev_error_info[sid].reqinfo =3D 0;
-> +            if (s->sid_transl_en) {
-> +                /* next iopmp */
-> +                if (s->next_iommu) {
-> +                    int new_sid =3D s->sid_transl;
-> +                    IopmpState *next_s =3D IOPMP(container_of(s->next_io=
-mmu,
-> +                                                            IopmpState, =
-iommu));
-> +                    next_s->transaction_state[new_sid].supported =3D tru=
-e;
-> +                    while (next_s->transaction_state[new_sid].running) {
-> +                        ;
-> +                    }
-> +                    qemu_mutex_lock(&next_s->iopmp_transaction_mutex);
-> +                    next_s->transaction_state[new_sid].running =3D 1;
-> +                    qemu_mutex_unlock(&next_s->iopmp_transaction_mutex);
-> +                    next_s->transaction_state[new_sid].start_addr =3D st=
-art_addr;
-> +                    next_s->transaction_state[new_sid].end_addr =3D end_=
-addr;
-> +                    entry =3D iopmp_translate(s->next_iommu, addr, flags=
-,
-> +                                           s->sid_transl);
-> +                    qemu_mutex_lock(&next_s->iopmp_transaction_mutex);
-> +                    next_s->transaction_state[new_sid].running =3D 0;
-> +                    qemu_mutex_unlock(&next_s->iopmp_transaction_mutex);
-> +                    return entry;
-> +                } else {
-> +                    error_report("Next iopmp is not found.");
-> +                    exit(1);
-
-This is code that the guest calls, we shouldn't allow the guest to
-kill QEMU like this.
-
+> +    }
+> +    cpu_physical_memory_write(addr, buf, len);
+> +    return MEMTX_OK;
+> +}
+> +
+> +static void atcdmac300_co_run_channel(void *opaque, int ch)
+> +{
+> +    ATCDMAC300State *s =3D opaque;
+> +    int result;
+> +    uint64_t src_addr, dst_addr;
+> +    /* End address for AXI_BOUNDARY check */
+> +    uint64_t src_end_addr, dst_end_addr;
+> +    /* DMA register bit field */
+> +    uint32_t src_addr_ctl, dst_addr_ctl, int_tc_mask, int_err_mask,
+> +             int_abort_mask, burst_size, src_width, dst_width;
+> +    /* Internal computation */
+> +    uint32_t remain_size_byte, dst_remain_byte, burst_size_transfer,
+> +             src_burst_remain, src_width_byte, dst_width_byte,
+> +             burst_size_byte, dma_remain_transfer_size, buf_index;
+> +    uint32_t axi_src_len, axi_dst_len;
+> +    uint8_t buf[ATCDMAC300_MAX_BURST_SIZE * 32];
+> +    iopmp_transaction_info src_transaction, dst_transaction;
+> +    src_transaction.sid =3D s->sid;
+> +    dst_transaction.sid =3D s->sid;
+> +    if (((s->chan[ch].ChnCtrl >> CHAN_CTL_ENABLE) & 0x1) !=3D 0x1) {
+> +        return;
+> +    }
+> +    src_width =3D (s->chan[ch].ChnCtrl >> CHAN_CTL_SRC_WIDTH) &
+> +                CHAN_CTL_SRC_WIDTH_MASK;
+> +    dst_width =3D (s->chan[ch].ChnCtrl >> CHAN_CTL_DST_WIDTH) &
+> +                CHAN_CTL_DST_WIDTH_MASK;
+> +    burst_size =3D (s->chan[ch].ChnCtrl >> CHAN_CTL_SRC_BURST_SZ) &
+> +                    CHAN_CTL_SRC_BURST_SZ_MASK;
+> +    src_addr =3D (s->chan[ch].ChnSrcAddrH << 32) |
+> +                s->chan[ch].ChnSrcAddr;
+> +    dst_addr =3D (s->chan[ch].ChnDstAddrH << 32) |
+> +                s->chan[ch].ChnDstAddr;
+> +    src_addr_ctl =3D (s->chan[ch].ChnCtrl >> CHAN_CTL_SRC_ADDR_CTL) &
+> +                    CHAN_CTL_SRC_ADDR_CTL_MASK;
+> +    dst_addr_ctl =3D (s->chan[ch].ChnCtrl >> CHAN_CTL_DST_ADDR_CTL) &
+> +                    CHAN_CTL_DST_ADDR_CTL_MASK;
+> +
+> +    src_width_byte =3D 1 << src_width;
+> +    dst_width_byte =3D 1 << dst_width;
+> +    dma_remain_transfer_size =3D s->chan[ch].ChnTranSize;
+> +    remain_size_byte =3D dma_remain_transfer_size * src_width_byte;
+> +    int_tc_mask =3D (s->chan[ch].ChnCtrl >> CHAN_CTL_INT_TC_MASK_POS)
+> +                    & 0x1;
+> +    int_err_mask =3D (s->chan[ch].ChnCtrl >>
+> +                    CHAN_CTL_INT_ERR_MASK_POS) & 0x1;
+> +    int_abort_mask =3D (s->chan[ch].ChnCtrl >>
+> +                        CHAN_CTL_INT_ABT_MASK_POS) & 0x1;
+> +    burst_size_transfer =3D (1 << burst_size);
+> +    burst_size_byte =3D burst_size_transfer * src_width_byte;
+> +    if (remain_size_byte && burst_size < 11 &&
+> +        src_width < 6 && dst_width < 6 &&
+> +        (src_addr & (src_width_byte - 1)) =3D=3D 0 &&
+> +        (dst_addr & (dst_width_byte - 1)) =3D=3D 0 &&
+> +        (remain_size_byte & (dst_width_byte - 1)) =3D=3D 0 &&
+> +        (burst_size_byte & (dst_width_byte - 1)) =3D=3D 0) {
+> +        while (remain_size_byte > 0) {
+> +            if (s->ChAbort & (1 << ch)) {
+> +                /* check abort status before a dma brust start*/
+> +                s->ChAbort &=3D ~(1 << ch);
+> +                atcdmac300_dma_reset_chan(s, ch);
+> +                atcdmac300_dma_int_stat_update(s, INT_STATUS_ABT,
+> +                                                ch);
+> +                if (!int_abort_mask) {
+> +                    qemu_irq_raise(s->irq);
 > +                }
+> +                return;
+> +            }
+> +            int i;
+> +            src_burst_remain =3D MIN(burst_size_transfer,
+> +                                   dma_remain_transfer_size);
+> +            dst_remain_byte =3D src_burst_remain * src_width_byte;
+> +            buf_index =3D 0;
+> +            /* One DMA burst may need mutiple AXI bursts */
+> +            while (src_burst_remain) {
+> +                if (src_addr_ctl =3D=3D 0) {
+> +                    axi_src_len =3D MIN(src_burst_remain,
+> +                                      AXI_BURST_INC_LEN_MAX + 1);
+> +                    src_end_addr =3D src_width_byte * axi_src_len + src_=
+addr;
+> +                    if ((src_addr & AXI_BOUNDARY) !=3D
+> +                         (src_end_addr & AXI_BOUNDARY)) {
+> +                            src_end_addr &=3D AXI_BOUNDARY;
+> +                            axi_src_len =3D (src_end_addr - src_addr) /
+> +                                          src_width_byte;
+> +                        }
+> +                    /* Convert AXI signal to general IOPMP transaction *=
+/
+> +                    src_transaction.start_addr =3D src_addr;
+> +                    src_transaction.end_addr =3D src_end_addr - 1;
+> +                }
+> +                if (src_addr_ctl =3D=3D 1) {
+> +                    /* AXI does not support decrement type, use fixed ty=
+pe */
+> +                    src_transaction.start_addr =3D src_addr;
+> +                    src_transaction.end_addr =3D src_addr + src_width_by=
+te - 1;
+> +                }
+> +                if (src_addr_ctl =3D=3D 2) {
+> +                    src_transaction.start_addr =3D src_addr;
+> +                    src_transaction.end_addr =3D src_addr + src_width_by=
+te - 1;
+> +                }
+> +                memset(buf, 0, sizeof(buf));
+> +                /* src_burst */
+> +                for (i =3D 0; i < axi_src_len; i++) {
+> +                    if (src_addr_ctl =3D=3D 1) {
+> +                        /* Change AXI addr for decrement address mode */
+> +                        src_transaction.start_addr =3D src_addr;
+> +                        src_transaction.end_addr =3D src_addr + src_widt=
+h_byte
+> +                                                   - 1;
+> +                    }
+> +                    buf_index +=3D src_width_byte;
+> +                    result =3D dma_iopmp_read(s, src_addr, &buf[buf_inde=
+x],
+> +                                            src_width_byte, &src_transac=
+tion);
+> +                    while (result =3D=3D MEMTX_IOPMP_STALL) {
+> +                        qemu_coroutine_yield();
+> +                        result =3D dma_iopmp_read(s, src_addr, &buf[buf_=
+index],
+> +                                                src_width_byte,
+> +                                                &src_transaction);
+> +                    }
+> +                    if (result !=3D MEMTX_OK) {
+> +                        s->ChAbort &=3D ~(1 << ch);
+> +                        atcdmac300_dma_int_stat_update(s,
+> +                            INT_STATUS_ERR, ch);
+> +                        atcdmac300_dma_reset_chan(s, ch);
+> +                        if (!int_err_mask) {
+> +                            qemu_irq_raise(s->irq);
+> +                        }
+> +                        return;
+> +                    }
+> +                    if (src_addr_ctl =3D=3D 0) {
+> +                        src_addr +=3D src_width_byte;
+> +                    }
+> +                    if (src_addr_ctl =3D=3D 1) {
+> +                        src_addr -=3D src_width_byte;
+> +                    }
+> +                }
+> +                src_burst_remain -=3D axi_src_len;
+> +                dma_remain_transfer_size -=3D axi_src_len;
+> +                remain_size_byte -=3D axi_src_len * src_width_byte;
+> +            }
+> +            buf_index =3D 0;
+> +            /* One src burst may need mutiple dst bursts*/
+> +            while (dst_remain_byte > 0) {
+> +                if (dst_addr_ctl =3D=3D 0) {
+> +                    axi_dst_len =3D
+> +                        (dst_remain_byte / dst_width_byte);
+> +                    axi_dst_len =3D MIN(axi_dst_len,
+> +                                        AXI_BURST_INC_LEN_MAX + 1);
+> +                    dst_end_addr =3D dst_width_byte * axi_dst_len
+> +                                    + dst_addr;
+> +                        if ((dst_addr & AXI_BOUNDARY) !=3D
+> +                            (dst_end_addr & AXI_BOUNDARY)) {
+> +                            dst_end_addr &=3D AXI_BOUNDARY;
+> +                            axi_dst_len =3D (dst_end_addr - dst_addr) /
+> +                                          dst_width_byte;
+> +                        }
+> +                    dst_transaction.start_addr =3D dst_addr;
+> +                    dst_transaction.end_addr =3D dst_end_addr - 1;
+> +                }
+> +                if (dst_addr_ctl =3D=3D 1) {
+> +                    dst_transaction.start_addr =3D dst_addr;
+> +                    dst_transaction.end_addr =3D dst_addr + dst_width_by=
+te
+> +                                            - 1;
+> +                }
+> +                if (dst_addr_ctl =3D=3D 2) {
+> +                    dst_transaction.start_addr =3D dst_addr;
+> +                    dst_transaction.end_addr =3D dst_addr + dst_width_by=
+te
+> +                                            - 1;
+> +                }
+> +                for (i =3D 0; i < axi_dst_len; i++) {
+> +                    if (dst_addr_ctl =3D=3D 1) {
+> +                        /* Change AXI addr for decrement address mode */
+> +                        dst_transaction.start_addr =3D dst_addr;
+> +                        dst_transaction.end_addr =3D dst_addr + dst_widt=
+h_byte
+> +                                                   - 1;
+> +                    }
+> +                    buf_index +=3D dst_width_byte;
+> +                    result =3D dma_iopmp_write(s, dst_addr, &buf[buf_ind=
+ex],
+> +                                             dst_width_byte, &dst_transa=
+ction);
+> +                    while (result =3D=3D MEMTX_IOPMP_STALL) {
+> +                        qemu_coroutine_yield();
+> +                        result =3D dma_iopmp_write(s, dst_addr, &buf[buf=
+_index],
+> +                                                 dst_width_byte,
+> +                                                 &dst_transaction);
+> +                    }
+> +                    if (result !=3D MEMTX_OK) {
+> +                        s->ChAbort &=3D ~(1 << ch);
+> +                        atcdmac300_dma_int_stat_update(s,
+> +                            INT_STATUS_ERR, ch);
+> +                        atcdmac300_dma_reset_chan(s, ch);
+> +                        if (!int_err_mask) {
+> +                            qemu_irq_raise(s->irq);
+> +                        }
+> +                        return;
+> +                    }
+> +                    if (dst_addr_ctl =3D=3D 0) {
+> +                        dst_addr +=3D dst_width_byte;
+> +                    }
+> +                    if (dst_addr_ctl =3D=3D 1) {
+> +                        dst_addr -=3D dst_width_byte;
+> +                    }
+> +                }
+> +                dst_remain_byte -=3D dst_width_byte * axi_dst_len;
 > +            }
 > +        }
-> +    } else {
-> +        if (result =3D=3D ENTRY_PAR_HIT) {
-> +            iopmp_error_reaction(s, sid, start_addr, end_addr,
-> +                                 (1 << ERR_REQINFO_PAR_HIT) |
-> +                                 ((flags - 1) << ERR_REQINFO_TYPE));
-> +        } else {
-> +            iopmp_error_reaction(s, sid, start_addr, end_addr,
-> +                                 (1 << ERR_REQINFO_NO_HIT) |
-> +                                 ((flags - 1) << ERR_REQINFO_TYPE));
+> +        /* DMA transfer complete */
+> +        s->ChAbort &=3D ~(1 << ch);
+> +        atcdmac300_dma_reset_chan(s, ch);
+> +        atcdmac300_dma_int_stat_update(s, INT_STATUS_TC, ch);
+> +        if (!int_tc_mask) {
+> +            qemu_irq_raise(s->irq);
 > +        }
-> +        entry.target_as =3D &s->blocked_io_as;
-> +        entry.perm =3D IOMMU_RW;
-> +    }
-> +    return entry;
-> +}
-> +
-> +static const MemoryRegionOps iopmp_ops =3D {
-> +    .read =3D iopmp_read,
-> +    .write =3D iopmp_write,
-> +    .endianness =3D DEVICE_NATIVE_ENDIAN,
-> +    .valid =3D {.min_access_size =3D 4, .max_access_size =3D 4}
-> +};
-> +
-> +static MemTxResult iopmp_block_write(void *opaque, hwaddr addr, uint64_t=
- value,
-> +                                     unsigned size, MemTxAttrs attrs)
-> +{
-> +    IopmpState *s =3D IOPMP(opaque);
-> +
-> +    switch (iopmp_get_field(s->regs.errreact, ERRREACT_RWE)) {
-> +    case RWE_BUS_ERROR:
-> +        return MEMTX_ERROR;
-> +        break;
-> +    case RWE_DECODE_ERROR:
-> +        return MEMTX_DECODE_ERROR;
-> +        break;
-> +    case RWE_SUCCESS:
-> +        return MEMTX_OK;
-> +        break;
-> +    default:
-> +        break;
-> +    }
-> +    return MEMTX_OK;
-> +}
-> +
-> +static MemTxResult iopmp_block_read(void *opaque, hwaddr addr, uint64_t =
-*pdata,
-> +                                    unsigned size, MemTxAttrs attrs)
-> +{
-> +    IopmpState *s =3D IOPMP(opaque);
-> +
-> +    switch (iopmp_get_field(s->regs.errreact, ERRREACT_RRE)) {
-> +    case RRE_BUS_ERROR:
-> +        return MEMTX_ERROR;
-> +        break;
-> +    case RRE_DECODE_ERROR:
-> +        return MEMTX_DECODE_ERROR;
-> +        break;
-> +    case RRE_SUCCESS_ZEROS:
-> +        *pdata =3D 0;
-> +        return MEMTX_OK;
-> +        break;
-> +    case RRE_SUCCESS_ONES:
-> +        *pdata =3D UINT64_MAX;
-> +        return MEMTX_OK;
-> +        break;
-> +    default:
-> +        break;
-> +    }
-> +    return MEMTX_OK;
-> +}
-> +
-> +static const MemoryRegionOps iopmp_block_io_ops =3D {
-> +    .read_with_attrs =3D iopmp_block_read,
-> +    .write_with_attrs =3D iopmp_block_write,
-> +    .endianness =3D DEVICE_NATIVE_ENDIAN,
-> +    .valid =3D {.min_access_size =3D 1, .max_access_size =3D 8},
-> +};
-> +
-> +static MemTxResult iopmp_handle_stall(IopmpState *s, hwaddr addr,
-> +                                      MemTxAttrs attrs)
-> +{
-> +    return MEMTX_IOPMP_STALL;
-> +}
-> +
-> +static MemTxResult iopmp_stall_write(void *opaque, hwaddr addr, uint64_t=
- value,
-> +                                     unsigned size, MemTxAttrs attrs)
-> +{
-> +    IopmpState *s =3D IOPMP(opaque);
-> +
-> +    return iopmp_handle_stall(s, addr, attrs);
-> +}
-> +
-> +static MemTxResult iopmp_stall_read(void *opaque, hwaddr addr, uint64_t =
-*pdata,
-> +                                    unsigned size, MemTxAttrs attrs)
-> +{
-> +    IopmpState *s =3D IOPMP(opaque);
-> +
-> +    *pdata =3D 0;
-> +    return iopmp_handle_stall(s, addr, attrs);
-> +}
-> +
-> +static const MemoryRegionOps iopmp_stall_io_ops =3D {
-> +    .read_with_attrs =3D iopmp_stall_read,
-> +    .write_with_attrs =3D iopmp_stall_write,
-> +    .endianness =3D DEVICE_NATIVE_ENDIAN,
-> +    .valid =3D {.min_access_size =3D 1, .max_access_size =3D 8},
-> +};
-> +
-> +static void iopmp_realize(DeviceState *dev, Error **errp)
-> +{
-> +    Object *obj =3D OBJECT(dev);
-> +    SysBusDevice *sbd =3D SYS_BUS_DEVICE(dev);
-> +    IopmpState *s =3D IOPMP(dev);
-> +    s->downstream =3D get_system_memory();
-> +    uint64_t size =3D memory_region_size(s->downstream);
-> +
-> +    qemu_mutex_init(&s->iopmp_transaction_mutex);
-> +    s->prient_prog =3D 1;
-> +    s->sid_num =3D MIN(s->sid_num, IOPMP_MAX_SID_NUM);
-> +    s->md_num =3D MIN(s->md_num, IOPMP_MAX_MD_NUM);
-> +    s->entry_num =3D MIN(s->entry_num, IOPMP_MAX_ENTRY_NUM);
-> +    if (s->sid_transl_en) {
-> +        s->sid_transl_prog =3D 1;
-> +    }
-> +    if (!s->model_str || strcmp(s->model_str, "rapidk") =3D=3D 0) {
-> +        /* apply default model */
-> +        s->model =3D IOPMP_MODEL_RAPIDK;
-> +        iopmp_set_field32(&s->regs.mdcfglck, MDCFGLCK_F, s->md_num);
-> +        iopmp_set_field32(&s->regs.mdcfglck, MDCFGLCK_L, 1);
-> +        s->regs.mdcfg[0] =3D s->k;
+> +        return;
 > +    } else {
-> +        error_report("IOPMP model %s is not supported. "
-> +                     "Vailid values are full, rapidk, dynamick,"
-> +                     "isolation and compactk.", s->model_str);
-> +        exit(1);
-> +    }
-> +    memory_region_init_iommu(&s->iommu, sizeof(s->iommu),
-> +                             TYPE_IOPMP_IOMMU_MEMORY_REGION,
-> +                             obj, "iopmp-iommu", UINT64_MAX);
-> +    address_space_init(&s->iopmp_as, MEMORY_REGION(&s->iommu), "iommu");
-> +    memory_region_init_io(&s->mmio, obj, &iopmp_ops,
-> +                          s, "iopmp-regs", 0x100000);
-> +    sysbus_init_mmio(sbd, &s->mmio);
-> +    memory_region_init_io(&s->blocked_io, obj, &iopmp_block_io_ops,
-> +                          s, "iopmp-blocked-io", size);
-> +    address_space_init(&s->downstream_as, s->downstream,
-> +                       "iopmp-downstream-as");
-> +    address_space_init(&s->blocked_io_as, &s->blocked_io,
-> +                       "iopmp-blocked-io-as");
-> +
-> +    memory_region_init_io(&s->stall_io, obj, &iopmp_stall_io_ops,
-> +                          s, "iopmp-stall-io", size);
-> +    address_space_init(&s->stall_io_as, &s->stall_io,
-> +                       "iopmp-stall-io-as");
-> +
-> +    object_initialize_child(OBJECT(s), "iopmp_transaction_info",
-> +                            &s->transaction_info_sink,
-> +                            TYPE_IOPMP_TRASACTION_INFO_SINK);
-> +}
-> +
-> +static void iopmp_reset(DeviceState *dev)
-> +{
-> +    IopmpState *s =3D IOPMP(dev);
-> +    qemu_set_irq(s->irq, 0);
-> +    memset(&s->regs, 0, sizeof(iopmp_regs));
-> +    memset(&s->entry_addr, 0, IOPMP_MAX_ENTRY_NUM * sizeof(iopmp_addr_t)=
-);
-> +    if (s->model =3D=3D IOPMP_MODEL_RAPIDK) {
-> +        iopmp_set_field32(&s->regs.mdcfglck, MDCFGLCK_F, s->md_num);
-> +        iopmp_set_field32(&s->regs.mdcfglck, MDCFGLCK_L, 1);
-> +        s->regs.mdcfg[0] =3D s->k;
-> +    }
-> +    s->regs.errreact =3D 0;
-> +
-> +    s->prient_prog =3D 1;
-> +    if (s->sid_transl_en) {
-> +        s->sid_transl_prog =3D 1;
+> +        s->ChAbort &=3D ~(1 << ch);
+> +        atcdmac300_dma_int_stat_update(s, INT_STATUS_ERR, ch);
+> +        atcdmac300_dma_reset_chan(s, ch);
+> +        if (!int_err_mask) {
+> +            qemu_irq_raise(s->irq);
+> +        }
 > +    }
 > +}
 > +
-> +static int iopmp_attrs_to_index(IOMMUMemoryRegion *iommu, MemTxAttrs att=
-rs)
+> +static void atcdmac300_co_run(void *opaque)
 > +{
-> +    unsigned int sid =3D attrs.requester_id;
-> +    return sid;
+> +
+> +    while (1) {
+> +        for (int ch =3D 0; ch < ATCDMAC300_MAX_CHAN; ch++) {
+> +            atcdmac300_co_run_channel(opaque, ch);
+> +            qemu_coroutine_yield();
+> +        }
+> +    }
 > +}
 > +
-> +static void iopmp_iommu_memory_region_class_init(ObjectClass *klass, voi=
-d *data)
+> +static void atcdmac300_bh_cb(void *opaque)
 > +{
-> +    IOMMUMemoryRegionClass *imrc =3D IOMMU_MEMORY_REGION_CLASS(klass);
+> +    ATCDMAC300State *s =3D opaque;
 > +
-> +    imrc->translate =3D iopmp_translate;
-> +    imrc->attrs_to_index =3D iopmp_attrs_to_index;
+> +    int rearm =3D 0;
+> +    if (s->running) {
+> +        rearm =3D 1;
+> +        goto out;
+> +    } else {
+> +        s->running =3D 1;
+> +    }
+> +
+> +    AioContext *ctx =3D qemu_get_current_aio_context();
+> +    aio_co_enter(ctx, s->co);
+> +
+> +    s->running =3D 0;
+> +out:
+> +    if (rearm) {
+> +        qemu_bh_schedule_idle(s->bh);
+> +        s->dma_bh_scheduled =3D true;
+> +    }
+> +    qemu_bh_schedule_idle(s->bh);
+> +    s->dma_bh_scheduled =3D true;
+> +    s->running =3D 0;
 > +}
 > +
-> +static Property iopmp_property[] =3D {
-> +    DEFINE_PROP_STRING("model", IopmpState, model_str),
-> +    DEFINE_PROP_BOOL("sps_en", IopmpState, sps_en, false),
-> +    DEFINE_PROP_BOOL("sid_transl_en", IopmpState, sid_transl_en, false),
-> +    DEFINE_PROP_UINT32("k", IopmpState, k, IOPMP_MODEL_K),
-> +    DEFINE_PROP_UINT32("prio_entry", IopmpState, prio_entry, PRIO_ENTRY)=
+> +static void atcdmac300_write(void *opaque, hwaddr offset, uint64_t value=
 ,
-> +    DEFINE_PROP_UINT32("sid_num", IopmpState, sid_num, IOPMP_MAX_SID_NUM=
+> +                             unsigned size)
+> +{
+> +    ATCDMAC300State *s =3D opaque;
+> +    int ch =3D 0;
+> +
+> +    LOG("@@@ atcdmac300_write()=3D0x%lx, value=3D0x%lx\n", offset, value=
+);
+> +
+> +    if (offset >=3D 0x40) {
+> +        ch =3D ATCDMAC300_GET_CHAN(offset);
+> +        offset =3D ATCDMAC300_GET_OFF(offset, ch);
+> +    }
+> +
+> +    switch (offset) {
+> +    case ATCDMAC300_INT_STATUS:
+> +        /* Write 1 to clear */
+> +        s->IntStatus =3D 0;
+> +        break;
+> +    case ATCDMAC300_DMAC_CTRL:
+> +        atcdmac300_dma_reset(s);
+> +        break;
+> +    case ATCDMAC300_CHN_ABT:
+> +        for (int i =3D 0; i < ATCDMAC300_MAX_CHAN; i++) {
+> +            if (value & 0x1 && (s->chan[i].ChnCtrl & (1 << CHAN_CTL_ENAB=
+LE))) {
+> +                s->ChAbort |=3D (0x1 << i);
+> +            }
+> +            value >>=3D 1;
+> +        }
+> +        break;
+> +    case ATCDMAC300_CHAN_CTL:
+> +        s->chan[ch].ChnCtrl =3D value;
+> +        qemu_bh_schedule_idle(s->bh);
+> +        break;
+> +    case ATCDMAC300_CHAN_TRAN_SZ:
+> +        s->chan[ch].ChnTranSize =3D value;
+> +        break;
+> +    case ATCDMAC300_CHAN_SRC_ADDR:
+> +        s->chan[ch].ChnSrcAddr =3D value;
+> +        break;
+> +    case ATCDMAC300_CHAN_SRC_ADDR_H:
+> +        s->chan[ch].ChnSrcAddrH =3D value;
+> +        break;
+> +    case ATCDMAC300_CHAN_DST_ADDR:
+> +        s->chan[ch].ChnDstAddr =3D value;
+> +        break;
+> +    case ATCDMAC300_CHAN_DST_ADDR_H:
+> +        s->chan[ch].ChnDstAddrH =3D value;
+> +        break;
+> +    case ATCDMAC300_CHAN_LL_POINTER:
+> +        s->chan[ch].ChnLLPointer =3D value;
+> +        break;
+> +    case ATCDMAC300_CHAN_LL_POINTER_H:
+> +        s->chan[ch].ChnLLPointerH =3D value;
+> +        break;
+> +    default:
+> +        LOGGE("%s: Bad offset 0x%" HWADDR_PRIX "\n",
+> +              __func__, offset);
+> +        break;
+> +    }
+> +}
+> +
+> +static const MemoryRegionOps atcdmac300_ops =3D {
+> +    .read =3D atcdmac300_read,
+> +    .write =3D atcdmac300_write,
+> +    .endianness =3D DEVICE_NATIVE_ENDIAN,
+> +    .valid =3D {
+> +        .min_access_size =3D 4,
+> +        .max_access_size =3D 8
+> +    }
+> +};
+> +
+> +static void atcdmac300_init(Object *obj)
+> +{
+> +    ATCDMAC300State *s =3D ATCDMAC300(obj);
+> +    SysBusDevice *sbus =3D SYS_BUS_DEVICE(obj);
+> +
+> +    sysbus_init_irq(sbus, &s->irq);
+> +    memory_region_init_io(&s->mmio, obj, &atcdmac300_ops, s, TYPE_ATCDMA=
+C300,
+> +                          s->mmio_size);
+> +    sysbus_init_mmio(sbus, &s->mmio);
+> +    if (s->iothread) {
+> +        s->ctx =3D iothread_get_aio_context(s->iothread);
+> +    } else {
+> +        s->ctx =3D qemu_get_aio_context();
+> +    }
+> +    s->bh =3D aio_bh_new(s->ctx, atcdmac300_bh_cb, s);
+> +    s->co =3D qemu_coroutine_create(atcdmac300_co_run, s);
+> +}
+> +
+> +static Property atcdmac300_properties[] =3D {
+> +    DEFINE_PROP_UINT32("mmio-size", ATCDMAC300State, mmio_size, 0x100000=
 ),
-> +    DEFINE_PROP_UINT32("md_num", IopmpState, md_num, IOPMP_MAX_MD_NUM),
-> +    DEFINE_PROP_UINT32("entry_num", IopmpState, entry_num, IOPMP_MAX_ENT=
-RY_NUM),
+> +    DEFINE_PROP_UINT32("id-and-revision", ATCDMAC300State, IdRev,
+> +                       (ATCDMAC300_PRODUCT_ID  << 8) |
+> +                       ((ATCDMAC300_PRODUCT_ID & 0x7) << 4) |
+> +                       ((ATCDMAC300_PRODUCT_ID & 0x7))),
+> +    DEFINE_PROP_UINT32("inturrupt-status", ATCDMAC300State, IntStatus, 0=
+),
+> +    DEFINE_PROP_UINT32("dmac-configuration", ATCDMAC300State,
+> +                       DMACfg, 0xc3404108),
+> +    DEFINE_PROP_LINK("iothread", ATCDMAC300State, iothread,
+> +                     TYPE_IOTHREAD, IOThread *),
+> +
 > +    DEFINE_PROP_END_OF_LIST(),
 > +};
 > +
-> +static void iopmp_class_init(ObjectClass *klass, void *data)
+> +static void atcdmac300_class_init(ObjectClass *klass, void *data)
 > +{
-> +    DeviceClass *dc =3D DEVICE_CLASS(klass);
-> +    device_class_set_props(dc, iopmp_property);
-> +    dc->realize =3D iopmp_realize;
-> +    dc->reset =3D iopmp_reset;
+> +    DeviceClass *k =3D DEVICE_CLASS(klass);
+> +    device_class_set_props(k, atcdmac300_properties);
 > +}
 > +
-> +static void iopmp_init(Object *obj)
-> +{
-> +    IopmpState *s =3D IOPMP(obj);
-> +    SysBusDevice *sbd =3D SYS_BUS_DEVICE(obj);
-> +    sysbus_init_irq(sbd, &s->irq);
-> +}
-> +
-> +static const TypeInfo iopmp_info =3D {
-> +    .name =3D TYPE_IOPMP,
-> +    .parent =3D TYPE_SYS_BUS_DEVICE,
-> +    .instance_size =3D sizeof(IopmpState),
-> +    .instance_init =3D iopmp_init,
-> +    .class_init =3D iopmp_class_init,
+> +static const TypeInfo atcdmac300_info =3D {
+> +    .name          =3D TYPE_ATCDMAC300,
+> +    .parent        =3D TYPE_SYS_BUS_DEVICE,
+> +    .instance_size =3D sizeof(ATCDMAC300State),
+> +    .class_init    =3D atcdmac300_class_init,
+> +    .instance_init =3D atcdmac300_init,
 > +};
 > +
-> +static const TypeInfo
-> +iopmp_iommu_memory_region_info =3D {
-> +    .name =3D TYPE_IOPMP_IOMMU_MEMORY_REGION,
-> +    .parent =3D TYPE_IOMMU_MEMORY_REGION,
-> +    .class_init =3D iopmp_iommu_memory_region_class_init,
-> +};
-> +
-> +DeviceState *iopmp_create(hwaddr addr, qemu_irq irq)
+> +DeviceState *
+> +atcdmac300_create(const char *name, hwaddr addr, hwaddr mmio_size, qemu_=
+irq irq)
 > +{
-> +    LOG("%s:\n", __func__);
-> +    DeviceState *iopmp_device =3D sysbus_create_varargs(TYPE_IOPMP, addr=
-, irq,
-> +                                                      NULL);
-> +    return iopmp_device;
-> +}
-
-Let's drop this function. These helper functions end up being a pain to mai=
-ntain
-
-> +
-> +void
-> +cascade_iopmp(DeviceState *cur_dev, DeviceState *next_dev)
-> +{
-> +    IopmpState *s =3D IOPMP(cur_dev);
-> +    s->sid_transl_en =3D true;
-> +    IopmpState *next_s =3D IOPMP(next_dev);
-> +    s->next_iommu =3D &next_s->iommu;
+> +    DeviceState *dev;
+> +    dev =3D sysbus_create_varargs(TYPE_ATCDMAC300, addr, irq, NULL);
+> +    return dev;
 > +}
 > +
-> +static size_t
-> +transaction_info_push(StreamSink *transaction_info_sink, unsigned char *=
-buf,
-> +                    size_t len, bool eop)
+> +static void atcdmac300_register_types(void)
 > +{
-> +    Iopmp_StreamSink *ss =3D IOPMP_TRASACTION_INFO_SINK(transaction_info=
-_sink);
-> +    IopmpState *s =3D IOPMP(container_of(ss, IopmpState,
-> +                                       transaction_info_sink));
-> +    iopmp_transaction_info signal;
-> +    memcpy(&signal, buf, len);
-> +    uint32_t sid =3D signal.sid;
-> +    if (s->transaction_state[sid].running) {
-> +        if (eop) {
-> +            qemu_mutex_lock(&s->iopmp_transaction_mutex);
-> +            s->transaction_state[sid].running =3D 0;
-> +            qemu_mutex_unlock(&s->iopmp_transaction_mutex);
-> +            return 1;
-> +        } else {
-> +            return 0;
-> +        }
-> +    } else if (len =3D=3D sizeof(iopmp_transaction_info)) {
-> +        s->transaction_state[sid].supported =3D 1;
-> +        qemu_mutex_lock(&s->iopmp_transaction_mutex);
-> +        s->transaction_state[sid].running =3D 1;
-> +        qemu_mutex_unlock(&s->iopmp_transaction_mutex);
-> +        s->transaction_state[sid].start_addr =3D signal.start_addr;
-> +        s->transaction_state[sid].end_addr =3D signal.end_addr;
-> +        return 1;
-> +    }
-> +    return 0;
-
-I think a few more newlines would make this a little easier to read :)
-
+> +    type_register_static(&atcdmac300_info);
 > +}
 > +
-> +static void iopmp_transaction_info_sink_class_init(ObjectClass *klass,
-> +                                                   void *data)
+> +void atcdmac300_connect_iopmp(DeviceState *dev, AddressSpace *iopmp_as,
+> +                                 StreamSink *iopmp_address_sink, uint32_=
+t sid)
 > +{
-> +    StreamSinkClass *ssc =3D STREAM_SINK_CLASS(klass);
-> +    ssc->push =3D transaction_info_push;
+> +    ATCDMAC300State *s =3D ATCDMAC300(dev);
+> +    s->iopmp_as =3D iopmp_as;
+> +    s->iopmp_address_sink =3D iopmp_address_sink;
+> +    s->sid =3D sid;
 > +}
 > +
-> +static const TypeInfo transaction_info_sink =3D {
-> +    .name =3D TYPE_IOPMP_TRASACTION_INFO_SINK,
-> +    .parent =3D TYPE_OBJECT,
-> +    .instance_size =3D sizeof(Iopmp_StreamSink),
-> +    .class_init =3D iopmp_transaction_info_sink_class_init,
-> +    .interfaces =3D (InterfaceInfo[]) {
-> +        { TYPE_STREAM_SINK },
-> +        { }
-> +    },
-> +};
-> +
-> +static void
-> +iopmp_register_types(void)
-> +{
-> +    type_register_static(&iopmp_info);
-> +    type_register_static(&iopmp_iommu_memory_region_info);
-> +    type_register_static(&transaction_info_sink);
-> +}
-> +
-> +type_init(iopmp_register_types);
-> diff --git a/include/hw/misc/riscv_iopmp.h b/include/hw/misc/riscv_iopmp.=
-h
+> +type_init(atcdmac300_register_types)
+> diff --git a/hw/dma/meson.build b/hw/dma/meson.build
+> index a96c1be2c8..dfe37de32d 100644
+> --- a/hw/dma/meson.build
+> +++ b/hw/dma/meson.build
+> @@ -14,3 +14,4 @@ system_ss.add(when: 'CONFIG_PXA2XX', if_true: files('px=
+a2xx_dma.c'))
+>  system_ss.add(when: 'CONFIG_RASPI', if_true: files('bcm2835_dma.c'))
+>  system_ss.add(when: 'CONFIG_SIFIVE_PDMA', if_true: files('sifive_pdma.c'=
+))
+>  system_ss.add(when: 'CONFIG_XLNX_CSU_DMA', if_true: files('xlnx_csu_dma.=
+c'))
+> +system_ss.add(when: 'CONFIG_ATCDMAC300', if_true: files('atcdmac300.c'))
+> \ No newline at end of file
+> diff --git a/include/hw/dma/atcdmac300.h b/include/hw/dma/atcdmac300.h
 > new file mode 100644
-> index 0000000000..7ff078c903
+> index 0000000000..4f798e2a68
 > --- /dev/null
-> +++ b/include/hw/misc/riscv_iopmp.h
-> @@ -0,0 +1,342 @@
+> +++ b/include/hw/dma/atcdmac300.h
+> @@ -0,0 +1,180 @@
 > +/*
-> + * QEMU RISC-V IOPMP (Input Output Physical Memory Protection)
+> + * Andes ATCDMAC300 (Andes Technology DMA Controller)
 > + *
-> + * Copyright (c) 2023 Andes Tech. Corp.
+> + * Copyright (c) 2022 Andes Tech. Corp.
 > + *
 > + * This program is free software; you can redistribute it and/or modify =
 it
@@ -1217,386 +766,174 @@ T
 > + *
 > + * You should have received a copy of the GNU General Public License alo=
 ng with
-> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + * this program.  If not, see <http://www.gnu.org/licenses/>
+> + *
 > + */
 > +
-> +#ifndef RISCV_IOPMP_H
-> +#define RISCV_IOPMP_H
+> +#ifndef ATCDMAC300_H
+> +#define ATCDMAC300_H
 > +
 > +#include "hw/sysbus.h"
-> +#include "qemu/typedefs.h"
-> +#include "memory.h"
+> +#include "qom/object.h"
+> +#include "qemu/coroutine.h"
+> +#include "block/aio.h"
+> +#include "sysemu/iothread.h"
+> +#include "sysemu/dma.h"
 > +#include "hw/stream.h"
-> +#include "hw/misc/riscv_iopmp_transaction_info.h"
 > +
-> +#define TYPE_IOPMP "iopmp"
-> +#define IOPMP(obj) OBJECT_CHECK(IopmpState, (obj), TYPE_IOPMP)
+> +#define TYPE_ATCDMAC300 "atcdmac300"
+> +OBJECT_DECLARE_SIMPLE_TYPE(ATCDMAC300State, ATCDMAC300)
 > +
-> +#define iopmp_get_field(reg, name) (((reg) & (name ## _FIELD)) >> (name)=
-)
-> +#define iopmp_set_field32(reg, name, newval) do { \
-> +    uint32_t val =3D *reg; \
-> +    val &=3D ~name##_FIELD; \
-> +    val |=3D ((newval) << name) & name##_FIELD; \
-> +    *reg =3D val; \
-> +    } while (0)
-> +#define iopmp_set_field64(reg, name, newval) do { \
-> +    uint64_t val =3D *reg; \
-> +    val &=3D ~name##_FIELD; \
-> +    val |=3D ((newval) << name) & name##_FIELD; \
-> +    *reg =3D val; \
-> +    } while (0)
-
-I think it would be a lot simpler and easier to read if you use the
-existing register macros.
-
-Have a look at hw/ssi/ibex_spi_host.c for an example of using REG32()
-and FIELD() to define the registers and then FIELD_DP32() and
-FIELD_EX32() to access the registers.
-
-The registers should probably also be in the C file, as we don't need
-to export them.
-
-Alistair
-
+> +#define ATCDMAC300_IOPMP_SID            0
 > +
+> +#define ATCDMAC300_PRODUCT_ID           0x010230
+> +#define ATCDMAC300_REV_MAJOR            0x0
+> +#define ATCDMAC300_REV_MINOR            0x1
 > +
-> +#define IOPMP_MAX_MD_NUM    63
-> +#define IOPMP_MAX_SID_NUM   256
-> +#define IOPMP_MAX_ENTRY_NUM 512
+> +/* DMAC Configuration Register (Offset 0x10)  */
+> +#define ATCDMAC300_DMA_CFG              0x10
+> +#define DMA_CFG_CHAIN_XFR               31
+> +#define DMA_CFG_REQ_SYNC                30
+> +#define DMA_CFG_DATA_WITDTH             24
+> +#define DMA_CFG_ADDR_WIDTH              17
+> +#define DMA_CFG_CORE_NUM                16
+> +#define DMA_CFG_BUS_NUM                 15
+> +#define DMA_CFG_REQ_NUM                 10
+> +#define DMA_CFG_FIFO_DEPTH              4
+> +#define DMA_CFG_CHAN_NUM                0
 > +
-> +#define IOPMP_VERSION      0x0
-> +#define IOPMP_IMP          0x4
-> +#define IOPMP_HWCFG0       0x8
-> +#define IOPMP_HWCFG1       0xC
-> +#define IOPMP_HWCFG2       0x10
-> +#define IOPMP_ENTRYOFFSET  0x20
-> +#define IOPMP_ERRREACT     0x28
-> +#define IOPMP_MDSTALL      0x30
-> +#define IOPMP_MDSTALLH     0x34
-> +#define IOPMP_SIDSCP       0x38
-> +#define IOPMP_MDLCK        0x40
-> +#define IOPMP_MDLCKH       0x44
-> +#define IOPMP_MDCFGLCK     0x48
-> +#define IOPMP_ENTRYLCK     0x4C
+> +/* Interrupt Status Register (Offset 0x20) */
+> +#define ATCDMAC300_DMAC_CTRL            0x20
 > +
-> +#define IOPMP_ERR_REQADDR  0x60
-> +#define IOPMP_ERR_REQADDRH 0x64
-> +#define IOPMP_ERR_REQSID   0x68
-> +#define IOPMP_ERR_REQINFO  0x6C
+> +/* Channel Abort Register (Offset 0x24) */
+> +#define ATCDMAC300_CHN_ABT              0x24
 > +
-> +#define IOPMP_MDCFG0       0x800
-> +#define IOPMP_SRCMD_EN0    0x1000
-> +#define IOPMP_SRCMD_ENH0   0x1004
-> +#define IOPMP_SRCMD_R0     0x1008
-> +#define IOPMP_SRCMD_RH0    0x100C
-> +#define IOPMP_SRCMD_W0     0x1010
-> +#define IOPMP_SRCMD_WH0    0x1014
+> +/* Interrupt Status Register (Offset 0x30) */
+> +#define ATCDMAC300_INT_STATUS           0x30
+> +#define INT_STATUS_TC                   16
+> +#define INT_STATUS_ABT                  8
+> +#define INT_STATUS_ERR                  0
 > +
-> +#define IOPMP_ENTRY_ADDR0  0x4000
-> +#define IOPMP_ENTRY_ADDRH0 0x4004
-> +#define IOPMP_ENTRY_CFG0   0x4008
-> +#define IOPMP_USER_CFG0    0x400C
+> +/* Interrupt Status Register (Offset 0x34) */
+> +#define ATCDMAC300_CHAN_ENABLE          0x34
 > +
-> +#define VERSION_VENDOR       0
-> +#define VERSION_SPECVER      24
-> +#define VENDER_ANDES         6533
-> +#define SPECVER_1_0_0_DRAFT4 4
+> +/* Channel n Control Register (Offset 0x40 + n*0x20) */
+> +#define CHAN_CTL_SRC_BUS_IDX            31
+> +#define CHAN_CTL_DST_BUS_IDX            30
+> +#define CHAN_CTL_PRIORITY               29
+> +#define CHAN_CTL_SRC_BURST_SZ           24
+> +#define CHAN_CTL_SRC_WIDTH              21
+> +#define CHAN_CTL_DST_WIDTH              18
+> +#define CHAN_CTL_SRC_MODE               17
+> +#define CHAN_CTL_DST_MODE               16
+> +#define CHAN_CTL_SRC_ADDR_CTL           14
+> +#define CHAN_CTL_DST_ADDR_CTL           12
+> +#define CHAN_CTL_SRC_REQ_SEL            8
+> +#define CHAN_CTL_DST_REQ_SEL            4
+> +#define CHAN_CTL_INT_ABT_MASK_POS       3
+> +#define CHAN_CTL_INT_ERR_MASK_POS       2
+> +#define CHAN_CTL_INT_TC_MASK_POS        1
+> +#define CHAN_CTL_ENABLE                 0
 > +
-> +#define IMPID_1_0_0_DRAFT4_0 10040
+> +#define CHAN_CTL_SRC_WIDTH_MASK         0x7
+> +#define CHAN_CTL_DST_WIDTH_MASK         0x7
+> +#define CHAN_CTL_SRC_BURST_SZ_MASK      0xf
+> +#define CHAN_CTL_SRC_ADDR_CTL_MASK      0x3
+> +#define CHAN_CTL_DST_ADDR_CTL_MASK      0x3
 > +
-> +#define HWCFG0_SID_NUM     0
-> +#define HWCFG0_ENTRY_NUM   16
+> +#define ATCDMAC300_CHAN_CTL             0x40
+> +#define ATCDMAC300_CHAN_TRAN_SZ         0x44
+> +#define ATCDMAC300_CHAN_SRC_ADDR        0x48
+> +#define ATCDMAC300_CHAN_SRC_ADDR_H      0x4C
+> +#define ATCDMAC300_CHAN_DST_ADDR        0x50
+> +#define ATCDMAC300_CHAN_DST_ADDR_H      0x54
+> +#define ATCDMAC300_CHAN_LL_POINTER      0x58
+> +#define ATCDMAC300_CHAN_LL_POINTER_H    0x5C
 > +
-> +#define HWCFG1_MODEL            0
-> +#define HWCFG1_TOR_EN           4
-> +#define HWCFG1_SPS_EN           5
-> +#define HWCFG1_USER_CFG_EN      6
-> +#define HWCFG1_PRIENT_PROG      7
-> +#define HWCFG1_SID_TRANSL_EN    8
-> +#define HWCFG1_SID_TRANSL_PROG  9
-> +#define HWCFG1_MD_NUM           24
-> +#define HWCFG1_ENABLE           31
+> +#define ATCDMAC300_IRQ_START            0x40
+> +#define ATCDMAC300_IRQ_END              (ATCDMAC300_IRQ_START + \
+> +                                         ATCDMAC300_MAX_CHAN)
 > +
-> +#define HWCFG1_SPS_EN_FIELD          (1 << HWCFG1_SPS_EN)
-> +#define HWCFG1_PRIENT_PROG_FIELD     (1 << HWCFG1_PRIENT_PROG)
-> +#define HWCFG1_SID_TRANSL_PROG_FIELD (1 << HWCFG1_SID_TRANSL_PROG)
-> +#define HWCFG1_ENABLE_FIELD          (1 << HWCFG1_ENABLE)
-> +
-> +#define HWCFG2_PRIO_ENTRY       0
-> +#define HWCFG2_SID_TRANSL      16
-> +
-> +#define HWCFG2_PRIO_ENTRY_FIELD (0xFFFF << HWCFG2_PRIO_ENTRY)
-> +#define HWCFG2_SID_TRANSL_FIELD (0xFFFF << HWCFG2_SID_TRANSL)
-> +
-> +#define ERRREACT_L          0
-> +#define ERRREACT_IE         1
-> +#define ERRREACT_IP         2
-> +#define ERRREACT_IRE        4
-> +#define ERRREACT_RRE        5
-> +#define ERRREACT_IWE        8
-> +#define ERRREACT_RWE        9
-> +#define ERRREACT_PEE        28
-> +#define ERRREACT_RPE        29
-> +
-> +#define ERRREACT_L_FIELD    (0x1 << ERRREACT_L)
-> +#define ERRREACT_IE_FIELD   (0x1 << ERRREACT_IE)
-> +#define ERRREACT_IP_FIELD   (0x1 << ERRREACT_IP)
-> +#define ERRREACT_IRE_FIELD  (0x1 << ERRREACT_IRE)
-> +#define ERRREACT_RRE_FIELD  (0x7 << ERRREACT_RRE)
-> +#define ERRREACT_IWE_FIELD  (0x1 << ERRREACT_IWE)
-> +#define ERRREACT_RWE_FIELD  (0x7 << ERRREACT_RWE)
-> +#define ERRREACT_PEE_FIELD  (0x1 << ERRREACT_PEE)
-> +#define ERRREACT_RPE_FIELD  (0x7 << ERRREACT_RPE)
-> +
-> +#define RRE_BUS_ERROR       0
-> +#define RRE_DECODE_ERROR    1
-> +#define RRE_SUCCESS_ZEROS   2
-> +#define RRE_SUCCESS_ONES    3
-> +
-> +#define RWE_BUS_ERROR       0
-> +#define RWE_DECODE_ERROR    1
-> +#define RWE_SUCCESS         2
-> +
-> +#define MDSTALL               0
-> +#define MDSTALLH              32
-> +#define MDSTALL_FIELD         UINT32_MAX
-> +#define MDSTALLH_FIELD        (UINT64_MAX << MDSTALLH)
-> +#define MDSTALL_EXEMPT        0
-> +#define MDSTALL_EXEMPT_FIELD  (1 << MDSTALL_EXEMPT)
-> +#define MDSTALL_ISSTALLED     0
-> +#define MDSTALL_MD            1
-> +#define MDSTALL_MD_FIELD      (0x7FFFFFFFFFFFFFFF << MDSTALL_MD)
-> +
-> +#define SIDSCP_SID         0
-> +#define SIDSCP_STAT        30
-> +#define SIDSCP_OP          30
-> +#define SIDSCP_SID_FIELD   (0xFFFF << SIDSCP_SID)
-> +#define SIDSCP_STAT_FIELD  (0x3 << SIDSCP_STAT)
-> +#define SIDSCP_OP_FIELD    (0x3 << SIDSCP_OP)
-> +#define SIDSCP_OP_QUERY    0
-> +#define SIDSCP_OP_STALL    1
-> +#define SIDSCP_OP_NOTSTALL 2
-> +
-> +#define MDLCK_L            0
-> +#define MDLCK_MD           1
-> +
-> +#define MDCFGLCK_L         0
-> +#define MDCFGLCK_L_FIELD   (0x1 << MDCFGLCK_L)
-> +#define MDCFGLCK_F         1
-> +#define MDCFGLCK_F_FIELD   (0x7F << MDCFGLCK_F)
-> +
-> +#define ENTRYLCK_L         0
-> +#define ENTRYLCK_L_FIELD   (0x1 << MDCFGLCK_L)
-> +#define ENTRYLCK_F         1
-> +#define ENTRYLCK_F_FIELD   (0xFFFF << ENTRYLCK_F)
-> +
-> +#define ERR_REQINFO_NO_HIT  0
-> +#define ERR_REQINFO_PAR_HIT 1
-> +#define ERR_REQINFO_TYPE    8
-> +#define ERR_REQINFO_EID     16
-> +
-> +#define ERR_REQINFO_NO_HIT_FIELD  (0x1 << ERR_REQINFO_NO_HIT)
-> +#define ERR_REQINFO_PAR_HIT_FIELD (0x1 << ERR_REQINFO_PAR_HIT)
-> +#define ERR_REQINFO_TYPE_FIELD    (0x3 << ERR_REQINFO_TYPE)
-> +#define ERR_REQINFO_EID_FIELD     (0xFFFF << ERR_REQINFO_EID)
-> +
-> +#define ERR_REQINFO_TYPE_READ  0
-> +#define ERR_REQINFO_TYPE_WRITE 1
-> +#define ERR_REQINFO_TYPE_USER  3
-> +
-> +#define SRCMD_EN_L         0
-> +#define SRCMD_EN_MD        1
-> +#define SRCMD_EN_L_FIELD   (0x1 << SRCMD_EN_L)
-> +#define SRCMD_EN_MD_FIELD  (0x7FFFFFFF << SRCMD_EN_MD)
-> +#define SRCMD_ENH_MDH        32
-> +#define SRCMD_ENH_MDH_FIELD (0xFFFFFFFFUL << SRCMD_ENH_MDH)
-> +
-> +#define SRCMD_R_MD        1
-> +#define SRCMD_R_MD_FIELD  (0x7FFFFFFF << SRCMD_R_MD)
-> +#define SRCMD_RH_MDH        32
-> +#define SRCMD_RH_MDH_FIELD (0xFFFFFFFFUL << SRCMD_RH_MDH)
-> +#define SRCMD_W_MD        1
-> +#define SRCMD_W_MD_FIELD  (0x7FFFFFFF << SRCMD_W_MD)
-> +#define SRCMD_WH_MDH        32
-> +#define SRCMD_WH_MDH_FIELD (0xFFFFFFFFUL << SRCMD_WH_MDH)
-> +
-> +#define ENTRY_ADDR_ADDR         0
-> +#define ENTRY_ADDR_ADDR_FIELD   0xFFFFFFFF
-> +#define ENTRY_ADDRH_ADDRH       32
-> +#define ENTRY_ADDRH_ADDRH_FIELD (0xFFFFFFFFUL << ENTRY_ADDRH_ADDRH)
-> +
-> +#define ENTRY_CFG_R            0
-> +#define ENTRY_CFG_W            1
-> +#define ENTRY_CFG_X            2
-> +#define ENTRY_CFG_A            3
-> +#define ENTRY_CFG_A_FIELD      (0x3 << ENTRY_CFG_A)
-> +
-> +#define IOPMP_MODEL_FULL       0
-> +#define IOPMP_MODEL_RAPIDK     0x1
-> +#define IOPMP_MODEL_DYNAMICK   0x2
-> +#define IOPMP_MODEL_ISOLATION  0x3
-> +#define IOPMP_MODEL_COMPACTK   0x4
-> +#define IOPMP_MODEL_K          8
-> +
-> +#define TOR_EN 1
-> +#define SPS_EN 0
-> +#define USER_CFG_EN   0
-> +#define PROG_PRIENT   1
-> +#define PRIO_ENTRY    IOPMP_MAX_ENTRY_NUM
-> +#define SID_TRANSL_EN 0
-> +#define SID_TRANSL    0
-> +
-> +#define ENTRY_NO_HIT      0
-> +#define ENTRY_PAR_HIT     1
-> +#define ENTRY_HIT         2
+> +#define ATCDMAC300_MAX_BURST_SIZE       1024
+> +#define ATCDMAC300_MAX_CHAN             0x8
 > +
 > +#define AXI_BURST_TYPE_FIX 0
 > +#define AXI_BURST_TYPE_INC 1
+> +#define AXI_BURST_INC_LEN_MAX 255
+> +#define AXI_BURST_FIX_LEN_MAX 15
+> +#define AXI_BOUNDARY 0x1000
 > +
-> +typedef enum {
-> +    IOPMP_READ      =3D 1 << 0,
-> +    IOPMP_WRITE     =3D 1 << 1,
-> +    IOPMP_EXEC      =3D 1 << 2,
-> +    IOPMP_ADDRMODE  =3D 1 << 3,
-> +} iopmp_priv_t;
+> +#define PER_CHAN_OFFSET                 0x20
+> +#define ATCDMAC300_FIRST_CHAN_BASE      ATCDMAC300_CHAN_CTL
+> +#define ATCDMAC300_GET_CHAN(reg)        (((reg - ATCDMAC300_FIRST_CHAN_B=
+ASE) / \
+> +                                            PER_CHAN_OFFSET))
+> +#define ATCDMAC300_GET_OFF(reg, ch)     (reg - (ch * PER_CHAN_OFFSET))
 > +
-> +typedef enum {
-> +    IOPMP_AMATCH_OFF,  /* Null (off)                            */
-> +    IOPMP_AMATCH_TOR,  /* Top of Range                          */
-> +    IOPMP_AMATCH_NA4,  /* Naturally aligned four-byte region    */
-> +    IOPMP_AMATCH_NAPOT /* Naturally aligned power-of-two region */
-> +} iopmp_am_t;
+> +#define DMA_ABT_RESULT (1 << 3)
 > +
 > +typedef struct {
-> +    uint64_t addr_reg;
-> +    uint32_t  cfg_reg;
-> +} iopmp_entry_t;
-> +
-> +typedef struct {
-> +    target_ulong sa;
-> +    target_ulong ea;
-> +} iopmp_addr_t;
-> +
-> +typedef struct {
-> +    uint64_t srcmd_en[IOPMP_MAX_SID_NUM];
-> +    uint64_t srcmd_r[IOPMP_MAX_SID_NUM];
-> +    uint64_t srcmd_w[IOPMP_MAX_SID_NUM];
-> +    uint32_t mdcfg[IOPMP_MAX_MD_NUM];
-> +    iopmp_entry_t entry[IOPMP_MAX_ENTRY_NUM];
-> +    uint64_t mdmsk;
-> +    uint64_t mdlck;
-> +    uint32_t entrylck;
-> +    uint32_t mdcfglck;
-> +    uint32_t arrlck;
-> +    uint64_t mdstall;
-> +    uint32_t sidscp;
-> +    uint32_t errreact;
-> +    uint64_t err_reqaddr;
-> +    uint32_t err_reqsid;
-> +    uint32_t err_reqinfo;
-> +} iopmp_regs;
-> +
-> +/* To verfiy the same transcation */
-> +typedef struct iopmp_transaction_state {
-> +    bool supported;
-> +    bool running;
-> +    hwaddr start_addr;
-> +    hwaddr end_addr;
-> +} iopmp_transaction_state;
-> +
-> +typedef struct iopmp_error_info {
-> +    uint32_t reqinfo;
-> +    hwaddr start_addr;
-> +    hwaddr end_addr;
-> +} iopmp_error_info;
-> +
-> +typedef struct Iopmp_StreamSink {
-> +    Object parent;
-> +} Iopmp_StreamSink;
-> +
-> +typedef struct IopmpState {
-> +    SysBusDevice parent_obj;
-> +    iopmp_addr_t entry_addr[IOPMP_MAX_ENTRY_NUM];
-> +    iopmp_transaction_state transaction_state[IOPMP_MAX_SID_NUM];
-> +    QemuMutex iopmp_transaction_mutex;
-> +    iopmp_error_info prev_error_info[IOPMP_MAX_SID_NUM];
-> +    MemoryRegion mmio;
-> +    IOMMUMemoryRegion iommu;
-> +    IOMMUMemoryRegion *next_iommu;
-> +    iopmp_regs regs;
-> +    MemoryRegion *downstream;
-> +    MemoryRegion blocked_io;
-> +    MemoryRegion stall_io;
-> +    char *model_str;
-> +    uint32_t model;
-> +    uint32_t k;
-> +    bool sps_en;
-> +    bool sid_transl_prog;
-> +    bool prient_prog;
-> +    bool sid_transl_en;
-> +    uint32_t sid_transl;
-> +    bool on_axi_bus;
-> +    Iopmp_StreamSink transaction_info_sink;
-> +
-> +    AddressSpace iopmp_as;
-> +    AddressSpace downstream_as;
-> +    AddressSpace blocked_io_as;
-> +    AddressSpace stall_io_as;
 > +    qemu_irq irq;
-> +    bool enable;
-> +    uint32_t sidscp_op[IOPMP_MAX_SID_NUM];
-> +    uint64_t md_stall_stat;
-> +    uint32_t prio_entry;
 > +
-> +    uint32_t sid_num;
-> +    uint32_t md_num;
-> +    uint32_t entry_num;
-> +} IopmpState;
+> +    /* Channel control registers (n=3D0~7) */
+> +    uint32_t ChnCtrl;
+> +    uint32_t ChnTranSize;
+> +    uint32_t ChnSrcAddr;
+> +    uint64_t ChnSrcAddrH;
+> +    uint32_t ChnDstAddr;
+> +    uint64_t ChnDstAddrH;
+> +    uint32_t ChnLLPointer;
+> +    uint32_t ChnLLPointerH;
+> +} ATCDMAC300Chan;
 > +
-> +DeviceState *iopmp_create(hwaddr addr, qemu_irq irq);
-> +void cascade_iopmp(DeviceState *cur_dev, DeviceState *next_dev);
 > +
-> +#endif
-> diff --git a/include/hw/misc/riscv_iopmp_transaction_info.h b/include/hw/=
-misc/riscv_iopmp_transaction_info.h
-> new file mode 100644
-> index 0000000000..fd12fd214c
-> --- /dev/null
-> +++ b/include/hw/misc/riscv_iopmp_transaction_info.h
-> @@ -0,0 +1,28 @@
-> +/*
-> + * QEMU RISC-V IOPMP (Input Output Physical Memory Protection)
-> + *
-> + * Copyright (c) 2023 Andes Tech. Corp.
-> + *
-> + * This program is free software; you can redistribute it and/or modify =
-it
-> + * under the terms and conditions of the GNU General Public License,
-> + * version 2 or later, as published by the Free Software Foundation.
-> + *
-> + * This program is distributed in the hope it will be useful, but WITHOU=
-T
-> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License=
- for
-> + * more details.
-> + *
-> + * You should have received a copy of the GNU General Public License alo=
-ng with
-> + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> + */
+> +struct ATCDMAC300State {
+> +    /*< private >*/
+> +    SysBusDevice busdev;
+> +    /*< public >*/
 > +
-> +#ifndef RISCV_IOPMP_TRANSACTION_INFO_H
-> +#define RISCV_IOPMP_TRANSACTION_INFO_H
+> +    qemu_irq irq;
+> +    MemoryRegion mmio;
+> +    uint32_t mmio_size;
 > +
-> +typedef struct {
-> +    uint32_t sid:16;
-> +    uint64_t start_addr;
-> +    uint64_t end_addr;
-> +} iopmp_transaction_info;
+> +    /* ID and revision register */
+> +    uint32_t IdRev;
 > +
-> +#endif
+> +    /* Configuration register */
+> +    uint32_t DMACfg;
+> +
+> +    /* Global control registers */
+> +    uint32_t DMACtrl;
+> +    uint32_t ChAbort;
+> +
+> +    /* Channel status registers */
+> +    uint32_t IntStatus;
+> +    uint32_t ChEN;
+> +
+> +    ATCDMAC300Chan chan[ATCDMAC300_MAX_CHAN];
+> +
+> +    /* To support iopmp */
+> +    AddressSpace *iopmp_as;
+> +    StreamSink *iopmp_address_sink;
+> +    uint32_t sid;
+> +
+> +    Coroutine *co;
+> +    QEMUBH *bh;
+> +    bool running;
+> +    bool dma_bh_scheduled;
+> +    AioContext *ctx;
+> +    IOThread *iothread;
+> +};
+> +
+> +DeviceState *atcdmac300_create(const char *name, hwaddr addr, hwaddr mmi=
+o_size,
+> +                               qemu_irq irq);
+> +
+> +void atcdmac300_connect_iopmp(DeviceState *dev, AddressSpace *iopmp_as,
+> +                              StreamSink *iopmp_address_sink, uint32_t s=
+id);
+> +
+> +#endif /* ATCDMAC300_H */
 > --
 > 2.34.1
 >
