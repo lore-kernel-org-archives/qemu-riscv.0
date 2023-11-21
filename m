@@ -4,83 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0E14C54FB9
-	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Nov 2023 04:26:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CB6BC5ACB3
+	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Nov 2023 04:45:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r5ILI-0002ai-Ry; Mon, 20 Nov 2023 23:26:32 -0500
+	id 1r5Id9-0006Zu-V9; Mon, 20 Nov 2023 23:45:01 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1r5ILH-0002Zy-9K; Mon, 20 Nov 2023 23:26:31 -0500
-Received: from mail-vs1-xe30.google.com ([2607:f8b0:4864:20::e30])
+ id 1r5Id6-0006XO-Kp; Mon, 20 Nov 2023 23:44:56 -0500
+Received: from mail-vs1-xe32.google.com ([2607:f8b0:4864:20::e32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1r5ILE-00025z-3u; Mon, 20 Nov 2023 23:26:31 -0500
-Received: by mail-vs1-xe30.google.com with SMTP id
- ada2fe7eead31-45d8c405696so1640145137.3; 
- Mon, 20 Nov 2023 20:26:26 -0800 (PST)
+ id 1r5Id4-0006jD-UF; Mon, 20 Nov 2023 23:44:56 -0500
+Received: by mail-vs1-xe32.google.com with SMTP id
+ ada2fe7eead31-462ac0f82e3so323045137.0; 
+ Mon, 20 Nov 2023 20:44:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700540786; x=1701145586; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1700541893; x=1701146693; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RyAv/uSSPONDME3+CIEDqeepL72DvtLeIwRR29X76AQ=;
- b=YVKP0rNdEQXwkJr3AD6I9qkWtrZtIl++SEwicFX5thg6C1nRJJyNXbj1d7ui+aA5Zy
- 1NvkBKY9awt/14CZsj+HO1W50xAKWeBxgIPcSaccFQSIB7otNVtJgEjevODcMeLPYN20
- iyu5TTs6udgsOu+YLImXhPtrAjJmR6bnUS13SrVscfwLnRRYvMvrWha8SUzxswlgPbq3
- 02hXydXvojC8hyHNWjhEbqE8CdWL2V1sgZAnH2jJOkGol1s5W2kLWj2OBsq+ydQZPaxT
- 4+stU11y1WAYBkrk/ZBazsaj3dUkR40IIHvBTMfT6/W46ygA3Zx/0PcVjigCnYs+kgN2
- 06xw==
+ bh=qDXJkcUjY9jheYpanOMTtzm4HcEyyA0Tvq22+8P3kYU=;
+ b=WOoHG1x0Ezs/uJUxH91Ac8H83bzjnBYI2Nt0KkT7RjbgDhHlpXu6CuphBwxPCj7SwD
+ PCkqIDrK6yCNLecPRZYEbuNimddddQ343b707DjXg+SMAkkE4Or+qW35edOs/Vm+rID0
+ rZA4uB805wteGjiD6qNRSF3DcKJq6yX7P34xBQ5K0K5FnxZTD/Ss1KU7c4k4MXCJpoWM
+ OgpnYvGF2T1IXPi9S/waO/p9l9seG7ltJXpRTADbppKa/T45qI5KO5PtXCcgRY1zzIz1
+ HOJ+Fs0jPaBW8cuneNH87vxO7nNJhjajYupyiKNeFJAgAXmtfo1VIJqRb8rmK60oKfGT
+ N2BA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700540786; x=1701145586;
+ d=1e100.net; s=20230601; t=1700541893; x=1701146693;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RyAv/uSSPONDME3+CIEDqeepL72DvtLeIwRR29X76AQ=;
- b=CLQIWLe1xQvPky3txYuK6/OdcpXVH6iXm3Ak4tqeySAfJA6EzD2QYqBySeoot83MF+
- UFoxxW6SMd8oCXBKIl2YSx8Ee3OUtzVARrNYxr1YPaa0rsGaeHRcedS7OmWJPhTNaSDI
- 1t6WVxOewVoINKifoTiFQEcIjy7TXhNIUV28iNW3iVoJDvfYhwgP/IKGjdV3wn15Y8zi
- t9SYn3Q7htozSOUbi1bBCcwDOHc/e+X1eMJ09hZTGLUlQPSG63a10xtMQGw+XNcvBzTS
- Dr3Um/b802Ts6jhBkddQ5HvZfo5qxAuEG1AyQwcSOjqjLZiKT5c2cV/DGjPEN9pzISUs
- jItQ==
-X-Gm-Message-State: AOJu0YxbCoVVMJgCnIq7CTYC9Jb4ChucVF02BjeJ1TvzrZsXHAJEpbUo
- 6APtqXrMfsQ6dG7JJkMfpkxIMYaGRSyIu4J+mTM=
-X-Google-Smtp-Source: AGHT+IFF50HLYXQKqBpy6ml2EVABWbVLX8rBEz6FSywpjvR+yOumuxGbrGa6YoAm3uzrCupnXQ5Q9gURSFAcRH6m/EY=
-X-Received: by 2002:a67:c189:0:b0:45f:c608:296b with SMTP id
- h9-20020a67c189000000b0045fc608296bmr8123946vsj.27.1700540786115; Mon, 20 Nov
- 2023 20:26:26 -0800 (PST)
+ bh=qDXJkcUjY9jheYpanOMTtzm4HcEyyA0Tvq22+8P3kYU=;
+ b=VJ5M1oVMgWLOJAabqUBYWajXlURKkqJM6tgADq3GX3KLIt1ohuLGxbRF0XgjbqlwKH
+ hOwWAs0Vbg9HqpMb1g0+jnTNRfW8PQXUd2VQbm6/3oaVC325uoq1t0KS2jWxtCdYg37L
+ 9URPkJbOJT0EB+14dIeGD3RSQiwFlwotA+LPLBFoClXFobqALg87vS3cegbTKCFdf00R
+ 1C1SlAExdTElEo3TQgx9+7vvGr5TICZHGyB829bG0JiuZbK2ZV28cz+4mgFBPZJYMgWe
+ WUCluaFfFQoMI8BsfhRq5kpld2Wq1GVONbL07DyOP2FwL1ggx3oxBZlZzp5pfp3HPxAX
+ ePFQ==
+X-Gm-Message-State: AOJu0Yz1qOHuw8vfiYNS0M6KmUN+cYYXtx8wcbj/ANStnjdkjN0atmIk
+ Vv0A7iJocHbXfO2x/rcLQwmWkWzmwV+Vj4Sk7FV+OatTxJYahg==
+X-Google-Smtp-Source: AGHT+IFDCuBwgrcJt1Ihjizu1b3wCaU+4FFBTZItvDgciMuIU8S88sStlvhs4ZPFdk6bXwqhAlMpYsR6OSqCVQtsLMw=
+X-Received: by 2002:a05:6102:1085:b0:462:9efa:77a0 with SMTP id
+ s5-20020a056102108500b004629efa77a0mr5125226vsr.11.1700541893433; Mon, 20 Nov
+ 2023 20:44:53 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.1699496263.git.houyingle@canaan-creative.com>
- <6d1d8cc8c2b37b145e4a826095619097fa4a34d5.1699496263.git.houyingle@canaan-creative.com>
- <CAEomy4TmM0ShGkuV2mprB8Xm0Kn62ZWZA7Gnfvt07pioY9fCCA@mail.gmail.com>
- <bf0c7c6d-a940-4968-ab18-4af6125b8d0b@linaro.org>
- <BJSPR01MB062758831AA8BF73856F5DFC95B3A@BJSPR01MB0627.CHNPR01.prod.partner.outlook.cn>
- <3bd74930-f445-47b2-bb76-8451aa7b995a@linaro.org>
-In-Reply-To: <3bd74930-f445-47b2-bb76-8451aa7b995a@linaro.org>
+References: <20231120120609.37960-1-ivan.klokov@syntacore.com>
+ <20231120120609.37960-2-ivan.klokov@syntacore.com>
+In-Reply-To: <20231120120609.37960-2-ivan.klokov@syntacore.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 21 Nov 2023 14:25:59 +1000
-Message-ID: <CAKmqyKPpW2gF0CyhvzcvhtjkeXTBppG9Qz5fZzshR1=n0+yZ=w@mail.gmail.com>
-Subject: Re: [PATCH 1/1] hw/intc/riscv_aclint:Change the way to get CPUState
- from hard-base to pu_index
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: LeoHou <LeoHou@canaan-creative.com>, Dongxue Zhang <elta.era@gmail.com>, 
- Alistair Francis <alistair.francis@wdc.com>,
- Anup Patel <apatel@ventanamicro.com>, Bin Meng <bin.meng@windriver.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- =?UTF-8?B?5L6v6Iux5LmQ?= <houyingle@canaan-creative.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Mayuresh Chitale <mchitale@ventanamicro.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Palmer Dabbelt <palmer@rivosinc.com>, 
- Weiwei Li <liweiwei@iscas.ac.cn>, QEMU Developers <qemu-devel@nongnu.org>, 
- qemu-riscv <qemu-riscv@nongnu.org>,
- =?UTF-8?B?5byg5Lic6Zuq?= <zhangdongxue@canaan-creative.com>, 
- "leohou1402@gmail.com" <leohou1402@gmail.com>
+Date: Tue, 21 Nov 2023 14:44:26 +1000
+Message-ID: <CAKmqyKOK5m8DewTx=JphWLUtrr9LK29R1BUN72qoUGc26FuEpg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] target/riscv/cpu_helper.c: Invalid exception on MMU
+ translation stage
+To: Ivan Klokov <ivan.klokov@syntacore.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com, 
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e30;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe30.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e32;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe32.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -104,124 +91,96 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Nov 20, 2023 at 10:17=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
-<philmd@linaro.org> wrote:
+On Mon, Nov 20, 2023 at 11:19=E2=80=AFPM Ivan Klokov <ivan.klokov@syntacore=
+.com> wrote:
 >
-> On 13/11/23 05:25, LeoHou wrote:
-> > On 9/11/23 23:26, Philippe Mathieu-Daud=C3=A9  wrote:
-> >
-> >> Hi Leo,
-> >>
-> >> First, I can't find your patch in my mailbox, so I'm replying to
-> >> Dongxue's review.
+> According to RISCV priveleged spec sect. 5.3.2 Virtual Address Translatio=
+n Process
+> access-fault exceptions may raise only after PMA/PMP check. Current imple=
+mentation
+> generates an acces-fault for mbare mode even if there were no PMA/PMP err=
+ors.
+> This patch removes the erroneous MMU mode check and generates an access-f=
+ault
+> exception based on the pmp_violation flag only.
+>
+> Signed-off-by: Ivan Klokov <ivan.klokov@syntacore.com>
 
-I also can't find the original patch
-
-> >>
-> >> On 9/11/23 03:41, Dongxue Zhang wrote:
-> >>> Reviewed-by: Dongxue Zhang <zhangdongxue@canaan-creative.com>
-> >>>
-> >>>
-> >>>> On Thu, Nov 9, 2023 at 10:22=E2=80=AFAM Leo Hou <LeoHou@canaan-creat=
-ive.com> wrote:
-> >>>>
-> >>>> From: Leo Hou <houyingle@canaan-creative.com>
-> >>>>
-> >>>> cpu_by_arch_id() uses hartid-base as the index to obtain the corresp=
-onding CPUState structure variable.
-> >>>> qemu_get_cpu() uses cpu_index as the index to obtain the correspondi=
-ng CPUState structure variable.
-> >>>>
-> >>>> In heterogeneous CPU or multi-socket scenarios, multiple aclint need=
-s to be instantiated,
-> >>>> and the hartid-base of each cpu bound by aclint can start from 0. If=
- cpu_by_arch_id() is still used
-
-This doesn't sound right
-
-cpu_by_arch_id() calls riscv_get_arch_id() to compare against the id.
-
-riscv_get_arch_id() just returns the mhartid.
-
-From the RISC-V priv spec on mhartid:
-
-Hart IDs might not necessarily be numbered contiguously in a
-multiprocessor system, but at least one hart must have a hart ID of
-zero. Hart IDs must be unique within the execution environment.
-
-So no two harts should have the same ID. So only a single aclint
-should have a hartid-base of 0.
-
-From a quick look I couldn't see where we set mhartid though, so it's
-possible we just don't set it or set it correctly. In which case that
-is the bug to be fixed.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
-> >>>> in this case, all aclint will bind to the earliest initialized hart =
-with hartid-base 0 and cause conflicts.
-> >>>>
-> >>>> So with cpu_index as the index, use qemu_get_cpu() to get the CPUSta=
-te struct variable,
-> >>>> and connect the aclint interrupt line to the hart of the CPU indexed=
- with cpu_index
-> >>>> (the corresponding hartid-base can start at 0). It's more reasonable=
-.
-> >>>>
-> >>>> Signed-off-by: Leo Hou <houyingle@canaan-creative.com>
-> >>>> ---
-> >>>>     hw/intc/riscv_aclint.c | 16 ++++++++--------
-> >>>>     1 file changed, 8 insertions(+), 8 deletions(-)
-> >>>>
-> >>>> diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
-> >>>> index ab1a0b4b3a..be8f539fcb 100644
-> >>>> --- a/hw/intc/riscv_aclint.c
-> >>>> +++ b/hw/intc/riscv_aclint.c
-> >>>> @@ -130,7 +130,7 @@ static uint64_t riscv_aclint_mtimer_read(void *o=
-paque, hwaddr addr,
-> >>>>             addr < (mtimer->timecmp_base + (mtimer->num_harts << 3))=
-) {
-> >>>>             size_t hartid =3D mtimer->hartid_base +
-> >>>>                             ((addr - mtimer->timecmp_base) >> 3);
-> >>>> -        CPUState *cpu =3D cpu_by_arch_id(hartid);
-> >>>> +        CPUState *cpu =3D qemu_get_cpu(hartid);
-> >>
-> >> There is some code smell here. qemu_get_cpu() shouldn't be called by
-> >> device models, but only by accelerators.
-> >
-> > Yes, qemu_get_cpu() is designed to be called by accelerators.
-> > But there is currently no new API to support multi-socket and
-> > heterogeneous processor architectures=EF=BC=8Cand sifive_plic has been
-> > designed with qemu_get_cpu().
-> > Please refer to:
-> > [1] https://lore.kernel.org/qemu-devel/1519683480-33201-16-git-send-ema=
-il-mjc@sifive.com/
-> > [2] https://lore.kernel.org/qemu-devel/20200825184836.1282371-3-alistai=
-r.francis@wdc.com/
-> >
-> >
-> >> Maybe the timer should get a link of the hart array it belongs to,
-> >> and offset to this array base hartid?
-> >
-> > The same problem exists not only with timer, but also with aclint.
-> > There needs to be a general approach to this problem.
+> ---
+>  target/riscv/cpu_helper.c | 30 +++++++-----------------------
+>  1 file changed, 7 insertions(+), 23 deletions(-)
 >
-> Right. However since there is no heterogeneous support in QEMU
-> at present, we don't need this patch in the next release.
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index b7af69de53..9ff0952e46 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -1143,47 +1143,31 @@ static void raise_mmu_exception(CPURISCVState *en=
+v, target_ulong address,
+>                                  bool two_stage_indirect)
+>  {
+>      CPUState *cs =3D env_cpu(env);
+> -    int page_fault_exceptions, vm;
+> -    uint64_t stap_mode;
+> -
+> -    if (riscv_cpu_mxl(env) =3D=3D MXL_RV32) {
+> -        stap_mode =3D SATP32_MODE;
+> -    } else {
+> -        stap_mode =3D SATP64_MODE;
+> -    }
+> -
+> -    if (first_stage) {
+> -        vm =3D get_field(env->satp, stap_mode);
+> -    } else {
+> -        vm =3D get_field(env->hgatp, stap_mode);
+> -    }
+> -
+> -    page_fault_exceptions =3D vm !=3D VM_1_10_MBARE && !pmp_violation;
 >
-> So I'd rather wait and work on a correct fix. Up to the maintainer.
->
-> Regards,
->
-> Phil.
->
-> >> I'm going to
-> >> NACK
-> >> this patch until further review / clarifications.
-> >
-> > Regards,
-> >
-> > Leo Hou.
+>      switch (access_type) {
+>      case MMU_INST_FETCH:
+>          if (env->virt_enabled && !first_stage) {
+>              cs->exception_index =3D RISCV_EXCP_INST_GUEST_PAGE_FAULT;
+>          } else {
+> -            cs->exception_index =3D page_fault_exceptions ?
+> -                RISCV_EXCP_INST_PAGE_FAULT : RISCV_EXCP_INST_ACCESS_FAUL=
+T;
+> +            cs->exception_index =3D pmp_violation ?
+> +                RISCV_EXCP_INST_ACCESS_FAULT : RISCV_EXCP_INST_PAGE_FAUL=
+T;
+>          }
+>          break;
+>      case MMU_DATA_LOAD:
+>          if (two_stage && !first_stage) {
+>              cs->exception_index =3D RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT;
+>          } else {
+> -            cs->exception_index =3D page_fault_exceptions ?
+> -                RISCV_EXCP_LOAD_PAGE_FAULT : RISCV_EXCP_LOAD_ACCESS_FAUL=
+T;
+> +            cs->exception_index =3D pmp_violation ?
+> +                RISCV_EXCP_LOAD_ACCESS_FAULT : RISCV_EXCP_LOAD_PAGE_FAUL=
+T;
+>          }
+>          break;
+>      case MMU_DATA_STORE:
+>          if (two_stage && !first_stage) {
+>              cs->exception_index =3D RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FA=
+ULT;
+>          } else {
+> -            cs->exception_index =3D page_fault_exceptions ?
+> -                RISCV_EXCP_STORE_PAGE_FAULT :
+> -                RISCV_EXCP_STORE_AMO_ACCESS_FAULT;
+> +            cs->exception_index =3D pmp_violation ?
+> +                RISCV_EXCP_STORE_AMO_ACCESS_FAULT :
+> +                RISCV_EXCP_STORE_PAGE_FAULT;
+>          }
+>          break;
+>      default:
+> --
+> 2.34.1
 >
 >
 
