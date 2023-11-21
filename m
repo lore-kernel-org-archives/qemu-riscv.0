@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEA79C54FB9
-	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Nov 2023 05:23:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFF46C54FB9
+	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Nov 2023 05:25:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r5JDm-0007OE-OQ; Tue, 21 Nov 2023 00:22:50 -0500
+	id 1r5JGQ-0008H8-Q3; Tue, 21 Nov 2023 00:25:34 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1r5JDk-0007Nk-TT; Tue, 21 Nov 2023 00:22:48 -0500
-Received: from mail-ua1-x933.google.com ([2607:f8b0:4864:20::933])
+ id 1r5JGI-0008FW-1c; Tue, 21 Nov 2023 00:25:26 -0500
+Received: from mail-vs1-xe2a.google.com ([2607:f8b0:4864:20::e2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1r5JDj-0008O1-4f; Tue, 21 Nov 2023 00:22:48 -0500
-Received: by mail-ua1-x933.google.com with SMTP id
- a1e0cc1a2514c-7bae0c07007so1222298241.1; 
- Mon, 20 Nov 2023 21:22:46 -0800 (PST)
+ id 1r5JGC-0000k9-UG; Tue, 21 Nov 2023 00:25:25 -0500
+Received: by mail-vs1-xe2a.google.com with SMTP id
+ ada2fe7eead31-462a24a7583so498669137.1; 
+ Mon, 20 Nov 2023 21:25:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700544165; x=1701148965; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1700544318; x=1701149118; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XbEIDadxjWfk1FoP17FgwYft/fonaxXafjG1RHYflbE=;
- b=iIv3pbnjSsE2zaCEs2ENIUsSFpX65JxyulVu1D8HxGU4XAtcmqViKTnO8UGKVN3LMq
- QFtTV8YQB3bz9u45BY0bevXPjB4/kM2YOt+jnumnn6JPLROzQ4pYWlddBQlap1xV0uNh
- OQQA7tdC9geMXG8fSpXN9tSj8BQkT6rBYCdQkW/xx+/XssWpMKbm0BVjqYueobBHkQwQ
- W7ojN1qh2afW2o1p7Qbx+ulm+oEF+dtdSxyTmfSUXLgTUUueiUan0DQ1RY3VzmHAXdWQ
- 6KuCFTbOYdXvOC/Drn1CueF2l6wTB5EUnx9Mk1b2HrTXw9NdA9/GabihMvL+JjeSGlCn
- 9DDA==
+ bh=ODDnYhnNJGT4HVCdZSSg7d+SgIQVjIy1ewFbVw6KxX8=;
+ b=fj4Nm9nnaZgd5TiLar61SqNDpdhwDiyDBMwo0P/yl+q9O0aU0M3uObinB/VkdD8D+J
+ F3brsZ0apoSZcSExRXdZtpIHLOZdGnFE2F/+KgwykFNyNSUD9r8Afb+TGfLfLSSMTHmq
+ edneWeCE4EVeAVH4OEarss+BbzZf/+a62Lq8YgkvDUamfJ33bjPwthcJJCvTnz9yqQRH
+ jhJ3eSgmTgWxdHXcTrqJ3LyjzzrzH2HE1VWJPE8HJqX5ACFoY/oZi/f1Ek7ynVwf5lZl
+ vD03mKk6/Zjv+JjCdfwyRyBC+nXkioujGHIpy+/h/SQ2JHEoqpjcJE3mSC6w/DklvvW+
+ UCEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700544165; x=1701148965;
+ d=1e100.net; s=20230601; t=1700544318; x=1701149118;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XbEIDadxjWfk1FoP17FgwYft/fonaxXafjG1RHYflbE=;
- b=NS1n/cHxmxCnvIwJUt490H7qhE6sNYE/dy7DNbC9HTYkiIlH30e6yf3LTDYLkFSg5c
- x8XfGkjVlvfX6QKSsqlG4WdRO+bo0GmKDUYT34NX3U89/Gohmy4K25b+w1Uu9OU29TM5
- 4IKkeL/Q2hEz4CSyqNC5u9tk6o7+wueKGZfgv+yozmW6EeSbNBocTYCjZotkscoi9ZFS
- P0sam5B98k/cakjPHtEpFJaR6xb2T7CZOmyfs75DWWBlw5eRAgr/Oi5Be1ud+FUDP+0u
- 38Mp6cVBHLBW8e/ws4oThHvFGUO0Usinmc8zPV0e1tYFZ8COSuFzd25+DzstTsfBvE5k
- y1qg==
-X-Gm-Message-State: AOJu0YxJLdeH/CpJ4tuM+Xx4ME+j6uyeLm7Vz54Z2lHb9m/i70PU5ril
- 4vPMzNTW4SzrX9v+nIw9Jm0mJa/DpiqUg7LAQtw=
-X-Google-Smtp-Source: AGHT+IHqo00CpEfbyHb8g9CP69QSkuY6KdstymYWdVdDE42a7R1DJipzz1N/CQuo+HvTh05E4w76j9MiqWB/RnikHjo=
-X-Received: by 2002:a67:fb98:0:b0:462:8cc4:1333 with SMTP id
- n24-20020a67fb98000000b004628cc41333mr5221239vsr.27.1700544165594; Mon, 20
- Nov 2023 21:22:45 -0800 (PST)
+ bh=ODDnYhnNJGT4HVCdZSSg7d+SgIQVjIy1ewFbVw6KxX8=;
+ b=fJKAnxQeiQWHHpUeAVh0Hcxg3SUGf9D9qyb/hJv5XIGaFA/SwUSkb9ou8K6OSsukeO
+ BLp8G/szrmyKGozmPs46+VTQUA9CE0Tb7w4DtXRRJELFn3e0kZESrCKHh+iFYWfANCTc
+ Om6/6xJUvaxYn5Y2Z5/C5jquAz3htcBxakhgxjdJSl4nzXmERV3Qn6AzjZgbdBpjHlLI
+ tWUM4VKz3Yhkv02QsCj6ak7GvR54VxeHUOvCIcmVAFVEkLwyRrvZWOATvvlPqqQnCdrF
+ N+Pa/dxToD2jt+CmSIG6vu5qID5V9+GuAXkFnRQZnYuP3jAqP55Ew0e1aLRx8jKXB/9j
+ vY4g==
+X-Gm-Message-State: AOJu0YwtquOZL1NY8+Ocr2we7F9Lpj7t2oJL5Rg0RMLCO+bYvBhL0QL3
+ ARIr4lte+c2CMSrqaiU3Df522+K3JKnjITMoQQM=
+X-Google-Smtp-Source: AGHT+IFiVjZg3OBvSkfFG+kKjK3isObVBq3hxlrOkQZ2NU81FFLKxGLqp7TBvwAO4VDoRqdjE/OyeNdsIUEnDSAc/c0=
+X-Received: by 2002:a05:6102:1085:b0:462:9efa:77a0 with SMTP id
+ s5-20020a056102108500b004629efa77a0mr5191192vsr.11.1700544317702; Mon, 20 Nov
+ 2023 21:25:17 -0800 (PST)
 MIME-Version: 1.0
 References: <20231114094705.109146-1-ethan84@andestech.com>
- <20231114094705.109146-5-ethan84@andestech.com>
-In-Reply-To: <20231114094705.109146-5-ethan84@andestech.com>
+ <20231114094705.109146-2-ethan84@andestech.com>
+In-Reply-To: <20231114094705.109146-2-ethan84@andestech.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 21 Nov 2023 15:22:18 +1000
-Message-ID: <CAKmqyKNTcec+QLPLyWRtF4k5DQzNEK_aVmJY28fUGgXTrvWcyw@mail.gmail.com>
-Subject: Re: [PATCH v3 4/4] hw/riscv/virt: Add IOPMP support
+Date: Tue, 21 Nov 2023 15:24:50 +1000
+Message-ID: <CAKmqyKOVpATp-pjkvqZtJHF3B0M5NpUJqDeyin8rVG8gpbtj4w@mail.gmail.com>
+Subject: Re: [PATCH v3 1/4] hw/core: Add config stream
 To: Ethan Chen <ethan84@andestech.com>
 Cc: qemu-devel@nongnu.org, peter.maydell@linaro.org, edgar.iglesias@gmail.com, 
  richard.henderson@linaro.org, pbonzini@redhat.com, palmer@dabbelt.com, 
@@ -67,8 +67,8 @@ Cc: qemu-devel@nongnu.org, peter.maydell@linaro.org, edgar.iglesias@gmail.com,
  peterx@redhat.com, david@redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::933;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x933.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2a;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2a.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -92,197 +92,56 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Nov 14, 2023 at 7:48=E2=80=AFPM Ethan Chen via <qemu-devel@nongnu.o=
+On Tue, Nov 14, 2023 at 7:49=E2=80=AFPM Ethan Chen via <qemu-devel@nongnu.o=
 rg> wrote:
 >
-> - Add 'iopmp=3Don' option to enable a iopmp device and a dma device
->  connect to the iopmp device
-> - Add 'iopmp_cascade=3Don' option to enable iopmp cascading.
+> Make other device can use /hw/core/stream.c by select this config.
+>
+> Signed-off-by: Ethan Chen <ethan84@andestech.com>
+> ---
+>  hw/core/Kconfig     | 3 +++
+>  hw/core/meson.build | 1 +
+>  2 files changed, 4 insertions(+)
+>
+> diff --git a/hw/core/Kconfig b/hw/core/Kconfig
+> index 9397503656..628dc3d883 100644
+> --- a/hw/core/Kconfig
+> +++ b/hw/core/Kconfig
+> @@ -27,3 +27,6 @@ config REGISTER
+>
+>  config SPLIT_IRQ
+>      bool
+> +
+> +config STREAM
+> +    bool
+> \ No newline at end of file
 
-Can we document these in docs/system/riscv/virt.rst
+You are missing a newline here. I think checkpatch should catch this,
+make sure you run it on all of your patches
+
+> diff --git a/hw/core/meson.build b/hw/core/meson.build
+> index 67dad04de5..d6ce14d5ce 100644
+> --- a/hw/core/meson.build
+> +++ b/hw/core/meson.build
+> @@ -34,6 +34,7 @@ system_ss.add(when: 'CONFIG_REGISTER', if_true: files('=
+register.c'))
+>  system_ss.add(when: 'CONFIG_SPLIT_IRQ', if_true: files('split-irq.c'))
+>  system_ss.add(when: 'CONFIG_XILINX_AXI', if_true: files('stream.c'))
+>  system_ss.add(when: 'CONFIG_PLATFORM_BUS', if_true: files('sysbus-fdt.c'=
+))
+> +system_ss.add(when: 'CONFIG_STREAM', if_true: files('stream.c'))
+
+You have added the build but not the file. This will fail to compile.
+
+Each patch must compile and run when applied individually in order.
+That way we maintain git bisectability. Can you please make sure that
+the build is not broken as your patches are applied
 
 Alistair
 
 >
-> Signed-off-by: Ethan Chen <ethan84@andestech.com>
-> ---
->  hw/riscv/Kconfig        |  2 ++
->  hw/riscv/virt.c         | 72 +++++++++++++++++++++++++++++++++++++++--
->  include/hw/riscv/virt.h | 10 +++++-
->  3 files changed, 81 insertions(+), 3 deletions(-)
->
-> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> index b6a5eb4452..c30a104aa4 100644
-> --- a/hw/riscv/Kconfig
-> +++ b/hw/riscv/Kconfig
-> @@ -45,6 +45,8 @@ config RISCV_VIRT
->      select FW_CFG_DMA
->      select PLATFORM_BUS
->      select ACPI
-> +    select ATCDMAC300
-> +    select RISCV_IOPMP
->
->  config SHAKTI_C
->      bool
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index c7fc97e273..3e23ee3afc 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -53,6 +53,8 @@
->  #include "hw/display/ramfb.h"
->  #include "hw/acpi/aml-build.h"
->  #include "qapi/qapi-visit-common.h"
-> +#include "hw/misc/riscv_iopmp.h"
-> +#include "hw/dma/atcdmac300.h"
->
->  /*
->   * The virt machine physical address space used by some of the devices
-> @@ -97,6 +99,9 @@ static const MemMapEntry virt_memmap[] =3D {
->      [VIRT_UART0] =3D        { 0x10000000,         0x100 },
->      [VIRT_VIRTIO] =3D       { 0x10001000,        0x1000 },
->      [VIRT_FW_CFG] =3D       { 0x10100000,          0x18 },
-> +    [VIRT_IOPMP] =3D        { 0x10200000,      0x100000 },
-> +    [VIRT_IOPMP2] =3D       { 0x10300000,      0x100000 },
-> +    [VIRT_DMAC] =3D         { 0x10400000,      0x100000 },
->      [VIRT_FLASH] =3D        { 0x20000000,     0x4000000 },
->      [VIRT_IMSIC_M] =3D      { 0x24000000, VIRT_IMSIC_MAX_SIZE },
->      [VIRT_IMSIC_S] =3D      { 0x28000000, VIRT_IMSIC_MAX_SIZE },
-> @@ -1527,13 +1532,33 @@ static void virt_machine_init(MachineState *machi=
-ne)
->
->      create_platform_bus(s, mmio_irqchip);
->
-> -    serial_mm_init(system_memory, memmap[VIRT_UART0].base,
-> -        0, qdev_get_gpio_in(mmio_irqchip, UART0_IRQ), 399193,
-> +    serial_mm_init(system_memory, memmap[VIRT_UART0].base + 0x20,
-> +        0x2, qdev_get_gpio_in(mmio_irqchip, UART0_IRQ), 38400,
->          serial_hd(0), DEVICE_LITTLE_ENDIAN);
->
->      sysbus_create_simple("goldfish_rtc", memmap[VIRT_RTC].base,
->          qdev_get_gpio_in(mmio_irqchip, RTC_IRQ));
->
-> +    /* DMAC */
-> +    DeviceState *dmac_dev =3D atcdmac300_create("atcdmac300",
-> +        memmap[VIRT_DMAC].base, memmap[VIRT_DMAC].size,
-> +        qdev_get_gpio_in(DEVICE(mmio_irqchip), DMAC_IRQ));
-> +
-> +    if (s->have_iopmp) {
-> +        /* IOPMP */
-> +        DeviceState *iopmp_dev =3D iopmp_create(memmap[VIRT_IOPMP].base,
-> +            qdev_get_gpio_in(DEVICE(mmio_irqchip), IOPMP_IRQ));
-> +        /* DMA with IOPMP */
-> +        atcdmac300_connect_iopmp(dmac_dev, &(IOPMP(iopmp_dev)->iopmp_as)=
-,
-> +            (StreamSink *)&(IOPMP(iopmp_dev)->transaction_info_sink), 0)=
-;
-> +        if (s->have_iopmp_cascade) {
-> +            DeviceState *iopmp_dev2 =3D iopmp_create(memmap[VIRT_IOPMP2]=
-.base,
-> +                qdev_get_gpio_in(DEVICE(mmio_irqchip), IOPMP2_IRQ));
-> +            cascade_iopmp(iopmp_dev, iopmp_dev2);
-> +        }
-> +    }
-> +
-> +
->      for (i =3D 0; i < ARRAY_SIZE(s->flash); i++) {
->          /* Map legacy -drive if=3Dpflash to machine properties */
->          pflash_cfi01_legacy_drive(s->flash[i],
-> @@ -1628,6 +1653,35 @@ static void virt_set_aclint(Object *obj, bool valu=
-e, Error **errp)
->      s->have_aclint =3D value;
->  }
->
-> +static bool virt_get_iopmp(Object *obj, Error **errp)
-> +{
-> +    RISCVVirtState *s =3D RISCV_VIRT_MACHINE(obj);
-> +
-> +    return s->have_iopmp;
-> +}
-> +
-> +static void virt_set_iopmp(Object *obj, bool value, Error **errp)
-> +{
-> +    RISCVVirtState *s =3D RISCV_VIRT_MACHINE(obj);
-> +
-> +    s->have_iopmp =3D value;
-> +}
-> +
-> +static bool virt_get_iopmp_cascade(Object *obj, Error **errp)
-> +{
-> +    RISCVVirtState *s =3D RISCV_VIRT_MACHINE(obj);
-> +
-> +    return s->have_iopmp_cascade;
-> +}
-> +
-> +static void virt_set_iopmp_cascade(Object *obj, bool value, Error **errp=
-)
-> +{
-> +    RISCVVirtState *s =3D RISCV_VIRT_MACHINE(obj);
-> +
-> +    s->have_iopmp_cascade =3D value;
-> +}
-> +
-> +
->  bool virt_is_acpi_enabled(RISCVVirtState *s)
->  {
->      return s->acpi !=3D ON_OFF_AUTO_OFF;
-> @@ -1730,6 +1784,20 @@ static void virt_machine_class_init(ObjectClass *o=
-c, void *data)
->                                NULL, NULL);
->      object_class_property_set_description(oc, "acpi",
->                                            "Enable ACPI");
-> +
-> +    object_class_property_add_bool(oc, "iopmp", virt_get_iopmp,
-> +                                   virt_set_iopmp);
-> +    object_class_property_set_description(oc, "iopmp",
-> +                                          "Set on/off to enable/disable =
-"
-> +                                          "iopmp device");
-> +
-> +    object_class_property_add_bool(oc, "iopmp-cascade",
-> +                                   virt_get_iopmp_cascade,
-> +                                   virt_set_iopmp_cascade);
-> +    object_class_property_set_description(oc, "iopmp-cascade",
-> +                                          "Set on/off to enable/disable =
-"
-> +                                          "iopmp2 device which is cascad=
-ed by "
-> +                                          "iopmp1 device");
->  }
->
->  static const TypeInfo virt_machine_typeinfo =3D {
-> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-> index e5c474b26e..5fa2944d29 100644
-> --- a/include/hw/riscv/virt.h
-> +++ b/include/hw/riscv/virt.h
-> @@ -54,6 +54,8 @@ struct RISCVVirtState {
->
->      int fdt_size;
->      bool have_aclint;
-> +    bool have_iopmp;
-> +    bool have_iopmp_cascade;
->      RISCVVirtAIAType aia_type;
->      int aia_guests;
->      char *oem_id;
-> @@ -82,12 +84,18 @@ enum {
->      VIRT_PCIE_MMIO,
->      VIRT_PCIE_PIO,
->      VIRT_PLATFORM_BUS,
-> -    VIRT_PCIE_ECAM
-> +    VIRT_PCIE_ECAM,
-> +    VIRT_IOPMP,
-> +    VIRT_IOPMP2,
-> +    VIRT_DMAC,
->  };
->
->  enum {
->      UART0_IRQ =3D 10,
->      RTC_IRQ =3D 11,
-> +    DMAC_IRQ =3D 12,
-> +    IOPMP_IRQ =3D 13,
-> +    IOPMP2_IRQ =3D 14,
->      VIRTIO_IRQ =3D 1, /* 1 to 8 */
->      VIRTIO_COUNT =3D 8,
->      PCIE_IRQ =3D 0x20, /* 32 to 35 */
+>  system_ss.add(files(
+>    'cpu-sysemu.c',
 > --
 > 2.34.1
 >
