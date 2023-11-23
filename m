@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2051AC5AD4C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Nov 2023 10:14:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BA1BC5AD4C
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Nov 2023 10:22:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r66iU-0007YN-I3; Thu, 23 Nov 2023 05:13:50 -0500
+	id 1r66q5-0002Nl-Bn; Thu, 23 Nov 2023 05:21:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1r66iS-0007Xm-Va
- for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 05:13:48 -0500
-Received: from mail-oi1-x22e.google.com ([2607:f8b0:4864:20::22e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r66q4-0002NZ-Hp
+ for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 05:21:40 -0500
+Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1r66iQ-0000fG-0X
- for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 05:13:48 -0500
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-3b4145e887bso425960b6e.3
- for <qemu-riscv@nongnu.org>; Thu, 23 Nov 2023 02:13:45 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r66q1-00022y-Co
+ for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 05:21:40 -0500
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-332e3664665so236204f8f.0
+ for <qemu-riscv@nongnu.org>; Thu, 23 Nov 2023 02:21:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1700734424; x=1701339224; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=TBb8nbzEKb8jgIQUZRuFfiQuRX/arJLmU3ecrGkf2gw=;
- b=OAJkLAD2PErcxHuoOk9a/A8Ve8ntfgkHiklbeP43uUXeFqcAC9Trs0+FT3BdDTOduQ
- ORBgeFPYZIG2DkzfXLTfF6Jd6Oo1AqrqrIhDlrSz3/Jy1DNDeO6daHzQIjD+qJ528qZv
- AhDg0lIDhWMcRhZbJGEIlT2xFTxc8NHw8zsBXSsdKOa+6zUw2hg6t6U5QMQmJz+FM2+3
- JwDf+8sng71ncWrxKJvvyd5lVcj01TdJDEpz/4UIdmAZ5ilw2W2N/moykGk7gp/DjH1g
- IaCgMqcIM6JrcnZaaaFOibK5r6Uetzd9dLm+5hH+5TuDPzw2XXk0Z7WdubCkXUYEfhEL
- yubw==
+ d=linaro.org; s=google; t=1700734896; x=1701339696; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=kUQC8xhTq5RfOEMvOZ0M18fUGG+Lr230MwcRRy8FYgc=;
+ b=dh5xRXrFxufbj8eYauvxZ0VA3Y87cB0YL3b2cqdRmKyT84+JE6UfPrx6XIoCs953RK
+ juizEYdHcQJ1yuXJSS5p6uds2vDUqNPPuMxKMiKWIjxc/Y2LBXYoB2Qy9n2rMTsFDfoS
+ M6JRFY89zk01eQgShLuV2ZhwKpKORbZkHcbJ0fy5NndMr06iuB7F+2rhxJHEfb9fOlTO
+ S76MAZPWRXZkOjCnSS/a+9DVVng4wwQybS8qPH5fmuiIr6mwC52rY/aNB7jy/xkEn2cm
+ C7/iMFGtJHbXoD2QrJRxpubBrrhececCBL4MGR20evVC3tf/CNWWVRuO9YKl065PcOI3
+ ustg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700734424; x=1701339224;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=TBb8nbzEKb8jgIQUZRuFfiQuRX/arJLmU3ecrGkf2gw=;
- b=VUdCJDaWmImgTN/WSqfL7WQ+WQfm6ZsaQEShNe0K7mpjP0ySkPxSNji3vyIj0e+3ta
- dKtEk3/3oABicdAdsrye2LbqCri9D3ckb3VKwU41y8+jSXhUM9DVtMmE5d3xi47Hs0do
- NCpK6+SyMZKuD4yTLa+iTdc4uskGI9Ier/hpr5uaIQk/4c0F/O4onXdvZyRE5ctpMa2t
- 1C1GQpDxkmRScH/FZFycNbVxTOuBWaOW6Q2hExVnsw7buLh95MWajd7YYiuWsiHIoJby
- iKnqhSkhSBPTOQ3c1ZS5bbfApZhcpbpKbyVb8pW+imyA6idgA3Mh8YgSoj52YsU7ld47
- GYRw==
-X-Gm-Message-State: AOJu0Yy0kcPMONLucjfFD0VmFuQF7ndahnzsBkohZAzgNz96vq97l7Oa
- j/ixjuQKKIRcQmzH4eWvn4YVtQ==
-X-Google-Smtp-Source: AGHT+IHJ/eo4vMr93VkSHqzLzvKMb6PB24N/ldpk8bJjH5ZfVzdVvwwWYC3vl31xx1f1v1HPzLACUw==
-X-Received: by 2002:a05:6808:191e:b0:3b8:4cec:de9b with SMTP id
- bf30-20020a056808191e00b003b84cecde9bmr1055542oib.3.1700734424319; 
- Thu, 23 Nov 2023 02:13:44 -0800 (PST)
-Received: from grind.dc1.ventanamicro.com ([152.250.131.119])
+ d=1e100.net; s=20230601; t=1700734896; x=1701339696;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=kUQC8xhTq5RfOEMvOZ0M18fUGG+Lr230MwcRRy8FYgc=;
+ b=J5LZC5GWjQQlkc+hObxe1xXDgWCBcse3Rploe+3X+dRNlKIYAMF7TjmfgiehDAM+/Z
+ jIMbJ1FMkVJZwDNHuqX/l/UcxRvoFKTfIDzxmFPcgv71fjfQ3ioTfdxAhaTlC5e5Ldo5
+ mvTe1hwQ5iWecys8evJgVm+1KHoG13dNx7JeTK6kv9B68/Fb2uH9VQgIKGNrFNUi0J4V
+ B9nPjYRsodWg6se2CKAx2GSLGjmFPHzKV9odCdZIphwucXVkHiCAe0g+P7gAZ/Tvam0s
+ hGdlsVGcHoCvQUmHVe+pteN7RIaEfeNifBq6w3RGm4WMPv1ga83V7C+us7+7GzYKXKpT
+ MWQQ==
+X-Gm-Message-State: AOJu0YzLc0Vf+vuIyKW+yGGeiXBtSBmFmEU7S6GMAu3F630aG05oyp1B
+ HBbYteqfnqsQZet6uQSn5odq2g==
+X-Google-Smtp-Source: AGHT+IG5PMoyBXYTKHCwhRUVvWLhAEG9Wv+F69BSvt5i9a4xLaZoAng6G6JmO8RwBFk4nGo79TypTg==
+X-Received: by 2002:a5d:6da7:0:b0:332:c3e1:763b with SMTP id
+ u7-20020a5d6da7000000b00332c3e1763bmr4140699wrs.45.1700734895784; 
+ Thu, 23 Nov 2023 02:21:35 -0800 (PST)
+Received: from [192.168.69.100] ([176.176.165.237])
  by smtp.gmail.com with ESMTPSA id
- e13-20020a631e0d000000b0057c44503835sm970665pge.65.2023.11.23.02.13.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Nov 2023 02:13:43 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH for-8.2] target/riscv/kvm: fix shadowing in
- kvm_riscv_(get|put)_regs_csr
-Date: Thu, 23 Nov 2023 07:13:38 -0300
-Message-ID: <20231123101338.1040134-1-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.41.0
+ dm16-20020a0560000bd000b00332cb4697ebsm1266453wrb.55.2023.11.23.02.21.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 23 Nov 2023 02:21:35 -0800 (PST)
+Message-ID: <50795130-6a02-4611-8da7-c06158fc9cff@linaro.org>
+Date: Thu, 23 Nov 2023 11:21:33 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22e.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] RISC-V: Increase max vlen to 4096
+Content-Language: en-US
+To: Patrick O'Neill <patrick@rivosinc.com>, qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org
+References: <20231123001709.64934-1-patrick@rivosinc.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20231123001709.64934-1-patrick@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -94,112 +93,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-KVM_RISCV_GET_CSR() and KVM_RISCV_SET_CSR() use an 'int ret' variable
-that is used to do an early 'return' if ret > 0. Both are being called
-in functions that are also declaring a 'ret' integer, initialized with
-'0', and this integer is used as return of the function.
+Hi Patrick,
 
-The result is that the compiler is less than pleased and is pointing
-shadowing errors:
+On 23/11/23 01:17, Patrick O'Neill wrote:
+> QEMU currently limits the max vlenb to 1024. GCC sets the upper bound
+> to 4096 [1]. There doesn't seem to be an upper bound set by the spec [2]
+> so this patch just changes QEMU to match GCC's upper bound.
+> 
+> [1] https://github.com/gcc-mirror/gcc/blob/5d2a360f0a541646abb11efdbabc33c6a04de7ee/gcc/testsuite/gcc.target/riscv/rvv/base/zvl-unimplemented-2.c#L4
+> [2] https://github.com/riscv/riscv-v-spec/issues/204
+> 
+> Signed-off-by: Patrick O'Neill <patrick@rivosinc.com>
+> ---
+> Tested by applying to QEMU v8.1.2 and running the GCC testsuite in QEMU
+> user mode with rv64gcv_zvl4096b. Failures are somewhat reasonable and on
+> first inspection appear to be in the same ballpark as failures for
+> rv64gcv_zvl1024b. Since I used tip-of-tree GCC I'm expecting those
+> failures to be GCC-caused & from skimming the debug log they appear to
+> be.
+> ---
+>   target/riscv/cpu.h | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 6ea22e0eea..2ff3a72fc0 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -97,7 +97,7 @@ typedef enum {
+>   #include "debug.h"
+>   #endif
+> 
+> -#define RV_VLEN_MAX 1024
+> +#define RV_VLEN_MAX 4096
 
-../target/riscv/kvm/kvm-cpu.c: In function 'kvm_riscv_get_regs_csr':
-../target/riscv/kvm/kvm-cpu.c:90:13: error: declaration of 'ret' shadows a previous local [-Werror=shadow=compatible-local]
-   90 |         int ret = kvm_get_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
-      |             ^~~
-../target/riscv/kvm/kvm-cpu.c:539:5: note: in expansion of macro 'KVM_RISCV_GET_CSR'
-  539 |     KVM_RISCV_GET_CSR(cs, env, sstatus, env->mstatus);
-      |     ^~~~~~~~~~~~~~~~~
-../target/riscv/kvm/kvm-cpu.c:536:9: note: shadowed declaration is here
-  536 |     int ret = 0;
-      |         ^~~
+This seems to break the "cpu/vector" field migration. Maybe we don't
+care, but this should be clarified in the commit description.
 
-../target/riscv/kvm/kvm-cpu.c: In function 'kvm_riscv_put_regs_csr':
-../target/riscv/kvm/kvm-cpu.c:98:13: error: declaration of 'ret' shadows a previous local [-Werror=shadow=compatible-local]
-   98 |         int ret = kvm_set_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
-      |             ^~~
-../target/riscv/kvm/kvm-cpu.c:556:5: note: in expansion of macro 'KVM_RISCV_SET_CSR'
-  556 |     KVM_RISCV_SET_CSR(cs, env, sstatus, env->mstatus);
-      |     ^~~~~~~~~~~~~~~~~
-../target/riscv/kvm/kvm-cpu.c:553:9: note: shadowed declaration is here
-  553 |     int ret = 0;
-      |         ^~~
+Regards,
 
-The macros are doing early returns for non-zero returns and the local
-'ret' variable for both functions is used just to do 'return 0', so
-remove them from kvm_riscv_get_regs_csr() and kvm_riscv_put_regs_csr()
-and do a straight 'return 0' in the end.
-
-For good measure let's also rename the 'ret' variables in
-KVM_RISCV_GET_CSR() and KVM_RISCV_SET_CSR() to '_ret' to make them more
-resilient to these kind of errors.
-
-Fixes: 937f0b4512 ("target/riscv: Implement kvm_arch_get_registers")
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/kvm/kvm-cpu.c | 19 +++++++++----------
- 1 file changed, 9 insertions(+), 10 deletions(-)
-
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 78fa1fa162..45b6cf1cfa 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -87,17 +87,17 @@ static uint64_t kvm_riscv_reg_id(CPURISCVState *env, uint64_t type,
- 
- #define KVM_RISCV_GET_CSR(cs, env, csr, reg) \
-     do { \
--        int ret = kvm_get_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
--        if (ret) { \
--            return ret; \
-+        int _ret = kvm_get_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
-+        if (_ret) { \
-+            return _ret; \
-         } \
-     } while (0)
- 
- #define KVM_RISCV_SET_CSR(cs, env, csr, reg) \
-     do { \
--        int ret = kvm_set_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
--        if (ret) { \
--            return ret; \
-+        int _ret = kvm_set_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
-+        if (_ret) { \
-+            return _ret; \
-         } \
-     } while (0)
- 
-@@ -533,7 +533,6 @@ static int kvm_riscv_put_regs_core(CPUState *cs)
- 
- static int kvm_riscv_get_regs_csr(CPUState *cs)
- {
--    int ret = 0;
-     CPURISCVState *env = &RISCV_CPU(cs)->env;
- 
-     KVM_RISCV_GET_CSR(cs, env, sstatus, env->mstatus);
-@@ -545,12 +544,12 @@ static int kvm_riscv_get_regs_csr(CPUState *cs)
-     KVM_RISCV_GET_CSR(cs, env, stval, env->stval);
-     KVM_RISCV_GET_CSR(cs, env, sip, env->mip);
-     KVM_RISCV_GET_CSR(cs, env, satp, env->satp);
--    return ret;
-+
-+    return 0;
- }
- 
- static int kvm_riscv_put_regs_csr(CPUState *cs)
- {
--    int ret = 0;
-     CPURISCVState *env = &RISCV_CPU(cs)->env;
- 
-     KVM_RISCV_SET_CSR(cs, env, sstatus, env->mstatus);
-@@ -563,7 +562,7 @@ static int kvm_riscv_put_regs_csr(CPUState *cs)
-     KVM_RISCV_SET_CSR(cs, env, sip, env->mip);
-     KVM_RISCV_SET_CSR(cs, env, satp, env->satp);
- 
--    return ret;
-+    return 0;
- }
- 
- static int kvm_riscv_get_regs_fp(CPUState *cs)
--- 
-2.41.0
+Phil.
 
 
