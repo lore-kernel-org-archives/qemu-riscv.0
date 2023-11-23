@@ -4,80 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BA1BC5AD4C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Nov 2023 10:22:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 633E5C61D85
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Nov 2023 10:23:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r66q5-0002Nl-Bn; Thu, 23 Nov 2023 05:21:41 -0500
+	id 1r66s0-0003D1-88; Thu, 23 Nov 2023 05:23:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r66q4-0002NZ-Hp
- for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 05:21:40 -0500
-Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r66rz-0003CX-51
+ for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 05:23:39 -0500
+Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r66q1-00022y-Co
- for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 05:21:40 -0500
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-332e3664665so236204f8f.0
- for <qemu-riscv@nongnu.org>; Thu, 23 Nov 2023 02:21:36 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r66rx-0002lV-Ga
+ for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 05:23:38 -0500
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-40b27b498c3so4640405e9.0
+ for <qemu-riscv@nongnu.org>; Thu, 23 Nov 2023 02:23:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700734896; x=1701339696; darn=nongnu.org;
+ d=linaro.org; s=google; t=1700735016; x=1701339816; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=kUQC8xhTq5RfOEMvOZ0M18fUGG+Lr230MwcRRy8FYgc=;
- b=dh5xRXrFxufbj8eYauvxZ0VA3Y87cB0YL3b2cqdRmKyT84+JE6UfPrx6XIoCs953RK
- juizEYdHcQJ1yuXJSS5p6uds2vDUqNPPuMxKMiKWIjxc/Y2LBXYoB2Qy9n2rMTsFDfoS
- M6JRFY89zk01eQgShLuV2ZhwKpKORbZkHcbJ0fy5NndMr06iuB7F+2rhxJHEfb9fOlTO
- S76MAZPWRXZkOjCnSS/a+9DVVng4wwQybS8qPH5fmuiIr6mwC52rY/aNB7jy/xkEn2cm
- C7/iMFGtJHbXoD2QrJRxpubBrrhececCBL4MGR20evVC3tf/CNWWVRuO9YKl065PcOI3
- ustg==
+ bh=BQXlq2DBaRvDl0dUwf6hitoVzbMvjzP4AsQvCnP7xJc=;
+ b=R6BtQrTmj0nKyRSUcUZNRmKnn8JMRjOnOEiGG7rxecv2dEpq1GGpJiNXKG1P31i0ie
+ QYKuGFEOwgmfvSKiLQV7zWU4/dY5K7hprcq4uQU9zLCDm9zwoCx+X5Qm9qb41NxcEYTM
+ ZJREiIrB3LA7ONPXs8LOpbRH886JXRzQFwVwDmdeHMek5ZeB4lrEK/WzmGxJkN8AcPxP
+ dNduG7yU7r0IpwOl8j78N6dhnNMccaYUP1Tr5NeiY7VkEAMcxMmF4UWLKeSd9vIFTWk2
+ cfwx1a0kdD8qXi1TQ+8sOHQM/yedZV38BIKzta+Zb8oQRnw30t/2ClJIsg9e81KoRHbL
+ ct7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700734896; x=1701339696;
+ d=1e100.net; s=20230601; t=1700735016; x=1701339816;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=kUQC8xhTq5RfOEMvOZ0M18fUGG+Lr230MwcRRy8FYgc=;
- b=J5LZC5GWjQQlkc+hObxe1xXDgWCBcse3Rploe+3X+dRNlKIYAMF7TjmfgiehDAM+/Z
- jIMbJ1FMkVJZwDNHuqX/l/UcxRvoFKTfIDzxmFPcgv71fjfQ3ioTfdxAhaTlC5e5Ldo5
- mvTe1hwQ5iWecys8evJgVm+1KHoG13dNx7JeTK6kv9B68/Fb2uH9VQgIKGNrFNUi0J4V
- B9nPjYRsodWg6se2CKAx2GSLGjmFPHzKV9odCdZIphwucXVkHiCAe0g+P7gAZ/Tvam0s
- hGdlsVGcHoCvQUmHVe+pteN7RIaEfeNifBq6w3RGm4WMPv1ga83V7C+us7+7GzYKXKpT
- MWQQ==
-X-Gm-Message-State: AOJu0YzLc0Vf+vuIyKW+yGGeiXBtSBmFmEU7S6GMAu3F630aG05oyp1B
- HBbYteqfnqsQZet6uQSn5odq2g==
-X-Google-Smtp-Source: AGHT+IG5PMoyBXYTKHCwhRUVvWLhAEG9Wv+F69BSvt5i9a4xLaZoAng6G6JmO8RwBFk4nGo79TypTg==
-X-Received: by 2002:a5d:6da7:0:b0:332:c3e1:763b with SMTP id
- u7-20020a5d6da7000000b00332c3e1763bmr4140699wrs.45.1700734895784; 
- Thu, 23 Nov 2023 02:21:35 -0800 (PST)
+ bh=BQXlq2DBaRvDl0dUwf6hitoVzbMvjzP4AsQvCnP7xJc=;
+ b=vpxgLlhYkDy30SWTN8JDyRnvxBj19IOT86dxApY9se88kJejr1GK2Vz2UmmtoO0Ji7
+ F5LjmY/clA9p6XJX4YScFUMB2N9oTWpHWBM/BmGiS7AmOdA/k1BpFTezEaO1GAmeBIUt
+ agDi/oOkMqAMR/OzFICzcnID+C79ZLIS8bSQ7PkyqzTyqig5ZGECnLPql+T77MyxrY9/
+ WaU0dhc1elTxMcoEhQ3scwDvThRDWvqjY7NsrPBuXoMnYlu5a0zzp7wYASsl1eAAkxvS
+ iT+RgGm6bSwrXo8v9Wo0TrCoguYJ/dQdASsAGY0rmwnIuLFZZvgQlySM0uvcFr7d1t8t
+ Ujlw==
+X-Gm-Message-State: AOJu0YzCWIyL+4/8l9099iCZktT/lAZtqA8E6FhEX5smCh87ABoHJmKe
+ WTJcWLDoWBd6nYMjNtA4vybuuN3iGaAFea3RNTs=
+X-Google-Smtp-Source: AGHT+IEemMFpGEFEPgsAp7CH2cAZXG0zxAZgZvKV9H81rmOvRXXj+yTnDHlcQN9feY6l8KiIhCVTrg==
+X-Received: by 2002:a05:600c:5250:b0:409:1841:3f42 with SMTP id
+ fc16-20020a05600c525000b0040918413f42mr3625320wmb.13.1700735015882; 
+ Thu, 23 Nov 2023 02:23:35 -0800 (PST)
 Received: from [192.168.69.100] ([176.176.165.237])
  by smtp.gmail.com with ESMTPSA id
- dm16-20020a0560000bd000b00332cb4697ebsm1266453wrb.55.2023.11.23.02.21.34
+ 24-20020a05600c231800b0040b36050f1bsm1464159wmo.44.2023.11.23.02.23.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Nov 2023 02:21:35 -0800 (PST)
-Message-ID: <50795130-6a02-4611-8da7-c06158fc9cff@linaro.org>
-Date: Thu, 23 Nov 2023 11:21:33 +0100
+ Thu, 23 Nov 2023 02:23:35 -0800 (PST)
+Message-ID: <5cb07d83-934d-4db0-8fee-3146f3751743@linaro.org>
+Date: Thu, 23 Nov 2023 11:23:33 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] RISC-V: Increase max vlen to 4096
+Subject: Re: [PATCH for-8.2] target/riscv/kvm: fix shadowing in
+ kvm_riscv_(get|put)_regs_csr
 Content-Language: en-US
-To: Patrick O'Neill <patrick@rivosinc.com>, qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org
-References: <20231123001709.64934-1-patrick@rivosinc.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ ajones@ventanamicro.com
+References: <20231123101338.1040134-1-dbarboza@ventanamicro.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20231123001709.64934-1-patrick@rivosinc.com>
+In-Reply-To: <20231123101338.1040134-1-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42b.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -93,44 +96,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Patrick,
+On 23/11/23 11:13, Daniel Henrique Barboza wrote:
+> KVM_RISCV_GET_CSR() and KVM_RISCV_SET_CSR() use an 'int ret' variable
+> that is used to do an early 'return' if ret > 0. Both are being called
+> in functions that are also declaring a 'ret' integer, initialized with
+> '0', and this integer is used as return of the function.
+> 
+> The result is that the compiler is less than pleased and is pointing
+> shadowing errors:
+> 
+> ../target/riscv/kvm/kvm-cpu.c: In function 'kvm_riscv_get_regs_csr':
+> ../target/riscv/kvm/kvm-cpu.c:90:13: error: declaration of 'ret' shadows a previous local [-Werror=shadow=compatible-local]
+>     90 |         int ret = kvm_get_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
+>        |             ^~~
+> ../target/riscv/kvm/kvm-cpu.c:539:5: note: in expansion of macro 'KVM_RISCV_GET_CSR'
+>    539 |     KVM_RISCV_GET_CSR(cs, env, sstatus, env->mstatus);
+>        |     ^~~~~~~~~~~~~~~~~
+> ../target/riscv/kvm/kvm-cpu.c:536:9: note: shadowed declaration is here
+>    536 |     int ret = 0;
 
-On 23/11/23 01:17, Patrick O'Neill wrote:
-> QEMU currently limits the max vlenb to 1024. GCC sets the upper bound
-> to 4096 [1]. There doesn't seem to be an upper bound set by the spec [2]
-> so this patch just changes QEMU to match GCC's upper bound.
+
+> The macros are doing early returns for non-zero returns and the local
+> 'ret' variable for both functions is used just to do 'return 0', so
+> remove them from kvm_riscv_get_regs_csr() and kvm_riscv_put_regs_csr()
+> and do a straight 'return 0' in the end.
 > 
-> [1] https://github.com/gcc-mirror/gcc/blob/5d2a360f0a541646abb11efdbabc33c6a04de7ee/gcc/testsuite/gcc.target/riscv/rvv/base/zvl-unimplemented-2.c#L4
-> [2] https://github.com/riscv/riscv-v-spec/issues/204
+> For good measure let's also rename the 'ret' variables in
+> KVM_RISCV_GET_CSR() and KVM_RISCV_SET_CSR() to '_ret' to make them more
+> resilient to these kind of errors.
 > 
-> Signed-off-by: Patrick O'Neill <patrick@rivosinc.com>
+> Fixes: 937f0b4512 ("target/riscv: Implement kvm_arch_get_registers")
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > ---
-> Tested by applying to QEMU v8.1.2 and running the GCC testsuite in QEMU
-> user mode with rv64gcv_zvl4096b. Failures are somewhat reasonable and on
-> first inspection appear to be in the same ballpark as failures for
-> rv64gcv_zvl1024b. Since I used tip-of-tree GCC I'm expecting those
-> failures to be GCC-caused & from skimming the debug log they appear to
-> be.
-> ---
->   target/riscv/cpu.h | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 6ea22e0eea..2ff3a72fc0 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -97,7 +97,7 @@ typedef enum {
->   #include "debug.h"
->   #endif
-> 
-> -#define RV_VLEN_MAX 1024
-> +#define RV_VLEN_MAX 4096
+>   target/riscv/kvm/kvm-cpu.c | 19 +++++++++----------
+>   1 file changed, 9 insertions(+), 10 deletions(-)
 
-This seems to break the "cpu/vector" field migration. Maybe we don't
-care, but this should be clarified in the commit description.
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
-Regards,
-
-Phil.
 
 
