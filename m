@@ -4,66 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 769C3C5AD4C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Nov 2023 09:12:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2051AC5AD4C
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Nov 2023 10:14:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r65lB-000600-BB; Thu, 23 Nov 2023 04:12:33 -0500
+	id 1r66iU-0007YN-I3; Thu, 23 Nov 2023 05:13:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ivan.klokov@syntacore.com>)
- id 1r65l8-0005zL-NV; Thu, 23 Nov 2023 04:12:31 -0500
-Received: from mta-04.yadro.com ([89.207.88.248])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ivan.klokov@syntacore.com>)
- id 1r65l6-0000FN-Mo; Thu, 23 Nov 2023 04:12:30 -0500
-DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com E5E77C0002
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-04; t=1700730742;
- bh=fqEB+XnNjzwadFp8pdCn5WUq1BZ6k0jmhu3L43yvSic=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=etyAY4R+iwNm3UWn3j24y7hpeE96602E45SAlSwl7CEMlCM+HKTvFu0QlMhEo9eAm
- bJvi5Ht+HeKYNibMreLNfENG22Etv3zQVmYcgSGzEY5STe180OqQrKlSU551lh+BUm
- qo3+mPQnAavuvU/eKoFgKm39zXT9cGWCPl65yDx577rS+ktn7BPtcxIZr9z0HXvNa0
- EFXMnq+LqkIaUVDIY2GFyc5ak7rMis8gijgNe79KeqBOVCMULoCQr8W/kVoGSWKFIF
- 4PqRgOtmyYyZ9CyB2mvkCxgr+h4lJsO47QKv1VW4+p24TwnoBoPFdtsXyvymY+XNvF
- 2Fg8j0tB11cvQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-03; t=1700730742;
- bh=fqEB+XnNjzwadFp8pdCn5WUq1BZ6k0jmhu3L43yvSic=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=evxafABYS3lPm4QePdidDwPAbjP2pE0PieXUuYN67/TmH1oZyMGsu6dQ5OjJlvZ2F
- zoYbGflkjbGPpjrdvCHI8V/H94m8a6dYQVZCFEzCKl1FS9JbsQ6XWf0grEeKtz8Z7a
- p4QPsCfuJ0xSNlMbD9UELN++GGAp4y2vgV2JeSVHrJETE52XNkRzVu3dpmIBWQP3Ig
- Ubrdes36OWdETcokWXZI/6DuK2vbE0CTcf8mABSlid5YquJrjJhdVqJoNnvGDArGnr
- 6HJnmW23yPRBMBGUwy8yKJPZxj7nIWJZe3hXNE7vMaeV4VZBh+lvsRLkN6zNQ2eaXI
- REF2opX/IW7zA==
-From: Ivan Klokov <ivan.klokov@syntacore.com>
-To: <qemu-devel@nongnu.org>
-CC: <qemu-riscv@nongnu.org>, <palmer@dabbelt.com>, <alistair.francis@wdc.com>, 
- <bin.meng@windriver.com>, <liwei1518@gmail.com>,
- <dbarboza@ventanamicro.com>, 
- <zhiwei_liu@linux.alibaba.com>, Ivan Klokov <ivan.klokov@syntacore.com>
-Subject: [PATCH 1/1] target/riscv/pmp: Use hwaddr instead of target_ulong for
- RV32
-Date: Thu, 23 Nov 2023 12:12:14 +0300
-Message-ID: <20231123091214.20312-1-ivan.klokov@syntacore.com>
-X-Mailer: git-send-email 2.34.1
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1r66iS-0007Xm-Va
+ for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 05:13:48 -0500
+Received: from mail-oi1-x22e.google.com ([2607:f8b0:4864:20::22e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1r66iQ-0000fG-0X
+ for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 05:13:48 -0500
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-3b4145e887bso425960b6e.3
+ for <qemu-riscv@nongnu.org>; Thu, 23 Nov 2023 02:13:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1700734424; x=1701339224; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=TBb8nbzEKb8jgIQUZRuFfiQuRX/arJLmU3ecrGkf2gw=;
+ b=OAJkLAD2PErcxHuoOk9a/A8Ve8ntfgkHiklbeP43uUXeFqcAC9Trs0+FT3BdDTOduQ
+ ORBgeFPYZIG2DkzfXLTfF6Jd6Oo1AqrqrIhDlrSz3/Jy1DNDeO6daHzQIjD+qJ528qZv
+ AhDg0lIDhWMcRhZbJGEIlT2xFTxc8NHw8zsBXSsdKOa+6zUw2hg6t6U5QMQmJz+FM2+3
+ JwDf+8sng71ncWrxKJvvyd5lVcj01TdJDEpz/4UIdmAZ5ilw2W2N/moykGk7gp/DjH1g
+ IaCgMqcIM6JrcnZaaaFOibK5r6Uetzd9dLm+5hH+5TuDPzw2XXk0Z7WdubCkXUYEfhEL
+ yubw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700734424; x=1701339224;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TBb8nbzEKb8jgIQUZRuFfiQuRX/arJLmU3ecrGkf2gw=;
+ b=VUdCJDaWmImgTN/WSqfL7WQ+WQfm6ZsaQEShNe0K7mpjP0ySkPxSNji3vyIj0e+3ta
+ dKtEk3/3oABicdAdsrye2LbqCri9D3ckb3VKwU41y8+jSXhUM9DVtMmE5d3xi47Hs0do
+ NCpK6+SyMZKuD4yTLa+iTdc4uskGI9Ier/hpr5uaIQk/4c0F/O4onXdvZyRE5ctpMa2t
+ 1C1GQpDxkmRScH/FZFycNbVxTOuBWaOW6Q2hExVnsw7buLh95MWajd7YYiuWsiHIoJby
+ iKnqhSkhSBPTOQ3c1ZS5bbfApZhcpbpKbyVb8pW+imyA6idgA3Mh8YgSoj52YsU7ld47
+ GYRw==
+X-Gm-Message-State: AOJu0Yy0kcPMONLucjfFD0VmFuQF7ndahnzsBkohZAzgNz96vq97l7Oa
+ j/ixjuQKKIRcQmzH4eWvn4YVtQ==
+X-Google-Smtp-Source: AGHT+IHJ/eo4vMr93VkSHqzLzvKMb6PB24N/ldpk8bJjH5ZfVzdVvwwWYC3vl31xx1f1v1HPzLACUw==
+X-Received: by 2002:a05:6808:191e:b0:3b8:4cec:de9b with SMTP id
+ bf30-20020a056808191e00b003b84cecde9bmr1055542oib.3.1700734424319; 
+ Thu, 23 Nov 2023 02:13:44 -0800 (PST)
+Received: from grind.dc1.ventanamicro.com ([152.250.131.119])
+ by smtp.gmail.com with ESMTPSA id
+ e13-20020a631e0d000000b0057c44503835sm970665pge.65.2023.11.23.02.13.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 23 Nov 2023 02:13:43 -0800 (PST)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ ajones@ventanamicro.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH for-8.2] target/riscv/kvm: fix shadowing in
+ kvm_riscv_(get|put)_regs_csr
+Date: Thu, 23 Nov 2023 07:13:38 -0300
+Message-ID: <20231123101338.1040134-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: T-EXCH-06.corp.yadro.com (172.17.10.110) To
- S-Exch-01.corp.yadro.com (10.78.5.241)
-Received-SPF: permerror client-ip=89.207.88.248;
- envelope-from=ivan.klokov@syntacore.com; helo=mta-04.yadro.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::22e;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- T_SCC_BODY_TEXT_LINE=-0.01,
- T_SPF_PERMERROR=0.01 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -79,118 +94,112 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The Sv32 page-based virtual-memory scheme described in RISCV privileged
-spec Section 5.3 supports 34-bit physical addresses for RV32, so the
-PMP scheme must support addresses wider than XLEN for RV32. However,
-PMP address register format is still 32 bit wide.
+KVM_RISCV_GET_CSR() and KVM_RISCV_SET_CSR() use an 'int ret' variable
+that is used to do an early 'return' if ret > 0. Both are being called
+in functions that are also declaring a 'ret' integer, initialized with
+'0', and this integer is used as return of the function.
 
-Signed-off-by: Ivan Klokov <ivan.klokov@syntacore.com>
+The result is that the compiler is less than pleased and is pointing
+shadowing errors:
+
+../target/riscv/kvm/kvm-cpu.c: In function 'kvm_riscv_get_regs_csr':
+../target/riscv/kvm/kvm-cpu.c:90:13: error: declaration of 'ret' shadows a previous local [-Werror=shadow=compatible-local]
+   90 |         int ret = kvm_get_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
+      |             ^~~
+../target/riscv/kvm/kvm-cpu.c:539:5: note: in expansion of macro 'KVM_RISCV_GET_CSR'
+  539 |     KVM_RISCV_GET_CSR(cs, env, sstatus, env->mstatus);
+      |     ^~~~~~~~~~~~~~~~~
+../target/riscv/kvm/kvm-cpu.c:536:9: note: shadowed declaration is here
+  536 |     int ret = 0;
+      |         ^~~
+
+../target/riscv/kvm/kvm-cpu.c: In function 'kvm_riscv_put_regs_csr':
+../target/riscv/kvm/kvm-cpu.c:98:13: error: declaration of 'ret' shadows a previous local [-Werror=shadow=compatible-local]
+   98 |         int ret = kvm_set_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
+      |             ^~~
+../target/riscv/kvm/kvm-cpu.c:556:5: note: in expansion of macro 'KVM_RISCV_SET_CSR'
+  556 |     KVM_RISCV_SET_CSR(cs, env, sstatus, env->mstatus);
+      |     ^~~~~~~~~~~~~~~~~
+../target/riscv/kvm/kvm-cpu.c:553:9: note: shadowed declaration is here
+  553 |     int ret = 0;
+      |         ^~~
+
+The macros are doing early returns for non-zero returns and the local
+'ret' variable for both functions is used just to do 'return 0', so
+remove them from kvm_riscv_get_regs_csr() and kvm_riscv_put_regs_csr()
+and do a straight 'return 0' in the end.
+
+For good measure let's also rename the 'ret' variables in
+KVM_RISCV_GET_CSR() and KVM_RISCV_SET_CSR() to '_ret' to make them more
+resilient to these kind of errors.
+
+Fixes: 937f0b4512 ("target/riscv: Implement kvm_arch_get_registers")
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- target/riscv/pmp.c | 26 ++++++++++++--------------
- target/riscv/pmp.h |  8 ++++----
- 2 files changed, 16 insertions(+), 18 deletions(-)
+ target/riscv/kvm/kvm-cpu.c | 19 +++++++++----------
+ 1 file changed, 9 insertions(+), 10 deletions(-)
 
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 162e88a90a..dff9512c3f 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -150,8 +150,7 @@ void pmp_unlock_entries(CPURISCVState *env)
-     }
+diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+index 78fa1fa162..45b6cf1cfa 100644
+--- a/target/riscv/kvm/kvm-cpu.c
++++ b/target/riscv/kvm/kvm-cpu.c
+@@ -87,17 +87,17 @@ static uint64_t kvm_riscv_reg_id(CPURISCVState *env, uint64_t type,
+ 
+ #define KVM_RISCV_GET_CSR(cs, env, csr, reg) \
+     do { \
+-        int ret = kvm_get_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
+-        if (ret) { \
+-            return ret; \
++        int _ret = kvm_get_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
++        if (_ret) { \
++            return _ret; \
+         } \
+     } while (0)
+ 
+ #define KVM_RISCV_SET_CSR(cs, env, csr, reg) \
+     do { \
+-        int ret = kvm_set_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
+-        if (ret) { \
+-            return ret; \
++        int _ret = kvm_set_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
++        if (_ret) { \
++            return _ret; \
+         } \
+     } while (0)
+ 
+@@ -533,7 +533,6 @@ static int kvm_riscv_put_regs_core(CPUState *cs)
+ 
+ static int kvm_riscv_get_regs_csr(CPUState *cs)
+ {
+-    int ret = 0;
+     CPURISCVState *env = &RISCV_CPU(cs)->env;
+ 
+     KVM_RISCV_GET_CSR(cs, env, sstatus, env->mstatus);
+@@ -545,12 +544,12 @@ static int kvm_riscv_get_regs_csr(CPUState *cs)
+     KVM_RISCV_GET_CSR(cs, env, stval, env->stval);
+     KVM_RISCV_GET_CSR(cs, env, sip, env->mip);
+     KVM_RISCV_GET_CSR(cs, env, satp, env->satp);
+-    return ret;
++
++    return 0;
  }
  
--static void pmp_decode_napot(target_ulong a, target_ulong *sa,
--                             target_ulong *ea)
-+static void pmp_decode_napot(hwaddr a, hwaddr *sa, hwaddr *ea)
+ static int kvm_riscv_put_regs_csr(CPUState *cs)
  {
-     /*
-      * aaaa...aaa0   8-byte NAPOT range
-@@ -173,8 +172,8 @@ void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index)
-     uint8_t this_cfg = env->pmp_state.pmp[pmp_index].cfg_reg;
-     target_ulong this_addr = env->pmp_state.pmp[pmp_index].addr_reg;
-     target_ulong prev_addr = 0u;
--    target_ulong sa = 0u;
--    target_ulong ea = 0u;
-+    hwaddr sa = 0u;
-+    hwaddr ea = 0u;
+-    int ret = 0;
+     CPURISCVState *env = &RISCV_CPU(cs)->env;
  
-     if (pmp_index >= 1u) {
-         prev_addr = env->pmp_state.pmp[pmp_index - 1].addr_reg;
-@@ -227,8 +226,7 @@ void pmp_update_rule_nums(CPURISCVState *env)
-     }
+     KVM_RISCV_SET_CSR(cs, env, sstatus, env->mstatus);
+@@ -563,7 +562,7 @@ static int kvm_riscv_put_regs_csr(CPUState *cs)
+     KVM_RISCV_SET_CSR(cs, env, sip, env->mip);
+     KVM_RISCV_SET_CSR(cs, env, satp, env->satp);
+ 
+-    return ret;
++    return 0;
  }
  
--static int pmp_is_in_range(CPURISCVState *env, int pmp_index,
--                           target_ulong addr)
-+static int pmp_is_in_range(CPURISCVState *env, int pmp_index, hwaddr addr)
- {
-     int result = 0;
- 
-@@ -305,14 +303,14 @@ static bool pmp_hart_has_privs_default(CPURISCVState *env, pmp_priv_t privs,
-  * Return true if a pmp rule match or default match
-  * Return false if no match
-  */
--bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-+bool pmp_hart_has_privs(CPURISCVState *env, hwaddr addr,
-                         target_ulong size, pmp_priv_t privs,
-                         pmp_priv_t *allowed_privs, target_ulong mode)
- {
-     int i = 0;
-     int pmp_size = 0;
--    target_ulong s = 0;
--    target_ulong e = 0;
-+    hwaddr s = 0;
-+    hwaddr e = 0;
- 
-     /* Short cut if no rules */
-     if (0 == pmp_get_num_rules(env)) {
-@@ -624,12 +622,12 @@ target_ulong mseccfg_csr_read(CPURISCVState *env)
-  * To avoid this we return a size of 1 (which means no caching) if the PMP
-  * region only covers partial of the TLB page.
-  */
--target_ulong pmp_get_tlb_size(CPURISCVState *env, target_ulong addr)
-+target_ulong pmp_get_tlb_size(CPURISCVState *env, hwaddr addr)
- {
--    target_ulong pmp_sa;
--    target_ulong pmp_ea;
--    target_ulong tlb_sa = addr & ~(TARGET_PAGE_SIZE - 1);
--    target_ulong tlb_ea = tlb_sa + TARGET_PAGE_SIZE - 1;
-+    hwaddr pmp_sa;
-+    hwaddr pmp_ea;
-+    hwaddr tlb_sa = addr & ~(TARGET_PAGE_SIZE - 1);
-+    hwaddr tlb_ea = tlb_sa + TARGET_PAGE_SIZE - 1;
-     int i;
- 
-     /*
-diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
-index 9af8614cd4..f5c10ce85c 100644
---- a/target/riscv/pmp.h
-+++ b/target/riscv/pmp.h
-@@ -53,8 +53,8 @@ typedef struct {
- } pmp_entry_t;
- 
- typedef struct {
--    target_ulong sa;
--    target_ulong ea;
-+    hwaddr sa;
-+    hwaddr ea;
- } pmp_addr_t;
- 
- typedef struct {
-@@ -73,11 +73,11 @@ target_ulong mseccfg_csr_read(CPURISCVState *env);
- void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
-                        target_ulong val);
- target_ulong pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index);
--bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-+bool pmp_hart_has_privs(CPURISCVState *env, hwaddr addr,
-                         target_ulong size, pmp_priv_t privs,
-                         pmp_priv_t *allowed_privs,
-                         target_ulong mode);
--target_ulong pmp_get_tlb_size(CPURISCVState *env, target_ulong addr);
-+target_ulong pmp_get_tlb_size(CPURISCVState *env, hwaddr addr);
- void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index);
- void pmp_update_rule_nums(CPURISCVState *env);
- uint32_t pmp_get_num_rules(CPURISCVState *env);
+ static int kvm_riscv_get_regs_fp(CPUState *cs)
 -- 
-2.34.1
+2.41.0
 
 
