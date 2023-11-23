@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9567FC61D85
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Nov 2023 19:17:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDB90C5AD4C
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Nov 2023 19:17:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r6FB0-0008OK-L1; Thu, 23 Nov 2023 14:15:50 -0500
+	id 1r6FB4-0008Ub-W3; Thu, 23 Nov 2023 14:15:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1r6FAu-0008Ja-TP
- for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 14:15:45 -0500
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ id 1r6FB0-0008ON-Ny
+ for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 14:15:50 -0500
+Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1r6FAt-0003hg-3r
- for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 14:15:44 -0500
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-1cf897c8de1so7957275ad.0
- for <qemu-riscv@nongnu.org>; Thu, 23 Nov 2023 11:15:42 -0800 (PST)
+ id 1r6FAz-0003kn-4A
+ for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 14:15:50 -0500
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-1ce656b9780so8459515ad.2
+ for <qemu-riscv@nongnu.org>; Thu, 23 Nov 2023 11:15:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1700766941; x=1701371741; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1700766948; x=1701371748; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JF5lkWbAc2C1VZm8P9TGmUDxxgv7XlATDWqvy4zet8o=;
- b=DZB2J/8ifAAuh4GDE5f19jnSGrf8wf21bZm6AKlx1ODiCnQqztCTzOgNCJwmwFJ6zi
- lXuLsRDgl3OUqIYELHNcyJy+UM+CDsgA6sqKqa486lF7YNwfzh0y65pfBcX/OiKK4XsG
- wVKOddB6zJobPDYWZJm5vY5jkvwNqOEGAmiTHBYAwWptb6Rv/XaqONutEWYVgHQhloSE
- Enr5tFouunz3LgztVVKl4TD2V2iLR4lKvfKwmd/7DgLr3MBqiMIWUZirAqgY3rTBADou
- tyDAtyHWs06n230sBc9QJ3f2uZhlMDhUiTKj3eoA921V2tphz2vPil5PYoKnqzopqkbN
- xajw==
+ bh=LzVLyJhe38kZFUDSFuU/9rcqCOh/CTumw3tEFLT/sDQ=;
+ b=onNyqg0Bxqn7U0lYW/c5TXeDW9gWGwRxIED+3wLOTonEahbimy5iwtvCobFG56peEm
+ 6K0Ey4bAKZBlR0vE+gV4FbAnGAY2U5pFvi4FE4UdzYI9nfiXkveH/r/f8Ii2Qr9SKecW
+ UelQIVbzx0PY29mst83wYtEpl9yifo8aVcw5Cm+iLy7BrUDoq3EBZxjLbFQpZHxXhDlL
+ 9VLtjlVDPS6kyQOK3kV/R23NzatYM5wqfFzGiG0ChgHKVgOvqPucMljLzJf215KaT6Go
+ FuQFkSVLJORe197neNGhMU4pGQHOM69VBeVRU8Xqjkv8QrjZsGXw8hgIfg0GowExzXgR
+ GO8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700766941; x=1701371741;
+ d=1e100.net; s=20230601; t=1700766948; x=1701371748;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JF5lkWbAc2C1VZm8P9TGmUDxxgv7XlATDWqvy4zet8o=;
- b=S4sdEcY/i8XA4zGGuzyYzeN5GPQz1V3lKcxgpmrZeGZ0DvyiRdQgLu/MXegS/+amUD
- Ho1Of2Vqt2tvXrILaPTfPR/s4NtG6aqQFFrXQEMCfS8i9r+tqaRYNfWJOFtlrZ5iGexN
- H6e2x/x31YIA7upfMsrUH6d402PgVwS3lU8lUfzTOb+/St5vak+4B5Vupxf/abtOT5VQ
- pGFhYR7Q71eY6FXepEW18ZBZ14Jmfpg4M/0q4hqVPSl9Z/mq+R47ymu5wVh9sr7X8AMt
- c29UTaBA17WvUKbj6g3LV27M59S7QqE/2F4O7W6/3XcJWPOc5WwS/hzbh+ykXIpL5CgX
- m4Qw==
-X-Gm-Message-State: AOJu0Ywlwa8Xiwc7ULemEQvzHAJpa6OEeVnXE08Dn98nVfad7f3EUcYN
- iCWz6sSivyZHMIV+IXxIKFcfiA==
-X-Google-Smtp-Source: AGHT+IGt5Gp93ztMxOj6W5t5ZLHIuaHvT4+3fCmozRu8+SA2mG6Xc0mUbRiQy62DZFMosqZqDqeDrg==
-X-Received: by 2002:a17:902:bb8f:b0:1cf:8c88:51cb with SMTP id
- m15-20020a170902bb8f00b001cf8c8851cbmr358719pls.62.1700766941614; 
- Thu, 23 Nov 2023 11:15:41 -0800 (PST)
+ bh=LzVLyJhe38kZFUDSFuU/9rcqCOh/CTumw3tEFLT/sDQ=;
+ b=vq2MiV9iDv8yV19s05eUaEY8wa4SXriKBOp6V2tsX1RXHDojJXi7OxlR0UnARc8aXA
+ tVzJzKi6/2wfB5Q8Q7RuA9ZOzgXXj/S553moFDgznDAIg7H5WJsWsJOZZiz3obMONDU7
+ yE89Q708vG1RZLTR9W09ZDq/fpBDRshZ++hdKhQXIS45ydScHe1E8SRLBPtX9Gyidg1Z
+ 59rTY+pHoLw0yTFhplFCTzVmR5R6cvcyCDrZYgZfgSgeQgS7ZtAJpEV0HR8yDZIVk8xa
+ NgnfhDmzC56PnnkjUSBTLd006BYYV6NUbbE5c5S9Ftd8EEg5oZoG4T0jKRMyIiExYD6h
+ 4DSQ==
+X-Gm-Message-State: AOJu0YzC6hbRgLgSdvegLrlJNXIaA9ABTkv2Fo3NhMQ9ucwaC1cDkYgB
+ GbrBujsM5d7MJjjWnb2zYMZmsQ==
+X-Google-Smtp-Source: AGHT+IE+yame+jBp2sa+nHl3H/sz6JSu3lqKs3lArrXzETxJ5BbxIHz55Ct6TZxeWNEbOA0y1a23MA==
+X-Received: by 2002:a17:903:22d2:b0:1cf:6bc2:223f with SMTP id
+ y18-20020a17090322d200b001cf6bc2223fmr388837plg.51.1700766947694; 
+ Thu, 23 Nov 2023 11:15:47 -0800 (PST)
 Received: from grind.. ([2804:7f0:bdcd:fb00:6501:2693:db52:c621])
  by smtp.gmail.com with ESMTPSA id
- h21-20020a170902eed500b001bc21222e34sm1680760plb.285.2023.11.23.11.15.38
+ h21-20020a170902eed500b001bc21222e34sm1680760plb.285.2023.11.23.11.15.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Nov 2023 11:15:41 -0800 (PST)
+ Thu, 23 Nov 2023 11:15:47 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  ajones@ventanamicro.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH for-9.0 1/7] target/riscv: implement svade
-Date: Thu, 23 Nov 2023 16:15:26 -0300
-Message-ID: <20231123191532.1101644-2-dbarboza@ventanamicro.com>
+Subject: [PATCH for-9.0 3/7] target/riscv/cpu.c: finalize satp_mode earlier
+Date: Thu, 23 Nov 2023 16:15:28 -0300
+Message-ID: <20231123191532.1101644-4-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231123191532.1101644-1-dbarboza@ventanamicro.com>
 References: <20231123191532.1101644-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x633.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,88 +96,50 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-'svade' is a RVA22S64 profile requirement, a profile we're going to add
-shortly. It is a named feature (i.e. not a formal extension, not defined
-in riscv,isa DT at this moment) defined in [1] as:
-
-"Page-fault exceptions are raised when a page is accessed when A bit is
-clear, or written when D bit is clear.".
-
-As far as the spec goes, 'svade' is one of the two distinct modes of
-handling PTE_A and PTE_D. The other way, i.e. update PTE_A/PTE_D when
-they're cleared, is defined by the 'svadu' extension. Checking
-cpu_helper.c, get_physical_address(), we can verify that QEMU is
-compliant with that: we will update PTE_A/PTE_D if 'svadu' is enabled,
-or throw a page-fault exception if 'svadu' isn't enabled.
-
-So, as far as we're concerned, 'svade' translates to 'svadu must be
-disabled'.
-
-We'll implement it like 'zic64b': an internal flag that profiles can
-enable. The flag will not be exposed to users.
-
-[1] https://github.com/riscv/riscv-profiles/blob/main/profiles.adoc
+Profiles will need to validate satp_mode during their own finalize
+methods. This will occur inside riscv_tcg_cpu_finalize_features() for
+TCG. Given that satp_mode does not have any pre-req from the accelerator
+finalize() method, it's safe to finalize it ealier.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- target/riscv/cpu.c         | 1 +
- target/riscv/cpu_cfg.h     | 1 +
- target/riscv/tcg/tcg-cpu.c | 9 +++++++++
- 3 files changed, 11 insertions(+)
+ target/riscv/cpu.c | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 3a230608cb..59b131c1fc 100644
+index 29a9f77702..a395c77bda 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -1445,6 +1445,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] = {
- };
- 
- const RISCVCPUMultiExtConfig riscv_cpu_named_features[] = {
-+    MULTI_EXT_CFG_BOOL("svade", svade, true),
-     MULTI_EXT_CFG_BOOL("zic64b", zic64b, true),
- 
-     DEFINE_PROP_END_OF_LIST(),
-diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-index 90f18eb601..46b06db68b 100644
---- a/target/riscv/cpu_cfg.h
-+++ b/target/riscv/cpu_cfg.h
-@@ -116,6 +116,7 @@ struct RISCVCPUConfig {
-     bool ext_smepmp;
-     bool rvv_ta_all_1s;
-     bool rvv_ma_all_1s;
-+    bool svade;
-     bool zic64b;
- 
-     uint32_t mvendorid;
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 8fa8d61142..ddf37b25f3 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -188,6 +188,9 @@ static void riscv_cpu_enable_named_feat(RISCVCPU *cpu, uint32_t feat_offset)
-         cpu->cfg.cbop_blocksize = 64;
-         cpu->cfg.cboz_blocksize = 64;
-         break;
-+    case CPU_CFG_OFFSET(svade):
-+        cpu->cfg.ext_svadu = false;
-+        break;
-     default:
-         g_assert_not_reached();
-     }
-@@ -383,8 +386,14 @@ static void riscv_cpu_validate_zic64b(RISCVCPU *cpu)
-                       cpu->cfg.cboz_blocksize == 64;
- }
- 
-+static void riscv_cpu_validate_svade(RISCVCPU *cpu)
-+{
-+    cpu->cfg.svade = !cpu->cfg.ext_svadu;
-+}
-+
- static void riscv_cpu_validate_named_features(RISCVCPU *cpu)
+@@ -1056,6 +1056,14 @@ void riscv_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
  {
-+    riscv_cpu_validate_svade(cpu);
-     riscv_cpu_validate_zic64b(cpu);
+     Error *local_err = NULL;
+ 
++#ifndef CONFIG_USER_ONLY
++    riscv_cpu_satp_mode_finalize(cpu, &local_err);
++    if (local_err != NULL) {
++        error_propagate(errp, local_err);
++        return;
++    }
++#endif
++
+     /*
+      * KVM accel does not have a specialized finalize()
+      * callback because its extensions are validated
+@@ -1068,14 +1076,6 @@ void riscv_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
+             return;
+         }
+     }
+-
+-#ifndef CONFIG_USER_ONLY
+-    riscv_cpu_satp_mode_finalize(cpu, &local_err);
+-    if (local_err != NULL) {
+-        error_propagate(errp, local_err);
+-        return;
+-    }
+-#endif
  }
  
+ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
 -- 
 2.41.0
 
