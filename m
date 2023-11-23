@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64F9DC61D85
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Nov 2023 18:52:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19DDEC61D85
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Nov 2023 18:52:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r6EnY-0007rh-Ga; Thu, 23 Nov 2023 13:51:37 -0500
+	id 1r6EoB-0008Jz-UK; Thu, 23 Nov 2023 13:52:15 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1r6EnU-0007qT-W9
- for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 13:51:33 -0500
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ id 1r6Eo3-0008A8-SM
+ for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 13:52:07 -0500
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1r6EnS-0008F9-7X
- for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 13:51:32 -0500
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1cf6bdf8274so15939835ad.1
- for <qemu-riscv@nongnu.org>; Thu, 23 Nov 2023 10:51:29 -0800 (PST)
+ id 1r6Eo0-0000Ak-FW
+ for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 13:52:07 -0500
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-1cf7a1546c0so9649925ad.0
+ for <qemu-riscv@nongnu.org>; Thu, 23 Nov 2023 10:52:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1700765488; x=1701370288; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=1YNp+4Cx+kEVtJDx/e1YmWMjcChTvtDhDJ8J5a420Fc=;
- b=OD3Ke2s0DvdhWX9x8LD0PXk6zS6O39k5YbP37ItTOSbzyAGY8Kru/AFEjS0Jvlhron
- rgngRAekDcZbT2jajiOrSQx1x7Wt7nnMIQY8dFshTZOszdZ7EHz5OX5HpGJAo/62RBVX
- sT7BKF4pLescrWgggTjuTpE3359XTJnhJyXYE9V3HXrwv7kCno9vawxkid4dGwyvgdtX
- SyRyYL3Gm60Awwj4KhSGT46MOsC9h5g7lry8+hkI4xr/grTksLs9JyY8R4+FnDeNfI2e
- kit3qsRymAm2QxjD778MWRDQ0gm/SX7qWeyz3lja7smdp1yrWFJqMRsl0tvPRfR8OX3f
- +i5A==
+ d=ventanamicro.com; s=google; t=1700765522; x=1701370322; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wLvppxrHlugfax1BmTiiJZtjsEJqto80RCKzfZuCGnM=;
+ b=WzYXsqcq6BSu67Uc047VXtWPzLDIxG0RArvYfZgk2vFmLe68SDhJolycc2UPBgXKPa
+ SDdRwb0PmhJV1fus3nRIe8soUf8xfyPIJPrgbegInEEdI6bMp1f2gCd/LMYSe08lCOcK
+ C62X2WRM0yVtqHv/soeS7HGDuFoIm4rSaOlvsRbFTGhkHC9EK9gOWWB1FbYAkoSj4b5w
+ pOWsMrpToZ75geVo+0oGnKJ/aWcKH0sTfuBX+cqgSWrhUue2sjRRGUE9QacKLRhdWG4I
+ uI26L/ZKw7pZC/Eb2SoycUNKCsZjQ5u3YsMTUK8f/Hp9Lf4/Dxox+XQ4EBdYZ50jCkLE
+ WbOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700765488; x=1701370288;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=1YNp+4Cx+kEVtJDx/e1YmWMjcChTvtDhDJ8J5a420Fc=;
- b=rVCuQYSTYCEg9kOCR87c98IaqdCqngBAGonEpTvphBM0PHYrITzlN+Z3/JGY8K7dha
- Hn7DD1E8dLzSK8llPR9QorhqGMjWkzeBCypE0ADJww72+Gvrf3AcG7C9gNQq+wfBlAig
- aEa8P4apycANe9GVvm1XASBRpNH8K5gzYD/Bx28Qw3MuHE9tda4Vvq9zhLR5JEim5Il3
- T88kq+JG98UghzDGY7u6hF3iEo6uAZNElnx/NkM9H1ArbTz5G/a7oV+oQpk8ghgl5qU6
- KDYzdahogV+0KRor3VNjpzT1a1Q/zNEN+xrIDlFk2/qOJ/w2VK3f1EPTx53JMkzEbh/g
- u0qA==
-X-Gm-Message-State: AOJu0YyEHCJ7sap2/6cpDVJNOZ4PYBfQJmgiKTQ83cLWLKZDx7u4nnmP
- J0zSt94+8Yeo0gmJ/h3HtNrOig==
-X-Google-Smtp-Source: AGHT+IFCCHA9THkU31k54JLok3/Sf9L0tW5h+mKD1OGiDWx4dXgH0Ao9J9CpucKQvI4fbNCWupJsxA==
-X-Received: by 2002:a17:903:2347:b0:1cf:837d:1e59 with SMTP id
- c7-20020a170903234700b001cf837d1e59mr4249364plh.25.1700765488370; 
- Thu, 23 Nov 2023 10:51:28 -0800 (PST)
+ d=1e100.net; s=20230601; t=1700765522; x=1701370322;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=wLvppxrHlugfax1BmTiiJZtjsEJqto80RCKzfZuCGnM=;
+ b=nVLtkKrjTYek9k6A8WeCi8/zPzBLY6C6D1Z+X7uAs6Ods6IsK0EFwIgiLlnoVcjjru
+ xeKrTXWRCUt3/v022pn34J/Jee9X4VncyWRvZKe3cFDiKUjWg4/fqWxPi4PotDr9xeIM
+ sJMiiXVn9Tb2NL2Hdjzjx+xSdWIq7rSBCh3BGtJ9qt8DjUz6zTU3ouCsi6PQN3tqF0t9
+ ioLfzeMjTZSUhuag5f/cuQi+wpz8hB3EW2lWX1eP+yj58l5kk4P9GgJ+f9wc5/DePW7r
+ jBK+fFXrq4JFf8cW1R9uX2PHbuIS4F6bZcmkPkWsxViqc/my0b+cjqOlVk0WhVZNB8QA
+ RpTw==
+X-Gm-Message-State: AOJu0YwO5Yv5IMiWm3JNirm98OcKSE+EqxWS/tNR0krdHj3EFM4KP67I
+ B43nuHtCQmLwvF8Gplvdk9xFMA==
+X-Google-Smtp-Source: AGHT+IE1vAT+MMmIW0LA0ucxG3+349nBFTkh2RjmJGM0wry4g0p4N1RQULVUfbR86UXQ+O/EEI6lNw==
+X-Received: by 2002:a17:902:c78b:b0:1cf:8c7a:ed20 with SMTP id
+ w11-20020a170902c78b00b001cf8c7aed20mr323269pla.27.1700765522703; 
+ Thu, 23 Nov 2023 10:52:02 -0800 (PST)
 Received: from grind.. ([2804:7f0:bdcd:fb00:6501:2693:db52:c621])
  by smtp.gmail.com with ESMTPSA id
- u4-20020a17090282c400b001bb1f0605b2sm1662638plz.214.2023.11.23.10.51.25
+ u4-20020a17090282c400b001bb1f0605b2sm1662638plz.214.2023.11.23.10.52.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Nov 2023 10:51:27 -0800 (PST)
+ Thu, 23 Nov 2023 10:52:02 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  ajones@ventanamicro.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH for-9.0 v11 00/18] rv64i and rva22u64 CPUs,
- RVA22U64 profile support
-Date: Thu, 23 Nov 2023 15:51:04 -0300
-Message-ID: <20231123185122.1100436-1-dbarboza@ventanamicro.com>
+Subject: [PATCH for-9.0 v11 11/18] target/riscv/tcg: add MISA user options hash
+Date: Thu, 23 Nov 2023 15:51:15 -0300
+Message-ID: <20231123185122.1100436-12-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20231123185122.1100436-1-dbarboza@ventanamicro.com>
+References: <20231123185122.1100436-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x630.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -94,62 +96,87 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+We already track user choice for multi-letter extensions because we
+needed to honor user choice when enabling/disabling extensions during
+realize(). We refrained from adding the same mechanism for MISA
+extensions since we didn't need it.
 
-In this new version we added a new function, riscv_cpu_enable_named_feat(),
-to allow profiles to enable named features.
+Profile support requires tne need to check for user choice for MISA
+extensions, so let's add the corresponding hash now. It works like the
+existing multi-letter hash (multi_ext_user_opts) but tracking MISA bits
+options in the cpu_set_misa_ext_cfg() callback.
 
-This doesn't have much of an impact for this current work - the only
-named feature we're using here is zic64b and the default block size
-values already satisfies it.
+Note that we can't re-use the same hash from multi-letter extensions
+because that hash uses cpu->cfg offsets as keys, while for MISA
+extensions we're using MISA bits as keys.
 
-The reason we're doing this change now is due to the incoming RVA22S64
-support. A new named featured called 'svade' will be added for it, and
-'svade' is NOT enabled by default in QEMU. Profiles will need to enable
-named features to support RVA22S64, so might as well implement this
-capability right from the start.
+After adding the user hash in cpu_set_misa_ext_cfg(), setting default
+values with object_property_set_bool() in add_misa_properties() will end
+up marking the user choice hash with them. Set the default value
+manually to avoid it.
 
-Series based on master.
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+---
+ target/riscv/tcg/tcg-cpu.c | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
 
-Patches missing acks: patch 10
-
-Changes from v10:
-- patch 10:
-  - add riscv_cpu_enable_named_feat()
-  - enable named features during cpu_set_profile()
-- v10 link: https://lore.kernel.org/qemu-riscv/20231103134629.561732-1-dbarboza@ventanamicro.com/
-
-
-Daniel Henrique Barboza (18):
-  target/riscv: create TYPE_RISCV_VENDOR_CPU
-  target/riscv/tcg: do not use "!generic" CPU checks
-  target/riscv/tcg: update priv_ver on user_set extensions
-  target/riscv: add rv64i CPU
-  target/riscv: add zicbop extension flag
-  target/riscv/tcg: add 'zic64b' support
-  riscv-qmp-cmds.c: expose named features in cpu_model_expansion
-  target/riscv: add rva22u64 profile definition
-  target/riscv/kvm: add 'rva22u64' flag as unavailable
-  target/riscv/tcg: add user flag for profile support
-  target/riscv/tcg: add MISA user options hash
-  target/riscv/tcg: add riscv_cpu_write_misa_bit()
-  target/riscv/tcg: handle profile MISA bits
-  target/riscv/tcg: add hash table insert helpers
-  target/riscv/tcg: honor user choice for G MISA bits
-  target/riscv/tcg: validate profiles during finalize
-  riscv-qmp-cmds.c: add profile flags in cpu-model-expansion
-  target/riscv: add 'rva22u64' CPU
-
- hw/riscv/virt.c               |   5 +
- target/riscv/cpu-qom.h        |   4 +
- target/riscv/cpu.c            | 134 ++++++++++++-
- target/riscv/cpu.h            |  13 ++
- target/riscv/cpu_cfg.h        |   3 +
- target/riscv/kvm/kvm-cpu.c    |   7 +-
- target/riscv/riscv-qmp-cmds.c |  44 +++-
- target/riscv/tcg/tcg-cpu.c    | 367 ++++++++++++++++++++++++++++++----
- 8 files changed, 524 insertions(+), 53 deletions(-)
-
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index f26dc7748d..930aa7465b 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -34,6 +34,7 @@
+ 
+ /* Hash that stores user set extensions */
+ static GHashTable *multi_ext_user_opts;
++static GHashTable *misa_ext_user_opts;
+ 
+ static bool cpu_cfg_ext_is_user_set(uint32_t ext_offset)
+ {
+@@ -807,6 +808,10 @@ static void cpu_set_misa_ext_cfg(Object *obj, Visitor *v, const char *name,
+         return;
+     }
+ 
++    g_hash_table_insert(misa_ext_user_opts,
++                        GUINT_TO_POINTER(misa_bit),
++                        (gpointer)value);
++
+     prev_val = env->misa_ext & misa_bit;
+ 
+     if (value == prev_val) {
+@@ -878,6 +883,7 @@ static const RISCVCPUMisaExtConfig misa_ext_cfgs[] = {
+  */
+ static void riscv_cpu_add_misa_properties(Object *cpu_obj)
+ {
++    CPURISCVState *env = &RISCV_CPU(cpu_obj)->env;
+     bool use_def_vals = riscv_cpu_is_generic(cpu_obj);
+     int i;
+ 
+@@ -898,7 +904,13 @@ static void riscv_cpu_add_misa_properties(Object *cpu_obj)
+                             NULL, (void *)misa_cfg);
+         object_property_set_description(cpu_obj, name, desc);
+         if (use_def_vals) {
+-            object_property_set_bool(cpu_obj, name, misa_cfg->enabled, NULL);
++            if (misa_cfg->enabled) {
++                env->misa_ext |= bit;
++                env->misa_ext_mask |= bit;
++            } else {
++                env->misa_ext &= ~bit;
++                env->misa_ext_mask &= ~bit;
++            }
+         }
+     }
+ }
+@@ -1147,6 +1159,7 @@ static void tcg_cpu_instance_init(CPUState *cs)
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     Object *obj = OBJECT(cpu);
+ 
++    misa_ext_user_opts = g_hash_table_new(NULL, g_direct_equal);
+     multi_ext_user_opts = g_hash_table_new(NULL, g_direct_equal);
+     riscv_cpu_add_user_properties(obj);
+ 
 -- 
 2.41.0
 
