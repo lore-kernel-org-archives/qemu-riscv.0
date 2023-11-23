@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 633E5C61D85
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Nov 2023 10:23:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C7B2C5AD4C
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Nov 2023 18:02:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r66s0-0003D1-88; Thu, 23 Nov 2023 05:23:40 -0500
+	id 1r6E1I-0001Vu-D3; Thu, 23 Nov 2023 13:01:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r66rz-0003CX-51
- for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 05:23:39 -0500
-Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1r6E1H-0001V3-7R
+ for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 13:01:43 -0500
+Received: from mail-ed1-x52b.google.com ([2a00:1450:4864:20::52b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r66rx-0002lV-Ga
- for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 05:23:38 -0500
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-40b27b498c3so4640405e9.0
- for <qemu-riscv@nongnu.org>; Thu, 23 Nov 2023 02:23:37 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1r6E1F-00050Y-KF
+ for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 13:01:42 -0500
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-548d1f8b388so1665739a12.0
+ for <qemu-riscv@nongnu.org>; Thu, 23 Nov 2023 10:01:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700735016; x=1701339816; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=BQXlq2DBaRvDl0dUwf6hitoVzbMvjzP4AsQvCnP7xJc=;
- b=R6BtQrTmj0nKyRSUcUZNRmKnn8JMRjOnOEiGG7rxecv2dEpq1GGpJiNXKG1P31i0ie
- QYKuGFEOwgmfvSKiLQV7zWU4/dY5K7hprcq4uQU9zLCDm9zwoCx+X5Qm9qb41NxcEYTM
- ZJREiIrB3LA7ONPXs8LOpbRH886JXRzQFwVwDmdeHMek5ZeB4lrEK/WzmGxJkN8AcPxP
- dNduG7yU7r0IpwOl8j78N6dhnNMccaYUP1Tr5NeiY7VkEAMcxMmF4UWLKeSd9vIFTWk2
- cfwx1a0kdD8qXi1TQ+8sOHQM/yedZV38BIKzta+Zb8oQRnw30t/2ClJIsg9e81KoRHbL
- ct7w==
+ d=vrull.eu; s=google; t=1700762499; x=1701367299; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9r1LYM7znRQbkiucsbsE5oOCfK6L2pC5SpIekpnlOHo=;
+ b=sLR8oF+TAd5mF30KvaZXy9Yh8NjXfttCsXHZXsGN9hXpypIibYnsiyzLn8PKQtEJdv
+ VLqOuzLWVX3qd0K07+gzZYoMZbngoBF9gxoZflQoaMKuoQgF8d1o7P8hDo9hH4FzW5lC
+ OYdVHghDhVJHEprzXHXcoYyflq6hMMXvin5/hFGrLz/5kT99Q7nO82YLWAlonD382el9
+ ahbHnmYW+JzdrGcOGlxT9amj96GJzxhrEAuyp9F9iRzWhkvn3s61dgj9Md+UfAXqHvBS
+ oX4LYcaBNqlfu5f9ys4puk1xkGxXVmW9IjRVW3QQFdUpu+nUKvmnQfX8rk/aTp6psEyR
+ THvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700735016; x=1701339816;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=BQXlq2DBaRvDl0dUwf6hitoVzbMvjzP4AsQvCnP7xJc=;
- b=vpxgLlhYkDy30SWTN8JDyRnvxBj19IOT86dxApY9se88kJejr1GK2Vz2UmmtoO0Ji7
- F5LjmY/clA9p6XJX4YScFUMB2N9oTWpHWBM/BmGiS7AmOdA/k1BpFTezEaO1GAmeBIUt
- agDi/oOkMqAMR/OzFICzcnID+C79ZLIS8bSQ7PkyqzTyqig5ZGECnLPql+T77MyxrY9/
- WaU0dhc1elTxMcoEhQ3scwDvThRDWvqjY7NsrPBuXoMnYlu5a0zzp7wYASsl1eAAkxvS
- iT+RgGm6bSwrXo8v9Wo0TrCoguYJ/dQdASsAGY0rmwnIuLFZZvgQlySM0uvcFr7d1t8t
- Ujlw==
-X-Gm-Message-State: AOJu0YzCWIyL+4/8l9099iCZktT/lAZtqA8E6FhEX5smCh87ABoHJmKe
- WTJcWLDoWBd6nYMjNtA4vybuuN3iGaAFea3RNTs=
-X-Google-Smtp-Source: AGHT+IEemMFpGEFEPgsAp7CH2cAZXG0zxAZgZvKV9H81rmOvRXXj+yTnDHlcQN9feY6l8KiIhCVTrg==
-X-Received: by 2002:a05:600c:5250:b0:409:1841:3f42 with SMTP id
- fc16-20020a05600c525000b0040918413f42mr3625320wmb.13.1700735015882; 
- Thu, 23 Nov 2023 02:23:35 -0800 (PST)
-Received: from [192.168.69.100] ([176.176.165.237])
- by smtp.gmail.com with ESMTPSA id
- 24-20020a05600c231800b0040b36050f1bsm1464159wmo.44.2023.11.23.02.23.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Nov 2023 02:23:35 -0800 (PST)
-Message-ID: <5cb07d83-934d-4db0-8fee-3146f3751743@linaro.org>
-Date: Thu, 23 Nov 2023 11:23:33 +0100
+ d=1e100.net; s=20230601; t=1700762499; x=1701367299;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9r1LYM7znRQbkiucsbsE5oOCfK6L2pC5SpIekpnlOHo=;
+ b=TvB5GijKkqgvweACfZiamBjzN6t/1eYEue0sb46If6ETEOKrHDdH8gJGK66aoWmv7a
+ N/o7HoFlIE3lfDSxAhTQHDtsIsIY4umB8upI/JvrpK+0TS/YJpO35gTWkb9vrHhvtO4N
+ GnxCYayvXxxeMmoIy2VgJpkl2QNjpgmDXVlJQqt0V4PCsREReljitBduokE4a9FskIRv
+ 6tggsYBdgk0a5PPoMEV4MuVIFWqAGR1qI/+g0Oh4QSno/r+9mCo/omem81cyAnPdXOcP
+ DBDIg0xX2jU1eL0G7YXq1u30u04wZ/O5BpOvhe5FlYhJZlDjMso7CNSIFRaSO7cpa2L1
+ cNGw==
+X-Gm-Message-State: AOJu0YyfoFMGq01DiVfCLdpcxoAabxz7MOPQV4JGjOnwZESGVD6qDBbB
+ 53NtRrXTu6sQGiS2/tWsYFxsvrlv52GgcIIEd/YoUQ==
+X-Google-Smtp-Source: AGHT+IEKcG30N7I9gzhBcTY/ggCn9DxY3FKRfvpzBPmQCQvPX06FzEIj5qUD8gf6HAdQW8aMElmvfw==
+X-Received: by 2002:a17:907:a0d6:b0:9fe:324b:f70a with SMTP id
+ hw22-20020a170907a0d600b009fe324bf70amr62694ejc.63.1700762498818; 
+ Thu, 23 Nov 2023 10:01:38 -0800 (PST)
+Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
+ [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
+ p18-20020a1709061b5200b009b9a1714524sm1074027ejg.12.2023.11.23.10.01.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 23 Nov 2023 10:01:38 -0800 (PST)
+From: Christoph Muellner <christoph.muellner@vrull.eu>
+To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>,
+ Laurent Vivier <laurent@vivier.eu>
+Subject: [PATCH] linux-user/riscv: Add Zicboz extensions to hwprobe
+Date: Thu, 23 Nov 2023 19:01:35 +0100
+Message-ID: <20231123180135.2116194-1-christoph.muellner@vrull.eu>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH for-8.2] target/riscv/kvm: fix shadowing in
- kvm_riscv_(get|put)_regs_csr
-Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com
-References: <20231123101338.1040134-1-dbarboza@ventanamicro.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20231123101338.1040134-1-dbarboza@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52b;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-ed1-x52b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,42 +97,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 23/11/23 11:13, Daniel Henrique Barboza wrote:
-> KVM_RISCV_GET_CSR() and KVM_RISCV_SET_CSR() use an 'int ret' variable
-> that is used to do an early 'return' if ret > 0. Both are being called
-> in functions that are also declaring a 'ret' integer, initialized with
-> '0', and this integer is used as return of the function.
-> 
-> The result is that the compiler is less than pleased and is pointing
-> shadowing errors:
-> 
-> ../target/riscv/kvm/kvm-cpu.c: In function 'kvm_riscv_get_regs_csr':
-> ../target/riscv/kvm/kvm-cpu.c:90:13: error: declaration of 'ret' shadows a previous local [-Werror=shadow=compatible-local]
->     90 |         int ret = kvm_get_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
->        |             ^~~
-> ../target/riscv/kvm/kvm-cpu.c:539:5: note: in expansion of macro 'KVM_RISCV_GET_CSR'
->    539 |     KVM_RISCV_GET_CSR(cs, env, sstatus, env->mstatus);
->        |     ^~~~~~~~~~~~~~~~~
-> ../target/riscv/kvm/kvm-cpu.c:536:9: note: shadowed declaration is here
->    536 |     int ret = 0;
+From: Christoph Müllner <christoph.muellner@vrull.eu>
 
+Upstream Linux recently added RISC-V Zicboz support to the hwprobe API.
+This patch introduces this for QEMU's user space emulator.
 
-> The macros are doing early returns for non-zero returns and the local
-> 'ret' variable for both functions is used just to do 'return 0', so
-> remove them from kvm_riscv_get_regs_csr() and kvm_riscv_put_regs_csr()
-> and do a straight 'return 0' in the end.
-> 
-> For good measure let's also rename the 'ret' variables in
-> KVM_RISCV_GET_CSR() and KVM_RISCV_SET_CSR() to '_ret' to make them more
-> resilient to these kind of errors.
-> 
-> Fixes: 937f0b4512 ("target/riscv: Implement kvm_arch_get_registers")
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->   target/riscv/kvm/kvm-cpu.c | 19 +++++++++----------
->   1 file changed, 9 insertions(+), 10 deletions(-)
+Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
+---
+ linux-user/syscall.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-
+diff --git a/linux-user/syscall.c b/linux-user/syscall.c
+index 65ac3ac796..22e947d752 100644
+--- a/linux-user/syscall.c
++++ b/linux-user/syscall.c
+@@ -8799,6 +8799,7 @@ static int do_getdents64(abi_long dirfd, abi_long arg2, abi_long count)
+ #define     RISCV_HWPROBE_EXT_ZBA      (1 << 3)
+ #define     RISCV_HWPROBE_EXT_ZBB      (1 << 4)
+ #define     RISCV_HWPROBE_EXT_ZBS      (1 << 5)
++#define     RISCV_HWPROBE_EXT_ZICBOZ   (1 << 6)
+ 
+ #define RISCV_HWPROBE_KEY_CPUPERF_0     5
+ #define     RISCV_HWPROBE_MISALIGNED_UNKNOWN     (0 << 0)
+@@ -8855,6 +8856,8 @@ static void risc_hwprobe_fill_pairs(CPURISCVState *env,
+                      RISCV_HWPROBE_EXT_ZBB : 0;
+             value |= cfg->ext_zbs ?
+                      RISCV_HWPROBE_EXT_ZBS : 0;
++            value |= cfg->ext_zicboz ?
++                     RISCV_HWPROBE_EXT_ZBS : 0;
+             __put_user(value, &pair->value);
+             break;
+         case RISCV_HWPROBE_KEY_CPUPERF_0:
+-- 
+2.41.0
 
 
