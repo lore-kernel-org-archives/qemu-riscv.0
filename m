@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A7EFC27C40
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Nov 2023 01:43:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92054C61DF4
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Nov 2023 03:05:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r5ykQ-0007rd-07; Wed, 22 Nov 2023 20:43:18 -0500
+	id 1r601c-0005Yn-Al; Wed, 22 Nov 2023 22:05:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <patrick@rivosinc.com>)
- id 1r5xPV-00070g-Nh
- for qemu-riscv@nongnu.org; Wed, 22 Nov 2023 19:17:37 -0500
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1r601a-0005YU-HP; Wed, 22 Nov 2023 22:05:06 -0500
+Received: from mail-ua1-x92d.google.com ([2607:f8b0:4864:20::92d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <patrick@rivosinc.com>)
- id 1r5xPT-0000GY-SX
- for qemu-riscv@nongnu.org; Wed, 22 Nov 2023 19:17:37 -0500
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-1cf62a3b249so2733145ad.0
- for <qemu-riscv@nongnu.org>; Wed, 22 Nov 2023 16:17:35 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1r601Z-0002F9-1m; Wed, 22 Nov 2023 22:05:06 -0500
+Received: by mail-ua1-x92d.google.com with SMTP id
+ a1e0cc1a2514c-7c449d30fa3so134683241.0; 
+ Wed, 22 Nov 2023 19:05:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1700698654; x=1701303454;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=lhRYRi7vANkjLCTUL1asmQ357tOqr1+NqvoT+6py0Os=;
- b=Iad8BNNiPqgVq1BheRsbF1ZhgMnzHM4jb6X92LgGfxBMVJL1f2qPtn+i4pJ6p0Gevi
- UsW2ihf1O4Fxlj9KxDvWchlKbj6uNZ8UIN7l0zRhne7f8kQsnOScAJ2BVL3JMcaKW4Bw
- SWSJmI7ZyVPoOo4lRGgGeH7Shsd1I/Dt2O11U2BqLkaOoLcqy/W++Fj8KHVBrMkJgE7p
- jfGjzPmK6RwpDSOpxdLWESMDyiYoz9ThZUai3vJu6NHLu1lpLxCFcIJIPHNaCDI2fOm7
- 0KnRZPAm3i4WBBStmrCSAJ+YbfUHEZWuT5pdmcho/b6+3V3uTcEYuyab4oPKWLU+8LmZ
- M5mA==
+ d=gmail.com; s=20230601; t=1700708702; x=1701313502; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=t9aZX8EQpoeqwHDXXySSmozRCFJH1BkixVH4mW9OpYA=;
+ b=EgHHGPTCht7lodwVlUH2pNTcKiMxQfGtqUhMH/yKHxGmxaAQt+c+uVWy13xnEFaL9D
+ yndkrtKbdCzKwrqrs7yMK4OpoPNWRTqTHBFoADzlYfz5s3Nr0kggjXU2/W8YppEjcH1o
+ 8TcCyhELiH/1oxtFrJYCAoZh3lHLIi3Za8vnFUBOo9NfUoMTiQR17tyo/hLCk377LSaf
+ Al3xFeJv7hCNiaH7I7KXaGms9v49dcyXYU2EaBiUxz1kWl2Y0DFvKEWCmdAJvfKR1IbM
+ dhbZW5fR9mUkRZM81ECRcnUJd08grPg+YHDFsYtEdM6Pkp3YiVhYUGRBgOxfSZkzaAJb
+ kc5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700698654; x=1701303454;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=lhRYRi7vANkjLCTUL1asmQ357tOqr1+NqvoT+6py0Os=;
- b=mkSQoFbOc1DUPG+W0wayhOzBPLr9Xtj4Cf4B9YSYj9TYeOWj2Yz2UCngj7bZWclZRp
- anw7ZZ6Z2TNecGfe654hshkKDgIIpxBht5hvxXMdJBcI+/Tgv3j2yovC3TZikzfbPRdt
- 1CKHginBrCW/mf3iSihb/uGRe/qo/8AVOP8d/4GZBVetj1MLfgFscAscoyDpFqq7X1xT
- 7ikr2/C9Bkhmu7cp2zZymPmlH1Lh4s/Ko6pDZ9GuDHwWgjLm4k3242GwGvCKkM7Qvjpk
- LVlmf+IRu7lwte0xH4nR+9wOt4JEMcbyzhTW6kukF1dUH+hQSwGKfHbOoZqoyg5zTbjh
- +v2g==
-X-Gm-Message-State: AOJu0YyBnK4bG8XQXgoPBBT0oJzMyS3QGCoi2UqnKpi4ZNYlSJ+IL1CC
- fwlyby1LXNFiwplFoizd9vGMGil6re95qbaNFEizVA==
-X-Google-Smtp-Source: AGHT+IEmQPBAD7TRbg2ZcP7UEiMz/wJ1L6buvdcAmN8td2nhx1Ib6SlUSM3Ztrf8HrrvwatWmcViCw==
-X-Received: by 2002:a17:902:e80a:b0:1cc:361b:7b10 with SMTP id
- u10-20020a170902e80a00b001cc361b7b10mr4647408plg.24.1700698653660; 
- Wed, 22 Nov 2023 16:17:33 -0800 (PST)
-Received: from patrick-ThinkPad-X1-Carbon-Gen-8.hq.rivosinc.com
- ([12.44.203.122]) by smtp.gmail.com with ESMTPSA id
- jh9-20020a170903328900b001c0de73564dsm3289plb.205.2023.11.22.16.17.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Nov 2023 16:17:33 -0800 (PST)
-From: Patrick O'Neill <patrick@rivosinc.com>
-To: qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org,
-	Patrick O'Neill <patrick@rivosinc.com>
-Subject: [PATCH] RISC-V: Increase max vlen to 4096
-Date: Wed, 22 Nov 2023 16:17:09 -0800
-Message-ID: <20231123001709.64934-1-patrick@rivosinc.com>
-X-Mailer: git-send-email 2.42.0
+ d=1e100.net; s=20230601; t=1700708702; x=1701313502;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=t9aZX8EQpoeqwHDXXySSmozRCFJH1BkixVH4mW9OpYA=;
+ b=V9gIVvYO/sWWJSwvPXETtSmlGIF/wkkNe0EZMz3J6JUBEHFcO/p25wVDZFPKNkF401
+ DlHbdxypemSEx8vHfQXZvYlTHriBsdjRawHO60NmAd1pCLYdiTRf1EbSJwgWK1Sll/qa
+ 05swYH9v+rbq3ckwcs1IjjKx61h9WSxYycBA2HiKXD3h7Eb8gGR8MYiGrZIsaOi6NEfc
+ ap41G89RStq1hZC6uM293FS+m/If6e95hleBxxCadMeSXKkrwqeUi2rRlEgQvrcEX5Q9
+ f3RH7nqvNVnYd8P2cTZygFc56t3+Sgd8+Fh4ZFvIDWLi+grMMvs7bPAf9b5K7TWDREC1
+ hruA==
+X-Gm-Message-State: AOJu0YxCO/7fGM/nPabI343oyAMcaqWZdzMIjL0ScsUg+wipBP9CAQHE
+ P6GWc91PCKtaOAzJKI3QkmemiCYhn9n9Tzy/chs=
+X-Google-Smtp-Source: AGHT+IFOcXgyBX64gsLi6UavSl32VHbWHzx6Bkr9yhW68mVLd6gCSag2yUkfX/J0uydR4OdqBy4wv/E6WV0GsaBjNw4=
+X-Received: by 2002:a05:6102:4702:b0:462:8f85:783a with SMTP id
+ ei2-20020a056102470200b004628f85783amr4249277vsb.22.1700708702084; Wed, 22
+ Nov 2023 19:05:02 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=patrick@rivosinc.com; helo=mail-pl1-x633.google.com
+References: <20231030054834.39145-1-akihiko.odaki@daynix.com>
+ <20231030054834.39145-2-akihiko.odaki@daynix.com>
+In-Reply-To: <20231030054834.39145-2-akihiko.odaki@daynix.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 23 Nov 2023 13:04:35 +1000
+Message-ID: <CAKmqyKMo41GMJ0vVN2_CsfOVrfsz8H9AtxTe6-JbtX+Pi6B3DA@mail.gmail.com>
+Subject: Re: [PATCH v6 1/5] hw/riscv: Use misa_mxl instead of misa_mxl_max
+To: Akihiko Odaki <akihiko.odaki@daynix.com>
+Cc: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
+ Mikhail Tyutin <m.tyutin@yadro.com>, Aleksandr Anenkov <a.anenkov@yadro.com>,
+ qemu-devel@nongnu.org, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Fabiano Rosas <farosas@suse.de>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92d;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92d.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 22 Nov 2023 20:43:16 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,38 +96,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-QEMU currently limits the max vlenb to 1024. GCC sets the upper bound
-to 4096 [1]. There doesn't seem to be an upper bound set by the spec [2]
-so this patch just changes QEMU to match GCC's upper bound.
+On Mon, Oct 30, 2023 at 3:50=E2=80=AFPM Akihiko Odaki <akihiko.odaki@daynix=
+.com> wrote:
+>
+> The effective MXL value matters when booting.
 
-[1] https://github.com/gcc-mirror/gcc/blob/5d2a360f0a541646abb11efdbabc33c6a04de7ee/gcc/testsuite/gcc.target/riscv/rvv/base/zvl-unimplemented-2.c#L4
-[2] https://github.com/riscv/riscv-v-spec/issues/204
+This doesn't sound right. Surely the max is what matters here
 
-Signed-off-by: Patrick O'Neill <patrick@rivosinc.com>
----
-Tested by applying to QEMU v8.1.2 and running the GCC testsuite in QEMU
-user mode with rv64gcv_zvl4096b. Failures are somewhat reasonable and on
-first inspection appear to be in the same ballpark as failures for
-rv64gcv_zvl1024b. Since I used tip-of-tree GCC I'm expecting those
-failures to be GCC-caused & from skimming the debug log they appear to
-be.
----
- target/riscv/cpu.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Also, this was specifically changed to misa_mxl_max in db23e5d981a
+"target/riscv: Replace riscv_cpu_is_32bit with riscv_cpu_mxl".
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 6ea22e0eea..2ff3a72fc0 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -97,7 +97,7 @@ typedef enum {
- #include "debug.h"
- #endif
+This needs a much better description of why this change should be made
 
--#define RV_VLEN_MAX 1024
-+#define RV_VLEN_MAX 4096
- #define RV_MAX_MHPMEVENTS 32
- #define RV_MAX_MHPMCOUNTERS 32
+Alistair
 
---
-2.34.1
+>
+> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+> ---
+>  hw/riscv/boot.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index 52bf8e67de..dad3f6e7b1 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -36,7 +36,7 @@
+>
+>  bool riscv_is_32bit(RISCVHartArrayState *harts)
+>  {
+> -    return harts->harts[0].env.misa_mxl_max =3D=3D MXL_RV32;
+> +    return harts->harts[0].env.misa_mxl =3D=3D MXL_RV32;
+>  }
+>
+>  /*
+> --
+> 2.42.0
+>
+>
 
