@@ -4,93 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD41CC5AD4C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Nov 2023 07:24:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 769C3C5AD4C
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Nov 2023 09:12:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r644L-000543-6E; Thu, 23 Nov 2023 02:24:13 -0500
+	id 1r65lB-000600-BB; Thu, 23 Nov 2023 04:12:33 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1r644J-000531-Vj
- for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 02:24:11 -0500
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1r644I-0002WS-HJ
- for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 02:24:11 -0500
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-6c398717726so527764b3a.2
- for <qemu-riscv@nongnu.org>; Wed, 22 Nov 2023 23:24:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1700724248; x=1701329048;
- darn=nongnu.org; 
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=WGlTPW3xVQBrGzxZ3PIJH6SHW9JKGrytJBUktVOvRkE=;
- b=V4KN19/PFFiWnqPndG5qdC0j0lGAaIEcigVrq8bY+OVbvVR8TDN79fYxzqKZsND7UL
- O2DjxeKqk0SOIa7Mx4nYIpw2SAe7+8DTlIX9Ux9gs4MKxqKBmyBb6OVbZOoWYaqVCkXm
- ZkhpGtoC3hhLJhBzUc9CLXpCYxy2ngwv5EW9lKP21BeKHFvsPbedBFuZy2/i4giRrF8/
- TojkN5ivGQQ5KY4o/xvGqb30Hh3htxiypmTEcUN8o82WRkEiT0YK08JpA3stUC3lDm14
- KRy3DoLOBBve3jP1lK7BSWsbtt+BzmqmwNen27DF8coPcpkFE/xcMqrSvUQ7XDKlAoMa
- 9jMA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700724248; x=1701329048;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=WGlTPW3xVQBrGzxZ3PIJH6SHW9JKGrytJBUktVOvRkE=;
- b=DnrFRihc2F4DILoFbzHa8alp5NkZ/1DRQ6Z62z+ase3/L7wZ/h+Wx2UHJxBC/a5Uzz
- wO1fJiCBco5sdVO3lXfyGFCc3ZMMIHWr6IPKeGirISOGCNfsYb/McTKjL0BAzw3Ry+ac
- 8YlNNUMbpc8i6iHBZA5VgRxrC1jkx2Z1snTsdoJbB3LTBr6DyxchpJwLI6cUE8+OxOZq
- bsqSb1ldsyJ2nLvBi5gISdl8oUOVC+PRqIdFu14Vmv4Bocz7Z9NiSTYN/5I+WRnxOppN
- tLuRnT8oo8QRyAe9d3fwZk6AkfmDRi0nY/K+6l9/W06OMnOx9LX6TX/h4UnCa/JS+W5F
- O/Sw==
-X-Gm-Message-State: AOJu0YwIcGF0iL8cAthiySYqycQYWccGJctXm31Qe1fTLz6iu+0wP7i/
- F9W8YuhECxpMjVeU+b11s1Umbg==
-X-Google-Smtp-Source: AGHT+IFAmexz7i3YdJjx2Np3NOEEA2/6fr/dRuuvOryid+zNTqGv1u4cxFxvbsNx23dSVVKuzW45KQ==
-X-Received: by 2002:a05:6a00:1d8d:b0:6cb:88c2:83b3 with SMTP id
- z13-20020a056a001d8d00b006cb88c283b3mr5035006pfw.0.1700724248102; 
- Wed, 22 Nov 2023 23:24:08 -0800 (PST)
-Received: from [157.82.205.15] ([157.82.205.15])
- by smtp.gmail.com with ESMTPSA id
- it27-20020a056a00459b00b006c7ca969858sm602308pfb.82.2023.11.22.23.24.05
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 22 Nov 2023 23:24:07 -0800 (PST)
-Message-ID: <fcf3a810-7492-4f60-9126-63713d6a30bd@daynix.com>
-Date: Thu, 23 Nov 2023 16:24:04 +0900
+ (Exim 4.90_1) (envelope-from <ivan.klokov@syntacore.com>)
+ id 1r65l8-0005zL-NV; Thu, 23 Nov 2023 04:12:31 -0500
+Received: from mta-04.yadro.com ([89.207.88.248])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <ivan.klokov@syntacore.com>)
+ id 1r65l6-0000FN-Mo; Thu, 23 Nov 2023 04:12:30 -0500
+DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com E5E77C0002
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-04; t=1700730742;
+ bh=fqEB+XnNjzwadFp8pdCn5WUq1BZ6k0jmhu3L43yvSic=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=etyAY4R+iwNm3UWn3j24y7hpeE96602E45SAlSwl7CEMlCM+HKTvFu0QlMhEo9eAm
+ bJvi5Ht+HeKYNibMreLNfENG22Etv3zQVmYcgSGzEY5STe180OqQrKlSU551lh+BUm
+ qo3+mPQnAavuvU/eKoFgKm39zXT9cGWCPl65yDx577rS+ktn7BPtcxIZr9z0HXvNa0
+ EFXMnq+LqkIaUVDIY2GFyc5ak7rMis8gijgNe79KeqBOVCMULoCQr8W/kVoGSWKFIF
+ 4PqRgOtmyYyZ9CyB2mvkCxgr+h4lJsO47QKv1VW4+p24TwnoBoPFdtsXyvymY+XNvF
+ 2Fg8j0tB11cvQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-03; t=1700730742;
+ bh=fqEB+XnNjzwadFp8pdCn5WUq1BZ6k0jmhu3L43yvSic=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=evxafABYS3lPm4QePdidDwPAbjP2pE0PieXUuYN67/TmH1oZyMGsu6dQ5OjJlvZ2F
+ zoYbGflkjbGPpjrdvCHI8V/H94m8a6dYQVZCFEzCKl1FS9JbsQ6XWf0grEeKtz8Z7a
+ p4QPsCfuJ0xSNlMbD9UELN++GGAp4y2vgV2JeSVHrJETE52XNkRzVu3dpmIBWQP3Ig
+ Ubrdes36OWdETcokWXZI/6DuK2vbE0CTcf8mABSlid5YquJrjJhdVqJoNnvGDArGnr
+ 6HJnmW23yPRBMBGUwy8yKJPZxj7nIWJZe3hXNE7vMaeV4VZBh+lvsRLkN6zNQ2eaXI
+ REF2opX/IW7zA==
+From: Ivan Klokov <ivan.klokov@syntacore.com>
+To: <qemu-devel@nongnu.org>
+CC: <qemu-riscv@nongnu.org>, <palmer@dabbelt.com>, <alistair.francis@wdc.com>, 
+ <bin.meng@windriver.com>, <liwei1518@gmail.com>,
+ <dbarboza@ventanamicro.com>, 
+ <zhiwei_liu@linux.alibaba.com>, Ivan Klokov <ivan.klokov@syntacore.com>
+Subject: [PATCH 1/1] target/riscv/pmp: Use hwaddr instead of target_ulong for
+ RV32
+Date: Thu, 23 Nov 2023 12:12:14 +0300
+Message-ID: <20231123091214.20312-1-ivan.klokov@syntacore.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 1/5] hw/riscv: Use misa_mxl instead of misa_mxl_max
-Content-Language: en-US
-To: Alistair Francis <alistair23@gmail.com>
-Cc: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Mikhail Tyutin <m.tyutin@yadro.com>, Aleksandr Anenkov
- <a.anenkov@yadro.com>, qemu-devel@nongnu.org,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Fabiano Rosas <farosas@suse.de>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
-References: <20231030054834.39145-1-akihiko.odaki@daynix.com>
- <20231030054834.39145-2-akihiko.odaki@daynix.com>
- <CAKmqyKMo41GMJ0vVN2_CsfOVrfsz8H9AtxTe6-JbtX+Pi6B3DA@mail.gmail.com>
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <CAKmqyKMo41GMJ0vVN2_CsfOVrfsz8H9AtxTe6-JbtX+Pi6B3DA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::432;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x432.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Content-Type: text/plain
+X-ClientProxiedBy: T-EXCH-06.corp.yadro.com (172.17.10.110) To
+ S-Exch-01.corp.yadro.com (10.78.5.241)
+Received-SPF: permerror client-ip=89.207.88.248;
+ envelope-from=ivan.klokov@syntacore.com; helo=mta-04.yadro.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01,
+ T_SPF_PERMERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,33 +79,118 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2023/11/23 12:04, Alistair Francis wrote:
-> On Mon, Oct 30, 2023 at 3:50 PM Akihiko Odaki <akihiko.odaki@daynix.com> wrote:
->>
->> The effective MXL value matters when booting.
-> 
-> This doesn't sound right. Surely the max is what matters here
-> 
-> Also, this was specifically changed to misa_mxl_max in db23e5d981a
-> "target/riscv: Replace riscv_cpu_is_32bit with riscv_cpu_mxl".
-> 
-> This needs a much better description of why this change should be made
- >
- > Alistair
+The Sv32 page-based virtual-memory scheme described in RISCV privileged
+spec Section 5.3 supports 34-bit physical addresses for RV32, so the
+PMP scheme must support addresses wider than XLEN for RV32. However,
+PMP address register format is still 32 bit wide.
 
-The kernel will be executed with the current MXL rather than the initial 
-MXL value so the current MXL should be used here.
+Signed-off-by: Ivan Klokov <ivan.klokov@syntacore.com>
+---
+ target/riscv/pmp.c | 26 ++++++++++++--------------
+ target/riscv/pmp.h |  8 ++++----
+ 2 files changed, 16 insertions(+), 18 deletions(-)
 
-For example, if you are going to emulate a system that has a RV64 CPU 
-and a firmware that sets the MXL to RV32, then mxl_max should be 
-MXL_RV64 and mxl should be MXL_RV32, and the kernel should be assumed as 
-a RV32 binary. Loading a 64-bit kernel will not work in such a case.
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index 162e88a90a..dff9512c3f 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -150,8 +150,7 @@ void pmp_unlock_entries(CPURISCVState *env)
+     }
+ }
+ 
+-static void pmp_decode_napot(target_ulong a, target_ulong *sa,
+-                             target_ulong *ea)
++static void pmp_decode_napot(hwaddr a, hwaddr *sa, hwaddr *ea)
+ {
+     /*
+      * aaaa...aaa0   8-byte NAPOT range
+@@ -173,8 +172,8 @@ void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index)
+     uint8_t this_cfg = env->pmp_state.pmp[pmp_index].cfg_reg;
+     target_ulong this_addr = env->pmp_state.pmp[pmp_index].addr_reg;
+     target_ulong prev_addr = 0u;
+-    target_ulong sa = 0u;
+-    target_ulong ea = 0u;
++    hwaddr sa = 0u;
++    hwaddr ea = 0u;
+ 
+     if (pmp_index >= 1u) {
+         prev_addr = env->pmp_state.pmp[pmp_index - 1].addr_reg;
+@@ -227,8 +226,7 @@ void pmp_update_rule_nums(CPURISCVState *env)
+     }
+ }
+ 
+-static int pmp_is_in_range(CPURISCVState *env, int pmp_index,
+-                           target_ulong addr)
++static int pmp_is_in_range(CPURISCVState *env, int pmp_index, hwaddr addr)
+ {
+     int result = 0;
+ 
+@@ -305,14 +303,14 @@ static bool pmp_hart_has_privs_default(CPURISCVState *env, pmp_priv_t privs,
+  * Return true if a pmp rule match or default match
+  * Return false if no match
+  */
+-bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
++bool pmp_hart_has_privs(CPURISCVState *env, hwaddr addr,
+                         target_ulong size, pmp_priv_t privs,
+                         pmp_priv_t *allowed_privs, target_ulong mode)
+ {
+     int i = 0;
+     int pmp_size = 0;
+-    target_ulong s = 0;
+-    target_ulong e = 0;
++    hwaddr s = 0;
++    hwaddr e = 0;
+ 
+     /* Short cut if no rules */
+     if (0 == pmp_get_num_rules(env)) {
+@@ -624,12 +622,12 @@ target_ulong mseccfg_csr_read(CPURISCVState *env)
+  * To avoid this we return a size of 1 (which means no caching) if the PMP
+  * region only covers partial of the TLB page.
+  */
+-target_ulong pmp_get_tlb_size(CPURISCVState *env, target_ulong addr)
++target_ulong pmp_get_tlb_size(CPURISCVState *env, hwaddr addr)
+ {
+-    target_ulong pmp_sa;
+-    target_ulong pmp_ea;
+-    target_ulong tlb_sa = addr & ~(TARGET_PAGE_SIZE - 1);
+-    target_ulong tlb_ea = tlb_sa + TARGET_PAGE_SIZE - 1;
++    hwaddr pmp_sa;
++    hwaddr pmp_ea;
++    hwaddr tlb_sa = addr & ~(TARGET_PAGE_SIZE - 1);
++    hwaddr tlb_ea = tlb_sa + TARGET_PAGE_SIZE - 1;
+     int i;
+ 
+     /*
+diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
+index 9af8614cd4..f5c10ce85c 100644
+--- a/target/riscv/pmp.h
++++ b/target/riscv/pmp.h
+@@ -53,8 +53,8 @@ typedef struct {
+ } pmp_entry_t;
+ 
+ typedef struct {
+-    target_ulong sa;
+-    target_ulong ea;
++    hwaddr sa;
++    hwaddr ea;
+ } pmp_addr_t;
+ 
+ typedef struct {
+@@ -73,11 +73,11 @@ target_ulong mseccfg_csr_read(CPURISCVState *env);
+ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
+                        target_ulong val);
+ target_ulong pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index);
+-bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
++bool pmp_hart_has_privs(CPURISCVState *env, hwaddr addr,
+                         target_ulong size, pmp_priv_t privs,
+                         pmp_priv_t *allowed_privs,
+                         target_ulong mode);
+-target_ulong pmp_get_tlb_size(CPURISCVState *env, target_ulong addr);
++target_ulong pmp_get_tlb_size(CPURISCVState *env, hwaddr addr);
+ void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index);
+ void pmp_update_rule_nums(CPURISCVState *env);
+ uint32_t pmp_get_num_rules(CPURISCVState *env);
+-- 
+2.34.1
 
-You can find a similar example in x86_64: x86_64 systems typically 
-starts in 16-bit mode, and the firmware switches to 64-bit mode. When 
-emulating those systems, QEMU switches to 64-bit mode and loads a 64-bit 
-kernel.
-
-Regards,
-Akihiko Odaki
 
