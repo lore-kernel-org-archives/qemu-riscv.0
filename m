@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AE53C5AD4C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Nov 2023 20:38:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99DA2C61D97
+	for <qemu-riscv@archiver.kernel.org>; Fri, 24 Nov 2023 09:24:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r6GSU-0005fL-7G; Thu, 23 Nov 2023 15:37:59 -0500
+	id 1r6SPs-0001wY-Q0; Fri, 24 Nov 2023 04:24:04 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1r6GST-0005f0-8X
- for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 15:37:57 -0500
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1r6SPr-0001wO-93
+ for qemu-riscv@nongnu.org; Fri, 24 Nov 2023 04:24:03 -0500
+Received: from mail-lf1-x136.google.com ([2a00:1450:4864:20::136])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1r6GSR-00017Q-L6
- for qemu-riscv@nongnu.org; Thu, 23 Nov 2023 15:37:56 -0500
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-1cf98db3569so4286285ad.1
- for <qemu-riscv@nongnu.org>; Thu, 23 Nov 2023 12:37:55 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1r6SPp-0006o2-Iz
+ for qemu-riscv@nongnu.org; Fri, 24 Nov 2023 04:24:03 -0500
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-507a0907896so2162046e87.2
+ for <qemu-riscv@nongnu.org>; Fri, 24 Nov 2023 01:24:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1700771874; x=1701376674; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=kZ3opmbdsKZYcUTskiib2tuLJ71Hd/pA8b2WyG9Oz6Y=;
- b=V+GEUA7Y0d73J5tw2QA+Y87jwfAuJ6MxfK8+/QdH36L4G0wLxsRZK2093wmXKir7uR
- h9FFCjj1BDk4sAu5hR0fkoNBCkS9ZD3w2hK/oIC/m1Pi8lHRejTHyB5pjkje9MADFM0k
- JTwN0dx7WFv2hVUI8LXTEJ/MRmjojSSNwOTnTQQIS/5ahemr7V6oURWAbNaArwGnXI27
- xUZWcfwD1WAisvSU8w//7OL59Zu+yOGZT2KQd2ZkH0x5kSLYvBi6Ep7p5pSjahMSSFW+
- Ka/iZhNcw4gQGLi9DemuZ4DL3S55NkaTdK/4Oq0kPTDorFHY1ia5Lydd3xiXw0I+GePs
- XVVw==
+ d=ventanamicro.com; s=google; t=1700817839; x=1701422639; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=9pxljqwO+woALFQ41UDByycJRL0z5czCfgCEDhXSk4g=;
+ b=DxWKKDS26zXx33Pg+BINAlKbIUaMOeSpbDKkeaoUEbgAOcazm/KbaJzJMWubOxRDc3
+ nCrnM8qS8LZUAEqs9ol/2ydwS9Zb4LFURtr3Rk1BhbHvkdJsuH5Twv4kZb30PIkhmeNi
+ Jv5UEot8BhuMDGYLk6MYskXKBBOeTFaQ9utgK+EUpLAFox9EOuAQpA8pwKKGKh8brwwb
+ PRe9pNsrSmtLh+L9mKP9Wwl3acVFmp70DGSPGo3k6pXoaysFTZANVlJzk6xzoGSdIBsl
+ pxyROzOu5y6c5+aReeEnlOARcSIfBZBsB90gV17mKC3MOXTGYVGpTpN/OUd2CWfB/z6U
+ 73YA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700771874; x=1701376674;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=kZ3opmbdsKZYcUTskiib2tuLJ71Hd/pA8b2WyG9Oz6Y=;
- b=TJAPvSpEGTBtCnI1U3ZGrOXuFEbWFUu4+5f0yIhzQie7OSY5RMK2dkCIrSYRfcsave
- 6nHXVxhjw13roeLw7Iim2t9dRTVS3b3ZXVFMOeZ42pB/rQNvQCY1zBI07/4OL4VrHr3j
- kJ+qXC2m1NvZXRyk7jrDBvJrUDoSfGiRQg2sAbcfQxxImPvLrIaoIPrJsGMj76U1u3mt
- 66GIE0SV4r9ClSBc1KS090FrkrxB6d4sS1Bg0w3RngD1vS2Jw58FXkrMZhI3vM2QNTQ/
- uMspHDpn0ogWo18zO8AEdbl4GbsgdywyNPN8rHUgymISihAPbuz06JGRoTvxcZjIoAlG
- DpAw==
-X-Gm-Message-State: AOJu0YzZUOZjgfqIv7ZkFZiJ16U1+Tx1v/OFF2VU+Epb3v6R8cQqrvBN
- NVh+bsqOOEe2yYovut9tTNcGpQ==
-X-Google-Smtp-Source: AGHT+IHsarAfOsfP6jvw2oaSUicaVE0r9awbIb0oc2Rxk347CTsVWyZ7i2Qa84G4tZnzRIu8JTHWSw==
-X-Received: by 2002:a17:902:f7c6:b0:1cf:5c9b:5c27 with SMTP id
- h6-20020a170902f7c600b001cf5c9b5c27mr419944plw.63.1700771873631; 
- Thu, 23 Nov 2023 12:37:53 -0800 (PST)
-Received: from [192.168.68.109] ([152.250.131.119])
+ d=1e100.net; s=20230601; t=1700817839; x=1701422639;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9pxljqwO+woALFQ41UDByycJRL0z5czCfgCEDhXSk4g=;
+ b=eV/kwpJPzg0T38i6Tge+zdKmh5AkUFGsxpPgOHQW5fX1BnqwpMPpPi8DNbR3ODsWfG
+ hrk0fmL1yTf4+R6CbYsokXDQOD2Dk/sYw6KEo52OkrRjwy9Km4MN9Ru8+nKlW99LpUx2
+ XwYfgSG81pNhJZT+Jte+xE3j8iHESz4Muc3ydfUsC+0mqxnbm3IYNwRk+5P8BqOJsshV
+ pA2suBe1VYO3zCNbiuZ/8LEwaBIEOZfahqy+FrJlc+/L8HROVbBOAjEeEcibRE/4Siy5
+ m0i2OpeN9noELacJX+NJfS8yEDLbr/Gby04mfrvFlsTdGuBMyPlD8TBB0bU6GaCVMJR+
+ FpnA==
+X-Gm-Message-State: AOJu0YymLlr12CW8hpQ71dsfAffYq3neaKR7TH6OaFRaOf8xedhI5SHN
+ sz+JiMfehAt/8z4XAwegYS1gpQ==
+X-Google-Smtp-Source: AGHT+IFdkZa+lc4uMsvr7nCqf6SCgYL2QWrnqk2BRAZQXuNrZ0tKYw1Ub54jURyEhqY+w0hWEhIpyg==
+X-Received: by 2002:a19:6449:0:b0:507:c507:c9b6 with SMTP id
+ b9-20020a196449000000b00507c507c9b6mr1322672lfj.41.1700817839265; 
+ Fri, 24 Nov 2023 01:23:59 -0800 (PST)
+Received: from localhost (cst-prg-91-180.cust.vodafone.cz. [46.135.91.180])
  by smtp.gmail.com with ESMTPSA id
- e5-20020a170902b78500b001cf59cccb10sm1668732pls.23.2023.11.23.12.37.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Nov 2023 12:37:53 -0800 (PST)
-Message-ID: <d25f1acc-5796-4674-a9b7-cd2f25aae64f@ventanamicro.com>
-Date: Thu, 23 Nov 2023 17:37:49 -0300
+ f10-20020a5d568a000000b0032d9caeab0fsm3863635wrv.77.2023.11.24.01.23.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 24 Nov 2023 01:23:58 -0800 (PST)
+Date: Fri, 24 Nov 2023 10:23:57 +0100
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com
+Subject: Re: [PATCH for-9.0 v11 03/18] target/riscv/tcg: update priv_ver on
+ user_set extensions
+Message-ID: <20231124-92b499e54aa4a447386fac16@orel>
+References: <20231123185122.1100436-1-dbarboza@ventanamicro.com>
+ <20231123185122.1100436-4-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] linux-user/riscv: Add Zicboz extensions to hwprobe
-Content-Language: en-US
-To: Christoph Muellner <christoph.muellner@vrull.eu>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Cc: Laurent Vivier <laurent@vivier.eu>
-References: <20231123181300.2140622-1-christoph.muellner@vrull.eu>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20231123181300.2140622-1-christoph.muellner@vrull.eu>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x634.google.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20231123185122.1100436-4-dbarboza@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::136;
+ envelope-from=ajones@ventanamicro.com; helo=mail-lf1-x136.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,41 +96,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-On 11/23/23 15:12, Christoph Muellner wrote:
-> From: Christoph Müllner <christoph.muellner@vrull.eu>
+On Thu, Nov 23, 2023 at 03:51:07PM -0300, Daniel Henrique Barboza wrote:
+> We'll add a new bare CPU type that won't have any default priv_ver. This
+> means that the CPU will default to priv_ver = 0, i.e. 1.10.0.
 > 
-> Upstream Linux recently added RISC-V Zicboz support to the hwprobe API.
-> This patch introduces this for QEMU's user space emulator.
+> At the same we'll allow these CPUs to enable extensions at will, but
+> then, if the extension has a priv_ver newer than 1.10, we'll end up
+> disabling it. Users will then need to manually set priv_ver to something
+> other than 1.10 to enable the extensions they want, which is not ideal.
 > 
-> Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
+> Change the setter() of extensions to allow user enabled extensions to
+> bump the priv_ver of the CPU. This will make it convenient for users to
+> enable extensions for CPUs that doesn't set a default priv_ver.
+> 
+> This change does not affect any existing CPU: vendor CPUs does not allow
+> extensions to be enabled, and generic CPUs are already set to priv_ver
+> LATEST.
+> 
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 > ---
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
->   linux-user/syscall.c | 3 +++
->   1 file changed, 3 insertions(+)
+>  target/riscv/tcg/tcg-cpu.c | 32 ++++++++++++++++++++++++++++++++
+>  1 file changed, 32 insertions(+)
 > 
-> diff --git a/linux-user/syscall.c b/linux-user/syscall.c
-> index 65ac3ac796..2f9a1c5279 100644
-> --- a/linux-user/syscall.c
-> +++ b/linux-user/syscall.c
-> @@ -8799,6 +8799,7 @@ static int do_getdents64(abi_long dirfd, abi_long arg2, abi_long count)
->   #define     RISCV_HWPROBE_EXT_ZBA      (1 << 3)
->   #define     RISCV_HWPROBE_EXT_ZBB      (1 << 4)
->   #define     RISCV_HWPROBE_EXT_ZBS      (1 << 5)
-> +#define     RISCV_HWPROBE_EXT_ZICBOZ   (1 << 6)
->   
->   #define RISCV_HWPROBE_KEY_CPUPERF_0     5
->   #define     RISCV_HWPROBE_MISALIGNED_UNKNOWN     (0 << 0)
-> @@ -8855,6 +8856,8 @@ static void risc_hwprobe_fill_pairs(CPURISCVState *env,
->                        RISCV_HWPROBE_EXT_ZBB : 0;
->               value |= cfg->ext_zbs ?
->                        RISCV_HWPROBE_EXT_ZBS : 0;
-> +            value |= cfg->ext_zicboz ?
-> +                     RISCV_HWPROBE_EXT_ZICBOZ : 0;
->               __put_user(value, &pair->value);
->               break;
->           case RISCV_HWPROBE_KEY_CPUPERF_0:
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index 7670120673..d279314624 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -114,6 +114,26 @@ static int cpu_cfg_ext_get_min_version(uint32_t ext_offset)
+>      g_assert_not_reached();
+>  }
+>  
+> +static void cpu_validate_multi_ext_priv_ver(CPURISCVState *env,
+> +                                            uint32_t ext_offset)
+
+We should probably name this cpu_bump_multi_ext_priv_ver(). "validate"
+implies we're checking something and either returning an error when it's
+not what we expect or asserting on unexpected input. We do neither here,
+we just bump priv_ver, when necessary.
+
+Thanks,
+drew
 
