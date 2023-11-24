@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 373B8C61D97
-	for <qemu-riscv@archiver.kernel.org>; Fri, 24 Nov 2023 17:18:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65418C61D97
+	for <qemu-riscv@archiver.kernel.org>; Fri, 24 Nov 2023 17:42:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r6ZoM-0004mj-NS; Fri, 24 Nov 2023 12:17:50 -0500
+	id 1r6aBT-0007mW-PE; Fri, 24 Nov 2023 12:41:43 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1r6ZoD-0004RQ-TN
- for qemu-riscv@nongnu.org; Fri, 24 Nov 2023 12:17:42 -0500
-Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1r6aBS-0007k0-IY
+ for qemu-riscv@nongnu.org; Fri, 24 Nov 2023 12:41:42 -0500
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1r6ZoC-00084f-7q
- for qemu-riscv@nongnu.org; Fri, 24 Nov 2023 12:17:41 -0500
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a013d22effcso295451166b.2
- for <qemu-riscv@nongnu.org>; Fri, 24 Nov 2023 09:17:38 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1r6aBQ-0006Ou-Om
+ for qemu-riscv@nongnu.org; Fri, 24 Nov 2023 12:41:42 -0500
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-1cf6a67e290so16519825ad.1
+ for <qemu-riscv@nongnu.org>; Fri, 24 Nov 2023 09:41:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1700846257; x=1701451057; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=4ssoAPZeWgBblBh8RNleEQCH85LsXMl5zyETMsXY2m4=;
- b=GLmDRm6XwfoRAhQZnPPGYd5h3UOcW80Fnzt41ZGdGLy653MQCh/l0Vf698kBl0ruBn
- cdD8wyhWc3xZPIErL1pMZOUrsRM3ZrU9+vN07n9c7K8TxW0y42LFrBF8gY5PSIWEIXwd
- fgt5pbU6E85IhL3OgQEI848mH3IuEjcjSATcCpHaG074YdMEr3VxDZcMdk16Y0BRv7e0
- MAjNrbvzNum5ChwjE7jG1PtSm+bviW7l38Z0L0HQUDvEGIudXufHG1yqTbtN3hXWR6Hj
- DretLC1KuAOJEIQsZ8FuTc64bObyiEsL83XlmD2wZc+VaO5M2aTJqQiOMbmsushxm/mw
- 3Dpg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700846257; x=1701451057;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=vrull.eu; s=google; t=1700847698; x=1701452498; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4ssoAPZeWgBblBh8RNleEQCH85LsXMl5zyETMsXY2m4=;
- b=sAESJvd1lxN0hrli6N5l85Z2O/np5Tv/LUV/T7oRA73hVLRgf5kQ/RoSw9S57RNch+
- Ah+3v7nD6EEcLdywjVgiuLEL2oBnpgfRkcadzz28HtmSXT/XmY6rHPIhCZdmJmtoGxie
- lBhiIHBmmuSzrh9UVtSKMDEayTfwps3EZA7d9TSP0/3OML6iu1fQv+upPydRkslrHq1f
- BgG+ja2gYKUmrRZEI2W+vy75Ojm7yhTWLOhjcT5DqdA4ypuFXmi03rcAzY5LueXCCOaT
- mTWPaiK9NRgIIGil51wKBXEDx7lAWR1JhTQcpMyWxuiq6FwKy6BU4TE2Eee7D0LKl1BK
- aaeg==
-X-Gm-Message-State: AOJu0Yxx8TFUhqy3xWSDIbcOT/gg3RTXj0JudFVxyqvCbKJSGLAkl0cN
- XU0DJb4PAAtKsUszA1PVAFbgng==
-X-Google-Smtp-Source: AGHT+IEAcibprdkEJIPQAp5O8Qfc96xh9i3MlRfKxg1ZSzAc5CC2WM1d+rRnmmUQahFcPCDeLOjPLw==
-X-Received: by 2002:a17:906:d8ab:b0:9af:4561:591d with SMTP id
- qc11-20020a170906d8ab00b009af4561591dmr3031201ejb.18.1700846256687; 
- Fri, 24 Nov 2023 09:17:36 -0800 (PST)
-Received: from localhost ([81.19.4.232]) by smtp.gmail.com with ESMTPSA id
- a18-20020a170906191200b009e6cedc8bf5sm2286699eje.29.2023.11.24.09.17.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Nov 2023 09:17:36 -0800 (PST)
-Date: Fri, 24 Nov 2023 18:17:35 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
-Subject: Re: [PATCH for-9.0 4/7] target/riscv/cpu: add riscv_cpu_is_32bit()
-Message-ID: <20231124-534f3edb379494bade73e9f8@orel>
-References: <20231123191532.1101644-1-dbarboza@ventanamicro.com>
- <20231123191532.1101644-5-dbarboza@ventanamicro.com>
+ bh=0doE+xU3LQuc6URq/RcUDO+8m89F+MxaAiNXFDpzIfw=;
+ b=QRHLvWDtGjqSPjD79gbjnzJtTykM/EcaKYUX9uKul8yTRLieBq4kXrdaOVJQL3uc6r
+ O4a8ZDpvl4iglP4uHbyXzLEWir0Grgt/MYP8SfS/UuVTYL2SWDkmZ3dd7sCROwNMOK7D
+ sDl4u/L+u/a1+9gaB2CWghkrwrjARCOzRE7l3oRNWU4tO81uQmPVTeUUiTfsV/j8s+ko
+ kcN0iMJ/RuLZo4PjI7TKuUGylzRrmXsAV3lGITGO6prQMBAZE7FcXNvhx//LIsph9XrX
+ Aa8p4nEp/ZSGh9vFiEbv38MOGZe51IZ47u4irOjV9zYZCzOgmwA7UZWXcUFh9ULwJIDG
+ uV8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700847698; x=1701452498;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0doE+xU3LQuc6URq/RcUDO+8m89F+MxaAiNXFDpzIfw=;
+ b=BgjAAnkYU3zzT8SlJ4V5JbjFhssSnwBcJRbEr1fSqaizeed2Kh1oBgQytHo3P/yoO0
+ fqiIn4GTGgurXbI/P8g91LzeAmezKWkToBySQbSInEIjQSxclQQ0crzOIjJkmxgDxWpk
+ xYHaULG8q+yGRfcp/mXEh3LW8KV9bNMkaheQr12/4ZmPRa8rJXTwlTGmjB6A6mQFYq9S
+ 5mSYadJGa+T2WP6gYs64qYGH59nPTfdXCZR0yKPpLnSSylCOBXbFiwZ5v5Rh545OxcT+
+ 8Uz9cHxB0h7KzRWDl4ZVmju9Gq/ZQrSt55H+OmbDa1gtb9dOCkW/FVDuCBByNhqkcev/
+ 7XTA==
+X-Gm-Message-State: AOJu0YwNFen0IxcqwrP7+eqNx5uoHVDI4lfdTf6+7CEzIWMfml+dSqq+
+ 2NxBrQUs0O+8rxCBnWo66r6MPFaUZZ/0/RO1s2xELw==
+X-Google-Smtp-Source: AGHT+IFroIa6m9vEOR6kCl8od4IepRuFGkhTwMXnjCrPAW5qYu8BHhkuhKHT7TY8RYlYZaITRIJXUOQ0xgR4OG+r6m0=
+X-Received: by 2002:a17:90b:1c86:b0:280:cd7b:1fa5 with SMTP id
+ oo6-20020a17090b1c8600b00280cd7b1fa5mr3788293pjb.4.1700847698386; Fri, 24 Nov
+ 2023 09:41:38 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20231123191532.1101644-5-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::629;
- envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x629.google.com
+References: <20231123181300.2140622-1-christoph.muellner@vrull.eu>
+ <20231124-b892dc7ca5a5f9ff4cceda6e@orel>
+In-Reply-To: <20231124-b892dc7ca5a5f9ff4cceda6e@orel>
+From: =?UTF-8?Q?Christoph_M=C3=BCllner?= <christoph.muellner@vrull.eu>
+Date: Fri, 24 Nov 2023 18:41:25 +0100
+Message-ID: <CAEg0e7hy2Z+X7TR8iaQckCHZ2NGyPJV8dioco-FB2aPErMpnOQ@mail.gmail.com>
+Subject: Re: [PATCH v2] linux-user/riscv: Add Zicboz extensions to hwprobe
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Laurent Vivier <laurent@vivier.eu>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-pl1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -94,61 +93,65 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Nov 23, 2023 at 04:15:29PM -0300, Daniel Henrique Barboza wrote:
-> Next patch will need to retrieve if a given RISCVCPU is 32 or 64 bit.
-> The existing helper riscv_is_32bit() (hw/riscv/boot.c) will always check
-> the first CPU of a given hart array, not any given CPU.
-> 
-> Create a helper to retrieve the info for any given CPU, not the first
-> CPU of the hart array. The helper is using the same 32 bit check that
-> riscv_cpu_satp_mode_finalize() was doing.
-> 
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->  target/riscv/cpu.c | 7 ++++++-
->  target/riscv/cpu.h | 1 +
->  2 files changed, 7 insertions(+), 1 deletion(-)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index a395c77bda..2b79fe861b 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -53,6 +53,11 @@ const uint32_t misa_bits[] = {RVI, RVE, RVM, RVA, RVF, RVD, RVV,
->  #define BYTE(x)   (x)
->  #endif
->  
-> +bool riscv_cpu_is_32bit(RISCVCPU *cpu)
-> +{
-> +    return riscv_cpu_mxl(&cpu->env) == MXL_RV32;
-> +}
-> +
->  #define ISA_EXT_DATA_ENTRY(_name, _min_ver, _prop) \
->      {#_name, _min_ver, CPU_CFG_OFFSET(_prop)}
->  
-> @@ -980,7 +985,7 @@ static void riscv_cpu_disas_set_info(CPUState *s, disassemble_info *info)
->  #ifndef CONFIG_USER_ONLY
->  static void riscv_cpu_satp_mode_finalize(RISCVCPU *cpu, Error **errp)
->  {
-> -    bool rv32 = riscv_cpu_mxl(&cpu->env) == MXL_RV32;
-> +    bool rv32 = riscv_cpu_is_32bit(cpu);
->      uint8_t satp_mode_map_max, satp_mode_supported_max;
->  
->      /* The CPU wants the OS to decide which satp mode to use */
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 1f34eda1e4..485d2da3c2 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -695,6 +695,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
->                            uint64_t *cs_base, uint32_t *pflags);
->  
->  void riscv_cpu_update_mask(CPURISCVState *env);
-> +bool riscv_cpu_is_32bit(RISCVCPU *cpu);
->  
->  RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
->                             target_ulong *ret_value,
-> -- 
-> 2.41.0
+On Fri, Nov 24, 2023 at 5:59=E2=80=AFPM Andrew Jones <ajones@ventanamicro.c=
+om> wrote:
 >
+> On Thu, Nov 23, 2023 at 07:12:59PM +0100, Christoph Muellner wrote:
+> > From: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
+> >
+> > Upstream Linux recently added RISC-V Zicboz support to the hwprobe API.
+> > This patch introduces this for QEMU's user space emulator.
+> >
+> > Signed-off-by: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
+> > ---
+> >  linux-user/syscall.c | 3 +++
+> >  1 file changed, 3 insertions(+)
+> >
+> > diff --git a/linux-user/syscall.c b/linux-user/syscall.c
+> > index 65ac3ac796..2f9a1c5279 100644
+> > --- a/linux-user/syscall.c
+> > +++ b/linux-user/syscall.c
+> > @@ -8799,6 +8799,7 @@ static int do_getdents64(abi_long dirfd, abi_long=
+ arg2, abi_long count)
+> >  #define     RISCV_HWPROBE_EXT_ZBA      (1 << 3)
+> >  #define     RISCV_HWPROBE_EXT_ZBB      (1 << 4)
+> >  #define     RISCV_HWPROBE_EXT_ZBS      (1 << 5)
+> > +#define     RISCV_HWPROBE_EXT_ZICBOZ   (1 << 6)
+> >
+> >  #define RISCV_HWPROBE_KEY_CPUPERF_0     5
+> >  #define     RISCV_HWPROBE_MISALIGNED_UNKNOWN     (0 << 0)
+> > @@ -8855,6 +8856,8 @@ static void risc_hwprobe_fill_pairs(CPURISCVState=
+ *env,
+> >                       RISCV_HWPROBE_EXT_ZBB : 0;
+> >              value |=3D cfg->ext_zbs ?
+> >                       RISCV_HWPROBE_EXT_ZBS : 0;
+> > +            value |=3D cfg->ext_zicboz ?
+> > +                     RISCV_HWPROBE_EXT_ZICBOZ : 0;
+> >              __put_user(value, &pair->value);
+> >              break;
+> >          case RISCV_HWPROBE_KEY_CPUPERF_0:
+> > --
+> > 2.41.0
+> >
+> >
+>
+> We should also add support for getting the block size with
+> RISCV_HWPROBE_KEY_ZICBOZ_BLOCK_SIZE.
 
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+Hi Andrew, this is already upstream, just the EXT_ZICBOZ is missing:
+
+commit 301c65f49f9602f39b9f3ce0ad9ff70d4bda7226
+Author: Palmer Dabbelt <palmer@rivosinc.com>
+Date:   Fri Nov 10 09:37:16 2023 -0800
+
+    linux-user/riscv: Add Zicboz block size to hwprobe
+
+    Support for probing the Zicboz block size landed in Linux 6.6, which wa=
+s
+    released a few weeks ago.  This provides the user-configured block size
+    when Zicboz is enabled.
+
+>
+> Thanks,
+> drew
 
