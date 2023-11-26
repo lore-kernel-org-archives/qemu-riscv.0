@@ -4,87 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88337C4167B
-	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Nov 2023 10:02:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAAE3C4167B
+	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Nov 2023 23:12:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r7Bxe-0002Iq-77; Sun, 26 Nov 2023 05:01:58 -0500
+	id 1r7OIj-0001SH-Ja; Sun, 26 Nov 2023 18:12:33 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1r7Bxc-0002Gt-0O
- for qemu-riscv@nongnu.org; Sun, 26 Nov 2023 05:01:56 -0500
-Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1r7Bxa-0007dp-0l
- for qemu-riscv@nongnu.org; Sun, 26 Nov 2023 05:01:55 -0500
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-332fd78fa9dso171964f8f.3
- for <qemu-riscv@nongnu.org>; Sun, 26 Nov 2023 02:01:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1700992911; x=1701597711; darn=nongnu.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=sWamtikRUf1sDqGW+Z56O+5DFooywPqde+YI6Lz5I54=;
- b=mlCZHMLtWQPizcgbR/lkP2xA1aLQ8oDKrid5ihLej5tSntaqN3z0hsim+LvqbJ51oK
- hetTCV/lvDfSCPEVl/8SculEGG//2b+mDAibPd03YFwVdJv9S85sTiobquf5jC3BOj6u
- y1pZWe6ei8avv5IQKJnkGFH0ewa5dPqSS4AV5+sIqF7HqePvgUC7/UXrUw0fKQFWfoBj
- nlFCYAPWbTVCyIfMHcgIhwBDMq/Htj92AZIMB6jxrAS2P+st6MOaIAHPu0WwdkdDGDPq
- 4nlmup19Qalg4a8VL+al8ErU7udaxqMy3hBSjY/U6j7yDTi2ab0nGkhcdLXHBvUOiTWj
- q3yg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700992911; x=1701597711;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=sWamtikRUf1sDqGW+Z56O+5DFooywPqde+YI6Lz5I54=;
- b=rdSug9o7J0o1lEd1OkRXtDnGCXupJ3F/by6oqRHb4yf5kvmuZODD+tjGvaFSRYNj7a
- mXuhXzZ3T7u1iZpSN09f0kxeqc+UpMu/DO/Bqr7ziuTTxtqlF+x8rttqB3h2r1T/Lkjg
- JwgoXyqJk2v9otxEKSN8cbLFaKNHy8NpVKWZA3Ah+oJI3WfZERio/HkCBjO71dKvE8iF
- /n5Jm2jL4aUWMkRF7Ixv/kXxgpLBmLiSwLxk6AcJsXZip8nJ3T6IZ7vIh9smjUnteZ9c
- 4S6rrlvQsK82R1TbW7Zev5CBTIYLcAwZOyIpE/ockvnPCRrlakd2dO1vjchJA9QotQta
- 0Spg==
-X-Gm-Message-State: AOJu0YwU/RtYxLBpd/DQlkpJLZJjtjgCXEuxcAiN73NsXM45MJ+5/fu2
- BeIjUXKjojQhA45PTzB0KNH9Cw==
-X-Google-Smtp-Source: AGHT+IHZzkyWKfg8Pd3elx0pBvu0sF7/fkjTjGCJMQ69hkt9KVgXj9clvKEGu8ueKatkB3RrvnJzKw==
-X-Received: by 2002:adf:f5c1:0:b0:332:f895:f599 with SMTP id
- k1-20020adff5c1000000b00332f895f599mr1734940wrp.29.1700992911365; 
- Sun, 26 Nov 2023 02:01:51 -0800 (PST)
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
- by smtp.gmail.com with ESMTPSA id
- 2-20020a5d47a2000000b00332ff137c29sm606226wrb.79.2023.11.26.02.01.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Nov 2023 02:01:50 -0800 (PST)
-Date: Sun, 26 Nov 2023 11:01:50 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Christoph =?utf-8?Q?M=C3=BCllner?= <christoph.muellner@vrull.eu>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Laurent Vivier <laurent@vivier.eu>
-Subject: Re: [PATCH v2] linux-user/riscv: Add Zicboz extensions to hwprobe
-Message-ID: <20231126-fbb9c420dec7ea31141cb367@orel>
-References: <20231123181300.2140622-1-christoph.muellner@vrull.eu>
- <20231124-b892dc7ca5a5f9ff4cceda6e@orel>
- <CAEg0e7hy2Z+X7TR8iaQckCHZ2NGyPJV8dioco-FB2aPErMpnOQ@mail.gmail.com>
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r7OIh-0001Rz-WC
+ for qemu-riscv@nongnu.org; Sun, 26 Nov 2023 18:12:32 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r7OIf-0005yd-U2
+ for qemu-riscv@nongnu.org; Sun, 26 Nov 2023 18:12:31 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1701040347;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:mime-version: content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=fkwaEM58UHLuhpJyBeL28b0kI59lMSIVxOuuRaVK8LQ=;
+ b=LWo2196b6Y77wWlshEjdx3DPqcVBGtLBQJwOwonnv6aeJWa2NkK+FnDmbOPr0XiNUlBA0J
+ tQDBis5pS26YtSFs0ytt1vIMWKFhFgnD85/vAjeeqJaMN/znl6W3/beOR9g5jvV18lSbs0
+ VjuzKlnw6AtbTbarSsuz8Rtw/vZJacc=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-211-tj7e-V6JODGPzbzB3Utbdw-1; Sun, 26 Nov 2023 18:12:25 -0500
+X-MC-Unique: tj7e-V6JODGPzbzB3Utbdw-1
+Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.9])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 46823811E7B;
+ Sun, 26 Nov 2023 23:12:24 +0000 (UTC)
+Received: from gshan.redhat.com (unknown [10.64.136.61])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 6307E492BE9;
+ Sun, 26 Nov 2023 23:12:15 +0000 (UTC)
+From: Gavin Shan <gshan@redhat.com>
+To: qemu-arm@nongnu.org
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org,
+ imammedo@redhat.com, richard.henderson@linaro.org,
+ quic_llindhol@quicinc.com, b.galvani@gmail.com,
+ strahinja.p.jankovic@gmail.com, kfting@nuvoton.com, wuhaotsh@google.com,
+ nieklinnenbank@gmail.com, rad@semihalf.com, marcin.juszkiewicz@linaro.org,
+ eduardo@habkost.net, marcel.apfelbaum@gmail.com, philmd@linaro.org,
+ wangyanan55@huawei.com, vijai@behindbytes.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ shan.gavin@gmail.com
+Subject: [PATCH v7 0/8] Unified CPU type check
+Date: Mon, 27 Nov 2023 09:12:02 +1000
+Message-ID: <20231126231210.112820-1-gshan@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset=UTF-8
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAEg0e7hy2Z+X7TR8iaQckCHZ2NGyPJV8dioco-FB2aPErMpnOQ@mail.gmail.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::435;
- envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x435.google.com
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.9
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=gshan@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -101,54 +87,126 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Nov 24, 2023 at 06:41:25PM +0100, Christoph Müllner wrote:
-> On Fri, Nov 24, 2023 at 5:59 PM Andrew Jones <ajones@ventanamicro.com> wrote:
-> >
-> > On Thu, Nov 23, 2023 at 07:12:59PM +0100, Christoph Muellner wrote:
-> > > From: Christoph Müllner <christoph.muellner@vrull.eu>
-> > >
-> > > Upstream Linux recently added RISC-V Zicboz support to the hwprobe API.
-> > > This patch introduces this for QEMU's user space emulator.
-> > >
-> > > Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
-> > > ---
-> > >  linux-user/syscall.c | 3 +++
-> > >  1 file changed, 3 insertions(+)
-> > >
-> > > diff --git a/linux-user/syscall.c b/linux-user/syscall.c
-> > > index 65ac3ac796..2f9a1c5279 100644
-> > > --- a/linux-user/syscall.c
-> > > +++ b/linux-user/syscall.c
-> > > @@ -8799,6 +8799,7 @@ static int do_getdents64(abi_long dirfd, abi_long arg2, abi_long count)
-> > >  #define     RISCV_HWPROBE_EXT_ZBA      (1 << 3)
-> > >  #define     RISCV_HWPROBE_EXT_ZBB      (1 << 4)
-> > >  #define     RISCV_HWPROBE_EXT_ZBS      (1 << 5)
-> > > +#define     RISCV_HWPROBE_EXT_ZICBOZ   (1 << 6)
-> > >
-> > >  #define RISCV_HWPROBE_KEY_CPUPERF_0     5
-> > >  #define     RISCV_HWPROBE_MISALIGNED_UNKNOWN     (0 << 0)
-> > > @@ -8855,6 +8856,8 @@ static void risc_hwprobe_fill_pairs(CPURISCVState *env,
-> > >                       RISCV_HWPROBE_EXT_ZBB : 0;
-> > >              value |= cfg->ext_zbs ?
-> > >                       RISCV_HWPROBE_EXT_ZBS : 0;
-> > > +            value |= cfg->ext_zicboz ?
-> > > +                     RISCV_HWPROBE_EXT_ZICBOZ : 0;
-> > >              __put_user(value, &pair->value);
-> > >              break;
-> > >          case RISCV_HWPROBE_KEY_CPUPERF_0:
-> > > --
-> > > 2.41.0
-> > >
-> > >
-> >
-> > We should also add support for getting the block size with
-> > RISCV_HWPROBE_KEY_ZICBOZ_BLOCK_SIZE.
-> 
-> Hi Andrew, this is already upstream, just the EXT_ZICBOZ is missing:
+This series bases on Phil's repository because the prepatory commits
+have been queued to the branch.
 
-Oh, thanks. In that case,
+  https://gitlab.com/philmd/qemu.git (branch: cpus-next)
 
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+There are two places where the user specified CPU type is checked to see
+if it's supported or allowed by the board: machine_run_board_init() and
+mc->init(). We don't have to maintain two duplicate sets of logic. This
+series intends to move the check to machine_run_board_init() so that we
+have unified CPU type check.
 
-drew
+PATCH[1-3] refactors the logic to validate CPU type in machine_run_board_init()
+PATCH[4-8] validates the CPU type in machine_run_board_init() for the
+           individual boards
+
+v1: https://lists.nongnu.org/archive/html/qemu-arm/2023-07/msg00302.html
+v2: https://lists.nongnu.org/archive/html/qemu-arm/2023-07/msg00528.html
+v3: https://lists.nongnu.org/archive/html/qemu-arm/2023-09/msg00157.html
+v4: https://lists.nongnu.org/archive/html/qemu-arm/2023-11/msg00005.html
+v5: https://lists.nongnu.org/archive/html/qemu-arm/2023-11/msg00611.html
+v6: https://lists.nongnu.org/archive/html/qemu-arm/2023-11/msg00768.html
+
+Testing
+=======
+
+Before the series is applied:
+
+  [gshan@gshan q]$ ./build/qemu-system-aarch64 -M virt -cpu cortex-a8
+  qemu-system-aarch64: mach-virt: CPU type cortex-a8-arm-cpu not supported
+  [gshan@gshan q]$ ./build/qemu-system-aarch64 -M sbsa-ref -cpu cortex-a53
+  qemu-system-aarch64: sbsa-ref: CPU type cortex-a53-arm-cpu not supported
+  [gshan@gshan q]$ ./build/qemu-system-aarch64 -M sbsa-ref -cpu sa1100
+  qemu-system-aarch64: sbsa-ref: CPU type sa1100-arm-cpu not supported
+  [gshan@gshan q]$ ./build/qemu-system-aarch64 -M sbsa-ref -cpu host
+  qemu-system-aarch64: unable to find CPU model 'host'
+
+After the series is applied:
+
+  [gshan@gshan q]$ ./build/qemu-system-aarch64 -M virt -cpu cortex-a8
+  qemu-system-aarch64: Invalid CPU type: cortex-a8
+  The valid types are: cortex-a7, cortex-a15, cortex-a35, cortex-a55,     \
+                       cortex-a72, cortex-a76, cortex-a710, a64fx,        \
+                       neoverse-n1, neoverse-v1, neoverse-n2, cortex-a53, \
+                       cortex-a57, max
+  [gshan@gshan q]$ ./build/qemu-system-aarch64 -M sbsa-ref -cpu cortex-a53
+  qemu-system-aarch64: Invalid CPU type: cortex-a53
+  The valid types are: cortex-a57, cortex-a72, neoverse-n1, neoverse-v1,  \
+                       neoverse-n2, max
+  [gshan@gshan q]$ ./build/qemu-system-aarch64 -M sbsa-ref -cpu sa1100
+  qemu-system-aarch64: Invalid CPU type: sa1100
+  The valid types are: cortex-a57, cortex-a72, neoverse-n1, neoverse-v1,  \
+                       neoverse-n2, max
+  [gshan@gshan q]$ ./build/qemu-system-aarch64 -M sbsa-ref -cpu host
+  qemu-system-aarch64: unable to find CPU model 'host'
+
+Changelog
+=========
+v7:
+  * Add 'return' after error_propagate() in machine_run_board_init()
+    to avoid calling mc->init() in the failing case              (Marcin)
+v6:
+  * Drop PATCH[v5 01-23], queued by Phil                         (Phil)
+  * Clearer hint if only one CPU type is supported and have
+    'const MachineState *' in is_cpu_type_supported()            (Phil)
+  * Move valid_cpu_types[] to board's class_init() function      (Phil)
+v5:
+  * PATCH[v5 01] to remove CPU class 'ev67' for alpha            (Ricard/Igor)
+  * PATCH[v5 02] to remove object_class_is_abstract() for hppa   (Gavin)
+  * Don't move cpu_class_by_name()                               (Richard)
+  * PATCH[v5 04] to remove 'oc == NULL' since the check has
+    been covered in object_class_dynamic_cast()                  (Igor)
+  * Introduce generic cpu_list(), shared by most of the targets  (Richard)
+  * Use g_str_has_suffix and g_auto_free                         (Richard)
+  * Collect r-bs from Igor and Richard                           (Gavin)
+v4:
+  * Integrate Philippe's patches where cpu_class_by_name()
+    is consolidated and my duplicate code is dropped            (Philippe)
+  * Simplified changelog and improvements                       (Thomas)
+  * g_assert() on the return value from cpu_model_from_type()
+    in is_cpu_type_supported()                                  (Philippe)
+  * Collected r-bs from Philippe Mathieu-Daudé, Leif Lindholm,
+    Bastian Koppelmann, Daniel Henrique Barboza, Cédric Le Goater,
+    Gavin Shan                                                  (Gavin)
+v3:
+  * Generic helper cpu_model_from_type()                        (Igor)
+  * Apply cpu_model_from_type() to the individual targets       (Igor)
+  * Implement cpu_list() for the missed targets                 (Gavin)
+  * Remove mc->valid_cpu_models                                 (Richard)
+  * Separate patch to constify mc->validate_cpu_types           (Gavin)
+v2:
+  * Constify mc->valid_cpu_types                                (Richard)
+  * Print the supported CPU models, instead of typenames        (Peter)
+  * Misc improvements for the hleper to do the check            (Igor)
+  * More patches to move the check                              (Marcin)
+
+Gavin Shan (8):
+  machine: Use error handling when CPU type is checked
+  machine: Introduce helper is_cpu_type_supported()
+  machine: Print CPU model name instead of CPU type
+  hw/arm/virt: Hide host CPU model for tcg
+  hw/arm/virt: Check CPU type in machine_run_board_init()
+  hw/arm/sbsa-ref: Check CPU type in machine_run_board_init()
+  hw/arm: Check CPU type in machine_run_board_init()
+  hw/riscv/shakti_c: Check CPU type in machine_run_board_init()
+
+ hw/arm/bananapi_m2u.c   | 12 ++---
+ hw/arm/cubieboard.c     | 12 ++---
+ hw/arm/mps2-tz.c        | 26 ++++++++---
+ hw/arm/mps2.c           | 26 ++++++++---
+ hw/arm/msf2-som.c       | 12 ++---
+ hw/arm/musca.c          | 12 +++--
+ hw/arm/npcm7xx_boards.c | 12 +++--
+ hw/arm/orangepi.c       | 12 ++---
+ hw/arm/sbsa-ref.c       | 36 +++++----------
+ hw/arm/virt.c           | 60 ++++++++++---------------
+ hw/core/machine.c       | 98 +++++++++++++++++++++++++----------------
+ hw/riscv/shakti_c.c     | 13 +++---
+ 12 files changed, 174 insertions(+), 157 deletions(-)
+
+-- 
+2.42.0
+
 
