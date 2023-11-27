@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D531C0755A
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Nov 2023 11:38:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A249FC4167B
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Nov 2023 11:38:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r7ZwG-0003pj-7t; Mon, 27 Nov 2023 06:38:08 -0500
+	id 1r7ZwE-0003oi-Fa; Mon, 27 Nov 2023 06:38:06 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1r7ZwF-0003pM-6n
- for qemu-riscv@nongnu.org; Mon, 27 Nov 2023 06:38:07 -0500
+ id 1r7ZwC-0003nf-SA
+ for qemu-riscv@nongnu.org; Mon, 27 Nov 2023 06:38:04 -0500
 Received: from mail-ot1-x32a.google.com ([2607:f8b0:4864:20::32a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1r7ZwD-0005GP-FV
- for qemu-riscv@nongnu.org; Mon, 27 Nov 2023 06:38:06 -0500
+ id 1r7ZwA-0005BL-Ux
+ for qemu-riscv@nongnu.org; Mon, 27 Nov 2023 06:38:04 -0500
 Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-6d7eb7ff384so2693399a34.0
- for <qemu-riscv@nongnu.org>; Mon, 27 Nov 2023 03:38:05 -0800 (PST)
+ 46e09a7af769-6d812988394so1149097a34.3
+ for <qemu-riscv@nongnu.org>; Mon, 27 Nov 2023 03:38:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1701085084; x=1701689884; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1701085081; x=1701689881; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dGNqscTm0j47pNh5vB1J02Wn8NgcJ09lbo8OaJQCkt0=;
- b=okmEcH04fRHdKvmeVgga+gfgEMNxdoPI+kpEcfR38/CpS75Xwk7xz8/efhZxrWOvxr
- yGwkLizcqAHCo1IJysQZSQ/jSqsKjui5JD7t+Xk2mbr5QV4Ve5USCbtiL5gGKtCvuWkw
- wlpj8VjPGR5iKeRr7PRGIPQgk2A8ffClOhhtlX0woXHBNTDv43jjNrBK2uCvNbGzdDld
- LKFmCOolpzcEhAe9gl9HgxnfEH72XBB5cinp9UC5L9qOGeT4FQWgRTeWeyQ+uFLPsYj4
- O3xDC7q8GqnbaW+tjusYqTqLSnEopfYz2aKTyg3o7KsqvCFMGz8cpC9ShJdOsxuvmAm0
- 1nRQ==
+ bh=O6Cx6hq+HUMRF2lU3ZU7j52Tu06FE50ccwBQOiQWWbM=;
+ b=bbCEB7B6Hl4S+4Ia+bECS44EzvvUFNgEke8eKGYSc58vWFGuFEIi85vG697K+KMlMP
+ 3ZVGP9+X1bF+BFcskSGgsMNfhnuJEEyhkGBG5xdZHpMMIbO0uOBSA8ykFKhCynpdDXUA
+ uCbaFiyISbOO7cjHtnXsJJpLOFIa0slvLq9EV15L/6A/tPlo7x74xO6GkfPpx73TPoNG
+ Z6VkTZXJdXlwWgzUR4my7943FfOO8QG9USqIOUTqwmWkfbjewnImhpcNa+gq2mBAuM6S
+ XoFfyKAVDGrvlGBLvBx+rOvVjP9ODEjpnOTN+5EruJXC95k6wOgbKFsG21NW/bsR2J6u
+ lzvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701085084; x=1701689884;
+ d=1e100.net; s=20230601; t=1701085081; x=1701689881;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=dGNqscTm0j47pNh5vB1J02Wn8NgcJ09lbo8OaJQCkt0=;
- b=Pmm+gIsvA9k70U9fhdfY8EYckYMZWxkIm+4bo5TWNpdFs+PN2CGyL+WbaRCcxGOc9K
- 2a4/Ui12V77Xpew6BO/l28NfGUOCltd0f9vsGzr8p3cUSy8V39kmrXz5E7YMwmboNKFm
- 4+3VQrX67nWubNLJmSpnoPzd79ZEoPYfkqWAR6HKZ0TpWU3W3ApSd1B+A2FCIErQyo2u
- grWXUaJrG7FINpVlfsFOpKjrIL5QN5I336n+goW1nMhuvxpz7qTwoOYp7p+5wXjitdfZ
- PuBVsS9kkht1801CEqOPNaksGTBW7AfHUbuoRxRgMusGXuxGsvzqYK6mPYepAOSrNi8+
- JcHA==
-X-Gm-Message-State: AOJu0YxhuwnZesWg/9Vk3i299+Uw8K1Jfll9slgty+AOepNy+TFqkMK8
- XpWSPN9JNwXPl54bW5YEy8qaHg==
-X-Google-Smtp-Source: AGHT+IFO4nub4CFKBoScddwqgyPE6APX3r3t2ZJRaunzsq6VUBtg+zRYPgER0EHbQVKKLXXtv0mLkg==
-X-Received: by 2002:a9d:6c90:0:b0:6ce:2789:7195 with SMTP id
- c16-20020a9d6c90000000b006ce27897195mr11117799otr.31.1701085084503; 
- Mon, 27 Nov 2023 03:38:04 -0800 (PST)
+ bh=O6Cx6hq+HUMRF2lU3ZU7j52Tu06FE50ccwBQOiQWWbM=;
+ b=wjjssIcyH2nn0JU1eIB+ySqy+ietPUTXbdTRoLIhPwW8Et0vtUjT+EWH0FsFRpOc6U
+ okar2ONs0FP/HH6006ZeQG4TyaHWIofRe4oSguwk+XvlE1HDLB5+WMTo94jaqxkrIgMS
+ f3EjWGs4PsrS1B3X4mLq0a9a9NnmL70skQj2cX2k7mhDOoe6rrXCw8B4HrJWOEFdfRH7
+ jRwyqlmpQijG8n81eNpoT5hY2ijCzjZ8LCmwWI85VXRM/33byWV0Nq4x1zgPVtTN55fA
+ Zf12eJHP4s81ZN4P5282Be5ozLtr8U2/kGIk0uvkYN0XuM/Z3fk7IUz8BGKgQhXjsj42
+ 8x0g==
+X-Gm-Message-State: AOJu0YyUpKeg27O+T9NxJ4DPWsxzKwu+IGVq9vDZj2UtOQ9TyQZEuE4H
+ E3jXTFx4vpCc9c6TpiJlQ+Kn2w==
+X-Google-Smtp-Source: AGHT+IGQoFqV3mXZFUhqqVLE77karmypdPlxVzdSMzHU6nlgAE8hcuMmyxCXTLlu72YlMdSRJDyyxg==
+X-Received: by 2002:a9d:654b:0:b0:6d8:1c12:4863 with SMTP id
+ q11-20020a9d654b000000b006d81c124863mr5936576otl.21.1701085081465; 
+ Mon, 27 Nov 2023 03:38:01 -0800 (PST)
 Received: from grind.. ([2804:7f0:bdcd:fb00:6501:2693:db52:c621])
  by smtp.gmail.com with ESMTPSA id
- q15-20020a63e94f000000b00578b40a4903sm7618323pgj.22.2023.11.27.03.38.01
+ q15-20020a63e94f000000b00578b40a4903sm7618323pgj.22.2023.11.27.03.37.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Nov 2023 03:38:04 -0800 (PST)
+ Mon, 27 Nov 2023 03:38:01 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  ajones@ventanamicro.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH for-9.0 v2 2/8] target/riscv: add priv ver restriction to
- profiles
-Date: Mon, 27 Nov 2023 08:37:46 -0300
-Message-ID: <20231127113752.1290265-3-dbarboza@ventanamicro.com>
+Subject: [PATCH for-9.0 v2 1/8] target/riscv: implement svade
+Date: Mon, 27 Nov 2023 08:37:45 -0300
+Message-ID: <20231127113752.1290265-2-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231127113752.1290265-1-dbarboza@ventanamicro.com>
 References: <20231127113752.1290265-1-dbarboza@ventanamicro.com>
@@ -97,110 +96,83 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Some profiles, like RVA22S64, has a priv_spec requirement.
+'svade' is a RVA22S64 profile requirement, a profile we're going to add
+shortly. It is a named feature (i.e. not a formal extension, not defined
+in riscv,isa DT at this moment) defined in [1] as:
 
-Make this requirement explicit for all profiles. We'll validate this
-requirement finalize() time and, in case the user chooses an
-incompatible priv_spec while activating a profile, a warning will be
-shown.
+"Page-fault exceptions are raised when a page is accessed when A bit is
+clear, or written when D bit is clear.".
+
+As far as the spec goes, 'svade' is one of the two distinct modes of
+handling PTE_A and PTE_D. The other way, i.e. update PTE_A/PTE_D when
+they're cleared, is defined by the 'svadu' extension. Checking
+cpu_helper.c, get_physical_address(), we can verify that QEMU is
+compliant with that: we will update PTE_A/PTE_D if 'svadu' is enabled,
+or throw a page-fault exception if 'svadu' isn't enabled.
+
+So, as far as we're concerned, 'svade' translates to 'svadu must be
+disabled'.
+
+We'll implement it like 'zic64b': an internal flag that profiles can
+enable. The flag will not be exposed to users.
+
+[1] https://github.com/riscv/riscv-profiles/blob/main/profiles.adoc
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 ---
- target/riscv/cpu.c         |  1 +
- target/riscv/cpu.h         |  2 ++
- target/riscv/tcg/tcg-cpu.c | 31 +++++++++++++++++++++++++++++++
- 3 files changed, 34 insertions(+)
+ target/riscv/cpu.c         | 1 +
+ target/riscv/cpu_cfg.h     | 1 +
+ target/riscv/tcg/tcg-cpu.c | 5 +++++
+ 3 files changed, 7 insertions(+)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 59b131c1fc..29a9f77702 100644
+index 3a230608cb..59b131c1fc 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -1537,6 +1537,7 @@ Property riscv_cpu_options[] = {
- static RISCVCPUProfile RVA22U64 = {
-     .name = "rva22u64",
-     .misa_ext = RVI | RVM | RVA | RVF | RVD | RVC | RVU,
-+    .priv_spec = RISCV_PROFILE_ATTR_UNUSED,
-     .ext_offsets = {
-         CPU_CFG_OFFSET(ext_zicsr), CPU_CFG_OFFSET(ext_zihintpause),
-         CPU_CFG_OFFSET(ext_zba), CPU_CFG_OFFSET(ext_zbb),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 5ff629650d..1f34eda1e4 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -81,10 +81,12 @@ typedef struct riscv_cpu_profile {
-     uint32_t misa_ext;
-     bool enabled;
-     bool user_set;
-+    int priv_spec;
-     const int32_t ext_offsets[];
- } RISCVCPUProfile;
+@@ -1445,6 +1445,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] = {
+ };
  
- #define RISCV_PROFILE_EXT_LIST_END -1
-+#define RISCV_PROFILE_ATTR_UNUSED -1
+ const RISCVCPUMultiExtConfig riscv_cpu_named_features[] = {
++    MULTI_EXT_CFG_BOOL("svade", svade, true),
+     MULTI_EXT_CFG_BOOL("zic64b", zic64b, true),
  
- extern RISCVCPUProfile *riscv_profiles[];
+     DEFINE_PROP_END_OF_LIST(),
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index 90f18eb601..46b06db68b 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -116,6 +116,7 @@ struct RISCVCPUConfig {
+     bool ext_smepmp;
+     bool rvv_ta_all_1s;
+     bool rvv_ma_all_1s;
++    bool svade;
+     bool zic64b;
  
+     uint32_t mvendorid;
 diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index e395e2449e..4d25fc43d2 100644
+index 04aedf3840..e395e2449e 100644
 --- a/target/riscv/tcg/tcg-cpu.c
 +++ b/target/riscv/tcg/tcg-cpu.c
-@@ -74,6 +74,20 @@ static void riscv_cpu_write_misa_bit(RISCVCPU *cpu, uint32_t bit,
+@@ -188,6 +188,9 @@ static void riscv_cpu_enable_named_feat(RISCVCPU *cpu, uint32_t feat_offset)
+         cpu->cfg.cbop_blocksize = 64;
+         cpu->cfg.cboz_blocksize = 64;
+         break;
++    case CPU_CFG_OFFSET(svade):
++        cpu->cfg.ext_svadu = false;
++        break;
+     default:
+         g_assert_not_reached();
      }
+@@ -381,6 +384,8 @@ static void riscv_cpu_update_named_features(RISCVCPU *cpu)
+     cpu->cfg.zic64b = cpu->cfg.cbom_blocksize == 64 &&
+                       cpu->cfg.cbop_blocksize == 64 &&
+                       cpu->cfg.cboz_blocksize == 64;
++
++    cpu->cfg.svade = !cpu->cfg.ext_svadu;
  }
  
-+static const char *cpu_priv_ver_to_str(int priv_ver)
-+{
-+    switch (priv_ver) {
-+    case PRIV_VERSION_1_10_0:
-+        return "v1.10.0";
-+    case PRIV_VERSION_1_11_0:
-+        return "v1.11.0";
-+    case PRIV_VERSION_1_12_0:
-+        return "v1.12.0";
-+    }
-+
-+    g_assert_not_reached();
-+}
-+
- static void riscv_cpu_synchronize_from_tb(CPUState *cs,
-                                           const TranslationBlock *tb)
- {
-@@ -755,11 +769,24 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
- static void riscv_cpu_validate_profile(RISCVCPU *cpu,
-                                        RISCVCPUProfile *profile)
- {
-+    CPURISCVState *env = &cpu->env;
-     const char *warn_msg = "Profile %s mandates disabled extension %s";
-     bool send_warn = profile->user_set && profile->enabled;
-     bool profile_impl = true;
-     int i;
- 
-+    if (profile->priv_spec != RISCV_PROFILE_ATTR_UNUSED &&
-+        profile->priv_spec != env->priv_ver) {
-+        profile_impl = false;
-+
-+        if (send_warn) {
-+            warn_report("Profile %s requires priv spec %s, "
-+                        "but priv ver %s was set", profile->name,
-+                        cpu_priv_ver_to_str(profile->priv_spec),
-+                        cpu_priv_ver_to_str(env->priv_ver));
-+        }
-+    }
-+
-     for (i = 0; misa_bits[i] != 0; i++) {
-         uint32_t bit = misa_bits[i];
- 
-@@ -1048,6 +1075,10 @@ static void cpu_set_profile(Object *obj, Visitor *v, const char *name,
-     profile->user_set = true;
-     profile->enabled = value;
- 
-+    if (profile->enabled) {
-+        cpu->env.priv_ver = profile->priv_spec;
-+    }
-+
-     for (i = 0; misa_bits[i] != 0; i++) {
-         uint32_t bit = misa_bits[i];
- 
+ static void riscv_cpu_validate_g(RISCVCPU *cpu)
 -- 
 2.41.0
 
