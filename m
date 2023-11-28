@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4244C07CA9
-	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Nov 2023 15:35:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C620C4167B
+	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Nov 2023 15:51:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r806v-0007Ov-Fw; Tue, 28 Nov 2023 10:34:53 -0500
+	id 1r80Mi-0005yf-Ep; Tue, 28 Nov 2023 10:51:12 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1r806r-0007Nn-3i
- for qemu-riscv@nongnu.org; Tue, 28 Nov 2023 10:34:49 -0500
+ id 1r80Mg-0005xm-Fn
+ for qemu-riscv@nongnu.org; Tue, 28 Nov 2023 10:51:10 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1r806n-00045B-PC
- for qemu-riscv@nongnu.org; Tue, 28 Nov 2023 10:34:48 -0500
+ id 1r80Md-0007lX-0g
+ for qemu-riscv@nongnu.org; Tue, 28 Nov 2023 10:51:10 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1701185685;
+ s=mimecast20190719; t=1701186665;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=D9lOQjODNv02P43/kZH/wGQ3w31tJS9+8fDtN67uTGI=;
- b=NyjTBJ5yv9WguSF41/HC+2EQMw2noy9dmB1Pr+cjC9SDTKgW7C2Ec8x6MAMxtNXwxEvlzW
- P9NRr+O9ayhJSBxnayYId2ZnJ8fvxG2qYKmiOku3jsB+elOePuFR1vuB2s4y1Av74axOLK
- Fv2jmzer0NBRoTeafmg5OjTL3q37Xao=
-Received: from mail-lf1-f69.google.com (mail-lf1-f69.google.com
- [209.85.167.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=a7TaJ1fftDKYLjchnWgAH2T0JUqr3+5SdVc0/8Z4EIs=;
+ b=g2FtqkKmMfVEwbeSWHRRRFzal+8CFPa2CspgBH++J3x8CMkl3YJhJAu3jTltdvmMAhlQoV
+ cCu4wHUH7AEK3M9JNtwW1VAWHP6YrsgUpJwmRWvR3snPkgfqukHsMQGd1PM4QcgGLKOfJk
+ gk7+Ls3r4CfWftxRqM3+qX9E775u0lI=
+Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
+ [209.85.218.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-357-0-h-95b-PwGO8JIB8jXprw-1; Tue, 28 Nov 2023 10:34:43 -0500
-X-MC-Unique: 0-h-95b-PwGO8JIB8jXprw-1
-Received: by mail-lf1-f69.google.com with SMTP id
- 2adb3069b0e04-50abbf4ee79so6032822e87.1
- for <qemu-riscv@nongnu.org>; Tue, 28 Nov 2023 07:34:43 -0800 (PST)
+ us-mta-137-Ov-UI5b_Nkib6FeVyrNUhQ-1; Tue, 28 Nov 2023 10:51:04 -0500
+X-MC-Unique: Ov-UI5b_Nkib6FeVyrNUhQ-1
+Received: by mail-ej1-f70.google.com with SMTP id
+ a640c23a62f3a-a0d66bf14d9so231903366b.0
+ for <qemu-riscv@nongnu.org>; Tue, 28 Nov 2023 07:51:03 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701185682; x=1701790482;
+ d=1e100.net; s=20230601; t=1701186663; x=1701791463;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=D9lOQjODNv02P43/kZH/wGQ3w31tJS9+8fDtN67uTGI=;
- b=GLcbA6eaA54SU7tG01SwwwywQF/VtqyCzAqlymAUl1kdO7vpSZ6h/AFxq30CrVYkZc
- Hk47xgCrmmq+VzAtqv4uyF9G+b5iYVinRXJMJtbkFBy+73jKmIF+es4GxkdvS6tRyJyi
- s0MydvLioBiMq2fT5kghLMxAK+t/WLe0HEzyp0cI2WNuecBGkYrmXM8iLtV0CYFum/zv
- guaDpwJHZWGwFPuAGttsaymUxv6GRISMhRuiRJEKiiic9uzmm0jkRapdIW13pNoBiiJt
- AWqtGt2MeG9UTXkZi1Xq0BZ/vUE68rJzznnYKL9JN4D/Kl/sWXBFF8uxRD5SEWL03pu5
- OVEw==
-X-Gm-Message-State: AOJu0Yz+0Mh3tZjRLJbi1FHsLvCnJCLn/tl+/Ui+jOIlhtsDcD8CfrhG
- mcPeSg0bjGCn4+5ofdE/xzLCMnxq6scts4ryqQ0B6hOWR/BDPZdefmTizcT7eIIlH2IsWFulEOw
- 2bonyWdzmB9vFt+Q=
-X-Received: by 2002:ac2:4acb:0:b0:50b:ac31:28e5 with SMTP id
- m11-20020ac24acb000000b0050bac3128e5mr5758132lfp.65.1701185682046; 
- Tue, 28 Nov 2023 07:34:42 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFVxWl5bdZvuMtpJUQ8Z+EaD52jviZNSCZAMpxb5IUoQ4q6GjfDoZU/DsJDwJO/WcMaVBCVag==
-X-Received: by 2002:ac2:4acb:0:b0:50b:ac31:28e5 with SMTP id
- m11-20020ac24acb000000b0050bac3128e5mr5758085lfp.65.1701185681511; 
- Tue, 28 Nov 2023 07:34:41 -0800 (PST)
+ bh=a7TaJ1fftDKYLjchnWgAH2T0JUqr3+5SdVc0/8Z4EIs=;
+ b=l62C8EobBWP2Ma51ESylzyqZT9yG0qWeV1wozI2LGgWpZaGfJ+x2WqM4lbx2a5lg9Z
+ uaBVSgpIJGMEbuGWIsLr2dObyhnN5mYxoJYXh8A2jy95ic4Y+BVZxJIwmnP2DdPWTI64
+ FQBVq0cQMyV41+7oJDQ7+HjcO6pBd1dgLQ4NhUK6I3dLlrhkKkEIzg655GVdzK8OqRF/
+ YuGCkV+lBMznmYDevzKvbNNuHOm71LX6xwRoxd666sjTUBhTUI1rDRP/KpQR87n5IY3a
+ As6deEpFGDSf9pdcBkzSzEOC0v7u+34bUaO4sN8Ab7Z2ZHJJGJOTl7r7YEsDu3bS6/xK
+ PApQ==
+X-Gm-Message-State: AOJu0YwmPUOwcmmiLFapzGwbr+H9rvsri/tb1UqQdEJLtjSySqTwwpJa
+ F1MDy4txxz9+6+z2tWu+/DfK1hA4PiFzZaWTo73+yQgsVbJ7eUBhBFy9HaHpqljNAY/lAcOXMgv
+ 6lSlDtJhJncyFHe0=
+X-Received: by 2002:a17:906:eb08:b0:9fd:5708:cefd with SMTP id
+ mb8-20020a170906eb0800b009fd5708cefdmr10544132ejb.76.1701186662906; 
+ Tue, 28 Nov 2023 07:51:02 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEb0zDYECHV55FNXL39hwvytpLNp50WfqgLZLPXS6enMvDKVaq+r28r7KsslsxMoD0RVFay7w==
+X-Received: by 2002:a17:906:eb08:b0:9fd:5708:cefd with SMTP id
+ mb8-20020a170906eb0800b009fd5708cefdmr10544093ejb.76.1701186662648; 
+ Tue, 28 Nov 2023 07:51:02 -0800 (PST)
 Received: from imammedo.users.ipa.redhat.com (nat-pool-brq-t.redhat.com.
  [213.175.37.10]) by smtp.gmail.com with ESMTPSA id
- d11-20020a056402000b00b0054851cd28d2sm6365832edu.79.2023.11.28.07.34.39
+ cd19-20020a170906b35300b009ff783d892esm7045461ejb.146.2023.11.28.07.51.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Nov 2023 07:34:41 -0800 (PST)
-Date: Tue, 28 Nov 2023 16:34:38 +0100
+ Tue, 28 Nov 2023 07:51:02 -0800 (PST)
+Date: Tue, 28 Nov 2023 16:50:59 +0100
 From: Igor Mammedov <imammedo@redhat.com>
 To: Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini
@@ -99,11 +99,12 @@ Cc: qemu-devel@nongnu.org, Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini
  <npiggin@gmail.com>, Greg Kurz <groug@kaod.org>, Michael Rolnik
  <mrolnik@gmail.com>, Eduardo Habkost <eduardo@habkost.net>, Markus
  Armbruster <armbru@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Subject: Re: [PATCH 02/22] hw/intc/apic: Pass CPU using QOM link property
-Message-ID: <20231128163438.3d257bdd@imammedo.users.ipa.redhat.com>
-In-Reply-To: <20230918160257.30127-3-philmd@linaro.org>
+Subject: Re: [PATCH 03/22] target/i386/kvm: Correct comment in
+ kvm_cpu_realize()
+Message-ID: <20231128165059.0d991a0c@imammedo.users.ipa.redhat.com>
+In-Reply-To: <20230918160257.30127-4-philmd@linaro.org>
 References: <20230918160257.30127-1-philmd@linaro.org>
- <20230918160257.30127-3-philmd@linaro.org>
+ <20230918160257.30127-4-philmd@linaro.org>
 X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
@@ -135,70 +136,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, 18 Sep 2023 18:02:35 +0200
+On Mon, 18 Sep 2023 18:02:36 +0200
 Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> wrote:
 
-> QOM objects shouldn't access each other internals fields
-> except using the QOM API.
->=20
-> Declare the 'cpu' and 'base-addr' properties, set them
-> using object_property_set_link() and qdev_prop_set_uint32()
-> respectively.
->=20
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 
 Reviewed-by: Igor Mammedov <imammedo@redhat.com>
 
 > ---
->  hw/intc/apic_common.c    |  2 ++
->  target/i386/cpu-sysemu.c | 11 ++++++-----
->  2 files changed, 8 insertions(+), 5 deletions(-)
+>  target/i386/kvm/kvm-cpu.c | 1 +
+>  1 file changed, 1 insertion(+)
 >=20
-> diff --git a/hw/intc/apic_common.c b/hw/intc/apic_common.c
-> index 68ad30e2f5..e28f7402ab 100644
-> --- a/hw/intc/apic_common.c
-> +++ b/hw/intc/apic_common.c
-> @@ -394,6 +394,8 @@ static Property apic_properties_common[] =3D {
->                      true),
->      DEFINE_PROP_BOOL("legacy-instance-id", APICCommonState, legacy_insta=
-nce_id,
->                       false),
-> +    DEFINE_PROP_LINK("cpu", APICCommonState, cpu, TYPE_X86_CPU, X86CPU *=
-),
-> +    DEFINE_PROP_UINT32("base-addr", APICCommonState, apicbase, 0),
->      DEFINE_PROP_END_OF_LIST(),
->  };
-> =20
-> diff --git a/target/i386/cpu-sysemu.c b/target/i386/cpu-sysemu.c
-> index 6a164d3769..6edfb7e2af 100644
-> --- a/target/i386/cpu-sysemu.c
-> +++ b/target/i386/cpu-sysemu.c
-> @@ -269,7 +269,6 @@ APICCommonClass *apic_get_class(Error **errp)
-> =20
->  void x86_cpu_apic_create(X86CPU *cpu, Error **errp)
->  {
-> -    APICCommonState *apic;
->      APICCommonClass *apic_class =3D apic_get_class(errp);
-> =20
->      assert(apic_class);
-> @@ -279,11 +278,13 @@ void x86_cpu_apic_create(X86CPU *cpu, Error **errp)
->                                OBJECT(cpu->apic_state));
->      object_unref(OBJECT(cpu->apic_state));
-> =20
-> +    if (!object_property_set_link(OBJECT(cpu->apic_state), "cpu",
-> +                                  OBJECT(cpu), errp)) {
-> +        return;
-> +    }
->      qdev_prop_set_uint32(cpu->apic_state, "id", cpu->apic_id);
-> -    /* TODO: convert to link<> */
-> -    apic =3D APIC_COMMON(cpu->apic_state);
-> -    apic->cpu =3D cpu;
-> -    apic->apicbase =3D APIC_DEFAULT_ADDRESS | MSR_IA32_APICBASE_ENABLE;
-> +    qdev_prop_set_uint32(cpu->apic_state, "base-addr",
-> +                         APIC_DEFAULT_ADDRESS | MSR_IA32_APICBASE_ENABLE=
-);
->  }
-> =20
->  void x86_cpu_apic_realize(X86CPU *cpu, Error **errp)
+> diff --git a/target/i386/kvm/kvm-cpu.c b/target/i386/kvm/kvm-cpu.c
+> index 7237378a7d..1fe62ce176 100644
+> --- a/target/i386/kvm/kvm-cpu.c
+> +++ b/target/i386/kvm/kvm-cpu.c
+> @@ -37,6 +37,7 @@ static bool kvm_cpu_realizefn(CPUState *cs, Error **err=
+p)
+>       *  -> cpu_exec_realizefn():
+>       *            -> accel_cpu_realizefn()
+>       *               kvm_cpu_realizefn() -> host_cpu_realizefn()
+> +     *  -> cpu_common_realizefn()
+>       *  -> check/update ucode_rev, phys_bits, mwait
+>       */
+>      if (cpu->max_features) {
 
 
