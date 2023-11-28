@@ -4,64 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCEE9C4167B
-	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Nov 2023 09:43:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11A47C4167B
+	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Nov 2023 09:56:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r7ucp-0000TT-8m; Tue, 28 Nov 2023 04:43:27 -0500
+	id 1r7uoi-0002h9-6F; Tue, 28 Nov 2023 04:55:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r7ucn-0000T4-OT
- for qemu-riscv@nongnu.org; Tue, 28 Nov 2023 04:43:25 -0500
-Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r7uoh-0002gW-7J
+ for qemu-riscv@nongnu.org; Tue, 28 Nov 2023 04:55:43 -0500
+Received: from mail-lj1-x230.google.com ([2a00:1450:4864:20::230])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r7uck-00030B-Qx
- for qemu-riscv@nongnu.org; Tue, 28 Nov 2023 04:43:25 -0500
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-548f0b7ab11so7048356a12.1
- for <qemu-riscv@nongnu.org>; Tue, 28 Nov 2023 01:43:22 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r7uoe-0005Ia-H6
+ for qemu-riscv@nongnu.org; Tue, 28 Nov 2023 04:55:42 -0500
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-2c6b30aca06so64631261fa.3
+ for <qemu-riscv@nongnu.org>; Tue, 28 Nov 2023 01:55:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701164601; x=1701769401; darn=nongnu.org;
+ d=linaro.org; s=google; t=1701165338; x=1701770138; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=X2UmEudICUsl9z+oIELO7zxS+xZLb9OLSjs0VmBtRJM=;
- b=PITx30J0Cpf7KND9octGxKIG5O34FvLO3pcLA+CxSWygYvE0x/1PcyGAIyCophE6l5
- d4RVwXlO2aLANMkMaC+I1uzbpklI/Je6/KnV8y6eFUplZwQlBD3oHwumoaJyXhKtMkb/
- s4XhKQTeeVxVd6HzEyVXtjQ/mhonKa190q191ydacqzTS1CHnIQLl3p/au+LFxqnHtIH
- XusXXoS6AXD8jvkjUlj5CsS5YVLXuX9lxlNBCkfo2QstOFxKNrvZyZV/5V5AvMzWNriD
- eycuxyg8bibVyXt55l4J4YOeLNuxYh1T9ziSUf2vSgnlI6dGLzqITT7ZUH5h79g4j6V9
- 3tPQ==
+ bh=nxa3jYuPqiZHmE2B8TUKDEx3Z0xntheE02BxIoJ77yo=;
+ b=utdlUNUmOTzYgjCv4YfmG7fPcF0rYnBpC3pUknzqYM7e3ynvYHFm0FDBiwXcIJskjp
+ q0+qpcf32zhVawAXxrm+4ocrBSbWnJNBWqFaHCy9iDH2PBc+Co81r2VYFnlaSEYV/0L/
+ 2CvtwxCfNqune56FpRXSYTB924RCQghtSazTWIu9D8Hp8C4Zzybp4Icwei8tKdDpu7zd
+ I7UsynD+bNn4dpNlgkSGHYlQ+XVHd3wJAjK368TcIudJGKNuBhsyn2e/QbaDxJKDSD4r
+ S4BIC8nYK+1oLmuPDkzZTgDcfvasFXt0M4ClGI78WZVFRYuu9UdUX/ZYEOmGbbWDV1Z3
+ HQ0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701164601; x=1701769401;
+ d=1e100.net; s=20230601; t=1701165338; x=1701770138;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=X2UmEudICUsl9z+oIELO7zxS+xZLb9OLSjs0VmBtRJM=;
- b=JShDEmThnCtd5oLqFSG7dq9N5HQIttgtk6QIKT1iyBSaEzjVVSpEB+TrRIaUdPJfxl
- F85GkRhC4xf4z94cGOgxnGrIA7whI35zWeYEMIVjKlI3h49eaGTCniIYi6g+tooy5tHZ
- fsbSjURotQbJzoO3/K9xNgpIwaswAf7LqxGlE+SMB64pb4M32F4ABHA/D2tubf2SesPs
- z4m+zdP1KBSYPK9jTiofKzgPG3C3uIe/805wyttmVjwApvCdSNZBPdCK1LfNNHqtZuKD
- BAkFF5tpzlOGnsCFm7Npwfn2BK8s/A4/3KrFd/Czh/KvhDFs6yK6zD8ZxCnIy3o9RCo2
- 8ewg==
-X-Gm-Message-State: AOJu0Yz7rmHcB8CdYDzWjw9J5Inwc0EYgRK21LGslC/6cy6NdWbgRz7R
- Ku5Po3WyWqNxS9IJQffr3s+SvQ==
-X-Google-Smtp-Source: AGHT+IFUQKPtirytLbJEO+gRu6TxdBopLMQIpRUqxGEIHbIqi4wjsrufPIN4qZn6pwm/OmXH1EGcnA==
-X-Received: by 2002:a05:6402:f19:b0:54b:4067:627e with SMTP id
- i25-20020a0564020f1900b0054b4067627emr6556065eda.8.1701164601103; 
- Tue, 28 Nov 2023 01:43:21 -0800 (PST)
+ bh=nxa3jYuPqiZHmE2B8TUKDEx3Z0xntheE02BxIoJ77yo=;
+ b=RERZLYVeTBcoYRjeRZY9vMQsmY92Xilh9qHLswEX8QjZUtOnH8GeYD4B7aMx7a/ZK5
+ k/SOQZ+UHeRUGWQEJfRLGONLUyI0VRqZUPR1+7bOlBmm3qmumCb81IaD945QYwYRuLiG
+ 4URzniVS0JWqgdFokwWmjoVfBx5E1OKS1VLaYeRbXXfrsf3DynTkreP5i9O+PLPYwt1D
+ 52uRgaWDlxVlwop7KB6aaD8o59n5Rfkx73418+rkJPvTWU+4OR/vyRB0dEsI6C3wKOkG
+ J0Jz9PUKUOKtJPPB822Vhubjovavm614GFH7NKaJEV0WZU4UuOzBbGYieTohaG0Vzjyo
+ JJ3g==
+X-Gm-Message-State: AOJu0Yw0rgacQnSCYkgUaNbBvTyNY0Yegp+aAClZyOEzg/ytQpNnmoqf
+ 9avyKyCmN4VvGzENIABso1xd7Q==
+X-Google-Smtp-Source: AGHT+IH3WxE92HFdVREg7+BlJOeYiVJlL5QqeM1HhPm+Uxkv9bhXNivMT3JxZEaoOqZ/mWEiadxwyg==
+X-Received: by 2002:a2e:a4cd:0:b0:2c9:986c:f1f3 with SMTP id
+ p13-20020a2ea4cd000000b002c9986cf1f3mr6333501ljm.12.1701165338182; 
+ Tue, 28 Nov 2023 01:55:38 -0800 (PST)
 Received: from [192.168.69.100] (crb44-h02-176-184-13-61.dsl.sta.abo.bbox.fr.
  [176.184.13.61]) by smtp.gmail.com with ESMTPSA id
- cb6-20020a0564020b6600b0054b63229d66sm2180384edb.66.2023.11.28.01.43.19
+ ay12-20020a05600c1e0c00b0040588d85b3asm17637340wmb.15.2023.11.28.01.55.35
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Nov 2023 01:43:20 -0800 (PST)
-Message-ID: <013fb5f5-8281-4f7a-83c8-ac22f845297b@linaro.org>
-Date: Tue, 28 Nov 2023 10:43:18 +0100
+ Tue, 28 Nov 2023 01:55:37 -0800 (PST)
+Message-ID: <32bf41db-375b-4061-bbf3-17ae6b543926@linaro.org>
+Date: Tue, 28 Nov 2023 10:55:34 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 1/8] machine: Use error handling when CPU type is
- checked
+Subject: Re: [PATCH v7 3/8] machine: Print CPU model name instead of CPU type
 Content-Language: en-US
 To: Gavin Shan <gshan@redhat.com>, qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org,
@@ -74,13 +73,13 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org,
  bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
  zhiwei_liu@linux.alibaba.com, shan.gavin@gmail.com
 References: <20231126231210.112820-1-gshan@redhat.com>
- <20231126231210.112820-2-gshan@redhat.com>
+ <20231126231210.112820-4-gshan@redhat.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20231126231210.112820-2-gshan@redhat.com>
+In-Reply-To: <20231126231210.112820-4-gshan@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::535;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x535.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::230;
+ envelope-from=philmd@linaro.org; helo=mail-lj1-x230.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,63 +105,81 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Hi Gavin,
 
 On 27/11/23 00:12, Gavin Shan wrote:
-> QEMU will be terminated if the specified CPU type isn't supported
-> in machine_run_board_init(). The list of supported CPU type names
-> is tracked by mc->valid_cpu_types.
+> The names of supported CPU models instead of CPU types should be
+> printed when the user specified CPU type isn't supported, to be
+> consistent with the output from '-cpu ?'.
 > 
-> The error handling can be used to propagate error messages, to be
-> consistent how the errors are handled for other situations in the
-> same function.
+> Correct the error messages to print CPU model names instead of CPU
+> type names.
 > 
-> No functional change intended.
-> 
-> Suggested-by: Igor Mammedov <imammedo@redhat.com>
 > Signed-off-by: Gavin Shan <gshan@redhat.com>
 > ---
-> v7: Add 'return' after error_propagate() to avoid calling into
->      mc->init() in the failing case                        (Marcin)
-> ---
->   hw/core/machine.c | 15 +++++++++------
->   1 file changed, 9 insertions(+), 6 deletions(-)
+>   hw/core/machine.c | 21 +++++++++++++++------
+>   1 file changed, 15 insertions(+), 6 deletions(-)
 > 
 > diff --git a/hw/core/machine.c b/hw/core/machine.c
-> index 0c17398141..b3ef325936 100644
+> index 05e1922b89..898c25552a 100644
 > --- a/hw/core/machine.c
 > +++ b/hw/core/machine.c
-> @@ -1394,6 +1394,7 @@ void machine_run_board_init(MachineState *machine, const char *mem_path, Error *
->       MachineClass *machine_class = MACHINE_GET_CLASS(machine);
+> @@ -1392,6 +1392,7 @@ static void is_cpu_type_supported(const MachineState *machine, Error **errp)
+>       MachineClass *mc = MACHINE_GET_CLASS(machine);
 >       ObjectClass *oc = object_class_by_name(machine->cpu_type);
 >       CPUClass *cc;
-> +    Error *local_err = NULL;
-
-IIUC the big comment in "include/qapi/error.h", since commit ae7c80a7bd
-("error: New macro ERRP_GUARD()") we want to use the new macro instead.
-
->       /* This checkpoint is required by replay to separate prior clock
->          reading from the other reads, because timer polling functions query
-> @@ -1466,15 +1467,17 @@ void machine_run_board_init(MachineState *machine, const char *mem_path, Error *
+> +    char *model;
+>       int i;
 >   
->           if (!machine_class->valid_cpu_types[i]) {
->               /* The user specified CPU is not valid */
-> -            error_report("Invalid CPU type: %s", machine->cpu_type);
-> -            error_printf("The valid types are: %s",
-> -                         machine_class->valid_cpu_types[0]);
-> +            error_setg(&local_err, "Invalid CPU type: %s", machine->cpu_type);
-> +            error_append_hint(&local_err, "The valid types are: %s",
-> +                              machine_class->valid_cpu_types[0]);
->               for (i = 1; machine_class->valid_cpu_types[i]; i++) {
-> -                error_printf(", %s", machine_class->valid_cpu_types[i]);
-> +                error_append_hint(&local_err, ", %s",
-> +                                  machine_class->valid_cpu_types[i]);
+>       /*
+> @@ -1408,17 +1409,25 @@ static void is_cpu_type_supported(const MachineState *machine, Error **errp)
+>   
+>           /* The user specified CPU type isn't valid */
+>           if (!mc->valid_cpu_types[i]) {
+> -            error_setg(errp, "Invalid CPU type: %s", machine->cpu_type);
+> +            model = cpu_model_from_type(machine->cpu_type);
+> +            g_assert(model != NULL);
+> +            error_setg(errp, "Invalid CPU type: %s", model);
+> +            g_free(model);
+
+   g_autofree char *requested = cpu_model_from_type(machine->cpu_type);
+   error_setg(errp, "Invalid CPU type: %s", requested);
+
+> +
+> +            model = cpu_model_from_type(mc->valid_cpu_types[0]);
+> +            g_assert(model != NULL);
+>               if (!mc->valid_cpu_types[1]) {
+> -                error_append_hint(errp, "The only valid type is: %s",
+> -                                  mc->valid_cpu_types[0]);
+> +                error_append_hint(errp, "The only valid type is: %s", model);
+
+   g_autofree char *model = cpu_model_from_type(mc->valid_cpu_types[0]);
+   error_append_hint(errp, "The only valid type is: %s\n", model);
+
+>               } else {
+> -                error_append_hint(errp, "The valid types are: %s",
+> -                                  mc->valid_cpu_types[0]);
+> +                error_append_hint(errp, "The valid types are: %s", model);
+
+Please move all the enumeration in this ladder, this makes the logic
+simpler to follow:
+
+   error_append_hint(errp, "The valid types are: ");
+   for (i = 0; mc->valid_cpu_types[i]; i++) {
+        g_autofree char *model =
+                            cpu_model_from_type(mc->valid_cpu_types[i]);
+        error_append_hint(errp, ", %s", model);
+   }
+   error_append_hint(errp, "\n");
+
 >               }
-> -            error_printf("\n");
-> +            error_append_hint(&local_err, "\n");
+> +            g_free(model);
 >   
-> -            exit(1);
-> +            error_propagate(errp, local_err);
-> +            return;
->           }
->       }
+>               for (i = 1; mc->valid_cpu_types[i]; i++) {
+> -                error_append_hint(errp, ", %s", mc->valid_cpu_types[i]);
+> +                model = cpu_model_from_type(mc->valid_cpu_types[i]);
+> +                g_assert(model != NULL);
+> +                error_append_hint(errp, ", %s", model);
+> +                g_free(model);
+>               }
 >   
+>               error_append_hint(errp, "\n");
 
 
