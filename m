@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F195C07CB1
-	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Nov 2023 21:27:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F817C4167B
+	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Nov 2023 21:28:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8S5E-00023q-MF; Wed, 29 Nov 2023 16:27:00 -0500
+	id 1r8S5J-00028D-Lg; Wed, 29 Nov 2023 16:27:05 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <stefanha@redhat.com>)
- id 1r8S5D-00022g-Lt
- for qemu-riscv@nongnu.org; Wed, 29 Nov 2023 16:26:59 -0500
+ id 1r8S5H-000265-Dd
+ for qemu-riscv@nongnu.org; Wed, 29 Nov 2023 16:27:03 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <stefanha@redhat.com>)
- id 1r8S53-00051C-68
- for qemu-riscv@nongnu.org; Wed, 29 Nov 2023 16:26:59 -0500
+ id 1r8S54-000526-Sw
+ for qemu-riscv@nongnu.org; Wed, 29 Nov 2023 16:27:03 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1701293208;
+ s=mimecast20190719; t=1701293210;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=DG7+f00gCNxrB4UkczfVTSYAisk/aHQSNhsUg/07D1c=;
- b=LpxxkporQWSJYVx048CrfXuD5swJ6RpQ7ppy11hL8tvZv85UyOOm358jwww08kZiIDFPjk
- KwMd3dL1yU6AejsFMAbfJiddQi5IGDL7L4p4WCB6jEX9o8pE7TafF8FA7w7+KSEjsfgqHH
- kEvOeaUrAW6s9WSz+UvndLSQ40K32IA=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-167-55r8XQSHMnC_rWqi5-T4vw-1; Wed, 29 Nov 2023 16:26:43 -0500
-X-MC-Unique: 55r8XQSHMnC_rWqi5-T4vw-1
+ bh=xnTMhuYWY4rKexdgAFG5bYrl78FXKUVZK+idLclmJ2E=;
+ b=YCY6lSK28P3FK+cFz/3aFW0Ur55lWgnCU9UDl1eeyTfFYBLcyXx/JhyNbRcjDsko2Gez16
+ dpvo2WA4mOV3ShHCr+W+NXn7/gpr4o/3rkKfGTpMsjMVIWs2oswe3H5wd7cge/qE10jkzv
+ 0jvWud9aY33UPsIsl6MzjA6yYS1wnIA=
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-111-yAhr-UrSN4qD-XoM_Pt1Aw-1; Wed,
+ 29 Nov 2023 16:26:46 -0500
+X-MC-Unique: yAhr-UrSN4qD-XoM_Pt1Aw-1
 Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
  [10.11.54.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 37B5C83DCD6;
- Wed, 29 Nov 2023 21:26:41 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id BBD3F1E441DC;
+ Wed, 29 Nov 2023 21:26:43 +0000 (UTC)
 Received: from localhost (unknown [10.39.192.91])
- by smtp.corp.redhat.com (Postfix) with ESMTP id EE2DB2026D66;
- Wed, 29 Nov 2023 21:26:39 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 9C9BA2026D4C;
+ Wed, 29 Nov 2023 21:26:42 +0000 (UTC)
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Jean-Christophe Dubois <jcd@tribudubois.net>,
@@ -103,10 +103,9 @@ Cc: Jean-Christophe Dubois <jcd@tribudubois.net>,
  Akihiko Odaki <akihiko.odaki@daynix.com>,
  Leonardo Bras <leobras@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>
-Subject: [PATCH 3/6] qemu/main-loop: rename qemu_cond_wait_iothread() to
- qemu_cond_wait_bql()
-Date: Wed, 29 Nov 2023 16:26:22 -0500
-Message-ID: <20231129212625.1051502-4-stefanha@redhat.com>
+Subject: [PATCH 4/6] system/cpus: rename qemu_global_mutex to qemu_bql
+Date: Wed, 29 Nov 2023 16:26:23 -0500
+Message-ID: <20231129212625.1051502-5-stefanha@redhat.com>
 In-Reply-To: <20231129212625.1051502-1-stefanha@redhat.com>
 References: <20231129212625.1051502-1-stefanha@redhat.com>
 MIME-Version: 1.0
@@ -137,153 +136,103 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The name "iothread" is overloaded. Use the term Big QEMU Lock (BQL)
-instead, it is already widely used and unambiguous.
+The APIs using qemu_global_mutex now follow the Big QEMU Lock (BQL)
+nomenclature. It's a little strange that the actual QemuMutex variable
+that embodies the BQL is called qemu_global_mutex instead of qemu_bql.
+Rename it for consistency.
 
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 ---
- include/qemu/main-loop.h          | 8 ++++----
- accel/tcg/tcg-accel-ops-rr.c      | 4 ++--
- hw/display/virtio-gpu.c           | 2 +-
- hw/ppc/spapr_events.c             | 2 +-
- system/cpu-throttle.c             | 2 +-
- system/cpus.c                     | 4 ++--
- target/i386/nvmm/nvmm-accel-ops.c | 2 +-
- target/i386/whpx/whpx-accel-ops.c | 2 +-
- 8 files changed, 13 insertions(+), 13 deletions(-)
+ system/cpus.c | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/include/qemu/main-loop.h b/include/qemu/main-loop.h
-index 0b6a3e4824..ec2a70f041 100644
---- a/include/qemu/main-loop.h
-+++ b/include/qemu/main-loop.h
-@@ -373,17 +373,17 @@ G_DEFINE_AUTOPTR_CLEANUP_FUNC(BQLLockAuto, qemu_bql_auto_unlock)
-         = qemu_bql_auto_lock(__FILE__, __LINE__)
- 
- /*
-- * qemu_cond_wait_iothread: Wait on condition for the main loop mutex
-+ * qemu_cond_wait_bql: Wait on condition for the main loop mutex
-  *
-  * This function atomically releases the main loop mutex and causes
-  * the calling thread to block on the condition.
-  */
--void qemu_cond_wait_iothread(QemuCond *cond);
-+void qemu_cond_wait_bql(QemuCond *cond);
- 
- /*
-- * qemu_cond_timedwait_iothread: like the previous, but with timeout
-+ * qemu_cond_timedwait_bql: like the previous, but with timeout
-  */
--void qemu_cond_timedwait_iothread(QemuCond *cond, int ms);
-+void qemu_cond_timedwait_bql(QemuCond *cond, int ms);
- 
- /* internal interfaces */
- 
-diff --git a/accel/tcg/tcg-accel-ops-rr.c b/accel/tcg/tcg-accel-ops-rr.c
-index c21215a094..1e5a688085 100644
---- a/accel/tcg/tcg-accel-ops-rr.c
-+++ b/accel/tcg/tcg-accel-ops-rr.c
-@@ -111,7 +111,7 @@ static void rr_wait_io_event(void)
- 
-     while (all_cpu_threads_idle()) {
-         rr_stop_kick_timer();
--        qemu_cond_wait_iothread(first_cpu->halt_cond);
-+        qemu_cond_wait_bql(first_cpu->halt_cond);
-     }
- 
-     rr_start_kick_timer();
-@@ -198,7 +198,7 @@ static void *rr_cpu_thread_fn(void *arg)
- 
-     /* wait for initial kick-off after machine start */
-     while (first_cpu->stopped) {
--        qemu_cond_wait_iothread(first_cpu->halt_cond);
-+        qemu_cond_wait_bql(first_cpu->halt_cond);
- 
-         /* process any pending work */
-         CPU_FOREACH(cpu) {
-diff --git a/hw/display/virtio-gpu.c b/hw/display/virtio-gpu.c
-index b016d3bac8..67c5be1a4e 100644
---- a/hw/display/virtio-gpu.c
-+++ b/hw/display/virtio-gpu.c
-@@ -1512,7 +1512,7 @@ void virtio_gpu_reset(VirtIODevice *vdev)
-         g->reset_finished = false;
-         qemu_bh_schedule(g->reset_bh);
-         while (!g->reset_finished) {
--            qemu_cond_wait_iothread(&g->reset_cond);
-+            qemu_cond_wait_bql(&g->reset_cond);
-         }
-     } else {
-         virtio_gpu_reset_bh(g);
-diff --git a/hw/ppc/spapr_events.c b/hw/ppc/spapr_events.c
-index deb4641505..cb0eeee587 100644
---- a/hw/ppc/spapr_events.c
-+++ b/hw/ppc/spapr_events.c
-@@ -899,7 +899,7 @@ void spapr_mce_req_event(PowerPCCPU *cpu, bool recovered)
-             }
-             return;
-         }
--        qemu_cond_wait_iothread(&spapr->fwnmi_machine_check_interlock_cond);
-+        qemu_cond_wait_bql(&spapr->fwnmi_machine_check_interlock_cond);
-         if (spapr->fwnmi_machine_check_addr == -1) {
-             /*
-              * If the machine was reset while waiting for the interlock,
-diff --git a/system/cpu-throttle.c b/system/cpu-throttle.c
-index e98836311b..1d2b73369e 100644
---- a/system/cpu-throttle.c
-+++ b/system/cpu-throttle.c
-@@ -54,7 +54,7 @@ static void cpu_throttle_thread(CPUState *cpu, run_on_cpu_data opaque)
-     endtime_ns = qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + sleeptime_ns;
-     while (sleeptime_ns > 0 && !cpu->stop) {
-         if (sleeptime_ns > SCALE_MS) {
--            qemu_cond_timedwait_iothread(cpu->halt_cond,
-+            qemu_cond_timedwait_bql(cpu->halt_cond,
-                                          sleeptime_ns / SCALE_MS);
-         } else {
-             qemu_bql_unlock();
 diff --git a/system/cpus.c b/system/cpus.c
-index d5b98c11f5..eb24a4db8e 100644
+index eb24a4db8e..138720a540 100644
 --- a/system/cpus.c
 +++ b/system/cpus.c
-@@ -513,12 +513,12 @@ void qemu_bql_unlock(void)
-     qemu_mutex_unlock(&qemu_global_mutex);
+@@ -65,7 +65,7 @@
+ 
+ #endif /* CONFIG_LINUX */
+ 
+-static QemuMutex qemu_global_mutex;
++static QemuMutex qemu_bql;
+ 
+ /*
+  * The chosen accelerator is supposed to register this.
+@@ -389,14 +389,14 @@ void qemu_init_cpu_loop(void)
+     qemu_init_sigbus();
+     qemu_cond_init(&qemu_cpu_cond);
+     qemu_cond_init(&qemu_pause_cond);
+-    qemu_mutex_init(&qemu_global_mutex);
++    qemu_mutex_init(&qemu_bql);
+ 
+     qemu_thread_get_self(&io_thread);
  }
  
--void qemu_cond_wait_iothread(QemuCond *cond)
-+void qemu_cond_wait_bql(QemuCond *cond)
+ void run_on_cpu(CPUState *cpu, run_on_cpu_func func, run_on_cpu_data data)
  {
-     qemu_cond_wait(cond, &qemu_global_mutex);
+-    do_run_on_cpu(cpu, func, data, &qemu_global_mutex);
++    do_run_on_cpu(cpu, func, data, &qemu_bql);
  }
  
--void qemu_cond_timedwait_iothread(QemuCond *cond, int ms)
-+void qemu_cond_timedwait_bql(QemuCond *cond, int ms)
- {
-     qemu_cond_timedwait(cond, &qemu_global_mutex, ms);
+ static void qemu_cpu_stop(CPUState *cpu, bool exit)
+@@ -428,7 +428,7 @@ void qemu_wait_io_event(CPUState *cpu)
+             slept = true;
+             qemu_plugin_vcpu_idle_cb(cpu);
+         }
+-        qemu_cond_wait(cpu->halt_cond, &qemu_global_mutex);
++        qemu_cond_wait(cpu->halt_cond, &qemu_bql);
+     }
+     if (slept) {
+         qemu_plugin_vcpu_resume_cb(cpu);
+@@ -502,7 +502,7 @@ void qemu_bql_lock_impl(const char *file, int line)
+     QemuMutexLockFunc bql_lock = qatomic_read(&qemu_bql_mutex_lock_func);
+ 
+     g_assert(!qemu_bql_locked());
+-    bql_lock(&qemu_global_mutex, file, line);
++    bql_lock(&qemu_bql, file, line);
+     set_bql_locked(true);
  }
-diff --git a/target/i386/nvmm/nvmm-accel-ops.c b/target/i386/nvmm/nvmm-accel-ops.c
-index 387ccfcce5..0fe8a76820 100644
---- a/target/i386/nvmm/nvmm-accel-ops.c
-+++ b/target/i386/nvmm/nvmm-accel-ops.c
-@@ -48,7 +48,7 @@ static void *qemu_nvmm_cpu_thread_fn(void *arg)
-             }
+ 
+@@ -510,17 +510,17 @@ void qemu_bql_unlock(void)
+ {
+     g_assert(qemu_bql_locked());
+     set_bql_locked(false);
+-    qemu_mutex_unlock(&qemu_global_mutex);
++    qemu_mutex_unlock(&qemu_bql);
+ }
+ 
+ void qemu_cond_wait_bql(QemuCond *cond)
+ {
+-    qemu_cond_wait(cond, &qemu_global_mutex);
++    qemu_cond_wait(cond, &qemu_bql);
+ }
+ 
+ void qemu_cond_timedwait_bql(QemuCond *cond, int ms)
+ {
+-    qemu_cond_timedwait(cond, &qemu_global_mutex, ms);
++    qemu_cond_timedwait(cond, &qemu_bql, ms);
+ }
+ 
+ /* signal CPU creation */
+@@ -571,7 +571,7 @@ void pause_all_vcpus(void)
+     replay_mutex_unlock();
+ 
+     while (!all_vcpus_paused()) {
+-        qemu_cond_wait(&qemu_pause_cond, &qemu_global_mutex);
++        qemu_cond_wait(&qemu_pause_cond, &qemu_bql);
+         CPU_FOREACH(cpu) {
+             qemu_cpu_kick(cpu);
          }
-         while (cpu_thread_is_idle(cpu)) {
--            qemu_cond_wait_iothread(cpu->halt_cond);
-+            qemu_cond_wait_bql(cpu->halt_cond);
-         }
-         qemu_wait_io_event_common(cpu);
-     } while (!cpu->unplug || cpu_can_run(cpu));
-diff --git a/target/i386/whpx/whpx-accel-ops.c b/target/i386/whpx/whpx-accel-ops.c
-index 1f29346a88..d8bec46081 100644
---- a/target/i386/whpx/whpx-accel-ops.c
-+++ b/target/i386/whpx/whpx-accel-ops.c
-@@ -48,7 +48,7 @@ static void *whpx_cpu_thread_fn(void *arg)
-             }
-         }
-         while (cpu_thread_is_idle(cpu)) {
--            qemu_cond_wait_iothread(cpu->halt_cond);
-+            qemu_cond_wait_bql(cpu->halt_cond);
-         }
-         qemu_wait_io_event_common(cpu);
-     } while (!cpu->unplug || cpu_can_run(cpu));
+@@ -649,7 +649,7 @@ void qemu_init_vcpu(CPUState *cpu)
+     cpus_accel->create_vcpu_thread(cpu);
+ 
+     while (!cpu->created) {
+-        qemu_cond_wait(&qemu_cpu_cond, &qemu_global_mutex);
++        qemu_cond_wait(&qemu_cpu_cond, &qemu_bql);
+     }
+ }
+ 
 -- 
 2.42.0
 
