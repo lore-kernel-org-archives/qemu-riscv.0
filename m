@@ -4,87 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D0A9C4167B
-	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Nov 2023 17:38:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F195C07CB1
+	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Nov 2023 21:27:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8NzD-00007i-Mv; Wed, 29 Nov 2023 12:04:31 -0500
+	id 1r8S5E-00023q-MF; Wed, 29 Nov 2023 16:27:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1r8NzB-0008VG-PC
- for qemu-riscv@nongnu.org; Wed, 29 Nov 2023 12:04:29 -0500
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1r8Nz7-0002zV-HU
- for qemu-riscv@nongnu.org; Wed, 29 Nov 2023 12:04:29 -0500
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-1cfc3f50504so33221545ad.3
- for <qemu-riscv@nongnu.org>; Wed, 29 Nov 2023 09:04:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1701277464; x=1701882264; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=y/52Np4NKh02g/xFTctIbb9Rk3QH3KmZVD4jfr+ROnU=;
- b=BnJC9zFaBTE+KuQi+913fgYgJzyoY01SrjzZE7Yi4ApM/KEjTPxZqvQ+JHn6Ke51iY
- 1Xsx4wBbB7O7OCF6p5Tj2gR+H/+nQde6l6YplcVJKfnBZ8ks7lzzye71FXFh4L+h1QxT
- LeawK681sb7E/5M+QfzW6m8OlfFygTbqe5TDoU9EIklscjstMQUmRTH2Zcx/Ud2GJLUZ
- FeeZhFD8b81r43BdrFoqJFDlZP9IT+ugiozmyExW3zXlXJKZvDFExSKxwY61DkkAoVWT
- DLdMGY5DerRVPUTDSBW4FFed5FGyBvHvKPCGeslNJYvp0TNU3l9MFkKBTNOtNRcBictI
- ys2w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701277464; x=1701882264;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=y/52Np4NKh02g/xFTctIbb9Rk3QH3KmZVD4jfr+ROnU=;
- b=Lqmp1R17y55wy6ePMn2MI6J8U0DQVCc3uBWXrxl6xd48PC39rw7h1YtVhBeGs8uSQR
- exXg5QsicRvQEqYI1ZtNlKR+VB1XcI0hsMSXjE499BeUgInYNUtVQlQW0bbWKP9AK1Lr
- QD3SimCoyaKQaAvJlQXnoCkTgofBl2pK0k0/4DWBsBfCDccxxe+wV0wYCxXNjwKoqeWc
- SQ7bGN/rILrmb9zZl5jJnxOjemmjaVeFwCrTfTzBRgGrD5nB3uOkH8gfNkLqFLjanqEh
- ZY2N3H3hsqUhoL6pyLsrDMD8DOuOiGTT3RTKsCa+5yyrQNTCZgTTBpPreZDtuAKC364U
- Ri0A==
-X-Gm-Message-State: AOJu0YzWg9VYIy29TjUTbdnpgrmHae1TgyAIcHpZXzqkRmvVY+dnYff+
- FwWHP3/jXK1GKmqsp0njPWjcEmfg5BjPE0L8yRV5Gg==
-X-Google-Smtp-Source: AGHT+IGPkJTg5S4qK9RbfO9IBCM3zCOpCzFFQO5hQQl/OBPXkd7sDcYYORFcpVhkQWVE7/Dm0AMdqA==
-X-Received: by 2002:a17:902:d50f:b0:1cf:eacb:a12c with SMTP id
- b15-20020a170902d50f00b001cfeacba12cmr7898292plg.65.1701277464063; 
- Wed, 29 Nov 2023 09:04:24 -0800 (PST)
-Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
- [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- p5-20020a170902eac500b001cfc6838e30sm6921383pld.308.2023.11.29.09.04.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Nov 2023 09:04:23 -0800 (PST)
-From: Max Chou <max.chou@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Max Chou <max.chou@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ (Exim 4.90_1) (envelope-from <stefanha@redhat.com>)
+ id 1r8S5D-00022g-Lt
+ for qemu-riscv@nongnu.org; Wed, 29 Nov 2023 16:26:59 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <stefanha@redhat.com>)
+ id 1r8S53-00051C-68
+ for qemu-riscv@nongnu.org; Wed, 29 Nov 2023 16:26:59 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1701293208;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=DG7+f00gCNxrB4UkczfVTSYAisk/aHQSNhsUg/07D1c=;
+ b=LpxxkporQWSJYVx048CrfXuD5swJ6RpQ7ppy11hL8tvZv85UyOOm358jwww08kZiIDFPjk
+ KwMd3dL1yU6AejsFMAbfJiddQi5IGDL7L4p4WCB6jEX9o8pE7TafF8FA7w7+KSEjsfgqHH
+ kEvOeaUrAW6s9WSz+UvndLSQ40K32IA=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-167-55r8XQSHMnC_rWqi5-T4vw-1; Wed, 29 Nov 2023 16:26:43 -0500
+X-MC-Unique: 55r8XQSHMnC_rWqi5-T4vw-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 37B5C83DCD6;
+ Wed, 29 Nov 2023 21:26:41 +0000 (UTC)
+Received: from localhost (unknown [10.39.192.91])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id EE2DB2026D66;
+ Wed, 29 Nov 2023 21:26:39 +0000 (UTC)
+From: Stefan Hajnoczi <stefanha@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Jean-Christophe Dubois <jcd@tribudubois.net>,
+ Fabiano Rosas <farosas@suse.de>, qemu-s390x@nongnu.org,
+ Song Gao <gaosong@loongson.cn>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Thomas Huth <thuth@redhat.com>, Hyman Huang <yong.huang@smartx.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>,
+ David Woodhouse <dwmw2@infradead.org>,
+ Andrey Smirnov <andrew.smirnov@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>, Kevin Wolf <kwolf@redhat.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Max Filippov <jcmvbkbc@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Paul Durrant <paul@xen.org>,
+ Jagannathan Raman <jag.raman@oracle.com>,
+ Juan Quintela <quintela@redhat.com>,
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ qemu-arm@nongnu.org, Jason Wang <jasowang@redhat.com>,
+ Gerd Hoffmann <kraxel@redhat.com>, Hanna Reitz <hreitz@redhat.com>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ BALATON Zoltan <balaton@eik.bme.hu>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Elena Ufimtseva <elena.ufimtseva@oracle.com>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Hailiang Zhang <zhanghailiang@xfusion.com>,
+ Roman Bolshakov <rbolshakov@ddn.com>, Huacai Chen <chenhuacai@kernel.org>,
+ Fam Zheng <fam@euphon.net>, Eric Blake <eblake@redhat.com>,
+ Jiri Slaby <jslaby@suse.cz>, Alexander Graf <agraf@csgraf.de>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liwei1518@gmail.com>,
+ Eric Farman <farman@linux.ibm.com>, Stafford Horne <shorne@gmail.com>,
+ David Hildenbrand <david@redhat.com>,
+ Markus Armbruster <armbru@redhat.com>,
+ Reinoud Zandijk <reinoud@netbsd.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Cameron Esfahani <dirty@apple.com>, xen-devel@lists.xenproject.org,
+ Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>, qemu-riscv@nongnu.org,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ John Snow <jsnow@redhat.com>, Sunil Muthuswamy <sunilmut@microsoft.com>,
+ Michael Roth <michael.roth@amd.com>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>,
- Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Subject: [PATCH 2/2] target/riscv: The whole vector register move instructions
- depend on vsew
-Date: Thu, 30 Nov 2023 01:03:58 +0800
-Message-Id: <20231129170400.21251-3-max.chou@sifive.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231129170400.21251-1-max.chou@sifive.com>
-References: <20231129170400.21251-1-max.chou@sifive.com>
+ Bin Meng <bin.meng@windriver.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, kvm@vger.kernel.org,
+ Stefan Hajnoczi <stefanha@redhat.com>, qemu-block@nongnu.org,
+ Halil Pasic <pasic@linux.ibm.com>, Peter Xu <peterx@redhat.com>,
+ Anthony Perard <anthony.perard@citrix.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Eduardo Habkost <eduardo@habkost.net>, Paolo Bonzini <pbonzini@redhat.com>,
+ Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>, qemu-ppc@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Akihiko Odaki <akihiko.odaki@daynix.com>,
+ Leonardo Bras <leobras@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>
+Subject: [PATCH 3/6] qemu/main-loop: rename qemu_cond_wait_iothread() to
+ qemu_cond_wait_bql()
+Date: Wed, 29 Nov 2023 16:26:22 -0500
+Message-ID: <20231129212625.1051502-4-stefanha@redhat.com>
+In-Reply-To: <20231129212625.1051502-1-stefanha@redhat.com>
+References: <20231129212625.1051502-1-stefanha@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=max.chou@sifive.com; helo=mail-pl1-x634.google.com
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.4
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=stefanha@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -101,30 +137,154 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The RISC-V v spec 16.6 section says that the whole vector register move
-instructions operate as if EEW=SEW. So it should depends on the vsew
-field of vtype register.
+The name "iothread" is overloaded. Use the term Big QEMU Lock (BQL)
+instead, it is already widely used and unambiguous.
 
-Signed-off-by: Max Chou <max.chou@sifive.com>
+Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ include/qemu/main-loop.h          | 8 ++++----
+ accel/tcg/tcg-accel-ops-rr.c      | 4 ++--
+ hw/display/virtio-gpu.c           | 2 +-
+ hw/ppc/spapr_events.c             | 2 +-
+ system/cpu-throttle.c             | 2 +-
+ system/cpus.c                     | 4 ++--
+ target/i386/nvmm/nvmm-accel-ops.c | 2 +-
+ target/i386/whpx/whpx-accel-ops.c | 2 +-
+ 8 files changed, 13 insertions(+), 13 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 114ad87397f..3871f0ea73d 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -3643,8 +3643,7 @@ static bool trans_##NAME(DisasContext *s, arg_##NAME * a)               \
-         QEMU_IS_ALIGNED(a->rs2, LEN)) {                                 \
-         uint32_t maxsz = (s->cfg_ptr->vlen >> 3) * LEN;                 \
-         if (s->vstart_eq_zero) {                                        \
--            /* EEW = 8 */                                               \
--            tcg_gen_gvec_mov(MO_8, vreg_ofs(s, a->rd),                  \
-+            tcg_gen_gvec_mov(s->sew, vreg_ofs(s, a->rd),                \
-                              vreg_ofs(s, a->rs2), maxsz, maxsz);        \
-             mark_vs_dirty(s);                                           \
-         } else {                                                        \
+diff --git a/include/qemu/main-loop.h b/include/qemu/main-loop.h
+index 0b6a3e4824..ec2a70f041 100644
+--- a/include/qemu/main-loop.h
++++ b/include/qemu/main-loop.h
+@@ -373,17 +373,17 @@ G_DEFINE_AUTOPTR_CLEANUP_FUNC(BQLLockAuto, qemu_bql_auto_unlock)
+         = qemu_bql_auto_lock(__FILE__, __LINE__)
+ 
+ /*
+- * qemu_cond_wait_iothread: Wait on condition for the main loop mutex
++ * qemu_cond_wait_bql: Wait on condition for the main loop mutex
+  *
+  * This function atomically releases the main loop mutex and causes
+  * the calling thread to block on the condition.
+  */
+-void qemu_cond_wait_iothread(QemuCond *cond);
++void qemu_cond_wait_bql(QemuCond *cond);
+ 
+ /*
+- * qemu_cond_timedwait_iothread: like the previous, but with timeout
++ * qemu_cond_timedwait_bql: like the previous, but with timeout
+  */
+-void qemu_cond_timedwait_iothread(QemuCond *cond, int ms);
++void qemu_cond_timedwait_bql(QemuCond *cond, int ms);
+ 
+ /* internal interfaces */
+ 
+diff --git a/accel/tcg/tcg-accel-ops-rr.c b/accel/tcg/tcg-accel-ops-rr.c
+index c21215a094..1e5a688085 100644
+--- a/accel/tcg/tcg-accel-ops-rr.c
++++ b/accel/tcg/tcg-accel-ops-rr.c
+@@ -111,7 +111,7 @@ static void rr_wait_io_event(void)
+ 
+     while (all_cpu_threads_idle()) {
+         rr_stop_kick_timer();
+-        qemu_cond_wait_iothread(first_cpu->halt_cond);
++        qemu_cond_wait_bql(first_cpu->halt_cond);
+     }
+ 
+     rr_start_kick_timer();
+@@ -198,7 +198,7 @@ static void *rr_cpu_thread_fn(void *arg)
+ 
+     /* wait for initial kick-off after machine start */
+     while (first_cpu->stopped) {
+-        qemu_cond_wait_iothread(first_cpu->halt_cond);
++        qemu_cond_wait_bql(first_cpu->halt_cond);
+ 
+         /* process any pending work */
+         CPU_FOREACH(cpu) {
+diff --git a/hw/display/virtio-gpu.c b/hw/display/virtio-gpu.c
+index b016d3bac8..67c5be1a4e 100644
+--- a/hw/display/virtio-gpu.c
++++ b/hw/display/virtio-gpu.c
+@@ -1512,7 +1512,7 @@ void virtio_gpu_reset(VirtIODevice *vdev)
+         g->reset_finished = false;
+         qemu_bh_schedule(g->reset_bh);
+         while (!g->reset_finished) {
+-            qemu_cond_wait_iothread(&g->reset_cond);
++            qemu_cond_wait_bql(&g->reset_cond);
+         }
+     } else {
+         virtio_gpu_reset_bh(g);
+diff --git a/hw/ppc/spapr_events.c b/hw/ppc/spapr_events.c
+index deb4641505..cb0eeee587 100644
+--- a/hw/ppc/spapr_events.c
++++ b/hw/ppc/spapr_events.c
+@@ -899,7 +899,7 @@ void spapr_mce_req_event(PowerPCCPU *cpu, bool recovered)
+             }
+             return;
+         }
+-        qemu_cond_wait_iothread(&spapr->fwnmi_machine_check_interlock_cond);
++        qemu_cond_wait_bql(&spapr->fwnmi_machine_check_interlock_cond);
+         if (spapr->fwnmi_machine_check_addr == -1) {
+             /*
+              * If the machine was reset while waiting for the interlock,
+diff --git a/system/cpu-throttle.c b/system/cpu-throttle.c
+index e98836311b..1d2b73369e 100644
+--- a/system/cpu-throttle.c
++++ b/system/cpu-throttle.c
+@@ -54,7 +54,7 @@ static void cpu_throttle_thread(CPUState *cpu, run_on_cpu_data opaque)
+     endtime_ns = qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + sleeptime_ns;
+     while (sleeptime_ns > 0 && !cpu->stop) {
+         if (sleeptime_ns > SCALE_MS) {
+-            qemu_cond_timedwait_iothread(cpu->halt_cond,
++            qemu_cond_timedwait_bql(cpu->halt_cond,
+                                          sleeptime_ns / SCALE_MS);
+         } else {
+             qemu_bql_unlock();
+diff --git a/system/cpus.c b/system/cpus.c
+index d5b98c11f5..eb24a4db8e 100644
+--- a/system/cpus.c
++++ b/system/cpus.c
+@@ -513,12 +513,12 @@ void qemu_bql_unlock(void)
+     qemu_mutex_unlock(&qemu_global_mutex);
+ }
+ 
+-void qemu_cond_wait_iothread(QemuCond *cond)
++void qemu_cond_wait_bql(QemuCond *cond)
+ {
+     qemu_cond_wait(cond, &qemu_global_mutex);
+ }
+ 
+-void qemu_cond_timedwait_iothread(QemuCond *cond, int ms)
++void qemu_cond_timedwait_bql(QemuCond *cond, int ms)
+ {
+     qemu_cond_timedwait(cond, &qemu_global_mutex, ms);
+ }
+diff --git a/target/i386/nvmm/nvmm-accel-ops.c b/target/i386/nvmm/nvmm-accel-ops.c
+index 387ccfcce5..0fe8a76820 100644
+--- a/target/i386/nvmm/nvmm-accel-ops.c
++++ b/target/i386/nvmm/nvmm-accel-ops.c
+@@ -48,7 +48,7 @@ static void *qemu_nvmm_cpu_thread_fn(void *arg)
+             }
+         }
+         while (cpu_thread_is_idle(cpu)) {
+-            qemu_cond_wait_iothread(cpu->halt_cond);
++            qemu_cond_wait_bql(cpu->halt_cond);
+         }
+         qemu_wait_io_event_common(cpu);
+     } while (!cpu->unplug || cpu_can_run(cpu));
+diff --git a/target/i386/whpx/whpx-accel-ops.c b/target/i386/whpx/whpx-accel-ops.c
+index 1f29346a88..d8bec46081 100644
+--- a/target/i386/whpx/whpx-accel-ops.c
++++ b/target/i386/whpx/whpx-accel-ops.c
+@@ -48,7 +48,7 @@ static void *whpx_cpu_thread_fn(void *arg)
+             }
+         }
+         while (cpu_thread_is_idle(cpu)) {
+-            qemu_cond_wait_iothread(cpu->halt_cond);
++            qemu_cond_wait_bql(cpu->halt_cond);
+         }
+         qemu_wait_io_event_common(cpu);
+     } while (!cpu->unplug || cpu_can_run(cpu));
 -- 
-2.34.1
+2.42.0
 
 
