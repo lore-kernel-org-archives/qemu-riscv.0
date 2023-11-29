@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C37FCC4167B
-	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Nov 2023 04:22:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0F0BC4167B
+	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Nov 2023 04:22:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8C5H-0003pt-ON; Tue, 28 Nov 2023 23:21:59 -0500
+	id 1r8C54-0002ig-HA; Tue, 28 Nov 2023 23:21:46 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r8C5G-0003fN-8A
- for qemu-riscv@nongnu.org; Tue, 28 Nov 2023 23:21:58 -0500
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r8C52-0002e7-Mx
+ for qemu-riscv@nongnu.org; Tue, 28 Nov 2023 23:21:44 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r8C5E-0007SG-GM
- for qemu-riscv@nongnu.org; Tue, 28 Nov 2023 23:21:57 -0500
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r8C50-0007QP-JV
+ for qemu-riscv@nongnu.org; Tue, 28 Nov 2023 23:21:44 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1701231715;
+ s=mimecast20190719; t=1701231702;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:mime-version: content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=JVyfjLzyQs0XZ2Tf2HNNgNKUbfHJiHRiECV6o6YVcyQ=;
- b=NI63WixXGe34e7qo7FBQm81Ta8NvZjAjgJy4DLn6EeuDKtCCSehvL4FhKHM/ych+eYo8mN
- VgNHCDCx8PmH0muyn53V/qucpRj/cIoMR/hvWqPKAb619uQZuxGFgxTDFW7NBE2qLs4+q9
- xBadNFUh8HrpK/+rQ/tZsQfbz5+i1fI=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-140-U9X8hXBdMli6dCpHfluznA-1; Tue, 28 Nov 2023 23:21:51 -0500
-X-MC-Unique: U9X8hXBdMli6dCpHfluznA-1
+ bh=i8Sp/8SK4743lQGwgH+4VWrbTnWzFB9u/QLRM/j3xU8=;
+ b=DsKL4Zu3YGBGfbasnYqQWuWr3mW8GmYS4zH7WGkEBk/HsCs4nPylmIdyq7y9SGML/vv/41
+ pJLRfteGQLZw0rjkoOia1GcSWbgg/6yIR4bCTenD2KbLWmeZRz8l0xwP5rfQjYwSA6RFyz
+ INMloPrNBMg/Q+1lSMbM8L0g+U0SpTw=
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-210-YrfAMrQbOtCOEnDL7r6jiA-1; Tue,
+ 28 Nov 2023 23:21:35 -0500
+X-MC-Unique: YrfAMrQbOtCOEnDL7r6jiA-1
 Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
  [10.11.54.9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 02E0380C343;
- Wed, 29 Nov 2023 04:21:50 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 284F53C02772;
+ Wed, 29 Nov 2023 04:21:34 +0000 (UTC)
 Received: from gshan.redhat.com (unknown [10.64.136.61])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 9EB81492BE0;
- Wed, 29 Nov 2023 04:21:42 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 49F2A492BE0;
+ Wed, 29 Nov 2023 04:21:26 +0000 (UTC)
 From: Gavin Shan <gshan@redhat.com>
 To: qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org,
@@ -54,10 +54,10 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org,
  vijai@behindbytes.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
  zhiwei_liu@linux.alibaba.com, shan.gavin@gmail.com
-Subject: [PATCH v8 9/9] hw/riscv/shakti_c: Check CPU type in
+Subject: [PATCH v8 7/9] hw/arm/sbsa-ref: Check CPU type in
  machine_run_board_init()
-Date: Wed, 29 Nov 2023 14:20:12 +1000
-Message-ID: <20231129042012.277831-10-gshan@redhat.com>
+Date: Wed, 29 Nov 2023 14:20:10 +1000
+Message-ID: <20231129042012.277831-8-gshan@redhat.com>
 In-Reply-To: <20231129042012.277831-1-gshan@redhat.com>
 References: <20231129042012.277831-1-gshan@redhat.com>
 MIME-Version: 1.0
@@ -96,51 +96,77 @@ by ourselves.
 
 Signed-off-by: Gavin Shan <gshan@redhat.com>
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Leif Lindholm <quic_llindhol@quicinc.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- hw/riscv/shakti_c.c | 13 ++++++-------
- 1 file changed, 6 insertions(+), 7 deletions(-)
+ hw/arm/sbsa-ref.c | 36 ++++++++++--------------------------
+ 1 file changed, 10 insertions(+), 26 deletions(-)
 
-diff --git a/hw/riscv/shakti_c.c b/hw/riscv/shakti_c.c
-index 12ea74b032..3888034c2b 100644
---- a/hw/riscv/shakti_c.c
-+++ b/hw/riscv/shakti_c.c
-@@ -28,7 +28,6 @@
- #include "exec/address-spaces.h"
- #include "hw/riscv/boot.h"
+diff --git a/hw/arm/sbsa-ref.c b/hw/arm/sbsa-ref.c
+index f3c9704693..477dca0637 100644
+--- a/hw/arm/sbsa-ref.c
++++ b/hw/arm/sbsa-ref.c
+@@ -145,27 +145,6 @@ static const int sbsa_ref_irqmap[] = {
+     [SBSA_GWDT_WS0] = 16,
+ };
  
+-static const char * const valid_cpus[] = {
+-    ARM_CPU_TYPE_NAME("cortex-a57"),
+-    ARM_CPU_TYPE_NAME("cortex-a72"),
+-    ARM_CPU_TYPE_NAME("neoverse-n1"),
+-    ARM_CPU_TYPE_NAME("neoverse-v1"),
+-    ARM_CPU_TYPE_NAME("neoverse-n2"),
+-    ARM_CPU_TYPE_NAME("max"),
+-};
 -
- static const struct MemmapEntry {
-     hwaddr base;
-     hwaddr size;
-@@ -47,12 +46,6 @@ static void shakti_c_machine_state_init(MachineState *mstate)
-     ShaktiCMachineState *sms = RISCV_SHAKTI_MACHINE(mstate);
-     MemoryRegion *system_memory = get_system_memory();
+-static bool cpu_type_valid(const char *cpu)
+-{
+-    int i;
+-
+-    for (i = 0; i < ARRAY_SIZE(valid_cpus); i++) {
+-        if (strcmp(cpu, valid_cpus[i]) == 0) {
+-            return true;
+-        }
+-    }
+-    return false;
+-}
+-
+ static uint64_t sbsa_ref_cpu_mp_affinity(SBSAMachineState *sms, int idx)
+ {
+     uint8_t clustersz = ARM_DEFAULT_CPUS_PER_CLUSTER;
+@@ -733,11 +712,6 @@ static void sbsa_ref_init(MachineState *machine)
+     const CPUArchIdList *possible_cpus;
+     int n, sbsa_max_cpus;
  
--    /* Allow only Shakti C CPU for this platform */
--    if (strcmp(mstate->cpu_type, TYPE_RISCV_CPU_SHAKTI_C) != 0) {
--        error_report("This board can only be used with Shakti C CPU");
+-    if (!cpu_type_valid(machine->cpu_type)) {
+-        error_report("sbsa-ref: CPU type %s not supported", machine->cpu_type);
 -        exit(1);
 -    }
 -
-     /* Initialize SoC */
-     object_initialize_child(OBJECT(mstate), "soc", &sms->soc,
-                             TYPE_RISCV_SHAKTI_SOC);
-@@ -82,9 +75,15 @@ static void shakti_c_machine_instance_init(Object *obj)
- static void shakti_c_machine_class_init(ObjectClass *klass, void *data)
+     if (kvm_enabled()) {
+         error_report("sbsa-ref: KVM is not supported for this machine");
+         exit(1);
+@@ -898,10 +872,20 @@ static void sbsa_ref_instance_init(Object *obj)
+ static void sbsa_ref_class_init(ObjectClass *oc, void *data)
  {
-     MachineClass *mc = MACHINE_CLASS(klass);
+     MachineClass *mc = MACHINE_CLASS(oc);
 +    static const char * const valid_cpu_types[] = {
-+        RISCV_CPU_TYPE_NAME("shakti-c"),
-+        NULL
++        ARM_CPU_TYPE_NAME("cortex-a57"),
++        ARM_CPU_TYPE_NAME("cortex-a72"),
++        ARM_CPU_TYPE_NAME("neoverse-n1"),
++        ARM_CPU_TYPE_NAME("neoverse-v1"),
++        ARM_CPU_TYPE_NAME("neoverse-n2"),
++        ARM_CPU_TYPE_NAME("max"),
++        NULL,
 +    };
-+
-     mc->desc = "RISC-V Board compatible with Shakti SDK";
-     mc->init = shakti_c_machine_state_init;
-     mc->default_cpu_type = TYPE_RISCV_CPU_SHAKTI_C;
-+    mc->valid_cpu_types = valid_cpu_types;
-     mc->default_ram_id = "riscv.shakti.c.ram";
- }
  
+     mc->init = sbsa_ref_init;
+     mc->desc = "QEMU 'SBSA Reference' ARM Virtual Machine";
+     mc->default_cpu_type = ARM_CPU_TYPE_NAME("neoverse-n1");
++    mc->valid_cpu_types = valid_cpu_types;
+     mc->max_cpus = 512;
+     mc->pci_allow_0_address = true;
+     mc->minimum_page_bits = 12;
 -- 
 2.42.0
 
