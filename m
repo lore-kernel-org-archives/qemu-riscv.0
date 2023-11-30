@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B973EC4167B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:31:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FF0FC4167B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:31:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8i4Y-0001Qk-9c; Thu, 30 Nov 2023 09:31:22 -0500
+	id 1r8i51-0001Zm-GW; Thu, 30 Nov 2023 09:31:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i46-0001KB-6N; Thu, 30 Nov 2023 09:30:54 -0500
+ id 1r8i4y-0001YB-IE; Thu, 30 Nov 2023 09:31:48 -0500
 Received: from mgamail.intel.com ([192.55.52.43])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i40-0000yu-2Z; Thu, 30 Nov 2023 09:30:53 -0500
+ id 1r8i4w-000157-Ab; Thu, 30 Nov 2023 09:31:48 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1701354648; x=1732890648;
+ t=1701354706; x=1732890706;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=GonVMos5FsS7CHBj98lIck+6Zgp9gIFuSW7kS7bFSf0=;
- b=h956BNIBUfQbDjZD4GX8CoRJZ6W0c3Uz2QxtAYtCY8+Ihot0QBZhEjJW
- 3ugdrFBvoaFCrDIKYp3XfHR0cL1FL7Ox3q+/rv4xqGQccDAauE0mHnI0o
- 2le8WJWH/2mQ+ZPSXqpdvHjErNt8lm/R8rFAE2fPWscGSApjOD9D5cAdM
- BjguCF1uUkGjj4xy2VyuxhvJx5vZBy48sbCdPiwvkPWds3NqNaoavSc8R
- 648eNxGXzAXsZLyKoieemB+hC6swVnK6DMQxS35hp3rRxhhyWrqtDZoHA
- 3iNHtID4f8DdkB7H64UjCev5dGn9VANJpFWismSCIyMB2JD2GbT7L0wvf A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479530850"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479530850"
+ bh=q8av5JpkyS6FnEIeBR5gNojelDu9V7STUz/Dtf8UH7E=;
+ b=SXRPthXIKWLa7vnXnPXE7eXzXWzC6Rp5EpH7BMg9RdCE3R+U4c5GLN3w
+ UNRaw+EcrhRvAS+qHjMgSwBYfd8JhT2ax3YFnkXbQ143V40Yus8ygxp0A
+ IWaUrzfcJzJVRZZOyoCiwfzzGA8Q4sRaEA4pGauZhrV5wm2y/drOwHCit
+ y396H48MPdJ7c1MOdEy2iOBrvffqoj2kDA7lrH/fKjOJvXKnBcQlVGKR+
+ KMT8x4UTXXm7owEf3ZoK/yBC5/LDu5iJJdYF3uvWfZrvDAxMmiX1uso4b
+ 58psAnVf3ZBESpu5RHvGYAiRU83drUqdYriakl1iD5G6LzsEHoohQ3UWh A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479531061"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479531061"
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:30:42 -0800
+ 30 Nov 2023 06:31:11 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942729601"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942729601"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942729632"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942729632"
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:30:33 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:31:01 -0800
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -72,10 +72,10 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
  Thomas Huth <thuth@redhat.com>, Zhiyuan Lv <zhiyuan.lv@intel.com>,
  Zhenyu Wang <zhenyu.z.wang@intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
  Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 01/41] qdev: Introduce new device category to cover basic
- topology device
-Date: Thu, 30 Nov 2023 22:41:23 +0800
-Message-Id: <20231130144203.2307629-2-zhao1.liu@linux.intel.com>
+Subject: [RFC 04/41] qom/object: Introduce helper to resolve path from
+ non-direct parent
+Date: Thu, 30 Nov 2023 22:41:26 +0800
+Message-Id: <20231130144203.2307629-5-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
@@ -88,8 +88,8 @@ X-Spam_score: -4.3
 X-Spam_bar: ----
 X-Spam_report: (-4.3 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01,
- T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,41 +107,73 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-Topology devices are used to define CPUs and need to be created and
-realized before the board initialization.
+When we support child<> property creation from cli, the peripheral
+container (/machine/peripheral) may not be the direct parent of the
+devices created from cli.
 
-Use this new catogory to identify such special devices.
+For this case, add a helper to resolve path from non-direct parent.
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- include/hw/qdev-core.h | 1 +
- system/qdev-monitor.c  | 1 +
- 2 files changed, 2 insertions(+)
+ include/qom/object.h | 15 +++++++++++++++
+ qom/object.c         | 18 ++++++++++++++++++
+ 2 files changed, 33 insertions(+)
 
-diff --git a/include/hw/qdev-core.h b/include/hw/qdev-core.h
-index 151d9682380d..97b7cfd04e35 100644
---- a/include/hw/qdev-core.h
-+++ b/include/hw/qdev-core.h
-@@ -86,6 +86,7 @@ typedef enum DeviceCategory {
-     DEVICE_CATEGORY_SOUND,
-     DEVICE_CATEGORY_MISC,
-     DEVICE_CATEGORY_CPU,
-+    DEVICE_CATEGORY_CPU_DEF,
-     DEVICE_CATEGORY_WATCHDOG,
-     DEVICE_CATEGORY_MAX
- } DeviceCategory;
-diff --git a/system/qdev-monitor.c b/system/qdev-monitor.c
-index a13db763e5dd..0f163b2d0310 100644
---- a/system/qdev-monitor.c
-+++ b/system/qdev-monitor.c
-@@ -173,6 +173,7 @@ static void qdev_print_devinfos(bool show_no_user)
-         [DEVICE_CATEGORY_SOUND]   = "Sound",
-         [DEVICE_CATEGORY_MISC]    = "Misc",
-         [DEVICE_CATEGORY_CPU]     = "CPU",
-+        [DEVICE_CATEGORY_CPU_DEF] = "CPU Definition",
-         [DEVICE_CATEGORY_WATCHDOG]= "Watchdog",
-         [DEVICE_CATEGORY_MAX]     = "Uncategorized",
-     };
+diff --git a/include/qom/object.h b/include/qom/object.h
+index afccd24ca7ab..494eef801be3 100644
+--- a/include/qom/object.h
++++ b/include/qom/object.h
+@@ -1562,6 +1562,21 @@ Object *object_resolve_path_type(const char *path, const char *typename,
+  */
+ Object *object_resolve_path_at(Object *parent, const char *path);
+ 
++/**
++ * object_resolve_path_from:
++ * @parent: the object from which to resolve the path
++ * @path: the path to resolve
++ * @ambiguous: returns true if the path resolution failed because of an
++ *   ambiguous match
++ *
++ * This is like object_resolve_path_at(), except @parent may be the
++ * partial parent of @path.
++ *
++ * Returns: The resolved object or NULL on path lookup failure.
++ */
++Object *object_resolve_path_from(Object *parent, const char *path,
++                                 bool *ambiguous);
++
+ /**
+  * object_resolve_path_component:
+  * @parent: the object in which to resolve the path
+diff --git a/qom/object.c b/qom/object.c
+index 95c0dc8285fe..da29e88816b5 100644
+--- a/qom/object.c
++++ b/qom/object.c
+@@ -2192,6 +2192,24 @@ Object *object_resolve_path_at(Object *parent, const char *path)
+     return object_resolve_abs_path(parent, parts, TYPE_OBJECT);
+ }
+ 
++Object *object_resolve_path_from(Object *parent, const char *path,
++                                 bool *ambiguousp)
++{
++    g_auto(GStrv) parts = NULL;
++    bool ambiguous = false;
++    Object *obj;
++
++    parts = g_strsplit(path, "/", 0);
++    assert(parts);
++
++    obj = object_resolve_partial_path(parent, parts, TYPE_OBJECT,
++                                      &ambiguous);
++    if (ambiguousp) {
++        *ambiguousp = ambiguous;
++    }
++    return obj;
++}
++
+ typedef struct StringProperty
+ {
+     char *(*get)(Object *, Error **);
 -- 
 2.34.1
 
