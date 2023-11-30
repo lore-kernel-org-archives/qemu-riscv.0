@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC651C4167B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:32:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94C7FC4167B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:33:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8i58-0001eg-JG; Thu, 30 Nov 2023 09:31:59 -0500
+	id 1r8i5P-0001kr-If; Thu, 30 Nov 2023 09:32:15 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i54-0001d3-5x; Thu, 30 Nov 2023 09:31:54 -0500
+ id 1r8i5O-0001k8-6X; Thu, 30 Nov 2023 09:32:14 -0500
 Received: from mgamail.intel.com ([192.55.52.43])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i52-000157-KU; Thu, 30 Nov 2023 09:31:53 -0500
+ id 1r8i5L-00018C-4R; Thu, 30 Nov 2023 09:32:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1701354712; x=1732890712;
+ t=1701354731; x=1732890731;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=FvkKzJCE6FUWENQ9f97m08P62P/QoMoZpAQ1rnP03oI=;
- b=HtfMqBHHZUN7GgJRWat9fIWsFbhJkMP4kLDyPJrkFVSgc68P71B6J9KH
- h4MDq+Da2PJF8O8mzW2oB7HcQtW9oQaBJzWha7RJrHOxgHxUajKXquZ5+
- k5SFchDNnnduvUwiL7l5Leg5heYe7kOS2aCbeACzpETnW/WU5jZiyR5CO
- ZByDc/4VqhgrTLErOHeCmuc1L954soYl7YZJ6bEQwOYnmhUVkeQ9dfZDQ
- Aj50DQIlBTJ64MBaIY+469zRzDq97JDKlDhbz187rR/cAOp7cM35d1N7y
- 5VF7AFFvaQfOsz6AT5X7J1LB9tt5XSvqXlKoIjfUcn9HOGsNw3es/4S0l w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479531156"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479531156"
+ bh=vOtFxW4vj/U4kztv92p8xu/6iieeFFSa0l7Rf+yqZFI=;
+ b=AhfhMEJUM+u9rmyvO32IPdp0wSYzhNAwN2WXM/wZ/RWr4kBSQd2eg/Wj
+ BpZcqG6oGj4ExHNZDBK3IMUAmCSUVPz9U0DM7b8ajKczh9D7XlFdoXGBx
+ QLAEmlzaUzldZY8fzqgw6+qX+GDNHKuEol+Fgs8L9mMM9fGyw0GQA8sUN
+ UhFvCyOR+2y6PtX1WL8SoNPRkDaVHKD4LmhScBNWY6454m7tvaZsIvSaD
+ vDU0xK+m0lCGqNqcN2NkIyVPNWdP3fWRvA53P/lmGxCBSMvq2R4Cl/MMm
+ D2DYn+92Xx7CoNDmDe4rcCXKiD2A8jBLzQGMhpOQFudyShdR/T2GqRcf1 g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479531333"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479531333"
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:31:20 -0800
+ 30 Nov 2023 06:31:39 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942729654"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942729654"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942729711"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942729711"
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:31:10 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:31:29 -0800
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -72,9 +72,9 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
  Thomas Huth <thuth@redhat.com>, Zhiyuan Lv <zhiyuan.lv@intel.com>,
  Zhenyu Wang <zhenyu.z.wang@intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
  Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 05/41] qdev: Set device parent and id after setting properties
-Date: Thu, 30 Nov 2023 22:41:27 +0800
-Message-Id: <20231130144203.2307629-6-zhao1.liu@linux.intel.com>
+Subject: [RFC 07/41] qdev: Introduce parent option in -device
+Date: Thu, 30 Nov 2023 22:41:29 +0800
+Message-Id: <20231130144203.2307629-8-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
@@ -106,56 +106,185 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-The properties setting does not conflict with the creation of child<>
-property.
+Currently, the devices added by "-device" are linked via bus, and are
+set the parent as peripheral-anon or peripheral containers of the
+machine.
 
-Pre-setting the device's properties can help the device's parent
-selection. Some topology devices (e.g., CPUs that support hotplug)
-usually define topology sub indexes as properties, and the selection of
-their parent needs to be based on these proteries.
+But this is not enough for building CPU topology hierarchies as:
+1. The relationship between different CPU hierarchies is child<>
+   property other than link<> property, and they shouldn't be linked
+   using the special bus.
+2. The canonical path of device is built from the child<> property, and
+   the well defined CPU topology hierarchies ask their canonical path to
+   reflect the correct topological relationship.
 
-Move qdev_set_id() after properties setting to help the next user-child
-introduction.
+With these, the child<> property support is needed for QDev interface to
+allow user to configure proper parent in "-device".
+
+Introduce the "parent" option in "-device" to create the child<>
+property. This option asks for the device id of the parent device.
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- system/qdev-monitor.c | 15 ++++++++-------
- 1 file changed, 8 insertions(+), 7 deletions(-)
+ hw/xen/xen-legacy-backend.c |  2 +-
+ include/monitor/qdev.h      |  3 ++-
+ system/qdev-monitor.c       | 50 ++++++++++++++++++++++++++-----------
+ 3 files changed, 38 insertions(+), 17 deletions(-)
 
+diff --git a/hw/xen/xen-legacy-backend.c b/hw/xen/xen-legacy-backend.c
+index 124dd5f3d687..70ad11c6287e 100644
+--- a/hw/xen/xen-legacy-backend.c
++++ b/hw/xen/xen-legacy-backend.c
+@@ -184,7 +184,7 @@ static struct XenLegacyDevice *xen_be_get_xendev(const char *type, int dom,
+     object_initialize(&xendev->qdev, ops->size, TYPE_XENBACKEND);
+     OBJECT(xendev)->free = g_free;
+     qdev_set_id(DEVICE(xendev), g_strdup_printf("xen-%s-%d", type, dev),
+-                &error_fatal);
++                NULL, &error_fatal);
+     qdev_realize(DEVICE(xendev), xen_sysbus, &error_fatal);
+     object_unref(OBJECT(xendev));
+ 
+diff --git a/include/monitor/qdev.h b/include/monitor/qdev.h
+index f5fd6e6c1ffc..3d9d06158e5f 100644
+--- a/include/monitor/qdev.h
++++ b/include/monitor/qdev.h
+@@ -16,6 +16,7 @@ DeviceState *qdev_device_add_from_qdict(const QDict *opts, long *category,
+  * qdev_set_id: parent the device and set its id if provided.
+  * @dev: device to handle
+  * @id: id to be given to the device, or NULL.
++ * @parent: parent to be set for the device, or NULL.
+  *
+  * Returns: the id of the device in case of success; otherwise NULL.
+  *
+@@ -34,6 +35,6 @@ DeviceState *qdev_device_add_from_qdict(const QDict *opts, long *category,
+  * returned string is owned by the corresponding child property and must
+  * not be freed by the caller.
+  */
+-const char *qdev_set_id(DeviceState *dev, char *id, Error **errp);
++const char *qdev_set_id(DeviceState *dev, char *id, char *parent, Error **errp);
+ 
+ #endif
 diff --git a/system/qdev-monitor.c b/system/qdev-monitor.c
-index 7ee33a50142a..107411bb50cc 100644
+index 0261937b8462..8f56113eef65 100644
 --- a/system/qdev-monitor.c
 +++ b/system/qdev-monitor.c
-@@ -700,14 +700,7 @@ DeviceState *qdev_device_add_from_qdict(const QDict *opts, long *category,
+@@ -587,22 +587,33 @@ static BusState *qbus_find(const char *path, Error **errp)
+ }
+ 
+ static Object *qdev_find_peripheral_parent(DeviceState *dev,
++                                           char *parent_id,
+                                            Error **errp)
+ {
+     Object *parent_obj, *obj = OBJECT(dev);
+ 
+-    parent_obj = uc_provide_default_parent(obj, errp);
+-    if (*errp) {
+-        return NULL;
+-    }
++    if (parent_id) {
++        parent_obj = object_resolve_path_from(qdev_get_peripheral(),
++                                              parent_id, NULL);
++        if (parent_obj) {
++            if (uc_check_user_parent(obj, parent_obj)) {
++                return parent_obj;
++            }
++        }
++    } else {
++        parent_obj = uc_provide_default_parent(obj, errp);
++        if (*errp) {
++            return NULL;
++        }
+ 
+-    if (parent_obj) {
+-        /*
+-         * Non-anonymous parents (under "/peripheral") are allowed to
+-         * be accessed to create child<> properties.
+-         */
+-        if (object_is_child_from(parent_obj, qdev_get_peripheral())) {
+-            return parent_obj;
++        if (parent_obj) {
++            /*
++             * Non-anonymous parents (under "/peripheral") are allowed to
++             * be accessed to create child<> properties.
++             */
++            if (object_is_child_from(parent_obj, qdev_get_peripheral())) {
++                return parent_obj;
++            }
          }
      }
  
--    /*
--     * set dev's parent and register its id.
--     * If it fails it means the id is already taken.
--     */
+@@ -628,7 +639,8 @@ static bool qdev_pre_check_device_id(char *id, Error **errp)
+ }
+ 
+ /* Takes ownership of @id, will be freed when deleting the device */
+-const char *qdev_set_id(DeviceState *dev, char *id, Error **errp)
++const char *qdev_set_id(DeviceState *dev, char *id,
++                        char *parent, Error **errp)
+ {
+     Object *parent_obj = NULL;
+     ObjectProperty *prop;
+@@ -639,7 +651,7 @@ const char *qdev_set_id(DeviceState *dev, char *id, Error **errp)
+     uc = (UserChild *)object_dynamic_cast(OBJECT(dev), TYPE_USER_CHILD);
+ 
+     if (uc) {
+-        parent_obj = qdev_find_peripheral_parent(dev, errp);
++        parent_obj = qdev_find_peripheral_parent(dev, parent, errp);
+         if (*errp) {
+             goto err;
+         }
+@@ -655,6 +667,11 @@ const char *qdev_set_id(DeviceState *dev, char *id, Error **errp)
+                 goto err;
+             }
+         }
++        g_free(parent);
++    } else if (parent) {
++        error_setg(errp, "Only the device implemented user-child "
++                   "interface supports `parent` option.");
++        goto err;
+     }
+ 
+     /*
+@@ -684,6 +701,7 @@ const char *qdev_set_id(DeviceState *dev, char *id, Error **errp)
+ 
+     return prop->name;
+ err:
++    g_free(parent);
+     g_free(id);
+     return NULL;
+ }
+@@ -694,7 +712,7 @@ DeviceState *qdev_device_add_from_qdict(const QDict *opts, long *category,
+     ERRP_GUARD();
+     DeviceClass *dc;
+     const char *driver, *path;
+-    char *id;
++    char *id, *parent;
+     DeviceState *dev = NULL;
+     BusState *bus = NULL;
+ 
+@@ -772,12 +790,14 @@ DeviceState *qdev_device_add_from_qdict(const QDict *opts, long *category,
+     }
+ 
      id = g_strdup(qdict_get_try_str(opts, "id"));
--    if (!qdev_set_id(dev, id, errp)) {
--        goto err_del_dev;
--    }
++    parent = g_strdup(qdict_get_try_str(opts, "parent"));
  
      /* set properties */
      dev->opts = qdict_clone_shallow(opts);
-@@ -721,6 +714,14 @@ DeviceState *qdev_device_add_from_qdict(const QDict *opts, long *category,
+     qdict_del(dev->opts, "driver");
+     qdict_del(dev->opts, "bus");
+     qdict_del(dev->opts, "id");
++    qdict_del(dev->opts, "parent");
+ 
+     object_set_properties_from_keyval(&dev->parent_obj, dev->opts, from_json,
+                                       errp);
+@@ -789,7 +809,7 @@ DeviceState *qdev_device_add_from_qdict(const QDict *opts, long *category,
+      * set dev's parent and register its id.
+      * If it fails it means the id is already taken.
+      */
+-    if (!qdev_set_id(dev, id, errp)) {
++    if (!qdev_set_id(dev, id, parent, errp)) {
          goto err_del_dev;
      }
  
-+    /*
-+     * set dev's parent and register its id.
-+     * If it fails it means the id is already taken.
-+     */
-+    if (!qdev_set_id(dev, id, errp)) {
-+        goto err_del_dev;
-+    }
-+
-     if (!qdev_realize(dev, bus, errp)) {
-         goto err_del_dev;
-     }
 -- 
 2.34.1
 
