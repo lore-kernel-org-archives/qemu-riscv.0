@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 998C6C4167B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:39:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F402BC4167B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:39:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8iAC-0006XJ-Dr; Thu, 30 Nov 2023 09:37:12 -0500
+	id 1r8i7M-0006Sy-MN; Thu, 30 Nov 2023 09:34:16 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8iA8-0006Aa-3K; Thu, 30 Nov 2023 09:37:08 -0500
+ id 1r8i6x-0005zY-Vz; Thu, 30 Nov 2023 09:33:57 -0500
 Received: from mgamail.intel.com ([192.55.52.43])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8iA6-0002CQ-3H; Thu, 30 Nov 2023 09:37:07 -0500
+ id 1r8i6v-0001RT-7l; Thu, 30 Nov 2023 09:33:50 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1701355026; x=1732891026;
+ t=1701354829; x=1732890829;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=1TBuBuayUq5ep3LedB2XG6MRM6nllhfykxLgfM/A+kw=;
- b=myqWtp1P9nIxX3zGWkd+pg+VMXUsWniH8dQHsxW3R+KbkCEABxG17x8c
- ONKvlYZuYK5ox8SUFymjCAw00e/2uGgACySYv8IIggSRUloxftjDec4Ab
- c13nCqcDVwEce5HAdPunFvQaGAym4zsz/zGvsTs/Vx7JIekY5HDndp5KT
- DehAIe5ltwf+oi7OWyhQQNHcLDr/Sbkxe0GPRoYDcsnceuuHT/qci34hG
- QTXJqWQgYr2WnjLAxgjy6R3m63RnwXwzlM2T/cQ5Tk/iT1Bdim/V3f2vH
- uIsEq3C29nWVxklROcJCr+lF+KqcjbkNtctvz7gE73VaK77TvgaW6eIuL w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532878"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479532878"
+ bh=tVF0CmmcOBEuYyYp6LOjwJOc13qp/jolnKC9SQQ9zpo=;
+ b=iuRtElay4mAE7FyVUEtPe003Cf8Glto2UManH4hBv2JTPkrSKS9YMaKI
+ xfJt8lWvuI/QXcpxWhfuMHigIHrhxc9yWASysSlrpti/JKbWxgyZIWQVU
+ WkI46x5IPzOQS+MFp1dBSz3l3ynOeviwhUSpeQvZfaTzdd3MHKU0uiEUV
+ OnD3RDKHBAKA4KV6/YGGXO13Uh/dUVep4M4RPnutRu+aXJ4OkVP0xSrsy
+ jrimARPbe0/HQhz+80YiDhNQ5hx0IW42NQhntKQJVD+d7ogUtFZdq1cGf
+ RbTtA18p+Vu7CAzegA2o+40UM/bfD+UqT7I2x7exnnlmS/nOS4tTPXNGA g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532010"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479532010"
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:37:01 -0800
+ 30 Nov 2023 06:33:41 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730622"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942730622"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730040"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942730040"
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:36:52 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:33:32 -0800
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -72,9 +72,10 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
  Thomas Huth <thuth@redhat.com>, Zhiyuan Lv <zhiyuan.lv@intel.com>,
  Zhenyu Wang <zhenyu.z.wang@intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
  Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 41/41] hw/i386: Cleanup non-QOM topology support
-Date: Thu, 30 Nov 2023 22:42:03 +0800
-Message-Id: <20231130144203.2307629-42-zhao1.liu@linux.intel.com>
+Subject: [RFC 20/41] hw/cpu/cluster: Descript cluster is not only used for TCG
+ in comment
+Date: Thu, 30 Nov 2023 22:41:42 +0800
+Message-Id: <20231130144203.2307629-21-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
@@ -106,92 +107,69 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-After i386 supports QOM topology, drop original topology logic.
+Update the comment to make the cpu-cluster description more general for
+both TCG and accel cases.
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- hw/i386/x86.c | 52 +++++++++++----------------------------------------
- 1 file changed, 11 insertions(+), 41 deletions(-)
+ hw/cpu/cluster.c         |  2 +-
+ include/hw/cpu/cluster.h | 20 +++++++++++++++-----
+ 2 files changed, 16 insertions(+), 6 deletions(-)
 
-diff --git a/hw/i386/x86.c b/hw/i386/x86.c
-index 99f6c502de43..cba8b806cdb6 100644
---- a/hw/i386/x86.c
-+++ b/hw/i386/x86.c
-@@ -118,7 +118,8 @@ out:
+diff --git a/hw/cpu/cluster.c b/hw/cpu/cluster.c
+index 340cfad9f8f1..27ab9e25a265 100644
+--- a/hw/cpu/cluster.c
++++ b/hw/cpu/cluster.c
+@@ -1,5 +1,5 @@
+ /*
+- * QEMU CPU cluster
++ * CPU cluster abstract device
+  *
+  * Copyright (c) 2018 GreenSocs SAS
+  *
+diff --git a/include/hw/cpu/cluster.h b/include/hw/cpu/cluster.h
+index c038f05ddc9f..b3185e2f2566 100644
+--- a/include/hw/cpu/cluster.h
++++ b/include/hw/cpu/cluster.h
+@@ -1,5 +1,5 @@
+ /*
+- * QEMU CPU cluster
++ * CPU cluster abstract device
+  *
+  * Copyright (c) 2018 GreenSocs SAS
+  *
+@@ -24,17 +24,27 @@
+ #include "qom/object.h"
  
- void x86_cpus_init(X86MachineState *x86ms, int default_cpu_version)
- {
--    int i;
-+    CPUCore *core;
-+    int i, cpu_index = 0, core_idx = 0;
-     const CPUArchIdList *possible_cpus;
-     MachineState *ms = MACHINE(x86ms);
-     MachineClass *mc = MACHINE_GET_CLASS(x86ms);
-@@ -153,34 +154,17 @@ void x86_cpus_init(X86MachineState *x86ms, int default_cpu_version)
- 
-     possible_cpus = mc->possible_cpu_arch_ids(ms);
- 
--    /*
--     * possible_cpus_qom_granu means the QOM topology support.
--     *
--     * TODO: Drop the "!mc->smp_props.possible_cpus_qom_granu" case when
--     * i386 completes QOM topology support.
--     */
--    if (mc->smp_props.possible_cpus_qom_granu) {
--        CPUCore *core;
--        int cpu_index = 0;
--        int core_idx = 0;
--
--        MACHINE_CORE_FOREACH(ms, core) {
--            for (i = 0; i < core->plugged_threads; i++) {
--                x86_cpu_new(x86ms, possible_cpus->cpus[cpu_index].arch_id,
--                            OBJECT(core), cpu_index, &error_fatal);
--                cpu_index++;
--            }
--
--            if (core->plugged_threads < core->nr_threads) {
--                cpu_index += core->nr_threads - core->plugged_threads;
--            }
--            core_idx++;
-+    MACHINE_CORE_FOREACH(ms, core) {
-+        for (i = 0; i < core->plugged_threads; i++) {
-+            x86_cpu_new(x86ms, possible_cpus->cpus[cpu_index].arch_id,
-+                        OBJECT(core), cpu_index, &error_fatal);
-+            cpu_index++;
-         }
--    } else {
--        for (i = 0; i < ms->smp.cpus; i++) {
--            x86_cpu_new(x86ms, possible_cpus->cpus[i].arch_id,
--                        NULL, i, &error_fatal);
-+
-+        if (core->plugged_threads < core->nr_threads) {
-+            cpu_index += core->nr_threads - core->plugged_threads;
-         }
-+        core_idx++;
-     }
- }
- 
-@@ -460,20 +444,6 @@ void x86_cpu_pre_plug(HotplugHandler *hotplug_dev,
-         return;
-     }
- 
--    /*
--     * possible_cpus_qom_granu means the QOM topology support.
--     *
--     * TODO: Drop the "!mc->smp_props.possible_cpus_qom_granu" case when
--     * i386 completes QOM topology support.
--     */
--    if (!mc->smp_props.possible_cpus_qom_granu) {
--        x86_topo_ids_from_apicid(cpu->apic_id, &topo_info, &topo_ids);
--        x86_cpu_assign_topo_id(cpu, &topo_ids, errp);
--        if (*errp) {
--            return;
--        }
--    }
--
-     if (hyperv_feat_enabled(cpu, HYPERV_FEAT_VPINDEX) &&
-         kvm_enabled() && !kvm_hv_vpindex_settable()) {
-         error_setg(errp, "kernel doesn't allow setting HyperV VP_INDEX");
+ /*
+- * CPU Cluster type
++ * # CPU Cluster
+  *
+- * A cluster is a group of CPUs which are all identical and have the same view
+- * of the rest of the system. It is mainly an internal QEMU representation and
+- * does not necessarily match with the notion of clusters on the real hardware.
++ * A cluster is a group of CPUs, that is, a level above the CPU (or Core).
++ *
++ * - For accel case, it's a CPU topology level concept above cores, in which
++ * the cores may share some resources (L2 cache or some others like L3
++ * cache tags, depending on the Archs). It is used to emulate the physical
++ * CPU cluster/module.
++ *
++ * - For TCG, cluster is used to organize CPUs directly without core. In one
++ * cluster, CPUs are all identical and have the same view of the rest of the
++ * system. It is mainly an internal QEMU representation and may not necessarily
++ * match with the notion of clusters on the real hardware.
+  *
+  * If CPUs are not identical (for example, Cortex-A53 and Cortex-A57 CPUs in an
+  * Arm big.LITTLE system) they should be in different clusters. If the CPUs do
+  * not have the same view of memory (for example the main CPU and a management
+  * controller processor) they should be in different clusters.
+  *
++ * # Use case for cluster in TCG
++ *
+  * A cluster is created by creating an object of TYPE_CPU_CLUSTER, and then
+  * adding the CPUs to it as QOM child objects (e.g. using the
+  * object_initialize_child() or object_property_add_child() functions).
 -- 
 2.34.1
 
