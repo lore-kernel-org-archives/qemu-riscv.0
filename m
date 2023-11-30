@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B545CC4167B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:38:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 998C6C4167B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:39:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8i4o-0001VJ-8Z; Thu, 30 Nov 2023 09:31:38 -0500
+	id 1r8iAC-0006XJ-Dr; Thu, 30 Nov 2023 09:37:12 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i4m-0001UZ-K9; Thu, 30 Nov 2023 09:31:36 -0500
+ id 1r8iA8-0006Aa-3K; Thu, 30 Nov 2023 09:37:08 -0500
 Received: from mgamail.intel.com ([192.55.52.43])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i4k-00014B-U4; Thu, 30 Nov 2023 09:31:36 -0500
+ id 1r8iA6-0002CQ-3H; Thu, 30 Nov 2023 09:37:07 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1701354694; x=1732890694;
+ t=1701355026; x=1732891026;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=50lNzU4oWEfgKNc9gIKf0MEOC0NyWyVi0AxeNokOwXU=;
- b=Kt/2N9Y3v/DtmsKN2swIPZRAC9T6INcdp8i6Tk0gM14FtaHo8CQr/Rqk
- D9iv4V5Hg7c0oQ8c2oSfwTEO59KpfRMsyJa6+SyVkdiT8LHN8DG7YpZ4b
- 0MvuRs6UFWN33dQ2il/EBmNqmhwG/mWWd5wYNEetLUdIOdqPeSOwK925L
- XVVSnQ5nDPE+Nmk4jEWPbr+m1LbuSzpUGcIQlH4o3XcMiufIAMrNzcqUV
- jYLg4kZBJ7aYY6PTlY625UxgR3K3DT7dBjGtimW0LN9YNP+Bh/7qm9g+g
- EWnTEELIeArwyr+2wtBdRDTIbogVddkq4H94QYISEymDv/3nYUzYei284 w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479530953"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479530953"
+ bh=1TBuBuayUq5ep3LedB2XG6MRM6nllhfykxLgfM/A+kw=;
+ b=myqWtp1P9nIxX3zGWkd+pg+VMXUsWniH8dQHsxW3R+KbkCEABxG17x8c
+ ONKvlYZuYK5ox8SUFymjCAw00e/2uGgACySYv8IIggSRUloxftjDec4Ab
+ c13nCqcDVwEce5HAdPunFvQaGAym4zsz/zGvsTs/Vx7JIekY5HDndp5KT
+ DehAIe5ltwf+oi7OWyhQQNHcLDr/Sbkxe0GPRoYDcsnceuuHT/qci34hG
+ QTXJqWQgYr2WnjLAxgjy6R3m63RnwXwzlM2T/cQ5Tk/iT1Bdim/V3f2vH
+ uIsEq3C29nWVxklROcJCr+lF+KqcjbkNtctvz7gE73VaK77TvgaW6eIuL w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532878"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479532878"
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:31:01 -0800
+ 30 Nov 2023 06:37:01 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942729615"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942729615"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730622"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942730622"
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:30:52 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:36:52 -0800
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -72,10 +72,9 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
  Thomas Huth <thuth@redhat.com>, Zhiyuan Lv <zhiyuan.lv@intel.com>,
  Zhenyu Wang <zhenyu.z.wang@intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
  Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 03/41] system: Create base category devices from cli before
- board initialization
-Date: Thu, 30 Nov 2023 22:41:25 +0800
-Message-Id: <20231130144203.2307629-4-zhao1.liu@linux.intel.com>
+Subject: [RFC 41/41] hw/i386: Cleanup non-QOM topology support
+Date: Thu, 30 Nov 2023 22:42:03 +0800
+Message-Id: <20231130144203.2307629-42-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
@@ -107,113 +106,92 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-Topology devices are required to complete CPU topology building before
-*_init_cpus() in MachineClass.init().
-
-Add a qemu_create_cli_base_devices() before board initialization to
-help create and realize topology devices from cli early.
+After i386 supports QOM topology, drop original topology logic.
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- system/vl.c | 51 ++++++++++++++++++++++++++++++++++-----------------
- 1 file changed, 34 insertions(+), 17 deletions(-)
+ hw/i386/x86.c | 52 +++++++++++----------------------------------------
+ 1 file changed, 11 insertions(+), 41 deletions(-)
 
-diff --git a/system/vl.c b/system/vl.c
-index 0be155b530b4..65add2fb2460 100644
---- a/system/vl.c
-+++ b/system/vl.c
-@@ -1197,8 +1197,9 @@ static int device_help_func(void *opaque, QemuOpts *opts, Error **errp)
- static int device_init_func(void *opaque, QemuOpts *opts, Error **errp)
+diff --git a/hw/i386/x86.c b/hw/i386/x86.c
+index 99f6c502de43..cba8b806cdb6 100644
+--- a/hw/i386/x86.c
++++ b/hw/i386/x86.c
+@@ -118,7 +118,8 @@ out:
+ 
+ void x86_cpus_init(X86MachineState *x86ms, int default_cpu_version)
  {
-     DeviceState *dev;
-+    long *category = opaque;
+-    int i;
++    CPUCore *core;
++    int i, cpu_index = 0, core_idx = 0;
+     const CPUArchIdList *possible_cpus;
+     MachineState *ms = MACHINE(x86ms);
+     MachineClass *mc = MACHINE_GET_CLASS(x86ms);
+@@ -153,34 +154,17 @@ void x86_cpus_init(X86MachineState *x86ms, int default_cpu_version)
  
--    dev = qdev_device_add(opts, NULL, errp);
-+    dev = qdev_device_add(opts, category, errp);
-     if (!dev && *errp) {
-         error_report_err(*errp);
-         return -1;
-@@ -2617,25 +2618,13 @@ static void qemu_init_board(void)
-     realtime_init();
- }
+     possible_cpus = mc->possible_cpu_arch_ids(ms);
  
--static void qemu_create_cli_devices(void)
-+static void qemu_create_cli_devices(long *category)
- {
-     DeviceOption *opt;
- 
--    soundhw_init();
+-    /*
+-     * possible_cpus_qom_granu means the QOM topology support.
+-     *
+-     * TODO: Drop the "!mc->smp_props.possible_cpus_qom_granu" case when
+-     * i386 completes QOM topology support.
+-     */
+-    if (mc->smp_props.possible_cpus_qom_granu) {
+-        CPUCore *core;
+-        int cpu_index = 0;
+-        int core_idx = 0;
 -
--    qemu_opts_foreach(qemu_find_opts("fw_cfg"),
--                      parse_fw_cfg, fw_cfg_find(), &error_fatal);
+-        MACHINE_CORE_FOREACH(ms, core) {
+-            for (i = 0; i < core->plugged_threads; i++) {
+-                x86_cpu_new(x86ms, possible_cpus->cpus[cpu_index].arch_id,
+-                            OBJECT(core), cpu_index, &error_fatal);
+-                cpu_index++;
+-            }
 -
--    /* init USB devices */
--    if (machine_usb(current_machine)) {
--        if (foreach_device_config(DEV_USB, usb_parse) < 0)
--            exit(1);
--    }
--
--    /* init generic devices */
-     rom_set_order_override(FW_CFG_ORDER_OVERRIDE_DEVICE);
-     qemu_opts_foreach(qemu_find_opts("device"),
--                      device_init_func, NULL, &error_fatal);
-+                      device_init_func, category, &error_fatal);
-     QTAILQ_FOREACH(opt, &device_opts, next) {
-         DeviceState *dev;
-         loc_push_restore(&opt->loc);
-@@ -2646,13 +2635,40 @@ static void qemu_create_cli_devices(void)
-          * from the start, so call qdev_device_add_from_qdict() directly for
-          * now.
-          */
--        dev = qdev_device_add_from_qdict(opt->opts, NULL, true, &error_fatal);
-+        dev = qdev_device_add_from_qdict(opt->opts, category,
-+                                         true, &error_fatal);
-         object_unref(OBJECT(dev));
-         loc_pop(&opt->loc);
+-            if (core->plugged_threads < core->nr_threads) {
+-                cpu_index += core->nr_threads - core->plugged_threads;
+-            }
+-            core_idx++;
++    MACHINE_CORE_FOREACH(ms, core) {
++        for (i = 0; i < core->plugged_threads; i++) {
++            x86_cpu_new(x86ms, possible_cpus->cpus[cpu_index].arch_id,
++                        OBJECT(core), cpu_index, &error_fatal);
++            cpu_index++;
+         }
+-    } else {
+-        for (i = 0; i < ms->smp.cpus; i++) {
+-            x86_cpu_new(x86ms, possible_cpus->cpus[i].arch_id,
+-                        NULL, i, &error_fatal);
++
++        if (core->plugged_threads < core->nr_threads) {
++            cpu_index += core->nr_threads - core->plugged_threads;
+         }
++        core_idx++;
      }
-     rom_reset_order_override();
  }
  
-+static void qemu_create_cli_base_devices(void)
-+{
-+    long category = DEVICE_CATEGORY_CPU_DEF;
-+
-+    qemu_opts_foreach(qemu_find_opts("fw_cfg"),
-+                      parse_fw_cfg, fw_cfg_find(), &error_fatal);
-+
-+    /* init CPU topology devices which don't support hotplug. */
-+    qemu_create_cli_devices(&category);
-+}
-+
-+static void qemu_create_cli_periphery_devices(void)
-+{
-+    soundhw_init();
-+
-+    /* init USB devices */
-+    if (machine_usb(current_machine)) {
-+        if (foreach_device_config(DEV_USB, usb_parse) < 0) {
-+            exit(1);
-+        }
-+    }
-+
-+    /* init generic devices */
-+    qemu_create_cli_devices(NULL);
-+}
-+
- static void qemu_machine_creation_done(void)
- {
-     MachineState *machine = MACHINE(qdev_get_machine());
-@@ -2701,8 +2717,9 @@ void qmp_x_exit_preconfig(Error **errp)
+@@ -460,20 +444,6 @@ void x86_cpu_pre_plug(HotplugHandler *hotplug_dev,
          return;
      }
  
-+    qemu_create_cli_base_devices();
-     qemu_init_board();
--    qemu_create_cli_devices();
-+    qemu_create_cli_periphery_devices();
-     qemu_machine_creation_done();
- 
-     if (loadvm) {
+-    /*
+-     * possible_cpus_qom_granu means the QOM topology support.
+-     *
+-     * TODO: Drop the "!mc->smp_props.possible_cpus_qom_granu" case when
+-     * i386 completes QOM topology support.
+-     */
+-    if (!mc->smp_props.possible_cpus_qom_granu) {
+-        x86_topo_ids_from_apicid(cpu->apic_id, &topo_info, &topo_ids);
+-        x86_cpu_assign_topo_id(cpu, &topo_ids, errp);
+-        if (*errp) {
+-            return;
+-        }
+-    }
+-
+     if (hyperv_feat_enabled(cpu, HYPERV_FEAT_VPINDEX) &&
+         kvm_enabled() && !kvm_hv_vpindex_settable()) {
+         error_setg(errp, "kernel doesn't allow setting HyperV VP_INDEX");
 -- 
 2.34.1
 
