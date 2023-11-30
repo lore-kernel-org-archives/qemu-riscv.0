@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D52F4C46CA0
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:40:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8258C4167B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:40:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8iA6-00060I-EX; Thu, 30 Nov 2023 09:37:06 -0500
+	id 1r8iA7-00068K-LU; Thu, 30 Nov 2023 09:37:07 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i9t-00058t-Hj; Thu, 30 Nov 2023 09:36:55 -0500
+ id 1r8i9p-00053u-FO; Thu, 30 Nov 2023 09:36:50 -0500
 Received: from mgamail.intel.com ([192.55.52.43])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i9q-00027I-Lm; Thu, 30 Nov 2023 09:36:52 -0500
+ id 1r8i9n-00027k-0g; Thu, 30 Nov 2023 09:36:48 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1701355010; x=1732891010;
+ t=1701355007; x=1732891007;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=q0lEBoFOr9b0x5amAD6sBLj9mxt45Se06XmWgm72SHY=;
- b=WIqhmw4DFSEv2mL9YQ3QlamxfwWEMzf1KwqSsHtrvmhGQ0tAhdCpBp/4
- w2sOYvtd+pTrXNT7xNDr6It8B6Bt8FOSDmE1VvXtIFZaQ3AtmjXZ/8Zb3
- 8bf2xyxMLsAux3GxfRLfz5Ev10PgwgC6xPnbDLdKQ8TiQlOg4RIl/RaFp
- ZpHNp3NcIzxe0urfifgK//iEi4VpKPMxwhiVr9jVWSZoCuO8qkCrnrWiB
- ysTQ2hf8iZP4rYlE2DfsuMbUqldEToW2/C4Hn9px1Qv9Rh+xPsoBmXchu
- gAYHLr01pla56MIfQJPqdLPFIAAXpHnvbW0oU6miu7aHYTA41gaNhPwst Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532783"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479532783"
+ bh=lndGadsp6lchipVix45sBuugJYcXf54DoIQPmPepLjo=;
+ b=bx3vDR9XpjRnDbqVDXTmIhC+Vxm3Bq/BGRdUpOgvox8QLeNS1cmVphkL
+ pqM+Ukg7C8FJnsTyaLW6NtMqvHWk3wSCAt4/OcC9oKsRN7m/2QZbG7z2p
+ PJYSNSpScTucsW+VGEtaH/PB1HTJRW4e5iJUZgf9W7G9eYE5xaWHUMoxU
+ rep8VnbIM6KdsYWvmhGsolQojs2B+LbXe1D8uEXOA6fdx4INvqWa6Nx+g
+ hsAuMTLZIDjXnCi6B5OfXInQ9sGechh2SNL2SCHInF5I/s+NZmlGaCKuF
+ nPwqlKXUhkypJ72xoMJangOJE0zWP995FeZzFXQF1gPW9+oJvt+/Db58O A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532682"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479532682"
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:36:43 -0800
+ 30 Nov 2023 06:36:24 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730530"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942730530"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730506"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942730506"
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:36:33 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:36:14 -0800
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -72,10 +72,9 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
  Thomas Huth <thuth@redhat.com>, Zhiyuan Lv <zhiyuan.lv@intel.com>,
  Zhenyu Wang <zhenyu.z.wang@intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
  Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 39/41] hw/i386: Add the interface to search parent for QOM
- topology
-Date: Thu, 30 Nov 2023 22:42:01 +0800
-Message-Id: <20231130144203.2307629-40-zhao1.liu@linux.intel.com>
+Subject: [RFC 37/41] hw/i386: Allow i386 to create new CPUs from QOM topology
+Date: Thu, 30 Nov 2023 22:41:59 +0800
+Message-Id: <20231130144203.2307629-38-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
@@ -107,182 +106,60 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-QOM topology needs to search parent cpu-core for hotplugged CPU to
-create topology child<> property in qdev_set_id().
+For QOM topology, maximum number of CPUs and the number of plugged CPUs
+are configured in core level.
 
-This process is before x86_cpu_pre_plug(), thus place 2 helpers
-x86_cpu_assign_apic_id() and x86_cpu_assign_topo_id() in
-x86_cpu_search_parent_pre_plug() to help get the correct topology sub
-indexes. Then x86_cpu_search_parent_pre_plug() searches the parent
-cpu-core with these sub indexes.
+Iterate through all the cpu-cores to determine how many CPUs should be
+created in each cpu-core.
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- hw/i386/x86.c         | 128 +++++++++++++++++++++++++++++++++++++++---
- include/hw/i386/x86.h |   3 +
- 2 files changed, 122 insertions(+), 9 deletions(-)
+ hw/i386/x86.c | 32 +++++++++++++++++++++++++++++---
+ 1 file changed, 29 insertions(+), 3 deletions(-)
 
 diff --git a/hw/i386/x86.c b/hw/i386/x86.c
-index 04edd6de6aeb..595d4365fdd1 100644
+index 3c99f4c3ab51..febffed92a83 100644
 --- a/hw/i386/x86.c
 +++ b/hw/i386/x86.c
-@@ -460,16 +460,18 @@ void x86_cpu_pre_plug(HotplugHandler *hotplug_dev,
-         return;
+@@ -152,9 +152,35 @@ void x86_cpus_init(X86MachineState *x86ms, int default_cpu_version)
      }
  
--    /* if 'address' properties socket-id/core-id/thread-id are not set, set them
--     * so that machine_query_hotpluggable_cpus would show correct values
+     possible_cpus = mc->possible_cpu_arch_ids(ms);
+-    for (i = 0; i < ms->smp.cpus; i++) {
+-        x86_cpu_new(x86ms, possible_cpus->cpus[i].arch_id,
+-                    NULL, i, &error_fatal);
++
 +    /*
 +     * possible_cpus_qom_granu means the QOM topology support.
 +     *
 +     * TODO: Drop the "!mc->smp_props.possible_cpus_qom_granu" case when
 +     * i386 completes QOM topology support.
-      */
--    /* TODO: move socket_id/core_id/thread_id checks into x86_cpu_realizefn()
--     * once -smp refactoring is complete and there will be CPU private
--     * CPUState::nr_cores and CPUState::nr_threads fields instead of globals */
--    x86_topo_ids_from_apicid(cpu->apic_id, &topo_info, &topo_ids);
--    x86_cpu_assign_topo_id(cpu, &topo_ids, errp);
--    if (*errp) {
--        return;
-+    if (!mc->smp_props.possible_cpus_qom_granu) {
-+        x86_topo_ids_from_apicid(cpu->apic_id, &topo_info, &topo_ids);
-+        x86_cpu_assign_topo_id(cpu, &topo_ids, errp);
-+        if (*errp) {
-+            return;
-+        }
-     }
- 
-     if (hyperv_feat_enabled(cpu, HYPERV_FEAT_VPINDEX) &&
-@@ -484,6 +486,114 @@ void x86_cpu_pre_plug(HotplugHandler *hotplug_dev,
-     numa_cpu_pre_plug(cpu_slot, dev, errp);
- }
- 
-+static int x86_cpu_get_topo_id_by_level(X86CPU *cpu,
-+                                        CPUTopoLevel level)
-+{
-+    switch (level) {
-+    case CPU_TOPO_THREAD:
-+        return cpu->thread_id;
-+    case CPU_TOPO_CORE:
-+        return cpu->core_id;
-+    case CPU_TOPO_DIE:
-+        return cpu->die_id;
-+    case CPU_TOPO_SOCKET:
-+        return cpu->socket_id;
-+    default:
-+        g_assert_not_reached();
-+    }
++     */
++    if (mc->smp_props.possible_cpus_qom_granu) {
++        CPUCore *core;
++        int cpu_index = 0;
++        int core_idx = 0;
 +
-+    return -1;
-+}
++        MACHINE_CORE_FOREACH(ms, core) {
++            for (i = 0; i < core->plugged_threads; i++) {
++                x86_cpu_new(x86ms, possible_cpus->cpus[cpu_index].arch_id,
++                            OBJECT(core), cpu_index, &error_fatal);
++                cpu_index++;
++            }
 +
-+typedef struct SearchCoreCb {
-+    X86CPU *cpu;
-+    CPUTopoState *parent;
-+    int id;
-+} SearchCoreCb;
-+
-+static int x86_cpu_search_parent_core(CPUTopoState *topo,
-+                                      void *opaque)
-+{
-+    SearchCoreCb *cb = opaque;
-+    CPUTopoLevel level = CPU_TOPO_LEVEL(topo);
-+
-+    cb->parent = topo;
-+    cb->id = x86_cpu_get_topo_id_by_level(cb->cpu, level);
-+
-+    if (cb->id == topo->index) {
-+        if (level == CPU_TOPO_CORE) {
-+            return TOPO_FOREACH_END;
-+        }
-+        return TOPO_FOREACH_CONTINUE;
-+    }
-+    return TOPO_FOREACH_SIBLING;
-+}
-+
-+Object *x86_cpu_search_parent_pre_plug(CPUTopoState *topo,
-+                                       CPUTopoState *root,
-+                                       Error **errp)
-+{
-+    int ret;
-+    SearchCoreCb cb;
-+    X86CPUTopoIDs topo_ids;
-+    X86CPUTopoInfo topo_info;
-+    X86CPU *cpu = X86_CPU(topo);
-+    CPUSlot *slot = CPU_SLOT(root);
-+    MachineState *ms = slot->ms;
-+    DECLARE_BITMAP(foreach_bitmap, USER_AVAIL_LEVEL_NUM);
-+
-+    topo_info.dies_per_pkg = ms->smp.dies;
-+    topo_info.cores_per_die = ms->smp.cores;
-+    topo_info.threads_per_core = ms->smp.threads;
-+
-+    if (cpu->apic_id == UNASSIGNED_APIC_ID) {
-+        x86_cpu_assign_apic_id(ms, cpu, &topo_ids, &topo_info, errp);
-+        if (*errp) {
-+            return NULL;
++            if (core->plugged_threads < core->nr_threads) {
++                cpu_index += core->nr_threads - core->plugged_threads;
++            }
++            core_idx++;
 +        }
 +    } else {
-+        /*
-+         * if 'address' properties socket-id/core-id/thread-id are not set,
-+         * set them so that machine_query_hotpluggable_cpus would show
-+         * correct values.
-+         *
-+         * TODO: move socket_id/core_id/thread_id checks into
-+         * x86_cpu_realizefn() once -smp refactoring is complete and there
-+         * will be CPU private CPUState::nr_cores and CPUState::nr_threads
-+         * fields instead of globals.
-+         */
-+        x86_topo_ids_from_apicid(cpu->apic_id, &topo_info, &topo_ids);
-+    }
-+
-+    x86_cpu_assign_topo_id(cpu, &topo_ids, errp);
-+    if (*errp) {
-+        return NULL;
-+    }
-+
-+    cb.cpu = cpu;
-+    cb.parent = NULL;
-+    cb.id = -1;
-+    bitmap_fill(foreach_bitmap, USER_AVAIL_LEVEL_NUM);
-+    clear_bit(CPU_TOPO_UNKNOWN, foreach_bitmap);
-+    clear_bit(CPU_TOPO_THREAD, foreach_bitmap);
-+
-+    ret = cpu_topo_child_foreach_recursive(root, foreach_bitmap,
-+                                           x86_cpu_search_parent_core, &cb);
-+    if (ret != TOPO_FOREACH_END) {
-+        g_autofree char *search_info = NULL;
-+
-+        search_info = !cb.parent ? g_strdup("") :
-+            g_strdup_printf(" for %s level with id: %d",
-+            cpu_topo_level_to_string(CPU_TOPO_LEVEL(cb.parent)), cb.id);
-+        error_setg(errp, "Can't find parent%s", search_info);
-+        return NULL;
-+    }
-+
-+    /* Keep the index of CPU topology device the same as the thread_id. */
-+    topo->index = cpu->thread_id;
-+    return OBJECT(cb.parent);
-+}
-+
- CpuInstanceProperties
- x86_cpu_index_to_props(MachineState *ms, unsigned cpu_index)
- {
-diff --git a/include/hw/i386/x86.h b/include/hw/i386/x86.h
-index 19e9f93fe286..e8c9ddc36359 100644
---- a/include/hw/i386/x86.h
-+++ b/include/hw/i386/x86.h
-@@ -104,6 +104,9 @@ int64_t x86_get_default_cpu_node_id(const MachineState *ms, int idx);
- const CPUArchIdList *x86_possible_cpu_arch_ids(MachineState *ms);
- CPUArchId *x86_find_cpu_slot(MachineState *ms, uint32_t id, int *idx);
- void x86_rtc_set_cpus_count(ISADevice *rtc, uint16_t cpus_count);
-+Object *x86_cpu_search_parent_pre_plug(CPUTopoState *topo,
-+                                       CPUTopoState *root,
-+                                       Error **errp);
- void x86_cpu_pre_plug(HotplugHandler *hotplug_dev,
-                       DeviceState *dev, Error **errp);
- void x86_cpu_plug(HotplugHandler *hotplug_dev,
++        for (i = 0; i < ms->smp.cpus; i++) {
++            x86_cpu_new(x86ms, possible_cpus->cpus[i].arch_id,
++                        NULL, i, &error_fatal);
++        }
+     }
+ }
+ 
 -- 
 2.34.1
 
