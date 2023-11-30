@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01039C10DAA
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:37:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACA31C4167B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:37:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8i9K-0002ob-0Q; Thu, 30 Nov 2023 09:36:18 -0500
+	id 1r8i6c-0005kH-QY; Thu, 30 Nov 2023 09:33:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i98-0001jV-MO; Thu, 30 Nov 2023 09:36:07 -0500
+ id 1r8i6a-0005Zs-5H; Thu, 30 Nov 2023 09:33:28 -0500
 Received: from mgamail.intel.com ([192.55.52.43])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i90-0001tW-E1; Thu, 30 Nov 2023 09:36:06 -0500
+ id 1r8i6Y-0001I2-0p; Thu, 30 Nov 2023 09:33:27 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1701354958; x=1732890958;
+ t=1701354806; x=1732890806;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=/v8heKKPYeoDkQz9adBaYazg44MH5EQbkce1fx19vRE=;
- b=ho2+FRa+OIviTDwySshVXwSE5mx0tXUzClJ9qIoZpSBjd8ZOTWghvEOC
- Z//8cLpwlI85ZzaE0OEJY8XiPSsr2WbbGSvxziaFMQWTqXDfbXfzubxP9
- EUZv6v9DsxQ8HNOjBQmyt3rzYiTNPfb5vk38X3irH0FJz2AAXaz0phAaR
- Zteq8PU9ytCe7C+/QNMq7cteAglCWKH7pZBmyiJevJvkqru8RcmPpZ3UF
- fuQtj0sOhLXF9J44Z+nEtaMXRn/t5ccYHWa/KITLeWi+/opmECySnXII0
- fMs+0rvN/3kVnjfTnu8+eSRbxHdVVFX+dOrhp1lkoj8QtZvzyJ4Z8xi2x Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532517"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479532517"
+ bh=UIctuJN57ff0cGtb6JQuQGzOnsVqrF/BvG/lcB/CLAU=;
+ b=ikudpG28NQ0aL5uvIg4IVbk4L/60gA/hBg9FC4XM2pCHKXFzWOJKfQiU
+ A36JEIy1CyJ/IaaxOui6LPNLu17LiL8oQa8sWyMgHAN16THmFtxFsCL+9
+ Z2po8C10Y572Aza7c6u4aUj8dovdLlw8GjsgNnlDvvKFuH2s+EyxF0Qwa
+ sVA5Fly+o8m3nOPH1XG6uBiomCK/ZL/9fgWL59qnh5uFtVESI6+1D1TIR
+ 1mAmnHicXWomN6DAB7co4TDfQJ/iBzudda3L6uLLnDaGR9cvp9BibKcQE
+ tXj2wg3T6dF4m/s4nbGfKNcOfCjwGE/hVQTGP5YjpLOybMQRSS+SsbS1W g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479531926"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479531926"
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:35:54 -0800
+ 30 Nov 2023 06:33:22 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730319"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942730319"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730016"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942730016"
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:35:44 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:33:13 -0800
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -72,10 +72,9 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
  Thomas Huth <thuth@redhat.com>, Zhiyuan Lv <zhiyuan.lv@intel.com>,
  Zhenyu Wang <zhenyu.z.wang@intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
  Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 34/41] hw/core/topo: Implement user-child to collect topology
- device from cli
-Date: Thu, 30 Nov 2023 22:41:56 +0800
-Message-Id: <20231130144203.2307629-35-zhao1.liu@linux.intel.com>
+Subject: [RFC 18/41] hw/cpu/cluster: Rename CPUClusterState to CPUCluster
+Date: Thu, 30 Nov 2023 22:41:40 +0800
+Message-Id: <20231130144203.2307629-19-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
@@ -107,192 +106,180 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-Support user-child for topology devices.
-
-This will affect these 2 aspects:
-1. For the basic topology device (with DEVICE_CATEGORY_CPU_DEF
-   category), user could specify "parent" to build the topology
-   relationship from cli. And cpu-slot will collect all topology
-   devices.
-
-2. For the hotplug topology devices (ppc-core or CPUs of other arches),
-   user-child could help to search the correct topology parent in
-   topology tree with the index properties. This is compatible with
-   the original behavior of inserting CPU/core from cli. And this
-   requires arch to support QOM topology with a few arch-specific
-   modifications, before this support, hotplugged CPUs/cores are
-   inserted into cpu-slot by default.
+To keep the same naming style as cpu-core, rename CPUClusterState to
+CPUCluster.
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- hw/core/cpu-slot.c         | 44 ++++++++++++++++++++++++++++++++++++++
- hw/core/cpu-topo.c         | 38 ++++++++++++++++++++++++++++++++
- include/hw/core/cpu-slot.h |  3 +++
- include/hw/core/cpu-topo.h |  4 ++++
- 4 files changed, 89 insertions(+)
+ gdbstub/system.c                   | 2 +-
+ hw/cpu/cluster.c                   | 8 ++++----
+ include/hw/arm/armsse.h            | 2 +-
+ include/hw/arm/xlnx-versal.h       | 4 ++--
+ include/hw/arm/xlnx-zynqmp.h       | 4 ++--
+ include/hw/cpu/cluster.h           | 6 +++---
+ include/hw/riscv/microchip_pfsoc.h | 4 ++--
+ include/hw/riscv/sifive_u.h        | 4 ++--
+ 8 files changed, 17 insertions(+), 17 deletions(-)
 
-diff --git a/hw/core/cpu-slot.c b/hw/core/cpu-slot.c
-index 45b6aef0750a..413daa66aaad 100644
---- a/hw/core/cpu-slot.c
-+++ b/hw/core/cpu-slot.c
-@@ -559,3 +559,47 @@ bool machine_validate_cpu_topology(MachineState *ms, Error **errp)
+diff --git a/gdbstub/system.c b/gdbstub/system.c
+index 783ac140b982..1c0b55d3ebe7 100644
+--- a/gdbstub/system.c
++++ b/gdbstub/system.c
+@@ -277,7 +277,7 @@ static int find_cpu_clusters(Object *child, void *opaque)
+ {
+     if (object_dynamic_cast(child, TYPE_CPU_CLUSTER)) {
+         GDBState *s = (GDBState *) opaque;
+-        CPUClusterState *cluster = CPU_CLUSTER(child);
++        CPUCluster *cluster = CPU_CLUSTER(child);
+         GDBProcess *process;
  
-     return true;
- }
-+
-+Object *cpu_slot_get_free_parent(CPUTopoState *child, Error **errp)
-+{
-+    MachineState *ms = MACHINE(qdev_get_machine());
-+    MachineClass *mc = MACHINE_GET_CLASS(ms);
-+    CPUTopoLevel level = CPU_TOPO_LEVEL(child);
-+    CPUSlot *slot = ms->topo;
-+
-+    if (!slot) {
-+        return NULL;
-+    }
-+
-+    /*
-+     * For CPUs and cores that support hotplug, the behavior is to specify
-+     * some topology sub ids. This requires special handling.
-+     */
-+    if (level == mc->smp_props.possible_cpus_qom_granu) {
-+        CPUTopoClass *child_tc = CPU_TOPO_GET_CLASS(child);
-+
-+        if (child_tc->search_parent_pre_plug) {
-+            return child_tc->search_parent_pre_plug(child,
-+                       CPU_TOPO(slot), errp);
-+        }
-+    }
-+
-+    /*
-+     * For other topology devices, just collect them into CPU slot.
-+     * The realize() of CPUTopoClass will check no "parent" option case.
-+     */
-+    return OBJECT(slot);
-+}
-+
-+char *cpu_slot_name_future_child(CPUTopoState *child)
-+{
-+    MachineState *ms = MACHINE(qdev_get_machine());
-+    CPUTopoLevel level = CPU_TOPO_LEVEL(child);
-+    CPUSlot *slot = ms->topo;
-+
-+    if (!slot) {
-+        return NULL;
-+    }
-+
-+    return get_topo_global_name(&slot->stat, level);
-+}
-diff --git a/hw/core/cpu-topo.c b/hw/core/cpu-topo.c
-index 351112ca7a73..143b0a148b17 100644
---- a/hw/core/cpu-topo.c
-+++ b/hw/core/cpu-topo.c
-@@ -20,8 +20,10 @@
- 
- #include "qemu/osdep.h"
- 
-+#include "hw/core/cpu-slot.h"
- #include "hw/core/cpu-topo.h"
- #include "hw/qdev-properties.h"
-+#include "monitor/user-child.h"
+         s->processes = g_renew(GDBProcess, s->processes, ++s->process_num);
+diff --git a/hw/cpu/cluster.c b/hw/cpu/cluster.c
+index 61289a840d46..fd978a543e40 100644
+--- a/hw/cpu/cluster.c
++++ b/hw/cpu/cluster.c
+@@ -26,12 +26,12 @@
  #include "qapi/error.h"
  
- const char *cpu_topo_level_to_string(CPUTopoLevel level)
-@@ -272,10 +274,38 @@ static void cpu_topo_unrealize(DeviceState *dev)
-     }
- }
+ static Property cpu_cluster_properties[] = {
+-    DEFINE_PROP_UINT32("cluster-id", CPUClusterState, cluster_id, 0),
++    DEFINE_PROP_UINT32("cluster-id", CPUCluster, cluster_id, 0),
+     DEFINE_PROP_END_OF_LIST()
+ };
  
-+/*
-+ * Prefer to insert topology device into topology tree where the CPU
-+ * slot is the root.
-+ */
-+static Object *cpu_topo_get_parent(UserChild *uc, Error **errp)
-+{
-+    return cpu_slot_get_free_parent(CPU_TOPO(uc), errp);
-+}
-+
-+static char *cpu_topo_get_child_name(UserChild *uc, Object *parent)
-+{
-+    return cpu_slot_name_future_child(CPU_TOPO(uc));
-+}
-+
-+/* Only check type. Other topology details with be checked at realize(). */
-+static bool cpu_topo_check_user_parent(UserChild *uc, Object *parent)
-+{
-+    CPUTopoState *topo;
-+
-+    topo = (CPUTopoState *)object_dynamic_cast(parent, TYPE_CPU_TOPO);
-+    if (!topo) {
-+        return false;
-+    }
-+
-+    return true;
-+}
-+
- static void cpu_topo_class_init(ObjectClass *oc, void *data)
+ typedef struct CallbackData {
+-    CPUClusterState *cluster;
++    CPUCluster *cluster;
+     int cpu_count;
+ } CallbackData;
+ 
+@@ -50,7 +50,7 @@ static int add_cpu_to_cluster(Object *obj, void *opaque)
+ static void cpu_cluster_realize(DeviceState *dev, Error **errp)
  {
-     DeviceClass *dc = DEVICE_CLASS(oc);
-     CPUTopoClass *tc = CPU_TOPO_CLASS(oc);
-+    UserChildClass *ucc = USER_CHILD_CLASS(oc);
- 
-     /* All topology devices belong to CPU property. */
-     set_bit(DEVICE_CATEGORY_CPU, dc->categories);
-@@ -290,6 +320,10 @@ static void cpu_topo_class_init(ObjectClass *oc, void *data)
-     dc->hotpluggable = false;
- 
-     tc->level = CPU_TOPO_UNKNOWN;
-+
-+    ucc->get_parent = cpu_topo_get_parent;
-+    ucc->get_child_name = cpu_topo_get_child_name;
-+    ucc->check_parent = cpu_topo_check_user_parent;
- }
- 
- static void cpu_topo_instance_init(Object *obj)
-@@ -310,6 +344,10 @@ static const TypeInfo cpu_topo_type_info = {
-     .class_init = cpu_topo_class_init,
-     .instance_size = sizeof(CPUTopoState),
-     .instance_init = cpu_topo_instance_init,
-+    .interfaces = (InterfaceInfo[]) {
-+        { TYPE_USER_CHILD },
-+        { }
-+    }
+     /* Iterate through all our CPU children and set their cluster_index */
+-    CPUClusterState *cluster = CPU_CLUSTER(dev);
++    CPUCluster *cluster = CPU_CLUSTER(dev);
+     Object *cluster_obj = OBJECT(dev);
+     CallbackData cbdata = {
+         .cluster = cluster,
+@@ -87,7 +87,7 @@ static void cpu_cluster_class_init(ObjectClass *klass, void *data)
+ static const TypeInfo cpu_cluster_type_info = {
+     .name = TYPE_CPU_CLUSTER,
+     .parent = TYPE_DEVICE,
+-    .instance_size = sizeof(CPUClusterState),
++    .instance_size = sizeof(CPUCluster),
+     .class_init = cpu_cluster_class_init,
  };
  
- static void cpu_topo_register_types(void)
-diff --git a/include/hw/core/cpu-slot.h b/include/hw/core/cpu-slot.h
-index 9e1c6d6b7ff2..1a63f55f52c3 100644
---- a/include/hw/core/cpu-slot.h
-+++ b/include/hw/core/cpu-slot.h
-@@ -102,4 +102,7 @@ void machine_plug_cpu_slot(MachineState *ms);
- void machine_create_smp_topo_tree(MachineState *ms, Error **errp);
- bool machine_validate_cpu_topology(MachineState *ms, Error **errp);
+diff --git a/include/hw/arm/armsse.h b/include/hw/arm/armsse.h
+index 88b3b759c5a8..886586a3bed4 100644
+--- a/include/hw/arm/armsse.h
++++ b/include/hw/arm/armsse.h
+@@ -153,7 +153,7 @@ struct ARMSSE {
  
-+Object *cpu_slot_get_free_parent(CPUTopoState *child, Error **errp);
-+char *cpu_slot_name_future_child(CPUTopoState *child);
-+
- #endif /* CPU_SLOT_H */
-diff --git a/include/hw/core/cpu-topo.h b/include/hw/core/cpu-topo.h
-index d27da0335c42..6cef26cce0b7 100644
---- a/include/hw/core/cpu-topo.h
-+++ b/include/hw/core/cpu-topo.h
-@@ -48,6 +48,8 @@ OBJECT_DECLARE_TYPE(CPUTopoState, CPUTopoClass, CPU_TOPO)
-  *     new child (including direct child and non-direct child) is added.
-  * @check_topo_child: Method to check the support for new child (including
-  *     direct child and non-direct child) to be added.
-+ * @search_parent_pre_plug: Method to search proper topology parent of @child
-+ *     from @root.
+     /*< public >*/
+     ARMv7MState armv7m[SSE_MAX_CPUS];
+-    CPUClusterState cluster[SSE_MAX_CPUS];
++    CPUCluster cluster[SSE_MAX_CPUS];
+     IoTKitSecCtl secctl;
+     TZPPC apb_ppc[NUM_INTERNAL_PPCS];
+     TZMPC mpc[IOTS_NUM_MPC];
+diff --git a/include/hw/arm/xlnx-versal.h b/include/hw/arm/xlnx-versal.h
+index b24fa64557fd..61bde52b6af5 100644
+--- a/include/hw/arm/xlnx-versal.h
++++ b/include/hw/arm/xlnx-versal.h
+@@ -58,7 +58,7 @@ struct Versal {
+     struct {
+         struct {
+             MemoryRegion mr;
+-            CPUClusterState cluster;
++            CPUCluster cluster;
+             ARMCPU cpu[XLNX_VERSAL_NR_ACPUS];
+             GICv3State gic;
+         } apu;
+@@ -88,7 +88,7 @@ struct Versal {
+             MemoryRegion mr;
+             MemoryRegion mr_ps_alias;
+ 
+-            CPUClusterState cluster;
++            CPUCluster cluster;
+             ARMCPU cpu[XLNX_VERSAL_NR_RCPUS];
+         } rpu;
+ 
+diff --git a/include/hw/arm/xlnx-zynqmp.h b/include/hw/arm/xlnx-zynqmp.h
+index 96358d51ebb7..5eea765ea76c 100644
+--- a/include/hw/arm/xlnx-zynqmp.h
++++ b/include/hw/arm/xlnx-zynqmp.h
+@@ -98,8 +98,8 @@ struct XlnxZynqMPState {
+     DeviceState parent_obj;
+ 
+     /*< public >*/
+-    CPUClusterState apu_cluster;
+-    CPUClusterState rpu_cluster;
++    CPUCluster apu_cluster;
++    CPUCluster rpu_cluster;
+     ARMCPU apu_cpu[XLNX_ZYNQMP_NUM_APU_CPUS];
+     ARMCPU rpu_cpu[XLNX_ZYNQMP_NUM_RPU_CPUS];
+     GICState gic;
+diff --git a/include/hw/cpu/cluster.h b/include/hw/cpu/cluster.h
+index 53fbf36af542..644b87350268 100644
+--- a/include/hw/cpu/cluster.h
++++ b/include/hw/cpu/cluster.h
+@@ -55,7 +55,7 @@
   */
- struct CPUTopoClass {
-     /*< private >*/
-@@ -59,6 +61,8 @@ struct CPUTopoClass {
-                              bool is_realize);
-     void (*check_topo_child)(CPUTopoState *parent, CPUTopoState *child,
-                              Error **errp);
-+    Object *(*search_parent_pre_plug)(CPUTopoState *child, CPUTopoState *root,
-+                                      Error **errp);
- };
+ 
+ #define TYPE_CPU_CLUSTER "cpu-cluster"
+-OBJECT_DECLARE_SIMPLE_TYPE(CPUClusterState, CPU_CLUSTER)
++OBJECT_DECLARE_SIMPLE_TYPE(CPUCluster, CPU_CLUSTER)
+ 
+ /*
+  * This limit is imposed by TCG, which puts the cluster ID into an
+@@ -64,13 +64,13 @@ OBJECT_DECLARE_SIMPLE_TYPE(CPUClusterState, CPU_CLUSTER)
+ #define MAX_CLUSTERS 255
  
  /**
+- * CPUClusterState:
++ * CPUCluster:
+  * @cluster_id: The cluster ID. This value is for internal use only and should
+  *   not be exposed directly to the user or to the guest.
+  *
+  * State of a CPU cluster.
+  */
+-struct CPUClusterState {
++struct CPUCluster {
+     /*< private >*/
+     DeviceState parent_obj;
+ 
+diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
+index daef086da602..c9ac14e35625 100644
+--- a/include/hw/riscv/microchip_pfsoc.h
++++ b/include/hw/riscv/microchip_pfsoc.h
+@@ -38,8 +38,8 @@ typedef struct MicrochipPFSoCState {
+     DeviceState parent_obj;
+ 
+     /*< public >*/
+-    CPUClusterState e_cluster;
+-    CPUClusterState u_cluster;
++    CPUCluster e_cluster;
++    CPUCluster u_cluster;
+     RISCVHartArrayState e_cpus;
+     RISCVHartArrayState u_cpus;
+     DeviceState *plic;
+diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+index 0696f8594277..fda4a708e960 100644
+--- a/include/hw/riscv/sifive_u.h
++++ b/include/hw/riscv/sifive_u.h
+@@ -40,8 +40,8 @@ typedef struct SiFiveUSoCState {
+     DeviceState parent_obj;
+ 
+     /*< public >*/
+-    CPUClusterState e_cluster;
+-    CPUClusterState u_cluster;
++    CPUCluster e_cluster;
++    CPUCluster u_cluster;
+     RISCVHartArrayState e_cpus;
+     RISCVHartArrayState u_cpus;
+     DeviceState *plic;
 -- 
 2.34.1
 
