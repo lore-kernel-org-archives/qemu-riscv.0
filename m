@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11416C4167B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 18:29:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAE0DC10DC2
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 18:29:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8llg-0007W7-U0; Thu, 30 Nov 2023 13:28:08 -0500
+	id 1r8llq-0007ae-U7; Thu, 30 Nov 2023 13:28:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1r8llg-0007Uj-Cg
- for qemu-riscv@nongnu.org; Thu, 30 Nov 2023 13:28:08 -0500
-Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533])
+ id 1r8lli-0007Y8-TI
+ for qemu-riscv@nongnu.org; Thu, 30 Nov 2023 13:28:11 -0500
+Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1r8lld-000224-CD
- for qemu-riscv@nongnu.org; Thu, 30 Nov 2023 13:28:08 -0500
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-5c2ad6a5515so996710a12.2
- for <qemu-riscv@nongnu.org>; Thu, 30 Nov 2023 10:28:04 -0800 (PST)
+ id 1r8llh-00022Z-8k
+ for qemu-riscv@nongnu.org; Thu, 30 Nov 2023 13:28:10 -0500
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-6cdd405ca77so1281399b3a.0
+ for <qemu-riscv@nongnu.org>; Thu, 30 Nov 2023 10:28:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1701368884; x=1701973684; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1701368887; x=1701973687; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CJStN5o6cpCtaFVDDaVOii99nG55HoJ22pJfQroY+Sc=;
- b=AVtyYVOhrpF9V90bOzCj/63/Yb97YACYyxdW32Gv5RcoRtRvSZ+Sgpap19YMJk+Ngc
- YpXGYk49w8Pgy6F0ES3aNWhx8iBc2fnERzT/8RgihMb2oPKgo8/dZb9+KH5y6sEQJhBt
- 0hIFORK+NOJxz55U1bDs6C6gg3/ymdXMdbRMZc0yIPh5HD0/OvFbCopoN83o+ts+GpSg
- iHdZyNfeIeMLFz5cqk/G2uoL7ET48lwZlVHIALkrsk/EYhmZb/mPm0bS2GPXkLyYCEbx
- nFPX46hp0HrnpjnIbrVqhTpoIndRo+XxrrJ+R+ba7FcgTkSfP2IEwa8RjPKvINFSF92N
- ujNw==
+ bh=34Xpt4JtgZm+A2kDvOT6tk9K/WJ3wSZMAoupfQaoGuQ=;
+ b=CGM6pU4IJ963G8pKuP8HJj89djfrE+bFPEUSBC4AgjoQSu4zfJak/vB+UOIuKrEWdT
+ khElQ4+Wp/Mx6vt2EK4aQs7wzM6G76oZdlcF5TUNNUMGbWgViNPUnaXJjS+YV8oBViF6
+ SsOg1k821WMhqFwVYDW01pbLvg6s1rjnSTDMuP8dMQmzkJogZkcP0k5L1VANHcQqM9CQ
+ NoJ2v39pUp+jIwXK1wWJS16SSlE2TVJZgEseSxDoKHf3VRfD14EgTLf0Eqih9Uz4sWUw
+ vEbXHMcV8xvyO1urX6P/Hnb3hdu4VxZq4+R7JfOeEYPqV3UafujWa/hO6zJVI0gO+SyR
+ aolw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701368884; x=1701973684;
+ d=1e100.net; s=20230601; t=1701368887; x=1701973687;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CJStN5o6cpCtaFVDDaVOii99nG55HoJ22pJfQroY+Sc=;
- b=rd8UIvuNme4nP2rhWCzyLlZ+rlBCOEIwPZZg9X3dHNLJ+2bQmey1b5S60o+RWKOlqD
- zunYlBfKe3WhUoR3fzru6UGb8SEFPrLf/iNmXykZeVlEWxxYTyLXnzuhsYGzmg1a9bq8
- 9HVcppyTTnc8PCt8LWbwK8bHwlIPiVXG8x0sbX/tJj6V8kTM43KUGd/fNzFjsozLNIEI
- Tb90X7R5qOQH9MYUUHhllFVi0MN202qLoweyHkUHnTqq2Ghc1p5LTTLK4aE7u2z62GSd
- lZ/J7hlHZk5Pej6SIaemZ9JqBd4cvHcDg2+Ex4OrXbgytvpHm9G9CjZsUoNYZ73fnepi
- 8Dgg==
-X-Gm-Message-State: AOJu0YyMPlGMIEOYE3qNdTzntYw2Osbv+yeutPuGrhaIcE2qU7AiYggN
- y2qk6vRNFgCPdF3WNuTpweRNOg==
-X-Google-Smtp-Source: AGHT+IF9mE+0J44ey0CFRbzsvJ4LTODVFoBF3efUhbiFnK9/Us6g87ZD/LXfP57EFDtjh+M1HEMpkg==
-X-Received: by 2002:a05:6a20:e112:b0:187:bc51:de6e with SMTP id
- kr18-20020a056a20e11200b00187bc51de6emr28770983pzb.26.1701368883854; 
- Thu, 30 Nov 2023 10:28:03 -0800 (PST)
+ bh=34Xpt4JtgZm+A2kDvOT6tk9K/WJ3wSZMAoupfQaoGuQ=;
+ b=n8Jiq/6Ca9AzD5Jn1xnBj1SJYDPHc6WYUAorktneTh8V5rAO9FlwQCaI1ZjBaGsfxh
+ zLQEbtWbQKx1M/Mu6d/g4P2an7hnCWKjAswQEX87BhptoLfCnzIQbOp8hs2Qp8cWY8hg
+ snnBlNXflZOqLimybcic/KBMrUtNyxX5lumYV8ngPthAqaaSP77UAkuF9nkFT16+36P7
+ 3qLX9+aKvOsQk1cabdBCGRi4KXZI2oTFvU1mIxzpfVrB/U2VMAiZVVd81QFCQZmr/jeO
+ tOfpDHulBrkGjEsBM62Gn4vBRwMeqvBlJlKwxoXtMEBoMEiWSDRV0EzT+hzC6Xynp1ku
+ Rw7A==
+X-Gm-Message-State: AOJu0YxftXdw3BWkNvfNuLSrG6YhmoPYXBEvIELEWna/K/ipMKnppc9R
+ A1srdNCZzgO+MyiSlPglNc5yVA==
+X-Google-Smtp-Source: AGHT+IGRVI/rmGCqeV/A+j6kefzOI/mrKfFJkfe0YJ9OicRBE7ANJiHHcHHmQa5WaOZul6CPE6QZOQ==
+X-Received: by 2002:a05:6a20:9712:b0:187:9f15:bfc7 with SMTP id
+ hr18-20020a056a20971200b001879f15bfc7mr20226100pzc.27.1701368886814; 
+ Thu, 30 Nov 2023 10:28:06 -0800 (PST)
 Received: from grind.. (200-206-229-234.dsl.telesp.net.br. [200.206.229.234])
  by smtp.gmail.com with ESMTPSA id
- b24-20020aa78718000000b0068fece22469sm1517451pfo.4.2023.11.30.10.28.01
+ b24-20020aa78718000000b0068fece22469sm1517451pfo.4.2023.11.30.10.28.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Nov 2023 10:28:03 -0800 (PST)
+ Thu, 30 Nov 2023 10:28:06 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  ajones@ventanamicro.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH for-9.0 3/4] target/riscv/kvm: do PR_RISCV_V_SET_CONTROL
- during realize()
-Date: Thu, 30 Nov 2023 15:27:47 -0300
-Message-ID: <20231130182748.1894790-4-dbarboza@ventanamicro.com>
+Subject: [PATCH for-9.0 4/4] target/riscv/kvm: add RVV and Vector CSR regs
+Date: Thu, 30 Nov 2023 15:27:48 -0300
+Message-ID: <20231130182748.1894790-5-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231130182748.1894790-1-dbarboza@ventanamicro.com>
 References: <20231130182748.1894790-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::533;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x533.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x430.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,79 +96,129 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Linux RISC-V vector documentation (Document/arch/riscv/vector.rst)
-mandates a prctl() in order to allow an userspace thread to use the
-Vector extension from the host.
+Add support for RVV and Vector CSR KVM regs vstart, vl and vtype.
 
-This is something to be done in realize() time, after init(), when we
-already decided whether we're using RVV or not. We don't have a
-realize() callback for KVM yet, so add kvm_cpu_realize() and enable RVV
-for the thread via PR_RISCV_V_SET_CONTROL.
+Support for vregs[] requires KVM side changes and an extra reg (vlenb)
+and will be added later.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- target/riscv/kvm/kvm-cpu.c | 29 +++++++++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
+ target/riscv/kvm/kvm-cpu.c | 74 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 74 insertions(+)
 
 diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 45b6cf1cfa..273c71baea 100644
+index 273c71baea..5408ead81c 100644
 --- a/target/riscv/kvm/kvm-cpu.c
 +++ b/target/riscv/kvm/kvm-cpu.c
-@@ -18,6 +18,7 @@
+@@ -89,6 +89,10 @@ static uint64_t kvm_riscv_reg_id(CPURISCVState *env, uint64_t type,
  
- #include "qemu/osdep.h"
- #include <sys/ioctl.h>
-+#include <sys/prctl.h>
+ #define RISCV_FP_D_REG(env, idx)  kvm_riscv_reg_id(env, KVM_REG_RISCV_FP_D, idx)
  
- #include <linux/kvm.h>
- 
-@@ -47,6 +48,9 @@
- #include "sysemu/runstate.h"
- #include "hw/riscv/numa.h"
- 
-+#define PR_RISCV_V_SET_CONTROL            69
-+#define PR_RISCV_V_VSTATE_CTRL_ON          2
++#define RISCV_VECTOR_CSR_REG(env, name) \
++    kvm_riscv_reg_id(env, KVM_REG_RISCV_VECTOR, \
++                     KVM_REG_RISCV_VECTOR_CSR_REG(name))
 +
- void riscv_kvm_aplic_request(void *opaque, int irq, int level)
- {
-     kvm_set_irq(kvm_state, irq, !!level);
-@@ -1481,11 +1485,36 @@ static void kvm_cpu_instance_init(CPUState *cs)
-     }
+ #define KVM_RISCV_GET_CSR(cs, env, csr, reg) \
+     do { \
+         int _ret = kvm_get_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
+@@ -142,6 +146,7 @@ static KVMCPUConfig kvm_misa_ext_cfgs[] = {
+     KVM_MISA_CFG(RVH, KVM_RISCV_ISA_EXT_H),
+     KVM_MISA_CFG(RVI, KVM_RISCV_ISA_EXT_I),
+     KVM_MISA_CFG(RVM, KVM_RISCV_ISA_EXT_M),
++    KVM_MISA_CFG(RVV, KVM_RISCV_ISA_EXT_V),
+ };
+ 
+ static void kvm_cpu_get_misa_ext_cfg(Object *obj, Visitor *v,
+@@ -688,6 +693,65 @@ static void kvm_riscv_put_regs_timer(CPUState *cs)
+     env->kvm_timer_dirty = false;
  }
  
-+/*
-+ * We'll get here via the following path:
-+ *
-+ * riscv_cpu_realize()
-+ *   -> cpu_exec_realizefn()
-+ *      -> kvm_cpu_realize() (via accel_cpu_common_realize())
-+ */
-+static bool kvm_cpu_realize(CPUState *cs, Error **errp)
++static int kvm_riscv_get_regs_vector(CPUState *cs)
 +{
-+    RISCVCPU *cpu = RISCV_CPU(cs);
-+    int ret;
++    CPURISCVState *env = &RISCV_CPU(cs)->env;
++    target_ulong reg;
++    int ret = 0;
 +
-+    if (riscv_has_ext(&cpu->env, RVV)) {
-+        ret = prctl(PR_RISCV_V_SET_CONTROL, PR_RISCV_V_VSTATE_CTRL_ON);
-+        if (ret) {
-+            error_setg(errp, "Error in prctl PR_RISCV_V_SET_CONTROL, code: %s",
-+                       strerrorname_np(errno));
-+            return false;
-+        }
++    if (!riscv_has_ext(env, RVV)) {
++        return 0;
 +    }
 +
-+   return true;
++    ret = kvm_get_one_reg(cs, RISCV_VECTOR_CSR_REG(env, vstart), &reg);
++    if (ret) {
++        return ret;
++    }
++    env->vstart = reg;
++
++    ret = kvm_get_one_reg(cs, RISCV_VECTOR_CSR_REG(env, vl), &reg);
++    if (ret) {
++        return ret;
++    }
++    env->vl = reg;
++
++    ret = kvm_get_one_reg(cs, RISCV_VECTOR_CSR_REG(env, vtype), &reg);
++    if (ret) {
++        return ret;
++    }
++    env->vtype = reg;
++
++    return 0;
 +}
 +
- static void kvm_cpu_accel_class_init(ObjectClass *oc, void *data)
- {
-     AccelCPUClass *acc = ACCEL_CPU_CLASS(oc);
++static int kvm_riscv_put_regs_vector(CPUState *cs)
++{
++    CPURISCVState *env = &RISCV_CPU(cs)->env;
++    target_ulong reg;
++    int ret = 0;
++
++    if (!riscv_has_ext(env, RVV)) {
++        return 0;
++    }
++
++    reg = env->vstart;
++    ret = kvm_set_one_reg(cs, RISCV_VECTOR_CSR_REG(env, vstart), &reg);
++    if (ret) {
++        return ret;
++    }
++
++    reg = env->vl;
++    ret = kvm_set_one_reg(cs, RISCV_VECTOR_CSR_REG(env, vl), &reg);
++    if (ret) {
++        return ret;
++    }
++
++    reg = env->vtype;
++    ret = kvm_set_one_reg(cs, RISCV_VECTOR_CSR_REG(env, vtype), &reg);
++
++    return ret;
++}
++
+ typedef struct KVMScratchCPU {
+     int kvmfd;
+     int vmfd;
+@@ -989,6 +1053,11 @@ int kvm_arch_get_registers(CPUState *cs)
+         return ret;
+     }
  
-     acc->cpu_instance_init = kvm_cpu_instance_init;
-+    acc->cpu_target_realize = kvm_cpu_realize;
++    ret = kvm_riscv_get_regs_vector(cs);
++    if (ret) {
++        return ret;
++    }
++
+     return ret;
  }
  
- static const TypeInfo kvm_cpu_accel_type_info = {
+@@ -1029,6 +1098,11 @@ int kvm_arch_put_registers(CPUState *cs, int level)
+         return ret;
+     }
+ 
++    ret = kvm_riscv_put_regs_vector(cs);
++    if (ret) {
++        return ret;
++    }
++
+     if (KVM_PUT_RESET_STATE == level) {
+         RISCVCPU *cpu = RISCV_CPU(cs);
+         if (cs->cpu_index == 0) {
 -- 
 2.41.0
 
