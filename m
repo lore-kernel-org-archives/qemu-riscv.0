@@ -4,90 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA0D7C46CA3
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:41:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41AA5C4167B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 18:28:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8iA7-000656-8k; Thu, 30 Nov 2023 09:37:07 -0500
+	id 1r8llW-0007Ow-W6; Thu, 30 Nov 2023 13:27:59 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i9x-0005EA-5L; Thu, 30 Nov 2023 09:36:58 -0500
-Received: from mgamail.intel.com ([192.55.52.43])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i9v-00027I-Hf; Thu, 30 Nov 2023 09:36:56 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1701355015; x=1732891015;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=n1bOTd1De6zljXfwth5hOf8VQYb/0aDsDjxTGUGzfGQ=;
- b=Yu4EGhg6yNshxMTJYvtudEMoU2SJagl/F8MQClr47J9bZmuFtKpBNODl
- IzLhhYEJmu0ZWUDF//G9NUKcDiKgAYp5jWm5QnSAIdKAGkwUFZCuoCAVT
- FWOoQVnpeU18pt3dVgu8iQ+8IdlFCdSeBqB37k7BPCiuL7/jRyTRKwuWv
- KhnqpF9u6J29gyKGWGLyX5DWNRGeDY9CR0qUV6qaoZp1C2/TGd14AYzwy
- BgOw+PtOS1DxwiRHNEMs68QZZCuu82pf+FJcYrMgAws4unI4fZ59uwcY0
- uAWHoliihs5DORIasvSOtlQHA0+rVVTzM54zxedlVngX13BodedG7K00Q w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532839"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479532839"
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
- by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:36:52 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730582"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942730582"
-Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:36:42 -0800
-From: Zhao Liu <zhao1.liu@linux.intel.com>
-To: Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- "Michael S . Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
- Nicholas Piggin <npiggin@gmail.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Igor Mammedov <imammedo@redhat.com>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Barrat?= <fbarrat@linux.ibm.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
- Gerd Hoffmann <kraxel@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Alistair Francis <alistair@alistair23.me>,
- "Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
- =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-ppc@nongnu.org,
- xen-devel@lists.xenproject.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
- qemu-s390x@nongnu.org
-Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
- Thomas Huth <thuth@redhat.com>, Zhiyuan Lv <zhiyuan.lv@intel.com>,
- Zhenyu Wang <zhenyu.z.wang@intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
- Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 40/41] hw/i386: Support QOM topology
-Date: Thu, 30 Nov 2023 22:42:02 +0800
-Message-Id: <20231130144203.2307629-41-zhao1.liu@linux.intel.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
-References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1r8llW-0007OR-0C
+ for qemu-riscv@nongnu.org; Thu, 30 Nov 2023 13:27:58 -0500
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1r8llU-00020W-F9
+ for qemu-riscv@nongnu.org; Thu, 30 Nov 2023 13:27:57 -0500
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-6cdedb683f9so710327b3a.0
+ for <qemu-riscv@nongnu.org>; Thu, 30 Nov 2023 10:27:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1701368874; x=1701973674; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=q7yun4U7tx9SivzwtPFNXuaW40xzS24FRTchvW/8usI=;
+ b=boDayZLND9BSo5BOfB1p3aNzo/47wKv+hxUXq+H7PLBMtctHJpoFpyBM6kJP5oubjP
+ Nq9xq+yPbR+eXfLNd709zM33rRwSnY5AogG4z1IsY1kaddlzME5uGd7gl4Psfq5+BBvB
+ UIioEh8/pv4lf6uaTIswFtfmV9xq8Sopq05OxQpPErRIeVKe24OtrLiKLPX/7cxv9FDf
+ I02RkiLob8kDVHOmFYBB8fDn63M1RFcMlxvg2f9EVAkBK5VCmydD0M+kaCSr/avLr3K+
+ DIArXr2o2t7CjR+Cys3PqCVgiDtpD4GK7+TgxwJaGezsduLB0shviHYOldpWA/vnAckQ
+ UYUA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701368874; x=1701973674;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=q7yun4U7tx9SivzwtPFNXuaW40xzS24FRTchvW/8usI=;
+ b=efvOCgv4n4xtSDIk7ctu35ppo7TbdWyPaSO2qp4iRL/htDyfxrKzMbvldD0kVv6GhI
+ O5ARIhv4jvjfSjm+W1DfNtaFqIXR9aALS7cbTR4fsN+Q9jlMO18gQYU2bLVCDZvuz+Q/
+ 4tVDmU7Mo8XCeFyTPp5EpeFnd/vyBcuTFg5pcDyzzjKEbN3GGl0EqRBV9dnhNbuzeTmd
+ 1LiBdTsxWovw+q5YDb3ZAc0jwM0ajUc1yLhZ20vPe03NssNm8AvzEEY27NopPDTiFcnr
+ crHehIYmYaMwKZALgvk9ZuC+pflRmISYdjkwiexAOATr78QcH5b7fIXzIc+vIEKyBiQd
+ lwBQ==
+X-Gm-Message-State: AOJu0YzkwI4CcyYQ/Uq6CP4WjqJwUvMoIQkpRjbLbb1Polrbi7IHpVuK
+ YSLX62NVWH54/lJRsO5w8Liu+Q==
+X-Google-Smtp-Source: AGHT+IFvckFmJFm1GIC7sfIwbm4bQM2/jv+62pPyaeLlzpAmmn3Pq1NAAXitW8RmaY8CS6P/qw/hlA==
+X-Received: by 2002:a05:6a00:3a04:b0:6cb:bc06:b058 with SMTP id
+ fj4-20020a056a003a0400b006cbbc06b058mr23886350pfb.0.1701368874521; 
+ Thu, 30 Nov 2023 10:27:54 -0800 (PST)
+Received: from grind.. (200-206-229-234.dsl.telesp.net.br. [200.206.229.234])
+ by smtp.gmail.com with ESMTPSA id
+ b24-20020aa78718000000b0068fece22469sm1517451pfo.4.2023.11.30.10.27.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Nov 2023 10:27:54 -0800 (PST)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ ajones@ventanamicro.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH for-9.0 0/4] target/riscv: add RVV CSRs
+Date: Thu, 30 Nov 2023 15:27:44 -0300
+Message-ID: <20231130182748.1894790-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=192.55.52.43;
- envelope-from=zhao1.liu@linux.intel.com; helo=mgamail.intel.com
-X-Spam_score_int: -42
-X-Spam_score: -4.3
-X-Spam_bar: ----
-X-Spam_report: (-4.3 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -104,54 +93,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Zhao Liu <zhao1.liu@intel.com>
+Hi,
 
-Set MachineClass.smp_props.possible_cpus_qom_granu and
-TopoClass.search_parent_pre_plug for i386.
+This series adds RVV, vstart, vl and vtype regs to the KVM driver.
 
-So far, the i386 topology is based on the QOM topology.
+But first we need a couple of things done. We need 'ptrace.h' RISC-V
+linux-header to be able to read/write RVV CSRs. This is done in patch 2.
+Patch 1 is the usual linux-header bump for all archs.
 
-Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
----
- hw/i386/x86.c     | 1 +
- target/i386/cpu.c | 4 ++++
- 2 files changed, 5 insertions(+)
+Patch 3 is adding a realize() callback for the KVM driver because we're
+doing a prctl() to enable Vector support for the thread.
 
-diff --git a/hw/i386/x86.c b/hw/i386/x86.c
-index 595d4365fdd1..99f6c502de43 100644
---- a/hw/i386/x86.c
-+++ b/hw/i386/x86.c
-@@ -1565,6 +1565,7 @@ static void x86_machine_class_init(ObjectClass *oc, void *data)
-     mc->cpu_index_to_instance_props = x86_cpu_index_to_props;
-     mc->get_default_cpu_node_id = x86_get_default_cpu_node_id;
-     mc->possible_cpu_arch_ids = x86_possible_cpu_arch_ids;
-+    mc->smp_props.possible_cpus_qom_granu = CPU_TOPO_THREAD;
-     x86mc->save_tsc_khz = true;
-     x86mc->fwcfg_dma_enabled = true;
-     nc->nmi_monitor_handler = x86_nmi;
-diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index cd16cb893daf..1de5726691e1 100644
---- a/target/i386/cpu.c
-+++ b/target/i386/cpu.c
-@@ -41,6 +41,7 @@
- #include "exec/address-spaces.h"
- #include "hw/boards.h"
- #include "hw/i386/sgx-epc.h"
-+#include "hw/i386/x86.h"
- #endif
- 
- #include "disas/capstone.h"
-@@ -8009,6 +8010,9 @@ static void x86_cpu_common_class_init(ObjectClass *oc, void *data)
- #if !defined(CONFIG_USER_ONLY)
-     object_class_property_add(oc, "crash-information", "GuestPanicInformation",
-                               x86_cpu_get_crash_info_qom, NULL, NULL, NULL);
-+
-+    CPU_TOPO_CLASS(oc)->search_parent_pre_plug =
-+        x86_cpu_search_parent_pre_plug;
- #endif
- 
-     for (w = 0; w < FEATURE_WORDS; w++) {
+Patches are based on master. You'll need the following KVM fix to be
+able to build:
+
+[PATCH for-8.2] target/riscv/kvm: fix shadowing in kvm_riscv_(get|put)_regs_csr
+
+
+Daniel Henrique Barboza (4):
+  linux-headers: Update to Linux v6.7-rc3
+  linux-headers: riscv: add ptrace.h
+  target/riscv/kvm: do PR_RISCV_V_SET_CONTROL during realize()
+  target/riscv/kvm: add RVV and Vector CSR regs
+
+ include/standard-headers/drm/drm_fourcc.h     |   2 +
+ include/standard-headers/linux/pci_regs.h     |  24 ++-
+ include/standard-headers/linux/vhost_types.h  |   7 +
+ .../standard-headers/linux/virtio_config.h    |   5 +
+ include/standard-headers/linux/virtio_pci.h   |  11 ++
+ linux-headers/asm-arm64/kvm.h                 |  32 ++++
+ linux-headers/asm-generic/unistd.h            |  14 +-
+ linux-headers/asm-loongarch/bitsperlong.h     |   1 +
+ linux-headers/asm-loongarch/kvm.h             | 108 +++++++++++
+ linux-headers/asm-loongarch/mman.h            |   1 +
+ linux-headers/asm-loongarch/unistd.h          |   5 +
+ linux-headers/asm-mips/unistd_n32.h           |   4 +
+ linux-headers/asm-mips/unistd_n64.h           |   4 +
+ linux-headers/asm-mips/unistd_o32.h           |   4 +
+ linux-headers/asm-powerpc/unistd_32.h         |   4 +
+ linux-headers/asm-powerpc/unistd_64.h         |   4 +
+ linux-headers/asm-riscv/kvm.h                 |  12 ++
+ linux-headers/asm-riscv/ptrace.h              | 132 +++++++++++++
+ linux-headers/asm-s390/unistd_32.h            |   4 +
+ linux-headers/asm-s390/unistd_64.h            |   4 +
+ linux-headers/asm-x86/unistd_32.h             |   4 +
+ linux-headers/asm-x86/unistd_64.h             |   3 +
+ linux-headers/asm-x86/unistd_x32.h            |   3 +
+ linux-headers/linux/iommufd.h                 | 180 +++++++++++++++++-
+ linux-headers/linux/kvm.h                     |  11 ++
+ linux-headers/linux/psp-sev.h                 |   1 +
+ linux-headers/linux/stddef.h                  |   7 +
+ linux-headers/linux/userfaultfd.h             |   9 +-
+ linux-headers/linux/vfio.h                    |  47 +++--
+ linux-headers/linux/vhost.h                   |   8 +
+ scripts/update-linux-headers.sh               |   3 +
+ target/riscv/kvm/kvm-cpu.c                    | 103 ++++++++++
+ 32 files changed, 735 insertions(+), 26 deletions(-)
+ create mode 100644 linux-headers/asm-loongarch/bitsperlong.h
+ create mode 100644 linux-headers/asm-loongarch/kvm.h
+ create mode 100644 linux-headers/asm-loongarch/mman.h
+ create mode 100644 linux-headers/asm-loongarch/unistd.h
+ create mode 100644 linux-headers/asm-riscv/ptrace.h
+
 -- 
-2.34.1
+2.41.0
 
 
