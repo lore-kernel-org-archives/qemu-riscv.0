@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 015A2C4167B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:37:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C085C10DAA
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:37:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8i7k-0007PY-TD; Thu, 30 Nov 2023 09:34:40 -0500
+	id 1r8i7P-0006r3-Vg; Thu, 30 Nov 2023 09:34:20 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i7V-0006xN-Ot; Thu, 30 Nov 2023 09:34:26 -0500
+ id 1r8i7G-00068Z-6I; Thu, 30 Nov 2023 09:34:10 -0500
 Received: from mgamail.intel.com ([192.55.52.43])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i7S-0001Un-Ct; Thu, 30 Nov 2023 09:34:24 -0500
+ id 1r8i7A-0001Un-Ub; Thu, 30 Nov 2023 09:34:07 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1701354862; x=1732890862;
+ t=1701354844; x=1732890844;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=KYdyPQbbzxDFAf7dgOGDTufkcJTYeF0L4udr4i03f58=;
- b=nVrvZOQ2zLkvLt5zc8ZVitp4F2lAJYYQ8h/3qzfWoW1DVQSHCf2z1Rc2
- ZY7lB/2RolYIauH4MmK8UoWWPCjFSoKkUIg5M8axmfXQzKOs4kO5dB6X5
- b4L5K6vhIdabnxupL4uSx5jQ2w7/L+LcqjRwCUwHKBlZbps+Z7B+uEiik
- 4mLGQTaQ8IKKS9re6pSsoAVjqxkLby+cvtwle1w16lrA0u97jSkZUPloM
- BDYav9fCPYUT5CCLJCMFNsItvuJ7+qEuwhvmvXla5GqDYu8E9ivjxtZjt
- /lPdP8dPID0SVeJvSPDrzMcqeEdURJL0KdwWjAt04UuFu8LqsnjbJmJm7 A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532180"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479532180"
+ bh=ojKaeiijveA4rQSsZpp2eyLul8UTXwtywNBoYac3pw0=;
+ b=KffefMi63af5nmZYTDhlpSDBuIGsay1Zvuzoft0mO3rkUpO+P2Ys70Cr
+ kyXYZ6+zISYNsrdxGsGuHIginbLoa8u/9/mbbckVZ7Ccd/ZeO8uEBHmBI
+ RBYchHff4EpAUQn3v8v70ypfXtNy3OVEst+BgPM2SguywgzTYEGsAolIi
+ S1FJBRRXXPNdp+zVrI0mI+c41sC1RjHg/ll8a6/EnRvWDwEY/BgLFLxSG
+ ng33F7gTc79udonbrZ/mNJKXA1c3+V+rKYB8iUZ5G3nyCcePC1QrdeN2v
+ oEKlTd0Ak3MQ5USTLxvhy8m+qfM5Rnd6h9HUDnwP99gKvObk5Gy/oTrGl Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532120"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479532120"
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:34:19 -0800
+ 30 Nov 2023 06:34:00 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730082"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942730082"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730060"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942730060"
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:34:09 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:33:50 -0800
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -72,10 +72,10 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
  Thomas Huth <thuth@redhat.com>, Zhiyuan Lv <zhiyuan.lv@intel.com>,
  Zhenyu Wang <zhenyu.z.wang@intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
  Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 24/41] hw/cpu/socket: Abstract cpu-socket level as topology
- device
-Date: Thu, 30 Nov 2023 22:41:46 +0800
-Message-Id: <20231130144203.2307629-25-zhao1.liu@linux.intel.com>
+Subject: [RFC 22/41] hw/cpu/cluster: Convert cpu-cluster from general device
+ to topology device
+Date: Thu, 30 Nov 2023 22:41:44 +0800
+Message-Id: <20231130144203.2307629-23-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
@@ -107,150 +107,94 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-Abstract socket level as a topology device "cpu-socket" to allow user to
-create socket level topology from cli and later the cpu-sockets could be
-added into topology tree.
+Convert cpu-cluster to topology device then user could create cluster
+level topology from cli and later the cpu-clusters could be added into
+topology tree.
 
-In addition, mark the cpu-socket as DEVICE_CATEGORY_CPU_DEF category to
+In addition, mark the cpu-cluster as DEVICE_CATEGORY_CPU_DEF category to
 indicate it belongs to the basic CPU definition and should be created
 from cli before board initialization.
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- MAINTAINERS             |  2 ++
- hw/cpu/meson.build      |  2 +-
- hw/cpu/socket.c         | 46 +++++++++++++++++++++++++++++++++++++++++
- include/hw/cpu/socket.h | 38 ++++++++++++++++++++++++++++++++++
- 4 files changed, 87 insertions(+), 1 deletion(-)
- create mode 100644 hw/cpu/socket.c
- create mode 100644 include/hw/cpu/socket.h
+ hw/cpu/cluster.c         | 11 +++++++++--
+ include/hw/cpu/cluster.h |  7 +++++--
+ 2 files changed, 14 insertions(+), 4 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 91d0936edb32..6a9fa0aeed0c 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1864,6 +1864,7 @@ F: hw/core/null-machine.c
- F: hw/core/numa.c
- F: hw/cpu/cluster.c
- F: hw/cpu/die.c
-+F: hw/cpu/socket.c
- F: qapi/machine.json
- F: qapi/machine-common.json
- F: qapi/machine-target.json
-@@ -1872,6 +1873,7 @@ F: include/hw/core/cpu.h
- F: include/hw/core/cpu-topo.h
- F: include/hw/cpu/cluster.h
- F: include/hw/cpu/die.h
-+F: include/hw/cpu/socket.h
- F: include/sysemu/numa.h
- F: tests/unit/test-smp-parse.c
- T: git https://gitlab.com/ehabkost/qemu.git machine-next
-diff --git a/hw/cpu/meson.build b/hw/cpu/meson.build
-index e685fe1c7d8a..251724fea86c 100644
---- a/hw/cpu/meson.build
-+++ b/hw/cpu/meson.build
-@@ -1,4 +1,4 @@
--system_ss.add(files('core.c', 'cluster.c', 'die.c'))
-+system_ss.add(files('core.c', 'cluster.c', 'die.c', 'socket.c'))
+diff --git a/hw/cpu/cluster.c b/hw/cpu/cluster.c
+index 8a666c27d151..adf0ef23e8d4 100644
+--- a/hw/cpu/cluster.c
++++ b/hw/cpu/cluster.c
+@@ -86,15 +86,21 @@ static void cpu_cluster_realize(DeviceState *dev, Error **errp)
+     if (cc->tcg_clu_ops->collect_cpus) {
+         cc->tcg_clu_ops->collect_cpus(cluster, errp);
+     }
++
++    cc->parent_realize(dev, errp);
+ }
  
- system_ss.add(when: 'CONFIG_ARM11MPCORE', if_true: files('arm11mpcore.c'))
- system_ss.add(when: 'CONFIG_REALVIEW', if_true: files('realview_mpcore.c'))
-diff --git a/hw/cpu/socket.c b/hw/cpu/socket.c
-new file mode 100644
-index 000000000000..afd29f8a91c1
---- /dev/null
-+++ b/hw/cpu/socket.c
-@@ -0,0 +1,46 @@
-+/*
-+ * CPU socket abstract device
-+ *
-+ * Copyright (c) 2023 Intel Corporation
-+ * Author: Zhao Liu <zhao1.liu@intel.com>
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License as published by
-+ * the Free Software Foundation; either version 2 of the License,
-+ * or (at your option) any later version.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU General Public License
-+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "hw/cpu/socket.h"
-+
-+static void cpu_socket_class_init(ObjectClass *oc, void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(oc);
-+    CPUTopoClass *tc = CPU_TOPO_CLASS(oc);
-+
+ static void cpu_cluster_class_init(ObjectClass *klass, void *data)
+ {
+     DeviceClass *dc = DEVICE_CLASS(klass);
++    CPUTopoClass *tc = CPU_TOPO_CLASS(klass);
+     CPUClusterClass *cc = CPU_CLUSTER_CLASS(klass);
+ 
 +    set_bit(DEVICE_CATEGORY_CPU_DEF, dc->categories);
-+
-+    tc->level = CPU_TOPO_SOCKET;
-+}
-+
-+static const TypeInfo cpu_socket_type_info = {
-+    .name = TYPE_CPU_SOCKET,
+     device_class_set_props(dc, cpu_cluster_properties);
+-    dc->realize = cpu_cluster_realize;
++    device_class_set_parent_realize(dc, cpu_cluster_realize,
++                                    &cc->parent_realize);
++    tc->level = CPU_TOPO_CLUSTER;
+ 
+ #ifdef CONFIG_TCG
+     cc->tcg_clu_ops = &common_cluster_tcg_ops;
+@@ -103,8 +109,9 @@ static void cpu_cluster_class_init(ObjectClass *klass, void *data)
+ 
+ static const TypeInfo cpu_cluster_type_info = {
+     .name = TYPE_CPU_CLUSTER,
+-    .parent = TYPE_DEVICE,
 +    .parent = TYPE_CPU_TOPO,
-+    .class_init = cpu_socket_class_init,
-+    .instance_size = sizeof(CPUSocket),
-+};
-+
-+static void cpu_socket_register_types(void)
-+{
-+    type_register_static(&cpu_socket_type_info);
-+}
-+
-+type_init(cpu_socket_register_types)
-diff --git a/include/hw/cpu/socket.h b/include/hw/cpu/socket.h
-new file mode 100644
-index 000000000000..897852903cd2
---- /dev/null
-+++ b/include/hw/cpu/socket.h
-@@ -0,0 +1,38 @@
-+/*
-+ * CPU socket abstract device
-+ *
-+ * Copyright (c) 2023 Intel Corporation
-+ * Author: Zhao Liu <zhao1.liu@intel.com>
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License as published by
-+ * the Free Software Foundation; either version 2 of the License,
-+ * or (at your option) any later version.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU General Public License
-+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#ifndef HW_CPU_SOCKET_H
-+#define HW_CPU_SOCKET_H
-+
+     .instance_size = sizeof(CPUCluster),
++    .class_size = sizeof(CPUClusterClass),
+     .class_init = cpu_cluster_class_init,
+ };
+ 
+diff --git a/include/hw/cpu/cluster.h b/include/hw/cpu/cluster.h
+index b3185e2f2566..888993c36da4 100644
+--- a/include/hw/cpu/cluster.h
++++ b/include/hw/cpu/cluster.h
+@@ -20,6 +20,7 @@
+ #ifndef HW_CPU_CLUSTER_H
+ #define HW_CPU_CLUSTER_H
+ 
 +#include "hw/core/cpu-topo.h"
-+#include "hw/qdev-core.h"
+ #include "hw/qdev-core.h"
+ #include "qom/object.h"
+ 
+@@ -84,11 +85,13 @@ struct TCGClusterOps {
+ 
+ struct CPUClusterClass {
+     /*< private >*/
+-    DeviceClass parent_class;
++    CPUTopoClass parent_class;
+ 
+     /*< public >*/
+     /* when TCG is not available, this pointer is NULL */
+     const struct TCGClusterOps *tcg_clu_ops;
 +
-+#define TYPE_CPU_SOCKET "cpu-socket"
-+
-+OBJECT_DECLARE_SIMPLE_TYPE(CPUSocket, CPU_SOCKET)
-+
-+struct CPUSocket {
-+    /*< private >*/
++    DeviceRealize parent_realize;
+ };
+ 
+ /**
+@@ -100,7 +103,7 @@ struct CPUClusterClass {
+  */
+ struct CPUCluster {
+     /*< private >*/
+-    DeviceState parent_obj;
 +    CPUTopoState parent_obj;
-+
-+    /*< public >*/
-+};
-+
-+#endif /* HW_CPU_SOCKET_H */
+ 
+     /*< public >*/
+     uint32_t cluster_id;
 -- 
 2.34.1
 
