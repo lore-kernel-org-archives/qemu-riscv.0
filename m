@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F402BC4167B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:39:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09213C10DAA
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:39:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8i7M-0006Sy-MN; Thu, 30 Nov 2023 09:34:16 -0500
+	id 1r8i88-0000Ij-S9; Thu, 30 Nov 2023 09:35:04 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i6x-0005zY-Vz; Thu, 30 Nov 2023 09:33:57 -0500
+ id 1r8i86-0000BJ-WE; Thu, 30 Nov 2023 09:35:03 -0500
 Received: from mgamail.intel.com ([192.55.52.43])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i6v-0001RT-7l; Thu, 30 Nov 2023 09:33:50 -0500
+ id 1r8i85-0001d0-3b; Thu, 30 Nov 2023 09:35:02 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1701354829; x=1732890829;
+ t=1701354901; x=1732890901;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=tVF0CmmcOBEuYyYp6LOjwJOc13qp/jolnKC9SQQ9zpo=;
- b=iuRtElay4mAE7FyVUEtPe003Cf8Glto2UManH4hBv2JTPkrSKS9YMaKI
- xfJt8lWvuI/QXcpxWhfuMHigIHrhxc9yWASysSlrpti/JKbWxgyZIWQVU
- WkI46x5IPzOQS+MFp1dBSz3l3ynOeviwhUSpeQvZfaTzdd3MHKU0uiEUV
- OnD3RDKHBAKA4KV6/YGGXO13Uh/dUVep4M4RPnutRu+aXJ4OkVP0xSrsy
- jrimARPbe0/HQhz+80YiDhNQ5hx0IW42NQhntKQJVD+d7ogUtFZdq1cGf
- RbTtA18p+Vu7CAzegA2o+40UM/bfD+UqT7I2x7exnnlmS/nOS4tTPXNGA g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532010"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479532010"
+ bh=FbB6vbX6bR4dqU1fCV07ghJ+c5nYYHlqh35CAqrTsmY=;
+ b=B/nP++8jsG+K2z9pnGPDpayNbQ2YXtdACARmebKqiqXEGl2dBrcX2657
+ +x9QBSlx/lW+m7eC7n0j/cto7yJ0HGWtogRPlwzdRUdDyRWm4b3hlV7kr
+ RR2jmSPoh1YtS63KNKdQdrkKb9he9RXVOLzBDQXY3R3uSeGfmGDpzzkhR
+ IxUoGFo4l/wJXoEJidYaie/2IxKy3KIlm/oH4TJkNgHQKiNVQpAzmmrUJ
+ 5cSP0OwXrF9xa9lMRLbozr+t7EBVzuFm/yyotH5eWr5aE/ZfZae/7cEjc
+ vAy1XwoG/5jPlErXBfKWblmwi2Xffi4lpVjcQ/ChqzxP/u9adri9ir9iF Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532317"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479532317"
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:33:41 -0800
+ 30 Nov 2023 06:34:56 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730040"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942730040"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730130"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942730130"
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:33:32 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:34:47 -0800
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -72,10 +72,9 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
  Thomas Huth <thuth@redhat.com>, Zhiyuan Lv <zhiyuan.lv@intel.com>,
  Zhenyu Wang <zhenyu.z.wang@intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
  Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 20/41] hw/cpu/cluster: Descript cluster is not only used for TCG
- in comment
-Date: Thu, 30 Nov 2023 22:41:42 +0800
-Message-Id: <20231130144203.2307629-21-zhao1.liu@linux.intel.com>
+Subject: [RFC 28/41] hw/core/slot: Maintain the core queue in CPU slot
+Date: Thu, 30 Nov 2023 22:41:50 +0800
+Message-Id: <20231130144203.2307629-29-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
@@ -107,69 +106,127 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-Update the comment to make the cpu-cluster description more general for
-both TCG and accel cases.
+Maintain the cores queue at cpu-slot to facilitate direct traversal
+of all cores.
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- hw/cpu/cluster.c         |  2 +-
- include/hw/cpu/cluster.h | 20 +++++++++++++++-----
- 2 files changed, 16 insertions(+), 6 deletions(-)
+ hw/core/cpu-slot.c         | 43 ++++++++++++++++++++++++++++++++++++++
+ include/hw/core/cpu-slot.h |  9 ++++++++
+ include/hw/cpu/core.h      |  2 ++
+ 3 files changed, 54 insertions(+)
 
-diff --git a/hw/cpu/cluster.c b/hw/cpu/cluster.c
-index 340cfad9f8f1..27ab9e25a265 100644
---- a/hw/cpu/cluster.c
-+++ b/hw/cpu/cluster.c
-@@ -1,5 +1,5 @@
- /*
-- * QEMU CPU cluster
-+ * CPU cluster abstract device
-  *
-  * Copyright (c) 2018 GreenSocs SAS
-  *
-diff --git a/include/hw/cpu/cluster.h b/include/hw/cpu/cluster.h
-index c038f05ddc9f..b3185e2f2566 100644
---- a/include/hw/cpu/cluster.h
-+++ b/include/hw/cpu/cluster.h
-@@ -1,5 +1,5 @@
- /*
-- * QEMU CPU cluster
-+ * CPU cluster abstract device
-  *
-  * Copyright (c) 2018 GreenSocs SAS
-  *
-@@ -24,17 +24,27 @@
- #include "qom/object.h"
+diff --git a/hw/core/cpu-slot.c b/hw/core/cpu-slot.c
+index 5aef5b0189c2..a6b7d98dea18 100644
+--- a/hw/core/cpu-slot.c
++++ b/hw/core/cpu-slot.c
+@@ -22,6 +22,40 @@
  
- /*
-- * CPU Cluster type
-+ * # CPU Cluster
-  *
-- * A cluster is a group of CPUs which are all identical and have the same view
-- * of the rest of the system. It is mainly an internal QEMU representation and
-- * does not necessarily match with the notion of clusters on the real hardware.
-+ * A cluster is a group of CPUs, that is, a level above the CPU (or Core).
-+ *
-+ * - For accel case, it's a CPU topology level concept above cores, in which
-+ * the cores may share some resources (L2 cache or some others like L3
-+ * cache tags, depending on the Archs). It is used to emulate the physical
-+ * CPU cluster/module.
-+ *
-+ * - For TCG, cluster is used to organize CPUs directly without core. In one
-+ * cluster, CPUs are all identical and have the same view of the rest of the
-+ * system. It is mainly an internal QEMU representation and may not necessarily
-+ * match with the notion of clusters on the real hardware.
-  *
-  * If CPUs are not identical (for example, Cortex-A53 and Cortex-A57 CPUs in an
-  * Arm big.LITTLE system) they should be in different clusters. If the CPUs do
-  * not have the same view of memory (for example the main CPU and a management
-  * controller processor) they should be in different clusters.
-  *
-+ * # Use case for cluster in TCG
-+ *
-  * A cluster is created by creating an object of TYPE_CPU_CLUSTER, and then
-  * adding the CPUs to it as QOM child objects (e.g. using the
-  * object_initialize_child() or object_property_add_child() functions).
+ #include "hw/core/cpu-slot.h"
+ 
++static void cpu_slot_add_topo_info(CPUTopoState *root, CPUTopoState *child)
++{
++    CPUSlot *slot = CPU_SLOT(root);
++    CPUTopoLevel level = CPU_TOPO_LEVEL(child);
++
++    if (level == CPU_TOPO_CORE) {
++        QTAILQ_INSERT_TAIL(&slot->cores, CPU_CORE(child), node);
++    }
++    return;
++}
++
++static void cpu_slot_del_topo_info(CPUTopoState *root, CPUTopoState *child)
++{
++    CPUSlot *slot = CPU_SLOT(root);
++    CPUTopoLevel level = CPU_TOPO_LEVEL(child);
++
++    if (level == CPU_TOPO_CORE) {
++        QTAILQ_REMOVE(&slot->cores, CPU_CORE(child), node);
++    }
++    return;
++}
++
++static void cpu_slot_update_topo_info(CPUTopoState *root, CPUTopoState *child,
++                                      bool is_realize)
++{
++    g_assert(child->parent);
++
++    if (is_realize) {
++        cpu_slot_add_topo_info(root, child);
++    } else {
++        cpu_slot_del_topo_info(root, child);
++    }
++}
++
+ static void cpu_slot_class_init(ObjectClass *oc, void *data)
+ {
+     DeviceClass *dc = DEVICE_CLASS(oc);
+@@ -31,12 +65,21 @@ static void cpu_slot_class_init(ObjectClass *oc, void *data)
+     dc->user_creatable = false;
+ 
+     tc->level = CPU_TOPO_ROOT;
++    tc->update_topo_info = cpu_slot_update_topo_info;
++}
++
++static void cpu_slot_instance_init(Object *obj)
++{
++    CPUSlot *slot = CPU_SLOT(obj);
++
++    QTAILQ_INIT(&slot->cores);
+ }
+ 
+ static const TypeInfo cpu_slot_type_info = {
+     .name = TYPE_CPU_SLOT,
+     .parent = TYPE_CPU_TOPO,
+     .class_init = cpu_slot_class_init,
++    .instance_init = cpu_slot_instance_init,
+     .instance_size = sizeof(CPUSlot),
+ };
+ 
+diff --git a/include/hw/core/cpu-slot.h b/include/hw/core/cpu-slot.h
+index 718c8ecaa751..d2a1160562be 100644
+--- a/include/hw/core/cpu-slot.h
++++ b/include/hw/core/cpu-slot.h
+@@ -22,17 +22,26 @@
+ #define CPU_SLOT_H
+ 
+ #include "hw/core/cpu-topo.h"
++#include "hw/cpu/core.h"
+ #include "hw/qdev-core.h"
+ 
+ #define TYPE_CPU_SLOT "cpu-slot"
+ 
+ OBJECT_DECLARE_SIMPLE_TYPE(CPUSlot, CPU_SLOT)
+ 
++/**
++ * CPUSlot:
++ * @cores: Queue consisting of all the cores in the topology tree
++ *     where the cpu-slot is the root. cpu-slot can maintain similar
++ *     queues for other topology levels to facilitate traversal
++ *     when necessary.
++ */
+ struct CPUSlot {
+     /*< private >*/
+     CPUTopoState parent_obj;
+ 
+     /*< public >*/
++    QTAILQ_HEAD(, CPUCore) cores;
+ };
+ 
+ #endif /* CPU_SLOT_H */
+diff --git a/include/hw/cpu/core.h b/include/hw/cpu/core.h
+index 591240861efb..65dc10931190 100644
+--- a/include/hw/cpu/core.h
++++ b/include/hw/cpu/core.h
+@@ -40,6 +40,8 @@ struct CPUCore {
+      * "-device"/"device_add"?
+      */
+     int plugged_threads;
++
++    QTAILQ_ENTRY(CPUCore) node;
+ };
+ 
+ #endif
 -- 
 2.34.1
 
