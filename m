@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94BD4C4167B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:36:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1276C4167B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:36:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8i7G-0006Cy-TM; Thu, 30 Nov 2023 09:34:16 -0500
+	id 1r8i87-0000CS-AI; Thu, 30 Nov 2023 09:35:03 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i6k-0005qt-Iv; Thu, 30 Nov 2023 09:33:40 -0500
+ id 1r8i85-0008Tr-2S; Thu, 30 Nov 2023 09:35:01 -0500
 Received: from mgamail.intel.com ([192.55.52.43])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i6i-0001RT-8O; Thu, 30 Nov 2023 09:33:38 -0500
+ id 1r8i7u-0001Un-SP; Thu, 30 Nov 2023 09:35:00 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1701354816; x=1732890816;
+ t=1701354890; x=1732890890;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=ewTMs2u73zZUV2zJblGAkkri1EYaJm+RSs7ZWl9w7g8=;
- b=ObtDTnZKhzx71/fy1sMds76oOx6R/DHFRvy3OH1z+Sp2VD4MufcayHji
- a4Zj4jiMJAHMnI45dfJ/b55phnK2IvSYIf/oDnr+qxKlkAzKJq9Tj1sy6
- zj1YDYDEVxna9DyTxZi5r0C+bT5o2fjD47rVixkcR6Tm5fxOamoJKT7Hy
- IpimkBZk1OSXww1cVtblCRnvKIvkTPsrMYKYX3NuvNw34wBl+cyLRY7cE
- /McbdqOTHw2l3aZhLqJSlgI4VTE0h/4vrs1+ceSR10Jsv0d8GxtY7c+zB
- kI0/5BIrUJcFq7+4vyVUwuLIxBw1TiA1laMWmjKZYdP5NkDkfdJX/a/Mk A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479531981"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479531981"
+ bh=dK+ilj3Q1LqgiJ2/EiJWYjQp1qXfjG6+/g3hE8BTtcM=;
+ b=CBoT00iUZavpZrRiU+b75R3pv+ggnBmPYkA3OVVGpHXlZXP8BkmReFDL
+ nzeSWUyj86Om8LG3Oo1r9VMeI65OwpvuxWrFhU3VZceg2WWm7mprZPB8H
+ /hEHgeFxedIEmnF1fz7PgisTHufE7jUa1IA57P/voCJv+8Q+JGgXzb5m7
+ oPFy5gQUszeQtZMhjsq/A23VTZsykpJePbeOkHGAR2T1e2diCfKkTTvDt
+ 9gzJVjwnfi5vDparYIc7r+I74W4s8n8iRHof2pRhee2Img3sjbO/0g7wu
+ uxg7XTPHEF1d5qGpP/m4t+cAiuWyGXXTtrnryn0gauXUGocEcnvUfdY2M g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532284"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479532284"
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:33:32 -0800
+ 30 Nov 2023 06:34:47 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730032"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942730032"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730118"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942730118"
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:33:22 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:34:37 -0800
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -72,14 +72,15 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
  Thomas Huth <thuth@redhat.com>, Zhiyuan Lv <zhiyuan.lv@intel.com>,
  Zhenyu Wang <zhenyu.z.wang@intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
  Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 19/41] hw/cpu/cluster: Wrap TCG related ops and props into
- CONFIG_TCG
-Date: Thu, 30 Nov 2023 22:41:41 +0800
-Message-Id: <20231130144203.2307629-20-zhao1.liu@linux.intel.com>
+Subject: [RFC 27/41] hw/core/slot: Introduce CPU slot as the root of CPU
+ topology
+Date: Thu, 30 Nov 2023 22:41:49 +0800
+Message-Id: <20231130144203.2307629-28-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Received-SPF: none client-ip=192.55.52.43;
  envelope-from=zhao1.liu@linux.intel.com; helo=mgamail.intel.com
@@ -107,139 +108,149 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-Currenltly cpu-cluster is used in TCG case to organize CPUs with the
-same type.
-
-Wrap 2 things into TCG specific areas:
-1. cluster-id:
-
-   The cluster-id in TCG case is global, since no higher topology
-   container above cluster. To simplify the logic of cluster topology
-   in virtualization, move the cluster-id into CONFIG_TCG, then it
-   won't be exposed in cli.
-
-2. CPU collection in realize():
-
-   In TCG case, the CPUs are added into cluster directly via child<>
-   property. But in virtualization case, the CPU topology will be built
-   via topology tree. Thus, wrap CPU collection as the TCG operation.
+Abstract the root of topology tree as a special topology device
+"cpu-slot".
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- hw/cpu/cluster.c         | 30 +++++++++++++++++++++++++-----
- include/hw/cpu/cluster.h | 22 ++++++++++++++++++++--
- 2 files changed, 45 insertions(+), 7 deletions(-)
+ MAINTAINERS                |  2 ++
+ hw/core/cpu-slot.c         | 48 ++++++++++++++++++++++++++++++++++++++
+ hw/core/meson.build        |  1 +
+ include/hw/core/cpu-slot.h | 38 ++++++++++++++++++++++++++++++
+ 4 files changed, 89 insertions(+)
+ create mode 100644 hw/core/cpu-slot.c
+ create mode 100644 include/hw/core/cpu-slot.h
 
-diff --git a/hw/cpu/cluster.c b/hw/cpu/cluster.c
-index fd978a543e40..340cfad9f8f1 100644
---- a/hw/cpu/cluster.c
-+++ b/hw/cpu/cluster.c
-@@ -26,7 +26,9 @@
- #include "qapi/error.h"
- 
- static Property cpu_cluster_properties[] = {
-+#ifdef CONFIG_TCG
-     DEFINE_PROP_UINT32("cluster-id", CPUCluster, cluster_id, 0),
-+#endif
-     DEFINE_PROP_END_OF_LIST()
- };
- 
-@@ -47,18 +49,17 @@ static int add_cpu_to_cluster(Object *obj, void *opaque)
-     return 0;
- }
- 
--static void cpu_cluster_realize(DeviceState *dev, Error **errp)
-+static void cpu_cluster_common_collect_cpus(CPUCluster *cluster, Error **errp)
- {
-     /* Iterate through all our CPU children and set their cluster_index */
--    CPUCluster *cluster = CPU_CLUSTER(dev);
--    Object *cluster_obj = OBJECT(dev);
-+    Object *cluster_obj = OBJECT(cluster);
-     CallbackData cbdata = {
-         .cluster = cluster,
-         .cpu_count = 0,
-     };
- 
--    if (cluster->cluster_id >= MAX_CLUSTERS) {
--        error_setg(errp, "cluster-id must be less than %d", MAX_CLUSTERS);
-+    if (cluster->cluster_id >= MAX_TCG_CLUSTERS) {
-+        error_setg(errp, "cluster-id must be less than %d", MAX_TCG_CLUSTERS);
-         return;
-     }
- 
-@@ -73,15 +74,34 @@ static void cpu_cluster_realize(DeviceState *dev, Error **errp)
-     assert(cbdata.cpu_count > 0);
- }
- 
-+static const struct TCGClusterOps common_cluster_tcg_ops = {
-+    .collect_cpus = cpu_cluster_common_collect_cpus,
-+};
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 4b373ff46ce3..ac08b5a8c4e0 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1856,6 +1856,7 @@ R: Philippe Mathieu-Daudé <philmd@linaro.org>
+ R: Yanan Wang <wangyanan55@huawei.com>
+ S: Supported
+ F: hw/core/cpu.c
++F: hw/core/cpu-slot.c
+ F: hw/core/cpu-topo.c
+ F: hw/core/machine-qmp-cmds.c
+ F: hw/core/machine.c
+@@ -1872,6 +1873,7 @@ F: qapi/machine-common.json
+ F: qapi/machine-target.json
+ F: include/hw/boards.h
+ F: include/hw/core/cpu.h
++F: include/hw/core/cpu-slot.h
+ F: include/hw/core/cpu-topo.h
+ F: include/hw/cpu/book.h
+ F: include/hw/cpu/cluster.h
+diff --git a/hw/core/cpu-slot.c b/hw/core/cpu-slot.c
+new file mode 100644
+index 000000000000..5aef5b0189c2
+--- /dev/null
++++ b/hw/core/cpu-slot.c
+@@ -0,0 +1,48 @@
++/*
++ * CPU slot device abstraction
++ *
++ * Copyright (c) 2023 Intel Corporation
++ * Author: Zhao Liu <zhao1.liu@intel.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License,
++ * or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, see <http://www.gnu.org/licenses/>.
++ */
 +
-+static void cpu_cluster_realize(DeviceState *dev, Error **errp)
++#include "qemu/osdep.h"
++
++#include "hw/core/cpu-slot.h"
++
++static void cpu_slot_class_init(ObjectClass *oc, void *data)
 +{
-+    CPUCluster *cluster = CPU_CLUSTER(dev);
-+    CPUClusterClass *cc = CPU_CLUSTER_GET_CLASS(dev);
++    DeviceClass *dc = DEVICE_CLASS(oc);
++    CPUTopoClass *tc = CPU_TOPO_CLASS(oc);
 +
-+    if (cc->tcg_clu_ops->collect_cpus) {
-+        cc->tcg_clu_ops->collect_cpus(cluster, errp);
-+    }
++    set_bit(DEVICE_CATEGORY_CPU_DEF, dc->categories);
++    dc->user_creatable = false;
++
++    tc->level = CPU_TOPO_ROOT;
 +}
 +
- static void cpu_cluster_class_init(ObjectClass *klass, void *data)
- {
-     DeviceClass *dc = DEVICE_CLASS(klass);
-+    CPUClusterClass *cc = CPU_CLUSTER_CLASS(klass);
- 
-     device_class_set_props(dc, cpu_cluster_properties);
-     dc->realize = cpu_cluster_realize;
- 
-     /* This is not directly for users, CPU children must be attached by code */
-     dc->user_creatable = false;
-+
-+#ifdef CONFIG_TCG
-+    cc->tcg_clu_ops = &common_cluster_tcg_ops;
-+#endif
- }
- 
- static const TypeInfo cpu_cluster_type_info = {
-diff --git a/include/hw/cpu/cluster.h b/include/hw/cpu/cluster.h
-index 644b87350268..c038f05ddc9f 100644
---- a/include/hw/cpu/cluster.h
-+++ b/include/hw/cpu/cluster.h
-@@ -55,13 +55,31 @@
-  */
- 
- #define TYPE_CPU_CLUSTER "cpu-cluster"
--OBJECT_DECLARE_SIMPLE_TYPE(CPUCluster, CPU_CLUSTER)
-+OBJECT_DECLARE_TYPE(CPUCluster, CPUClusterClass, CPU_CLUSTER)
- 
- /*
-  * This limit is imposed by TCG, which puts the cluster ID into an
-  * 8 bit field (and uses all-1s for the default "not in any cluster").
-  */
--#define MAX_CLUSTERS 255
-+#define MAX_TCG_CLUSTERS 255
-+
-+struct TCGClusterOps {
-+    /**
-+     * @collect_cpus: Iterate children CPUs and set cluser_index.
-+     *
-+     * Called when the cluster is realized.
-+     */
-+    void (*collect_cpus)(CPUCluster *cluster, Error **errp);
++static const TypeInfo cpu_slot_type_info = {
++    .name = TYPE_CPU_SLOT,
++    .parent = TYPE_CPU_TOPO,
++    .class_init = cpu_slot_class_init,
++    .instance_size = sizeof(CPUSlot),
 +};
 +
-+struct CPUClusterClass {
++static void cpu_slot_register_types(void)
++{
++    type_register_static(&cpu_slot_type_info);
++}
++
++type_init(cpu_slot_register_types)
+diff --git a/hw/core/meson.build b/hw/core/meson.build
+index 501d2529697e..3347c054e162 100644
+--- a/hw/core/meson.build
++++ b/hw/core/meson.build
+@@ -23,6 +23,7 @@ else
+ endif
+ 
+ common_ss.add(files('cpu-common.c'))
++common_ss.add(files('cpu-slot.c'))
+ common_ss.add(files('cpu-topo.c'))
+ common_ss.add(files('machine-smp.c'))
+ system_ss.add(when: 'CONFIG_FITLOADER', if_true: files('loader-fit.c'))
+diff --git a/include/hw/core/cpu-slot.h b/include/hw/core/cpu-slot.h
+new file mode 100644
+index 000000000000..718c8ecaa751
+--- /dev/null
++++ b/include/hw/core/cpu-slot.h
+@@ -0,0 +1,38 @@
++/*
++ * CPU slot device abstraction
++ *
++ * Copyright (c) 2023 Intel Corporation
++ * Author: Zhao Liu <zhao1.liu@intel.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License,
++ * or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, see <http://www.gnu.org/licenses/>.
++ */
++
++#ifndef CPU_SLOT_H
++#define CPU_SLOT_H
++
++#include "hw/core/cpu-topo.h"
++#include "hw/qdev-core.h"
++
++#define TYPE_CPU_SLOT "cpu-slot"
++
++OBJECT_DECLARE_SIMPLE_TYPE(CPUSlot, CPU_SLOT)
++
++struct CPUSlot {
 +    /*< private >*/
-+    DeviceClass parent_class;
++    CPUTopoState parent_obj;
 +
 +    /*< public >*/
-+    /* when TCG is not available, this pointer is NULL */
-+    const struct TCGClusterOps *tcg_clu_ops;
 +};
- 
- /**
-  * CPUCluster:
++
++#endif /* CPU_SLOT_H */
 -- 
 2.34.1
 
