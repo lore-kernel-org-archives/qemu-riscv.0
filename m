@@ -4,34 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8AFEC07CA9
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 13:21:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A51A1C46CA0
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 13:37:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8gyy-0001xt-Tu; Thu, 30 Nov 2023 08:21:32 -0500
+	id 1r8hDt-0007XK-NM; Thu, 30 Nov 2023 08:36:57 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <SRS0=Tvl7=HL=kaod.org=clg@ozlabs.org>)
- id 1r8gym-0001b4-71; Thu, 30 Nov 2023 08:21:24 -0500
-Received: from gandalf.ozlabs.org ([150.107.74.76])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <SRS0=Tvl7=HL=kaod.org=clg@ozlabs.org>)
- id 1r8gyj-0003kM-Lh; Thu, 30 Nov 2023 08:21:19 -0500
-Received: from gandalf.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
- by gandalf.ozlabs.org (Postfix) with ESMTP id 4SgxfF5JRqz4xhb;
- Fri,  1 Dec 2023 00:21:09 +1100 (AEDT)
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
- (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 4SgxdL6Gzsz4xdZ;
- Fri,  1 Dec 2023 00:20:22 +1100 (AEDT)
-Message-ID: <d9164828-22fb-42a4-b71a-5ae14a172d50@kaod.org>
-Date: Thu, 30 Nov 2023 14:20:17 +0100
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r8hDs-0007UE-Hs
+ for qemu-riscv@nongnu.org; Thu, 30 Nov 2023 08:36:56 -0500
+Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r8hDq-0007CO-Sm
+ for qemu-riscv@nongnu.org; Thu, 30 Nov 2023 08:36:56 -0500
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-332c7d4a6a7so616688f8f.2
+ for <qemu-riscv@nongnu.org>; Thu, 30 Nov 2023 05:36:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1701351413; x=1701956213; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=92EVl/+kAJa1w133nRnLwZdbri5T/CNJ+OGiI8vF/hc=;
+ b=hhzErzXQtgBBzvCb1WRbh54SijuwJDwK7Gs5ShgJup2iFhBM6EvSP/66J51VF6NMb7
+ hg6sYu+eho8OZH4JGpH+ZYvmlbbNAHEMFvA1Pi5cg+YC/Z7t9eVB93FX85rSAQS0UvMs
+ Xs+bzcKezsKxOvSTdCTTwe95jwcWEwdRFxU6qucVxDTHtNCpDZWmTQd62o5mFtI+knaD
+ bpB/EtL2ojRD82MRzk68puzMLNVGt7likxTDR2A4MESXP0yGOwxU/bBOu4T4cGr2rAG6
+ 2DUFqXj2BTbT94xX5UJogkYtTZEkYk3ssC9hpF0fL2y24iWWsWw3jkdl/L/SuDUbgXH+
+ 1N4A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701351413; x=1701956213;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=92EVl/+kAJa1w133nRnLwZdbri5T/CNJ+OGiI8vF/hc=;
+ b=esdzTE6LAoeGvhSHAvalHr4CchNg474KBgrvklS9HWsjDMPNbcBzSxaXbHqov2TsWc
+ YSA33XVvIqfArb2uV2Z/Z5vsceGlPz4qU603pS8ZeFcNSJBeAz5nvPo1R0rhyl0fEu1R
+ d5rHsvcF0y1DMBUe2sKIdAALog1oUQkvDzoKNeITx4IDbHcfPcBYJ8AOeeONcKtbTogd
+ 8QJpKZboSsVJ5sacH3ylqHraUJVhaIvHcmoN7vSSQ7uxGXbVUKHOBR1fMXQRPlW9ozmg
+ RDgZOIZXFCAN0t7/jfnW/SznaZycKkEPS25EyGGkX1UCH+w3/zPeslZT/82nXMnssncm
+ DhNQ==
+X-Gm-Message-State: AOJu0YwybN6cW8Oob23qd5txeT5phFaVgKOeY/sX6fvuz17zl1qC4TqJ
+ rRJgPoDC0xosvZ/Br+78sI1peA==
+X-Google-Smtp-Source: AGHT+IGzSdlgStqYT69A2lG9GtqRHhg/niB3F/uN4GK5nKt0eJM7WDiZHR6K1BVe40jqO9Y7LSdkKg==
+X-Received: by 2002:a05:6000:10c:b0:333:2be6:860e with SMTP id
+ o12-20020a056000010c00b003332be6860emr238311wrx.71.1701351413167; 
+ Thu, 30 Nov 2023 05:36:53 -0800 (PST)
+Received: from [192.168.69.100] (sev93-h02-176-184-17-116.dsl.sta.abo.bbox.fr.
+ [176.184.17.116]) by smtp.gmail.com with ESMTPSA id
+ i2-20020adffc02000000b003330aede2aesm1559297wrr.112.2023.11.30.05.36.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 30 Nov 2023 05:36:52 -0800 (PST)
+Message-ID: <ce8686c9-ac4b-4bb8-a181-af536ef1097a@linaro.org>
+Date: Thu, 30 Nov 2023 14:36:46 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/6] system/cpus: rename qemu_global_mutex to qemu_bql
+Subject: Re: [PATCH 3/6] qemu/main-loop: rename qemu_cond_wait_iothread() to
+ qemu_cond_wait_bql()
 Content-Language: en-US
 To: Stefan Hajnoczi <stefanha@redhat.com>, qemu-devel@nongnu.org
 Cc: Jean-Christophe Dubois <jcd@tribudubois.net>,
@@ -80,25 +110,26 @@ Cc: Jean-Christophe Dubois <jcd@tribudubois.net>,
  =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Eduardo Habkost <eduardo@habkost.net>, Paolo Bonzini <pbonzini@redhat.com>,
  Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
- qemu-ppc@nongnu.org, =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?=
- <philmd@linaro.org>, Christian Borntraeger <borntraeger@linux.ibm.com>,
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, qemu-ppc@nongnu.org,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
  Akihiko Odaki <akihiko.odaki@daynix.com>, Leonardo Bras
  <leobras@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>
 References: <20231129212625.1051502-1-stefanha@redhat.com>
- <20231129212625.1051502-5-stefanha@redhat.com>
-From: =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>
-In-Reply-To: <20231129212625.1051502-5-stefanha@redhat.com>
+ <20231129212625.1051502-4-stefanha@redhat.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20231129212625.1051502-4-stefanha@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=150.107.74.76;
- envelope-from=SRS0=Tvl7=HL=kaod.org=clg@ozlabs.org; helo=gandalf.ozlabs.org
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9,
- HEADER_FROM_DIFFERENT_DOMAINS=0.249, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::434;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x434.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -114,21 +145,22 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 11/29/23 22:26, Stefan Hajnoczi wrote:
-> The APIs using qemu_global_mutex now follow the Big QEMU Lock (BQL)
-> nomenclature. It's a little strange that the actual QemuMutex variable
-> that embodies the BQL is called qemu_global_mutex instead of qemu_bql.
-> Rename it for consistency.
+On 29/11/23 22:26, Stefan Hajnoczi wrote:
+> The name "iothread" is overloaded. Use the term Big QEMU Lock (BQL)
+> instead, it is already widely used and unambiguous.
 > 
 > Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
+> ---
+>   include/qemu/main-loop.h          | 8 ++++----
+>   accel/tcg/tcg-accel-ops-rr.c      | 4 ++--
+>   hw/display/virtio-gpu.c           | 2 +-
+>   hw/ppc/spapr_events.c             | 2 +-
+>   system/cpu-throttle.c             | 2 +-
+>   system/cpus.c                     | 4 ++--
+>   target/i386/nvmm/nvmm-accel-ops.c | 2 +-
+>   target/i386/whpx/whpx-accel-ops.c | 2 +-
+>   8 files changed, 13 insertions(+), 13 deletions(-)
 
-
-Reviewed-by: Cédric Le Goater <clg@kaod.org>
-
-Thanks,
-
-C.
-
-
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
