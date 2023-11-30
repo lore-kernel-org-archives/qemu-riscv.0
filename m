@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F572C4167B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 09:03:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07B5EC4167B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 09:04:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8cwg-0006Xh-Qc; Thu, 30 Nov 2023 04:02:54 -0500
+	id 1r8cyE-0007bA-70; Thu, 30 Nov 2023 04:04:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <xadimgnik@gmail.com>)
- id 1r8cwe-0006W8-Pa; Thu, 30 Nov 2023 04:02:52 -0500
-Received: from mail-ed1-x536.google.com ([2a00:1450:4864:20::536])
+ id 1r8cyC-0007aC-N1; Thu, 30 Nov 2023 04:04:28 -0500
+Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <xadimgnik@gmail.com>)
- id 1r8cwc-00053W-La; Thu, 30 Nov 2023 04:02:52 -0500
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-54b89582efeso642601a12.0; 
- Thu, 30 Nov 2023 01:02:47 -0800 (PST)
+ id 1r8cxv-0005DH-JH; Thu, 30 Nov 2023 04:04:28 -0500
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-54af61f2a40so628805a12.3; 
+ Thu, 30 Nov 2023 01:04:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1701334966; x=1701939766; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1701335046; x=1701939846; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:organization:references:cc:to
  :content-language:subject:reply-to:user-agent:mime-version:date
  :message-id:from:from:to:cc:subject:date:message-id:reply-to;
- bh=dN4djQbmfKsEe8CLCBFczIlNB941kshQNbbSdFz94k8=;
- b=CQiPsiuCDyKjMhnK2NzsHXtN5dXWTylxMn81nAfW7gX0CJWJuMLd3CvnvZwqO6uRrL
- LAeeDHlsHoaKE9wUADFRv0RET5SEP7dSMnhQA6BeM/IzZhvBrvKprPhDzlP9HjQqxtHV
- BWbM4Ezebi65aLIxHIp6yDCYjMGZGIIdbEdDUh97x2OtE63WKYy2llOFl4hUkJu3MPqB
- SCRqIbI8uIWQ5Dm2iFHmUW1SayeTYvDJMlB/OSTMBVzUGIlmlx/Z05hZZpOvo4RwK/hI
- I94IXmUbU0kRrNoakLaI5dKtGzB8t2rw5Br/Z+Ua9OJbBHXB2eQOdKyjFnCqNBiqoiM6
- Wmow==
+ bh=rDG0LfrN9KzuY1dutbAJHJsyvk/SVEQtsaapgDeTQgk=;
+ b=dkHK8MRb++sCz4i0zNrhVGgeSbXSrc6SzWVLvMgdTcOEt2uTu4rcRoUt2fvwZQJbn2
+ orjK3p/Zhaz0yU8qUarN+UpnePhayf7loixfZRFEG14sIbGyhY7pa34UqgDA47shxK8j
+ KSa8fliUbb4hlMh1s1ofiWTaLB1+GDG+bYJWMcR174beH0GZmwwnzFHICegF7y4WsGQS
+ pB1gno+/guK6gntMV/5AkVlaQ+Yc3JnTLFCeJnioIO4cIoDdupoRbu8ZtTLU2RXJkQnA
+ 3rUWI0y8TZ4TXn4PAdCszfRubKP2itX1NYXH36XPhsYhNVWbU75YiaxxZLf9NPBM8ll7
+ n7ZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701334966; x=1701939766;
+ d=1e100.net; s=20230601; t=1701335046; x=1701939846;
  h=content-transfer-encoding:in-reply-to:organization:references:cc:to
  :content-language:subject:reply-to:user-agent:mime-version:date
  :message-id:from:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dN4djQbmfKsEe8CLCBFczIlNB941kshQNbbSdFz94k8=;
- b=WTId6utKkzf3a1lwqonXdHVtkouVVbcMll70mXFkGLr7SzGx5pMqegKUv9PnCzqOtx
- MVF+2XKKlTiER4UKfR/+ndiz8Zsm1HYCa4bT78UDYYDF8m7F19ZKmBTdXTX8tbt89tGF
- uiu/zA5dWfkASK4t8lGvl8aaMoYQcdYQdGTOyXyEswGWctAXf/11Z7a8EaQRJoM7UpSM
- XUgn9QZbD/kf7rYDtfZyYcTlbBK249eQ73IvSh9rGeFfgwaNCsE/691Pf9cbpr4b/5Bg
- jSVjg9qp8qO2p6vEWIpLCcLAo464lqORdixPB2lSQiT9QaEEpsTljU+yoDKTalFonAjj
- PLdA==
-X-Gm-Message-State: AOJu0YxjFp2EJax8Vc8Au14cBTTjF/ub/EzpiJhWEs+loajYwJ57LATp
- 2bEp9LN+s/paXGtVpsXZNgs=
-X-Google-Smtp-Source: AGHT+IFWDX/X0nWdxhdyMpsksBOB56iEUyavnywH1etzd7/ikoUkMx/LzyNe6VUbK0/ejUiaEoLuHw==
-X-Received: by 2002:a17:906:abd2:b0:a18:91d0:c58e with SMTP id
- kq18-20020a170906abd200b00a1891d0c58emr796124ejb.52.1701334965913; 
- Thu, 30 Nov 2023 01:02:45 -0800 (PST)
+ bh=rDG0LfrN9KzuY1dutbAJHJsyvk/SVEQtsaapgDeTQgk=;
+ b=sisATOfMlYd7fndRZ4zDduj9hQXOrAKaymUIqsyP8XvuC+fyoVvQQu/yll1GXGTBCF
+ AwReimHF0hE5co8ebGqpcmHXBfH14d8tzWU94gSNoQqFxIoQeYbyOpOaj+WPFAJtuYvA
+ Lxy5szKl1TMVV2uMNwaT10oyiHzelwh8aGnnSoI7g1CevHAZUUPdiUFZ355TFM5WUyFi
+ P9wulCJZvYV65SFFCi11xEw7LJD0qdjDIUTmdI3RNeT/jLaAuFotbwPC4bd7n0GRHTHQ
+ Aip2vTdY6ENw4wdk/zaWcq2janVo3SnqLez6eMdJGS0F8vTLEyE97xPJHkAaAXwI3SEr
+ Gitg==
+X-Gm-Message-State: AOJu0Yzjs/fGkW+M+gJ33xrvEqjJZK4uR/nymYew8/aIgBZXgduoaC6r
+ AsDKh01Z/SIBj8NOknpbeqk=
+X-Google-Smtp-Source: AGHT+IH62q365iHhXfNeCdgPZMilj33GjyyKhNs3sjPFImh+k7bvQx+U/QmZwntDvSzeLzApdBDisw==
+X-Received: by 2002:a17:906:197:b0:a02:9987:dc3b with SMTP id
+ 23-20020a170906019700b00a029987dc3bmr14284857ejb.15.1701335046283; 
+ Thu, 30 Nov 2023 01:04:06 -0800 (PST)
 Received: from [192.168.17.21] (54-240-197-238.amazon.com. [54.240.197.238])
  by smtp.gmail.com with ESMTPSA id
- i16-20020a1709061cd000b009b2cc87b8c3sm438680ejh.52.2023.11.30.01.02.40
+ i16-20020a1709061cd000b009b2cc87b8c3sm438680ejh.52.2023.11.30.01.04.00
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Nov 2023 01:02:45 -0800 (PST)
+ Thu, 30 Nov 2023 01:04:05 -0800 (PST)
 From: Paul Durrant <xadimgnik@gmail.com>
 X-Google-Original-From: Paul Durrant <paul@xen.org>
-Message-ID: <9b189639-5477-4c48-98a2-3ba55417de01@xen.org>
-Date: Thu, 30 Nov 2023 09:02:35 +0000
+Message-ID: <67642c0a-4c2d-4f0b-90e8-9b125647af6c@xen.org>
+Date: Thu, 30 Nov 2023 09:03:58 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/6] system/cpus: rename qemu_mutex_lock_iothread() to
- qemu_bql_lock()
+Subject: Re: [PATCH 2/6] qemu/main-loop: rename QEMU_IOTHREAD_LOCK_GUARD to
+ QEMU_BQL_LOCK_GUARD
 Content-Language: en-US
 To: Stefan Hajnoczi <stefanha@redhat.com>, qemu-devel@nongnu.org
 Cc: Jean-Christophe Dubois <jcd@tribudubois.net>,
@@ -120,20 +120,20 @@ Cc: Jean-Christophe Dubois <jcd@tribudubois.net>,
  <leobras@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>
 References: <20231129212625.1051502-1-stefanha@redhat.com>
- <20231129212625.1051502-2-stefanha@redhat.com>
+ <20231129212625.1051502-3-stefanha@redhat.com>
 Organization: Xen Project
-In-Reply-To: <20231129212625.1051502-2-stefanha@redhat.com>
+In-Reply-To: <20231129212625.1051502-3-stefanha@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::536;
- envelope-from=xadimgnik@gmail.com; helo=mail-ed1-x536.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
+ envelope-from=xadimgnik@gmail.com; helo=mail-ed1-x52c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ SPF_HELO_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01,
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -151,124 +151,21 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 29/11/2023 21:26, Stefan Hajnoczi wrote:
-> The Big QEMU Lock (BQL) has many names and they are confusing. The
-> actual QemuMutex variable is called qemu_global_mutex but it's commonly
-> referred to as the BQL in discussions and some code comments. The
-> locking APIs, however, are called qemu_mutex_lock_iothread() and
-> qemu_mutex_unlock_iothread().
-> 
-> The "iothread" name is historic and comes from when the main thread was
-> split into into KVM vcpu threads and the "iothread" (now called the main
-> loop thread). I have contributed to the confusion myself by introducing
-> a separate --object iothread, a separate concept unrelated to the BQL.
-> 
-> The "iothread" name is no longer appropriate for the BQL. Rename the
-> locking APIs to:
-> - void qemu_bql_lock(void)
-> - void qemu_bql_unlock(void)
-> - bool qemu_bql_locked(void)
-> 
-> There are more APIs with "iothread" in their names. Subsequent patches
-> will rename them. There are also comments and documentation that will be
-> updated in later patches.
+> The name "iothread" is overloaded. Use the term Big QEMU Lock (BQL)
+> instead, it is already widely used and unambiguous.
 > 
 > Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 > ---
->   include/block/aio-wait.h             |   2 +-
->   include/qemu/main-loop.h             |  26 +++---
->   accel/accel-blocker.c                |  10 +--
->   accel/dummy-cpus.c                   |   8 +-
->   accel/hvf/hvf-accel-ops.c            |   4 +-
->   accel/kvm/kvm-accel-ops.c            |   4 +-
->   accel/kvm/kvm-all.c                  |  22 ++---
->   accel/tcg/cpu-exec.c                 |  26 +++---
->   accel/tcg/cputlb.c                   |  16 ++--
->   accel/tcg/tcg-accel-ops-icount.c     |   4 +-
->   accel/tcg/tcg-accel-ops-mttcg.c      |  12 +--
->   accel/tcg/tcg-accel-ops-rr.c         |  14 ++--
->   accel/tcg/tcg-accel-ops.c            |   2 +-
->   accel/tcg/translate-all.c            |   2 +-
->   cpu-common.c                         |   4 +-
->   dump/dump.c                          |   4 +-
->   hw/core/cpu-common.c                 |   6 +-
->   hw/i386/intel_iommu.c                |   6 +-
->   hw/i386/kvm/xen_evtchn.c             |  16 ++--
->   hw/i386/kvm/xen_overlay.c            |   2 +-
->   hw/i386/kvm/xen_xenstore.c           |   2 +-
->   hw/intc/arm_gicv3_cpuif.c            |   2 +-
->   hw/intc/s390_flic.c                  |  18 ++--
->   hw/misc/edu.c                        |   4 +-
->   hw/misc/imx6_src.c                   |   2 +-
->   hw/misc/imx7_src.c                   |   2 +-
->   hw/net/xen_nic.c                     |   8 +-
->   hw/ppc/pegasos2.c                    |   2 +-
->   hw/ppc/ppc.c                         |   4 +-
->   hw/ppc/spapr.c                       |   2 +-
->   hw/ppc/spapr_rng.c                   |   4 +-
->   hw/ppc/spapr_softmmu.c               |   4 +-
->   hw/remote/mpqemu-link.c              |  12 +--
->   hw/remote/vfio-user-obj.c            |   2 +-
->   hw/s390x/s390-skeys.c                |   2 +-
->   migration/block-dirty-bitmap.c       |   4 +-
->   migration/block.c                    |  16 ++--
->   migration/colo.c                     |  60 +++++++-------
->   migration/dirtyrate.c                |  12 +--
->   migration/migration.c                |  52 ++++++------
->   migration/ram.c                      |  12 +--
->   replay/replay-internal.c             |   2 +-
->   semihosting/console.c                |   8 +-
->   stubs/iothread-lock.c                |   6 +-
->   system/cpu-throttle.c                |   4 +-
->   system/cpus.c                        |  28 +++----
->   system/dirtylimit.c                  |   4 +-
->   system/memory.c                      |   2 +-
->   system/physmem.c                     |   8 +-
->   system/runstate.c                    |   2 +-
->   system/watchpoint.c                  |   4 +-
->   target/arm/arm-powerctl.c            |  14 ++--
->   target/arm/helper.c                  |   4 +-
->   target/arm/hvf/hvf.c                 |   8 +-
->   target/arm/kvm.c                     |   4 +-
->   target/arm/kvm64.c                   |   4 +-
->   target/arm/ptw.c                     |   6 +-
->   target/arm/tcg/helper-a64.c          |   8 +-
->   target/arm/tcg/m_helper.c            |   4 +-
->   target/arm/tcg/op_helper.c           |  24 +++---
->   target/arm/tcg/psci.c                |   2 +-
->   target/hppa/int_helper.c             |   8 +-
->   target/i386/hvf/hvf.c                |   6 +-
->   target/i386/kvm/hyperv.c             |   4 +-
->   target/i386/kvm/kvm.c                |  28 +++----
->   target/i386/kvm/xen-emu.c            |  14 ++--
->   target/i386/nvmm/nvmm-accel-ops.c    |   4 +-
->   target/i386/nvmm/nvmm-all.c          |  20 ++---
->   target/i386/tcg/sysemu/fpu_helper.c  |   6 +-
->   target/i386/tcg/sysemu/misc_helper.c |   4 +-
->   target/i386/whpx/whpx-accel-ops.c    |   4 +-
->   target/i386/whpx/whpx-all.c          |  24 +++---
->   target/loongarch/csr_helper.c        |   4 +-
->   target/mips/kvm.c                    |   4 +-
->   target/mips/tcg/sysemu/cp0_helper.c  |   4 +-
->   target/openrisc/sys_helper.c         |  16 ++--
->   target/ppc/excp_helper.c             |  12 +--
->   target/ppc/kvm.c                     |   4 +-
->   target/ppc/misc_helper.c             |   8 +-
->   target/ppc/timebase_helper.c         |   8 +-
->   target/s390x/kvm/kvm.c               |   4 +-
->   target/s390x/tcg/misc_helper.c       | 118 +++++++++++++--------------
->   target/sparc/int32_helper.c          |   2 +-
->   target/sparc/int64_helper.c          |   6 +-
->   target/sparc/win_helper.c            |  20 ++---
->   target/xtensa/exc_helper.c           |   8 +-
->   ui/spice-core.c                      |   4 +-
->   util/async.c                         |   2 +-
->   util/main-loop.c                     |   8 +-
->   util/rcu.c                           |  14 ++--
->   audio/coreaudio.m                    |   4 +-
->   memory_ldst.c.inc                    |  18 ++--
->   target/i386/hvf/README.md            |   2 +-
->   ui/cocoa.m                           |  50 ++++++------
->   94 files changed, 502 insertions(+), 502 deletions(-)
+>   include/qemu/main-loop.h  | 20 ++++++++++----------
+>   hw/i386/kvm/xen_evtchn.c  | 14 +++++++-------
+>   hw/i386/kvm/xen_gnttab.c  |  2 +-
+>   hw/mips/mips_int.c        |  2 +-
+>   hw/ppc/ppc.c              |  2 +-
+>   target/i386/kvm/xen-emu.c |  2 +-
+>   target/ppc/excp_helper.c  |  2 +-
+>   target/ppc/helper_regs.c  |  2 +-
+>   target/riscv/cpu_helper.c |  4 ++--
+>   9 files changed, 25 insertions(+), 25 deletions(-)
 > 
 
 Reviewed-by: Paul Durrant <paul@xen.org>
