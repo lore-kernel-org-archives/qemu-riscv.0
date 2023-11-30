@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 304CFC4167B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:35:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94BD4C4167B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:36:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8i6L-0004Bq-Kt; Thu, 30 Nov 2023 09:33:13 -0500
+	id 1r8i7G-0006Cy-TM; Thu, 30 Nov 2023 09:34:16 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i6J-00043R-Ar; Thu, 30 Nov 2023 09:33:11 -0500
+ id 1r8i6k-0005qt-Iv; Thu, 30 Nov 2023 09:33:40 -0500
 Received: from mgamail.intel.com ([192.55.52.43])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i6H-0001I2-HS; Thu, 30 Nov 2023 09:33:10 -0500
+ id 1r8i6i-0001RT-8O; Thu, 30 Nov 2023 09:33:38 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1701354789; x=1732890789;
+ t=1701354816; x=1732890816;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=/4XB1+0XSfZXJW6ggYvVG8+UQ24RT1LIudOfD5YSaJw=;
- b=HasYQyEUkyVg21haLFRHGDdWbARruYDFjMYrLUFCSDFA7i3axlx1zrdK
- fu3NPHtZCxTw3A5pJhlnvwjnGuzUMT2IdFV9kHEIWh+4RLOgmKpyxz+fV
- HUgT1/mGJ+MJLDM7Yso4qoj+MM9pgumfhXFdSzWkRGgKdLBGM3yb/7WA7
- oM9DtHv+mt7dkM+lfQR1r5vcVeKEeZ4HtaEi/imu6Jp++uqNu4MPq4gxy
- RERmOGl/6JZCsCOg8h2ZqCXB7GP/sANyyIEGgHCrlThnXXmI2Jax3rhMa
- EFkvZfN5xrlNpmx4gfc2xTtjWaGooJ9RyU4Kks03V+K30LCwoJigisB/Q w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479531860"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479531860"
+ bh=ewTMs2u73zZUV2zJblGAkkri1EYaJm+RSs7ZWl9w7g8=;
+ b=ObtDTnZKhzx71/fy1sMds76oOx6R/DHFRvy3OH1z+Sp2VD4MufcayHji
+ a4Zj4jiMJAHMnI45dfJ/b55phnK2IvSYIf/oDnr+qxKlkAzKJq9Tj1sy6
+ zj1YDYDEVxna9DyTxZi5r0C+bT5o2fjD47rVixkcR6Tm5fxOamoJKT7Hy
+ IpimkBZk1OSXww1cVtblCRnvKIvkTPsrMYKYX3NuvNw34wBl+cyLRY7cE
+ /McbdqOTHw2l3aZhLqJSlgI4VTE0h/4vrs1+ceSR10Jsv0d8GxtY7c+zB
+ kI0/5BIrUJcFq7+4vyVUwuLIxBw1TiA1laMWmjKZYdP5NkDkfdJX/a/Mk A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479531981"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479531981"
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:33:04 -0800
+ 30 Nov 2023 06:33:32 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942729971"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942729971"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730032"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942730032"
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:32:54 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:33:22 -0800
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -72,10 +72,10 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
  Thomas Huth <thuth@redhat.com>, Zhiyuan Lv <zhiyuan.lv@intel.com>,
  Zhenyu Wang <zhenyu.z.wang@intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
  Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 16/41] PPC/ppc-core: Limit plugged-threads and nr-threads to be
- equal
-Date: Thu, 30 Nov 2023 22:41:38 +0800
-Message-Id: <20231130144203.2307629-17-zhao1.liu@linux.intel.com>
+Subject: [RFC 19/41] hw/cpu/cluster: Wrap TCG related ops and props into
+ CONFIG_TCG
+Date: Thu, 30 Nov 2023 22:41:41 +0800
+Message-Id: <20231130144203.2307629-20-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
@@ -107,73 +107,139 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-PPC supports CPU hotplug at core granularity, thus ppc-core only accepts
-all CPUs in a core are plugged.
+Currenltly cpu-cluster is used in TCG case to organize CPUs with the
+same type.
 
-Check if plugged_threads and nr_threads are equal when ppc-core
-realizes.
+Wrap 2 things into TCG specific areas:
+1. cluster-id:
+
+   The cluster-id in TCG case is global, since no higher topology
+   container above cluster. To simplify the logic of cluster topology
+   in virtualization, move the cluster-id into CONFIG_TCG, then it
+   won't be exposed in cli.
+
+2. CPU collection in realize():
+
+   In TCG case, the CPUs are added into cluster directly via child<>
+   property. But in virtualization case, the CPU topology will be built
+   via topology tree. Thus, wrap CPU collection as the TCG operation.
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- hw/ppc/ppc_core.c         | 18 ++++++++++++++++++
- include/hw/ppc/ppc_core.h |  1 +
- 2 files changed, 19 insertions(+)
+ hw/cpu/cluster.c         | 30 +++++++++++++++++++++++++-----
+ include/hw/cpu/cluster.h | 22 ++++++++++++++++++++--
+ 2 files changed, 45 insertions(+), 7 deletions(-)
 
-diff --git a/hw/ppc/ppc_core.c b/hw/ppc/ppc_core.c
-index 4433b54af506..3857f3150052 100644
---- a/hw/ppc/ppc_core.c
-+++ b/hw/ppc/ppc_core.c
-@@ -53,20 +53,38 @@ static void powerpc_core_prop_set_core_id(Object *obj, Visitor *v,
-     core->core_id = value;
+diff --git a/hw/cpu/cluster.c b/hw/cpu/cluster.c
+index fd978a543e40..340cfad9f8f1 100644
+--- a/hw/cpu/cluster.c
++++ b/hw/cpu/cluster.c
+@@ -26,7 +26,9 @@
+ #include "qapi/error.h"
+ 
+ static Property cpu_cluster_properties[] = {
++#ifdef CONFIG_TCG
+     DEFINE_PROP_UINT32("cluster-id", CPUCluster, cluster_id, 0),
++#endif
+     DEFINE_PROP_END_OF_LIST()
+ };
+ 
+@@ -47,18 +49,17 @@ static int add_cpu_to_cluster(Object *obj, void *opaque)
+     return 0;
  }
  
-+static void powerpc_core_realize(DeviceState *dev, Error **errp)
+-static void cpu_cluster_realize(DeviceState *dev, Error **errp)
++static void cpu_cluster_common_collect_cpus(CPUCluster *cluster, Error **errp)
+ {
+     /* Iterate through all our CPU children and set their cluster_index */
+-    CPUCluster *cluster = CPU_CLUSTER(dev);
+-    Object *cluster_obj = OBJECT(dev);
++    Object *cluster_obj = OBJECT(cluster);
+     CallbackData cbdata = {
+         .cluster = cluster,
+         .cpu_count = 0,
+     };
+ 
+-    if (cluster->cluster_id >= MAX_CLUSTERS) {
+-        error_setg(errp, "cluster-id must be less than %d", MAX_CLUSTERS);
++    if (cluster->cluster_id >= MAX_TCG_CLUSTERS) {
++        error_setg(errp, "cluster-id must be less than %d", MAX_TCG_CLUSTERS);
+         return;
+     }
+ 
+@@ -73,15 +74,34 @@ static void cpu_cluster_realize(DeviceState *dev, Error **errp)
+     assert(cbdata.cpu_count > 0);
+ }
+ 
++static const struct TCGClusterOps common_cluster_tcg_ops = {
++    .collect_cpus = cpu_cluster_common_collect_cpus,
++};
++
++static void cpu_cluster_realize(DeviceState *dev, Error **errp)
 +{
-+    CPUCore *core = CPU_CORE(dev);
-+    PowerPCCoreClass *ppc_class = POWERPC_CORE_GET_CLASS(dev);
++    CPUCluster *cluster = CPU_CLUSTER(dev);
++    CPUClusterClass *cc = CPU_CLUSTER_GET_CLASS(dev);
 +
-+    if (core->plugged_threads != -1 &&
-+        core->nr_threads != core->plugged_threads) {
-+        error_setg(errp, "nr_threads and plugged-threads must be equal");
-+        return;
++    if (cc->tcg_clu_ops->collect_cpus) {
++        cc->tcg_clu_ops->collect_cpus(cluster, errp);
 +    }
-+
-+    ppc_class->parent_realize(dev, errp);
 +}
 +
- static void powerpc_core_class_init(ObjectClass *oc, void *data)
+ static void cpu_cluster_class_init(ObjectClass *klass, void *data)
  {
-     DeviceClass *dc = DEVICE_CLASS(oc);
-+    PowerPCCoreClass *ppc_class = POWERPC_CORE_CLASS(oc);
+     DeviceClass *dc = DEVICE_CLASS(klass);
++    CPUClusterClass *cc = CPU_CLUSTER_CLASS(klass);
  
-     object_class_property_add(oc, "core-id", "int",
-                               powerpc_core_prop_get_core_id,
-                               powerpc_core_prop_set_core_id,
-                               NULL, NULL);
-+    device_class_set_parent_realize(dc, powerpc_core_realize,
-+                                    &ppc_class->parent_realize);
+     device_class_set_props(dc, cpu_cluster_properties);
+     dc->realize = cpu_cluster_realize;
+ 
+     /* This is not directly for users, CPU children must be attached by code */
+     dc->user_creatable = false;
++
++#ifdef CONFIG_TCG
++    cc->tcg_clu_ops = &common_cluster_tcg_ops;
++#endif
  }
  
- static const TypeInfo powerpc_core_type_info = {
-     .name = TYPE_POWERPC_CORE,
-     .parent = TYPE_CPU_CORE,
-     .abstract = true,
-+    .class_size = sizeof(PowerPCCoreClass),
-     .class_init = powerpc_core_class_init,
-     .instance_size = sizeof(PowerPCCore),
- };
-diff --git a/include/hw/ppc/ppc_core.h b/include/hw/ppc/ppc_core.h
-index bcc83e426e3f..1207d220872a 100644
---- a/include/hw/ppc/ppc_core.h
-+++ b/include/hw/ppc/ppc_core.h
-@@ -34,6 +34,7 @@ struct PowerPCCoreClass {
-     CPUCoreClass parent_class;
+ static const TypeInfo cpu_cluster_type_info = {
+diff --git a/include/hw/cpu/cluster.h b/include/hw/cpu/cluster.h
+index 644b87350268..c038f05ddc9f 100644
+--- a/include/hw/cpu/cluster.h
++++ b/include/hw/cpu/cluster.h
+@@ -55,13 +55,31 @@
+  */
  
-     /*< public >*/
-+    DeviceRealize parent_realize;
- };
+ #define TYPE_CPU_CLUSTER "cpu-cluster"
+-OBJECT_DECLARE_SIMPLE_TYPE(CPUCluster, CPU_CLUSTER)
++OBJECT_DECLARE_TYPE(CPUCluster, CPUClusterClass, CPU_CLUSTER)
  
- struct PowerPCCore {
+ /*
+  * This limit is imposed by TCG, which puts the cluster ID into an
+  * 8 bit field (and uses all-1s for the default "not in any cluster").
+  */
+-#define MAX_CLUSTERS 255
++#define MAX_TCG_CLUSTERS 255
++
++struct TCGClusterOps {
++    /**
++     * @collect_cpus: Iterate children CPUs and set cluser_index.
++     *
++     * Called when the cluster is realized.
++     */
++    void (*collect_cpus)(CPUCluster *cluster, Error **errp);
++};
++
++struct CPUClusterClass {
++    /*< private >*/
++    DeviceClass parent_class;
++
++    /*< public >*/
++    /* when TCG is not available, this pointer is NULL */
++    const struct TCGClusterOps *tcg_clu_ops;
++};
+ 
+ /**
+  * CPUCluster:
 -- 
 2.34.1
 
