@@ -4,63 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 628CFC4167B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 13:48:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5588CC4167B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 13:50:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8hOc-0004mv-5N; Thu, 30 Nov 2023 08:48:04 -0500
+	id 1r8hQg-0006Zo-AC; Thu, 30 Nov 2023 08:50:10 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r8hOa-0004mW-AU
- for qemu-riscv@nongnu.org; Thu, 30 Nov 2023 08:48:00 -0500
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r8hQW-0006VJ-9V
+ for qemu-riscv@nongnu.org; Thu, 30 Nov 2023 08:50:02 -0500
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r8hOY-0000oN-CO
- for qemu-riscv@nongnu.org; Thu, 30 Nov 2023 08:48:00 -0500
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-40b54261524so8816665e9.3
- for <qemu-riscv@nongnu.org>; Thu, 30 Nov 2023 05:47:57 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1r8hQT-0001If-FZ
+ for qemu-riscv@nongnu.org; Thu, 30 Nov 2023 08:50:00 -0500
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-40b472f98b1so7748855e9.3
+ for <qemu-riscv@nongnu.org>; Thu, 30 Nov 2023 05:49:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701352077; x=1701956877; darn=nongnu.org;
+ d=linaro.org; s=google; t=1701352196; x=1701956996; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=rzryK5Ovxx7DOgDxZdQ36NxzgykTz4w4Mydj5qAA+DE=;
- b=r2Dznn7RVHK1297vRYlqe94iFNeF30YgPKO64YdSm6/dsmRHYdzRHGkTCHoWOssGJO
- /NenS5m8DNkXZRjx093YHfKgYGAb7zUuqwFTjRaU5T+L05q3XiUaNf/topzJqOmGhQ8O
- QsTj7MZZI4gNlxpIycnpacXUnFDfzRtQ2tF1/QbyTfN5690q0Q1MP2r8tH+9hMrhj9Of
- fkxtU8botkYc6WFFghJP3SR1xY9Vr8SqBD7q6XctA9jjJaxdbUp9xONqAirtiCA8E917
- ceprCm5e5Cp2mUL9g+vELobEyBmqriQCgl0viYFMmAhIrCHnMR6mjNPT8uTuf0jEhVBY
- lacw==
+ bh=MzXC86kI/230MRmOExolGBgQpce+zyW7qougvXLVSk8=;
+ b=I25aAQN3MwjonWQAuXfFk0f4HfMOhFTw+vwYH+7LaxUmESp8giU/JcRynvg2cOAK4O
+ FWD7RjbjDPJuNzJfgD7AF3l+TAvHpfAzRpkxijP8NhSPqx7FXKVi3Rj5AUl8Mk2PgEo8
+ lu2As9DQDyDTONl/qwdnbfLGqFeVoG53EFquA9ex65zkrLcjzCh39o5L+pp2UOKaEYp/
+ xeutKbblANB4GiSU+yBeHo/Aoe3bBh3FGOfj98GwJsNf59xTu7vBpChQhj46TdzWj+Am
+ It6Fb0V2KAMeHpMqxtEVVc9D+Au5qphui+PQBerUAapilUICqP8bHOFpv32vUrrX8zwk
+ kK1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701352077; x=1701956877;
+ d=1e100.net; s=20230601; t=1701352196; x=1701956996;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=rzryK5Ovxx7DOgDxZdQ36NxzgykTz4w4Mydj5qAA+DE=;
- b=ONf+sn5bNhaUaxtgi2oMkXXrnmWQShQCW4NCrxrSRiPy2bwH+AkBGvo0BjJHNcpk8q
- um1Ihe/BJIqwO+bORLrltpngntNNzEkJfm0YBuZLywLus9NYR1C3CWQTzrfJ8SqKn/H3
- 9Vj/GxjBz+X6QU9RNDD/6INhUQu5kVtJ4p8xdCQQtPhgXL6RhF9NNNhee26D+ixI6+Zb
- fkGreAMWWn7imf5H4afR6wcDMPkk+X1nDK8O+8Yq4hpFin+kY+an/p0DHAGxaddGop7A
- WxQ+SRFVRklcrXov22vQEbLNXTX242yy4ZUOLVSHm3SW7LQcZzR+jF14OONMJguJFv6d
- cP9g==
-X-Gm-Message-State: AOJu0Ywwcug0iyLgQgHfmMu90QqVMlrBWf6223YHvUsmyNu43Ts4MyQC
- JoVBAz6YIbz8uB0zarXLD/p6sA==
-X-Google-Smtp-Source: AGHT+IEVx+BgPGgvtoGgXlS2ma7+soUtQpvgW6i96U/5dPN3399XP3o/9uLj4S+iHyFoPGNahzok1g==
-X-Received: by 2002:a05:600c:3c8a:b0:40b:4da4:b985 with SMTP id
- bg10-20020a05600c3c8a00b0040b4da4b985mr6336852wmb.38.1701352076590; 
- Thu, 30 Nov 2023 05:47:56 -0800 (PST)
+ bh=MzXC86kI/230MRmOExolGBgQpce+zyW7qougvXLVSk8=;
+ b=Em/JZPU/L0CY4YJC7QfqIsF317/9GO4Swpi2U9uHZonVE+aazCFH/SErnhtkN96ptu
+ 8cju9rDbOLzdUHpizCic6jqotpBYD76YfHm1iC/dPc4NbExs0jyus4w7E6AFe2BLOjfu
+ EPE2a6KrtZuhkd8gMFSRlw5d22SByQC62byfXEJL0O671APnha91m5giMhnYgfFwMc5I
+ kbcDazpM/QQHPO1K563Sn3+yQAsktM0oJ54Kxn7ySA3Z4yASS18DfjkQJs+rXyQRtJQv
+ PHAC/0Nj4YO2Z/UjwbVSZJMRVYpAxSRzKzy6HO2VVnJGj4Pn8a8HFT/kaF0ja/ukTPz7
+ ++ZQ==
+X-Gm-Message-State: AOJu0YwGZ/OJ6yLhGK8ENK87nVNpqN5YM12QR+t+GBNtPXrD3JmtYw/3
+ LdXWGyk3woStq9tD2k0PGgPc2w==
+X-Google-Smtp-Source: AGHT+IGEZM/F60lbKf+pyOaxLGJZDqngSEf0GXts+oJS0AF+AGOPuKqrMqfmt5a2LHBk+wqKglvvAA==
+X-Received: by 2002:adf:f588:0:b0:332:eb19:9530 with SMTP id
+ f8-20020adff588000000b00332eb199530mr14573473wro.32.1701352195915; 
+ Thu, 30 Nov 2023 05:49:55 -0800 (PST)
 Received: from [192.168.69.100] (sev93-h02-176-184-17-116.dsl.sta.abo.bbox.fr.
  [176.184.17.116]) by smtp.gmail.com with ESMTPSA id
- n26-20020a05600c3b9a00b0040b34409d43sm2099005wms.11.2023.11.30.05.47.50
+ h1-20020adfe981000000b00332f6202b82sm1595392wrm.9.2023.11.30.05.49.50
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Nov 2023 05:47:56 -0800 (PST)
-Message-ID: <9c305a84-fd86-42fe-98ae-9297d480acd6@linaro.org>
-Date: Thu, 30 Nov 2023 14:47:49 +0100
+ Thu, 30 Nov 2023 05:49:55 -0800 (PST)
+Message-ID: <fcaff24d-0ced-4547-898f-a9b8bf49be45@linaro.org>
+Date: Thu, 30 Nov 2023 14:49:48 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/6] Replace "iothread lock" with "BQL" in comments
+Subject: Re: [PATCH 6/6] Rename "QEMU global mutex" to "BQL" in comments and
+ docs
 Content-Language: en-US
 To: Stefan Hajnoczi <stefanha@redhat.com>, qemu-devel@nongnu.org
 Cc: Jean-Christophe Dubois <jcd@tribudubois.net>,
@@ -115,20 +116,20 @@ Cc: Jean-Christophe Dubois <jcd@tribudubois.net>,
  <leobras@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>
 References: <20231129212625.1051502-1-stefanha@redhat.com>
- <20231129212625.1051502-6-stefanha@redhat.com>
+ <20231129212625.1051502-7-stefanha@redhat.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20231129212625.1051502-6-stefanha@redhat.com>
+In-Reply-To: <20231129212625.1051502-7-stefanha@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x330.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::332;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -144,76 +145,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Stefan,
-
 On 29/11/23 22:26, Stefan Hajnoczi wrote:
-> The term "iothread lock" is obsolete. The APIs use Big QEMU Lock (BQL)
-> in their names. Update the code comments to use "BQL" instead of
-> "iothread lock".
+> The term "QEMU global mutex" is identical to the more widely used Big
+> QEMU Lock ("BQL"). Update the code comments and documentation to use
+> "BQL" instead of "QEMU global mutex".
 > 
 > Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 > ---
->   docs/devel/reset.rst             |  2 +-
->   hw/display/qxl.h                 |  2 +-
->   include/exec/cpu-common.h        |  2 +-
->   include/exec/memory.h            |  4 ++--
->   include/exec/ramblock.h          |  2 +-
->   include/migration/register.h     |  8 ++++----
->   target/arm/internals.h           |  4 ++--
->   accel/tcg/cputlb.c               |  4 ++--
->   accel/tcg/tcg-accel-ops-icount.c |  2 +-
->   hw/remote/mpqemu-link.c          |  2 +-
->   migration/block-dirty-bitmap.c   | 10 +++++-----
->   migration/block.c                | 24 ++++++++++++------------
->   migration/colo.c                 |  2 +-
->   migration/migration.c            |  2 +-
->   migration/ram.c                  |  4 ++--
->   system/physmem.c                 |  6 +++---
->   target/arm/helper.c              |  2 +-
->   target/arm/tcg/m_helper.c        |  2 +-
->   ui/spice-core.c                  |  2 +-
->   util/rcu.c                       |  2 +-
->   audio/coreaudio.m                |  4 ++--
->   ui/cocoa.m                       |  6 +++---
->   22 files changed, 49 insertions(+), 49 deletions(-)
+>   docs/devel/multi-thread-tcg.rst   |  7 +++----
+>   docs/devel/qapi-code-gen.rst      |  2 +-
+>   docs/devel/replay.rst             |  2 +-
+>   docs/devel/multiple-iothreads.txt | 16 ++++++++--------
+>   include/block/blockjob.h          |  6 +++---
+>   include/io/task.h                 |  2 +-
+>   include/qemu/coroutine-core.h     |  2 +-
+>   include/qemu/coroutine.h          |  2 +-
+>   hw/block/dataplane/virtio-blk.c   |  8 ++++----
+>   hw/block/virtio-blk.c             |  2 +-
+>   hw/scsi/virtio-scsi-dataplane.c   |  6 +++---
+>   net/tap.c                         |  2 +-
+>   12 files changed, 28 insertions(+), 29 deletions(-)
 
 
-> diff --git a/include/exec/ramblock.h b/include/exec/ramblock.h
-> index 69c6a53902..a2bc0a345d 100644
-> --- a/include/exec/ramblock.h
-> +++ b/include/exec/ramblock.h
-> @@ -34,7 +34,7 @@ struct RAMBlock {
->       ram_addr_t max_length;
->       void (*resized)(const char*, uint64_t length, void *host);
->       uint32_t flags;
-> -    /* Protected by iothread lock.  */
-> +    /* Protected by BQL.  */
+> diff --git a/include/block/blockjob.h b/include/block/blockjob.h
+> index e594c10d23..b2bc7c04d6 100644
+> --- a/include/block/blockjob.h
+> +++ b/include/block/blockjob.h
+> @@ -54,7 +54,7 @@ typedef struct BlockJob {
+>   
+>       /**
+>        * Speed that was set with @block_job_set_speed.
+> -     * Always modified and read under QEMU global mutex (GLOBAL_STATE_CODE).
+> +     * Always modified and read under BQL (GLOBAL_STATE_CODE).
 
-There is only one single BQL, so preferably:
+"under the BQL"
 
-"by the BQL"
+>        */
+>       int64_t speed;
+>   
+> @@ -66,7 +66,7 @@ typedef struct BlockJob {
+>   
+>       /**
+>        * Block other operations when block job is running.
+> -     * Always modified and read under QEMU global mutex (GLOBAL_STATE_CODE).
+> +     * Always modified and read under BQL (GLOBAL_STATE_CODE).
 
->       char idstr[256];
->       /* RCU-enabled, writes protected by the ramlist lock */
->       QLIST_ENTRY(RAMBlock) next;
+Ditto,
 
+>        */
+>       Error *blocker;
+>   
+> @@ -89,7 +89,7 @@ typedef struct BlockJob {
+>   
+>       /**
+>        * BlockDriverStates that are involved in this block job.
+> -     * Always modified and read under QEMU global mutex (GLOBAL_STATE_CODE).
+> +     * Always modified and read under BQL (GLOBAL_STATE_CODE).
 
+Ditto.
 
-
-> -/* Called with iothread lock taken.  */
-> +/* Called with BQL taken.  */
-
-"with the BQL" (other uses)
-
-Otherwise,
+>        */
+>       GSList *nodes;
+>   } BlockJob;
 
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-
->   static void dirty_bitmap_do_save_cleanup(DBMSaveState *s)
->   {
->       SaveBitmapState *dbms;
-> @@ -479,7 +479,7 @@ static void dirty_bitmap_do_save_cleanup(DBMSaveState *s)
->       }
->   }
 
 
