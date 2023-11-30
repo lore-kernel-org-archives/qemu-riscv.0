@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2DEFC10DAA
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:34:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 304CFC4167B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:35:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8i5s-00031G-04; Thu, 30 Nov 2023 09:32:44 -0500
+	id 1r8i6L-0004Bq-Kt; Thu, 30 Nov 2023 09:33:13 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i5q-0002t0-2c; Thu, 30 Nov 2023 09:32:42 -0500
+ id 1r8i6J-00043R-Ar; Thu, 30 Nov 2023 09:33:11 -0500
 Received: from mgamail.intel.com ([192.55.52.43])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i5o-0001BS-4M; Thu, 30 Nov 2023 09:32:41 -0500
+ id 1r8i6H-0001I2-HS; Thu, 30 Nov 2023 09:33:10 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1701354760; x=1732890760;
+ t=1701354789; x=1732890789;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=giqm05kbC3tYOPrffoLra7vHI+bWgR59/qNt+YCSQ+8=;
- b=g02N2G6gMNbxuYTy/MpXvk/tCF1JtxcYvoqJjbqmKbsgNmt688e6H3nX
- 2fG5uXcRFQU9Rz50eLiXvJMFq98b1y0AcSRLfWyodbOACXXzWGir5EpX+
- R9RqjNTy1TvtBxghMfQgkPqV3y9L3uX3PA1kITasQ3oc00KOsWhDUx/0q
- ug0cRclDm/C2DCWz6SEJTpGaenvklSoexfiB9zRUbiAo4tht7sLBlo94z
- BuiYla+2W+nzDhapsAYeW+OZc8fH5iaJab2RV42tBwOXjmOmCk1aFdzv7
- GKoxFfYWknklgboGXWdDa+IziI2o18qG4mfwFYhcToQW+C/1a5sSgcpA+ A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479531659"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479531659"
+ bh=/4XB1+0XSfZXJW6ggYvVG8+UQ24RT1LIudOfD5YSaJw=;
+ b=HasYQyEUkyVg21haLFRHGDdWbARruYDFjMYrLUFCSDFA7i3axlx1zrdK
+ fu3NPHtZCxTw3A5pJhlnvwjnGuzUMT2IdFV9kHEIWh+4RLOgmKpyxz+fV
+ HUgT1/mGJ+MJLDM7Yso4qoj+MM9pgumfhXFdSzWkRGgKdLBGM3yb/7WA7
+ oM9DtHv+mt7dkM+lfQR1r5vcVeKEeZ4HtaEi/imu6Jp++uqNu4MPq4gxy
+ RERmOGl/6JZCsCOg8h2ZqCXB7GP/sANyyIEGgHCrlThnXXmI2Jax3rhMa
+ EFkvZfN5xrlNpmx4gfc2xTtjWaGooJ9RyU4Kks03V+K30LCwoJigisB/Q w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479531860"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479531860"
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:32:26 -0800
+ 30 Nov 2023 06:33:04 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942729853"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942729853"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942729971"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942729971"
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:32:17 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:32:54 -0800
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -72,10 +72,10 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
  Thomas Huth <thuth@redhat.com>, Zhiyuan Lv <zhiyuan.lv@intel.com>,
  Zhenyu Wang <zhenyu.z.wang@intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
  Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 12/41] hw/core/topo: Add helpers to traverse the CPU topology
- tree
-Date: Thu, 30 Nov 2023 22:41:34 +0800
-Message-Id: <20231130144203.2307629-13-zhao1.liu@linux.intel.com>
+Subject: [RFC 16/41] PPC/ppc-core: Limit plugged-threads and nr-threads to be
+ equal
+Date: Thu, 30 Nov 2023 22:41:38 +0800
+Message-Id: <20231130144203.2307629-17-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
@@ -107,88 +107,73 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-The topology devices will be organized as a topology tree. Each topology
-device may have many topology children with lower topology level.
+PPC supports CPU hotplug at core granularity, thus ppc-core only accepts
+all CPUs in a core are plugged.
 
-Add the helpers to traverse the CPU topology tree.
+Check if plugged_threads and nr_threads are equal when ppc-core
+realizes.
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- hw/core/cpu-topo.c         | 41 ++++++++++++++++++++++++++++++++++++++
- include/hw/core/cpu-topo.h | 13 ++++++++++++
- 2 files changed, 54 insertions(+)
+ hw/ppc/ppc_core.c         | 18 ++++++++++++++++++
+ include/hw/ppc/ppc_core.h |  1 +
+ 2 files changed, 19 insertions(+)
 
-diff --git a/hw/core/cpu-topo.c b/hw/core/cpu-topo.c
-index cba2dc747e74..687a4cc566ec 100644
---- a/hw/core/cpu-topo.c
-+++ b/hw/core/cpu-topo.c
-@@ -318,3 +318,44 @@ static void cpu_topo_register_types(void)
+diff --git a/hw/ppc/ppc_core.c b/hw/ppc/ppc_core.c
+index 4433b54af506..3857f3150052 100644
+--- a/hw/ppc/ppc_core.c
++++ b/hw/ppc/ppc_core.c
+@@ -53,20 +53,38 @@ static void powerpc_core_prop_set_core_id(Object *obj, Visitor *v,
+     core->core_id = value;
  }
  
- type_init(cpu_topo_register_types)
-+
-+static int do_cpu_topo_child_foreach(CPUTopoState *topo,
-+                                     unsigned long *levels,
-+                                     topo_fn fn, void *opaque,
-+                                     bool recurse)
++static void powerpc_core_realize(DeviceState *dev, Error **errp)
 +{
-+    CPUTopoState *child;
-+    int ret = TOPO_FOREACH_CONTINUE;
++    CPUCore *core = CPU_CORE(dev);
++    PowerPCCoreClass *ppc_class = POWERPC_CORE_GET_CLASS(dev);
 +
-+    QTAILQ_FOREACH(child, &topo->children, sibling) {
-+        if (!levels || (levels && test_bit(CPU_TOPO_LEVEL(child), levels))) {
-+            ret = fn(child, opaque);
-+            if (ret == TOPO_FOREACH_END || ret == TOPO_FOREACH_ERR) {
-+                break;
-+            } else if (ret == TOPO_FOREACH_SIBLING) {
-+                continue;
-+            }
-+        }
-+
-+        if (recurse) {
-+            ret = do_cpu_topo_child_foreach(child, levels, fn, opaque, recurse);
-+            if (ret != TOPO_FOREACH_CONTINUE) {
-+                break;
-+            }
-+        }
++    if (core->plugged_threads != -1 &&
++        core->nr_threads != core->plugged_threads) {
++        error_setg(errp, "nr_threads and plugged-threads must be equal");
++        return;
 +    }
-+    return ret;
++
++    ppc_class->parent_realize(dev, errp);
 +}
 +
-+int cpu_topo_child_foreach(CPUTopoState *topo, unsigned long *levels,
-+                           topo_fn fn, void *opaque)
-+{
-+    return do_cpu_topo_child_foreach(topo, levels, fn, opaque, false);
-+}
-+
-+int cpu_topo_child_foreach_recursive(CPUTopoState *topo,
-+                                     unsigned long *levels,
-+                                     topo_fn fn, void *opaque)
-+{
-+    return do_cpu_topo_child_foreach(topo, levels, fn, opaque, true);
-+}
-diff --git a/include/hw/core/cpu-topo.h b/include/hw/core/cpu-topo.h
-index 1ffdb0be6d38..453bacbb558b 100644
---- a/include/hw/core/cpu-topo.h
-+++ b/include/hw/core/cpu-topo.h
-@@ -90,4 +90,17 @@ struct CPUTopoState {
+ static void powerpc_core_class_init(ObjectClass *oc, void *data)
+ {
+     DeviceClass *dc = DEVICE_CLASS(oc);
++    PowerPCCoreClass *ppc_class = POWERPC_CORE_CLASS(oc);
  
- #define CPU_TOPO_LEVEL(topo)    (CPU_TOPO_GET_CLASS(topo)->level)
+     object_class_property_add(oc, "core-id", "int",
+                               powerpc_core_prop_get_core_id,
+                               powerpc_core_prop_set_core_id,
+                               NULL, NULL);
++    device_class_set_parent_realize(dc, powerpc_core_realize,
++                                    &ppc_class->parent_realize);
+ }
  
-+#define TOPO_FOREACH_SIBLING         2
-+#define TOPO_FOREACH_END             1
-+#define TOPO_FOREACH_CONTINUE        0
-+#define TOPO_FOREACH_ERR             -1
-+
-+typedef int (*topo_fn)(CPUTopoState *topo, void *opaque);
-+
-+int cpu_topo_child_foreach(CPUTopoState *topo, unsigned long *levels,
-+                           topo_fn fn, void *opaque);
-+int cpu_topo_child_foreach_recursive(CPUTopoState *topo,
-+                                     unsigned long *levels,
-+                                     topo_fn fn, void *opaque);
-+
- #endif /* CPU_TOPO_H */
+ static const TypeInfo powerpc_core_type_info = {
+     .name = TYPE_POWERPC_CORE,
+     .parent = TYPE_CPU_CORE,
+     .abstract = true,
++    .class_size = sizeof(PowerPCCoreClass),
+     .class_init = powerpc_core_class_init,
+     .instance_size = sizeof(PowerPCCore),
+ };
+diff --git a/include/hw/ppc/ppc_core.h b/include/hw/ppc/ppc_core.h
+index bcc83e426e3f..1207d220872a 100644
+--- a/include/hw/ppc/ppc_core.h
++++ b/include/hw/ppc/ppc_core.h
+@@ -34,6 +34,7 @@ struct PowerPCCoreClass {
+     CPUCoreClass parent_class;
+ 
+     /*< public >*/
++    DeviceRealize parent_realize;
+ };
+ 
+ struct PowerPCCore {
 -- 
 2.34.1
 
