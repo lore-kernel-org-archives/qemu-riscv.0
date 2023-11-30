@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A72CBC4167B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:33:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC7E2C4167B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:34:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8i6C-0003mf-LA; Thu, 30 Nov 2023 09:33:05 -0500
+	id 1r8i6J-00043t-Fx; Thu, 30 Nov 2023 09:33:11 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i6B-0003gj-Hk; Thu, 30 Nov 2023 09:33:03 -0500
+ id 1r8i6H-0003yV-Fk; Thu, 30 Nov 2023 09:33:09 -0500
 Received: from mgamail.intel.com ([192.55.52.43])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i65-0001EW-Ja; Thu, 30 Nov 2023 09:33:03 -0500
+ id 1r8i6E-0001EW-Bs; Thu, 30 Nov 2023 09:33:09 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1701354777; x=1732890777;
+ t=1701354786; x=1732890786;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=rj2qhjfojWttufVsjPIiSdC7tmdmcTNlZ7nywO+2iko=;
- b=dO4Aez7JrHM7v38FGTfGLWF0uORB5obZxpc3iXPJf7dbriTn8K4H9FcD
- 6losTWfcMEH82P+iZs/jWXJHH1ummgG/PPkzxPs0Rorw43dUxq8zvYPJ0
- VmW/FtwiGNf1Sv1yrR43JJBtseVV80M8cPYMDe+ETUkpFtE3zaeSRqlT+
- tY2LcLshTuI2jUqMGMzt3Ose8jHnE0u1Rcbg6QPWvCW2y7wekVSxWwaSJ
- 9Vv+Pn+5qMIpvXCzFMD1IhWpghdUoh6SIitkAor7H04J3utXJXD/UhmJP
- ebzw45PAHCKFgHhLrhy3JKz1V1YEauijAX4OBl51nvuit2jmyP8msOk8M g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479531720"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479531720"
+ bh=HQNocPVaV+DgJS+Ld4DvaS6hVw4IdYUlBhgQdcIl19Q=;
+ b=h5Rfb6iQTuIroyQoXUynoGRMPvKTIQtOHQPuV1lnHfqnNQ86qvbjMtXw
+ ldhiGhtkxtHxBk7RT0WFAIAsF95V8DXvVIpVsYCTaLuaWwW4JG5aSEwXX
+ iCtoChT9EzqHXG8masEvnyeck122QSu+kHINuL1ZgupxUjT9qXhDyKKvR
+ y0SeXvLY+BKDTgB4RNgGTWvltWd4ndAb1PV+m7C9owwg6Fx/UD/r0/CS4
+ Sl8MGNY+WOxBjAfV8udMcjd6RF003bZ5BN3meSQmWpxVn8cJtdvz9AQ6m
+ F7jiMbwhadhBiC/yScfE3xBsp85SJKBeL8y7PzaUn67SjEwa+PgAyTXQy g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479531806"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479531806"
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:32:36 -0800
+ 30 Nov 2023 06:32:54 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942729870"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942729870"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942729932"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942729932"
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:32:26 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:32:45 -0800
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -72,10 +72,10 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
  Thomas Huth <thuth@redhat.com>, Zhiyuan Lv <zhiyuan.lv@intel.com>,
  Zhenyu Wang <zhenyu.z.wang@intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
  Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 13/41] hw/core/cpu: Convert CPU from general device to topology
- device
-Date: Thu, 30 Nov 2023 22:41:35 +0800
-Message-Id: <20231130144203.2307629-14-zhao1.liu@linux.intel.com>
+Subject: [RFC 15/41] hw/cpu/core: Allow to configure plugged threads for
+ cpu-core
+Date: Thu, 30 Nov 2023 22:41:37 +0800
+Message-Id: <20231130144203.2307629-16-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
@@ -107,158 +107,191 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-Convert CPU to topology device then its parent topology devices could
-count the number of CPUs when new CPUs are added into topology tree.
+When the core abstraction is applied for the architecture support CPU
+hotplug, the plugged CPUs and unplugged CPUs are distributed among the
+cores created in the topology tree.
 
-Note since CPUs are created from *_init_cpus() in MachineClass.init() or
-added from hotplug way, it depends on board initialization. Thus CPU
-topology device isn't marked as DEVICE_CATEGORY_CPU_DEF and it will only
-be created after board initialization.
+Add plugged_threads field to help cpu-core decide to how many CPUs to
+create.
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- accel/kvm/kvm-all.c   |  4 ++--
- hw/core/cpu-common.c  | 25 +++++++++++++++++++++----
- include/hw/core/cpu.h |  8 ++++++--
- 3 files changed, 29 insertions(+), 8 deletions(-)
+ hw/cpu/core.c                   | 33 +++++++++++++++++++++++++++++++++
+ hw/ppc/pnv_core.c               |  6 +++++-
+ hw/ppc/spapr_cpu_core.c         |  6 +++++-
+ include/hw/cpu/core.h           |  9 +++++++++
+ include/hw/ppc/pnv_core.h       |  2 ++
+ include/hw/ppc/spapr_cpu_core.h |  2 ++
+ 6 files changed, 56 insertions(+), 2 deletions(-)
 
-diff --git a/accel/kvm/kvm-all.c b/accel/kvm/kvm-all.c
-index e39a810a4e92..2eee3eb95907 100644
---- a/accel/kvm/kvm-all.c
-+++ b/accel/kvm/kvm-all.c
-@@ -3953,7 +3953,7 @@ static void query_stats(StatsResultList **result, StatsTarget target,
-         break;
-     case STATS_TARGET_VCPU:
-         add_stats_entry(result, STATS_PROVIDER_KVM,
--                        cpu->parent_obj.canonical_path,
-+                        DEVICE(cpu)->canonical_path,
-                         stats_list);
-         break;
-     default:
-@@ -4045,7 +4045,7 @@ static void query_stats_cb(StatsResultList **result, StatsTarget target,
-         stats_args.names = names;
-         stats_args.errp = errp;
-         CPU_FOREACH(cpu) {
--            if (!apply_str_list_filter(cpu->parent_obj.canonical_path, targets)) {
-+            if (!apply_str_list_filter(DEVICE(cpu)->canonical_path, targets)) {
-                 continue;
-             }
-             query_stats_vcpu(cpu, &stats_args);
-diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
-index 82dae51a550b..e9ed84ff5386 100644
---- a/hw/core/cpu-common.c
-+++ b/hw/core/cpu-common.c
-@@ -195,6 +195,16 @@ static void cpu_common_realizefn(DeviceState *dev, Error **errp)
- {
-     CPUState *cpu = CPU(dev);
-     Object *machine = qdev_get_machine();
-+    CPUClass *cc = CPU_GET_CLASS(cpu);
+diff --git a/hw/cpu/core.c b/hw/cpu/core.c
+index 7e274d6aebb7..15546b5b2339 100644
+--- a/hw/cpu/core.c
++++ b/hw/cpu/core.c
+@@ -36,6 +36,20 @@ static void core_prop_set_nr_threads(Object *obj, Visitor *v, const char *name,
+     core->nr_threads = value;
+ }
+ 
++static void core_prop_set_plugged_threads(Object *obj, Visitor *v,
++                                          const char *name, void *opaque,
++                                          Error **errp)
++{
++    CPUCore *core = CPU_CORE(obj);
++    int64_t value;
 +
-+    /*
-+     * The parent topology realize() must be completed before cpu_resume()
-+     * where the CPU starts to run.
-+     */
-+    cc->parent_realize(dev, errp);
-+    if (*errp) {
++    if (!visit_type_int(v, name, &value, errp)) {
 +        return;
 +    }
- 
-     /* qdev_get_machine() can return something that's not TYPE_MACHINE
-      * if this is one of the user-only emulators; in that case there's
-@@ -225,6 +235,7 @@ static void cpu_common_realizefn(DeviceState *dev, Error **errp)
- static void cpu_common_unrealizefn(DeviceState *dev)
- {
-     CPUState *cpu = CPU(dev);
-+    CPUClass *cc = CPU_GET_CLASS(cpu);
- 
-     /* Call the plugin hook before clearing the cpu is fully unrealized */
-     if (tcg_enabled()) {
-@@ -233,6 +244,7 @@ static void cpu_common_unrealizefn(DeviceState *dev)
- 
-     /* NOTE: latest generic point before the cpu is fully unrealized */
-     cpu_exec_unrealizefn(cpu);
-+    cc->parent_unrealize(dev);
- }
- 
- static void cpu_common_initfn(Object *obj)
-@@ -275,6 +287,7 @@ static void cpu_class_init(ObjectClass *klass, void *data)
- {
-     DeviceClass *dc = DEVICE_CLASS(klass);
-     ResettableClass *rc = RESETTABLE_CLASS(klass);
-+    CPUTopoClass *tc = CPU_TOPO_CLASS(klass);
-     CPUClass *k = CPU_CLASS(klass);
- 
-     k->parse_features = cpu_common_parse_features;
-@@ -282,9 +295,6 @@ static void cpu_class_init(ObjectClass *klass, void *data)
-     k->has_work = cpu_common_has_work;
-     k->gdb_read_register = cpu_common_gdb_read_register;
-     k->gdb_write_register = cpu_common_gdb_write_register;
--    set_bit(DEVICE_CATEGORY_CPU, dc->categories);
--    dc->realize = cpu_common_realizefn;
--    dc->unrealize = cpu_common_unrealizefn;
-     rc->phases.hold = cpu_common_reset_hold;
-     cpu_class_init_props(dc);
-     /*
-@@ -292,11 +302,18 @@ static void cpu_class_init(ObjectClass *klass, void *data)
-      * IRQs, adding reset handlers, halting non-first CPUs, ...
-      */
-     dc->user_creatable = false;
-+    /* CPU is the minimum granularity for hotplug. */
-+    dc->hotpluggable = true;
-+    device_class_set_parent_realize(dc, cpu_common_realizefn,
-+                                    &k->parent_realize);
-+    device_class_set_parent_unrealize(dc, cpu_common_unrealizefn,
-+                                      &k->parent_unrealize);
-+    tc->level = CPU_TOPO_THREAD;
- }
- 
- static const TypeInfo cpu_type_info = {
-     .name = TYPE_CPU,
--    .parent = TYPE_DEVICE,
-+    .parent = TYPE_CPU_TOPO,
-     .instance_size = sizeof(CPUState),
-     .instance_init = cpu_common_initfn,
-     .instance_finalize = cpu_common_finalize,
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index c0c8320413e5..a700f7c39140 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -20,6 +20,7 @@
- #ifndef QEMU_CPU_H
- #define QEMU_CPU_H
- 
-+#include "hw/core/cpu-topo.h"
- #include "hw/qdev-core.h"
- #include "disas/dis-asm.h"
- #include "exec/cpu-common.h"
-@@ -146,7 +147,7 @@ struct SysemuCPUOps;
-  */
- struct CPUClass {
-     /*< private >*/
--    DeviceClass parent_class;
-+    CPUTopoClass parent_class;
-     /*< public >*/
- 
-     ObjectClass *(*class_by_name)(const char *cpu_model);
-@@ -191,6 +192,9 @@ struct CPUClass {
-     int reset_dump_flags;
-     int gdb_num_core_regs;
-     bool gdb_stop_before_watchpoint;
 +
-+    DeviceRealize parent_realize;
-+    DeviceUnrealize parent_unrealize;
++    core->plugged_threads = value;
++}
++
+ static void cpu_core_instance_init(Object *obj)
+ {
+     CPUCore *core = CPU_CORE(obj);
+@@ -48,6 +62,22 @@ static void cpu_core_instance_init(Object *obj)
+     if (current_machine) {
+         core->nr_threads = current_machine->smp.threads;
+     }
++
++    core->plugged_threads = -1;
++}
++
++static void cpu_core_realize(DeviceState *dev, Error **errp)
++{
++    CPUCore *core = CPU_CORE(dev);
++
++    if (core->plugged_threads > core->nr_threads) {
++        error_setg(errp, "Plugged threads (plugged-threads: %d) must "
++                   "not be more than max threads (nr-threads: %d)",
++                   core->plugged_threads, core->nr_threads);
++        return;
++    } else if (core->plugged_threads == -1) {
++        core->plugged_threads = core->nr_threads;
++    }
+ }
+ 
+ static void cpu_core_class_init(ObjectClass *oc, void *data)
+@@ -57,6 +87,9 @@ static void cpu_core_class_init(ObjectClass *oc, void *data)
+     set_bit(DEVICE_CATEGORY_CPU, dc->categories);
+     object_class_property_add(oc, "nr-threads", "int", core_prop_get_nr_threads,
+                               core_prop_set_nr_threads, NULL, NULL);
++    object_class_property_add(oc, "plugged-threads", "int", NULL,
++                              core_prop_set_plugged_threads, NULL, NULL);
++    dc->realize = cpu_core_realize;
+ }
+ 
+ static const TypeInfo cpu_core_type_info = {
+diff --git a/hw/ppc/pnv_core.c b/hw/ppc/pnv_core.c
+index a90d1ec92bd8..8b75739697d1 100644
+--- a/hw/ppc/pnv_core.c
++++ b/hw/ppc/pnv_core.c
+@@ -276,6 +276,8 @@ static void pnv_core_realize(DeviceState *dev, Error **errp)
+ 
+     assert(pc->chip);
+ 
++    pcc->parent_realize(dev, errp);
++
+     pc->threads = g_new(PowerPCCPU *, cc->nr_threads);
+     for (i = 0; i < cc->nr_threads; i++) {
+         PowerPCCPU *cpu;
+@@ -376,11 +378,13 @@ static void pnv_core_power10_class_init(ObjectClass *oc, void *data)
+ static void pnv_core_class_init(ObjectClass *oc, void *data)
+ {
+     DeviceClass *dc = DEVICE_CLASS(oc);
++    PnvCoreClass *pcc = PNV_CORE_CLASS(oc);
+ 
+-    dc->realize = pnv_core_realize;
+     dc->unrealize = pnv_core_unrealize;
+     device_class_set_props(dc, pnv_core_properties);
+     dc->user_creatable = false;
++    device_class_set_parent_realize(dc, pnv_core_realize,
++                                    &pcc->parent_realize);
+ }
+ 
+ #define DEFINE_PNV_CORE_TYPE(family, cpu_model) \
+diff --git a/hw/ppc/spapr_cpu_core.c b/hw/ppc/spapr_cpu_core.c
+index 7c2ea1424747..5533a386f350 100644
+--- a/hw/ppc/spapr_cpu_core.c
++++ b/hw/ppc/spapr_cpu_core.c
+@@ -331,6 +331,7 @@ static void spapr_cpu_core_realize(DeviceState *dev, Error **errp)
+         (SpaprMachineState *) object_dynamic_cast(qdev_get_machine(),
+                                                   TYPE_SPAPR_MACHINE);
+     SpaprCpuCore *sc = SPAPR_CPU_CORE(OBJECT(dev));
++    SpaprCpuCoreClass *scc = SPAPR_CPU_CORE_GET_CLASS(sc);
+     CPUCore *cc = CPU_CORE(OBJECT(dev));
+     int i;
+ 
+@@ -339,6 +340,8 @@ static void spapr_cpu_core_realize(DeviceState *dev, Error **errp)
+         return;
+     }
+ 
++    scc->parent_realize(dev, errp);
++
+     qemu_register_reset(spapr_cpu_core_reset_handler, sc);
+     sc->threads = g_new0(PowerPCCPU *, cc->nr_threads);
+     for (i = 0; i < cc->nr_threads; i++) {
+@@ -363,11 +366,12 @@ static void spapr_cpu_core_class_init(ObjectClass *oc, void *data)
+     DeviceClass *dc = DEVICE_CLASS(oc);
+     SpaprCpuCoreClass *scc = SPAPR_CPU_CORE_CLASS(oc);
+ 
+-    dc->realize = spapr_cpu_core_realize;
+     dc->unrealize = spapr_cpu_core_unrealize;
+     dc->reset = spapr_cpu_core_reset;
+     device_class_set_props(dc, spapr_cpu_core_properties);
+     scc->cpu_type = data;
++    device_class_set_parent_realize(dc, spapr_cpu_core_realize,
++                                    &scc->parent_realize);
+ }
+ 
+ #define DEFINE_SPAPR_CPU_CORE_TYPE(cpu_model) \
+diff --git a/include/hw/cpu/core.h b/include/hw/cpu/core.h
+index 17f117bd5225..87d50151ab01 100644
+--- a/include/hw/cpu/core.h
++++ b/include/hw/cpu/core.h
+@@ -21,7 +21,16 @@ struct CPUCore {
+     DeviceState parent_obj;
+ 
+     /*< public >*/
++    int core_id;
++
++    /* Maximum number of threads contained in this core. */
+     int nr_threads;
++
++    /*
++     * How many threads should be plugged in this core via
++     * "-device"/"device_add"?
++     */
++    int plugged_threads;
  };
  
- /*
-@@ -456,7 +460,7 @@ struct qemu_work_item;
-  */
- struct CPUState {
-     /*< private >*/
--    DeviceState parent_obj;
-+    CPUTopoState parent_obj;
-     /* cache to avoid expensive CPU_GET_CLASS */
-     CPUClass *cc;
+ #endif
+diff --git a/include/hw/ppc/pnv_core.h b/include/hw/ppc/pnv_core.h
+index 56c3f6b51f2f..3b9edf69f9fb 100644
+--- a/include/hw/ppc/pnv_core.h
++++ b/include/hw/ppc/pnv_core.h
+@@ -49,6 +49,8 @@ struct PnvCoreClass {
      /*< public >*/
+     const MemoryRegionOps *xscom_ops;
+     uint64_t xscom_size;
++
++    DeviceRealize parent_realize;
+ };
+ 
+ #define PNV_CORE_TYPE_SUFFIX "-" TYPE_PNV_CORE
+diff --git a/include/hw/ppc/spapr_cpu_core.h b/include/hw/ppc/spapr_cpu_core.h
+index db3e515051ca..dabdbd4bcbc9 100644
+--- a/include/hw/ppc/spapr_cpu_core.h
++++ b/include/hw/ppc/spapr_cpu_core.h
+@@ -37,6 +37,8 @@ struct SpaprCpuCoreClass {
+ 
+     /*< public >*/
+     const char *cpu_type;
++
++    DeviceRealize parent_realize;
+ };
+ 
+ const char *spapr_get_cpu_core_type(const char *cpu_type);
 -- 
 2.34.1
 
