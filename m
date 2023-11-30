@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94C7FC4167B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:33:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A72CBC4167B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:33:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8i5P-0001kr-If; Thu, 30 Nov 2023 09:32:15 -0500
+	id 1r8i6C-0003mf-LA; Thu, 30 Nov 2023 09:33:05 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i5O-0001k8-6X; Thu, 30 Nov 2023 09:32:14 -0500
+ id 1r8i6B-0003gj-Hk; Thu, 30 Nov 2023 09:33:03 -0500
 Received: from mgamail.intel.com ([192.55.52.43])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i5L-00018C-4R; Thu, 30 Nov 2023 09:32:13 -0500
+ id 1r8i65-0001EW-Ja; Thu, 30 Nov 2023 09:33:03 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1701354731; x=1732890731;
+ t=1701354777; x=1732890777;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=vOtFxW4vj/U4kztv92p8xu/6iieeFFSa0l7Rf+yqZFI=;
- b=AhfhMEJUM+u9rmyvO32IPdp0wSYzhNAwN2WXM/wZ/RWr4kBSQd2eg/Wj
- BpZcqG6oGj4ExHNZDBK3IMUAmCSUVPz9U0DM7b8ajKczh9D7XlFdoXGBx
- QLAEmlzaUzldZY8fzqgw6+qX+GDNHKuEol+Fgs8L9mMM9fGyw0GQA8sUN
- UhFvCyOR+2y6PtX1WL8SoNPRkDaVHKD4LmhScBNWY6454m7tvaZsIvSaD
- vDU0xK+m0lCGqNqcN2NkIyVPNWdP3fWRvA53P/lmGxCBSMvq2R4Cl/MMm
- D2DYn+92Xx7CoNDmDe4rcCXKiD2A8jBLzQGMhpOQFudyShdR/T2GqRcf1 g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479531333"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479531333"
+ bh=rj2qhjfojWttufVsjPIiSdC7tmdmcTNlZ7nywO+2iko=;
+ b=dO4Aez7JrHM7v38FGTfGLWF0uORB5obZxpc3iXPJf7dbriTn8K4H9FcD
+ 6losTWfcMEH82P+iZs/jWXJHH1ummgG/PPkzxPs0Rorw43dUxq8zvYPJ0
+ VmW/FtwiGNf1Sv1yrR43JJBtseVV80M8cPYMDe+ETUkpFtE3zaeSRqlT+
+ tY2LcLshTuI2jUqMGMzt3Ose8jHnE0u1Rcbg6QPWvCW2y7wekVSxWwaSJ
+ 9Vv+Pn+5qMIpvXCzFMD1IhWpghdUoh6SIitkAor7H04J3utXJXD/UhmJP
+ ebzw45PAHCKFgHhLrhy3JKz1V1YEauijAX4OBl51nvuit2jmyP8msOk8M g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479531720"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479531720"
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:31:39 -0800
+ 30 Nov 2023 06:32:36 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942729711"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942729711"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942729870"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942729870"
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:31:29 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:32:26 -0800
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -72,9 +72,10 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
  Thomas Huth <thuth@redhat.com>, Zhiyuan Lv <zhiyuan.lv@intel.com>,
  Zhenyu Wang <zhenyu.z.wang@intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
  Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 07/41] qdev: Introduce parent option in -device
-Date: Thu, 30 Nov 2023 22:41:29 +0800
-Message-Id: <20231130144203.2307629-8-zhao1.liu@linux.intel.com>
+Subject: [RFC 13/41] hw/core/cpu: Convert CPU from general device to topology
+ device
+Date: Thu, 30 Nov 2023 22:41:35 +0800
+Message-Id: <20231130144203.2307629-14-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
@@ -106,185 +107,158 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-Currently, the devices added by "-device" are linked via bus, and are
-set the parent as peripheral-anon or peripheral containers of the
-machine.
+Convert CPU to topology device then its parent topology devices could
+count the number of CPUs when new CPUs are added into topology tree.
 
-But this is not enough for building CPU topology hierarchies as:
-1. The relationship between different CPU hierarchies is child<>
-   property other than link<> property, and they shouldn't be linked
-   using the special bus.
-2. The canonical path of device is built from the child<> property, and
-   the well defined CPU topology hierarchies ask their canonical path to
-   reflect the correct topological relationship.
-
-With these, the child<> property support is needed for QDev interface to
-allow user to configure proper parent in "-device".
-
-Introduce the "parent" option in "-device" to create the child<>
-property. This option asks for the device id of the parent device.
+Note since CPUs are created from *_init_cpus() in MachineClass.init() or
+added from hotplug way, it depends on board initialization. Thus CPU
+topology device isn't marked as DEVICE_CATEGORY_CPU_DEF and it will only
+be created after board initialization.
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- hw/xen/xen-legacy-backend.c |  2 +-
- include/monitor/qdev.h      |  3 ++-
- system/qdev-monitor.c       | 50 ++++++++++++++++++++++++++-----------
- 3 files changed, 38 insertions(+), 17 deletions(-)
+ accel/kvm/kvm-all.c   |  4 ++--
+ hw/core/cpu-common.c  | 25 +++++++++++++++++++++----
+ include/hw/core/cpu.h |  8 ++++++--
+ 3 files changed, 29 insertions(+), 8 deletions(-)
 
-diff --git a/hw/xen/xen-legacy-backend.c b/hw/xen/xen-legacy-backend.c
-index 124dd5f3d687..70ad11c6287e 100644
---- a/hw/xen/xen-legacy-backend.c
-+++ b/hw/xen/xen-legacy-backend.c
-@@ -184,7 +184,7 @@ static struct XenLegacyDevice *xen_be_get_xendev(const char *type, int dom,
-     object_initialize(&xendev->qdev, ops->size, TYPE_XENBACKEND);
-     OBJECT(xendev)->free = g_free;
-     qdev_set_id(DEVICE(xendev), g_strdup_printf("xen-%s-%d", type, dev),
--                &error_fatal);
-+                NULL, &error_fatal);
-     qdev_realize(DEVICE(xendev), xen_sysbus, &error_fatal);
-     object_unref(OBJECT(xendev));
- 
-diff --git a/include/monitor/qdev.h b/include/monitor/qdev.h
-index f5fd6e6c1ffc..3d9d06158e5f 100644
---- a/include/monitor/qdev.h
-+++ b/include/monitor/qdev.h
-@@ -16,6 +16,7 @@ DeviceState *qdev_device_add_from_qdict(const QDict *opts, long *category,
-  * qdev_set_id: parent the device and set its id if provided.
-  * @dev: device to handle
-  * @id: id to be given to the device, or NULL.
-+ * @parent: parent to be set for the device, or NULL.
-  *
-  * Returns: the id of the device in case of success; otherwise NULL.
-  *
-@@ -34,6 +35,6 @@ DeviceState *qdev_device_add_from_qdict(const QDict *opts, long *category,
-  * returned string is owned by the corresponding child property and must
-  * not be freed by the caller.
-  */
--const char *qdev_set_id(DeviceState *dev, char *id, Error **errp);
-+const char *qdev_set_id(DeviceState *dev, char *id, char *parent, Error **errp);
- 
- #endif
-diff --git a/system/qdev-monitor.c b/system/qdev-monitor.c
-index 0261937b8462..8f56113eef65 100644
---- a/system/qdev-monitor.c
-+++ b/system/qdev-monitor.c
-@@ -587,22 +587,33 @@ static BusState *qbus_find(const char *path, Error **errp)
- }
- 
- static Object *qdev_find_peripheral_parent(DeviceState *dev,
-+                                           char *parent_id,
-                                            Error **errp)
- {
-     Object *parent_obj, *obj = OBJECT(dev);
- 
--    parent_obj = uc_provide_default_parent(obj, errp);
--    if (*errp) {
--        return NULL;
--    }
-+    if (parent_id) {
-+        parent_obj = object_resolve_path_from(qdev_get_peripheral(),
-+                                              parent_id, NULL);
-+        if (parent_obj) {
-+            if (uc_check_user_parent(obj, parent_obj)) {
-+                return parent_obj;
-+            }
-+        }
-+    } else {
-+        parent_obj = uc_provide_default_parent(obj, errp);
-+        if (*errp) {
-+            return NULL;
-+        }
- 
--    if (parent_obj) {
--        /*
--         * Non-anonymous parents (under "/peripheral") are allowed to
--         * be accessed to create child<> properties.
--         */
--        if (object_is_child_from(parent_obj, qdev_get_peripheral())) {
--            return parent_obj;
-+        if (parent_obj) {
-+            /*
-+             * Non-anonymous parents (under "/peripheral") are allowed to
-+             * be accessed to create child<> properties.
-+             */
-+            if (object_is_child_from(parent_obj, qdev_get_peripheral())) {
-+                return parent_obj;
-+            }
-         }
-     }
- 
-@@ -628,7 +639,8 @@ static bool qdev_pre_check_device_id(char *id, Error **errp)
- }
- 
- /* Takes ownership of @id, will be freed when deleting the device */
--const char *qdev_set_id(DeviceState *dev, char *id, Error **errp)
-+const char *qdev_set_id(DeviceState *dev, char *id,
-+                        char *parent, Error **errp)
- {
-     Object *parent_obj = NULL;
-     ObjectProperty *prop;
-@@ -639,7 +651,7 @@ const char *qdev_set_id(DeviceState *dev, char *id, Error **errp)
-     uc = (UserChild *)object_dynamic_cast(OBJECT(dev), TYPE_USER_CHILD);
- 
-     if (uc) {
--        parent_obj = qdev_find_peripheral_parent(dev, errp);
-+        parent_obj = qdev_find_peripheral_parent(dev, parent, errp);
-         if (*errp) {
-             goto err;
-         }
-@@ -655,6 +667,11 @@ const char *qdev_set_id(DeviceState *dev, char *id, Error **errp)
-                 goto err;
+diff --git a/accel/kvm/kvm-all.c b/accel/kvm/kvm-all.c
+index e39a810a4e92..2eee3eb95907 100644
+--- a/accel/kvm/kvm-all.c
++++ b/accel/kvm/kvm-all.c
+@@ -3953,7 +3953,7 @@ static void query_stats(StatsResultList **result, StatsTarget target,
+         break;
+     case STATS_TARGET_VCPU:
+         add_stats_entry(result, STATS_PROVIDER_KVM,
+-                        cpu->parent_obj.canonical_path,
++                        DEVICE(cpu)->canonical_path,
+                         stats_list);
+         break;
+     default:
+@@ -4045,7 +4045,7 @@ static void query_stats_cb(StatsResultList **result, StatsTarget target,
+         stats_args.names = names;
+         stats_args.errp = errp;
+         CPU_FOREACH(cpu) {
+-            if (!apply_str_list_filter(cpu->parent_obj.canonical_path, targets)) {
++            if (!apply_str_list_filter(DEVICE(cpu)->canonical_path, targets)) {
+                 continue;
              }
-         }
-+        g_free(parent);
-+    } else if (parent) {
-+        error_setg(errp, "Only the device implemented user-child "
-+                   "interface supports `parent` option.");
-+        goto err;
-     }
+             query_stats_vcpu(cpu, &stats_args);
+diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
+index 82dae51a550b..e9ed84ff5386 100644
+--- a/hw/core/cpu-common.c
++++ b/hw/core/cpu-common.c
+@@ -195,6 +195,16 @@ static void cpu_common_realizefn(DeviceState *dev, Error **errp)
+ {
+     CPUState *cpu = CPU(dev);
+     Object *machine = qdev_get_machine();
++    CPUClass *cc = CPU_GET_CLASS(cpu);
++
++    /*
++     * The parent topology realize() must be completed before cpu_resume()
++     * where the CPU starts to run.
++     */
++    cc->parent_realize(dev, errp);
++    if (*errp) {
++        return;
++    }
  
-     /*
-@@ -684,6 +701,7 @@ const char *qdev_set_id(DeviceState *dev, char *id, Error **errp)
+     /* qdev_get_machine() can return something that's not TYPE_MACHINE
+      * if this is one of the user-only emulators; in that case there's
+@@ -225,6 +235,7 @@ static void cpu_common_realizefn(DeviceState *dev, Error **errp)
+ static void cpu_common_unrealizefn(DeviceState *dev)
+ {
+     CPUState *cpu = CPU(dev);
++    CPUClass *cc = CPU_GET_CLASS(cpu);
  
-     return prop->name;
- err:
-+    g_free(parent);
-     g_free(id);
-     return NULL;
+     /* Call the plugin hook before clearing the cpu is fully unrealized */
+     if (tcg_enabled()) {
+@@ -233,6 +244,7 @@ static void cpu_common_unrealizefn(DeviceState *dev)
+ 
+     /* NOTE: latest generic point before the cpu is fully unrealized */
+     cpu_exec_unrealizefn(cpu);
++    cc->parent_unrealize(dev);
  }
-@@ -694,7 +712,7 @@ DeviceState *qdev_device_add_from_qdict(const QDict *opts, long *category,
-     ERRP_GUARD();
-     DeviceClass *dc;
-     const char *driver, *path;
--    char *id;
-+    char *id, *parent;
-     DeviceState *dev = NULL;
-     BusState *bus = NULL;
  
-@@ -772,12 +790,14 @@ DeviceState *qdev_device_add_from_qdict(const QDict *opts, long *category,
-     }
+ static void cpu_common_initfn(Object *obj)
+@@ -275,6 +287,7 @@ static void cpu_class_init(ObjectClass *klass, void *data)
+ {
+     DeviceClass *dc = DEVICE_CLASS(klass);
+     ResettableClass *rc = RESETTABLE_CLASS(klass);
++    CPUTopoClass *tc = CPU_TOPO_CLASS(klass);
+     CPUClass *k = CPU_CLASS(klass);
  
-     id = g_strdup(qdict_get_try_str(opts, "id"));
-+    parent = g_strdup(qdict_get_try_str(opts, "parent"));
- 
-     /* set properties */
-     dev->opts = qdict_clone_shallow(opts);
-     qdict_del(dev->opts, "driver");
-     qdict_del(dev->opts, "bus");
-     qdict_del(dev->opts, "id");
-+    qdict_del(dev->opts, "parent");
- 
-     object_set_properties_from_keyval(&dev->parent_obj, dev->opts, from_json,
-                                       errp);
-@@ -789,7 +809,7 @@ DeviceState *qdev_device_add_from_qdict(const QDict *opts, long *category,
-      * set dev's parent and register its id.
-      * If it fails it means the id is already taken.
+     k->parse_features = cpu_common_parse_features;
+@@ -282,9 +295,6 @@ static void cpu_class_init(ObjectClass *klass, void *data)
+     k->has_work = cpu_common_has_work;
+     k->gdb_read_register = cpu_common_gdb_read_register;
+     k->gdb_write_register = cpu_common_gdb_write_register;
+-    set_bit(DEVICE_CATEGORY_CPU, dc->categories);
+-    dc->realize = cpu_common_realizefn;
+-    dc->unrealize = cpu_common_unrealizefn;
+     rc->phases.hold = cpu_common_reset_hold;
+     cpu_class_init_props(dc);
+     /*
+@@ -292,11 +302,18 @@ static void cpu_class_init(ObjectClass *klass, void *data)
+      * IRQs, adding reset handlers, halting non-first CPUs, ...
       */
--    if (!qdev_set_id(dev, id, errp)) {
-+    if (!qdev_set_id(dev, id, parent, errp)) {
-         goto err_del_dev;
-     }
+     dc->user_creatable = false;
++    /* CPU is the minimum granularity for hotplug. */
++    dc->hotpluggable = true;
++    device_class_set_parent_realize(dc, cpu_common_realizefn,
++                                    &k->parent_realize);
++    device_class_set_parent_unrealize(dc, cpu_common_unrealizefn,
++                                      &k->parent_unrealize);
++    tc->level = CPU_TOPO_THREAD;
+ }
  
+ static const TypeInfo cpu_type_info = {
+     .name = TYPE_CPU,
+-    .parent = TYPE_DEVICE,
++    .parent = TYPE_CPU_TOPO,
+     .instance_size = sizeof(CPUState),
+     .instance_init = cpu_common_initfn,
+     .instance_finalize = cpu_common_finalize,
+diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+index c0c8320413e5..a700f7c39140 100644
+--- a/include/hw/core/cpu.h
++++ b/include/hw/core/cpu.h
+@@ -20,6 +20,7 @@
+ #ifndef QEMU_CPU_H
+ #define QEMU_CPU_H
+ 
++#include "hw/core/cpu-topo.h"
+ #include "hw/qdev-core.h"
+ #include "disas/dis-asm.h"
+ #include "exec/cpu-common.h"
+@@ -146,7 +147,7 @@ struct SysemuCPUOps;
+  */
+ struct CPUClass {
+     /*< private >*/
+-    DeviceClass parent_class;
++    CPUTopoClass parent_class;
+     /*< public >*/
+ 
+     ObjectClass *(*class_by_name)(const char *cpu_model);
+@@ -191,6 +192,9 @@ struct CPUClass {
+     int reset_dump_flags;
+     int gdb_num_core_regs;
+     bool gdb_stop_before_watchpoint;
++
++    DeviceRealize parent_realize;
++    DeviceUnrealize parent_unrealize;
+ };
+ 
+ /*
+@@ -456,7 +460,7 @@ struct qemu_work_item;
+  */
+ struct CPUState {
+     /*< private >*/
+-    DeviceState parent_obj;
++    CPUTopoState parent_obj;
+     /* cache to avoid expensive CPU_GET_CLASS */
+     CPUClass *cc;
+     /*< public >*/
 -- 
 2.34.1
 
