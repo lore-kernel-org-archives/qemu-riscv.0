@@ -4,37 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5782C4167B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 13:21:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8AFEC07CA9
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 13:21:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8gyQ-00012j-1z; Thu, 30 Nov 2023 08:20:58 -0500
+	id 1r8gyy-0001xt-Tu; Thu, 30 Nov 2023 08:21:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <SRS0=Tvl7=HL=kaod.org=clg@ozlabs.org>)
- id 1r8gyJ-000108-Hn; Thu, 30 Nov 2023 08:20:51 -0500
-Received: from mail.ozlabs.org ([2404:9400:2221:ea00::3]
- helo=gandalf.ozlabs.org)
+ id 1r8gym-0001b4-71; Thu, 30 Nov 2023 08:21:24 -0500
+Received: from gandalf.ozlabs.org ([150.107.74.76])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <SRS0=Tvl7=HL=kaod.org=clg@ozlabs.org>)
- id 1r8gyG-0003hC-KZ; Thu, 30 Nov 2023 08:20:51 -0500
-Received: from gandalf.ozlabs.org (mail.ozlabs.org
- [IPv6:2404:9400:2221:ea00::3])
- by gandalf.ozlabs.org (Postfix) with ESMTP id 4Sgxdj5bkSz4xjY;
- Fri,  1 Dec 2023 00:20:41 +1100 (AEDT)
+ id 1r8gyj-0003kM-Lh; Thu, 30 Nov 2023 08:21:19 -0500
+Received: from gandalf.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
+ by gandalf.ozlabs.org (Postfix) with ESMTP id 4SgxfF5JRqz4xhb;
+ Fri,  1 Dec 2023 00:21:09 +1100 (AEDT)
 Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 4Sgxck69gcz4xW7;
- Fri,  1 Dec 2023 00:19:50 +1100 (AEDT)
-Message-ID: <f9b6941c-15b9-40ec-bc17-a154678d1a1c@kaod.org>
-Date: Thu, 30 Nov 2023 14:19:44 +0100
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 4SgxdL6Gzsz4xdZ;
+ Fri,  1 Dec 2023 00:20:22 +1100 (AEDT)
+Message-ID: <d9164828-22fb-42a4-b71a-5ae14a172d50@kaod.org>
+Date: Thu, 30 Nov 2023 14:20:17 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/6] qemu/main-loop: rename qemu_cond_wait_iothread() to
- qemu_cond_wait_bql()
+Subject: Re: [PATCH 4/6] system/cpus: rename qemu_global_mutex to qemu_bql
 Content-Language: en-US
 To: Stefan Hajnoczi <stefanha@redhat.com>, qemu-devel@nongnu.org
 Cc: Jean-Christophe Dubois <jcd@tribudubois.net>,
@@ -89,20 +86,19 @@ Cc: Jean-Christophe Dubois <jcd@tribudubois.net>,
  <leobras@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>
 References: <20231129212625.1051502-1-stefanha@redhat.com>
- <20231129212625.1051502-4-stefanha@redhat.com>
+ <20231129212625.1051502-5-stefanha@redhat.com>
 From: =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>
-In-Reply-To: <20231129212625.1051502-4-stefanha@redhat.com>
+In-Reply-To: <20231129212625.1051502-5-stefanha@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2404:9400:2221:ea00::3;
+Received-SPF: pass client-ip=150.107.74.76;
  envelope-from=SRS0=Tvl7=HL=kaod.org=clg@ozlabs.org; helo=gandalf.ozlabs.org
-X-Spam_score_int: -39
-X-Spam_score: -4.0
-X-Spam_bar: ----
-X-Spam_report: (-4.0 / 5.0 requ) BAYES_00=-1.9,
- HEADER_FROM_DIFFERENT_DOMAINS=0.249, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9,
+ HEADER_FROM_DIFFERENT_DOMAINS=0.249, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -119,8 +115,10 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 11/29/23 22:26, Stefan Hajnoczi wrote:
-> The name "iothread" is overloaded. Use the term Big QEMU Lock (BQL)
-> instead, it is already widely used and unambiguous.
+> The APIs using qemu_global_mutex now follow the Big QEMU Lock (BQL)
+> nomenclature. It's a little strange that the actual QemuMutex variable
+> that embodies the BQL is called qemu_global_mutex instead of qemu_bql.
+> Rename it for consistency.
 > 
 > Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 
