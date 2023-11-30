@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D83FAC4167B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 20:38:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7604DC4167B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 20:44:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8nmx-0001Pm-U4; Thu, 30 Nov 2023 15:37:35 -0500
+	id 1r8nsq-0004xt-1t; Thu, 30 Nov 2023 15:43:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <stefanha@redhat.com>)
- id 1r8nmt-0001JB-R5
- for qemu-riscv@nongnu.org; Thu, 30 Nov 2023 15:37:32 -0500
+ id 1r8nso-0004wo-JQ
+ for qemu-riscv@nongnu.org; Thu, 30 Nov 2023 15:43:38 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <stefanha@redhat.com>)
- id 1r8nms-0007Uq-4H
- for qemu-riscv@nongnu.org; Thu, 30 Nov 2023 15:37:31 -0500
+ id 1r8nsl-0008UW-KG
+ for qemu-riscv@nongnu.org; Thu, 30 Nov 2023 15:43:38 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1701376649;
+ s=mimecast20190719; t=1701377014;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=+iKxVT3Aoxm2ETYbHgSKpvUXyQ0XJ8rFvA2vgboplHU=;
- b=hW6GsID15gGACN9CVU77siWFGuwahUR66MCO0GWqLMsF8Tz6sYppPnvfWBCorajj4LmYpJ
- oHQ04JiIgAxqyJ749Q7FdY0pDcTvPZS0KxC08BLRf5afUkJ+RtxVBh/VUp+sOA2066xvLs
- yXnrlw59dHt33hdieQm7DlHMA4d11Qk=
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-342-EGzAGfmtP1Gfd_b9MrP_Pw-1; Thu,
- 30 Nov 2023 15:37:25 -0500
-X-MC-Unique: EGzAGfmtP1Gfd_b9MrP_Pw-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com
- [10.11.54.7])
+ bh=cNAnS8dhB7e4TvDt7MCxzeAFcs3pq2oyNt9JbDuu0+0=;
+ b=XQsADhPo9zzCyI4BfNmmG5MHeS7sHsgVA5kZfbtrXlyUw02+B6YwL6YBCgbQaWfqsnX/1Z
+ t69HTR8FXzXonnxOzWr8yVu3RbJoqFpRFY40GJxIJ2BJC0tQ2NP3RR1s7psIC0XjU48ur1
+ Ppo36AlZ/evJSjWH08ldvQjMQYky2wk=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-488-YVQAL4REMrW4yB-eXJoi0A-1; Thu, 30 Nov 2023 15:43:32 -0500
+X-MC-Unique: YVQAL4REMrW4yB-eXJoi0A-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.8])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 5D6F62802292;
- Thu, 30 Nov 2023 20:37:21 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 13067828AC0;
+ Thu, 30 Nov 2023 20:43:29 +0000 (UTC)
 Received: from localhost (unknown [10.39.192.46])
- by smtp.corp.redhat.com (Postfix) with ESMTP id DDF641C060BD;
- Thu, 30 Nov 2023 20:37:19 +0000 (UTC)
-Date: Thu, 30 Nov 2023 15:37:18 -0500
+ by smtp.corp.redhat.com (Postfix) with ESMTP id E5D84C0BDC0;
+ Thu, 30 Nov 2023 20:43:26 +0000 (UTC)
+Date: Thu, 30 Nov 2023 15:43:25 -0500
 From: Stefan Hajnoczi <stefanha@redhat.com>
-To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
+To: Peter Xu <peterx@redhat.com>
 Cc: qemu-devel@nongnu.org, Jean-Christophe Dubois <jcd@tribudubois.net>,
  Fabiano Rosas <farosas@suse.de>, qemu-s390x@nongnu.org,
  Song Gao <gaosong@loongson.cn>,
@@ -92,28 +92,29 @@ Cc: qemu-devel@nongnu.org, Jean-Christophe Dubois <jcd@tribudubois.net>,
  Bin Meng <bin.meng@windriver.com>,
  Stefano Stabellini <sstabellini@kernel.org>, kvm@vger.kernel.org,
  qemu-block@nongnu.org, Halil Pasic <pasic@linux.ibm.com>,
- Peter Xu <peterx@redhat.com>, Anthony Perard <anthony.perard@citrix.com>,
+ Anthony Perard <anthony.perard@citrix.com>,
  Harsh Prateek Bora <harshpb@linux.ibm.com>,
  Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
  Eduardo Habkost <eduardo@habkost.net>, Paolo Bonzini <pbonzini@redhat.com>,
  Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
  =?iso-8859-1?Q?C=E9dric?= Le Goater <clg@kaod.org>, qemu-ppc@nongnu.org,
+ Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
  Christian Borntraeger <borntraeger@linux.ibm.com>,
  Akihiko Odaki <akihiko.odaki@daynix.com>,
  Leonardo Bras <leobras@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>
-Subject: Re: [PATCH 6/6] Rename "QEMU global mutex" to "BQL" in comments and
- docs
-Message-ID: <20231130203718.GD1184658@fedora>
+Subject: Re: [PATCH 1/6] system/cpus: rename qemu_mutex_lock_iothread() to
+ qemu_bql_lock()
+Message-ID: <20231130204325.GE1184658@fedora>
 References: <20231129212625.1051502-1-stefanha@redhat.com>
- <20231129212625.1051502-7-stefanha@redhat.com>
- <fcaff24d-0ced-4547-898f-a9b8bf49be45@linaro.org>
+ <20231129212625.1051502-2-stefanha@redhat.com>
+ <ZWjr0TKxihlpd1jm@x1n>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="rAX955JzN10OrQ/Q"
+ protocol="application/pgp-signature"; boundary="SBmcOIqLLg4zQdMA"
 Content-Disposition: inline
-In-Reply-To: <fcaff24d-0ced-4547-898f-a9b8bf49be45@linaro.org>
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.7
+In-Reply-To: <ZWjr0TKxihlpd1jm@x1n>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.8
 Received-SPF: pass client-ip=170.10.133.124; envelope-from=stefanha@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
@@ -123,7 +124,7 @@ X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -140,92 +141,83 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
---rAX955JzN10OrQ/Q
-Content-Type: text/plain; charset=iso-8859-1
+--SBmcOIqLLg4zQdMA
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 30, 2023 at 02:49:48PM +0100, Philippe Mathieu-Daud=E9 wrote:
-> On 29/11/23 22:26, Stefan Hajnoczi wrote:
-> > The term "QEMU global mutex" is identical to the more widely used Big
-> > QEMU Lock ("BQL"). Update the code comments and documentation to use
-> > "BQL" instead of "QEMU global mutex".
+On Thu, Nov 30, 2023 at 03:08:49PM -0500, Peter Xu wrote:
+> On Wed, Nov 29, 2023 at 04:26:20PM -0500, Stefan Hajnoczi wrote:
+> > The Big QEMU Lock (BQL) has many names and they are confusing. The
+> > actual QemuMutex variable is called qemu_global_mutex but it's commonly
+> > referred to as the BQL in discussions and some code comments. The
+> > locking APIs, however, are called qemu_mutex_lock_iothread() and
+> > qemu_mutex_unlock_iothread().
+> >=20
+> > The "iothread" name is historic and comes from when the main thread was
+> > split into into KVM vcpu threads and the "iothread" (now called the main
+> > loop thread). I have contributed to the confusion myself by introducing
+> > a separate --object iothread, a separate concept unrelated to the BQL.
+> >=20
+> > The "iothread" name is no longer appropriate for the BQL. Rename the
+> > locking APIs to:
+> > - void qemu_bql_lock(void)
+> > - void qemu_bql_unlock(void)
+> > - bool qemu_bql_locked(void)
+> >=20
+> > There are more APIs with "iothread" in their names. Subsequent patches
+> > will rename them. There are also comments and documentation that will be
+> > updated in later patches.
 > >=20
 > > Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
-> > ---
-> >   docs/devel/multi-thread-tcg.rst   |  7 +++----
-> >   docs/devel/qapi-code-gen.rst      |  2 +-
-> >   docs/devel/replay.rst             |  2 +-
-> >   docs/devel/multiple-iothreads.txt | 16 ++++++++--------
-> >   include/block/blockjob.h          |  6 +++---
-> >   include/io/task.h                 |  2 +-
-> >   include/qemu/coroutine-core.h     |  2 +-
-> >   include/qemu/coroutine.h          |  2 +-
-> >   hw/block/dataplane/virtio-blk.c   |  8 ++++----
-> >   hw/block/virtio-blk.c             |  2 +-
-> >   hw/scsi/virtio-scsi-dataplane.c   |  6 +++---
-> >   net/tap.c                         |  2 +-
-> >   12 files changed, 28 insertions(+), 29 deletions(-)
 >=20
+> Acked-by: Peter Xu <peterx@redhat.com>
 >=20
-> > diff --git a/include/block/blockjob.h b/include/block/blockjob.h
-> > index e594c10d23..b2bc7c04d6 100644
-> > --- a/include/block/blockjob.h
-> > +++ b/include/block/blockjob.h
-> > @@ -54,7 +54,7 @@ typedef struct BlockJob {
-> >       /**
-> >        * Speed that was set with @block_job_set_speed.
-> > -     * Always modified and read under QEMU global mutex (GLOBAL_STATE_=
-CODE).
-> > +     * Always modified and read under BQL (GLOBAL_STATE_CODE).
+> Two nickpicks:
 >=20
-> "under the BQL"
->=20
-> >        */
-> >       int64_t speed;
-> > @@ -66,7 +66,7 @@ typedef struct BlockJob {
-> >       /**
-> >        * Block other operations when block job is running.
-> > -     * Always modified and read under QEMU global mutex (GLOBAL_STATE_=
-CODE).
-> > +     * Always modified and read under BQL (GLOBAL_STATE_CODE).
->=20
-> Ditto,
->=20
-> >        */
-> >       Error *blocker;
-> > @@ -89,7 +89,7 @@ typedef struct BlockJob {
-> >       /**
-> >        * BlockDriverStates that are involved in this block job.
-> > -     * Always modified and read under QEMU global mutex (GLOBAL_STATE_=
-CODE).
-> > +     * Always modified and read under BQL (GLOBAL_STATE_CODE).
->=20
-> Ditto.
->=20
-> >        */
-> >       GSList *nodes;
-> >   } BlockJob;
+>   - BQL contains "QEMU" as the 2nd character, so maybe easier to further
+>     rename qemu_bql into bql_?
 
-Will fix in v2.
+Philippe wondered whether the variable name should end with _mutex (or
+_lock is common too), so an alternative might be big_qemu_lock. That's
+imperfect because it doesn't start with the usual qemu_ prefix.
+qemu_big_lock is better in that regard but inconsistent with our BQL
+abbreviation.
+
+I don't like putting an underscore at the end. It's unusual and would
+make me wonder what that means.
+
+Naming is hard, but please discuss and I'm open to change to BQL
+variable's name to whatever we all agree on.
+
+>=20
+>   - Could we keep the full spell of BQL at some places, so people can sti=
+ll
+>     reference it if not familiar?  IIUC most of the BQL helpers will root
+>     back to the major three functions (_lock, _unlock, _locked), perhaps
+>     add a comment of "BQL stands for..." over these three functions as
+>     comment?
+
+Yes, I'll update the doc comments to say "Big QEMU Lock (BQL)" for each
+of these functions.
 
 Stefan
 
---rAX955JzN10OrQ/Q
+--SBmcOIqLLg4zQdMA
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmVo8n4ACgkQnKSrs4Gr
-c8hqqggAtuleOhegca1BHCQqICnBO4Olum6obo9K4B6RhmNaK9kIfqeO3kNFY9K0
-xy7SGfNACel07j3Lttl6p+xHJOe1zaE7IV2o9jKqMK0J09vpTZSXq06ssaTJrYZn
-p2hGeneWnTJU5O3qUpotRsBp19PdMJLL3o2V7fJ+FRmE+0bc1KTCfzaIDC0IWFQD
-rc5d8Et49WwA+aKWhDsn3GeRlvfxIxk/TFHsfdkLSdpU/LVU9lP/ExNVLqwYTNl9
-OChcXKr+5mvuONgflXwub4uzX8FbIS/HoPIIC7uBG5xE+gao+EYmNRXVFFHRC+CP
-/rjI7iW5qJHCSKa8tj2XY0KwbTSlcQ==
-=hoap
+iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmVo8+0ACgkQnKSrs4Gr
+c8jJmAf9E8P/Xu7G6FqCGvOsGt/mlsqbLE31vNsiYxVDEuJJ4a39lBYM8XOY3zUI
+Gg064yxhG8tJGG9m/NXlySw6Sspev3/nD4NPnrVvUGbS7OGjFL9L4oeHzgeK/ude
+U2mtVSBxhVHvx08ya0nKtF3i0ghiSWa+/X83V03smz5ZuMNU1ZXTAzSCp54dwQCH
+nO4Q4Y7nQxE57jSy8rB5HTwxFpmfjfXlzYpF+3rYGj+pjy7vOEuD8jdGBZ3+ts9x
+Cca0JUsQNEHbcUesyE4ToH5KQHOFUQKalbc+knFcT8JuoGXX3MwuS4mp22wi7Gv6
+LDSh2bymbDqhY4xQU5BomaihozS0ww==
+=QeIi
 -----END PGP SIGNATURE-----
 
---rAX955JzN10OrQ/Q--
+--SBmcOIqLLg4zQdMA--
 
 
