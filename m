@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F295C07CA9
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 13:00:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5782C4167B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 13:21:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8gdZ-0000gw-Cl; Thu, 30 Nov 2023 07:59:25 -0500
+	id 1r8gyQ-00012j-1z; Thu, 30 Nov 2023 08:20:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <SRS0=Tvl7=HL=kaod.org=clg@ozlabs.org>)
- id 1r8gdX-0000fp-Mr; Thu, 30 Nov 2023 07:59:23 -0500
+ id 1r8gyJ-000108-Hn; Thu, 30 Nov 2023 08:20:51 -0500
 Received: from mail.ozlabs.org ([2404:9400:2221:ea00::3]
  helo=gandalf.ozlabs.org)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <SRS0=Tvl7=HL=kaod.org=clg@ozlabs.org>)
- id 1r8gdV-0007pe-Qw; Thu, 30 Nov 2023 07:59:23 -0500
+ id 1r8gyG-0003hC-KZ; Thu, 30 Nov 2023 08:20:51 -0500
 Received: from gandalf.ozlabs.org (mail.ozlabs.org
  [IPv6:2404:9400:2221:ea00::3])
- by gandalf.ozlabs.org (Postfix) with ESMTP id 4Sgx912pNvz4xjZ;
- Thu, 30 Nov 2023 23:59:17 +1100 (AEDT)
+ by gandalf.ozlabs.org (Postfix) with ESMTP id 4Sgxdj5bkSz4xjY;
+ Fri,  1 Dec 2023 00:20:41 +1100 (AEDT)
 Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 4Sgx853gFPz4xW7;
- Thu, 30 Nov 2023 23:58:28 +1100 (AEDT)
-Message-ID: <0f414482-a1e7-4863-9ce1-3584b4d43e6c@kaod.org>
-Date: Thu, 30 Nov 2023 13:58:26 +0100
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 4Sgxck69gcz4xW7;
+ Fri,  1 Dec 2023 00:19:50 +1100 (AEDT)
+Message-ID: <f9b6941c-15b9-40ec-bc17-a154678d1a1c@kaod.org>
+Date: Thu, 30 Nov 2023 14:19:44 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] qemu/main-loop: rename QEMU_IOTHREAD_LOCK_GUARD to
- QEMU_BQL_LOCK_GUARD
+Subject: Re: [PATCH 3/6] qemu/main-loop: rename qemu_cond_wait_iothread() to
+ qemu_cond_wait_bql()
 Content-Language: en-US
 To: Stefan Hajnoczi <stefanha@redhat.com>, qemu-devel@nongnu.org
 Cc: Jean-Christophe Dubois <jcd@tribudubois.net>,
@@ -89,9 +89,9 @@ Cc: Jean-Christophe Dubois <jcd@tribudubois.net>,
  <leobras@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>
 References: <20231129212625.1051502-1-stefanha@redhat.com>
- <20231129212625.1051502-3-stefanha@redhat.com>
+ <20231129212625.1051502-4-stefanha@redhat.com>
 From: =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>
-In-Reply-To: <20231129212625.1051502-3-stefanha@redhat.com>
+In-Reply-To: <20231129212625.1051502-4-stefanha@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=2404:9400:2221:ea00::3;
