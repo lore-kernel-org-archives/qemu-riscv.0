@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F317C10DAA
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A3EEC4167B
 	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:36:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8i7X-0006zb-2E; Thu, 30 Nov 2023 09:34:28 -0500
+	id 1r8i6U-0004wZ-FN; Thu, 30 Nov 2023 09:33:22 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i7L-0006NL-WD; Thu, 30 Nov 2023 09:34:16 -0500
+ id 1r8i6S-0004h2-3Q; Thu, 30 Nov 2023 09:33:20 -0500
 Received: from mgamail.intel.com ([192.55.52.43])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i7I-0001Un-OM; Thu, 30 Nov 2023 09:34:15 -0500
+ id 1r8i6O-0001I2-F8; Thu, 30 Nov 2023 09:33:19 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1701354852; x=1732890852;
+ t=1701354796; x=1732890796;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=IhpodbfJau6szIdQazmb+IK5Vtn7KUNNpXNSlzloW+Q=;
- b=FhMQfiO9KA0KRRQSAbFS7bQ58jqH95th0hZs4wonD0peIknsmWm2yy+t
- 1pA/xGSpm3snEqq2eB1EeuLYkzg68R0/oC2kZ8EslPquklCGzzV9IfcWc
- O5engfx66L0brqasSe92mOlYLaS2lxOuCh0Lj+NQhe58U/N5FcKzyWpsp
- enYokScWmi5kFQ4WOb/ypyHAX/fe0eMQMB2Bq0YsPAE8S6pv9ozY3OTlo
- l2OoHKoqxfhMIPtnpIYF1OmkBHqmonbYhyk4V5BGne8VoQNUfdL92mJR1
- jVE6a5Y/jxsdGSTg/fAb6Cz2/P/lV5VMdhO+ixVluNMVf3zVfVenOhl7N A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532154"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479532154"
+ bh=8LquYvv0CgMyC9ho8G2nSKazoduQFmRgmZ/sS4KE0RQ=;
+ b=RlMCp2zwHlIEffgznP5g10ny/lftEpCrRgqgrgIqqKz1fxPE7bGSiXuY
+ aeirM2h8IBbyAfCFJnRGGEUkYhrwibM/UCIBwEUu6ytPq4I/ipFC2Kax2
+ UtC33V/dHXFzZmKwIj50TPuor9s/7N0bVmnDD1JlQFiZziAZJg6aV0g06
+ onpTDKrUruyylimF8uiiR9Q19EsH2OPS47anRN0kbUQnm53T2aruHhT1C
+ Hrsbm+PBnGdaayJP/UIN+sru/reexlaOSET+1HobIQQhFJwu9R4ChLVHr
+ 98Gv+HniT0cxRMCLecwyj2fCMdEb4cx1uggyYUB9gY6eviV2r+lEqwKx+ g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479531893"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479531893"
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:34:09 -0800
+ 30 Nov 2023 06:33:13 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730068"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942730068"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942729990"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942729990"
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:34:00 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:33:04 -0800
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -72,9 +72,10 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
  Thomas Huth <thuth@redhat.com>, Zhiyuan Lv <zhiyuan.lv@intel.com>,
  Zhenyu Wang <zhenyu.z.wang@intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
  Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 23/41] hw/cpu/die: Abstract cpu-die level as topology device
-Date: Thu, 30 Nov 2023 22:41:45 +0800
-Message-Id: <20231130144203.2307629-24-zhao1.liu@linux.intel.com>
+Subject: [RFC 17/41] hw/cpu/core: Convert cpu-core from general device to
+ topology device
+Date: Thu, 30 Nov 2023 22:41:39 +0800
+Message-Id: <20231130144203.2307629-18-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
@@ -106,150 +107,251 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-Abstract die level as a topology device "cpu-die" to allow user to
-create die level topology from cli and later the cpu-dies could be added
-into topology tree.
+Convert cpu-core to topology device then user could create core level
+topology from cli and later the cpu-cores could be added into topology
+tree.
 
-In addition, mark the cpu-die as DEVICE_CATEGORY_CPU_DEF category to
-indicate it belongs to the basic CPU definition and should be created
-from cli before board initialization.
+In addition, mark the common cpu-core as DEVICE_CATEGORY_CPU_DEF
+category to indicate it belongs to the basic CPU definition and should
+be created from cli before board initialization.
+
+But since PPC supports CPU hotplug at core granularity, ppc-core should
+be created after board initialization. Thus, mask the category flag
+DEVICE_CATEGORY_CPU_DEF for ppc-core.
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- MAINTAINERS          |  2 ++
- hw/cpu/die.c         | 46 ++++++++++++++++++++++++++++++++++++++++++++
- hw/cpu/meson.build   |  2 +-
- include/hw/cpu/die.h | 38 ++++++++++++++++++++++++++++++++++++
- 4 files changed, 87 insertions(+), 1 deletion(-)
- create mode 100644 hw/cpu/die.c
- create mode 100644 include/hw/cpu/die.h
+ hw/cpu/core.c                   | 19 ++++++++++++++++---
+ hw/ppc/pnv_core.c               |  6 +++++-
+ hw/ppc/ppc_core.c               |  5 +++++
+ hw/ppc/spapr_cpu_core.c         |  7 ++++++-
+ include/hw/cpu/core.h           | 13 +++++++++++--
+ include/hw/ppc/pnv_core.h       |  1 +
+ include/hw/ppc/spapr_cpu_core.h |  1 +
+ 7 files changed, 45 insertions(+), 7 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 89e350866d6a..91d0936edb32 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1863,6 +1863,7 @@ F: hw/core/machine-smp.c
- F: hw/core/null-machine.c
- F: hw/core/numa.c
- F: hw/cpu/cluster.c
-+F: hw/cpu/die.c
- F: qapi/machine.json
- F: qapi/machine-common.json
- F: qapi/machine-target.json
-@@ -1870,6 +1871,7 @@ F: include/hw/boards.h
- F: include/hw/core/cpu.h
- F: include/hw/core/cpu-topo.h
- F: include/hw/cpu/cluster.h
-+F: include/hw/cpu/die.h
- F: include/sysemu/numa.h
- F: tests/unit/test-smp-parse.c
- T: git https://gitlab.com/ehabkost/qemu.git machine-next
-diff --git a/hw/cpu/die.c b/hw/cpu/die.c
-new file mode 100644
-index 000000000000..06c4f7cc8fa2
---- /dev/null
-+++ b/hw/cpu/die.c
-@@ -0,0 +1,46 @@
-+/*
-+ * CPU die abstract device
-+ *
-+ * Copyright (c) 2023 Intel Corporation
-+ * Author: Zhao Liu <zhao1.liu@intel.com>
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License as published by
-+ * the Free Software Foundation; either version 2 of the License,
-+ * or (at your option) any later version.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU General Public License
-+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "hw/cpu/die.h"
-+
-+static void cpu_die_class_init(ObjectClass *oc, void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(oc);
-+    CPUTopoClass *tc = CPU_TOPO_CLASS(oc);
-+
-+    set_bit(DEVICE_CATEGORY_CPU_DEF, dc->categories);
-+
-+    tc->level = CPU_TOPO_DIE;
-+}
-+
-+static const TypeInfo cpu_die_type_info = {
-+    .name = TYPE_CPU_DIE,
-+    .parent = TYPE_CPU_TOPO,
-+    .class_init = cpu_die_class_init,
-+    .instance_size = sizeof(CPUDie),
-+};
-+
-+static void cpu_die_register_types(void)
-+{
-+    type_register_static(&cpu_die_type_info);
-+}
-+
-+type_init(cpu_die_register_types)
-diff --git a/hw/cpu/meson.build b/hw/cpu/meson.build
-index 6d319947ca0b..e685fe1c7d8a 100644
---- a/hw/cpu/meson.build
-+++ b/hw/cpu/meson.build
-@@ -1,4 +1,4 @@
--system_ss.add(files('core.c', 'cluster.c'))
-+system_ss.add(files('core.c', 'cluster.c', 'die.c'))
+diff --git a/hw/cpu/core.c b/hw/cpu/core.c
+index 15546b5b2339..261b15fa8171 100644
+--- a/hw/cpu/core.c
++++ b/hw/cpu/core.c
+@@ -27,6 +27,7 @@ static void core_prop_set_nr_threads(Object *obj, Visitor *v, const char *name,
+                                      void *opaque, Error **errp)
+ {
+     CPUCore *core = CPU_CORE(obj);
++    CPUTopoState *topo = CPU_TOPO(obj);
+     int64_t value;
  
- system_ss.add(when: 'CONFIG_ARM11MPCORE', if_true: files('arm11mpcore.c'))
- system_ss.add(when: 'CONFIG_REALVIEW', if_true: files('realview_mpcore.c'))
-diff --git a/include/hw/cpu/die.h b/include/hw/cpu/die.h
-new file mode 100644
-index 000000000000..4c68786b5f2f
---- /dev/null
-+++ b/include/hw/cpu/die.h
-@@ -0,0 +1,38 @@
-+/*
-+ * CPU die abstract device
-+ *
-+ * Copyright (c) 2023 Intel Corporation
-+ * Author: Zhao Liu <zhao1.liu@intel.com>
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License as published by
-+ * the Free Software Foundation; either version 2 of the License,
-+ * or (at your option) any later version.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU General Public License
-+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
-+ */
+     if (!visit_type_int(v, name, &value, errp)) {
+@@ -34,6 +35,7 @@ static void core_prop_set_nr_threads(Object *obj, Visitor *v, const char *name,
+     }
+ 
+     core->nr_threads = value;
++    topo->max_children = core->nr_threads;
+ }
+ 
+ static void core_prop_set_plugged_threads(Object *obj, Visitor *v,
+@@ -53,6 +55,7 @@ static void core_prop_set_plugged_threads(Object *obj, Visitor *v,
+ static void cpu_core_instance_init(Object *obj)
+ {
+     CPUCore *core = CPU_CORE(obj);
++    CPUTopoState *topo = CPU_TOPO(obj);
+ 
+     /*
+      * Only '-device something-cpu-core,help' can get us there before
+@@ -64,11 +67,14 @@ static void cpu_core_instance_init(Object *obj)
+     }
+ 
+     core->plugged_threads = -1;
++    /* Core's child can only be the thread. */
++    topo->child_level = CPU_TOPO_THREAD;
+ }
+ 
+ static void cpu_core_realize(DeviceState *dev, Error **errp)
+ {
+     CPUCore *core = CPU_CORE(dev);
++    CPUCoreClass *cc = CPU_CORE_GET_CLASS(core);
+ 
+     if (core->plugged_threads > core->nr_threads) {
+         error_setg(errp, "Plugged threads (plugged-threads: %d) must "
+@@ -78,25 +84,32 @@ static void cpu_core_realize(DeviceState *dev, Error **errp)
+     } else if (core->plugged_threads == -1) {
+         core->plugged_threads = core->nr_threads;
+     }
 +
-+#ifndef HW_CPU_DIE_H
-+#define HW_CPU_DIE_H
++    cc->parent_realize(dev, errp);
+ }
+ 
+ static void cpu_core_class_init(ObjectClass *oc, void *data)
+ {
+     DeviceClass *dc = DEVICE_CLASS(oc);
++    CPUTopoClass *tc = CPU_TOPO_CLASS(oc);
++    CPUCoreClass *cc = CPU_CORE_CLASS(oc);
+ 
+-    set_bit(DEVICE_CATEGORY_CPU, dc->categories);
++    set_bit(DEVICE_CATEGORY_CPU_DEF, dc->categories);
+     object_class_property_add(oc, "nr-threads", "int", core_prop_get_nr_threads,
+                               core_prop_set_nr_threads, NULL, NULL);
+     object_class_property_add(oc, "plugged-threads", "int", NULL,
+                               core_prop_set_plugged_threads, NULL, NULL);
+-    dc->realize = cpu_core_realize;
++    device_class_set_parent_realize(dc, cpu_core_realize, &cc->parent_realize);
 +
++    tc->level = CPU_TOPO_CORE;
+ }
+ 
+ static const TypeInfo cpu_core_type_info = {
+     .name = TYPE_CPU_CORE,
+-    .parent = TYPE_DEVICE,
++    .parent = TYPE_CPU_TOPO,
+     .abstract = true,
+     .class_init = cpu_core_class_init,
++    .class_size = sizeof(CPUCoreClass),
+     .instance_size = sizeof(CPUCore),
+     .instance_init = cpu_core_instance_init,
+ };
+diff --git a/hw/ppc/pnv_core.c b/hw/ppc/pnv_core.c
+index 8b75739697d1..315b823e7d38 100644
+--- a/hw/ppc/pnv_core.c
++++ b/hw/ppc/pnv_core.c
+@@ -334,6 +334,7 @@ static void pnv_core_unrealize(DeviceState *dev)
+ {
+     PnvCore *pc = PNV_CORE(dev);
+     CPUCore *cc = CPU_CORE(dev);
++    PnvCoreClass *pcc = PNV_CORE_GET_CLASS(pc);
+     int i;
+ 
+     qemu_unregister_reset(pnv_core_reset, pc);
+@@ -342,6 +343,8 @@ static void pnv_core_unrealize(DeviceState *dev)
+         pnv_core_cpu_unrealize(pc, pc->threads[i]);
+     }
+     g_free(pc->threads);
++
++    pcc->parent_unrealize(dev);
+ }
+ 
+ static Property pnv_core_properties[] = {
+@@ -380,11 +383,12 @@ static void pnv_core_class_init(ObjectClass *oc, void *data)
+     DeviceClass *dc = DEVICE_CLASS(oc);
+     PnvCoreClass *pcc = PNV_CORE_CLASS(oc);
+ 
+-    dc->unrealize = pnv_core_unrealize;
+     device_class_set_props(dc, pnv_core_properties);
+     dc->user_creatable = false;
+     device_class_set_parent_realize(dc, pnv_core_realize,
+                                     &pcc->parent_realize);
++    device_class_set_parent_unrealize(dc, pnv_core_unrealize,
++                                      &pcc->parent_unrealize);
+ }
+ 
+ #define DEFINE_PNV_CORE_TYPE(family, cpu_model) \
+diff --git a/hw/ppc/ppc_core.c b/hw/ppc/ppc_core.c
+index 3857f3150052..0a700d6a5b42 100644
+--- a/hw/ppc/ppc_core.c
++++ b/hw/ppc/ppc_core.c
+@@ -72,6 +72,11 @@ static void powerpc_core_class_init(ObjectClass *oc, void *data)
+     DeviceClass *dc = DEVICE_CLASS(oc);
+     PowerPCCoreClass *ppc_class = POWERPC_CORE_CLASS(oc);
+ 
++    /*
++     * PPC cores support hotplug and must be created after
++     * qemu_init_board().
++     */
++    clear_bit(DEVICE_CATEGORY_CPU_DEF, dc->categories);
+     object_class_property_add(oc, "core-id", "int",
+                               powerpc_core_prop_get_core_id,
+                               powerpc_core_prop_set_core_id,
+diff --git a/hw/ppc/spapr_cpu_core.c b/hw/ppc/spapr_cpu_core.c
+index 5533a386f350..c965c213ab14 100644
+--- a/hw/ppc/spapr_cpu_core.c
++++ b/hw/ppc/spapr_cpu_core.c
+@@ -235,6 +235,7 @@ static void spapr_delete_vcpu(PowerPCCPU *cpu)
+ static void spapr_cpu_core_unrealize(DeviceState *dev)
+ {
+     SpaprCpuCore *sc = SPAPR_CPU_CORE(OBJECT(dev));
++    SpaprCpuCoreClass *scc = SPAPR_CPU_CORE_GET_CLASS(sc);
+     CPUCore *cc = CPU_CORE(dev);
+     int i;
+ 
+@@ -254,6 +255,8 @@ static void spapr_cpu_core_unrealize(DeviceState *dev)
+     }
+     g_free(sc->threads);
+     qemu_unregister_reset(spapr_cpu_core_reset_handler, sc);
++
++    scc->parent_unrealize(dev);
+ }
+ 
+ static bool spapr_realize_vcpu(PowerPCCPU *cpu, SpaprMachineState *spapr,
+@@ -366,12 +369,14 @@ static void spapr_cpu_core_class_init(ObjectClass *oc, void *data)
+     DeviceClass *dc = DEVICE_CLASS(oc);
+     SpaprCpuCoreClass *scc = SPAPR_CPU_CORE_CLASS(oc);
+ 
+-    dc->unrealize = spapr_cpu_core_unrealize;
+     dc->reset = spapr_cpu_core_reset;
+     device_class_set_props(dc, spapr_cpu_core_properties);
++    dc->hotpluggable = true;
+     scc->cpu_type = data;
+     device_class_set_parent_realize(dc, spapr_cpu_core_realize,
+                                     &scc->parent_realize);
++    device_class_set_parent_unrealize(dc, spapr_cpu_core_unrealize,
++                                      &scc->parent_unrealize);
+ }
+ 
+ #define DEFINE_SPAPR_CPU_CORE_TYPE(cpu_model) \
+diff --git a/include/hw/cpu/core.h b/include/hw/cpu/core.h
+index 87d50151ab01..591240861efb 100644
+--- a/include/hw/cpu/core.h
++++ b/include/hw/cpu/core.h
+@@ -10,15 +10,24 @@
+ #define HW_CPU_CORE_H
+ 
+ #include "hw/qdev-core.h"
 +#include "hw/core/cpu-topo.h"
-+#include "hw/qdev-core.h"
+ #include "qom/object.h"
+ 
+ #define TYPE_CPU_CORE "cpu-core"
+ 
+-OBJECT_DECLARE_SIMPLE_TYPE(CPUCore, CPU_CORE)
++OBJECT_DECLARE_TYPE(CPUCore, CPUCoreClass, CPU_CORE)
 +
-+#define TYPE_CPU_DIE "cpu-die"
-+
-+OBJECT_DECLARE_SIMPLE_TYPE(CPUDie, CPU_DIE)
-+
-+struct CPUDie {
++struct CPUCoreClass {
 +    /*< private >*/
-+    CPUTopoState obj;
++    CPUTopoClass parent_class;
 +
 +    /*< public >*/
++    DeviceRealize parent_realize;
 +};
-+
-+#endif /* HW_CPU_DIE_H */
+ 
+ struct CPUCore {
+     /*< private >*/
+-    DeviceState parent_obj;
++    CPUTopoState parent_obj;
+ 
+     /*< public >*/
+     int core_id;
+diff --git a/include/hw/ppc/pnv_core.h b/include/hw/ppc/pnv_core.h
+index 3b9edf69f9fb..ca04461c8531 100644
+--- a/include/hw/ppc/pnv_core.h
++++ b/include/hw/ppc/pnv_core.h
+@@ -51,6 +51,7 @@ struct PnvCoreClass {
+     uint64_t xscom_size;
+ 
+     DeviceRealize parent_realize;
++    DeviceUnrealize parent_unrealize;
+ };
+ 
+ #define PNV_CORE_TYPE_SUFFIX "-" TYPE_PNV_CORE
+diff --git a/include/hw/ppc/spapr_cpu_core.h b/include/hw/ppc/spapr_cpu_core.h
+index dabdbd4bcbc9..46cf68fc8859 100644
+--- a/include/hw/ppc/spapr_cpu_core.h
++++ b/include/hw/ppc/spapr_cpu_core.h
+@@ -39,6 +39,7 @@ struct SpaprCpuCoreClass {
+     const char *cpu_type;
+ 
+     DeviceRealize parent_realize;
++    DeviceUnrealize parent_unrealize;
+ };
+ 
+ const char *spapr_get_cpu_core_type(const char *cpu_type);
 -- 
 2.34.1
 
