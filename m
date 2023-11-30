@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09213C10DAA
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:39:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D749AC10DAA
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:39:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8i88-0000Ij-S9; Thu, 30 Nov 2023 09:35:04 -0500
+	id 1r8i9C-0001oy-Et; Thu, 30 Nov 2023 09:36:10 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i86-0000BJ-WE; Thu, 30 Nov 2023 09:35:03 -0500
+ id 1r8i8d-0001Mn-MP; Thu, 30 Nov 2023 09:35:37 -0500
 Received: from mgamail.intel.com ([192.55.52.43])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i85-0001d0-3b; Thu, 30 Nov 2023 09:35:02 -0500
+ id 1r8i8Z-0001tW-Iw; Thu, 30 Nov 2023 09:35:34 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1701354901; x=1732890901;
+ t=1701354931; x=1732890931;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=FbB6vbX6bR4dqU1fCV07ghJ+c5nYYHlqh35CAqrTsmY=;
- b=B/nP++8jsG+K2z9pnGPDpayNbQ2YXtdACARmebKqiqXEGl2dBrcX2657
- +x9QBSlx/lW+m7eC7n0j/cto7yJ0HGWtogRPlwzdRUdDyRWm4b3hlV7kr
- RR2jmSPoh1YtS63KNKdQdrkKb9he9RXVOLzBDQXY3R3uSeGfmGDpzzkhR
- IxUoGFo4l/wJXoEJidYaie/2IxKy3KIlm/oH4TJkNgHQKiNVQpAzmmrUJ
- 5cSP0OwXrF9xa9lMRLbozr+t7EBVzuFm/yyotH5eWr5aE/ZfZae/7cEjc
- vAy1XwoG/5jPlErXBfKWblmwi2Xffi4lpVjcQ/ChqzxP/u9adri9ir9iF Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532317"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479532317"
+ bh=f8dzVIiaV15FUJhTAcShJBTihquI/MGo+GvFSgqbGOs=;
+ b=CGADjJyleEKvWjqLrSJqVu4kQIgphAR6wQBD/Ifbpfz6FaifT2b2RMtv
+ 6RRLZSPtCxGEWieNH3cKDepxb7AIX+Tjv5VkxMn6wovUb+Ac6gfYpCLgr
+ b/d+zRibQg31wk6uOJ685WQbiyMv/Loxx9gskj5FQamRVp3rY5c8oH8Ae
+ +sqzovCYUgjtyVrDM2f9b2rdaMhNnkEXHj5TvkYetiiuIj6bsP0stUYIa
+ xBuasb+QK9N60wOvYZjpcT7wJTUwoYXIyv7/Bf9OWH0cWJ/YwIjXj2LS4
+ 5o85lIY5LDZT/Xe7gf0b3aOZKf8R4meZ4v+lhIkDDZV8RdFVoBvGr4a2C g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532412"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479532412"
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:34:56 -0800
+ 30 Nov 2023 06:35:24 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730130"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942730130"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730271"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942730271"
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:34:47 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:35:15 -0800
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -72,9 +72,10 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
  Thomas Huth <thuth@redhat.com>, Zhiyuan Lv <zhiyuan.lv@intel.com>,
  Zhenyu Wang <zhenyu.z.wang@intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
  Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 28/41] hw/core/slot: Maintain the core queue in CPU slot
-Date: Thu, 30 Nov 2023 22:41:50 +0800
-Message-Id: <20231130144203.2307629-29-zhao1.liu@linux.intel.com>
+Subject: [RFC 31/41] hw/machine: Plug cpu-slot into machine to maintain
+ topology tree
+Date: Thu, 30 Nov 2023 22:41:53 +0800
+Message-Id: <20231130144203.2307629-32-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
@@ -106,127 +107,121 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-Maintain the cores queue at cpu-slot to facilitate direct traversal
-of all cores.
+Add a cpu-slot in machine as the root of topology tree to maintain the
+QOM topology.
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- hw/core/cpu-slot.c         | 43 ++++++++++++++++++++++++++++++++++++++
- include/hw/core/cpu-slot.h |  9 ++++++++
- include/hw/cpu/core.h      |  2 ++
- 3 files changed, 54 insertions(+)
+ hw/core/cpu-slot.c         | 31 +++++++++++++++++++++++++++++++
+ include/hw/boards.h        |  2 ++
+ include/hw/core/cpu-slot.h |  7 +++++++
+ system/vl.c                |  2 ++
+ 4 files changed, 42 insertions(+)
 
 diff --git a/hw/core/cpu-slot.c b/hw/core/cpu-slot.c
-index 5aef5b0189c2..a6b7d98dea18 100644
+index 2a796ad5b6e7..4b148440ed3d 100644
 --- a/hw/core/cpu-slot.c
 +++ b/hw/core/cpu-slot.c
-@@ -22,6 +22,40 @@
+@@ -20,6 +20,7 @@
  
+ #include "qemu/osdep.h"
+ 
++#include "hw/boards.h"
  #include "hw/core/cpu-slot.h"
+ #include "qapi/error.h"
  
-+static void cpu_slot_add_topo_info(CPUTopoState *root, CPUTopoState *child)
-+{
-+    CPUSlot *slot = CPU_SLOT(root);
-+    CPUTopoLevel level = CPU_TOPO_LEVEL(child);
-+
-+    if (level == CPU_TOPO_CORE) {
-+        QTAILQ_INSERT_TAIL(&slot->cores, CPU_CORE(child), node);
-+    }
-+    return;
-+}
-+
-+static void cpu_slot_del_topo_info(CPUTopoState *root, CPUTopoState *child)
-+{
-+    CPUSlot *slot = CPU_SLOT(root);
-+    CPUTopoLevel level = CPU_TOPO_LEVEL(child);
-+
-+    if (level == CPU_TOPO_CORE) {
-+        QTAILQ_REMOVE(&slot->cores, CPU_CORE(child), node);
-+    }
-+    return;
-+}
-+
-+static void cpu_slot_update_topo_info(CPUTopoState *root, CPUTopoState *child,
-+                                      bool is_realize)
-+{
-+    g_assert(child->parent);
-+
-+    if (is_realize) {
-+        cpu_slot_add_topo_info(root, child);
-+    } else {
-+        cpu_slot_del_topo_info(root, child);
-+    }
-+}
-+
- static void cpu_slot_class_init(ObjectClass *oc, void *data)
- {
-     DeviceClass *dc = DEVICE_CLASS(oc);
-@@ -31,12 +65,21 @@ static void cpu_slot_class_init(ObjectClass *oc, void *data)
-     dc->user_creatable = false;
- 
-     tc->level = CPU_TOPO_ROOT;
-+    tc->update_topo_info = cpu_slot_update_topo_info;
-+}
-+
-+static void cpu_slot_instance_init(Object *obj)
-+{
-+    CPUSlot *slot = CPU_SLOT(obj);
-+
-+    QTAILQ_INIT(&slot->cores);
+@@ -165,3 +166,33 @@ static void cpu_slot_register_types(void)
  }
  
- static const TypeInfo cpu_slot_type_info = {
-     .name = TYPE_CPU_SLOT,
-     .parent = TYPE_CPU_TOPO,
-     .class_init = cpu_slot_class_init,
-+    .instance_init = cpu_slot_instance_init,
-     .instance_size = sizeof(CPUSlot),
- };
+ type_init(cpu_slot_register_types)
++
++void machine_plug_cpu_slot(MachineState *ms)
++{
++    MachineClass *mc = MACHINE_GET_CLASS(ms);
++
++    ms->topo = CPU_SLOT(qdev_new(TYPE_CPU_SLOT));
++
++    object_property_add_child(container_get(OBJECT(ms), "/peripheral"),
++                              "cpu-slot", OBJECT(ms->topo));
++    DEVICE(ms->topo)->id = g_strdup_printf("%s", "cpu-slot");
++
++    qdev_realize_and_unref(DEVICE(ms->topo), NULL, &error_abort);
++    ms->topo->ms = ms;
++
++    if (!mc->smp_props.clusters_supported) {
++        clear_bit(CPU_TOPO_CLUSTER, ms->topo->supported_levels);
++    }
++
++    if (!mc->smp_props.dies_supported) {
++        clear_bit(CPU_TOPO_DIE, ms->topo->supported_levels);
++    }
++
++    if (!mc->smp_props.books_supported) {
++        clear_bit(CPU_TOPO_BOOK, ms->topo->supported_levels);
++    }
++
++    if (!mc->smp_props.drawers_supported) {
++        clear_bit(CPU_TOPO_DRAWER, ms->topo->supported_levels);
++    }
++}
+diff --git a/include/hw/boards.h b/include/hw/boards.h
+index da85f86efb91..81a7b04ece86 100644
+--- a/include/hw/boards.h
++++ b/include/hw/boards.h
+@@ -10,6 +10,7 @@
+ #include "qemu/module.h"
+ #include "qom/object.h"
+ #include "hw/core/cpu.h"
++#include "hw/core/cpu-slot.h"
  
+ #define TYPE_MACHINE_SUFFIX "-machine"
+ 
+@@ -398,6 +399,7 @@ struct MachineState {
+     AccelState *accelerator;
+     CPUArchIdList *possible_cpus;
+     CpuTopology smp;
++    CPUSlot *topo;
+     struct NVDIMMState *nvdimms_state;
+     struct NumaState *numa_state;
+ };
 diff --git a/include/hw/core/cpu-slot.h b/include/hw/core/cpu-slot.h
-index 718c8ecaa751..d2a1160562be 100644
+index 7bf51988afb3..1361af4ccfc0 100644
 --- a/include/hw/core/cpu-slot.h
 +++ b/include/hw/core/cpu-slot.h
-@@ -22,17 +22,26 @@
- #define CPU_SLOT_H
- 
- #include "hw/core/cpu-topo.h"
-+#include "hw/cpu/core.h"
- #include "hw/qdev-core.h"
- 
- #define TYPE_CPU_SLOT "cpu-slot"
- 
- OBJECT_DECLARE_SIMPLE_TYPE(CPUSlot, CPU_SLOT)
- 
-+/**
-+ * CPUSlot:
-+ * @cores: Queue consisting of all the cores in the topology tree
-+ *     where the cpu-slot is the root. cpu-slot can maintain similar
-+ *     queues for other topology levels to facilitate traversal
-+ *     when necessary.
-+ */
+@@ -78,6 +78,7 @@ OBJECT_DECLARE_SIMPLE_TYPE(CPUSlot, CPU_SLOT)
+  *     when necessary.
+  * @stat: Statistical topology information for topology tree.
+  * @supported_levels: Supported topology levels for topology tree.
++ * @ms: Machine in which this cpu-slot is plugged.
+  */
  struct CPUSlot {
      /*< private >*/
-     CPUTopoState parent_obj;
- 
-     /*< public >*/
-+    QTAILQ_HEAD(, CPUCore) cores;
+@@ -87,6 +88,12 @@ struct CPUSlot {
+     QTAILQ_HEAD(, CPUCore) cores;
+     CPUTopoStat stat;
+     DECLARE_BITMAP(supported_levels, USER_AVAIL_LEVEL_NUM);
++    MachineState *ms;
  };
  
- #endif /* CPU_SLOT_H */
-diff --git a/include/hw/cpu/core.h b/include/hw/cpu/core.h
-index 591240861efb..65dc10931190 100644
---- a/include/hw/cpu/core.h
-+++ b/include/hw/cpu/core.h
-@@ -40,6 +40,8 @@ struct CPUCore {
-      * "-device"/"device_add"?
-      */
-     int plugged_threads;
++#define MACHINE_CORE_FOREACH(ms, core) \
++    QTAILQ_FOREACH((core), &(ms)->topo->cores, node)
 +
-+    QTAILQ_ENTRY(CPUCore) node;
- };
++void machine_plug_cpu_slot(MachineState *ms);
++
+ #endif /* CPU_SLOT_H */
+diff --git a/system/vl.c b/system/vl.c
+index 65add2fb2460..637f708d2265 100644
+--- a/system/vl.c
++++ b/system/vl.c
+@@ -2128,6 +2128,8 @@ static void qemu_create_machine(QDict *qdict)
+                                           false, &error_abort);
+         qobject_unref(default_opts);
+     }
++
++    machine_plug_cpu_slot(current_machine);
+ }
  
- #endif
+ static int global_init_func(void *opaque, QemuOpts *opts, Error **errp)
 -- 
 2.34.1
 
