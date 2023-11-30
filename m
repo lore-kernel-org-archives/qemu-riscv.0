@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1276C4167B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:36:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F317C10DAA
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Nov 2023 14:36:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r8i87-0000CS-AI; Thu, 30 Nov 2023 09:35:03 -0500
+	id 1r8i7X-0006zb-2E; Thu, 30 Nov 2023 09:34:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i85-0008Tr-2S; Thu, 30 Nov 2023 09:35:01 -0500
+ id 1r8i7L-0006NL-WD; Thu, 30 Nov 2023 09:34:16 -0500
 Received: from mgamail.intel.com ([192.55.52.43])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1r8i7u-0001Un-SP; Thu, 30 Nov 2023 09:35:00 -0500
+ id 1r8i7I-0001Un-OM; Thu, 30 Nov 2023 09:34:15 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1701354890; x=1732890890;
+ t=1701354852; x=1732890852;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=dK+ilj3Q1LqgiJ2/EiJWYjQp1qXfjG6+/g3hE8BTtcM=;
- b=CBoT00iUZavpZrRiU+b75R3pv+ggnBmPYkA3OVVGpHXlZXP8BkmReFDL
- nzeSWUyj86Om8LG3Oo1r9VMeI65OwpvuxWrFhU3VZceg2WWm7mprZPB8H
- /hEHgeFxedIEmnF1fz7PgisTHufE7jUa1IA57P/voCJv+8Q+JGgXzb5m7
- oPFy5gQUszeQtZMhjsq/A23VTZsykpJePbeOkHGAR2T1e2diCfKkTTvDt
- 9gzJVjwnfi5vDparYIc7r+I74W4s8n8iRHof2pRhee2Img3sjbO/0g7wu
- uxg7XTPHEF1d5qGpP/m4t+cAiuWyGXXTtrnryn0gauXUGocEcnvUfdY2M g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532284"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479532284"
+ bh=IhpodbfJau6szIdQazmb+IK5Vtn7KUNNpXNSlzloW+Q=;
+ b=FhMQfiO9KA0KRRQSAbFS7bQ58jqH95th0hZs4wonD0peIknsmWm2yy+t
+ 1pA/xGSpm3snEqq2eB1EeuLYkzg68R0/oC2kZ8EslPquklCGzzV9IfcWc
+ O5engfx66L0brqasSe92mOlYLaS2lxOuCh0Lj+NQhe58U/N5FcKzyWpsp
+ enYokScWmi5kFQ4WOb/ypyHAX/fe0eMQMB2Bq0YsPAE8S6pv9ozY3OTlo
+ l2OoHKoqxfhMIPtnpIYF1OmkBHqmonbYhyk4V5BGne8VoQNUfdL92mJR1
+ jVE6a5Y/jxsdGSTg/fAb6Cz2/P/lV5VMdhO+ixVluNMVf3zVfVenOhl7N A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="479532154"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="479532154"
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2023 06:34:47 -0800
+ 30 Nov 2023 06:34:09 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730118"
-X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942730118"
+X-IronPort-AV: E=McAfee;i="6600,9927,10910"; a="942730068"
+X-IronPort-AV: E=Sophos;i="6.04,239,1695711600"; d="scan'208";a="942730068"
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:34:37 -0800
+ by orsmga005.jf.intel.com with ESMTP; 30 Nov 2023 06:34:00 -0800
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -72,15 +72,13 @@ Cc: Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
  Thomas Huth <thuth@redhat.com>, Zhiyuan Lv <zhiyuan.lv@intel.com>,
  Zhenyu Wang <zhenyu.z.wang@intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
  Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 27/41] hw/core/slot: Introduce CPU slot as the root of CPU
- topology
-Date: Thu, 30 Nov 2023 22:41:49 +0800
-Message-Id: <20231130144203.2307629-28-zhao1.liu@linux.intel.com>
+Subject: [RFC 23/41] hw/cpu/die: Abstract cpu-die level as topology device
+Date: Thu, 30 Nov 2023 22:41:45 +0800
+Message-Id: <20231130144203.2307629-24-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 References: <20231130144203.2307629-1-zhao1.liu@linux.intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Received-SPF: none client-ip=192.55.52.43;
  envelope-from=zhao1.liu@linux.intel.com; helo=mgamail.intel.com
@@ -108,47 +106,52 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-Abstract the root of topology tree as a special topology device
-"cpu-slot".
+Abstract die level as a topology device "cpu-die" to allow user to
+create die level topology from cli and later the cpu-dies could be added
+into topology tree.
+
+In addition, mark the cpu-die as DEVICE_CATEGORY_CPU_DEF category to
+indicate it belongs to the basic CPU definition and should be created
+from cli before board initialization.
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- MAINTAINERS                |  2 ++
- hw/core/cpu-slot.c         | 48 ++++++++++++++++++++++++++++++++++++++
- hw/core/meson.build        |  1 +
- include/hw/core/cpu-slot.h | 38 ++++++++++++++++++++++++++++++
- 4 files changed, 89 insertions(+)
- create mode 100644 hw/core/cpu-slot.c
- create mode 100644 include/hw/core/cpu-slot.h
+ MAINTAINERS          |  2 ++
+ hw/cpu/die.c         | 46 ++++++++++++++++++++++++++++++++++++++++++++
+ hw/cpu/meson.build   |  2 +-
+ include/hw/cpu/die.h | 38 ++++++++++++++++++++++++++++++++++++
+ 4 files changed, 87 insertions(+), 1 deletion(-)
+ create mode 100644 hw/cpu/die.c
+ create mode 100644 include/hw/cpu/die.h
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 4b373ff46ce3..ac08b5a8c4e0 100644
+index 89e350866d6a..91d0936edb32 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -1856,6 +1856,7 @@ R: Philippe Mathieu-Daudé <philmd@linaro.org>
- R: Yanan Wang <wangyanan55@huawei.com>
- S: Supported
- F: hw/core/cpu.c
-+F: hw/core/cpu-slot.c
- F: hw/core/cpu-topo.c
- F: hw/core/machine-qmp-cmds.c
- F: hw/core/machine.c
-@@ -1872,6 +1873,7 @@ F: qapi/machine-common.json
+@@ -1863,6 +1863,7 @@ F: hw/core/machine-smp.c
+ F: hw/core/null-machine.c
+ F: hw/core/numa.c
+ F: hw/cpu/cluster.c
++F: hw/cpu/die.c
+ F: qapi/machine.json
+ F: qapi/machine-common.json
  F: qapi/machine-target.json
- F: include/hw/boards.h
+@@ -1870,6 +1871,7 @@ F: include/hw/boards.h
  F: include/hw/core/cpu.h
-+F: include/hw/core/cpu-slot.h
  F: include/hw/core/cpu-topo.h
- F: include/hw/cpu/book.h
  F: include/hw/cpu/cluster.h
-diff --git a/hw/core/cpu-slot.c b/hw/core/cpu-slot.c
++F: include/hw/cpu/die.h
+ F: include/sysemu/numa.h
+ F: tests/unit/test-smp-parse.c
+ T: git https://gitlab.com/ehabkost/qemu.git machine-next
+diff --git a/hw/cpu/die.c b/hw/cpu/die.c
 new file mode 100644
-index 000000000000..5aef5b0189c2
+index 000000000000..06c4f7cc8fa2
 --- /dev/null
-+++ b/hw/core/cpu-slot.c
-@@ -0,0 +1,48 @@
++++ b/hw/cpu/die.c
+@@ -0,0 +1,46 @@
 +/*
-+ * CPU slot device abstraction
++ * CPU die abstract device
 + *
 + * Copyright (c) 2023 Intel Corporation
 + * Author: Zhao Liu <zhao1.liu@intel.com>
@@ -168,53 +171,49 @@ index 000000000000..5aef5b0189c2
 + */
 +
 +#include "qemu/osdep.h"
++#include "hw/cpu/die.h"
 +
-+#include "hw/core/cpu-slot.h"
-+
-+static void cpu_slot_class_init(ObjectClass *oc, void *data)
++static void cpu_die_class_init(ObjectClass *oc, void *data)
 +{
 +    DeviceClass *dc = DEVICE_CLASS(oc);
 +    CPUTopoClass *tc = CPU_TOPO_CLASS(oc);
 +
 +    set_bit(DEVICE_CATEGORY_CPU_DEF, dc->categories);
-+    dc->user_creatable = false;
 +
-+    tc->level = CPU_TOPO_ROOT;
++    tc->level = CPU_TOPO_DIE;
 +}
 +
-+static const TypeInfo cpu_slot_type_info = {
-+    .name = TYPE_CPU_SLOT,
++static const TypeInfo cpu_die_type_info = {
++    .name = TYPE_CPU_DIE,
 +    .parent = TYPE_CPU_TOPO,
-+    .class_init = cpu_slot_class_init,
-+    .instance_size = sizeof(CPUSlot),
++    .class_init = cpu_die_class_init,
++    .instance_size = sizeof(CPUDie),
 +};
 +
-+static void cpu_slot_register_types(void)
++static void cpu_die_register_types(void)
 +{
-+    type_register_static(&cpu_slot_type_info);
++    type_register_static(&cpu_die_type_info);
 +}
 +
-+type_init(cpu_slot_register_types)
-diff --git a/hw/core/meson.build b/hw/core/meson.build
-index 501d2529697e..3347c054e162 100644
---- a/hw/core/meson.build
-+++ b/hw/core/meson.build
-@@ -23,6 +23,7 @@ else
- endif
++type_init(cpu_die_register_types)
+diff --git a/hw/cpu/meson.build b/hw/cpu/meson.build
+index 6d319947ca0b..e685fe1c7d8a 100644
+--- a/hw/cpu/meson.build
++++ b/hw/cpu/meson.build
+@@ -1,4 +1,4 @@
+-system_ss.add(files('core.c', 'cluster.c'))
++system_ss.add(files('core.c', 'cluster.c', 'die.c'))
  
- common_ss.add(files('cpu-common.c'))
-+common_ss.add(files('cpu-slot.c'))
- common_ss.add(files('cpu-topo.c'))
- common_ss.add(files('machine-smp.c'))
- system_ss.add(when: 'CONFIG_FITLOADER', if_true: files('loader-fit.c'))
-diff --git a/include/hw/core/cpu-slot.h b/include/hw/core/cpu-slot.h
+ system_ss.add(when: 'CONFIG_ARM11MPCORE', if_true: files('arm11mpcore.c'))
+ system_ss.add(when: 'CONFIG_REALVIEW', if_true: files('realview_mpcore.c'))
+diff --git a/include/hw/cpu/die.h b/include/hw/cpu/die.h
 new file mode 100644
-index 000000000000..718c8ecaa751
+index 000000000000..4c68786b5f2f
 --- /dev/null
-+++ b/include/hw/core/cpu-slot.h
++++ b/include/hw/cpu/die.h
 @@ -0,0 +1,38 @@
 +/*
-+ * CPU slot device abstraction
++ * CPU die abstract device
 + *
 + * Copyright (c) 2023 Intel Corporation
 + * Author: Zhao Liu <zhao1.liu@intel.com>
@@ -233,24 +232,24 @@ index 000000000000..718c8ecaa751
 + * along with this program; if not, see <http://www.gnu.org/licenses/>.
 + */
 +
-+#ifndef CPU_SLOT_H
-+#define CPU_SLOT_H
++#ifndef HW_CPU_DIE_H
++#define HW_CPU_DIE_H
 +
 +#include "hw/core/cpu-topo.h"
 +#include "hw/qdev-core.h"
 +
-+#define TYPE_CPU_SLOT "cpu-slot"
++#define TYPE_CPU_DIE "cpu-die"
 +
-+OBJECT_DECLARE_SIMPLE_TYPE(CPUSlot, CPU_SLOT)
++OBJECT_DECLARE_SIMPLE_TYPE(CPUDie, CPU_DIE)
 +
-+struct CPUSlot {
++struct CPUDie {
 +    /*< private >*/
-+    CPUTopoState parent_obj;
++    CPUTopoState obj;
 +
 +    /*< public >*/
 +};
 +
-+#endif /* CPU_SLOT_H */
++#endif /* HW_CPU_DIE_H */
 -- 
 2.34.1
 
