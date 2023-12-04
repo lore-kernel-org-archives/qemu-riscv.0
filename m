@@ -4,77 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 434B0C4167B
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7237EC46CA0
 	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Dec 2023 15:27:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rAApz-0004CJ-Il; Mon, 04 Dec 2023 10:26:23 -0500
+	id 1rAApa-0003uh-6G; Mon, 04 Dec 2023 10:25:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rAApp-00042J-0F
- for qemu-riscv@nongnu.org; Mon, 04 Dec 2023 10:26:13 -0500
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rAApX-0003rj-Mg
+ for qemu-riscv@nongnu.org; Mon, 04 Dec 2023 10:25:56 -0500
+Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rAApm-0005Ss-6W
- for qemu-riscv@nongnu.org; Mon, 04 Dec 2023 10:26:12 -0500
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-40b479ec4a3so45629825e9.2
- for <qemu-riscv@nongnu.org>; Mon, 04 Dec 2023 07:26:09 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rAApR-0005NY-56
+ for qemu-riscv@nongnu.org; Mon, 04 Dec 2023 10:25:51 -0500
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-3333a3a599fso1064094f8f.0
+ for <qemu-riscv@nongnu.org>; Mon, 04 Dec 2023 07:25:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701703568; x=1702308368; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hwIlmu7y+8erPdoR/Kkd+7013w7hW587KwHOvMnbXVw=;
- b=MB/sBipiwkb23i9jGyz/FuzYzwo/tL9DvMx8tI32jrTb1hZbXDKQBKGT49F+B84bRw
- TNndYFi6jP1HjOHggS/8eEvinRohZZ8pWwjBjhrNT48HwqYl3rwuK0VliMh5+Sk+npK+
- R+W+nbbdF4QDFcXPPIuSLnYM407qA2HPrlGW7amMpwdTNOCuLbZGNZIyG8ijvHzTh4KE
- IygEVVjkHodQVjwZJF0YFoBsfsysLk8dq10Sn+0Uqmf2r7bl/41pit2mk/6IqJsIdy/o
- 6zSTWiJRdsNx9Bg2wcBzhqFDTKPzu7ZlKJxK4E4LwmSlnrA8QeICKXDRYC/vkmvsHZs/
- bsbg==
+ d=linaro.org; s=google; t=1701703547; x=1702308347; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=O+Y9xjSg4IuHGgwxwgKXYHb/P7EXEsinI+WrmX30V8Y=;
+ b=T5Aos29TnzewqONy2qAx/3xHtEJJjjgN6B0B6hrzm03a38QxTmATBIpLyefpUaxXN0
+ +AT5VyogEo+QCFx1+bbckVnKWHBhnUwVpJtt5Se9ag1fVlFc+B3K8HkMprHmOmtWEhdf
+ deWEYOsByD8ajBzfdSIvkXeATgE7klJGhzDeAju/L9AcO96m1AbplU/2vOd4RSdItnpr
+ C71mlxLv0RPID/9xCOk9xg86ydb+REgwy88lYSv4v2kAOwZhiMW4THVlxGBIOSWeCCeO
+ TWgxPXRp/MJ7eyj/63ZS5IwG/vOG53Q2xCtotXCzJeZq3SbOkjsoY+GB5XjxPlhVmtHs
+ Njhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701703568; x=1702308368;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=hwIlmu7y+8erPdoR/Kkd+7013w7hW587KwHOvMnbXVw=;
- b=p37mpI73djJVJ7LD/0+LD5rhbFuoXPk9PkmW0AMWWMc4hP29TLyERxllq9u/Iw+MO1
- xZomWlDTeTzVnQwfsYFy4nMeBcS2oSDjm0BlNF4ICMhG3m5ccKY6adkwuobrPoua0/I0
- 2oQEJr1jUeBcNrA3s6Ev/P0FRLkMi1c9lukIE4DhCIxrWFbtmmdMqWXYBh8gGDETRJk+
- bHrQ5ZaJr4yKYen/D0WA55MrqfQcaFGP3zeGLJcJwn34XwBl3/gDFkKMhhSzHtgJGulq
- Qkts215aAtJAlMtZTddtxRtJ2/uQKvi1j0d5moE+i9UAiU5Le3YmFC5K0paOCEe5EBHg
- t89g==
-X-Gm-Message-State: AOJu0YzBC1r2+ScXr2jvKpj40mJ0azL3X7lhxrZBDX13S25k+mR9mbi2
- vzDY5421XB9zC9ALJr/NyWYh8g==
-X-Google-Smtp-Source: AGHT+IEO8jGWysVtJ00t3Be9HD2MxetjOg8h35eCcRxj0jBNyQExo3+7A8UzZGuCwcPrVVepITwy/A==
-X-Received: by 2002:a05:600c:354f:b0:40b:3645:4671 with SMTP id
- i15-20020a05600c354f00b0040b36454671mr3949699wmq.10.1701703568398; 
- Mon, 04 Dec 2023 07:26:08 -0800 (PST)
+ d=1e100.net; s=20230601; t=1701703547; x=1702308347;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=O+Y9xjSg4IuHGgwxwgKXYHb/P7EXEsinI+WrmX30V8Y=;
+ b=n2wCqWpaKgXTydcHVroOLsbWjN5hLj+YncoiVSSDk7cqfaFn7R+C7BqrG9Pn33jiTw
+ W73sfB6OmEckOLuY7fAALbDbgi5CXkFR90uKcnn54JkqYgSH9Gbcxt2a4B1zDTiceNgu
+ f7xgCbLNyxSjGbOr7ukC7uqDGCL00kQkBn2NX8jGFMydMqKQVdZA2obtrHdWnMK6HJd7
+ QOykj5Gv/pRVRFjb51kKrxHZ6UD8IV+zrFsyoW8aXawOcKVBIChdVZsvvy2TrX32oTlM
+ Ikjjo85aZ8dmUJDkUqb5zJu7ZKCdzoVxoWy1+NF4DkKM5gMiYlyNp19cQAAYJ+ijoPQ2
+ Z6QQ==
+X-Gm-Message-State: AOJu0Yx9IkyaXD+El7x02YE4PK8O3uaJogweGcRLSx42phxY5kpS8ION
+ zNrSUbxfyl6j/+6X+k/WvRxXbQ==
+X-Google-Smtp-Source: AGHT+IHmDr0yTZEs3HYdvrwB3CDIP3XAr63BtD9/L9mDHqk5Y7r1/Tjsa5TeSTA1VrZTF5M9+YLxbw==
+X-Received: by 2002:a1c:7204:0:b0:40b:5e4a:235c with SMTP id
+ n4-20020a1c7204000000b0040b5e4a235cmr798678wmc.94.1701703547058; 
+ Mon, 04 Dec 2023 07:25:47 -0800 (PST)
 Received: from m1x-phil.lan ([176.176.140.35])
  by smtp.gmail.com with ESMTPSA id
- r21-20020a05600c35d500b0040b3e79bad3sm15354298wmq.40.2023.12.04.07.26.07
+ f18-20020a05600c155200b004094d4292aesm15445704wmg.18.2023.12.04.07.25.45
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 04 Dec 2023 07:26:08 -0800 (PST)
+ Mon, 04 Dec 2023 07:25:46 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PULL 2/4] target/riscv/kvm: fix shadowing in
- kvm_riscv_(get|put)_regs_csr
-Date: Mon,  4 Dec 2023 16:25:22 +0100
-Message-ID: <20231204152524.37803-3-philmd@linaro.org>
+Cc: qemu-riscv@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PULL 0/4] Misc fixes for 2023-12-04
+Date: Mon,  4 Dec 2023 16:25:20 +0100
+Message-ID: <20231204152524.37803-1-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20231204152524.37803-1-philmd@linaro.org>
-References: <20231204152524.37803-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,118 +90,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+The following changes since commit 17dacf7ac9e2f076c15f32a290203f8f571a8800:
 
-KVM_RISCV_GET_CSR() and KVM_RISCV_SET_CSR() use an 'int ret' variable
-that is used to do an early 'return' if ret > 0. Both are being called
-in functions that are also declaring a 'ret' integer, initialized with
-'0', and this integer is used as return of the function.
+  Merge tag 'pull-more-8.2-fixes-011223-2' of https://gitlab.com/stsquad/qemu into staging (2023-12-04 08:03:18 -0500)
 
-The result is that the compiler is less than pleased and is pointing
-shadowing errors:
+are available in the Git repository at:
 
-../target/riscv/kvm/kvm-cpu.c: In function 'kvm_riscv_get_regs_csr':
-../target/riscv/kvm/kvm-cpu.c:90:13: error: declaration of 'ret' shadows a previous local [-Werror=shadow=compatible-local]
-   90 |         int ret = kvm_get_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
-      |             ^~~
-../target/riscv/kvm/kvm-cpu.c:539:5: note: in expansion of macro 'KVM_RISCV_GET_CSR'
-  539 |     KVM_RISCV_GET_CSR(cs, env, sstatus, env->mstatus);
-      |     ^~~~~~~~~~~~~~~~~
-../target/riscv/kvm/kvm-cpu.c:536:9: note: shadowed declaration is here
-  536 |     int ret = 0;
-      |         ^~~
+  https://github.com/philmd/qemu.git tags/misc-fixes-20231204
 
-../target/riscv/kvm/kvm-cpu.c: In function 'kvm_riscv_put_regs_csr':
-../target/riscv/kvm/kvm-cpu.c:98:13: error: declaration of 'ret' shadows a previous local [-Werror=shadow=compatible-local]
-   98 |         int ret = kvm_set_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
-      |             ^~~
-../target/riscv/kvm/kvm-cpu.c:556:5: note: in expansion of macro 'KVM_RISCV_SET_CSR'
-  556 |     KVM_RISCV_SET_CSR(cs, env, sstatus, env->mstatus);
-      |     ^~~~~~~~~~~~~~~~~
-../target/riscv/kvm/kvm-cpu.c:553:9: note: shadowed declaration is here
-  553 |     int ret = 0;
-      |         ^~~
+for you to fetch changes up to 2e8ed6a970e1842528f34aeb36b387834205c53a:
 
-The macros are doing early returns for non-zero returns and the local
-'ret' variable for both functions is used just to do 'return 0', so
-remove them from kvm_riscv_get_regs_csr() and kvm_riscv_put_regs_csr()
-and do a straight 'return 0' in the end.
+  tests/avocado: mark ReplayKernelNormal.test_mips64el_malta as flaky (2023-12-04 16:21:00 +0100)
 
-For good measure let's also rename the 'ret' variables in
-KVM_RISCV_GET_CSR() and KVM_RISCV_SET_CSR() to '_ret' to make them more
-resilient to these kind of errors.
+----------------------------------------------------------------
+Misc fixes for 8.2
 
-Fixes: 937f0b4512 ("target/riscv: Implement kvm_arch_get_registers")
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Tested-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Message-ID: <20231123101338.1040134-1-dbarboza@ventanamicro.com>
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
- target/riscv/kvm/kvm-cpu.c | 19 +++++++++----------
- 1 file changed, 9 insertions(+), 10 deletions(-)
+- memory: Avoid unaligned accesses (Patrick)
+- target/riscv: Fix variable shadowing (Daniel)
+- tests/avocado: Update URL, skip flaky test (Alex, Phil)
 
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 78fa1fa162..45b6cf1cfa 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -87,17 +87,17 @@ static uint64_t kvm_riscv_reg_id(CPURISCVState *env, uint64_t type,
- 
- #define KVM_RISCV_GET_CSR(cs, env, csr, reg) \
-     do { \
--        int ret = kvm_get_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
--        if (ret) { \
--            return ret; \
-+        int _ret = kvm_get_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
-+        if (_ret) { \
-+            return _ret; \
-         } \
-     } while (0)
- 
- #define KVM_RISCV_SET_CSR(cs, env, csr, reg) \
-     do { \
--        int ret = kvm_set_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
--        if (ret) { \
--            return ret; \
-+        int _ret = kvm_set_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
-+        if (_ret) { \
-+            return _ret; \
-         } \
-     } while (0)
- 
-@@ -533,7 +533,6 @@ static int kvm_riscv_put_regs_core(CPUState *cs)
- 
- static int kvm_riscv_get_regs_csr(CPUState *cs)
- {
--    int ret = 0;
-     CPURISCVState *env = &RISCV_CPU(cs)->env;
- 
-     KVM_RISCV_GET_CSR(cs, env, sstatus, env->mstatus);
-@@ -545,12 +544,12 @@ static int kvm_riscv_get_regs_csr(CPUState *cs)
-     KVM_RISCV_GET_CSR(cs, env, stval, env->stval);
-     KVM_RISCV_GET_CSR(cs, env, sip, env->mip);
-     KVM_RISCV_GET_CSR(cs, env, satp, env->satp);
--    return ret;
-+
-+    return 0;
- }
- 
- static int kvm_riscv_put_regs_csr(CPUState *cs)
- {
--    int ret = 0;
-     CPURISCVState *env = &RISCV_CPU(cs)->env;
- 
-     KVM_RISCV_SET_CSR(cs, env, sstatus, env->mstatus);
-@@ -563,7 +562,7 @@ static int kvm_riscv_put_regs_csr(CPUState *cs)
-     KVM_RISCV_SET_CSR(cs, env, sip, env->mip);
-     KVM_RISCV_SET_CSR(cs, env, satp, env->satp);
- 
--    return ret;
-+    return 0;
- }
- 
- static int kvm_riscv_get_regs_fp(CPUState *cs)
+----------------------------------------------------------------
+
+Alex Bennée (1):
+  tests/avocado: mark ReplayKernelNormal.test_mips64el_malta as flaky
+
+Daniel Henrique Barboza (1):
+  target/riscv/kvm: fix shadowing in kvm_riscv_(get|put)_regs_csr
+
+Patrick Venture (1):
+  system/memory: use ldn_he_p/stn_he_p
+
+Philippe Mathieu-Daudé (1):
+  tests/avocado: Update yamon-bin-02.22.zip URL
+
+ system/memory.c                     | 32 ++---------------------------
+ target/riscv/kvm/kvm-cpu.c          | 19 ++++++++---------
+ tests/avocado/machine_mips_malta.py |  5 +++--
+ tests/avocado/replay_kernel.py      |  3 +++
+ 4 files changed, 17 insertions(+), 42 deletions(-)
+
 -- 
 2.41.0
 
