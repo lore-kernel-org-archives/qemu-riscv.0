@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1618EC4167B
-	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Dec 2023 00:50:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24AD9C07E97
+	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Dec 2023 00:50:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1r9x9N-0006pr-MS; Sun, 03 Dec 2023 19:49:29 -0500
+	id 1r9x8q-0005UW-1z; Sun, 03 Dec 2023 19:48:56 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r9x97-0006NE-1g
- for qemu-riscv@nongnu.org; Sun, 03 Dec 2023 19:49:17 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([216.145.221.124])
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r9x8o-0005QU-Gj
+ for qemu-riscv@nongnu.org; Sun, 03 Dec 2023 19:48:54 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r9x94-0001uV-Tj
- for qemu-riscv@nongnu.org; Sun, 03 Dec 2023 19:49:12 -0500
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1r9x8m-0001r6-Um
+ for qemu-riscv@nongnu.org; Sun, 03 Dec 2023 19:48:54 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1701650949;
+ s=mimecast20190719; t=1701650932;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:mime-version: content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=JVyfjLzyQs0XZ2Tf2HNNgNKUbfHJiHRiECV6o6YVcyQ=;
- b=Tw7U0pk9ZVhsWeTU/ULveFIuf0DmeM1HtSooGU/64CkaCk71mmdtaRp5L511G23ihvwiix
- vMaSvcSdSffDWvqnIMC4TexU8KoDxzCir7qLkq2Ku2+lKV6NNBuNqjEo9Pozcqa0JqAiX1
- NeFqfqXpc7npM+H4p5ecU58yma4/VEM=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-2-8Ayeq6h7MLm6Im-iWCNtyA-1; Sun, 03 Dec 2023 19:49:05 -0500
-X-MC-Unique: 8Ayeq6h7MLm6Im-iWCNtyA-1
+ bh=i8Sp/8SK4743lQGwgH+4VWrbTnWzFB9u/QLRM/j3xU8=;
+ b=W6ET9LwpZheCEN9FRioViokYExB8L3jDGvilIG8IEwgL+J1uR5all47nsIzOAisGK5SfM6
+ AWpwbUQ/NuD2Rixomv/xNjAfV4okfn8EXPRd3bLbGu81XOEQhYdjq9hwmsOa6jdWqEiiry
+ j6BHKLMXGM7WnQwjv/1HC6lhglf5A1Y=
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-694-3U4DFAOQM6yVAvagJvXCfA-1; Sun,
+ 03 Dec 2023 19:48:47 -0500
+X-MC-Unique: 3U4DFAOQM6yVAvagJvXCfA-1
 Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
  [10.11.54.9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B4DFE8314FD;
- Mon,  4 Dec 2023 00:49:03 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id C6D5738C6161;
+ Mon,  4 Dec 2023 00:48:46 +0000 (UTC)
 Received: from gshan.redhat.com (unknown [10.64.136.61])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id D0C4E492BE0;
- Mon,  4 Dec 2023 00:48:55 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 303B5492BE0;
+ Mon,  4 Dec 2023 00:48:38 +0000 (UTC)
 From: Gavin Shan <gshan@redhat.com>
 To: qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org,
@@ -54,10 +54,10 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org,
  palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  liwei1518@gmail.com, dbarboza@ventanamicro.com,
  zhiwei_liu@linux.alibaba.com, shan.gavin@gmail.com
-Subject: [PATCH v9 9/9] hw/riscv/shakti_c: Check CPU type in
+Subject: [PATCH v9 7/9] hw/arm/sbsa-ref: Check CPU type in
  machine_run_board_init()
-Date: Mon,  4 Dec 2023 10:47:26 +1000
-Message-ID: <20231204004726.483558-10-gshan@redhat.com>
+Date: Mon,  4 Dec 2023 10:47:24 +1000
+Message-ID: <20231204004726.483558-8-gshan@redhat.com>
 In-Reply-To: <20231204004726.483558-1-gshan@redhat.com>
 References: <20231204004726.483558-1-gshan@redhat.com>
 MIME-Version: 1.0
@@ -65,14 +65,15 @@ Content-Type: text/plain; charset=UTF-8
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.9
-Received-SPF: pass client-ip=216.145.221.124; envelope-from=gshan@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=gshan@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -95,51 +96,77 @@ by ourselves.
 
 Signed-off-by: Gavin Shan <gshan@redhat.com>
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Leif Lindholm <quic_llindhol@quicinc.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- hw/riscv/shakti_c.c | 13 ++++++-------
- 1 file changed, 6 insertions(+), 7 deletions(-)
+ hw/arm/sbsa-ref.c | 36 ++++++++++--------------------------
+ 1 file changed, 10 insertions(+), 26 deletions(-)
 
-diff --git a/hw/riscv/shakti_c.c b/hw/riscv/shakti_c.c
-index 12ea74b032..3888034c2b 100644
---- a/hw/riscv/shakti_c.c
-+++ b/hw/riscv/shakti_c.c
-@@ -28,7 +28,6 @@
- #include "exec/address-spaces.h"
- #include "hw/riscv/boot.h"
+diff --git a/hw/arm/sbsa-ref.c b/hw/arm/sbsa-ref.c
+index f3c9704693..477dca0637 100644
+--- a/hw/arm/sbsa-ref.c
++++ b/hw/arm/sbsa-ref.c
+@@ -145,27 +145,6 @@ static const int sbsa_ref_irqmap[] = {
+     [SBSA_GWDT_WS0] = 16,
+ };
  
+-static const char * const valid_cpus[] = {
+-    ARM_CPU_TYPE_NAME("cortex-a57"),
+-    ARM_CPU_TYPE_NAME("cortex-a72"),
+-    ARM_CPU_TYPE_NAME("neoverse-n1"),
+-    ARM_CPU_TYPE_NAME("neoverse-v1"),
+-    ARM_CPU_TYPE_NAME("neoverse-n2"),
+-    ARM_CPU_TYPE_NAME("max"),
+-};
 -
- static const struct MemmapEntry {
-     hwaddr base;
-     hwaddr size;
-@@ -47,12 +46,6 @@ static void shakti_c_machine_state_init(MachineState *mstate)
-     ShaktiCMachineState *sms = RISCV_SHAKTI_MACHINE(mstate);
-     MemoryRegion *system_memory = get_system_memory();
+-static bool cpu_type_valid(const char *cpu)
+-{
+-    int i;
+-
+-    for (i = 0; i < ARRAY_SIZE(valid_cpus); i++) {
+-        if (strcmp(cpu, valid_cpus[i]) == 0) {
+-            return true;
+-        }
+-    }
+-    return false;
+-}
+-
+ static uint64_t sbsa_ref_cpu_mp_affinity(SBSAMachineState *sms, int idx)
+ {
+     uint8_t clustersz = ARM_DEFAULT_CPUS_PER_CLUSTER;
+@@ -733,11 +712,6 @@ static void sbsa_ref_init(MachineState *machine)
+     const CPUArchIdList *possible_cpus;
+     int n, sbsa_max_cpus;
  
--    /* Allow only Shakti C CPU for this platform */
--    if (strcmp(mstate->cpu_type, TYPE_RISCV_CPU_SHAKTI_C) != 0) {
--        error_report("This board can only be used with Shakti C CPU");
+-    if (!cpu_type_valid(machine->cpu_type)) {
+-        error_report("sbsa-ref: CPU type %s not supported", machine->cpu_type);
 -        exit(1);
 -    }
 -
-     /* Initialize SoC */
-     object_initialize_child(OBJECT(mstate), "soc", &sms->soc,
-                             TYPE_RISCV_SHAKTI_SOC);
-@@ -82,9 +75,15 @@ static void shakti_c_machine_instance_init(Object *obj)
- static void shakti_c_machine_class_init(ObjectClass *klass, void *data)
+     if (kvm_enabled()) {
+         error_report("sbsa-ref: KVM is not supported for this machine");
+         exit(1);
+@@ -898,10 +872,20 @@ static void sbsa_ref_instance_init(Object *obj)
+ static void sbsa_ref_class_init(ObjectClass *oc, void *data)
  {
-     MachineClass *mc = MACHINE_CLASS(klass);
+     MachineClass *mc = MACHINE_CLASS(oc);
 +    static const char * const valid_cpu_types[] = {
-+        RISCV_CPU_TYPE_NAME("shakti-c"),
-+        NULL
++        ARM_CPU_TYPE_NAME("cortex-a57"),
++        ARM_CPU_TYPE_NAME("cortex-a72"),
++        ARM_CPU_TYPE_NAME("neoverse-n1"),
++        ARM_CPU_TYPE_NAME("neoverse-v1"),
++        ARM_CPU_TYPE_NAME("neoverse-n2"),
++        ARM_CPU_TYPE_NAME("max"),
++        NULL,
 +    };
-+
-     mc->desc = "RISC-V Board compatible with Shakti SDK";
-     mc->init = shakti_c_machine_state_init;
-     mc->default_cpu_type = TYPE_RISCV_CPU_SHAKTI_C;
-+    mc->valid_cpu_types = valid_cpu_types;
-     mc->default_ram_id = "riscv.shakti.c.ram";
- }
  
+     mc->init = sbsa_ref_init;
+     mc->desc = "QEMU 'SBSA Reference' ARM Virtual Machine";
+     mc->default_cpu_type = ARM_CPU_TYPE_NAME("neoverse-n1");
++    mc->valid_cpu_types = valid_cpu_types;
+     mc->max_cpus = 512;
+     mc->pci_allow_0_address = true;
+     mc->minimum_page_bits = 12;
 -- 
 2.42.0
 
