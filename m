@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54576C4167B
-	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Dec 2023 00:25:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59B82C4167B
+	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Dec 2023 00:26:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rAfip-0006gD-Gp; Tue, 05 Dec 2023 19:25:03 -0500
+	id 1rAfkA-0007rG-JR; Tue, 05 Dec 2023 19:26:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rAfin-0006YS-A1; Tue, 05 Dec 2023 19:25:01 -0500
-Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
+ id 1rAfk8-0007ql-U0; Tue, 05 Dec 2023 19:26:24 -0500
+Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rAfil-0008Po-BU; Tue, 05 Dec 2023 19:25:00 -0500
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-548f853fc9eso8000620a12.1; 
- Tue, 05 Dec 2023 16:24:58 -0800 (PST)
+ id 1rAfk7-00016W-80; Tue, 05 Dec 2023 19:26:24 -0500
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-50be4f03b06so4127994e87.0; 
+ Tue, 05 Dec 2023 16:26:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1701822297; x=1702427097; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1701822381; x=1702427181; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rWScdywkfFb76Vj2EMKdAjVcWPxLAaI8Mm5VbIFOUMc=;
- b=MXz+HndmyPepCkWF+3uoALDcQvcx9Xyf2ydU724OfJJrwnbzGEuZNXcOzAWa3kpXrl
- mow3lVJnuNrZcak5eGr6vu6BTdQOocT7IwoQO1k4h8xOvjvvYprKhZu7VzO4+uBwr6oG
- frGDGYrl/b663Tl/ARj0y1JXId9TKENiXMKw4VwZlhKwnrKtU0KHrlwzvixyZyEmwUNW
- HarDW2mADB6JAZp6gyVMHQ1bTWL9ux6PkqWz2fdASk+BWfHNDAB0YDvyj1X7HGTAG555
- R2KjvL0Gzl5P5eq/bP4WKObvGCG1Da3i0vpzB07mVbRdNv10y05WB1fFneHJ8Afn/MLT
- MmSg==
+ bh=6+7lwnfTMC8kcRYbQZYnxjxLvv7b0jrwyoRwZAQLfeg=;
+ b=lzMtC+xtbGDGqxB83bFUZ9CZoBqueFjCSNNdPO7fgBIdFf5X5jqIb6xBYWxKPg74dg
+ 03pfeb6Gd8l4ES7fSDbhIooZofLX0icYAuv6gWVCx8PYzV1og+C1+J0IKVkZdoTnaFrz
+ zp/W+heAmSdXA1GTB36SpU5v8agHyo0rIUiR6tyfQ8QGFUzZ+0wg8eJV8ZImeelaIfvS
+ kvIBttLloO3CN7xlHD1KvJTdzBHljZRWNpxWtN/DItfxcsFvn0QM7S0DiylP5QR1JHIK
+ 2mRconH2qkUND1nupe7qpe+ioXna57S3P/0ro/o+O/kDgk0Ze9sHPLeLcthKHreD0eOF
+ UJdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701822297; x=1702427097;
+ d=1e100.net; s=20230601; t=1701822381; x=1702427181;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rWScdywkfFb76Vj2EMKdAjVcWPxLAaI8Mm5VbIFOUMc=;
- b=k4b/xOp/EoI6W8PjRPqBPD2XsIlTS1Zyvt5avf+BCdXKoSzQsfFhKNMzIoPT69Xtyq
- AWruvpKzGkUi05u5R7RfdbGz4dDtGoGTCCDGjhXZ9V9tRXyB9SQxquGLUnZdNzz+sMQz
- V7gRh0MfSGc7Xic2zKAYO3xOqXfsTiUT0EXCpVcn3IDrCpcBsZIhHMytK1goi5cQgB7M
- orJlT0BMC0BG7/qk6jIUC4cbCl7807aTqbjFTK6UfmygkCgKORpYEnGMuNYL2lcV8rwn
- Nf1vrSOJLQbXUn+6ukGCM6rlBRSq03tcm5+0OsSrsSBm6vyopMOuDByeG6BNwk8lPBAF
- BW1Q==
-X-Gm-Message-State: AOJu0YyCVf1cT3jt7v+xKn97nZGI8nT3i9a8OItGjUT6prfOphKiinn8
- nr0hKs+a+KK0lAkjLYly6KZ++X3B0SQrrfrBRnQ=
-X-Google-Smtp-Source: AGHT+IEoPFEcUlqhfk4pjUtJWTiDD3IX5M/wyYZOHS3L0atac9rDLnPnzdfaoZYRsfgWImNitnAgTmlcdB8WFyzI8dA=
-X-Received: by 2002:a50:9997:0:b0:54c:526d:52c with SMTP id
- m23-20020a509997000000b0054c526d052cmr41321edb.85.1701822297194; Tue, 05 Dec
- 2023 16:24:57 -0800 (PST)
+ bh=6+7lwnfTMC8kcRYbQZYnxjxLvv7b0jrwyoRwZAQLfeg=;
+ b=TIvFhHN6GAjG+QcIeHO0b5VGVbvk8K12UDgEmfp/kes58f4vuaBwAd8qcKT8q008kT
+ 67bivBRhw3CaZPJ4w9kwVHOZMlnVW6cBU/NgCbwwcpRwMlqlPE0UJc1Wdnz/YGBqDYJb
+ QQ0nv4fMCUUxQGsRIPE4SckEwyJowjdoVPYCCFy3SzB61k8Ij1v/xjjr40LAmwxyx6yj
+ L1l8pc3/S9+uHRJQUROmvSzGDuk5rEjfepw2bKmaKxtSMkri1ygcv6FZJ2ik3it0R6GB
+ hB2TJ7Mrf5X37vN5FKwK/P9p5aOOwfJ1e/od+bCTehks0xBDsYJiznprHdhd6gO/P4Cu
+ IGzQ==
+X-Gm-Message-State: AOJu0Ywa3Gxtl7J0BpN45uQCnAMOZlU2zTmGo4d2djP1dkbPmPzG1lHi
+ GiA6+fIpqf8m7AyWOZx8f/9X+dosa0z84d7FEEY=
+X-Google-Smtp-Source: AGHT+IHJRpWlI9EyYfcb2+aTpth0sZEpsq5YHWPHxiNzSuVYZ+xHhDG6fRJm3jH+rfbemwzWf01FkgQf01rDwefg5BA=
+X-Received: by 2002:a19:6d1b:0:b0:50b:ea76:509f with SMTP id
+ i27-20020a196d1b000000b0050bea76509fmr24122lfc.64.1701822380891; Tue, 05 Dec
+ 2023 16:26:20 -0800 (PST)
 MIME-Version: 1.0
 References: <20231130182748.1894790-1-dbarboza@ventanamicro.com>
- <20231130182748.1894790-3-dbarboza@ventanamicro.com>
-In-Reply-To: <20231130182748.1894790-3-dbarboza@ventanamicro.com>
+ <20231130182748.1894790-4-dbarboza@ventanamicro.com>
+In-Reply-To: <20231130182748.1894790-4-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 6 Dec 2023 10:24:29 +1000
-Message-ID: <CAKmqyKPxL_ajNd-1dh-zg6FVigRGABpZ79caiGNrBYjMtotcyw@mail.gmail.com>
-Subject: Re: [PATCH for-9.0 2/4] linux-headers: riscv: add ptrace.h
+Date: Wed, 6 Dec 2023 10:25:53 +1000
+Message-ID: <CAKmqyKN0xUWNj1XtNHD096pFQ1Uv65XKEeU+xb_6hUX-Qf9_bw@mail.gmail.com>
+Subject: Re: [PATCH for-9.0 3/4] target/riscv/kvm: do PR_RISCV_V_SET_CONTROL
+ during realize()
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
  palmer@rivosinc.com, ajones@ventanamicro.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::532;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x532.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::12e;
+ envelope-from=alistair23@gmail.com; helo=mail-lf1-x12e.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -90,182 +91,89 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Dec 1, 2023 at 4:29=E2=80=AFAM Daniel Henrique Barboza
+On Fri, Dec 1, 2023 at 5:00=E2=80=AFAM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> KVM vector support for RISC-V requires the linux-header ptrace.h.
+> Linux RISC-V vector documentation (Document/arch/riscv/vector.rst)
+> mandates a prctl() in order to allow an userspace thread to use the
+> Vector extension from the host.
+>
+> This is something to be done in realize() time, after init(), when we
+> already decided whether we're using RVV or not. We don't have a
+> realize() callback for KVM yet, so add kvm_cpu_realize() and enable RVV
+> for the thread via PR_RISCV_V_SET_CONTROL.
 >
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  linux-headers/asm-riscv/ptrace.h | 132 +++++++++++++++++++++++++++++++
->  scripts/update-linux-headers.sh  |   3 +
->  2 files changed, 135 insertions(+)
->  create mode 100644 linux-headers/asm-riscv/ptrace.h
+>  target/riscv/kvm/kvm-cpu.c | 29 +++++++++++++++++++++++++++++
+>  1 file changed, 29 insertions(+)
 >
-> diff --git a/linux-headers/asm-riscv/ptrace.h b/linux-headers/asm-riscv/p=
-trace.h
-> new file mode 100644
-> index 0000000000..1e3166caca
-> --- /dev/null
-> +++ b/linux-headers/asm-riscv/ptrace.h
-> @@ -0,0 +1,132 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only WITH Linux-syscall-note */
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index 45b6cf1cfa..273c71baea 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -18,6 +18,7 @@
+>
+>  #include "qemu/osdep.h"
+>  #include <sys/ioctl.h>
+> +#include <sys/prctl.h>
+>
+>  #include <linux/kvm.h>
+>
+> @@ -47,6 +48,9 @@
+>  #include "sysemu/runstate.h"
+>  #include "hw/riscv/numa.h"
+>
+> +#define PR_RISCV_V_SET_CONTROL            69
+> +#define PR_RISCV_V_VSTATE_CTRL_ON          2
+> +
+>  void riscv_kvm_aplic_request(void *opaque, int irq, int level)
+>  {
+>      kvm_set_irq(kvm_state, irq, !!level);
+> @@ -1481,11 +1485,36 @@ static void kvm_cpu_instance_init(CPUState *cs)
+>      }
+>  }
+>
 > +/*
-> + * Copyright (C) 2012 Regents of the University of California
-> + */
-> +
-> +#ifndef _ASM_RISCV_PTRACE_H
-> +#define _ASM_RISCV_PTRACE_H
-> +
-> +#ifndef __ASSEMBLY__
-> +
-> +#include <linux/types.h>
-> +
-> +#define PTRACE_GETFDPIC                33
-> +
-> +#define PTRACE_GETFDPIC_EXEC   0
-> +#define PTRACE_GETFDPIC_INTERP 1
-> +
-> +/*
-> + * User-mode register state for core dumps, ptrace, sigcontext
+> + * We'll get here via the following path:
 > + *
-> + * This decouples struct pt_regs from the userspace ABI.
-> + * struct user_regs_struct must form a prefix of struct pt_regs.
+> + * riscv_cpu_realize()
+> + *   -> cpu_exec_realizefn()
+> + *      -> kvm_cpu_realize() (via accel_cpu_common_realize())
 > + */
-> +struct user_regs_struct {
-> +       unsigned long pc;
-> +       unsigned long ra;
-> +       unsigned long sp;
-> +       unsigned long gp;
-> +       unsigned long tp;
-> +       unsigned long t0;
-> +       unsigned long t1;
-> +       unsigned long t2;
-> +       unsigned long s0;
-> +       unsigned long s1;
-> +       unsigned long a0;
-> +       unsigned long a1;
-> +       unsigned long a2;
-> +       unsigned long a3;
-> +       unsigned long a4;
-> +       unsigned long a5;
-> +       unsigned long a6;
-> +       unsigned long a7;
-> +       unsigned long s2;
-> +       unsigned long s3;
-> +       unsigned long s4;
-> +       unsigned long s5;
-> +       unsigned long s6;
-> +       unsigned long s7;
-> +       unsigned long s8;
-> +       unsigned long s9;
-> +       unsigned long s10;
-> +       unsigned long s11;
-> +       unsigned long t3;
-> +       unsigned long t4;
-> +       unsigned long t5;
-> +       unsigned long t6;
-> +};
+> +static bool kvm_cpu_realize(CPUState *cs, Error **errp)
+> +{
+> +    RISCVCPU *cpu =3D RISCV_CPU(cs);
+> +    int ret;
 > +
-> +struct __riscv_f_ext_state {
-> +       __u32 f[32];
-> +       __u32 fcsr;
-> +};
+> +    if (riscv_has_ext(&cpu->env, RVV)) {
+> +        ret =3D prctl(PR_RISCV_V_SET_CONTROL, PR_RISCV_V_VSTATE_CTRL_ON)=
+;
+> +        if (ret) {
+> +            error_setg(errp, "Error in prctl PR_RISCV_V_SET_CONTROL, cod=
+e: %s",
+> +                       strerrorname_np(errno));
+> +            return false;
+> +        }
+> +    }
 > +
-> +struct __riscv_d_ext_state {
-> +       __u64 f[32];
-> +       __u32 fcsr;
-> +};
+> +   return true;
+> +}
 > +
-> +struct __riscv_q_ext_state {
-> +       __u64 f[64] __attribute__((aligned(16)));
-> +       __u32 fcsr;
-> +       /*
-> +        * Reserved for expansion of sigcontext structure.  Currently zer=
-oed
-> +        * upon signal, and must be zero upon sigreturn.
-> +        */
-> +       __u32 reserved[3];
-> +};
-> +
-> +struct __riscv_ctx_hdr {
-> +       __u32 magic;
-> +       __u32 size;
-> +};
-> +
-> +struct __riscv_extra_ext_header {
-> +       __u32 __padding[129] __attribute__((aligned(16)));
-> +       /*
-> +        * Reserved for expansion of sigcontext structure.  Currently zer=
-oed
-> +        * upon signal, and must be zero upon sigreturn.
-> +        */
-> +       __u32 reserved;
-> +       struct __riscv_ctx_hdr hdr;
-> +};
-> +
-> +union __riscv_fp_state {
-> +       struct __riscv_f_ext_state f;
-> +       struct __riscv_d_ext_state d;
-> +       struct __riscv_q_ext_state q;
-> +};
-> +
-> +struct __riscv_v_ext_state {
-> +       unsigned long vstart;
-> +       unsigned long vl;
-> +       unsigned long vtype;
-> +       unsigned long vcsr;
-> +       unsigned long vlenb;
-> +       void *datap;
-> +       /*
-> +        * In signal handler, datap will be set a correct user stack offs=
-et
-> +        * and vector registers will be copied to the address of datap
-> +        * pointer.
-> +        */
-> +};
-> +
-> +struct __riscv_v_regset_state {
-> +       unsigned long vstart;
-> +       unsigned long vl;
-> +       unsigned long vtype;
-> +       unsigned long vcsr;
-> +       unsigned long vlenb;
-> +       char vreg[];
-> +};
-> +
-> +/*
-> + * According to spec: The number of bits in a single vector register,
-> + * VLEN >=3D ELEN, which must be a power of 2, and must be no greater th=
-an
-> + * 2^16 =3D 65536bits =3D 8192bytes
-> + */
-> +#define RISCV_MAX_VLENB (8192)
-> +
-> +#endif /* __ASSEMBLY__ */
-> +
-> +#endif /* _ASM_RISCV_PTRACE_H */
-> diff --git a/scripts/update-linux-headers.sh b/scripts/update-linux-heade=
-rs.sh
-> index 34295c0fe5..a0006eec6f 100755
-> --- a/scripts/update-linux-headers.sh
-> +++ b/scripts/update-linux-headers.sh
-> @@ -156,6 +156,9 @@ for arch in $ARCHLIST; do
->          cp_portable "$tmpdir/bootparam.h" \
->                      "$output/include/standard-headers/asm-$arch"
->      fi
-> +    if [ $arch =3D riscv ]; then
-> +        cp "$tmpdir/include/asm/ptrace.h" "$output/linux-headers/asm-ris=
-cv/"
-> +    fi
->  done
+>  static void kvm_cpu_accel_class_init(ObjectClass *oc, void *data)
+>  {
+>      AccelCPUClass *acc =3D ACCEL_CPU_CLASS(oc);
 >
->  rm -rf "$output/linux-headers/linux"
+>      acc->cpu_instance_init =3D kvm_cpu_instance_init;
+> +    acc->cpu_target_realize =3D kvm_cpu_realize;
+>  }
+>
+>  static const TypeInfo kvm_cpu_accel_type_info =3D {
 > --
 > 2.41.0
 >
