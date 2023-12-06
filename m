@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8D97C4167B
-	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Dec 2023 01:21:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AB70C4167B
+	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Dec 2023 03:39:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rAgbG-0004Ef-N9; Tue, 05 Dec 2023 20:21:18 -0500
+	id 1rAike-0006cL-Cf; Tue, 05 Dec 2023 22:39:09 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <atishp@atishpatra.org>)
- id 1rAgbF-0004EW-Li
- for qemu-riscv@nongnu.org; Tue, 05 Dec 2023 20:21:17 -0500
-Received: from mail-lj1-x236.google.com ([2a00:1450:4864:20::236])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rAika-0006bx-0q; Tue, 05 Dec 2023 22:39:04 -0500
+Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <atishp@atishpatra.org>)
- id 1rAgbD-000760-J6
- for qemu-riscv@nongnu.org; Tue, 05 Dec 2023 20:21:17 -0500
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-2c9f751663bso43971051fa.1
- for <qemu-riscv@nongnu.org>; Tue, 05 Dec 2023 17:21:14 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rAikY-0000NY-DO; Tue, 05 Dec 2023 22:39:03 -0500
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-54cb4fa667bso3906939a12.3; 
+ Tue, 05 Dec 2023 19:39:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=atishpatra.org; s=google; t=1701825673; x=1702430473; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1701833940; x=1702438740; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=i3/Vwal/9VhYPZLaVj4KiOzjzd2yQ6ht3KJy7c3oH7I=;
- b=gujnfSXlKEhLaQ3KmSXJbvDzIHwFCillIwlEILo3VCadGc48QsyaK5ygFH2AqNx37v
- RfGcYVVsFRQzc5aydPHxkPZ82loGIFthpQOmVkFMmZir/UmOTgKxTz13HMqBbpJATfiV
- CfCaS1Cya2O4GX9KagVk7K6oaD0kYgj0ZfqQk=
+ bh=OLp5AGIqfRNPjvzsvUQwknLb6hSSPAKtwZW1BRi1ko8=;
+ b=lQV9Dfh2qgTH5DJNZpuudsBktFowhltCePIdfEiBOhaCTYoQG+OrrClRQw5S0VYH2M
+ AR8z2VxkL6yrr3xkdFjgBqiHxxw1ValpRiL0cel1gJAwkr+bZ0oqQjbbAL9h9008QOrm
+ Q0QrZZ5FHi4QZ+7l3Bm6nPIjzy6ZUnCqoVS+BUYMgnWrfxef6rR/30PvWfKn3kTkbxWt
+ C1RqmEv6x3QB+tYpeD6pBP8nAZa5d5UI1wHOmlWM36wGNUreiQBE9weobszlpjqz8Zk4
+ +HvqlmHu+cJzbv1rqGp/UkKpeb9vb7BA1Kp+urJVzuOrq0LpNY+JVkx1RvCDIXvebd+e
+ uuXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701825673; x=1702430473;
+ d=1e100.net; s=20230601; t=1701833940; x=1702438740;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=i3/Vwal/9VhYPZLaVj4KiOzjzd2yQ6ht3KJy7c3oH7I=;
- b=IU6Ok3fCZPZyc6tVRtoeX/JyxMWbkCwDpF1IL6hGQPSNQ196dzC17KwY4+ufOLbNIm
- 9TgX1C67PLWs5w0+5ledi/Z0zd+PTIp53g8kCtiz6V+1Fc2WbT/VtgMFSp1Gl3uJe6NN
- AsILNAOiKVrciGWGxcpncJ1CsEMum6kIP9wnpiF40F9g6AnpyEI6Q5VDM/+mgFfSNbdD
- 1v4VnXCoLymWXnFaKryXy6UgN4+i9ywhE3Mc1XKlA0pkYHvI/A7in74ZyiP2FwsQD8zn
- TD15L20HhPSS1/2CPsE1KPOoEsJBS1UBQsV0ww7IUcY7J5pgfDsu6hmX0jrsVSSGtFWn
- gGWQ==
-X-Gm-Message-State: AOJu0Yzx2k8PX6SxG0TImokbuuQT/eA3hrMj4B3leYUxlwRI0x3cgY3I
- ECwlXMXXtUzB4YNQPJaDngcy5NdxO7bxse6+f1LfAU3bRos4xrF5+A==
-X-Google-Smtp-Source: AGHT+IHXBmteqftGV/ac3mh1ysWLNeNeSwxpFp4Vwg1+ThN1B6GQHE4qdu54pXJc8rmi9wZ7GcWP0jHdon0DmT7iqYg=
-X-Received: by 2002:ac2:538d:0:b0:50b:ff2a:8847 with SMTP id
- g13-20020ac2538d000000b0050bff2a8847mr41542lfh.165.1701825672791; Tue, 05 Dec
- 2023 17:21:12 -0800 (PST)
+ bh=OLp5AGIqfRNPjvzsvUQwknLb6hSSPAKtwZW1BRi1ko8=;
+ b=eHtbSPnw3fLGEa5li3eLiCk32CueCppi/JhxtULvOPMsWxzRM2MeiSxlkQXFxTkS6O
+ kuuoby7os3LbT2H3pc0kVNJHTDRgCU+BpOwi3AqJVbKyPd1LJ5iGnyALcPK8kqVHEGeT
+ 2NvDgF/dolzlzDYPoP6cuKfNwdmAL2c9+YcMK+uVuAQyEDabn8nVoUsA1qMTH/9mddrS
+ nx7OKqz7ycmsvbXgIwRrhV+jKx8P3+77EcElXgCxS1YCb8WOQzbRyNsZ9TCYBVAZcX1/
+ L+e9uWUTIvo/ug+gh0GGT+q5rYgoUKJ8NJF/E/njW7w4amEO+Dq2iLE9W6DWdFtZuRFX
+ KHnw==
+X-Gm-Message-State: AOJu0YxCDKhJR9zrte+BgyqY7nhP2MHHut6Ci9clBGpXQ5ZQP92u2f+H
+ CljYOM26Xp3QpBjaVCssrwSSsjPOvPphKzGWCID81jUbtkHZ9EW0
+X-Google-Smtp-Source: AGHT+IE2l89bpmHWuNJf1Zr6lGdHffeUaMYc9to6TsWLgfEGDHB8zFdzZPt6je2+T+R+003zvWE12ds/m7HZdpo+iGM=
+X-Received: by 2002:a50:d501:0:b0:54c:ac4d:f4b7 with SMTP id
+ u1-20020a50d501000000b0054cac4df4b7mr190943edi.1.1701833939678; Tue, 05 Dec
+ 2023 19:38:59 -0800 (PST)
 MIME-Version: 1.0
-References: <25092274-76c6-4d34-a3c4-cae3214bc277@Spark>
- <CAOnJCUL_kg08aQoNosbTgT64O508kQ58-MtT29fBsD+f8dqyoQ@mail.gmail.com>
- <61ae4c15-c251-43a6-aa98-b12ea5feb246@Spark>
-In-Reply-To: <61ae4c15-c251-43a6-aa98-b12ea5feb246@Spark>
-From: Atish Patra <atishp@atishpatra.org>
-Date: Tue, 5 Dec 2023 17:21:01 -0800
-Message-ID: <CAOnJCUK3eVTwPG4VTCpw0kzwqLMO0RMcYAcb1vDjdKrum38MYw@mail.gmail.com>
-Subject: =?UTF-8?Q?Re=3A_About_RISCV=E2=80=99s_Performance_Counters_and_QEMU?=
-To: Elio Vinciguerra <eliovinciguerra@me.com>
-Cc: ELIO VINCIGUERRA <elio.vinciguerra@phd.unict.it>, 
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
+References: <20231114022254.294711-1-alvinga@andestech.com>
+In-Reply-To: <20231114022254.294711-1-alvinga@andestech.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 6 Dec 2023 13:38:32 +1000
+Message-ID: <CAKmqyKPqUD1j+p3E31Rdo4aDF_gBfJb2QmCJBGsjHqQViEOxTQ@mail.gmail.com>
+Subject: Re: [PATCH v5] target/riscv: update checks on writing pmpcfg for
+ Smepmp to version 1.0
+To: Alvin Chang <alvinga@andestech.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, alistair.francis@wdc.com, 
+ liweiwei@iscas.ac.cn
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::236;
- envelope-from=atishp@atishpatra.org; helo=mail-lj1-x236.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2a00:1450:4864:20::534;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x534.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -88,90 +89,139 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Dec 5, 2023 at 4:56=E2=80=AFAM Elio Vinciguerra <eliovinciguerra@me=
-.com> wrote:
+On Tue, Nov 14, 2023 at 12:24=E2=80=AFPM Alvin Chang via <qemu-devel@nongnu=
+.org> wrote:
 >
-> Thanks for your answer, do you know if the working ones return actual or =
-random numbers?
+> Current checks on writing pmpcfg for Smepmp follows Smepmp version
+> 0.9.1. However, Smepmp specification has already been ratified, and
+> there are some differences between version 0.9.1 and 1.0. In this
+> commit we update the checks of writing pmpcfg to follow Smepmp version
+> 1.0.
 >
+> When mseccfg.MML is set, the constraints to modify PMP rules are:
+> 1. Locked rules cannot be removed or modified until a PMP reset, unless
+>    mseccfg.RLB is set.
+> 2. From Smepmp specification version 1.0, chapter 2 section 4b:
+>    Adding a rule with executable privileges that either is M-mode-only
+>    or a locked Shared-Region is not possible and such pmpcfg writes are
+>    ignored, leaving pmpcfg unchanged.
+>
+> The commit transfers the value of pmpcfg into the index of the Smepmp
+> truth table, and checks the rules by aforementioned specification
+> changes.
+>
+> Signed-off-by: Alvin Chang <alvinga@andestech.com>
+> ---
+> Changes from v4: Rebase on master.
+>
+> Changes from v3: Modify "epmp_operation" to "smepmp_operation".
+>
+> Changes from v2: Adopt switch case ranges and numerical order.
+>
+> Changes from v1: Convert ePMP over to Smepmp.
+>
+>  target/riscv/pmp.c | 40 ++++++++++++++++++++++++++++++++--------
+>  1 file changed, 32 insertions(+), 8 deletions(-)
+>
+> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> index 162e88a90a..4069514069 100644
+> --- a/target/riscv/pmp.c
+> +++ b/target/riscv/pmp.c
+> @@ -102,16 +102,40 @@ static bool pmp_write_cfg(CPURISCVState *env, uint3=
+2_t pmp_index, uint8_t val)
+>                  locked =3D false;
+>              }
+>
+> -            /* mseccfg.MML is set */
+> -            if (MSECCFG_MML_ISSET(env)) {
+> -                /* not adding execute bit */
+> -                if ((val & PMP_LOCK) !=3D 0 && (val & PMP_EXEC) !=3D PMP=
+_EXEC) {
+> +            /*
+> +             * mseccfg.MML is set. Locked rules cannot be removed or mod=
+ified
+> +             * until a PMP reset. Besides, from Smepmp specification ver=
+sion 1.0
+> +             * , chapter 2 section 4b says:
+> +             * Adding a rule with executable privileges that either is
+> +             * M-mode-only or a locked Shared-Region is not possible and=
+ such
+> +             * pmpcfg writes are ignored, leaving pmpcfg unchanged.
+> +             */
+> +            if (MSECCFG_MML_ISSET(env) && !pmp_is_locked(env, pmp_index)=
+) {
 
-It depends on your definition of reality :). For cycle/insteret, it
-returns host_ticks by default.
-For the other three events, we rely on the riscv_cpu_tlb_fill() function.
+This is tricky and took me a while to get my head around.
 
-Both cases it is not close to what you would actually see in hardware.
-However, we need something
-to build the software ecosystem in absence of real hardware.
+From what I can tell, there is a bug in the spec.
 
-I don't know your requirements for running in Qemu. However, if you
-can use real silicon, there are few
-RISC-V hardware that have decent support for PMU.
- HiFive unleashed, Alibaba D1 and Andes AX45MP core (with inflight patches)
+The spec specifically states that:
 
-> And do you know if it is easily possible to implement the actual behavior=
- of other counters?
->
+"""
+The meaning of pmpcfg.L changes: Instead of marking a rule as locked
+and enforced in all modes, it
+now marks a rule as M-mode-only when set and S/U-mode-only when unset.
+"""
 
-You mean events ? AFAIK, the problem is there is no easy way to
-emulate any other event. I would be happy to be proven wrong though.
-Once you find a way to emulate other events, supporting them is pretty easy=
-.
+So the check for !pmp_is_locked() sounds correct.
 
-> Regards,
-> Elio
-> Il 4 dic 2023, 9:30=E2=80=AFAM +0100, Atish Patra <atishp@atishpatra.org>=
-, ha scritto:
->
-> On Fri, Dec 1, 2023 at 7:57=E2=80=AFAM ELIO VINCIGUERRA
-> <elio.vinciguerra@phd.unict.it> wrote:
->
->
-> Hi everybody, I recently started using RISCV architectures, I would need =
-a way to access =E2=80=9Chpmcounter[3-31]=E2=80=9D registers using QEMU emu=
-lator.
->
-> The kernel used for simulations is a C program, not a heavy operating sys=
-tem, which is why I would need to access the registers mentioned before via=
- assembly.
->
-> Trivially accessing any of those registers always returns zero.
->
-> The question is:
-> Are these registers enabled in QEMU? If not, is it possible to enable the=
-m or are they hardwired to zero? How?
->
-> Trying to access the registers =E2=80=9Ccycle=E2=80=9D, =E2=80=9Cinstret=
-=E2=80=9D and =E2=80=9Ctime=E2=80=9D the values come out to be non-zero, wh=
-ich is why I think it is also possible to enable =E2=80=9Chpmcounter[3-31]=
-=E2=80=9D, but the mode of operation is unknown to me, can anyone help me?
->
->
-> Yes. You can use all the hpmcounters[3-31]. By default,
-> hpmcounter[3-18] are enabled. You can modify the set of counters using
-> pmu-mask cpu property.
-> https://gitlab.com/qemu-project/qemu/-/blob/master/target/riscv/cpu.c?ref=
-_type=3Dheads#L1467
->
-> However, upstream Qemu doesn't support a lot of PMU events. It only
-> supports 3 cache related events apart from cycle/instret.
->
-> Here are the events it supports.
-> https://gitlab.com/qemu-project/qemu/-/blob/master/target/riscv/pmu.c?ref=
-_type=3Dheads#L36
->
-> Regards,
-> Elio
->
->
->
->
+But then they add:
+
+"""
+The formerly reserved encoding of pmpcfg.RW=3D01, and the encoding
+pmpcfg.LRWX=3D1111, now encode a Shared-Region.
+"""
+
+Which contradicts what they just said.
+
+I *think* we want to ignore the locked bit here. We don't actually
+care if it's already set, instead we care if the region is an M-mode
+only region from the 2.1 table
+
+I think the best bet here is to create a helper function that takes a
+pmpcfg value and returns if it is M-mode only. Then we should check if
+the current pmp_index is M-mode only OR if we are adding one and then
+reject that.
+
+Does that make sense?
+
+Alistair
+
+> +                /*
+> +                 * Convert the PMP permissions to match the truth table =
+in the
+> +                 * Smepmp spec.
+> +                 */
+> +                const uint8_t smepmp_operation =3D
+> +                    ((val & PMP_LOCK) >> 4) | ((val & PMP_READ) << 2) |
+> +                    (val & PMP_WRITE) | ((val & PMP_EXEC) >> 2);
+> +
+> +                switch (smepmp_operation) {
+> +                case 0 ... 8:
+>                      locked =3D false;
+> -                }
+> -                /* shared region and not adding X bit */
+> -                if ((val & PMP_LOCK) !=3D PMP_LOCK &&
+> -                    (val & 0x7) !=3D (PMP_WRITE | PMP_EXEC)) {
+> +                    break;
+> +                case 9 ... 11:
+> +                    break;
+> +                case 12:
+> +                    locked =3D false;
+> +                    break;
+> +                case 13:
+> +                    break;
+> +                case 14:
+> +                case 15:
+>                      locked =3D false;
+> +                    break;
+> +                default:
+> +                    g_assert_not_reached();
+>                  }
+>              }
+>          } else {
 > --
-> Regards,
-> Atish
-
-
-
---=20
-Regards,
-Atish
+> 2.34.1
+>
+>
 
