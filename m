@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30C05C4167B
-	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Dec 2023 00:54:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 857AEC4167B
+	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Dec 2023 00:57:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rAgAz-0004uZ-UN; Tue, 05 Dec 2023 19:54:09 -0500
+	id 1rAgDn-0005j6-JJ; Tue, 05 Dec 2023 19:57:03 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rAgAy-0004sT-4v; Tue, 05 Dec 2023 19:54:08 -0500
-Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
+ id 1rAgDm-0005io-RL; Tue, 05 Dec 2023 19:57:02 -0500
+Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rAgAw-0000IH-Dp; Tue, 05 Dec 2023 19:54:07 -0500
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-54c671acd2eso5763012a12.1; 
- Tue, 05 Dec 2023 16:54:05 -0800 (PST)
+ id 1rAgDl-0000tw-A2; Tue, 05 Dec 2023 19:57:02 -0500
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-548ce39b101so7842752a12.2; 
+ Tue, 05 Dec 2023 16:57:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1701824044; x=1702428844; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1701824219; x=1702429019; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gZ/3Ui2YLExDZlzu3rb+WYG8IxT3rYMEuJa5rYx119Y=;
- b=fLZewPGcL36Vm+K/cUC3NT/MUzMPx4UsWyDSrw2+PBdzNozPDwRBxi/yv5iuMmvmF2
- cZcynYqhfrdJYk0Y8XejoUdhBsig8LhMGxKO2l0wWxnHCMO0sM0xP7iaSbnpUtIs0R29
- PswJaiyZC/wQWs8YNSZ7FB/gcwcs7k+17urc2E+iZAxzUHQu8XCmzmsHU/cFtd6eQ/RO
- dXZiPS6iRYr511ODAr6idDO++cQKIzxW0+yUsmbbHA6ew+Sxk20vZkSqPHwmlYQ6Ht65
- TW7ldOK6LmuSEx89OaithSqBYEs3hUMgCEmgHW7eXVssHekwWqzn4qo04xoxWAQwWW6j
- jzSA==
+ bh=iOrzd1+wCgODobzsxmtV08tAr43Yb62xMT/P7Tl7mKc=;
+ b=ILhhWjqLEG5bEAJ9zYVsgiJCO2q2ALWqINEREL6ukoy/Q5QQ1V5caLDcfOxE8bRQp3
+ rAuU1D2LtE/sEVkz+Yv5Kgjsa35B6tSr94azFviBhefKCKV35AeupguJnwLRx3MG3KiH
+ 1Vr0Fm3iBEoBHHnJ0DIaN20qDp0q4XZ/DZdIkO9sNUEKaj/gDg/zIzsjMpW4vvjL9J5C
+ 1BCDrXXb6Usns19jpMY5pfVy3r2J0GfLVkohCX8Guj4qB/e2cvs6T+rzSomUY/0AKqXv
+ /rjjAuqvZHIihMY4TCB3MxbPJBHv0VbgSaGuCjPyFDpZJvD188JatjuquUMZS8XOZdQn
+ fU/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701824044; x=1702428844;
+ d=1e100.net; s=20230601; t=1701824219; x=1702429019;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gZ/3Ui2YLExDZlzu3rb+WYG8IxT3rYMEuJa5rYx119Y=;
- b=OiA67AuWhxGDHRiP9K5IUb48NUzLq9cpkgW5Q3hljvxKepl9cU75C3STWw15TkpOi1
- e5MTKitsnfpS02n7MMjWUgsidTnB1L5uBCd3qN7h6JczqudhAzFqU2UyECwj6vqe4aEY
- w5Hfih8JbZQKNUwAbVYG1Tpn9BWYXBvZ2Hd+e3xwRjxwPvNywVTn+Py7lrP63QNR5OUP
- 8JMMYJKyuI35ndBF7dh5U+YIFW7Z13fl7FW09IdWoisuvYoDQ7ca6qdDf2mRLECRyabF
- ly2cKmSNbrjRGNCAoIJmX1LZZ8P5+MOQW9XbSPOrbcsNHKwa8x8xgzQYRT0qWCMFE9l2
- FcOQ==
-X-Gm-Message-State: AOJu0YyHV946JzIOIdh3IhFb5rrYo2YnlHS0oMenGNFTceEG4D44SoTM
- Q2furmOFXU8b6hW9HvgSVncfxYTAXcghkQc12Lc=
-X-Google-Smtp-Source: AGHT+IEaxasVb5GN/IEK16+IlgDq5VVdpTJd+8MluJTe1QcsJ4yl9v+DU4Mc+cih+2k996v4oyzhs4irf3t7WQoS67c=
-X-Received: by 2002:a05:6402:35c9:b0:548:55f0:b5f2 with SMTP id
- z9-20020a05640235c900b0054855f0b5f2mr90131edc.6.1701824044517; Tue, 05 Dec
- 2023 16:54:04 -0800 (PST)
+ bh=iOrzd1+wCgODobzsxmtV08tAr43Yb62xMT/P7Tl7mKc=;
+ b=NoKopv3o3/WAz41Jhut/iWOy6kkczEaCTNNetyw8TKyDJAUQgsKpNT8whL3GqGofiC
+ GM1Gz1OIk2mAC6iWcykSMbR4I7iJQOhl+xHFljmgHsc0GGT1HwHpB1w+pKUFLpEvDpHD
+ CebKMic2ozAJlIipNw4Z2chN7aiHvnKII3J0kr8rBsr+054AB4j1GEX1jyoYMfeuyfs8
+ eAqkQX7pqN/uHopY/o0FlLiw+C1Xj7Z0ybsgoq3jxBMKQxhX+J6nON4wMEnbmHpXFAY2
+ v0VOSUShCAySTkfzv+tl2R9DELCzKNTXgdUZ0JzxDPy6GKfI/7K/RVgQhhgXUdPIwkM4
+ 0Gaw==
+X-Gm-Message-State: AOJu0YzQZ6miwJReP8lSfPEDF3YsTbtnzrUlh9PyAkiaJxiY0lc2KeIS
+ UBSrJrXKT1KThbwZw1hHX3znOO0sYn/DJo4fNHQxh/mBHRmw4A==
+X-Google-Smtp-Source: AGHT+IHLoLKB7RwhsoR0UZleUdy51e5/r8CSYwxlL4PAMRJQHBtwprGneuli0mOT/3q04+NQFnAql5Pa/H5WE8FDPh0=
+X-Received: by 2002:a05:6402:448b:b0:54d:1d9f:5eb2 with SMTP id
+ er11-20020a056402448b00b0054d1d9f5eb2mr54591edb.79.1701824219469; Tue, 05 Dec
+ 2023 16:56:59 -0800 (PST)
 MIME-Version: 1.0
-References: <20231123001709.64934-1-patrick@rivosinc.com>
- <50795130-6a02-4611-8da7-c06158fc9cff@linaro.org>
- <9eba31fa-74b3-4d35-97d4-632fbdd2666f@rivosinc.com>
-In-Reply-To: <9eba31fa-74b3-4d35-97d4-632fbdd2666f@rivosinc.com>
+References: <20231123181300.2140622-1-christoph.muellner@vrull.eu>
+In-Reply-To: <20231123181300.2140622-1-christoph.muellner@vrull.eu>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 6 Dec 2023 10:53:37 +1000
-Message-ID: <CAKmqyKPh6U5iDdXNcBbuo1as-jZw=SY1gXHOptiRjkMJCO-Aow@mail.gmail.com>
-Subject: Re: [PATCH] RISC-V: Increase max vlen to 4096
-To: "Patrick O'Neill" <patrick@rivosinc.com>
-Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Date: Wed, 6 Dec 2023 10:56:32 +1000
+Message-ID: <CAKmqyKOoH1+Gc7oUw5-fW5wZX3yiQDWs2xoQQDNyci=W=D0MuQ@mail.gmail.com>
+Subject: Re: [PATCH v2] linux-user/riscv: Add Zicboz extensions to hwprobe
+To: Christoph Muellner <christoph.muellner@vrull.eu>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Laurent Vivier <laurent@vivier.eu>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x52e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::529;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x529.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -90,85 +91,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Nov 28, 2023 at 3:09=E2=80=AFAM Patrick O'Neill <patrick@rivosinc.c=
-om> wrote:
+On Mon, Nov 27, 2023 at 12:37=E2=80=AFAM Christoph Muellner
+<christoph.muellner@vrull.eu> wrote:
 >
-> Hi Phil,
+> From: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
 >
-> On 11/23/23 02:21, Philippe Mathieu-Daud=C3=A9 wrote:
-> > Hi Patrick,
-> >
-> > On 23/11/23 01:17, Patrick O'Neill wrote:
-> >> QEMU currently limits the max vlenb to 1024. GCC sets the upper bound
-> >> to 4096 [1]. There doesn't seem to be an upper bound set by the spec [=
-2]
-> >> so this patch just changes QEMU to match GCC's upper bound.
-> >>
-> >> [1]
-> >> https://github.com/gcc-mirror/gcc/blob/5d2a360f0a541646abb11efdbabc33c=
-6a04de7ee/gcc/testsuite/gcc.target/riscv/rvv/base/zvl-unimplemented-2.c#L4
-> >> [2] https://github.com/riscv/riscv-v-spec/issues/204
-> >>
-> >> Signed-off-by: Patrick O'Neill <patrick@rivosinc.com>
-> >> ---
-> >> Tested by applying to QEMU v8.1.2 and running the GCC testsuite in QEM=
-U
-> >> user mode with rv64gcv_zvl4096b. Failures are somewhat reasonable and =
-on
-> >> first inspection appear to be in the same ballpark as failures for
-> >> rv64gcv_zvl1024b. Since I used tip-of-tree GCC I'm expecting those
-> >> failures to be GCC-caused & from skimming the debug log they appear to
-> >> be.
-> >> ---
-> >>   target/riscv/cpu.h | 2 +-
-> >>   1 file changed, 1 insertion(+), 1 deletion(-)
-> >>
-> >> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> >> index 6ea22e0eea..2ff3a72fc0 100644
-> >> --- a/target/riscv/cpu.h
-> >> +++ b/target/riscv/cpu.h
-> >> @@ -97,7 +97,7 @@ typedef enum {
-> >>   #include "debug.h"
-> >>   #endif
-> >>
-> >> -#define RV_VLEN_MAX 1024
-> >> +#define RV_VLEN_MAX 4096
-> >
-> > This seems to break the "cpu/vector" field migration. Maybe we don't
-> > care, but this should be clarified in the commit description.
-> I wasn't aware of that (this is actually my first patch to qemu!). Do
-> you have a pointer to more information about the migration so I can
-> write an appropriate blurb/understand what the migration was/did?
+> Upstream Linux recently added RISC-V Zicboz support to the hwprobe API.
+> This patch introduces this for QEMU's user space emulator.
+>
+> Signed-off-by: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
 
-If you increase the version_id and minimum_version_id in this struct
-that should handle it:
+Thanks!
 
-static const VMStateDescription vmstate_vector =3D {
-    .name =3D "cpu/vector",
-    .version_id =3D 2,
-    .minimum_version_id =3D 2,
-    .needed =3D vector_needed,
-    .fields =3D (VMStateField[]) {
-        VMSTATE_UINT64_ARRAY(env.vreg, RISCVCPU, 32 * RV_VLEN_MAX / 64),
-        VMSTATE_UINTTL(env.vxrm, RISCVCPU),
-        VMSTATE_UINTTL(env.vxsat, RISCVCPU),
-        VMSTATE_UINTTL(env.vl, RISCVCPU),
-        VMSTATE_UINTTL(env.vstart, RISCVCPU),
-        VMSTATE_UINTTL(env.vtype, RISCVCPU),
-        VMSTATE_BOOL(env.vill, RISCVCPU),
-        VMSTATE_END_OF_LIST()
-    }
-};
+Applied to riscv-to-apply.next
 
 Alistair
 
+> ---
+>  linux-user/syscall.c | 3 +++
+>  1 file changed, 3 insertions(+)
 >
-> Thanks,
-> Patrick
-> >
-> > Regards,
-> >
-> > Phil.
-> >
+> diff --git a/linux-user/syscall.c b/linux-user/syscall.c
+> index 65ac3ac796..2f9a1c5279 100644
+> --- a/linux-user/syscall.c
+> +++ b/linux-user/syscall.c
+> @@ -8799,6 +8799,7 @@ static int do_getdents64(abi_long dirfd, abi_long a=
+rg2, abi_long count)
+>  #define     RISCV_HWPROBE_EXT_ZBA      (1 << 3)
+>  #define     RISCV_HWPROBE_EXT_ZBB      (1 << 4)
+>  #define     RISCV_HWPROBE_EXT_ZBS      (1 << 5)
+> +#define     RISCV_HWPROBE_EXT_ZICBOZ   (1 << 6)
+>
+>  #define RISCV_HWPROBE_KEY_CPUPERF_0     5
+>  #define     RISCV_HWPROBE_MISALIGNED_UNKNOWN     (0 << 0)
+> @@ -8855,6 +8856,8 @@ static void risc_hwprobe_fill_pairs(CPURISCVState *=
+env,
+>                       RISCV_HWPROBE_EXT_ZBB : 0;
+>              value |=3D cfg->ext_zbs ?
+>                       RISCV_HWPROBE_EXT_ZBS : 0;
+> +            value |=3D cfg->ext_zicboz ?
+> +                     RISCV_HWPROBE_EXT_ZICBOZ : 0;
+>              __put_user(value, &pair->value);
+>              break;
+>          case RISCV_HWPROBE_KEY_CPUPERF_0:
+> --
+> 2.41.0
+>
 >
 
