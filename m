@@ -4,126 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A954AC4167B
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Dec 2023 11:45:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12B31C4167B
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Dec 2023 15:39:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rBCoB-00018W-1J; Thu, 07 Dec 2023 06:44:47 -0500
+	id 1rBGSk-0005wx-E4; Thu, 07 Dec 2023 10:38:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <stefanha@redhat.com>)
- id 1rBCoA-000182-Ji
- for qemu-riscv@nongnu.org; Thu, 07 Dec 2023 06:44:46 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <stefanha@redhat.com>)
- id 1rBCo9-0000kZ-2F
- for qemu-riscv@nongnu.org; Thu, 07 Dec 2023 06:44:46 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1701949484;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=CsscwaTR3+4z+GEJpfoX3rBQXEHIy7L+AXtx2hqmFDs=;
- b=dknAJvFiXyeStoq12UfuXaD9TiEWx8VFkQSgLRGJnanKw8ybLHLSXjNM6vcC/ao49zalhX
- TqVKeeorUOFot8agWI3eW6PwXpdT4a25rx7HHRgTvPMY37ipuRu6dVSh6w1fj8V0B/ocqo
- ncSoGOtE+TiaU9joRx/ZTBLrpOvQd8o=
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-214-S1U663asNt-wRPjGPfGkaQ-1; Thu,
- 07 Dec 2023 06:44:40 -0500
-X-MC-Unique: S1U663asNt-wRPjGPfGkaQ-1
-Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
- [10.11.54.9])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 71EC9380628D;
- Thu,  7 Dec 2023 11:44:37 +0000 (UTC)
-Received: from localhost (unknown [10.39.194.155])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 46EA7492BC6;
- Thu,  7 Dec 2023 11:44:34 +0000 (UTC)
-Date: Thu, 7 Dec 2023 06:44:32 -0500
-From: Stefan Hajnoczi <stefanha@redhat.com>
-To: Harsh Prateek Bora <harshpb@linux.ibm.com>
-Cc: qemu-devel@nongnu.org, Jean-Christophe Dubois <jcd@tribudubois.net>,
- Fabiano Rosas <farosas@suse.de>, qemu-s390x@nongnu.org,
- Song Gao <gaosong@loongson.cn>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Thomas Huth <thuth@redhat.com>, Hyman Huang <yong.huang@smartx.com>,
- Marcelo Tosatti <mtosatti@redhat.com>,
- David Woodhouse <dwmw2@infradead.org>,
- Andrey Smirnov <andrew.smirnov@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Kevin Wolf <kwolf@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Max Filippov <jcmvbkbc@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>, Paul Durrant <paul@xen.org>,
- Jagannathan Raman <jag.raman@oracle.com>,
- Juan Quintela <quintela@redhat.com>,
- Daniel =?iso-8859-1?Q?P=2E_Berrang=E9?= <berrange@redhat.com>,
- qemu-arm@nongnu.org, Jason Wang <jasowang@redhat.com>,
- Gerd Hoffmann <kraxel@redhat.com>, Hanna Reitz <hreitz@redhat.com>,
- =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
- BALATON Zoltan <balaton@eik.bme.hu>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Elena Ufimtseva <elena.ufimtseva@oracle.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Hailiang Zhang <zhanghailiang@xfusion.com>,
- Roman Bolshakov <rbolshakov@ddn.com>,
- Huacai Chen <chenhuacai@kernel.org>, Fam Zheng <fam@euphon.net>,
- Eric Blake <eblake@redhat.com>, Jiri Slaby <jslaby@suse.cz>,
- Alexander Graf <agraf@csgraf.de>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Weiwei Li <liwei1518@gmail.com>, Eric Farman <farman@linux.ibm.com>,
- Stafford Horne <shorne@gmail.com>, David Hildenbrand <david@redhat.com>,
- Markus Armbruster <armbru@redhat.com>,
- Reinoud Zandijk <reinoud@netbsd.org>, Palmer Dabbelt <palmer@dabbelt.com>,
- Cameron Esfahani <dirty@apple.com>, xen-devel@lists.xenproject.org,
- Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>, qemu-riscv@nongnu.org,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- John Snow <jsnow@redhat.com>, Sunil Muthuswamy <sunilmut@microsoft.com>,
- Michael Roth <michael.roth@amd.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Bin Meng <bin.meng@windriver.com>,
- Stefano Stabellini <sstabellini@kernel.org>, kvm@vger.kernel.org,
- qemu-block@nongnu.org, Halil Pasic <pasic@linux.ibm.com>,
- Peter Xu <peterx@redhat.com>, Anthony Perard <anthony.perard@citrix.com>,
- Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>, Paolo Bonzini <pbonzini@redhat.com>,
- Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
- =?iso-8859-1?Q?C=E9dric?= Le Goater <clg@kaod.org>, qemu-ppc@nongnu.org,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Akihiko Odaki <akihiko.odaki@daynix.com>,
- Leonardo Bras <leobras@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>
-Subject: Re: [PATCH 1/6] system/cpus: rename qemu_mutex_lock_iothread() to
- qemu_bql_lock()
-Message-ID: <20231207114432.GA2137208@fedora>
-References: <20231129212625.1051502-1-stefanha@redhat.com>
- <20231129212625.1051502-2-stefanha@redhat.com>
- <8f89fbbf-454b-c5e5-5e8f-46ea42ec20ed@linux.ibm.com>
+ (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
+ id 1rBGSj-0005wb-03
+ for qemu-riscv@nongnu.org; Thu, 07 Dec 2023 10:38:53 -0500
+Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
+ id 1rBGSg-0007xQ-RB
+ for qemu-riscv@nongnu.org; Thu, 07 Dec 2023 10:38:52 -0500
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-33348e711e0so1113712f8f.1
+ for <qemu-riscv@nongnu.org>; Thu, 07 Dec 2023 07:38:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1701963528; x=1702568328;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=VASR91DiF19ip9aHE05QCy1kZYGttEFaati7FSvhsAk=;
+ b=My4pos2fKNYntFE7E0q7OHnfxzRfXvLvKkqu3sYCXQIyUEtt5sRTG2e8WDKH5N8I0h
+ Lma3zdW0Xt7/Tn/npSRee24By4hiq/8JQah4w2DwSCMep+0xzy+1JRdYQfhuVVkb96t7
+ /h4HrWs4ivUMF/DDJ4BHrLDe0TVcMwGFq7xAKd8TIPsKPvrJZD7LcUPx0ZBaS6/OF++T
+ qBCRS3/RtKsSrkIo4Bfi0wYpbdQy4Ih4zvAYxIoBL7X03ijlDhCt4nX8c63tEsWTi/4a
+ P53NOWdbJF+zWgMsJXDf+CadrnAbrRCyUgcYUAMwuHYBPQdmjOC5tvS63ofxJ6XgbtUw
+ 835g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701963528; x=1702568328;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=VASR91DiF19ip9aHE05QCy1kZYGttEFaati7FSvhsAk=;
+ b=oD4GjqwWDv8zsfjXPqd9zMkY1oQpcR3oJeC5UoFWBBOdyYcmSMmMa0zXFjemMYyaOc
+ phvxdXoWhnVpwADjevnfCr0Z00XLLxfKzdfzXT1qnWwM3wOwKV3I/FIPdaM54xLnv3Cy
+ krXBKb9Q8y1s3M0h5DHGxjpRMDIqmtWm/JHG7Q+Pq9/Nx9JJhKUjfKPUSWMj6EBklU7r
+ x1qQIzkoPNOFN2IGmnH2s/RqJUqo9Q6eBtJSfBiyOh+BVS9t91oEsedzyzTRleUDjlBQ
+ 06uYQSjLV9zmlp4vv6EN1LQ8SfY9AriKNoOa63Lj9GJrlgxX7SEEAXBYuWLahapSkGWR
+ AWVA==
+X-Gm-Message-State: AOJu0YxQJWC+Ktk+NosbNpio0ph+UR+VmAcivha5XDEfdPPxRFf4Kcgc
+ uSjNQp8DEQO5tVtqRo1ssrsBoA==
+X-Google-Smtp-Source: AGHT+IHF+NsorDkYfC5rnY9pjkHRMww+NTCCpEbOqv4QqJccks1rVrhKNHEU+FJKT4WKRofOK292XA==
+X-Received: by 2002:a5d:4845:0:b0:333:2fd2:51d0 with SMTP id
+ n5-20020a5d4845000000b003332fd251d0mr1445213wrs.73.1701963527792; 
+ Thu, 07 Dec 2023 07:38:47 -0800 (PST)
+Received: from rockhopper.ba.rivosinc.com (214.11.169.217.in-addr.arpa.
+ [217.169.11.214]) by smtp.gmail.com with ESMTPSA id
+ b16-20020a5d4b90000000b0033339e03a60sm1711399wrt.59.2023.12.07.07.38.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 07 Dec 2023 07:38:47 -0800 (PST)
+From: Rob Bradford <rbradford@rivosinc.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, atishp@rivosinc.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ Rob Bradford <rbradford@rivosinc.com>
+Subject: [PATCH 0/2] Add support for (ratified) Zacas extension
+Date: Thu,  7 Dec 2023 15:32:29 +0000
+Message-ID: <20231207153842.32401-1-rbradford@rivosinc.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="0duhWLao8zUYzEym"
-Content-Disposition: inline
-In-Reply-To: <8f89fbbf-454b-c5e5-5e8f-46ea42ec20ed@linux.ibm.com>
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.9
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=stefanha@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::434;
+ envelope-from=rbradford@rivosinc.com; helo=mail-wr1-x434.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -139,47 +93,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+The Zacas extension is now ratified:
+https://github.com/riscv/riscv-zacas
 
---0duhWLao8zUYzEym
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This series uses a patch from Weiwei Li from:
+https://github.com/plctlab/plct-qemu/tree/plct-zacas-dev with the
+following changes:
 
-On Fri, Dec 01, 2023 at 10:42:43AM +0530, Harsh Prateek Bora wrote:
-> On 11/30/23 02:56, Stefan Hajnoczi wrote:
-> > diff --git a/hw/remote/mpqemu-link.c b/hw/remote/mpqemu-link.c
-> > index 9bd98e8219..ffb2c25145 100644
-> > --- a/hw/remote/mpqemu-link.c
-> > +++ b/hw/remote/mpqemu-link.c
-> > @@ -33,7 +33,7 @@
-> >    */
-> >   bool mpqemu_msg_send(MPQemuMsg *msg, QIOChannel *ioc, Error **errp)
-> >   {
-> > -    bool iolock =3D qemu_mutex_iothread_locked();
-> > +    bool iolock =3D qemu_bql_locked();
->=20
-> Should var name (one more below) be updated to reflect this update ?
+* Fixed destination register (looks like a copy and paste error),
+* Fixed extension name enabling,
+* Minor coding style fixes,
+* Updated for new extension handling & cpu.h header split.
 
-Yes. I'll grep for that tree-wide because there might be other
-instances.
+This patch was mentioned on the list here:
+https://www.mail-archive.com/qemu-devel@nongnu.org/msg970280.html
 
-Stefan
+The series was tested against riscv-tests from the following PR:
+https://github.com/riscv-software-src/riscv-tests/pull/492
 
---0duhWLao8zUYzEym
-Content-Type: application/pgp-signature; name="signature.asc"
+Rob Bradford (1):
+  disas/riscv: Add amocas.[w,d,q] instructions
 
------BEGIN PGP SIGNATURE-----
+Weiwei Li (1):
+  target/riscv: Add support for Zacas extension
 
-iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmVxsCAACgkQnKSrs4Gr
-c8i1rQgAnF5hLI7FnDMNxncR8cyzsclzHlBL3lW0nptTddMxVMVSgpepQqo6yITp
-7C02PzbGoKbRWSa8b95tpYbHeVbakCnrKjMsojhx5N50uYa7odEtNpXrPedhUh4l
-ZcOC1N5E1uU55koqEGYWFSDoEC3BApk9qN0RFngsKFtoTears5RgyhSpuYYrdpyL
-LN15OOQjSBJYsGNtYggDfIyN5hT4H55c8hsQF0b+kw/UwWoNRdjsdyMNelsHheII
-+KODOArdtF9lNCVXL4kbZmuQbwmmHbAdfytMIurhnKWa+ENSZZ42DY9Z+XBIReto
-Fj4JhmDsI3ewnZLjTxZ/jQHHNcV8Ew==
-=KX5N
------END PGP SIGNATURE-----
+ disas/riscv.c                               |   9 ++
+ target/riscv/cpu.c                          |   2 +
+ target/riscv/cpu_cfg.h                      |   1 +
+ target/riscv/insn32.decode                  |   6 +
+ target/riscv/insn_trans/trans_rvzacas.c.inc | 150 ++++++++++++++++++++
+ target/riscv/tcg/tcg-cpu.c                  |   5 +
+ target/riscv/translate.c                    |   1 +
+ 7 files changed, 174 insertions(+)
+ create mode 100644 target/riscv/insn_trans/trans_rvzacas.c.inc
 
---0duhWLao8zUYzEym--
+-- 
+2.43.0
 
 
