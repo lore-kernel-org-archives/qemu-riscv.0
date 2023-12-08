@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84CDBC4167B
-	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Dec 2023 18:39:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FDC8C4167B
+	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Dec 2023 18:39:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rBfkb-0006Cx-E5; Fri, 08 Dec 2023 13:39:01 -0500
+	id 1rBfkc-0006DR-Bx; Fri, 08 Dec 2023 13:39:02 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rBfkW-00069v-1M
- for qemu-riscv@nongnu.org; Fri, 08 Dec 2023 13:38:56 -0500
-Received: from mail-pg1-x532.google.com ([2607:f8b0:4864:20::532])
+ id 1rBfka-0006Cb-NJ
+ for qemu-riscv@nongnu.org; Fri, 08 Dec 2023 13:39:00 -0500
+Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rBfkT-0008Tm-9G
- for qemu-riscv@nongnu.org; Fri, 08 Dec 2023 13:38:55 -0500
-Received: by mail-pg1-x532.google.com with SMTP id
- 41be03b00d2f7-5c6839373f8so1826296a12.0
- for <qemu-riscv@nongnu.org>; Fri, 08 Dec 2023 10:38:52 -0800 (PST)
+ id 1rBfkW-0008UL-J6
+ for qemu-riscv@nongnu.org; Fri, 08 Dec 2023 13:39:00 -0500
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-286f22c52c7so2048558a91.2
+ for <qemu-riscv@nongnu.org>; Fri, 08 Dec 2023 10:38:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1702060731; x=1702665531; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1702060735; x=1702665535; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hPwJtAXApDrIUg5rSZaBlMF2+8X83cxrveamFWPFeEQ=;
- b=mw/skWcyjU2QHDhW+Zu5I9HXjcAmQIa183ljs4arSANOc4bBZ6LH2RjPgxgj7Ukzjp
- HSWiXIFZCpSV280EgpPjhKXpDU0GNGkqykhCs14ripw8IOh5aJb1G/wfzhTvGCITqo4V
- IKT5RC9zJlQDaDoe7L35YAEAZPxa9DG6uH8uuV6iVVzund13RKAmxrq1QJQ0Utlp3r+v
- fIPZzzVC0hh3WJtxXrFwH239HIVL7T6Ky1btQrQPttJhV7/kmHGp8TnBUH6/5QiJTzWJ
- uGGxk7DpcqiG29/mNGoXhZ3BTy2kcSdCFgy8fINQBlEQserHZjsryhJ/LQ9v1NQsTNhO
- 0lTw==
+ bh=NDUfXfcWCozOr3YgPfrQcgZ6dHfOfa/IJlJz1rUOmVs=;
+ b=Lh4uGZHE7CCxi8LRDEOsVbSVjUKk0U79gztgTYBR1/vIdCAuoPfmQxENj04fiRAN/8
+ ErL8m4tqtGUwie7daQqO+KAtCG3whu0mDRSxOvV7Vkz5HS1vUfgV7XJGUH8l1zjeBHIY
+ LggUnV2oKU87EYeBxKOb2RDYSvBgvUvOr8b08wxRsbxkJBTyq4CuhZVUmxvwLcGxmiRs
+ N2vR3705uawMkH4kg3quZuZl95RaDm0EtU288+2XDpPe6BBfkE07jGF84vSgHlvZYatx
+ mv8Nxg+lS310CdqotRvSR0/9RTS7DGBQ02NeblzpKC6eWEM0Sy2j/fKNiOziJPAwgjkV
+ RuJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702060731; x=1702665531;
+ d=1e100.net; s=20230601; t=1702060735; x=1702665535;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hPwJtAXApDrIUg5rSZaBlMF2+8X83cxrveamFWPFeEQ=;
- b=lZkuiGTUBZCeRh71dt5WRAmAg7eAKD7c0wLxqC7/qo9pJpaALZpzzfK7audPVeagTX
- 0E5m4A91Yv6SfP+xMPh7S/qIdeg006GEG9sqp/F+fCmPY0WEpWKD97z2unafKuByHr0e
- FPy6ypEzmj8w/IZGYPZlEJ+G2ryKVR35aIKOfMeQzs/1f5A6wiC/bmNf3T7NCwCO9zw8
- /TELb8n3lfSr4z5wBVWJrhRj9IwPQpvK8ZtryetudaAXMIUYCdz/KYBXQ+bygLl8A89F
- 1sJ+YhwpkFkvRWBJj/PqCWRYxyik/Thv+1IVnZfQsD6PBhqro75fgvVDNX2jJJEY4ruv
- LJvw==
-X-Gm-Message-State: AOJu0Yy+j7Fetjsnz8ldAujtRUGrD658i7j1OTGvOVtYaZGFIrIDqtbB
- /rqO9eIB3vJCwghkk5b6OsRpHw==
-X-Google-Smtp-Source: AGHT+IFrq3IvKskYKVKmZb7oUKn9GHMutoAffayi/XAS1SC4NHCKeQKfaVtSVkDaMn8Ir3Sm9ko/4A==
-X-Received: by 2002:a17:90a:3049:b0:286:6cd8:ef12 with SMTP id
- q9-20020a17090a304900b002866cd8ef12mr1714425pjl.42.1702060731515; 
- Fri, 08 Dec 2023 10:38:51 -0800 (PST)
+ bh=NDUfXfcWCozOr3YgPfrQcgZ6dHfOfa/IJlJz1rUOmVs=;
+ b=dKnmXc5NtCgFObzNPFkkRoUFVPiWGotJoxEgCQTxMuDh0ur2lfqD49LnZnulgBgYQ1
+ 0uWnNonhGaP1O8HsLizVfblbzLRoMJ+bJcgfnGeeSrdyILjipymbXK9TJFU2w+3Jf88Q
+ MEAQtD+EB5pevArBw2aiFSEQiPZN/7RmMjkaOXcoR6veIlXiol+t1cqAe/ke4/L/NaV5
+ b9Ye3FeH/JwUDOFj/lVpjOfKO0rFXBZ2W2YNNCK9sVIeFo0JODGok4szKcnuUw9TUWb4
+ XCKHIE6AbvnVvgroPLmaxQEevhVrmhTMHtAskMR6CDNuL7koupvgVJmf/r3ya2j+ghfZ
+ aknA==
+X-Gm-Message-State: AOJu0YyWA2XefmOTH2KvMWYWVG6agvUcJqQy6yP85u9iuG3vJJ2fa7b2
+ Z2HTLJ6tnLd9u7aUB44rOsSH/A==
+X-Google-Smtp-Source: AGHT+IF5vNV7Ckzv3fFEibjYzWgBzqp+D4YZC+h1rf/ORom4P6rwIkG+3vr2+xs783PpYkpqrTZtOQ==
+X-Received: by 2002:a17:90a:3482:b0:286:6cc1:8670 with SMTP id
+ p2-20020a17090a348200b002866cc18670mr446596pjb.85.1702060735222; 
+ Fri, 08 Dec 2023 10:38:55 -0800 (PST)
 Received: from grind.. ([152.234.124.8]) by smtp.gmail.com with ESMTPSA id
- sk13-20020a17090b2dcd00b002864c14063fsm2190709pjb.20.2023.12.08.10.38.48
+ sk13-20020a17090b2dcd00b002864c14063fsm2190709pjb.20.2023.12.08.10.38.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Dec 2023 10:38:51 -0800 (PST)
+ Fri, 08 Dec 2023 10:38:54 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  ajones@ventanamicro.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH for-9.0 3/5] target/riscv/kvm: change timer regs size to u64
-Date: Fri,  8 Dec 2023 15:38:33 -0300
-Message-ID: <20231208183835.2411523-4-dbarboza@ventanamicro.com>
+Subject: [PATCH for-9.0 4/5] target/riscv/kvm: add RISCV_CONFIG_REG()
+Date: Fri,  8 Dec 2023 15:38:34 -0300
+Message-ID: <20231208183835.2411523-5-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231208183835.2411523-1-dbarboza@ventanamicro.com>
 References: <20231208183835.2411523-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::532;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x532.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x1029.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -95,96 +95,95 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-KVM_REG_RISCV_TIMER regs are always u64 according to the KVM API, but at
-this moment we'll return u32 regs if we're running a RISCV32 target.
+Create a RISCV_CONFIG_REG() macro, similar to what other regs use, to
+hide away some of the boilerplate.
 
-Use the kvm_riscv_reg_id_u64() helper in RISCV_TIMER_REG() to fix it.
-
-Reported-by: Andrew Jones <ajones@ventanamicro.com>
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- target/riscv/kvm/kvm-cpu.c | 26 +++++++++++++-------------
- 1 file changed, 13 insertions(+), 13 deletions(-)
+ target/riscv/kvm/kvm-cpu.c | 25 +++++++++++--------------
+ 1 file changed, 11 insertions(+), 14 deletions(-)
 
 diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 34ed82ebe5..476e5d4b3d 100644
+index 476e5d4b3d..11797338ec 100644
 --- a/target/riscv/kvm/kvm-cpu.c
 +++ b/target/riscv/kvm/kvm-cpu.c
-@@ -88,7 +88,7 @@ static uint64_t kvm_riscv_reg_id_u64(uint64_t type, uint64_t idx)
+@@ -88,6 +88,10 @@ static uint64_t kvm_riscv_reg_id_u64(uint64_t type, uint64_t idx)
  #define RISCV_CSR_REG(env, name)  kvm_riscv_reg_id(env, KVM_REG_RISCV_CSR, \
                   KVM_REG_RISCV_CSR_REG(name))
  
--#define RISCV_TIMER_REG(env, name)  kvm_riscv_reg_id(env, KVM_REG_RISCV_TIMER, \
-+#define RISCV_TIMER_REG(name)  kvm_riscv_reg_id_u64(KVM_REG_RISCV_TIMER, \
++#define RISCV_CONFIG_REG(env, name) \
++    kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG, \
++                     KVM_REG_RISCV_CONFIG_REG(name))
++
+ #define RISCV_TIMER_REG(name)  kvm_riscv_reg_id_u64(KVM_REG_RISCV_TIMER, \
                   KVM_REG_RISCV_TIMER_REG(name))
  
- #define RISCV_FP_F_REG(idx)  kvm_riscv_reg_id_u32(KVM_REG_RISCV_FP_F, idx)
-@@ -111,17 +111,17 @@ static uint64_t kvm_riscv_reg_id_u64(uint64_t type, uint64_t idx)
-         } \
-     } while (0)
+@@ -756,24 +760,21 @@ static void kvm_riscv_init_machine_ids(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
+     struct kvm_one_reg reg;
+     int ret;
  
--#define KVM_RISCV_GET_TIMER(cs, env, name, reg) \
-+#define KVM_RISCV_GET_TIMER(cs, name, reg) \
-     do { \
--        int ret = kvm_get_one_reg(cs, RISCV_TIMER_REG(env, name), &reg); \
-+        int ret = kvm_get_one_reg(cs, RISCV_TIMER_REG(name), &reg); \
-         if (ret) { \
-             abort(); \
-         } \
-     } while (0)
- 
--#define KVM_RISCV_SET_TIMER(cs, env, name, reg) \
-+#define KVM_RISCV_SET_TIMER(cs, name, reg) \
-     do { \
--        int ret = kvm_set_one_reg(cs, RISCV_TIMER_REG(env, name), &reg); \
-+        int ret = kvm_set_one_reg(cs, RISCV_TIMER_REG(name), &reg); \
-         if (ret) { \
-             abort(); \
-         } \
-@@ -649,10 +649,10 @@ static void kvm_riscv_get_regs_timer(CPUState *cs)
-         return;
+-    reg.id = kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG,
+-                              KVM_REG_RISCV_CONFIG_REG(mvendorid));
++    reg.id = RISCV_CONFIG_REG(env, mvendorid);
+     reg.addr = (uint64_t)&cpu->cfg.mvendorid;
+     ret = ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
+     if (ret != 0) {
+         error_report("Unable to retrieve mvendorid from host, error %d", ret);
      }
  
--    KVM_RISCV_GET_TIMER(cs, env, time, env->kvm_timer_time);
--    KVM_RISCV_GET_TIMER(cs, env, compare, env->kvm_timer_compare);
--    KVM_RISCV_GET_TIMER(cs, env, state, env->kvm_timer_state);
--    KVM_RISCV_GET_TIMER(cs, env, frequency, env->kvm_timer_frequency);
-+    KVM_RISCV_GET_TIMER(cs, time, env->kvm_timer_time);
-+    KVM_RISCV_GET_TIMER(cs, compare, env->kvm_timer_compare);
-+    KVM_RISCV_GET_TIMER(cs, state, env->kvm_timer_state);
-+    KVM_RISCV_GET_TIMER(cs, frequency, env->kvm_timer_frequency);
- 
-     env->kvm_timer_dirty = true;
- }
-@@ -666,8 +666,8 @@ static void kvm_riscv_put_regs_timer(CPUState *cs)
-         return;
+-    reg.id = kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG,
+-                              KVM_REG_RISCV_CONFIG_REG(marchid));
++    reg.id = RISCV_CONFIG_REG(env, marchid);
+     reg.addr = (uint64_t)&cpu->cfg.marchid;
+     ret = ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
+     if (ret != 0) {
+         error_report("Unable to retrieve marchid from host, error %d", ret);
      }
  
--    KVM_RISCV_SET_TIMER(cs, env, time, env->kvm_timer_time);
--    KVM_RISCV_SET_TIMER(cs, env, compare, env->kvm_timer_compare);
-+    KVM_RISCV_SET_TIMER(cs, time, env->kvm_timer_time);
-+    KVM_RISCV_SET_TIMER(cs, compare, env->kvm_timer_compare);
+-    reg.id = kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG,
+-                              KVM_REG_RISCV_CONFIG_REG(mimpid));
++    reg.id = RISCV_CONFIG_REG(env, mimpid);
+     reg.addr = (uint64_t)&cpu->cfg.mimpid;
+     ret = ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
+     if (ret != 0) {
+@@ -788,8 +789,7 @@ static void kvm_riscv_init_misa_ext_mask(RISCVCPU *cpu,
+     struct kvm_one_reg reg;
+     int ret;
  
+-    reg.id = kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG,
+-                              KVM_REG_RISCV_CONFIG_REG(isa));
++    reg.id = RISCV_CONFIG_REG(env, isa);
+     reg.addr = (uint64_t)&env->misa_ext_mask;
+     ret = ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
+ 
+@@ -1094,8 +1094,7 @@ static int kvm_vcpu_set_machine_ids(RISCVCPU *cpu, CPUState *cs)
+     uint64_t id;
+     int ret;
+ 
+-    id = kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG,
+-                          KVM_REG_RISCV_CONFIG_REG(mvendorid));
++    id = RISCV_CONFIG_REG(env, mvendorid);
      /*
-      * To set register of RISCV_TIMER_REG(state) will occur a error from KVM
-@@ -676,7 +676,7 @@ static void kvm_riscv_put_regs_timer(CPUState *cs)
-      * TODO If KVM changes, adapt here.
-      */
-     if (env->kvm_timer_state) {
--        KVM_RISCV_SET_TIMER(cs, env, state, env->kvm_timer_state);
-+        KVM_RISCV_SET_TIMER(cs, state, env->kvm_timer_state);
+      * cfg.mvendorid is an uint32 but a target_ulong will
+      * be written. Assign it to a target_ulong var to avoid
+@@ -1107,15 +1106,13 @@ static int kvm_vcpu_set_machine_ids(RISCVCPU *cpu, CPUState *cs)
+         return ret;
      }
  
-     /*
-@@ -685,7 +685,7 @@ static void kvm_riscv_put_regs_timer(CPUState *cs)
-      * during the migration.
-      */
-     if (migration_is_running(migrate_get_current()->state)) {
--        KVM_RISCV_GET_TIMER(cs, env, frequency, reg);
-+        KVM_RISCV_GET_TIMER(cs, frequency, reg);
-         if (reg != env->kvm_timer_frequency) {
-             error_report("Dst Hosts timer frequency != Src Hosts");
-         }
+-    id = kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG,
+-                          KVM_REG_RISCV_CONFIG_REG(marchid));
++    id = RISCV_CONFIG_REG(env, marchid);
+     ret = kvm_set_one_reg(cs, id, &cpu->cfg.marchid);
+     if (ret != 0) {
+         return ret;
+     }
+ 
+-    id = kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG,
+-                          KVM_REG_RISCV_CONFIG_REG(mimpid));
++    id = RISCV_CONFIG_REG(env, mimpid);
+     ret = kvm_set_one_reg(cs, id, &cpu->cfg.mimpid);
+ 
+     return ret;
 -- 
 2.41.0
 
