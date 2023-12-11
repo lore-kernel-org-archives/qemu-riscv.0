@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D349C4167B
-	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Dec 2023 21:28:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CFFDC4332F
+	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Dec 2023 21:28:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rCnkQ-0006WR-Kt; Mon, 11 Dec 2023 16:23:31 -0500
+	id 1rCnjO-0004DE-Ep; Mon, 11 Dec 2023 16:22:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rCnkP-0006T5-BL
- for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 16:23:29 -0500
-Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rCnjN-0004Bb-1y
+ for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 16:22:25 -0500
+Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rCnkM-0005wM-OT
- for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 16:23:29 -0500
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a1ca24776c3so1227960466b.0
- for <qemu-riscv@nongnu.org>; Mon, 11 Dec 2023 13:23:26 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rCnjK-0005jf-Ir
+ for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 16:22:24 -0500
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-54f4f7e88feso4741071a12.3
+ for <qemu-riscv@nongnu.org>; Mon, 11 Dec 2023 13:22:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702329805; x=1702934605; darn=nongnu.org;
+ d=linaro.org; s=google; t=1702329741; x=1702934541; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Mqu2MlgIdZS3QyZ/aQC1T5TlHEjoxgX9tzjZABIOL+s=;
- b=ip6a5NgNqHygdZxbPwyPH9o6TJImdbN6zqUfBwqPPSyeCGUAoltGLPSWYmyhuWKACA
- SE+p+f3KA7yG4pRJJZK1oJ0S3JOAF6fJL7MwXQ+nEY16ArlnYZm7mbQUEc7tZ7ugpuhu
- TkNESfVf1iHSXDwbtxZBok6A2XnDD1CtT/Qo41pCKKTFKsmHtsjUrqZg8a62RCq1wK0Q
- PDxqLer7qMvnIy+yYm4KxpRdQa1vEMlCsWomU0r/1ksMZTERBPWeC8Wm6RpgPVJuQ7aB
- IE9mnvTm5xhc7A20XXAj1P0C/jbqZfE5azusYLp0+fH+PffuDyj4e8MIU69bRv+R4pBp
- c07g==
+ bh=31p8j5Jt1hoDV9F+fYTdM7YWxOI6Tic5VBGPVB9TKlo=;
+ b=WH1TVbEr7xsnjmJiqykhQC49Z7oj7479RqnoctPft4KZ5ieIJSJVDptDD4Oy9Nub+Y
+ l8D6KMjEEBnK7LMqwsefrSPfltObQWVqJ5Jdzy7704J89XP3iIW2CI4c8kuzsur8XJB8
+ OsBIXzJeqPfWtfOYQsXjQWg0h2v4uKz42cuMMEHVIre6F2PP3x1jIG6lsgACj+ByR1rH
+ f94SyGgI6Ff61zg5c3/D0CzMyw1v5FoU4nAuL9gYtYACkTYxD0gvOUKsdikjT1U2ogWJ
+ /n2LNrECUTMlyMPQZOUi5mLfiu+aHIO0hNwNQHc2PpfKpFwnlu23sC9pgKZgho/O7ik8
+ sX4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702329805; x=1702934605;
+ d=1e100.net; s=20230601; t=1702329741; x=1702934541;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Mqu2MlgIdZS3QyZ/aQC1T5TlHEjoxgX9tzjZABIOL+s=;
- b=AnegYeB3Q/6otN1K6j7ziwdc6EADAbESo5GjSG9Gklxi/+JVqtaR2yFnWt7J9Mx43y
- CG252nV9ym5AJje6BTDSI4IJs+ekAN21mEL9OF0wMx1QQQEI1S/Ms+6Ret38Aa9NRAMY
- 1HK8yzuWRHRmGXMbET69h9IMqgUEG5OhqGeoHzUlF0KD3RiBJTvgLjVt/p3cNX/6FUp3
- ea+40eh9rdTjpwtVwqQOYS715tWP+wvw0aN7JHg/knkkP0/vpyONlRkgApyBfPk+tiKM
- zVn3Y3+jX1bZ1YEs6MVDytRp5X3xwGLo8G6a3woD5XguHCjk1f+uXZGnQXuytCDg0rCq
- e/Rg==
-X-Gm-Message-State: AOJu0YyKI/y/oaqt0DYo7qQPxJxtbmAVNbqHPI/hqokV2Ro8m+DDqSTC
- EREls3htxADs3iUTcmqblQmtdQ==
-X-Google-Smtp-Source: AGHT+IFn8/3rk8CtW9OM9MwSkcANYhGT/MeN5C5V5YIFguGIcvrA/lPPLRPS+jv/cd9Ds9KT/8JIBA==
-X-Received: by 2002:a17:907:20aa:b0:a1c:6e3e:4873 with SMTP id
- pw10-20020a17090720aa00b00a1c6e3e4873mr4173217ejb.43.1702329805455; 
- Mon, 11 Dec 2023 13:23:25 -0800 (PST)
+ bh=31p8j5Jt1hoDV9F+fYTdM7YWxOI6Tic5VBGPVB9TKlo=;
+ b=HN+0j/CgO01ddt4b7ihq250nLwVMEnhx343wyC4Jw+lsWDhhJ4qo/+2IY0rkpkyebM
+ Ua2fZ2WYYDNrIbabahxQeTA33TWKfn16CtF7N8BWq5LD68GeSJ6gxS6tmw7hiwICDmej
+ bNcDJjS6QSKhyLxx9rJZk2ebg+B5MYcrKrj47LWxMh37AKwEBmnUFM8gqYqenIcmbs7G
+ jkR6N8KOMzTIRFKV+RzuR/6r/z0bT6e5KToCy+H6wCEmo86gKK5SEcdklrZpsGrIB6yv
+ DursvSiGhGjdfqoMKh0fjxz8Ll6oVScR1OKN3ZFiUCheVYgnVt01QmvKLtkPniH+86dZ
+ IfXQ==
+X-Gm-Message-State: AOJu0YxRAnyR+Uc7+ipCc8nb3JQKTnmfS0umIikuzzAfEjJ9DxnZnPEK
+ QoETmiAtpEPKP4Ba7FFOoXWAXw==
+X-Google-Smtp-Source: AGHT+IEmyjseetZ6MABzDolM2F1vBB3vF3EY9+Y9NrS2c3NXJni7DdLVf2NG0DPdko7jlFhqGhfwLQ==
+X-Received: by 2002:aa7:c513:0:b0:54c:a689:2d8c with SMTP id
+ o19-20020aa7c513000000b0054ca6892d8cmr3367204edq.69.1702329741047; 
+ Mon, 11 Dec 2023 13:22:21 -0800 (PST)
 Received: from m1x-phil.lan ([176.176.175.193])
  by smtp.gmail.com with ESMTPSA id
- vv9-20020a170907a68900b00a1db8b08610sm5437885ejc.148.2023.12.11.13.23.23
+ l12-20020a056402230c00b0054c7aee67acsm4014017eda.97.2023.12.11.13.22.18
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 11 Dec 2023 13:23:25 -0800 (PST)
+ Mon, 11 Dec 2023 13:22:20 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Ilya Leoshkevich <iii@linux.ibm.com>, Peter Xu <peterx@redhat.com>,
@@ -73,19 +73,18 @@ Cc: Ilya Leoshkevich <iii@linux.ibm.com>, Peter Xu <peterx@redhat.com>,
  Daniel Henrique Barboza <danielhb413@gmail.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Thomas Huth <thuth@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Song Gao <gaosong@loongson.cn>
-Subject: [PATCH 24/24] target: Restrict 'sysemu/reset.h' to system emulation
-Date: Mon, 11 Dec 2023 22:20:01 +0100
-Message-ID: <20231211212003.21686-25-philmd@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 16/24] exec/cpu-all: Reduce 'qemu/rcu.h' header inclusion
+Date: Mon, 11 Dec 2023 22:19:53 +0100
+Message-ID: <20231211212003.21686-17-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231211212003.21686-1-philmd@linaro.org>
 References: <20231211212003.21686-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62e;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x62e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x52d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -108,47 +107,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-vCPU "reset" is only possible with system emulation.
+"exec/cpu-all.h" doesn't need definitions from "qemu/rcu.h",
+however "exec/ram_addr.h" does.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/i386/cpu.c      | 2 +-
- target/loongarch/cpu.c | 2 ++
- 2 files changed, 3 insertions(+), 1 deletion(-)
+ include/exec/cpu-all.h  | 1 -
+ include/exec/ram_addr.h | 1 +
+ 2 files changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index dfb96217ad..17b6962d43 100644
---- a/target/i386/cpu.c
-+++ b/target/i386/cpu.c
-@@ -24,7 +24,6 @@
- #include "qemu/hw-version.h"
- #include "cpu.h"
- #include "tcg/helper-tcg.h"
--#include "sysemu/reset.h"
- #include "sysemu/hvf.h"
- #include "hvf/hvf-i386.h"
- #include "kvm/kvm_i386.h"
-@@ -37,6 +36,7 @@
- #include "hw/qdev-properties.h"
- #include "hw/i386/topology.h"
- #ifndef CONFIG_USER_ONLY
-+#include "sysemu/reset.h"
- #include "qapi/qapi-commands-machine-target.h"
- #include "exec/address-spaces.h"
- #include "hw/boards.h"
-diff --git a/target/loongarch/cpu.c b/target/loongarch/cpu.c
-index fc075952e6..b26187dfde 100644
---- a/target/loongarch/cpu.c
-+++ b/target/loongarch/cpu.c
-@@ -17,7 +17,9 @@
- #include "internals.h"
- #include "fpu/softfloat-helpers.h"
- #include "cpu-csr.h"
-+#ifndef CONFIG_USER_ONLY
- #include "sysemu/reset.h"
-+#endif
- #include "tcg/tcg.h"
- #include "vec.h"
+diff --git a/include/exec/cpu-all.h b/include/exec/cpu-all.h
+index b1e293a08f..2d568ae4f0 100644
+--- a/include/exec/cpu-all.h
++++ b/include/exec/cpu-all.h
+@@ -22,7 +22,6 @@
+ #include "exec/cpu-common.h"
+ #include "exec/memory.h"
+ #include "exec/tswap.h"
+-#include "qemu/rcu.h"
+ 
+ /* some important defines:
+  *
+diff --git a/include/exec/ram_addr.h b/include/exec/ram_addr.h
+index 90676093f5..aab7d6c57c 100644
+--- a/include/exec/ram_addr.h
++++ b/include/exec/ram_addr.h
+@@ -25,6 +25,7 @@
+ #include "sysemu/tcg.h"
+ #include "exec/ramlist.h"
+ #include "exec/ramblock.h"
++#include "qemu/rcu.h"
+ 
+ extern uint64_t total_dirty_pages;
  
 -- 
 2.41.0
