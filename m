@@ -4,59 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37068C4332F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Dec 2023 21:29:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B219C4332F
+	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Dec 2023 21:29:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rCnis-0002oC-Ml; Mon, 11 Dec 2023 16:21:54 -0500
+	id 1rCnpH-0001xA-LH; Mon, 11 Dec 2023 16:28:31 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rCnir-0002iI-Dx
- for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 16:21:53 -0500
-Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rCnpF-0001fj-9n
+ for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 16:28:29 -0500
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rCnip-0005dZ-Bp
- for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 16:21:53 -0500
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-55114c073b8so2373871a12.1
- for <qemu-riscv@nongnu.org>; Mon, 11 Dec 2023 13:21:50 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rCnpD-00075O-Cn
+ for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 16:28:28 -0500
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-40c339d2b88so35808455e9.3
+ for <qemu-riscv@nongnu.org>; Mon, 11 Dec 2023 13:28:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702329710; x=1702934510; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ctY48Y/OwHlinQy0HeLOez7IoCqO19a0AzhAC5KFtJo=;
- b=D5pE47HhTN4G+oeoW2jLbaubLUYS85QF0ZLMYIPk91EJKHyIIy3Et77wqQM0im4W0z
- +n7H8VSwDCw+oAarXXatujVm9LQQbQ90gVcntBnMmlW5NO9yir+xEmFktDOLJMBZjSvS
- xJb0gDioMCCuBbAsqjtQoAShTPms2G35OPtOcjDvMmjHb07KuGpg+W9H46se9EeitnAM
- M0gcTBMB6FOk0o6woN2nLUK7Flf1xyzK5p+awdC3/kKGZFXMRnzF8+UXXTrrRzFAvbAV
- 6fPJ+qeL453oZzdSKbl+IWridNcZVtOWGsSHotAGP2EilF1LbJGvGBYfIvFZ3bXeTUZo
- ofaA==
+ d=linaro.org; s=google; t=1702330106; x=1702934906; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=X5fiX191P4G5pBLsLalRnbHg5N0cH0B6SHCS4O/yB3g=;
+ b=lnIki7Ee4hFuOUfBzwIqjrikWC2HSncy8TRwDYk6s/5mI8K8iuJejP1o1u6/8CTePh
+ d5yTO/DpONZTSyorfqJUAKMjXtlv8tPQF2+X0lOnjsedfFssqv5eTmVrQyOsd/gmZ+On
+ wqX3N7eXgwzOqtkO7lOTIzsjK6VNaCgIzrlPNb7M3AOfugCc7zQ9ifs1vvP9le7+XGLp
+ G0skBeS1mt2WinqkNNH63aMb/v2ehFiwad6YH6cfAEBSSsdYE2WCrrBiPKim8f3UdEik
+ p+WXlmfQMh2dZDz+QI6LTprM7hb0JSiCaYlAUdCrGCTSzq4cTdaR1J/f7vSmjNleu8mN
+ lpsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702329710; x=1702934510;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ctY48Y/OwHlinQy0HeLOez7IoCqO19a0AzhAC5KFtJo=;
- b=rb9oajcfoZtMPm1C6BWxHwCca6w22Xx5SBjqPIl7oQ64bZZ9IRGV46JYFnM1aMJR0T
- pQXHeU2mJhg7s8TLSYtLtAJYqn6ApLCRkyFBYy1/3CdcLwsaiVwkZsa4jXtR/8yXAFA6
- /a2sc5BAddZA3PJmZWpkmT3l0NK3hmq1VflQGFcLeQEI/4B2u/1VHL11Wikcd6OB9bE3
- kl/Ob9RuKECpKEnYjmeeaQZhKIa2dcIO639YFUVGXSHJ+M611QPuCP4ThOfIgNm6ljjE
- /V0STLxJHcbz+h9uBmWJoRMh5qqiZHLWRBBBBpy+5G/EvqP0IVXTGftdCY8joZr7DWhj
- f61Q==
-X-Gm-Message-State: AOJu0YwirU12DK8l4UXNs5sMAVDYva5rli7fXhM3UeswPuqpW0FjAB+E
- ipHV1Tfh19jPOm7z1WXWVeC+kg==
-X-Google-Smtp-Source: AGHT+IGCuHPmu7XBcoyZGbS/1vv337vHf9v2rTtqCVC+z2TYZobgtGzbWjHW3TEMn/IMi+AiZLh79Q==
-X-Received: by 2002:a17:907:94d4:b0:a1a:8399:e12d with SMTP id
- dn20-20020a17090794d400b00a1a8399e12dmr1806037ejc.64.1702329710085; 
- Mon, 11 Dec 2023 13:21:50 -0800 (PST)
-Received: from m1x-phil.lan ([176.176.175.193])
+ d=1e100.net; s=20230601; t=1702330106; x=1702934906;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=X5fiX191P4G5pBLsLalRnbHg5N0cH0B6SHCS4O/yB3g=;
+ b=RVmCvLW1vVBpQ/Gq7GVFbpRyIueeea8PplivAwT9tRffCIKOhAFioDkYFa6+SMjF5Y
+ E23FMU7qnQikhWG7zG6S13zWN0tPcfaYDvqfaFCHenB8Fa3TEt2ZXDn4CGx19rf/JkIj
+ bEXZ4mJWocuNcE4N87hHV6VtOzrDd9Ghb9JXyQzUJONiS8XWtyzpaSkigaLimWZFLo8H
+ QBX8VAuJCZdL9djUyzDlOhmmh+esWqqQRwB+dEky/lRj+WDnwLV7yxoddA1wjw7Amj5J
+ xbVqZoLYSczS8CNyy9MbtMh2dIon4eaekn1qGxElnBNXXX0+Vb1WcT6ZxROAMz0K066V
+ 6xYw==
+X-Gm-Message-State: AOJu0YxtFxYnGZsh3YOx+iYuQEklm3/WfKJbVugpVNweg+23OzIgG9se
+ 9IzxrrWORjhwwirAS6OSFdbJTQ==
+X-Google-Smtp-Source: AGHT+IGF9wlJDqbTFsQ+lI7POZDFz1IPDejuBWORh8oTC1zt3ac9hgvmD2JUuv0T0TaVCeR5cmcUZg==
+X-Received: by 2002:a1c:770b:0:b0:40c:7a3:888e with SMTP id
+ t11-20020a1c770b000000b0040c07a3888emr2762705wmi.148.1702330105669; 
+ Mon, 11 Dec 2023 13:28:25 -0800 (PST)
+Received: from [192.168.69.100] ([176.176.175.193])
  by smtp.gmail.com with ESMTPSA id
- wb8-20020a170907d50800b00a1cb351dd4fsm5350843ejc.9.2023.12.11.13.21.46
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 11 Dec 2023 13:21:49 -0800 (PST)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+ d15-20020a056000114f00b0033359ae2d52sm9380197wrx.17.2023.12.11.13.28.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 11 Dec 2023 13:28:25 -0800 (PST)
+Message-ID: <1738ff77-057a-4f92-9a58-e1e1573db3d2@linaro.org>
+Date: Mon, 11 Dec 2023 22:28:22 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 20/24] exec: Declare abi_ptr type in its own
+ 'tcg/abi_ptr.h' header
+Content-Language: en-US
 To: qemu-devel@nongnu.org
 Cc: Ilya Leoshkevich <iii@linux.ibm.com>, Peter Xu <peterx@redhat.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
@@ -64,34 +70,29 @@ Cc: Ilya Leoshkevich <iii@linux.ibm.com>, Peter Xu <peterx@redhat.com>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  Eduardo Habkost <eduardo@habkost.net>, qemu-arm@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>, qemu-ppc@nongnu.org,
- qemu-s390x@nongnu.org,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
- qemu-riscv@nongnu.org, David Hildenbrand <david@redhat.com>,
- Warner Losh <imp@bsdimp.com>, Claudio Fontana <cfontana@suse.de>,
- Brian Cain <bcain@quicinc.com>,
+ qemu-s390x@nongnu.org, =?UTF-8?Q?Alex_Benn=C3=A9e?=
+ <alex.bennee@linaro.org>, =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?=
+ <berrange@redhat.com>, qemu-riscv@nongnu.org,
+ David Hildenbrand <david@redhat.com>, Warner Losh <imp@bsdimp.com>,
+ Claudio Fontana <cfontana@suse.de>, Brian Cain <bcain@quicinc.com>,
  Daniel Henrique Barboza <danielhb413@gmail.com>,
  Richard Henderson <richard.henderson@linaro.org>,
- Thomas Huth <thuth@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 12/24] target/i386: Include missing 'exec/exec-all.h' header
-Date: Mon, 11 Dec 2023 22:19:49 +0100
-Message-ID: <20231211212003.21686-13-philmd@linaro.org>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20231211212003.21686-1-philmd@linaro.org>
+ Thomas Huth <thuth@redhat.com>
 References: <20231211212003.21686-1-philmd@linaro.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+ <20231211212003.21686-21-philmd@linaro.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20231211212003.21686-21-philmd@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::533;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x533.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,27 +108,110 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The XRSTOR instruction ends calling tlb_flush(), declared
-in "exec/exec-all.h".
+On 11/12/23 22:19, Philippe Mathieu-Daudé wrote:
+> The abi_ptr type is declared in "exec/cpu_ldst.h" with all
+> the load/store helpers. Some source files requiring abi_ptr
+> type don't need the load/store helpers. In order to simplify,
+> create a new "tcg/abi_ptr.h" header.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> ---
+>   include/exec/cpu_ldst.h   | 17 +++--------------
+>   include/exec/exec-all.h   |  1 +
+>   include/exec/translator.h |  5 ++++-
+>   include/tcg/abi_ptr.h     | 32 ++++++++++++++++++++++++++++++++
+>   accel/tcg/cputlb.c        |  1 +
+>   5 files changed, 41 insertions(+), 15 deletions(-)
+>   create mode 100644 include/tcg/abi_ptr.h
+> 
+> diff --git a/include/exec/cpu_ldst.h b/include/exec/cpu_ldst.h
+> index 25e7239cc5..c69f02b699 100644
+> --- a/include/exec/cpu_ldst.h
+> +++ b/include/exec/cpu_ldst.h
+> @@ -65,18 +65,9 @@
+>   #include "exec/memopidx.h"
+>   #include "qemu/int128.h"
+>   #include "cpu.h"
+> +#include "tcg/abi_ptr.h"
+>   
+>   #if defined(CONFIG_USER_ONLY)
+> -/* sparc32plus has 64bit long but 32bit space address
+> - * this can make bad result with g2h() and h2g()
+> - */
+> -#if TARGET_VIRT_ADDR_SPACE_BITS <= 32
+> -typedef uint32_t abi_ptr;
+> -#define TARGET_ABI_FMT_ptr "%x"
+> -#else
+> -typedef uint64_t abi_ptr;
+> -#define TARGET_ABI_FMT_ptr "%"PRIx64
+> -#endif
+>   
+>   #ifndef TARGET_TAGGED_ADDRESSES
+>   static inline abi_ptr cpu_untagged_addr(CPUState *cs, abi_ptr x)
+> @@ -120,10 +111,8 @@ static inline bool guest_range_valid_untagged(abi_ulong start, abi_ulong len)
+>       assert(h2g_valid(x)); \
+>       h2g_nocheck(x); \
+>   })
+> -#else
+> -typedef target_ulong abi_ptr;
+> -#define TARGET_ABI_FMT_ptr TARGET_FMT_lx
+> -#endif
+> +
+> +#endif /* CONFIG_USER_ONLY */
+>   
+>   uint32_t cpu_ldub_data(CPUArchState *env, abi_ptr ptr);
+>   int cpu_ldsb_data(CPUArchState *env, abi_ptr ptr);
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+
+> diff --git a/include/tcg/abi_ptr.h b/include/tcg/abi_ptr.h
+> new file mode 100644
+> index 0000000000..415e31cabb
+> --- /dev/null
+> +++ b/include/tcg/abi_ptr.h
+> @@ -0,0 +1,32 @@
+> +/*
+> + * TCG abi_ptr type
+> + *
+> + * SPDX-License-Identifier: LGPL-2.1-or-later
+> + */
+> +#ifndef TCG_ABI_PTR_H
+> +#define TCG_ABI_PTR_H
+> +
+> +#include "cpu-param.h"
+> +
+> +#if defined(CONFIG_USER_ONLY)
+> +/* sparc32plus has 64bit long but 32bit space address
+
+Forgot to squash:
+
+-- >8 --
+@@ -11,3 +11,4 @@
+  #if defined(CONFIG_USER_ONLY)
+-/* sparc32plus has 64bit long but 32bit space address
++/*
++ * sparc32plus has 64bit long but 32bit space address
+   * this can make bad result with g2h() and h2g()
 ---
- target/i386/tcg/fpu_helper.c | 1 +
- 1 file changed, 1 insertion(+)
 
-diff --git a/target/i386/tcg/fpu_helper.c b/target/i386/tcg/fpu_helper.c
-index 4430d3d380..3bb018fbae 100644
---- a/target/i386/tcg/fpu_helper.c
-+++ b/target/i386/tcg/fpu_helper.c
-@@ -21,6 +21,7 @@
- #include <math.h>
- #include "cpu.h"
- #include "tcg-cpu.h"
-+#include "exec/exec-all.h"
- #include "exec/cpu_ldst.h"
- #include "exec/helper-proto.h"
- #include "fpu/softfloat.h"
--- 
-2.41.0
+> + * this can make bad result with g2h() and h2g()
+> + */
+> +#if TARGET_VIRT_ADDR_SPACE_BITS <= 32
+> +typedef uint32_t abi_ptr;
+> +#define TARGET_ABI_FMT_ptr "%x"
+> +#else
+> +typedef uint64_t abi_ptr;
+> +#define TARGET_ABI_FMT_ptr "%"PRIx64
+> +#endif
+> +
+> +#else /* !CONFIG_USER_ONLY */
+> +
+> +#include "exec/target_long.h"
+> +
+> +typedef target_ulong abi_ptr;
+> +#define TARGET_ABI_FMT_ptr TARGET_FMT_lx
+> +
+> +#endif /* !CONFIG_USER_ONLY */
+> +
+> +#endif
 
 
