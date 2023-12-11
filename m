@@ -4,63 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7513CC4167B
-	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Dec 2023 21:56:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6CE7C4167D
+	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Dec 2023 21:56:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rCoFl-0000gi-5M; Mon, 11 Dec 2023 16:55:53 -0500
+	id 1rCoF4-0000Fv-Vu; Mon, 11 Dec 2023 16:55:11 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1rCoFb-0000UK-HY
- for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 16:55:43 -0500
-Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
+ (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1rCoF3-0000Cs-4V
+ for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 16:55:09 -0500
+Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1rCoFY-0003TL-E1
- for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 16:55:42 -0500
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-40c32df9174so41677825e9.3
- for <qemu-riscv@nongnu.org>; Mon, 11 Dec 2023 13:55:40 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1rCoF0-0003Fk-9i
+ for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 16:55:08 -0500
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-55114c073b8so2404232a12.1
+ for <qemu-riscv@nongnu.org>; Mon, 11 Dec 2023 13:55:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=bsdimp-com.20230601.gappssmtp.com; s=20230601; t=1702331739; x=1702936539;
+ d=bsdimp-com.20230601.gappssmtp.com; s=20230601; t=1702331704; x=1702936504;
  darn=nongnu.org; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Iz3Q0l8K0vTD25XA9XVhmf7f45s/h8Yij03I5Oe4Os4=;
- b=CDUP/Ael9bxxwIIan/HILJlcVPkos3Ip+tGtvjYcpCnrL8tHvnS+Nnsm7+gItrNAGi
- eXbAv20lEsaiY22JcykX7tSsR708W4C1aRm2zRYULCu7SZ+eCT8IgIrk/jvyF7K7gn9N
- 954orqpEn0n63sSJLsXktY29y5T77y8eeYgdMykSaOoN2pyniZDbP3ZNGwDPMSGmF3UE
- FFqKU4Xxy4kFAsQfVPfKbH8aJtiCh5i7tQtfalt8tKUcjMQ1JXIwx0rlBcf9lN/Y/pN6
- JMWjreOJxetD+oWnY41MyBLvpkp5ipwrZxfIAlkoJqfIAFKVMpY8t2zvDpWiDD0hs4cm
- DcqQ==
+ bh=aF396CQf/xahnK9tLf7Jbhp/lY8WpZ39PZ0s6eBIOPk=;
+ b=RNQVhbdpaDaU/zU4FFfbhGdw+UdRiivpwo29ctCE4t2kRtJ19kQ/HnKsClAqKN7xne
+ xMynDWQppl2n60QfD6pTVQiLdbdoxfNDQVUgMpZDLj5dE4VXb0mfnzoC/fjkStBLPTOS
+ gYnRRRO9V+Myx34zKiUJWdPG/f3GfWCKvm3Ua51/tHxUNtyumMmM/SckgC/RN4SbtIFq
+ y6KKPXYYiwYpiPRqFLj7LflH9aD/eXj6KmfrvjGu8KDeAWd8N2hqGnk35FRv/OBRfY8U
+ 9hEZ1D7Q/DTgWojmqTZff2T9s7KS8wSH4oYy3nIVejvjQQS8zNtoyYhN/pqzT9FHeDB+
+ xaog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702331739; x=1702936539;
+ d=1e100.net; s=20230601; t=1702331704; x=1702936504;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Iz3Q0l8K0vTD25XA9XVhmf7f45s/h8Yij03I5Oe4Os4=;
- b=obNPeutaCpF2FBJ7GXzp6vAf9eZ0CXaMtyaT74BQ6D5PKcj6Nt98PMovTkCa4z9f/S
- VHc9m9QDafbNaDwBIUWjnl9T4rw41YbrxIQBsWCuiA43GTRwlht1mhVQ0ZdsA+3Q91cA
- C/1QesHpxYGdxTJ67c2AR8lorHZYVhKALkq2qljBprHPcqmkLIYM2IEuIi8ENSYGGioK
- S3vZoFr2DyZzbRKrfs94TUTZAm2jfQpi1kuoKuyt5Va3qtfOqoW2TNyZl967JE1NLuJA
- xE5ghE1nmrOtmjeM1L/O/BAHzaVYoNLPgToJJfKtvse43/DX6F0BGlk4ZtbXspJGjHyf
- O8ag==
-X-Gm-Message-State: AOJu0YyQcfChgAiioAqa6Ib58dqRIOUJmCljlBDrfbnbRlSYwtXoEhRP
- vX/1mTmZaNtIp0Xe6eDeaJ0ak6HKf3n2v+gkKkIhew==
-X-Google-Smtp-Source: AGHT+IH2J60t4jgWjWsmDAtxC/wWNmQPmde2ThAQ76FDH5GLoHt5faxYztbGpy6XtMX/EvcjBT9D2Wy+uQ8hAhEroZs=
-X-Received: by 2002:a7b:ce13:0:b0:40c:2307:e133 with SMTP id
- m19-20020a7bce13000000b0040c2307e133mr1859225wmc.168.1702331739033; Mon, 11
- Dec 2023 13:55:39 -0800 (PST)
+ bh=aF396CQf/xahnK9tLf7Jbhp/lY8WpZ39PZ0s6eBIOPk=;
+ b=BLA2LsBRqfHFYyOFfMGEnhWOhfWPx/Yxl3fwaA+bX2EOzbLLZXOPLLHtukYYFDXJrh
+ d89KAxrQKgFPyuhSmgRMigkT+IJ9m2iPRH8vPmeB7ppDIFFQkq5Jg3KCI66hsctfCdJn
+ +p/Whm07cDVledt1ILIv6gyiE/vTtGtcZwROZQzp/KDgsP7e8Dza0BTz5DQafmI80TJf
+ XtljrCl4lJyjuI33EQEgUf50yQtGsn4Dhe2oNBogFPYlWFd4K1ZLD6LOJ21oBfBbydU3
+ 2Q1XndP4PPKIgtCASjCp7v/w6W22oiOjHSMxgiihauR0j98hKMmlznSxbEUx7TSUVMzy
+ NJYQ==
+X-Gm-Message-State: AOJu0Yweqjfiz3tJMJJcZtIDmerocAuwEWHLc/cD8ASMwFe5AAIo4OoN
+ EcNui9YYeb9zOSdznxykkx2Q3CB0JpVz9x9TQ/ZsUQ==
+X-Google-Smtp-Source: AGHT+IEc9xhaxbK7OOlF/iWmgNAMI9Q4YDpb5eCvtBFgma50RLU3srp1cW+tlkxsxIlEOUuBOWnSRcRs4OPQPyEO3IQ=
+X-Received: by 2002:a50:955d:0:b0:54f:64f4:b6b2 with SMTP id
+ v29-20020a50955d000000b0054f64f4b6b2mr2198492eda.59.1702331704500; Mon, 11
+ Dec 2023 13:55:04 -0800 (PST)
 MIME-Version: 1.0
 References: <20231211212003.21686-1-philmd@linaro.org>
- <20231211212003.21686-2-philmd@linaro.org>
- <CANCZdfppY0D1HOBN-n1h9ZQUHSK23YVgewn-vcRAQTs6--TCzw@mail.gmail.com>
-In-Reply-To: <CANCZdfppY0D1HOBN-n1h9ZQUHSK23YVgewn-vcRAQTs6--TCzw@mail.gmail.com>
+ <20231211212003.21686-3-philmd@linaro.org>
+In-Reply-To: <20231211212003.21686-3-philmd@linaro.org>
 From: Warner Losh <imp@bsdimp.com>
-Date: Mon, 11 Dec 2023 14:55:27 -0700
-Message-ID: <CANCZdfrc1RYKotcYhJLKZamh95K=CcbYtwuuTrrvt9wuJSuG9w@mail.gmail.com>
-Subject: Re: [PATCH 01/24] exec: Include 'cpu.h' before validating
- CPUArchState placement
+Date: Mon, 11 Dec 2023 14:54:53 -0700
+Message-ID: <CANCZdfqt-PBNgFb19pyzoMbTF2yYvgRNdsyQuKZDQWCR=hvYJw@mail.gmail.com>
+Subject: Re: [PATCH 02/24] exec: Expose 'target_page.h' API to user emulation
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, Ilya Leoshkevich <iii@linux.ibm.com>,
  Peter Xu <peterx@redhat.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
@@ -74,10 +72,11 @@ Cc: qemu-devel@nongnu.org, Ilya Leoshkevich <iii@linux.ibm.com>,
  Claudio Fontana <cfontana@suse.de>, Brian Cain <bcain@quicinc.com>, 
  Daniel Henrique Barboza <danielhb413@gmail.com>,
  Richard Henderson <richard.henderson@linaro.org>, 
- Thomas Huth <thuth@redhat.com>
-Content-Type: multipart/alternative; boundary="000000000000986994060c42fe96"
-Received-SPF: none client-ip=2a00:1450:4864:20::32c;
- envelope-from=wlosh@bsdimp.com; helo=mail-wm1-x32c.google.com
+ Thomas Huth <thuth@redhat.com>,
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>
+Content-Type: multipart/alternative; boundary="000000000000897434060c42fcb1"
+Received-SPF: none client-ip=2a00:1450:4864:20::52d;
+ envelope-from=wlosh@bsdimp.com; helo=mail-ed1-x52d.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -100,63 +99,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000986994060c42fe96
+--000000000000897434060c42fcb1
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Dec 11, 2023 at 2:53=E2=80=AFPM Warner Losh <imp@bsdimp.com> wrote:
+On Mon, Dec 11, 2023 at 2:20=E2=80=AFPM Philippe Mathieu-Daud=C3=A9 <philmd=
+@linaro.org>
+wrote:
 
+> User-only objects might benefit from the "exec/target_page.h"
+> API, which allows to build some objects once for all targets.
 >
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> ---
+>  meson.build      |  2 +-
+>  page-target.c    | 43 +++++++++++++++++++++++++++++++++++++++++++
+>  system/physmem.c | 35 -----------------------------------
+>  3 files changed, 44 insertions(+), 36 deletions(-)
+>  create mode 100644 page-target.c
 >
-> On Mon, Dec 11, 2023 at 2:20=E2=80=AFPM Philippe Mathieu-Daud=C3=A9 <phil=
-md@linaro.org>
-> wrote:
->
->> CPUArchState 'env' field is defined within the ArchCPU structure,
->> so we need to include each target "cpu.h" header which defines it.
->>
->> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
->> ---
->>  include/exec/cpu-all.h | 9 +++++----
->>  1 file changed, 5 insertions(+), 4 deletions(-)
->>
->
-> Signed-off-by: Warner Losh <imp@bsdimp.com>
->
-
-Brain f**** I meant:
 
 Reviewed-by: Warner Losh <imp@bsdimp.com>
 
---000000000000986994060c42fe96
+--000000000000897434060c42fcb1
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 <div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Mon, Dec 11, 2023 at 2:53=E2=80=AF=
-PM Warner Losh &lt;<a href=3D"mailto:imp@bsdimp.com">imp@bsdimp.com</a>&gt;=
- wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px =
-0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=
-=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote"><div dir=
-=3D"ltr" class=3D"gmail_attr">On Mon, Dec 11, 2023 at 2:20=E2=80=AFPM Phili=
-ppe Mathieu-Daud=C3=A9 &lt;<a href=3D"mailto:philmd@linaro.org" target=3D"_=
-blank">philmd@linaro.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail=
-_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204=
-,204);padding-left:1ex">CPUArchState &#39;env&#39; field is defined within =
-the ArchCPU structure,<br>
-so we need to include each target &quot;cpu.h&quot; header which defines it=
-.<br>
+<div dir=3D"ltr" class=3D"gmail_attr">On Mon, Dec 11, 2023 at 2:20=E2=80=AF=
+PM Philippe Mathieu-Daud=C3=A9 &lt;<a href=3D"mailto:philmd@linaro.org">phi=
+lmd@linaro.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" st=
+yle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padd=
+ing-left:1ex">User-only objects might benefit from the &quot;exec/target_pa=
+ge.h&quot;<br>
+API, which allows to build some objects once for all targets.<br>
 <br>
 Signed-off-by: Philippe Mathieu-Daud=C3=A9 &lt;<a href=3D"mailto:philmd@lin=
 aro.org" target=3D"_blank">philmd@linaro.org</a>&gt;<br>
 ---<br>
-=C2=A0include/exec/cpu-all.h | 9 +++++----<br>
-=C2=A01 file changed, 5 insertions(+), 4 deletions(-)<br></blockquote><div>=
-<br></div><div>Signed-off-by: Warner Losh &lt;<a href=3D"mailto:imp@bsdimp.=
-com" target=3D"_blank">imp@bsdimp.com</a>&gt;</div></div></div></blockquote=
-><div><br></div><div>Brain f**** I meant:</div><div><br></div><div>Reviewed=
--by: Warner Losh &lt;<a href=3D"mailto:imp@bsdimp.com">imp@bsdimp.com</a>&g=
-t;</div></div></div>
+=C2=A0meson.build=C2=A0 =C2=A0 =C2=A0 |=C2=A0 2 +-<br>
+=C2=A0page-target.c=C2=A0 =C2=A0 | 43 +++++++++++++++++++++++++++++++++++++=
+++++++<br>
+=C2=A0system/physmem.c | 35 -----------------------------------<br>
+=C2=A03 files changed, 44 insertions(+), 36 deletions(-)<br>
+=C2=A0create mode 100644 page-target.c<br></blockquote><div><br></div><div>=
+Reviewed-by: Warner Losh &lt;<a href=3D"mailto:imp@bsdimp.com">imp@bsdimp.c=
+om</a>&gt;</div></div></div>
 
---000000000000986994060c42fe96--
+--000000000000897434060c42fcb1--
 
