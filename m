@@ -4,60 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBF4EC4167B
-	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Dec 2023 21:54:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7513CC4167B
+	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Dec 2023 21:56:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rCoE5-0007wG-Tk; Mon, 11 Dec 2023 16:54:09 -0500
+	id 1rCoFl-0000gi-5M; Mon, 11 Dec 2023 16:55:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1rCoE5-0007vO-7r
- for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 16:54:09 -0500
-Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
+ (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1rCoFb-0000UK-HY
+ for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 16:55:43 -0500
+Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1rCoE2-00038f-8O
- for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 16:54:08 -0500
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-54c64316a22so6677481a12.0
- for <qemu-riscv@nongnu.org>; Mon, 11 Dec 2023 13:54:05 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1rCoFY-0003TL-E1
+ for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 16:55:42 -0500
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-40c32df9174so41677825e9.3
+ for <qemu-riscv@nongnu.org>; Mon, 11 Dec 2023 13:55:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=bsdimp-com.20230601.gappssmtp.com; s=20230601; t=1702331644; x=1702936444;
+ d=bsdimp-com.20230601.gappssmtp.com; s=20230601; t=1702331739; x=1702936539;
  darn=nongnu.org; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cxBNCytuKVpcMOMd1uTr/PXu7b7GfNOqYnE6uYYpyN4=;
- b=D5RhjY77K8unZAAJt/1x+uK1S1DNGuvStAvhzVCJID6ODDNp2BtQZL4ebwD/ayKm8w
- /JoIEZaP9cq8JBBr7PoLD5VMLjx6BnhQp7CnRvh4rnJrw4AxBJv32kEDNC5a6x3MBi9y
- FpDXxjYaddni/JR2pFCPZ4N8InAOeKf+udijWTdRbWUwLbLAbW4pA8aumV7YM1pTEJnX
- OEbxlG+OjQxU6Rk7S/qkrk7N3y/9NvXrxmA24/f2lyiuBX7JxdJILwZ7p5fLcynnizR4
- OoGYPdfUlKplSs2iLPNhn2M7y51fAiSscREkXOSh4hHtrFl8xbV8jju0votb13u/7pjZ
- JZ7Q==
+ bh=Iz3Q0l8K0vTD25XA9XVhmf7f45s/h8Yij03I5Oe4Os4=;
+ b=CDUP/Ael9bxxwIIan/HILJlcVPkos3Ip+tGtvjYcpCnrL8tHvnS+Nnsm7+gItrNAGi
+ eXbAv20lEsaiY22JcykX7tSsR708W4C1aRm2zRYULCu7SZ+eCT8IgIrk/jvyF7K7gn9N
+ 954orqpEn0n63sSJLsXktY29y5T77y8eeYgdMykSaOoN2pyniZDbP3ZNGwDPMSGmF3UE
+ FFqKU4Xxy4kFAsQfVPfKbH8aJtiCh5i7tQtfalt8tKUcjMQ1JXIwx0rlBcf9lN/Y/pN6
+ JMWjreOJxetD+oWnY41MyBLvpkp5ipwrZxfIAlkoJqfIAFKVMpY8t2zvDpWiDD0hs4cm
+ DcqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702331644; x=1702936444;
+ d=1e100.net; s=20230601; t=1702331739; x=1702936539;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=cxBNCytuKVpcMOMd1uTr/PXu7b7GfNOqYnE6uYYpyN4=;
- b=WOJnVu2KmLx/gz0DRi19lGeKewrXyhTEADNqJegi7BOihwayh7IZ95LsaC6OAq9s6w
- GB9863RvTp+16szSW1XnRd/Uv1wS4rQrnHJPSNl7OIP3L31RcK4iSRMgVg5EnNey6A46
- 81kxpasVjGAPuNKk888inlzKxspTECF/LbakCLhqnLW8ldRxqR6ubS+hupf9bjR+5y/q
- ZF0O6AuZHw8DE+huZiHdoo+/ghwmSIKeHT63HPZ9Mxlb09/XbXE0ZhTZOCH+3//16RV5
- CURHQBW0xHbMEsYE6BNUmVFxXuryXVw1EPAtyUUkMe8FGOkyYgkeuCcRlcSRAKo8GnI+
- 3qvg==
-X-Gm-Message-State: AOJu0YyFV93A536GC3ZfSh/upI1Biy5nNoo6sUvBgYGrYahe2Cwt/BIm
- NmvcKKJjw1WobReNNU7Sgd2gu/3oj1dpbBrnmWEjFg==
-X-Google-Smtp-Source: AGHT+IH/rFEPQKRev89Ru4IDb6qH9WoAKEry3fvz1dlxm0fD57lBoPZ4WauRolKVGm9zQT6JJAY8/X/Iy9si+eQTElE=
-X-Received: by 2002:a50:f602:0:b0:54d:b2b8:171d with SMTP id
- c2-20020a50f602000000b0054db2b8171dmr3359635edn.35.1702331643743; Mon, 11 Dec
- 2023 13:54:03 -0800 (PST)
+ bh=Iz3Q0l8K0vTD25XA9XVhmf7f45s/h8Yij03I5Oe4Os4=;
+ b=obNPeutaCpF2FBJ7GXzp6vAf9eZ0CXaMtyaT74BQ6D5PKcj6Nt98PMovTkCa4z9f/S
+ VHc9m9QDafbNaDwBIUWjnl9T4rw41YbrxIQBsWCuiA43GTRwlht1mhVQ0ZdsA+3Q91cA
+ C/1QesHpxYGdxTJ67c2AR8lorHZYVhKALkq2qljBprHPcqmkLIYM2IEuIi8ENSYGGioK
+ S3vZoFr2DyZzbRKrfs94TUTZAm2jfQpi1kuoKuyt5Va3qtfOqoW2TNyZl967JE1NLuJA
+ xE5ghE1nmrOtmjeM1L/O/BAHzaVYoNLPgToJJfKtvse43/DX6F0BGlk4ZtbXspJGjHyf
+ O8ag==
+X-Gm-Message-State: AOJu0YyQcfChgAiioAqa6Ib58dqRIOUJmCljlBDrfbnbRlSYwtXoEhRP
+ vX/1mTmZaNtIp0Xe6eDeaJ0ak6HKf3n2v+gkKkIhew==
+X-Google-Smtp-Source: AGHT+IH2J60t4jgWjWsmDAtxC/wWNmQPmde2ThAQ76FDH5GLoHt5faxYztbGpy6XtMX/EvcjBT9D2Wy+uQ8hAhEroZs=
+X-Received: by 2002:a7b:ce13:0:b0:40c:2307:e133 with SMTP id
+ m19-20020a7bce13000000b0040c2307e133mr1859225wmc.168.1702331739033; Mon, 11
+ Dec 2023 13:55:39 -0800 (PST)
 MIME-Version: 1.0
 References: <20231211212003.21686-1-philmd@linaro.org>
  <20231211212003.21686-2-philmd@linaro.org>
-In-Reply-To: <20231211212003.21686-2-philmd@linaro.org>
+ <CANCZdfppY0D1HOBN-n1h9ZQUHSK23YVgewn-vcRAQTs6--TCzw@mail.gmail.com>
+In-Reply-To: <CANCZdfppY0D1HOBN-n1h9ZQUHSK23YVgewn-vcRAQTs6--TCzw@mail.gmail.com>
 From: Warner Losh <imp@bsdimp.com>
-Date: Mon, 11 Dec 2023 14:53:52 -0700
-Message-ID: <CANCZdfppY0D1HOBN-n1h9ZQUHSK23YVgewn-vcRAQTs6--TCzw@mail.gmail.com>
+Date: Mon, 11 Dec 2023 14:55:27 -0700
+Message-ID: <CANCZdfrc1RYKotcYhJLKZamh95K=CcbYtwuuTrrvt9wuJSuG9w@mail.gmail.com>
 Subject: Re: [PATCH 01/24] exec: Include 'cpu.h' before validating
  CPUArchState placement
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
@@ -74,9 +75,9 @@ Cc: qemu-devel@nongnu.org, Ilya Leoshkevich <iii@linux.ibm.com>,
  Daniel Henrique Barboza <danielhb413@gmail.com>,
  Richard Henderson <richard.henderson@linaro.org>, 
  Thomas Huth <thuth@redhat.com>
-Content-Type: multipart/alternative; boundary="000000000000ea6152060c42f8c0"
-Received-SPF: none client-ip=2a00:1450:4864:20::52c;
- envelope-from=wlosh@bsdimp.com; helo=mail-ed1-x52c.google.com
+Content-Type: multipart/alternative; boundary="000000000000986994060c42fe96"
+Received-SPF: none client-ip=2a00:1450:4864:20::32c;
+ envelope-from=wlosh@bsdimp.com; helo=mail-wm1-x32c.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -99,36 +100,50 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000ea6152060c42f8c0
+--000000000000986994060c42fe96
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Dec 11, 2023 at 2:20=E2=80=AFPM Philippe Mathieu-Daud=C3=A9 <philmd=
-@linaro.org>
-wrote:
+On Mon, Dec 11, 2023 at 2:53=E2=80=AFPM Warner Losh <imp@bsdimp.com> wrote:
 
-> CPUArchState 'env' field is defined within the ArchCPU structure,
-> so we need to include each target "cpu.h" header which defines it.
 >
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> ---
->  include/exec/cpu-all.h | 9 +++++----
->  1 file changed, 5 insertions(+), 4 deletions(-)
+>
+> On Mon, Dec 11, 2023 at 2:20=E2=80=AFPM Philippe Mathieu-Daud=C3=A9 <phil=
+md@linaro.org>
+> wrote:
+>
+>> CPUArchState 'env' field is defined within the ArchCPU structure,
+>> so we need to include each target "cpu.h" header which defines it.
+>>
+>> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+>> ---
+>>  include/exec/cpu-all.h | 9 +++++----
+>>  1 file changed, 5 insertions(+), 4 deletions(-)
+>>
+>
+> Signed-off-by: Warner Losh <imp@bsdimp.com>
 >
 
-Signed-off-by: Warner Losh <imp@bsdimp.com>
+Brain f**** I meant:
 
---000000000000ea6152060c42f8c0
+Reviewed-by: Warner Losh <imp@bsdimp.com>
+
+--000000000000986994060c42fe96
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 <div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Mon, Dec 11, 2023 at 2:20=E2=80=AF=
-PM Philippe Mathieu-Daud=C3=A9 &lt;<a href=3D"mailto:philmd@linaro.org">phi=
-lmd@linaro.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" st=
-yle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padd=
-ing-left:1ex">CPUArchState &#39;env&#39; field is defined within the ArchCP=
-U structure,<br>
+<div dir=3D"ltr" class=3D"gmail_attr">On Mon, Dec 11, 2023 at 2:53=E2=80=AF=
+PM Warner Losh &lt;<a href=3D"mailto:imp@bsdimp.com">imp@bsdimp.com</a>&gt;=
+ wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px =
+0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=
+=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote"><div dir=
+=3D"ltr" class=3D"gmail_attr">On Mon, Dec 11, 2023 at 2:20=E2=80=AFPM Phili=
+ppe Mathieu-Daud=C3=A9 &lt;<a href=3D"mailto:philmd@linaro.org" target=3D"_=
+blank">philmd@linaro.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail=
+_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204=
+,204);padding-left:1ex">CPUArchState &#39;env&#39; field is defined within =
+the ArchCPU structure,<br>
 so we need to include each target &quot;cpu.h&quot; header which defines it=
 .<br>
 <br>
@@ -138,7 +153,10 @@ aro.org" target=3D"_blank">philmd@linaro.org</a>&gt;<br>
 =C2=A0include/exec/cpu-all.h | 9 +++++----<br>
 =C2=A01 file changed, 5 insertions(+), 4 deletions(-)<br></blockquote><div>=
 <br></div><div>Signed-off-by: Warner Losh &lt;<a href=3D"mailto:imp@bsdimp.=
-com">imp@bsdimp.com</a>&gt;</div><div>=C2=A0</div></div></div>
+com" target=3D"_blank">imp@bsdimp.com</a>&gt;</div></div></div></blockquote=
+><div><br></div><div>Brain f**** I meant:</div><div><br></div><div>Reviewed=
+-by: Warner Losh &lt;<a href=3D"mailto:imp@bsdimp.com">imp@bsdimp.com</a>&g=
+t;</div></div></div>
 
---000000000000ea6152060c42f8c0--
+--000000000000986994060c42fe96--
 
