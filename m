@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C136FC4167B
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1337C4332F
 	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Dec 2023 21:26:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rCnk5-0005If-1L; Mon, 11 Dec 2023 16:23:09 -0500
+	id 1rCnhj-0000jW-Vg; Mon, 11 Dec 2023 16:20:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rCnk2-0005CH-MR
- for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 16:23:06 -0500
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rCnhg-0000go-Ad
+ for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 16:20:40 -0500
 Received: from mail-lf1-x135.google.com ([2a00:1450:4864:20::135])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rCnk0-0005po-HE
- for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 16:23:06 -0500
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rCnhU-0005DC-Mg
+ for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 16:20:39 -0500
 Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-50bf2d9b3fdso6529840e87.3
- for <qemu-riscv@nongnu.org>; Mon, 11 Dec 2023 13:23:02 -0800 (PST)
+ 2adb3069b0e04-50be4f03b06so4745372e87.0
+ for <qemu-riscv@nongnu.org>; Mon, 11 Dec 2023 13:20:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702329780; x=1702934580; darn=nongnu.org;
+ d=linaro.org; s=google; t=1702329627; x=1702934427; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6IVD0fP181N6yKPURwFJTLnTnzSvk7D9idiGLSO6/Cw=;
- b=j2dxbNdV6HhJOO/qnq5xW1LOo6MzI1uHNTaURVb7sOkMF/zhyaoqvzfOXw4LbZTHwF
- lipBpHTtTzmvcIlcesyEDh+6s9m1I8GdAjXvlNgoyhFq5ZE9MBw0/KSaamtKzJ24tEWM
- iMPX1QUntrll0LtwiPuIOBa1OrIH+Ze/QWS8tHBaOQMSp8nKd5/CN0mkjaHzo2DtoQgj
- zbK1ethi7tHQLgvXIgtYK/7k6i94yeGJvd9P1CIIPUTdPZMotk+mpFEqElUsAJl0hcok
- ZpLzB2E/seuHDmCc3ZdAzwUNAeGMp5NUSZmyNSe/uqzg2GFObsZufqruvUArRCN9XDvK
- AQgg==
+ bh=wgiAOK8BuLaD0cXDs62KfIAvV8sc/YA5HaZCqiUDiy0=;
+ b=MmvNvQ1d0inCOhQtAJ811ZIi5Opzju8kLcjZhJVpe4JO+f3ZUc5x3GMbIJdswNnMXN
+ swKnBAhEM/VtwqKNJPXY+ECORzLXENvXiYzkogTa81qDcxfuLSLciAPf0ODwCnklvd0Q
+ 0r5+5cZ37FYwrIx7khk+diDg1oECS4MmqL7ZEw5lsTBXiKTuwDKt7kd6ydi/ElpGnjrj
+ 1G25/9y0Gxwtsu2xDDUdqGUPdcLiYewKeCi8uDWZU+t8gZvPoQCy1md+jyiAWMwaJmjC
+ 0AzhJioYpooMRn8AO9FUXpHQxovgsVnYQevPuMzhpAg2KBp0Lp78SgAc5nhTZNa4Kdep
+ i9pA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702329780; x=1702934580;
+ d=1e100.net; s=20230601; t=1702329627; x=1702934427;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6IVD0fP181N6yKPURwFJTLnTnzSvk7D9idiGLSO6/Cw=;
- b=fFPXaOPdnJBwTwQpjbRvBECpJ/jLfsBlVLFNLxXRvlSZJ65S7jbJC5sBaA32K5tJim
- SLRsnIDKy4DhsWbMWbpC4bklJ8yXp0pPnunDWFJCpNq714mj+n4dd4zBzLFC1Ql0YLTf
- ygor7hQIQNIX8o5XL+yWPxxAaBoBtxyDPkwEbJPrqFcStYCbMdHgAecgBLkay7/LSlH3
- Fl8rJABW3udr1V1xj9rtco/nReil3D/1pGQ+7r8+xH2zmq9kripV8Ba0nbtOZAtgWNeJ
- EPUce0JSeMW1VQttpXlG2qeWJQF1QQe375bSPUGj4T9GjXId/dAMzPe1U1nlVdV+qHW9
- mhJg==
-X-Gm-Message-State: AOJu0Yz9hNDnev4NOgRPc/k7CYtV9YSD6hkZ+kabreBqO8rnC8C2G71S
- 7kUEUlU1Z1R1Bpl9evbDJHRmBA==
-X-Google-Smtp-Source: AGHT+IGImOxVOWgtEtRNbTpMP3VyoEVtcVk7T/kTyJSDnJhEjGlDz85TYtGNSnv9pwyCRPaMJL33wQ==
-X-Received: by 2002:a05:6512:610:b0:50b:fbbb:2035 with SMTP id
- b16-20020a056512061000b0050bfbbb2035mr2542678lfe.97.1702329779237; 
- Mon, 11 Dec 2023 13:22:59 -0800 (PST)
+ bh=wgiAOK8BuLaD0cXDs62KfIAvV8sc/YA5HaZCqiUDiy0=;
+ b=akfAZ9eC1ny+4iZ42AtLXZMrOYpD94B9wun+aIb22To96ietSawCcmmQo+kFHFAd04
+ vethuTteXARKyjBJSFcyfZmkJJ3msFuJqoYZfACquUVnn7pQFQQTjlxXOW6N8WTFhAaS
+ NVe5QbJT7MZJS5bbkByr6RVLrb4zoHoW4kz4wfjh0tS/QQr/ZxNwhsVL9yUFbnq6jxsi
+ IWmZwachz3oPQlv09r9JqbOZtxNyl/Tob9Sry4nUl4gsyy5x//Glw4SqKweKbWZRRzst
+ QOF1QZ0CgVVYvZQkqpEy4TG7TesV30szFJ5hKmmI8G2pKFGK3svXs4l2T5YcD1KYpnF5
+ ju0w==
+X-Gm-Message-State: AOJu0YwBcu4kxqqUEeFAWmuHw47aHtKM5QkaQ1QaxlQZ6+TsB6EhmAWy
+ MtQypCdFJgWIwsd5W863/wtCEg==
+X-Google-Smtp-Source: AGHT+IEs4f16yITKu9ESGF3sYemei7SRIH+ratgBSuKGdsJp+f7TQSU4vhxmpbCTPj2yD2qXXhIKpQ==
+X-Received: by 2002:ac2:5f59:0:b0:50b:f300:204 with SMTP id
+ 25-20020ac25f59000000b0050bf3000204mr1399873lfz.70.1702329626915; 
+ Mon, 11 Dec 2023 13:20:26 -0800 (PST)
 Received: from m1x-phil.lan ([176.176.175.193])
  by smtp.gmail.com with ESMTPSA id
- vb5-20020a170907d04500b00a1d885359d6sm5283778ejc.46.2023.12.11.13.22.56
+ cf8-20020a0564020b8800b0054cfef2fe21sm4026966edb.41.2023.12.11.13.20.23
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 11 Dec 2023 13:22:58 -0800 (PST)
+ Mon, 11 Dec 2023 13:20:26 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Ilya Leoshkevich <iii@linux.ibm.com>, Peter Xu <peterx@redhat.com>,
@@ -73,10 +73,11 @@ Cc: Ilya Leoshkevich <iii@linux.ibm.com>, Peter Xu <peterx@redhat.com>,
  Daniel Henrique Barboza <danielhb413@gmail.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Thomas Huth <thuth@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 21/24] exec/cpu_ldst: Avoid including 'cpu.h'
-Date: Mon, 11 Dec 2023 22:19:58 +0100
-Message-ID: <20231211212003.21686-22-philmd@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>
+Subject: [PATCH 02/24] exec: Expose 'target_page.h' API to user emulation
+Date: Mon, 11 Dec 2023 22:19:39 +0100
+Message-ID: <20231211212003.21686-3-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231211212003.21686-1-philmd@linaro.org>
 References: <20231211212003.21686-1-philmd@linaro.org>
@@ -107,40 +108,125 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-"exec/cpu_ldst.h" doesn't need to huge "cpu.h" header,
-but simply:
-
- - exec/cpu-defs.h
- - exec/tlb-common.h
- - exec/user/abitypes.h
- - exec/user/guest-base.h
+User-only objects might benefit from the "exec/target_page.h"
+API, which allows to build some objects once for all targets.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/exec/cpu_ldst.h | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ meson.build      |  2 +-
+ page-target.c    | 43 +++++++++++++++++++++++++++++++++++++++++++
+ system/physmem.c | 35 -----------------------------------
+ 3 files changed, 44 insertions(+), 36 deletions(-)
+ create mode 100644 page-target.c
 
-diff --git a/include/exec/cpu_ldst.h b/include/exec/cpu_ldst.h
-index c69f02b699..a115553ee8 100644
---- a/include/exec/cpu_ldst.h
-+++ b/include/exec/cpu_ldst.h
-@@ -64,11 +64,15 @@
+diff --git a/meson.build b/meson.build
+index d2c4c2adb3..5fdc4ef8db 100644
+--- a/meson.build
++++ b/meson.build
+@@ -3488,7 +3488,7 @@ if get_option('b_lto')
+   pagevary = declare_dependency(link_with: pagevary)
+ endif
+ common_ss.add(pagevary)
+-specific_ss.add(files('page-vary-target.c'))
++specific_ss.add(files('page-target.c', 'page-vary-target.c'))
  
- #include "exec/memopidx.h"
- #include "qemu/int128.h"
--#include "cpu.h"
-+#include "exec/cpu-defs.h"
-+#include "exec/tlb-common.h"
- #include "tcg/abi_ptr.h"
- 
- #if defined(CONFIG_USER_ONLY)
- 
-+#include "exec/user/abitypes.h"
-+#include "exec/user/guest-base.h"
+ subdir('backends')
+ subdir('disas')
+diff --git a/page-target.c b/page-target.c
+new file mode 100644
+index 0000000000..d286e2d58b
+--- /dev/null
++++ b/page-target.c
+@@ -0,0 +1,43 @@
++/*
++ * QEMU page values getters (target independent)
++ *
++ *  Copyright (c) 2003 Fabrice Bellard
++ *
++ * SPDX-License-Identifier: LGPL-2.1-or-later
++ */
 +
- #ifndef TARGET_TAGGED_ADDRESSES
- static inline abi_ptr cpu_untagged_addr(CPUState *cs, abi_ptr x)
++#include "qemu/osdep.h"
++#include "exec/target_page.h"
++#include "exec/cpu-defs.h"
++#include "exec/cpu-all.h"
++
++size_t qemu_target_page_size(void)
++{
++    return TARGET_PAGE_SIZE;
++}
++
++int qemu_target_page_mask(void)
++{
++    return TARGET_PAGE_MASK;
++}
++
++int qemu_target_page_bits(void)
++{
++    return TARGET_PAGE_BITS;
++}
++
++int qemu_target_page_bits_min(void)
++{
++    return TARGET_PAGE_BITS_MIN;
++}
++
++/* Convert target pages to MiB (2**20). */
++size_t qemu_target_pages_to_MiB(size_t pages)
++{
++    int page_bits = TARGET_PAGE_BITS;
++
++    /* So far, the largest (non-huge) page size is 64k, i.e. 16 bits. */
++    g_assert(page_bits < 20);
++
++    return pages >> (20 - page_bits);
++}
+diff --git a/system/physmem.c b/system/physmem.c
+index a63853a7bc..4bdb3d0592 100644
+--- a/system/physmem.c
++++ b/system/physmem.c
+@@ -3422,41 +3422,6 @@ int cpu_memory_rw_debug(CPUState *cpu, vaddr addr,
+     return 0;
+ }
+ 
+-/*
+- * Allows code that needs to deal with migration bitmaps etc to still be built
+- * target independent.
+- */
+-size_t qemu_target_page_size(void)
+-{
+-    return TARGET_PAGE_SIZE;
+-}
+-
+-int qemu_target_page_mask(void)
+-{
+-    return TARGET_PAGE_MASK;
+-}
+-
+-int qemu_target_page_bits(void)
+-{
+-    return TARGET_PAGE_BITS;
+-}
+-
+-int qemu_target_page_bits_min(void)
+-{
+-    return TARGET_PAGE_BITS_MIN;
+-}
+-
+-/* Convert target pages to MiB (2**20). */
+-size_t qemu_target_pages_to_MiB(size_t pages)
+-{
+-    int page_bits = TARGET_PAGE_BITS;
+-
+-    /* So far, the largest (non-huge) page size is 64k, i.e. 16 bits. */
+-    g_assert(page_bits < 20);
+-
+-    return pages >> (20 - page_bits);
+-}
+-
+ bool cpu_physical_memory_is_io(hwaddr phys_addr)
  {
+     MemoryRegion*mr;
 -- 
 2.41.0
 
