@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6CE7C4167D
-	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Dec 2023 21:56:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5F74C4332F
+	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Dec 2023 21:57:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rCoF4-0000Fv-Vu; Mon, 11 Dec 2023 16:55:11 -0500
+	id 1rCoHd-0002DQ-9L; Mon, 11 Dec 2023 16:57:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1rCoF3-0000Cs-4V
- for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 16:55:09 -0500
-Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d])
+ (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1rCoHb-0002Cg-Ah
+ for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 16:57:47 -0500
+Received: from mail-lf1-x130.google.com ([2a00:1450:4864:20::130])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1rCoF0-0003Fk-9i
- for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 16:55:08 -0500
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-55114c073b8so2404232a12.1
- for <qemu-riscv@nongnu.org>; Mon, 11 Dec 2023 13:55:05 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1rCoHV-0003fq-A5
+ for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 16:57:47 -0500
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-50dfac6c0beso2184127e87.2
+ for <qemu-riscv@nongnu.org>; Mon, 11 Dec 2023 13:57:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=bsdimp-com.20230601.gappssmtp.com; s=20230601; t=1702331704; x=1702936504;
+ d=bsdimp-com.20230601.gappssmtp.com; s=20230601; t=1702331859; x=1702936659;
  darn=nongnu.org; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=aF396CQf/xahnK9tLf7Jbhp/lY8WpZ39PZ0s6eBIOPk=;
- b=RNQVhbdpaDaU/zU4FFfbhGdw+UdRiivpwo29ctCE4t2kRtJ19kQ/HnKsClAqKN7xne
- xMynDWQppl2n60QfD6pTVQiLdbdoxfNDQVUgMpZDLj5dE4VXb0mfnzoC/fjkStBLPTOS
- gYnRRRO9V+Myx34zKiUJWdPG/f3GfWCKvm3Ua51/tHxUNtyumMmM/SckgC/RN4SbtIFq
- y6KKPXYYiwYpiPRqFLj7LflH9aD/eXj6KmfrvjGu8KDeAWd8N2hqGnk35FRv/OBRfY8U
- 9hEZ1D7Q/DTgWojmqTZff2T9s7KS8wSH4oYy3nIVejvjQQS8zNtoyYhN/pqzT9FHeDB+
- xaog==
+ bh=UKPVikaa2BLezfE8Nh/92umz0KQtEqI+41mcl4l0ePw=;
+ b=ewDeVlty+NacT5KASby9VXFQzjrugXfFt1BNCs+irXsTr/7cg8+zsd/uiEVDHUrnQF
+ LMxSjza+p3PblaRyvh4sf0B18iGACQRq2vK7xCvJ8EQC+i/CdUofv/7lhZyV9ezItVEn
+ oEjp4uQiPuT/hcompbxbXPSpbyYdFYLLuDKfH3Dzo5+6aIOZtNXxZeWBwMbj09y6Hbc4
+ QoEyClt3CIetZyBQfuEbOwWQoONNVKuAYILc2Zg36nOXFe61bfV+Cqjrt9f+bd3fRogx
+ vqMOoGu4twmm7lW4SaYfiY6Pntvv7ubtja4h4uq2wMOTmPyuctR4BA//pNPL9P7snKWd
+ GWqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702331704; x=1702936504;
+ d=1e100.net; s=20230601; t=1702331859; x=1702936659;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=aF396CQf/xahnK9tLf7Jbhp/lY8WpZ39PZ0s6eBIOPk=;
- b=BLA2LsBRqfHFYyOFfMGEnhWOhfWPx/Yxl3fwaA+bX2EOzbLLZXOPLLHtukYYFDXJrh
- d89KAxrQKgFPyuhSmgRMigkT+IJ9m2iPRH8vPmeB7ppDIFFQkq5Jg3KCI66hsctfCdJn
- +p/Whm07cDVledt1ILIv6gyiE/vTtGtcZwROZQzp/KDgsP7e8Dza0BTz5DQafmI80TJf
- XtljrCl4lJyjuI33EQEgUf50yQtGsn4Dhe2oNBogFPYlWFd4K1ZLD6LOJ21oBfBbydU3
- 2Q1XndP4PPKIgtCASjCp7v/w6W22oiOjHSMxgiihauR0j98hKMmlznSxbEUx7TSUVMzy
- NJYQ==
-X-Gm-Message-State: AOJu0Yweqjfiz3tJMJJcZtIDmerocAuwEWHLc/cD8ASMwFe5AAIo4OoN
- EcNui9YYeb9zOSdznxykkx2Q3CB0JpVz9x9TQ/ZsUQ==
-X-Google-Smtp-Source: AGHT+IEc9xhaxbK7OOlF/iWmgNAMI9Q4YDpb5eCvtBFgma50RLU3srp1cW+tlkxsxIlEOUuBOWnSRcRs4OPQPyEO3IQ=
-X-Received: by 2002:a50:955d:0:b0:54f:64f4:b6b2 with SMTP id
- v29-20020a50955d000000b0054f64f4b6b2mr2198492eda.59.1702331704500; Mon, 11
- Dec 2023 13:55:04 -0800 (PST)
+ bh=UKPVikaa2BLezfE8Nh/92umz0KQtEqI+41mcl4l0ePw=;
+ b=qvZ7HngmfYXyn8dqyeCwV8HA9rNnS+SiyeqMBU85LnHCM5zWyTZrFslTjU/eFlcJ5m
+ czRy/kKwix7JUgnCkUm3QYdtDQb5S2PvRmAR/y0AECW5WEh50yafdzwmBqnr7n16/ZeP
+ o9NIgHBoDviu18uCpGy5vCHA/X+0UoFSfLrwe7WR+1ZDMjLTUsFwsBFdiQsudxtO6gGY
+ o45c05OKBhm/zm38NU3vkhHLuU/uQ/X4aKRpG21S1xRxhlr01/+VEWzQ4bNXw9WLVPGy
+ 1C1lK8rOBbwyNtTXxM4M9JChjPu9cNA5CojV+tBhuYO7l/Ok5/idZJNo+j+rWMRyyrV3
+ eIPw==
+X-Gm-Message-State: AOJu0YytU8d+66bXZ+tMybUB4F3v5OLL3CLC8FN/YHi/Cuoq5JlRXTSe
+ j5EYsm1EsFTyljCSfrEicipgbrMI7jeo1z0sKKzi6A==
+X-Google-Smtp-Source: AGHT+IG2qMuzvVV1CtWvhYnE38e244SwEqL/xcTix+Kr15BR7ZuKHiaqT3xa9LzluUeec4JTOBB8iJLUsObH0AmIbdY=
+X-Received: by 2002:a05:6512:3a92:b0:50c:de34:da09 with SMTP id
+ q18-20020a0565123a9200b0050cde34da09mr3009336lfu.101.1702331859299; Mon, 11
+ Dec 2023 13:57:39 -0800 (PST)
 MIME-Version: 1.0
 References: <20231211212003.21686-1-philmd@linaro.org>
- <20231211212003.21686-3-philmd@linaro.org>
-In-Reply-To: <20231211212003.21686-3-philmd@linaro.org>
+ <20231211212003.21686-15-philmd@linaro.org>
+In-Reply-To: <20231211212003.21686-15-philmd@linaro.org>
 From: Warner Losh <imp@bsdimp.com>
-Date: Mon, 11 Dec 2023 14:54:53 -0700
-Message-ID: <CANCZdfqt-PBNgFb19pyzoMbTF2yYvgRNdsyQuKZDQWCR=hvYJw@mail.gmail.com>
-Subject: Re: [PATCH 02/24] exec: Expose 'target_page.h' API to user emulation
+Date: Mon, 11 Dec 2023 14:57:28 -0700
+Message-ID: <CANCZdfoHViOt9-wnZ_HxHpKm2r2A_RH90MVjMF3tGjRvnjTd-w@mail.gmail.com>
+Subject: Re: [PATCH 14/24] gdbstub: Include missing 'hw/core/cpu.h' header
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, Ilya Leoshkevich <iii@linux.ibm.com>,
  Peter Xu <peterx@redhat.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
@@ -72,11 +72,10 @@ Cc: qemu-devel@nongnu.org, Ilya Leoshkevich <iii@linux.ibm.com>,
  Claudio Fontana <cfontana@suse.de>, Brian Cain <bcain@quicinc.com>, 
  Daniel Henrique Barboza <danielhb413@gmail.com>,
  Richard Henderson <richard.henderson@linaro.org>, 
- Thomas Huth <thuth@redhat.com>,
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>
-Content-Type: multipart/alternative; boundary="000000000000897434060c42fcb1"
-Received-SPF: none client-ip=2a00:1450:4864:20::52d;
- envelope-from=wlosh@bsdimp.com; helo=mail-ed1-x52d.google.com
+ Thomas Huth <thuth@redhat.com>
+Content-Type: multipart/alternative; boundary="000000000000c3897e060c430573"
+Received-SPF: none client-ip=2a00:1450:4864:20::130;
+ envelope-from=wlosh@bsdimp.com; helo=mail-lf1-x130.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -99,52 +98,56 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000897434060c42fcb1
+--000000000000c3897e060c430573
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Dec 11, 2023 at 2:20=E2=80=AFPM Philippe Mathieu-Daud=C3=A9 <philmd=
+On Mon, Dec 11, 2023 at 2:22=E2=80=AFPM Philippe Mathieu-Daud=C3=A9 <philmd=
 @linaro.org>
 wrote:
 
-> User-only objects might benefit from the "exec/target_page.h"
-> API, which allows to build some objects once for all targets.
+> Functions such gdb_get_cpu_pid() dereference CPUState so
+> require the structure declaration from "hw/core/cpu.h":
+>
+>   static uint32_t gdb_get_cpu_pid(CPUState *cpu)
+>   {
+>     ...
+>     return cpu->cluster_index + 1;
+>   }
 >
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 > ---
->  meson.build      |  2 +-
->  page-target.c    | 43 +++++++++++++++++++++++++++++++++++++++++++
->  system/physmem.c | 35 -----------------------------------
->  3 files changed, 44 insertions(+), 36 deletions(-)
->  create mode 100644 page-target.c
+>  gdbstub/gdbstub.c | 1 +
+>  1 file changed, 1 insertion(+)
 >
 
 Reviewed-by: Warner Losh <imp@bsdimp.com>
 
---000000000000897434060c42fcb1
+--000000000000c3897e060c430573
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 <div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Mon, Dec 11, 2023 at 2:20=E2=80=AF=
+<div dir=3D"ltr" class=3D"gmail_attr">On Mon, Dec 11, 2023 at 2:22=E2=80=AF=
 PM Philippe Mathieu-Daud=C3=A9 &lt;<a href=3D"mailto:philmd@linaro.org">phi=
 lmd@linaro.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" st=
 yle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padd=
-ing-left:1ex">User-only objects might benefit from the &quot;exec/target_pa=
-ge.h&quot;<br>
-API, which allows to build some objects once for all targets.<br>
+ing-left:1ex">Functions such gdb_get_cpu_pid() dereference CPUState so<br>
+require the structure declaration from &quot;hw/core/cpu.h&quot;:<br>
+<br>
+=C2=A0 static uint32_t gdb_get_cpu_pid(CPUState *cpu)<br>
+=C2=A0 {<br>
+=C2=A0 =C2=A0 ...<br>
+=C2=A0 =C2=A0 return cpu-&gt;cluster_index + 1;<br>
+=C2=A0 }<br>
 <br>
 Signed-off-by: Philippe Mathieu-Daud=C3=A9 &lt;<a href=3D"mailto:philmd@lin=
 aro.org" target=3D"_blank">philmd@linaro.org</a>&gt;<br>
 ---<br>
-=C2=A0meson.build=C2=A0 =C2=A0 =C2=A0 |=C2=A0 2 +-<br>
-=C2=A0page-target.c=C2=A0 =C2=A0 | 43 +++++++++++++++++++++++++++++++++++++=
-++++++<br>
-=C2=A0system/physmem.c | 35 -----------------------------------<br>
-=C2=A03 files changed, 44 insertions(+), 36 deletions(-)<br>
-=C2=A0create mode 100644 page-target.c<br></blockquote><div><br></div><div>=
-Reviewed-by: Warner Losh &lt;<a href=3D"mailto:imp@bsdimp.com">imp@bsdimp.c=
-om</a>&gt;</div></div></div>
+=C2=A0gdbstub/gdbstub.c | 1 +<br>
+=C2=A01 file changed, 1 insertion(+)<br></blockquote><div><br></div><div>Re=
+viewed-by: Warner Losh &lt;<a href=3D"mailto:imp@bsdimp.com">imp@bsdimp.com=
+</a>&gt;</div><div>=C2=A0</div></div></div>
 
---000000000000897434060c42fcb1--
+--000000000000c3897e060c430573--
 
