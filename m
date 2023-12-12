@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 750D4C4332F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 12 Dec 2023 12:35:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59414C4332F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 12 Dec 2023 12:35:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rD1yO-0007rW-G3; Tue, 12 Dec 2023 07:34:52 -0500
+	id 1rD1z1-0000Cq-8z; Tue, 12 Dec 2023 07:35:31 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rD1yN-0007rH-Hf
- for qemu-riscv@nongnu.org; Tue, 12 Dec 2023 07:34:51 -0500
-Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rD1yr-0008Ro-Qy
+ for qemu-riscv@nongnu.org; Tue, 12 Dec 2023 07:35:22 -0500
+Received: from mail-ej1-x62c.google.com ([2a00:1450:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rD1yM-0006kh-0A
- for qemu-riscv@nongnu.org; Tue, 12 Dec 2023 07:34:51 -0500
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a1da1017a09so681592066b.3
- for <qemu-riscv@nongnu.org>; Tue, 12 Dec 2023 04:34:49 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rD1yo-00072U-1e
+ for qemu-riscv@nongnu.org; Tue, 12 Dec 2023 07:35:21 -0500
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a1f8a1e9637so547045966b.1
+ for <qemu-riscv@nongnu.org>; Tue, 12 Dec 2023 04:35:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702384488; x=1702989288; darn=nongnu.org;
+ d=linaro.org; s=google; t=1702384516; x=1702989316; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=81Lrxkba5TiSEWNy5rmSbN+DrKv9XHIGlVRArHRoC/Y=;
- b=C3ya4RPFhCDuc/pU0ehFvvJl4i8hK1IjTN3lfOamjANhtPBXG1rl49uZkkcSXEOrmC
- iF14n3i1q83C4PdBcTMcePvbyfd2uWuZgvh65Z2+BiPrnA/YKm9Rw6NfdW6JozMNYFWb
- +fuExi70lUD7HdUlN4N/mTuWWWdzthEdKicXhp65OLfnIm+YV07LPFxVhj0/caTm1RsE
- shUArjcTqG2P2UXBQrIVVbpoIoEzYR1KAtqP/oDVV3xP3ce0XI8iA+Ja6rjB9woI+tn6
- Gu5i1yfABnQ3T32E2EngWMyvXn4v8CnhrfbbqrhvfFugBL+8f3iV9DBCvYnZEdKxZXSc
- 0pmA==
+ bh=my60g7IAHtC+Xh4NyAr8rtLaKcoTnKLvvJwkWl2gbFo=;
+ b=V5UI/R/l1ngYEGNCHAHqPeIzA9erqqgRQa3WtWRzE9De1qotyYYSIr1c/PL5zJe4dw
+ Z517BpE2HLg19yJpLlDjrq63DnrfpiKRX12HNILM8qSiOSgywQK/8kbE82wlfzGV34ex
+ P1VCfvZbNcNGYdciI20U2jW6XMVSMoWzRElIZkS45eTrCCcCZ8B2q0dtt3CTJhrjex9M
+ xUvwb0Q2GYugc2cQ7WviTxMFnypBqUNJLxZgek2cUqVW37dC8NdxTs1Vmi/L1NNj3cB1
+ V+PG/sp5Qg08nuuJ7aasj0SgcXZp6EcrWbI5f0gZIDLAWm/aTPjmyifoFEExPHFe4mUb
+ nB9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702384488; x=1702989288;
+ d=1e100.net; s=20230601; t=1702384516; x=1702989316;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=81Lrxkba5TiSEWNy5rmSbN+DrKv9XHIGlVRArHRoC/Y=;
- b=Ut3focstizkbTiup5Y8Ung3pFwwMkwVgH0GeZyJxvfY/voLoZU4W96Z8NjsZqyxs/7
- XJwkO4c6xj9bq+O4+ZjpUBi1WNVW/aJ/uVvEmsjHbzx82RaUj3ihwVvpz8lQa90O5jJm
- ZUeJiLYPfHQP5BybkD1anVtjS/F5nDoFOaUtjWf//IuPxpUHgaNkTzpfxLIFvK+aSHUk
- 8XnsvzJR6yZgeXmTb2arGTsJGCjR+o06oONT8v+S1iJfTKdELO06qrVTtGvN/fUICs/w
- vxsJ5FahOHr0fIizmD/HYCKGXKetygTHjxnBEq7FjlgNYdcbfMY8d0ZVqxSO5YkQtDz/
- KHdg==
-X-Gm-Message-State: AOJu0YyILgoVhalbyKivLGtLEqhsJSXdfBhZp27/B9bK/OFjmMjxruzw
- NK+HhJvSYIQQcAD19avCGlMpiA==
-X-Google-Smtp-Source: AGHT+IEXHKedmksOi5i+8cNWCq3xdc8whFnCDprHwI4ClL0JkDpXjFEvA15M4aXrvMqloFi9T4RFjQ==
-X-Received: by 2002:a17:906:5a49:b0:9e0:4910:166a with SMTP id
- my9-20020a1709065a4900b009e04910166amr3516231ejc.32.1702384488777; 
- Tue, 12 Dec 2023 04:34:48 -0800 (PST)
+ bh=my60g7IAHtC+Xh4NyAr8rtLaKcoTnKLvvJwkWl2gbFo=;
+ b=lTxDvV/OYMI4LQ1TATlWZw2WfCmUChV/cXBVoYdq0b2NcIopNZ6xLmUEsOSRK80CNn
+ UrPXzY/ArcnyYNYszhHjY86WpjgN6XNNiEhEEltGfn1pwqGekryE5azQkiXcCVzwLszD
+ D++4MpJj+YE0T55MkO7oC0UPkWXsgZAXMesdOM6yNts+Lo90I/6m9KRyHQcGvENBDVxJ
+ ld/qWpeDpp8woqFpHzumQQHpeqkYt5XQIVN/ZeAWfzm7VvDG6S26TQKInDyummScsuMB
+ fB7UHlDeeC30N2Qlc4GyBtJHOi81/+ETnUXC0MMx/wcJ5XxlVyrJ/x9aBXqqzJ21mMD8
+ OARQ==
+X-Gm-Message-State: AOJu0Yxa2zot6HpzaHN8eQwqTPna7JcLKiw6xWTyljU8OFBqgmQG7ckq
+ C31FaLvoq6bCyoBCLyyOz0+v7A==
+X-Google-Smtp-Source: AGHT+IHg6SmT2GhDFp4PTORsgElZmax2WEunLBgmWsjFP5qNYK4wg1Y/VLxqjo9Fr/AZEmMcrounvQ==
+X-Received: by 2002:a17:907:6887:b0:a1d:b773:ae8b with SMTP id
+ qy7-20020a170907688700b00a1db773ae8bmr7213392ejc.17.1702384516222; 
+ Tue, 12 Dec 2023 04:35:16 -0800 (PST)
 Received: from m1x-phil.lan ([176.176.175.193])
  by smtp.gmail.com with ESMTPSA id
- re14-20020a170907a2ce00b00a1f751d2ba4sm5517119ejc.99.2023.12.12.04.34.46
+ vh9-20020a170907d38900b00a1d18c142eesm6233817ejc.59.2023.12.12.04.35.14
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 12 Dec 2023 04:34:48 -0800 (PST)
+ Tue, 12 Dec 2023 04:35:15 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Claudio Fontana <cfontana@suse.de>, qemu-ppc@nongnu.org,
@@ -65,18 +65,19 @@ Cc: Claudio Fontana <cfontana@suse.de>, qemu-ppc@nongnu.org,
  qemu-arm@nongnu.org, Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Anton Johansson <anjo@rev.ng>, Warner Losh <imp@bsdimp.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v2 06/23] semihosting/uaccess: Avoid including 'cpu.h'
-Date: Tue, 12 Dec 2023 13:33:42 +0100
-Message-ID: <20231212123401.37493-7-philmd@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Eduardo Habkost <eduardo@habkost.net>
+Subject: [PATCH v2 10/23] target/i386: Include missing 'exec/exec-all.h' header
+Date: Tue, 12 Dec 2023 13:33:46 +0100
+Message-ID: <20231212123401.37493-11-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231212123401.37493-1-philmd@linaro.org>
 References: <20231212123401.37493-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::629;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x629.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62c;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x62c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,28 +100,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-"semihosting/uaccess.h" only requires declarations
-from "exec/cpu-defs.h". Avoid including the huge "cpu.h".
+The XRSTOR instruction ends calling tlb_flush(), declared
+in "exec/exec-all.h".
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- include/semihosting/uaccess.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/i386/tcg/fpu_helper.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/include/semihosting/uaccess.h b/include/semihosting/uaccess.h
-index 3963eafc3e..6c8835fbcb 100644
---- a/include/semihosting/uaccess.h
-+++ b/include/semihosting/uaccess.h
-@@ -14,7 +14,7 @@
- #error Cannot include semihosting/uaccess.h from user emulation
- #endif
- 
--#include "cpu.h"
-+#include "exec/cpu-defs.h"
- 
- #define get_user_u64(val, addr)                                         \
-     ({ uint64_t val_ = 0;                                               \
+diff --git a/target/i386/tcg/fpu_helper.c b/target/i386/tcg/fpu_helper.c
+index 4430d3d380..3bb018fbae 100644
+--- a/target/i386/tcg/fpu_helper.c
++++ b/target/i386/tcg/fpu_helper.c
+@@ -21,6 +21,7 @@
+ #include <math.h>
+ #include "cpu.h"
+ #include "tcg-cpu.h"
++#include "exec/exec-all.h"
+ #include "exec/cpu_ldst.h"
+ #include "exec/helper-proto.h"
+ #include "fpu/softfloat.h"
 -- 
 2.41.0
 
