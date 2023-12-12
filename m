@@ -4,98 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7788C4332F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 12 Dec 2023 04:56:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D40C9C4332F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 12 Dec 2023 11:04:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rCunr-000790-8C; Mon, 11 Dec 2023 23:55:31 -0500
+	id 1rD0Y4-0006wp-Py; Tue, 12 Dec 2023 06:03:36 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1rCunn-00078W-G3
- for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 23:55:29 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <irina.ryapolova@syntacore.com>)
+ id 1rD0Y1-0006vV-QE; Tue, 12 Dec 2023 06:03:33 -0500
+Received: from mta-04.yadro.com ([89.207.88.248])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1rCunk-0006NU-VJ
- for qemu-riscv@nongnu.org; Mon, 11 Dec 2023 23:55:27 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1702356921;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=gDEN6IBKCR9SZvy+vP5xMfqISLn2urgiBHY3S8b4Wt0=;
- b=i1rctoaqK2VXCKM67iVI/sUXTDmNEmL5pF45n4uZSFa49p8jabSjmFBoP2dlQ0hostKN0l
- 1xr1tW43f8CIYhXWf7c19/vLHbYe08OVPccLcTa/sBMxaY7vHzajqk73nkGtpobUNsGPem
- GKgwpLnjld74PhiO+xMmzMIuTvkzDeQ=
-Received: from mail-oi1-f200.google.com (mail-oi1-f200.google.com
- [209.85.167.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-602-SG1M-9igM26JSscGy-TE_Q-1; Mon, 11 Dec 2023 23:55:19 -0500
-X-MC-Unique: SG1M-9igM26JSscGy-TE_Q-1
-Received: by mail-oi1-f200.google.com with SMTP id
- 5614622812f47-3b9eeff9f7bso6034749b6e.1
- for <qemu-riscv@nongnu.org>; Mon, 11 Dec 2023 20:55:19 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702356919; x=1702961719;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=gDEN6IBKCR9SZvy+vP5xMfqISLn2urgiBHY3S8b4Wt0=;
- b=MGIfVYRAxBrtsE/iIjSnMyhxP+HP3a+int5yI387UpSlfysoNokzQqV92c50AHZKo9
- uabRUnBZ4sjh7qFQmmQZ5YdAfmfXT0P1F1DJVxESnyTNmDbXZcOxAegYYjc4Hxj1VR1u
- PAiT1JADlZFQoEIavPQ19A+bSUyzanNSP01sZQvjd/8OUwIc/IucrT8iu5OF38oRK6xV
- lEcHA/wGvQncfOu2TdmByGSyLAsmLiNdeBbLY0YQYKl8kzIVLklrWmpG8A8SSWP59eWP
- xBm4yp4RdiMo/4NRxykakNyc3K6lSnut8eSLyOI6G6NDet7vyeL6VEwy6VIu1rxmuF59
- EwUA==
-X-Gm-Message-State: AOJu0YxhXazBtxdk3fRWgDmCtZI553nGhWT1FdhickKIihnN2SLbGBfu
- bVWxHQy02TGIVLw7kN7gHrKY3idx2QLjLmHZZ58+xnU01Ion6RRBrrH2La+M3iXkGeiSc+Vg2OO
- axy0aDqxiUCT8FJ4=
-X-Received: by 2002:a05:6808:1493:b0:3b9:d4c0:5fac with SMTP id
- e19-20020a056808149300b003b9d4c05facmr7478803oiw.22.1702356919116; 
- Mon, 11 Dec 2023 20:55:19 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IF69UM/96uA9+yVDBg06a7ccGQ/ArtwPvz/UiRlwVZ4UPAq2rRgkmD9crHzR3Fux+aWTDQ9Zg==
-X-Received: by 2002:a05:6808:1493:b0:3b9:d4c0:5fac with SMTP id
- e19-20020a056808149300b003b9d4c05facmr7478776oiw.22.1702356918859; 
- Mon, 11 Dec 2023 20:55:18 -0800 (PST)
-Received: from [192.168.68.51] ([43.252.115.3])
- by smtp.gmail.com with ESMTPSA id
- c23-20020aa78817000000b006ce358d5d9asm7417601pfo.141.2023.12.11.20.55.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 11 Dec 2023 20:55:18 -0800 (PST)
-Message-ID: <0b2aaedf-7a4c-49f4-b4af-71f9ab693207@redhat.com>
-Date: Tue, 12 Dec 2023 14:55:08 +1000
+ (Exim 4.90_1) (envelope-from <irina.ryapolova@syntacore.com>)
+ id 1rD0Xx-0001cX-Uz; Tue, 12 Dec 2023 06:03:32 -0500
+DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com 236AAC0002
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-04; t=1702379005;
+ bh=cIz1MYlyL/+t/uoik96OC0Ii1nEqdqMAlTGy5r/LHfw=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=sCUkkQyEgX3nmeWoFyydBvzQ6z28qsgFIzVUioej8jcRlodNVd1CV14yHS9aVJrj0
+ BBxMn475wNyKws7Ki9k7PPkmCAiBAbVIMKha7IpOlnPndZXRqCd6e4YyXFMJlMgtDl
+ FxteUwdBf660veC385Lta6/pn+WUfKRppFOf/2UlDxQCYGidhw7y4ec04rSH/Yf6mE
+ 5Y+0Lf2qM4TPRvj2Glj/xLSEACT214c0M1KYvIgXdbqrrT3x9If1HCUXhOXqfwpIbI
+ eN5N8/J1W99oMEUP49qtBDACqEeEGsB1CieBMAnzPv38U6kFiCdaTDj8MsgJIIN68/
+ AZN6MfPf9FP2Q==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-03; t=1702379005;
+ bh=cIz1MYlyL/+t/uoik96OC0Ii1nEqdqMAlTGy5r/LHfw=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=qp7EaF8vuG1tutZG8n2OpJSdToTqhjIpxgSVosKcO55Ig6Rcg/tJLR9F2pD6+FvvT
+ xXMb0B3x1HiphDB9M+UH1UyL+UYcIwZKaBrbwj6jwC3TFDFk/7j4CXoTtQU/oWYDCI
+ VE32CG/es0x9X0U/zUkzJUYNyM77J7vlN9CCe/wwkLMgxRRl1PjnGQ6+chcEMYs0PK
+ 4A5JPlwTGDkHNA6FWfO9b2tWVPtVlQQUR/ya8mJlAtKFWpNIxxvAfdq9MaKJaOld6I
+ NvZjMwLvYL/ugaKqFW3K6WxZF5DvNgW+8m59KYF9UjK6Tf++aodLWbNe1Qbmbd6wzS
+ psUsRhU/iDIlQ==
+From: Irina Ryapolova <irina.ryapolova@syntacore.com>
+To: <qemu-devel@nongnu.org>
+CC: <qemu-riscv@nongnu.org>, <palmer@dabbelt.com>, <alistair.francis@wdc.com>, 
+ <bin.meng@windriver.com>, <liwei1518@gmail.com>,
+ <dbarboza@ventanamicro.com>, 
+ <zhiwei_liu@linux.alibaba.com>, Irina Ryapolova
+ <irina.ryapolova@syntacore.com>
+Subject: [PATCH v2 2/2] target/riscv: UPDATE xATP write CSR
+Date: Tue, 12 Dec 2023 14:03:05 +0300
+Message-ID: <20231212110305.45443-2-irina.ryapolova@syntacore.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20231212110305.45443-1-irina.ryapolova@syntacore.com>
+References: <20231212110305.45443-1-irina.ryapolova@syntacore.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 0/9] Unified CPU type check
-From: Gavin Shan <gshan@redhat.com>
-To: qemu-arm@nongnu.org
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org,
- b.galvani@gmail.com, strahinja.p.jankovic@gmail.com, imammedo@redhat.com,
- kfting@nuvoton.com, wuhaotsh@google.com, nieklinnenbank@gmail.com,
- rad@semihalf.com, quic_llindhol@quicinc.com, marcin.juszkiewicz@linaro.org,
- eduardo@habkost.net, marcel.apfelbaum@gmail.com, philmd@linaro.org,
- armbru@redhat.com, wangyanan55@huawei.com, vijai@behindbytes.com,
- palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, shan.gavin@gmail.com
-References: <20231204004726.483558-1-gshan@redhat.com>
-In-Reply-To: <20231204004726.483558-1-gshan@redhat.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=gshan@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: T-Exch-05.corp.yadro.com (172.17.10.109) To
+ S-Exch-01.corp.yadro.com (10.78.5.241)
+Received-SPF: permerror client-ip=89.207.88.248;
+ envelope-from=irina.ryapolova@syntacore.com; helo=mta-04.yadro.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01,
+ T_SPF_PERMERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -111,37 +81,104 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Phil,
+Added xATP_MODE validation for vsatp/hgatp CSRs.
+The xATP register is an SXLEN-bit read/write WARL register, so
+the legal value must be returned (See riscv-privileged-20211203, SATP/VSATP/HGATP CSRs).
 
-On 12/4/23 10:47, Gavin Shan wrote:
-> This series bases on Phil's repository because the prepatory commits
-> have been queued to the branch.
-> 
->    https://gitlab.com/philmd/qemu.git (branch: cpus-next)
-> 
-> There are two places where the user specified CPU type is checked to see
-> if it's supported or allowed by the board: machine_run_board_init() and
-> mc->init(). We don't have to maintain two duplicate sets of logic. This
-> series intends to move the check to machine_run_board_init() so that we
-> have unified CPU type check.
-> 
-> This series can be checked out from:
-> 
->    git@github.com:gwshan/qemu.git (branch: kvm/cpu-type)
-> 
-> PATCH[1-4] refactors and improves the logic to validate CPU type in
->             machine_run_board_init()
-> PATCH[5-9] validates the CPU type in machine_run_board_init() for the
->             individual boards
-> 
-> v6: https://lists.nongnu.org/archive/html/qemu-arm/2023-11/msg00768.html
-> v7: https://lists.nongnu.org/archive/html/qemu-arm/2023-11/msg01045.html
-> v8: https://lists.nongnu.org/archive/html/qemu-arm/2023-11/msg01168.html
-> 
+Signed-off-by: Irina Ryapolova <irina.ryapolova@syntacore.com>
+---
+ target/riscv/csr.c | 52 ++++++++++++++++++++++++++--------------------
+ 1 file changed, 29 insertions(+), 23 deletions(-)
 
-Ping to see if there is a chance to queue it up before the Chrismas? :)
-
-Thanks,
-Gavin
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 735fb27be7..6d7a3dd9aa 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -1282,6 +1282,32 @@ static bool validate_vm(CPURISCVState *env, target_ulong vm)
+     return get_field(mode_supported, (1 << vm));
+ }
+ 
++static target_ulong legalize_xatp(CPURISCVState *env, target_ulong old_xatp,
++                                  target_ulong val)
++{
++    target_ulong mask;
++    bool vm;
++    if (riscv_cpu_mxl(env) == MXL_RV32) {
++        vm = validate_vm(env, get_field(val, SATP32_MODE));
++        mask = (val ^ old_xatp) & (SATP32_MODE | SATP32_ASID | SATP32_PPN);
++    } else {
++        vm = validate_vm(env, get_field(val, SATP64_MODE));
++        mask = (val ^ old_xatp) & (SATP64_MODE | SATP64_ASID | SATP64_PPN);
++    }
++
++    if (vm && mask) {
++        /*
++         * The ISA defines SATP.MODE=Bare as "no translation", but we still
++         * pass these through QEMU's TLB emulation as it improves
++         * performance.  Flushing the TLB on SATP writes with paging
++         * enabled avoids leaking those invalid cached mappings.
++         */
++        tlb_flush(env_cpu(env));
++        return val;
++    }
++    return old_xatp;
++}
++
+ static target_ulong legalize_mpp(CPURISCVState *env, target_ulong old_mpp,
+                                  target_ulong val)
+ {
+@@ -2997,31 +3023,11 @@ static RISCVException read_satp(CPURISCVState *env, int csrno,
+ static RISCVException write_satp(CPURISCVState *env, int csrno,
+                                  target_ulong val)
+ {
+-    target_ulong mask;
+-    bool vm;
+-
+     if (!riscv_cpu_cfg(env)->mmu) {
+         return RISCV_EXCP_NONE;
+     }
+ 
+-    if (riscv_cpu_mxl(env) == MXL_RV32) {
+-        vm = validate_vm(env, get_field(val, SATP32_MODE));
+-        mask = (val ^ env->satp) & (SATP32_MODE | SATP32_ASID | SATP32_PPN);
+-    } else {
+-        vm = validate_vm(env, get_field(val, SATP64_MODE));
+-        mask = (val ^ env->satp) & (SATP64_MODE | SATP64_ASID | SATP64_PPN);
+-    }
+-
+-    if (vm && mask) {
+-        /*
+-         * The ISA defines SATP.MODE=Bare as "no translation", but we still
+-         * pass these through QEMU's TLB emulation as it improves
+-         * performance.  Flushing the TLB on SATP writes with paging
+-         * enabled avoids leaking those invalid cached mappings.
+-         */
+-        tlb_flush(env_cpu(env));
+-        env->satp = val;
+-    }
++    env->satp = legalize_xatp(env, env->satp, val);
+     return RISCV_EXCP_NONE;
+ }
+ 
+@@ -3506,7 +3512,7 @@ static RISCVException read_hgatp(CPURISCVState *env, int csrno,
+ static RISCVException write_hgatp(CPURISCVState *env, int csrno,
+                                   target_ulong val)
+ {
+-    env->hgatp = val;
++    env->hgatp = legalize_xatp(env, env->hgatp, val);
+     return RISCV_EXCP_NONE;
+ }
+ 
+@@ -3772,7 +3778,7 @@ static RISCVException read_vsatp(CPURISCVState *env, int csrno,
+ static RISCVException write_vsatp(CPURISCVState *env, int csrno,
+                                   target_ulong val)
+ {
+-    env->vsatp = val;
++    env->vsatp = legalize_xatp(env, env->vsatp, val);
+     return RISCV_EXCP_NONE;
+ }
+ 
+-- 
+2.25.1
 
 
