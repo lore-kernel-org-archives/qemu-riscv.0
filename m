@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99230C4332F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 12 Dec 2023 15:41:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14047C4167B
+	for <qemu-riscv@archiver.kernel.org>; Tue, 12 Dec 2023 15:41:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rD4rC-0007O1-Ac; Tue, 12 Dec 2023 10:39:38 -0500
+	id 1rD4r5-0007HW-46; Tue, 12 Dec 2023 10:39:31 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <stefanha@redhat.com>)
- id 1rD4rA-0007M9-7g
- for qemu-riscv@nongnu.org; Tue, 12 Dec 2023 10:39:36 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ id 1rD4r3-0007FG-Ds
+ for qemu-riscv@nongnu.org; Tue, 12 Dec 2023 10:39:29 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <stefanha@redhat.com>)
- id 1rD4r5-0000Xg-MH
- for qemu-riscv@nongnu.org; Tue, 12 Dec 2023 10:39:35 -0500
+ id 1rD4qw-0000Qr-Vv
+ for qemu-riscv@nongnu.org; Tue, 12 Dec 2023 10:39:28 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1702395570;
+ s=mimecast20190719; t=1702395562;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=kB/so7QFFjnkFtHtE1LEBq5orXKBbKTqYBv/2PCkoOc=;
- b=NAfZXzvmoU87LzXImIXtCoBDbQoExe7hsI99Ce9pOJYM9yDvrt5zGQU1TChwHjPnuJlbwQ
- yy9JK1e8VLxtbLRkkd4AAGjEOlkKy95MFqAuQEwaOFCAUWfkie4cQoEtqrHnfl5xJmPxmM
- xJELGvotvmv6LqLg+zC614GkD8JMhdQ=
+ bh=BroPZmE361PFBNWWVQQ1qyyRuueblUtOw8ob7c91iHw=;
+ b=LfaL4GKJyoR5nNJ8qCRNLN+R/NMsMf4C2OCR7bXU2G0TEm2/2Aei9rjdiQdhcVSKjp4ngI
+ KkW9h/mVRwmg0AdkhCCy00EAFq2Qq1NXsnGIBNDD1ARtPwtOtkn7sDtgz/c9H7v4HISY7a
+ i/6tN6xOtO/66jdLptcmA3J2tQ/TN+Y=
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-411-nid3NutHOn2yfWpyd9v-ow-1; Tue, 12 Dec 2023 10:39:28 -0500
-X-MC-Unique: nid3NutHOn2yfWpyd9v-ow-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com
- [10.11.54.7])
+ us-mta-688-wQWsViZDNTmhjWSD43lVBw-1; Tue, 12 Dec 2023 10:39:20 -0500
+X-MC-Unique: wQWsViZDNTmhjWSD43lVBw-1
+Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.10])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 0F7B8101A52A;
- Tue, 12 Dec 2023 15:39:26 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id D83C2836F27;
+ Tue, 12 Dec 2023 15:39:17 +0000 (UTC)
 Received: from localhost (unknown [10.39.193.220])
- by smtp.corp.redhat.com (Postfix) with ESMTP id CA6D71C060AF;
- Tue, 12 Dec 2023 15:39:24 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 0708C492BF0;
+ Tue, 12 Dec 2023 15:39:17 +0000 (UTC)
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
@@ -101,27 +101,28 @@ Cc: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
  Jean-Christophe Dubois <jcd@tribudubois.net>,
  Eric Blake <eblake@redhat.com>, Roman Bolshakov <rbolshakov@ddn.com>,
  Halil Pasic <pasic@linux.ibm.com>, xen-devel@lists.xenproject.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v2 5/5] Rename "QEMU global mutex" to "BQL" in comments and
- docs
-Date: Tue, 12 Dec 2023 10:39:04 -0500
-Message-ID: <20231212153905.631119-6-stefanha@redhat.com>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ David Woodhouse <dwmw@amazon.co.uk>
+Subject: [PATCH v2 2/5] qemu/main-loop: rename QEMU_IOTHREAD_LOCK_GUARD to
+ BQL_LOCK_GUARD
+Date: Tue, 12 Dec 2023 10:39:01 -0500
+Message-ID: <20231212153905.631119-3-stefanha@redhat.com>
 In-Reply-To: <20231212153905.631119-1-stefanha@redhat.com>
 References: <20231212153905.631119-1-stefanha@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.7
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=stefanha@redhat.com;
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.10
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=stefanha@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -137,289 +138,240 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The term "QEMU global mutex" is identical to the more widely used Big
-QEMU Lock ("BQL"). Update the code comments and documentation to use
-"BQL" instead of "QEMU global mutex".
+The name "iothread" is overloaded. Use the term Big QEMU Lock (BQL)
+instead, it is already widely used and unambiguous.
 
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
-Acked-by: Markus Armbruster <armbru@redhat.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Paul Durrant <paul@xen.org>
+Acked-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Cédric Le Goater <clg@kaod.org>
+Acked-by: Ilya Leoshkevich <iii@linux.ibm.com>
 ---
- docs/devel/multi-thread-tcg.rst   |  7 +++----
- docs/devel/qapi-code-gen.rst      |  2 +-
- docs/devel/replay.rst             |  2 +-
- docs/devel/multiple-iothreads.txt | 16 ++++++++--------
- include/block/blockjob.h          |  6 +++---
- include/io/task.h                 |  2 +-
- include/qemu/coroutine-core.h     |  2 +-
- include/qemu/coroutine.h          |  2 +-
- hw/block/dataplane/virtio-blk.c   |  8 ++++----
- hw/block/virtio-blk.c             |  2 +-
- hw/scsi/virtio-scsi-dataplane.c   |  6 +++---
- net/tap.c                         |  2 +-
- 12 files changed, 28 insertions(+), 29 deletions(-)
+ include/qemu/main-loop.h  | 19 +++++++++----------
+ hw/i386/kvm/xen_evtchn.c  | 14 +++++++-------
+ hw/i386/kvm/xen_gnttab.c  |  2 +-
+ hw/mips/mips_int.c        |  2 +-
+ hw/ppc/ppc.c              |  2 +-
+ target/i386/kvm/xen-emu.c |  2 +-
+ target/ppc/excp_helper.c  |  2 +-
+ target/ppc/helper_regs.c  |  2 +-
+ target/riscv/cpu_helper.c |  4 ++--
+ 9 files changed, 24 insertions(+), 25 deletions(-)
 
-diff --git a/docs/devel/multi-thread-tcg.rst b/docs/devel/multi-thread-tcg.rst
-index c9541a7b20..7302c3bf53 100644
---- a/docs/devel/multi-thread-tcg.rst
-+++ b/docs/devel/multi-thread-tcg.rst
-@@ -226,10 +226,9 @@ instruction. This could be a future optimisation.
- Emulated hardware state
- -----------------------
+diff --git a/include/qemu/main-loop.h b/include/qemu/main-loop.h
+index 596a206acd..1da0fb186e 100644
+--- a/include/qemu/main-loop.h
++++ b/include/qemu/main-loop.h
+@@ -344,33 +344,32 @@ void bql_lock_impl(const char *file, int line);
+ void bql_unlock(void);
  
--Currently thanks to KVM work any access to IO memory is automatically
--protected by the global iothread mutex, also known as the BQL (Big
--QEMU Lock). Any IO region that doesn't use global mutex is expected to
--do its own locking.
-+Currently thanks to KVM work any access to IO memory is automatically protected
-+by the BQL (Big QEMU Lock). Any IO region that doesn't use the BQL is expected
-+to do its own locking.
- 
- However IO memory isn't the only way emulated hardware state can be
- modified. Some architectures have model specific registers that
-diff --git a/docs/devel/qapi-code-gen.rst b/docs/devel/qapi-code-gen.rst
-index 7f78183cd4..ea8228518c 100644
---- a/docs/devel/qapi-code-gen.rst
-+++ b/docs/devel/qapi-code-gen.rst
-@@ -594,7 +594,7 @@ blocking the guest and other background operations.
- Coroutine safety can be hard to prove, similar to thread safety.  Common
- pitfalls are:
- 
--- The global mutex isn't held across ``qemu_coroutine_yield()``, so
-+- The BQL isn't held across ``qemu_coroutine_yield()``, so
-   operations that used to assume that they execute atomically may have
-   to be more careful to protect against changes in the global state.
- 
-diff --git a/docs/devel/replay.rst b/docs/devel/replay.rst
-index 0244be8b9c..effd856f0c 100644
---- a/docs/devel/replay.rst
-+++ b/docs/devel/replay.rst
-@@ -184,7 +184,7 @@ modes.
- Reading and writing requests are created by CPU thread of QEMU. Later these
- requests proceed to block layer which creates "bottom halves". Bottom
- halves consist of callback and its parameters. They are processed when
--main loop locks the global mutex. These locks are not synchronized with
-+main loop locks the BQL. These locks are not synchronized with
- replaying process because main loop also processes the events that do not
- affect the virtual machine state (like user interaction with monitor).
- 
-diff --git a/docs/devel/multiple-iothreads.txt b/docs/devel/multiple-iothreads.txt
-index a3e949f6b3..828e5527a3 100644
---- a/docs/devel/multiple-iothreads.txt
-+++ b/docs/devel/multiple-iothreads.txt
-@@ -5,7 +5,7 @@ the COPYING file in the top-level directory.
- 
- 
- This document explains the IOThread feature and how to write code that runs
--outside the QEMU global mutex.
-+outside the BQL.
- 
- The main loop and IOThreads
- ---------------------------
-@@ -29,13 +29,13 @@ scalability bottleneck on hosts with many CPUs.  Work can be spread across
- several IOThreads instead of just one main loop.  When set up correctly this
- can improve I/O latency and reduce jitter seen by the guest.
- 
--The main loop is also deeply associated with the QEMU global mutex, which is a
--scalability bottleneck in itself.  vCPU threads and the main loop use the QEMU
--global mutex to serialize execution of QEMU code.  This mutex is necessary
--because a lot of QEMU's code historically was not thread-safe.
-+The main loop is also deeply associated with the BQL, which is a
-+scalability bottleneck in itself.  vCPU threads and the main loop use the BQL
-+to serialize execution of QEMU code.  This mutex is necessary because a lot of
-+QEMU's code historically was not thread-safe.
- 
- The fact that all I/O processing is done in a single main loop and that the
--QEMU global mutex is contended by all vCPU threads and the main loop explain
-+BQL is contended by all vCPU threads and the main loop explain
- why it is desirable to place work into IOThreads.
- 
- The experimental virtio-blk data-plane implementation has been benchmarked and
-@@ -66,7 +66,7 @@ There are several old APIs that use the main loop AioContext:
- 
- Since they implicitly work on the main loop they cannot be used in code that
- runs in an IOThread.  They might cause a crash or deadlock if called from an
--IOThread since the QEMU global mutex is not held.
-+IOThread since the BQL is not held.
- 
- Instead, use the AioContext functions directly (see include/block/aio.h):
-  * aio_set_fd_handler() - monitor a file descriptor
-@@ -105,7 +105,7 @@ used in the block layer and can lead to hangs.
- 
- There is currently no lock ordering rule if a thread needs to acquire multiple
- AioContexts simultaneously.  Therefore, it is only safe for code holding the
--QEMU global mutex to acquire other AioContexts.
-+BQL to acquire other AioContexts.
- 
- Side note: the best way to schedule a function call across threads is to call
- aio_bh_schedule_oneshot().  No acquire/release or locking is needed.
-diff --git a/include/block/blockjob.h b/include/block/blockjob.h
-index e594c10d23..7061ab7201 100644
---- a/include/block/blockjob.h
-+++ b/include/block/blockjob.h
-@@ -54,7 +54,7 @@ typedef struct BlockJob {
- 
-     /**
-      * Speed that was set with @block_job_set_speed.
--     * Always modified and read under QEMU global mutex (GLOBAL_STATE_CODE).
-+     * Always modified and read under the BQL (GLOBAL_STATE_CODE).
-      */
-     int64_t speed;
- 
-@@ -66,7 +66,7 @@ typedef struct BlockJob {
- 
-     /**
-      * Block other operations when block job is running.
--     * Always modified and read under QEMU global mutex (GLOBAL_STATE_CODE).
-+     * Always modified and read under the BQL (GLOBAL_STATE_CODE).
-      */
-     Error *blocker;
- 
-@@ -89,7 +89,7 @@ typedef struct BlockJob {
- 
-     /**
-      * BlockDriverStates that are involved in this block job.
--     * Always modified and read under QEMU global mutex (GLOBAL_STATE_CODE).
-+     * Always modified and read under the BQL (GLOBAL_STATE_CODE).
-      */
-     GSList *nodes;
- } BlockJob;
-diff --git a/include/io/task.h b/include/io/task.h
-index dc7d32ebd0..0b5342ee84 100644
---- a/include/io/task.h
-+++ b/include/io/task.h
-@@ -149,7 +149,7 @@ typedef void (*QIOTaskWorker)(QIOTask *task,
-  * lookups) to be easily run non-blocking. Reporting the
-  * results in the main thread context means that the caller
-  * typically does not need to be concerned about thread
-- * safety wrt the QEMU global mutex.
-+ * safety wrt the BQL.
+ /**
+- * QEMU_IOTHREAD_LOCK_GUARD
++ * BQL_LOCK_GUARD
   *
-  * For example, the socket_listen() method will block the caller
-  * while DNS lookups take place if given a name, instead of IP
-diff --git a/include/qemu/coroutine-core.h b/include/qemu/coroutine-core.h
-index 230bb56517..503bad6e0e 100644
---- a/include/qemu/coroutine-core.h
-+++ b/include/qemu/coroutine-core.h
-@@ -22,7 +22,7 @@
-  * rather than callbacks, for operations that need to give up control while
-  * waiting for events to complete.
-  *
-- * These functions are re-entrant and may be used outside the global mutex.
-+ * These functions are re-entrant and may be used outside the BQL.
-  *
-  * Functions that execute in coroutine context cannot be called
-  * directly from normal functions.  Use @coroutine_fn to mark such
-diff --git a/include/qemu/coroutine.h b/include/qemu/coroutine.h
-index a65be6697f..e6aff45301 100644
---- a/include/qemu/coroutine.h
-+++ b/include/qemu/coroutine.h
-@@ -26,7 +26,7 @@
-  * rather than callbacks, for operations that need to give up control while
-  * waiting for events to complete.
-  *
-- * These functions are re-entrant and may be used outside the global mutex.
-+ * These functions are re-entrant and may be used outside the BQL.
-  *
-  * Functions that execute in coroutine context cannot be called
-  * directly from normal functions.  Use @coroutine_fn to mark such
-diff --git a/hw/block/dataplane/virtio-blk.c b/hw/block/dataplane/virtio-blk.c
-index f83bb0f116..eafc573407 100644
---- a/hw/block/dataplane/virtio-blk.c
-+++ b/hw/block/dataplane/virtio-blk.c
-@@ -47,7 +47,7 @@ void virtio_blk_data_plane_notify(VirtIOBlockDataPlane *s, VirtQueue *vq)
-     virtio_notify_irqfd(s->vdev, vq);
- }
+  * Wrap a block of code in a conditional bql_{lock,unlock}.
+  */
+-typedef struct IOThreadLockAuto IOThreadLockAuto;
++typedef struct BQLLockAuto BQLLockAuto;
  
--/* Context: QEMU global mutex held */
-+/* Context: BQL held */
- bool virtio_blk_data_plane_create(VirtIODevice *vdev, VirtIOBlkConf *conf,
-                                   VirtIOBlockDataPlane **dataplane,
-                                   Error **errp)
-@@ -100,7 +100,7 @@ bool virtio_blk_data_plane_create(VirtIODevice *vdev, VirtIOBlkConf *conf,
-     return true;
- }
- 
--/* Context: QEMU global mutex held */
-+/* Context: BQL held */
- void virtio_blk_data_plane_destroy(VirtIOBlockDataPlane *s)
+-static inline IOThreadLockAuto *qemu_iothread_auto_lock(const char *file,
+-                                                        int line)
++static inline BQLLockAuto *bql_auto_lock(const char *file, int line)
  {
-     VirtIOBlock *vblk;
-@@ -117,7 +117,7 @@ void virtio_blk_data_plane_destroy(VirtIOBlockDataPlane *s)
-     g_free(s);
- }
- 
--/* Context: QEMU global mutex held */
-+/* Context: BQL held */
- int virtio_blk_data_plane_start(VirtIODevice *vdev)
- {
-     VirtIOBlock *vblk = VIRTIO_BLK(vdev);
-@@ -261,7 +261,7 @@ static void virtio_blk_data_plane_stop_bh(void *opaque)
+     if (bql_locked()) {
+         return NULL;
      }
+     bql_lock_impl(file, line);
+     /* Anything non-NULL causes the cleanup function to be called */
+-    return (IOThreadLockAuto *)(uintptr_t)1;
++    return (BQLLockAuto *)(uintptr_t)1;
  }
  
--/* Context: QEMU global mutex held */
-+/* Context: BQL held */
- void virtio_blk_data_plane_stop(VirtIODevice *vdev)
+-static inline void qemu_iothread_auto_unlock(IOThreadLockAuto *l)
++static inline void bql_auto_unlock(BQLLockAuto *l)
  {
-     VirtIOBlock *vblk = VIRTIO_BLK(vdev);
-diff --git a/hw/block/virtio-blk.c b/hw/block/virtio-blk.c
-index a1f8e15522..2a5f6544cc 100644
---- a/hw/block/virtio-blk.c
-+++ b/hw/block/virtio-blk.c
-@@ -1500,7 +1500,7 @@ static void virtio_blk_resize(void *opaque)
-     VirtIODevice *vdev = VIRTIO_DEVICE(opaque);
+     bql_unlock();
+ }
+ 
+-G_DEFINE_AUTOPTR_CLEANUP_FUNC(IOThreadLockAuto, qemu_iothread_auto_unlock)
++G_DEFINE_AUTOPTR_CLEANUP_FUNC(BQLLockAuto, bql_auto_unlock)
+ 
+-#define QEMU_IOTHREAD_LOCK_GUARD() \
+-    g_autoptr(IOThreadLockAuto) _iothread_lock_auto __attribute__((unused)) \
+-        = qemu_iothread_auto_lock(__FILE__, __LINE__)
++#define BQL_LOCK_GUARD() \
++    g_autoptr(BQLLockAuto) _bql_lock_auto __attribute__((unused)) \
++        = bql_auto_lock(__FILE__, __LINE__)
+ 
+ /*
+  * qemu_cond_wait_iothread: Wait on condition for the main loop mutex
+diff --git a/hw/i386/kvm/xen_evtchn.c b/hw/i386/kvm/xen_evtchn.c
+index d7d15cfaf7..bd077eda6d 100644
+--- a/hw/i386/kvm/xen_evtchn.c
++++ b/hw/i386/kvm/xen_evtchn.c
+@@ -1127,7 +1127,7 @@ int xen_evtchn_reset_op(struct evtchn_reset *reset)
+         return -ESRCH;
+     }
+ 
+-    QEMU_IOTHREAD_LOCK_GUARD();
++    BQL_LOCK_GUARD();
+     return xen_evtchn_soft_reset();
+ }
+ 
+@@ -1145,7 +1145,7 @@ int xen_evtchn_close_op(struct evtchn_close *close)
+         return -EINVAL;
+     }
+ 
+-    QEMU_IOTHREAD_LOCK_GUARD();
++    BQL_LOCK_GUARD();
+     qemu_mutex_lock(&s->port_lock);
+ 
+     ret = close_port(s, close->port, &flush_kvm_routes);
+@@ -1272,7 +1272,7 @@ int xen_evtchn_bind_pirq_op(struct evtchn_bind_pirq *pirq)
+         return -EINVAL;
+     }
+ 
+-    QEMU_IOTHREAD_LOCK_GUARD();
++    BQL_LOCK_GUARD();
+ 
+     if (s->pirq[pirq->pirq].port) {
+         return -EBUSY;
+@@ -1824,7 +1824,7 @@ int xen_physdev_map_pirq(struct physdev_map_pirq *map)
+         return -ENOTSUP;
+     }
+ 
+-    QEMU_IOTHREAD_LOCK_GUARD();
++    BQL_LOCK_GUARD();
+     QEMU_LOCK_GUARD(&s->port_lock);
+ 
+     if (map->domid != DOMID_SELF && map->domid != xen_domid) {
+@@ -1884,7 +1884,7 @@ int xen_physdev_unmap_pirq(struct physdev_unmap_pirq *unmap)
+         return -EINVAL;
+     }
+ 
+-    QEMU_IOTHREAD_LOCK_GUARD();
++    BQL_LOCK_GUARD();
+     qemu_mutex_lock(&s->port_lock);
+ 
+     if (!pirq_inuse(s, pirq)) {
+@@ -1924,7 +1924,7 @@ int xen_physdev_eoi_pirq(struct physdev_eoi *eoi)
+         return -ENOTSUP;
+     }
+ 
+-    QEMU_IOTHREAD_LOCK_GUARD();
++    BQL_LOCK_GUARD();
+     QEMU_LOCK_GUARD(&s->port_lock);
+ 
+     if (!pirq_inuse(s, pirq)) {
+@@ -1956,7 +1956,7 @@ int xen_physdev_query_pirq(struct physdev_irq_status_query *query)
+         return -ENOTSUP;
+     }
+ 
+-    QEMU_IOTHREAD_LOCK_GUARD();
++    BQL_LOCK_GUARD();
+     QEMU_LOCK_GUARD(&s->port_lock);
+ 
+     if (!pirq_inuse(s, pirq)) {
+diff --git a/hw/i386/kvm/xen_gnttab.c b/hw/i386/kvm/xen_gnttab.c
+index 0a24f53f20..d9477ae927 100644
+--- a/hw/i386/kvm/xen_gnttab.c
++++ b/hw/i386/kvm/xen_gnttab.c
+@@ -176,7 +176,7 @@ int xen_gnttab_map_page(uint64_t idx, uint64_t gfn)
+         return -EINVAL;
+     }
+ 
+-    QEMU_IOTHREAD_LOCK_GUARD();
++    BQL_LOCK_GUARD();
+     QEMU_LOCK_GUARD(&s->gnt_lock);
+ 
+     xen_overlay_do_map_page(&s->gnt_aliases[idx], gpa);
+diff --git a/hw/mips/mips_int.c b/hw/mips/mips_int.c
+index 6c32e466a3..eef2fd2cd1 100644
+--- a/hw/mips/mips_int.c
++++ b/hw/mips/mips_int.c
+@@ -36,7 +36,7 @@ static void cpu_mips_irq_request(void *opaque, int irq, int level)
+         return;
+     }
+ 
+-    QEMU_IOTHREAD_LOCK_GUARD();
++    BQL_LOCK_GUARD();
+ 
+     if (level) {
+         env->CP0_Cause |= 1 << (irq + CP0Ca_IP);
+diff --git a/hw/ppc/ppc.c b/hw/ppc/ppc.c
+index b6581c16fc..7387b5b677 100644
+--- a/hw/ppc/ppc.c
++++ b/hw/ppc/ppc.c
+@@ -47,7 +47,7 @@ void ppc_set_irq(PowerPCCPU *cpu, int irq, int level)
+     unsigned int old_pending;
+ 
+     /* We may already have the BQL if coming from the reset path */
+-    QEMU_IOTHREAD_LOCK_GUARD();
++    BQL_LOCK_GUARD();
+ 
+     old_pending = env->pending_interrupts;
+ 
+diff --git a/target/i386/kvm/xen-emu.c b/target/i386/kvm/xen-emu.c
+index b0ed2e6aeb..fc2c2321ac 100644
+--- a/target/i386/kvm/xen-emu.c
++++ b/target/i386/kvm/xen-emu.c
+@@ -581,7 +581,7 @@ static int xen_set_shared_info(uint64_t gfn)
+     uint64_t gpa = gfn << TARGET_PAGE_BITS;
+     int i, err;
+ 
+-    QEMU_IOTHREAD_LOCK_GUARD();
++    BQL_LOCK_GUARD();
  
      /*
--     * virtio_notify_config() needs to acquire the global mutex,
-+     * virtio_notify_config() needs to acquire the BQL,
-      * so it can't be called from an iothread. Instead, schedule
-      * it to be run in the main context BH.
-      */
-diff --git a/hw/scsi/virtio-scsi-dataplane.c b/hw/scsi/virtio-scsi-dataplane.c
-index 1e684beebe..56ecc5b12e 100644
---- a/hw/scsi/virtio-scsi-dataplane.c
-+++ b/hw/scsi/virtio-scsi-dataplane.c
-@@ -20,7 +20,7 @@
- #include "scsi/constants.h"
- #include "hw/virtio/virtio-bus.h"
- 
--/* Context: QEMU global mutex held */
-+/* Context: BQL held */
- void virtio_scsi_dataplane_setup(VirtIOSCSI *s, Error **errp)
+      * The xen_overlay device tells KVM about it too, since it had to
+diff --git a/target/ppc/excp_helper.c b/target/ppc/excp_helper.c
+index 8a2bfb5aa2..2ec6429e36 100644
+--- a/target/ppc/excp_helper.c
++++ b/target/ppc/excp_helper.c
+@@ -2222,7 +2222,7 @@ static int ppc_next_unmasked_interrupt(CPUPPCState *env)
+ void ppc_maybe_interrupt(CPUPPCState *env)
  {
-     VirtIOSCSICommon *vs = VIRTIO_SCSI_COMMON(s);
-@@ -93,7 +93,7 @@ static void virtio_scsi_dataplane_stop_bh(void *opaque)
+     CPUState *cs = env_cpu(env);
+-    QEMU_IOTHREAD_LOCK_GUARD();
++    BQL_LOCK_GUARD();
+ 
+     if (ppc_next_unmasked_interrupt(env)) {
+         cpu_interrupt(cs, CPU_INTERRUPT_HARD);
+diff --git a/target/ppc/helper_regs.c b/target/ppc/helper_regs.c
+index f380342d4d..e0b2dcd02e 100644
+--- a/target/ppc/helper_regs.c
++++ b/target/ppc/helper_regs.c
+@@ -244,7 +244,7 @@ void cpu_interrupt_exittb(CPUState *cs)
+      * unless running with TCG.
+      */
+     if (tcg_enabled()) {
+-        QEMU_IOTHREAD_LOCK_GUARD();
++        BQL_LOCK_GUARD();
+         cpu_interrupt(cs, CPU_INTERRUPT_EXITTB);
      }
  }
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index e7e23b34f4..99d1275729 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -655,7 +655,7 @@ void riscv_cpu_interrupt(CPURISCVState *env)
+     uint64_t gein, vsgein = 0, vstip = 0, irqf = 0;
+     CPUState *cs = env_cpu(env);
  
--/* Context: QEMU global mutex held */
-+/* Context: BQL held */
- int virtio_scsi_dataplane_start(VirtIODevice *vdev)
- {
-     int i;
-@@ -191,7 +191,7 @@ fail_guest_notifiers:
-     return -ENOSYS;
- }
+-    QEMU_IOTHREAD_LOCK_GUARD();
++    BQL_LOCK_GUARD();
  
--/* Context: QEMU global mutex held */
-+/* Context: BQL held */
- void virtio_scsi_dataplane_stop(VirtIODevice *vdev)
- {
-     BusState *qbus = qdev_get_parent_bus(DEVICE(vdev));
-diff --git a/net/tap.c b/net/tap.c
-index c23d0323c2..c698b70475 100644
---- a/net/tap.c
-+++ b/net/tap.c
-@@ -219,7 +219,7 @@ static void tap_send(void *opaque)
+     if (env->virt_enabled) {
+         gein = get_field(env->hstatus, HSTATUS_VGEIN);
+@@ -681,7 +681,7 @@ uint64_t riscv_cpu_update_mip(CPURISCVState *env, uint64_t mask, uint64_t value)
+     /* No need to update mip for VSTIP */
+     mask = ((mask == MIP_VSTIP) && env->vstime_irq) ? 0 : mask;
  
-         /*
-          * When the host keeps receiving more packets while tap_send() is
--         * running we can hog the QEMU global mutex.  Limit the number of
-+         * running we can hog the BQL.  Limit the number of
-          * packets that are processed per tap_send() callback to prevent
-          * stalling the guest.
-          */
+-    QEMU_IOTHREAD_LOCK_GUARD();
++    BQL_LOCK_GUARD();
+ 
+     env->mip = (env->mip & ~mask) | (value & mask);
+ 
 -- 
 2.43.0
 
