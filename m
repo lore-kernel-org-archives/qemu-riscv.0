@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B60C5C4167B
-	for <qemu-riscv@archiver.kernel.org>; Tue, 12 Dec 2023 12:38:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4ACEC4332F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 12 Dec 2023 12:38:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rD20K-000447-To; Tue, 12 Dec 2023 07:36:58 -0500
+	id 1rD217-00069H-1m; Tue, 12 Dec 2023 07:37:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rD1zl-0002Le-VU
- for qemu-riscv@nongnu.org; Tue, 12 Dec 2023 07:36:18 -0500
-Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rD20A-0003eU-9E
+ for qemu-riscv@nongnu.org; Tue, 12 Dec 2023 07:36:44 -0500
+Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rD1zi-0000Fm-Nl
- for qemu-riscv@nongnu.org; Tue, 12 Dec 2023 07:36:17 -0500
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-54cb4fa667bso7994098a12.3
- for <qemu-riscv@nongnu.org>; Tue, 12 Dec 2023 04:36:14 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rD206-0000mC-G8
+ for qemu-riscv@nongnu.org; Tue, 12 Dec 2023 07:36:41 -0500
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-54cb4fa667bso7994403a12.3
+ for <qemu-riscv@nongnu.org>; Tue, 12 Dec 2023 04:36:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702384573; x=1702989373; darn=nongnu.org;
+ d=linaro.org; s=google; t=1702384588; x=1702989388; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tD7bO+DUD+k+B6E3Kx/bmS2SAE12lsrmdjyahyo0DL0=;
- b=IwboWPP1Hz2yzRAXXXxXX+3IrreP6piNjisFppW5+ZsL1zZDCb0NCmgQpnmjdJf3yo
- ZJ9dAWhZGFFZwFRHuyKfPEit07n4k3+ZrQ+apQQvozvwyBdYChLAaD/yWbrmYuGoCeYV
- vv8fgc0GmsBZr98O2JqXaDfh05eOdSJO7mTpg5AZGZNFwsed1sKzmB5ps9HWTjO2NEfa
- p4LMlr1wSyueV4VCyDgrWuo5CpOq3R6tsus9NvNl+o1EVLpAQNiz2Ube2pd5+hmuzs8v
- 1SmoRzRTRmu5PjME/fqWDbJqPShVw9xqK8umZRSvq+6qK2e3/V/2XdoJ28qrMilLhvVK
- pAAQ==
+ bh=XcUJPYPixvkbPwyuTaViLgu23Dq6vUSgutR3BpOkySY=;
+ b=M6xa4qnd72QYOjEV61s1iEtUaKTqEHv9R5VNifMFNTPH3G6QaUzz6WiR8JMnGH5wwx
+ YU0Qkz9ESIrTNwU4W1Q1ABGWipBxskNscQvKo+JgkRNG5e2X+JC7NuoZjb0b7REwQCyf
+ olND/OZZGytwA/phQpbCURL6FbcJSBLTQWES1SUaO7zK4j1xEHl2qn1g8wUMEUVCW+fI
+ pYlYWBTfnT7v33Z6/pktjgb7NYfMuoASuRiZVdeb8d5FBXnD5HDDG4rbq42bQ6Sjdf2p
+ sGedqGobOEA+/Xbgrzh72yf7vD0wZAVuxhp1VRMBIM+nTn2ckXrXd/9aJRdmqv0guPmb
+ DGjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702384573; x=1702989373;
+ d=1e100.net; s=20230601; t=1702384588; x=1702989388;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tD7bO+DUD+k+B6E3Kx/bmS2SAE12lsrmdjyahyo0DL0=;
- b=tPi2OIm8xjAPGyoaW4a39ICSeF7Loiy6cSD55LPr4M5pZY/LdcUUgeoh017d7fIfOQ
- buij5ut3A2JWSIb/ZkiJ+5Ync3gXuiyOnrL7u2Z5J+XFOvkt1ozfWHV40bWztRyQGtZJ
- qVXbO+B7yNEzanhrKT4MBNBweGRenZ5R2bDPmiqEcv6jnuh2kCuek24cq7aUKxhPJqQN
- WiIGjhAcgC9mVSDO47/iJ6g2RNwOqbqAr6xJJjYD6qEVF0o3A9DhNG56oyG73HLCLxu+
- V/jY94RyTtfGLCZK91avuxxyiwqUphYZgDp4YsfSeYg8Wv0rHjgWesPmkUSjK4Iqn1qx
- SIwg==
-X-Gm-Message-State: AOJu0Yy9OAOPD8D5JcqeeFscHqw07jY51g5eZ/kkykzp/gLjGHR0iuaH
- zbvm+33YGKsO8rWtHylz7uUKNg==
-X-Google-Smtp-Source: AGHT+IE/qHb9fNxUNnSXjqWADnF4Tee8OxeD9a0SVcwJqjMerPr0gBSFID/RTiz54qADX6SbJz9OHw==
-X-Received: by 2002:a50:9f0d:0:b0:551:cb5d:da61 with SMTP id
- b13-20020a509f0d000000b00551cb5dda61mr164867edf.7.1702384573271; 
- Tue, 12 Dec 2023 04:36:13 -0800 (PST)
+ bh=XcUJPYPixvkbPwyuTaViLgu23Dq6vUSgutR3BpOkySY=;
+ b=kPMJcjx3oDlVUoNzOzJPVW6peGaXniYMIfdcwtx0r5lK9y6Kw6tXOglpTagagCQfyt
+ thYecQlbY52x8cgYtaziqavKvdP9ORq6P/rbsYLoAcAW3jkHSoZKDBLPjNamBKa0GgGO
+ MEw/Y+IbSJB6TQBWXZpVIdYSa385aOcg8mfFV/8hEzOJCvmqkD6EgXNdrqUX7HjkcYHh
+ 9BDOOD4ke9mFIZ+yagFalkEdKzstOwYmKanvrOxEXiy/RnFqmY7/fNmPGLO8owhk/WHf
+ 64vSfKFeWph5Ha/QpJ7wwT1Ff5zXolZYk/bMp567iW+zzyDpJkxRHZpu1/WJYtsQ0kgX
+ FnoQ==
+X-Gm-Message-State: AOJu0YzPELNWeW5ql1HzgRArZHcHs18cb+twjo0zq/zyMKsPqINTpblm
+ /SVJSBfS8CtEPFaWpvTxZrQi0Q==
+X-Google-Smtp-Source: AGHT+IGi/ndeDCRsbzkeIyI2icMnKHZUcY+4/u1N6lfUPc61wGzcvq/Uq1c9+DdTK2NLoK55oG6rdw==
+X-Received: by 2002:a17:907:20e9:b0:a19:a19b:78c5 with SMTP id
+ rh9-20020a17090720e900b00a19a19b78c5mr3381195ejb.136.1702384587924; 
+ Tue, 12 Dec 2023 04:36:27 -0800 (PST)
 Received: from m1x-phil.lan ([176.176.175.193])
  by smtp.gmail.com with ESMTPSA id
- cy25-20020a0564021c9900b00551cf39a97asm127284edb.56.2023.12.12.04.36.11
+ um7-20020a170907cb0700b00a1d8ba21d72sm6180806ejc.201.2023.12.12.04.36.25
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 12 Dec 2023 04:36:12 -0800 (PST)
+ Tue, 12 Dec 2023 04:36:27 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Claudio Fontana <cfontana@suse.de>, qemu-ppc@nongnu.org,
@@ -65,20 +65,19 @@ Cc: Claudio Fontana <cfontana@suse.de>, qemu-ppc@nongnu.org,
  qemu-arm@nongnu.org, Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Anton Johansson <anjo@rev.ng>, Warner Losh <imp@bsdimp.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Riku Voipio <riku.voipio@iki.fi>
-Subject: [PATCH v2 18/23] accel/tcg: Un-inline retaddr helpers to
- 'user-retaddr.h'
-Date: Tue, 12 Dec 2023 13:33:54 +0100
-Message-ID: <20231212123401.37493-19-philmd@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH v2 20/23] exec: Declare abi_ptr type in its own 'abi_ptr.h'
+ header
+Date: Tue, 12 Dec 2023 13:33:56 +0100
+Message-ID: <20231212123401.37493-21-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231212123401.37493-1-philmd@linaro.org>
 References: <20231212123401.37493-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x52e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::531;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x531.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,131 +100,140 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-set_helper_retaddr() is only used in accel/tcg/user-exec.c.
-
-clear_helper_retaddr() is only used in accel/tcg/user-exec.c
-and accel/tcg/user-exec.c.
-
-No need to expose their definitions to all user-emulation
-files including "exec/cpu_ldst.h", move them to a new
-"user-retaddr.h" header (restricted to accel/tcg/).
+The abi_ptr type is declared in "exec/cpu_ldst.h" with all
+the load/store helpers. Some source files requiring abi_ptr
+type don't need the load/store helpers. In order to simplify,
+create a new "exec/abi_ptr.h" header.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- accel/tcg/user-retaddr.h | 28 ++++++++++++++++++++++++++++
- include/exec/cpu_ldst.h  | 28 ++--------------------------
- accel/tcg/cpu-exec.c     |  3 +++
- accel/tcg/user-exec.c    |  1 +
- 4 files changed, 34 insertions(+), 26 deletions(-)
- create mode 100644 accel/tcg/user-retaddr.h
+ include/exec/abi_ptr.h    | 33 +++++++++++++++++++++++++++++++++
+ include/exec/cpu_ldst.h   | 17 +++--------------
+ include/exec/exec-all.h   |  1 +
+ include/exec/translator.h |  5 ++++-
+ accel/tcg/cputlb.c        |  1 +
+ 5 files changed, 42 insertions(+), 15 deletions(-)
+ create mode 100644 include/exec/abi_ptr.h
 
-diff --git a/accel/tcg/user-retaddr.h b/accel/tcg/user-retaddr.h
+diff --git a/include/exec/abi_ptr.h b/include/exec/abi_ptr.h
 new file mode 100644
-index 0000000000..e0f57e1994
+index 0000000000..2b6ae470c4
 --- /dev/null
-+++ b/accel/tcg/user-retaddr.h
-@@ -0,0 +1,28 @@
-+#ifndef ACCEL_TCG_USER_RETADDR_H
-+#define ACCEL_TCG_USER_RETADDR_H
++++ b/include/exec/abi_ptr.h
+@@ -0,0 +1,33 @@
++/*
++ * QEMU abi_ptr type
++ *
++ * SPDX-License-Identifier: LGPL-2.1-or-later
++ */
++#ifndef EXEC_ABI_PTR_H
++#define EXEC_ABI_PTR_H
 +
-+#include "qemu/atomic.h"
++#include "cpu-param.h"
 +
-+extern __thread uintptr_t helper_retaddr;
++#if defined(CONFIG_USER_ONLY)
++/*
++ * sparc32plus has 64bit long but 32bit space address
++ * this can make bad result with g2h() and h2g()
++ */
++#if TARGET_VIRT_ADDR_SPACE_BITS <= 32
++typedef uint32_t abi_ptr;
++#define TARGET_ABI_FMT_ptr "%x"
++#else
++typedef uint64_t abi_ptr;
++#define TARGET_ABI_FMT_ptr "%"PRIx64
++#endif
 +
-+static inline void set_helper_retaddr(uintptr_t ra)
-+{
-+    helper_retaddr = ra;
-+    /*
-+     * Ensure that this write is visible to the SIGSEGV handler that
-+     * may be invoked due to a subsequent invalid memory operation.
-+     */
-+    signal_barrier();
-+}
++#else /* !CONFIG_USER_ONLY */
 +
-+static inline void clear_helper_retaddr(void)
-+{
-+    /*
-+     * Ensure that previous memory operations have succeeded before
-+     * removing the data visible to the signal handler.
-+     */
-+    signal_barrier();
-+    helper_retaddr = 0;
-+}
++#include "exec/target_long.h"
++
++typedef target_ulong abi_ptr;
++#define TARGET_ABI_FMT_ptr TARGET_FMT_lx
++
++#endif /* !CONFIG_USER_ONLY */
 +
 +#endif
 diff --git a/include/exec/cpu_ldst.h b/include/exec/cpu_ldst.h
-index 6061e33ac9..25e7239cc5 100644
+index 25e7239cc5..64e0319996 100644
 --- a/include/exec/cpu_ldst.h
 +++ b/include/exec/cpu_ldst.h
-@@ -300,31 +300,7 @@ Int128 cpu_atomic_cmpxchgo_be_mmu(CPUArchState *env, abi_ptr addr,
-                                   Int128 cmpv, Int128 newv,
-                                   MemOpIdx oi, uintptr_t retaddr);
+@@ -63,20 +63,11 @@
+ #define CPU_LDST_H
  
--#if defined(CONFIG_USER_ONLY)
--
--extern __thread uintptr_t helper_retaddr;
--
--static inline void set_helper_retaddr(uintptr_t ra)
--{
--    helper_retaddr = ra;
--    /*
--     * Ensure that this write is visible to the SIGSEGV handler that
--     * may be invoked due to a subsequent invalid memory operation.
--     */
--    signal_barrier();
--}
--
--static inline void clear_helper_retaddr(void)
--{
--    /*
--     * Ensure that previous memory operations have succeeded before
--     * removing the data visible to the signal handler.
--     */
--    signal_barrier();
--    helper_retaddr = 0;
--}
--
+ #include "exec/memopidx.h"
++#include "exec/abi_ptr.h"
+ #include "qemu/int128.h"
+ #include "cpu.h"
+ 
+ #if defined(CONFIG_USER_ONLY)
+-/* sparc32plus has 64bit long but 32bit space address
+- * this can make bad result with g2h() and h2g()
+- */
+-#if TARGET_VIRT_ADDR_SPACE_BITS <= 32
+-typedef uint32_t abi_ptr;
+-#define TARGET_ABI_FMT_ptr "%x"
 -#else
-+#if !defined(CONFIG_USER_ONLY)
+-typedef uint64_t abi_ptr;
+-#define TARGET_ABI_FMT_ptr "%"PRIx64
+-#endif
  
- #include "tcg/oversized-guest.h"
+ #ifndef TARGET_TAGGED_ADDRESSES
+ static inline abi_ptr cpu_untagged_addr(CPUState *cs, abi_ptr x)
+@@ -120,10 +111,8 @@ static inline bool guest_range_valid_untagged(abi_ulong start, abi_ulong len)
+     assert(h2g_valid(x)); \
+     h2g_nocheck(x); \
+ })
+-#else
+-typedef target_ulong abi_ptr;
+-#define TARGET_ABI_FMT_ptr TARGET_FMT_lx
+-#endif
++
++#endif /* CONFIG_USER_ONLY */
  
-@@ -376,7 +352,7 @@ static inline CPUTLBEntry *tlb_entry(CPUState *cpu, uintptr_t mmu_idx,
-     return &cpu->neg.tlb.f[mmu_idx].table[tlb_index(cpu, mmu_idx, addr)];
- }
+ uint32_t cpu_ldub_data(CPUArchState *env, abi_ptr ptr);
+ int cpu_ldsb_data(CPUArchState *env, abi_ptr ptr);
+diff --git a/include/exec/exec-all.h b/include/exec/exec-all.h
+index df3d93a2e2..5b6be2de6c 100644
+--- a/include/exec/exec-all.h
++++ b/include/exec/exec-all.h
+@@ -22,6 +22,7 @@
  
--#endif /* defined(CONFIG_USER_ONLY) */
-+#endif /* !defined(CONFIG_USER_ONLY) */
+ #include "cpu.h"
+ #if defined(CONFIG_USER_ONLY)
++#include "exec/abi_ptr.h"
+ #include "exec/cpu_ldst.h"
+ #endif
+ #include "exec/translation-block.h"
+diff --git a/include/exec/translator.h b/include/exec/translator.h
+index 6d3f59d095..574058b900 100644
+--- a/include/exec/translator.h
++++ b/include/exec/translator.h
+@@ -19,7 +19,10 @@
+  */
  
- #if TARGET_BIG_ENDIAN
- # define cpu_lduw_data        cpu_lduw_be_data
-diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
-index c938eb96f8..e591992d0c 100644
---- a/accel/tcg/cpu-exec.c
-+++ b/accel/tcg/cpu-exec.c
-@@ -44,6 +44,9 @@
- #include "tb-context.h"
+ #include "qemu/bswap.h"
+-#include "exec/cpu_ldst.h"	/* for abi_ptr */
++#include "exec/cpu-common.h"
++#include "exec/cpu-defs.h"
++#include "exec/abi_ptr.h"
++#include "cpu.h"
+ 
+ /**
+  * gen_intermediate_code
+diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
+index db3f93fda9..852a55fbb6 100644
+--- a/accel/tcg/cputlb.c
++++ b/accel/tcg/cputlb.c
+@@ -34,6 +34,7 @@
+ #include "qemu/atomic.h"
+ #include "qemu/atomic128.h"
+ #include "exec/translate-all.h"
++#include "exec/abi_ptr.h"
+ #include "trace.h"
+ #include "tb-hash.h"
  #include "internal-common.h"
- #include "internal-target.h"
-+#if defined(CONFIG_USER_ONLY)
-+#include "user-retaddr.h"
-+#endif
- 
- /* -icount align implementation. */
- 
-diff --git a/accel/tcg/user-exec.c b/accel/tcg/user-exec.c
-index 68b252cb8e..2575f0842f 100644
---- a/accel/tcg/user-exec.c
-+++ b/accel/tcg/user-exec.c
-@@ -31,6 +31,7 @@
- #include "tcg/tcg-ldst.h"
- #include "internal-common.h"
- #include "internal-target.h"
-+#include "user-retaddr.h"
- 
- __thread uintptr_t helper_retaddr;
- 
 -- 
 2.41.0
 
