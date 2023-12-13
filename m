@@ -4,30 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4217FC4332F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Dec 2023 13:45:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FA50C4332F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Dec 2023 13:46:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rDPXb-0003hU-1h; Wed, 13 Dec 2023 08:44:47 -0500
+	id 1rDPYa-000476-I4; Wed, 13 Dec 2023 08:45:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1rDPXZ-0003g6-2A; Wed, 13 Dec 2023 08:44:45 -0500
+ id 1rDPYL-0003t1-PX; Wed, 13 Dec 2023 08:45:35 -0500
 Received: from rev.ng ([5.9.113.41])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1rDPXX-0006YU-02; Wed, 13 Dec 2023 08:44:44 -0500
+ id 1rDPXt-0006eH-Vg; Wed, 13 Dec 2023 08:45:31 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=rev.ng;
  s=dkim; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
  References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=QvRrr1ggHR1iB7s/vU//ZWm9HwdfpH6rvLKIBIODlSo=; b=qCfBEgF6uelWl7gBcfX/Dv/eJx
- u78aQmU8U0Cr/A9VXFWq/sSX0SVnhErEfvaixl9Bt/G8Io9UAuyPSJtMZwje4PUYOUczCkdnS/ZKF
- OWolvUZJz+tF8zq2dKRYf6GOg7J/yP2FKKtj8onnxgHfqvJE3mhwRMIGO7UwpyVxLZy4=;
-Date: Wed, 13 Dec 2023 14:44:30 +0100
+ bh=y/BeS/uWhohIgo2Q1Syl0ONa3+qSPBdT0sc++7O39OY=; b=qL1OvgA/y6zXkDHDdjO1FIECXA
+ h4NDPd4SBuw+FXzuQfvmAg7jRwpeU42oZxFdAREVoivbTFO35pHosBfW+jIg7JHx8pGv6gdRPoeMy
+ 6iuG+kgAOfLpZCffn9l9jcA6qAT+WzioW76ZRdyEDdNpjZYeF6ivF8iKTJEZkYLAleqg=;
+Date: Wed, 13 Dec 2023 14:44:53 +0100
 To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, Claudio Fontana <cfontana@suse.de>, 
  qemu-ppc@nongnu.org, qemu-s390x@nongnu.org, 
@@ -37,16 +37,15 @@ Cc: qemu-devel@nongnu.org, Claudio Fontana <cfontana@suse.de>,
  qemu-arm@nongnu.org, Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
  Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>, 
  Warner Losh <imp@bsdimp.com>
-Subject: Re: [PATCH v2 12/23] exec/cpu-all: Remove unused 'qemu/thread.h'
- header
-Message-ID: <gipmgja5d6h2wii4m23ae3rjdr4qliabq7f6vfuhn7akrajsu4@yyztbzwbnwbh>
+Subject: Re: [PATCH v2 14/23] exec/cpu-all: Remove unused tswapls() definitions
+Message-ID: <vxb6ts4qlgf2krobzz2rosemk2f546wkuegfh5p5tzgwxih5ly@lv2hzdfirn5z>
 References: <20231212123401.37493-1-philmd@linaro.org>
- <20231212123401.37493-13-philmd@linaro.org>
+ <20231212123401.37493-15-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20231212123401.37493-13-philmd@linaro.org>
+In-Reply-To: <20231212123401.37493-15-philmd@linaro.org>
 Received-SPF: pass client-ip=5.9.113.41; envelope-from=anjo@rev.ng; helo=rev.ng
 X-Spam_score_int: -20
 X-Spam_score: -2.1
@@ -72,24 +71,29 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 12/12/23, Philippe Mathieu-Daudé wrote:
-> Nothing is required from the "qemu/thread.h".
+> Last use of tswapls() was removed 2 years ago in commit
+> aee14c77f4 ("linux-user: Rewrite do_getdents, do_getdents64").
 > 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->  include/exec/cpu-all.h | 1 -
->  1 file changed, 1 deletion(-)
+>  include/exec/cpu-all.h | 2 --
+>  1 file changed, 2 deletions(-)
 > 
 > diff --git a/include/exec/cpu-all.h b/include/exec/cpu-all.h
-> index 9a7b5737d3..26b44ca125 100644
+> index 5b5379b94c..b042d94892 100644
 > --- a/include/exec/cpu-all.h
 > +++ b/include/exec/cpu-all.h
-> @@ -22,7 +22,6 @@
->  #include "exec/cpu-common.h"
->  #include "exec/memory.h"
->  #include "exec/tswap.h"
-> -#include "qemu/thread.h"
->  #include "hw/core/cpu.h"
->  #include "qemu/rcu.h"
+> @@ -38,11 +38,9 @@
+>  
+>  #if TARGET_LONG_SIZE == 4
+>  #define tswapl(s) tswap32(s)
+> -#define tswapls(s) tswap32s((uint32_t *)(s))
+>  #define bswaptls(s) bswap32s(s)
+>  #else
+>  #define tswapl(s) tswap64(s)
+> -#define tswapls(s) tswap64s((uint64_t *)(s))
+>  #define bswaptls(s) bswap64s(s)
+>  #endif
 >  
 > -- 
 > 2.41.0
