@@ -4,120 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AABBEC4332F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 12 Dec 2023 15:41:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E253EC4332F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Dec 2023 05:20:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rD4qy-0007Cx-DS; Tue, 12 Dec 2023 10:39:24 -0500
+	id 1rDHf2-0003MK-On; Wed, 13 Dec 2023 00:19:56 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <stefanha@redhat.com>)
- id 1rD4qx-0007Ca-Qu
- for qemu-riscv@nongnu.org; Tue, 12 Dec 2023 10:39:23 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <stefanha@redhat.com>)
- id 1rD4qv-0000Px-Gz
- for qemu-riscv@nongnu.org; Tue, 12 Dec 2023 10:39:23 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1702395561;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=mhd5PyZ3DXbsV3qmdtVMB6yuzeux7oigKl5JGcj9MXo=;
- b=i20thM2NfPtABc2SQB2yXRbAwQElnfmOoBt+Uen6D0Z/cSLlxJorr4wKjbbyqjO+rOlYns
- uZwHcMINm2Y2PdzetbJFeevsMIgr2rSmJPKsUK0ocwVfweuFVboitrQ7CMxO5CRIcAe3Lk
- M0ivJcVSFs90N/mJUuadHxrViaPBriU=
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-588-oXKjbKZqPLi5HX1YCXpYaQ-1; Tue,
- 12 Dec 2023 10:39:14 -0500
-X-MC-Unique: oXKjbKZqPLi5HX1YCXpYaQ-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
- [10.11.54.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B28B42806403;
- Tue, 12 Dec 2023 15:39:11 +0000 (UTC)
-Received: from localhost (unknown [10.39.193.220])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 922F32026D66;
- Tue, 12 Dec 2023 15:39:06 +0000 (UTC)
-From: Stefan Hajnoczi <stefanha@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Akihiko Odaki <akihiko.odaki@daynix.com>,
- Artyom Tarasenko <atar4qemu@gmail.com>, Paul Durrant <paul@xen.org>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- Paolo Bonzini <pbonzini@redhat.com>, BALATON Zoltan <balaton@eik.bme.hu>,
- Jagannathan Raman <jag.raman@oracle.com>,
- Anthony Perard <anthony.perard@citrix.com>,
- Nicholas Piggin <npiggin@gmail.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- Stefan Hajnoczi <stefanha@redhat.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Alexander Graf <agraf@csgraf.de>,
- Hailiang Zhang <zhanghailiang@xfusion.com>,
- Marcelo Tosatti <mtosatti@redhat.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Huacai Chen <chenhuacai@kernel.org>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>, Peter Xu <peterx@redhat.com>,
- Hyman Huang <yong.huang@smartx.com>, Fam Zheng <fam@euphon.net>,
- Song Gao <gaosong@loongson.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- David Woodhouse <dwmw2@infradead.org>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Aurelien Jarno <aurelien@aurel32.net>,
- Leonardo Bras <leobras@redhat.com>, Jiri Slaby <jslaby@suse.cz>,
- Eric Farman <farman@linux.ibm.com>, Thomas Huth <thuth@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- David Hildenbrand <david@redhat.com>, Michael Roth <michael.roth@amd.com>,
- Elena Ufimtseva <elena.ufimtseva@oracle.com>,
- Gerd Hoffmann <kraxel@redhat.com>, Cameron Esfahani <dirty@apple.com>,
- qemu-ppc@nongnu.org, John Snow <jsnow@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Weiwei Li <liwei1518@gmail.com>, Hanna Reitz <hreitz@redhat.com>,
- qemu-s390x@nongnu.org, qemu-block@nongnu.org,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- kvm@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
- Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
- Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
- Andrey Smirnov <andrew.smirnov@gmail.com>,
- Reinoud Zandijk <reinoud@netbsd.org>, Kevin Wolf <kwolf@redhat.com>,
- Bin Meng <bin.meng@windriver.com>,
- Sunil Muthuswamy <sunilmut@microsoft.com>,
- Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Stafford Horne <shorne@gmail.com>, Fabiano Rosas <farosas@suse.de>,
- Juan Quintela <quintela@redhat.com>, Markus Armbruster <armbru@redhat.com>,
- qemu-arm@nongnu.org, Jason Wang <jasowang@redhat.com>,
- Eduardo Habkost <eduardo@habkost.net>, Max Filippov <jcmvbkbc@gmail.com>,
- Jean-Christophe Dubois <jcd@tribudubois.net>,
- Eric Blake <eblake@redhat.com>, Roman Bolshakov <rbolshakov@ddn.com>,
- Halil Pasic <pasic@linux.ibm.com>, xen-devel@lists.xenproject.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v2 0/5] Make Big QEMU Lock naming consistent
-Date: Tue, 12 Dec 2023 10:38:59 -0500
-Message-ID: <20231212153905.631119-1-stefanha@redhat.com>
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1rDHf1-0003Ll-Pr
+ for qemu-riscv@nongnu.org; Wed, 13 Dec 2023 00:19:55 -0500
+Received: from mail-io1-xd36.google.com ([2607:f8b0:4864:20::d36])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1rDHf0-0002YB-8I
+ for qemu-riscv@nongnu.org; Wed, 13 Dec 2023 00:19:55 -0500
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-7b7020f03c9so266257039f.3
+ for <qemu-riscv@nongnu.org>; Tue, 12 Dec 2023 21:19:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1702444793; x=1703049593;
+ darn=nongnu.org; 
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=SzIUgJAyJY5dDdCff8SpfRi3ccAVPKM0UnEn1OD8uzo=;
+ b=uhuMt665Zp9bGSTv00+lhPH+m8G9N9KnvsGzH7bQGsEa7VfCx4xAXu9OkoI8FltFCC
+ m4QJJ8zv+Es8cK2lEgeALVCcBWu5FHnOxFHD8cuM6JnNQTGIVdWy2sKESLyjPedukQDV
+ 5t9JPsGBopm27+cJyYtpJfWliQL1hQo35/g1Ny6tX0rzNURLXWT/0gzI9smaHkPltbkV
+ hmN7Z+96UdisEeJAMc/el23gwBGuZrM3PxLlaZ0wfxv6JQGnoRs2Pp+7te203Mq49tpW
+ 1+COAKpPc0TqgJioixcUvPWFL1mVAEhtcvJLhG7y8aB+7K4jaW8VJok0qyz7V1X21gAD
+ TCQA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702444793; x=1703049593;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=SzIUgJAyJY5dDdCff8SpfRi3ccAVPKM0UnEn1OD8uzo=;
+ b=HS5wXbjU1YaY7JlMll082BccBX/dqUCNnNMdSrABvYNK5+0Y7d/3WlopjZn0ZdNxGp
+ 6yY0CP/7ZvP/q6ZnmXb40ACGfhrET/WRHKjJhUafaCyDANrudLU9GfdJ0ecbpukNEkUJ
+ kdDFb3gm9pq+yfRLHQjYT7fNVclHrivmNr6n77Yh6FecxoJ5w+d32rm1uO3LXCwIZzg6
+ IBJcQhlZhGxTM6lqA5Pc0XrBD0kl1mmLORnR3YOdX16/q/k/z/9v+Fv+/9RzUNwKt1xC
+ wZSMivJfFjt7NgOgUKwqEqBYWEm9Vk/hFdDqgv3pyQ4CLtUH+CcH+fFSPOVzujvRSkF5
+ clNA==
+X-Gm-Message-State: AOJu0YxnJ1748VcUPqFsNvHQFsw49NAFd7Iu94ToBN/PQraJQfAIDb6q
+ LC0zZJd14VrF0izSbTl8IURQDQ==
+X-Google-Smtp-Source: AGHT+IHNtD9Px03IFzgoK+mfwYgQJzd+LfMXTy/X7lb3MjioLSJ0hrsvHgwgpku/vIjLOHQoAUPsxw==
+X-Received: by 2002:a92:c54e:0:b0:35f:69a7:15c0 with SMTP id
+ a14-20020a92c54e000000b0035f69a715c0mr1603184ilj.28.1702444793226; 
+ Tue, 12 Dec 2023 21:19:53 -0800 (PST)
+Received: from localhost ([157.82.205.15]) by smtp.gmail.com with UTF8SMTPSA id
+ u9-20020a170902e80900b001cf8546335fsm9555880plg.5.2023.12.12.21.19.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 12 Dec 2023 21:19:52 -0800 (PST)
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
+Date: Wed, 13 Dec 2023 14:19:30 +0900
+Subject: [PATCH v7 2/4] target/riscv: Remove misa_mxl validation
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.4
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=stefanha@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 7bit
+Message-Id: <20231213-riscv-v7-2-a760156a337f@daynix.com>
+References: <20231213-riscv-v7-0-a760156a337f@daynix.com>
+In-Reply-To: <20231213-riscv-v7-0-a760156a337f@daynix.com>
+To: Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ =?utf-8?q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>, 
+ Mikhail Tyutin <m.tyutin@yadro.com>, 
+ Aleksandr Anenkov <a.anenkov@yadro.com>, 
+ =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>, 
+ Fabiano Rosas <farosas@suse.de>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Akihiko Odaki <akihiko.odaki@daynix.com>
+X-Mailer: b4 0.12.4
+Received-SPF: none client-ip=2607:f8b0:4864:20::d36;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-io1-xd36.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -133,151 +102,67 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-v2:
-- Rename APIs bql_*() [PeterX]
-- Spell out "Big QEMU Lock (BQL)" in doc comments [PeterX]
-- Rename "iolock" variables in hw/remote/mpqemu-link.c [Harsh]
-- Fix bql_auto_lock() indentation in Patch 2 [Ilya]
-- "with BQL taken" -> "with the BQL taken" [Philippe]
-- "under BQL" -> "under the BQL" [Philippe]
+It is initialized with a simple assignment and there is little room for
+error. In fact, the validation is even more complex.
 
-The Big QEMU Lock ("BQL") has two other names: "iothread lock" and "QEMU global
-mutex". The term "iothread lock" is easily confused with the unrelated --object
-iothread (iothread.c).
+Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+Acked-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/tcg/tcg-cpu.c | 15 +++------------
+ 1 file changed, 3 insertions(+), 12 deletions(-)
 
-This series updates the code and documentation to consistently use "BQL". This
-makes the code easier to understand.
-
-Stefan Hajnoczi (5):
-  system/cpus: rename qemu_mutex_lock_iothread() to bql_lock()
-  qemu/main-loop: rename QEMU_IOTHREAD_LOCK_GUARD to BQL_LOCK_GUARD
-  qemu/main-loop: rename qemu_cond_wait_iothread() to
-    qemu_cond_wait_bql()
-  Replace "iothread lock" with "BQL" in comments
-  Rename "QEMU global mutex" to "BQL" in comments and docs
-
- docs/devel/multi-thread-tcg.rst      |   7 +-
- docs/devel/qapi-code-gen.rst         |   2 +-
- docs/devel/replay.rst                |   2 +-
- docs/devel/reset.rst                 |   2 +-
- docs/devel/multiple-iothreads.txt    |  16 ++--
- hw/display/qxl.h                     |   2 +-
- include/block/aio-wait.h             |   2 +-
- include/block/blockjob.h             |   6 +-
- include/exec/cpu-common.h            |   2 +-
- include/exec/memory.h                |   4 +-
- include/exec/ramblock.h              |   2 +-
- include/io/task.h                    |   2 +-
- include/migration/register.h         |   8 +-
- include/qemu/coroutine-core.h        |   2 +-
- include/qemu/coroutine.h             |   2 +-
- include/qemu/main-loop.h             |  69 ++++++++--------
- include/qemu/thread.h                |   2 +-
- target/arm/internals.h               |   4 +-
- accel/accel-blocker.c                |  10 +--
- accel/dummy-cpus.c                   |   8 +-
- accel/hvf/hvf-accel-ops.c            |   4 +-
- accel/kvm/kvm-accel-ops.c            |   4 +-
- accel/kvm/kvm-all.c                  |  22 ++---
- accel/tcg/cpu-exec.c                 |  26 +++---
- accel/tcg/cputlb.c                   |  20 ++---
- accel/tcg/tcg-accel-ops-icount.c     |   6 +-
- accel/tcg/tcg-accel-ops-mttcg.c      |  12 +--
- accel/tcg/tcg-accel-ops-rr.c         |  18 ++--
- accel/tcg/tcg-accel-ops.c            |   2 +-
- accel/tcg/translate-all.c            |   2 +-
- cpu-common.c                         |   4 +-
- dump/dump.c                          |   4 +-
- hw/block/dataplane/virtio-blk.c      |   8 +-
- hw/block/virtio-blk.c                |   2 +-
- hw/core/cpu-common.c                 |   6 +-
- hw/display/virtio-gpu.c              |   2 +-
- hw/i386/intel_iommu.c                |   6 +-
- hw/i386/kvm/xen_evtchn.c             |  30 +++----
- hw/i386/kvm/xen_gnttab.c             |   2 +-
- hw/i386/kvm/xen_overlay.c            |   2 +-
- hw/i386/kvm/xen_xenstore.c           |   2 +-
- hw/intc/arm_gicv3_cpuif.c            |   2 +-
- hw/intc/s390_flic.c                  |  18 ++--
- hw/mips/mips_int.c                   |   2 +-
- hw/misc/edu.c                        |   4 +-
- hw/misc/imx6_src.c                   |   2 +-
- hw/misc/imx7_src.c                   |   2 +-
- hw/net/xen_nic.c                     |   8 +-
- hw/ppc/pegasos2.c                    |   2 +-
- hw/ppc/ppc.c                         |   6 +-
- hw/ppc/spapr.c                       |   2 +-
- hw/ppc/spapr_events.c                |   2 +-
- hw/ppc/spapr_rng.c                   |   4 +-
- hw/ppc/spapr_softmmu.c               |   4 +-
- hw/remote/mpqemu-link.c              |  22 ++---
- hw/remote/vfio-user-obj.c            |   2 +-
- hw/s390x/s390-skeys.c                |   2 +-
- hw/scsi/virtio-scsi-dataplane.c      |   6 +-
- migration/block-dirty-bitmap.c       |  14 ++--
- migration/block.c                    |  40 ++++-----
- migration/colo.c                     |  62 +++++++-------
- migration/dirtyrate.c                |  12 +--
- migration/migration.c                |  54 ++++++------
- migration/ram.c                      |  16 ++--
- net/tap.c                            |   2 +-
- replay/replay-internal.c             |   2 +-
- semihosting/console.c                |   8 +-
- stubs/iothread-lock.c                |   6 +-
- system/cpu-throttle.c                |   6 +-
- system/cpus.c                        |  55 +++++++------
- system/dirtylimit.c                  |   4 +-
- system/memory.c                      |   2 +-
- system/physmem.c                     |  14 ++--
- system/runstate.c                    |   2 +-
- system/watchpoint.c                  |   4 +-
- target/arm/arm-powerctl.c            |  14 ++--
- target/arm/helper.c                  |   6 +-
- target/arm/hvf/hvf.c                 |   8 +-
- target/arm/kvm.c                     |   4 +-
- target/arm/kvm64.c                   |   4 +-
- target/arm/ptw.c                     |   6 +-
- target/arm/tcg/helper-a64.c          |   8 +-
- target/arm/tcg/m_helper.c            |   6 +-
- target/arm/tcg/op_helper.c           |  24 +++---
- target/arm/tcg/psci.c                |   2 +-
- target/hppa/int_helper.c             |   8 +-
- target/i386/hvf/hvf.c                |   6 +-
- target/i386/kvm/hyperv.c             |   4 +-
- target/i386/kvm/kvm.c                |  28 +++----
- target/i386/kvm/xen-emu.c            |  16 ++--
- target/i386/nvmm/nvmm-accel-ops.c    |   6 +-
- target/i386/nvmm/nvmm-all.c          |  20 ++---
- target/i386/tcg/sysemu/fpu_helper.c  |   6 +-
- target/i386/tcg/sysemu/misc_helper.c |   4 +-
- target/i386/whpx/whpx-accel-ops.c    |   6 +-
- target/i386/whpx/whpx-all.c          |  24 +++---
- target/loongarch/csr_helper.c        |   4 +-
- target/mips/kvm.c                    |   4 +-
- target/mips/tcg/sysemu/cp0_helper.c  |   4 +-
- target/openrisc/sys_helper.c         |  16 ++--
- target/ppc/excp_helper.c             |  14 ++--
- target/ppc/helper_regs.c             |   2 +-
- target/ppc/kvm.c                     |   4 +-
- target/ppc/misc_helper.c             |   8 +-
- target/ppc/timebase_helper.c         |   8 +-
- target/riscv/cpu_helper.c            |   4 +-
- target/s390x/kvm/kvm.c               |   4 +-
- target/s390x/tcg/misc_helper.c       | 118 +++++++++++++--------------
- target/sparc/int32_helper.c          |   2 +-
- target/sparc/int64_helper.c          |   6 +-
- target/sparc/win_helper.c            |  20 ++---
- target/xtensa/exc_helper.c           |   8 +-
- ui/spice-core.c                      |   6 +-
- util/async.c                         |   2 +-
- util/main-loop.c                     |   8 +-
- util/qsp.c                           |   6 +-
- util/rcu.c                           |  16 ++--
- audio/coreaudio.m                    |   8 +-
- memory_ldst.c.inc                    |  18 ++--
- target/i386/hvf/README.md            |   2 +-
- ui/cocoa.m                           |  56 ++++++-------
- 121 files changed, 644 insertions(+), 645 deletions(-)
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index 8a35683a345d..ee17f65afb60 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -148,7 +148,7 @@ static void riscv_cpu_validate_misa_priv(CPURISCVState *env, Error **errp)
+     }
+ }
+ 
+-static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu, Error **errp)
++static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu)
+ {
+     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cpu);
+     CPUClass *cc = CPU_CLASS(mcc);
+@@ -168,11 +168,6 @@ static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu, Error **errp)
+     default:
+         g_assert_not_reached();
+     }
+-
+-    if (env->misa_mxl_max != env->misa_mxl) {
+-        error_setg(errp, "misa_mxl_max must be equal to misa_mxl");
+-        return;
+-    }
+ }
+ 
+ static void riscv_cpu_validate_priv_spec(RISCVCPU *cpu, Error **errp)
+@@ -673,7 +668,6 @@ static bool riscv_cpu_is_generic(Object *cpu_obj)
+ static bool tcg_cpu_realize(CPUState *cs, Error **errp)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+-    Error *local_err = NULL;
+ 
+     if (!riscv_cpu_tcg_compatible(cpu)) {
+         g_autofree char *name = riscv_cpu_get_name(cpu);
+@@ -682,14 +676,11 @@ static bool tcg_cpu_realize(CPUState *cs, Error **errp)
+         return false;
+     }
+ 
+-    riscv_cpu_validate_misa_mxl(cpu, &local_err);
+-    if (local_err != NULL) {
+-        error_propagate(errp, local_err);
+-        return false;
+-    }
++    riscv_cpu_validate_misa_mxl(cpu);
+ 
+ #ifndef CONFIG_USER_ONLY
+     CPURISCVState *env = &cpu->env;
++    Error *local_err = NULL;
+ 
+     CPU(cs)->tcg_cflags |= CF_PCREL;
+ 
 
 -- 
 2.43.0
