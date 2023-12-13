@@ -4,128 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86136C4332F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Dec 2023 06:37:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D150C4332F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Dec 2023 06:42:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rDIs5-0006L7-B8; Wed, 13 Dec 2023 01:37:29 -0500
+	id 1rDIwL-0007jT-Nh; Wed, 13 Dec 2023 01:41:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1rDIs4-0006Ky-9a
- for qemu-riscv@nongnu.org; Wed, 13 Dec 2023 01:37:28 -0500
-Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031])
+ id 1rDIwK-0007iZ-La
+ for qemu-riscv@nongnu.org; Wed, 13 Dec 2023 01:41:52 -0500
+Received: from mail-il1-x131.google.com ([2607:f8b0:4864:20::131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1rDIru-0004TB-EB
- for qemu-riscv@nongnu.org; Wed, 13 Dec 2023 01:37:27 -0500
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-28abca51775so971789a91.1
- for <qemu-riscv@nongnu.org>; Tue, 12 Dec 2023 22:37:17 -0800 (PST)
+ id 1rDIwH-0005I3-Ez
+ for qemu-riscv@nongnu.org; Wed, 13 Dec 2023 01:41:52 -0500
+Received: by mail-il1-x131.google.com with SMTP id
+ e9e14a558f8ab-35f56f06142so14148675ab.1
+ for <qemu-riscv@nongnu.org>; Tue, 12 Dec 2023 22:41:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1702449436; x=1703054236;
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1702449708; x=1703054508;
  darn=nongnu.org; 
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=kMU0hw+gwGczR/gRWRQnDaEoeESPinDQdK01aukaVCQ=;
- b=s+peaJo6EWVTDJBRapFS2fBU40Dk0fE5KGRX3jYux4cZ+3ugPlXJBYLtlEBdwMhDHh
- /t7qMsuDhbNnkYEaijhuvXNuKNMxQRz8NQuNB9ngISfa7/uzC7xTBvokaHe0NvQBLSIj
- ECEBIwKVVKgpJH8kzioqCjbTcOyyhJ5WhfUjXxjLVgkf2GiaBMpIGCVP+x+nPKyHaZ1B
- tftHXdoG0WM3rubkYuIiUxjO2Xt/LoB1owF+1ujXBc8aAHAkIrjRlLxA+tEuxdG9KWgl
- SXwnLbs0Yac2T3Uk5Wavrhh6LH8focAve0wfm1MpFp8QDnM4FYJhDGoRBi/i2CnsfV+j
- 1k8Q==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=Y7i/8o0Wx2acDjqQpzIxXLGKG6zQqXSVPKewbE+roCo=;
+ b=vWrIJqASAckQxkFfZ4W0Mugjsxk9al9Zfs7kLZtEWBtNGMdK8EMtdT3mfgRSIGII6b
+ 2geyfUnOPJ4WAhy/3kFY7456PK/EhfW2BNOghwL6WLg+xQtb3IH25HFBj7vq0AhmnYwk
+ l3YodHct5lDRi3HI+VWJwLfBD2hp37xJ77lvMFyNSWG2ld0XuZaAPAhsYdO/oN3AhW4i
+ 7r2szl57KBrfl/XAlSEcOmp7oC0q106hBX7BV07UdQJuwz/ZkneerPKbjukevMEkXQWf
+ HVa/LBV14+K70zNc3sY7qGgMX9UrCT8mDBRlJry0OCww82UzmcvDEPsV0T3UxXAMg/U5
+ bbGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702449436; x=1703054236;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=kMU0hw+gwGczR/gRWRQnDaEoeESPinDQdK01aukaVCQ=;
- b=h8zAOVlE/XGcMcq4TdBtglXCZ2SU0vlAzQpoG15kcbqVl7pYelargz4dKqN6nZ/xIT
- iaLbJVmi5xjn0azx0Jl7vmLHal0bjLeqa875pRDL5Sd2EJQ1+PFqzWsZjzzPVU1VnSHx
- CW578Ww7BFVuXF40HqP+CQBKUxxPb70Y+pEHjtVBOGfKUvu02C60l2F7NP8Y2dQvTMas
- gRiA0aKmSSMNau5BykdvOgTfLhD6mDRmqAuRmO/acelvn1ALzezJFyKeaT5lqgFFnI0w
- 87bGufRa78ECha1eGgiGpQtS1OY7hRT6UTMPtwmqdC84wwtqiJV3ALNeKNbl4ecQe2MU
- g5BQ==
-X-Gm-Message-State: AOJu0Ywz6qxSfBgKvcg1Er09CtAuPN9LymfNMEW31TKfBYmu8qWrkI9v
- /GzkHbHJEK26KKDLrGQHbP1b0Q==
-X-Google-Smtp-Source: AGHT+IG5o/HJjzAe1oqBwjDmyKD+jnryCVy/PNKNBzfMqSP/v+UwSWZ7GhdbAoPzo3ay4ybD2HWbEQ==
-X-Received: by 2002:a17:902:eb87:b0:1d0:b944:6344 with SMTP id
- q7-20020a170902eb8700b001d0b9446344mr3145508plg.28.1702449435577; 
- Tue, 12 Dec 2023 22:37:15 -0800 (PST)
-Received: from [157.82.205.15] ([157.82.205.15])
- by smtp.gmail.com with ESMTPSA id
- u13-20020a170902e5cd00b001cff026df52sm9636038plf.221.2023.12.12.22.37.02
+ d=1e100.net; s=20230601; t=1702449708; x=1703054508;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Y7i/8o0Wx2acDjqQpzIxXLGKG6zQqXSVPKewbE+roCo=;
+ b=dD0O5biafXpveyhF2pgZ4GlAqpdOvL7j2cYftpnlj+wJ1S1YPKJUh8lz/pi1yx0XuY
+ MGA+n4y4qJ3MYBIIUEVDjUMQ1Wcf2iM6/6nm5Ecc01CPnQyV5h05pFLNeV4y3uz5020f
+ 44axONN2dY+rhtNarwcgaqfUEdQg2XVl5kwKjlpASllm2acUgONCOQ/RZh+O4vJIA4PM
+ yRFKYsvYAdckq0hc91oTMH8y4USwm6y6EKWGV96q1ZedgVkT4nfo6qbNfS14Qcub504v
+ uYiKkgkWO5wev8zkOrkftIKTXXKbG0Nte46m9iRY4C1umTetPuGdqyiilf8peJNrZecr
+ LphA==
+X-Gm-Message-State: AOJu0YwVoxv5+4I8xRuacz4/yluPYAxVnkU8sERBfxQ0CcnYtSYMd/Kz
+ gIbzTzg8/IE1DSZpmEXm3mwiPg==
+X-Google-Smtp-Source: AGHT+IE+an7XxdzkxX+W3EI2IxHfSqofuh7LdfAxngMyUpiNhX9Tf+z6Eaq/ds1LADbxQpmCLOMZfQ==
+X-Received: by 2002:a05:6e02:1c8b:b0:35d:a8a7:ba08 with SMTP id
+ w11-20020a056e021c8b00b0035da8a7ba08mr11315195ill.86.1702449708215; 
+ Tue, 12 Dec 2023 22:41:48 -0800 (PST)
+Received: from localhost ([157.82.205.15]) by smtp.gmail.com with UTF8SMTPSA id
+ c11-20020a170902d48b00b001d0c0848977sm9713449plg.49.2023.12.12.22.41.41
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 12 Dec 2023 22:37:15 -0800 (PST)
-Message-ID: <389fff8c-9f5d-4b6b-acd2-bc3e2110a9b3@daynix.com>
-Date: Wed, 13 Dec 2023 15:37:00 +0900
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/5] system/cpus: rename qemu_mutex_lock_iothread() to
- bql_lock()
-Content-Language: en-US
-To: Stefan Hajnoczi <stefanha@redhat.com>, qemu-devel@nongnu.org
-Cc: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Artyom Tarasenko <atar4qemu@gmail.com>, Paul Durrant <paul@xen.org>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
- Paolo Bonzini <pbonzini@redhat.com>, BALATON Zoltan <balaton@eik.bme.hu>,
- Jagannathan Raman <jag.raman@oracle.com>,
- Anthony Perard <anthony.perard@citrix.com>,
- Nicholas Piggin <npiggin@gmail.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Alexander Graf <agraf@csgraf.de>, Hailiang Zhang
- <zhanghailiang@xfusion.com>, Marcelo Tosatti <mtosatti@redhat.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Huacai Chen <chenhuacai@kernel.org>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>, Peter Xu <peterx@redhat.com>,
- Hyman Huang <yong.huang@smartx.com>, Fam Zheng <fam@euphon.net>,
- Song Gao <gaosong@loongson.cn>, Alistair Francis <alistair.francis@wdc.com>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- David Woodhouse <dwmw2@infradead.org>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Aurelien Jarno <aurelien@aurel32.net>,
- Leonardo Bras <leobras@redhat.com>, Jiri Slaby <jslaby@suse.cz>,
- Eric Farman <farman@linux.ibm.com>, Thomas Huth <thuth@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- David Hildenbrand <david@redhat.com>, Michael Roth <michael.roth@amd.com>,
- Elena Ufimtseva <elena.ufimtseva@oracle.com>,
- Gerd Hoffmann <kraxel@redhat.com>, Cameron Esfahani <dirty@apple.com>,
- qemu-ppc@nongnu.org, John Snow <jsnow@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Weiwei Li <liwei1518@gmail.com>, Hanna Reitz <hreitz@redhat.com>,
- qemu-s390x@nongnu.org, qemu-block@nongnu.org,
- =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>, kvm@vger.kernel.org,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
- Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
- Andrey Smirnov <andrew.smirnov@gmail.com>,
- Reinoud Zandijk <reinoud@netbsd.org>, Kevin Wolf <kwolf@redhat.com>,
- Bin Meng <bin.meng@windriver.com>, Sunil Muthuswamy
- <sunilmut@microsoft.com>, Peter Maydell <peter.maydell@linaro.org>,
- qemu-riscv@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Stafford Horne <shorne@gmail.com>, Fabiano Rosas <farosas@suse.de>,
- Juan Quintela <quintela@redhat.com>, Markus Armbruster <armbru@redhat.com>,
- qemu-arm@nongnu.org, Jason Wang <jasowang@redhat.com>,
- Eduardo Habkost <eduardo@habkost.net>, Max Filippov <jcmvbkbc@gmail.com>,
- Jean-Christophe Dubois <jcd@tribudubois.net>, Eric Blake
- <eblake@redhat.com>, Roman Bolshakov <rbolshakov@ddn.com>,
- Halil Pasic <pasic@linux.ibm.com>, xen-devel@lists.xenproject.org,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- David Woodhouse <dwmw@amazon.co.uk>
-References: <20231212153905.631119-1-stefanha@redhat.com>
- <20231212153905.631119-2-stefanha@redhat.com>
+ Tue, 12 Dec 2023 22:41:47 -0800 (PST)
 From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <20231212153905.631119-2-stefanha@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::1031;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pj1-x1031.google.com
+Date: Wed, 13 Dec 2023 15:41:02 +0900
+Subject: [PATCH v17 03/14] target/riscv: Use GDBFeature for dynamic XML
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20231213-gdb-v17-3-777047380591@daynix.com>
+References: <20231213-gdb-v17-0-777047380591@daynix.com>
+In-Reply-To: <20231213-gdb-v17-0-777047380591@daynix.com>
+To: Peter Maydell <peter.maydell@linaro.org>, 
+ Nicholas Piggin <npiggin@gmail.com>, 
+ Daniel Henrique Barboza <danielhb413@gmail.com>, 
+ =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ =?utf-8?q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>, 
+ =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>, 
+ Brian Cain <bcain@quicinc.com>, Song Gao <gaosong@loongson.cn>, 
+ Laurent Vivier <laurent@vivier.eu>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+ Richard Henderson <richard.henderson@linaro.org>, 
+ David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>, 
+ Thomas Huth <thuth@redhat.com>, Eduardo Habkost <eduardo@habkost.net>, 
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
+ Yanan Wang <wangyanan55@huawei.com>, Michael Rolnik <mrolnik@gmail.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ Yoshinori Sato <ysato@users.sourceforge.jp>, John Snow <jsnow@redhat.com>, 
+ Cleber Rosa <crosa@redhat.com>, Alexandre Iooss <erdnaxe@crans.org>, 
+ Mahmoud Mandour <ma.mandourr@gmail.com>, 
+ Mikhail Tyutin <m.tyutin@yadro.com>, 
+ Aleksandr Anenkov <a.anenkov@yadro.com>
+Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-ppc@nongnu.org, 
+ qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, 
+ 20231213-riscv-v7-0-a760156a337f@daynix.com, 
+ Akihiko Odaki <akihiko.odaki@daynix.com>
+X-Mailer: b4 0.12.4
+Received-SPF: none client-ip=2607:f8b0:4864:20::131;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-il1-x131.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -148,201 +120,215 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2023/12/13 0:39, Stefan Hajnoczi wrote:
-> The Big QEMU Lock (BQL) has many names and they are confusing. The
-> actual QemuMutex variable is called qemu_global_mutex but it's commonly
-> referred to as the BQL in discussions and some code comments. The
-> locking APIs, however, are called qemu_mutex_lock_iothread() and
-> qemu_mutex_unlock_iothread().
-> 
-> The "iothread" name is historic and comes from when the main thread was
-> split into into KVM vcpu threads and the "iothread" (now called the main
-> loop thread). I have contributed to the confusion myself by introducing
-> a separate --object iothread, a separate concept unrelated to the BQL.
-> 
-> The "iothread" name is no longer appropriate for the BQL. Rename the
-> locking APIs to:
-> - void bql_lock(void)
-> - void bql_unlock(void)
-> - bool bql_locked(void)
-> 
-> There are more APIs with "iothread" in their names. Subsequent patches
-> will rename them. There are also comments and documentation that will be
-> updated in later patches.
-> 
-> Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
-> Reviewed-by: Paul Durrant <paul@xen.org>
-> Acked-by: Fabiano Rosas <farosas@suse.de>
-> Acked-by: David Woodhouse <dwmw@amazon.co.uk>
-> Reviewed-by: Cédric Le Goater <clg@kaod.org>
-> Acked-by: Peter Xu <peterx@redhat.com>
-> Acked-by: Eric Farman <farman@linux.ibm.com>
-> Reviewed-by: Harsh Prateek Bora <harshpb@linux.ibm.com>
-> ---
->   include/block/aio-wait.h             |   2 +-
->   include/qemu/main-loop.h             |  40 ++++-----
->   include/qemu/thread.h                |   2 +-
->   accel/accel-blocker.c                |  10 +--
->   accel/dummy-cpus.c                   |   8 +-
->   accel/hvf/hvf-accel-ops.c            |   4 +-
->   accel/kvm/kvm-accel-ops.c            |   4 +-
->   accel/kvm/kvm-all.c                  |  22 ++---
->   accel/tcg/cpu-exec.c                 |  26 +++---
->   accel/tcg/cputlb.c                   |  16 ++--
->   accel/tcg/tcg-accel-ops-icount.c     |   4 +-
->   accel/tcg/tcg-accel-ops-mttcg.c      |  12 +--
->   accel/tcg/tcg-accel-ops-rr.c         |  14 ++--
->   accel/tcg/tcg-accel-ops.c            |   2 +-
->   accel/tcg/translate-all.c            |   2 +-
->   cpu-common.c                         |   4 +-
->   dump/dump.c                          |   4 +-
->   hw/core/cpu-common.c                 |   6 +-
->   hw/i386/intel_iommu.c                |   6 +-
->   hw/i386/kvm/xen_evtchn.c             |  16 ++--
->   hw/i386/kvm/xen_overlay.c            |   2 +-
->   hw/i386/kvm/xen_xenstore.c           |   2 +-
->   hw/intc/arm_gicv3_cpuif.c            |   2 +-
->   hw/intc/s390_flic.c                  |  18 ++--
->   hw/misc/edu.c                        |   4 +-
->   hw/misc/imx6_src.c                   |   2 +-
->   hw/misc/imx7_src.c                   |   2 +-
->   hw/net/xen_nic.c                     |   8 +-
->   hw/ppc/pegasos2.c                    |   2 +-
->   hw/ppc/ppc.c                         |   4 +-
->   hw/ppc/spapr.c                       |   2 +-
->   hw/ppc/spapr_rng.c                   |   4 +-
->   hw/ppc/spapr_softmmu.c               |   4 +-
->   hw/remote/mpqemu-link.c              |  20 ++---
->   hw/remote/vfio-user-obj.c            |   2 +-
->   hw/s390x/s390-skeys.c                |   2 +-
->   migration/block-dirty-bitmap.c       |   4 +-
->   migration/block.c                    |  16 ++--
->   migration/colo.c                     |  60 +++++++-------
->   migration/dirtyrate.c                |  12 +--
->   migration/migration.c                |  52 ++++++------
->   migration/ram.c                      |  12 +--
->   replay/replay-internal.c             |   2 +-
->   semihosting/console.c                |   8 +-
->   stubs/iothread-lock.c                |   6 +-
->   system/cpu-throttle.c                |   4 +-
->   system/cpus.c                        |  51 ++++++------
->   system/dirtylimit.c                  |   4 +-
->   system/memory.c                      |   2 +-
->   system/physmem.c                     |   8 +-
->   system/runstate.c                    |   2 +-
->   system/watchpoint.c                  |   4 +-
->   target/arm/arm-powerctl.c            |  14 ++--
->   target/arm/helper.c                  |   4 +-
->   target/arm/hvf/hvf.c                 |   8 +-
->   target/arm/kvm.c                     |   4 +-
->   target/arm/kvm64.c                   |   4 +-
->   target/arm/ptw.c                     |   6 +-
->   target/arm/tcg/helper-a64.c          |   8 +-
->   target/arm/tcg/m_helper.c            |   6 +-
->   target/arm/tcg/op_helper.c           |  24 +++---
->   target/arm/tcg/psci.c                |   2 +-
->   target/hppa/int_helper.c             |   8 +-
->   target/i386/hvf/hvf.c                |   6 +-
->   target/i386/kvm/hyperv.c             |   4 +-
->   target/i386/kvm/kvm.c                |  28 +++----
->   target/i386/kvm/xen-emu.c            |  14 ++--
->   target/i386/nvmm/nvmm-accel-ops.c    |   4 +-
->   target/i386/nvmm/nvmm-all.c          |  20 ++---
->   target/i386/tcg/sysemu/fpu_helper.c  |   6 +-
->   target/i386/tcg/sysemu/misc_helper.c |   4 +-
->   target/i386/whpx/whpx-accel-ops.c    |   4 +-
->   target/i386/whpx/whpx-all.c          |  24 +++---
->   target/loongarch/csr_helper.c        |   4 +-
->   target/mips/kvm.c                    |   4 +-
->   target/mips/tcg/sysemu/cp0_helper.c  |   4 +-
->   target/openrisc/sys_helper.c         |  16 ++--
->   target/ppc/excp_helper.c             |  12 +--
->   target/ppc/kvm.c                     |   4 +-
->   target/ppc/misc_helper.c             |   8 +-
->   target/ppc/timebase_helper.c         |   8 +-
->   target/s390x/kvm/kvm.c               |   4 +-
->   target/s390x/tcg/misc_helper.c       | 118 +++++++++++++--------------
->   target/sparc/int32_helper.c          |   2 +-
->   target/sparc/int64_helper.c          |   6 +-
->   target/sparc/win_helper.c            |  20 ++---
->   target/xtensa/exc_helper.c           |   8 +-
->   ui/spice-core.c                      |   4 +-
->   util/async.c                         |   2 +-
->   util/main-loop.c                     |   8 +-
->   util/qsp.c                           |   6 +-
->   util/rcu.c                           |  14 ++--
->   audio/coreaudio.m                    |   4 +-
->   memory_ldst.c.inc                    |  18 ++--
->   target/i386/hvf/README.md            |   2 +-
->   ui/cocoa.m                           |  50 ++++++------
->   96 files changed, 530 insertions(+), 529 deletions(-)
-> 
-> diff --git a/include/block/aio-wait.h b/include/block/aio-wait.h
-> index 5449b6d742..d22ca24329 100644
-> --- a/include/block/aio-wait.h
-> +++ b/include/block/aio-wait.h
-> @@ -151,7 +151,7 @@ static inline bool in_aio_context_home_thread(AioContext *ctx)
->       }
->   
->       if (ctx == qemu_get_aio_context()) {
-> -        return qemu_mutex_iothread_locked();
-> +        return bql_locked();
->       } else {
->           return false;
->       }
-> diff --git a/include/qemu/main-loop.h b/include/qemu/main-loop.h
-> index 68e70e61aa..596a206acd 100644
-> --- a/include/qemu/main-loop.h
-> +++ b/include/qemu/main-loop.h
-> @@ -248,19 +248,19 @@ GSource *iohandler_get_g_source(void);
->   AioContext *iohandler_get_aio_context(void);
->   
->   /**
-> - * qemu_mutex_iothread_locked: Return lock status of the main loop mutex.
-> + * bql_locked: Return lock status of the Big QEMU Lock (BQL)
->    *
-> - * The main loop mutex is the coarsest lock in QEMU, and as such it
-> + * The Big QEMU Lock (BQL) is the coarsest lock in QEMU, and as such it
->    * must always be taken outside other locks.  This function helps
->    * functions take different paths depending on whether the current
-> - * thread is running within the main loop mutex.
-> + * thread is running within the BQL.
->    *
->    * This function should never be used in the block layer, because
->    * unit tests, block layer tools and qemu-storage-daemon do not
->    * have a BQL.
->    * Please instead refer to qemu_in_main_thread().
->    */
-> -bool qemu_mutex_iothread_locked(void);
-> +bool bql_locked(void);
->   
->   /**
->    * qemu_in_main_thread: return whether it's possible to safely access
-> @@ -312,58 +312,58 @@ bool qemu_in_main_thread(void);
->       } while (0)
->   
->   /**
-> - * qemu_mutex_lock_iothread: Lock the main loop mutex.
-> + * bql_lock: Lock the Big QEMU Lock (BQL).
->    *
-> - * This function locks the main loop mutex.  The mutex is taken by
-> + * This function locks the Big QEMU Lock (BQL).  The lock is taken by
->    * main() in vl.c and always taken except while waiting on
-> - * external events (such as with select).  The mutex should be taken
-> + * external events (such as with select).  The lock should be taken
->    * by threads other than the main loop thread when calling
->    * qemu_bh_new(), qemu_set_fd_handler() and basically all other
->    * functions documented in this file.
->    *
-> - * NOTE: tools currently are single-threaded and qemu_mutex_lock_iothread
-> + * NOTE: tools currently are single-threaded and bql_lock
->    * is a no-op there.
->    */
-> -#define qemu_mutex_lock_iothread()                      \
-> -    qemu_mutex_lock_iothread_impl(__FILE__, __LINE__)
-> -void qemu_mutex_lock_iothread_impl(const char *file, int line);
-> +#define bql_lock()                      \
-> +    bql_lock_impl(__FILE__, __LINE__)
+In preparation for a change to use GDBFeature as a parameter of
+gdb_register_coprocessor(), convert the internal representation of
+dynamic feature from plain XML to GDBFeature.
 
-This line break is no longer necessary.
+Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+---
+ target/riscv/cpu.h     |  5 ++--
+ target/riscv/cpu.c     |  4 +--
+ target/riscv/gdbstub.c | 79 ++++++++++++++++++++++----------------------------
+ 3 files changed, 40 insertions(+), 48 deletions(-)
+
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 060b7f69a743..ad7236d75477 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -24,6 +24,7 @@
+ #include "hw/registerfields.h"
+ #include "hw/qdev-properties.h"
+ #include "exec/cpu-defs.h"
++#include "exec/gdbstub.h"
+ #include "qemu/cpu-float.h"
+ #include "qom/object.h"
+ #include "qemu/int128.h"
+@@ -424,8 +425,8 @@ struct ArchCPU {
+ 
+     CPURISCVState env;
+ 
+-    char *dyn_csr_xml;
+-    char *dyn_vreg_xml;
++    GDBFeature dyn_csr_feature;
++    GDBFeature dyn_vreg_feature;
+ 
+     /* Configuration Settings */
+     RISCVCPUConfig cfg;
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index b799f1336041..673e937a5d82 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1534,9 +1534,9 @@ static const char *riscv_gdb_get_dynamic_xml(CPUState *cs, const char *xmlname)
+     RISCVCPU *cpu = RISCV_CPU(cs);
+ 
+     if (strcmp(xmlname, "riscv-csr.xml") == 0) {
+-        return cpu->dyn_csr_xml;
++        return cpu->dyn_csr_feature.xml;
+     } else if (strcmp(xmlname, "riscv-vector.xml") == 0) {
+-        return cpu->dyn_vreg_xml;
++        return cpu->dyn_vreg_feature.xml;
+     }
+ 
+     return NULL;
+diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+index 365040228a12..76b72a959549 100644
+--- a/target/riscv/gdbstub.c
++++ b/target/riscv/gdbstub.c
+@@ -214,13 +214,14 @@ static int riscv_gdb_set_virtual(CPURISCVState *cs, uint8_t *mem_buf, int n)
+     return 0;
+ }
+ 
+-static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
++static GDBFeature *riscv_gen_dynamic_csr_feature(CPUState *cs, int base_reg)
+ {
+     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cs);
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+-    GString *s = g_string_new(NULL);
++    GDBFeatureBuilder builder;
+     riscv_csr_predicate_fn predicate;
++    const char *name;
+     int bitsize = 16 << mcc->misa_mxl_max;
+     int i;
+ 
+@@ -233,9 +234,9 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
+         bitsize = 64;
+     }
+ 
+-    g_string_printf(s, "<?xml version=\"1.0\"?>");
+-    g_string_append_printf(s, "<!DOCTYPE feature SYSTEM \"gdb-target.dtd\">");
+-    g_string_append_printf(s, "<feature name=\"org.gnu.gdb.riscv.csr\">");
++    gdb_feature_builder_init(&builder, &cpu->dyn_csr_feature,
++                             "org.gnu.gdb.riscv.csr", "riscv-csr.xml",
++                             base_reg);
+ 
+     for (i = 0; i < CSR_TABLE_SIZE; i++) {
+         if (env->priv_ver < csr_ops[i].min_priv_ver) {
+@@ -243,72 +244,64 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
+         }
+         predicate = csr_ops[i].predicate;
+         if (predicate && (predicate(env, i) == RISCV_EXCP_NONE)) {
+-            if (csr_ops[i].name) {
+-                g_string_append_printf(s, "<reg name=\"%s\"", csr_ops[i].name);
+-            } else {
+-                g_string_append_printf(s, "<reg name=\"csr%03x\"", i);
++            g_autofree char *dynamic_name = NULL;
++            name = csr_ops[i].name;
++            if (!name) {
++                dynamic_name = g_strdup_printf("csr%03x", i);
++                name = dynamic_name;
+             }
+-            g_string_append_printf(s, " bitsize=\"%d\"", bitsize);
+-            g_string_append_printf(s, " regnum=\"%d\"/>", base_reg + i);
++
++            gdb_feature_builder_append_reg(&builder, name, bitsize, i,
++                                           "int", NULL);
+         }
+     }
+ 
+-    g_string_append_printf(s, "</feature>");
+-
+-    cpu->dyn_csr_xml = g_string_free(s, false);
++    gdb_feature_builder_end(&builder);
+ 
+ #if !defined(CONFIG_USER_ONLY)
+     env->debugger = false;
+ #endif
+ 
+-    return CSR_TABLE_SIZE;
++    return &cpu->dyn_csr_feature;
+ }
+ 
+-static int ricsv_gen_dynamic_vector_xml(CPUState *cs, int base_reg)
++static GDBFeature *ricsv_gen_dynamic_vector_feature(CPUState *cs, int base_reg)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+-    GString *s = g_string_new(NULL);
+-    g_autoptr(GString) ts = g_string_new("");
++    GDBFeatureBuilder builder;
+     int reg_width = cpu->cfg.vlen;
+-    int num_regs = 0;
+     int i;
+ 
+-    g_string_printf(s, "<?xml version=\"1.0\"?>");
+-    g_string_append_printf(s, "<!DOCTYPE target SYSTEM \"gdb-target.dtd\">");
+-    g_string_append_printf(s, "<feature name=\"org.gnu.gdb.riscv.vector\">");
++    gdb_feature_builder_init(&builder, &cpu->dyn_vreg_feature,
++                             "org.gnu.gdb.riscv.vector", "riscv-vector.xml",
++                             base_reg);
+ 
+     /* First define types and totals in a whole VL */
+     for (i = 0; i < ARRAY_SIZE(vec_lanes); i++) {
+         int count = reg_width / vec_lanes[i].size;
+-        g_string_printf(ts, "%s", vec_lanes[i].id);
+-        g_string_append_printf(s,
+-                               "<vector id=\"%s\" type=\"%s\" count=\"%d\"/>",
+-                               ts->str, vec_lanes[i].gdb_type, count);
++        gdb_feature_builder_append_tag(
++            &builder, "<vector id=\"%s\" type=\"%s\" count=\"%d\"/>",
++            vec_lanes[i].id, vec_lanes[i].gdb_type, count);
+     }
+ 
+     /* Define unions */
+-    g_string_append_printf(s, "<union id=\"riscv_vector\">");
++    gdb_feature_builder_append_tag(&builder, "<union id=\"riscv_vector\">");
+     for (i = 0; i < ARRAY_SIZE(vec_lanes); i++) {
+-        g_string_append_printf(s, "<field name=\"%c\" type=\"%s\"/>",
+-                               vec_lanes[i].suffix,
+-                               vec_lanes[i].id);
++        gdb_feature_builder_append_tag(&builder,
++                                       "<field name=\"%c\" type=\"%s\"/>",
++                                       vec_lanes[i].suffix, vec_lanes[i].id);
+     }
+-    g_string_append(s, "</union>");
++    gdb_feature_builder_append_tag(&builder, "</union>");
+ 
+     /* Define vector registers */
+     for (i = 0; i < 32; i++) {
+-        g_string_append_printf(s,
+-                               "<reg name=\"v%d\" bitsize=\"%d\""
+-                               " regnum=\"%d\" group=\"vector\""
+-                               " type=\"riscv_vector\"/>",
+-                               i, reg_width, base_reg++);
+-        num_regs++;
++        gdb_feature_builder_append_reg(&builder, g_strdup_printf("v%d", i),
++                                       reg_width, i, "riscv_vector", "vector");
+     }
+ 
+-    g_string_append_printf(s, "</feature>");
++    gdb_feature_builder_end(&builder);
+ 
+-    cpu->dyn_vreg_xml = g_string_free(s, false);
+-    return num_regs;
++    return &cpu->dyn_vreg_feature;
+ }
+ 
+ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+@@ -324,10 +317,9 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+                                  32, "riscv-32bit-fpu.xml", 0);
+     }
+     if (env->misa_ext & RVV) {
+-        int base_reg = cs->gdb_num_regs;
+         gdb_register_coprocessor(cs, riscv_gdb_get_vector,
+                                  riscv_gdb_set_vector,
+-                                 ricsv_gen_dynamic_vector_xml(cs, base_reg),
++                                 ricsv_gen_dynamic_vector_feature(cs, cs->gdb_num_regs)->num_regs,
+                                  "riscv-vector.xml", 0);
+     }
+     switch (mcc->misa_mxl_max) {
+@@ -347,9 +339,8 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+     }
+ 
+     if (cpu->cfg.ext_zicsr) {
+-        int base_reg = cs->gdb_num_regs;
+         gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
+-                                 riscv_gen_dynamic_csr_xml(cs, base_reg),
++                                 riscv_gen_dynamic_csr_feature(cs, cs->gdb_num_regs)->num_regs,
+                                  "riscv-csr.xml", 0);
+     }
+ }
+
+-- 
+2.43.0
+
 
