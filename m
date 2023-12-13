@@ -4,75 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66C4BC4167B
-	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Dec 2023 07:02:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE05EC4332F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Dec 2023 10:08:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rDJFZ-0006cc-61; Wed, 13 Dec 2023 02:01:45 -0500
+	id 1rDMAg-0004SF-0t; Wed, 13 Dec 2023 05:08:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1rDJFX-0006bu-KE
- for qemu-riscv@nongnu.org; Wed, 13 Dec 2023 02:01:43 -0500
-Received: from mail-pg1-x531.google.com ([2607:f8b0:4864:20::531])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rDMAd-0004PK-KR
+ for qemu-riscv@nongnu.org; Wed, 13 Dec 2023 05:08:51 -0500
+Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1rDJFV-0007pf-RR
- for qemu-riscv@nongnu.org; Wed, 13 Dec 2023 02:01:43 -0500
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-5bcfc508d14so5566350a12.3
- for <qemu-riscv@nongnu.org>; Tue, 12 Dec 2023 23:01:39 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rDMAT-0005T0-Cy
+ for qemu-riscv@nongnu.org; Wed, 13 Dec 2023 05:08:50 -0500
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-40c256ffdbcso68744205e9.2
+ for <qemu-riscv@nongnu.org>; Wed, 13 Dec 2023 02:08:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=vrull.eu; s=google; t=1702450898; x=1703055698; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7ZY+cxXOIdcMkNM2EwN8xLlAGBkPxKBX2VXeH5g07Hk=;
- b=gv87linZEt5fjZ3FLpCmU4jqXcA48nTR0P7xuU3J3iH5jmm4I0cnHzPr2L5LS8HfPt
- Bi1UaV5TnETqJtOapnl0XYqXfTDKFglnglThsjuGGSdJ8ECuTwZAHmOS9DggXKIQ7i6j
- +9wu/eAvf3itd45I67U7Xbz2zAYY8vwyUexLCoSwi8PtCEjIiBvgQESpyQ/rdoY58YUl
- esydQo73Qm3G6hSbdtQ3xoByAE/s8SnR1JQFn0Jd+wRz7ifV8FuETY/9yvSakBz4vtEK
- GXJKRjxxaidDVXQiqtB1i9hsQd/Jwdr4OnY9STVgHxUgnlbqyn2XlBxh/z5ESxId0DQ6
- osTQ==
+ d=linaro.org; s=google; t=1702462120; x=1703066920; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=1jeRVloAfgc9VzxVBvU1eZ5DA0UROdx957mdkIzl4oQ=;
+ b=KUqJk/4kyGkcfEFKCyxE+PhvUnuypsaXB6wW239kJ2aArHKExWiKrZos4dbRiDvrOh
+ +EFoXECX3gdVUuYetmmbqfm1FJnNR1S1IWsJA6QAFSpouYrpfVMR1ex+SXzeg7qTWbPQ
+ gV979wDVkw4lQuX3dlXbkxdMxWK/kO53nYxnepkdZnyHP57bIaWLQiR0JIFY2o+5OMk2
+ EI8XziHTePvP+ZQ1z/pLwrGTat2IV9TNv0yTaZ5UpVTlgonGNeNnXb8qLQm2P8C4TyDk
+ 9nSvn5cAjc7gHg2XIwQVxLkw6on8MTERYckDAty+8LJKDBK57Put8anE57h3n5I16pui
+ 9C/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702450898; x=1703055698;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=7ZY+cxXOIdcMkNM2EwN8xLlAGBkPxKBX2VXeH5g07Hk=;
- b=jyG+QhYMbgNKqxqdsVOK0QioI+MEFYIA75BJhLIbSA8PSGNnMfWOhGBaRbw2u6x7F1
- T+LTgZG5zR0hHZ5R/YUFi1kxIBeteZ0z046Tml1AjCbgOZjIoKjeIqq9UEoDGLMlW7A8
- ETWwwHQH7OV7no3DFUqdNq2dTcpJQv3BUFgGOlBXoBrsTeOT+0ItVAGtv10iCh+3gSCU
- ucYDdv+7FJF+EnsFbIVwoPMBJfPB5UdmO1FLImawkx2idGkbBH4FwuuTy0C2KNZtv00x
- TNIobA5FXtwIUHBokkTWoXA0p3XZpDqunwYaDvS0qI8J62kyX0DxQuzLz+7SyU0+KNdR
- 2HIA==
-X-Gm-Message-State: AOJu0Yy9EY98RosQ3oZ+PGXajbkVtkaVXMctja+bDVJnKLzEbn8ZiMUC
- DmZOKNtmnl4mZtWQipbT74FrZZvkEPz3Wki89asnyQ==
-X-Google-Smtp-Source: AGHT+IHG/f1Bls9uanaI+Bw79CQHLmOOSWYjuKlN7903DWvgd4DId+XpndTVB3m0XjCW5Ui0a0u2DAs9kq1Dnu1tqFA=
-X-Received: by 2002:a05:6a20:8e13:b0:18f:f57a:e761 with SMTP id
- y19-20020a056a208e1300b0018ff57ae761mr10375320pzj.63.1702450898487; Tue, 12
- Dec 2023 23:01:38 -0800 (PST)
+ d=1e100.net; s=20230601; t=1702462120; x=1703066920;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=1jeRVloAfgc9VzxVBvU1eZ5DA0UROdx957mdkIzl4oQ=;
+ b=asOh2xOOv4xnu+NrXoP+FCuzvLcXbNIIQSf08oCqdMt2UB5bMKGTmoihsc1vVgU3im
+ 18HtjO0Jfoilxzrv694ppgRINYlP7lBGegWo2XIFYm2p7z9wmDQ2I/Yzbhehuo4RJh5d
+ VXwfT8i+xQydIElsrs/WbAKVIs/44ObgUGmmbE2Ulo5AXWL1AAn54aT3u5beXVMPSL4V
+ lVh+T5AtsqaPLK4YkUI3m2m5mS4WaiaLpx7VFSvHq3iVkqu4MNDIklEquEJtxM4+jYdl
+ 94sfKMNfJk0e71wP68qfKaDnPrNkuDtG41OFCcqcdtJuAX7mjAwlA6JAFQg1gFny+3Cs
+ p2Mg==
+X-Gm-Message-State: AOJu0YzJKjyzSLJBtRoh7JZv0mP3eFO8VvpStVvQTNbX2QkPTr13C62P
+ 9fESwveJG92gUNDESWwE7oZRjA==
+X-Google-Smtp-Source: AGHT+IH87rFAreeniJ3MdD3kXbX+E2Su8zg16d3KUGa1yJI+qt9gtmWVT+bCyKjf7Vjo1dI7wBQxeQ==
+X-Received: by 2002:a05:600c:243:b0:40c:5583:c69d with SMTP id
+ 3-20020a05600c024300b0040c5583c69dmr1114688wmj.112.1702462119858; 
+ Wed, 13 Dec 2023 02:08:39 -0800 (PST)
+Received: from [192.168.19.175] (234.red-88-28-2.dynamicip.rima-tde.net.
+ [88.28.2.234]) by smtp.gmail.com with ESMTPSA id
+ m29-20020a05600c3b1d00b0040b3515cdf8sm19847959wms.7.2023.12.13.02.08.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 13 Dec 2023 02:08:39 -0800 (PST)
+Message-ID: <ff0237a8-9e1c-46bf-ae69-99c3f33112f6@linaro.org>
+Date: Wed, 13 Dec 2023 11:08:32 +0100
 MIME-Version: 1.0
-References: <20231208094315.177-1-zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20231208094315.177-1-zhiwei_liu@linux.alibaba.com>
-From: =?UTF-8?Q?Christoph_M=C3=BCllner?= <christoph.muellner@vrull.eu>
-Date: Wed, 13 Dec 2023 08:00:00 +0100
-Message-ID: <CAEg0e7j-+=S__67puJh2KqTkqZeQAShSo4fZAwDN=SLNa8iSHw@mail.gmail.com>
-Subject: Re: [PATCH for 8.2] target/riscv: Fix th.dcache.cval1 priviledge check
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: qemu-devel@nongnu.org, richard.henderson@linaro.org, 
- alistair.francis@wdc.com, qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
- envelope-from=christoph.muellner@vrull.eu; helo=mail-pg1-x531.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9 0/9] Unified CPU type check
+Content-Language: en-US
+To: Gavin Shan <gshan@redhat.com>, qemu-arm@nongnu.org
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org,
+ b.galvani@gmail.com, strahinja.p.jankovic@gmail.com, imammedo@redhat.com,
+ kfting@nuvoton.com, wuhaotsh@google.com, nieklinnenbank@gmail.com,
+ rad@semihalf.com, quic_llindhol@quicinc.com, marcin.juszkiewicz@linaro.org,
+ eduardo@habkost.net, marcel.apfelbaum@gmail.com, armbru@redhat.com,
+ wangyanan55@huawei.com, vijai@behindbytes.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, shan.gavin@gmail.com
+References: <20231204004726.483558-1-gshan@redhat.com>
+ <0b2aaedf-7a4c-49f4-b4af-71f9ab693207@redhat.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <0b2aaedf-7a4c-49f4-b4af-71f9ab693207@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -89,39 +101,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Dec 8, 2023 at 10:44=E2=80=AFAM LIU Zhiwei <zhiwei_liu@linux.alibab=
-a.com> wrote:
->
-> According to the specification, the th.dcache.cvall1 can be executed
-> under all priviledges.
-> The specification about xtheadcmo located in,
-> https://github.com/T-head-Semi/thead-extension-spec/blob/master/xtheadcmo=
-/dcache_cval1.adoc
->
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+On 12/12/23 05:55, Gavin Shan wrote:
+> Hi Phil,
+> 
+> On 12/4/23 10:47, Gavin Shan wrote:
+>> This series bases on Phil's repository because the prepatory commits
+>> have been queued to the branch.
+>>
+>>    https://gitlab.com/philmd/qemu.git (branch: cpus-next)
+>>
+>> There are two places where the user specified CPU type is checked to see
+>> if it's supported or allowed by the board: machine_run_board_init() and
+>> mc->init(). We don't have to maintain two duplicate sets of logic. This
+>> series intends to move the check to machine_run_board_init() so that we
+>> have unified CPU type check.
+>>
+>> This series can be checked out from:
+>>
+>>    git@github.com:gwshan/qemu.git (branch: kvm/cpu-type)
+>>
+>> PATCH[1-4] refactors and improves the logic to validate CPU type in
+>>             machine_run_board_init()
+>> PATCH[5-9] validates the CPU type in machine_run_board_init() for the
+>>             individual boards
+>>
+>> v6: https://lists.nongnu.org/archive/html/qemu-arm/2023-11/msg00768.html
+>> v7: https://lists.nongnu.org/archive/html/qemu-arm/2023-11/msg01045.html
+>> v8: https://lists.nongnu.org/archive/html/qemu-arm/2023-11/msg01168.html
+>>
+> 
+> Ping to see if there is a chance to queue it up before the Chrismas? :)
 
-Reviewed-by: Christoph Muellner <christoph.muellner@vrull.eu>
+Series queued. "Before" Christmas will depend on the final release tag.
 
-> ---
->  target/riscv/insn_trans/trans_xthead.c.inc | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/target/riscv/insn_trans/trans_xthead.c.inc b/target/riscv/in=
-sn_trans/trans_xthead.c.inc
-> index 810d76665a..dbb6411239 100644
-> --- a/target/riscv/insn_trans/trans_xthead.c.inc
-> +++ b/target/riscv/insn_trans/trans_xthead.c.inc
-> @@ -296,7 +296,7 @@ NOP_PRIVCHECK(th_dcache_csw, REQUIRE_XTHEADCMO, REQUI=
-RE_PRIV_MS)
->  NOP_PRIVCHECK(th_dcache_cisw, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
->  NOP_PRIVCHECK(th_dcache_isw, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
->  NOP_PRIVCHECK(th_dcache_cpal1, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
-> -NOP_PRIVCHECK(th_dcache_cval1, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
-> +NOP_PRIVCHECK(th_dcache_cval1, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MSU)
->
->  NOP_PRIVCHECK(th_icache_iall, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
->  NOP_PRIVCHECK(th_icache_ialls, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
-> --
-> 2.17.1
->
+Thanks for the various iterations,
+
+Phil.
 
