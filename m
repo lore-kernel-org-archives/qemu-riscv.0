@@ -4,90 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35451C4332F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Dec 2023 05:21:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BE08C4332F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Dec 2023 05:36:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rDHev-0003K9-0S; Wed, 13 Dec 2023 00:19:49 -0500
+	id 1rDHut-00082S-9N; Wed, 13 Dec 2023 00:36:19 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1rDHes-0003JY-VD
- for qemu-riscv@nongnu.org; Wed, 13 Dec 2023 00:19:46 -0500
-Received: from mail-yw1-x1135.google.com ([2607:f8b0:4864:20::1135])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1rDHer-0002WI-9s
- for qemu-riscv@nongnu.org; Wed, 13 Dec 2023 00:19:46 -0500
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-5d33574f64eso66221197b3.3
- for <qemu-riscv@nongnu.org>; Tue, 12 Dec 2023 21:19:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1702444784; x=1703049584;
- darn=nongnu.org; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=BDZ8jZutIMtJlsViReu5YTppEsrOhcVzMzQHGoLlyE4=;
- b=UC1GGo6W5P07enSTf2yImsB9xitEw0xHwE0liS/9L5JNR+DEzoa5l3j6fLGW2C6W0r
- KEddnSXsLY7pw3j72xPG2+X5tSJGd+r56zQGWk8pmvqJbyRw3usE5WKlCjxOcvP+ENXN
- y5kupOEwZblZHfU+UIxPRNgSCdIqz2YCBQrUvzjK+47+RsieVkEuP5xnBcJGkWtZZs2P
- GJzOMJI6lLJI9rncLE+g0hWZlFvFawzQr8B8shczRtkozYWdTUHdsM2aIdWN1HhtSs0c
- TIJOeYmzPfQogIESmtC9a2lVzjCfebb/qbVgNl9nBZQuvkXBxvyds7cVKtVmrQdXiQso
- /HRQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702444784; x=1703049584;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=BDZ8jZutIMtJlsViReu5YTppEsrOhcVzMzQHGoLlyE4=;
- b=QTeoTioSfDry9m+rnUTeTZw76Xi5HKXLInIQqgHOTRfY6GdiRGkCjV7RMafvepX3W7
- gK4Vn35SKWj5vJj49BO++5DaUsCS8E3HXPEqaUNGHuhybDyIGx0T4lSirPgRvwRKl51B
- EDv7o1sszFE679/EJnvMHgqFuhWJzqZQ04YZJHV2hTLYKtiBXyxkAjprlhJ3KKN4Mwsu
- oACJUZjJQv27luxGYR8F+tf0MmZ1wQaDPkgioHf7GAsGcOnT+swUzXGHsVZnEBuw5UxF
- NokHPbSl4ZUvkhx2JSFEILESKiVvepSAjQIFHMNCjOeRrv1UShj8zmSvazPM5N/Z9cIH
- t3Cg==
-X-Gm-Message-State: AOJu0YzjhA0inHh9IPY0rBpb0baBxaAm9Pd0SHRsqEhHuM7Yd0EI/QGC
- gX5S74BVejCwEUj3tukWazqMvA==
-X-Google-Smtp-Source: AGHT+IFbM++G/MiNLOcJ3LDKlIw1vPpiTTsg3KUdPOcBbPZFYsp8IQep/p01VH+FJknGUqxpZha7yg==
-X-Received: by 2002:a0d:ccce:0:b0:5d7:1940:b39d with SMTP id
- o197-20020a0dccce000000b005d71940b39dmr6440161ywd.105.1702444783724; 
- Tue, 12 Dec 2023 21:19:43 -0800 (PST)
-Received: from localhost ([157.82.205.15]) by smtp.gmail.com with UTF8SMTPSA id
- b8-20020a170903228800b001d052d1aaf2sm9446438plh.101.2023.12.12.21.19.40
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 12 Dec 2023 21:19:43 -0800 (PST)
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH v7 0/4] gdbstub and TCG plugin improvements
-Date: Wed, 13 Dec 2023 14:19:28 +0900
-Message-Id: <20231213-riscv-v7-0-a760156a337f@daynix.com>
+ (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
+ id 1rDHus-00082B-1O; Wed, 13 Dec 2023 00:36:18 -0500
+Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
+ helo=Atcsqr.andestech.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
+ id 1rDHuo-0003LX-Vg; Wed, 13 Dec 2023 00:36:17 -0500
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 3BD5ZiUs091612;
+ Wed, 13 Dec 2023 13:35:44 +0800 (+08)
+ (envelope-from ethan84@andestech.com)
+Received: from ethan84-VirtualBox (10.0.12.51) by ATCPCS16.andestech.com
+ (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; Wed, 13 Dec 2023
+ 13:35:40 +0800
+Date: Wed, 13 Dec 2023 13:35:34 +0800
+To: <qemu-devel@nongnu.org>
+CC: <peter.maydell@linaro.org>, <edgar.iglesias@gmail.com>,
+ <richard.henderson@linaro.org>, <pbonzini@redhat.com>,
+ <palmer@dabbelt.com>, <alistair.francis@wdc.com>,
+ <in.meng@windriver.com>, <liweiwei@iscas.ac.cn>,
+ <dbarboza@ventanamicro.com>, <hiwei_liu@linux.alibaba.com>,
+ <qemu-riscv@nongnu.org>, <peterx@redhat.com>, <david@redhat.com>
+Subject: Re: [PATCH v4 0/4] Support RISC-V IOPMP
+Message-ID: <ZXlCply0inBLku9C@ethan84-VirtualBox>
+References: <20231122053251.440723-1-ethan84@andestech.com>
+ <ZW7Vr1SGnEoHADAY@ethan84-VirtualBox>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAOA+eWUC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyzHUUlJIzE
- vPSU3UzU4B8JSMDI2NDI0Nj3aLM4uQy3bTkZEszEwNLC7PkNCWg2oKi1LTMCrA50bG1tQAquOi
- hVwAAAA==
-To: Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- =?utf-8?q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>, 
- Mikhail Tyutin <m.tyutin@yadro.com>, 
- Aleksandr Anenkov <a.anenkov@yadro.com>, 
- =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>, 
- Fabiano Rosas <farosas@suse.de>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Akihiko Odaki <akihiko.odaki@daynix.com>
-X-Mailer: b4 0.12.4
-Received-SPF: none client-ip=2607:f8b0:4864:20::1135;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-yw1-x1135.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <ZW7Vr1SGnEoHADAY@ethan84-VirtualBox>
+User-Agent: Mutt/2.1.4 (2021-12-11)
+X-Originating-IP: [10.0.12.51]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 3BD5ZiUs091612
+Received-SPF: pass client-ip=60.248.80.70; envelope-from=ethan84@andestech.com;
+ helo=Atcsqr.andestech.com
+X-Spam_score_int: -8
+X-Spam_score: -0.9
+X-Spam_bar: /
+X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9, RDNS_DYNAMIC=0.982,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001, TVD_RCVD_IP=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,63 +66,80 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-to:  Ethan Chen <ethan84@andestech.com>
+From:  Ethan Chen via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This series extracts fixes and refactorings that can be applied
-independently from "[PATCH v9 00/23] plugins: Allow to read registers".
+Ping again.
 
-The patch "target/riscv: Move MISA limits to class" was replaced with
-patch "target/riscv: Move misa_mxl_max to class" since I found instances
-may have different misa_ext_mask.
-
-V6 -> V7:
-  Rebased.
-
-V5 -> V6:
-  Added patch "default-configs: Add TARGET_XML_FILES definition".
-  Rebased.
-
-V4 -> V5:
-  Added patch "hw/riscv: Use misa_mxl instead of misa_mxl_max".
-
-V3 -> V4:
-  Added patch "gdbstub: Check if gdb_regs is NULL".
-
-V2 -> V3:
-  Restored patch sets from the previous version.
-  Rebased to commit 800485762e6564e04e2ab315132d477069562d91.
-
-V1 -> V2:
-  Added patch "target/riscv: Do not allow MXL_RV32 for TARGET_RISCV64".
-  Added patch "target/riscv: Initialize gdb_core_xml_file only once".
-  Dropped patch "target/riscv: Remove misa_mxl validation".
-  Dropped patch "target/riscv: Move misa_mxl_max to class".
-  Dropped patch "target/riscv: Validate misa_mxl_max only once".
-
-Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
----
-Akihiko Odaki (4):
-      hw/riscv: Use misa_mxl instead of misa_mxl_max
-      target/riscv: Remove misa_mxl validation
-      target/riscv: Move misa_mxl_max to class
-      target/riscv: Validate misa_mxl_max only once
-
- target/riscv/cpu.h         |   4 +-
- hw/riscv/boot.c            |   2 +-
- target/riscv/cpu.c         | 139 ++++++++++++++++++++++++++-------------------
- target/riscv/gdbstub.c     |  12 ++--
- target/riscv/kvm/kvm-cpu.c |  10 ++--
- target/riscv/machine.c     |   7 +--
- target/riscv/tcg/tcg-cpu.c |  44 ++------------
- target/riscv/translate.c   |   3 +-
- 8 files changed, 109 insertions(+), 112 deletions(-)
----
-base-commit: 9c74490bff6c8886a922008d0c9ce6cae70dd17e
-change-id: 20231213-riscv-fcc9640986cf
-
-Best regards,
--- 
-Akihiko Odaki <akihiko.odaki@daynix.com>
-
+On Tue, Dec 05, 2023 at 03:48:07PM +0800, Ethan Chen wrote:
+> Ping.
+> https://patchew.org/QEMU/20231122053251.440723-1-ethan84@andestech.com/
+> 
+> On Wed, Nov 22, 2023 at 01:32:47PM +0800, Ethan Chen wrote:
+> > This series implements IOPMP specification v1.0.0-draft4 rapid-k model.
+> > The specification url:
+> > https://github.com/riscv-non-isa/iopmp-spec/blob/main/riscv_iopmp_specification.pdf
+> > 
+> > When IOPMP is enabled, a DMA device ATCDMAC300 is added to RISC-V virt
+> > platform. This DMA device is connected to the IOPMP and has the functionalities
+> > required by IOPMP, including:
+> > - Support setup the connection to IOPMP
+> > - Support asynchronous I/O to handle stall transactions
+> > - Send transaction information
+> > 
+> > IOPMP takes a transaction which partially match an entry as a partially hit
+> > error. The transaction size is depending on source device, destination device
+> > and bus.
+> > 
+> > Source device can send a transaction_info to IOPMP. IOPMP will check partially
+> > hit by transaction_info. If source device does not send a transaction_info,
+> > IOPMP checks information in IOMMU and dose not check partially hit.
+> > 
+> > Changes for v4:
+> > 
+> >   - Add descriptions of IOPMP and ATCDMAC300
+> >   - Refine coding style and comments
+> >   - config XILINX_AXI does not include file stream.c but selects config STREAM
+> >     instead.
+> >   - ATCDMAC300: INT_STATUS is write 1 clear per bit
+> > 		            Rename iopmp_address_sink to transcation_info_sink
+> >   - IOPMP: Refine error message and remove unused variable
+> >   - VIRT: Document new options
+> > 	        atcdmac300 is only added when iopmp is enabled
+> >           serial setting should not be changed
+> > 
+> > Ethan Chen (4):
+> >   hw/core: Add config stream
+> >   Add RISC-V IOPMP support
+> >   hw/dma: Add Andes ATCDMAC300 support
+> >   hw/riscv/virt: Add IOPMP support
+> > 
+> >  docs/system/riscv/virt.rst                    |  11 +
+> >  hw/Kconfig                                    |   1 +
+> >  hw/core/Kconfig                               |   3 +
+> >  hw/core/meson.build                           |   2 +-
+> >  hw/dma/Kconfig                                |   4 +
+> >  hw/dma/atcdmac300.c                           | 566 ++++++++++
+> >  hw/dma/meson.build                            |   1 +
+> >  hw/misc/Kconfig                               |   4 +
+> >  hw/misc/meson.build                           |   1 +
+> >  hw/misc/riscv_iopmp.c                         | 966 ++++++++++++++++++
+> >  hw/riscv/Kconfig                              |   2 +
+> >  hw/riscv/virt.c                               |  65 ++
+> >  include/hw/dma/atcdmac300.h                   | 180 ++++
+> >  include/hw/misc/riscv_iopmp.h                 | 341 +++++++
+> >  .../hw/misc/riscv_iopmp_transaction_info.h    |  28 +
+> >  include/hw/riscv/virt.h                       |  10 +-
+> >  16 files changed, 2183 insertions(+), 2 deletions(-)
+> >  create mode 100644 hw/dma/atcdmac300.c
+> >  create mode 100644 hw/misc/riscv_iopmp.c
+> >  create mode 100644 include/hw/dma/atcdmac300.h
+> >  create mode 100644 include/hw/misc/riscv_iopmp.h
+> >  create mode 100644 include/hw/misc/riscv_iopmp_transaction_info.h
+> > 
+> > -- 
+> > 2.34.1
+> > 
 
