@@ -4,68 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24C5FC4332F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Dec 2023 05:26:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4CC9C4332F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Dec 2023 05:36:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rE0ht-0006hy-Vc; Fri, 15 Dec 2023 00:25:54 -0500
+	id 1rE0rM-0001a5-7d; Fri, 15 Dec 2023 00:35:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rE0hp-0006hf-Pv; Fri, 15 Dec 2023 00:25:49 -0500
-Received: from mail-ua1-x931.google.com ([2607:f8b0:4864:20::931])
+ id 1rE0r7-0001Xh-Md; Fri, 15 Dec 2023 00:35:27 -0500
+Received: from mail-vk1-xa2e.google.com ([2607:f8b0:4864:20::a2e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rE0hn-0001ca-Gk; Fri, 15 Dec 2023 00:25:49 -0500
-Received: by mail-ua1-x931.google.com with SMTP id
- a1e0cc1a2514c-7cb0fdced70so116858241.1; 
- Thu, 14 Dec 2023 21:25:46 -0800 (PST)
+ id 1rE0r5-0003MI-8O; Fri, 15 Dec 2023 00:35:25 -0500
+Received: by mail-vk1-xa2e.google.com with SMTP id
+ 71dfb90a1353d-4b2c34bcc1eso107157e0c.3; 
+ Thu, 14 Dec 2023 21:35:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702617945; x=1703222745; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1702618522; x=1703223322; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GAbGTrqsBi12JzUlTC3BDFK7dYGpXLIvG0BANQtgKRg=;
- b=O+f2Xu1RHLHDx4kTQrU70LQSZ8zaRq7yAxRiAMpK1HuZEA6l9KjTG7p/U7et9R0fg6
- Upxhp5eqgVzHEuhyxDrgvY6LteW94FrGzzHcxqPFoCZz0Q+nMcssLBPHfAau/9GnuSVQ
- 4EcV8ry7OhdRtR00whbqfWNvJ4l6/WMVxGUjbK7s1lpup0wVT0bFhAvRb+vYbnK8v25g
- XpG5UNCvKhjE5UfDtpFoQG1wHPkJy6gsFBcp3yXXU1gvbpVpQpsLL3CjWLXumFfkYGl3
- ff0WcBUmOGJS/KHmYkKpX0Vr1r2iDBzcgepJCBlrEE7xkrKtqtG/yERpwtN2v+zOk8X0
- 3liQ==
+ bh=zSsG9xJNygGbLfdWQL0zVatbAIrnp7H+NiOG3cwFmUg=;
+ b=KyURcyZe34FBlv2W6kzoaFKHzQpiGuRj0yOpP8g9hsMxP9/DE02QciD3r8zUp52idE
+ uGgULMFysbL/w+RA+hc9YxD8QlFDX9YQRAnFrhc/xSVs0xtR+3Ju6OQskt6XtONfQiLu
+ NUyuyXng8TdKgXEX80t1BiWTa6hT8EitZyf73IGWDfusqQE7I+Z91W6UKYvbq2h22Gf2
+ uBXbIPB8RK/CAvwX+SDHADaFMulHMYAbJQJls2QEu6DebOYcfFs0M/xS0OoYTCdobS0R
+ AZF7SfcbClVUojSFHfqYRdkAfvOpMfp2o9dIZv0jzzUY5Tu2JqQYl2wLjTDtTyYXenOM
+ T/Aw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702617945; x=1703222745;
+ d=1e100.net; s=20230601; t=1702618522; x=1703223322;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GAbGTrqsBi12JzUlTC3BDFK7dYGpXLIvG0BANQtgKRg=;
- b=mBlX088V0vsiZlIPbj1UnukozjHRuxnrAul0aDAsVfv6bXUhjg/cdo9KTZBHOQ7PQw
- QJUUGlHgERZD6XdzDwbAy2uSKrBkKeNNGSgV0mElk/YFR325VZyNX/Smrq4rWim/kiBY
- e3puMmAZX5NUuUS3aBnNbT/SHuAveUopAn3ruHHRlB2uvSogKoCKht4S0PZbJAxOaMND
- 4hdF8xDpYqkLTLJLLh6MRQ2Z/7YKNx6RmJEUQxNfB1sSK5E/b684lveETyXs1efkiji7
- W9bXU16zkcVJKhIvBZWV55dkcDquUqho+LZR4/ExRYfQKkMl1GIxhdPZnjwLPDLgI03I
- DKfA==
-X-Gm-Message-State: AOJu0YyBOF6KtkIPynh6XiL0HgLZwOwxRxJvz1F0Y0opQsnzaP+R0AQ9
- ZUWOSqw5WDr3/wOo2yOGq29YPiPCuumFWklAzvw=
-X-Google-Smtp-Source: AGHT+IEHOECN7ZxBjOcSoF1xv3qW5HXwuRCzttisv25V+JX+IybJviFWb9zw2cr3Murqd4gPShaNJdi11NvIgHs/5FU=
-X-Received: by 2002:a05:6102:952:b0:464:8360:b520 with SMTP id
- a18-20020a056102095200b004648360b520mr11172646vsi.10.1702617944975; Thu, 14
- Dec 2023 21:25:44 -0800 (PST)
+ bh=zSsG9xJNygGbLfdWQL0zVatbAIrnp7H+NiOG3cwFmUg=;
+ b=L0UzPyG+/SL5gdFlN2uycflZVVc8meTU2R1Q180Z75LqtDxQ0PrGr0qo5am1D5DuSn
+ hxY/COptm3JQ4Sp6Tr0S3GOeLwkUaA9nxfilSkHT8tbem1z4ucig8uyfYCEuHfAKsaEM
+ qN9OH64R924m5xg6IMuwegKePToTJEyRG9VdG+duwASLoa7k+zbau4V9rjZU3svx+7fS
+ IBAV/3iSM9u6AQEwVo/BNPflYMlCbJySAIibn/Qy0WLFdymrJeOalnt4+1TPrTb0D1ca
+ wo9XqJewCW3MNQEz5sRooNr/N/I78p3p1+3cqD5ZqJ9AyhuXU7AyLVAy74PHjqg40KWl
+ bfWw==
+X-Gm-Message-State: AOJu0YwGaDYYI+y+0NmMft9f1TSZcWR9NuMGLX9egyiw+EHtovCtENra
+ +/rQX+ahHVczWnHeTssTLuoCW5TGPBWyMkaMUnw=
+X-Google-Smtp-Source: AGHT+IEWx4UN/IZP43q6F9D7nSMmI7JQePhHQ5sPKIzws6v2P8ikunEhkUlEo0EYkTDjCLKKrFdPpOEgcdsMl6ZzuJI=
+X-Received: by 2002:a05:6122:201e:b0:4b2:c554:dfc2 with SMTP id
+ l30-20020a056122201e00b004b2c554dfc2mr11455141vkd.17.1702618521718; Thu, 14
+ Dec 2023 21:35:21 -0800 (PST)
 MIME-Version: 1.0
-References: <CAEV2DRrg5ekL9MUcO2xOKjKkYtrQYhORQ2n4qO+cxamrw82BGA@mail.gmail.com>
-In-Reply-To: <CAEV2DRrg5ekL9MUcO2xOKjKkYtrQYhORQ2n4qO+cxamrw82BGA@mail.gmail.com>
+References: <20231030054834.39145-1-akihiko.odaki@daynix.com>
+ <20231030054834.39145-2-akihiko.odaki@daynix.com>
+ <CAKmqyKMo41GMJ0vVN2_CsfOVrfsz8H9AtxTe6-JbtX+Pi6B3DA@mail.gmail.com>
+ <fcf3a810-7492-4f60-9126-63713d6a30bd@daynix.com>
+In-Reply-To: <fcf3a810-7492-4f60-9126-63713d6a30bd@daynix.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 15 Dec 2023 15:25:18 +1000
-Message-ID: <CAKmqyKPc538OEZUoARsHuRxfqg5LQuXUB7tRkJ-tu6Jujm8bRg@mail.gmail.com>
-Subject: Re: [PATCH v5] target/riscv: update checks on writing pmpcfg for
- Smepmp to version 1.0
-To: Alvin Chang <vivahavey@gmail.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, alistair.francis@wdc.com, 
- liweiwei@iscas.ac.cn
+Date: Fri, 15 Dec 2023 15:34:55 +1000
+Message-ID: <CAKmqyKOvwZ71+pGz-HSvE29U9a2dbYVPLR0Li2ak5ji+_Ez4-A@mail.gmail.com>
+Subject: Re: [PATCH v6 1/5] hw/riscv: Use misa_mxl instead of misa_mxl_max
+To: Akihiko Odaki <akihiko.odaki@daynix.com>
+Cc: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
+ Mikhail Tyutin <m.tyutin@yadro.com>, Aleksandr Anenkov <a.anenkov@yadro.com>,
+ qemu-devel@nongnu.org, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Fabiano Rosas <farosas@suse.de>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::931;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x931.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2e;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2e.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -89,355 +98,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Dec 6, 2023 at 3:37=E2=80=AFPM Alvin Chang <vivahavey@gmail.com> wr=
-ote:
+On Thu, Nov 23, 2023 at 5:24=E2=80=AFPM Akihiko Odaki <akihiko.odaki@daynix=
+.com> wrote:
 >
-> > -----Original Message-----
->
-> > From: Alistair Francis <alistair23@gmail.com>
->
-> > Sent: Wednesday, December 6, 2023 11:39 AM
->
-> > To: Alvin Che-Chia Chang(=E5=BC=B5=E5=93=B2=E5=98=89) <alvinga@andestec=
-h.com>
->
-> > Cc: qemu-riscv@nongnu.org; qemu-devel@nongnu.org;
->
-> > alistair.francis@wdc.com; liweiwei@iscas.ac.cn
->
-> > Subject: Re: [PATCH v5] target/riscv: update checks on writing pmpcfg f=
-or
->
-> > Smepmp to version 1.0
->
+> On 2023/11/23 12:04, Alistair Francis wrote:
+> > On Mon, Oct 30, 2023 at 3:50=E2=80=AFPM Akihiko Odaki <akihiko.odaki@da=
+ynix.com> wrote:
+> >>
+> >> The effective MXL value matters when booting.
 > >
->
-> > On Tue, Nov 14, 2023 at 12:24=E2=80=AFPM Alvin Chang via <qemu-devel@no=
-ngnu.org>
->
-> > wrote:
->
-> > >
->
-> > > Current checks on writing pmpcfg for Smepmp follows Smepmp version
->
-> > > 0.9.1. However, Smepmp specification has already been ratified, and
->
-> > > there are some differences between version 0.9.1 and 1.0. In this
->
-> > > commit we update the checks of writing pmpcfg to follow Smepmp versio=
-n
->
-> > > 1.0.
->
-> > >
->
-> > > When mseccfg.MML is set, the constraints to modify PMP rules are:
->
-> > > 1. Locked rules cannot be removed or modified until a PMP reset, unle=
-ss
->
-> > >    mseccfg.RLB is set.
->
-> > > 2. From Smepmp specification version 1.0, chapter 2 section 4b:
->
-> > >    Adding a rule with executable privileges that either is M-mode-onl=
-y
->
-> > >    or a locked Shared-Region is not possible and such pmpcfg writes a=
-re
->
-> > >    ignored, leaving pmpcfg unchanged.
->
-> > >
->
-> > > The commit transfers the value of pmpcfg into the index of the Smepmp
->
-> > > truth table, and checks the rules by aforementioned specification
->
-> > > changes.
->
-> > >
->
-> > > Signed-off-by: Alvin Chang <alvinga@andestech.com>
->
-> > > ---
->
-> > > Changes from v4: Rebase on master.
->
-> > >
->
-> > > Changes from v3: Modify "epmp_operation" to "smepmp_operation".
->
-> > >
->
-> > > Changes from v2: Adopt switch case ranges and numerical order.
->
-> > >
->
-> > > Changes from v1: Convert ePMP over to Smepmp.
->
-> > >
->
-> > >  target/riscv/pmp.c | 40 ++++++++++++++++++++++++++++++++--------
->
-> > >  1 file changed, 32 insertions(+), 8 deletions(-)
->
-> > >
->
-> > > diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c index
->
-> > > 162e88a90a..4069514069 100644
->
-> > > --- a/target/riscv/pmp.c
->
-> > > +++ b/target/riscv/pmp.c
->
-> > > @@ -102,16 +102,40 @@ static bool pmp_write_cfg(CPURISCVState *env,
->
-> > uint32_t pmp_index, uint8_t val)
->
-> > >                  locked =3D false;
->
-> > >              }
->
-> > >
->
-> > > -            /* mseccfg.MML is set */
->
-> > > -            if (MSECCFG_MML_ISSET(env)) {
->
-> > > -                /* not adding execute bit */
->
-> > > -                if ((val & PMP_LOCK) !=3D 0 && (val & PMP_EXEC) !=3D
->
-> > PMP_EXEC) {
->
-> > > +            /*
->
-> > > +             * mseccfg.MML is set. Locked rules cannot be removed or
->
-> > modified
->
-> > > +             * until a PMP reset. Besides, from Smepmp specification
->
-> > version 1.0
->
-> > > +             * , chapter 2 section 4b says:
->
-> > > +             * Adding a rule with executable privileges that either =
-is
->
-> > > +             * M-mode-only or a locked Shared-Region is not possible
->
-> > and such
->
-> > > +             * pmpcfg writes are ignored, leaving pmpcfg unchanged.
->
-> > > +             */
->
-> > > +            if (MSECCFG_MML_ISSET(env) && !pmp_is_locked(env,
->
-> > > + pmp_index)) {
->
+> > This doesn't sound right. Surely the max is what matters here
 > >
->
-> > This is tricky and took me a while to get my head around.
->
+> > Also, this was specifically changed to misa_mxl_max in db23e5d981a
+> > "target/riscv: Replace riscv_cpu_is_32bit with riscv_cpu_mxl".
 > >
+> > This needs a much better description of why this change should be made
+>  >
+>  > Alistair
 >
-> > From what I can tell, there is a bug in the spec.
+> The kernel will be executed with the current MXL rather than the initial
+> MXL value so the current MXL should be used here.
 >
-> >
->
-> > The spec specifically states that:
->
-> >
->
-> > """
->
-> > The meaning of pmpcfg.L changes: Instead of marking a rule as locked an=
-d
->
-> > enforced in all modes, it now marks a rule as M-mode-only when set and
->
-> > S/U-mode-only when unset.
->
-> > """
->
-> >
->
-> > So the check for !pmp_is_locked() sounds correct.
->
-> >
->
-> > But then they add:
->
-> >
->
-> > """
->
-> > The formerly reserved encoding of pmpcfg.RW=3D01, and the encoding
->
-> > pmpcfg.LRWX=3D1111, now encode a Shared-Region.
->
-> > """
->
-> >
->
-> > Which contradicts what they just said.
+> For example, if you are going to emulate a system that has a RV64 CPU
+> and a firmware that sets the MXL to RV32, then mxl_max should be
+> MXL_RV64 and mxl should be MXL_RV32, and the kernel should be assumed as
+> a RV32 binary. Loading a 64-bit kernel will not work in such a case.
 
-In future can you please reply in plain text? Otherwise the formatting
-gets a little funky
+But this is called before the firmware runs, so it won't be changed by firm=
+ware.
 
->
->
-> Yes you are right, it seems there are some misleading words.
->
->
-> >
->
-> > I *think* we want to ignore the locked bit here. We don't actually care=
- if it's
->
-> > already set, instead we care if the region is an M-mode only region fro=
-m the
->
-> > 2.1 table
->
->
-> The check for !pmp_is_locked() is because spec says (below table 2.1):
->
-> "*Locked rules cannot be removed or modified until a PMP reset, unless ms=
-eccfg.RLB is set."
->
-> It is not related to M-mode-only or S/U-mode-only or Shared-Region.
-
-Yes, but when mseccfg.MML is set
-
-"The meaning of pmpcfg.L changes: Instead of marking a rule as locked
-and enforced in all modes, it
-now marks a rule as M-mode-only when set and S/U-mode-only when unset."
-
-So the comment below table 2.1 no longer applies
-
->
->
-> In other words, a pmpcfg where the pmpcfg.L bit was set can not be config=
-ured anymore. Therefore, I think we should not ignore it here, since we are=
- trying to write a new value into the pmpcfg. If we ignore it, the locked p=
-mpcfg will be modified and it would violate the spec.
->
->
-> If the pmpcfg was not locked, we also need to check the new value that th=
-e user wants to write. Because chapter 2 section 4b says: "Adding a rule wi=
-th executable privileges that either is M-mode-only or a locked Shared-Regi=
-on is not possible and such pmpcfg writes are ignored, leaving pmpcfg uncha=
-nged". This checking is implemented as that switch-case statement, based on=
- table 2.1 truth table.
-
-Yeah, that sounds right.
+Maybe it's worth putting what this fixes in the commit message?
 
 Alistair
 
 >
+> You can find a similar example in x86_64: x86_64 systems typically
+> starts in 16-bit mode, and the firmware switches to 64-bit mode. When
+> emulating those systems, QEMU switches to 64-bit mode and loads a 64-bit
+> kernel.
 >
-> Alvin Chang
->
->
-> >
->
-> > I think the best bet here is to create a helper function that takes a p=
-mpcfg
->
-> > value and returns if it is M-mode only. Then we should check if the cur=
-rent
->
-> > pmp_index is M-mode only OR if we are adding one and then reject that.
->
-> >
->
-> > Does that make sense?
->
-> >
->
-> > Alistair
->
-> >
->
-> > > +                /*
->
-> > > +                 * Convert the PMP permissions to match the truth
->
-> > table in the
->
-> > > +                 * Smepmp spec.
->
-> > > +                 */
->
-> > > +                const uint8_t smepmp_operation =3D
->
-> > > +                    ((val & PMP_LOCK) >> 4) | ((val & PMP_READ) <<
->
-> > 2) |
->
-> > > +                    (val & PMP_WRITE) | ((val & PMP_EXEC) >> 2);
->
-> > > +
->
-> > > +                switch (smepmp_operation) {
->
-> > > +                case 0 ... 8:
->
-> > >                      locked =3D false;
->
-> > > -                }
->
-> > > -                /* shared region and not adding X bit */
->
-> > > -                if ((val & PMP_LOCK) !=3D PMP_LOCK &&
->
-> > > -                    (val & 0x7) !=3D (PMP_WRITE | PMP_EXEC)) {
->
-> > > +                    break;
->
-> > > +                case 9 ... 11:
->
-> > > +                    break;
->
-> > > +                case 12:
->
-> > > +                    locked =3D false;
->
-> > > +                    break;
->
-> > > +                case 13:
->
-> > > +                    break;
->
-> > > +                case 14:
->
-> > > +                case 15:
->
-> > >                      locked =3D false;
->
-> > > +                    break;
->
-> > > +                default:
->
-> > > +                    g_assert_not_reached();
->
-> > >                  }
->
-> > >              }
->
-> > >          } else {
->
-> > > --
->
-> > > 2.34.1
->
-> > >
->
-> > >
+> Regards,
+> Akihiko Odaki
 
