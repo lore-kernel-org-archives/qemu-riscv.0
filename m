@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60FDCC35274
-	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Dec 2023 13:19:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D83ABC35274
+	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Dec 2023 13:29:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rE86U-0001R6-Ld; Fri, 15 Dec 2023 08:19:48 -0500
+	id 1rE8FK-0005FF-Uv; Fri, 15 Dec 2023 08:28:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rE86S-0001QY-Ti
- for qemu-riscv@nongnu.org; Fri, 15 Dec 2023 08:19:45 -0500
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rE8FJ-0005F5-OD
+ for qemu-riscv@nongnu.org; Fri, 15 Dec 2023 08:28:53 -0500
+Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rE86O-0004YI-Oy
- for qemu-riscv@nongnu.org; Fri, 15 Dec 2023 08:19:44 -0500
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-40c39ef63d9so6785625e9.3
- for <qemu-riscv@nongnu.org>; Fri, 15 Dec 2023 05:19:40 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rE8FG-0002yl-KK
+ for qemu-riscv@nongnu.org; Fri, 15 Dec 2023 08:28:53 -0500
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-28abb3c5b9cso188928a91.3
+ for <qemu-riscv@nongnu.org>; Fri, 15 Dec 2023 05:28:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1702646379; x=1703251179; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Aftn2uaV37T5bWxlLd5cesnbqw5JlTkzghxCLW+9Q70=;
- b=hhVwnqKrf6IQt7eS52ld60dLNQh/kuodcdywG/FQXJPiUY2AandklEpxhcawIDF1VX
- SnyuV6RRug3C3pqAa/qSgU+I++QWbh0o24305tGWr0OGEgRsacfoGL4rhY4hSgt89U1t
- bbw8o4TBxBoj4XWa/VjO2Y/r32r8oYajhdFbyCeepeu77tgPzBlDW9V/FRuZpSthi1sE
- 1M3a6MERjVUsZszuqx6jFjASIRyQhVaKsBhBwYrRjlSwwxhyBSdMcBHwVAptXAyiC3BK
- TZUtkWkvD3WYxu+1GsMN0KRdylXo8+PSEY9tlDjm6aVRd/mDbACeW14+V177MvCfzPQQ
- ISwQ==
+ d=ventanamicro.com; s=google; t=1702646928; x=1703251728; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=fko1lpxnitHM+oOBA41I7J6nnnrbSKtYzwowR+O4tSU=;
+ b=NXoA8NdpEM7kjRLwF9Ubr+QTp93BW6A/4AGM6jsTDtalGlCLA/VttmCD1CjEYyQRep
+ d0RqlI3K1tNRnqAXGpWmC5G1KhELh2HULbL6xxab6Qo2BW0zF2xWdxR/AcXB4p910+BE
+ EfwmXyus6tZGSsNN+1/NT0M0v70zNyXePqVnozSPIntMuz7zVYHtEIepf8AmbKmkmEX6
+ saOzfVCajHHH05eqsfyLwb3n1JpFJokcg4wvpQKN1dcALyqSrKHY8CcBhcA91P7s7Qcp
+ 0TEQFiolT5aFcmQkYRizsmnHVvX9UZPbT1itUOlElrCPsEGKNQDXEeTOBiqhoWvnb3Kq
+ hXxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702646379; x=1703251179;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Aftn2uaV37T5bWxlLd5cesnbqw5JlTkzghxCLW+9Q70=;
- b=wnm3nmbOJHfi4Yn6f7YwV9ICLbCZUEbQv70OTNxJN0orl8wkgEVamJsX3A2dKI7GHN
- TA5nMUmcTLZRIhl9zVU7ygEEPekALkxFkiTT6BNfhXrJrFYIB+fmmbJVfpXipErof3uf
- HbdDp6wHi16SNmdKzJPM4BrVRrw7IgrsTm4/rAmMfTq2MvQDw7ak7RsbgAHa5xlOgFzA
- 1rFelhMeZQJARXySyZFmDcbgKAenVy5EJTuOlSy7U1Q7XHutZphRFK2eNiTZ8VBFQNpK
- vAghU4UpieIUcmBL1PHg+/r6zdkNWPgSc+GTDon4Lw/rJSYojhGA6w1jw+8fo5aw4wBZ
- x+Tw==
-X-Gm-Message-State: AOJu0YxCNyDP4LBSMOuy8Uug8eesB/RM0j1TD5WgchagYV10egiI12XI
- YlW6yBUzpgOzOigadU64N1f5Tg==
-X-Google-Smtp-Source: AGHT+IFXaxr84BiWRvT+Cbw4W5fmItoG2Jx9BfPUvtWdgdVL2rPGot+l/sU41cPb4ikQhxNcLbrSsQ==
-X-Received: by 2002:a05:600c:2147:b0:409:247b:b0ae with SMTP id
- v7-20020a05600c214700b00409247bb0aemr6427267wml.36.1702646379136; 
- Fri, 15 Dec 2023 05:19:39 -0800 (PST)
-Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
+ d=1e100.net; s=20230601; t=1702646928; x=1703251728;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=fko1lpxnitHM+oOBA41I7J6nnnrbSKtYzwowR+O4tSU=;
+ b=hl67mRzj7pIqjFUNLUap6Nbuwi+Q5UebvaIyRfFN7I9+SkL6R6ojtH5MXtjz1syv3F
+ vX6dFEG2Hq0QvoNkz6vuP5ZTqnQug9l00dFHynqZ97ECwqQRFHQ72k6SRMeN6eI08i1Q
+ E37jLDEer7wtie2i1siCaa4iKq9OHJyZfYVxR6ix0vhEW2//oIb/Z+Rg4aZ8Rt7m86R5
+ 6n0jyF32x0qbwI6+VlpAVgZXkEOuVMc+rtUVFbJDYY8nBSr0AA94wORXLWDDV3RmegsR
+ BIfFXddFfzi5R80eRddbMaZLtpSE2BHa4ufxE8m8eKRlgoabyFGJN9Pz/nRd+Q0WuxeT
+ YGMg==
+X-Gm-Message-State: AOJu0YyDlOuI1kjDT0aENWVY2+CLl0dIYE0a8Fzluo9EIOPPIjmTLqCE
+ nXrdvX71tru8cqfWBm1gX+eisYB1LjuJxfS3Y/Q=
+X-Google-Smtp-Source: AGHT+IGL/NYTcu5XtkjcuOjc/+WPm/2fOPyLBPK1DJz5zFbuOaQUJ2QxS4ZCOC/pso8WtdJsajdSmg==
+X-Received: by 2002:a17:90a:aa87:b0:285:b239:f4ed with SMTP id
+ l7-20020a17090aaa8700b00285b239f4edmr4879762pjq.34.1702646928547; 
+ Fri, 15 Dec 2023 05:28:48 -0800 (PST)
+Received: from [192.168.68.110] ([179.93.21.205])
  by smtp.gmail.com with ESMTPSA id
- o5-20020a05600c510500b0040b3e26872dsm31515807wms.8.2023.12.15.05.19.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Dec 2023 05:19:38 -0800 (PST)
-Date: Fri, 15 Dec 2023 14:19:37 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
-Subject: Re: [PATCH for-9.0 5/5] target/riscv/kvm: rename riscv_reg_id() to
- riscv_reg_id_ulong()
-Message-ID: <20231215-45e97313ce6a97ed3eb9e8dd@orel>
-References: <20231208183835.2411523-1-dbarboza@ventanamicro.com>
- <20231208183835.2411523-6-dbarboza@ventanamicro.com>
+ e5-20020a170902744500b001d34cc99dc5sm5202367plt.232.2023.12.15.05.28.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 15 Dec 2023 05:28:47 -0800 (PST)
+Message-ID: <eb848757-f703-4a02-a5f2-0b9ce5635541@ventanamicro.com>
+Date: Fri, 15 Dec 2023 10:28:44 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20231208183835.2411523-6-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x330.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: Vendor CPU overrides of non-extension properties
+Content-Language: en-US
+To: Rob Bradford <rbradford@rivosinc.com>
+Cc: qemu-riscv@nongnu.org
+References: <b815ab5fdf33d9b9000c8165d50d000f387a3463.camel@rivosinc.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <b815ab5fdf33d9b9000c8165d50d000f387a3463.camel@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x102f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,131 +95,64 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Dec 08, 2023 at 03:38:35PM -0300, Daniel Henrique Barboza wrote:
-> kvm_riscv_reg_id() returns an id encoded with an ulong size, i.e. an u32
-> size when running TARGET_RISCV32 and u64 when running TARGET_RISCV64.
-> 
-> Rename it to kvm_riscv_reg_id_ulong() to enhance code readability. It'll
-> be in line with the existing kvm_riscv_reg_id_<size>() helpers.
-> 
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->  target/riscv/kvm/kvm-cpu.c | 40 ++++++++++++++++++++------------------
->  1 file changed, 21 insertions(+), 19 deletions(-)
-> 
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index 11797338ec..62a1e51f0a 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -54,7 +54,7 @@ void riscv_kvm_aplic_request(void *opaque, int irq, int level)
->  
->  static bool cap_has_mp_state;
->  
-> -static uint64_t kvm_riscv_reg_id(CPURISCVState *env, uint64_t type,
-> +static uint64_t kvm_riscv_reg_id_ulong(CPURISCVState *env, uint64_t type,
->                                   uint64_t idx)
->  {
->      uint64_t id = KVM_REG_RISCV | type | idx;
-> @@ -82,15 +82,17 @@ static uint64_t kvm_riscv_reg_id_u64(uint64_t type, uint64_t idx)
->      return KVM_REG_RISCV | KVM_REG_SIZE_U64 | type | idx;
->  }
->  
-> -#define RISCV_CORE_REG(env, name)  kvm_riscv_reg_id(env, KVM_REG_RISCV_CORE, \
-> -                 KVM_REG_RISCV_CORE_REG(name))
-> +#define RISCV_CORE_REG(env, name) \
-> +    kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CORE, \
-> +                           KVM_REG_RISCV_CORE_REG(name))
->  
-> -#define RISCV_CSR_REG(env, name)  kvm_riscv_reg_id(env, KVM_REG_RISCV_CSR, \
-> -                 KVM_REG_RISCV_CSR_REG(name))
-> +#define RISCV_CSR_REG(env, name) \
-> +    kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CSR, \
-> +                           KVM_REG_RISCV_CSR_REG(name))
->  
->  #define RISCV_CONFIG_REG(env, name) \
-> -    kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG, \
-> -                     KVM_REG_RISCV_CONFIG_REG(name))
-> +    kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CONFIG, \
-> +                           KVM_REG_RISCV_CONFIG_REG(name))
->  
->  #define RISCV_TIMER_REG(name)  kvm_riscv_reg_id_u64(KVM_REG_RISCV_TIMER, \
->                   KVM_REG_RISCV_TIMER_REG(name))
-> @@ -216,8 +218,8 @@ static void kvm_riscv_update_cpu_misa_ext(RISCVCPU *cpu, CPUState *cs)
->  
->          /* If we're here we're going to disable the MISA bit */
->          reg = 0;
-> -        id = kvm_riscv_reg_id(env, KVM_REG_RISCV_ISA_EXT,
-> -                              misa_cfg->kvm_reg_id);
-> +        id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_ISA_EXT,
-> +                                    misa_cfg->kvm_reg_id);
->          ret = kvm_set_one_reg(cs, id, &reg);
->          if (ret != 0) {
->              /*
-> @@ -378,8 +380,8 @@ static void kvm_riscv_update_cpu_cfg_isa_ext(RISCVCPU *cpu, CPUState *cs)
->              continue;
->          }
->  
-> -        id = kvm_riscv_reg_id(env, KVM_REG_RISCV_ISA_EXT,
-> -                              multi_ext_cfg->kvm_reg_id);
-> +        id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_ISA_EXT,
-> +                                    multi_ext_cfg->kvm_reg_id);
->          reg = kvm_cpu_cfg_get(cpu, multi_ext_cfg);
->          ret = kvm_set_one_reg(cs, id, &reg);
->          if (ret != 0) {
-> @@ -509,7 +511,7 @@ static int kvm_riscv_get_regs_core(CPUState *cs)
->      env->pc = reg;
->  
->      for (i = 1; i < 32; i++) {
-> -        uint64_t id = kvm_riscv_reg_id(env, KVM_REG_RISCV_CORE, i);
-> +        uint64_t id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CORE, i);
->          ret = kvm_get_one_reg(cs, id, &reg);
->          if (ret) {
->              return ret;
-> @@ -534,7 +536,7 @@ static int kvm_riscv_put_regs_core(CPUState *cs)
->      }
->  
->      for (i = 1; i < 32; i++) {
-> -        uint64_t id = kvm_riscv_reg_id(env, KVM_REG_RISCV_CORE, i);
-> +        uint64_t id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CORE, i);
->          reg = env->gpr[i];
->          ret = kvm_set_one_reg(cs, id, &reg);
->          if (ret) {
-> @@ -810,8 +812,8 @@ static void kvm_riscv_read_cbomz_blksize(RISCVCPU *cpu, KVMScratchCPU *kvmcpu,
->      struct kvm_one_reg reg;
->      int ret;
->  
-> -    reg.id = kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG,
-> -                              cbomz_cfg->kvm_reg_id);
-> +    reg.id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CONFIG,
-> +                                    cbomz_cfg->kvm_reg_id);
->      reg.addr = (uint64_t)kvmconfig_get_cfg_addr(cpu, cbomz_cfg);
->      ret = ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
->      if (ret != 0) {
-> @@ -832,8 +834,8 @@ static void kvm_riscv_read_multiext_legacy(RISCVCPU *cpu,
->          KVMCPUConfig *multi_ext_cfg = &kvm_multi_ext_cfgs[i];
->          struct kvm_one_reg reg;
->  
-> -        reg.id = kvm_riscv_reg_id(env, KVM_REG_RISCV_ISA_EXT,
-> -                                  multi_ext_cfg->kvm_reg_id);
-> +        reg.id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_ISA_EXT,
-> +                                        multi_ext_cfg->kvm_reg_id);
->          reg.addr = (uint64_t)&val;
->          ret = ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
->          if (ret != 0) {
-> @@ -925,8 +927,8 @@ static void kvm_riscv_init_multiext_cfg(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
->  
->      for (i = 0; i < ARRAY_SIZE(kvm_multi_ext_cfgs); i++) {
->          multi_ext_cfg = &kvm_multi_ext_cfgs[i];
-> -        reg_id = kvm_riscv_reg_id(&cpu->env, KVM_REG_RISCV_ISA_EXT,
-> -                                  multi_ext_cfg->kvm_reg_id);
-> +        reg_id = kvm_riscv_reg_id_ulong(&cpu->env, KVM_REG_RISCV_ISA_EXT,
-> +                                        multi_ext_cfg->kvm_reg_id);
->          reg_search = bsearch(&reg_id, reglist->reg, reglist->n,
->                               sizeof(uint64_t), uint64_cmp);
->          if (!reg_search) {
-> -- 
-> 2.41.0
->
 
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+
+On 12/15/23 08:49, Rob Bradford wrote:
+> Hi Daniel,
+> 
+> Thanks for your work on improving the extension handling for vendor
+> CPUs. I have a query regarding the correct way to override properties
+> that are included in the "cpu_options" list as part of the vendor CPU
+> initialisation function.
+> 
+> i.e. these properties:
+> 
+> Property riscv_cpu_options[] = {
+>      DEFINE_PROP_UINT32("pmu-mask", RISCVCPU, cfg.pmu_mask,
+> MAKE_64BIT_MASK(3, 16)),
+>      {.name = "pmu-num", .info = &prop_pmu_num}, /* Deprecated */
+> 
+>      DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
+>      DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
+> 
+>      DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
+>      DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
+> 
+>      DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
+>      DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
+> 
+>      DEFINE_PROP_UINT16("cbom_blocksize", RISCVCPU, cfg.cbom_blocksize,
+> 64),
+>      DEFINE_PROP_UINT16("cboz_blocksize", RISCVCPU, cfg.cboz_blocksize,
+> 64),
+> 
+>      DEFINE_PROP_END_OF_LIST(),
+> };
+> 
+> I think that these values should be specifiable as part of the vendor
+> CPU initialisation method however unfortunately they are overwritten
+> with the default values from the properties as
+> riscv_cpu_add_user_properties which adds the properties is called from
+> the type post_init method which is called after the vendor CPU init
+> function - so any changes to e.g. cfg.vlen are lost.
+
+You're right. And curious you're mentioning this problem now - I have patches
+that fixes it for vlen and elen (due to some work I'm doing with RVV).
+
+I guess I'll just go ahead and do all these riscv_cpu_options the same way.
+I'll see if I can post these fixes next week.
+
+
+Thanks,
+
+Daniel
+
+
+> 
+> I would appreciate hearing your thoughts on how these configuration
+> values can be set for vendor CPUs.
+> 
+> Cheers,
+> 
+> Rob
 
