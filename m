@@ -4,75 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D83ABC35274
-	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Dec 2023 13:29:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18DBDC35274
+	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Dec 2023 15:18:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rE8FK-0005FF-Uv; Fri, 15 Dec 2023 08:28:55 -0500
+	id 1rE9xL-0002c0-TU; Fri, 15 Dec 2023 10:18:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rE8FJ-0005F5-OD
- for qemu-riscv@nongnu.org; Fri, 15 Dec 2023 08:28:53 -0500
-Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1rE9wy-0002LW-R1
+ for qemu-riscv@nongnu.org; Fri, 15 Dec 2023 10:18:08 -0500
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rE8FG-0002yl-KK
- for qemu-riscv@nongnu.org; Fri, 15 Dec 2023 08:28:53 -0500
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-28abb3c5b9cso188928a91.3
- for <qemu-riscv@nongnu.org>; Fri, 15 Dec 2023 05:28:49 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1rE9wx-0006fC-5V
+ for qemu-riscv@nongnu.org; Fri, 15 Dec 2023 10:18:04 -0500
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-40c19f5f822so4293745e9.1
+ for <qemu-riscv@nongnu.org>; Fri, 15 Dec 2023 07:18:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1702646928; x=1703251728; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=fko1lpxnitHM+oOBA41I7J6nnnrbSKtYzwowR+O4tSU=;
- b=NXoA8NdpEM7kjRLwF9Ubr+QTp93BW6A/4AGM6jsTDtalGlCLA/VttmCD1CjEYyQRep
- d0RqlI3K1tNRnqAXGpWmC5G1KhELh2HULbL6xxab6Qo2BW0zF2xWdxR/AcXB4p910+BE
- EfwmXyus6tZGSsNN+1/NT0M0v70zNyXePqVnozSPIntMuz7zVYHtEIepf8AmbKmkmEX6
- saOzfVCajHHH05eqsfyLwb3n1JpFJokcg4wvpQKN1dcALyqSrKHY8CcBhcA91P7s7Qcp
- 0TEQFiolT5aFcmQkYRizsmnHVvX9UZPbT1itUOlElrCPsEGKNQDXEeTOBiqhoWvnb3Kq
- hXxw==
+ d=linaro.org; s=google; t=1702653481; x=1703258281; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:user-agent
+ :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tJMhX72seUmobXUZCtth5wzvy7ZNMZEv4SUoOOPYmWI=;
+ b=Bx21tpicRtMskNtwU5+3VaVEEWYMeUmToBPwotp8m8yymuxcaPsPilxdfQ/zZh6lg/
+ oQJeoyQ8lSIauhW6iOGyAcXKwrapNHLuJ3y7rC7Yl/jMx002FqiB1jxrSYFUbNY3QzJB
+ G7vjSiCxvkIkxDehFexrw6qvpphsJ3FCOb2WvI1LUYqxVSPWQkpokOCe65zF7PcQnJvm
+ wRyTfQ78u1jdZhmyKCmhz8uK3kSlL87YBGbsmjBG55AJ+k2+/Nuk8GJ8mtJGFJ9+c5Kq
+ TuqgGbVKZ2h2NyDYtmUSvpXlHQQFN2TzJdz0zWiuVN75e7oVf/M5X/L0/Ce15hE4Rqez
+ ntEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702646928; x=1703251728;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=fko1lpxnitHM+oOBA41I7J6nnnrbSKtYzwowR+O4tSU=;
- b=hl67mRzj7pIqjFUNLUap6Nbuwi+Q5UebvaIyRfFN7I9+SkL6R6ojtH5MXtjz1syv3F
- vX6dFEG2Hq0QvoNkz6vuP5ZTqnQug9l00dFHynqZ97ECwqQRFHQ72k6SRMeN6eI08i1Q
- E37jLDEer7wtie2i1siCaa4iKq9OHJyZfYVxR6ix0vhEW2//oIb/Z+Rg4aZ8Rt7m86R5
- 6n0jyF32x0qbwI6+VlpAVgZXkEOuVMc+rtUVFbJDYY8nBSr0AA94wORXLWDDV3RmegsR
- BIfFXddFfzi5R80eRddbMaZLtpSE2BHa4ufxE8m8eKRlgoabyFGJN9Pz/nRd+Q0WuxeT
- YGMg==
-X-Gm-Message-State: AOJu0YyDlOuI1kjDT0aENWVY2+CLl0dIYE0a8Fzluo9EIOPPIjmTLqCE
- nXrdvX71tru8cqfWBm1gX+eisYB1LjuJxfS3Y/Q=
-X-Google-Smtp-Source: AGHT+IGL/NYTcu5XtkjcuOjc/+WPm/2fOPyLBPK1DJz5zFbuOaQUJ2QxS4ZCOC/pso8WtdJsajdSmg==
-X-Received: by 2002:a17:90a:aa87:b0:285:b239:f4ed with SMTP id
- l7-20020a17090aaa8700b00285b239f4edmr4879762pjq.34.1702646928547; 
- Fri, 15 Dec 2023 05:28:48 -0800 (PST)
-Received: from [192.168.68.110] ([179.93.21.205])
- by smtp.gmail.com with ESMTPSA id
- e5-20020a170902744500b001d34cc99dc5sm5202367plt.232.2023.12.15.05.28.46
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 15 Dec 2023 05:28:47 -0800 (PST)
-Message-ID: <eb848757-f703-4a02-a5f2-0b9ce5635541@ventanamicro.com>
-Date: Fri, 15 Dec 2023 10:28:44 -0300
+ d=1e100.net; s=20230601; t=1702653481; x=1703258281;
+ h=content-transfer-encoding:mime-version:message-id:date:user-agent
+ :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=tJMhX72seUmobXUZCtth5wzvy7ZNMZEv4SUoOOPYmWI=;
+ b=tIsDZ2+UW87m4n/HuiTwZBN8/YvgcKSoHqPkwsQSW5tiGTq1sQ3SA6K2qy8wzxe71F
+ kboQW5G5TWeRebOv68NrLEa/nhOaxTmXpkWS6bqVRfvnCuiDos44lr5CkVMDel8DxORe
+ JWD9aCsMMCrbcISxVvAmE9ey4AMi+W/y3WVcNz1C6OGp6JuYsiZueoNGuGqmDErJiSPk
+ 2lXAqc3DMEgw4w/Qv1ljTpxywvA7NE8xO+o0Y70j1Vm58DyVIf+27nGzKo6sIkCIs7Am
+ cDEnaVF+u5HTX1AMbXf+Ea2ydfVI5mQ92Ej/GoBgkAysFK/Egxu+wtLxWwxpZOXCismm
+ IcCg==
+X-Gm-Message-State: AOJu0YyFIivcvwk3OwAbYX4bp/DDtO3KVJ1DyYJ6/+Qbr/TOUqSqPwRY
+ EJJaXJUaGIamN1mLxXYzvcZc1w==
+X-Google-Smtp-Source: AGHT+IEDgXX7B7hyDhy2CHyJ609IiUYB9fl1Fr2Xpwx5YAZtEceIiGWvy0HK3Wi0g/3MpzY1G9+NhA==
+X-Received: by 2002:a05:600c:5117:b0:40c:6939:b470 with SMTP id
+ o23-20020a05600c511700b0040c6939b470mr829271wms.53.1702653481507; 
+ Fri, 15 Dec 2023 07:18:01 -0800 (PST)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ z11-20020a5d4d0b000000b003365b2047c5sm391485wrt.114.2023.12.15.07.18.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 Dec 2023 07:18:01 -0800 (PST)
+Received: from draig (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id BC2D15F878;
+ Fri, 15 Dec 2023 15:18:00 +0000 (GMT)
+From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Akihiko Odaki <akihiko.odaki@daynix.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,  Alistair Francis
+ <alistair.francis@wdc.com>,  Bin Meng <bin.meng@windriver.com>,  Weiwei Li
+ <liwei1518@gmail.com>,  Daniel Henrique Barboza
+ <dbarboza@ventanamicro.com>,  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Mikhail Tyutin <m.tyutin@yadro.com>,  Aleksandr Anenkov
+ <a.anenkov@yadro.com>,  Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
+ <philmd@linaro.org>,
+ Fabiano Rosas <farosas@suse.de>,  qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Subject: Re: [PATCH v7 0/4] gdbstub and TCG plugin improvements
+In-Reply-To: <20231213-riscv-v7-0-a760156a337f@daynix.com> (Akihiko Odaki's
+ message of "Wed, 13 Dec 2023 14:19:28 +0900")
+References: <20231213-riscv-v7-0-a760156a337f@daynix.com>
+User-Agent: mu4e 1.11.26; emacs 29.1
+Date: Fri, 15 Dec 2023 15:18:00 +0000
+Message-ID: <87a5qb8pg7.fsf@draig.linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Vendor CPU overrides of non-extension properties
-Content-Language: en-US
-To: Rob Bradford <rbradford@rivosinc.com>
-Cc: qemu-riscv@nongnu.org
-References: <b815ab5fdf33d9b9000c8165d50d000f387a3463.camel@rivosinc.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <b815ab5fdf33d9b9000c8165d50d000f387a3463.camel@rivosinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x102f.google.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x329.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -95,64 +105,19 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Akihiko Odaki <akihiko.odaki@daynix.com> writes:
 
+> This series extracts fixes and refactorings that can be applied
+> independently from "[PATCH v9 00/23] plugins: Allow to read registers".
+>
+> The patch "target/riscv: Move MISA limits to class" was replaced with
+> patch "target/riscv: Move misa_mxl_max to class" since I found instances
+> may have different misa_ext_mask.
 
-On 12/15/23 08:49, Rob Bradford wrote:
-> Hi Daniel,
-> 
-> Thanks for your work on improving the extension handling for vendor
-> CPUs. I have a query regarding the correct way to override properties
-> that are included in the "cpu_options" list as part of the vendor CPU
-> initialisation function.
-> 
-> i.e. these properties:
-> 
-> Property riscv_cpu_options[] = {
->      DEFINE_PROP_UINT32("pmu-mask", RISCVCPU, cfg.pmu_mask,
-> MAKE_64BIT_MASK(3, 16)),
->      {.name = "pmu-num", .info = &prop_pmu_num}, /* Deprecated */
-> 
->      DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
->      DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
-> 
->      DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
->      DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
-> 
->      DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
->      DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
-> 
->      DEFINE_PROP_UINT16("cbom_blocksize", RISCVCPU, cfg.cbom_blocksize,
-> 64),
->      DEFINE_PROP_UINT16("cboz_blocksize", RISCVCPU, cfg.cboz_blocksize,
-> 64),
-> 
->      DEFINE_PROP_END_OF_LIST(),
-> };
-> 
-> I think that these values should be specifiable as part of the vendor
-> CPU initialisation method however unfortunately they are overwritten
-> with the default values from the properties as
-> riscv_cpu_add_user_properties which adds the properties is called from
-> the type post_init method which is called after the vendor CPU init
-> function - so any changes to e.g. cfg.vlen are lost.
+I'm happy to take this through my tree with the register work if the
+remaining patches get some review from the RiscV maintainers.
 
-You're right. And curious you're mentioning this problem now - I have patches
-that fixes it for vlen and elen (due to some work I'm doing with RVV).
-
-I guess I'll just go ahead and do all these riscv_cpu_options the same way.
-I'll see if I can post these fixes next week.
-
-
-Thanks,
-
-Daniel
-
-
-> 
-> I would appreciate hearing your thoughts on how these configuration
-> values can be set for vendor CPUs.
-> 
-> Cheers,
-> 
-> Rob
+--=20
+Alex Benn=C3=A9e
+Virtualisation Tech Lead @ Linaro
 
