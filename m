@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC429C46CCD
-	for <qemu-riscv@archiver.kernel.org>; Sat, 16 Dec 2023 13:53:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43038C46CA2
+	for <qemu-riscv@archiver.kernel.org>; Sat, 16 Dec 2023 13:53:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rEV5I-0001C8-Gy; Sat, 16 Dec 2023 08:52:04 -0500
+	id 1rEV5I-0001C9-Ho; Sat, 16 Dec 2023 08:52:04 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1rEV5G-0001AH-MJ; Sat, 16 Dec 2023 08:52:02 -0500
-Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
+ id 1rEV5E-00017U-VH; Sat, 16 Dec 2023 08:52:00 -0500
+Received: from mail-lj1-x22a.google.com ([2a00:1450:4864:20::22a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1rEV5E-0001Eh-Fc; Sat, 16 Dec 2023 08:52:02 -0500
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a2331caab22so17525966b.3; 
- Sat, 16 Dec 2023 05:51:59 -0800 (PST)
+ id 1rEV5B-0001E4-U4; Sat, 16 Dec 2023 08:52:00 -0500
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-2cc4029dc6eso18168031fa.1; 
+ Sat, 16 Dec 2023 05:51:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702734719; x=1703339519; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1702734716; x=1703339516; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rye7SEwEpHGno4AHmNtYhB26rqF5AqoDV8mljGrNQW0=;
- b=KZLRur/XntCpJzAMJtdjmSb6H5hEvZHXxTODxQHQUsPSLdr9cFAslpCHdILJauAQOB
- SWWV3SH8lJ4iakVlVvokMXBPpJIR1H/uCxeh1gdt6GX0xUbI0q5Cu5sHPkJ9t5DOnI+E
- Mv+8z8+pH9LghyvhrQvbCntP8k5a7qVbn/7Jr565FkK2BYQ0gzUB3HH3TPqJx1xCAI8r
- iCMqLBRgbC7Ge/W8n9O5hiQOZ4K3oWaz0oJfNEQ+s6Cw6qAVCprdNl+4Dpy+nkBbdifc
- FLKEjr2KaFcbJDP9GvSBqL/8hVXSMjXyNBM90bANe8s0ya6PhUYsnsv5t+J21T/Elrc/
- kaDw==
+ bh=oN1psNxcDgJFhm/E3XNz0g2xCbvEoEyEGFOivuneCyU=;
+ b=An6C3Vd9uHz9L7MgsPVOguo4hulHqZQye1vkkqGhVNdw+SufcPogfOdygkrmLHL4qP
+ jv4Liw/lOOqo5u/AJHG15tZY3VQH5YKNWZJkn6i6AyUUCHo3u9AnS3nRXeEnrcvmPYrG
+ BjDy1Q1YSlZrOqPYS37fNowO5aDkgNS3ipnES1Sc+2HF8tKqWUsnTq3FnlVtViNlKdIM
+ H22Kt8SJONdIZaok1hUhElpwDKmyL66PmzWJyrGmJQDFIh5Qtu5zhGMIkIH4hhw5nTBH
+ MuSnyUzR7qm9K8KnnYM4j+7IYzqfW7UbryT+wF7iA15BEiVhhS0pSD396jwUIr3uQ0Y9
+ yFLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702734719; x=1703339519;
+ d=1e100.net; s=20230601; t=1702734716; x=1703339516;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rye7SEwEpHGno4AHmNtYhB26rqF5AqoDV8mljGrNQW0=;
- b=E5j7SOUOAZ/gX8sw/25iJmM7mToNki8sZuEjCL2H3yY6mrbf0T4b8/e5rqva8dGcNJ
- HY68zaAurYyeok734gGHPg3jBe1+6UgeicNXQB6bVuICjT5QZOMzczbhoJVvIkEafniu
- vtutaVU+NEmx+knuidZs7TTn1qqB4pfXCIqDb74s+gAslebuZSSQVbe1rDf3LkYLOOzI
- OhZcSsTK5Xvb3WFPEffeJDlpz771+8DA2lBqghGPwSU3chlrG3ScwebFiLNuvxpFYje7
- D3zBIcpz+cWIi/8ElHv7JFs7pTbFouL4IwJK9jQxZAlBOI4Yq+jzZM2hQODc/zN3i1Vz
- mI1w==
-X-Gm-Message-State: AOJu0YyzqoaXhWsN3aycIKxYY4ifn+q8Aknrp6os7tXqVCO1Mun8Z3b0
- tzXjiCaKISQC14rMRQOaW9pCSBqbE6f6zA==
-X-Google-Smtp-Source: AGHT+IHiGTCJNPe6i8tlJh/ZD1mac23zQ3jjidLcsPBKQfSG5S3c6FiPelEiM+hfstYTh2MY6T9QIQ==
-X-Received: by 2002:a17:906:2984:b0:a17:d7ea:f59e with SMTP id
- x4-20020a170906298400b00a17d7eaf59emr6064454eje.48.1702734718811; 
- Sat, 16 Dec 2023 05:51:58 -0800 (PST)
+ bh=oN1psNxcDgJFhm/E3XNz0g2xCbvEoEyEGFOivuneCyU=;
+ b=C/37VWJx428xj0wRNWpw0yde4VKPllywZezj+Ql0pbRrWnkdrQ1APw5ZChh0vYdWTV
+ 01qjHUb+8ZdYzuEFCl3MiwIA+9DKjCCvaBN3/If+Ie0ZFgr11Om0F16NVCIsalAqpzCs
+ e/+1wu3RTbhFndRj+XvE47x8NCB/99lafwAi/ze/MVCcULXVWbRgAgfWUn6ROdl9YGWX
+ Ajs7vZoqEssaQF93vWQHja2j/hzIrwqp1fb6UVEo3gPztJarXnLv+QyeMyONDFUEvQdP
+ KGu57j1BX589nLmIRlfjLmBcLnh/76HlLaCHW0NqcFEKvgU6sYtTkKR9gyxcXGQGqsay
+ 8mSg==
+X-Gm-Message-State: AOJu0Ywm8LZCaGmqP+4QOj5zwg66wRTC7XJTSv4UHswkNeuNgWWkkxVD
+ MjwT0cpZ2JXQPS4V0HTMVis=
+X-Google-Smtp-Source: AGHT+IELfMM57A8wFw/eCznkK4zjdAM1LsIB7joZqhQ498V2gwdblEUN1D3ezcy2hQOAB4r/n4LURg==
+X-Received: by 2002:a05:6512:690:b0:50b:f4fc:6b79 with SMTP id
+ t16-20020a056512069000b0050bf4fc6b79mr7188742lfe.84.1702734715783; 
+ Sat, 16 Dec 2023 05:51:55 -0800 (PST)
 Received: from freya.midgard (broadband-188-255-126-251.ip.moscow.rt.ru.
  [188.255.126.251]) by smtp.gmail.com with ESMTPSA id
- vw12-20020a170907a70c00b00a1c904675cfsm11819595ejc.29.2023.12.16.05.51.57
+ vw12-20020a170907a70c00b00a1c904675cfsm11819595ejc.29.2023.12.16.05.51.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 16 Dec 2023 05:51:58 -0800 (PST)
+ Sat, 16 Dec 2023 05:51:55 -0800 (PST)
 From: Alexey Baturo <baturo.alexey@gmail.com>
 X-Google-Original-From: Alexey Baturo <me@deliversmonkey.space>
 To: 
@@ -63,17 +63,17 @@ Cc: zhiwei_liu@linux.alibaba.com, baturo.alexey@gmail.com,
  richard.henderson@linaro.org, palmer@dabbelt.com, Alistair.Francis@wdc.com,
  sagark@eecs.berkeley.edu, kbastian@mail.uni-paderborn.de,
  qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Subject: [RFC PATCH v2 6/6] target/riscv: Enable updates for pointer masking
- variables and thus enable pointer masking extension
-Date: Sat, 16 Dec 2023 13:51:36 +0000
-Message-Id: <20231216135136.1597456-7-me@deliversmonkey.space>
+Subject: [RFC PATCH v2 4/6] target/riscv: Add functions to calculate current
+ number of masked bits for pointer masking
+Date: Sat, 16 Dec 2023 13:51:34 +0000
+Message-Id: <20231216135136.1597456-5-me@deliversmonkey.space>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231216135136.1597456-1-me@deliversmonkey.space>
 References: <20231216135136.1597456-1-me@deliversmonkey.space>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
- envelope-from=baturo.alexey@gmail.com; helo=mail-ej1-x62f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::22a;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-lj1-x22a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,110 +100,81 @@ From: Alexey Baturo <baturo.alexey@gmail.com>
 
 Signed-off-by: Alexey Baturo <baturo.alexey@gmail.com>
 ---
- target/riscv/cpu.c        | 9 +++++++++
- target/riscv/cpu_helper.c | 1 +
- target/riscv/csr.c        | 4 ++++
- target/riscv/machine.c    | 1 +
- target/riscv/pmp.c        | 1 +
- 5 files changed, 16 insertions(+)
+ target/riscv/cpu.h        |  2 ++
+ target/riscv/cpu_helper.c | 49 +++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 51 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 1e6571ce99..1d20e6a978 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -153,6 +153,9 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
-     ISA_EXT_DATA_ENTRY(svnapot, PRIV_VERSION_1_12_0, ext_svnapot),
-     ISA_EXT_DATA_ENTRY(svpbmt, PRIV_VERSION_1_12_0, ext_svpbmt),
-+    ISA_EXT_DATA_ENTRY(ssnpm, PRIV_VERSION_1_12_0, ext_ssnpm),
-+    ISA_EXT_DATA_ENTRY(smnpm, PRIV_VERSION_1_12_0, ext_smnpm),
-+    ISA_EXT_DATA_ENTRY(smmpm, PRIV_VERSION_1_12_0, ext_smmpm),
-     ISA_EXT_DATA_ENTRY(xtheadba, PRIV_VERSION_1_11_0, ext_xtheadba),
-     ISA_EXT_DATA_ENTRY(xtheadbb, PRIV_VERSION_1_11_0, ext_xtheadbb),
-     ISA_EXT_DATA_ENTRY(xtheadbs, PRIV_VERSION_1_11_0, ext_xtheadbs),
-@@ -897,6 +900,7 @@ static void riscv_cpu_reset_hold(Object *obj)
-     pmp_unlock_entries(env);
- #endif
-     env->xl = riscv_cpu_mxl(env);
-+    riscv_cpu_update_mask(env);
-     cs->exception_index = RISCV_EXCP_NONE;
-     env->load_res = -1;
-     set_default_nan_mode(1, &env->fp_status);
-@@ -1337,6 +1341,11 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 2099168950..9a8e5bc022 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -679,6 +679,8 @@ static inline uint32_t vext_get_vlmax(RISCVCPU *cpu, target_ulong vtype)
+ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+                           uint64_t *cs_base, uint32_t *pflags);
  
-     MULTI_EXT_CFG_BOOL("zmmul", ext_zmmul, false),
- 
-+    /* Zjpm v0.8 extensions */
-+    MULTI_EXT_CFG_BOOL("ssnpm", ext_ssnpm, false),
-+    MULTI_EXT_CFG_BOOL("smnpm", ext_smnpm, false),
-+    MULTI_EXT_CFG_BOOL("smmpm", ext_smmpm, false),
++void riscv_cpu_update_mask(CPURISCVState *env);
 +
-     MULTI_EXT_CFG_BOOL("zca", ext_zca, false),
-     MULTI_EXT_CFG_BOOL("zcb", ext_zcb, false),
-     MULTI_EXT_CFG_BOOL("zcd", ext_zcd, false),
+ RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
+                            target_ulong *ret_value,
+                            target_ulong new_value, target_ulong write_mask);
 diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 8e2751fef4..c2bc737dd7 100644
+index 79cddbd930..8e2751fef4 100644
 --- a/target/riscv/cpu_helper.c
 +++ b/target/riscv/cpu_helper.c
-@@ -723,6 +723,7 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
-     /* tlb_flush is unnecessary as mode is contained in mmu_idx */
-     env->priv = newpriv;
-     env->xl = cpu_recompute_xl(env);
-+    riscv_cpu_update_mask(env);
- 
-     /*
-      * Clear the load reservation - otherwise a reservation placed in one
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index a67ba30494..5336d91dd8 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -1348,6 +1348,7 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
-         env->xl = cpu_recompute_xl(env);
-     }
- 
-+    riscv_cpu_update_mask(env);
-     return RISCV_EXCP_NONE;
+@@ -143,6 +143,55 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+     *pflags = flags;
  }
  
-@@ -2039,6 +2040,7 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
-     }
-     env->menvcfg = (env->menvcfg & ~mask) | (val & mask);
- 
-+    riscv_cpu_update_mask(env);
-     return RISCV_EXCP_NONE;
- }
- 
-@@ -2093,6 +2095,8 @@ static RISCVException write_senvcfg(CPURISCVState *env, int csrno,
-     }
- 
-     env->senvcfg = (env->senvcfg & ~mask) | (val & mask);
++void riscv_cpu_update_mask(CPURISCVState *env)
++{
++#ifndef CONFIG_USER_ONLY
++    int priv_mode = cpu_address_mode(env);
++    int pmm = 0;
++    int pmlen = 0;
++    int satp_mode = 0;
++    if (riscv_cpu_mxl(env) == MXL_RV32) {
++        satp_mode = get_field(env->satp, SATP32_MODE);
++    } else {
++        satp_mode = get_field(env->satp, SATP64_MODE);
++    }
++    /* Get current PMM field */
++    switch (priv_mode) {
++    case PRV_M:
++        pmm = riscv_cpu_cfg(env)->ext_smmpm ?
++                  get_field(env->mseccfg, MSECCFG_PMM) : PMM_FIELD_DISABLED;
++        break;
++    case PRV_S:
++        pmm = riscv_cpu_cfg(env)->ext_smnpm ?
++                  get_field(env->menvcfg, MENVCFG_PMM) : PMM_FIELD_DISABLED;
++        break;
++    case PRV_U:
++        pmm = riscv_cpu_cfg(env)->ext_ssnpm ?
++                  get_field(env->senvcfg, SENVCFG_PMM) : PMM_FIELD_DISABLED;
++        break;
++    default:
++        g_assert_not_reached();
++    }
++    /* Get pmlen from PMM field */
++    switch (pmm) {
++    case PMM_FIELD_DISABLED:
++        pmlen = 0;
++        break;
++    case PMM_FIELD_PMLEN7:
++        pmlen = 7;
++        break;
++    case PMM_FIELD_PMLEN16:
++        pmlen = 16;
++        break;
++    default:
++        g_assert_not_reached();
++    }
++    /* in bare mode address is not sign extended */
++    env->pm_signext = (satp_mode != VM_1_10_MBARE);
++    env->pm_pmlen = pmlen;
++#endif
++}
 +
-+    riscv_cpu_update_mask(env);
-     return RISCV_EXCP_NONE;
- }
- 
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index 5e9c5b43ab..41ad30c8e1 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -261,6 +261,7 @@ static int riscv_cpu_post_load(void *opaque, int version_id)
-     CPURISCVState *env = &cpu->env;
- 
-     env->xl = cpu_recompute_xl(env);
-+    riscv_cpu_update_mask(env);
-     return 0;
- }
- 
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 893ccd58d8..2cc08e58c5 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -607,6 +607,7 @@ void mseccfg_csr_write(CPURISCVState *env, target_ulong val)
-     }
- 
-     env->mseccfg = val;
-+    riscv_cpu_update_mask(env);
- }
+ #ifndef CONFIG_USER_ONLY
  
  /*
 -- 
