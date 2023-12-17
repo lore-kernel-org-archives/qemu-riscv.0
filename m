@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCA23C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Sun, 17 Dec 2023 22:57:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52C9CC3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Sun, 17 Dec 2023 23:10:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rF04T-0001Ld-3n; Sun, 17 Dec 2023 17:57:17 -0500
+	id 1rF0GL-0004Ug-WB; Sun, 17 Dec 2023 18:09:34 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rF04O-0001HQ-Sk; Sun, 17 Dec 2023 17:57:12 -0500
-Received: from mail-oo1-xc30.google.com ([2607:f8b0:4864:20::c30])
+ id 1rF0GJ-0004Tx-Ug; Sun, 17 Dec 2023 18:09:32 -0500
+Received: from mail-ua1-x92d.google.com ([2607:f8b0:4864:20::92d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rF04G-0008Ln-Da; Sun, 17 Dec 2023 17:57:12 -0500
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-589d4033e84so1815515eaf.1; 
- Sun, 17 Dec 2023 14:57:03 -0800 (PST)
+ id 1rF0GI-0003fi-Aw; Sun, 17 Dec 2023 18:09:31 -0500
+Received: by mail-ua1-x92d.google.com with SMTP id
+ a1e0cc1a2514c-7cafdcaf187so659264241.2; 
+ Sun, 17 Dec 2023 15:09:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702853823; x=1703458623; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1702854569; x=1703459369; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=no3OST4kml0RbWigchwmxf3Pnq0GT2ZmHOMOPeKy2/w=;
- b=g7+binOAScfb9a+SEAaPeFmO0PMAIcVWSsMVFRogVNSmPhOcX+qUZSHYU7GGbkxa5E
- K9zy0cLPhLHZOWIPRn0/+DpsEY6/ChxBQmUvaOioRnzAaiFI5upJ58F6bjjKqYg6wc6z
- t74zIC6FivMVMYDqdtb8HxA7GL7OkN87aSC5Oeo/GCwUP/EM1G9cbMB7KrvMWfGwX40m
- GLNsGkSaNm6DcDrX69b8Ukp1HKFAHu6U/qUmoct0ohogrVmNOFvve5EAcxKknl0u6/p2
- EvyegnE6TmUuAnsutl+XNyJqfrkAYqmsT5NbLXAiOquvLd3nVQpFZsvgL/9c06ccRsDe
- gK5w==
+ bh=pes4guvSLvMkNWTPWDJcTMLlnjDOjEl8vqGsUVlHga8=;
+ b=R7dHFsB6zLiwDEfFxp7GR7bwH5AahFO8XVlYv15NtyWEOuwzhfyhenzpoRYSsHs6PN
+ 2I7JfQ+rNCE6aJD0ushsXynDhBEmGkBE2OwRb54SGD/jhQeJQc9stsLRIlZRNN0VwC/i
+ KmtddusEMZec94YZ8Iga0IEyfT6scbk6TzXekV8dNZVX7sYE9j3VHosPg618FMBTLbLL
+ WrxxMujxblR6R0GfINFpzWyAO7VeGj/uv2dlN8zFcp+i4fMhpkl0D2aByms1REswqV3e
+ 2N9VhcRulbxGhiRMLom+GJLsz8LtSfPVXidzwkb9qT5FePAstD6EAInt9xmSNO8Hd+MQ
+ upPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702853823; x=1703458623;
+ d=1e100.net; s=20230601; t=1702854569; x=1703459369;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=no3OST4kml0RbWigchwmxf3Pnq0GT2ZmHOMOPeKy2/w=;
- b=OcNZYNIKmFNTiko5tmv7jj7Ggb0C9y37n8JQb2QzL8o3O/e91Xzz10JsbZb7Nex78x
- p05DfciGrm9w1rbg3lomBi/wvhs22eGHu2VyrRptrgchtBulkJv77fHNLpkTtgBoqWQy
- eF7N2ESJAKeacEhjs2la+cp5d6TwZUKNmeJ2xS73Zal7dQTMNtmb12OdbbjAPJs6Ba25
- ZrHbFzEsEP0Jpq3JAgC1HlXrq3xR4Thd/mLlIgrhpGlGdlZ7vMtkeeOHsonoT+C/CPaJ
- Eutes0rvzP5o17aWf+p6xkJano/F/hrxjR70L0KoXNDNtTNYBZ8aX8p/IyApAAGoAo1E
- V/Vg==
-X-Gm-Message-State: AOJu0YwrIUVfIRkYmiwO1DRIb+4MBr6KVuA80ezcPQBwqsO5HwCy6uhk
- CupshUlvs24WW3hnyoca1k/h+o7J331a1pN/bREsaf4O314=
-X-Google-Smtp-Source: AGHT+IEPSImu5QCc62X5zmFzezYenUBRJoJnJIbX73eFaDa5bItDQBRGSHlZKcRp93aeWwUbiytr3FwGLfcOBXMjrvQ=
-X-Received: by 2002:aca:210e:0:b0:3b8:b063:a1db with SMTP id
- 14-20020aca210e000000b003b8b063a1dbmr16184232oiz.101.1702853822697; Sun, 17
- Dec 2023 14:57:02 -0800 (PST)
+ bh=pes4guvSLvMkNWTPWDJcTMLlnjDOjEl8vqGsUVlHga8=;
+ b=dQo3kCblgg1M+XI1sSRb31YAlAqhVbSa4Xxsef4M8ihot/XrfZKE0dCzGb5O9Lf+f8
+ ZzgiGrQes3EQzHHuL3rrv+K+6xOg3+fzRR0hCedIRiPTzCINZOdGdCCAnFUFfLPCYB7h
+ Lfa/DmE5/Y10xFUvSbmQcX3Whpf28YoAyNt26XUlCk4dIvclFGF9q7hO2basw8CAb3IQ
+ 5EMXZWKLdh7veWKPb8mOsbpVsj6wHRXME4jNeUP8C9uMeHCpew7i+lxOZjtF4UK99PpN
+ /eQ7zZNvbCzhswUAeKKaHgDwy5ly5fNi4jOAYDeIWxC5QMlaO7BKTAAECLFrqNrIuiT8
+ bz+w==
+X-Gm-Message-State: AOJu0YzTGomg+yramPFvPsMC6fNNHXT8GOV5Uxk+yAuGF/yQZQmJQz7L
+ uk/N7kfcb/asenmGo6hnz9Q3w/Ypps9O6EsgcXU=
+X-Google-Smtp-Source: AGHT+IELVehbAOpH7jqSi31bELbQF7v39NwKD/c92WtcRaeo7anh6H+gpXsu7zDSggSOyYkf5SKveqwS2epWt8qVkHQ=
+X-Received: by 2002:a05:6102:3ed6:b0:464:784f:8e3d with SMTP id
+ n22-20020a0561023ed600b00464784f8e3dmr11453513vsv.31.1702854568496; Sun, 17
+ Dec 2023 15:09:28 -0800 (PST)
 MIME-Version: 1.0
-References: <20231123091214.20312-1-ivan.klokov@syntacore.com>
-In-Reply-To: <20231123091214.20312-1-ivan.klokov@syntacore.com>
+References: <20231211170732.2541368-1-dbarboza@ventanamicro.com>
+In-Reply-To: <20231211170732.2541368-1-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 18 Dec 2023 08:56:36 +1000
-Message-ID: <CAKmqyKO1TLcGYRRNstQytaStnJzp10K7oP7mwZ5kBY6r=dUKOQ@mail.gmail.com>
-Subject: Re: [PATCH 1/1] target/riscv/pmp: Use hwaddr instead of target_ulong
- for RV32
-To: Ivan Klokov <ivan.klokov@syntacore.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com, 
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
+Date: Mon, 18 Dec 2023 09:09:02 +1000
+Message-ID: <CAKmqyKP=9P5KrcwmxR-G9MVj=VYvcOwRbRi5dmKZFe+0EHSLJw@mail.gmail.com>
+Subject: Re: [PATCH for-9.0] target/riscv/cpu.c: fix machine IDs getters
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, ajones@ventanamicro.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c30;
- envelope-from=alistair23@gmail.com; helo=mail-oo1-xc30.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92d;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92d.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -90,133 +89,96 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Nov 23, 2023 at 7:13=E2=80=AFPM Ivan Klokov <ivan.klokov@syntacore.=
-com> wrote:
+On Tue, Dec 12, 2023 at 3:08=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
 >
-> The Sv32 page-based virtual-memory scheme described in RISCV privileged
-> spec Section 5.3 supports 34-bit physical addresses for RV32, so the
-> PMP scheme must support addresses wider than XLEN for RV32. However,
-> PMP address register format is still 32 bit wide.
+> mvendorid is an uint32 property, mimpid/marchid are uint64 properties.
+> But their getters are returning bools. The reason this went under the
+> radar for this long is because we have no code using the getters.
 >
-> Signed-off-by: Ivan Klokov <ivan.klokov@syntacore.com>
+> The problem can be seem via the 'qom-get' API though. Launching QEMU
+> with the 'veyron-v1' CPU, a model with:
+>
+> VEYRON_V1_MVENDORID: 0x61f (1567)
+> VEYRON_V1_MIMPID: 0x111 (273)
+> VEYRON_V1_MARCHID: 0x8000000000010000 (9223372036854841344)
+>
+> This is what the API returns when retrieving these properties:
+>
+> (qemu) qom-get /machine/soc0/harts[0] mvendorid
+> true
+> (qemu) qom-get /machine/soc0/harts[0] mimpid
+> true
+> (qemu) qom-get /machine/soc0/harts[0] marchid
+> true
+>
+> After this patch:
+>
+> (qemu) qom-get /machine/soc0/harts[0] mvendorid
+> 1567
+> (qemu) qom-get /machine/soc0/harts[0] mimpid
+> 273
+> (qemu) qom-get /machine/soc0/harts[0] marchid
+> 9223372036854841344
+>
+> Fixes: 1e34150045 ("target/riscv/cpu.c: restrict 'mvendorid' value")
+> Fixes: a1863ad368 ("target/riscv/cpu.c: restrict 'mimpid' value")
+> Fixes: d6a427e2c0 ("target/riscv/cpu.c: restrict 'marchid' value")
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/pmp.c | 26 ++++++++++++--------------
->  target/riscv/pmp.h |  8 ++++----
->  2 files changed, 16 insertions(+), 18 deletions(-)
+>  target/riscv/cpu.c | 12 ++++++------
+>  1 file changed, 6 insertions(+), 6 deletions(-)
 >
-> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index 162e88a90a..dff9512c3f 100644
-> --- a/target/riscv/pmp.c
-> +++ b/target/riscv/pmp.c
-> @@ -150,8 +150,7 @@ void pmp_unlock_entries(CPURISCVState *env)
->      }
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 83c7c0cf07..70bf10aa7c 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1573,9 +1573,9 @@ static void cpu_set_mvendorid(Object *obj, Visitor =
+*v, const char *name,
+>  static void cpu_get_mvendorid(Object *obj, Visitor *v, const char *name,
+>                                void *opaque, Error **errp)
+>  {
+> -    bool value =3D RISCV_CPU(obj)->cfg.mvendorid;
+> +    uint32_t value =3D RISCV_CPU(obj)->cfg.mvendorid;
+>
+> -    visit_type_bool(v, name, &value, errp);
+> +    visit_type_uint32(v, name, &value, errp);
 >  }
 >
-> -static void pmp_decode_napot(target_ulong a, target_ulong *sa,
-> -                             target_ulong *ea)
-> +static void pmp_decode_napot(hwaddr a, hwaddr *sa, hwaddr *ea)
+>  static void cpu_set_mimpid(Object *obj, Visitor *v, const char *name,
+> @@ -1602,9 +1602,9 @@ static void cpu_set_mimpid(Object *obj, Visitor *v,=
+ const char *name,
+>  static void cpu_get_mimpid(Object *obj, Visitor *v, const char *name,
+>                             void *opaque, Error **errp)
 >  {
->      /*
->       * aaaa...aaa0   8-byte NAPOT range
-> @@ -173,8 +172,8 @@ void pmp_update_rule_addr(CPURISCVState *env, uint32_=
-t pmp_index)
->      uint8_t this_cfg =3D env->pmp_state.pmp[pmp_index].cfg_reg;
->      target_ulong this_addr =3D env->pmp_state.pmp[pmp_index].addr_reg;
->      target_ulong prev_addr =3D 0u;
-> -    target_ulong sa =3D 0u;
-> -    target_ulong ea =3D 0u;
-> +    hwaddr sa =3D 0u;
-> +    hwaddr ea =3D 0u;
+> -    bool value =3D RISCV_CPU(obj)->cfg.mimpid;
+> +    uint64_t value =3D RISCV_CPU(obj)->cfg.mimpid;
 >
->      if (pmp_index >=3D 1u) {
->          prev_addr =3D env->pmp_state.pmp[pmp_index - 1].addr_reg;
-> @@ -227,8 +226,7 @@ void pmp_update_rule_nums(CPURISCVState *env)
->      }
+> -    visit_type_bool(v, name, &value, errp);
+> +    visit_type_uint64(v, name, &value, errp);
 >  }
 >
-> -static int pmp_is_in_range(CPURISCVState *env, int pmp_index,
-> -                           target_ulong addr)
-> +static int pmp_is_in_range(CPURISCVState *env, int pmp_index, hwaddr add=
-r)
+>  static void cpu_set_marchid(Object *obj, Visitor *v, const char *name,
+> @@ -1652,9 +1652,9 @@ static void cpu_set_marchid(Object *obj, Visitor *v=
+, const char *name,
+>  static void cpu_get_marchid(Object *obj, Visitor *v, const char *name,
+>                             void *opaque, Error **errp)
 >  {
->      int result =3D 0;
+> -    bool value =3D RISCV_CPU(obj)->cfg.marchid;
+> +    uint64_t value =3D RISCV_CPU(obj)->cfg.marchid;
 >
-> @@ -305,14 +303,14 @@ static bool pmp_hart_has_privs_default(CPURISCVStat=
-e *env, pmp_priv_t privs,
->   * Return true if a pmp rule match or default match
->   * Return false if no match
->   */
-> -bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-> +bool pmp_hart_has_privs(CPURISCVState *env, hwaddr addr,
->                          target_ulong size, pmp_priv_t privs,
->                          pmp_priv_t *allowed_privs, target_ulong mode)
->  {
->      int i =3D 0;
->      int pmp_size =3D 0;
-> -    target_ulong s =3D 0;
-> -    target_ulong e =3D 0;
-> +    hwaddr s =3D 0;
-> +    hwaddr e =3D 0;
+> -    visit_type_bool(v, name, &value, errp);
+> +    visit_type_uint64(v, name, &value, errp);
+>  }
 >
->      /* Short cut if no rules */
->      if (0 =3D=3D pmp_get_num_rules(env)) {
-> @@ -624,12 +622,12 @@ target_ulong mseccfg_csr_read(CPURISCVState *env)
->   * To avoid this we return a size of 1 (which means no caching) if the P=
-MP
->   * region only covers partial of the TLB page.
->   */
-> -target_ulong pmp_get_tlb_size(CPURISCVState *env, target_ulong addr)
-> +target_ulong pmp_get_tlb_size(CPURISCVState *env, hwaddr addr)
->  {
-> -    target_ulong pmp_sa;
-> -    target_ulong pmp_ea;
-> -    target_ulong tlb_sa =3D addr & ~(TARGET_PAGE_SIZE - 1);
-> -    target_ulong tlb_ea =3D tlb_sa + TARGET_PAGE_SIZE - 1;
-> +    hwaddr pmp_sa;
-> +    hwaddr pmp_ea;
-> +    hwaddr tlb_sa =3D addr & ~(TARGET_PAGE_SIZE - 1);
-> +    hwaddr tlb_ea =3D tlb_sa + TARGET_PAGE_SIZE - 1;
->      int i;
->
->      /*
-> diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
-> index 9af8614cd4..f5c10ce85c 100644
-> --- a/target/riscv/pmp.h
-> +++ b/target/riscv/pmp.h
-> @@ -53,8 +53,8 @@ typedef struct {
->  } pmp_entry_t;
->
->  typedef struct {
-> -    target_ulong sa;
-> -    target_ulong ea;
-> +    hwaddr sa;
-> +    hwaddr ea;
->  } pmp_addr_t;
->
->  typedef struct {
-> @@ -73,11 +73,11 @@ target_ulong mseccfg_csr_read(CPURISCVState *env);
->  void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
->                         target_ulong val);
->  target_ulong pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index);
-> -bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-> +bool pmp_hart_has_privs(CPURISCVState *env, hwaddr addr,
->                          target_ulong size, pmp_priv_t privs,
->                          pmp_priv_t *allowed_privs,
->                          target_ulong mode);
-> -target_ulong pmp_get_tlb_size(CPURISCVState *env, target_ulong addr);
-> +target_ulong pmp_get_tlb_size(CPURISCVState *env, hwaddr addr);
->  void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index);
->  void pmp_update_rule_nums(CPURISCVState *env);
->  uint32_t pmp_get_num_rules(CPURISCVState *env);
+>  static void riscv_cpu_class_init(ObjectClass *c, void *data)
 > --
-> 2.34.1
+> 2.41.0
 >
 >
 
