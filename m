@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A361C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Sun, 17 Dec 2023 22:47:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 028A9C3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Sun, 17 Dec 2023 22:55:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rEzua-00071a-Ih; Sun, 17 Dec 2023 17:47:04 -0500
+	id 1rF02I-0000TT-MS; Sun, 17 Dec 2023 17:55:02 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rEzuZ-00071M-4d; Sun, 17 Dec 2023 17:47:03 -0500
-Received: from mail-ot1-x332.google.com ([2607:f8b0:4864:20::332])
+ id 1rF02H-0000Sj-17; Sun, 17 Dec 2023 17:55:01 -0500
+Received: from mail-ua1-x932.google.com ([2607:f8b0:4864:20::932])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rEzuX-0006AK-NJ; Sun, 17 Dec 2023 17:47:02 -0500
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-6d9dc789f23so2023430a34.3; 
- Sun, 17 Dec 2023 14:47:00 -0800 (PST)
+ id 1rF02F-0007uY-Jk; Sun, 17 Dec 2023 17:55:00 -0500
+Received: by mail-ua1-x932.google.com with SMTP id
+ a1e0cc1a2514c-7cad62b0a68so335939241.1; 
+ Sun, 17 Dec 2023 14:54:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702853219; x=1703458019; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1702853698; x=1703458498; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=P0civUcNhg1i3NeXBmXNu1GbvVR6uCcA+M2Q5iqg0vU=;
- b=C6BgPGXhDAoVmVbGY3HyWQ96+EmiNVp9G5SfAGGLnQVtdjKUv+tC/ZtSKb9Kuy1fri
- tKRGEv/VvYawu3p7tcYwsDT5lvSv1n0b8ZNzvNHCxDIMRw9FV2/TxlBx0kM+SDDEzm2I
- kKpTup+rd/gc7mWoksEqa8z3CRHUgXLzn1MZ5Pig6ZEQiCYRGzsS43/IaWtrMatJs23m
- Pjykfepeo5LJdTuIvXOzR4f8klXOLBe08+QuXCivGyRDKDr8CUn+ZITb17SysV7o8vws
- S3MMQBulxzz21q3n614Z5Bp+9xkMmkLYmUrpA3ofvo/h8xPpwSyo9jVHPVw2Vr9Ztrlf
- dwTw==
+ bh=q8nkBHdl08VZ0achz1wa1UTOO5ut7QycYK9mSo2h8u0=;
+ b=MNJVdXAfIN7No1oJOYquuYNR0FHjKjJ7n5/kv1r4qTTEqAraujuKiOhw0FDex6QUd1
+ UsE3i+0/jmEpCuybiQe3QwfCLneh2xoGwsEfH6CwSucGHU3qb9THOq1eDE83j1LoKasq
+ pu3jDanjHa2atO+i62wcUjUbBaEMoM/XAo9LcuSAmbbt5NBHEtcI8K1XAjPAQ9Zal4tD
+ sYXf8XvrsDoKwV1DymVhudLytq7YpX/7iNB5rxksvZgMOnPhFYQEuzKKE/Z4a7j6Ss2S
+ Ln+wBULfDrFGkZ2fnyuLfLRapTaxR1J0PsLFATRLL7xInF6Sbwy78IIEh10PyjwGzvV3
+ DKKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702853219; x=1703458019;
+ d=1e100.net; s=20230601; t=1702853698; x=1703458498;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=P0civUcNhg1i3NeXBmXNu1GbvVR6uCcA+M2Q5iqg0vU=;
- b=EmZdEEfsGX3YAYpcfjCuPHaRfuuuxdRhhMEXJbwgOxIxlp+zkoMA1O0KpcmQB9LIA3
- ZECqDHgyxRzlAxCkLYoig8/qsCRNm2DWf2dFnSrS+q6Qk9ycIuaJkyO+YRW4PETJjRr9
- EdQWNiaJdGFQndXD3tR1phGi1++opH8PEfNH5k+QHzipixrQGDzbO991ctfoOGnHXv7K
- OBpR5Kjz2tYNWnE+Fz1BY/NmA9kPt+qZ6QKVFiVz2IquLRhhDT+zm1EII7ZS1vcVREOs
- m1Md6Glx/qq9ejXf+7R8soVBplzjKnMAl+w5Ji9l0pW/QZoVJjFdJDC7FKiRKCe8ESXl
- I0NQ==
-X-Gm-Message-State: AOJu0Yw2EHfV3UMGWtUfmE+qnm7JGYY9ZSxFKscPEYvYAQTwuiQdhrOO
- 5aNklTv+/7hwzWrzcwIu6lEPywtYie6HJgmZFPc=
-X-Google-Smtp-Source: AGHT+IE5dkDd5lFqkuoAYDzveiYtAmWUkg/3UT0l9TzWzqiDLdKcCjg3YgHBMciuWux0+xQhzD6IhKMUIdnQ5fFefHs=
-X-Received: by 2002:a05:6870:70a4:b0:1fb:75a:c42a with SMTP id
- v36-20020a05687070a400b001fb075ac42amr14351335oae.83.1702853219236; Sun, 17
- Dec 2023 14:46:59 -0800 (PST)
+ bh=q8nkBHdl08VZ0achz1wa1UTOO5ut7QycYK9mSo2h8u0=;
+ b=jl+1kdxo8TpttUzctkMURP4TlBLmtVDuzyBPO+pnONnzapp+TJ5+bBHdwhEFJUEhDf
+ EdOcQxeGazSSROLxIb9HitM8ZXQ3J/XMXP03AfSFC8o2O4gMiJgIWG7CfBRKXBjWeomc
+ HX2z+LWttCWQF7NcWA/DXPALvmT0yWyrjThHRXxsqlRM7AlNO6SWY/UCGw3SShLO/Yw0
+ B6w0+dfXEBlu1PVYFJgh6/hMNHr44yO6V7pP6pqypEr9GCHQlIQ1whcwvfUs7LR0d8rT
+ perMjRsH99V9FBO0hnF4Djd3Qatp9CDd1ptUoJWWSo+rWc7jmdp8BqZmoOwQQ0FFbuU9
+ dENg==
+X-Gm-Message-State: AOJu0YylzUq/coKZSBtA3+EWI9iYrz0wUZN+4N1ieE6EUDW2bMyhY6c/
+ gov26p/IUN1/I6u0JO405SgQLLQ4Chd+l4AoIAk=
+X-Google-Smtp-Source: AGHT+IEPvF6Y036n7uf25dN9CsXiutTPM83YZ9/9MblioBQeJO6+l4qp8Si50MYwXhQA7n84qZ46Q/eGjNuhquSWLWo=
+X-Received: by 2002:a05:6102:b13:b0:464:5162:d22b with SMTP id
+ b19-20020a0561020b1300b004645162d22bmr12732914vst.5.1702853698283; Sun, 17
+ Dec 2023 14:54:58 -0800 (PST)
 MIME-Version: 1.0
 References: <20231215023313.1708-1-zhiwei_liu@linux.alibaba.com>
 In-Reply-To: <20231215023313.1708-1-zhiwei_liu@linux.alibaba.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 18 Dec 2023 08:46:33 +1000
-Message-ID: <CAKmqyKNzqXSSWN19MCuDKjWpaHxvbP29gkPK4E1QLW4ebkPeog@mail.gmail.com>
+Date: Mon, 18 Dec 2023 08:54:32 +1000
+Message-ID: <CAKmqyKMoQ=PjKKV-NHQGR84HUkDGDAgCEmiboNLAkcFSNUX1JQ@mail.gmail.com>
 Subject: Re: [PATCH 1/1] target/riscv: Not allow write mstatus_vs without RVV
 To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 Cc: qemu-devel@nongnu.org, Alistair.Francis@wdc.com, palmer@dabbelt.com, 
@@ -64,8 +64,8 @@ Cc: qemu-devel@nongnu.org, Alistair.Francis@wdc.com, palmer@dabbelt.com,
  qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::332;
- envelope-from=alistair23@gmail.com; helo=mail-ot1-x332.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::932;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x932.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -98,7 +98,9 @@ On Fri, Dec 15, 2023 at 12:34=E2=80=AFPM LIU Zhiwei
 >
 > Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
