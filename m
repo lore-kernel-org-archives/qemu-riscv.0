@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29023C35274
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Dec 2023 20:56:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00FEAC35274
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Dec 2023 21:20:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rFKeG-0000s9-Ln; Mon, 18 Dec 2023 15:55:36 -0500
+	id 1rFL2L-0006By-E4; Mon, 18 Dec 2023 16:20:31 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rFKeB-0000q3-V8
- for qemu-riscv@nongnu.org; Mon, 18 Dec 2023 15:55:32 -0500
-Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b])
+ id 1rFL2G-0006Bd-Iq
+ for qemu-riscv@nongnu.org; Mon, 18 Dec 2023 16:20:24 -0500
+Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rFKe9-0003y1-HB
- for qemu-riscv@nongnu.org; Mon, 18 Dec 2023 15:55:31 -0500
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-5cda3e35b26so704262a12.1
- for <qemu-riscv@nongnu.org>; Mon, 18 Dec 2023 12:55:13 -0800 (PST)
+ id 1rFL2E-0007qU-St
+ for qemu-riscv@nongnu.org; Mon, 18 Dec 2023 16:20:24 -0500
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-1d0c4d84bf6so16834975ad.1
+ for <qemu-riscv@nongnu.org>; Mon, 18 Dec 2023 13:20:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1702932913; x=1703537713; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1702934421; x=1703539221; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=qqGEFjsjfCaCTYZIR8UFcCe8X+bdKtw032QcRfWvd7U=;
- b=EStDxgB/YkLyVVXj+tDqvQO3Dkyzi/QhxGBp/Rute5mynVqK3XHwodTOLu1qyMaXOD
- eCE0Es4CrDMGaZKrXk4pHgUXpDWc7NUVS1ENvGaYS6Y7CJ0Ys6z0lp78yRhZEfVtKJeY
- Tnjos2tZQmi/guVaGJ2NTMgJpqwODfGGByLM4WQ/2RfdZ+Dpq8a0VR2PznoukbCq18FH
- LXbqy1DZyGK0rqnLAVXLDGzPzUPtv4a8vRsZkIeUSAMq1m/fyMMpbgQ47dta1qHRlUKd
- BlNkWYycWPRP0tvMGWGsxZB6u5XV9Dt4vSy5i7dwB+bJUQMaqnAOmgyLGFsX4dBaCx4p
- V2Cg==
+ bh=fUnhxCRV7sx9qlEgP71rK1sLH+4Vx787zjLEWm5mnaw=;
+ b=Ad6qzoT7yQ3FGjYa+f39VkUbeLP3keEF0y50CX+Y7GmlmZLf/1bQCJCvY4uTgdAro0
+ 20gQELWFpdsc0QlUYGeDuMLwngqO2xY4NK2Mb5DVWhjCWxZfyUfxY6b78g18XuDPlAx5
+ VGiusbe5lAiexyK9kkM6y9GCkvZg/d4qUrhrYX15I4ZsCl7UNJ9PDU76TfYf0VIJJhHt
+ LXRAlqOl7nglVnmiTnCmQvPJIrJlpJ7SvgS60PbY5BtZQg/arI1I2WN0Uvr8S2ApQmfW
+ gdEe8f5BtcpnXi83DGpz2cC0CwU8Ns1CG0bupcRty/cGNXGjTSW4ELJGspP5smKJOpDy
+ qrFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702932913; x=1703537713;
+ d=1e100.net; s=20230601; t=1702934421; x=1703539221;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qqGEFjsjfCaCTYZIR8UFcCe8X+bdKtw032QcRfWvd7U=;
- b=iEEE5ZtjLtoJeuDioBCqFn/xB38VQ0kz6MVWpyf6TqHUXzBoSZJUkZhcUJooQoNeSe
- hPksKvT/KfwVAYcjzPhbf35Wum/lfryzFIzZum5J87vylxxY5xDb34YpMxgZgWRFNuZZ
- ES+u5xHer4fN0SFEClazXzW4w5Mmx7/jiojtkzaBL8ODD36NjUj3+sO+oEsg1IFDio12
- 0PMBkfDBKYAszFm6bZWdnGbp9OmLdP1iDyBOXXT8C5z93yc0T4xGb7h96+3d43mYi4+o
- uQEJZSDGZRTaT7bXEYOGa4kMPtAyNso1WFxAyUpL8XGFQyWQPlVOSiLjMzU8Ev7P81aE
- 01mg==
-X-Gm-Message-State: AOJu0YwMqX5ba6r8fj46wfAPfjbTZBL5YG2DwsJORLPvZXmBk5nHF9rQ
- UggtQ7T6146CwRkXMukAa3AKXg==
-X-Google-Smtp-Source: AGHT+IG6fgQQTVk72n9ibIMivQxw+zd3GKY7kgTWyVrLh8WXou20LaH/3XDirG9DmnUjEtqMxGQGGA==
-X-Received: by 2002:a05:6a21:7888:b0:194:7c1a:323e with SMTP id
- bf8-20020a056a21788800b001947c1a323emr1185077pzc.37.1702932912689; 
- Mon, 18 Dec 2023 12:55:12 -0800 (PST)
+ bh=fUnhxCRV7sx9qlEgP71rK1sLH+4Vx787zjLEWm5mnaw=;
+ b=foSj4FLsjvI0zctkBVajLtK/nhmKTcdOPom1EMvnPJZDD0/Jiq8/EwSOC2z9xkrXPc
+ wzWKwE84QBQOO1FzUVyRekPGMQ2hCo7sUs0KqgifdvDwik82f/X1mvi9fOl6LAHdgqAx
+ mERMuBHvawkFLKLutbCRF8xdkXr+JUopQbY9pHCeC+NociiwyvIXFqf75vds6J+1huzy
+ XRyiPBrrizgpjuytgiu1eqD/QTvREv5pBIuAhnjBioVnulNQqYI6HrSY2QF4cBWqaVhi
+ g2QMSLX9UV6kX2o4XKkyTsmGFOshlUxw9ifD+w4IHUmj50qQzkXARKFK3d5JNJdjIR/9
+ Ez4g==
+X-Gm-Message-State: AOJu0YzhFj2sCNZ9sEih7Z+X8YBT0P8zTfTOAYN1U2DZ+2XFYto5v9ko
+ oITzXfGFuvQUVXCNgh6i9OzIvA==
+X-Google-Smtp-Source: AGHT+IEKPRyVtmpXqFW7MQUNBy2d+fduS4rMd2zbe79sS9SEjsMOWtqQal/Tscszu1t3+TS3JH9CJQ==
+X-Received: by 2002:a17:903:120c:b0:1d3:581e:9cc9 with SMTP id
+ l12-20020a170903120c00b001d3581e9cc9mr5540158plh.88.1702934420909; 
+ Mon, 18 Dec 2023 13:20:20 -0800 (PST)
 Received: from [192.168.68.110] ([179.93.21.205])
  by smtp.gmail.com with ESMTPSA id
- d12-20020a056a0010cc00b006ce61c9495fsm18600372pfu.206.2023.12.18.12.55.09
+ d4-20020a170902b70400b001cfb971edfasm19484479pls.205.2023.12.18.13.20.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 18 Dec 2023 12:55:12 -0800 (PST)
-Message-ID: <15709fcb-79d5-4d96-a568-f4d1943b6290@ventanamicro.com>
-Date: Mon, 18 Dec 2023 17:55:08 -0300
+ Mon, 18 Dec 2023 13:20:20 -0800 (PST)
+Message-ID: <6e28881d-a0d7-406e-b477-8740a80d3461@ventanamicro.com>
+Date: Mon, 18 Dec 2023 18:20:14 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv/kvm: do not use non-portable
- strerrorname_np()
+Subject: Re: [PATCH 1/1] hw/riscv/virt.c: fix the interrupts-extended property
+ format of PLIC
 Content-Language: en-US
-To: Natanael Copa <ncopa@alpinelinux.org>, qemu-devel@nongnu.org
-Cc: qemu-stable@nongnu.org, qemu-trivial@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>,
+To: Yong-Xuan Wang <yongxuan.wang@sifive.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com, 
+ jim.shu@sifive.com, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
-References: <20231218162301.14817-1-ncopa@alpinelinux.org>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20231218090543.22353-1-yongxuan.wang@sifive.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20231218162301.14817-1-ncopa@alpinelinux.org>
+In-Reply-To: <20231218090543.22353-1-yongxuan.wang@sifive.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x635.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,80 +103,86 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 12/18/23 13:22, Natanael Copa wrote:
-> strerrorname_np is non-portable and breaks building with musl libc.
+On 12/18/23 06:05, Yong-Xuan Wang wrote:
+> The interrupts-extended property of PLIC only has 2 * hart number
+> fields when KVM enabled, copy 4 * hart number fields to fdt will
+> expose some uninitialized value.
 > 
-> Use strerror(errno) instead, like we do other places.
+> In this patch, I also refactor the code about the setting of
+> interrupts-extended property of PLIC for improved readability.
 > 
-> Cc: qemu-stable@nongnu.org
-> Fixes: commit 082e9e4a58ba (target/riscv/kvm: improve 'init_multiext_cfg' error msg)
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2041
-> Buglink: https://gitlab.alpinelinux.org/alpine/aports/-/issues/15541
-> Signed-off-by: Natanael Copa <ncopa@alpinelinux.org>
+> Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+> Reviewed-by: Jim Shu <jim.shu@sifive.com>
 > ---
-
-Apart from my 'aesthetic preference' of using "error code %d" instead of
-strerror(errno), which I stand by, this patch is fixing a build break
-and it's an improvement from what we have now. Aesthetics can be dealt
-with later.
-
 
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-
-
-
->   target/riscv/kvm/kvm-cpu.c | 18 ++++++++----------
->   1 file changed, 8 insertions(+), 10 deletions(-)
+>   hw/riscv/virt.c | 47 +++++++++++++++++++++++++++--------------------
+>   1 file changed, 27 insertions(+), 20 deletions(-)
 > 
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index 45b6cf1cfa..117e33cf90 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -832,9 +832,8 @@ static void kvm_riscv_read_multiext_legacy(RISCVCPU *cpu,
->                   multi_ext_cfg->supported = false;
->                   val = false;
->               } else {
-> -                error_report("Unable to read ISA_EXT KVM register %s, "
-> -                             "error code: %s", multi_ext_cfg->name,
-> -                             strerrorname_np(errno));
-> +                error_report("Unable to read ISA_EXT KVM register %s: %s",
-> +                             multi_ext_cfg->name, strerror(errno));
->                   exit(EXIT_FAILURE);
->               }
->           } else {
-> @@ -895,8 +894,8 @@ static void kvm_riscv_init_multiext_cfg(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
->            *
->            * Error out if we get any other errno.
->            */
-> -        error_report("Error when accessing get-reg-list, code: %s",
-> -                     strerrorname_np(errno));
-> +        error_report("Error when accessing get-reg-list: %s",
-> +                     strerror(errno));
->           exit(EXIT_FAILURE);
->       }
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index d2eac2415619..e42baf82cab6 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -460,24 +460,6 @@ static void create_fdt_socket_plic(RISCVVirtState *s,
+>           "sifive,plic-1.0.0", "riscv,plic0"
+>       };
 >   
-> @@ -905,8 +904,8 @@ static void kvm_riscv_init_multiext_cfg(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
->       reglist->n = rl_struct.n;
->       ret = ioctl(kvmcpu->cpufd, KVM_GET_REG_LIST, reglist);
->       if (ret) {
-> -        error_report("Error when reading KVM_GET_REG_LIST, code %s ",
-> -                     strerrorname_np(errno));
-> +        error_report("Error when reading KVM_GET_REG_LIST: %s",
-> +                     strerror(errno));
->           exit(EXIT_FAILURE);
->       }
->   
-> @@ -927,9 +926,8 @@ static void kvm_riscv_init_multiext_cfg(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
->           reg.addr = (uint64_t)&val;
->           ret = ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
->           if (ret != 0) {
-> -            error_report("Unable to read ISA_EXT KVM register %s, "
-> -                         "error code: %s", multi_ext_cfg->name,
-> -                         strerrorname_np(errno));
-> +            error_report("Unable to read ISA_EXT KVM register %s: %s",
-> +                         multi_ext_cfg->name, strerror(errno));
->               exit(EXIT_FAILURE);
->           }
->   
+> -    if (kvm_enabled()) {
+> -        plic_cells = g_new0(uint32_t, s->soc[socket].num_harts * 2);
+> -    } else {
+> -        plic_cells = g_new0(uint32_t, s->soc[socket].num_harts * 4);
+> -    }
+> -
+> -    for (cpu = 0; cpu < s->soc[socket].num_harts; cpu++) {
+> -        if (kvm_enabled()) {
+> -            plic_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
+> -            plic_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_S_EXT);
+> -        } else {
+> -            plic_cells[cpu * 4 + 0] = cpu_to_be32(intc_phandles[cpu]);
+> -            plic_cells[cpu * 4 + 1] = cpu_to_be32(IRQ_M_EXT);
+> -            plic_cells[cpu * 4 + 2] = cpu_to_be32(intc_phandles[cpu]);
+> -            plic_cells[cpu * 4 + 3] = cpu_to_be32(IRQ_S_EXT);
+> -        }
+> -    }
+> -
+>       plic_phandles[socket] = (*phandle)++;
+>       plic_addr = memmap[VIRT_PLIC].base + (memmap[VIRT_PLIC].size * socket);
+>       plic_name = g_strdup_printf("/soc/plic@%lx", plic_addr);
+> @@ -490,8 +472,33 @@ static void create_fdt_socket_plic(RISCVVirtState *s,
+>                                     (char **)&plic_compat,
+>                                     ARRAY_SIZE(plic_compat));
+>       qemu_fdt_setprop(ms->fdt, plic_name, "interrupt-controller", NULL, 0);
+> -    qemu_fdt_setprop(ms->fdt, plic_name, "interrupts-extended",
+> -        plic_cells, s->soc[socket].num_harts * sizeof(uint32_t) * 4);
+> +
+> +    if (kvm_enabled()) {
+> +        plic_cells = g_new0(uint32_t, s->soc[socket].num_harts * 2);
+> +
+> +        for (cpu = 0; cpu < s->soc[socket].num_harts; cpu++) {
+> +            plic_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
+> +            plic_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_S_EXT);
+> +        }
+> +
+> +        qemu_fdt_setprop(ms->fdt, plic_name, "interrupts-extended",
+> +                         plic_cells,
+> +                         s->soc[socket].num_harts * sizeof(uint32_t) * 2);
+> +   } else {
+> +        plic_cells = g_new0(uint32_t, s->soc[socket].num_harts * 4);
+> +
+> +        for (cpu = 0; cpu < s->soc[socket].num_harts; cpu++) {
+> +            plic_cells[cpu * 4 + 0] = cpu_to_be32(intc_phandles[cpu]);
+> +            plic_cells[cpu * 4 + 1] = cpu_to_be32(IRQ_M_EXT);
+> +            plic_cells[cpu * 4 + 2] = cpu_to_be32(intc_phandles[cpu]);
+> +            plic_cells[cpu * 4 + 3] = cpu_to_be32(IRQ_S_EXT);
+> +        }
+> +
+> +        qemu_fdt_setprop(ms->fdt, plic_name, "interrupts-extended",
+> +                         plic_cells,
+> +                         s->soc[socket].num_harts * sizeof(uint32_t) * 4);
+> +    }
+> +
+>       qemu_fdt_setprop_cells(ms->fdt, plic_name, "reg",
+>           0x0, plic_addr, 0x0, memmap[VIRT_PLIC].size);
+>       qemu_fdt_setprop_cell(ms->fdt, plic_name, "riscv,ndev",
 
