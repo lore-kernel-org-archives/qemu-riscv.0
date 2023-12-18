@@ -4,79 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 819E9C35274
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Dec 2023 03:16:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF7CEC35274
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Dec 2023 03:19:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rF47A-0001o1-Eg; Sun, 17 Dec 2023 22:16:20 -0500
+	id 1rF4A7-0003CN-D7; Sun, 17 Dec 2023 22:19:23 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rF479-0001nl-8z; Sun, 17 Dec 2023 22:16:19 -0500
-Received: from mail-qv1-xf2b.google.com ([2607:f8b0:4864:20::f2b])
+ id 1rF4A4-0003BN-Ja; Sun, 17 Dec 2023 22:19:20 -0500
+Received: from mail-qk1-x735.google.com ([2607:f8b0:4864:20::735])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rF477-0007oK-Ba; Sun, 17 Dec 2023 22:16:19 -0500
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-67f0d22e4faso24488156d6.3; 
- Sun, 17 Dec 2023 19:16:16 -0800 (PST)
+ id 1rF4A2-0008L1-Og; Sun, 17 Dec 2023 22:19:20 -0500
+Received: by mail-qk1-x735.google.com with SMTP id
+ af79cd13be357-77f5b3fa323so190325785a.0; 
+ Sun, 17 Dec 2023 19:19:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702869375; x=1703474175; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1702869557; x=1703474357; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uLOxfdvV98AGgoylDzxJfs6BejVcZBSEmEuVpPVuFL8=;
- b=GcKh4DFlBnidYSnIOJdlTIKvIrpWlfdbgPzLyC4N7JIjOjIIydCHF0Tcn7FIif4phZ
- 1AYmy6RsU6G6U3jd+2I/4PacbF63EmhSt9H0B+vrshjGlLi08PS+hhYh4U+WcwzJejmK
- rLsEIoZshtXt0ZHULu6jrOOqhkt1FN/GLbAaQ1gwuPM7WqqZO42XS2GZ3/t0KZkTVoXT
- ir3+GqpkwiJSh5ElkPGtx4IRBnhHJTpqtZc8w411I/S2i+5EiLwbzLx4DlXHa2IzAzw7
- xHziTCAycRAdKjLNvfeRiRiOLv/YHaql3reE6WzdFdBDus25EifJcHvs4YAF2HW+gK4h
- RpQQ==
+ bh=36kf5zrbILZW+uA0q0TBq/MRm+vepFVRdEC1alr6AtU=;
+ b=Js/iBbvV2y88T/zLXsy12g9AVH5L5iD0YDtZCzZ2kl4rnvAWc0ySB5AQ8QTW6aNS52
+ Oe/Ksq8YuUkXivntiF7HQ9vqxuW6mfqut4+4IuuGkgSDHqiVJoUBigL9pWT40M0MMlfi
+ 8BDLjIl3NY4T/aTJ3KY9DAUMPHb6OdeT6qg7b3luZ3RpxzZgRDpkxTHiupocDOEzlhZ/
+ sR1HhBfwAKCNmnM0LDqoKEpSkMZYQURycUPd9xT4bjZnhEY72rU/F0yDBvTpZCfwmgUQ
+ x0Af4oHpgn+vgYN8d0x58Q5FTKN19UzhAuMnsV4K8lxqoeqFHjrvY/Q76Eoop1znN6jE
+ UwqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702869375; x=1703474175;
+ d=1e100.net; s=20230601; t=1702869557; x=1703474357;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=uLOxfdvV98AGgoylDzxJfs6BejVcZBSEmEuVpPVuFL8=;
- b=JFnQHawoRRKkaTRZjB5xmSw0BWLpLZyqYcSJ+fG9cfGgiTwJbYbUfA+euLEL/Py28a
- 692/fXjQx4AgjT3l2W2bqHLTUjlJcWL3m/a2rj88ZeevPhqYtQoXkd2E+FWLbrXZzPCW
- k47Pj8Qbqb2UhhAwp7dchMVAnTnSU714Hysf9fYR/+1CmhTJErWLqBHAl5rPH4jACYPy
- KVopEgI0IGIjlaBoLODw3RDAbzjMWpefDIt07zlo34FEsn+1paqofUWXWIGSZeSZ7gfx
- Tk0VSnPl8yRPyNmuY2zB7wOjY+9we6jnmXsDtzrtFd29+VHQZYIK8u0dF7H6psrhI0Yf
- e4Cw==
-X-Gm-Message-State: AOJu0Yy/ns8hindf7U2av3JQPGKlcNp5/kHuOjR48QNZu2WQ8WEs2IlX
- jXdCKJ9oxKPMXhIvpx9h7Oi8bKvbU+s7bBcIe5g+siyXp6E=
-X-Google-Smtp-Source: AGHT+IGraYof6UMmtTnHMNEWKCpzqLRoPOPk9c8Hr7yDIyCZgb1ziWpoCKxuzzp9sWXf35PlnoPzDjudrdeJlfL5LxI=
-X-Received: by 2002:a05:620a:2989:b0:77e:fba3:a235 with SMTP id
- r9-20020a05620a298900b0077efba3a235mr20859192qkp.143.1702869375212; Sun, 17
- Dec 2023 19:16:15 -0800 (PST)
+ bh=36kf5zrbILZW+uA0q0TBq/MRm+vepFVRdEC1alr6AtU=;
+ b=mvuVBB6r2tB3Kyr2UvigF1eb2MgTDsxKToFdMyyIrnAm6cQbA6jrbt9fb+rpAnMRhX
+ Lu3oIgPbgw7dO1M8CE6mlFQ6vM/e1XTm3NFlU5mGR82yLYYKD9GmAUFUfLWPQ3I+WT5x
+ lL+x8JiqZ7j8/APZb0b0e5XByStoFxzNJJUONqKoxRHCDP3YA9JI8/rsxR+iaQNqYOsJ
+ fzELf/7stQ5X5/illRPm70zUBN3ohV9VUil6axyVPPrSCxKtv5633L0e8Ud9u2VizdpK
+ GCxFsVhSaHOvYbLPQCXifR0DfMKg19Y4CmgcTBVEDe3t4GxZ0PYhemlZsp1Hvag1DrHk
+ N5xA==
+X-Gm-Message-State: AOJu0YxHH0k2w7DhUiFhvBBMurZ1P5EKM/oabavlZmlYtP7g9NXRDuAT
+ sNKCU44DKYANOz8bhsCA0aLDj5o0rlGG5fBlqTE=
+X-Google-Smtp-Source: AGHT+IEbcACEfHBrKogpb9+CTZrrVO7TWyKEJlFBwyHparnkIWdCIOqNJI9Tslqn9hfa1GngLndb3ybTtbbRSVDQKzk=
+X-Received: by 2002:a05:620a:10a6:b0:77f:9c9:70cb with SMTP id
+ h6-20020a05620a10a600b0077f09c970cbmr17307129qkk.118.1702869557428; Sun, 17
+ Dec 2023 19:19:17 -0800 (PST)
 MIME-Version: 1.0
-References: <20231030054834.39145-1-akihiko.odaki@daynix.com>
- <20231030054834.39145-2-akihiko.odaki@daynix.com>
- <CAKmqyKMo41GMJ0vVN2_CsfOVrfsz8H9AtxTe6-JbtX+Pi6B3DA@mail.gmail.com>
- <fcf3a810-7492-4f60-9126-63713d6a30bd@daynix.com>
- <CAKmqyKOvwZ71+pGz-HSvE29U9a2dbYVPLR0Li2ak5ji+_Ez4-A@mail.gmail.com>
- <946c24af-042c-43e5-8092-4488a32e549d@daynix.com>
-In-Reply-To: <946c24af-042c-43e5-8092-4488a32e549d@daynix.com>
+References: <20231130182748.1894790-1-dbarboza@ventanamicro.com>
+In-Reply-To: <20231130182748.1894790-1-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 18 Dec 2023 13:15:49 +1000
-Message-ID: <CAKmqyKOOKKBh4gtRFQ6Uwyv9=XSQ=Gek__=LwHykaTrG9yrX=A@mail.gmail.com>
-Subject: Re: [PATCH v6 1/5] hw/riscv: Use misa_mxl instead of misa_mxl_max
-To: Akihiko Odaki <akihiko.odaki@daynix.com>
-Cc: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Mikhail Tyutin <m.tyutin@yadro.com>, Aleksandr Anenkov <a.anenkov@yadro.com>,
- qemu-devel@nongnu.org, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Fabiano Rosas <farosas@suse.de>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
+Date: Mon, 18 Dec 2023 13:18:51 +1000
+Message-ID: <CAKmqyKOd-_4X5M7UATM=VqRdJb1Dr1GQ0=9RK5gD7QarDOt8oQ@mail.gmail.com>
+Subject: Re: [PATCH for-9.0 0/4] target/riscv: add RVV CSRs
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, ajones@ventanamicro.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::f2b;
- envelope-from=alistair23@gmail.com; helo=mail-qv1-xf2b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::735;
+ envelope-from=alistair23@gmail.com; helo=mail-qk1-x735.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -100,77 +89,80 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Dec 15, 2023 at 4:34=E2=80=AFPM Akihiko Odaki <akihiko.odaki@daynix=
-.com> wrote:
+On Fri, Dec 1, 2023 at 4:29=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
 >
-> On 2023/12/15 14:34, Alistair Francis wrote:
-> > On Thu, Nov 23, 2023 at 5:24=E2=80=AFPM Akihiko Odaki <akihiko.odaki@da=
-ynix.com> wrote:
-> >>
-> >> On 2023/11/23 12:04, Alistair Francis wrote:
-> >>> On Mon, Oct 30, 2023 at 3:50=E2=80=AFPM Akihiko Odaki <akihiko.odaki@=
-daynix.com> wrote:
-> >>>>
-> >>>> The effective MXL value matters when booting.
-> >>>
-> >>> This doesn't sound right. Surely the max is what matters here
-> >>>
-> >>> Also, this was specifically changed to misa_mxl_max in db23e5d981a
-> >>> "target/riscv: Replace riscv_cpu_is_32bit with riscv_cpu_mxl".
-> >>>
-> >>> This needs a much better description of why this change should be mad=
-e
-> >>   >
-> >>   > Alistair
-> >>
-> >> The kernel will be executed with the current MXL rather than the initi=
-al
-> >> MXL value so the current MXL should be used here.
-> >>
-> >> For example, if you are going to emulate a system that has a RV64 CPU
-> >> and a firmware that sets the MXL to RV32, then mxl_max should be
-> >> MXL_RV64 and mxl should be MXL_RV32, and the kernel should be assumed =
-as
-> >> a RV32 binary. Loading a 64-bit kernel will not work in such a case.
-> >
-> > But this is called before the firmware runs, so it won't be changed by =
-firmware.
+> Hi,
 >
-> It's more like QEMU emulates the firmware. It's the responsibility of
-> the firmware to load kernels for the real hardware, but QEMU does it
-> instead.
+> This series adds RVV, vstart, vl and vtype regs to the KVM driver.
 >
-> The firmware can change the MXL to load a 32-bit kernel on a 64-bit
-> system so if QEMU happens to emulate such a behavior, mxl should be used
-> when loading the kernel instead of mxl_max. QEMU currently does not
-> implement such a feature, but in such a case mxl =3D=3D mxl_max so it doe=
-s
-> not hurt to use mxl.
+> But first we need a couple of things done. We need 'ptrace.h' RISC-V
+> linux-header to be able to read/write RVV CSRs. This is done in patch 2.
+> Patch 1 is the usual linux-header bump for all archs.
 >
-> >
-> > Maybe it's worth putting what this fixes in the commit message?
+> Patch 3 is adding a realize() callback for the KVM driver because we're
+> doing a prctl() to enable Vector support for the thread.
 >
-> What about:
+> Patches are based on master. You'll need the following KVM fix to be
+> able to build:
 >
-> A later commit requires one extra step to retrieve mxl_max. As mxl is
-> semantically more correct and does not need such a extra step, refer to
-> mxl instead.
+> [PATCH for-8.2] target/riscv/kvm: fix shadowing in kvm_riscv_(get|put)_re=
+gs_csr
 >
-> Currently mxl always equals to mxl_max so it does not matter which of
-> mxl or mxl_max to refer to. However, it is possible to have different
-> values for mxl and mxl_max if QEMU gains a new feature to load a RV32
-> kernel on a RV64 system, for example. For such a behavior, the real
-> system will need the firmware to switch MXL to RV32, and if QEMU
-> implements the same behavior, mxl will represent the MXL that
-> corresponds to the kernel being loaded. Therefore, it is more
-> appropriate to refer to mxl instead of mxl_max when mxl !=3D mxl_max.
+>
+> Daniel Henrique Barboza (4):
+>   linux-headers: Update to Linux v6.7-rc3
+>   linux-headers: riscv: add ptrace.h
+>   target/riscv/kvm: do PR_RISCV_V_SET_CONTROL during realize()
+>   target/riscv/kvm: add RVV and Vector CSR regs
 
-Great! That explains it really well. Can you include that in the
-commit message in the next revision
+Do you mind rebasing this on
+https://github.com/alistair23/qemu/tree/riscv-to-apply.next
 
 Alistair
 
 >
-> Regards,
-> Akihiko Odaki
+>  include/standard-headers/drm/drm_fourcc.h     |   2 +
+>  include/standard-headers/linux/pci_regs.h     |  24 ++-
+>  include/standard-headers/linux/vhost_types.h  |   7 +
+>  .../standard-headers/linux/virtio_config.h    |   5 +
+>  include/standard-headers/linux/virtio_pci.h   |  11 ++
+>  linux-headers/asm-arm64/kvm.h                 |  32 ++++
+>  linux-headers/asm-generic/unistd.h            |  14 +-
+>  linux-headers/asm-loongarch/bitsperlong.h     |   1 +
+>  linux-headers/asm-loongarch/kvm.h             | 108 +++++++++++
+>  linux-headers/asm-loongarch/mman.h            |   1 +
+>  linux-headers/asm-loongarch/unistd.h          |   5 +
+>  linux-headers/asm-mips/unistd_n32.h           |   4 +
+>  linux-headers/asm-mips/unistd_n64.h           |   4 +
+>  linux-headers/asm-mips/unistd_o32.h           |   4 +
+>  linux-headers/asm-powerpc/unistd_32.h         |   4 +
+>  linux-headers/asm-powerpc/unistd_64.h         |   4 +
+>  linux-headers/asm-riscv/kvm.h                 |  12 ++
+>  linux-headers/asm-riscv/ptrace.h              | 132 +++++++++++++
+>  linux-headers/asm-s390/unistd_32.h            |   4 +
+>  linux-headers/asm-s390/unistd_64.h            |   4 +
+>  linux-headers/asm-x86/unistd_32.h             |   4 +
+>  linux-headers/asm-x86/unistd_64.h             |   3 +
+>  linux-headers/asm-x86/unistd_x32.h            |   3 +
+>  linux-headers/linux/iommufd.h                 | 180 +++++++++++++++++-
+>  linux-headers/linux/kvm.h                     |  11 ++
+>  linux-headers/linux/psp-sev.h                 |   1 +
+>  linux-headers/linux/stddef.h                  |   7 +
+>  linux-headers/linux/userfaultfd.h             |   9 +-
+>  linux-headers/linux/vfio.h                    |  47 +++--
+>  linux-headers/linux/vhost.h                   |   8 +
+>  scripts/update-linux-headers.sh               |   3 +
+>  target/riscv/kvm/kvm-cpu.c                    | 103 ++++++++++
+>  32 files changed, 735 insertions(+), 26 deletions(-)
+>  create mode 100644 linux-headers/asm-loongarch/bitsperlong.h
+>  create mode 100644 linux-headers/asm-loongarch/kvm.h
+>  create mode 100644 linux-headers/asm-loongarch/mman.h
+>  create mode 100644 linux-headers/asm-loongarch/unistd.h
+>  create mode 100644 linux-headers/asm-riscv/ptrace.h
+>
+> --
+> 2.41.0
+>
+>
 
