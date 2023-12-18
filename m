@@ -4,68 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A068FC35274
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Dec 2023 03:15:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 819E9C35274
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Dec 2023 03:16:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rF45w-00012p-2w; Sun, 17 Dec 2023 22:15:04 -0500
+	id 1rF47A-0001o1-Eg; Sun, 17 Dec 2023 22:16:20 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rF45t-00011y-9N; Sun, 17 Dec 2023 22:15:01 -0500
-Received: from mail-qk1-x72b.google.com ([2607:f8b0:4864:20::72b])
+ id 1rF479-0001nl-8z; Sun, 17 Dec 2023 22:16:19 -0500
+Received: from mail-qv1-xf2b.google.com ([2607:f8b0:4864:20::f2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rF45r-0007Q6-Gl; Sun, 17 Dec 2023 22:15:00 -0500
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-77f56750defso189794585a.1; 
- Sun, 17 Dec 2023 19:14:58 -0800 (PST)
+ id 1rF477-0007oK-Ba; Sun, 17 Dec 2023 22:16:19 -0500
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-67f0d22e4faso24488156d6.3; 
+ Sun, 17 Dec 2023 19:16:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702869298; x=1703474098; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1702869375; x=1703474175; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=W+3/LPl5400p6E2XLuoV+FxAc7JhmsVxdocARkuSuEk=;
- b=JAsA+nFigWZPsNRPahC70m1MmxPXa1tfOWBoARZKAqAMkAZLhmqhJKSFtgk4fJtVmy
- UTSmsYXrwtP+H/m3+Qc3CFGJdSVn2oAN9l0Aa/Do7lYe83R9gyFSt+1o8JSwCQLH0q0c
- Pn25XnVKPu3gvtcmpla3YlDndT9S84274Ju1zgAqiWXIaoAEK2PMkpDVo5u8QcaLMrdB
- k1RY54bNeJuJSqL4sUOBqRJ+G6VpnVTO8sCwNDkiaCPYD+oFSYCXgzMknkCsydNe58Sb
- s/dtjUQYMtypuBpAzwuLROhKX0D5kDuPRQXsyxTC9DBheip0GPhwIBSGiScy5NBr/7fa
- 7UcQ==
+ bh=uLOxfdvV98AGgoylDzxJfs6BejVcZBSEmEuVpPVuFL8=;
+ b=GcKh4DFlBnidYSnIOJdlTIKvIrpWlfdbgPzLyC4N7JIjOjIIydCHF0Tcn7FIif4phZ
+ 1AYmy6RsU6G6U3jd+2I/4PacbF63EmhSt9H0B+vrshjGlLi08PS+hhYh4U+WcwzJejmK
+ rLsEIoZshtXt0ZHULu6jrOOqhkt1FN/GLbAaQ1gwuPM7WqqZO42XS2GZ3/t0KZkTVoXT
+ ir3+GqpkwiJSh5ElkPGtx4IRBnhHJTpqtZc8w411I/S2i+5EiLwbzLx4DlXHa2IzAzw7
+ xHziTCAycRAdKjLNvfeRiRiOLv/YHaql3reE6WzdFdBDus25EifJcHvs4YAF2HW+gK4h
+ RpQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702869298; x=1703474098;
+ d=1e100.net; s=20230601; t=1702869375; x=1703474175;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=W+3/LPl5400p6E2XLuoV+FxAc7JhmsVxdocARkuSuEk=;
- b=sFwQ8w07skdpu3Sk1ybJlJmeGH+/LtyZwPkxcqIhD8CyTbDlbDnrh24l8ZAcyKswEB
- Rim05aP8yRo+goqPGk9c72xC+8LSAIlBNMwhh00Y3B0cklwwZ1cC8+uZa2OkV+CPInHD
- 9UecPf8G3Dk2mFfm7kVRfMTUHcDTbzLtcLij9W2xXpJtRTrv+SDnALkyg0nDsHPZ1L98
- nxpwZnsij5/xeoltxRg+avmERmKr+VenmgrOouaAm1OQhUFznTJ8eFlGcBSXUGo9sf8V
- m35Gatf2BEphQ7EHMGWx0VQCBlY5ZCyXOVC2Zu5wlreGbzS/cgIbkIuphcjNXIxm87u/
- APLA==
-X-Gm-Message-State: AOJu0Yy+0xlD6evIt9VuSWlv81S0bUZiC5cx+nT1aR1p6FZqYUJM5kC1
- YfR8/1meoG921Gfs7jqC74vWdWJx8uPFniA1Y+U=
-X-Google-Smtp-Source: AGHT+IG6a9f1J/jCfPqQJe4MNL9QH7CKN9m8VR+TCMzHAhyim1nO+EgYpSl61+Qy2ucQoiE6ys0tJWZa53GTuFB4Hdk=
-X-Received: by 2002:a05:620a:5311:b0:77f:25f5:36f2 with SMTP id
- oo17-20020a05620a531100b0077f25f536f2mr17101227qkn.143.1702869298129; Sun, 17
- Dec 2023 19:14:58 -0800 (PST)
+ bh=uLOxfdvV98AGgoylDzxJfs6BejVcZBSEmEuVpPVuFL8=;
+ b=JFnQHawoRRKkaTRZjB5xmSw0BWLpLZyqYcSJ+fG9cfGgiTwJbYbUfA+euLEL/Py28a
+ 692/fXjQx4AgjT3l2W2bqHLTUjlJcWL3m/a2rj88ZeevPhqYtQoXkd2E+FWLbrXZzPCW
+ k47Pj8Qbqb2UhhAwp7dchMVAnTnSU714Hysf9fYR/+1CmhTJErWLqBHAl5rPH4jACYPy
+ KVopEgI0IGIjlaBoLODw3RDAbzjMWpefDIt07zlo34FEsn+1paqofUWXWIGSZeSZ7gfx
+ Tk0VSnPl8yRPyNmuY2zB7wOjY+9we6jnmXsDtzrtFd29+VHQZYIK8u0dF7H6psrhI0Yf
+ e4Cw==
+X-Gm-Message-State: AOJu0Yy/ns8hindf7U2av3JQPGKlcNp5/kHuOjR48QNZu2WQ8WEs2IlX
+ jXdCKJ9oxKPMXhIvpx9h7Oi8bKvbU+s7bBcIe5g+siyXp6E=
+X-Google-Smtp-Source: AGHT+IGraYof6UMmtTnHMNEWKCpzqLRoPOPk9c8Hr7yDIyCZgb1ziWpoCKxuzzp9sWXf35PlnoPzDjudrdeJlfL5LxI=
+X-Received: by 2002:a05:620a:2989:b0:77e:fba3:a235 with SMTP id
+ r9-20020a05620a298900b0077efba3a235mr20859192qkp.143.1702869375212; Sun, 17
+ Dec 2023 19:16:15 -0800 (PST)
 MIME-Version: 1.0
-References: <20231216135136.1597456-1-me@deliversmonkey.space>
-In-Reply-To: <20231216135136.1597456-1-me@deliversmonkey.space>
+References: <20231030054834.39145-1-akihiko.odaki@daynix.com>
+ <20231030054834.39145-2-akihiko.odaki@daynix.com>
+ <CAKmqyKMo41GMJ0vVN2_CsfOVrfsz8H9AtxTe6-JbtX+Pi6B3DA@mail.gmail.com>
+ <fcf3a810-7492-4f60-9126-63713d6a30bd@daynix.com>
+ <CAKmqyKOvwZ71+pGz-HSvE29U9a2dbYVPLR0Li2ak5ji+_Ez4-A@mail.gmail.com>
+ <946c24af-042c-43e5-8092-4488a32e549d@daynix.com>
+In-Reply-To: <946c24af-042c-43e5-8092-4488a32e549d@daynix.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 18 Dec 2023 13:14:31 +1000
-Message-ID: <CAKmqyKPndzQS7F8h+M-_yd5j3_W4yzaHaHowH2qKyQ_bA7XLXw@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 0/6] Pointer Masking update to Zjpm v0.6.1
-To: Alexey Baturo <baturo.alexey@gmail.com>
-Cc: zhiwei_liu@linux.alibaba.com, richard.henderson@linaro.org, 
- palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu, 
- kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Date: Mon, 18 Dec 2023 13:15:49 +1000
+Message-ID: <CAKmqyKOOKKBh4gtRFQ6Uwyv9=XSQ=Gek__=LwHykaTrG9yrX=A@mail.gmail.com>
+Subject: Re: [PATCH v6 1/5] hw/riscv: Use misa_mxl instead of misa_mxl_max
+To: Akihiko Odaki <akihiko.odaki@daynix.com>
+Cc: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
+ Mikhail Tyutin <m.tyutin@yadro.com>, Aleksandr Anenkov <a.anenkov@yadro.com>,
+ qemu-devel@nongnu.org, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Fabiano Rosas <farosas@suse.de>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::72b;
- envelope-from=alistair23@gmail.com; helo=mail-qk1-x72b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::f2b;
+ envelope-from=alistair23@gmail.com; helo=mail-qv1-xf2b.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -89,68 +100,77 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, Dec 16, 2023 at 11:52=E2=80=AFPM Alexey Baturo <baturo.alexey@gmail=
+On Fri, Dec 15, 2023 at 4:34=E2=80=AFPM Akihiko Odaki <akihiko.odaki@daynix=
 .com> wrote:
 >
-> From: Alexey Baturo <baturo.alexey@gmail.com>
+> On 2023/12/15 14:34, Alistair Francis wrote:
+> > On Thu, Nov 23, 2023 at 5:24=E2=80=AFPM Akihiko Odaki <akihiko.odaki@da=
+ynix.com> wrote:
+> >>
+> >> On 2023/11/23 12:04, Alistair Francis wrote:
+> >>> On Mon, Oct 30, 2023 at 3:50=E2=80=AFPM Akihiko Odaki <akihiko.odaki@=
+daynix.com> wrote:
+> >>>>
+> >>>> The effective MXL value matters when booting.
+> >>>
+> >>> This doesn't sound right. Surely the max is what matters here
+> >>>
+> >>> Also, this was specifically changed to misa_mxl_max in db23e5d981a
+> >>> "target/riscv: Replace riscv_cpu_is_32bit with riscv_cpu_mxl".
+> >>>
+> >>> This needs a much better description of why this change should be mad=
+e
+> >>   >
+> >>   > Alistair
+> >>
+> >> The kernel will be executed with the current MXL rather than the initi=
+al
+> >> MXL value so the current MXL should be used here.
+> >>
+> >> For example, if you are going to emulate a system that has a RV64 CPU
+> >> and a firmware that sets the MXL to RV32, then mxl_max should be
+> >> MXL_RV64 and mxl should be MXL_RV32, and the kernel should be assumed =
+as
+> >> a RV32 binary. Loading a 64-bit kernel will not work in such a case.
+> >
+> > But this is called before the firmware runs, so it won't be changed by =
+firmware.
 >
-> Hi all,
+> It's more like QEMU emulates the firmware. It's the responsibility of
+> the firmware to load kernels for the real hardware, but QEMU does it
+> instead.
 >
-> It looks like Zjpm v0.8 is almost frozen and we don't expect it change dr=
-astically anymore.
-> Compared to the original implementation with explicit base and mask CSRs,=
- we now only have
-> several fixed options for number of masked bits which are set using exist=
-ing CSRs.
+> The firmware can change the MXL to load a 32-bit kernel on a 64-bit
+> system so if QEMU happens to emulate such a behavior, mxl should be used
+> when loading the kernel instead of mxl_max. QEMU currently does not
+> implement such a feature, but in such a case mxl =3D=3D mxl_max so it doe=
+s
+> not hurt to use mxl.
 >
-> Thanks
+> >
+> > Maybe it's worth putting what this fixes in the commit message?
 >
-> [previous:]
+> What about:
 >
-> This series of patches intends to update RISC-V Pointer Masking implement=
-ation
-> to the latest Zjpm v0.6.1 version.
-> The Pointer Masking functionality is simplified compared to previous vers=
-ion
-> of spec.
-> The changes have been tested with handwritten assembly tests and LLVM HWA=
-SAN
-> test suite.
+> A later commit requires one extra step to retrieve mxl_max. As mxl is
+> semantically more correct and does not need such a extra step, refer to
+> mxl instead.
 >
-> Thanks
->
-> Alexey Baturo (6):
->   target/riscv: Remove obsolete pointer masking extension code.
->   target/riscv: Add new CSR fields for S{sn,mn,m}pm extensions as part
->     of Zjpm v0.8
->   target/riscv: Add pointer masking tb flags
->   target/riscv: Add functions to calculate current number of masked bits
->     for pointer masking
->   target/riscv: Update address modify functions to take into account
->     pointer masking
->   target/riscv: Enable updates for pointer masking variables and thus
->     enable pointer masking extension
->
->  target/riscv/cpu.c           |  17 +-
->  target/riscv/cpu.h           |  35 ++--
->  target/riscv/cpu_bits.h      |  85 +--------
->  target/riscv/cpu_cfg.h       |   3 +
->  target/riscv/cpu_helper.c    |  85 +++++----
->  target/riscv/csr.c           | 339 ++---------------------------------
->  target/riscv/machine.c       |  14 +-
->  target/riscv/pmp.c           |  14 +-
->  target/riscv/pmp.h           |  11 +-
->  target/riscv/translate.c     |  50 +++---
->  target/riscv/vector_helper.c |   9 +-
->  11 files changed, 143 insertions(+), 519 deletions(-)
+> Currently mxl always equals to mxl_max so it does not matter which of
+> mxl or mxl_max to refer to. However, it is possible to have different
+> values for mxl and mxl_max if QEMU gains a new feature to load a RV32
+> kernel on a RV64 system, for example. For such a behavior, the real
+> system will need the firmware to switch MXL to RV32, and if QEMU
+> implements the same behavior, mxl will represent the MXL that
+> corresponds to the kernel being loaded. Therefore, it is more
+> appropriate to refer to mxl instead of mxl_max when mxl !=3D mxl_max.
 
-Overall it looks good!
+Great! That explains it really well. Can you include that in the
+commit message in the next revision
 
 Alistair
 
 >
-> --
-> 2.34.1
->
->
+> Regards,
+> Akihiko Odaki
 
