@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D74BC35274
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Dec 2023 08:50:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1042C35274
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Dec 2023 09:06:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rF9KI-0003Zq-Sb; Mon, 18 Dec 2023 03:50:15 -0500
+	id 1rF9ZS-000603-Q1; Mon, 18 Dec 2023 04:05:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1rF9KG-0003ZN-Ts
- for qemu-riscv@nongnu.org; Mon, 18 Dec 2023 03:50:12 -0500
-Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1rF9ZQ-0005zE-UZ
+ for qemu-riscv@nongnu.org; Mon, 18 Dec 2023 04:05:52 -0500
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1rF9KE-000202-31
- for qemu-riscv@nongnu.org; Mon, 18 Dec 2023 03:50:12 -0500
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-6d411636a95so927170b3a.0
- for <qemu-riscv@nongnu.org>; Mon, 18 Dec 2023 00:50:06 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1rF9ZP-0005jS-9r
+ for qemu-riscv@nongnu.org; Mon, 18 Dec 2023 04:05:52 -0500
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-1d075392ff6so20372065ad.1
+ for <qemu-riscv@nongnu.org>; Mon, 18 Dec 2023 01:05:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1702889405; x=1703494205; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=DbHH/pxeL/8H/oditovSN1+fXKRH7AmKIzQ/zPGXxlM=;
- b=kgKG0AgPbJUXnel1aZxAr+j2/TxZcdkNk6ytItOYGjEh8y3GnDzGI9j5Yh/Q5bz9CK
- eI4i4OkQZ9Pikm641A6veDlWxSlU5as2NSR44WPcghD5ghsYjWWwOOthQ6Uyr6QnyC/n
- oCtfj/EW2l7NyipnEbcwhB510qVhh7p1V9BQBUOGi08q36mIOFDeNrnqod7CFKf+/Q+n
- hdZKr5pywFj7J8CN50qNhNeinpBlKCzM5XQB5DZxDPnrhp6ZM2zHSsTja1QuJZQKOEwo
- UbZIPZjGoi5oxRYN9pYGVwLlf4U1xrB1UKZsy6g9MA3lTgnc8tuP9/coXskcc+S19KDo
- gNSQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702889405; x=1703494205;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=sifive.com; s=google; t=1702890349; x=1703495149; darn=nongnu.org;
+ h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DbHH/pxeL/8H/oditovSN1+fXKRH7AmKIzQ/zPGXxlM=;
- b=LqbZNfdUm4eF+cQLzQzNsZN4gKwCXoW+0kxQFapfWlLCak8kltBDuhtA3foW/7SMwi
- 7cbiej3XQW9Hgmjy5XhDBcAYVGzWE08qmsPGAHvMmDelqbgeLo5PE7y8Lo+hIzFP5d0Z
- JwYIa9hoxzHW0oTpvy/ChWaA4bAec3qzYhnyePHwxJyfIe+ElbMi/HnlAQxE+OGYRAgn
- j7SmBRadKQo3/xJilReGtH1kiNW5LiswnOILNxSILZ2PVmXUO2CgxAx7jI65jpWdjUWf
- y9U7R2cPceDcpN1xwxtwj8xL43ibVE3T4N0ZTDNUR3CWPnzN4GPnXkEa6VAu4XEgRO7c
- 7aeg==
-X-Gm-Message-State: AOJu0Yxk02xqY5tsS+UPpLCFFDfw4TWr63IjATLBMWevT3y8cyExE4ZJ
- 82vPFA1V4fyldpg8GxH+P0OR7Q==
-X-Google-Smtp-Source: AGHT+IGP2qnLa1xmTeAB5IgJ454dt8nScw+At2MNLxSoZ5In2j2Ka86nXYHcQGRsD/O6rh+jO2kC3Q==
-X-Received: by 2002:a05:6a00:6ca0:b0:6d8:3c6f:f3bf with SMTP id
- jc32-20020a056a006ca000b006d83c6ff3bfmr806658pfb.15.1702889405047; 
- Mon, 18 Dec 2023 00:50:05 -0800 (PST)
-Received: from sunil-laptop ([106.51.188.200])
+ bh=5Prm2RQOFL5Rml8G8Y8xBqh8xRDyejK3NR4FTYNxBcI=;
+ b=jYETh40uALor9Wm81Jb3g39p+2t/996/XvcW2nYPGjGaMzbVvjZuer/Fqpbd5w6EIy
+ afy+WUdHZ5WjgGX81dRj6aS7DZy4x6Me6aCnSNnZ4vIUX+uZplMla+bBMNykSgu/4m1/
+ UQ+nkrC9HCaqOai54eJQ5KHhb0vM3aUjb2NtcVka+WTVBH43rebv2AWXNtIFU8jSVkbx
+ pECGb+e+41ctit6qJ3w7vy63TUtXr308EZ3PsPk89KfQm6XzSYzW5W1Uf1HvblGJ/GbT
+ qP/7yZf0Qa0CO6BHV1Td8Z5AbmdYLqlt/ZrtjOLlATWs6eHLuOOht+m4GbhX2UjAMz/y
+ sxVQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702890349; x=1703495149;
+ h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=5Prm2RQOFL5Rml8G8Y8xBqh8xRDyejK3NR4FTYNxBcI=;
+ b=HLS+JGT6uBDjDKG3t7qFxkpytH1+QWE+tSQdTXfjYyAo2svgNJv1Q2yj9otFiUfNcG
+ 8x2aP0RXJl53eTCMShoizqdW9npQ1/rzIP/x6t0Fa6l8mjs3uIweUOzeW3HpvZh78dRC
+ UZ1FhgVw6TDED/tXkLQukyBcNJBLNI8Voy9bz0+qwZSlpMh6IFXlbFLiZ0yq0wB0THAf
+ PVrsyeBNReo2cFEO56nbjuMfh//Zk8MqpOT50Q4rLUihPo3na0quHw9AXSHR1xzTuU2Y
+ OsuOttQDNvhs5Fgw3VfExcMedMzpgTF9PcVIdxeDBCGyFnYAB0gm9dkG6L0BK/7QprSM
+ 7gaw==
+X-Gm-Message-State: AOJu0YwVsSxNAHTYDPq2XJ6vF8tBCvv94FvZrmZRgbXg2FlixwRy82W1
+ PoQcH+18YlfWcSM+uA4+4RTa3Q==
+X-Google-Smtp-Source: AGHT+IG/sDa2FB0ab0g+ui6NkiPpL/pIozc9sfm74nywpWzPpD7WG3B4/mboJFMb2O+Fpp7OXcScAg==
+X-Received: by 2002:a17:902:680a:b0:1d0:6ffd:6115 with SMTP id
+ h10-20020a170902680a00b001d06ffd6115mr15749114plk.55.1702890348793; 
+ Mon, 18 Dec 2023 01:05:48 -0800 (PST)
+Received: from hsinchu26.internal.sifive.com
+ (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
  by smtp.gmail.com with ESMTPSA id
- p2-20020aa78602000000b006d626f91d38sm2061466pfn.9.2023.12.18.00.50.02
+ j4-20020a170902da8400b001cc3c521affsm18527946plx.300.2023.12.18.01.05.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Dec 2023 00:50:04 -0800 (PST)
-Date: Mon, 18 Dec 2023 14:19:58 +0530
-From: Sunil V L <sunilvl@ventanamicro.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Mon, 18 Dec 2023 01:05:48 -0800 (PST)
+From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com,
+ jim.shu@sifive.com, Yong-Xuan Wang <yongxuan.wang@sifive.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Subject: Re: [PATCH 1/1] target/riscv: SMBIOS support for RISC-V virt machine
-Message-ID: <ZYAHtq1HozBOZZrJ@sunil-laptop>
-References: <20231218074018.66134-1-heinrich.schuchardt@canonical.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20231218074018.66134-1-heinrich.schuchardt@canonical.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pf1-x42e.google.com
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH 1/1] hw/riscv/virt.c: fix the interrupts-extended property
+ format of PLIC
+Date: Mon, 18 Dec 2023 09:05:40 +0000
+Message-Id: <20231218090543.22353-1-yongxuan.wang@sifive.com>
+X-Mailer: git-send-email 2.17.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=yongxuan.wang@sifive.com; helo=mail-pl1-x62e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,70 +96,85 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Heinrich,
+The interrupts-extended property of PLIC only has 2 * hart number
+fields when KVM enabled, copy 4 * hart number fields to fdt will
+expose some uninitialized value.
 
-Thanks for the patch!.
+In this patch, I also refactor the code about the setting of
+interrupts-extended property of PLIC for improved readability.
 
-On Mon, Dec 18, 2023 at 08:40:18AM +0100, Heinrich Schuchardt wrote:
-> Generate SMBIOS tables for the RISC-V mach-virt.
-> Add CONFIG_SMBIOS=y to the RISC-V default config.
-> 
-> The implementation is based on the corresponding ARM and Loongson code.
-> 
-> With the patch the following firmware tables are provided:
-> 
->     etc/smbios/smbios-anchor
->     etc/smbios/smbios-tables
-> 
-> Booting Ubuntu 23.10 via EDK II allowed displaying the SMBIOS table using
-> the dmidecode command:
-> 
->     Handle 0x0100, DMI type 1, 27 bytes
->     System Information
->         Manufacturer: QEMU
->         Product Name: QEMU Virtual Machine
->         Version: virt
->     ...
-> 
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  hw/riscv/Kconfig |  1 +
->  hw/riscv/virt.c  | 36 ++++++++++++++++++++++++++++++++++++
->  2 files changed, 37 insertions(+)
-> 
-> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> index b6a5eb4452..1e11ac9432 100644
-> --- a/hw/riscv/Kconfig
-> +++ b/hw/riscv/Kconfig
-> @@ -41,6 +41,7 @@ config RISCV_VIRT
->      select RISCV_IMSIC
->      select SIFIVE_PLIC
->      select SIFIVE_TEST
-> +    select SMBIOS
->      select VIRTIO_MMIO
->      select FW_CFG_DMA
->      select PLATFORM_BUS
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index d2eac24156..6c27cb5330 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -36,6 +36,7 @@
->  #include "hw/riscv/boot.h"
->  #include "hw/riscv/numa.h"
->  #include "kvm/kvm_riscv.h"
-> +#include "hw/firmware/smbios.h"
->  #include "hw/intc/riscv_aclint.h"
->  #include "hw/intc/riscv_aplic.h"
->  #include "hw/intc/riscv_imsic.h"
-> @@ -1249,6 +1250,39 @@ static void create_platform_bus(RISCVVirtState *s, DeviceState *irqchip)
->                                  sysbus_mmio_get_region(sysbus, 0));
->  }
->  
-> +static void virt_build_smbios(RISCVVirtState *s)
-> +{
-Can we avoid duplicating this function which exists in other
-architectures? 
+Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+Reviewed-by: Jim Shu <jim.shu@sifive.com>
+---
+ hw/riscv/virt.c | 47 +++++++++++++++++++++++++++--------------------
+ 1 file changed, 27 insertions(+), 20 deletions(-)
 
-Thanks,
-Sunil
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index d2eac2415619..e42baf82cab6 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -460,24 +460,6 @@ static void create_fdt_socket_plic(RISCVVirtState *s,
+         "sifive,plic-1.0.0", "riscv,plic0"
+     };
+ 
+-    if (kvm_enabled()) {
+-        plic_cells = g_new0(uint32_t, s->soc[socket].num_harts * 2);
+-    } else {
+-        plic_cells = g_new0(uint32_t, s->soc[socket].num_harts * 4);
+-    }
+-
+-    for (cpu = 0; cpu < s->soc[socket].num_harts; cpu++) {
+-        if (kvm_enabled()) {
+-            plic_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
+-            plic_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_S_EXT);
+-        } else {
+-            plic_cells[cpu * 4 + 0] = cpu_to_be32(intc_phandles[cpu]);
+-            plic_cells[cpu * 4 + 1] = cpu_to_be32(IRQ_M_EXT);
+-            plic_cells[cpu * 4 + 2] = cpu_to_be32(intc_phandles[cpu]);
+-            plic_cells[cpu * 4 + 3] = cpu_to_be32(IRQ_S_EXT);
+-        }
+-    }
+-
+     plic_phandles[socket] = (*phandle)++;
+     plic_addr = memmap[VIRT_PLIC].base + (memmap[VIRT_PLIC].size * socket);
+     plic_name = g_strdup_printf("/soc/plic@%lx", plic_addr);
+@@ -490,8 +472,33 @@ static void create_fdt_socket_plic(RISCVVirtState *s,
+                                   (char **)&plic_compat,
+                                   ARRAY_SIZE(plic_compat));
+     qemu_fdt_setprop(ms->fdt, plic_name, "interrupt-controller", NULL, 0);
+-    qemu_fdt_setprop(ms->fdt, plic_name, "interrupts-extended",
+-        plic_cells, s->soc[socket].num_harts * sizeof(uint32_t) * 4);
++
++    if (kvm_enabled()) {
++        plic_cells = g_new0(uint32_t, s->soc[socket].num_harts * 2);
++
++        for (cpu = 0; cpu < s->soc[socket].num_harts; cpu++) {
++            plic_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
++            plic_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_S_EXT);
++        }
++
++        qemu_fdt_setprop(ms->fdt, plic_name, "interrupts-extended",
++                         plic_cells,
++                         s->soc[socket].num_harts * sizeof(uint32_t) * 2);
++   } else {
++        plic_cells = g_new0(uint32_t, s->soc[socket].num_harts * 4);
++
++        for (cpu = 0; cpu < s->soc[socket].num_harts; cpu++) {
++            plic_cells[cpu * 4 + 0] = cpu_to_be32(intc_phandles[cpu]);
++            plic_cells[cpu * 4 + 1] = cpu_to_be32(IRQ_M_EXT);
++            plic_cells[cpu * 4 + 2] = cpu_to_be32(intc_phandles[cpu]);
++            plic_cells[cpu * 4 + 3] = cpu_to_be32(IRQ_S_EXT);
++        }
++
++        qemu_fdt_setprop(ms->fdt, plic_name, "interrupts-extended",
++                         plic_cells,
++                         s->soc[socket].num_harts * sizeof(uint32_t) * 4);
++    }
++
+     qemu_fdt_setprop_cells(ms->fdt, plic_name, "reg",
+         0x0, plic_addr, 0x0, memmap[VIRT_PLIC].size);
+     qemu_fdt_setprop_cell(ms->fdt, plic_name, "riscv,ndev",
+-- 
+2.17.1
+
 
