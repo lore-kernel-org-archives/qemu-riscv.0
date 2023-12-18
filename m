@@ -4,100 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7795C35274
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Dec 2023 15:06:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28D6CC35274
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Dec 2023 16:35:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rFFAN-0004ed-6u; Mon, 18 Dec 2023 10:04:24 -0500
+	id 1rFGa3-0002n5-RX; Mon, 18 Dec 2023 11:35:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1rFFAI-0004KR-MQ
- for qemu-riscv@nongnu.org; Mon, 18 Dec 2023 10:04:18 -0500
-Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1rFFAG-0007K9-NW
- for qemu-riscv@nongnu.org; Mon, 18 Dec 2023 10:04:18 -0500
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-6cea0fd9b53so1495587b3a.1
- for <qemu-riscv@nongnu.org>; Mon, 18 Dec 2023 07:04:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1702911855; x=1703516655; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eZmwHBAqlWDpR0Ly31GEGuNJ8i9iUz/JPoUFQ5VSjzk=;
- b=jX1rkR/UxTT+vfvWoyyZiRSiIcwRqywSmjb1IcaNrTTpKrT2OuIZyUOrL0CI1Uss07
- aISorcydnl9k2jQ/9Bj1OGH8ol309GJH76ThiXptho9NuchI0lv4ewSe9hIQWjlKdmAK
- Fy/oFXvBkUBnYTFlokY0zCx7UP4LAHDLlkAnFhfgVt52Dsww2LbFHMkUfQ3t5aoqrB+T
- TTjYdN1S78DaFAb74T0ox3NAk66ZFMmTCs1ga5RerIGLir9j7+VCgxKQHU4vc1UXyW75
- GtSJy/SKAHpttRBWvP9wBwUpWnIQxgKhF7oMOWeNQPIeRdrw3K1UE4de94BqQrFNiVZg
- BlmA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702911855; x=1703516655;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=eZmwHBAqlWDpR0Ly31GEGuNJ8i9iUz/JPoUFQ5VSjzk=;
- b=sfMGn7XmGQUgp3sFl6eaWG4ddc9v3unpsVV4toeLHr10JKiMP06MLCwbpYf2S3jTDc
- +P/+nJRYfQhKtu3WKDPYE+4sNJi42LkWypGXgXQTW4I5LV+Jug7+yLItxsR7YMZcw2Ou
- bS/qAm10fS42C2+6RZ1MuxHhNoL1UB5gjeu3aVxG7zC7z5MMn6J/a1QM5BMxsEuGpvmh
- jP6QbGtYuxFhqcyxIJ5OJ8cU1Ik5ZMDSPvrO514ir9+HniX/72S9LH/R48xNhG12yvWk
- WSV6z5bqUkNSp0qmhe9q6Lh2CumfRqo6jeYzzy2gM3SbHWknpdHAVytGIbrZPKGx9YyJ
- 7bTw==
-X-Gm-Message-State: AOJu0YyEeetdhr7Shp+2Lg+t1IUXb4uUbrCtI2sUXTJfceIRfIS1Zv2r
- AhUXe7qqwQuoIfMfn3271xmEQw==
-X-Google-Smtp-Source: AGHT+IGZ67e60c/8Y/HVbxkqemWJy4YCBzp3+yOGco2hCAT26bJMNOkKdQr885m+NH/kqJbBhr5z3Q==
-X-Received: by 2002:a05:6a00:4b42:b0:6ce:2731:d5c8 with SMTP id
- kr2-20020a056a004b4200b006ce2731d5c8mr8414386pfb.57.1702911853843; 
- Mon, 18 Dec 2023 07:04:13 -0800 (PST)
-Received: from sunil-pc.Dlink ([106.51.188.200])
- by smtp.gmail.com with ESMTPSA id
- p1-20020a056a000a0100b006c06779e593sm18975505pfh.16.2023.12.18.07.04.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Dec 2023 07:04:13 -0800 (PST)
-From: Sunil V L <sunilvl@ventanamicro.com>
-To: qemu-arm@nongnu.org,
-	qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Shannon Zhao <shannon.zhaosl@gmail.com>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Gerd Hoffmann <kraxel@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ (Exim 4.90_1) (envelope-from <ncopa@alpinelinux.org>)
+ id 1rFGOn-00078t-DV; Mon, 18 Dec 2023 11:23:22 -0500
+Received: from gbr-app-1.alpinelinux.org ([213.219.36.190])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <ncopa@alpinelinux.org>)
+ id 1rFGOk-0005sD-TC; Mon, 18 Dec 2023 11:23:20 -0500
+Received: from ncopa-desktop.lan (ti0056a400-5190.bb.online.no [85.167.243.86])
+ (Authenticated sender: ncopa@alpinelinux.org)
+ by gbr-app-1.alpinelinux.org (Postfix) with ESMTPSA id E162B22597C;
+ Mon, 18 Dec 2023 16:23:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alpinelinux.org;
+ s=smtp; t=1702916592;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=0FWL/8idHPFO9kfCetgnotzl224SvDQDNj5iKEvReqs=;
+ b=y+6rJ1W5Jn2PBD9jOtN6DJj+cZeZcNI7BIKUBXz7L060DZ+lRukWerQXtyR6igOOrKO3Mt
+ IcHgk6Hn4AbATuEYeke0InYZMUiu1SmC08h3yNUMZNdw9j6vETy+sxFqVzl7TpbnX3PsZE
+ JxMnEnasHUA662MiJ9UmdHoiQKO7EuY=
+From: Natanael Copa <ncopa@alpinelinux.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-stable@nongnu.org, qemu-trivial@nongnu.org,
+ Natanael Copa <ncopa@alpinelinux.org>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Anup Patel <apatel@ventanamicro.com>,
- Atish Kumar Patra <atishp@rivosinc.com>, Haibo Xu <haibo1.xu@intel.com>,
- Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH v8 12/13] hw/riscv/virt-acpi-build.c: Add IO controllers and
- devices
-Date: Mon, 18 Dec 2023 20:32:46 +0530
-Message-Id: <20231218150247.466427-13-sunilvl@ventanamicro.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20231218150247.466427-1-sunilvl@ventanamicro.com>
-References: <20231218150247.466427-1-sunilvl@ventanamicro.com>
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PATCH] target/riscv/kvm: do not use non-portable strerrorname_np()
+Date: Mon, 18 Dec 2023 17:22:44 +0100
+Message-ID: <20231218162301.14817-1-ncopa@alpinelinux.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pf1-x429.google.com
+Received-SPF: pass client-ip=213.219.36.190;
+ envelope-from=ncopa@alpinelinux.org; helo=gbr-app-1.alpinelinux.org
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Mon, 18 Dec 2023 11:34:59 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -112,154 +70,70 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add basic IO controllers and devices like PCI, VirtIO and UART in the
-ACPI namespace.
+strerrorname_np is non-portable and breaks building with musl libc.
 
-Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
-Acked-by: Michael S. Tsirkin <mst@redhat.com>
+Use strerror(errno) instead, like we do other places.
+
+Cc: qemu-stable@nongnu.org
+Fixes: commit 082e9e4a58ba (target/riscv/kvm: improve 'init_multiext_cfg' error msg)
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2041
+Buglink: https://gitlab.alpinelinux.org/alpine/aports/-/issues/15541
+Signed-off-by: Natanael Copa <ncopa@alpinelinux.org>
 ---
- hw/riscv/Kconfig           |  1 +
- hw/riscv/virt-acpi-build.c | 79 ++++++++++++++++++++++++++++++++++++--
- 2 files changed, 76 insertions(+), 4 deletions(-)
+ target/riscv/kvm/kvm-cpu.c | 18 ++++++++----------
+ 1 file changed, 8 insertions(+), 10 deletions(-)
 
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index b6a5eb4452..a50717be87 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -45,6 +45,7 @@ config RISCV_VIRT
-     select FW_CFG_DMA
-     select PLATFORM_BUS
-     select ACPI
-+    select ACPI_PCI
- 
- config SHAKTI_C
-     bool
-diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-index 86c38f7c2b..4d03a27efd 100644
---- a/hw/riscv/virt-acpi-build.c
-+++ b/hw/riscv/virt-acpi-build.c
-@@ -27,15 +27,18 @@
- #include "hw/acpi/acpi-defs.h"
- #include "hw/acpi/acpi.h"
- #include "hw/acpi/aml-build.h"
-+#include "hw/acpi/pci.h"
- #include "hw/acpi/utils.h"
-+#include "hw/intc/riscv_aclint.h"
- #include "hw/nvram/fw_cfg_acpi.h"
-+#include "hw/pci-host/gpex.h"
-+#include "hw/riscv/virt.h"
-+#include "hw/riscv/numa.h"
-+#include "hw/virtio/virtio-acpi.h"
-+#include "migration/vmstate.h"
- #include "qapi/error.h"
- #include "qemu/error-report.h"
- #include "sysemu/reset.h"
--#include "migration/vmstate.h"
--#include "hw/riscv/virt.h"
--#include "hw/riscv/numa.h"
--#include "hw/intc/riscv_aclint.h"
- 
- #define ACPI_BUILD_TABLE_SIZE             0x20000
- #define ACPI_BUILD_INTC_ID(socket, index) ((socket << 24) | (index))
-@@ -132,6 +135,39 @@ static void acpi_dsdt_add_cpus(Aml *scope, RISCVVirtState *s)
+diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+index 45b6cf1cfa..117e33cf90 100644
+--- a/target/riscv/kvm/kvm-cpu.c
++++ b/target/riscv/kvm/kvm-cpu.c
+@@ -832,9 +832,8 @@ static void kvm_riscv_read_multiext_legacy(RISCVCPU *cpu,
+                 multi_ext_cfg->supported = false;
+                 val = false;
+             } else {
+-                error_report("Unable to read ISA_EXT KVM register %s, "
+-                             "error code: %s", multi_ext_cfg->name,
+-                             strerrorname_np(errno));
++                error_report("Unable to read ISA_EXT KVM register %s: %s",
++                             multi_ext_cfg->name, strerror(errno));
+                 exit(EXIT_FAILURE);
+             }
+         } else {
+@@ -895,8 +894,8 @@ static void kvm_riscv_init_multiext_cfg(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
+          *
+          * Error out if we get any other errno.
+          */
+-        error_report("Error when accessing get-reg-list, code: %s",
+-                     strerrorname_np(errno));
++        error_report("Error when accessing get-reg-list: %s",
++                     strerror(errno));
+         exit(EXIT_FAILURE);
      }
- }
  
-+static void
-+acpi_dsdt_add_uart(Aml *scope, const MemMapEntry *uart_memmap,
-+                    uint32_t uart_irq)
-+{
-+    Aml *dev = aml_device("COM0");
-+    aml_append(dev, aml_name_decl("_HID", aml_string("PNP0501")));
-+    aml_append(dev, aml_name_decl("_UID", aml_int(0)));
-+
-+    Aml *crs = aml_resource_template();
-+    aml_append(crs, aml_memory32_fixed(uart_memmap->base,
-+                                         uart_memmap->size, AML_READ_WRITE));
-+    aml_append(crs,
-+                aml_interrupt(AML_CONSUMER, AML_LEVEL, AML_ACTIVE_HIGH,
-+                               AML_EXCLUSIVE, &uart_irq, 1));
-+    aml_append(dev, aml_name_decl("_CRS", crs));
-+
-+    Aml *pkg = aml_package(2);
-+    aml_append(pkg, aml_string("clock-frequency"));
-+    aml_append(pkg, aml_int(3686400));
-+
-+    Aml *UUID = aml_touuid("DAFFD814-6EBA-4D8C-8A91-BC9BBF4AA301");
-+
-+    Aml *pkg1 = aml_package(1);
-+    aml_append(pkg1, pkg);
-+
-+    Aml *package = aml_package(2);
-+    aml_append(package, UUID);
-+    aml_append(package, pkg1);
-+
-+    aml_append(dev, aml_name_decl("_DSD", package));
-+    aml_append(scope, dev);
-+}
-+
- /* RHCT Node[N] starts at offset 56 */
- #define RHCT_NODE_ARRAY_OFFSET 56
+@@ -905,8 +904,8 @@ static void kvm_riscv_init_multiext_cfg(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
+     reglist->n = rl_struct.n;
+     ret = ioctl(kvmcpu->cpufd, KVM_GET_REG_LIST, reglist);
+     if (ret) {
+-        error_report("Error when reading KVM_GET_REG_LIST, code %s ",
+-                     strerrorname_np(errno));
++        error_report("Error when reading KVM_GET_REG_LIST: %s",
++                     strerror(errno));
+         exit(EXIT_FAILURE);
+     }
  
-@@ -310,6 +346,8 @@ static void build_dsdt(GArray *table_data,
-                        RISCVVirtState *s)
- {
-     Aml *scope, *dsdt;
-+    MachineState *ms = MACHINE(s);
-+    uint8_t socket_count;
-     const MemMapEntry *memmap = s->memmap;
-     AcpiTable table = { .sig = "DSDT", .rev = 2, .oem_id = s->oem_id,
-                         .oem_table_id = s->oem_table_id };
-@@ -329,6 +367,29 @@ static void build_dsdt(GArray *table_data,
+@@ -927,9 +926,8 @@ static void kvm_riscv_init_multiext_cfg(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
+         reg.addr = (uint64_t)&val;
+         ret = ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
+         if (ret != 0) {
+-            error_report("Unable to read ISA_EXT KVM register %s, "
+-                         "error code: %s", multi_ext_cfg->name,
+-                         strerrorname_np(errno));
++            error_report("Unable to read ISA_EXT KVM register %s: %s",
++                         multi_ext_cfg->name, strerror(errno));
+             exit(EXIT_FAILURE);
+         }
  
-     fw_cfg_acpi_dsdt_add(scope, &memmap[VIRT_FW_CFG]);
- 
-+    socket_count = riscv_socket_count(ms);
-+
-+    acpi_dsdt_add_uart(scope, &memmap[VIRT_UART0], UART0_IRQ);
-+
-+    if (socket_count == 1) {
-+        virtio_acpi_dsdt_add(scope, memmap[VIRT_VIRTIO].base,
-+                             memmap[VIRT_VIRTIO].size,
-+                             VIRTIO_IRQ, 0, VIRTIO_COUNT);
-+        acpi_dsdt_add_gpex_host(scope, PCIE_IRQ);
-+    } else if (socket_count == 2) {
-+        virtio_acpi_dsdt_add(scope, memmap[VIRT_VIRTIO].base,
-+                             memmap[VIRT_VIRTIO].size,
-+                             VIRTIO_IRQ + VIRT_IRQCHIP_NUM_SOURCES, 0,
-+                             VIRTIO_COUNT);
-+        acpi_dsdt_add_gpex_host(scope, PCIE_IRQ + VIRT_IRQCHIP_NUM_SOURCES);
-+    } else {
-+        virtio_acpi_dsdt_add(scope, memmap[VIRT_VIRTIO].base,
-+                             memmap[VIRT_VIRTIO].size,
-+                             VIRTIO_IRQ + VIRT_IRQCHIP_NUM_SOURCES, 0,
-+                             VIRTIO_COUNT);
-+        acpi_dsdt_add_gpex_host(scope, PCIE_IRQ + VIRT_IRQCHIP_NUM_SOURCES * 2);
-+    }
-+
-     aml_append(dsdt, scope);
- 
-     /* copy AML table into ACPI tables blob and patch header there */
-@@ -465,6 +526,16 @@ static void virt_acpi_build(RISCVVirtState *s, AcpiBuildTables *tables)
-     acpi_add_table(table_offsets, tables_blob);
-     build_rhct(tables_blob, tables->linker, s);
- 
-+    acpi_add_table(table_offsets, tables_blob);
-+    {
-+        AcpiMcfgInfo mcfg = {
-+           .base = s->memmap[VIRT_PCIE_MMIO].base,
-+           .size = s->memmap[VIRT_PCIE_MMIO].size,
-+        };
-+        build_mcfg(tables_blob, tables->linker, &mcfg, s->oem_id,
-+                   s->oem_table_id);
-+    }
-+
-     /* XSDT is pointed to by RSDP */
-     xsdt = tables_blob->len;
-     build_xsdt(tables_blob, tables->linker, table_offsets, s->oem_id,
 -- 
-2.39.2
+2.43.0
 
 
