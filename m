@@ -4,79 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57C9EC35274
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Dec 2023 21:35:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1F2CC35274
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Dec 2023 21:43:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rFLH7-0000vW-BC; Mon, 18 Dec 2023 16:35:47 -0500
+	id 1rFLNu-0003wS-LH; Mon, 18 Dec 2023 16:42:47 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1rFLGo-0000s3-7d; Mon, 18 Dec 2023 16:35:26 -0500
-Received: from isrv.corpit.ru ([86.62.121.231])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1rFLGm-0001bK-9q; Mon, 18 Dec 2023 16:35:25 -0500
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 256DE3CDA9;
- Tue, 19 Dec 2023 00:35:20 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 1D9384DD73;
- Tue, 19 Dec 2023 00:35:09 +0300 (MSK)
-Message-ID: <3a159117-1f07-4d1d-911f-98e102959dab@tls.msk.ru>
-Date: Tue, 19 Dec 2023 00:35:08 +0300
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rFLNr-0003wB-P9
+ for qemu-riscv@nongnu.org; Mon, 18 Dec 2023 16:42:44 -0500
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rFLNd-0002tW-Vz
+ for qemu-riscv@nongnu.org; Mon, 18 Dec 2023 16:42:32 -0500
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-1d075392ff6so26106215ad.1
+ for <qemu-riscv@nongnu.org>; Mon, 18 Dec 2023 13:42:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1702935748; x=1703540548; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=MdXgJLb8m17I6hAhaSrmUKe3l3vEoRUpd/gpx/q+FSo=;
+ b=DDkV691mxIyuetPMrAL7ou3686oCWq+dR9H9RorDWxwE8wy//JbotT+KVKAi4O/YAC
+ I66wViSLiiExV4MDayy611JELlnFdg3Vr7Ozvw/sMWs8GQWodh4mRmARjkuKaPpI6RD4
+ KN3cvpAjSG5f7qgsP3mIiS4mnAydOkrbZGVRU8a1MgQ6dhaS4sFwVEWG5xICOTemEk3L
+ EyBMSCqMMoFTl3aAPPLZ4YglwTOHfevb9G7jZyLh+NzFoeW9mXUBm1vuX4UrJBp3ULGD
+ IkDcM/+6uEJVMe8BeC/TnBMzGrar8HoZBsF4U6sis9jnGqdYZIiNdGeDnDsBabGJyvAG
+ jWpA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702935748; x=1703540548;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=MdXgJLb8m17I6hAhaSrmUKe3l3vEoRUpd/gpx/q+FSo=;
+ b=tkrdEc3B6j+XA90wpLcUs43pwRW3V75FxlBZ2Yf0HPF0cx/0YQMwdFm1Fr6xnGS6zg
+ 2mYTdqT9G7vJYZXa5sulPZX9seIl+nvP1Q4VMAPHWy1LobAR3TE3DMEEkYMY11P4n//x
+ 2gVpiNLvzV0phaH3lRK6dfmWDsd8RBKNQhWb1rR+RnkZ0zknhQl5cw9C/FTlpdk5qpUu
+ Ua5kKkJAwOnXHieOJqD5Re4tCOdJGGlFY8AhBsjI9o0P7aj7lQ8r0QWOGw8PXw/jtiTF
+ xpGrlqsWK3YGE+Gp50gnfUbccnFWOACw0NejvllKSj/YzgAHVrvAqKGKw+DZc+PlnbRc
+ ehSw==
+X-Gm-Message-State: AOJu0Yzl5W7WqwXEz4CiKB8XmyblQqemtRWsMBikadWifx4rB23hTfrH
+ 2sh2tiBRxmH98OfUgBh7ttzYBStl1KswZA==
+X-Google-Smtp-Source: AGHT+IE6Q+NG23Au5ghMw570AIhk6jEK7jCweZZ2am+21PHPcxjkzB8xoXYOMzrZnoDgi04KrEeIpg==
+X-Received: by 2002:a17:903:27c8:b0:1d3:5612:e546 with SMTP id
+ km8-20020a17090327c800b001d35612e546mr45002plb.12.1702935748376; 
+ Mon, 18 Dec 2023 13:42:28 -0800 (PST)
+Received: from [192.168.68.110] ([179.93.21.205])
+ by smtp.gmail.com with ESMTPSA id
+ az4-20020a170902a58400b001b7f40a8959sm19429993plb.76.2023.12.18.13.42.24
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 18 Dec 2023 13:42:27 -0800 (PST)
+Message-ID: <969e91df-5c1b-4c55-aa31-942d32d314a6@ventanamicro.com>
+Date: Mon, 18 Dec 2023 18:42:23 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv/kvm: do not use non-portable
- strerrorname_np()
+Subject: Re: [PATCH 1/1] target/riscv/kvm.c: remove group setting of KVM AIA
+ if the machine only has 1 socket
 Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Natanael Copa <ncopa@alpinelinux.org>, qemu-devel@nongnu.org
-Cc: qemu-stable@nongnu.org, qemu-trivial@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>,
+To: Yong-Xuan Wang <yongxuan.wang@sifive.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com, 
+ jim.shu@sifive.com, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
-References: <20231218162301.14817-1-ncopa@alpinelinux.org>
- <dfb9bf4e-820a-4e7e-b62b-8df952099e7a@ventanamicro.com>
-From: Michael Tokarev <mjt@tls.msk.ru>
-Autocrypt: addr=mjt@tls.msk.ru; keydata=
- xsBLBETIiwkBCADh3cFB56BQYPjtMZCfK6PSLR8lw8EB20rsrPeJtd91IoNZlnCjSoxd9Th1
- bLUR8YlpRJ2rjc6O1Bc04VghqUOHgS/tYt8vLjcGWixzdhSLJgPDK3QQZPAvBjMbCt1B6euC
- WuD87Pv5Udlpnzf4aMwxkgfTusx+ynae/o+T5r7tXD+isccbC3SiGhmAPxFyY3zGcFk4+Rxc
- 0tP8YY2FWE/baHu+lBDTUN79efWAkHhex1XzVZsV7ZD16rzDbXFK5m6ApvGJWlr5YDEEydTF
- WwmvwBfr4OINVxzEG/ujNiG4fpMf2NsnFGyB9aSbFjXZevB4qWkduYYW+xpK1EryszHtAAYp
- zSBNaWNoYWVsIFRva2FyZXYgPG1qdEB0bHMubXNrLnJ1PsLAlgQTAQoAQAIbAwYLCQgHAwIE
- FQIIAwQWAgMBAh4BAheAAhkBFiEEbuGV0Yhuj/uBDUMkRXzgoIBEZcUFAmBbcjwFCS5e6jMA
- CgkQRXzgoIBEZcUTIQgA1hPsOF82pXxbcJXBMc4zB9OQu4AlnZvERoGyw7I2222QzaN3RFuj
- Fia//mapXzpIQNF08l/AA6cx+CKPeGnXwyZfF9fLa4RfifmdNKME8C00XlqnoJDZBGzq8yMy
- LAKDxl9OQWFcDwDxV+irg5U3fbtNVhvV0kLbS2TyQ0aU5w60ERS2NcyDWplOo7AOzZWChcA4
- UFf78oVdZdCW8YDtU0uQFhA9moNnrePy1HSFqduxnlFHEI+fDj/TiOm2ci48b8SBBJOIJFjl
- SBgH8+SfT9ZqkzhN9vh3YJ49831NwASVm0x1rDHcIwWD32VFZViZ3NjehogRNH9br0PSUYOC
- 3s7ATQRX2BjLAQgAnak3m0imYOkv2tO/olULFa686tlwuvl5kL0NWCdGQeXv2uMxy36szcrh
- K1uYhpiQv4r2qNd8BJtYlnYIK16N8GBdkplaDIHcBMbU4t+6bQzEIJIaWoq1hzakmHHngE2a
- pNMnUf/01GFvCRPlv3imkujE/5ILbagjtdyJaHF0wGOSlTnNT4W8j+zPJ/XK0I5EVQwtbmoc
- GY62LKxxz2pID6sPZV4zQVY4JdUQaFvOz1emnBxakkt0cq3Qnnqso1tjiy7vyH9CAwPR/48W
- fpK6dew4Fk+STYtBeixOTfSUS8qRS/wfpUeNa5RnEdTtFQ9IcjpQ/nPrvJJsu9FqwlpjMwAR
- AQABwsBlBBgBCAAPBQJX2BjLAhsMBQkSzAMAAAoJEEV84KCARGXFUKcH/jqKETECkbyPktdP
- cWVqw2ZIsmGxMkIdnZTbPwhORseGXMHadQODayhU9GWfCDdSPkWDWzMamD+qStfl9MhlVT60
- HTbo6wu1W/ogUS70qQPTY9IfsvAj6f8TlSlK0eLMa3s2UxL2oe5FkNs2CnVeRlr4Yqvp/ZQV
- 6LXtew4GPRrmplUT/Cre9QIUqR4pxYCQaMoOXQQw3Y0csBwoDYUQujn3slbDJRIweHoppBzT
- rM6ZG5ldWQN3n3d71pVuv80guylX8+TSB8Mvkqwb5I36/NAFKl0CbGbTuQli7SmNiTAKilXc
- Y5Uh9PIrmixt0JrmGVRzke6+11mTjVlio/J5dCM=
-In-Reply-To: <dfb9bf4e-820a-4e7e-b62b-8df952099e7a@ventanamicro.com>
+ Andrew Jones <ajones@ventanamicro.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+References: <20231218090543.22353-1-yongxuan.wang@sifive.com>
+ <20231218090543.22353-2-yongxuan.wang@sifive.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20231218090543.22353-2-yongxuan.wang@sifive.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=86.62.121.231; envelope-from=mjt@tls.msk.ru;
- helo=isrv.corpit.ru
-X-Spam_score_int: -68
-X-Spam_score: -6.9
-X-Spam_bar: ------
-X-Spam_report: (-6.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_HI=-5,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x633.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -92,52 +104,66 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-18.12.2023 20:20, Daniel Henrique Barboza wrote:
-> 
-> 
-> On 12/18/23 13:22, Natanael Copa wrote:
->> strerrorname_np is non-portable and breaks building with musl libc.
->>
->> Use strerror(errno) instead, like we do other places.
->>
->> Cc: qemu-stable@nongnu.org
->> Fixes: commit 082e9e4a58ba (target/riscv/kvm: improve 'init_multiext_cfg' error msg)
->> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2041
->> Buglink: https://gitlab.alpinelinux.org/alpine/aports/-/issues/15541
->> Signed-off-by: Natanael Copa <ncopa@alpinelinux.org>
->> ---
->>   target/riscv/kvm/kvm-cpu.c | 18 ++++++++----------
->>   1 file changed, 8 insertions(+), 10 deletions(-)
->>
->> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
->> index 45b6cf1cfa..117e33cf90 100644
->> --- a/target/riscv/kvm/kvm-cpu.c
->> +++ b/target/riscv/kvm/kvm-cpu.c
->> @@ -832,9 +832,8 @@ static void kvm_riscv_read_multiext_legacy(RISCVCPU *cpu,
->>                   multi_ext_cfg->supported = false;
->>                   val = false;
->>               } else {
->> -                error_report("Unable to read ISA_EXT KVM register %s, "
->> -                             "error code: %s", multi_ext_cfg->name,
->> -                             strerrorname_np(errno));
->> +                error_report("Unable to read ISA_EXT KVM register %s: %s",
->> +                             multi_ext_cfg->name, strerror(errno));
-> 
-> 
-> The reason I did this change, as described in 082e9e4a58ba mentioned in the commit
-> message, was precisely to avoid things like this:
-> 
-> qemu-system-riscv64: Unable to read ISA_EXT KVM register ssaia, error: no such file or directory
 
-If KVM context puts its own unique meaning for ENOENT, maybe something like
 
-  "unable to read KVM register: %s\n", errno == ENOENT ? "no such register" : strerror(errno)
+On 12/18/23 06:05, Yong-Xuan Wang wrote:
+> The emulated AIA within the Linux kernel restores the HART index
+> of the IMSICs according to the configured AIA settings. During
+> this process, the group setting is used only when the machine
+> partitions harts into groups. It's unnecessary to set the group
+> configuration if the machine has only one socket, as its address
+> space might not contain the group shift.
+> 
+> Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+> Reviewed-by: Jim Shu <jim.shu@sifive.com>
+> ---
 
-would do it better?
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-To me, "No such file or directory" already tells everything and does not look
-weird, but that's because I've seen this error message for all sorts of contexts
-and got used to this. It is definitely understandable.
-
-/mjt
+>   target/riscv/kvm/kvm-cpu.c | 31 +++++++++++++++++--------------
+>   1 file changed, 17 insertions(+), 14 deletions(-)
+> 
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index 62a1e51f0a2e..6494597157b8 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -1387,21 +1387,24 @@ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
+>           exit(1);
+>       }
+>   
+> -    socket_bits = find_last_bit(&socket_count, BITS_PER_LONG) + 1;
+> -    ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+> -                            KVM_DEV_RISCV_AIA_CONFIG_GROUP_BITS,
+> -                            &socket_bits, true, NULL);
+> -    if (ret < 0) {
+> -        error_report("KVM AIA: failed to set group_bits");
+> -        exit(1);
+> -    }
+>   
+> -    ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+> -                            KVM_DEV_RISCV_AIA_CONFIG_GROUP_SHIFT,
+> -                            &group_shift, true, NULL);
+> -    if (ret < 0) {
+> -        error_report("KVM AIA: failed to set group_shift");
+> -        exit(1);
+> +    if (socket_count > 1) {
+> +        socket_bits = find_last_bit(&socket_count, BITS_PER_LONG) + 1;
+> +        ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+> +                                KVM_DEV_RISCV_AIA_CONFIG_GROUP_BITS,
+> +                                &socket_bits, true, NULL);
+> +        if (ret < 0) {
+> +            error_report("KVM AIA: failed to set group_bits");
+> +            exit(1);
+> +        }
+> +
+> +        ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+> +                                KVM_DEV_RISCV_AIA_CONFIG_GROUP_SHIFT,
+> +                                &group_shift, true, NULL);
+> +        if (ret < 0) {
+> +            error_report("KVM AIA: failed to set group_shift");
+> +            exit(1);
+> +        }
+>       }
+>   
+>       guest_bits = guest_num == 0 ? 0 :
 
