@@ -4,68 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF7CEC35274
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Dec 2023 03:19:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDCA5C35274
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Dec 2023 04:02:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rF4A7-0003CN-D7; Sun, 17 Dec 2023 22:19:23 -0500
+	id 1rF4pw-0004PE-D1; Sun, 17 Dec 2023 23:02:37 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rF4A4-0003BN-Ja; Sun, 17 Dec 2023 22:19:20 -0500
-Received: from mail-qk1-x735.google.com ([2607:f8b0:4864:20::735])
+ id 1rF4pr-0004Od-Hu; Sun, 17 Dec 2023 23:02:31 -0500
+Received: from mail-vk1-xa33.google.com ([2607:f8b0:4864:20::a33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rF4A2-0008L1-Og; Sun, 17 Dec 2023 22:19:20 -0500
-Received: by mail-qk1-x735.google.com with SMTP id
- af79cd13be357-77f5b3fa323so190325785a.0; 
- Sun, 17 Dec 2023 19:19:18 -0800 (PST)
+ id 1rF4pq-0001ib-2w; Sun, 17 Dec 2023 23:02:31 -0500
+Received: by mail-vk1-xa33.google.com with SMTP id
+ 71dfb90a1353d-4b6c3a37ddeso196527e0c.0; 
+ Sun, 17 Dec 2023 20:02:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702869557; x=1703474357; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1702872148; x=1703476948; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=36kf5zrbILZW+uA0q0TBq/MRm+vepFVRdEC1alr6AtU=;
- b=Js/iBbvV2y88T/zLXsy12g9AVH5L5iD0YDtZCzZ2kl4rnvAWc0ySB5AQ8QTW6aNS52
- Oe/Ksq8YuUkXivntiF7HQ9vqxuW6mfqut4+4IuuGkgSDHqiVJoUBigL9pWT40M0MMlfi
- 8BDLjIl3NY4T/aTJ3KY9DAUMPHb6OdeT6qg7b3luZ3RpxzZgRDpkxTHiupocDOEzlhZ/
- sR1HhBfwAKCNmnM0LDqoKEpSkMZYQURycUPd9xT4bjZnhEY72rU/F0yDBvTpZCfwmgUQ
- x0Af4oHpgn+vgYN8d0x58Q5FTKN19UzhAuMnsV4K8lxqoeqFHjrvY/Q76Eoop1znN6jE
- UwqA==
+ bh=jvbarZLcf8+hdpbtuI2t6ImhljTfKcEURhaE3dBn6OI=;
+ b=ZRi0Y2cDP7TrTBUZ+cqldWf82b6+Ur8SJj/NzoHGyRsYv/Xr8mO5hSzxNN1eJoE9Wx
+ 45Mn4Bx/rAt5MeDgJBuJrlno5Jxhs3palGF3B4eXgYjg2zKXnT2wyM7Jgkln1j7OWzAc
+ exwGNNY/pg3lJHywwBkzx/00c2mPWwkbhcxaZOvmC9uXa9kdigUfR9y8AeYJoF0aNJo0
+ 9z1UCF+DtCtQy2OEV/xo0oFJ8YvVm0ahAlP9qq1XwoDq8zI962pGBDd8yfzXKiNg+7+7
+ FClWbySy3UnU9tAE/FP1wWEONaUelL0Hx/g/xrDgOF66rPHUkGtVo3xVq49DDxdLBTFL
+ ZPlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702869557; x=1703474357;
+ d=1e100.net; s=20230601; t=1702872148; x=1703476948;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=36kf5zrbILZW+uA0q0TBq/MRm+vepFVRdEC1alr6AtU=;
- b=mvuVBB6r2tB3Kyr2UvigF1eb2MgTDsxKToFdMyyIrnAm6cQbA6jrbt9fb+rpAnMRhX
- Lu3oIgPbgw7dO1M8CE6mlFQ6vM/e1XTm3NFlU5mGR82yLYYKD9GmAUFUfLWPQ3I+WT5x
- lL+x8JiqZ7j8/APZb0b0e5XByStoFxzNJJUONqKoxRHCDP3YA9JI8/rsxR+iaQNqYOsJ
- fzELf/7stQ5X5/illRPm70zUBN3ohV9VUil6axyVPPrSCxKtv5633L0e8Ud9u2VizdpK
- GCxFsVhSaHOvYbLPQCXifR0DfMKg19Y4CmgcTBVEDe3t4GxZ0PYhemlZsp1Hvag1DrHk
- N5xA==
-X-Gm-Message-State: AOJu0YxHH0k2w7DhUiFhvBBMurZ1P5EKM/oabavlZmlYtP7g9NXRDuAT
- sNKCU44DKYANOz8bhsCA0aLDj5o0rlGG5fBlqTE=
-X-Google-Smtp-Source: AGHT+IEbcACEfHBrKogpb9+CTZrrVO7TWyKEJlFBwyHparnkIWdCIOqNJI9Tslqn9hfa1GngLndb3ybTtbbRSVDQKzk=
-X-Received: by 2002:a05:620a:10a6:b0:77f:9c9:70cb with SMTP id
- h6-20020a05620a10a600b0077f09c970cbmr17307129qkk.118.1702869557428; Sun, 17
- Dec 2023 19:19:17 -0800 (PST)
+ bh=jvbarZLcf8+hdpbtuI2t6ImhljTfKcEURhaE3dBn6OI=;
+ b=qeL7SAW2NPVD4l5/s9clLidzxOw75RFUsOhFgy9hCn7S0aKTMj/z6F+5LsRrbflplI
+ jixh3XMEnh/MnDZ3nR40Z03WTOoNpPC3QFb58Om4CVQTbhBvq2yrSAYMVZJCw6fJy0WG
+ Ndp4Ifj02yM2p3ktRQYXJjluMSf/ll+FIv2crGSAuWSnKjviRBIK+Ms42v6JOebhumot
+ 69FvI9c+hAIE+PWmCLptc3ckISIGK80HmVX45TiI/QrLA58VUsCU3cSgej0SMnPm9tb2
+ wjCV7qAihIDMV1I4bumpnM7fH00n0Pp3OeAjvitC9maSJRBUx7vTUW4Poa0Owl+kUOxn
+ 3n1A==
+X-Gm-Message-State: AOJu0YzQl5U2QpUYJbRJQ5mriz1YJuS7yu/d7I26HSs7trayVl+D43Yg
+ pEoG2vrCeHCu54mn24vA5tR1Qr6MrxolxvA8Sss=
+X-Google-Smtp-Source: AGHT+IE2K/ywxH1dRQAeDXX+FlsN/t80BgvzXrEX+5NxrwPaqNJwqNbV1c1UAbhuV9IC+zZIxZG7t6io8hYxmyVq7s0=
+X-Received: by 2002:a05:6122:2519:b0:4b6:cb66:778c with SMTP id
+ cl25-20020a056122251900b004b6cb66778cmr161888vkb.16.1702872148510; Sun, 17
+ Dec 2023 20:02:28 -0800 (PST)
 MIME-Version: 1.0
-References: <20231130182748.1894790-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20231130182748.1894790-1-dbarboza@ventanamicro.com>
+References: <20231122053251.440723-1-ethan84@andestech.com>
+ <20231122053251.440723-2-ethan84@andestech.com>
+In-Reply-To: <20231122053251.440723-2-ethan84@andestech.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 18 Dec 2023 13:18:51 +1000
-Message-ID: <CAKmqyKOd-_4X5M7UATM=VqRdJb1Dr1GQ0=9RK5gD7QarDOt8oQ@mail.gmail.com>
-Subject: Re: [PATCH for-9.0 0/4] target/riscv: add RVV CSRs
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, ajones@ventanamicro.com
+Date: Mon, 18 Dec 2023 14:02:02 +1000
+Message-ID: <CAKmqyKMgxiW5ZK=OmGiDEpTXJN=jyFnzxMzduxkD9Dvn1WDM3w@mail.gmail.com>
+Subject: Re: [PATCH v4 1/4] hw/core: Add config stream
+To: Ethan Chen <ethan84@andestech.com>
+Cc: qemu-devel@nongnu.org, peter.maydell@linaro.org, edgar.iglesias@gmail.com, 
+ richard.henderson@linaro.org, pbonzini@redhat.com, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, in.meng@windriver.com, liweiwei@iscas.ac.cn, 
+ dbarboza@ventanamicro.com, hiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, 
+ peterx@redhat.com, david@redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::735;
- envelope-from=alistair23@gmail.com; helo=mail-qk1-x735.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a33;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa33.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -89,80 +92,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Dec 1, 2023 at 4:29=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Wed, Nov 22, 2023 at 3:36=E2=80=AFPM Ethan Chen via <qemu-devel@nongnu.o=
+rg> wrote:
 >
-> Hi,
->
-> This series adds RVV, vstart, vl and vtype regs to the KVM driver.
->
-> But first we need a couple of things done. We need 'ptrace.h' RISC-V
-> linux-header to be able to read/write RVV CSRs. This is done in patch 2.
-> Patch 1 is the usual linux-header bump for all archs.
->
-> Patch 3 is adding a realize() callback for the KVM driver because we're
-> doing a prctl() to enable Vector support for the thread.
->
-> Patches are based on master. You'll need the following KVM fix to be
-> able to build:
->
-> [PATCH for-8.2] target/riscv/kvm: fix shadowing in kvm_riscv_(get|put)_re=
-gs_csr
->
->
-> Daniel Henrique Barboza (4):
->   linux-headers: Update to Linux v6.7-rc3
->   linux-headers: riscv: add ptrace.h
->   target/riscv/kvm: do PR_RISCV_V_SET_CONTROL during realize()
->   target/riscv/kvm: add RVV and Vector CSR regs
+> Make other device can use /hw/core/stream.c by select this config.
 
-Do you mind rebasing this on
-https://github.com/alistair23/qemu/tree/riscv-to-apply.next
+Ensure other devices can use /hw/core/stream.c by selecting this config.
+
+>
+> Signed-off-by: Ethan Chen <ethan84@andestech.com>
+
+Otherwise:
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  hw/Kconfig          | 1 +
+>  hw/core/Kconfig     | 3 +++
+>  hw/core/meson.build | 2 +-
+>  3 files changed, 5 insertions(+), 1 deletion(-)
 >
->  include/standard-headers/drm/drm_fourcc.h     |   2 +
->  include/standard-headers/linux/pci_regs.h     |  24 ++-
->  include/standard-headers/linux/vhost_types.h  |   7 +
->  .../standard-headers/linux/virtio_config.h    |   5 +
->  include/standard-headers/linux/virtio_pci.h   |  11 ++
->  linux-headers/asm-arm64/kvm.h                 |  32 ++++
->  linux-headers/asm-generic/unistd.h            |  14 +-
->  linux-headers/asm-loongarch/bitsperlong.h     |   1 +
->  linux-headers/asm-loongarch/kvm.h             | 108 +++++++++++
->  linux-headers/asm-loongarch/mman.h            |   1 +
->  linux-headers/asm-loongarch/unistd.h          |   5 +
->  linux-headers/asm-mips/unistd_n32.h           |   4 +
->  linux-headers/asm-mips/unistd_n64.h           |   4 +
->  linux-headers/asm-mips/unistd_o32.h           |   4 +
->  linux-headers/asm-powerpc/unistd_32.h         |   4 +
->  linux-headers/asm-powerpc/unistd_64.h         |   4 +
->  linux-headers/asm-riscv/kvm.h                 |  12 ++
->  linux-headers/asm-riscv/ptrace.h              | 132 +++++++++++++
->  linux-headers/asm-s390/unistd_32.h            |   4 +
->  linux-headers/asm-s390/unistd_64.h            |   4 +
->  linux-headers/asm-x86/unistd_32.h             |   4 +
->  linux-headers/asm-x86/unistd_64.h             |   3 +
->  linux-headers/asm-x86/unistd_x32.h            |   3 +
->  linux-headers/linux/iommufd.h                 | 180 +++++++++++++++++-
->  linux-headers/linux/kvm.h                     |  11 ++
->  linux-headers/linux/psp-sev.h                 |   1 +
->  linux-headers/linux/stddef.h                  |   7 +
->  linux-headers/linux/userfaultfd.h             |   9 +-
->  linux-headers/linux/vfio.h                    |  47 +++--
->  linux-headers/linux/vhost.h                   |   8 +
->  scripts/update-linux-headers.sh               |   3 +
->  target/riscv/kvm/kvm-cpu.c                    | 103 ++++++++++
->  32 files changed, 735 insertions(+), 26 deletions(-)
->  create mode 100644 linux-headers/asm-loongarch/bitsperlong.h
->  create mode 100644 linux-headers/asm-loongarch/kvm.h
->  create mode 100644 linux-headers/asm-loongarch/mman.h
->  create mode 100644 linux-headers/asm-loongarch/unistd.h
->  create mode 100644 linux-headers/asm-riscv/ptrace.h
+> diff --git a/hw/Kconfig b/hw/Kconfig
+> index 9ca7b38c31..e4d153dce7 100644
+> --- a/hw/Kconfig
+> +++ b/hw/Kconfig
+> @@ -79,6 +79,7 @@ config XILINX
+>  config XILINX_AXI
+>      bool
+>      select PTIMER # for hw/dma/xilinx_axidma.c
+> +    select STREAM
 >
+>  config XLNX_ZYNQMP
+>      bool
+> diff --git a/hw/core/Kconfig b/hw/core/Kconfig
+> index 9397503656..e89ffa728b 100644
+> --- a/hw/core/Kconfig
+> +++ b/hw/core/Kconfig
+> @@ -27,3 +27,6 @@ config REGISTER
+>
+>  config SPLIT_IRQ
+>      bool
+> +
+> +config STREAM
+> +    bool
+> diff --git a/hw/core/meson.build b/hw/core/meson.build
+> index 67dad04de5..0893917b12 100644
+> --- a/hw/core/meson.build
+> +++ b/hw/core/meson.build
+> @@ -32,8 +32,8 @@ system_ss.add(when: 'CONFIG_PLATFORM_BUS', if_true: fil=
+es('platform-bus.c'))
+>  system_ss.add(when: 'CONFIG_PTIMER', if_true: files('ptimer.c'))
+>  system_ss.add(when: 'CONFIG_REGISTER', if_true: files('register.c'))
+>  system_ss.add(when: 'CONFIG_SPLIT_IRQ', if_true: files('split-irq.c'))
+> -system_ss.add(when: 'CONFIG_XILINX_AXI', if_true: files('stream.c'))
+>  system_ss.add(when: 'CONFIG_PLATFORM_BUS', if_true: files('sysbus-fdt.c'=
+))
+> +system_ss.add(when: 'CONFIG_STREAM', if_true: files('stream.c'))
+>
+>  system_ss.add(files(
+>    'cpu-sysemu.c',
 > --
-> 2.41.0
+> 2.34.1
 >
 >
 
