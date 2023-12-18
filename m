@@ -4,68 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDF06C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Dec 2023 00:10:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BA0BC3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Dec 2023 00:12:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rF1Cm-00017F-T2; Sun, 17 Dec 2023 19:09:56 -0500
+	id 1rF1Ev-0001t9-RP; Sun, 17 Dec 2023 19:12:09 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rF1Cl-00015g-Fp; Sun, 17 Dec 2023 19:09:55 -0500
-Received: from mail-ua1-x92b.google.com ([2607:f8b0:4864:20::92b])
+ id 1rF1Et-0001s8-W2; Sun, 17 Dec 2023 19:12:08 -0500
+Received: from mail-ot1-x329.google.com ([2607:f8b0:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rF1Cj-0003rr-RD; Sun, 17 Dec 2023 19:09:55 -0500
-Received: by mail-ua1-x92b.google.com with SMTP id
- a1e0cc1a2514c-7ca9c5921ceso673052241.1; 
- Sun, 17 Dec 2023 16:09:53 -0800 (PST)
+ id 1rF1Es-0005J0-1a; Sun, 17 Dec 2023 19:12:07 -0500
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-6db8e289d60so12668a34.2; 
+ Sun, 17 Dec 2023 16:12:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702858192; x=1703462992; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1702858323; x=1703463123; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=I79oP+kXZSmFq3WOKNiCM/ttcvZYYLuZYvELtmi6dDQ=;
- b=Wec592rOW6ovECARLoviY1olYRtsTUGBEudILhLaSMCZXc1MtPKuWFxO2PvTsfkaZw
- IFG362zP3vxWuatRFVS9NFBm3t9I3rQS7ocybITIEyGvAEq7V/vVuqp6gsMTBBQ1jn3L
- 4zlZbRnzLWmiS6ZvWy5eIgEeege0l0+PL0BB720eKVg4fq7X94dQiDD3w12/7q3JPhjK
- PPRDRChEnrcKpFdquU5KpvSIkLmjDsZYJsM52rPzDZVBkDM4Wp9x3Cxs5KGhRsXKSGwE
- hEeSegueEEv5Ko0MQU4zaxe4yB8j5LHLT5ex6YufXDB7M8R8ryokRAlNTfXeY5pniO7Y
- 2MLA==
+ bh=ppAygMqNY3b49kU3Oy0Nr8bNQa8xO4FeaYLqknhMUKs=;
+ b=RS8OOZfyGFRJWYWesE91+jJFw7E0uq8WgtI1pa8SWe7zbBLTXhpE7atBXRxVgdP323
+ XG47A17RWZhXzx0Le5npbTyDlztH3cjsaX61DQ+k3OHnznLCS9dMR1PzGj8uDlFgP6Hx
+ xTTdhF6LXUjQjgfXa/84vY9ia2Wo4PPZqX4KPZ+BtxrWDVpvGUN0uuu8IcJvMwJ3YCq7
+ FQ0KxvD/C0NF7BNuwUcTTQBJw84ObnZjJaIizfAKtEAGzNvUv4+PdwbKs73kuWegG4wA
+ KrhV5ObPVbT10IQSQDMpfrtJMR4Ey6RJbUw92kLdpxlaUHgHxDLdesujpLfjsDWIKXNW
+ KxdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702858192; x=1703462992;
+ d=1e100.net; s=20230601; t=1702858323; x=1703463123;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=I79oP+kXZSmFq3WOKNiCM/ttcvZYYLuZYvELtmi6dDQ=;
- b=eD78z0X4uDQLQcc72qToMZTWT9J2UU+P5IFhokNNiintDZ/IkcM+vRkj4L9qy7mPnZ
- jJphrSVApD40f/0kOaRJG/ahqzy4RZ5E/lIqKrLmsltAnUIr/vM+uXUe9e4yJO67PoN4
- G639LRHKlQByExRWFAjdI9PxvYqHEqaIzWKZpBKzDveuDjCSbCHp4NkMn7wP1CjimTzE
- 5SQ7mYxgZBLtIv77ATygAqh9xz9AU/LBx2uC0e9nJ2ae8rj/rsRt8uKUVdrk3hylrjSf
- 4g4i35Dlj7xvP+SMuaPeZt6gd7Kz7CDmPHgvjd26IsRjfZI2ngGJ4DvN68TLD3lAYmQa
- 18vA==
-X-Gm-Message-State: AOJu0Yz8D1V8IEQrVeI+k4OnaYEjC4ah0ZxZ+H3TM3ZdAqRMRgfsgjg+
- GvkTJY2Gj5GmqS0W4qXBTomDdajAq5WQbQr3Pg0=
-X-Google-Smtp-Source: AGHT+IG64y9LD++SBpCuPqZws5YuoPPLP8Gogm1SLOHCp0LmoHpP2OZjEgTWpoCTsB0y7FkiieZco/9LYEfYGdVBysU=
-X-Received: by 2002:a05:6102:54a4:b0:464:6018:abc5 with SMTP id
- bk36-20020a05610254a400b004646018abc5mr13634716vsb.5.1702858189333; Sun, 17
- Dec 2023 16:09:49 -0800 (PST)
+ bh=ppAygMqNY3b49kU3Oy0Nr8bNQa8xO4FeaYLqknhMUKs=;
+ b=f6sf5AH6/FZ70ZGs3/1kNiw8R/4D8g/rHACKPtJ5nDaNiK39lLB0lHbuajVSECMoXx
+ 5b3Hl4dpja0L11pxJIRbpXvKu4dc+zwvtuZkPvKDqOtLlEXGQv15BMDBeNUaLv+xiBWG
+ MVs12vwmGaw80f7v1S9QlTjqfsOy3FjFPGlLvgGz9Opr4E6gIxQBeO0pkQSBtOd5sh63
+ 8eYgUOxpG5SgM97ncnmAnQbTybXCqvuaUwWCsuaOriFoyymPzl8oWWqUKQR8kfX6pzvk
+ sfEQ6DehTVclfEqbQiss/WabznrMoqApPRN3UUtmShpPixvytkQSil9V7U/YcC8lOU7A
+ 4J8w==
+X-Gm-Message-State: AOJu0YxkRpNci+iAcqAAsrXvluQFLqCX8IRV5auft1Jb38wVV9iRZ6nG
+ 71rBNsd3zq1/KuT9C+9ZL5pQ0mzXvdledzz+Eac=
+X-Google-Smtp-Source: AGHT+IFz79HNPu4J/b7dor38C9M7KpbM6asCqAhy+tRy9hFwRp5tPsptedzSBVf6n6NqM2jLN0g+1rwCbChw9vQ5FJk=
+X-Received: by 2002:a05:6808:1416:b0:3b9:cf78:5aa0 with SMTP id
+ w22-20020a056808141600b003b9cf785aa0mr10733794oiv.38.1702858323234; Sun, 17
+ Dec 2023 16:12:03 -0800 (PST)
 MIME-Version: 1.0
-References: <20231208183835.2411523-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20231208183835.2411523-1-dbarboza@ventanamicro.com>
+References: <20231213-gdb-v17-0-777047380591@daynix.com>
+ <20231213-gdb-v17-3-777047380591@daynix.com>
+In-Reply-To: <20231213-gdb-v17-3-777047380591@daynix.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 18 Dec 2023 10:09:22 +1000
-Message-ID: <CAKmqyKPZL9TqKda_d+W-oBuQFdyoSJASz+7FqNa8dkeT_YfNow@mail.gmail.com>
-Subject: Re: [PATCH for-9.0 0/5] target/riscv/kvm: fix KVM reg id sizes
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, ajones@ventanamicro.com
+Date: Mon, 18 Dec 2023 10:11:37 +1000
+Message-ID: <CAKmqyKND5sRzgWVhgfDWBBz=oeLWPGMTwfZnXxSxe92vg3SSuA@mail.gmail.com>
+Subject: Re: [PATCH v17 03/14] target/riscv: Use GDBFeature for dynamic XML
+To: Akihiko Odaki <akihiko.odaki@daynix.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Nicholas Piggin <npiggin@gmail.com>, 
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Brian Cain <bcain@quicinc.com>, Song Gao <gaosong@loongson.cn>, 
+ Laurent Vivier <laurent@vivier.eu>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ David Hildenbrand <david@redhat.com>, 
+ Ilya Leoshkevich <iii@linux.ibm.com>, Thomas Huth <thuth@redhat.com>, 
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
+ Yanan Wang <wangyanan55@huawei.com>, Michael Rolnik <mrolnik@gmail.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>, 
+ John Snow <jsnow@redhat.com>, Cleber Rosa <crosa@redhat.com>,
+ Alexandre Iooss <erdnaxe@crans.org>, 
+ Mahmoud Mandour <ma.mandourr@gmail.com>, Mikhail Tyutin <m.tyutin@yadro.com>, 
+ Aleksandr Anenkov <a.anenkov@yadro.com>, qemu-arm@nongnu.org,
+ qemu-devel@nongnu.org, 
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, 
+ 20231213-riscv-v7-0-a760156a337f@daynix.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92b;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::329;
+ envelope-from=alistair23@gmail.com; helo=mail-ot1-x329.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -89,58 +116,253 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, Dec 9, 2023 at 4:40=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Wed, Dec 13, 2023 at 4:43=E2=80=AFPM Akihiko Odaki <akihiko.odaki@daynix=
+.com> wrote:
 >
-> Hi,
+> In preparation for a change to use GDBFeature as a parameter of
+> gdb_register_coprocessor(), convert the internal representation of
+> dynamic feature from plain XML to GDBFeature.
 >
-> While working in a follow-up for the Vector KVM regs, where we would
-> read 'vlenb' and then all other vregs [1], Drew noticed that we're using
-> kvm_riscv_reg_id() in registers that are u32 and u64.
->
-> The helper is returning ulong regs for all cases, meaning that we return
-> the wrong size for u32 regs when running 6 in 64 bits (case of FP_F
-> regs) and u64 regs when running in 32 bits (case of FP_D and timer
-> regs).
->
-> It's best to do a quick bug fix round in the KVM reg IDs before adding
-> more IDs, so here we are.
->
-> This is marked as 9.0 because the fixes aren't critical enough to
-> postpone 8.2. Michael, patches 1, 2 and 3 are good candidates for
-> 8.2-stable.
->
-> Alistair, in case these are accepted I'll re-send "[PATCH for-9.0 0/4]
-> target/riscv: add RVV CSRs" based on these fixes to avoid conflicts in
-> the tree.
->
->
-> [1] this is dependent on kernel side changes that are being discussed
-> here: https://lore.kernel.org/kvm/20231205174509.2238870-1-dbarboza@venta=
-namicro.com/
-> ("[PATCH v3 0/3] RISC-V, KVM: add 'vlenb' and vector CSRs to get-reg-list=
-")
->
->
-> Daniel Henrique Barboza (5):
->   target/riscv/kvm: change KVM_REG_RISCV_FP_F to u32
->   target/riscv/kvm: change KVM_REG_RISCV_FP_D to u64
->   target/riscv/kvm: change timer regs size to u64
->   target/riscv/kvm: add RISCV_CONFIG_REG()
->   target/riscv/kvm: rename riscv_reg_id() to riscv_reg_id_ulong()
+> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  target/riscv/cpu.h     |  5 ++--
+>  target/riscv/cpu.c     |  4 +--
+>  target/riscv/gdbstub.c | 79 ++++++++++++++++++++++----------------------=
+------
+>  3 files changed, 40 insertions(+), 48 deletions(-)
 >
->  target/riscv/kvm/kvm-cpu.c | 109 ++++++++++++++++++++-----------------
->  1 file changed, 59 insertions(+), 50 deletions(-)
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 060b7f69a743..ad7236d75477 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -24,6 +24,7 @@
+>  #include "hw/registerfields.h"
+>  #include "hw/qdev-properties.h"
+>  #include "exec/cpu-defs.h"
+> +#include "exec/gdbstub.h"
+>  #include "qemu/cpu-float.h"
+>  #include "qom/object.h"
+>  #include "qemu/int128.h"
+> @@ -424,8 +425,8 @@ struct ArchCPU {
+>
+>      CPURISCVState env;
+>
+> -    char *dyn_csr_xml;
+> -    char *dyn_vreg_xml;
+> +    GDBFeature dyn_csr_feature;
+> +    GDBFeature dyn_vreg_feature;
+>
+>      /* Configuration Settings */
+>      RISCVCPUConfig cfg;
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index b799f1336041..673e937a5d82 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1534,9 +1534,9 @@ static const char *riscv_gdb_get_dynamic_xml(CPUSta=
+te *cs, const char *xmlname)
+>      RISCVCPU *cpu =3D RISCV_CPU(cs);
+>
+>      if (strcmp(xmlname, "riscv-csr.xml") =3D=3D 0) {
+> -        return cpu->dyn_csr_xml;
+> +        return cpu->dyn_csr_feature.xml;
+>      } else if (strcmp(xmlname, "riscv-vector.xml") =3D=3D 0) {
+> -        return cpu->dyn_vreg_xml;
+> +        return cpu->dyn_vreg_feature.xml;
+>      }
+>
+>      return NULL;
+> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+> index 365040228a12..76b72a959549 100644
+> --- a/target/riscv/gdbstub.c
+> +++ b/target/riscv/gdbstub.c
+> @@ -214,13 +214,14 @@ static int riscv_gdb_set_virtual(CPURISCVState *cs,=
+ uint8_t *mem_buf, int n)
+>      return 0;
+>  }
+>
+> -static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
+> +static GDBFeature *riscv_gen_dynamic_csr_feature(CPUState *cs, int base_=
+reg)
+>  {
+>      RISCVCPUClass *mcc =3D RISCV_CPU_GET_CLASS(cs);
+>      RISCVCPU *cpu =3D RISCV_CPU(cs);
+>      CPURISCVState *env =3D &cpu->env;
+> -    GString *s =3D g_string_new(NULL);
+> +    GDBFeatureBuilder builder;
+>      riscv_csr_predicate_fn predicate;
+> +    const char *name;
+>      int bitsize =3D 16 << mcc->misa_mxl_max;
+>      int i;
+>
+> @@ -233,9 +234,9 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, in=
+t base_reg)
+>          bitsize =3D 64;
+>      }
+>
+> -    g_string_printf(s, "<?xml version=3D\"1.0\"?>");
+> -    g_string_append_printf(s, "<!DOCTYPE feature SYSTEM \"gdb-target.dtd=
+\">");
+> -    g_string_append_printf(s, "<feature name=3D\"org.gnu.gdb.riscv.csr\"=
+>");
+> +    gdb_feature_builder_init(&builder, &cpu->dyn_csr_feature,
+> +                             "org.gnu.gdb.riscv.csr", "riscv-csr.xml",
+> +                             base_reg);
+>
+>      for (i =3D 0; i < CSR_TABLE_SIZE; i++) {
+>          if (env->priv_ver < csr_ops[i].min_priv_ver) {
+> @@ -243,72 +244,64 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, =
+int base_reg)
+>          }
+>          predicate =3D csr_ops[i].predicate;
+>          if (predicate && (predicate(env, i) =3D=3D RISCV_EXCP_NONE)) {
+> -            if (csr_ops[i].name) {
+> -                g_string_append_printf(s, "<reg name=3D\"%s\"", csr_ops[=
+i].name);
+> -            } else {
+> -                g_string_append_printf(s, "<reg name=3D\"csr%03x\"", i);
+> +            g_autofree char *dynamic_name =3D NULL;
+> +            name =3D csr_ops[i].name;
+> +            if (!name) {
+> +                dynamic_name =3D g_strdup_printf("csr%03x", i);
+> +                name =3D dynamic_name;
+>              }
+> -            g_string_append_printf(s, " bitsize=3D\"%d\"", bitsize);
+> -            g_string_append_printf(s, " regnum=3D\"%d\"/>", base_reg + i=
+);
+> +
+> +            gdb_feature_builder_append_reg(&builder, name, bitsize, i,
+> +                                           "int", NULL);
+>          }
+>      }
+>
+> -    g_string_append_printf(s, "</feature>");
+> -
+> -    cpu->dyn_csr_xml =3D g_string_free(s, false);
+> +    gdb_feature_builder_end(&builder);
+>
+>  #if !defined(CONFIG_USER_ONLY)
+>      env->debugger =3D false;
+>  #endif
+>
+> -    return CSR_TABLE_SIZE;
+> +    return &cpu->dyn_csr_feature;
+>  }
+>
+> -static int ricsv_gen_dynamic_vector_xml(CPUState *cs, int base_reg)
+> +static GDBFeature *ricsv_gen_dynamic_vector_feature(CPUState *cs, int ba=
+se_reg)
+>  {
+>      RISCVCPU *cpu =3D RISCV_CPU(cs);
+> -    GString *s =3D g_string_new(NULL);
+> -    g_autoptr(GString) ts =3D g_string_new("");
+> +    GDBFeatureBuilder builder;
+>      int reg_width =3D cpu->cfg.vlen;
+> -    int num_regs =3D 0;
+>      int i;
+>
+> -    g_string_printf(s, "<?xml version=3D\"1.0\"?>");
+> -    g_string_append_printf(s, "<!DOCTYPE target SYSTEM \"gdb-target.dtd\=
+">");
+> -    g_string_append_printf(s, "<feature name=3D\"org.gnu.gdb.riscv.vecto=
+r\">");
+> +    gdb_feature_builder_init(&builder, &cpu->dyn_vreg_feature,
+> +                             "org.gnu.gdb.riscv.vector", "riscv-vector.x=
+ml",
+> +                             base_reg);
+>
+>      /* First define types and totals in a whole VL */
+>      for (i =3D 0; i < ARRAY_SIZE(vec_lanes); i++) {
+>          int count =3D reg_width / vec_lanes[i].size;
+> -        g_string_printf(ts, "%s", vec_lanes[i].id);
+> -        g_string_append_printf(s,
+> -                               "<vector id=3D\"%s\" type=3D\"%s\" count=
+=3D\"%d\"/>",
+> -                               ts->str, vec_lanes[i].gdb_type, count);
+> +        gdb_feature_builder_append_tag(
+> +            &builder, "<vector id=3D\"%s\" type=3D\"%s\" count=3D\"%d\"/=
+>",
+> +            vec_lanes[i].id, vec_lanes[i].gdb_type, count);
+>      }
+>
+>      /* Define unions */
+> -    g_string_append_printf(s, "<union id=3D\"riscv_vector\">");
+> +    gdb_feature_builder_append_tag(&builder, "<union id=3D\"riscv_vector=
+\">");
+>      for (i =3D 0; i < ARRAY_SIZE(vec_lanes); i++) {
+> -        g_string_append_printf(s, "<field name=3D\"%c\" type=3D\"%s\"/>"=
+,
+> -                               vec_lanes[i].suffix,
+> -                               vec_lanes[i].id);
+> +        gdb_feature_builder_append_tag(&builder,
+> +                                       "<field name=3D\"%c\" type=3D\"%s=
+\"/>",
+> +                                       vec_lanes[i].suffix, vec_lanes[i]=
+.id);
+>      }
+> -    g_string_append(s, "</union>");
+> +    gdb_feature_builder_append_tag(&builder, "</union>");
+>
+>      /* Define vector registers */
+>      for (i =3D 0; i < 32; i++) {
+> -        g_string_append_printf(s,
+> -                               "<reg name=3D\"v%d\" bitsize=3D\"%d\""
+> -                               " regnum=3D\"%d\" group=3D\"vector\""
+> -                               " type=3D\"riscv_vector\"/>",
+> -                               i, reg_width, base_reg++);
+> -        num_regs++;
+> +        gdb_feature_builder_append_reg(&builder, g_strdup_printf("v%d", =
+i),
+> +                                       reg_width, i, "riscv_vector", "ve=
+ctor");
+>      }
+>
+> -    g_string_append_printf(s, "</feature>");
+> +    gdb_feature_builder_end(&builder);
+>
+> -    cpu->dyn_vreg_xml =3D g_string_free(s, false);
+> -    return num_regs;
+> +    return &cpu->dyn_vreg_feature;
+>  }
+>
+>  void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+> @@ -324,10 +317,9 @@ void riscv_cpu_register_gdb_regs_for_features(CPUSta=
+te *cs)
+>                                   32, "riscv-32bit-fpu.xml", 0);
+>      }
+>      if (env->misa_ext & RVV) {
+> -        int base_reg =3D cs->gdb_num_regs;
+>          gdb_register_coprocessor(cs, riscv_gdb_get_vector,
+>                                   riscv_gdb_set_vector,
+> -                                 ricsv_gen_dynamic_vector_xml(cs, base_r=
+eg),
+> +                                 ricsv_gen_dynamic_vector_feature(cs, cs=
+->gdb_num_regs)->num_regs,
+>                                   "riscv-vector.xml", 0);
+>      }
+>      switch (mcc->misa_mxl_max) {
+> @@ -347,9 +339,8 @@ void riscv_cpu_register_gdb_regs_for_features(CPUStat=
+e *cs)
+>      }
+>
+>      if (cpu->cfg.ext_zicsr) {
+> -        int base_reg =3D cs->gdb_num_regs;
+>          gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_cs=
+r,
+> -                                 riscv_gen_dynamic_csr_xml(cs, base_reg)=
+,
+> +                                 riscv_gen_dynamic_csr_feature(cs, cs->g=
+db_num_regs)->num_regs,
+>                                   "riscv-csr.xml", 0);
+>      }
+>  }
 >
 > --
-> 2.41.0
+> 2.43.0
 >
 >
 
