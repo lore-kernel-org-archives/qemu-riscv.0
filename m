@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E65E5C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Sun, 17 Dec 2023 23:32:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDF06C3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Dec 2023 00:10:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rF0bg-00006O-5t; Sun, 17 Dec 2023 18:31:36 -0500
+	id 1rF1Cm-00017F-T2; Sun, 17 Dec 2023 19:09:56 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rF0bb-0008Uv-FL; Sun, 17 Dec 2023 18:31:31 -0500
-Received: from mail-oo1-xc2a.google.com ([2607:f8b0:4864:20::c2a])
+ id 1rF1Cl-00015g-Fp; Sun, 17 Dec 2023 19:09:55 -0500
+Received: from mail-ua1-x92b.google.com ([2607:f8b0:4864:20::92b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rF0bZ-0000rN-SS; Sun, 17 Dec 2023 18:31:31 -0500
-Received: by mail-oo1-xc2a.google.com with SMTP id
- 006d021491bc7-59067ccb090so1773531eaf.1; 
- Sun, 17 Dec 2023 15:31:29 -0800 (PST)
+ id 1rF1Cj-0003rr-RD; Sun, 17 Dec 2023 19:09:55 -0500
+Received: by mail-ua1-x92b.google.com with SMTP id
+ a1e0cc1a2514c-7ca9c5921ceso673052241.1; 
+ Sun, 17 Dec 2023 16:09:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702855888; x=1703460688; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1702858192; x=1703462992; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hmvrTNVKpntJINm3U3Z/KBle5aKlIXKR6P6QP7zbpTg=;
- b=Mp312Iei0pClg8Mv/3wH4q/OphKrulwmLbzJ0S95+RhXvQsP5vCKJ8yJKA9evCf9bz
- j/BP9Bk56DYKD1Adr/RTr7zu+GZEI1ItsVWVxziMOTggoIiEQjzZV3YPMwSV3c0vUM1a
- y1LI8og3n8Cvib/h4IRNMTSkllPpyZY5plVzEkcr4IFiyaTNoKAHj7BNJDxwrZ9+n1t1
- gvlVQ5QxeUbRjx/38tcyLNrazYZbBxn24i9yxahRgDNexkuvxyRpfQKsvyO4dS0YJHx+
- IxTolbVkcbqdXCLUrTLgUm3qWakJhM6dnzD8nzynpI0Sg+ULoW5cfs1u86Zds5CngQNw
- 4BWA==
+ bh=I79oP+kXZSmFq3WOKNiCM/ttcvZYYLuZYvELtmi6dDQ=;
+ b=Wec592rOW6ovECARLoviY1olYRtsTUGBEudILhLaSMCZXc1MtPKuWFxO2PvTsfkaZw
+ IFG362zP3vxWuatRFVS9NFBm3t9I3rQS7ocybITIEyGvAEq7V/vVuqp6gsMTBBQ1jn3L
+ 4zlZbRnzLWmiS6ZvWy5eIgEeege0l0+PL0BB720eKVg4fq7X94dQiDD3w12/7q3JPhjK
+ PPRDRChEnrcKpFdquU5KpvSIkLmjDsZYJsM52rPzDZVBkDM4Wp9x3Cxs5KGhRsXKSGwE
+ hEeSegueEEv5Ko0MQU4zaxe4yB8j5LHLT5ex6YufXDB7M8R8ryokRAlNTfXeY5pniO7Y
+ 2MLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702855888; x=1703460688;
+ d=1e100.net; s=20230601; t=1702858192; x=1703462992;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hmvrTNVKpntJINm3U3Z/KBle5aKlIXKR6P6QP7zbpTg=;
- b=qXaO/IszplPEGINa/RnX/1TeIsplR0YDCPX6BJEUD4sOICO7Oh9WCUEQIwzqV5Vplq
- e8fxoWDaWWRKQ19TPpBl7E6Achkc7JLQGmkcSVZCZn/9ijhJ7Bko4C/IYrFFgMQTnpQI
- N7HcRE0goENI//UCmgOcMsTyTnU31BAwHA/jbjNswFtlMiW2jkNQs1wplo/bXSWTiRKu
- Zqpy8lqUDaCwuepPOJ1hKKI3uhJ87IPJPfPzlzmN0aPV1emOmWEM5X+CEIGayaSX+trR
- WCa815zyLci5GOoPC+J/iwyxAyZBADX8wLNfno76Xa+gSWtYezzNftxDY/771Rybkkrl
- xDuQ==
-X-Gm-Message-State: AOJu0Yx7h9KJX40SNYiOcy+CLxjaoOPL7NqX0UJ0z6MtRvevtX8LUiVD
- 9vvaZfQh//bIplK9KCJhm3v8dfv/0WAlwzntMwo=
-X-Google-Smtp-Source: AGHT+IGDX/3aMT3Tt7JsP6B4t2877j1SNNnWqW+Iv1HB2mblmJKr4tvH3nt+6Y1B7L6BgU+0C8AAdvpN/X1wGRBObqE=
-X-Received: by 2002:a05:6358:cc1e:b0:16d:bc07:7d2f with SMTP id
- gx30-20020a056358cc1e00b0016dbc077d2fmr12919156rwb.15.1702855887784; Sun, 17
- Dec 2023 15:31:27 -0800 (PST)
+ bh=I79oP+kXZSmFq3WOKNiCM/ttcvZYYLuZYvELtmi6dDQ=;
+ b=eD78z0X4uDQLQcc72qToMZTWT9J2UU+P5IFhokNNiintDZ/IkcM+vRkj4L9qy7mPnZ
+ jJphrSVApD40f/0kOaRJG/ahqzy4RZ5E/lIqKrLmsltAnUIr/vM+uXUe9e4yJO67PoN4
+ G639LRHKlQByExRWFAjdI9PxvYqHEqaIzWKZpBKzDveuDjCSbCHp4NkMn7wP1CjimTzE
+ 5SQ7mYxgZBLtIv77ATygAqh9xz9AU/LBx2uC0e9nJ2ae8rj/rsRt8uKUVdrk3hylrjSf
+ 4g4i35Dlj7xvP+SMuaPeZt6gd7Kz7CDmPHgvjd26IsRjfZI2ngGJ4DvN68TLD3lAYmQa
+ 18vA==
+X-Gm-Message-State: AOJu0Yz8D1V8IEQrVeI+k4OnaYEjC4ah0ZxZ+H3TM3ZdAqRMRgfsgjg+
+ GvkTJY2Gj5GmqS0W4qXBTomDdajAq5WQbQr3Pg0=
+X-Google-Smtp-Source: AGHT+IG64y9LD++SBpCuPqZws5YuoPPLP8Gogm1SLOHCp0LmoHpP2OZjEgTWpoCTsB0y7FkiieZco/9LYEfYGdVBysU=
+X-Received: by 2002:a05:6102:54a4:b0:464:6018:abc5 with SMTP id
+ bk36-20020a05610254a400b004646018abc5mr13634716vsb.5.1702858189333; Sun, 17
+ Dec 2023 16:09:49 -0800 (PST)
 MIME-Version: 1.0
-References: <20231211170732.2541368-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20231211170732.2541368-1-dbarboza@ventanamicro.com>
+References: <20231208183835.2411523-1-dbarboza@ventanamicro.com>
+In-Reply-To: <20231208183835.2411523-1-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 18 Dec 2023 09:31:01 +1000
-Message-ID: <CAKmqyKOkXe-Jxn7WGSCom_4SK9oMF41=CYO5mgBdsMCC9hxmxQ@mail.gmail.com>
-Subject: Re: [PATCH for-9.0] target/riscv/cpu.c: fix machine IDs getters
+Date: Mon, 18 Dec 2023 10:09:22 +1000
+Message-ID: <CAKmqyKPZL9TqKda_d+W-oBuQFdyoSJASz+7FqNa8dkeT_YfNow@mail.gmail.com>
+Subject: Re: [PATCH for-9.0 0/5] target/riscv/kvm: fix KVM reg id sizes
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
  palmer@rivosinc.com, ajones@ventanamicro.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c2a;
- envelope-from=alistair23@gmail.com; helo=mail-oo1-xc2a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92b;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92b.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -89,42 +89,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Dec 12, 2023 at 3:08=E2=80=AFAM Daniel Henrique Barboza
+On Sat, Dec 9, 2023 at 4:40=E2=80=AFAM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> mvendorid is an uint32 property, mimpid/marchid are uint64 properties.
-> But their getters are returning bools. The reason this went under the
-> radar for this long is because we have no code using the getters.
+> Hi,
 >
-> The problem can be seem via the 'qom-get' API though. Launching QEMU
-> with the 'veyron-v1' CPU, a model with:
+> While working in a follow-up for the Vector KVM regs, where we would
+> read 'vlenb' and then all other vregs [1], Drew noticed that we're using
+> kvm_riscv_reg_id() in registers that are u32 and u64.
 >
-> VEYRON_V1_MVENDORID: 0x61f (1567)
-> VEYRON_V1_MIMPID: 0x111 (273)
-> VEYRON_V1_MARCHID: 0x8000000000010000 (9223372036854841344)
+> The helper is returning ulong regs for all cases, meaning that we return
+> the wrong size for u32 regs when running 6 in 64 bits (case of FP_F
+> regs) and u64 regs when running in 32 bits (case of FP_D and timer
+> regs).
 >
-> This is what the API returns when retrieving these properties:
+> It's best to do a quick bug fix round in the KVM reg IDs before adding
+> more IDs, so here we are.
 >
-> (qemu) qom-get /machine/soc0/harts[0] mvendorid
-> true
-> (qemu) qom-get /machine/soc0/harts[0] mimpid
-> true
-> (qemu) qom-get /machine/soc0/harts[0] marchid
-> true
+> This is marked as 9.0 because the fixes aren't critical enough to
+> postpone 8.2. Michael, patches 1, 2 and 3 are good candidates for
+> 8.2-stable.
 >
-> After this patch:
+> Alistair, in case these are accepted I'll re-send "[PATCH for-9.0 0/4]
+> target/riscv: add RVV CSRs" based on these fixes to avoid conflicts in
+> the tree.
 >
-> (qemu) qom-get /machine/soc0/harts[0] mvendorid
-> 1567
-> (qemu) qom-get /machine/soc0/harts[0] mimpid
-> 273
-> (qemu) qom-get /machine/soc0/harts[0] marchid
-> 9223372036854841344
 >
-> Fixes: 1e34150045 ("target/riscv/cpu.c: restrict 'mvendorid' value")
-> Fixes: a1863ad368 ("target/riscv/cpu.c: restrict 'mimpid' value")
-> Fixes: d6a427e2c0 ("target/riscv/cpu.c: restrict 'marchid' value")
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> [1] this is dependent on kernel side changes that are being discussed
+> here: https://lore.kernel.org/kvm/20231205174509.2238870-1-dbarboza@venta=
+namicro.com/
+> ("[PATCH v3 0/3] RISC-V, KVM: add 'vlenb' and vector CSRs to get-reg-list=
+")
+>
+>
+> Daniel Henrique Barboza (5):
+>   target/riscv/kvm: change KVM_REG_RISCV_FP_F to u32
+>   target/riscv/kvm: change KVM_REG_RISCV_FP_D to u64
+>   target/riscv/kvm: change timer regs size to u64
+>   target/riscv/kvm: add RISCV_CONFIG_REG()
+>   target/riscv/kvm: rename riscv_reg_id() to riscv_reg_id_ulong()
 
 Thanks!
 
@@ -132,53 +135,10 @@ Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
->  target/riscv/cpu.c | 12 ++++++------
->  1 file changed, 6 insertions(+), 6 deletions(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 83c7c0cf07..70bf10aa7c 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1573,9 +1573,9 @@ static void cpu_set_mvendorid(Object *obj, Visitor =
-*v, const char *name,
->  static void cpu_get_mvendorid(Object *obj, Visitor *v, const char *name,
->                                void *opaque, Error **errp)
->  {
-> -    bool value =3D RISCV_CPU(obj)->cfg.mvendorid;
-> +    uint32_t value =3D RISCV_CPU(obj)->cfg.mvendorid;
+>  target/riscv/kvm/kvm-cpu.c | 109 ++++++++++++++++++++-----------------
+>  1 file changed, 59 insertions(+), 50 deletions(-)
 >
-> -    visit_type_bool(v, name, &value, errp);
-> +    visit_type_uint32(v, name, &value, errp);
->  }
->
->  static void cpu_set_mimpid(Object *obj, Visitor *v, const char *name,
-> @@ -1602,9 +1602,9 @@ static void cpu_set_mimpid(Object *obj, Visitor *v,=
- const char *name,
->  static void cpu_get_mimpid(Object *obj, Visitor *v, const char *name,
->                             void *opaque, Error **errp)
->  {
-> -    bool value =3D RISCV_CPU(obj)->cfg.mimpid;
-> +    uint64_t value =3D RISCV_CPU(obj)->cfg.mimpid;
->
-> -    visit_type_bool(v, name, &value, errp);
-> +    visit_type_uint64(v, name, &value, errp);
->  }
->
->  static void cpu_set_marchid(Object *obj, Visitor *v, const char *name,
-> @@ -1652,9 +1652,9 @@ static void cpu_set_marchid(Object *obj, Visitor *v=
-, const char *name,
->  static void cpu_get_marchid(Object *obj, Visitor *v, const char *name,
->                             void *opaque, Error **errp)
->  {
-> -    bool value =3D RISCV_CPU(obj)->cfg.marchid;
-> +    uint64_t value =3D RISCV_CPU(obj)->cfg.marchid;
->
-> -    visit_type_bool(v, name, &value, errp);
-> +    visit_type_uint64(v, name, &value, errp);
->  }
->
->  static void riscv_cpu_class_init(ObjectClass *c, void *data)
 > --
 > 2.41.0
 >
