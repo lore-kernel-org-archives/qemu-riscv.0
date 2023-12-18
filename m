@@ -4,95 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C888C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Dec 2023 00:17:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63C2FC46CA2
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Dec 2023 02:55:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rF1KA-0006QX-FX; Sun, 17 Dec 2023 19:17:34 -0500
+	id 1rF3mD-0003s3-19; Sun, 17 Dec 2023 21:54:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rF1K8-0006OU-P7; Sun, 17 Dec 2023 19:17:32 -0500
-Received: from mail-il1-x12c.google.com ([2607:f8b0:4864:20::12c])
+ id 1rF3mB-0003rW-CJ; Sun, 17 Dec 2023 21:54:39 -0500
+Received: from mail-ua1-x931.google.com ([2607:f8b0:4864:20::931])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rF1K6-000765-PS; Sun, 17 Dec 2023 19:17:32 -0500
-Received: by mail-il1-x12c.google.com with SMTP id
- e9e14a558f8ab-35f89f18daeso11085675ab.3; 
- Sun, 17 Dec 2023 16:17:29 -0800 (PST)
+ id 1rF3m9-0002R2-8U; Sun, 17 Dec 2023 21:54:39 -0500
+Received: by mail-ua1-x931.google.com with SMTP id
+ a1e0cc1a2514c-7c5bfd8858cso777870241.3; 
+ Sun, 17 Dec 2023 18:54:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702858648; x=1703463448; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1702868075; x=1703472875; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=z8Kkygl6dmdcmbHuqi3jkwPQEUDeFq6IZdUkP6LKZhs=;
- b=VSM59rXnxrhKASOH4JeBLwAa+1xbLM+WOtk6/yrTX2kzocjR7xZ/ztD01DfFy1EqCO
- 0C7whlSd99Dy3k2hGwv6gX3GwxvZWjkPT3ohcOqOXeSIzGrk21793mbWdwtdpLtWrBK3
- afT/oAde1cuLMn91Mo8nrnZYxzXaelX9ghm5I6+E+Ayjxakv5bxPLyL3DlsrJEl5gglY
- LUtolZt8D6WFviShJ8pZvhScjn+i+IynJcc2ibH/ZWxOhSLTilhgxPZiXe24wmtbTf44
- CiAfj5LKBLe1XadWZLcJiGOomKbosHEhk11fUsRym/qkc9+uxoBuNXJ0JbxC/RvaKnRQ
- C6dQ==
+ bh=rW10vjtq3w3c6hsmFCBLdMOmKVGtbgqqdquYNMVKK/g=;
+ b=gvuLZvWBvddQP0wvX5J3MQMN2qbpqYjmRJZ1qlhvoY2Uex5GkjswiPjuv+ZIO2ZDd2
+ QykenvnI9ueCBd6MtnVcg3QQbEx0Zy3GctuDyp13G/kKktPdyvsKe2V/TafEIbSPRc/u
+ R7yJJVaUWF51HKdizRMCkPV1fTQTGb8cwZgP8mLtOSblB4hsXPMLFfl+o61NI1YY7W82
+ 7meZN00PclsTVNwl1l5JyiiZ6mFjQbD5KMrh1S6PCjjAc7quZrs94OQt7ENxOAY6Ok+Y
+ GarX0tlBIbWNVRU8ZHBwI9EOxlrG3L2tDASbJazH8Ze1FYxIGy34cDuLYgLBlQJyfN4m
+ TNiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702858648; x=1703463448;
+ d=1e100.net; s=20230601; t=1702868075; x=1703472875;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=z8Kkygl6dmdcmbHuqi3jkwPQEUDeFq6IZdUkP6LKZhs=;
- b=sbm4qCz3hqaKU1Y0wFNHIt1CWv4VPzrHu/SToVdq5VCvu0OVM9Rm5OJUgBI5kyE8GW
- Sl8MpfP/8w5yCWpYZIe8Bq4yIkoxolyireuRMedATrkFToeu3Oh3cM16uAMhTlK+bI5h
- w93gTQGPXB7uEuuRGstqF7xdldqzf/J/Jxd3+5+VYNj5Jfs0OpmvXhmybSflEI6MXc3E
- 8qrW4O/szuxmXiD3za+WyzcvHAVfbR8G1pe+5GkRnxImfQlseItBHVtcDVA0aTRsxn66
- ImAiiXi+tKXJAHZ7ACxJizjZxhsLiPRbzMa3nyJWGjrLRYEZIxAWjxl5/diMr8dFNK5f
- DHBw==
-X-Gm-Message-State: AOJu0Yx0zYRcNWNny7nGWSgBZSLIV+ES4oGMcuCk4Neh0RsrjBocYSZX
- nhpiiQQi0VpzZDu/vKE95id0JJXr09LkcbUDh90=
-X-Google-Smtp-Source: AGHT+IFG5w88oEGXT3J7poB1TiYzkBpCr6Q0nrTAlYOefdMl3PdWg36aCKASbYZ2VSQbpi+ItwpEQLV9sQOiZ8LI5uw=
-X-Received: by 2002:a05:6e02:214d:b0:35d:a2c9:dac3 with SMTP id
- d13-20020a056e02214d00b0035da2c9dac3mr18534042ilv.33.1702858648353; Sun, 17
- Dec 2023 16:17:28 -0800 (PST)
+ bh=rW10vjtq3w3c6hsmFCBLdMOmKVGtbgqqdquYNMVKK/g=;
+ b=qtqzO6HLjXXcluC9laKwb86Jk93wnkfr6gp0eBOQLJgX0eaz4bxH8tICu+QegNcGMu
+ S+n4J0vBbcNK7XW5xJ2t29dWazuidh25lEwpIkm1ZPAZ73eTM9uD9yyUq8uiElZfoOtO
+ 0lqw6/J6hUqtYV8bs+ogfcDpAEFGZ9b1qZ6hi4CytfoJNlfr1u4mcmiHicuX64B5EUO+
+ Gghti5eZqbRmntAY3Hu2mRsjF3F1wXrlJkYQtvJHI3mMIHgyp5ajEAcnpCsB5IzZKr5l
+ rH5LK6LU0yMMdoCI//HHiC33CHrr/ExCOJ7rvP3Bnr9wBcgMi4xoR9pKrRUkF/I6sfhF
+ lDcg==
+X-Gm-Message-State: AOJu0YwS8mgqiSgXroJB5VhlaSdZyQRjdClIxTE0YLHaffzMuNipAv8n
+ AhwCXW2HSlXsAmeSpZQYElHCMmphgyzvA1tOXgo=
+X-Google-Smtp-Source: AGHT+IGaCMGIVrLhWSOr9rMLHcf3OaFN+jCGHnpSsKloPnWaspd9vmDPq78/dsn1uZ7i7dfPC6zehvO2Ld/E40vQ3jw=
+X-Received: by 2002:a05:6122:a08:b0:4b2:deeb:d9c5 with SMTP id
+ 8-20020a0561220a0800b004b2deebd9c5mr10354567vkn.15.1702868075486; Sun, 17 Dec
+ 2023 18:54:35 -0800 (PST)
 MIME-Version: 1.0
-References: <20231213-gdb-v17-0-777047380591@daynix.com>
- <20231213-gdb-v17-9-777047380591@daynix.com>
-In-Reply-To: <20231213-gdb-v17-9-777047380591@daynix.com>
+References: <20231207153842.32401-1-rbradford@rivosinc.com>
+ <20231207153842.32401-2-rbradford@rivosinc.com>
+In-Reply-To: <20231207153842.32401-2-rbradford@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 18 Dec 2023 10:17:02 +1000
-Message-ID: <CAKmqyKMWYf1rad=9wapdMGfY8FPOGY09AK3cSRkmTvWD5UWCfQ@mail.gmail.com>
-Subject: Re: [PATCH v17 09/14] hw/core/cpu: Remove gdb_get_dynamic_xml member
-To: Akihiko Odaki <akihiko.odaki@daynix.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Nicholas Piggin <npiggin@gmail.com>, 
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Brian Cain <bcain@quicinc.com>, Song Gao <gaosong@loongson.cn>, 
- Laurent Vivier <laurent@vivier.eu>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
- Richard Henderson <richard.henderson@linaro.org>,
- David Hildenbrand <david@redhat.com>, 
- Ilya Leoshkevich <iii@linux.ibm.com>, Thomas Huth <thuth@redhat.com>, 
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
- Yanan Wang <wangyanan55@huawei.com>, Michael Rolnik <mrolnik@gmail.com>, 
- Paolo Bonzini <pbonzini@redhat.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>, 
- John Snow <jsnow@redhat.com>, Cleber Rosa <crosa@redhat.com>,
- Alexandre Iooss <erdnaxe@crans.org>, 
- Mahmoud Mandour <ma.mandourr@gmail.com>, Mikhail Tyutin <m.tyutin@yadro.com>, 
- Aleksandr Anenkov <a.anenkov@yadro.com>, qemu-arm@nongnu.org,
- qemu-devel@nongnu.org, 
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, 
- 20231213-riscv-v7-0-a760156a337f@daynix.com
+Date: Mon, 18 Dec 2023 12:54:09 +1000
+Message-ID: <CAKmqyKN50b9RAqfrMoe9_vZB1PfML+7K7u4=jeSE1Na6PPD3NA@mail.gmail.com>
+Subject: Re: [PATCH 1/2] target/riscv: Add support for Zacas extension
+To: Rob Bradford <rbradford@rivosinc.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, atishp@rivosinc.com, 
+ palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
+ liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
+ Weiwei Li <liweiwei@iscas.ac.cn>, Junqiang Wang <wangjunqiang@iscas.ac.cn>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12c;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::931;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x931.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -116,208 +91,280 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Dec 13, 2023 at 5:49=E2=80=AFPM Akihiko Odaki <akihiko.odaki@daynix=
-.com> wrote:
+On Fri, Dec 8, 2023 at 1:40=E2=80=AFAM Rob Bradford <rbradford@rivosinc.com=
+> wrote:
 >
-> This function is no longer used.
+> From: Weiwei Li <liweiwei@iscas.ac.cn>
 >
-> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-> Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+> Add support for amocas.w/d/q instructions which are part of the ratified
+> Zacas extension: https://github.com/riscv/riscv-zacas
+>
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
+> ---
+>  target/riscv/cpu.c                          |   2 +
+>  target/riscv/cpu_cfg.h                      |   1 +
+>  target/riscv/insn32.decode                  |   6 +
+>  target/riscv/insn_trans/trans_rvzacas.c.inc | 150 ++++++++++++++++++++
+>  target/riscv/tcg/tcg-cpu.c                  |   5 +
+>  target/riscv/translate.c                    |   1 +
+>  6 files changed, 165 insertions(+)
+>  create mode 100644 target/riscv/insn_trans/trans_rvzacas.c.inc
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 83c7c0cf07..a265833b17 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -87,6 +87,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
+>      ISA_EXT_DATA_ENTRY(zihintpause, PRIV_VERSION_1_10_0, ext_zihintpause=
+),
+>      ISA_EXT_DATA_ENTRY(zihpm, PRIV_VERSION_1_12_0, ext_zihpm),
+>      ISA_EXT_DATA_ENTRY(zmmul, PRIV_VERSION_1_12_0, ext_zmmul),
+> +    ISA_EXT_DATA_ENTRY(zacas, PRIV_VERSION_1_12_0, ext_zacas),
+>      ISA_EXT_DATA_ENTRY(zawrs, PRIV_VERSION_1_12_0, ext_zawrs),
+>      ISA_EXT_DATA_ENTRY(zfa, PRIV_VERSION_1_12_0, ext_zfa),
+>      ISA_EXT_DATA_ENTRY(zfbfmin, PRIV_VERSION_1_12_0, ext_zfbfmin),
+> @@ -1300,6 +1301,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[]=
+ =3D {
+>      MULTI_EXT_CFG_BOOL("zicsr", ext_zicsr, true),
+>      MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
+>      MULTI_EXT_CFG_BOOL("zihintpause", ext_zihintpause, true),
+> +    MULTI_EXT_CFG_BOOL("zacas", ext_zacas, false),
+>      MULTI_EXT_CFG_BOOL("zawrs", ext_zawrs, true),
+>      MULTI_EXT_CFG_BOOL("zfa", ext_zfa, true),
+>      MULTI_EXT_CFG_BOOL("zfh", ext_zfh, false),
+> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> index f4605fb190..d516de4a44 100644
+> --- a/target/riscv/cpu_cfg.h
+> +++ b/target/riscv/cpu_cfg.h
+> @@ -77,6 +77,7 @@ struct RISCVCPUConfig {
+>      bool ext_svnapot;
+>      bool ext_svpbmt;
+>      bool ext_zdinx;
+> +    bool ext_zacas;
+>      bool ext_zawrs;
+>      bool ext_zfa;
+>      bool ext_zfbfmin;
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index 33597fe2bb..f22df04cfd 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -1004,3 +1004,9 @@ vgmul_vv    101000 1 ..... 10001 010 ..... 1110111 =
+@r2_vm_1
+>  vsm4k_vi    100001 1 ..... ..... 010 ..... 1110111 @r_vm_1
+>  vsm4r_vv    101000 1 ..... 10000 010 ..... 1110111 @r2_vm_1
+>  vsm4r_vs    101001 1 ..... 10000 010 ..... 1110111 @r2_vm_1
+> +
+> +# *** RV32 Zacas Standard Extension ***
+> +amocas_w    00101 . . ..... ..... 010 ..... 0101111 @atom_st
+> +amocas_d    00101 . . ..... ..... 011 ..... 0101111 @atom_st
+> +# *** RV64 Zacas Standard Extension ***
+> +amocas_q    00101 . . ..... ..... 100 ..... 0101111 @atom_st
+> diff --git a/target/riscv/insn_trans/trans_rvzacas.c.inc b/target/riscv/i=
+nsn_trans/trans_rvzacas.c.inc
+> new file mode 100644
+> index 0000000000..5d274d4c08
+> --- /dev/null
+> +++ b/target/riscv/insn_trans/trans_rvzacas.c.inc
+> @@ -0,0 +1,150 @@
+> +/*
+> + * RISC-V translation routines for the RV64 Zacas Standard Extension.
+> + *
+> + * Copyright (c) 2020-2023 PLCT Lab
+> + *
+> + * This program is free software; you can redistribute it and/or modify =
+it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOU=
+T
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License=
+ for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License alo=
+ng with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#define REQUIRE_ZACAS(ctx) do {          \
+> +    if (!ctx->cfg_ptr->ext_zacas) {      \
+> +        return false;                     \
+> +    }                                     \
+> +} while (0)
+> +
+> +static bool gen_cmpxchg(DisasContext *ctx, arg_atomic *a, MemOp mop)
+> +{
+> +    TCGv dest =3D get_gpr(ctx, a->rd, EXT_NONE);
+> +    TCGv src1 =3D get_address(ctx, a->rs1, 0);
+> +    TCGv src2 =3D get_gpr(ctx, a->rs2, EXT_NONE);
+> +
+> +    decode_save_opc(ctx);
+> +    tcg_gen_atomic_cmpxchg_tl(dest, src1, dest, src2, ctx->mem_idx, mop)=
+;
+> +
+> +    gen_set_gpr(ctx, a->rd, dest);
+> +    return true;
+> +}
+> +
+> +static bool trans_amocas_w(DisasContext *ctx, arg_amocas_w *a)
+> +{
+> +    REQUIRE_ZACAS(ctx);
+> +    return gen_cmpxchg(ctx, a, MO_ALIGN | MO_TESL);
+> +}
+> +
+> +static TCGv_i64 get_gpr_pair(DisasContext *ctx, int reg_num)
+> +{
+> +    TCGv_i64 t;
+> +
+> +    assert(get_ol(ctx) =3D=3D MXL_RV32);
+> +
+> +    if (reg_num =3D=3D 0) {
+> +        return tcg_constant_i64(0);
+> +    }
+> +
+> +    t =3D tcg_temp_new_i64();
+> +    tcg_gen_concat_tl_i64(t, cpu_gpr[reg_num], cpu_gpr[reg_num + 1]);
+> +    return t;
+> +}
+> +
+> +static void gen_set_gpr_pair(DisasContext *ctx, int reg_num, TCGv_i64 t)
+> +{
+> +    assert(get_ol(ctx) =3D=3D MXL_RV32);
+> +
+> +    if (reg_num !=3D 0) {
+> +#ifdef TARGET_RISCV32
+> +        tcg_gen_extr_i64_i32(cpu_gpr[reg_num], cpu_gpr[reg_num + 1], t);
+> +#else
+> +        tcg_gen_ext32s_i64(cpu_gpr[reg_num], t);
+> +        tcg_gen_sari_i64(cpu_gpr[reg_num + 1], t, 32);
+> +#endif
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+This should be dynamic based on the MXL.
+
+> +
+> +        if (get_xl_max(ctx) =3D=3D MXL_RV128) {
+> +            tcg_gen_sari_tl(cpu_gprh[reg_num], cpu_gpr[reg_num], 63);
+> +            tcg_gen_sari_tl(cpu_gprh[reg_num + 1], cpu_gpr[reg_num + 1],=
+ 63);
+> +        }
+> +    }
+> +}
+> +
+> +static bool gen_cmpxchg64(DisasContext *ctx, arg_atomic *a, MemOp mop)
+> +{
+> +    /*
+> +     * Encodings with odd numbered registers specified in rs2 and rd are
+> +     * reserved.
+> +     */
+> +    if ((a->rs2 | a->rd) & 1) {
+> +        return false;
+> +    }
+> +
+> +    TCGv_i64 dest =3D get_gpr_pair(ctx, a->rd);
+> +    TCGv src1 =3D get_address(ctx, a->rs1, 0);
+> +    TCGv_i64 src2 =3D get_gpr_pair(ctx, a->rs2);
+> +
+> +    decode_save_opc(ctx);
+> +    tcg_gen_atomic_cmpxchg_i64(dest, src1, dest, src2, ctx->mem_idx, mop=
+);
+> +
+> +    gen_set_gpr_pair(ctx, a->rd, dest);
+> +    return true;
+> +}
+> +
+> +static bool trans_amocas_d(DisasContext *ctx, arg_amocas_d *a)
+> +{
+> +    REQUIRE_ZACAS(ctx);
+> +    switch (get_ol(ctx)) {
+> +    case MXL_RV32:
+> +        return gen_cmpxchg64(ctx, a, MO_ALIGN | MO_TEUQ);
+> +    case MXL_RV64:
+> +    case MXL_RV128:
+> +        return gen_cmpxchg(ctx, a, MO_ALIGN | MO_TEUQ);
+> +    default:
+> +        g_assert_not_reached();
+> +    }
+> +}
+> +
+> +static bool trans_amocas_q(DisasContext *ctx, arg_amocas_q *a)
+> +{
+> +    REQUIRE_ZACAS(ctx);
+> +    REQUIRE_64BIT(ctx);
+> +
+> +    /*
+> +     * Encodings with odd numbered registers specified in rs2 and rd are
+> +     * reserved.
+> +     */
+> +    if ((a->rs2 | a->rd) & 1) {
+> +        return false;
+> +    }
+> +
+> +#ifdef TARGET_RISCV64
+
+We already have a REQUIRE_64BIT(ctx), do we need this as well?
 
 Alistair
 
-> ---
->  include/hw/core/cpu.h |  4 ----
->  target/arm/cpu.h      |  6 ------
->  target/ppc/cpu.h      |  1 -
->  target/arm/cpu.c      |  1 -
->  target/arm/gdbstub.c  | 18 ------------------
->  target/ppc/cpu_init.c |  3 ---
->  target/ppc/gdbstub.c  | 10 ----------
->  target/riscv/cpu.c    | 14 --------------
->  8 files changed, 57 deletions(-)
->
-> diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-> index a6214610603f..17f99adc0f41 100644
-> --- a/include/hw/core/cpu.h
-> +++ b/include/hw/core/cpu.h
-> @@ -134,9 +134,6 @@ struct SysemuCPUOps;
->   *           before the insn which triggers a watchpoint rather than aft=
-er it.
->   * @gdb_arch_name: Optional callback that returns the architecture name =
-known
->   * to GDB. The caller must free the returned string with g_free.
-> - * @gdb_get_dynamic_xml: Callback to return dynamically generated XML fo=
-r the
-> - *   gdb stub. Returns a pointer to the XML contents for the specified X=
-ML file
-> - *   or NULL if the CPU doesn't have a dynamically generated content for=
- it.
->   * @disas_set_info: Setup architecture specific components of disassembl=
-y info
->   * @adjust_watchpoint_address: Perform a target-specific adjustment to a=
-n
->   * address before attempting to match it against watchpoints.
-> @@ -167,7 +164,6 @@ struct CPUClass {
->
->      const char *gdb_core_xml_file;
->      const gchar * (*gdb_arch_name)(CPUState *cpu);
-> -    const char * (*gdb_get_dynamic_xml)(CPUState *cpu, const char *xmlna=
-me);
->
->      void (*disas_set_info)(CPUState *cpu, disassemble_info *info);
->
-> diff --git a/target/arm/cpu.h b/target/arm/cpu.h
-> index b2f8ac81f06c..c8e77440f0f7 100644
-> --- a/target/arm/cpu.h
-> +++ b/target/arm/cpu.h
-> @@ -1182,12 +1182,6 @@ hwaddr arm_cpu_get_phys_page_attrs_debug(CPUState =
-*cpu, vaddr addr,
->  int arm_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
->  int arm_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
->
-> -/* Returns the dynamically generated XML for the gdb stub.
-> - * Returns a pointer to the XML contents for the specified XML file or N=
-ULL
-> - * if the XML name doesn't match the predefined one.
-> - */
-> -const char *arm_gdb_get_dynamic_xml(CPUState *cpu, const char *xmlname);
-> -
->  int arm_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cs,
->                               int cpuid, DumpState *s);
->  int arm_cpu_write_elf32_note(WriteCoreDumpFunction f, CPUState *cs,
-> diff --git a/target/ppc/cpu.h b/target/ppc/cpu.h
-> index f87c26f98a67..9f94282e13e9 100644
-> --- a/target/ppc/cpu.h
-> +++ b/target/ppc/cpu.h
-> @@ -1524,7 +1524,6 @@ int ppc_cpu_gdb_write_register(CPUState *cpu, uint8=
-_t *buf, int reg);
->  int ppc_cpu_gdb_write_register_apple(CPUState *cpu, uint8_t *buf, int re=
-g);
->  #ifndef CONFIG_USER_ONLY
->  hwaddr ppc_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
-> -const char *ppc_gdb_get_dynamic_xml(CPUState *cs, const char *xml_name);
->  #endif
->  int ppc64_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cs,
->                                 int cpuid, DumpState *s);
-> diff --git a/target/arm/cpu.c b/target/arm/cpu.c
-> index efcc22b1446c..304538cca52a 100644
-> --- a/target/arm/cpu.c
-> +++ b/target/arm/cpu.c
-> @@ -2499,7 +2499,6 @@ static void arm_cpu_class_init(ObjectClass *oc, voi=
-d *data)
->      cc->sysemu_ops =3D &arm_sysemu_ops;
->  #endif
->      cc->gdb_arch_name =3D arm_gdb_arch_name;
-> -    cc->gdb_get_dynamic_xml =3D arm_gdb_get_dynamic_xml;
->      cc->gdb_stop_before_watchpoint =3D true;
->      cc->disas_set_info =3D arm_disas_set_info;
->
-> diff --git a/target/arm/gdbstub.c b/target/arm/gdbstub.c
-> index 059d84f98e52..a3bb73cfa7ce 100644
-> --- a/target/arm/gdbstub.c
-> +++ b/target/arm/gdbstub.c
-> @@ -474,24 +474,6 @@ static GDBFeature *arm_gen_dynamic_m_secextreg_featu=
-re(CPUState *cs,
->  #endif
->  #endif /* CONFIG_TCG */
->
-> -const char *arm_gdb_get_dynamic_xml(CPUState *cs, const char *xmlname)
-> -{
-> -    ARMCPU *cpu =3D ARM_CPU(cs);
-> -
-> -    if (strcmp(xmlname, "system-registers.xml") =3D=3D 0) {
-> -        return cpu->dyn_sysreg_feature.desc.xml;
-> -    } else if (strcmp(xmlname, "sve-registers.xml") =3D=3D 0) {
-> -        return cpu->dyn_svereg_feature.desc.xml;
-> -    } else if (strcmp(xmlname, "arm-m-system.xml") =3D=3D 0) {
-> -        return cpu->dyn_m_systemreg_feature.desc.xml;
-> -#ifndef CONFIG_USER_ONLY
-> -    } else if (strcmp(xmlname, "arm-m-secext.xml") =3D=3D 0) {
-> -        return cpu->dyn_m_secextreg_feature.desc.xml;
-> -#endif
-> -    }
-> -    return NULL;
-> -}
-> -
->  void arm_cpu_register_gdb_regs_for_features(ARMCPU *cpu)
->  {
->      CPUState *cs =3D CPU(cpu);
-> diff --git a/target/ppc/cpu_init.c b/target/ppc/cpu_init.c
-> index a0178c3ce80a..909d753b0221 100644
-> --- a/target/ppc/cpu_init.c
-> +++ b/target/ppc/cpu_init.c
-> @@ -7380,9 +7380,6 @@ static void ppc_cpu_class_init(ObjectClass *oc, voi=
-d *data)
->  #endif
->
->      cc->gdb_num_core_regs =3D 71;
-> -#ifndef CONFIG_USER_ONLY
-> -    cc->gdb_get_dynamic_xml =3D ppc_gdb_get_dynamic_xml;
-> -#endif
->  #ifdef USE_APPLE_GDB
->      cc->gdb_read_register =3D ppc_cpu_gdb_read_register_apple;
->      cc->gdb_write_register =3D ppc_cpu_gdb_write_register_apple;
-> diff --git a/target/ppc/gdbstub.c b/target/ppc/gdbstub.c
-> index 8ca37b6bf952..f47878a67bd1 100644
-> --- a/target/ppc/gdbstub.c
-> +++ b/target/ppc/gdbstub.c
-> @@ -342,16 +342,6 @@ static void gdb_gen_spr_feature(CPUState *cs)
->
->      gdb_feature_builder_end(&builder);
->  }
-> -
-> -const char *ppc_gdb_get_dynamic_xml(CPUState *cs, const char *xml_name)
-> -{
-> -    PowerPCCPUClass *pcc =3D POWERPC_CPU_GET_CLASS(cs);
-> -
-> -    if (strcmp(xml_name, "power-spr.xml") =3D=3D 0) {
-> -        return pcc->gdb_spr.xml;
-> -    }
-> -    return NULL;
-> -}
->  #endif
->
->  #if !defined(CONFIG_USER_ONLY)
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index a3a98230ca87..1e3ac556b33e 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1529,19 +1529,6 @@ static const gchar *riscv_gdb_arch_name(CPUState *=
-cs)
+> +    TCGv_i128 dest =3D tcg_temp_new_i128();
+> +    TCGv src1 =3D get_address(ctx, a->rs1, 0);
+> +    TCGv_i128 src2 =3D tcg_temp_new_i128();
+> +    TCGv_i64 src2l =3D get_gpr(ctx, a->rs2, EXT_NONE);
+> +    TCGv_i64 src2h =3D get_gpr(ctx, a->rs2 =3D=3D 0 ? 0 : a->rs2 + 1, EX=
+T_NONE);
+> +    TCGv_i64 destl =3D get_gpr(ctx, a->rd, EXT_NONE);
+> +    TCGv_i64 desth =3D get_gpr(ctx, a->rd =3D=3D 0 ? 0 : a->rd + 1, EXT_=
+NONE);
+> +
+> +    tcg_gen_concat_i64_i128(src2, src2l, src2h);
+> +    tcg_gen_concat_i64_i128(dest, destl, desth);
+> +    decode_save_opc(ctx);
+> +    tcg_gen_atomic_cmpxchg_i128(dest, src1, dest, src2, ctx->mem_idx,
+> +                                (MO_ALIGN | MO_TEUO));
+> +
+> +    tcg_gen_extr_i128_i64(destl, desth, dest);
+> +
+> +    if (a->rd !=3D 0) {
+> +        gen_set_gpr(ctx, a->rd, destl);
+> +        gen_set_gpr(ctx, a->rd + 1, desth);
+> +    }
+> +#endif
+> +
+> +    return true;
+> +}
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index 8a35683a34..29b5a88931 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -343,6 +343,11 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu=
+, Error **errp)
+>          return;
 >      }
->  }
 >
-> -static const char *riscv_gdb_get_dynamic_xml(CPUState *cs, const char *x=
-mlname)
-> -{
-> -    RISCVCPU *cpu =3D RISCV_CPU(cs);
-> -
-> -    if (strcmp(xmlname, "riscv-csr.xml") =3D=3D 0) {
-> -        return cpu->dyn_csr_feature.xml;
-> -    } else if (strcmp(xmlname, "riscv-vector.xml") =3D=3D 0) {
-> -        return cpu->dyn_vreg_feature.xml;
-> -    }
-> -
-> -    return NULL;
-> -}
-> -
->  #ifndef CONFIG_USER_ONLY
->  static int64_t riscv_get_arch_id(CPUState *cs)
->  {
-> @@ -1695,7 +1682,6 @@ static void riscv_cpu_common_class_init(ObjectClass=
- *c, void *data)
->      cc->get_arch_id =3D riscv_get_arch_id;
->  #endif
->      cc->gdb_arch_name =3D riscv_gdb_arch_name;
-> -    cc->gdb_get_dynamic_xml =3D riscv_gdb_get_dynamic_xml;
->
->      object_class_property_add(c, "mvendorid", "uint32", cpu_get_mvendori=
-d,
->                                cpu_set_mvendorid, NULL, NULL);
->
+> +    if ((cpu->cfg.ext_zacas) && !riscv_has_ext(env, RVA)) {
+> +        error_setg(errp, "Zacas extension requires A extension");
+> +        return;
+> +    }
+> +
+>      if ((cpu->cfg.ext_zawrs) && !riscv_has_ext(env, RVA)) {
+>          error_setg(errp, "Zawrs extension requires A extension");
+>          return;
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index f0be79bb16..071fbad7ef 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -1089,6 +1089,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase,=
+ target_ulong pc)
+>  #include "insn_trans/trans_rvv.c.inc"
+>  #include "insn_trans/trans_rvb.c.inc"
+>  #include "insn_trans/trans_rvzicond.c.inc"
+> +#include "insn_trans/trans_rvzacas.c.inc"
+>  #include "insn_trans/trans_rvzawrs.c.inc"
+>  #include "insn_trans/trans_rvzicbo.c.inc"
+>  #include "insn_trans/trans_rvzfa.c.inc"
 > --
 > 2.43.0
 >
