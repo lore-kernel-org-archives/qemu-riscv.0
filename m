@@ -4,82 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B465CC41535
-	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Dec 2023 11:26:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBFA6C41535
+	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Dec 2023 12:33:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rFYDt-0000Dq-U0; Tue, 19 Dec 2023 06:25:18 -0500
+	id 1rFZHj-0001zG-EG; Tue, 19 Dec 2023 07:33:20 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1rFYDr-0000CW-Om
- for qemu-riscv@nongnu.org; Tue, 19 Dec 2023 06:25:16 -0500
-Received: from mail-lj1-x232.google.com ([2a00:1450:4864:20::232])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1rFYDk-0005Ie-KP
- for qemu-riscv@nongnu.org; Tue, 19 Dec 2023 06:25:13 -0500
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2cc843af59fso4931681fa.0
- for <qemu-riscv@nongnu.org>; Tue, 19 Dec 2023 03:25:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702985106; x=1703589906; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5SaXnUXmMqvm0EDM8x1yH11gCRyWV5uAr8hLy1MvP4A=;
- b=cKWoKZKTpSOSKVxhRSn9uc3v903KjaRRf45wsizh0kF6lbClr1KxvWS2t9GCg94+9r
- V9ae1cDevAMcQpQCCUDcPSOI3SsvcNwcoRnGrYP/EEBBlah3l6mMQQgy/d+HRgmtZF3T
- fjFBZ9148c4eWoU5UNtkpb0s366G71sTF1J942Y/s0SqAvwdccYtZug0RXux+gTtdpxS
- ABR8VHed9uWthwVZfoqNrMFwiniMwrxUIkPBWlJeVHek+XHihIo0xJTMke2JS7BqV+3T
- 5KIayA/5n61Ztzlu4PkpwfCETpSSDnmC7rmBpbmgEU6zbq+1gfFFTo9zp/083H0vNmka
- XUfg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702985106; x=1703589906;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=5SaXnUXmMqvm0EDM8x1yH11gCRyWV5uAr8hLy1MvP4A=;
- b=o5ur4/xyF+yg31AQ/reJ+Y34aVlY7OXrLqjcDSfgVjZHPyJthdfuBASlEYI01zSJOK
- WzwzsiT1xwrfttn2gJUIdHqo1T29hrKn3SBYUTdbAAX2r3VteBMfb3vHKq+I5L5eeb+u
- /oZV3FQdXmBpDji4NeN4AtmdcfNDKm4pCAX9z2QvXXBUOh5bcNGgU4QnOuPdZh0538NN
- XHSxnSt+AepOnUdQrFTRVY6dF5z6ItuWzohz/G+ko7kJP5PxZnS1IiFfXalxVWHUE5aE
- eGmIhfd55k/I0IUiImx+zNhdbn0CdQnu7MulTnV435p8FWBcSnO02EVmGsV37+9C1N3o
- wTmA==
-X-Gm-Message-State: AOJu0Yy0GhmInH1VPr0pPB2wxkSbT2tcX5HhG65Mfy8MyemyRXys+7mM
- XfB9gmWfdoG98h3xipCS7EGr6Au46EmjaybnizaeoA==
-X-Google-Smtp-Source: AGHT+IHwOXRUzIuYEGCfhaj34x2jg/GeFRrqT1dJ7w4B8muWlNh0l8OR2Blf2DRFrKVLau2sfgkDefRQtRqGiRJOwUg=
-X-Received: by 2002:a05:6512:2386:b0:50b:e995:d9e6 with SMTP id
- c6-20020a056512238600b0050be995d9e6mr10571413lfv.93.1702985105799; Tue, 19
- Dec 2023 03:25:05 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alvinga@andestech.com>)
+ id 1rFZHY-0001yY-71
+ for qemu-riscv@nongnu.org; Tue, 19 Dec 2023 07:33:10 -0500
+Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
+ helo=Atcsqr.andestech.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <alvinga@andestech.com>)
+ id 1rFZHT-00035N-K3
+ for qemu-riscv@nongnu.org; Tue, 19 Dec 2023 07:33:07 -0500
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 3BJCWnbx055594;
+ Tue, 19 Dec 2023 20:32:49 +0800 (+08)
+ (envelope-from alvinga@andestech.com)
+Received: from alvinga-VirtualBox.andestech.com (10.0.13.65) by
+ ATCPCS16.andestech.com (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; 
+ Tue, 19 Dec 2023 20:32:49 +0800
+To: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
+CC: <alistair.francis@wdc.com>, <bin.meng@windriver.com>,
+ <liwei1518@gmail.com>, <dbarboza@ventanamicro.com>,
+ <zhiwei_liu@linux.alibaba.com>, Alvin Chang <alvinga@andestech.com>
+Subject: [PATCH v2] target/riscv: Implement optional CSR mcontext of debug
+ Sdtrig extension
+Date: Tue, 19 Dec 2023 20:32:44 +0800
+Message-ID: <20231219123244.290935-1-alvinga@andestech.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20231218162301.14817-1-ncopa@alpinelinux.org>
- <dfb9bf4e-820a-4e7e-b62b-8df952099e7a@ventanamicro.com>
- <CAFEAcA_znj3yGXYB6OsTAwg5dT8kE154ZS=YRtye6dmy0TeKDQ@mail.gmail.com>
- <941c9369-3cee-459b-ac28-4b5f1aecbe82@ventanamicro.com>
-In-Reply-To: <941c9369-3cee-459b-ac28-4b5f1aecbe82@ventanamicro.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Tue, 19 Dec 2023 11:24:53 +0000
-Message-ID: <CAFEAcA_EgQ1a9DGgFXoJ0AW2=51ECOR9juTB+S3v=xa0sMXNGw@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv/kvm: do not use non-portable
- strerrorname_np()
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: Natanael Copa <ncopa@alpinelinux.org>, qemu-devel@nongnu.org,
- qemu-stable@nongnu.org, 
- qemu-trivial@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::232;
- envelope-from=peter.maydell@linaro.org; helo=mail-lj1-x232.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.0.13.65]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 3BJCWnbx055594
+Received-SPF: pass client-ip=60.248.80.70; envelope-from=alvinga@andestech.com;
+ helo=Atcsqr.andestech.com
+X-Spam_score_int: -8
+X-Spam_score: -0.9
+X-Spam_bar: /
+X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9, RDNS_DYNAMIC=0.982,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001, TVD_RCVD_IP=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -92,27 +63,126 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-to:  Alvin Chang <alvinga@andestech.com>
+From:  Alvin Chang via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, 18 Dec 2023 at 18:34, Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
-> On 12/18/23 14:53, Peter Maydell wrote:
-> > On Mon, 18 Dec 2023 at 17:22, Daniel Henrique Barboza
-> > <dbarboza@ventanamicro.com> wrote:
-> > We don't seem to worry about that in any of the other
-> > KVM code -- accel/kvm/ has lots of places that
-> > use strerror() or error_setg_errno().
->
-> I don't know how this is being used in other parts of accel/kvm, but in this particular
-> instance we're handling the errors from get_one_reg.
+The debug Sdtrig extension defines an CSR "mcontext". This commit
+implements its predicate and read/write operations into CSR table.
+Its value is reset as 0 when the trigger module is reset.
 
-Yep; compare accel/kvm/kvm-all.c:kvm_get_one_reg(), which does:
+Signed-off-by: Alvin Chang <alvinga@andestech.com>
+---
+Changes from v1: Remove dedicated cfg, always implement mcontext.
 
-    r = kvm_vcpu_ioctl(cs, KVM_GET_ONE_REG, &reg);
-    if (r) {
-        trace_kvm_failed_reg_get(id, strerror(-r));
-    }
+ target/riscv/cpu.h      |  1 +
+ target/riscv/cpu_bits.h |  7 +++++++
+ target/riscv/csr.c      | 36 +++++++++++++++++++++++++++++++-----
+ target/riscv/debug.c    |  2 ++
+ 4 files changed, 41 insertions(+), 5 deletions(-)
 
--- PMM
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index d74b361..e117641 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -345,6 +345,7 @@ struct CPUArchState {
+     target_ulong tdata1[RV_MAX_TRIGGERS];
+     target_ulong tdata2[RV_MAX_TRIGGERS];
+     target_ulong tdata3[RV_MAX_TRIGGERS];
++    target_ulong mcontext;
+     struct CPUBreakpoint *cpu_breakpoint[RV_MAX_TRIGGERS];
+     struct CPUWatchpoint *cpu_watchpoint[RV_MAX_TRIGGERS];
+     QEMUTimer *itrigger_timer[RV_MAX_TRIGGERS];
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index ebd7917..3296648 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -361,6 +361,7 @@
+ #define CSR_TDATA2          0x7a2
+ #define CSR_TDATA3          0x7a3
+ #define CSR_TINFO           0x7a4
++#define CSR_MCONTEXT        0x7a8
+ 
+ /* Debug Mode Registers */
+ #define CSR_DCSR            0x7b0
+@@ -905,4 +906,10 @@ typedef enum RISCVException {
+ /* JVT CSR bits */
+ #define JVT_MODE                           0x3F
+ #define JVT_BASE                           (~0x3F)
++
++/* Debug Sdtrig CSR masks */
++#define MCONTEXT32                         0x0000003F
++#define MCONTEXT64                         0x0000000000001FFFULL
++#define MCONTEXT32_HCONTEXT                0x0000007F
++#define MCONTEXT64_HCONTEXT                0x0000000000003FFFULL
+ #endif
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index fde7ce1..ff1e128 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -3900,6 +3900,31 @@ static RISCVException read_tinfo(CPURISCVState *env, int csrno,
+     return RISCV_EXCP_NONE;
+ }
+ 
++static RISCVException read_mcontext(CPURISCVState *env, int csrno,
++                                    target_ulong *val)
++{
++    *val = env->mcontext;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException write_mcontext(CPURISCVState *env, int csrno,
++                                     target_ulong val)
++{
++    bool rv32 = riscv_cpu_mxl(env) == MXL_RV32 ? true : false;
++    int32_t mask;
++
++    if (riscv_has_ext(env, RVH)) {
++        /* Spec suggest 7-bit for RV32 and 14-bit for RV64 w/ H extension */
++        mask = rv32 ? MCONTEXT32_HCONTEXT : MCONTEXT64_HCONTEXT;
++    } else {
++        /* Spec suggest 6-bit for RV32 and 13-bit for RV64 w/o H extension */
++        mask = rv32 ? MCONTEXT32 : MCONTEXT64;
++    }
++
++    env->mcontext = val & mask;
++    return RISCV_EXCP_NONE;
++}
++
+ /*
+  * Functions to access Pointer Masking feature registers
+  * We have to check if current priv lvl could modify
+@@ -4794,11 +4819,12 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     [CSR_PMPADDR15] =  { "pmpaddr15", pmp, read_pmpaddr, write_pmpaddr },
+ 
+     /* Debug CSRs */
+-    [CSR_TSELECT]   =  { "tselect", debug, read_tselect, write_tselect },
+-    [CSR_TDATA1]    =  { "tdata1",  debug, read_tdata,   write_tdata   },
+-    [CSR_TDATA2]    =  { "tdata2",  debug, read_tdata,   write_tdata   },
+-    [CSR_TDATA3]    =  { "tdata3",  debug, read_tdata,   write_tdata   },
+-    [CSR_TINFO]     =  { "tinfo",   debug, read_tinfo,   write_ignore  },
++    [CSR_TSELECT]   =  { "tselect",  debug, read_tselect,  write_tselect  },
++    [CSR_TDATA1]    =  { "tdata1",   debug, read_tdata,    write_tdata    },
++    [CSR_TDATA2]    =  { "tdata2",   debug, read_tdata,    write_tdata    },
++    [CSR_TDATA3]    =  { "tdata3",   debug, read_tdata,    write_tdata    },
++    [CSR_TINFO]     =  { "tinfo",    debug, read_tinfo,    write_ignore   },
++    [CSR_MCONTEXT]  =  { "mcontext", debug, read_mcontext, write_mcontext },
+ 
+     /* User Pointer Masking */
+     [CSR_UMTE]    =    { "umte",    pointer_masking, read_umte,  write_umte },
+diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+index 4945d1a..e30d99c 100644
+--- a/target/riscv/debug.c
++++ b/target/riscv/debug.c
+@@ -940,4 +940,6 @@ void riscv_trigger_reset_hold(CPURISCVState *env)
+         env->cpu_watchpoint[i] = NULL;
+         timer_del(env->itrigger_timer[i]);
+     }
++
++    env->mcontext = 0;
+ }
+-- 
+2.34.1
+
 
