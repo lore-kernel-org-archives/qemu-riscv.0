@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 809D4C46CD4
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Dec 2023 10:40:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54C4CC35274
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Dec 2023 10:41:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rGGRm-0003iA-FT; Thu, 21 Dec 2023 05:38:34 -0500
+	id 1rGGSL-0004VZ-Mx; Thu, 21 Dec 2023 05:39:11 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rGGRh-0003fu-G2
- for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 05:38:29 -0500
-Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
+ id 1rGGS2-00045n-L3
+ for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 05:38:50 -0500
+Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rGGRb-0003qC-TQ
- for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 05:38:28 -0500
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3365424df34so471936f8f.1
- for <qemu-riscv@nongnu.org>; Thu, 21 Dec 2023 02:38:21 -0800 (PST)
+ id 1rGGRp-00049d-QV
+ for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 05:38:50 -0500
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-33666946422so512140f8f.1
+ for <qemu-riscv@nongnu.org>; Thu, 21 Dec 2023 02:38:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703155100; x=1703759900; darn=nongnu.org;
+ d=linaro.org; s=google; t=1703155111; x=1703759911; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qzxoAeOdiga+52AiTCmsWe8ywFNoeoZ5ZVuxsnjrTLU=;
- b=gDyRIMMmzg8a8Lpp0d/LZz6q79ZRZBTg78Ld4g3Y1Ce711K1KijmxNgpe/zoL6XQRb
- ABQLFFDhAmx1ImjZPu4fh7lXeFWqcZ3yRPVU+bvuH8jLNCh4gGgv73bcQmNy7Mpk9R2t
- VJPLTUwSP7HKvNeo/VpzZ8y1SKChl6VkD5rnIBe62l5mGNZqeRAZwo+gYsfcr2ZbSOnA
- bnkOVzK91ZRDLkfqNPyqmQ+vFfzDnOfIOHFGRpQolmzw944Cb5hwv5TBEVEDUIevljAA
- Dvzufu5aBYlZGNOL9QrOATQKT2GnIH0tliAOk/VSTWxy3MpZiQElpfksNXjDSw5bIYSy
- YPfw==
+ bh=G7uxGZGov81O+5jLuoaBr/C5I/uZZh1/zGx1+p9cIt8=;
+ b=wn6HY0qqfgzoqA3mnBjrnMK8LKAfVexaGcaOc09+YSLVy+8XSd1fRIcIt69+fpn093
+ Vp/EaU5VSj+ceM2HqI9U3KLr8qyPmjW9RXIR/79pCxe4puFpblWmigTX5PAYeGaldyct
+ IWkFzOHvsQA/GJ5HAmR8fuua5cKbKwRveFlJ2793oK4wmM17eGXAZ27eEhWUZKAqhwjm
+ qyiA8/lvgvRCS+tAxFtaFR56pYs9+/SGB5KMI2MepqUSMpwl7Wu4Ht/EasCwhswMbKBI
+ UpzWshjwpR71Z704VjQDwS3VDdzlueH0UBoVj6F6hO4dsT6dmOzU3UdSFnPuL4eTmkvG
+ x+JA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703155100; x=1703759900;
+ d=1e100.net; s=20230601; t=1703155111; x=1703759911;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qzxoAeOdiga+52AiTCmsWe8ywFNoeoZ5ZVuxsnjrTLU=;
- b=kgnCP5ZNiXls7ooAxXciXtFdP5DKRyPr0QkVem6iRpM8zWU0MjyzuHnL4lhe3Jo/aq
- 3OLz7jTCIfBShart2VEAk2jX1qMp76YpI6SxyuRWqD49yEuXOnXuXAKHTYgzNk72gM9M
- cf38AeOqHUxPHph5C47kkL4xxPtDN7/GPns8dcxoP5ad0OOXOpJjYgxCeDuYZXbUAbwM
- mXe1s9mpAZKw8crC0L8r2lMSkt0PTJhAhY50tyiH+O4f/OxPWUzTp45II4CRHJcU8Qks
- VRvTzw8Sp1c7rbyhJ7+q3V6QFgZMJihdqQeFwVRSnh1Zc57IbPWDdKixDNdC6brpJVUq
- KCEg==
-X-Gm-Message-State: AOJu0YwuPblxCiKf87E0GoE0+YxmFU5iHjjopr5555TVKR9LMfJSd2A+
- jwZxJzx7hZGIbeNqs9PNV+PZqw==
-X-Google-Smtp-Source: AGHT+IGEPtr1hXboAnkM1kRksQtInSnZ2jI35ee+E47oqVqOC7jqs/eRFR/CZjbl0DDaumndGsscIA==
-X-Received: by 2002:adf:e3ce:0:b0:336:751a:70cc with SMTP id
- k14-20020adfe3ce000000b00336751a70ccmr630653wrm.18.1703155100131; 
- Thu, 21 Dec 2023 02:38:20 -0800 (PST)
+ bh=G7uxGZGov81O+5jLuoaBr/C5I/uZZh1/zGx1+p9cIt8=;
+ b=AEGnJKXP7tfWP3IXpf/fjTLk7ZG+IAjw2o8o5vnt1UXrpcPuNK8zaveXIQPgonVT1n
+ CqU0jl6cLX2sAljuwZcps3RjFOuMuRcFMvIgxdnsUMcuHizCHdofKA0x/vAQ7rTm7IlS
+ 8rpzDh4LeRjlm4Ib4vxaeMabVmCRipv0vTY/U6lG1Tq9bdHgArIjltuwNPg56v+Wb0pN
+ 99JNioiWojfNpsZNwzaktOaam91rGXnmKcGhiD/sB0YglBKbtbKn8ODwspwRUaJKNysL
+ Ddtz2S/kPixvTW8fsfXskuVw2xJNCfX4H2vH9vHN3tgH47oKaz1dOL4FDavwE1YO8qkt
+ jpnA==
+X-Gm-Message-State: AOJu0YwWh/FAXXpKwQm26nMupVVW5Mk0ifYEGQt6irtPTDa7twMi+Ign
+ 3NlqSBaVyl9r0kg3q16skccxlA==
+X-Google-Smtp-Source: AGHT+IHDkK7DDkGONkWeeg1etyQrE038hwJH58HJmds12JAmwy22MbScTVnibljXYstd5tpPwiyrKA==
+X-Received: by 2002:a5d:5385:0:b0:336:6f89:9eca with SMTP id
+ d5-20020a5d5385000000b003366f899ecamr616253wrv.66.1703155111228; 
+ Thu, 21 Dec 2023 02:38:31 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- v16-20020adf8b50000000b003366f4406f6sm1699383wra.97.2023.12.21.02.38.19
+ w9-20020a5d6809000000b00336768f52fesm1722017wru.63.2023.12.21.02.38.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Dec 2023 02:38:19 -0800 (PST)
+ Thu, 21 Dec 2023 02:38:29 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 25CA15F8C3;
- Thu, 21 Dec 2023 10:38:19 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 2CE1E5F8D6;
+ Thu, 21 Dec 2023 10:38:20 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
@@ -92,18 +92,19 @@ Cc: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- Mahmoud Mandour <ma.mandourr@gmail.com>, Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH 02/40] tests/avocado: use snapshot=on in kvm_xen_guest
-Date: Thu, 21 Dec 2023 10:37:40 +0000
-Message-Id: <20231221103818.1633766-3-alex.bennee@linaro.org>
+ Mahmoud Mandour <ma.mandourr@gmail.com>, Bin Meng <bin.meng@windriver.com>,
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
+Subject: [PATCH 13/40] qtest: bump qos-test timeout to 2 minutes
+Date: Thu, 21 Dec 2023 10:37:51 +0000
+Message-Id: <20231221103818.1633766-14-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231221103818.1633766-1-alex.bennee@linaro.org>
 References: <20231221103818.1633766-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::434;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x434.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::435;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x435.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -126,27 +127,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This ensures the rootfs is never permanently changed as we don't need
-persistence between tests anyway.
+From: Daniel P. Berrangé <berrange@redhat.com>
 
+The qos-test takes just under 1 minute in a --enable-debug
+build. Bumping to 2 minutes will give more headroom.
+
+Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+Message-ID: <20230717182859.707658-10-berrange@redhat.com>
+Signed-off-by: Thomas Huth <thuth@redhat.com>
+Message-Id: <20231215070357.10888-10-thuth@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- tests/avocado/kvm_xen_guest.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tests/qtest/meson.build | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/tests/avocado/kvm_xen_guest.py b/tests/avocado/kvm_xen_guest.py
-index 5391283113e..f8cb458d5db 100644
---- a/tests/avocado/kvm_xen_guest.py
-+++ b/tests/avocado/kvm_xen_guest.py
-@@ -59,7 +59,7 @@ def common_vm_setup(self):
-     def run_and_check(self):
-         self.vm.add_args('-kernel', self.kernel_path,
-                          '-append', self.kernel_params,
--                         '-drive',  f"file={self.rootfs},if=none,format=raw,id=drv0",
-+                         '-drive',  f"file={self.rootfs},if=none,snapshot=on,format=raw,id=drv0",
-                          '-device', 'xen-disk,drive=drv0,vdev=xvda',
-                          '-device', 'virtio-net-pci,netdev=unet',
-                          '-netdev', 'user,id=unet,hostfwd=:127.0.0.1:0-:22')
+diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
+index dc1e6da5c7b..b02ca540cff 100644
+--- a/tests/qtest/meson.build
++++ b/tests/qtest/meson.build
+@@ -7,6 +7,7 @@ slow_qtests = {
+   'pxe-test': 600,
+   'prom-env-test': 360,
+   'boot-serial-test': 180,
++  'qos-test': 120,
+ }
+ 
+ qtests_generic = [
 -- 
 2.39.2
 
