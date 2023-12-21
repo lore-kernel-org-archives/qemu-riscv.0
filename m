@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B26BC35274
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Dec 2023 10:49:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF17CC46CCD
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Dec 2023 10:50:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rGGaq-0004sz-H5; Thu, 21 Dec 2023 05:47:56 -0500
+	id 1rGGae-0004YF-EN; Thu, 21 Dec 2023 05:47:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rGGaj-0004eV-4m
- for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 05:47:49 -0500
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
+ id 1rGGaO-00041i-BZ
+ for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 05:47:29 -0500
+Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rGGa7-0007NA-U7
- for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 05:47:48 -0500
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-3365d38dce2so575708f8f.1
- for <qemu-riscv@nongnu.org>; Thu, 21 Dec 2023 02:47:10 -0800 (PST)
+ id 1rGGZz-0007IL-QX
+ for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 05:47:27 -0500
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3367601a301so567752f8f.2
+ for <qemu-riscv@nongnu.org>; Thu, 21 Dec 2023 02:47:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703155627; x=1703760427; darn=nongnu.org;
+ d=linaro.org; s=google; t=1703155621; x=1703760421; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iz4XjWcI1n0170OiHCw9kC1AKAhw4u9LezlV3t4Jyjw=;
- b=hTRKAU1wLrFbF4mZFjAyFlU31aFvAadOtoW/B/KL1Xl7QLCtjw/UAxKVgtgMAKxYsx
- MfUpThLb+CK7VUJLB8yKfcegTYeWgqjhlqHisy39oCrhcbEPsMFm5203gRrgwk+ROTpU
- 36FmMbJd7zQ2BHF781hAvSPpV08mf28bCzHDEUIHL8VRuwQLniVbDwqGO09VS2xVK1UJ
- tVenEkU6Nwmf/Yv5IKXuNyVG5qpXNfbGfoBXaJGnKEBcSgz+DKiNY9v9zMYDIz+yYeBb
- Nnxi7MEzTQ1+UFUzn/dyydaXChzXEzb2kbCz5M/mc8kBqOcVb9yl4m6qNG8i2JCuNITu
- rLQw==
+ bh=g/fOzvr35aMETqAoYDYQoT5JhVL24idRAcD8t9TRCiI=;
+ b=LmJT9OYHZDqA+ti4AKJehjqRXz2WdxNTd4CGIdm8SDF9pP8iiFeo9zH/HaSZ/GNjGV
+ Fm/tzHHCsA68JLzjlzHUvI4uFYL/kNfwCmOVsRDhTLGS83UJ21kT4vxkh7VSl2KhtUcn
+ Nuu+al9tLg0ZFk5H+4Ym0n1Zr6XIhXSSt1ecOgZrp9gQRxg5YYruKRG4cDUQo4x55cZw
+ NIWPq1DKb40b1ZBmLNqFBTBeGTF1mH2iPnSrozQB94zOSzPOmE347C+jYKMljx3HM5mR
+ Zgv21h1QViXoiAHKtv3l/ueXm0UgBJC1KLpr+gUHcYUewov63VV9p9SGEIjki6FvKGtt
+ 2kfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703155627; x=1703760427;
+ d=1e100.net; s=20230601; t=1703155621; x=1703760421;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iz4XjWcI1n0170OiHCw9kC1AKAhw4u9LezlV3t4Jyjw=;
- b=g+SyBykUR53gdtibkDX5zlN3L0OfSL6ZPuUprXRwAbQHAnsO+EYK1Gf1s7SiMyYidf
- 0LP8zaIqJYuaVuT5T4UcqtqTozozyofVXmi1ocUaMpL+qjqp2v9Yxh96EiGX9KAH343O
- sBRqnMmOK/sG83nZaPXTg5ULGZkWcpQpXAY5eG+Eg0emyvDNyZUPfnWtGPl0fx4o4Xma
- Rvtr5aoxt0K4YegHIxvCPP0CN8rvearUpRTNEYJziI4ZszM0Btr0cVFF+cS3zt633h9D
- u/q4ssunqTAq9x6lJUCNrRdy+ESTJGQ8rfQ2AXiOgffpL5tdDCfsDnVsNRaQEj+wHPbu
- d5iw==
-X-Gm-Message-State: AOJu0YxnkEcRJxhH+mShhaexrG3SrSz+SprzwBBLaeEoVg54tLSt0P/u
- lr3A6rDy37mk/u8gSDPWWGIyfg==
-X-Google-Smtp-Source: AGHT+IG4NoNT3YXiMOGMXkwJApLipA7i3bUZfP9WCrgyPaafXJ7X2t+K4o4c4C0kVTC9z2qRchxbRQ==
-X-Received: by 2002:adf:f7c1:0:b0:336:7bcd:3bdb with SMTP id
- a1-20020adff7c1000000b003367bcd3bdbmr369298wrq.11.1703155627271; 
- Thu, 21 Dec 2023 02:47:07 -0800 (PST)
+ bh=g/fOzvr35aMETqAoYDYQoT5JhVL24idRAcD8t9TRCiI=;
+ b=wHk3RvrFe+n5e20EpRMSCAiiZGb/kUi32CFIr83Da9+sDUtc3z8uABfnOE6W458aRd
+ hW7OwcSqspNa0fEafsQ3ImXiiTG76CZMYSAhuDWrE4yVWRwEjjs/zLQBYN21ssx3mHkp
+ LYZ3ZVozpHh8q3H35qkQbzQXvmuSvemz0NcPtwNmhHKdTFYTQ6OzVXahsrTn2diuvDTo
+ 8RTpj4we4dYODeRI/Db40/E3Md2h6M5TXDUM2PkRZXgUfUZYgCYwP64RymuKI9VX61iX
+ C+Op8VNEkUZbNUrJ1Tfch5Smz8ajwWNY0QFbXKwpxOGUjqjqmh4VCMyCkcqybSJ8meJv
+ vzDw==
+X-Gm-Message-State: AOJu0Ywt4wJvUINx8aUza9sCU7WsxJM0kxDZrJjZBd9DKrZwa0i66E4C
+ 7muYoP8H58RYk9OLfjt1nL20Jw==
+X-Google-Smtp-Source: AGHT+IGte0FFRzg2XMABf/T12GSw8W/1kcHRtYW8R8cwVQEBRQHDdPZEGG/QKObjM6E1HrTyflQSlw==
+X-Received: by 2002:adf:ed50:0:b0:336:7b01:85bf with SMTP id
+ u16-20020adfed50000000b003367b0185bfmr390182wro.199.1703155621526; 
+ Thu, 21 Dec 2023 02:47:01 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- v8-20020a5d6788000000b003367b610d92sm1724223wru.103.2023.12.21.02.47.01
+ n8-20020a5d4008000000b003366cc543casm1710259wrp.102.2023.12.21.02.46.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Dec 2023 02:47:06 -0800 (PST)
+ Thu, 21 Dec 2023 02:46:58 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 765E75F902;
- Thu, 21 Dec 2023 10:38:22 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 266695F8E9;
+ Thu, 21 Dec 2023 10:38:21 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
@@ -94,23 +94,23 @@ Cc: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
  =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
  Mahmoud Mandour <ma.mandourr@gmail.com>, Bin Meng <bin.meng@windriver.com>,
  Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH 34/40] gdbstub: Add members to identify registers to GDBFeature
-Date: Thu, 21 Dec 2023 10:38:12 +0000
-Message-Id: <20231221103818.1633766-35-alex.bennee@linaro.org>
+Subject: [PATCH 23/40] target/riscv: Move misa_mxl_max to class
+Date: Thu, 21 Dec 2023 10:38:01 +0000
+Message-Id: <20231221103818.1633766-24-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231221103818.1633766-1-alex.bennee@linaro.org>
 References: <20231221103818.1633766-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::432;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x432.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::430;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x430.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -129,137 +129,533 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Akihiko Odaki <akihiko.odaki@daynix.com>
 
-These members will be used to help plugins to identify registers.
-The added members in instances of GDBFeature dynamically generated by
-CPUs will be filled in later changes.
+misa_mxl_max is common for all instances of a RISC-V CPU class so they
+are better put into class.
 
 Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Message-Id: <20231213-gdb-v17-10-777047380591@daynix.com>
+Message-Id: <20231213-riscv-v7-3-a760156a337f@daynix.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- include/exec/gdbstub.h  |  3 +++
- gdbstub/gdbstub.c       | 12 +++++++++---
- target/riscv/gdbstub.c  |  4 +---
- scripts/feature_to_c.py | 14 +++++++++++++-
- 4 files changed, 26 insertions(+), 7 deletions(-)
+ target/riscv/cpu.h         |   4 +-
+ target/riscv/cpu.c         | 118 +++++++++++++++++++------------------
+ target/riscv/gdbstub.c     |  12 ++--
+ target/riscv/kvm/kvm-cpu.c |  10 ++--
+ target/riscv/machine.c     |   7 +--
+ target/riscv/tcg/tcg-cpu.c |  12 ++--
+ target/riscv/translate.c   |   3 +-
+ 7 files changed, 87 insertions(+), 79 deletions(-)
 
-diff --git a/include/exec/gdbstub.h b/include/exec/gdbstub.h
-index 82a8afa237f..da9ddfe54c5 100644
---- a/include/exec/gdbstub.h
-+++ b/include/exec/gdbstub.h
-@@ -13,12 +13,15 @@
- typedef struct GDBFeature {
-     const char *xmlname;
-     const char *xml;
-+    const char *name;
-+    const char * const *regs;
-     int num_regs;
- } GDBFeature;
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index d74b361be64..060b7f69a74 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -169,7 +169,6 @@ struct CPUArchState {
  
- typedef struct GDBFeatureBuilder {
-     GDBFeature *feature;
-     GPtrArray *xml;
-+    GPtrArray *regs;
-     int base_reg;
- } GDBFeatureBuilder;
+     /* RISCVMXL, but uint32_t for vmstate migration */
+     uint32_t misa_mxl;      /* current mxl */
+-    uint32_t misa_mxl_max;  /* max mxl for this cpu */
+     uint32_t misa_ext;      /* current extensions */
+     uint32_t misa_ext_mask; /* max ext for this cpu */
+     uint32_t xl;            /* current xlen */
+@@ -450,6 +449,7 @@ struct RISCVCPUClass {
  
-diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-index 801eba9a0b0..420ab2a3766 100644
---- a/gdbstub/gdbstub.c
-+++ b/gdbstub/gdbstub.c
-@@ -419,9 +419,10 @@ void gdb_feature_builder_init(GDBFeatureBuilder *builder, GDBFeature *feature,
-     builder->feature = feature;
-     builder->xml = g_ptr_array_new();
-     g_ptr_array_add(builder->xml, header);
-+    builder->regs = g_ptr_array_new();
-     builder->base_reg = base_reg;
-     feature->xmlname = xmlname;
--    feature->num_regs = 0;
-+    feature->name = name;
+     DeviceRealize parent_realize;
+     ResettablePhases parent_phases;
++    uint32_t misa_mxl_max;  /* max mxl for this cpu */
+ };
+ 
+ static inline int riscv_has_ext(CPURISCVState *env, target_ulong ext)
+@@ -756,7 +756,7 @@ enum riscv_pmu_event_idx {
+ /* used by tcg/tcg-cpu.c*/
+ void isa_ext_update_enabled(RISCVCPU *cpu, uint32_t ext_offset, bool en);
+ bool isa_ext_is_enabled(RISCVCPU *cpu, uint32_t ext_offset);
+-void riscv_cpu_set_misa(CPURISCVState *env, RISCVMXL mxl, uint32_t ext);
++void riscv_cpu_set_misa_ext(CPURISCVState *env, uint32_t ext);
+ 
+ typedef struct RISCVCPUMultiExtConfig {
+     const char *name;
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 83c7c0cf07b..2ab61df2217 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -274,9 +274,8 @@ const char *riscv_cpu_get_trap_name(target_ulong cause, bool async)
+     }
  }
  
- void gdb_feature_builder_append_tag(const GDBFeatureBuilder *builder,
-@@ -440,10 +441,12 @@ void gdb_feature_builder_append_reg(const GDBFeatureBuilder *builder,
-                                     const char *type,
-                                     const char *group)
+-void riscv_cpu_set_misa(CPURISCVState *env, RISCVMXL mxl, uint32_t ext)
++void riscv_cpu_set_misa_ext(CPURISCVState *env, uint32_t ext)
  {
--    if (builder->feature->num_regs < regnum) {
--        builder->feature->num_regs = regnum;
-+    if (builder->regs->len <= regnum) {
-+        g_ptr_array_set_size(builder->regs, regnum + 1);
-     }
- 
-+    builder->regs->pdata[regnum] = (gpointer *)name;
-+
-     if (group) {
-         gdb_feature_builder_append_tag(
-             builder,
-@@ -469,6 +472,9 @@ void gdb_feature_builder_end(const GDBFeatureBuilder *builder)
-     }
- 
-     g_ptr_array_free(builder->xml, TRUE);
-+
-+    builder->feature->num_regs = builder->regs->len;
-+    builder->feature->regs = (void *)g_ptr_array_free(builder->regs, FALSE);
+-    env->misa_mxl_max = env->misa_mxl = mxl;
+     env->misa_ext_mask = env->misa_ext = ext;
  }
  
- const GDBFeature *gdb_find_static_feature(const char *xmlname)
+@@ -378,11 +377,7 @@ static void riscv_any_cpu_init(Object *obj)
+ {
+     RISCVCPU *cpu = RISCV_CPU(obj);
+     CPURISCVState *env = &cpu->env;
+-#if defined(TARGET_RISCV32)
+-    riscv_cpu_set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVD | RVC | RVU);
+-#elif defined(TARGET_RISCV64)
+-    riscv_cpu_set_misa(env, MXL_RV64, RVI | RVM | RVA | RVF | RVD | RVC | RVU);
+-#endif
++    riscv_cpu_set_misa_ext(env, RVI | RVM | RVA | RVF | RVD | RVC | RVU);
+ 
+ #ifndef CONFIG_USER_ONLY
+     set_satp_mode_max_supported(RISCV_CPU(obj),
+@@ -403,16 +398,14 @@ static void riscv_max_cpu_init(Object *obj)
+ {
+     RISCVCPU *cpu = RISCV_CPU(obj);
+     CPURISCVState *env = &cpu->env;
+-    RISCVMXL mlx = MXL_RV64;
+ 
+-#ifdef TARGET_RISCV32
+-    mlx = MXL_RV32;
+-#endif
+-    riscv_cpu_set_misa(env, mlx, 0);
+     env->priv_ver = PRIV_VERSION_LATEST;
+ #ifndef CONFIG_USER_ONLY
+-    set_satp_mode_max_supported(RISCV_CPU(obj), mlx == MXL_RV32 ?
+-                                VM_1_10_SV32 : VM_1_10_SV57);
++#ifdef TARGET_RISCV32
++    set_satp_mode_max_supported(cpu, VM_1_10_SV32);
++#else
++    set_satp_mode_max_supported(cpu, VM_1_10_SV57);
++#endif
+ #endif
+ }
+ 
+@@ -420,8 +413,6 @@ static void riscv_max_cpu_init(Object *obj)
+ static void rv64_base_cpu_init(Object *obj)
+ {
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+-    /* We set this in the realise function */
+-    riscv_cpu_set_misa(env, MXL_RV64, 0);
+     /* Set latest version of privileged specification */
+     env->priv_ver = PRIV_VERSION_LATEST;
+ #ifndef CONFIG_USER_ONLY
+@@ -433,8 +424,7 @@ static void rv64_sifive_u_cpu_init(Object *obj)
+ {
+     RISCVCPU *cpu = RISCV_CPU(obj);
+     CPURISCVState *env = &cpu->env;
+-    riscv_cpu_set_misa(env, MXL_RV64,
+-                       RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
++    riscv_cpu_set_misa_ext(env, RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+     env->priv_ver = PRIV_VERSION_1_10_0;
+ #ifndef CONFIG_USER_ONLY
+     set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV39);
+@@ -452,7 +442,7 @@ static void rv64_sifive_e_cpu_init(Object *obj)
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     RISCVCPU *cpu = RISCV_CPU(obj);
+ 
+-    riscv_cpu_set_misa(env, MXL_RV64, RVI | RVM | RVA | RVC | RVU);
++    riscv_cpu_set_misa_ext(env, RVI | RVM | RVA | RVC | RVU);
+     env->priv_ver = PRIV_VERSION_1_10_0;
+ #ifndef CONFIG_USER_ONLY
+     set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
+@@ -469,7 +459,7 @@ static void rv64_thead_c906_cpu_init(Object *obj)
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     RISCVCPU *cpu = RISCV_CPU(obj);
+ 
+-    riscv_cpu_set_misa(env, MXL_RV64, RVG | RVC | RVS | RVU);
++    riscv_cpu_set_misa_ext(env, RVG | RVC | RVS | RVU);
+     env->priv_ver = PRIV_VERSION_1_11_0;
+ 
+     cpu->cfg.ext_zfa = true;
+@@ -500,7 +490,7 @@ static void rv64_veyron_v1_cpu_init(Object *obj)
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     RISCVCPU *cpu = RISCV_CPU(obj);
+ 
+-    riscv_cpu_set_misa(env, MXL_RV64, RVG | RVC | RVS | RVU | RVH);
++    riscv_cpu_set_misa_ext(env, RVG | RVC | RVS | RVU | RVH);
+     env->priv_ver = PRIV_VERSION_1_12_0;
+ 
+     /* Enable ISA extensions */
+@@ -544,8 +534,6 @@ static void rv128_base_cpu_init(Object *obj)
+         exit(EXIT_FAILURE);
+     }
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+-    /* We set this in the realise function */
+-    riscv_cpu_set_misa(env, MXL_RV128, 0);
+     /* Set latest version of privileged specification */
+     env->priv_ver = PRIV_VERSION_LATEST;
+ #ifndef CONFIG_USER_ONLY
+@@ -556,8 +544,6 @@ static void rv128_base_cpu_init(Object *obj)
+ static void rv32_base_cpu_init(Object *obj)
+ {
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+-    /* We set this in the realise function */
+-    riscv_cpu_set_misa(env, MXL_RV32, 0);
+     /* Set latest version of privileged specification */
+     env->priv_ver = PRIV_VERSION_LATEST;
+ #ifndef CONFIG_USER_ONLY
+@@ -569,8 +555,7 @@ static void rv32_sifive_u_cpu_init(Object *obj)
+ {
+     RISCVCPU *cpu = RISCV_CPU(obj);
+     CPURISCVState *env = &cpu->env;
+-    riscv_cpu_set_misa(env, MXL_RV32,
+-                       RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
++    riscv_cpu_set_misa_ext(env, RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+     env->priv_ver = PRIV_VERSION_1_10_0;
+ #ifndef CONFIG_USER_ONLY
+     set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV32);
+@@ -588,7 +573,7 @@ static void rv32_sifive_e_cpu_init(Object *obj)
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     RISCVCPU *cpu = RISCV_CPU(obj);
+ 
+-    riscv_cpu_set_misa(env, MXL_RV32, RVI | RVM | RVA | RVC | RVU);
++    riscv_cpu_set_misa_ext(env, RVI | RVM | RVA | RVC | RVU);
+     env->priv_ver = PRIV_VERSION_1_10_0;
+ #ifndef CONFIG_USER_ONLY
+     set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
+@@ -605,7 +590,7 @@ static void rv32_ibex_cpu_init(Object *obj)
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     RISCVCPU *cpu = RISCV_CPU(obj);
+ 
+-    riscv_cpu_set_misa(env, MXL_RV32, RVI | RVM | RVC | RVU);
++    riscv_cpu_set_misa_ext(env, RVI | RVM | RVC | RVU);
+     env->priv_ver = PRIV_VERSION_1_12_0;
+ #ifndef CONFIG_USER_ONLY
+     set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
+@@ -622,7 +607,7 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     RISCVCPU *cpu = RISCV_CPU(obj);
+ 
+-    riscv_cpu_set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVC | RVU);
++    riscv_cpu_set_misa_ext(env, RVI | RVM | RVA | RVF | RVC | RVU);
+     env->priv_ver = PRIV_VERSION_1_10_0;
+ #ifndef CONFIG_USER_ONLY
+     set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
+@@ -845,7 +830,7 @@ static void riscv_cpu_reset_hold(Object *obj)
+         mcc->parent_phases.hold(obj);
+     }
+ #ifndef CONFIG_USER_ONLY
+-    env->misa_mxl = env->misa_mxl_max;
++    env->misa_mxl = mcc->misa_mxl_max;
+     env->priv = PRV_M;
+     env->mstatus &= ~(MSTATUS_MIE | MSTATUS_MPRV);
+     if (env->misa_mxl > MXL_RV32) {
+@@ -1213,6 +1198,12 @@ static void riscv_cpu_post_init(Object *obj)
+ 
+ static void riscv_cpu_init(Object *obj)
+ {
++    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(obj);
++    RISCVCPU *cpu = RISCV_CPU(obj);
++    CPURISCVState *env = &cpu->env;
++
++    env->misa_mxl = mcc->misa_mxl_max;
++
+ #ifndef CONFIG_USER_ONLY
+     qdev_init_gpio_in(DEVICE(obj), riscv_cpu_set_irq,
+                       IRQ_LOCAL_MAX + IRQ_LOCAL_GUEST_MAX);
+@@ -1657,7 +1648,7 @@ static void cpu_get_marchid(Object *obj, Visitor *v, const char *name,
+     visit_type_bool(v, name, &value, errp);
+ }
+ 
+-static void riscv_cpu_class_init(ObjectClass *c, void *data)
++static void riscv_cpu_common_class_init(ObjectClass *c, void *data)
+ {
+     RISCVCPUClass *mcc = RISCV_CPU_CLASS(c);
+     CPUClass *cc = CPU_CLASS(c);
+@@ -1699,6 +1690,13 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+     device_class_set_props(dc, riscv_cpu_properties);
+ }
+ 
++static void riscv_cpu_class_init(ObjectClass *c, void *data)
++{
++    RISCVCPUClass *mcc = RISCV_CPU_CLASS(c);
++
++    mcc->misa_mxl_max = (uint32_t)(uintptr_t)data;
++}
++
+ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str,
+                                  int max_str_len)
+ {
+@@ -1764,18 +1762,22 @@ void riscv_cpu_list(void)
+     g_slist_free(list);
+ }
+ 
+-#define DEFINE_CPU(type_name, initfn)      \
+-    {                                      \
+-        .name = type_name,                 \
+-        .parent = TYPE_RISCV_CPU,          \
+-        .instance_init = initfn            \
++#define DEFINE_CPU(type_name, misa_mxl_max, initfn)         \
++    {                                                       \
++        .name = (type_name),                                \
++        .parent = TYPE_RISCV_CPU,                           \
++        .instance_init = (initfn),                          \
++        .class_init = riscv_cpu_class_init,                 \
++        .class_data = (void *)(misa_mxl_max)                \
+     }
+ 
+-#define DEFINE_DYNAMIC_CPU(type_name, initfn) \
+-    {                                         \
+-        .name = type_name,                    \
+-        .parent = TYPE_RISCV_DYNAMIC_CPU,     \
+-        .instance_init = initfn               \
++#define DEFINE_DYNAMIC_CPU(type_name, misa_mxl_max, initfn) \
++    {                                                       \
++        .name = (type_name),                                \
++        .parent = TYPE_RISCV_DYNAMIC_CPU,                   \
++        .instance_init = (initfn),                          \
++        .class_init = riscv_cpu_class_init,                 \
++        .class_data = (void *)(misa_mxl_max)                \
+     }
+ 
+ static const TypeInfo riscv_cpu_type_infos[] = {
+@@ -1788,29 +1790,31 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+         .instance_post_init = riscv_cpu_post_init,
+         .abstract = true,
+         .class_size = sizeof(RISCVCPUClass),
+-        .class_init = riscv_cpu_class_init,
++        .class_init = riscv_cpu_common_class_init,
+     },
+     {
+         .name = TYPE_RISCV_DYNAMIC_CPU,
+         .parent = TYPE_RISCV_CPU,
+         .abstract = true,
+     },
+-    DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_ANY,      riscv_any_cpu_init),
+-    DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_MAX,      riscv_max_cpu_init),
+ #if defined(TARGET_RISCV32)
+-    DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE32,   rv32_base_cpu_init),
+-    DEFINE_CPU(TYPE_RISCV_CPU_IBEX,             rv32_ibex_cpu_init),
+-    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E31,       rv32_sifive_e_cpu_init),
+-    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E34,       rv32_imafcu_nommu_cpu_init),
+-    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U34,       rv32_sifive_u_cpu_init),
++    DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_ANY,     MXL_RV32,  riscv_any_cpu_init),
++    DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_MAX,     MXL_RV32,  riscv_max_cpu_init),
++    DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE32,  MXL_RV32,  rv32_base_cpu_init),
++    DEFINE_CPU(TYPE_RISCV_CPU_IBEX,            MXL_RV32,  rv32_ibex_cpu_init),
++    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E31,      MXL_RV32,  rv32_sifive_e_cpu_init),
++    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E34,      MXL_RV32,  rv32_imafcu_nommu_cpu_init),
++    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U34,      MXL_RV32,  rv32_sifive_u_cpu_init),
+ #elif defined(TARGET_RISCV64)
+-    DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE64,   rv64_base_cpu_init),
+-    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rv64_sifive_e_cpu_init),
+-    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rv64_sifive_u_cpu_init),
+-    DEFINE_CPU(TYPE_RISCV_CPU_SHAKTI_C,         rv64_sifive_u_cpu_init),
+-    DEFINE_CPU(TYPE_RISCV_CPU_THEAD_C906,       rv64_thead_c906_cpu_init),
+-    DEFINE_CPU(TYPE_RISCV_CPU_VEYRON_V1,        rv64_veyron_v1_cpu_init),
+-    DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE128,  rv128_base_cpu_init),
++    DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_ANY,     MXL_RV64,  riscv_any_cpu_init),
++    DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_MAX,     MXL_RV64,  riscv_max_cpu_init),
++    DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE64,  MXL_RV64,  rv64_base_cpu_init),
++    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,      MXL_RV64,  rv64_sifive_e_cpu_init),
++    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,      MXL_RV64,  rv64_sifive_u_cpu_init),
++    DEFINE_CPU(TYPE_RISCV_CPU_SHAKTI_C,        MXL_RV64,  rv64_sifive_u_cpu_init),
++    DEFINE_CPU(TYPE_RISCV_CPU_THEAD_C906,      MXL_RV64,  rv64_thead_c906_cpu_init),
++    DEFINE_CPU(TYPE_RISCV_CPU_VEYRON_V1,       MXL_RV64,  rv64_veyron_v1_cpu_init),
++    DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE128, MXL_RV128, rv128_base_cpu_init),
+ #endif
+ };
+ 
 diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-index 68d0fdc1fd6..d9b52ffd09b 100644
+index 58b3ace0fe9..365040228a1 100644
 --- a/target/riscv/gdbstub.c
 +++ b/target/riscv/gdbstub.c
-@@ -266,11 +266,9 @@ static GDBFeature *riscv_gen_dynamic_csr_feature(CPUState *cs, int base_reg)
+@@ -49,6 +49,7 @@ static const struct TypeSize vec_lanes[] = {
+ 
+ int riscv_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+ {
++    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cs);
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+     target_ulong tmp;
+@@ -61,7 +62,7 @@ int riscv_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+         return 0;
+     }
+ 
+-    switch (env->misa_mxl_max) {
++    switch (mcc->misa_mxl_max) {
+     case MXL_RV32:
+         return gdb_get_reg32(mem_buf, tmp);
+     case MXL_RV64:
+@@ -75,12 +76,13 @@ int riscv_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+ 
+ int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+ {
++    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cs);
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+     int length = 0;
+     target_ulong tmp;
+ 
+-    switch (env->misa_mxl_max) {
++    switch (mcc->misa_mxl_max) {
+     case MXL_RV32:
+         tmp = (int32_t)ldl_p(mem_buf);
+         length = 4;
+@@ -214,11 +216,12 @@ static int riscv_gdb_set_virtual(CPURISCVState *cs, uint8_t *mem_buf, int n)
+ 
+ static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
+ {
++    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cs);
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+     GString *s = g_string_new(NULL);
+     riscv_csr_predicate_fn predicate;
+-    int bitsize = 16 << env->misa_mxl_max;
++    int bitsize = 16 << mcc->misa_mxl_max;
+     int i;
+ 
+ #if !defined(CONFIG_USER_ONLY)
+@@ -310,6 +313,7 @@ static int ricsv_gen_dynamic_vector_xml(CPUState *cs, int base_reg)
+ 
+ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+ {
++    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cs);
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+     if (env->misa_ext & RVD) {
+@@ -326,7 +330,7 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+                                  ricsv_gen_dynamic_vector_xml(cs, base_reg),
+                                  "riscv-vector.xml", 0);
+     }
+-    switch (env->misa_mxl_max) {
++    switch (mcc->misa_mxl_max) {
+     case MXL_RV32:
+         gdb_register_coprocessor(cs, riscv_gdb_get_virtual,
+                                  riscv_gdb_set_virtual,
+diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+index 45b6cf1cfa0..f5624e553b6 100644
+--- a/target/riscv/kvm/kvm-cpu.c
++++ b/target/riscv/kvm/kvm-cpu.c
+@@ -1501,14 +1501,14 @@ static void kvm_cpu_accel_register_types(void)
+ }
+ type_init(kvm_cpu_accel_register_types);
+ 
+-static void riscv_host_cpu_init(Object *obj)
++static void riscv_host_cpu_class_init(ObjectClass *c, void *data)
+ {
+-    CPURISCVState *env = &RISCV_CPU(obj)->env;
++    RISCVCPUClass *mcc = RISCV_CPU_CLASS(c);
+ 
+ #if defined(TARGET_RISCV32)
+-    env->misa_mxl_max = env->misa_mxl = MXL_RV32;
++    mcc->misa_mxl_max = MXL_RV32;
+ #elif defined(TARGET_RISCV64)
+-    env->misa_mxl_max = env->misa_mxl = MXL_RV64;
++    mcc->misa_mxl_max = MXL_RV64;
+ #endif
+ }
+ 
+@@ -1516,7 +1516,7 @@ static const TypeInfo riscv_kvm_cpu_type_infos[] = {
+     {
+         .name = TYPE_RISCV_CPU_HOST,
+         .parent = TYPE_RISCV_CPU,
+-        .instance_init = riscv_host_cpu_init,
++        .class_init = riscv_host_cpu_class_init,
+     }
+ };
+ 
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+index fdde243e040..4c8d9a66595 100644
+--- a/target/riscv/machine.c
++++ b/target/riscv/machine.c
+@@ -178,10 +178,9 @@ static const VMStateDescription vmstate_pointermasking = {
+ 
+ static bool rv128_needed(void *opaque)
+ {
+-    RISCVCPU *cpu = opaque;
+-    CPURISCVState *env = &cpu->env;
++    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(opaque);
+ 
+-    return env->misa_mxl_max == MXL_RV128;
++    return mcc->misa_mxl_max == MXL_RV128;
+ }
+ 
+ static const VMStateDescription vmstate_rv128 = {
+@@ -372,7 +371,7 @@ const VMStateDescription vmstate_riscv_cpu = {
+         VMSTATE_UINTTL(env.vext_ver, RISCVCPU),
+         VMSTATE_UINT32(env.misa_mxl, RISCVCPU),
+         VMSTATE_UINT32(env.misa_ext, RISCVCPU),
+-        VMSTATE_UINT32(env.misa_mxl_max, RISCVCPU),
++        VMSTATE_UNUSED(4),
+         VMSTATE_UINT32(env.misa_ext_mask, RISCVCPU),
+         VMSTATE_UINTTL(env.priv, RISCVCPU),
+         VMSTATE_BOOL(env.virt_enabled, RISCVCPU),
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index ee17f65afb6..7f6712c81a4 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -152,10 +152,9 @@ static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu)
+ {
+     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cpu);
+     CPUClass *cc = CPU_CLASS(mcc);
+-    CPURISCVState *env = &cpu->env;
+ 
+     /* Validate that MISA_MXL is set properly. */
+-    switch (env->misa_mxl_max) {
++    switch (mcc->misa_mxl_max) {
+ #ifdef TARGET_RISCV64
+     case MXL_RV64:
+     case MXL_RV128:
+@@ -274,6 +273,7 @@ static void riscv_cpu_disable_priv_spec_isa_exts(RISCVCPU *cpu)
+  */
+ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+ {
++    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cpu);
+     CPURISCVState *env = &cpu->env;
+     Error *local_err = NULL;
+ 
+@@ -454,7 +454,7 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zcb), true);
+         cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zcmp), true);
+         cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zcmt), true);
+-        if (riscv_has_ext(env, RVF) && env->misa_mxl_max == MXL_RV32) {
++        if (riscv_has_ext(env, RVF) && mcc->misa_mxl_max == MXL_RV32) {
+             cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zcf), true);
          }
-         predicate = csr_ops[i].predicate;
-         if (predicate && (predicate(env, i) == RISCV_EXCP_NONE)) {
--            g_autofree char *dynamic_name = NULL;
-             name = csr_ops[i].name;
-             if (!name) {
--                dynamic_name = g_strdup_printf("csr%03x", i);
--                name = dynamic_name;
-+                name = g_strdup_printf("csr%03x", i);
-             }
+     }
+@@ -462,7 +462,7 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+     /* zca, zcd and zcf has a PRIV 1.12.0 restriction */
+     if (riscv_has_ext(env, RVC) && env->priv_ver >= PRIV_VERSION_1_12_0) {
+         cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zca), true);
+-        if (riscv_has_ext(env, RVF) && env->misa_mxl_max == MXL_RV32) {
++        if (riscv_has_ext(env, RVF) && mcc->misa_mxl_max == MXL_RV32) {
+             cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zcf), true);
+         }
+         if (riscv_has_ext(env, RVD)) {
+@@ -470,7 +470,7 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         }
+     }
  
-             gdb_feature_builder_append_reg(&builder, name, bitsize, i,
-diff --git a/scripts/feature_to_c.py b/scripts/feature_to_c.py
-index e04d6b2df7f..807af0e685c 100644
---- a/scripts/feature_to_c.py
-+++ b/scripts/feature_to_c.py
-@@ -50,7 +50,9 @@ def writeliteral(indent, bytes):
-         sys.stderr.write(f'unexpected start tag: {element.tag}\n')
-         exit(1)
+-    if (env->misa_mxl_max != MXL_RV32 && cpu->cfg.ext_zcf) {
++    if (mcc->misa_mxl_max != MXL_RV32 && cpu->cfg.ext_zcf) {
+         error_setg(errp, "Zcf extension is only relevant to RV32");
+         return;
+     }
+@@ -956,7 +956,7 @@ static void riscv_init_max_cpu_extensions(Object *obj)
+     const RISCVCPUMultiExtConfig *prop;
  
-+    feature_name = element.attrib['name']
-     regnum = 0
-+    regnames = []
-     regnums = []
-     tags = ['feature']
-     for event, element in events:
-@@ -67,6 +69,7 @@ def writeliteral(indent, bytes):
-                 if 'regnum' in element.attrib:
-                     regnum = int(element.attrib['regnum'])
+     /* Enable RVG, RVJ and RVV that are disabled by default */
+-    riscv_cpu_set_misa(env, env->misa_mxl, env->misa_ext | RVG | RVJ | RVV);
++    riscv_cpu_set_misa_ext(env, env->misa_ext | RVG | RVJ | RVV);
  
-+                regnames.append(element.attrib['name'])
-                 regnums.append(regnum)
-                 regnum += 1
+     for (prop = riscv_cpu_extensions; prop && prop->name; prop++) {
+         isa_ext_update_enabled(cpu, prop->offset, true);
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index f0be79bb160..7e383c5eebf 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -1167,6 +1167,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+ {
+     DisasContext *ctx = container_of(dcbase, DisasContext, base);
+     CPURISCVState *env = cpu_env(cs);
++    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cs);
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     uint32_t tb_flags = ctx->base.tb->flags;
  
-@@ -85,6 +88,15 @@ def writeliteral(indent, bytes):
-     writeliteral(8, bytes(os.path.basename(input), 'utf-8'))
-     sys.stdout.write(',\n')
-     writeliteral(8, read)
--    sys.stdout.write(f',\n        {num_regs},\n    }},\n')
-+    sys.stdout.write(',\n')
-+    writeliteral(8, bytes(feature_name, 'utf-8'))
-+    sys.stdout.write(',\n        (const char * const []) {\n')
-+
-+    for index, regname in enumerate(regnames):
-+        sys.stdout.write(f'            [{regnums[index] - base_reg}] =\n')
-+        writeliteral(16, bytes(regname, 'utf-8'))
-+        sys.stdout.write(',\n')
-+
-+    sys.stdout.write(f'        }},\n        {num_regs},\n    }},\n')
- 
- sys.stdout.write('    { NULL }\n};\n')
+@@ -1188,7 +1189,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->cfg_vta_all_1s = cpu->cfg.rvv_ta_all_1s;
+     ctx->vstart_eq_zero = FIELD_EX32(tb_flags, TB_FLAGS, VSTART_EQ_ZERO);
+     ctx->vl_eq_vlmax = FIELD_EX32(tb_flags, TB_FLAGS, VL_EQ_VLMAX);
+-    ctx->misa_mxl_max = env->misa_mxl_max;
++    ctx->misa_mxl_max = mcc->misa_mxl_max;
+     ctx->xl = FIELD_EX32(tb_flags, TB_FLAGS, XL);
+     ctx->address_xl = FIELD_EX32(tb_flags, TB_FLAGS, AXL);
+     ctx->cs = cs;
 -- 
 2.39.2
 
