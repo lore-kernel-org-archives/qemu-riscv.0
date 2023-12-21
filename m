@@ -4,53 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82C34C35274
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Dec 2023 09:51:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48BA8C35274
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Dec 2023 09:52:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rGFhk-0006P1-5m; Thu, 21 Dec 2023 04:51:00 -0500
+	id 1rGFhu-0006Rm-Gx; Thu, 21 Dec 2023 04:51:11 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <duchao@eswincomputing.com>)
- id 1rGFhZ-0006Mu-Hj; Thu, 21 Dec 2023 04:50:49 -0500
+ id 1rGFhb-0006NG-Qt; Thu, 21 Dec 2023 04:50:53 -0500
 Received: from zg8tmja2lje4os4yms4ymjma.icoremail.net ([206.189.21.223])
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <duchao@eswincomputing.com>)
- id 1rGFhX-0002XK-5q; Thu, 21 Dec 2023 04:50:49 -0500
+ id 1rGFhX-0002WN-UJ; Thu, 21 Dec 2023 04:50:50 -0500
 Received: from localhost.localdomain (unknown [10.12.130.31])
- by app1 (Coremail) with SMTP id TAJkCgAHk_0TCoRlUowCAA--.24821S6;
- Thu, 21 Dec 2023 17:49:11 +0800 (CST)
+ by app1 (Coremail) with SMTP id TAJkCgAHk_0TCoRlUowCAA--.24821S4;
+ Thu, 21 Dec 2023 17:49:08 +0800 (CST)
 From: Chao Du <duchao@eswincomputing.com>
 To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com,
  alistair23@gmail.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  palmer@dabbelt.com, anup@brainfault.org, atishp@atishpatra.org
-Subject: [RFC PATCH 2/4] target/riscv/kvm: implement
- kvm_arch_update_guest_debug()
-Date: Thu, 21 Dec 2023 09:49:21 +0000
-Message-Id: <20231221094923.7349-3-duchao@eswincomputing.com>
+Subject: [RFC PATCH 0/4] target/riscv/kvm: QEMU support for KVM Guest Debug on
+ RISC-V
+Date: Thu, 21 Dec 2023 09:49:19 +0000
+Message-Id: <20231221094923.7349-1-duchao@eswincomputing.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20231221094923.7349-1-duchao@eswincomputing.com>
-References: <20231221094923.7349-1-duchao@eswincomputing.com>
-X-CM-TRANSID: TAJkCgAHk_0TCoRlUowCAA--.24821S6
-X-Coremail-Antispam: 1UD129KBjvdXoWrKryrCrWDuFWDKF47uFykKrg_yoW3Gwc_Cr
- WxuF18GryUWFy0gayDCw13AFy3G3yfC3W7t3WxAFyUCryDWrWkJws5W3W7Zry7urWxCFZr
- JrsrXFZxCry5GjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUbq8YjsxI4VWxJwAYFVCjjxCrM7AC8VAFwI0_Wr0E3s1l1xkIjI8I
- 6I8E6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l82xGYIkIc2x26280x7
- IE14v26r15M28IrcIa0xkI8VCY1x0267AKxVW5JVCq3wA2ocxC64kIII0Yj41l84x0c7CE
- w4AK67xGY2AK021l84ACjcxK6xIIjxv20xvE14v26w1j6s0DM28EF7xvwVC0I7IYx2IY6x
- kF7I0E14v26r4UJVWxJr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIE
- c7CjxVAFwI0_GcCE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I
- 8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCF
- s4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwACI402YVCY1x02628vn2kIc2xKxwCY02
- Avz4vE-syl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG
- 67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MI
- IYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E
- 14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJV
- W8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxU7iFx
- UUUUU
+X-CM-TRANSID: TAJkCgAHk_0TCoRlUowCAA--.24821S4
+X-Coremail-Antispam: 1UD129KBjvdXoWrZr1rXF13ZFWUtw17CF48Zwb_yoWkXrXEkr
+ Z3XrW8G3yDWFy0vFZ7A3WrGFWrGrWfWw1IvFnFvr4UKr9rur4UJan5ta48A34UZF4rZas7
+ AFn3tryfAr13WjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUbIxYjsxI4VWkCwAYFVCjjxCrM7AC8VAFwI0_Gr0_Xr1l1xkIjI8I
+ 6I8E6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l8cAvFVAK0II2c7xJM2
+ 8CjxkF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVWDJVCq3wA2z4x0Y4vE2Ix0
+ cI8IcVCY1x0267AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I
+ 8E87Iv6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI
+ 64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8Jw
+ Am72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkI
+ wI1lc2xSY4AK6svPMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I
+ 0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWU
+ tVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcV
+ CY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAF
+ wI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa
+ 7IU8IzuJUUUUU==
 X-CM-SenderInfo: xgxfxt3r6h245lqf0zpsxwx03jof0z/
 Received-SPF: pass client-ip=206.189.21.223;
  envelope-from=duchao@eswincomputing.com;
@@ -76,28 +73,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Set the control flag when there are active breakpoints. This will
-help KVM to know the status in the userspace.
+This series implements QEMU KVM Guest Debug on RISC-V. Currently, we can
+debug RISC-V KVM guest from the host side, with software breakpoints.
 
-Signed-off-by: Chao Du <duchao@eswincomputing.com>
----
- target/riscv/kvm/kvm-cpu.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+A brief test was done on QEMU RISC-V hypervisor emulator.
 
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index e9110006b0..94697b09bb 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -1598,5 +1598,7 @@ void kvm_arch_remove_all_hw_breakpoints(void)
- 
- void kvm_arch_update_guest_debug(CPUState *cs, struct kvm_guest_debug *dbg)
- {
--    /* TODO; To be implemented later. */
-+    if (kvm_sw_breakpoints_active(cs)) {
-+        dbg->control |= KVM_GUESTDBG_ENABLE;
-+    }
- }
--- 
+A TODO list which will be added later:
+1. HW breakpoints support
+2. Test cases
+
+This series is based on QEMU 8.2.0-rc4 and is also available at:
+https://github.com/Du-Chao/qemu/tree/riscv_gd_sw
+
+This is dependent on KVM side changes:
+https://github.com/Du-Chao/linux/tree/riscv_gd_sw
+
+Chao Du (4):
+  target/riscv/kvm: add software breakpoints support
+  target/riscv/kvm: implement kvm_arch_update_guest_debug()
+  target/riscv/kvm: handle the exit with debug reason
+  linux-headers: enable KVM GUEST DEBUG for RISC-V
+
+ accel/kvm/kvm-all.c           |   8 +--
+ include/sysemu/kvm.h          |   6 +-
+ linux-headers/asm-riscv/kvm.h |   1 +
+ target/arm/kvm64.c            |   6 +-
+ target/i386/kvm/kvm.c         |   6 +-
+ target/mips/kvm.c             |   6 +-
+ target/ppc/kvm.c              |   6 +-
+ target/riscv/kvm/kvm-cpu.c    | 101 ++++++++++++++++++++++++++++++++++
+ target/s390x/kvm/kvm.c        |   6 +-
+ 9 files changed, 130 insertions(+), 16 deletions(-)
+
+--
 2.17.1
 
 
