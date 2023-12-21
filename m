@@ -4,83 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6BA4C46CD4
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Dec 2023 10:41:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FB57C35274
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Dec 2023 10:41:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rGGUR-0002A1-AX; Thu, 21 Dec 2023 05:41:19 -0500
+	id 1rGGS7-0004J5-IH; Thu, 21 Dec 2023 05:38:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1rGGUK-0001Ln-H1; Thu, 21 Dec 2023 05:41:12 -0500
-Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1rGGS3-000479-3L
+ for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 05:38:51 -0500
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1rGGUC-00051D-7m; Thu, 21 Dec 2023 05:41:12 -0500
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-40c339d2b88so6398785e9.3; 
- Thu, 21 Dec 2023 02:41:03 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1rGGRp-0004Az-QE
+ for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 05:38:50 -0500
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-40d22d3e751so10234845e9.1
+ for <qemu-riscv@nongnu.org>; Thu, 21 Dec 2023 02:38:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1703155262; x=1703760062; darn=nongnu.org;
+ d=linaro.org; s=google; t=1703155114; x=1703759914; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0pUzfr9ANEUcGoT5fPK11uZ48vY9h+mrrIb4ttUNNJI=;
- b=lsdRztdMSOWRG64mpAQmcCY0Sc6AVtJdXzMANPsnscgks4Ov8DdRtfdKxbWNo+B48S
- ScWoQ57G3uxAYgFy/RVHnHKbgBV1g/5DtK/Ztsp4EY9YHMnpTysX/Htx1Q3p+H/mrFP+
- 3JVkIAcZ1vaix/DMRElfgDduIVAEsCmkmArPyYL30XSjUF/hWOnHOvrdE/XJ/LcsxlaO
- H8umlypSP9ZiKF45dcVTfrpND/pxJF9aVM/X5Knsma1RYvKbZTfnkxmktF/QTzjPY3s2
- SEs4ldrPomSr7Nd1g5YhBDZAsXRenjJMcZwl6skPdenv5DvydEzIcw/2QH/j0NR/tKfK
- qQAQ==
+ bh=wRw1//+81PB5ZNvZJSTSQFwoG2tqKVRM/U60AtyQst4=;
+ b=DqIcZVoOLSjcui58FZ/UyhBoiwMsmNO6RujXDQwEC4miwXnB6nvqIPYePsBpTZGDtU
+ 0t7AJKC+kiAkAsm3LYAI7ZfBw429N+xxy10OZ3G/iogAF9t8zPnUaxbXD3liDxjO56PI
+ xl6ZIl+5fSkvJcvlROG7AVR4hDWdiiLwHGs14brJ3OixqdEL0udgeHdpbm4dIZlbYLIY
+ +2LDzLpASnSHUQudulQ+zV0RNBLGh74ifHO2ZimphjPjIjPN7Hn9ViogyP7z7z1Zj8Cd
+ 5HlgsmL+vQjdr4Cy2Iko5o8+OyXjnISO10eVfn69bUSFCcKHSssp7eIIgW2EKsFkVZVN
+ BLdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703155262; x=1703760062;
+ d=1e100.net; s=20230601; t=1703155114; x=1703759914;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0pUzfr9ANEUcGoT5fPK11uZ48vY9h+mrrIb4ttUNNJI=;
- b=GbsiX27VJYhh4UGdWzL3YcXKh21rE/5kpa5nbHpMhIKUecAWy2yVQGQPdy+5aUkNRb
- nMQ741Ead+9QxSDaQFC6kk316hw86ujAtVdkfC0jsoFeDnuu3LylvcQys9HmElP2A3yD
- wgquBlW9ebdy6S19D0+H1fxu6lcsP5seRq6L2GWsiJ6UdkR1V3gDeOVfbprYxhOLCW7p
- Mwv8/JYAalo2AO8bxdDQPGUWFr75AW5vSWXhM5EnOjbW6WM2YxX7NR+gwmVLVkcUZ2pb
- SXRcQ9SU49ow41TPFYvgbiGmeNrsz+NZYJUe+Gi5cntGQGPy3vhzzGeOKB4jyQl9xRRH
- j91Q==
-X-Gm-Message-State: AOJu0YxPyptObC6zcVMxUA0ByCsmhvy/0ITsS/SWSyIi6mn1kvT/KX+h
- HR2CTzIXBQLMBe+kvgyjWok=
-X-Google-Smtp-Source: AGHT+IEHNprdXxCisd4RoXp9LlJ/YoFR+oLNsbTo8AO1mDUFwqOXrC04LxSWxfakumtldpsrRJ3g4g==
-X-Received: by 2002:a05:600c:3f94:b0:40c:316b:f6e2 with SMTP id
- fs20-20020a05600c3f9400b0040c316bf6e2mr601008wmb.97.1703155262196; 
- Thu, 21 Dec 2023 02:41:02 -0800 (PST)
-Received: from freya.midgard (broadband-188-255-126-251.ip.moscow.rt.ru.
- [188.255.126.251]) by smtp.gmail.com with ESMTPSA id
- bh20-20020a05600c3d1400b0040d15dcb77asm10633674wmb.23.2023.12.21.02.41.00
+ bh=wRw1//+81PB5ZNvZJSTSQFwoG2tqKVRM/U60AtyQst4=;
+ b=sGu2NOj58303VcnVcDbWlPkGLRo8j+1DAWV7zAi+Co+rjsKQuqrdX2U8U9nakOMiMv
+ sJgCTImrheYa3bZOmPIpPXMl5txapNKWSQYp+N1fd4P0trTtSx/0R7YfzTcvGm1TEkVY
+ GtJbkyj7OrE1xP942SWYGRgqhkDJ36fp+prEb+e6dnKCwCcGqpiROvJ2Y35JjMB24OHE
+ kbduMuj6NmsRkpntXxZhNyizBBtaEmcIQYFrqQMSD7+rbwTC/d1RY6NJBIS2VKgXI7p9
+ SKJ0MnrqJFewNZokw5Vw9qFVmRE2pfm/Xd0NBbL2ayLTnnqlLerWpA3TuJnwDAl9oHII
+ ohIQ==
+X-Gm-Message-State: AOJu0YzDrCv1429g1XPZ6EZvgb2bUcMKwW/U+V6ULoJEsigMNJPQg/t7
+ LU/74u0dA8l2hKhJkHWz1bPLtQ==
+X-Google-Smtp-Source: AGHT+IFUDT42ZfgxAq6eYw2wg67I2vRT0RkhbKrIwr7L+Dl+ovwJ7TZlueXf4epnlhr2FkleOOHAug==
+X-Received: by 2002:a05:600c:474d:b0:40c:262f:3c14 with SMTP id
+ w13-20020a05600c474d00b0040c262f3c14mr317513wmo.109.1703155114132; 
+ Thu, 21 Dec 2023 02:38:34 -0800 (PST)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ k13-20020a05600c1c8d00b0040d3dc52665sm1814454wms.21.2023.12.21.02.38.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Dec 2023 02:41:01 -0800 (PST)
-From: Alexey Baturo <baturo.alexey@gmail.com>
-X-Google-Original-From: Alexey Baturo <me@deliversmonkey.space>
-To: 
-Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
- zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com, Alistair.Francis@wdc.com,
- sagark@eecs.berkeley.edu, kbastian@mail.uni-paderborn.de,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Subject: [PATCH 5/6] target/riscv: Update address modify functions to take
- into account pointer masking
-Date: Thu, 21 Dec 2023 10:40:34 +0000
-Message-Id: <20231221104035.1287244-6-me@deliversmonkey.space>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231221104035.1287244-1-me@deliversmonkey.space>
-References: <20231221104035.1287244-1-me@deliversmonkey.space>
+ Thu, 21 Dec 2023 02:38:29 -0800 (PST)
+Received: from draig.lan (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id 175685F8AF;
+ Thu, 21 Dec 2023 10:38:20 +0000 (GMT)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ John Snow <jsnow@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Yanan Wang <wangyanan55@huawei.com>, Eduardo Habkost <eduardo@habkost.net>,
+ Brian Cain <bcain@quicinc.com>, Laurent Vivier <laurent@vivier.eu>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Cleber Rosa <crosa@redhat.com>,
+ David Hildenbrand <david@redhat.com>, Beraldo Leal <bleal@redhat.com>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>,
+ Weiwei Li <liwei1518@gmail.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Paul Durrant <paul@xen.org>, qemu-s390x@nongnu.org,
+ David Woodhouse <dwmw2@infradead.org>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>,
+ Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ Michael Rolnik <mrolnik@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Laurent Vivier <lvivier@redhat.com>, kvm@vger.kernel.org,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Alexandre Iooss <erdnaxe@crans.org>, Thomas Huth <thuth@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>, qemu-ppc@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Nicholas Piggin <npiggin@gmail.com>, qemu-riscv@nongnu.org,
+ qemu-arm@nongnu.org, Song Gao <gaosong@loongson.cn>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ Mahmoud Mandour <ma.mandourr@gmail.com>, Bin Meng <bin.meng@windriver.com>,
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
+Subject: [PATCH 12/40] qtest: bump boot-serial-test timeout to 3 minutes
+Date: Thu, 21 Dec 2023 10:37:50 +0000
+Message-Id: <20231221103818.1633766-13-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20231221103818.1633766-1-alex.bennee@linaro.org>
+References: <20231221103818.1633766-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
- envelope-from=baturo.alexey@gmail.com; helo=mail-wm1-x32c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x329.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,72 +127,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Alexey Baturo <baturo.alexey@gmail.com>
+From: Daniel P. Berrangé <berrange@redhat.com>
 
-Signed-off-by: Alexey Baturo <baturo.alexey@gmail.com>
+The boot-serial-test takes about 1 + 1/2 minutes in a --enable-debug
+build. Bumping to 3 minutes will give more headroom.
+
+Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+Message-ID: <20230717182859.707658-9-berrange@redhat.com>
+Signed-off-by: Thomas Huth <thuth@redhat.com>
+Message-Id: <20231215070357.10888-9-thuth@redhat.com>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- target/riscv/translate.c     | 21 +++++++++++++++++++--
- target/riscv/vector_helper.c |  7 +++++++
- 2 files changed, 26 insertions(+), 2 deletions(-)
+ tests/qtest/meson.build | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 4c0d526b58..70bbead73b 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -581,7 +581,15 @@ static TCGv get_address(DisasContext *ctx, int rs1, int imm)
-     TCGv src1 = get_gpr(ctx, rs1, EXT_NONE);
- 
-     tcg_gen_addi_tl(addr, src1, imm);
--    if (get_address_xl(ctx) == MXL_RV32) {
-+    if (ctx->pm_enabled) {
-+        tcg_gen_shl_tl(addr, addr, pm_pmlen);
-+        /* sign extend address by first non-masked bit otherwise zero extend */
-+        if (ctx->pm_signext) {
-+            tcg_gen_sar_tl(addr, addr, pm_pmlen);
-+        } else {
-+            tcg_gen_shr_tl(addr, addr, pm_pmlen);
-+        }
-+    } else if (get_address_xl(ctx) == MXL_RV32) {
-         tcg_gen_ext32u_tl(addr, addr);
-     }
- 
-@@ -595,7 +603,16 @@ static TCGv get_address_indexed(DisasContext *ctx, int rs1, TCGv offs)
-     TCGv src1 = get_gpr(ctx, rs1, EXT_NONE);
- 
-     tcg_gen_add_tl(addr, src1, offs);
--    if (get_xl(ctx) == MXL_RV32) {
-+    /* sign extend address by first non-masked bit */
-+    if (ctx->pm_enabled) {
-+        tcg_gen_shl_tl(addr, addr, pm_pmlen);
-+        /* sign extend address by first non-masked bit otherwise zero extend */
-+        if (ctx->pm_signext) {
-+            tcg_gen_sar_tl(addr, addr, pm_pmlen);
-+        } else {
-+            tcg_gen_shr_tl(addr, addr, pm_pmlen);
-+        }
-+    } else if (get_xl(ctx) == MXL_RV32) {
-         tcg_gen_ext32u_tl(addr, addr);
-     }
-     return addr;
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 8e7a8e80a0..d91bdcbbc0 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -94,6 +94,13 @@ static inline uint32_t vext_max_elems(uint32_t desc, uint32_t log2_esz)
- 
- static inline target_ulong adjust_addr(CPURISCVState *env, target_ulong addr)
- {
-+    addr = addr << env->pm_pmlen;
-+    /* sign/zero extend masked address by N-1 bit */
-+    if (env->pm_signext) {
-+        addr = (target_long)addr >> env->pm_pmlen;
-+    } else {
-+        addr = addr >> env->pm_pmlen;
-+    }
-     return addr;
+diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
+index c7944e8dbe9..dc1e6da5c7b 100644
+--- a/tests/qtest/meson.build
++++ b/tests/qtest/meson.build
+@@ -6,6 +6,7 @@ slow_qtests = {
+   'test-hmp' : 240,
+   'pxe-test': 600,
+   'prom-env-test': 360,
++  'boot-serial-test': 180,
  }
  
+ qtests_generic = [
 -- 
-2.34.1
+2.39.2
 
 
