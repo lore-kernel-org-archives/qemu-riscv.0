@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10390C35274
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Dec 2023 10:42:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FE0FC35274
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Dec 2023 10:43:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rGGRw-0003rU-FI; Thu, 21 Dec 2023 05:38:44 -0500
+	id 1rGGS0-0003uw-7r; Thu, 21 Dec 2023 05:38:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rGGRo-0003jy-Gg
- for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 05:38:37 -0500
-Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
+ id 1rGGRu-0003ov-A2
+ for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 05:38:42 -0500
+Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rGGRc-0003qA-L0
- for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 05:38:31 -0500
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-40c60dfa5bfso7274415e9.0
- for <qemu-riscv@nongnu.org>; Thu, 21 Dec 2023 02:38:21 -0800 (PST)
+ id 1rGGRh-00044J-Ea
+ for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 05:38:40 -0500
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-40d3bf30664so6419365e9.0
+ for <qemu-riscv@nongnu.org>; Thu, 21 Dec 2023 02:38:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703155100; x=1703759900; darn=nongnu.org;
+ d=linaro.org; s=google; t=1703155107; x=1703759907; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RdsiaowAjsV2VhJV7X+uJO6SS3PjKGOvNs318qpxEnc=;
- b=smoqC5XBHIKRLdCzjk3C+N3c7Npc7lkVyPWKOvabPiCS7DrFTW9enRo7alMKR5yHGQ
- MEwSok6GxE0ShU2VqtOpNOBHrhyGB7d7O8chqqN7qxbAUuppL/udGWJXfdB+/WqZdTwh
- 4e291lO2YA7o7fupbrfgmuPUsyTeI7wDXlSNhpG3tRh3jL1tdyqLrUy6TKnEnS3Is9mG
- rKOGRoZJHqRP+SNVjJL5jHySlcAdIZd5omdxsQwKaLcNsg46ahaJWL65DP5q5AS6PU4I
- lwNt+/axVQl0k5UhaeFhz7uzvR4lYsCqUlyIgB3rHwoacPCZ+k1uehnUGi5vqF3PEViy
- dYtA==
+ bh=CaH8a0Z2sktOk6HhcvLcaTrwfzviKqp7ItoU8rNpnow=;
+ b=pApkGXFRqSjMP0KpeIQWtscrjohNocGeVJhJ/b7JId/5o5lfwuihlVJKVS9WnC5QlL
+ LojyvvABjRVT/3amk3b9jPmZs9lIQwtxSWYCszmvN4wRqdSliqfwqa2TCTrbPLZsaGUo
+ O86+IlbwhFDCYMrVWE5X9k3pfdnUacM+F5HH/AdVNR+o/s/7VPk0e64Yxr67/1ODfrNf
+ jlE4jOCvJkK+UgYkMHzK3ayQ/+tQcpXB/OyGeDUw4z/gTgaQcPxxqJtBlCjIPoZ4IH3l
+ wOi/yKH/xRD8O8xPdxV1JSzWRl4VkGd64lUAqIplS+rCc5/p/7kkLrkWrPGJFAFSeQfo
+ ZWAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703155100; x=1703759900;
+ d=1e100.net; s=20230601; t=1703155107; x=1703759907;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RdsiaowAjsV2VhJV7X+uJO6SS3PjKGOvNs318qpxEnc=;
- b=lcdS/rYI6qgorIbz7E4gnqriXamZDAmc1OX6MH0E7wS2qAk2FnzlLgEDl6kfNNZqrX
- B6mSsvEtjdKwsyClgzQh6xcuiP0j5RUjhIgnoVLC9jxp1+aRD9r1sAZFOQ134h+qYoZo
- hsQuz2/7wx0ZHakLnlB9fzEifW4Do3U3SUpPTKUUPRtWhWtV948KB+tTKelNlByWzlLt
- KrvrVvQ8YRSOXBivD5KsMlzlP5r1ntn6qS8zjTtBIa7AbjWpPjzordxLRPLKDqia/7Bf
- 557vnz5/i9POhSaVZ15N4mMhkKvHp7e7SVIPRvK2qFZOwr++nL1Q/8Cxxbs3bvn0SQxH
- FBjQ==
-X-Gm-Message-State: AOJu0Yy+DiDSu1k+0As5sF9MZkigSO+PiuFo8FemDb3lnILRg5zUu5oW
- +L66xTY9cKCTzPECAXyKEXeFpg==
-X-Google-Smtp-Source: AGHT+IGNQvXI1TaGTd5rITt67gBKkdTgtOk28s10TrQMNaMkVZnKYF8g1lcS1QVjmQIWgMwv/uml1w==
-X-Received: by 2002:a05:600c:3108:b0:40c:29fb:2c4b with SMTP id
- g8-20020a05600c310800b0040c29fb2c4bmr624080wmo.148.1703155099929; 
- Thu, 21 Dec 2023 02:38:19 -0800 (PST)
+ bh=CaH8a0Z2sktOk6HhcvLcaTrwfzviKqp7ItoU8rNpnow=;
+ b=vu9T/abqjYCZ4Um0iYsKJAGr0pafA+xRNjnFxfo/NB7PB0PHbnMVay4SCYb1T4LByz
+ mlyQdvpP2BN9vGsv/oKGG9qSWGDROOYqO2242gnCUluc609M4XUVv7QzssZuxjqqHkwH
+ CAs3W0AHQoqt+OrYissu01cMuygM5dkEu/B48IcGR/YD8GmzMQ5/ZUxVqRjLiu20QqIz
+ v3ocCVJ5J5WjnDUchcb/OG9fT2iAq4Te35hlux+hD2kceqhnwIVr3SEMWuX3TxHiorHn
+ +1xRjZnkVHK9M+dQfuLcRk7+de1Iqw+g+RaZExngfiFKggqS350uLrPtdClzAixoxFXA
+ iaFA==
+X-Gm-Message-State: AOJu0YzTPAtwAODes1hs/73Neg0UwEx6aTtoo5KK4HmbDAb68+0dh3FI
+ 1DSlwtSKAOftcrMlWpbhEbtwbA==
+X-Google-Smtp-Source: AGHT+IH9UYY7nDpturwPwVgfN1wQh5wud+cCc1FCBGp1qeGHyRPqqOwQjcUbg93xcGLmfOziL5lR5Q==
+X-Received: by 2002:a05:600c:1911:b0:40c:30e8:fc5f with SMTP id
+ j17-20020a05600c191100b0040c30e8fc5fmr601578wmq.90.1703155107622; 
+ Thu, 21 Dec 2023 02:38:27 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- c18-20020a05600c0a5200b0040c6d559490sm2887676wmq.3.2023.12.21.02.38.19
+ a4-20020adff7c4000000b003366da509ecsm1712592wrq.85.2023.12.21.02.38.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Dec 2023 02:38:19 -0800 (PST)
+ Thu, 21 Dec 2023 02:38:22 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 0FE0E5F8AF;
+ by draig.lan (Postfix) with ESMTP id B0D745F8CF;
  Thu, 21 Dec 2023 10:38:19 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -92,19 +92,19 @@ Cc: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- Mahmoud Mandour <ma.mandourr@gmail.com>, Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH 01/40] tests/avocado: Add a test for a little-endian
- microblaze machine
-Date: Thu, 21 Dec 2023 10:37:39 +0000
-Message-Id: <20231221103818.1633766-2-alex.bennee@linaro.org>
+ Mahmoud Mandour <ma.mandourr@gmail.com>, Bin Meng <bin.meng@windriver.com>,
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
+Subject: [PATCH 08/40] qtest: bump npcm7xx_pwn-test timeout to 5 minutes
+Date: Thu, 21 Dec 2023 10:37:46 +0000
+Message-Id: <20231221103818.1633766-9-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231221103818.1633766-1-alex.bennee@linaro.org>
 References: <20231221103818.1633766-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::333;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x333.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -127,61 +127,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Thomas Huth <thuth@redhat.com>
+From: Daniel P. Berrangé <berrange@redhat.com>
 
-We've already got a test for a big endian microblaze machine, but so
-far we lack one for a little endian machine. Now that the QEMU advent
-calendar featured such an image, we can test the little endian mode,
-too.
+The npcm7xx_pwn-test takes 3 & 1/2 minutes in a --enable-debug build.
+Bumping to 5 minutes will give more headroom.
 
+Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+Message-ID: <20230717182859.707658-5-berrange@redhat.com>
 Signed-off-by: Thomas Huth <thuth@redhat.com>
-Message-Id: <20231215161851.71508-1-thuth@redhat.com>
+Message-Id: <20231215070357.10888-5-thuth@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- tests/avocado/machine_microblaze.py | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
+ tests/qtest/meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tests/avocado/machine_microblaze.py b/tests/avocado/machine_microblaze.py
-index 8d0efff30d2..807709cd11e 100644
---- a/tests/avocado/machine_microblaze.py
-+++ b/tests/avocado/machine_microblaze.py
-@@ -5,6 +5,8 @@
- # This work is licensed under the terms of the GNU GPL, version 2 or
- # later. See the COPYING file in the top-level directory.
- 
-+import time
-+from avocado_qemu import exec_command, exec_command_and_wait_for_pattern
- from avocado_qemu import QemuSystemTest
- from avocado_qemu import wait_for_console_pattern
- from avocado.utils import archive
-@@ -33,3 +35,27 @@ def test_microblaze_s3adsp1800(self):
-         # The kernel sometimes gets stuck after the "This architecture ..."
-         # message, that's why we don't test for a later string here. This
-         # needs some investigation by a microblaze wizard one day...
-+
-+    def test_microblazeel_s3adsp1800(self):
-+        """
-+        :avocado: tags=arch:microblazeel
-+        :avocado: tags=machine:petalogix-s3adsp1800
-+        """
-+
-+        self.require_netdev('user')
-+        tar_url = ('http://www.qemu-advent-calendar.org/2023/download/'
-+                   'day13.tar.gz')
-+        tar_hash = '6623d5fff5f84cfa8f34e286f32eff6a26546f44'
-+        file_path = self.fetch_asset(tar_url, asset_hash=tar_hash)
-+        archive.extract(file_path, self.workdir)
-+        self.vm.set_console()
-+        self.vm.add_args('-kernel', self.workdir + '/day13/xmaton.bin')
-+        self.vm.add_args('-nic', 'user,tftp=' + self.workdir + '/day13/')
-+        self.vm.launch()
-+        wait_for_console_pattern(self, 'QEMU Advent Calendar 2023')
-+        time.sleep(0.1)
-+        exec_command(self, 'root')
-+        time.sleep(0.1)
-+        exec_command_and_wait_for_pattern(self,
-+                'tftp -g -r xmaton.png 10.0.2.2 ; md5sum xmaton.png',
-+                '821cd3cab8efd16ad6ee5acc3642a8ea')
+diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
+index 000ac54b7d6..84cec0a847d 100644
+--- a/tests/qtest/meson.build
++++ b/tests/qtest/meson.build
+@@ -1,7 +1,7 @@
+ slow_qtests = {
+   'bios-tables-test' : 120,
+   'migration-test' : 480,
+-  'npcm7xx_pwm-test': 150,
++  'npcm7xx_pwm-test': 300,
+   'qom-test' : 900,
+   'test-hmp' : 120,
+ }
 -- 
 2.39.2
 
