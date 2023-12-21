@@ -4,113 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1CBDC35274
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Dec 2023 13:20:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28CC2C46CCD
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Dec 2023 13:25:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rGIxq-0004Nx-Fn; Thu, 21 Dec 2023 08:19:50 -0500
+	id 1rGJ3Z-0006sb-Fi; Thu, 21 Dec 2023 08:25:45 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1rGIxh-0004Ip-40
- for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 08:19:41 -0500
-Received: from mail-oo1-xc32.google.com ([2607:f8b0:4864:20::c32])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rGJ3Y-0006rt-6y
+ for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 08:25:44 -0500
+Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1rGIxd-0004Ux-AK
- for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 08:19:40 -0500
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-593f6fb21a5so550029eaf.2
- for <qemu-riscv@nongnu.org>; Thu, 21 Dec 2023 05:19:37 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rGJ3T-0008WO-Og
+ for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 08:25:43 -0500
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-1d408c2908cso1865745ad.1
+ for <qemu-riscv@nongnu.org>; Thu, 21 Dec 2023 05:25:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1703164776; x=1703769576;
- darn=nongnu.org; 
+ d=ventanamicro.com; s=google; t=1703165138; x=1703769938; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=xwacrzLBpA+7qNqKLKW6P7iJRvrUEffyGirc6Z5p94U=;
- b=y6HwN4tRpBIvubX2S6Tkmd63nsodN9Xhqhw9iBNizA99s25qs/X7nq9aBlGGUwxauZ
- pL4aHkzT4B3xrofW2EAeXQPX/RK+pZkc+S6/1hTzwaDMjn+Eii/2Xt8XA0AFRNdP1BWk
- bAY/gkvX5dXQWhSUZlJVC1Nb4AvfO68kH6c43ANTwRS02uhFJU3MR+CCd0t3eHFxbVN4
- knuYd1Ow1YcLFT6Y8QrhOtCUA88pcacU5/eHJEiGWILzQOnyGLp1XEKKvEse6TRhbAGO
- HyOjtkwTQbRtDuK9ZRrIsH4LKQO2r0d4VhssTzHPImUJKiwixqWXKEIwR0FtmBNxRQGi
- vdQg==
+ bh=dtCpxS5Y5FkbYHPyPu9ckoSAdShFhEOJjAO41TPz1fc=;
+ b=OuFqvPPL/gf6XLSvU091QrezYv2n5vn8DfYSOPPEfebUXWYcxxKRTpyAPwjcJHdlZm
+ 12uEGPfFjp+9JE8GlUCpYYqFSMLNwi3hdaLn2BpeVNgh87JER1ijAehQVx5FbzqPaZ+a
+ xAFduEuyuxrsnPfDXg2dgtPwYcu7KdwNk23o7pR0K4J1mlvKBfzm1WWECQwcBlSaZneF
+ 6P2RBsyknf7Fn3FqiMORPk575YTh//vjJWsYUf9uE0oGuyEVYKSe6VYINZa8uSwvNpzG
+ K7gsnMtMn+slyJ+apvtpFoplLlQyMJ3FxAtXzE4Fytvm2JO532xPMtHszGRw2XWm6NBA
+ Cpfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703164776; x=1703769576;
+ d=1e100.net; s=20230601; t=1703165138; x=1703769938;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xwacrzLBpA+7qNqKLKW6P7iJRvrUEffyGirc6Z5p94U=;
- b=PBG0+QkYVjkBaZ31m6YqhB+H2DQi5P/Ux+Fdg6R0g+YiQ0wVGrWwNPWkx82OjGLrc5
- tRSKhmd8tcz69nau29aRcwPyj+T0/gxrTK7WpYU/DazO0J3tit9a3WDpD0vyx5UVVHtn
- bBJPOWkWwnaEaOfsYNCU3CHANdvvphb8Qqk+0/vsWaIkWKvPheMX4friStVqVw5mHpNc
- Fq/LIpOBy5kLdZ6KfTSQOkNphQnLtJxaboS/fZFIL/hG+IbwPEiq36+VaE3XbG9VGmoa
- 9Lq2DR4Eh1WuCfcznS+HQdC5m/H/MbXHU5XKLGGG/9zwGewE6d2rZlod9lZw28w5dLiN
- WD2Q==
-X-Gm-Message-State: AOJu0YyksQI0gXTD/OBnjKCGu4OqUoRGvEk/WYUmr+Vh4nEOYBuR8gQD
- up6ihrw8Tgge2kWzwBggAe/iNA==
-X-Google-Smtp-Source: AGHT+IGxbsSZ9PeiiKJkEVFCCUo7LUzl75tIosPOKCu5gnxWVDQqzciwl8Jbemw6CO0IZlVeMEgpvA==
-X-Received: by 2002:a05:6358:7e14:b0:172:bab8:8a51 with SMTP id
- o20-20020a0563587e1400b00172bab88a51mr1217478rwm.65.1703164775932; 
- Thu, 21 Dec 2023 05:19:35 -0800 (PST)
-Received: from ?IPV6:2400:4050:a840:1e00:9ac7:6d57:2b16:6932?
- ([2400:4050:a840:1e00:9ac7:6d57:2b16:6932])
+ bh=dtCpxS5Y5FkbYHPyPu9ckoSAdShFhEOJjAO41TPz1fc=;
+ b=N/8fTrfdScDA73/flDYDnLa0Z4VqBQ9hBiGoFxC7HjPbM8sa+AbG/VGve7O8D9Kfe6
+ eELobsvZiYbSScK2HiDCxbkdIOfDu20fgSDLQTDxPYH183ma6qTOXprRFu6+DYbIGErB
+ NOS/WEJDTqToO9fmmgs0+1efITAZtYwyjhAdAsVjyauRb3SOZKBPYn4smbdRQ/4CyGHD
+ kY3itWvBsURYZOfuZXNc71a8inL/axtnKOxqWJWYxqVJi4dxa1CpECKHLVXmSfTkcxgP
+ nARnYezRnM+tDeedebcP82fNIIqZZHPjr3jxXx2FCZSjhQe2oXjuRC2YtDTh8d7oleXr
+ +0lQ==
+X-Gm-Message-State: AOJu0Yxu96eC9HROqFO9vXQajOOepjxghIn4/zFk4pndOZyIPn+bc8qz
+ YTl2OrI8Rw74+mhb++LPP3tcYw==
+X-Google-Smtp-Source: AGHT+IGmQ4NVTK242CFrIh95WymHvHQRAmABQI/g7pxJl1ifoOvOKw0JhFlZD7/7t1UrpNArEKrydQ==
+X-Received: by 2002:a17:902:cec7:b0:1d3:df5f:65fd with SMTP id
+ d7-20020a170902cec700b001d3df5f65fdmr3797948plg.126.1703165137953; 
+ Thu, 21 Dec 2023 05:25:37 -0800 (PST)
+Received: from [192.168.68.110] ([179.93.21.205])
  by smtp.gmail.com with ESMTPSA id
- w19-20020a63d753000000b005cd78f13608sm1556327pgi.13.2023.12.21.05.19.27
+ ja15-20020a170902efcf00b001d3ef57d916sm1618410plb.10.2023.12.21.05.25.35
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 Dec 2023 05:19:35 -0800 (PST)
-Message-ID: <a26a55b2-240c-48c3-b341-48c1d7195bd9@daynix.com>
-Date: Thu, 21 Dec 2023 22:19:25 +0900
+ Thu, 21 Dec 2023 05:25:37 -0800 (PST)
+Message-ID: <01b04447-ec85-448a-9b84-e73e35864412@ventanamicro.com>
+Date: Thu, 21 Dec 2023 10:25:33 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 37/40] plugins: add an API to read registers
+Subject: Re: [PATCH v2 2/2] target/riscv: UPDATE xATP write CSR
 Content-Language: en-US
-To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- qemu-devel@nongnu.org
-Cc: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- John Snow <jsnow@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Yanan Wang <wangyanan55@huawei.com>, Eduardo Habkost <eduardo@habkost.net>,
- Brian Cain <bcain@quicinc.com>, Laurent Vivier <laurent@vivier.eu>,
- Palmer Dabbelt <palmer@dabbelt.com>, Cleber Rosa <crosa@redhat.com>,
- David Hildenbrand <david@redhat.com>, Beraldo Leal <bleal@redhat.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- Weiwei Li <liwei1518@gmail.com>, Paul Durrant <paul@xen.org>,
- qemu-s390x@nongnu.org, David Woodhouse <dwmw2@infradead.org>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Michael Rolnik <mrolnik@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Laurent Vivier <lvivier@redhat.com>, kvm@vger.kernel.org,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- Alexandre Iooss <erdnaxe@crans.org>, Thomas Huth <thuth@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>, qemu-ppc@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Nicholas Piggin <npiggin@gmail.com>, qemu-riscv@nongnu.org,
- qemu-arm@nongnu.org, Song Gao <gaosong@loongson.cn>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Richard Henderson <richard.henderson@linaro.org>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
- Mahmoud Mandour <ma.mandourr@gmail.com>, Bin Meng <bin.meng@windriver.com>
-References: <20231221103818.1633766-1-alex.bennee@linaro.org>
- <20231221103818.1633766-38-alex.bennee@linaro.org>
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <20231221103818.1633766-38-alex.bennee@linaro.org>
+To: Irina Ryapolova <irina.ryapolova@syntacore.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com
+References: <20231212110305.45443-1-irina.ryapolova@syntacore.com>
+ <20231212110305.45443-2-irina.ryapolova@syntacore.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20231212110305.45443-2-irina.ryapolova@syntacore.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::c32;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-oo1-xc32.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001,
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x635.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -127,137 +97,107 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2023/12/21 19:38, Alex Bennée wrote:
-> We can only request a list of registers once the vCPU has been
-> initialised so the user needs to use either call the get function on
-> vCPU initialisation or during the translation phase.
+
+
+On 12/12/23 08:03, Irina Ryapolova wrote:
+> Added xATP_MODE validation for vsatp/hgatp CSRs.
+> The xATP register is an SXLEN-bit read/write WARL register, so
+> the legal value must be returned (See riscv-privileged-20211203, SATP/VSATP/HGATP CSRs).
 > 
-> We don't expose the reg number to the plugin instead hiding it behind
-> an opaque handle. This allows for a bit of future proofing should the
-> internals need to be changed while also being hashed against the
-> CPUClass so we can handle different register sets per-vCPU in
-> hetrogenous situations.
-> 
-> Having an internal state within the plugins also allows us to expand
-> the interface in future (for example providing callbacks on register
-> change if the translator can track changes).
-> 
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1706
-> Cc: Akihiko Odaki <akihiko.odaki@daynix.com>
-> Based-on: <20231025093128.33116-18-akihiko.odaki@daynix.com>
-> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-> 
+> Signed-off-by: Irina Ryapolova <irina.ryapolova@syntacore.com>
 > ---
-> v2
->    - use new get whole list api, and expose upwards
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+>   target/riscv/csr.c | 52 ++++++++++++++++++++++++++--------------------
+>   1 file changed, 29 insertions(+), 23 deletions(-)
 > 
-> vAJB:
-> 
-> The main difference to Akikio's version is hiding the gdb register
-> detail from the plugin for the reasons described above.
-> ---
->   include/qemu/qemu-plugin.h   |  53 +++++++++++++++++-
->   plugins/api.c                | 102 +++++++++++++++++++++++++++++++++++
->   plugins/qemu-plugins.symbols |   2 +
->   3 files changed, 155 insertions(+), 2 deletions(-)
-> 
-> diff --git a/include/qemu/qemu-plugin.h b/include/qemu/qemu-plugin.h
-> index 4daab6efd29..e3b35c6ee81 100644
-> --- a/include/qemu/qemu-plugin.h
-> +++ b/include/qemu/qemu-plugin.h
-> @@ -11,6 +11,7 @@
->   #ifndef QEMU_QEMU_PLUGIN_H
->   #define QEMU_QEMU_PLUGIN_H
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 735fb27be7..6d7a3dd9aa 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -1282,6 +1282,32 @@ static bool validate_vm(CPURISCVState *env, target_ulong vm)
+>       return get_field(mode_supported, (1 << vm));
+>   }
 >   
-> +#include <glib.h>
->   #include <inttypes.h>
->   #include <stdbool.h>
->   #include <stddef.h>
-> @@ -227,8 +228,8 @@ struct qemu_plugin_insn;
->    * @QEMU_PLUGIN_CB_R_REGS: callback reads the CPU's regs
->    * @QEMU_PLUGIN_CB_RW_REGS: callback reads and writes the CPU's regs
->    *
-> - * Note: currently unused, plugins cannot read or change system
-> - * register state.
-> + * Note: currently QEMU_PLUGIN_CB_RW_REGS is unused, plugins cannot change
-> + * system register state.
->    */
->   enum qemu_plugin_cb_flags {
->       QEMU_PLUGIN_CB_NO_REGS,
-> @@ -708,4 +709,52 @@ uint64_t qemu_plugin_end_code(void);
->   QEMU_PLUGIN_API
->   uint64_t qemu_plugin_entry_code(void);
+> +static target_ulong legalize_xatp(CPURISCVState *env, target_ulong old_xatp,
+> +                                  target_ulong val)
+> +{
+> +    target_ulong mask;
+> +    bool vm;
+> +    if (riscv_cpu_mxl(env) == MXL_RV32) {
+> +        vm = validate_vm(env, get_field(val, SATP32_MODE));
+> +        mask = (val ^ old_xatp) & (SATP32_MODE | SATP32_ASID | SATP32_PPN);
+> +    } else {
+> +        vm = validate_vm(env, get_field(val, SATP64_MODE));
+> +        mask = (val ^ old_xatp) & (SATP64_MODE | SATP64_ASID | SATP64_PPN);
+> +    }
+> +
+> +    if (vm && mask) {
+> +        /*
+> +         * The ISA defines SATP.MODE=Bare as "no translation", but we still
+> +         * pass these through QEMU's TLB emulation as it improves
+> +         * performance.  Flushing the TLB on SATP writes with paging
+> +         * enabled avoids leaking those invalid cached mappings.
+> +         */
+> +        tlb_flush(env_cpu(env));
+> +        return val;
+> +    }
+> +    return old_xatp;
+> +}
+> +
+>   static target_ulong legalize_mpp(CPURISCVState *env, target_ulong old_mpp,
+>                                    target_ulong val)
+>   {
+> @@ -2997,31 +3023,11 @@ static RISCVException read_satp(CPURISCVState *env, int csrno,
+>   static RISCVException write_satp(CPURISCVState *env, int csrno,
+>                                    target_ulong val)
+>   {
+> -    target_ulong mask;
+> -    bool vm;
+> -
+>       if (!riscv_cpu_cfg(env)->mmu) {
+>           return RISCV_EXCP_NONE;
+>       }
 >   
-> +/** struct qemu_plugin_register - Opaque handle for a translated instruction */
-> +struct qemu_plugin_register;
-
-What about identifying a register with an index in an array returned by 
-qemu_plugin_get_registers(). That saves troubles having the handle 
-member in qemu_plugin_reg_descriptor.
-
-> +
-> +/**
-> + * typedef qemu_plugin_reg_descriptor - register descriptions
-> + *
-> + * @name: register name
-> + * @handle: opaque handle for retrieving value with qemu_plugin_read_register
-> + * @feature: optional feature descriptor, can be NULL
-
-Why can it be NULL?
-
-> + */
-> +typedef struct {
-> +    char name[32];
-
-Why not const char *?
-
-> +    struct qemu_plugin_register *handle;
-> +    const char *feature;
-> +} qemu_plugin_reg_descriptor;
-> +
-> +/**
-> + * qemu_plugin_get_registers() - return register list for vCPU
-> + * @vcpu_index: vcpu to query
-> + *
-> + * Returns a GArray of qemu_plugin_reg_descriptor or NULL. Caller
-> + * frees the array (but not the const strings).
-> + *
-> + * As the register set of a given vCPU is only available once
-> + * the vCPU is initialised if you want to monitor registers from the
-> + * start you should call this from a qemu_plugin_register_vcpu_init_cb()
-> + * callback.
-
-Is this note really necessary? You won't know vcpu_index before 
-qemu_plugin_register_vcpu_init_cb() anyway.
-
-> + */
-> +GArray * qemu_plugin_get_registers(unsigned int vcpu_index);
-
-Spurious space after *.
-
-> +
-> +/**
-> + * qemu_plugin_read_register() - read register
-> + *
-> + * @vcpu: vcpu index
-> + * @handle: a @qemu_plugin_reg_handle handle
-> + * @buf: A GByteArray for the data owned by the plugin
-> + *
-> + * This function is only available in a context that register read access is
-> + * explicitly requested.
-> + *
-> + * Returns the size of the read register. The content of @buf is in target byte
-> + * order. On failure returns -1
-> + */
-> +int qemu_plugin_read_register(unsigned int vcpu,
-> +                              struct qemu_plugin_register *handle,
-> +                              GByteArray *buf);
-
-Indention is not correct. docs/devel/style.rst says:
-
- > In case of function, there are several variants:
- >
- > * 4 spaces indent from the beginning
- > * align the secondary lines just after the opening parenthesis of the 
-first
+> -    if (riscv_cpu_mxl(env) == MXL_RV32) {
+> -        vm = validate_vm(env, get_field(val, SATP32_MODE));
+> -        mask = (val ^ env->satp) & (SATP32_MODE | SATP32_ASID | SATP32_PPN);
+> -    } else {
+> -        vm = validate_vm(env, get_field(val, SATP64_MODE));
+> -        mask = (val ^ env->satp) & (SATP64_MODE | SATP64_ASID | SATP64_PPN);
+> -    }
+> -
+> -    if (vm && mask) {
+> -        /*
+> -         * The ISA defines SATP.MODE=Bare as "no translation", but we still
+> -         * pass these through QEMU's TLB emulation as it improves
+> -         * performance.  Flushing the TLB on SATP writes with paging
+> -         * enabled avoids leaking those invalid cached mappings.
+> -         */
+> -        tlb_flush(env_cpu(env));
+> -        env->satp = val;
+> -    }
+> +    env->satp = legalize_xatp(env, env->satp, val);
+>       return RISCV_EXCP_NONE;
+>   }
+>   
+> @@ -3506,7 +3512,7 @@ static RISCVException read_hgatp(CPURISCVState *env, int csrno,
+>   static RISCVException write_hgatp(CPURISCVState *env, int csrno,
+>                                     target_ulong val)
+>   {
+> -    env->hgatp = val;
+> +    env->hgatp = legalize_xatp(env, env->hgatp, val);
+>       return RISCV_EXCP_NONE;
+>   }
+>   
+> @@ -3772,7 +3778,7 @@ static RISCVException read_vsatp(CPURISCVState *env, int csrno,
+>   static RISCVException write_vsatp(CPURISCVState *env, int csrno,
+>                                     target_ulong val)
+>   {
+> -    env->vsatp = val;
+> +    env->vsatp = legalize_xatp(env, env->vsatp, val);
+>       return RISCV_EXCP_NONE;
+>   }
+>   
 
