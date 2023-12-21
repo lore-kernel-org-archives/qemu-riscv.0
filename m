@@ -4,114 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC730C46CD4
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Dec 2023 10:44:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 393EAC35274
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Dec 2023 10:44:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rGGS1-00040T-7c; Thu, 21 Dec 2023 05:38:49 -0500
+	id 1rGGUO-0001qo-Li; Thu, 21 Dec 2023 05:41:16 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rGGRo-0003k0-GN
- for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 05:38:37 -0500
-Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1rGGUH-0000yB-JR; Thu, 21 Dec 2023 05:41:09 -0500
+Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rGGRd-0003ue-Jq
- for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 05:38:35 -0500
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-40b5155e154so7497555e9.3
- for <qemu-riscv@nongnu.org>; Thu, 21 Dec 2023 02:38:24 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1rGGUA-0004yZ-5E; Thu, 21 Dec 2023 05:41:09 -0500
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-3368d1c7b23so42317f8f.0; 
+ Thu, 21 Dec 2023 02:41:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703155103; x=1703759903; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1703155259; x=1703760059; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0SGlJ3OP3ZQJqIGzbf9sUE9qzVbTUWx7/uZllqYVPY0=;
- b=UO323iXmOmh5yE6j0ejVtPe5o99qF8o89J9VMfZA+ItjvxD/LRVyuhGTFVg20a0yei
- jYK8f/GIxd9NMc2EEtuaRySHAkZD3tIapH5QOjWie2JlMwD43XlasRtuJYre6f0v4/Fq
- y2FuEviB6Ra3NKprdifuzwCziROWUudQLfMBxDePzE89mSwp1CB4BTBMBP9W9P43ridL
- 6i5Knj5wNRQFVzs+iefdoT0NNsTeZp30yihZnD0OryQa2UwjpOeugd5JmxzFltSRsRY7
- ICpPQZh1MLwetFLJosB9RL1v7C0ee4m22F2Pk9irM+PAgAJvJHvYQLHmXC/ZaWE/k9St
- jXCA==
+ bh=jRDEQh1JkAlYBSiLzwHd6WKlB2tHlxIi9rObWqcFdBQ=;
+ b=T3tzKDEn9w8jbNTP7GSYqUy4Q3WD1qdSM+5/C4+Vpj+zGGopDfL6bY6x01O3Uqskxz
+ CJXd/fuKfe9e5jIapKYPPGD0D7Cj6KYx3J69K3gtotf1rVKMLNe0L2UmstZ6xqQs4kmM
+ Dcll4UCip9KFMk9TOJY1s0luOXeoNbAGvlzsTY3KWg+BDpu06OHP+Io+uAwlvH27iY8R
+ K6zV1TkWPpc3xpezyBid4mygcq/jHhK/hUDXV+JTMVPwN1LB1JvcGnKrx/6oTBdBEyMi
+ qWS6RM6UZS6ne0DBUjB9Lux+lXGbOWoFVTcPSms8StXVt5R0zpHfSg7l1mkfVs+e6rWL
+ ajVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703155103; x=1703759903;
+ d=1e100.net; s=20230601; t=1703155259; x=1703760059;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0SGlJ3OP3ZQJqIGzbf9sUE9qzVbTUWx7/uZllqYVPY0=;
- b=mhTyNNXiR+8PcxKyzlPdssS0wtUvnA31BGZ4OJtkRWNSW0TLksNvS3SVqOdhsZqOdI
- wD2YOEhLEdAbM4tQYTJHeke5d09h6vnKqlhqUqvPWXB/FHez0qRP/fH6ANMPTrS/ubTB
- Jp1q4rZNEmJ/ccbXajWwurE3ODkvX1/2AofymWAty6KCu7gKyEQo453C+zRGLxNkH5vR
- QEDs5WOawlTvlGeUtH0O4PpsthYUPhx6de/Bf8hdTnQpS9kTOjQ42Om9bn5tXxHAfGp3
- epx3bExWw9M8rx6FOmxdO4c5kuaveXSRBYR0pEtMRl/Pk0Xvzes7E9fVGwF4EDNTQ1Ze
- e5/g==
-X-Gm-Message-State: AOJu0Yyxh/PVVvnLVRsl4MwaC2VpJlkUBUkiZ3trKdsIgNyBniN1tCdq
- +itwNCUTYQRoy2c3uMe9+BzJXA==
-X-Google-Smtp-Source: AGHT+IGzJv9S1fGxxqDGAioWCTZZnAHT+eEN3Nvlx6N8WGUGOAIae5FBAMLZ8ea9qlDbj4MITf/SSw==
-X-Received: by 2002:a05:600c:22ce:b0:40c:532b:7a30 with SMTP id
- 14-20020a05600c22ce00b0040c532b7a30mr557054wmg.202.1703155103330; 
- Thu, 21 Dec 2023 02:38:23 -0800 (PST)
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- q21-20020adfb195000000b0033674734a58sm1744728wra.79.2023.12.21.02.38.20
+ bh=jRDEQh1JkAlYBSiLzwHd6WKlB2tHlxIi9rObWqcFdBQ=;
+ b=EpdRPxaHo+K0mI+f4b9tfkaEyDoDsy01oi90Lm4Ip8VXwlMtIMjFFpUM5oBs0Oy1VF
+ ojzejkDSAAkyGQXUXJoGIcKaNR6g7X7khU3lVG24SfXkn6MLtNkpjnfm1uP7ePd8+KVC
+ kBs/vk+hFX18dSmbpIlzgNAI4TrtZeARQpVQd9lTQdoWsnVNmOr0CIycIGjtgKSO2WSY
+ HPSAkd4HuoVOCjT7ya6KGzAWqALwR83827YoTOtHh5jioOq7VfafNn2a7oi9fO2KHo0U
+ uFlhg5YmrlQ37Dmf0QgR69iDHriII0ip12VkW8BGi13wURIK3djSMtC+d2Z+gWQeZH5d
+ NFFg==
+X-Gm-Message-State: AOJu0YwSRliBeatX++6R1Jrm65N59Ckn6vXS3STv7VIJBQPIZehXco2o
+ 0g2EcJKWBAK/0j00Iq3zp3U=
+X-Google-Smtp-Source: AGHT+IEEgaKPH1f/CHCA77RpfqnHueISatT3LoVm8Ul3bW29nFl3gF4cV10YbozFxuueRufcWBqMuQ==
+X-Received: by 2002:a05:600c:6985:b0:40d:1467:3d84 with SMTP id
+ fp5-20020a05600c698500b0040d14673d84mr598759wmb.118.1703155258912; 
+ Thu, 21 Dec 2023 02:40:58 -0800 (PST)
+Received: from freya.midgard (broadband-188-255-126-251.ip.moscow.rt.ru.
+ [188.255.126.251]) by smtp.gmail.com with ESMTPSA id
+ bh20-20020a05600c3d1400b0040d15dcb77asm10633674wmb.23.2023.12.21.02.40.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Dec 2023 02:38:22 -0800 (PST)
-Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 9B5FE5F8CE;
- Thu, 21 Dec 2023 10:38:19 +0000 (GMT)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- John Snow <jsnow@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Yanan Wang <wangyanan55@huawei.com>, Eduardo Habkost <eduardo@habkost.net>,
- Brian Cain <bcain@quicinc.com>, Laurent Vivier <laurent@vivier.eu>,
- Palmer Dabbelt <palmer@dabbelt.com>, Cleber Rosa <crosa@redhat.com>,
- David Hildenbrand <david@redhat.com>, Beraldo Leal <bleal@redhat.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- Weiwei Li <liwei1518@gmail.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Paul Durrant <paul@xen.org>, qemu-s390x@nongnu.org,
- David Woodhouse <dwmw2@infradead.org>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Michael Rolnik <mrolnik@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Laurent Vivier <lvivier@redhat.com>, kvm@vger.kernel.org,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- Alexandre Iooss <erdnaxe@crans.org>, Thomas Huth <thuth@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>, qemu-ppc@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Nicholas Piggin <npiggin@gmail.com>, qemu-riscv@nongnu.org,
- qemu-arm@nongnu.org, Song Gao <gaosong@loongson.cn>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Richard Henderson <richard.henderson@linaro.org>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- Mahmoud Mandour <ma.mandourr@gmail.com>, Bin Meng <bin.meng@windriver.com>,
- =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH 07/40] qtest: bump qom-test timeout to 15 minutes
-Date: Thu, 21 Dec 2023 10:37:45 +0000
-Message-Id: <20231221103818.1633766-8-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20231221103818.1633766-1-alex.bennee@linaro.org>
-References: <20231221103818.1633766-1-alex.bennee@linaro.org>
+ Thu, 21 Dec 2023 02:40:58 -0800 (PST)
+From: Alexey Baturo <baturo.alexey@gmail.com>
+X-Google-Original-From: Alexey Baturo <me@deliversmonkey.space>
+To: 
+Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
+ zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com, Alistair.Francis@wdc.com,
+ sagark@eecs.berkeley.edu, kbastian@mail.uni-paderborn.de,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Subject: [PATCH 3/6] target/riscv: Add pointer masking tb flags
+Date: Thu, 21 Dec 2023 10:40:32 +0000
+Message-Id: <20231221104035.1287244-4-me@deliversmonkey.space>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231221104035.1287244-1-me@deliversmonkey.space>
+References: <20231221104035.1287244-1-me@deliversmonkey.space>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::429;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-wr1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -127,37 +95,110 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Daniel P. Berrangé <berrange@redhat.com>
+From: Alexey Baturo <baturo.alexey@gmail.com>
 
-The qom-test is periodically hitting the 5 minute timeout when running
-on the aarch64 emulator under GitLab CI. With an --enable-debug build
-it can take over 10 minutes for arm/aarch64 targets. Setting timeout
-to 15 minutes gives enough headroom to hopefully make it reliable.
-
-Reviewed-by: Thomas Huth <thuth@redhat.com>
-Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
-Message-ID: <20230717182859.707658-4-berrange@redhat.com>
-Signed-off-by: Thomas Huth <thuth@redhat.com>
-Message-Id: <20231215070357.10888-4-thuth@redhat.com>
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Signed-off-by: Alexey Baturo <baturo.alexey@gmail.com>
 ---
- tests/qtest/meson.build | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/cpu.h        | 19 +++++++++++++------
+ target/riscv/cpu_helper.c |  4 ++++
+ target/riscv/translate.c  | 10 ++++++++++
+ 3 files changed, 27 insertions(+), 6 deletions(-)
 
-diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
-index f184d051cfe..000ac54b7d6 100644
---- a/tests/qtest/meson.build
-+++ b/tests/qtest/meson.build
-@@ -2,7 +2,7 @@ slow_qtests = {
-   'bios-tables-test' : 120,
-   'migration-test' : 480,
-   'npcm7xx_pwm-test': 150,
--  'qom-test' : 300,
-+  'qom-test' : 900,
-   'test-hmp' : 120,
- }
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index f49d4aa52c..2099168950 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -390,6 +390,10 @@ struct CPUArchState {
+     target_ulong senvcfg;
+     uint64_t henvcfg;
+ #endif
++    /* current number of masked top bits by pointer masking */
++    target_ulong pm_pmlen;
++    /* if pointer masking should do sign extension */
++    bool pm_signext;
  
+     /* Fields from here on are preserved across CPU reset. */
+     QEMUTimer *stimer; /* Internal timer for S-mode interrupt */
+@@ -538,14 +542,17 @@ FIELD(TB_FLAGS, VILL, 14, 1)
+ FIELD(TB_FLAGS, VSTART_EQ_ZERO, 15, 1)
+ /* The combination of MXL/SXL/UXL that applies to the current cpu mode. */
+ FIELD(TB_FLAGS, XL, 16, 2)
+-FIELD(TB_FLAGS, VTA, 18, 1)
+-FIELD(TB_FLAGS, VMA, 19, 1)
++/* If pointer masking should be applied and address sign extended */
++FIELD(TB_FLAGS, PM_ENABLED, 18, 1)
++FIELD(TB_FLAGS, PM_SIGNEXTEND, 19, 1)
++FIELD(TB_FLAGS, VTA, 20, 1)
++FIELD(TB_FLAGS, VMA, 21, 1)
+ /* Native debug itrigger */
+-FIELD(TB_FLAGS, ITRIGGER, 20, 1)
++FIELD(TB_FLAGS, ITRIGGER, 22, 1)
+ /* Virtual mode enabled */
+-FIELD(TB_FLAGS, VIRT_ENABLED, 21, 1)
+-FIELD(TB_FLAGS, PRIV, 22, 2)
+-FIELD(TB_FLAGS, AXL, 24, 2)
++FIELD(TB_FLAGS, VIRT_ENABLED, 23, 1)
++FIELD(TB_FLAGS, PRIV, 24, 2)
++FIELD(TB_FLAGS, AXL, 25, 2)
+ 
+ #ifdef TARGET_RISCV32
+ #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index a3d477d226..79cddbd930 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -135,6 +135,10 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+     flags = FIELD_DP32(flags, TB_FLAGS, VS, vs);
+     flags = FIELD_DP32(flags, TB_FLAGS, XL, env->xl);
+     flags = FIELD_DP32(flags, TB_FLAGS, AXL, cpu_address_xl(env));
++    if (env->pm_pmlen != 0) {
++        flags = FIELD_DP32(flags, TB_FLAGS, PM_ENABLED, 1);
++    }
++    flags = FIELD_DP32(flags, TB_FLAGS, PM_SIGNEXTEND, env->pm_signext);
+ 
+     *pflags = flags;
+ }
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 6b4b9a671c..4c0d526b58 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -42,6 +42,8 @@ static TCGv cpu_gpr[32], cpu_gprh[32], cpu_pc, cpu_vl, cpu_vstart;
+ static TCGv_i64 cpu_fpr[32]; /* assume F and D extensions */
+ static TCGv load_res;
+ static TCGv load_val;
++/* number of top masked address bits by pointer masking extension */
++static TCGv pm_pmlen;
+ 
+ /*
+  * If an operation is being performed on less than TARGET_LONG_BITS,
+@@ -103,6 +105,9 @@ typedef struct DisasContext {
+     bool vl_eq_vlmax;
+     CPUState *cs;
+     TCGv zero;
++    /* pointer masking extension */
++    bool pm_enabled;
++    bool pm_signext;
+     /* Use icount trigger for native debug */
+     bool itrigger;
+     /* FRM is known to contain a valid value. */
+@@ -1176,6 +1181,8 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->xl = FIELD_EX32(tb_flags, TB_FLAGS, XL);
+     ctx->address_xl = FIELD_EX32(tb_flags, TB_FLAGS, AXL);
+     ctx->cs = cs;
++    ctx->pm_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_ENABLED);
++    ctx->pm_signext = FIELD_EX32(tb_flags, TB_FLAGS, PM_SIGNEXTEND);
+     ctx->itrigger = FIELD_EX32(tb_flags, TB_FLAGS, ITRIGGER);
+     ctx->zero = tcg_constant_tl(0);
+     ctx->virt_inst_excp = false;
+@@ -1307,4 +1314,7 @@ void riscv_translate_init(void)
+                              "load_res");
+     load_val = tcg_global_mem_new(tcg_env, offsetof(CPURISCVState, load_val),
+                              "load_val");
++    /* Assign var with number of pointer masking masked bits to tcg global */
++    pm_pmlen = tcg_global_mem_new(tcg_env, offsetof(CPURISCVState, pm_pmlen),
++                                   "pmlen");
+ }
 -- 
-2.39.2
+2.34.1
 
 
