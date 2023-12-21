@@ -4,87 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5B19C35274
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Dec 2023 16:04:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58106C35274
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Dec 2023 17:52:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rGLWY-0002II-MH; Thu, 21 Dec 2023 11:03:50 -0500
+	id 1rGND4-0002U0-Bl; Thu, 21 Dec 2023 12:51:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rGLWO-0002Bv-FJ
- for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 11:03:43 -0500
-Received: from mail-oi1-x230.google.com ([2607:f8b0:4864:20::230])
+ id 1rGND1-0002TV-TJ
+ for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 12:51:48 -0500
+Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rGLWM-0005P2-Kc
- for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 11:03:40 -0500
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-3ba31cc0d77so667671b6e.1
- for <qemu-riscv@nongnu.org>; Thu, 21 Dec 2023 08:03:38 -0800 (PST)
+ id 1rGNCz-0007uK-Mv
+ for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 12:51:47 -0500
+Received: by mail-pg1-x536.google.com with SMTP id
+ 41be03b00d2f7-5cd870422c8so621740a12.0
+ for <qemu-riscv@nongnu.org>; Thu, 21 Dec 2023 09:51:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1703174617; x=1703779417; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=W/+UOSMOl9cvWCpiBW/FNXNUrwwIMbPapGI3Cuf5G/0=;
- b=mosMzU2vuHdqc5A/bb/KvV8NkZNwTftJA/NngpXxi7zeJxqovcVfem5H5FO7GHb1kr
- VOE+ifKU43B7Sehg985LyoRnlo28qkx5Xn/FTUGNMU7RiSuSaCBRYFNJ3HJAYX3oETDw
- OZFyzL79T/8saiC8tOgBhWqOMYVa6oLe0YikC+ar5wkVww+cTQHaIZSCVshAKvUQ0eXK
- Xfldphu0FiIiZbba+S5EgEKfZ1CJNQmNe/8CApqCHeYyPOD8izKVTa4J6buIznyimy04
- Qb0l7eYskjaMeTNUFNp2NcFpxIM0xMtK6YVbpnW1E0j9WN1fMAEE90jb8Odj6wH4//5/
- pj4A==
+ d=ventanamicro.com; s=google; t=1703181104; x=1703785904; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=NyRmzaKwHApH9j1z664mnPBjPmPdME76kWN5omNMN6c=;
+ b=AxOIpReINMxIORHWa1HjjrwndteACGR06PdEzbaM3Py5xxz/v9aD4ksZu2RapKEuLx
+ TRn74+KAo03YoSzgn3wCVo2pfS9NBOzdaU4+FNOt3EwFBDs9MiqTaDsLgunZpzhjuqUv
+ Mos86p5jAxAEcrcHsfuUq93lk11/+FD8QkhfI7at6EobZgQQn6KPQQQJV6FonN6FSxX2
+ JGP1QyQnS7WBdGz6B7qqK9/3n0yojS5dByC1oK6zOhi/uEs3lUwkasIICuLN7cCTEGf4
+ 2vixImUsPLh/rymQoU3OseAmZxjRBaGuebwqSP1sz3sSgYZaaD0HvudMkzI0GeX1RTjK
+ UC0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703174617; x=1703779417;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=W/+UOSMOl9cvWCpiBW/FNXNUrwwIMbPapGI3Cuf5G/0=;
- b=rYayI9Ta+F9TsH8aA1hyfoz8qH5vaq3QFS3r0O2WpZ5NHpNI8U156o5uuOKJRNj9Fl
- c48fyVDD9DYM5EwLJm+5/0b999QdPAauXoYuwg0Yx7gCGJdlC95Mlq+aY90uOUt3wN7o
- N54+s8aXYqPAXlQYBOKjTpwMUGNIbRQ01jjI8/9mkTCzt1We4gsbPm8jNwQ5bBfbs10c
- 6eMG5NvFxjef06jEZAXfi8pTuOuU/9pWwNvmhNe8woqZnnXRkxNzfAmKdMrL5l39xNz2
- xDdPYYisR1YvVA1XXn1p+Bez+48OFqKZvGzt48qpk2RNjzp4OgBRk5TK54c/1u0WFBCs
- 7sdQ==
-X-Gm-Message-State: AOJu0YxVvtMjPds1TN/M1ckIcBLapzTbSVfK+1FsD13n0rYkFKP6zjmA
- XP4xZ3OLK/cPripyRvmTx/xibw==
-X-Google-Smtp-Source: AGHT+IEgWKOUDiOC3pm910w0LLm+gngMCG55xpmzZNMslMXU61kwMwB7QSaz4JK9+OEULOgzhh5+Cw==
-X-Received: by 2002:a05:6358:7e56:b0:172:fe13:7f8e with SMTP id
- p22-20020a0563587e5600b00172fe137f8emr1756064rwm.7.1703174617567; 
- Thu, 21 Dec 2023 08:03:37 -0800 (PST)
-Received: from [192.168.68.110] ([179.93.21.205])
+ d=1e100.net; s=20230601; t=1703181104; x=1703785904;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=NyRmzaKwHApH9j1z664mnPBjPmPdME76kWN5omNMN6c=;
+ b=eCrYsEjR0nr2ysVZ9y4bYtG/W+iPSS965w/8wAa+TQ93MRaTgiibrfTcEPfXJaCoZ2
+ XDx6kqsl3ZCVAMItv3SLTwlrhStduZmt+q/6dqruG/8lQ3tSpxT9Si049rXi+KDVXdOA
+ AXcHlzrPBWstINWvG5H+4LhUYxIXznkAhWUoiqKXMEbDl57sQLaVInzC17bzNFknIMwh
+ Aej55o81mWiiXJqnL2l+qgw/FuYmeUVSwh4sNkcILT67piRHpC/yERliu5lU+kO0WR93
+ Vz7yG5tKzIDFapMkWs52tynwWjXx2TjcsfC4Ml5IoawCjx/f00wdTmZ3AWkNkvDnM9Yu
+ 9CJA==
+X-Gm-Message-State: AOJu0YyjxMRbBgAgz17KlfX1l3VV+LbiaNWmg3iuK6TSxD6Drrrx8w7m
+ F8gP9HR8Sgg+qlROxhEQwCX9R/DfyyHP+w==
+X-Google-Smtp-Source: AGHT+IF3I6EYPwd2jy+wvleHhbycNPXAlHIdWqPaCt1lz5PR38MLgp1v9l569PBdT1YUolPuCFzmzg==
+X-Received: by 2002:a05:6a20:3d94:b0:190:d1d2:56ff with SMTP id
+ s20-20020a056a203d9400b00190d1d256ffmr30218pzi.88.1703181104022; 
+ Thu, 21 Dec 2023 09:51:44 -0800 (PST)
+Received: from grind.dc1.ventanamicro.com ([179.93.21.205])
  by smtp.gmail.com with ESMTPSA id
- o184-20020a6341c1000000b005c6aa4d4a0dsm1766670pga.45.2023.12.21.08.03.35
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 Dec 2023 08:03:37 -0800 (PST)
-Message-ID: <9613811d-2630-4a3f-a0dc-97641d8fc7a5@ventanamicro.com>
-Date: Thu, 21 Dec 2023 13:03:35 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] target/riscv/csr: Added the ability to delegate LCOFI
- to VS
-Content-Language: en-US
-To: Vadim Shakirov <vadim.shakirov@syntacore.com>, qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
-References: <20231221113628.41038-1-vadim.shakirov@syntacore.com>
- <20231221113628.41038-3-vadim.shakirov@syntacore.com>
+ w10-20020a63f50a000000b005b18c53d73csm1806261pgh.16.2023.12.21.09.51.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 Dec 2023 09:51:43 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20231221113628.41038-3-vadim.shakirov@syntacore.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::230;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x230.google.com
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ ajones@ventanamicro.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH 00/16] target/riscv: deprecate riscv_cpu_options[]
+Date: Thu, 21 Dec 2023 14:51:21 -0300
+Message-ID: <20231221175137.497379-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::536;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x536.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,103 +93,83 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Hi,
+
+Rob reported a few days ago about vendor properties overrides that we're
+having with riscv_cpu_options [1]. At that time I was doing changes in
+the 'vlen' and 'elen' properties due to (yet to be sent) changes I'm
+making in Vector code. I decided to extend the work I was doing and it
+resulted in this cleanup.
+
+As Rob mentioned, the defaults in riscv_cpu_options[] properties will
+overwrite settings that comes from cpu_init() due to how the
+accelerators are adding them during post_init() time. The KVM driver
+does validations in init() time, so it needs to overwrite
+riscv_cpu_options[] with its own versions. Vendor CPUs can be changed
+via these options because the default constructor does not allow for any
+customization. Last, but not the least, we have validations for these
+options that are being done by the TCG driver, but should be done in the
+common code since it also affects KVM.
+
+The first problem is solved by moving all properties from
+riscv_cpu_options[] to riscv_cpu_properties[]. They'll be changed into
+class properties, their default values will be initialized earlier, and
+any changes in cpu_init() will overwrite them.
+
+The second problem requires changes in the KVM driver. We'll need a
+finalize() mechanic, like TCG already has, to validate options during
+realize() time. This will relieve the driver from having to re-implement
+the setters for each option. 
+
+The third and forth problems can be solved by implementing getters and
+setters for these class options. We have a precedent for that - the
+machine IDs work this way - but we want to center everything in
+riscv_cpu_properties[] for simplicity. We have an example of how this is
+done in the pmu-* properties, and we'll do the same for every other
+class property.
+
+Another noticeable change made in this series is the removal of the
+string properties 'priv_spec' and 'vext_spec'. We'll manipulate strings
+as needed but won't store them in cpu->cfg. This will also make it
+easier to migrate those properties to bools, like we already do with
+satp_mode.
+
+Series based on Alistair's riscv-to-apply.next. It can also be retrieved
+via:
+
+https://gitlab.com/danielhb/qemu/-/tree/fix_cpu_opts_v1
 
 
-On 12/21/23 08:36, Vadim Shakirov wrote:
-> In the AIA specification in the paragraph "Virtual interrupts for VS level"
-> it is indicated for interrupts 13-63: if the bit in hideleg is enabled,
-> then the corresponding vsip and vsie bits are aliases to sip and sie
-> 
-> Signed-off-by: Vadim Shakirov <vadim.shakirov@syntacore.com>
-> ---
+[1] https://lore.kernel.org/qemu-riscv/b815ab5fdf33d9b9000c8165d50d000f387a3463.camel@rivosinc.com/
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
->   target/riscv/csr.c | 36 ++++++++++++++++++++++++++----------
->   1 file changed, 26 insertions(+), 10 deletions(-)
-> 
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 36f807d5f6..46a5d0c69a 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -1129,7 +1129,7 @@ static RISCVException write_stimecmph(CPURISCVState *env, int csrno,
->   
->   static const uint64_t delegable_ints = S_MODE_INTERRUPTS |
->                                         VS_MODE_INTERRUPTS | LOCAL_INTERRUPTS;
-> -static const uint64_t vs_delegable_ints = VS_MODE_INTERRUPTS;
-> +static const uint64_t vs_delegable_ints = VS_MODE_INTERRUPTS | LOCAL_INTERRUPTS;
->   static const uint64_t all_ints = M_MODE_INTERRUPTS | S_MODE_INTERRUPTS |
->                                   HS_MODE_INTERRUPTS | LOCAL_INTERRUPTS;
->   #define DELEGABLE_EXCPS ((1ULL << (RISCV_EXCP_INST_ADDR_MIS)) | \
-> @@ -1167,7 +1167,7 @@ static const target_ulong sip_writable_mask = SIP_SSIP | MIP_USIP | MIP_UEIP |
->   static const target_ulong hip_writable_mask = MIP_VSSIP;
->   static const target_ulong hvip_writable_mask = MIP_VSSIP | MIP_VSTIP |
->                                                  MIP_VSEIP;
-> -static const target_ulong vsip_writable_mask = MIP_VSSIP;
-> +static const target_ulong vsip_writable_mask = MIP_VSSIP | LOCAL_INTERRUPTS;
->   
->   const bool valid_vm_1_10_32[16] = {
->       [VM_1_10_MBARE] = true,
-> @@ -2416,20 +2416,34 @@ static RISCVException write_sstatus(CPURISCVState *env, int csrno,
->       return write_mstatus(env, CSR_MSTATUS, newval);
->   }
->   
-> +
-> +static uint64_t vsi_to_mi(uint64_t vsi)
-> +{
-> +    uint64_t mi;
-> +
-> +    mi = (vsi & (VS_MODE_INTERRUPTS >> 1)) << 1;
-> +    mi |= vsi & LOCAL_INTERRUPTS;
-> +
-> +    return mi;
-> +}
-> +
->   static RISCVException rmw_vsie64(CPURISCVState *env, int csrno,
->                                    uint64_t *ret_val,
->                                    uint64_t new_val, uint64_t wr_mask)
->   {
->       RISCVException ret;
-> -    uint64_t rval, mask = env->hideleg & VS_MODE_INTERRUPTS;
-> +    uint64_t rval, mask = env->hideleg & (VS_MODE_INTERRUPTS |
-> +                                                        LOCAL_INTERRUPTS);
->   
->       /* Bring VS-level bits to correct position */
-> -    new_val = (new_val & (VS_MODE_INTERRUPTS >> 1)) << 1;
-> -    wr_mask = (wr_mask & (VS_MODE_INTERRUPTS >> 1)) << 1;
-> +    new_val = vsi_to_mi(new_val);
-> +    wr_mask = vsi_to_mi(wr_mask);
->   
->       ret = rmw_mie64(env, csrno, &rval, new_val, wr_mask & mask);
-> +
->       if (ret_val) {
-> -        *ret_val = (rval & mask) >> 1;
-> +        *ret_val = (rval & (env->hideleg & VS_MODE_INTERRUPTS)) >> 1;
-> +        *ret_val |= rval & (env->hideleg & LOCAL_INTERRUPTS);
->       }
->   
->       return ret;
-> @@ -2630,16 +2644,18 @@ static RISCVException rmw_vsip64(CPURISCVState *env, int csrno,
->                                    uint64_t new_val, uint64_t wr_mask)
->   {
->       RISCVException ret;
-> -    uint64_t rval, mask = env->hideleg & VS_MODE_INTERRUPTS;
-> +    uint64_t rval, mask = env->hideleg & (VS_MODE_INTERRUPTS |
-> +                                                        LOCAL_INTERRUPTS);
->   
->       /* Bring VS-level bits to correct position */
-> -    new_val = (new_val & (VS_MODE_INTERRUPTS >> 1)) << 1;
-> -    wr_mask = (wr_mask & (VS_MODE_INTERRUPTS >> 1)) << 1;
-> +    new_val = vsi_to_mi(new_val);
-> +    wr_mask = vsi_to_mi(wr_mask);
->   
->       ret = rmw_mip64(env, csrno, &rval, new_val,
->                       wr_mask & mask & vsip_writable_mask);
->       if (ret_val) {
-> -        *ret_val = (rval & mask) >> 1;
-> +        *ret_val = (rval & (env->hideleg & VS_MODE_INTERRUPTS)) >> 1;
-> +        *ret_val |= rval & (env->hideleg & LOCAL_INTERRUPTS);
->       }
->   
->       return ret;
+Daniel Henrique Barboza (16):
+  target/riscv/cpu_cfg.h: remove user_spec and bext_spec
+  target/riscv: move 'pmu-mask' and 'pmu-num' to riscv_cpu_properties[]
+  target/riscv: make riscv_cpu_is_generic() public
+  target/riscv: move 'mmu' to riscv_cpu_properties[]
+  target/riscv: move 'pmp' to riscv_cpu_properties[]
+  target/riscv: rework 'priv_spec'
+  target/riscv: rework 'vext_spec'
+  target/riscv: move 'vlen' to riscv_cpu_properties[]
+  target/riscv: move 'elen' to riscv_cpu_properties[]
+  target/riscv: create finalize_features() for KVM
+  target/riscv: move 'cbom_blocksize' to riscv_cpu_properties[]
+  target/riscv: move 'cboz_blocksize' to riscv_cpu_properties[]
+  target/riscv: remove riscv_cpu_options[]
+  target/riscv/cpu.c: move 'mvendorid' to riscv_cpu_properties[]
+  target/riscv/cpu.c: move 'mimpid' to riscv_cpu_properties[]
+  target/riscv/cpu.c: move 'marchid' to riscv_cpu_properties[]
+
+ target/riscv/cpu.c           | 582 ++++++++++++++++++++++++++++++-----
+ target/riscv/cpu.h           |   7 +-
+ target/riscv/cpu_cfg.h       |   4 -
+ target/riscv/kvm/kvm-cpu.c   |  94 +++---
+ target/riscv/kvm/kvm_riscv.h |   1 +
+ target/riscv/tcg/tcg-cpu.c   |  63 ----
+ 6 files changed, 560 insertions(+), 191 deletions(-)
+
+-- 
+2.43.0
+
 
