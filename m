@@ -4,79 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68DEAC35274
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE694C46CD4
 	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Dec 2023 10:41:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rGGUJ-0001JJ-PA; Thu, 21 Dec 2023 05:41:11 -0500
+	id 1rGGS7-0004IW-4K; Thu, 21 Dec 2023 05:38:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1rGGUC-0000Vi-S7; Thu, 21 Dec 2023 05:41:06 -0500
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1rGGS0-0003w6-KY
+ for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 05:38:48 -0500
+Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1rGGU4-0004xD-Q3; Thu, 21 Dec 2023 05:41:04 -0500
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-40c6736d10fso7867995e9.1; 
- Thu, 21 Dec 2023 02:40:54 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1rGGRp-0004Ap-8O
+ for qemu-riscv@nongnu.org; Thu, 21 Dec 2023 05:38:47 -0500
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-40c3ceded81so6576705e9.1
+ for <qemu-riscv@nongnu.org>; Thu, 21 Dec 2023 02:38:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1703155253; x=1703760053; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=qkluXZJ+yNwvQGBILr/lSv4ei/NhWG9eq5SAHsm+Ngg=;
- b=EHP4WNvOTH21XI5+OdxWFiNiBIez73NFKMiQBUgZj3mE16qNUuBnt0Mu3qULvXPCo+
- FtLmeVL8e3kvPabq9HU6UFQb8eLam6iOTBB72XW0y8w+SZupeimaepupf8BvZD0d8ueI
- X9KJnmy2lTwT5ajDuxjx459pUJ3zV+ZQGYzPIm64Nku6IfDsFgpH7AHCcVeBZV+r70WD
- 13meix4f3DNzJG39YQNCaHxhJbOi1M3v8AAAnb8XliiekhjgT+FaSjwk77oZnRGojAb8
- D1tmRFGK+07Ol5Z9vCn7cETv372cQE9pqYJoDgeTfChbtzPqS/giFQJgG8mcL8wnMqRR
- f08g==
+ d=linaro.org; s=google; t=1703155114; x=1703759914; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=oeKurO18PT1xLzL5iQamunNBev09YXep7NV+pG6wspo=;
+ b=ifgyRZJL0DhDD46WjmnFjNBxBmaxwKB01VbP7WSdHRY0reGfOP64nm+/QUyzXQKqOC
+ q5GSVVLHbJwXg/c0AigYft4NsYRh5rRPadn5uC/mxaAn5gh/hOWhLDY21IJ7H9rweQvn
+ Gs6yxsd7mhpaPM/No3bfUEplrN/4ZKdyUy/XzYRFtEDiVSWMpirTbDNqvzRG15uGWHSL
+ FAMzSR4Vg7UjZPx4gXTrB1m6BBnt4M0KuUeEJ6K6G0+sz6t/Hku6OSXJr1Bm7z51pSY9
+ PXLl8FVK+5DiCkYz4l22sJM0WC5xP70qs09r+y3W8DKWNKxtZ7zvFaSrDCVUaHfIy3MX
+ hoTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703155253; x=1703760053;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=qkluXZJ+yNwvQGBILr/lSv4ei/NhWG9eq5SAHsm+Ngg=;
- b=baSfIFe4b2bgy3SOQZXt66+biusSQp1DQuNFDjc4hqYqIe9IsHnkULXJXoIN6bYMoE
- g99kco4vMx7aTGsn5Udxg5HiPiN40Y9WDeXbrzsNkKbyi3+CY8OZZV86O+LBjkoE9pWE
- H3kuKzDdFex5/Nc4lOuQpXCQDqab2fl4Nc7bpmgQMeWngW8U3upfF7SXueRVrfeyxg5w
- +U9czBycrj3mTJa/ckDtAYKJudw8vpEDup5DRyyIEne1VH8+IB0/xs2Q3jzPjrpsrekZ
- KvUAelJ4/Uy8gCZbYsiwXECZI4B+yuk3OajN0PjjEGMm35AqFjmx54OyL4nLXt30lo8y
- hNJA==
-X-Gm-Message-State: AOJu0YwckEf2ZmS+m6eiLFs429FQOkkkMkLEUpIX8vggIYj/+R8p701+
- CuX7K7MPNc80goZEmhaGqt0=
-X-Google-Smtp-Source: AGHT+IFJvNhWRWQm76tXaBEg3GzcfYWh0+RecI+P1lC2RvXt+E1qF2QOzrbCU2yo+b61ANd6Lzir9g==
-X-Received: by 2002:a05:600c:251:b0:40c:261b:3a86 with SMTP id
- 17-20020a05600c025100b0040c261b3a86mr653205wmj.53.1703155253184; 
- Thu, 21 Dec 2023 02:40:53 -0800 (PST)
-Received: from freya.midgard (broadband-188-255-126-251.ip.moscow.rt.ru.
- [188.255.126.251]) by smtp.gmail.com with ESMTPSA id
- bh20-20020a05600c3d1400b0040d15dcb77asm10633674wmb.23.2023.12.21.02.40.51
+ d=1e100.net; s=20230601; t=1703155114; x=1703759914;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=oeKurO18PT1xLzL5iQamunNBev09YXep7NV+pG6wspo=;
+ b=IpWF3pC7YKlkz1Wj2Q33AULMniNaqZYNDJyz02RRXZwKXgXPqYxhCKHlJ9YF08y8dk
+ 6ooZua3mzS3Kvdx7OyTtBBxFwXFDntK5Ku8ivRge/JlrYp/36MftKUpqnAnlhhQ1nHEi
+ 5auD2+kNGpxWP8MJhp0GIj1BCSpNhWW95NnD+YX7l0CxbSejy0Ui1x0OQTKN9yZI9cRh
+ Hxnfjmijvs++XduKqw3xBLUuoc+aKvXvJMO22aYoyXBLkHUgWM7pnnmVitMqc5dhjbWy
+ Q4XzXo7A8zmB/HNgR0p3/abawUBcddx2N3pmdy6hJ4GxxsilkIvssfKBZDHE2c0iqnCT
+ JxKA==
+X-Gm-Message-State: AOJu0YyRiSTof5vs93zWn+SIiHGmMfLrf64942JH/pMokpR4eqI6+L/W
+ Ap5gK6nOCed91MKuRRBrOsuKxQ==
+X-Google-Smtp-Source: AGHT+IEDw9S3TarblsmJZYT54zqBYySCojx04X6aERE08kCaPWULIdSrrrthFqqDkUid6eRtO2RAUg==
+X-Received: by 2002:a1c:7209:0:b0:40d:3823:5e0e with SMTP id
+ n9-20020a1c7209000000b0040d38235e0emr586756wmc.140.1703155113939; 
+ Thu, 21 Dec 2023 02:38:33 -0800 (PST)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ p2-20020a05600c1d8200b0040596352951sm11263469wms.5.2023.12.21.02.38.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Dec 2023 02:40:52 -0800 (PST)
-From: Alexey Baturo <baturo.alexey@gmail.com>
-X-Google-Original-From: Alexey Baturo <me@deliversmonkey.space>
-To: 
-Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
- zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com, Alistair.Francis@wdc.com,
- sagark@eecs.berkeley.edu, kbastian@mail.uni-paderborn.de,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Subject: [PATCH 0/6] Pointer Masking update for Zjpm v0.8
-Date: Thu, 21 Dec 2023 10:40:29 +0000
-Message-Id: <20231221104035.1287244-1-me@deliversmonkey.space>
-X-Mailer: git-send-email 2.34.1
+ Thu, 21 Dec 2023 02:38:29 -0800 (PST)
+Received: from draig.lan (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id B86145F8E1;
+ Thu, 21 Dec 2023 10:38:20 +0000 (GMT)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ John Snow <jsnow@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Yanan Wang <wangyanan55@huawei.com>, Eduardo Habkost <eduardo@habkost.net>,
+ Brian Cain <bcain@quicinc.com>, Laurent Vivier <laurent@vivier.eu>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Cleber Rosa <crosa@redhat.com>,
+ David Hildenbrand <david@redhat.com>, Beraldo Leal <bleal@redhat.com>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>,
+ Weiwei Li <liwei1518@gmail.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Paul Durrant <paul@xen.org>, qemu-s390x@nongnu.org,
+ David Woodhouse <dwmw2@infradead.org>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>,
+ Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ Michael Rolnik <mrolnik@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Laurent Vivier <lvivier@redhat.com>, kvm@vger.kernel.org,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Alexandre Iooss <erdnaxe@crans.org>, Thomas Huth <thuth@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>, qemu-ppc@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Nicholas Piggin <npiggin@gmail.com>, qemu-riscv@nongnu.org,
+ qemu-arm@nongnu.org, Song Gao <gaosong@loongson.cn>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ Mahmoud Mandour <ma.mandourr@gmail.com>, Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH 19/40] tests/fp: Bump fp-test-mulAdd test timeout to 3 minutes
+Date: Thu, 21 Dec 2023 10:37:57 +0000
+Message-Id: <20231221103818.1633766-20-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20231221103818.1633766-1-alex.bennee@linaro.org>
+References: <20231221103818.1633766-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=baturo.alexey@gmail.com; helo=mail-wm1-x332.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -92,44 +126,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Alexey Baturo <baturo.alexey@gmail.com>
+From: Thomas Huth <thuth@redhat.com>
 
-Hi all,
+When running the tests in slow mode with --enable-debug on a very loaded
+system, the  fp-test-mulAdd test can take longer than 2 minutes. Bump the
+timeout to three minutes to make sure it passes in such situations, too.
 
-It looks like Zjpm v0.8 is almost frozen and we don't expect it change drastically anymore.
-Compared to the original implementation with explicit base and mask CSRs, we now only have
-several fixed options for number of masked bits which are set using existing CSRs.
-The changes have been tested with handwritten assembly tests and LLVM HWASAN
-test suite.
+Signed-off-by: Thomas Huth <thuth@redhat.com>
+Message-Id: <20231215070357.10888-16-thuth@redhat.com>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+---
+ tests/fp/meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Thanks
-
-Alexey Baturo (6):
-  target/riscv: Remove obsolete pointer masking extension code.
-  target/riscv: Add new CSR fields for S{sn,mn,m}pm extensions as part
-    of Zjpm v0.8
-  target/riscv: Add pointer masking tb flags
-  target/riscv: Add functions to calculate current number of masked bits
-    for pointer masking
-  target/riscv: Update address modify functions to take into account
-    pointer masking
-  target/riscv: Enable updates for pointer masking variables and thus
-    enable pointer masking extension
-
- target/riscv/cpu.c           |  17 +-
- target/riscv/cpu.h           |  35 ++--
- target/riscv/cpu_bits.h      |  85 +--------
- target/riscv/cpu_cfg.h       |   3 +
- target/riscv/cpu_helper.c    |  88 ++++-----
- target/riscv/csr.c           | 339 ++---------------------------------
- target/riscv/machine.c       |  14 +-
- target/riscv/pmp.c           |  14 +-
- target/riscv/pmp.h           |  11 +-
- target/riscv/translate.c     |  50 +++---
- target/riscv/vector_helper.c |   9 +-
- 11 files changed, 146 insertions(+), 519 deletions(-)
-
+diff --git a/tests/fp/meson.build b/tests/fp/meson.build
+index cbc17392d67..3b7fc637499 100644
+--- a/tests/fp/meson.build
++++ b/tests/fp/meson.build
+@@ -124,7 +124,7 @@ test('fp-test-mulAdd', fptest,
+      # no fptest_rounding_args
+      args: fptest_args +
+            ['f16_mulAdd', 'f32_mulAdd', 'f64_mulAdd', 'f128_mulAdd'],
+-     suite: ['softfloat-slow', 'softfloat-ops-slow', 'slow'], timeout: 90)
++     suite: ['softfloat-slow', 'softfloat-ops-slow', 'slow'], timeout: 180)
+ 
+ executable(
+   'fp-bench',
 -- 
-2.34.1
+2.39.2
 
 
