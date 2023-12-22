@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 212D2C41535
-	for <qemu-riscv@archiver.kernel.org>; Fri, 22 Dec 2023 12:03:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7C78C41535
+	for <qemu-riscv@archiver.kernel.org>; Fri, 22 Dec 2023 12:23:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rGeFU-0002We-6m; Fri, 22 Dec 2023 07:03:28 -0500
+	id 1rGeYD-0001Uy-2K; Fri, 22 Dec 2023 07:22:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rGeFT-0002WJ-A6
- for qemu-riscv@nongnu.org; Fri, 22 Dec 2023 07:03:27 -0500
-Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
+ id 1rGeYB-0001Uh-OO
+ for qemu-riscv@nongnu.org; Fri, 22 Dec 2023 07:22:47 -0500
+Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rGeFR-0001Mj-Ox
- for qemu-riscv@nongnu.org; Fri, 22 Dec 2023 07:03:27 -0500
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-1d3ea5cc137so14736925ad.0
- for <qemu-riscv@nongnu.org>; Fri, 22 Dec 2023 04:03:24 -0800 (PST)
+ id 1rGeY9-0005mk-2V
+ for qemu-riscv@nongnu.org; Fri, 22 Dec 2023 07:22:47 -0500
+Received: by mail-pg1-x52a.google.com with SMTP id
+ 41be03b00d2f7-5cdfed46372so19071a12.3
+ for <qemu-riscv@nongnu.org>; Fri, 22 Dec 2023 04:22:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1703246604; x=1703851404; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=2OZrcMbF4IC72z/H6USRbLJpj60y8dWQhBpm2pxlgdI=;
- b=DC8CRTddlFgWvO2wrcr13dWFIp13Y8d8hoVn3swfesHb1BkjwfR3DFBaCD08+SRRL4
- Tuqp5rqNRhNJ+ERPot8dEs+noR+qGn9dRDjNPANnqdVg3WaOqVXTsFsbxMslFDf4uJ1V
- 1RCPHxxjhAZhb2ZnR9+KI2wI/vW86yFKYH3ELKlLxuJkefWkuSeo+AlyeIRZjkSXvioO
- vLknuVZ0l5JYGw1XxU2MCLlHvRjIDgz9sOgS/tN0y/W6CgWjqVsJ8klFKcOykT+bPWoD
- xYRCCfxRjv65TOuaMbhogAPIaKCjnx88R35a5gZAMjRyS88Q1WIkSdSIFG1+5d94OBX+
- HkpQ==
+ d=ventanamicro.com; s=google; t=1703247763; x=1703852563; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bNKontpfLUZyadIzXzNBnB69eWAYBQx8Z06ZfrYR8/0=;
+ b=bHR973U682ixIDlPQ+i/QFa6uoEZHk26LTME1cebpk9GHdutDjWSSPjXXx5XUyEemD
+ KsSNGfYmvr803AsYrx++JYaCDwUMwMoe1bVV+Ptu14RxdyilZEbKoHN40VMuJoGLyy9z
+ 8/FwArjJKjClG1up3P/cTB0FaEi6J5bOyh2KnvMbgB/ripnIYHmHf6tWifxmVuV7DlNP
+ yiw5SP4Rvg6gL1mMrrlWT6WPSBcQ/7sfrG6wT0VZEE3noslEADJWEu5dK17RBmdxlxc3
+ f9lylD6qiqbzyksitBkA6lkWKCuedYxMK2I6y6sNzRwJbesGN6XmS3P7+OOsrPtugw3T
+ pXHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703246604; x=1703851404;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=2OZrcMbF4IC72z/H6USRbLJpj60y8dWQhBpm2pxlgdI=;
- b=wHKbShp3a6AuuQ6PwWBZZkxrnE/9x48pINjsXRaDAF0BfNBloy56uFFtXjUQwzWY4I
- vrdUpNKbQa+dXsuKNWaCyXcEQdAWSwyYRUovnahkV3a7DYe1/YvbGJbhMpPj+L0L4eDr
- jVFzfjC7pGpgU0u6ekKOvmnNbKcERtXlGbSSwRDxYzVkR7+G3L9xtTxQ/jxEH/MCuMBQ
- dWsuORjhr3bviXvGOyzsaTSQDqsIT4hcHpc0RtNAOZtAOWdjwoKtLYa8qebmGaZBKOn8
- YxBMLgTNcIw/apGZFpy/OxugK2qkkjtLK0j8OhNwL8tmXo/Sfb1lKCjXrUL/+9v4akvx
- 3Ehg==
-X-Gm-Message-State: AOJu0YxJo9St/x6uD5DJfPC0gsTiIBgneBd86d/DLEd3EHmYX3nKAiYi
- xYy91oZ14VFr9NfwsHz+ZmnQGvveeUPwgQ==
-X-Google-Smtp-Source: AGHT+IE96dKw4yNtfYmBr4gkJYGkDu2cO1NasS8Qj4RokDTN4tZj4u5TM/w0zoUztD8BlPaKDQjJKg==
-X-Received: by 2002:a17:903:244a:b0:1d0:8e08:35be with SMTP id
- l10-20020a170903244a00b001d08e0835bemr1349592pls.7.1703246603781; 
- Fri, 22 Dec 2023 04:03:23 -0800 (PST)
-Received: from [192.168.68.110] (201-69-66-51.dial-up.telesp.net.br.
+ d=1e100.net; s=20230601; t=1703247764; x=1703852564;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=bNKontpfLUZyadIzXzNBnB69eWAYBQx8Z06ZfrYR8/0=;
+ b=awJmddIN5FtdprcvZBHcN4fhzCBMi4388TVu9gl4HdQNaCPi0IY3R9LB8DYMYoYUJr
+ oA7mpydeXwct08L1eBqyTPXehcZKAMLFTwk4wgA17vochFh2aB0lbdx3EsJCKXE/wHl1
+ H7ebs99L1XhMAsxznuDTQjvSoKLsUsLVaJFDSpQEvCe7royTB/WIi7vjcNCB46DbMcNR
+ DE+G7MRhntu+iZBV4aQZHsaCB6ahWTdz4mBLHhAhp48rRze/8LSqxP2NczdHEwwnLBBe
+ lkzkC24eM0gE3Kn9qIqhrxJvO1Wj9q1jqyBSIHuZ6diyyz4MqdIoRkCLtFl/4ziUS4VS
+ bg4w==
+X-Gm-Message-State: AOJu0Ywv87uth3Z12vW4lEZf8SFpT9Ro30MjH9v9Au9HSV1WhHh6gLiy
+ DbLXONTCYV/akEkeHFO6KqqiRWy39ix/YQ==
+X-Google-Smtp-Source: AGHT+IGVsM/Li3YD6MuFO/G8cE7Px9qU45nHLuk38M8cY1Zc+0fHGtcYFu6e3WJKguSMrsMhEDoWSA==
+X-Received: by 2002:a05:6a20:78a1:b0:194:b3af:8674 with SMTP id
+ d33-20020a056a2078a100b00194b3af8674mr1122908pzg.10.1703247763704; 
+ Fri, 22 Dec 2023 04:22:43 -0800 (PST)
+Received: from grind.dc1.ventanamicro.com (201-69-66-51.dial-up.telesp.net.br.
  [201.69.66.51]) by smtp.gmail.com with ESMTPSA id
- g22-20020a170902869600b001cca8a01e68sm3271402plo.278.2023.12.22.04.03.21
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 22 Dec 2023 04:03:23 -0800 (PST)
-Message-ID: <10ab017f-41a0-4e1f-a0b4-d18495d2b616@ventanamicro.com>
-Date: Fri, 22 Dec 2023 09:03:19 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 11/16] target/riscv: move 'cbom_blocksize' to
- riscv_cpu_properties[]
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+ g14-20020aa7874e000000b006ce7ad8c14esm3274901pfo.164.2023.12.22.04.22.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 22 Dec 2023 04:22:43 -0800 (PST)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com
-References: <20231221175137.497379-1-dbarboza@ventanamicro.com>
- <20231221175137.497379-12-dbarboza@ventanamicro.com>
- <18451041-c186-4e33-be31-3bfd4cf5b401@linaro.org>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <18451041-c186-4e33-be31-3bfd4cf5b401@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ ajones@ventanamicro.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH v2 01/16] target/riscv/cpu_cfg.h: remove user_spec and
+ bext_spec
+Date: Fri, 22 Dec 2023 09:22:20 -0300
+Message-ID: <20231222122235.545235-2-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20231222122235.545235-1-dbarboza@ventanamicro.com>
+References: <20231222122235.545235-1-dbarboza@ventanamicro.com>
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x629.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,23 +97,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+They aren't being used.
 
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ target/riscv/cpu_cfg.h | 2 --
+ 1 file changed, 2 deletions(-)
 
-On 12/22/23 01:40, Richard Henderson wrote:
-> On 12/22/23 04:51, Daniel Henrique Barboza wrote:
->> +const PropertyInfo prop_cbom_blksize = {
-> 
-> static?  Same for cboz in the next patch.
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index f4605fb190..c67a8731d3 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -136,8 +136,6 @@ struct RISCVCPUConfig {
+ 
+     uint32_t pmu_mask;
+     char *priv_spec;
+-    char *user_spec;
+-    char *bext_spec;
+     char *vext_spec;
+     uint16_t vlen;
+     uint16_t elen;
+-- 
+2.43.0
 
-Same in every other patch where I added a PropertyInfo it seems.
-
-
-I'll fix it in v2. Thanks,
-
-
-Daniel
-
-> 
-> 
-> r~
 
