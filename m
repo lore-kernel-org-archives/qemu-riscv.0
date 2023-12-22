@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7016EC41535
-	for <qemu-riscv@archiver.kernel.org>; Fri, 22 Dec 2023 12:24:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8D99C4706C
+	for <qemu-riscv@archiver.kernel.org>; Fri, 22 Dec 2023 12:25:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rGeYm-0001uX-Ff; Fri, 22 Dec 2023 07:23:24 -0500
+	id 1rGeYI-0001XX-Lg; Fri, 22 Dec 2023 07:22:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rGeYk-0001tW-QR
- for qemu-riscv@nongnu.org; Fri, 22 Dec 2023 07:23:22 -0500
-Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
+ id 1rGeYG-0001Wk-Fq
+ for qemu-riscv@nongnu.org; Fri, 22 Dec 2023 07:22:52 -0500
+Received: from mail-io1-xd30.google.com ([2607:f8b0:4864:20::d30])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rGeYj-0006Ds-2q
- for qemu-riscv@nongnu.org; Fri, 22 Dec 2023 07:23:22 -0500
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-6d775f9af42so1628100b3a.3
- for <qemu-riscv@nongnu.org>; Fri, 22 Dec 2023 04:23:20 -0800 (PST)
+ id 1rGeYE-0005v6-Tb
+ for qemu-riscv@nongnu.org; Fri, 22 Dec 2023 07:22:52 -0500
+Received: by mail-io1-xd30.google.com with SMTP id
+ ca18e2360f4ac-7b7f93eb935so76328339f.1
+ for <qemu-riscv@nongnu.org>; Fri, 22 Dec 2023 04:22:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1703247800; x=1703852600; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1703247770; x=1703852570; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YOG7GjzzHRfLatHdrFLWdWSYTLIf6bifme29NkFErLs=;
- b=F2IYV+nZqnZ1zzUqx6NDefWaFhLUMTFlfZ8+vV6J8YZqyZCiwWmB9u1fdItYnWpgVR
- 8+XC9AJia2fzKOPSePKnKj9VnA2NfqnxLqQGSjUpzvW/hVTRuacQBaRWsq3e9bS8dzUK
- vA3K0/P6jTyBkKHDIx2L7y2n8JcsHft+mqIuUQV78WbmUtV8A9Lkma8AL9+EHu41D1Tw
- f7yioKOkC2RlM8h7z8L0VkZxLWcQV+i7I3ePVFkr0yIM8ACY/nWuE+v1ac9JfImlPhHC
- wRLk/jQGE0NJudCT+rSGGD9bb/4buDHXnHq4xPo6n7/ISmRBaDYImIkBl/OEkNynv87L
- sM1Q==
+ bh=Oagcc2Zv4k0si9dN/lqEsLqexrn9/qqPDiS/g5OohqM=;
+ b=Pj9AhRxY43NMKAwMnp0mppNeOvbNuc+vvntrrVk7Khxs1udLlFYOmymoX0wGqEj80T
+ bPPc6n1NLvF4DBSit8r3pNoPjMvZAJVK+9g+GIT0h1GmHpJq/KaHACAmDbAI+u4KqQM1
+ Yo25FOQlUWeZyQFxxT+Wp7sc1q+JXs28KAC613f2RGc0tOZv7XZ3le5UKdnTU1GNdK5P
+ OsE0KzWJo1+vOoKZ4pL/rSEq17Hdb5KTtKxo3yPFRERQxJ1kJQFV4Hl4QIPTSJUAgwCN
+ 9KIkmyHAayEUBN/FcRaTDsvEPkpC+ScMc0S2HDXxny3On0T/ACL2b9JTxEvfv/rwwxBd
+ HmaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703247800; x=1703852600;
+ d=1e100.net; s=20230601; t=1703247770; x=1703852570;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YOG7GjzzHRfLatHdrFLWdWSYTLIf6bifme29NkFErLs=;
- b=RV1xEbUaqWIHySLVUQiJotI2bT7X8p4CtPf4nTkXRuxcO6776N1fWnqgS/zOUWqqf1
- CwjSK0+XS/pdv78XCA+QZNXXAplcTCPoNAGwVypUtfrW6tiLhPKBgooHQ4kXImx8OgT1
- MNOhS37/etD+EkpFV6o+cvkUF3yq96dMv3gu19WJN58Po85DDhCED+iQ51D3oeO31vyg
- lxJWBMUNeb8Fnelt22ad5toBK6RV2BQvhjC0znO967ecdd1A9hlr4zzYIzmatoMVBTJK
- /DGl0RE5/OdzoeV5YOksNvzU/9jD7kPi1iFwuUvm8ws08LU2ur87NrdiwLyk4kYpjTf8
- mvpg==
-X-Gm-Message-State: AOJu0YzcseD2vbknXDuk+k72YoGMpgw3/ulTPMJ2jykoIi7NA/zMXsKH
- N80KxtHVD3f+DzdQWQG8PqbIPlPlZqXwGw==
-X-Google-Smtp-Source: AGHT+IEFTjxgHsbSnfiabKY7tsWfEVffMExprXFVqAh6H2jw37VriuXH2cq7H6ygJ0VLiYFHtBIrnQ==
-X-Received: by 2002:a05:6a20:8e0c:b0:18d:10d7:3313 with SMTP id
- y12-20020a056a208e0c00b0018d10d73313mr1571708pzj.20.1703247799839; 
- Fri, 22 Dec 2023 04:23:19 -0800 (PST)
+ bh=Oagcc2Zv4k0si9dN/lqEsLqexrn9/qqPDiS/g5OohqM=;
+ b=WSDlTlsPJEhriOFxRtEGpe9xnf+K9WLWMeWwjcNZVqkAAL5s5mlYfJ2cgLjXBkTd3o
+ I4jDp8Ox5IIcdUURUMzUEAsqxAQTRwpIhb/z3BD+9L4V+2WesSxeVyEkCqW9kxqTCLqP
+ +UQS3sutvc9P8PYxMazrdtpfxwXAogv2CfO2SNb31d1QK94iPW7kJgO9MndTYsDvr1mz
+ u9MhlwuaghddW7ys4uZiGhaF2rHkWoZtnwvYSiERWA1FCEa9dTmsWEjFl416uv+9U9Ep
+ U8QRS6NrI24YB0Fv3/yeJQQbs+tW+nhFNzgJEcyetjD0MYTQctmYmNWeCmf5H9tlMscO
+ KC/A==
+X-Gm-Message-State: AOJu0Yx6G0bBaMQZl8367fwkk8RBCd4Rv2MINe1H3HpG0YQQtnlBwP/M
+ /b1WnGyrHsgm0CR/aWkGGkF1NCgeYKpT8A==
+X-Google-Smtp-Source: AGHT+IGGxm2zC4frts7y71/3cieGAzfB5JBJqX9EODDYa40UrW3bqCKYvm+O8BYa+KmDGdlewxyhJQ==
+X-Received: by 2002:a05:6602:50:b0:7b7:abba:a0d0 with SMTP id
+ z16-20020a056602005000b007b7abbaa0d0mr1204134ioz.43.1703247769819; 
+ Fri, 22 Dec 2023 04:22:49 -0800 (PST)
 Received: from grind.dc1.ventanamicro.com (201-69-66-51.dial-up.telesp.net.br.
  [201.69.66.51]) by smtp.gmail.com with ESMTPSA id
- g14-20020aa7874e000000b006ce7ad8c14esm3274901pfo.164.2023.12.22.04.23.17
+ g14-20020aa7874e000000b006ce7ad8c14esm3274901pfo.164.2023.12.22.04.22.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Dec 2023 04:23:19 -0800 (PST)
+ Fri, 22 Dec 2023 04:22:49 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  ajones@ventanamicro.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v2 13/16] target/riscv: remove riscv_cpu_options[]
-Date: Fri, 22 Dec 2023 09:22:32 -0300
-Message-ID: <20231222122235.545235-14-dbarboza@ventanamicro.com>
+Subject: [PATCH v2 03/16] target/riscv: make riscv_cpu_is_generic() public
+Date: Fri, 22 Dec 2023 09:22:22 -0300
+Message-ID: <20231222122235.545235-4-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20231222122235.545235-1-dbarboza@ventanamicro.com>
 References: <20231222122235.545235-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x433.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d30;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-io1-xd30.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,83 +96,60 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The array is empty and can be removed.
+We'll use this function in target/riscv/cpu.c to implement setters that
+won't allow vendor CPU options to be changed.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- target/riscv/cpu.c         | 5 -----
- target/riscv/cpu.h         | 1 -
- target/riscv/kvm/kvm-cpu.c | 9 ---------
- target/riscv/tcg/tcg-cpu.c | 4 ----
- 4 files changed, 19 deletions(-)
+ target/riscv/cpu.c         | 5 +++++
+ target/riscv/cpu.h         | 1 +
+ target/riscv/tcg/tcg-cpu.c | 5 -----
+ 3 files changed, 6 insertions(+), 5 deletions(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index f30058518a..7b1cc5d0c9 100644
+index 34f7616258..fb3d23b047 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -1860,11 +1860,6 @@ static const PropertyInfo prop_cboz_blksize = {
-     .set_default_value = qdev_propinfo_set_default_value_uint,
- };
+@@ -183,6 +183,11 @@ void isa_ext_update_enabled(RISCVCPU *cpu, uint32_t ext_offset, bool en)
+     *ext_enabled = en;
+ }
  
--Property riscv_cpu_options[] = {
--
--    DEFINE_PROP_END_OF_LIST(),
--};
--
- static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
- 
++bool riscv_cpu_is_generic(Object *cpu_obj)
++{
++    return object_dynamic_cast(cpu_obj, TYPE_RISCV_DYNAMIC_CPU) != NULL;
++}
++
+ const char * const riscv_int_regnames[] = {
+     "x0/zero", "x1/ra",  "x2/sp",  "x3/gp",  "x4/tp",  "x5/t0",   "x6/t1",
+     "x7/t2",   "x8/s0",  "x9/s1",  "x10/a0", "x11/a1", "x12/a2",  "x13/a3",
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 988471c7ba..f06987687a 100644
+index d74b361be6..cfe965e512 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -774,7 +774,6 @@ extern const RISCVCPUMultiExtConfig riscv_cpu_extensions[];
- extern const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[];
- extern const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[];
- extern const RISCVCPUMultiExtConfig riscv_cpu_deprecated_exts[];
--extern Property riscv_cpu_options[];
+@@ -757,6 +757,7 @@ enum riscv_pmu_event_idx {
+ void isa_ext_update_enabled(RISCVCPU *cpu, uint32_t ext_offset, bool en);
+ bool isa_ext_is_enabled(RISCVCPU *cpu, uint32_t ext_offset);
+ void riscv_cpu_set_misa(CPURISCVState *env, RISCVMXL mxl, uint32_t ext);
++bool riscv_cpu_is_generic(Object *cpu_obj);
  
- typedef struct isa_ext_data {
+ typedef struct RISCVCPUMultiExtConfig {
      const char *name;
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 137a8ab2bb..5800abc9c6 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -1443,19 +1443,10 @@ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
- static void kvm_cpu_instance_init(CPUState *cs)
- {
-     Object *obj = OBJECT(RISCV_CPU(cs));
--    DeviceState *dev = DEVICE(obj);
- 
-     riscv_init_kvm_registers(obj);
- 
-     kvm_riscv_add_cpu_user_properties(obj);
--
--    for (Property *prop = riscv_cpu_options; prop && prop->name; prop++) {
--        /* Check if we have a specific KVM handler for the option */
--        if (object_property_find(obj, prop->name)) {
--            continue;
--        }
--        qdev_property_add_static(dev, prop);
--    }
- }
- 
- void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
 diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 84064ef7e0..d3eeedc758 100644
+index 8a35683a34..a09300e908 100644
 --- a/target/riscv/tcg/tcg-cpu.c
 +++ b/target/riscv/tcg/tcg-cpu.c
-@@ -889,10 +889,6 @@ static void riscv_cpu_add_user_properties(Object *obj)
-     riscv_cpu_add_multiext_prop_array(obj, riscv_cpu_experimental_exts);
- 
-     riscv_cpu_add_multiext_prop_array(obj, riscv_cpu_deprecated_exts);
--
--    for (Property *prop = riscv_cpu_options; prop && prop->name; prop++) {
--        qdev_property_add_static(DEVICE(obj), prop);
--    }
+@@ -658,11 +658,6 @@ bool riscv_cpu_tcg_compatible(RISCVCPU *cpu)
+     return object_dynamic_cast(OBJECT(cpu), TYPE_RISCV_CPU_HOST) == NULL;
  }
  
+-static bool riscv_cpu_is_generic(Object *cpu_obj)
+-{
+-    return object_dynamic_cast(cpu_obj, TYPE_RISCV_DYNAMIC_CPU) != NULL;
+-}
+-
  /*
+  * We'll get here via the following path:
+  *
 -- 
 2.43.0
 
