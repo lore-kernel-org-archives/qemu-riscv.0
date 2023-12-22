@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE839C41535
-	for <qemu-riscv@archiver.kernel.org>; Fri, 22 Dec 2023 04:38:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5911C41535
+	for <qemu-riscv@archiver.kernel.org>; Fri, 22 Dec 2023 04:38:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rGXIA-00029x-Vs; Thu, 21 Dec 2023 23:37:47 -0500
+	id 1rGXIW-0002Nw-Tg; Thu, 21 Dec 2023 23:38:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <npiggin@gmail.com>)
- id 1rGXI0-00026V-Mm; Thu, 21 Dec 2023 23:37:36 -0500
-Received: from mail-oi1-x232.google.com ([2607:f8b0:4864:20::232])
+ id 1rGXIN-0002Hp-V2; Thu, 21 Dec 2023 23:37:59 -0500
+Received: from mail-oi1-x22a.google.com ([2607:f8b0:4864:20::22a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <npiggin@gmail.com>)
- id 1rGXHz-0005iY-AS; Thu, 21 Dec 2023 23:37:36 -0500
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-3bb6ed2b913so1131668b6e.2; 
- Thu, 21 Dec 2023 20:37:33 -0800 (PST)
+ id 1rGXIM-0006G0-I0; Thu, 21 Dec 2023 23:37:59 -0500
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-3bb6fc61ce7so985947b6e.3; 
+ Thu, 21 Dec 2023 20:37:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1703219853; x=1703824653; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1703219874; x=1703824674; darn=nongnu.org;
  h=in-reply-to:references:to:from:subject:cc:message-id:date
  :content-transfer-encoding:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6vCrTpKSPPE7AfY3YWMhSKqdsTSH0jQJ5wDqlM3mFIs=;
- b=MJYoP5wqGzXqRgVwqxrZ551gkDuGGF4WMv550+tHc8WGGdW64B9kdIzd01Yt7VWt4m
- NdAgVKy5qXeBKoArg/tq9vplE2KcYQwRlHDhCKwLd9AxAC0xYSEE7J1QZVW0cUhoZrWQ
- 5F3h0R2pVzpp/G79IHJSBnlgff+WPAJBkRomx/24VWu+ASQQtEPFr8PBYY5Lg3EI9txx
- jbM3iZHXBKMIJABJ7VBA/HUCDDsaTBmoSMZk1iTOJMqQ+6eHjscujKfV/plIUDv2EqGQ
- Ioo4zqEstEMNoK1TbrJx9NYPaZeNEsPem52y39oP97P0nthGeXgUKLGMIgVgtGjW/Nvd
- yqlQ==
+ bh=ubXue0ZHyXpELIbpnzirK9Dyfve4h1EaxAGTUFo0d/k=;
+ b=lIAsgvZK8I3EoMGyg43d8nZxR7sdPBKB7PzdcMw+TOJkxgl2c/t/Kniz/529ZTdBYV
+ TRH/ZNae87B3ZBCGwMEN3ky9Xpl6QoF8mERDFVbaxkUjCiFjhNtmtLHM9QZxXwI43pfu
+ 4a4bMcMUrRmp5p373ntQx1CxTodE/YtaO1tFg8OWhn81On03t2pIRJouNjHpEJOK5tK/
+ P3F+HvumJacsAH/nH2BFWdl3JRGBZ/gfsMcDxa0v+BFEg7FMWrUZqxANedZWCoAUjY3h
+ NCVMtPOPmilSFZkkJS+50WAlhlAXnpyp5Oe+9HGCpvOSjJtkHnyrkbTsRv+257Rgd9m3
+ zLfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703219853; x=1703824653;
+ d=1e100.net; s=20230601; t=1703219874; x=1703824674;
  h=in-reply-to:references:to:from:subject:cc:message-id:date
  :content-transfer-encoding:mime-version:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=6vCrTpKSPPE7AfY3YWMhSKqdsTSH0jQJ5wDqlM3mFIs=;
- b=u0HCLWrnQKItgK5ms9tmUzZPnPLGKpieGYeCAobBWn7dEfrcgCbLWJIBI8DrQkm8m7
- PjtHtN/zZokGw+VDGFppebcF2swODQSFaHUr0M1/BvIAEPTeOzjLqXRo26OEY/mif90w
- KCaGgHDD9JCqbyoHSzx4gdeGkhcgeZ/IXEMYLSByNaK8V8KDmiFs+pQwlK38P2DvbgbG
- a0iPxIRb8NoZ0rZ9aDyZBDWyXulQ4Ht2AzrlUyam+wJpS/6tRZO2ZZhCMLOwOGzjSdMu
- WRSEvu6mOCEcEi1eTi4ZAjgifdHdfRqFxPnhOqQkO3YTrFpWMnY3jVSnY1H1V3Piq2xr
- z5gQ==
-X-Gm-Message-State: AOJu0Yy9JkjOsopNhvRV7xlix0L41mNzuPvaZIjfWKkKl7v0r14R2mYN
- cbyhYHKKtrkzN5NHMnc4CRE=
-X-Google-Smtp-Source: AGHT+IHyqKiLgDwap+e6Ff1oyWMkk2SvYahvVlCSei8SjPQGCsfhaHRHE2GxXfgIrKsVJYfS3tj9YA==
-X-Received: by 2002:a05:6359:4c19:b0:170:ec2e:4367 with SMTP id
- kj25-20020a0563594c1900b00170ec2e4367mr1074635rwc.1.1703219852827; 
- Thu, 21 Dec 2023 20:37:32 -0800 (PST)
+ bh=ubXue0ZHyXpELIbpnzirK9Dyfve4h1EaxAGTUFo0d/k=;
+ b=i8luFN60zuU2bFLGXQsrZ5HVGJ3e+xeLYr+cWEgJ7buNdUEOWU3bAvRJ9J4uH1Zv6V
+ SVFyn+EP4Ucu92vcE8QMElwcWIQGxL9PwXbk2fw+TKRx07CFBrafZhYhaj19xIgMvnty
+ AGJJ2wLh/juAYQsdSqxNDoP7qaTNFmyv6fBep1ODQ/zTttA2CczA2+yPcbbBEi1hA3FS
+ gNC+n4P6XFuuqwYJoCohOOfyf622qILtvm3FxVv+Xfko9EhEo8879sllYjLDpgdezmpz
+ BzrSJYm5pbHcIDLMWq0FBkcloJdq6RhU43y0/1c0ueZAUtE1AgdFhc7Y8IvNqhEPw+lS
+ pJBg==
+X-Gm-Message-State: AOJu0YwfrPCJWqJRfSG6QVn7b5jCLxaxKC15jRfjGhkCKXGmkEj9U9Uo
+ /ooTORDagzWD3e33prBUz+M=
+X-Google-Smtp-Source: AGHT+IF7n4AUbnBmECv575kazZeQ++dtW9tAC2x/p6q/pARNv7y29BoLqvElYyZiMFOUNvxEZ23OQA==
+X-Received: by 2002:a05:6808:128a:b0:3bb:7174:eb with SMTP id
+ a10-20020a056808128a00b003bb717400ebmr926627oiw.60.1703219874450; 
+ Thu, 21 Dec 2023 20:37:54 -0800 (PST)
 Received: from localhost ([1.146.126.39]) by smtp.gmail.com with ESMTPSA id
- d18-20020a17090b005200b0028b2ff2208esm6384674pjt.19.2023.12.21.20.37.21
+ y22-20020a056a00191600b006cef521b151sm2433777pfi.168.2023.12.21.20.37.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 Dec 2023 20:37:32 -0800 (PST)
+ Thu, 21 Dec 2023 20:37:54 -0800 (PST)
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 22 Dec 2023 14:37:19 +1000
-Message-Id: <CXUL1KDTLCWC.3N2HSO3O5U9LM@wheely>
+Date: Fri, 22 Dec 2023 14:37:42 +1000
+Message-Id: <CXUL1V42EKAH.2TYZ3ZFJPHGZ5@wheely>
 Cc: "Ilya Leoshkevich" <iii@linux.ibm.com>, "Peter Xu" <peterx@redhat.com>,
  "Liu Zhiwei" <zhiwei_liu@linux.alibaba.com>, "Peter Maydell"
  <peter.maydell@linaro.org>, "Mark Cave-Ayland"
@@ -72,20 +72,18 @@ Cc: "Ilya Leoshkevich" <iii@linux.ibm.com>, "Peter Xu" <peterx@redhat.com>,
  Losh" <imp@bsdimp.com>, "Claudio Fontana" <cfontana@suse.de>, "Brian Cain"
  <bcain@quicinc.com>, "Daniel Henrique Barboza" <danielhb413@gmail.com>,
  "Richard Henderson" <richard.henderson@linaro.org>, "Thomas Huth"
- <thuth@redhat.com>, =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
- "David Gibson" <david@gibson.dropbear.id.au>, "Harsh Prateek Bora"
- <harshpb@linux.ibm.com>
-Subject: Re: [PATCH 09/24] hw/ppc/spapr_hcall: Remove unused
- 'exec/exec-all.h' included header
+ <thuth@redhat.com>, =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>
+Subject: Re: [PATCH 17/24] target/ppc/excp_helper: Avoid 'abi_ptr' in system
+ emulation
 From: "Nicholas Piggin" <npiggin@gmail.com>
 To: =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  <qemu-devel@nongnu.org>
 X-Mailer: aerc 0.15.2
 References: <20231211212003.21686-1-philmd@linaro.org>
- <20231211212003.21686-10-philmd@linaro.org>
-In-Reply-To: <20231211212003.21686-10-philmd@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::232;
- envelope-from=npiggin@gmail.com; helo=mail-oi1-x232.google.com
+ <20231211212003.21686-18-philmd@linaro.org>
+In-Reply-To: <20231211212003.21686-18-philmd@linaro.org>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::22a;
+ envelope-from=npiggin@gmail.com; helo=mail-oi1-x22a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -109,25 +107,31 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On Tue Dec 12, 2023 at 7:19 AM AEST, Philippe Mathieu-Daud=C3=A9 wrote:
+> 'abi_ptr' is a user specific type. The system emulation
+> equivalent is 'target_ulong'. Use it in ppc_ldl_code()
+> to emphasis this is not an user emulation function.
+>
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 
 Acked-by: Nicholas Piggin <npiggin@gmail.com>
 
 > ---
->  hw/ppc/spapr_hcall.c | 1 -
->  1 file changed, 1 deletion(-)
+>  target/ppc/excp_helper.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/hw/ppc/spapr_hcall.c b/hw/ppc/spapr_hcall.c
-> index 522a2396c7..fcefd1d1c7 100644
-> --- a/hw/ppc/spapr_hcall.c
-> +++ b/hw/ppc/spapr_hcall.c
-> @@ -8,7 +8,6 @@
->  #include "qemu/main-loop.h"
->  #include "qemu/module.h"
->  #include "qemu/error-report.h"
-> -#include "exec/exec-all.h"
->  #include "exec/tb-flush.h"
->  #include "helper_regs.h"
->  #include "hw/ppc/ppc.h"
+> diff --git a/target/ppc/excp_helper.c b/target/ppc/excp_helper.c
+> index a42743a3e0..3d7c9bbf1a 100644
+> --- a/target/ppc/excp_helper.c
+> +++ b/target/ppc/excp_helper.c
+> @@ -142,7 +142,7 @@ static inline bool insn_need_byteswap(CPUArchState *e=
+nv)
+>      return !!(env->msr & ((target_ulong)1 << MSR_LE));
+>  }
+> =20
+> -static uint32_t ppc_ldl_code(CPUArchState *env, abi_ptr addr)
+> +static uint32_t ppc_ldl_code(CPUArchState *env, target_ulong addr)
+>  {
+>      uint32_t insn =3D cpu_ldl_code(env, addr);
+> =20
 
 
