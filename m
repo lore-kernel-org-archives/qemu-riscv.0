@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF800C46CD4
-	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Dec 2023 09:11:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54C8EC46CD3
+	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Dec 2023 09:22:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rI3SU-0005yP-NE; Tue, 26 Dec 2023 04:10:42 -0500
+	id 1rI3d2-0007Vn-V4; Tue, 26 Dec 2023 04:21:36 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rI3ST-0005y4-Ht
- for qemu-riscv@nongnu.org; Tue, 26 Dec 2023 04:10:41 -0500
-Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
+ id 1rI3d0-0007Uu-Pb
+ for qemu-riscv@nongnu.org; Tue, 26 Dec 2023 04:21:34 -0500
+Received: from mail-pg1-x531.google.com ([2607:f8b0:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rI3SR-0005tx-UN
- for qemu-riscv@nongnu.org; Tue, 26 Dec 2023 04:10:41 -0500
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-1d422c9f894so22460745ad.3
- for <qemu-riscv@nongnu.org>; Tue, 26 Dec 2023 01:10:39 -0800 (PST)
+ id 1rI3cy-0007Xi-Om
+ for qemu-riscv@nongnu.org; Tue, 26 Dec 2023 04:21:34 -0500
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-5ce10b5ee01so815457a12.1
+ for <qemu-riscv@nongnu.org>; Tue, 26 Dec 2023 01:21:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1703581838; x=1704186638; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=ventanamicro.com; s=google; t=1703582491; x=1704187291; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=mo87ThT8zpRzFLT7CFeYA/PuMRY8PpwdibPow0743bc=;
- b=kOQzZZchkxEQtTDVO9ruguBY4HHLuAg2vMbcxi9JT1FozzhbHTu8eGTZ6VwqupDGR+
- dis95p0HOwmhYD6s48ftqktRkOfA0tuTEmHSf2TfW3smn5cWanaUHxZgVfe2VkPApV8H
- D4wESX+olgoG95uNrPSoL9nAWjOVKWBfIPdheJmF3eWhVFf2hOOPZ21Je/GldWbjA5cL
- Dzf9LSD6q9d2JJmu4h/chPHKKBIuOXG2+sCG0FrQkXADi8qEYXuvWA928k5+hXrdQIQl
- xf/w5jE14jS+Nmi2f/tpUg6gUg9nWB4yM1lYP4mI3bDTAfjCwJy0hPs1YRZ/hczlDxi0
- xAfA==
+ bh=WRFhmqa4MVy3cGMvRBHO+TZSMH0tR1rOwEbQqCyrZWk=;
+ b=Y68h4Gj3SXampDAefnf8AIKfOBzKT+jv/1zS1rhJ6xWpmzeZlL3U1BbWdolAa6NgP3
+ 8RHlE9bQ/zA/spRqU8EjYSccQr31a+NPt4gO1sByF0OLJ539kXyQU+dwbia0FulswCtP
+ xcVeM4PZKYzAtH2kf1gApq3Y84AHvTfLhyN4KV6DZ7vh4fnMVJkmQc6MDgv7AR6DtCvB
+ /QmWnyayOjbfjAxOBZOxlAExKicvwnsPsJRnIScBqQCioT7cuTl460gt5S7GbNKU4S5b
+ fKcQaa+Xv4wLfqDS83fVv/qDWavg2LMS1sk4tQrMGWxhhzzk1PXrVVr2JJ0FVjxhMunP
+ KH/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703581838; x=1704186638;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1703582491; x=1704187291;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=mo87ThT8zpRzFLT7CFeYA/PuMRY8PpwdibPow0743bc=;
- b=McfOQQenuO0/IcrhAb1154RRnRxerQHl/LewXuVt15sFd8+3E5pRzzyIGJdbqfpNV1
- r2T/NlZSYmgBkU1LhbEpoJLO5ZTkrMPX2ZHAKu1aRTrcMYdppfa0sLN7poIy1BfTJMXt
- 5txqzCwyDJUUR3bLmOuZOBT3+grB68M/3BSQyGQ6eglDimsNZ4kQ9E+eNoUIb2SiqQcV
- swQrhIHlGSLlnkwZslBp6+nlm2Iie+GK2r2eRoikX5Val/niy0chMzeHUDP0M6plx21z
- B4yJPCWdGtDnL+jyEej29w5/76uqxC2bqFiGnBMdI1EvKl17RRcknj9DqLl/kqn8CJ7e
- B1wA==
-X-Gm-Message-State: AOJu0YyMfH1OAyxQ125Y63I2jxQNpDk5u0hZUZRSS28jWN3ZNXrmk38m
- 3k+06fAlYdqgUPPUiPD6/3uycW47fCvSRw==
-X-Google-Smtp-Source: AGHT+IFL/nq4K8DwFm+OjEO4ndItYAU30rsqYozp1vAh22BO8uu2O0mJ91XuKbKTK5mK/jkNo2RjCw==
-X-Received: by 2002:a17:903:4290:b0:1d4:ad0:24ad with SMTP id
- ju16-20020a170903429000b001d40ad024admr6678876plb.28.1703581838037; 
- Tue, 26 Dec 2023 01:10:38 -0800 (PST)
+ bh=WRFhmqa4MVy3cGMvRBHO+TZSMH0tR1rOwEbQqCyrZWk=;
+ b=I1NT+34jqC8wVx4g142ngm1HGGHdNTFM155UOXmtXfSKL6hDadf2PCZyjSIcijEejY
+ /44pCudZsFHnJuUDLbfiEf2nVWf4YopB9d3sB+AgJnTjX1u7bthZOUBlsdhQ3m8W5Okb
+ VC3JQhdPZySFcFZLeh1c+98/AKtWY75wBLYHojt/HTWSW2zCBuW2PXXGtV3AAVQKZ6Vl
+ 4j4d+60B+itluPSb7sWMp0gcju+JcgsSinutkDF47dr6adHHCsYfme1ZUXsaL1ft2kZz
+ UgsXNalJ/RDSz3YmIMg0/fKAe3ibB5lX8+vGUqX5ilYZADZTDGV9agWu7S27UWg0f5Ws
+ XKcQ==
+X-Gm-Message-State: AOJu0YwDxEUBen1sNh/EL42NUC8OEUqLwNHYzAc4HKGLm0OVPe7U5Hfr
+ imzao/NRF8KKToAt/hfwmM8JKia9wvIHj0Ai5nHaHCy++2cHew==
+X-Google-Smtp-Source: AGHT+IEgMHnCzA+EkexEZYpDMqJW9oyeFr6JSN/z6gOSvzT6ChCR6XgNK7T2DVN8e9J8h6rzgOvyiQ==
+X-Received: by 2002:a05:6a20:3d1a:b0:18f:97c:384e with SMTP id
+ y26-20020a056a203d1a00b0018f097c384emr8617249pzi.40.1703582490723; 
+ Tue, 26 Dec 2023 01:21:30 -0800 (PST)
 Received: from [192.168.68.110] (201-69-66-51.dial-up.telesp.net.br.
  [201.69.66.51]) by smtp.gmail.com with ESMTPSA id
- ok13-20020a17090b1d4d00b0028aea6c24bcsm14284382pjb.53.2023.12.26.01.10.34
+ d12-20020a631d0c000000b005cdc081bd2asm8938462pgd.24.2023.12.26.01.21.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 26 Dec 2023 01:10:37 -0800 (PST)
-Message-ID: <0a479e8b-c08d-43b9-be2c-d1e7c2372811@ventanamicro.com>
-Date: Tue, 26 Dec 2023 06:10:31 -0300
+ Tue, 26 Dec 2023 01:21:30 -0800 (PST)
+Message-ID: <4b3554bd-3d7b-46dc-a873-b6c7af1357a0@ventanamicro.com>
+Date: Tue, 26 Dec 2023 06:21:23 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] target/riscv: Fix mcycle/minstret increment behavior
-Content-Language: en-US
 To: Xu Lu <luxu.kernel@bytedance.com>, palmer@dabbelt.com,
  alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, lihangjing@bytedance.com,
- xieyongji@bytedance.com
+ xieyongji@bytedance.com, qemu-trivial@nongnu.org,
+ Michael Tokarev <mjt@tls.msk.ru>
 References: <20231226040500.82813-1-luxu.kernel@bytedance.com>
+Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 In-Reply-To: <20231226040500.82813-1-luxu.kernel@bytedance.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x531.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -98,22 +99,23 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Michael,
 
+This is a good candidate for qemu-trivial. Already acked.
+
+
+Thanks,
+
+Daniel
 
 On 12/26/23 01:05, Xu Lu wrote:
 > The mcycle/minstret counter's stop flag is mistakenly updated on a copy
 > on stack. Thus the counter increments even when the CY/IR bit in the
 > mcountinhibit register is set. This commit corrects its behavior.
 > 
-
-Good catch.
-
 > Fixes: 3780e33732f88 (target/riscv: Support mcycle/minstret write operation)
 > Signed-off-by: Xu Lu <luxu.kernel@bytedance.com>
 > ---
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
 >   target/riscv/csr.c | 14 +++++++-------
 >   1 file changed, 7 insertions(+), 7 deletions(-)
 > 
