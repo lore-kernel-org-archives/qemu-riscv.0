@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F750C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Thu, 28 Dec 2023 23:34:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B1CCC3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Thu, 28 Dec 2023 23:35:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rIzsz-0006yx-8d; Thu, 28 Dec 2023 18:33:57 -0500
+	id 1rIzuO-0007ev-84; Thu, 28 Dec 2023 18:35:24 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rIzsx-0006yT-N8
- for qemu-riscv@nongnu.org; Thu, 28 Dec 2023 18:33:55 -0500
-Received: from mail-oi1-x233.google.com ([2607:f8b0:4864:20::233])
+ id 1rIzuN-0007eg-EI
+ for qemu-riscv@nongnu.org; Thu, 28 Dec 2023 18:35:23 -0500
+Received: from mail-pg1-x52c.google.com ([2607:f8b0:4864:20::52c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rIzsv-00012n-L5
- for qemu-riscv@nongnu.org; Thu, 28 Dec 2023 18:33:55 -0500
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-3bbc7746812so1428692b6e.2
- for <qemu-riscv@nongnu.org>; Thu, 28 Dec 2023 15:33:53 -0800 (PST)
+ id 1rIzuL-0001Sl-PE
+ for qemu-riscv@nongnu.org; Thu, 28 Dec 2023 18:35:23 -0500
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-5bdbe2de25fso5028073a12.3
+ for <qemu-riscv@nongnu.org>; Thu, 28 Dec 2023 15:35:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703806432; x=1704411232; darn=nongnu.org;
+ d=linaro.org; s=google; t=1703806520; x=1704411320; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=XqdW2jYMosMWBr/zRbtSmLUfAk/mJ9qyLcxKlP+ZplU=;
- b=oHDPg+IxHx65MraDYrGoNh66wznsVqHz8zaIdJoTpmkyIpyYSxvIBBjDGr7mm9rcQn
- 0hYEEjnrXfnfbs8W1stiiJk9rRSyNSaTSv1XuSTntYb6V2FVzniPU7LN9nBpVoGjb1Da
- Rfwpx6UemQHD+ypEBt9iPbxyF0Hz6bCkwZmv6PHgIiXVsyKXaZO/dt9/VYhvf+WUwvXs
- s42qlDKL2r8jYJ29YLDChZb3dsKKxOhslrF3oN8IOHiKTPP0sP3cV2lBgqlBkUqOpIim
- zXvwWtZIi9oc7jJcc6YSVAt19+Wx8Nq5+TJe40ZLgWI8pZAYGC37+SbFBOSWi1l+ddz4
- mISw==
+ bh=W2CVuWjc0aHfQ2kxa8isvUI7TnL7fKIOqCue126Pnis=;
+ b=zhqcNRMoUXCCwCgc6yyqBNnCTa8TQ8H/z0oT+Slwp8S+QIxgbQW7TrrBMXgr2tqML6
+ 1UYV41i9+Z7VCTd1WAcI9P869aHcmuwNg0dXVDjRYpckRdjG/m8K5fxSKgPHEyMnenLZ
+ laGUtK9HHpTzH9muNmPvs951BIDc5VyDvojXYf5D9cczG4Rz7XOmVDBbr3KDwsPmpum7
+ 2wkgk6wNv9ydt9OQpT6+mtdJUgVVbIe4AVzoqeoU6tWvUQJkG/xannJVDeE7VGYkubEq
+ MnvGPJolBq8Z1OVt7g2ApwPjpKAQ4tJ3JOoQ1OniWxT6zohCthcYMR2HOUwpwDhT4vG4
+ LDow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703806432; x=1704411232;
+ d=1e100.net; s=20230601; t=1703806520; x=1704411320;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=XqdW2jYMosMWBr/zRbtSmLUfAk/mJ9qyLcxKlP+ZplU=;
- b=rW7xFn3dmEiGuBDER1/r4U4/T+Y0LtIhcAN8yLkhdOeGMWzh0ShHpfr1ToG2lmQzi5
- DFdSyrueN96Mc+ECzr6N3d3Kxw0xjIftPvykhvImw35lZgEeye1GZtdWj3olgeiSpQVb
- mdOGGOq4e6GuaTNEG2AnVdaQPrEYSfkGkVHdrqYB8U3SbKspauQlmunux1Tb0AURvkJW
- fV0qwug7DCI0fIJhYAndJoGeNCEq6u1lqBjPfDSrvKdVWgB3mMz1ucceq/qSWmwG6GOV
- 4MFcljpWNgnwxVlkB2CZC5eWllNQTu5596jyeQ2rOaM3ky9qBzVH1E8jWjAvip0wS0un
- Ot0Q==
-X-Gm-Message-State: AOJu0Yy2am1gx+6bT24t91cTbHNtYIUmMlIMsPd/cCZAP2erwo7GeZNq
- Q6piq9ZqY/FQ4PCgVrvuIlRwa8IoojDFWQ==
-X-Google-Smtp-Source: AGHT+IFNgPp1e4EyZEuStzvgU676fjg9bEHnnsnwFIlcvtE565e0WCboTTP46wPVSy8wjWb8brq2YA==
-X-Received: by 2002:a05:6808:228a:b0:3bb:b9d1:aabe with SMTP id
- bo10-20020a056808228a00b003bbb9d1aabemr6243421oib.4.1703806432115; 
- Thu, 28 Dec 2023 15:33:52 -0800 (PST)
+ bh=W2CVuWjc0aHfQ2kxa8isvUI7TnL7fKIOqCue126Pnis=;
+ b=RTn/sCXSOM9pr5/qdbxfaj6KgT2C+jKumEOr9mwmfVQw4dZ0lqf37ErKpzJ9G4ZYrM
+ 43/tbGViZLaBEev9J31IYz4ecuuyc4oNOz796naaq6HDy/MAulQ5Ye0Eg5FtcbXPZSEV
+ mCJPU0245PKPqWOQXg/Ertikh6dQHjfvHQzh2bKz5V9VY9zWrg2mrVOAaREPTQAa045B
+ dyQeOnnqUaXjA0H+Yc01eGyPmse9fewfmH4optKpRCTfxpr5D3YMdiXlNmlWknP1V8WP
+ RiVLYZ/Mfx638WdXHNoeFinn2rm0Q31DY0cdKj1fzIZEtoljyBjDmwHAB40QvnvCMOlu
+ VwiA==
+X-Gm-Message-State: AOJu0YwMG0BPFAXn4UseU85QYnrhGZyYa0c9O5rrm/523HeTeqd3YB6A
+ KBmMEhtl/kri8BRnpJZIilylz3XpDEffPQ==
+X-Google-Smtp-Source: AGHT+IGwZbxNDOHL1fj5BFEnqxoeXRhlxPqAm5pA9TtMUKc1GgjZ/Ko773iRlU35YJSkRaClZy7+UQ==
+X-Received: by 2002:a05:6a20:3caa:b0:196:23dd:15c5 with SMTP id
+ b42-20020a056a203caa00b0019623dd15c5mr3828975pzj.113.1703806520397; 
+ Thu, 28 Dec 2023 15:35:20 -0800 (PST)
 Received: from ?IPV6:2001:8003:c020:6900:324d:cbc2:5f8b:3a9d?
  ([2001:8003:c020:6900:324d:cbc2:5f8b:3a9d])
  by smtp.gmail.com with ESMTPSA id
- e27-20020a056a0000db00b006d9bf71461asm7105954pfj.86.2023.12.28.15.33.48
+ e27-20020a056a0000db00b006d9bf71461asm7105954pfj.86.2023.12.28.15.35.16
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 28 Dec 2023 15:33:51 -0800 (PST)
-Message-ID: <10c1404a-dff6-4f1e-95f6-9273d4e53c75@linaro.org>
-Date: Fri, 29 Dec 2023 10:33:44 +1100
+ Thu, 28 Dec 2023 15:35:20 -0800 (PST)
+Message-ID: <127b5fc3-b852-4d5c-b53b-1fafcf22cd1f@linaro.org>
+Date: Fri, 29 Dec 2023 10:35:15 +1100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/6] target/riscv: Add pointer masking tb flags
+Subject: Re: [PATCH v2 3/6] target/riscv: Add helper functions to calculate
+ current number of masked bits for pointer masking
 Content-Language: en-US
 To: Alexey Baturo <baturo.alexey@gmail.com>
 Cc: zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
  Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
  kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 References: <20231224044812.2072140-1-me@deliversmonkey.space>
- <20231224044812.2072140-5-me@deliversmonkey.space>
+ <20231224044812.2072140-4-me@deliversmonkey.space>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20231224044812.2072140-5-me@deliversmonkey.space>
+In-Reply-To: <20231224044812.2072140-4-me@deliversmonkey.space>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::233;
- envelope-from=richard.henderson@linaro.org; helo=mail-oi1-x233.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -104,47 +105,74 @@ On 12/24/23 15:48, Alexey Baturo wrote:
 > 
 > Signed-off-by: Alexey Baturo <baturo.alexey@gmail.com>
 > ---
->   target/riscv/cpu.h        | 15 +++++++++------
->   target/riscv/cpu_helper.c |  3 +++
->   target/riscv/translate.c  |  5 +++++
->   3 files changed, 17 insertions(+), 6 deletions(-)
+>   target/riscv/cpu.h        |  4 +++
+>   target/riscv/cpu_helper.c | 54 +++++++++++++++++++++++++++++++++++++++
+>   2 files changed, 58 insertions(+)
 > 
 > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index c607a94bba..038b86db4b 100644
+> index bd379ee653..c607a94bba 100644
 > --- a/target/riscv/cpu.h
 > +++ b/target/riscv/cpu.h
-> @@ -538,14 +538,17 @@ FIELD(TB_FLAGS, VILL, 14, 1)
->   FIELD(TB_FLAGS, VSTART_EQ_ZERO, 15, 1)
->   /* The combination of MXL/SXL/UXL that applies to the current cpu mode. */
->   FIELD(TB_FLAGS, XL, 16, 2)
-> -FIELD(TB_FLAGS, VTA, 18, 1)
-> -FIELD(TB_FLAGS, VMA, 19, 1)
-> +/* If pointer masking should be applied and address sign extended */
-> +FIELD(TB_FLAGS, PM_PMM, 18, 2)
-> +FIELD(TB_FLAGS, PM_SIGNEXTEND, 20, 1)
-> +FIELD(TB_FLAGS, VTA, 21, 1)
-> +FIELD(TB_FLAGS, VMA, 22, 1)
->   /* Native debug itrigger */
-> -FIELD(TB_FLAGS, ITRIGGER, 20, 1)
-> +FIELD(TB_FLAGS, ITRIGGER, 23, 1)
->   /* Virtual mode enabled */
-> -FIELD(TB_FLAGS, VIRT_ENABLED, 21, 1)
-> -FIELD(TB_FLAGS, PRIV, 22, 2)
-> -FIELD(TB_FLAGS, AXL, 24, 2)
-> +FIELD(TB_FLAGS, VIRT_ENABLED, 24, 1)
-> +FIELD(TB_FLAGS, PRIV, 25, 2)
-> +FIELD(TB_FLAGS, AXL, 27, 2)
+> @@ -672,6 +672,10 @@ static inline uint32_t vext_get_vlmax(RISCVCPU *cpu, target_ulong vtype)
+>   void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+>                             uint64_t *cs_base, uint32_t *pflags);
+>   
+> +bool riscv_cpu_bare_mode(CPURISCVState *env);
+> +RISCVPmPmm riscv_pm_get_pmm(CPURISCVState *env);
+> +int riscv_pm_get_pmlen(RISCVPmPmm pmm);
+> +
+>   RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
+>                              target_ulong *ret_value,
+>                              target_ulong new_value, target_ulong write_mask);
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index a3d477d226..47f325294e 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -139,6 +139,60 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+>       *pflags = flags;
+>   }
+>   
+> +RISCVPmPmm riscv_pm_get_pmm(CPURISCVState *env)
+> +{
+> +#ifndef CONFIG_USER_ONLY
+> +    int priv_mode = cpu_address_mode(env);
+> +    int pmm = 0;
+> +    /* Get current PMM field */
+> +    switch (priv_mode) {
+> +    case PRV_M:
+> +        pmm = riscv_cpu_cfg(env)->ext_smmpm ?
+> +                  get_field(env->mseccfg, MSECCFG_PMM) : PMM_FIELD_DISABLED;
+> +        break;
+> +    case PRV_S:
+> +        pmm = riscv_cpu_cfg(env)->ext_smnpm ?
+> +                  get_field(env->menvcfg, MENVCFG_PMM) : PMM_FIELD_DISABLED;
+> +        break;
+> +    case PRV_U:
+> +        pmm = riscv_cpu_cfg(env)->ext_ssnpm ?
+> +                  get_field(env->senvcfg, SENVCFG_PMM) : PMM_FIELD_DISABLED;
+> +        break;
+> +    default:
+> +        g_assert_not_reached();
+> +    }
+> +    return pmm;
+> +#endif
+> +}
+> +
+> +bool riscv_cpu_bare_mode(CPURISCVState *env)
+> +{
+> +#ifndef CONFIG_USER_ONLY
+> +    int satp_mode = 0;
+> +    if (riscv_cpu_mxl(env) == MXL_RV32) {
+> +        satp_mode = get_field(env->satp, SATP32_MODE);
+> +    } else {
+> +        satp_mode = get_field(env->satp, SATP64_MODE);
+> +    }
+> +    return (satp_mode == VM_1_10_MBARE);
+> +#endif
+> +}
 
-Any particular reason to add these in the middle?
-
-Something to consider as a somewhat unrelated cleanup would be to add an eighth MMUIdx for 
-MMUIdx_M + no translation.  This would be used both for MBARE and internally within 
-get_physical_address for accessing PTEs.  See also the ptw_translate cleanups in 
-target/i386 for atomic PTE updates (4a1e9d4d11cd).
-
-At which point PM_SIGNEXTEND can be replaced by a test vs mmu_idx, saving a bit in tb_flags.
-
-Something for later, anyway.
+You can't leave these with no return statement for CONFIG_USER_ONLY.
+You probably don't need the ifdef at all, come to that.
 
 
 r~
