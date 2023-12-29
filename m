@@ -4,76 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29A1AC3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Fri, 29 Dec 2023 00:50:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C212C3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Fri, 29 Dec 2023 00:50:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rJ14L-00074r-2a; Thu, 28 Dec 2023 19:49:45 -0500
+	id 1rJ14R-00079Q-Gn; Thu, 28 Dec 2023 19:49:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1rJ14I-000736-4B
- for qemu-riscv@nongnu.org; Thu, 28 Dec 2023 19:49:42 -0500
-Received: from mail-oa1-x34.google.com ([2001:4860:4864:20::34])
+ id 1rJ14K-000746-Cv
+ for qemu-riscv@nongnu.org; Thu, 28 Dec 2023 19:49:44 -0500
+Received: from mail-oi1-x22c.google.com ([2607:f8b0:4864:20::22c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1rJ14F-0003XZ-3e
- for qemu-riscv@nongnu.org; Thu, 28 Dec 2023 19:49:41 -0500
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-204ec50010eso767507fac.3
- for <qemu-riscv@nongnu.org>; Thu, 28 Dec 2023 16:49:38 -0800 (PST)
+ id 1rJ14H-0003Xy-Ss
+ for qemu-riscv@nongnu.org; Thu, 28 Dec 2023 19:49:43 -0500
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-3bbc5636b8eso1069304b6e.2
+ for <qemu-riscv@nongnu.org>; Thu, 28 Dec 2023 16:49:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1703810978; x=1704415778;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1703810980; x=1704415780;
  darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=gvkcXGMKJhei6A4C5VxcjXDsgHP4Nqs2chK3cpMCHlw=;
- b=q0abwfHTdGdCr8XVdlXfgvRhcjSOYj2kF/nKq2w35Gwr0fZsXzBK+rKPXsa0PL1Ci8
- V8WCf8lxy1/0z2BT0ofsZzXm72BOOqlvN0e2gTAHeNM/uL4rh27+AwGy7nqint+stV1f
- X703vEoBWbXX7UhI5pGZvwwBjJ62XkHM7YbE1swB55c3dnDwssnfK8rexPYbOWPWV8DL
- dgp/6/33lqtTLMJ4L9RQPy7ggoTcq4AvgfkYvxwwIGzXTbSY2nUUDVNW1F6U5Di675Ah
- qhY76KSx+iHywD2dG1us5/nKd82h0jgKGo0YjGgc1tVbc2+0psBheSlsQkuAUpKT6r7L
- RVqg==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=AVDVq7i2S5ZvAV5+/0uStEZfRYh+joB7RC2I6xYSmWs=;
+ b=pLEklrLMcGH4kA7Rg3InuPLfFmWVtoY/E+ML65js05ds9ZPx+gaVkiXqofR7HEKyw0
+ i51aODLzO8rBmrHeI9aAunKPpECBhoZDlDF5RUkjIYMA+YXQeIMINqtgEf+6LHI4f+DK
+ u8GJZamnpGHUrchYdjSNFNjYK3U9w+/K9zZYGX70jzFML9gqjfZ2HiMOHGNuikdfqTh2
+ kC6rTYCWsuyUIqOi4SyA6uLJ+eRzNPokdXU4BiBDebDb7HRAg//k6yO5aKPGFr84CV/L
+ zBKZPsNPtTzKKb+u2nw6adrEujNhMbds4afBbkcjZoBhK3P1TBTcUqU62k4XwBNiaJlu
+ Ww8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703810978; x=1704415778;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gvkcXGMKJhei6A4C5VxcjXDsgHP4Nqs2chK3cpMCHlw=;
- b=jknYN02InNT5VFUg3EKuQs6WLZTBhL3yK401dLKVqGo4Eaue71rljqXZjlOeJdAMf+
- SPlJNKSutqzc/R17/sRKteCbZJ6s4tGKIWOKT+LyktVN+IZTHAjF5q7yY+eIVbf0rgyO
- FY3hp40aQ1tRkKVJEQnc0+rXntz8agnCO8rAMRKxODzGvJVN0B60LxqF2D6JJe8oEVOn
- 4xP4eRv6QFMGaoMoqoXzwA6me2RiWCDXmKbianGinBmdS74NrAHidCP7rmXmMV2jpMXa
- mLG5zHRG/f7kfXNiy4sFZb1dotjMn4uIcsCA8F8TQz7JabEw56iakEX5Fe1RK8tSbD9J
- AcKA==
-X-Gm-Message-State: AOJu0YxRGttuZEsM11aCJwlm0FCGhxFSA+Bf+1RhRFVSssqMZJOY8o8A
- ocTcfsTu6pflfJ9cqN+LjpKsucBtvkSKMQ==
-X-Google-Smtp-Source: AGHT+IFDFsH38N4Fr6QwiwrXJhhnkFArHgjIiNHhews2+8PIMZxLWUatkO2qy50ABGGp+1pglHVwiA==
-X-Received: by 2002:a05:6870:7087:b0:204:70b3:97d5 with SMTP id
- v7-20020a056870708700b0020470b397d5mr6922097oae.78.1703810977761; 
- Thu, 28 Dec 2023 16:49:37 -0800 (PST)
+ d=1e100.net; s=20230601; t=1703810980; x=1704415780;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=AVDVq7i2S5ZvAV5+/0uStEZfRYh+joB7RC2I6xYSmWs=;
+ b=BhjjTkZ9BpRFHiS8JJ5u8h4rZtUm7QyBfsFdoaLRTzvJC1L5K3lzFommEmxQhdGuub
+ LeOgw3Bz8aXA7To7aaWJZQqr7pnYzVWTGv+BORPr5ryQSy87rJUDszRw4F0dlkbZk/Ly
+ 1yvXcDVnpHTDqGPX/WX7YZt9bNCTboXk/nRepqYfDpfDB8dcIoGd5MIJZ6ULQ5LQtoLB
+ esz5EGSMOcG0D4qcai4RoCzbw2O2kYT1CT2CHSw+2pXFIGpfjcEgCmqXyiNKlsXx9N7H
+ 6mm/X7A4imunREJEKht9Rc6ich8JJ1H0YVFkUREwE0T36aRwd78NIF1O3sEwkUfI+eJ8
+ N5/Q==
+X-Gm-Message-State: AOJu0YzEUpty36TJb4VYAlbeKQ3bZap5483Wi7Lr67YTnV0rbV45ZGw2
+ SEDNKG4z6FFPe2vdfpQIW941s4bwdPhOrA==
+X-Google-Smtp-Source: AGHT+IHWb9ejX4nvJMZdiv+nytwJIMdIVj9026wj8WCQ11QoIxppgyIV+Hh28xeMB/3hSSYLmoEDtg==
+X-Received: by 2002:a05:6870:3b1b:b0:1fb:75b:2b87 with SMTP id
+ gh27-20020a0568703b1b00b001fb075b2b87mr6338096oab.67.1703810980436; 
+ Thu, 28 Dec 2023 16:49:40 -0800 (PST)
 Received: from atishp.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- ms25-20020a0568706b9900b0020463640518sm2636007oab.14.2023.12.28.16.49.36
+ ms25-20020a0568706b9900b0020463640518sm2636007oab.14.2023.12.28.16.49.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Dec 2023 16:49:37 -0800 (PST)
+ Thu, 28 Dec 2023 16:49:40 -0800 (PST)
 From: Atish Patra <atishp@rivosinc.com>
 To: qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>,
+Cc: Atish Patra <atishp@rivosinc.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
  Weiwei Li <liwei1518@gmail.com>, kaiwenxue1@gmail.com
-Subject: [v2 0/5] Add ISA extension smcntrpmf support 
-Date: Thu, 28 Dec 2023 16:49:24 -0800
-Message-Id: <20231229004929.3842055-1-atishp@rivosinc.com>
+Subject: [v2 2/5] target/riscv: Add cycle & instret privilege mode filtering
+ properties
+Date: Thu, 28 Dec 2023 16:49:26 -0800
+Message-Id: <20231229004929.3842055-3-atishp@rivosinc.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231229004929.3842055-1-atishp@rivosinc.com>
+References: <20231229004929.3842055-1-atishp@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::34;
- envelope-from=atishp@rivosinc.com; helo=mail-oa1-x34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::22c;
+ envelope-from=atishp@rivosinc.com; helo=mail-oi1-x22c.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -95,48 +100,59 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patch series adds the support for RISC-V ISA extension smcntrpmf (cycle and
-privilege mode filtering) [1]. It is based on Kevin's earlier work but improves
-it by actually implement privilege mode filtering by tracking the privilege
-mode switches. This enables the privilege mode filtering for mhpmcounters as
-well. However, Smcntrpmf/Sscofpmf must be enabled to leverage this. This series
-also modified to report the raw instruction count instead of virtual cpu time
-based on the instruction count when icount is enabled. The former seems to be
-the preferred approach for instruction count for other architectures as well.
+From: Kaiwen Xue <kaiwenx@rivosinc.com>
 
-Please let me know if anybody thinks that's incorrect.
+This adds the properties for ISA extension smcntrpmf. Patches
+implementing it will follow.
 
-The series is also available at
+Signed-off-by: Atish Patra <atishp@rivosinc.com>
+Signed-off-by: Kaiwen Xue <kaiwenx@rivosinc.com>
+---
+ target/riscv/cpu.c     | 3 ++-
+ target/riscv/cpu_cfg.h | 1 +
+ 2 files changed, 3 insertions(+), 1 deletion(-)
 
-
-Changes from v1->v2:
-1. Implemented actual mode filtering for both icount and host ticks mode.
-1. Addressed comments in v1.
-2. Added Kevin's personal email address.
-
-[1] https://github.com/riscv/riscv-smcntrpmf
-[2] https://github.com/atishp04/qemu/tree/smcntrpmf_v1
-
-Atish Patra (2):
-target/riscv: Fix the predicate functions for mhpmeventhX CSRs
-target/riscv: Implement privilege mode filtering for cycle/instret
-
-Kaiwen Xue (3):
-target/riscv: Add cycle & instret privilege mode filtering properties
-target/riscv: Add cycle & instret privilege mode filtering definitions
-target/riscv: Add cycle & instret privilege mode filtering support
-
-target/riscv/cpu.c        |   3 +-
-target/riscv/cpu.h        |  17 +++
-target/riscv/cpu_bits.h   |  29 +++++
-target/riscv/cpu_cfg.h    |   1 +
-target/riscv/cpu_helper.c |   9 +-
-target/riscv/csr.c        | 245 ++++++++++++++++++++++++++++++--------
-target/riscv/pmu.c        |  43 +++++++
-target/riscv/pmu.h        |   2 +
-8 files changed, 295 insertions(+), 54 deletions(-)
-
---
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 83c7c0cf07be..da3f05cd5373 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -148,6 +148,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
+     ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
+     ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
++    ISA_EXT_DATA_ENTRY(smcntrpmf, PRIV_VERSION_1_12_0, ext_smcntrpmf),
+     ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
+     ISA_EXT_DATA_ENTRY(svadu, PRIV_VERSION_1_12_0, ext_svadu),
+     ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
+@@ -1296,6 +1297,7 @@ const char *riscv_get_misa_ext_description(uint32_t bit)
+ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+     /* Defaults for standard extensions */
+     MULTI_EXT_CFG_BOOL("sscofpmf", ext_sscofpmf, false),
++    DEFINE_PROP_BOOL("smcntrpmf", RISCVCPU, cfg.ext_smcntrpmf, false),
+     MULTI_EXT_CFG_BOOL("zifencei", ext_zifencei, true),
+     MULTI_EXT_CFG_BOOL("zicsr", ext_zicsr, true),
+     MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
+@@ -1308,7 +1310,6 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+     MULTI_EXT_CFG_BOOL("zve64f", ext_zve64f, false),
+     MULTI_EXT_CFG_BOOL("zve64d", ext_zve64d, false),
+     MULTI_EXT_CFG_BOOL("sstc", ext_sstc, true),
+-
+     MULTI_EXT_CFG_BOOL("smepmp", ext_smepmp, false),
+     MULTI_EXT_CFG_BOOL("smstateen", ext_smstateen, false),
+     MULTI_EXT_CFG_BOOL("svadu", ext_svadu, true),
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index f4605fb190b9..00c34fdd3209 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -72,6 +72,7 @@ struct RISCVCPUConfig {
+     bool ext_zihpm;
+     bool ext_smstateen;
+     bool ext_sstc;
++    bool ext_smcntrpmf;
+     bool ext_svadu;
+     bool ext_svinval;
+     bool ext_svnapot;
+-- 
 2.34.1
 
 
