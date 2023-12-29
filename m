@@ -4,87 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 411D0C4706F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 29 Dec 2023 00:51:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4787FC46CD3
+	for <qemu-riscv@archiver.kernel.org>; Fri, 29 Dec 2023 08:05:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rJ14P-000775-90; Thu, 28 Dec 2023 19:49:49 -0500
+	id 1rJ7rT-0005KS-Pb; Fri, 29 Dec 2023 03:04:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1rJ14L-00074v-QQ
- for qemu-riscv@nongnu.org; Thu, 28 Dec 2023 19:49:46 -0500
-Received: from mail-oa1-x31.google.com ([2001:4860:4864:20::31])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1rJ14J-0003YQ-5H
- for qemu-riscv@nongnu.org; Thu, 28 Dec 2023 19:49:45 -0500
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-204fdd685fdso629940fac.2
- for <qemu-riscv@nongnu.org>; Thu, 28 Dec 2023 16:49:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1703810982; x=1704415782;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KT0dgX+fbfi05uQpO/YMpPX7vZZAzvk8bOn5ql7e53k=;
- b=BeKO9ybVjI3l6LyD2DiLSbIL+D3suc+kOooLMHNFkZNn+yTzxioJ/+rl6Vtb9LKAyP
- tvvrhbQtyCs4tOc/2xtJCLnGy/7oDNdPJPRIJMNfe1VPabji9whItjuMavfVY7c6RDRL
- wqOVKiJVkZWfe7u/QlPpmf8xBeZ5QYSCNpowr/hi4sCX35BGsnyVZL/Ks7bbs0sujl65
- 0LbO7SNnlVZLR52KqNZOgJ/MqSzhmCqQ9yi9i3CvZoEDEnIcvdYOXwjLDTnOOj0BiwE9
- SwyQUXkv5fQeROSJcORtY4sM5hDSqWqnHc5wCjORGrZvXJZw/PRcJjkAZUh0yVeGy1VD
- M82Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703810982; x=1704415782;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=KT0dgX+fbfi05uQpO/YMpPX7vZZAzvk8bOn5ql7e53k=;
- b=RBQqiDKRNc3IJnWVkN1omHamaX/SQ+oPGY6Oz4uUNWWyYaX0CgIM0rIsKML8W3xEPK
- HWRyvQ4XwZf3cPO88wovlI8zGTYAZZ7/kSkAIf7sPr5xtffznXJzw43yK7RcR/4lgpGT
- 0aHLqqXhESIvkwBsCkEL6Q/h2oUFl/2/2fKTstqw4bOGx5+lG/AhSVcPQRp7csvO+wER
- +q4n0MhH8v8x1OZ4j9Tp0yD8dq0SKkltf3qojz1dhXOWcc8nZB6/acmvYlPLw2WRpOvW
- uFDb7/Ipd6buSUMmrkyQcQINZCPKjCknxwVZNPSwdFuCo/iea051e6jwcEodqQtA8uq7
- dtrg==
-X-Gm-Message-State: AOJu0Yw/OkCJHcBDLwebUQNganNPhMxjVJw9bSZXIZChnCUEW/mWCxNe
- 0tvuhgLs81pLRJWbG5986Sh9sZkyHRvt8A==
-X-Google-Smtp-Source: AGHT+IGuJBgIb+xz0IuSlCHEXrPH9cKohwEw83Nglfm6DcxukFAULjuQTxBfIOpmbZDfw9rgq9M78Q==
-X-Received: by 2002:a05:6870:1683:b0:204:2721:7dd4 with SMTP id
- j3-20020a056870168300b0020427217dd4mr14028941oae.108.1703810982062; 
- Thu, 28 Dec 2023 16:49:42 -0800 (PST)
-Received: from atishp.ba.rivosinc.com ([64.71.180.162])
- by smtp.gmail.com with ESMTPSA id
- ms25-20020a0568706b9900b0020463640518sm2636007oab.14.2023.12.28.16.49.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Dec 2023 16:49:41 -0800 (PST)
-From: Atish Patra <atishp@rivosinc.com>
-To: qemu-devel@nongnu.org
-Cc: Atish Patra <atishp@rivosinc.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
- Weiwei Li <liwei1518@gmail.com>, kaiwenxue1@gmail.com
-Subject: [v2 3/5] target/riscv: Add cycle & instret privilege mode filtering
- definitions
-Date: Thu, 28 Dec 2023 16:49:27 -0800
-Message-Id: <20231229004929.3842055-4-atishp@rivosinc.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231229004929.3842055-1-atishp@rivosinc.com>
-References: <20231229004929.3842055-1-atishp@rivosinc.com>
+ (Exim 4.90_1) (envelope-from <vladimir.isaev@syntacore.com>)
+ id 1rJ7rR-0005Jx-J3; Fri, 29 Dec 2023 03:04:53 -0500
+Received: from mta-04.yadro.com ([89.207.88.248])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <vladimir.isaev@syntacore.com>)
+ id 1rJ7rO-000588-7I; Fri, 29 Dec 2023 03:04:53 -0500
+DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com F1426C0002
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-04; t=1703837025;
+ bh=KrWVf5+lJz4MfIbBmYA1Pz0j724FCRFUK9gDsiM43Bo=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=VX7tFOyiN+kakx++amkiMawj8JJNVh5qEUzXv0BPFNiLPp2zBzkBckFxAs3OKVVdc
+ BQaxsulyRZRP7it2yoH2DxDaXq1A8FrEjQanoqO+QAs8g3fRjLcsCCDGXHLf4YCgli
+ 6IzkOzoUbGRsIxq8grjg5ZK7iZ4PAKMEvTbmzJ3LAdk+WCwx5R2syzEUH6f2cXW/s7
+ xdPh3v91lxbTWeQ4AGm7ke8S9LUTI2oyR9oT/fLQ33I3q7ouywCprqA94ev9biv35w
+ N+MXPK3lMOd2TFNuW9bAYbb2xLq89xvB0ZDu/wNFTubR2BB/59JYGLX7OOkW76RwOd
+ /8Omq4QSIXnXg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-03; t=1703837025;
+ bh=KrWVf5+lJz4MfIbBmYA1Pz0j724FCRFUK9gDsiM43Bo=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=txKNX/RPLVATD4ZUSpuvrWDRAnVWtJJvoRMMrF26bJfC0ilv7U3SkLymvXAPguWVK
+ b28pXS2FNu4d81dE4U5blWBoc6tNJdU2AFQ06bQn9CavuCHxPB7jQbx5E7fqmwXuLF
+ N0a3pkGvYx844Pavs0CgktF29U9Bldx4vUl9GbMpOE8EowCM0fYROJVrowdPuqxb+2
+ 6IVq27ARsVAMxhhnZ/1If1YOLy+CZl82ton9MHzRy5B0eGBTX6e7Kv8Gb8KUa+mW6s
+ ke8wpuzw2WV81y2INsw5IC0A8qtWL/PWjbju8CHstFW6XnlDbEQZtjBMIqD/LSGGd1
+ rkSB6Yn2JBW4w==
+From: Vladimir Isaev <vladimir.isaev@syntacore.com>
+To: <qemu-riscv@nongnu.org>
+CC: <qemu-devel@nongnu.org>, <dbarboza@ventanamicro.com>,
+ <zhiwei_liu@linux.alibaba.com>, <liwei1518@gmail.com>,
+ <bin.meng@windriver.com>, <alistair.francis@wdc.com>, <palmer@dabbelt.com>,
+ Vladimir Isaev <vladimir.isaev@syntacore.com>
+Subject: [PATCH] target/riscv/tcg: do not set defaults for non-generic
+Date: Fri, 29 Dec 2023 11:02:52 +0300
+Message-ID: <20231229080302.125418-1-vladimir.isaev@syntacore.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::31;
- envelope-from=atishp@rivosinc.com; helo=mail-oa1-x31.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Type: text/plain
+X-ClientProxiedBy: T-EXCH-08.corp.yadro.com (172.17.11.58) To
+ S-Exch-01.corp.yadro.com (10.78.5.241)
+Received-SPF: permerror client-ip=89.207.88.248;
+ envelope-from=vladimir.isaev@syntacore.com; helo=mta-04.yadro.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01,
+ T_SPF_PERMERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,102 +78,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Kaiwen Xue <kaiwenx@rivosinc.com>
+riscv_cpu_options[] are exported using qdev and some of them are defined
+with default values. This is unfortunate since riscv_cpu_add_user_properties()
+is called after CPU instance init and there is no clear way to disable MMU/PMP
+for some CPUs.
 
-This adds the definitions for ISA extension smcntrpmf.
+Can't define them as NODEFAULT since we still need defaults for generic CPU.
 
-Signed-off-by: Kaiwen Xue <kaiwenx@rivosinc.com>
-Signed-off-by: Atish Patra <atishp@rivosinc.com>
+Signed-off-by: Vladimir Isaev <vladimir.isaev@syntacore.com>
 ---
- target/riscv/cpu.c      |  1 -
- target/riscv/cpu.h      |  6 ++++++
- target/riscv/cpu_bits.h | 29 +++++++++++++++++++++++++++++
- 3 files changed, 35 insertions(+), 1 deletion(-)
+ target/riscv/tcg/tcg-cpu.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index da3f05cd5373..54395f95b299 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1297,7 +1297,6 @@ const char *riscv_get_misa_ext_description(uint32_t bit)
- const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
-     /* Defaults for standard extensions */
-     MULTI_EXT_CFG_BOOL("sscofpmf", ext_sscofpmf, false),
--    DEFINE_PROP_BOOL("smcntrpmf", RISCVCPU, cfg.ext_smcntrpmf, false),
-     MULTI_EXT_CFG_BOOL("zifencei", ext_zifencei, true),
-     MULTI_EXT_CFG_BOOL("zicsr", ext_zicsr, true),
-     MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index d74b361be641..34617c4c4bab 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -319,6 +319,12 @@ struct CPUArchState {
- 
-     target_ulong mcountinhibit;
- 
-+    /* PMU cycle & instret privilege mode filtering */
-+    target_ulong mcyclecfg;
-+    target_ulong mcyclecfgh;
-+    target_ulong minstretcfg;
-+    target_ulong minstretcfgh;
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index 8a35683a345d..9ffce1c9f7b0 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -937,6 +937,8 @@ static void riscv_cpu_add_multiext_prop_array(Object *obj,
+  */
+ static void riscv_cpu_add_user_properties(Object *obj)
+ {
++    bool use_def_vals = riscv_cpu_is_generic(obj);
 +
-     /* PMU counter state */
-     PMUCTRState pmu_ctrs[RV_MAX_MHPMCOUNTERS];
+ #ifndef CONFIG_USER_ONLY
+     riscv_add_satp_mode_properties(obj);
+ #endif
+@@ -950,6 +952,8 @@ static void riscv_cpu_add_user_properties(Object *obj)
+     riscv_cpu_add_multiext_prop_array(obj, riscv_cpu_deprecated_exts);
  
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index ebd7917d490a..0ee91e502e8f 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -401,6 +401,10 @@
- /* Machine counter-inhibit register */
- #define CSR_MCOUNTINHIBIT   0x320
- 
-+/* Machine counter configuration registers */
-+#define CSR_MCYCLECFG       0x321
-+#define CSR_MINSTRETCFG     0x322
+     for (Property *prop = riscv_cpu_options; prop && prop->name; prop++) {
++        prop->set_default = prop->set_default && use_def_vals;
 +
- #define CSR_MHPMEVENT3      0x323
- #define CSR_MHPMEVENT4      0x324
- #define CSR_MHPMEVENT5      0x325
-@@ -431,6 +435,9 @@
- #define CSR_MHPMEVENT30     0x33e
- #define CSR_MHPMEVENT31     0x33f
- 
-+#define CSR_MCYCLECFGH      0x721
-+#define CSR_MINSTRETCFGH    0x722
-+
- #define CSR_MHPMEVENT3H     0x723
- #define CSR_MHPMEVENT4H     0x724
- #define CSR_MHPMEVENT5H     0x725
-@@ -885,6 +892,28 @@ typedef enum RISCVException {
- /* PMU related bits */
- #define MIE_LCOFIE                         (1 << IRQ_PMU_OVF)
- 
-+#define MCYCLECFG_BIT_MINH                 BIT_ULL(62)
-+#define MCYCLECFGH_BIT_MINH                BIT(30)
-+#define MCYCLECFG_BIT_SINH                 BIT_ULL(61)
-+#define MCYCLECFGH_BIT_SINH                BIT(29)
-+#define MCYCLECFG_BIT_UINH                 BIT_ULL(60)
-+#define MCYCLECFGH_BIT_UINH                BIT(28)
-+#define MCYCLECFG_BIT_VSINH                BIT_ULL(59)
-+#define MCYCLECFGH_BIT_VSINH               BIT(27)
-+#define MCYCLECFG_BIT_VUINH                BIT_ULL(58)
-+#define MCYCLECFGH_BIT_VUINH               BIT(26)
-+
-+#define MINSTRETCFG_BIT_MINH               BIT_ULL(62)
-+#define MINSTRETCFGH_BIT_MINH              BIT(30)
-+#define MINSTRETCFG_BIT_SINH               BIT_ULL(61)
-+#define MINSTRETCFGH_BIT_SINH              BIT(29)
-+#define MINSTRETCFG_BIT_UINH               BIT_ULL(60)
-+#define MINSTRETCFGH_BIT_UINH              BIT(28)
-+#define MINSTRETCFG_BIT_VSINH              BIT_ULL(59)
-+#define MINSTRETCFGH_BIT_VSINH             BIT(27)
-+#define MINSTRETCFG_BIT_VUINH              BIT_ULL(58)
-+#define MINSTRETCFGH_BIT_VUINH             BIT(26)
-+
- #define MHPMEVENT_BIT_OF                   BIT_ULL(63)
- #define MHPMEVENTH_BIT_OF                  BIT(31)
- #define MHPMEVENT_BIT_MINH                 BIT_ULL(62)
+         qdev_property_add_static(DEVICE(obj), prop);
+     }
+ }
 -- 
-2.34.1
+2.43.0
 
 
