@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E701C46CD4
-	for <qemu-riscv@archiver.kernel.org>; Fri, 29 Dec 2023 12:07:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C367C46CD3
+	for <qemu-riscv@archiver.kernel.org>; Fri, 29 Dec 2023 12:08:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rJBeQ-0007mf-3j; Fri, 29 Dec 2023 07:07:42 -0500
+	id 1rJBeX-0007xb-I3; Fri, 29 Dec 2023 07:07:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
- id 1rJBeL-0007lZ-91
- for qemu-riscv@nongnu.org; Fri, 29 Dec 2023 07:07:38 -0500
+ id 1rJBeP-0007ma-Py
+ for qemu-riscv@nongnu.org; Fri, 29 Dec 2023 07:07:42 -0500
 Received: from smtp-relay-internal-1.canonical.com ([185.125.188.123])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
- id 1rJBeI-0004y6-Jf
- for qemu-riscv@nongnu.org; Fri, 29 Dec 2023 07:07:36 -0500
-Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
- [209.85.208.72])
+ id 1rJBeM-00050V-0F
+ for qemu-riscv@nongnu.org; Fri, 29 Dec 2023 07:07:39 -0500
+Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
+ [209.85.208.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 3C7573F73C
- for <qemu-riscv@nongnu.org>; Fri, 29 Dec 2023 12:07:29 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id A2E6F3F74B
+ for <qemu-riscv@nongnu.org>; Fri, 29 Dec 2023 12:07:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1703851649;
- bh=tFjzcWXuE5DSXBUytMlng7Kt/kySHhmp0JIqujk7Ie8=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=IEpuYlSjBiNeTB5VC42hKn+e+o4BM2PHj7LBVSJGV5d5ZK9illWq2GrFBUcJXnR3U
- QUyoYoTTlmkOM3mt/pcU7ZqltVErvuzTNjMaUZsUYE75kWEn1kwtG18ivcA3gObdk2
- wazT+Jfe5OIeSnUMuUGYRhiC4pEcMvW6VaQU9bq/7L3vKt3M4J54NN/G/4405mg4fl
- ECSnaMPrkWxJKZEJaBMm6QHAzb5iXiOmxQAryQtsuDu2/MKcvFStj7C4ZBcFmgwWJF
- auEWxNNnDFiRmnEroVeQs3OEOEC8NaParziDtQzkM/FFq/+DDENsM76ETfJ+QEHvta
- afnAvDSrZRcbA==
-Received: by mail-ed1-f72.google.com with SMTP id
- 4fb4d7f45d1cf-5551f8ec1c8so1856975a12.1
- for <qemu-riscv@nongnu.org>; Fri, 29 Dec 2023 04:07:29 -0800 (PST)
+ s=20210705; t=1703851650;
+ bh=s14UZKIRamkFLlhaFGm4Uw4f4/c+w2rqs+mbTkZJg4Q=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=HHRDcV1/9I/ygSI0v51rDoZU9nAB9GYPV4zlKFH280a2RqS3gMfcxaJ5A2BsISQwV
+ tSRbW7GskXkqQ5++T5C6cTUsHhCa6+RqaIevYv+mwzLqnre8h2xpyNWGsAOmcZi0Dn
+ NsnbXTKkT+Z6H5xSdvNb0D1dWH+ZiIhRUoydBUv4GP3mOVXzv8o0tEAKGHckv7U4gu
+ tqf3mS8Fac0Z+8cptZ7E2WDUSmavpdwh9CTUJmfZSdYslgzY6/ltN6sitYzjUOkLX8
+ aeqD+/R3GDXcAh905ojm3/m2GtpPZQP5bDnweRvfMpheAk1Gr7MmRYZu5VLHy360Or
+ QYk+x1HKdoNkA==
+Received: by mail-ed1-f70.google.com with SMTP id
+ 4fb4d7f45d1cf-554a4d7390cso2672695a12.3
+ for <qemu-riscv@nongnu.org>; Fri, 29 Dec 2023 04:07:30 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703851648; x=1704456448;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=tFjzcWXuE5DSXBUytMlng7Kt/kySHhmp0JIqujk7Ie8=;
- b=dLlRsKOoRU74gFx/CJvD2XdIUGcrC5fLhAcSvxXyEqlYGalP4TzJeYmsoiSg0mW0iV
- 2qSRjqjsliiAN1aSQt9ulX2RZq2F4PEmCPc99ORx98K/K6tiovccQe7yfThvL5OI4Wi0
- YkYjkEGz9GoosHyBjjpz2mbW6XJs+XPMC/S91uqFitR6keJFriv1q/UHylROji8k+tqt
- gPZXaf3PJYdWE1q2+mh3mEbx3cpn0RkKB9/x8dS0kRqpGj5zTnulDl+0fDOF3Z62vAO4
- IrqkRgEep22SqiJbCyJopEXqopZys95tzFHCKZr6H6Zo/GoHregJgYIq19eXNB9gDn3y
- E5Lw==
-X-Gm-Message-State: AOJu0YzY5pCzmTG9A+rtGCXkCDz/PWQteIj1jjIxnWdfwcxsKAJNjUuV
- KL9WQ98xhkdn2l2nIrKSlSgJM5kVKntyggqzTWsRKPFL+33xv3DC3Fs3WTlZTKba2h+NUGWjzzS
- 0xgfKssIaIQS3AgZHBGfIcSuXB1CvKmFtIVZGfYA=
-X-Received: by 2002:a50:d7d7:0:b0:553:739e:bfac with SMTP id
- m23-20020a50d7d7000000b00553739ebfacmr7732608edj.8.1703851648222; 
- Fri, 29 Dec 2023 04:07:28 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEYwKsRQBh2evsx0Q9HgRecFYtkUacRQZ1dFs5S8toVVatnvK9PEr9WMTwV2D/Vu1PaF2YmUw==
-X-Received: by 2002:a50:d7d7:0:b0:553:739e:bfac with SMTP id
- m23-20020a50d7d7000000b00553739ebfacmr7732592edj.8.1703851647910; 
- Fri, 29 Dec 2023 04:07:27 -0800 (PST)
+ d=1e100.net; s=20230601; t=1703851650; x=1704456450;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=s14UZKIRamkFLlhaFGm4Uw4f4/c+w2rqs+mbTkZJg4Q=;
+ b=XogSBRGx2/iQnplhkM6vloiPq48QzEc5tsHOupr3mJ01GQdxPh1GTduTjxeMfxM7/g
+ RN1yvhzIlpssTl6d8p7DTyk5UWSCVnrMPtY3Pb0YVchsBHsQCAtYD0JEaMAY8tSmdXWS
+ preBe/9HpLn/w7MYsQPM54fHuek1e5fOQs+mOdubW9jDcdnLqIySXurGStX8EwWK3VA+
+ /iS50qJI8PAsm2/lOPuCyVlp5YQojVOQufMZ8uUJqceuw44gro1qmYuJvKxzna51lb5v
+ awz65DxoLdffpnfr/Los68UGuH3UG7B2gompCyjn9OICdPz3Hjci3ad6nQq5OxMJnef/
+ g9Dg==
+X-Gm-Message-State: AOJu0Yy40RbXbmXg33LFN7udukIEQ5XnqspD/fHztheNduZuH7kYQ3Ez
+ VWfDDcdKVpZ26w5S1zApeJ+7ryzoOSvPE1h7xUpdttZHYccs3GrQaU3bIVhx4LPscPQgHKLWb+K
+ ZbVVO5tMrdyjKjaL9fjQFAFMP9H1w+Ege2Rr1UKY=
+X-Received: by 2002:a05:6402:2c9:b0:555:ba0d:f5a with SMTP id
+ b9-20020a05640202c900b00555ba0d0f5amr268699edx.123.1703851650083; 
+ Fri, 29 Dec 2023 04:07:30 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEnMAoH5Zdij2HsmiFhNYuijcdbfoTJ5d7H8EdOtH7zAeKtc8CGnf2gv00S4ar//jPyieQBAw==
+X-Received: by 2002:a05:6402:2c9:b0:555:ba0d:f5a with SMTP id
+ b9-20020a05640202c900b00555ba0d0f5amr268693edx.123.1703851649784; 
+ Fri, 29 Dec 2023 04:07:29 -0800 (PST)
 Received: from x13s.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de.
  [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
- j20-20020aa7c0d4000000b005527de2aecfsm10943344edp.42.2023.12.29.04.07.26
+ j20-20020aa7c0d4000000b005527de2aecfsm10943344edp.42.2023.12.29.04.07.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 Dec 2023 04:07:27 -0800 (PST)
+ Fri, 29 Dec 2023 04:07:29 -0800 (PST)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>
@@ -78,10 +79,12 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>, Bin Meng <bin.meng@windriver.com>,
  Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 0/4] target/riscv: SMBIOS support for RISC-V virt machine
-Date: Fri, 29 Dec 2023 13:07:20 +0100
-Message-ID: <20231229120724.41383-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 2/4] smbios: function to set default processor family
+Date: Fri, 29 Dec 2023 13:07:22 +0100
+Message-ID: <20231229120724.41383-3-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20231229120724.41383-1-heinrich.schuchardt@canonical.com>
+References: <20231229120724.41383-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=185.125.188.123;
@@ -109,29 +112,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Generate SMBIOS tables for the RISC-V mach-virt.
-Add CONFIG_SMBIOS=y to the RISC-V default config.
+Provide a function to set the default processor family.
 
-With the series the following firmware tables are provided:
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+v2:
+	new patch
+---
+ hw/smbios/smbios.c           | 7 +++++++
+ include/hw/firmware/smbios.h | 1 +
+ 2 files changed, 8 insertions(+)
 
-    etc/smbios/smbios-anchor
-    etc/smbios/smbios-tables
-
-Add processor-family to the '-smbios type=4' command line options.
-
-Heinrich Schuchardt (4):
-  smbios: add processor-family option
-  smbios: function to set default processor family
-  target/riscv: SMBIOS support for RISC-V virt machine
-  qemu-options: enable -smbios option on RISC-V
-
- hw/riscv/Kconfig             |  1 +
- hw/riscv/virt.c              | 42 ++++++++++++++++++++++++++++++++++++
- hw/smbios/smbios.c           | 20 ++++++++++++++--
- include/hw/firmware/smbios.h |  1 +
- qemu-options.hx              |  6 +++---
- 5 files changed, 65 insertions(+), 5 deletions(-)
-
+diff --git a/hw/smbios/smbios.c b/hw/smbios/smbios.c
+index 647bc6d603..03fe736565 100644
+--- a/hw/smbios/smbios.c
++++ b/hw/smbios/smbios.c
+@@ -989,6 +989,13 @@ void smbios_set_cpuid(uint32_t version, uint32_t features)
+         field = value;                                                    \
+     }
+ 
++void smbios_set_default_processor_family(uint16_t processor_family)
++{
++    if (type4.processor_family <= 0x01) {
++        type4.processor_family = processor_family;
++    }
++}
++
+ void smbios_set_defaults(const char *manufacturer, const char *product,
+                          const char *version, bool legacy_mode,
+                          bool uuid_encoded, SmbiosEntryPointType ep_type)
+diff --git a/include/hw/firmware/smbios.h b/include/hw/firmware/smbios.h
+index 7f3259a630..6e514982d4 100644
+--- a/include/hw/firmware/smbios.h
++++ b/include/hw/firmware/smbios.h
+@@ -295,6 +295,7 @@ void smbios_set_cpuid(uint32_t version, uint32_t features);
+ void smbios_set_defaults(const char *manufacturer, const char *product,
+                          const char *version, bool legacy_mode,
+                          bool uuid_encoded, SmbiosEntryPointType ep_type);
++void smbios_set_default_processor_family(uint16_t processor_family);
+ uint8_t *smbios_get_table_legacy(MachineState *ms, size_t *length);
+ void smbios_get_tables(MachineState *ms,
+                        const struct smbios_phys_mem_area *mem_array,
 -- 
 2.43.0
 
