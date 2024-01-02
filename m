@@ -4,85 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8770C47074
-	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Jan 2024 12:30:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF70EC47077
+	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Jan 2024 15:12:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rKdud-0002UD-54; Tue, 02 Jan 2024 07:30:27 -0500
+	id 1rKgRF-0002y8-UY; Tue, 02 Jan 2024 10:12:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rKduW-0002TM-PX
- for qemu-riscv@nongnu.org; Tue, 02 Jan 2024 07:30:22 -0500
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rKdu9-0005nx-7v
- for qemu-riscv@nongnu.org; Tue, 02 Jan 2024 07:30:20 -0500
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-1d44200b976so29064925ad.2
- for <qemu-riscv@nongnu.org>; Tue, 02 Jan 2024 04:29:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1704198595; x=1704803395; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Augk+xPGGFqEgjYC1IaucYVe0K+Hl4t3eULPoLhAk20=;
- b=lTPt9y07aR/otrAP8pObnFXgwa2zwNGmH4oQlT01c4ibgnQAyFE3C6GvktTyO5tuZa
- Z3TWV/FE4XKyKI6vI6ljAfIdnd7SiaRMmcA5xDAsWzH+PXQURZFUPnZWbSrYjJb01Zor
- KRbmP+DgQKA0CcNOUt/hDUAyXghRbyUDRzQA5RcQnhPX65ftgiaT/5HESVlRrtV3jqGy
- 8f6Is3JLPu8IkkRrep4FMBi0zA70fQ5jpZKNt7iLage1mM9aGNd7JVS+an/G/F6bAVyt
- pcHzemOFGZmXVhYlDwOPpbgAN2qpxMaZeXd7pkam1bP0juGEGejhyQx3xTGgOT8RDdEr
- xLEA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704198595; x=1704803395;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Augk+xPGGFqEgjYC1IaucYVe0K+Hl4t3eULPoLhAk20=;
- b=GJXObvUWgPn7OxL9p4MxvOCnKAyc0DmhC/7c89tAEChs6gDU1/gTrX3fK36Z3dBfrw
- ACP/d1cJMljKQj0w32kqZwSv37gTQCHbSZb2ZhR13FTuKqn4Q5xL24Sz7B+OYzxm1VN4
- 44kLM3iPModHdJ7SVGoaWvYOfABgPOkyyn6yXcc0sq8xocmZBLG+OTlbID/gbduKhgpe
- sEdYw/8KAXzaqMAkVASSMscN8Jg773i4zrfC40f7w9zgFyDKHdwTQGF5LrLRq/pNVSXp
- ixjIFu/k9UHHN2fEQihqC8dHJexF7GWVMsl5cseDUpVrC4CAQDcvzg39pdJi+gdS5iiU
- 2Z+g==
-X-Gm-Message-State: AOJu0Yzz9GlMsnRaadDHVXLigHVCNr0U8WFejbFTrZAsssQ1vH0RZCX5
- lSFs7mZMqBnvBfxqxx+6GhiVIIT2JMh19g==
-X-Google-Smtp-Source: AGHT+IHS3iOa66IYtgf5mfAZCZ07dT1eHIB6zQxVe89gAoGWeHV2UUPXNhTMpzv3HoP9IPA8LQ5MYQ==
-X-Received: by 2002:a17:903:2450:b0:1d4:ab6b:f102 with SMTP id
- l16-20020a170903245000b001d4ab6bf102mr1281083pls.85.1704198595524; 
- Tue, 02 Jan 2024 04:29:55 -0800 (PST)
-Received: from [192.168.68.110] ([189.79.21.107])
- by smtp.gmail.com with ESMTPSA id
- l7-20020a17090270c700b001d49608e3dfsm8560466plt.50.2024.01.02.04.29.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 02 Jan 2024 04:29:55 -0800 (PST)
-Message-ID: <b2a9b35d-e1dc-4d01-b42c-a2eb865f274e@ventanamicro.com>
-Date: Tue, 2 Jan 2024 09:29:51 -0300
+ (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
+ id 1rKgRE-0002xa-2G; Tue, 02 Jan 2024 10:12:16 -0500
+Received: from bg4.exmail.qq.com ([43.154.221.58])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
+ id 1rKgR9-0001wD-7q; Tue, 02 Jan 2024 10:12:15 -0500
+X-QQ-mid: bizesmtp68t1704208314tohqx14h
+Received: from ubuntu.. ( [111.196.133.100]) by bizesmtp.qq.com (ESMTP) with 
+ id ; Tue, 02 Jan 2024 23:11:53 +0800 (CST)
+X-QQ-SSF: 01200000000000F0I000000A0000000
+X-QQ-FEAT: znfcQSa1hKbICwrgmZQK0m2iX094lHQRH0Lyd7e6oXKmEFAyy8N3ADLu9b+Ul
+ jZhmRaABsB2R9xwW5NRwdeZfceqWJoobhJKd6GmwUGSMk34nZX5Iu6sbtLhxtPKU62D9+Qt
+ OOQLYGVarAEWfYCKcYK3QnxMHV0XABz4jLGQel7GW10lpkgr0M2q6jWGcTcNwK4nlcZnl9r
+ fkI3TdwcP/0aUv7TTn09ILopmkoeUkeBriI7t/EZlU0DJvEAPFH2MOwgQtxpaT1j5aCNBP2
+ 1j2rATPJfDZfLLum8e2WBZsTVYM8Mc9jdzODV8pcNaW9jbVZ+2LgIs6HyqYVgVhluun8tUP
+ bnoBrxasWC5HXDEAB5zLZI4y19gt1GdNs1RuZA7
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 8007132172162359819
+From: Bin Meng <bmeng@tinylab.org>
+To: Alistair Francis <alistair.francis@wdc.com>,
+	qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org
+Subject: [PATCH] roms/opensbi: Upgrade from v1.3.1 to v1.4
+Date: Tue,  2 Jan 2024 23:11:53 +0800
+Message-Id: <20240102151153.133896-1-bmeng@tinylab.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 10/16] target/riscv: create finalize_features() for KVM
-Content-Language: en-US
-To: Vladimir Isaev <vladimir.isaev@syntacore.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com
-References: <20231222122235.545235-1-dbarboza@ventanamicro.com>
- <20231222122235.545235-11-dbarboza@ventanamicro.com>
- <1905a7c9-b59f-4392-9a27-74c292668856@syntacore.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <1905a7c9-b59f-4392-9a27-74c292668856@syntacore.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x632.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
+Content-Transfer-Encoding: 8bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtp:tinylab.org:qybglogicsvrgz:qybglogicsvrgz7a-0
+Received-SPF: pass client-ip=43.154.221.58; envelope-from=bmeng@tinylab.org;
+ helo=bg4.exmail.qq.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,190 +65,194 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Upgrade OpenSBI from v1.3.1 to v1.4 and the pre-built bios images.
 
+The v1.4 release includes the following commits:
 
-On 12/29/23 08:22, Vladimir Isaev wrote:
-> 22.12.2023 15:22, Daniel Henrique Barboza wrote:
->> To turn cbom_blocksize and cboz_blocksize into class properties we need
->> KVM specific changes.
->>
->> KVM is creating its own version of these options with a customized
->> setter() that prevents users from picking an invalid value during init()
->> time. This comes at the cost of duplicating each option that KVM
->> supports. This will keep happening for each new shared option KVM
->> implements in the future.
->>
->> We can avoid that by using the same property TCG uses and adding
->> specific KVM handling during finalize() time, like TCG already does with
->> riscv_tcg_cpu_finalize_features(). To do that, the common CPU property
->> offers a way of knowing if an option was user set or not, sparing us
->> from doing unneeded syscalls.
->>
->> riscv_kvm_cpu_finalize_features() is then created using the same
->> KVMScratch CPU we already use during init() time, since finalize() time
->> is still too early to use the official KVM CPU for it. cbom_blocksize
->> and cboz_blocksize are then handled during finalize() in the same way
->> they're handled by their KVM specific setter.
->>
->> With this change we can proceed with the blocksize changes in the common
->> code without breaking the KVM driver.
->>
->> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->> ---
->>   target/riscv/cpu.c           | 16 +++++++---
->>   target/riscv/cpu.h           |  1 +
->>   target/riscv/kvm/kvm-cpu.c   | 59 ++++++++++++++++++++++++++++++++++++
->>   target/riscv/kvm/kvm_riscv.h |  1 +
->>   4 files changed, 72 insertions(+), 5 deletions(-)
->>
->> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> index 8be619b6f1..f49d31d753 100644
->> --- a/target/riscv/cpu.c
->> +++ b/target/riscv/cpu.c
->> @@ -63,6 +63,11 @@ static void cpu_option_add_user_setting(const char *optname, uint32_t value)
->>                           GUINT_TO_POINTER(value));
->>   }
->>
->> +bool riscv_cpu_option_set(const char *optname)
->> +{
->> +    return g_hash_table_contains(general_user_opts, optname);
->> +}
->> +
-> 
-> This function may work in unexpected way for future developer since we can check just somehow restricted
-> number of options using it, like vlen/elen/cbom/cboz size, but not vext_spec or pmu-num/mask.
+1a398d9 lib: sbi: Add Zicntr as a HART ISA extension
+669089c lib: sbi: Add Zihpm as a HART ISA extension
+72b9c8f lib: sbi: Alphabetically sort HART ISA extensions
+5359fc6 lib: sbi: Rename hart_pmu_get_allowed_bits() function
+976895c lib: sbi: Fix Priv spec version for [m|s]counteren and mcountinhibit CSRs
+6053917 lib: sbi: Fix how print gets flags
+35ef182 lib: sbi: print not fill '0' when left-aligned
+40dac06 lib: sbi: Add '+' flags for print
+458fa74 lib: sbi: Add ' ' '\'' flags for print
+05cbb6e lib: sbi: implifying the parameters of printi
+fe08281 lib: sbi: print add 'o' type
+c6ee5ae lib: sbi: Fix printi
+3b6fcdd lib: sbi: Simplify prints
+cc89fa7 lib: sbi: Fix printc
+ff43168 lib: sbi: Fix timing of clearing tbuf
+a73982d lib: sbi: Fix missing '\0' when buffer szie equal 1
+ea6533a lib: utils/gpio: Fix RV32 compile error for designware GPIO driver
+c3b98c6 include: sbi: Add macro definitions for mseccfg CSR
+1c099c4 lib: sbi: Add functions to manipulate PMP entries
+6c202c5 include: sbi: Add Smepmp specific access flags for PMP entries
+cbcfc7b lib: sbi: Add smepmp in hart extensions
+d72f5f1 lib: utils: Add detection of Smepmp from ISA string in FDT
+4a42a23 lib: sbi: Grant SU R/W/X permissions to whole memory
+f3fdd04 lib: sbi: Change the order of PMP initialization
+5dd8db5 lib: sbi: Add support for Smepmp
+6e44ef6 lib: sbi: Add functions to map/unmap shared memory
+0ad8660 lib: sbi: Map/Unmap debug console shared memory buffers
+057eb10 lib: utils/gpio: Fix RV32 compile error for designware GPIO driver
+0e2111e libfdt: fix SPDX license identifiers
+e05a9cf lib: sbi: Update system suspend to spec
+5e20d25 include: sbi: fix CSR define of mseccfg
+44c5151 include: sbi_utils: Remove driver pointer from struct i2c_adapter
+14a35b0 lib: utils/regmap: Add generic regmap access library
+8e97275 lib: utils/regmap: Add simple FDT based regmap framework
+f21d8f7 lib: utils/regmap: Add simple FDT based syscon regmap driver
+4a344a9 lib: utils/reset: Add syscon based reboot and poweroff
+c2e6027 lib: utils/reset: Remove SiFive Test reset driver
+f536e0b gitignore: allow gitignore to ignore most dot file
+c744ed7 lib: sbi_pmu: Enable noncontigous hpm event and counters
+6259b2e lib: utils/fdt: Fix fdt_parse_isa_extensions() implementation
+f46a564 lib: sbi: Fix typo for finding fixed event counter
+94197a8 fw_base.S: Fix assembler error with clang 16+
+c104c60 lib: sbi: Add support for smcntrpmf
+7aabeee Makefile: Fix grep warning
+e7e73aa platform: generic: allwinner: correct mhpmevent count
+ee1f83c lib: sbi_pmu: remove mhpm_count field in hart feature
+a9cffd6 firmware: payload: test: Change to SBI v2.0 DBCN ecalls
+b20bd47 lib: sbi: improve the definition of SBI_IPI_EVENT_MAX
+664692f lib: sbi_pmu: ensure update hpm counter before starting counting
+c9a296d platform: generic: allwinner: fix OF process for T-HEAD c9xx pmu
+901d3d7 lib: sbi_pmu: keep overflow interrupt of stopped hpm counter disabled
+cacfba3 platform: Allow platforms to specify the size of tlb fifo
+5bd9694 lib: sbi: alloc tlb fifo by sbi_malloc
+130e65d lib: sbi: Implement SET_FS_DIRTY() to make sure the mstatus FS dirty is set
+d1e4dff lib: sbi: Introduce HART index in sbi_scratch
+e6125c3 lib: sbi: Remove sbi_platform_hart_index/invalid() functions
+296e70d lib: sbi: Extend sbi_hartmask to support both hartid and hartindex
+e632cd7 lib: sbi: Use sbi_scratch_last_hartindex() in remote TLB managment
+78c667b lib: sbi: Prefer hartindex over hartid in IPI framework
+22d6ff8 lib: sbi: Remove sbi_scratch_last_hartid() macro
+112daa2 lib: sbi: Maximize the use of HART index in sbi_domain
+9560fb3 include: sbi: Remove sbi_hartmask_for_each_hart() macro
+b8fb96e include: sbi_domain: Fix permission test macros
+bff27c1 lib: sbi: Factor-out Smepmp configuration as separate function
+5240d31 lib: sbi: Don't clear mseccfg.MML bit in sbi_hart_smepmp_configure()
+2b51a9d lib: sbi: Fix pmp_flags for Smepmp read-only shared region
+73aea28 lib: sbi: Populate M-only Smepmp entries before setting mseccfg.MML
+e8bc162 lib: utils/serial: Add shared regions for serial drivers
+b7e9d34 lib: utils/regmap: Mark syscon region as shared read-write
+3669153 platform: generic: thead: fix stale TLB entries for th1520/sg2042
+de525ac firmware: Remove ALIGN in .rela.dyn in linker script
+2a6d725 firmware: Remove handling of R_RISCV_{32,64}
+6ed125a Makefile: Add --exclude-libs ALL to avoid .dynsym
+e21901d doc: Fix fw_payload.md
+a125423 lib: utils/serial: Ensure proper allocation of PMP entries for uart8250
+d36709f lib: utils: timer/ipi: Update memregion flags for PLMT and PLICSW
+8197c2f lib: sbi: fix sbi_domain_get_assigned_hartmask()
+9da30f6 lib: utils/fdt: simplify dt_parse_isa_extensions
+942aca2 lib: utils: Simplify SET_ISA_EXT_MAP()
+f831b93 lib: sbi_pmu: check for index overflows
+d891cae gpio/starfive: redundant readl() call
+e8114c6 docs: platform: update platform_requirements.md
+3632f2b lib: sbi: Add support for mconfigptr
+ec0559e lib: sbi_misaligned_ldst: Fix handling of C.SWSP and C.SDSP
+cbdd869 include: sbi: Change spec version to 2.0
+5d0ed1b lib: sbi: simplify sanitize_domain()
+c1a6987 platform: generic: thead: move to thead c9xx header to vendor specific postion
+8e941e7 platform: generic: thead: separate implement of T-HEAD c9xx pmu
+492d9b1 platform: generic: thead: separate implement of T-HEAD c9xx errata
+3e21b96 platform: generic: thead: initialize PMU by default in thead generic platform
+a140a4e lib: sbi: Correctly limit flushes to a single ASID/VMID
+88ae718 platform: generic: thead: improve tlb flush errata
+52fd64b platform: Uses hart count as the default size of tlb info
+07f2ccd lib: utils/serial: Optimize semihosting_putc implementation
+fccdf41 firmware: fw_base.S: Fix boot hart status synchronization
+d1e0f7f utils/reset: Remove fdt_reset_thead
+896d2c9 lib: utils/timer: Allow ACLINT MTIMER driver to setup quirks
+accafb1 lib: utils/timer: mtimer: add separate T-Head C9xx CLINT mtimer compatible
+98bc25f lib: utils/ipi: mswi: add separate T-Head C9xx CLINT mswi compatible
+5b2f55d lib: sbi: separate the swap operation of domain region
+3b03cdd lib: sbi: Add regions merging when sanitizing domain region
+2bfdb9e platform: generic: Add Sophgo sg2042 platform support
+280f7ae include: sbi: macros for mseccfg.sseed and .useed
+efcac33 lib: sbi: Add Zkr in hart extensions
+6e5b0cf lib: sbi: enable seed access in S-mode
+6602e11 lib: sbi: change sbi_hart_features.extensions as an array
+3aaed4f lib: sbi: Make console_puts/console_putc interchangeable
+dc0bb19 lib: utils/serial: remove semihosting_putc
+16bb930 lib: sbi: Fix PMP granularity handling in sbi_hart_map_saddr()
+574b9c8 lib: sbi_pmu: avoid buffer overflow
+791704c lib: utils/irqchip: Avoid redundant writes to APLIC CLRIE register
+f520256 lib: sbi: Allow relaxed MMIO writes in device ipi_send() callback
+b70d628 lib: sbi: Allow relaxed MMIO writes in device ipi_clear() callback
+bd74931 lib: ipi: Adjust Andes PLICSW to single-bit-per-hart scheme
+291403f sbi: sbi_pmu: Improve sbi_pmu_init() error handling
+090fa99 lib: sbi: Add XAndesPMU in hart extensions
+a48f2cf sbi: sbi_pmu: Add hw_counter_filter_mode() to pmu device
+51ec60c platform: include: andes45: Add PMU related CSR defines
+effd89a platform: generic: Introduce pmu_init() platform override
+1b9e743 platform: andes: Add Andes custom PMU support
+2e50c24 platform: andes: Enable Andes PMU for AE350
+535c661 platform: rzfive: Enable Andes PMU for RZ/Five
+0b3262e lib: utils: fdt_fixup: Allow preserving PMU properties
+009ae4e platform: andes: Factor out is_andes() helper
+0308f93 lib: utils: fdt_pmu: Make the fdt_pmu_evt_select table global variable
+e19d419 lib: utils: fdt_pmu: Do not iterate over the fdt_pmu_evt_select table
+d162009 docs: pmu: Add Andes PMU node example
+6b9a849 lib: sbi: Remove xchg/cmpxchg implemented via lr/sc
+11bf49b lib: sbi: Fix __atomic_op_bit_ord and comments
+8839869 lib: sbi: Replace __atomic_op_bit_ord with __atomic intrinsics
+07419ec lib: sbi: Prevent redundant sbi_ipi_process
+93da66b lib: sbi_hart: Store PMP granularity as log base 2
+ee72517 lib: sbi_pmu: Add PMU snapshot definitions
+11a0ba5 lib: sbi_pmu: Fix the counter info function
+0696810 firmware: fix section types
+a25fc74 lib: sbi_hsm: Put the resume_pending hart in the interruptible hart mask
+87aa306 platform: recalculate heap size to support new tlb entry number
+a2e254e lib: sbi: skip wait_for_coldboot when coolboot done
+6112d58 lib: utils/fdt: Allow to use reg-names when parsing ACLINT
+35cba92 lib: sbi_tlb: Check tlb_range_flush_limit only once per request
+a894187 lib: sbi_ipi: Do not ignore errors from sbi_ipi_send()
+446fa65 lib: sbi_ipi: Process self-IPIs in sbi_ipi_send()
+2707250 lib: sbi_ipi: Drop unnecessary ipi_process check
+925ce14 lib: sbi: Simplify the initialization of root_hmask in sbi_domain_init
+2c8be56 lib: sbi: Improve the code of privilege mode and extensions detection
+056fe6f lib: sbi: Refactor the code for enable extensions in menvfg CSR
+776770d lib: sbi: Using one array to define the name of extensions
+3daac8f lib: sbi: Detect extensions from the ISA string in DT
+416ceb3 lib: sbi_tlb: Reduce size of struct sbi_tlb_info
+80169b2 platform: generic: Fine tune fw_platform_calculate_heap_size()
+cdebae2 lib: utils/irqchip: Add shared MMIO region for PLIC in root domain
+3284bea lib: sbi: Allow ecall handlers to directly update register state
+5a57e8c lib: sbi: Remove the SBI_ETRAP error code
+2b80b92 lib: sbi: Do not enter OpenSBI with mseccfg.MML == 1
+63e09ad lib: sbi: Fix shift bug in sbi_system_reset
+ba29293 lib: utils/timer: mtimer: only use regname for aclint
+bbd065d lib: sbi: Detect Zicntr extension only based on traps
+a2b255b include: Bump-up version to 1.4
 
-Makes sense. I'll add all options in this hash to make it consistent.
+Signed-off-by: Bin Meng <bmeng@tinylab.org>
 
+---
+Please pull the complete patch from https://github.com/lbmeng/qemu
+opensbi branch.
 
-Thanks,
+ .../opensbi-riscv32-generic-fw_dynamic.bin    | Bin 135376 -> 267416 bytes
+ .../opensbi-riscv64-generic-fw_dynamic.bin    | Bin 138368 -> 270808 bytes
+ roms/opensbi                                  |   2 +-
+ 3 files changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/pc-bios/opensbi-riscv32-generic-fw_dynamic.bin b/pc-bios/opensbi-riscv32-generic-fw_dynamic.bin
+index 9a2ba3f2a4..60ca1165c8 100644
+Binary files a/pc-bios/opensbi-riscv32-generic-fw_dynamic.bin and b/pc-bios/opensbi-riscv32-generic-fw_dynamic.bin differ
+diff --git a/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin b/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin
+index 5d4e812819..bae158d457 100644
+Binary files a/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin and b/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin differ
+diff --git a/roms/opensbi b/roms/opensbi
+index 057eb10b6d..a2b255b889 160000
+--- a/roms/opensbi
++++ b/roms/opensbi
+@@ -1 +1 @@
+-Subproject commit 057eb10b6d523540012e6947d5c9f63e95244e94
++Subproject commit a2b255b88918715173942f2c5e1f97ac9e90c877
+-- 
+2.34.1
 
-Daniel
-
-> 
->>   #define ISA_EXT_DATA_ENTRY(_name, _min_ver, _prop) \
->>       {#_name, _min_ver, CPU_CFG_OFFSET(_prop)}
->>
->> @@ -1056,17 +1061,18 @@ void riscv_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
->>   {
->>       Error *local_err = NULL;
->>
->> -    /*
->> -     * KVM accel does not have a specialized finalize()
->> -     * callback because its extensions are validated
->> -     * in the get()/set() callbacks of each property.
->> -     */
->>       if (tcg_enabled()) {
->>           riscv_tcg_cpu_finalize_features(cpu, &local_err);
->>           if (local_err != NULL) {
->>               error_propagate(errp, local_err);
->>               return;
->>           }
->> +    } else if (kvm_enabled()) {
->> +        riscv_kvm_cpu_finalize_features(cpu, &local_err);
->> +        if (local_err != NULL) {
->> +            error_propagate(errp, local_err);
->> +            return;
->> +        }
->>       }
->>
->>   #ifndef CONFIG_USER_ONLY
->> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->> index 53101b82c5..988471c7ba 100644
->> --- a/target/riscv/cpu.h
->> +++ b/target/riscv/cpu.h
->> @@ -495,6 +495,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->>                           bool probe, uintptr_t retaddr);
->>   char *riscv_isa_string(RISCVCPU *cpu);
->>   void riscv_cpu_list(void);
->> +bool riscv_cpu_option_set(const char *optname);
->>
->>   #define cpu_list riscv_cpu_list
->>   #define cpu_mmu_index riscv_cpu_mmu_index
->> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
->> index 62a1e51f0a..70fb075846 100644
->> --- a/target/riscv/kvm/kvm-cpu.c
->> +++ b/target/riscv/kvm/kvm-cpu.c
->> @@ -1490,6 +1490,65 @@ static void kvm_cpu_instance_init(CPUState *cs)
->>       }
->>   }
->>
->> +void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
->> +{
->> +    CPURISCVState *env = &cpu->env;
->> +    KVMScratchCPU kvmcpu;
->> +    struct kvm_one_reg reg;
->> +    uint64_t val;
->> +    int ret;
->> +
->> +    /* short-circuit without spinning the scratch CPU */
->> +    if (!cpu->cfg.ext_zicbom && !cpu->cfg.ext_zicboz) {
->> +        return;
->> +    }
->> +
->> +    if (!kvm_riscv_create_scratch_vcpu(&kvmcpu)) {
->> +        error_setg(errp, "Unable to create scratch KVM cpu");
->> +        return;
->> +    }
->> +
->> +    if (cpu->cfg.ext_zicbom &&
->> +        riscv_cpu_option_set(kvm_cbom_blocksize.name)) {
->> +
->> +        reg.id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CONFIG,
->> +                                        kvm_cbom_blocksize.kvm_reg_id);
->> +        reg.addr = (uint64_t)&val;
->> +        ret = ioctl(kvmcpu.cpufd, KVM_GET_ONE_REG, &reg);
->> +        if (ret != 0) {
->> +            error_setg(errp, "Unable to read cbom_blocksize, error %d", errno);
->> +            return;
->> +        }
->> +
->> +        if (cpu->cfg.cbom_blocksize != val) {
->> +            error_setg(errp, "Unable to set cbom_blocksize to a different "
->> +                       "value than the host (%lu)", val);
->> +            return;
->> +        }
->> +    }
->> +
->> +    if (cpu->cfg.ext_zicboz &&
->> +        riscv_cpu_option_set(kvm_cboz_blocksize.name)) {
->> +
->> +        reg.id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CONFIG,
->> +                                        kvm_cboz_blocksize.kvm_reg_id);
->> +        reg.addr = (uint64_t)&val;
->> +        ret = ioctl(kvmcpu.cpufd, KVM_GET_ONE_REG, &reg);
->> +        if (ret != 0) {
->> +            error_setg(errp, "Unable to read cbom_blocksize, error %d", errno);
->> +            return;
->> +        }
->> +
->> +        if (cpu->cfg.cboz_blocksize != val) {
->> +            error_setg(errp, "Unable to set cboz_blocksize to a different "
->> +                       "value than the host (%lu)", val);
->> +            return;
->> +        }
->> +    }
->> +
->> +    kvm_riscv_destroy_scratch_vcpu(&kvmcpu);
->> +}
->> +
->>   static void kvm_cpu_accel_class_init(ObjectClass *oc, void *data)
->>   {
->>       AccelCPUClass *acc = ACCEL_CPU_CLASS(oc);
->> diff --git a/target/riscv/kvm/kvm_riscv.h b/target/riscv/kvm/kvm_riscv.h
->> index 8329cfab82..4bd98fddc7 100644
->> --- a/target/riscv/kvm/kvm_riscv.h
->> +++ b/target/riscv/kvm/kvm_riscv.h
->> @@ -27,5 +27,6 @@ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
->>                             uint64_t guest_num);
->>   void riscv_kvm_aplic_request(void *opaque, int irq, int level);
->>   int kvm_riscv_sync_mpstate_to_kvm(RISCVCPU *cpu, int state);
->> +void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp);
->>
->>   #endif
->> --
->> 2.43.0
->>
->>
 
