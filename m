@@ -4,34 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF64EC46CD2
-	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Jan 2024 16:03:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFBD3C47074
+	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Jan 2024 16:06:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rKhEH-0005AT-2X; Tue, 02 Jan 2024 11:02:57 -0500
+	id 1rKhHL-0006sB-7v; Tue, 02 Jan 2024 11:06:07 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <SRS0=hBD0=IM=kaod.org=clg@ozlabs.org>)
- id 1rKhEC-00057K-Ro; Tue, 02 Jan 2024 11:02:52 -0500
+ id 1rKhGv-0006R1-9J; Tue, 02 Jan 2024 11:05:43 -0500
 Received: from gandalf.ozlabs.org ([150.107.74.76])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <SRS0=hBD0=IM=kaod.org=clg@ozlabs.org>)
- id 1rKhEA-0002Ay-5H; Tue, 02 Jan 2024 11:02:52 -0500
-Received: from gandalf.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
- by gandalf.ozlabs.org (Postfix) with ESMTP id 4T4HgQ2NfRz4x22;
- Wed,  3 Jan 2024 03:02:42 +1100 (AEDT)
+ id 1rKhGr-0002fC-Tr; Tue, 02 Jan 2024 11:05:39 -0500
+Received: from gandalf.ozlabs.org (mail.ozlabs.org
+ [IPv6:2404:9400:2221:ea00::3])
+ by gandalf.ozlabs.org (Postfix) with ESMTP id 4T4Hkj6Q0lz4wdB;
+ Wed,  3 Jan 2024 03:05:33 +1100 (AEDT)
 Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 4T4Hfs3GGMz4x23;
- Wed,  3 Jan 2024 03:02:13 +1100 (AEDT)
-Message-ID: <6fe17c0c-e9c4-46fc-bac0-8e977e531c8c@kaod.org>
-Date: Tue, 2 Jan 2024 17:02:08 +0100
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 4T4HkK0K3sz4wcM;
+ Wed,  3 Jan 2024 03:05:12 +1100 (AEDT)
+Message-ID: <5bcc750f-2736-4eca-aec2-f45e56a6fa92@kaod.org>
+Date: Tue, 2 Jan 2024 17:05:09 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/5] Replace "iothread lock" with "BQL" in comments
+Subject: Re: [PATCH v3 5/5] Rename "QEMU global mutex" to "BQL" in comments
+ and docs
 Content-Language: en-US
 To: Stefan Hajnoczi <stefanha@redhat.com>, qemu-devel@nongnu.org
 Cc: Hanna Reitz <hreitz@redhat.com>, qemu-riscv@nongnu.org,
@@ -86,9 +88,9 @@ Cc: Hanna Reitz <hreitz@redhat.com>, qemu-riscv@nongnu.org,
  BALATON Zoltan <balaton@eik.bme.hu>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 References: <20240102153529.486531-1-stefanha@redhat.com>
- <20240102153529.486531-5-stefanha@redhat.com>
+ <20240102153529.486531-6-stefanha@redhat.com>
 From: =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>
-In-Reply-To: <20240102153529.486531-5-stefanha@redhat.com>
+In-Reply-To: <20240102153529.486531-6-stefanha@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=150.107.74.76;
@@ -115,11 +117,12 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 1/2/24 16:35, Stefan Hajnoczi wrote:
-> The term "iothread lock" is obsolete. The APIs use Big QEMU Lock (BQL)
-> in their names. Update the code comments to use "BQL" instead of
-> "iothread lock".
+> The term "QEMU global mutex" is identical to the more widely used Big
+> QEMU Lock ("BQL"). Update the code comments and documentation to use
+> "BQL" instead of "QEMU global mutex".
 > 
 > Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
+> Acked-by: Markus Armbruster <armbru@redhat.com>
 > Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
@@ -128,7 +131,6 @@ Reviewed-by: Cédric Le Goater <clg@kaod.org>
 Thanks,
 
 C.
-
 
 
 
