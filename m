@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9993C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jan 2024 22:09:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EFAFC3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jan 2024 22:18:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rL9Pb-0008N5-DT; Wed, 03 Jan 2024 17:08:31 -0500
+	id 1rL9Z3-0001zy-C8; Wed, 03 Jan 2024 17:18:17 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rL9Pa-0008M6-0x
- for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 17:08:30 -0500
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
+ id 1rL9Z2-0001zh-0G
+ for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 17:18:16 -0500
+Received: from mail-oo1-xc2a.google.com ([2607:f8b0:4864:20::c2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rL9PY-0004sQ-1x
- for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 17:08:29 -0500
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-1d480c6342dso44259925ad.2
- for <qemu-riscv@nongnu.org>; Wed, 03 Jan 2024 14:08:27 -0800 (PST)
+ id 1rL9Z0-00014N-FU
+ for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 17:18:15 -0500
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-594965fbb3cso5245161eaf.1
+ for <qemu-riscv@nongnu.org>; Wed, 03 Jan 2024 14:18:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704319706; x=1704924506; darn=nongnu.org;
+ d=linaro.org; s=google; t=1704320293; x=1704925093; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=/eTTFbrv6dlsZWhQ1YSFmXMRMJ1j9PfOhE9AOL0gnrg=;
- b=ORg329/jrsAMNt6UDF58a10Cc5+I7623JWUxsu3kZIKUm6G6IN9EYq1RHUxKzBUc3o
- QXAjfVTRAzZ9ilF1UvXTPOItX5s7UZSPGvxqcfTT/OUbXOJdjkwD0IsUVxx3SLp4pe5K
- HeEvB/jLSlG5hgVK6ZIs/yqsGfI3uM2+Y+49D0Gt30O8SI6fItLNyILEyY4KVudwiktH
- DRgZKnQ23w0r/NWXojt4gRSas9nUFZpzx4w2rIuYLPB7Bdn/w+JmzQliLFVyGs6OrIP5
- 0nOpJZP/hIKpdnNuSBLPll5lE54VQhuUtPFZzT1sh0GAWzAa2RrnAP2o9M8l1jCzs4lQ
- 7B8A==
+ bh=oY7A6dcazrd1HX/YecrgNeGFMezD5hHIGXl4MS6ZxdA=;
+ b=T3703RyBJ4I8hIoHXkF/KEf/DB1LOqAa9eUA4IhtT3dMjHiw8BK+hGhyJdJWcpVOzf
+ S+OZyAYdyWe355lwiYz5qqJq1e+cF9JXNHltNDwFhDf2RFNx6EF6OHN2u8y/C00RCg0a
+ g8ZJpviyXagpHRY9Sz3nimPT/0E0yMVDhUk66G4vjMVrmKt0hwdY+/4R8u4CvBBl9/Gi
+ GNJ55gcGNAfWNO0WsnPAE8pTOYBTqJENxS76biYfG7NR2nXyYhv4rtuUrUt1VMNnQRJv
+ 7A0zl8xnffLSv/9r91IWarnKG9X9BlN+/nxSvsEN/T6MkTbnmgk2XSHfBAUZnmL7L//U
+ FYhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704319706; x=1704924506;
+ d=1e100.net; s=20230601; t=1704320293; x=1704925093;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=/eTTFbrv6dlsZWhQ1YSFmXMRMJ1j9PfOhE9AOL0gnrg=;
- b=MFvrMMgbtuHM2LBPK8x6fUKLmLkHDvvCm55/WjW/1F9P5kb7L5UIBbGsXJDLJIl10t
- +bCGqLMDTNMwPLlnvcTcy5+rLoyHzCO/a6SxqJCTLbsv27+IIV84lFgQGuOzApbOtYCm
- kDDzPc0IZtthqNNbLvqXv60/LEJOKXfS9DU0+rwoLGeGmbrJwVZO2yFlO33orYk+qD44
- GRPI3CwP3lghIx7zJtEuXvUzSY+7+ic5iGqflpKYza7X0TgI9YGuwgFHG4MZ0qdt1sfV
- l3H6I7SyEKutIVkNVPl3QHh9n2hhktIKOYyS0vwq0CUWNPBvBE+3+l9aUgPFCUhwla14
- 4tYQ==
-X-Gm-Message-State: AOJu0YxhrxXFfr/HEQjbBNrQlUWLa/qPFbGNf5TNosy2Tj+eaogjOaxb
- S9FF5QP2D9Ttswzv1mruz2RvDEXo4n6pnA==
-X-Google-Smtp-Source: AGHT+IHDl/Mc6Z49uGqyCYuhtbGC6UwegHbT/2hM6/FJ7/7e/yItiV3EtGQkFMSLE3Y/Nu03NRsgxA==
-X-Received: by 2002:a17:903:41c8:b0:1d4:5276:7674 with SMTP id
- u8-20020a17090341c800b001d452767674mr22189661ple.64.1704319706237; 
- Wed, 03 Jan 2024 14:08:26 -0800 (PST)
+ bh=oY7A6dcazrd1HX/YecrgNeGFMezD5hHIGXl4MS6ZxdA=;
+ b=AzG819VrZtxDsq/+x4zaWaxzeVJQ+CU6WdvuPgjV7PTUmbAARWHgM5x1YN87N4he/L
+ yIAD4oZSDqXEjnDVErc3W2uPPKOzt64O7S46Z/DD1Pjut8l4b0sHj+v58lnfY4XEhN4j
+ cLP/Z7pqtVwsXlY33piH4x+jojqwIFPR3nZWBqtiwwY7S4AO8J++m6TCqQPI7h4A3O0f
+ cZTvvnCLikmuAWm894oexnqREYP2kW4FFPFepOiiF9E4J/9ZZLevZn0AeXWn7O5wf3LL
+ 0M0vU1gvw/51eFkt2FkFcJP8EqgUsP7drol+VCxJ4X88mL4B//GeMaLCwGaVhEiLAJZX
+ bb8w==
+X-Gm-Message-State: AOJu0YzSOhquCifchQG+IoHMMj6RWWMHKTt8TwLhWWKJCP1els4xfDH+
+ juTfK1IpF85f/94MGlyCC4hztNT/qovfmQ==
+X-Google-Smtp-Source: AGHT+IHfl63e3h8k0UBNGbukm9N6fcWtClBQsI2DHfGkuEYK4eVmhRuqADGuMXejLyJE1ZfrfNa/Wg==
+X-Received: by 2002:a05:6358:6f8d:b0:170:cc82:db41 with SMTP id
+ s13-20020a0563586f8d00b00170cc82db41mr24209890rwn.21.1704320292794; 
+ Wed, 03 Jan 2024 14:18:12 -0800 (PST)
 Received: from [192.168.50.95] (124-149-254-207.tpgi.com.au. [124.149.254.207])
  by smtp.gmail.com with ESMTPSA id
- t1-20020a170902bc4100b001d4cd7bf923sm2228046plz.68.2024.01.03.14.08.22
+ k4-20020aa792c4000000b006ce5da5956csm23439586pfa.24.2024.01.03.14.18.08
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 03 Jan 2024 14:08:25 -0800 (PST)
-Message-ID: <47177ca3-e190-42b1-a6c2-d3a2be8cedb6@linaro.org>
-Date: Thu, 4 Jan 2024 09:08:18 +1100
+ Wed, 03 Jan 2024 14:18:12 -0800 (PST)
+Message-ID: <8ee0bdd6-42b8-4b4b-9083-ea6eba08447d@linaro.org>
+Date: Thu, 4 Jan 2024 09:18:04 +1100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/6] target/riscv: Add pointer masking tb flags
+Subject: Re: [PATCH v3 5/6] target/riscv: Update address modify functions to
+ take into account pointer masking
 Content-Language: en-US
 To: Alexey Baturo <baturo.alexey@gmail.com>
 Cc: zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
  Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
  kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 References: <20240103185716.1790546-1-me@deliversmonkey.space>
- <20240103185716.1790546-5-me@deliversmonkey.space>
+ <20240103185716.1790546-6-me@deliversmonkey.space>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240103185716.1790546-5-me@deliversmonkey.space>
+In-Reply-To: <20240103185716.1790546-6-me@deliversmonkey.space>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x630.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c2a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-oo1-xc2a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,53 +104,10 @@ On 1/4/24 05:57, Alexey Baturo wrote:
 > 
 > Signed-off-by: Alexey Baturo <baturo.alexey@gmail.com>
 > ---
->   target/riscv/cpu.h        |  3 +++
->   target/riscv/cpu_helper.c |  3 +++
->   target/riscv/translate.c  | 11 +++++++++++
->   3 files changed, 17 insertions(+)
-> 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index c607a94bba..4df160494f 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -546,6 +546,9 @@ FIELD(TB_FLAGS, ITRIGGER, 20, 1)
->   FIELD(TB_FLAGS, VIRT_ENABLED, 21, 1)
->   FIELD(TB_FLAGS, PRIV, 22, 2)
->   FIELD(TB_FLAGS, AXL, 24, 2)
-> +/* If pointer masking should be applied and address sign extended */
-> +FIELD(TB_FLAGS, PM_PMM, 26, 2)
-> +FIELD(TB_FLAGS, PM_SIGNEXTEND, 28, 1)
->   
->   #ifdef TARGET_RISCV32
->   #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 4c34e12ee3..b8d8a622f3 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -68,6 +68,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
->       RISCVCPU *cpu = env_archcpu(env);
->       RISCVExtStatus fs, vs;
->       uint32_t flags = 0;
-> +    bool pm_signext = !riscv_cpu_bare_mode(env);
->   
->       *pc = env->xl == MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
->       *cs_base = 0;
-> @@ -135,6 +136,8 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
->       flags = FIELD_DP32(flags, TB_FLAGS, VS, vs);
->       flags = FIELD_DP32(flags, TB_FLAGS, XL, env->xl);
->       flags = FIELD_DP32(flags, TB_FLAGS, AXL, cpu_address_xl(env));
-> +    flags = FIELD_DP32(flags, TB_FLAGS, PM_PMM, riscv_pm_get_pmm(env));
-> +    flags = FIELD_DP32(flags, TB_FLAGS, PM_SIGNEXTEND, pm_signext);
+>   target/riscv/translate.c     | 12 ++++++++----
+>   target/riscv/vector_helper.c | 12 ++++++++++++
+>   2 files changed, 20 insertions(+), 4 deletions(-)
 
-You should avoid setting these fields (i.e. leave them zero) when they won't be used...
-
-> +    if (get_xl(ctx) == MXL_RV32) {
-> +        ctx->addr_width = 32;
-> +        ctx->addr_signed = false;
-
-... like so.
-
-Otherwise,
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 
