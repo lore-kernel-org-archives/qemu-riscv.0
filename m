@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1C96C4707C
-	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jan 2024 17:36:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C611C3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jan 2024 17:36:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rL58I-0003mD-3B; Wed, 03 Jan 2024 12:34:22 -0500
+	id 1rL58U-00043h-Il; Wed, 03 Jan 2024 12:34:34 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rL58F-0003iD-J6
- for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:34:19 -0500
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
+ id 1rL58P-0003yq-Hn
+ for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:34:29 -0500
+Received: from mail-lj1-x235.google.com ([2a00:1450:4864:20::235])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rL57w-0002TB-C1
- for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:34:19 -0500
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-3373bc6d625so2650026f8f.3
- for <qemu-riscv@nongnu.org>; Wed, 03 Jan 2024 09:33:59 -0800 (PST)
+ id 1rL584-0002Va-1b
+ for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:34:29 -0500
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2cc7d2c1ff0so114507041fa.3
+ for <qemu-riscv@nongnu.org>; Wed, 03 Jan 2024 09:34:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704303239; x=1704908039; darn=nongnu.org;
+ d=linaro.org; s=google; t=1704303243; x=1704908043; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KQu3dEC4bAAkAiF4vI+JksTKEdmVPQCRZYwFmghpZj8=;
- b=GKCNt6pyYd5wN7PxyfxpueM2/VJ0Vu34VBAa3MNKUABjv/ZZtKbZVYcxOcbUT/BdD3
- +MjaSeGcFMOXd1bgur4vaUqj8Kn3cSGeFAW+wXzd2Lh2PNjoR6nweXMHkEr0w1+ffBbb
- wKmAFEw1l16QZ3RQhUu30C0lNx8lg9P8kucZpehoOwqDbJPrhe2Dmdslt2BxVmqacocZ
- ZQKOJVHX5vKywvdDvo7mqA9Gl+yywytDMfxkEDzcMBS1t/rW+AdHQracy7YNgeAJh9CZ
- IZkfjhQbxNyXiaizE6EbeYMuFBUO10C/tAOGM7coS4PR4f6KLYs7RYJoPAGaIfTQj/BZ
- rGkQ==
+ bh=G7uxGZGov81O+5jLuoaBr/C5I/uZZh1/zGx1+p9cIt8=;
+ b=Auu0NJM0w0lP+xQ2nDVJjbOs9Rh9fBl6lkEe1wrdgaCbZIHVUNzirOuVa6rwdMzi4N
+ j6/wcgTf1iitxO9BX7U53zwkWy1g0IWvsCygTrnG4W8h1Kfd62eSPkx/a3YnVfFjWIWC
+ HC9nRuz+pRcOHzs+H+Tr7+WJe49Pk4yZt/5AEqAvjYdgjb5wC+Rkk+P3b4WvRBiwgvQB
+ dZu+PczlBaOH/H68UyN5PqtcwhVCJCmM++IDvbWRhlyljzM2ivRMLraxfR6UL7nGWoeO
+ E3GJO1bxYMzStvkODb0/8LlZE+HddafIjHTzzCRMF48oB50MVsDVaqzeDbnw53mQqSSm
+ KSlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704303239; x=1704908039;
+ d=1e100.net; s=20230601; t=1704303243; x=1704908043;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KQu3dEC4bAAkAiF4vI+JksTKEdmVPQCRZYwFmghpZj8=;
- b=EMvUctmhKcL85BfOgEoU6P1F2BDeIFPNQONUYO+uyA/6LO7uYJhXwHXUSPPC6HCQVz
- /p3POIF3F6peXZ2l6vE+TEgT42y0Ya17zG/qjQdrhUoN3lv+x+ib6yRhH8E9WfN/kJVb
- 3I9i5ZPb7hnqwZ4X/Wur7ArJvk3CtAma1F9sNU1uvDxcRYZ0zFzpqft7HQsscvHmLkwN
- A+nRzSLKQxmQwoi96XjCYA+aqb7xbR6zxi6jgl8+VFR7Wr5Bhybu8xlPJdx9xHeADht+
- qPBkcs8hEVByT0RqN3x07dMQf+tL4HxvjY73Loxr2EVDkgZS6oEMcWtA1vsOEWNBiYIf
- u2+g==
-X-Gm-Message-State: AOJu0Ywf0TbvvK5WP7s4E3Vs+31OlOZBNFzRma+wKtNoMXQOp5iehsr6
- 0zuq5p9bYXKanCOtHxaiqQVg0YxPIEsA0A==
-X-Google-Smtp-Source: AGHT+IHvYycIZso0+RNoX8bRrVZuyBR3PSZbo6WxRH0B5gzJyTbCgXGQtXc87zbj/WxsWkkJLPXsCA==
-X-Received: by 2002:a05:6000:1369:b0:336:6e22:672e with SMTP id
- q9-20020a056000136900b003366e22672emr8708289wrz.38.1704303239019; 
- Wed, 03 Jan 2024 09:33:59 -0800 (PST)
+ bh=G7uxGZGov81O+5jLuoaBr/C5I/uZZh1/zGx1+p9cIt8=;
+ b=PzeCBcHdatoQEgbtezXlDrUqQTRPLTfL5IqrzDgMDsc70BTZud+oQLgU+bYvWHPcTj
+ KXyBcp3uYRgZaLmn+4YS4u14gR/bFnNlCLz4d+BWY/2egX9oEE4voncjcYbvThiJdG65
+ WS0AS9AedMy2N6ZqbaJSqlS320Liu8wXJQYF541Y0OJCZY80Nsu2/5ujOZyAqUVhj1ZX
+ 9BAmANUDU/0T9W9ttlq1UoLrCIRPHh6UmJ3moYyusPKIy8Y2mb4+zL2af4pnLZb5Crr2
+ lvLSJn9fLL0+VBAxZYJCwL5ndlvV9PTpf8xMn/LpPTK5N2rcqNTJt5QugPf5aaXHhERj
+ 5u7Q==
+X-Gm-Message-State: AOJu0Yz66Osq8EJF9QO6pGlelkRLQcHv24k5luYzZBEbqMvk9uqFMXLd
+ NUPK+GG1eWFDm8yzN3DHbbOrZO1fa1NUjQ==
+X-Google-Smtp-Source: AGHT+IFhNAa0ExWYCS2KvTjl2oi2iRsIB5/oaggT0hzzaXckkjHspuvOE576DfxADqAu/SUDJduuEQ==
+X-Received: by 2002:a05:651c:686:b0:2cc:d555:bc66 with SMTP id
+ x6-20020a05651c068600b002ccd555bc66mr4899025ljb.76.1704303242728; 
+ Wed, 03 Jan 2024 09:34:02 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- b7-20020adfe307000000b0033674734a58sm15715029wrj.79.2024.01.03.09.33.53
+ q28-20020adfab1c000000b0033690139ea5sm28923405wrc.44.2024.01.03.09.33.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Wed, 03 Jan 2024 09:33:56 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 3CB4D5F92D;
+ by draig.lan (Postfix) with ESMTP id 817AB5F944;
  Wed,  3 Jan 2024 17:33:50 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -94,24 +94,24 @@ Cc: qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-riscv@nongnu.org,
  Alistair Francis <alistair.francis@wdc.com>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 10/43] qtest: bump pxe-test timeout to 10 minutes
-Date: Wed,  3 Jan 2024 17:33:16 +0000
-Message-Id: <20240103173349.398526-11-alex.bennee@linaro.org>
+Subject: [PATCH v2 13/43] qtest: bump qos-test timeout to 2 minutes
+Date: Wed,  3 Jan 2024 17:33:19 +0000
+Message-Id: <20240103173349.398526-14-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240103173349.398526-1-alex.bennee@linaro.org>
 References: <20240103173349.398526-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::432;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x432.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::235;
+ envelope-from=alex.bennee@linaro.org; helo=mail-lj1-x235.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -129,28 +129,28 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Daniel P. Berrangé <berrange@redhat.com>
 
-The pxe-test uses the boot_sector_test() function, and that already
-uses a timeout of 600 seconds. So adjust the timeout on the meson
-side accordingly.
+The qos-test takes just under 1 minute in a --enable-debug
+build. Bumping to 2 minutes will give more headroom.
 
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
-[thuth: Bump timeout to 600s and adjust commit description]
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+Message-ID: <20230717182859.707658-10-berrange@redhat.com>
 Signed-off-by: Thomas Huth <thuth@redhat.com>
-Message-Id: <20231215070357.10888-7-thuth@redhat.com>
+Message-Id: <20231215070357.10888-10-thuth@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
  tests/qtest/meson.build | 1 +
  1 file changed, 1 insertion(+)
 
 diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
-index 7a4160df046..ec93d5a384f 100644
+index dc1e6da5c7b..b02ca540cff 100644
 --- a/tests/qtest/meson.build
 +++ b/tests/qtest/meson.build
-@@ -4,6 +4,7 @@ slow_qtests = {
-   'npcm7xx_pwm-test': 300,
-   'qom-test' : 900,
-   'test-hmp' : 240,
-+  'pxe-test': 600,
+@@ -7,6 +7,7 @@ slow_qtests = {
+   'pxe-test': 600,
+   'prom-env-test': 360,
+   'boot-serial-test': 180,
++  'qos-test': 120,
  }
  
  qtests_generic = [
