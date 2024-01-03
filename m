@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A90A3C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jan 2024 23:27:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E081EC47073
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jan 2024 23:27:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rLAdg-0004zN-2P; Wed, 03 Jan 2024 18:27:08 -0500
+	id 1rLAeG-00054o-3A; Wed, 03 Jan 2024 18:27:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1rLAde-0004yq-D8
- for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 18:27:06 -0500
-Received: from mail-lj1-x233.google.com ([2a00:1450:4864:20::233])
+ id 1rLAeE-00054O-Vf
+ for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 18:27:42 -0500
+Received: from mail-lf1-x135.google.com ([2a00:1450:4864:20::135])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1rLAdc-000791-7H
- for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 18:27:06 -0500
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-2cd20d9d483so2159311fa.1
- for <qemu-riscv@nongnu.org>; Wed, 03 Jan 2024 15:27:03 -0800 (PST)
+ id 1rLAe9-0007Bd-Sd
+ for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 18:27:42 -0500
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-50ea226bda8so1993887e87.2
+ for <qemu-riscv@nongnu.org>; Wed, 03 Jan 2024 15:27:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1704324422; x=1704929222;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1704324456; x=1704929256;
  darn=nongnu.org; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oX+Ot/NWA8X93J/IMQOe1aMpkSFiyDZq3hoDSwe4gcE=;
- b=ab9cEVpV+HxJZ7+PBuiki3x8EWAbY9YIqr8I/c2PfaVtuEaZoJr5uRbCqv7Tj85owr
- 1TnEO9D3RAkLSJIp2T0LQi9Sfwv8/GIy2ZZG6VHPhtEcLW8hnWjQFwa+DZNhTDvjpdJK
- UvInrgPWkQ5BlhqFbyxcS+7x+gWX3+iwWQoOT0oEGfYPvqATGWm10yhJLv3zrBFBZaFq
- QhAdI4Fa9nqGmhDdUskQaHHjCjgwLWg98VnABp9OD+uzHV0S+3OAT/SW8o+XuUQvHvid
- yZvTQ7a1FCdI3HbpOPI044hpP2EEBzdz2EtCl8PZpSK7pq+Cgi+LhQYNQ2VpzNI8BCZQ
- O0lQ==
+ bh=kBIT0AqBPbtnqVlqZa8omJbPsDRit6ZaF2wl5BN6R9I=;
+ b=0NqKGRYaRiTOlxFu2umRibsiUHJ7wjHYkz0u9XPNKYaZeDeATxtbNVOUzb7orIW7Gw
+ azGuNhkVAbWv3ulgUEUcUdT6GjpCnFslTAZ05nh8ew8JhEUORvOmoGAV03PNOpoYjSdx
+ UsfNOQCnbbR0g2azCiezcWDljTplVbNQfoeBednzJ2bjJknaklLcTGuwzV7ZhNhEh12F
+ PD5BarmwKj2cDTvcx9MTMo8AlMCK7WpMVjblVRMl0ym5QyyWCpBYu7Pe6X6fkQLPWVGE
+ 1dG4+eQ3omN4R5oXP48GkqUUbgz/8wASEGgE8Ljb8dSx4ZUYOL5h0NWRPs+24lrRP0eT
+ EQrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704324422; x=1704929222;
+ d=1e100.net; s=20230601; t=1704324456; x=1704929256;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oX+Ot/NWA8X93J/IMQOe1aMpkSFiyDZq3hoDSwe4gcE=;
- b=Y6fZyknwIWefkzvLMjDZvavmPz0YcOz/G/6Jh9t5TgKB8/zwmNT6XxXZaAYFyYPNID
- drctNdCzd77KSTdzcJiyskR+kByj6X53xgJg4r5FeHuyOy1LdWX2Si8KtAukTxjU7H6H
- KlwRmjz4WtJ0AUQTh1pf2Vuqs/neNsTM/LBAyCR9CN5uy8segw2a0uLfmczJyoY24G/R
- gUa4Yy7t5vFGSHUkcnZXoXfPD5igkrsVg9WkpMgsPJzkTE52LQFeb+vJ25bRPAhyYPR8
- ijN7GTXfYtzxd8M7M20/qSCwaxlIzOIn4lITyIV1wDp7jW1HEMGPFbcNAMVTAfZl2Me8
- neXg==
-X-Gm-Message-State: AOJu0YwTkEt0PzSsHF7PoFJIgKFUbl740obXDcumOpl8qUkAa0C6FNGs
- +XpiJbyjY0cDLgemMtZts8OXlz131kSEtgIjbkNEMMlkupuPsw==
-X-Google-Smtp-Source: AGHT+IHQaNdfzIPsduidcWjhYBkdNEYQnH3nn6xqhJD+4oNT0gSFieKWcpBeGndLvQtM5F9bRuPyHvph6+ULRONdnjE=
-X-Received: by 2002:a05:651c:2119:b0:2cd:449:149 with SMTP id
- a25-20020a05651c211900b002cd04490149mr2638597ljq.80.1704324421707; Wed, 03
- Jan 2024 15:27:01 -0800 (PST)
+ bh=kBIT0AqBPbtnqVlqZa8omJbPsDRit6ZaF2wl5BN6R9I=;
+ b=fUkoqcTIgL98Vvmjm0MvET81Fu7eYbJPbJc04IaQqj2aFemfKXc6af37zBW9PJ8WFv
+ 16P8CVltdHntNPLmPQFE0FdsUH7wuIQ4tkTZyAqKOTJ7XNjirDDjb17OwjzLSesaS9Uc
+ FdgJTTz69XdL/fpnxf3xoMBISfPfHXAlJeUnC26jAC0kFn+C7FPWlmcWBKb2IjVb4Ll5
+ yVZ7oj1QsdD22MBq3DJ/BkvNu3KF6xO7x3kzjX7fCmjSHzKghsqCchgC18dMOBDMbagl
+ T+gcOCnlHeVkLB2bM5zf/dYOD8M10gvP/LaNp1mDmP6Q69MuXwwdPBI5m616g8pjH0r6
+ WW1A==
+X-Gm-Message-State: AOJu0YyE121mcjI1vnNG2XV6YXtZogchVLnwQug+jwd0jKT+xOcAOwoS
+ ScEgS3J9GmeZoxWTSxbMWFe6j0n51KNFHVsJYvMxo0CTuHkeDg==
+X-Google-Smtp-Source: AGHT+IGVS5/lXQEZwDniMtTDdZVjoMiUgUW5DO85BsL+uWxzhXQPCk9BfyUjn5gZWBMAnwjSxSrgwHW/zB9PTwAaIGA=
+X-Received: by 2002:a19:f807:0:b0:50e:7703:3b0b with SMTP id
+ a7-20020a19f807000000b0050e77033b0bmr5654504lff.75.1704324455681; Wed, 03 Jan
+ 2024 15:27:35 -0800 (PST)
 MIME-Version: 1.0
 References: <20231229004929.3842055-1-atishp@rivosinc.com>
- <20231229004929.3842055-3-atishp@rivosinc.com>
- <ff37b49d-e152-472e-8c24-4adbb8cdcb46@ventanamicro.com>
-In-Reply-To: <ff37b49d-e152-472e-8c24-4adbb8cdcb46@ventanamicro.com>
+ <20231229004929.3842055-5-atishp@rivosinc.com>
+ <21533886-8389-4701-b541-dca295cb2814@ventanamicro.com>
+In-Reply-To: <21533886-8389-4701-b541-dca295cb2814@ventanamicro.com>
 From: Atish Kumar Patra <atishp@rivosinc.com>
-Date: Wed, 3 Jan 2024 15:26:50 -0800
-Message-ID: <CAHBxVyEqiutsbsADKpOOJ_oT5Y-W8MWUWQgQY7ihAriL4et3+Q@mail.gmail.com>
-Subject: Re: [v2 2/5] target/riscv: Add cycle & instret privilege mode
- filtering properties
+Date: Wed, 3 Jan 2024 15:27:24 -0800
+Message-ID: <CAHBxVyGufrYRP5t5M0-0CwYnBRcu7_00ueHaUAQGOhu3JUs0OQ@mail.gmail.com>
+Subject: Re: [v2 4/5] target/riscv: Add cycle & instret privilege mode
+ filtering support
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
  Bin Meng <bin.meng@windriver.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
@@ -71,14 +71,15 @@ Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
  Weiwei Li <liwei1518@gmail.com>, kaiwenxue1@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::233;
- envelope-from=atishp@rivosinc.com; helo=mail-lj1-x233.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::135;
+ envelope-from=atishp@rivosinc.com; helo=mail-lf1-x135.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -94,7 +95,7 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jan 3, 2024 at 12:11=E2=80=AFPM Daniel Henrique Barboza
+On Wed, Jan 3, 2024 at 12:18=E2=80=AFPM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
 >
@@ -102,84 +103,199 @@ On Wed, Jan 3, 2024 at 12:11=E2=80=AFPM Daniel Henrique Barboza
 > On 12/28/23 21:49, Atish Patra wrote:
 > > From: Kaiwen Xue <kaiwenx@rivosinc.com>
 > >
-> > This adds the properties for ISA extension smcntrpmf. Patches
-> > implementing it will follow.
+> > QEMU only calculates dummy cycles and instructions, so there is no
+> > actual means to stop the icount in QEMU. Hence this patch merely adds
+> > the functionality of accessing the cfg registers, and cause no actual
+> > effects on the counting of cycle and instret counters.
 > >
 > > Signed-off-by: Atish Patra <atishp@rivosinc.com>
 > > Signed-off-by: Kaiwen Xue <kaiwenx@rivosinc.com>
 > > ---
-> >   target/riscv/cpu.c     | 3 ++-
-> >   target/riscv/cpu_cfg.h | 1 +
-> >   2 files changed, 3 insertions(+), 1 deletion(-)
+> >   target/riscv/cpu.c |  1 +
+> >   target/riscv/csr.c | 83 +++++++++++++++++++++++++++++++++++++++++++++=
++
+> >   2 files changed, 84 insertions(+)
 > >
 > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > index 83c7c0cf07be..da3f05cd5373 100644
+> > index 54395f95b299..d24f7ff8b55b 100644
 > > --- a/target/riscv/cpu.c
 > > +++ b/target/riscv/cpu.c
-> > @@ -148,6 +148,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
-> >       ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen)=
-,
-> >       ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
-> >       ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
-> > +    ISA_EXT_DATA_ENTRY(smcntrpmf, PRIV_VERSION_1_12_0, ext_smcntrpmf),
-> >       ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
-> >       ISA_EXT_DATA_ENTRY(svadu, PRIV_VERSION_1_12_0, ext_svadu),
-> >       ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
-> > @@ -1296,6 +1297,7 @@ const char *riscv_get_misa_ext_description(uint32=
+> > @@ -1297,6 +1297,7 @@ const char *riscv_get_misa_ext_description(uint32=
 _t bit)
 > >   const RISCVCPUMultiExtConfig riscv_cpu_extensions[] =3D {
 > >       /* Defaults for standard extensions */
 > >       MULTI_EXT_CFG_BOOL("sscofpmf", ext_sscofpmf, false),
-> > +    DEFINE_PROP_BOOL("smcntrpmf", RISCVCPU, cfg.ext_smcntrpmf, false),
+> > +    MULTI_EXT_CFG_BOOL("smcntrpmf", ext_smcntrpmf, false),
 >
-> This will end up breaking the build since this macro is adding a Property=
- object
-> inside a RISCVCPUMultiExtConfig array. Patch 3 is then fixing it by remov=
-ing this
-> line, so in the end the build works fine. But having a patch that doesn't=
- build
-> can make future bisects unpleasant.
+>
+> As I said in patch 2 this declaration can happen there instead.
 >
 
-This was a rebase error. I will fix it in the next version.
+Yup. Will do it.
 
-> I don't see a problem adding right now the actual flag:
 >
-> +    MULTI_EXT_CFG_BOOL("smcntrpmf", ext_smcntrpmf, false),
+> >       MULTI_EXT_CFG_BOOL("zifencei", ext_zifencei, true),
+> >       MULTI_EXT_CFG_BOOL("zicsr", ext_zicsr, true),
+> >       MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
+> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> > index 283468bbc652..618e801a7612 100644
+> > --- a/target/riscv/csr.c
+> > +++ b/target/riscv/csr.c
+> > @@ -233,6 +233,27 @@ static RISCVException sscofpmf_32(CPURISCVState *e=
+nv, int csrno)
+> >       return sscofpmf(env, csrno);
+> >   }
+> >
+> > +static RISCVException smcntrpmf(CPURISCVState *env, int csrno)
+> > +{
+> > +    RISCVCPU *cpu =3D env_archcpu(env);
+> > +
+> > +    if (!cpu->cfg.ext_smcntrpmf) {
+> > +        return RISCV_EXCP_ILLEGAL_INST;
+> > +    }
 >
-> The flag will do nothing, sure, but the commit msg already mentions "Patc=
-hes
-> implementing it will follow", so it's fine to me.
+> env_archcpu() should be avoided when possible due to its overhead. You ca=
+n use
+> riscv_cpu_cfg() to retrieve cpu->cfg using 'env':
 >
+
+Sure. Will fix it.
+
+> > +    if (!riscv_cpu_cfg(env)->ext_smcntrpmf) {
+> > +        return RISCV_EXCP_ILLEGAL_INST;
+> > +    }
 >
 >
 > Thanks,
 >
 > Daniel
 >
->
-> >       MULTI_EXT_CFG_BOOL("zifencei", ext_zifencei, true),
-> >       MULTI_EXT_CFG_BOOL("zicsr", ext_zicsr, true),
-> >       MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
-> > @@ -1308,7 +1310,6 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions=
-[] =3D {
-> >       MULTI_EXT_CFG_BOOL("zve64f", ext_zve64f, false),
-> >       MULTI_EXT_CFG_BOOL("zve64d", ext_zve64d, false),
-> >       MULTI_EXT_CFG_BOOL("sstc", ext_sstc, true),
-> > -
-> >       MULTI_EXT_CFG_BOOL("smepmp", ext_smepmp, false),
-> >       MULTI_EXT_CFG_BOOL("smstateen", ext_smstateen, false),
-> >       MULTI_EXT_CFG_BOOL("svadu", ext_svadu, true),
-> > diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> > index f4605fb190b9..00c34fdd3209 100644
-> > --- a/target/riscv/cpu_cfg.h
-> > +++ b/target/riscv/cpu_cfg.h
-> > @@ -72,6 +72,7 @@ struct RISCVCPUConfig {
-> >       bool ext_zihpm;
-> >       bool ext_smstateen;
-> >       bool ext_sstc;
-> > +    bool ext_smcntrpmf;
-> >       bool ext_svadu;
-> >       bool ext_svinval;
-> >       bool ext_svnapot;
+> > +
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> > +static RISCVException smcntrpmf_32(CPURISCVState *env, int csrno)
+> > +{
+> > +    if (riscv_cpu_mxl(env) !=3D MXL_RV32) {
+> > +        return RISCV_EXCP_ILLEGAL_INST;
+> > +    }
+> > +
+> > +    return smcntrpmf(env, csrno);
+> > +}
+> > +
+> > +
+> >   static RISCVException any(CPURISCVState *env, int csrno)
+> >   {
+> >       return RISCV_EXCP_NONE;
+> > @@ -818,6 +839,54 @@ static int read_hpmcounterh(CPURISCVState *env, in=
+t csrno, target_ulong *val)
+> >
+> >   #else /* CONFIG_USER_ONLY */
+> >
+> > +static int read_mcyclecfg(CPURISCVState *env, int csrno, target_ulong =
+*val)
+> > +{
+> > +    *val =3D env->mcyclecfg;
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> > +static int write_mcyclecfg(CPURISCVState *env, int csrno, target_ulong=
+ val)
+> > +{
+> > +    env->mcyclecfg =3D val;
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> > +static int read_mcyclecfgh(CPURISCVState *env, int csrno, target_ulong=
+ *val)
+> > +{
+> > +    *val =3D env->mcyclecfgh;
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> > +static int write_mcyclecfgh(CPURISCVState *env, int csrno, target_ulon=
+g val)
+> > +{
+> > +    env->mcyclecfgh =3D val;
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> > +static int read_minstretcfg(CPURISCVState *env, int csrno, target_ulon=
+g *val)
+> > +{
+> > +    *val =3D env->minstretcfg;
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> > +static int write_minstretcfg(CPURISCVState *env, int csrno, target_ulo=
+ng val)
+> > +{
+> > +    env->minstretcfg =3D val;
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> > +static int read_minstretcfgh(CPURISCVState *env, int csrno, target_ulo=
+ng *val)
+> > +{
+> > +    *val =3D env->minstretcfgh;
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> > +static int write_minstretcfgh(CPURISCVState *env, int csrno, target_ul=
+ong val)
+> > +{
+> > +    env->minstretcfgh =3D val;
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> >   static int read_mhpmevent(CPURISCVState *env, int csrno, target_ulong=
+ *val)
+> >   {
+> >       int evt_index =3D csrno - CSR_MCOUNTINHIBIT;
+> > @@ -4922,6 +4991,13 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D=
+ {
+> >                                write_mcountinhibit,
+> >                                .min_priv_ver =3D PRIV_VERSION_1_11_0   =
+    },
+> >
+> > +    [CSR_MCYCLECFG]      =3D { "mcyclecfg",   smcntrpmf, read_mcyclecf=
+g,
+> > +                             write_mcyclecfg,
+> > +                             .min_priv_ver =3D PRIV_VERSION_1_12_0    =
+   },
+> > +    [CSR_MINSTRETCFG]    =3D { "minstretcfg", smcntrpmf, read_minstret=
+cfg,
+> > +                             write_minstretcfg,
+> > +                             .min_priv_ver =3D PRIV_VERSION_1_12_0    =
+   },
+> > +
+> >       [CSR_MHPMEVENT3]     =3D { "mhpmevent3",     any,    read_mhpmeve=
+nt,
+> >                                write_mhpmevent                         =
+  },
+> >       [CSR_MHPMEVENT4]     =3D { "mhpmevent4",     any,    read_mhpmeve=
+nt,
+> > @@ -4981,6 +5057,13 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D=
+ {
+> >       [CSR_MHPMEVENT31]    =3D { "mhpmevent31",    any,    read_mhpmeve=
+nt,
+> >                                write_mhpmevent                         =
+  },
+> >
+> > +    [CSR_MCYCLECFGH]     =3D { "mcyclecfgh",   smcntrpmf_32, read_mcyc=
+lecfgh,
+> > +                             write_mcyclecfgh,
+> > +                             .min_priv_ver =3D PRIV_VERSION_1_12_0    =
+    },
+> > +    [CSR_MINSTRETCFGH]   =3D { "minstretcfgh", smcntrpmf_32, read_mins=
+tretcfgh,
+> > +                             write_minstretcfgh,
+> > +                             .min_priv_ver =3D PRIV_VERSION_1_12_0    =
+    },
+> > +
+> >       [CSR_MHPMEVENT3H]    =3D { "mhpmevent3h",    sscofpmf_32,  read_m=
+hpmeventh,
+> >                                write_mhpmeventh,
+> >                                .min_priv_ver =3D PRIV_VERSION_1_12_0   =
+     },
 
