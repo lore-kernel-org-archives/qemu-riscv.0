@@ -4,113 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C044C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jan 2024 17:40:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11C7BC3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jan 2024 17:41:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rL5DG-0006uj-F3; Wed, 03 Jan 2024 12:39:30 -0500
+	id 1rL5EW-0002mr-B9; Wed, 03 Jan 2024 12:40:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rL5D5-0006FX-5M
- for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:39:20 -0500
-Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rL5EG-0002Kq-Q1
+ for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:40:34 -0500
+Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rL5Cw-0000dc-8A
- for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:39:18 -0500
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-40d894764e7so25111445e9.1
- for <qemu-riscv@nongnu.org>; Wed, 03 Jan 2024 09:39:09 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rL5EF-0001WI-0P
+ for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:40:32 -0500
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-5ce2aada130so2075828a12.1
+ for <qemu-riscv@nongnu.org>; Wed, 03 Jan 2024 09:40:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704303548; x=1704908348; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1704303630; x=1704908430; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TjgnYFLBOv5uB2tWkg/kIZdJs8xT0wOiNJtUez299cQ=;
- b=W1qQNInEuA+Z2I8CU38mZRcMQ9lAXxekImthC6KfNg6T9pmsUqW591gAacpTuJc8dr
- /zs+EvWQy0Qu3cquBHgyFbpdgHcXe1G5YAFjPJgHPSCS5fLkPAei/+OBXo3UItHtG28l
- /gTFjebnnuO1J4+14JXiJDOaPgWVU7EOi7xjluJvN5GoETSNoGKh8q1jYn5oeoOXAZtw
- GabI1dRvoFzrQZEdWryPajahZNb6MnQyeTq7r2MyoOfu/65QRNgil9O7INVzDcBONGX4
- tIfkr+roUYtCBB0L7lZ/DVd4knWGI2ScoP/bcolVteT+nTLDOiBREUwbPk7cTXjCha6l
- PHog==
+ bh=afT5wE04eaPASU0VvwKt04xd7mUQk2Pdh4so599y5Fs=;
+ b=Lj5cMSGOaHW8UA3Px1FW8//5ckIUtPqLUd6NTSmfmVstbQH+QQwUW+kFHEdTZWz+j3
+ VmZaglOQOiZHtKZEfIwti4luH7moX6+T6bU0lwL3fUGrJskHLqKnNi/mv1+ZkH59K+gN
+ KUDOOcea4BItoM0GcPcpRAwOD91NeSwk000XHWeB9lldm91JPwPyrybphQEzFWfcxWcs
+ PQdOLCg1E9qptizSwIReXZM0uErnLb8RyvD3FSj1W5Py1AjD+z/F/wN4B1+03t3lcfzj
+ aCMjhA51xuQO7oIJXsZhiZl/U3DU2XfTs6indyg5cXyDPHcKHAgybeSKxXkhbUf8RPbh
+ Gy0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704303548; x=1704908348;
+ d=1e100.net; s=20230601; t=1704303630; x=1704908430;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TjgnYFLBOv5uB2tWkg/kIZdJs8xT0wOiNJtUez299cQ=;
- b=opz6Nwc7lEWJD7G2uM7JqwjZyQxFX0FXYG14w4RF589e1vAJBfgxA6YBcragtwkvSP
- avCY8iOpnrr8GE+CXBS054/pQRdbLBYyijcX1sO9f9CXdOK2SKiTev04/EqvK6wqjJsb
- kBItud2gwk/aLk5d77CMAOFPFrpBDLKSQ5nMx+msLTsXIRnEYrukpAGFDyiWuwqZGULK
- oIhYr720vk3f9IkWZvVRbnl730Lri4tvzIDePoip1YGfloHkOvyUdx+Eq1FFD9x0Zx0b
- bAJ0CT0iol7hp1zCQKe3I+wfkymWYVhjDNbr54rtWeJ7aPJgQdjAQik46qkXCVSka0T9
- nkSw==
-X-Gm-Message-State: AOJu0Yyn48ozAavdwpYdGZDy8wRZqR+W7/Y+LSziCWEa+9eksvmA+qvN
- UWzCOJ6g2FiLkX099PbZeDsD6OI45zRhkQ==
-X-Google-Smtp-Source: AGHT+IECwsD+EsV7hgtfvLIigahdUQBBQ70d0NAK/wXl9lkOBh690IpgKO7C8ioQ4D+awmSxFlPX5A==
-X-Received: by 2002:a7b:cb92:0:b0:40d:38cd:ad5c with SMTP id
- m18-20020a7bcb92000000b0040d38cdad5cmr6656970wmi.263.1704303548411; 
- Wed, 03 Jan 2024 09:39:08 -0800 (PST)
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- i15-20020a05600c354f00b0040d604dea3bsm2972869wmq.4.2024.01.03.09.39.05
+ bh=afT5wE04eaPASU0VvwKt04xd7mUQk2Pdh4so599y5Fs=;
+ b=MiXA1CIe04ZDi/8ZIHgLgO0SHBUci7U+r4JssKUlSc2WCVHV26HZ5Jl43bNG5d7YYk
+ gGSLuzJTzqVP++bi4IBY55dXoZ9aFAk7RMrB25ay+fNCyoxG9ZHsIdRshdpuwo7OlJwP
+ KWFg7beCZJEN48iK17uW7xeKrqElEwJGcBsxTKoYLtiWyEuJL1rMSK4nxhuNdta4zCxd
+ qObWiJcyJyL6ypd5gfG4ZFavHqK4olAPSoOuk8GkZbPPiXrP8v0fVHSudtHsYtSaIvyP
+ P06mau92kD1ixCXPwAE0YQMFB+4AC34s6baSBavIh6A4AYkRnF79KXxVWvSa8HJZ1Dqi
+ ZXVA==
+X-Gm-Message-State: AOJu0YyAUXqtdxX/GN0PYnwTT+3Hby9v8o/JnPOgNptxZVlqx1Ju5+T8
+ hT9wO2Hf1TehCdU8x8puuaYdTlu4Tk7SHg==
+X-Google-Smtp-Source: AGHT+IFVQX8RXXeGoiis/hniof6sItZpeppfaAoHdamXjEmG3f1Pe37PA95+rX2a9+84VtmK0uo3kg==
+X-Received: by 2002:a05:6a20:992:b0:196:9f89:29ba with SMTP id
+ e18-20020a056a20099200b001969f8929bamr2778528pzb.45.1704303629736; 
+ Wed, 03 Jan 2024 09:40:29 -0800 (PST)
+Received: from grind.. ([189.79.21.107]) by smtp.gmail.com with ESMTPSA id
+ v3-20020aa78503000000b006d7f1ae421csm24042050pfn.145.2024.01.03.09.40.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Jan 2024 09:39:05 -0800 (PST)
-Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 542725F9D4;
- Wed,  3 Jan 2024 17:33:53 +0000 (GMT)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+ Wed, 03 Jan 2024 09:40:29 -0800 (PST)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
-Cc: qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
- Richard Henderson <richard.henderson@linaro.org>,
- Song Gao <gaosong@loongson.cn>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- David Hildenbrand <david@redhat.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Yanan Wang <wangyanan55@huawei.com>, Bin Meng <bin.meng@windriver.com>,
- Laurent Vivier <lvivier@redhat.com>, Michael Rolnik <mrolnik@gmail.com>,
- Alexandre Iooss <erdnaxe@crans.org>, David Woodhouse <dwmw2@infradead.org>,
- Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>,
- Brian Cain <bcain@quicinc.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Beraldo Leal <bleal@redhat.com>, Paul Durrant <paul@xen.org>,
- Mahmoud Mandour <ma.mandourr@gmail.com>, Thomas Huth <thuth@redhat.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Cleber Rosa <crosa@redhat.com>,
- kvm@vger.kernel.org, Peter Maydell <peter.maydell@linaro.org>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- qemu-arm@nongnu.org, Weiwei Li <liwei1518@gmail.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- John Snow <jsnow@redhat.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Nicholas Piggin <npiggin@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-riscv@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v2 39/43] contrib/plugins: fix imatch
-Date: Wed,  3 Jan 2024 17:33:45 +0000
-Message-Id: <20240103173349.398526-40-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240103173349.398526-1-alex.bennee@linaro.org>
-References: <20240103173349.398526-1-alex.bennee@linaro.org>
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ ajones@ventanamicro.com, vladimir.isaev@syntacore.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH v3 02/16] target/riscv: make riscv_cpu_is_generic() public
+Date: Wed,  3 Jan 2024 14:39:59 -0300
+Message-ID: <20240103174013.147279-3-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240103174013.147279-1-dbarboza@ventanamicro.com>
+References: <20240103174013.147279-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x529.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -126,28 +95,61 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We can't directly save the ephemeral imatch from argv as that memory
-will get recycled.
+We'll use this function in target/riscv/cpu.c to implement setters that
+won't allow vendor CPU options to be changed.
 
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- contrib/plugins/execlog.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/cpu.c         | 5 +++++
+ target/riscv/cpu.h         | 1 +
+ target/riscv/tcg/tcg-cpu.c | 5 -----
+ 3 files changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/contrib/plugins/execlog.c b/contrib/plugins/execlog.c
-index 82dc2f584e2..f262e5555eb 100644
---- a/contrib/plugins/execlog.c
-+++ b/contrib/plugins/execlog.c
-@@ -199,7 +199,7 @@ static void parse_insn_match(char *match)
-     if (!imatches) {
-         imatches = g_ptr_array_new();
-     }
--    g_ptr_array_add(imatches, match);
-+    g_ptr_array_add(imatches, g_strdup(match));
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 70bf10aa7c..65cfa6c740 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -183,6 +183,11 @@ void isa_ext_update_enabled(RISCVCPU *cpu, uint32_t ext_offset, bool en)
+     *ext_enabled = en;
  }
  
- static void parse_vaddr_match(char *match)
++bool riscv_cpu_is_generic(Object *cpu_obj)
++{
++    return object_dynamic_cast(cpu_obj, TYPE_RISCV_DYNAMIC_CPU) != NULL;
++}
++
+ const char * const riscv_int_regnames[] = {
+     "x0/zero", "x1/ra",  "x2/sp",  "x3/gp",  "x4/tp",  "x5/t0",   "x6/t1",
+     "x7/t2",   "x8/s0",  "x9/s1",  "x10/a0", "x11/a1", "x12/a2",  "x13/a3",
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 40c96a32cc..bf69cb9a27 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -756,6 +756,7 @@ enum riscv_pmu_event_idx {
+ void isa_ext_update_enabled(RISCVCPU *cpu, uint32_t ext_offset, bool en);
+ bool isa_ext_is_enabled(RISCVCPU *cpu, uint32_t ext_offset);
+ void riscv_cpu_set_misa(CPURISCVState *env, RISCVMXL mxl, uint32_t ext);
++bool riscv_cpu_is_generic(Object *cpu_obj);
+ 
+ typedef struct RISCVCPUMultiExtConfig {
+     const char *name;
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index 8a35683a34..a09300e908 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -658,11 +658,6 @@ bool riscv_cpu_tcg_compatible(RISCVCPU *cpu)
+     return object_dynamic_cast(OBJECT(cpu), TYPE_RISCV_CPU_HOST) == NULL;
+ }
+ 
+-static bool riscv_cpu_is_generic(Object *cpu_obj)
+-{
+-    return object_dynamic_cast(cpu_obj, TYPE_RISCV_DYNAMIC_CPU) != NULL;
+-}
+-
+ /*
+  * We'll get here via the following path:
+  *
 -- 
-2.39.2
+2.43.0
 
 
