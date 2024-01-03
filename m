@@ -4,132 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A1CFC46CD2
-	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Jan 2024 21:38:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62740C47077
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jan 2024 17:35:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rKmRy-0004Il-BW; Tue, 02 Jan 2024 16:37:27 -0500
+	id 1rL589-0003cs-Tv; Wed, 03 Jan 2024 12:34:13 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <shentey@gmail.com>)
- id 1rKmRt-0004Gu-C4; Tue, 02 Jan 2024 16:37:21 -0500
-Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1rL580-0003VG-HE
+ for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:34:06 -0500
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <shentey@gmail.com>)
- id 1rKmRq-0006eO-Ia; Tue, 02 Jan 2024 16:37:21 -0500
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-40d6b4e2945so47723995e9.0; 
- Tue, 02 Jan 2024 13:37:16 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1rL57q-0002Oc-G8
+ for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:34:02 -0500
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-40d76fefd6bso43398985e9.2
+ for <qemu-riscv@nongnu.org>; Wed, 03 Jan 2024 09:33:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704231435; x=1704836235; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:subject:cc:to:from:date:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1704303233; x=1704908033; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/j7/rdcZmoVQjecAI6/HxXOPJUcRBJCUvX9qQzCAcW8=;
- b=WpKgwuIYS5kJ/C0W5HWw3U8W8XaMt5pX1suWta+U0uNusKVRcGrQ5JkfKnM+i8TFlz
- m3riJ+Qm+kB+n9w/GTlWsqUKezkiMffxqGSVuz6bN6NASmf/TbpVYvA1/1NZb9CHK94z
- kVaDlg7pQCDukCq8bJSWE8xMC5veE2WO4+18IYKEVWitbvkPfMP429WrYBV01tDIC1gi
- XCnEMZ0FfXZ2I09IXhrMtVH3b67ruR6nYZp9yCfbao9W5YMQngzItY1xYiRGXVTOm21W
- D9Y1gZqgAPCXWaOUPuZXdGzFjN31RrD4PEJCUNbOEdhFPYSLvAy0NZUDWERB/zgkD58f
- lznw==
+ bh=qzxoAeOdiga+52AiTCmsWe8ywFNoeoZ5ZVuxsnjrTLU=;
+ b=ZLps0+nU4+JNR/NQZZd/MN36RMkw1RydMXgzftF+ZsmXcXuYRV2G1vmqHuR+flMRUz
+ YZxuq4neTtF+FCgSh3AtmknIrUyrmVH36lZmzTi8A9L3dMVe6ukiEZx9G9Xff1wVqenf
+ 67VBAAQ2TuLv5u81Wih0cRgqvvex8hWVEfsFfE62TkndggnanGtevLTecgfxwImSBkOm
+ IJLJG7ekrS52ekogCYbc7bkLEVTACYhxYe0Ac0v5j7XNdFgXvUmhFRldn4+LnTuInl7z
+ 0Y1BHtsx9DIUGN3nJbbxdnIVZLWEObWwDsGIEZh/gQXqH3TZ6XsAQPjQvXZ9pzfTUPVc
+ FCRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704231435; x=1704836235;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1704303233; x=1704908033;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/j7/rdcZmoVQjecAI6/HxXOPJUcRBJCUvX9qQzCAcW8=;
- b=J7ZIXovTir9xZhr94bTLKbC5guVPgJL5R0sflRboIalWPp38CoLyiqh919lnr204Jd
- 6LdUzM3gOUhYfiEwFGGOcptmVPMPBG9PGNbALJwUcxep4UDCJaPosKwjL90123EYCEWf
- rwAU55tpmn4YyaBIFNyoRA6Yt3xujbNPhlSasqLAX/pXXpHM/DZMhPCH/D+SIq7FK2Wf
- wx/OPguXzf0yHy33+pndAhhtIi9PWHtG56Xxn+LKJ2dq+Ra9vUfW11DTPRAphmPJgMia
- K2jzWYc3rIXUX5Ud9sobFoXvhjSdB7Cliztj/Ms/FQULtvfE7hwlzQuIUOkgLLTl/zVo
- qdfg==
-X-Gm-Message-State: AOJu0YzdHhT4kZocPTtn8tSBq9FXpWmOxFTUTWewNJagN5cPksRNz0Gc
- BfmkG83mLm4B2lsfqMJPakA=
-X-Google-Smtp-Source: AGHT+IFrz+8G4XaufDC1u0mAfvhOGqc3F19J3DroZasFggdJGsufr8PGV5ZiaTqLN5DOoVoj9N8dAg==
-X-Received: by 2002:a7b:ce13:0:b0:40d:6f34:5c13 with SMTP id
- m19-20020a7bce13000000b0040d6f345c13mr2971570wmc.231.1704231434891; 
- Tue, 02 Jan 2024 13:37:14 -0800 (PST)
-Received: from [127.0.0.1] (dynamic-089-014-091-072.89.14.pool.telefonica.de.
- [89.14.91.72]) by smtp.gmail.com with ESMTPSA id
- p34-20020a05600c1da200b0040d8b4ebd55sm252596wms.0.2024.01.02.13.37.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 02 Jan 2024 13:37:14 -0800 (PST)
-Date: Tue, 02 Jan 2024 21:37:00 +0000
-From: Bernhard Beschow <shentey@gmail.com>
-To: Stefan Hajnoczi <stefanha@redhat.com>, qemu-devel@nongnu.org
-CC: =?ISO-8859-1?Q?Daniel_P=2E_Berrang=E9?= <berrange@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Akihiko Odaki <akihiko.odaki@daynix.com>,
- Artyom Tarasenko <atar4qemu@gmail.com>, Paul Durrant <paul@xen.org>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- =?ISO-8859-1?Q?C=E9dric_Le_Goater?= <clg@kaod.org>,
- Paolo Bonzini <pbonzini@redhat.com>, BALATON Zoltan <balaton@eik.bme.hu>,
- Jagannathan Raman <jag.raman@oracle.com>,
- Anthony Perard <anthony.perard@citrix.com>,
- Nicholas Piggin <npiggin@gmail.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Alexander Graf <agraf@csgraf.de>, Hailiang Zhang <zhanghailiang@xfusion.com>, 
- Marcelo Tosatti <mtosatti@redhat.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Huacai Chen <chenhuacai@kernel.org>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>, Peter Xu <peterx@redhat.com>,
- Hyman Huang <yong.huang@smartx.com>, Fam Zheng <fam@euphon.net>,
- Song Gao <gaosong@loongson.cn>, Alistair Francis <alistair.francis@wdc.com>,
- =?ISO-8859-1?Q?Marc-Andr=E9_Lureau?= <marcandre.lureau@redhat.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- David Woodhouse <dwmw2@infradead.org>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Aurelien Jarno <aurelien@aurel32.net>,
- Leonardo Bras <leobras@redhat.com>, Jiri Slaby <jslaby@suse.cz>,
- Eric Farman <farman@linux.ibm.com>, Thomas Huth <thuth@redhat.com>,
+ bh=qzxoAeOdiga+52AiTCmsWe8ywFNoeoZ5ZVuxsnjrTLU=;
+ b=qakGqJhpLxP6pNIa1Y+TdAmLuje5wMe3HPmPQ2t9DLAlFH6Ol9JEbz3/mHbnfWYRtZ
+ zTBwQD1cOWy6lhItNk2wuxVdcLvtVMbLg1yzD1nm6qL+g6EAeQ2XSuFNX7za/d9Qh8Su
+ QS5chxY/RSRfWMdTeawYBzzyKyfoIYXseItD//A7rYiNiyqnVsdV+W6Al4Nk34jhQJGB
+ gMhaCKIgD98I+nmR8H/4P24UHt/ufhTh1g7lk8oPyetMuUVsl5Rs99BTTXei+NYja8PD
+ xDczQBU9uafbbh054l/oXizB5Y/ja4EvEagcKXmUs7F1m0RP6iOINmwYuKDl+grM57sM
+ Lr9Q==
+X-Gm-Message-State: AOJu0YxwA/HrBieEOyMTGPyKgUmwmhcZq23pK4+nZ5vm7lhnXKs7ZJAS
+ 445kLZ9MBo/MaUZxk0j5k/sFO+JGNiP1CQ==
+X-Google-Smtp-Source: AGHT+IGhE7/q82Jf4z4D1OPjoyeetuf4+aSfmg/R61bfYTK6tVdLZR8E2VO87yUiQHcrTBnDAn/iZg==
+X-Received: by 2002:a05:600c:a0b:b0:40d:7da9:8662 with SMTP id
+ z11-20020a05600c0a0b00b0040d7da98662mr2292525wmp.338.1704303233122; 
+ Wed, 03 Jan 2024 09:33:53 -0800 (PST)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ t12-20020adfe10c000000b00336f43fa654sm18186652wrz.22.2024.01.03.09.33.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 03 Jan 2024 09:33:50 -0800 (PST)
+Received: from draig.lan (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id 7EB765F92F;
+ Wed,  3 Jan 2024 17:33:49 +0000 (GMT)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
- David Hildenbrand <david@redhat.com>, Michael Roth <michael.roth@amd.com>,
- Elena Ufimtseva <elena.ufimtseva@oracle.com>,
- Gerd Hoffmann <kraxel@redhat.com>, Cameron Esfahani <dirty@apple.com>,
- qemu-ppc@nongnu.org, John Snow <jsnow@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Weiwei Li <liwei1518@gmail.com>, Hanna Reitz <hreitz@redhat.com>,
- qemu-s390x@nongnu.org, qemu-block@nongnu.org,
- =?ISO-8859-1?Q?Alex_Benn=E9e?= <alex.bennee@linaro.org>, kvm@vger.kernel.org, 
- "Michael S. Tsirkin" <mst@redhat.com>,
- Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
- Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
- Andrey Smirnov <andrew.smirnov@gmail.com>,
- Reinoud Zandijk <reinoud@netbsd.org>, Kevin Wolf <kwolf@redhat.com>,
- Bin Meng <bin.meng@windriver.com>, Sunil Muthuswamy <sunilmut@microsoft.com>, 
- Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Stafford Horne <shorne@gmail.com>, 
- Fabiano Rosas <farosas@suse.de>, Juan Quintela <quintela@redhat.com>,
- Markus Armbruster <armbru@redhat.com>, qemu-arm@nongnu.org,
- Jason Wang <jasowang@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
- Max Filippov <jcmvbkbc@gmail.com>,
- Jean-Christophe Dubois <jcd@tribudubois.net>, Eric Blake <eblake@redhat.com>, 
- Roman Bolshakov <rbolshakov@ddn.com>, Halil Pasic <pasic@linux.ibm.com>,
- xen-devel@lists.xenproject.org,
- =?ISO-8859-1?Q?Philippe_Mathieu-Daud=E9?= <philmd@linaro.org>,
- David Woodhouse <dwmw@amazon.co.uk>
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v2_1/5=5D_system/cpus=3A_rename_?=
- =?US-ASCII?Q?qemu=5Fmutex=5Flock=5Fiothread=28=29_to_bql=5Flock=28=29?=
-In-Reply-To: <20231212153905.631119-2-stefanha@redhat.com>
-References: <20231212153905.631119-1-stefanha@redhat.com>
- <20231212153905.631119-2-stefanha@redhat.com>
-Message-ID: <CFD7EE4A-D216-4CE8-B963-0CCEEA623E53@gmail.com>
+ Song Gao <gaosong@loongson.cn>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ David Hildenbrand <david@redhat.com>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Yanan Wang <wangyanan55@huawei.com>, Bin Meng <bin.meng@windriver.com>,
+ Laurent Vivier <lvivier@redhat.com>, Michael Rolnik <mrolnik@gmail.com>,
+ Alexandre Iooss <erdnaxe@crans.org>, David Woodhouse <dwmw2@infradead.org>,
+ Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>,
+ Brian Cain <bcain@quicinc.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Beraldo Leal <bleal@redhat.com>, Paul Durrant <paul@xen.org>,
+ Mahmoud Mandour <ma.mandourr@gmail.com>, Thomas Huth <thuth@redhat.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Cleber Rosa <crosa@redhat.com>,
+ kvm@vger.kernel.org, Peter Maydell <peter.maydell@linaro.org>,
+ Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ qemu-arm@nongnu.org, Weiwei Li <liwei1518@gmail.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ John Snow <jsnow@redhat.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Nicholas Piggin <npiggin@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>,
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-riscv@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v2 02/43] tests/avocado: use snapshot=on in kvm_xen_guest
+Date: Wed,  3 Jan 2024 17:33:08 +0000
+Message-Id: <20240103173349.398526-3-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240103173349.398526-1-alex.bennee@linaro.org>
+References: <20240103173349.398526-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::333;
- envelope-from=shentey@gmail.com; helo=mail-wm1-x333.google.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::335;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x335.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -145,41 +126,28 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+This ensures the rootfs is never permanently changed as we don't need
+persistence between tests anyway.
 
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+---
+ tests/avocado/kvm_xen_guest.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Am 12=2E Dezember 2023 15:39:00 UTC schrieb Stefan Hajnoczi <stefanha@redh=
-at=2Ecom>:
->The Big QEMU Lock (BQL) has many names and they are confusing=2E The
->actual QemuMutex variable is called qemu_global_mutex but it's commonly
->referred to as the BQL in discussions and some code comments=2E The
->locking APIs, however, are called qemu_mutex_lock_iothread() and
->qemu_mutex_unlock_iothread()=2E
->
->The "iothread" name is historic and comes from when the main thread was
->split into into KVM vcpu threads and the "iothread" (now called the main
+diff --git a/tests/avocado/kvm_xen_guest.py b/tests/avocado/kvm_xen_guest.py
+index 5391283113e..f8cb458d5db 100644
+--- a/tests/avocado/kvm_xen_guest.py
++++ b/tests/avocado/kvm_xen_guest.py
+@@ -59,7 +59,7 @@ def common_vm_setup(self):
+     def run_and_check(self):
+         self.vm.add_args('-kernel', self.kernel_path,
+                          '-append', self.kernel_params,
+-                         '-drive',  f"file={self.rootfs},if=none,format=raw,id=drv0",
++                         '-drive',  f"file={self.rootfs},if=none,snapshot=on,format=raw,id=drv0",
+                          '-device', 'xen-disk,drive=drv0,vdev=xvda',
+                          '-device', 'virtio-net-pci,netdev=unet',
+                          '-netdev', 'user,id=unet,hostfwd=:127.0.0.1:0-:22')
+-- 
+2.39.2
 
-Duplicate "into" here=2E
-
->loop thread)=2E I have contributed to the confusion myself by introducing
->a separate --object iothread, a separate concept unrelated to the BQL=2E
->
->The "iothread" name is no longer appropriate for the BQL=2E Rename the
->locking APIs to:
->- void bql_lock(void)
->- void bql_unlock(void)
->- bool bql_locked(void)
->
->There are more APIs with "iothread" in their names=2E Subsequent patches
->will rename them=2E There are also comments and documentation that will b=
-e
->updated in later patches=2E
->
->Signed-off-by: Stefan Hajnoczi <stefanha@redhat=2Ecom>
->Reviewed-by: Paul Durrant <paul@xen=2Eorg>
->Acked-by: Fabiano Rosas <farosas@suse=2Ede>
->Acked-by: David Woodhouse <dwmw@amazon=2Eco=2Euk>
->Reviewed-by: C=C3=A9dric Le Goater <clg@kaod=2Eorg>
->Acked-by: Peter Xu <peterx@redhat=2Ecom>
->Acked-by: Eric Farman <farman@linux=2Eibm=2Ecom>
->Reviewed-by: Harsh Prateek Bora <harshpb@linux=2Eibm=2Ecom>
 
