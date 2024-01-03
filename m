@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A33E8C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jan 2024 17:43:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBFAEC3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jan 2024 17:43:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rL5El-0004jb-9T; Wed, 03 Jan 2024 12:41:03 -0500
+	id 1rL5En-00054k-P5; Wed, 03 Jan 2024 12:41:05 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rL5Ea-0003Ol-Jz
- for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:40:52 -0500
-Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
+ id 1rL5Ek-0004i6-Se
+ for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:41:02 -0500
+Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rL5ET-0001dq-PR
- for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:40:51 -0500
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-6d9b1589a75so2394389b3a.3
- for <qemu-riscv@nongnu.org>; Wed, 03 Jan 2024 09:40:45 -0800 (PST)
+ id 1rL5Eg-0001iw-11
+ for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:41:02 -0500
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-5ce942efda5so1783717a12.2
+ for <qemu-riscv@nongnu.org>; Wed, 03 Jan 2024 09:40:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1704303643; x=1704908443; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1704303656; x=1704908456; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=j9FLMG9CAE7ALWgiMWmYvxQJdqWs+YAB7ykqY3X8jZI=;
- b=L2FfbnCjHvtzteLwF3W7+NHqTSmgmnK4BJZDTs1xfNyKQ1qiTUEu7Q2wTs8sD1jRVO
- MATmAMxfPb3oyctCZLjxlaj0evXcp1YgdrCKk2Ep/BjAWJy8OlpC/yebB8FJ8WssqJM/
- x1vAyQYRrjIrUNr6tKbq9pNm2rr601lP+DJvcA6Mnb+8ZeVvE5MKe5BjawPXCnfqNHAD
- ITn01yfP+MGg9IIgxseGrwivRztl/yuQ+iqeQdDqRhnnIiyjyUTV7zdPNz35/NiUmQlp
- GJ27ptBgaCHz3H3HJTi5W5xHmwzYzN5HHXAWoZ1glwd7v6giBP8Rj6qXGQFowIT2SwI6
- OimA==
+ bh=KCqEJqvOs1M1K8ABiO2IzEPvdUeqoMhjDMz6ZppTteE=;
+ b=F0IoSy0QKagwSgvCZodyjmi+FcO1cEiRoguy93mG6mGK/7nO5AV1/P0pmDnlg8Qp94
+ a5WHo7+eh2RtmSdZP3h6RtU+eTB/83qUg1SbI1Z3o12T3U3LU6TsFYj7gM2QhJ/jMZXv
+ XTC1t2dqtFIC48M+ILK0dydyLlIRc0XR/bGwI0JZq5xe+FAD5mD+DsNOYuICOw1PgyyK
+ vkowO8Ohtnt9QyU4kpuf4aXAhgmMKYvTsGCPAMw1yRXZe+1C1Z9xwAs81kWAG+Fc8EdZ
+ TVYm5tG+DxT2Fo+s6864aaV6X4eJ0AkCEUiP57P30LMgxYtKdrIJoZwyAxAKxBkhfpOW
+ +v9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704303643; x=1704908443;
+ d=1e100.net; s=20230601; t=1704303656; x=1704908456;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=j9FLMG9CAE7ALWgiMWmYvxQJdqWs+YAB7ykqY3X8jZI=;
- b=GHrti64bmWesRDs+lrcP3w3X/Flhm6dr5IAInds9jW7SvCvCg/J9zmdtvGVVIdIGw5
- AozUdAF32vwbAN6/sHbgk2usac/Yyf9bSt1hNoqFo0i/Ast357L5Jm4RMvYLjHaHsWqd
- H+c5RUF6WG5Sd1bhDc7SxN224xmjWDMx0sdditG9PTtR34HiqKfGY9HN7H4vNrghrADx
- /QiQKslRoPLkDkbxsp8XaB4obelW5Ubm1AUzqY1Gnjv2F1blTFcLUiscddExDmrgfiZc
- GISWP4F7mhuEJeNwx6A7M5lcn8GgFKnEYAkTD04mjsqgsqFJn49i7Q/XVbkzntY8EGBu
- GKcA==
-X-Gm-Message-State: AOJu0YwjpqOEANaE59w9YV3LYnmDr8I7AJ+lo0sw24h0gGpzH1gqe21n
- lfSvRyIGBvU6EOqsRjUXYJnOu1hzS70U+w==
-X-Google-Smtp-Source: AGHT+IE8QOnDt6UdRkFSV9AZ3jaRg2kQd0tRzotNMc9EBuov7bu+83h/mM4Qx2nvG0DmTR6imT69IA==
-X-Received: by 2002:a05:6a00:13a1:b0:6d9:98ea:e8ad with SMTP id
- t33-20020a056a0013a100b006d998eae8admr10594521pfg.47.1704303643448; 
- Wed, 03 Jan 2024 09:40:43 -0800 (PST)
+ bh=KCqEJqvOs1M1K8ABiO2IzEPvdUeqoMhjDMz6ZppTteE=;
+ b=A0fB19A4c3Ze5hoQkxb3Yk5oSQPxcDmmxuibn92giBOzJoVWQ2oZ7AUQc2HTQ3XO38
+ 7r8JCQdtDKz9Tx5bwg6Rl13mkuDeFIfOzEtmtW1NuJO3CcmC28rFmFGL+O4vKzMUwZLT
+ /w4UdMpXQwpzxiRdtgmNCHNeMJRPDGDooRsi+ok6pphu6pqHp8y6uzuaERyCB3e9d0C7
+ W80IWEiwsl0xzknlekF0vE6876RHoeb5w5IAcWfoK9AG8hqtPjfLXhby+lz/ZzAsrupj
+ NOU++jH73x+YHnczwSNbpvmBzPn0mFiAiJZVA7Zrb98lYtuqiDk8XEMRUIA/t82Mdqxo
+ USDQ==
+X-Gm-Message-State: AOJu0Ywq9DDGnVWcZFPkfY2YFRQ2eArx2JIvPib1M01yAMs1x861oKtY
+ TeLtrQsuDduafvPYpwHecrnJYLrkOUMluA==
+X-Google-Smtp-Source: AGHT+IF0i9Hg4MIKZQYKXuRYlsP3ssINh5wY3o67egI5uceAB4U8Bw6B5H4jpX04bp1O7fCDVJ6dMg==
+X-Received: by 2002:a05:6a20:8f14:b0:199:4e1:fec2 with SMTP id
+ b20-20020a056a208f1400b0019904e1fec2mr36349pzk.50.1704303656455; 
+ Wed, 03 Jan 2024 09:40:56 -0800 (PST)
 Received: from grind.. ([189.79.21.107]) by smtp.gmail.com with ESMTPSA id
- v3-20020aa78503000000b006d7f1ae421csm24042050pfn.145.2024.01.03.09.40.40
+ v3-20020aa78503000000b006d7f1ae421csm24042050pfn.145.2024.01.03.09.40.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Jan 2024 09:40:43 -0800 (PST)
+ Wed, 03 Jan 2024 09:40:56 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  ajones@ventanamicro.com, vladimir.isaev@syntacore.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v3 06/16] target/riscv: rework 'priv_spec'
-Date: Wed,  3 Jan 2024 14:40:03 -0300
-Message-ID: <20240103174013.147279-7-dbarboza@ventanamicro.com>
+Subject: [PATCH v3 10/16] target/riscv: create finalize_features() for KVM
+Date: Wed,  3 Jan 2024 14:40:07 -0300
+Message-ID: <20240103174013.147279-11-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240103174013.147279-1-dbarboza@ventanamicro.com>
 References: <20240103174013.147279-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x436.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x530.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,211 +95,171 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-'priv_spec' and 'vext_spec' are two string options used as a fancy way
-of setting integers in the CPU state (cpu->env.priv_ver and
-cpu->env.vext_ver). It requires us to deal with string parsing and to
-store them in cpu_cfg.
+To turn cbom_blocksize and cboz_blocksize into class properties we need
+KVM specific changes.
 
-We must support these string options, but we don't need to store them.
-We have a precedence for this kind of arrangement in target/ppc/compat.c,
-ppc_compat_prop_get|set, getters and setters used for the
-'max-cpu-compat' class property of the pseries ppc64 machine. We'll do
-the same with both 'priv_spec' and 'vext_spec'.
+KVM is creating its own version of these options with a customized
+setter() that prevents users from picking an invalid value during init()
+time. This comes at the cost of duplicating each option that KVM
+supports. This will keep happening for each new shared option KVM
+implements in the future.
 
-For 'priv_spec', the validation from riscv_cpu_validate_priv_spec() will
-be done by the prop_priv_spec_set() setter, while also preventing it to
-be changed for vendor CPUs. Add two helpers that converts env->priv_ver
-back and forth to its string representation. These helpers allow us to
-get a string and set 'env->priv_ver' and return a string giving the
-current env->priv_ver value. In other words, make the cpu->cfg.priv_spec
-string obsolete.
+We can avoid that by using the same property TCG uses and adding
+specific KVM handling during finalize() time, like TCG already does with
+riscv_tcg_cpu_finalize_features(). To do that, the common CPU property
+offers a way of knowing if an option was user set or not, sparing us
+from doing unneeded syscalls.
 
-Last but not the least, move the reworked 'priv_spec' option to
-riscv_cpu_properties[].
+riscv_kvm_cpu_finalize_features() is then created using the same
+KVMScratch CPU we already use during init() time, since finalize() time
+is still too early to use the official KVM CPU for it. cbom_blocksize
+and cboz_blocksize are then handled during finalize() in the same way
+they're handled by their KVM specific setter.
 
-After all said and done, we don't need to store the 'priv_spec' string in
-the CPU state, and we're now protecting vendor CPUs from priv_ver
-changes:
-
-$ ./build/qemu-system-riscv64 -M virt -cpu sifive-e51,priv_spec="v1.12.0"
-qemu-system-riscv64: can't apply global sifive-e51-riscv-cpu.priv_spec=v1.12.0:
-    CPU 'sifive-e51' does not allow changing the value of 'priv_spec'
-Current 'priv_spec' val: v1.10.0
-$
+With this change we can proceed with the blocksize changes in the common
+code without breaking the KVM driver.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- target/riscv/cpu.c         | 73 +++++++++++++++++++++++++++++++++++++-
- target/riscv/cpu.h         |  3 ++
- target/riscv/cpu_cfg.h     |  1 -
- target/riscv/tcg/tcg-cpu.c | 29 ---------------
- 4 files changed, 75 insertions(+), 31 deletions(-)
+ target/riscv/cpu.c           | 16 +++++++---
+ target/riscv/cpu.h           |  1 +
+ target/riscv/kvm/kvm-cpu.c   | 59 ++++++++++++++++++++++++++++++++++++
+ target/riscv/kvm/kvm_riscv.h |  1 +
+ 4 files changed, 72 insertions(+), 5 deletions(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 01b3b57cee..657569d8a6 100644
+index da432e4c1e..92b4881e9c 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -1631,8 +1631,77 @@ static const PropertyInfo prop_pmp = {
-     .set = prop_pmp_set,
- };
+@@ -63,6 +63,11 @@ static void cpu_option_add_user_setting(const char *optname, uint32_t value)
+                         GUINT_TO_POINTER(value));
+ }
  
-+static int priv_spec_from_str(const char *priv_spec_str)
++bool riscv_cpu_option_set(const char *optname)
 +{
-+    int priv_version = -1;
-+
-+    if (!g_strcmp0(priv_spec_str, PRIV_VER_1_12_0_STR)) {
-+        priv_version = PRIV_VERSION_1_12_0;
-+    } else if (!g_strcmp0(priv_spec_str, PRIV_VER_1_11_0_STR)) {
-+        priv_version = PRIV_VERSION_1_11_0;
-+    } else if (!g_strcmp0(priv_spec_str, PRIV_VER_1_10_0_STR)) {
-+        priv_version = PRIV_VERSION_1_10_0;
-+    }
-+
-+    return priv_version;
++    return g_hash_table_contains(general_user_opts, optname);
 +}
 +
-+static const char *priv_spec_to_str(int priv_version)
-+{
-+    switch (priv_version) {
-+    case PRIV_VERSION_1_10_0:
-+        return PRIV_VER_1_10_0_STR;
-+    case PRIV_VERSION_1_11_0:
-+        return PRIV_VER_1_11_0_STR;
-+    case PRIV_VERSION_1_12_0:
-+        return PRIV_VER_1_12_0_STR;
-+    default:
-+        return NULL;
-+    }
-+}
-+
-+static void prop_priv_spec_set(Object *obj, Visitor *v, const char *name,
-+                               void *opaque, Error **errp)
-+{
-+    RISCVCPU *cpu = RISCV_CPU(obj);
-+    g_autofree char *value = NULL;
-+    int priv_version = -1;
-+
-+    visit_type_str(v, name, &value, errp);
-+
-+    priv_version = priv_spec_from_str(value);
-+    if (priv_version < 0) {
-+        error_setg(errp, "Unsupported privilege spec version '%s'", value);
-+        return;
-+    }
-+
-+    if (priv_version != cpu->env.priv_ver && riscv_cpu_is_vendor(obj)) {
-+        cpu_set_prop_err(cpu, name, errp);
-+        error_append_hint(errp, "Current '%s' val: %s\n", name,
-+                          object_property_get_str(obj, name, NULL));
-+        return;
-+    }
-+
-+    cpu_option_add_user_setting(name, priv_version);
-+    cpu->env.priv_ver = priv_version;
-+}
-+
-+static void prop_priv_spec_get(Object *obj, Visitor *v, const char *name,
-+                               void *opaque, Error **errp)
-+{
-+    RISCVCPU *cpu = RISCV_CPU(obj);
-+    const char *value = priv_spec_to_str(cpu->env.priv_ver);
-+
-+    visit_type_str(v, name, (char **)&value, errp);
-+}
-+
-+static const PropertyInfo prop_priv_spec = {
-+    .name = "priv_spec",
-+    .get = prop_priv_spec_get,
-+    .set = prop_priv_spec_set,
-+};
-+
- Property riscv_cpu_options[] = {
--    DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
-     DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
+ #define ISA_EXT_DATA_ENTRY(_name, _min_ver, _prop) \
+     {#_name, _min_ver, CPU_CFG_OFFSET(_prop)}
  
-     DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
-@@ -1653,6 +1722,8 @@ static Property riscv_cpu_properties[] = {
-     {.name = "mmu", .info = &prop_mmu},
-     {.name = "pmp", .info = &prop_pmp},
+@@ -1056,17 +1061,18 @@ void riscv_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
+ {
+     Error *local_err = NULL;
  
-+    {.name = "priv_spec", .info = &prop_priv_spec},
-+
+-    /*
+-     * KVM accel does not have a specialized finalize()
+-     * callback because its extensions are validated
+-     * in the get()/set() callbacks of each property.
+-     */
+     if (tcg_enabled()) {
+         riscv_tcg_cpu_finalize_features(cpu, &local_err);
+         if (local_err != NULL) {
+             error_propagate(errp, local_err);
+             return;
+         }
++    } else if (kvm_enabled()) {
++        riscv_kvm_cpu_finalize_features(cpu, &local_err);
++        if (local_err != NULL) {
++            error_propagate(errp, local_err);
++            return;
++        }
+     }
+ 
  #ifndef CONFIG_USER_ONLY
-     DEFINE_PROP_UINT64("resetvec", RISCVCPU, env.resetvec, DEFAULT_RSTVEC),
- #endif
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index bf69cb9a27..aa3d3372e3 100644
+index f1715d9d31..484c32e607 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -77,6 +77,9 @@ const char *riscv_get_misa_ext_description(uint32_t bit);
- #define CPU_CFG_OFFSET(_prop) offsetof(struct RISCVCPUConfig, _prop)
+@@ -494,6 +494,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+                         bool probe, uintptr_t retaddr);
+ char *riscv_isa_string(RISCVCPU *cpu);
+ void riscv_cpu_list(void);
++bool riscv_cpu_option_set(const char *optname);
  
- /* Privileged specification version */
-+#define PRIV_VER_1_10_0_STR "v1.10.0"
-+#define PRIV_VER_1_11_0_STR "v1.11.0"
-+#define PRIV_VER_1_12_0_STR "v1.12.0"
- enum {
-     PRIV_VERSION_1_10_0 = 0,
-     PRIV_VERSION_1_11_0,
-diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-index c67a8731d3..2dba1f0007 100644
---- a/target/riscv/cpu_cfg.h
-+++ b/target/riscv/cpu_cfg.h
-@@ -135,7 +135,6 @@ struct RISCVCPUConfig {
-     bool ext_XVentanaCondOps;
- 
-     uint32_t pmu_mask;
--    char *priv_spec;
-     char *vext_spec;
-     uint16_t vlen;
-     uint16_t elen;
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index a09300e908..4d67b72d9e 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -175,29 +175,6 @@ static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu, Error **errp)
+ #define cpu_list riscv_cpu_list
+ #define cpu_mmu_index riscv_cpu_mmu_index
+diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+index 62a1e51f0a..70fb075846 100644
+--- a/target/riscv/kvm/kvm-cpu.c
++++ b/target/riscv/kvm/kvm-cpu.c
+@@ -1490,6 +1490,65 @@ static void kvm_cpu_instance_init(CPUState *cs)
      }
  }
  
--static void riscv_cpu_validate_priv_spec(RISCVCPU *cpu, Error **errp)
--{
--    CPURISCVState *env = &cpu->env;
--    int priv_version = -1;
--
--    if (cpu->cfg.priv_spec) {
--        if (!g_strcmp0(cpu->cfg.priv_spec, "v1.12.0")) {
--            priv_version = PRIV_VERSION_1_12_0;
--        } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.11.0")) {
--            priv_version = PRIV_VERSION_1_11_0;
--        } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.10.0")) {
--            priv_version = PRIV_VERSION_1_10_0;
--        } else {
--            error_setg(errp,
--                       "Unsupported privilege spec version '%s'",
--                       cpu->cfg.priv_spec);
--            return;
--        }
--
--        env->priv_ver = priv_version;
--    }
--}
--
- static void riscv_cpu_validate_v(CPURISCVState *env, RISCVCPUConfig *cfg,
-                                  Error **errp)
++void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
++{
++    CPURISCVState *env = &cpu->env;
++    KVMScratchCPU kvmcpu;
++    struct kvm_one_reg reg;
++    uint64_t val;
++    int ret;
++
++    /* short-circuit without spinning the scratch CPU */
++    if (!cpu->cfg.ext_zicbom && !cpu->cfg.ext_zicboz) {
++        return;
++    }
++
++    if (!kvm_riscv_create_scratch_vcpu(&kvmcpu)) {
++        error_setg(errp, "Unable to create scratch KVM cpu");
++        return;
++    }
++
++    if (cpu->cfg.ext_zicbom &&
++        riscv_cpu_option_set(kvm_cbom_blocksize.name)) {
++
++        reg.id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CONFIG,
++                                        kvm_cbom_blocksize.kvm_reg_id);
++        reg.addr = (uint64_t)&val;
++        ret = ioctl(kvmcpu.cpufd, KVM_GET_ONE_REG, &reg);
++        if (ret != 0) {
++            error_setg(errp, "Unable to read cbom_blocksize, error %d", errno);
++            return;
++        }
++
++        if (cpu->cfg.cbom_blocksize != val) {
++            error_setg(errp, "Unable to set cbom_blocksize to a different "
++                       "value than the host (%lu)", val);
++            return;
++        }
++    }
++
++    if (cpu->cfg.ext_zicboz &&
++        riscv_cpu_option_set(kvm_cboz_blocksize.name)) {
++
++        reg.id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CONFIG,
++                                        kvm_cboz_blocksize.kvm_reg_id);
++        reg.addr = (uint64_t)&val;
++        ret = ioctl(kvmcpu.cpufd, KVM_GET_ONE_REG, &reg);
++        if (ret != 0) {
++            error_setg(errp, "Unable to read cbom_blocksize, error %d", errno);
++            return;
++        }
++
++        if (cpu->cfg.cboz_blocksize != val) {
++            error_setg(errp, "Unable to set cboz_blocksize to a different "
++                       "value than the host (%lu)", val);
++            return;
++        }
++    }
++
++    kvm_riscv_destroy_scratch_vcpu(&kvmcpu);
++}
++
+ static void kvm_cpu_accel_class_init(ObjectClass *oc, void *data)
  {
-@@ -625,12 +602,6 @@ void riscv_tcg_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
-     CPURISCVState *env = &cpu->env;
-     Error *local_err = NULL;
+     AccelCPUClass *acc = ACCEL_CPU_CLASS(oc);
+diff --git a/target/riscv/kvm/kvm_riscv.h b/target/riscv/kvm/kvm_riscv.h
+index 8329cfab82..4bd98fddc7 100644
+--- a/target/riscv/kvm/kvm_riscv.h
++++ b/target/riscv/kvm/kvm_riscv.h
+@@ -27,5 +27,6 @@ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
+                           uint64_t guest_num);
+ void riscv_kvm_aplic_request(void *opaque, int irq, int level);
+ int kvm_riscv_sync_mpstate_to_kvm(RISCVCPU *cpu, int state);
++void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp);
  
--    riscv_cpu_validate_priv_spec(cpu, &local_err);
--    if (local_err != NULL) {
--        error_propagate(errp, local_err);
--        return;
--    }
--
-     riscv_cpu_validate_misa_priv(env, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
+ #endif
 -- 
 2.43.0
 
