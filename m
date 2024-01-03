@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2347C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jan 2024 17:35:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B20BC4707C
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jan 2024 17:36:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rL59F-0005F6-1k; Wed, 03 Jan 2024 12:35:21 -0500
+	id 1rL58F-0003iF-Hk; Wed, 03 Jan 2024 12:34:19 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rL58f-0004F9-8q
- for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:34:48 -0500
-Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
+ id 1rL584-0003Wx-Fe
+ for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:34:09 -0500
+Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rL585-0002Yp-SC
- for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:34:40 -0500
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-40d8902da73so20212675e9.2
- for <qemu-riscv@nongnu.org>; Wed, 03 Jan 2024 09:34:08 -0800 (PST)
+ id 1rL57r-0002PV-Ig
+ for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:34:07 -0500
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-40d894764e7so25059355e9.1
+ for <qemu-riscv@nongnu.org>; Wed, 03 Jan 2024 09:33:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704303247; x=1704908047; darn=nongnu.org;
+ d=linaro.org; s=google; t=1704303234; x=1704908034; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KAYNxNN/VIwn3brnYwBM4da3zygXAIotsdaTZu8xJew=;
- b=wCnmPOkEij82oE867mhfPAatD41ENl0pBqdBOX8u+4Uq+iuTOI05ZOv2zaGkm1rnbm
- AYNMOlZZo+gJdTJE3p5xzw3SNHKmGuqgGi+PskUf8uYAnB6Qv1Vdrky03Xoy+LPGPlfK
- Op4lKZoWyt6ffEvhqqV5uf773bNYVTWc5HGeAUiQ3s81dkz0ZT0hesICvJsu35GQma2K
- 2O36bXJl5WdYqYmBGjEniFh367yX68aIGkVjEF+17aXcjgChOn61lbo1ioR1FwuPnCGe
- FHcD+I+0YjgY8kZPHcXEZw+JgxuekA5+8sbrXy+xHsVyAKRH0wKa1ICJlvvnoc2L58/u
- gPzQ==
+ bh=W+Zw2YkajEPYChe7VczIaT3yCibcEp4TlrDptH8Gvrw=;
+ b=OFH4IgoAjq1Akam95na2SHI3Py5H7YvNiL7C4E+d0vlv+nPiWU6WVjZAli1XkcxW1L
+ IdEHbsvF6VSZRqcukvhoLZUILrfXSJMfFwnJIDHWklrItG6o2TuNxYX+3H97qWDnky5O
+ DjOoKhu2GNbKzObhAcyC2gHf7JCcDohhDGnuPkre/nZyMj2IQd88Oj3kOG33/mICbmIO
+ t0MY6xXRm6Ksj7UIqWv4BTuKna5S9Lo23XIuDR8qn0o6Pj8ibc0JjtfnjRMeYkPdKIUP
+ ifbjOi05F5eArD7UVT7V8YVRLtONVGrYAi/4dluUrbq8dbNzxTjay5SeaTpK6W6NssGc
+ SDsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704303247; x=1704908047;
+ d=1e100.net; s=20230601; t=1704303234; x=1704908034;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KAYNxNN/VIwn3brnYwBM4da3zygXAIotsdaTZu8xJew=;
- b=ehId5STzTNxkyG6a/fekVvZR5873cGQK2ohPefMsAVFq7HtNIfqlrQz8R7yVbh3lNg
- 9I5Ba8pKRIrg89dloI+XNOUdoZyMOVN5TKNpG59weSGWTl03PrSUZdC+ygYlLPurG3Wq
- fwzxcI0KDkcWTh44OTcl2nBz5MJdYqAzlMNpB0oqE6P8IS1DzCQ6BUa95kOds2DTSTWZ
- bLEhsx3VrY64Z2h+X9ah6hLas9/Hx0qyT2qJYJKTmdLrn2nRHul9nPpTHtm2s5UyaHUH
- nCeoNMDcdqRm0pp4khLbM5DD9AgCvIiJuLAmQGdhxV9RSeyhN3shVA1u+GGmUqGxmiev
- BzXg==
-X-Gm-Message-State: AOJu0YwOb0rjQE1XewtiWK799YlAcg/krpSuurSdxYgelvEQJfr6r6y4
- ImnrbiLQx/TrjW9ln+CfyAP6lYVtZiw2zw==
-X-Google-Smtp-Source: AGHT+IEiNtW/AYEnFWgw1kuSIysK4yf5Kl2eOUr965I4B/3sWjOv3kPWjVHIGoC5zO/lkGW9NHvGjQ==
-X-Received: by 2002:a05:600c:3c88:b0:40d:6582:e552 with SMTP id
- bg8-20020a05600c3c8800b0040d6582e552mr6943624wmb.9.1704303247501; 
- Wed, 03 Jan 2024 09:34:07 -0800 (PST)
+ bh=W+Zw2YkajEPYChe7VczIaT3yCibcEp4TlrDptH8Gvrw=;
+ b=wiHOul349Edh30sBADs9P2KZC/9gTjh+fbopmEy0bkp6zfn9wVwofAMMLHhsj2YOWt
+ WKLmKKDsco4SNhcVWk1Na1niixhOq6g/q8zTb11iLp6iiubQw0aY071J27HS+y1GPbqj
+ fqKNqoGQX/hVUSElbYd4wp1au8Vt5/vDyJmuPfRenkwoQliSLTGXB/0DR840lrxOfls4
+ PyLdZPQI63jEyEOl23mvu4Ui0FuzCUHoXpDOY7JWFGzZV8HJ/ODAN+0UUzQJujlmiH0z
+ uVaXCJfArcmuypzeOJDD30Ksb+5+cVYeCMB6CsKwp4+mOLtfp6yFwpqCAbbwOCRjNIya
+ mpGw==
+X-Gm-Message-State: AOJu0YxZBfXOG1WE4hV3PjZVzroeP6cIb5NNdySBOXjJYMgASuSuRLUT
+ E4xeoco9L7BYu7uT+eLNMHgTAF1/C0X1mQ==
+X-Google-Smtp-Source: AGHT+IHJAM/Ysaat03yPO0/Jg6Y5f2vvi2xxZpKY9OBoQnPldlvT9O3mxmIliH0RHJ++gB0qw/aiPw==
+X-Received: by 2002:a05:600c:511e:b0:40b:3e23:f0a0 with SMTP id
+ o30-20020a05600c511e00b0040b3e23f0a0mr6942090wms.4.1704303234129; 
+ Wed, 03 Jan 2024 09:33:54 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- o21-20020a05600c511500b0040d86e89abfsm2917164wms.43.2024.01.03.09.33.56
+ h15-20020a05600c350f00b0040d8810efc9sm2942787wmq.17.2024.01.03.09.33.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Jan 2024 09:34:02 -0800 (PST)
+ Wed, 03 Jan 2024 09:33:53 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 6E5185F955;
- Wed,  3 Jan 2024 17:33:51 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id D8B9B5F93B;
+ Wed,  3 Jan 2024 17:33:49 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
@@ -93,18 +93,18 @@ Cc: qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
  Eduardo Habkost <eduardo@habkost.net>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-riscv@nongnu.org,
  Alistair Francis <alistair.francis@wdc.com>,
- Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH v2 23/43] target/riscv: Remove misa_mxl validation
-Date: Wed,  3 Jan 2024 17:33:29 +0000
-Message-Id: <20240103173349.398526-24-alex.bennee@linaro.org>
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
+Subject: [PATCH v2 06/43] qtest: bump migration-test timeout to 8 minutes
+Date: Wed,  3 Jan 2024 17:33:12 +0000
+Message-Id: <20240103173349.398526-7-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240103173349.398526-1-alex.bennee@linaro.org>
 References: <20240103173349.398526-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::335;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x335.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::333;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x333.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -127,71 +127,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
+From: Daniel P. Berrangé <berrange@redhat.com>
 
-It is initialized with a simple assignment and there is little room for
-error. In fact, the validation is even more complex.
+The migration test should take between 1 min 30 and 2 mins on reasonably
+modern hardware. The test is not especially compute bound, rather its
+running time is dominated by the guest RAM size relative to the
+bandwidth cap, which forces each iteration to take at least 30 seconds.
+None the less under high load conditions with multiple QEMU processes
+spawned and competing with other parallel tests, the worst case running
+time might be somewhat extended. Bumping the timeout to 8 minutes gives
+us good headroom, while still catching stuck tests relatively quickly.
 
-Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Acked-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
-Message-Id: <20231213-riscv-v7-2-a760156a337f@daynix.com>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
+Message-ID: <20230717182859.707658-3-berrange@redhat.com>
+[thuth: Bump timeout to 8 minutes to make it work on very loaded systems, too]
+Signed-off-by: Thomas Huth <thuth@redhat.com>
+Message-Id: <20231215070357.10888-3-thuth@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- target/riscv/tcg/tcg-cpu.c | 15 +++------------
- 1 file changed, 3 insertions(+), 12 deletions(-)
+ tests/qtest/meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 8a35683a345..ee17f65afb6 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -148,7 +148,7 @@ static void riscv_cpu_validate_misa_priv(CPURISCVState *env, Error **errp)
-     }
- }
- 
--static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu, Error **errp)
-+static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu)
- {
-     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cpu);
-     CPUClass *cc = CPU_CLASS(mcc);
-@@ -168,11 +168,6 @@ static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu, Error **errp)
-     default:
-         g_assert_not_reached();
-     }
--
--    if (env->misa_mxl_max != env->misa_mxl) {
--        error_setg(errp, "misa_mxl_max must be equal to misa_mxl");
--        return;
--    }
- }
- 
- static void riscv_cpu_validate_priv_spec(RISCVCPU *cpu, Error **errp)
-@@ -673,7 +668,6 @@ static bool riscv_cpu_is_generic(Object *cpu_obj)
- static bool tcg_cpu_realize(CPUState *cs, Error **errp)
- {
-     RISCVCPU *cpu = RISCV_CPU(cs);
--    Error *local_err = NULL;
- 
-     if (!riscv_cpu_tcg_compatible(cpu)) {
-         g_autofree char *name = riscv_cpu_get_name(cpu);
-@@ -682,14 +676,11 @@ static bool tcg_cpu_realize(CPUState *cs, Error **errp)
-         return false;
-     }
- 
--    riscv_cpu_validate_misa_mxl(cpu, &local_err);
--    if (local_err != NULL) {
--        error_propagate(errp, local_err);
--        return false;
--    }
-+    riscv_cpu_validate_misa_mxl(cpu);
- 
- #ifndef CONFIG_USER_ONLY
-     CPURISCVState *env = &cpu->env;
-+    Error *local_err = NULL;
- 
-     CPU(cs)->tcg_cflags |= CF_PCREL;
- 
+diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
+index 366872ed57b..f184d051cfe 100644
+--- a/tests/qtest/meson.build
++++ b/tests/qtest/meson.build
+@@ -1,6 +1,6 @@
+ slow_qtests = {
+   'bios-tables-test' : 120,
+-  'migration-test' : 150,
++  'migration-test' : 480,
+   'npcm7xx_pwm-test': 150,
+   'qom-test' : 300,
+   'test-hmp' : 120,
 -- 
 2.39.2
 
