@@ -4,72 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE46AC47073
-	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jan 2024 17:49:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15E0FC3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jan 2024 17:49:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rL5EE-0002A6-CJ; Wed, 03 Jan 2024 12:40:30 -0500
+	id 1rL5Mi-0000gl-Uj; Wed, 03 Jan 2024 12:49:17 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rL5EC-0001wt-MK
- for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:40:28 -0500
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1rL5Mf-0000Sd-Cy
+ for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:49:13 -0500
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rL5E9-0001TM-LY
- for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:40:28 -0500
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-6da47688fd9so1320934b3a.0
- for <qemu-riscv@nongnu.org>; Wed, 03 Jan 2024 09:40:23 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1rL5Ma-0000Jr-Bn
+ for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:49:12 -0500
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-33686649b72so10912909f8f.3
+ for <qemu-riscv@nongnu.org>; Wed, 03 Jan 2024 09:49:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1704303622; x=1704908422; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=z7UORM0NWuS6n0uI47AynTbWu+1ee3gU4K7fSIa+SVU=;
- b=TDwlLO2B3z8v15kpfuT9cl0Akj4J+azXJtI0OZ9BNdDhJ8V9onNe4aPo17r6TGqxK3
- eiBzBFtJUUuGuF1fGATErghEZpF3idTgg/xWL/3RPiXrfvxY8WayDpwM22EmahnDDwZd
- Zpzuw1PJpuaLKDyHvGTvdJRAxJpjl19DHtzOitGhkQaN44PpMNNfXWzdjj3uuckOXgq/
- c1wY471cPjYPTPpxX/pQt58Rfhmr2gJ3sB7gl2aO7RNidf76G2oYDqRxu8T2PFEFF/bp
- efkSq/Vd/CGS1jbku7Nz6xvTpK20SBm1R8pObDuol3a84QxvdR4lWyVDIcAdIV0p4Jkf
- djiA==
+ d=linaro.org; s=google; t=1704304146; x=1704908946; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=G1gJobfuOXArDzvCmnHLIGQ5mswWRXVhuXYUXNww838=;
+ b=SaCp47LbCwAVkTak62+mpkkEGyubiX6BGsENvQdKc8JjBElw8RHDfkb6MGHo7td/Q4
+ RKs9uoiA/ANQynfbnX5QaJOURSR00k6UusgOaPrzZ/q70/2uQImFpqzkD5PGhjHjy4mA
+ L0UdAorTwjjOQGtQvT5p1EcnLgT4NlCvAZXMfMwmVM5ujl2zEy0++q0o4SuUiAOVA5p2
+ bRcpx9qVV00CnwHeIvof2Vmz3I9htkIS/WS8v0P8YyiaEAELee+DDvKflMULZr06tFUl
+ CVNC3iQm89UElHdvQYntWItp3340lwL98wBuF4WT9Qy24hjgfT6uEaXQTL5+oRQGbCPK
+ fY9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704303622; x=1704908422;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=z7UORM0NWuS6n0uI47AynTbWu+1ee3gU4K7fSIa+SVU=;
- b=r0QX2NcHw6128e56A+5BB2D5ZoDo2SsrJkRPGi8AmEzDLOZMZuSq9sMSBMWFyfs8x2
- psouG7bLEM944eIrxT86hbo9ojrTl/fxay/0jKj0djzVK1Mn9meJ7EhZdu2ZhWNbDwR3
- bIT/BKQxsBU0PHJVClTKdMBN/5nuME3gNGWOajk1+dKqQ8M2wKGPtZR71zTyeGMmvCtd
- 6eug3nxmOhzxn6vsnGowdMYS8iNuZIJyp6YP4BWJCbBTSp2+pu2E+2+3cfVHZpqKd5YC
- 2TEnejXV8ULZW4Xx2shoIUy1M0XHKmFj2sGq31hfHyGB+2/KaWEgEfr1mubIIMaodCc0
- 3/pg==
-X-Gm-Message-State: AOJu0Yy7KiFIJB+BW8rpdy9crosQXR2yUKeKHI8ypF77JB7nMqndS2j2
- IhHqIHYt0L/qszlZ0EEsTXAMSAIFsfoVRbyY/oSOfr26H3bL8A==
-X-Google-Smtp-Source: AGHT+IGCEtG+G5I207Z0xCkQsgk1jNTVxPAuxQ/Jw0cXIszLO23gnfJLAtxLPPs2qv821lteXLzzOA==
-X-Received: by 2002:aa7:888b:0:b0:6d9:bbb6:7c1a with SMTP id
- z11-20020aa7888b000000b006d9bbb67c1amr7705475pfe.14.1704303622394; 
- Wed, 03 Jan 2024 09:40:22 -0800 (PST)
-Received: from grind.. ([189.79.21.107]) by smtp.gmail.com with ESMTPSA id
- v3-20020aa78503000000b006d7f1ae421csm24042050pfn.145.2024.01.03.09.40.18
+ d=1e100.net; s=20230601; t=1704304146; x=1704908946;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=G1gJobfuOXArDzvCmnHLIGQ5mswWRXVhuXYUXNww838=;
+ b=heP23XhJRfMOUVRSpBF5lg/rRXzMlfgytzSTXO8qetXXnvLYA9DtSCKQY5LRyMSIYf
+ gAY5ZupPu9gAWnhw4sxcuFQXGJ1VIwBdvtObKsyB4XZmW1ii2Kr3UJVJDjc6Ldu/uUsv
+ op/YGGGo3DZq7jDHfrQau7vxLoYMiL5VLEBmtV8ydzA9L4cJG56GSaegCJMA8bXtGWb9
+ mESly8EiwVPZc0+KG3H29fNoODJPEc6naLMDiV6ri/lLAEgRO/Lz0eTjvOVVdjAxz/PR
+ c+wLysyfga3j9mhYR9zF4jp5ofjmlWalNMoIcMQYTdEGcgb74pLjbaiWOZqXoxBsOUHt
+ B19Q==
+X-Gm-Message-State: AOJu0YwkbzyPvAaTsCLUbnLEs+6GSJHQw/O2PcHrQ+pwXR4tpLGSDT3K
+ wU0wqz2ou7g5Vk9szYH85WBCA30e6MwCYQ==
+X-Google-Smtp-Source: AGHT+IGBTYNZSeJJFlrDUsZAC7ZX18VaF73k3nmFtB4HTAJAnT+qiuiHp3e6xy5HCWK1xoAdWaJkyA==
+X-Received: by 2002:a05:600c:538c:b0:40d:7b73:68bb with SMTP id
+ hg12-20020a05600c538c00b0040d7b7368bbmr4470553wmb.131.1704304146689; 
+ Wed, 03 Jan 2024 09:49:06 -0800 (PST)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ c18-20020a5d4152000000b0033609b71825sm31007316wrq.35.2024.01.03.09.49.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Jan 2024 09:40:22 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+ Wed, 03 Jan 2024 09:49:05 -0800 (PST)
+Received: from draig.lan (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id D9EC15F949;
+ Wed,  3 Jan 2024 17:33:50 +0000 (GMT)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com, vladimir.isaev@syntacore.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v3 00/16] target/riscv: deprecate riscv_cpu_options[]
-Date: Wed,  3 Jan 2024 14:39:57 -0300
-Message-ID: <20240103174013.147279-1-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.43.0
+Cc: qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Song Gao <gaosong@loongson.cn>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ David Hildenbrand <david@redhat.com>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Yanan Wang <wangyanan55@huawei.com>, Bin Meng <bin.meng@windriver.com>,
+ Laurent Vivier <lvivier@redhat.com>, Michael Rolnik <mrolnik@gmail.com>,
+ Alexandre Iooss <erdnaxe@crans.org>, David Woodhouse <dwmw2@infradead.org>,
+ Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>,
+ Brian Cain <bcain@quicinc.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Beraldo Leal <bleal@redhat.com>, Paul Durrant <paul@xen.org>,
+ Mahmoud Mandour <ma.mandourr@gmail.com>, Thomas Huth <thuth@redhat.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Cleber Rosa <crosa@redhat.com>,
+ kvm@vger.kernel.org, Peter Maydell <peter.maydell@linaro.org>,
+ Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ qemu-arm@nongnu.org, Weiwei Li <liwei1518@gmail.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ John Snow <jsnow@redhat.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Nicholas Piggin <npiggin@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>,
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-riscv@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v2 17/43] tests/unit: Bump test-aio-multithread test timeout
+ to 2 minutes
+Date: Wed,  3 Jan 2024 17:33:23 +0000
+Message-Id: <20240103173349.398526-18-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240103173349.398526-1-alex.bennee@linaro.org>
+References: <20240103173349.398526-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x432.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -92,73 +127,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+From: Thomas Huth <thuth@redhat.com>
 
-In v2, after Vladimir's feedback, the following major changes were made:
+When running the tests in slow mode on a very loaded system and with
+--enable-debug, the test-aio-multithread can take longer than 1 minute.
+Bump the timeout to two minutes to make sure that it also passes in
+such situations.
 
-- add default values in riscv_cpu_init() instead of doing gimmicks with
-  setters and .set_default_value callbacks. The cost of having defaults
-  for non-boolean properties in the parent class is smaller than having
-  to deal with duplicated 'if cfg.prop == 0' checks in all setters;
+Signed-off-by: Thomas Huth <thuth@redhat.com>
+Message-Id: <20231215070357.10888-14-thuth@redhat.com>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+---
+ tests/unit/meson.build | 1 +
+ 1 file changed, 1 insertion(+)
 
-- all properties are now being registered in the 'general_user_opts'
-  hash. We were registering only the properties that KVM checks,
-  Vladimir pointed out that this isn't consistent, we're making it
-  consistent now.
-
-Other smaller changes were made in patches 1, 2, 3 and 7.
-
-Vladimir, due to the amount of changes I didn't add your "Tested-by" in
-the patches. You're welcome to give this another try and add a tested-by
-again :)
-
-Patches based on riscv-to-apply.next. 
-
-Changes from v2:
-- patch 1:
-  - remove 'bext_ver' from cpu.h
-- patch 2 and 3: switched places
-- patch 3 (former 2):
-  - added hash implementation from patch 8
-  - added pmu_mask setter()
-  - pmu-mask and pmu-num can't be changed for vendor CPUs
-- patches 4, 5, 6:
-  - properties are now being added in the hash
-- patch 7:
-  - fixed string check in prop_vext_spec_set()
-  - vext_spec is now being added in the hash
-- patches 8, 9, 11, 12:
-  - default values added in riscv_cpu_init()
-  - no longer checking for "value == 0" in setters
-- v2 link: https://lore.kernel.org/qemu-riscv/20231222122235.545235-1-dbarboza@ventanamicro.com/
-
-Daniel Henrique Barboza (16):
-  target/riscv/cpu_cfg.h: remove unused fields
-  target/riscv: make riscv_cpu_is_generic() public
-  target/riscv: move 'pmu-mask' and 'pmu-num' to riscv_cpu_properties[]
-  target/riscv: move 'mmu' to riscv_cpu_properties[]
-  target/riscv: move 'pmp' to riscv_cpu_properties[]
-  target/riscv: rework 'priv_spec'
-  target/riscv: rework 'vext_spec'
-  target/riscv: move 'vlen' to riscv_cpu_properties[]
-  target/riscv: move 'elen' to riscv_cpu_properties[]
-  target/riscv: create finalize_features() for KVM
-  target/riscv: move 'cbom_blocksize' to riscv_cpu_properties[]
-  target/riscv: move 'cboz_blocksize' to riscv_cpu_properties[]
-  target/riscv: remove riscv_cpu_options[]
-  target/riscv/cpu.c: move 'mvendorid' to riscv_cpu_properties[]
-  target/riscv/cpu.c: move 'mimpid' to riscv_cpu_properties[]
-  target/riscv/cpu.c: move 'marchid' to riscv_cpu_properties[]
-
- target/riscv/cpu.c           | 614 ++++++++++++++++++++++++++++++-----
- target/riscv/cpu.h           |   8 +-
- target/riscv/cpu_cfg.h       |   4 -
- target/riscv/kvm/kvm-cpu.c   |  94 +++---
- target/riscv/kvm/kvm_riscv.h |   1 +
- target/riscv/tcg/tcg-cpu.c   |  63 ----
- 6 files changed, 590 insertions(+), 194 deletions(-)
-
+diff --git a/tests/unit/meson.build b/tests/unit/meson.build
+index a05d4710904..0b0c7c14115 100644
+--- a/tests/unit/meson.build
++++ b/tests/unit/meson.build
+@@ -172,6 +172,7 @@ test_env.set('G_TEST_SRCDIR', meson.current_source_dir())
+ test_env.set('G_TEST_BUILDDIR', meson.current_build_dir())
+ 
+ slow_tests = {
++  'test-aio-multithread' : 120,
+   'test-crypto-tlscredsx509': 45,
+   'test-crypto-tlssession': 45
+ }
 -- 
-2.43.0
+2.39.2
 
 
