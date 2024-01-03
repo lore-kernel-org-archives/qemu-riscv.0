@@ -4,81 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49DC4C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jan 2024 20:41:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9993C3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jan 2024 22:09:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rL82u-0006a7-Hx; Wed, 03 Jan 2024 15:41:01 -0500
+	id 1rL9Pb-0008N5-DT; Wed, 03 Jan 2024 17:08:31 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rL82t-0006Zq-Po
- for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 15:40:59 -0500
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rL9Pa-0008M6-0x
+ for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 17:08:30 -0500
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rL82q-0004Uh-Bo
- for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 15:40:59 -0500
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-1d4c3393f99so15990255ad.0
- for <qemu-riscv@nongnu.org>; Wed, 03 Jan 2024 12:40:55 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rL9PY-0004sQ-1x
+ for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 17:08:29 -0500
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-1d480c6342dso44259925ad.2
+ for <qemu-riscv@nongnu.org>; Wed, 03 Jan 2024 14:08:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1704314455; x=1704919255; darn=nongnu.org;
+ d=linaro.org; s=google; t=1704319706; x=1704924506; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=obr0rT5ltUkVhW08aqamm6C2nliAU020IL7X/tYqAY0=;
- b=OwGfchM9Wl46pg3YytCwmHxJYjb88vNMp7Er/2jjwRHlQ91aekZOwjRWak7g2VWeG0
- G1Y+HzvN33kzew5unkFyv7WRGSELMDF6B6MFmk2aQx3SNVZaAzsqPrlBa+nVqkXRU7SY
- CaWpqESiPsfCEJEOB0D2TcqPFmK64LAeCYNHjJ5EF2+6r36BCMVL4h5bXmiGj1KDarni
- Ph0kWoyNE626EaOQ59bx3iQfTTZC84BlF7LxtjnfC9H2WtAK3LlsrXOcuTQu+P7hrhyS
- K+ygQTPkuqRbkNbMS91hZVf6U2MyKFphSxqonnS/6h1ozcbht7j1ZSP5EMAiBUOqCZC0
- FVpw==
+ bh=/eTTFbrv6dlsZWhQ1YSFmXMRMJ1j9PfOhE9AOL0gnrg=;
+ b=ORg329/jrsAMNt6UDF58a10Cc5+I7623JWUxsu3kZIKUm6G6IN9EYq1RHUxKzBUc3o
+ QXAjfVTRAzZ9ilF1UvXTPOItX5s7UZSPGvxqcfTT/OUbXOJdjkwD0IsUVxx3SLp4pe5K
+ HeEvB/jLSlG5hgVK6ZIs/yqsGfI3uM2+Y+49D0Gt30O8SI6fItLNyILEyY4KVudwiktH
+ DRgZKnQ23w0r/NWXojt4gRSas9nUFZpzx4w2rIuYLPB7Bdn/w+JmzQliLFVyGs6OrIP5
+ 0nOpJZP/hIKpdnNuSBLPll5lE54VQhuUtPFZzT1sh0GAWzAa2RrnAP2o9M8l1jCzs4lQ
+ 7B8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704314455; x=1704919255;
+ d=1e100.net; s=20230601; t=1704319706; x=1704924506;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=obr0rT5ltUkVhW08aqamm6C2nliAU020IL7X/tYqAY0=;
- b=BVBBEtSje1ePNPLV2MpgLxvbxQoD1irow8tqoPRTp0B8Gi2M6VnYhUpbWuMWcc+s/G
- q1wTG7KjEjg9sUIb217d/Z/dEfG5pijzylf5uNUxti+iktYHtLug4yqXQ+V6W9Ro20Nw
- GSYkUTKh7KY4ITxgAz/USmpAB5Xn22JJgqVfyuCIv1RK5PmRnuUQ3bNvS5jlevuOi+Nc
- 3BjV833JMKWrY2rX/FIqZDq00ZFJFO3+c+Zap6BOxTgGTQ39FJJilmVHjb2OYQ/u7ka0
- 4XoMpyVIQxFwl2VT+/bLin5h7D0x8KbNwZKs/kvqQWvpBpyOTUBxnFmIYiMojdZZRwLO
- CMGw==
-X-Gm-Message-State: AOJu0YydQAd6BptcMeiCsDY81jSJDd5tngOBVWj5sFz+sJwf2JnKx6HX
- PN9y5mHik0aGmHf0JyM9ERmnsgvnCvxJ+Q==
-X-Google-Smtp-Source: AGHT+IFbLqs95YqHE45FVQTYBlIGrqqt5lAHKTSOisHvDEtcc2/+2cwyD3lpOXRkqEg2+L0pwETIqA==
-X-Received: by 2002:a17:902:e547:b0:1d4:acc3:304 with SMTP id
- n7-20020a170902e54700b001d4acc30304mr5462222plf.15.1704314455164; 
- Wed, 03 Jan 2024 12:40:55 -0800 (PST)
-Received: from [192.168.68.110] ([189.79.21.107])
+ bh=/eTTFbrv6dlsZWhQ1YSFmXMRMJ1j9PfOhE9AOL0gnrg=;
+ b=MFvrMMgbtuHM2LBPK8x6fUKLmLkHDvvCm55/WjW/1F9P5kb7L5UIBbGsXJDLJIl10t
+ +bCGqLMDTNMwPLlnvcTcy5+rLoyHzCO/a6SxqJCTLbsv27+IIV84lFgQGuOzApbOtYCm
+ kDDzPc0IZtthqNNbLvqXv60/LEJOKXfS9DU0+rwoLGeGmbrJwVZO2yFlO33orYk+qD44
+ GRPI3CwP3lghIx7zJtEuXvUzSY+7+ic5iGqflpKYza7X0TgI9YGuwgFHG4MZ0qdt1sfV
+ l3H6I7SyEKutIVkNVPl3QHh9n2hhktIKOYyS0vwq0CUWNPBvBE+3+l9aUgPFCUhwla14
+ 4tYQ==
+X-Gm-Message-State: AOJu0YxhrxXFfr/HEQjbBNrQlUWLa/qPFbGNf5TNosy2Tj+eaogjOaxb
+ S9FF5QP2D9Ttswzv1mruz2RvDEXo4n6pnA==
+X-Google-Smtp-Source: AGHT+IHDl/Mc6Z49uGqyCYuhtbGC6UwegHbT/2hM6/FJ7/7e/yItiV3EtGQkFMSLE3Y/Nu03NRsgxA==
+X-Received: by 2002:a17:903:41c8:b0:1d4:5276:7674 with SMTP id
+ u8-20020a17090341c800b001d452767674mr22189661ple.64.1704319706237; 
+ Wed, 03 Jan 2024 14:08:26 -0800 (PST)
+Received: from [192.168.50.95] (124-149-254-207.tpgi.com.au. [124.149.254.207])
  by smtp.gmail.com with ESMTPSA id
- bb10-20020a170902bc8a00b001d4b7176b17sm6069831plb.307.2024.01.03.12.40.51
+ t1-20020a170902bc4100b001d4cd7bf923sm2228046plz.68.2024.01.03.14.08.22
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 03 Jan 2024 12:40:54 -0800 (PST)
-Message-ID: <4c8bca8b-f4f8-4ad4-8de3-59e44a619b1c@ventanamicro.com>
-Date: Wed, 3 Jan 2024 17:40:51 -0300
+ Wed, 03 Jan 2024 14:08:25 -0800 (PST)
+Message-ID: <47177ca3-e190-42b1-a6c2-d3a2be8cedb6@linaro.org>
+Date: Thu, 4 Jan 2024 09:08:18 +1100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/4] qemu-options: enable -smbios option on RISC-V
+Subject: Re: [PATCH v3 4/6] target/riscv: Add pointer masking tb flags
 Content-Language: en-US
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Cc: Paolo Bonzini <pbonzini@redhat.com>, Bin Meng <bin.meng@windriver.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- "Michael S . Tsirkin" <mst@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
- Ani Sinha <anisinha@redhat.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-References: <20231229120724.41383-1-heinrich.schuchardt@canonical.com>
- <20231229120724.41383-5-heinrich.schuchardt@canonical.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20231229120724.41383-5-heinrich.schuchardt@canonical.com>
+To: Alexey Baturo <baturo.alexey@gmail.com>
+Cc: zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
+ Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+References: <20240103185716.1790546-1-me@deliversmonkey.space>
+ <20240103185716.1790546-5-me@deliversmonkey.space>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20240103185716.1790546-5-me@deliversmonkey.space>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x633.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x630.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,34 +98,60 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-On 12/29/23 09:07, Heinrich Schuchardt wrote:
-> With SMBIOS support added for RISC-V we also should enable the command line
-> option.
+On 1/4/24 05:57, Alexey Baturo wrote:
+> From: Alexey Baturo <baturo.alexey@gmail.com>
 > 
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Signed-off-by: Alexey Baturo <baturo.alexey@gmail.com>
 > ---
-> v2:
-> 	new patch
-> ---
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
->   qemu-options.hx | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   target/riscv/cpu.h        |  3 +++
+>   target/riscv/cpu_helper.c |  3 +++
+>   target/riscv/translate.c  | 11 +++++++++++
+>   3 files changed, 17 insertions(+)
 > 
-> diff --git a/qemu-options.hx b/qemu-options.hx
-> index 7bdb414345..5ed82df11f 100644
-> --- a/qemu-options.hx
-> +++ b/qemu-options.hx
-> @@ -2705,7 +2705,7 @@ DEF("smbios", HAS_ARG, QEMU_OPTION_smbios,
->       "                specify SMBIOS type 17 fields\n"
->       "-smbios type=41[,designation=str][,kind=str][,instance=%d][,pcidev=str]\n"
->       "                specify SMBIOS type 41 fields\n",
-> -    QEMU_ARCH_I386 | QEMU_ARCH_ARM | QEMU_ARCH_LOONGARCH)
-> +    QEMU_ARCH_I386 | QEMU_ARCH_ARM | QEMU_ARCH_LOONGARCH | QEMU_ARCH_RISCV)
->   SRST
->   ``-smbios file=binary``
->       Load SMBIOS entry from binary file.
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index c607a94bba..4df160494f 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -546,6 +546,9 @@ FIELD(TB_FLAGS, ITRIGGER, 20, 1)
+>   FIELD(TB_FLAGS, VIRT_ENABLED, 21, 1)
+>   FIELD(TB_FLAGS, PRIV, 22, 2)
+>   FIELD(TB_FLAGS, AXL, 24, 2)
+> +/* If pointer masking should be applied and address sign extended */
+> +FIELD(TB_FLAGS, PM_PMM, 26, 2)
+> +FIELD(TB_FLAGS, PM_SIGNEXTEND, 28, 1)
+>   
+>   #ifdef TARGET_RISCV32
+>   #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 4c34e12ee3..b8d8a622f3 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -68,6 +68,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+>       RISCVCPU *cpu = env_archcpu(env);
+>       RISCVExtStatus fs, vs;
+>       uint32_t flags = 0;
+> +    bool pm_signext = !riscv_cpu_bare_mode(env);
+>   
+>       *pc = env->xl == MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
+>       *cs_base = 0;
+> @@ -135,6 +136,8 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+>       flags = FIELD_DP32(flags, TB_FLAGS, VS, vs);
+>       flags = FIELD_DP32(flags, TB_FLAGS, XL, env->xl);
+>       flags = FIELD_DP32(flags, TB_FLAGS, AXL, cpu_address_xl(env));
+> +    flags = FIELD_DP32(flags, TB_FLAGS, PM_PMM, riscv_pm_get_pmm(env));
+> +    flags = FIELD_DP32(flags, TB_FLAGS, PM_SIGNEXTEND, pm_signext);
+
+You should avoid setting these fields (i.e. leave them zero) when they won't be used...
+
+> +    if (get_xl(ctx) == MXL_RV32) {
+> +        ctx->addr_width = 32;
+> +        ctx->addr_signed = false;
+
+... like so.
+
+Otherwise,
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+
+
+r~
 
