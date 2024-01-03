@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26A26C4707C
-	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jan 2024 17:38:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0900C3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jan 2024 17:39:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rL59E-0005Bg-6x; Wed, 03 Jan 2024 12:35:20 -0500
+	id 1rL591-0004mK-E5; Wed, 03 Jan 2024 12:35:07 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rL58Y-00047i-UY
- for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:34:42 -0500
-Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
+ id 1rL58g-0004FM-3f
+ for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:34:48 -0500
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rL585-0002Yb-Qz
- for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:34:38 -0500
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-40d76fefd6bso43400365e9.2
- for <qemu-riscv@nongnu.org>; Wed, 03 Jan 2024 09:34:08 -0800 (PST)
+ id 1rL586-0002aD-1f
+ for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:34:42 -0500
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-40d3ae326f6so113090865e9.3
+ for <qemu-riscv@nongnu.org>; Wed, 03 Jan 2024 09:34:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704303247; x=1704908047; darn=nongnu.org;
+ d=linaro.org; s=google; t=1704303248; x=1704908048; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7D67tYXvih4KCwe2bBHgIjHHJeamoItQznsN6YA9Vd8=;
- b=MFFXzJIf55q9r0T+r5NolrJywjR80gmS2XBoakBnt/i7D6pEbltPJJlvojH3GPs6Z0
- Iz5K1jz9E5pvvSYTfPqNwua2ICcqtPwPsnd9sKcIdbfNWtXgUdLyVHMWNCpIzK0JHSA9
- 0I9dQUXnP9orHAoijwDn/CjXH03/f/5xd8SyIyKG0kA2E5L6eKLyQUMemYER/er9vIjy
- TEVzanPvznl9A4Yf0Q+NQMu00L36lPEtswNoSWws+zOYFzm7FGxtsieK0TjZq+EVNK4S
- V7nay6aIAo0zBvSfQHOaMvgKuGdM4c0r+KoSF+rAyUjswT5HxXWfkMbJZ31I/xy5vD//
- WwLg==
+ bh=yeLMVf2eHHsXh0O15q4pkBIw3KoK3wQ6PmZ1CrbEex8=;
+ b=JqUOyFxL7rDpc/7X3JA7lmsJHTScg8veFFmTK/Ziqllmq9qOVy6Ahw8yqSrmNMdriQ
+ BkFBJwbcJtNZR5NRx3QhML6fdPY/kPSI1z7vNTP3Cod7mzC3OcJGF1FPN7ltMpjJ2gzv
+ SLH7HKaDFIJA5Aj2+Z9KMmjNvUNbLOZV382tWYeXx86sy9O6fxuNoWTORjpfiwJvEZbj
+ fSoOLY4rwMBpAO3z6kHollATZdOAmWosoqp0XWlHHs+EMtWKxUtmyGXLLj6PQYtUb3R2
+ AFByACCtqNm3GaqWvoLBUi8dIysHlKbsMCB1D9PLCrnPm9LDg45xi6ZaTKrEwk6Q0JfM
+ dOJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704303247; x=1704908047;
+ d=1e100.net; s=20230601; t=1704303248; x=1704908048;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7D67tYXvih4KCwe2bBHgIjHHJeamoItQznsN6YA9Vd8=;
- b=YdMoijdWxKlwCRx56a0JFXzUx2fgUHuMp7Ky/m9gMwVcETx76tBl/I04TlvNmub2bn
- wUzPXnQAYU0rpZzBZfDDZPPMemJRYhZmC76b9BrgrD29+9ESWscj74guFkhaJvXLbi5L
- DUAmm8ZKceXOKEyjbif6Code0/FLeLOrgD4lS90FSoont07ZiIE1fngv2gls2z7wnlgG
- rH0d/4h9JlKP6It/TE4DPDNlVAc2coeEVg5gux8MaJuLN7VneZ0v1NsgmrdSBoPysSZG
- GkjrZjGa1kYTIWmpNlGvIsx48z2WEBQT2FpaQE8+L3Fhs1JLmJDwjd/RIng6ClbXVvT6
- 5Rng==
-X-Gm-Message-State: AOJu0YwKHkcH5edCHRzDyF5cd+9rt7SdxBd2B+nampKhzGOwouQwTLjf
- Aq9rhkS1BOnbv3kmLDX3PZNKPIZgVje2EQ==
-X-Google-Smtp-Source: AGHT+IErNBTQpBkZbV6r2MzOdGPh9Bvldj7qh/+A69H0FMUGmVXVgs8pxhjKMkp7hjzjXZpujjaZnQ==
-X-Received: by 2002:a05:600c:22c3:b0:40d:6085:b90 with SMTP id
- 3-20020a05600c22c300b0040d60850b90mr2702772wmg.363.1704303247304; 
- Wed, 03 Jan 2024 09:34:07 -0800 (PST)
+ bh=yeLMVf2eHHsXh0O15q4pkBIw3KoK3wQ6PmZ1CrbEex8=;
+ b=nGPe/tyNzIR0Yg0s700623E9KiTYszS8dSKEpOYga2kKpKgatGLsBadEVishwWf67x
+ QeOH1rU44MW0Kk8uXINiN5qmk5wWdwJSWD6l3qvJgakMphNhsF/nBt5LrBGSrEsAMpDk
+ ryxORW8YpRZV1QMOuk0fsY8C2T3k9i+cCMcd6qss+zPeNg7iGSGzxlgXNF8rA0VoKP3h
+ 00Drr4CnhLmyyWSlhUifYN6BM60L1BOWNav4Qng5pMQBgLA2pCv3jlVjHXPKlaRFp5aK
+ 7UwhnB5MlZRCKeKcryp9XBU4ywDuOY4RxcKxnm3YS9WjrzBBeXwuWAj2j09VtZbsrSfJ
+ cbbQ==
+X-Gm-Message-State: AOJu0YxZkjyPoEBGwfyZjAsY0xg0QA9iPUMngDCvpHKggdfwpWycaGaQ
+ j6ZuCrD282KGDYO6At0eVdKTvgXjjz0caw==
+X-Google-Smtp-Source: AGHT+IFyai4Oz9QJseCnlyqpWeqvg34E978y7oogZCjDWncnuKw5cPGMk2yNAsv5VqWOMwukJlNOZQ==
+X-Received: by 2002:a05:600c:ac6:b0:40c:2c6d:a810 with SMTP id
+ c6-20020a05600c0ac600b0040c2c6da810mr10276642wmr.32.1704303248659; 
+ Wed, 03 Jan 2024 09:34:08 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- p15-20020a05600c1d8f00b0040d6eb44b94sm2957663wms.2.2024.01.03.09.33.58
+ k39-20020a05600c1ca700b0040d8af75e19sm2948860wms.24.2024.01.03.09.33.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Jan 2024 09:34:02 -0800 (PST)
+ Wed, 03 Jan 2024 09:34:03 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id EF90E5F95C;
- Wed,  3 Jan 2024 17:33:51 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 06C1B5F9D2;
+ Wed,  3 Jan 2024 17:33:53 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
@@ -94,17 +94,17 @@ Cc: qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-riscv@nongnu.org,
  Alistair Francis <alistair.francis@wdc.com>,
  Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH v2 28/43] target/riscv: Use GDBFeature for dynamic XML
-Date: Wed,  3 Jan 2024 17:33:34 +0000
-Message-Id: <20240103173349.398526-29-alex.bennee@linaro.org>
+Subject: [PATCH v2 36/43] plugins: Use different helpers when reading registers
+Date: Wed,  3 Jan 2024 17:33:42 +0000
+Message-Id: <20240103173349.398526-37-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240103173349.398526-1-alex.bennee@linaro.org>
 References: <20240103173349.398526-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::333;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x333.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x330.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -129,213 +129,184 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Akihiko Odaki <akihiko.odaki@daynix.com>
 
-In preparation for a change to use GDBFeature as a parameter of
-gdb_register_coprocessor(), convert the internal representation of
-dynamic feature from plain XML to GDBFeature.
+This avoids optimizations incompatible when reading registers.
 
 Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Message-Id: <20231213-gdb-v17-3-777047380591@daynix.com>
+Message-Id: <20231213-gdb-v17-12-777047380591@daynix.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- target/riscv/cpu.h     |  5 +--
- target/riscv/cpu.c     |  4 +--
- target/riscv/gdbstub.c | 79 +++++++++++++++++++-----------------------
- 3 files changed, 40 insertions(+), 48 deletions(-)
+ accel/tcg/plugin-helpers.h |  3 ++-
+ include/qemu/plugin.h      |  1 +
+ accel/tcg/plugin-gen.c     | 43 ++++++++++++++++++++++++++++++++++----
+ plugins/api.c              | 12 +++++++++--
+ 4 files changed, 52 insertions(+), 7 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 060b7f69a74..ad7236d7547 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -24,6 +24,7 @@
- #include "hw/registerfields.h"
- #include "hw/qdev-properties.h"
- #include "exec/cpu-defs.h"
-+#include "exec/gdbstub.h"
- #include "qemu/cpu-float.h"
- #include "qom/object.h"
- #include "qemu/int128.h"
-@@ -424,8 +425,8 @@ struct ArchCPU {
- 
-     CPURISCVState env;
- 
--    char *dyn_csr_xml;
--    char *dyn_vreg_xml;
-+    GDBFeature dyn_csr_feature;
-+    GDBFeature dyn_vreg_feature;
- 
-     /* Configuration Settings */
-     RISCVCPUConfig cfg;
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index b799f133604..673e937a5d8 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1534,9 +1534,9 @@ static const char *riscv_gdb_get_dynamic_xml(CPUState *cs, const char *xmlname)
-     RISCVCPU *cpu = RISCV_CPU(cs);
- 
-     if (strcmp(xmlname, "riscv-csr.xml") == 0) {
--        return cpu->dyn_csr_xml;
-+        return cpu->dyn_csr_feature.xml;
-     } else if (strcmp(xmlname, "riscv-vector.xml") == 0) {
--        return cpu->dyn_vreg_xml;
-+        return cpu->dyn_vreg_feature.xml;
-     }
- 
-     return NULL;
-diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-index 365040228a1..76b72a95954 100644
---- a/target/riscv/gdbstub.c
-+++ b/target/riscv/gdbstub.c
-@@ -214,13 +214,14 @@ static int riscv_gdb_set_virtual(CPURISCVState *cs, uint8_t *mem_buf, int n)
-     return 0;
- }
- 
--static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
-+static GDBFeature *riscv_gen_dynamic_csr_feature(CPUState *cs, int base_reg)
- {
-     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cs);
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     CPURISCVState *env = &cpu->env;
--    GString *s = g_string_new(NULL);
-+    GDBFeatureBuilder builder;
-     riscv_csr_predicate_fn predicate;
-+    const char *name;
-     int bitsize = 16 << mcc->misa_mxl_max;
-     int i;
- 
-@@ -233,9 +234,9 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
-         bitsize = 64;
-     }
- 
--    g_string_printf(s, "<?xml version=\"1.0\"?>");
--    g_string_append_printf(s, "<!DOCTYPE feature SYSTEM \"gdb-target.dtd\">");
--    g_string_append_printf(s, "<feature name=\"org.gnu.gdb.riscv.csr\">");
-+    gdb_feature_builder_init(&builder, &cpu->dyn_csr_feature,
-+                             "org.gnu.gdb.riscv.csr", "riscv-csr.xml",
-+                             base_reg);
- 
-     for (i = 0; i < CSR_TABLE_SIZE; i++) {
-         if (env->priv_ver < csr_ops[i].min_priv_ver) {
-@@ -243,72 +244,64 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
-         }
-         predicate = csr_ops[i].predicate;
-         if (predicate && (predicate(env, i) == RISCV_EXCP_NONE)) {
--            if (csr_ops[i].name) {
--                g_string_append_printf(s, "<reg name=\"%s\"", csr_ops[i].name);
--            } else {
--                g_string_append_printf(s, "<reg name=\"csr%03x\"", i);
-+            g_autofree char *dynamic_name = NULL;
-+            name = csr_ops[i].name;
-+            if (!name) {
-+                dynamic_name = g_strdup_printf("csr%03x", i);
-+                name = dynamic_name;
-             }
--            g_string_append_printf(s, " bitsize=\"%d\"", bitsize);
--            g_string_append_printf(s, " regnum=\"%d\"/>", base_reg + i);
-+
-+            gdb_feature_builder_append_reg(&builder, name, bitsize, i,
-+                                           "int", NULL);
-         }
-     }
- 
--    g_string_append_printf(s, "</feature>");
--
--    cpu->dyn_csr_xml = g_string_free(s, false);
-+    gdb_feature_builder_end(&builder);
- 
- #if !defined(CONFIG_USER_ONLY)
-     env->debugger = false;
+diff --git a/accel/tcg/plugin-helpers.h b/accel/tcg/plugin-helpers.h
+index 8e685e06545..11796436f35 100644
+--- a/accel/tcg/plugin-helpers.h
++++ b/accel/tcg/plugin-helpers.h
+@@ -1,4 +1,5 @@
+ #ifdef CONFIG_PLUGIN
+-DEF_HELPER_FLAGS_2(plugin_vcpu_udata_cb, TCG_CALL_NO_RWG | TCG_CALL_PLUGIN, void, i32, ptr)
++DEF_HELPER_FLAGS_2(plugin_vcpu_udata_cb_no_wg, TCG_CALL_NO_WG | TCG_CALL_PLUGIN, void, i32, ptr)
++DEF_HELPER_FLAGS_2(plugin_vcpu_udata_cb_no_rwg, TCG_CALL_NO_RWG | TCG_CALL_PLUGIN, void, i32, ptr)
+ DEF_HELPER_FLAGS_4(plugin_vcpu_mem_cb, TCG_CALL_NO_RWG | TCG_CALL_PLUGIN, void, i32, i32, i64, ptr)
  #endif
+diff --git a/include/qemu/plugin.h b/include/qemu/plugin.h
+index 7fdc3a4849f..b0c5ac68293 100644
+--- a/include/qemu/plugin.h
++++ b/include/qemu/plugin.h
+@@ -73,6 +73,7 @@ enum plugin_dyn_cb_type {
  
--    return CSR_TABLE_SIZE;
-+    return &cpu->dyn_csr_feature;
- }
+ enum plugin_dyn_cb_subtype {
+     PLUGIN_CB_REGULAR,
++    PLUGIN_CB_REGULAR_R,
+     PLUGIN_CB_INLINE,
+     PLUGIN_N_CB_SUBTYPES,
+ };
+diff --git a/accel/tcg/plugin-gen.c b/accel/tcg/plugin-gen.c
+index 78b331b2510..b37ce7683e6 100644
+--- a/accel/tcg/plugin-gen.c
++++ b/accel/tcg/plugin-gen.c
+@@ -79,6 +79,7 @@ enum plugin_gen_from {
  
--static int ricsv_gen_dynamic_vector_xml(CPUState *cs, int base_reg)
-+static GDBFeature *ricsv_gen_dynamic_vector_feature(CPUState *cs, int base_reg)
+ enum plugin_gen_cb {
+     PLUGIN_GEN_CB_UDATA,
++    PLUGIN_GEN_CB_UDATA_R,
+     PLUGIN_GEN_CB_INLINE,
+     PLUGIN_GEN_CB_MEM,
+     PLUGIN_GEN_ENABLE_MEM_HELPER,
+@@ -90,7 +91,10 @@ enum plugin_gen_cb {
+  * These helpers are stubs that get dynamically switched out for calls
+  * direct to the plugin if they are subscribed to.
+  */
+-void HELPER(plugin_vcpu_udata_cb)(uint32_t cpu_index, void *udata)
++void HELPER(plugin_vcpu_udata_cb_no_wg)(uint32_t cpu_index, void *udata)
++{ }
++
++void HELPER(plugin_vcpu_udata_cb_no_rwg)(uint32_t cpu_index, void *udata)
+ { }
+ 
+ void HELPER(plugin_vcpu_mem_cb)(unsigned int vcpu_index,
+@@ -98,7 +102,7 @@ void HELPER(plugin_vcpu_mem_cb)(unsigned int vcpu_index,
+                                 void *userdata)
+ { }
+ 
+-static void gen_empty_udata_cb(void)
++static void gen_empty_udata_cb(void (*gen_helper)(TCGv_i32, TCGv_ptr))
  {
-     RISCVCPU *cpu = RISCV_CPU(cs);
--    GString *s = g_string_new(NULL);
--    g_autoptr(GString) ts = g_string_new("");
-+    GDBFeatureBuilder builder;
-     int reg_width = cpu->cfg.vlen;
--    int num_regs = 0;
-     int i;
+     TCGv_i32 cpu_index = tcg_temp_ebb_new_i32();
+     TCGv_ptr udata = tcg_temp_ebb_new_ptr();
+@@ -106,12 +110,22 @@ static void gen_empty_udata_cb(void)
+     tcg_gen_movi_ptr(udata, 0);
+     tcg_gen_ld_i32(cpu_index, tcg_env,
+                    -offsetof(ArchCPU, env) + offsetof(CPUState, cpu_index));
+-    gen_helper_plugin_vcpu_udata_cb(cpu_index, udata);
++    gen_helper(cpu_index, udata);
  
--    g_string_printf(s, "<?xml version=\"1.0\"?>");
--    g_string_append_printf(s, "<!DOCTYPE target SYSTEM \"gdb-target.dtd\">");
--    g_string_append_printf(s, "<feature name=\"org.gnu.gdb.riscv.vector\">");
-+    gdb_feature_builder_init(&builder, &cpu->dyn_vreg_feature,
-+                             "org.gnu.gdb.riscv.vector", "riscv-vector.xml",
-+                             base_reg);
- 
-     /* First define types and totals in a whole VL */
-     for (i = 0; i < ARRAY_SIZE(vec_lanes); i++) {
-         int count = reg_width / vec_lanes[i].size;
--        g_string_printf(ts, "%s", vec_lanes[i].id);
--        g_string_append_printf(s,
--                               "<vector id=\"%s\" type=\"%s\" count=\"%d\"/>",
--                               ts->str, vec_lanes[i].gdb_type, count);
-+        gdb_feature_builder_append_tag(
-+            &builder, "<vector id=\"%s\" type=\"%s\" count=\"%d\"/>",
-+            vec_lanes[i].id, vec_lanes[i].gdb_type, count);
-     }
- 
-     /* Define unions */
--    g_string_append_printf(s, "<union id=\"riscv_vector\">");
-+    gdb_feature_builder_append_tag(&builder, "<union id=\"riscv_vector\">");
-     for (i = 0; i < ARRAY_SIZE(vec_lanes); i++) {
--        g_string_append_printf(s, "<field name=\"%c\" type=\"%s\"/>",
--                               vec_lanes[i].suffix,
--                               vec_lanes[i].id);
-+        gdb_feature_builder_append_tag(&builder,
-+                                       "<field name=\"%c\" type=\"%s\"/>",
-+                                       vec_lanes[i].suffix, vec_lanes[i].id);
-     }
--    g_string_append(s, "</union>");
-+    gdb_feature_builder_append_tag(&builder, "</union>");
- 
-     /* Define vector registers */
-     for (i = 0; i < 32; i++) {
--        g_string_append_printf(s,
--                               "<reg name=\"v%d\" bitsize=\"%d\""
--                               " regnum=\"%d\" group=\"vector\""
--                               " type=\"riscv_vector\"/>",
--                               i, reg_width, base_reg++);
--        num_regs++;
-+        gdb_feature_builder_append_reg(&builder, g_strdup_printf("v%d", i),
-+                                       reg_width, i, "riscv_vector", "vector");
-     }
- 
--    g_string_append_printf(s, "</feature>");
-+    gdb_feature_builder_end(&builder);
- 
--    cpu->dyn_vreg_xml = g_string_free(s, false);
--    return num_regs;
-+    return &cpu->dyn_vreg_feature;
+     tcg_temp_free_ptr(udata);
+     tcg_temp_free_i32(cpu_index);
  }
  
- void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
-@@ -324,10 +317,9 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
-                                  32, "riscv-32bit-fpu.xml", 0);
-     }
-     if (env->misa_ext & RVV) {
--        int base_reg = cs->gdb_num_regs;
-         gdb_register_coprocessor(cs, riscv_gdb_get_vector,
-                                  riscv_gdb_set_vector,
--                                 ricsv_gen_dynamic_vector_xml(cs, base_reg),
-+                                 ricsv_gen_dynamic_vector_feature(cs, cs->gdb_num_regs)->num_regs,
-                                  "riscv-vector.xml", 0);
-     }
-     switch (mcc->misa_mxl_max) {
-@@ -347,9 +339,8 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
-     }
++static void gen_empty_udata_cb_no_wg(void)
++{
++    gen_empty_udata_cb(gen_helper_plugin_vcpu_udata_cb_no_wg);
++}
++
++static void gen_empty_udata_cb_no_rwg(void)
++{
++    gen_empty_udata_cb(gen_helper_plugin_vcpu_udata_cb_no_rwg);
++}
++
+ /*
+  * For now we only support addi_i64.
+  * When we support more ops, we can generate one empty inline cb for each.
+@@ -192,7 +206,8 @@ static void plugin_gen_empty_callback(enum plugin_gen_from from)
+                     gen_empty_mem_helper);
+         /* fall through */
+     case PLUGIN_GEN_FROM_TB:
+-        gen_wrapped(from, PLUGIN_GEN_CB_UDATA, gen_empty_udata_cb);
++        gen_wrapped(from, PLUGIN_GEN_CB_UDATA, gen_empty_udata_cb_no_rwg);
++        gen_wrapped(from, PLUGIN_GEN_CB_UDATA_R, gen_empty_udata_cb_no_wg);
+         gen_wrapped(from, PLUGIN_GEN_CB_INLINE, gen_empty_inline_cb);
+         break;
+     default:
+@@ -588,6 +603,12 @@ static void plugin_gen_tb_udata(const struct qemu_plugin_tb *ptb,
+     inject_udata_cb(ptb->cbs[PLUGIN_CB_REGULAR], begin_op);
+ }
  
-     if (cpu->cfg.ext_zicsr) {
--        int base_reg = cs->gdb_num_regs;
-         gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
--                                 riscv_gen_dynamic_csr_xml(cs, base_reg),
-+                                 riscv_gen_dynamic_csr_feature(cs, cs->gdb_num_regs)->num_regs,
-                                  "riscv-csr.xml", 0);
++static void plugin_gen_tb_udata_r(const struct qemu_plugin_tb *ptb,
++                                  TCGOp *begin_op)
++{
++    inject_udata_cb(ptb->cbs[PLUGIN_CB_REGULAR_R], begin_op);
++}
++
+ static void plugin_gen_tb_inline(const struct qemu_plugin_tb *ptb,
+                                  TCGOp *begin_op)
+ {
+@@ -602,6 +623,14 @@ static void plugin_gen_insn_udata(const struct qemu_plugin_tb *ptb,
+     inject_udata_cb(insn->cbs[PLUGIN_CB_INSN][PLUGIN_CB_REGULAR], begin_op);
+ }
+ 
++static void plugin_gen_insn_udata_r(const struct qemu_plugin_tb *ptb,
++                                    TCGOp *begin_op, int insn_idx)
++{
++    struct qemu_plugin_insn *insn = g_ptr_array_index(ptb->insns, insn_idx);
++
++    inject_udata_cb(insn->cbs[PLUGIN_CB_INSN][PLUGIN_CB_REGULAR_R], begin_op);
++}
++
+ static void plugin_gen_insn_inline(const struct qemu_plugin_tb *ptb,
+                                    TCGOp *begin_op, int insn_idx)
+ {
+@@ -721,6 +750,9 @@ static void plugin_gen_inject(struct qemu_plugin_tb *plugin_tb)
+                 case PLUGIN_GEN_CB_UDATA:
+                     plugin_gen_tb_udata(plugin_tb, op);
+                     break;
++                case PLUGIN_GEN_CB_UDATA_R:
++                    plugin_gen_tb_udata_r(plugin_tb, op);
++                    break;
+                 case PLUGIN_GEN_CB_INLINE:
+                     plugin_gen_tb_inline(plugin_tb, op);
+                     break;
+@@ -737,6 +769,9 @@ static void plugin_gen_inject(struct qemu_plugin_tb *plugin_tb)
+                 case PLUGIN_GEN_CB_UDATA:
+                     plugin_gen_insn_udata(plugin_tb, op, insn_idx);
+                     break;
++                case PLUGIN_GEN_CB_UDATA_R:
++                    plugin_gen_insn_udata_r(plugin_tb, op, insn_idx);
++                    break;
+                 case PLUGIN_GEN_CB_INLINE:
+                     plugin_gen_insn_inline(plugin_tb, op, insn_idx);
+                     break;
+diff --git a/plugins/api.c b/plugins/api.c
+index 5521b0ad36c..ac39cdea0b3 100644
+--- a/plugins/api.c
++++ b/plugins/api.c
+@@ -89,7 +89,11 @@ void qemu_plugin_register_vcpu_tb_exec_cb(struct qemu_plugin_tb *tb,
+                                           void *udata)
+ {
+     if (!tb->mem_only) {
+-        plugin_register_dyn_cb__udata(&tb->cbs[PLUGIN_CB_REGULAR],
++        int index = flags == QEMU_PLUGIN_CB_R_REGS ||
++                    flags == QEMU_PLUGIN_CB_RW_REGS ?
++                    PLUGIN_CB_REGULAR_R : PLUGIN_CB_REGULAR;
++
++        plugin_register_dyn_cb__udata(&tb->cbs[index],
+                                       cb, flags, udata);
+     }
+ }
+@@ -109,7 +113,11 @@ void qemu_plugin_register_vcpu_insn_exec_cb(struct qemu_plugin_insn *insn,
+                                             void *udata)
+ {
+     if (!insn->mem_only) {
+-        plugin_register_dyn_cb__udata(&insn->cbs[PLUGIN_CB_INSN][PLUGIN_CB_REGULAR],
++        int index = flags == QEMU_PLUGIN_CB_R_REGS ||
++                    flags == QEMU_PLUGIN_CB_RW_REGS ?
++                    PLUGIN_CB_REGULAR_R : PLUGIN_CB_REGULAR;
++
++        plugin_register_dyn_cb__udata(&insn->cbs[PLUGIN_CB_INSN][index],
+                                       cb, flags, udata);
      }
  }
 -- 
