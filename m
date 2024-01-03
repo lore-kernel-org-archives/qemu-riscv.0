@@ -4,83 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8651AC3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jan 2024 17:47:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56977C4707B
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jan 2024 17:47:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rL5F5-0006IC-Df; Wed, 03 Jan 2024 12:41:23 -0500
+	id 1rL5DO-0007cB-9a; Wed, 03 Jan 2024 12:39:38 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rL5F1-0005wF-KU
- for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:41:19 -0500
-Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1rL5D7-0006LP-9Q
+ for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:39:22 -0500
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rL5Et-0001o6-Pl
- for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:41:18 -0500
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-6da47688fd9so1321483b3a.0
- for <qemu-riscv@nongnu.org>; Wed, 03 Jan 2024 09:41:10 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1rL5Cx-0000ez-AW
+ for qemu-riscv@nongnu.org; Wed, 03 Jan 2024 12:39:20 -0500
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-40d60c49ee7so57992795e9.0
+ for <qemu-riscv@nongnu.org>; Wed, 03 Jan 2024 09:39:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1704303669; x=1704908469; darn=nongnu.org;
+ d=linaro.org; s=google; t=1704303550; x=1704908350; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oFdaFzrh3PlOhs4z4Tfhlmxx+edYQsfPinw4wO3JTV0=;
- b=nx0FBMNuv7dA42UntI0tuyDvsWJOIUA+hCsgDdvFta8LoccnPK0MFFpNhKcLi+jS0i
- SixkhETsWa05OIOnMUh2O6ejmfx2024uuM4syPfypdKVSls7BM+45DSuoH4BDwh5hIFF
- JEZdnPxfgG2MLCP1tuNteY7rgSH8hsOrENtWBN8KrzP3+rINxGgsueyQrkn1xk36nghh
- rFtDh3XZj9dX2/pGgXRIvxe9ak9eQJGu9ihE7a7NXNikOGCc77Mp6dfnB+ctIgoO6WW0
- uYzeNRDDwCwDnbWl5VmR8IVURXmgjPv0qjh/uSxCvruQrDvT59eQ4xCjX5+W984LbToL
- RdDg==
+ bh=oeKurO18PT1xLzL5iQamunNBev09YXep7NV+pG6wspo=;
+ b=C6JglGkCfX5HMVbUd92dEc9h7gVgTTIXiWqLZf9uHQDhQX65PkspIQWlqn+UcKbpWB
+ J3vIbYNIACZdhsiRyJq+5okNIGvvWb4A1/s4btvl4XXaVt1rP34TGoEqWGkzSrdoR/LZ
+ j43NBusKVQi3jgQMH5q1lGeMUdefFHxvDL1VguqkLiv0Kv/YkWOSPxhPwX2x4fKUhIZH
+ xpsTBiouO6kv6sVnVhjQLyly9P1SF+4M4Ag7WCmBqZ6l7GCDtq+khkGbnKCmFzt8HNBN
+ HBAY1xvyqZC/GMUtZVbHrKsbKgsQPKBiOpJTouhz1M6OksEcl2mSEOHqhiVd2Njlamse
+ KujQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704303669; x=1704908469;
+ d=1e100.net; s=20230601; t=1704303550; x=1704908350;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oFdaFzrh3PlOhs4z4Tfhlmxx+edYQsfPinw4wO3JTV0=;
- b=VF/+csNvr/A3P8aik6VOZBP6MM2LwWmqnFnVjn//3YMx9/2x6qC4zejhVMH8mBI63m
- RzBDLX9L2La1eLBBuk/6ZcoaZz/ttPDO4HLLrMq6y15nCejrbhWWJ4oKvzlVzxiR++W9
- 4S85/kvFTHUyclib1v2NMvzLQSK902zljZoWv8xUX31Wgx2ynp9M1wrXQmzviRYeaZVR
- rOsjew1fXlSNeTo3b6L+NQcBUK1FXts6U3FfyX0a597UhO+/0gtXiKMhe9RwJI/9THLg
- 3lxkcU8u6+E2vVdXQLn0Q7C5nI+aifMRx6XM/zp+8mlClpOiRT8wtcIXS4uvY90tJftg
- h/ww==
-X-Gm-Message-State: AOJu0YyHhiQD8SUbI03a6SeExyBKFrTXQOYWiinMLWr17pjJ+Aa+tBtX
- yRvTRmRWNQQdYeBeZezXb1oz9zQhIvSQ9soASkw8W3fRMl1rAA==
-X-Google-Smtp-Source: AGHT+IHv9aw9HVjv2cvx1jsKRXWsyoa8LBJLeZ187UzeGTNpgxCyZzstcY2zUOiMaYAGyv6IMF1JTQ==
-X-Received: by 2002:a05:6a20:9686:b0:196:106d:dd06 with SMTP id
- hp6-20020a056a20968600b00196106ddd06mr5867363pzc.16.1704303669245; 
- Wed, 03 Jan 2024 09:41:09 -0800 (PST)
-Received: from grind.. ([189.79.21.107]) by smtp.gmail.com with ESMTPSA id
- v3-20020aa78503000000b006d7f1ae421csm24042050pfn.145.2024.01.03.09.41.06
+ bh=oeKurO18PT1xLzL5iQamunNBev09YXep7NV+pG6wspo=;
+ b=CH0Kbn2zxm1QLXLlDdvzZP7DKetEc6HF/A1wVu2cUef0Ju6fM0UC9pDt3+XhjvCy3H
+ pDqHXa5j6JqU9j1LJMYBfbGyGd3CGcJoG2mlAF5yPMOL80g80q2X+7WOOAKEOMO6PyAF
+ e7pkLOctYX1ld9EYn8V7B5mu59SS5zXfIELcDd7mM+SucNNpFW/VoKh644f1AVrTLuDc
+ y6iTSuX7QDLv1Zyw1aJqW9W6vOcCKX1uGA6ydueDwMTAob2uuTJ0N5CRjHH1iRvdAV1k
+ mFzJNWdWwVN9iTZy6JqVbYG1wNBjW7C1m2keOo9sry7tKBLo/Q01GyDqXCbH+FoQA6lH
+ i70g==
+X-Gm-Message-State: AOJu0Yz6S9N67TQxEs2uccpl4EK9KWqEaJEth48v9eRAflnSRGPfSm0t
+ u8xavHhxurysvVxqpTlqpgjBJucVEfle5A==
+X-Google-Smtp-Source: AGHT+IFr7TkHDM4WWp1TO9UpDh2cwaH7JdhPfjki/y18qhHSL+e3Ga994DayBnr9oQrGy3VPOy05Xw==
+X-Received: by 2002:a05:600c:44d6:b0:40c:78c:f864 with SMTP id
+ f22-20020a05600c44d600b0040c078cf864mr10710339wmo.16.1704303549769; 
+ Wed, 03 Jan 2024 09:39:09 -0800 (PST)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ fj7-20020a05600c0c8700b0040d77ebd55csm2974477wmb.13.2024.01.03.09.39.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Jan 2024 09:41:08 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+ Wed, 03 Jan 2024 09:39:08 -0800 (PST)
+Received: from draig.lan (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id 12EF95F94E;
+ Wed,  3 Jan 2024 17:33:51 +0000 (GMT)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com, vladimir.isaev@syntacore.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v3 14/16] target/riscv/cpu.c: move 'mvendorid' to
- riscv_cpu_properties[]
-Date: Wed,  3 Jan 2024 14:40:11 -0300
-Message-ID: <20240103174013.147279-15-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240103174013.147279-1-dbarboza@ventanamicro.com>
-References: <20240103174013.147279-1-dbarboza@ventanamicro.com>
+Cc: qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Song Gao <gaosong@loongson.cn>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ David Hildenbrand <david@redhat.com>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Yanan Wang <wangyanan55@huawei.com>, Bin Meng <bin.meng@windriver.com>,
+ Laurent Vivier <lvivier@redhat.com>, Michael Rolnik <mrolnik@gmail.com>,
+ Alexandre Iooss <erdnaxe@crans.org>, David Woodhouse <dwmw2@infradead.org>,
+ Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>,
+ Brian Cain <bcain@quicinc.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Beraldo Leal <bleal@redhat.com>, Paul Durrant <paul@xen.org>,
+ Mahmoud Mandour <ma.mandourr@gmail.com>, Thomas Huth <thuth@redhat.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Cleber Rosa <crosa@redhat.com>,
+ kvm@vger.kernel.org, Peter Maydell <peter.maydell@linaro.org>,
+ Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ qemu-arm@nongnu.org, Weiwei Li <liwei1518@gmail.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ John Snow <jsnow@redhat.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Nicholas Piggin <npiggin@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>,
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-riscv@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v2 19/43] tests/fp: Bump fp-test-mulAdd test timeout to 3
+ minutes
+Date: Wed,  3 Jan 2024 17:33:25 +0000
+Message-Id: <20240103173349.398526-20-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240103173349.398526-1-alex.bennee@linaro.org>
+References: <20240103173349.398526-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x331.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,115 +127,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Keep all class properties in riscv_cpu_properties[].
+From: Thomas Huth <thuth@redhat.com>
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+When running the tests in slow mode with --enable-debug on a very loaded
+system, the  fp-test-mulAdd test can take longer than 2 minutes. Bump the
+timeout to three minutes to make sure it passes in such situations, too.
+
+Signed-off-by: Thomas Huth <thuth@redhat.com>
+Message-Id: <20231215070357.10888-16-thuth@redhat.com>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- target/riscv/cpu.c | 69 +++++++++++++++++++++++++---------------------
- 1 file changed, 37 insertions(+), 32 deletions(-)
+ tests/fp/meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 0d0197a8ef..2fe282d0af 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1894,6 +1894,41 @@ static const PropertyInfo prop_cboz_blksize = {
-     .set = prop_cboz_blksize_set,
- };
+diff --git a/tests/fp/meson.build b/tests/fp/meson.build
+index cbc17392d67..3b7fc637499 100644
+--- a/tests/fp/meson.build
++++ b/tests/fp/meson.build
+@@ -124,7 +124,7 @@ test('fp-test-mulAdd', fptest,
+      # no fptest_rounding_args
+      args: fptest_args +
+            ['f16_mulAdd', 'f32_mulAdd', 'f64_mulAdd', 'f128_mulAdd'],
+-     suite: ['softfloat-slow', 'softfloat-ops-slow', 'slow'], timeout: 90)
++     suite: ['softfloat-slow', 'softfloat-ops-slow', 'slow'], timeout: 180)
  
-+static void prop_mvendorid_set(Object *obj, Visitor *v, const char *name,
-+                               void *opaque, Error **errp)
-+{
-+    bool dynamic_cpu = riscv_cpu_is_dynamic(obj);
-+    RISCVCPU *cpu = RISCV_CPU(obj);
-+    uint32_t prev_val = cpu->cfg.mvendorid;
-+    uint32_t value;
-+
-+    if (!visit_type_uint32(v, name, &value, errp)) {
-+        return;
-+    }
-+
-+    if (!dynamic_cpu && prev_val != value) {
-+        error_setg(errp, "Unable to change %s mvendorid (0x%x)",
-+                   object_get_typename(obj), prev_val);
-+        return;
-+    }
-+
-+    cpu->cfg.mvendorid = value;
-+}
-+
-+static void prop_mvendorid_get(Object *obj, Visitor *v, const char *name,
-+                               void *opaque, Error **errp)
-+{
-+    uint32_t value = RISCV_CPU(obj)->cfg.mvendorid;
-+
-+    visit_type_uint32(v, name, &value, errp);
-+}
-+
-+static const PropertyInfo prop_mvendorid = {
-+    .name = "mvendorid",
-+    .get = prop_mvendorid_get,
-+    .set = prop_mvendorid_set,
-+};
-+
- static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
- 
-@@ -1912,6 +1947,8 @@ static Property riscv_cpu_properties[] = {
-     {.name = "cbom_blocksize", .info = &prop_cbom_blksize},
-     {.name = "cboz_blocksize", .info = &prop_cboz_blksize},
- 
-+     {.name = "mvendorid", .info = &prop_mvendorid},
-+
- #ifndef CONFIG_USER_ONLY
-     DEFINE_PROP_UINT64("resetvec", RISCVCPU, env.resetvec, DEFAULT_RSTVEC),
- #endif
-@@ -1976,35 +2013,6 @@ static const struct SysemuCPUOps riscv_sysemu_ops = {
- };
- #endif
- 
--static void cpu_set_mvendorid(Object *obj, Visitor *v, const char *name,
--                              void *opaque, Error **errp)
--{
--    bool dynamic_cpu = riscv_cpu_is_dynamic(obj);
--    RISCVCPU *cpu = RISCV_CPU(obj);
--    uint32_t prev_val = cpu->cfg.mvendorid;
--    uint32_t value;
--
--    if (!visit_type_uint32(v, name, &value, errp)) {
--        return;
--    }
--
--    if (!dynamic_cpu && prev_val != value) {
--        error_setg(errp, "Unable to change %s mvendorid (0x%x)",
--                   object_get_typename(obj), prev_val);
--        return;
--    }
--
--    cpu->cfg.mvendorid = value;
--}
--
--static void cpu_get_mvendorid(Object *obj, Visitor *v, const char *name,
--                              void *opaque, Error **errp)
--{
--    uint32_t value = RISCV_CPU(obj)->cfg.mvendorid;
--
--    visit_type_uint32(v, name, &value, errp);
--}
--
- static void cpu_set_mimpid(Object *obj, Visitor *v, const char *name,
-                            void *opaque, Error **errp)
- {
-@@ -2114,9 +2122,6 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
-     cc->gdb_arch_name = riscv_gdb_arch_name;
-     cc->gdb_get_dynamic_xml = riscv_gdb_get_dynamic_xml;
- 
--    object_class_property_add(c, "mvendorid", "uint32", cpu_get_mvendorid,
--                              cpu_set_mvendorid, NULL, NULL);
--
-     object_class_property_add(c, "mimpid", "uint64", cpu_get_mimpid,
-                               cpu_set_mimpid, NULL, NULL);
- 
+ executable(
+   'fp-bench',
 -- 
-2.43.0
+2.39.2
 
 
