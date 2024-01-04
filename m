@@ -4,58 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49EA9C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Jan 2024 02:39:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81534C4706F
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Jan 2024 03:55:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rLDdZ-0003q4-Pf; Wed, 03 Jan 2024 21:39:13 -0500
+	id 1rLEp4-0007J9-Lw; Wed, 03 Jan 2024 22:55:10 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
- id 1rLDdO-0003oL-1w; Wed, 03 Jan 2024 21:39:02 -0500
-Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
- helo=Atcsqr.andestech.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
- id 1rLDdK-0005BJ-Bg; Wed, 03 Jan 2024 21:39:01 -0500
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 4042cSic094412;
- Thu, 4 Jan 2024 10:38:28 +0800 (+08)
- (envelope-from ethan84@andestech.com)
-Received: from ethan84-VirtualBox (10.0.12.51) by ATCPCS16.andestech.com
- (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; Thu, 4 Jan 2024
- 10:38:26 +0800
-Date: Thu, 4 Jan 2024 10:38:19 +0800
-To: Alistair Francis <alistair23@gmail.com>
-CC: <qemu-devel@nongnu.org>, <peter.maydell@linaro.org>,
- <edgar.iglesias@gmail.com>, <richard.henderson@linaro.org>,
- <pbonzini@redhat.com>, <palmer@dabbelt.com>,
- <alistair.francis@wdc.com>, <in.meng@windriver.com>,
- <liweiwei@iscas.ac.cn>, <dbarboza@ventanamicro.com>,
- <hiwei_liu@linux.alibaba.com>, <qemu-riscv@nongnu.org>,
- <peterx@redhat.com>, <david@redhat.com>
-Subject: Re: [PATCH v4 0/4] Support RISC-V IOPMP
-Message-ID: <ZZYaGwLs3OS84WUQ@ethan84-VirtualBox>
-References: <20231122053251.440723-1-ethan84@andestech.com>
- <CAKmqyKO9nGLo2b0TamakNh4qRr+Bi8NQ973bQ=ch8=CKoH-etg@mail.gmail.com>
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rLEp0-0007IG-NF; Wed, 03 Jan 2024 22:55:06 -0500
+Received: from mail-ua1-x92a.google.com ([2607:f8b0:4864:20::92a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rLEop-0008OY-4l; Wed, 03 Jan 2024 22:54:56 -0500
+Received: by mail-ua1-x92a.google.com with SMTP id
+ a1e0cc1a2514c-7cc10f59524so44034241.1; 
+ Wed, 03 Jan 2024 19:54:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1704340493; x=1704945293; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=P/mIZipsaJxUK1JwYV0hhhOLfAxDGY7YJW4ADcqZ4KQ=;
+ b=RjL2mpL0ubsX4x5YSLIJI064xzTFKxCkFejA/Q685h27crKqOVHtW9BKFc2qTKnAAb
+ EUocoFMoUTITRXd31NQBq0QYM9JVLjvm5ldLd05xEOWMOMT8+oNh6A+761niQOdO6mZb
+ UT1ZdaYDjoj/exDrsTcZKPX8u0dE2IbjTbJvAXFfus6sR608aJOfLVAa7HT2p6F68Y4Q
+ zopVRALtdEtZsn+cJ+MXpNNrqCSf0eCucbcOV+Yqa2ZxNS5U2MtcKvJngiwEL/bLz+8D
+ LQzMetdjyukdJCfmgTInw1F11amU/HFekUmlZHZ8Yi9zIlESBlgmLXWd2onNIaOx9XWD
+ glzw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704340493; x=1704945293;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=P/mIZipsaJxUK1JwYV0hhhOLfAxDGY7YJW4ADcqZ4KQ=;
+ b=ueih0/utT6a6apaLsp3uY4CBKnl6wmL8WgrvbShuhX8BtxrWjebbAU664PUgR0mstc
+ 85uJGPrC5n1ZkX6PjFkbPqltetxgBkC9SoD5I9W96SLv1dxUtaR1bX3QXBfdLjHD9Xbx
+ ohR6RF1oduPGblI9t/B2eZlpTRyPdXDd9vYxlfxgPkO9hSQXbXGgFQMkfxxdL7hO6Rp8
+ ZHAc3maFBTrcfptCYq/tx85MtnOE+KPG1f+akGes3WCq4U4P7H4/Xvf2agvfNy+Yq4hu
+ O99W03yc6w4SXL3KcAuUpk4er0LJutfra9418eZg67/6HI0JioTqMG7wca5+g78RevYg
+ tWSQ==
+X-Gm-Message-State: AOJu0YxhSkzTm/p28ZJzds7gQBYDDhLLCMwNFdzyhGTnKJUTHPoT2t2M
+ fy1yPxu7WM11moBs5KPAJ5lROrFe4+4JJidp9a6SxlsgdEQ=
+X-Google-Smtp-Source: AGHT+IFfrkEpQQBBxbSnZmNSmNF+SZOqxMLdW/ZbP1VtLf/FrmhWBAOFl4XaoMHVInpot4RNnGumLXSRXmFM8BjWFAg=
+X-Received: by 2002:a05:6102:3ecb:b0:467:a0c0:f467 with SMTP id
+ n11-20020a0561023ecb00b00467a0c0f467mr1289vsv.27.1704340493534; Wed, 03 Jan
+ 2024 19:54:53 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAKmqyKO9nGLo2b0TamakNh4qRr+Bi8NQ973bQ=ch8=CKoH-etg@mail.gmail.com>
-User-Agent: Mutt/2.1.4 (2021-12-11)
-X-Originating-IP: [10.0.12.51]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 4042cSic094412
-Received-SPF: pass client-ip=60.248.80.70; envelope-from=ethan84@andestech.com;
- helo=Atcsqr.andestech.com
-X-Spam_score_int: -8
-X-Spam_score: -0.9
-X-Spam_bar: /
-X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9, RDNS_DYNAMIC=0.982,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001, TVD_RCVD_IP=0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+References: <20231221113628.41038-1-vadim.shakirov@syntacore.com>
+In-Reply-To: <20231221113628.41038-1-vadim.shakirov@syntacore.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 4 Jan 2024 13:54:27 +1000
+Message-ID: <CAKmqyKPqfsVFD2N3YDOW=WYLHRwiOYmZp8op18ds6Hw4AHXY=A@mail.gmail.com>
+Subject: Re: [PATCH 0/2] Added the ability to delegate LCOFI to VS
+To: Vadim Shakirov <vadim.shakirov@syntacore.com>
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92a;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92a.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -68,92 +88,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Ethan Chen <ethan84@andestech.com>
-From:  Ethan Chen via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Dec 18, 2023 at 02:18:58PM +1000, Alistair Francis wrote:
-> On Wed, Nov 22, 2023 at 3:36 PM Ethan Chen via <qemu-devel@nongnu.org> wrote:
-> >
-> > This series implements IOPMP specification v1.0.0-draft4 rapid-k model.
-> > The specification url:
-> > https://github.com/riscv-non-isa/iopmp-spec/blob/main/riscv_iopmp_specification.pdf
-> >
-> > When IOPMP is enabled, a DMA device ATCDMAC300 is added to RISC-V virt
-> > platform. This DMA device is connected to the IOPMP and has the functionalities
-> 
-> I don't think we want to add an Andes DMA device to the virt machine.
-> 
-> I can't even find the spec for the ATCDMAC300, which isn't great
-> 
+On Fri, Dec 22, 2023 at 1:08=E2=80=AFAM Vadim Shakirov
+<vadim.shakirov@syntacore.com> wrote:
+>
+> This series of patches adds LCOFI delegation from HS-mode to VS-mode.
+>
+> This possibility must be implemented, as in the AIA spec in section 6.3.2
+> it is indicated in table 6.1 that in the case when the hideleg bit is set=
+,
+> the corresponding vsip bit is an alias to the corresponding sip bit, also
+> for enable registers.
+>
+> Vadim Shakirov (2):
+>   target/riscv/csr: Rename groups of interrupts
+>   target/riscv/csr: Added the ability to delegate LCOFI to VS
 
-AndeShape ATCDMAC110 data sheet is available on Andes website
-http://www.andestech.com/en/products-solutions/product-documentation/
+Thanks for the patch.
 
-ATCDMAC300 is compatible with ATCDMAC110.
+Do you mind rebasing this on
+https://github.com/alistair23/qemu/tree/riscv-to-apply.next and
+sending a new version?
 
-Thanks,
-Ethan Chen
+Alistair
 
-> 
-> > required by IOPMP, including:
-> > - Support setup the connection to IOPMP
-> > - Support asynchronous I/O to handle stall transactions
-> > - Send transaction information
-> >
-> > IOPMP takes a transaction which partially match an entry as a partially hit
-> > error. The transaction size is depending on source device, destination device
-> > and bus.
-> >
-> > Source device can send a transaction_info to IOPMP. IOPMP will check partially
-> > hit by transaction_info. If source device does not send a transaction_info,
-> > IOPMP checks information in IOMMU and dose not check partially hit.
-> >
-> > Changes for v4:
-> >
-> >   - Add descriptions of IOPMP and ATCDMAC300
-> >   - Refine coding style and comments
-> >   - config XILINX_AXI does not include file stream.c but selects config STREAM
-> >     instead.
-> >   - ATCDMAC300: INT_STATUS is write 1 clear per bit
-> >                             Rename iopmp_address_sink to transcation_info_sink
-> >   - IOPMP: Refine error message and remove unused variable
-> >   - VIRT: Document new options
-> >                 atcdmac300 is only added when iopmp is enabled
-> >           serial setting should not be changed
-> >
-> > Ethan Chen (4):
-> >   hw/core: Add config stream
-> >   Add RISC-V IOPMP support
-> >   hw/dma: Add Andes ATCDMAC300 support
-> >   hw/riscv/virt: Add IOPMP support
-> >
-> >  docs/system/riscv/virt.rst                    |  11 +
-> >  hw/Kconfig                                    |   1 +
-> >  hw/core/Kconfig                               |   3 +
-> >  hw/core/meson.build                           |   2 +-
-> >  hw/dma/Kconfig                                |   4 +
-> >  hw/dma/atcdmac300.c                           | 566 ++++++++++
-> >  hw/dma/meson.build                            |   1 +
-> >  hw/misc/Kconfig                               |   4 +
-> >  hw/misc/meson.build                           |   1 +
-> >  hw/misc/riscv_iopmp.c                         | 966 ++++++++++++++++++
-> >  hw/riscv/Kconfig                              |   2 +
-> >  hw/riscv/virt.c                               |  65 ++
-> >  include/hw/dma/atcdmac300.h                   | 180 ++++
-> >  include/hw/misc/riscv_iopmp.h                 | 341 +++++++
-> >  .../hw/misc/riscv_iopmp_transaction_info.h    |  28 +
-> >  include/hw/riscv/virt.h                       |  10 +-
-> >  16 files changed, 2183 insertions(+), 2 deletions(-)
-> >  create mode 100644 hw/dma/atcdmac300.c
-> >  create mode 100644 hw/misc/riscv_iopmp.c
-> >  create mode 100644 include/hw/dma/atcdmac300.h
-> >  create mode 100644 include/hw/misc/riscv_iopmp.h
-> >  create mode 100644 include/hw/misc/riscv_iopmp_transaction_info.h
-> >
-> > --
-> > 2.34.1
-> >
-> >
+>
+>  target/riscv/csr.c | 50 ++++++++++++++++++++++++++++++----------------
+>  1 file changed, 33 insertions(+), 17 deletions(-)
+>
+> --
+> 2.34.1
+>
+>
 
