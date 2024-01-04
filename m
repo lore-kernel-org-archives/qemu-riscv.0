@@ -4,99 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2935CC47073
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Jan 2024 18:13:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2224C47074
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Jan 2024 23:00:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rLSCr-0006WF-4T; Thu, 04 Jan 2024 13:12:39 -0500
+	id 1rLWh8-00041c-R7; Thu, 04 Jan 2024 18:00:10 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLSCo-0006Vo-Cl
- for qemu-riscv@nongnu.org; Thu, 04 Jan 2024 13:12:34 -0500
-Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rLWh6-00041A-0Y; Thu, 04 Jan 2024 18:00:09 -0500
+Received: from mail-vk1-xa2a.google.com ([2607:f8b0:4864:20::a2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLSCR-0000W0-9O
- for qemu-riscv@nongnu.org; Thu, 04 Jan 2024 13:12:33 -0500
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-336c9acec03so603221f8f.2
- for <qemu-riscv@nongnu.org>; Thu, 04 Jan 2024 10:12:09 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rLWh3-0002cz-U0; Thu, 04 Jan 2024 18:00:07 -0500
+Received: by mail-vk1-xa2a.google.com with SMTP id
+ 71dfb90a1353d-4b745fa9671so299008e0c.0; 
+ Thu, 04 Jan 2024 15:00:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704391927; x=1704996727; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=sDUuF9dozzTZnMqPT4WhJ/Hlq7qfud2Jb3j/6GkUXbQ=;
- b=veauWBtLkDRXgf6jXnK2yDECVYuYQO2MkKz4UqK9R4VgT+gqej+tkZHFFoH8W7abhV
- tnaYWkrbqLii5COHr72Q8WUepO5/4NWxVApQ5y66ZT+RQwd+YxZiaFpKXf5sMkqWN9jX
- RegpJEAMJW1wuY8vrXQhHGtWGh8YXMQKn2w5tNZe9ynNYk3I0VkiZSu7tjZyGbLYe34s
- C9LpU5YsQRX0GW5lo5nEkXVZHq3JaJWQ/Ni51dgIzE4Fdc94zcJARvsFzt0cb8dlF+vA
- qe2Myu2f1YXmKiALhz4qtpP5e5TinQYGsDpCPcJjAwK/T7CSQVvcT8OGRCnDKk08ICok
- EEjA==
+ d=gmail.com; s=20230601; t=1704409204; x=1705014004; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GLTPtn8KsZSo2T/OmS23oBF20rd49bjYa5hF/DBWF4k=;
+ b=O38wyLOWJnpnDE+viskJOTLAG09fKQdvxjSrZYyzg/VOvafindfGQja/XSUkI+wtVh
+ Ybj5wE51o2/VZlwqvva4Alfo1jVlC1uaoB6aTmLgUX6kaKnny+5vo8peiVR6a7YUUV3z
+ DyHeC95oPnBXiWaicmNBzWdPRax2FhpTN2+d+1rP/89MiU/9HZvzSIEnjvhJLCsLN8qK
+ cumMeMZNj8bmaVZ5OG0Sli6iLfcnzxRryhiaxoAyyJ+/4J+GfxvT3N7NTMnYpuTUDEy1
+ mWmAFy6Y8aVUWU1fxGsh9b0mNGU8ODH0mVpmB+ORc1bpdMxywxoWGVxZTClFRWnbwZrq
+ KsOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704391927; x=1704996727;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=sDUuF9dozzTZnMqPT4WhJ/Hlq7qfud2Jb3j/6GkUXbQ=;
- b=WZ5cxOEPEuLmqWup0bSZkKD3w2n9Djpxwml2IZZHYzSUfJnivrPqPRo62PII0KJqbz
- +y3GGTbQ/bAM16XhKXuf5pVoBcQDyHsZIJz+knUJDdN6goqh35HNZNwcB4Aykt/R28EG
- B1NF8MjJvCL/oqMjgAzadwyo07Jj54HqPuRv4tGqX+b4aL15jJ+ZAxo6lb2pDMfhuTie
- BA2t4AavZ5oQ9YtlZ95erqmb9TXMxBDe4gBbhyxENGucXSZ5lkJuI1hXhz4gAjNNaPx6
- grkQL+jmr3jKOV76FgrXH2qFN3fsMPSbRTUjaOL01M4k+lgL1AjB5qW0JlAxpVV2hYmC
- hPQQ==
-X-Gm-Message-State: AOJu0YwU3C57l76iZkDNaijXPcwkFLR4E7h7A7SMV59sgChZqFijvpGI
- DnWOygQnWpAUiIizfLDl6CmyuqA1J7lz9g==
-X-Google-Smtp-Source: AGHT+IFFkpKqDkFewmPSebnsx4JaRsWmRWsUxGMMKuP5Lyx6GnTlLsnxVeGm5PlroH9uprv95NxCzg==
-X-Received: by 2002:adf:f30e:0:b0:337:39c7:2c8 with SMTP id
- i14-20020adff30e000000b0033739c702c8mr566203wro.110.1704391927570; 
- Thu, 04 Jan 2024 10:12:07 -0800 (PST)
-Received: from [192.168.69.100] ([176.187.194.232])
- by smtp.gmail.com with ESMTPSA id
- p9-20020adfcc89000000b003368100ff71sm33292931wrj.10.2024.01.04.10.12.01
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 04 Jan 2024 10:12:06 -0800 (PST)
-Message-ID: <6bff96da-acfe-4969-91fd-db9d9ef03d34@linaro.org>
-Date: Thu, 4 Jan 2024 19:12:00 +0100
+ d=1e100.net; s=20230601; t=1704409204; x=1705014004;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=GLTPtn8KsZSo2T/OmS23oBF20rd49bjYa5hF/DBWF4k=;
+ b=VutijRBVZXcfpx+BwE8x/8FG1wN64Npe83AxfF/kBa2pGPZe5MNMRo4RVLAlcoL+G1
+ cHeNuQJPMQXfGrtXRISbJ+QdxOVeCzf9KXuDRWDmL1I4qhtJ0AcmbfM8i/oYRX7NLTiW
+ A4aIPRgKmPCZF2AvufGJZi2XszP/DRgBgD4lT/qj715YVWcF5BQXkdKE4+D9HdAheYa6
+ wNYAyzBrfRIYzN9OOdGeJSwx7pUQSUDCoTmaAw/J4DJNWRTJ8YC/h/DVmNOPI3dNm7s/
+ cNkS3q+PwhpHpI/bo9ZE9sJ1k7asnG+HNvCaV60Nz3gxAFtZYNd2/mPT0cf0MyGt4CTY
+ +c7w==
+X-Gm-Message-State: AOJu0YyuGwuSYZDikFNEfpmL7kSPuvW7NIv3OorB613e+m08fBj0lpbw
+ QqHe/bVgCq/vKu9lE8EscVa7D9KZX4TqTV0sbJA=
+X-Google-Smtp-Source: AGHT+IGNvUcS68rlSOfaFQQkdiCp3VlwGm5+r9zTrcsuH8vvrBlUBLpFMjVBw/ZKG1g2oLyiOcid2f1OBqc/rOJewR0=
+X-Received: by 2002:a05:6122:922:b0:4b6:de45:807e with SMTP id
+ j34-20020a056122092200b004b6de45807emr1314137vka.15.1704409204366; Thu, 04
+ Jan 2024 15:00:04 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 01/31] target/alpha: Remove 'ev67' CPU class
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: Gavin Shan <gshan@redhat.com>, laurent@vivier.eu,
- richard.henderson@linaro.org
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
- imp@bsdimp.com, kevans@freebsd.org, pbonzini@redhat.com,
- peter.maydell@linaro.org, imammedo@redhat.com, b.galvani@gmail.com,
- strahinja.p.jankovic@gmail.com, sundeep.lkml@gmail.com, kfting@nuvoton.com,
- wuhaotsh@google.com, nieklinnenbank@gmail.com, rad@semihalf.com,
- qemu-arm@nongnu.org, quic_llindhol@quicinc.com,
- marcin.juszkiewicz@linaro.org, eduardo@habkost.net,
- marcel.apfelbaum@gmail.com, wangyanan55@huawei.com, vijai@behindbytes.com,
- palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, mrolnik@gmail.com, edgar.iglesias@gmail.com,
- bcain@quicinc.com, gaosong@loongson.cn, aurelien@aurel32.net,
- jiaxun.yang@flygoat.com, aleksandar.rikalo@syrmia.com,
- chenhuacai@kernel.org, shorne@gmail.com, npiggin@gmail.com, clg@kaod.org,
- ysato@users.sourceforge.jp, kbastian@mail.uni-paderborn.de,
- jcmvbkbc@gmail.com, shan.gavin@gmail.com
-References: <20231114235628.534334-1-gshan@redhat.com>
- <20231114235628.534334-2-gshan@redhat.com>
- <9fcd0827-a729-4cf8-a6ab-93cda04d88f9@linaro.org>
- <04107470-8438-4e24-9a9a-03f6fa30bb31@linaro.org>
-In-Reply-To: <04107470-8438-4e24-9a9a-03f6fa30bb31@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42d.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01,
- T_SPF_HELO_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+References: <20231218125334.37184-1-dbarboza@ventanamicro.com>
+ <20231218125334.37184-20-dbarboza@ventanamicro.com>
+In-Reply-To: <20231218125334.37184-20-dbarboza@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 5 Jan 2024 08:59:38 +1000
+Message-ID: <CAKmqyKOiY+W6594v4wDBkmCv1BipqwhOPTodrUQQ-+8DNXgHPQ@mail.gmail.com>
+Subject: Re: [PATCH v13 19/26] target/riscv: implement svade
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, ajones@ventanamicro.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2a;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2a.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -112,90 +90,96 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 4/1/24 19:03, Philippe Mathieu-Daudé wrote:
-> On 4/1/24 18:58, Philippe Mathieu-Daudé wrote:
->> On 15/11/23 00:55, Gavin Shan wrote:
->>> 'ev67' CPU class will be returned to match everything, which makes
->>> no sense as mentioned in the comments. Remove the logic to fall
->>> back to 'ev67' CPU class to match everything.
->>>
->>> Signed-off-by: Gavin Shan <gshan@redhat.com>
->>> ---
->>>   target/alpha/cpu.c | 7 ++-----
->>>   1 file changed, 2 insertions(+), 5 deletions(-)
->>>
->>> diff --git a/target/alpha/cpu.c b/target/alpha/cpu.c
->>> index 39cf841b3e..91fe8ae095 100644
->>> --- a/target/alpha/cpu.c
->>> +++ b/target/alpha/cpu.c
->>> @@ -141,11 +141,8 @@ static ObjectClass 
->>> *alpha_cpu_class_by_name(const char *cpu_model)
->>>       typename = g_strdup_printf(ALPHA_CPU_TYPE_NAME("%s"), cpu_model);
->>>       oc = object_class_by_name(typename);
->>>       g_free(typename);
->>> -
->>> -    /* TODO: remove match everything nonsense */
->>> -    if (!oc || object_class_is_abstract(oc)) {
->>> -        /* Default to ev67; no reason not to emulate insns by 
->>> default. */
->>> -        oc = object_class_by_name(ALPHA_CPU_TYPE_NAME("ev67"));
->>> +    if (!oc || !object_class_dynamic_cast(oc, TYPE_ALPHA_CPU)) {
->>> +        return NULL;
->>>       }
->>
->> This breaks linux-user:
->>
->> qemu-alpha: unable to find CPU model 'any'
-> 
-> Thread 1 "qemu-alpha" hit Breakpoint 1, alpha_cpu_class_by_name 
-> (cpu_model=0x5555557202a0 "any") at target/alpha/cpu.c:123
-> 123    {
-> (gdb) bt
-> #0  alpha_cpu_class_by_name (cpu_model=0x5555557202a0 "any") at 
-> target/alpha/cpu.c:123
-> #1  0x0000555555583956 in cpu_class_by_name 
-> (typename=typename@entry=0x555555674af8 "alpha-cpu", 
-> cpu_model=0x5555557202a0 "any")
->      at hw/core/cpu-common.c:156
-> #2  0x00005555555904a1 in parse_cpu_option (cpu_option=<optimized out>) 
-> at cpu-target.c:257
-> #3  0x00005555555822e9 in main (argc=2, argv=0x7fffffffe318, 
-> envp=<optimized out>) at linux-user/main.c:784
-> 
-> in main():
-> 
->   781     if (cpu_model == NULL) {
->   782         cpu_model = cpu_get_model(get_elf_eflags(execfd));
->   783     }
->   784     cpu_type = parse_cpu_option(cpu_model);
-> 
-> Having:
-> 
-> $ cat linux-user/alpha/target_elf.h
-> ...
-> #ifndef ALPHA_TARGET_ELF_H
-> #define ALPHA_TARGET_ELF_H
-> static inline const char *cpu_get_model(uint32_t eflags)
-> {
->      return "any";
-> }
-> #endif
+On Mon, Dec 18, 2023 at 10:57=E2=80=AFPM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> 'svade' is a RVA22S64 profile requirement, a profile we're going to add
+> shortly. It is a named feature (i.e. not a formal extension, not defined
+> in riscv,isa DT at this moment) defined in [1] as:
+>
+> "Page-fault exceptions are raised when a page is accessed when A bit is
+> clear, or written when D bit is clear.".
+>
+> As far as the spec goes, 'svade' is one of the two distinct modes of
+> handling PTE_A and PTE_D. The other way, i.e. update PTE_A/PTE_D when
+> they're cleared, is defined by the 'svadu' extension. Checking
+> cpu_helper.c, get_physical_address(), we can verify that QEMU is
+> compliant with that: we will update PTE_A/PTE_D if 'svadu' is enabled,
+> or throw a page-fault exception if 'svadu' isn't enabled.
+>
+> So, as far as we're concerned, 'svade' translates to 'svadu must be
+> disabled'.
+>
+> We'll implement it like 'zic64b': an internal flag that profiles can
+> enable. The flag will not be exposed to users.
+>
+> [1] https://github.com/riscv/riscv-profiles/blob/main/profiles.adoc
+>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
-Laurent, Richard, are you OK with this fix?
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
--- >8 --
-diff --git a/linux-user/alpha/target_elf.h b/linux-user/alpha/target_elf.h
-index 344e9f4d39..b77d638f6d 100644
---- a/linux-user/alpha/target_elf.h
-+++ b/linux-user/alpha/target_elf.h
-@@ -9,6 +9,6 @@
-  #define ALPHA_TARGET_ELF_H
-  static inline const char *cpu_get_model(uint32_t eflags)
-  {
--    return "any";
-+    return "ev67";
-  }
-  #endif
----
+Alistair
 
+> ---
+>  target/riscv/cpu.c         | 1 +
+>  target/riscv/cpu_cfg.h     | 1 +
+>  target/riscv/tcg/tcg-cpu.c | 5 +++++
+>  3 files changed, 7 insertions(+)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index a38d78b2d6..a76bc1b86a 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1445,6 +1445,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_experimental=
+_exts[] =3D {
+>  };
+>
+>  const RISCVCPUMultiExtConfig riscv_cpu_named_features[] =3D {
+> +    MULTI_EXT_CFG_BOOL("svade", svade, true),
+>      MULTI_EXT_CFG_BOOL("zic64b", zic64b, true),
+>
+>      DEFINE_PROP_END_OF_LIST(),
+> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> index 90f18eb601..46b06db68b 100644
+> --- a/target/riscv/cpu_cfg.h
+> +++ b/target/riscv/cpu_cfg.h
+> @@ -116,6 +116,7 @@ struct RISCVCPUConfig {
+>      bool ext_smepmp;
+>      bool rvv_ta_all_1s;
+>      bool rvv_ma_all_1s;
+> +    bool svade;
+>      bool zic64b;
+>
+>      uint32_t mvendorid;
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index 04aedf3840..e395e2449e 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -188,6 +188,9 @@ static void riscv_cpu_enable_named_feat(RISCVCPU *cpu=
+, uint32_t feat_offset)
+>          cpu->cfg.cbop_blocksize =3D 64;
+>          cpu->cfg.cboz_blocksize =3D 64;
+>          break;
+> +    case CPU_CFG_OFFSET(svade):
+> +        cpu->cfg.ext_svadu =3D false;
+> +        break;
+>      default:
+>          g_assert_not_reached();
+>      }
+> @@ -381,6 +384,8 @@ static void riscv_cpu_update_named_features(RISCVCPU =
+*cpu)
+>      cpu->cfg.zic64b =3D cpu->cfg.cbom_blocksize =3D=3D 64 &&
+>                        cpu->cfg.cbop_blocksize =3D=3D 64 &&
+>                        cpu->cfg.cboz_blocksize =3D=3D 64;
+> +
+> +    cpu->cfg.svade =3D !cpu->cfg.ext_svadu;
+>  }
+>
+>  static void riscv_cpu_validate_g(RISCVCPU *cpu)
+> --
+> 2.43.0
+>
+>
 
