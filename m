@@ -4,75 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 242F9C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 05:27:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9612C47077
+	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 05:28:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rLcjV-0005JK-Aw; Fri, 05 Jan 2024 00:27:01 -0500
+	id 1rLcka-0005yH-Iy; Fri, 05 Jan 2024 00:28:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rLcjT-0005Ij-U1; Fri, 05 Jan 2024 00:26:59 -0500
-Received: from mail-ua1-x936.google.com ([2607:f8b0:4864:20::936])
+ id 1rLckZ-0005xE-RK; Fri, 05 Jan 2024 00:28:07 -0500
+Received: from mail-vs1-xe34.google.com ([2607:f8b0:4864:20::e34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rLcjS-0006RE-Dy; Fri, 05 Jan 2024 00:26:59 -0500
-Received: by mail-ua1-x936.google.com with SMTP id
- a1e0cc1a2514c-7cbdd011627so408429241.3; 
- Thu, 04 Jan 2024 21:26:57 -0800 (PST)
+ id 1rLckY-0007qO-CE; Fri, 05 Jan 2024 00:28:07 -0500
+Received: by mail-vs1-xe34.google.com with SMTP id
+ ada2fe7eead31-46746edb7bcso261768137.0; 
+ Thu, 04 Jan 2024 21:28:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704432417; x=1705037217; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1704432484; x=1705037284; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=//0DpHIysVHUwO4ZYlnAywUsF3E/eJjKR1qha7ZFK08=;
- b=a88xvHM08iqgYftMZ0InOY7lFBu5EGcelFBHNoH/eruK6ZYo98a9VIph1xjW5WeVYN
- CmfOxF6cPZeML8ZM+tQu0g5TeNHDAtil0yhKu5IptFg9Wa7zmHergvvA1ZUCPW0ystzh
- einsfTnuL9Nmy5NguX51HUViqheEKZ82gnNX8ayV2E3Nr2UTTzhDtCcHRboB7Z9VSy4u
- du9vbiSBKVVJuPNCzW0/8jfHeGons1F/47d5qqKFGlEPGjdo+pWlnA3YbVHh0gVquAFS
- pJQY9ZpeDzeOhS5GQEKoD2VNg7HyKF0ghiJs6ru4oRZUTix1LdXZBT4mdhZPPI/G9wdb
- 54hA==
+ bh=17UITJ0cKd8ZbUdLS4tLr7i0KiAKs/G+nSUHMwOtFBY=;
+ b=E5073KVbOuyMTbXDWWI8XYTKOt4Cku+iYZo0PvkU+POtBORdekP4jkQt8WtljKf9X3
+ 0knZETe7O+2M4KZrrjmWH8kBS03KqDkocdPYGbUt6PaEbz7hRrVwXlcvclNyRo4OC1W1
+ wxcTgSH9VgDESMtITithxZWwg5M0T+5dXg27WDlrruMYWQlg6StK+nb+rn/jsDvNtXLE
+ G1Bfde9XYdC9SQLUgRIY2xL0steQIzzLHCeiUohituae7wF0UP5TxklFurJ4mnvNHDpE
+ h9bSUc97en5bQNpq8M8SjRgkhqMZIbmLrXdaZH8VN8otmyaBZok0P8ex3gOz2ulAwpdV
+ uvlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704432417; x=1705037217;
+ d=1e100.net; s=20230601; t=1704432484; x=1705037284;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=//0DpHIysVHUwO4ZYlnAywUsF3E/eJjKR1qha7ZFK08=;
- b=DPe8/aeRJkMahW/UiCeDemYRFbtloUG24yM7yOCWMrjWwtEF5gnSr/b9UPpbjqZOB8
- zJ4hUf/B9zKbYeWGYaQjoNQzdUcyJTD1cvYNeAAIv57ZniTZExXo8E6vJ0Pjr2iLNHcD
- gzww5OR0RZo9c+NQzPbfLBTYJ+6rct8U9swYpTnOkjO+a+7wkpCDEDa6THQqlcC+Ns5d
- emW+MuRycjRDAGjpPJ2S31V1D2OgMvwE930c2afqWZ9nI25vN1YWC3i92WslORNGGOBx
- 51HRo9Muhe5yPu2dPifCvDqSEjWzUYWmg/ZcVWA1nV9aZCIZeMOFYMA64lorhiny2fiW
- sK0A==
-X-Gm-Message-State: AOJu0Yz8gz0lgzD9O8cPd1+heLJMA8hz+32gKydB5dMkqzKCtKPvtppP
- O3X/dgmpkB7YvbWHP4LmSFMflVLlDxgLehZjWcA=
-X-Google-Smtp-Source: AGHT+IHs+ElU9fQUTHonucOFn8aAOIAUsxmW+MUq3jXLY4Wd6TVO2T6yuhMJ9O8JlD/Cs3A3brKIYBBiHdGlDAFesXs=
-X-Received: by 2002:a05:6102:548e:b0:467:b460:750d with SMTP id
- bk14-20020a056102548e00b00467b460750dmr299148vsb.0.1704432417082; Thu, 04 Jan
- 2024 21:26:57 -0800 (PST)
+ bh=17UITJ0cKd8ZbUdLS4tLr7i0KiAKs/G+nSUHMwOtFBY=;
+ b=q7eGBQLeaBvzETyRifJ46eSayt28y660aTYsCf3DIf1rvwc+egxNk/VeV6KL001r3Q
+ BGwWpYVMR/UV6g6OB9zrxbm92ip6kTwK2HHe81rMe9K5Ve8PPnYNeGENMOtrkkkuDqPk
+ n6E5dIlHEvGFY4oMtcmJi9X+VSZXRou+I2xdhoB1kIOLALeH8kRLvIroYDkrm23JM3Sx
+ PGcZZUrKYS4qMj+MXV8HQbT657eE1/MilHQb0/YSkRD+b6nGIc/daC064NKNXjzMON/s
+ EVX6jL7EezGudNXrObMiW19xcayesY/uR4h5SiORjcp8duJ4cCEdoJnNSSZENcNdUfAz
+ i7HQ==
+X-Gm-Message-State: AOJu0Yxb9vHGpQ1UFKruhPngzHnZuJbBLcHj1AiIj/FPFa8wAInjQBe5
+ N4X6XkN9uHQRujgQ0uuHwGvz1coSWzNiThENQQw=
+X-Google-Smtp-Source: AGHT+IGPd3vByghx9pUY/k4h2w1lPJJJH1acVd6tTcqsmVpDiv+inJK2H7EWKhF80AoQlEnbJdkGU7ClSpt/iWG8nDI=
+X-Received: by 2002:a05:6102:3d86:b0:467:b489:5e52 with SMTP id
+ h6-20020a0561023d8600b00467b4895e52mr403806vsv.18.1704432484630; Thu, 04 Jan
+ 2024 21:28:04 -0800 (PST)
 MIME-Version: 1.0
-References: <20231229120724.41383-1-heinrich.schuchardt@canonical.com>
- <20231229120724.41383-5-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231229120724.41383-5-heinrich.schuchardt@canonical.com>
+References: <20240103185716.1790546-1-me@deliversmonkey.space>
+ <20240103185716.1790546-7-me@deliversmonkey.space>
+In-Reply-To: <20240103185716.1790546-7-me@deliversmonkey.space>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 5 Jan 2024 15:26:31 +1000
-Message-ID: <CAKmqyKPyKW_TXiDVPd_99dn+-bUvPZZrnbFS-yrFMSTxgGvNMQ@mail.gmail.com>
-Subject: Re: [PATCH v2 4/4] qemu-options: enable -smbios option on RISC-V
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, Bin Meng <bin.meng@windriver.com>, 
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- "Michael S . Tsirkin" <mst@redhat.com>, 
- Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Date: Fri, 5 Jan 2024 15:27:38 +1000
+Message-ID: <CAKmqyKMbYg2baDXRfzLCMajGJ-DL9Kjm2sot2wD8rNHERbNSJQ@mail.gmail.com>
+Subject: Re: [PATCH v3 6/6] target/riscv: Enable updates for pointer masking
+ variables and thus enable pointer masking extension
+To: Alexey Baturo <baturo.alexey@gmail.com>
+Cc: richard.henderson@linaro.org, zhiwei_liu@linux.alibaba.com, 
+ palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu, 
+ kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::936;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x936.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e34;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe34.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -96,43 +91,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Dec 29, 2023 at 10:08=E2=80=AFPM Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Thu, Jan 4, 2024 at 4:58=E2=80=AFAM Alexey Baturo <baturo.alexey@gmail.c=
+om> wrote:
 >
-> With SMBIOS support added for RISC-V we also should enable the command li=
-ne
-> option.
+> From: Alexey Baturo <baturo.alexey@gmail.com>
 >
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Signed-off-by: Alexey Baturo <baturo.alexey@gmail.com>
+> ---
+>  target/riscv/cpu.c | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 1e6571ce99..13389ddc55 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -153,6 +153,9 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
+>      ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
+>      ISA_EXT_DATA_ENTRY(svnapot, PRIV_VERSION_1_12_0, ext_svnapot),
+>      ISA_EXT_DATA_ENTRY(svpbmt, PRIV_VERSION_1_12_0, ext_svpbmt),
+> +    ISA_EXT_DATA_ENTRY(ssnpm, PRIV_VERSION_1_12_0, ext_ssnpm),
+> +    ISA_EXT_DATA_ENTRY(smnpm, PRIV_VERSION_1_12_0, ext_smnpm),
+> +    ISA_EXT_DATA_ENTRY(smmpm, PRIV_VERSION_1_12_0, ext_smmpm),
+>      ISA_EXT_DATA_ENTRY(xtheadba, PRIV_VERSION_1_11_0, ext_xtheadba),
+>      ISA_EXT_DATA_ENTRY(xtheadbb, PRIV_VERSION_1_11_0, ext_xtheadbb),
+>      ISA_EXT_DATA_ENTRY(xtheadbs, PRIV_VERSION_1_11_0, ext_xtheadbs),
+> @@ -1337,6 +1340,11 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[=
+] =3D {
+>
+>      MULTI_EXT_CFG_BOOL("zmmul", ext_zmmul, false),
+>
+> +    /* Zjpm v0.8 extensions */
+> +    MULTI_EXT_CFG_BOOL("ssnpm", ext_ssnpm, false),
+> +    MULTI_EXT_CFG_BOOL("smnpm", ext_smnpm, false),
+> +    MULTI_EXT_CFG_BOOL("smmpm", ext_smmpm, false),
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+What happens to the existing J property?
+
 
 Alistair
 
-> ---
-> v2:
->         new patch
-> ---
->  qemu-options.hx | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/qemu-options.hx b/qemu-options.hx
-> index 7bdb414345..5ed82df11f 100644
-> --- a/qemu-options.hx
-> +++ b/qemu-options.hx
-> @@ -2705,7 +2705,7 @@ DEF("smbios", HAS_ARG, QEMU_OPTION_smbios,
->      "                specify SMBIOS type 17 fields\n"
->      "-smbios type=3D41[,designation=3Dstr][,kind=3Dstr][,instance=3D%d][=
-,pcidev=3Dstr]\n"
->      "                specify SMBIOS type 41 fields\n",
-> -    QEMU_ARCH_I386 | QEMU_ARCH_ARM | QEMU_ARCH_LOONGARCH)
-> +    QEMU_ARCH_I386 | QEMU_ARCH_ARM | QEMU_ARCH_LOONGARCH | QEMU_ARCH_RIS=
-CV)
->  SRST
->  ``-smbios file=3Dbinary``
->      Load SMBIOS entry from binary file.
+> +
+>      MULTI_EXT_CFG_BOOL("zca", ext_zca, false),
+>      MULTI_EXT_CFG_BOOL("zcb", ext_zcb, false),
+>      MULTI_EXT_CFG_BOOL("zcd", ext_zcd, false),
 > --
-> 2.43.0
+> 2.34.1
 >
 >
 
