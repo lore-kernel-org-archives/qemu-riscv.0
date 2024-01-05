@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DCADC47074
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 02:53:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CD3FC3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 03:26:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rLaKW-0004et-V7; Thu, 04 Jan 2024 21:53:05 -0500
+	id 1rLaqY-0001FP-Mw; Thu, 04 Jan 2024 22:26:10 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rLaKU-0004bW-Vc; Thu, 04 Jan 2024 21:53:02 -0500
-Received: from mail-vs1-xe2d.google.com ([2607:f8b0:4864:20::e2d])
+ id 1rLaqW-0001Eb-Ss; Thu, 04 Jan 2024 22:26:08 -0500
+Received: from mail-oi1-x231.google.com ([2607:f8b0:4864:20::231])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rLaKT-0000UR-ES; Thu, 04 Jan 2024 21:53:02 -0500
-Received: by mail-vs1-xe2d.google.com with SMTP id
- ada2fe7eead31-4676dc16009so321280137.2; 
- Thu, 04 Jan 2024 18:53:00 -0800 (PST)
+ id 1rLaqV-0007Os-9V; Thu, 04 Jan 2024 22:26:08 -0500
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-3bbd6e37af4so840790b6e.1; 
+ Thu, 04 Jan 2024 19:26:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704423180; x=1705027980; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1704425165; x=1705029965; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
  bh=bkm/1r8pH1/tjxwn4ABPGiuvYkFb3WjqjfE2lwSHBw4=;
- b=QKRjAY5JGGgbLBDHtvB4KasAS3b2N6l60CY7LW9AhvcHUhCF3YCqmWL8aS9GVMNple
- oFY7LCObJv1tXler+OCfVIHenHT/WUREpkwAsW63t+I5Xx7xJqWSdiAJgFrhsTg0rUKT
- dtWuTrEpgq02+8I4IfcjtzjPH+lmYXoNyFn5uduh8UIRRXVq/iqImvmAuuyO5l2S5H4N
- 1jh7r76akz1aD0EIBUnKXN6NT0gLml0kmrwYiGQOSldRpZbIx4yLoGYWhVgH7wheJqXE
- RGRXeALftAgNZXwa/z15xqpQM4Xwt8Ufgite2nuwHlVijoeLgqC7vE+6W5z+qKslSyDs
- paHA==
+ b=LCo6OM+8s890K3/q2l4AvE2e8PgDpxw7mD4I/mBSwbLr6VdzdzJUsfc71QQpeKi1Qj
+ n25zvI2V7LENBHSH8K8oPaHZgLpFE8oCzIjGyi1UUK4+t4LiTxBJh9167HeUOfHRyzyD
+ v7ElzECtD6ECLmajma5/4naX69TZU0Wk5lT/ijiLlYqazCeHjBZ1XgmHeOVduGMBMaO/
+ LGK1Co8tkTglWeiU4/pNar7d6jHS888a7G0uQp9ZHwzv1qbeVKuHuodt0IcmuRxOfe+e
+ c70fWK0JtSACtcF757kz4huJzP/Cy0KRQGBXByYT3OP3f2pL+XcVC/xF6y5ZlIIGVqWE
+ 36xg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704423180; x=1705027980;
+ d=1e100.net; s=20230601; t=1704425165; x=1705029965;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
  bh=bkm/1r8pH1/tjxwn4ABPGiuvYkFb3WjqjfE2lwSHBw4=;
- b=TlUHzxUlae2GlFVJtGewQcz2ePeIaQ6XG2n3kyEQKf2Tzj4NZG3aJYrpL1Z7HEUgNp
- ufAKHJeCwfNVErPQQ63mWBG7sNlOYfaGfzkkrcxVtj6A0GaoTCNTUPewi2XvUvRFU3aK
- GSe/18JcdCFncQMrDwbRcsd7mwLF9morpkqx2nKRzrolp5t09YjDRjhnzABFAtZ0dnkz
- uREbGlyTPpWU1eB562F8TQe0asUFf6/tqPDgZcIa1Crn6Mr7tR9TsefRwnA6ucKL0J2L
- 7rxjMYqpV4UGZHcnvgsxQSnZh1v5uPbGNVhYk5E/kGMBi5P9oYt7dLzgIszubDfr1MkF
- yARw==
-X-Gm-Message-State: AOJu0YzLWx83u9unoC6gE6YMaktJTwymrC8CZBUTyFjIV3bo0A+P6xUl
- e1P21E40payv0DoxkZ34RDjgZDYuXTUBfDjjehs=
-X-Google-Smtp-Source: AGHT+IExA3LmKyMour6MZklxvQLBi40SAYlLTPHiVdhS4WnGpkSj0QqABWWtAC+vf4vGBOq/VMfvJL9/PmxkgRHwpxs=
-X-Received: by 2002:a05:6102:5595:b0:466:f511:d410 with SMTP id
- dc21-20020a056102559500b00466f511d410mr963022vsb.10.1704423180031; Thu, 04
- Jan 2024 18:53:00 -0800 (PST)
+ b=bkEMusdS/q6mt+k8R8yQCdxeYltQDi4nR9/iHa41EdzbJC8QoO5t204oSYa3Xxjtc7
+ r1yo1TeNh9e9cnjIE+9wwCZ4krZG5vuCmXK3+OYvfSBtMIBZLiFgVQ7cv8tlFcsU0UoM
+ ikl9P7D5ZjGOHy1Hm0hheXLM/1sVWIPyYtKiEJRJcMEZ8VNVu6+vklBziXpHXXJtfe83
+ +Gsv64if2jV4kqStSUVGbh5lgFa4gQ2geTD5UR/3/vIJHi6XOhMt840LwNQZ+vXclRMd
+ ybBRuj9qacW0vI0sSLbTHfzJ5a+AWZi13goN+Z8rY3usRCrUVAlZYqELnoW4HnVGYgF1
+ zwiw==
+X-Gm-Message-State: AOJu0YxuNq652UGbw7Q6NtYgNnTTZ9sYNWxqDOGhxIwLIHxPGUwG7Dbe
+ XfWhvHEl3UiCGNlUBQXY9etn8uz88GWxqNdzT6k=
+X-Google-Smtp-Source: AGHT+IHphwB6RAABKdUDTErh2wTsFwM0TOpfhf+TIXmIiLpD7tJYkvCvC0jdeL+np2oUd0diQ5tU1n8nfNNhf2em46Q=
+X-Received: by 2002:a05:6808:4488:b0:3ba:d14:b846 with SMTP id
+ eq8-20020a056808448800b003ba0d14b846mr1746907oib.82.1704425165459; Thu, 04
+ Jan 2024 19:26:05 -0800 (PST)
 MIME-Version: 1.0
 References: <20231226040500.82813-1-luxu.kernel@bytedance.com>
 In-Reply-To: <20231226040500.82813-1-luxu.kernel@bytedance.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 5 Jan 2024 12:52:34 +1000
-Message-ID: <CAKmqyKM1wmimumA84rf_a_0owD6syJorcaXW=nSJLnEXW3pFPQ@mail.gmail.com>
+Date: Fri, 5 Jan 2024 13:25:39 +1000
+Message-ID: <CAKmqyKOEy0=ADKvmN9m60bzL=VYBm8tU6sHZ8JU0RHhQ+ni_5A@mail.gmail.com>
 Subject: Re: [PATCH] target/riscv: Fix mcycle/minstret increment behavior
 To: Xu Lu <luxu.kernel@bytedance.com>
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
@@ -65,8 +65,8 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  xieyongji@bytedance.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2d;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::231;
+ envelope-from=alistair23@gmail.com; helo=mail-oi1-x231.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
