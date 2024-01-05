@@ -4,79 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4028C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 17:05:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16E63C3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 18:07:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rLndG-0007wK-6r; Fri, 05 Jan 2024 12:05:18 -0500
+	id 1rLoba-0001nu-IX; Fri, 05 Jan 2024 13:07:38 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLndE-0007uy-8u
- for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 12:05:16 -0500
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1rLobZ-0001nf-Fl
+ for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 13:07:37 -0500
+Received: from mail-pg1-x52c.google.com ([2607:f8b0:4864:20::52c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLndA-0005QM-9d
- for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 12:05:15 -0500
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-40d858c56cbso20528185e9.2
- for <qemu-riscv@nongnu.org>; Fri, 05 Jan 2024 09:05:11 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1rLobX-0004Rz-JN
+ for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 13:07:37 -0500
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-53fbf2c42bfso1272064a12.3
+ for <qemu-riscv@nongnu.org>; Fri, 05 Jan 2024 10:07:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704474310; x=1705079110; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=aEKJmkt/kEh0jAkLCdfh1+fpI+Ncd11yrNhGOqJTJao=;
- b=MogocZ9bwYR+2NE7ubyx9IQJTk/rqodPdS2872oCx0LPBs+5WvAK/Y4FaAyJEwi8w3
- n9l7Hzpmx6/FLzBHQcWHQGaGZo+FljbNg6Q56SWgH7UDYpiZZmWBPplMfRHTOXyhfeTG
- Ecmq7FGSsIPAkwwhXLijx73OLk3iS6LAlsb/vQbE8DXO2R8MIZW8Ep0hqA8FR6DjBVtG
- DGp+pggwzptanAEsGI9Hh78w60kdGCQF7rO80x6OILypmuLRHt8ZEiLxXoJUUlrchEmG
- 0yX7Mi53Ecf+gGLR17wjol1AbRddSdMvNAbiqwmnXV+pXSXW+4EMMupTUT+32rmqZidc
- +1Hw==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1704478054; x=1705082854;
+ darn=nongnu.org; 
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=bHsHpKSLxo23gNzK+/R47h+VsUNDD5UAjZsR9YYsCiA=;
+ b=BXbLHYVaPjnMIf5nGCNo3l1i/QEDOJZPLdd2bmiP4iYHaC1FzNe0QHz4LgMLjS+PXC
+ KPCQynwdzvku7JcPtKoxf6xwomQlyTJ7XD1LLJQhN3WLebz4Tl0w1VZGQCdf+qa3TI2N
+ VzxNd3Ps8T0zkYs/hKolP8DNZy/XUHlA+RdWYb1TYbs9el9jgmhNqtwhVn1a9iVSsAjZ
+ dPB5umfYqo1traiQzrsYlZx+Kr9qkcQuEiNd6tshdXtSsA2syHlHwrvE0bCfH29GPTDR
+ 7ZaWIHsRCnHBTrxmHIhJSQPwkNLYE0ymPxWXpP3LUfFXZ0wY33E8JWPlgidmQlMA9e/H
+ 812Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704474310; x=1705079110;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1704478054; x=1705082854;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=aEKJmkt/kEh0jAkLCdfh1+fpI+Ncd11yrNhGOqJTJao=;
- b=UrF2DP4/kbo9Qo89NoYFAsY5ElctyFjuA6dM5EWP3PWgns/ut/J1H7gMHp4SUOA6xX
- nOYwFqkO3Yizo+pjeYsXcqb5CojF4RBF21Xjl3pHvLvnkqs8CUAkRtzodU9EpAYnc1Xg
- 7qS9wGEfvhm0DuFPiyKAgQ+Zb74t/2zWaCpZjUZMfUiqnNDrJzS/k6qLpywDX7dVbRKt
- W7ofsSdUYRzAOqeXTcvtkl/wvnWdjW1ITFBYcCDnFbip2GX/uFi23aQNgICfZuGovl/d
- LyWA+Yx1cUXiDcy4TZ/n8oJ+ej+emR1YYB1OZEfvySC92QIFl3DbMk97fhWDsa38vRvp
- 5eZQ==
-X-Gm-Message-State: AOJu0YybwR9wFoHIHm6Qy+kagMGrcvp1ZroCQyL7AGDB84upb54ndX38
- /LyM4DrYQ1h+Ey6R07li2QzHrcK8V39fzQ==
-X-Google-Smtp-Source: AGHT+IEzGMVIaFFpOtQ3MJiOm/QErUDRTnXNULZjgHpiLM7Fqf3LNNQJXBiZ/5uH3kUircJDBwyWCw==
-X-Received: by 2002:a1c:4c18:0:b0:40d:7eb2:bf93 with SMTP id
- z24-20020a1c4c18000000b0040d7eb2bf93mr1384600wmf.46.1704474310418; 
- Fri, 05 Jan 2024 09:05:10 -0800 (PST)
-Received: from [192.168.69.100] (juv34-h02-176-184-26-1.dsl.sta.abo.bbox.fr.
- [176.184.26.1]) by smtp.gmail.com with ESMTPSA id
- fc12-20020a05600c524c00b0040d5a9d6b68sm2143198wmb.6.2024.01.05.09.05.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 05 Jan 2024 09:05:10 -0800 (PST)
-Message-ID: <566d5a05-5cd3-40fe-b40e-8e82524d8ea6@linaro.org>
-Date: Fri, 5 Jan 2024 18:05:08 +0100
+ bh=bHsHpKSLxo23gNzK+/R47h+VsUNDD5UAjZsR9YYsCiA=;
+ b=AAzsHZ1H2tS9jKmVj1GfFNRhzwr1ZX9eqxY4u6Olu2lquOIjz5RldJVE3crn7pDpqW
+ B95BSGiEuh2XpWRaPNloelwFeH1BRHcqYI0WMLqceO6Sd+oMRHx0cdQEACxXsgApkmg1
+ UOzwBolacShuGZxMBDArzqdrojGNeVq2M0+JOI+PFmxRHuZ4Fw6UWla6RA3sk5yhAvLz
+ 98TyWQP1mGgRJ8v7vBia9n/twP6fQxxaIVVsf0wMRR3ZUdbdqrIc24z4727ar37o3DqQ
+ VtdVTxmOjBtHbq16K92kC9/cWhFCqVd6sy7vUJIN3YdZudMgGCmXWaJot8Vl7ujG2ecL
+ B6mw==
+X-Gm-Message-State: AOJu0Yww5F81GXBKAtYcu+oIIWSeK0i2SsnzdYOCIgzhrQZyoxmxlhvd
+ YodBjbpkpOTLQJ4iXKYOnHS+m44i+OIjmw==
+X-Google-Smtp-Source: AGHT+IHB5+gHzlK/cEboxvuzNU4lb6gZ89r1I1YTI4BPHCim+HQdiFgvSLABzWLzcHuADwhUMYME0Q==
+X-Received: by 2002:a17:90a:4f05:b0:28b:ecdf:326f with SMTP id
+ p5-20020a17090a4f0500b0028becdf326fmr2192448pjh.87.1704478053983; 
+ Fri, 05 Jan 2024 10:07:33 -0800 (PST)
+Received: from debug.ba.rivosinc.com ([64.71.180.162])
+ by smtp.gmail.com with ESMTPSA id
+ sb6-20020a17090b50c600b0028d2500e82esm23775pjb.50.2024.01.05.10.07.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 05 Jan 2024 10:07:33 -0800 (PST)
+Date: Fri, 5 Jan 2024 10:07:32 -0800
+From: Deepak Gupta <debug@rivosinc.com>
+To: Alexey Baturo <baturo.alexey@gmail.com>
+Cc: richard.henderson@linaro.org, zhiwei_liu@linux.alibaba.com,
+ palmer@dabbelt.com, Alistair.Francis@wdc.com,
+ sagark@eecs.berkeley.edu, kbastian@mail.uni-paderborn.de,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Subject: Re: [PATCH v3 5/6] target/riscv: Update address modify functions to
+ take into account pointer masking
+Message-ID: <ZZhFZB8kpOd48mba@debug.ba.rivosinc.com>
+References: <20240103185716.1790546-1-me@deliversmonkey.space>
+ <20240103185716.1790546-6-me@deliversmonkey.space>
+ <CAKC1njSMAWV_tPru_E04GfhstfPK3gjeF1PuBtx+VaQqws6uVA@mail.gmail.com>
+ <CAFukJ-B-TorkC4q-a1gVvyJD4w4vUF26Ph+VhPNjQJCDTuOZTw@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PULL 00/71] HW core patches for 2024-01-05
-Content-Language: en-US
-To: qemu-devel@nongnu.org, Peter Maydell <peter.maydell@linaro.org>
-Cc: qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org
-References: <20240105154307.21385-1-philmd@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20240105154307.21385-1-philmd@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+In-Reply-To: <CAFukJ-B-TorkC4q-a1gVvyJD4w4vUF26Ph+VhPNjQJCDTuOZTw@mail.gmail.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52c;
+ envelope-from=debug@rivosinc.com; helo=mail-pg1-x52c.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -93,77 +102,55 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 5/1/24 16:41, Philippe Mathieu-Daudé wrote:
-> The following changes since commit 05470c3979d5485003e129ff4b0c2ef98af91d86:
-> 
->    Merge tag 'for-upstream' of https://gitlab.com/bonzini/qemu into staging (2024-01-04 19:55:20 +0000)
-> 
-> are available in the Git repository at:
-> 
->    https://github.com/philmd/qemu.git tags/hw-cpus-20240105
-> 
-> for you to fetch changes up to a318da6b3f6a88e6cfd6953c519def9457e8962f:
-> 
->    target/sparc: Simplify qemu_irq_ack (2024-01-05 16:20:15 +0100)
-> 
-> ----------------------------------------------------------------
-> HW core patch queue
-> 
-> - Unify CPU QOM type checks (Gavin)
-> - Simplify uses of some CPU related property (Philippe)
->    (start-powered-off, ARM reset-cbar and mp-affinity)
-> - Header and documentation cleanups (Zhao, Philippe)
-> - Have Memory API return boolean indicating possible error
-> - Fix frame filter mask in CAN sja1000 model (Pavel)
-> - QOM embed MCF5206 timer into SoC (Thomas)
-> - Simplify LEON3 qemu_irq_ack handler (Clément)
-> 
-> ----------------------------------------------------------------
+On Fri, Jan 05, 2024 at 10:29:35AM +0300, Alexey Baturo wrote:
+>> +    addr = addr << pmlen;
+>> +    if (signext) {
+>> +        addr = (target_long)addr >> pmlen;
+>> +    } else {
+>> +        addr = addr >> pmlen;
+>Could you please elaborate a bit more on your concern here?
+>I believe this code works as intended: https://godbolt.org/z/b9c7na13a
+Nevermind I missed this above in code.
+addr = addr << pmlen;
 
-
-> Philippe Mathieu-Daudé (37):
-
->    backends: Simplify host_memory_backend_memory_complete()
-
-I neglected to run checkpatch.pl on this patch, so it lacks:
-
--- >8 --
-diff --git a/backends/hostmem.c b/backends/hostmem.c
-index 30f69b2cb5..987f6f591e 100644
---- a/backends/hostmem.c
-+++ b/backends/hostmem.c
-@@ -346,5 +346,7 @@ host_memory_backend_memory_complete(UserCreatable 
-*uc, Error **errp)
-      unsigned long maxnode = (lastbit + 1) % (MAX_NODES + 1);
--    /* ensure policy won't be ignored in case memory is preallocated
-+    /*
-+     * Ensure policy won't be ignored in case memory is preallocated
-       * before mbind(). note: MPOL_MF_STRICT is ignored on hugepages so
--     * this doesn't catch hugepage case. */
-+     * this doesn't catch hugepage case.
-+     */
-      unsigned flags = MPOL_MF_STRICT | MPOL_MF_MOVE;
-@@ -365,3 +367,4 @@ host_memory_backend_memory_complete(UserCreatable 
-*uc, Error **errp)
-
--    /* We can have up to MAX_NODES nodes, but we need to pass maxnode+1
-+    /*
-+     * We can have up to MAX_NODES nodes, but we need to pass maxnode+1
-       * as argument to mbind() due to an old Linux bug (feature?) which
-@@ -393,3 +396,4 @@ host_memory_backend_memory_complete(UserCreatable 
-*uc, Error **errp)
-  #endif
--    /* Preallocate memory after the NUMA policy has been instantiated.
-+    /*
-+     * Preallocate memory after the NUMA policy has been instantiated.
-       * This is necessary to guarantee memory is allocated with
----
-
-Since the PR is already in the testing pipeline:
-- if it get merged, I'll send a cleanup patch
-- otherwise if it fails I'll fix it.
-
-Sorry for missing that.
-
-Phil.
+You're good. Sorry about that.
+>
+>Thanks
+>
+>пт, 5 янв. 2024 г. в 04:02, Deepak Gupta <debug@rivosinc.com>:
+>
+>> > --- a/target/riscv/vector_helper.c
+>> > +++ b/target/riscv/vector_helper.c
+>> > @@ -94,6 +94,18 @@ static inline uint32_t vext_max_elems(uint32_t desc,
+>> uint32_t log2_esz)
+>> >
+>> >  static inline target_ulong adjust_addr(CPURISCVState *env, target_ulong
+>> addr)
+>> >  {
+>> > +    RISCVPmPmm pmm = riscv_pm_get_pmm(env);
+>> > +    if (pmm == PMM_FIELD_DISABLED)
+>> > +        return addr;
+>> > +    int pmlen = riscv_pm_get_pmlen(pmm);
+>> > +    bool signext = !riscv_cpu_bare_mode(env);
+>> > +    addr = addr << pmlen;
+>> > +    /* sign/zero extend masked address by N-1 bit */
+>> > +    if (signext) {
+>> > +        addr = (target_long)addr >> pmlen;
+>>
+>> These look like right shift operations and not sign extensions of N-1 bit
+>>
+>> > +    } else {
+>> > +        addr = addr >> pmlen;
+>>
+>> Same here.
+>>
+>> > +    }
+>> >      return addr;
+>> >  }
+>> >
+>> > --
+>> > 2.34.1
+>> >
+>> >
+>>
 
