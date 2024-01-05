@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62FB9C4707B
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 15:52:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0428CC47079
+	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 15:52:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rLmSU-0000AH-Kq; Fri, 05 Jan 2024 10:50:06 -0500
+	id 1rLmRU-0005kl-ME; Fri, 05 Jan 2024 10:49:04 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmRn-0007TP-GB
- for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:49:27 -0500
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmRF-0003wu-NS
+ for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:48:49 -0500
+Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmRl-00088b-I9
- for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:49:23 -0500
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-336990fb8fbso1225268f8f.1
- for <qemu-riscv@nongnu.org>; Fri, 05 Jan 2024 07:49:19 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmRD-0006cG-Pn
+ for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:48:49 -0500
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-337520892f7so392642f8f.0
+ for <qemu-riscv@nongnu.org>; Fri, 05 Jan 2024 07:48:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704469759; x=1705074559; darn=nongnu.org;
+ d=linaro.org; s=google; t=1704469726; x=1705074526; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3HnuyTIxGYsWykQsG+bF/A0ZdepEt+u1/qeWfQkxoXY=;
- b=W5IRGN+q6DxEAK7IZ142Yb6IQ7SyaNnnL42Zi3OjH8BHb3APSAzo3/QcBLKwzXUKdk
- e6Mkz9HGBxDx8rVeGuNK2jOtNrjL0jAVeMGBY7b2XLo4Tayr6136TGASp/O5c0jggpU4
- gZaycS75NjgbR9dsRwT2ir3octbXCuBd6/nG9ecY2wsaqg7GDDwoLKApGOfJpkBNCV6x
- A5cGl5zFNSDisVBRiwrszNVn2k9W4dhBq4kh1W+odEl5du13AmPIQ/NQPdH31CABblza
- SeIxHR2/ZEjEu18tLg62ds9RFn9qD3EXRiZvHn6uNqoXJJiYpqdBUWfmT7aBx2ZiZKg2
- EBUQ==
+ bh=KS/EWIqcckkOMDkJJEhaku50ApzyYMzhGT/LMkqQfVg=;
+ b=TQKmNGjJDide/9Oo07D/i+Oegvwn/RSRSI59Ceub2ho3TaO4cn2Trm+/h85KIULEd1
+ uDo5PXFPKWCOEzscu1P9ttuVXBZbwVNDAyjazNoxIz6bs9uh5n6L9Wdbk53e0vIKic2f
+ 56NfS7iUqm11yTHxUGYKJUF8SckZo04uXXfIZ4tmhaZw9du/4fhE+RzBZbQHatM/GT/q
+ 1l3E2+VlQ5P/PZBdTbGquBCt56l9XE/7Ec3IarLInKDq7MNcp1TPMIcC/6LOgfgrNhCm
+ inJoRD0PGS3Nbrybxa58hlv+Y5GU2V3V5+8gambOdZszPyG7T+QBcOgIzR1cpMbP2v5K
+ O2kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704469759; x=1705074559;
+ d=1e100.net; s=20230601; t=1704469726; x=1705074526;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3HnuyTIxGYsWykQsG+bF/A0ZdepEt+u1/qeWfQkxoXY=;
- b=RbLnBG2oKYvd7Ry2wluMYysbP0BStQneUPL557DMqx0y9tTJrSdvt3AFjO3N5ai/d0
- 61zxkB8BSoo46DUFLBZqNDmUoPuy3zyVdEK/J/Hn+pOOOqwnbX57nFG/m5Z3XUMSPnGz
- Rze9YfiAP1OKGtBiDaTddMjjdqwkH7YLIG3q3bWUMeN6qGY4/Itl84AzBaEHXaDJryry
- f02vsHrk3/U2up34SQRPR8D664ODiu9MJXaQ8M6vTWvYbZ98kTS+kozkZSJxeD3858dD
- FRU0pXBzF54ZRb5iYb3byaSSyrMqf3lFsQlrabNCv/lXSJu5hX5mArxBEEeX2YRwpf5r
- o2nw==
-X-Gm-Message-State: AOJu0YzJsMOARP5OmQa3JIjyjMri9LipuZuiz6nWjZ1Nvv/Rojh7n1uW
- GGYvVWwpK00qd/ubzgP3GV5rwXkRTFbaYzfK9/YsTf5Mm2s=
-X-Google-Smtp-Source: AGHT+IF0Pyylu6bX+CfbQ1+REdITz6wqERsRZV89jAdI+Yqci0wvAbIS9//YMrS8A8aLBTnEpv3jBA==
-X-Received: by 2002:a5d:5cc3:0:b0:336:e399:6fc7 with SMTP id
- cg3-20020a5d5cc3000000b00336e3996fc7mr1040828wrb.59.1704469758884; 
- Fri, 05 Jan 2024 07:49:18 -0800 (PST)
+ bh=KS/EWIqcckkOMDkJJEhaku50ApzyYMzhGT/LMkqQfVg=;
+ b=MZ1sR8WRNBzO9UoMwtZ5JsEieKYFu9MY0yePOrvJ1fOsTzqKSlWqIkQ7am9OYgg7oQ
+ h0oIFa+LT7WBnnpqYn4eoxVG2DJx1QRdbgOxkax9181NCg5kWCEe8gP1B2kvT+fNyjQh
+ yQ3wIBPzjQxe/cN5iOvSB26bP5iK5iWclbeCCc6nGgpvYkZarcbTcqqfh7whoWE7dK1R
+ 9vuOl8+hg3kH/rhV6gRXEz2/Xv3BaFpDTNHFn58P0tEBxTbXR8x2JVCJVtJEBKBOlGOe
+ 1WAtoJsXYf5kleefaWQcWnCrZpx8byFyq1T3UMePDtPIm5zJGVwpEQXEgxHn4eoxc1Io
+ moLQ==
+X-Gm-Message-State: AOJu0YyNf2JW0lDsmLSRHmWnh1fDSQBGX649E2WttPYphl0DfeIJBfxD
+ PIN5Fy2d+YaZQVjIjygfVOPC9NS7BwxoXQ==
+X-Google-Smtp-Source: AGHT+IHCMZopN7QkaYjwbRy6R//U2x8WCEhaSSdxcgt4jsVJjXGRov5SRbnQWWKvsRXafcE/p4r2fw==
+X-Received: by 2002:a05:600c:1ca4:b0:40d:8bc8:3566 with SMTP id
+ k36-20020a05600c1ca400b0040d8bc83566mr1247666wms.145.1704469726365; 
+ Fri, 05 Jan 2024 07:48:46 -0800 (PST)
 Received: from m1x-phil.lan (juv34-h02-176-184-26-1.dsl.sta.abo.bbox.fr.
  [176.184.26.1]) by smtp.gmail.com with ESMTPSA id
- k4-20020a5d6284000000b00336c43b366fsm1618203wru.12.2024.01.05.07.49.17
+ jb13-20020a05600c54ed00b0040d86e89abfsm1891493wmb.43.2024.01.05.07.48.45
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 05 Jan 2024 07:49:18 -0800 (PST)
+ Fri, 05 Jan 2024 07:48:46 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
- Gavin Shan <gshan@redhat.com>, David Hildenbrand <david@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>
-Subject: [PULL 60/71] backends: Reduce variable scope in
- host_memory_backend_memory_complete
-Date: Fri,  5 Jan 2024 16:42:53 +0100
-Message-ID: <20240105154307.21385-61-philmd@linaro.org>
+ Peter Xu <peterx@redhat.com>, Gavin Shan <gshan@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, David Hildenbrand <david@redhat.com>
+Subject: [PULL 54/71] memory: Have memory_region_init_resizeable_ram() return
+ a boolean
+Date: Fri,  5 Jan 2024 16:42:47 +0100
+Message-ID: <20240105154307.21385-55-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240105154307.21385-1-philmd@linaro.org>
 References: <20240105154307.21385-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::432;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x432.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::431;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x431.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,48 +96,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Reduce the &local_err variable use and remove the 'out:' label.
+Following the example documented since commit e3fe3988d7 ("error:
+Document Error API usage rules"), have memory_region_init_resizeable_ram
+return a boolean indicating whether an error is set or not.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
+Reviewed-by: Peter Xu <peterx@redhat.com>
 Reviewed-by: Gavin Shan <gshan@redhat.com>
-Message-Id: <20231120213301.24349-18-philmd@linaro.org>
+Message-Id: <20231120213301.24349-12-philmd@linaro.org>
 ---
- backends/hostmem.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ include/exec/memory.h | 4 +++-
+ system/memory.c       | 4 +++-
+ 2 files changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/backends/hostmem.c b/backends/hostmem.c
-index 3f8eb936d7..1b0043a0d9 100644
---- a/backends/hostmem.c
-+++ b/backends/hostmem.c
-@@ -324,7 +324,6 @@ host_memory_backend_memory_complete(UserCreatable *uc, Error **errp)
- {
-     HostMemoryBackend *backend = MEMORY_BACKEND(uc);
-     HostMemoryBackendClass *bc = MEMORY_BACKEND_GET_CLASS(uc);
--    Error *local_err = NULL;
-     void *ptr;
-     uint64_t sz;
- 
-@@ -400,15 +399,16 @@ host_memory_backend_memory_complete(UserCreatable *uc, Error **errp)
-      * specified NUMA policy in place.
-      */
-     if (backend->prealloc) {
-+        Error *local_err = NULL;
-+
-         qemu_prealloc_mem(memory_region_get_fd(&backend->mr), ptr, sz,
-                           backend->prealloc_threads,
-                           backend->prealloc_context, &local_err);
-         if (local_err) {
--            goto out;
-+            error_propagate(errp, local_err);
-+            return;
-         }
-     }
--out:
--    error_propagate(errp, local_err);
+diff --git a/include/exec/memory.h b/include/exec/memory.h
+index 6209458f56..faddf8f073 100644
+--- a/include/exec/memory.h
++++ b/include/exec/memory.h
+@@ -1342,8 +1342,10 @@ bool memory_region_init_ram_flags_nomigrate(MemoryRegion *mr,
+  *
+  * Note that this function does not do anything to cause the data in the
+  * RAM memory region to be migrated; that is the responsibility of the caller.
++ *
++ * Return: true on success, else false setting @errp with error.
+  */
+-void memory_region_init_resizeable_ram(MemoryRegion *mr,
++bool memory_region_init_resizeable_ram(MemoryRegion *mr,
+                                        Object *owner,
+                                        const char *name,
+                                        uint64_t size,
+diff --git a/system/memory.c b/system/memory.c
+index e5193d4623..75303484e1 100644
+--- a/system/memory.c
++++ b/system/memory.c
+@@ -1578,7 +1578,7 @@ bool memory_region_init_ram_flags_nomigrate(MemoryRegion *mr,
+     return true;
  }
  
- static bool
+-void memory_region_init_resizeable_ram(MemoryRegion *mr,
++bool memory_region_init_resizeable_ram(MemoryRegion *mr,
+                                        Object *owner,
+                                        const char *name,
+                                        uint64_t size,
+@@ -1599,7 +1599,9 @@ void memory_region_init_resizeable_ram(MemoryRegion *mr,
+         mr->size = int128_zero();
+         object_unparent(OBJECT(mr));
+         error_propagate(errp, err);
++        return false;
+     }
++    return true;
+ }
+ 
+ #ifdef CONFIG_POSIX
 -- 
 2.41.0
 
