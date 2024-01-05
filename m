@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAEB5C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 05:02:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0CCCC3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 05:04:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rLcL8-0004Vx-MB; Fri, 05 Jan 2024 00:01:50 -0500
+	id 1rLcNZ-00066H-TQ; Fri, 05 Jan 2024 00:04:22 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rLcL6-0004VN-Ce; Fri, 05 Jan 2024 00:01:48 -0500
-Received: from mail-ua1-x931.google.com ([2607:f8b0:4864:20::931])
+ id 1rLcNV-00061x-0M; Fri, 05 Jan 2024 00:04:17 -0500
+Received: from mail-vs1-xe30.google.com ([2607:f8b0:4864:20::e30])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rLcL4-0004wv-O7; Fri, 05 Jan 2024 00:01:48 -0500
-Received: by mail-ua1-x931.google.com with SMTP id
- a1e0cc1a2514c-7cd42bc0f1dso375095241.1; 
- Thu, 04 Jan 2024 21:01:46 -0800 (PST)
+ id 1rLcNT-0007JF-63; Fri, 05 Jan 2024 00:04:16 -0500
+Received: by mail-vs1-xe30.google.com with SMTP id
+ ada2fe7eead31-467a18fc0fcso357236137.3; 
+ Thu, 04 Jan 2024 21:04:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704430905; x=1705035705; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1704431053; x=1705035853; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ktf3SHSlzcwR9Tpu7F7DJwNP9RlrcT5Haiz4Zl8Y3Xw=;
- b=C43v3qg8kb9EY1I51Oh3nXmeJ9r4BF3H4f9sVGW9L1eS1PVMDQdq+fhTjn3uLIIACE
- jnAZqIropDXT4G2/AOQDxIfwytPqyo61wZVXlGCEXHjic1f6fEvOgkU/8csb1Z189GWP
- Yn0j1Ua1QEf+tJioGSHEKWv/rlTevV1zt2ZBUoCbyy04PqvcV7cHeCfx3OFlwtYECr9n
- m4wMUL+zA/fgNMxAV5hLMpbOCMIuZB4uUlHQO7ZqWGeE6+JV6Grlt5CKGEKmEHjviF5T
- WywiAaH4REPAwYS08AwFR7C4I3DViYoJe3R21l/YcfbNu4prQDSslSEf8Ln18KnTuawi
- NoYA==
+ bh=j8lCbyF/aXWjkDQX2/9FoTk2GzHD/9Z+J+TVAk7hl8g=;
+ b=DtHM5bSntqIg5Z/7b62Gjz/GMmGRNqI3c5cGaV+wDn7Uaci8vhsyg6pMEMOxy0y4dj
+ T9E0ILtOfiPsujQQ4XMMZCrF0uEk19MeY/HdzfUojqLsyDqwh3u2nAPtBXlBMZlpYxz5
+ GpxQ7AkMYFx1pY6GYeJWCsskd3tKaWBve3sBd4sgGNNpfP9itgOadOh2oYzlV0cyF+LZ
+ 7mR0wTo+mAo7sbIBCPr7NWtiL532D5Q3IHQs6iI+tLoWq74butzK03/hc2zHWQeSViHT
+ AWMTI2r87x8OnpETmLwudOzKUyl3hxpwaRhwQbS74YUjmSYrsBnrlso5iTcHyOFiazaR
+ I8Hw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704430905; x=1705035705;
+ d=1e100.net; s=20230601; t=1704431053; x=1705035853;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Ktf3SHSlzcwR9Tpu7F7DJwNP9RlrcT5Haiz4Zl8Y3Xw=;
- b=Vi6mwKc4ug+dClyN0ZfIiw8T37A1hC+Wo71kbnKk0oizAMPnDoi9vrd34dotvsv0+a
- 86J6bbfan0WdSpux7pycuHyT6tliPuZ48Ai0KD3yVIr5pwJzsrx/qCKHQB9AzJ9aRx2s
- TLIlF9qxWZ/VB6BNP+MJRBabTUy9Gs0iZzJNC1gMNsKXio4oamDJlR2s+Z46otrh2FDT
- rb3urR0TlH4hbtgRBvhlPT0nrMd7j6FnUkwpb+I2dUcHi9iVzKNkzwjnFbKA7vNyTPDT
- giz7X1c9J6XjhfBt16+1ii0RlhppI+iqZ0/Gm6IlKdjHWIY1GWTpFv8s176ZBC5Xhnyn
- hybg==
-X-Gm-Message-State: AOJu0YyKj4jGKnGGYfFg7A678ZuyanS6wYVZ2h5ysb8ckEl6mMRj3Kjk
- dmjqoJ44g4k3S3MYUOAr2OuHs7nQiXCbUihXRtk=
-X-Google-Smtp-Source: AGHT+IGhJh1q7Ey4dMGozqqXs9Ri6V+bcQnRbNF8JxSBr3u9W6l1VCn3PRtn81FheD6EyczovF8gCOZ54RDeeIXb4/A=
-X-Received: by 2002:a05:6102:559c:b0:467:4b38:42ff with SMTP id
- dc28-20020a056102559c00b004674b3842ffmr1569120vsb.33.1704430905378; Thu, 04
- Jan 2024 21:01:45 -0800 (PST)
+ bh=j8lCbyF/aXWjkDQX2/9FoTk2GzHD/9Z+J+TVAk7hl8g=;
+ b=N73MWxvj3TCL5Z/N06pF5BPszM2R3/3QrEhMhtTKnKKdkYDNCtgz3AE7uu+SyE2eUj
+ nYg8JsHxeGMiKFOTXx1HhWa5lxYT+SfoO0YBtcMXMbDUtjeMr/ljJ0cD8JUZCAma1zcC
+ S9xCUGrwZxUFbayTubzQvS2+H4pxi6qns0TY8EIPx9bicCf80ELGAifDpc0J9faTuNH2
+ fhEIZ679ZB9iUNdH6tYWIFt3LDV1klntJOjyk/zpzM3cJmEhOlsCrbHAuYFCnrjYv6DG
+ WVcobEat5awCSMrcxTKH4kkjKhkUm6ecGHwwYNAO+WX1AjY1j1TGogPilcnRaIDTFdOP
+ Daew==
+X-Gm-Message-State: AOJu0YzdYkNLNr7BDKUln5GesQIA22zJzrUOekgMyegwGjq0R1GgAFCc
+ FYA2VpuHhBP/j41OlOGreBLt791ViAG0YpEz04U=
+X-Google-Smtp-Source: AGHT+IHzNCuT3LYDSYzwl8GuyoOfIO4LKO2kuvptT9gz2ogvOgtDflZhlwCIdrCOtxeqjIUHoJp9Us2e/18RYeCbFFE=
+X-Received: by 2002:a67:c194:0:b0:467:5c2:7935 with SMTP id
+ h20-20020a67c194000000b0046705c27935mr1290729vsj.64.1704431052681; Thu, 04
+ Jan 2024 21:04:12 -0800 (PST)
 MIME-Version: 1.0
 References: <20240103174013.147279-1-dbarboza@ventanamicro.com>
- <20240103174013.147279-14-dbarboza@ventanamicro.com>
-In-Reply-To: <20240103174013.147279-14-dbarboza@ventanamicro.com>
+ <20240103174013.147279-6-dbarboza@ventanamicro.com>
+In-Reply-To: <20240103174013.147279-6-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 5 Jan 2024 15:01:00 +1000
-Message-ID: <CAKmqyKNL_MoKXY_y44a=RiNTo05BuPqit1Nvz=gD157R+xb6=A@mail.gmail.com>
-Subject: Re: [PATCH v3 13/16] target/riscv: remove riscv_cpu_options[]
+Date: Fri, 5 Jan 2024 15:03:00 +1000
+Message-ID: <CAKmqyKNXX9a3M4f=+mCoq_i_-rLi-pAB_uj0FNC3XL-xwe3jXg@mail.gmail.com>
+Subject: Re: [PATCH v3 05/16] target/riscv: move 'pmp' to
+ riscv_cpu_properties[]
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
  palmer@rivosinc.com, ajones@ventanamicro.com, vladimir.isaev@syntacore.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::931;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x931.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e30;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe30.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -90,10 +91,15 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jan 4, 2024 at 3:45=E2=80=AFAM Daniel Henrique Barboza
+On Thu, Jan 4, 2024 at 4:53=E2=80=AFAM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> The array is empty and can be removed.
+> Move 'pmp' to riscv_cpu_properties[], creating a new setter() for it
+> that forbids 'pmp' to be changed in vendor CPUs, like we did with the
+> 'mmu' option.
+>
+> We'll also have to manually set 'pmp =3D true' to generic CPUs that were
+> still relying on the previous default to set it.
 >
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
@@ -102,84 +108,95 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/cpu.c         | 5 -----
->  target/riscv/cpu.h         | 1 -
->  target/riscv/kvm/kvm-cpu.c | 9 ---------
->  target/riscv/tcg/tcg-cpu.c | 4 ----
->  4 files changed, 19 deletions(-)
+>  target/riscv/cpu.c | 38 ++++++++++++++++++++++++++++++++++++--
+>  1 file changed, 36 insertions(+), 2 deletions(-)
 >
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 1e35b73e40..0d0197a8ef 100644
+> index 9f1407b73f..01b3b57cee 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -1894,11 +1894,6 @@ static const PropertyInfo prop_cboz_blksize =3D {
->      .set =3D prop_cboz_blksize_set,
+> @@ -420,6 +420,7 @@ static void riscv_max_cpu_init(Object *obj)
+>      RISCVMXL mlx =3D MXL_RV64;
+>
+>      cpu->cfg.mmu =3D true;
+> +    cpu->cfg.pmp =3D true;
+>
+>  #ifdef TARGET_RISCV32
+>      mlx =3D MXL_RV32;
+> @@ -439,6 +440,7 @@ static void rv64_base_cpu_init(Object *obj)
+>      CPURISCVState *env =3D &cpu->env;
+>
+>      cpu->cfg.mmu =3D true;
+> +    cpu->cfg.pmp =3D true;
+>
+>      /* We set this in the realise function */
+>      riscv_cpu_set_misa(env, MXL_RV64, 0);
+> @@ -568,6 +570,7 @@ static void rv128_base_cpu_init(Object *obj)
+>      }
+>
+>      cpu->cfg.mmu =3D true;
+> +    cpu->cfg.pmp =3D true;
+>
+>      /* We set this in the realise function */
+>      riscv_cpu_set_misa(env, MXL_RV128, 0);
+> @@ -584,6 +587,7 @@ static void rv32_base_cpu_init(Object *obj)
+>      CPURISCVState *env =3D &cpu->env;
+>
+>      cpu->cfg.mmu =3D true;
+> +    cpu->cfg.pmp =3D true;
+>
+>      /* We set this in the realise function */
+>      riscv_cpu_set_misa(env, MXL_RV32, 0);
+> @@ -1596,9 +1600,38 @@ static const PropertyInfo prop_mmu =3D {
+>      .set =3D prop_mmu_set,
 >  };
 >
 > -Property riscv_cpu_options[] =3D {
-> -
-> -    DEFINE_PROP_END_OF_LIST(),
-> -};
-> -
->  static Property riscv_cpu_properties[] =3D {
->      DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
+> -    DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
+> +static void prop_pmp_set(Object *obj, Visitor *v, const char *name,
+> +                         void *opaque, Error **errp)
+> +{
+> +    RISCVCPU *cpu =3D RISCV_CPU(obj);
+> +    bool value;
+> +
+> +    visit_type_bool(v, name, &value, errp);
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 484c32e607..59e23708d1 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -773,7 +773,6 @@ extern const RISCVCPUMultiExtConfig riscv_cpu_extensi=
-ons[];
->  extern const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[];
->  extern const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[];
->  extern const RISCVCPUMultiExtConfig riscv_cpu_deprecated_exts[];
-> -extern Property riscv_cpu_options[];
+> +    if (cpu->cfg.pmp !=3D value && riscv_cpu_is_vendor(obj)) {
+> +        cpu_set_prop_err(cpu, name, errp);
+> +        return;
+> +    }
+> +
+> +    cpu_option_add_user_setting(name, value);
+> +    cpu->cfg.pmp =3D value;
+> +}
+> +
+> +static void prop_pmp_get(Object *obj, Visitor *v, const char *name,
+> +                         void *opaque, Error **errp)
+> +{
+> +    bool value =3D RISCV_CPU(obj)->cfg.pmp;
+> +
+> +    visit_type_bool(v, name, &value, errp);
+> +}
+> +
+> +static const PropertyInfo prop_pmp =3D {
+> +    .name =3D "pmp",
+> +    .get =3D prop_pmp_get,
+> +    .set =3D prop_pmp_set,
+> +};
+> +
+> +Property riscv_cpu_options[] =3D {
+>      DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
+>      DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
 >
->  typedef struct isa_ext_data {
->      const char *name;
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index 137a8ab2bb..5800abc9c6 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -1443,19 +1443,10 @@ void kvm_riscv_aia_create(MachineState *machine, =
-uint64_t group_shift,
->  static void kvm_cpu_instance_init(CPUState *cs)
->  {
->      Object *obj =3D OBJECT(RISCV_CPU(cs));
-> -    DeviceState *dev =3D DEVICE(obj);
+> @@ -1618,6 +1651,7 @@ static Property riscv_cpu_properties[] =3D {
+>      {.name =3D "pmu-num", .info =3D &prop_pmu_num}, /* Deprecated */
 >
->      riscv_init_kvm_registers(obj);
+>      {.name =3D "mmu", .info =3D &prop_mmu},
+> +    {.name =3D "pmp", .info =3D &prop_pmp},
 >
->      kvm_riscv_add_cpu_user_properties(obj);
-> -
-> -    for (Property *prop =3D riscv_cpu_options; prop && prop->name; prop+=
-+) {
-> -        /* Check if we have a specific KVM handler for the option */
-> -        if (object_property_find(obj, prop->name)) {
-> -            continue;
-> -        }
-> -        qdev_property_add_static(dev, prop);
-> -    }
->  }
->
->  void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
-> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> index 84064ef7e0..d3eeedc758 100644
-> --- a/target/riscv/tcg/tcg-cpu.c
-> +++ b/target/riscv/tcg/tcg-cpu.c
-> @@ -889,10 +889,6 @@ static void riscv_cpu_add_user_properties(Object *ob=
-j)
->      riscv_cpu_add_multiext_prop_array(obj, riscv_cpu_experimental_exts);
->
->      riscv_cpu_add_multiext_prop_array(obj, riscv_cpu_deprecated_exts);
-> -
-> -    for (Property *prop =3D riscv_cpu_options; prop && prop->name; prop+=
-+) {
-> -        qdev_property_add_static(DEVICE(obj), prop);
-> -    }
->  }
->
->  /*
+>  #ifndef CONFIG_USER_ONLY
+>      DEFINE_PROP_UINT64("resetvec", RISCVCPU, env.resetvec, DEFAULT_RSTVE=
+C),
 > --
 > 2.43.0
 >
