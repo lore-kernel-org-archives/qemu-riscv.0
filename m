@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B86DC3DA6E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF6ACC47079
 	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 15:46:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rLmM5-0004MZ-6I; Fri, 05 Jan 2024 10:43:29 -0500
+	id 1rLmMm-00050P-7S; Fri, 05 Jan 2024 10:44:12 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmLv-0004Du-7x
- for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:43:19 -0500
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmMd-0004oI-HX
+ for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:44:04 -0500
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmLt-0002x1-ID
- for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:43:18 -0500
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-40d4a222818so4021815e9.0
- for <qemu-riscv@nongnu.org>; Fri, 05 Jan 2024 07:43:17 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmMa-0003Cj-Ro
+ for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:44:03 -0500
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-40e36e29685so10178045e9.3
+ for <qemu-riscv@nongnu.org>; Fri, 05 Jan 2024 07:44:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704469396; x=1705074196; darn=nongnu.org;
+ d=linaro.org; s=google; t=1704469439; x=1705074239; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dyYYg5j1yzG/KRM3hwRmq5l0B0UfdF1Z3FJP8e3OduU=;
- b=cOTdFLzkEqK4Mqv8v7cggaUEx+hZJ2bidv4Rq5SR6kOu9ghWEGUBjDtQ1pnvK3yCsQ
- amWMvG7ZOSoCs0BD/m2VvYwi4eMHrQcQ6i/VSLuBKwelJH/0SPLN7z2xLpz+mWHmZ/ZQ
- uUdDdMaGHxNW0ZvqOJJb8YObL8l2Kw4PtazcOG5iMDa7onFCagajUqZOt+7g7qJglorN
- kNh/b29oShwcIjjJl+9s2PQsXXN5yDynHC/mZAM7or3QYv+r+x9eWHvQFx4thYwYOBql
- cvv1p1bR6ftkdOiV4qocHo1Pfyd5dU/Odt4RBl5xmuk+XB4YS+BosOj+guX1mUb6XY+4
- iL2Q==
+ bh=wJixAs+R9evY25N/DNdQZkg5UuMmYpP4W3heU6glhRE=;
+ b=dXDd3JGIuaPHal0zUrDxlITmM54qS28iLzvT+rq/Gkdm52HjQzg0GEOVMF9jClL9sV
+ eDFlkkG6cUlEIoojkUW2po6dEB4zi5vkfgdMqE1zNAfZ8IPEGvIr+FqDArz/n7YKTmaT
+ pX9qcPhG/F+DmmejqoCM8uVfAAGJoeFaZfNCR7lXiVE1NZIWSiRAK6YQ6f241GbAtg+Z
+ r8gCue8Kl/YsHkLZ8lnr0UGvzc2xQ8MZqw5qz4LsGD/PCGyATYNCI9yhWThtdEJ5sqfZ
+ NjtHaygNVrWm6Qd3fTZnFUFL6Z5nvT7OGIZtCCOeuRLa8gJQxJj2Q5o1eKNEtf7tV6Ts
+ lgdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704469396; x=1705074196;
+ d=1e100.net; s=20230601; t=1704469439; x=1705074239;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=dyYYg5j1yzG/KRM3hwRmq5l0B0UfdF1Z3FJP8e3OduU=;
- b=Ny9haoUyll9PjZUDU9ias3BbS2Ps68HazZrvjYADT5+N+Fhrv5NSCiUrBHdh56o3M9
- WgyMa0c7jyGDX1Uls7G1jFjl35iiUM6W6aSJhvcXDNeSc85io7gTJmXhIeQ9OaGxfy6r
- KcgBjr4GWIjqs53tovEOjrPLUCAeJkSlH/JTcqFt7B24iL0L2tQoKWktx/M+iGTJdaAH
- osYsoRrE7jUraIwKMT4zLj4EdORhG92hukuPfFIx9CTzUWVkmqXyjysIsyDBhDotC9B1
- O8ewsC10RyFWfAgdV1jo6Yh+dBmCJRx6ZeYgGcPAPxAWptp8ro7p7F6b40ZN0uWEKN4R
- CMog==
-X-Gm-Message-State: AOJu0Yx9yMp6gaoiWzxAsUTVJdS8OcYm+FdCrNCnJ+4PMhAHPGyZ0g2N
- IpGutOR2Vh2t/rvlFIDMo+FxIYjWj2LYcQ4Pf0umDRcjnco=
-X-Google-Smtp-Source: AGHT+IGEXDELUnfWjSH8cEyldisUN18wGhsk2Nh0xeSqB84muNDIOcvJYfd8ElDl5RA5raRsCrlfqw==
-X-Received: by 2002:a05:600c:3846:b0:40e:364d:d526 with SMTP id
- s6-20020a05600c384600b0040e364dd526mr821960wmr.87.1704469395811; 
- Fri, 05 Jan 2024 07:43:15 -0800 (PST)
+ bh=wJixAs+R9evY25N/DNdQZkg5UuMmYpP4W3heU6glhRE=;
+ b=LKEeZ1pRf4yuUKsTnCOY1N+Z58Ne3kLXxWxLYaan+Ckp1aJ+lfhQ9PvabsIokSBWUQ
+ F5DcCC5EGkt7aDvlTtsK+jSFh12m9vZL/SXsQxFx6P9Lp5y7RTGAqzn6bTUaExbkp/O1
+ LXg8zhvCvM/cCpSsmN0HYoary7M3OMum0NCvWBOASRFOVpcBluVqGlG+l0vVVDqYuqIC
+ nb3Y9XImOkgu0Ci0Ozhj0eKqW8wfrTIboORiYNKt/dq9Kdmpo3rcgqZLaeHFPtLjzcv4
+ JXfaI4S9ediv+sXI70Soj6pp1JGatCT7OxNwvfDZlPOll8rmH3uRQCAQWtM1u2FzsiK6
+ DW5g==
+X-Gm-Message-State: AOJu0YxqyDRy12xD30+tU01hKVals38UBWdOQYI32qlt0fyO5ntZi4cM
+ GVgWdk7FeJvZDMIWjAC5uYV0qoOEbuZXrxRmt7IocVm49OE=
+X-Google-Smtp-Source: AGHT+IFoMWPlhBCtOmnYSXXJFu3jd4UtzUg6fxaXJ1pqnm8v3TQFe5yIc0clOVbJSI2P5kt4INIb/g==
+X-Received: by 2002:a05:600c:13d6:b0:40d:9336:2991 with SMTP id
+ e22-20020a05600c13d600b0040d93362991mr1231609wmg.129.1704469439492; 
+ Fri, 05 Jan 2024 07:43:59 -0800 (PST)
 Received: from m1x-phil.lan (juv34-h02-176-184-26-1.dsl.sta.abo.bbox.fr.
  [176.184.26.1]) by smtp.gmail.com with ESMTPSA id
- m3-20020a05600c3b0300b0040d91ab1d54sm1936603wms.6.2024.01.05.07.43.14
+ n12-20020a05600c3b8c00b0040d62f89381sm1929866wms.35.2024.01.05.07.43.58
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 05 Jan 2024 07:43:15 -0800 (PST)
+ Fri, 05 Jan 2024 07:43:59 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
+ Gavin Shan <gshan@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
- Thomas Huth <thuth@redhat.com>
-Subject: [PULL 01/71] meson: Allow building binary with no target-specific
- files in hw/
-Date: Fri,  5 Jan 2024 16:41:54 +0100
-Message-ID: <20240105154307.21385-2-philmd@linaro.org>
+ Richard Henderson <richard.henderson@linaro.org>,
+ Michael Rolnik <mrolnik@gmail.com>
+Subject: [PULL 09/71] target/avr: Use generic cpu_list()
+Date: Fri,  5 Jan 2024 16:42:02 +0100
+Message-ID: <20240105154307.21385-10-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240105154307.21385-1-philmd@linaro.org>
 References: <20240105154307.21385-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x336.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -98,34 +96,79 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Allow  building a qemu-system-foo binary with target-agnostic
-only HW models.
+From: Gavin Shan <gshan@redhat.com>
 
+Before it's applied:
+
+[gshan@gshan q]$ ./build/qemu-system-avr -cpu ?
+avr5-avr-cpu
+avr51-avr-cpu
+avr6-avr-cpu
+
+After it's applied:
+
+[gshan@gshan q]$ ./build/qemu-system-avr -cpu ?
+Available CPUs:
+  avr5
+  avr51
+  avr6
+
+Signed-off-by: Gavin Shan <gshan@redhat.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <20231114235628.534334-10-gshan@redhat.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Message-Id: <20231121203129.67999-1-philmd@linaro.org>
 ---
- meson.build | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ target/avr/cpu.h |  2 --
+ target/avr/cpu.c | 15 ---------------
+ 2 files changed, 17 deletions(-)
 
-diff --git a/meson.build b/meson.build
-index 5a2582776c..371edafae6 100644
---- a/meson.build
-+++ b/meson.build
-@@ -3771,9 +3771,11 @@ foreach target : target_dirs
-     arch_deps += t.dependencies()
+diff --git a/target/avr/cpu.h b/target/avr/cpu.h
+index 7960c5c57a..7d5dd42575 100644
+--- a/target/avr/cpu.h
++++ b/target/avr/cpu.h
+@@ -184,7 +184,6 @@ static inline void set_avr_feature(CPUAVRState *env, int feature)
+     env->features |= (1U << feature);
+ }
  
-     hw_dir = target_name == 'sparc64' ? 'sparc64' : target_base_arch
--    hw = hw_arch[hw_dir].apply(config_target, strict: false)
--    arch_srcs += hw.sources()
--    arch_deps += hw.dependencies()
-+    if hw_arch.has_key(hw_dir)
-+      hw = hw_arch[hw_dir].apply(config_target, strict: false)
-+      arch_srcs += hw.sources()
-+      arch_deps += hw.dependencies()
-+    endif
+-#define cpu_list avr_cpu_list
+ #define cpu_mmu_index avr_cpu_mmu_index
  
-     arch_srcs += config_devices_h[target]
-     link_args += ['@block.syms', '@qemu.syms']
+ static inline int avr_cpu_mmu_index(CPUAVRState *env, bool ifetch)
+@@ -194,7 +193,6 @@ static inline int avr_cpu_mmu_index(CPUAVRState *env, bool ifetch)
+ 
+ void avr_cpu_tcg_init(void);
+ 
+-void avr_cpu_list(void);
+ int cpu_avr_exec(CPUState *cpu);
+ 
+ enum {
+diff --git a/target/avr/cpu.c b/target/avr/cpu.c
+index 3e478294a6..f5cbdc4a8c 100644
+--- a/target/avr/cpu.c
++++ b/target/avr/cpu.c
+@@ -362,21 +362,6 @@ typedef struct AVRCPUInfo {
+ } AVRCPUInfo;
+ 
+ 
+-static void avr_cpu_list_entry(gpointer data, gpointer user_data)
+-{
+-    const char *typename = object_class_get_name(OBJECT_CLASS(data));
+-
+-    qemu_printf("%s\n", typename);
+-}
+-
+-void avr_cpu_list(void)
+-{
+-    GSList *list;
+-    list = object_class_get_list_sorted(TYPE_AVR_CPU, false);
+-    g_slist_foreach(list, avr_cpu_list_entry, NULL);
+-    g_slist_free(list);
+-}
+-
+ #define DEFINE_AVR_CPU_TYPE(model, initfn) \
+     { \
+         .parent = TYPE_AVR_CPU, \
 -- 
 2.41.0
 
