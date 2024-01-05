@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D186C47077
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 15:49:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8EA1C3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 15:49:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rLmRU-0005ni-VM; Fri, 05 Jan 2024 10:49:05 -0500
+	id 1rLmNR-0008KN-Rx; Fri, 05 Jan 2024 10:44:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmQi-0000Zv-Vg
- for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:48:19 -0500
-Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmNQ-000870-L6
+ for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:44:52 -0500
+Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmQh-0005BS-6i
- for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:48:16 -0500
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-40d8902da73so12874105e9.2
- for <qemu-riscv@nongnu.org>; Fri, 05 Jan 2024 07:48:14 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmNN-0003Mr-9e
+ for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:44:51 -0500
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-40d3c4bfe45so14901575e9.1
+ for <qemu-riscv@nongnu.org>; Fri, 05 Jan 2024 07:44:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704469694; x=1705074494; darn=nongnu.org;
+ d=linaro.org; s=google; t=1704469486; x=1705074286; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6o3ekhlfh/+CPANGecFeiASb4d6bBwdSECTd289TNhk=;
- b=DQ2QHVerxwTlhr1DqwDw79ObknnhCQxFTaaeZuBVVYMFATrYKkTM5ov94YvUVSbC+s
- r4OfWgetYJCN0rvRqkwXfpB/GFKjRN2PpVDvO3Jw7lACaRBlcJvahrqNexRnJ4fCcmVy
- hE6I99OAkXqylZ4Wyuma5VSqAD9t/bQOeOv/6vBLFQeNoIiaPXxFMphm6Bg4ZO3MOPy8
- v0gjaVImO96C8xzzUgDHWzZBCZmEdqwgCorsKJ/pDYBQekiuUNtAC2AyqQMS9u84LXtG
- 7iG6x7g5lESq20caGsdyR4vvdThmeVmraLFKbGkImHhVuar87CANvafTDSgegrtmJTHH
- cdjA==
+ bh=yaDY8QYkk1W3Mtkw1yjFTsfcx0RHMGOL7zHOvOfrIZM=;
+ b=e0UxCDTe7uC6Btd804/EDt7+PG+Ds0D00DG/EVBQrzOpEe6+QkvJ0DdQ1yGT0xMxU0
+ 9AtLoRfcZSHlExD4IvNCcjuOIrD/DiOpy0Stbt2tLIaf7aQ4PolGj5kVd0skddfr4qpn
+ TtBXQYvfHcNPNDCVH6RgBaWkhxMwbOdKuym0iN7dE73005aeQgZojXflBXNwmiFUlhg4
+ KFIpm/iRGxopyZN21KKqOyt3rkPiQRfa7NFqw8uOmm6mb2saDC1sKiZQFQI97I+xWZdh
+ Pa3l01zBGOt3podG0IFl4+5ZMxq56KJP+XERACQTScimEqejRxmXqOE7/EbpRCZhEhxk
+ GCuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704469694; x=1705074494;
+ d=1e100.net; s=20230601; t=1704469486; x=1705074286;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6o3ekhlfh/+CPANGecFeiASb4d6bBwdSECTd289TNhk=;
- b=LPkk4TgbvH+8qH+6P3Ym7CL57Bj3w0SYrn7ienwxsrjD2WcTHRGQESvbbmy0lWMYcj
- vCvXuv7HeYGCR5d882SCd53JK7ZEAyF5LOyhkDmJ3jh6Xws/96gcixtmbJBhpat16oD2
- oyGiMPGd8ie0gqd5ma84TpPO2YsqYBY0dttN+XZZrro5uZzx+RERrjm8lcE0kkyHtQcb
- F0yhYInylUwrSv5nO918OHKVuybB+SOF5/7HbRhEZHsdL8ghkJDbvU+R+p7dIRrLBXiw
- v/H/vlxK4z/OfsGLpDiAVTlyRtrlJF+o+dl17JilqymmSPr+v0gD24jTVN4JI+8q4/gk
- jxrw==
-X-Gm-Message-State: AOJu0YyJQTuysD2yFDU0fzbn8J63XSwM9ag4dE7O2J2OwPg3r1L6Y2BS
- XaA5yce9mdIBm26OJIerjUMgICD8lZPhOg==
-X-Google-Smtp-Source: AGHT+IEVGT+tdyoug5yxzjTjKQjcUaDiSAs47WQNs2RTCBbWWg2OgCTyf3aQofocalOeLeGM2MPLjg==
-X-Received: by 2002:a05:600c:4f51:b0:40e:3a6f:9b1e with SMTP id
- m17-20020a05600c4f5100b0040e3a6f9b1emr370957wmq.109.1704469693840; 
- Fri, 05 Jan 2024 07:48:13 -0800 (PST)
+ bh=yaDY8QYkk1W3Mtkw1yjFTsfcx0RHMGOL7zHOvOfrIZM=;
+ b=hATq24O0ZZKQlclD69qUXNcqV6myqsJrc/uw1g7Lr2BAcEDK4uBMfKaXaMCSD5ibfz
+ CuOInZ0kfk94QczfdXbLQKOV6h8IfCA4A3ZiwKoPfE38tQOTTHLc92EmklsjHaNBZ2kt
+ Pw8FXZcrheMDcK+6KO2bkdGVefj4jnbg4dL/mqTsvoluPALZW5ybl5bXzYgDW5Lo5mnE
+ qY5bzVTo5dvsL9CSBOGGTJFcLgSRAh7lrgovidXCVY01d2VSACWuH3DO4BfJGD4687RM
+ LNNf0sXLjZBCfesAY2+rNhjJOPhEmcP6L0iGY1kn221jSSiSwns7NMkiHkqaupIiJr8a
+ RZfA==
+X-Gm-Message-State: AOJu0YxnWeeEBcnXRLiMdMU7mea4RNJeXOc0PJsOhPt4SFBOKSMtUvFj
+ yeo1EpdMuWk+Bp3wkBY/ZhvMJEX96shSqZIhP+fhfgia1vM=
+X-Google-Smtp-Source: AGHT+IHY0byHYmf47rQ0Ty7m/fu8y+dbBIzHFBSmQY01g5UcWP8GuA3ykeJeMDCIdpydsqIuGbE0Mg==
+X-Received: by 2002:a05:600c:450d:b0:40d:938e:6b49 with SMTP id
+ t13-20020a05600c450d00b0040d938e6b49mr697221wmo.131.1704469486736; 
+ Fri, 05 Jan 2024 07:44:46 -0800 (PST)
 Received: from m1x-phil.lan (juv34-h02-176-184-26-1.dsl.sta.abo.bbox.fr.
  [176.184.26.1]) by smtp.gmail.com with ESMTPSA id
- fc12-20020a05600c524c00b0040d5a9d6b68sm1952853wmb.6.2024.01.05.07.48.12
+ q17-20020a05600c46d100b0040e375604ecsm1940574wmo.31.2024.01.05.07.44.45
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 05 Jan 2024 07:48:13 -0800 (PST)
+ Fri, 05 Jan 2024 07:44:46 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
+ Gavin Shan <gshan@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
- Gavin Shan <gshan@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Peter Xu <peterx@redhat.com>, David Hildenbrand <david@redhat.com>
-Subject: [PULL 48/71] memory: Simplify memory_region_init_ram_from_fd() calls
-Date: Fri,  5 Jan 2024 16:42:41 +0100
-Message-ID: <20240105154307.21385-49-philmd@linaro.org>
+ Richard Henderson <richard.henderson@linaro.org>,
+ Stafford Horne <shorne@gmail.com>
+Subject: [PULL 16/71] target/openrisc: Use generic cpu_list()
+Date: Fri,  5 Jan 2024 16:42:09 +0100
+Message-ID: <20240105154307.21385-17-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240105154307.21385-1-philmd@linaro.org>
 References: <20240105154307.21385-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::335;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x335.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,47 +96,105 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Mechanical change using the following coccinelle script:
+From: Gavin Shan <gshan@redhat.com>
 
-@@
-expression mr, owner, arg3, arg4, arg5, arg6, arg7, errp;
-@@
--   memory_region_init_ram_from_fd(mr, owner, arg3, arg4, arg5, arg6, arg7, &errp);
-    if (
--       errp
-+       !memory_region_init_ram_from_fd(mr, owner, arg3, arg4, arg5, arg6, arg7, &errp)
-    ) {
-        ...
-        return;
-    }
+Before it's applied:
 
-and removing the local Error variable.
+[gshan@gshan q]$ ./build/qemu-or1k -cpu ?
+Available CPUs:
+  or1200
+  any
 
+After it's applied:
+
+[gshan@gshan q]$ ./build/qemu-or1k -cpu ?
+Available CPUs:
+  any
+  or1200
+
+Signed-off-by: Gavin Shan <gshan@redhat.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <20231114235628.534334-17-gshan@redhat.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
-Reviewed-by: Gavin Shan <gshan@redhat.com>
-Message-Id: <20231120213301.24349-6-philmd@linaro.org>
 ---
- system/memory.c | 5 +----
- 1 file changed, 1 insertion(+), 4 deletions(-)
+ target/openrisc/cpu.h |  3 ---
+ target/openrisc/cpu.c | 42 ------------------------------------------
+ 2 files changed, 45 deletions(-)
 
-diff --git a/system/memory.c b/system/memory.c
-index 3997ac5928..c1374e9968 100644
---- a/system/memory.c
-+++ b/system/memory.c
-@@ -3577,11 +3577,8 @@ void memory_region_init_ram(MemoryRegion *mr,
-                             Error **errp)
- {
-     DeviceState *owner_dev;
--    Error *err = NULL;
+diff --git a/target/openrisc/cpu.h b/target/openrisc/cpu.h
+index dedeb89f8e..b454014ddd 100644
+--- a/target/openrisc/cpu.h
++++ b/target/openrisc/cpu.h
+@@ -299,15 +299,12 @@ struct ArchCPU {
+     CPUOpenRISCState env;
+ };
  
--    memory_region_init_ram_nomigrate(mr, owner, name, size, &err);
--    if (err) {
--        error_propagate(errp, err);
-+    if (!memory_region_init_ram_nomigrate(mr, owner, name, size, errp)) {
-         return;
-     }
-     /* This will assert if owner is neither NULL nor a DeviceState.
+-void cpu_openrisc_list(void);
+ void openrisc_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
+ int openrisc_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
+ int openrisc_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
+ void openrisc_translate_init(void);
+ int print_insn_or1k(bfd_vma addr, disassemble_info *info);
+ 
+-#define cpu_list cpu_openrisc_list
+-
+ #ifndef CONFIG_USER_ONLY
+ hwaddr openrisc_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+ 
+diff --git a/target/openrisc/cpu.c b/target/openrisc/cpu.c
+index f7d53c592a..381ebe00d3 100644
+--- a/target/openrisc/cpu.c
++++ b/target/openrisc/cpu.c
+@@ -253,48 +253,6 @@ static void openrisc_cpu_class_init(ObjectClass *oc, void *data)
+     cc->tcg_ops = &openrisc_tcg_ops;
+ }
+ 
+-/* Sort alphabetically by type name, except for "any". */
+-static gint openrisc_cpu_list_compare(gconstpointer a, gconstpointer b)
+-{
+-    ObjectClass *class_a = (ObjectClass *)a;
+-    ObjectClass *class_b = (ObjectClass *)b;
+-    const char *name_a, *name_b;
+-
+-    name_a = object_class_get_name(class_a);
+-    name_b = object_class_get_name(class_b);
+-    if (strcmp(name_a, "any-" TYPE_OPENRISC_CPU) == 0) {
+-        return 1;
+-    } else if (strcmp(name_b, "any-" TYPE_OPENRISC_CPU) == 0) {
+-        return -1;
+-    } else {
+-        return strcmp(name_a, name_b);
+-    }
+-}
+-
+-static void openrisc_cpu_list_entry(gpointer data, gpointer user_data)
+-{
+-    ObjectClass *oc = data;
+-    const char *typename;
+-    char *name;
+-
+-    typename = object_class_get_name(oc);
+-    name = g_strndup(typename,
+-                     strlen(typename) - strlen("-" TYPE_OPENRISC_CPU));
+-    qemu_printf("  %s\n", name);
+-    g_free(name);
+-}
+-
+-void cpu_openrisc_list(void)
+-{
+-    GSList *list;
+-
+-    list = object_class_get_list(TYPE_OPENRISC_CPU, false);
+-    list = g_slist_sort(list, openrisc_cpu_list_compare);
+-    qemu_printf("Available CPUs:\n");
+-    g_slist_foreach(list, openrisc_cpu_list_entry, NULL);
+-    g_slist_free(list);
+-}
+-
+ #define DEFINE_OPENRISC_CPU_TYPE(cpu_model, initfn) \
+     {                                               \
+         .parent = TYPE_OPENRISC_CPU,                \
 -- 
 2.41.0
 
