@@ -4,77 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66E02C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 05:30:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36AD4C3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 05:44:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rLclw-0006j3-KJ; Fri, 05 Jan 2024 00:29:32 -0500
+	id 1rLd0I-0000jH-7P; Fri, 05 Jan 2024 00:44:22 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rLclu-0006iM-Qn; Fri, 05 Jan 2024 00:29:30 -0500
-Received: from mail-ua1-x932.google.com ([2607:f8b0:4864:20::932])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rLclt-00084V-7f; Fri, 05 Jan 2024 00:29:30 -0500
-Received: by mail-ua1-x932.google.com with SMTP id
- a1e0cc1a2514c-7cd861086a7so422897241.1; 
- Thu, 04 Jan 2024 21:29:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704432567; x=1705037367; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CGve81iZh7DeumVsNopDUzBrLKhnhLbrPWslp/4l6kA=;
- b=Qf9vvVC8CMAIHhxY4G6mDgH293SZub1C8kjhHoydrO8hOHrj0r7zzyKTmR20R7OrXQ
- kJy+luosm+h1qmBaS2B7J9n1SAnO1gAE55Sit5DXbIzMMRATIeQHj0ig2e4IsYQah0rf
- J4PsG6e18oZKp8bt5nnz1+yrIVEdZ2izh1GM/Dgt7of+r2aDbSGMdfTwBxC0lSyu8B/I
- qDCXXhbnymk3Wckwio0wyAYDKTDYABw1SqZOtE4NWzLsfLD541igkdHzXRuX4GJxrXff
- 9b7pZUZ6QUXT2sHO/31Cltap3rDR+8pSOkLnPcmv6NuaBusWtUJznYVgOWB6HYwX1jn/
- OV0w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704432567; x=1705037367;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CGve81iZh7DeumVsNopDUzBrLKhnhLbrPWslp/4l6kA=;
- b=AWPGX4/8FyV/ztblzY31ZFF0hstrVhhHKK0KOAl+HG6EBafQjyqRTpm0G2D+kNMmeb
- i9YRpdnmwT3c+qBSpq3zY1Qj+K0gNteHgM9VFnL+xeog4D/mkddaCXCdX7CDVYDHKJQ0
- t/OuCILdI0c2x9D7aWSgUPA4/4FQeWDYNFlMnFIt3/QAc8wyypklNDAEHf+nGZ/HOuKu
- WMRSMHG701pC9SwMzgqdxifKVk5Fp7LKXUiVh/uDXB4xAyvAELCPM+JD7tnP8PhLzmmD
- oErW1kr4ujSq4I1GaL5QaefEJ3QHpM9ppMG1LGCLUUTO081aYKoI74o0CfZxy/C0Gqb/
- 1GSw==
-X-Gm-Message-State: AOJu0Yz0S3+mpu2CGNnrzznj9CcbiV6AhrKkCjgYzrOOUuJK2KIk0Rsq
- Nu4WFHJDlRE9SWpfRQkFF8E21gNp0scU96U2Xg0EnoYP
-X-Google-Smtp-Source: AGHT+IE5i1rEeIy473NJp4v+Sa1QZU+yik+CYZ8FQ2iSusZaoY7CjC1qky/M1TylgYWVIYxvit+UEEEVnWFOGgoa8iw=
-X-Received: by 2002:a05:6122:88d:b0:4b6:e6e1:49b3 with SMTP id
- 13-20020a056122088d00b004b6e6e149b3mr1443269vkf.17.1704432567658; Thu, 04 Jan
- 2024 21:29:27 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
+ id 1rLd0G-0000iw-Iz; Fri, 05 Jan 2024 00:44:20 -0500
+Received: from smtp-relay-canonical-0.canonical.com ([185.125.188.120])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
+ id 1rLd0E-0001Lv-0u; Fri, 05 Jan 2024 00:44:20 -0500
+Received: from [192.168.123.94] (ip-178-202-040-247.um47.pools.vodafone-ip.de
+ [178.202.40.247])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 5F899413B3; 
+ Fri,  5 Jan 2024 05:44:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1704433453;
+ bh=OyQM+TWjGJ6u5HqzmvRQlHPmDy8aSFTrKgSPYbJ15rU=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=Zo6ysmT/T3LBnJPOiNufXFNDjQje9Uhz8JtdjNAbA8O/zqCzczpHuL2LzyM+pb2f4
+ /Cef4B1sSqPbWxja1E52ODSVH9c+CozB3eBgyPZNocCqbO8XTAheovWjJWqGDzZC41
+ Meqf1GrErAEEDDA9e8sq59aE/W1VhVB+39+TglbuSxug5nS8wFxFvBKX5gGDsvyv5q
+ BPYdxC349jK+uQPeTMJYEOBja/q6q2oaWE/LfeZEFtvTvQ6Fe+3Ozvkrf0CWnYTB45
+ ZY2JaRjqIyuvMnNL3o27JHa12yYPmwMqBXL8xXwaNWgo3OlOdrQZlJP3278V+/lugA
+ zxz0IRXZjWAfg==
+Message-ID: <cf9b3023-d6d4-4da9-ab1e-da440f98bf3e@canonical.com>
+Date: Fri, 5 Jan 2024 06:44:14 +0100
 MIME-Version: 1.0
-References: <20240104071523.273702-1-bmeng@tinylab.org>
-In-Reply-To: <20240104071523.273702-1-bmeng@tinylab.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 5 Jan 2024 15:29:01 +1000
-Message-ID: <CAKmqyKMmcVBU5BxwNxY58BvqXmYSB+fFOR0FKHy0bqTeO_OoqQ@mail.gmail.com>
-Subject: Re: [PATCH] docs/system/riscv: sifive_u: Update S-mode U-Boot image
- build instructions
-To: Bin Meng <bmeng@tinylab.org>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::932;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x932.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/4] smbios: add processor-family option
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Bin Meng <bin.meng@windriver.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
+ Ani Sinha <anisinha@redhat.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+References: <20231229120724.41383-1-heinrich.schuchardt@canonical.com>
+ <20231229120724.41383-2-heinrich.schuchardt@canonical.com>
+ <CAKmqyKNmyMKMDuUwrgi4RQnAAWAJ7uSzMztDnHW+HRaM1zPNDA@mail.gmail.com>
+Content-Language: en-US, de-DE
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAKmqyKNmyMKMDuUwrgi4RQnAAWAJ7uSzMztDnHW+HRaM1zPNDA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=185.125.188.120;
+ envelope-from=heinrich.schuchardt@canonical.com;
+ helo=smtp-relay-canonical-0.canonical.com
+X-Spam_score_int: -70
+X-Spam_score: -7.1
+X-Spam_bar: -------
+X-Spam_report: (-7.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-2.691,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -91,106 +83,134 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jan 4, 2024 at 5:18=E2=80=AFPM Bin Meng <bmeng@tinylab.org> wrote:
->
-> Currently, the documentation outlines the process for building the
-> S-mode U-Boot image using `make menuconfig` and manual actions within
-> the menuconfig UI. However, this approach is fragile due to Kconfig
-> options potentially changing across different releases. For example,
-> CONFIG_OF_PRIOR_STAGE has been replaced by CONFIG_BOARD since v2022.01
-> release, and CONFIG_TEXT_BASE has been moved to the 'General setup'
-> menu from the 'Boot options' menu in v2024.01 release.
->
-> This update aims to make the S-mode U-Boot image build instructions
-> future-proof. It leverages the 'config' script provided in the U-Boot
-> source tree to edit the .config file, followed by a `make olddefconfig`.
->
-> Validated with U-Boot v2024.01 release.
->
-> Signed-off-by: Bin Meng <bmeng@tinylab.org>
+On 1/5/24 06:24, Alistair Francis wrote:
+> On Fri, Dec 29, 2023 at 10:48 PM Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+>>
+>> For RISC-V the SMBIOS standard requires specific values of the processor
+>> family value depending on the bitness of the CPU.
+> 
+> Can you provide some details of where this is described? I can't seem to find it
+> 
+> Alistair
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+System Management BIOS (SMBIOS) Reference Specification 3.7.0 (DSP0134)
+https://www.dmtf.org/sites/default/files/standards/documents/DSP0134_3.7.0.pdf
+7.5.2 Processor Information — Processor Family
+Table 23 – Processor Information: Processor Family field
 
-Alistair
+200h 512 RISC-V RV32
+201h 513 RISC-V RV64
+202h 514 RISC-V RV128
 
->
-> ---
->
->  docs/system/riscv/sifive_u.rst | 33 ++++++++++++---------------------
->  1 file changed, 12 insertions(+), 21 deletions(-)
->
-> diff --git a/docs/system/riscv/sifive_u.rst b/docs/system/riscv/sifive_u.=
-rst
-> index 7b166567f9..8f55ae8e31 100644
-> --- a/docs/system/riscv/sifive_u.rst
-> +++ b/docs/system/riscv/sifive_u.rst
-> @@ -210,7 +210,7 @@ command line options with ``qemu-system-riscv32``.
->  Running U-Boot
->  --------------
->
-> -U-Boot mainline v2021.07 release is tested at the time of writing. To bu=
-ild a
-> +U-Boot mainline v2024.01 release is tested at the time of writing. To bu=
-ild a
->  U-Boot mainline bootloader that can be booted by the ``sifive_u`` machin=
-e, use
->  the sifive_unleashed_defconfig with similar commands as described above =
-for
->  Linux:
-> @@ -325,15 +325,10 @@ configuration of U-Boot:
->
->    $ export CROSS_COMPILE=3Driscv64-linux-
->    $ make sifive_unleashed_defconfig
-> -  $ make menuconfig
-> -
-> -then manually select the following configuration:
-> -
-> -  * Device Tree Control ---> Provider of DTB for DT Control ---> Prior S=
-tage bootloader DTB
-> -
-> -and unselect the following configuration:
-> -
-> -  * Library routines ---> Allow access to binman information in the devi=
-ce tree
-> +  $ ./scripts/config --enable OF_BOARD
-> +  $ ./scripts/config --disable BINMAN_FDT
-> +  $ ./scripts/config --disable SPL
-> +  $ make olddefconfig
->
->  This changes U-Boot to use the QEMU generated device tree blob, and bypa=
-ss
->  running the U-Boot SPL stage.
-> @@ -352,17 +347,13 @@ It's possible to create a 32-bit U-Boot S-mode imag=
-e as well.
->
->    $ export CROSS_COMPILE=3Driscv64-linux-
->    $ make sifive_unleashed_defconfig
-> -  $ make menuconfig
-> -
-> -then manually update the following configuration in U-Boot:
-> -
-> -  * Device Tree Control ---> Provider of DTB for DT Control ---> Prior S=
-tage bootloader DTB
-> -  * RISC-V architecture ---> Base ISA ---> RV32I
-> -  * Boot options ---> Boot images ---> Text Base ---> 0x80400000
-> -
-> -and unselect the following configuration:
-> -
-> -  * Library routines ---> Allow access to binman information in the devi=
-ce tree
-> +  $ ./scripts/config --disable ARCH_RV64I
-> +  $ ./scripts/config --enable ARCH_RV32I
-> +  $ ./scripts/config --set-val TEXT_BASE 0x80400000
-> +  $ ./scripts/config --enable OF_BOARD
-> +  $ ./scripts/config --disable BINMAN_FDT
-> +  $ ./scripts/config --disable SPL
-> +  $ make olddefconfig
->
->  Use the same command line options to boot the 32-bit U-Boot S-mode image=
-:
->
-> --
-> 2.34.1
->
->
+While for other architectures values for different CPU generations have 
+been defined the values for RISC-V only depend on the bitness.
+
+Best regards
+
+Heinrich
+
+> 
+>>
+>> Add a processor-family option for SMBIOS table 4.
+>>
+>> The value of processor-family may exceed 255 and therefore must be provided
+>> in the Processor Family 2 field. Set the Processor Family field to 0xFE
+>> which signals that the Processor Family 2 is used.
+>>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>> v2:
+>>          new patch
+>> ---
+>>   hw/smbios/smbios.c | 13 +++++++++++--
+>>   qemu-options.hx    |  4 ++--
+>>   2 files changed, 13 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/hw/smbios/smbios.c b/hw/smbios/smbios.c
+>> index 2a90601ac5..647bc6d603 100644
+>> --- a/hw/smbios/smbios.c
+>> +++ b/hw/smbios/smbios.c
+>> @@ -102,6 +102,7 @@ static struct {
+>>   #define DEFAULT_CPU_SPEED 2000
+>>
+>>   static struct {
+>> +    uint16_t processor_family;
+>>       const char *sock_pfx, *manufacturer, *version, *serial, *asset, *part;
+>>       uint64_t max_speed;
+>>       uint64_t current_speed;
+>> @@ -110,6 +111,7 @@ static struct {
+>>       .max_speed = DEFAULT_CPU_SPEED,
+>>       .current_speed = DEFAULT_CPU_SPEED,
+>>       .processor_id = 0,
+>> +    .processor_family = 0x01, /* Other */
+>>   };
+>>
+>>   struct type8_instance {
+>> @@ -337,6 +339,10 @@ static const QemuOptDesc qemu_smbios_type4_opts[] = {
+>>           .name = "part",
+>>           .type = QEMU_OPT_STRING,
+>>           .help = "part number",
+>> +    }, {
+>> +        .name = "processor-family",
+>> +        .type = QEMU_OPT_NUMBER,
+>> +        .help = "processor family",
+>>       }, {
+>>           .name = "processor-id",
+>>           .type = QEMU_OPT_NUMBER,
+>> @@ -726,7 +732,7 @@ static void smbios_build_type_4_table(MachineState *ms, unsigned instance)
+>>       snprintf(sock_str, sizeof(sock_str), "%s%2x", type4.sock_pfx, instance);
+>>       SMBIOS_TABLE_SET_STR(4, socket_designation_str, sock_str);
+>>       t->processor_type = 0x03; /* CPU */
+>> -    t->processor_family = 0x01; /* Other */
+>> +    t->processor_family = 0xfe; /* use Processor Family 2 field */
+>>       SMBIOS_TABLE_SET_STR(4, processor_manufacturer_str, type4.manufacturer);
+>>       if (type4.processor_id == 0) {
+>>           t->processor_id[0] = cpu_to_le32(smbios_cpuid_version);
+>> @@ -758,7 +764,7 @@ static void smbios_build_type_4_table(MachineState *ms, unsigned instance)
+>>       t->thread_count = (threads_per_socket > 255) ? 0xFF : threads_per_socket;
+>>
+>>       t->processor_characteristics = cpu_to_le16(0x02); /* Unknown */
+>> -    t->processor_family2 = cpu_to_le16(0x01); /* Other */
+>> +    t->processor_family2 = cpu_to_le16(type4.processor_family);
+>>
+>>       if (tbl_len == SMBIOS_TYPE_4_LEN_V30) {
+>>           t->core_count2 = t->core_enabled2 = cpu_to_le16(cores_per_socket);
+>> @@ -1402,6 +1408,9 @@ void smbios_entry_add(QemuOpts *opts, Error **errp)
+>>                   return;
+>>               }
+>>               save_opt(&type4.sock_pfx, opts, "sock_pfx");
+>> +            type4.processor_family = qemu_opt_get_number(opts,
+>> +                                                         "processor-family",
+>> +                                                         0x01 /* Other */);
+>>               save_opt(&type4.manufacturer, opts, "manufacturer");
+>>               save_opt(&type4.version, opts, "version");
+>>               save_opt(&type4.serial, opts, "serial");
+>> diff --git a/qemu-options.hx b/qemu-options.hx
+>> index b66570ae00..7bdb414345 100644
+>> --- a/qemu-options.hx
+>> +++ b/qemu-options.hx
+>> @@ -2694,7 +2694,7 @@ DEF("smbios", HAS_ARG, QEMU_OPTION_smbios,
+>>       "                specify SMBIOS type 3 fields\n"
+>>       "-smbios type=4[,sock_pfx=str][,manufacturer=str][,version=str][,serial=str]\n"
+>>       "              [,asset=str][,part=str][,max-speed=%d][,current-speed=%d]\n"
+>> -    "              [,processor-id=%d]\n"
+>> +    "              [,processor-family=%d,processor-id=%d]\n"
+>>       "                specify SMBIOS type 4 fields\n"
+>>       "-smbios type=8[,external_reference=str][,internal_reference=str][,connector_type=%d][,port_type=%d]\n"
+>>       "                specify SMBIOS type 8 fields\n"
+>> @@ -2722,7 +2722,7 @@ SRST
+>>   ``-smbios type=3[,manufacturer=str][,version=str][,serial=str][,asset=str][,sku=str]``
+>>       Specify SMBIOS type 3 fields
+>>
+>> -``-smbios type=4[,sock_pfx=str][,manufacturer=str][,version=str][,serial=str][,asset=str][,part=str][,processor-id=%d]``
+>> +``-smbios type=4[,sock_pfx=str][,manufacturer=str][,version=str][,serial=str][,asset=str][,part=str][,processor-family=%d][,processor-id=%d]``
+>>       Specify SMBIOS type 4 fields
+>>
+>>   ``-smbios type=11[,value=str][,path=filename]``
+>> --
+>> 2.43.0
+>>
+>>
+
 
