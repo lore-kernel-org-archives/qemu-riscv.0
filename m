@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 092BFC47077
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 15:55:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB754C47077
+	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 15:56:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rLmRP-00056L-Pm; Fri, 05 Jan 2024 10:48:59 -0500
+	id 1rLmPD-0003A0-AU; Fri, 05 Jan 2024 10:46:43 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmR7-0002ur-Hy
- for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:48:41 -0500
-Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmOa-0001iP-Pu
+ for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:46:06 -0500
+Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmR3-0005yG-V3
- for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:48:41 -0500
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3374eb61cbcso1484460f8f.0
- for <qemu-riscv@nongnu.org>; Fri, 05 Jan 2024 07:48:36 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmOU-0003n1-V9
+ for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:46:02 -0500
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-33723ad790cso1319588f8f.1
+ for <qemu-riscv@nongnu.org>; Fri, 05 Jan 2024 07:45:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704469716; x=1705074516; darn=nongnu.org;
+ d=linaro.org; s=google; t=1704469555; x=1705074355; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EqhTmAjxaD/BTNoVLzXvd/YAl4zMVPKwo4ul47FACnE=;
- b=hG+QZSF0V851L7X8jojOvd9JZ4d5qjF9niXHq0p9KQj/BkYgySSeSx8M/nvxpE4D19
- nXa2lYEQnTb0aATCyaoj6yQzom6DfeFg2LpcysBT1A1ANiXPCknvfHs6tA9SaeYDF/f1
- U5g1gehpehK82xs48K3kz6+gZ5qhVFVlsf17Tka5pS4YxESQ9A5YmD55OUijQKeIkd3W
- n+BFve+c6BVfjZpdnS9aVeFZ8BUdjQcHKJhYQvRFfTJJFW9NeCJtylw/O9QXqkPLD1PS
- pTqkO/AqkpWGHoRJqxD+a8hRifOEdI83lS7BK27vfGfCFbyvY6iPZRSS59yM9kvI/lCr
- gN1A==
+ bh=RbnewdzJw2WIotOB6UCheBhSeiFExHVz6pISXRX/KZs=;
+ b=wWWcE4ZMz7jSyR8BERdVhQ5fdM5Uw0UJqJBGbybWADWqeHA/6Zm+NazIwCBvMKycrW
+ jncj9/hpBZXlwyUFGSMy6Riz8Jlr+8I4QRNcBVY/fl1ayHL7O3BJwICGD/nMI7a5pOTV
+ TKZUKgXS+nQOLv/KJYSeartncYUbmHpGjR2XXh3B8szDogVIK9k331Kbnpnm/Cya54HM
+ D1tt9Lj8FKpEot1W9qouSfpYd3sKQ8oczIo2gxP42tjRz3qGiSsUXgAyFzRDJ8rd5zIW
+ c32mAF3NyJGvxzgGXul4gxoMf3RT0LACVzMYeqWbD66cAiMttpncleQDzstsCyXOazHe
+ 4cIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704469716; x=1705074516;
+ d=1e100.net; s=20230601; t=1704469555; x=1705074355;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EqhTmAjxaD/BTNoVLzXvd/YAl4zMVPKwo4ul47FACnE=;
- b=bx5S8cTXmmkYPSRfsOewbkjaOA4+A7/mLxifqRhbf4Khe1tTAEVORUg/+GoG8oA2kC
- mjW+j3VYqRMd2juigXpUZq2TreoCCyyYjub4KSmsWkIh/rJ6i0fWKHHniDfF9ZIjKVHn
- RhsQ9Lb9oO11rh2MtJ5e4MdVBHJIHkYC1nuGhm+i2wTHyZ3hcSgSKefsRbv/GOo5FofP
- YiT93+O4HxalMDRpcFNWV/jXfnh1fiBf8IjHBWIcj8FDiFbyjBgedRAmyiuCDudImkez
- mBzYX6J3h0aoobKaUA0wtRsP9w8DusMBcYqkDQpdymTDEeUUAi29lG0mv0+Yonxnpdz3
- AUqw==
-X-Gm-Message-State: AOJu0YxI3aN9a/EUDZADug5yXIj6iamWBv2UVEFLOpe1klaWl90i3M9W
- mMMIDL30tzLtBAk8dIVRNd5ZNQ0VXyi91A==
-X-Google-Smtp-Source: AGHT+IHK2kFr48UQS0bqpJVz6a1E49DB73EV3GNpMskug7Jop80bPyFSPeLiiJHWQyevrricJnKzIg==
-X-Received: by 2002:a5d:6e82:0:b0:336:7d12:caf3 with SMTP id
- k2-20020a5d6e82000000b003367d12caf3mr1547672wrz.44.1704469715876; 
- Fri, 05 Jan 2024 07:48:35 -0800 (PST)
+ bh=RbnewdzJw2WIotOB6UCheBhSeiFExHVz6pISXRX/KZs=;
+ b=S4s5dFhTK4YHiInAAXpdxgEoVFQvTZNM2q/5neQ7CuR2o+wmOb2XuLQnJ2rUyvikfw
+ FoO7f275eNFbTM+tj7WtP0HuXg1kn5DaP9CPpFlDPSJQ3uxSWLHJEdCWls8eEWeBXjqD
+ z5J0zDLyhhFKloywJ9Sr7ipHGZGDWdTQlH/JI5Ffri4Xk7z9F49kYoCjbzxrRPh+7lAI
+ iFj/N/68PVlfbfj0j4LMUh3YqU2pR2HXhkSSfbMa9oydDXj5dMCMz6FS98erbpM699nh
+ jV62c2A0agET5Ss1VfNdX05R43McMojs8Ot3L+2yrdjCShU0K0YQQmhKuYRFLhrAtUUG
+ ZFZw==
+X-Gm-Message-State: AOJu0YyYvpB9YwkJbXkDOM6W58U4oSHvS8Vbrq/Ph5eK+ctMnhI4QXe9
+ G01QvvPU/+su08lQdGH4Nnv2G57qVjXfbQ==
+X-Google-Smtp-Source: AGHT+IHg+0OT3KRSSE5x1DHXNTZTW9W0UuTexnJBd7wkFGmaURJNKZhXNVpCc2y41EKLDdnS3IPcDg==
+X-Received: by 2002:a5d:650c:0:b0:337:5280:a14 with SMTP id
+ x12-20020a5d650c000000b0033752800a14mr856805wru.170.1704469555497; 
+ Fri, 05 Jan 2024 07:45:55 -0800 (PST)
 Received: from m1x-phil.lan (juv34-h02-176-184-26-1.dsl.sta.abo.bbox.fr.
  [176.184.26.1]) by smtp.gmail.com with ESMTPSA id
- t1-20020adfd001000000b0033672971fabsm1602690wrh.115.2024.01.05.07.48.34
+ x17-20020a5d6511000000b0033743c2d17dsm1609158wru.28.2024.01.05.07.45.53
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 05 Jan 2024 07:48:35 -0800 (PST)
+ Fri, 05 Jan 2024 07:45:55 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
+ Gavin Shan <gshan@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
+ Markus Armbruster <armbru@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Peter Xu <peterx@redhat.com>, Gavin Shan <gshan@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>, David Hildenbrand <david@redhat.com>
-Subject: [PULL 52/71] memory: Simplify
- memory_region_init_rom_device_nomigrate() calls
-Date: Fri,  5 Jan 2024 16:42:45 +0100
-Message-ID: <20240105154307.21385-53-philmd@linaro.org>
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Yanan Wang <wangyanan55@huawei.com>
+Subject: [PULL 24/71] machine: Use error handling when CPU type is checked
+Date: Fri,  5 Jan 2024 16:42:17 +0100
+Message-ID: <20240105154307.21385-25-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240105154307.21385-1-philmd@linaro.org>
 References: <20240105154307.21385-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::434;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x434.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,49 +98,54 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Mechanical change using the following coccinelle script:
+From: Gavin Shan <gshan@redhat.com>
 
-@@
-expression mr, owner, arg3, arg4, arg5, arg6, errp;
-@@
--   memory_region_init_rom_device_nomigrate(mr, owner, arg3, arg4, arg5, arg6, &errp);
-    if (
--       errp
-+       !memory_region_init_rom_device_nomigrate(mr, owner, arg3, arg4, arg5, arg6, &errp)
-    ) {
-        ...
-        return;
-    }
+Functions that use an Error **errp parameter to return errors should
+not also report them to the user, because reporting is the caller's
+job. The principle is violated by machine_run_board_init() because
+it calls error_report(), error_printf(), and exit(1) when the machine
+doesn't support the requested CPU type.
 
-and removing the local Error variable.
+Clean this up by using error_setg() and error_append_hint() instead.
+No functional change, as the only caller passes &error_fatal.
 
+Suggested-by: Igor Mammedov <imammedo@redhat.com>
+Signed-off-by: Gavin Shan <gshan@redhat.com>
+Reviewed-by: Markus Armbruster <armbru@redhat.com>
+Message-ID: <20231204004726.483558-2-gshan@redhat.com>
+[PMD: Correct error_append_hint() argument]
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Peter Xu <peterx@redhat.com>
-Reviewed-by: Gavin Shan <gshan@redhat.com>
-Message-Id: <20231120213301.24349-10-philmd@linaro.org>
 ---
- system/memory.c | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
+ hw/core/machine.c | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
 
-diff --git a/system/memory.c b/system/memory.c
-index 8db271c19e..c6562f5e86 100644
---- a/system/memory.c
-+++ b/system/memory.c
-@@ -3627,12 +3627,9 @@ void memory_region_init_rom_device(MemoryRegion *mr,
-                                    Error **errp)
- {
-     DeviceState *owner_dev;
--    Error *err = NULL;
+diff --git a/hw/core/machine.c b/hw/core/machine.c
+index 0198b54b39..1898d1d1d7 100644
+--- a/hw/core/machine.c
++++ b/hw/core/machine.c
+@@ -1477,15 +1477,16 @@ void machine_run_board_init(MachineState *machine, const char *mem_path, Error *
  
--    memory_region_init_rom_device_nomigrate(mr, owner, ops, opaque,
--                                            name, size, &err);
--    if (err) {
--        error_propagate(errp, err);
-+    if (!memory_region_init_rom_device_nomigrate(mr, owner, ops, opaque,
-+                                                 name, size, errp)) {
-         return;
+         if (!machine_class->valid_cpu_types[i]) {
+             /* The user specified CPU is not valid */
+-            error_report("Invalid CPU type: %s", machine->cpu_type);
+-            error_printf("The valid types are: %s",
+-                         machine_class->valid_cpu_types[0]);
++            error_setg(errp, "Invalid CPU type: %s", machine->cpu_type);
++            error_append_hint(errp, "The valid types are: %s",
++                              machine_class->valid_cpu_types[0]);
+             for (i = 1; machine_class->valid_cpu_types[i]; i++) {
+-                error_printf(", %s", machine_class->valid_cpu_types[i]);
++                error_append_hint(errp, ", %s",
++                                  machine_class->valid_cpu_types[i]);
+             }
+-            error_printf("\n");
+ 
+-            exit(1);
++            error_append_hint(errp, "\n");
++            return;
+         }
      }
-     /* This will assert if owner is neither NULL nor a DeviceState.
+ 
 -- 
 2.41.0
 
