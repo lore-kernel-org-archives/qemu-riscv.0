@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8450DC3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 15:53:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A093CC3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 15:54:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rLmQO-00084V-5X; Fri, 05 Jan 2024 10:47:57 -0500
+	id 1rLmRY-0006En-1Q; Fri, 05 Jan 2024 10:49:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmPR-0004L2-1e
- for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:46:58 -0500
-Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmRN-0004iM-9y
+ for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:48:57 -0500
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmPJ-0003y5-Ev
- for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:46:56 -0500
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-336755f1688so1408156f8f.0
- for <qemu-riscv@nongnu.org>; Fri, 05 Jan 2024 07:46:48 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmRJ-0006pQ-9Y
+ for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:48:55 -0500
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-40d87df95ddso14955225e9.0
+ for <qemu-riscv@nongnu.org>; Fri, 05 Jan 2024 07:48:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704469608; x=1705074408; darn=nongnu.org;
+ d=linaro.org; s=google; t=1704469731; x=1705074531; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=H4P3qee4jFL51Nbb/746jQf4mN+fePYfOB7VeiIaJ9s=;
- b=Kkwah4b1tougeMRIpTCAQAwZ9p+kwT5uP9F0d1TekDZxKNFruCjHlyyMhiRX/Eaq5Y
- 620c6kZHtKSeyiKEdKRLGJpUM+wRdzTLIY1sAWXrDEbW9OnKXBKyPrVdxXOGm5aIiCEV
- EThdXcWqHbRbHXDHBIXJ/REptiyqGo5hX5F+fFLoCxiIC6puZ/cTTiP9sdNeBeuBGtWe
- EYROdmlU8GkXnBy1y0PhRsD9TiIIMQsRoqLeqGFXFc/x8sYh/Aew/MXHLuAi8H7WhNwz
- gRT3HYkCGkE3vheDOhyo7w8g+XACjxGXEIa0DMGezH5n5CPlcoVZQGPTX6CNyAzXrRGe
- wZRg==
+ bh=Dn8kXCOFTNbdwpGvjXbfKLmnnB9Pg2Sf7+jbS80Xsv4=;
+ b=yNiFcMBIatYGftSM5AGjnqdqSpfEHnDy0FfkdPfkcA3QBAZqmMnGBqeBzlsFTr2uQA
+ IhgxgWfVc9rCH7BBJTfpjlcrVGgw0l64eNy4TFI6L+8I+jpZV06K1GBtBYD98GkLEAXD
+ qGT4HFCkKhvspbG5gm8GeP1CNPhSg9oX84gGMvSZl0n2UpdFYLMSLsMXCBtO0xGQnLut
+ tYxq82Ldsg2P2ZwEwx3Tun/iuoVrz3Jp3iAtvaq4GRvpFtqJOf6FslqMHWfk7owGRQXb
+ yVrdQQ6UKNKEmnCA18hpoqfl0yZKMi8BZCHQApcWUegyXfVju59biFNGDKnT3l6a/Td5
+ mJbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704469608; x=1705074408;
+ d=1e100.net; s=20230601; t=1704469731; x=1705074531;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=H4P3qee4jFL51Nbb/746jQf4mN+fePYfOB7VeiIaJ9s=;
- b=gWJtKL7pC4veLL7UCRsYe1O+aeAzUyyCmUVrj3ociDcdg1jAEvnFRh5F1yVKqjXRaF
- dorgT4IucBfWuaAc83dYdkncNGlMy2Nxk7WucKfVhJNxRzAi9MMQXVfFNVgZvuX+txpf
- vf2Qcvo1LVQH9HSZ1oXWQat/n59DlQu2cyC3keLCWO90lOaUErnAAtcygaQjq2carAnH
- lnlHjr59r8KP6m+wRP3Jz3oiCM2fehWFyzI5rQ2ycyRe6zemtxRiQVlaSur6CJ5fbwZC
- ZYk06v6xrfmHzpiFzkfCAfkILykB2w/Mm6Lw8roWOSyoNE8xbTHvxG+IbVeYiZ9G0Z8p
- grGw==
-X-Gm-Message-State: AOJu0YygA58nvdQFfcgXUO1RtFqUtCPx1/wVLSbx+7oZMCtpTkU2QnZl
- WyaVu3TrewUKnpRnxbMNSJFd2zUQoC3GKQ==
-X-Google-Smtp-Source: AGHT+IEyGA9a4ElA/usmcvq/rVU/Gq5rSOiQpNsrPhNyNUufj8qQ00o5kNeZX8axqLWUwPTy/4YXaA==
-X-Received: by 2002:a05:6000:1972:b0:337:4221:5525 with SMTP id
- da18-20020a056000197200b0033742215525mr1273664wrb.46.1704469607760; 
- Fri, 05 Jan 2024 07:46:47 -0800 (PST)
+ bh=Dn8kXCOFTNbdwpGvjXbfKLmnnB9Pg2Sf7+jbS80Xsv4=;
+ b=fKSwX6/hPNgMyaYKgZQDhzDPhvJ9iSC/cg6zwH8qUL9y1c2wEZbjG4TSlmh/pAMRzs
+ jlHCl8me/r1RnZHy/wD2vBdZmPipTAZyujHRaHcSN9umrXGkjGPVCz/2rmnhz27eF+xJ
+ LGgl613pIhZPJSyDlT9tay0vDdD92Z3ngaiGi7iADja9TR2/XO9/J4IIzFC7LOLjoL2d
+ HbQPIdJm8idTlI+NW8wAj/z4ISMlcLz7LtHjGrbDBoILhPegHemIMx/htjCinOXvYCFQ
+ 6CzgJo9fOosXRfHM79VBDWr1qGAbRiWcrm6ay2030p8jKLSBVZmzrkJi4yVoML1XvnGP
+ fw7Q==
+X-Gm-Message-State: AOJu0Yzd+UserB+6kq6+bX3Tq7x9jjOsL3XFz6sAhrmgvZCmu3Rx7veN
+ 2JfW8goVMLSrZTcFcLSuunUgPLZ/AV4uMw==
+X-Google-Smtp-Source: AGHT+IFD7DyB4xxIwWnwejyKUiMk9ET1/qEMLxKpFrkBYKfHXFKCm93a1wvJdQnG9Qtn/KNLDMdcQg==
+X-Received: by 2002:a05:600c:5188:b0:40e:375f:6929 with SMTP id
+ fa8-20020a05600c518800b0040e375f6929mr311928wmb.40.1704469731598; 
+ Fri, 05 Jan 2024 07:48:51 -0800 (PST)
 Received: from m1x-phil.lan (juv34-h02-176-184-26-1.dsl.sta.abo.bbox.fr.
  [176.184.26.1]) by smtp.gmail.com with ESMTPSA id
- d18-20020adff2d2000000b003374d8306cesm1606073wrp.86.2024.01.05.07.46.46
+ s7-20020a5d6a87000000b0033680f7be5fsm1610144wru.87.2024.01.05.07.48.50
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 05 Jan 2024 07:46:47 -0800 (PST)
+ Fri, 05 Jan 2024 07:48:51 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
- Gavin Shan <gshan@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Vijai Kumar K <vijai@behindbytes.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PULL 32/71] hw/riscv/shakti_c: Check CPU type in
- machine_run_board_init()
-Date: Fri,  5 Jan 2024 16:42:25 +0100
-Message-ID: <20240105154307.21385-33-philmd@linaro.org>
+ Peter Xu <peterx@redhat.com>, Gavin Shan <gshan@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, David Hildenbrand <david@redhat.com>
+Subject: [PULL 55/71] memory: Have memory_region_init_ram_from_file() handler
+ return a boolean
+Date: Fri,  5 Jan 2024 16:42:48 +0100
+Message-ID: <20240105154307.21385-56-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240105154307.21385-1-philmd@linaro.org>
 References: <20240105154307.21385-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x330.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,61 +96,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Gavin Shan <gshan@redhat.com>
+Following the example documented since commit e3fe3988d7 ("error:
+Document Error API usage rules"), have memory_region_init_ram_from_file
+return a boolean indicating whether an error is set or not.
 
-Set mc->valid_cpu_types so that the user specified CPU type can
-be validated in machine_run_board_init(). We needn't to do it
-by ourselves.
-
-Signed-off-by: Gavin Shan <gshan@redhat.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Message-ID: <20231204004726.483558-10-gshan@redhat.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Peter Xu <peterx@redhat.com>
+Reviewed-by: Gavin Shan <gshan@redhat.com>
+Message-Id: <20231120213301.24349-13-philmd@linaro.org>
 ---
- hw/riscv/shakti_c.c | 13 ++++++-------
- 1 file changed, 6 insertions(+), 7 deletions(-)
+ include/exec/memory.h | 4 +++-
+ system/memory.c       | 4 +++-
+ 2 files changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/hw/riscv/shakti_c.c b/hw/riscv/shakti_c.c
-index 12ea74b032..3888034c2b 100644
---- a/hw/riscv/shakti_c.c
-+++ b/hw/riscv/shakti_c.c
-@@ -28,7 +28,6 @@
- #include "exec/address-spaces.h"
- #include "hw/riscv/boot.h"
- 
--
- static const struct MemmapEntry {
-     hwaddr base;
-     hwaddr size;
-@@ -47,12 +46,6 @@ static void shakti_c_machine_state_init(MachineState *mstate)
-     ShaktiCMachineState *sms = RISCV_SHAKTI_MACHINE(mstate);
-     MemoryRegion *system_memory = get_system_memory();
- 
--    /* Allow only Shakti C CPU for this platform */
--    if (strcmp(mstate->cpu_type, TYPE_RISCV_CPU_SHAKTI_C) != 0) {
--        error_report("This board can only be used with Shakti C CPU");
--        exit(1);
--    }
--
-     /* Initialize SoC */
-     object_initialize_child(OBJECT(mstate), "soc", &sms->soc,
-                             TYPE_RISCV_SHAKTI_SOC);
-@@ -82,9 +75,15 @@ static void shakti_c_machine_instance_init(Object *obj)
- static void shakti_c_machine_class_init(ObjectClass *klass, void *data)
- {
-     MachineClass *mc = MACHINE_CLASS(klass);
-+    static const char * const valid_cpu_types[] = {
-+        RISCV_CPU_TYPE_NAME("shakti-c"),
-+        NULL
-+    };
-+
-     mc->desc = "RISC-V Board compatible with Shakti SDK";
-     mc->init = shakti_c_machine_state_init;
-     mc->default_cpu_type = TYPE_RISCV_CPU_SHAKTI_C;
-+    mc->valid_cpu_types = valid_cpu_types;
-     mc->default_ram_id = "riscv.shakti.c.ram";
+diff --git a/include/exec/memory.h b/include/exec/memory.h
+index faddf8f073..c39819ec75 100644
+--- a/include/exec/memory.h
++++ b/include/exec/memory.h
+@@ -1376,8 +1376,10 @@ bool memory_region_init_resizeable_ram(MemoryRegion *mr,
+  *
+  * Note that this function does not do anything to cause the data in the
+  * RAM memory region to be migrated; that is the responsibility of the caller.
++ *
++ * Return: true on success, else false setting @errp with error.
+  */
+-void memory_region_init_ram_from_file(MemoryRegion *mr,
++bool memory_region_init_ram_from_file(MemoryRegion *mr,
+                                       Object *owner,
+                                       const char *name,
+                                       uint64_t size,
+diff --git a/system/memory.c b/system/memory.c
+index 75303484e1..e05d88aa67 100644
+--- a/system/memory.c
++++ b/system/memory.c
+@@ -1605,7 +1605,7 @@ bool memory_region_init_resizeable_ram(MemoryRegion *mr,
  }
  
+ #ifdef CONFIG_POSIX
+-void memory_region_init_ram_from_file(MemoryRegion *mr,
++bool memory_region_init_ram_from_file(MemoryRegion *mr,
+                                       Object *owner,
+                                       const char *name,
+                                       uint64_t size,
+@@ -1628,7 +1628,9 @@ void memory_region_init_ram_from_file(MemoryRegion *mr,
+         mr->size = int128_zero();
+         object_unparent(OBJECT(mr));
+         error_propagate(errp, err);
++        return false;
+     }
++    return true;
+ }
+ 
+ void memory_region_init_ram_from_fd(MemoryRegion *mr,
 -- 
 2.41.0
 
