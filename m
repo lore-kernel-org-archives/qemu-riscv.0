@@ -4,70 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3AB4C47077
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 05:19:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C63BDC3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 05:24:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rLcbi-0003Vd-MB; Fri, 05 Jan 2024 00:18:58 -0500
+	id 1rLchG-0004V9-On; Fri, 05 Jan 2024 00:24:42 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rLcbg-0003TM-Oz; Fri, 05 Jan 2024 00:18:56 -0500
-Received: from mail-ua1-x936.google.com ([2607:f8b0:4864:20::936])
+ id 1rLchE-0004UR-Ma; Fri, 05 Jan 2024 00:24:40 -0500
+Received: from mail-ua1-x934.google.com ([2607:f8b0:4864:20::934])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rLcbf-00008V-5I; Fri, 05 Jan 2024 00:18:56 -0500
-Received: by mail-ua1-x936.google.com with SMTP id
- a1e0cc1a2514c-7cd0e4e3da6so452932241.0; 
- Thu, 04 Jan 2024 21:18:54 -0800 (PST)
+ id 1rLchD-0005FX-1P; Fri, 05 Jan 2024 00:24:40 -0500
+Received: by mail-ua1-x934.google.com with SMTP id
+ a1e0cc1a2514c-7cc0f5bcb4fso440323241.1; 
+ Thu, 04 Jan 2024 21:24:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704431933; x=1705036733; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1704432277; x=1705037077; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gEX8EfbggQwg5SMmX1UZF4Ha2g9ZGknZpcZUn/MVmhs=;
- b=Rhlcq1AUacAlAUQ1NCv0SWH/HN2BYwQv10116f52yQyQtMZ0RVpG2grqatn6+T+0qE
- DnA1vXLYbk16+Jy0RWgIidc+uT/1J4efrsrXR0gEbXkIhmsLX3SlxpQUyXqljwdtSS70
- mBbFYWx8JRC0lvMiusryVXab125LGibEFCcG2sXctFupnJGPjnRxlYS5H/3onIOEo0N4
- t69xgaN0e1d+E/EVs2VbDsqKfTfbPMpRgo+aNJBXGw1qY1lOmyQ0xPVTdV9SKz1evME/
- b1z27L1932owgAjVsMq18PEHukeuJhOZ2bMJbxbTKNquSA5xmcQliSP43zffnw9m4kkV
- doig==
+ bh=FwdA6WdijysZ9q+QKAOZuqXxvlqY+Vu5vFFYgL7ZxWM=;
+ b=mdyDODMDQYgvpItvtLHCCgvFKTZtEQMD5qYNj+6C9rEP4CLYimAkgT/l3aXaWzJ/M+
+ IpnuplwijXYU6IMXWxEjY58AP8NmADbMsBZIKbusq/VL2QkRcAn6OwYVTDJOfJPVzm3Y
+ ETeEbSvleLRN9WQNJBUD1zaAM23PIg+ZspPggvrKPoiuEUmuxL4oKRliOiDWA6YyXkZk
+ I9y+fZ7DAdarIhRKrGzmgyVNqN6H9Az93KD6vI4rT8YGn19DEDY5roXN8GvV0GLGz+sR
+ mUJnLLLECPfeY7JVy44F6wLP19Dj1xN9tuqsqsJ9j5I55KMuqAsm66/G6+53AVXXZ5A4
+ cXtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704431933; x=1705036733;
+ d=1e100.net; s=20230601; t=1704432277; x=1705037077;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gEX8EfbggQwg5SMmX1UZF4Ha2g9ZGknZpcZUn/MVmhs=;
- b=Ys9xFaP958RWxvJZ1rT9+m2rOV8Hqd6xXA/pIMq/8oOk0AUy0YUyUJOgWDVIRIcEcu
- athQW3BuLHNXYWpMm6hJbQ6ChrOfe7WPDnIGe1yW2qDy5KM6IZDy4wvowpuxpyEodP9j
- kcQz/lM+3H5VsvGV6bcDKkctPxlWkAYOLE+Js8wrfxLu9elZwOZjC1g06cPO9Xl9qD1S
- R7xEvyC80AwawkmbdY5UUE28Tw6FawoXqLOLfit2QyA6o2fQbEg2VBxJiNg50KlLrag3
- S0GGFhI46YI8qhlEMj8pxa8Ytp2JQAIN4YpZmMOUXLOz2XmBp//Wov5UoWSWdGxSrlyf
- NYEw==
-X-Gm-Message-State: AOJu0Ywcn1j9kXXFW+WVc0GPYxG5wDJTeOen9+9xv2tgUA2z6zIXrkY/
- pLrAB1rl6a+FAlJ4rwh2jEI9g60qA0VL8nJcevg=
-X-Google-Smtp-Source: AGHT+IHDUGkCowPN7A9aAhAGZIqFvjxwL4Fou1wGaiG7P8sldu32JvSzTdODK/wCzeIZ7CAdmqM8tNKmIFfkaQLjDiI=
-X-Received: by 2002:a05:6102:2c83:b0:467:b8fa:3a46 with SMTP id
- if3-20020a0561022c8300b00467b8fa3a46mr28545vsb.20.1704431933636; Thu, 04 Jan
- 2024 21:18:53 -0800 (PST)
+ bh=FwdA6WdijysZ9q+QKAOZuqXxvlqY+Vu5vFFYgL7ZxWM=;
+ b=RBWt1cVUwaF6qnXWeluJ9+Tre9496TefWXgtW600hCUGwthwZnCxlDPH+410KcySzX
+ aCTa6gEgCsWW4+9UlGaAfcahy8P5lX6Fuxzq0hIZCEDcGO7uQeVgxdkz5XUAuFI9kZfx
+ 2A0KbFDD3cXfb2Ij+6/Pl7F7gA1cTBsltyAkVaiZrCOh/0xBugHuj4USQb49KKU4QRU8
+ 9+K707WvcyowQkyKBK9Vs+08EQWzw0ekDAXh0JVS8cdL5HEswZjUnNo6ZiReU9HNsW7+
+ D15jrtL/XuL0tVGY0NVi1M3f3OosSfbO8PPj/7JZ55FMOZMYm9r1IeroPnF6ACmRyqJe
+ UMiQ==
+X-Gm-Message-State: AOJu0Yyo+oPhuiO+0m7F6hIDhueIf439SsExphPdJwg1LyLFuqddTiu5
+ 7ay2+RT3q8lQlk7C5Rv+vQ719TW5x8+12f70mwI=
+X-Google-Smtp-Source: AGHT+IFzbKI7tFM9CMH30I3s0J8O20lbGNGRr0+A79fZkdByXgrC+mmU8gqhsiWWOGHBOL0qvAOrmM7mqP1nOuLcGOw=
+X-Received: by 2002:a05:6102:3713:b0:467:759f:b00b with SMTP id
+ s19-20020a056102371300b00467759fb00bmr1739369vst.5.1704432277596; Thu, 04 Jan
+ 2024 21:24:37 -0800 (PST)
 MIME-Version: 1.0
-References: <20240103174013.147279-1-dbarboza@ventanamicro.com>
- <20240103174013.147279-10-dbarboza@ventanamicro.com>
-In-Reply-To: <20240103174013.147279-10-dbarboza@ventanamicro.com>
+References: <20231229120724.41383-1-heinrich.schuchardt@canonical.com>
+ <20231229120724.41383-2-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231229120724.41383-2-heinrich.schuchardt@canonical.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 5 Jan 2024 15:17:00 +1000
-Message-ID: <CAKmqyKPQEVUXm_t7qkRRMCpgyNojibqM+=sf-f1zUrNHY5drPw@mail.gmail.com>
-Subject: Re: [PATCH v3 09/16] target/riscv: move 'elen' to
- riscv_cpu_properties[]
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, ajones@ventanamicro.com, vladimir.isaev@syntacore.com
+Date: Fri, 5 Jan 2024 15:24:11 +1000
+Message-ID: <CAKmqyKNmyMKMDuUwrgi4RQnAAWAJ7uSzMztDnHW+HRaM1zPNDA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/4] smbios: add processor-family option
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, Bin Meng <bin.meng@windriver.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>, 
+ Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::936;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x936.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::934;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x934.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -91,112 +96,132 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jan 4, 2024 at 3:49=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Fri, Dec 29, 2023 at 10:48=E2=80=AFPM Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> Do the same thing we did with 'vlen' in the previous patch with 'elen'.
->
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> For RISC-V the SMBIOS standard requires specific values of the processor
+> family value depending on the bitness of the CPU.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Can you provide some details of where this is described? I can't seem to fi=
+nd it
 
 Alistair
 
+>
+> Add a processor-family option for SMBIOS table 4.
+>
+> The value of processor-family may exceed 255 and therefore must be provid=
+ed
+> in the Processor Family 2 field. Set the Processor Family field to 0xFE
+> which signals that the Processor Family 2 is used.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  target/riscv/cpu.c         | 44 ++++++++++++++++++++++++++++++++++++--
->  target/riscv/tcg/tcg-cpu.c |  5 -----
->  2 files changed, 42 insertions(+), 7 deletions(-)
+> v2:
+>         new patch
+> ---
+>  hw/smbios/smbios.c | 13 +++++++++++--
+>  qemu-options.hx    |  4 ++--
+>  2 files changed, 13 insertions(+), 4 deletions(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 557874a017..da432e4c1e 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1269,6 +1269,7 @@ static void riscv_cpu_init(Object *obj)
->      /* Default values for non-bool cpu properties */
->      cpu->cfg.pmu_mask =3D MAKE_64BIT_MASK(3, 16);
->      cpu->cfg.vlen =3D 128;
-> +    cpu->cfg.elen =3D 64;
->      cpu->env.vext_ver =3D VEXT_VERSION_1_00_0;
->  }
+> diff --git a/hw/smbios/smbios.c b/hw/smbios/smbios.c
+> index 2a90601ac5..647bc6d603 100644
+> --- a/hw/smbios/smbios.c
+> +++ b/hw/smbios/smbios.c
+> @@ -102,6 +102,7 @@ static struct {
+>  #define DEFAULT_CPU_SPEED 2000
 >
-> @@ -1775,9 +1776,47 @@ static const PropertyInfo prop_vlen =3D {
->      .set =3D prop_vlen_set,
+>  static struct {
+> +    uint16_t processor_family;
+>      const char *sock_pfx, *manufacturer, *version, *serial, *asset, *par=
+t;
+>      uint64_t max_speed;
+>      uint64_t current_speed;
+> @@ -110,6 +111,7 @@ static struct {
+>      .max_speed =3D DEFAULT_CPU_SPEED,
+>      .current_speed =3D DEFAULT_CPU_SPEED,
+>      .processor_id =3D 0,
+> +    .processor_family =3D 0x01, /* Other */
 >  };
 >
-> -Property riscv_cpu_options[] =3D {
-> -    DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
-> +static void prop_elen_set(Object *obj, Visitor *v, const char *name,
-> +                         void *opaque, Error **errp)
-> +{
-> +    RISCVCPU *cpu =3D RISCV_CPU(obj);
-> +    uint16_t value;
-> +
-> +    if (!visit_type_uint16(v, name, &value, errp)) {
-> +        return;
-> +    }
-> +
-> +    if (!is_power_of_2(value)) {
-> +        error_setg(errp, "Vector extension ELEN must be power of 2");
-> +        return;
-> +    }
-> +
-> +    if (value !=3D cpu->cfg.elen && riscv_cpu_is_vendor(obj)) {
-> +        cpu_set_prop_err(cpu, name, errp);
-> +        error_append_hint(errp, "Current '%s' val: %u\n",
-> +                          name, cpu->cfg.elen);
-> +        return;
-> +    }
-> +
-> +    cpu_option_add_user_setting(name, value);
-> +    cpu->cfg.elen =3D value;
-> +}
+>  struct type8_instance {
+> @@ -337,6 +339,10 @@ static const QemuOptDesc qemu_smbios_type4_opts[] =
+=3D {
+>          .name =3D "part",
+>          .type =3D QEMU_OPT_STRING,
+>          .help =3D "part number",
+> +    }, {
+> +        .name =3D "processor-family",
+> +        .type =3D QEMU_OPT_NUMBER,
+> +        .help =3D "processor family",
+>      }, {
+>          .name =3D "processor-id",
+>          .type =3D QEMU_OPT_NUMBER,
+> @@ -726,7 +732,7 @@ static void smbios_build_type_4_table(MachineState *m=
+s, unsigned instance)
+>      snprintf(sock_str, sizeof(sock_str), "%s%2x", type4.sock_pfx, instan=
+ce);
+>      SMBIOS_TABLE_SET_STR(4, socket_designation_str, sock_str);
+>      t->processor_type =3D 0x03; /* CPU */
+> -    t->processor_family =3D 0x01; /* Other */
+> +    t->processor_family =3D 0xfe; /* use Processor Family 2 field */
+>      SMBIOS_TABLE_SET_STR(4, processor_manufacturer_str, type4.manufactur=
+er);
+>      if (type4.processor_id =3D=3D 0) {
+>          t->processor_id[0] =3D cpu_to_le32(smbios_cpuid_version);
+> @@ -758,7 +764,7 @@ static void smbios_build_type_4_table(MachineState *m=
+s, unsigned instance)
+>      t->thread_count =3D (threads_per_socket > 255) ? 0xFF : threads_per_=
+socket;
 >
-> +static void prop_elen_get(Object *obj, Visitor *v, const char *name,
-> +                         void *opaque, Error **errp)
-> +{
-> +    uint16_t value =3D RISCV_CPU(obj)->cfg.elen;
-> +
-> +    visit_type_uint16(v, name, &value, errp);
-> +}
-> +
-> +static const PropertyInfo prop_elen =3D {
-> +    .name =3D "elen",
-> +    .get =3D prop_elen_get,
-> +    .set =3D prop_elen_set,
-> +};
-> +
-> +Property riscv_cpu_options[] =3D {
->      DEFINE_PROP_UINT16("cbom_blocksize", RISCVCPU, cfg.cbom_blocksize, 6=
-4),
->      DEFINE_PROP_UINT16("cboz_blocksize", RISCVCPU, cfg.cboz_blocksize, 6=
-4),
+>      t->processor_characteristics =3D cpu_to_le16(0x02); /* Unknown */
+> -    t->processor_family2 =3D cpu_to_le16(0x01); /* Other */
+> +    t->processor_family2 =3D cpu_to_le16(type4.processor_family);
 >
-> @@ -1797,6 +1836,7 @@ static Property riscv_cpu_properties[] =3D {
->      {.name =3D "vext_spec", .info =3D &prop_vext_spec},
+>      if (tbl_len =3D=3D SMBIOS_TYPE_4_LEN_V30) {
+>          t->core_count2 =3D t->core_enabled2 =3D cpu_to_le16(cores_per_so=
+cket);
+> @@ -1402,6 +1408,9 @@ void smbios_entry_add(QemuOpts *opts, Error **errp)
+>                  return;
+>              }
+>              save_opt(&type4.sock_pfx, opts, "sock_pfx");
+> +            type4.processor_family =3D qemu_opt_get_number(opts,
+> +                                                         "processor-fami=
+ly",
+> +                                                         0x01 /* Other *=
+/);
+>              save_opt(&type4.manufacturer, opts, "manufacturer");
+>              save_opt(&type4.version, opts, "version");
+>              save_opt(&type4.serial, opts, "serial");
+> diff --git a/qemu-options.hx b/qemu-options.hx
+> index b66570ae00..7bdb414345 100644
+> --- a/qemu-options.hx
+> +++ b/qemu-options.hx
+> @@ -2694,7 +2694,7 @@ DEF("smbios", HAS_ARG, QEMU_OPTION_smbios,
+>      "                specify SMBIOS type 3 fields\n"
+>      "-smbios type=3D4[,sock_pfx=3Dstr][,manufacturer=3Dstr][,version=3Ds=
+tr][,serial=3Dstr]\n"
+>      "              [,asset=3Dstr][,part=3Dstr][,max-speed=3D%d][,current=
+-speed=3D%d]\n"
+> -    "              [,processor-id=3D%d]\n"
+> +    "              [,processor-family=3D%d,processor-id=3D%d]\n"
+>      "                specify SMBIOS type 4 fields\n"
+>      "-smbios type=3D8[,external_reference=3Dstr][,internal_reference=3Ds=
+tr][,connector_type=3D%d][,port_type=3D%d]\n"
+>      "                specify SMBIOS type 8 fields\n"
+> @@ -2722,7 +2722,7 @@ SRST
+>  ``-smbios type=3D3[,manufacturer=3Dstr][,version=3Dstr][,serial=3Dstr][,=
+asset=3Dstr][,sku=3Dstr]``
+>      Specify SMBIOS type 3 fields
 >
->      {.name =3D "vlen", .info =3D &prop_vlen},
-> +    {.name =3D "elen", .info =3D &prop_elen},
+> -``-smbios type=3D4[,sock_pfx=3Dstr][,manufacturer=3Dstr][,version=3Dstr]=
+[,serial=3Dstr][,asset=3Dstr][,part=3Dstr][,processor-id=3D%d]``
+> +``-smbios type=3D4[,sock_pfx=3Dstr][,manufacturer=3Dstr][,version=3Dstr]=
+[,serial=3Dstr][,asset=3Dstr][,part=3Dstr][,processor-family=3D%d][,process=
+or-id=3D%d]``
+>      Specify SMBIOS type 4 fields
 >
->  #ifndef CONFIG_USER_ONLY
->      DEFINE_PROP_UINT64("resetvec", RISCVCPU, env.resetvec, DEFAULT_RSTVE=
-C),
-> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> index 8ec858e096..84064ef7e0 100644
-> --- a/target/riscv/tcg/tcg-cpu.c
-> +++ b/target/riscv/tcg/tcg-cpu.c
-> @@ -185,11 +185,6 @@ static void riscv_cpu_validate_v(CPURISCVState *env,=
- RISCVCPUConfig *cfg,
->          return;
->      }
->
-> -    if (!is_power_of_2(cfg->elen)) {
-> -        error_setg(errp, "Vector extension ELEN must be power of 2");
-> -        return;
-> -    }
-> -
->      if (cfg->elen > 64 || cfg->elen < 8) {
->          error_setg(errp,
->                     "Vector extension implementation only supports ELEN "
+>  ``-smbios type=3D11[,value=3Dstr][,path=3Dfilename]``
 > --
 > 2.43.0
 >
