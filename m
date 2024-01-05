@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23FD6C47074
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 02:44:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1087EC47073
+	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 02:46:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rLaC7-0002Re-1T; Thu, 04 Jan 2024 21:44:23 -0500
+	id 1rLaE0-0003JC-K0; Thu, 04 Jan 2024 21:46:20 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rLaC5-0002R4-48; Thu, 04 Jan 2024 21:44:21 -0500
-Received: from mail-vk1-xa33.google.com ([2607:f8b0:4864:20::a33])
+ id 1rLaDy-0003IV-0a; Thu, 04 Jan 2024 21:46:18 -0500
+Received: from mail-ua1-x92c.google.com ([2607:f8b0:4864:20::92c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rLaBz-0007uk-8E; Thu, 04 Jan 2024 21:44:19 -0500
-Received: by mail-vk1-xa33.google.com with SMTP id
- 71dfb90a1353d-4b77c844087so105215e0c.1; 
- Thu, 04 Jan 2024 18:44:14 -0800 (PST)
+ id 1rLaDs-0008IL-EB; Thu, 04 Jan 2024 21:46:17 -0500
+Received: by mail-ua1-x92c.google.com with SMTP id
+ a1e0cc1a2514c-7cbdd011627so367495241.3; 
+ Thu, 04 Jan 2024 18:46:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704422653; x=1705027453; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1704422770; x=1705027570; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bGYcEli+F0JI63m/VflcnX/9JBGcwCJpIQJrf8kM0ic=;
- b=WHJv0R8RA9TwKQt1kSogD02TUTLgp5x033yNPng5rJ9Ec/hDQYWf9lm+Rs1g18vyHN
- HcGWtgoBhgAOCaHvUgEp+HYghuEGbMWy2IKeymo/NZpolQ8LZJe10T+hCl+0QdBXjhzd
- CmyDw1VorD6p8hJ8ccjwghKfSMSydfVsoLOjweGo/Bj8XJIwBiZjjXFvU3lu9n/b+ykG
- HnEl8kua4BtV8kN2rz0dmygALR8U/59N/Gd0mwN1A4UeekSi/16IWLVGSKIUASmihT2d
- FRxK+7VlDJhfXBjmpXlUKEGAue39PmS4l+PyY1WjqlP4jUbwu1X5OkqfiMuz/+jXLeVk
- wDMw==
+ bh=yW85sg0dA766UAWwr0J+Y2nQ5BSWXcHrlIelXrTGhaw=;
+ b=As76g4kLIJtocfbKQGMbC1wN0DQ8cIQRIvfps04GavmOgvVSrsDOlLZITjFPJeTQ4j
+ +itUfeyTbJJSpAGIfbxE96XT4hRZLXjqgApZ3m8Ucpc18qXdFAj6RdV/co27lLjD11wD
+ cQ1bF98Q5gb7Gt/Y77MOsnM00156+iyHkGpwoq+9O6blAuxkD94PQpOyoW//IJ1SCpxa
+ tzKraqOgz2SUiyGH9PzjFawR+Dfang+so0vacgh38dGzzvRzgd3F8d24BNj1+63I7IZ3
+ USTSKjZBB6WAupwaRhZTNMv5zSm1q6v5nYs8R96uwn0S1lPyrNhDp1yPuOupT0khPIne
+ wCqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704422653; x=1705027453;
+ d=1e100.net; s=20230601; t=1704422770; x=1705027570;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bGYcEli+F0JI63m/VflcnX/9JBGcwCJpIQJrf8kM0ic=;
- b=Jkq0MLwmovF8RIDwGtt8WjqcS2j+ZNM7wRcEJ3T8SUhQlPTII4Zbrd+DS+CFseJphf
- 5/DTg/91YcIWwhKH2uCtL7zqn4QlamFFkdWYnoMdO7mOE5M9LCbvyPFDBTqE9neGfKq1
- yKJqH3Dw6Pv+NPNoQ70Dm/OSSgyJ0UIMOuDPlzvl3SWbYNUABUFqg2jYIPSLn2qy38tL
- P46KaNXhq5y9+lI5VtD0fBj5Aqi1M0Y6GOKK15zKs8fKUvFep8aflor2IvqPGPYZoiH+
- V7qn+l+Fn9cajFNg3Q6Bx09uD1H+APfj5IaJSrB6Iz6zJxmkKzmYh6YOt2W1Ei+G7tcs
- nP9Q==
-X-Gm-Message-State: AOJu0Ywf7Meyy0ZHVTo/qT2mgWncNXwKKYnJHfAodh+705LMSzEnvvFj
- NKXZe8yzj+InIz41XkBFwob+BfjympPc5NzO9PF+oSx0
-X-Google-Smtp-Source: AGHT+IHrGHnUDI2oKnA5Kc7PiaJaF6Z5oJ+gQlhew/zhW9gj+YdQ/rgy+A884b2iA0ie75PHHj8HqU1FnYdd7byFTwI=
-X-Received: by 2002:a05:6122:3bd1:b0:4b7:41f2:9ea7 with SMTP id
- ft17-20020a0561223bd100b004b741f29ea7mr1218086vkb.11.1704422653387; Thu, 04
- Jan 2024 18:44:13 -0800 (PST)
+ bh=yW85sg0dA766UAWwr0J+Y2nQ5BSWXcHrlIelXrTGhaw=;
+ b=w/3TlPIBGowfpn6lZxYdRZnF2+jxUaUk/tPc1j2N7CfGao0x/EqsUPvLBZ10nZddFZ
+ ucaeZquOCe1zA+ozyWCeF5+c1kGia9zJ0XyvMNKe5le5VrS3a5iE2jsUaR1XkRpNT7r7
+ gaz/MQUJ1K22Eghqloc4Ub8jkYghtXoG2mAiYzJ4Rf8ONJYxglp63mwe+kvudZuTy4kM
+ eswM38Br1oR4T7SllziL5UbLF04P82eE2h5UmrjNGzq5I9JhLVUnXlUlaDrI7fYRYf3V
+ VNV/NPPVN4OVDFWVeCc177dmLtsFB6r5ExdN/CiA+udvo8jlTmTlRuv8f8+BGHVSdx1C
+ CMhg==
+X-Gm-Message-State: AOJu0Yw0GvS34wA5plF6GasCtBN/uPIO1UrST8uXA25wfB4Yttwk5yn3
+ tVBhd1sz1u/VvuAdAy8JvrQ7IUee1KDLNqCRpMU=
+X-Google-Smtp-Source: AGHT+IHC00LZ4oAf6E2ks0HYvl/eDjbtMjUF0Sep/jSJn4Szorf3yVvmNVBmpWazZQJR+NOIZRg9/Up3lZHCTpDmKQY=
+X-Received: by 2002:a05:6102:6688:b0:467:17ca:bef3 with SMTP id
+ gw8-20020a056102668800b0046717cabef3mr1630281vsb.8.1704422770750; Thu, 04 Jan
+ 2024 18:46:10 -0800 (PST)
 MIME-Version: 1.0
 References: <20231229004929.3842055-1-atishp@rivosinc.com>
- <20231229004929.3842055-2-atishp@rivosinc.com>
-In-Reply-To: <20231229004929.3842055-2-atishp@rivosinc.com>
+ <20231229004929.3842055-4-atishp@rivosinc.com>
+In-Reply-To: <20231229004929.3842055-4-atishp@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 5 Jan 2024 12:43:47 +1000
-Message-ID: <CAKmqyKOa7fE3zgAzb9m4yzYKcAaw0M8o+6jAuWpfj9pnVVwjgA@mail.gmail.com>
-Subject: Re: [v2 1/5] target/riscv: Fix the predicate functions for
- mhpmeventhX CSRs
+Date: Fri, 5 Jan 2024 12:45:44 +1000
+Message-ID: <CAKmqyKP9cYeiw83qY2GbrRquDi5_rSvCKbAmoxi91MfgHCfL6Q@mail.gmail.com>
+Subject: Re: [v2 3/5] target/riscv: Add cycle & instret privilege mode
+ filtering definitions
 To: Atish Patra <atishp@rivosinc.com>
 Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
  Bin Meng <bin.meng@windriver.com>, 
@@ -69,8 +69,8 @@ Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
  Weiwei Li <liwei1518@gmail.com>, kaiwenxue1@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a33;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa33.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92c;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92c.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -94,254 +94,110 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Dec 29, 2023 at 10:51=E2=80=AFAM Atish Patra <atishp@rivosinc.com> =
+On Fri, Dec 29, 2023 at 12:08=E2=80=AFPM Atish Patra <atishp@rivosinc.com> =
 wrote:
 >
-> mhpmeventhX CSRs are available for RV32. The predicate function
-> should check that first before checking sscofpmf extension.
+> From: Kaiwen Xue <kaiwenx@rivosinc.com>
 >
-> Fixes: 14664483457b ("target/riscv: Add sscofpmf extension support")
+> This adds the definitions for ISA extension smcntrpmf.
+>
+> Signed-off-by: Kaiwen Xue <kaiwenx@rivosinc.com>
 > Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> ---
+>  target/riscv/cpu.c      |  1 -
+>  target/riscv/cpu.h      |  6 ++++++
+>  target/riscv/cpu_bits.h | 29 +++++++++++++++++++++++++++++
+>  3 files changed, 35 insertions(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index da3f05cd5373..54395f95b299 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1297,7 +1297,6 @@ const char *riscv_get_misa_ext_description(uint32_t=
+ bit)
+>  const RISCVCPUMultiExtConfig riscv_cpu_extensions[] =3D {
+>      /* Defaults for standard extensions */
+>      MULTI_EXT_CFG_BOOL("sscofpmf", ext_sscofpmf, false),
+> -    DEFINE_PROP_BOOL("smcntrpmf", RISCVCPU, cfg.ext_smcntrpmf, false),
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Can you explain why you are removing this in the commit message?
 
 Alistair
 
-> ---
->  target/riscv/csr.c | 67 ++++++++++++++++++++++++++--------------------
->  1 file changed, 38 insertions(+), 29 deletions(-)
+>      MULTI_EXT_CFG_BOOL("zifencei", ext_zifencei, true),
+>      MULTI_EXT_CFG_BOOL("zicsr", ext_zicsr, true),
+>      MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index d74b361be641..34617c4c4bab 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -319,6 +319,12 @@ struct CPUArchState {
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index fde7ce1a5336..283468bbc652 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -224,6 +224,15 @@ static RISCVException sscofpmf(CPURISCVState *env, i=
-nt csrno)
->      return RISCV_EXCP_NONE;
->  }
+>      target_ulong mcountinhibit;
 >
-> +static RISCVException sscofpmf_32(CPURISCVState *env, int csrno)
-> +{
-> +    if (riscv_cpu_mxl(env) !=3D MXL_RV32) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    }
+> +    /* PMU cycle & instret privilege mode filtering */
+> +    target_ulong mcyclecfg;
+> +    target_ulong mcyclecfgh;
+> +    target_ulong minstretcfg;
+> +    target_ulong minstretcfgh;
 > +
-> +    return sscofpmf(env, csrno);
-> +}
+>      /* PMU counter state */
+>      PMUCTRState pmu_ctrs[RV_MAX_MHPMCOUNTERS];
+>
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index ebd7917d490a..0ee91e502e8f 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -401,6 +401,10 @@
+>  /* Machine counter-inhibit register */
+>  #define CSR_MCOUNTINHIBIT   0x320
+>
+> +/* Machine counter configuration registers */
+> +#define CSR_MCYCLECFG       0x321
+> +#define CSR_MINSTRETCFG     0x322
 > +
->  static RISCVException any(CPURISCVState *env, int csrno)
->  {
->      return RISCV_EXCP_NONE;
-> @@ -4972,91 +4981,91 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D =
-{
->      [CSR_MHPMEVENT31]    =3D { "mhpmevent31",    any,    read_mhpmevent,
->                               write_mhpmevent                           }=
-,
+>  #define CSR_MHPMEVENT3      0x323
+>  #define CSR_MHPMEVENT4      0x324
+>  #define CSR_MHPMEVENT5      0x325
+> @@ -431,6 +435,9 @@
+>  #define CSR_MHPMEVENT30     0x33e
+>  #define CSR_MHPMEVENT31     0x33f
 >
-> -    [CSR_MHPMEVENT3H]    =3D { "mhpmevent3h",    sscofpmf,  read_mhpmeve=
-nth,
-> +    [CSR_MHPMEVENT3H]    =3D { "mhpmevent3h",    sscofpmf_32,  read_mhpm=
-eventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT4H]    =3D { "mhpmevent4h",    sscofpmf,  read_mhpmeve=
-nth,
-> +    [CSR_MHPMEVENT4H]    =3D { "mhpmevent4h",    sscofpmf_32,  read_mhpm=
-eventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT5H]    =3D { "mhpmevent5h",    sscofpmf,  read_mhpmeve=
-nth,
-> +    [CSR_MHPMEVENT5H]    =3D { "mhpmevent5h",    sscofpmf_32,  read_mhpm=
-eventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT6H]    =3D { "mhpmevent6h",    sscofpmf,  read_mhpmeve=
-nth,
-> +    [CSR_MHPMEVENT6H]    =3D { "mhpmevent6h",    sscofpmf_32,  read_mhpm=
-eventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT7H]    =3D { "mhpmevent7h",    sscofpmf,  read_mhpmeve=
-nth,
-> +    [CSR_MHPMEVENT7H]    =3D { "mhpmevent7h",    sscofpmf_32,  read_mhpm=
-eventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT8H]    =3D { "mhpmevent8h",    sscofpmf,  read_mhpmeve=
-nth,
-> +    [CSR_MHPMEVENT8H]    =3D { "mhpmevent8h",    sscofpmf_32,  read_mhpm=
-eventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT9H]    =3D { "mhpmevent9h",    sscofpmf,  read_mhpmeve=
-nth,
-> +    [CSR_MHPMEVENT9H]    =3D { "mhpmevent9h",    sscofpmf_32,  read_mhpm=
-eventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT10H]   =3D { "mhpmevent10h",    sscofpmf,  read_mhpmev=
-enth,
-> +    [CSR_MHPMEVENT10H]   =3D { "mhpmevent10h",    sscofpmf_32,  read_mhp=
-meventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT11H]   =3D { "mhpmevent11h",    sscofpmf,  read_mhpmev=
-enth,
-> +    [CSR_MHPMEVENT11H]   =3D { "mhpmevent11h",    sscofpmf_32,  read_mhp=
-meventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT12H]   =3D { "mhpmevent12h",    sscofpmf,  read_mhpmev=
-enth,
-> +    [CSR_MHPMEVENT12H]   =3D { "mhpmevent12h",    sscofpmf_32,  read_mhp=
-meventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT13H]   =3D { "mhpmevent13h",    sscofpmf,  read_mhpmev=
-enth,
-> +    [CSR_MHPMEVENT13H]   =3D { "mhpmevent13h",    sscofpmf_32,  read_mhp=
-meventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT14H]   =3D { "mhpmevent14h",    sscofpmf,  read_mhpmev=
-enth,
-> +    [CSR_MHPMEVENT14H]   =3D { "mhpmevent14h",    sscofpmf_32,  read_mhp=
-meventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT15H]   =3D { "mhpmevent15h",    sscofpmf,  read_mhpmev=
-enth,
-> +    [CSR_MHPMEVENT15H]   =3D { "mhpmevent15h",    sscofpmf_32,  read_mhp=
-meventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT16H]   =3D { "mhpmevent16h",    sscofpmf,  read_mhpmev=
-enth,
-> +    [CSR_MHPMEVENT16H]   =3D { "mhpmevent16h",    sscofpmf_32,  read_mhp=
-meventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT17H]   =3D { "mhpmevent17h",    sscofpmf,  read_mhpmev=
-enth,
-> +    [CSR_MHPMEVENT17H]   =3D { "mhpmevent17h",    sscofpmf_32,  read_mhp=
-meventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT18H]   =3D { "mhpmevent18h",    sscofpmf,  read_mhpmev=
-enth,
-> +    [CSR_MHPMEVENT18H]   =3D { "mhpmevent18h",    sscofpmf_32,  read_mhp=
-meventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT19H]   =3D { "mhpmevent19h",    sscofpmf,  read_mhpmev=
-enth,
-> +    [CSR_MHPMEVENT19H]   =3D { "mhpmevent19h",    sscofpmf_32,  read_mhp=
-meventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT20H]   =3D { "mhpmevent20h",    sscofpmf,  read_mhpmev=
-enth,
-> +    [CSR_MHPMEVENT20H]   =3D { "mhpmevent20h",    sscofpmf_32,  read_mhp=
-meventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT21H]   =3D { "mhpmevent21h",    sscofpmf,  read_mhpmev=
-enth,
-> +    [CSR_MHPMEVENT21H]   =3D { "mhpmevent21h",    sscofpmf_32,  read_mhp=
-meventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT22H]   =3D { "mhpmevent22h",    sscofpmf,  read_mhpmev=
-enth,
-> +    [CSR_MHPMEVENT22H]   =3D { "mhpmevent22h",    sscofpmf_32,  read_mhp=
-meventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT23H]   =3D { "mhpmevent23h",    sscofpmf,  read_mhpmev=
-enth,
-> +    [CSR_MHPMEVENT23H]   =3D { "mhpmevent23h",    sscofpmf_32,  read_mhp=
-meventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT24H]   =3D { "mhpmevent24h",    sscofpmf,  read_mhpmev=
-enth,
-> +    [CSR_MHPMEVENT24H]   =3D { "mhpmevent24h",    sscofpmf_32,  read_mhp=
-meventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT25H]   =3D { "mhpmevent25h",    sscofpmf,  read_mhpmev=
-enth,
-> +    [CSR_MHPMEVENT25H]   =3D { "mhpmevent25h",    sscofpmf_32,  read_mhp=
-meventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT26H]   =3D { "mhpmevent26h",    sscofpmf,  read_mhpmev=
-enth,
-> +    [CSR_MHPMEVENT26H]   =3D { "mhpmevent26h",    sscofpmf_32,  read_mhp=
-meventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT27H]   =3D { "mhpmevent27h",    sscofpmf,  read_mhpmev=
-enth,
-> +    [CSR_MHPMEVENT27H]   =3D { "mhpmevent27h",    sscofpmf_32,  read_mhp=
-meventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT28H]   =3D { "mhpmevent28h",    sscofpmf,  read_mhpmev=
-enth,
-> +    [CSR_MHPMEVENT28H]   =3D { "mhpmevent28h",    sscofpmf_32,  read_mhp=
-meventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT29H]   =3D { "mhpmevent29h",    sscofpmf,  read_mhpmev=
-enth,
-> +    [CSR_MHPMEVENT29H]   =3D { "mhpmevent29h",    sscofpmf_32,  read_mhp=
-meventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT30H]   =3D { "mhpmevent30h",    sscofpmf,  read_mhpmev=
-enth,
-> +    [CSR_MHPMEVENT30H]   =3D { "mhpmevent30h",    sscofpmf_32,  read_mhp=
-meventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
-> -    [CSR_MHPMEVENT31H]   =3D { "mhpmevent31h",    sscofpmf,  read_mhpmev=
-enth,
-> +    [CSR_MHPMEVENT31H]   =3D { "mhpmevent31h",    sscofpmf_32,  read_mhp=
-meventh,
->                               write_mhpmeventh,
->                               .min_priv_ver =3D PRIV_VERSION_1_12_0      =
-  },
+> +#define CSR_MCYCLECFGH      0x721
+> +#define CSR_MINSTRETCFGH    0x722
+> +
+>  #define CSR_MHPMEVENT3H     0x723
+>  #define CSR_MHPMEVENT4H     0x724
+>  #define CSR_MHPMEVENT5H     0x725
+> @@ -885,6 +892,28 @@ typedef enum RISCVException {
+>  /* PMU related bits */
+>  #define MIE_LCOFIE                         (1 << IRQ_PMU_OVF)
 >
+> +#define MCYCLECFG_BIT_MINH                 BIT_ULL(62)
+> +#define MCYCLECFGH_BIT_MINH                BIT(30)
+> +#define MCYCLECFG_BIT_SINH                 BIT_ULL(61)
+> +#define MCYCLECFGH_BIT_SINH                BIT(29)
+> +#define MCYCLECFG_BIT_UINH                 BIT_ULL(60)
+> +#define MCYCLECFGH_BIT_UINH                BIT(28)
+> +#define MCYCLECFG_BIT_VSINH                BIT_ULL(59)
+> +#define MCYCLECFGH_BIT_VSINH               BIT(27)
+> +#define MCYCLECFG_BIT_VUINH                BIT_ULL(58)
+> +#define MCYCLECFGH_BIT_VUINH               BIT(26)
+> +
+> +#define MINSTRETCFG_BIT_MINH               BIT_ULL(62)
+> +#define MINSTRETCFGH_BIT_MINH              BIT(30)
+> +#define MINSTRETCFG_BIT_SINH               BIT_ULL(61)
+> +#define MINSTRETCFGH_BIT_SINH              BIT(29)
+> +#define MINSTRETCFG_BIT_UINH               BIT_ULL(60)
+> +#define MINSTRETCFGH_BIT_UINH              BIT(28)
+> +#define MINSTRETCFG_BIT_VSINH              BIT_ULL(59)
+> +#define MINSTRETCFGH_BIT_VSINH             BIT(27)
+> +#define MINSTRETCFG_BIT_VUINH              BIT_ULL(58)
+> +#define MINSTRETCFGH_BIT_VUINH             BIT(26)
+> +
+>  #define MHPMEVENT_BIT_OF                   BIT_ULL(63)
+>  #define MHPMEVENTH_BIT_OF                  BIT(31)
+>  #define MHPMEVENT_BIT_MINH                 BIT_ULL(62)
 > --
 > 2.34.1
 >
