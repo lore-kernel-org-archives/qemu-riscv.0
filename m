@@ -4,85 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB754C47077
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 15:56:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EDC5C3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 15:56:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rLmPD-0003A0-AU; Fri, 05 Jan 2024 10:46:43 -0500
+	id 1rLmTR-00035l-3x; Fri, 05 Jan 2024 10:51:05 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmOa-0001iP-Pu
- for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:46:06 -0500
-Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmST-000060-Ls
+ for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:50:05 -0500
+Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmOU-0003n1-V9
- for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:46:02 -0500
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-33723ad790cso1319588f8f.1
- for <qemu-riscv@nongnu.org>; Fri, 05 Jan 2024 07:45:56 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmSR-00011T-LY
+ for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:50:05 -0500
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-40e3712d259so10460445e9.3
+ for <qemu-riscv@nongnu.org>; Fri, 05 Jan 2024 07:50:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704469555; x=1705074355; darn=nongnu.org;
+ d=linaro.org; s=google; t=1704469801; x=1705074601; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RbnewdzJw2WIotOB6UCheBhSeiFExHVz6pISXRX/KZs=;
- b=wWWcE4ZMz7jSyR8BERdVhQ5fdM5Uw0UJqJBGbybWADWqeHA/6Zm+NazIwCBvMKycrW
- jncj9/hpBZXlwyUFGSMy6Riz8Jlr+8I4QRNcBVY/fl1ayHL7O3BJwICGD/nMI7a5pOTV
- TKZUKgXS+nQOLv/KJYSeartncYUbmHpGjR2XXh3B8szDogVIK9k331Kbnpnm/Cya54HM
- D1tt9Lj8FKpEot1W9qouSfpYd3sKQ8oczIo2gxP42tjRz3qGiSsUXgAyFzRDJ8rd5zIW
- c32mAF3NyJGvxzgGXul4gxoMf3RT0LACVzMYeqWbD66cAiMttpncleQDzstsCyXOazHe
- 4cIA==
+ bh=SDwxzH3vS9V/d1nX5dyRUP+IK7/Bx5gX/AEs8zKaqSE=;
+ b=serQmlLIe01mZ/Q4/bElvfh9EQf7ZBvIKcZy4qmSldLsvUS859MG0lwpZ6amaLkSp3
+ uDJIkL+28oYOdcbODmN9PVgUBfF1NFIJ0Pr8yr4HOODW3jDzAI5hbQx/ZhGn1LPXtHDN
+ Y7X0uuVB0zmqSs1qOoMWZOff5Y2sQqgKu3IQTwYs6HSVIAmc+Pfr2wrA/KaI4jcqOqO3
+ t8TbqnqowaqijPSJDiZOrg7B9XHEENzZT+JjBvWjrnpCabOBrAkiO+DVEQhoXS7q22/O
+ 6PdULmvbzC5lG13RZEK7cYrqfnAlnzG/iQ2nBEXaCaJ84PpcomS+B7Bl6jR6UYLXMiar
+ Vjig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704469555; x=1705074355;
+ d=1e100.net; s=20230601; t=1704469801; x=1705074601;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RbnewdzJw2WIotOB6UCheBhSeiFExHVz6pISXRX/KZs=;
- b=S4s5dFhTK4YHiInAAXpdxgEoVFQvTZNM2q/5neQ7CuR2o+wmOb2XuLQnJ2rUyvikfw
- FoO7f275eNFbTM+tj7WtP0HuXg1kn5DaP9CPpFlDPSJQ3uxSWLHJEdCWls8eEWeBXjqD
- z5J0zDLyhhFKloywJ9Sr7ipHGZGDWdTQlH/JI5Ffri4Xk7z9F49kYoCjbzxrRPh+7lAI
- iFj/N/68PVlfbfj0j4LMUh3YqU2pR2HXhkSSfbMa9oydDXj5dMCMz6FS98erbpM699nh
- jV62c2A0agET5Ss1VfNdX05R43McMojs8Ot3L+2yrdjCShU0K0YQQmhKuYRFLhrAtUUG
- ZFZw==
-X-Gm-Message-State: AOJu0YyYvpB9YwkJbXkDOM6W58U4oSHvS8Vbrq/Ph5eK+ctMnhI4QXe9
- G01QvvPU/+su08lQdGH4Nnv2G57qVjXfbQ==
-X-Google-Smtp-Source: AGHT+IHg+0OT3KRSSE5x1DHXNTZTW9W0UuTexnJBd7wkFGmaURJNKZhXNVpCc2y41EKLDdnS3IPcDg==
-X-Received: by 2002:a5d:650c:0:b0:337:5280:a14 with SMTP id
- x12-20020a5d650c000000b0033752800a14mr856805wru.170.1704469555497; 
- Fri, 05 Jan 2024 07:45:55 -0800 (PST)
+ bh=SDwxzH3vS9V/d1nX5dyRUP+IK7/Bx5gX/AEs8zKaqSE=;
+ b=gwCq6QqHg3JrKH+Go+CoekpIWrWNsRUIG90mx1VRv393cRJqmQqoS/R++d9rZ4iH9F
+ RzOzFUe9clvj8V1MvJbv6mTNvHwl5i4zT/kOr8egqpv1wrYygpyOlUg1Dfyb7IVLwOXs
+ bdglk7PKWj/WyjuUJPwY0NMCx25JM41bJyeq5Xw1OZMEohNnxJcAlNo/eT/fb/EWEZPE
+ H4oiGAyG/UjRQYf8LyqGy5Wf2s5aV0/CD/6RAAaag9VK/OCXHUZ268xT96+DUaCUgj1h
+ BbG+TkgBLHn4f3fB62WL2KHX4koV+7BNfiOLQgn7PIZ5TzQ5WKnUnbeWiY4iLKG4uAgr
+ kQ8A==
+X-Gm-Message-State: AOJu0YzNBC9HoX+eWPHjOGY2IIPgMR4BHWokJCW/smPfQt2LAzjUMNTB
+ P1YOP/8mD32AcE8ZdFfGvlssORDsXlGnpw==
+X-Google-Smtp-Source: AGHT+IHZhgpsMlbsYpnIF6g74vkVM44Ykg89QYw29B5DlHtEOAZm73Uhln07VdUJ0jn4/p0BBuuaKQ==
+X-Received: by 2002:a7b:cd96:0:b0:40d:5821:5148 with SMTP id
+ y22-20020a7bcd96000000b0040d58215148mr934968wmj.67.1704469801572; 
+ Fri, 05 Jan 2024 07:50:01 -0800 (PST)
 Received: from m1x-phil.lan (juv34-h02-176-184-26-1.dsl.sta.abo.bbox.fr.
  [176.184.26.1]) by smtp.gmail.com with ESMTPSA id
- x17-20020a5d6511000000b0033743c2d17dsm1609158wru.28.2024.01.05.07.45.53
+ b1-20020a5d4d81000000b00337405c06a6sm1621048wru.48.2024.01.05.07.50.00
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 05 Jan 2024 07:45:55 -0800 (PST)
+ Fri, 05 Jan 2024 07:50:01 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
- Gavin Shan <gshan@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
- Markus Armbruster <armbru@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>
-Subject: [PULL 24/71] machine: Use error handling when CPU type is checked
-Date: Fri,  5 Jan 2024 16:42:17 +0100
-Message-ID: <20240105154307.21385-25-philmd@linaro.org>
+ Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
+ Gavin Shan <gshan@redhat.com>,
+ =?UTF-8?q?Herv=C3=A9=20Poussineau?= <hpoussin@reactos.org>
+Subject: [PULL 68/71] hw/pci-host/raven: Propagate error in raven_realize()
+Date: Fri,  5 Jan 2024 16:43:01 +0100
+Message-ID: <20240105154307.21385-69-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240105154307.21385-1-philmd@linaro.org>
 References: <20240105154307.21385-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x334.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,54 +96,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Gavin Shan <gshan@redhat.com>
+When an Error** reference is available, it is better to
+propagate local errors, rather then using generic ones,
+which might terminate the whole QEMU process.
 
-Functions that use an Error **errp parameter to return errors should
-not also report them to the user, because reporting is the caller's
-job. The principle is violated by machine_run_board_init() because
-it calls error_report(), error_printf(), and exit(1) when the machine
-doesn't support the requested CPU type.
-
-Clean this up by using error_setg() and error_append_hint() instead.
-No functional change, as the only caller passes &error_fatal.
-
-Suggested-by: Igor Mammedov <imammedo@redhat.com>
-Signed-off-by: Gavin Shan <gshan@redhat.com>
-Reviewed-by: Markus Armbruster <armbru@redhat.com>
-Message-ID: <20231204004726.483558-2-gshan@redhat.com>
-[PMD: Correct error_append_hint() argument]
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
+Reviewed-by: Gavin Shan <gshan@redhat.com>
+Message-Id: <20231120213301.24349-26-philmd@linaro.org>
 ---
- hw/core/machine.c | 13 +++++++------
- 1 file changed, 7 insertions(+), 6 deletions(-)
+ hw/pci-host/raven.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/hw/core/machine.c b/hw/core/machine.c
-index 0198b54b39..1898d1d1d7 100644
---- a/hw/core/machine.c
-+++ b/hw/core/machine.c
-@@ -1477,15 +1477,16 @@ void machine_run_board_init(MachineState *machine, const char *mem_path, Error *
+diff --git a/hw/pci-host/raven.c b/hw/pci-host/raven.c
+index f71d4872c8..c7a0a2878a 100644
+--- a/hw/pci-host/raven.c
++++ b/hw/pci-host/raven.c
+@@ -345,8 +345,10 @@ static void raven_realize(PCIDevice *d, Error **errp)
+     d->config[PCI_LATENCY_TIMER] = 0x10;
+     d->config[PCI_CAPABILITY_LIST] = 0x00;
  
-         if (!machine_class->valid_cpu_types[i]) {
-             /* The user specified CPU is not valid */
--            error_report("Invalid CPU type: %s", machine->cpu_type);
--            error_printf("The valid types are: %s",
--                         machine_class->valid_cpu_types[0]);
-+            error_setg(errp, "Invalid CPU type: %s", machine->cpu_type);
-+            error_append_hint(errp, "The valid types are: %s",
-+                              machine_class->valid_cpu_types[0]);
-             for (i = 1; machine_class->valid_cpu_types[i]; i++) {
--                error_printf(", %s", machine_class->valid_cpu_types[i]);
-+                error_append_hint(errp, ", %s",
-+                                  machine_class->valid_cpu_types[i]);
-             }
--            error_printf("\n");
- 
--            exit(1);
-+            error_append_hint(errp, "\n");
-+            return;
-         }
-     }
- 
+-    memory_region_init_rom_nomigrate(&s->bios, OBJECT(s), "bios", BIOS_SIZE,
+-                                     &error_fatal);
++    if (!memory_region_init_rom_nomigrate(&s->bios, OBJECT(s), "bios",
++                                          BIOS_SIZE, errp)) {
++        return;
++    }
+     memory_region_add_subregion(get_system_memory(), (uint32_t)(-BIOS_SIZE),
+                                 &s->bios);
+     if (s->bios_name) {
 -- 
 2.41.0
 
