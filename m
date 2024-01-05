@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B647C47073
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 02:22:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83369C47074
+	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 02:24:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rLZqn-00047a-3m; Thu, 04 Jan 2024 21:22:21 -0500
+	id 1rLZsy-00054D-Id; Thu, 04 Jan 2024 21:24:36 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rLZql-00046z-7x; Thu, 04 Jan 2024 21:22:19 -0500
-Received: from mail-vs1-xe2a.google.com ([2607:f8b0:4864:20::e2a])
+ id 1rLZsx-00053e-5L; Thu, 04 Jan 2024 21:24:35 -0500
+Received: from mail-ua1-x929.google.com ([2607:f8b0:4864:20::929])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rLZqj-0007Zm-H4; Thu, 04 Jan 2024 21:22:19 -0500
-Received: by mail-vs1-xe2a.google.com with SMTP id
- ada2fe7eead31-4676dc16009so315433137.2; 
- Thu, 04 Jan 2024 18:22:16 -0800 (PST)
+ id 1rLZsv-00025Y-Ho; Thu, 04 Jan 2024 21:24:34 -0500
+Received: by mail-ua1-x929.google.com with SMTP id
+ a1e0cc1a2514c-7cc970f8156so390390241.2; 
+ Thu, 04 Jan 2024 18:24:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704421335; x=1705026135; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1704421472; x=1705026272; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=c7LTEIdFXgljpim3sgFtJtjZaBaJhf1rt+QsM+DgEAU=;
- b=DGuh5B50FFbsjcQo8tu6Qldrs2ROglnqiF7xSXazgBwnn4L4MKsUzpqW4+5dtejiCt
- Oyli+W17Tbqg2L3H47ro8iD1VvQd1lsAy3k9ve1QlT50Svq+nAYLfppFfDxIinTfOQSB
- O35A/lrmCZbnOWFFdmE923g3TpzZOcEVAAHpSc5sX6PuwJsXAxcBYdKw//qOmc0kC6xh
- dn6xo0N63ryf6V0z11k33fQrcuntbZrcZLltdLh0v69c3jqmcCIkmiyed5q5Coo+FW62
- 2IbHDVUvW6R14zUr6ixnCdWTqJGvwi/MxlUfvJo2bbF2dLDV1mz+M5GsBb+73Bu2ngoh
- g/MA==
+ bh=jtEY4DCww7WXkEjsIn7jh/VQK7DmUAMbEBa3/C1MbXg=;
+ b=mOJyaC5h4iRQVIsYqJQnvJ5G2TECouUqXOinFIpFOS9QkQa2m5/jogIaUhw3nvrUSu
+ IzWJFmilVTO9oWuOmXVGG8AdYlqfM8CKe5FWLSI1Gtot5MG+ssiu88vI6JXllebYClUv
+ fpUJ6HIbWFUUiB43dHNN27ER1wZzEJMm01NuiVY7kXfcXDK82dQr9Leypl2I45+ovfyk
+ tpo7Y7hSr9bcRlK+Ij/7viyJtN1Zm2Wt/q58cYpOnym2/SX65+3M0cc4dIpD1NKeLgoD
+ CtL/3MSqwL3QjQzgwYQMcUgv15E3t1piD+lKqA+4JSeBeq6uQs++8C2D7LvLw7HEplLC
+ Bs2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704421335; x=1705026135;
+ d=1e100.net; s=20230601; t=1704421472; x=1705026272;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=c7LTEIdFXgljpim3sgFtJtjZaBaJhf1rt+QsM+DgEAU=;
- b=r3Q3CsW2WR2hEX51A/BsmkSWh7EybiEwoTenCJ9K3U/zuWWo9aLCJyMi4XbiCHkTJG
- ir18uoEGIOr+P0koOOaRHNY2U+DL78rPyAsHfScsRQhP4HCZttwDD9CnqkI0q+ydCwNf
- bDHv5e21AaaVhC8V95KFAxn4rhZo+1uvhe7CuQkcqJglUjaL6osouOMpNTX5ad3kpjzm
- +KxMunKB9iuAK4xe0Q485rOG2ldmjaH2wUyjEdR8zigPR5z0qZNpj3zSGM+GeK3mot+l
- lcUrcgzDsStBGRKiz+A/IXRYTt4+rkyioBz+opIQTZpXuZb5v3w/dUU+bUYYDPPCUlhU
- EDvQ==
-X-Gm-Message-State: AOJu0YyizDeFXalQ37qKf+VFsjFRwMxwC3SCtYic1Sq1HgjuLagife5W
- K5zORFT3uTiMa5DezcNPa2QcoFfYzsABdCE2lSA=
-X-Google-Smtp-Source: AGHT+IHReZaLIS0UZgmYMR/u90ZLljcdL4QXdaDZIsCtMuLChSp2rxVssS+0sMFFB0T066yYLnx/JpjSp4mSCpmSjao=
-X-Received: by 2002:a05:6122:1294:b0:4b6:d112:7025 with SMTP id
- i20-20020a056122129400b004b6d1127025mr868931vkp.6.1704421335375; Thu, 04 Jan
- 2024 18:22:15 -0800 (PST)
+ bh=jtEY4DCww7WXkEjsIn7jh/VQK7DmUAMbEBa3/C1MbXg=;
+ b=BqS2ssuR7OXRyNZlwUpKnkX+LY2rNwBy5tgg6zET8dyfToHudbBe4OHV9lpw7sU0nN
+ qQ1qNs00G58a6ItQPMIDXmTRshWepLF53c4PdiKxm76PqYCII+TXpmU7Bpn9/OICuNjI
+ uI/NnMjtv7hPy/Vx1w6RP4jfacIAXIuGb8xBsm47GeHb0dCU4gnBwBHumzMVqHF7iJM9
+ HNAhy0cJ01aiy1iVIZR6Jv+BkhRaYU4QXezNGhQAoEQswD6YL08A7k/VPWiTDUGTAUXP
+ lAhvwxGTeUr8rIRpAedRXGAgeW5wMN+qG42vKmvrjQPPpjjKaIHz4fVRKgJT4QKny2VR
+ UCXw==
+X-Gm-Message-State: AOJu0YydyixxEg44faNgX8uzCETxKhMg6fq3tK4ZWPZpF1Cy4Wpmj5dJ
+ yQpj1fe6B0B4PRUUKI0HlDNSCNPIqf0yJJ+YJko=
+X-Google-Smtp-Source: AGHT+IGu/Wj0C2UXjFH8DEtFDAJnZIpaxd1NN6Cxt4Y6AeZ2LbzExi/f2vlKLoY5CW2hcjBkZUXgts62+fNSHuEbtpU=
+X-Received: by 2002:a05:6122:1b0e:b0:4b7:4cfb:4217 with SMTP id
+ er14-20020a0561221b0e00b004b74cfb4217mr1020484vkb.22.1704421471958; Thu, 04
+ Jan 2024 18:24:31 -0800 (PST)
 MIME-Version: 1.0
 References: <20231218125334.37184-1-dbarboza@ventanamicro.com>
- <20231218125334.37184-25-dbarboza@ventanamicro.com>
-In-Reply-To: <20231218125334.37184-25-dbarboza@ventanamicro.com>
+ <20231218125334.37184-26-dbarboza@ventanamicro.com>
+In-Reply-To: <20231218125334.37184-26-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 5 Jan 2024 12:21:49 +1000
-Message-ID: <CAKmqyKMv=mPXrB1wRV43GnUCQy0wjSif089dVzAvMX-b1N4pVQ@mail.gmail.com>
-Subject: Re: [PATCH v13 24/26] target/riscv: add 'parent' in profile
- description
+Date: Fri, 5 Jan 2024 12:24:05 +1000
+Message-ID: <CAKmqyKMmbdPyC9tuyxEtf4cHorVtWkqm-hvhMS0bTH3cOT3fdw@mail.gmail.com>
+Subject: Re: [PATCH v13 25/26] target/riscv: add RVA22S64 profile
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
  palmer@rivosinc.com, ajones@ventanamicro.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2a;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::929;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x929.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -94,20 +93,34 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On Mon, Dec 18, 2023 at 11:00=E2=80=AFPM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> Certain S-mode profiles, like RVA22S64 and RVA23S64, mandate all the
-> mandatory extensions of their respective U-mode profiles. RVA22S64
-> includes all mandatory extensions of RVA22U64, and the same happens with
-> RVA23 profiles.
+> The RVA22S64 profile consists of the following:
 >
-> Add a 'parent' field to allow profiles to enable other profiles. This
-> will allow us to describe S-mode profiles by specifying their parent
-> U-mode profile, then adding just the S-mode specific extensions.
+> - all mandatory extensions of RVA22U64;
+> - priv spec v1.12.0;
+> - satp mode sv39;
+> - Ssccptr, a cache related named feature that we're assuming always
+>   enable since we don't implement a cache;
+> - Other named features already implemented: Sstvecd, Sstvala,
+>   Sscounterenw;
+> - the new Svade named feature that was recently added.
 >
-> We're naming the field 'parent' to consider the possibility of other
-> uses (e.g. a s-mode profile including a previous s-mode profile) in the
-> future.
+> Most of the work is already done, so this patch is enough to implement
+> the profile.
 >
-> Suggested-by: Andrew Jones <ajones@ventanamicro.com>
+> After this patch, the 'rva22s64' user flag alone can be used with the
+> rva64i CPU to boot Linux:
+>
+> -cpu rv64i,rva22s64=3Dtrue
+>
+> This is the /proc/cpuinfo with this profile enabled:
+>
+>  # cat /proc/cpuinfo
+> processor       : 0
+> hart            : 0
+> isa             : rv64imafdc_zicbom_zicbop_zicboz_zicntr_zicsr_zifencei_z=
+ihintpause_zihpm_zfhmin_zca_zcd_zba_zbb_zbs_zkt_svinval_svpbmt
+> mmu             : sv39
+>
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
@@ -116,78 +129,54 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/cpu.c         |  1 +
->  target/riscv/cpu.h         |  1 +
->  target/riscv/tcg/tcg-cpu.c | 14 +++++++++++++-
->  3 files changed, 15 insertions(+), 1 deletion(-)
+>  target/riscv/cpu.c | 32 ++++++++++++++++++++++++++++++++
+>  1 file changed, 32 insertions(+)
 >
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 6795f5da41..aa33e7a1cf 100644
+> index aa33e7a1cf..f57a9ee298 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -1540,6 +1540,7 @@ Property riscv_cpu_options[] =3D {
->   * having a cfg offset) at this moment.
->   */
->  static RISCVCPUProfile RVA22U64 =3D {
-> +    .parent =3D NULL,
->      .name =3D "rva22u64",
->      .misa_ext =3D RVI | RVM | RVA | RVF | RVD | RVC | RVU,
->      .priv_spec =3D RISCV_PROFILE_ATTR_UNUSED,
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 6c5fceb5f5..44fb0a9ca8 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -77,6 +77,7 @@ const char *riscv_get_misa_ext_description(uint32_t bit=
-);
->  #define CPU_CFG_OFFSET(_prop) offsetof(struct RISCVCPUConfig, _prop)
->
->  typedef struct riscv_cpu_profile {
-> +    struct riscv_cpu_profile *parent;
->      const char *name;
->      uint32_t misa_ext;
->      bool enabled;
-> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> index 152f95718b..6284d36809 100644
-> --- a/target/riscv/tcg/tcg-cpu.c
-> +++ b/target/riscv/tcg/tcg-cpu.c
-> @@ -797,7 +797,7 @@ static void riscv_cpu_validate_profile(RISCVCPU *cpu,
->      CPURISCVState *env =3D &cpu->env;
->      const char *warn_msg =3D "Profile %s mandates disabled extension %s"=
-;
->      bool send_warn =3D profile->user_set && profile->enabled;
-> -    bool profile_impl =3D true;
-> +    bool parent_enabled, profile_impl =3D true;
->      int i;
->
->  #ifndef CONFIG_USER_ONLY
-> @@ -850,6 +850,13 @@ static void riscv_cpu_validate_profile(RISCVCPU *cpu=
-,
+> @@ -1560,8 +1560,40 @@ static RISCVCPUProfile RVA22U64 =3D {
 >      }
+>  };
 >
->      profile->enabled =3D profile_impl;
+> +/*
+> + * As with RVA22U64, RVA22S64 also defines 'named features'.
+> + *
+> + * Cache related features that we consider enabled since we don't
+> + * implement cache: Ssccptr
+> + *
+> + * Other named features that we already implement: Sstvecd, Sstvala,
+> + * Sscounterenw
+> + *
+> + * Named features that we need to enable: svade
+> + *
+> + * The remaining features/extensions comes from RVA22U64.
+> + */
+> +static RISCVCPUProfile RVA22S64 =3D {
+> +    .parent =3D &RVA22U64,
+> +    .name =3D "rva22s64",
+> +    .misa_ext =3D RVS,
+> +    .priv_spec =3D PRIV_VERSION_1_12_0,
+> +    .satp_mode =3D VM_1_10_SV39,
+> +    .ext_offsets =3D {
+> +        /* rva22s64 exts */
+> +        CPU_CFG_OFFSET(ext_zifencei), CPU_CFG_OFFSET(ext_svpbmt),
+> +        CPU_CFG_OFFSET(ext_svinval),
 > +
-> +    if (profile->parent !=3D NULL) {
-> +        parent_enabled =3D object_property_get_bool(OBJECT(cpu),
-> +                                                  profile->parent->name,
-> +                                                  NULL);
-> +        profile->enabled =3D profile->enabled && parent_enabled;
-> +    }
->  }
->
->  static void riscv_cpu_validate_profiles(RISCVCPU *cpu)
-> @@ -1107,6 +1114,11 @@ static void cpu_set_profile(Object *obj, Visitor *=
-v, const char *name,
->      profile->user_set =3D true;
->      profile->enabled =3D value;
->
-> +    if (profile->parent !=3D NULL) {
-> +        object_property_set_bool(obj, profile->parent->name,
-> +                                 profile->enabled, NULL);
-> +    }
+> +        /* rva22s64 named features */
+> +        CPU_CFG_OFFSET(svade),
 > +
->      if (profile->enabled) {
->          cpu->env.priv_ver =3D profile->priv_spec;
->      }
+> +        RISCV_PROFILE_EXT_LIST_END
+> +    }
+> +};
+> +
+>  RISCVCPUProfile *riscv_profiles[] =3D {
+>      &RVA22U64,
+> +    &RVA22S64,
+>      NULL,
+>  };
+>
 > --
 > 2.43.0
 >
