@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 172B7C47079
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 15:52:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EADDC3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 15:52:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rLmPv-0005hO-Mj; Fri, 05 Jan 2024 10:47:28 -0500
+	id 1rLmRT-0005eZ-MK; Fri, 05 Jan 2024 10:49:03 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmOn-000209-J9
- for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:46:25 -0500
-Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmQf-0000Wy-Uf
+ for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:48:14 -0500
+Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmOk-0003qC-NO
- for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:46:17 -0500
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-40d76923ec4so16163805e9.3
- for <qemu-riscv@nongnu.org>; Fri, 05 Jan 2024 07:46:12 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmQc-00052G-EV
+ for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:48:13 -0500
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-336746c7b6dso1227765f8f.0
+ for <qemu-riscv@nongnu.org>; Fri, 05 Jan 2024 07:48:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704469572; x=1705074372; darn=nongnu.org;
+ d=linaro.org; s=google; t=1704469688; x=1705074488; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TaWEpr5f/U/wZNl7ClicoZnkchpUab2rsBaBsce3JqA=;
- b=ILKT0InOW9Wh0TE9nnBj+WiviH/WaLZ2lala2LTM3Aovv0TCxl0Pbwsc9kFU21n0b9
- 1DerARmCTs0ZNtAjGFfFlADSzSrWqBtdT6c9OexpGORqpgTGKiQNneNccpIuTSkvuVZB
- KblNMxRPeXNDg8ICd5uQ0ErMktTa9w/pq+f3jAKVX9Lm6tqPTV8f5bFBW0wf9himunrL
- ykMetXUvmr1a3RXbLacRdY3kjsrVVVT3RWv61tAUS4HoEu+kGsd6HSiup7Df9XZOy+8D
- CBcAwY2UHg1DBoGyKfZi4IIGiL+7BQuOmcT36oKycCdiqNVOKEpVv4U2tglj2CqkVMAT
- ED9g==
+ bh=rwNOMMIAYzGSLWabz4mQJXWqt1PJzQTuexNMmuOK734=;
+ b=zTpWELjazCjgv0efnlE4zgCZ6HMfKPlhg7nalHCtNUcEufcNlCWuRjuP6LJ9uo75Ur
+ +ULrhv/L//U7gescR667EK9aNhCAPgAS8DWNrKeVSbPTXSLugeLAee/nUj3nl4cEBez/
+ F331TfRBGXG4m0zMU6p+k6Nh0HmUpU0NP91eJFH1AGeyRcyX2GNwnhPpWO9ksIBaZlps
+ eR+BMefEpXYEBfigksRECRFsDbzf+JDqMOeGJVmHb+MRGf37TATqYwxecIizGM5M+ZD3
+ 7TxuOS9ny3tgcLdMuthxk+SbODKAIGH7osJoZBxrlUBgL/0xxDSVgVPbryjwvtywRgcy
+ kFdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704469572; x=1705074372;
+ d=1e100.net; s=20230601; t=1704469688; x=1705074488;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TaWEpr5f/U/wZNl7ClicoZnkchpUab2rsBaBsce3JqA=;
- b=oPab5fmqGNsUS0X5lMMJ403UJrwUQ/SHBUizjYqTQZ7cFt7Dd9lR7qGId8wNjkASEd
- 4IXFHiaFVSt64GnGCBMoeB2ti/KZIqYxfKT4iOFnbSGZsYXO+vebacAwS78g1RBlRyAc
- 5v9ImmlVh5Jk4w0eywvq7m7o/3anP/woY3TmHdVFoMlzKkB1epuZKu/CaAGc1m42++dv
- G3jVoOoqXJ0Ly8b6uT8wDC/0U5ae1xaQF4vOI+MTwo2ZAONLzlL9E0Dh4NBakt6mfyrs
- LmBkoblCZ/mtvaWr42MnccsGIq2EWzUfl1Zpr7cY61ZF5tSWN8WKdEDlaXmkgQatcnWJ
- ovvA==
-X-Gm-Message-State: AOJu0Yze5hLASJQ9qZFwar8dR1qnf9ONdILaksmhJikFsyBYVkNB6Vtu
- alb9Gh/Rs69Qha2sGcs52dYiM2dPX6KpsQ==
-X-Google-Smtp-Source: AGHT+IHchGDzGZUXyaUKE7Ua7noUpkAg1Gg/cGtAMRVa5jV2c1mKHycg+NpR9CLOzU4msVwipqj0dQ==
-X-Received: by 2002:a05:600c:138e:b0:40d:9485:cc89 with SMTP id
- u14-20020a05600c138e00b0040d9485cc89mr1204952wmf.74.1704469571776; 
- Fri, 05 Jan 2024 07:46:11 -0800 (PST)
+ bh=rwNOMMIAYzGSLWabz4mQJXWqt1PJzQTuexNMmuOK734=;
+ b=JmSg7ZGlfN1wmiiMP3Qrw4V5L5wHloA5OSSZfWaQ1Q7k3hLeGt07d/3Uxp3QBSgOyR
+ vqC2g6h+3hGrwu+AmTOGZQpiQFncZw3oYUIO4+tg6LsLVNKNyzaNSRpX1WgQ1zNImVjD
+ 6eLtUSrnKsiU8xpddurQa+Ca1ex/gDDuQaD2XPmotBsCeMQN6x9ATcGaq4jr0y6HDfto
+ OvQFlopcG+Vfzd6PxqlEvwwp5m+/6Rsi4VwmlrhllD4KTYObRwVaRjNIccIU7Y6VfU/+
+ E0E9OgdL1NnVO5mNYdR9o3QahN0GAvPqDObUT1c6Ftj41RzMUVclvxFDvTTS1dSAiU9i
+ c6eA==
+X-Gm-Message-State: AOJu0YwggQ7vv0qKqq9h5Ii852sH86Bs/5hdOiYV9dZMiYqyYhEnYOK4
+ 1i8QknJ0Z0VgS/FGhLJ8mMhXYYZAKuBnYQ==
+X-Google-Smtp-Source: AGHT+IE3AwHJlxhlvMqgvF8M8h0KfKHRXRjT1nqeu0wbgl9Vs7yTQ8aq+uC0QVut0myi6CcQGNipwQ==
+X-Received: by 2002:adf:e0d0:0:b0:336:e366:471 with SMTP id
+ m16-20020adfe0d0000000b00336e3660471mr1336264wri.58.1704469688486; 
+ Fri, 05 Jan 2024 07:48:08 -0800 (PST)
 Received: from m1x-phil.lan (juv34-h02-176-184-26-1.dsl.sta.abo.bbox.fr.
  [176.184.26.1]) by smtp.gmail.com with ESMTPSA id
- k9-20020a05600c1c8900b0040e3a1f88f2sm1376690wms.15.2024.01.05.07.46.10
+ o5-20020adfca05000000b00336ee9edbb3sm1605985wrh.94.2024.01.05.07.48.07
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 05 Jan 2024 07:46:11 -0800 (PST)
+ Fri, 05 Jan 2024 07:48:08 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
- Gavin Shan <gshan@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>
-Subject: [PULL 27/71] machine: Print CPU model name instead of CPU type
-Date: Fri,  5 Jan 2024 16:42:20 +0100
-Message-ID: <20240105154307.21385-28-philmd@linaro.org>
+ Peter Xu <peterx@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Gavin Shan <gshan@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ David Hildenbrand <david@redhat.com>
+Subject: [PULL 47/71] memory: Simplify memory_region_init_rom_nomigrate() calls
+Date: Fri,  5 Jan 2024 16:42:40 +0100
+Message-ID: <20240105154307.21385-48-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240105154307.21385-1-philmd@linaro.org>
 References: <20240105154307.21385-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::331;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,52 +97,48 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Gavin Shan <gshan@redhat.com>
+Mechanical change using the following coccinelle script:
 
-The names of supported CPU models instead of CPU types should be
-printed when the user specified CPU type isn't supported, to be
-consistent with the output from '-cpu ?'.
+@@
+expression mr, owner, arg3, arg4, errp;
+@@
+-   memory_region_init_rom_nomigrate(mr, owner, arg3, arg4, &errp);
+    if (
+-       errp
++       !memory_region_init_rom_nomigrate(mr, owner, arg3, arg4, &errp)
+    ) {
+        ...
+        return;
+    }
 
-Correct the error messages to print CPU model names instead of CPU
-type names.
+and removing the local Error variable.
 
-Signed-off-by: Gavin Shan <gshan@redhat.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Message-ID: <20231204004726.483558-5-gshan@redhat.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Peter Xu <peterx@redhat.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Gavin Shan <gshan@redhat.com>
+Message-Id: <20231120213301.24349-5-philmd@linaro.org>
 ---
- hw/core/machine.c | 14 +++++++++-----
- 1 file changed, 9 insertions(+), 5 deletions(-)
+ system/memory.c | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
 
-diff --git a/hw/core/machine.c b/hw/core/machine.c
-index c523ce32eb..fc239101f9 100644
---- a/hw/core/machine.c
-+++ b/hw/core/machine.c
-@@ -1421,15 +1421,19 @@ static bool is_cpu_type_supported(const MachineState *machine, Error **errp)
+diff --git a/system/memory.c b/system/memory.c
+index 72c6441e20..3997ac5928 100644
+--- a/system/memory.c
++++ b/system/memory.c
+@@ -3601,11 +3601,8 @@ void memory_region_init_rom(MemoryRegion *mr,
+                             Error **errp)
+ {
+     DeviceState *owner_dev;
+-    Error *err = NULL;
  
-         /* The user specified CPU type isn't valid */
-         if (!mc->valid_cpu_types[i]) {
--            error_setg(errp, "Invalid CPU type: %s", machine->cpu_type);
-+            g_autofree char *requested = cpu_model_from_type(machine->cpu_type);
-+            error_setg(errp, "Invalid CPU model: %s", requested);
-             if (!mc->valid_cpu_types[1]) {
--                error_append_hint(errp, "The only valid type is: %s\n",
--                                  mc->valid_cpu_types[0]);
-+                g_autofree char *model = cpu_model_from_type(
-+                                                 mc->valid_cpu_types[0]);
-+                error_append_hint(errp, "The only valid type is: %s\n", model);
-             } else {
--                error_append_hint(errp, "The valid types are: ");
-+                error_append_hint(errp, "The valid models are: ");
-                 for (i = 0; mc->valid_cpu_types[i]; i++) {
-+                    g_autofree char *model = cpu_model_from_type(
-+                                                 mc->valid_cpu_types[i]);
-                     error_append_hint(errp, "%s%s",
--                                      mc->valid_cpu_types[i],
-+                                      model,
-                                       mc->valid_cpu_types[i + 1] ? ", " : "");
-                 }
-                 error_append_hint(errp, "\n");
+-    memory_region_init_rom_nomigrate(mr, owner, name, size, &err);
+-    if (err) {
+-        error_propagate(errp, err);
++    if (!memory_region_init_rom_nomigrate(mr, owner, name, size, errp)) {
+         return;
+     }
+     /* This will assert if owner is neither NULL nor a DeviceState.
 -- 
 2.41.0
 
