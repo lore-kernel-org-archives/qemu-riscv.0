@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86811C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 15:47:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0091EC3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 15:48:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rLmPO-0004IV-JW; Fri, 05 Jan 2024 10:46:54 -0500
+	id 1rLmPO-0004JJ-Pl; Fri, 05 Jan 2024 10:46:56 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmOW-0001dW-IP
- for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:46:03 -0500
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmOc-0001mC-Qh
+ for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:46:06 -0500
+Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmOR-0003mZ-FH
- for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:46:00 -0500
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-3374d309eebso1223104f8f.3
- for <qemu-riscv@nongnu.org>; Fri, 05 Jan 2024 07:45:50 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmOa-0003ny-HK
+ for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:46:06 -0500
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-40d5b89e2bfso16280385e9.0
+ for <qemu-riscv@nongnu.org>; Fri, 05 Jan 2024 07:46:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704469549; x=1705074349; darn=nongnu.org;
+ d=linaro.org; s=google; t=1704469561; x=1705074361; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3jkeu47vffO/ERd6kLypsT3czQKlKT7aS4JG6Pky2DY=;
- b=h9EycmOGdrNO5rvwWd01oYWHv05fzv3TQOZuWVJE4irUf8D6knzOusi9vZM65kRooH
- BEm9jur62/mXsreihLsy0Ttwdqcp6z8LIde3lXEc6xdDoz/dJhY32YF4Yx1slTjbfU/y
- XD3f1tVWwy3d+lsa3TQD0TtFURSS4fvcSiW6s6TvHWtpQfgghuaCSAoCYOmBNKht3aDc
- HbttmLSi7tlKkplwsxdxnnhu8F/YZ8CS08Tea+Pwx49ZGs9oHyd0WCxZVjeKYSuGPluZ
- eZS8RDARtOWdy8jD9QopSseYJuZWLC0lSd3ghyYrIZM1d0AYuvJTLPHdmMbO6/Sj246l
- NDdA==
+ bh=Z1uFhaGSAXCVtK5H8w3hTtFzEkQOw8kna05bCiblS/M=;
+ b=f+PT+rUvYR9fqDBm8gjVu32P9inyKy7hXUYxxSF8Nm5iMU6IIL/QaayarcXkX86jN0
+ ddqtdXG29N9ymQdvb/Q4DIkDf7qtkmW5KtkNRv8wBMVR/dqD8yCg8HuVmZiooWz8kYW+
+ T4EVbq3y1P8OdhUnDoWCgionN9RQoFVQ/lxWP14p5UwHRKDzgO4AT9HWSOip9AeOXb7g
+ MwAZsFozCxcCk0Qf/kqrZ07wOE7Kyy6RyBgfXUaqTyzdQkv8dVOpjegVm8iHvXDVuRNp
+ 3AL5ocMUl6zbxkiD/5bqwyJXiLtsffKsBzSFPyoPVcYbZeMBYduoLC7oF93QCrbRwaWg
+ F1TA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704469549; x=1705074349;
+ d=1e100.net; s=20230601; t=1704469561; x=1705074361;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3jkeu47vffO/ERd6kLypsT3czQKlKT7aS4JG6Pky2DY=;
- b=vgV6rp9yWU6RedeWqu1XU9n3Y1VcJhBTUUwJJjBydCE8SCSrzryPE7T9VGmoQk0P3F
- MHTi+utywCqYLgk2mMbVrQenHi4DcZXPkFVnqSY7zQS02Vxjs2RNhTf2uqmZ2t8SW4Z2
- kqdexR6PvBeYxTrvLKV2L02iBrLPD9n5vKdelhcz3S/Df65QoO3qhBezoSSEMiZGkz/P
- K5Yrd1YyfYoGAx7vh+eq0hsS4ICogRrxUOUiXKYORiMPb5v9QMGYkcd/4MqhO/4C4AZR
- CGpzkHxlBEHPC//In6zprQT8j9f6nWTf8XJusbjAEpMmcXnd1Mwo4qaKLO7sCpcwpAPd
- Q/Rg==
-X-Gm-Message-State: AOJu0Yw9cPd+Ygm2Qxqga7Ca4pNjf9sdPrgQFC+aWlnP1mRwKgAr0uYB
- qFYDbNm6VR6wE0CFV80L1KAPtVhqc+r8gw==
-X-Google-Smtp-Source: AGHT+IEYAvOKmZbGFZqgZ8JX8GTX59rCOn9IIqs3TPU4/SxaUYqyvkZImfDIkP70g1JHlRCNwNu+ow==
-X-Received: by 2002:a5d:5227:0:b0:337:5588:801f with SMTP id
- i7-20020a5d5227000000b003375588801fmr1201012wra.57.1704469549409; 
- Fri, 05 Jan 2024 07:45:49 -0800 (PST)
+ bh=Z1uFhaGSAXCVtK5H8w3hTtFzEkQOw8kna05bCiblS/M=;
+ b=aOgFnouaUSk38y7kOnAnhswGA1yBSbtbVOvAsx0LO33wYew2LB3J39u1dQDqV+J+3D
+ Ur1y0jJ5mDbLqr2LKn62lzvfDmRnpVeKAp7L7vWDdFwZmj2fTD7eM9IXZvoHehDz8aNB
+ 3JcLhjbGXAAn1E99LIjstRxURwj09wJhlLpZmnA81fY1AO7YN/RXcuRJx/B+Ihmd0gak
+ gBm0VPVeti14Fp8hm4TYkJQBqdbkYRx4xOfud0M3ebm1yHR56NsB6LDDKyOabddRAdHF
+ SWG7TAMmQQ+MtxTu++5D9aGch/6nW+SXCf+i5HyNTb65YUrK6ScSn0RtJ8C0TyJKLkok
+ fHEw==
+X-Gm-Message-State: AOJu0Yw8BJe1s+hFi0KmQ/6TRF0ZbMPgT7anLDnV6lv7uKFBXFvBGQcY
+ PB7t7laTgOaZj4aaxu23TY2B3z+7h2bk5g==
+X-Google-Smtp-Source: AGHT+IGNIP2qF+lk734+mVjuRLP7zjtWDlqmba3PqBdgJ+gZ58KdYl5CKMtUGzmbo0p3bP/yZnjyKQ==
+X-Received: by 2002:a05:600c:3b95:b0:40e:3532:2f6f with SMTP id
+ n21-20020a05600c3b9500b0040e35322f6fmr1208080wms.182.1704469560809; 
+ Fri, 05 Jan 2024 07:46:00 -0800 (PST)
 Received: from m1x-phil.lan (juv34-h02-176-184-26-1.dsl.sta.abo.bbox.fr.
  [176.184.26.1]) by smtp.gmail.com with ESMTPSA id
- d7-20020adfe2c7000000b00336d24b4847sm1592885wrj.114.2024.01.05.07.45.48
+ f13-20020a05600c154d00b0040e3635ca65sm1945854wmg.2.2024.01.05.07.45.59
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 05 Jan 2024 07:45:49 -0800 (PST)
+ Fri, 05 Jan 2024 07:46:00 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
+ Gavin Shan <gshan@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
  Eduardo Habkost <eduardo@habkost.net>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>, Paolo Bonzini <pbonzini@redhat.com>
-Subject: [PULL 23/71] hw/core: Add machine_class_default_cpu_type()
-Date: Fri,  5 Jan 2024 16:42:16 +0100
-Message-ID: <20240105154307.21385-24-philmd@linaro.org>
+ Yanan Wang <wangyanan55@huawei.com>
+Subject: [PULL 25/71] machine: Introduce helper is_cpu_type_supported()
+Date: Fri,  5 Jan 2024 16:42:18 +0100
+Message-ID: <20240105154307.21385-26-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240105154307.21385-1-philmd@linaro.org>
 References: <20240105154307.21385-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::432;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x432.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::333;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x333.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,69 +97,132 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add a helper to return a machine default CPU type.
+From: Gavin Shan <gshan@redhat.com>
 
-If this machine is restricted to a single CPU type,
-use it as default, obviously.
+The logic, to check if the specified CPU type is supported in
+machine_run_board_init(), is independent enough. Factor it out into
+helper is_cpu_type_supported(). machine_run_board_init() looks a bit
+clean with this. Since we're here, @machine_class is renamed to @mc to
+avoid multiple line spanning of code. The comments are tweaked a bit
+either.
 
+No functional change intended.
+
+Signed-off-by: Gavin Shan <gshan@redhat.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Message-ID: <20231204004726.483558-3-gshan@redhat.com>
+[PMD: Only call new helper if machine->cpu_type is not NULL]
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20231116163726.28952-1-philmd@linaro.org>
 ---
- include/hw/boards.h | 6 ++++++
- hw/core/machine.c   | 8 ++++++++
- system/vl.c         | 2 +-
- 3 files changed, 15 insertions(+), 1 deletion(-)
+ hw/core/machine.c | 84 ++++++++++++++++++++++++++---------------------
+ 1 file changed, 46 insertions(+), 38 deletions(-)
 
-diff --git a/include/hw/boards.h b/include/hw/boards.h
-index 8af165f4dc..bcfde8a84d 100644
---- a/include/hw/boards.h
-+++ b/include/hw/boards.h
-@@ -24,6 +24,12 @@ OBJECT_DECLARE_TYPE(MachineState, MachineClass, MACHINE)
- 
- extern MachineState *current_machine;
- 
-+/**
-+ * machine_class_default_cpu_type: Return the machine default CPU type.
-+ * @mc: Machine class
-+ */
-+const char *machine_class_default_cpu_type(MachineClass *mc);
-+
- void machine_add_audiodev_property(MachineClass *mc);
- void machine_run_board_init(MachineState *machine, const char *mem_path, Error **errp);
- bool machine_usb(MachineState *machine);
 diff --git a/hw/core/machine.c b/hw/core/machine.c
-index 2699bcba53..0198b54b39 100644
+index 1898d1d1d7..0119b11fc8 100644
 --- a/hw/core/machine.c
 +++ b/hw/core/machine.c
-@@ -1390,6 +1390,14 @@ out:
-     return r;
+@@ -1399,12 +1399,53 @@ const char *machine_class_default_cpu_type(MachineClass *mc)
+     return mc->default_cpu_type;
  }
  
-+const char *machine_class_default_cpu_type(MachineClass *mc)
++static bool is_cpu_type_supported(const MachineState *machine, Error **errp)
 +{
-+    if (mc->valid_cpu_types && !mc->valid_cpu_types[1]) {
-+        /* Only a single CPU type allowed: use it as default. */
-+        return mc->valid_cpu_types[0];
++    MachineClass *mc = MACHINE_GET_CLASS(machine);
++    ObjectClass *oc = object_class_by_name(machine->cpu_type);
++    CPUClass *cc;
++    int i;
++
++    /*
++     * Check if the user specified CPU type is supported when the valid
++     * CPU types have been determined. Note that the user specified CPU
++     * type is provided through '-cpu' option.
++     */
++    if (mc->valid_cpu_types) {
++        for (i = 0; mc->valid_cpu_types[i]; i++) {
++            if (object_class_dynamic_cast(oc, mc->valid_cpu_types[i])) {
++                break;
++            }
++        }
++
++        /* The user specified CPU type isn't valid */
++        if (!mc->valid_cpu_types[i]) {
++            error_setg(errp, "Invalid CPU type: %s", machine->cpu_type);
++            error_append_hint(errp, "The valid types are: %s",
++                              mc->valid_cpu_types[0]);
++            for (i = 1; mc->valid_cpu_types[i]; i++) {
++                error_append_hint(errp, ", %s", mc->valid_cpu_types[i]);
++            }
++
++            error_append_hint(errp, "\n");
++            return false;
++        }
 +    }
-+    return mc->default_cpu_type;
++
++    /* Check if CPU type is deprecated and warn if so */
++    cc = CPU_CLASS(oc);
++    if (cc && cc->deprecation_note) {
++        warn_report("CPU model %s is deprecated -- %s",
++                    machine->cpu_type, cc->deprecation_note);
++    }
++
++    return true;
 +}
- 
++
  void machine_run_board_init(MachineState *machine, const char *mem_path, Error **errp)
  {
-diff --git a/system/vl.c b/system/vl.c
-index 6b87bfa32c..fbdf8bd55a 100644
---- a/system/vl.c
-+++ b/system/vl.c
-@@ -3737,7 +3737,7 @@ void qemu_init(int argc, char **argv)
-     migration_object_init();
+     ERRP_GUARD();
+     MachineClass *machine_class = MACHINE_GET_CLASS(machine);
+-    ObjectClass *oc = object_class_by_name(machine->cpu_type);
+-    CPUClass *cc;
  
-     /* parse features once if machine provides default cpu_type */
--    current_machine->cpu_type = machine_class->default_cpu_type;
-+    current_machine->cpu_type = machine_class_default_cpu_type(machine_class);
-     if (cpu_option) {
-         current_machine->cpu_type = parse_cpu_option(cpu_option);
+     /* This checkpoint is required by replay to separate prior clock
+        reading from the other reads, because timer polling functions query
+@@ -1459,42 +1500,9 @@ void machine_run_board_init(MachineState *machine, const char *mem_path, Error *
+         machine->ram = machine_consume_memdev(machine, machine->memdev);
      }
+ 
+-    /* If the machine supports the valid_cpu_types check and the user
+-     * specified a CPU with -cpu check here that the user CPU is supported.
+-     */
+-    if (machine_class->valid_cpu_types && machine->cpu_type) {
+-        int i;
+-
+-        for (i = 0; machine_class->valid_cpu_types[i]; i++) {
+-            if (object_class_dynamic_cast(oc,
+-                                          machine_class->valid_cpu_types[i])) {
+-                /* The user specified CPU is in the valid field, we are
+-                 * good to go.
+-                 */
+-                break;
+-            }
+-        }
+-
+-        if (!machine_class->valid_cpu_types[i]) {
+-            /* The user specified CPU is not valid */
+-            error_setg(errp, "Invalid CPU type: %s", machine->cpu_type);
+-            error_append_hint(errp, "The valid types are: %s",
+-                              machine_class->valid_cpu_types[0]);
+-            for (i = 1; machine_class->valid_cpu_types[i]; i++) {
+-                error_append_hint(errp, ", %s",
+-                                  machine_class->valid_cpu_types[i]);
+-            }
+-
+-            error_append_hint(errp, "\n");
+-            return;
+-        }
+-    }
+-
+-    /* Check if CPU type is deprecated and warn if so */
+-    cc = CPU_CLASS(oc);
+-    if (cc && cc->deprecation_note) {
+-        warn_report("CPU model %s is deprecated -- %s", machine->cpu_type,
+-                    cc->deprecation_note);
++    /* Check if the CPU type is supported */
++    if (machine->cpu_type && !is_cpu_type_supported(machine, errp)) {
++        return;
+     }
+ 
+     if (machine->cgs) {
 -- 
 2.41.0
 
