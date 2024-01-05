@@ -4,84 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A8DAC3DA6E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1148C47077
 	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 15:46:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rLmNY-0000NN-FL; Fri, 05 Jan 2024 10:45:00 -0500
+	id 1rLmNF-00075X-Kr; Fri, 05 Jan 2024 10:44:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmNW-0000Eq-Jd
- for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:44:58 -0500
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmND-0006rH-KX
+ for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:44:39 -0500
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmNG-0003Ly-Og
- for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:44:57 -0500
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-3367a304091so1312115f8f.3
- for <qemu-riscv@nongnu.org>; Fri, 05 Jan 2024 07:44:42 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmN8-0003Ki-Sj
+ for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:44:39 -0500
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-40e3b43173eso2020075e9.1
+ for <qemu-riscv@nongnu.org>; Fri, 05 Jan 2024 07:44:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704469481; x=1705074281; darn=nongnu.org;
+ d=linaro.org; s=google; t=1704469473; x=1705074273; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=u+LOg4cE3e/L+FkF/kdo/NDds7gIy3v+MrTgt4iIEa4=;
- b=n5kSfdb/lfP7oDDbyCG5oqr7XHssSJaEsPSnUqsTFei00qGvkLC5F377mhnpJvZE/v
- pe1zbxhC7rYsHfDr+65vayV6/AelRC1ynexpKTGiDSUJddWM6m/EpBQ/fCL/rFzq429v
- Ies5iUwKXbTH0oWxDVWR8sIqeA8DYXe/lkEy4V63Uw4u6nQcsA+Ux6uvLRFawF55WJKF
- XOOVx3bzHJaD8hdAwnT7WpEtelvVEmbKO0kap2TItCVTL5G24Prh+j14VtxOnPm8/QNR
- PKbWArQzkF2Aj28LuacMuelFJJFoV5OHawvWr39qMV+4vM0libGicCScHhvOfzhpSTP7
- 4Rzg==
+ bh=7xMSbSX6JUqisE+ZC80AlkX0gZxRGpO/C3MZvmfxXXw=;
+ b=LXY91qUUH1TUmvuQBu09q4hAozPHbS2k9DAfDt+/kStq0aiWQuk8boP1tWxU2Iz0Mh
+ 2Z0HidpLfbAgEh17zxkdnnTO4ZQfFVJx4MHAnX3PKLxnNlSwXMUpnmQYfZgSZ5sOYVLZ
+ WpARwsXsNNln+7mHTjrtxAUXSVnFfHrsggqDP67xhFo7+v1Hf2ngjOz924Wxvl62fZxk
+ K8+Vik8J75c/9euLvAyAHXR2QUaervBwNX2FCxkN2I+UEF/F8ol+SFH8RFmvQmCUIsf4
+ 1FRXD9L4RLmCt1GABjhBFmDLrWAHa6Yf8iNcWA2PHyTfU/iAyZ17VvmWA0MRD9pkzCci
+ 0+FA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704469481; x=1705074281;
+ d=1e100.net; s=20230601; t=1704469473; x=1705074273;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=u+LOg4cE3e/L+FkF/kdo/NDds7gIy3v+MrTgt4iIEa4=;
- b=DUBvZfu4Dm2Zr8Zb5kR1IEJrqSJgtoeYs5pHfh/yFatXKFyDZ8fartsPvBnOQqd4Le
- Xrj6k6Blryf4DZtPC2tdNJTScfsipNdTJ69pQhQWZfB/JRqmf8qvHBf4xPIkmz6KlCX7
- 0PpIGxBLazSATjJrbG3wakVqCQ8D0unDwLcifN4l4IS2JzLQI6YSj91uV+YSzABewDjf
- N91cpQpAqyMQmH6yIYgy+3qXQu9ViLVVup23apA0lkuVvKArM8/PrVSaX5SohVZHbqaJ
- TR6AJgkOC6zniiDmjlchAAOeNtOOuuYBnAtdpgCItfFuG05mhrj/YgkAJwlHLHrrEETx
- bHsg==
-X-Gm-Message-State: AOJu0Yyr/fqm1fYpuYr/P1Rf+9z31MPEUddOyViCyrCp7JyF7RSra/Jo
- o194OqzPsQbcXUhUEFiGV3SppsR9tRjPIV5OtiefbWu1Hvs=
-X-Google-Smtp-Source: AGHT+IEarfJTD405bI94EVCg55vrH/dVFfv8hgbjU6uLDA50z0vQRFzAKUVK9+a0lSmqXfes6+iuWw==
-X-Received: by 2002:a5d:6445:0:b0:337:4e86:ebe1 with SMTP id
- d5-20020a5d6445000000b003374e86ebe1mr837995wrw.42.1704469481467; 
- Fri, 05 Jan 2024 07:44:41 -0800 (PST)
+ bh=7xMSbSX6JUqisE+ZC80AlkX0gZxRGpO/C3MZvmfxXXw=;
+ b=FzxVoK34mwC4G9yZbuvXF0WDYktOTK1tgQ/pGwotwN6BhX9WScFcUw9El+Tgo8Dsjx
+ uSkq6vMYTBY2+FgmOZWekPioWCuKv2Nt1bHGnV6+lujBNRLkVQ0yz+xk2FfgQEixG691
+ pYfuvBmKkjb3e/F/qslUx7kzqHLvE/cm07w6tFn4/VQoNNIoiE6D/oqcvrszLnduvEqv
+ d3zPyYSFMk6FZLLHcSkiKovbavqMd28HftXTCaG9eHX9SbJEIB/LI539ff6L0IeKYIIg
+ 6J2Ke3uJ84CHcaC9j32vHANO2FX/IETHSHcAs+IMRRSVIfVpsMHjljJpbp3xNpzWacKk
+ y3Og==
+X-Gm-Message-State: AOJu0YwC2K+bzRVptL4AfDv/C1FPVAhottqm9TEMLN48xqozMRWVvlFp
+ 26wfnN+ClczMAYliHDqBz8nlG3OHjttM0g==
+X-Google-Smtp-Source: AGHT+IFEQOPByjJ+ZfLyQjLjuiKcBG0Ek0dj7SrLUFZkRO5L6I94AsbJcQMkO458+KpNe8VtvTujCg==
+X-Received: by 2002:a05:600c:19c7:b0:40c:2671:1553 with SMTP id
+ u7-20020a05600c19c700b0040c26711553mr827570wmq.36.1704469473620; 
+ Fri, 05 Jan 2024 07:44:33 -0800 (PST)
 Received: from m1x-phil.lan (juv34-h02-176-184-26-1.dsl.sta.abo.bbox.fr.
  [176.184.26.1]) by smtp.gmail.com with ESMTPSA id
- f11-20020a5d50cb000000b00336ebf27d59sm1604796wrt.78.2024.01.05.07.44.39
+ fm26-20020a05600c0c1a00b0040d5e53d7c3sm1972654wmb.23.2024.01.05.07.44.32
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 05 Jan 2024 07:44:41 -0800 (PST)
+ Fri, 05 Jan 2024 07:44:33 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  Gavin Shan <gshan@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Richard Henderson <richard.henderson@linaro.org>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>
-Subject: [PULL 15/71] target/mips: Use generic cpu_list()
-Date: Fri,  5 Jan 2024 16:42:08 +0100
-Message-ID: <20240105154307.21385-16-philmd@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Laurent Vivier <laurent@vivier.eu>
+Subject: [PULL 14/71] target/m68k: Use generic cpu_list()
+Date: Fri,  5 Jan 2024 16:42:07 +0100
+Message-ID: <20240105154307.21385-15-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240105154307.21385-1-philmd@linaro.org>
 References: <20240105154307.21385-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x429.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -102,126 +100,116 @@ From: Gavin Shan <gshan@redhat.com>
 
 Before it's applied:
 
-[gshan@gshan q]$ ./build/qemu-system-mips64 -cpu ?
-MIPS '4Kc'
-MIPS '4Km'
-MIPS '4KEcR1'
-MIPS 'XBurstR1'
-MIPS '4KEmR1'
-MIPS '4KEc'
-MIPS '4KEm'
-MIPS '24Kc'
-MIPS '24KEc'
-MIPS '24Kf'
-MIPS '34Kf'
-MIPS '74Kf'
-MIPS 'XBurstR2'
-MIPS 'M14K'
-MIPS 'M14Kc'
-MIPS 'P5600'
-MIPS 'mips32r6-generic'
-MIPS 'I7200'
-MIPS 'R4000'
-MIPS 'VR5432'
-MIPS '5Kc'
-MIPS '5Kf'
-MIPS '20Kc'
-MIPS 'MIPS64R2-generic'
-MIPS '5KEc'
-MIPS '5KEf'
-MIPS 'I6400'
-MIPS 'I6500'
-MIPS 'Loongson-2E'
-MIPS 'Loongson-2F'
-MIPS 'Loongson-3A1000'
-MIPS 'Loongson-3A4000'
-MIPS 'mips64dspr2'
-MIPS 'Octeon68XX'
+[gshan@gshan q]$ ./build/qemu-system-m68k -cpu ?
+cfv4e
+m5206
+m5208
+m68000
+m68010
+m68020
+m68030
+m68040
+m68060
+any
 
 After it's applied:
 
-[gshan@gshan q]$ ./build/qemu-system-mips64 -cpu ?
+[gshan@gshan q]$ ./build/qemu-system-m68k -cpu ?
 Available CPUs:
-  20Kc
-  24Kc
-  24KEc
-  24Kf
-  34Kf
-  4Kc
-  4KEc
-  4KEcR1
-  4KEm
-  4KEmR1
-  4Km
-  5Kc
-  5KEc
-  5KEf
-  5Kf
-  74Kf
-  I6400
-  I6500
-  I7200
-  Loongson-2E
-  Loongson-2F
-  Loongson-3A1000
-  Loongson-3A4000
-  M14K
-  M14Kc
-  mips32r6-generic
-  mips64dspr2
-  MIPS64R2-generic
-  Octeon68XX
-  P5600
-  R4000
-  VR5432
-  XBurstR1
-  XBurstR2
+  any
+  cfv4e
+  m5206
+  m5208
+  m68000
+  m68010
+  m68020
+  m68030
+  m68040
+  m68060
 
 Signed-off-by: Gavin Shan <gshan@redhat.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <20231114235628.534334-16-gshan@redhat.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Message-ID: <20231114235628.534334-15-gshan@redhat.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/mips/cpu.h          | 4 ----
- target/mips/cpu-defs.c.inc | 9 ---------
- 2 files changed, 13 deletions(-)
+ target/m68k/cpu.h    |  4 ----
+ target/m68k/helper.c | 40 ----------------------------------------
+ 2 files changed, 44 deletions(-)
 
-diff --git a/target/mips/cpu.h b/target/mips/cpu.h
-index 52f13f0363..1163a71f3c 100644
---- a/target/mips/cpu.h
-+++ b/target/mips/cpu.h
-@@ -1235,10 +1235,6 @@ struct MIPSCPUClass {
-     bool no_data_aborts;
- };
+diff --git a/target/m68k/cpu.h b/target/m68k/cpu.h
+index 6cfc696d2b..d13427b0fe 100644
+--- a/target/m68k/cpu.h
++++ b/target/m68k/cpu.h
+@@ -556,8 +556,6 @@ static inline bool m68k_feature(CPUM68KState *env, int feature)
+     return (env->features & BIT_ULL(feature)) != 0;
+ }
  
--void mips_cpu_list(void);
+-void m68k_cpu_list(void);
 -
--#define cpu_list mips_cpu_list
+ void register_m68k_insns (CPUM68KState *env);
+ 
+ enum {
+@@ -576,8 +574,6 @@ enum {
+ 
+ #define CPU_RESOLVING_TYPE TYPE_M68K_CPU
+ 
+-#define cpu_list m68k_cpu_list
 -
- void cpu_wrdsp(uint32_t rs, uint32_t mask_num, CPUMIPSState *env);
- uint32_t cpu_rddsp(uint32_t mask_num, CPUMIPSState *env);
+ /* MMU modes definitions */
+ #define MMU_KERNEL_IDX 0
+ #define MMU_USER_IDX 1
+diff --git a/target/m68k/helper.c b/target/m68k/helper.c
+index 0a1544cd68..14508dfa11 100644
+--- a/target/m68k/helper.c
++++ b/target/m68k/helper.c
+@@ -29,46 +29,6 @@
  
-diff --git a/target/mips/cpu-defs.c.inc b/target/mips/cpu-defs.c.inc
-index c0c389c59a..fbf787d8ce 100644
---- a/target/mips/cpu-defs.c.inc
-+++ b/target/mips/cpu-defs.c.inc
-@@ -1018,15 +1018,6 @@ const mips_def_t mips_defs[] =
- };
- const int mips_defs_number = ARRAY_SIZE(mips_defs);
+ #define SIGNBIT (1u << 31)
  
--void mips_cpu_list(void)
+-/* Sort alphabetically, except for "any". */
+-static gint m68k_cpu_list_compare(gconstpointer a, gconstpointer b)
 -{
--    int i;
+-    ObjectClass *class_a = (ObjectClass *)a;
+-    ObjectClass *class_b = (ObjectClass *)b;
+-    const char *name_a, *name_b;
 -
--    for (i = 0; i < ARRAY_SIZE(mips_defs); i++) {
--        qemu_printf("MIPS '%s'\n", mips_defs[i].name);
+-    name_a = object_class_get_name(class_a);
+-    name_b = object_class_get_name(class_b);
+-    if (strcmp(name_a, "any-" TYPE_M68K_CPU) == 0) {
+-        return 1;
+-    } else if (strcmp(name_b, "any-" TYPE_M68K_CPU) == 0) {
+-        return -1;
+-    } else {
+-        return strcasecmp(name_a, name_b);
 -    }
 -}
 -
- static void fpu_init (CPUMIPSState *env, const mips_def_t *def)
+-static void m68k_cpu_list_entry(gpointer data, gpointer user_data)
+-{
+-    ObjectClass *c = data;
+-    const char *typename;
+-    char *name;
+-
+-    typename = object_class_get_name(c);
+-    name = g_strndup(typename, strlen(typename) - strlen("-" TYPE_M68K_CPU));
+-    qemu_printf("%s\n", name);
+-    g_free(name);
+-}
+-
+-void m68k_cpu_list(void)
+-{
+-    GSList *list;
+-
+-    list = object_class_get_list(TYPE_M68K_CPU, false);
+-    list = g_slist_sort(list, m68k_cpu_list_compare);
+-    g_slist_foreach(list, m68k_cpu_list_entry, NULL);
+-    g_slist_free(list);
+-}
+-
+ static int cf_fpu_gdb_get_reg(CPUM68KState *env, GByteArray *mem_buf, int n)
  {
-     int i;
+     if (n < 8) {
 -- 
 2.41.0
 
