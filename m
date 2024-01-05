@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42570C3DA6E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69381C47077
 	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 15:53:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rLmQs-0000sW-Km; Fri, 05 Jan 2024 10:48:26 -0500
+	id 1rLmTq-0004qW-RT; Fri, 05 Jan 2024 10:51:34 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmPS-0004Nn-O4
- for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:47:00 -0500
-Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmSK-0008PO-Vu
+ for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:49:59 -0500
+Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmPO-0003zT-IU
- for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:46:58 -0500
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-33748c4f33dso1401856f8f.1
- for <qemu-riscv@nongnu.org>; Fri, 05 Jan 2024 07:46:54 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rLmSI-0000zJ-78
+ for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 10:49:56 -0500
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-33677fb38a3so1538912f8f.0
+ for <qemu-riscv@nongnu.org>; Fri, 05 Jan 2024 07:49:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704469613; x=1705074413; darn=nongnu.org;
+ d=linaro.org; s=google; t=1704469791; x=1705074591; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cFGPQoyiNDNESAoFxHgGgEpoIvyyYwdHUPQolOFmxbE=;
- b=yDHJUZtuJ+/pbAiwQ7FJM6Y7cA9os0eiFqDzVhm3WM69UHx4LvAMpspc3VSq7FMsfr
- Qg2vgeASyHqK9nB1MgQMnbKrjeBKPFzmMg5CZWEuM75fok6QhuEVX1TmGUVp7EwgTwQA
- Uq/I+c4a4ig9NuVW6dAFhlcattXWiYKYA+lOmxuL2UdTn/SnAockYNgdNMTQm7BkzUW1
- oB+JMyvUUfWNp6dVTX726vWXDydMFhE2ZcrVd7aGugP7beY28JgxT6lyC3tzEWEnDcLz
- XhmWIUXQdOGuH5rQjN4/955fObhC8wi3LJiZ2eMw7OIEORdf+0XmFJqlNiQAJxjNjs+E
- DVIQ==
+ bh=Z5/v+dvKjgkiKWiEWELJXJdh6CxKEAYCa0IE+244Hh8=;
+ b=QGmMTmsPzG09YP9RTv3wX7hL7BH1ePk48LweT5ro7lTtu1EO15dnbc0Z7nwii5Uxlv
+ gAW8H1cVZTlXlUlS+OxOd+rST3K69Lolv8+WWSp2MLaik+gKY0wkGMOaSnad4wKvOwaY
+ wbSeFAQWo/UyO2VJ0uxalm2g6PT1ouLlhmkAdqCjMfVnxOq8wODyPkFXzSUNMSEWhuzG
+ C9NYGv5GTiIkFuNPID2YoDeML53hhQRqvubhLYm5Es18EQyRCbEUR8bcbSDT014IfI4V
+ HvbV6s43a0bbTa/59PAjyk8xD3Nn0gw0cbe58Nf0eksTU3spwYiD0joNdjXsVmIMmveD
+ rDSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704469613; x=1705074413;
+ d=1e100.net; s=20230601; t=1704469791; x=1705074591;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cFGPQoyiNDNESAoFxHgGgEpoIvyyYwdHUPQolOFmxbE=;
- b=ulXp3Ih1Eqqe4p5J6FMd1zShfmwXb+dZY0Tn66UVap6BDu2HMrfY3/3imllUFV7LJi
- lsENmoGHi0NVQhu4rfDUWEOdoA/anz1rTDI1eayGLyHnkaIsmvTAGBanziRN4eh+xhqa
- puHpcH3XN95/2OTxok6YpQPYv3oOrcEnUSSpD1FpQVM1O+rCtQUz3BjuVoKpUOXvDlYu
- Pk+LUSwNj3cr7V8UCbtC7r+II0DT+eRRd2M5BCLOWPPZ7m5IOAQNoJjSTLP+G/9UtpqG
- xfTpv0EgNIR4mYdAPW9tjc6u2C6RyI/x2GBL07pt4XXpPqsE23OHF8+MIRzlOh9SktO+
- AZsw==
-X-Gm-Message-State: AOJu0Ywh+UbtPZ5R7ukAG/kmU2oOt3kaKWdgLgQQF3BPWT5ajdEt395x
- bvA5jmFoA8cVUCad4E8UrSSzs9YdhEavrQ==
-X-Google-Smtp-Source: AGHT+IFZLC2sKOmV+bj7XyN2s9p4gXiuKgjYCZfd/aPNXehtVwbSuR+sykW++shNHUXHHv21xtufkA==
-X-Received: by 2002:a5d:4b83:0:b0:337:49b6:8bea with SMTP id
- b3-20020a5d4b83000000b0033749b68beamr1188216wrt.78.1704469613220; 
- Fri, 05 Jan 2024 07:46:53 -0800 (PST)
+ bh=Z5/v+dvKjgkiKWiEWELJXJdh6CxKEAYCa0IE+244Hh8=;
+ b=FT8N/675HL6tIbACDz4Dplp0mDi6sJsA5dlKP5Y9iy+apgvA4q+ZDFM6Eiy8sZmxnM
+ DZ6SVAC151bKR264dmjaKuFS04SRlx/tY/1RqpYKpkXeADuDZqHF2qpVXMzO4mxqjh+v
+ cOXXhEgme8UTd56WKHGFRGmR6Em0+j7DB94mjkDu9QpOSW3JXvyz6lSQV4LVsX9wsJUo
+ VLZNtuvWOAeVgtd9b8/9VjqzI2vsHrCaJWYKZEYfnc/V9XpfxKMG99w7dTdGzhLhxraM
+ tyDeQJLvdgHkQ6vFNiK3O54EGAQ6rsvEEAmrSi4lLV7mHHgwUoJWNrr/dsgkz7/2oPae
+ 8TSA==
+X-Gm-Message-State: AOJu0Ywq+IcPsCSHaMhXOSf7gdjDPLUwI/w8c3cpHleW2WAfxXqrk35p
+ JAKiL5YfFlRQrY+WRap0upeDfPlLZtJb0Q==
+X-Google-Smtp-Source: AGHT+IEC9VUr/PXB0Hf7LPxeqrhHmLHyX3P5rGzjminRYbjRgLPZ92Ef9i/1SP3FQVsoFVvgOjt4pA==
+X-Received: by 2002:a05:600c:3488:b0:40d:8514:fb5 with SMTP id
+ a8-20020a05600c348800b0040d85140fb5mr1225021wmq.21.1704469791170; 
+ Fri, 05 Jan 2024 07:49:51 -0800 (PST)
 Received: from m1x-phil.lan (juv34-h02-176-184-26-1.dsl.sta.abo.bbox.fr.
  [176.184.26.1]) by smtp.gmail.com with ESMTPSA id
- u10-20020adfa18a000000b00336ca349bdesm1626770wru.47.2024.01.05.07.46.52
+ hn3-20020a05600ca38300b0040e398f8cafsm1647488wmb.31.2024.01.05.07.49.50
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 05 Jan 2024 07:46:52 -0800 (PST)
+ Fri, 05 Jan 2024 07:49:50 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>
-Subject: [PULL 33/71] hw/core/cpu: Remove final vestiges of dynamic state
- tracing
-Date: Fri,  5 Jan 2024 16:42:26 +0100
-Message-ID: <20240105154307.21385-34-philmd@linaro.org>
+ Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
+ Gavin Shan <gshan@redhat.com>
+Subject: [PULL 66/71] hw/misc: Simplify memory_region_init_ram_from_fd() calls
+Date: Fri,  5 Jan 2024 16:42:59 +0100
+Message-ID: <20240105154307.21385-67-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240105154307.21385-1-philmd@linaro.org>
 References: <20240105154307.21385-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::430;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x430.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -98,30 +95,56 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The dynamic state tracing was removed in commit d0aaf08bb9.
+Mechanical change using the following coccinelle script:
 
-Fixes: d0aaf08bb9 ("tcg: remove the final vestiges of dstate")
+@@
+expression mr, owner, arg3, arg4, arg5, arg6, arg7, errp;
+@@
+-   memory_region_init_ram_from_fd(mr, owner, arg3, arg4, arg5, arg6, arg7, &errp);
+    if (
+-       errp
++       !memory_region_init_ram_from_fd(mr, owner, arg3, arg4, arg5, arg6, arg7, &errp)
+    ) {
+        ...
+        return;
+    }
+
+and removing the local Error variable.
+
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20231129182734.15565-1-philmd@linaro.org>
+Reviewed-by: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
+Reviewed-by: Gavin Shan <gshan@redhat.com>
+Message-Id: <20231120213301.24349-24-philmd@linaro.org>
 ---
- include/hw/core/cpu.h | 3 ---
- 1 file changed, 3 deletions(-)
+ hw/misc/ivshmem.c | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
 
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 76ef59de0a..44ff954207 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -437,9 +437,6 @@ struct qemu_work_item;
-  * @kvm_fd: vCPU file descriptor for KVM.
-  * @work_mutex: Lock to prevent multiple access to @work_list.
-  * @work_list: List of pending asynchronous work.
-- * @trace_dstate_delayed: Delayed changes to trace_dstate (includes all changes
-- *                        to @trace_dstate).
-- * @trace_dstate: Dynamic tracing state of events for this vCPU (bitmask).
-  * @plugin_mask: Plugin event bitmap. Modified only via async work.
-  * @ignore_memory_transaction_failures: Cached copy of the MachineState
-  *    flag of the same name: allows the board to suppress calling of the
+diff --git a/hw/misc/ivshmem.c b/hw/misc/ivshmem.c
+index 62af75e862..a2fd0bc365 100644
+--- a/hw/misc/ivshmem.c
++++ b/hw/misc/ivshmem.c
+@@ -476,7 +476,6 @@ static void setup_interrupt(IVShmemState *s, int vector, Error **errp)
+ 
+ static void process_msg_shmem(IVShmemState *s, int fd, Error **errp)
+ {
+-    Error *local_err = NULL;
+     struct stat buf;
+     size_t size;
+ 
+@@ -496,10 +495,9 @@ static void process_msg_shmem(IVShmemState *s, int fd, Error **errp)
+     size = buf.st_size;
+ 
+     /* mmap the region and map into the BAR2 */
+-    memory_region_init_ram_from_fd(&s->server_bar2, OBJECT(s), "ivshmem.bar2",
+-                                   size, RAM_SHARED, fd, 0, &local_err);
+-    if (local_err) {
+-        error_propagate(errp, local_err);
++    if (!memory_region_init_ram_from_fd(&s->server_bar2, OBJECT(s),
++                                        "ivshmem.bar2", size, RAM_SHARED,
++                                        fd, 0, errp)) {
+         return;
+     }
+ 
 -- 
 2.41.0
 
