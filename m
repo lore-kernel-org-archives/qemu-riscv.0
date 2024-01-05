@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D143C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 03:51:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88296C3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 03:52:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rLbFG-0004wv-5N; Thu, 04 Jan 2024 22:51:42 -0500
+	id 1rLbG0-0005F0-4B; Thu, 04 Jan 2024 22:52:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rLbFE-0004wM-Qc; Thu, 04 Jan 2024 22:51:40 -0500
-Received: from mail-ua1-x934.google.com ([2607:f8b0:4864:20::934])
+ id 1rLbFy-0005EU-Jl; Thu, 04 Jan 2024 22:52:26 -0500
+Received: from mail-ua1-x92f.google.com ([2607:f8b0:4864:20::92f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rLbFD-0005IX-8L; Thu, 04 Jan 2024 22:51:40 -0500
-Received: by mail-ua1-x934.google.com with SMTP id
- a1e0cc1a2514c-7cbdd011627so381063241.3; 
- Thu, 04 Jan 2024 19:51:38 -0800 (PST)
+ id 1rLbFx-0005mf-2b; Thu, 04 Jan 2024 22:52:26 -0500
+Received: by mail-ua1-x92f.google.com with SMTP id
+ a1e0cc1a2514c-7cd5ab5d5bbso357897241.3; 
+ Thu, 04 Jan 2024 19:52:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704426698; x=1705031498; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1704426744; x=1705031544; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ld3G+NfFpIRxaJ+dhDUpwTHyQE4CN+3iaWh9gHiKo1Y=;
- b=gu3SyBJD4s8983wRiREwLLiE4E0cjQSWH3y0oKBIE7Rk5wHWjAfoTtajOO9bXhfxNS
- XQ3hciJrbzY1SzbFKnkUO73W113QqlLCa0jaX5k2TG/0mJNaOJuBKW4gaxzvZ36dPwsd
- AdeJfGyLcA7jvQmsBS1MHSC5F+z2wcRRufAjRqQ7MocIvFupzPowhpmHWpCIpwz6UT6M
- ZGCNRXzkiGhENiM0NHXTgT7p84E3/lpXVTRyyOWBKG/A6bbjY/DUI8mcWuSStxakeCxl
- hCgFEULO8jtf7GkJTCiHnHZpOz19QRZyqLqtGAkqDAxTxk3MOxinX1QMVmfy34IUeqvM
- WpbQ==
+ bh=FbsUhug9aRcFiZGsW2WkGhpv6LeKKlWTh3fGKjuwWEU=;
+ b=L7Sf6BBMism3RNAk60HH1ABGLZWjuxn5/vERg3UcqFmdmXcy9BUaSPnDsqWlUWdtoR
+ JR+xx7rXebgYupxR1VNX7xaAnlwPb6xVYvKvBssZaiLzzHO4o1Y+41yr7bwPUQiFBBSa
+ i8fZEEjfuVF+Fsdp6Ga97mlth6bY5vXD8U+J4u2pXYtnCPzsGi/7+s+mNwv2CQfaJFb2
+ r3oSv2/gfHYO8rbRdvccvxpbxSjG01j1YIyAJULYkseSL0CkgCbkypy1NeFZ4mMlqBM0
+ 4Ei6AmwWW8lGZkvFDLHDs72IMdnHsPsnqz/3ZkOa2Bt47INqyyi+o98L0HAsZp6D452Q
+ e/AQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704426698; x=1705031498;
+ d=1e100.net; s=20230601; t=1704426744; x=1705031544;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Ld3G+NfFpIRxaJ+dhDUpwTHyQE4CN+3iaWh9gHiKo1Y=;
- b=fGzB3KfU3zw88zQOcxaXvrHeGaQs+HmLG4SDdtXJYqOEx8AKaWWAyG5G99losqyqcZ
- iLR3eU34pKaLQgRl1HxLqvbJBzGDcTLWMQuxgWOOn0OizB9zX0sJU4wF2lx3iRTdMiG+
- Au3cITWYOH8UnQIZ2pBwu9jmbPoiHryWwN/3KvJHidh3TjRKSxhVAypoOSlB3aYfPe4S
- 7NlGYErTDrRrzE3LtTNdb4iTA6quf0VkOs2jLuIEPQnMsbz87RwvSVcG11D2r5l0QGPb
- ZSULQ6/pYHLYOue4xA7mdbD7By/7hIVkSp5djXn9JvuLeERxRX7OZ+1qzHHTYQAp2fKi
- skow==
-X-Gm-Message-State: AOJu0YwKCKFRs/My2x2hsjMGceI6MMotIS8Xv5CBHfEEQ0QJ+SqT4z8n
- crYTtqzOqMCHf4cvPuYKkP8f0p+wjDcYTEe8FL8=
-X-Google-Smtp-Source: AGHT+IHO8T06R5l4Rsm1zajYWhtkopiCcmAR+ex/nGFLSlDitBGhHjyBOFoCnRag5YCk/kxT+OhZG7IutdL9bjOSpi4=
-X-Received: by 2002:a05:6102:94e:b0:467:b62e:5800 with SMTP id
- a14-20020a056102094e00b00467b62e5800mr116373vsi.18.1704426697666; Thu, 04 Jan
- 2024 19:51:37 -0800 (PST)
+ bh=FbsUhug9aRcFiZGsW2WkGhpv6LeKKlWTh3fGKjuwWEU=;
+ b=Y1Nlw+px5JyTZ7OHyfGa1gCfNSDSeD0JNEw/PPQxjSzhj4TfLhzJo99v+P0JGFZgY3
+ PG6UTnyF6P9xnq/aC62hEaD7VPS4nw5EnvcuMvDfAXK7nm/yFqTxpO6c8WBUgSdW9xGu
+ GXyq3paJ2W0xd2CWYcqLvSigl3mQ4wBQzE8U40JyOZz1E+/zH2sVgMq9nsMu20WFrBA6
+ FgmK7oFnVSiATXDyziTg78DjEeFbzswlEgodaASMTSlUExDVRLclDVVDibQCvX9gDaV9
+ nEu37tMyhJPGle7y4EPy57sM5UoBv/ME85k8kPjNlFfI7KMGNmaYVb1H23ddCWyjuaLA
+ Heog==
+X-Gm-Message-State: AOJu0YyOeXWm7GAP2MZntSJbnGHAu78J6EPBhG41OPTDdAkN2gWWcJCN
+ U8QuxBfImw2rIsDGPQsobKPVg/YaIXKLtq4kUV8=
+X-Google-Smtp-Source: AGHT+IHYUOkxfjRXbpzDuVue8HiQAWTRUnzJG1lJDuZkwxezkbDU8slEXlN5ZdoMFHSasO0eYKFZ+JMHP7z1eIdZlA0=
+X-Received: by 2002:ac5:ccd3:0:b0:4b7:197b:318a with SMTP id
+ j19-20020ac5ccd3000000b004b7197b318amr1179413vkn.23.1704426743734; Thu, 04
+ Jan 2024 19:52:23 -0800 (PST)
 MIME-Version: 1.0
 References: <20240103174013.147279-1-dbarboza@ventanamicro.com>
- <20240103174013.147279-2-dbarboza@ventanamicro.com>
-In-Reply-To: <20240103174013.147279-2-dbarboza@ventanamicro.com>
+ <20240103174013.147279-3-dbarboza@ventanamicro.com>
+In-Reply-To: <20240103174013.147279-3-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 5 Jan 2024 13:51:11 +1000
-Message-ID: <CAKmqyKO9zzN3g-ZRoXbKQfVaBf918KqW_1=RuS=Dshdom6YHOQ@mail.gmail.com>
-Subject: Re: [PATCH v3 01/16] target/riscv/cpu_cfg.h: remove unused fields
+Date: Fri, 5 Jan 2024 13:51:57 +1000
+Message-ID: <CAKmqyKPpXWb60Jh4HtBdCbgapmcxiD4C2Ty_s192Fy0D0COsXA@mail.gmail.com>
+Subject: Re: [PATCH v3 02/16] target/riscv: make riscv_cpu_is_generic() public
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
  palmer@rivosinc.com, ajones@ventanamicro.com, vladimir.isaev@syntacore.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::934;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x934.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92f;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92f.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -90,10 +90,11 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jan 4, 2024 at 3:46=E2=80=AFAM Daniel Henrique Barboza
+On Thu, Jan 4, 2024 at 3:42=E2=80=AFAM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> user_spec, bext_spec and bext_ver aren't being used.
+> We'll use this function in target/riscv/cpu.c to implement setters that
+> won't allow vendor CPU options to be changed.
 >
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
@@ -102,35 +103,62 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/cpu.h     | 1 -
->  target/riscv/cpu_cfg.h | 2 --
->  2 files changed, 3 deletions(-)
+>  target/riscv/cpu.c         | 5 +++++
+>  target/riscv/cpu.h         | 1 +
+>  target/riscv/tcg/tcg-cpu.c | 5 -----
+>  3 files changed, 6 insertions(+), 5 deletions(-)
 >
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 70bf10aa7c..65cfa6c740 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -183,6 +183,11 @@ void isa_ext_update_enabled(RISCVCPU *cpu, uint32_t =
+ext_offset, bool en)
+>      *ext_enabled =3D en;
+>  }
+>
+> +bool riscv_cpu_is_generic(Object *cpu_obj)
+> +{
+> +    return object_dynamic_cast(cpu_obj, TYPE_RISCV_DYNAMIC_CPU) !=3D NUL=
+L;
+> +}
+> +
+>  const char * const riscv_int_regnames[] =3D {
+>      "x0/zero", "x1/ra",  "x2/sp",  "x3/gp",  "x4/tp",  "x5/t0",   "x6/t1=
+",
+>      "x7/t2",   "x8/s0",  "x9/s1",  "x10/a0", "x11/a1", "x12/a2",  "x13/a=
+3",
 > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index d74b361be6..40c96a32cc 100644
+> index 40c96a32cc..bf69cb9a27 100644
 > --- a/target/riscv/cpu.h
 > +++ b/target/riscv/cpu.h
-> @@ -164,7 +164,6 @@ struct CPUArchState {
->      target_ulong guest_phys_fault_addr;
+> @@ -756,6 +756,7 @@ enum riscv_pmu_event_idx {
+>  void isa_ext_update_enabled(RISCVCPU *cpu, uint32_t ext_offset, bool en)=
+;
+>  bool isa_ext_is_enabled(RISCVCPU *cpu, uint32_t ext_offset);
+>  void riscv_cpu_set_misa(CPURISCVState *env, RISCVMXL mxl, uint32_t ext);
+> +bool riscv_cpu_is_generic(Object *cpu_obj);
 >
->      target_ulong priv_ver;
-> -    target_ulong bext_ver;
->      target_ulong vext_ver;
+>  typedef struct RISCVCPUMultiExtConfig {
+>      const char *name;
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index 8a35683a34..a09300e908 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -658,11 +658,6 @@ bool riscv_cpu_tcg_compatible(RISCVCPU *cpu)
+>      return object_dynamic_cast(OBJECT(cpu), TYPE_RISCV_CPU_HOST) =3D=3D =
+NULL;
+>  }
 >
->      /* RISCVMXL, but uint32_t for vmstate migration */
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> index f4605fb190..c67a8731d3 100644
-> --- a/target/riscv/cpu_cfg.h
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -136,8 +136,6 @@ struct RISCVCPUConfig {
->
->      uint32_t pmu_mask;
->      char *priv_spec;
-> -    char *user_spec;
-> -    char *bext_spec;
->      char *vext_spec;
->      uint16_t vlen;
->      uint16_t elen;
+> -static bool riscv_cpu_is_generic(Object *cpu_obj)
+> -{
+> -    return object_dynamic_cast(cpu_obj, TYPE_RISCV_DYNAMIC_CPU) !=3D NUL=
+L;
+> -}
+> -
+>  /*
+>   * We'll get here via the following path:
+>   *
 > --
 > 2.43.0
 >
