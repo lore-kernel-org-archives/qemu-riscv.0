@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8A31C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 05:16:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08E89C3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 05:18:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rLcYj-00021R-0i; Fri, 05 Jan 2024 00:15:53 -0500
+	id 1rLcaq-0002rH-AJ; Fri, 05 Jan 2024 00:18:04 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rLcYd-00020b-2F; Fri, 05 Jan 2024 00:15:47 -0500
-Received: from mail-vs1-xe2a.google.com ([2607:f8b0:4864:20::e2a])
+ id 1rLcao-0002qb-Iv; Fri, 05 Jan 2024 00:18:02 -0500
+Received: from mail-ua1-x930.google.com ([2607:f8b0:4864:20::930])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rLcYb-0006YW-4d; Fri, 05 Jan 2024 00:15:46 -0500
-Received: by mail-vs1-xe2a.google.com with SMTP id
- ada2fe7eead31-4670a58b118so256693137.2; 
- Thu, 04 Jan 2024 21:15:44 -0800 (PST)
+ id 1rLcam-0008U9-Qw; Fri, 05 Jan 2024 00:18:02 -0500
+Received: by mail-ua1-x930.google.com with SMTP id
+ a1e0cc1a2514c-7cdf4b99e7eso238364241.0; 
+ Thu, 04 Jan 2024 21:17:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704431743; x=1705036543; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1704431879; x=1705036679; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FpIwxGIoBzTF2CiL9kRStVXzjIkH2PzgGmQCJ3pRg8E=;
- b=aCzyh9JGMmrC0LFenMEiYzIeva5pA/uQO+r851oiWUDJilb9ZzSgIVILl0vn0lWF6U
- Ju3wxzRAioRNShVe5RRUOwvykUPZDNtNIqcy7Dbr8W48wJxDg5edBaUYz+gJzHR1z2HY
- JPvPKjJyWpjrb4CwfzdiTmk8ufrKfCfwbhoic5IB/anAwWg0wmCPVerzY3wmfWhxZXtC
- LYUnSIhRc03wsnr1FAuTyjdrQkgUUf/1fnu2NBN/5cG39k4QI2uuTux6FHmdPZIgDRr1
- pQNGmhzHgtGN47KhBNe0R9BRDVrPrXW2J03h8GSpDyv0d7fU/Suw8oIRpqJWXwPXQZRX
- 6uGA==
+ bh=v1Wq3peqZgPbg2yQFzBm1lb4F6pcpmP7MHWgPMaIRPE=;
+ b=Kz7TrZswZeFjhGxnjzO8WtFyLGvmJxmCbHg3vUS5w2Xb/jAcPAe8NHsR9AkUiYLWKu
+ +nKEIOSvf9dQaDrXFrSDVmV9fIrdrVu5CN0CmrDivo3J/FSWvXelVj1rUkhy6OTU0gKQ
+ dje/8eXNwxlm5Cchlztgo19zSn/gNhTh+7/chvxwdwOILVSX/1Ov639SN5UEO+AqKemb
+ RsP63rhkkhD7dCHVn3NIMlVIaRyi7tB/y7Rek+K7hpPOrD0VwnHcgSnibdNsoeb9aOrN
+ zY0eie18q0EVF9qv/BNYtAQ0e216oIEpX0fQjuGa6AyiMaHqNypXAUVh7lgY/uWS3amZ
+ 1y6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704431743; x=1705036543;
+ d=1e100.net; s=20230601; t=1704431879; x=1705036679;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FpIwxGIoBzTF2CiL9kRStVXzjIkH2PzgGmQCJ3pRg8E=;
- b=Ee10/wY3FPb961hIqSwaDuSpK7IscuuogJwNffwlZkdBP8nf5IOKc6Mp/WEtX38MST
- QXtEf/EEphCAvmW6OCV4s7Emd1bCMynFH5yOvZ/Mgp6vTioZ1NUm3l8YAnKocdBF1WKt
- 278hPt6fdon8xo+WuqU7Ry3uKUhsN9ALp9CBIFf33B48PihcSqfp1GLAcMsOEWrDEwSS
- a+pRBXVk/7tkKhmn5tidpausV57xIwclbiQTIllMMcT1Q0fvFfLz6cEq5iNiOhN6fc9n
- Lmig8bDv/IwHVHPFxf0v1c9adRPKksHxMsjeXSevqL9BuumkvD177XhWbRSTEqBvZ5dz
- oE4w==
-X-Gm-Message-State: AOJu0Yw3AmGCvCitlcMA1dP4Y8zn1z3uW3tqMcqnevi7i3fteIvWp/mx
- gi/6/G3eypiEzsLUHm9JeGD/SY1Jnxh3NCZlADg=
-X-Google-Smtp-Source: AGHT+IEjAeGE+CiiCR1+pfYYZhCn5dePl4bb90sRSZ+SqObbZdrSfAZYqKGuMSEGY+9uivt2BQcp4LGO3LFDPJRXih4=
-X-Received: by 2002:a05:6102:b12:b0:467:aff0:1627 with SMTP id
- b18-20020a0561020b1200b00467aff01627mr875352vst.1.1704431743612; Thu, 04 Jan
- 2024 21:15:43 -0800 (PST)
+ bh=v1Wq3peqZgPbg2yQFzBm1lb4F6pcpmP7MHWgPMaIRPE=;
+ b=HysR+Ltqp/y2D4YzEZdtNm5LTkdtwSlsYKRnyz5FfhwGsGxvWsQjxqV3PhMKqVcRUo
+ bNC9dhR6J6hjXFElxwIAYOD2dtFU5VlWHiYlyJ7smiKB+FltDK8htu6nJzFdQlctdmcQ
+ iBxTtpNyFchl8uBg1rGcVJw4SdbPt8r9Bi/iJrkz+/oYV2wBRVJOCLP/XyifVmkv+DwF
+ iBSwPia6OpOFUSdOpkLiNngGShC9tsPwz14/gUMdHx9nzurs6YX93GHnRamzq66ZW41K
+ E6G1OBzEjlDwsln8oVlRlljE1x5t4yx7p3l+5LUDAiuWWt8HRspZI/DlhOriz/qNqySm
+ U3Nw==
+X-Gm-Message-State: AOJu0Yy2JXHY4hDyrBnY/ZqewQKR7ug+ECspU1QpLaZImRvrzbAwOdKO
+ V+fw3794TacyeDKEKZpueJCl/tPXYHHQP/yieRU=
+X-Google-Smtp-Source: AGHT+IGJ8pQqhGR678XmKn0HhwBP1y9WHG3puKrdwY+9YNT2FmHnk9Lv8XaBDySLvwjUDdLiZGkuDZpY/wM1Cme9SxI=
+X-Received: by 2002:a05:6102:151d:b0:467:af58:295a with SMTP id
+ f29-20020a056102151d00b00467af58295amr1195518vsv.31.1704431879315; Thu, 04
+ Jan 2024 21:17:59 -0800 (PST)
 MIME-Version: 1.0
-References: <20240103174013.147279-1-dbarboza@ventanamicro.com>
- <20240103174013.147279-8-dbarboza@ventanamicro.com>
-In-Reply-To: <20240103174013.147279-8-dbarboza@ventanamicro.com>
+References: <20231218204321.75757-1-dbarboza@ventanamicro.com>
+In-Reply-To: <20231218204321.75757-1-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 5 Jan 2024 15:15:00 +1000
-Message-ID: <CAKmqyKN0eev2Bc7NQ5ZEDtFWKD9OkcnzLu45C5gKqcVHA7+wVg@mail.gmail.com>
-Subject: Re: [PATCH v3 07/16] target/riscv: rework 'vext_spec'
+Date: Fri, 5 Jan 2024 15:17:33 +1000
+Message-ID: <CAKmqyKMAteKFDF14TikbQGYz98e9Kjr_YKrM1GgtfGOotHUSNg@mail.gmail.com>
+Subject: Re: [PATCH v2 0/4] target/riscv: add RVV CSRs
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, ajones@ventanamicro.com, vladimir.isaev@syntacore.com
+ palmer@rivosinc.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2a;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::930;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x930.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -90,143 +89,80 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jan 4, 2024 at 3:47=E2=80=AFAM Daniel Henrique Barboza
+On Tue, Dec 19, 2023 at 6:44=E2=80=AFAM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> The same rework did in 'priv_spec' is done for 'vext_spec'. This time is
-> simpler, since we only accept one value ("v1.0") and we'll always have
-> env->vext_ver set to VEXT_VERSION_1_00_0, thus we don't need helpers to
-> convert string to 'vext_ver' back and forth like we needed for
-> 'priv_spec'.
+> Hi,
 >
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> This version was rebased on top of Alistair's riscv-to-apply.next. A
+> small tweak was needed in patch 4 due to changes in the branch.
+>
+> I took the chance to update linux-headers to 6.7-rc5, although the
+> differences from the rc3 headers from v1 were minimal.
+>
+> All patches acked.
+>
+> Changes from v1:
+> - rebased to Alistair's riscv-to-apply.next
+> - patch 1:
+>   - updated headers to v6.7-rc5
+> - patch 4:
+>   - use kvm_riscv_reg_id_ulong() instead of kvm_riscv_reg_id()
+> - v1 link: https://lore.kernel.org/qemu-riscv/20231130182748.1894790-1-db=
+arboza@ventanamicro.com/
+>
+> Daniel Henrique Barboza (4):
+>   linux-headers: Update to Linux v6.7-rc5
+>   linux-headers: riscv: add ptrace.h
+>   target/riscv/kvm: do PR_RISCV_V_SET_CONTROL during realize()
+>   target/riscv/kvm: add RVV and Vector CSR regs
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
->  target/riscv/cpu.c         | 35 +++++++++++++++++++++++++++++++++--
->  target/riscv/cpu.h         |  1 +
->  target/riscv/cpu_cfg.h     |  1 -
->  target/riscv/tcg/tcg-cpu.c | 15 ---------------
->  4 files changed, 34 insertions(+), 18 deletions(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 657569d8a6..c39da44f51 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1267,6 +1267,7 @@ static void riscv_cpu_init(Object *obj)
+>  include/standard-headers/drm/drm_fourcc.h     |   2 +
+>  include/standard-headers/linux/pci_regs.h     |  24 ++-
+>  include/standard-headers/linux/vhost_types.h  |   7 +
+>  .../standard-headers/linux/virtio_config.h    |   5 +
+>  include/standard-headers/linux/virtio_pci.h   |  11 ++
+>  linux-headers/asm-arm64/kvm.h                 |  32 ++++
+>  linux-headers/asm-generic/unistd.h            |  14 +-
+>  linux-headers/asm-loongarch/bitsperlong.h     |   1 +
+>  linux-headers/asm-loongarch/kvm.h             | 108 +++++++++++
+>  linux-headers/asm-loongarch/mman.h            |   1 +
+>  linux-headers/asm-loongarch/unistd.h          |   5 +
+>  linux-headers/asm-mips/unistd_n32.h           |   4 +
+>  linux-headers/asm-mips/unistd_n64.h           |   4 +
+>  linux-headers/asm-mips/unistd_o32.h           |   4 +
+>  linux-headers/asm-powerpc/unistd_32.h         |   4 +
+>  linux-headers/asm-powerpc/unistd_64.h         |   4 +
+>  linux-headers/asm-riscv/kvm.h                 |  12 ++
+>  linux-headers/asm-riscv/ptrace.h              | 132 +++++++++++++
+>  linux-headers/asm-s390/unistd_32.h            |   4 +
+>  linux-headers/asm-s390/unistd_64.h            |   4 +
+>  linux-headers/asm-x86/unistd_32.h             |   4 +
+>  linux-headers/asm-x86/unistd_64.h             |   3 +
+>  linux-headers/asm-x86/unistd_x32.h            |   3 +
+>  linux-headers/linux/iommufd.h                 | 180 +++++++++++++++++-
+>  linux-headers/linux/kvm.h                     |  11 ++
+>  linux-headers/linux/psp-sev.h                 |   1 +
+>  linux-headers/linux/stddef.h                  |   9 +-
+>  linux-headers/linux/userfaultfd.h             |   9 +-
+>  linux-headers/linux/vfio.h                    |  47 +++--
+>  linux-headers/linux/vhost.h                   |   8 +
+>  scripts/update-linux-headers.sh               |   3 +
+>  target/riscv/kvm/kvm-cpu.c                    | 103 ++++++++++
+>  32 files changed, 736 insertions(+), 27 deletions(-)
+>  create mode 100644 linux-headers/asm-loongarch/bitsperlong.h
+>  create mode 100644 linux-headers/asm-loongarch/kvm.h
+>  create mode 100644 linux-headers/asm-loongarch/mman.h
+>  create mode 100644 linux-headers/asm-loongarch/unistd.h
+>  create mode 100644 linux-headers/asm-riscv/ptrace.h
 >
->      /* Default values for non-bool cpu properties */
->      cpu->cfg.pmu_mask =3D MAKE_64BIT_MASK(3, 16);
-> +    cpu->env.vext_ver =3D VEXT_VERSION_1_00_0;
->  }
->
->  typedef struct misa_ext_info {
-> @@ -1701,9 +1702,38 @@ static const PropertyInfo prop_priv_spec =3D {
->      .set =3D prop_priv_spec_set,
->  };
->
-> -Property riscv_cpu_options[] =3D {
-> -    DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
-> +static void prop_vext_spec_set(Object *obj, Visitor *v, const char *name=
-,
-> +                               void *opaque, Error **errp)
-> +{
-> +    RISCVCPU *cpu =3D RISCV_CPU(obj);
-> +    g_autofree char *value =3D NULL;
->
-> +    visit_type_str(v, name, &value, errp);
-> +
-> +    if (g_strcmp0(value, VEXT_VER_1_00_0_STR) !=3D 0) {
-> +        error_setg(errp, "Unsupported vector spec version '%s'", value);
-> +        return;
-> +    }
-> +
-> +    cpu_option_add_user_setting(name, VEXT_VERSION_1_00_0);
-> +    cpu->env.vext_ver =3D VEXT_VERSION_1_00_0;
-> +}
-> +
-> +static void prop_vext_spec_get(Object *obj, Visitor *v, const char *name=
-,
-> +                               void *opaque, Error **errp)
-> +{
-> +    const char *value =3D VEXT_VER_1_00_0_STR;
-> +
-> +    visit_type_str(v, name, (char **)&value, errp);
-> +}
-> +
-> +static const PropertyInfo prop_vext_spec =3D {
-> +    .name =3D "vext_spec",
-> +    .get =3D prop_vext_spec_get,
-> +    .set =3D prop_vext_spec_set,
-> +};
-> +
-> +Property riscv_cpu_options[] =3D {
->      DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
->      DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
->
-> @@ -1723,6 +1753,7 @@ static Property riscv_cpu_properties[] =3D {
->      {.name =3D "pmp", .info =3D &prop_pmp},
->
->      {.name =3D "priv_spec", .info =3D &prop_priv_spec},
-> +    {.name =3D "vext_spec", .info =3D &prop_vext_spec},
->
->  #ifndef CONFIG_USER_ONLY
->      DEFINE_PROP_UINT64("resetvec", RISCVCPU, env.resetvec, DEFAULT_RSTVE=
-C),
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index aa3d3372e3..f1715d9d31 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -89,6 +89,7 @@ enum {
->  };
->
->  #define VEXT_VERSION_1_00_0 0x00010000
-> +#define VEXT_VER_1_00_0_STR "v1.0"
->
->  enum {
->      TRANSLATE_SUCCESS,
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> index 2dba1f0007..7112af6c4c 100644
-> --- a/target/riscv/cpu_cfg.h
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -135,7 +135,6 @@ struct RISCVCPUConfig {
->      bool ext_XVentanaCondOps;
->
->      uint32_t pmu_mask;
-> -    char *vext_spec;
->      uint16_t vlen;
->      uint16_t elen;
->      uint16_t cbom_blocksize;
-> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> index 4d67b72d9e..6501c29d8e 100644
-> --- a/target/riscv/tcg/tcg-cpu.c
-> +++ b/target/riscv/tcg/tcg-cpu.c
-> @@ -201,21 +201,6 @@ static void riscv_cpu_validate_v(CPURISCVState *env,=
- RISCVCPUConfig *cfg,
->                     "in the range [8, 64]");
->          return;
->      }
-> -
-> -    if (cfg->vext_spec) {
-> -        if (!g_strcmp0(cfg->vext_spec, "v1.0")) {
-> -            env->vext_ver =3D VEXT_VERSION_1_00_0;
-> -        } else {
-> -            error_setg(errp, "Unsupported vector spec version '%s'",
-> -                       cfg->vext_spec);
-> -            return;
-> -        }
-> -    } else if (env->vext_ver =3D=3D 0) {
-> -        qemu_log("vector version is not specified, "
-> -                 "use the default value v1.0\n");
-> -
-> -        env->vext_ver =3D VEXT_VERSION_1_00_0;
-> -    }
->  }
->
->  static void riscv_cpu_disable_priv_spec_isa_exts(RISCVCPU *cpu)
 > --
 > 2.43.0
 >
