@@ -4,82 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51839C4707B
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jan 2024 23:09:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34B83C47074
+	for <qemu-riscv@archiver.kernel.org>; Sun,  7 Jan 2024 23:41:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rLtHE-0002eF-G4; Fri, 05 Jan 2024 18:06:56 -0500
+	id 1rMclb-0007BY-Sq; Sun, 07 Jan 2024 18:41:19 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rLtHA-0002ay-Ls
- for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 18:06:52 -0500
-Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rMcla-0007Au-2K; Sun, 07 Jan 2024 18:41:18 -0500
+Received: from mail-qv1-xf2d.google.com ([2607:f8b0:4864:20::f2d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rLtH5-0002OK-8b
- for qemu-riscv@nongnu.org; Fri, 05 Jan 2024 18:06:50 -0500
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-6d77c6437f0so69477b3a.2
- for <qemu-riscv@nongnu.org>; Fri, 05 Jan 2024 15:06:46 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rMclY-0006iI-4o; Sun, 07 Jan 2024 18:41:17 -0500
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-67f9f6caabcso14064896d6.3; 
+ Sun, 07 Jan 2024 15:41:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1704496006; x=1705100806; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1704670874; x=1705275674; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jvFT0pVZgs4ahu2r9CedsBPIb0PhnodChOJsMFYeXAs=;
- b=CUw74WBdEc4+0BgHNXKix5vaY7BftYZSNKQsh2+mjRroXyYouxdiajYPvfZWm5ReTr
- pR45O5ro+WQjcOBNGzxgQBU1YHns3vPt9VG4z5uHZuW+83pUq8UhHXtxuzfSjnWpeoZB
- NYeHdr78rF0o6Rrm3MYrqNVNnH6uZA1WUEdYZy3NGhxv/MLYcK7QdrGisGiU+WSUH6Zm
- esOYWAIIiOVOMYKQEQGKm/KwsKVaTPK4UIcmlUylg90O3BZ/S55FL+uztvmoCV+OiCkT
- 4H2NP7s2fBnvtjO9TWRhmpnnZwTF2T5qIoaZQxWiyqmOdLfHwlayELOG+zXSvP4uBWG+
- aQ4Q==
+ bh=EW2dgSQrxieMxSNaTZ7OtZx+Dr1ZzgYu+7eKtMT4bAA=;
+ b=JfcfTKYGUOVx7o3dkmAETgQMiKcWm72EiG2Z9kfbvkX39VfdhFcNENk8U0rjSJDlFg
+ 1MUyPwAkB2SFRrYAaoJauGrZfZbbW+2AFebwX8WcH0qJZ3laWZUlV2vRXzXolUqclTUc
+ EB8kEcK0wf0AI9QPWmpPJ9OJ4vS7B6z3I1C55boXd1bSre/qFFkW5yv+KRuhD8ApyzBM
+ /qCk9e+iw8nXDUM9mrULHsY3y5cdXBZ+HrP9MDKK0/+LiR64PNUfRiBE7vOaoJCaWSm6
+ uQsf6m/yjAnKggqjSJVHiS5DkYjdhLG5BWtcsJs9/xfd7xTxAUN7KXtpghi9/Da3y9os
+ NVEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704496006; x=1705100806;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1704670874; x=1705275674;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jvFT0pVZgs4ahu2r9CedsBPIb0PhnodChOJsMFYeXAs=;
- b=opIGupRSqc1jt5L3Y5VRrDf0VSt4VbxxWim8KYuWdNW/TIsSCOVxd+b6NtaAUMOIIg
- Lk2CzJWSBiF1oSoaHLLm1yjvjWYiGF2O98JQ83fb1A7a2wdshUlvS9QBLm8hADJ8yh8n
- D7QEb5A1nUbEnT1ZW8jhLe8TVjAty72bs6gyfS+YHqE1hdRtgUyVQaBiUTOUSujqRlN0
- IwNup6ex56+TG3v1nMRQDSIyEKtQ+W9Oe3ELqgeWuMSCkJ3r7rYu5WsHBx8d02bgwDV4
- 5UYK51DvfHG8Q973v2+qFsJteffaG1UCVKNbpEn5QbWNC7+TLmrEq4+/aiHc+6DjH3ul
- ZOeQ==
-X-Gm-Message-State: AOJu0YwXFqUXYBS0a7Xr7y2KQp+bTq6kuAtYj6CRXY8GX9LilAZGR8mW
- JozbeM/QGERbFKJyLXnTBAVg1gqWtu2ZtQ==
-X-Google-Smtp-Source: AGHT+IE2+yTwvlIlrBBUdrlxh/bdcMi9Frd7Jsrb15//QBHKpAJf5zF8GAeFZ7MV29beo2qlL3lkLg==
-X-Received: by 2002:a62:ed11:0:b0:6da:c8b7:d58d with SMTP id
- u17-20020a62ed11000000b006dac8b7d58dmr69664pfh.15.1704496005986; 
- Fri, 05 Jan 2024 15:06:45 -0800 (PST)
-Received: from grind.dc1.ventanamicro.com ([152.234.127.254])
- by smtp.gmail.com with ESMTPSA id
- r19-20020aa78b93000000b006dacfab07b6sm1849249pfd.121.2024.01.05.15.06.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Jan 2024 15:06:45 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v4 17/17] target/riscv/cpu.c: move 'marchid' to
- riscv_cpu_properties[]
-Date: Fri,  5 Jan 2024 20:05:46 -0300
-Message-ID: <20240105230546.265053-18-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240105230546.265053-1-dbarboza@ventanamicro.com>
-References: <20240105230546.265053-1-dbarboza@ventanamicro.com>
+ bh=EW2dgSQrxieMxSNaTZ7OtZx+Dr1ZzgYu+7eKtMT4bAA=;
+ b=DTuyThBs0pYAAgo2W6bQ457ijWvYoLDR4/ynOfg1t58KamO8vNdckdtfxQnkqHVrD2
+ BHbPivu9enJbhGjUWKXTlPeNCxPClZkl4vVsoPiL88uKh7Mr3QofZIPR90wARB3zFDKj
+ XssJ2UfLRpSM5h/Jg9pCDGnhuR17nUeL1E4YWjqiKUxFUHKLoR03rGkOUo79XjQDdDk/
+ dfzIkR+s/z203nhkXp8zuQ6hNR6cFawWZcCIIONADNRXXbTr2kE1RlUTMnvVzF79EmTP
+ 1F5jct7XGwA559n8K5XIb9dGdnEaHvHl2x+8viUesSlMMHJpfGrmZsgJIFL54AfZJJYh
+ h+YQ==
+X-Gm-Message-State: AOJu0YzrOnv1l/4Q2ojKN0cvR0I8frdDXK5zCxUg9HewfaZCar4kBXCR
+ 1ckEh4cz6+6c1ImpBMUpqnUOEAwlHvJZRPNgl/s=
+X-Google-Smtp-Source: AGHT+IHnXGZEXA0U7WRX0UI7OsKBJgyfh+K5Gc3ZCV5GEIht4L9AYrp6p4neqaHEb103PFF/6pB3ji5Fc9XM3/MTmBE=
+X-Received: by 2002:a0c:f98f:0:b0:680:ca82:b1c8 with SMTP id
+ t15-20020a0cf98f000000b00680ca82b1c8mr3892214qvn.86.1704670873767; Sun, 07
+ Jan 2024 15:41:13 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20240104071523.273702-1-bmeng@tinylab.org>
+In-Reply-To: <20240104071523.273702-1-bmeng@tinylab.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 8 Jan 2024 09:40:47 +1000
+Message-ID: <CAKmqyKMSs9vYMVKfgeye-vnPQOgk34sdQXNVty2YZMFQszNP8Q@mail.gmail.com>
+Subject: Re: [PATCH] docs/system/riscv: sifive_u: Update S-mode U-Boot image
+ build instructions
+To: Bin Meng <bmeng@tinylab.org>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::f2d;
+ envelope-from=alistair23@gmail.com; helo=mail-qv1-xf2d.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -97,156 +91,108 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Keep all class properties in riscv_cpu_properties[].
+On Thu, Jan 4, 2024 at 5:18=E2=80=AFPM Bin Meng <bmeng@tinylab.org> wrote:
+>
+> Currently, the documentation outlines the process for building the
+> S-mode U-Boot image using `make menuconfig` and manual actions within
+> the menuconfig UI. However, this approach is fragile due to Kconfig
+> options potentially changing across different releases. For example,
+> CONFIG_OF_PRIOR_STAGE has been replaced by CONFIG_BOARD since v2022.01
+> release, and CONFIG_TEXT_BASE has been moved to the 'General setup'
+> menu from the 'Boot options' menu in v2024.01 release.
+>
+> This update aims to make the S-mode U-Boot image build instructions
+> future-proof. It leverages the 'config' script provided in the U-Boot
+> source tree to edit the .config file, followed by a `make olddefconfig`.
+>
+> Validated with U-Boot v2024.01 release.
+>
+> Signed-off-by: Bin Meng <bmeng@tinylab.org>
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/cpu.c | 110 +++++++++++++++++++++++----------------------
- 1 file changed, 57 insertions(+), 53 deletions(-)
+Thanks!
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 6149f5960e..3870c3a433 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -2044,6 +2044,62 @@ static const PropertyInfo prop_mimpid = {
-     .set = prop_mimpid_set,
- };
- 
-+static void prop_marchid_set(Object *obj, Visitor *v, const char *name,
-+                             void *opaque, Error **errp)
-+{
-+    bool dynamic_cpu = riscv_cpu_is_dynamic(obj);
-+    RISCVCPU *cpu = RISCV_CPU(obj);
-+    uint64_t prev_val = cpu->cfg.marchid;
-+    uint64_t value, invalid_val;
-+    uint32_t mxlen = 0;
-+
-+    if (!visit_type_uint64(v, name, &value, errp)) {
-+        return;
-+    }
-+
-+    if (!dynamic_cpu && prev_val != value) {
-+        error_setg(errp, "Unable to change %s marchid (0x%" PRIu64 ")",
-+                   object_get_typename(obj), prev_val);
-+        return;
-+    }
-+
-+    switch (riscv_cpu_mxl(&cpu->env)) {
-+    case MXL_RV32:
-+        mxlen = 32;
-+        break;
-+    case MXL_RV64:
-+    case MXL_RV128:
-+        mxlen = 64;
-+        break;
-+    default:
-+        g_assert_not_reached();
-+    }
-+
-+    invalid_val = 1LL << (mxlen - 1);
-+
-+    if (value == invalid_val) {
-+        error_setg(errp, "Unable to set marchid with MSB (%u) bit set "
-+                         "and the remaining bits zero", mxlen);
-+        return;
-+    }
-+
-+    cpu->cfg.marchid = value;
-+}
-+
-+static void prop_marchid_get(Object *obj, Visitor *v, const char *name,
-+                             void *opaque, Error **errp)
-+{
-+    uint64_t value = RISCV_CPU(obj)->cfg.marchid;
-+
-+    visit_type_uint64(v, name, &value, errp);
-+}
-+
-+static const PropertyInfo prop_marchid = {
-+    .name = "marchid",
-+    .get = prop_marchid_get,
-+    .set = prop_marchid_set,
-+};
-+
- /*
-  * RVA22U64 defines some 'named features' or 'synthetic extensions'
-  * that are cache related: Za64rs, Zic64b, Ziccif, Ziccrse, Ziccamoa
-@@ -2132,6 +2188,7 @@ static Property riscv_cpu_properties[] = {
- 
-      {.name = "mvendorid", .info = &prop_mvendorid},
-      {.name = "mimpid", .info = &prop_mimpid},
-+     {.name = "marchid", .info = &prop_marchid},
- 
- #ifndef CONFIG_USER_ONLY
-     DEFINE_PROP_UINT64("resetvec", RISCVCPU, env.resetvec, DEFAULT_RSTVEC),
-@@ -2213,56 +2270,6 @@ static const struct SysemuCPUOps riscv_sysemu_ops = {
- };
- #endif
- 
--static void cpu_set_marchid(Object *obj, Visitor *v, const char *name,
--                            void *opaque, Error **errp)
--{
--    bool dynamic_cpu = riscv_cpu_is_dynamic(obj);
--    RISCVCPU *cpu = RISCV_CPU(obj);
--    uint64_t prev_val = cpu->cfg.marchid;
--    uint64_t value, invalid_val;
--    uint32_t mxlen = 0;
--
--    if (!visit_type_uint64(v, name, &value, errp)) {
--        return;
--    }
--
--    if (!dynamic_cpu && prev_val != value) {
--        error_setg(errp, "Unable to change %s marchid (0x%" PRIu64 ")",
--                   object_get_typename(obj), prev_val);
--        return;
--    }
--
--    switch (riscv_cpu_mxl(&cpu->env)) {
--    case MXL_RV32:
--        mxlen = 32;
--        break;
--    case MXL_RV64:
--    case MXL_RV128:
--        mxlen = 64;
--        break;
--    default:
--        g_assert_not_reached();
--    }
--
--    invalid_val = 1LL << (mxlen - 1);
--
--    if (value == invalid_val) {
--        error_setg(errp, "Unable to set marchid with MSB (%u) bit set "
--                         "and the remaining bits zero", mxlen);
--        return;
--    }
--
--    cpu->cfg.marchid = value;
--}
--
--static void cpu_get_marchid(Object *obj, Visitor *v, const char *name,
--                           void *opaque, Error **errp)
--{
--    uint64_t value = RISCV_CPU(obj)->cfg.marchid;
--
--    visit_type_uint64(v, name, &value, errp);
--}
--
- static void riscv_cpu_class_init(ObjectClass *c, void *data)
- {
-     RISCVCPUClass *mcc = RISCV_CPU_CLASS(c);
-@@ -2293,9 +2300,6 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
-     cc->gdb_arch_name = riscv_gdb_arch_name;
-     cc->gdb_get_dynamic_xml = riscv_gdb_get_dynamic_xml;
- 
--    object_class_property_add(c, "marchid", "uint64", cpu_get_marchid,
--                              cpu_set_marchid, NULL, NULL);
--
-     device_class_set_props(dc, riscv_cpu_properties);
- }
- 
--- 
-2.43.0
+Applied to riscv-to-apply.next
 
+Alistair
+
+>
+> ---
+>
+>  docs/system/riscv/sifive_u.rst | 33 ++++++++++++---------------------
+>  1 file changed, 12 insertions(+), 21 deletions(-)
+>
+> diff --git a/docs/system/riscv/sifive_u.rst b/docs/system/riscv/sifive_u.=
+rst
+> index 7b166567f9..8f55ae8e31 100644
+> --- a/docs/system/riscv/sifive_u.rst
+> +++ b/docs/system/riscv/sifive_u.rst
+> @@ -210,7 +210,7 @@ command line options with ``qemu-system-riscv32``.
+>  Running U-Boot
+>  --------------
+>
+> -U-Boot mainline v2021.07 release is tested at the time of writing. To bu=
+ild a
+> +U-Boot mainline v2024.01 release is tested at the time of writing. To bu=
+ild a
+>  U-Boot mainline bootloader that can be booted by the ``sifive_u`` machin=
+e, use
+>  the sifive_unleashed_defconfig with similar commands as described above =
+for
+>  Linux:
+> @@ -325,15 +325,10 @@ configuration of U-Boot:
+>
+>    $ export CROSS_COMPILE=3Driscv64-linux-
+>    $ make sifive_unleashed_defconfig
+> -  $ make menuconfig
+> -
+> -then manually select the following configuration:
+> -
+> -  * Device Tree Control ---> Provider of DTB for DT Control ---> Prior S=
+tage bootloader DTB
+> -
+> -and unselect the following configuration:
+> -
+> -  * Library routines ---> Allow access to binman information in the devi=
+ce tree
+> +  $ ./scripts/config --enable OF_BOARD
+> +  $ ./scripts/config --disable BINMAN_FDT
+> +  $ ./scripts/config --disable SPL
+> +  $ make olddefconfig
+>
+>  This changes U-Boot to use the QEMU generated device tree blob, and bypa=
+ss
+>  running the U-Boot SPL stage.
+> @@ -352,17 +347,13 @@ It's possible to create a 32-bit U-Boot S-mode imag=
+e as well.
+>
+>    $ export CROSS_COMPILE=3Driscv64-linux-
+>    $ make sifive_unleashed_defconfig
+> -  $ make menuconfig
+> -
+> -then manually update the following configuration in U-Boot:
+> -
+> -  * Device Tree Control ---> Provider of DTB for DT Control ---> Prior S=
+tage bootloader DTB
+> -  * RISC-V architecture ---> Base ISA ---> RV32I
+> -  * Boot options ---> Boot images ---> Text Base ---> 0x80400000
+> -
+> -and unselect the following configuration:
+> -
+> -  * Library routines ---> Allow access to binman information in the devi=
+ce tree
+> +  $ ./scripts/config --disable ARCH_RV64I
+> +  $ ./scripts/config --enable ARCH_RV32I
+> +  $ ./scripts/config --set-val TEXT_BASE 0x80400000
+> +  $ ./scripts/config --enable OF_BOARD
+> +  $ ./scripts/config --disable BINMAN_FDT
+> +  $ ./scripts/config --disable SPL
+> +  $ make olddefconfig
+>
+>  Use the same command line options to boot the 32-bit U-Boot S-mode image=
+:
+>
+> --
+> 2.34.1
+>
+>
 
