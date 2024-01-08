@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4319C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 20:57:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 347C1C3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 20:57:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rMwaY-00062G-3r; Mon, 08 Jan 2024 15:51:14 -0500
+	id 1rMwbN-0008LC-KX; Mon, 08 Jan 2024 15:52:05 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1rMwZb-0003ou-Bs; Mon, 08 Jan 2024 15:50:19 -0500
+ id 1rMwa8-0004Uo-B6; Mon, 08 Jan 2024 15:50:48 -0500
 Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1rMwZF-000108-C6; Mon, 08 Jan 2024 15:50:15 -0500
+ id 1rMwa3-00010I-W9; Mon, 08 Jan 2024 15:50:48 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=OnWPh5hbzzJOk4js2nxRTuG9hB5F2v55vySQRb6M4tk=; b=eM4ZffAn4bADdkBWEqoCKrgnIf
- zU48GV4UpKFWM8AZjnxqAsNDiDBB40Ne9EVPaZMtoZW3+PQbyU1RJQBwqrdBybANNmBYcnUANdvi6
- 3jQwb23XEJbXAdB8z2wKtWej+vmfHbf3vSn+ZxIEFUbx+y5K5A9QzBWx4TC3PPhlXRzYcY30AtfaH
- j6ZB5C74ZawnoR9pbtMFkFqDbDyTMuwxT7v9W45Qi0rs+jHA1fBUjUB/VNLvF3cXnktKP6l8AZAKD
- e6XnCxIBYP21Ps9UYsQeSm9Whiu+stofElHMXnGyXFGQsxMKRqo1x/rCYc1S89DacBc8KVdsQ51kM
- kbc0tmgA==;
+ bh=Z9PKbT6aWgGFmUoAHlhWOCQT7qwoHJu2JS0Kzz2LdOw=; b=lU6iClFHtagGRLJhXeevcPJq0E
+ y8oUI8iYUl7jDjdzYVNww6Y2+PI96ggExeGgKIuz0FDXx1ddQxkDYwONUeyx/dfOqaBA5Jf+6qbva
+ rrsi68H/hMAsn8xbfxCmr31LSFb0/onnJV6n2Uobu3gojugX80gyyWAxeyMovgkqTCLdqNDqkTxmG
+ TA7JPTnAg2jNr0WABgJBdKZ/Fj+MMpfFKA/mCVnuf2KfFrgJpS3l3KEd+CXBSc7Ak1KiL55vsJah1
+ bKJkiOFqEcglSvjdQ6Sudlh/Xb0A19FZzgkXb5SR3Y86zgprihK8cSRb0M7DLUDApLVuEQZ08kgAk
+ pVT+FmVA==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1rMwYj-007wXO-2l; Mon, 08 Jan 2024 20:49:22 +0000
+ id 1rMwYk-007wXb-2x; Mon, 08 Jan 2024 20:49:23 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYj-002NEa-0w; Mon, 08 Jan 2024 20:49:21 +0000
+ Hat Linux)) id 1rMwYk-002NFl-1u; Mon, 08 Jan 2024 20:49:22 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -84,9 +84,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 10/46] hw/hppa: use pci_init_nic_devices()
-Date: Mon,  8 Jan 2024 20:26:39 +0000
-Message-ID: <20240108204909.564514-11-dwmw2@infradead.org>
+Subject: [PATCH v3 26/46] hw/net/lan9118: use qemu_configure_nic_device()
+Date: Mon,  8 Jan 2024 20:26:55 +0000
+Message-ID: <20240108204909.564514-27-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
@@ -121,36 +121,121 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
+Some callers instantiate the device unconditionally, others will do so only
+if there is a NICInfo to go with it. This appears to be fairly random, but
+preseve the existing behaviour for now.
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/hppa/machine.c | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
+ hw/arm/kzm.c             | 4 ++--
+ hw/arm/mps2.c            | 2 +-
+ hw/arm/realview.c        | 6 ++----
+ hw/arm/vexpress.c        | 4 ++--
+ hw/net/lan9118.c         | 5 ++---
+ include/hw/net/lan9118.h | 2 +-
+ 6 files changed, 10 insertions(+), 13 deletions(-)
 
-diff --git a/hw/hppa/machine.c b/hw/hppa/machine.c
-index c8da7c18d5..19d477105e 100644
---- a/hw/hppa/machine.c
-+++ b/hw/hppa/machine.c
-@@ -338,7 +338,6 @@ static void machine_HP_common_init_tail(MachineState *machine, PCIBus *pci_bus,
-     uint64_t kernel_entry = 0, kernel_low, kernel_high;
-     MemoryRegion *addr_space = get_system_memory();
-     MemoryRegion *rom_region;
--    long i;
-     unsigned int smp_cpus = machine->smp.cpus;
+diff --git a/hw/arm/kzm.c b/hw/arm/kzm.c
+index 9be91ebeaa..2ccd6f8a76 100644
+--- a/hw/arm/kzm.c
++++ b/hw/arm/kzm.c
+@@ -113,8 +113,8 @@ static void kzm_init(MachineState *machine)
+         alias_offset += ram[i].size;
+     }
+ 
+-    if (nd_table[0].used) {
+-        lan9118_init(&nd_table[0], KZM_LAN9118_ADDR,
++    if (qemu_find_nic_info("lan9118", true, NULL)) {
++        lan9118_init(KZM_LAN9118_ADDR,
+                      qdev_get_gpio_in(DEVICE(&s->soc.avic), 52));
+     }
+ 
+diff --git a/hw/arm/mps2.c b/hw/arm/mps2.c
+index bd873cc5de..50919ee46d 100644
+--- a/hw/arm/mps2.c
++++ b/hw/arm/mps2.c
+@@ -456,7 +456,7 @@ static void mps2_common_init(MachineState *machine)
+     /* In hardware this is a LAN9220; the LAN9118 is software compatible
+      * except that it doesn't support the checksum-offload feature.
+      */
+-    lan9118_init(&nd_table[0], mmc->ethernet_base,
++    lan9118_init(mmc->ethernet_base,
+                  qdev_get_gpio_in(armv7m,
+                                   mmc->fpga_type == FPGA_AN511 ? 47 : 13));
+ 
+diff --git a/hw/arm/realview.c b/hw/arm/realview.c
+index 6e7529d98f..1f88da3702 100644
+--- a/hw/arm/realview.c
++++ b/hw/arm/realview.c
+@@ -84,7 +84,6 @@ static void realview_init(MachineState *machine,
+     SysBusDevice *busdev;
+     qemu_irq pic[64];
+     PCIBus *pci_bus = NULL;
+-    NICInfo *nd;
+     DriveInfo *dinfo;
+     I2CBus *i2c;
+     int n;
+@@ -295,10 +294,9 @@ static void realview_init(MachineState *machine,
+         }
+     }
+ 
+-    nd = qemu_find_nic_info(is_pb ? "lan9118" : "smc91c111", true, NULL);
+-    if (nd) {
++    if (qemu_find_nic_info(is_pb ? "lan9118" : "smc91c111", true, NULL)) {
+         if (is_pb) {
+-            lan9118_init(nd, 0x4e000000, pic[28]);
++            lan9118_init(0x4e000000, pic[28]);
+         } else {
+             smc91c111_init(0x4e000000, pic[28]);
+         }
+diff --git a/hw/arm/vexpress.c b/hw/arm/vexpress.c
+index fd981f4c33..1e02e0965f 100644
+--- a/hw/arm/vexpress.c
++++ b/hw/arm/vexpress.c
+@@ -679,8 +679,8 @@ static void vexpress_common_init(MachineState *machine)
+     memory_region_add_subregion(sysmem, map[VE_VIDEORAM], &vms->vram);
+ 
+     /* 0x4e000000 LAN9118 Ethernet */
+-    if (nd_table[0].used) {
+-        lan9118_init(&nd_table[0], map[VE_ETHERNET], pic[15]);
++    if (qemu_find_nic_info("lan9118", true, NULL)) {
++        lan9118_init(map[VE_ETHERNET], pic[15]);
+     }
+ 
+     /* VE_USB: not modelled */
+diff --git a/hw/net/lan9118.c b/hw/net/lan9118.c
+index 598dd79e17..47ff25b441 100644
+--- a/hw/net/lan9118.c
++++ b/hw/net/lan9118.c
+@@ -1408,14 +1408,13 @@ static void lan9118_register_types(void)
+ 
+ /* Legacy helper function.  Should go away when machine config files are
+    implemented.  */
+-void lan9118_init(NICInfo *nd, uint32_t base, qemu_irq irq)
++void lan9118_init(uint32_t base, qemu_irq irq)
+ {
+     DeviceState *dev;
      SysBusDevice *s;
  
-@@ -362,10 +361,8 @@ static void machine_HP_common_init_tail(MachineState *machine, PCIBus *pci_bus,
-                         qdev_get_gpio_in(lasi_dev, LASI_IRQ_LAN_HPA));
-     }
+-    qemu_check_nic_model(nd, "lan9118");
+     dev = qdev_new(TYPE_LAN9118);
+-    qdev_set_nic_properties(dev, nd);
++    qemu_configure_nic_device(dev, true, NULL);
+     s = SYS_BUS_DEVICE(dev);
+     sysbus_realize_and_unref(s, &error_fatal);
+     sysbus_mmio_map(s, 0, base);
+diff --git a/include/hw/net/lan9118.h b/include/hw/net/lan9118.h
+index 3d0c67f339..4bf9da7a63 100644
+--- a/include/hw/net/lan9118.h
++++ b/include/hw/net/lan9118.h
+@@ -15,6 +15,6 @@
  
--    for (i = 0; i < nb_nics; i++) {
--        if (!enable_lasi_lan()) {
--            pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
--        }
-+    if (!enable_lasi_lan()) {
-+        pci_init_nic_devices(pci_bus, mc->default_nic);
-     }
+ #define TYPE_LAN9118 "lan9118"
  
-     /* BMC board: HP Powerbar SP2 Diva (with console only) */
+-void lan9118_init(NICInfo *, uint32_t, qemu_irq);
++void lan9118_init(uint32_t, qemu_irq);
+ 
+ #endif
 -- 
 2.41.0
 
