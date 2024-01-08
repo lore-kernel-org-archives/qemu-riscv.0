@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A433DC47079
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 20:55:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0B6CC3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 20:55:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rMwaT-0005fd-1w; Mon, 08 Jan 2024 15:51:09 -0500
+	id 1rMwaD-0004iL-CW; Mon, 08 Jan 2024 15:50:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1rMwZa-0003oq-4A; Mon, 08 Jan 2024 15:50:19 -0500
-Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ <BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1rMwZU-0003lL-EV; Mon, 08 Jan 2024 15:50:10 -0500
+Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1rMwZF-00010C-22; Mon, 08 Jan 2024 15:50:13 -0500
+ <BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1rMwZA-0000vB-RY; Mon, 08 Jan 2024 15:50:08 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+ d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=9F94s85N161zpHncvzHPgHeV1YSdfSxyasD9KuzjSZQ=; b=C782r6Abcag566KSiqaHoxRWFf
- qJXNYst6t8COyQd4+X+OL97wL2cQh4nGGDrDlMb+uWJt2mjIYFxch9GJN0G9gkS/WDmwqOyhwf4s4
- Em3VlMcW1qNmFx9QIe2ZOo+kFEYaMaagMuH1nY0/timFzvyGQWLIPrBAsRcIMn4c3y98MubZzrcjQ
- FabY+Z0DlLwZy+7jjSk0ueaKiRixHvLe+91Ru7TfCqjVoSakPcj9Y05g0VSVRkDGAWzL4GTnqCiZU
- sgzg6LI7mmxKGNHcNZsECKuKHYzQm4nBQkqZGcCsXzOCNfT9J4BOsCYmjvolhREOFFyRA/6N7hQdP
- JFqZu4cg==;
+ bh=6GcIfEqXlcnmmpl6cCrOJJoCYIHAK8lem5JXl9qMtnE=; b=jHmLFfWjdNWZEwoAjapVuYMxb4
+ YUENhD15vHFueDLBK1r5BffVHDYrLRK0/rou5KqHnL08QsHFsVwLfeoxDIWTSzz/MNNeI8oIdojaW
+ 0MYqRzeFKKVBJ0jU49R37R5g/IKEAZ26JLf3fWDfjsgj5hQu44Jfjhc0arOZH/DXceHB04e5JvDEV
+ ZBUifwJL1a8WlHMs0aM+wrrKoOs5+chirS62fIrMq4i+A4lQf1dtugy3i5XhEV3gP5P7BAEwkKNx/
+ d9d0jcYe+m0C2Pzvj89li+68AgVW7TWwy1P935IwFo/4/1UVEiFXnR1yrzWmCAn0xhkb3+Jla3mtZ
+ Nc0JTarw==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1rMwYk-007wXQ-2w; Mon, 08 Jan 2024 20:49:23 +0000
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1rMwYj-008RPq-KG; Mon, 08 Jan 2024 20:49:22 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYj-002NEz-2D; Mon, 08 Jan 2024 20:49:21 +0000
+ Hat Linux)) id 1rMwYk-002NFT-10; Mon, 08 Jan 2024 20:49:22 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -84,19 +84,19 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 15/46] hw/ppc/prep: use pci_init_nic_devices()
-Date: Mon,  8 Jan 2024 20:26:44 +0000
-Message-ID: <20240108204909.564514-16-dwmw2@infradead.org>
+Subject: [PATCH v3 22/46] hw/arm/aspeed: use qemu_configure_nic_device()
+Date: Mon,  8 Jan 2024 20:26:51 +0000
+Message-ID: <20240108204909.564514-23-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- desiato.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1:d65d:64ff:fe57:4e05;
- envelope-from=BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org;
- helo=desiato.infradead.org
+ casper.infradead.org. See http://www.infradead.org/rpr.html
+Received-SPF: none client-ip=2001:8b0:10b:1236::1;
+ envelope-from=BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org;
+ helo=casper.infradead.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -121,46 +121,38 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Previously, the first PCI NIC would be placed in PCI slot 3 and the rest
-would be dynamically assigned. Even if the user overrode the default NIC
-type and made it something other than PCNet.
-
-Now, the first PCNet NIC (that is, anything not explicitly specified
-to be anything different) will go to slot 3 even if it isn't the first
-NIC specified on the commnd line. And anything else will be dynamically
-assigned.
-
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/ppc/prep.c | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
+ hw/arm/aspeed.c | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/hw/ppc/prep.c b/hw/ppc/prep.c
-index 137276bcb9..1a6cd05c61 100644
---- a/hw/ppc/prep.c
-+++ b/hw/ppc/prep.c
-@@ -241,7 +241,6 @@ static void ibm_40p_init(MachineState *machine)
-     ISADevice *isa_dev;
-     ISABus *isa_bus;
-     void *fw_cfg;
--    int i;
-     uint32_t kernel_base = 0, initrd_base = 0;
-     long kernel_size = 0, initrd_size = 0;
-     char boot_device;
-@@ -336,10 +335,9 @@ static void ibm_40p_init(MachineState *machine)
-         /* XXX: s3-trio at PCI_DEVFN(2, 0) */
-         pci_vga_init(pci_bus);
+diff --git a/hw/arm/aspeed.c b/hw/arm/aspeed.c
+index cc59176563..bed5e4f40b 100644
+--- a/hw/arm/aspeed.c
++++ b/hw/arm/aspeed.c
+@@ -356,7 +356,6 @@ static void aspeed_machine_init(MachineState *machine)
+     AspeedMachineClass *amc = ASPEED_MACHINE_GET_CLASS(machine);
+     AspeedSoCClass *sc;
+     int i;
+-    NICInfo *nd = &nd_table[0];
  
--        for (i = 0; i < nb_nics; i++) {
--            pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic,
--                                i == 0 ? "3" : NULL);
--        }
-+        /* First PCNET device at PCI_DEVFN(3, 0) */
-+        pci_init_nic_in_slot(pci_bus, mc->default_nic, NULL, "3");
-+        pci_init_nic_devices(pci_bus, mc->default_nic);
+     bmc->soc = ASPEED_SOC(object_new(amc->soc_name));
+     object_property_add_child(OBJECT(machine), "soc", OBJECT(bmc->soc));
+@@ -371,10 +370,10 @@ static void aspeed_machine_init(MachineState *machine)
+                              &error_fatal);
+ 
+     for (i = 0; i < sc->macs_num; i++) {
+-        if ((amc->macs_mask & (1 << i)) && nd->used) {
+-            qemu_check_nic_model(nd, TYPE_FTGMAC100);
+-            qdev_set_nic_properties(DEVICE(&bmc->soc->ftgmac100[i]), nd);
+-            nd++;
++        if ((amc->macs_mask & (1 << i)) &&
++            !qemu_configure_nic_device(DEVICE(&bmc->soc->ftgmac100[i]),
++                                       true, NULL)) {
++            break; /* No configs left; stop asking */
+         }
      }
  
-     /* Prepare firmware configuration for OpenBIOS */
 -- 
 2.41.0
 
