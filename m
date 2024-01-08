@@ -4,86 +4,125 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F9D1C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 11:35:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DED7C3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 12:28:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rMnu9-000275-2w; Mon, 08 Jan 2024 06:34:53 -0500
+	id 1rMojU-0005nw-7t; Mon, 08 Jan 2024 07:27:57 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1rMnu7-00025v-1q
- for qemu-riscv@nongnu.org; Mon, 08 Jan 2024 06:34:51 -0500
-Received: from mail-pg1-x52c.google.com ([2607:f8b0:4864:20::52c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1rMnu5-0006y8-4i
- for qemu-riscv@nongnu.org; Mon, 08 Jan 2024 06:34:50 -0500
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-5c6ce4dffb5so302341a12.0
- for <qemu-riscv@nongnu.org>; Mon, 08 Jan 2024 03:34:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1704713686; x=1705318486; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ykj9rb5faTIAKtTXYqY6/zCYcpj8jVy1GLb0MO00h10=;
- b=Vsx0eRjrIzolNbNxwD8cV1w5n4L6RMeRNmObCi14yQ/90ZVRUEiwR8PzuV+y1kOjCj
- Xbo4v/eOqOraevFhLrnIYhkgAO/E5ai0GF/UKt3EqG5/lHFQcRRndNgiZRoDPnH2AXYC
- qjfI2352fqvjFej0QkhxVWBc6FxcmoF7lGEk00xgdAGdMi0a16IAM2CLIB6LAzXioJ8f
- LXt6TAVMXBWVVv7Cvlcwpw2i2xwmIPsEx431+WdpJ0352AbiUxow2lSBEJJLU3BjZs4J
- b6jqPVJ0+DHV0hmWahNSYxPCL0e3apUxrtelf+okQ1YNWF9EeJs+YQXLbUxusrRnJhBr
- /B/w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704713686; x=1705318486;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ykj9rb5faTIAKtTXYqY6/zCYcpj8jVy1GLb0MO00h10=;
- b=mhJe/mLAD8I8khujcSpz6LK1BuP15LFPH+WaGQT4EVRu4FGL97Gkd/R3km+9w7J+gi
- 4VhWHHpMhLU5MaQqf0xkOcvPHfa5MLYuIQtrOiFZ39NqKMrK6VMR9241OlYRcGi42u9c
- o7q+fzEOY+1Ca0ZvyPexE3OyXHoswF6gGLCJ4afBUQl9UAR3lrdrXmpHQvDGc52jwfVr
- 5fYR/3WriwAOHVhvGFP2NZBbPW6WMLEgieOOrFvBNcYNaXNk4/qjQxWC/TvGcpx9s7Vz
- y+/78URedPE/8rXGeJk65n6f5hCxArI76XVPqZ3Cqfmx1sSajXqfB5tVEWUsVrJMdcQE
- ohpQ==
-X-Gm-Message-State: AOJu0Yzn+IfjquwkYX+v51jnqMSrxMsaK5WYrHSspxJqF/iLCcmzYy0Z
- cFvzKotDiRfC5Dxje3UPuMEBbc/hLeu+Mw==
-X-Google-Smtp-Source: AGHT+IH9L3hIGKOpWqNlUmBM3kk1cZVBtwbj2/TgosF4gUiYzMdraa86hxqzNmHUX86mxorkvrjLOg==
-X-Received: by 2002:a05:6a20:13d1:b0:196:d90:aa62 with SMTP id
- ho17-20020a056a2013d100b001960d90aa62mr887356pzc.121.1704713686162; 
- Mon, 08 Jan 2024 03:34:46 -0800 (PST)
-Received: from sunil-laptop ([106.51.188.200])
- by smtp.gmail.com with ESMTPSA id
- j23-20020a17090aeb1700b0028b89520c7asm5986211pjz.9.2024.01.08.03.34.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jan 2024 03:34:45 -0800 (PST)
-Date: Mon, 8 Jan 2024 17:04:36 +0530
-From: Sunil V L <sunilvl@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: Sia Jee Heng <jeeheng.sia@starfivetech.com>, qemu-arm@nongnu.org,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org, mst@redhat.com,
- imammedo@redhat.com, anisinha@redhat.com, peter.maydell@linaro.org,
- shannon.zhaosl@gmail.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com
-Subject: Re: [RESEND RFC v1 1/2] hw/arm/virt-acpi-build.c: Migrate SPCR
- creation to common location
-Message-ID: <ZZvdzOjQBbxfmuRJ@sunil-laptop>
-References: <20240105090608.5745-1-jeeheng.sia@starfivetech.com>
- <20240105090608.5745-2-jeeheng.sia@starfivetech.com>
- <7cb2ab36-811a-477f-b2de-1f581150a595@ventanamicro.com>
+ (Exim 4.90_1) (envelope-from <iii@linux.ibm.com>)
+ id 1rMojN-0005gF-Qe; Mon, 08 Jan 2024 07:27:49 -0500
+Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <iii@linux.ibm.com>)
+ id 1rMoj9-0001Vd-M9; Mon, 08 Jan 2024 07:27:49 -0500
+Received: from pps.filterd (m0353722.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 408CJ7eF011242; Mon, 8 Jan 2024 12:26:48 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
+ h=message-id : subject :
+ from : to : cc : date : in-reply-to : references : content-type :
+ content-transfer-encoding : mime-version; s=pp1;
+ bh=GWZ5VSSILwvZEYjs2ah+vKQhv71Sizq1i7905GYRhVg=;
+ b=eXwElvQ2AvLzT8soE9YIYlVKrCndglb1kIKoouuKU76bE7+DNgp0fD6YYJ+loqDS/6/Y
+ s80tA2b98JpSCfA26XiYwgSWexblKVBHX4Xx6JD+HvFcQ8zo+/eX/ydma+hAPoYeVjOM
+ PDOAhMQQIx3k3pc/y9cz7QSzYvZPGvp4vtq3Esbc3L9f9SgRjzrjU4ujze8fLW6zHqOK
+ nl/EGDZMcHZGPMw4AG1bXzVX9+MpaJYc/R7GPhMytjP10aIZKnbJnR0VuRQ/YW5qsQ7A
+ u7ykuStrbzvnGdeK+TFvh1A2g5aO+yyOKXQIvJXzmqkOZUTOy9vaRtVnHOeZGrv1AFeF Jw== 
+Received: from pps.reinject (localhost [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3vggxs857n-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 08 Jan 2024 12:26:47 +0000
+Received: from m0353722.ppops.net (m0353722.ppops.net [127.0.0.1])
+ by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 408CMM9j023215;
+ Mon, 8 Jan 2024 12:26:47 GMT
+Received: from ppma22.wdc07v.mail.ibm.com
+ (5c.69.3da9.ip4.static.sl-reverse.com [169.61.105.92])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3vggxs856j-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 08 Jan 2024 12:26:46 +0000
+Received: from pps.filterd (ppma22.wdc07v.mail.ibm.com [127.0.0.1])
+ by ppma22.wdc07v.mail.ibm.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 408C5E66022845; Mon, 8 Jan 2024 12:26:44 GMT
+Received: from smtprelay06.fra02v.mail.ibm.com ([9.218.2.230])
+ by ppma22.wdc07v.mail.ibm.com (PPS) with ESMTPS id 3vfhjy7yjm-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 08 Jan 2024 12:26:44 +0000
+Received: from smtpav03.fra02v.mail.ibm.com (smtpav03.fra02v.mail.ibm.com
+ [10.20.54.102])
+ by smtprelay06.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 408CQgO538797722
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 8 Jan 2024 12:26:42 GMT
+Received: from smtpav03.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 951E420043;
+ Mon,  8 Jan 2024 12:26:42 +0000 (GMT)
+Received: from smtpav03.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id B6D5D20040;
+ Mon,  8 Jan 2024 12:26:41 +0000 (GMT)
+Received: from [9.155.200.166] (unknown [9.155.200.166])
+ by smtpav03.fra02v.mail.ibm.com (Postfix) with ESMTP;
+ Mon,  8 Jan 2024 12:26:41 +0000 (GMT)
+Message-ID: <1e5fb129a184ce743365f3503bc3ba2e47676b5c.camel@linux.ibm.com>
+Subject: Re: [PATCH v2 08/43] qtest: bump npcm7xx_pwn-test timeout to 5 minutes
+From: Ilya Leoshkevich <iii@linux.ibm.com>
+To: Alex =?ISO-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: qemu-s390x@nongnu.org, qemu-ppc@nongnu.org, Richard Henderson
+ <richard.henderson@linaro.org>, Song Gao <gaosong@loongson.cn>,
+ =?ISO-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>, David
+ Hildenbrand <david@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>, Yanan Wang
+ <wangyanan55@huawei.com>, Bin Meng <bin.meng@windriver.com>, Laurent Vivier
+ <lvivier@redhat.com>, Michael Rolnik <mrolnik@gmail.com>, Alexandre Iooss
+ <erdnaxe@crans.org>, David Woodhouse <dwmw2@infradead.org>, Laurent Vivier
+ <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>, Brian Cain
+ <bcain@quicinc.com>, Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Beraldo Leal <bleal@redhat.com>, Paul Durrant <paul@xen.org>, Mahmoud
+ Mandour <ma.mandourr@gmail.com>, Thomas Huth <thuth@redhat.com>, Liu
+ Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Cleber Rosa <crosa@redhat.com>, kvm@vger.kernel.org,
+ Peter Maydell <peter.maydell@linaro.org>, Wainer dos
+ Santos Moschetta <wainersm@redhat.com>, qemu-arm@nongnu.org, Weiwei Li
+ <liwei1518@gmail.com>, Philippe =?ISO-8859-1?Q?Mathieu-Daud=E9?=
+ <philmd@linaro.org>, John Snow <jsnow@redhat.com>, Daniel Henrique Barboza
+ <dbarboza@ventanamicro.com>, Nicholas Piggin <npiggin@gmail.com>, Palmer
+ Dabbelt <palmer@dabbelt.com>, Marcel Apfelbaum
+ <marcel.apfelbaum@gmail.com>, =?ISO-8859-1?Q?C=E9dric?= Le Goater
+ <clg@kaod.org>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Eduardo
+ Habkost <eduardo@habkost.net>, Pierrick Bouvier
+ <pierrick.bouvier@linaro.org>, qemu-riscv@nongnu.org, Alistair Francis
+ <alistair.francis@wdc.com>, "Daniel P." =?ISO-8859-1?Q?Berrang=E9?=
+ <berrange@redhat.com>
+Date: Mon, 08 Jan 2024 13:26:41 +0100
+In-Reply-To: <20240103173349.398526-9-alex.bennee@linaro.org>
+References: <20240103173349.398526-1-alex.bennee@linaro.org>
+ <20240103173349.398526-9-alex.bennee@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.48.4 (3.48.4-1.fc38) 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <7cb2ab36-811a-477f-b2de-1f581150a595@ventanamicro.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52c;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pg1-x52c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+X-TM-AS-GCONF: 00
+X-Proofpoint-GUID: 3n4703UJLu9UuNQtQwKGxRASFadYab6V
+X-Proofpoint-ORIG-GUID: uFOpD788Yz5ZHIHSnHD0G_5gxHCVFtIt
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-01-08_04,2024-01-08_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 mlxscore=0
+ spamscore=0 clxscore=1011 phishscore=0 lowpriorityscore=0 bulkscore=0
+ priorityscore=1501 mlxlogscore=922 suspectscore=0 impostorscore=0
+ malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2311290000 definitions=main-2401080106
+Received-SPF: pass client-ip=148.163.158.5; envelope-from=iii@linux.ibm.com;
+ helo=mx0b-001b2d01.pphosted.com
+X-Spam_score_int: -19
+X-Spam_score: -2.0
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -100,103 +139,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Jan 05, 2024 at 09:19:14AM -0300, Daniel Henrique Barboza wrote:
-> 
-> 
-> On 1/5/24 06:06, Sia Jee Heng wrote:
-> > RISC-V should also generate the SPCR in a manner similar to ARM.
-> > Therefore, instead of replicating the code, relocate this function
-> > to the common AML build.
-> > 
-> > Signed-off-by: Sia Jee Heng <jeeheng.sia@starfivetech.com>
-> > ---
-> >   hw/acpi/aml-build.c         | 51 ++++++++++++++++++++++++++++
-> >   hw/arm/virt-acpi-build.c    | 68 +++++++++++++++----------------------
-> >   include/hw/acpi/acpi-defs.h | 33 ++++++++++++++++++
-> >   include/hw/acpi/aml-build.h |  4 +++
-> >   4 files changed, 115 insertions(+), 41 deletions(-)
-> > 
-> > diff --git a/hw/acpi/aml-build.c b/hw/acpi/aml-build.c
-> > index af66bde0f5..1efa534aa8 100644
-> > --- a/hw/acpi/aml-build.c
-> > +++ b/hw/acpi/aml-build.c
-> > @@ -1994,6 +1994,57 @@ static void build_processor_hierarchy_node(GArray *tbl, uint32_t flags,
-> >       }
-> >   }
-> > +void build_spcr(GArray *table_data, BIOSLinker *linker,
-> > +                const AcpiSpcrData *f, const char *oem_id,
-> > +                const char *oem_table_id)
-> > +{
-> > +    AcpiTable table = { .sig = "SPCR", .rev = 2, .oem_id = oem_id,
-> > +                        .oem_table_id = oem_table_id };
-> > +
-> > +    acpi_table_begin(&table, table_data);
-> > +    /* Interface type */
-> > +    build_append_int_noprefix(table_data, f->interface_type, 1);
-> > +    /* Reserved */
-> > +    build_append_int_noprefix(table_data, 0, 3);
-> > +    /* Base Address */
-> > +    build_append_gas(table_data, f->base_addr.id, f->base_addr.width,
-> > +                     f->base_addr.offset, f->base_addr.size,
-> > +                     f->base_addr.addr);
-> > +    /* Interrupt type */
-> > +    build_append_int_noprefix(table_data, f->interrupt_type, 1);
-> > +    /* IRQ */
-> > +    build_append_int_noprefix(table_data, f->pc_interrupt, 1);
-> > +    /* Global System Interrupt */
-> > +    build_append_int_noprefix(table_data, f->interrupt, 4);
-> > +    /* Baud Rate */
-> > +    build_append_int_noprefix(table_data, f->baud_rate, 1);
-> > +    /* Parity */
-> > +    build_append_int_noprefix(table_data, f->parity, 1);
-> > +    /* Stop Bits */
-> > +    build_append_int_noprefix(table_data, f->stop_bits, 1);
-> > +    /* Flow Control */
-> > +    build_append_int_noprefix(table_data, f->flow_control, 1);
-> > +    /* Terminal Type */
-> > +    build_append_int_noprefix(table_data, f->terminal_type, 1);
-> > +    /* PCI Device ID  */
-> > +    build_append_int_noprefix(table_data, f->pci_device_id, 2);
-> > +    /* PCI Vendor ID */
-> > +    build_append_int_noprefix(table_data, f->pci_vendor_id, 2);
-> > +    /* PCI Bus Number */
-> > +    build_append_int_noprefix(table_data, f->pci_bus, 1);
-> > +    /* PCI Device Number */
-> > +    build_append_int_noprefix(table_data, f->pci_device, 1);
-> > +    /* PCI Function Number */
-> > +    build_append_int_noprefix(table_data, f->pci_function, 1);
-> > +    /* PCI Flags */
-> > +    build_append_int_noprefix(table_data, f->pci_flags, 4);
-> > +    /* PCI Segment */
-> > +    build_append_int_noprefix(table_data, f->pci_segment, 1);
-> > +    /* Reserved */
-> > +    build_append_int_noprefix(table_data, 0, 4);
-> > +
-> > +    acpi_table_end(linker, &table);
-> > +}
-> >   /*
-> >    * ACPI spec, Revision 6.3
-> >    * 5.2.29 Processor Properties Topology Table (PPTT)
-> > diff --git a/hw/arm/virt-acpi-build.c b/hw/arm/virt-acpi-build.c
-> > index 510ab0dcca..a31f736d1a 100644
-> > --- a/hw/arm/virt-acpi-build.c
-> > +++ b/hw/arm/virt-acpi-build.c
-> > @@ -431,48 +431,34 @@ build_iort(GArray *table_data, BIOSLinker *linker, VirtMachineState *vms)
-> >    * Rev: 1.07
-> >    */
-> >   static void
-> > -build_spcr(GArray *table_data, BIOSLinker *linker, VirtMachineState *vms)
-> > +build_spcr_v2(GArray *table_data, BIOSLinker *linker, VirtMachineState *vms)
-> 
-> Nit: I don't understand the '_v2' in the name of this function. Is it just to not collide
-> with the now public build_spcr()? Or does it have to do with the SPCR table being
-> '.rev = 2'? Because if it's the latter, you can name the common helper 'build_spcr_rev2'
-> (since both ARM and RISC-V use SPCR rev 2), keep this local build_spcr() initializing
-> the AcpiSpcrData struct with ARM attributes and then call the common build_spcr_rev2().
-> 
-My suggestion is, keep the build_spcr() generic and take version as the
-parameter.
+On Wed, 2024-01-03 at 17:33 +0000, Alex Benn=C3=A9e wrote:
+> From: Daniel P. Berrang=C3=A9 <berrange@redhat.com>
+>=20
+> The npcm7xx_pwn-test takes 3 & 1/2 minutes in a --enable-debug build.
+> Bumping to 5 minutes will give more headroom.
+>=20
+> Signed-off-by: Daniel P. Berrang=C3=A9 <berrange@redhat.com>
+> Reviewed-by: Thomas Huth <thuth@redhat.com>
+> Message-ID: <20230717182859.707658-5-berrange@redhat.com>
+> Signed-off-by: Thomas Huth <thuth@redhat.com>
+> Message-Id: <20231215070357.10888-5-thuth@redhat.com>
+> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+> ---
+> =C2=A0tests/qtest/meson.build | 2 +-
+> =C2=A01 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
+> index 000ac54b7d6..84cec0a847d 100644
+> --- a/tests/qtest/meson.build
+> +++ b/tests/qtest/meson.build
+> @@ -1,7 +1,7 @@
+> =C2=A0slow_qtests =3D {
+> =C2=A0=C2=A0 'bios-tables-test' : 120,
+> =C2=A0=C2=A0 'migration-test' : 480,
+> -=C2=A0 'npcm7xx_pwm-test': 150,
+> +=C2=A0 'npcm7xx_pwm-test': 300,
+> =C2=A0=C2=A0 'qom-test' : 900,
+> =C2=A0=C2=A0 'test-hmp' : 120,
+> =C2=A0}
 
-Thanks,
-Sunil
+Nit: s/pwn/pwm/ in the commit subject and message.
 
