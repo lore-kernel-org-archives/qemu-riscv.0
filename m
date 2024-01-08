@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC311C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 20:54:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A10FC3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 20:54:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rMwai-0006PY-Gt; Mon, 08 Jan 2024 15:51:25 -0500
+	id 1rMwaF-0004pa-On; Mon, 08 Jan 2024 15:50:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rMwZw-00043Q-WD; Mon, 08 Jan 2024 15:50:37 -0500
+ id 1rMwZY-0003o7-Ls; Mon, 08 Jan 2024 15:50:13 -0500
 Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rMwZt-0000v9-L6; Mon, 08 Jan 2024 15:50:36 -0500
+ id 1rMwZE-0000uy-99; Mon, 08 Jan 2024 15:50:09 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=uc7qG2cne/6E8+t91EtiLDMAE+B8LUD5xbmCp8tTbzY=; b=W51OsUX6uNMef+WOdKoBKEPVPC
- l0ml+H8yYOCuYD7wGi99UEZz8kAiuHDfQMnIowBKwdmBZgV/FseLB9wsfW9NBF/9hTlPSgKb8sPbT
- Rz/dYde3PWiVF1nj1oHbdRjdIJWaFu4zzaTQjsQ2wZ6fsux/b1qrQucpKv5XdU09eB2CeQtn085kL
- fPtGEs9Lyi+1jaCl3c8zXbiOKhWcdUaGNdQ/dL6CSW0S4V5PGqwF0YPEUjhr1MvpAur/nK6MRrk4S
- knwoPsI53hHdtH+Pv7fm2VJ2RJuqW/JfFDzL+n2PAaKMLsC12mbjmRy67qQO0maB4G7TPJIPjgHmC
- OoLgn7hw==;
+ bh=hIoRnAOMf4YLSnQadmaBzYXHMtK98X95ymuChZmuyOk=; b=nfxsfbqV1CHr1yheFZqmqLuDWj
+ OkCLvnwbhPHn2IVSnOAZlJcmn3l++D3kgPeT6bXOqWCPoFwuMqq4di8mfLBX9m3NESJ0NiMZJVYdY
+ A+OO59fTIAzChlNUEYpim+kMzrYnSgEY8y8oqz6pB2juLoGEPrW9WE6gQOiWcl6UaumHGjhLukdLn
+ xW/kDvmrsqXhVWnlafADfHvUWavzvCPo/+D9N2eKUEPzFC5ayE9nYyc8LtXHw/KOj0WfTVgx3v14M
+ o93mKqGsZVbRFaHaToR+1JuwA6mCR6EY/rPI2QAFvSMx7dqTsPo0o2ktlvxJnt7wd9L3Toaw3Ejlo
+ tAby7F6Q==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1rMwYh-008RPP-WE; Mon, 08 Jan 2024 20:49:21 +0000
+ id 1rMwYj-008RPl-Eh; Mon, 08 Jan 2024 20:49:22 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYi-002NEF-2O; Mon, 08 Jan 2024 20:49:20 +0000
+ Hat Linux)) id 1rMwYk-002NFO-0e; Mon, 08 Jan 2024 20:49:22 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -84,10 +84,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 05/46] hw/i386/pc: use qemu_get_nic_info() and
- pci_init_nic_devices()
-Date: Mon,  8 Jan 2024 20:26:34 +0000
-Message-ID: <20240108204909.564514-6-dwmw2@infradead.org>
+Subject: [PATCH v3 21/46] hw/arm/allwinner: use qemu_configure_nic_device()
+Date: Mon,  8 Jan 2024 20:26:50 +0000
+Message-ID: <20240108204909.564514-22-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
@@ -122,83 +121,100 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Eliminate direct access to nd_table[] and nb_nics by processing the the
-Xen and ISA NICs first and then calling pci_init_nic_devices() for the
-rest.
-
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- hw/i386/pc.c                | 26 ++++++++++++++++----------
- include/hw/net/ne2000-isa.h |  2 --
- 2 files changed, 16 insertions(+), 12 deletions(-)
+ hw/arm/allwinner-a10.c |  6 +-----
+ hw/arm/allwinner-h3.c  |  6 +-----
+ hw/arm/allwinner-r40.c | 27 ++-------------------------
+ 3 files changed, 4 insertions(+), 35 deletions(-)
 
-diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-index 496498df3a..d80c536d88 100644
---- a/hw/i386/pc.c
-+++ b/hw/i386/pc.c
-@@ -658,8 +658,11 @@ static void pc_init_ne2k_isa(ISABus *bus, NICInfo *nd)
- {
-     static int nb_ne2k = 0;
+diff --git a/hw/arm/allwinner-a10.c b/hw/arm/allwinner-a10.c
+index b0ea3f7f66..57f52871ec 100644
+--- a/hw/arm/allwinner-a10.c
++++ b/hw/arm/allwinner-a10.c
+@@ -142,11 +142,7 @@ static void aw_a10_realize(DeviceState *dev, Error **errp)
+     sysbus_realize(SYS_BUS_DEVICE(&s->dramc), &error_fatal);
+     sysbus_mmio_map(SYS_BUS_DEVICE(&s->dramc), 0, AW_A10_DRAMC_BASE);
  
--    if (nb_ne2k == NE2000_NB_MAX)
-+    if (nb_ne2k == NE2000_NB_MAX) {
-+        error_setg(&error_fatal,
-+                   "maximum number of ISA NE2000 devices exceeded");
+-    /* FIXME use qdev NIC properties instead of nd_table[] */
+-    if (nd_table[0].used) {
+-        qemu_check_nic_model(&nd_table[0], TYPE_AW_EMAC);
+-        qdev_set_nic_properties(DEVICE(&s->emac), &nd_table[0]);
+-    }
++    qemu_configure_nic_device(DEVICE(&s->emac), true, NULL);
+     if (!sysbus_realize(SYS_BUS_DEVICE(&s->emac), errp)) {
          return;
-+    }
-     isa_ne2000_init(bus, ne2000_io[nb_ne2k],
-                     ne2000_irq[nb_ne2k], nd);
-     nb_ne2k++;
-@@ -1297,23 +1300,26 @@ void pc_nic_init(PCMachineClass *pcmc, ISABus *isa_bus, PCIBus *pci_bus,
-                  BusState *xen_bus)
- {
-     MachineClass *mc = MACHINE_CLASS(pcmc);
--    int i;
-+    bool default_is_ne2k = g_str_equal(mc->default_nic, TYPE_ISA_NE2000);
-+    NICInfo *nd;
- 
-     rom_set_order_override(FW_CFG_ORDER_OVERRIDE_NIC);
--    for (i = 0; i < nb_nics; i++) {
--        NICInfo *nd = &nd_table[i];
--        const char *model = nd->model ? nd->model : mc->default_nic;
- 
--        if (xen_bus && (!nd->model || g_str_equal(model, "xen-net-device"))) {
-+    if (xen_bus) {
-+        while (nc = qemu_find_nic_info("xen-net-device", true, NULL)) {
-             DeviceState *dev = qdev_new("xen-net-device");
-             qdev_set_nic_properties(dev, nd);
-             qdev_realize_and_unref(dev, xen_bus, &error_fatal);
--        } else if (g_str_equal(model, "ne2k_isa")) {
--            pc_init_ne2k_isa(isa_bus, nd);
--        } else {
--            pci_nic_init_nofail(nd, pci_bus, model, NULL);
-         }
      }
-+
-+    while ((nd = qemu_find_nic_info(TYPE_ISA_NE2000, default_is_ne2k, NULL))) {
-+        pc_init_ne2k_isa(isa_bus, nd);
-+    }
-+
-+    /* Anything remaining should be a PCI NIC */
-+    pci_init_nic_devices(pci_bus, mc->default_nic);
-+
-     rom_reset_order_override();
- }
+diff --git a/hw/arm/allwinner-h3.c b/hw/arm/allwinner-h3.c
+index f05afddf7e..4f102ad082 100644
+--- a/hw/arm/allwinner-h3.c
++++ b/hw/arm/allwinner-h3.c
+@@ -369,11 +369,7 @@ static void allwinner_h3_realize(DeviceState *dev, Error **errp)
+                               "sd-bus");
  
-diff --git a/include/hw/net/ne2000-isa.h b/include/hw/net/ne2000-isa.h
-index af59ee0b02..73bae10ad1 100644
---- a/include/hw/net/ne2000-isa.h
-+++ b/include/hw/net/ne2000-isa.h
-@@ -22,8 +22,6 @@ static inline ISADevice *isa_ne2000_init(ISABus *bus, int base, int irq,
+     /* EMAC */
+-    /* FIXME use qdev NIC properties instead of nd_table[] */
+-    if (nd_table[0].used) {
+-        qemu_check_nic_model(&nd_table[0], TYPE_AW_SUN8I_EMAC);
+-        qdev_set_nic_properties(DEVICE(&s->emac), &nd_table[0]);
+-    }
++    qemu_configure_nic_device(DEVICE(&s->emac), true, NULL);
+     object_property_set_link(OBJECT(&s->emac), "dma-memory",
+                              OBJECT(get_system_memory()), &error_fatal);
+     sysbus_realize(SYS_BUS_DEVICE(&s->emac), &error_fatal);
+diff --git a/hw/arm/allwinner-r40.c b/hw/arm/allwinner-r40.c
+index a0d367c60d..4d5661b014 100644
+--- a/hw/arm/allwinner-r40.c
++++ b/hw/arm/allwinner-r40.c
+@@ -294,7 +294,6 @@ static void allwinner_r40_init(Object *obj)
+ 
+ static void allwinner_r40_realize(DeviceState *dev, Error **errp)
  {
-     ISADevice *d;
+-    const char *r40_nic_models[] = { "gmac", "emac", NULL };
+     AwR40State *s = AW_R40(dev);
  
--    qemu_check_nic_model(nd, "ne2k_isa");
+     /* CPUs */
+@@ -454,31 +453,8 @@ static void allwinner_r40_realize(DeviceState *dev, Error **errp)
+     sysbus_mmio_map(SYS_BUS_DEVICE(&s->dramc), 2,
+                     s->memmap[AW_R40_DEV_DRAMPHY]);
+ 
+-    /* nic support gmac and emac */
+-    for (int i = 0; i < ARRAY_SIZE(r40_nic_models) - 1; i++) {
+-        NICInfo *nic = &nd_table[i];
 -
-     d = isa_try_new(TYPE_ISA_NE2000);
-     if (d) {
-         DeviceState *dev = DEVICE(d);
+-        if (!nic->used) {
+-            continue;
+-        }
+-        if (qemu_show_nic_models(nic->model, r40_nic_models)) {
+-            exit(0);
+-        }
+-
+-        switch (qemu_find_nic_model(nic, r40_nic_models, r40_nic_models[0])) {
+-        case 0: /* gmac */
+-            qdev_set_nic_properties(DEVICE(&s->gmac), nic);
+-            break;
+-        case 1: /* emac */
+-            qdev_set_nic_properties(DEVICE(&s->emac), nic);
+-            break;
+-        default:
+-            exit(1);
+-            break;
+-        }
+-    }
+-
+     /* GMAC */
++    qemu_configure_nic_device(DEVICE(&s->gmac), true, "gmac");
+     object_property_set_link(OBJECT(&s->gmac), "dma-memory",
+                                      OBJECT(get_system_memory()), &error_fatal);
+     sysbus_realize(SYS_BUS_DEVICE(&s->gmac), &error_fatal);
+@@ -487,6 +463,7 @@ static void allwinner_r40_realize(DeviceState *dev, Error **errp)
+                        qdev_get_gpio_in(DEVICE(&s->gic), AW_R40_GIC_SPI_GMAC));
+ 
+     /* EMAC */
++    qemu_configure_nic_device(DEVICE(&s->emac), true, "emac");
+     sysbus_realize(SYS_BUS_DEVICE(&s->emac), &error_fatal);
+     sysbus_mmio_map(SYS_BUS_DEVICE(&s->emac), 0, s->memmap[AW_R40_DEV_EMAC]);
+     sysbus_connect_irq(SYS_BUS_DEVICE(&s->emac), 0,
 -- 
 2.41.0
 
