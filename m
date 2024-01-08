@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A10FC3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 20:54:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A433DC47079
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 20:55:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rMwaF-0004pa-On; Mon, 08 Jan 2024 15:50:55 -0500
+	id 1rMwaT-0005fd-1w; Mon, 08 Jan 2024 15:51:09 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rMwZY-0003o7-Ls; Mon, 08 Jan 2024 15:50:13 -0500
-Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
+ <BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1rMwZa-0003oq-4A; Mon, 08 Jan 2024 15:50:19 -0500
+Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rMwZE-0000uy-99; Mon, 08 Jan 2024 15:50:09 -0500
+ <BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1rMwZF-00010C-22; Mon, 08 Jan 2024 15:50:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+ d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=hIoRnAOMf4YLSnQadmaBzYXHMtK98X95ymuChZmuyOk=; b=nfxsfbqV1CHr1yheFZqmqLuDWj
- OkCLvnwbhPHn2IVSnOAZlJcmn3l++D3kgPeT6bXOqWCPoFwuMqq4di8mfLBX9m3NESJ0NiMZJVYdY
- A+OO59fTIAzChlNUEYpim+kMzrYnSgEY8y8oqz6pB2juLoGEPrW9WE6gQOiWcl6UaumHGjhLukdLn
- xW/kDvmrsqXhVWnlafADfHvUWavzvCPo/+D9N2eKUEPzFC5ayE9nYyc8LtXHw/KOj0WfTVgx3v14M
- o93mKqGsZVbRFaHaToR+1JuwA6mCR6EY/rPI2QAFvSMx7dqTsPo0o2ktlvxJnt7wd9L3Toaw3Ejlo
- tAby7F6Q==;
+ bh=9F94s85N161zpHncvzHPgHeV1YSdfSxyasD9KuzjSZQ=; b=C782r6Abcag566KSiqaHoxRWFf
+ qJXNYst6t8COyQd4+X+OL97wL2cQh4nGGDrDlMb+uWJt2mjIYFxch9GJN0G9gkS/WDmwqOyhwf4s4
+ Em3VlMcW1qNmFx9QIe2ZOo+kFEYaMaagMuH1nY0/timFzvyGQWLIPrBAsRcIMn4c3y98MubZzrcjQ
+ FabY+Z0DlLwZy+7jjSk0ueaKiRixHvLe+91Ru7TfCqjVoSakPcj9Y05g0VSVRkDGAWzL4GTnqCiZU
+ sgzg6LI7mmxKGNHcNZsECKuKHYzQm4nBQkqZGcCsXzOCNfT9J4BOsCYmjvolhREOFFyRA/6N7hQdP
+ JFqZu4cg==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1rMwYj-008RPl-Eh; Mon, 08 Jan 2024 20:49:22 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1rMwYk-007wXQ-2w; Mon, 08 Jan 2024 20:49:23 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYk-002NFO-0e; Mon, 08 Jan 2024 20:49:22 +0000
+ Hat Linux)) id 1rMwYj-002NEz-2D; Mon, 08 Jan 2024 20:49:21 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -84,19 +84,19 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 21/46] hw/arm/allwinner: use qemu_configure_nic_device()
-Date: Mon,  8 Jan 2024 20:26:50 +0000
-Message-ID: <20240108204909.564514-22-dwmw2@infradead.org>
+Subject: [PATCH v3 15/46] hw/ppc/prep: use pci_init_nic_devices()
+Date: Mon,  8 Jan 2024 20:26:44 +0000
+Message-ID: <20240108204909.564514-16-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- casper.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1236::1;
- envelope-from=BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org;
- helo=casper.infradead.org
+ desiato.infradead.org. See http://www.infradead.org/rpr.html
+Received-SPF: none client-ip=2001:8b0:10b:1:d65d:64ff:fe57:4e05;
+ envelope-from=BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org;
+ helo=desiato.infradead.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -121,100 +121,46 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
+Previously, the first PCI NIC would be placed in PCI slot 3 and the rest
+would be dynamically assigned. Even if the user overrode the default NIC
+type and made it something other than PCNet.
+
+Now, the first PCNet NIC (that is, anything not explicitly specified
+to be anything different) will go to slot 3 even if it isn't the first
+NIC specified on the commnd line. And anything else will be dynamically
+assigned.
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/arm/allwinner-a10.c |  6 +-----
- hw/arm/allwinner-h3.c  |  6 +-----
- hw/arm/allwinner-r40.c | 27 ++-------------------------
- 3 files changed, 4 insertions(+), 35 deletions(-)
+ hw/ppc/prep.c | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
 
-diff --git a/hw/arm/allwinner-a10.c b/hw/arm/allwinner-a10.c
-index b0ea3f7f66..57f52871ec 100644
---- a/hw/arm/allwinner-a10.c
-+++ b/hw/arm/allwinner-a10.c
-@@ -142,11 +142,7 @@ static void aw_a10_realize(DeviceState *dev, Error **errp)
-     sysbus_realize(SYS_BUS_DEVICE(&s->dramc), &error_fatal);
-     sysbus_mmio_map(SYS_BUS_DEVICE(&s->dramc), 0, AW_A10_DRAMC_BASE);
+diff --git a/hw/ppc/prep.c b/hw/ppc/prep.c
+index 137276bcb9..1a6cd05c61 100644
+--- a/hw/ppc/prep.c
++++ b/hw/ppc/prep.c
+@@ -241,7 +241,6 @@ static void ibm_40p_init(MachineState *machine)
+     ISADevice *isa_dev;
+     ISABus *isa_bus;
+     void *fw_cfg;
+-    int i;
+     uint32_t kernel_base = 0, initrd_base = 0;
+     long kernel_size = 0, initrd_size = 0;
+     char boot_device;
+@@ -336,10 +335,9 @@ static void ibm_40p_init(MachineState *machine)
+         /* XXX: s3-trio at PCI_DEVFN(2, 0) */
+         pci_vga_init(pci_bus);
  
--    /* FIXME use qdev NIC properties instead of nd_table[] */
--    if (nd_table[0].used) {
--        qemu_check_nic_model(&nd_table[0], TYPE_AW_EMAC);
--        qdev_set_nic_properties(DEVICE(&s->emac), &nd_table[0]);
--    }
-+    qemu_configure_nic_device(DEVICE(&s->emac), true, NULL);
-     if (!sysbus_realize(SYS_BUS_DEVICE(&s->emac), errp)) {
-         return;
+-        for (i = 0; i < nb_nics; i++) {
+-            pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic,
+-                                i == 0 ? "3" : NULL);
+-        }
++        /* First PCNET device at PCI_DEVFN(3, 0) */
++        pci_init_nic_in_slot(pci_bus, mc->default_nic, NULL, "3");
++        pci_init_nic_devices(pci_bus, mc->default_nic);
      }
-diff --git a/hw/arm/allwinner-h3.c b/hw/arm/allwinner-h3.c
-index f05afddf7e..4f102ad082 100644
---- a/hw/arm/allwinner-h3.c
-+++ b/hw/arm/allwinner-h3.c
-@@ -369,11 +369,7 @@ static void allwinner_h3_realize(DeviceState *dev, Error **errp)
-                               "sd-bus");
  
-     /* EMAC */
--    /* FIXME use qdev NIC properties instead of nd_table[] */
--    if (nd_table[0].used) {
--        qemu_check_nic_model(&nd_table[0], TYPE_AW_SUN8I_EMAC);
--        qdev_set_nic_properties(DEVICE(&s->emac), &nd_table[0]);
--    }
-+    qemu_configure_nic_device(DEVICE(&s->emac), true, NULL);
-     object_property_set_link(OBJECT(&s->emac), "dma-memory",
-                              OBJECT(get_system_memory()), &error_fatal);
-     sysbus_realize(SYS_BUS_DEVICE(&s->emac), &error_fatal);
-diff --git a/hw/arm/allwinner-r40.c b/hw/arm/allwinner-r40.c
-index a0d367c60d..4d5661b014 100644
---- a/hw/arm/allwinner-r40.c
-+++ b/hw/arm/allwinner-r40.c
-@@ -294,7 +294,6 @@ static void allwinner_r40_init(Object *obj)
- 
- static void allwinner_r40_realize(DeviceState *dev, Error **errp)
- {
--    const char *r40_nic_models[] = { "gmac", "emac", NULL };
-     AwR40State *s = AW_R40(dev);
- 
-     /* CPUs */
-@@ -454,31 +453,8 @@ static void allwinner_r40_realize(DeviceState *dev, Error **errp)
-     sysbus_mmio_map(SYS_BUS_DEVICE(&s->dramc), 2,
-                     s->memmap[AW_R40_DEV_DRAMPHY]);
- 
--    /* nic support gmac and emac */
--    for (int i = 0; i < ARRAY_SIZE(r40_nic_models) - 1; i++) {
--        NICInfo *nic = &nd_table[i];
--
--        if (!nic->used) {
--            continue;
--        }
--        if (qemu_show_nic_models(nic->model, r40_nic_models)) {
--            exit(0);
--        }
--
--        switch (qemu_find_nic_model(nic, r40_nic_models, r40_nic_models[0])) {
--        case 0: /* gmac */
--            qdev_set_nic_properties(DEVICE(&s->gmac), nic);
--            break;
--        case 1: /* emac */
--            qdev_set_nic_properties(DEVICE(&s->emac), nic);
--            break;
--        default:
--            exit(1);
--            break;
--        }
--    }
--
-     /* GMAC */
-+    qemu_configure_nic_device(DEVICE(&s->gmac), true, "gmac");
-     object_property_set_link(OBJECT(&s->gmac), "dma-memory",
-                                      OBJECT(get_system_memory()), &error_fatal);
-     sysbus_realize(SYS_BUS_DEVICE(&s->gmac), &error_fatal);
-@@ -487,6 +463,7 @@ static void allwinner_r40_realize(DeviceState *dev, Error **errp)
-                        qdev_get_gpio_in(DEVICE(&s->gic), AW_R40_GIC_SPI_GMAC));
- 
-     /* EMAC */
-+    qemu_configure_nic_device(DEVICE(&s->emac), true, "emac");
-     sysbus_realize(SYS_BUS_DEVICE(&s->emac), &error_fatal);
-     sysbus_mmio_map(SYS_BUS_DEVICE(&s->emac), 0, s->memmap[AW_R40_DEV_EMAC]);
-     sysbus_connect_irq(SYS_BUS_DEVICE(&s->emac), 0,
+     /* Prepare firmware configuration for OpenBIOS */
 -- 
 2.41.0
 
