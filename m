@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A9CAC47074
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 00:35:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AAB8C47074
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 00:37:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rMdbh-0004Ce-BK; Sun, 07 Jan 2024 19:35:09 -0500
+	id 1rMddI-0006JE-GV; Sun, 07 Jan 2024 19:36:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rMdbb-0004BS-LY; Sun, 07 Jan 2024 19:35:03 -0500
-Received: from mail-qv1-xf2f.google.com ([2607:f8b0:4864:20::f2f])
+ id 1rMddG-0006IN-2d; Sun, 07 Jan 2024 19:36:46 -0500
+Received: from mail-qt1-x835.google.com ([2607:f8b0:4864:20::835])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rMdbS-0007qO-PI; Sun, 07 Jan 2024 19:35:03 -0500
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-67f8d9fe99fso13518666d6.2; 
- Sun, 07 Jan 2024 16:34:52 -0800 (PST)
+ id 1rMddD-0000My-Nu; Sun, 07 Jan 2024 19:36:45 -0500
+Received: by mail-qt1-x835.google.com with SMTP id
+ d75a77b69052e-42786ec994bso14440351cf.1; 
+ Sun, 07 Jan 2024 16:36:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704674092; x=1705278892; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1704674202; x=1705279002; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+BwABrhnGAjQCRR+6x6oj+0T+DauJMqQhO4UI/GHcbw=;
- b=lo1WrRtjyQDo+9euQNQomgyz5sHZyhFdMo166yF5tX+qpDa3DvF4bXUv9PNaQRtgr3
- YCcbDJ7Wr33Kyl6ZBqvSzrRoFRZEvovZEwG1oBuDJ0Fsh/IpfFqVlHmjgae8uiDw8aGp
- YnQVN2T7zQAMiyA4ZSS4bS36lwpuA/cuasNMx5eG6PUTeHIrk/NXffvh4QdAmIj6sFLF
- MZWFtjWBQjT5O5xghCWozgRreBgpUmbDFOJgEXvN4CZV4dutn51zjgB8q+8reQX2Dkru
- 3J2S2qmJb3cxWvpyvFPULNtisUTASst5gtS6qAAnM/w1VEtCGzNkU4zoYRhtmonNhzLF
- NTYA==
+ bh=dwcPXoZSsLUDRHTLUA9jZ7j8zB8Om95hG8lmYloRClQ=;
+ b=nmTwk8pSrFjcV/piJuqXSxmGH1SzXykiplfN9UXWTQGcx32EmidHwy+2bDiTQRqg46
+ GyakD9+4Xjc49502ZckshN9JWERM4Jr+fF9xYuqHNs9evUp/eEwUcKlnIgZKC4k/HSu4
+ lxSjSMaopDaOh/cS0VTToT0sA4VBbHHuxCdUO2wyCmHBNrmOUEJjsMpqvWWPqDPl5FF1
+ XoTAhM6re5jDEl7AQ8GPocNl+3Kl3BNb+aLtmvnNfQA+LNEYePHfnfGbEvNr2GNuKAkQ
+ a1206VyBa1WSVrQG7l8mebPJSsBqqE6CJMES0NVpaJ3myT65OIp2vMLPkQUpLoeUlM++
+ GtKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704674092; x=1705278892;
+ d=1e100.net; s=20230601; t=1704674202; x=1705279002;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+BwABrhnGAjQCRR+6x6oj+0T+DauJMqQhO4UI/GHcbw=;
- b=M5Q7CTEEI6BaAtUiqNcUwv3ZJPX2gldM5Kz38usNDjCgHIUYuE19zgZVP30hJXoxDk
- pqYMJ+m0UBd3hYEGbiVhETKeYOTAffvfWHkj7Bg/8Y0gwPBv45DeCQqEzaiApDlqj0qr
- CmUHSubuAealdiqzUvnl8E8pmFcl/n4JEfeA0LqnTgBQg2LpLHjUJlMCV5QtTFrmG3D0
- Q0mqZIPD3+VKY59iSGAnSnxHepeIBY5KTvxB61LRBsqFjBufjJi4OwLWzIePiyeXt/NQ
- +1J4NWbH8uno88zCZaxVfa+fvBPapqzTbtiU8mqWNnOQrEChq5yIRgwX95TrH48DdcjF
- hZYw==
-X-Gm-Message-State: AOJu0YwoNP1rtC/AoitzhdyDF8qNldigf+5iFI4/K7dkHyFZDTIcLojv
- 6k5XNx8FCco1Ctd38RL5IFg3jsqlJCS6zn3owIw=
-X-Google-Smtp-Source: AGHT+IHinnxaYeci4ljIJ8bBUItdUhNszEHOMo/MTSqFzIKyZaM0O8r6Kkvofyw7fkg9xootkkS1UFoZcHoWIPPLTM4=
-X-Received: by 2002:a05:6214:48f:b0:680:3608:9216 with SMTP id
- pt15-20020a056214048f00b0068036089216mr4481475qvb.99.1704674092091; Sun, 07
- Jan 2024 16:34:52 -0800 (PST)
+ bh=dwcPXoZSsLUDRHTLUA9jZ7j8zB8Om95hG8lmYloRClQ=;
+ b=oNUCDwdcIoh75CuR/+pntFncFvfgCiNpUoJz0GZ6AFxVRh0vk1GaxkP1NaQYA5bfTx
+ uQKqq3pcCXUp8o2jUlLBW+fIXeCe2/Rezjl/a/5phU6Yw53zQ3TRMfUkDGs7hJV5Q4/z
+ nS4rdPK6MgpiFCuzH5kjDqI1V1oCzWhiTbwg6nHAzrI0BTFwL+ED2o9YDQjBo1Az3UgI
+ OnIMKO4K8/jvAV/HcH1owAuAE3WJFJKdTWsHcGAeTTLblaFQo/2xMKZAHmQAdykRhDFr
+ pM4PlDFC1uZCWZMwcWu5ovY7v5deMJ7mxO+8rOO1FV4tzBxU+q9Cvg+NXNZGpfTC6p2m
+ X73g==
+X-Gm-Message-State: AOJu0YyTRsA4wHfrNzhMml9oP4LN1qVEm+3ICOwfgyrFpKwSQ7mGoqP9
+ rbRaM3wFKKhKsQpqn/CQtlzpR7f6SQksUEmdByM=
+X-Google-Smtp-Source: AGHT+IGg3qT2twfKTyAH129NcwoDtlIeJGbx2L2ImSHwluV6VpoGCFlOJJkdTbr/HTXJ3RY/+D+PB+ShnlryyiXIBzk=
+X-Received: by 2002:ac8:5f87:0:b0:429:9315:bac1 with SMTP id
+ j7-20020ac85f87000000b004299315bac1mr1961935qta.137.1704674202242; Sun, 07
+ Jan 2024 16:36:42 -0800 (PST)
 MIME-Version: 1.0
 References: <20240102151153.133896-1-bmeng@tinylab.org>
 In-Reply-To: <20240102151153.133896-1-bmeng@tinylab.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 8 Jan 2024 10:34:26 +1000
-Message-ID: <CAKmqyKOw0DGPs5zuBfrKZdFQKrVe6jx=Qf7BJO2MhgbXKbm2HQ@mail.gmail.com>
+Date: Mon, 8 Jan 2024 10:36:16 +1000
+Message-ID: <CAKmqyKN1u8WjNnAebn87Ca-zJFjFV7JedhV6=d9eGvsLoGLXiw@mail.gmail.com>
 Subject: Re: [PATCH] roms/opensbi: Upgrade from v1.3.1 to v1.4
 To: Bin Meng <bmeng@tinylab.org>
 Cc: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::f2f;
- envelope-from=alistair23@gmail.com; helo=mail-qv1-xf2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::835;
+ envelope-from=alistair23@gmail.com; helo=mail-qt1-x835.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -278,7 +278,9 @@ n
 >
 > Signed-off-by: Bin Meng <bmeng@tinylab.org>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
