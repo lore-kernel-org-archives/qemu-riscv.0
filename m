@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 081C3C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 21:03:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07AABC3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 21:03:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rMwbP-0008Oj-TD; Mon, 08 Jan 2024 15:52:07 -0500
+	id 1rMwaX-0005xi-EZ; Mon, 08 Jan 2024 15:51:13 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1rMwaB-0004e2-0O; Mon, 08 Jan 2024 15:50:51 -0500
-Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ <BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1rMwZU-0003lR-Ik; Mon, 08 Jan 2024 15:50:10 -0500
+Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1rMwa3-00010H-Fq; Mon, 08 Jan 2024 15:50:50 -0500
+ <BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1rMwZB-0000v2-6H; Mon, 08 Jan 2024 15:50:08 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+ d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=sIvM8Te/mI7VlQ7unlUHnFMmc5eyEzom2MnrpIIKUis=; b=XAg8ZGiC5eVOJhZhVLlJ9KN+Yt
- KmAvPkKhALeLAXFtfQdfWZ6PGOGnj3lRB6+kFR9o9bPjIWRmMPT6BB9IhjN+AHUtNznPPIkTHPXn4
- ieEhrCtyy3bTXBhQOO/ES2YPWZNG8J4dFM028KHdT1RWl5f5yHcjVW2PNS5eJ+HtAPrnU92aA6ciz
- pgYIj8sFGhP+aXbpFiPDqCiMTctz5AQNEYikXpiATMk5u4rnNfCcNBtBjK22L//4NaBVeKGSrTvvW
- woUpO3SAQJ+Xa8YaMFp/MUAigik72SrxYrWYjKUq+mTko6W8wQUK0HDaAaah8SHK6YuexEHPd5Bhc
- z2ewDTjA==;
+ bh=ZkSNmy83S4DOqkgHUNjcsUnKDxjqNwsV356V+7t17VI=; b=EQc+yjRlYKASMGRQ5TGtJYtw74
+ sF8ySymUAdfsOgT4x8BrVFBLhebRSylHntgqIY++FPzBttXXgr/16ja7fa2J1+ehxRT60nkpIJ6O2
+ xdt6IBFKc6PoA3ULA/douiQH9RzvQ2xt9Wqg2tyJbaDQBf1BW2CB3ctV16gcUYApEAKkwdCHnPPyN
+ iQ5mxU5swxpdModrJuuKK28dz5xRvKVKpiNRdDaPMFGioGC7eFsMNDKDyTOmQENQyzl80fz01z2zn
+ Rl+kUJ85iSOo9TQly6JKlt7Nw8vnlz4wR7uiOnNFppoUpeXr7e8yTOB9xXJR8ax9b+bRWyyATW+sE
+ MnMHK9vA==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1rMwYm-007wXp-0H; Mon, 08 Jan 2024 20:49:24 +0000
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1rMwYk-008RQ7-PV; Mon, 08 Jan 2024 20:49:24 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYl-002NGM-0I; Mon, 08 Jan 2024 20:49:23 +0000
+ Hat Linux)) id 1rMwYl-002NGr-1c; Mon, 08 Jan 2024 20:49:23 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -84,19 +84,19 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 33/46] hw/m68k/q800: use qemu_find_nic_info()
-Date: Mon,  8 Jan 2024 20:27:02 +0000
-Message-ID: <20240108204909.564514-34-dwmw2@infradead.org>
+Subject: [PATCH v3 39/46] hw/riscv: use qemu_configure_nic_device()
+Date: Mon,  8 Jan 2024 20:27:08 +0000
+Message-ID: <20240108204909.564514-40-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- desiato.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1:d65d:64ff:fe57:4e05;
- envelope-from=BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org;
- helo=desiato.infradead.org
+ casper.infradead.org. See http://www.infradead.org/rpr.html
+Received-SPF: none client-ip=2001:8b0:10b:1236::1;
+ envelope-from=BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org;
+ helo=casper.infradead.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -121,89 +121,69 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-If a corresponding NIC configuration was found, it will have a MAC address
-already assigned, so use that. Else, generate and assign a default one.
-
-Using qemu_find_nic_info() is simpler than the alternative of using
-qemu_configure_nic_device() and then having to fetch the "mac" property
-as a string and convert it.
-
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/m68k/q800.c | 29 ++++++++++++++++-------------
- 1 file changed, 16 insertions(+), 13 deletions(-)
+ hw/riscv/microchip_pfsoc.c | 14 ++------------
+ hw/riscv/sifive_u.c        |  7 +------
+ 2 files changed, 3 insertions(+), 18 deletions(-)
 
-diff --git a/hw/m68k/q800.c b/hw/m68k/q800.c
-index 83d1571d02..c9e7bdf197 100644
---- a/hw/m68k/q800.c
-+++ b/hw/m68k/q800.c
-@@ -48,6 +48,7 @@
- #include "hw/display/macfb.h"
- #include "hw/block/swim.h"
- #include "net/net.h"
-+#include "net/util.h"
- #include "qapi/error.h"
- #include "qemu/error-report.h"
- #include "sysemu/qtest.h"
-@@ -271,6 +272,8 @@ static void q800_machine_init(MachineState *machine)
-     BusState *adb_bus;
-     NubusBus *nubus;
-     DriveInfo *dinfo;
-+    NICInfo *nd;
-+    MACAddr mac;
-     uint8_t rng_seed[32];
+diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+index b775aa8946..7725dfbde5 100644
+--- a/hw/riscv/microchip_pfsoc.c
++++ b/hw/riscv/microchip_pfsoc.c
+@@ -202,7 +202,6 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+     MemoryRegion *envm_data = g_new(MemoryRegion, 1);
+     MemoryRegion *qspi_xip_mem = g_new(MemoryRegion, 1);
+     char *plic_hart_config;
+-    NICInfo *nd;
+     int i;
  
-     linux_boot = (kernel_filename != NULL);
-@@ -371,13 +374,6 @@ static void q800_machine_init(MachineState *machine)
+     sysbus_realize(SYS_BUS_DEVICE(&s->e_cpus), &error_abort);
+@@ -411,17 +410,8 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+         memmap[MICROCHIP_PFSOC_USB].size);
  
-     /* MACSONIC */
- 
--    if (nb_nics > 1) {
--        error_report("q800 can only have one ethernet interface");
--        exit(1);
+     /* GEMs */
+-
+-    nd = &nd_table[0];
+-    if (nd->used) {
+-        qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
+-        qdev_set_nic_properties(DEVICE(&s->gem0), nd);
 -    }
--
--    qemu_check_nic_model(&nd_table[0], "dp83932");
--
-     /*
-      * MacSonic driver needs an Apple MAC address
-      * Valid prefix are:
-@@ -387,14 +383,21 @@ static void q800_machine_init(MachineState *machine)
-      * 08:00:07 Apple
-      * (Q800 use the last one)
-      */
--    nd_table[0].macaddr.a[0] = 0x08;
--    nd_table[0].macaddr.a[1] = 0x00;
--    nd_table[0].macaddr.a[2] = 0x07;
--
-     object_initialize_child(OBJECT(machine), "dp8393x", &m->dp8393x,
-                             TYPE_DP8393X);
-     dev = DEVICE(&m->dp8393x);
--    qdev_set_nic_properties(dev, &nd_table[0]);
-+    nd = qemu_find_nic_info(TYPE_DP8393X, true, "dp83932");
-+    if (nd) {
-+        qdev_set_nic_properties(dev, nd);
-+        memcpy(mac.a, nd->macaddr.a, sizeof(mac.a));
-+    } else {
-+        qemu_macaddr_default_if_unset(&mac);
-+    }
-+    mac.a[0] = 0x08;
-+    mac.a[1] = 0x00;
-+    mac.a[2] = 0x07;
-+    qdev_prop_set_macaddr(dev, "mac", mac.a);
-+
-     qdev_prop_set_uint8(dev, "it_shift", 2);
-     qdev_prop_set_bit(dev, "big_endian", true);
-     object_property_set_link(OBJECT(dev), "dma_mr",
-@@ -415,7 +418,7 @@ static void q800_machine_init(MachineState *machine)
-     prom = memory_region_get_ram_ptr(dp8393x_prom);
-     checksum = 0;
-     for (i = 0; i < 6; i++) {
--        prom[i] = revbit8(nd_table[0].macaddr.a[i]);
-+        prom[i] = revbit8(mac.a[i]);
-         checksum ^= prom[i];
+-    nd = &nd_table[1];
+-    if (nd->used) {
+-        qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
+-        qdev_set_nic_properties(DEVICE(&s->gem1), nd);
+-    }
++    qemu_configure_nic_device(DEVICE(&s->gem0), true, NULL);
++    qemu_configure_nic_device(DEVICE(&s->gem1), true, NULL);
+ 
+     object_property_set_int(OBJECT(&s->gem0), "revision", GEM_REVISION, errp);
+     object_property_set_int(OBJECT(&s->gem0), "phy-addr", 8, errp);
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index ec76dce6c9..5207ec1fa5 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -789,7 +789,6 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+     MemoryRegion *l2lim_mem = g_new(MemoryRegion, 1);
+     char *plic_hart_config;
+     int i, j;
+-    NICInfo *nd = &nd_table[0];
+ 
+     qdev_prop_set_uint32(DEVICE(&s->u_cpus), "num-harts", ms->smp.cpus - 1);
+     qdev_prop_set_uint32(DEVICE(&s->u_cpus), "hartid-base", 1);
+@@ -893,11 +892,7 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
      }
-     prom[7] = 0xff - checksum;
+     sysbus_mmio_map(SYS_BUS_DEVICE(&s->otp), 0, memmap[SIFIVE_U_DEV_OTP].base);
+ 
+-    /* FIXME use qdev NIC properties instead of nd_table[] */
+-    if (nd->used) {
+-        qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
+-        qdev_set_nic_properties(DEVICE(&s->gem), nd);
+-    }
++    qemu_configure_nic_device(DEVICE(&s->gem), true, NULL);
+     object_property_set_int(OBJECT(&s->gem), "revision", GEM_REVISION,
+                             &error_abort);
+     if (!sysbus_realize(SYS_BUS_DEVICE(&s->gem), errp)) {
 -- 
 2.41.0
 
