@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07AABC3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 21:03:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D5AFC3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 21:03:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rMwaX-0005xi-EZ; Mon, 08 Jan 2024 15:51:13 -0500
+	id 1rMwb3-0006vB-9A; Mon, 08 Jan 2024 15:51:45 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rMwZU-0003lR-Ik; Mon, 08 Jan 2024 15:50:10 -0500
+ id 1rMwZw-00042v-9A; Mon, 08 Jan 2024 15:50:36 -0500
 Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rMwZB-0000v2-6H; Mon, 08 Jan 2024 15:50:08 -0500
+ id 1rMwZt-0000ux-Ew; Mon, 08 Jan 2024 15:50:35 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=ZkSNmy83S4DOqkgHUNjcsUnKDxjqNwsV356V+7t17VI=; b=EQc+yjRlYKASMGRQ5TGtJYtw74
- sF8ySymUAdfsOgT4x8BrVFBLhebRSylHntgqIY++FPzBttXXgr/16ja7fa2J1+ehxRT60nkpIJ6O2
- xdt6IBFKc6PoA3ULA/douiQH9RzvQ2xt9Wqg2tyJbaDQBf1BW2CB3ctV16gcUYApEAKkwdCHnPPyN
- iQ5mxU5swxpdModrJuuKK28dz5xRvKVKpiNRdDaPMFGioGC7eFsMNDKDyTOmQENQyzl80fz01z2zn
- Rl+kUJ85iSOo9TQly6JKlt7Nw8vnlz4wR7uiOnNFppoUpeXr7e8yTOB9xXJR8ax9b+bRWyyATW+sE
- MnMHK9vA==;
+ bh=MtsxthwV/XHTVMI8Ph+V2vIGIyQmamq03UN301HMpX4=; b=PT6zlFaRlQa+uavB1+kjb5Kekl
+ ewArnNLhFmKdXVZebbCFbxdk7Ljpre/RVILdG5jVDpjwF6OpupTJTNAKSneiRC1PlrzMntVevewHA
+ Aiyb1SGwAHzBbKBwiVaEV62nHudYjg8KaVltZK5CkM0me8XQj3iGjw0BbWNcCY+gZ8fuGinElIbW6
+ vrmSTircUy9XWCpf68cvZXZ6DpPPXaiWq7WtXK238z7wuuakIgUh7TB6wNy6vLQYASorGrn4v/gm5
+ IxLEXs8dYAjl84Jb47k6TUUtt/tV9tu7339JtfgwlZXKl+rbx7gRPXIKH2kN3zvYq/Uj8tS1QkgXD
+ l7t7DD6g==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1rMwYk-008RQ7-PV; Mon, 08 Jan 2024 20:49:24 +0000
+ id 1rMwYi-008RPc-Vt; Mon, 08 Jan 2024 20:49:22 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYl-002NGr-1c; Mon, 08 Jan 2024 20:49:23 +0000
+ Hat Linux)) id 1rMwYj-002NEi-1T; Mon, 08 Jan 2024 20:49:21 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -84,9 +84,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 39/46] hw/riscv: use qemu_configure_nic_device()
-Date: Mon,  8 Jan 2024 20:27:08 +0000
-Message-ID: <20240108204909.564514-40-dwmw2@infradead.org>
+Subject: [PATCH v3 12/46] hw/mips/fuloong2e: use pci_init_nic_devices()
+Date: Mon,  8 Jan 2024 20:26:41 +0000
+Message-ID: <20240108204909.564514-13-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
@@ -121,69 +121,49 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
+The previous behaviour was: *if* the first NIC specified on the command
+line was an RTL8139 (or unspecified model) then it gets assigned to PCI
+slot 7, which is where the Fuloong board had an RTL8139. All other
+devices (including the first, if it was specified a anything other then
+an rtl8319) get dynamically assigned on the bus.
+
+The new behaviour is subtly different: If the first NIC was given a
+specific model *other* than rtl8139, and a subsequent NIC was not,
+then the rtl8139 (or unspecified) NIC will go to slot 7 and the rest
+will be dynamically assigned.
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/riscv/microchip_pfsoc.c | 14 ++------------
- hw/riscv/sifive_u.c        |  7 +------
- 2 files changed, 3 insertions(+), 18 deletions(-)
+ hw/mips/fuloong2e.c | 16 +++-------------
+ 1 file changed, 3 insertions(+), 13 deletions(-)
 
-diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-index b775aa8946..7725dfbde5 100644
---- a/hw/riscv/microchip_pfsoc.c
-+++ b/hw/riscv/microchip_pfsoc.c
-@@ -202,7 +202,6 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
-     MemoryRegion *envm_data = g_new(MemoryRegion, 1);
-     MemoryRegion *qspi_xip_mem = g_new(MemoryRegion, 1);
-     char *plic_hart_config;
--    NICInfo *nd;
-     int i;
- 
-     sysbus_realize(SYS_BUS_DEVICE(&s->e_cpus), &error_abort);
-@@ -411,17 +410,8 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
-         memmap[MICROCHIP_PFSOC_USB].size);
- 
-     /* GEMs */
+diff --git a/hw/mips/fuloong2e.c b/hw/mips/fuloong2e.c
+index 97b2c8ed8e..a45aac368c 100644
+--- a/hw/mips/fuloong2e.c
++++ b/hw/mips/fuloong2e.c
+@@ -201,19 +201,9 @@ static void main_cpu_reset(void *opaque)
+ /* Network support */
+ static void network_init(PCIBus *pci_bus)
+ {
+-    int i;
 -
--    nd = &nd_table[0];
--    if (nd->used) {
--        qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
--        qdev_set_nic_properties(DEVICE(&s->gem0), nd);
+-    for (i = 0; i < nb_nics; i++) {
+-        NICInfo *nd = &nd_table[i];
+-        const char *default_devaddr = NULL;
+-
+-        if (i == 0 && (!nd->model || strcmp(nd->model, "rtl8139") == 0)) {
+-            /* The Fuloong board has a RTL8139 card using PCI SLOT 7 */
+-            default_devaddr = "07";
+-        }
+-
+-        pci_nic_init_nofail(nd, pci_bus, "rtl8139", default_devaddr);
 -    }
--    nd = &nd_table[1];
--    if (nd->used) {
--        qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
--        qdev_set_nic_properties(DEVICE(&s->gem1), nd);
--    }
-+    qemu_configure_nic_device(DEVICE(&s->gem0), true, NULL);
-+    qemu_configure_nic_device(DEVICE(&s->gem1), true, NULL);
++    /* The Fuloong board has a RTL8139 card using PCI SLOT 7 */
++    pci_init_nic_in_slot(pci_bus, "rtl8139", NULL, "07");
++    pci_init_nic_devices(pci_bus, "rtl8139");
+ }
  
-     object_property_set_int(OBJECT(&s->gem0), "revision", GEM_REVISION, errp);
-     object_property_set_int(OBJECT(&s->gem0), "phy-addr", 8, errp);
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index ec76dce6c9..5207ec1fa5 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -789,7 +789,6 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
-     MemoryRegion *l2lim_mem = g_new(MemoryRegion, 1);
-     char *plic_hart_config;
-     int i, j;
--    NICInfo *nd = &nd_table[0];
- 
-     qdev_prop_set_uint32(DEVICE(&s->u_cpus), "num-harts", ms->smp.cpus - 1);
-     qdev_prop_set_uint32(DEVICE(&s->u_cpus), "hartid-base", 1);
-@@ -893,11 +892,7 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
-     }
-     sysbus_mmio_map(SYS_BUS_DEVICE(&s->otp), 0, memmap[SIFIVE_U_DEV_OTP].base);
- 
--    /* FIXME use qdev NIC properties instead of nd_table[] */
--    if (nd->used) {
--        qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
--        qdev_set_nic_properties(DEVICE(&s->gem), nd);
--    }
-+    qemu_configure_nic_device(DEVICE(&s->gem), true, NULL);
-     object_property_set_int(OBJECT(&s->gem), "revision", GEM_REVISION,
-                             &error_abort);
-     if (!sysbus_realize(SYS_BUS_DEVICE(&s->gem), errp)) {
+ static void mips_fuloong2e_init(MachineState *machine)
 -- 
 2.41.0
 
