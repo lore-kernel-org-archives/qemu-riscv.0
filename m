@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2B2EC3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 20:52:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40BCEC3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 20:53:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rMwZq-0003xG-DU; Mon, 08 Jan 2024 15:50:30 -0500
+	id 1rMwbB-0007Zh-Lz; Mon, 08 Jan 2024 15:51:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rMwZT-0003l2-3a; Mon, 08 Jan 2024 15:50:07 -0500
+ id 1rMwZw-00043F-H9; Mon, 08 Jan 2024 15:50:36 -0500
 Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rMwZA-0000uw-OK; Mon, 08 Jan 2024 15:50:06 -0500
+ id 1rMwZt-0000v5-Lt; Mon, 08 Jan 2024 15:50:36 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=wozYunS9mL+E+NW7be8DLpB1Vtj79zSyr6dMjYfNaXI=; b=jcI3zWKyisQTWt932lF8taMSuX
- Fh58CKyE7nQO1wPJEhwKWAyAOihnTcN3D88J/0ElKQ04mAla5ZQvWXnaJKqK6nCkcTf4tPvJle/p/
- 9CpBVgea3QhoLhn7gcat3RbTtqNqgSnxqw6uKNtJNt/tDXW5lCvqchHSrcRdot0vV4S2/SUWSCqCp
- +phQiHWjzINAILVomuhlMZGxsE2OAX1d3CBs8+xqtzNgA4sVpyrezcQeflHUo/inybz+jxsDChiqB
- Wg6i/u5ga2dtNc0038HhRYZdL7UsrzOb2pzE6aFKKrZWfn9LDsYF/a0C7xBenPqv32d2nHKcvUVR+
- a8xUQsFQ==;
+ bh=8zuRre35272BYJVRGd9RIb87z+uvpwtc4RlOpE6V4GU=; b=b+e5pHRNHzAKqZDt2JN3LRQAy/
+ bLs2U1SXGlCjRJKJipRex6dDaZp+CkBO/dgYwcdJfyt6yseiya5dFWEK5KYJUcFEkskgKtwgAouUh
+ yd2pjryXltEkLU0KbkXN0wJpTw7lcyuNtVo4HMqEG2UE3q6djj3wI7+Tz2u4QfUuprPPrdD0YAIRG
+ d2gRpO6/uOZYE5d0xc9sBHYVyLKWMooQA+EkAdTUpzPJDMyVPWKHHkKmLPNSAXfaDEehr/q3qZ68K
+ fh7wmhbbIFQRCKfRzskDaIgPNxMlGxMYiQNkkOPzdVoLTSj8ogm6JAkqmlhTcLiE9WXS0hyv2qQ/D
+ 2c35O4/Q==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1rMwYk-008RQ3-KA; Mon, 08 Jan 2024 20:49:23 +0000
+ id 1rMwYj-008RPt-Rr; Mon, 08 Jan 2024 20:49:23 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYl-002NGS-0Y; Mon, 08 Jan 2024 20:49:23 +0000
+ Hat Linux)) id 1rMwYk-002NFc-1T; Mon, 08 Jan 2024 20:49:22 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -84,9 +84,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 34/46] hw/microblaze: use qemu_configure_nic_device()
-Date: Mon,  8 Jan 2024 20:27:03 +0000
-Message-ID: <20240108204909.564514-35-dwmw2@infradead.org>
+Subject: [PATCH v3 24/46] hw/arm/fsl: use qemu_configure_nic_device()
+Date: Mon,  8 Jan 2024 20:26:53 +0000
+Message-ID: <20240108204909.564514-25-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
@@ -97,12 +97,13 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
 Received-SPF: none client-ip=2001:8b0:10b:1236::1;
  envelope-from=BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org;
  helo=casper.infradead.org
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -122,46 +123,64 @@ From: David Woodhouse <dwmw@amazon.co.uk>
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/microblaze/petalogix_ml605_mmu.c      | 3 +--
- hw/microblaze/petalogix_s3adsp1800_mmu.c | 3 +--
- 2 files changed, 2 insertions(+), 4 deletions(-)
+ hw/arm/fsl-imx25.c  | 2 +-
+ hw/arm/fsl-imx6.c   | 2 +-
+ hw/arm/fsl-imx6ul.c | 2 +-
+ hw/arm/fsl-imx7.c   | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/hw/microblaze/petalogix_ml605_mmu.c b/hw/microblaze/petalogix_ml605_mmu.c
-index fb7889cf67..0f5fabc32e 100644
---- a/hw/microblaze/petalogix_ml605_mmu.c
-+++ b/hw/microblaze/petalogix_ml605_mmu.c
-@@ -133,7 +133,6 @@ petalogix_ml605_init(MachineState *machine)
-     sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[TIMER_IRQ]);
+diff --git a/hw/arm/fsl-imx25.c b/hw/arm/fsl-imx25.c
+index 9d2fb75a68..a24fa7b443 100644
+--- a/hw/arm/fsl-imx25.c
++++ b/hw/arm/fsl-imx25.c
+@@ -170,7 +170,7 @@ static void fsl_imx25_realize(DeviceState *dev, Error **errp)
  
-     /* axi ethernet and dma initialization. */
--    qemu_check_nic_model(&nd_table[0], "xlnx.axi-ethernet");
-     eth0 = qdev_new("xlnx.axi-ethernet");
-     dma = qdev_new("xlnx.axi-dma");
+     object_property_set_uint(OBJECT(&s->fec), "phy-num", s->phy_num,
+                              &error_abort);
+-    qdev_set_nic_properties(DEVICE(&s->fec), &nd_table[0]);
++    qemu_configure_nic_device(DEVICE(&s->fec), true, NULL);
  
-@@ -145,7 +144,7 @@ petalogix_ml605_init(MachineState *machine)
-                                   "axistream-connected-target", NULL);
-     cs = object_property_get_link(OBJECT(dma),
-                                   "axistream-control-connected-target", NULL);
--    qdev_set_nic_properties(eth0, &nd_table[0]);
-+    qemu_configure_nic_device(eth0, true, NULL);
-     qdev_prop_set_uint32(eth0, "rxmem", 0x1000);
-     qdev_prop_set_uint32(eth0, "txmem", 0x1000);
-     object_property_set_link(OBJECT(eth0), "axistream-connected", ds,
-diff --git a/hw/microblaze/petalogix_s3adsp1800_mmu.c b/hw/microblaze/petalogix_s3adsp1800_mmu.c
-index 505639c298..dad46bd7f9 100644
---- a/hw/microblaze/petalogix_s3adsp1800_mmu.c
-+++ b/hw/microblaze/petalogix_s3adsp1800_mmu.c
-@@ -114,9 +114,8 @@ petalogix_s3adsp1800_init(MachineState *machine)
-     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, TIMER_BASEADDR);
-     sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[TIMER_IRQ]);
+     if (!sysbus_realize(SYS_BUS_DEVICE(&s->fec), errp)) {
+         return;
+diff --git a/hw/arm/fsl-imx6.c b/hw/arm/fsl-imx6.c
+index b2153022c0..02f3024090 100644
+--- a/hw/arm/fsl-imx6.c
++++ b/hw/arm/fsl-imx6.c
+@@ -380,7 +380,7 @@ static void fsl_imx6_realize(DeviceState *dev, Error **errp)
  
--    qemu_check_nic_model(&nd_table[0], "xlnx.xps-ethernetlite");
-     dev = qdev_new("xlnx.xps-ethernetlite");
--    qdev_set_nic_properties(dev, &nd_table[0]);
-+    qemu_configure_nic_device(dev, true, NULL);
-     qdev_prop_set_uint32(dev, "tx-ping-pong", 0);
-     qdev_prop_set_uint32(dev, "rx-ping-pong", 0);
-     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+     object_property_set_uint(OBJECT(&s->eth), "phy-num", s->phy_num,
+                              &error_abort);
+-    qdev_set_nic_properties(DEVICE(&s->eth), &nd_table[0]);
++    qemu_configure_nic_device(DEVICE(&s->eth), true, NULL);
+     if (!sysbus_realize(SYS_BUS_DEVICE(&s->eth), errp)) {
+         return;
+     }
+diff --git a/hw/arm/fsl-imx6ul.c b/hw/arm/fsl-imx6ul.c
+index e37b69a5e1..ca3dd439ec 100644
+--- a/hw/arm/fsl-imx6ul.c
++++ b/hw/arm/fsl-imx6ul.c
+@@ -442,7 +442,7 @@ static void fsl_imx6ul_realize(DeviceState *dev, Error **errp)
+                                  s->phy_num[i], &error_abort);
+         object_property_set_uint(OBJECT(&s->eth[i]), "tx-ring-num",
+                                  FSL_IMX6UL_ETH_NUM_TX_RINGS, &error_abort);
+-        qdev_set_nic_properties(DEVICE(&s->eth[i]), &nd_table[i]);
++        qemu_configure_nic_device(DEVICE(&s->eth[i]), true, NULL);
+         sysbus_realize(SYS_BUS_DEVICE(&s->eth[i]), &error_abort);
+ 
+         sysbus_mmio_map(SYS_BUS_DEVICE(&s->eth[i]), 0,
+diff --git a/hw/arm/fsl-imx7.c b/hw/arm/fsl-imx7.c
+index 474cfdc87c..1acbe065db 100644
+--- a/hw/arm/fsl-imx7.c
++++ b/hw/arm/fsl-imx7.c
+@@ -446,7 +446,7 @@ static void fsl_imx7_realize(DeviceState *dev, Error **errp)
+                                  s->phy_num[i], &error_abort);
+         object_property_set_uint(OBJECT(&s->eth[i]), "tx-ring-num",
+                                  FSL_IMX7_ETH_NUM_TX_RINGS, &error_abort);
+-        qdev_set_nic_properties(DEVICE(&s->eth[i]), &nd_table[i]);
++        qemu_configure_nic_device(DEVICE(&s->eth[i]), true, NULL);
+         sysbus_realize(SYS_BUS_DEVICE(&s->eth[i]), &error_abort);
+ 
+         sysbus_mmio_map(SYS_BUS_DEVICE(&s->eth[i]), 0, FSL_IMX7_ENETn_ADDR[i]);
 -- 
 2.41.0
 
