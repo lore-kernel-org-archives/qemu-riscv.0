@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1851C47074
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 00:43:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA7EEC47074
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 00:44:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rMdj7-0007XR-KL; Sun, 07 Jan 2024 19:42:49 -0500
+	id 1rMdkP-0008J1-FM; Sun, 07 Jan 2024 19:44:09 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rMdj3-0007WV-SG; Sun, 07 Jan 2024 19:42:46 -0500
-Received: from mail-vs1-xe2b.google.com ([2607:f8b0:4864:20::e2b])
+ id 1rMdkM-0008Ii-Os; Sun, 07 Jan 2024 19:44:06 -0500
+Received: from mail-ua1-x931.google.com ([2607:f8b0:4864:20::931])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rMdiz-0003Er-H7; Sun, 07 Jan 2024 19:42:44 -0500
-Received: by mail-vs1-xe2b.google.com with SMTP id
- ada2fe7eead31-467010c1c72so843277137.0; 
- Sun, 07 Jan 2024 16:42:40 -0800 (PST)
+ id 1rMdkL-0003O5-0g; Sun, 07 Jan 2024 19:44:06 -0500
+Received: by mail-ua1-x931.google.com with SMTP id
+ a1e0cc1a2514c-7cc705bbb2eso335305241.1; 
+ Sun, 07 Jan 2024 16:44:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704674560; x=1705279360; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1704674643; x=1705279443; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=r/YieroAu1/k0iYDoqTvoj21wLi6W/2h6d4dWR97K0o=;
- b=GRGuzF1oiFrKhorS18MAwogous7rynJS1cbUKBRcERoHxhmpoF4htPFPxPcMQ7whub
- 0Lo62nVpQrC3zYO42auhiiS3ALoG43FIv3gdOJUUqr72XNjFUfXADKPxpD+Swpu0lUpu
- L8zGvUlsGu41PJObMhdqcnukQYrPSj4icjtKe4IyQv8zlAk07Jlb5PSsu7TZ9nrCtcZu
- w7ZVwi//yPbvfiux30ND3whyGY+SmoYjenmTrHdbIHMMXqw/05j7o25R60DTDLL6I3eC
- eJwio0E0mAD5/f3EJDdK/lCaRMFnnVXuCtdOndu6xDw1YH1KPdBELUIF/SND26m+w2HB
- KylQ==
+ bh=jwSsmQ9gvmKwvTWHmlo6xE9WpD5uBTuAgmAET4zgGyw=;
+ b=fUD60zgp6dp6B7rg3FJIKezZ6941cW69bjq9PZqylqKzucyG/Q4lOY4N4fWZO6B7SK
+ 9mUU7LYzYoWBs5C7vtl+udJU0gxilOEMeq6txxIBrPvNunpQk4JcmYZmGUKmhXM0laUq
+ R8+ncXyVViJwbD29FMk4Rc/d21t7PPee/YLv/ndX3q1jrHYZWC/Fa/sVhbInkUMvwNKm
+ E3O89AXSgzfcgAfLolU/r843Aftwuy4El/QmGVIbDrbb0xecaVuLfmgoQHNYyJbE4hjy
+ 0dD+MGFJkFxuE+/eDTDtswF7DvC3c5eZEipPc7vsv13yfj0MwtkwbqQ8V9G9M1fNnwa2
+ G8JA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704674560; x=1705279360;
+ d=1e100.net; s=20230601; t=1704674643; x=1705279443;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=r/YieroAu1/k0iYDoqTvoj21wLi6W/2h6d4dWR97K0o=;
- b=VxefoQGOXBn1WcknrM8RQs3ghLiMbylLCW8sYGXbZZtISs1g+Mp296CKK7tvIClTce
- 7NoCQPKVy4+1n+Cruaz3q1K0LS9tTT/nnw88wbT/8yEx4hW7knyce6wEn/XR/8HAe739
- 0pJeSCY/WRLFQJ7rTo4iqI5odmbD2YI+EW2sIATSqgVrmVfWsUpen+UfguJUUdKSkKAe
- PKBKOk5VNROQ7K5E+ru+cJxpUCZiPEVLcGHSxYP/HLSp6K//geXK4nRDXXA2rD3ESXPu
- OqBuoHOXN/6/pLL0tUfsIl5H+lJR9K5iQ/r6+w6FJz3EJeBZ0t7jPfBtwosbFUhAD4jW
- veqQ==
-X-Gm-Message-State: AOJu0Yzea7zm/Jaz64gaVRcmJQTjFsiNJYmdlIMVzZfmK+mTI+9bGjtG
- wiNZumKj8UKpXpZcnPKWyGwRCVlaB4J7+nYykK0=
-X-Google-Smtp-Source: AGHT+IEGYcDhimvTX7C66iiOB79fLhjYDjERnSMLT9u6tlT75oICoiB8D4SRh3lnJ92LPDc/gheVJxWuotWS3jEUoTc=
-X-Received: by 2002:a05:6102:2745:b0:467:993e:2663 with SMTP id
- p5-20020a056102274500b00467993e2663mr3439935vsu.8.1704674559960; Sun, 07 Jan
- 2024 16:42:39 -0800 (PST)
+ bh=jwSsmQ9gvmKwvTWHmlo6xE9WpD5uBTuAgmAET4zgGyw=;
+ b=Tvwg0YfBf5ld33MR1uqttzvXhKAI0/ck0yr8ufC05HA4OfdXokRtavCtwqy5qdOyXC
+ eTtk9cQ+r5XV4KH5hl9guQwiwrqb0OBCZIqMf1MeZOX9T1DTPe0ifPyG44u/9xCaVz5f
+ I1DaDwH0UV7NeGFTbzojRu7oOdvUSt5Snudpnwx7eMN2L3cvowqHuJmmrvz1EBq76Hhu
+ rMGwwkZf98T9+Eqt4268yBLQ9ZFYFB5tktrK5p1zQi/DUR0d7Vx8O60ukIhKCue8PO9u
+ P/SS0Zb7xyAOW9D8IBgb962yEbwl9oKXXo2omU9YN/LSLOQN2H/dy0ysKkvYHeBrJA2R
+ jGPQ==
+X-Gm-Message-State: AOJu0Ywvt7R/E6w7GaVK6MO8GjP+59LTlkRW+/hp/JB+rR5VAphyRHB2
+ oTeCbnAIU5DJVBb8ZSGnTvw3TsVDHXgcpcRSmpKkg9VX
+X-Google-Smtp-Source: AGHT+IFn4KDFfdkpB2jihN2rkUo3PVJJ0Q/X0a9heLUiZnQ14F21rA2NvOZDwaNPAdKA4cXnJhEdKiwwti9Jssxq1Rs=
+X-Received: by 2002:a05:6102:2b8d:b0:467:ae15:4d35 with SMTP id
+ ib13-20020a0561022b8d00b00467ae154d35mr1369088vsb.8.1704674643416; Sun, 07
+ Jan 2024 16:44:03 -0800 (PST)
 MIME-Version: 1.0
 References: <20231220153205.11072-1-ivan.klokov@syntacore.com>
 In-Reply-To: <20231220153205.11072-1-ivan.klokov@syntacore.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 8 Jan 2024 10:42:14 +1000
-Message-ID: <CAKmqyKMpoqMXW_vH0f9nb9q5=UUeb37Onr4f1pk6VVp3cR_QpA@mail.gmail.com>
+Date: Mon, 8 Jan 2024 10:43:37 +1000
+Message-ID: <CAKmqyKO8W6PExfMGZ-UXrTVfMdwhq2wnMVO-YAMmW_1V-RAX6A@mail.gmail.com>
 Subject: Re: [PATCH 1/1] target/riscv: pmp: Ignore writes when RW=01 and MML=0
 To: Ivan Klokov <ivan.klokov@syntacore.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
@@ -64,8 +64,8 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2b;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::931;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x931.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -109,7 +109,9 @@ com> wrote:
 >
 > Signed-off-by: Ivan Klokov <ivan.klokov@syntacore.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
