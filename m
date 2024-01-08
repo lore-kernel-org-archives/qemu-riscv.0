@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7F17C47079
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 21:00:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B4EBC3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 21:00:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rMwaw-0006gL-0J; Mon, 08 Jan 2024 15:51:38 -0500
+	id 1rMwac-0006Ih-Dc; Mon, 08 Jan 2024 15:51:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rMwZV-0003lV-Pg; Mon, 08 Jan 2024 15:50:10 -0500
+ id 1rMwZY-0003o4-Lh; Mon, 08 Jan 2024 15:50:13 -0500
 Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rMwZE-0000v1-2R; Mon, 08 Jan 2024 15:50:09 -0500
+ id 1rMwZE-0000v3-9n; Mon, 08 Jan 2024 15:50:09 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=mKejtkSe+nFfQ0aoeWucod44zhEmF2o9bYQegdFzkdU=; b=ZhUUZhVnEtNk66WpkrjhP43mCV
- H3uiW5TCXECVTszSMNTlGImLRnCJ7mRVxLbSXF38/zp3zDh02oGGm5xm1I++bqiszLsiMgpKlsBbn
- TJQE40SEXrpdX5zDOCgvIUvf9p8gxJfkb+6CquiaHmvhy7TAgDi56pnWpJpl40xFp1hW+Xx6NKe3k
- vCmsdXhQ0Q6xN/66xcfxEuTCsskLeP5QiaL+89ed4mPu9Kg9GS2bh5ElDodmdAGOkP/R3hIqKRb+l
- MgVuvJNBtE+tYSeTpi/2OPg3fM5ZN3Lu/S6/PYMJcGzRRk680SD/KQX/roookyqQ58M4LHbFjVmKM
- Otesh1vA==;
+ bh=5H4+RlrFBb1kzBe4t2y8/9sK3+GNicJATXfDxB43fyo=; b=sOqQRiIJwqesJ1F0GQ8sGgjgn8
+ 14drnnNOVXK2BORNkgmyRJ3x5Mq5CcZFlOyG7ME7Ze3xzZwUSiYlHcoeKh0SIxQj9Vep8K3Aiyr7T
+ TUu0l4sr07meaF+29YflIoNnjqtSzGGDslj15cNGYh/TAQPGVQgP3hkcsWJ0kB2IrEW0Mf9Tv+TTO
+ bjYFGWQzr4BWwc/NfRxfdF9TxLv6x3VM1XftggObBDViAWOCgFZUSwscrjBqUzv6p8G0XzrqRfD0V
+ UFmy4QN6XCuimCND6bM24kDM5DEYzSkxpoJroDRYSU4Io9GY6YqqlSctE4keDdGEcIC7YtVZrziSq
+ Z074P6aA==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1rMwYj-008RPh-C4; Mon, 08 Jan 2024 20:49:22 +0000
+ id 1rMwYj-008RPz-VV; Mon, 08 Jan 2024 20:49:23 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYj-002NFB-2x; Mon, 08 Jan 2024 20:49:21 +0000
+ Hat Linux)) id 1rMwYk-002NG1-2d; Mon, 08 Jan 2024 20:49:22 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -84,9 +84,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 18/46] hw/sh4/r2d: use pci_init_nic_devices()
-Date: Mon,  8 Jan 2024 20:26:47 +0000
-Message-ID: <20240108204909.564514-19-dwmw2@infradead.org>
+Subject: [PATCH v3 29/46] hw/arm/stellaris: use qemu_find_nic_info()
+Date: Mon,  8 Jan 2024 20:26:58 +0000
+Message-ID: <20240108204909.564514-30-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
@@ -121,42 +121,77 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Previously, the first PCI NIC would be assigned to slot 2 even if the
-user override the model and made it something other than an rtl8139
-which is the default. Everything else would be dynamically assigned.
+Rather than just using qemu_configure_nic_device(), populate the MAC
+address in the system-registers device by peeking at the NICInfo before
+it's assigned to the device.
 
-Now, the first rtl8139 gets slot 2 and everything else is dynamic.
+Generate the MAC address early, if there is no matching -nic option.
+Otherwise the MAC address wouldn't be generated until net_client_init1()
+runs.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Yoshinori Sato <ysato@users.sourceforge.jp>
 ---
- hw/sh4/r2d.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ hw/arm/stellaris.c | 30 ++++++++++++++++++++++--------
+ 1 file changed, 22 insertions(+), 8 deletions(-)
 
-diff --git a/hw/sh4/r2d.c b/hw/sh4/r2d.c
-index 4944994e9c..e9f316a6ce 100644
---- a/hw/sh4/r2d.c
-+++ b/hw/sh4/r2d.c
-@@ -240,7 +240,6 @@ static void r2d_init(MachineState *machine)
-     MemoryRegion *sdram = g_new(MemoryRegion, 1);
-     qemu_irq *irq;
-     DriveInfo *dinfo;
--    int i;
-     DeviceState *dev;
-     SysBusDevice *busdev;
-     MemoryRegion *address_space_mem = get_system_memory();
-@@ -309,9 +308,8 @@ static void r2d_init(MachineState *machine)
-                           0x555, 0x2aa, 0);
+diff --git a/hw/arm/stellaris.c b/hw/arm/stellaris.c
+index 729a8bf569..e8e1c83413 100644
+--- a/hw/arm/stellaris.c
++++ b/hw/arm/stellaris.c
+@@ -1027,7 +1027,8 @@ static void stellaris_init(MachineState *ms, stellaris_board_info *board)
+     DeviceState *ssys_dev;
+     int i;
+     int j;
+-    const uint8_t *macaddr;
++    NICInfo *nd;
++    MACAddr mac;
  
-     /* NIC: rtl8139 on-board, and 2 slots. */
--    for (i = 0; i < nb_nics; i++)
--        pci_nic_init_nofail(&nd_table[i], pci_bus,
--                            mc->default_nic, i == 0 ? "2" : NULL);
-+    pci_init_nic_in_slot(pci_bus, mc->default_nic, NULL, "2");
-+    pci_init_nic_devices(pci_bus, mc->default_nic);
+     MemoryRegion *sram = g_new(MemoryRegion, 1);
+     MemoryRegion *flash = g_new(MemoryRegion, 1);
+@@ -1050,12 +1051,22 @@ static void stellaris_init(MachineState *ms, stellaris_board_info *board)
+      * need its sysclk output.
+      */
+     ssys_dev = qdev_new(TYPE_STELLARIS_SYS);
+-    /* Most devices come preprogrammed with a MAC address in the user data. */
+-    macaddr = nd_table[0].macaddr.a;
++
++    /*
++     * Most devices come preprogrammed with a MAC address in the user data.
++     * Generate a MAC address now, if there isn't a matching -nic for it.
++     */
++    nd = qemu_find_nic_info("stellaris_enet", true, "stellaris");
++    if (nd) {
++        memcpy(mac.a, nd->macaddr.a, sizeof(mac.a));
++    } else {
++        qemu_macaddr_default_if_unset(&mac);
++    }
++
+     qdev_prop_set_uint32(ssys_dev, "user0",
+-                         macaddr[0] | (macaddr[1] << 8) | (macaddr[2] << 16));
++                         mac.a[0] | (mac.a[1] << 8) | (mac.a[2] << 16));
+     qdev_prop_set_uint32(ssys_dev, "user1",
+-                         macaddr[3] | (macaddr[4] << 8) | (macaddr[5] << 16));
++                         mac.a[3] | (mac.a[4] << 8) | (mac.a[5] << 16));
+     qdev_prop_set_uint32(ssys_dev, "did0", board->did0);
+     qdev_prop_set_uint32(ssys_dev, "did1", board->did1);
+     qdev_prop_set_uint32(ssys_dev, "dc0", board->dc0);
+@@ -1267,10 +1278,13 @@ static void stellaris_init(MachineState *ms, stellaris_board_info *board)
+     if (board->dc4 & (1 << 28)) {
+         DeviceState *enet;
  
-     /* USB keyboard */
-     usb_create_simple(usb_bus_find(-1), "usb-kbd");
+-        qemu_check_nic_model(&nd_table[0], "stellaris");
+-
+         enet = qdev_new("stellaris_enet");
+-        qdev_set_nic_properties(enet, &nd_table[0]);
++        if (nd) {
++            qdev_set_nic_properties(enet, nd);
++        } else {
++            qdev_prop_set_macaddr(enet, "mac", mac.a);
++        }
++
+         sysbus_realize_and_unref(SYS_BUS_DEVICE(enet), &error_fatal);
+         sysbus_mmio_map(SYS_BUS_DEVICE(enet), 0, 0x40048000);
+         sysbus_connect_irq(SYS_BUS_DEVICE(enet), 0, qdev_get_gpio_in(nvic, 42));
 -- 
 2.41.0
 
