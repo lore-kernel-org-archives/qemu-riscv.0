@@ -4,47 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80D45C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 16:39:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62184C3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 16:39:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rMse2-0006Oq-RH; Mon, 08 Jan 2024 11:38:35 -0500
+	id 1rMsdP-0005Qf-3t; Mon, 08 Jan 2024 11:37:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <stefanha@redhat.com>)
- id 1rMsdn-0005tN-Az
- for qemu-riscv@nongnu.org; Mon, 08 Jan 2024 11:38:20 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ id 1rMsdJ-0005Mi-FE
+ for qemu-riscv@nongnu.org; Mon, 08 Jan 2024 11:37:50 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <stefanha@redhat.com>)
- id 1rMsda-000369-Q6
- for qemu-riscv@nongnu.org; Mon, 08 Jan 2024 11:38:19 -0500
+ id 1rMsdF-0002nn-61
+ for qemu-riscv@nongnu.org; Mon, 08 Jan 2024 11:37:48 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1704731886;
+ s=mimecast20190719; t=1704731863;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=xM4VAbKYt5bBYtmHmlEyW+nGKsdcNTrQLabNpuLOZVM=;
- b=UlMqJ8WeYCIDS/BZ2714p7Oy2Eh8SFnmn5WYAqVUWXCtmL5lstDYY3usbmmSBHYy/0o8u/
- EsTIbtwm7hA+DIvk3tkACQisLYIYJ5KdXR9I02K5kIqm+GQVtqOwj2rfBx/Z2cLzwO4G6d
- G4KMCB6wf7GaiCDccKdZ9M35tEhNt+w=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-287-P6Ntz1u8OGWXTHWfH-iwTQ-1; Mon, 08 Jan 2024 11:37:59 -0500
-X-MC-Unique: P6Ntz1u8OGWXTHWfH-iwTQ-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
- [10.11.54.6])
+ content-transfer-encoding:content-transfer-encoding;
+ bh=rjva5D5HUZRLSUeQ7TC2x2FhyuCk/YO2hvk35Ore6vo=;
+ b=emMkfWRiCeoE26kf/1EbwD5l6tzShNxBnFclGPewePBsTOxuW2XROB5i7qqc1fBEJzipD/
+ aJ3hevD3KIjsCTohn2+Kf9YAVj+qJ4wDTJZjQicY1zh0R2NbWnv/J9FnXEvxpNlJ0lz1WG
+ 0h3D7/meBw/oHP+jXEVhQMsg/8y5/PU=
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-642-S-QDLwRgPya2u5KWj3De2w-1; Mon,
+ 08 Jan 2024 11:37:41 -0500
+X-MC-Unique: S-QDLwRgPya2u5KWj3De2w-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 5097D1019C97;
- Mon,  8 Jan 2024 16:37:57 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id A2C281C06916;
+ Mon,  8 Jan 2024 16:37:38 +0000 (UTC)
 Received: from localhost (unknown [10.39.194.85])
- by smtp.corp.redhat.com (Postfix) with ESMTP id CF54C2166B33;
- Mon,  8 Jan 2024 16:37:55 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id F3AF01C060AF;
+ Mon,  8 Jan 2024 16:37:36 +0000 (UTC)
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-s390x@nongnu.org, Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
@@ -98,23 +97,21 @@ Cc: qemu-s390x@nongnu.org, Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
  Bin Meng <bin.meng@windriver.com>, Fabiano Rosas <farosas@suse.de>,
  Akihiko Odaki <akihiko.odaki@daynix.com>,
  David Hildenbrand <david@redhat.com>
-Subject: [PULL 6/6] Rename "QEMU global mutex" to "BQL" in comments and docs
-Date: Mon,  8 Jan 2024 11:37:35 -0500
-Message-ID: <20240108163735.254732-7-stefanha@redhat.com>
-In-Reply-To: <20240108163735.254732-1-stefanha@redhat.com>
-References: <20240108163735.254732-1-stefanha@redhat.com>
+Subject: [PULL 0/6] Block patches
+Date: Mon,  8 Jan 2024 11:37:29 -0500
+Message-ID: <20240108163735.254732-1-stefanha@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.6
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=stefanha@redhat.com;
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.7
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=stefanha@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
 X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-2.243,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -132,286 +129,160 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The term "QEMU global mutex" is identical to the more widely used Big
-QEMU Lock ("BQL"). Update the code comments and documentation to use
-"BQL" instead of "QEMU global mutex".
+The following changes since commit ffd454c67e38cc6df792733ebc5d967eee28ac0d:
 
-Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
-Acked-by: Markus Armbruster <armbru@redhat.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Paul Durrant <paul@xen.org>
-Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Reviewed-by: Cédric Le Goater <clg@kaod.org>
-Reviewed-by: Harsh Prateek Bora <harshpb@linux.ibm.com>
-Message-id: 20240102153529.486531-6-stefanha@redhat.com
-Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
----
- docs/devel/multi-thread-tcg.rst   |  7 +++----
- docs/devel/qapi-code-gen.rst      |  2 +-
- docs/devel/replay.rst             |  2 +-
- docs/devel/multiple-iothreads.txt | 14 +++++++-------
- include/block/blockjob.h          |  6 +++---
- include/io/task.h                 |  2 +-
- include/qemu/coroutine-core.h     |  2 +-
- include/qemu/coroutine.h          |  2 +-
- hw/block/dataplane/virtio-blk.c   |  8 ++++----
- hw/block/virtio-blk.c             |  2 +-
- hw/scsi/virtio-scsi-dataplane.c   |  6 +++---
- net/tap.c                         |  2 +-
- 12 files changed, 27 insertions(+), 28 deletions(-)
+  Merge tag 'pull-vfio-20240107' of https://github.com/legoater/qemu into staging (2024-01-08 10:28:42 +0000)
 
-diff --git a/docs/devel/multi-thread-tcg.rst b/docs/devel/multi-thread-tcg.rst
-index c9541a7b20..7302c3bf53 100644
---- a/docs/devel/multi-thread-tcg.rst
-+++ b/docs/devel/multi-thread-tcg.rst
-@@ -226,10 +226,9 @@ instruction. This could be a future optimisation.
- Emulated hardware state
- -----------------------
- 
--Currently thanks to KVM work any access to IO memory is automatically
--protected by the global iothread mutex, also known as the BQL (Big
--QEMU Lock). Any IO region that doesn't use global mutex is expected to
--do its own locking.
-+Currently thanks to KVM work any access to IO memory is automatically protected
-+by the BQL (Big QEMU Lock). Any IO region that doesn't use the BQL is expected
-+to do its own locking.
- 
- However IO memory isn't the only way emulated hardware state can be
- modified. Some architectures have model specific registers that
-diff --git a/docs/devel/qapi-code-gen.rst b/docs/devel/qapi-code-gen.rst
-index 7f78183cd4..ea8228518c 100644
---- a/docs/devel/qapi-code-gen.rst
-+++ b/docs/devel/qapi-code-gen.rst
-@@ -594,7 +594,7 @@ blocking the guest and other background operations.
- Coroutine safety can be hard to prove, similar to thread safety.  Common
- pitfalls are:
- 
--- The global mutex isn't held across ``qemu_coroutine_yield()``, so
-+- The BQL isn't held across ``qemu_coroutine_yield()``, so
-   operations that used to assume that they execute atomically may have
-   to be more careful to protect against changes in the global state.
- 
-diff --git a/docs/devel/replay.rst b/docs/devel/replay.rst
-index 0244be8b9c..effd856f0c 100644
---- a/docs/devel/replay.rst
-+++ b/docs/devel/replay.rst
-@@ -184,7 +184,7 @@ modes.
- Reading and writing requests are created by CPU thread of QEMU. Later these
- requests proceed to block layer which creates "bottom halves". Bottom
- halves consist of callback and its parameters. They are processed when
--main loop locks the global mutex. These locks are not synchronized with
-+main loop locks the BQL. These locks are not synchronized with
- replaying process because main loop also processes the events that do not
- affect the virtual machine state (like user interaction with monitor).
- 
-diff --git a/docs/devel/multiple-iothreads.txt b/docs/devel/multiple-iothreads.txt
-index 4865196bde..de85767b12 100644
---- a/docs/devel/multiple-iothreads.txt
-+++ b/docs/devel/multiple-iothreads.txt
-@@ -5,7 +5,7 @@ the COPYING file in the top-level directory.
- 
- 
- This document explains the IOThread feature and how to write code that runs
--outside the QEMU global mutex.
-+outside the BQL.
- 
- The main loop and IOThreads
- ---------------------------
-@@ -29,13 +29,13 @@ scalability bottleneck on hosts with many CPUs.  Work can be spread across
- several IOThreads instead of just one main loop.  When set up correctly this
- can improve I/O latency and reduce jitter seen by the guest.
- 
--The main loop is also deeply associated with the QEMU global mutex, which is a
--scalability bottleneck in itself.  vCPU threads and the main loop use the QEMU
--global mutex to serialize execution of QEMU code.  This mutex is necessary
--because a lot of QEMU's code historically was not thread-safe.
-+The main loop is also deeply associated with the BQL, which is a
-+scalability bottleneck in itself.  vCPU threads and the main loop use the BQL
-+to serialize execution of QEMU code.  This mutex is necessary because a lot of
-+QEMU's code historically was not thread-safe.
- 
- The fact that all I/O processing is done in a single main loop and that the
--QEMU global mutex is contended by all vCPU threads and the main loop explain
-+BQL is contended by all vCPU threads and the main loop explain
- why it is desirable to place work into IOThreads.
- 
- The experimental virtio-blk data-plane implementation has been benchmarked and
-@@ -66,7 +66,7 @@ There are several old APIs that use the main loop AioContext:
- 
- Since they implicitly work on the main loop they cannot be used in code that
- runs in an IOThread.  They might cause a crash or deadlock if called from an
--IOThread since the QEMU global mutex is not held.
-+IOThread since the BQL is not held.
- 
- Instead, use the AioContext functions directly (see include/block/aio.h):
-  * aio_set_fd_handler() - monitor a file descriptor
-diff --git a/include/block/blockjob.h b/include/block/blockjob.h
-index e594c10d23..7061ab7201 100644
---- a/include/block/blockjob.h
-+++ b/include/block/blockjob.h
-@@ -54,7 +54,7 @@ typedef struct BlockJob {
- 
-     /**
-      * Speed that was set with @block_job_set_speed.
--     * Always modified and read under QEMU global mutex (GLOBAL_STATE_CODE).
-+     * Always modified and read under the BQL (GLOBAL_STATE_CODE).
-      */
-     int64_t speed;
- 
-@@ -66,7 +66,7 @@ typedef struct BlockJob {
- 
-     /**
-      * Block other operations when block job is running.
--     * Always modified and read under QEMU global mutex (GLOBAL_STATE_CODE).
-+     * Always modified and read under the BQL (GLOBAL_STATE_CODE).
-      */
-     Error *blocker;
- 
-@@ -89,7 +89,7 @@ typedef struct BlockJob {
- 
-     /**
-      * BlockDriverStates that are involved in this block job.
--     * Always modified and read under QEMU global mutex (GLOBAL_STATE_CODE).
-+     * Always modified and read under the BQL (GLOBAL_STATE_CODE).
-      */
-     GSList *nodes;
- } BlockJob;
-diff --git a/include/io/task.h b/include/io/task.h
-index dc7d32ebd0..0b5342ee84 100644
---- a/include/io/task.h
-+++ b/include/io/task.h
-@@ -149,7 +149,7 @@ typedef void (*QIOTaskWorker)(QIOTask *task,
-  * lookups) to be easily run non-blocking. Reporting the
-  * results in the main thread context means that the caller
-  * typically does not need to be concerned about thread
-- * safety wrt the QEMU global mutex.
-+ * safety wrt the BQL.
-  *
-  * For example, the socket_listen() method will block the caller
-  * while DNS lookups take place if given a name, instead of IP
-diff --git a/include/qemu/coroutine-core.h b/include/qemu/coroutine-core.h
-index 230bb56517..503bad6e0e 100644
---- a/include/qemu/coroutine-core.h
-+++ b/include/qemu/coroutine-core.h
-@@ -22,7 +22,7 @@
-  * rather than callbacks, for operations that need to give up control while
-  * waiting for events to complete.
-  *
-- * These functions are re-entrant and may be used outside the global mutex.
-+ * These functions are re-entrant and may be used outside the BQL.
-  *
-  * Functions that execute in coroutine context cannot be called
-  * directly from normal functions.  Use @coroutine_fn to mark such
-diff --git a/include/qemu/coroutine.h b/include/qemu/coroutine.h
-index a65be6697f..e6aff45301 100644
---- a/include/qemu/coroutine.h
-+++ b/include/qemu/coroutine.h
-@@ -26,7 +26,7 @@
-  * rather than callbacks, for operations that need to give up control while
-  * waiting for events to complete.
-  *
-- * These functions are re-entrant and may be used outside the global mutex.
-+ * These functions are re-entrant and may be used outside the BQL.
-  *
-  * Functions that execute in coroutine context cannot be called
-  * directly from normal functions.  Use @coroutine_fn to mark such
-diff --git a/hw/block/dataplane/virtio-blk.c b/hw/block/dataplane/virtio-blk.c
-index 97a302cf49..ba22732497 100644
---- a/hw/block/dataplane/virtio-blk.c
-+++ b/hw/block/dataplane/virtio-blk.c
-@@ -84,7 +84,7 @@ apply_vq_mapping(IOThreadVirtQueueMappingList *iothread_vq_mapping_list,
-     }
- }
- 
--/* Context: QEMU global mutex held */
-+/* Context: BQL held */
- bool virtio_blk_data_plane_create(VirtIODevice *vdev, VirtIOBlkConf *conf,
-                                   VirtIOBlockDataPlane **dataplane,
-                                   Error **errp)
-@@ -148,7 +148,7 @@ bool virtio_blk_data_plane_create(VirtIODevice *vdev, VirtIOBlkConf *conf,
-     return true;
- }
- 
--/* Context: QEMU global mutex held */
-+/* Context: BQL held */
- void virtio_blk_data_plane_destroy(VirtIOBlockDataPlane *s)
- {
-     VirtIOBlock *vblk;
-@@ -179,7 +179,7 @@ void virtio_blk_data_plane_destroy(VirtIOBlockDataPlane *s)
-     g_free(s);
- }
- 
--/* Context: QEMU global mutex held */
-+/* Context: BQL held */
- int virtio_blk_data_plane_start(VirtIODevice *vdev)
- {
-     VirtIOBlock *vblk = VIRTIO_BLK(vdev);
-@@ -310,7 +310,7 @@ static void virtio_blk_data_plane_stop_vq_bh(void *opaque)
-     virtio_queue_host_notifier_read(host_notifier);
- }
- 
--/* Context: QEMU global mutex held */
-+/* Context: BQL held */
- void virtio_blk_data_plane_stop(VirtIODevice *vdev)
- {
-     VirtIOBlock *vblk = VIRTIO_BLK(vdev);
-diff --git a/hw/block/virtio-blk.c b/hw/block/virtio-blk.c
-index 315b7b364c..b7a344ca97 100644
---- a/hw/block/virtio-blk.c
-+++ b/hw/block/virtio-blk.c
-@@ -1539,7 +1539,7 @@ static void virtio_blk_resize(void *opaque)
-     VirtIODevice *vdev = VIRTIO_DEVICE(opaque);
- 
-     /*
--     * virtio_notify_config() needs to acquire the global mutex,
-+     * virtio_notify_config() needs to acquire the BQL,
-      * so it can't be called from an iothread. Instead, schedule
-      * it to be run in the main context BH.
-      */
-diff --git a/hw/scsi/virtio-scsi-dataplane.c b/hw/scsi/virtio-scsi-dataplane.c
-index 135e23fe54..2806a121b2 100644
---- a/hw/scsi/virtio-scsi-dataplane.c
-+++ b/hw/scsi/virtio-scsi-dataplane.c
-@@ -20,7 +20,7 @@
- #include "scsi/constants.h"
- #include "hw/virtio/virtio-bus.h"
- 
--/* Context: QEMU global mutex held */
-+/* Context: BQL held */
- void virtio_scsi_dataplane_setup(VirtIOSCSI *s, Error **errp)
- {
-     VirtIOSCSICommon *vs = VIRTIO_SCSI_COMMON(s);
-@@ -93,7 +93,7 @@ static void virtio_scsi_dataplane_stop_bh(void *opaque)
-     }
- }
- 
--/* Context: QEMU global mutex held */
-+/* Context: BQL held */
- int virtio_scsi_dataplane_start(VirtIODevice *vdev)
- {
-     int i;
-@@ -185,7 +185,7 @@ fail_guest_notifiers:
-     return -ENOSYS;
- }
- 
--/* Context: QEMU global mutex held */
-+/* Context: BQL held */
- void virtio_scsi_dataplane_stop(VirtIODevice *vdev)
- {
-     BusState *qbus = qdev_get_parent_bus(DEVICE(vdev));
-diff --git a/net/tap.c b/net/tap.c
-index c23d0323c2..c698b70475 100644
---- a/net/tap.c
-+++ b/net/tap.c
-@@ -219,7 +219,7 @@ static void tap_send(void *opaque)
- 
-         /*
-          * When the host keeps receiving more packets while tap_send() is
--         * running we can hog the QEMU global mutex.  Limit the number of
-+         * running we can hog the BQL.  Limit the number of
-          * packets that are processed per tap_send() callback to prevent
-          * stalling the guest.
-          */
+are available in the Git repository at:
+
+  https://gitlab.com/stefanha/qemu.git tags/block-pull-request
+
+for you to fetch changes up to 0b2675c473f68f13bc5ca1dd1c43ce421542e7b8:
+
+  Rename "QEMU global mutex" to "BQL" in comments and docs (2024-01-08 10:45:43 -0500)
+
+----------------------------------------------------------------
+Pull request
+
+----------------------------------------------------------------
+
+Philippe Mathieu-Daudé (1):
+  iothread: Remove unused Error** argument in aio_context_set_aio_params
+
+Stefan Hajnoczi (5):
+  system/cpus: rename qemu_mutex_lock_iothread() to bql_lock()
+  qemu/main-loop: rename QEMU_IOTHREAD_LOCK_GUARD to BQL_LOCK_GUARD
+  qemu/main-loop: rename qemu_cond_wait_iothread() to
+    qemu_cond_wait_bql()
+  Replace "iothread lock" with "BQL" in comments
+  Rename "QEMU global mutex" to "BQL" in comments and docs
+
+ docs/devel/multi-thread-tcg.rst      |   7 +-
+ docs/devel/qapi-code-gen.rst         |   2 +-
+ docs/devel/replay.rst                |   2 +-
+ docs/devel/reset.rst                 |   2 +-
+ docs/devel/multiple-iothreads.txt    |  14 ++--
+ hw/display/qxl.h                     |   2 +-
+ include/block/aio-wait.h             |   2 +-
+ include/block/aio.h                  |   3 +-
+ include/block/blockjob.h             |   6 +-
+ include/exec/cpu-common.h            |   2 +-
+ include/exec/memory.h                |   4 +-
+ include/exec/ramblock.h              |   2 +-
+ include/io/task.h                    |   2 +-
+ include/migration/register.h         |   8 +-
+ include/qemu/coroutine-core.h        |   2 +-
+ include/qemu/coroutine.h             |   2 +-
+ include/qemu/main-loop.h             |  68 ++++++++-------
+ include/qemu/thread.h                |   2 +-
+ target/arm/internals.h               |   4 +-
+ accel/accel-blocker.c                |  10 +--
+ accel/dummy-cpus.c                   |   8 +-
+ accel/hvf/hvf-accel-ops.c            |   4 +-
+ accel/kvm/kvm-accel-ops.c            |   4 +-
+ accel/kvm/kvm-all.c                  |  22 ++---
+ accel/tcg/cpu-exec.c                 |  26 +++---
+ accel/tcg/cputlb.c                   |  20 ++---
+ accel/tcg/tcg-accel-ops-icount.c     |   6 +-
+ accel/tcg/tcg-accel-ops-mttcg.c      |  12 +--
+ accel/tcg/tcg-accel-ops-rr.c         |  18 ++--
+ accel/tcg/tcg-accel-ops.c            |   2 +-
+ accel/tcg/translate-all.c            |   2 +-
+ cpu-common.c                         |   4 +-
+ dump/dump.c                          |   4 +-
+ hw/block/dataplane/virtio-blk.c      |   8 +-
+ hw/block/virtio-blk.c                |   2 +-
+ hw/core/cpu-common.c                 |   6 +-
+ hw/display/virtio-gpu.c              |   2 +-
+ hw/i386/intel_iommu.c                |   6 +-
+ hw/i386/kvm/xen_evtchn.c             |  30 +++----
+ hw/i386/kvm/xen_gnttab.c             |   2 +-
+ hw/i386/kvm/xen_overlay.c            |   2 +-
+ hw/i386/kvm/xen_xenstore.c           |   2 +-
+ hw/intc/arm_gicv3_cpuif.c            |   2 +-
+ hw/intc/s390_flic.c                  |  18 ++--
+ hw/mips/mips_int.c                   |   2 +-
+ hw/misc/edu.c                        |   4 +-
+ hw/misc/imx6_src.c                   |   2 +-
+ hw/misc/imx7_src.c                   |   2 +-
+ hw/net/xen_nic.c                     |   8 +-
+ hw/ppc/pegasos2.c                    |   2 +-
+ hw/ppc/ppc.c                         |   6 +-
+ hw/ppc/spapr.c                       |   2 +-
+ hw/ppc/spapr_events.c                |   2 +-
+ hw/ppc/spapr_rng.c                   |   4 +-
+ hw/ppc/spapr_softmmu.c               |   4 +-
+ hw/remote/mpqemu-link.c              |  22 ++---
+ hw/remote/vfio-user-obj.c            |   2 +-
+ hw/s390x/s390-skeys.c                |   2 +-
+ hw/scsi/virtio-scsi-dataplane.c      |   6 +-
+ iothread.c                           |   3 +-
+ migration/block-dirty-bitmap.c       |  14 ++--
+ migration/block.c                    |  38 ++++-----
+ migration/colo.c                     |  62 +++++++-------
+ migration/dirtyrate.c                |  12 +--
+ migration/migration.c                |  54 ++++++------
+ migration/ram.c                      |  16 ++--
+ net/tap.c                            |   2 +-
+ replay/replay-internal.c             |   2 +-
+ semihosting/console.c                |   8 +-
+ stubs/iothread-lock.c                |   6 +-
+ system/cpu-throttle.c                |   6 +-
+ system/cpus.c                        |  55 +++++++------
+ system/dirtylimit.c                  |   4 +-
+ system/memory.c                      |   2 +-
+ system/physmem.c                     |  14 ++--
+ system/runstate.c                    |   2 +-
+ system/watchpoint.c                  |   4 +-
+ target/arm/arm-powerctl.c            |  14 ++--
+ target/arm/helper.c                  |   6 +-
+ target/arm/hvf/hvf.c                 |   8 +-
+ target/arm/kvm.c                     |   8 +-
+ target/arm/ptw.c                     |   6 +-
+ target/arm/tcg/helper-a64.c          |   8 +-
+ target/arm/tcg/m_helper.c            |   6 +-
+ target/arm/tcg/op_helper.c           |  24 +++---
+ target/arm/tcg/psci.c                |   2 +-
+ target/hppa/int_helper.c             |   8 +-
+ target/i386/hvf/hvf.c                |   6 +-
+ target/i386/kvm/hyperv.c             |   4 +-
+ target/i386/kvm/kvm.c                |  28 +++----
+ target/i386/kvm/xen-emu.c            |  16 ++--
+ target/i386/nvmm/nvmm-accel-ops.c    |   6 +-
+ target/i386/nvmm/nvmm-all.c          |  20 ++---
+ target/i386/tcg/sysemu/fpu_helper.c  |   6 +-
+ target/i386/tcg/sysemu/misc_helper.c |   4 +-
+ target/i386/whpx/whpx-accel-ops.c    |   6 +-
+ target/i386/whpx/whpx-all.c          |  24 +++---
+ target/loongarch/tcg/csr_helper.c    |   4 +-
+ target/mips/kvm.c                    |   4 +-
+ target/mips/tcg/sysemu/cp0_helper.c  |   4 +-
+ target/openrisc/sys_helper.c         |  16 ++--
+ target/ppc/excp_helper.c             |  14 ++--
+ target/ppc/helper_regs.c             |   2 +-
+ target/ppc/kvm.c                     |   4 +-
+ target/ppc/misc_helper.c             |   8 +-
+ target/ppc/timebase_helper.c         |   8 +-
+ target/riscv/cpu_helper.c            |   4 +-
+ target/s390x/kvm/kvm.c               |   4 +-
+ target/s390x/tcg/misc_helper.c       | 118 +++++++++++++--------------
+ target/sparc/int32_helper.c          |   2 +-
+ target/sparc/int64_helper.c          |   6 +-
+ target/sparc/win_helper.c            |  20 ++---
+ target/xtensa/exc_helper.c           |   8 +-
+ ui/spice-core.c                      |   6 +-
+ util/aio-posix.c                     |   3 +-
+ util/aio-win32.c                     |   3 +-
+ util/async.c                         |   2 +-
+ util/main-loop.c                     |  13 ++-
+ util/qsp.c                           |   6 +-
+ util/rcu.c                           |  16 ++--
+ audio/coreaudio.m                    |   8 +-
+ memory_ldst.c.inc                    |  18 ++--
+ target/i386/hvf/README.md            |   2 +-
+ ui/cocoa.m                           |  56 ++++++-------
+ 124 files changed, 646 insertions(+), 655 deletions(-)
+
 -- 
 2.43.0
 
