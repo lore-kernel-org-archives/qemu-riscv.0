@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D5AFC3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 21:03:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8F7DC3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 21:04:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rMwb3-0006vB-9A; Mon, 08 Jan 2024 15:51:45 -0500
+	id 1rMwbR-0008Pq-4b; Mon, 08 Jan 2024 15:52:09 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rMwZw-00042v-9A; Mon, 08 Jan 2024 15:50:36 -0500
-Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
+ <BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1rMwa9-0004ad-OV; Mon, 08 Jan 2024 15:50:49 -0500
+Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rMwZt-0000ux-Ew; Mon, 08 Jan 2024 15:50:35 -0500
+ <BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1rMwa4-000106-AN; Mon, 08 Jan 2024 15:50:49 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+ d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=MtsxthwV/XHTVMI8Ph+V2vIGIyQmamq03UN301HMpX4=; b=PT6zlFaRlQa+uavB1+kjb5Kekl
- ewArnNLhFmKdXVZebbCFbxdk7Ljpre/RVILdG5jVDpjwF6OpupTJTNAKSneiRC1PlrzMntVevewHA
- Aiyb1SGwAHzBbKBwiVaEV62nHudYjg8KaVltZK5CkM0me8XQj3iGjw0BbWNcCY+gZ8fuGinElIbW6
- vrmSTircUy9XWCpf68cvZXZ6DpPPXaiWq7WtXK238z7wuuakIgUh7TB6wNy6vLQYASorGrn4v/gm5
- IxLEXs8dYAjl84Jb47k6TUUtt/tV9tu7339JtfgwlZXKl+rbx7gRPXIKH2kN3zvYq/Uj8tS1QkgXD
- l7t7DD6g==;
+ bh=MQiK8Ibs4kfxIXSnt/gzZHX373ukfed9ntiFamchQXY=; b=d6cFrHjD6/+gUHayRZakRT8I9h
+ bJZx7IbE81BJB4hQZqukYX3eW3znm1fR1phouladzQJsnY5Deel34gpeQVfTB+HaFN3YsjQtdkbvN
+ 3MNbA1oCAclbvNGPuS/6oCjxueFfCmA1PaPUMuaslCMFAgkDHkXgypkCkTC1Jp2lTNhKMhkoRd6Ic
+ HzTlF23yvTcpYGLTcg7poNaB5ET+SyKTnq8hPc0eeew0PWzl8v3r+gbir/7njkGsv9Trc6umhJKuB
+ 5qurqQgyFniPUUqbhY+ZRXqNH0Zmf414g7kLzAT8K+sVEskmtkeiPmxWaeiJlB1+hCBglERBtr1cA
+ T3kahX8w==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1rMwYi-008RPc-Vt; Mon, 08 Jan 2024 20:49:22 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1rMwYm-007wXz-0N; Mon, 08 Jan 2024 20:49:24 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYj-002NEi-1T; Mon, 08 Jan 2024 20:49:21 +0000
+ Hat Linux)) id 1rMwYl-002NGv-1q; Mon, 08 Jan 2024 20:49:23 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -84,19 +84,20 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 12/46] hw/mips/fuloong2e: use pci_init_nic_devices()
-Date: Mon,  8 Jan 2024 20:26:41 +0000
-Message-ID: <20240108204909.564514-13-dwmw2@infradead.org>
+Subject: [PATCH v3 40/46] hw/s390x/s390-virtio-ccw: use
+ qemu_create_nic_device()
+Date: Mon,  8 Jan 2024 20:27:09 +0000
+Message-ID: <20240108204909.564514-41-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- casper.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1236::1;
- envelope-from=BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org;
- helo=casper.infradead.org
+ desiato.infradead.org. See http://www.infradead.org/rpr.html
+Received-SPF: none client-ip=2001:8b0:10b:1:d65d:64ff:fe57:4e05;
+ envelope-from=BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org;
+ helo=desiato.infradead.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -121,49 +122,34 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-The previous behaviour was: *if* the first NIC specified on the command
-line was an RTL8139 (or unspecified model) then it gets assigned to PCI
-slot 7, which is where the Fuloong board had an RTL8139. All other
-devices (including the first, if it was specified a anything other then
-an rtl8319) get dynamically assigned on the bus.
-
-The new behaviour is subtly different: If the first NIC was given a
-specific model *other* than rtl8139, and a subsequent NIC was not,
-then the rtl8139 (or unspecified) NIC will go to slot 7 and the rest
-will be dynamically assigned.
-
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/mips/fuloong2e.c | 16 +++-------------
- 1 file changed, 3 insertions(+), 13 deletions(-)
+ hw/s390x/s390-virtio-ccw.c | 11 ++---------
+ 1 file changed, 2 insertions(+), 9 deletions(-)
 
-diff --git a/hw/mips/fuloong2e.c b/hw/mips/fuloong2e.c
-index 97b2c8ed8e..a45aac368c 100644
---- a/hw/mips/fuloong2e.c
-+++ b/hw/mips/fuloong2e.c
-@@ -201,19 +201,9 @@ static void main_cpu_reset(void *opaque)
- /* Network support */
- static void network_init(PCIBus *pci_bus)
+diff --git a/hw/s390x/s390-virtio-ccw.c b/hw/s390x/s390-virtio-ccw.c
+index 1169e20b94..202c378131 100644
+--- a/hw/s390x/s390-virtio-ccw.c
++++ b/hw/s390x/s390-virtio-ccw.c
+@@ -221,16 +221,9 @@ static void s390_init_ipl_dev(const char *kernel_filename,
+ 
+ static void s390_create_virtio_net(BusState *bus, const char *name)
  {
 -    int i;
 -
 -    for (i = 0; i < nb_nics; i++) {
 -        NICInfo *nd = &nd_table[i];
--        const char *default_devaddr = NULL;
+-        DeviceState *dev;
 -
--        if (i == 0 && (!nd->model || strcmp(nd->model, "rtl8139") == 0)) {
--            /* The Fuloong board has a RTL8139 card using PCI SLOT 7 */
--            default_devaddr = "07";
--        }
--
--        pci_nic_init_nofail(nd, pci_bus, "rtl8139", default_devaddr);
--    }
-+    /* The Fuloong board has a RTL8139 card using PCI SLOT 7 */
-+    pci_init_nic_in_slot(pci_bus, "rtl8139", NULL, "07");
-+    pci_init_nic_devices(pci_bus, "rtl8139");
- }
+-        qemu_check_nic_model(nd, "virtio");
++    DeviceState *dev;
  
- static void mips_fuloong2e_init(MachineState *machine)
+-        dev = qdev_new(name);
+-        qdev_set_nic_properties(dev, nd);
++    while ((dev = qemu_create_nic_device(name, true, "virtio"))) {
+         qdev_realize_and_unref(dev, bus, &error_fatal);
+     }
+ }
 -- 
 2.41.0
 
