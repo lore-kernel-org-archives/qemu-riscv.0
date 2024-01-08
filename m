@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39AE0C4707C
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32D86C47073
 	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 20:57:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rMwaJ-0004uF-81; Mon, 08 Jan 2024 15:50:59 -0500
+	id 1rMwaJ-0004uE-7q; Mon, 08 Jan 2024 15:50:59 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rMwZU-0003lM-Eq; Mon, 08 Jan 2024 15:50:10 -0500
-Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
+ <BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1rMwZY-0003o9-QC; Mon, 08 Jan 2024 15:50:13 -0500
+Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rMwZC-0000uu-VC; Mon, 08 Jan 2024 15:50:08 -0500
+ <BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1rMwZF-00010D-PE; Mon, 08 Jan 2024 15:50:11 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+ d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=GlXzCO3XdZ21RHsZxfP3RgbC823eeizUvksRPyKhf1o=; b=F2PLLrhA1JCW2ZC6Gag0CAqTku
- yoaan0Fj4kmMVNXtnb8mwsbdx3hzKzm/2rPfryD/967lRW8bxpKpoRAIiZ6hJojMGfdOiNNAqiSF7
- TrdjxJw/78RYS0xwuNkvNVSJeuSdJOO6+v17RiFKR8zia+6NWU9Ldz7hDoi7vakXoa32RqX+TSPii
- exGfEZHdsrKgfj2fB1e4C3ijCX3WnNHb7dlV8cHz8Z7YZQhOSufyMjqlDpFWSAoO/sFQZc0wgLO6G
- NCMH2nANgaHhp/DlIlQbxOWgFbJea+QyzDq2hyfzHwM9pNnzQP/EIH02681vCOWfeDhOxxUrSidgH
- YJ4me+yg==;
+ bh=fKzSEAzycsDrEiPWFhQoNqX9JuE8mZwP1mZzqxeZRVI=; b=heBk2HKstNixMCfGHrZOPLntIm
+ 3ER50x76sGFR2x/zM4Mdza3n/WZnJmR281mpL1waE6lKWCg4EGMPULgiMZDSOgSE5jEjG7O5BYpL5
+ HPZF+v/DR9iBzkk7Rvd8f6AFxXoCJqlQSj5nfYekAsuL6wKs8mcZo/HvpRqcpeLT3Sg8wKV0euy8D
+ MCyQ8ppYR8RIsBhycfsDqXle4/codF94H9ZCTKDfsqVlzP3RYLTfLPgJv4acCK5aORbytCwpsTAFq
+ WF9F9NnrT/Iq0HqCfj/UIEYOXmtnOwbO7RzGBrfHRrGm5VL95TMhN64sMRjIsBT+OWZM4QMdqcIl9
+ jV/d1MGA==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1rMwYi-008RPe-Ri; Mon, 08 Jan 2024 20:49:22 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1rMwYm-007wXt-0F; Mon, 08 Jan 2024 20:49:24 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYj-002NEu-1z; Mon, 08 Jan 2024 20:49:21 +0000
+ Hat Linux)) id 1rMwYl-002NGd-0y; Mon, 08 Jan 2024 20:49:23 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -84,19 +84,19 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 14/46] hw/mips/loongson3_virt: use pci_init_nic_devices()
-Date: Mon,  8 Jan 2024 20:26:43 +0000
-Message-ID: <20240108204909.564514-15-dwmw2@infradead.org>
+Subject: [PATCH v3 36/46] hw/mips/jazz: use qemu_find_nic_info()
+Date: Mon,  8 Jan 2024 20:27:05 +0000
+Message-ID: <20240108204909.564514-37-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- casper.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1236::1;
- envelope-from=BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org;
- helo=casper.infradead.org
+ desiato.infradead.org. See http://www.infradead.org/rpr.html
+Received-SPF: none client-ip=2001:8b0:10b:1:d65d:64ff:fe57:4e05;
+ envelope-from=BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org;
+ helo=desiato.infradead.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -121,26 +121,54 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
+Extract the MAC address from the NICInfo, or generate one explicitly if
+there was no corresponding NIC configuration, to put it in the PROM.
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/mips/loongson3_virt.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ hw/mips/jazz.c | 15 +++++++--------
+ 1 file changed, 7 insertions(+), 8 deletions(-)
 
-diff --git a/hw/mips/loongson3_virt.c b/hw/mips/loongson3_virt.c
-index 33eae01eca..caedde2df0 100644
---- a/hw/mips/loongson3_virt.c
-+++ b/hw/mips/loongson3_virt.c
-@@ -451,9 +451,7 @@ static inline void loongson3_virt_devices_init(MachineState *machine,
-         usb_create_simple(usb_bus_find(-1), "usb-tablet");
+diff --git a/hw/mips/jazz.c b/hw/mips/jazz.c
+index 0d2348aa5a..5bf3e328db 100644
+--- a/hw/mips/jazz.c
++++ b/hw/mips/jazz.c
+@@ -119,15 +119,19 @@ static const MemoryRegionOps dma_dummy_ops = {
+     .endianness = DEVICE_NATIVE_ENDIAN,
+ };
+ 
+-static void mips_jazz_init_net(NICInfo *nd, IOMMUMemoryRegion *rc4030_dma_mr,
++static void mips_jazz_init_net(IOMMUMemoryRegion *rc4030_dma_mr,
+                                DeviceState *rc4030, MemoryRegion *dp8393x_prom)
+ {
+     DeviceState *dev;
+     SysBusDevice *sysbus;
+     int checksum, i;
+     uint8_t *prom;
++    NICInfo *nd;
+ 
+-    qemu_check_nic_model(nd, "dp83932");
++    nd = qemu_find_nic_info("dp8393x", true, "dp82932");
++    if (!nd) {
++        return;
++    }
+ 
+     dev = qdev_new("dp8393x");
+     qdev_set_nic_properties(dev, nd);
+@@ -324,12 +328,7 @@ static void mips_jazz_init(MachineState *machine,
      }
  
--    for (i = 0; i < nb_nics; i++) {
--        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
+     /* Network controller */
+-    if (nb_nics == 1) {
+-        mips_jazz_init_net(&nd_table[0], rc4030_dma_mr, rc4030, dp8393x_prom);
+-    } else if (nb_nics > 1) {
+-        error_report("This machine only supports one NIC");
+-        exit(1);
 -    }
-+    pci_init_nic_devices(pci_bus, mc->default_nic);
- }
++    mips_jazz_init_net(rc4030_dma_mr, rc4030, dp8393x_prom);
  
- static void mips_loongson3_virt_init(MachineState *machine)
+     /* SCSI adapter */
+     dev = qdev_new(TYPE_SYSBUS_ESP);
 -- 
 2.41.0
 
