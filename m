@@ -4,70 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34B83C47074
-	for <qemu-riscv@archiver.kernel.org>; Sun,  7 Jan 2024 23:41:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20EECC47074
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 00:14:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rMclb-0007BY-Sq; Sun, 07 Jan 2024 18:41:19 -0500
+	id 1rMdH0-0005yX-AO; Sun, 07 Jan 2024 19:13:46 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rMcla-0007Au-2K; Sun, 07 Jan 2024 18:41:18 -0500
-Received: from mail-qv1-xf2d.google.com ([2607:f8b0:4864:20::f2d])
+ id 1rMdGz-0005xy-6P; Sun, 07 Jan 2024 19:13:45 -0500
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rMclY-0006iI-4o; Sun, 07 Jan 2024 18:41:17 -0500
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-67f9f6caabcso14064896d6.3; 
- Sun, 07 Jan 2024 15:41:14 -0800 (PST)
+ id 1rMdGx-0000IS-Hd; Sun, 07 Jan 2024 19:13:44 -0500
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-1d3e6c86868so11085865ad.1; 
+ Sun, 07 Jan 2024 16:13:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704670874; x=1705275674; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1704672821; x=1705277621; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EW2dgSQrxieMxSNaTZ7OtZx+Dr1ZzgYu+7eKtMT4bAA=;
- b=JfcfTKYGUOVx7o3dkmAETgQMiKcWm72EiG2Z9kfbvkX39VfdhFcNENk8U0rjSJDlFg
- 1MUyPwAkB2SFRrYAaoJauGrZfZbbW+2AFebwX8WcH0qJZ3laWZUlV2vRXzXolUqclTUc
- EB8kEcK0wf0AI9QPWmpPJ9OJ4vS7B6z3I1C55boXd1bSre/qFFkW5yv+KRuhD8ApyzBM
- /qCk9e+iw8nXDUM9mrULHsY3y5cdXBZ+HrP9MDKK0/+LiR64PNUfRiBE7vOaoJCaWSm6
- uQsf6m/yjAnKggqjSJVHiS5DkYjdhLG5BWtcsJs9/xfd7xTxAUN7KXtpghi9/Da3y9os
- NVEA==
+ bh=ydyQcpoWwEBe73HeZcT4G88tDIBP8gJ14l5X8kcFbbM=;
+ b=fu0lqz0+ffhOW8dzQnXy9r2q2y5BKZqYnKx7fql8O0eNC7BPflZSlgk4xEZ17+ZqeW
+ sSaIuC/ie50DPxv/BYVU9D9JlMpU8tQBU86KfOLMiCIaQhGYAOCXUCmMgXiRTXEBPY+B
+ PFejHSnupfbBzK1aF0/WBLAni5Lz7tEAHfi9uN/UibyHaEhJ6cIWmaAiL+aY/KNILeg4
+ W4kjJRopEnPdLF498z1GSFH9JLA1W9ni/+ZmhxkzpfRv1p/phpIz34ctA6dmFRPAIspu
+ hOr2FYAUyUEmhf/bTF8DVhMMJmFD3d5GCDCJpzjL+k+9twMgfQHdOwx8+o05tFQZzyib
+ i9Mg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704670874; x=1705275674;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1704672821; x=1705277621;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EW2dgSQrxieMxSNaTZ7OtZx+Dr1ZzgYu+7eKtMT4bAA=;
- b=DTuyThBs0pYAAgo2W6bQ457ijWvYoLDR4/ynOfg1t58KamO8vNdckdtfxQnkqHVrD2
- BHbPivu9enJbhGjUWKXTlPeNCxPClZkl4vVsoPiL88uKh7Mr3QofZIPR90wARB3zFDKj
- XssJ2UfLRpSM5h/Jg9pCDGnhuR17nUeL1E4YWjqiKUxFUHKLoR03rGkOUo79XjQDdDk/
- dfzIkR+s/z203nhkXp8zuQ6hNR6cFawWZcCIIONADNRXXbTr2kE1RlUTMnvVzF79EmTP
- 1F5jct7XGwA559n8K5XIb9dGdnEaHvHl2x+8viUesSlMMHJpfGrmZsgJIFL54AfZJJYh
- h+YQ==
-X-Gm-Message-State: AOJu0YzrOnv1l/4Q2ojKN0cvR0I8frdDXK5zCxUg9HewfaZCar4kBXCR
- 1ckEh4cz6+6c1ImpBMUpqnUOEAwlHvJZRPNgl/s=
-X-Google-Smtp-Source: AGHT+IHnXGZEXA0U7WRX0UI7OsKBJgyfh+K5Gc3ZCV5GEIht4L9AYrp6p4neqaHEb103PFF/6pB3ji5Fc9XM3/MTmBE=
-X-Received: by 2002:a0c:f98f:0:b0:680:ca82:b1c8 with SMTP id
- t15-20020a0cf98f000000b00680ca82b1c8mr3892214qvn.86.1704670873767; Sun, 07
- Jan 2024 15:41:13 -0800 (PST)
-MIME-Version: 1.0
-References: <20240104071523.273702-1-bmeng@tinylab.org>
-In-Reply-To: <20240104071523.273702-1-bmeng@tinylab.org>
+ bh=ydyQcpoWwEBe73HeZcT4G88tDIBP8gJ14l5X8kcFbbM=;
+ b=q/wQaqT+EdQk9mW4rbOWc/La5RJZRQ/Nb7f/idaitoyhFx+N+1/qZYsYSQ27IicFQw
+ 9uyk3LpLaBU528DuoiypeqiGcL9e9tUwdwcUy9QMXAMlfD2StJSt1JC5qZbHyQzXM994
+ Ru4jj9YQXzJVL7D5TBYH+GjxN/woe5yz/LjpdXtfxTSg5mtbocd4PVyPLRBzLEgp3LtA
+ 3yAj0yxfpLp85/dsOFqHQ5KYVL2nD4rAA+f248RBaKGX43j3IbW8xrQIdD8BS+E+9yN7
+ ogj7hVVI0nw65E4WgI3g+GcVX4LOotiGq1y1mURUyZRT1mVv8jatET7E0c9moe3u47+N
+ 2DNA==
+X-Gm-Message-State: AOJu0YwLlnbBLBH6QLZp3+us/Q9OBykTE6Z5tdL1lvYSt4BG3Ql9JB7H
+ pH5FbCZQoWgurJn1ggyEJks=
+X-Google-Smtp-Source: AGHT+IHdHUcyp/ly2k/G7eeBGv3Zh5M9TU4WmWE7CKh6o0oAWBQEnBN2t8AA3J06Zjf2QKEq0t3cvA==
+X-Received: by 2002:a17:903:24f:b0:1d4:75c8:6d2d with SMTP id
+ j15-20020a170903024f00b001d475c86d2dmr3811976plh.49.1704672821594; 
+ Sun, 07 Jan 2024 16:13:41 -0800 (PST)
+Received: from toolbox.alistair23.me
+ (2403-580b-97e8-0-321-6fb2-58f1-a1b1.ip6.aussiebb.net.
+ [2403:580b:97e8:0:321:6fb2:58f1:a1b1])
+ by smtp.gmail.com with ESMTPSA id
+ d15-20020a170902b70f00b001d4974385d4sm4943434pls.250.2024.01.07.16.13.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 07 Jan 2024 16:13:41 -0800 (PST)
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 8 Jan 2024 09:40:47 +1000
-Message-ID: <CAKmqyKMSs9vYMVKfgeye-vnPQOgk34sdQXNVty2YZMFQszNP8Q@mail.gmail.com>
-Subject: Re: [PATCH] docs/system/riscv: sifive_u: Update S-mode U-Boot image
- build instructions
-To: Bin Meng <bmeng@tinylab.org>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::f2d;
- envelope-from=alistair23@gmail.com; helo=mail-qv1-xf2d.google.com
+X-Google-Original-From: Alistair Francis <alistair.francis@wdc.com>
+To: zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, palmer@dabbelt.com,
+ dbarboza@ventanamicro.com, bin.meng@windriver.com, qemu-devel@nongnu.org,
+ liwei1518@gmail.com
+Cc: alistair23@gmail.com,
+	Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH 1/3] target/riscv: Assert that the CSR numbers will be correct
+Date: Mon,  8 Jan 2024 10:13:26 +1000
+Message-ID: <20240108001328.280222-2-alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240108001328.280222-1-alistair.francis@wdc.com>
+References: <20240108001328.280222-1-alistair.francis@wdc.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=alistair23@gmail.com; helo=mail-pl1-x630.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -91,108 +98,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jan 4, 2024 at 5:18=E2=80=AFPM Bin Meng <bmeng@tinylab.org> wrote:
->
-> Currently, the documentation outlines the process for building the
-> S-mode U-Boot image using `make menuconfig` and manual actions within
-> the menuconfig UI. However, this approach is fragile due to Kconfig
-> options potentially changing across different releases. For example,
-> CONFIG_OF_PRIOR_STAGE has been replaced by CONFIG_BOARD since v2022.01
-> release, and CONFIG_TEXT_BASE has been moved to the 'General setup'
-> menu from the 'Boot options' menu in v2024.01 release.
->
-> This update aims to make the S-mode U-Boot image build instructions
-> future-proof. It leverages the 'config' script provided in the U-Boot
-> source tree to edit the .config file, followed by a `make olddefconfig`.
->
-> Validated with U-Boot v2024.01 release.
->
-> Signed-off-by: Bin Meng <bmeng@tinylab.org>
+The CSRs will always be between either CSR_MHPMCOUNTER3 and
+CSR_MHPMCOUNTER31 or CSR_MHPMCOUNTER3H and CSR_MHPMCOUNTER31H.
 
-Thanks!
+So although ctr_index can't be negative, Coverity doesn't know this and
+it isn't obvious to human readers either. Let's add an assert to ensure
+that Coverity knows the values will be within range.
 
-Applied to riscv-to-apply.next
+To simplify the code let's also change the RV32 adjustment.
 
-Alistair
+Fixes: Coverity CID 1523910
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/csr.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
->
-> ---
->
->  docs/system/riscv/sifive_u.rst | 33 ++++++++++++---------------------
->  1 file changed, 12 insertions(+), 21 deletions(-)
->
-> diff --git a/docs/system/riscv/sifive_u.rst b/docs/system/riscv/sifive_u.=
-rst
-> index 7b166567f9..8f55ae8e31 100644
-> --- a/docs/system/riscv/sifive_u.rst
-> +++ b/docs/system/riscv/sifive_u.rst
-> @@ -210,7 +210,7 @@ command line options with ``qemu-system-riscv32``.
->  Running U-Boot
->  --------------
->
-> -U-Boot mainline v2021.07 release is tested at the time of writing. To bu=
-ild a
-> +U-Boot mainline v2024.01 release is tested at the time of writing. To bu=
-ild a
->  U-Boot mainline bootloader that can be booted by the ``sifive_u`` machin=
-e, use
->  the sifive_unleashed_defconfig with similar commands as described above =
-for
->  Linux:
-> @@ -325,15 +325,10 @@ configuration of U-Boot:
->
->    $ export CROSS_COMPILE=3Driscv64-linux-
->    $ make sifive_unleashed_defconfig
-> -  $ make menuconfig
-> -
-> -then manually select the following configuration:
-> -
-> -  * Device Tree Control ---> Provider of DTB for DT Control ---> Prior S=
-tage bootloader DTB
-> -
-> -and unselect the following configuration:
-> -
-> -  * Library routines ---> Allow access to binman information in the devi=
-ce tree
-> +  $ ./scripts/config --enable OF_BOARD
-> +  $ ./scripts/config --disable BINMAN_FDT
-> +  $ ./scripts/config --disable SPL
-> +  $ make olddefconfig
->
->  This changes U-Boot to use the QEMU generated device tree blob, and bypa=
-ss
->  running the U-Boot SPL stage.
-> @@ -352,17 +347,13 @@ It's possible to create a 32-bit U-Boot S-mode imag=
-e as well.
->
->    $ export CROSS_COMPILE=3Driscv64-linux-
->    $ make sifive_unleashed_defconfig
-> -  $ make menuconfig
-> -
-> -then manually update the following configuration in U-Boot:
-> -
-> -  * Device Tree Control ---> Provider of DTB for DT Control ---> Prior S=
-tage bootloader DTB
-> -  * RISC-V architecture ---> Base ISA ---> RV32I
-> -  * Boot options ---> Boot images ---> Text Base ---> 0x80400000
-> -
-> -and unselect the following configuration:
-> -
-> -  * Library routines ---> Allow access to binman information in the devi=
-ce tree
-> +  $ ./scripts/config --disable ARCH_RV64I
-> +  $ ./scripts/config --enable ARCH_RV32I
-> +  $ ./scripts/config --set-val TEXT_BASE 0x80400000
-> +  $ ./scripts/config --enable OF_BOARD
-> +  $ ./scripts/config --disable BINMAN_FDT
-> +  $ ./scripts/config --disable SPL
-> +  $ make olddefconfig
->
->  Use the same command line options to boot the 32-bit U-Boot S-mode image=
-:
->
-> --
-> 2.34.1
->
->
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index fde7ce1a53..336ec7eda7 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -195,8 +195,11 @@ static RISCVException mctr(CPURISCVState *env, int csrno)
+ 
+     if ((riscv_cpu_mxl(env) == MXL_RV32) && csrno >= CSR_MCYCLEH) {
+         /* Offset for RV32 mhpmcounternh counters */
+-        base_csrno += 0x80;
++        csrno -= 0x80;
+     }
++
++    g_assert(csrno >= CSR_MHPMCOUNTER3 && csrno <= CSR_MHPMCOUNTER31);
++
+     ctr_index = csrno - base_csrno;
+     if ((BIT(ctr_index) & pmu_avail_ctrs >> 3) == 0) {
+         /* The PMU is not enabled or counter is out of range */
+-- 
+2.43.0
+
 
