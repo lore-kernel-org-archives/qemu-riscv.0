@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAF88C47073
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 21:00:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7990FC3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 21:00:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rMwa2-00049o-5X; Mon, 08 Jan 2024 15:50:42 -0500
+	id 1rMwbH-000891-Fm; Mon, 08 Jan 2024 15:51:59 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1rMwZY-0003o6-M0; Mon, 08 Jan 2024 15:50:13 -0500
+ id 1rMwa5-0004Fa-34; Mon, 08 Jan 2024 15:50:45 -0500
 Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1rMwZE-00010E-RB; Mon, 08 Jan 2024 15:50:11 -0500
+ id 1rMwa3-00010S-7H; Mon, 08 Jan 2024 15:50:44 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=vOPLDRs2pS03aFI3QKRuxfVdnOLMGUdP65R8Ofm4Hp4=; b=fryOhSDr3Sqtj/iGNQmSgoZC81
- 0bGoir4uvuNgVOwYFL1sDLG0qL07aRdFpM5bAJLXRJnRMx9U3c4QlhYrfGIR0ZD8rzIod70oaH03m
- 32JHaV5EZnpDyaapgbucMOXP0B4SNSnpc4ECIHxaJ403KFlc8VSyGhgbl9Ov+D8HDtwELOrzGF4H/
- ItyyGOTXfBcAilSezrmYxbybrVpmkvoj+/cBATGduER26ylWNBqZXNBMljk3KwcpPcFIx/nScB0CD
- 6caPIW50TvBL5hpX6f7H+gU3MUsh5192cNfpYuPDZO/kTfzzbn8mkGjq6+Oq5MRyuGx/CIfzH0w3a
- 9/f6TL/g==;
+ bh=rTopHu98DHOiHwDxqf9TRgh2IF7Z3stx+8tiOprcI64=; b=Zzn090CYyyg1K81T6v5iNsVYOt
+ 6Dhn8iNEErAwnNe4IYC5D4OqMRXv9zXr8x6c+oM9dYRlZWyYyNr0S3pwEX7wVa2vJQLKRRj+fh22y
+ cVApTVo/Mqqj2eymH5XJESGSiWk6wgHG3wFXv7AWxDyUKVeOEBX7YMIVskD4wXT9/t74PjLH54FOn
+ njCMdfoJH4NpkpR6HIUZmktEHiE9hXX9mG65VARLCRuL+/mkaPzW9zJhaH0PKQ261yR4r3rl/wT3U
+ Zm//eVVmsDNaXTKwSMYtn9V588ar1Va0V/GypLwLfaqUtRskXVrLS1IL+5qp2lByUhI8eqiI6A4VN
+ U3v9QWlA==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1rMwYk-007wXT-2t; Mon, 08 Jan 2024 20:49:23 +0000
+ id 1rMwYn-007wY3-1J; Mon, 08 Jan 2024 20:49:27 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYj-002NF7-2j; Mon, 08 Jan 2024 20:49:21 +0000
+ Hat Linux)) id 1rMwYl-002NHH-2j; Mon, 08 Jan 2024 20:49:23 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -84,9 +84,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 17/46] hw/ppc: use pci_init_nic_devices()
-Date: Mon,  8 Jan 2024 20:26:46 +0000
-Message-ID: <20240108204909.564514-18-dwmw2@infradead.org>
+Subject: [PATCH v3 44/46] hw/pci: remove pci_nic_init_nofail()
+Date: Mon,  8 Jan 2024 20:27:13 +0000
+Message-ID: <20240108204909.564514-45-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
@@ -121,91 +121,111 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
+This function is no longer used.
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/ppc/e500.c          |  4 +---
- hw/ppc/mac_newworld.c  |  4 +---
- hw/ppc/mac_oldworld.c  |  4 +---
- hw/ppc/ppc440_bamboo.c | 14 +++++---------
- 4 files changed, 8 insertions(+), 18 deletions(-)
+ hw/pci/pci.c         | 72 --------------------------------------------
+ include/hw/pci/pci.h |  3 --
+ 2 files changed, 75 deletions(-)
 
-diff --git a/hw/ppc/e500.c b/hw/ppc/e500.c
-index 566f1200dd..3bd12b54ab 100644
---- a/hw/ppc/e500.c
-+++ b/hw/ppc/e500.c
-@@ -1079,9 +1079,7 @@ void ppce500_init(MachineState *machine)
+diff --git a/hw/pci/pci.c b/hw/pci/pci.c
+index 5849606f66..449abfb182 100644
+--- a/hw/pci/pci.c
++++ b/hw/pci/pci.c
+@@ -1853,78 +1853,6 @@ const pci_class_desc *get_class_desc(int class)
+     return desc;
+ }
  
-     if (pci_bus) {
-         /* Register network interfaces. */
--        for (i = 0; i < nb_nics; i++) {
--            pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
--        }
-+        pci_init_nic_devices(pci_bus, mc->default_nic);
-     }
- 
-     /* Register spinning region */
-diff --git a/hw/ppc/mac_newworld.c b/hw/ppc/mac_newworld.c
-index 535710314a..b36dbaf2b6 100644
---- a/hw/ppc/mac_newworld.c
-+++ b/hw/ppc/mac_newworld.c
-@@ -444,9 +444,7 @@ static void ppc_core99_init(MachineState *machine)
-         graphic_depth = 15;
-     }
- 
--    for (i = 0; i < nb_nics; i++) {
--        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
--    }
-+    pci_init_nic_devices(pci_bus, mc->default_nic);
- 
-     /* The NewWorld NVRAM is not located in the MacIO device */
-     if (kvm_enabled() && qemu_real_host_page_size() > 4096) {
-diff --git a/hw/ppc/mac_oldworld.c b/hw/ppc/mac_oldworld.c
-index 9acc7adfc9..1981d3d8f6 100644
---- a/hw/ppc/mac_oldworld.c
-+++ b/hw/ppc/mac_oldworld.c
-@@ -277,9 +277,7 @@ static void ppc_heathrow_init(MachineState *machine)
- 
-     pci_vga_init(pci_bus);
- 
--    for (i = 0; i < nb_nics; i++) {
--        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
--    }
-+    pci_init_nic_devices(pci_bus, mc->default_nic);
- 
-     /* MacIO IDE */
-     ide_drive_get(hd, ARRAY_SIZE(hd));
-diff --git a/hw/ppc/ppc440_bamboo.c b/hw/ppc/ppc440_bamboo.c
-index a189942de4..c75c3083e6 100644
---- a/hw/ppc/ppc440_bamboo.c
-+++ b/hw/ppc/ppc440_bamboo.c
-@@ -161,7 +161,6 @@ static void bamboo_init(MachineState *machine)
-     DeviceState *uicdev;
-     SysBusDevice *uicsbd;
-     int success;
+-/* Initialize a PCI NIC.  */
+-PCIDevice *pci_nic_init_nofail(NICInfo *nd, PCIBus *rootbus,
+-                               const char *default_model,
+-                               const char *default_devaddr)
+-{
+-    const char *devaddr = nd->devaddr ? nd->devaddr : default_devaddr;
+-    GPtrArray *pci_nic_models;
+-    PCIBus *bus;
+-    PCIDevice *pci_dev;
+-    DeviceState *dev;
+-    int devfn;
 -    int i;
- 
-     if (kvm_enabled()) {
-         error_report("machine %s does not support the KVM accelerator",
-@@ -234,14 +233,11 @@ static void bamboo_init(MachineState *machine)
-     }
- 
-     if (pcibus) {
--        /* Register network interfaces. */
--        for (i = 0; i < nb_nics; i++) {
--            /*
--             * There are no PCI NICs on the Bamboo board, but there are
--             * PCI slots, so we can pick whatever default model we want.
--             */
--            pci_nic_init_nofail(&nd_table[i], pcibus, mc->default_nic, NULL);
+-    int dom, busnr;
+-    unsigned slot;
+-
+-    if (nd->model && !strcmp(nd->model, "virtio")) {
+-        g_free(nd->model);
+-        nd->model = g_strdup("virtio-net-pci");
+-    }
+-
+-    pci_nic_models = qemu_get_nic_models(TYPE_PCI_DEVICE);
+-
+-    if (qemu_show_nic_models(nd->model, (const char **)pci_nic_models->pdata)) {
+-        exit(0);
+-    }
+-
+-    i = qemu_find_nic_model(nd, (const char **)pci_nic_models->pdata,
+-                            default_model);
+-    if (i < 0) {
+-        exit(1);
+-    }
+-
+-    if (!rootbus) {
+-        error_report("No primary PCI bus");
+-        exit(1);
+-    }
+-
+-    assert(!rootbus->parent_dev);
+-
+-    if (!devaddr) {
+-        devfn = -1;
+-        busnr = 0;
+-    } else {
+-        if (pci_parse_devaddr(devaddr, &dom, &busnr, &slot, NULL) < 0) {
+-            error_report("Invalid PCI device address %s for device %s",
+-                         devaddr, nd->model);
+-            exit(1);
 -        }
-+        /*
-+         * There are no PCI NICs on the Bamboo board, but there are
-+         * PCI slots, so we can pick whatever default model we want.
-+         */
-+        pci_init_nic_devices(pcibus, mc->default_nic);
-     }
+-
+-        if (dom != 0) {
+-            error_report("No support for non-zero PCI domains");
+-            exit(1);
+-        }
+-
+-        devfn = PCI_DEVFN(slot, 0);
+-    }
+-
+-    bus = pci_find_bus_nr(rootbus, busnr);
+-    if (!bus) {
+-        error_report("Invalid PCI device address %s for device %s",
+-                     devaddr, nd->model);
+-        exit(1);
+-    }
+-
+-    pci_dev = pci_new(devfn, nd->model);
+-    dev = &pci_dev->qdev;
+-    qdev_set_nic_properties(dev, nd);
+-    pci_realize_and_unref(pci_dev, bus, &error_fatal);
+-    g_ptr_array_free(pci_nic_models, true);
+-    return pci_dev;
+-}
+-
+ void pci_init_nic_devices(PCIBus *bus, const char *default_model)
+ {
+     qemu_create_nic_bus_devices(&bus->qbus, TYPE_PCI_DEVICE, default_model,
+diff --git a/include/hw/pci/pci.h b/include/hw/pci/pci.h
+index 6ff0b95a02..eaa3fc99d8 100644
+--- a/include/hw/pci/pci.h
++++ b/include/hw/pci/pci.h
+@@ -314,9 +314,6 @@ void pci_device_set_intx_routing_notifier(PCIDevice *dev,
+                                           PCIINTxRoutingNotifier notifier);
+ void pci_device_reset(PCIDevice *dev);
  
-     /* Load kernel. */
+-PCIDevice *pci_nic_init_nofail(NICInfo *nd, PCIBus *rootbus,
+-                               const char *default_model,
+-                               const char *default_devaddr);
+ void pci_init_nic_devices(PCIBus *bus, const char *default_model);
+ bool pci_init_nic_in_slot(PCIBus *rootbus, const char *default_model,
+                           const char *alias, const char *devaddr);
 -- 
 2.41.0
 
