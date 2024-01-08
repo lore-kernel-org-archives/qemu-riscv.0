@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7E0EC3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 21:00:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAF88C47073
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 21:00:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rMwbV-0008TX-4u; Mon, 08 Jan 2024 15:52:13 -0500
+	id 1rMwa2-00049o-5X; Mon, 08 Jan 2024 15:50:42 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1rMwaC-0004iY-GP; Mon, 08 Jan 2024 15:50:52 -0500
+ id 1rMwZY-0003o6-M0; Mon, 08 Jan 2024 15:50:13 -0500
 Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1rMwa4-00010R-Hn; Mon, 08 Jan 2024 15:50:52 -0500
+ id 1rMwZE-00010E-RB; Mon, 08 Jan 2024 15:50:11 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=5FFKf2juZuA0ARVGIdD/KabCPqMDr3tXXa+7Wjm6OEc=; b=PAdt6YdVW3snue3qkAzK6dyP1c
- FES1B1zDiKaNuaPqAoStvMFO1366b0Rk1IGPgX05qzRAjcBnKdo+B4KV/14qC8j1JEupFMb8xsYmd
- 6Kdx7GxCrLmP1pJsiI5Lu8Y13wRHSRg5bmnMsTMCscS0WODgCskYUGMTLUrAdkk2e4Y9VcUnbCzrr
- ccW436LsI9gFz7OYQwyYUuCPRPKSK6YeOAjyzCqbeOCEtHQDZB7oPYtRUB6U9d8MXhZQvNAbD83p6
- 37MTB9n+XCnzURdsZjMZPO6kyin9WTMxqOddche5AVm+jccH1RqRDwOifFfehpaOK07R+aoBkPEyT
- H1oQbYYA==;
+ bh=vOPLDRs2pS03aFI3QKRuxfVdnOLMGUdP65R8Ofm4Hp4=; b=fryOhSDr3Sqtj/iGNQmSgoZC81
+ 0bGoir4uvuNgVOwYFL1sDLG0qL07aRdFpM5bAJLXRJnRMx9U3c4QlhYrfGIR0ZD8rzIod70oaH03m
+ 32JHaV5EZnpDyaapgbucMOXP0B4SNSnpc4ECIHxaJ403KFlc8VSyGhgbl9Ov+D8HDtwELOrzGF4H/
+ ItyyGOTXfBcAilSezrmYxbybrVpmkvoj+/cBATGduER26ylWNBqZXNBMljk3KwcpPcFIx/nScB0CD
+ 6caPIW50TvBL5hpX6f7H+gU3MUsh5192cNfpYuPDZO/kTfzzbn8mkGjq6+Oq5MRyuGx/CIfzH0w3a
+ 9/f6TL/g==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1rMwYm-007wXg-0G; Mon, 08 Jan 2024 20:49:24 +0000
+ id 1rMwYk-007wXT-2t; Mon, 08 Jan 2024 20:49:23 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYk-002NFv-2P; Mon, 08 Jan 2024 20:49:22 +0000
+ Hat Linux)) id 1rMwYj-002NF7-2j; Mon, 08 Jan 2024 20:49:21 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -84,10 +84,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 28/46] hw/arm/npcm7xx: use qemu_configure_nic_device,
- allow emc0/emc1 as aliases
-Date: Mon,  8 Jan 2024 20:26:57 +0000
-Message-ID: <20240108204909.564514-29-dwmw2@infradead.org>
+Subject: [PATCH v3 17/46] hw/ppc: use pci_init_nic_devices()
+Date: Mon,  8 Jan 2024 20:26:46 +0000
+Message-ID: <20240108204909.564514-18-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
@@ -122,80 +121,91 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Also update the test to specify which device to attach the test socket
-to, and remove the comment lamenting the fact that we can't do so.
-
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/arm/npcm7xx.c               | 16 +++++++++-------
- tests/qtest/npcm7xx_emc-test.c | 18 ++++--------------
- 2 files changed, 13 insertions(+), 21 deletions(-)
+ hw/ppc/e500.c          |  4 +---
+ hw/ppc/mac_newworld.c  |  4 +---
+ hw/ppc/mac_oldworld.c  |  4 +---
+ hw/ppc/ppc440_bamboo.c | 14 +++++---------
+ 4 files changed, 8 insertions(+), 18 deletions(-)
 
-diff --git a/hw/arm/npcm7xx.c b/hw/arm/npcm7xx.c
-index 15ff21d047..ee395864e4 100644
---- a/hw/arm/npcm7xx.c
-+++ b/hw/arm/npcm7xx.c
-@@ -655,8 +655,9 @@ static void npcm7xx_realize(DeviceState *dev, Error **errp)
+diff --git a/hw/ppc/e500.c b/hw/ppc/e500.c
+index 566f1200dd..3bd12b54ab 100644
+--- a/hw/ppc/e500.c
++++ b/hw/ppc/e500.c
+@@ -1079,9 +1079,7 @@ void ppce500_init(MachineState *machine)
  
-     /*
-      * EMC Modules. Cannot fail.
--     * The mapping of the device to its netdev backend works as follows:
--     * emc[i] = nd_table[i]
-+     * Use the available NIC configurations in order, allowing 'emc0' and
-+     * 'emc1' to by used as aliases for the model= parameter to override.
-+     *
-      * This works around the inability to specify the netdev property for the
-      * emc device: it's not pluggable and thus the -device option can't be
-      * used.
-@@ -664,12 +665,13 @@ static void npcm7xx_realize(DeviceState *dev, Error **errp)
-     QEMU_BUILD_BUG_ON(ARRAY_SIZE(npcm7xx_emc_addr) != ARRAY_SIZE(s->emc));
-     QEMU_BUILD_BUG_ON(ARRAY_SIZE(s->emc) != 2);
-     for (i = 0; i < ARRAY_SIZE(s->emc); i++) {
--        s->emc[i].emc_num = i;
-         SysBusDevice *sbd = SYS_BUS_DEVICE(&s->emc[i]);
--        if (nd_table[i].used) {
--            qemu_check_nic_model(&nd_table[i], TYPE_NPCM7XX_EMC);
--            qdev_set_nic_properties(DEVICE(sbd), &nd_table[i]);
+     if (pci_bus) {
+         /* Register network interfaces. */
+-        for (i = 0; i < nb_nics; i++) {
+-            pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
 -        }
-+        char alias[6];
-+
-+        s->emc[i].emc_num = i;
-+        snprintf(alias, sizeof(alias), "emc%u", i);
-+        qemu_configure_nic_device(DEVICE(sbd), true, alias);
-+
-         /*
-          * The device exists regardless of whether it's connected to a QEMU
-          * netdev backend. So always instantiate it even if there is no
-diff --git a/tests/qtest/npcm7xx_emc-test.c b/tests/qtest/npcm7xx_emc-test.c
-index b046f1d76a..f7646fae2c 100644
---- a/tests/qtest/npcm7xx_emc-test.c
-+++ b/tests/qtest/npcm7xx_emc-test.c
-@@ -225,21 +225,11 @@ static int *packet_test_init(int module_num, GString *cmd_line)
-     g_assert_cmpint(ret, != , -1);
++        pci_init_nic_devices(pci_bus, mc->default_nic);
+     }
  
-     /*
--     * KISS and use -nic. We specify two nics (both emc{0,1}) because there's
--     * currently no way to specify only emc1: The driver implicitly relies on
--     * emc[i] == nd_table[i].
-+     * KISS and use -nic. The driver accepts 'emc0' and 'emc1' as aliases
-+     * in the 'model' field to specify the device to match.
-      */
--    if (module_num == 0) {
--        g_string_append_printf(cmd_line,
--                               " -nic socket,fd=%d,model=" TYPE_NPCM7XX_EMC " "
--                               " -nic user,model=" TYPE_NPCM7XX_EMC " ",
--                               test_sockets[1]);
--    } else {
--        g_string_append_printf(cmd_line,
--                               " -nic user,model=" TYPE_NPCM7XX_EMC " "
--                               " -nic socket,fd=%d,model=" TYPE_NPCM7XX_EMC " ",
--                               test_sockets[1]);
+     /* Register spinning region */
+diff --git a/hw/ppc/mac_newworld.c b/hw/ppc/mac_newworld.c
+index 535710314a..b36dbaf2b6 100644
+--- a/hw/ppc/mac_newworld.c
++++ b/hw/ppc/mac_newworld.c
+@@ -444,9 +444,7 @@ static void ppc_core99_init(MachineState *machine)
+         graphic_depth = 15;
+     }
+ 
+-    for (i = 0; i < nb_nics; i++) {
+-        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
 -    }
-+    g_string_append_printf(cmd_line, " -nic socket,fd=%d,model=emc%d ",
-+                           test_sockets[1], module_num);
++    pci_init_nic_devices(pci_bus, mc->default_nic);
  
-     g_test_queue_destroy(packet_test_clear, test_sockets);
-     return test_sockets;
+     /* The NewWorld NVRAM is not located in the MacIO device */
+     if (kvm_enabled() && qemu_real_host_page_size() > 4096) {
+diff --git a/hw/ppc/mac_oldworld.c b/hw/ppc/mac_oldworld.c
+index 9acc7adfc9..1981d3d8f6 100644
+--- a/hw/ppc/mac_oldworld.c
++++ b/hw/ppc/mac_oldworld.c
+@@ -277,9 +277,7 @@ static void ppc_heathrow_init(MachineState *machine)
+ 
+     pci_vga_init(pci_bus);
+ 
+-    for (i = 0; i < nb_nics; i++) {
+-        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
+-    }
++    pci_init_nic_devices(pci_bus, mc->default_nic);
+ 
+     /* MacIO IDE */
+     ide_drive_get(hd, ARRAY_SIZE(hd));
+diff --git a/hw/ppc/ppc440_bamboo.c b/hw/ppc/ppc440_bamboo.c
+index a189942de4..c75c3083e6 100644
+--- a/hw/ppc/ppc440_bamboo.c
++++ b/hw/ppc/ppc440_bamboo.c
+@@ -161,7 +161,6 @@ static void bamboo_init(MachineState *machine)
+     DeviceState *uicdev;
+     SysBusDevice *uicsbd;
+     int success;
+-    int i;
+ 
+     if (kvm_enabled()) {
+         error_report("machine %s does not support the KVM accelerator",
+@@ -234,14 +233,11 @@ static void bamboo_init(MachineState *machine)
+     }
+ 
+     if (pcibus) {
+-        /* Register network interfaces. */
+-        for (i = 0; i < nb_nics; i++) {
+-            /*
+-             * There are no PCI NICs on the Bamboo board, but there are
+-             * PCI slots, so we can pick whatever default model we want.
+-             */
+-            pci_nic_init_nofail(&nd_table[i], pcibus, mc->default_nic, NULL);
+-        }
++        /*
++         * There are no PCI NICs on the Bamboo board, but there are
++         * PCI slots, so we can pick whatever default model we want.
++         */
++        pci_init_nic_devices(pcibus, mc->default_nic);
+     }
+ 
+     /* Load kernel. */
 -- 
 2.41.0
 
