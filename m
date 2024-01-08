@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3255AC3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 20:51:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B42EC47DAF
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 20:51:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rMwa9-0004ZD-F3; Mon, 08 Jan 2024 15:50:49 -0500
+	id 1rMwaK-0004xF-Q6; Mon, 08 Jan 2024 15:51:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rMwZU-0003lK-BK; Mon, 08 Jan 2024 15:50:08 -0500
-Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
+ <BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1rMwZa-0003or-8w; Mon, 08 Jan 2024 15:50:19 -0500
+Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rMwZB-0000uz-28; Mon, 08 Jan 2024 15:50:08 -0500
+ <BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1rMwZF-00010J-8l; Mon, 08 Jan 2024 15:50:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+ d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=7Y/fpZLGSTfVybtSU43YJBQfzBq7lyV4x3tmIJkV8Ts=; b=e82c7+8C6M2+PbpguJIN0m5bUN
- TRxTNVMVnkmomcru6vqqeFzQr+jet08uHbZBojwEdctvCMdjKhIagERczo1Tq6AaijgzCFCPpvWvl
- Z4YVc4fCtbQnj1CuCCwGZeW6LtZCMc49LzcbdI3UGVBFh/JFxKfxBIyzg/67/bv4M0QXpHhk8SBQa
- 19EHdUHFu5fXojvCMw+X6O05LgK8eo7bWVSm3/6fqjYfkuJNUz+lWR7jQrnZmTmPLzfGr4ebO4kj7
- 4a9lu7XLoJh+XSrmdPDYjmVUQ7e3xnHx1sqL3wrwMBWrg2PoGk6ufFz96Zcya45KEZkPEr9pRoPSv
- cLpEBghg==;
+ bh=AhJIqQ4JvGd0KYjdhY7u9mp0ZZRVDk/M4nuhh3LTnPc=; b=QCk8aYCkC346WPe06AhMAiDeaM
+ wfg8iT+0fMlHnulAR9D/433Cl2gjJ8UP2O8m1cxUBdlVPBPbzyz1foyPaCRcP34NQUMYxzCTl4+db
+ o50Ep9pyalIkHCiIKdizJVrKhaaZP1CYNfqOKeQroBk2uPkSpgtE6swFA9CkQpRDxOSjnbA5gNaGH
+ HICKCAy8u3JV4UY7XqHoWa9Dlr/x+Dos61Oxq3k4Zktd/cY+aPkHq0KWFuVwklG/mApd9HPXC7XTu
+ VCEr3nG/8ImCZTzQugIZlf+94FLPbHxRIO/1oNg4wVGc2+nsdlCBYFwrgprv1PsC1RujeJHMrHIN3
+ l8QYFd/A==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1rMwYj-008RPf-3s; Mon, 08 Jan 2024 20:49:22 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1rMwYm-007wXw-0J; Mon, 08 Jan 2024 20:49:24 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYj-002NF3-2R; Mon, 08 Jan 2024 20:49:21 +0000
+ Hat Linux)) id 1rMwYl-002NGm-1P; Mon, 08 Jan 2024 20:49:23 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -84,20 +84,20 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 16/46] hw/ppc/spapr: use qemu_get_nic_info() and
- pci_init_nic_devices()
-Date: Mon,  8 Jan 2024 20:26:45 +0000
-Message-ID: <20240108204909.564514-17-dwmw2@infradead.org>
+Subject: [PATCH v3 38/46] hw/openrisc/openrisc_sim: use
+ qemu_create_nic_device()
+Date: Mon,  8 Jan 2024 20:27:07 +0000
+Message-ID: <20240108204909.564514-39-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- casper.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1236::1;
- envelope-from=BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org;
- helo=casper.infradead.org
+ desiato.infradead.org. See http://www.infradead.org/rpr.html
+Received-SPF: none client-ip=2001:8b0:10b:1:d65d:64ff:fe57:4e05;
+ envelope-from=BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org;
+ helo=desiato.infradead.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -122,55 +122,54 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Avoid directly referencing nd_table[] by first instantiating any
-spapr-vlan devices using a qemu_get_nic_info() loop, then calling
-pci_init_nic_devices() to do the rest.
-
-No functional change intended.
-
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/ppc/spapr.c | 18 +++++-------------
- 1 file changed, 5 insertions(+), 13 deletions(-)
+ hw/openrisc/openrisc_sim.c | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
 
-diff --git a/hw/ppc/spapr.c b/hw/ppc/spapr.c
-index 4997aa4f1d..37604e7caf 100644
---- a/hw/ppc/spapr.c
-+++ b/hw/ppc/spapr.c
-@@ -2796,6 +2796,7 @@ static void spapr_machine_init(MachineState *machine)
-     MemoryRegion *sysmem = get_system_memory();
-     long load_limit, fw_size;
-     Error *resize_hpt_err = NULL;
-+    NICInfo *nd;
+diff --git a/hw/openrisc/openrisc_sim.c b/hw/openrisc/openrisc_sim.c
+index 35da123aef..bffd6f721f 100644
+--- a/hw/openrisc/openrisc_sim.c
++++ b/hw/openrisc/openrisc_sim.c
+@@ -170,7 +170,7 @@ static void openrisc_create_fdt(Or1ksimState *state,
  
-     if (!filename) {
-         error_report("Could not find LPAR firmware '%s'", bios_name);
-@@ -2996,21 +2997,12 @@ static void spapr_machine_init(MachineState *machine)
+ static void openrisc_sim_net_init(Or1ksimState *state, hwaddr base, hwaddr size,
+                                   int num_cpus, OpenRISCCPU *cpus[],
+-                                  int irq_pin, NICInfo *nd)
++                                  int irq_pin)
+ {
+     void *fdt = state->fdt;
+     DeviceState *dev;
+@@ -178,8 +178,10 @@ static void openrisc_sim_net_init(Or1ksimState *state, hwaddr base, hwaddr size,
+     char *nodename;
+     int i;
  
-     phb = spapr_create_default_phb();
+-    dev = qdev_new("open_eth");
+-    qdev_set_nic_properties(dev, nd);
++    dev = qemu_create_nic_device("open_eth", true, NULL);
++    if (!dev) {
++        return;
++    }
  
--    for (i = 0; i < nb_nics; i++) {
--        NICInfo *nd = &nd_table[i];
--
--        if (!nd->model) {
--            nd->model = g_strdup("spapr-vlan");
--        }
--
--        if (g_str_equal(nd->model, "spapr-vlan") ||
--            g_str_equal(nd->model, "ibmveth")) {
--            spapr_vlan_create(spapr->vio_bus, nd);
--        } else {
--            pci_nic_init_nofail(&nd_table[i], phb->bus, nd->model, NULL);
--        }
-+    while ((nd = qemu_find_nic_info("spapr-vlan", true, "ibmveth"))) {
-+        spapr_vlan_create(spapr->vio_bus, nd);
-     }
+     s = SYS_BUS_DEVICE(dev);
+     sysbus_realize_and_unref(s, &error_fatal);
+@@ -313,12 +315,10 @@ static void openrisc_sim_init(MachineState *machine)
+     openrisc_create_fdt(state, or1ksim_memmap, smp_cpus, machine->ram_size,
+                         machine->kernel_cmdline);
  
-+    pci_init_nic_devices(phb->bus, NULL);
-+
-     for (i = 0; i <= drive_get_max_bus(IF_SCSI); i++) {
-         spapr_vscsi_create(spapr->vio_bus);
-     }
+-    if (nd_table[0].used) {
+-        openrisc_sim_net_init(state, or1ksim_memmap[OR1KSIM_ETHOC].base,
+-                              or1ksim_memmap[OR1KSIM_ETHOC].size,
+-                              smp_cpus, cpus,
+-                              OR1KSIM_ETHOC_IRQ, nd_table);
+-    }
++    openrisc_sim_net_init(state, or1ksim_memmap[OR1KSIM_ETHOC].base,
++                          or1ksim_memmap[OR1KSIM_ETHOC].size,
++                          smp_cpus, cpus,
++                          OR1KSIM_ETHOC_IRQ);
+ 
+     if (smp_cpus > 1) {
+         openrisc_sim_ompic_init(state, or1ksim_memmap[OR1KSIM_OMPIC].base,
 -- 
 2.41.0
 
