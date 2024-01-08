@@ -4,88 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B686DC3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 18:12:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3255AC3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 20:51:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rMu6i-0006J4-Ow; Mon, 08 Jan 2024 13:12:17 -0500
+	id 1rMwa9-0004ZD-F3; Mon, 08 Jan 2024 15:50:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rMu6W-0005p3-Ii
- for qemu-riscv@nongnu.org; Mon, 08 Jan 2024 13:12:10 -0500
-Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rMu6S-0003pB-RW
- for qemu-riscv@nongnu.org; Mon, 08 Jan 2024 13:12:04 -0500
-Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-5cde7afa1d7so661323a12.1
- for <qemu-riscv@nongnu.org>; Mon, 08 Jan 2024 10:12:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1704737519; x=1705342319; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=1lmbW06hRXitdC3FpdS7xqR0DA7UO6ZByFcZQKLCroc=;
- b=UnoS0S4WO+WZQ/dzyd1zC/dXMLspzOZtXnwdVISE4BfMJWhMx6/eLFI5KpuSTktDbj
- 55zXVY8cSLV6sC7hkO9GNbpTAAcPzN7RNQkA+kr2b7VAPwhdFC/yKqMMpSBLuNH4emyB
- gBetsPQ/VU2f0Q5VSvRVW3UcbRgRmM+MGbt2aEnqQ0KBvnIHjcgyhBwznTr6BnNUraFH
- zN/1WEMQ0ukeezaihz06nhm0wUmHZlscU2t81aenTytbJBZAofe6Ct/OBkv1KzI2ao7L
- H+nCS3bLDLRaaLmS4lzEKcWHr78Gxf2xUjcWRHK4ZxToABULeRbjPa2RiwcMLafXeXmW
- 6t1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704737519; x=1705342319;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=1lmbW06hRXitdC3FpdS7xqR0DA7UO6ZByFcZQKLCroc=;
- b=gSTk73UIlbgDFQl8rwAa9pUWX7dGWOacXDUinxaS3vgHUv0NxxvnLttntb0MGb+z4e
- d8uonOnP/61MbBxijlLdr5LcvjQYnicF9In+k8rD67yw3WIlXHLY9BpOtualb9XfqQb/
- dXWFq5ETuXCuA4puL4XR2eG4zDTICjg6wsP1pR+LwwO4Kwtk99pkKrxgv0Zr+Jsgnwjk
- KsnlVOB4Dfbr730g51ogCpGv+54jCSMuyo0710TeGy3979/fg78e9yCW7tvSyonACmKt
- WoSZPaX1gVGiHnS2vRRGNUolc29RTkRNCyEvLBbjBafA37CWBT6q6ssVH1Ejc/+wfUKI
- 79CQ==
-X-Gm-Message-State: AOJu0Yw8d8zHqR8O++bUbvnaos1t3/HcNZQKyv7QNKVEUi55LWcU1Tz8
- qZWeVbhKL1aG6vH4vwMMups4NIRwbiloSw==
-X-Google-Smtp-Source: AGHT+IF2Ms03/ucicWidYZqlsZNSGMabTHhAsouX+q4Shy9OfQSc86K4aL8FNWKUy1ju1RMZHgiz4A==
-X-Received: by 2002:a05:6a20:2445:b0:199:9f30:aa32 with SMTP id
- t5-20020a056a20244500b001999f30aa32mr1204350pzc.66.1704737519317; 
- Mon, 08 Jan 2024 10:11:59 -0800 (PST)
-Received: from [192.168.68.110] ([189.79.22.11])
- by smtp.gmail.com with ESMTPSA id
- d23-20020a634f17000000b005c67a388836sm146772pgb.62.2024.01.08.10.11.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 08 Jan 2024 10:11:58 -0800 (PST)
-Message-ID: <090b3f37-0a93-4bf9-8701-ea3d17798f63@ventanamicro.com>
-Date: Mon, 8 Jan 2024 15:11:55 -0300
+ (Exim 4.90_1) (envelope-from
+ <BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1rMwZU-0003lK-BK; Mon, 08 Jan 2024 15:50:08 -0500
+Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from
+ <BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1rMwZB-0000uz-28; Mon, 08 Jan 2024 15:50:08 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+ MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
+ Reply-To:Content-Type:Content-ID:Content-Description;
+ bh=7Y/fpZLGSTfVybtSU43YJBQfzBq7lyV4x3tmIJkV8Ts=; b=e82c7+8C6M2+PbpguJIN0m5bUN
+ TRxTNVMVnkmomcru6vqqeFzQr+jet08uHbZBojwEdctvCMdjKhIagERczo1Tq6AaijgzCFCPpvWvl
+ Z4YVc4fCtbQnj1CuCCwGZeW6LtZCMc49LzcbdI3UGVBFh/JFxKfxBIyzg/67/bv4M0QXpHhk8SBQa
+ 19EHdUHFu5fXojvCMw+X6O05LgK8eo7bWVSm3/6fqjYfkuJNUz+lWR7jQrnZmTmPLzfGr4ebO4kj7
+ 4a9lu7XLoJh+XSrmdPDYjmVUQ7e3xnHx1sqL3wrwMBWrg2PoGk6ufFz96Zcya45KEZkPEr9pRoPSv
+ cLpEBghg==;
+Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1rMwYj-008RPf-3s; Mon, 08 Jan 2024 20:49:22 +0000
+Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
+ Hat Linux)) id 1rMwYj-002NF3-2R; Mon, 08 Jan 2024 20:49:21 +0000
+From: David Woodhouse <dwmw2@infradead.org>
+To: qemu-devel@nongnu.org
+Cc: Richard Henderson <richard.henderson@linaro.org>,
+ Beniamino Galvani <b.galvani@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Strahinja Jankovic <strahinja.p.jankovic@gmail.com>,
+ Niek Linnenbank <nieklinnenbank@gmail.com>,
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ Andrew Jeffery <andrew@codeconstruct.com.au>,
+ Joel Stanley <joel@jms.id.au>, Igor Mitsyanko <i.mitsyanko@gmail.com>,
+ Jean-Christophe Dubois <jcd@tribudubois.net>,
+ Andrey Smirnov <andrew.smirnov@gmail.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Rob Herring <robh@kernel.org>, Subbaraya Sundeep <sundeep.lkml@gmail.com>,
+ Jan Kiszka <jan.kiszka@web.de>, Tyrone Ting <kfting@nuvoton.com>,
+ Hao Wu <wuhaotsh@google.com>, Radoslaw Biernacki <rad@semihalf.com>,
+ Leif Lindholm <quic_llindhol@quicinc.com>,
+ Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Alistair Francis <alistair@alistair23.me>, Helge Deller <deller@gmx.de>,
+ Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Song Gao <gaosong@loongson.cn>, Thomas Huth <huth@tuxfamily.org>,
+ Laurent Vivier <laurent@vivier.eu>, Huacai Chen <chenhuacai@kernel.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ =?UTF-8?q?Herv=C3=A9=20Poussineau?= <hpoussin@reactos.org>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, Jason Wang <jasowang@redhat.com>,
+ Jia Liu <proljc@gmail.com>, Stafford Horne <shorne@gmail.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Nicholas Piggin <npiggin@gmail.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Eric Farman <farman@linux.ibm.com>, David Hildenbrand <david@redhat.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Magnus Damm <magnus.damm@gmail.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
+ Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
+ xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
+Subject: [PATCH v3 16/46] hw/ppc/spapr: use qemu_get_nic_info() and
+ pci_init_nic_devices()
+Date: Mon,  8 Jan 2024 20:26:45 +0000
+Message-ID: <20240108204909.564514-17-dwmw2@infradead.org>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
+References: <20240108204909.564514-1-dwmw2@infradead.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/5] target/riscv: Add cycle & instret privilege mode
- filtering support
-Content-Language: en-US
-To: Atish Patra <atishp@rivosinc.com>
-Cc: Kaiwen Xue <kaiwenx@rivosinc.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Weiwei Li
- <liwei1518@gmail.com>, kaiwenxue1@gmail.com
-References: <20240105221327.176764-1-atishp@rivosinc.com>
- <20240105221327.176764-5-atishp@rivosinc.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240105221327.176764-5-atishp@rivosinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52a.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
+ casper.infradead.org. See http://www.infradead.org/rpr.html
+Received-SPF: none client-ip=2001:8b0:10b:1236::1;
+ envelope-from=BATV+41a72dc6539c0dfbbc31+7442+infradead.org+dwmw2@casper.srs.infradead.org;
+ helo=casper.infradead.org
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -102,136 +120,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+From: David Woodhouse <dwmw@amazon.co.uk>
 
+Avoid directly referencing nd_table[] by first instantiating any
+spapr-vlan devices using a qemu_get_nic_info() loop, then calling
+pci_init_nic_devices() to do the rest.
 
-On 1/5/24 19:13, Atish Patra wrote:
-> From: Kaiwen Xue <kaiwenx@rivosinc.com>
-> 
-> QEMU only calculates dummy cycles and instructions, so there is no
-> actual means to stop the icount in QEMU. Hence this patch merely adds
-> the functionality of accessing the cfg registers, and cause no actual
-> effects on the counting of cycle and instret counters.
-> 
-> Signed-off-by: Atish Patra <atishp@rivosinc.com>
-> Signed-off-by: Kaiwen Xue <kaiwenx@rivosinc.com>
-> ---
+No functional change intended.
 
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+---
+ hw/ppc/spapr.c | 18 +++++-------------
+ 1 file changed, 5 insertions(+), 13 deletions(-)
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+diff --git a/hw/ppc/spapr.c b/hw/ppc/spapr.c
+index 4997aa4f1d..37604e7caf 100644
+--- a/hw/ppc/spapr.c
++++ b/hw/ppc/spapr.c
+@@ -2796,6 +2796,7 @@ static void spapr_machine_init(MachineState *machine)
+     MemoryRegion *sysmem = get_system_memory();
+     long load_limit, fw_size;
+     Error *resize_hpt_err = NULL;
++    NICInfo *nd;
+ 
+     if (!filename) {
+         error_report("Could not find LPAR firmware '%s'", bios_name);
+@@ -2996,21 +2997,12 @@ static void spapr_machine_init(MachineState *machine)
+ 
+     phb = spapr_create_default_phb();
+ 
+-    for (i = 0; i < nb_nics; i++) {
+-        NICInfo *nd = &nd_table[i];
+-
+-        if (!nd->model) {
+-            nd->model = g_strdup("spapr-vlan");
+-        }
+-
+-        if (g_str_equal(nd->model, "spapr-vlan") ||
+-            g_str_equal(nd->model, "ibmveth")) {
+-            spapr_vlan_create(spapr->vio_bus, nd);
+-        } else {
+-            pci_nic_init_nofail(&nd_table[i], phb->bus, nd->model, NULL);
+-        }
++    while ((nd = qemu_find_nic_info("spapr-vlan", true, "ibmveth"))) {
++        spapr_vlan_create(spapr->vio_bus, nd);
+     }
+ 
++    pci_init_nic_devices(phb->bus, NULL);
++
+     for (i = 0; i <= drive_get_max_bus(IF_SCSI); i++) {
+         spapr_vscsi_create(spapr->vio_bus);
+     }
+-- 
+2.41.0
 
->   target/riscv/csr.c | 80 ++++++++++++++++++++++++++++++++++++++++++++++
->   1 file changed, 80 insertions(+)
-> 
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 283468bbc652..3bd4aa22374f 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -233,6 +233,24 @@ static RISCVException sscofpmf_32(CPURISCVState *env, int csrno)
->       return sscofpmf(env, csrno);
->   }
->   
-> +static RISCVException smcntrpmf(CPURISCVState *env, int csrno)
-> +{
-> +    if (!riscv_cpu_cfg(env)->ext_smcntrpmf) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    }
-> +
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException smcntrpmf_32(CPURISCVState *env, int csrno)
-> +{
-> +    if (riscv_cpu_mxl(env) != MXL_RV32) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    }
-> +
-> +    return smcntrpmf(env, csrno);
-> +}
-> +
->   static RISCVException any(CPURISCVState *env, int csrno)
->   {
->       return RISCV_EXCP_NONE;
-> @@ -818,6 +836,54 @@ static int read_hpmcounterh(CPURISCVState *env, int csrno, target_ulong *val)
->   
->   #else /* CONFIG_USER_ONLY */
->   
-> +static int read_mcyclecfg(CPURISCVState *env, int csrno, target_ulong *val)
-> +{
-> +    *val = env->mcyclecfg;
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static int write_mcyclecfg(CPURISCVState *env, int csrno, target_ulong val)
-> +{
-> +    env->mcyclecfg = val;
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static int read_mcyclecfgh(CPURISCVState *env, int csrno, target_ulong *val)
-> +{
-> +    *val = env->mcyclecfgh;
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static int write_mcyclecfgh(CPURISCVState *env, int csrno, target_ulong val)
-> +{
-> +    env->mcyclecfgh = val;
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static int read_minstretcfg(CPURISCVState *env, int csrno, target_ulong *val)
-> +{
-> +    *val = env->minstretcfg;
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static int write_minstretcfg(CPURISCVState *env, int csrno, target_ulong val)
-> +{
-> +    env->minstretcfg = val;
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static int read_minstretcfgh(CPURISCVState *env, int csrno, target_ulong *val)
-> +{
-> +    *val = env->minstretcfgh;
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static int write_minstretcfgh(CPURISCVState *env, int csrno, target_ulong val)
-> +{
-> +    env->minstretcfgh = val;
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
->   static int read_mhpmevent(CPURISCVState *env, int csrno, target_ulong *val)
->   {
->       int evt_index = csrno - CSR_MCOUNTINHIBIT;
-> @@ -4922,6 +4988,13 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->                                write_mcountinhibit,
->                                .min_priv_ver = PRIV_VERSION_1_11_0       },
->   
-> +    [CSR_MCYCLECFG]      = { "mcyclecfg",   smcntrpmf, read_mcyclecfg,
-> +                             write_mcyclecfg,
-> +                             .min_priv_ver = PRIV_VERSION_1_12_0       },
-> +    [CSR_MINSTRETCFG]    = { "minstretcfg", smcntrpmf, read_minstretcfg,
-> +                             write_minstretcfg,
-> +                             .min_priv_ver = PRIV_VERSION_1_12_0       },
-> +
->       [CSR_MHPMEVENT3]     = { "mhpmevent3",     any,    read_mhpmevent,
->                                write_mhpmevent                           },
->       [CSR_MHPMEVENT4]     = { "mhpmevent4",     any,    read_mhpmevent,
-> @@ -4981,6 +5054,13 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->       [CSR_MHPMEVENT31]    = { "mhpmevent31",    any,    read_mhpmevent,
->                                write_mhpmevent                           },
->   
-> +    [CSR_MCYCLECFGH]     = { "mcyclecfgh",   smcntrpmf_32, read_mcyclecfgh,
-> +                             write_mcyclecfgh,
-> +                             .min_priv_ver = PRIV_VERSION_1_12_0        },
-> +    [CSR_MINSTRETCFGH]   = { "minstretcfgh", smcntrpmf_32, read_minstretcfgh,
-> +                             write_minstretcfgh,
-> +                             .min_priv_ver = PRIV_VERSION_1_12_0        },
-> +
->       [CSR_MHPMEVENT3H]    = { "mhpmevent3h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
 
