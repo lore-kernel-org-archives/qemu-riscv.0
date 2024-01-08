@@ -4,88 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45C6AC3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 13:27:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5027AC47077
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 15:42:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rMper-0003wP-Tl; Mon, 08 Jan 2024 08:27:13 -0500
+	id 1rMrlg-0001NU-K8; Mon, 08 Jan 2024 10:42:24 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rMpeq-0003vv-IB
- for qemu-riscv@nongnu.org; Mon, 08 Jan 2024 08:27:12 -0500
-Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1rMrld-0001Cs-U1
+ for qemu-riscv@nongnu.org; Mon, 08 Jan 2024 10:42:22 -0500
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rMpen-0006Ia-NG
- for qemu-riscv@nongnu.org; Mon, 08 Jan 2024 08:27:12 -0500
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a28e31563ebso179129466b.2
- for <qemu-riscv@nongnu.org>; Mon, 08 Jan 2024 05:27:09 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1rMrlc-0001kR-1R
+ for qemu-riscv@nongnu.org; Mon, 08 Jan 2024 10:42:21 -0500
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-3374e332124so1856238f8f.2
+ for <qemu-riscv@nongnu.org>; Mon, 08 Jan 2024 07:42:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1704720428; x=1705325228; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=1/S7NO6UwoWL1rC7ZAoUavDZDgBVHGYlMv41dSqoUZ0=;
- b=BO8Z8JviOKxj9vcq2YFyie3mITbBvsCz9WwoH7m5NxoQqTFF7OfDt2rJJU++av1X+S
- 6OUNIVnQFi4eAlFY7kbBFoA45Ud25JEDLODqNXj75MBUB6smZukNPdxcV9XBhO5BMeym
- neidDEhLd4T7LeqkjvKoLJna54hL3V5jAw016fvkvBgEzxofMGozB9NedUROVaNAb44O
- RK4AwbB4K0HGs4d/xlO8Q9UZBE3m3KHhuFdIux65Q1Uwe8JE6AH48YuMMoeYga6HBoTc
- xWab/l7VzBk7tF9loDF+Vsqamns8dP4jR20x+3iK9rSh1j314TjzK98W8Tohs5zLiZ+Y
- Blsg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704720428; x=1705325228;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1704728536; x=1705333336; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:user-agent
+ :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1/S7NO6UwoWL1rC7ZAoUavDZDgBVHGYlMv41dSqoUZ0=;
- b=f+f3Ry6mqHylOzIwm5D8A5QnZb8Jn/ZdWQeXH++I6mJw4Us3meT2eRuga2rubdN6Zf
- XTWl/0G80N1YLr8M9yUcszsWXbIsE2TZm85YOxI7A4vr++rs6loY1AgWdHQe1JKpj0zg
- phMTwK6XZ4o9MBDcUyVZmfbqATaBGhaSSw5thPBbY+XSS2Pm53IUqF18M7FWAKTuJd4P
- GgsdWAoTyYiZ/IQsTz4V0K3fc8BVPecQQXGpyXzP3HI3CmVpusG7LjL2qRchREmL2DVu
- Ga7v1A9Z6e+qFLcPcDX7gr2y3ilj+E8Xkyg63AV8C43W40h76QMtKfH4GmwAceAJXi0O
- QulQ==
-X-Gm-Message-State: AOJu0YwQYpEUfv/lDm2fAsC9i9Yd97kFSalUg2/YX1bGrOfl/b1uc+cr
- 7m7xDSbQ10NnrfDHF6RGaf2JJ6Un4yUt/g==
-X-Google-Smtp-Source: AGHT+IE4hdAYNNXGz838FbeVHSo3EP6Mc17m6k6mIhwtiI2r+ErfogEGUsJRVovhow1p04sMb9OJbA==
-X-Received: by 2002:a17:906:f8c8:b0:a28:fbf4:5944 with SMTP id
- lh8-20020a170906f8c800b00a28fbf45944mr1540863ejb.104.1704720428024; 
- Mon, 08 Jan 2024 05:27:08 -0800 (PST)
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
- by smtp.gmail.com with ESMTPSA id
- e5-20020a1709061e8500b00a19b7362dcfsm3909657ejj.139.2024.01.08.05.27.07
+ bh=9+zq0eAJ8bnvzZww3oF3k7l2MJoHjo61IChq0q0yyX0=;
+ b=yFLLcc1NAIVbbQFBT0VWhor4LfaWs4Xto4oOpehIjArMo3gviKeRJERgHayoTUZTc7
+ kqi43Vmn8/xI/tTJoeCAfoiGX2sEKPAiOV/kzGHaKszXNQRsUBSV39Dv/ilAiUZspaID
+ peyOcrohRCa+FnkLSyU4sTu538dN6MjXPSiAZNSyW2WROnO4UooDQyLA9BteZeQNH8Co
+ P91fRPJoy6Oj1cP/P1orNqDFnMab+q4cksGo31Mo1nt37OAQAQbwum+ekpmn8XeifYkE
+ R0i6qIGFdpAmkdp/ASaLJQh4aXa5g7emIMqCPqXd5DbbXbjhROpk+PKR93Nvg805c0Fq
+ RL+A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704728536; x=1705333336;
+ h=content-transfer-encoding:mime-version:message-id:date:user-agent
+ :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=9+zq0eAJ8bnvzZww3oF3k7l2MJoHjo61IChq0q0yyX0=;
+ b=ZvDBOgS6NLDYmxqaY11du/x/AKlKVIP3xKneL+a5rLiXC4m0yNN6sMwAWwNvRT6Qv+
+ jvwT+rrH2WHoSD0tSIpYlBagrN44m7pNK7BPPEF7SvQS08gPXD5W0Zfs9mRUBh5szvhL
+ e5G2nhSZ9uUHkJD58NNLAZUhbg/9sfUdIt21Sp5y2hj/SsHLI2ffviPF/HTP7lSXJ2I+
+ pCHlJ23K22D2m1h2qL0EOu0xqeQd+oMbaW9nM17sKsCOM6bs5g5KgMtXKidCZuxlg8XS
+ st0H9bnXUkSxoPMYkcmZA9F6HThd+m1QyO560Nx6J5GlZQjubLmFfA5EuCf1NtaaPSby
+ ud5w==
+X-Gm-Message-State: AOJu0YxpRWhMTeCFXKL/rqGDz+GuzZWvDuCY5xKMKEevM3NYAVnBTmQN
+ DUX+yr1amA9TXFyd5MwZqnQzx+D4ByQPbw==
+X-Google-Smtp-Source: AGHT+IEgtyqgyTqbod9Kf6NoPB3N1lGdn0K/I8y2qeymJ1ePt/2JGWNh/xIFDfV+gZgkYj8VyO6ozw==
+X-Received: by 2002:adf:f5d0:0:b0:336:7a58:39da with SMTP id
+ k16-20020adff5d0000000b003367a5839damr1660622wrp.106.1704728535992; 
+ Mon, 08 Jan 2024 07:42:15 -0800 (PST)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ a3-20020a5d53c3000000b00336751cd4ebsm8137614wrw.72.2024.01.08.07.42.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jan 2024 05:27:07 -0800 (PST)
-Date: Mon, 8 Jan 2024 14:27:06 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Conor Dooley <conor@kernel.org>, qemu-riscv@nongnu.org, 
- Conor Dooley <conor.dooley@microchip.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
-Subject: Re: Re: [PATCH v2] riscv: support new isa extension detection
- devicetree properties
-Message-ID: <20240108-efa3f83dcd3997dc0af458d7@orel>
-References: <20231208-sponge-thickness-c0e9511b1baf@spud>
- <CAKmqyKNmepRv7i43U-2V2LYzkQB1bG9WWvS1PUJdrF3ynX5NmQ@mail.gmail.com>
+ Mon, 08 Jan 2024 07:42:15 -0800 (PST)
+Received: from draig (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id 4FA165F756;
+ Mon,  8 Jan 2024 15:42:15 +0000 (GMT)
+From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
+ <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>, Weiwei Li
+ <liwei1518@gmail.com>, Daniel Henrique Barboza
+ <dbarboza@ventanamicro.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ qemu-riscv@nongnu.org
+Subject: Re: [PATCH v2 23/43] target/riscv: Remove misa_mxl validation
+In-Reply-To: <20240103173349.398526-24-alex.bennee@linaro.org> ("Alex
+ =?utf-8?Q?Benn=C3=A9e=22's?= message of "Wed, 3 Jan 2024 17:33:29 +0000")
+References: <20240103173349.398526-1-alex.bennee@linaro.org>
+ <20240103173349.398526-24-alex.bennee@linaro.org>
+User-Agent: mu4e 1.11.27; emacs 29.1
+Date: Mon, 08 Jan 2024 15:42:15 +0000
+Message-ID: <87sf37hlwo.fsf@draig.linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAKmqyKNmepRv7i43U-2V2LYzkQB1bG9WWvS1PUJdrF3ynX5NmQ@mail.gmail.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
- envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x62f.google.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,26 +102,31 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Dec 18, 2023 at 02:37:55PM +1000, Alistair Francis wrote:
-...
-> > +void riscv_isa_write_fdt(RISCVCPU *cpu, void *fdt, char *nodename)
-> > +{
-> > +    const size_t maxlen = sizeof("rv128i");
-> > +    g_autofree char *isa_base = g_new(char, maxlen);
-> > +    g_autofree char *riscv_isa;
-> > +    char **isa_extensions;
-> > +    int count = 0;
-> > +
-> > +    riscv_isa = riscv_isa_string(cpu);
-> > +    qemu_fdt_setprop_string(fdt, nodename, "riscv,isa", riscv_isa);
-> > +
-> > +    snprintf(isa_base, maxlen, "rv%di", TARGET_LONG_BITS);
-> 
-> This should dynamically come from misa_mxl_max not the compile time target
+Alex Benn=C3=A9e <alex.bennee@linaro.org> writes:
+
+> From: Akihiko Odaki <akihiko.odaki@daynix.com>
 >
+> It is initialized with a simple assignment and there is little room for
+> error. In fact, the validation is even more complex.
+>
+> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+> Acked-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Acked-by: Alistair Francis <alistair.francis@wdc.com>
+> Message-Id: <20231213-riscv-v7-2-a760156a337f@daynix.com>
+> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
 
-Need to also fix riscv_isa_string()
+ping: along with this are the RiscV maintainers happy for me to take:
 
-Thanks,
-drew
+  [PATCH v2 23/43] target/riscv: Remove misa_mxl validation
+  [PATCH v2 24/43] target/riscv: Move misa_mxl_max to class
+  [PATCH v2 25/43] target/riscv: Validate misa_mxl_max only once
+
+through my next pull request?
+
+<snip>
+
+--=20
+Alex Benn=C3=A9e
+Virtualisation Tech Lead @ Linaro
 
