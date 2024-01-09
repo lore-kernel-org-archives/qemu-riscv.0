@@ -4,77 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75F11C46CD2
-	for <qemu-riscv@archiver.kernel.org>; Tue,  9 Jan 2024 17:19:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98174C47079
+	for <qemu-riscv@archiver.kernel.org>; Tue,  9 Jan 2024 17:20:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rNFkx-0001vg-5F; Tue, 09 Jan 2024 12:19:15 -0500
+	id 1rNFkv-0001uo-Ag; Tue, 09 Jan 2024 12:19:13 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
- id 1rNFkv-0001ut-Px
- for qemu-riscv@nongnu.org; Tue, 09 Jan 2024 12:19:13 -0500
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ id 1rNFks-0001sH-UJ
+ for qemu-riscv@nongnu.org; Tue, 09 Jan 2024 12:19:10 -0500
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
- id 1rNFkt-0004zc-PE
- for qemu-riscv@nongnu.org; Tue, 09 Jan 2024 12:19:13 -0500
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-40e47dc8b0eso19574215e9.3
- for <qemu-riscv@nongnu.org>; Tue, 09 Jan 2024 09:19:10 -0800 (PST)
+ id 1rNFkq-0004wU-5p
+ for qemu-riscv@nongnu.org; Tue, 09 Jan 2024 12:19:10 -0500
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-40e4f71288bso9209035e9.1
+ for <qemu-riscv@nongnu.org>; Tue, 09 Jan 2024 09:19:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1704820749; x=1705425549;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1704820746; x=1705425546;
  darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UeBAWzRpOAQVVjJ7+UDoja5VcmkPMK9XyQFrZXrNvlM=;
- b=qWPtonFhxnn9rXhSfpT0x5FNLOtZ6+hJbq8fKnADY9LBte9LoPY28fphwtvCj8Uu7S
- djGMFOj/k1P1t0XPozTUSQssBR3E2RddseuKoE2d9GlYw3rvNjHxxrolccr902zMC/uj
- BIBdrtVjzBKZs/nUZcTrCNG2b3t3J1DBRXKPgaOcE7DGpCmgsvXAv9wlKAsktNVeY3Bf
- L0BJQaMEnfwyMvZ1fggm7nhwhJWsI5YAIsOjmFWpLwogfl+t8OtD0i0AVGFItD1YQsC/
- rVktqL1sSAi/635maVQIvtQ+e9GWKGT4HL6Q8pgOQ2Dd+/peH3iI5/axBODFvKi7IyYE
- Qbjg==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=TbCumLLjYRCuAyIHcutRJ3p/VueAcKdHkiZb64FNRoo=;
+ b=C+0ih+TXKmnygJgMLBAILDXrJg0UsnOIDtzONtEvE5h5B70Bx8NgNf8lVHPUOWk2eO
+ KEC72NOVB2jqbQD+i16VyVBsH7ESl6l9CLECc2s/6PIefrDWBJprRZNTmpFPRL2oEvEy
+ 1cbPMoxbEtx0WqXyTY8vUzgM7JePDCVl2Y1+lDgzE9a0QuUUpmO+1VQjPJFTTEe3Uq3w
+ Wn50jKGErBcWc8VP5pihEfZOqJNnMUHPUDyIwhmO0GoXPZ8mZ3ookkSXIWGhJxuNWpSq
+ Kd+GfmK6IbmgvBbUeer0ZY1X8Or4TzZOdpocM8tu6+9GCvwlHg1jQwHlt/beskIohPB6
+ UDIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704820749; x=1705425549;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UeBAWzRpOAQVVjJ7+UDoja5VcmkPMK9XyQFrZXrNvlM=;
- b=wnp1sYp0uuR0hMR+N2fMYcG2I9hVK3z2ducxsV3iRBEKV5s6W7zV7lP04oElB+aBnf
- yhwuRjPutcCMua4rCDqySisFcMy81koVS+voJHq80BSXYj/0DZwfNEJ8oN8r217GiJZq
- csV9YyUSxoH/snuVrVmC3KCvF9QfV+ybKITtJhs2zUXiJO0uJfyWlVEWDY+FdYVopj4E
- 4Ba/Pri1fA88TmTwMuRQG9S/mG02A4xRI5FUjjFRtRjw+SJ4h98zd1yninqBYnJm0PTF
- nxO3W76Yh5cySf5KrbkRQ08ttZl7DB5Az1lAlaDyUapZRF87FHkCqAKrUqNAq3r1tqNz
- AXtg==
-X-Gm-Message-State: AOJu0YxeZ3Uw9CP/1RFpDYhZdoYbnLfX1MoMZNi36UTaKnWtUVjaQBpO
- uYe7VCnWDJY5RhfVeH8xG38LdHgJMcTWLA==
-X-Google-Smtp-Source: AGHT+IHJ1ur4DJoStJQng+FGZyTS43ALfuAsUxDrJEoarFjdHisPzexi4tI9miri+L8npUukKF/yjQ==
-X-Received: by 2002:a05:600c:4512:b0:40e:3549:9021 with SMTP id
- t18-20020a05600c451200b0040e35499021mr3239072wmo.33.1704820749545; 
- Tue, 09 Jan 2024 09:19:09 -0800 (PST)
+ d=1e100.net; s=20230601; t=1704820746; x=1705425546;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TbCumLLjYRCuAyIHcutRJ3p/VueAcKdHkiZb64FNRoo=;
+ b=f6W0Bijaf0/k7S8/tk/p6nn4o28lcfwEduPsp28QmAIMDJLS6C9slzT53JxBkxE4kY
+ 0LWdn4asrPvK7vDiaF3m1y2ScmSgen60OKL2i7LnP5stNdMY2FzM9NIJz8O5WX4vIvq/
+ B7uu98wXRaYXlCsJKM8fJ9mKJgkd15AZp2c37X2xELnLZmO1AGBWw5lD5INskUThKq8P
+ w6g9TWooSfdN1UQw5DSvymk78eyX/RUU8Epk4LejEJBNzu+zIaoebUnHPwBuJmimcs05
+ 6l9s+8HFbgLV+9QHa094U1eXRe1Odv5/Pqi6Iu9ICS6YLGODh8pvYz+25Br3FWYqKsJw
+ JKiA==
+X-Gm-Message-State: AOJu0Yyz6uKXB8uaLeYCAu64mod6PTdWOfWTCeEdN3ug+JnjtsTuCaNq
+ ZY3PB9A97uoC2olb1c2C3EcRevBaC53MCVSFJqnrnDBB4fWHYg==
+X-Google-Smtp-Source: AGHT+IEE5T8PHcP2iom7puaFp2dzwp6v3Dz5FC3IYTUUgGSDAQqhq1fyNvRx403NSIpulg4HkOkiLA==
+X-Received: by 2002:a7b:c38f:0:b0:40e:4e65:a6e0 with SMTP id
+ s15-20020a7bc38f000000b0040e4e65a6e0mr496441wmj.5.1704820745891; 
+ Tue, 09 Jan 2024 09:19:05 -0800 (PST)
 Received: from rockhopper.ba.rivosinc.com (214.11.169.217.in-addr.arpa.
  [217.169.11.214]) by smtp.gmail.com with ESMTPSA id
- bg30-20020a05600c3c9e00b0040d62f89381sm4350308wmb.35.2024.01.09.09.19.08
+ bg30-20020a05600c3c9e00b0040d62f89381sm4350308wmb.35.2024.01.09.09.19.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Jan 2024 09:19:08 -0800 (PST)
+ Tue, 09 Jan 2024 09:19:05 -0800 (PST)
 From: Rob Bradford <rbradford@rivosinc.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, atishp@rivosinc.com, palmer@dabbelt.com,
  alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  Rob Bradford <rbradford@rivosinc.com>
-Subject: [PATCH 3/3] target/riscv: Enable 'B' extension on max CPU type
-Date: Tue,  9 Jan 2024 17:07:37 +0000
-Message-ID: <20240109171848.32237-4-rbradford@rivosinc.com>
+Subject: [PATCH 0/3] target/riscv: Add support for 'B' extension
+Date: Tue,  9 Jan 2024 17:07:34 +0000
+Message-ID: <20240109171848.32237-1-rbradford@rivosinc.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240109171848.32237-1-rbradford@rivosinc.com>
-References: <20240109171848.32237-1-rbradford@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=rbradford@rivosinc.com; helo=mail-wm1-x330.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::332;
+ envelope-from=rbradford@rivosinc.com; helo=mail-wm1-x332.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -96,25 +93,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
----
- target/riscv/tcg/tcg-cpu.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Add support for the new (fast track) 'B' extension [1] this extension
+uses the misa.B bit to indicate that the Zba, Zbb and Zbs extensions are
+present.
 
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index f10871d352..9705daec93 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -999,7 +999,8 @@ static void riscv_init_max_cpu_extensions(Object *obj)
-     const RISCVCPUMultiExtConfig *prop;
- 
-     /* Enable RVG, RVJ and RVV that are disabled by default */
--    riscv_cpu_set_misa(env, env->misa_mxl, env->misa_ext | RVG | RVJ | RVV);
-+    riscv_cpu_set_misa(env, env->misa_mxl,
-+                       env->misa_ext | RVG | RVJ | RVV | RVB);
- 
-     for (prop = riscv_cpu_extensions; prop && prop->name; prop++) {
-         isa_ext_update_enabled(cpu, prop->offset, true);
+Since this extension is not yet frozen it is exposed via the 'x-b' cpu
+option. The validation logic is based on the new approach taken for the
+'G' extension. [2]
+
+The specification handles backward compatability: The misa.B bit may be
+set if Zba, Zbb and Zbs are present but in order to not break existing
+systems the bit is not required to be set if they are present. As such
+even though Zba, Zbb and Zbs default to on in QEMU this extension is not
+enabled by default in any cpu other than the 'max' variant.
+
+Cheers,
+
+Rob
+
+[1] - https://github.com/riscv/riscv-b
+[2] - https://patchew.org/QEMU/20231218125334.37184-1-dbarboza@ventanamicro.com/20231218125334.37184-16-dbarboza@ventanamicro.com/
+
+Rob Bradford (3):
+  target/riscv: Add infrastructure for 'B' MISA extension
+  target/riscv: Add step to validate 'B' extension
+  target/riscv: Enable 'B' extension on max CPU type
+
+ target/riscv/cpu.c         |  5 +++--
+ target/riscv/cpu.h         |  1 +
+ target/riscv/tcg/tcg-cpu.c | 37 ++++++++++++++++++++++++++++++++++++-
+ 3 files changed, 40 insertions(+), 3 deletions(-)
+
 -- 
 2.43.0
 
