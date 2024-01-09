@@ -4,114 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D78D0C46CD2
-	for <qemu-riscv@archiver.kernel.org>; Tue,  9 Jan 2024 14:24:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D7C3C46CD2
+	for <qemu-riscv@archiver.kernel.org>; Tue,  9 Jan 2024 14:34:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rND1u-0005U4-Qw; Tue, 09 Jan 2024 09:24:34 -0500
+	id 1rNDB2-0005lZ-4D; Tue, 09 Jan 2024 09:34:01 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1rND1c-0005Gs-GB
- for qemu-riscv@nongnu.org; Tue, 09 Jan 2024 09:24:18 -0500
-Received: from mail-lf1-x136.google.com ([2a00:1450:4864:20::136])
+ id 1rNDAz-0005l1-KH
+ for qemu-riscv@nongnu.org; Tue, 09 Jan 2024 09:33:57 -0500
+Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1rND1a-0008Cx-Dh
- for qemu-riscv@nongnu.org; Tue, 09 Jan 2024 09:24:16 -0500
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-50ea98440a7so2899178e87.1
- for <qemu-riscv@nongnu.org>; Tue, 09 Jan 2024 06:24:14 -0800 (PST)
+ id 1rNDAv-0003gF-Rq
+ for qemu-riscv@nongnu.org; Tue, 09 Jan 2024 09:33:55 -0500
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-50e72e3d435so2901590e87.2
+ for <qemu-riscv@nongnu.org>; Tue, 09 Jan 2024 06:33:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704810253; x=1705415053; darn=nongnu.org;
+ d=linaro.org; s=google; t=1704810832; x=1705415632; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=w/fxIqo+g5WwjavjYufA4hFi1cRbz34uO2PZEzQMCek=;
- b=CQuwigCMYjkwADbs4UKn5pW7quKJgZyhj9oVVnyn+jjGlSv3vzruOtJr5xKa3gbgAy
- lYyhAKllFcuvmQzpEnsC7kAXRxjZ7ainllblfKM4m6wqOxc2NaZIR61Vvx/k3f15QS33
- uDD/WKzb6fKWuUJIaUTyHIJsk0CXSq7HPixEeg8vbem/r5Ewdant5Hws/Ltu2AWYaC+c
- lWzgHwXOnCJ4A27OPdi9zT03NKqDZPYXyN8eUWiVBqIRJIlxMD+t4SVk0wjMFyOf7jID
- 2UxdhrMPxTLN+PaVKRtUwN8A0plDoDi4FNMZWCHC9VnLPZmmrE64FdoYMQ23cZhDYeD5
- GEZQ==
+ bh=cKpiQmUug1k+ONhUsi7k1absNM74ek0qI+Tl6MsSYKc=;
+ b=uF2CD7CViqoXDZ25UxO31jeg9gqv0z1uIyZWqge/lhS55umEp05Cqa/N7PsK55EOOl
+ KEg+H19UVrUSRtHXCi9LOUacMxLhokNaGOUn6L+2p29L8Idr0bSNp+vY981h/tRGTXmR
+ 1gk5MEmZxpl8JifsJ9UHcLw3sCdXhQdBQfewpJunXCI1+N7dW+VJSUztVRt6y8uyMga2
+ B4C9DfNx8MGcftzvWaphbADzdCTqHPDSqO5H57ur9nKygCH07t0Rt3zmRmoiH4QAJpJx
+ wJCO8ro3ydRz8XXZafb2cr0s+xusLIfJVdbQ/0oVc4Zb9jPq6eZ4yxPgvekionCJUdkI
+ AU9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704810253; x=1705415053;
+ d=1e100.net; s=20230601; t=1704810832; x=1705415632;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=w/fxIqo+g5WwjavjYufA4hFi1cRbz34uO2PZEzQMCek=;
- b=T2Ck60xGLL3YNxxFQhMy8F3jtOHl+W542J3uuW0kyrz96e8H9Gp33dAptwbBB83Wkh
- FsyH8lUNBQ7jUzz3DRLtP5grUksyblp8DtenhrfjHLTo9KeooypzhPXQ9C4y/+K9BU8F
- /smvAApHqv5D+KjTp6A27yuBtkuPwbvQWrMnSunLPxf+HDfi4Xa3PRuguWVi0SBoMm+C
- nu2uBwfnIqO06EcN37ihpOkRkYpzjgQo49Km6vGhl1W6N6y9I11Gx1CmZCNkNWJRz64J
- HMrCD0HbLYnCXB6SlzdBeUZkKszzGlSNza5pfiUlLwmdeXpKbqaoaZMA+datyj15RRrC
- m85w==
-X-Gm-Message-State: AOJu0YzwaFa2sXOGQ/t5bUrn6BP9qpT+X0OSm5RdwWYlDEvaJNFtddVo
- LaMlE+wtBqRWaLtWqrdK9hFLop3eooWML4lXnGKyD57fyyXOHw==
-X-Google-Smtp-Source: AGHT+IFrVXvHsq1m1peP2eO+e72Pz8YdISUp+RIUUAo1aE+Zj9tZO0OThcNuGgpWww0VuL5fmq96NN7TJ2JIvwtuWz4=
-X-Received: by 2002:a05:6512:2001:b0:50e:a923:4bb with SMTP id
- a1-20020a056512200100b0050ea92304bbmr1442148lfb.133.1704810252732; Tue, 09
- Jan 2024 06:24:12 -0800 (PST)
+ bh=cKpiQmUug1k+ONhUsi7k1absNM74ek0qI+Tl6MsSYKc=;
+ b=Vn8BLUKgfEqBmF1k5r/ZveObmENLSUS//YYdqn/kA0iwKoE8L8JAfjGuz1tVix+oqw
+ mlFeJ4i747MwKp7mwhR5rT9tyq3ERyeHf5OnR+YBUDoL/Cqrdnvq7vjut1EI7cJCo9qN
+ bxh3ijv+gDp08PUZqypYhHJ6STPn6sLDwpMyog13FgMCzMfzxVcwaBU+jgwgZ6VDLGjm
+ bmGPXD79tMR42RvuVzksosO8ChygDWxXwoGSbsA8YHh+QYj+RwIdIJoKa2bfE8EQcK36
+ c9C1ILmLX6dnILlfWTy7Ac8vS28pdMAdOCttqpIPiiTmHbn+HS4HpE/KiWvW/DpER05U
+ IxWw==
+X-Gm-Message-State: AOJu0YyByXhckCnAOlL8w7UItmJnQ/mfnhJ3cKeSiGIA3OFER6b9CwT0
+ 27xSj/7Wci9uEmSbGeTQnjfubCMASN44QaKKcE+ln1fijouF7A==
+X-Google-Smtp-Source: AGHT+IE5m6xVtiy3AwYkC+7EfPfJcnlLrnRf1ru49SQoFHhaBXQ34RRr0IgipBBwh8OCveY0e3PagOB2iTLMwmSA91g=
+X-Received: by 2002:a05:6512:b9d:b0:50e:6c1d:5dec with SMTP id
+ b29-20020a0565120b9d00b0050e6c1d5decmr1962461lfv.23.1704810832007; Tue, 09
+ Jan 2024 06:33:52 -0800 (PST)
 MIME-Version: 1.0
-References: <20240108163735.254732-1-stefanha@redhat.com>
-In-Reply-To: <20240108163735.254732-1-stefanha@redhat.com>
+References: <20240105154307.21385-1-philmd@linaro.org>
+ <20240105154307.21385-30-philmd@linaro.org>
+In-Reply-To: <20240105154307.21385-30-philmd@linaro.org>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Tue, 9 Jan 2024 14:24:01 +0000
-Message-ID: <CAFEAcA_RYdGZRxOAD43phmj0WmHTbU01tiNTmC8CxHF2cpb6DQ@mail.gmail.com>
-Subject: Re: [PULL 0/6] Block patches
-To: Stefan Hajnoczi <stefanha@redhat.com>
-Cc: qemu-devel@nongnu.org, qemu-s390x@nongnu.org, 
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>, qemu-block@nongnu.org, 
- Alistair Francis <alistair.francis@wdc.com>, Max Filippov <jcmvbkbc@gmail.com>,
- kvm@vger.kernel.org, Daniel Henrique Barboza <danielhb413@gmail.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, qemu-arm@nongnu.org, 
- Jean-Christophe Dubois <jcd@tribudubois.net>, Jiri Slaby <jslaby@suse.cz>, 
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Eric Blake <eblake@redhat.com>, Paul Durrant <paul@xen.org>,
- BALATON Zoltan <balaton@eik.bme.hu>, 
- Kevin Wolf <kwolf@redhat.com>, Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>, 
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- Roman Bolshakov <rbolshakov@ddn.com>, Reinoud Zandijk <reinoud@netbsd.org>, 
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Gerd Hoffmann <kraxel@redhat.com>, Thomas Huth <thuth@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
- xen-devel@lists.xenproject.org, Anthony Perard <anthony.perard@citrix.com>, 
- Weiwei Li <liwei1518@gmail.com>, qemu-ppc@nongnu.org, 
- Sunil Muthuswamy <sunilmut@microsoft.com>, Halil Pasic <pasic@linux.ibm.com>, 
- Song Gao <gaosong@loongson.cn>, Aurelien Jarno <aurelien@aurel32.net>, 
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
- Andrey Smirnov <andrew.smirnov@gmail.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
- Eduardo Habkost <eduardo@habkost.net>, "Michael S. Tsirkin" <mst@redhat.com>, 
- Marcelo Tosatti <mtosatti@redhat.com>, qemu-riscv@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>, Alexander Graf <agraf@csgraf.de>, 
- Markus Armbruster <armbru@redhat.com>, John Snow <jsnow@redhat.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, Peter Xu <peterx@redhat.com>,
- Stefan Weil <sw@weilnetz.de>, Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Hailiang Zhang <zhanghailiang@xfusion.com>, 
- Hyman Huang <yong.huang@smartx.com>, Michael Roth <michael.roth@amd.com>,
- Fam Zheng <fam@euphon.net>, Stefano Stabellini <sstabellini@kernel.org>, 
- Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
- David Gibson <david@gibson.dropbear.id.au>, 
- Artyom Tarasenko <atar4qemu@gmail.com>, Stafford Horne <shorne@gmail.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- David Woodhouse <dwmw2@infradead.org>, 
- Cameron Esfahani <dirty@apple.com>, Eric Farman <farman@linux.ibm.com>,
- Jason Wang <jasowang@redhat.com>, 
- Nicholas Piggin <npiggin@gmail.com>, Ilya Leoshkevich <iii@linux.ibm.com>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Hanna Reitz <hreitz@redhat.com>, 
- Huacai Chen <chenhuacai@kernel.org>, Jagannathan Raman <jag.raman@oracle.com>, 
- Elena Ufimtseva <elena.ufimtseva@oracle.com>, Bin Meng <bin.meng@windriver.com>,
- Fabiano Rosas <farosas@suse.de>, Akihiko Odaki <akihiko.odaki@daynix.com>, 
- David Hildenbrand <david@redhat.com>
+Date: Tue, 9 Jan 2024 14:33:41 +0000
+Message-ID: <CAFEAcA8P+kDHv_crqDmrbzzJHDpy1fe4T_tXsu8+nWggmjymgQ@mail.gmail.com>
+Subject: Re: [PULL 29/71] hw/arm/virt: Check CPU type in
+ machine_run_board_init()
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-ppc@nongnu.org, qemu-arm@nongnu.org, 
+ qemu-riscv@nongnu.org, Gavin Shan <gshan@redhat.com>, 
+ Richard Henderson <richard.henderson@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::136;
- envelope-from=peter.maydell@linaro.org; helo=mail-lf1-x136.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::12e;
+ envelope-from=peter.maydell@linaro.org; helo=mail-lf1-x12e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -134,44 +92,30 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, 8 Jan 2024 at 16:37, Stefan Hajnoczi <stefanha@redhat.com> wrote:
+On Fri, 5 Jan 2024 at 15:46, Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org=
+> wrote:
 >
-> The following changes since commit ffd454c67e38cc6df792733ebc5d967eee28ac=
-0d:
+> From: Gavin Shan <gshan@redhat.com>
 >
->   Merge tag 'pull-vfio-20240107' of https://github.com/legoater/qemu into=
- staging (2024-01-08 10:28:42 +0000)
->
-> are available in the Git repository at:
->
->   https://gitlab.com/stefanha/qemu.git tags/block-pull-request
->
-> for you to fetch changes up to 0b2675c473f68f13bc5ca1dd1c43ce421542e7b8:
->
->   Rename "QEMU global mutex" to "BQL" in comments and docs (2024-01-08 10=
-:45:43 -0500)
->
-> ----------------------------------------------------------------
-> Pull request
->
-> ----------------------------------------------------------------
->
-> Philippe Mathieu-Daud=C3=A9 (1):
->   iothread: Remove unused Error** argument in aio_context_set_aio_params
->
-> Stefan Hajnoczi (5):
->   system/cpus: rename qemu_mutex_lock_iothread() to bql_lock()
->   qemu/main-loop: rename QEMU_IOTHREAD_LOCK_GUARD to BQL_LOCK_GUARD
->   qemu/main-loop: rename qemu_cond_wait_iothread() to
->     qemu_cond_wait_bql()
->   Replace "iothread lock" with "BQL" in comments
->   Rename "QEMU global mutex" to "BQL" in comments and docs
+> Set mc->valid_cpu_types so that the user specified CPU type can be
+> validated in machine_run_board_init(). We needn't to do the check
+> by ourselves.
 
+Hi; after this change if you try to use the 'virt' board from
+qemu-system-arm with an invalid CPU type you get an odd
+error message full of "(null)"s:
 
-Applied, thanks.
+$ ./build/x86/qemu-system-arm -machine virt -cpu cortex-a9
+qemu-system-arm: Invalid CPU model: cortex-a9
+The valid models are: cortex-a7, cortex-a15, (null), (null), (null),
+(null), (null), (null), (null), (null), (null), (null), (null), max
 
-Please update the changelog at https://wiki.qemu.org/ChangeLog/9.0
-for any user-visible changes.
+This seems to be because we print a "(null)" for every 64-bit
+only CPU in the list, instead of either ignoring them or not
+compiling them into the list in the first place.
 
+https://gitlab.com/qemu-project/qemu/-/issues/2084
+
+thanks
 -- PMM
 
