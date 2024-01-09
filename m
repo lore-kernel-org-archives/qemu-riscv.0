@@ -4,106 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD724C3DA6E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jan 2024 21:07:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 217D4C3DA6E
+	for <qemu-riscv@archiver.kernel.org>; Tue,  9 Jan 2024 00:27:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rMwaA-0004dd-Pw; Mon, 08 Jan 2024 15:50:51 -0500
+	id 1rMzxN-0001XA-2i; Mon, 08 Jan 2024 19:27:01 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from
- <BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1rMwZa-0003os-OE; Mon, 08 Jan 2024 15:50:19 -0500
-Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from
- <BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1rMwZF-00010K-RH; Mon, 08 Jan 2024 15:50:14 -0500
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
- MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
- Reply-To:Content-Type:Content-ID:Content-Description;
- bh=nQ3rktK8dEdIEwAMeeCC6bqdVVt9BSYkg4MRVTEfqOM=; b=bGBRXYSbyRkskdXWh6m971dJdP
- 5XIzUANuHbkSZaFKWvwYPX45SbDNG5Fp0a3TOesDsQ33yypvAO9Gi6u/0HEdR431TkjP7mk7K4Owp
- /InUIPomiJAIvxOJdUaPkJ0/3jWUkebXuphh9ozi6hfKvahJI7sx0LZ0dBk9hueidmt0lg6F4KUDh
- 6oLeCH7TDfP4T2HQ1qvRFGGNuPScQKbTgqryBva7FULnF52zKDcH4zrQvWY8+k/ImNsKHXBzRpLx/
- vxaDexMsh4s2s1HV0EAaK8/YK8elERa4drs1WpWoMFzMXeFozgiifA/NpPu3cBnTFcbfZultK2uoE
- JvzSk6Dg==;
-Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1rMwYj-007wXP-2m; Mon, 08 Jan 2024 20:49:22 +0000
-Received: from dwoodhou by i7.infradead.org with local (Exim 4.96.2 #2 (Red
- Hat Linux)) id 1rMwYj-002NEe-1A; Mon, 08 Jan 2024 20:49:21 +0000
-From: David Woodhouse <dwmw2@infradead.org>
-To: qemu-devel@nongnu.org
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Beniamino Galvani <b.galvani@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Strahinja Jankovic <strahinja.p.jankovic@gmail.com>,
- Niek Linnenbank <nieklinnenbank@gmail.com>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- Andrew Jeffery <andrew@codeconstruct.com.au>,
- Joel Stanley <joel@jms.id.au>, Igor Mitsyanko <i.mitsyanko@gmail.com>,
- Jean-Christophe Dubois <jcd@tribudubois.net>,
- Andrey Smirnov <andrew.smirnov@gmail.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Rob Herring <robh@kernel.org>, Subbaraya Sundeep <sundeep.lkml@gmail.com>,
- Jan Kiszka <jan.kiszka@web.de>, Tyrone Ting <kfting@nuvoton.com>,
- Hao Wu <wuhaotsh@google.com>, Radoslaw Biernacki <rad@semihalf.com>,
- Leif Lindholm <quic_llindhol@quicinc.com>,
- Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Alistair Francis <alistair@alistair23.me>, Helge Deller <deller@gmx.de>,
- Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Song Gao <gaosong@loongson.cn>, Thomas Huth <huth@tuxfamily.org>,
- Laurent Vivier <laurent@vivier.eu>, Huacai Chen <chenhuacai@kernel.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- =?UTF-8?q?Herv=C3=A9=20Poussineau?= <hpoussin@reactos.org>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Aurelien Jarno <aurelien@aurel32.net>, Jason Wang <jasowang@redhat.com>,
- Jia Liu <proljc@gmail.com>, Stafford Horne <shorne@gmail.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Nicholas Piggin <npiggin@gmail.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Eric Farman <farman@linux.ibm.com>, David Hildenbrand <david@redhat.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Magnus Damm <magnus.damm@gmail.com>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
- Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
- xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v3 11/46] hw/loongarch: use pci_init_nic_devices()
-Date: Mon,  8 Jan 2024 20:26:40 +0000
-Message-ID: <20240108204909.564514-12-dwmw2@infradead.org>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20240108204909.564514-1-dwmw2@infradead.org>
-References: <20240108204909.564514-1-dwmw2@infradead.org>
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1rMzxI-0001Ti-TQ
+ for qemu-riscv@nongnu.org; Mon, 08 Jan 2024 19:26:56 -0500
+Received: from mail-oa1-x33.google.com ([2001:4860:4864:20::33])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1rMzxE-0001bM-FZ
+ for qemu-riscv@nongnu.org; Mon, 08 Jan 2024 19:26:55 -0500
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-204df0830ccso2281933fac.1
+ for <qemu-riscv@nongnu.org>; Mon, 08 Jan 2024 16:26:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1704760010; x=1705364810;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CBFb3wD9JrSYCXaN0lwhbhsoKTi8i5JV1Iqt3vza59s=;
+ b=I/bRge2T9GmW9Xrt32ZD3g5PkMMkWgEdxyJFJh/VFy/QizpPYtzOa/w0ZWZ5SjM7l/
+ 2i0gYXkC3bqigyK4Uyp5MrH4/tgfO7sLXd4o635dZLF/8okBFLJCrGg80bYXt/G2LN/k
+ B5wCB8ysIevdMFe3l6gyitXsKrlf+fjA0pDScH4vTsGByt4tmp6sfm2WxDcv13V4zI3D
+ 7mBI2xA+WHs59vYja6QBAJiIz9HoIGYc90Mga/gfLu/iw+mJR/x2o/LdHaDPZZkov1Nm
+ Fy56yFU+msk4/uTeARTY2FmaHDwxOc67Mu/KKGSwkSu0IxbfGMOYZva4yTsS2wdeYwhe
+ KaFw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704760010; x=1705364810;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=CBFb3wD9JrSYCXaN0lwhbhsoKTi8i5JV1Iqt3vza59s=;
+ b=tihDwk9XtJvKWOnSgRrpg7GKcSsQXNGgaGOBDzlNrce6hlsrX3NJfj3bUz9Vd2iGeN
+ gyXeermtFeN1JFcyv40AUZ4aex5NrmdeWLbsq9VH+6ncxYWYgWKbv2qDkQoG1qxqGh/Z
+ IAIEzpootgOmkoa6dkZp9t9WGMSKzErPamU4m5rcx/Af74GSa5/xXvFwumv8y2txQ2Jh
+ JiFYtQO2Kxcc7TkkiNYjAIXP7MBfdhMQfUxumEB3qXVa8/AZutEyRf1cRHduBIb6hZCo
+ pet26q8/kQalZbBiRlvXxHzgdxKe5z6pZxuRDU/VAY2AiXubG/65SENfIYVekG7MemIR
+ qhXQ==
+X-Gm-Message-State: AOJu0YzWPyRwidcAMEvwGA6vg1jawSwxTfOcFGGDeoYhINPKHpElwMwJ
+ pdwgOuady422KQ2wUfiBunpH8haecqMxlA==
+X-Google-Smtp-Source: AGHT+IEpDUvEad/BmYXqSLpVWfxXwSszCAP1wofyOfkB3aIV2PrZ0V/dnhz9QT0g+1zE09IooTLJWw==
+X-Received: by 2002:a05:6871:2b01:b0:203:ec89:de1e with SMTP id
+ dr1-20020a0568712b0100b00203ec89de1emr6835850oac.58.1704760010602; 
+ Mon, 08 Jan 2024 16:26:50 -0800 (PST)
+Received: from atishp.ba.rivosinc.com ([64.71.180.162])
+ by smtp.gmail.com with ESMTPSA id
+ wp12-20020a056871a9cc00b002042cafdc52sm219917oab.2.2024.01.08.16.26.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 08 Jan 2024 16:26:50 -0800 (PST)
+From: Atish Patra <atishp@rivosinc.com>
+To: 
+Cc: Kaiwen Xue <kaiwenx@rivosinc.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Atish Patra <atishp@rivosinc.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, Weiwei Li <liwei1518@gmail.com>,
+ kaiwenxue1@gmail.com
+Subject: [PATCH v4 3/5] target/riscv: Add cycle & instret privilege mode
+ filtering definitions
+Date: Mon,  8 Jan 2024 16:25:52 -0800
+Message-Id: <20240109002554.646572-4-atishp@rivosinc.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240109002554.646572-1-atishp@rivosinc.com>
+References: <20240109002554.646572-1-atishp@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- desiato.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1:d65d:64ff:fe57:4e05;
- envelope-from=BATV+a33e3d7a5f0474923369+7442+infradead.org+dwmw2@desiato.srs.infradead.org;
- helo=desiato.infradead.org
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2001:4860:4864:20::33;
+ envelope-from=atishp@rivosinc.com; helo=mail-oa1-x33.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -119,29 +102,90 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+From: Kaiwen Xue <kaiwenx@rivosinc.com>
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+This adds the definitions for ISA extension smcntrpmf.
+
+Signed-off-by: Kaiwen Xue <kaiwenx@rivosinc.com>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Signed-off-by: Atish Patra <atishp@rivosinc.com>
 ---
- hw/loongarch/virt.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ target/riscv/cpu.h      |  6 ++++++
+ target/riscv/cpu_bits.h | 29 +++++++++++++++++++++++++++++
+ 2 files changed, 35 insertions(+)
 
-diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
-index 4b7dc67a2d..c48804ac38 100644
---- a/hw/loongarch/virt.c
-+++ b/hw/loongarch/virt.c
-@@ -504,9 +504,7 @@ static void loongarch_devices_init(DeviceState *pch_pic, LoongArchMachineState *
-     fdt_add_uart_node(lams);
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index d74b361be641..34617c4c4bab 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -319,6 +319,12 @@ struct CPUArchState {
  
-     /* Network init */
--    for (i = 0; i < nb_nics; i++) {
--        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
--    }
-+    pci_init_nic_devices(pci_bus, mc->default_nic);
+     target_ulong mcountinhibit;
  
-     /*
-      * There are some invalid guest memory access.
++    /* PMU cycle & instret privilege mode filtering */
++    target_ulong mcyclecfg;
++    target_ulong mcyclecfgh;
++    target_ulong minstretcfg;
++    target_ulong minstretcfgh;
++
+     /* PMU counter state */
+     PMUCTRState pmu_ctrs[RV_MAX_MHPMCOUNTERS];
+ 
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index ebd7917d490a..0ee91e502e8f 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -401,6 +401,10 @@
+ /* Machine counter-inhibit register */
+ #define CSR_MCOUNTINHIBIT   0x320
+ 
++/* Machine counter configuration registers */
++#define CSR_MCYCLECFG       0x321
++#define CSR_MINSTRETCFG     0x322
++
+ #define CSR_MHPMEVENT3      0x323
+ #define CSR_MHPMEVENT4      0x324
+ #define CSR_MHPMEVENT5      0x325
+@@ -431,6 +435,9 @@
+ #define CSR_MHPMEVENT30     0x33e
+ #define CSR_MHPMEVENT31     0x33f
+ 
++#define CSR_MCYCLECFGH      0x721
++#define CSR_MINSTRETCFGH    0x722
++
+ #define CSR_MHPMEVENT3H     0x723
+ #define CSR_MHPMEVENT4H     0x724
+ #define CSR_MHPMEVENT5H     0x725
+@@ -885,6 +892,28 @@ typedef enum RISCVException {
+ /* PMU related bits */
+ #define MIE_LCOFIE                         (1 << IRQ_PMU_OVF)
+ 
++#define MCYCLECFG_BIT_MINH                 BIT_ULL(62)
++#define MCYCLECFGH_BIT_MINH                BIT(30)
++#define MCYCLECFG_BIT_SINH                 BIT_ULL(61)
++#define MCYCLECFGH_BIT_SINH                BIT(29)
++#define MCYCLECFG_BIT_UINH                 BIT_ULL(60)
++#define MCYCLECFGH_BIT_UINH                BIT(28)
++#define MCYCLECFG_BIT_VSINH                BIT_ULL(59)
++#define MCYCLECFGH_BIT_VSINH               BIT(27)
++#define MCYCLECFG_BIT_VUINH                BIT_ULL(58)
++#define MCYCLECFGH_BIT_VUINH               BIT(26)
++
++#define MINSTRETCFG_BIT_MINH               BIT_ULL(62)
++#define MINSTRETCFGH_BIT_MINH              BIT(30)
++#define MINSTRETCFG_BIT_SINH               BIT_ULL(61)
++#define MINSTRETCFGH_BIT_SINH              BIT(29)
++#define MINSTRETCFG_BIT_UINH               BIT_ULL(60)
++#define MINSTRETCFGH_BIT_UINH              BIT(28)
++#define MINSTRETCFG_BIT_VSINH              BIT_ULL(59)
++#define MINSTRETCFGH_BIT_VSINH             BIT(27)
++#define MINSTRETCFG_BIT_VUINH              BIT_ULL(58)
++#define MINSTRETCFGH_BIT_VUINH             BIT(26)
++
+ #define MHPMEVENT_BIT_OF                   BIT_ULL(63)
+ #define MHPMEVENTH_BIT_OF                  BIT(31)
+ #define MHPMEVENT_BIT_MINH                 BIT_ULL(62)
 -- 
-2.41.0
+2.34.1
 
 
