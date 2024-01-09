@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 562CFC46CD2
-	for <qemu-riscv@archiver.kernel.org>; Tue,  9 Jan 2024 14:59:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 197F5C46CD2
+	for <qemu-riscv@archiver.kernel.org>; Tue,  9 Jan 2024 15:00:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rNDZu-0004UC-Ka; Tue, 09 Jan 2024 09:59:42 -0500
+	id 1rNDZu-0004U5-D6; Tue, 09 Jan 2024 09:59:42 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <irina.ryapolova@syntacore.com>)
- id 1rNDZt-0004Ta-B5; Tue, 09 Jan 2024 09:59:41 -0500
+ id 1rNDZs-0004Ss-1w; Tue, 09 Jan 2024 09:59:40 -0500
 Received: from mta-04.yadro.com ([89.207.88.248])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <irina.ryapolova@syntacore.com>)
- id 1rNDZq-0007m1-RX; Tue, 09 Jan 2024 09:59:41 -0500
-DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com 36F9BC000E
+ id 1rNDZq-0007h2-6y; Tue, 09 Jan 2024 09:59:39 -0500
+DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com 25527C000E
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-04; t=1704812376;
- bh=/3BoQ65SwFzb/8NChuj73jsr2YIu/wN+xGTLSwDWZl8=;
+ s=mta-04; t=1704812372;
+ bh=HJZFCGF9tmHBYnGnlqSJ8Wes9m5d58fAWrGHT5MfzNc=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=fPucQQUPXXmp67sE2RlU5SvwghiEECdnWrT7dMWbkGJmycS6FMt234KqcZ+ZDqKN6
- qZYZP+PaaZHVssDFU8gefrvRogj8+0rMtHkbF6FOZgX6RXykiwo7jGf39DjZ9q0R4y
- q7CnepXu544q/qf3cIt2kyohPGqWCYeJurtpidrjQXzfzylwM1GWvDx5ES8Udt2bcU
- kPCktUe5fw99GUrsJdosthZQEboHrqzPCJtnZVhMJAPBcG8D5UHwvTVyPXL0NA6ubT
- N/+OHhLa+MDdTfvQdtD8g7Y6N1udt0NaSW1iax+LETImvprBdDdfXJrXXD/biJ64Ed
- TDLcVv42t5bBg==
+ b=hWoQbXhYSuxDj3JhLPHgHMvsFKs/UXKkWtah4ooQ+QqnAORa/buuBEVy9igzS30yU
+ xjoW1oG35UU/YHO3i+LxPR/d2Zp0P3783BmT/HGCLXAsl/PWcor04QcbUBrGxIvX8Z
+ wD5MH9XdIqewPzYWf3L+0bQzo2yPb+oDg6hnKLqAIqe7pUWtyxfrDyJr3a9OTgl81J
+ 0vZ74hq4quYJVEx3Q7pqaHUXUravcmitSQeG7hIGAVKcBHs8aUim18bDVV/cL7FIXB
+ oHtSSVNIcXm/3sQ8iioeA9KSyyC3pES2m7lYF4bI2lFhqEgR3iJ1ypCPqGklJt/DCr
+ lXiJfWSK+yVtw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-03; t=1704812376;
- bh=/3BoQ65SwFzb/8NChuj73jsr2YIu/wN+xGTLSwDWZl8=;
+ s=mta-03; t=1704812372;
+ bh=HJZFCGF9tmHBYnGnlqSJ8Wes9m5d58fAWrGHT5MfzNc=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=QE6rCE9LioJRggk9mLbZEhH/e3KKmqPsQkoQnzOb8Jq0av9Z1NHG7QaqAZ2OePSWn
- h3j1VqYs0rl+wfcyRnZj5HgNG8niatnXfHF2obk/EuF5xvQIKSwfJUIOvdcj3Kub/3
- RqEDUwnnJC2m6FCovs1Si7Qr0P1+2lgZaFWTzWdAOzPcAuwem4Zul3Wh1coUK8ECJs
- BqQD40NowQVoKyjQOybZasXaDNBdPP5+pI2NPKDxdVxRfN/4HrugGuMRZt8ghJf+EB
- 8lpnqaOV8BbughibIASko+Id1G9la4YiGPKTd8nai0G+dGq8QsuxFDBZ+S0tU8cE+E
- KA9/yR8J1ppSA==
+ b=hEVbtjbZYVEivqjOzqMda9OmIaj5mxAXdEqcv6sy06vKajHp70CPK+LqyLWfS1toT
+ KUUYmkf2oDDcJmKI/QXJqjPSIl4/Czi7E9e9rXkvlA988mRr13HGWXVVub53njSDBt
+ ajQsole/Jw+GmMkW8eBHTKu89L+aG1dYVr7xW90ZtiuczQVnL4Qj+5G0u6yeON1UFT
+ VLkv3USh7hgqkQf8NuWH4QERLIin7LrdBfEFREDv3AuK52i5kyopXsqwOjfOmrIp7x
+ E7PTBBljjjG90vNAGEfuFASgd2eph8ljh91a/zorU616BDcVNtTR0R1MzbIRMySRFH
+ FVlmrMDcu59fA==
 From: Irina Ryapolova <irina.ryapolova@syntacore.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-riscv@nongnu.org>, <palmer@dabbelt.com>, <alistair.francis@wdc.com>, 
@@ -46,12 +46,10 @@ CC: <qemu-riscv@nongnu.org>, <palmer@dabbelt.com>, <alistair.francis@wdc.com>,
  <dbarboza@ventanamicro.com>, 
  <zhiwei_liu@linux.alibaba.com>, Irina Ryapolova
  <irina.ryapolova@syntacore.com>
-Subject: [PATCH v3 2/2] target/riscv: UPDATE xATP write CSR
-Date: Tue, 9 Jan 2024 17:59:22 +0300
-Message-ID: <20240109145923.37893-2-irina.ryapolova@syntacore.com>
+Subject: [PATCH v3 1/2] target/riscv: FIX xATP_MODE validation
+Date: Tue, 9 Jan 2024 17:59:21 +0300
+Message-ID: <20240109145923.37893-1-irina.ryapolova@syntacore.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240109145923.37893-1-irina.ryapolova@syntacore.com>
-References: <20240109145923.37893-1-irina.ryapolova@syntacore.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -81,104 +79,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Added xATP_MODE validation for vsatp/hgatp CSRs.
-The xATP register is an SXLEN-bit read/write WARL register, so
-the legal value must be returned (See riscv-privileged-20211203, SATP/VSATP/HGATP CSRs).
+The SATP register is an SXLEN-bit read/write WARL register. It means that CSR fields are only defined
+for a subset of bit encodings, but allow any value to be written while guaranteeing to return a legal
+value whenever read (See riscv-privileged-20211203, SATP CSR).
+
+For example on rv64 we are trying to write to SATP CSR val = 0x1000000000000000 (SATP_MODE = 1 - Reserved for standard use)
+and after that we are trying to read SATP_CSR. We read from the SATP CSR value = 0x1000000000000000, which is not a correct
+operation (return illegal value).
 
 Signed-off-by: Irina Ryapolova <irina.ryapolova@syntacore.com>
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- target/riscv/csr.c | 52 ++++++++++++++++++++++++++--------------------
- 1 file changed, 29 insertions(+), 23 deletions(-)
+Changes for v2:
+  -used satp_mode.map instead of satp_mode.supported
+Changes for v3:
+  -patch formatting corrected
+---
+ target/riscv/csr.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 735fb27be7..6d7a3dd9aa 100644
+index fde7ce1a53..735fb27be7 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -1282,6 +1282,32 @@ static bool validate_vm(CPURISCVState *env, target_ulong vm)
-     return get_field(mode_supported, (1 << vm));
+@@ -1278,8 +1278,8 @@ static RISCVException read_mstatus(CPURISCVState *env, int csrno,
+ 
+ static bool validate_vm(CPURISCVState *env, target_ulong vm)
+ {
+-    return (vm & 0xf) <=
+-           satp_mode_max_from_map(riscv_cpu_cfg(env)->satp_mode.map);
++    uint64_t mode_supported = riscv_cpu_cfg(env)->satp_mode.map;
++    return get_field(mode_supported, (1 << vm));
  }
  
-+static target_ulong legalize_xatp(CPURISCVState *env, target_ulong old_xatp,
-+                                  target_ulong val)
-+{
-+    target_ulong mask;
-+    bool vm;
-+    if (riscv_cpu_mxl(env) == MXL_RV32) {
-+        vm = validate_vm(env, get_field(val, SATP32_MODE));
-+        mask = (val ^ old_xatp) & (SATP32_MODE | SATP32_ASID | SATP32_PPN);
-+    } else {
-+        vm = validate_vm(env, get_field(val, SATP64_MODE));
-+        mask = (val ^ old_xatp) & (SATP64_MODE | SATP64_ASID | SATP64_PPN);
-+    }
-+
-+    if (vm && mask) {
-+        /*
-+         * The ISA defines SATP.MODE=Bare as "no translation", but we still
-+         * pass these through QEMU's TLB emulation as it improves
-+         * performance.  Flushing the TLB on SATP writes with paging
-+         * enabled avoids leaking those invalid cached mappings.
-+         */
-+        tlb_flush(env_cpu(env));
-+        return val;
-+    }
-+    return old_xatp;
-+}
-+
  static target_ulong legalize_mpp(CPURISCVState *env, target_ulong old_mpp,
-                                  target_ulong val)
- {
-@@ -2997,31 +3023,11 @@ static RISCVException read_satp(CPURISCVState *env, int csrno,
- static RISCVException write_satp(CPURISCVState *env, int csrno,
-                                  target_ulong val)
- {
--    target_ulong mask;
--    bool vm;
--
-     if (!riscv_cpu_cfg(env)->mmu) {
-         return RISCV_EXCP_NONE;
-     }
- 
--    if (riscv_cpu_mxl(env) == MXL_RV32) {
--        vm = validate_vm(env, get_field(val, SATP32_MODE));
--        mask = (val ^ env->satp) & (SATP32_MODE | SATP32_ASID | SATP32_PPN);
--    } else {
--        vm = validate_vm(env, get_field(val, SATP64_MODE));
--        mask = (val ^ env->satp) & (SATP64_MODE | SATP64_ASID | SATP64_PPN);
--    }
--
--    if (vm && mask) {
--        /*
--         * The ISA defines SATP.MODE=Bare as "no translation", but we still
--         * pass these through QEMU's TLB emulation as it improves
--         * performance.  Flushing the TLB on SATP writes with paging
--         * enabled avoids leaking those invalid cached mappings.
--         */
--        tlb_flush(env_cpu(env));
--        env->satp = val;
--    }
-+    env->satp = legalize_xatp(env, env->satp, val);
-     return RISCV_EXCP_NONE;
- }
- 
-@@ -3506,7 +3512,7 @@ static RISCVException read_hgatp(CPURISCVState *env, int csrno,
- static RISCVException write_hgatp(CPURISCVState *env, int csrno,
-                                   target_ulong val)
- {
--    env->hgatp = val;
-+    env->hgatp = legalize_xatp(env, env->hgatp, val);
-     return RISCV_EXCP_NONE;
- }
- 
-@@ -3772,7 +3778,7 @@ static RISCVException read_vsatp(CPURISCVState *env, int csrno,
- static RISCVException write_vsatp(CPURISCVState *env, int csrno,
-                                   target_ulong val)
- {
--    env->vsatp = val;
-+    env->vsatp = legalize_xatp(env, env->vsatp, val);
-     return RISCV_EXCP_NONE;
- }
- 
 -- 
 2.25.1
 
