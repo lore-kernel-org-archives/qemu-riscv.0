@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F006C4707B
-	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Jan 2024 18:26:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED0E5C4707B
+	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Jan 2024 18:33:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rNdHL-0005m7-9L; Wed, 10 Jan 2024 13:26:15 -0500
+	id 1rNdNP-0007eB-Uq; Wed, 10 Jan 2024 13:32:33 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rNdHI-0005lU-3F
- for qemu-riscv@nongnu.org; Wed, 10 Jan 2024 13:26:13 -0500
-Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
+ id 1rNdNN-0007dW-Ma
+ for qemu-riscv@nongnu.org; Wed, 10 Jan 2024 13:32:29 -0500
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rNdHG-0001bv-AU
- for qemu-riscv@nongnu.org; Wed, 10 Jan 2024 13:26:11 -0500
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-6dad22e13dcso2888804b3a.3
- for <qemu-riscv@nongnu.org>; Wed, 10 Jan 2024 10:26:09 -0800 (PST)
+ id 1rNdNM-0004Li-1b
+ for qemu-riscv@nongnu.org; Wed, 10 Jan 2024 13:32:29 -0500
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-1d3eae5c1d7so23561395ad.2
+ for <qemu-riscv@nongnu.org>; Wed, 10 Jan 2024 10:32:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1704911169; x=1705515969; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1704911546; x=1705516346; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=vH57QS3GpCPRyTxw+0Wf6Wt6n6YVM5kYbKb5iKtrHCo=;
- b=ARJgxGuz4UBPKPJWVy6E5mvEDT12tQ9xj6sSV1NYn65Rzb1aqSO2Lka0+BkG97/A4c
- rPB/wUPdvVGvPieLSzQWaHwaCapfCGdBOx0YuRuhqk4Zooe8c3foWIf4RF1khWNeEMON
- O5b+AzMBOEhy7NltTFYITROACJhcYoSjz39csh3LtBNXeHUS+LibX0/AhSEnooJRq5Fa
- Qx8PKMt3/IVG+BBfxdc83yvRJ9oIE7Mjdt0beqJaeNg499AeuyPelnEvU4sNrshHgqDC
- wOte09q1btVcbD+8/kN7zZF39tIrSTi2OXRAoKXQmrtN9E5fsugDj7T5sQ8a2uCkfGFG
- GSUQ==
+ bh=pWiq8kTUh+mdL1XsRJNdTllaoAxLxDDvBnyzL1CSrv0=;
+ b=chFOXK/2XOdioiotdSmsh8J93WI0XYhmJ/0UhzyiqE+VZEVh49AUKBsCXXfAGEZhqq
+ Ki2H1gqRB0JAPWFHETuxIxf5rx06Pgo71WmnLenZUxh+LLuIxlgC/AQ29kn9WGg/fiY7
+ UsOvy0C4Ux7xw2etBtaqrFfFnylTwAYo3/cpY4yUMFZzvOExGF2626CGDASRhLpGjuL9
+ rH5ZfGr9GVBZLhJt1e7f1Ys9cT2AsInKzHxb5PoKSlHzpYq0A8MbQEPixYkgEGCszOnp
+ dWgcQx3+71o/WaCo9zpzJdCATZE48rlR7iB2Q+gqWAF/ZJia2/QFqyRnum+pRkRPAHZJ
+ ijQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704911169; x=1705515969;
+ d=1e100.net; s=20230601; t=1704911546; x=1705516346;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=vH57QS3GpCPRyTxw+0Wf6Wt6n6YVM5kYbKb5iKtrHCo=;
- b=HFeCZbuL1CSp5oD5VXLLEaFBOh+2u+XIvcIEEGIPof5EMsywIRa7OMNowQzwVjL0Al
- Ay4ppA6NAI9pAzv99XVzOgIuX45m37ec7M1eSitW1lZaBVbmpihEIDb/o16wGRmhUs2/
- RP7M9Eq05VVJK9NvwcnF9T+5rX4t/3mSF7e7uZL3ObckMEizgJyesVnDvfnKHUzghkDE
- 3VhW6RvK5kCqbDohPNOzsUoDBGMrvKynZGOph5WJWO+0zohlYMHiyOS+njQVZ6ErXq+k
- 8afTHAjxl7NYkJiGOZdHkdrBKCFEQqShOMW6ahRSgmzxdKuvoq2913gvcPIFdn+8pRCl
- wFRg==
-X-Gm-Message-State: AOJu0YxPsM29NVOC1Re7SK73seO7RiIyI274kUsU7S+p8NtizPRr5aNt
- sLQizGsUe87sxCaafft8pn6DUi3iuH4yYw==
-X-Google-Smtp-Source: AGHT+IEcjQGytGqP8jUKJiFx/4nmFGGyIDLNRJv6GYED+6PdzyOFJM88JrZ26BAuvtsOUiHa0PuLOQ==
-X-Received: by 2002:a05:6a00:38d8:b0:6db:1a5f:ad70 with SMTP id
- ey24-20020a056a0038d800b006db1a5fad70mr62810pfb.2.1704911168968; 
- Wed, 10 Jan 2024 10:26:08 -0800 (PST)
+ bh=pWiq8kTUh+mdL1XsRJNdTllaoAxLxDDvBnyzL1CSrv0=;
+ b=BF/bLmYCHEFnUz6AsOYfr2qnQkev7lWgW8ogJxDwTdM5R+P8ugCeZehQvKco3m0nUj
+ CWN71p5clTNEEVL5JTwEFiUPSACXV0Dsf+0vTn+9j1l4dlER1DqQS5iU9/sMSswBSogx
+ eJKyThbHcuAAmJn3kXVrvtBrMLII0LM+SLiMaywNk6Usr3O322TeRuzxO+jx85txsBsf
+ VOovf8r+jS3JsdPtBvznqS9izaOSTsdCKorRFsmGgK6rG8XGGO12QRWGlSr37REPcSkN
+ Q3P9PjEoeX4XhbN5v8H1Y65dxUALhiw6Vm7sj7ESB5AybhbdeEOvr8nRiGT/T6FraylK
+ UwhA==
+X-Gm-Message-State: AOJu0Yzv+nrq0mIMLG5yjxpl2gwObo0Hx214XEAYxQGr132PKynTdYK3
+ 6QRrAO/vLquplNwrzK1rUf7RhjMSRWIZVw==
+X-Google-Smtp-Source: AGHT+IGVNiBTr6nIEP1vCVzDHHnFKArHMz4EWw7ScuFg9qwE6fhPEj1cQsss0C6P9G4SzkHJjouttw==
+X-Received: by 2002:a17:90b:1d8c:b0:28b:ea0c:f9b8 with SMTP id
+ pf12-20020a17090b1d8c00b0028bea0cf9b8mr920866pjb.64.1704911546278; 
+ Wed, 10 Jan 2024 10:32:26 -0800 (PST)
 Received: from [192.168.68.110] ([152.234.123.64])
  by smtp.gmail.com with ESMTPSA id
- h34-20020a63f922000000b005c66e25497dsm3811372pgi.83.2024.01.10.10.26.06
+ d11-20020a170902aa8b00b001d4cb49a28bsm3932331plr.277.2024.01.10.10.32.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 10 Jan 2024 10:26:08 -0800 (PST)
-Message-ID: <07cbdc64-3965-42af-b106-30e6afdc48ee@ventanamicro.com>
-Date: Wed, 10 Jan 2024 15:26:03 -0300
+ Wed, 10 Jan 2024 10:32:25 -0800 (PST)
+Message-ID: <de442ad9-0479-4a7e-bccf-97fcd081a35e@ventanamicro.com>
+Date: Wed, 10 Jan 2024 15:32:21 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] target/riscv: Add step to validate 'B' extension
+Subject: Re: [PATCH 3/3] target/riscv: Enable 'B' extension on max CPU type
 Content-Language: en-US
 To: Rob Bradford <rbradford@rivosinc.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, atishp@rivosinc.com, palmer@dabbelt.com,
  alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com
 References: <20240109171848.32237-1-rbradford@rivosinc.com>
- <20240109171848.32237-3-rbradford@rivosinc.com>
+ <20240109171848.32237-4-rbradford@rivosinc.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240109171848.32237-3-rbradford@rivosinc.com>
+In-Reply-To: <20240109171848.32237-4-rbradford@rivosinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x436.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,80 +101,38 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 1/9/24 14:07, Rob Bradford wrote:
-> If the B extension is enabled warn if the user has disabled any of the
-> required extensions that are part of the 'B' extension. Conversely
-> enable the extensions that make up the 'B' extension if it is enabled.
-> 
 > Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
 > ---
-
-This patch doesn't apply cleanly on current master. Which is normal, since we just
-had a RISC-V PR merged.
-
-I'm afraid you'll need to resend the series rebased on top of master (since it's newer
-than Alistair's riscv-to-apply.next now).
-
-
->   target/riscv/tcg/tcg-cpu.c | 33 +++++++++++++++++++++++++++++++++
->   1 file changed, 33 insertions(+)
+>   target/riscv/tcg/tcg-cpu.c | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
 > 
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index f10871d352..9705daec93 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -999,7 +999,8 @@ static void riscv_init_max_cpu_extensions(Object *obj)
+>       const RISCVCPUMultiExtConfig *prop;
+>   
+>       /* Enable RVG, RVJ and RVV that are disabled by default */
+> -    riscv_cpu_set_misa(env, env->misa_mxl, env->misa_ext | RVG | RVJ | RVV);
+> +    riscv_cpu_set_misa(env, env->misa_mxl,
+> +                       env->misa_ext | RVG | RVJ | RVV | RVB);
 
-I fixed the conflicts and applied the patch and it works for me. So:
+I'm aware that we decided a while ago the 'max' CPU could only have non-vendor and
+non-experimental extensions enabled. RVB is experimental, so in theory we shouldn't
+enable it.
+
+But RVB is an alias for zba, zbb and zbs, extensions that the 'max' CPU is already
+enabling. In this case I think it's sensible to enable RVB here since it would just
+reflect stuff that it's already happening.
 
 
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
 
 
-> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> index fda54671d5..f10871d352 100644
-> --- a/target/riscv/tcg/tcg-cpu.c
-> +++ b/target/riscv/tcg/tcg-cpu.c
-> @@ -273,6 +273,35 @@ static void riscv_cpu_disable_priv_spec_isa_exts(RISCVCPU *cpu)
->       }
->   }
+
 >   
-> +static void riscv_cpu_validate_b(RISCVCPU *cpu)
-> +{
-> +    const char *warn_msg = "RVB mandates disabled extension %s";
-> +
-> +    if (!cpu->cfg.ext_zba) {
-> +        if (!cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_zba))) {
-> +            cpu->cfg.ext_zba = true;
-> +        } else {
-> +            warn_report(warn_msg, "zba");
-> +        }
-> +    }
-> +
-> +    if (!cpu->cfg.ext_zbb) {
-> +        if (!cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_zbb))) {
-> +            cpu->cfg.ext_zbb = true;
-> +        } else {
-> +            warn_report(warn_msg, "zbb");
-> +        }
-> +    }
-> +
-> +    if (!cpu->cfg.ext_zbs) {
-> +        if (!cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_zbs))) {
-> +            cpu->cfg.ext_zbs = true;
-> +        } else {
-> +            warn_report(warn_msg, "zbs");
-> +        }
-> +    }
-> +}
-> +
->   /*
->    * Check consistency between chosen extensions while setting
->    * cpu->cfg accordingly.
-> @@ -309,6 +338,10 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
->           env->misa_ext_mask |= RVI | RVM | RVA | RVF | RVD;
->       }
->   
-> +    if (riscv_has_ext(env, RVB)) {
-> +        riscv_cpu_validate_b(cpu);
-> +    }
-> +
->       if (riscv_has_ext(env, RVI) && riscv_has_ext(env, RVE)) {
->           error_setg(errp,
->                      "I and E extensions are incompatible");
+>       for (prop = riscv_cpu_extensions; prop && prop->name; prop++) {
+>           isa_ext_update_enabled(cpu, prop->offset, true);
 
