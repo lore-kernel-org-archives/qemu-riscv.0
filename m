@@ -4,63 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABF7EC47077
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Jan 2024 13:31:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F259C47077
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Jan 2024 14:01:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rNv9M-0004DA-Qd; Thu, 11 Jan 2024 08:31:12 -0500
+	id 1rNvcY-0007Ky-US; Thu, 11 Jan 2024 09:01:22 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rNv9F-00049P-0a
- for qemu-riscv@nongnu.org; Thu, 11 Jan 2024 08:31:07 -0500
-Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rNvcW-0007JX-Gq
+ for qemu-riscv@nongnu.org; Thu, 11 Jan 2024 09:01:20 -0500
+Received: from mail-ej1-x635.google.com ([2a00:1450:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rNv9C-00020t-IL
- for qemu-riscv@nongnu.org; Thu, 11 Jan 2024 08:31:04 -0500
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a2c29418ad5so128167666b.0
- for <qemu-riscv@nongnu.org>; Thu, 11 Jan 2024 05:31:01 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rNvcU-0006cq-J4
+ for qemu-riscv@nongnu.org; Thu, 11 Jan 2024 09:01:20 -0500
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a28f66dc7ffso1157281166b.0
+ for <qemu-riscv@nongnu.org>; Thu, 11 Jan 2024 06:01:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704979861; x=1705584661; darn=nongnu.org;
+ d=linaro.org; s=google; t=1704981673; x=1705586473; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=ApFCZe++K6mdEosZ5Zb18U8fI6FgBHYQCdfmSUN0e0A=;
- b=a7IOfG9UuaOG3lnH0t/JGdH03kHjfmGVkpcPLFisNPjzLL+YZ1SxGjK1fDE67Qy/XR
- l9+G64raVAOd5ldHjCC+CURUqEjz/pEiQKER31AcQ02O/9dUCP7sQUF6A7+4ht/qJtpL
- K4P7pwwFtLDdC67TsV4toqNOEv5Xq1ShAfkLL2HpuHSxrvG6OfKT8wJFAcpY2gbYoBWb
- etaFl9RykOeG5omueCBbTPSdO+FuXKP7W73Ypvrf2DRhsOOHXW4BEICRHgHczFbMwj5N
- Ppa3U9c9P7rRP3iR/r2smzfphP5f6DAbXOoE8qZXQEaWJdlKES0UOWM0juXmNxTaeRvF
- FuEw==
+ bh=h2RpPuGEzbLXO/q/GxO4Zqvt8tldWX4SahttPk2YlGY=;
+ b=mjbEP/5Czqm6w4+cQ6oHNMlamPBGwc8U4uouXYdLe6dSOm23tIGxQYzOoRsiJ70AX0
+ Xbh4w4FlH7D51lYX+OQOmeyu17I9+MKD3QRf4HjU+N1G+m2UUwtmp53GuhcxRgZV8+Kx
+ 04NWfIcl3j2i+5vKZQLWJYIQR/bq3SUSxB6jdnaGHatlmUNPNzgvjF97R9YANMzeI8fl
+ 0umQxyYQZBTYBkpXb5ug4lOvJGrjC9FAaemPmwYXcrjLatGikojICGnUtQRwsI6NvAZr
+ R4NUiKqrLfs/oA3GyDFvcl0p0TV8hKlOi19yvoklcSvKP6HQQxG4I01vEm4lVEZ5KyhH
+ dXzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704979861; x=1705584661;
+ d=1e100.net; s=20230601; t=1704981673; x=1705586473;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ApFCZe++K6mdEosZ5Zb18U8fI6FgBHYQCdfmSUN0e0A=;
- b=onjMVquFfi6dKts/6qz0bgeQ/BNRi+s5ovMI4ePkz1e75a4t/LxgeQsoneEZfhrqdh
- 0Sca/XNsYYD6fP5a1hgVLAPYdqB/xxx/o4hXcvI+pTQx4Ju0JCy8dJB8z7/zWuZjjAWT
- z1V2nWp7MaO1yaXbmpLSBOJEmj5aBZWydhFQNgBqMRCmrx/qb/lmFIJG9tXcF4IPHccR
- g2icMWx2b2VsU1oSbYfiy/8s62JBxdwaIF9KVqcTp5tPTy2nZu6aDUG5798kV049Rowy
- iCm4gt3yZXEB7nphoOtx61xdmUXNuAtuCvN/aEF0iV6fgA7kHHImqaI7NLecb517IsH2
- U3SA==
-X-Gm-Message-State: AOJu0Yx9B4FXBdUKTD2IFtOhbwn+ZsAC12vbBYjjhhwymmdNkA9Fokzw
- 97vI8gJCzb0lnLtu18dnwDDHQ2O5erei/A==
-X-Google-Smtp-Source: AGHT+IGYBUsAOKsLaP5iAzdHj6bGoHc74gul6QIY/5Uc9BDjtowkPwGrU9YvGcitLnOVH9KFRdeKqw==
-X-Received: by 2002:a17:907:8022:b0:a2c:7293:d724 with SMTP id
- ft34-20020a170907802200b00a2c7293d724mr275807ejc.44.1704979860745; 
- Thu, 11 Jan 2024 05:31:00 -0800 (PST)
+ bh=h2RpPuGEzbLXO/q/GxO4Zqvt8tldWX4SahttPk2YlGY=;
+ b=vuvlcjJLujICP8JUmt9NvMNu7JoIXBglE/H3d2WIhWlCLGX9Xlyst1FL2n3SdDYHe4
+ n+yqKRLQrAEEQbPWNki2IPhezruy0XyzXO9iO51heNvw5SAQptqwNABjV+Exs1e0tuVM
+ BnKtDgVr2VvLqzecDSL5QNIPblPkixUEligVRoIHBnhgFHeX31CK+E8kNyIQ1S5n0MDq
+ bXNsBgizCdytHUAh4Z+aozVUc49BV2HvTezvlmvlNG7yH4Px7/Dl2NqP+4bucCR8SRmh
+ n+evYO7fefTvxgcP+653jxkqjbpmvTY1Ba7ORrKZImQhC4BJSgHJHBw9CrpT6D70JJ7Y
+ kQpA==
+X-Gm-Message-State: AOJu0YzSnTmJh8XGwjzoh0PDEfZHww0EmLDOP8cRkYnoHS+Lp2T7UA9I
+ Y0MFdQ8QwGSu4B20Xp4fKBHlQEZFi31WWA==
+X-Google-Smtp-Source: AGHT+IGcWANbw87s/pDAASQo0NAdJFu8b2B5QcVIq5BEGgMbk6bZ7fUKghDc+/ZCqix/Dq8gHhpb/g==
+X-Received: by 2002:a17:907:9488:b0:a28:f6a2:ca7c with SMTP id
+ dm8-20020a170907948800b00a28f6a2ca7cmr1065105ejc.17.1704981673304; 
+ Thu, 11 Jan 2024 06:01:13 -0800 (PST)
 Received: from [192.168.69.100] (vau06-h02-176-184-43-236.dsl.sta.abo.bbox.fr.
  [176.184.43.236]) by smtp.gmail.com with ESMTPSA id
- l10-20020a1709061c4a00b00a2b9bbd6d73sm572899ejg.214.2024.01.11.05.30.56
+ x17-20020a170906711100b00a2c5ec21e0esm575137ejj.85.2024.01.11.06.01.09
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 11 Jan 2024 05:31:00 -0800 (PST)
-Message-ID: <f8cd806a-4e87-4e19-b898-acd675f9daa6@linaro.org>
-Date: Thu, 11 Jan 2024 14:30:55 +0100
+ Thu, 11 Jan 2024 06:01:12 -0800 (PST)
+Message-ID: <00b95fa5-b289-4476-b1eb-e97bc6f9986b@linaro.org>
+Date: Thu, 11 Jan 2024 15:01:07 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 02/43] tests/avocado: use snapshot=on in kvm_xen_guest
+Subject: Re: [PATCH v2 42/43] docs/devel: lift example and plugin API sections
+ up
 Content-Language: en-US
 To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-devel@nongnu.org
@@ -91,20 +92,20 @@ Cc: qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-riscv@nongnu.org,
  Alistair Francis <alistair.francis@wdc.com>
 References: <20240103173349.398526-1-alex.bennee@linaro.org>
- <20240103173349.398526-3-alex.bennee@linaro.org>
+ <20240103173349.398526-43-alex.bennee@linaro.org>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20240103173349.398526-3-alex.bennee@linaro.org>
+In-Reply-To: <20240103173349.398526-43-alex.bennee@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x62a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::635;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x635.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -121,13 +122,13 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 3/1/24 18:33, Alex Bennée wrote:
-> This ensures the rootfs is never permanently changed as we don't need
-> persistence between tests anyway.
+> This makes them a bit more visible in the TCG emulation menu rather
+> than hiding them away bellow the ToC limit.
 > 
 > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 > ---
->   tests/avocado/kvm_xen_guest.py | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   docs/devel/tcg-plugins.rst | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
 
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
