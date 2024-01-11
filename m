@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46C74C47422
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Jan 2024 14:54:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E117C47077
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Jan 2024 15:17:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rNwRb-00055D-HM; Thu, 11 Jan 2024 09:54:07 -0500
+	id 1rNwoG-0003jc-I7; Thu, 11 Jan 2024 10:17:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rNwRa-00054u-58
- for qemu-riscv@nongnu.org; Thu, 11 Jan 2024 09:54:06 -0500
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
+ (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
+ id 1rNwoE-0003ih-M2
+ for qemu-riscv@nongnu.org; Thu, 11 Jan 2024 10:17:30 -0500
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rNwRY-00026x-GV
- for qemu-riscv@nongnu.org; Thu, 11 Jan 2024 09:54:05 -0500
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-1d3eae5c1d7so29432125ad.2
- for <qemu-riscv@nongnu.org>; Thu, 11 Jan 2024 06:54:04 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
+ id 1rNwoC-0003XA-Qk
+ for qemu-riscv@nongnu.org; Thu, 11 Jan 2024 10:17:30 -0500
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-337874b8164so560701f8f.2
+ for <qemu-riscv@nongnu.org>; Thu, 11 Jan 2024 07:17:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1704984843; x=1705589643; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=uH2Jp9YOpfFP7sHNePpZpIbL/BrZQiETtghIf2tm2Xo=;
- b=eYxuRAbYEppcS7fCRhIZ8/SBwLSpaWb8/AZ/3JEOg5ggyWzxkvsbFQmQsyKDj3Yxj8
- /JWNLwSkwojjygOZOPLdUarI2rVfi1dYxgDKmYMIwXTmh+m9HbPhqB67oOc7F0Y0Rjpu
- fefLgDnm5akSymh+cDxZR8/HKDKNWQVgxCbGic617JgkigW0KeAlzL3rYwHdzoY6TZmh
- xzFanRcZ8LQhPcQpTng5KAPhZVXttVj3bGieuretDO3BLTWqTCsollJjb7wRHwBqewiY
- CpfAzuFmqld/1wqI8B0bxRtCf5/g2IO73i/2ycDH8Mw9GOuKldMfGp+03xFWylHKi8Dy
- k9tg==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1704986246; x=1705591046;
+ darn=nongnu.org; 
+ h=mime-version:user-agent:content-transfer-encoding:references
+ :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=8QYhKldxNt1TMQmAu9UVIDbUbhZ82SeG1htSGPK80fY=;
+ b=jSpMa4Dk4F1yIxcHPbyG3mnEqBCs9T72ZNqIkf0fsPekNxuZW9Oi6J264weqUPf3/+
+ o3IIZZ5/NSiFCh1oNuOjuYTKbJAYYdRyLgtFlbC1WP4uIDzi2lwCofrlnC97lBkJXjk4
+ Kpd69Z4/sR1UEX7cYW8fZOh4yOM3dQv5P2Zc5GYtNEyc00zXaSUGI3oYAbVGymAgkNq4
+ 7oIqiMrF/IJmgdTMQwYJ464J8LC2wi16swrq27XH+cwgaMb/p4cP5yLSVTMUdN2inN1+
+ BCJFXnFwYIBUXrVN4g1Ly0jwvTeDdSjhz4vXZxVX9H7XNr30mcxQSR2e0W/9QLeJK2yZ
+ v9iQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704984843; x=1705589643;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=uH2Jp9YOpfFP7sHNePpZpIbL/BrZQiETtghIf2tm2Xo=;
- b=S2nINRiWayx/A9NeXXlYPd6g2WSLWn3jmSH1l8BPdBbwfQ/dCiDdXf8W8w9rymZxFO
- THXsky8rJoBiKCYMpH9crirTF3D7+gUeKVjrv61+LGGZgO+BKyMGgsWEP1SOYf1L38XV
- nUVJAUCvPNC020PYG2aVmBhgQ/05JSzZu6Qe/iCuFPerRmA4ayLF5zzKRXnkpVy9WkMw
- jb+keqAl8FEmqb6MFCQhSF3weNFXE6B3KjyNoisydZJL9It9mn4p4rTJP/j1a064lKj5
- GFFO1pom7Xa2iRkeA9SlnSuXbayShCXn3tOyqq21RJcMEdtx+AJ5p8tSbKGLhK/Jkpa5
- I+Sw==
-X-Gm-Message-State: AOJu0YzQLG6AFijYzhJvu5Q6ksMD6rELiTfsUecYSrtlUeJRYu9Z9uXf
- E9g2quL6mBm0giVuX/DGvdfXFo04BGu3PA==
-X-Google-Smtp-Source: AGHT+IFp4QO9L9e99lNSWiPzT2XkQE9jYA6jmu7ywes9OSWFCOMLnr5wnbVRLwRCNqAu14IFaWNWGw==
-X-Received: by 2002:a17:902:bb10:b0:1d4:39cb:f916 with SMTP id
- im16-20020a170902bb1000b001d439cbf916mr1153912plb.70.1704984843019; 
- Thu, 11 Jan 2024 06:54:03 -0800 (PST)
-Received: from [192.168.68.110] ([152.234.123.64])
+ d=1e100.net; s=20230601; t=1704986246; x=1705591046;
+ h=mime-version:user-agent:content-transfer-encoding:references
+ :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=8QYhKldxNt1TMQmAu9UVIDbUbhZ82SeG1htSGPK80fY=;
+ b=Y23zP20BMNmObgx80RnZk5BxDxDq/neC+zz8nfFxZ2LWEXTQukSzp0fg1x5IFfWV+k
+ pcKTJFu93F1k68L/9q2sSytTkRp84MrVuF7s0+2ma3MDvdnJXsmWBjaIQj5cqb2Q8LBJ
+ PiQT789+6Q1wv9yqdB10JCI0DimYkaNdky3FIZX1Gs7z8gFc7hH3Ce49s63YmkxiwTYV
+ y2KSWL4Tn7h8MIj81cqbpFNnztBx+SlH4H1/2fAY+oDb8XQFJ9vJr0V05CbXTMH9gKJ3
+ H86ybM6XlFVB+NveQDpK52FatSVBq2Va7wEx6HVU7FoyH6+eTNwlgBtUgwIAwfoG457f
+ 3TGg==
+X-Gm-Message-State: AOJu0YzcONGiV8vEBEp2Vo5ZpY3ezJQm39p8i7dTFsRcgEVWfMn6MFJY
+ hzJNxgSUU6v7PNsQLdYVJjfXtjL4cR8CGA==
+X-Google-Smtp-Source: AGHT+IEjFBwMiIciK6FHvVN7rBxQJS6Ez0FpLs2duRGDTsn2QDdq9qJe5PumdCinbi57B9IsWv+djA==
+X-Received: by 2002:adf:ef12:0:b0:336:ec3f:fcf5 with SMTP id
+ e18-20020adfef12000000b00336ec3ffcf5mr762005wro.49.1704986246418; 
+ Thu, 11 Jan 2024 07:17:26 -0800 (PST)
+Received: from [192.168.1.9] (214.11.169.217.in-addr.arpa. [217.169.11.214])
  by smtp.gmail.com with ESMTPSA id
- z17-20020a170903409100b001d4898862cesm1251150plc.211.2024.01.11.06.54.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 11 Jan 2024 06:54:02 -0800 (PST)
-Message-ID: <ee62a091-5f44-4a25-a724-06393af41807@ventanamicro.com>
-Date: Thu, 11 Jan 2024 11:53:58 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] target/riscv: Enable 'B' extension on max CPU type
+ n3-20020a5d6603000000b00333404e9935sm1427192wru.54.2024.01.11.07.17.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 11 Jan 2024 07:17:26 -0800 (PST)
+Message-ID: <3dbd3fa1cbad80948175f98dcc0c76b886e2376e.camel@rivosinc.com>
+Subject: Re: Re: [PATCH 1/3] target/riscv: Add infrastructure for 'B' MISA
+ extension
+From: Rob Bradford <rbradford@rivosinc.com>
 To: Andrew Jones <ajones@ventanamicro.com>
-Cc: Rob Bradford <rbradford@rivosinc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, atishp@rivosinc.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, atishp@rivosinc.com, 
+ palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
+ liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com,  ved@rivosinc.com
+Date: Thu, 11 Jan 2024 15:17:25 +0000
+In-Reply-To: <20240111-df7a6acf3109b630469591a1@orel>
 References: <20240109171848.32237-1-rbradford@rivosinc.com>
- <20240109171848.32237-4-rbradford@rivosinc.com>
- <de442ad9-0479-4a7e-bccf-97fcd081a35e@ventanamicro.com>
- <20240111-558c99b8f3be4297e9ae4118@orel>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240111-558c99b8f3be4297e9ae4118@orel>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ <20240109171848.32237-2-rbradford@rivosinc.com>
+ <20240111-585fe1291fcaa1e0432674e3@orel>
+ <20240111-df7a6acf3109b630469591a1@orel>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.48.4 (3.48.4-1.module_f38+17164+63eeee4a) 
+MIME-Version: 1.0
+Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
+ envelope-from=rbradford@rivosinc.com; helo=mail-wr1-x42a.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,59 +101,70 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
++ Ved
 
+On Thu, 2024-01-11 at 14:14 +0100, Andrew Jones wrote:
+> On Thu, Jan 11, 2024 at 02:07:34PM +0100, Andrew Jones wrote:
+> > On Tue, Jan 09, 2024 at 05:07:35PM +0000, Rob Bradford wrote:
+> > > Add the infrastructure for the 'B' extension which is the union
+> > > of the
+> > > Zba, Zbb and Zbs instructions.
+> > >=20
+> > > Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
+> > > ---
+> > > =C2=A0target/riscv/cpu.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 | 5 +++--
+> > > =C2=A0target/riscv/cpu.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 | 1 +
+> > > =C2=A0target/riscv/tcg/tcg-cpu.c | 1 +
+> > > =C2=A03 files changed, 5 insertions(+), 2 deletions(-)
+> > >=20
+> > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > > index b07a76ef6b..22f8e527ff 100644
+> > > --- a/target/riscv/cpu.c
+> > > +++ b/target/riscv/cpu.c
+> > > @@ -38,9 +38,9 @@
+> > > =C2=A0#include "tcg/tcg.h"
+> > > =C2=A0
+> > > =C2=A0/* RISC-V CPU definitions */
+> > > -static const char riscv_single_letter_exts[] =3D "IEMAFDQCPVH";
+> > > +static const char riscv_single_letter_exts[] =3D "IEMAFDQCBPVH";
+> >=20
+> > Is there a corresponding proposed change to table 29.1 of the
+> > nonpriv spec
+> > which states B comes after C and before P? If so, can you provide a
+> > link
+> > to it? Otherwise, how do we know that?
+>=20
+> Oh, I see. The unpriv spec B chapter comes after the C chapter (and
+> before
+> J, P, ...). I still wonder if we'll have a 29.1 table update with the
+> ratification of this extension though.
+>=20
+>=20
 
-On 1/11/24 10:02, Andrew Jones wrote:
-> On Wed, Jan 10, 2024 at 03:32:21PM -0300, Daniel Henrique Barboza wrote:
->>
->>
->> On 1/9/24 14:07, Rob Bradford wrote:
->>> Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
->>> ---
->>>    target/riscv/tcg/tcg-cpu.c | 3 ++-
->>>    1 file changed, 2 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
->>> index f10871d352..9705daec93 100644
->>> --- a/target/riscv/tcg/tcg-cpu.c
->>> +++ b/target/riscv/tcg/tcg-cpu.c
->>> @@ -999,7 +999,8 @@ static void riscv_init_max_cpu_extensions(Object *obj)
->>>        const RISCVCPUMultiExtConfig *prop;
->>>        /* Enable RVG, RVJ and RVV that are disabled by default */
->>> -    riscv_cpu_set_misa(env, env->misa_mxl, env->misa_ext | RVG | RVJ | RVV);
->>> +    riscv_cpu_set_misa(env, env->misa_mxl,
->>> +                       env->misa_ext | RVG | RVJ | RVV | RVB);
->>
->> I'm aware that we decided a while ago the 'max' CPU could only have non-vendor and
->> non-experimental extensions enabled. RVB is experimental, so in theory we shouldn't
->> enable it.
->>
->> But RVB is an alias for zba, zbb and zbs, extensions that the 'max' CPU is already
->> enabling. In this case I think it's sensible to enable RVB here since it would just													
->> reflect stuff that it's already happening.
-> 
-> It's also setting the B bit in misa, which, until this spec is at least
-> frozen, is a reserved bit and reserved bits "must return zero when read".
+I agree it's a bit confusing - but the order is established by the
+table in the unprivileged spec and the table explanation also makes
+this clear.
 
-This is a side effect that I wasn't aware of.
+"""
+Table 27.1: Standard ISA extension names. The table also defines the
+canonical order in which
+extension names must appear in the name string, with top-to-bottom in
+table indicating first-to-last
+in the name string, e.g., RV32IMACV is legal, whereas RV32IMAVC is not.
+"""
 
-Rob, given that the 'max' CPU already has the zb* extensions enabled, is there any
-other gain in enabling RVB in this CPU? If there isn't I'd rather leave this one
-out for now.
+The proposed B specification does not make any remarks about the
+ordering in the ISA definition string. [1] I would worry there would be
+a lot of software churn if this ordering were to be changed.
 
+Cheers,
 
-Thanks,
+Rob
 
-Daniel
-
-
-> 
-> I don't want to stand in the way of progress and it seems 99.9% likely
-> that the spec will be frozen and ratified, but, if we want to stick to
-> our policies (which we should document), then even the 'max' cpu type
-> should require x-b be added to the command line if it wants the B bit
-> set in misa.
-> 
 > Thanks,
 > drew
+
+[1] - https://github.com/riscv/riscv-b
 
