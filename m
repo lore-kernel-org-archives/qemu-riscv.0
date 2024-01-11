@@ -4,84 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C1D5C47258
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Jan 2024 16:17:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC2FCC47077
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Jan 2024 18:01:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rNxjm-00070q-Ji; Thu, 11 Jan 2024 11:16:58 -0500
+	id 1rNzMY-0005qN-HI; Thu, 11 Jan 2024 13:01:06 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
- id 1rNxjh-0006rV-2M
- for qemu-riscv@nongnu.org; Thu, 11 Jan 2024 11:16:53 -0500
-Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
- id 1rNxjd-0005V3-Vo
- for qemu-riscv@nongnu.org; Thu, 11 Jan 2024 11:16:52 -0500
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-3373a30af67so4894572f8f.0
- for <qemu-riscv@nongnu.org>; Thu, 11 Jan 2024 08:16:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1704989808; x=1705594608;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cN/RXcq/RZ7ChyrSSuRPL4giRO8aqwkOGTqjxzEKvew=;
- b=IDmZX3lAkbELLMM2N7tjl5dspsafZEAImKkgjY5+xxYqVlCSLe1MJt7MvrBfq1lQpb
- UoUw9dLhgCFrfA0W/15gRh/SpelwZyYVeqSvz/+rid3twxb4QDHNMBCDGXBLM4xIbQHO
- RyNn+Zrj7g5Eb3Mguo3YWJhXH4SMdzX0qTWWOlw5T6nt8RLolunXwbT/9C5fNHwpRIBm
- 9i8iwRUOUG1tGSP1bOXfd0R37QLXiMr+9ruyfsrINbfWeytLR4mk2c9+sc4Qd1y+R6Fn
- ljWapPFBOL+rhsvX2U7wCP1ezSnrDj3aodOugpMZVYM77VU/UsGjf5wy5IUF/TiQlNbP
- 5GdQ==
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rNzMQ-0005oY-Ix
+ for qemu-riscv@nongnu.org; Thu, 11 Jan 2024 13:00:59 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rNzMN-0005gJ-9g
+ for qemu-riscv@nongnu.org; Thu, 11 Jan 2024 13:00:58 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1704996053;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=kh8stwKBgYn/rinhc5TuWZQrnBCBdvT1n8mHW2rR+6E=;
+ b=KMmpyVgxtOH44/zT/XrmZDaXXxX6XARtCnJzCyQcDxk6IOZd3Qu0nvci0H4UKK2V2WapEH
+ P2f5NuHqqWvmjqR5fYrNUF3YQ6KVnAw1/rjwqN791Fru34pddXJl1P/mBjER5+wVsN0Yyc
+ HwKoAeHETkFFmBAJHH0wErSdJQVdXQI=
+Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com
+ [209.85.215.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-643-qv1g_JSQMNqv23t_pz4w_w-1; Thu, 11 Jan 2024 13:00:46 -0500
+X-MC-Unique: qv1g_JSQMNqv23t_pz4w_w-1
+Received: by mail-pg1-f199.google.com with SMTP id
+ 41be03b00d2f7-5ce8a3381a1so4450767a12.3
+ for <qemu-riscv@nongnu.org>; Thu, 11 Jan 2024 10:00:45 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704989808; x=1705594608;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cN/RXcq/RZ7ChyrSSuRPL4giRO8aqwkOGTqjxzEKvew=;
- b=NzZZtB1sDPXeiAMK1sIU879IHSIw8baucsEXb+upa8IT8XhmXH6JUeTLIj/0P0EFMn
- F7S31c3ByrgOC9QrhFD0Nd6LDaHJGe/ZkIUXM2WL9S7nLtDfJV1D+C3CW4Mt6rneCxtl
- wtR5ejpsw0RvaxUKMuBJTTDFWEyAI0jZKG/B2n3lQLr/k/DidrjEIRNqmdHbjjm5WWKB
- lN40CbICKpKhv+q1o95Q1MoC/y0xJSIhDtp9b+Z+Fy/lAVB2Cw/FBhtCStWes6Yrc04o
- TkhTvmJ6xNBlgQI4fwIwhMj0xg5oZi9yjSvm5G1XaD/VMDdm5Gr8HsXsSafKNY2Zqszi
- 8bRQ==
-X-Gm-Message-State: AOJu0YxY3RipVGT6rgv0xT0okbQDsPopuIjKRfV10z6E8CTfex+Wy7fF
- WMn+KUavkHcQi9Cd4djtaxLca/lhAsrglg==
-X-Google-Smtp-Source: AGHT+IGiujPwnHTu5hjTey5BLHdal2IVWNkU8+LavjLatDpRddmOfAvbC0KhQKzxRTn4P0LSj8Fi3A==
-X-Received: by 2002:a5d:6684:0:b0:333:2fd2:3bcf with SMTP id
- l4-20020a5d6684000000b003332fd23bcfmr452219wru.136.1704989808023; 
- Thu, 11 Jan 2024 08:16:48 -0800 (PST)
-Received: from rockhopper.ba.rivosinc.com (214.11.169.217.in-addr.arpa.
- [217.169.11.214]) by smtp.gmail.com with ESMTPSA id
- f18-20020adffcd2000000b0033642a9a1eesm1553183wrs.21.2024.01.11.08.16.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jan 2024 08:16:47 -0800 (PST)
-From: Rob Bradford <rbradford@rivosinc.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, atishp@rivosinc.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- Rob Bradford <rbradford@rivosinc.com>,
- Andrew Jones <ajones@ventanamicro.com>
-Subject: [PATCH v2 1/2] target/riscv: Add infrastructure for 'B' MISA extension
-Date: Thu, 11 Jan 2024 16:16:43 +0000
-Message-ID: <20240111161644.33630-2-rbradford@rivosinc.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240111161644.33630-1-rbradford@rivosinc.com>
-References: <20240111161644.33630-1-rbradford@rivosinc.com>
+ d=1e100.net; s=20230601; t=1704996041; x=1705600841;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+ :to:content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=kh8stwKBgYn/rinhc5TuWZQrnBCBdvT1n8mHW2rR+6E=;
+ b=hLauqiTDA50Yki6mhqnRQGH6Z6fiUJApCiP19llhv77TLv0r7qUuvl7oBCyNFlAu08
+ SNVsHY7W1MrFHVLX6ypHE5JIFNEJkJ7zOFe8/1NdJdSX/KY0dwPMTv3rj0/FISQLke7B
+ lMWGPTFikjpic/4rBSSXmHF7yJ4aaGsHK6RBNLcdckwgMkrFLHAdAcvJwXCkjHFjimqR
+ cnG3agc+WFT/9GPLWw17tCp0uBjkmtKDPJR6zONCqS9w7JNi0+udmz27xGuT1Uc7Fgns
+ seVgVixARdTy+FXFxvE26hD1ZcSirhlf+wm0RwS39paZKrglREaII9xArr3ihRf9IIzb
+ k7qQ==
+X-Gm-Message-State: AOJu0YzY+Gurxz48NXjcJuaAZLEWQtX29S4KbT6fIS4o/72QLLxHZAQe
+ UJFBAfCGqiUKJC4P7+86AiZHBFzwPbT/X/mSyXDqyeJY1gmJQmEDjDwBprKdlpJkbwEB5j1ghhw
+ YEkStKHidkj7YUXI3VCBJ368=
+X-Received: by 2002:a05:6a20:a107:b0:19a:3785:474c with SMTP id
+ q7-20020a056a20a10700b0019a3785474cmr269076pzk.47.1704996041588; 
+ Thu, 11 Jan 2024 10:00:41 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHOHi0gIcdPFAANnMQ3UbL/TlFWu3uXL0qEoH0YcSWbg4UzL8gnMHTf0iSR1M2wxh/+Bq+SPw==
+X-Received: by 2002:a05:6a20:a107:b0:19a:3785:474c with SMTP id
+ q7-20020a056a20a10700b0019a3785474cmr269038pzk.47.1704996041235; 
+ Thu, 11 Jan 2024 10:00:41 -0800 (PST)
+Received: from [192.168.0.9] (ip-109-43-176-232.web.vodafone.de.
+ [109.43.176.232]) by smtp.gmail.com with ESMTPSA id
+ du9-20020a056a002b4900b006da2b1e4fabsm1466871pfb.163.2024.01.11.10.00.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 11 Jan 2024 10:00:40 -0800 (PST)
+Message-ID: <d8c66952-8e65-4fd8-8701-7b599e261b4b@redhat.com>
+Date: Thu, 11 Jan 2024 19:00:24 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/5] hw/s390x: Rename cpu_class_init() to include 'sclp'
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: Richard Henderson <richard.henderson@linaro.org>,
+ Weiwei Li <liwei1518@gmail.com>, Alistair Francis
+ <alistair.francis@wdc.com>, qemu-s390x@nongnu.org,
+ Michael Tokarev <mjt@tls.msk.ru>, David Hildenbrand <david@redhat.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>, qemu-riscv@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
+ qemu-trivial@nongnu.org, Halil Pasic <pasic@linux.ibm.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ Eduardo Habkost <eduardo@habkost.net>, Laurent Vivier <laurent@vivier.eu>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Eric Farman
+ <farman@linux.ibm.com>, Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+References: <20240111120221.35072-1-philmd@linaro.org>
+ <20240111120221.35072-4-philmd@linaro.org>
+From: Thomas Huth <thuth@redhat.com>
+Autocrypt: addr=thuth@redhat.com; keydata=
+ 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
+In-Reply-To: <20240111120221.35072-4-philmd@linaro.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
- envelope-from=rbradford@rivosinc.com; helo=mail-wr1-x42b.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -11
+X-Spam_score: -1.2
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-2.467,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_SBL_CSS=3.335, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,67 +157,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add the infrastructure for the 'B' extension which is the union of the
-Zba, Zbb and Zbs instructions.
+On 11/01/2024 13.02, Philippe Mathieu-Daudé wrote:
+> cpu_class_init() is specific to s390x SCLP, so rename
+> it as sclp_cpu_class_init() (as other names in this file)
+> to ease navigating the code.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> ---
+>   hw/s390x/sclpcpu.c | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/hw/s390x/sclpcpu.c b/hw/s390x/sclpcpu.c
+> index f2b1a4b037..fa79891f5a 100644
+> --- a/hw/s390x/sclpcpu.c
+> +++ b/hw/s390x/sclpcpu.c
+> @@ -73,7 +73,7 @@ static int read_event_data(SCLPEvent *event, EventBufferHeader *evt_buf_hdr,
+>       return 1;
+>   }
+>   
+> -static void cpu_class_init(ObjectClass *oc, void *data)
+> +static void sclp_cpu_class_init(ObjectClass *oc, void *data)
+>   {
+>       SCLPEventClass *k = SCLP_EVENT_CLASS(oc);
+>       DeviceClass *dc = DEVICE_CLASS(oc);
+> @@ -94,7 +94,7 @@ static const TypeInfo sclp_cpu_info = {
+>       .name          = TYPE_SCLP_CPU_HOTPLUG,
+>       .parent        = TYPE_SCLP_EVENT,
+>       .instance_size = sizeof(SCLPEvent),
+> -    .class_init    = cpu_class_init,
+> +    .class_init    = sclp_cpu_class_init,
+>       .class_size    = sizeof(SCLPEventClass),
+>   };
+>   
 
-Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
----
- target/riscv/cpu.c         | 5 +++--
- target/riscv/cpu.h         | 1 +
- target/riscv/tcg/tcg-cpu.c | 1 +
- 3 files changed, 5 insertions(+), 2 deletions(-)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 8cbfc7e781..fc01c10e24 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -38,9 +38,9 @@
- #include "tcg/tcg.h"
- 
- /* RISC-V CPU definitions */
--static const char riscv_single_letter_exts[] = "IEMAFDQCPVH";
-+static const char riscv_single_letter_exts[] = "IEMAFDQCBPVH";
- const uint32_t misa_bits[] = {RVI, RVE, RVM, RVA, RVF, RVD, RVV,
--                              RVC, RVS, RVU, RVH, RVJ, RVG, 0};
-+                              RVC, RVS, RVU, RVH, RVJ, RVG, RVB, 0};
- 
- /*
-  * From vector_helper.c
-@@ -1299,6 +1299,7 @@ static const MISAExtInfo misa_ext_info_arr[] = {
-     MISA_EXT_INFO(RVJ, "x-j", "Dynamic translated languages"),
-     MISA_EXT_INFO(RVV, "v", "Vector operations"),
-     MISA_EXT_INFO(RVG, "g", "General purpose (IMAFD_Zicsr_Zifencei)"),
-+    MISA_EXT_INFO(RVB, "x-b", "Bit manipulation (Zba_Zbb_Zbs)")
- };
- 
- static int riscv_validate_misa_info_idx(uint32_t bit)
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 5f3955c38d..3843d44fc9 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -69,6 +69,7 @@ typedef struct CPUArchState CPURISCVState;
- #define RVH RV('H')
- #define RVJ RV('J')
- #define RVG RV('G')
-+#define RVB RV('B')
- 
- extern const uint32_t misa_bits[];
- const char *riscv_get_misa_ext_name(uint32_t bit);
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 14133ff665..5396c6c3eb 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -1056,6 +1056,7 @@ static const RISCVCPUMisaExtConfig misa_ext_cfgs[] = {
-     MISA_CFG(RVJ, false),
-     MISA_CFG(RVV, false),
-     MISA_CFG(RVG, false),
-+    MISA_CFG(RVB, false),
- };
- 
- /*
--- 
-2.43.0
+Reviewed-by: Thomas Huth <thuth@redhat.com>
 
 
