@@ -4,102 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09E52C4707B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Jan 2024 12:37:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F36B9C47077
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Jan 2024 13:01:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rNuJT-0000U0-9C; Thu, 11 Jan 2024 07:37:35 -0500
+	id 1rNugA-0003VI-L7; Thu, 11 Jan 2024 08:01:02 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rNuJS-0000T8-BF
- for qemu-riscv@nongnu.org; Thu, 11 Jan 2024 07:37:34 -0500
-Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rNufy-0003GE-QZ
+ for qemu-riscv@nongnu.org; Thu, 11 Jan 2024 08:00:53 -0500
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rNuJP-0007oh-AQ
- for qemu-riscv@nongnu.org; Thu, 11 Jan 2024 07:37:34 -0500
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-336c8ab0b20so4620897f8f.1
- for <qemu-riscv@nongnu.org>; Thu, 11 Jan 2024 04:37:30 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rNufv-0002ue-MY
+ for qemu-riscv@nongnu.org; Thu, 11 Jan 2024 08:00:50 -0500
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-1d50d0c98c3so36895725ad.1
+ for <qemu-riscv@nongnu.org>; Thu, 11 Jan 2024 05:00:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704976649; x=1705581449; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XjWVrWLBuhexZhNzqcbaaji/ra/r9VF4ONEQ8D3AprU=;
- b=yZPFGqiG0LI22OIAHxdFL4L3OmR4S2CrjvWBlKI+K/0v9jcsu3pm98uAQeacvUg2iO
- DH7debgPOPf0me68Mg8XrFdGbKQ7/nsMX1i2/Yz7by11zeO5Mb+H1tvkrVQnYY8uEJMq
- j7ST5pybWNG4ePsbLSBLXaEwVsrEDNe+Ysk31LNP72njLlHxDGSZCF80rzo74lSjd+4p
- kDnRjNNGDuGea4TgGPBj+KiNuWAmxic3QFG1LhK/ZbasZGpb8wH94i5isI15f+uLoVCK
- +9jVKJgkCzBNjukZSwL04lr3yBEQlZttXgM7A32shgJn04hWQFUrNzwz27/5I8EY7yoF
- sF8Q==
+ d=ventanamicro.com; s=google; t=1704978043; x=1705582843; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=rFg1dNzVPnTCsOdeKSTg9W97fq3ju3xEU4cGnUvmmQY=;
+ b=pX1jYTeIIa99KP9XtBtGyCp+iqD0j12ZESCQ5cVtvv3yvVFe5Oa6QJJxRuiGSWXq46
+ Ppj75JNvARsp5d9PcrpLb5C9+E5dgW322B1uw7Q1mEAA4SDzaBLR/NtHFdxlc/Xn46V7
+ q92Ecii0qO02eJdis6VpWlffGdf4EmGw94pAjKIZhEwtMIcwzj5tbz0xuQOtf5AhVGZC
+ XWURLDaNlyR0s7c1mCT/dmBNLjWLhAQpz5jiUejtQA/AGy67i8imDc/wk2+ltXQVSyvq
+ DKSFCD0Eb+iu/+3cERERSxEHtNyS4SDErWzQtZmYaZxq5cYlIc1LdbmptlxDYS+yXNjD
+ aX1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704976649; x=1705581449;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=XjWVrWLBuhexZhNzqcbaaji/ra/r9VF4ONEQ8D3AprU=;
- b=WCN5+hKmSdpCEVjukeyS/15SMIkVvyPVgLHgaxElQQPF8JI2mxBIeJGV5+juJgNfS8
- 38qfJzWeFb4YcWyrBZcgS4TfPRDUKAZYEhI1dCSIGNAtchU0fqMe9iAugSV2ECx/LScS
- c8juROloIyFN0WqDmfY9TY5vaUrH41m716a/T2TqCMDvnngY3urf5Sb70e6uyG5VmeBg
- Xht8piHdFkHu7audeUXJSw6Aaa5CFkf4D5g5mHQZ3dkRhijsZNwIYw5HeQ27nWSA6YRi
- tMwCjQmikrfLyHnpMBukIPFyfc0GzJLNC6o9/2kWttdbV2jRUGZZGG0Q4QqUKYuSokD9
- QdZQ==
-X-Gm-Message-State: AOJu0YzSL4qXiyhZeoFbWYCku2b6obcl9uLW44xtHWqxoLh9sLykeUeG
- Zje5iVC3zXMOMXopz9U99i1Eq1bkOqIc0g==
-X-Google-Smtp-Source: AGHT+IFZRj0uozQ33Kz3/zEEIWAh2I8FM6ycWyYCYl25J9YmcIK8POHwIM0XSklNJwKChNuv51rsAg==
-X-Received: by 2002:a5d:4d84:0:b0:336:6dad:2c71 with SMTP id
- b4-20020a5d4d84000000b003366dad2c71mr672153wru.111.1704976649448; 
- Thu, 11 Jan 2024 04:37:29 -0800 (PST)
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- l4-20020adffe84000000b003375cf3b17dsm1130163wrr.42.2024.01.11.04.37.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jan 2024 04:37:29 -0800 (PST)
-Received: from draig (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 93E4C5F7AD;
- Thu, 11 Jan 2024 12:37:28 +0000 (GMT)
-From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: qemu-s390x@nongnu.org,  qemu-ppc@nongnu.org,  Richard Henderson
- <richard.henderson@linaro.org>,  Song Gao <gaosong@loongson.cn>,
- =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>,  David
- Hildenbrand
- <david@redhat.com>,  Aurelien Jarno <aurelien@aurel32.net>,  Yoshinori
- Sato <ysato@users.sourceforge.jp>,  Yanan Wang <wangyanan55@huawei.com>,
- Bin Meng <bin.meng@windriver.com>,  Laurent Vivier <lvivier@redhat.com>,
- Michael Rolnik <mrolnik@gmail.com>,  Alexandre Iooss <erdnaxe@crans.org>,
- David Woodhouse <dwmw2@infradead.org>,  Laurent Vivier
- <laurent@vivier.eu>,  Paolo Bonzini <pbonzini@redhat.com>,  Brian Cain
- <bcain@quicinc.com>,  Daniel Henrique Barboza <danielhb413@gmail.com>,
- Beraldo Leal <bleal@redhat.com>,  Paul Durrant <paul@xen.org>,  Mahmoud
- Mandour <ma.mandourr@gmail.com>,  Thomas Huth <thuth@redhat.com>,  Liu
- Zhiwei <zhiwei_liu@linux.alibaba.com>,  Cleber Rosa <crosa@redhat.com>,
- kvm@vger.kernel.org,  Peter Maydell <peter.maydell@linaro.org>,  Wainer
- dos Santos Moschetta <wainersm@redhat.com>,  qemu-arm@nongnu.org,  Weiwei
- Li <liwei1518@gmail.com>,  Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
- <philmd@linaro.org>, John Snow <jsnow@redhat.com>,  Daniel Henrique Barboza
- <dbarboza@ventanamicro.com>,  Nicholas Piggin <npiggin@gmail.com>,  Palmer
- Dabbelt <palmer@dabbelt.com>,  Marcel Apfelbaum
- <marcel.apfelbaum@gmail.com>,  Ilya Leoshkevich <iii@linux.ibm.com>,
- =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@kaod.org>,  "Edgar E. Iglesias"
- <edgar.iglesias@gmail.com>,  Eduardo Habkost <eduardo@habkost.net>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,  qemu-riscv@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: Re: [PATCH v2 00/43] testing and plugin updates for 9.0 (pre-PR)
-In-Reply-To: <20240103173349.398526-1-alex.bennee@linaro.org> ("Alex
- =?utf-8?Q?Benn=C3=A9e=22's?=
- message of "Wed, 3 Jan 2024 17:33:06 +0000")
-References: <20240103173349.398526-1-alex.bennee@linaro.org>
-User-Agent: mu4e 1.11.27; emacs 29.1
-Date: Thu, 11 Jan 2024 12:37:28 +0000
-Message-ID: <87cyu8f3lj.fsf@draig.linaro.org>
+ d=1e100.net; s=20230601; t=1704978043; x=1705582843;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=rFg1dNzVPnTCsOdeKSTg9W97fq3ju3xEU4cGnUvmmQY=;
+ b=qZz4gLcPLGmM7v71oLG+VwpVlHDbHPUAGfoTTwRu0veCQUqQLthy2qg6x5Iq3DEXOz
+ 8eh8zILihyEJvqs95JVDGYCyyLY2XyFDKtCdaE0gkctkwhNpg0+evcTMwJU1AVwfQYke
+ tYluR60isSVvswv3KchCgcPSVLv8WzZ7i9SL9nw5KHUjco6+V74ixM/m664GXVIn+HES
+ soK6t7Rjm8WqfZu+zD6qKIz84l5BlfipuGxsw6KUJtbYAwtyLYULO5Pvs9HemW1GF3PQ
+ P9ouTDgHEdMAkvHqy+7iKD+MpOFNunBU+FR6ARcEH9a1z7VVBEqwEHVJhiYuaE3d/bBS
+ Jveg==
+X-Gm-Message-State: AOJu0Yz47+JY9hUxM7zEdNhr4DbjlXCzx6H8DBTeCZr+EjUdA38NOHrq
+ vnxHlpGUxQnwFZXaTp7Zb5OEsFZYSlS5Rw==
+X-Google-Smtp-Source: AGHT+IHKq5uz9HJ7tGNRly4fQPUPZks7QHK7eRejUxuKSvk+CAZt0w+2McbJtV6c1U6lMxiSVend0g==
+X-Received: by 2002:a17:902:c40d:b0:1d0:acd4:e711 with SMTP id
+ k13-20020a170902c40d00b001d0acd4e711mr1098588plk.15.1704978043272; 
+ Thu, 11 Jan 2024 05:00:43 -0800 (PST)
+Received: from [192.168.68.110] ([152.234.123.64])
+ by smtp.gmail.com with ESMTPSA id
+ g11-20020a170902c98b00b001d4c97a2adcsm1115031plc.108.2024.01.11.05.00.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 11 Jan 2024 05:00:42 -0800 (PST)
+Message-ID: <cfee5451-89a8-444a-b0a1-ac2035a66922@ventanamicro.com>
+Date: Thu, 11 Jan 2024 10:00:38 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42c.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/5] hw/core/cpu: Rename cpu_class_init() to include
+ 'common'
+Content-Language: en-US
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: Richard Henderson <richard.henderson@linaro.org>,
+ Weiwei Li <liwei1518@gmail.com>, Alistair Francis
+ <alistair.francis@wdc.com>, qemu-s390x@nongnu.org,
+ Michael Tokarev <mjt@tls.msk.ru>, David Hildenbrand <david@redhat.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>, qemu-riscv@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
+ qemu-trivial@nongnu.org, Halil Pasic <pasic@linux.ibm.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ Eduardo Habkost <eduardo@habkost.net>, Laurent Vivier <laurent@vivier.eu>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Eric Farman
+ <farman@linux.ibm.com>, Thomas Huth <thuth@redhat.com>
+References: <20240111120221.35072-1-philmd@linaro.org>
+ <20240111120221.35072-3-philmd@linaro.org>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20240111120221.35072-3-philmd@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x634.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -122,45 +108,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Alex Benn=C3=A9e <alex.bennee@linaro.org> writes:
 
-> This brings in the first batch of testing updates for the next
-> release. The main bulk of these is Daniel and Thomas' cleanups of the
-> qtest timeouts and allowing meson control them. There are a few minor
-> tweaks I've made to some avocado and gitlab tests.
->
-> The big update is support for reading register values in TCG plugins.
-> After feedback from Akihiko I've left all the smarts to the plugin and
-> made the interface a simple "all the registers" dump. There is a
-> follow on patch to make the register code a little more efficient by
-> checking disassembly. However we can leave the door open for future
-> API enhancements if the translator ever learns to reliably know when
-> registers might be touched.
->
-> v2
-> --
->
->  - Review feedback for register API
->  - readthedocs update
->  - add expectation docs for plugins
->
-> The following still need review:
->
->   docs/devel: document some plugin assumptions
->   docs/devel: lift example and plugin API sections up
->   contrib/plugins: optimise the register value tracking
->   contrib/plugins: extend execlog to track register changes
->   contrib/plugins: fix imatch
->   plugins: add an API to read registers
->   gdbstub: expose api to find registers
->   readthodocs: fully specify a build environment
->   gitlab: include microblazeel in testing
->   tests/avocado: use snapshot=3Don in kvm_xen_guest
 
-Ping for final review? I'd at least like to get the testing stuff
-cleared out of my tree.
+On 1/11/24 09:02, Philippe Mathieu-Daudé wrote:
+> cpu_class_init() is common, so rename it as cpu_common_class_init()
+> to ease navigating the code.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> ---
 
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+>   hw/core/cpu-common.c | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
+> index 3ccfe882e2..67db07741d 100644
+> --- a/hw/core/cpu-common.c
+> +++ b/hw/core/cpu-common.c
+> @@ -273,7 +273,7 @@ static int64_t cpu_common_get_arch_id(CPUState *cpu)
+>       return cpu->cpu_index;
+>   }
+>   
+> -static void cpu_class_init(ObjectClass *klass, void *data)
+> +static void cpu_common_class_init(ObjectClass *klass, void *data)
+>   {
+>       DeviceClass *dc = DEVICE_CLASS(klass);
+>       ResettableClass *rc = RESETTABLE_CLASS(klass);
+> @@ -304,7 +304,7 @@ static const TypeInfo cpu_type_info = {
+>       .instance_finalize = cpu_common_finalize,
+>       .abstract = true,
+>       .class_size = sizeof(CPUClass),
+> -    .class_init = cpu_class_init,
+> +    .class_init = cpu_common_class_init,
+>   };
+>   
+>   static void cpu_register_types(void)
 
