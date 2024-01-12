@@ -4,70 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BADC1C4707B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Jan 2024 23:44:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF128C47077
+	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jan 2024 01:23:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rO4iw-0004fK-DW; Thu, 11 Jan 2024 18:44:34 -0500
+	id 1rO6Fy-00038D-Kh; Thu, 11 Jan 2024 20:22:46 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rO4iv-0004f2-AZ; Thu, 11 Jan 2024 18:44:33 -0500
-Received: from mail-vk1-xa2d.google.com ([2607:f8b0:4864:20::a2d])
+ id 1rO6Fx-00037h-5H; Thu, 11 Jan 2024 20:22:45 -0500
+Received: from mail-vs1-xe36.google.com ([2607:f8b0:4864:20::e36])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rO4it-0007dg-D3; Thu, 11 Jan 2024 18:44:32 -0500
-Received: by mail-vk1-xa2d.google.com with SMTP id
- 71dfb90a1353d-4b72377deb0so1798808e0c.2; 
- Thu, 11 Jan 2024 15:44:30 -0800 (PST)
+ id 1rO6Fv-0007kp-G5; Thu, 11 Jan 2024 20:22:44 -0500
+Received: by mail-vs1-xe36.google.com with SMTP id
+ ada2fe7eead31-46771fc85cdso1188473137.2; 
+ Thu, 11 Jan 2024 17:22:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705016669; x=1705621469; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1705022562; x=1705627362; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YdIvnkQTNFZK0ei42TuwlFF3C1DlFfOuO/NfFOKC6jw=;
- b=Mw3U4Q62BbEW43f1pmFg2enO9TjPE8LzuL17gLgGddHZ0+vwRuBLkZ2/8EtNDP02JH
- t7O8gODOa7vvEEZTDm2n6hN2XAXYJjTAA9pkwSB4limo+WOisGRfHlRwSXGyzXEjtQFf
- D6RCK6ghsrGUvTc3nxBy03kBPUJiC6q8ymglC3IQjVxv4Rvw54/+xNDPcTh2yRpgwDkb
- 9ubuB6fDyL7VGpkCLvROjUIh/+YxEdL3E2B/ozOJ9PL+LrxyeTpFgtzRXfFkb9F8BVZP
- /AJhAYjTn/ewwTQRMMKbF70uw09cXDTufdcFM668h/q+5+thH+830VqsFiUltr2TKSup
- AEnw==
+ bh=LkF9/1VdPlJF5YGzOoY0fbmY7AjaH0tcrXCeTR73l+E=;
+ b=JFV7hEJurIsG4Xv8n1yUuKu8uENlRC9ye0tCfAB/DVpHICplB49dzBY/Cho0tNLGqA
+ RKbbbiDVLuZN9GliRj40Rlgj87neyZfxiVkTJBAWI5Ob2W5Obyv0J4UuNkaRDknJuSSH
+ 9jgdCM6YJSnTXsTPtUKhTrscSfbqWtZC9yG2671KSAl6VkHR4sc0J+Z0uDd2IU9gvRbq
+ +HAz6RekLCFkPmpFg2AJJVdTXW5TZXF5hIa6voXb4uYJB6kycrhrqux409fRoDXzVkfl
+ MyT1NUJzWA7HbY2ELRcvrLWFZbNO3Aurv40O4cdjwy036dopSGHz5Njq4T7JDVRRkdrS
+ qFmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705016669; x=1705621469;
+ d=1e100.net; s=20230601; t=1705022562; x=1705627362;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YdIvnkQTNFZK0ei42TuwlFF3C1DlFfOuO/NfFOKC6jw=;
- b=hh/R30jLUuIkEolbvOYio2dongtGFgHZyqgftQetFHckxV0EUd51R3SVH4uE6Erq0J
- VlCKYRfzH6KFdXgsCQaDB4aeFL5Q9H2cYgRgTZJJ0aYll5gNAUpBUKwyKsQmCl0/7aYo
- IVbk0M4pBWMiE2eoxdHAXfcm+P+39jw8WTTlHtaRJ8qrsdn9ossKhF9rsGey6MMHjes2
- UKyUP1lB96FDAzRMKon7mTr8KWijinNiDPPppwWd64gKy/Ntw2sOufGJNmOaW592W5oh
- Rhx6fTWCLhVtKtzoQVaS4sp9ishhLGg/OOmdFxfchCh3AH+k70hmcCzSiOY9u0Zzo1+E
- mgBQ==
-X-Gm-Message-State: AOJu0YyPyRbAjLUvE5sJd48631e58qGxoCSJS6/zohyXmCwFQETGC0ZY
- oFVzSavQsFtyD356kx0asaHWxbhh4LHRAYjx4Eg=
-X-Google-Smtp-Source: AGHT+IFXGt4x4Skj58Si50DyHAhYZACxKEj5uQs1aKyShKQ37OfmT1E4CdWf/psn85MvhoxkXT0lZMj06N3yrrIY6zU=
-X-Received: by 2002:a05:6122:1b88:b0:4b8:ce85:1e97 with SMTP id
- es8-20020a0561221b8800b004b8ce851e97mr568159vkb.20.1705016669694; Thu, 11 Jan
- 2024 15:44:29 -0800 (PST)
+ bh=LkF9/1VdPlJF5YGzOoY0fbmY7AjaH0tcrXCeTR73l+E=;
+ b=B9S681T8hAcrsYhaz+p3unDiFacFHKk18jck8f87mCfJYxjh5ssG1RDbmRp7RqqawB
+ Z7l9roEEJM9HjPmkMfQZYK2JZb4AkL8TuA/vVNwRe8JmAdi8Ujlmco3/Nbg7UavYaVUd
+ 0lkMWXjaorHdpvaXq+b6le3fO9rLhnuB4d5HRgtUX8QFd0827tgWX0CECy7zxW/4KuUd
+ jG8eJTaoReoCpAE28hfwnbZNVuWSaZHn9gE+HG1XjrFGYegdB2jI6dWyBSS1vDf0brg4
+ rBIpu8ML6YIurGpFDPAINtVwTP1UrA9l13Bzx45tStMWaWj05tNpREw2AJc063rIzoSg
+ Lk2w==
+X-Gm-Message-State: AOJu0YwIrgskRKupEKD2o6nOJCiW3+YoxF2gmSQRIumympB71kW2Onlb
+ 0HBAE2+cgKTrVgRDOcublEFf8efwbXvECfex0u8=
+X-Google-Smtp-Source: AGHT+IF+YzVu391rSoFAj94jLf4ea9VyRy+wq20vPLB9n87PCwu5bLAztpHrUc8eYs8kZP9PRtrx9NB5mn4+lGSY+xc=
+X-Received: by 2002:a67:f710:0:b0:467:c4d0:921d with SMTP id
+ m16-20020a67f710000000b00467c4d0921dmr909582vso.25.1705022561825; Thu, 11 Jan
+ 2024 17:22:41 -0800 (PST)
 MIME-Version: 1.0
-References: <20240105230546.265053-1-dbarboza@ventanamicro.com>
- <20240105230546.265053-13-dbarboza@ventanamicro.com>
-In-Reply-To: <20240105230546.265053-13-dbarboza@ventanamicro.com>
+References: <20240111161644.33630-1-rbradford@rivosinc.com>
+In-Reply-To: <20240111161644.33630-1-rbradford@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 12 Jan 2024 09:44:03 +1000
-Message-ID: <CAKmqyKNTOdZ84QY1iTT9_O4M22Undvw+H1r8RGMNs5AyN92tyA@mail.gmail.com>
-Subject: Re: [PATCH v4 12/17] target/riscv: move 'cbop_blocksize' to
- riscv_cpu_properties[]
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, ajones@ventanamicro.com
+Date: Fri, 12 Jan 2024 11:22:15 +1000
+Message-ID: <CAKmqyKNFABtEKtcUCcD1LSaSLpMFT15oGJoysK-v7LckS3uP=A@mail.gmail.com>
+Subject: Re: [PATCH v2 0/2] target/riscv: Add support for 'B' extension
+To: Rob Bradford <rbradford@rivosinc.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, atishp@rivosinc.com, 
+ palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
+ liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2d;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e36;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe36.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -91,91 +89,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, Jan 6, 2024 at 9:09=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Fri, Jan 12, 2024 at 2:17=E2=80=AFAM Rob Bradford <rbradford@rivosinc.co=
+m> wrote:
 >
-> Do the same we did with 'cbom_blocksize' in the previous patch.
+> Add support for the new (fast track) 'B' extension [1] this extension
+> uses the misa.B bit to indicate that the Zba, Zbb and Zbs extensions are
+> present.
 >
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Since this extension is not yet frozen it is exposed via the 'x-b' cpu
+> option. The validation logic is based on the new approach taken for the
+> 'G' extension.
+>
+> The specification handles backward compatability: The misa.B bit may be
+> set if Zba, Zbb and Zbs are present but in order to not break existing
+> systems the bit is not required to be set if they are present. As such
+> even though Zba, Zbb and Zbs default to on in QEMU this extension is not
+> enabled by default in any cpu.
+>
+> Cheers,
+>
+> Rob
+>
+> [1] - https://github.com/riscv/riscv-b
+>
+> Changes since V1:
+> - Rebased on master after latest riscv updates
+> - All patches have R-B tags
+> - Array formatting fix to make future diffs clean (Daniel)
+> - Dropped enabling for max CPU variant as misa.B is reserved until
+>   spec is at least frozen (Daniel & Drew)
+>
+> Rob Bradford (2):
+>   target/riscv: Add infrastructure for 'B' MISA extension
+>   target/riscv: Add step to validate 'B' extension
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
->  target/riscv/cpu.c | 38 +++++++++++++++++++++++++++++++++++++-
->  1 file changed, 37 insertions(+), 1 deletion(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index b77d26231c..e3cbe9b1b6 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1317,6 +1317,7 @@ static void riscv_cpu_init(Object *obj)
->      cpu->cfg.vlen =3D 128;
->      cpu->cfg.elen =3D 64;
->      cpu->cfg.cbom_blocksize =3D 64;
-> +    cpu->cfg.cbop_blocksize =3D 64;
->      cpu->env.vext_ver =3D VEXT_VERSION_1_00_0;
->  }
+>  target/riscv/cpu.c         |  5 +++--
+>  target/riscv/cpu.h         |  1 +
+>  target/riscv/tcg/tcg-cpu.c | 33 +++++++++++++++++++++++++++++++++
+>  3 files changed, 37 insertions(+), 2 deletions(-)
 >
-> @@ -1902,8 +1903,42 @@ static const PropertyInfo prop_cbom_blksize =3D {
->      .set =3D prop_cbom_blksize_set,
->  };
->
-> +static void prop_cbop_blksize_set(Object *obj, Visitor *v, const char *n=
-ame,
-> +                                  void *opaque, Error **errp)
-> +{
-> +    RISCVCPU *cpu =3D RISCV_CPU(obj);
-> +    uint16_t value;
-> +
-> +    if (!visit_type_uint16(v, name, &value, errp)) {
-> +        return;
-> +    }
-> +
-> +    if (value !=3D cpu->cfg.cbop_blocksize && riscv_cpu_is_vendor(obj)) =
-{
-> +        cpu_set_prop_err(cpu, name, errp);
-> +        error_append_hint(errp, "Current '%s' val: %u\n",
-> +                          name, cpu->cfg.cbop_blocksize);
-> +        return;
-> +    }
-> +
-> +    cpu_option_add_user_setting(name, value);
-> +    cpu->cfg.cbop_blocksize =3D value;
-> +}
-> +
-> +static void prop_cbop_blksize_get(Object *obj, Visitor *v, const char *n=
-ame,
-> +                         void *opaque, Error **errp)
-> +{
-> +    uint16_t value =3D RISCV_CPU(obj)->cfg.cbop_blocksize;
-> +
-> +    visit_type_uint16(v, name, &value, errp);
-> +}
-> +
-> +static const PropertyInfo prop_cbop_blksize =3D {
-> +    .name =3D "cbop_blocksize",
-> +    .get =3D prop_cbop_blksize_get,
-> +    .set =3D prop_cbop_blksize_set,
-> +};
-> +
->  Property riscv_cpu_options[] =3D {
-> -    DEFINE_PROP_UINT16("cbop_blocksize", RISCVCPU, cfg.cbop_blocksize, 6=
-4),
->      DEFINE_PROP_UINT16("cboz_blocksize", RISCVCPU, cfg.cboz_blocksize, 6=
-4),
->
->      DEFINE_PROP_END_OF_LIST(),
-> @@ -1992,6 +2027,7 @@ static Property riscv_cpu_properties[] =3D {
->      {.name =3D "elen", .info =3D &prop_elen},
->
->      {.name =3D "cbom_blocksize", .info =3D &prop_cbom_blksize},
-> +    {.name =3D "cbop_blocksize", .info =3D &prop_cbop_blksize},
->
->  #ifndef CONFIG_USER_ONLY
->      DEFINE_PROP_UINT64("resetvec", RISCVCPU, env.resetvec, DEFAULT_RSTVE=
-C),
 > --
 > 2.43.0
 >
