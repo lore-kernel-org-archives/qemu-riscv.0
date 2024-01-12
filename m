@@ -4,90 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98F77C4706C
-	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jan 2024 16:54:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE18FC4706C
+	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jan 2024 21:38:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rOKnO-0005Qi-EF; Fri, 12 Jan 2024 11:54:14 -0500
+	id 1rOPER-0003oR-1J; Fri, 12 Jan 2024 16:38:27 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
- id 1rOKnN-0005Q4-IS
- for qemu-riscv@nongnu.org; Fri, 12 Jan 2024 11:54:13 -0500
-Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rOPEO-0003ni-Tm
+ for qemu-riscv@nongnu.org; Fri, 12 Jan 2024 16:38:24 -0500
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
- id 1rOKnL-0005kQ-EZ
- for qemu-riscv@nongnu.org; Fri, 12 Jan 2024 11:54:13 -0500
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-3376555b756so3846208f8f.0
- for <qemu-riscv@nongnu.org>; Fri, 12 Jan 2024 08:54:10 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rOPEN-0001Xi-6L
+ for qemu-riscv@nongnu.org; Fri, 12 Jan 2024 16:38:24 -0500
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-1d4ba539f6cso63882935ad.3
+ for <qemu-riscv@nongnu.org>; Fri, 12 Jan 2024 13:38:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1705078449; x=1705683249;
- darn=nongnu.org; 
- h=mime-version:user-agent:content-transfer-encoding:references
- :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
- :date:message-id:reply-to;
- bh=Wa5lcaVnSMCaKjFP8eBbZ/pS/ZZdaoRW9vHVCkmxAkM=;
- b=0cMd2BBkSGdEuNd+DdPgbP3LWjQoHns/4mRUvYGLAgrqNjq/65t6VTuqIdd8HgW+9B
- JnnMbYM03lvbcGwgpw9xd0Opk+F2L42t+mruwGMGjULPnYg8pRekSmGgnp5z4Yu9eoWO
- 7AI23ofFvaXscHppjsMFJqO+6kg8zf/uOUacxHnEODB2FnWy2ltKVLSRKeglS3cYj5QE
- a6HeSrTIy/fTukoU+GgewHTEz4GyXk1ZiFoFyu8GPW/o41J9so3TmhduG6LjIUHcD200
- RNNCUU262DvcVhlYq4ZdBNttji1QZHNSL6WHSUmut4FKX/tzHSdmoNmW/3ElAXkcxV+D
- JxZA==
+ d=ventanamicro.com; s=google; t=1705095501; x=1705700301; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lT0phRZ9oTpRjBU5KO4G/ql0H7YMEWcTrCKQ7fmArKs=;
+ b=fVNan446iL8AMq35720eZM2IvqJIdvx7eN1kF4qA+PnmCdaZPQtzgspdPl8iLEXniv
+ C2Qy7kLhTFGsGhvGxkk2B80r6wVWabXQBjoOIUP4n5UxyeKTE2tbIhpm7AKArNQQy/WY
+ 0ejEMYZulVYwYLzwTF2MFGF3MnGN3z378V5cIe7bv2e5u9aqRk46dMqtA74dJLv6H+TD
+ rTRicbMpbvh45eHgxtWmvjI9B41uax8CK2164oTkUC/JkYBG3uZ0dtHzyUShGNPqXJ+p
+ oTdCWAm8cTnDXa6BslajDppkTN04hR14bZV6XSX5ChEnVWF6YWFadBdQuy9KfQPFC8Z8
+ mGGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705078449; x=1705683249;
- h=mime-version:user-agent:content-transfer-encoding:references
- :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Wa5lcaVnSMCaKjFP8eBbZ/pS/ZZdaoRW9vHVCkmxAkM=;
- b=FyG5fiLGl/mXZlDl7yArFDoZOiXpnc+ULRQdqlzW5md26butgUp7gPqFGusY3WS2T7
- KjMKsaBdIjYfrVDs2J+XET2GSW4WKqYBGipwTe6hdx5h5VFDEjEa9aH8ZyJTPwk/GYkG
- D1j6Kqu9cHI1m6sTbVrbjJXdnny0ZG/aHP3kPdQrJb7Bmv04NySNTeHF9ebZRHZ66v9L
- 1BjnPARWp/E40I6+AhDKQ7OBlM+5h3p9VYR3hY17ET7KPvsk3wiCYuWCaDISe48Ev/TM
- CmFwI0vozxZtMs8Im4wwC/Wr+YwBlfWaMM4EA9zwPBtAhzFeZsDxph9X8NTaLjRmWmRA
- vnjA==
-X-Gm-Message-State: AOJu0YzO0CO9TI8fN1zFgjxaMA1gWJYux1KsWDtguRWKgcs8CLMlGoC2
- bBPjpBnLcOCFf2W3A0HqbfiydbmOrUb0Zg==
-X-Google-Smtp-Source: AGHT+IEKK3jDFutqLa/46AnP5Pk+3WHjHLbaZ0oNySs93zRtUKWXScrwek4WOCfYEVz/CxTRBeD8Hw==
-X-Received: by 2002:a05:6000:1186:b0:337:4758:43fc with SMTP id
- g6-20020a056000118600b00337475843fcmr894052wrx.60.1705078449176; 
- Fri, 12 Jan 2024 08:54:09 -0800 (PST)
-Received: from [192.168.1.9] (214.11.169.217.in-addr.arpa. [217.169.11.214])
- by smtp.gmail.com with ESMTPSA id
- z5-20020a5d4c85000000b003367ff4aadasm4362376wrs.31.2024.01.12.08.54.08
+ d=1e100.net; s=20230601; t=1705095501; x=1705700301;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lT0phRZ9oTpRjBU5KO4G/ql0H7YMEWcTrCKQ7fmArKs=;
+ b=NC1HM2vy59zx6d1bYC0SAPZ7k3XKpYJkl9T7NcgbeVnKbbNp5dswsXF9tdT+eJojvy
+ 9bhTCra9fSthg71lWS3qIgnaQeZlO3HTql1GZ4gdZj+tm7LRch/77dK412KKcvUVB3dj
+ 1eG+comOE57Mio1QFRKEE3spAB9sKjKJMMxPayZPsv/lMG4xzP8Dr9MKAC7xzbHyOEOa
+ vAFTP7oqYTnsXAL0sI3PXStSxcp3P3rFcBa9MtSxHWSNivQN4me0nNcnxKm3yZP/FPMO
+ S6vz6SFemtzurGP2nW4OkGDLUTARzAoAYf2d1SjtRSJplsIn4bF9sCiO1DGfpmi8Sg/h
+ 4RlQ==
+X-Gm-Message-State: AOJu0YySEKxEjDbQJ+r+Vh/PCii8lLd20EKPyXknBALDNPhkr1hdmUpM
+ FsMH0JjIh5EAffCm29DM2Tp1BB/Ynpsomg==
+X-Google-Smtp-Source: AGHT+IGEqZMVcba7VB6yaSfH+dMKkbb6UugWzE7iA7zy5t9YkDTNOLbFPzUjOzBvehchKjPjF9IGDg==
+X-Received: by 2002:a17:902:d4c6:b0:1d5:8cc1:70bf with SMTP id
+ o6-20020a170902d4c600b001d58cc170bfmr2139839plg.51.1705095501562; 
+ Fri, 12 Jan 2024 13:38:21 -0800 (PST)
+Received: from grind.. ([152.234.123.64]) by smtp.gmail.com with ESMTPSA id
+ lf8-20020a170902fb4800b001d5b2967d00sm364727plb.290.2024.01.12.13.38.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Jan 2024 08:54:08 -0800 (PST)
-Message-ID: <7461190fbece351f916eccd258bf62b86227927d.camel@rivosinc.com>
-Subject: Re: Re: Re: [PATCH 1/3] target/riscv: Add infrastructure for 'B'
- MISA extension
-From: Rob Bradford <rbradford@rivosinc.com>
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, atishp@rivosinc.com, 
- palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
- liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com,  ved@rivosinc.com
-Date: Fri, 12 Jan 2024 16:54:08 +0000
-In-Reply-To: <20240112-d9e3cc215a7a68c5189908bf@orel>
-References: <20240109171848.32237-1-rbradford@rivosinc.com>
- <20240109171848.32237-2-rbradford@rivosinc.com>
- <20240111-585fe1291fcaa1e0432674e3@orel>
- <20240111-df7a6acf3109b630469591a1@orel>
- <3dbd3fa1cbad80948175f98dcc0c76b886e2376e.camel@rivosinc.com>
- <20240112-d9e3cc215a7a68c5189908bf@orel>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.48.4 (3.48.4-1.module_f38+17164+63eeee4a) 
+ Fri, 12 Jan 2024 13:38:21 -0800 (PST)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ richard.henderson@linaro.org, max.chou@sifive.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH 01/13] target/riscv: add 'vlenb' field in cpu->cfg
+Date: Fri, 12 Jan 2024 18:38:00 -0300
+Message-ID: <20240112213812.173521-2-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240112213812.173521-1-dbarboza@ventanamicro.com>
+References: <20240112213812.173521-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
- envelope-from=rbradford@rivosinc.com; helo=mail-wr1-x42b.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x631.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,107 +95,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, 2024-01-12 at 17:08 +0100, Andrew Jones wrote:
-> On Thu, Jan 11, 2024 at 03:17:25PM +0000, Rob Bradford wrote:
-> > + Ved
-> >=20
-> > On Thu, 2024-01-11 at 14:14 +0100, Andrew Jones wrote:
-> > > On Thu, Jan 11, 2024 at 02:07:34PM +0100, Andrew Jones wrote:
-> > > > On Tue, Jan 09, 2024 at 05:07:35PM +0000, Rob Bradford wrote:
-> > > > > Add the infrastructure for the 'B' extension which is the
-> > > > > union
-> > > > > of the
-> > > > > Zba, Zbb and Zbs instructions.
-> > > > >=20
-> > > > > Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
-> > > > > ---
-> > > > > =C2=A0target/riscv/cpu.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 | 5 +++--
-> > > > > =C2=A0target/riscv/cpu.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 | 1 +
-> > > > > =C2=A0target/riscv/tcg/tcg-cpu.c | 1 +
-> > > > > =C2=A03 files changed, 5 insertions(+), 2 deletions(-)
-> > > > >=20
-> > > > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > > > > index b07a76ef6b..22f8e527ff 100644
-> > > > > --- a/target/riscv/cpu.c
-> > > > > +++ b/target/riscv/cpu.c
-> > > > > @@ -38,9 +38,9 @@
-> > > > > =C2=A0#include "tcg/tcg.h"
-> > > > > =C2=A0
-> > > > > =C2=A0/* RISC-V CPU definitions */
-> > > > > -static const char riscv_single_letter_exts[] =3D
-> > > > > "IEMAFDQCPVH";
-> > > > > +static const char riscv_single_letter_exts[] =3D
-> > > > > "IEMAFDQCBPVH";
-> > > >=20
-> > > > Is there a corresponding proposed change to table 29.1 of the
-> > > > nonpriv spec
-> > > > which states B comes after C and before P? If so, can you
-> > > > provide a
-> > > > link
-> > > > to it? Otherwise, how do we know that?
-> > >=20
-> > > Oh, I see. The unpriv spec B chapter comes after the C chapter
-> > > (and
-> > > before
-> > > J, P, ...). I still wonder if we'll have a 29.1 table update with
-> > > the
-> > > ratification of this extension though.
-> > >=20
-> > >=20
-> >=20
-> > I agree it's a bit confusing - but the order is established by the
-> > table in the unprivileged spec and the table explanation also makes
-> > this clear.
-> >=20
-> > """
-> > Table 27.1: Standard ISA extension names. The table also defines
-> > the
-> > canonical order in which
-> > extension names must appear in the name string, with top-to-bottom
-> > in
-> > table indicating first-to-last
-> > in the name string, e.g., RV32IMACV is legal, whereas RV32IMAVC is
-> > not.
-> > """
->=20
-> Yes, this is the table I was referring to when I referenced "table
-> 29.1 of
-> the nonpriv spec". Since there's a chance I was looking at too old a
-> spec
-> I've now gone straight to the source,
->=20
-> https://github.com/riscv/riscv-isa-manual/blob/main/src/naming.adoc
->=20
-> but I still don't see B there. Do you see B in the table you're
-> looking
-> at?
->=20
-> >=20
-> > The proposed B specification does not make any remarks about the
-> > ordering in the ISA definition string. [1] I would worry there
-> > would be
-> > a lot of software churn if this ordering were to be changed.
->=20
-> The ordering shouldn't change, but I can't see where it's documented
-> (beyond the B chapter coming after the C chapter).
+Our usage of 'vlenb' is overwhelming superior than the use of 'vlen'.
+We're using 'vlenb' most of the time, having to do 'vlen >> 3' or
+'vlen / 8' in every instance.
 
-I'm using table 27.1 in the published PDF which is the PDF in this
-release:=20
-https://github.com/riscv/riscv-isa-manual/releases/tag/Ratified-IMAFDQC
-It looks like it was removed in this commit (which is a set of
-backports):
+In hindsight we would be better if the 'vlenb' property  was introduced
+instead of 'vlen'. That's not what happened, and now we can't easily get
+rid of it due to user scripts all around. What we can do, however, is to
+change our internal representation to use 'vlenb'.
 
-https://github.com/riscv/riscv-isa-manual/commit/6ecd735338241583d53396b706=
-5eab7c9ace68aa
+Add a 'vlenb' field in cpu->cfg. It'll be set via the existing 'vlen'
+property, i.e. setting 'vlen' will also set 'vlenb'.
 
-Cheers,
+We'll replace all 'vlen >> 3' code to use 'vlenb' directly. Start with
+the single instance we have in target/riscv/cpu.c.
 
-Rob
->=20
-> Thanks,
-> drew
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ target/riscv/cpu.c     | 4 +++-
+ target/riscv/cpu_cfg.h | 1 +
+ 2 files changed, 4 insertions(+), 1 deletion(-)
 
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 8d3ec74a1c..f4261d2ffc 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -847,7 +847,7 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+                              csr_ops[csrno].name, val);
+             }
+         }
+-        uint16_t vlenb = cpu->cfg.vlen >> 3;
++        uint16_t vlenb = cpu->cfg.vlenb;
+ 
+         for (i = 0; i < 32; i++) {
+             qemu_fprintf(f, " %-8s ", riscv_rvv_regnames[i]);
+@@ -1314,6 +1314,7 @@ static void riscv_cpu_init(Object *obj)
+     /* Default values for non-bool cpu properties */
+     cpu->cfg.pmu_mask = MAKE_64BIT_MASK(3, 16);
+     cpu->cfg.vlen = 128;
++    cpu->cfg.vlenb = 128 >> 3;
+     cpu->cfg.elen = 64;
+     cpu->env.vext_ver = VEXT_VERSION_1_00_0;
+ }
+@@ -1810,6 +1811,7 @@ static void prop_vlen_set(Object *obj, Visitor *v, const char *name,
+ 
+     cpu_option_add_user_setting(name, value);
+     cpu->cfg.vlen = value;
++    cpu->cfg.vlenb = value >> 3;
+ }
+ 
+ static void prop_vlen_get(Object *obj, Visitor *v, const char *name,
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index fea14c275f..50479dd72f 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -140,6 +140,7 @@ struct RISCVCPUConfig {
+ 
+     uint32_t pmu_mask;
+     uint16_t vlen;
++    uint16_t vlenb;
+     uint16_t elen;
+     uint16_t cbom_blocksize;
+     uint16_t cbop_blocksize;
+-- 
+2.43.0
 
 
