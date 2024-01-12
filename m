@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9734AC4707C
-	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jan 2024 22:41:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEB14C4707C
+	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jan 2024 22:42:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rOQDA-00073C-Rp; Fri, 12 Jan 2024 17:41:12 -0500
+	id 1rOQEf-0007mI-TT; Fri, 12 Jan 2024 17:42:45 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rOQD8-00071O-LU
- for qemu-riscv@nongnu.org; Fri, 12 Jan 2024 17:41:10 -0500
-Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031])
+ id 1rOQEe-0007lx-Mu
+ for qemu-riscv@nongnu.org; Fri, 12 Jan 2024 17:42:44 -0500
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rOQD6-000228-HU
- for qemu-riscv@nongnu.org; Fri, 12 Jan 2024 17:41:10 -0500
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-28db7135547so2552602a91.3
- for <qemu-riscv@nongnu.org>; Fri, 12 Jan 2024 14:41:08 -0800 (PST)
+ id 1rOQEc-0002jE-Ce
+ for qemu-riscv@nongnu.org; Fri, 12 Jan 2024 17:42:44 -0500
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1d3f29fea66so43548365ad.3
+ for <qemu-riscv@nongnu.org>; Fri, 12 Jan 2024 14:42:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705099267; x=1705704067; darn=nongnu.org;
+ d=linaro.org; s=google; t=1705099352; x=1705704152; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=hYjXtUHSyVy74WWwvvSngKil6srMZaeX/nr1xR2tuek=;
- b=dYMubrCb3cYPwOndX0F/ICBFQD2Sn+WLa9nxb7PpExJEeLNno/vTuHvFBopnKIzlf1
- cpiYZIiMFCk65WdrKM9v+DKlSCZt8AuUDlNFlQ9w0BMe44t5WpTD1gzp7Q7tsBBEmzhb
- v6hhDjaMMTC4nycc2ms+hKyl+E/EGkfozlWytbk81TVeP5asLJdDgQFgoi0dY9Tr0KZh
- j6bSWfY+U4EeDFZqw6754anZN6CSBKZEn2e2iIIGfQcW8QKCaeMxa2cUEuFZfCe7X6z5
- LuevYy6LjKZp2t6kN62/McRkegpopaRg4xe55WIYYBmWwO2cfLj6IbiYvqWe9SaJ0cl3
- EjWw==
+ bh=ulDjogcD9U8vNT9lSPrtouvUTbSQHpW66LV5AUgRqdc=;
+ b=ouoO91fqGxpMnfav0A2bjmo4A3Ru58eVF3jO9wD9IYYcij7sy83lYnk99z3iiAmCyU
+ 8McI6AGAm1DD1cK+AGII7BSO5Oalc06amqKB9G1/ihtsJeSVWtU+BaUpDTFZf/FDsQWq
+ Kc6ZwPmR6vO1mLHMqq90PBRcn4cK5HWh4novbrnxXkOxLwZDoiiL8xh94D53MTOxiGiq
+ xCrzRLeqiAxbijVfA5IkpYj/+YNK8ODugAzE2qW1tO1GPj/t4ix5JkiKv+FrxMRKXATX
+ Nqfmy/6xXkdBFHBFsSsFDj7pQb3KZq0d16Vi2DkWjyxsvIW31WRvr9IhIsE8+OeMcZvJ
+ cl8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705099267; x=1705704067;
+ d=1e100.net; s=20230601; t=1705099352; x=1705704152;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hYjXtUHSyVy74WWwvvSngKil6srMZaeX/nr1xR2tuek=;
- b=e6Ut1Fc+mLgmvDdhsNUZYgQ4j1sm/F5mQmEFdYHjktG+0lvielhKjakYtrnOtg0tt8
- 63IgQClOF4y1dtuej5M7RtaFCiFmI0h06e6bpYHRFu8vprvK2TfWRS26PVY4fmB2jMKa
- mCC+HQMorCHGxi82sXPab3yS+I/dcYdHztgiT4ifiSTazSk8A5F+o7Jva1wV53RBs+3j
- +lQPtc8G2cmTkt7oMgVxtbTQgPA+U+fNyB+kEgaoFj7eSb6cN0ZtPcmnvd1qhNTrTxUa
- zbOO66NfRDDlv4myroigCi2r/K/7bao6q7Y6gFkmEKdusV40y439uE69nhE4hXAq+tOW
- Hu8w==
-X-Gm-Message-State: AOJu0YzU8pQ2nW6wO+roJE+c7wInzOCxcV2lIiRSPvgmczlJuuDapQER
- yonEJyV2E0a+gz0OJ5bO48MFZ7n0RYDbZw==
-X-Google-Smtp-Source: AGHT+IEHyELds/gVZN6n+xwvV2muWAUtllN+Y8hM+g4tewlb0DtE8GYF+PlQt9EphNm9Z1/LCGGLcw==
-X-Received: by 2002:a17:90a:c004:b0:28c:e9ed:f724 with SMTP id
- p4-20020a17090ac00400b0028ce9edf724mr1776955pjt.98.1705099266979; 
- Fri, 12 Jan 2024 14:41:06 -0800 (PST)
+ bh=ulDjogcD9U8vNT9lSPrtouvUTbSQHpW66LV5AUgRqdc=;
+ b=DI74jXO1EgSKVwBVzD01H+v5SSJzcnoqR34pHnyqEaZKClvVYt/fmZ1ZKpMajMe7f9
+ aS/VBuBEK10St+CEZVrmyBhPhHumUlElS8b3ChV3eS7/VgreZuxaUd7C3U0w2kCdDXtv
+ nT79sfSot905I7OCecU+QunCm6Yxpwz7X0V/yoCWOHsQ/GGfqfdVNzl8BgfpoQ49mpSz
+ 0zZyf1IYs18ozcikH/z4xHrDd0Hf/ZsQuFucOcKXIVq0WbjDw8OOXVthRlZ01Rnysl5a
+ 9Jo/8Otif8+W41et9HsJ/B84cG815lcjhRH3tfrZa3Y5S5bRfsxwz34EO3W+GpiGNuIx
+ N+GA==
+X-Gm-Message-State: AOJu0YxIEfTuDAh5jiW7z9GhCriFkJMk+U0rA7KErEkvfUU+i0P/1UDR
+ WEoGwSU3wGFhTk+JeDSXfVZCS6regBjYEw==
+X-Google-Smtp-Source: AGHT+IFq2Avk7MCuzOvqijKduI1P26+ha4ylpqVBPK4esAPBjXjxMOquFFR4T1McpEzo3PQyk1xQYA==
+X-Received: by 2002:a17:902:fc4e:b0:1d4:3dfd:7e30 with SMTP id
+ me14-20020a170902fc4e00b001d43dfd7e30mr1672785plb.122.1705099352225; 
+ Fri, 12 Jan 2024 14:42:32 -0800 (PST)
 Received: from ?IPV6:2001:8004:2728:2ad6:e985:c1c8:a4fc:508?
  ([2001:8004:2728:2ad6:e985:c1c8:a4fc:508])
  by smtp.gmail.com with ESMTPSA id
- jj7-20020a170903048700b001d472670a30sm3695512plb.162.2024.01.12.14.41.02
+ jj7-20020a170903048700b001d472670a30sm3695512plb.162.2024.01.12.14.42.28
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 12 Jan 2024 14:41:06 -0800 (PST)
-Message-ID: <4b0847ec-467f-4fcb-8deb-01ec435d82ad@linaro.org>
-Date: Sat, 13 Jan 2024 09:40:59 +1100
+ Fri, 12 Jan 2024 14:42:31 -0800 (PST)
+Message-ID: <d0cc2c90-e401-460c-8883-7125c0506df7@linaro.org>
+Date: Sat, 13 Jan 2024 09:42:26 +1100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 08/13] target/riscv/vector_helper.c: use vlenb in
- HELPER(vsetvl)
+Subject: Re: [PATCH 09/13] target/riscv/cpu.h: use 'vlenb' in vext_get_vlmax()
 Content-Language: en-US
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  max.chou@sifive.com
 References: <20240112213812.173521-1-dbarboza@ventanamicro.com>
- <20240112213812.173521-9-dbarboza@ventanamicro.com>
+ <20240112213812.173521-10-dbarboza@ventanamicro.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240112213812.173521-9-dbarboza@ventanamicro.com>
+In-Reply-To: <20240112213812.173521-10-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1031.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x636.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,37 +100,28 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 1/13/24 08:38, Daniel Henrique Barboza wrote:
-> Use the new 'vlenb' CPU config to validate fractional LMUL. The original
-> comparison is done with 'vlen' and 'sew', both in bits. Use sew/8, or
-> sew in bytes, to do a direct comparison with vlenb.
-> 
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > ---
->   target/riscv/vector_helper.c | 9 ++++++---
->   1 file changed, 6 insertions(+), 3 deletions(-)
+>   target/riscv/cpu.h | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
 > 
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index cb944229b0..0c1a485d1e 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -45,9 +45,12 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
->                                               xlen - 1 - R_VTYPE_RESERVED_SHIFT);
->   
->       if (lmul & 4) {
-> -        /* Fractional LMUL - check LMUL * VLEN >= SEW */
-> -        if (lmul == 4 ||
-> -            cpu->cfg.vlen >> (8 - lmul) < sew) {
-> +        /*
-> +         * Fractional LMUL - check LMUL * VLEN >= SEW, or
-> +         * vlen >> (8 - lmul) < sew. We have 'vlenb', so
-> +         * compare it with sew in bytes.
-> +         */
-> +        if (lmul == 4 || cpu->cfg.vlenb >> (8 - lmul) < (sew << 3)) {
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 11df226a00..628ef67d5f 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -692,7 +692,8 @@ static inline uint32_t vext_get_vlmax(RISCVCPU *cpu, target_ulong vtype)
+>   {
+>       uint8_t sew = FIELD_EX64(vtype, VTYPE, VSEW);
+>       int8_t lmul = sextract32(FIELD_EX64(vtype, VTYPE, VLMUL), 0, 3);
+> -    return cpu->cfg.vlen >> (sew + 3 - lmul);
+> +    /* vlen = vlenb << 3 */
+> +    return (cpu->cfg.vlenb << 3) >> (sew + 3 - lmul);
+>   }
 
-You're shifting sew the wrong direction.  But better to simply adjust the vlenb shift:
+Better to simplify the arithmetic:
 
-- cpu->cfg.vlen >> (8 - lmul) < sew
-+ cpu->cfg.vlenb >> (8 - 3 - lmul) < sew
+-    return cpu->cfg.vlen >> (sew + 3 - lmul);
++    return cpu->cfg.vlenb >> (sew - lmul);
 
 
 r~
