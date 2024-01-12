@@ -4,68 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF128C47077
-	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jan 2024 01:23:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F317AC4707B
+	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jan 2024 01:24:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rO6Fy-00038D-Kh; Thu, 11 Jan 2024 20:22:46 -0500
+	id 1rO6Hn-0003w7-Ck; Thu, 11 Jan 2024 20:24:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rO6Fx-00037h-5H; Thu, 11 Jan 2024 20:22:45 -0500
-Received: from mail-vs1-xe36.google.com ([2607:f8b0:4864:20::e36])
+ id 1rO6Hk-0003vL-NH; Thu, 11 Jan 2024 20:24:36 -0500
+Received: from mail-ua1-x933.google.com ([2607:f8b0:4864:20::933])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rO6Fv-0007kp-G5; Thu, 11 Jan 2024 20:22:44 -0500
-Received: by mail-vs1-xe36.google.com with SMTP id
- ada2fe7eead31-46771fc85cdso1188473137.2; 
- Thu, 11 Jan 2024 17:22:42 -0800 (PST)
+ id 1rO6Hj-0000O7-2H; Thu, 11 Jan 2024 20:24:36 -0500
+Received: by mail-ua1-x933.google.com with SMTP id
+ a1e0cc1a2514c-7ce603b9051so1524694241.2; 
+ Thu, 11 Jan 2024 17:24:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705022562; x=1705627362; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1705022673; x=1705627473; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LkF9/1VdPlJF5YGzOoY0fbmY7AjaH0tcrXCeTR73l+E=;
- b=JFV7hEJurIsG4Xv8n1yUuKu8uENlRC9ye0tCfAB/DVpHICplB49dzBY/Cho0tNLGqA
- RKbbbiDVLuZN9GliRj40Rlgj87neyZfxiVkTJBAWI5Ob2W5Obyv0J4UuNkaRDknJuSSH
- 9jgdCM6YJSnTXsTPtUKhTrscSfbqWtZC9yG2671KSAl6VkHR4sc0J+Z0uDd2IU9gvRbq
- +HAz6RekLCFkPmpFg2AJJVdTXW5TZXF5hIa6voXb4uYJB6kycrhrqux409fRoDXzVkfl
- MyT1NUJzWA7HbY2ELRcvrLWFZbNO3Aurv40O4cdjwy036dopSGHz5Njq4T7JDVRRkdrS
- qFmQ==
+ bh=7bc8xw3NFmRkoKJ/FSNm5LlJpyNgoeF5F00/LBRIzxo=;
+ b=a8omvKlZG7Q75Ol1iiA5K+7cRgV1QnqRcNmDJlbESm4WUi4iUSjdpBVmBAtRKMRaaP
+ TDyQOKBLj5h4Imrg5XX08qu3DRAYP+qJI5URuUgjr8CWZY6/ucf1Td4RE4NLTjnK4yEI
+ h1soT81nTlPuXirZ1D7m7lbpv+Misllnuq5IikNNJAFGD+Y/KuTXU+oAy2XPrL1kmpGB
+ kCeC5OHJU3RWaTWmx0f77b4S/xy94H1zbS0HZ02OHk028/Y6gMVPswVgF+LML9lLOdja
+ zVhp1JIm5q8cG95Q0NC+irVuQz0XAHc0wNbrtqxob5nVARLL/BNg7sPNoAvjkHtRLSgK
+ E7Ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705022562; x=1705627362;
+ d=1e100.net; s=20230601; t=1705022673; x=1705627473;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LkF9/1VdPlJF5YGzOoY0fbmY7AjaH0tcrXCeTR73l+E=;
- b=B9S681T8hAcrsYhaz+p3unDiFacFHKk18jck8f87mCfJYxjh5ssG1RDbmRp7RqqawB
- Z7l9roEEJM9HjPmkMfQZYK2JZb4AkL8TuA/vVNwRe8JmAdi8Ujlmco3/Nbg7UavYaVUd
- 0lkMWXjaorHdpvaXq+b6le3fO9rLhnuB4d5HRgtUX8QFd0827tgWX0CECy7zxW/4KuUd
- jG8eJTaoReoCpAE28hfwnbZNVuWSaZHn9gE+HG1XjrFGYegdB2jI6dWyBSS1vDf0brg4
- rBIpu8ML6YIurGpFDPAINtVwTP1UrA9l13Bzx45tStMWaWj05tNpREw2AJc063rIzoSg
- Lk2w==
-X-Gm-Message-State: AOJu0YwIrgskRKupEKD2o6nOJCiW3+YoxF2gmSQRIumympB71kW2Onlb
- 0HBAE2+cgKTrVgRDOcublEFf8efwbXvECfex0u8=
-X-Google-Smtp-Source: AGHT+IF+YzVu391rSoFAj94jLf4ea9VyRy+wq20vPLB9n87PCwu5bLAztpHrUc8eYs8kZP9PRtrx9NB5mn4+lGSY+xc=
-X-Received: by 2002:a67:f710:0:b0:467:c4d0:921d with SMTP id
- m16-20020a67f710000000b00467c4d0921dmr909582vso.25.1705022561825; Thu, 11 Jan
- 2024 17:22:41 -0800 (PST)
+ bh=7bc8xw3NFmRkoKJ/FSNm5LlJpyNgoeF5F00/LBRIzxo=;
+ b=AJZ54Kt6Wnz180+fCpT/V0ZSb2fu0ZbrjPfocDKBRepow7t8JlapbyXPykEewqo6mU
+ cFGqhoHisNcYy782r7XNrg8JzX9Rk59cWbN6ExzXW8nZXy0qM5qeKC3wehmaCxO3Ex+e
+ Mz/E1A8JWH0lhRxRbc43BCsJ4SmrGi/wPqk1Cp2MDgYmcnieBudG9FU7lHxufBaX1Rx3
+ E83RAYKAziVo51AMdIKLT3ikT9D3Fi0peQB9JjyQeQl5M81D8KEvytm/kxacUYiOCdJU
+ no4MwNBOzRWdV2E8KUJ3NhkKQPFwJqiTY4Ku6MmJJrMSBfOGziIaQ9uZgtR5BvzG2zIh
+ VJJw==
+X-Gm-Message-State: AOJu0YxmjCQKpHWiDOWR0gcY8KCB2WEdvveez/QBaGvKRE6X2AT9n6gH
+ rMN8/s8lKNxxBzipMhxzGi6gwKokmxq5C4gowqc=
+X-Google-Smtp-Source: AGHT+IGpxkhFQZMm3gXz9a0/m3BvgD89dlHYqKaawTJ/0Q0dh2uELSMqAA/QGUjQ1lrWcsMo2oD53oojudixAlGq1LI=
+X-Received: by 2002:a05:6122:1988:b0:4b6:e467:ec9a with SMTP id
+ bv8-20020a056122198800b004b6e467ec9amr716685vkb.16.1705022673451; Thu, 11 Jan
+ 2024 17:24:33 -0800 (PST)
 MIME-Version: 1.0
-References: <20240111161644.33630-1-rbradford@rivosinc.com>
-In-Reply-To: <20240111161644.33630-1-rbradford@rivosinc.com>
+References: <20240105230546.265053-1-dbarboza@ventanamicro.com>
+ <20240105230546.265053-16-dbarboza@ventanamicro.com>
+In-Reply-To: <20240105230546.265053-16-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 12 Jan 2024 11:22:15 +1000
-Message-ID: <CAKmqyKNFABtEKtcUCcD1LSaSLpMFT15oGJoysK-v7LckS3uP=A@mail.gmail.com>
-Subject: Re: [PATCH v2 0/2] target/riscv: Add support for 'B' extension
-To: Rob Bradford <rbradford@rivosinc.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, atishp@rivosinc.com, 
- palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
- liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
+Date: Fri, 12 Jan 2024 11:24:07 +1000
+Message-ID: <CAKmqyKNzLNS7rvw3_j37TCUFi6xXNESBC60DKg7x6OEcsSuBEQ@mail.gmail.com>
+Subject: Re: [PATCH v4 15/17] target/riscv/cpu.c: move 'mvendorid' to
+ riscv_cpu_properties[]
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, ajones@ventanamicro.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e36;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe36.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::933;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x933.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -89,51 +91,127 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Jan 12, 2024 at 2:17=E2=80=AFAM Rob Bradford <rbradford@rivosinc.co=
-m> wrote:
+On Sat, Jan 6, 2024 at 9:09=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
 >
-> Add support for the new (fast track) 'B' extension [1] this extension
-> uses the misa.B bit to indicate that the Zba, Zbb and Zbs extensions are
-> present.
+> Keep all class properties in riscv_cpu_properties[].
 >
-> Since this extension is not yet frozen it is exposed via the 'x-b' cpu
-> option. The validation logic is based on the new approach taken for the
-> 'G' extension.
->
-> The specification handles backward compatability: The misa.B bit may be
-> set if Zba, Zbb and Zbs are present but in order to not break existing
-> systems the bit is not required to be set if they are present. As such
-> even though Zba, Zbb and Zbs default to on in QEMU this extension is not
-> enabled by default in any cpu.
->
-> Cheers,
->
-> Rob
->
-> [1] - https://github.com/riscv/riscv-b
->
-> Changes since V1:
-> - Rebased on master after latest riscv updates
-> - All patches have R-B tags
-> - Array formatting fix to make future diffs clean (Daniel)
-> - Dropped enabling for max CPU variant as misa.B is reserved until
->   spec is at least frozen (Daniel & Drew)
->
-> Rob Bradford (2):
->   target/riscv: Add infrastructure for 'B' MISA extension
->   target/riscv: Add step to validate 'B' extension
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  target/riscv/cpu.c | 69 +++++++++++++++++++++++++---------------------
+>  1 file changed, 37 insertions(+), 32 deletions(-)
 >
->  target/riscv/cpu.c         |  5 +++--
->  target/riscv/cpu.h         |  1 +
->  target/riscv/tcg/tcg-cpu.c | 33 +++++++++++++++++++++++++++++++++
->  3 files changed, 37 insertions(+), 2 deletions(-)
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 9d4243891c..c725a4839d 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1974,6 +1974,41 @@ static const PropertyInfo prop_cboz_blksize =3D {
+>      .set =3D prop_cboz_blksize_set,
+>  };
+>
+> +static void prop_mvendorid_set(Object *obj, Visitor *v, const char *name=
+,
+> +                               void *opaque, Error **errp)
+> +{
+> +    bool dynamic_cpu =3D riscv_cpu_is_dynamic(obj);
+> +    RISCVCPU *cpu =3D RISCV_CPU(obj);
+> +    uint32_t prev_val =3D cpu->cfg.mvendorid;
+> +    uint32_t value;
+> +
+> +    if (!visit_type_uint32(v, name, &value, errp)) {
+> +        return;
+> +    }
+> +
+> +    if (!dynamic_cpu && prev_val !=3D value) {
+> +        error_setg(errp, "Unable to change %s mvendorid (0x%x)",
+> +                   object_get_typename(obj), prev_val);
+> +        return;
+> +    }
+> +
+> +    cpu->cfg.mvendorid =3D value;
+> +}
+> +
+> +static void prop_mvendorid_get(Object *obj, Visitor *v, const char *name=
+,
+> +                               void *opaque, Error **errp)
+> +{
+> +    uint32_t value =3D RISCV_CPU(obj)->cfg.mvendorid;
+> +
+> +    visit_type_uint32(v, name, &value, errp);
+> +}
+> +
+> +static const PropertyInfo prop_mvendorid =3D {
+> +    .name =3D "mvendorid",
+> +    .get =3D prop_mvendorid_get,
+> +    .set =3D prop_mvendorid_set,
+> +};
+> +
+>  /*
+>   * RVA22U64 defines some 'named features' or 'synthetic extensions'
+>   * that are cache related: Za64rs, Zic64b, Ziccif, Ziccrse, Ziccamoa
+> @@ -2060,6 +2095,8 @@ static Property riscv_cpu_properties[] =3D {
+>      {.name =3D "cbop_blocksize", .info =3D &prop_cbop_blksize},
+>      {.name =3D "cboz_blocksize", .info =3D &prop_cboz_blksize},
+>
+> +     {.name =3D "mvendorid", .info =3D &prop_mvendorid},
+> +
+>  #ifndef CONFIG_USER_ONLY
+>      DEFINE_PROP_UINT64("resetvec", RISCVCPU, env.resetvec, DEFAULT_RSTVE=
+C),
+>  #endif
+> @@ -2140,35 +2177,6 @@ static const struct SysemuCPUOps riscv_sysemu_ops =
+=3D {
+>  };
+>  #endif
+>
+> -static void cpu_set_mvendorid(Object *obj, Visitor *v, const char *name,
+> -                              void *opaque, Error **errp)
+> -{
+> -    bool dynamic_cpu =3D riscv_cpu_is_dynamic(obj);
+> -    RISCVCPU *cpu =3D RISCV_CPU(obj);
+> -    uint32_t prev_val =3D cpu->cfg.mvendorid;
+> -    uint32_t value;
+> -
+> -    if (!visit_type_uint32(v, name, &value, errp)) {
+> -        return;
+> -    }
+> -
+> -    if (!dynamic_cpu && prev_val !=3D value) {
+> -        error_setg(errp, "Unable to change %s mvendorid (0x%x)",
+> -                   object_get_typename(obj), prev_val);
+> -        return;
+> -    }
+> -
+> -    cpu->cfg.mvendorid =3D value;
+> -}
+> -
+> -static void cpu_get_mvendorid(Object *obj, Visitor *v, const char *name,
+> -                              void *opaque, Error **errp)
+> -{
+> -    uint32_t value =3D RISCV_CPU(obj)->cfg.mvendorid;
+> -
+> -    visit_type_uint32(v, name, &value, errp);
+> -}
+> -
+>  static void cpu_set_mimpid(Object *obj, Visitor *v, const char *name,
+>                             void *opaque, Error **errp)
+>  {
+> @@ -2278,9 +2286,6 @@ static void riscv_cpu_class_init(ObjectClass *c, vo=
+id *data)
+>      cc->gdb_arch_name =3D riscv_gdb_arch_name;
+>      cc->gdb_get_dynamic_xml =3D riscv_gdb_get_dynamic_xml;
+>
+> -    object_class_property_add(c, "mvendorid", "uint32", cpu_get_mvendori=
+d,
+> -                              cpu_set_mvendorid, NULL, NULL);
+> -
+>      object_class_property_add(c, "mimpid", "uint64", cpu_get_mimpid,
+>                                cpu_set_mimpid, NULL, NULL);
 >
 > --
 > 2.43.0
