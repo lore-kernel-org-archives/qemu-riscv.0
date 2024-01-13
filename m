@@ -4,88 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A65DC4706C
-	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jan 2024 22:52:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3EB6C3DA79
+	for <qemu-riscv@archiver.kernel.org>; Sat, 13 Jan 2024 01:50:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rOQNf-0004j3-Ga; Fri, 12 Jan 2024 17:52:03 -0500
+	id 1rOTAc-0004v2-H0; Fri, 12 Jan 2024 20:50:46 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rOQNe-0004ic-A8
- for qemu-riscv@nongnu.org; Fri, 12 Jan 2024 17:52:02 -0500
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ (Exim 4.90_1) (envelope-from <ved@rivosinc.com>) id 1rORtM-0000aQ-Ue
+ for qemu-riscv@nongnu.org; Fri, 12 Jan 2024 19:28:53 -0500
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rOQNb-0007xD-DO
- for qemu-riscv@nongnu.org; Fri, 12 Jan 2024 17:52:02 -0500
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1d3aa0321b5so58063385ad.2
- for <qemu-riscv@nongnu.org>; Fri, 12 Jan 2024 14:51:58 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <ved@rivosinc.com>) id 1rORtK-0007ub-7s
+ for qemu-riscv@nongnu.org; Fri, 12 Jan 2024 19:28:52 -0500
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-1d4ab4e65aeso51628645ad.0
+ for <qemu-riscv@nongnu.org>; Fri, 12 Jan 2024 16:28:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705099917; x=1705704717; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=n0eRD2gbAFK8+D4qYKrFFO5oLv8pyWiOLJDRDhM9lXU=;
- b=RLUTfA5h39C7ce+9oBCqiUAd03/NfX09lRlDBf5a2Sf3XCVA798jxhZzmNDlmCXg0H
- krOmqBvHJxCh5RDGMsxwnGzKxE22QoflgXljeTIZT04MCMsolAEmF0VRc9ugoRGBmy7w
- tlCCJdtalCeE3SwMW61kifyW7ADtAG9zf1TpN0S4hEF57NGtktkp3hlu+R/7lXby3S8S
- B8RNRk1oofHgjNo67DqN39ieTFwWqqbsLIMybjZUaNNH1PoSbZHYeYq16xDJ+iXQ3LW7
- cCE/K5zmFf8U/G8gA8vRNV4jNW6Zp3joMi+o0n3yld7P29VRMy+jqPp6T7B5fQPmOpWd
- D3JA==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1705105728; x=1705710528;
+ darn=nongnu.org; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=gsm5BgPC3U8+ci61AhiTIOfIfHAz9Z+LUC5yPUBYy64=;
+ b=N3svVKm2lCquU1V8aqZh9lFkCSKW7kWIEdrw1GMO5+n5hErCN3uorF98VzKvr7Oxvj
+ Jj3kc1/DlX1ihQ4Me83YwKHY7Ram8Lz2fP5kjNrmTvVZUn+PTiJty+qjHQ1YBu0ANgRN
+ C0P2tfXF+6tenDYcu0dmI6PUSgN6XIduz8WqCYXJGxjOaQavXZF6Ip/xWUWU/rMOiO/0
+ syQLt4BAWW+5mFSzrs43GOX4meOsMSm/d89G0U1/Ay9G39TUbEu6P7drVgjfDmWbYcmY
+ R5hBhD2h3ACa6ivR+AklyYVjskHo8FPtvDutf+Ov1Q3rZzteo5Yj+XEA38NZsLNQv5tk
+ d+ZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705099917; x=1705704717;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=n0eRD2gbAFK8+D4qYKrFFO5oLv8pyWiOLJDRDhM9lXU=;
- b=NpIYIw02TAgFc47zCf0N5gzDSKcWACAJdXVYKrySplYWA0JYASs7PRbjyv4BBxUUxm
- fmsS6+FoqIBMyLdG71/CbBZWqHmqeiWUBxIqSiu5duIWinTn2B258AubjsNKkIudT2S8
- T+Nqc71ujrDQi5YWnMG2geqwgRnr33AnCpNQy7OD42F45ODmQJUlqjFahMX5fg73QZDG
- JO5Qz3t2MWpqnEDzxUTgnORmwxz7eRoIn/iN9RABby9IF6NInioT4ulaB9Rqd7DHUfVq
- JC+7b6/7lMNYYZFTJ/6klveeEQxckuyanACYL2Xk7P9PEs7TmGa78VMG/8YOsB3uwTHg
- gXiw==
-X-Gm-Message-State: AOJu0Yzqvuz+h59si9IOvZXVy7Tqm9ie7eLER8ETfrO3IwMtbnMq/doF
- ngPMwao7WYQYPo1Q+dSpizKSqlBF9goiIQ==
-X-Google-Smtp-Source: AGHT+IHuoZPySER0Cu6e6UuBV8h9dlII6GE8IxbbGGEPkadrUPMyuoDo2v0W30skiTUDxlXEme5Ibw==
-X-Received: by 2002:a17:902:c792:b0:1d4:cb7e:14ee with SMTP id
- w18-20020a170902c79200b001d4cb7e14eemr1420196pla.84.1705099917717; 
- Fri, 12 Jan 2024 14:51:57 -0800 (PST)
-Received: from ?IPV6:2001:8004:2728:2ad6:e985:c1c8:a4fc:508?
- ([2001:8004:2728:2ad6:e985:c1c8:a4fc:508])
- by smtp.gmail.com with ESMTPSA id
- l2-20020a170902e2c200b001d09c539c96sm3680953plc.229.2024.01.12.14.51.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 12 Jan 2024 14:51:57 -0800 (PST)
-Message-ID: <32238550-8008-4771-9a1d-755be8c19384@linaro.org>
-Date: Sat, 13 Jan 2024 09:51:50 +1100
+ d=1e100.net; s=20230601; t=1705105728; x=1705710528;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gsm5BgPC3U8+ci61AhiTIOfIfHAz9Z+LUC5yPUBYy64=;
+ b=prXI3SqTY7BaoVtuxHrq113Hz/A1B6rTeOYDvOAeqtj8SMN9ik34VpCp28F9EWn3f3
+ FXrmCmH8NjFFKALP6N94b59fNRo6eHrDS2jjsPflyjB1kgz+x/A64VJvIJt8LJuxF+cD
+ pk+i6CiCUxiuZdrK53dJy4wJxL21bATtfjNLg+YYJCvqkCdXsR581UHs5MPKfW2zUkzY
+ We+fn7QtC1XyQVkHBRaRjjKIUJZKVckN74T7bYjIEYKbhH51gPZmHuinv1jvdlNgcTh5
+ zBBMKYoWzd1gBudoyUe1PRi0Hz+znfpTzUV4I2J6FlufljN+W9ZVE2HleZ5H8qI7f11v
+ O8wQ==
+X-Gm-Message-State: AOJu0Yx6wISBhg6Y4PiAmaPaP2QHIqvApeicp74oaJ42ITaIQzoDCVwF
+ NvS6kQNXJtdUvM1Vk4iPx+jK65M0SB8JCg==
+X-Google-Smtp-Source: AGHT+IHEZ/JKocSP/JgiVDfECSziL6wGFKozxONVH2rZIbtbNS6rSer91mSpTk7dqE3D9RwNIuS0Qw==
+X-Received: by 2002:a17:902:bc4c:b0:1d5:73d0:eb7d with SMTP id
+ t12-20020a170902bc4c00b001d573d0eb7dmr2497346plz.18.1705105728288; 
+ Fri, 12 Jan 2024 16:28:48 -0800 (PST)
+Received: from ved-XPS-8940 ([12.0.166.162]) by smtp.gmail.com with ESMTPSA id
+ sm9-20020a17090b2e4900b0028bad9b220fsm4842111pjb.37.2024.01.12.16.28.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 12 Jan 2024 16:28:47 -0800 (PST)
+Date: Fri, 12 Jan 2024 18:28:45 -0600
+From: Ved Shanbhogue <ved@rivosinc.com>
+To: Rob Bradford <rbradford@rivosinc.com>
+Cc: Andrew Jones <ajones@ventanamicro.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, atishp@rivosinc.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com,
+ liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com
+Subject: Re: Re: Re: [PATCH 1/3] target/riscv: Add infrastructure for 'B'
+ MISA extension
+Message-ID: <ZaHZPZauuZh4SwVj@ved-XPS-8940>
+References: <20240109171848.32237-1-rbradford@rivosinc.com>
+ <20240109171848.32237-2-rbradford@rivosinc.com>
+ <20240111-585fe1291fcaa1e0432674e3@orel>
+ <20240111-df7a6acf3109b630469591a1@orel>
+ <3dbd3fa1cbad80948175f98dcc0c76b886e2376e.camel@rivosinc.com>
+ <20240112-d9e3cc215a7a68c5189908bf@orel>
+ <7461190fbece351f916eccd258bf62b86227927d.camel@rivosinc.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 11/13] trans_rvv.c.inc: remove vlmax arg from
- vec_element_loadx()
-Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- max.chou@sifive.com
-References: <20240112213812.173521-1-dbarboza@ventanamicro.com>
- <20240112213812.173521-12-dbarboza@ventanamicro.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240112213812.173521-12-dbarboza@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62d.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <7461190fbece351f916eccd258bf62b86227927d.camel@rivosinc.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=ved@rivosinc.com; helo=mail-pl1-x62e.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Fri, 12 Jan 2024 20:50:35 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -100,42 +101,17 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 1/13/24 08:38, Daniel Henrique Barboza wrote:
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->   target/riscv/insn_trans/trans_rvv.c.inc | 26 +++++++++++++++++--------
->   1 file changed, 18 insertions(+), 8 deletions(-)
-> 
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index 804cfd6c7f..3782d0fa2f 100644
-> --- a/target/riscv/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -3265,21 +3265,28 @@ static void endian_adjust(TCGv_i32 ofs, int sew)
->   #endif
->   }
->   
-> -/* Load idx >= VLMAX ? 0 : vreg[idx] */
-> +/*
-> + * Load idx >= VLMAX ? 0 : vreg[idx]
-> + *
-> + * This function assumes ctx->vl_eq_vlmax = true.
-> + */
->   static void vec_element_loadx(DisasContext *s, TCGv_i64 dest,
-> -                              int vreg, TCGv idx, int vlmax)
-> +                              int vreg, TCGv idx)
+Rob Bradford wrote:
+>I'm using table 27.1 in the published PDF which is the PDF in this
+>release:
+>https://github.com/riscv/riscv-isa-manual/releases/tag/Ratified-IMAFDQC
+>It looks like it was removed in this commit (which is a set of
+>backports):
+>
 
-I think removing the cpu configuration constant is a mistake.
-Compile-time constants are always better than computation...
+We would retain the previously documented canonical order with B
+between C and P and that table updated on ratification.
 
-> +#ifdef TARGET_RISCV64
-> +    tcg_gen_mov_i64(t_vlmax, cpu_vl);
-> +#else
-> +    tcg_gen_extu_tl_i64(t_vlmax, cpu_vl);
-> +#endif
-
-That said, no ifdef required -- the second statement should always work.
-
-
-
-r~
+regards
+ved
 
