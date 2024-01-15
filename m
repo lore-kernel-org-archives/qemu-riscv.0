@@ -4,73 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F8D3C3DA79
-	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jan 2024 09:59:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CFE3C3DA79
+	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jan 2024 11:51:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rPJkU-0000hj-JT; Mon, 15 Jan 2024 04:59:18 -0500
+	id 1rPLV7-000582-Rw; Mon, 15 Jan 2024 06:51:33 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <vadim.shakirov@syntacore.com>)
- id 1rPJkR-0000f4-Ai; Mon, 15 Jan 2024 04:59:15 -0500
-Received: from mta-04.yadro.com ([89.207.88.248])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <vadim.shakirov@syntacore.com>)
- id 1rPJkP-0004Nm-Aq; Mon, 15 Jan 2024 04:59:15 -0500
-DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com D8C85C0002
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-04; t=1705312746;
- bh=tPqhwywKLKJAjjFGnjKgtHBBCqMw+5GQeemY9Ywj7wY=;
- h=From:To:Subject:Date:Message-ID:Content-Type:MIME-Version:From;
- b=ISYSHBGGMVClzN6akxixbaJvHQFcJr1cf6ZV9nGcZ8ChMsRPcA3tSbZJ94fiaodky
- MIVbiVTV3/HYLm9X4WprMaT5nL4vXQ6HIplR8c57cFyfgq/4xNykbGdbM/CP1J3UxH
- 70f7M0kg8z4DdPxmHCqkYbfE2fKnG3gwt/zmnZgfxNcZe8NpkNDvZa/01Uv0Bk+Jma
- t/dueURuimIQppG72HR284ipMM58VoBeuilGHwEk4rqdHVYb4nbM5FvMNNBHuhykx9
- kdCmDOWeYC8lB6KvIUTh7GRFTpiLnkMSZlN9kxrMpefxv56y6GVAwhiHyN4PLoRXl0
- sLQjQWlPDioWQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-03; t=1705312746;
- bh=tPqhwywKLKJAjjFGnjKgtHBBCqMw+5GQeemY9Ywj7wY=;
- h=From:To:Subject:Date:Message-ID:Content-Type:MIME-Version:From;
- b=IXYHd71EEUJ03juvI3PHP7f6G2oFx6X2Dg2ojN+yVD5klxM+UJ1n9EvHaVZhRBV9K
- NRnNtNEg57WSTw4wzI5RA/bc9O7yfOZLPNaBlgPFlUyxf9uQqr19odGs4i7wR4jGm0
- AvWP44FZL3fAc8xJoE8Y4cXNHtUA4EVbEPxzzrrthCioS1M3tk85J2FEe17NHLAgYi
- tg9fSsIC5aDCANgOuiWM017I+Qgdl6YaE4FulMzfugMN9r0iaun0V+w2iYZe1J25U9
- kx0IDNnUMqoO8A7KBTqfJYyTdrEcp/sI+OpuKS1UMbNQz1N7vMKAY5t1rMfb14/mcA
- Sl0sXXXW8U0UA==
-From: Vadim Shakirov <vadim.shakirov@syntacore.com>
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1rPLV5-00057I-W1
+ for qemu-riscv@nongnu.org; Mon, 15 Jan 2024 06:51:32 -0500
+Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1rPLV4-0002iR-Bd
+ for qemu-riscv@nongnu.org; Mon, 15 Jan 2024 06:51:31 -0500
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-3377d45c178so3792677f8f.2
+ for <qemu-riscv@nongnu.org>; Mon, 15 Jan 2024 03:51:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1705319488; x=1705924288; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:user-agent
+ :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9l19L6rbX05ONRegK7vqFjOSqqycukFWTq6UAM6eNyI=;
+ b=du+VdGR5c6jbnaWy1/BBj924g9Tz8YQkt/5/lr8khXn8V4AFrJanh+6o0vjpcXSp+A
+ zOF0YSa6tJcCbxZAVuKPnEX0VUfnv96NpPefYh2V4G4qea44ZnXkN786P7WuU9GmGOoD
+ HAccITU+p6ZbTi6f9YWw7UbmruXWInvY8Ku8oV36YPOlRm2iu9vBLZIGI6U1dr24+59+
+ VWPD2Dz/bcikncoQxBpNYaj69eImeTvHyVWS4+PYi8Ve9+640qRLcTQQAraleo9jy9N2
+ AEqo+lPthz236ldgN6exUx25fVzp2v4Z5msNZDQAEzwcDlWwfxeF8WOI2Hw/3TUc8Of+
+ GvXA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705319488; x=1705924288;
+ h=content-transfer-encoding:mime-version:message-id:date:user-agent
+ :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=9l19L6rbX05ONRegK7vqFjOSqqycukFWTq6UAM6eNyI=;
+ b=CEcCgGQGWH8U7maBVOXv2yO9bR4klxsm7UcOKRiEufCpjiqL4BxZ57WdVzuqOzyC+P
+ XHoiC6fNxzU9VgDZE831KQV/Og/aAtA00oYAzr1JY6Agg8+yac7bjigajbpN0Y4QQ2As
+ m4BQH+OqqNhGM+eSAt21ba0/GXjHc67vHzZuBVro1/gBE53Vf7v+YnqB0B3gNDYqHjnZ
+ yXCfPyUxvgyFv/Iaq+z7CVNCxLBmJ7T/ZTmZ/+G3sLdGNI+hoe6G3iO+KmzVyyICpVbQ
+ XgabHvwgxEsErepqSNMGjJDx1qz8nMn8rLjwSkaSkmPNuKJoKmOSgk5mWTC5vWLsVsXD
+ csng==
+X-Gm-Message-State: AOJu0Yx5pLqdE5/Bb/3Z6dxYeX+/LhTd1J5Yg/RhArikdOrXXAQf4zzM
+ kq+9Be8dqOEs65LfrMB+JU0+Q6EcVgMW1g==
+X-Google-Smtp-Source: AGHT+IH3GpcUGafFfT+70R3lWyRyo45Gv5/bjAAhsnh/tJGw8bX+nySaHK9E3jA5toNz5o2Q4P6Ssg==
+X-Received: by 2002:a05:600c:3b2a:b0:40e:621b:639b with SMTP id
+ m42-20020a05600c3b2a00b0040e621b639bmr2872190wms.116.1705319488061; 
+ Mon, 15 Jan 2024 03:51:28 -0800 (PST)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ p19-20020adf9d93000000b003362d0eefd3sm11633639wre.20.2024.01.15.03.51.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 15 Jan 2024 03:51:27 -0800 (PST)
+Received: from draig (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id 61A965F78A;
+ Mon, 15 Jan 2024 11:51:27 +0000 (GMT)
+From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: Alistair Francis <alistair23@gmail.com>
-CC: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, Palmer Dabbelt
- <palmer@dabbelt.com>, Alistair Francis <alistair.francis@wdc.com>, Bin Meng
- <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>, "Daniel Henrique
- Barboza" <dbarboza@ventanamicro.com>, Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>, "qemu-riscv@nongnu.org"
- <qemu-riscv@nongnu.org>
-Subject: Re: [PATCH 0/2] Added the ability to delegate LCOFI to VS
-Thread-Topic: [PATCH 0/2] Added the ability to delegate LCOFI to VS
-Thread-Index: AQHaNAIPlLGQXkOoCUiH/Cnyw2C4GLDI6R6AgBHhSJ0=
-Date: Mon, 15 Jan 2024 09:59:05 +0000
-Message-ID: <c99500455a9548059294f2d3cd4804eb@syntacore.com>
-References: <20231221113628.41038-1-vadim.shakirov@syntacore.com>,
- <CAKmqyKPqfsVFD2N3YDOW=WYLHRwiOYmZp8op18ds6Hw4AHXY=A@mail.gmail.com>
-In-Reply-To: <CAKmqyKPqfsVFD2N3YDOW=WYLHRwiOYmZp8op18ds6Hw4AHXY=A@mail.gmail.com>
-Accept-Language: ru-RU, en-US
-Content-Language: ru-RU
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Content-Type: multipart/alternative;
- boundary="_000_c99500455a9548059294f2d3cd4804ebsyntacorecom_"
+Cc: qemu-devel@nongnu.org,  Palmer Dabbelt <palmer@dabbelt.com>,  Alistair
+ Francis <alistair.francis@wdc.com>,  Bin Meng <bin.meng@windriver.com>,
+ Weiwei Li <liwei1518@gmail.com>,  Daniel Henrique Barboza
+ <dbarboza@ventanamicro.com>,  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ qemu-riscv@nongnu.org,  Akihiko Odaki <akihiko.odaki@daynix.com>
+Subject: Re: [PATCH v2 23/43] target/riscv: Remove misa_mxl validation
+In-Reply-To: <875xzyejuw.fsf@draig.linaro.org> ("Alex =?utf-8?Q?Benn=C3=A9?=
+ =?utf-8?Q?e=22's?= message of "Fri, 12 Jan 2024 13:56:07 +0000")
+References: <20240103173349.398526-1-alex.bennee@linaro.org>
+ <20240103173349.398526-24-alex.bennee@linaro.org>
+ <87sf37hlwo.fsf@draig.linaro.org>
+ <CAKmqyKPCy9W-iYscHLjVvU=RfoSLURFgdki0qdzgNSkLKqutyg@mail.gmail.com>
+ <875xzyejuw.fsf@draig.linaro.org>
+User-Agent: mu4e 1.11.27; emacs 29.1
+Date: Mon, 15 Jan 2024 11:51:27 +0000
+Message-ID: <87a5p6ke68.fsf@draig.linaro.org>
 MIME-Version: 1.0
-Received-SPF: permerror client-ip=89.207.88.248;
- envelope-from=vadim.shakirov@syntacore.com; helo=mta-04.yadro.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::429;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- SPF_HELO_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01,
- T_SPF_PERMERROR=0.01 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -86,95 +105,48 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---_000_c99500455a9548059294f2d3cd4804ebsyntacorecom_
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Alex Benn=C3=A9e <alex.bennee@linaro.org> writes:
 
-VGhpcyBmdW5jdGlvbmFsaXR5IHR1cm5zIG91dCB0byBoYXZlIGFscmVhZHkgYmVlbiBhZGRlZCBi
-eSBjb21taXQgNDAzMzZkNWIxZDRjNmI4YjhiMzhjNzdmZGEyNTQ0NTdkNDRmZTkwYg0KDQpWYWRp
-bQ0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0K0J7RgjogQWxpc3RhaXIgRnJh
-bmNpcyA8YWxpc3RhaXIyM0BnbWFpbC5jb20+DQrQntGC0L/RgNCw0LLQu9C10L3QvjogNCDRj9C9
-0LLQsNGA0Y8gMjAyNCDQsy4gNjo1NDoyNw0K0JrQvtC80YM6IFZhZGltIFNoYWtpcm92DQrQmtC+
-0L/QuNGPOiBxZW11LWRldmVsQG5vbmdudS5vcmc7IFBhbG1lciBEYWJiZWx0OyBBbGlzdGFpciBG
-cmFuY2lzOyBCaW4gTWVuZzsgV2Vpd2VpIExpOyBEYW5pZWwgSGVucmlxdWUgQmFyYm96YTsgTGl1
-IFpoaXdlaTsgcWVtdS1yaXNjdkBub25nbnUub3JnDQrQotC10LzQsDogUmU6IFtQQVRDSCAwLzJd
-IEFkZGVkIHRoZSBhYmlsaXR5IHRvIGRlbGVnYXRlIExDT0ZJIHRvIFZTDQoNCsKr0JLQvdC40LzQ
-sNC90LjQtSEg0JTQsNC90L3QvtC1INC/0LjRgdGM0LzQviDQvtGCINCy0L3QtdGI0L3QtdCz0L4g
-0LDQtNGA0LXRgdCw0YLQsCHCuw0KDQpPbiBGcmksIERlYyAyMiwgMjAyMyBhdCAxOjA44oCvQU0g
-VmFkaW0gU2hha2lyb3YNCjx2YWRpbS5zaGFraXJvdkBzeW50YWNvcmUuY29tPiB3cm90ZToNCj4N
-Cj4gVGhpcyBzZXJpZXMgb2YgcGF0Y2hlcyBhZGRzIExDT0ZJIGRlbGVnYXRpb24gZnJvbSBIUy1t
-b2RlIHRvIFZTLW1vZGUuDQo+DQo+IFRoaXMgcG9zc2liaWxpdHkgbXVzdCBiZSBpbXBsZW1lbnRl
-ZCwgYXMgaW4gdGhlIEFJQSBzcGVjIGluIHNlY3Rpb24gNi4zLjINCj4gaXQgaXMgaW5kaWNhdGVk
-IGluIHRhYmxlIDYuMSB0aGF0IGluIHRoZSBjYXNlIHdoZW4gdGhlIGhpZGVsZWcgYml0IGlzIHNl
-dCwNCj4gdGhlIGNvcnJlc3BvbmRpbmcgdnNpcCBiaXQgaXMgYW4gYWxpYXMgdG8gdGhlIGNvcnJl
-c3BvbmRpbmcgc2lwIGJpdCwgYWxzbw0KPiBmb3IgZW5hYmxlIHJlZ2lzdGVycy4NCj4NCj4gVmFk
-aW0gU2hha2lyb3YgKDIpOg0KPiAgIHRhcmdldC9yaXNjdi9jc3I6IFJlbmFtZSBncm91cHMgb2Yg
-aW50ZXJydXB0cw0KPiAgIHRhcmdldC9yaXNjdi9jc3I6IEFkZGVkIHRoZSBhYmlsaXR5IHRvIGRl
-bGVnYXRlIExDT0ZJIHRvIFZTDQoNClRoYW5rcyBmb3IgdGhlIHBhdGNoLg0KDQpEbyB5b3UgbWlu
-ZCByZWJhc2luZyB0aGlzIG9uDQpodHRwczovL2dpdGh1Yi5jb20vYWxpc3RhaXIyMy9xZW11L3Ry
-ZWUvcmlzY3YtdG8tYXBwbHkubmV4dCBhbmQNCnNlbmRpbmcgYSBuZXcgdmVyc2lvbj8NCg0KQWxp
-c3RhaXINCg0KPg0KPiAgdGFyZ2V0L3Jpc2N2L2Nzci5jIHwgNTAgKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0tLQ0KPiAgMSBmaWxlIGNoYW5nZWQsIDMzIGluc2Vy
-dGlvbnMoKyksIDE3IGRlbGV0aW9ucygtKQ0KPg0KPiAtLQ0KPiAyLjM0LjENCj4NCj4NCg==
+> Alistair Francis <alistair23@gmail.com> writes:
+>
+>> On Tue, Jan 9, 2024 at 1:43=E2=80=AFAM Alex Benn=C3=A9e <alex.bennee@lin=
+aro.org> wrote:
+>>>
+>>> Alex Benn=C3=A9e <alex.bennee@linaro.org> writes:
+>>>
+>>> > From: Akihiko Odaki <akihiko.odaki@daynix.com>
+>>> >
+>>> > It is initialized with a simple assignment and there is little room f=
+or
+>>> > error. In fact, the validation is even more complex.
+>>> >
+>>> > Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+>>> > Acked-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+>>> > Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>>> > Acked-by: Alistair Francis <alistair.francis@wdc.com>
+>>> > Message-Id: <20231213-riscv-v7-2-a760156a337f@daynix.com>
+>>> > Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+>>>
+>>> ping: along with this are the RiscV maintainers happy for me to take:
+>>>
+>>>   [PATCH v2 23/43] target/riscv: Remove misa_mxl validation
+>>>   [PATCH v2 24/43] target/riscv: Move misa_mxl_max to class
+>>>   [PATCH v2 25/43] target/riscv: Validate misa_mxl_max only once
+>>>
+>>> through my next pull request?
+>>
+>> Yep! Go for it
+>
+> Sadly some of the recent changes that went through have created a merge
+> conflict.
+>
+> Akihiko,
+>
+> Any chance you could re-spin just the MISA_MXL patches?
 
---_000_c99500455a9548059294f2d3cd4804ebsyntacorecom_
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: base64
+Never mind, I think I got it figured out.
 
-PGh0bWw+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIgY29udGVudD0i
-dGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjxtZXRhIG5hbWU9IkdlbmVyYXRvciIgY29udGVu
-dD0iTWljcm9zb2Z0IEV4Y2hhbmdlIFNlcnZlciI+DQo8IS0tIGNvbnZlcnRlZCBmcm9tIHRleHQg
-LS0+PHN0eWxlPjwhLS0gLkVtYWlsUXVvdGUgeyBtYXJnaW4tbGVmdDogMXB0OyBwYWRkaW5nLWxl
-ZnQ6IDRwdDsgYm9yZGVyLWxlZnQ6ICM4MDAwMDAgMnB4IHNvbGlkOyB9IC0tPjwvc3R5bGU+DQo8
-L2hlYWQ+DQo8Ym9keT4NCjxtZXRhIGNvbnRlbnQ9InRleHQvaHRtbDsgY2hhcnNldD1VVEYtOCI+
-DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiIHN0eWxlPSIiPg0KPCEtLQ0KcA0KCXttYXJnaW4tdG9w
-OjA7DQoJbWFyZ2luLWJvdHRvbTowfQ0KLS0+DQo8L3N0eWxlPg0KPGRpdiBkaXI9Imx0ciI+DQo8
-ZGl2IGlkPSJ4X2RpdnRhZ2RlZmF1bHR3cmFwcGVyIiBkaXI9Imx0ciIgc3R5bGU9ImZvbnQtc2l6
-ZToxMnB0OyBjb2xvcjojMDAwMDAwOyBmb250LWZhbWlseTpDYWxpYnJpLEhlbHZldGljYSxzYW5z
-LXNlcmlmIj4NCjxkaXY+PHNwYW4gY2xhc3M9InhfSHd0WmUiIGxhbmc9ImVuIj48c3BhbiBjbGFz
-cz0ieF9qQ0FoeiB4X0NoTWswYiI+PHNwYW4gY2xhc3M9InhfcnlOcXZiIj5UaGlzIGZ1bmN0aW9u
-YWxpdHkgdHVybnMgb3V0IHRvIGhhdmUgYWxyZWFkeSBiZWVuIGFkZGVkIGJ5IGNvbW1pdCA0MDMz
-NmQ1YjFkNGM2YjhiOGIzOGM3N2ZkYTI1NDQ1N2Q0NGZlOTBiPC9zcGFuPjwvc3Bhbj48YnI+DQo8
-L3NwYW4+PC9kaXY+DQo8ZGl2PjxzcGFuIGNsYXNzPSJ4X0h3dFplIiBsYW5nPSJlbiI+PGJyPg0K
-PC9zcGFuPjwvZGl2Pg0KPGRpdj48c3BhbiBjbGFzcz0ieF9Id3RaZSIgbGFuZz0iZW4iPlZhZGlt
-PGJyPg0KPC9zcGFuPjwvZGl2Pg0KPGJyPg0KPC9kaXY+DQo8aHIgdGFiaW5kZXg9Ii0xIiBzdHls
-ZT0iZGlzcGxheTppbmxpbmUtYmxvY2s7IHdpZHRoOjk4JSI+DQo8ZGl2IGlkPSJ4X2RpdlJwbHlG
-d2RNc2ciIGRpcj0ibHRyIj48Zm9udCBmYWNlPSJDYWxpYnJpLCBzYW5zLXNlcmlmIiBjb2xvcj0i
-IzAwMDAwMCIgc3R5bGU9ImZvbnQtc2l6ZToxMXB0Ij48Yj7QntGCOjwvYj4gQWxpc3RhaXIgRnJh
-bmNpcyAmbHQ7YWxpc3RhaXIyM0BnbWFpbC5jb20mZ3Q7PGJyPg0KPGI+0J7RgtC/0YDQsNCy0LvQ
-tdC90L46PC9iPiA0INGP0L3QstCw0YDRjyAyMDI0INCzLiA2OjU0OjI3PGJyPg0KPGI+0JrQvtC8
-0YM6PC9iPiBWYWRpbSBTaGFraXJvdjxicj4NCjxiPtCa0L7Qv9C40Y86PC9iPiBxZW11LWRldmVs
-QG5vbmdudS5vcmc7IFBhbG1lciBEYWJiZWx0OyBBbGlzdGFpciBGcmFuY2lzOyBCaW4gTWVuZzsg
-V2Vpd2VpIExpOyBEYW5pZWwgSGVucmlxdWUgQmFyYm96YTsgTGl1IFpoaXdlaTsgcWVtdS1yaXNj
-dkBub25nbnUub3JnPGJyPg0KPGI+0KLQtdC80LA6PC9iPiBSZTogW1BBVENIIDAvMl0gQWRkZWQg
-dGhlIGFiaWxpdHkgdG8gZGVsZWdhdGUgTENPRkkgdG8gVlM8L2ZvbnQ+DQo8ZGl2PiZuYnNwOzwv
-ZGl2Pg0KPC9kaXY+DQo8L2Rpdj4NCjxmb250IHNpemU9IjIiPjxzcGFuIHN0eWxlPSJmb250LXNp
-emU6MTBwdDsiPg0KPGRpdiBjbGFzcz0iUGxhaW5UZXh0Ij7Cq9CS0L3QuNC80LDQvdC40LUhINCU
-0LDQvdC90L7QtSDQv9C40YHRjNC80L4g0L7RgiDQstC90LXRiNC90LXQs9C+INCw0LTRgNC10YHQ
-sNGC0LAhwrs8YnI+DQo8YnI+DQpPbiBGcmksIERlYyAyMiwgMjAyMyBhdCAxOjA44oCvQU0gVmFk
-aW0gU2hha2lyb3Y8YnI+DQombHQ7dmFkaW0uc2hha2lyb3ZAc3ludGFjb3JlLmNvbSZndDsgd3Jv
-dGU6PGJyPg0KJmd0Ozxicj4NCiZndDsgVGhpcyBzZXJpZXMgb2YgcGF0Y2hlcyBhZGRzIExDT0ZJ
-IGRlbGVnYXRpb24gZnJvbSBIUy1tb2RlIHRvIFZTLW1vZGUuPGJyPg0KJmd0Ozxicj4NCiZndDsg
-VGhpcyBwb3NzaWJpbGl0eSBtdXN0IGJlIGltcGxlbWVudGVkLCBhcyBpbiB0aGUgQUlBIHNwZWMg
-aW4gc2VjdGlvbiA2LjMuMjxicj4NCiZndDsgaXQgaXMgaW5kaWNhdGVkIGluIHRhYmxlIDYuMSB0
-aGF0IGluIHRoZSBjYXNlIHdoZW4gdGhlIGhpZGVsZWcgYml0IGlzIHNldCw8YnI+DQomZ3Q7IHRo
-ZSBjb3JyZXNwb25kaW5nIHZzaXAgYml0IGlzIGFuIGFsaWFzIHRvIHRoZSBjb3JyZXNwb25kaW5n
-IHNpcCBiaXQsIGFsc288YnI+DQomZ3Q7IGZvciBlbmFibGUgcmVnaXN0ZXJzLjxicj4NCiZndDs8
-YnI+DQomZ3Q7IFZhZGltIFNoYWtpcm92ICgyKTo8YnI+DQomZ3Q7Jm5ic3A7Jm5ic3A7IHRhcmdl
-dC9yaXNjdi9jc3I6IFJlbmFtZSBncm91cHMgb2YgaW50ZXJydXB0czxicj4NCiZndDsmbmJzcDsm
-bmJzcDsgdGFyZ2V0L3Jpc2N2L2NzcjogQWRkZWQgdGhlIGFiaWxpdHkgdG8gZGVsZWdhdGUgTENP
-RkkgdG8gVlM8YnI+DQo8YnI+DQpUaGFua3MgZm9yIHRoZSBwYXRjaC48YnI+DQo8YnI+DQpEbyB5
-b3UgbWluZCByZWJhc2luZyB0aGlzIG9uPGJyPg0KPGEgaHJlZj0iaHR0cHM6Ly9naXRodWIuY29t
-L2FsaXN0YWlyMjMvcWVtdS90cmVlL3Jpc2N2LXRvLWFwcGx5Lm5leHQiPmh0dHBzOi8vZ2l0aHVi
-LmNvbS9hbGlzdGFpcjIzL3FlbXUvdHJlZS9yaXNjdi10by1hcHBseS5uZXh0PC9hPiBhbmQ8YnI+
-DQpzZW5kaW5nIGEgbmV3IHZlcnNpb24/PGJyPg0KPGJyPg0KQWxpc3RhaXI8YnI+DQo8YnI+DQom
-Z3Q7PGJyPg0KJmd0OyZuYnNwOyB0YXJnZXQvcmlzY3YvY3NyLmMgfCA1MCAmIzQzOyYjNDM7JiM0
-MzsmIzQzOyYjNDM7JiM0MzsmIzQzOyYjNDM7JiM0MzsmIzQzOyYjNDM7JiM0MzsmIzQzOyYjNDM7
-JiM0MzsmIzQzOyYjNDM7JiM0MzsmIzQzOyYjNDM7JiM0MzsmIzQzOyYjNDM7JiM0MzsmIzQzOyYj
-NDM7JiM0MzsmIzQzOyYjNDM7JiM0MzstLS0tLS0tLS0tLS0tLS0tPGJyPg0KJmd0OyZuYnNwOyAx
-IGZpbGUgY2hhbmdlZCwgMzMgaW5zZXJ0aW9ucygmIzQzOyksIDE3IGRlbGV0aW9ucygtKTxicj4N
-CiZndDs8YnI+DQomZ3Q7IC0tPGJyPg0KJmd0OyAyLjM0LjE8YnI+DQomZ3Q7PGJyPg0KJmd0Ozxi
-cj4NCjwvZGl2Pg0KPC9zcGFuPjwvZm9udD4NCjwvYm9keT4NCjwvaHRtbD4NCg==
-
---_000_c99500455a9548059294f2d3cd4804ebsyntacorecom_--
+--=20
+Alex Benn=C3=A9e
+Virtualisation Tech Lead @ Linaro
 
