@@ -4,84 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12616C3DA79
-	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jan 2024 16:26:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC997C3DA79
+	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jan 2024 17:57:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rPPmK-0005na-5B; Mon, 15 Jan 2024 11:25:36 -0500
+	id 1rPRD6-0000WR-Qt; Mon, 15 Jan 2024 12:57:20 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
- id 1rPPmI-0005mM-Ar
- for qemu-riscv@nongnu.org; Mon, 15 Jan 2024 11:25:34 -0500
-Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rPRD0-0000VF-JT
+ for qemu-riscv@nongnu.org; Mon, 15 Jan 2024 12:57:14 -0500
+Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
- id 1rPPmF-00050v-66
- for qemu-riscv@nongnu.org; Mon, 15 Jan 2024 11:25:34 -0500
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-40e68d0dbf9so29595825e9.2
- for <qemu-riscv@nongnu.org>; Mon, 15 Jan 2024 08:25:30 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rPRCy-0002dl-Uc
+ for qemu-riscv@nongnu.org; Mon, 15 Jan 2024 12:57:14 -0500
+Received: by mail-pj1-x1031.google.com with SMTP id
+ 98e67ed59e1d1-28e0786edb3so2586193a91.2
+ for <qemu-riscv@nongnu.org>; Mon, 15 Jan 2024 09:57:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1705335929; x=1705940729;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QiPxYFkInWxtf4MkjHWSRFqjjhgLITYki68L5zfyr6Q=;
- b=XC8CKU5KVSr2UTsTOYGtDbcZoKpf2TzpZKOxj+TJ5vPI1b94Ym1fcad7iIJkFpRgAs
- fgubsglWmsK2chcFPkrSt2OUotSGLZfl9W+EG2RFIO8y2DDvVvZaix87E05/wj35801I
- gmHCdJCIcakObibENELYxvWg7nx+5Ab0Lwl4rJx3sps1GMKIDjTH90gS3miZrx7y58gR
- 72jp5WYSme/gERS2yFeKZpv3hid4+X758l595y1YmpCc7EN1M1WKSYA3YAgkabOeUmJO
- Kfj7jWwN/xvVLV4FurLl2a35lJc4n82E3zSBNZw1mJmu5jJs+0CUMbp6Pa9DI/V2jtdC
- o/XA==
+ d=ventanamicro.com; s=google; t=1705341431; x=1705946231; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=5RtbApft0G58bwA2B/6afNlY+oUzJ/R3LCmDvugQO5c=;
+ b=Mqoup4bbF/hXjJWA9I5rHTwba/5plz9+EmaA8lDLk5Me7PjimpLq25Km65AuUGDtfv
+ rlPGOmzxex55eqPKSPX8vfQk2rzmiEE1qTDXUxsJ8rvn9UWU48c3EoiyPHMyEroRB4Tx
+ HkH8x3ZS1XUDjC0f3a8pY/lcGBkCgGR8I9NqLYXSijQsHQEGJHhXtQwwrRpiV2sj5t+N
+ PRNBcsaH1lVeQwS9t+gXiT+p2sANRJWcxNRdHyNCHZqI1jfRWYraqCpuVQnTFL7CHWkL
+ h74oDtGt+DlIpsjZRj4SkCw4k+0311U+r1A0lOI9LBkITjz4UiK7TusvtHvKKdxQtzbk
+ KMGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705335929; x=1705940729;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=QiPxYFkInWxtf4MkjHWSRFqjjhgLITYki68L5zfyr6Q=;
- b=Zlz00UEHRyV+KuV6GiUBI5ZwktbOTTa1TxNIBZwsZ1oSc/lMIiaR6cbYLErul8uVY5
- pXONjVWLQ1xkzRSYFgrKKHRXcz7l3D5myVQbCsFhsU6o/wmv9aSwjRcnkGSTCgEK0T09
- Ce9LtEwiZATG88vN7kc/XC/ksgeAw4b8B9cO8+BnsrzLN4ydHVOlniYYkA6mWfinDMp4
- IoDUSnAIs7X8hnBDsx9EYyeZs2i+e5XSqwTG4SolroX18DNPCVOZ3dfCQL0ABHmpeyQc
- 58Vg9FgdK6NYZ9XWT+xN4UKs5MQeOx4z6w0yuZEjJaS/LF5ksy0IhRXZ1v6ioCVgsqtY
- kj6w==
-X-Gm-Message-State: AOJu0Yy0fBRq5cb0ILF5lHfljimAQiDA4BwctKCazoeroi2Byyp8pSO1
- BcCctU8uhlgoUuGuQnn1BbITP5VM1cEoUQ==
-X-Google-Smtp-Source: AGHT+IH4s4zTh1jpv4kWnAfDdd6b7c978O/MNUhzfbvKiec4xUw33RwqrI22cCz2nQCSUdlcvmc/DQ==
-X-Received: by 2002:a05:600c:4708:b0:40e:3a6f:9b3e with SMTP id
- v8-20020a05600c470800b0040e3a6f9b3emr1674534wmo.6.1705335928740; 
- Mon, 15 Jan 2024 08:25:28 -0800 (PST)
-Received: from rockhopper.ba.rivosinc.com (214.11.169.217.in-addr.arpa.
- [217.169.11.214]) by smtp.gmail.com with ESMTPSA id
- n16-20020a05600c4f9000b0040d62f97e3csm20274444wmq.10.2024.01.15.08.25.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jan 2024 08:25:28 -0800 (PST)
-From: Rob Bradford <rbradford@rivosinc.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, atishp@rivosinc.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- Rob Bradford <rbradford@rivosinc.com>
-Subject: [PATCH 1/2] target/riscv: Add Zaamo and Zalrsc extensions
-Date: Mon, 15 Jan 2024 16:25:24 +0000
-Message-ID: <20240115162525.63535-2-rbradford@rivosinc.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240115162525.63535-1-rbradford@rivosinc.com>
-References: <20240115162525.63535-1-rbradford@rivosinc.com>
+ d=1e100.net; s=20230601; t=1705341431; x=1705946231;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=5RtbApft0G58bwA2B/6afNlY+oUzJ/R3LCmDvugQO5c=;
+ b=XkvlH+muhP25GZ6e7pUNTuFit7JFxemiG8bDKcJ3BIq7MFD4dcutvyPS4Tp2a+M1l7
+ nBsnpEAViArJx2gtOE2W25Ji5qa19pNwGcKTQChPKybXV77bMzGmAXxrJGeng1PamURW
+ 8l6r8JBeAApcvDaz8GDvrYHWmSe+kSBNQUKGc9z4yioxWxCklw6i1u8y3uQrnpFZ7Rcr
+ v3rSSMiB7AhlAEc2LqUse7379bhWfMSksamIJog5zeoLzZ/xzp39XCawBbZeh7QhU16Z
+ hcVEUSXKvP7u3PkMi/S4G/cuBmdv2NS7D6tyGSx5rrq1VyRGrULiHA/xf/sN4pGL6GAT
+ LFLQ==
+X-Gm-Message-State: AOJu0YxoOzRvcu7qNnZ56D4u6Bd5Kemg486c5WJy/4ETpQzy9oidf54M
+ saJPiXNqb+ehqMazM8S9tkQH9b9WoSqomw==
+X-Google-Smtp-Source: AGHT+IE38+tgCd4s66dsdqh21v95XWionNpNurdUKj2eVVtZSuz4LhK0EwlJ3ySE6C9EnZym2IJnVw==
+X-Received: by 2002:a17:90a:9c07:b0:28b:f1b3:4426 with SMTP id
+ h7-20020a17090a9c0700b0028bf1b34426mr4161874pjp.51.1705341431262; 
+ Mon, 15 Jan 2024 09:57:11 -0800 (PST)
+Received: from [192.168.68.110] ([152.234.123.64])
+ by smtp.gmail.com with ESMTPSA id
+ sy8-20020a17090b2d0800b0028dd42b115bsm10102728pjb.5.2024.01.15.09.57.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 15 Jan 2024 09:57:10 -0800 (PST)
+Message-ID: <dbe10a18-163e-4457-92de-68e2f100217b@ventanamicro.com>
+Date: Mon, 15 Jan 2024 14:57:06 -0300
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 11/13] trans_rvv.c.inc: remove vlmax arg from
+ vec_element_loadx()
+Content-Language: en-US
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ max.chou@sifive.com
+References: <20240112213812.173521-1-dbarboza@ventanamicro.com>
+ <20240112213812.173521-12-dbarboza@ventanamicro.com>
+ <32238550-8008-4771-9a1d-755be8c19384@linaro.org>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <32238550-8008-4771-9a1d-755be8c19384@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::336;
- envelope-from=rbradford@rivosinc.com; helo=mail-wm1-x336.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x1031.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,54 +100,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-These extensions represent the atomic operations from A (Zaamo) and the
-Load-Reserved/Store-Conditional operations from A (Zalrsc)
 
-Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
----
- target/riscv/cpu.c     | 5 +++++
- target/riscv/cpu_cfg.h | 2 ++
- 2 files changed, 7 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 8d3ec74a1c..604baf53c8 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -103,7 +103,9 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zihintpause, PRIV_VERSION_1_10_0, ext_zihintpause),
-     ISA_EXT_DATA_ENTRY(zihpm, PRIV_VERSION_1_12_0, ext_zihpm),
-     ISA_EXT_DATA_ENTRY(zmmul, PRIV_VERSION_1_12_0, ext_zmmul),
-+    ISA_EXT_DATA_ENTRY(zaamo, PRIV_VERSION_1_12_0, ext_zaamo),
-     ISA_EXT_DATA_ENTRY(zacas, PRIV_VERSION_1_12_0, ext_zacas),
-+    ISA_EXT_DATA_ENTRY(zalrsc, PRIV_VERSION_1_12_0, ext_zalrsc),
-     ISA_EXT_DATA_ENTRY(zawrs, PRIV_VERSION_1_12_0, ext_zawrs),
-     ISA_EXT_DATA_ENTRY(zfa, PRIV_VERSION_1_12_0, ext_zfa),
-     ISA_EXT_DATA_ENTRY(zfbfmin, PRIV_VERSION_1_12_0, ext_zfbfmin),
-@@ -1491,6 +1493,9 @@ const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] = {
-     MULTI_EXT_CFG_BOOL("x-smaia", ext_smaia, false),
-     MULTI_EXT_CFG_BOOL("x-ssaia", ext_ssaia, false),
- 
-+    MULTI_EXT_CFG_BOOL("x-zaamo", ext_zaamo, false),
-+    MULTI_EXT_CFG_BOOL("x-zalrsc", ext_zalrsc, false),
-+
-     MULTI_EXT_CFG_BOOL("x-zvfh", ext_zvfh, false),
-     MULTI_EXT_CFG_BOOL("x-zvfhmin", ext_zvfhmin, false),
- 
-diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-index fea14c275f..cc4c30244c 100644
---- a/target/riscv/cpu_cfg.h
-+++ b/target/riscv/cpu_cfg.h
-@@ -78,7 +78,9 @@ struct RISCVCPUConfig {
-     bool ext_svnapot;
-     bool ext_svpbmt;
-     bool ext_zdinx;
-+    bool ext_zaamo;
-     bool ext_zacas;
-+    bool ext_zalrsc;
-     bool ext_zawrs;
-     bool ext_zfa;
-     bool ext_zfbfmin;
--- 
-2.43.0
+On 1/12/24 19:51, Richard Henderson wrote:
+> On 1/13/24 08:38, Daniel Henrique Barboza wrote:
+>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>> ---
+>>   target/riscv/insn_trans/trans_rvv.c.inc | 26 +++++++++++++++++--------
+>>   1 file changed, 18 insertions(+), 8 deletions(-)
+>>
+>> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+>> index 804cfd6c7f..3782d0fa2f 100644
+>> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+>> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+>> @@ -3265,21 +3265,28 @@ static void endian_adjust(TCGv_i32 ofs, int sew)
+>>   #endif
+>>   }
+>> -/* Load idx >= VLMAX ? 0 : vreg[idx] */
+>> +/*
+>> + * Load idx >= VLMAX ? 0 : vreg[idx]
+>> + *
+>> + * This function assumes ctx->vl_eq_vlmax = true.
+>> + */
+>>   static void vec_element_loadx(DisasContext *s, TCGv_i64 dest,
+>> -                              int vreg, TCGv idx, int vlmax)
+>> +                              int vreg, TCGv idx)
+> 
+> I think removing the cpu configuration constant is a mistake.
+> Compile-time constants are always better than computation...
 
+Apparently my commit msg is AWOL ...
+
+The 'vlmax' used in vec_element_loadx() is being calculated here, in trans_vrgather_vx():
+
+-        int scale = s->lmul - (s->sew + 3);
+-        int vlmax = s->cfg_ptr->vlen >> -scale;
+
+My idea was to eliminate the use of 'vlen' since, in this block, 'vl_eq_vlmax'
+is true and we have 'vl' in the TCG global 'cpu_vl'.
+
+I didn't find a way of reading 'cpu_vl' into an int variable and passing it as
+'vlmax' to vec_element_loadx(), but inside vec_element_loadx() we can operate
+'cpu_vl' normally since we're using TCG ops there. This is the reasoning behind
+this change.
+
+I am now wondering if this is worth the trouble, and we should instead do:
+
++    int vlmax = cpu->cfg.vlenb >> (s->sew - s->lmul);
+
+Like we're already doing in patch 9. Patch 12 would be a similar case.
+
+
+
+Thanks,
+
+Daniel
+
+
+
+> 
+>> +#ifdef TARGET_RISCV64
+>> +    tcg_gen_mov_i64(t_vlmax, cpu_vl);
+>> +#else
+>> +    tcg_gen_extu_tl_i64(t_vlmax, cpu_vl);
+>> +#endif
+> 
+> That said, no ifdef required -- the second statement should always work.
+> 
+> 
+> 
+> r~
 
