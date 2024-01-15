@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F831C3DA79
-	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jan 2024 22:28:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFC9BC47258
+	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jan 2024 22:34:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rPVPE-0000iA-1w; Mon, 15 Jan 2024 17:26:08 -0500
+	id 1rPVX3-0001P7-Lb; Mon, 15 Jan 2024 17:34:13 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rPVPC-0000dQ-EF
- for qemu-riscv@nongnu.org; Mon, 15 Jan 2024 17:26:06 -0500
-Received: from mail-oi1-x22c.google.com ([2607:f8b0:4864:20::22c])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rPVWw-0001Np-9l
+ for qemu-riscv@nongnu.org; Mon, 15 Jan 2024 17:34:07 -0500
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rPVPA-00066y-UG
- for qemu-riscv@nongnu.org; Mon, 15 Jan 2024 17:26:06 -0500
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-3bb53e20a43so6415250b6e.1
- for <qemu-riscv@nongnu.org>; Mon, 15 Jan 2024 14:26:04 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rPVWu-0007SV-LN
+ for qemu-riscv@nongnu.org; Mon, 15 Jan 2024 17:34:06 -0500
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-1d542701796so47860745ad.1
+ for <qemu-riscv@nongnu.org>; Mon, 15 Jan 2024 14:34:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1705357564; x=1705962364; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MWHeHV4OEo1q9eMddE57J21tzGp1rowPk1kJmzHf7hA=;
- b=MY6hUzKy9+VxM7KrQuRWWCCJXH+8lMlNj3mE2lydrqikejPL0vtTKLEU5ufCpSIEvp
- nUMfsmlPzHiTuS7Y/Q/YEmJByg5NoECgt8R6qekuQAWNePOuJ9x3SyAsZhECnCe+TurY
- vBsxhcpwhs5nD3V6jx2GDnNefN9WwJihs0KLM4vRtVvZNaPGl4hrEmcX1ialSYCx4MYL
- 6ZpqrztIpF+rNVsbo6WbO9S+tIT4+uPhI5YcNJXoNB/FPzo0f+xwoG6WXK2uZ07TjVGk
- iUQDstPc8IfvksLX+1Pn+5Nwt2Vw6rqleBqumtLYYzr/beSS96MbQP1E9J1hUL5ggXiL
- vYMg==
+ d=linaro.org; s=google; t=1705358043; x=1705962843; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=DTkAivCuD0DfeRNB96V/DsWva2aPG7hLD46T4T7sevc=;
+ b=hRCEXBruNjlvWJDAJ2X6neMnAd/jBE5dDfmqg2Mwgz40dbEUSBEuYFFVj+OUiQYyv5
+ lw7dde8UVD0LeHJx1leb7vwml/mGi6Ti0hrnwihvITblIbWet8DtGwnGRMj9/WjH7OL7
+ xnz/4gQIle1AJO7ehcTTnv0LG0TOQmbe3JKxVHFBjEntZUuQiTBhla9RsZdUMDoDVLCt
+ cBb/TTpgfA38p+ig8KUawMbjeHaANmjZbSXVLtzEPBLB4jaI2/l5LlTkKyh466Iqe31T
+ AZVCeeEOChS+D6tGGhgEUmuBUJrDCIst6yHSjUBb5i5QA5DCMk+I3Vhfr7CRg3msXvfn
+ IYrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705357564; x=1705962364;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=MWHeHV4OEo1q9eMddE57J21tzGp1rowPk1kJmzHf7hA=;
- b=uiJFMKB4RCoV2GOit9S/Ez2PmdMqV6FEaOHQGt+cRSkctO8pCDaqdMc67tkgoF4+CR
- sjTLtbVmyI799h7yR34RumkFRvUCmXCXbtCASvOJwKI+j1VDK6FBKT74cni+yFU8DJfy
- oGtT29LuBimlj3XfEG9Gi4HhjHKtMy+jTNinn5j3h+/sF9vvgA9PyVLKxx/JHtwWdSpG
- 6oLOoOoI5Yadg07FRxlA1HYzGm8r9lv+L8CAn9sUWpMy6kjR7B94yn8uQxKcKEd9tjgD
- ovotMLytgMFrd9FuoG8ADSR9WqrnDPLTRgMgTiDkYetSytjRl8VBa8Qsrl6AudvhCZmR
- Aj+Q==
-X-Gm-Message-State: AOJu0YzDWDPldbPWpdUwtsbO8MT18JG8cL1OeZqsgkcn0LSlctcgGj4j
- wm+2p50VTJbYHEJnaZdz3bBbZDp7/3uIMg==
-X-Google-Smtp-Source: AGHT+IEGdJgc9ja1YZyF5ojj0Trd8JIRYj/XLhDl5SjeUXNIS6UWh2Vg/2yB2dLImkdaBg+dLr5l3w==
-X-Received: by 2002:a05:6808:1a09:b0:3bd:5fb3:7f5c with SMTP id
- bk9-20020a0568081a0900b003bd5fb37f5cmr7882913oib.89.1705357563938; 
- Mon, 15 Jan 2024 14:26:03 -0800 (PST)
-Received: from grind.. ([152.234.123.64]) by smtp.gmail.com with ESMTPSA id
- ks19-20020a056a004b9300b006d977f70cd5sm8125940pfb.23.2024.01.15.14.26.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jan 2024 14:26:03 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
+ d=1e100.net; s=20230601; t=1705358043; x=1705962843;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=DTkAivCuD0DfeRNB96V/DsWva2aPG7hLD46T4T7sevc=;
+ b=MKSq5VvZ8TO7rXevTzIHvu0t3Q9l7Wv3LSeXLjXSn4rZHGZJRI/E+k0B958EH5pUZg
+ PgiyUZmwaA/BFbVCGQna+IobZaQnuXIJuoKrkyuOoOL4XAeJlV0a0roJgH2+FtrAC6k3
+ C7///cSAEsGOeOWmjEzUVfqHu2EeJ+VuCeVEzVzncvuAGfB01YJpfSEBOmj0pfHEpDAO
+ U+SVCkGFupJp4Y/CXbaiYwTxiPjiBi3yFVH1+JUw+i24hskikTf69Aq1EwngWiW/UYx8
+ Uwstb+7PsNBvFcVyxPuLQuZJofb5T1WXzAuHN5pTvrGZQKIFGSVb9kupzQwFbBtS+xKH
+ bcnQ==
+X-Gm-Message-State: AOJu0YwcsJn9qlTwHNeOPOegxrhoLf4BfuUrpBtjeoneGLWxPmzSBYVH
+ zW73V/BzadIweyy04BNgPKD1DACnEjZvjQ==
+X-Google-Smtp-Source: AGHT+IHeOACsTR/DqaSBJ4MSbaAdv2b9ZSQqq1r/OcJx2j3o9XJhChG/imaCsMYQlW3HwxYYG+ncuA==
+X-Received: by 2002:a17:903:40d1:b0:1d4:20b8:abf9 with SMTP id
+ t17-20020a17090340d100b001d420b8abf9mr3459296pld.54.1705358042073; 
+ Mon, 15 Jan 2024 14:34:02 -0800 (PST)
+Received: from ?IPV6:2001:8004:2738:1dd9:85fe:4dd3:358e:ec4?
+ ([2001:8004:2738:1dd9:85fe:4dd3:358e:ec4])
+ by smtp.gmail.com with ESMTPSA id
+ e17-20020a170902f1d100b001d54c6f5ac5sm8104235plc.263.2024.01.15.14.33.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 15 Jan 2024 14:34:01 -0800 (PST)
+Message-ID: <895f5218-00b5-48ca-adeb-e3a6efd112a1@linaro.org>
+Date: Tue, 16 Jan 2024 09:33:54 +1100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 01/12] target/riscv: add 'vlenb' field in cpu->cfg
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- richard.henderson@linaro.org, max.chou@sifive.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v2 09/12] target/riscv/cpu.h: use 'vlenb' in vext_get_vlmax()
-Date: Mon, 15 Jan 2024 19:25:25 -0300
-Message-ID: <20240115222528.257342-10-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240115222528.257342-1-dbarboza@ventanamicro.com>
+ max.chou@sifive.com
 References: <20240115222528.257342-1-dbarboza@ventanamicro.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22c.google.com
+ <20240115222528.257342-2-dbarboza@ventanamicro.com>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20240115222528.257342-2-dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -95,29 +99,30 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/cpu.h | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+On 1/16/24 09:25, Daniel Henrique Barboza wrote:
+> Our usage of 'vlenb' is overwhelming superior than the use of 'vlen'.
+> We're using 'vlenb' most of the time, having to do 'vlen >> 3' or
+> 'vlen / 8' in every instance.
+> 
+> In hindsight we would be better if the 'vlenb' property  was introduced
+> instead of 'vlen'. That's not what happened, and now we can't easily get
+> rid of it due to user scripts all around. What we can do, however, is to
+> change our internal representation to use 'vlenb'.
+> 
+> Add a 'vlenb' field in cpu->cfg. It'll be set via the existing 'vlen'
+> property, i.e. setting 'vlen' will also set 'vlenb'.
+> 
+> We'll replace all 'vlen >> 3' code to use 'vlenb' directly. Start with
+> the single instance we have in target/riscv/cpu.c.
+> 
+> Signed-off-by: Daniel Henrique Barboza<dbarboza@ventanamicro.com>
+> ---
+>   target/riscv/cpu.c     | 4 +++-
+>   target/riscv/cpu_cfg.h | 1 +
+>   2 files changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 11df226a00..7304e478c2 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -692,7 +692,11 @@ static inline uint32_t vext_get_vlmax(RISCVCPU *cpu, target_ulong vtype)
- {
-     uint8_t sew = FIELD_EX64(vtype, VTYPE, VSEW);
-     int8_t lmul = sextract32(FIELD_EX64(vtype, VTYPE, VLMUL), 0, 3);
--    return cpu->cfg.vlen >> (sew + 3 - lmul);
-+    /*
-+     * vlmax = vlen >> (sew + 3 - lmul). With vlenb,
-+     * 3 less shifts: vlenb >> (sew + 3 - 3 - lmul)
-+     */
-+    return cpu->cfg.vlenb >> (sew - lmul);
- }
- 
- void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
--- 
-2.43.0
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
+
+r~
 
