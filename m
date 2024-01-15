@@ -4,89 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3EB6C3DA79
-	for <qemu-riscv@archiver.kernel.org>; Sat, 13 Jan 2024 01:50:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A47DC4707B
+	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jan 2024 01:29:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rOTAc-0004v2-H0; Fri, 12 Jan 2024 20:50:46 -0500
+	id 1rPBmR-0006LI-BM; Sun, 14 Jan 2024 20:28:47 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ved@rivosinc.com>) id 1rORtM-0000aQ-Ue
- for qemu-riscv@nongnu.org; Fri, 12 Jan 2024 19:28:53 -0500
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rPBmH-0006KV-3W; Sun, 14 Jan 2024 20:28:39 -0500
+Received: from mail-vk1-xa2b.google.com ([2607:f8b0:4864:20::a2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ved@rivosinc.com>) id 1rORtK-0007ub-7s
- for qemu-riscv@nongnu.org; Fri, 12 Jan 2024 19:28:52 -0500
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-1d4ab4e65aeso51628645ad.0
- for <qemu-riscv@nongnu.org>; Fri, 12 Jan 2024 16:28:49 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rPBmF-0004qJ-CN; Sun, 14 Jan 2024 20:28:36 -0500
+Received: by mail-vk1-xa2b.google.com with SMTP id
+ 71dfb90a1353d-4b78b813dd0so1507045e0c.3; 
+ Sun, 14 Jan 2024 17:28:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1705105728; x=1705710528;
- darn=nongnu.org; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=gsm5BgPC3U8+ci61AhiTIOfIfHAz9Z+LUC5yPUBYy64=;
- b=N3svVKm2lCquU1V8aqZh9lFkCSKW7kWIEdrw1GMO5+n5hErCN3uorF98VzKvr7Oxvj
- Jj3kc1/DlX1ihQ4Me83YwKHY7Ram8Lz2fP5kjNrmTvVZUn+PTiJty+qjHQ1YBu0ANgRN
- C0P2tfXF+6tenDYcu0dmI6PUSgN6XIduz8WqCYXJGxjOaQavXZF6Ip/xWUWU/rMOiO/0
- syQLt4BAWW+5mFSzrs43GOX4meOsMSm/d89G0U1/Ay9G39TUbEu6P7drVgjfDmWbYcmY
- R5hBhD2h3ACa6ivR+AklyYVjskHo8FPtvDutf+Ov1Q3rZzteo5Yj+XEA38NZsLNQv5tk
- d+ZQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705105728; x=1705710528;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1705282113; x=1705886913; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gsm5BgPC3U8+ci61AhiTIOfIfHAz9Z+LUC5yPUBYy64=;
- b=prXI3SqTY7BaoVtuxHrq113Hz/A1B6rTeOYDvOAeqtj8SMN9ik34VpCp28F9EWn3f3
- FXrmCmH8NjFFKALP6N94b59fNRo6eHrDS2jjsPflyjB1kgz+x/A64VJvIJt8LJuxF+cD
- pk+i6CiCUxiuZdrK53dJy4wJxL21bATtfjNLg+YYJCvqkCdXsR581UHs5MPKfW2zUkzY
- We+fn7QtC1XyQVkHBRaRjjKIUJZKVckN74T7bYjIEYKbhH51gPZmHuinv1jvdlNgcTh5
- zBBMKYoWzd1gBudoyUe1PRi0Hz+znfpTzUV4I2J6FlufljN+W9ZVE2HleZ5H8qI7f11v
- O8wQ==
-X-Gm-Message-State: AOJu0Yx6wISBhg6Y4PiAmaPaP2QHIqvApeicp74oaJ42ITaIQzoDCVwF
- NvS6kQNXJtdUvM1Vk4iPx+jK65M0SB8JCg==
-X-Google-Smtp-Source: AGHT+IHEZ/JKocSP/JgiVDfECSziL6wGFKozxONVH2rZIbtbNS6rSer91mSpTk7dqE3D9RwNIuS0Qw==
-X-Received: by 2002:a17:902:bc4c:b0:1d5:73d0:eb7d with SMTP id
- t12-20020a170902bc4c00b001d573d0eb7dmr2497346plz.18.1705105728288; 
- Fri, 12 Jan 2024 16:28:48 -0800 (PST)
-Received: from ved-XPS-8940 ([12.0.166.162]) by smtp.gmail.com with ESMTPSA id
- sm9-20020a17090b2e4900b0028bad9b220fsm4842111pjb.37.2024.01.12.16.28.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Jan 2024 16:28:47 -0800 (PST)
-Date: Fri, 12 Jan 2024 18:28:45 -0600
-From: Ved Shanbhogue <ved@rivosinc.com>
-To: Rob Bradford <rbradford@rivosinc.com>
-Cc: Andrew Jones <ajones@ventanamicro.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, atishp@rivosinc.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com,
- liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com
-Subject: Re: Re: Re: [PATCH 1/3] target/riscv: Add infrastructure for 'B'
- MISA extension
-Message-ID: <ZaHZPZauuZh4SwVj@ved-XPS-8940>
-References: <20240109171848.32237-1-rbradford@rivosinc.com>
- <20240109171848.32237-2-rbradford@rivosinc.com>
- <20240111-585fe1291fcaa1e0432674e3@orel>
- <20240111-df7a6acf3109b630469591a1@orel>
- <3dbd3fa1cbad80948175f98dcc0c76b886e2376e.camel@rivosinc.com>
- <20240112-d9e3cc215a7a68c5189908bf@orel>
- <7461190fbece351f916eccd258bf62b86227927d.camel@rivosinc.com>
+ bh=BMyaPqMU+yTQ4jRoDn6GnzzvcQyzXwK5LRTL/BNPcTw=;
+ b=ZpTtK74K0eDXo8S6+YNRQtf3lbInyZGVGd5pdh06imHCNGxIFV9l5zXKRxb79uHLmV
+ tj+dj0DPWVYp4Sj+9xpLYLmD/tTTwbODb5ZErbAGooj0/FiuW3COxRvn9JQSIIuaR4mM
+ 4QdXtWIiYEUw50LbLbs7fPclJ9n9pCaiN0LqSt6r4X+rrhayNSWyupslnqpIRZDyQ053
+ HPH8/7gOfYZLlkWZwvgRNY1rGlfVkWDrK8dnCf2XyXyL10E/V4KpiiEEoeGJDH4UP942
+ 96C6rZPLXiJ7NoD3Yr3vicyhGJxMt2Z8B5md8AMSPlC6RBbgZ2aCS0v4FlkJxAH3jWHZ
+ Tayw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705282113; x=1705886913;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=BMyaPqMU+yTQ4jRoDn6GnzzvcQyzXwK5LRTL/BNPcTw=;
+ b=jV7NO6crcU9s5Fzes7SaqOg+U0OJL46W83vbsw8F+xTwy5XSzkXaNm9UhrYBnP9YND
+ RQTbx1Adg9bgP0UkI+s15PV51FHdCnmsJ5UrRTQYwDUmhdxsaybHYkYmMclTzFsyGEfi
+ Me6MZxe4GXTUDt7mFZh8LqLj6OPQ9dQLYoYCaK1uUZDGfOq1qVTbc3/tf0qMHAkRGjwH
+ OoxG84aXXGa0qxF7/fVtR0iT9qBcPVWOcfGQZNM+dePFRPOWZunHMQAvOIupuE9ci9LF
+ 0R2vliUIaBrSPXvCjvuquqLNjxdWsKvOrO/WeV1RKeFbN9RK+0ZCdHwtpkjPdxL53E1J
+ AixA==
+X-Gm-Message-State: AOJu0YyFq3w1kklodREGtE+4WUR9IarghCOphlUSnJwQ8q4z05yw3FXx
+ ymME0+zUXpkJbnUI2nvUbA+zt5BosguGLpMvwT4=
+X-Google-Smtp-Source: AGHT+IFGkuCxgIz9VqgFi/4KgMjdNVG5FdQMgvHRrincAJ+XBJgWEuQYtUaeOq1VFK/LsBHO5E2bbopHU2s/AgCJM74=
+X-Received: by 2002:a05:6122:4493:b0:4b7:2940:8fa2 with SMTP id
+ cz19-20020a056122449300b004b729408fa2mr2032622vkb.12.1705282113190; Sun, 14
+ Jan 2024 17:28:33 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <7461190fbece351f916eccd258bf62b86227927d.camel@rivosinc.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=ved@rivosinc.com; helo=mail-pl1-x62e.google.com
+References: <20240112140201.127083-1-dbarboza@ventanamicro.com>
+In-Reply-To: <20240112140201.127083-1-dbarboza@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 15 Jan 2024 11:28:06 +1000
+Message-ID: <CAKmqyKOoOfiZ2NOs=NsbXCskXT83KaBWH6T2y4yWLmmuEEXkzQ@mail.gmail.com>
+Subject: Re: [PATCH v5 0/8] target/riscv: deprecate riscv_cpu_options[]
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2b;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2b.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 12 Jan 2024 20:50:35 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -101,17 +89,50 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Rob Bradford wrote:
->I'm using table 27.1 in the published PDF which is the PDF in this
->release:
->https://github.com/riscv/riscv-isa-manual/releases/tag/Ratified-IMAFDQC
->It looks like it was removed in this commit (which is a set of
->backports):
+On Sat, Jan 13, 2024 at 12:05=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
 >
+> Hi,
+>
+> This version is a resend of patches 10 to 17 from v4, reviewed-by and
+> tested-by tags added, rebased with Alistair's riscv-to-apply.next.
+> Patches 01 to 09 of v4 are already queued.
+>
+> All patches acked.
+>
+> Changes from v4:
+> - patches 1 to 9: already queued
+> - patches 10 to 17: reviewed-by and tested-by tags added (tested-by
+>   not added in KVM specific patches)
+> - v4 link: https://lore.kernel.org/qemu-riscv/20240105230546.265053-1-dba=
+rboza@ventanamicro.com/
+>
+> Daniel Henrique Barboza (8):
+>   target/riscv: create finalize_features() for KVM
+>   target/riscv: move 'cbom_blocksize' to riscv_cpu_properties[]
+>   target/riscv: move 'cbop_blocksize' to riscv_cpu_properties[]
+>   target/riscv: move 'cboz_blocksize' to riscv_cpu_properties[]
+>   target/riscv: remove riscv_cpu_options[]
+>   target/riscv/cpu.c: move 'mvendorid' to riscv_cpu_properties[]
+>   target/riscv/cpu.c: move 'mimpid' to riscv_cpu_properties[]
+>   target/riscv/cpu.c: move 'marchid' to riscv_cpu_properties[]
 
-We would retain the previously documented canonical order with B
-between C and P and that table updated on ratification.
+Thanks!
 
-regards
-ved
+Applied to riscv-to-apply.next
+
+Alistair
+
+>
+>  target/riscv/cpu.c           | 377 +++++++++++++++++++++++------------
+>  target/riscv/cpu.h           |   2 +-
+>  target/riscv/kvm/kvm-cpu.c   | 100 ++++++----
+>  target/riscv/kvm/kvm_riscv.h |   1 +
+>  target/riscv/tcg/tcg-cpu.c   |   4 -
+>  5 files changed, 311 insertions(+), 173 deletions(-)
+>
+> --
+> 2.43.0
+>
+>
 
