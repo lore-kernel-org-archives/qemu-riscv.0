@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 126CCC4707B
-	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jan 2024 22:39:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E54FCC3DA79
+	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jan 2024 22:40:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rPVbu-0003L7-4X; Mon, 15 Jan 2024 17:39:14 -0500
+	id 1rPVcf-0003qJ-3f; Mon, 15 Jan 2024 17:40:01 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rPVbr-0003KS-0r
- for qemu-riscv@nongnu.org; Mon, 15 Jan 2024 17:39:11 -0500
-Received: from mail-oa1-x34.google.com ([2001:4860:4864:20::34])
+ id 1rPVce-0003on-5r
+ for qemu-riscv@nongnu.org; Mon, 15 Jan 2024 17:40:00 -0500
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rPVbp-0000Jf-JL
- for qemu-riscv@nongnu.org; Mon, 15 Jan 2024 17:39:10 -0500
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-204235d0913so5837539fac.1
- for <qemu-riscv@nongnu.org>; Mon, 15 Jan 2024 14:39:09 -0800 (PST)
+ id 1rPVcc-0000Sq-Ex
+ for qemu-riscv@nongnu.org; Mon, 15 Jan 2024 17:39:59 -0500
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-1d50d0c98c3so66514575ad.1
+ for <qemu-riscv@nongnu.org>; Mon, 15 Jan 2024 14:39:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705358348; x=1705963148; darn=nongnu.org;
+ d=linaro.org; s=google; t=1705358397; x=1705963197; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=WY4GznIDdlngfrLdHR9/HtneEkisTOyj1KKl47+tte8=;
- b=Lm93eDo2BV3qhtC8ZSxgLSXho3GG9MDOOuL+7De+pqGELsHHyWhzOI3zl7d11ECcPS
- g2DE2S5SeiOVf9/4iDWqgg/vYMA47+Ly8PSG18kClk+WXFbiYQ0N7szRophIxb9uyjOI
- BkbvfNmohN4m6JxvJOBf4Oh3FTks5YBJ8fCbH+TVEyU6z6ceQXUcTcTiR9PomIwztI0+
- lw9GtmMPPg2lyoxU7VVxmUSzKdJfjMYjsW4VM8/dlEzYW62zHatSPil4vCbBbHXA/XYB
- zNjdTpyvOgonDk5bLM2hbYJQ1MiqVnA9mvFxJ6WwQ/YSW/37XvoRZtbsG0HNqdCcb+k7
- HMMA==
+ bh=wVbx1WRYSKI3YmRetrmN1yHm2cubs9ARZOPDxm9nQOA=;
+ b=LavSAE1DTm6uNXHPDXmHx1/j5OktBEShh+pl5jGpech6HEzPTXvfT0jgDdv21iyRFK
+ 68LYuhREd1u86Ys7Odyy0dis2Q2nNqzFK1QqsNWaxyS9/6M2SzVYW0G+4FskvgOrZaVP
+ MHBRIw1ys8dM+C03VQQWDS9ug0M/J3Fe6fnuvnwpe9e1GYlXQy5ymEYFGDCRMB/eZ7jU
+ wMcC4ZeARG3KLkgsmeaRG6mMxDhB80wRZslejY73cjUyyvNb3ErB6F8vr7zXvqysGw+h
+ mJk+73yWOVhfeXV//iZHHmZDiTOQCfdDei3rzLUSriLSk5uu/JKWcOgNk3PpRIUPE74Z
+ qDFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705358348; x=1705963148;
+ d=1e100.net; s=20230601; t=1705358397; x=1705963197;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=WY4GznIDdlngfrLdHR9/HtneEkisTOyj1KKl47+tte8=;
- b=vew3JFSIriuIjIvxAWCfVBPVIRMPIJehIIr+NG/Waf33hk84qzKsPDbdTPXfkaiVXD
- YnZXY/5P8jFfzslYN8/FjSOtqRCN8kRCFjuR0zHJezDJtIYFI4I1swacJ9Oor5+6qZxf
- YSkOALVzV6Ek02oYGZ33pDjml8bz2dy82daKbBZDO0/F0U81HsUpnTMarbVe8FlHNppl
- 5b92hP1TGQ1WBlAB5cnnasGCf+q5VVVAbtAG4rETbTMsv4tgG6VcZFPD2pIlzGJ6opek
- s4tw6fN3lREasMOeE6mQvkn5WSL5PX81d8KhEkmQ6kyh1OZnfILpQV9tfScBtL8oZmEm
- NWYA==
-X-Gm-Message-State: AOJu0YyyM1VqvqZ8Oe1UPS+btINC6NDQ1dKu7LBNu74gUNQasTy/TABO
- nSJNOoS3WMs2OXi83IgxC7u5f8npXHtC6a46PfQuBKlNOyu1EQ==
-X-Google-Smtp-Source: AGHT+IFzEDnrwlxEW3TWVNjnbVxpG4QaMLLQPbkoMDLK8FNSNjkQ4vYV4oWS2yEGKPK2kitwteBgGg==
-X-Received: by 2002:a05:6870:3920:b0:203:a080:2d55 with SMTP id
- b32-20020a056870392000b00203a0802d55mr9104537oap.107.1705358348113; 
- Mon, 15 Jan 2024 14:39:08 -0800 (PST)
+ bh=wVbx1WRYSKI3YmRetrmN1yHm2cubs9ARZOPDxm9nQOA=;
+ b=kGeoDJoc6gUIISx9Csd7prYup2QbXfMaSWMjKFm2n3X0kDrDwn5ESELYOpzwQ1nKoP
+ 0DtyBBmHP+rdFHHB4uMSm4822MFk+R+beeEzeiWK2BNjIGi5SERGAYFAqRdwc52RdGfd
+ 4fPknYMbQtk2+0TMFO/iwkhlfS4WwzjyDbFtQO6QpMn+CJhYxvg6y/uSrDpgAbA/29ne
+ OEKKFIDE4RFyV7vIBHKBd7bFhwl+g92cqltmwpd7zGg+VJszlhc6nj9hYfdRUDz8xlYO
+ xiyGJ8Vca93ZW4AUpQ44Glr77NSxB1vfJjGwdoDilzBQO1V/AMQRUaWMIEEKP6udWo2a
+ OtAA==
+X-Gm-Message-State: AOJu0YyJjg6JGykP3G54msaF1EOCROLAJAtUj2jCjYD46lzCEv7PKa7m
+ tno+wUTSaeQuqspiyKgZke/4Ouk2w3bX+A==
+X-Google-Smtp-Source: AGHT+IGjQwAyEvf2f/aUAcH7vYXesAVw0bTF88KzFQbTvJIGusg2lGrCbDG5GVVxuPItVFavnRGnYA==
+X-Received: by 2002:a17:90b:38d2:b0:28d:647:202 with SMTP id
+ nn18-20020a17090b38d200b0028d06470202mr8234208pjb.35.1705358397211; 
+ Mon, 15 Jan 2024 14:39:57 -0800 (PST)
 Received: from ?IPV6:2001:8004:2738:1dd9:85fe:4dd3:358e:ec4?
  ([2001:8004:2738:1dd9:85fe:4dd3:358e:ec4])
  by smtp.gmail.com with ESMTPSA id
- mf8-20020a170902fc8800b001d58b7cb7c3sm8111698plb.90.2024.01.15.14.39.04
+ mf8-20020a170902fc8800b001d58b7cb7c3sm8111698plb.90.2024.01.15.14.39.52
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 15 Jan 2024 14:39:07 -0800 (PST)
-Message-ID: <22a41209-07a0-490b-9e57-477c160f4f94@linaro.org>
-Date: Tue, 16 Jan 2024 09:39:00 +1100
+ Mon, 15 Jan 2024 14:39:56 -0800 (PST)
+Message-ID: <ca3a656c-f9c5-4ef0-8e60-59440a7809f9@linaro.org>
+Date: Tue, 16 Jan 2024 09:39:51 +1100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 02/12] target/riscv/csr.c: use 'vlenb' instead of 'vlen'
+Subject: Re: [PATCH v2 03/12] target/riscv/gdbstub.c: use 'vlenb' instead of
+ shifting 'vlen'
 Content-Language: en-US
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  max.chou@sifive.com
 References: <20240115222528.257342-1-dbarboza@ventanamicro.com>
- <20240115222528.257342-3-dbarboza@ventanamicro.com>
+ <20240115222528.257342-4-dbarboza@ventanamicro.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240115222528.257342-3-dbarboza@ventanamicro.com>
+In-Reply-To: <20240115222528.257342-4-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2001:4860:4864:20::34;
- envelope-from=richard.henderson@linaro.org; helo=mail-oa1-x34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x629.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,16 +101,12 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 1/16/24 09:25, Daniel Henrique Barboza wrote:
-> As a bonus, we're being more idiomatic using cpu->cfg.vlenb when
-> reading CSR_VLENB.
-> 
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Signed-off-by: Daniel Henrique Barboza<dbarboza@ventanamicro.com>
 > ---
->   target/riscv/csr.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
+>   target/riscv/gdbstub.c | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-
 
 r~
 
