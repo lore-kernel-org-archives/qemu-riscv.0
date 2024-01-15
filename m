@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE85EC47422
-	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jan 2024 06:33:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1A71C3DA79
+	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jan 2024 06:33:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rPGVq-0000Ky-3G; Mon, 15 Jan 2024 01:31:58 -0500
+	id 1rPGW0-0000TL-0i; Mon, 15 Jan 2024 01:32:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1rPGVo-0000KR-Kz
- for qemu-riscv@nongnu.org; Mon, 15 Jan 2024 01:31:56 -0500
-Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
+ id 1rPGVy-0000QB-HV
+ for qemu-riscv@nongnu.org; Mon, 15 Jan 2024 01:32:06 -0500
+Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1rPGVn-0005hE-58
- for qemu-riscv@nongnu.org; Mon, 15 Jan 2024 01:31:56 -0500
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-6d99980b2e0so7016488b3a.2
- for <qemu-riscv@nongnu.org>; Sun, 14 Jan 2024 22:31:54 -0800 (PST)
+ id 1rPGVw-0005ib-W1
+ for qemu-riscv@nongnu.org; Mon, 15 Jan 2024 01:32:06 -0500
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-1d54b86538aso41940775ad.0
+ for <qemu-riscv@nongnu.org>; Sun, 14 Jan 2024 22:32:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1705300314; x=1705905114;
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1705300324; x=1705905124;
  darn=nongnu.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=GbHsFPTqeVEF6MXxcuYOrP3CMgZR2bO4xbc3tDD6CnQ=;
- b=pfIjDg0cTZZQiISuZy8XrIjwocED1K4j46YJ8VZlK4jPPoqrJe72YWJ1k7qnsjnRdZ
- lsP5ijSD/f2CTlddZH0fUbTS7ETAi3qc1Hwpqs7zgfw/Zeb/UK5Aylf4qzxO96LwHOoG
- PP7kQvjrIEymeMAvR4l05hplEbJk32wgiie+oaGzkQ7ELj7EDiaxo8FYlJT9g1hnXT2l
- 1sAihQo0q8EBK3tCIBJF1QC3AzsXAgmT7A85Zub6a1gdr5t5Lz+t2mXNKLMhBIiRS41h
- JO0D5qiApykYn5EcSVYgCwxdSUQbzAJbBFgTSzDglgnBDH/RPrthmkKTC0cWKyg8g36T
- 0wgA==
+ :reply-to; bh=OSaYglwzeOCnqtXdeYAE5QlmXuvdakxdKkKIO+iGRFE=;
+ b=lz63bqhdzxQzHQRGOH07UCe4izrrMSaaKTMzlhWV/UeNE5TjQ1lf8F1yc6nBR5QMu5
+ Fy/NVBCnjtK0pUugydswUkeaFEgDOUFGbqHRxFKyg1+MRLAMj8QW4qOsjyde1Gv/AAcx
+ ui3i5756vbpjpRnCkTVWmDE0DOBLmau/gEvHKp20Sd+GaUTW5jIP/HrCFAU6546/DjLw
+ leNTK3AJv4o/sa+33rPhtie6dQ58UCA3v7tCwaJl+6O8HPVNyTQ2ttnXkyyd/7Pk9IMy
+ VHvlFmpjddNsx4b/rnUA0VINWs8cEyGGhjYKjn0MogdiJ7P4VnvMLpA+KQsMbl4k9mAY
+ zVjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705300314; x=1705905114;
+ d=1e100.net; s=20230601; t=1705300324; x=1705905124;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GbHsFPTqeVEF6MXxcuYOrP3CMgZR2bO4xbc3tDD6CnQ=;
- b=fzR+gi7YsisrHJGTjBcyTPP1q/NN1bbGDebJuIFct2JkObbH9QUblPqU9EUBHZJXAz
- 0+PY3f1HhyTGZvhVgMtWHlkyaIG08rZxGdVV8PGrrRM/V/YPu9/4IqheqzC+7/1DVsTx
- t4tS+0wwftPtQR2TXC8iZrofz+vW7pgermXPJXI+tU7vU1aA+QzQm9Yr/qqPt0iRkb8d
- kXAFxDjdv0X3eCe5NbKtf7/7Iryv01DwJP7QGkiKsA/Jlpmeggagy0LHKvJb7mvwPNZO
- wZwbsAIg6B8R/WaROONwrDfRucnUo9Nz+LgRX6gabARz41d2wWK1pACXls/ozul0+gPi
- ObmQ==
-X-Gm-Message-State: AOJu0YynTWEiB9KZ7tV+YoAy66MG+kaI3FeCq06Y4VrP1vfY521ipCo3
- lfjjT5uijsSZZxbMRw3VwIBzeW6kPZSJMQ==
-X-Google-Smtp-Source: AGHT+IFlwl8uWvXwgb3Julj32KhlFJRRsaSu/FVp4F3xMJc3APxz8EV4QaSrqfIfsLKqImXbFBF6YA==
-X-Received: by 2002:a05:6a00:8d93:b0:6da:f1ba:a196 with SMTP id
- im19-20020a056a008d9300b006daf1baa196mr6940903pfb.37.1705300314000; 
- Sun, 14 Jan 2024 22:31:54 -0800 (PST)
+ bh=OSaYglwzeOCnqtXdeYAE5QlmXuvdakxdKkKIO+iGRFE=;
+ b=M0R086atZX+b1O04TVCRo9lstAg64JdLinpT0ZOP2x2FelM4RYuTjfsMt3JS07p7c3
+ VaqN3rh/55eeV5xr/0vXaPhb1qBYu186jIUqpAySG2huZdPf8apE5fGAxg9KQ4HNTEEN
+ VdBAxkgAqYoNUi7y12wTKb/HI8ynpIixVCSaAB/urpXfdhvbXStTSJIlzb0Mg/8OUHgX
+ HkzVw+LtvQMBMveUvCJdSvYPvA4oYrOvUtiy7ExjV8ls+kOJWeMAnvbluwgjsYJNjUdn
+ wx8MUvEK+CY8HEJ5t7JQRjVovARLACQNSAjbfWEVOlxVT/Um4oedjYSclxf5ILQYii+f
+ 9w7w==
+X-Gm-Message-State: AOJu0YwzIosBZx8id4hw+jfd8HKZzKuWU6iPMQ1TueduUHDdBl63EJh4
+ 0Aef2ts1mSLzXKIa5dmbSMhjNj5IINHPic7rNQEIM8l4iZ0=
+X-Google-Smtp-Source: AGHT+IEz/m3FymaJsmuua9TDDRDRT6/RgdcJ86Y7h/GJ9mQHjtYczzOF9VvmHeRgRyM2UMF0WBJUkg==
+X-Received: by 2002:a17:902:654f:b0:1d3:3357:22b9 with SMTP id
+ d15-20020a170902654f00b001d3335722b9mr2370306pln.139.1705300323774; 
+ Sun, 14 Jan 2024 22:32:03 -0800 (PST)
 Received: from localhost ([157.82.200.138])
  by smtp.gmail.com with UTF8SMTPSA id
- lc18-20020a056a004f5200b006d9cf4b56edsm7131375pfb.175.2024.01.14.22.31.50
+ l2-20020a170902e2c200b001d09c539c96sm6980265plc.229.2024.01.14.22.32.00
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 14 Jan 2024 22:31:53 -0800 (PST)
+ Sun, 14 Jan 2024 22:32:03 -0800 (PST)
 From: Akihiko Odaki <akihiko.odaki@daynix.com>
-Date: Mon, 15 Jan 2024 15:31:27 +0900
-Subject: [PATCH v9 2/4] target/riscv: Remove misa_mxl validation
+Date: Mon, 15 Jan 2024 15:31:29 +0900
+Subject: [PATCH v9 4/4] target/riscv: Validate misa_mxl_max only once
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240115-riscv-v9-2-ff171e1aedc8@daynix.com>
+Message-Id: <20240115-riscv-v9-4-ff171e1aedc8@daynix.com>
 References: <20240115-riscv-v9-0-ff171e1aedc8@daynix.com>
 In-Reply-To: <20240115-riscv-v9-0-ff171e1aedc8@daynix.com>
 To: Palmer Dabbelt <palmer@dabbelt.com>, 
@@ -80,8 +80,8 @@ To: Palmer Dabbelt <palmer@dabbelt.com>,
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
  Akihiko Odaki <akihiko.odaki@daynix.com>
 X-Mailer: b4 0.12.3
-Received-SPF: none client-ip=2607:f8b0:4864:20::429;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x429.google.com
+Received-SPF: none client-ip=2607:f8b0:4864:20::62a;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pl1-x62a.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -103,67 +103,97 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-It is initialized with a simple assignment and there is little room for
-error. In fact, the validation is even more complex.
+misa_mxl_max is now a class member and initialized only once for each
+class. This also moves the initialization of gdb_core_xml_file which
+will be referenced before realization in the future.
 
 Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Acked-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/tcg/tcg-cpu.c | 15 +++------------
- 1 file changed, 3 insertions(+), 12 deletions(-)
+ target/riscv/cpu.c         | 21 +++++++++++++++++++++
+ target/riscv/tcg/tcg-cpu.c | 23 -----------------------
+ 2 files changed, 21 insertions(+), 23 deletions(-)
 
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 4b742901e76e..4425bee1275e 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1292,6 +1292,26 @@ static const MISAExtInfo misa_ext_info_arr[] = {
+     MISA_EXT_INFO(RVG, "g", "General purpose (IMAFD_Zicsr_Zifencei)"),
+ };
+ 
++static void riscv_cpu_validate_misa_mxl(RISCVCPUClass *mcc)
++{
++    CPUClass *cc = CPU_CLASS(mcc);
++
++    /* Validate that MISA_MXL is set properly. */
++    switch (mcc->misa_mxl_max) {
++#ifdef TARGET_RISCV64
++    case MXL_RV64:
++    case MXL_RV128:
++        cc->gdb_core_xml_file = "riscv-64bit-cpu.xml";
++        break;
++#endif
++    case MXL_RV32:
++        cc->gdb_core_xml_file = "riscv-32bit-cpu.xml";
++        break;
++    default:
++        g_assert_not_reached();
++    }
++}
++
+ static int riscv_validate_misa_info_idx(uint32_t bit)
+ {
+     int idx;
+@@ -1833,6 +1853,7 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+     RISCVCPUClass *mcc = RISCV_CPU_CLASS(c);
+ 
+     mcc->misa_mxl_max = (uint32_t)(uintptr_t)data;
++    riscv_cpu_validate_misa_mxl(mcc);
+ }
+ 
+ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str,
 diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 14133ff66568..b85b0d036a61 100644
+index 20062acd0f0b..df198ee3a312 100644
 --- a/target/riscv/tcg/tcg-cpu.c
 +++ b/target/riscv/tcg/tcg-cpu.c
-@@ -268,7 +268,7 @@ static void riscv_cpu_validate_misa_priv(CPURISCVState *env, Error **errp)
+@@ -268,27 +268,6 @@ static void riscv_cpu_validate_misa_priv(CPURISCVState *env, Error **errp)
      }
  }
  
--static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu, Error **errp)
-+static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu)
- {
-     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cpu);
-     CPUClass *cc = CPU_CLASS(mcc);
-@@ -288,11 +288,6 @@ static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu, Error **errp)
-     default:
-         g_assert_not_reached();
-     }
+-static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu)
+-{
+-    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cpu);
+-    CPUClass *cc = CPU_CLASS(mcc);
 -
--    if (env->misa_mxl_max != env->misa_mxl) {
--        error_setg(errp, "misa_mxl_max must be equal to misa_mxl");
--        return;
+-    /* Validate that MISA_MXL is set properly. */
+-    switch (mcc->misa_mxl_max) {
+-#ifdef TARGET_RISCV64
+-    case MXL_RV64:
+-    case MXL_RV128:
+-        cc->gdb_core_xml_file = "riscv-64bit-cpu.xml";
+-        break;
+-#endif
+-    case MXL_RV32:
+-        cc->gdb_core_xml_file = "riscv-32bit-cpu.xml";
+-        break;
+-    default:
+-        g_assert_not_reached();
 -    }
- }
- 
+-}
+-
  static void riscv_cpu_validate_priv_spec(RISCVCPU *cpu, Error **errp)
-@@ -932,7 +927,6 @@ static bool riscv_cpu_is_vendor(Object *cpu_obj)
- static bool tcg_cpu_realize(CPUState *cs, Error **errp)
  {
-     RISCVCPU *cpu = RISCV_CPU(cs);
--    Error *local_err = NULL;
- 
-     if (!riscv_cpu_tcg_compatible(cpu)) {
-         g_autofree char *name = riscv_cpu_get_name(cpu);
-@@ -941,14 +935,11 @@ static bool tcg_cpu_realize(CPUState *cs, Error **errp)
+     CPURISCVState *env = &cpu->env;
+@@ -935,8 +914,6 @@ static bool tcg_cpu_realize(CPUState *cs, Error **errp)
          return false;
      }
  
--    riscv_cpu_validate_misa_mxl(cpu, &local_err);
--    if (local_err != NULL) {
--        error_propagate(errp, local_err);
--        return false;
--    }
-+    riscv_cpu_validate_misa_mxl(cpu);
- 
+-    riscv_cpu_validate_misa_mxl(cpu);
+-
  #ifndef CONFIG_USER_ONLY
      CPURISCVState *env = &cpu->env;
-+    Error *local_err = NULL;
- 
-     CPU(cs)->tcg_cflags |= CF_PCREL;
- 
+     Error *local_err = NULL;
 
 -- 
 2.43.0
