@@ -4,85 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CFE3C3DA79
-	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jan 2024 11:51:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 249F6C4707B
+	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jan 2024 13:51:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rPLV7-000582-Rw; Mon, 15 Jan 2024 06:51:33 -0500
+	id 1rPNN7-0001RT-2e; Mon, 15 Jan 2024 08:51:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rPLV5-00057I-W1
- for qemu-riscv@nongnu.org; Mon, 15 Jan 2024 06:51:32 -0500
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rPNN4-0001Qg-Rx
+ for qemu-riscv@nongnu.org; Mon, 15 Jan 2024 08:51:23 -0500
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rPLV4-0002iR-Bd
- for qemu-riscv@nongnu.org; Mon, 15 Jan 2024 06:51:31 -0500
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-3377d45c178so3792677f8f.2
- for <qemu-riscv@nongnu.org>; Mon, 15 Jan 2024 03:51:29 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rPNN3-0004Lo-9K
+ for qemu-riscv@nongnu.org; Mon, 15 Jan 2024 08:51:22 -0500
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-1d542701796so44489155ad.1
+ for <qemu-riscv@nongnu.org>; Mon, 15 Jan 2024 05:51:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705319488; x=1705924288; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9l19L6rbX05ONRegK7vqFjOSqqycukFWTq6UAM6eNyI=;
- b=du+VdGR5c6jbnaWy1/BBj924g9Tz8YQkt/5/lr8khXn8V4AFrJanh+6o0vjpcXSp+A
- zOF0YSa6tJcCbxZAVuKPnEX0VUfnv96NpPefYh2V4G4qea44ZnXkN786P7WuU9GmGOoD
- HAccITU+p6ZbTi6f9YWw7UbmruXWInvY8Ku8oV36YPOlRm2iu9vBLZIGI6U1dr24+59+
- VWPD2Dz/bcikncoQxBpNYaj69eImeTvHyVWS4+PYi8Ve9+640qRLcTQQAraleo9jy9N2
- AEqo+lPthz236ldgN6exUx25fVzp2v4Z5msNZDQAEzwcDlWwfxeF8WOI2Hw/3TUc8Of+
- GvXA==
+ d=ventanamicro.com; s=google; t=1705326679; x=1705931479; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=e47Fu5ywruR4ZSqWpk1+f3zWbQAx8wY2UlVJ5JiAUMg=;
+ b=QvW1+fAcwEIiH20oMH4fOo6B9wbt1H4HGu6K+twqVB4PWNfTPFer9YQLr8bDU8L2L1
+ ET1LHq/fWAcWk7Tsel3izYwTSu4Bv1r2RIS09idVn7Q/736SSewAwbgwVx4MGqDIUHk/
+ HDu6PzzOeOa7Cri4ssPWGeM/K8zQjqA1vVSlrKc9sWzcZYM6NeW+uwHvmj4Z3ky96htC
+ jBX+uM7J1BywfsRGmbEwKZdAaP+m44XkhK9ha8TbvyXFeIez2+CumISeVR6FcXZn9VRZ
+ a6GXn1Uq1daPpMUyxHl4Be7kz6+pOXTqYBBL6Ust46yD7/SaEY2F3XA5tpdGpNn5N0oz
+ b2tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705319488; x=1705924288;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=9l19L6rbX05ONRegK7vqFjOSqqycukFWTq6UAM6eNyI=;
- b=CEcCgGQGWH8U7maBVOXv2yO9bR4klxsm7UcOKRiEufCpjiqL4BxZ57WdVzuqOzyC+P
- XHoiC6fNxzU9VgDZE831KQV/Og/aAtA00oYAzr1JY6Agg8+yac7bjigajbpN0Y4QQ2As
- m4BQH+OqqNhGM+eSAt21ba0/GXjHc67vHzZuBVro1/gBE53Vf7v+YnqB0B3gNDYqHjnZ
- yXCfPyUxvgyFv/Iaq+z7CVNCxLBmJ7T/ZTmZ/+G3sLdGNI+hoe6G3iO+KmzVyyICpVbQ
- XgabHvwgxEsErepqSNMGjJDx1qz8nMn8rLjwSkaSkmPNuKJoKmOSgk5mWTC5vWLsVsXD
- csng==
-X-Gm-Message-State: AOJu0Yx5pLqdE5/Bb/3Z6dxYeX+/LhTd1J5Yg/RhArikdOrXXAQf4zzM
- kq+9Be8dqOEs65LfrMB+JU0+Q6EcVgMW1g==
-X-Google-Smtp-Source: AGHT+IH3GpcUGafFfT+70R3lWyRyo45Gv5/bjAAhsnh/tJGw8bX+nySaHK9E3jA5toNz5o2Q4P6Ssg==
-X-Received: by 2002:a05:600c:3b2a:b0:40e:621b:639b with SMTP id
- m42-20020a05600c3b2a00b0040e621b639bmr2872190wms.116.1705319488061; 
- Mon, 15 Jan 2024 03:51:28 -0800 (PST)
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- p19-20020adf9d93000000b003362d0eefd3sm11633639wre.20.2024.01.15.03.51.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jan 2024 03:51:27 -0800 (PST)
-Received: from draig (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 61A965F78A;
- Mon, 15 Jan 2024 11:51:27 +0000 (GMT)
-From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-devel@nongnu.org,  Palmer Dabbelt <palmer@dabbelt.com>,  Alistair
- Francis <alistair.francis@wdc.com>,  Bin Meng <bin.meng@windriver.com>,
- Weiwei Li <liwei1518@gmail.com>,  Daniel Henrique Barboza
- <dbarboza@ventanamicro.com>,  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-riscv@nongnu.org,  Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: Re: [PATCH v2 23/43] target/riscv: Remove misa_mxl validation
-In-Reply-To: <875xzyejuw.fsf@draig.linaro.org> ("Alex =?utf-8?Q?Benn=C3=A9?=
- =?utf-8?Q?e=22's?= message of "Fri, 12 Jan 2024 13:56:07 +0000")
-References: <20240103173349.398526-1-alex.bennee@linaro.org>
- <20240103173349.398526-24-alex.bennee@linaro.org>
- <87sf37hlwo.fsf@draig.linaro.org>
- <CAKmqyKPCy9W-iYscHLjVvU=RfoSLURFgdki0qdzgNSkLKqutyg@mail.gmail.com>
- <875xzyejuw.fsf@draig.linaro.org>
-User-Agent: mu4e 1.11.27; emacs 29.1
-Date: Mon, 15 Jan 2024 11:51:27 +0000
-Message-ID: <87a5p6ke68.fsf@draig.linaro.org>
+ d=1e100.net; s=20230601; t=1705326679; x=1705931479;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=e47Fu5ywruR4ZSqWpk1+f3zWbQAx8wY2UlVJ5JiAUMg=;
+ b=vbhSnDyqXZy/3ZkMoLreT/SYp98FQt9VaaHJ0W2AWN7KLxO1cyxrfJmARgTeL2CboY
+ SQnLJQPTcR22/9KTPVaCeu3uKs7mzvIOoBN9VhjJAhs3gTLlvqHFhgAlBCTFgDu8bW2f
+ tIfHjwkR26FGwnsWrD/HCIoYCiuabgIPCXVhEJQmS7C3BFJyJAS8GYFdE2SzDQk0DHd3
+ czMgTZ+CZY1RgAYaLfn/VRZuS3+IMYa185EZ7HKSp7zn8y072qfdPnhqwhGSlfV8rk1o
+ Fx3kxWk9pySA+aBPyAnfSEWFbjrVC9mcqvET2UmkR4/co50fv4qRNiWE3f4JRl9RJE4Z
+ CuEw==
+X-Gm-Message-State: AOJu0YybKmlijJ+QYBd7Qp0StHwoq+ULOdfzIoS/O8E86chEEOzSSfsD
+ m3wY1dC+TbuZ8dep2vGcaqWsaAHY+l7TVw==
+X-Google-Smtp-Source: AGHT+IF8LvwC1ytklC4KrjVWcrAUMFIaFTr5Uq/ESNjN2ffdh/UOAbBjA1Q75MRD3/XFBPIrnR05EA==
+X-Received: by 2002:a17:90a:cf04:b0:28e:2060:6f72 with SMTP id
+ h4-20020a17090acf0400b0028e20606f72mr1477979pju.80.1705326679433; 
+ Mon, 15 Jan 2024 05:51:19 -0800 (PST)
+Received: from [192.168.68.110] ([152.234.123.64])
+ by smtp.gmail.com with ESMTPSA id
+ o19-20020a170903009300b001d5d6db7bcdsm737930pld.194.2024.01.15.05.51.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 15 Jan 2024 05:51:18 -0800 (PST)
+Message-ID: <0e05fc12-c035-4e87-89fb-2fa35173e38e@ventanamicro.com>
+Date: Mon, 15 Jan 2024 10:51:15 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x429.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 10/13] target/riscv/insn_trans/trans_rvv.c.inc: use
+ 'vlenb' in MAXSZ()
+Content-Language: en-US
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ max.chou@sifive.com
+References: <20240112213812.173521-1-dbarboza@ventanamicro.com>
+ <20240112213812.173521-11-dbarboza@ventanamicro.com>
+ <fd99b822-16e5-44be-b314-ed986291e877@linaro.org>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <fd99b822-16e5-44be-b314-ed986291e877@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,48 +100,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Alex Benn=C3=A9e <alex.bennee@linaro.org> writes:
 
-> Alistair Francis <alistair23@gmail.com> writes:
->
->> On Tue, Jan 9, 2024 at 1:43=E2=80=AFAM Alex Benn=C3=A9e <alex.bennee@lin=
-aro.org> wrote:
->>>
->>> Alex Benn=C3=A9e <alex.bennee@linaro.org> writes:
->>>
->>> > From: Akihiko Odaki <akihiko.odaki@daynix.com>
->>> >
->>> > It is initialized with a simple assignment and there is little room f=
-or
->>> > error. In fact, the validation is even more complex.
->>> >
->>> > Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
->>> > Acked-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
->>> > Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->>> > Acked-by: Alistair Francis <alistair.francis@wdc.com>
->>> > Message-Id: <20231213-riscv-v7-2-a760156a337f@daynix.com>
->>> > Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
->>>
->>> ping: along with this are the RiscV maintainers happy for me to take:
->>>
->>>   [PATCH v2 23/43] target/riscv: Remove misa_mxl validation
->>>   [PATCH v2 24/43] target/riscv: Move misa_mxl_max to class
->>>   [PATCH v2 25/43] target/riscv: Validate misa_mxl_max only once
->>>
->>> through my next pull request?
+
+On 1/12/24 19:45, Richard Henderson wrote:
+> On 1/13/24 08:38, Daniel Henrique Barboza wrote:
+>> MAXSZ() returns the value in bytes. Now that we have access to vlenb
+>> we don't need to compensate with a '-3' in the scale to use 'vlen'.
 >>
->> Yep! Go for it
->
-> Sadly some of the recent changes that went through have created a merge
-> conflict.
->
-> Akihiko,
->
-> Any chance you could re-spin just the MISA_MXL patches?
+>> MAXSZ() now works as follows:
+>>
+>> LMUL  lmul=scale  MAXSZ (vlenb >> -scale)
+>>    1       0       vlenb
+>>    2       1       vlenb << 1
+>>    4       2       vlenb << 2
+>>    8       3       vlenb << 3
+> 
+> Um, what?
+> 
+>>   static inline uint32_t MAXSZ(DisasContext *s)
+>>   {
+>> -    int scale = s->lmul - 3;
+>> -    return s->cfg_ptr->vlen >> -scale;
+>> +    return s->cfg_ptr->vlenb >> -s->lmul;
+> 
+> There's no left-shift here, either before or after.
+> Bug?
 
-Never mind, I think I got it figured out.
+Yeah, I got lost in that explanation. I'll simplify it to be just a simple case of
+adjusting the right shift to use vlenb like in patches 8 and 9.
 
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
+
+Thanks,
+
+
+Daniel
+
+
+
+> 
+> 
+> r~
 
