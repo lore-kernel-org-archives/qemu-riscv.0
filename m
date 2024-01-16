@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D4B8C4707B
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D489C3DA79
 	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Jan 2024 01:10:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rPXy5-0007Tq-6J; Mon, 15 Jan 2024 20:10:17 -0500
+	id 1rPXy2-0007Sp-Uv; Mon, 15 Jan 2024 20:10:15 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jeeheng.sia@starfivetech.com>)
- id 1rPXy1-0007Qv-8G; Mon, 15 Jan 2024 20:10:13 -0500
+ id 1rPXxs-0007Pb-2p; Mon, 15 Jan 2024 20:10:04 -0500
 Received: from mail-sh0chn02on2062c.outbound.protection.partner.outlook.cn
  ([2406:e500:4420:2::62c]
  helo=CHN02-SH0-obe.outbound.protection.partner.outlook.cn)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jeeheng.sia@starfivetech.com>)
- id 1rPXxy-0005hs-CI; Mon, 15 Jan 2024 20:10:12 -0500
+ id 1rPXxk-0005hs-G3; Mon, 15 Jan 2024 20:10:03 -0500
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=acSE9P1sV/s6dLrdtU8S2HL3hSh8wSg20Hk9fQId1BI8zzZN/QeCZwg/JaUYbQpG90zuX/2v1V1O3xLUW2MJGF6KMsRyWPxIlI9hB4dMX7bhi2UDoeK7/V/xjnfaNR6KuuYrhHHkHMa7AkchMTvtpNtEaOjmBlMUILE2igWutneKBrZJkzMDiFftQpbmcsFvj1EomQMO8DBjG4a4QP46z4/uOuVirx2ZdkMsvHymxTDqdNkcr4s83AyrgUxVMSSXSTwY7Z6GtxcI7Om3TEthDLs4EamIDZexQt7SLlvEtbpcnD7maAChxw8SZ4ZqiNn5jnK4I1TzH7KcIsbFK2saog==
+ b=ik+qEhPUteo3ZYc1v6l7aLf796yD4DF+akQXK2J1OW125d75ZQNbZgufrJh4+78Sr7KTXHEPGsjSmnELKI3WaCCAHPUGq0BCNGF0PN2yYsIwfUvtkzXAYZY7RJ2k/tENuruA8wan0jrtTVQeYeF/8YN3hwbZmNd/0yYCCmeB52g/BI8kWB8fKGPK0M3616NSIKjW/wX1Ogze/r1MrJcs4Cz6x7xSUbr5MsVwilETw1xbpLyGtuWtPEHBd6YWH+CwxvaLAVUVU7oJqSqwFebVS+CbWoucIkp2tRNZdFClTQelfHHniLZMGpr7bv7WydAV3JCImGEcjbL4ZgrNFoOFXg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SWgcDjUyZMtL9DFUEv4cj7M9P0hs02oxETW145rxLtg=;
- b=Z2Euo63BQEau+fJKZJp+lW+qKM3uQ1+KOTcSLsKo4SYQiarNM3WcVt+iInnqEDau1DsNjs7jxSWPpaX77J1wn6ocAMLZ4+6kf3JoOHYlvz08BJhgqot0hhdJ+aesi54r5uWxUMWlykPScVNJ88HIPYXWTIiyZ5Dcf/M/LePXv7KU82GDuHqL7Z+H05hpzS5X3DPb6p3b/qME2P8Y/UVBJPfVOjV+QVbucBbvR0jSeiDtYuxdgjudahezNSoUogHf7YKxKxNa6CsxUFKEf2qIn/zu5VWS0lGUXMgZBO3VP8H0KPzdpOcuVKrf3xiX5CHts8PgUsXMWpfCTQr9mkzsFA==
+ bh=493pUU49l9KD7HnBf5Ra222ZudvCFsIrdMRpjyeBkRs=;
+ b=e1/DLVwBV06xw+IRS6KQuI8IzPTDdXE+x125cu0UxpQ2Xq8Wz8SSGzq1LyzYyxhroISDTpTyv8Dp1en5ixrbCmSvkngTIFOYpLElnq8NJzacsPBkgOrFDfJSg1ewTI/ucFRKhe2Ba+mEhUaMEa2ZmeLGP7xeB3pmKWmWRzZepmv7v8KuLy0ExLz9x63nf9iKvnfnvndgJSVDdH/9NOlzyvzYkaA7aGyCnTnR6vnM7WzEftMGwgEBEk1MaxUSCsa3D0XZ8bP+WxDbKt/fTVQli7TSd4ZJywhzaGpPagCp7Yh60qnDjCkFH9qgq51ii5GiMj0SsiujBGlqlTNOcjJ2kg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=starfivetech.com; dmarc=pass action=none
  header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
@@ -36,11 +36,11 @@ Received: from SHXPR01MB0574.CHNPR01.prod.partner.outlook.cn
  (2406:e500:c311:1c::14) by SHXPR01MB0527.CHNPR01.prod.partner.outlook.cn
  (2406:e500:c311:1e::14) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7135.33; Tue, 16 Jan
- 2024 01:09:54 +0000
+ 2024 01:09:43 +0000
 Received: from SHXPR01MB0574.CHNPR01.prod.partner.outlook.cn
  ([fe80::535d:fb55:ed0:334f]) by SHXPR01MB0574.CHNPR01.prod.partner.outlook.cn
  ([fe80::535d:fb55:ed0:334f%3]) with mapi id 15.20.7135.033; Tue, 16 Jan 2024
- 01:09:54 +0000
+ 01:09:43 +0000
 From: Sia Jee Heng <jeeheng.sia@starfivetech.com>
 To: qemu-arm@nongnu.org,
 	qemu-devel@nongnu.org,
@@ -50,12 +50,10 @@ Cc: mst@redhat.com, imammedo@redhat.com, anisinha@redhat.com,
  shannon.zhaosl@gmail.com, sunilvl@ventanamicro.com, palmer@dabbelt.com,
  alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
-Subject: [PATCH v2 2/2] hw/riscv/virt-acpi-build.c: Generate SPCR table
-Date: Mon, 15 Jan 2024 17:09:30 -0800
-Message-Id: <20240116010930.43433-3-jeeheng.sia@starfivetech.com>
+Subject: [PATCH v2 0/2] RISC-V: ACPI: Enable SPCR
+Date: Mon, 15 Jan 2024 17:09:28 -0800
+Message-Id: <20240116010930.43433-1-jeeheng.sia@starfivetech.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240116010930.43433-1-jeeheng.sia@starfivetech.com>
-References: <20240116010930.43433-1-jeeheng.sia@starfivetech.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: ZQ0PR01CA0031.CHNPR01.prod.partner.outlook.cn
@@ -64,53 +62,53 @@ X-ClientProxiedBy: ZQ0PR01CA0031.CHNPR01.prod.partner.outlook.cn
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: SHXPR01MB0574:EE_|SHXPR01MB0527:EE_
-X-MS-Office365-Filtering-Correlation-Id: 412dbab7-e065-439f-0158-08dc162fd972
+X-MS-Office365-Filtering-Correlation-Id: 7c2328b6-9f03-4b27-f4fb-08dc162fd294
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 0JjhB5pgBW1FYD/xKugSCMLI5rDVGN+bFi48BPsJcVHnAqo254KrtajXerlRJtoMHehVhF/0ZkRfZAFr2N7gIUvkSVSV0dsN+AYmahXj+TG5Mv7Ih0tBSskUsH2/DCL+uJ0n3QJ9o8sGpWciZDxagY7PINm31vjGlwA8Fwfc2vyDoEJDL5/Zh/PTIGV8huD9x3Q09HJeJW7FM4PWs2ALPWEAM1WOLebivU4yJyN6kWt6keBfpxfJbqWtv7KDI9bOSeDTo8iymZz7WgDEGVhd6wa+GmM3VdF5DYmTH/WKJ6I+FPGhqM415eu2i2JGCAQ8bTZl69KK4Hq2O4cpdEaPK6osk0hbqJLWU3x9STlngJgXbyauLHUOYmchWr9YASIDkH9jX1cCGJyiAhafgNS7NA/uxg7Pi2PnRryX3unHaAMY7tn0OghUMypwgm88scbFlzjwd9X7ZKeJoZSiXqj3chZImi67ic7/DIVC6Ea3lQTJmL8KDndD499ElBYQ42Dq5q3NStKGUKlGGUGSzngdajJqhGsLc0bnn3wE2rGghk/x8sgMmSdIPvxjRgKRdgKV
+X-Microsoft-Antispam-Message-Info: lJ6fRK6OWWqYCSBnoIFyapLVrytCyHQUGbDeMHoX0iOyfSgR6ZoDqeeRtPJnhbxf/Qaf6K9NurDo1qKQEtsOQcwql58Ig4WNe7vEwfa2Bid0/Ek5eaVLaQLNLdLZu9swJthtAunE31uugenjVVIfhRh895WeC5abrg9143oagJrwl5eAFBuvdLSn8k64EegYDg8bwhdybFREyxhd34LVsfYGUEi2PNu9vNDFsDNg5p80s7Vns4LjrrjA5Yj4W4sNR/D305R/wnVSnzqQOyqiKe6I/d4L7gjcXGDKvW+kQV3P8RK34RC0WItuVNUozvwrxypwogdxikjMRqDz747etWpW90cBIekk3OHxFrwM5WAGhWxtfQh1lSRIxX3foZJOT7TGPBMi+3Guxoxdfh4BWiNnHhE3Fb9OqlnM2Y1oDdc4gWWv6a1McS1s4QYCOHqdDdifstUsYjPUUzHIPnRjAUKlZUvLGK654oCc4OuzBIQ+qQSumy8EO06cWd+xe+OHiR2byeGKdKIJ2//ndgTZ0Kploo/Ak4TGSqtFgL5UJ1SJpelZwOY/YbuHiFjS1BVR
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SHXPR01MB0574.CHNPR01.prod.partner.outlook.cn; PTR:;
  CAT:NONE;
- SFS:(13230031)(366004)(136003)(346002)(39830400003)(396003)(230922051799003)(186009)(64100799003)(451199024)(1800799012)(1076003)(26005)(41320700001)(8936002)(41300700001)(66556008)(66476007)(8676002)(66946007)(508600001)(86362001)(6666004)(2616005)(36756003)(2906002)(38100700002)(38350700005)(5660300002)(40160700002)(52116002)(7416002)(4326008)(40180700001);
+ SFS:(13230031)(366004)(136003)(346002)(39830400003)(396003)(230922051799003)(186009)(64100799003)(451199024)(1800799012)(1076003)(26005)(41320700001)(8936002)(83380400001)(41300700001)(66556008)(66476007)(8676002)(66946007)(508600001)(966005)(86362001)(6666004)(2616005)(36756003)(2906002)(38100700002)(38350700005)(5660300002)(40160700002)(52116002)(7416002)(4326008)(40180700001);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?3FQ/UbsVzUX/+3Usmq5fVxDns7Q6qn+Gww6Lzrb0fAQVqYBOEj5BgTGLDOc4?=
- =?us-ascii?Q?/wEg+d1hYYlkVD0Kxny+/YOofFHT0iXOIAEFzO/lUVrTmUB7997g3OPeP3vp?=
- =?us-ascii?Q?CNKST69t8tuSQplnFr6F7VtrdJ0HrzVf9ROim2UGVv1OawbS4RtXK1ssSwF9?=
- =?us-ascii?Q?XhGS+K5xzyS5Ms5KIvtLvzv171wVphGLL44abAjVlSIGXTINmIou2dSyKKKN?=
- =?us-ascii?Q?sHJmWckFGo+7lF30WwY84TvER3DriHxDvlSwvbR23dAmR55vXFUgndopoVVt?=
- =?us-ascii?Q?Hj2tDd0IIviXjOgqYDA35d/k36x6nBDXoepNlFIYLe0BdTzhRcbDPfgz4rLd?=
- =?us-ascii?Q?RvyLLOrg6bbE4uLrPzbYkMBsKyQYEI1ylmCoBf4yHaqNpwTxQ/qL2xEls5cH?=
- =?us-ascii?Q?x4m3G3Cm/f1Lxc1TxPcr4CpuPDWpi31z/SaF3vz1NX56spwbuE47RQu2ZbNe?=
- =?us-ascii?Q?VtgrXsnZuFQOVLyYdfPL1+WEhObxU+/BVBZ8z+8AkmbBeOGVOc1z3U/vxQdW?=
- =?us-ascii?Q?/pQais6KnEW7ciyE5MRQxZmvmZONTA3WBT6NK9gWFP1El0j3e2AmTjEjXsNk?=
- =?us-ascii?Q?+AZbwQQ8NzKbN2qbz9G1zs6EXqnylMpJ5ycqyAxzSbwioPvHUb8Z0o5er9R9?=
- =?us-ascii?Q?fLJvyk7lKQFil2wJ7Ucg4K5gdnyXPKLUhBwHatAaClQQVqPU6fYvBzMI1ToI?=
- =?us-ascii?Q?gg3aI/T4lOvRQt8F8VUCaTMhfoDD1p/OBoOBE78MZZNVnjAcdS6aNkq+yb0T?=
- =?us-ascii?Q?qe3RMgwWiRWLVNSGa3QkSWNzTJcMZBdugHA32o2C8OcsqiBnYIJZICW4FrPa?=
- =?us-ascii?Q?+NZzZVYVjjYyeNPPVEmGtJJ37fHZDnv9TN+Ua6UrBgWW8UT9D61mr9X1MWx8?=
- =?us-ascii?Q?ZAyest/qneMv1ktt6Lwu199fRdx1hzDSNwUiYf+hNlbXBUkJQrTFc4yi489a?=
- =?us-ascii?Q?wY0K7vaZCQANaPz9egXkAEa14ymrKHfyYoQPbSks7jm2d06AAnY1UW1kWiiZ?=
- =?us-ascii?Q?KBklowyRIb7mIG/+kRsM8rJgKJ2n/IgsvAmGP+wpZY58EdzGZqHcZ7M161I4?=
- =?us-ascii?Q?YBDwzlTfRVqDUG9O61az/kJKKJULyQ9ibbzrjwOy9UDKn6OTHZ0Kh4h8QGFu?=
- =?us-ascii?Q?mRXVL53aSzOwHJ53D7d8EX+/suPA/+/UuAhWlnb8P2/kzv026pLhmV/UKcgD?=
- =?us-ascii?Q?Hy8C/TezUM7RLdRz8+iXYnO5xJvUVE5H2cfcWFWBjM6X+y6Cwy8s3f7zCrCY?=
- =?us-ascii?Q?47HqtovUosM3glqENgApb0Xe9lZRdHwN6cBL+r17FG/kbCzjAa+RIs841TR6?=
- =?us-ascii?Q?UiidXYE4KMMWlKL3pxgWySKMFt1+ThAhQkP44o5M4Ss4kxbnt+gk9Sv6Y+7w?=
- =?us-ascii?Q?+mEOwBPSQ6EYuiNjQSAwHuo4ofI1CMDw+SUFaUa4XXoAUaVAFfjfoeWyokSV?=
- =?us-ascii?Q?/bC34HggG3spwwZCF0Ltv+XCUBryL8tFzMz+X6WP1xaY+VhYFuc8QtOkqUHT?=
- =?us-ascii?Q?8B6Naf6RP67t0gVQ+KlSUlPhgIoj/4f/t17fxBApCiyLbFGTvuBNwbjwf9eX?=
- =?us-ascii?Q?aqJNKsL6MH2pvYXgw4mp1AQwyFJxNL1RrBKhObQ8FgXspzSHKfICCNkRj9fE?=
- =?us-ascii?Q?2A=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Z2OPIZjdfcNijtSW/JMTq5PBKXhsOmPUld2OcjfJh56I4Bxh2BScZOmg9iL2?=
+ =?us-ascii?Q?cyJDRmk+31H1JGuEC81H7hEUkRPl4u7CnNteLG5dsXGogHo7m0h3+MRqVHFv?=
+ =?us-ascii?Q?7GY6hTHv0jiBXoO8WIJrAYQVlzofFooisCh0KSYoR0jLNtDr0XpnGKPSJZom?=
+ =?us-ascii?Q?e7A5MldqvvFCRNDv8ZpjvdX9MyGydLAgFB8mpjsjH2zsv/AsQ5lU3fFzFASx?=
+ =?us-ascii?Q?tkSzW0gucltABrc8FFTJ/QR/1QLWXGHHr6PlM6huz5SjmUyAOVCXC1wp+K0w?=
+ =?us-ascii?Q?OZ0Blaj2SUfOwiGtmGytILN/Wcn3IVl7rPPylaU9+SJD/lryIP4IuRaFzqeS?=
+ =?us-ascii?Q?s83vM3a0/8uugBRZczy3OZ01EzxMyCE7b5PWKtjcNtOwuK7zNzH7fNKnaWEe?=
+ =?us-ascii?Q?mZ9rYja7wDw/JWaOIfdbd9HgcMJox20hOzNitO4wdhl7X5ro9/yg3m2vIV6P?=
+ =?us-ascii?Q?q3ev0QIXcH8+5lo6rCeS36RQCdXA4hj3Qhfp51I7gz8+8dwKYugZmqOlV3OD?=
+ =?us-ascii?Q?HrqLUQz+gDryDGFXpabzdZMIilwIsGiijwbJSgsQYTBwzgLVWdrTaGpEGmz4?=
+ =?us-ascii?Q?V8fVAxw38LBrpWEOJvbqESinxZivgJnQGNcCT1JKjyvcVeOkfdGcYBU7hz3U?=
+ =?us-ascii?Q?5Kp+mNastPaEMtjmAy2xeiZjnvPd3jeXHCkltYqxKj8/28EA7vmhlsFG16PZ?=
+ =?us-ascii?Q?5lJxASndU3tjoCeweTMuBlOUf04tUfoOuVuRgO6oJTwWeK/00iNtJ8O43J0a?=
+ =?us-ascii?Q?kzxaQMC9cwocY6BUkrHbHgTMsYvwz5rztO+JaMoXJ0boeAFSM64Z2R0ASXfT?=
+ =?us-ascii?Q?vvVBlUXONIIQ3hfX2ZGeGM2e8oc429lh9DCaadQyCvxAJuw8FfjLwwbRuffp?=
+ =?us-ascii?Q?bSnUfo4kf7S9Vi+LpfdzsIaGo4ItTvKp+px78xmFPaYd9b4KLbW4QvDG1p3Y?=
+ =?us-ascii?Q?PZrPmFkCPFFs+FAslNQA9XMDgBoTVI86c97mHGw0Iw7VeuCzBTS400dQPbto?=
+ =?us-ascii?Q?sFx54Pmr+voVQpdbhOROAYu7eethTjwqEle+16O2lLdCy8h40Rb2cov6LOJL?=
+ =?us-ascii?Q?rTlT2FPoBN31QKe4p/AE+/tyb+7laA5xnS8iK1PLNTvZ4sIB7LiRTvqtYqwY?=
+ =?us-ascii?Q?05bqtFWiJCvmp9IJwvf356b7NnUUqc3NqbAuwtuP+VF20bINBMrsFQPyT53U?=
+ =?us-ascii?Q?ueXZcfIXbBB8sWz4aF/H2e1UMhCqRopyvnR7gCQhOyvhrkCGS5b/rzMjObOd?=
+ =?us-ascii?Q?eGWBUPeqFDOBguW5heTLYiGesIPAOB2zWjiJ5GDBz3T4X7m8eS0CkIO5REL0?=
+ =?us-ascii?Q?3ctDo/XolmW3wUS+Q6lfLnKN++70d+Uop+9RYCSMDlPw4VklE4bOECaGFVdN?=
+ =?us-ascii?Q?PzI0zCXSn+yzE+8cUnuRXAAL2dRU8PGglaf+OxZ+y+aKkUyrZVOUESKhEOsl?=
+ =?us-ascii?Q?5MSlbRMj65KxJHFhm747LC/Gj3Dp/z9Km/IzMshPdMCxu6h4UdKq4nEzHD/1?=
+ =?us-ascii?Q?Juvo80OkCu2HJjdznzJuuceQ4kAC37vE2HHDw/hyhYBU9omIWfkeNuS+DcnL?=
+ =?us-ascii?Q?IFYaFG5yQUQVmUavK5rvd6H/8PQbmXusNuOn7w1mgr1tlHj+JnxqCzjB8Fi1?=
+ =?us-ascii?Q?Sw=3D=3D?=
 X-OriginatorOrg: starfivetech.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 412dbab7-e065-439f-0158-08dc162fd972
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7c2328b6-9f03-4b27-f4fb-08dc162fd294
 X-MS-Exchange-CrossTenant-AuthSource: SHXPR01MB0574.CHNPR01.prod.partner.outlook.cn
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jan 2024 01:09:54.9501 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jan 2024 01:09:43.4271 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 7Z+006pjy77HiNUa2wgDMBAb+9MW4XkGkhsp7KUqBOiJuqjLZ4qbRWOjE+heWpQ3nmsNI48l19gdA3L7H4NdZcAMpSMP4VPCB0Mzira1G8Y=
+X-MS-Exchange-CrossTenant-UserPrincipalName: sdnHhMcMtYzcvw5mIp87MZFF5waBAiF9PAB12VUXsHQlMnVGS9f1cencT98os+Zd7c5W1kKKSkZWLWc1vhk1SW++xrwUJOX+h/wdWuAA0ik=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SHXPR01MB0527
 Received-SPF: pass client-ip=2406:e500:4420:2::62c;
  envelope-from=jeeheng.sia@starfivetech.com;
@@ -135,72 +133,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Generate Serial Port Console Redirection Table (SPCR) for RISC-V
-virtual machine.
+This series focuses on enabling the Serial Port Console Redirection (SPCR)
+table for the RISC-V virt platform. Considering that ARM utilizes the same
+function, the initial patch involves migrating the build_spcr function to
+common code. This consolidation ensures that RISC-V avoids duplicating the
+function.
 
-Signed-off-by: Sia Jee Heng <jeeheng.sia@starfivetech.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- hw/riscv/virt-acpi-build.c | 39 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 39 insertions(+)
+The patch set is built upon Alistair's riscv-to-apply.next branch
 
-diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-index 26c7e4482d..7fc5071c84 100644
---- a/hw/riscv/virt-acpi-build.c
-+++ b/hw/riscv/virt-acpi-build.c
-@@ -174,6 +174,42 @@ acpi_dsdt_add_uart(Aml *scope, const MemMapEntry *uart_memmap,
-     aml_append(scope, dev);
- }
- 
-+/*
-+ * Serial Port Console Redirection Table (SPCR)
-+ * Rev: 1.07
-+ */
-+
-+static void
-+spcr_setup(GArray *table_data, BIOSLinker *linker, RISCVVirtState *s)
-+{
-+    AcpiSpcrData serial = {
-+        .interface_type = 0,       /* 16550 compatible */
-+        .base_addr.id = AML_AS_SYSTEM_MEMORY,
-+        .base_addr.width = 32,
-+        .base_addr.offset = 0,
-+        .base_addr.size = 1,
-+        .base_addr.addr = s->memmap[VIRT_UART0].base,
-+        .interrupt_type = (1 << 4),/* Bit[4] RISC-V PLIC/APLIC */
-+        .pc_interrupt = 0,
-+        .interrupt = UART0_IRQ,
-+        .baud_rate = 7,            /* 15200 */
-+        .parity = 0,
-+        .stop_bits = 1,
-+        .flow_control = 0,
-+        .terminal_type = 3,        /* ANSI */
-+        .language = 0,             /* Language */
-+        .pci_device_id = 0xffff,   /* not a PCI device*/
-+        .pci_vendor_id = 0xffff,   /* not a PCI device*/
-+        .pci_bus = 0,
-+        .pci_device = 0,
-+        .pci_function = 0,
-+        .pci_flags = 0,
-+        .pci_segment = 0,
-+    };
-+
-+    build_spcr(table_data, linker, &serial, 2, s->oem_id, s->oem_table_id);
-+}
-+
- /* RHCT Node[N] starts at offset 56 */
- #define RHCT_NODE_ARRAY_OFFSET 56
- 
-@@ -555,6 +591,9 @@ static void virt_acpi_build(RISCVVirtState *s, AcpiBuildTables *tables)
-     acpi_add_table(table_offsets, tables_blob);
-     build_rhct(tables_blob, tables->linker, s);
- 
-+    acpi_add_table(table_offsets, tables_blob);
-+    spcr_setup(tables_blob, tables->linker, s);
-+
-     acpi_add_table(table_offsets, tables_blob);
-     {
-         AcpiMcfgInfo mcfg = {
+Changes in v2:
+- Renamed the build_spcr_rev2() function to spcr_setup().
+- SPCR table version is passed from spcr_setup() to the common
+  build_spcr() function.
+- Added "Reviewed-by" from Daniel for patch 2.
+- The term 'RFC' has been removed from this series, as the dependency code
+  from [1] has been merged into Alistair's riscv-to-apply.next branch. The
+  first series of this patch can be found at [2].
+
+[1] https://lore.kernel.org/qemu-devel/20231218150247.466427-1-sunilvl@ventanamicro.com/
+[2] https://lore.kernel.org/qemu-devel/20240105090608.5745-1-jeeheng.sia@starfivetech.com/
+
+Sia Jee Heng (2):
+  hw/arm/virt-acpi-build.c: Migrate SPCR creation to common location
+  hw/riscv/virt-acpi-build.c: Generate SPCR table
+
+ hw/acpi/aml-build.c         | 51 ++++++++++++++++++++++++++++
+ hw/arm/virt-acpi-build.c    | 68 +++++++++++++++----------------------
+ hw/riscv/virt-acpi-build.c  | 39 +++++++++++++++++++++
+ include/hw/acpi/acpi-defs.h | 33 ++++++++++++++++++
+ include/hw/acpi/aml-build.h |  4 +++
+ 5 files changed, 154 insertions(+), 41 deletions(-)
+
 -- 
 2.34.1
 
