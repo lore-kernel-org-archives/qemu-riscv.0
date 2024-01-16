@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B28BBC47077
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Jan 2024 21:00:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 525D0C47DA7
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Jan 2024 21:00:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rPqVz-0004ZP-Pz; Tue, 16 Jan 2024 15:58:31 -0500
+	id 1rPqWW-0004k4-9Q; Tue, 16 Jan 2024 15:59:04 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rPqVy-0004YX-67
- for qemu-riscv@nongnu.org; Tue, 16 Jan 2024 15:58:30 -0500
-Received: from mail-pg1-x52d.google.com ([2607:f8b0:4864:20::52d])
+ id 1rPqWU-0004jT-Ln
+ for qemu-riscv@nongnu.org; Tue, 16 Jan 2024 15:59:02 -0500
+Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rPqVw-0007ZQ-Il
- for qemu-riscv@nongnu.org; Tue, 16 Jan 2024 15:58:29 -0500
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-5cddc5455aeso4899928a12.1
- for <qemu-riscv@nongnu.org>; Tue, 16 Jan 2024 12:58:28 -0800 (PST)
+ id 1rPqWS-0007eF-S3
+ for qemu-riscv@nongnu.org; Tue, 16 Jan 2024 15:59:02 -0500
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-28e724d9c47so759032a91.2
+ for <qemu-riscv@nongnu.org>; Tue, 16 Jan 2024 12:59:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1705438707; x=1706043507; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1705438740; x=1706043540; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eOWLB2x4xfDecgWD2qHtPR5sj/No/b3PuDL+cAM0xow=;
- b=NKjRH/Diyc6onKWIGJ8oQvMFQFwcOsewqUdQ4LanS2xCKoK6PjIPno765wHKeI60+H
- vKGwfHZv6i312q0PEuqgzrBLYo2BO7mlbMPS6pYWbSxa/UMaA4tvNhWvwSr8CKAevF8J
- ofqIH6DcLCWmWoh9Kva9EuATyNJ3UCZ3WHPMJf/YJHjI2ZLVl49gsNCLMdibmQeWYpau
- E4FaUI1PLTSFDqjNum162gd2BQg3apsRw3SyKZUvUQO4GFNKdass2WBnc8pjVqrRFNOx
- fBec0x1PI7tNx0Qh2fc0T5IJbF5UnKlWenEZS6sEgVPafu312yG8cRetBuwntZWrhfnU
- ftpA==
+ bh=r4cy4vMBI0zOMfd5xLwLJg2urR77gmMSIpOXOZ3zsA8=;
+ b=m2ed1djZqAIMT0dQZrvpGcgeIPjX3ni6bKd8z2LEM2w5gq1jghAU6w8O2lSmModOcH
+ 9Pa3DyKsREzoSBaF6bn9Gdk0PM4vXcfvWi3dBsLQKitZwaD3FsoDpNJhbhni2Om5AW76
+ LR5gQGxORO9B81+dJlnJIsKcMn79U9vys0bW71f7DoG8XMmtvMjLMwuseEcIeqxWRO/Q
+ 8wGXa5V3lFtROsqtcVKAKjXgQE0UK4adSQjuRlPSz5FfjnWecqvjjfDCeHdboAgxsesL
+ Ee3xwWe7FfrOW1fRiDcqjnevBmaXdTChleNSzcyLpP2NqKdL9A3F06H1F/DJ0n6ZrJpe
+ znMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705438707; x=1706043507;
+ d=1e100.net; s=20230601; t=1705438740; x=1706043540;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eOWLB2x4xfDecgWD2qHtPR5sj/No/b3PuDL+cAM0xow=;
- b=q7trG2uK6zDvTAJleg0v5zrangGKQCOmKfnoTs04NjGLIOZWVr1RkauOCQhqM/MAl6
- y1YlhN/WKUU6FpL5OHD+OjrzIewV+WfiA+B7UJvOfApCLmGCKt43aeSyC2V60yysYqXR
- hYm+FCzdAbG5uz3pAgwlnm1oLkvSXEHWxxgZv745ov3+F/mNcIywf1A/FE12h6p/4Rxl
- RvE7t3lEW526+RtAx7SddTVKhVGGClfHTXQVWoZw7rzlpjqfzv6L7uJoYElB80DjWRYW
- 4KBTyCwIKrZISQYufUw7PgBWlaQ7uEj3sIx+WptnsA1zmvwB4znjZZBy/HDtCu+3WRtv
- NTRw==
-X-Gm-Message-State: AOJu0YxWoLlQIaZQiMXb7zliMgswlPkU/FQyLrkL4o0Tnj6t9RKJ2Br8
- 7yjJ46slyVwwksN3qKeenRda5B6m8QSbUA==
-X-Google-Smtp-Source: AGHT+IFzsDNsMJmFojb4WsMcdxUqJrj0juHNS2ONrfXulPFEGRDFVXrOl2JpYLHpa8GCLLy7RSyagw==
-X-Received: by 2002:a17:90b:3586:b0:28b:16b0:55a4 with SMTP id
- mm6-20020a17090b358600b0028b16b055a4mr4071241pjb.38.1705438707228; 
- Tue, 16 Jan 2024 12:58:27 -0800 (PST)
+ bh=r4cy4vMBI0zOMfd5xLwLJg2urR77gmMSIpOXOZ3zsA8=;
+ b=Z2gmwyL+FbEqzsBMRJugE3SqQpbwa84am1NjwnwjWOKgqFMngARwPOdvFjYVEplkht
+ JQPZQhXKEAhGfIkH1JXkJLu92vm4FjOW1/49ygiXlFTcS9n0gCJLdWeWmmLtFIDnC19Z
+ fYW4peIqqZtxtqg+sYD3gAdOvBah+g/cRH4V2i3J4nPCh4L+ome5VAmvMvMsu/EN9qw0
+ PtrA7/gQhpKUlf6pt7X1Vl9GLLx0s0RJGo2rG94f+AOugngRylLnvQja79Z34ShGISXR
+ MJxl2I1NZS+O+wYyppoe29a01ZZnnGRwU4oNkhTSXiahTf+iTe3PQaUYYMJSrEHuLt1/
+ Nj8A==
+X-Gm-Message-State: AOJu0Yzuj3uhXN6FXzRy64C9Eth8G50ntJ27+2zDCpXy8Y5igjwzwRa6
+ KwMMJs6YPpSjrJlNcDcxnpL+v+PbTY5ZLg==
+X-Google-Smtp-Source: AGHT+IEM28JGFJgSblwE01TMCY5IOPs2q7ULcy18jlUGEbCwU2EeR3pPl1aqM+v7CjnQUQO6/+4hNQ==
+X-Received: by 2002:a17:90b:5150:b0:28b:bbf9:675a with SMTP id
+ sd16-20020a17090b515000b0028bbbf9675amr4383967pjb.25.1705438739766; 
+ Tue, 16 Jan 2024 12:58:59 -0800 (PST)
 Received: from grind.dc1.ventanamicro.com ([152.234.123.64])
  by smtp.gmail.com with ESMTPSA id
- sh2-20020a17090b524200b0028df5c748e4sm11326949pjb.44.2024.01.16.12.58.24
+ sh2-20020a17090b524200b0028df5c748e4sm11326949pjb.44.2024.01.16.12.58.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jan 2024 12:58:26 -0800 (PST)
+ Tue, 16 Jan 2024 12:58:59 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  richard.henderson@linaro.org, max.chou@sifive.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v3 01/13] target/riscv: add 'vlenb' field in cpu->cfg
-Date: Tue, 16 Jan 2024 17:58:05 -0300
-Message-ID: <20240116205817.344178-2-dbarboza@ventanamicro.com>
+Subject: [PATCH v3 11/13] target/riscv: change vext_get_vlmax() arguments
+Date: Tue, 16 Jan 2024 17:58:15 -0300
+Message-ID: <20240116205817.344178-12-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240116205817.344178-1-dbarboza@ventanamicro.com>
 References: <20240116205817.344178-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52d;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x102f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,69 +96,119 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Our usage of 'vlenb' is overwhelming superior than the use of 'vlen'.
-We're using 'vlenb' most of the time, having to do 'vlen >> 3' or
-'vlen / 8' in every instance.
+We'll re-use the logic froim vext_get_vlmax() in 2 other occurrences in
+the next patch, but first we need to make it independent of both 'cpu'
+and 'vtype'. To do that, add 'vlenb', 'vsew' and 'lmul' as parameters
+instead.
 
-In hindsight we would be better if the 'vlenb' property  was introduced
-instead of 'vlen'. That's not what happened, and now we can't easily get
-rid of it due to user scripts all around. What we can do, however, is to
-change our internal representation to use 'vlenb'.
+Adapt the two existing callers. In cpu_get_tb_cpu_state(), rename 'sew'
+to 'vsew' to be less ambiguous about what we're encoding into *pflags.
 
-Add a 'vlenb' field in cpu->cfg. It'll be set via the existing 'vlen'
-property, i.e. setting 'vlen' will also set 'vlenb'.
+In HELPER(vsetvl) the following changes were made:
 
-We'll replace all 'vlen >> 3' code to use 'vlenb' directly. Start with
-the single instance we have in target/riscv/cpu.c.
+- add a 'vsew' var to store vsew. Use it in the shift to get 'sew';
+- the existing 'lmul' var was renamed to 'vlmul';
+- add a new 'lmul' var to store 'lmul' encoded like DisasContext:lmul.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/cpu.c     | 4 +++-
- target/riscv/cpu_cfg.h | 1 +
- 2 files changed, 4 insertions(+), 1 deletion(-)
+ target/riscv/cpu.h           |  7 +++----
+ target/riscv/cpu_helper.c    | 11 +++++++----
+ target/riscv/vector_helper.c | 16 ++++++++++------
+ 3 files changed, 20 insertions(+), 14 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 8d3ec74a1c..f4261d2ffc 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -847,7 +847,7 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-                              csr_ops[csrno].name, val);
-             }
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 3af61e0f94..9dcbc0649a 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -688,11 +688,10 @@ static inline RISCVMXL riscv_cpu_sxl(CPURISCVState *env)
+  *               = 256 >> 7
+  *               = 2
+  */
+-static inline uint32_t vext_get_vlmax(RISCVCPU *cpu, target_ulong vtype)
++static inline uint32_t vext_get_vlmax(uint32_t vlenb, uint32_t vsew,
++                                      int8_t lmul)
+ {
+-    uint8_t vsew = FIELD_EX64(vtype, VTYPE, VSEW);
+-    int8_t lmul = sextract32(FIELD_EX64(vtype, VTYPE, VLMUL), 0, 3);
+-    uint32_t vlen = cpu->cfg.vlenb << 3;
++    uint32_t vlen = vlenb << 3;
+ 
+     /*
+      * We need to use 'vlen' instead of 'vlenb' to
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index c7cc7eb423..8da9104da4 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -81,13 +81,16 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+          * which is not supported by GVEC. So we set vl_eq_vlmax flag to true
+          * only when maxsz >= 8 bytes.
+          */
+-        uint32_t vlmax = vext_get_vlmax(cpu, env->vtype);
+-        uint32_t sew = FIELD_EX64(env->vtype, VTYPE, VSEW);
+-        uint32_t maxsz = vlmax << sew;
++
++        /* lmul encoded as in DisasContext::lmul */
++        int8_t lmul = sextract32(FIELD_EX64(env->vtype, VTYPE, VLMUL), 0, 3);
++        uint32_t vsew = FIELD_EX64(env->vtype, VTYPE, VSEW);
++        uint32_t vlmax = vext_get_vlmax(cpu->cfg.vlenb, vsew, lmul);
++        uint32_t maxsz = vlmax << vsew;
+         bool vl_eq_vlmax = (env->vstart == 0) && (vlmax == env->vl) &&
+                            (maxsz >= 8);
+         flags = FIELD_DP32(flags, TB_FLAGS, VILL, env->vill);
+-        flags = FIELD_DP32(flags, TB_FLAGS, SEW, sew);
++        flags = FIELD_DP32(flags, TB_FLAGS, SEW, vsew);
+         flags = FIELD_DP32(flags, TB_FLAGS, LMUL,
+                            FIELD_EX64(env->vtype, VTYPE, VLMUL));
+         flags = FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index b13be1541a..718a0c711a 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -35,16 +35,18 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
+ {
+     int vlmax, vl;
+     RISCVCPU *cpu = env_archcpu(env);
+-    uint64_t lmul = FIELD_EX64(s2, VTYPE, VLMUL);
+-    uint16_t sew = 8 << FIELD_EX64(s2, VTYPE, VSEW);
++    uint64_t vlmul = FIELD_EX64(s2, VTYPE, VLMUL);
++    uint8_t vsew = FIELD_EX64(s2, VTYPE, VSEW);
++    uint16_t sew = 8 << vsew;
+     uint8_t ediv = FIELD_EX64(s2, VTYPE, VEDIV);
+     int xlen = riscv_cpu_xlen(env);
+     bool vill = (s2 >> (xlen - 1)) & 0x1;
+     target_ulong reserved = s2 &
+                             MAKE_64BIT_MASK(R_VTYPE_RESERVED_SHIFT,
+                                             xlen - 1 - R_VTYPE_RESERVED_SHIFT);
++    int8_t lmul;
+ 
+-    if (lmul & 4) {
++    if (vlmul & 4) {
+         /*
+          * Fractional LMUL, check:
+          *
+@@ -53,8 +55,8 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
+          * (vlenb << 3) >> (8 - lmul) >= sew
+          * vlenb >> (8 - 3 - lmul) >= sew
+          */
+-        if (lmul == 4 ||
+-            cpu->cfg.vlenb >> (8 - 3 - lmul) < sew) {
++        if (vlmul == 4 ||
++            cpu->cfg.vlenb >> (8 - 3 - vlmul) < sew) {
+             vill = true;
          }
--        uint16_t vlenb = cpu->cfg.vlen >> 3;
-+        uint16_t vlenb = cpu->cfg.vlenb;
+     }
+@@ -68,7 +70,9 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
+         return 0;
+     }
  
-         for (i = 0; i < 32; i++) {
-             qemu_fprintf(f, " %-8s ", riscv_rvv_regnames[i]);
-@@ -1314,6 +1314,7 @@ static void riscv_cpu_init(Object *obj)
-     /* Default values for non-bool cpu properties */
-     cpu->cfg.pmu_mask = MAKE_64BIT_MASK(3, 16);
-     cpu->cfg.vlen = 128;
-+    cpu->cfg.vlenb = 128 >> 3;
-     cpu->cfg.elen = 64;
-     cpu->env.vext_ver = VEXT_VERSION_1_00_0;
- }
-@@ -1810,6 +1811,7 @@ static void prop_vlen_set(Object *obj, Visitor *v, const char *name,
- 
-     cpu_option_add_user_setting(name, value);
-     cpu->cfg.vlen = value;
-+    cpu->cfg.vlenb = value >> 3;
- }
- 
- static void prop_vlen_get(Object *obj, Visitor *v, const char *name,
-diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-index fea14c275f..50479dd72f 100644
---- a/target/riscv/cpu_cfg.h
-+++ b/target/riscv/cpu_cfg.h
-@@ -140,6 +140,7 @@ struct RISCVCPUConfig {
- 
-     uint32_t pmu_mask;
-     uint16_t vlen;
-+    uint16_t vlenb;
-     uint16_t elen;
-     uint16_t cbom_blocksize;
-     uint16_t cbop_blocksize;
+-    vlmax = vext_get_vlmax(cpu, s2);
++    /* lmul encoded as in DisasContext::lmul */
++    lmul = sextract32(FIELD_EX64(s2, VTYPE, VLMUL), 0, 3);
++    vlmax = vext_get_vlmax(cpu->cfg.vlenb, vsew, lmul);
+     if (s1 <= vlmax) {
+         vl = s1;
+     } else {
 -- 
 2.43.0
 
