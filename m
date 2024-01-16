@@ -4,96 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBC44C4707C
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Jan 2024 13:33:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E545C47077
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Jan 2024 17:52:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rPjZA-0004sn-Q9; Tue, 16 Jan 2024 08:33:20 -0500
+	id 1rPnbv-0006jg-GO; Tue, 16 Jan 2024 12:52:27 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <SRS0=FuRj=I2=kaod.org=clg@ozlabs.org>)
- id 1rPjYy-0004mN-46; Tue, 16 Jan 2024 08:33:11 -0500
-Received: from mail.ozlabs.org ([2404:9400:2221:ea00::3]
- helo=gandalf.ozlabs.org)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <SRS0=FuRj=I2=kaod.org=clg@ozlabs.org>)
- id 1rPjYu-00055N-Gd; Tue, 16 Jan 2024 08:33:06 -0500
-Received: from gandalf.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
- by gandalf.ozlabs.org (Postfix) with ESMTP id 4TDqh606Szz4xMC;
- Wed, 17 Jan 2024 00:32:54 +1100 (AEDT)
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 4TDqgg0ccfz4x3G;
- Wed, 17 Jan 2024 00:32:30 +1100 (AEDT)
-Message-ID: <60730ed3-9225-4b78-a44e-99b8016a2f08@kaod.org>
-Date: Tue, 16 Jan 2024 14:32:23 +0100
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rPnbu-0006j2-5c
+ for qemu-riscv@nongnu.org; Tue, 16 Jan 2024 12:52:26 -0500
+Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rPnbs-0001GT-50
+ for qemu-riscv@nongnu.org; Tue, 16 Jan 2024 12:52:25 -0500
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-6d9a79a1ad4so5267286b3a.2
+ for <qemu-riscv@nongnu.org>; Tue, 16 Jan 2024 09:52:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1705427542; x=1706032342; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=cYosPHB0+rSJtznR2kU5n7sSK9qEt3bUoapyBRW/cCg=;
+ b=B68g3+QbPmnr2KouAUAFuJmEqjPoJ6s4TgRJln4D6HuI01BO3s/AwIDPsVRkHFeyP4
+ owRaJ9BRUzDEC7D9tpgsliVknWMdjakXsQFzsyzvbwCyKxiWKba3NLnYB4fNfLAdnTRB
+ TXdAFmLTNU6zX84zGPgFzXP66OiAx4dx9FK6ErcRDfhfnQL+VhZkR3fDyFd8FEAih0p9
+ R33MM6dIOig145tvrI0qqIoXjsBNpbVe9URIcrk5iea2+XC58ztzNtCw8Rq30V1MNDmL
+ QwgURwVwkvVMV8WkAJJXQ7kC4q/iJ2WRmxklM/1PG8/E8FG74vYtJhmlTcAV59RwAVPV
+ 9DNw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705427542; x=1706032342;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=cYosPHB0+rSJtznR2kU5n7sSK9qEt3bUoapyBRW/cCg=;
+ b=diOGq2DLc+l6PcvXnaOYcymX6d9YqgRXgKPnItRz9pKn63QVUOw6Nyp5B76uJhVHIl
+ LLLONi797YD0mA62OQi2rFh/KguU6i4lYwo9IQqeqna5gywxEp4pHxwtjp5IlLVinE1z
+ Y5lTA9LroPZfPIgkuYYmUnR35lLq1WTJJrh582QDzQDX0DDd37hZMH5qFCaW60wSLt+F
+ M4ECNoccrQF/LNYwxRoxehORwFjVa6v8vobFsbsHo9YjK4BttZiTyg/19ZVscFdVQiqW
+ f/wPWkCkYfTtF/E7sQlFuP1jZLphxhvVVjoHrKhAmWBmm5v8qNUJ/9du0ZEtvXi4RGQD
+ fWUA==
+X-Gm-Message-State: AOJu0Yz9fQwuiF1zaXvaPeaPaNkKjMehrvSzV5V6EeTGx/UnDImgz2Mf
+ fUoNu1N2zNI121p75wwwrdFmdfnaPHuGQw==
+X-Google-Smtp-Source: AGHT+IE++LmHsZYa37MwzV2rwTtOc3cZqYrzTsO9r/GtCD2LsAvdS5qORul5baEBNd9HhOhZ2Q114g==
+X-Received: by 2002:a05:6a00:2e05:b0:6da:16ec:8afb with SMTP id
+ fc5-20020a056a002e0500b006da16ec8afbmr4781852pfb.69.1705427540830; 
+ Tue, 16 Jan 2024 09:52:20 -0800 (PST)
+Received: from [192.168.68.110] ([152.234.123.64])
+ by smtp.gmail.com with ESMTPSA id
+ t62-20020a625f41000000b006d9a94a03a8sm10013809pfb.77.2024.01.16.09.52.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 16 Jan 2024 09:52:19 -0800 (PST)
+Message-ID: <2d0dd940-69d6-4812-b807-d268306b2105@ventanamicro.com>
+Date: Tue, 16 Jan 2024 14:52:14 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 22/46] hw/arm/aspeed: use qemu_configure_nic_device()
+Subject: Re: [PATCH v2 09/12] target/riscv/cpu.h: use 'vlenb' in
+ vext_get_vlmax()
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ max.chou@sifive.com
+References: <20240115222528.257342-1-dbarboza@ventanamicro.com>
+ <20240115222528.257342-10-dbarboza@ventanamicro.com>
+ <86f114b3-10a4-4857-b470-5f61730ed382@linaro.org>
 Content-Language: en-US
-To: David Woodhouse <dwmw2@infradead.org>, qemu-devel@nongnu.org
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Beniamino Galvani <b.galvani@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Strahinja Jankovic <strahinja.p.jankovic@gmail.com>,
- Niek Linnenbank <nieklinnenbank@gmail.com>,
- Andrew Jeffery <andrew@codeconstruct.com.au>, Joel Stanley <joel@jms.id.au>,
- Igor Mitsyanko <i.mitsyanko@gmail.com>,
- Jean-Christophe Dubois <jcd@tribudubois.net>,
- Andrey Smirnov <andrew.smirnov@gmail.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Rob Herring <robh@kernel.org>, Subbaraya Sundeep <sundeep.lkml@gmail.com>,
- Jan Kiszka <jan.kiszka@web.de>, Tyrone Ting <kfting@nuvoton.com>,
- Hao Wu <wuhaotsh@google.com>, Radoslaw Biernacki <rad@semihalf.com>,
- Leif Lindholm <quic_llindhol@quicinc.com>,
- Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Alistair Francis <alistair@alistair23.me>, Helge Deller <deller@gmx.de>,
- Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Song Gao
- <gaosong@loongson.cn>, Thomas Huth <huth@tuxfamily.org>,
- Laurent Vivier <laurent@vivier.eu>, Huacai Chen <chenhuacai@kernel.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Aurelien Jarno <aurelien@aurel32.net>, Jason Wang <jasowang@redhat.com>,
- Jia Liu <proljc@gmail.com>, Stafford Horne <shorne@gmail.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Nicholas Piggin <npiggin@gmail.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>, Bin Meng
- <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Eric Farman <farman@linux.ibm.com>, David Hildenbrand <david@redhat.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Magnus Damm <magnus.damm@gmail.com>, Artyom Tarasenko <atar4qemu@gmail.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
- Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
- qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
- xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
-References: <20240108204909.564514-1-dwmw2@infradead.org>
- <20240108204909.564514-23-dwmw2@infradead.org>
-From: =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>
-In-Reply-To: <20240108204909.564514-23-dwmw2@infradead.org>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <86f114b3-10a4-4857-b470-5f61730ed382@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2404:9400:2221:ea00::3;
- envelope-from=SRS0=FuRj=I2=kaod.org=clg@ozlabs.org; helo=gandalf.ozlabs.org
-X-Spam_score_int: -39
-X-Spam_score: -4.0
-X-Spam_bar: ----
-X-Spam_report: (-4.0 / 5.0 requ) BAYES_00=-1.9,
- HEADER_FROM_DIFFERENT_DOMAINS=0.249, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42a.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -110,47 +100,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 1/8/24 21:26, David Woodhouse wrote:
-> From: David Woodhouse <dwmw@amazon.co.uk>
+
+
+On 1/15/24 20:14, Richard Henderson wrote:
+> On 1/16/24 09:25, Daniel Henrique Barboza wrote:
+>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>> ---
+>>   target/riscv/cpu.h | 6 +++++-
+>>   1 file changed, 5 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+>> index 11df226a00..7304e478c2 100644
+>> --- a/target/riscv/cpu.h
+>> +++ b/target/riscv/cpu.h
+>> @@ -692,7 +692,11 @@ static inline uint32_t vext_get_vlmax(RISCVCPU *cpu, target_ulong vtype)
+>>   {
+>>       uint8_t sew = FIELD_EX64(vtype, VTYPE, VSEW);
+>>       int8_t lmul = sextract32(FIELD_EX64(vtype, VTYPE, VLMUL), 0, 3);
+>> -    return cpu->cfg.vlen >> (sew + 3 - lmul);
+>> +    /*
+>> +     * vlmax = vlen >> (sew + 3 - lmul). With vlenb,
+>> +     * 3 less shifts: vlenb >> (sew + 3 - 3 - lmul)
+>> +     */
+>> +    return cpu->cfg.vlenb >> (sew - lmul);
+>>   }
 > 
-> Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-> ---
->   hw/arm/aspeed.c | 9 ++++-----
->   1 file changed, 4 insertions(+), 5 deletions(-)
+> I take it back -- this doesn't work without the + 3:
 > 
-> diff --git a/hw/arm/aspeed.c b/hw/arm/aspeed.c
-> index cc59176563..bed5e4f40b 100644
-> --- a/hw/arm/aspeed.c
-> +++ b/hw/arm/aspeed.c
-> @@ -356,7 +356,6 @@ static void aspeed_machine_init(MachineState *machine)
->       AspeedMachineClass *amc = ASPEED_MACHINE_GET_CLASS(machine);
->       AspeedSoCClass *sc;
->       int i;
-> -    NICInfo *nd = &nd_table[0];
->   
->       bmc->soc = ASPEED_SOC(object_new(amc->soc_name));
->       object_property_add_child(OBJECT(machine), "soc", OBJECT(bmc->soc));
-> @@ -371,10 +370,10 @@ static void aspeed_machine_init(MachineState *machine)
->                                &error_fatal);
->   
->       for (i = 0; i < sc->macs_num; i++) {
-> -        if ((amc->macs_mask & (1 << i)) && nd->used) {
-> -            qemu_check_nic_model(nd, TYPE_FTGMAC100);
-> -            qdev_set_nic_properties(DEVICE(&bmc->soc->ftgmac100[i]), nd);
-> -            nd++;
-> +        if ((amc->macs_mask & (1 << i)) &&
-> +            !qemu_configure_nic_device(DEVICE(&bmc->soc->ftgmac100[i]),
-> +                                       true, NULL)) {
-> +            break; /* No configs left; stop asking */
->           }
->       }
->   
+>    sew = 0
+>    lmul = 3
+> 
+>     vlenb >> (0 - 3)
+>   = vlenb >> -3
+> 
+> Need
+> 
+>    vlen = vlenb << 3
+>    vlmax = vlen >> (0 + 3 - 3)
+>          = vlen >> 0
+>          = vlen
 
-Acked-by: Cédric Le Goater <clg@kaod.org>
+I got tricked by the 'sew' variable name there. This formula is using vsew.
 
-Thanks,
-
-C.
+I'll fix and re-send. Thanks,
 
 
+Daniel
+
+
+> 
+> 
+> r~
+> 
+> 
 
