@@ -4,77 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE925C47258
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Jan 2024 21:03:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0A02C47258
+	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Jan 2024 08:21:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rPqWO-0004gu-N5; Tue, 16 Jan 2024 15:58:56 -0500
+	id 1rQ1AH-0006ld-43; Wed, 17 Jan 2024 03:20:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rPqWM-0004eX-6l
- for qemu-riscv@nongnu.org; Tue, 16 Jan 2024 15:58:54 -0500
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQ1AF-0006kM-7k
+ for qemu-riscv@nongnu.org; Wed, 17 Jan 2024 03:20:47 -0500
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rPqWK-0007cs-7z
- for qemu-riscv@nongnu.org; Tue, 16 Jan 2024 15:58:53 -0500
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-28feede2624so311151a91.2
- for <qemu-riscv@nongnu.org>; Tue, 16 Jan 2024 12:58:50 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQ1AC-0005w8-Ja
+ for qemu-riscv@nongnu.org; Wed, 17 Jan 2024 03:20:46 -0500
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-40d6b4e2945so120255895e9.0
+ for <qemu-riscv@nongnu.org>; Wed, 17 Jan 2024 00:20:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1705438730; x=1706043530; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=C+y3Qrztq/7kPEEkjYH8q/r34iQTuu3hzaoJAG+sufk=;
- b=OilqnivvFU2mUcz3eYgQUsVwgiOdRD+naYGXbrzPcWdroAgsSm8SOxKy1faIzMFx5e
- CuRBQS3oKEiqY5RuEhNo4Cbjes1ZJ7u6H+XJ/ay9QGcB3hrtPvvQIubUvNxRwTjfnW37
- bUsFz58DBSavzigiOC6c3Jw81J8tB9aq2e6jZSgQckgOWtdANLzwfOIY46b8TtJ61Nxj
- hVscMQ8S1oS6TkVEMe6Sm4h+oam5jAXqPlvUtbe+cqkySvhXLwNjBW0dwNGlYQMEqeO9
- cBc5uLuO5gzwwVHPth/Bmx1DdlsqpcQ8vZoM9aQY6Gr63XGuUOQCFQD1YqukeYG2QK9c
- efJw==
+ d=linaro.org; s=google; t=1705479643; x=1706084443; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=7LrgQPHbpCYKbZaSLtjO3LRr9bvKD/BTYKzEJd/knyI=;
+ b=SGwI4lHXkyF3W1oz1PQ0GvIJ3RLma25LdKFLj79RNR2y05g79Xqs+xo5P6JWcApCyu
+ OXB0NnK2DBFtZWaNhbWjtYwKCIYVSXbX0ggkl1ZC5HuEw5PKMw1N61i179L1OM8dhphT
+ iRkmNN7xaSBAJhR0Z3tBuFKgv3AllDNr8s2hTPmmBC5yC/F2yO7BPHsk3lIVoLUZT2On
+ kWpPuFQexTUugVLMVfl3daJLaxh8I26fP8BSFPV5XXard/5EzJU/zWp2dqN91jqxOzrF
+ Ilih229zH2g7+h4LsGX145KtAMF/UW/yat+WNgYD4LcyM/lcdHRgg/Tk3axyz2D6J/eB
+ hHzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705438730; x=1706043530;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=C+y3Qrztq/7kPEEkjYH8q/r34iQTuu3hzaoJAG+sufk=;
- b=NAPcAOiKdODt8NF5V35xn1PB+iYusAvWUJkNN/XcuWVKN1J70i5X2pbnupSZCakLWo
- hCfPXWN1/emhQxheXxvAJcftUSCB/nRqegHbQ4nx2x2wJehyAvvSpPBqb3oK2H+Pcy2N
- 0xKiH8wPlumvDprBAfnsFVF7b3TRojTYc7mB4C7THKmCtYprxyqxKiCgdAZB8I16+37D
- H/WX+gbaHgVzVZwT6iM+M+C7E6gIiUxGeiyqrc5PfWiWt3L2LMgRviHmfwslsNr5FwHn
- 5gfIYRC3n3HgLlNUAIYR/omhIWhQPmZ7K4Wmlz9pDjM5bctvmgDg36uwM40Hoq2jFb/e
- WC4g==
-X-Gm-Message-State: AOJu0YyTj6Vm3fY4d4t4EfSzOXkm7Kdn+ZgesQFdwjhhwxAamVUsC3dA
- mXoaqLnzoiz0Xg8JIQ/3DBXvpMoiaYVafA==
-X-Google-Smtp-Source: AGHT+IE9J29pUsNWTxIh79APWl0lEa+x2PGhHRKG8GUtxrqfMPYm4CEO7/007chcizx7UO57NzwBYw==
-X-Received: by 2002:a17:90b:314a:b0:28c:91a5:1e33 with SMTP id
- ip10-20020a17090b314a00b0028c91a51e33mr5214220pjb.12.1705438729958; 
- Tue, 16 Jan 2024 12:58:49 -0800 (PST)
-Received: from grind.dc1.ventanamicro.com ([152.234.123.64])
+ d=1e100.net; s=20230601; t=1705479643; x=1706084443;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=7LrgQPHbpCYKbZaSLtjO3LRr9bvKD/BTYKzEJd/knyI=;
+ b=eLzZOKgUxdK0nY/a3jkYMu2Sp1VeMxKfXt1MqkpSrd94zZDMN3pdWFeuqh5b+gG7gU
+ GDv6Va8bO/jLVg2pQCBCZe/A81GoHo56cTDyXLiCv0M3TBlC8gy+XeV3sEeOi1emvZ0E
+ i5ztcRp6f/7wOpY/XbA+uv7yXugEEZujr8lJIyg5IRGqX4xqAUeQTBGv6aquT7pOOcOb
+ SbL1vpaAqIiEDUIaoPLAh/TtERq4vW0FRHrw/3uKznSnwMvE13Q2m3nrQ5pY/W7vXGCe
+ tcGWruKZod8xesShyuPTU+ZkbfyDptKUKEg+qm58YLvgyxtZKpuAvq3O59V4WlNHfxK4
+ lCSQ==
+X-Gm-Message-State: AOJu0YzQ0ggigeaQ8b7y1CqCUgSoYhbgbF4msIJgIbDQ1swRPiP8EFig
+ 3SX1RBwf2zhywRJCpLJEUxAjAPpeZowfHg==
+X-Google-Smtp-Source: AGHT+IFsxJReS9qJRaCXsrjrI09WOc7aRCJQCul//PxGhmJaIvgVVutBr+hPnwPCnP7wLqPn/vZQzw==
+X-Received: by 2002:a05:600c:1709:b0:40e:3b99:6379 with SMTP id
+ c9-20020a05600c170900b0040e3b996379mr3372810wmn.259.1705479643014; 
+ Wed, 17 Jan 2024 00:20:43 -0800 (PST)
+Received: from [192.168.69.100] ([176.176.156.199])
  by smtp.gmail.com with ESMTPSA id
- sh2-20020a17090b524200b0028df5c748e4sm11326949pjb.44.2024.01.16.12.58.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jan 2024 12:58:49 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- richard.henderson@linaro.org, max.chou@sifive.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v3 08/13] target/riscv/vector_helper.c: use vlenb in
- HELPER(vsetvl)
-Date: Tue, 16 Jan 2024 17:58:12 -0300
-Message-ID: <20240116205817.344178-9-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240116205817.344178-1-dbarboza@ventanamicro.com>
-References: <20240116205817.344178-1-dbarboza@ventanamicro.com>
+ n13-20020a5d51cd000000b0033673ddd81csm1033645wrv.112.2024.01.17.00.20.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 17 Jan 2024 00:20:42 -0800 (PST)
+Message-ID: <ab450fd4-5a7b-4a19-bf60-4c9f079f5357@linaro.org>
+Date: Wed, 17 Jan 2024 09:20:40 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/5] misc: Trivial code rename cleanup
+Content-Language: en-US
+To: qemu-devel@nongnu.org
+Cc: Richard Henderson <richard.henderson@linaro.org>,
+ Weiwei Li <liwei1518@gmail.com>, Alistair Francis
+ <alistair.francis@wdc.com>, qemu-s390x@nongnu.org,
+ Michael Tokarev <mjt@tls.msk.ru>, David Hildenbrand <david@redhat.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>, qemu-riscv@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
+ qemu-trivial@nongnu.org, Halil Pasic <pasic@linux.ibm.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ Eduardo Habkost <eduardo@habkost.net>, Laurent Vivier <laurent@vivier.eu>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Eric Farman
+ <farman@linux.ibm.com>, Thomas Huth <thuth@redhat.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+References: <20240111120221.35072-1-philmd@linaro.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20240111120221.35072-1-philmd@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x1033.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,40 +104,17 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Use the new 'vlenb' CPU config to validate fractional LMUL. The original
-comparison is done with 'vlen' and 'sew', both in bits. Adjust the shift
-to use vlenb.
+On 11/1/24 13:02, Philippe Mathieu-Daudé wrote:
+> Rename some code names to ease navigating / grepping
+> the code.
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
----
- target/riscv/vector_helper.c | 11 +++++++++--
- 1 file changed, 9 insertions(+), 2 deletions(-)
+> Philippe Mathieu-Daudé (5):
+>    accel: Rename accel_init_ops_interfaces() to include 'system'
+>    hw/core/cpu: Rename cpu_class_init() to include 'common'
+>    hw/s390x: Rename cpu_class_init() to include 'sclp'
+>    target/i386: Rename tcg_cpu_FOO() to include 'x86'
+>    target/riscv: Rename tcg_cpu_FOO() to include 'riscv'
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index cb944229b0..b13be1541a 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -45,9 +45,16 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
-                                             xlen - 1 - R_VTYPE_RESERVED_SHIFT);
- 
-     if (lmul & 4) {
--        /* Fractional LMUL - check LMUL * VLEN >= SEW */
-+        /*
-+         * Fractional LMUL, check:
-+         *
-+         * VLEN * LMUL >= SEW
-+         * VLEN >> (8 - lmul) >= sew
-+         * (vlenb << 3) >> (8 - lmul) >= sew
-+         * vlenb >> (8 - 3 - lmul) >= sew
-+         */
-         if (lmul == 4 ||
--            cpu->cfg.vlen >> (8 - lmul) < sew) {
-+            cpu->cfg.vlenb >> (8 - 3 - lmul) < sew) {
-             vill = true;
-         }
-     }
--- 
-2.43.0
+Thanks, series queued.
 
 
