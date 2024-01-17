@@ -4,83 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4639FC47258
-	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Jan 2024 17:45:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EED5C47258
+	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Jan 2024 19:53:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rQ9ye-0007n8-34; Wed, 17 Jan 2024 12:45:28 -0500
+	id 1rQBy0-0006Gi-6w; Wed, 17 Jan 2024 14:52:52 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <hchauhan@ventanamicro.com>)
- id 1rQ9yZ-0007mD-Rh
- for qemu-riscv@nongnu.org; Wed, 17 Jan 2024 12:45:19 -0500
-Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rQBxu-0006Fj-Pa
+ for qemu-riscv@nongnu.org; Wed, 17 Jan 2024 14:52:46 -0500
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <hchauhan@ventanamicro.com>)
- id 1rQ9yW-0006tG-Ub
- for qemu-riscv@nongnu.org; Wed, 17 Jan 2024 12:45:18 -0500
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-6d9bd8adb9aso1586482b3a.0
- for <qemu-riscv@nongnu.org>; Wed, 17 Jan 2024 09:45:16 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rQBxs-0006a1-9P
+ for qemu-riscv@nongnu.org; Wed, 17 Jan 2024 14:52:46 -0500
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-1d40eec5e12so96820755ad.1
+ for <qemu-riscv@nongnu.org>; Wed, 17 Jan 2024 11:52:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1705513515; x=1706118315; darn=nongnu.org;
- h=to:references:message-id:content-transfer-encoding:cc:date
- :in-reply-to:from:subject:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ppy6lr1K8GU5rI/m7XUnum+A5RT4JsN6Ed0EaoQVToA=;
- b=ktuNszhNZ6YBytHEs+zJNpWH1e7dokDU8X92dnkyFz+Mz2XE80FcIFWKo5YSJCRF/q
- 6rRlkhcoBp2Zs+yGYInA7dzyHCji8AKS0+PwPUL1bklj9ieKASl8i+7U/S8dyvRexnQz
- DCu02KGT/Emw+/3qTl2NM/pWEoak0s9a0LeJxfwJO65Em7JMHPlRP8CAYp5EF9UYUfbZ
- qJKy4KjAxRRVShNSnJgMBF0EZf4eEY/Neu9r3YuVWkFRWBowQ+KlGrRLZalH+HfVub6y
- kcZZOlrd4WcqSf8fWzPuWS2JJJ5UI22HfRHDyEi2SSBJwNPv4NKzaP2hKlEDN+eUwx1h
- 2QAA==
+ d=ventanamicro.com; s=google; t=1705521160; x=1706125960; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=/xYk42ygsk5lrbwH+7arOtpwkLJGnVt3Ohm4NVD7B1s=;
+ b=ojRhNDO2H+dY3kwRWJgN0c/aZ5Rky/RpAKF+HLeZhIcHjB+ljlfW3lwLrhFJw+Szzv
+ p14Kto6PvuLw5SstV7Wx1ofwCSDKK/CbaMa6u0NXGIFqawNih7yGf+GpWBKPayPZBdHV
+ Di9hn7CS1mfCZ5LF9WFQqvWTEzuGhXY6Bzl4FRL7Qru+GJxbq4qIw/qirnPaFOhofDW0
+ d+4SYYTe9ZgmNJ3CIjcXkVidY6L9/mr2JjFl9O247U3k7H0StHDaRY8NvhPm/LgiHNgK
+ 0J6RBlBctuenq7x4vmIf0ke2mEUHoIzVz0daRoHUh8dygwsmRC9D2902HRh9bEYeOrvc
+ pE4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705513515; x=1706118315;
- h=to:references:message-id:content-transfer-encoding:cc:date
- :in-reply-to:from:subject:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ppy6lr1K8GU5rI/m7XUnum+A5RT4JsN6Ed0EaoQVToA=;
- b=c0UAyv88sXA3WB47P9SW4wiZbF7dOmrIoEa3eVrm7jFmEniK/7EXVsq07nmtWiGodo
- 1b//AQBhqS6RPZyy8eXey+tug9DgpdXUj8zpob9hAEdYpgXVzO5nxTd1RPq9/0rL18s4
- GqWM7yi7ZoEeNc9YrAWKmt2pBoMdTbLpRtJBhv4/4NoUiJoSTC/b9RYmibWkNrkAGTWz
- SSlsGtfBPxh00gdN4vGQeHvIhj5Z1R0raztnS79rmEYo600hcFydqTp9CHs2IZvQGpbM
- tsuQOTxtdLdiLZEKI/bLD+cydW+nEeYK5AGSSSFJq2TUaimB8sgFoG9zL14FvsF5RZ4o
- Tb1A==
-X-Gm-Message-State: AOJu0Ywag/fleLSc7df5AOJA5sp+wTsrXqGMTSIoq4ZJhWO31jzzdGpB
- 8U2SHl+P3mb0cw1i+9C7mTf57LpHCIWAjA==
-X-Google-Smtp-Source: AGHT+IG3Z/GK8IIzlC+KOfGfV2s7EKrt4Z94m2Tt+Hjl8Xfk596EUNkCd8KVJc6UjCxV/ueZ/zZ6sw==
-X-Received: by 2002:a05:6a21:6da2:b0:19a:49c8:b9e6 with SMTP id
- wl34-20020a056a216da200b0019a49c8b9e6mr19578804pzb.0.1705513515234; 
- Wed, 17 Jan 2024 09:45:15 -0800 (PST)
-Received: from smtpclient.apple ([2405:201:d019:cbd3:acb0:e027:e500:b68d])
+ d=1e100.net; s=20230601; t=1705521160; x=1706125960;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=/xYk42ygsk5lrbwH+7arOtpwkLJGnVt3Ohm4NVD7B1s=;
+ b=wgpQMHXPJap3sj16W/1MnEukJvRMx9dvxG9hKD7761gUW3SbLScc8N5R9no+gkYulV
+ 1LPjcT9WSQkzZjgod/GllfAWoTYIu3A8I4marcZ2oNn4XZ4N93qOtinDvMVWmL7Xbs3v
+ Igru1Y5G42sIqnFbuEtFpIGKmy/276SsqsSETHzaUaMZvO6wgH1YlrOCpYx9ad9tO+t6
+ hWlNi0l2JgFZNpvnHTFDD7ohMnjFRhQkgYEn8oRyAIFm9Gomn40RT+ug6WSVpD4wfC2p
+ QuF2KW4Ln2r3A9a1GdQAc3YcPm9O2os7jFIvpWPYLi5rDnsZhywO/rNOB6AKx8uVH6ME
+ sPoA==
+X-Gm-Message-State: AOJu0YwJ8DjcQhM+PfarDz/JqYrCHnj97CQ1m2tyNR3AD8jRzlyESZ2g
+ jnkBJ4uW4EN+cYG2RseUgkYrLIz2Z7Wi3w==
+X-Google-Smtp-Source: AGHT+IEIXppR5WjVnNdveMBHeYjkkqGC0It4LUZIxfDr/ECMCV9MiIH741Ufv+RygFL0VR9jexHmeg==
+X-Received: by 2002:a17:903:25d2:b0:1d5:f57d:2df with SMTP id
+ jc18-20020a17090325d200b001d5f57d02dfmr2194351plb.45.1705521160187; 
+ Wed, 17 Jan 2024 11:52:40 -0800 (PST)
+Received: from [192.168.68.110] ([152.234.127.133])
  by smtp.gmail.com with ESMTPSA id
- ei5-20020a056a0080c500b006d9c1fb00c3sm1727912pfb.9.2024.01.17.09.45.12
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 17 Jan 2024 09:45:14 -0800 (PST)
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.300.61.1.2\))
-Subject: Re: [PATCH 0/2] Export debug triggers as an extension
-From: Himanshu Chauhan <hchauhan@ventanamicro.com>
-In-Reply-To: <6f3a2208-e3dc-43fd-9783-0fad9f76c470@ventanamicro.com>
-Date: Wed, 17 Jan 2024 23:14:50 +0530
-Cc: Rob Bradford <rbradford@rivosinc.com>,
- Alistair Francis <alistair23@gmail.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Alvin Chang <alvinga@andestech.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Andrew Jones <ajones@ventanamicro.com>
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <EC762E99-2479-4F66-986E-98F9B9418F32@ventanamicro.com>
-References: <20240110040203.1920924-1-hchauhan@ventanamicro.com>
- <e2763db2-fade-482d-b433-1bfce6acf7d3@ventanamicro.com>
- <CAKmqyKOA6OtixYoMJ_qtXj_u0t6rMdHawg0VEvq3-=mK4q6_XQ@mail.gmail.com>
- <3c091744cd4bafeb7c1d177455fa9789822e7209.camel@rivosinc.com>
- <6f3a2208-e3dc-43fd-9783-0fad9f76c470@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-X-Mailer: Apple Mail (2.3774.300.61.1.2)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
- envelope-from=hchauhan@ventanamicro.com; helo=mail-pf1-x42d.google.com
+ kx6-20020a170902f94600b001d6f4500070sm40052plb.5.2024.01.17.11.52.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 17 Jan 2024 11:52:39 -0800 (PST)
+Message-ID: <4f6be7f1-82fb-4361-88c6-427443a85760@ventanamicro.com>
+Date: Wed, 17 Jan 2024 16:52:35 -0300
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/2] target/riscv: Convert sdtrig functionality from
+ property to an extension
+Content-Language: en-US
+To: Himanshu Chauhan <hchauhan@ventanamicro.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+References: <20240117142412.1615505-1-hchauhan@ventanamicro.com>
+ <20240117142412.1615505-2-hchauhan@ventanamicro.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20240117142412.1615505-2-hchauhan@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x634.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,165 +99,217 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-> On 17-Jan-2024, at 10:29=E2=80=AFPM, Daniel Henrique Barboza =
-<dbarboza@ventanamicro.com> wrote:
->=20
->=20
->=20
-> On 1/12/24 10:34, Rob Bradford wrote:
->> On Fri, 2024-01-12 at 13:52 +1000, Alistair Francis wrote:
->>> On Thu, Jan 11, 2024 at 5:20=E2=80=AFAM Daniel Henrique Barboza
->>> <dbarboza@ventanamicro.com> wrote:
->>>>=20
->>>> Himanshu,
->>>>=20
->>>> We spoke offline but let's make everyone aware:
->>>>=20
->>>> - 'sdtrig' should be marked with 'x-' and be an experimental
->>>> extension since
->>>> the spec isn't yet frozen;
->>>>=20
->>>> - Alvin sent a patch to the ML adding the 'mcontext' CSR for
->>>> 'sdtrig' some time
->>>> ago:
->>>>=20
->>>> "[PATCH v2] target/riscv: Implement optional CSR mcontext of debug
->>>> Sdtrig extension"
->>>>=20
->>>> It would be good to put his patch on top of this series to ease the
->>>> review for everyone.
->>>> The changes done in patch 2 would also be applicable to the
->>>> mcontext CSR;
->>>>=20
->>>>=20
->>>> - last but probably the most important: the existing 'debug' flag
->>>> seems to be acting as
->>>> the actual 'sdtrig' extension due to how the flag is gating trigger
->>>> code, e.g.:
->>>>=20
->>>>    if (cpu->cfg.debug) {
->>>>          riscv_trigger_realize(&cpu->env);
->>>>      }
->>>>=20
->>>> and
->>>>=20
->>>>      if (cpu->cfg.debug) {
->>>>          riscv_trigger_reset_hold(env);
->>>>      }
->>>>=20
->>>>=20
->>>> If that's really the case, all the checks with cpu->cfg.debug will
->>>> need to also include
->>>> cpu->cfg.ext_sdtrig (one or the other). And now we'll have to make
->>>> an option: do we leave
->>>> the debug triggers (i.e. the 'debug' flag) as always enabled?
->>>=20
->>> =46rom memory the "debug" property is for the original debug spec:
->>> =
-https://github.com/riscv/riscv-debug-spec/releases/tag/task_group_vote
->>>=20
->>> That was ratified and is an official extension. AFAIK this is what =
-is
->>> in physical hardware as well.
->>>=20
->>> The actual PDF says draft though, I'm not sure what's going on =
-there.
->>>=20
->>> The debug spec doesn't have a Z* name, so it's just "debug", at =
-least
->>> AFAIK.
->>>=20
->>> "sdtrig" seems to be a new backwards-incompatible extension doing
->>> basically the same thing. What a mess
->>>=20
->>>>=20
->>>> If it's up to me I would make 'debug' as default 'false' and
->>>> deprecate it. Users will need
->>>=20
->>> I don't think that's the right approach. It's a ratified extension
->>> that we are supporting and is in hardware. I think we are stuck
->>> supporting it
->>>=20
->>>=20
->> I've done a bit of digging and I agree things are quite messy. Here =
-are
->> my discoveries:
->> The debug option and the code for triggers was added in these =
-commits:
->> c9711bd778 target/riscv: cpu: Enable native debug feature
->> 38b4e781a4 target/riscv: machine: Add debug state description
->> b6092544fc target/riscv: csr: Hook debug CSR read/write
->> 1acdb3b013 target/riscv: cpu: Add a config option for native debug
->> 95799e36c1 target/riscv: Add initial support for the Sdtrig extension
->> In March 2022 - since the commit refers to the Sdtrig extension name
->> and from the date this was an implementation not of the ratified 0.13
->> debug spec (which did not have Sdtrig as a separate extension) but
->> rather a version of the in development 1.0 debug spec.
->> It's not trivial to tell if it's closer to the ratified 0.13 version =
-or
->> the (hopefully soon to be frozen) 1.0 version.
->> As the only part of the debug specification to be implemented is the
->> triggers then effectively the debug option is x-sdtrig.
->> I don't think there is any way for code running on the machine to
->> identify what version of the debug is implemented - the appropriate
->> register is only available for external debug. Once 1.0 is frozen =
-then
->> the presence of Sdtrig isa string would indicate 1.0 trigger support =
-is
->> available.
->> According to JIRA - https://jira.riscv.org/browse/RVS-981 the debug
->> specification should freeze this month.
->> How about considering this as a solution:
->> - Add a new x-sdtrig option that defaults to false
->> - Deprecate debug option - but retain it with default on
->> - Add warning if triggers are used and x-sdtrig is not enabled
->> - Update the trigger implementation to match frozen spec
->=20
-> If x-sdtrig is 'false' and 'debug' is on, and then we warn if =
-debug=3Dtrue and x-sdtrig
-> is false, we'll warn every time using the defaults.
->=20
-> Given what you said here:
->=20
->> There is potentially a chance that some use cases will be broken but =
-I
->> don't think triggers are being widely use - the SBI support only just
->> got merged:
->> =
-https://github.com/riscv-software-src/opensbi/commit/97f234f15c9657c6ec69f=
-a6ed745be8107bf6a>=20
->=20
-> I believe we can deprecate 'debug' and simply ignore its existence. Do =
-everything else with
-> x-sdtrig. So if an user sets any 'debug' value we'll:
->=20
-> - warn that the flag is deprecated
-> - set x-sdtrig to whatever value the user set to 'debug'
->=20
-> 'debug' will become just an alternate way to set x-sdtrig. The logic =
-should just check for
-> x-sdtrig.
+On 1/17/24 11:24, Himanshu Chauhan wrote:
+> The debug trigger (sdtrig) capability is controlled using the debug property.
+> The sdtrig is an ISA extension and should be treated so. The sdtrig extension
+> may or may not be implemented in a system. Therefore, it must raise an illegal
+> instruction exception when it is disabled and its CSRs are accessed.
+> 
+> This patch removes the "debug" property and replaces it with ext_sdtrig extension.
+> It also raises an illegal instruction exception when the extension is disabled and
+> its CSRs are accessed.
+> 
+> Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
+> ---
+>   target/riscv/cpu.c        | 7 +++----
+>   target/riscv/cpu_cfg.h    | 2 +-
+>   target/riscv/cpu_helper.c | 2 +-
+>   target/riscv/csr.c        | 2 +-
+>   target/riscv/machine.c    | 2 +-
+>   5 files changed, 7 insertions(+), 8 deletions(-)
+> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index b07a76ef6b..c770a7e506 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -909,7 +909,7 @@ static void riscv_cpu_reset_hold(Object *obj)
+>       set_default_nan_mode(1, &env->fp_status);
+>   
+>   #ifndef CONFIG_USER_ONLY
+> -    if (cpu->cfg.debug) {
+> +    if (cpu->cfg.ext_sdtrig) {
+>           riscv_trigger_reset_hold(env);
+>       }
+>   
+> @@ -1068,7 +1068,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>       riscv_cpu_register_gdb_regs_for_features(cs);
+>   
+>   #ifndef CONFIG_USER_ONLY
+> -    if (cpu->cfg.debug) {
+> +    if (cpu->cfg.ext_sdtrig) {
+>           riscv_trigger_realize(&cpu->env);
+>       }
+>   #endif
+> @@ -1393,6 +1393,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[] = {
+>   
+>   /* These are experimental so mark with 'x-' */
+>   const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] = {
+> +    MULTI_EXT_CFG_BOOL("x-sdtrig", ext_sdtrig, true),
+>       MULTI_EXT_CFG_BOOL("x-smaia", ext_smaia, false),
+>       MULTI_EXT_CFG_BOOL("x-ssaia", ext_ssaia, false),
+>   
+> @@ -1480,8 +1481,6 @@ Property riscv_cpu_options[] = {
+>   };
+>   
+>   static Property riscv_cpu_properties[] = {
+> -    DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
+> -
 
-My v2 patchset which I posted a few ours back, gets rid of =E2=80=98debug=E2=
-=80=99. It is replaced with x-sdtrig. Keeping them both doesn=E2=80=99t =
-make sense.
+We can't just get rid of 'debug' out of nowhere. If any user has any scripts that happens
+to be using the 'debug' flag QEMU will stop booting for them.
 
-Here is v2:
-https://mail.gnu.org/archive/html/qemu-riscv/2024-01/msg00570.html
+The policy for deprecation is to (1) warn the user that the option is deprecated and
+inform about the right option to use and (2) document it in docs/about/deprecated.rst.
+
+You can keep basically everything you did here but, in another patch, you'll need a special
+setter() for the 'debug' property that warns about the deprecation and sets ext_sdtrig.
+Here's a non-tested diff of what this would look like:
+
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 8d3ec74a1c..66b5033ce5 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1685,6 +1685,39 @@ static const PropertyInfo prop_pmp = {
+      .set = prop_pmp_set,
+  };
+  
++static void prop_debug_set(Object *obj, Visitor *v, const char *name,
++                           void *opaque, Error **errp)
++{
++    RISCVCPU *cpu = RISCV_CPU(obj);
++    bool value;
++
++    visit_type_bool(v, name, &value, errp);
++
++    if (cpu->cfg.debug != value && riscv_cpu_is_vendor(obj)) {
++        cpu_set_prop_err(cpu, name, errp);
++        return;
++    }
++
++    warn_report("\"debug\" property is deprecated; use \"x-sdtrig\"");
++    cpu_option_add_user_setting(name, value);
++    cpu->cfg.debug = value;
++    cpu->cfg.ext_sdtrig = value;
++}
++
++static void prop_debug_get(Object *obj, Visitor *v, const char *name,
++                         void *opaque, Error **errp)
++{
++    bool value = RISCV_CPU(obj)->cfg.pmp;
++
++    visit_type_bool(v, name, &value, errp);
++}
++
++static const PropertyInfo prop_debug = {
++    .name = "debug",
++    .get = prop_debug_get,
++    .set = prop_debug_set,
++};
++
+  static int priv_spec_from_str(const char *priv_spec_str)
+  {
+      int priv_version = -1;
+@@ -1942,7 +1975,7 @@ RISCVCPUProfile *riscv_profiles[] = {
+  };
+  
+  static Property riscv_cpu_properties[] = {
+-    DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
++    {.name = "debug", .info = &prop_debug}, /* Deprecated */
+
+      {.name = "pmu-mask", .info = &prop_pmu_mask},
+      {.name = "pmu-num", .info = &prop_pmu_num}, /* Deprecated */
 
 
-Regards
-Himanshu
+An example of a docs/about/deprecated.rst entry would be:
 
->=20
->=20
-> Thanks,
->=20
->=20
-> Daniel
-> =20
->> Hope this is helpful,
->> Rob
+diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
+index 2e15040246..b7608030a9 100644
+--- a/docs/about/deprecated.rst
++++ b/docs/about/deprecated.rst
+@@ -439,6 +439,10 @@ by a ``pmu-mask`` property. If set of counters is continuous then the mask can
+  be calculated with ``((2 ^ n) - 1) << 3``. The least significant three bits
+  must be left clear.
+  
++``debug=true|false`` on RISC-V CPUs (since 9.0)
++^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++
++The ``debug`` flag was superseded by the ``sdtrig`` extension.
+  
+  Backwards compatibility
+  -----------------------
 
 
+
+Thanks,
+
+
+Daniel
+
+
+
+
+
+
+>   #ifndef CONFIG_USER_ONLY
+>       DEFINE_PROP_UINT64("resetvec", RISCVCPU, env.resetvec, DEFAULT_RSTVEC),
+>   #endif
+> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> index f4605fb190..341ebf726a 100644
+> --- a/target/riscv/cpu_cfg.h
+> +++ b/target/riscv/cpu_cfg.h
+> @@ -109,6 +109,7 @@ struct RISCVCPUConfig {
+>       bool ext_zvfbfwma;
+>       bool ext_zvfh;
+>       bool ext_zvfhmin;
+> +    bool ext_sdtrig;
+>       bool ext_smaia;
+>       bool ext_ssaia;
+>       bool ext_sscofpmf;
+> @@ -145,7 +146,6 @@ struct RISCVCPUConfig {
+>       uint16_t cboz_blocksize;
+>       bool mmu;
+>       bool pmp;
+> -    bool debug;
+>       bool misa_w;
+>   
+>       bool short_isa_string;
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index e7e23b34f4..3f7c2f1315 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -126,7 +126,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+>                ? EXT_STATUS_DIRTY : EXT_STATUS_DISABLED;
+>       }
+>   
+> -    if (cpu->cfg.debug && !icount_enabled()) {
+> +    if (cpu->cfg.ext_sdtrig && !icount_enabled()) {
+>           flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_enabled);
+>       }
+>   #endif
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index c50a33397c..8dbb49aa88 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -543,7 +543,7 @@ static RISCVException have_mseccfg(CPURISCVState *env, int csrno)
+>   
+>   static RISCVException debug(CPURISCVState *env, int csrno)
+>   {
+> -    if (riscv_cpu_cfg(env)->debug) {
+> +    if (riscv_cpu_cfg(env)->ext_sdtrig) {
+>           return RISCV_EXCP_NONE;
+>       }
+>   
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index 72fe2374dc..8f9787a30f 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -231,7 +231,7 @@ static bool debug_needed(void *opaque)
+>   {
+>       RISCVCPU *cpu = opaque;
+>   
+> -    return cpu->cfg.debug;
+> +    return cpu->cfg.ext_sdtrig;
+>   }
+>   
+>   static int debug_post_load(void *opaque, int version_id)
 
