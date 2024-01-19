@@ -4,85 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1611DC47DAF
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2279FC47DB7
 	for <qemu-riscv@archiver.kernel.org>; Fri, 19 Jan 2024 11:42:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rQnBX-0005b3-HM; Fri, 19 Jan 2024 06:37:19 -0500
+	id 1rQn9a-0001NJ-FW; Fri, 19 Jan 2024 06:35:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQnBS-0005C6-EE
- for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 06:37:15 -0500
-Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQn9Z-0001MY-59
+ for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 06:35:17 -0500
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQnBP-0002xe-IN
- for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 06:37:13 -0500
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-337cc8e72f5so534734f8f.1
- for <qemu-riscv@nongnu.org>; Fri, 19 Jan 2024 03:37:11 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQn9X-0007QW-1T
+ for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 06:35:16 -0500
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-40e880121efso6970315e9.3
+ for <qemu-riscv@nongnu.org>; Fri, 19 Jan 2024 03:35:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705664230; x=1706269030; darn=nongnu.org;
+ d=linaro.org; s=google; t=1705664113; x=1706268913; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ejw3kKr4hdUsfv2MTceZhktCuWg4EKgMF+epEyFWJEQ=;
- b=PiTOekWjAhZ/WqAEtNGNMlFgJ0g/TuJY2yEyqfxaSCxPm04jtu4UWiMCIDMypER/Zb
- Pi4V9Q+l5942GpI49sCZ3HQlK2OTbx8cNPGngmZX80wQyNAQBy2V9v5WCv0UB7wNrf0r
- eOW6nRtkKlo1u0ckD1E/ugiG11RmovcBTXY7V5o+RbnzxSzQPdp63LxBoQDgP7RUEMS9
- AYrMnrD6ddKW0RIMs5B2HUzK+EtCX/Lh0yy8/k8QEhkq/M+nYH1+AAnDWYrT6MTps/94
- fQvCx7Pt1y6j7iTyFzXfrDndlXXraCtCHtUas5upY/7/ETu3lWGRsEErmwuuR88n+L+x
- 3uKw==
+ bh=q0OM46pXL9nPMgsbRdva1NHrfhMdj+GFjvayF2pJiPE=;
+ b=YUeCbigqUdzKZto7onfovqzSLSTvYz9uIlTIuruzRZdSr+/STPbOcK54FjSCkDJBMa
+ 4CercISKYID1MGpBLDaU92VSI6vOhD2oojCrh00q8ThBx6bsEW4434X1j6q8R4byaRtW
+ 3F6axbiVyXJsYpJhiruthqaXrsjd2BhwAnJZuHRhRvOgDtCVPjpxn3MSRLO2IUC18mkI
+ GzGijM0QWo9vw1AtnH4miA3T8XKaqgVtS0lMC/8umKXdhtOXqHk3bPU9fbtBDADsgd6J
+ U7TebedMkWcj2wFxp4kPISKI9vw8hHp3ADn2iP3/yHkbSHdFqbKTvYsrMVxhkzRBeRLs
+ 74wQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705664230; x=1706269030;
+ d=1e100.net; s=20230601; t=1705664113; x=1706268913;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ejw3kKr4hdUsfv2MTceZhktCuWg4EKgMF+epEyFWJEQ=;
- b=RgF9B0FYpkSStqmV5Z5Dd9JwHcht325EmCtVhvTqbZoup/+QAmvjsW4Ueq+VkM5iG9
- NcA3/C4Sb0Dgz8XBsU2/c0ZYbkKjF6A5DT/UUqLDGC3jgGNCec5obQ1lm+7UFoYjuM1E
- z46X+FUd2aRB6Dvzmcdv0+mE4sbxagsEC3CEL0hRtpcgKcvCidTTBKQkom1OrE6oY9zT
- S6YY2oUL5y5HjrAOb3kt0P4CcAURUv5zOr3Q9rrQLAoVGBrzuB1QihnMii5UQ/91FlJo
- 3szjliJJyHuLyiFDoDtDRUHaElq52MmiRIQzep75wytzCkZ1etTD8mvAgaETEFkIDZpu
- h2vA==
-X-Gm-Message-State: AOJu0YyKLtZ8ZGrBLZuupfcpGkLaIZB2wUF1Aei4/WSzuFExRmFgDQID
- CkFnvBDJjrWVVlbHgCdWoager2bY4RY9AqHHzJun/uSIwmitMl/4goS6pBjgJZl9XVvw5DDex6I
- wK7RQMQ==
-X-Google-Smtp-Source: AGHT+IHftV26JVhXEP8rL0J1wAhfdue/vz+sC0QRpj22APzzo7LI2+yoVLWfT7O+ZQ7jrjOsLWw3tw==
-X-Received: by 2002:adf:fe09:0:b0:337:c28d:ec06 with SMTP id
- n9-20020adffe09000000b00337c28dec06mr1471702wrr.25.1705664230321; 
- Fri, 19 Jan 2024 03:37:10 -0800 (PST)
+ bh=q0OM46pXL9nPMgsbRdva1NHrfhMdj+GFjvayF2pJiPE=;
+ b=AJhv0LlSSV5rB1TbhAs1iI6r23vN7qnlCziB74XVO4SCC623dPcT9Lp4xQGn/JKivY
+ HnXIpfVL17W8hqtwcbWicWqIpwDzpBAoDOoMAi0xPqgZYwHK63u64YHFBktIiCtC0UU6
+ b19PQJKj6/bjGM5Ui61UGHdt2mWHe19nVvVx+yYIStAepoo7f3xBI3IotMtZ0FZ4w41X
+ nf+9hrpigqGgpu88Zi0toZit+PLord/2T3iSbxAEBIa0fcAnr+rkB676nXfHuqbHTvQH
+ cOjDcVQJgENokLZiugDp6COeuSNKZpah/2Hq1KLfAhASalymaqGLecNyUu9kuAyuYayO
+ ofTw==
+X-Gm-Message-State: AOJu0Yw4HWYmVOiWJOkCt0trFMNTMn5A79Jk0QzjoxdvRB2UtaUhvy2X
+ KtZQ9xVhn7EJTil4M7kyHzjXjRcdJgrCDiEnoSkTC0rEJzxFSz7Rt9tHUv0nTPg=
+X-Google-Smtp-Source: AGHT+IHcp9HBLDTn6h3fPsq2H9ERjVHhKnanwC40cLXPtK2H4kuPyHzfMc25JUb5AKyPtgVlVQJ2UA==
+X-Received: by 2002:a05:600c:3110:b0:40e:5cf9:d5cf with SMTP id
+ g16-20020a05600c311000b0040e5cf9d5cfmr1352683wmo.124.1705664113537; 
+ Fri, 19 Jan 2024 03:35:13 -0800 (PST)
 Received: from localhost.localdomain (91-163-26-170.subs.proxad.net.
  [91.163.26.170]) by smtp.gmail.com with ESMTPSA id
- d16-20020adff2d0000000b0033668b27f8fsm6337529wrp.4.2024.01.19.03.37.09
+ q8-20020a7bce88000000b0040c11fbe581sm28301424wmj.27.2024.01.19.03.35.12
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 19 Jan 2024 03:37:10 -0800 (PST)
+ Fri, 19 Jan 2024 03:35:13 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, qemu-block@nongnu.org,
- qemu-arm@nongnu.org,
+ qemu-arm@nongnu.org, Daniel Hoffman <dhoff749@gmail.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Michael Tokarev <mjt@tls.msk.ru>, Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>
-Subject: [PULL 27/36] target/i386: Rename tcg_cpu_FOO() to include 'x86'
-Date: Fri, 19 Jan 2024 12:34:56 +0100
-Message-ID: <20240119113507.31951-28-philmd@linaro.org>
+ "Michael S. Tsirkin" <mst@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>
+Subject: [PULL 01/36] hw/timer/hpet: Convert DPRINTF to trace events
+Date: Fri, 19 Jan 2024 12:34:30 +0100
+Message-ID: <20240119113507.31951-2-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240119113507.31951-1-philmd@linaro.org>
 References: <20240119113507.31951-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::435;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x435.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::332;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,101 +95,221 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The tcg_cpu_FOO() names are x86 specific, so rename
-them as x86_tcg_cpu_FOO() (as other names in this file)
-to ease navigating the code.
+From: Daniel Hoffman <dhoff749@gmail.com>
 
+This conversion is pretty straight-forward. Standardized some formatting
+so the +0 and +4 offset cases can recycle the same message.
+
+Signed-off-by: Daniel Hoffman <dhoff749@gmail.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Message-ID: <20231118231129.2840388-1-dhoff749@gmail.com>
+[PMD: Fixed few string formats]
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Michael Tokarev <mjt@tls.msk.ru>
-Message-ID: <20240111120221.35072-5-philmd@linaro.org>
 ---
- target/i386/tcg/tcg-cpu.c | 32 ++++++++++++++++----------------
- 1 file changed, 16 insertions(+), 16 deletions(-)
+ hw/timer/hpet.c       | 55 +++++++++++++++++--------------------------
+ hw/timer/trace-events | 15 ++++++++++++
+ 2 files changed, 37 insertions(+), 33 deletions(-)
 
-diff --git a/target/i386/tcg/tcg-cpu.c b/target/i386/tcg/tcg-cpu.c
-index 6e881e9e27..e56489caea 100644
---- a/target/i386/tcg/tcg-cpu.c
-+++ b/target/i386/tcg/tcg-cpu.c
-@@ -114,18 +114,18 @@ static const struct TCGCPUOps x86_tcg_ops = {
- #endif /* !CONFIG_USER_ONLY */
- };
+diff --git a/hw/timer/hpet.c b/hw/timer/hpet.c
+index f2f1580f81..1672faa4f2 100644
+--- a/hw/timer/hpet.c
++++ b/hw/timer/hpet.c
+@@ -39,13 +39,7 @@
+ #include "hw/timer/i8254.h"
+ #include "exec/address-spaces.h"
+ #include "qom/object.h"
+-
+-//#define HPET_DEBUG
+-#ifdef HPET_DEBUG
+-#define DPRINTF printf
+-#else
+-#define DPRINTF(...)
+-#endif
++#include "trace.h"
  
--static void tcg_cpu_init_ops(AccelCPUClass *accel_cpu, CPUClass *cc)
-+static void x86_tcg_cpu_init_ops(AccelCPUClass *accel_cpu, CPUClass *cc)
- {
-     /* for x86, all cpus use the same set of operations */
-     cc->tcg_ops = &x86_tcg_ops;
- }
+ #define HPET_MSI_SUPPORT        0
  
--static void tcg_cpu_class_init(CPUClass *cc)
-+static void x86_tcg_cpu_class_init(CPUClass *cc)
- {
--    cc->init_accel_cpu = tcg_cpu_init_ops;
-+    cc->init_accel_cpu = x86_tcg_cpu_init_ops;
- }
+@@ -431,7 +425,7 @@ static uint64_t hpet_ram_read(void *opaque, hwaddr addr,
+     HPETState *s = opaque;
+     uint64_t cur_tick, index;
  
--static void tcg_cpu_xsave_init(void)
-+static void x86_tcg_cpu_xsave_init(void)
- {
- #define XO(bit, field) \
-     x86_ext_save_areas[bit].offset = offsetof(X86XSaveArea, field);
-@@ -147,25 +147,25 @@ static void tcg_cpu_xsave_init(void)
-  * TCG-specific defaults that override cpudef models when using TCG.
-  * Only for builtin_x86_defs models initialized with x86_register_cpudef_types.
-  */
--static PropValue tcg_default_props[] = {
-+static PropValue x86_tcg_default_props[] = {
-     { "vme", "off" },
-     { NULL, NULL },
- };
+-    DPRINTF("qemu: Enter hpet_ram_readl at %" PRIx64 "\n", addr);
++    trace_hpet_ram_read(addr);
+     index = addr;
+     /*address range of all TN regs*/
+     if (index >= 0x100 && index <= 0x3ff) {
+@@ -439,7 +433,7 @@ static uint64_t hpet_ram_read(void *opaque, hwaddr addr,
+         HPETTimer *timer = &s->timer[timer_id];
  
--static void tcg_cpu_instance_init(CPUState *cs)
-+static void x86_tcg_cpu_instance_init(CPUState *cs)
- {
-     X86CPU *cpu = X86_CPU(cs);
-     X86CPUClass *xcc = X86_CPU_GET_CLASS(cpu);
+         if (timer_id > s->num_timers) {
+-            DPRINTF("qemu: timer id out of range\n");
++            trace_hpet_timer_id_out_of_range(timer_id);
+             return 0;
+         }
  
-     if (xcc->model) {
-         /* Special cases not set in the X86CPUDefinition structs: */
--        x86_cpu_apply_props(cpu, tcg_default_props);
-+        x86_cpu_apply_props(cpu, x86_tcg_default_props);
+@@ -457,7 +451,7 @@ static uint64_t hpet_ram_read(void *opaque, hwaddr addr,
+         case HPET_TN_ROUTE + 4:
+             return timer->fsb >> 32;
+         default:
+-            DPRINTF("qemu: invalid hpet_ram_readl\n");
++            trace_hpet_ram_read_invalid();
+             break;
+         }
+     } else {
+@@ -469,7 +463,7 @@ static uint64_t hpet_ram_read(void *opaque, hwaddr addr,
+         case HPET_CFG:
+             return s->config;
+         case HPET_CFG + 4:
+-            DPRINTF("qemu: invalid HPET_CFG + 4 hpet_ram_readl\n");
++            trace_hpet_invalid_hpet_cfg(4);
+             return 0;
+         case HPET_COUNTER:
+             if (hpet_enabled(s)) {
+@@ -477,7 +471,7 @@ static uint64_t hpet_ram_read(void *opaque, hwaddr addr,
+             } else {
+                 cur_tick = s->hpet_counter;
+             }
+-            DPRINTF("qemu: reading counter  = %" PRIx64 "\n", cur_tick);
++            trace_hpet_ram_read_reading_counter(0, cur_tick);
+             return cur_tick;
+         case HPET_COUNTER + 4:
+             if (hpet_enabled(s)) {
+@@ -485,12 +479,12 @@ static uint64_t hpet_ram_read(void *opaque, hwaddr addr,
+             } else {
+                 cur_tick = s->hpet_counter;
+             }
+-            DPRINTF("qemu: reading counter + 4  = %" PRIx64 "\n", cur_tick);
++            trace_hpet_ram_read_reading_counter(4, cur_tick);
+             return cur_tick >> 32;
+         case HPET_STATUS:
+             return s->isr;
+         default:
+-            DPRINTF("qemu: invalid hpet_ram_readl\n");
++            trace_hpet_ram_read_invalid();
+             break;
+         }
      }
+@@ -504,8 +498,7 @@ static void hpet_ram_write(void *opaque, hwaddr addr,
+     HPETState *s = opaque;
+     uint64_t old_val, new_val, val, index;
  
--    tcg_cpu_xsave_init();
-+    x86_tcg_cpu_xsave_init();
- }
+-    DPRINTF("qemu: Enter hpet_ram_writel at %" PRIx64 " = 0x%" PRIx64 "\n",
+-            addr, value);
++    trace_hpet_ram_write(addr, value);
+     index = addr;
+     old_val = hpet_ram_read(opaque, addr, 4);
+     new_val = value;
+@@ -515,14 +508,14 @@ static void hpet_ram_write(void *opaque, hwaddr addr,
+         uint8_t timer_id = (addr - 0x100) / 0x20;
+         HPETTimer *timer = &s->timer[timer_id];
  
--static void tcg_cpu_accel_class_init(ObjectClass *oc, void *data)
-+static void x86_tcg_cpu_accel_class_init(ObjectClass *oc, void *data)
- {
-     AccelCPUClass *acc = ACCEL_CPU_CLASS(oc);
- 
-@@ -173,18 +173,18 @@ static void tcg_cpu_accel_class_init(ObjectClass *oc, void *data)
-     acc->cpu_target_realize = tcg_cpu_realizefn;
- #endif /* CONFIG_USER_ONLY */
- 
--    acc->cpu_class_init = tcg_cpu_class_init;
--    acc->cpu_instance_init = tcg_cpu_instance_init;
-+    acc->cpu_class_init = x86_tcg_cpu_class_init;
-+    acc->cpu_instance_init = x86_tcg_cpu_instance_init;
- }
--static const TypeInfo tcg_cpu_accel_type_info = {
-+static const TypeInfo x86_tcg_cpu_accel_type_info = {
-     .name = ACCEL_CPU_NAME("tcg"),
- 
-     .parent = TYPE_ACCEL_CPU,
--    .class_init = tcg_cpu_accel_class_init,
-+    .class_init = x86_tcg_cpu_accel_class_init,
-     .abstract = true,
- };
--static void tcg_cpu_accel_register_types(void)
-+static void x86_tcg_cpu_accel_register_types(void)
- {
--    type_register_static(&tcg_cpu_accel_type_info);
-+    type_register_static(&x86_tcg_cpu_accel_type_info);
- }
--type_init(tcg_cpu_accel_register_types);
-+type_init(x86_tcg_cpu_accel_register_types);
+-        DPRINTF("qemu: hpet_ram_writel timer_id = 0x%x\n", timer_id);
++        trace_hpet_ram_write_timer_id(timer_id);
+         if (timer_id > s->num_timers) {
+-            DPRINTF("qemu: timer id out of range\n");
++            trace_hpet_timer_id_out_of_range(timer_id);
+             return;
+         }
+         switch ((addr - 0x100) % 0x20) {
+         case HPET_TN_CFG:
+-            DPRINTF("qemu: hpet_ram_writel HPET_TN_CFG\n");
++            trace_hpet_ram_write_tn_cfg();
+             if (activating_bit(old_val, new_val, HPET_TN_FSB_ENABLE)) {
+                 update_irq(timer, 0);
+             }
+@@ -540,10 +533,10 @@ static void hpet_ram_write(void *opaque, hwaddr addr,
+             }
+             break;
+         case HPET_TN_CFG + 4: // Interrupt capabilities
+-            DPRINTF("qemu: invalid HPET_TN_CFG+4 write\n");
++            trace_hpet_ram_write_invalid_tn_cfg(4);
+             break;
+         case HPET_TN_CMP: // comparator register
+-            DPRINTF("qemu: hpet_ram_writel HPET_TN_CMP\n");
++            trace_hpet_ram_write_tn_cmp(0);
+             if (timer->config & HPET_TN_32BIT) {
+                 new_val = (uint32_t)new_val;
+             }
+@@ -566,7 +559,7 @@ static void hpet_ram_write(void *opaque, hwaddr addr,
+             }
+             break;
+         case HPET_TN_CMP + 4: // comparator register high order
+-            DPRINTF("qemu: hpet_ram_writel HPET_TN_CMP + 4\n");
++            trace_hpet_ram_write_tn_cmp(4);
+             if (!timer_is_periodic(timer)
+                 || (timer->config & HPET_TN_SETVAL)) {
+                 timer->cmp = (timer->cmp & 0xffffffffULL) | new_val << 32;
+@@ -591,7 +584,7 @@ static void hpet_ram_write(void *opaque, hwaddr addr,
+             timer->fsb = (new_val << 32) | (timer->fsb & 0xffffffff);
+             break;
+         default:
+-            DPRINTF("qemu: invalid hpet_ram_writel\n");
++            trace_hpet_ram_write_invalid();
+             break;
+         }
+         return;
+@@ -631,7 +624,7 @@ static void hpet_ram_write(void *opaque, hwaddr addr,
+             }
+             break;
+         case HPET_CFG + 4:
+-            DPRINTF("qemu: invalid HPET_CFG+4 write\n");
++            trace_hpet_invalid_hpet_cfg(4);
+             break;
+         case HPET_STATUS:
+             val = new_val & s->isr;
+@@ -643,24 +636,20 @@ static void hpet_ram_write(void *opaque, hwaddr addr,
+             break;
+         case HPET_COUNTER:
+             if (hpet_enabled(s)) {
+-                DPRINTF("qemu: Writing counter while HPET enabled!\n");
++                trace_hpet_ram_write_counter_write_while_enabled();
+             }
+             s->hpet_counter =
+                 (s->hpet_counter & 0xffffffff00000000ULL) | value;
+-            DPRINTF("qemu: HPET counter written. ctr = 0x%" PRIx64 " -> "
+-                    "%" PRIx64 "\n", value, s->hpet_counter);
++            trace_hpet_ram_write_counter_written(0, value, s->hpet_counter);
+             break;
+         case HPET_COUNTER + 4:
+-            if (hpet_enabled(s)) {
+-                DPRINTF("qemu: Writing counter while HPET enabled!\n");
+-            }
++            trace_hpet_ram_write_counter_write_while_enabled();
+             s->hpet_counter =
+                 (s->hpet_counter & 0xffffffffULL) | (((uint64_t)value) << 32);
+-            DPRINTF("qemu: HPET counter + 4 written. ctr = 0x%" PRIx64 " -> "
+-                    "%" PRIx64 "\n", value, s->hpet_counter);
++            trace_hpet_ram_write_counter_written(4, value, s->hpet_counter);
+             break;
+         default:
+-            DPRINTF("qemu: invalid hpet_ram_writel\n");
++            trace_hpet_ram_write_invalid();
+             break;
+         }
+     }
+diff --git a/hw/timer/trace-events b/hw/timer/trace-events
+index 8145e18e3d..de769f4b71 100644
+--- a/hw/timer/trace-events
++++ b/hw/timer/trace-events
+@@ -99,3 +99,18 @@ sifive_pwm_write(uint64_t data, uint64_t offset) "Write 0x%" PRIx64 " at address
+ sh_timer_start_stop(int enable, int current) "%d (%d)"
+ sh_timer_read(uint64_t offset) "tmu012_read 0x%" PRIx64
+ sh_timer_write(uint64_t offset, uint64_t value) "tmu012_write 0x%" PRIx64 " 0x%08" PRIx64
++
++# hpet.c
++hpet_timer_id_out_of_range(uint8_t timer_id) "timer id out of range: 0x%" PRIx8
++hpet_invalid_hpet_cfg(uint8_t reg_off) "invalid HPET_CFG + %u" PRIx8
++hpet_ram_read(uint64_t addr) "enter hpet_ram_readl at 0x%" PRIx64
++hpet_ram_read_reading_counter(uint8_t reg_off, uint64_t cur_tick) "reading counter + %" PRIu8 " = 0x%" PRIx64
++hpet_ram_read_invalid(void) "invalid hpet_ram_readl"
++hpet_ram_write(uint64_t addr, uint64_t value) "enter hpet_ram_writel at 0x%" PRIx64 " = 0x%" PRIx64
++hpet_ram_write_timer_id(uint64_t timer_id) "hpet_ram_writel timer_id = 0x%" PRIx64
++hpet_ram_write_tn_cfg(void) "hpet_ram_writel HPET_TN_CFG"
++hpet_ram_write_invalid_tn_cfg(uint8_t reg_off) "invalid HPET_TN_CFG + %" PRIu8 " write"
++hpet_ram_write_tn_cmp(uint8_t reg_off) "hpet_ram_writel HPET_TN_CMP + %" PRIu8
++hpet_ram_write_invalid(void) "invalid hpet_ram_writel"
++hpet_ram_write_counter_write_while_enabled(void) "Writing counter while HPET enabled!"
++hpet_ram_write_counter_written(uint8_t reg_off, uint64_t value, uint64_t counter) "HPET counter + %" PRIu8 "written. crt = 0x%" PRIx64 " -> 0x%" PRIx64
 -- 
 2.41.0
 
