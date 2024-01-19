@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93912C47DD7
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90A8DC47DAF
 	for <qemu-riscv@archiver.kernel.org>; Fri, 19 Jan 2024 11:43:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rQn9p-0001cn-NC; Fri, 19 Jan 2024 06:35:33 -0500
+	id 1rQnBD-0004ZD-0p; Fri, 19 Jan 2024 06:36:59 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQn9o-0001bU-2m
- for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 06:35:32 -0500
-Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQnB8-0004Be-B2
+ for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 06:36:54 -0500
+Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQn9k-0007Yk-SP
- for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 06:35:31 -0500
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-40e7065b692so6679385e9.3
- for <qemu-riscv@nongnu.org>; Fri, 19 Jan 2024 03:35:28 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQnB3-0002s8-N9
+ for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 06:36:53 -0500
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-337cc8e72f5so534410f8f.1
+ for <qemu-riscv@nongnu.org>; Fri, 19 Jan 2024 03:36:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705664127; x=1706268927; darn=nongnu.org;
+ d=linaro.org; s=google; t=1705664207; x=1706269007; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=H2zlYB8RHgO8CCP+jqoBT970ZAV+LbSEyEbXoFvRXkI=;
- b=Qzs905oIjX9Qx/rZ4OLyTlFAdU3S0idZTECKM5QQeqQ4mnEFy90b9MGigdj4sXi43i
- 9HREvQuj6izbvH9HsQrq29JQtna9OIBqTTq/IrXDsF606VgwnbufiMCR1m3rC8yH7jsR
- c4hX3ImLNFRJX/hlube2Teo+GlQ4FiP30x9uQWI+7tf9SZCrnIloyz4OOrU94vvD0Hih
- cY/d3Ls9XFMgSjiLC4aqfNmI7rk2tJyue3QSrvBuXfDifYHHsslI51hXa25f6SePUR3E
- e9oszdUp7edo7ebOb+T/vOtjyJ7TC8Fc+32tn2zZ8wo1WuWujlmyVDnkfNK3ip38d5SU
- QhRw==
+ bh=YCJoMF/gb5igTgNTbALJP1a0Tru9ZbMYu/Xtk0bIyeE=;
+ b=jr83yV6QzZIHSIofxWQ0h2X7waFwwscsukiwIpP6SEHAw8mu87uTNvJMbQopUJuwAe
+ s+r/mrTI3aC3wGZ+GfcoF2voRBR8HRFgWPmeJnNNep7J1NEj+Y+Qxe7HmiGLL7zWZLJ4
+ bIIiPVqg6N5FBMr+oTB37KSQx5Mn3BL3OBlLVqolKKGrJjPGlEbMe0hD8sCH+PwDspdw
+ WJ9xAZYfPAR5QO37/h0BUd4WQYroO6JJVrDDUf6xBd4DEuJIwqnS/IqNyM5b8kAAbgOn
+ NnNykWVvRCdLzEgX4nSZpgGtE9X9l6aALac3vdWwxe8MqoiWGuZ5Vkf3oE5HNyYI/48H
+ ledQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705664127; x=1706268927;
+ d=1e100.net; s=20230601; t=1705664207; x=1706269007;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=H2zlYB8RHgO8CCP+jqoBT970ZAV+LbSEyEbXoFvRXkI=;
- b=GkgC0Z86AR3QcfUDPP14shQjMGL4Q8eP/OTDQOwi4A+DudRHoVP7lYU0cxlbB9RKrh
- PkmmbsZce7KTWbuqxs8DSEWF8CcEZ0Pd02lvna9frV6NpA3g912h7igAohGnjcRSoA8f
- BR/JmZEvc3OMgh2Vlq0nNvklLqLX3MztVm0vrL2ByMPaXHs43iuj74II/808/JWz/KrX
- 5A55xW0gW+hkkhxeZZA9brLcMw3QMF9ZMdmvlLoBbZsCSAiYsFQOZsyaAgSeUd1rDyyK
- ey8OXwJHHw4Gg8RP5UtG316YJJcCixF/cF3x2CK5d0EfwlwTw4azYp89Le4ngEw9Vvp8
- F0UQ==
-X-Gm-Message-State: AOJu0YwZk63cyTPUFdW53wckFpLvKA0hugsoRtNfNZx79Ebg/3vE+HlH
- LYWsUHEk/79qGJambHdn3MQFZ0GpBdgFvv7pKwD1m76kekJHvgJMkin/D+3UcCw=
-X-Google-Smtp-Source: AGHT+IGXU2gL8oAHDVoYCWzkuB2wKuhhJqWN9FvsoGiKo9WKC58O5rIAZisM3Bq3Tpucyvg8fXp3yg==
-X-Received: by 2002:a05:600c:46cf:b0:40e:5118:5046 with SMTP id
- q15-20020a05600c46cf00b0040e51185046mr1365481wmo.21.1705664127043; 
- Fri, 19 Jan 2024 03:35:27 -0800 (PST)
+ bh=YCJoMF/gb5igTgNTbALJP1a0Tru9ZbMYu/Xtk0bIyeE=;
+ b=FCxPoSVeglliw17MnQwbTW4sHnvx78gugHoK0KIqwhwBT7InSZ2RLvv3WC8qBykCOH
+ 7lu/KM00EfSbhFSOlyowiz1f20h66Isq8oS2zeWkYrSAHorHJdszKjLGnoSLBgwud/PG
+ 3FoyvRumf5YR44gZujQFyh2AoPIFU54ZvbjjpPfFt0OOauQTUJy9h3tSxa/lM3nyngTr
+ /bNZAo2EDmx1MzfBv9yDjoV9GLkyw6311JfPV8d7bDfA33sKm7ojGi0hXh5YGa1kZZk3
+ Y8noq06carEcfLyZtceBCd0z0Ld75UH/z6JoJFmglKKQKdWKTBBljp2kGuDynA/ToRuL
+ jJHQ==
+X-Gm-Message-State: AOJu0Yzk+FEaz++r+YmabQmIeeivuzgnZDyrijv4Cuy1JlRa5LX5Z46R
+ Nl5vJbjPlwBecf5V0dzxFHyBuBO1jK6/4vFgz3RjjqJNNryzNHXHMonBFGp0d/K+6xjafPZoKUL
+ HChz8sQ==
+X-Google-Smtp-Source: AGHT+IEkXX6qJBnFfO2KmDqYeT+SNIkWiPsNOwf8xXlx1/PHClkUlPLkoK2wnMNdpT/VCqg2nazNFA==
+X-Received: by 2002:adf:f50e:0:b0:332:e667:4277 with SMTP id
+ q14-20020adff50e000000b00332e6674277mr1280379wro.40.1705664207710; 
+ Fri, 19 Jan 2024 03:36:47 -0800 (PST)
 Received: from localhost.localdomain (91-163-26-170.subs.proxad.net.
  [91.163.26.170]) by smtp.gmail.com with ESMTPSA id
- p10-20020a05600c358a00b0040e559e0ba7sm32395502wmq.26.2024.01.19.03.35.26
+ c9-20020adfe749000000b003368d2e729bsm6307532wrn.43.2024.01.19.03.36.47
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 19 Jan 2024 03:35:26 -0800 (PST)
+ Fri, 19 Jan 2024 03:36:47 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, qemu-block@nongnu.org,
  qemu-arm@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Richard Henderson <richard.henderson@linaro.org>,
- Cameron Esfahani <dirty@apple.com>, Roman Bolshakov <rbolshakov@ddn.com>,
- Paolo Bonzini <pbonzini@redhat.com>, kvm@vger.kernel.org
-Subject: [PULL 04/36] accel: Do not set CPUState::can_do_io in non-TCG accels
-Date: Fri, 19 Jan 2024 12:34:33 +0100
-Message-ID: <20240119113507.31951-5-philmd@linaro.org>
+ Paolo Bonzini <pbonzini@redhat.com>
+Subject: [PULL 22/36] system/watchpoint: Move TCG specific code to accel/tcg/
+Date: Fri, 19 Jan 2024 12:34:51 +0100
+Message-ID: <20240119113507.31951-23-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240119113507.31951-1-philmd@linaro.org>
 References: <20240119113507.31951-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::436;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x436.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,59 +97,321 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-'can_do_io' is specific to TCG. It was added to other
-accelerators in 626cf8f4c6 ("icount: set can_do_io outside
-TB execution"), then likely copy/pasted in commit c97d6d2cdf
-("i386: hvf: add code base from Google's QEMU repository").
-Having it set in non-TCG code is confusing, so remove it from
-QTest / HVF / KVM.
+Keep system/watchpoint.c accelerator-agnostic by moving
+TCG specific code to accel/tcg/watchpoint.c. Update meson.
 
-Fixes: 626cf8f4c6 ("icount: set can_do_io outside TB execution")
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20231129205037.16849-1-philmd@linaro.org>
+Message-Id: <20240111162032.43378-1-philmd@linaro.org>
 ---
- accel/dummy-cpus.c        | 1 -
- accel/hvf/hvf-accel-ops.c | 1 -
- accel/kvm/kvm-accel-ops.c | 1 -
- 3 files changed, 3 deletions(-)
+ accel/tcg/watchpoint.c | 143 +++++++++++++++++++++++++++++++++++++++++
+ system/watchpoint.c    | 124 -----------------------------------
+ accel/tcg/meson.build  |   1 +
+ 3 files changed, 144 insertions(+), 124 deletions(-)
+ create mode 100644 accel/tcg/watchpoint.c
 
-diff --git a/accel/dummy-cpus.c b/accel/dummy-cpus.c
-index f4b0ec5890..20519f1ea4 100644
---- a/accel/dummy-cpus.c
-+++ b/accel/dummy-cpus.c
-@@ -27,7 +27,6 @@ static void *dummy_cpu_thread_fn(void *arg)
-     bql_lock();
-     qemu_thread_get_self(cpu->thread);
-     cpu->thread_id = qemu_get_thread_id();
--    cpu->neg.can_do_io = true;
-     current_cpu = cpu;
+diff --git a/accel/tcg/watchpoint.c b/accel/tcg/watchpoint.c
+new file mode 100644
+index 0000000000..d3aab11458
+--- /dev/null
++++ b/accel/tcg/watchpoint.c
+@@ -0,0 +1,143 @@
++/*
++ * CPU watchpoints
++ *
++ *  Copyright (c) 2003 Fabrice Bellard
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, see <http://www.gnu.org/licenses/>.
++ */
++
++#include "qemu/osdep.h"
++#include "qemu/main-loop.h"
++#include "qemu/error-report.h"
++#include "exec/exec-all.h"
++#include "exec/translate-all.h"
++#include "sysemu/tcg.h"
++#include "sysemu/replay.h"
++#include "hw/core/tcg-cpu-ops.h"
++#include "hw/core/cpu.h"
++
++/*
++ * Return true if this watchpoint address matches the specified
++ * access (ie the address range covered by the watchpoint overlaps
++ * partially or completely with the address range covered by the
++ * access).
++ */
++static inline bool watchpoint_address_matches(CPUWatchpoint *wp,
++                                              vaddr addr, vaddr len)
++{
++    /*
++     * We know the lengths are non-zero, but a little caution is
++     * required to avoid errors in the case where the range ends
++     * exactly at the top of the address space and so addr + len
++     * wraps round to zero.
++     */
++    vaddr wpend = wp->vaddr + wp->len - 1;
++    vaddr addrend = addr + len - 1;
++
++    return !(addr > wpend || wp->vaddr > addrend);
++}
++
++/* Return flags for watchpoints that match addr + prot.  */
++int cpu_watchpoint_address_matches(CPUState *cpu, vaddr addr, vaddr len)
++{
++    CPUWatchpoint *wp;
++    int ret = 0;
++
++    QTAILQ_FOREACH(wp, &cpu->watchpoints, entry) {
++        if (watchpoint_address_matches(wp, addr, len)) {
++            ret |= wp->flags;
++        }
++    }
++    return ret;
++}
++
++/* Generate a debug exception if a watchpoint has been hit.  */
++void cpu_check_watchpoint(CPUState *cpu, vaddr addr, vaddr len,
++                          MemTxAttrs attrs, int flags, uintptr_t ra)
++{
++    CPUClass *cc = CPU_GET_CLASS(cpu);
++    CPUWatchpoint *wp;
++
++    assert(tcg_enabled());
++    if (cpu->watchpoint_hit) {
++        /*
++         * We re-entered the check after replacing the TB.
++         * Now raise the debug interrupt so that it will
++         * trigger after the current instruction.
++         */
++        bql_lock();
++        cpu_interrupt(cpu, CPU_INTERRUPT_DEBUG);
++        bql_unlock();
++        return;
++    }
++
++    if (cc->tcg_ops->adjust_watchpoint_address) {
++        /* this is currently used only by ARM BE32 */
++        addr = cc->tcg_ops->adjust_watchpoint_address(cpu, addr, len);
++    }
++
++    assert((flags & ~BP_MEM_ACCESS) == 0);
++    QTAILQ_FOREACH(wp, &cpu->watchpoints, entry) {
++        int hit_flags = wp->flags & flags;
++
++        if (hit_flags && watchpoint_address_matches(wp, addr, len)) {
++            if (replay_running_debug()) {
++                /*
++                 * replay_breakpoint reads icount.
++                 * Force recompile to succeed, because icount may
++                 * be read only at the end of the block.
++                 */
++                if (!cpu->neg.can_do_io) {
++                    /* Force execution of one insn next time.  */
++                    cpu->cflags_next_tb = 1 | CF_NOIRQ | curr_cflags(cpu);
++                    cpu_loop_exit_restore(cpu, ra);
++                }
++                /*
++                 * Don't process the watchpoints when we are
++                 * in a reverse debugging operation.
++                 */
++                replay_breakpoint();
++                return;
++            }
++
++            wp->flags |= hit_flags << BP_HIT_SHIFT;
++            wp->hitaddr = MAX(addr, wp->vaddr);
++            wp->hitattrs = attrs;
++
++            if (wp->flags & BP_CPU
++                && cc->tcg_ops->debug_check_watchpoint
++                && !cc->tcg_ops->debug_check_watchpoint(cpu, wp)) {
++                wp->flags &= ~BP_WATCHPOINT_HIT;
++                continue;
++            }
++            cpu->watchpoint_hit = wp;
++
++            mmap_lock();
++            /* This call also restores vCPU state */
++            tb_check_watchpoint(cpu, ra);
++            if (wp->flags & BP_STOP_BEFORE_ACCESS) {
++                cpu->exception_index = EXCP_DEBUG;
++                mmap_unlock();
++                cpu_loop_exit(cpu);
++            } else {
++                /* Force execution of one insn next time.  */
++                cpu->cflags_next_tb = 1 | CF_NOIRQ | curr_cflags(cpu);
++                mmap_unlock();
++                cpu_loop_exit_noexc(cpu);
++            }
++        } else {
++            wp->flags &= ~BP_WATCHPOINT_HIT;
++        }
++    }
++}
+diff --git a/system/watchpoint.c b/system/watchpoint.c
+index b76007ebf6..2aa2a9ea63 100644
+--- a/system/watchpoint.c
++++ b/system/watchpoint.c
+@@ -18,13 +18,8 @@
+  */
  
- #ifndef _WIN32
-diff --git a/accel/hvf/hvf-accel-ops.c b/accel/hvf/hvf-accel-ops.c
-index 8eabb696fa..d94d41ab6d 100644
---- a/accel/hvf/hvf-accel-ops.c
-+++ b/accel/hvf/hvf-accel-ops.c
-@@ -428,7 +428,6 @@ static void *hvf_cpu_thread_fn(void *arg)
-     qemu_thread_get_self(cpu->thread);
+ #include "qemu/osdep.h"
+-#include "qemu/main-loop.h"
+ #include "qemu/error-report.h"
+ #include "exec/exec-all.h"
+-#include "exec/translate-all.h"
+-#include "sysemu/tcg.h"
+-#include "sysemu/replay.h"
+-#include "hw/core/tcg-cpu-ops.h"
+ #include "hw/core/cpu.h"
  
-     cpu->thread_id = qemu_get_thread_id();
--    cpu->neg.can_do_io = true;
-     current_cpu = cpu;
+ /* Add a watchpoint.  */
+@@ -103,122 +98,3 @@ void cpu_watchpoint_remove_all(CPUState *cpu, int mask)
+         }
+     }
+ }
+-
+-#ifdef CONFIG_TCG
+-
+-/*
+- * Return true if this watchpoint address matches the specified
+- * access (ie the address range covered by the watchpoint overlaps
+- * partially or completely with the address range covered by the
+- * access).
+- */
+-static inline bool watchpoint_address_matches(CPUWatchpoint *wp,
+-                                              vaddr addr, vaddr len)
+-{
+-    /*
+-     * We know the lengths are non-zero, but a little caution is
+-     * required to avoid errors in the case where the range ends
+-     * exactly at the top of the address space and so addr + len
+-     * wraps round to zero.
+-     */
+-    vaddr wpend = wp->vaddr + wp->len - 1;
+-    vaddr addrend = addr + len - 1;
+-
+-    return !(addr > wpend || wp->vaddr > addrend);
+-}
+-
+-/* Return flags for watchpoints that match addr + prot.  */
+-int cpu_watchpoint_address_matches(CPUState *cpu, vaddr addr, vaddr len)
+-{
+-    CPUWatchpoint *wp;
+-    int ret = 0;
+-
+-    QTAILQ_FOREACH(wp, &cpu->watchpoints, entry) {
+-        if (watchpoint_address_matches(wp, addr, len)) {
+-            ret |= wp->flags;
+-        }
+-    }
+-    return ret;
+-}
+-
+-/* Generate a debug exception if a watchpoint has been hit.  */
+-void cpu_check_watchpoint(CPUState *cpu, vaddr addr, vaddr len,
+-                          MemTxAttrs attrs, int flags, uintptr_t ra)
+-{
+-    CPUClass *cc = CPU_GET_CLASS(cpu);
+-    CPUWatchpoint *wp;
+-
+-    assert(tcg_enabled());
+-    if (cpu->watchpoint_hit) {
+-        /*
+-         * We re-entered the check after replacing the TB.
+-         * Now raise the debug interrupt so that it will
+-         * trigger after the current instruction.
+-         */
+-        bql_lock();
+-        cpu_interrupt(cpu, CPU_INTERRUPT_DEBUG);
+-        bql_unlock();
+-        return;
+-    }
+-
+-    if (cc->tcg_ops->adjust_watchpoint_address) {
+-        /* this is currently used only by ARM BE32 */
+-        addr = cc->tcg_ops->adjust_watchpoint_address(cpu, addr, len);
+-    }
+-
+-    assert((flags & ~BP_MEM_ACCESS) == 0);
+-    QTAILQ_FOREACH(wp, &cpu->watchpoints, entry) {
+-        int hit_flags = wp->flags & flags;
+-
+-        if (hit_flags && watchpoint_address_matches(wp, addr, len)) {
+-            if (replay_running_debug()) {
+-                /*
+-                 * replay_breakpoint reads icount.
+-                 * Force recompile to succeed, because icount may
+-                 * be read only at the end of the block.
+-                 */
+-                if (!cpu->neg.can_do_io) {
+-                    /* Force execution of one insn next time.  */
+-                    cpu->cflags_next_tb = 1 | CF_NOIRQ | curr_cflags(cpu);
+-                    cpu_loop_exit_restore(cpu, ra);
+-                }
+-                /*
+-                 * Don't process the watchpoints when we are
+-                 * in a reverse debugging operation.
+-                 */
+-                replay_breakpoint();
+-                return;
+-            }
+-
+-            wp->flags |= hit_flags << BP_HIT_SHIFT;
+-            wp->hitaddr = MAX(addr, wp->vaddr);
+-            wp->hitattrs = attrs;
+-
+-            if (wp->flags & BP_CPU
+-                && cc->tcg_ops->debug_check_watchpoint
+-                && !cc->tcg_ops->debug_check_watchpoint(cpu, wp)) {
+-                wp->flags &= ~BP_WATCHPOINT_HIT;
+-                continue;
+-            }
+-            cpu->watchpoint_hit = wp;
+-
+-            mmap_lock();
+-            /* This call also restores vCPU state */
+-            tb_check_watchpoint(cpu, ra);
+-            if (wp->flags & BP_STOP_BEFORE_ACCESS) {
+-                cpu->exception_index = EXCP_DEBUG;
+-                mmap_unlock();
+-                cpu_loop_exit(cpu);
+-            } else {
+-                /* Force execution of one insn next time.  */
+-                cpu->cflags_next_tb = 1 | CF_NOIRQ | curr_cflags(cpu);
+-                mmap_unlock();
+-                cpu_loop_exit_noexc(cpu);
+-            }
+-        } else {
+-            wp->flags &= ~BP_WATCHPOINT_HIT;
+-        }
+-    }
+-}
+-
+-#endif /* CONFIG_TCG */
+diff --git a/accel/tcg/meson.build b/accel/tcg/meson.build
+index d25638d6c1..c15ac9ac8f 100644
+--- a/accel/tcg/meson.build
++++ b/accel/tcg/meson.build
+@@ -24,6 +24,7 @@ specific_ss.add_all(when: 'CONFIG_TCG', if_true: tcg_ss)
  
-     hvf_init_vcpu(cpu);
-diff --git a/accel/kvm/kvm-accel-ops.c b/accel/kvm/kvm-accel-ops.c
-index 45ff06e953..b3c946dc4b 100644
---- a/accel/kvm/kvm-accel-ops.c
-+++ b/accel/kvm/kvm-accel-ops.c
-@@ -36,7 +36,6 @@ static void *kvm_vcpu_thread_fn(void *arg)
-     bql_lock();
-     qemu_thread_get_self(cpu->thread);
-     cpu->thread_id = qemu_get_thread_id();
--    cpu->neg.can_do_io = true;
-     current_cpu = cpu;
+ specific_ss.add(when: ['CONFIG_SYSTEM_ONLY', 'CONFIG_TCG'], if_true: files(
+   'cputlb.c',
++  'watchpoint.c',
+ ))
  
-     r = kvm_init_vcpu(cpu, &error_fatal);
+ system_ss.add(when: ['CONFIG_TCG'], if_true: files(
 -- 
 2.41.0
 
