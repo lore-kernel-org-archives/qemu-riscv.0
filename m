@@ -4,78 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 232E1C47DB7
-	for <qemu-riscv@archiver.kernel.org>; Fri, 19 Jan 2024 11:42:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E48DC47DD7
+	for <qemu-riscv@archiver.kernel.org>; Fri, 19 Jan 2024 11:42:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rQn9X-0001Lf-I0; Fri, 19 Jan 2024 06:35:15 -0500
+	id 1rQnBo-0007PZ-W4; Fri, 19 Jan 2024 06:37:37 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQn9W-0001Ke-H0
- for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 06:35:14 -0500
-Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQnBn-0007O1-J6
+ for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 06:37:35 -0500
+Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQn9S-0007Pf-SI
- for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 06:35:14 -0500
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-337c5bcf79fso601518f8f.2
- for <qemu-riscv@nongnu.org>; Fri, 19 Jan 2024 03:35:10 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQnBm-000377-1B
+ for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 06:37:35 -0500
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-40e490c2115so10789335e9.0
+ for <qemu-riscv@nongnu.org>; Fri, 19 Jan 2024 03:37:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705664109; x=1706268909; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=FiTFj1k6iws3Fa/IOpt1AOvFogP9Al8X3pBEue7+AFk=;
- b=ToZNhl91hD/r2AYQF2OvcKd/0mbNaIGfcHEQFyl5WmF3z+baPR6DDxJmGTnRVPzeu7
- kBmt5UsIeVMZ7ZZR/eHPUzkeZyrh/40kVo/v3uRssN5v76jb68UxXnMWyad1L6L5BjLP
- fERvnZYYRdf7yMW5YrO/P7Wg972aD2gcl/i59RMhjgUHwJjn11ITMb/YEX15oMkchVLz
- pqj59UtjZBMbxxJnzrkpFmvJYMIUUlB94DTUh61VkRtI2RKO59cx9gyW6qYHsTck4JwQ
- HiyHoA65HoYSD2v/0u3EFsZk+9bvXclgDkbcbv5kspjUPADyg3hCYsiKzTi8CDBAecw1
- bdSg==
+ d=linaro.org; s=google; t=1705664252; x=1706269052; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8IaNDObNAqYNxlZ9PNSQWTtp9Qeox0bgAC84EDezcoU=;
+ b=zk7EHrNrHwfkJ05cCktdOV2Es7vmqZ6eSiF9Bv5eyosrcE+eZRp86WzGl5kt1cp7QM
+ IxJCCw4q4vnfe4nrMZo+SDRYMtaUO57aA5Kq0wYhk2mu1lzml/weaXP2u1EMvUaoxAtK
+ P2a9CtyIQq9R8YyaBhe+VbhlMgbKcRlT721PKoVyCdoWJQ1/Hnp0pQo4aVzwVk/NGZ6q
+ k7xXktBh8e6fN1Eict/W9HYJcWPo+HJwrCdqRiY4Yj69UUrJ6aL73dXUY67LNz2dN20w
+ rRt0XEE1pihrlicjJGU4f8GGv/VKOBDlq7SE8IM3aI++nJXvoCEHa/USFNPFYOZWSOZG
+ COdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705664109; x=1706268909;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=FiTFj1k6iws3Fa/IOpt1AOvFogP9Al8X3pBEue7+AFk=;
- b=DeWP8I0iWh8I77+oOj1jofPgX6xyFiPvR5kLyiWmUW9wOqM1y0jda2aT1UM6U+vzXT
- 5S+z/XPxCbFWDYIqao5znK88hiYxk+Dkn56a2YLBgVBLiTHNLqDDs08CFVDietK2XDkY
- znvHrOQuN8FxJUhf8km2kSL1oceO8R+9MmBB0hgw1Z9tNybE79M6dz5wK8VnYrgI3urD
- Ot92Tik30tpBYZOjtcZfsiZ0/2BQREj8fIA9OHe1ZIpvQ+yzAjqIgSPHjd/Td7LhMXsC
- sc83DrraUEihWWr29B0+zG6NdbHqqeXLuxmzVYCUwPHrkw/PxIf3kRQ3y/qR0pXWdnUt
- EGjQ==
-X-Gm-Message-State: AOJu0YzLQF7JjNFCpR3wtIZT3P7MEHxUlZ0NRFifNtCugoa2eSEt61sA
- He6x8IRFfMqIfZkmLRce5utUqwqeJFooQ8HYNmri8cvY9G9zt4BDX7jdS5qfxGc=
-X-Google-Smtp-Source: AGHT+IELXcbsrLmEacJWTC2CZtIBLjvDglWcytdwubS+EqUhUmFits+S35tXVn5lMV5l598UDILr2w==
-X-Received: by 2002:a5d:64cf:0:b0:336:e369:cef with SMTP id
- f15-20020a5d64cf000000b00336e3690cefmr1860158wri.130.1705664109128; 
- Fri, 19 Jan 2024 03:35:09 -0800 (PST)
+ d=1e100.net; s=20230601; t=1705664252; x=1706269052;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=8IaNDObNAqYNxlZ9PNSQWTtp9Qeox0bgAC84EDezcoU=;
+ b=BBwj/ESN9DHPL+XPVfPbsjELQBk06mXcFWvBjlVY0fwy82zsxZgD080TaaK6lJOFxR
+ /6DnG1ktOAvF4dwmaVEXI3LTL0wD9/yvqtqro+jWbEm3ml3RpNLWRdwivOKJ+bwNcPH/
+ d3/zwrVmdFwziJ12nLkYHnwyjafWYanbRBuSthnJqaFl8cvww0Wzx1ty9CccMXZ02AKW
+ Xdmr+V1FyXv9rl5vx2zKCogaY84bEQ1qAWegE5JZWGngJcg3NNfd55O3RjpEtM8Km3ok
+ npxm9jK5iH66VbvNi/YkC6+Y8K2EdSG9ZJn5BBn3h9QyEZeQw9TNUZaJtkaD022YIKtb
+ 9Htw==
+X-Gm-Message-State: AOJu0YzeM/qzmm22M60LONrlZ38mOYhQunV7yQjsbvgNaQ7Ud/coiI62
+ bhH6pMQ2gM/V88ZBL63rnavlQHIM+RYeDRAttj0iP/Yb4snjUCOU2u9dV1rwL6A=
+X-Google-Smtp-Source: AGHT+IGME/CrHYUSCjWLKv9N7hUwo8xb1T01fsrIIY9PgyaLVNdwLW0/psrKAa/3cpDKhot/jlQmvg==
+X-Received: by 2002:a05:600c:1388:b0:40e:43ba:cf3f with SMTP id
+ u8-20020a05600c138800b0040e43bacf3fmr505422wmf.1.1705664252716; 
+ Fri, 19 Jan 2024 03:37:32 -0800 (PST)
 Received: from localhost.localdomain (91-163-26-170.subs.proxad.net.
  [91.163.26.170]) by smtp.gmail.com with ESMTPSA id
- h2-20020a5d5042000000b00337d941604bsm2070554wrt.98.2024.01.19.03.35.08
+ j6-20020adfb306000000b00339208ecb30sm1294065wrd.68.2024.01.19.03.37.31
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 19 Jan 2024 03:35:08 -0800 (PST)
+ Fri, 19 Jan 2024 03:37:32 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, qemu-block@nongnu.org,
- qemu-arm@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PULL 00/36] HW core patches for 2024-01-19
-Date: Fri, 19 Jan 2024 12:34:29 +0100
-Message-ID: <20240119113507.31951-1-philmd@linaro.org>
+ qemu-arm@nongnu.org, Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Guenter Roeck <linux@roeck-us.net>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Fam Zheng <fam@euphon.net>
+Subject: [PULL 32/36] hw/scsi/esp-pci: set DMA_STAT_BCMBLT when BLAST command
+ issued
+Date: Fri, 19 Jan 2024 12:35:01 +0100
+Message-ID: <20240119113507.31951-33-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20240119113507.31951-1-philmd@linaro.org>
+References: <20240119113507.31951-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42e.google.com
-X-Spam_score_int: 4
-X-Spam_score: 0.4
-X-Spam_bar: /
-X-Spam_report: (0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001, SUSPICIOUS_RECIPS=2.51,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -91,162 +97,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The following changes since commit 88cf5fec91e50cd34bc002b633b4116228db0bc8:
+From: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
 
-  Merge tag 'pull-target-arm-20240118' of https://git.linaro.org/people/pmaydell/qemu-arm into staging (2024-01-18 12:48:17 +0000)
+Even though the BLAST command isn't fully implemented in QEMU, the DMA_STAT_BCMBLT
+bit should be set after the command has been issued to indicate that the command
+has completed.
 
-are available in the Git repository at:
+This fixes an issue with the DC390 DOS driver which issues the BLAST command as
+part of its normal error recovery routine at startup, and otherwise sits in a
+tight loop waiting for DMA_STAT_BCMBLT to be set before continuing.
 
-  https://github.com/philmd/qemu.git tags/hw-cpus-20240119
+Signed-off-by: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
+Reviewed-by: Guenter Roeck <linux@roeck-us.net>
+Tested-by: Guenter Roeck <linux@roeck-us.net>
+Message-ID: <20240112131529.515642-5-mark.cave-ayland@ilande.co.uk>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ hw/scsi/esp-pci.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-for you to fetch changes up to 7ec5d7d91215815e885d2b38e62256e8fd8e2bce:
-
-  configure: Add linux header compile support for LoongArch (2024-01-19 12:28:59 +0100)
-
-----------------------------------------------------------------
-HW core patch queue
-
-. Deprecate unmaintained SH-4 models (Samuel)
-. HPET: Convert DPRINTF calls to trace events (Daniel)
-. Implement buffered block writes in Intel PFlash (Gerd)
-. Ignore ELF loadable segments with zero size (Bin)
-. ESP/NCR53C9x: PCI DMA fixes (Mark)
-. PIIX: Simplify Xen PCI IRQ routing (Bernhard)
-. Restrict CPU 'start-powered-off' property to sysemu (Phil)
-
-. target/alpha: Only build sys_helper.c on system emulation (Phil)
-. target/xtensa: Use generic instruction breakpoint API & add test (Max)
-. Restrict icount to system emulation (Phil)
-. Do not set CPUState TCG-specific flags in non-TCG accels (Phil)
-. Cleanup TCG tb_invalidate API (Phil)
-. Correct LoongArch/KVM include path (Bibo)
-. Do not ignore throttle errors in crypto backends (Phil)
-
-. MAINTAINERS updates (Raphael, Zhao)
-
-Note the following checkpatch error is deliberately ignored:
-
-  ERROR: space prohibited after that '&&' (ctx:ExW)
-  #143: FILE: accel/tcg/watchpoint.c:119:
-  +                && cc->tcg_ops->debug_check_watchpoint
-                   ^
-----------------------------------------------------------------
-
-Bernhard Beschow (1):
-  hw/i386/pc_piix: Make piix_intx_routing_notifier_xen() more device
-    independent
-
-Bibo Mao (1):
-  configure: Add linux header compile support for LoongArch
-
-Bin Meng (1):
-  hw/elf_ops: Ignore loadable segments with zero size
-
-Daniel Hoffman (1):
-  hw/timer/hpet: Convert DPRINTF to trace events
-
-Gerd Hoffmann (3):
-  hw/pflash: refactor pflash_data_write()
-  hw/pflash: use ldn_{be,le}_p and stn_{be,le}_p
-  hw/pflash: implement update buffer for block writes
-
-Mark Cave-Ayland (4):
-  hw/scsi/esp-pci: use correct address register for PCI DMA transfers
-  hw/scsi/esp-pci: generate PCI interrupt from separate ESP and PCI
-    sources
-  hw/scsi/esp-pci: synchronise setting of DMA_STAT_DONE with ESP
-    completion interrupt
-  hw/scsi/esp-pci: set DMA_STAT_BCMBLT when BLAST command issued
-
-Max Filippov (2):
-  target/xtensa: use generic instruction breakpoint infrastructure
-  tests/tcg/xtensa: add icount/ibreak priority test
-
-Philippe Mathieu-Daudé (19):
-  backends/cryptodev: Do not ignore throttle/backends Errors
-  accel: Do not set CPUState::tcg_cflags in non-TCG accels
-  accel: Do not set CPUState::can_do_io in non-TCG accels
-  accel/tcg: Remove unused tb_invalidate_phys_addr()
-  accel/tcg: Remove tb_invalidate_phys_page() from system emulation
-  target/alpha: Extract clk_helper.c from sys_helper.c
-  target/alpha: Only build sys_helper.c on system emulation
-  system/cpu-timers: Have icount_configure() return a boolean
-  system/cpu-timers: Introduce ICountMode enumerator
-  target/arm: Ensure icount is enabled when emulating INST_RETIRED
-  util/async: Only call icount_notify_exit() if icount is enabled
-  system/replay: Restrict icount to system emulation
-  system/watchpoint: Move TCG specific code to accel/tcg/
-  cpus: Restrict 'start-powered-off' property to system emulation
-  accel: Rename accel_init_ops_interfaces() to include 'system'
-  hw/core/cpu: Rename cpu_class_init() to include 'common'
-  hw/s390x: Rename cpu_class_init() to include 'sclp'
-  target/i386: Rename tcg_cpu_FOO() to include 'x86'
-  target/riscv: Rename tcg_cpu_FOO() to include 'riscv'
-
-Raphael Norwitz (1):
-  MAINTAINERS: Update Raphael Norwitz email
-
-Samuel Tardieu (2):
-  target/sh4: Deprecate the shix machine
-  hw/block: Deprecate the TC58128 block device
-
-Zhao Liu (1):
-  MAINTAINERS: Update hw/core/cpu.c entry
-
- MAINTAINERS                   |   5 +-
- docs/about/deprecated.rst     |   5 +
- configure                     |   1 +
- accel/accel-system.h          |   2 +-
- include/exec/exec-all.h       |   5 -
- include/exec/translate-all.h  |   1 -
- include/hw/elf_ops.h          |  71 +++++++-------
- include/sysemu/cpu-timers.h   |  32 +++++--
- include/sysemu/replay.h       |  11 ++-
- target/xtensa/cpu.h           |   4 +
- accel/accel-system.c          |   2 +-
- accel/accel-target.c          |   2 +-
- accel/dummy-cpus.c            |   1 -
- accel/hvf/hvf-accel-ops.c     |   1 -
- accel/kvm/kvm-accel-ops.c     |   1 -
- accel/tcg/icount-common.c     |  36 +++----
- accel/tcg/tb-maint.c          |  24 +----
- accel/tcg/watchpoint.c        | 143 ++++++++++++++++++++++++++++
- backends/cryptodev.c          |  10 ++
- cpu-target.c                  |  36 ++-----
- hw/block/pflash_cfi01.c       | 171 ++++++++++++++++++----------------
- hw/block/pflash_cfi02.c       |   2 +-
- hw/block/tc58128.c            |   1 +
- hw/core/cpu-common.c          |   4 +-
- hw/i386/pc_piix.c             |   9 +-
- hw/s390x/sclpcpu.c            |   4 +-
- hw/scsi/esp-pci.c             |  61 ++++++++----
- hw/sh4/shix.c                 |   1 +
- hw/timer/hpet.c               |  55 +++++------
- stubs/icount.c                |  27 +-----
- system/cpu-timers.c           |   2 +-
- system/vl.c                   |   3 +-
- system/watchpoint.c           | 124 ------------------------
- target/alpha/clk_helper.c     |  32 +++++++
- target/alpha/sys_helper.c     |  18 ----
- target/arm/cpu.c              |   2 +-
- target/arm/helper.c           |   5 +-
- target/i386/cpu.c             |   2 +-
- target/i386/tcg/tcg-cpu.c     |  32 +++----
- target/riscv/tcg/tcg-cpu.c    |  28 +++---
- target/xtensa/cpu.c           |   1 +
- target/xtensa/dbg_helper.c    |  46 +++++----
- target/xtensa/helper.c        |  12 +++
- target/xtensa/translate.c     |  17 ----
- util/async.c                  |  16 ++--
- accel/tcg/meson.build         |   1 +
- hw/block/trace-events         |   7 +-
- hw/timer/trace-events         |  15 +++
- target/alpha/meson.build      |   7 +-
- tests/tcg/xtensa/test_break.S |  25 ++++-
- 50 files changed, 603 insertions(+), 520 deletions(-)
- create mode 100644 accel/tcg/watchpoint.c
- create mode 100644 target/alpha/clk_helper.c
-
+diff --git a/hw/scsi/esp-pci.c b/hw/scsi/esp-pci.c
+index 875a49199d..42d9d2e483 100644
+--- a/hw/scsi/esp-pci.c
++++ b/hw/scsi/esp-pci.c
+@@ -124,6 +124,7 @@ static void esp_pci_handle_blast(PCIESPState *pci, uint32_t val)
+ {
+     trace_esp_pci_dma_blast(val);
+     qemu_log_mask(LOG_UNIMP, "am53c974: cmd BLAST not implemented\n");
++    pci->dma_regs[DMA_STAT] |= DMA_STAT_BCMBLT;
+ }
+ 
+ static void esp_pci_handle_abort(PCIESPState *pci, uint32_t val)
 -- 
 2.41.0
 
