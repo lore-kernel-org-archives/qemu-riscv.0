@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8066C4725D
-	for <qemu-riscv@archiver.kernel.org>; Fri, 19 Jan 2024 11:43:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F83AC47DAF
+	for <qemu-riscv@archiver.kernel.org>; Fri, 19 Jan 2024 11:44:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rQnB3-00044i-5g; Fri, 19 Jan 2024 06:36:50 -0500
+	id 1rQnBn-0007NX-4z; Fri, 19 Jan 2024 06:37:35 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQnB1-0003v8-87
- for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 06:36:47 -0500
-Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQnBl-0007Go-2B
+ for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 06:37:33 -0500
+Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQnAy-0002qm-W2
- for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 06:36:46 -0500
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-40e86a9fc4bso8301865e9.2
- for <qemu-riscv@nongnu.org>; Fri, 19 Jan 2024 03:36:44 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQnBh-00034Y-Mv
+ for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 06:37:32 -0500
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-3376555b756so389737f8f.0
+ for <qemu-riscv@nongnu.org>; Fri, 19 Jan 2024 03:37:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705664203; x=1706269003; darn=nongnu.org;
+ d=linaro.org; s=google; t=1705664248; x=1706269048; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AAPSTP3JoL9Rbkyt54ClOb8XBp1E6hFiC5B+aqm9oc8=;
- b=cuby521LwVfsbJER/LRPs2/2NQjF1OH9/MvN5JLXnmvoo/Kjl/4VhVI7wq648PrE3k
- GXjKDKnhC9PAboqu8Mr1No6EwLYvmCj98DWz4qpYQQDiH4OwewTbuqdbprn1OhyO+tin
- CNYvAp+Uxxit255z7EkO9c1pZGbZP6glCNt7MjqrLX2uZDwKfVjMG+JCvFxTQVTcZeRH
- sX563UxC8hdhbp4RPvWHPrNBWgczdCwEE96RKFOoumRko6MwSMQOEbkuAZJcnKSlRIg4
- XHZl7GtuZcFn1CR26J2DxwSMN/4xViV8x/y4KzqE3xBdPE+U33W9OEqgK+ZU2uqgy3xs
- SppQ==
+ bh=ODpPk4V4L74xrCSwXIUijjl6fJH0n8xXoj2+PFNQbhs=;
+ b=eIXZ1Tks3W8nIRyoK4sHzQw0RHEZji/9FUeQC8Qsy/N4NAp9hCQOp/w05MccHJ+bZo
+ g8TnlT/q8GFE+LwuEWlQAPYX+svvvoa1iohVpBTIgiqMOfTbY93S3NnYLPJX2Av8/pUF
+ W1GRN/b5qkuGXmlzBE+zo927o7ij/RfxmjX8dnXfia0NDa0NuCcJtcb6qMOTWPfMUx1y
+ cJ+92ucdBkVXxKoSZUNSEeSvoWBVSJrYRn0oB+1KrpH44Pl2R54Ecdg1XqQGVfiNGS5R
+ Xzg5wIvP6KSX9cwZ2dFz5JoAWJoJ9h4pfXQUsq/1dirfqxaYGdAUfDH6ThhvUKV2IcW2
+ JEpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705664203; x=1706269003;
+ d=1e100.net; s=20230601; t=1705664248; x=1706269048;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AAPSTP3JoL9Rbkyt54ClOb8XBp1E6hFiC5B+aqm9oc8=;
- b=UIou0AZsVtLWBpI5tgMzIhPru3p/KrAGTHw3ia6bqWw6mECjEmDym1nuKqCZtmE12U
- 1MQof2+2MZkbyAbYE+6iHcwLk4DEj4EW4Z6WdhtiES5Qp9ZqHbxie+g2fMYC7V2y+KXJ
- djGCwUF5799WBLAvM/EFd8rFjPmHploRtoPlN8feE+isM8pANaFPnIVj5WJHLxe4y/qF
- j+3+RZkf0ZoKWgEQvdgg+i4jDG3kGY/3Gf/qu/bCowGKGyzxir3c8sY1zmAkJFQlWy11
- FoKANfQts8YQ/E/xEMVv3zgB0nIXlH8BmQ8GAimYFRlFS7753K2RQfbgRjgv4zQosXqF
- 635Q==
-X-Gm-Message-State: AOJu0YwTqor1xG8mLwZTSfNipxuyWTPp+Cjau54aLnSaQakGKDgDyOTB
- 66M3mAVlYcY5bwiljCFG4KkLq4zmObmrNUzacvx+Fns6QJN2lXcm85KKAKjftWk=
-X-Google-Smtp-Source: AGHT+IHISkHdSr18waL5utIUkxFUJwTaWRF75Lh3ZC2wSlAjeClGryFxg8O8BHfbToppa6wRY+N4Hg==
-X-Received: by 2002:a05:600c:1547:b0:40e:4d17:b239 with SMTP id
- f7-20020a05600c154700b0040e4d17b239mr1433286wmg.60.1705664203301; 
- Fri, 19 Jan 2024 03:36:43 -0800 (PST)
+ bh=ODpPk4V4L74xrCSwXIUijjl6fJH0n8xXoj2+PFNQbhs=;
+ b=dtD7meSFc/Yuv4AJNIf3+q7BGswlpbMcJPk4IzdKpkjp8CDtMoEyixX2Fv0DsBtBev
+ gHxK88xLWPdoYmwCF9YyiBbnuU8E/L0Tbk7r2zrGT32aSusP4GJ3u8C4RJLOTpgz+nF9
+ +msWLWUtfI1+Yg9/Uw8pdwiakVOByxxlgFlMvx8mXFDS7m1blJLNevEdmxBbRNvgSMRw
+ 8rViHJs5eLZOgcjdBJJhbXA7FADm1JAEAB13YbX6DRI3/sgxoWt6MwZE2pEh0dVaPslI
+ eLRbjf8dSTfOLO4CQ+69O0TbvY3iNZGdXQjVhn3C1n9V29631/g+3L3ZDuwtoBy7/OO3
+ RVnw==
+X-Gm-Message-State: AOJu0YzQkCpwOfGVLRwGFax4Pxbtuj2jYNCdV3ddzEBSt23WIkuC5UYm
+ Ag5iukMR7X3GZNO0Qc+l8+0M1glyAZ/5gnsRS13NJo3ufQAF4PA2BjEQHB990KE=
+X-Google-Smtp-Source: AGHT+IEIrX/z6IwaxDIYnTkkVa92cOwMdnkJU9aX6lQnqOf1mTPLbyTPg1auGFz61Q1hUZ14flsswQ==
+X-Received: by 2002:a5d:698b:0:b0:336:8b2f:2ae5 with SMTP id
+ g11-20020a5d698b000000b003368b2f2ae5mr589450wru.24.1705664248288; 
+ Fri, 19 Jan 2024 03:37:28 -0800 (PST)
 Received: from localhost.localdomain (91-163-26-170.subs.proxad.net.
  [91.163.26.170]) by smtp.gmail.com with ESMTPSA id
- k9-20020a05600c1c8900b0040d772030c2sm28737333wms.44.2024.01.19.03.36.42
+ n13-20020a5d51cd000000b0033673ddd81csm6238840wrv.112.2024.01.19.03.37.27
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 19 Jan 2024 03:36:42 -0800 (PST)
+ Fri, 19 Jan 2024 03:37:27 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, qemu-block@nongnu.org,
- qemu-arm@nongnu.org,
+ qemu-arm@nongnu.org, Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Guenter Roeck <linux@roeck-us.net>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
- Paolo Bonzini <pbonzini@redhat.com>
-Subject: [PULL 21/36] system/replay: Restrict icount to system emulation
-Date: Fri, 19 Jan 2024 12:34:50 +0100
-Message-ID: <20240119113507.31951-22-philmd@linaro.org>
+ Paolo Bonzini <pbonzini@redhat.com>, Fam Zheng <fam@euphon.net>
+Subject: [PULL 31/36] hw/scsi/esp-pci: synchronise setting of DMA_STAT_DONE
+ with ESP completion interrupt
+Date: Fri, 19 Jan 2024 12:35:00 +0100
+Message-ID: <20240119113507.31951-32-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240119113507.31951-1-philmd@linaro.org>
 References: <20240119113507.31951-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::329;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x329.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::431;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x431.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,104 +97,94 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Message-ID: <20231208113529.74067-7-philmd@linaro.org>
----
- include/sysemu/cpu-timers.h |  2 +-
- include/sysemu/replay.h     | 11 ++++++++---
- stubs/icount.c              | 19 -------------------
- 3 files changed, 9 insertions(+), 23 deletions(-)
+From: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
 
-diff --git a/include/sysemu/cpu-timers.h b/include/sysemu/cpu-timers.h
-index 3f05f29b10..d86738a378 100644
---- a/include/sysemu/cpu-timers.h
-+++ b/include/sysemu/cpu-timers.h
-@@ -30,7 +30,7 @@ typedef enum {
-     ICOUNT_ADAPTATIVE,
- } ICountMode;
+The setting of DMA_STAT_DONE at the end of a DMA transfer can be configured to
+generate an interrupt, however the Linux driver manually checks for DMA_STAT_DONE
+being set and if it is, considers that a DMA transfer has completed.
+
+If DMA_STAT_DONE is set but the ESP device isn't indicating an interrupt then
+the Linux driver considers this to be a spurious interrupt. However this can
+occur in QEMU as there is a delay between the end of DMA transfer where
+DMA_STAT_DONE is set, and the ESP device raising its completion interrupt.
+
+This appears to be an incorrect assumption in the Linux driver as the ESP and
+PCI DMA interrupt sources are separate (and may not be raised exactly
+together), however we can work around this by synchronising the setting of
+DMA_STAT_DONE at the end of a DMA transfer with the ESP completion interrupt.
+
+In conjunction with the previous commit Linux is now able to correctly boot
+from an am53c974 PCI SCSI device on the hppa C3700 machine without emitting
+"iget: checksum invalid" and "Spurious irq, sreg=10" errors.
+
+Signed-off-by: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
+Reviewed-by: Guenter Roeck <linux@roeck-us.net>
+Tested-by: Guenter Roeck <linux@roeck-us.net>
+Message-ID: <20240112131529.515642-4-mark.cave-ayland@ilande.co.uk>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ hw/scsi/esp-pci.c | 28 +++++++++++++---------------
+ 1 file changed, 13 insertions(+), 15 deletions(-)
+
+diff --git a/hw/scsi/esp-pci.c b/hw/scsi/esp-pci.c
+index 15dc3c004d..875a49199d 100644
+--- a/hw/scsi/esp-pci.c
++++ b/hw/scsi/esp-pci.c
+@@ -93,6 +93,18 @@ static void esp_irq_handler(void *opaque, int irq_num, int level)
  
--#ifdef CONFIG_TCG
-+#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
- extern ICountMode use_icount;
- #define icount_enabled() (use_icount)
- #else
-diff --git a/include/sysemu/replay.h b/include/sysemu/replay.h
-index 83995ae4bd..f229b2109c 100644
---- a/include/sysemu/replay.h
-+++ b/include/sysemu/replay.h
-@@ -1,6 +1,3 @@
--#ifndef SYSEMU_REPLAY_H
--#define SYSEMU_REPLAY_H
--
- /*
-  * QEMU replay (system interface)
-  *
-@@ -11,6 +8,12 @@
-  * See the COPYING file in the top-level directory.
-  *
-  */
-+#ifndef SYSEMU_REPLAY_H
-+#define SYSEMU_REPLAY_H
+     if (level) {
+         pci->dma_regs[DMA_STAT] |= DMA_STAT_SCSIINT;
 +
-+#ifdef CONFIG_USER_ONLY
-+#error Cannot include this header from user emulation
-+#endif
- 
- #include "exec/replay-core.h"
- #include "qapi/qapi-types-misc.h"
-@@ -84,12 +87,14 @@ int64_t replay_save_clock(ReplayClockKind kind, int64_t clock,
- int64_t replay_read_clock(ReplayClockKind kind, int64_t raw_icount);
- /*! Saves or reads the clock depending on the current replay mode. */
- #define REPLAY_CLOCK(clock, value)                                      \
-+    !icount_enabled() ? (value) :                                       \
-     (replay_mode == REPLAY_MODE_PLAY                                    \
-         ? replay_read_clock((clock), icount_get_raw())                  \
-         : replay_mode == REPLAY_MODE_RECORD                             \
-             ? replay_save_clock((clock), (value), icount_get_raw())     \
-             : (value))
- #define REPLAY_CLOCK_LOCKED(clock, value)                               \
-+    !icount_enabled() ? (value) :                                       \
-     (replay_mode == REPLAY_MODE_PLAY                                    \
-         ? replay_read_clock((clock), icount_get_raw_locked())           \
-         : replay_mode == REPLAY_MODE_RECORD                             \
-diff --git a/stubs/icount.c b/stubs/icount.c
-index 1eb35b10a8..9f9a59f55b 100644
---- a/stubs/icount.c
-+++ b/stubs/icount.c
-@@ -6,10 +6,6 @@
- 
- ICountMode use_icount = ICOUNT_DISABLED;
- 
--void icount_update(CPUState *cpu)
--{
--    abort();
--}
- bool icount_configure(QemuOpts *opts, Error **errp)
- {
-     /* signal error */
-@@ -22,21 +18,6 @@ int64_t icount_get_raw(void)
-     abort();
-     return 0;
++        /*
++         * If raising the ESP IRQ to indicate end of DMA transfer, set
++         * DMA_STAT_DONE at the same time. In theory this should be done in
++         * esp_pci_dma_memory_rw(), however there is a delay between setting
++         * DMA_STAT_DONE and the ESP IRQ arriving which is visible to the
++         * guest that can cause confusion e.g. Linux
++         */
++        if ((pci->dma_regs[DMA_CMD] & DMA_CMD_MASK) == 0x3 &&
++            pci->dma_regs[DMA_WBC] == 0) {
++                pci->dma_regs[DMA_STAT] |= DMA_STAT_DONE;
++        }
+     } else {
+         pci->dma_regs[DMA_STAT] &= ~DMA_STAT_SCSIINT;
+     }
+@@ -306,9 +318,6 @@ static void esp_pci_dma_memory_rw(PCIESPState *pci, uint8_t *buf, int len,
+     /* update status registers */
+     pci->dma_regs[DMA_WBC] -= len;
+     pci->dma_regs[DMA_WAC] += len;
+-    if (pci->dma_regs[DMA_WBC] == 0) {
+-        pci->dma_regs[DMA_STAT] |= DMA_STAT_DONE;
+-    }
  }
--int64_t icount_get(void)
+ 
+ static void esp_pci_dma_memory_read(void *opaque, uint8_t *buf, int len)
+@@ -363,24 +372,13 @@ static const VMStateDescription vmstate_esp_pci_scsi = {
+     }
+ };
+ 
+-static void esp_pci_command_complete(SCSIRequest *req, size_t resid)
 -{
--    abort();
--    return 0;
+-    ESPState *s = req->hba_private;
+-    PCIESPState *pci = container_of(s, PCIESPState, esp);
+-
+-    esp_command_complete(req, resid);
+-    pci->dma_regs[DMA_WBC] = 0;
+-    pci->dma_regs[DMA_STAT] |= DMA_STAT_DONE;
+-    esp_pci_update_irq(pci);
 -}
--int64_t icount_to_ns(int64_t icount)
--{
--    abort();
--    return 0;
--}
--int64_t icount_round(int64_t count)
--{
--    abort();
--    return 0;
--}
- void icount_start_warp_timer(void)
- {
-     abort();
+-
+ static const struct SCSIBusInfo esp_pci_scsi_info = {
+     .tcq = false,
+     .max_target = ESP_MAX_DEVS,
+     .max_lun = 7,
+ 
+     .transfer_data = esp_transfer_data,
+-    .complete = esp_pci_command_complete,
++    .complete = esp_command_complete,
+     .cancel = esp_request_cancelled,
+ };
+ 
 -- 
 2.41.0
 
