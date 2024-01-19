@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46F69C47DAF
-	for <qemu-riscv@archiver.kernel.org>; Fri, 19 Jan 2024 11:36:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CAFEC4725D
+	for <qemu-riscv@archiver.kernel.org>; Fri, 19 Jan 2024 11:37:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rQnAB-00027y-Ch; Fri, 19 Jan 2024 06:35:55 -0500
+	id 1rQnA8-000237-0b; Fri, 19 Jan 2024 06:35:52 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQnA9-00024K-Nm
- for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 06:35:53 -0500
-Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQnA5-0001zs-91
+ for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 06:35:49 -0500
+Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQnA6-0000d2-T3
- for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 06:35:53 -0500
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-40e80046246so3920135e9.1
- for <qemu-riscv@nongnu.org>; Fri, 19 Jan 2024 03:35:50 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQnA2-0000H5-9R
+ for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 06:35:48 -0500
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-40e800461baso7220445e9.3
+ for <qemu-riscv@nongnu.org>; Fri, 19 Jan 2024 03:35:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705664149; x=1706268949; darn=nongnu.org;
+ d=linaro.org; s=google; t=1705664145; x=1706268945; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7/u3zpIICoMRx+hk0gsj8/1K/WruFMiJJIe2/2+mB0M=;
- b=QhwK7cP5DoX1xzoqiuN9TK6m7HDpFJy6312Tmp8XlpxCNfM28jUO9G07cGF9UZr7jD
- +Sw/s+8zchXnrNeN+joMYVpaZjBht3yr46fM5BuC6/YF/gapLhGEKGwOmDBaVdRmZSBe
- Hthn3CndVy8Wzy6a6zivzA7dkS+ct04rjiR/3XIFfLq/CBtDdpxZ5zFoKJesA9HImcfV
- 9XnPXNWPn1gu25VfRsgQ1Ef0c82ybKNDin9PiuWXQyBNaJ1kEzJ28MbAFQnxuohj+J4o
- hWE3HEbZhEgc3NT80EXFRJiequu0iS/u1TgCHHpUN11fPjP1npe4iiUZ89aqe7AAAQRk
- D79g==
+ bh=PRuBRVEWPg8k5cL0C9qDEuFeMVHGZcEBcpFoyN0cEVQ=;
+ b=EMVAxAMrrzUnjsnO7ApWlfOIu7VNaPwPDdRXqzgzqvcoRUYR2UMjH/dU9JDn5o3tB2
+ g4sPh+YrgMNowicgedvP/qPWXRDTJeB0mQurnCO2bBAUROZwOh18nksK2ZfsfD1cT6j5
+ pB42Hh4d1+usxIxhOaTkSnzG1mBnu9xD/LEUO+65bmGlUXtfgwgrkot5T/bzfkEctact
+ 7z5N8TIYa8AOpxVWyWRgXhnc5G4JjeNNUna2QJUho23GrzfWr3dW5pOb0/UI9gFqa3rN
+ op4PS+HMsB0neOKJgtyPbp0njObQjitiAJixKF4AgFpGh4eyPS+ZRE4ApmY8+yJ0ezRC
+ RFoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705664149; x=1706268949;
+ d=1e100.net; s=20230601; t=1705664145; x=1706268945;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7/u3zpIICoMRx+hk0gsj8/1K/WruFMiJJIe2/2+mB0M=;
- b=nk+wrXH1e8ZjwKNs9KjeS5y7o0e1dkIz0H3emNPr/G2iEVHpaaI3Dpvm8Za2xWcReV
- YRhspOPRPFwN71wO+A/5YBmQG1h4qHZ3WVbG2jUJRXDxYK4w5oYStKdwAQIs+hHh+jZ7
- z/8q2CNBUU2ha5eGx3BXoQhfOWWsq44b8+rxsFJj656xD6pRHRcEFuILqq2UaCXZ0YFL
- IHEN0XAoAFt6qcL2Ol/pe+avjTU3X/j7yt5be6zG9PC3kI0hvo+M5aCLQLcvb5IWw7Mw
- PPM8z0jlrxSGbUD4hkYVoNMOcIz5sxGdtjTXcm2T2IgaLJGvjMLvh+Jfmgk5gO1RnoXj
- ywoA==
-X-Gm-Message-State: AOJu0YyW05Y/xccjgRZRYEOIam1BGrzPwMMwHI4sgvZkUG1CCTWwbNp8
- gZB1+38dmulAq3bwp3gr7yrPRu+QF398J8bbt0ulVK7C2Xn5PQyjtRz0mxGw4BI=
-X-Google-Smtp-Source: AGHT+IFhP5X1Ro226is5N8ltvqS/oUIw2aIaJAtqHtzZAlnM4Udz0apB9vfp8QyYyD9FFLH2ij70dw==
-X-Received: by 2002:a05:600c:2291:b0:40e:937f:16d8 with SMTP id
- 17-20020a05600c229100b0040e937f16d8mr521040wmf.50.1705664149390; 
- Fri, 19 Jan 2024 03:35:49 -0800 (PST)
+ bh=PRuBRVEWPg8k5cL0C9qDEuFeMVHGZcEBcpFoyN0cEVQ=;
+ b=oNNmETBtGh6rlgE2v0wHgeKshy1mv+ivUOZB/hpZKJ3wY37aa46n6kgK00BwwIxA2u
+ y5mfoZzciBskS6wzOHlsC1aEvltKlAnB98t9uE/Lw81DmEdotyLzs+sC8DqDK+B7vGiJ
+ YlZsOkRUAA0L7Om1IvBvXlt19Ms/v1YzEwFUZaI1i4dzA0BRZUQWgTrDpNm/yAl+KREz
+ SmJC5eTxJzsR4zRRxM98EkDcLptNkxS0U/rVMdRajYTmoQxBBdOW60lR8iA1XgLMck0K
+ pOtXWZeRohdqzBNNVlFa2tC7YJl6GrRwgkOz6CJn2XaoOSLkp6UfC8VtpvYTvCjuyZKJ
+ reUw==
+X-Gm-Message-State: AOJu0Ywyn2vgslcibQMo3y5reUZQaND3G8YfW8vhxVxTnMt4TWDc559J
+ 3JDB1WWvwVLekPWtzBvcE87wx/m18C4r6svQp93bEyb1pQspqzRnlGBnqBWzmEM=
+X-Google-Smtp-Source: AGHT+IF798xCajTRjCTkS072PtElk6PHFEgZ7W5QaajSvhfp1HsTQ3Ae0P1hWFiKJ3OnCfiVTr8f7A==
+X-Received: by 2002:a7b:c4d4:0:b0:40e:7611:e52f with SMTP id
+ g20-20020a7bc4d4000000b0040e7611e52fmr568136wmk.315.1705664144965; 
+ Fri, 19 Jan 2024 03:35:44 -0800 (PST)
 Received: from localhost.localdomain (91-163-26-170.subs.proxad.net.
  [91.163.26.170]) by smtp.gmail.com with ESMTPSA id
- r19-20020a05600c459300b0040e42391a12sm28532878wmo.13.2024.01.19.03.35.48
+ r19-20020a05600c459300b0040e42391a12sm28532667wmo.13.2024.01.19.03.35.44
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 19 Jan 2024 03:35:49 -0800 (PST)
+ Fri, 19 Jan 2024 03:35:44 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, qemu-block@nongnu.org,
  qemu-arm@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: [PULL 09/36] target/alpha: Extract clk_helper.c from sys_helper.c
-Date: Fri, 19 Jan 2024 12:34:38 +0100
-Message-ID: <20240119113507.31951-10-philmd@linaro.org>
+ Richard Henderson <richard.henderson@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>
+Subject: [PULL 08/36] accel/tcg: Remove tb_invalidate_phys_page() from system
+ emulation
+Date: Fri, 19 Jan 2024 12:34:37 +0100
+Message-ID: <20240119113507.31951-9-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240119113507.31951-1-philmd@linaro.org>
 References: <20240119113507.31951-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::335;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x335.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -95,97 +97,72 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Except helper_load_pcc(), all helpers from sys_helper.c
-are system-emulation specific. In preparation of restricting
-sys_helper.c to system emulation, extract helper_load_pcc()
-to clk_helper.c.
+Since previous commit, tb_invalidate_phys_page() is not used
+anymore in system emulation. Make it static for user emulation
+and remove its public declaration in "exec/translate-all.h".
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Message-Id: <20231130205600.35727-1-philmd@linaro.org>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20231207105426.49339-2-philmd@linaro.org>
 ---
- target/alpha/clk_helper.c | 32 ++++++++++++++++++++++++++++++++
- target/alpha/sys_helper.c | 15 ---------------
- target/alpha/meson.build  |  1 +
- 3 files changed, 33 insertions(+), 15 deletions(-)
- create mode 100644 target/alpha/clk_helper.c
+ include/exec/translate-all.h |  1 -
+ accel/tcg/tb-maint.c         | 24 +-----------------------
+ 2 files changed, 1 insertion(+), 24 deletions(-)
 
-diff --git a/target/alpha/clk_helper.c b/target/alpha/clk_helper.c
-new file mode 100644
-index 0000000000..26ffc231cd
---- /dev/null
-+++ b/target/alpha/clk_helper.c
-@@ -0,0 +1,32 @@
-+/*
-+ *  QEMU Alpha clock helpers.
-+ *
-+ *  Copyright (c) 2007 Jocelyn Mayer
-+ *
-+ * SPDX-License-Identifier: LGPL-2.1-or-later
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qemu/timer.h"
-+#include "exec/helper-proto.h"
-+#include "cpu.h"
-+
-+uint64_t helper_load_pcc(CPUAlphaState *env)
-+{
-+#ifndef CONFIG_USER_ONLY
-+    /*
-+     * In system mode we have access to a decent high-resolution clock.
-+     * In order to make OS-level time accounting work with the RPCC,
-+     * present it with a well-timed clock fixed at 250MHz.
-+     */
-+    return (((uint64_t)env->pcc_ofs << 32)
-+            | (uint32_t)(qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) >> 2));
-+#else
-+    /*
-+     * In user-mode, QEMU_CLOCK_VIRTUAL doesn't exist.  Just pass through
-+     * the host cpu clock ticks.  Also, don't bother taking PCC_OFS into
-+     * account.
-+     */
-+    return (uint32_t)cpu_get_host_ticks();
-+#endif
-+}
-diff --git a/target/alpha/sys_helper.c b/target/alpha/sys_helper.c
-index c83c92dd4c..98d9a0fff7 100644
---- a/target/alpha/sys_helper.c
-+++ b/target/alpha/sys_helper.c
-@@ -27,21 +27,6 @@
- #include "qemu/timer.h"
+diff --git a/include/exec/translate-all.h b/include/exec/translate-all.h
+index 88602ae8d8..85c9460c7c 100644
+--- a/include/exec/translate-all.h
++++ b/include/exec/translate-all.h
+@@ -23,7 +23,6 @@
  
  
--uint64_t helper_load_pcc(CPUAlphaState *env)
+ /* translate-all.c */
+-void tb_invalidate_phys_page(tb_page_addr_t addr);
+ void tb_check_watchpoint(CPUState *cpu, uintptr_t retaddr);
+ 
+ #ifdef CONFIG_USER_ONLY
+diff --git a/accel/tcg/tb-maint.c b/accel/tcg/tb-maint.c
+index 3d2a896220..da39a43bd8 100644
+--- a/accel/tcg/tb-maint.c
++++ b/accel/tcg/tb-maint.c
+@@ -1021,7 +1021,7 @@ void tb_invalidate_phys_range(tb_page_addr_t start, tb_page_addr_t last)
+  * Called with mmap_lock held for user-mode emulation
+  * NOTE: this function must not be called while a TB is running.
+  */
+-void tb_invalidate_phys_page(tb_page_addr_t addr)
++static void tb_invalidate_phys_page(tb_page_addr_t addr)
+ {
+     tb_page_addr_t start, last;
+ 
+@@ -1160,28 +1160,6 @@ tb_invalidate_phys_page_range__locked(struct page_collection *pages,
+ #endif
+ }
+ 
+-/*
+- * Invalidate all TBs which intersect with the target physical
+- * address page @addr.
+- */
+-void tb_invalidate_phys_page(tb_page_addr_t addr)
 -{
--#ifndef CONFIG_USER_ONLY
--    /* In system mode we have access to a decent high-resolution clock.
--       In order to make OS-level time accounting work with the RPCC,
--       present it with a well-timed clock fixed at 250MHz.  */
--    return (((uint64_t)env->pcc_ofs << 32)
--            | (uint32_t)(qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) >> 2));
--#else
--    /* In user-mode, QEMU_CLOCK_VIRTUAL doesn't exist.  Just pass through the host cpu
--       clock ticks.  Also, don't bother taking PCC_OFS into account.  */
--    return (uint32_t)cpu_get_host_ticks();
--#endif
+-    struct page_collection *pages;
+-    tb_page_addr_t start, last;
+-    PageDesc *p;
+-
+-    p = page_find(addr >> TARGET_PAGE_BITS);
+-    if (p == NULL) {
+-        return;
+-    }
+-
+-    start = addr & TARGET_PAGE_MASK;
+-    last = addr | ~TARGET_PAGE_MASK;
+-    pages = page_collection_lock(start, last);
+-    tb_invalidate_phys_page_range__locked(pages, p, start, last, 0);
+-    page_collection_unlock(pages);
 -}
 -
- /* PALcode support special instructions */
- #ifndef CONFIG_USER_ONLY
- void helper_tbia(CPUAlphaState *env)
-diff --git a/target/alpha/meson.build b/target/alpha/meson.build
-index d3502dd823..ea252c99a5 100644
---- a/target/alpha/meson.build
-+++ b/target/alpha/meson.build
-@@ -4,6 +4,7 @@ alpha_ss.add(files(
-   'fpu_helper.c',
-   'gdbstub.c',
-   'helper.c',
-+  'clk_helper.c',
-   'int_helper.c',
-   'mem_helper.c',
-   'sys_helper.c',
+ /*
+  * Invalidate all TBs which intersect with the target physical address range
+  * [start;last]. NOTE: start and end may refer to *different* physical pages.
 -- 
 2.41.0
 
