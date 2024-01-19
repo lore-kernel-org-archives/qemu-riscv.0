@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F6D3C47422
-	for <qemu-riscv@archiver.kernel.org>; Thu, 18 Jan 2024 22:40:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AEF1C47422
+	for <qemu-riscv@archiver.kernel.org>; Fri, 19 Jan 2024 03:15:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rQb3m-0003Ox-8n; Thu, 18 Jan 2024 17:40:30 -0500
+	id 1rQfLa-0001OW-Tr; Thu, 18 Jan 2024 22:15:10 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1rQb3l-0003OV-2B
- for qemu-riscv@nongnu.org; Thu, 18 Jan 2024 17:40:29 -0500
-Received: from mail-yb1-xb34.google.com ([2607:f8b0:4864:20::b34])
+ (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
+ id 1rQfLZ-0001O6-2x
+ for qemu-riscv@nongnu.org; Thu, 18 Jan 2024 22:15:09 -0500
+Received: from mail-lf1-x132.google.com ([2a00:1450:4864:20::132])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1rQb3i-0001kS-Up
- for qemu-riscv@nongnu.org; Thu, 18 Jan 2024 17:40:28 -0500
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-dc2308fe275so199547276.1
- for <qemu-riscv@nongnu.org>; Thu, 18 Jan 2024 14:40:26 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
+ id 1rQfLX-00079g-3r
+ for qemu-riscv@nongnu.org; Thu, 18 Jan 2024 22:15:08 -0500
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-50e7c6f0487so303196e87.3
+ for <qemu-riscv@nongnu.org>; Thu, 18 Jan 2024 19:15:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1705617625; x=1706222425;
- darn=nongnu.org; 
+ d=ventanamicro.com; s=google; t=1705634104; x=1706238904; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7Ax+R6EbI+a1jnNIwSZ04wxLUysLiBkhsAMXiU7HmZY=;
- b=O6BKnazs9g9fgEXISO4Rd3VV9tqecBSl6/fuy5H0vNgdd1jbiyRchihTH30mqUxt/W
- GGZHjRkc0+bmAfocJnoQPan7rSJKivJji+qQhijPAf9dqgpd0qu273aH1UN8jvVFRX+r
- jIPqQrCybL3YP3lAYjsoTpX78/r7hnWBtxdZDt/VWJ0x9Js6ALBkTY3rrpflFgmDLcVB
- YG4GHB5w8wwf0VagTiPQLZ9sk0HB5fC6EY3uRY7NUmP6CH1A/pEYcs+YS+xx1rSXOyd6
- jfUQOiXE2U+KxhpWKodjBQvSetZpfe8s4ZPkwAr8nyhMDjsQA4AkKH0F+32ASfqlWa1Y
- rRdg==
+ bh=ewYh7TiCnUJyWocuthrkYf85P3TaGK6aS5vdYzIN6cg=;
+ b=FZIie0JIMjLVJgOkfh3UFqDvOt5osoLQQ66wYMFpksILJnQhH08wBydpPc8oWHvF7o
+ cj3qbg7AcVE7vgeSkXEMDiAhr/DreuQHx8Iq5G1UkRHC5XZyefQ21l9mqFUt+dH8rI4g
+ 26AGW0IdixA9wQyhk+wy+WWjhtjLAGF5eOjFfwKLgauZlra+1Qo6ClVqxpieXV496uaH
+ IQNL6jtW9VGanT9XRbGqsK20zm3YGYjqMJOZhdVUcOhEWwo7S/8ta9jiU6kmccOjC8RO
+ USeupEsGdNr9L4lEQU902c3zl3jabdjqg/hM1kI6PjkkkGyN2MjwFHksG9aBavB5Xwxr
+ hiDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705617625; x=1706222425;
+ d=1e100.net; s=20230601; t=1705634104; x=1706238904;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7Ax+R6EbI+a1jnNIwSZ04wxLUysLiBkhsAMXiU7HmZY=;
- b=bE8jAHYROBbMywhAfZnIqTHdVr2lzVtopYzMWFMuQrLY2MQGmSuEJlaQN0Q2f8eS3E
- qcfrqxUulcHF3xf25A2+tIMM/jatYUe6FcYCzrOzHmxmWTGnmiOBaSeNe3Hg+J9wARUG
- 2wyOamdVaxGz1JozMPElXeIasaJ6tI5pqZWFkm9GpaavwhkBRl9JAKV/rZ2bhowWneEj
- 98vwR3QJJlsVlKEawgpvFhO95jqdcQCd6HVw761MjcPj6s1y2oGv+piEABUPB2JlGJmo
- +lWiMBI5fLqvxLQ20ZUYelDrZxCJED9RuopeH5nyvdTsV98NvusD/+adqNCxGkQt8WNz
- gnjA==
-X-Gm-Message-State: AOJu0YxayhDoaVtp9NDokTL7t8GKQ7SYsuYEhkCknapxYTsyrdo2VVgu
- I21DZrRx11hm7sIHutJSe5Fcb+UXf6AlPotfDm+iGpdylxJoqvxhrJsY9tNDMmCTbxX+/swXrlG
- QeVefJH2H4RC4flTiLeY+iQC1+OtFLGnHegG/Mw==
-X-Google-Smtp-Source: AGHT+IHhFFplzhvq72mJqar8oTkdG+XMDN/NxvBHGYupx3hiJHpMRBs+hfgF/aUrhAA87UcBMGQPCXxn+CyfJMtpRSw=
-X-Received: by 2002:a25:aa8d:0:b0:dc2:4e83:e6a4 with SMTP id
- t13-20020a25aa8d000000b00dc24e83e6a4mr1294879ybi.3.1705617625638; Thu, 18 Jan
- 2024 14:40:25 -0800 (PST)
+ bh=ewYh7TiCnUJyWocuthrkYf85P3TaGK6aS5vdYzIN6cg=;
+ b=bowReLoaVsSZptlRleXSjhDFO8np+wpOA2u6aYRrtZL0DtXaWIAe0IEH88Ug6qDBu1
+ JFagrY/m8eYKMawsevfeqSPWS5vY7noftN8Y+3FyL3VqD0/eM4LGiiebfJeto68s+A20
+ sJAD3+c5VTxPqQKNrCZqjJPTT4sylU24acQmy/vmW8ohRlKus+SxU8uuAFM+ihFwEFS7
+ XLZr11T+2UYeadPVQiJo8ml1c2Fkd4cFCQZrlYjbeFnm2AQUEnMUjeeqIw1r/YCqvVCG
+ KlmXu5d9xOiISHFkXl0YsufO+5hf3yD9N1/nvwI7ZlDxFZZhBhgZEAul9sibbgC6RCC/
+ N/0Q==
+X-Gm-Message-State: AOJu0Ywg9Edxn9jTM1EX88X891cbLti+yQAQDNtjQpoWKrXw+qCcBVeO
+ n2kY8mEN47qPwyC63oY7JJerJ4fQpE455KVQ7R2opVNjxZx1helR/5Dj8RMNxZEz/w17jR2hYS2
+ yY56HDxc8e7TnaGqltV86Q6NfWm2mm6nXfi/Q7Q==
+X-Google-Smtp-Source: AGHT+IGg5vrItO7Mrtv1FiuG8brZqB5A9ijQA9teebxKNloUztm8KuALOyowBR0SskAdMgaF3rYg0KJHeyBZU/s3R1A=
+X-Received: by 2002:a05:6512:3290:b0:50e:78dd:ef53 with SMTP id
+ p16-20020a056512329000b0050e78ddef53mr153523lfe.89.1705634104414; Thu, 18 Jan
+ 2024 19:15:04 -0800 (PST)
 MIME-Version: 1.0
-References: <20240109102930.405323-1-me@deliversmonkey.space>
- <20240109102930.405323-4-me@deliversmonkey.space>
- <CAKC1njSLR614zQk0_DAgYN1jjdg=0eUa7N1AEwwXZVNN6BwjmA@mail.gmail.com>
- <3cb918ca-27cd-4f1e-8738-306dc5280f42@linaro.org>
-In-Reply-To: <3cb918ca-27cd-4f1e-8738-306dc5280f42@linaro.org>
-From: Deepak Gupta <debug@rivosinc.com>
-Date: Thu, 18 Jan 2024 14:40:14 -0800
-Message-ID: <CAKC1njRXPi1Roch=T+NwQk-TOzN=gSjmPh2KCVsemKdex9CamA@mail.gmail.com>
-Subject: Re: [PATCH v4 3/6] target/riscv: Add helper functions to calculate
- current number of masked bits for pointer masking
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: Alexey Baturo <baturo.alexey@gmail.com>, zhiwei_liu@linux.alibaba.com, 
- palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu, 
- kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+References: <20240117142412.1615505-1-hchauhan@ventanamicro.com>
+ <20240117142412.1615505-2-hchauhan@ventanamicro.com>
+In-Reply-To: <20240117142412.1615505-2-hchauhan@ventanamicro.com>
+From: Anup Patel <apatel@ventanamicro.com>
+Date: Fri, 19 Jan 2024 08:44:51 +0530
+Message-ID: <CAK9=C2U40FBJYk3FnW9rK2XJhqedVQyoN4vLVdpsnE_8nW-Ffw@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] target/riscv: Convert sdtrig functionality from
+ property to an extension
+To: Himanshu Chauhan <hchauhan@ventanamicro.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b34;
- envelope-from=debug@rivosinc.com; helo=mail-yb1-xb34.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::132;
+ envelope-from=apatel@ventanamicro.com; helo=mail-lf1-x132.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,67 +91,145 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jan 18, 2024 at 12:50=E2=80=AFPM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Wed, Jan 17, 2024 at 7:54=E2=80=AFPM Himanshu Chauhan
+<hchauhan@ventanamicro.com> wrote:
 >
-> On 1/19/24 04:21, Deepak Gupta wrote:
-> > On Tue, Jan 9, 2024 at 2:31=E2=80=AFAM Alexey Baturo <baturo.alexey@gma=
-il.com> wrote:
-> >>
-> >> From: Alexey Baturo <baturo.alexey@gmail.com>
-> >>
-> >> Signed-off-by: Alexey Baturo <baturo.alexey@gmail.com>
-> >> ---
-> >
-> >> +
-> >> +bool riscv_cpu_virt_mem_enabled(CPURISCVState *env)
-> >> +{
-> >> +    bool virt_mem_en =3D false;
-> >> +#ifndef CONFIG_USER_ONLY
-> >> +    int satp_mode =3D 0;
-> >> +    int priv_mode =3D cpu_address_mode(env);
-> >> +    /* Get current PMM field */
-> >> +    if (riscv_cpu_mxl(env) =3D=3D MXL_RV32) {
-> >> +        satp_mode =3D get_field(env->satp, SATP32_MODE);
-> >> +    } else {
-> >> +        satp_mode =3D get_field(env->satp, SATP64_MODE);
-> >> +    }
-> >> +    virt_mem_en =3D ((satp_mode !=3D VM_1_10_MBARE) && (priv_mode !=
-=3D PRV_M));
-> >> +#endif
-> >> +    return virt_mem_en;
-> >
-> > Obsessing a little bit on how to test PM enabled binaries with qemu-use=
-r.
-> > If we return false above then we're not allowed to test binaries with
-> > pointer masking enabled with qemu-user.
-> > That use case is not required?
+> The debug trigger (sdtrig) capability is controlled using the debug prope=
+rty.
+> The sdtrig is an ISA extension and should be treated so. The sdtrig exten=
+sion
+> may or may not be implemented in a system. Therefore, it must raise an il=
+legal
+> instruction exception when it is disabled and its CSRs are accessed.
 >
-> In a previous round I suggested that the ifdefs are not necessary.
-> But for now it will always be off for qemu-user.
+> This patch removes the "debug" property and replaces it with ext_sdtrig e=
+xtension.
+> It also raises an illegal instruction exception when the extension is dis=
+abled and
+> its CSRs are accessed.
 >
-> At some point pointer masking will be in hardware, and the kernel will ga=
-in support for
-> it, and there will likely be a prctl() added for it.  At the point the ke=
-rnel finalizes
-> the API, you will be able to enable pointer masking for qemu-user.
+> Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
+> ---
+>  target/riscv/cpu.c        | 7 +++----
+>  target/riscv/cpu_cfg.h    | 2 +-
+>  target/riscv/cpu_helper.c | 2 +-
+>  target/riscv/csr.c        | 2 +-
+>  target/riscv/machine.c    | 2 +-
+>  5 files changed, 7 insertions(+), 8 deletions(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index b07a76ef6b..c770a7e506 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -909,7 +909,7 @@ static void riscv_cpu_reset_hold(Object *obj)
+>      set_default_nan_mode(1, &env->fp_status);
+>
+>  #ifndef CONFIG_USER_ONLY
+> -    if (cpu->cfg.debug) {
+> +    if (cpu->cfg.ext_sdtrig) {
+>          riscv_trigger_reset_hold(env);
+>      }
+>
+> @@ -1068,7 +1068,7 @@ static void riscv_cpu_realize(DeviceState *dev, Err=
+or **errp)
+>      riscv_cpu_register_gdb_regs_for_features(cs);
+>
+>  #ifndef CONFIG_USER_ONLY
+> -    if (cpu->cfg.debug) {
+> +    if (cpu->cfg.ext_sdtrig) {
+>          riscv_trigger_realize(&cpu->env);
+>      }
+>  #endif
+> @@ -1393,6 +1393,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[=
+] =3D {
+>
+>  /* These are experimental so mark with 'x-' */
+>  const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] =3D {
+> +    MULTI_EXT_CFG_BOOL("x-sdtrig", ext_sdtrig, true),
 
-I am sure I am missing some important detail here, BUT...
+Drop the "x-" because Sdtrig is already frozen and public review has starte=
+d.
 
-How is it different from aarch64 "top byte ignore".
-I think commit: 16c8497 enables top byte ignore for user pointers and
-by default for qemu-user for aarch64 target.
-
-IIRC, user <--> kernel abi is only needed for pointers that are passed
-to the kernel.
-
-And in the case of qemu-user, we are talking about the host kernel.
-Since arm64 had TBI enabled for qemu-user for a while and I imagine it
-works on x86 host kernel
-(assuming qemu-user is sanitizing pointers)
-Same should work for risc-v qemu-user, right?
-
+>      MULTI_EXT_CFG_BOOL("x-smaia", ext_smaia, false),
+>      MULTI_EXT_CFG_BOOL("x-ssaia", ext_ssaia, false),
+>
+> @@ -1480,8 +1481,6 @@ Property riscv_cpu_options[] =3D {
+>  };
+>
+>  static Property riscv_cpu_properties[] =3D {
+> -    DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
+> -
+>  #ifndef CONFIG_USER_ONLY
+>      DEFINE_PROP_UINT64("resetvec", RISCVCPU, env.resetvec, DEFAULT_RSTVE=
+C),
+>  #endif
+> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> index f4605fb190..341ebf726a 100644
+> --- a/target/riscv/cpu_cfg.h
+> +++ b/target/riscv/cpu_cfg.h
+> @@ -109,6 +109,7 @@ struct RISCVCPUConfig {
+>      bool ext_zvfbfwma;
+>      bool ext_zvfh;
+>      bool ext_zvfhmin;
+> +    bool ext_sdtrig;
+>      bool ext_smaia;
+>      bool ext_ssaia;
+>      bool ext_sscofpmf;
+> @@ -145,7 +146,6 @@ struct RISCVCPUConfig {
+>      uint16_t cboz_blocksize;
+>      bool mmu;
+>      bool pmp;
+> -    bool debug;
+>      bool misa_w;
+>
+>      bool short_isa_string;
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index e7e23b34f4..3f7c2f1315 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -126,7 +126,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *=
+pc,
+>               ? EXT_STATUS_DIRTY : EXT_STATUS_DISABLED;
+>      }
+>
+> -    if (cpu->cfg.debug && !icount_enabled()) {
+> +    if (cpu->cfg.ext_sdtrig && !icount_enabled()) {
+>          flags =3D FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_en=
+abled);
+>      }
+>  #endif
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index c50a33397c..8dbb49aa88 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -543,7 +543,7 @@ static RISCVException have_mseccfg(CPURISCVState *env=
+, int csrno)
+>
+>  static RISCVException debug(CPURISCVState *env, int csrno)
+>  {
+> -    if (riscv_cpu_cfg(env)->debug) {
+> +    if (riscv_cpu_cfg(env)->ext_sdtrig) {
+>          return RISCV_EXCP_NONE;
+>      }
+>
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index 72fe2374dc..8f9787a30f 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -231,7 +231,7 @@ static bool debug_needed(void *opaque)
+>  {
+>      RISCVCPU *cpu =3D opaque;
+>
+> -    return cpu->cfg.debug;
+> +    return cpu->cfg.ext_sdtrig;
+>  }
+>
+>  static int debug_post_load(void *opaque, int version_id)
+> --
+> 2.34.1
 >
 >
-> r~
+
+Regards,
+Anup
 
