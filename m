@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 859DCC47DAF
-	for <qemu-riscv@archiver.kernel.org>; Fri, 19 Jan 2024 11:37:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0D9BC47DAF
+	for <qemu-riscv@archiver.kernel.org>; Fri, 19 Jan 2024 11:38:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rQnBt-0007TQ-Qp; Fri, 19 Jan 2024 06:37:41 -0500
+	id 1rQnBh-0006z8-MR; Fri, 19 Jan 2024 06:37:29 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQnBs-0007S9-A5
- for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 06:37:40 -0500
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQnBf-0006eZ-1U
+ for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 06:37:27 -0500
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQnBq-000388-IB
- for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 06:37:40 -0500
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-40e9d4ab5f3so6341225e9.2
- for <qemu-riscv@nongnu.org>; Fri, 19 Jan 2024 03:37:38 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rQnBd-00032L-4Q
+ for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 06:37:26 -0500
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-40e9101b5f9so7133655e9.3
+ for <qemu-riscv@nongnu.org>; Fri, 19 Jan 2024 03:37:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705664257; x=1706269057; darn=nongnu.org;
+ d=linaro.org; s=google; t=1705664243; x=1706269043; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gdcgrGS7kL0CXr2CCXnG/ae/hIrP2R+qiFCnst8/G2g=;
- b=Lv0xOUsR8jSnPsTMMFjE5j1Jtl60ljrC2zftr1b+GX1sTsjNi+mxM4ajbRvvdTq6en
- YknxEbKnB7kD6Hghij0oPqZvSHxsvpg3+fcGdLcdSNc5acb9Fd5HQpCaQbj1igcxBllu
- YEhf3YD28a11MFlDvMNjIn7zianxhp9HxBt4B1AOuCXmdPGfZST9TYIITI7PNnsIT5Qw
- ROzv02W7BljapvtbShWakoG9yACgDU5WghtaM6QcBzC/DfWZvL3upM0q/wUKzkE8dIQt
- m0FmpFld07A1UXaPAkjHzXfBNVBCrcKNTKv2Eaw7OqbesxOxIWu8fgJl2UXQZt/PWLD9
- GAzg==
+ bh=OAd+hsmqGnC7BEM4hV/k6DWbPNlhhbttEWZwCPVCQ9Y=;
+ b=n6xOaMdSS8y0qzi5fI0HInImnj5gJ+72vuHTDC0yA7lGP4Q49I738O3BJRhvzWFIbY
+ Z8yyjC7MAE529qxGo+27gDKz/pI7AABnhs61gKoFcEZFvy+KdH0W4QggKju5Pww4nVd/
+ mmKTgwWurKF+IaPjOYmcOyTiCAk6yDm9v7BKK9nGm4pZN2WnPbO0tD+epBZcDNs2kNLH
+ 53DVniaBokY+JG3HkonwgNdP5YIRz/4cVr9HjZ09cjTOYcKcYpOUH3wvSAK+z/PBcQvp
+ tT5wypFdK7wg8XO1DSXsihrKpKHf8RSzbjuvJuDmXaZEdMQNn2C2RJLE2wm9pblQAl5X
+ IeLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705664257; x=1706269057;
+ d=1e100.net; s=20230601; t=1705664244; x=1706269044;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gdcgrGS7kL0CXr2CCXnG/ae/hIrP2R+qiFCnst8/G2g=;
- b=vpxGGvIXC5FtnplELU3xoXfFr+vUzrTEMPIH6NkXyf7URKOpjd5o5RyJ0PtOFBJfkV
- 4w5wOsmUle9S8myD+gwXDBE8G4ZZDZohB1YJTuFC8E7M9PzpJGjl0+T2Iqc+b0dbSpiH
- CmNDYbzgfRw8f099uy+9wnvbiHUu4mJZ4ARAcI0BEXCmv0lDReibOS/DoMv79SXLfhnX
- ixawqxYXjbonbIrWetVR4+TfMhXH3IfidgO2X2n88bvdijscxVpl5KUVmc0lXOax++yi
- NMxOOS0DshRf1+Dxf9546rxakgQ0prbhJdfkgg10TJeX9sdYlbvRyV1AaohHlYI5gcvd
- 02Vw==
-X-Gm-Message-State: AOJu0YzUB6Uo48bIfOmZpzJrSr0oSMypz8ZeumqmSGuC78JBtnBCM6/P
- uwfg+/ujPWmhgrxh0dtLQsO6+cV/ee/Vn4HfGG9AF6LJvM0VcPmIFk2iY/UYimQa9tpsCvtSocE
- W0/6Jhw==
-X-Google-Smtp-Source: AGHT+IENvoMQug95mCHXVpi+b44bKuO934CBuAz7EsoeistjipxTzDoyjJW5sWeZD96g7cmRskYsRA==
-X-Received: by 2002:a05:600c:4656:b0:40e:87fe:79d8 with SMTP id
- n22-20020a05600c465600b0040e87fe79d8mr1523223wmo.59.1705664257252; 
- Fri, 19 Jan 2024 03:37:37 -0800 (PST)
+ bh=OAd+hsmqGnC7BEM4hV/k6DWbPNlhhbttEWZwCPVCQ9Y=;
+ b=LBA+CJlcgP87wtLz0ygINzIB9TYZIE+HZY0avb+/tFATfTKwUf6E8zAW9yiD6URPE3
+ O/pL+r8D+P7qi1nNUJCAl5wOm0mgLfJMJa0cfIfYJaaCDDoD4XeTVwp9pAG9CwNW03cW
+ J6XZ6jGIIvEQK6m312Yd7Op33CmpBVLF71h4eoFhMUWD3gzTRZmTCTwHThMvLd7RWXY3
+ XhmIoFXwSlKdrE1TE7s8s95/MjA4blL8ZGhyHsqtl16yGTYWWPdrXalJ1CWzV7ZUuLvO
+ Je8NRG/oyLFMVkdXIvFBNSxGohzHn2+59mcXPdhaRQLs58U/hSvc+b+eMm0LUv9z4hzW
+ zm5A==
+X-Gm-Message-State: AOJu0YwWgnsrEGkhPbMuagBzbLRbWV/vqIDg/QxIVtAOKgux9Hx8W6wa
+ PleNbuh5TJa42bVZsdwjKJ2ALMbrrfc08oy66iucI9ow3lVr4m/hSZdbrBG1nIQ=
+X-Google-Smtp-Source: AGHT+IGMDAP70U/XWC2BDJOVuyM0qbZRpEV866bp7+zl1QT7cGWhh+JVskkaK0dz8hJJoVpnkafhMA==
+X-Received: by 2002:a7b:c3c7:0:b0:40e:5280:2ebc with SMTP id
+ t7-20020a7bc3c7000000b0040e52802ebcmr1254778wmj.152.1705664243768; 
+ Fri, 19 Jan 2024 03:37:23 -0800 (PST)
 Received: from localhost.localdomain (91-163-26-170.subs.proxad.net.
  [91.163.26.170]) by smtp.gmail.com with ESMTPSA id
- i6-20020adffc06000000b003375009accesm6301614wrr.50.2024.01.19.03.37.36
+ f6-20020a05600c4e8600b0040d6ffae526sm32950428wmq.39.2024.01.19.03.37.23
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 19 Jan 2024 03:37:36 -0800 (PST)
+ Fri, 19 Jan 2024 03:37:23 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, qemu-block@nongnu.org,
- qemu-arm@nongnu.org, Bin Meng <bmeng@tinylab.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PULL 33/36] hw/elf_ops: Ignore loadable segments with zero size
-Date: Fri, 19 Jan 2024 12:35:02 +0100
-Message-ID: <20240119113507.31951-34-philmd@linaro.org>
+ qemu-arm@nongnu.org, Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Guenter Roeck <linux@roeck-us.net>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Fam Zheng <fam@euphon.net>
+Subject: [PULL 30/36] hw/scsi/esp-pci: generate PCI interrupt from separate
+ ESP and PCI sources
+Date: Fri, 19 Jan 2024 12:34:59 +0100
+Message-ID: <20240119113507.31951-31-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240119113507.31951-1-philmd@linaro.org>
 References: <20240119113507.31951-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x334.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,132 +97,104 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Bin Meng <bmeng@tinylab.org>
+From: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
 
-Some ELF files really do have segments of zero size, e.g.:
+The am53c974/dc390 PCI interrupt has two separate sources: the first is from the
+internal ESP device, and the second is from the PCI DMA transfer logic.
 
-Program Headers:
-  Type           Offset             VirtAddr           PhysAddr
-                 FileSiz            MemSiz              Flags  Align
-  RISCV_ATTRIBUT 0x00000000000025b8 0x0000000000000000 0x0000000000000000
-                 0x000000000000003e 0x0000000000000000  R      0x1
-  LOAD           0x0000000000001000 0x0000000080200000 0x0000000080200000
-                 0x00000000000001d1 0x00000000000001d1  R E    0x1000
-  LOAD           0x00000000000011d1 0x00000000802001d1 0x00000000802001d1
-                 0x0000000000000e37 0x0000000000000e37  RW     0x1000
-  LOAD           0x0000000000000120 0x0000000000000000 0x0000000000000000
-                 0x0000000000000000 0x0000000000000000         0x1000
+Update the ESP interrupt handler so that it sets DMA_STAT_SCSIINT rather than
+driving the PCI IRQ directly, and introduce a new esp_pci_update_irq() function
+to generate the correct PCI IRQ level. In particular this fixes spurious interrupts
+being generated by setting DMA_STAT_DONE at the end of a transfer if DMA_CMD_INTE_D
+isn't set in the DMA_CMD register.
 
-The current logic does not check for this condition, resulting in
-the incorrect assignment of 'lowaddr' as zero.
-
-There is already a piece of codes inside the segment traversal loop
-that checks for zero-sized loadable segments for not creating empty
-ROM blobs. Let's move this check to the beginning of the loop to
-cover both scenarios.
-
-Signed-off-by: Bin Meng <bmeng@tinylab.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <20240116155049.390301-1-bmeng@tinylab.org>
+Signed-off-by: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
+Reviewed-by: Guenter Roeck <linux@roeck-us.net>
+Tested-by: Guenter Roeck <linux@roeck-us.net>
+Message-ID: <20240112131529.515642-3-mark.cave-ayland@ilande.co.uk>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/hw/elf_ops.h | 71 +++++++++++++++++++++++---------------------
- 1 file changed, 37 insertions(+), 34 deletions(-)
+ hw/scsi/esp-pci.c | 32 +++++++++++++++++++++++++++-----
+ 1 file changed, 27 insertions(+), 5 deletions(-)
 
-diff --git a/include/hw/elf_ops.h b/include/hw/elf_ops.h
-index 9c35d1b9da..3e966ddd5a 100644
---- a/include/hw/elf_ops.h
-+++ b/include/hw/elf_ops.h
-@@ -427,6 +427,16 @@ static ssize_t glue(load_elf, SZ)(const char *name, int fd,
-             file_size = ph->p_filesz; /* Size of the allocated data */
-             data_offset = ph->p_offset; /* Offset where the data is located */
+diff --git a/hw/scsi/esp-pci.c b/hw/scsi/esp-pci.c
+index 7117725371..15dc3c004d 100644
+--- a/hw/scsi/esp-pci.c
++++ b/hw/scsi/esp-pci.c
+@@ -77,6 +77,29 @@ struct PCIESPState {
+     ESPState esp;
+ };
  
-+            /*
-+             * Some ELF files really do have segments of zero size;
-+             * just ignore them rather than trying to set the wrong addr,
-+             * or create empty ROM blobs, because the zero-length blob can
-+             * falsely trigger the overlapping-ROM-blobs check.
-+             */
-+            if (mem_size == 0) {
-+                continue;
-+            }
++static void esp_pci_update_irq(PCIESPState *pci)
++{
++    int scsi_level = !!(pci->dma_regs[DMA_STAT] & DMA_STAT_SCSIINT);
++    int dma_level = (pci->dma_regs[DMA_CMD] & DMA_CMD_INTE_D) ?
++                    !!(pci->dma_regs[DMA_STAT] & DMA_STAT_DONE) : 0;
++    int level = scsi_level || dma_level;
 +
-             if (file_size > 0) {
-                 if (g_mapped_file_get_length(mapped_file) <
-                     file_size + data_offset) {
-@@ -530,45 +540,38 @@ static ssize_t glue(load_elf, SZ)(const char *name, int fd,
-                 *pentry = ehdr.e_entry - ph->p_vaddr + ph->p_paddr;
-             }
++    pci_set_irq(PCI_DEVICE(pci), level);
++}
++
++static void esp_irq_handler(void *opaque, int irq_num, int level)
++{
++    PCIESPState *pci = PCI_ESP(opaque);
++
++    if (level) {
++        pci->dma_regs[DMA_STAT] |= DMA_STAT_SCSIINT;
++    } else {
++        pci->dma_regs[DMA_STAT] &= ~DMA_STAT_SCSIINT;
++    }
++
++    esp_pci_update_irq(pci);
++}
++
+ static void esp_pci_handle_idle(PCIESPState *pci, uint32_t val)
+ {
+     ESPState *s = &pci->esp;
+@@ -151,6 +174,7 @@ static void esp_pci_dma_write(PCIESPState *pci, uint32_t saddr, uint32_t val)
+             /* clear some bits on write */
+             uint32_t mask = DMA_STAT_ERROR | DMA_STAT_ABORT | DMA_STAT_DONE;
+             pci->dma_regs[DMA_STAT] &= ~(val & mask);
++            esp_pci_update_irq(pci);
+         }
+         break;
+     default:
+@@ -161,17 +185,14 @@ static void esp_pci_dma_write(PCIESPState *pci, uint32_t saddr, uint32_t val)
  
--            /* Some ELF files really do have segments of zero size;
--             * just ignore them rather than trying to create empty
--             * ROM blobs, because the zero-length blob can falsely
--             * trigger the overlapping-ROM-blobs check.
--             */
--            if (mem_size != 0) {
--                if (load_rom) {
--                    g_autofree char *label =
--                        g_strdup_printf("%s ELF program header segment %d",
--                                        name, i);
-+            if (load_rom) {
-+                g_autofree char *label =
-+                    g_strdup_printf("%s ELF program header segment %d",
-+                                    name, i);
+ static uint32_t esp_pci_dma_read(PCIESPState *pci, uint32_t saddr)
+ {
+-    ESPState *s = &pci->esp;
+     uint32_t val;
  
--                    /*
--                     * rom_add_elf_program() takes its own reference to
--                     * 'mapped_file'.
--                     */
--                    rom_add_elf_program(label, mapped_file, data, file_size,
--                                        mem_size, addr, as);
--                } else {
--                    MemTxResult res;
-+                /*
-+                 * rom_add_elf_program() takes its own reference to
-+                 * 'mapped_file'.
-+                 */
-+                rom_add_elf_program(label, mapped_file, data, file_size,
-+                                    mem_size, addr, as);
-+            } else {
-+                MemTxResult res;
+     val = pci->dma_regs[saddr];
+     if (saddr == DMA_STAT) {
+-        if (s->rregs[ESP_RSTAT] & STAT_INT) {
+-            val |= DMA_STAT_SCSIINT;
+-        }
+         if (!(pci->sbac & SBAC_STATUS)) {
+             pci->dma_regs[DMA_STAT] &= ~(DMA_STAT_ERROR | DMA_STAT_ABORT |
+                                          DMA_STAT_DONE);
++            esp_pci_update_irq(pci);
+         }
+     }
  
--                    res = address_space_write(as ? as : &address_space_memory,
--                                              addr, MEMTXATTRS_UNSPECIFIED,
--                                              data, file_size);
-+                res = address_space_write(as ? as : &address_space_memory,
-+                                          addr, MEMTXATTRS_UNSPECIFIED,
-+                                          data, file_size);
-+                if (res != MEMTX_OK) {
-+                    goto fail;
-+                }
-+                /*
-+                 * We need to zero'ify the space that is not copied
-+                 * from file
-+                 */
-+                if (file_size < mem_size) {
-+                    res = address_space_set(as ? as : &address_space_memory,
-+                                            addr + file_size, 0,
-+                                            mem_size - file_size,
-+                                            MEMTXATTRS_UNSPECIFIED);
-                     if (res != MEMTX_OK) {
-                         goto fail;
-                     }
--                    /*
--                     * We need to zero'ify the space that is not copied
--                     * from file
--                     */
--                    if (file_size < mem_size) {
--                        res = address_space_set(as ? as : &address_space_memory,
--                                                addr + file_size, 0,
--                                                mem_size - file_size,
--                                                MEMTXATTRS_UNSPECIFIED);
--                        if (res != MEMTX_OK) {
--                            goto fail;
--                        }
--                    }
-                 }
-             }
+@@ -350,6 +371,7 @@ static void esp_pci_command_complete(SCSIRequest *req, size_t resid)
+     esp_command_complete(req, resid);
+     pci->dma_regs[DMA_WBC] = 0;
+     pci->dma_regs[DMA_STAT] |= DMA_STAT_DONE;
++    esp_pci_update_irq(pci);
+ }
  
+ static const struct SCSIBusInfo esp_pci_scsi_info = {
+@@ -386,7 +408,7 @@ static void esp_pci_scsi_realize(PCIDevice *dev, Error **errp)
+                           "esp-io", 0x80);
+ 
+     pci_register_bar(dev, 0, PCI_BASE_ADDRESS_SPACE_IO, &pci->io);
+-    s->irq = pci_allocate_irq(dev);
++    s->irq = qemu_allocate_irq(esp_irq_handler, pci, 0);
+ 
+     scsi_bus_init(&s->bus, sizeof(s->bus), d, &esp_pci_scsi_info);
+ }
 -- 
 2.41.0
 
