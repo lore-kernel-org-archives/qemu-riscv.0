@@ -4,77 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F059C4725D
-	for <qemu-riscv@archiver.kernel.org>; Fri, 19 Jan 2024 16:42:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ACEAC47258
+	for <qemu-riscv@archiver.kernel.org>; Sat, 20 Jan 2024 07:37:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rQrwQ-0007iO-Dv; Fri, 19 Jan 2024 11:42:02 -0500
+	id 1rR5vC-00010n-T4; Sat, 20 Jan 2024 02:37:42 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1rQrwF-0007Yh-M8
- for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 11:41:53 -0500
-Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rR5vB-00010M-R8
+ for qemu-riscv@nongnu.org; Sat, 20 Jan 2024 02:37:41 -0500
+Received: from mail-oi1-x234.google.com ([2607:f8b0:4864:20::234])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1rQrwB-00026g-9O
- for qemu-riscv@nongnu.org; Fri, 19 Jan 2024 11:41:50 -0500
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-559de6145c3so1109519a12.1
- for <qemu-riscv@nongnu.org>; Fri, 19 Jan 2024 08:41:37 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rR5v9-0005Sb-LY
+ for qemu-riscv@nongnu.org; Sat, 20 Jan 2024 02:37:40 -0500
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-3bda6c92ce7so765469b6e.2
+ for <qemu-riscv@nongnu.org>; Fri, 19 Jan 2024 23:37:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705682496; x=1706287296; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Rd/sNQHqIi3M1PSH7+a0qNGw3PD0Eadt0z8LVLPgO5U=;
- b=kcJJZuAXyg5HMm3oPjDyO5esS9JeOcUlnVJcQlq13ajouzP7U7lVKIPbFdr/1Q5rd3
- 0id3QFggShbmxFGuOMQo+IjDWymgGjzlbX0rMAjGDlCzXMLQvwYZ+gnl3JGj+ISo4yc3
- 99Zxy/uSOjlY+EU7c9AyFrdXeH4gXIgPOl4+XqDwaR0aTk55ZqqrjfWjbsTq2b7vKC8e
- dHf4c0/+tcsYj8LHvIUEkrQATm3krqtH2ATySIvS9pHqCHKL8YPqTiyrssjN3uE+i/kH
- w3JgJ041epaKA/P8qAbKtqSa8vhh9gCEDtrXoGS3XnEFdu/eqh2KEFazbQ+NdffWJMwv
- b1bw==
+ d=linaro.org; s=google; t=1705736257; x=1706341057; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=yK+7e3y3bv5eqHe1DA+NBJet8+lXvBvaGRGybBVRlyw=;
+ b=ZcYz0zjKXtAr3Ab4bpBYgt81OAveOQyta1D1moBLJqbzqMxYctr12k6feFPHPrmQWC
+ cEv4Mv9/H4tRl0RlfHAOBKO5VhIkHTX0eR07T5pi6TOlyi2GYyxhSyisx1yhtijVf+sB
+ wJmIv2vDIcATwiNDXIkl4rpSN2utxprfJkmjQUFvZEieipA80LvoR3kDOiz874TTigUk
+ dHcaDKMrue3VPk6mpvuKTkldys1yv66MSdQ/LlJ/kuxmx89/BoMmUc5xKuDGB7VK3Jtc
+ RZJWSAR8I/sF3nVAxaHyMwn63Fs7sNfBGOHUWRbXbZ38R2D+ExPnsCNtdvcxSXcokhrJ
+ Jvxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705682496; x=1706287296;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Rd/sNQHqIi3M1PSH7+a0qNGw3PD0Eadt0z8LVLPgO5U=;
- b=NOzoQhBRGz/RMsMKy+qseX7POt534bttUnlBXBV3Ras1Whuf8Fnl2OsL62RxHkT0R6
- TPGSwat9h9HciAxj2c0VgSmH0PrnbkJf5UBY1QeJJ/h5QexUymtkJDgRluHxM+W0HhcD
- qBpi8sXz6UySaeWJFTASqjDmuNb9bl7fcSyyqNyprwOoiTRfuaSK36wrnu0l2Zw41/j+
- 7t92Lg17Sfqi6EsYCv49vtFT1Cl1RNY05a8pCykOT2nE+byoJnvKj9LrfvPrh5+NUoVQ
- H0CdYty1ApPinUxtJUmdZS91UTwL/ifh/hwBddsFnry8kibfJH5R9EgYJcJeqFZ+YpG0
- kZ5w==
-X-Gm-Message-State: AOJu0Yz5PaRUILQaRdfYg7nOjBJcJ/T1LYqRGQ5dXg2MCNsC28eyc0dc
- 6s5nnOedwhW7iuE0nPf+Opcy28QXWNAuJqZWud0SkbuIkbLVn5BRIRoj3/GVkvA4tCskiGD5O3I
- QQLquvaHoiTT3Z/5MIqVtR56Z6dPJnKSGIzEuiA==
-X-Google-Smtp-Source: AGHT+IGcrThxjVlJNx5ohBlAmFYV5SVUSGb/C0detyIdcSLCGwAB8MrCuY6gjVvnqxHmKi/bV7+/pjK+qTJsP/lfoXo=
-X-Received: by 2002:a05:6402:b52:b0:559:f34f:8404 with SMTP id
- bx18-20020a0564020b5200b00559f34f8404mr28825edb.23.1705682496745; Fri, 19 Jan
- 2024 08:41:36 -0800 (PST)
+ d=1e100.net; s=20230601; t=1705736257; x=1706341057;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=yK+7e3y3bv5eqHe1DA+NBJet8+lXvBvaGRGybBVRlyw=;
+ b=mQHxLwCfuY48fb3R9ehlXnsTPXuYxPpWAL89Gxg+LquuenPWuP/ZFjEZ94NtIgwQEa
+ lMgr1UzDNSCHLTWPo2p0B8DU9CgG3EAOAhNIJmh+sSIizbZgU0ElQtrUmI3Frzq8zsoW
+ ZdZaWargX1NkXd6Mi1Y8mS8Gb5mAra+lHf1R0eVn8wTSYIvQMhrQLYcZvyg5LoeyIlz8
+ n+hSxbo8E5KQNJs4inT25mR0o5VNzKDMQZ6r2b4a7fwD0puwoX+ZgWnyKhFQ2EjGVldy
+ enyR7byfD0k5LgeXP+GD3iufwq/YeMwaMREMSsiLGrtLr0itpWsfV6Mkg0AnxUmXnSit
+ XX3g==
+X-Gm-Message-State: AOJu0YwATo1DNEIs4fh3ax67hXdukjQ8QMD0A/hpNTuZfg8tM3hfSxxX
+ HUK1e/pgt/FtOIBOvT5mFfXvdXJfnzXFXa13IIYfLtSh0Qnp4LNJZZalBuCgFS8=
+X-Google-Smtp-Source: AGHT+IGIpkqmzGRYw35IXJEiuoHs3H1mO/uOXiL3/Wch80Lp671rF4ONS3T32gjcjd5m54UNaU7VPA==
+X-Received: by 2002:a05:6808:1812:b0:3bd:a82a:a827 with SMTP id
+ bh18-20020a056808181200b003bda82aa827mr1501287oib.7.1705736257421; 
+ Fri, 19 Jan 2024 23:37:37 -0800 (PST)
+Received: from ?IPV6:2001:8004:5170:1e39:8ee2:6e6b:fea2:d3ab?
+ ([2001:8004:5170:1e39:8ee2:6e6b:fea2:d3ab])
+ by smtp.gmail.com with ESMTPSA id
+ y37-20020a634965000000b005ceeeea1816sm4693980pgk.77.2024.01.19.23.37.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 19 Jan 2024 23:37:36 -0800 (PST)
+Message-ID: <5b6571d3-f654-488d-9dc5-0d18ba542e05@linaro.org>
+Date: Sat, 20 Jan 2024 18:37:27 +1100
 MIME-Version: 1.0
-References: <20240119113507.31951-1-philmd@linaro.org>
-In-Reply-To: <20240119113507.31951-1-philmd@linaro.org>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Fri, 19 Jan 2024 16:41:25 +0000
-Message-ID: <CAFEAcA8JxJv7W1428eTaoereL6beSX0ET=zCih8CJ-Ni9QBrGA@mail.gmail.com>
-Subject: Re: [PULL 00/36] HW core patches for 2024-01-19
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, 
- qemu-block@nongnu.org, qemu-arm@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::529;
- envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x529.google.com
-X-Spam_score_int: 4
-X-Spam_score: 0.4
-X-Spam_bar: /
-X-Spam_report: (0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001, SUSPICIOUS_RECIPS=2.51,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 3/6] target/riscv: Add helper functions to calculate
+ current number of masked bits for pointer masking
+To: Deepak Gupta <debug@rivosinc.com>
+Cc: Alexey Baturo <baturo.alexey@gmail.com>, zhiwei_liu@linux.alibaba.com,
+ palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+References: <20240109102930.405323-1-me@deliversmonkey.space>
+ <20240109102930.405323-4-me@deliversmonkey.space>
+ <CAKC1njSLR614zQk0_DAgYN1jjdg=0eUa7N1AEwwXZVNN6BwjmA@mail.gmail.com>
+ <3cb918ca-27cd-4f1e-8738-306dc5280f42@linaro.org>
+ <CAKC1njRXPi1Roch=T+NwQk-TOzN=gSjmPh2KCVsemKdex9CamA@mail.gmail.com>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <CAKC1njRXPi1Roch=T+NwQk-TOzN=gSjmPh2KCVsemKdex9CamA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::234;
+ envelope-from=richard.henderson@linaro.org; helo=mail-oi1-x234.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -90,59 +103,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, 19 Jan 2024 at 11:37, Philippe Mathieu-Daud=C3=A9 <philmd@linaro.or=
-g> wrote:
->
-> The following changes since commit 88cf5fec91e50cd34bc002b633b4116228db0b=
-c8:
->
->   Merge tag 'pull-target-arm-20240118' of https://git.linaro.org/people/p=
-maydell/qemu-arm into staging (2024-01-18 12:48:17 +0000)
->
-> are available in the Git repository at:
->
->   https://github.com/philmd/qemu.git tags/hw-cpus-20240119
->
-> for you to fetch changes up to 7ec5d7d91215815e885d2b38e62256e8fd8e2bce:
->
->   configure: Add linux header compile support for LoongArch (2024-01-19 1=
-2:28:59 +0100)
->
-> ----------------------------------------------------------------
-> HW core patch queue
->
-> . Deprecate unmaintained SH-4 models (Samuel)
-> . HPET: Convert DPRINTF calls to trace events (Daniel)
-> . Implement buffered block writes in Intel PFlash (Gerd)
-> . Ignore ELF loadable segments with zero size (Bin)
-> . ESP/NCR53C9x: PCI DMA fixes (Mark)
-> . PIIX: Simplify Xen PCI IRQ routing (Bernhard)
-> . Restrict CPU 'start-powered-off' property to sysemu (Phil)
->
-> . target/alpha: Only build sys_helper.c on system emulation (Phil)
-> . target/xtensa: Use generic instruction breakpoint API & add test (Max)
-> . Restrict icount to system emulation (Phil)
-> . Do not set CPUState TCG-specific flags in non-TCG accels (Phil)
-> . Cleanup TCG tb_invalidate API (Phil)
-> . Correct LoongArch/KVM include path (Bibo)
-> . Do not ignore throttle errors in crypto backends (Phil)
->
-> . MAINTAINERS updates (Raphael, Zhao)
->
-> Note the following checkpatch error is deliberately ignored:
->
->   ERROR: space prohibited after that '&&' (ctx:ExW)
->   #143: FILE: accel/tcg/watchpoint.c:119:
->   +                && cc->tcg_ops->debug_check_watchpoint
->                    ^
-> ----------------------------------------------------------------
->
+On 1/19/24 09:40, Deepak Gupta wrote:
+> On Thu, Jan 18, 2024 at 12:50 PM Richard Henderson
+> <richard.henderson@linaro.org> wrote:
+>> At some point pointer masking will be in hardware, and the kernel will gain support for
+>> it, and there will likely be a prctl() added for it.  At the point the kernel finalizes
+>> the API, you will be able to enable pointer masking for qemu-user.
+> 
+> I am sure I am missing some important detail here, BUT...
+> 
+> How is it different from aarch64 "top byte ignore".
+
+It is very similar, yes.
+
+> I think commit: 16c8497 enables top byte ignore for user pointers and
+> by default for qemu-user for aarch64 target.
+
+Not quite, no.
+
+commit 0e0c030c681730f3ec55ba3b223b608a8f3e8282
+Author: Richard Henderson <richard.henderson@linaro.org>
+Date:   Fri Feb 12 10:48:51 2021 -0800
+
+     linux-user/aarch64: Implement PR_TAGGED_ADDR_ENABLE
+
+is more relevant.
+
+> IIRC, user <--> kernel abi is only needed for pointers that are passed
+> to the kernel.
+
+It is also needed to *enable* pointer masking at all.
+
+For aarch64, TBI has been enabled for user-space since the beginning, but that is not true 
+for riscv.  Therefore there will be a need for a syscall to opt in and enable pointer masking.
+
+> And in the case of qemu-user, we are talking about the host kernel.
+
+No, we are not.  We are always emulating the guest kernel.
 
 
-Applied, thanks.
-
-Please update the changelog at https://wiki.qemu.org/ChangeLog/9.0
-for any user-visible changes.
-
--- PMM
+r~
 
