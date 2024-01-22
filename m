@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01020C47DD9
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 02:56:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39A2DC47DD3
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 02:59:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rRkUZ-000194-Q2; Sun, 21 Jan 2024 21:56:55 -0500
+	id 1rRkWO-0002HL-Ap; Sun, 21 Jan 2024 21:58:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rRkUX-00017y-V2; Sun, 21 Jan 2024 21:56:53 -0500
-Received: from mail-vk1-xa2f.google.com ([2607:f8b0:4864:20::a2f])
+ id 1rRkWM-0002Gp-GS; Sun, 21 Jan 2024 21:58:46 -0500
+Received: from mail-vs1-xe33.google.com ([2607:f8b0:4864:20::e33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rRkUW-0003Gj-F5; Sun, 21 Jan 2024 21:56:53 -0500
-Received: by mail-vk1-xa2f.google.com with SMTP id
- 71dfb90a1353d-4b72e63821eso2172667e0c.1; 
- Sun, 21 Jan 2024 18:56:51 -0800 (PST)
+ id 1rRkWK-0003UP-3p; Sun, 21 Jan 2024 21:58:46 -0500
+Received: by mail-vs1-xe33.google.com with SMTP id
+ ada2fe7eead31-46771fc85cdso444741137.2; 
+ Sun, 21 Jan 2024 18:58:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705892211; x=1706497011; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1705892322; x=1706497122; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nTbR40hU+Tj9xgHvu3bznXrsZhKdFVs4mv4Eov5Unbg=;
- b=O+siOyLGlugFnNyt4s7N9+5DuoMEV/G5bMf90B1v4c12gH0VqEBJGZb8AnJhEYw0D0
- /XU5Ig87EVdCEYMO7jM39SmCE1k5No1WitDM9vV3t2qVnpfojFq8wQLDrI3NWG3f7roX
- 0zJWVm2qvTCdFueM+TlED6+zXotFUFyQow1pPokjEMymRAgISBof4+dRFw0MJ4fTtHGF
- UBfc6N/c9hgHJgjuceXLJR7mjm4kDL7oRMZd/7i4HDHXq74Jt9dYodjX1Q1Z+gp5+6Fn
- zPMbLFeIr+N9s6HPsBABbqaiYnDLDCN7qLtJ5LiUgs2pdtN6B6Bxoyu3iPf/MrpoFCMt
- 2Y4w==
+ bh=HNeW8DMwUBntABIT09BAKqnijY/uwJ2JcwSW7pYwO60=;
+ b=QusnTJwOOXbLlkL3yxieQqJlUHY/hhA3eFmJl3zGSqNWgsk++ADGCF4Bi888j2vC4K
+ oLWk1AZvUoeLDZMqnuVpLJdoj9bdL6RQgyNqZBV1zf9o5z4eBou2gCuMU9djpD5A1hS1
+ GHNcgrKqv9HuIBHXdjGnX+WSZYBMFcWF9UcFqqAikAu3GBoIwQ90YFKHIoYFZpQlBTCb
+ TrTKRnrtky3Es6FISKPeMpMK8inj17NkbwT6uNtUK739LKoYLFKS2usySqw8cOKO9o9a
+ uSHg3s/GM+qiivk/7pb3ZG8ne5eXM/23tzSH0K+gv6Y3bM3Jgo6JDSdRwK5ppWMlG+9S
+ y3hA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705892211; x=1706497011;
+ d=1e100.net; s=20230601; t=1705892322; x=1706497122;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=nTbR40hU+Tj9xgHvu3bznXrsZhKdFVs4mv4Eov5Unbg=;
- b=ClIIfl0xbKWoJJo77f1hwoNMcAQfILz/A2jGTVnNNUJx9QNrkIZAYYs7eRkQQRBfKN
- HlhkeIzskMjDrbwS35ZDi7D1kwpwJbsMiSueDlPB8vfLa5VenmaOG4Fua7VI+dp1jeKo
- WhAORNDLCvtUscoyNmnXndVDiUhaPq13VdJ49weys6z2tLW/6oSTL6jUaEkXfgLRhoHC
- wOZbHRbuUPY/IyPWqe6bR6ev75DCOSGXW1+ErgSpOA7d+7IveJI8DnQXw/Dpu4NL3IVH
- pyo4oPGqu+/kiPZqkfzobhmmYarW1woK0jmGUZ5FIqAXeFevAKwVwFBrU5a9BUC2Mvl/
- NRsA==
-X-Gm-Message-State: AOJu0YwikCcbCB663T5pOc8V3P05CXnkTBPNcpPhvv0a5fhfviH4VxHo
- u/U5noxIZpNz/EFZRF9NXcDOPRYQvR27Xy8Q4w9pOr1CRjeGcVROQN8WwH4GDI20JPYGtmaiB1N
- E3ByoMWvJIS4t3VAUMCQFS8Ajrvw=
-X-Google-Smtp-Source: AGHT+IEwN1q6duFDMQt2VIxFjQ0t53vAYRP9ebHstRcWIFC+Igcun1vwxiCMyUMzwaOC9VPdYE7nN+T4IUe/dtSAVjM=
-X-Received: by 2002:ac5:cdeb:0:b0:4b7:3b27:7c78 with SMTP id
- v11-20020ac5cdeb000000b004b73b277c78mr2318712vkn.15.1705892211207; Sun, 21
- Jan 2024 18:56:51 -0800 (PST)
+ bh=HNeW8DMwUBntABIT09BAKqnijY/uwJ2JcwSW7pYwO60=;
+ b=i5tGiMvHP3Ue+sFokuhXBhtXzSmwPeIrGjcEpKEoncr1MJU/DYgjuTgANVOtOZGnBU
+ tmJSibFji4TPbI79+KGFtgtDSpUr1IzRKyugJjggvJwZxcFWThTlF7mX+Fp5Mf/RlVC6
+ QsWxqkqLGYB5lTMSmBHj8I+9K4X+7ipzcWbCxnM/wgEKWU7yNP927dQA3p6P9Hc7pk03
+ G+9pJ7ZdbDNoNhL/Sn8pI3d+IvIswFvy8prc0+1XHPodp3TtjFlrFo+e/vmCXXpCX4wo
+ qfaTPoiA97pWu9dM2scdBlXR3YBt+eVi19oNfGlrQQYjV8sPBlhO0mlSSgVgrSHt3cnw
+ zPDg==
+X-Gm-Message-State: AOJu0YyWWcEyZfoXGLW8WuLWHbsiUH27/hmn05xg4Jm4NVi5rT7+peT0
+ al+b0TaPDxTmVBjP5SFgVJReDVnKLBW8aWfxcNlBeS+Z6A8rKaXX71meXCnozmmRw8kBM8a43fc
+ 56FiJP9XoiT66cLQPYj9DruJkhRs=
+X-Google-Smtp-Source: AGHT+IHUE1WskFf7FUUm4u+6LIP0RFervjaZFJEm5RmIxyyudA0vB3At9lBjtQ7ktj4P3m7+/8kEKyT7csWuoTv0WwM=
+X-Received: by 2002:a05:6102:160f:b0:469:b0b2:217a with SMTP id
+ cu15-20020a056102160f00b00469b0b2217amr799889vsb.27.1705892322419; Sun, 21
+ Jan 2024 18:58:42 -0800 (PST)
 MIME-Version: 1.0
 References: <20240116205817.344178-1-dbarboza@ventanamicro.com>
- <20240116205817.344178-5-dbarboza@ventanamicro.com>
-In-Reply-To: <20240116205817.344178-5-dbarboza@ventanamicro.com>
+ <20240116205817.344178-6-dbarboza@ventanamicro.com>
+In-Reply-To: <20240116205817.344178-6-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 22 Jan 2024 12:56:25 +1000
-Message-ID: <CAKmqyKPqCOHKvtDX+YFNBWFHO8e8E4jPa=KLG=LGPtK-Kafqyg@mail.gmail.com>
-Subject: Re: [PATCH v3 04/13] target/riscv/insn_trans/trans_rvbf16.c.inc: use
- cpu->cfg.vlenb
+Date: Mon, 22 Jan 2024 12:58:16 +1000
+Message-ID: <CAKmqyKMzW4jqFx5FVUOKNu5uQO_7dPJvc6kLQX8i6Us_0JetRA@mail.gmail.com>
+Subject: Re: [PATCH v3 05/13] target/riscv/insn_trans/trans_rvv.c.inc: use
+ 'vlenb'
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
  palmer@rivosinc.com, richard.henderson@linaro.org, max.chou@sifive.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2f;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e33;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe33.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -92,10 +92,11 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jan 17, 2024 at 8:17=E2=80=AFAM Daniel Henrique Barboza
+On Wed, Jan 17, 2024 at 7:00=E2=80=AFAM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> Use ctx->cfg_ptr->vlenb instead of ctx->cfg_ptr->vlen / 8.
+> Use s->cfg_ptr->vlenb instead of "s->cfg_ptr->vlen / 8"  and
+> "s->cfg_ptr->vlen >> 3".
 >
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
@@ -105,50 +106,458 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/insn_trans/trans_rvbf16.c.inc | 12 ++++++------
->  1 file changed, 6 insertions(+), 6 deletions(-)
+>  target/riscv/insn_trans/trans_rvv.c.inc | 140 ++++++++++++------------
+>  1 file changed, 70 insertions(+), 70 deletions(-)
 >
-> diff --git a/target/riscv/insn_trans/trans_rvbf16.c.inc b/target/riscv/in=
-sn_trans/trans_rvbf16.c.inc
-> index 4e39c00884..8ee99df3f3 100644
-> --- a/target/riscv/insn_trans/trans_rvbf16.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvbf16.c.inc
-> @@ -83,8 +83,8 @@ static bool trans_vfncvtbf16_f_f_w(DisasContext *ctx, a=
-rg_vfncvtbf16_f_f_w *a)
->          data =3D FIELD_DP32(data, VDATA, VMA, ctx->vma);
->          tcg_gen_gvec_3_ptr(vreg_ofs(ctx, a->rd), vreg_ofs(ctx, 0),
->                             vreg_ofs(ctx, a->rs2), tcg_env,
-> -                           ctx->cfg_ptr->vlen / 8,
-> -                           ctx->cfg_ptr->vlen / 8, data,
-> +                           ctx->cfg_ptr->vlenb,
-> +                           ctx->cfg_ptr->vlenb, data,
->                             gen_helper_vfncvtbf16_f_f_w);
->          mark_vs_dirty(ctx);
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_=
+trans/trans_rvv.c.inc
+> index 3871f0ea73..d743675262 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -217,7 +217,7 @@ static bool trans_vsetivli(DisasContext *s, arg_vseti=
+vli *a)
+>  /* vector register offset from env */
+>  static uint32_t vreg_ofs(DisasContext *s, int reg)
+>  {
+> -    return offsetof(CPURISCVState, vreg) + reg * s->cfg_ptr->vlen / 8;
+> +    return offsetof(CPURISCVState, vreg) + reg * s->cfg_ptr->vlenb;
+>  }
+>
+>  /* check functions */
+> @@ -627,11 +627,11 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1=
+, uint32_t data,
+>       * As simd_desc supports at most 2048 bytes, and in this implementat=
+ion,
+>       * the max vector group length is 4096 bytes. So split it into two p=
+arts.
+>       *
+> -     * The first part is vlen in bytes, encoded in maxsz of simd_desc.
+> +     * The first part is vlen in bytes (vlenb), encoded in maxsz of simd=
+_desc.
+>       * The second part is lmul, encoded in data of simd_desc.
+>       */
+> -    desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
+> -                                      s->cfg_ptr->vlen / 8, data));
+> +    desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
+> +                                      s->cfg_ptr->vlenb, data));
+>
+>      tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
+>      tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));
+> @@ -791,8 +791,8 @@ static bool ldst_stride_trans(uint32_t vd, uint32_t r=
+s1, uint32_t rs2,
+>      mask =3D tcg_temp_new_ptr();
+>      base =3D get_gpr(s, rs1, EXT_NONE);
+>      stride =3D get_gpr(s, rs2, EXT_NONE);
+> -    desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
+> -                                      s->cfg_ptr->vlen / 8, data));
+> +    desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
+> +                                      s->cfg_ptr->vlenb, data));
+>
+>      tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
+>      tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));
+> @@ -897,8 +897,8 @@ static bool ldst_index_trans(uint32_t vd, uint32_t rs=
+1, uint32_t vs2,
+>      mask =3D tcg_temp_new_ptr();
+>      index =3D tcg_temp_new_ptr();
+>      base =3D get_gpr(s, rs1, EXT_NONE);
+> -    desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
+> -                                      s->cfg_ptr->vlen / 8, data));
+> +    desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
+> +                                      s->cfg_ptr->vlenb, data));
+>
+>      tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
+>      tcg_gen_addi_ptr(index, tcg_env, vreg_ofs(s, vs2));
+> @@ -1036,8 +1036,8 @@ static bool ldff_trans(uint32_t vd, uint32_t rs1, u=
+int32_t data,
+>      dest =3D tcg_temp_new_ptr();
+>      mask =3D tcg_temp_new_ptr();
+>      base =3D get_gpr(s, rs1, EXT_NONE);
+> -    desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
+> -                                      s->cfg_ptr->vlen / 8, data));
+> +    desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
+> +                                      s->cfg_ptr->vlenb, data));
+>
+>      tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
+>      tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));
+> @@ -1086,7 +1086,7 @@ static bool ldst_whole_trans(uint32_t vd, uint32_t =
+rs1, uint32_t nf,
+>                               uint32_t width, gen_helper_ldst_whole *fn,
+>                               DisasContext *s, bool is_store)
+>  {
+> -    uint32_t evl =3D (s->cfg_ptr->vlen / 8) * nf / width;
+> +    uint32_t evl =3D s->cfg_ptr->vlenb * nf / width;
+>      TCGLabel *over =3D gen_new_label();
+>      tcg_gen_brcondi_tl(TCG_COND_GEU, cpu_vstart, evl, over);
+>
+> @@ -1096,8 +1096,8 @@ static bool ldst_whole_trans(uint32_t vd, uint32_t =
+rs1, uint32_t nf,
+>
+>      uint32_t data =3D FIELD_DP32(0, VDATA, NF, nf);
+>      dest =3D tcg_temp_new_ptr();
+> -    desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
+> -                                      s->cfg_ptr->vlen / 8, data));
+> +    desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
+> +                                      s->cfg_ptr->vlenb, data));
+>
+>      base =3D get_gpr(s, rs1, EXT_NONE);
+>      tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
+> @@ -1199,8 +1199,8 @@ do_opivv_gvec(DisasContext *s, arg_rmrr *a, GVecGen=
+3Fn *gvec_fn,
+>          data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
+>          tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
+>                             vreg_ofs(s, a->rs1), vreg_ofs(s, a->rs2),
+> -                           tcg_env, s->cfg_ptr->vlen / 8,
+> -                           s->cfg_ptr->vlen / 8, data, fn);
+> +                           tcg_env, s->cfg_ptr->vlenb,
+> +                           s->cfg_ptr->vlenb, data, fn);
+>      }
+>      mark_vs_dirty(s);
+>      gen_set_label(over);
+> @@ -1248,8 +1248,8 @@ static bool opivx_trans(uint32_t vd, uint32_t rs1, =
+uint32_t vs2, uint32_t vm,
+>      data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
+>      data =3D FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);
+>      data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
+> -    desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
+> -                                      s->cfg_ptr->vlen / 8, data));
+> +    desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
+> +                                      s->cfg_ptr->vlenb, data));
+>
+>      tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
+>      tcg_gen_addi_ptr(src2, tcg_env, vreg_ofs(s, vs2));
+> @@ -1410,8 +1410,8 @@ static bool opivi_trans(uint32_t vd, uint32_t imm, =
+uint32_t vs2, uint32_t vm,
+>      data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
+>      data =3D FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);
+>      data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
+> -    desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
+> -                                      s->cfg_ptr->vlen / 8, data));
+> +    desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
+> +                                      s->cfg_ptr->vlenb, data));
+>
+>      tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
+>      tcg_gen_addi_ptr(src2, tcg_env, vreg_ofs(s, vs2));
+> @@ -1492,8 +1492,8 @@ static bool do_opivv_widen(DisasContext *s, arg_rmr=
+r *a,
+>          tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
+>                             vreg_ofs(s, a->rs1),
+>                             vreg_ofs(s, a->rs2),
+> -                           tcg_env, s->cfg_ptr->vlen / 8,
+> -                           s->cfg_ptr->vlen / 8,
+> +                           tcg_env, s->cfg_ptr->vlenb,
+> +                           s->cfg_ptr->vlenb,
+>                             data, fn);
+>          mark_vs_dirty(s);
 >          gen_set_label(over);
-> @@ -112,8 +112,8 @@ static bool trans_vfwcvtbf16_f_f_v(DisasContext *ctx,=
- arg_vfwcvtbf16_f_f_v *a)
->          data =3D FIELD_DP32(data, VDATA, VMA, ctx->vma);
->          tcg_gen_gvec_3_ptr(vreg_ofs(ctx, a->rd), vreg_ofs(ctx, 0),
->                             vreg_ofs(ctx, a->rs2), tcg_env,
-> -                           ctx->cfg_ptr->vlen / 8,
-> -                           ctx->cfg_ptr->vlen / 8, data,
-> +                           ctx->cfg_ptr->vlenb,
-> +                           ctx->cfg_ptr->vlenb, data,
->                             gen_helper_vfwcvtbf16_f_f_v);
->          mark_vs_dirty(ctx);
+> @@ -1568,8 +1568,8 @@ static bool do_opiwv_widen(DisasContext *s, arg_rmr=
+r *a,
+>          tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
+>                             vreg_ofs(s, a->rs1),
+>                             vreg_ofs(s, a->rs2),
+> -                           tcg_env, s->cfg_ptr->vlen / 8,
+> -                           s->cfg_ptr->vlen / 8, data, fn);
+> +                           tcg_env, s->cfg_ptr->vlenb,
+> +                           s->cfg_ptr->vlenb, data, fn);
+>          mark_vs_dirty(s);
 >          gen_set_label(over);
-> @@ -143,8 +143,8 @@ static bool trans_vfwmaccbf16_vv(DisasContext *ctx, a=
-rg_vfwmaccbf16_vv *a)
->          tcg_gen_gvec_4_ptr(vreg_ofs(ctx, a->rd), vreg_ofs(ctx, 0),
->                             vreg_ofs(ctx, a->rs1),
->                             vreg_ofs(ctx, a->rs2), tcg_env,
-> -                           ctx->cfg_ptr->vlen / 8,
-> -                           ctx->cfg_ptr->vlen / 8, data,
-> +                           ctx->cfg_ptr->vlenb,
-> +                           ctx->cfg_ptr->vlenb, data,
->                             gen_helper_vfwmaccbf16_vv);
->          mark_vs_dirty(ctx);
+>          return true;
+> @@ -1639,8 +1639,8 @@ static bool opivv_trans(uint32_t vd, uint32_t vs1, =
+uint32_t vs2, uint32_t vm,
+>      data =3D FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);
+>      data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
+>      tcg_gen_gvec_4_ptr(vreg_ofs(s, vd), vreg_ofs(s, 0), vreg_ofs(s, vs1)=
+,
+> -                       vreg_ofs(s, vs2), tcg_env, s->cfg_ptr->vlen / 8,
+> -                       s->cfg_ptr->vlen / 8, data, fn);
+> +                       vreg_ofs(s, vs2), tcg_env, s->cfg_ptr->vlenb,
+> +                       s->cfg_ptr->vlenb, data, fn);
+>      mark_vs_dirty(s);
+>      gen_set_label(over);
+>      return true;
+> @@ -1831,8 +1831,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr =
+*a)             \
+>          tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+>                             vreg_ofs(s, a->rs1),                    \
+>                             vreg_ofs(s, a->rs2), tcg_env,           \
+> -                           s->cfg_ptr->vlen / 8,                   \
+> -                           s->cfg_ptr->vlen / 8, data,             \
+> +                           s->cfg_ptr->vlenb,                      \
+> +                           s->cfg_ptr->vlenb, data,                \
+>                             fns[s->sew]);                           \
+>          mark_vs_dirty(s);                                          \
+>          gen_set_label(over);                                       \
+> @@ -2036,8 +2036,8 @@ static bool trans_vmv_v_v(DisasContext *s, arg_vmv_=
+v_v *a)
+>              tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+>
+>              tcg_gen_gvec_2_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, a->rs1),
+> -                               tcg_env, s->cfg_ptr->vlen / 8,
+> -                               s->cfg_ptr->vlen / 8, data,
+> +                               tcg_env, s->cfg_ptr->vlenb,
+> +                               s->cfg_ptr->vlenb, data,
+>                                 fns[s->sew]);
+>              gen_set_label(over);
+>          }
+> @@ -2082,8 +2082,8 @@ static bool trans_vmv_v_x(DisasContext *s, arg_vmv_=
+v_x *a)
+>              };
+>
+>              tcg_gen_ext_tl_i64(s1_i64, s1);
+> -            desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
+> -                                              s->cfg_ptr->vlen / 8, data=
+));
+> +            desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
+> +                                              s->cfg_ptr->vlenb, data));
+>              tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, a->rd));
+>              fns[s->sew](dest, s1_i64, tcg_env, desc);
+>          }
+> @@ -2121,8 +2121,8 @@ static bool trans_vmv_v_i(DisasContext *s, arg_vmv_=
+v_i *a)
+>
+>              s1 =3D tcg_constant_i64(simm);
+>              dest =3D tcg_temp_new_ptr();
+> -            desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
+> -                                              s->cfg_ptr->vlen / 8, data=
+));
+> +            desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
+> +                                              s->cfg_ptr->vlenb, data));
+>              tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, a->rd));
+>              fns[s->sew](dest, s1, tcg_env, desc);
+>
+> @@ -2275,8 +2275,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr =
+*a)             \
+>          tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+>                             vreg_ofs(s, a->rs1),                    \
+>                             vreg_ofs(s, a->rs2), tcg_env,           \
+> -                           s->cfg_ptr->vlen / 8,                   \
+> -                           s->cfg_ptr->vlen / 8, data,             \
+> +                           s->cfg_ptr->vlenb,                      \
+> +                           s->cfg_ptr->vlenb, data,                \
+>                             fns[s->sew - 1]);                       \
+>          mark_vs_dirty(s);                                          \
+>          gen_set_label(over);                                       \
+> @@ -2303,8 +2303,8 @@ static bool opfvf_trans(uint32_t vd, uint32_t rs1, =
+uint32_t vs2,
+>      dest =3D tcg_temp_new_ptr();
+>      mask =3D tcg_temp_new_ptr();
+>      src2 =3D tcg_temp_new_ptr();
+> -    desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
+> -                                      s->cfg_ptr->vlen / 8, data));
+> +    desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
+> +                                      s->cfg_ptr->vlenb, data));
+>
+>      tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
+>      tcg_gen_addi_ptr(src2, tcg_env, vreg_ofs(s, vs2));
+> @@ -2391,8 +2391,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr =
+*a)           \
+>          tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),   \
+>                             vreg_ofs(s, a->rs1),                  \
+>                             vreg_ofs(s, a->rs2), tcg_env,         \
+> -                           s->cfg_ptr->vlen / 8,                 \
+> -                           s->cfg_ptr->vlen / 8, data,           \
+> +                           s->cfg_ptr->vlenb,                    \
+> +                           s->cfg_ptr->vlenb, data,              \
+>                             fns[s->sew - 1]);                     \
+>          mark_vs_dirty(s);                                        \
+>          gen_set_label(over);                                     \
+> @@ -2465,8 +2465,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr =
+*a)             \
+>          tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+>                             vreg_ofs(s, a->rs1),                    \
+>                             vreg_ofs(s, a->rs2), tcg_env,           \
+> -                           s->cfg_ptr->vlen / 8,                   \
+> -                           s->cfg_ptr->vlen / 8, data,             \
+> +                           s->cfg_ptr->vlenb,                      \
+> +                           s->cfg_ptr->vlenb, data,                \
+>                             fns[s->sew - 1]);                       \
+>          mark_vs_dirty(s);                                          \
+>          gen_set_label(over);                                       \
+> @@ -2581,8 +2581,8 @@ static bool do_opfv(DisasContext *s, arg_rmr *a,
+>          data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
+>          tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
+>                             vreg_ofs(s, a->rs2), tcg_env,
+> -                           s->cfg_ptr->vlen / 8,
+> -                           s->cfg_ptr->vlen / 8, data, fn);
+> +                           s->cfg_ptr->vlenb,
+> +                           s->cfg_ptr->vlenb, data, fn);
+>          mark_vs_dirty(s);
 >          gen_set_label(over);
+>          return true;
+> @@ -2691,8 +2691,8 @@ static bool trans_vfmv_v_f(DisasContext *s, arg_vfm=
+v_v_f *a)
+>              do_nanbox(s, t1, cpu_fpr[a->rs1]);
+>
+>              dest =3D tcg_temp_new_ptr();
+> -            desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
+> -                                              s->cfg_ptr->vlen / 8, data=
+));
+> +            desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
+> +                                              s->cfg_ptr->vlenb, data));
+>              tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, a->rd));
+>
+>              fns[s->sew - 1](dest, t1, tcg_env, desc);
+> @@ -2770,8 +2770,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *=
+a)              \
+>          data =3D FIELD_DP32(data, VDATA, VMA, s->vma);               \
+>          tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+>                             vreg_ofs(s, a->rs2), tcg_env,           \
+> -                           s->cfg_ptr->vlen / 8,                   \
+> -                           s->cfg_ptr->vlen / 8, data,             \
+> +                           s->cfg_ptr->vlenb,                      \
+> +                           s->cfg_ptr->vlenb, data,                \
+>                             fns[s->sew - 1]);                       \
+>          mark_vs_dirty(s);                                          \
+>          gen_set_label(over);                                       \
+> @@ -2821,8 +2821,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *=
+a)              \
+>          data =3D FIELD_DP32(data, VDATA, VMA, s->vma);               \
+>          tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+>                             vreg_ofs(s, a->rs2), tcg_env,           \
+> -                           s->cfg_ptr->vlen / 8,                   \
+> -                           s->cfg_ptr->vlen / 8, data,             \
+> +                           s->cfg_ptr->vlenb,                      \
+> +                           s->cfg_ptr->vlenb, data,                \
+>                             fns[s->sew]);                           \
+>          mark_vs_dirty(s);                                          \
+>          gen_set_label(over);                                       \
+> @@ -2888,8 +2888,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *=
+a)              \
+>          data =3D FIELD_DP32(data, VDATA, VMA, s->vma);               \
+>          tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+>                             vreg_ofs(s, a->rs2), tcg_env,           \
+> -                           s->cfg_ptr->vlen / 8,                   \
+> -                           s->cfg_ptr->vlen / 8, data,             \
+> +                           s->cfg_ptr->vlenb,                      \
+> +                           s->cfg_ptr->vlenb, data,                \
+>                             fns[s->sew - 1]);                       \
+>          mark_vs_dirty(s);                                          \
+>          gen_set_label(over);                                       \
+> @@ -2937,8 +2937,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *=
+a)              \
+>          data =3D FIELD_DP32(data, VDATA, VMA, s->vma);               \
+>          tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+>                             vreg_ofs(s, a->rs2), tcg_env,           \
+> -                           s->cfg_ptr->vlen / 8,                   \
+> -                           s->cfg_ptr->vlen / 8, data,             \
+> +                           s->cfg_ptr->vlenb,                      \
+> +                           s->cfg_ptr->vlenb, data,                \
+>                             fns[s->sew]);                           \
+>          mark_vs_dirty(s);                                          \
+>          gen_set_label(over);                                       \
+> @@ -3027,8 +3027,8 @@ static bool trans_##NAME(DisasContext *s, arg_r *a)=
+                \
+>          tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+>                             vreg_ofs(s, a->rs1),                    \
+>                             vreg_ofs(s, a->rs2), tcg_env,           \
+> -                           s->cfg_ptr->vlen / 8,                   \
+> -                           s->cfg_ptr->vlen / 8, data, fn);        \
+> +                           s->cfg_ptr->vlenb,                      \
+> +                           s->cfg_ptr->vlenb, data, fn);           \
+>          mark_vs_dirty(s);                                          \
+>          gen_set_label(over);                                       \
+>          return true;                                               \
+> @@ -3061,8 +3061,8 @@ static bool trans_vcpop_m(DisasContext *s, arg_rmr =
+*a)
+>          mask =3D tcg_temp_new_ptr();
+>          src2 =3D tcg_temp_new_ptr();
+>          dst =3D dest_gpr(s, a->rd);
+> -        desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
+> -                                          s->cfg_ptr->vlen / 8, data));
+> +        desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
+> +                                          s->cfg_ptr->vlenb, data));
+>
+>          tcg_gen_addi_ptr(src2, tcg_env, vreg_ofs(s, a->rs2));
+>          tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));
+> @@ -3090,8 +3090,8 @@ static bool trans_vfirst_m(DisasContext *s, arg_rmr=
+ *a)
+>          mask =3D tcg_temp_new_ptr();
+>          src2 =3D tcg_temp_new_ptr();
+>          dst =3D dest_gpr(s, a->rd);
+> -        desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
+> -                                          s->cfg_ptr->vlen / 8, data));
+> +        desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
+> +                                          s->cfg_ptr->vlenb, data));
+>
+>          tcg_gen_addi_ptr(src2, tcg_env, vreg_ofs(s, a->rs2));
+>          tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));
+> @@ -3128,8 +3128,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *=
+a)              \
+>          data =3D FIELD_DP32(data, VDATA, VMA, s->vma);               \
+>          tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd),                     \
+>                             vreg_ofs(s, 0), vreg_ofs(s, a->rs2),    \
+> -                           tcg_env, s->cfg_ptr->vlen / 8,          \
+> -                           s->cfg_ptr->vlen / 8,                   \
+> +                           tcg_env, s->cfg_ptr->vlenb,             \
+> +                           s->cfg_ptr->vlenb,                      \
+>                             data, fn);                              \
+>          mark_vs_dirty(s);                                          \
+>          gen_set_label(over);                                       \
+> @@ -3171,8 +3171,8 @@ static bool trans_viota_m(DisasContext *s, arg_viot=
+a_m *a)
+>          };
+>          tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
+>                             vreg_ofs(s, a->rs2), tcg_env,
+> -                           s->cfg_ptr->vlen / 8,
+> -                           s->cfg_ptr->vlen / 8, data, fns[s->sew]);
+> +                           s->cfg_ptr->vlenb,
+> +                           s->cfg_ptr->vlenb, data, fns[s->sew]);
+>          mark_vs_dirty(s);
+>          gen_set_label(over);
+>          return true;
+> @@ -3200,8 +3200,8 @@ static bool trans_vid_v(DisasContext *s, arg_vid_v =
+*a)
+>              gen_helper_vid_v_w, gen_helper_vid_v_d,
+>          };
+>          tcg_gen_gvec_2_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
+> -                           tcg_env, s->cfg_ptr->vlen / 8,
+> -                           s->cfg_ptr->vlen / 8,
+> +                           tcg_env, s->cfg_ptr->vlenb,
+> +                           s->cfg_ptr->vlenb,
+>                             data, fns[s->sew]);
+>          mark_vs_dirty(s);
+>          gen_set_label(over);
+> @@ -3620,8 +3620,8 @@ static bool trans_vcompress_vm(DisasContext *s, arg=
+_r *a)
+>          data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
+>          tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
+>                             vreg_ofs(s, a->rs1), vreg_ofs(s, a->rs2),
+> -                           tcg_env, s->cfg_ptr->vlen / 8,
+> -                           s->cfg_ptr->vlen / 8, data,
+> +                           tcg_env, s->cfg_ptr->vlenb,
+> +                           s->cfg_ptr->vlenb, data,
+>                             fns[s->sew]);
+>          mark_vs_dirty(s);
+>          gen_set_label(over);
+> @@ -3641,7 +3641,7 @@ static bool trans_##NAME(DisasContext *s, arg_##NAM=
+E * a)               \
+>          vext_check_isa_ill(s) &&                                        =
+\
+>          QEMU_IS_ALIGNED(a->rd, LEN) &&                                  =
+\
+>          QEMU_IS_ALIGNED(a->rs2, LEN)) {                                 =
+\
+> -        uint32_t maxsz =3D (s->cfg_ptr->vlen >> 3) * LEN;               =
+  \
+> +        uint32_t maxsz =3D s->cfg_ptr->vlenb * LEN;                     =
+  \
+>          if (s->vstart_eq_zero) {                                        =
+\
+>              tcg_gen_gvec_mov(s->sew, vreg_ofs(s, a->rd),                =
+\
+>                               vreg_ofs(s, a->rs2), maxsz, maxsz);        =
+\
+> @@ -3723,8 +3723,8 @@ static bool int_ext_op(DisasContext *s, arg_rmr *a,=
+ uint8_t seq)
+>
+>      tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
+>                         vreg_ofs(s, a->rs2), tcg_env,
+> -                       s->cfg_ptr->vlen / 8,
+> -                       s->cfg_ptr->vlen / 8, data, fn);
+> +                       s->cfg_ptr->vlenb,
+> +                       s->cfg_ptr->vlenb, data, fn);
+>
+>      mark_vs_dirty(s);
+>      gen_set_label(over);
 > --
 > 2.43.0
 >
