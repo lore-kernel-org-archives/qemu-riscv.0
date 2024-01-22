@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DDCFC47DDB
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 15:01:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FD26C47DD9
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 15:01:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rRvis-00072d-Gz; Mon, 22 Jan 2024 09:56:26 -0500
+	id 1rRvnx-0007uf-4U; Mon, 22 Jan 2024 10:01:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rRvin-0006ym-JO
- for qemu-riscv@nongnu.org; Mon, 22 Jan 2024 09:56:21 -0500
-Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
+ id 1rRvns-0007Te-En
+ for qemu-riscv@nongnu.org; Mon, 22 Jan 2024 10:01:36 -0500
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rRvih-0008Hu-Ma
- for qemu-riscv@nongnu.org; Mon, 22 Jan 2024 09:56:21 -0500
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-337d90030bfso2867864f8f.2
- for <qemu-riscv@nongnu.org>; Mon, 22 Jan 2024 06:56:15 -0800 (PST)
+ id 1rRvnn-0001m6-0E
+ for qemu-riscv@nongnu.org; Mon, 22 Jan 2024 10:01:36 -0500
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-40e8fec0968so42340075e9.1
+ for <qemu-riscv@nongnu.org>; Mon, 22 Jan 2024 07:01:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705935374; x=1706540174; darn=nongnu.org;
+ d=linaro.org; s=google; t=1705935689; x=1706540489; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BZ622lHwVBog+czBBq32/xN+pBjDFyqMlLTTXp/L7FE=;
- b=DnCqPPZWgokuX1sQEZwl8sBjfzwUTjlJI7fVBIAnCC9CNdNGc0JjGBa7iitszzXv9P
- hHqRPylUmNBIetlLkoZbE6AOA9qztSL8Hm59MO2egmKB22z6NhVLPWygqcQ0l7UbR0an
- 1AwMhfNf3SJuPQW8vIQ+0UcmEVzzsTgi3UIFmF7wBE42vjvy8GdB521k1lnWthvQ2nxw
- 9zHPGaGQiMutEl1TzroSp3et0lPIegeShKSv1sUII17abpS19yxNBFxQJD4iGRxiP97z
- ljyVzVQeWPhgvz1uK8Ww3Z+wFx+jOBT5Gkozb/Lz9qZqElZoiZ3pUKpPrB15k7WsQyGn
- 74sg==
+ bh=zMZ+pFdg1P4n/cHnfp4DZXoxUsYEnk+lXnRUtGdShK8=;
+ b=HZ9H0mY+R4p2kpbmpqhn9dxALuazkW8jXS5O2UQsvRZ7ghONWV5zvPF2qWBgc7I5ZS
+ LCn/O0c6waHg2+YDYIh1vMQVQXk1wsjLLn50AqbEpFqbdin6GuIHWXgv55izU38EC2YK
+ +gWA3ShY5y4mmPihQf+SAKl1Dut7Db3sRwdiER5XDT66rFflaBDWmhZChMO1R+ZvP6iK
+ B6WOkTSL5XOEEcL6AiNB+hJpIFvn8CS60+PCWBQEz2aWjxz/LABBgSpg5kWT5gV8Wrk4
+ sm1wD7bTRimNHLPc5/J9UsPvUJKGt8UFIg667y+9NEHOH4n77UyiI8PeObtTjxdBtK/N
+ F7yQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705935374; x=1706540174;
+ d=1e100.net; s=20230601; t=1705935689; x=1706540489;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BZ622lHwVBog+czBBq32/xN+pBjDFyqMlLTTXp/L7FE=;
- b=DMohWlNIx5tdvxMip2+sJqgG6R+iQR/uTeWGP6FCa636ZhJcsZ6Rf91SiAftJSVH0h
- yYxvQu0SAvidm5WqPMCDPSEz9D5qzILXbDa4eEpaMs2T6Kliuy3aXbhBpJIcApi/KMK1
- V+HtuEkUb9jc4B8Jt/esU5zBQhp+XXgX4yZOyn4HmPifK2yRV4OPKoSyZBDDO32ojbv+
- SUXSHRtHZQpGOwqPStR3n9HwcJWG0dmVvMh8PIFwnC8tqNlHi7wDrHVbu65MC9Va2W9k
- kvcQvu0bYhA0e+h+64LRTn30k87JBDM6/3SQeVGIuKg4n5tJ20lijq3hccU497SDNdME
- HXZQ==
-X-Gm-Message-State: AOJu0Yw+NuxiEdYRTPcg/cNTP8Wgd4thfUNbouAktepjwuCzZ/sRoZwU
- 8ewRX8wKgGk7mA0t18+QNkH//KHzs82SrjPI0xuVQ0NuxsE9kiP7vwVLxHj1Sc4=
-X-Google-Smtp-Source: AGHT+IGUiBOYuklVBedFu0zJPcyJZhLYk6Yc3D80C+JJViqQnNQPQ46i6Ialq80OWcx+wdU+nLE0+Q==
-X-Received: by 2002:a05:6000:dcf:b0:337:b636:993a with SMTP id
- dw15-20020a0560000dcf00b00337b636993amr1179443wrb.185.1705935374305; 
- Mon, 22 Jan 2024 06:56:14 -0800 (PST)
+ bh=zMZ+pFdg1P4n/cHnfp4DZXoxUsYEnk+lXnRUtGdShK8=;
+ b=kxKCeb+dDaASmN3DlOIcbtPFTH5JmSUmDlG/W4kp2bJi+teGCarJgMrYfZGhuQBUhe
+ OuV1PMm043NCSX6za0Wvb1dVRZt1hs3CFwUHSGE3nN/L6n9ncB6BMZYdMt3VfeovYJjD
+ H+0Xniqh1z/VXCs+e8Y7CQFfUAJp6xlU6Ig7Va3jldJmVZDcNgLa72YyEie3lYatm+qt
+ BQdqWYmjhw80KTFwjMbu1IsnoqYScCSw+EdD0PQ4FmuPGiO7yz679CcaRZ57j23LHODd
+ whEWHtEZOESjLhhyZfa1fmF5dGX9VGYkyVSeSPNL4Cs1U3WU49eWlPpWJv6quDhJOB5e
+ cLUA==
+X-Gm-Message-State: AOJu0Yzb1NNJ+PjA7EsdKi8MqJJvxvS9YdGWfu7pyiV3Ks7j8VI0TXvt
+ 8JvstAwV9FTQTI/6BiSUC5WjIOAMDA/77N935O9BQr1ggbvbsfdN6Rifdy9P3+o=
+X-Google-Smtp-Source: AGHT+IFPIr2Ee0y73303g5cCda6EprIxJ9AwU9+gItZXvCJzsVuJi+g6jnLnWq7qRPmBEAJUswV1Ew==
+X-Received: by 2002:a05:600c:4f10:b0:40e:b0ec:e98c with SMTP id
+ l16-20020a05600c4f1000b0040eb0ece98cmr456950wmq.139.1705935688372; 
+ Mon, 22 Jan 2024 07:01:28 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- n17-20020a5d67d1000000b003392f229b60sm4368629wrw.40.2024.01.22.06.56.11
+ t18-20020a05600c199200b0040e5951f199sm39123604wmq.34.2024.01.22.07.01.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jan 2024 06:56:11 -0800 (PST)
+ Mon, 22 Jan 2024 07:01:27 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id DBEA75F8F5;
- Mon, 22 Jan 2024 14:56:10 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 3642F5F9D5;
+ Mon, 22 Jan 2024 14:56:13 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
@@ -93,25 +93,25 @@ Cc: Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>, Song Gao <gaosong@loongson.cn>,
  Eduardo Habkost <eduardo@habkost.net>, Brian Cain <bcain@quicinc.com>,
- Paul Durrant <paul@xen.org>, Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH v3 01/21] hw/riscv: Use misa_mxl instead of misa_mxl_max
-Date: Mon, 22 Jan 2024 14:55:50 +0000
-Message-Id: <20240122145610.413836-2-alex.bennee@linaro.org>
+ Paul Durrant <paul@xen.org>
+Subject: [PATCH v3 21/21] docs/devel: document some plugin assumptions
+Date: Mon, 22 Jan 2024 14:56:10 +0000
+Message-Id: <20240122145610.413836-22-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240122145610.413836-1-alex.bennee@linaro.org>
 References: <20240122145610.413836-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::436;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x436.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::335;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x335.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -127,31 +127,77 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
+While we attempt to hide implementation details from the plugin we
+shouldn't be totally obtuse. Let the user know what they can and can't
+expect with the various instrumentation options.
 
-The effective MXL value matters when booting.
-
-Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Message-Id: <20240103173349.398526-23-alex.bennee@linaro.org>
-Message-Id: <20231213-riscv-v7-1-a760156a337f@daynix.com>
+Message-Id: <20240103173349.398526-44-alex.bennee@linaro.org>
+Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- hw/riscv/boot.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ docs/devel/tcg-plugins.rst | 49 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 49 insertions(+)
 
-diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-index 0ffca05189f..bc67c0bd189 100644
---- a/hw/riscv/boot.c
-+++ b/hw/riscv/boot.c
-@@ -36,7 +36,7 @@
+diff --git a/docs/devel/tcg-plugins.rst b/docs/devel/tcg-plugins.rst
+index 535a74684c5..9cc09d8c3da 100644
+--- a/docs/devel/tcg-plugins.rst
++++ b/docs/devel/tcg-plugins.rst
+@@ -112,6 +112,55 @@ details are opaque to plugins. The plugin is able to query select
+ details of instructions and system configuration only through the
+ exported *qemu_plugin* functions.
  
- bool riscv_is_32bit(RISCVHartArrayState *harts)
- {
--    return harts->harts[0].env.misa_mxl_max == MXL_RV32;
-+    return harts->harts[0].env.misa_mxl == MXL_RV32;
- }
++However the following assumptions can be made:
++
++Translation Blocks
++++++++++++++++++++
++
++All code will go through a translation phase although not all
++translations will be necessarily be executed. You need to instrument
++actual executions to track what is happening.
++
++It is quite normal to see the same address translated multiple times.
++If you want to track the code in system emulation you should examine
++the underlying physical address (``qemu_plugin_insn_haddr``) to take
++into account the effects of virtual memory although if the system does
++paging this will change too.
++
++Not all instructions in a block will always execute so if its
++important to track individual instruction execution you need to
++instrument them directly. However asynchronous interrupts will not
++change control flow mid-block.
++
++Instructions
++++++++++++++
++
++Instruction instrumentation runs before the instruction executes. You
++can be can be sure the instruction will be dispatched, but you can't
++be sure it will complete. Generally this will be because of a
++synchronous exception (e.g. SIGILL) triggered by the instruction
++attempting to execute. If you want to be sure you will need to
++instrument the next instruction as well. See the ``execlog.c`` plugin
++for examples of how to track this and finalise details after execution.
++
++Memory Accesses
+++++++++++++++++
++
++Memory callbacks are called after a successful load or store.
++Unsuccessful operations (i.e. faults) will not be visible to memory
++instrumentation although the execution side effects can be observed
++(e.g. entering a exception handler).
++
++System Idle and Resume States
+++++++++++++++++++++++++++++++
++
++The ``qemu_plugin_register_vcpu_idle_cb`` and
++``qemu_plugin_register_vcpu_resume_cb`` functions can be used to track
++when CPUs go into and return from sleep states when waiting for
++external I/O. Be aware though that these may occur less frequently
++than in real HW due to the inefficiencies of emulation giving less
++chance for the CPU to idle.
++
+ Internals
+ ---------
  
- /*
 -- 
 2.39.2
 
