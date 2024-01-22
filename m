@@ -4,103 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4508BC4725D
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 12:28:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13CEEC4725D
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 12:34:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rRtPg-0001fB-Ad; Mon, 22 Jan 2024 07:28:28 -0500
+	id 1rRtV9-0002qa-KB; Mon, 22 Jan 2024 07:34:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
- id 1rRtPf-0001ei-Fh
- for qemu-riscv@nongnu.org; Mon, 22 Jan 2024 07:28:27 -0500
-Received: from smtp-relay-internal-0.canonical.com ([185.125.188.122])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
- id 1rRtPd-00022Z-FS
- for qemu-riscv@nongnu.org; Mon, 22 Jan 2024 07:28:27 -0500
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 56EFC3FDA6
- for <qemu-riscv@nongnu.org>; Mon, 22 Jan 2024 12:28:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1705926501;
- bh=NWAyyWMMkHgiB7rsdHdk3aSWgcZ+zlAGNJ8OWJyQEkU=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=qH3zuPbXzl5xrdCMOk7BHPDp2M8N5YH+GiQ14qYvpeNpF7Mjn6FYVB23QAh0RAIHB
- or5kJqC1ezYIi4BMSGhZCAQuqHz+N3xHP2WDm8vW5UqPjDInFfINUOv3D4m/Zwtbll
- rRY5JpIdRRqu98vBWJzth5q4xUT7iOeYxbK6Elp4NUXDG5+b/PfvxrvRjsV/0B91XI
- /PFNY+5g9SBviyhnBk+gbUdQ6G1uxhxPofmKvM2iwUv0IWEh5WoMex9qSy4WZ7Zd5S
- DN3kLL3zlV/NFty9TBWlBJNflLNK7wbmZCe5ceDw3Axa51lw7MzPK9RpznrTswfa1i
- W1BvSsQcYHBHw==
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-337d589ef4dso2064955f8f.0
- for <qemu-riscv@nongnu.org>; Mon, 22 Jan 2024 04:28:21 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rRtV6-0002q4-Q6
+ for qemu-riscv@nongnu.org; Mon, 22 Jan 2024 07:34:04 -0500
+Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rRtV4-0003XP-Tr
+ for qemu-riscv@nongnu.org; Mon, 22 Jan 2024 07:34:04 -0500
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-5cf495b46caso1224703a12.1
+ for <qemu-riscv@nongnu.org>; Mon, 22 Jan 2024 04:34:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1705926841; x=1706531641; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DHODmQ6bFHA5OygOFcOdnmCvx2+mEm+4ihSAMSxYDNM=;
+ b=OKpQIKRclu08V/MREVcGR/iwt4J/JTYmbGYwJFEOvzks8nnbwGUYGb5HmCuj0QuEQt
+ 8UnF4db9WcePUUYm13z/88KYPry3pn3Oyoq61tXGliZpbM9JClGkuV3pGoGMJn8SmpUd
+ BlM4bt70DzvIO/e7TtJ/UDZPuA2Mb4QzKupeBOTZ0gqwYPGj75hEoZax6HwhQDWJRBzn
+ 0pgV8wVdfowpgwtIY9iCSFKJyTIxeIDYOwsMQrq83V6R1mS8moIPNQZq7kaNT2N+66go
+ lkcRVS+5Q/ra0wUkKOxAj/6x1Rq60K8nN+j53E/T1KRN28FZRc/t0sAZtLwZJm+bD/ZW
+ Tc1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705926500; x=1706531300;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=NWAyyWMMkHgiB7rsdHdk3aSWgcZ+zlAGNJ8OWJyQEkU=;
- b=pCegWLTskk297OOk+VZmyBsQ+pXl+MuF7+15jWJKhUvbY1ni+rcDe2rhqrlBPuhtWA
- vOYDf0cMOa1KGgkbwr8sYJEWZFC3QjsADTAX0tYnhEppI+NzBQBP78PjIntfa2uILd3y
- 2KwMdu0wIJLNGKNAFS9et6u0VS+WaeSPv44ji3c/3/siSDZ/g/rN/bgTpoOT9aPn7KWw
- 7Xzi4ZZ7dl7UgN94lv2bKGweCB6gIaJnjpB6Dnw/xJrI7Gyp4FUXuj7u37Vi8Bya0+9t
- I92cmWUTRqvHaLhR1tKVU4e7QPdQIXaJ2KHo0LNvLWN3oX+V/ygEfP9GSzGvNZjseey3
- vajw==
-X-Gm-Message-State: AOJu0YwXL3ViV0YAQ4Z9eztnGqjuvZNZ6N+bNnDXsCSOMjoSSy29+jeU
- OB6UVq6sG6YZXg6kVGt85ZtH6NxDxOyfOtTUipYIa0a7CUxx6QkiC5QXzfFylx9CsiHuqPVuEbA
- vhtvIa2ngm9/CB9HnAwDo3szXnrrZNVkwucmR2nvWHTShPivmjxMQCcruKQmImRaAcQdf
-X-Received: by 2002:a5d:44c6:0:b0:337:bded:898a with SMTP id
- z6-20020a5d44c6000000b00337bded898amr2401566wrr.0.1705926500579; 
- Mon, 22 Jan 2024 04:28:20 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEGpExWY9en+QTFcKTO1lzrlPjTSp1FpMONE+h9V7dzHf8Y/CNmLL+yu7rTqC5/CfssnD5jqQ==
-X-Received: by 2002:a5d:44c6:0:b0:337:bded:898a with SMTP id
- z6-20020a5d44c6000000b00337bded898amr2401551wrr.0.1705926499793; 
- Mon, 22 Jan 2024 04:28:19 -0800 (PST)
-Received: from [192.168.123.67] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
- [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
- b5-20020a5d4d85000000b00337d5aa55cdsm10692734wru.53.2024.01.22.04.28.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 22 Jan 2024 04:28:19 -0800 (PST)
-Message-ID: <22105210-d8d1-4808-b9ed-41eee71c53ca@canonical.com>
-Date: Mon, 22 Jan 2024 13:28:18 +0100
+ d=1e100.net; s=20230601; t=1705926841; x=1706531641;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=DHODmQ6bFHA5OygOFcOdnmCvx2+mEm+4ihSAMSxYDNM=;
+ b=MrHEgwx1GgxDH7K6ex1XzKTbPsm9Uc0zWq0Pj3NOGwbguHw/Ej5dxCCAH7ZCgFaNof
+ J+kBghbwV22SfpKuJ3xz6lPM9MXim1DAqCPn4D3WG2vJJxjHMJSfBBTiae4RuWGempwB
+ PACzzPkJR6npKMcrznHhUkfzfVegufWCcoLdChwl9XKjhWdeXNPPPrL0vKSs1g54sJFD
+ y0TFtVp5z9yOu2XK10ErTGKiqHmYFjSb8ejUQ42tHCv8QQxtH1fG5TJktmZElpdSBWKW
+ NoZY4j2sOnUFg9i0jQUdAjsEp0FLXzhIYpL0fFUmG6aTmU7/daWlsU6AtC7Jolo0D+zu
+ QVhQ==
+X-Gm-Message-State: AOJu0YwvMN9yXfTXUWYvTo2d+Fox5d5K3wDqQwQMquZfulxy3VPbZ2bh
+ Kv0UcP5SixsVA0KfpCh0oNXcosh26M08E/Qax/rpx7szg8YTvFCNeoB8xMHvI3NP1PPOBbps9o+
+ z
+X-Google-Smtp-Source: AGHT+IHAucIsK7wXABlTssiCjGz2GAzmJhTkMOKcUha1v+NlL7D4VAnWeNn8C+r6KQOjf0FtA63FAA==
+X-Received: by 2002:a05:6a20:3627:b0:19b:7d50:fe8f with SMTP id
+ r39-20020a056a20362700b0019b7d50fe8fmr1090281pze.40.1705926841569; 
+ Mon, 22 Jan 2024 04:34:01 -0800 (PST)
+Received: from grind.. ([2804:7f0:bdcd:fb00:6501:2693:db52:c621])
+ by smtp.gmail.com with ESMTPSA id
+ l10-20020a056a00140a00b006d9b2694b0csm9414305pfu.200.2024.01.22.04.33.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Jan 2024 04:34:01 -0800 (PST)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH v3 2/2] target/riscv: add rv32i, rv32e and rv64e CPUs
+Date: Mon, 22 Jan 2024 09:33:48 -0300
+Message-ID: <20240122123348.973288-3-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240122123348.973288-1-dbarboza@ventanamicro.com>
+References: <20240122123348.973288-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/4] target/riscv: SMBIOS support for RISC-V virt
- machine
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Bin Meng <bin.meng@windriver.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- "Michael S . Tsirkin" <mst@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
- Ani Sinha <anisinha@redhat.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-References: <20231229120724.41383-1-heinrich.schuchardt@canonical.com>
- <20231229120724.41383-4-heinrich.schuchardt@canonical.com>
- <20240122-4f4cbce3692cd684e0409f9e@orel>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240122-4f4cbce3692cd684e0409f9e@orel>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=185.125.188.122;
- envelope-from=heinrich.schuchardt@canonical.com;
- helo=smtp-relay-internal-0.canonical.com
-X-Spam_score_int: -56
-X-Spam_score: -5.7
-X-Spam_bar: -----
-X-Spam_report: (-5.7 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.289,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x530.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -116,146 +96,94 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 22.01.24 10:57, Andrew Jones wrote:
-> On Fri, Dec 29, 2023 at 01:07:23PM +0100, Heinrich Schuchardt wrote:
->> Generate SMBIOS tables for the RISC-V mach-virt.
->> Add CONFIG_SMBIOS=y to the RISC-V default config.
->> Set the default processor family in the type 4 table.
->>
->> The implementation is based on the corresponding ARM and Loongson code.
->>
->> With the patch the following firmware tables are provided:
->>
->>      etc/smbios/smbios-anchor
->>      etc/smbios/smbios-tables
->>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->> v2:
->> 	set processor family
->> ---
->>   hw/riscv/Kconfig |  1 +
->>   hw/riscv/virt.c  | 42 ++++++++++++++++++++++++++++++++++++++++++
->>   2 files changed, 43 insertions(+)
->>
->> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
->> index b6a5eb4452..1e11ac9432 100644
->> --- a/hw/riscv/Kconfig
->> +++ b/hw/riscv/Kconfig
->> @@ -41,6 +41,7 @@ config RISCV_VIRT
->>       select RISCV_IMSIC
->>       select SIFIVE_PLIC
->>       select SIFIVE_TEST
->> +    select SMBIOS
->>       select VIRTIO_MMIO
->>       select FW_CFG_DMA
->>       select PLATFORM_BUS
->> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
->> index d2eac24156..a876dd8f34 100644
->> --- a/hw/riscv/virt.c
->> +++ b/hw/riscv/virt.c
->> @@ -36,6 +36,7 @@
->>   #include "hw/riscv/boot.h"
->>   #include "hw/riscv/numa.h"
->>   #include "kvm/kvm_riscv.h"
->> +#include "hw/firmware/smbios.h"
->>   #include "hw/intc/riscv_aclint.h"
->>   #include "hw/intc/riscv_aplic.h"
->>   #include "hw/intc/riscv_imsic.h"
->> @@ -1249,6 +1250,45 @@ static void create_platform_bus(RISCVVirtState *s, DeviceState *irqchip)
->>                                   sysbus_mmio_get_region(sysbus, 0));
->>   }
->>   
->> +static void virt_build_smbios(RISCVVirtState *s)
->> +{
->> +    MachineClass *mc = MACHINE_GET_CLASS(s);
->> +    MachineState *ms = MACHINE(s);
->> +    uint8_t *smbios_tables, *smbios_anchor;
->> +    size_t smbios_tables_len, smbios_anchor_len;
->> +    struct smbios_phys_mem_area mem_array;
->> +    const char *product = "QEMU Virtual Machine";
->> +
->> +    if (kvm_enabled()) {
->> +        product = "KVM Virtual Machine";
->> +    }
->> +
->> +    smbios_set_defaults("QEMU", product, mc->name, false,
->> +                        true, SMBIOS_ENTRY_POINT_TYPE_64);
->> +
->> +#if defined(TARGET_RISCV32)
->> +    smbios_set_default_processor_family(0x200);
->> +#elif defined(TARGET_RISCV64)
->> +    smbios_set_default_processor_family(0x201);
->> +#endif
-> 
-> I think we should use misa_mxl_max to determine the family, rather than
-> TARGET_*, because, iirc, we're slowly working our ways towards allowing
-> rv32 cpus to be instantiated with qemu-system-riscv64.
+A bare bones 32 bit RVI CPU, rv32i, will make users lives easier when a
+full customized 32 bit CPU is desired, and users won't need to disable
+defaults by hand as they would with the rv32 CPU. [1] has an example of
+a situation that would be avoided with rv32i.
 
-Hello Andrew,
+In fact, add bare bones CPUs for RVE as well. Trying to use RVE in QEMU
+requires one to disable every single default extension, including RVI,
+and then add the desirable extension set. Adding rv32e/rv64e makes it
+more pleasant to use embedded CPUs in QEMU.
 
-thank you for reviewing. I guess you mean something like:
+[1] https://lore.kernel.org/qemu-riscv/258be47f-97be-4308-bed5-dc34ef7ff954@Spark/
 
-     if (riscv_is_32bit(&s->soc[0])) {
-         smbios_set_default_processor_family(0x200);
-#if defined(TARGET_RISCV64)
-     } else {
-         smbios_set_default_processor_family(0x201);
-#endif
-     }
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu-qom.h |  3 +++
+ target/riscv/cpu.c     | 21 +++++++++++++++++++++
+ 2 files changed, 24 insertions(+)
 
-riscv_is_32bit returns harts->harts[0].env.misa_mxl_max == MXL_RV32.
-
-Some real hardware has a 32bit hart and multiple 64bit harts. Will QEMU 
-support mixing harts with different bitness on the virt machine in 
-future? In that case we would have to revisit the code using 
-misa_mxl_max in multiple places.
-
-Best regards
-
-Heinrich
-
-> 
->> +
->> +    /* build the array of physical mem area from base_memmap */
->> +    mem_array.address = s->memmap[VIRT_DRAM].base;
->> +    mem_array.length = ms->ram_size;
->> +
->> +    smbios_get_tables(ms, &mem_array, 1,
->> +                      &smbios_tables, &smbios_tables_len,
->> +                      &smbios_anchor, &smbios_anchor_len,
->> +                      &error_fatal);
->> +
->> +    if (smbios_anchor) {
->> +        fw_cfg_add_file(s->fw_cfg, "etc/smbios/smbios-tables",
->> +                        smbios_tables, smbios_tables_len);
->> +        fw_cfg_add_file(s->fw_cfg, "etc/smbios/smbios-anchor",
->> +                        smbios_anchor, smbios_anchor_len);
->> +    }
->> +}
->> +
->>   static void virt_machine_done(Notifier *notifier, void *data)
->>   {
->>       RISCVVirtState *s = container_of(notifier, RISCVVirtState,
->> @@ -1337,6 +1377,8 @@ static void virt_machine_done(Notifier *notifier, void *data)
->>           riscv_setup_direct_kernel(kernel_entry, fdt_load_addr);
->>       }
->>   
->> +    virt_build_smbios(s);
->> +
->>       if (virt_is_acpi_enabled(s)) {
->>           virt_acpi_setup(s);
->>       }
->> -- 
->> 2.43.0
->>
->>
-> 
-> Otherwise,
-> 
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-> 
-> Thanks,
-> drew
+diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+index 9219c2fcc3..3670cfe6d9 100644
+--- a/target/riscv/cpu-qom.h
++++ b/target/riscv/cpu-qom.h
+@@ -34,7 +34,10 @@
+ #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
+ #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
+ #define TYPE_RISCV_CPU_BASE128          RISCV_CPU_TYPE_NAME("x-rv128")
++#define TYPE_RISCV_CPU_RV32I            RISCV_CPU_TYPE_NAME("rv32i")
++#define TYPE_RISCV_CPU_RV32E            RISCV_CPU_TYPE_NAME("rv32e")
+ #define TYPE_RISCV_CPU_RV64I            RISCV_CPU_TYPE_NAME("rv64i")
++#define TYPE_RISCV_CPU_RV64E            RISCV_CPU_TYPE_NAME("rv64e")
+ #define TYPE_RISCV_CPU_RVA22U64         RISCV_CPU_TYPE_NAME("rva22u64")
+ #define TYPE_RISCV_CPU_RVA22S64         RISCV_CPU_TYPE_NAME("rva22s64")
+ #define TYPE_RISCV_CPU_IBEX             RISCV_CPU_TYPE_NAME("lowrisc-ibex")
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 9b6e03a655..687d647c0c 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -610,6 +610,12 @@ static void rv64i_bare_cpu_init(Object *obj)
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     riscv_cpu_set_misa(env, MXL_RV64, RVI);
+ }
++
++static void rv64e_bare_cpu_init(Object *obj)
++{
++    CPURISCVState *env = &RISCV_CPU(obj)->env;
++    riscv_cpu_set_misa(env, MXL_RV64, RVE);
++}
+ #else
+ static void rv32_base_cpu_init(Object *obj)
+ {
+@@ -696,6 +702,18 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)
+     cpu->cfg.ext_zicsr = true;
+     cpu->cfg.pmp = true;
+ }
++
++static void rv32i_bare_cpu_init(Object *obj)
++{
++    CPURISCVState *env = &RISCV_CPU(obj)->env;
++    riscv_cpu_set_misa(env, MXL_RV32, RVI);
++}
++
++static void rv32e_bare_cpu_init(Object *obj)
++{
++    CPURISCVState *env = &RISCV_CPU(obj)->env;
++    riscv_cpu_set_misa(env, MXL_RV32, RVE);
++}
+ #endif
+ 
+ static ObjectClass *riscv_cpu_class_by_name(const char *cpu_model)
+@@ -2428,6 +2446,8 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+     DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_E31,  rv32_sifive_e_cpu_init),
+     DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_E34,  rv32_imafcu_nommu_cpu_init),
+     DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_U34,  rv32_sifive_u_cpu_init),
++    DEFINE_BARE_CPU(TYPE_RISCV_CPU_RV32I, rv32i_bare_cpu_init),
++    DEFINE_BARE_CPU(TYPE_RISCV_CPU_RV32E, rv32e_bare_cpu_init),
+ #elif defined(TARGET_RISCV64)
+     DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE64,   rv64_base_cpu_init),
+     DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_E51,  rv64_sifive_e_cpu_init),
+@@ -2437,6 +2457,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+     DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_VEYRON_V1,   rv64_veyron_v1_cpu_init),
+     DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE128,  rv128_base_cpu_init),
+     DEFINE_BARE_CPU(TYPE_RISCV_CPU_RV64I, rv64i_bare_cpu_init),
++    DEFINE_BARE_CPU(TYPE_RISCV_CPU_RV64E, rv64e_bare_cpu_init),
+     DEFINE_PROFILE_CPU(TYPE_RISCV_CPU_RVA22U64, rva22u64_profile_cpu_init),
+     DEFINE_PROFILE_CPU(TYPE_RISCV_CPU_RVA22S64, rva22s64_profile_cpu_init),
+ #endif
+-- 
+2.43.0
 
 
