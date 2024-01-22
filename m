@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAEC4C47DD9
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 15:04:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D48FBC47DAF
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 15:05:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rRvjE-0007KE-Bx; Mon, 22 Jan 2024 09:56:48 -0500
+	id 1rRvo7-0008Sf-6K; Mon, 22 Jan 2024 10:01:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rRvj0-00078V-IS
- for qemu-riscv@nongnu.org; Mon, 22 Jan 2024 09:56:36 -0500
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
+ id 1rRvo0-0007zD-VU
+ for qemu-riscv@nongnu.org; Mon, 22 Jan 2024 10:01:45 -0500
+Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rRvin-0008NR-7s
- for qemu-riscv@nongnu.org; Mon, 22 Jan 2024 09:56:34 -0500
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-40eacb6067dso13428405e9.1
- for <qemu-riscv@nongnu.org>; Mon, 22 Jan 2024 06:56:20 -0800 (PST)
+ id 1rRvnq-0001no-4D
+ for qemu-riscv@nongnu.org; Mon, 22 Jan 2024 10:01:43 -0500
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3368abe1093so2774759f8f.2
+ for <qemu-riscv@nongnu.org>; Mon, 22 Jan 2024 07:01:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705935379; x=1706540179; darn=nongnu.org;
+ d=linaro.org; s=google; t=1705935692; x=1706540492; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vrHtFk8FqRL+779o45NQf1FCvJE8oH7F88C4kJtsxq8=;
- b=RAQZstoSF5q2Fhjgx2c4o82FVOcpT4MK9cEqqC4vGD3MJuDyLmpXryk7zBAQXQ2eZH
- kK40y1XZ764nLaBUn+w++OQcbxJUpWehGEHln+pCLyEAMj/gp66qydWOkJFZ9W+TpmvU
- nNd2U8v1IAlqnhV3tC+uVuOO47t05OcZrCN69e7iT2TFwI/xcyx6gi0A1KzFN/+AaWnS
- bfgEepehq3p9goTe+5CYd2GsFo0jCsoYuhgMRnlxhVDk4MAkCZ5sh7XRFB5vOfZAo5cP
- LPhgQPScR23Fj+yMBGaU6Dr0GiYmAbdQaympgHYEfMmDqJ8W5tCOLeManEuJRklAIHHd
- Tkcg==
+ bh=t+Lu1aUTzILJv+8PeOqcfRU9ypZOJg6L0bg1/V/uBfw=;
+ b=pLY88iV91q7NkoYfMNEQQU0G/2nBwtOg6zpOGwDmMthoIr9hIvWygwv/PxdRkzDFPL
+ 5C6Fo4cF50ykqYBbtwPCWQtYDj62olAsLELtOHE5bTYJ3D6rnUwTd6yZQm/LtE2TiWUK
+ iXKrJ9XJYIDdXUuiR4u0eqnQSYxLtlA8n9DyeuGXx3KZGY1K/eLwhsWx3n7TlcSanO4l
+ 9RZXdINyzeoOjt6oZ3ZIeGaudtdl0Zrpr93zD3ra0XkurjqrfBR8KApntWTL6oagToly
+ r5hozjNq3oE1ozskQxZiQPCI0XfEYp7yExA9aFD+Gf3HoIEZZACqO5PzR9jobLadbOHA
+ VwwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705935379; x=1706540179;
+ d=1e100.net; s=20230601; t=1705935692; x=1706540492;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vrHtFk8FqRL+779o45NQf1FCvJE8oH7F88C4kJtsxq8=;
- b=qzkD27aGoximGD4Cbb7Es+4Ej51XredauTfH1+BzOYtsbVGldy95hh1QBsD7dlSdCR
- wtmF267lby8lV15XU6/Oyv4fxR8Df5rqC4LaxRXasOFh/cXnkVw+4JtnrD0IJRdrkz3T
- wJcIRirDabr+EDapF+00kFrMBX7Tz4SlJXQJFqeiR3lTKjn2rucWBerTB5SlMLHlM305
- vDItFoudtrMdpfkwh0T7JirENbPRkrVMsC8OcPmAhc59Nm2gn0ITU4b8pdtS/1FYVqUz
- 7uffKOQ7SdVSDfkQYcgmlT7cVrJTgAwO5kfIS7cHPoAvojqrOx5d5VLy8U2eDd1qQ0NQ
- 9knQ==
-X-Gm-Message-State: AOJu0Yxnb7uOfAbv9zU3Zuh9XnVtWVfZOPyXRubcdL9Ay4YXDShz1Qtm
- jbxV+Kb/M4jB7WO1ywrRkHlNgMBxpcCeMqJ34v7lTdS1S9HEljo3wE8LUhoEZlE=
-X-Google-Smtp-Source: AGHT+IGO7+SVpVCty+QMuZ5XWMkD2R7LdfBxaB5kk1TI4ToS3w8RJ5QwV5ZQrYH9LHANHW13J9fUYA==
-X-Received: by 2002:a05:600c:1906:b0:40e:a7d2:5a5a with SMTP id
- j6-20020a05600c190600b0040ea7d25a5amr918637wmq.71.1705935379780; 
- Mon, 22 Jan 2024 06:56:19 -0800 (PST)
+ bh=t+Lu1aUTzILJv+8PeOqcfRU9ypZOJg6L0bg1/V/uBfw=;
+ b=tEn3owZRo6jV3gGo0S9lDIbcAnWjTL8IU6R8At15NG2UO0qVZFMfZeytkKtpBOInFl
+ g/OYvtyB7PvvVUdPR14Zq7bbivzKYRpbGX56NQF5G7kPeiAwQWKR5uFuMucF4WKkXeXc
+ IF99uf9y1n1bNy7ZHmxGmelFUit6my5kY2Y40u5MolJv7VeOufoBvha+1AUzAsOsufvr
+ rs4oAd9w82xnZCIDmTl/C2Y6vbsmrh7ODPlcRV7aHHn1KEIracz2H5w6qAWhU3teNaOl
+ LIyemKB9ozUUMDla6mgqw/09qVa12VWRFPDdw4wh+Ez5Co8u7wW7Wph79E0194aV54WI
+ NmsQ==
+X-Gm-Message-State: AOJu0Yx5NShEe78cfg9ntvkjgfLsrSLLDmXb7fg1tc7QKfrXG4gYwtE3
+ vqNDgpTuUO82SSroNbxc9K4kHIhLvxQjGByekW0hB3aVfr0GAnwsHmYKZPJh+4U=
+X-Google-Smtp-Source: AGHT+IHRTiofbHHbDcY7uv6w4qbyhJzpWSu85QzckhLtxFm+BHNGyxBTpaRUgd7Z2Eylz9B6B5o7cg==
+X-Received: by 2002:a05:600c:4fc7:b0:40e:60a3:b3e6 with SMTP id
+ o7-20020a05600c4fc700b0040e60a3b3e6mr2319898wmq.170.1705935692106; 
+ Mon, 22 Jan 2024 07:01:32 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- x8-20020a5d4448000000b0033925e94c89sm7018246wrr.12.2024.01.22.06.56.12
+ u6-20020a05600c138600b0040d5a9d6b68sm43621458wmf.6.2024.01.22.07.01.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jan 2024 06:56:14 -0800 (PST)
+ Mon, 22 Jan 2024 07:01:31 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id C81A55F90B;
- Mon, 22 Jan 2024 14:56:11 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 1D9245F9D4;
+ Mon, 22 Jan 2024 14:56:13 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
@@ -93,25 +93,25 @@ Cc: Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>, Song Gao <gaosong@loongson.cn>,
  Eduardo Habkost <eduardo@habkost.net>, Brian Cain <bcain@quicinc.com>,
- Paul Durrant <paul@xen.org>, Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH v3 09/21] gdbstub: Use GDBFeature for GDBRegisterState
-Date: Mon, 22 Jan 2024 14:55:58 +0000
-Message-Id: <20240122145610.413836-10-alex.bennee@linaro.org>
+ Paul Durrant <paul@xen.org>
+Subject: [PATCH v3 20/21] docs/devel: lift example and plugin API sections up
+Date: Mon, 22 Jan 2024 14:56:09 +0000
+Message-Id: <20240122145610.413836-21-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240122145610.413836-1-alex.bennee@linaro.org>
 References: <20240122145610.413836-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x334.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::430;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x430.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -127,85 +127,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
+This makes them a bit more visible in the TCG emulation menu rather
+than hiding them away bellow the ToC limit.
 
-Simplify GDBRegisterState by replacing num_regs and xml members with
-one member that points to GDBFeature.
-
-Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Message-Id: <20240103173349.398526-31-alex.bennee@linaro.org>
-Message-Id: <20231213-gdb-v17-5-777047380591@daynix.com>
+Message-Id: <20240103173349.398526-43-alex.bennee@linaro.org>
+Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- gdbstub/gdbstub.c | 14 ++++++--------
- 1 file changed, 6 insertions(+), 8 deletions(-)
+ docs/devel/tcg-plugins.rst | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-index 068180c83c7..a80729436b6 100644
---- a/gdbstub/gdbstub.c
-+++ b/gdbstub/gdbstub.c
-@@ -47,10 +47,9 @@
+diff --git a/docs/devel/tcg-plugins.rst b/docs/devel/tcg-plugins.rst
+index fa7421279f5..535a74684c5 100644
+--- a/docs/devel/tcg-plugins.rst
++++ b/docs/devel/tcg-plugins.rst
+@@ -143,7 +143,7 @@ requested. The plugin isn't completely uninstalled until the safe work
+ has executed while all vCPUs are quiescent.
  
- typedef struct GDBRegisterState {
-     int base_reg;
--    int num_regs;
-     gdb_get_reg_cb get_reg;
-     gdb_set_reg_cb set_reg;
--    const char *xml;
-+    const GDBFeature *feature;
- } GDBRegisterState;
+ Example Plugins
+----------------
++===============
  
- GDBState gdbserver_state;
-@@ -391,7 +390,7 @@ static const char *get_feature_xml(const char *p, const char **newp,
-                     g_ptr_array_add(
-                         xml,
-                         g_markup_printf_escaped("<xi:include href=\"%s\"/>",
--                                                r->xml));
-+                                                r->feature->xmlname));
-                 }
-             }
-             g_ptr_array_add(xml, g_strdup("</target>"));
-@@ -513,7 +512,7 @@ static int gdb_read_register(CPUState *cpu, GByteArray *buf, int reg)
-     if (cpu->gdb_regs) {
-         for (guint i = 0; i < cpu->gdb_regs->len; i++) {
-             r = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
--            if (r->base_reg <= reg && reg < r->base_reg + r->num_regs) {
-+            if (r->base_reg <= reg && reg < r->base_reg + r->feature->num_regs) {
-                 return r->get_reg(env, buf, reg - r->base_reg);
-             }
-         }
-@@ -534,7 +533,7 @@ static int gdb_write_register(CPUState *cpu, uint8_t *mem_buf, int reg)
-     if (cpu->gdb_regs) {
-         for (guint i = 0; i < cpu->gdb_regs->len; i++) {
-             r =  &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
--            if (r->base_reg <= reg && reg < r->base_reg + r->num_regs) {
-+            if (r->base_reg <= reg && reg < r->base_reg + r->feature->num_regs) {
-                 return r->set_reg(env, mem_buf, reg - r->base_reg);
-             }
-         }
-@@ -553,7 +552,7 @@ void gdb_register_coprocessor(CPUState *cpu,
-         for (i = 0; i < cpu->gdb_regs->len; i++) {
-             /* Check for duplicates.  */
-             s = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
--            if (strcmp(s->xml, feature->xmlname) == 0) {
-+            if (s->feature == feature) {
-                 return;
-             }
-         }
-@@ -565,10 +564,9 @@ void gdb_register_coprocessor(CPUState *cpu,
-     g_array_set_size(cpu->gdb_regs, i + 1);
-     s = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
-     s->base_reg = cpu->gdb_num_regs;
--    s->num_regs = feature->num_regs;
-     s->get_reg = get_reg;
-     s->set_reg = set_reg;
--    s->xml = feature->xml;
-+    s->feature = feature;
+ There are a number of plugins included with QEMU and you are
+ encouraged to contribute your own plugins plugins upstream. There is a
+@@ -591,8 +591,8 @@ The plugin has a number of arguments, all of them are optional:
+   configuration arguments implies ``l2=on``.
+   (default: N = 2097152 (2MB), B = 64, A = 16)
  
-     /* Add to end of list.  */
-     cpu->gdb_num_regs += feature->num_regs;
+-API
+----
++Plugin API
++==========
+ 
+ The following API is generated from the inline documentation in
+ ``include/qemu/qemu-plugin.h``. Please ensure any updates to the API
 -- 
 2.39.2
 
