@@ -4,75 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E3F2C4725D
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 05:43:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F097C47DD3
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 05:46:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rRn4z-0005po-Gu; Mon, 22 Jan 2024 00:42:41 -0500
+	id 1rRn8w-0006pv-Lu; Mon, 22 Jan 2024 00:46:47 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rRn4x-0005nl-VT; Mon, 22 Jan 2024 00:42:40 -0500
-Received: from mail-vs1-xe31.google.com ([2607:f8b0:4864:20::e31])
+ id 1rRn8s-0006pW-Jj; Mon, 22 Jan 2024 00:46:45 -0500
+Received: from mail-ua1-x92d.google.com ([2607:f8b0:4864:20::92d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rRn4v-0004PJ-Ot; Mon, 22 Jan 2024 00:42:39 -0500
-Received: by mail-vs1-xe31.google.com with SMTP id
- ada2fe7eead31-4678c4e51a5so507401137.0; 
- Sun, 21 Jan 2024 21:42:37 -0800 (PST)
+ id 1rRn8r-0004yO-4x; Mon, 22 Jan 2024 00:46:42 -0500
+Received: by mail-ua1-x92d.google.com with SMTP id
+ a1e0cc1a2514c-7ce603b9051so756274241.2; 
+ Sun, 21 Jan 2024 21:46:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705902156; x=1706506956; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1705902399; x=1706507199; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vLzvH9+EWWPFcMB1uYeI4Z7U8DACRKEK9LgMsQ3CEFU=;
- b=eNbgFDNi5ZhMCejJxCEYpC+MK0Ju1l1MjpWLeXOgVrI0RWr13IKRCBZp8FrK/bS1zs
- gvGcF7+VHuICYpo0mIRcGn1Ej4vwMP0VMIE5ycU2Y8z+cNno1g5cU1LrLH3+DnUgma9B
- nQTymAXWuNOTyIqe0To7K9mRZAq5kdh9GHalmJK0XswODql26qF9MfFNCRrMvcY0PhsK
- Uphy0sCK04ZqhN8x1WfvRirWufyMmRbWT/v+LKsOKYw4o4Wf3yQHVfYm0kf3SswTOAH8
- 3wnQklfzAISE4mk7ryZ1e6O9GuJK3lXhWreaeVGGun3CwpN783AELKo2U+tom/9ZDNVA
- 5vYA==
+ bh=YdJ2czemUsaHJpJg0DhAPk/LGaceBp+lfKkunkosdKo=;
+ b=N9NkLIq0My+UVCc/mI8svnJbDP2EKZtyql8cJi+UwwF+92vLfU9QcMDEcxM11f6TMr
+ R11nuABMyCYH8vsU3DqK75FejHjHzQLshMOsGQ8/SZ74eYNEAMZHknMV1djQYpPDzLaO
+ hRImDkOxzegzxz8p+NFpovnvhTUAHaJRwBR+/hJWfcQuntT8/vPElwSp1dfKoFPV1vcg
+ TbrQOr9qRKT5lz5mhlTZNfLPd1qQWzUUzNUehFZeglr/luF0DuPJ3nRx8tgZeX2D/WqN
+ 8Bbc/pvlJJqbHCovHRj0ogm6MrxQEO3DqmzQRp3FUMRm+HT2jheRR9trDz3W4QVU0V+j
+ XqJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705902156; x=1706506956;
+ d=1e100.net; s=20230601; t=1705902399; x=1706507199;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vLzvH9+EWWPFcMB1uYeI4Z7U8DACRKEK9LgMsQ3CEFU=;
- b=Dj0/CzL4X3orJ4Cp3N7Lw8xz23w5Gw4LdK2BCheCt7y74WEs1XIeui+F6ceU3wsyHo
- g53mPIP4mHplt2SwS6VsefKzLG5LZOq3wdGokHX9AvbfPql0G+mudJ1ngG/DyypBMc9W
- A3lj2LuJvGZfo7yIN+S/8/T/R0rgAqsBATH1/DFoCtH+nzjc3mfPv84HxFwjurB/uTJI
- ddqdsJUP7ZGDR3NhXoTb+dSYcePtyUEZJm9Gt85zQZmH6mSMXaAkXmFBkvyp/50OS0PB
- 8TmgK+V7v5EmbEjVB9q+QEPFBWDwTCJo7/6kcfAXCFwd0hBWqcAPp+NhNB8MSxbJTf/d
- bb3Q==
-X-Gm-Message-State: AOJu0Yydg4ftzieXfhDjyhQm+KdPd7TUbLqi7n5LE9iNJhAcbdMyHVr0
- z/5CMt7ONG3s2Klio9l5BJkUKBWlT4Mo/u+hHrYZ7TFZY/irK9ei0lrUhCeIRxJc3nhCsYYfuQs
- KDCedpXGcjWUDTyWEKgRbxlxAS1M=
-X-Google-Smtp-Source: AGHT+IGRKb3KRFtugadkX0+TccGbYTq5FrxKvAMkRYPLWe4PQI9ULXlFFJff6tq21+UNnwXBI8otQpKAOVyum2hCO1E=
-X-Received: by 2002:a05:6102:160a:b0:469:b07e:9e38 with SMTP id
- cu10-20020a056102160a00b00469b07e9e38mr573575vsb.21.1705902156228; Sun, 21
- Jan 2024 21:42:36 -0800 (PST)
+ bh=YdJ2czemUsaHJpJg0DhAPk/LGaceBp+lfKkunkosdKo=;
+ b=D7Us7vsW755ChEF6pWmh/Sl3dvt5c+viVUQm+PqlGb1BSvBc0rBeLMEVV47YQS8eOo
+ K3l2yHXCWmJwTT1KZ6sb0Qc2hYJtngEKpblTqrbJnRbJqJtUucpCK02mrd2CqYFOZT1z
+ 4dBpuNnDxbNssjbI/4FBAmlMLCh4mSIW2wsX8EmybO70UxfLgT11os7Uv23Qsot5oV86
+ Yh9kF42JyJozSUxc8fKhb/lcWos4QQvxu9UmSvVwKnwqfcI6+BlO8QrIhyOdJS2e8KCJ
+ HOWrK+oFgJ63CVoyyX3HF9ZWvqT47g6yvR6Uc2ps3sccb6KB8vJyTG/h/68H3ZVZBUan
+ /LSg==
+X-Gm-Message-State: AOJu0YwhpsRr7WT4g9M+Wzx+Va7yo5AEj2ZZwvSwuk9fgZv8J9qzgJbI
+ 9tF7Z1ljtPCj+PcCocDRKMW2dvAT3Csd/pAKZDyAejTCMzIHlE1gMVs9w7LQxBnatINfUf86NCw
+ 5X01AJYA2qjQOHV64PYuheAXs0K8=
+X-Google-Smtp-Source: AGHT+IGCaMbM+bBhyteRc07mubGf3RCKJNV9TXHx4MZLMxel3Z5pkj9p0FxR2Kfq5y/PibvYQuX+d4aCF3q6QE9y18g=
+X-Received: by 2002:a05:6102:e13:b0:467:da18:30af with SMTP id
+ o19-20020a0561020e1300b00467da1830afmr1990993vst.27.1705902399178; Sun, 21
+ Jan 2024 21:46:39 -0800 (PST)
 MIME-Version: 1.0
-References: <20240110040203.1920924-1-hchauhan@ventanamicro.com>
- <e2763db2-fade-482d-b433-1bfce6acf7d3@ventanamicro.com>
- <CAKmqyKOA6OtixYoMJ_qtXj_u0t6rMdHawg0VEvq3-=mK4q6_XQ@mail.gmail.com>
- <3c091744cd4bafeb7c1d177455fa9789822e7209.camel@rivosinc.com>
-In-Reply-To: <3c091744cd4bafeb7c1d177455fa9789822e7209.camel@rivosinc.com>
+References: <20240119112129.20067-1-rbradford@rivosinc.com>
+ <20240119112129.20067-2-rbradford@rivosinc.com>
+In-Reply-To: <20240119112129.20067-2-rbradford@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 22 Jan 2024 15:42:10 +1000
-Message-ID: <CAKmqyKPkjBBo-2EAL25-3qACSv4c4naGT8V-F5e5as4D=WVa9g@mail.gmail.com>
-Subject: Re: [PATCH 0/2] Export debug triggers as an extension
+Date: Mon, 22 Jan 2024 15:46:13 +1000
+Message-ID: <CAKmqyKMBYjwsb1uYuShz3jjnyWAvaZQ+i+943sr-T3RYz_Rbig@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] target/riscv: Add Zaamo and Zalrsc extensions
 To: Rob Bradford <rbradford@rivosinc.com>
-Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Himanshu Chauhan <hchauhan@ventanamicro.com>, 
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Alvin Chang <alvinga@andestech.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Andrew Jones <ajones@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, atishp@rivosinc.com, 
+ palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
+ liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e31;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe31.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92d;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92d.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -96,141 +91,67 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Jan 12, 2024 at 11:34=E2=80=AFPM Rob Bradford <rbradford@rivosinc.c=
-om> wrote:
+On Fri, Jan 19, 2024 at 9:22=E2=80=AFPM Rob Bradford <rbradford@rivosinc.co=
+m> wrote:
 >
-> On Fri, 2024-01-12 at 13:52 +1000, Alistair Francis wrote:
-> > On Thu, Jan 11, 2024 at 5:20=E2=80=AFAM Daniel Henrique Barboza
-> > <dbarboza@ventanamicro.com> wrote:
-> > >
-> > > Himanshu,
-> > >
-> > > We spoke offline but let's make everyone aware:
-> > >
-> > > - 'sdtrig' should be marked with 'x-' and be an experimental
-> > > extension since
-> > > the spec isn't yet frozen;
-> > >
-> > > - Alvin sent a patch to the ML adding the 'mcontext' CSR for
-> > > 'sdtrig' some time
-> > > ago:
-> > >
-> > > "[PATCH v2] target/riscv: Implement optional CSR mcontext of debug
-> > > Sdtrig extension"
-> > >
-> > > It would be good to put his patch on top of this series to ease the
-> > > review for everyone.
-> > > The changes done in patch 2 would also be applicable to the
-> > > mcontext CSR;
-> > >
-> > >
-> > > - last but probably the most important: the existing 'debug' flag
-> > > seems to be acting as
-> > > the actual 'sdtrig' extension due to how the flag is gating trigger
-> > > code, e.g.:
-> > >
-> > >    if (cpu->cfg.debug) {
-> > >          riscv_trigger_realize(&cpu->env);
-> > >      }
-> > >
-> > > and
-> > >
-> > >      if (cpu->cfg.debug) {
-> > >          riscv_trigger_reset_hold(env);
-> > >      }
-> > >
-> > >
-> > > If that's really the case, all the checks with cpu->cfg.debug will
-> > > need to also include
-> > > cpu->cfg.ext_sdtrig (one or the other). And now we'll have to make
-> > > an option: do we leave
-> > > the debug triggers (i.e. the 'debug' flag) as always enabled?
-> >
-> > From memory the "debug" property is for the original debug spec:
-> > https://github.com/riscv/riscv-debug-spec/releases/tag/task_group_vote
-> >
-> > That was ratified and is an official extension. AFAIK this is what is
-> > in physical hardware as well.
-> >
-> > The actual PDF says draft though, I'm not sure what's going on there.
-> >
-> > The debug spec doesn't have a Z* name, so it's just "debug", at least
-> > AFAIK.
-> >
-> > "sdtrig" seems to be a new backwards-incompatible extension doing
-> > basically the same thing. What a mess
-> >
-> > >
-> > > If it's up to me I would make 'debug' as default 'false' and
-> > > deprecate it. Users will need
-> >
-> > I don't think that's the right approach. It's a ratified extension
-> > that we are supporting and is in hardware. I think we are stuck
-> > supporting it
-> >
-> >
+> These extensions represent the atomic operations from A (Zaamo) and the
+> Load-Reserved/Store-Conditional operations from A (Zalrsc)
 >
-> I've done a bit of digging and I agree things are quite messy. Here are
-> my discoveries:
+> Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>  target/riscv/cpu.c     | 5 +++++
+>  target/riscv/cpu_cfg.h | 2 ++
+>  2 files changed, 7 insertions(+)
 >
-> The debug option and the code for triggers was added in these commits:
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 8d3ec74a1c..604baf53c8 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -103,7 +103,9 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
+>      ISA_EXT_DATA_ENTRY(zihintpause, PRIV_VERSION_1_10_0, ext_zihintpause=
+),
+>      ISA_EXT_DATA_ENTRY(zihpm, PRIV_VERSION_1_12_0, ext_zihpm),
+>      ISA_EXT_DATA_ENTRY(zmmul, PRIV_VERSION_1_12_0, ext_zmmul),
+> +    ISA_EXT_DATA_ENTRY(zaamo, PRIV_VERSION_1_12_0, ext_zaamo),
+>      ISA_EXT_DATA_ENTRY(zacas, PRIV_VERSION_1_12_0, ext_zacas),
+> +    ISA_EXT_DATA_ENTRY(zalrsc, PRIV_VERSION_1_12_0, ext_zalrsc),
+>      ISA_EXT_DATA_ENTRY(zawrs, PRIV_VERSION_1_12_0, ext_zawrs),
+>      ISA_EXT_DATA_ENTRY(zfa, PRIV_VERSION_1_12_0, ext_zfa),
+>      ISA_EXT_DATA_ENTRY(zfbfmin, PRIV_VERSION_1_12_0, ext_zfbfmin),
+> @@ -1491,6 +1493,9 @@ const RISCVCPUMultiExtConfig riscv_cpu_experimental=
+_exts[] =3D {
+>      MULTI_EXT_CFG_BOOL("x-smaia", ext_smaia, false),
+>      MULTI_EXT_CFG_BOOL("x-ssaia", ext_ssaia, false),
 >
-> c9711bd778 target/riscv: cpu: Enable native debug feature
-> 38b4e781a4 target/riscv: machine: Add debug state description
-> b6092544fc target/riscv: csr: Hook debug CSR read/write
-> 1acdb3b013 target/riscv: cpu: Add a config option for native debug
-> 95799e36c1 target/riscv: Add initial support for the Sdtrig extension
->
-> In March 2022 - since the commit refers to the Sdtrig extension name
-> and from the date this was an implementation not of the ratified 0.13
-> debug spec (which did not have Sdtrig as a separate extension) but
-> rather a version of the in development 1.0 debug spec.
+> +    MULTI_EXT_CFG_BOOL("x-zaamo", ext_zaamo, false),
+> +    MULTI_EXT_CFG_BOOL("x-zalrsc", ext_zalrsc, false),
 
-Yeah... We used the "stable" from master. That is our mistake there.
-
-I'm pretty sure we targeted the 0.13. The "Sdtrig" was only added in
-the v4 as the changelog says: "mention Sdtrig extension in the commit"
-
->
-> It's not trivial to tell if it's closer to the ratified 0.13 version or
-> the (hopefully soon to be frozen) 1.0 version.
->
-> As the only part of the debug specification to be implemented is the
-> triggers then effectively the debug option is x-sdtrig.
->
-> I don't think there is any way for code running on the machine to
-> identify what version of the debug is implemented - the appropriate
-> register is only available for external debug. Once 1.0 is frozen then
-> the presence of Sdtrig isa string would indicate 1.0 trigger support is
-> available.
->
-> According to JIRA - https://jira.riscv.org/browse/RVS-981 the debug
-> specification should freeze this month.
->
-> How about considering this as a solution:
->
-> - Add a new x-sdtrig option that defaults to false
-> - Deprecate debug option - but retain it with default on
-
-We can't deprecate a ratified spec. The 0.13 just seems to call it
-"debug" so that's what we are stuck with
-
-> - Add warning if triggers are used and x-sdtrig is not enabled
-> - Update the trigger implementation to match frozen spec
-
-We will need to support two versions, as there are two ratified specs.
+We should implement the extension before we expose it to userspace.
+That helps maintain bisectability of the code
 
 Alistair
 
+> +
+>      MULTI_EXT_CFG_BOOL("x-zvfh", ext_zvfh, false),
+>      MULTI_EXT_CFG_BOOL("x-zvfhmin", ext_zvfhmin, false),
 >
-> There is potentially a chance that some use cases will be broken but I
-> don't think triggers are being widely use - the SBI support only just
-> got merged:
-> https://github.com/riscv-software-src/opensbi/commit/97f234f15c9657c6ec69=
-fa6ed745be8107bf6ae2
+> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> index fea14c275f..cc4c30244c 100644
+> --- a/target/riscv/cpu_cfg.h
+> +++ b/target/riscv/cpu_cfg.h
+> @@ -78,7 +78,9 @@ struct RISCVCPUConfig {
+>      bool ext_svnapot;
+>      bool ext_svpbmt;
+>      bool ext_zdinx;
+> +    bool ext_zaamo;
+>      bool ext_zacas;
+> +    bool ext_zalrsc;
+>      bool ext_zawrs;
+>      bool ext_zfa;
+>      bool ext_zfbfmin;
+> --
+> 2.43.0
 >
-> Hope this is helpful,
->
-> Rob
 >
 
