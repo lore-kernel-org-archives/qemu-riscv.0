@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 972B1C47422
-	for <qemu-riscv@archiver.kernel.org>; Sun, 21 Jan 2024 07:14:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17609C47422
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 02:39:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rRS20-0001tg-Ap; Sun, 21 Jan 2024 02:14:12 -0500
+	id 1rRkCz-0005tb-5d; Sun, 21 Jan 2024 21:38:45 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1rRS1y-0001sq-Cw; Sun, 21 Jan 2024 02:14:10 -0500
-Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rRkCv-0005sp-8u; Sun, 21 Jan 2024 21:38:41 -0500
+Received: from mail-ua1-x92d.google.com ([2607:f8b0:4864:20::92d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1rRS1w-0000lA-IY; Sun, 21 Jan 2024 02:14:10 -0500
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5578485fc0eso2059358a12.1; 
- Sat, 20 Jan 2024 23:14:07 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rRkCt-0007XR-La; Sun, 21 Jan 2024 21:38:40 -0500
+Received: by mail-ua1-x92d.google.com with SMTP id
+ a1e0cc1a2514c-7d2a67daa25so796344241.0; 
+ Sun, 21 Jan 2024 18:38:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705821246; x=1706426046; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wHlpOcv02DwrrX6WvncuMRoVIQ5OQyEnOP0Kgmns+98=;
- b=m66WnaHaDONsllXvHMc1jC1RNRAg4EVD1Mo/BjyC/3fnJtpTgQm/z/XEUaPhfu5vWW
- RGDH3b0dFLUubBvKDc8aX4yEgudkC3YvaTevIAAgRPNTKWTPPEbwaJEGFNexrAKCA2b8
- KN+pNJNbfIHTAtbXqK3ZFfVvFY/jO1+IhHUzpV/7ko8rezk+y5Ob8zZgNJtdcdzqj3L4
- Jw6IJmbwnrYvsQJ7JAeeus4I/AJmODmjV857Ujym8VOjP/CesRG8qYnSCP+zxtDUdH3K
- SsLQTsbfZgs4WY93uQoiSoXGj1XkSbr49mXu/wI2UzgeWOEN8d1rXiIalFdruG1wf1vk
- a3cw==
+ d=gmail.com; s=20230601; t=1705891117; x=1706495917; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vv+u4W2Hx8OQa8plQDcFKIld72nNQ8ZUv2EyDmmeHb8=;
+ b=OEG5f11/TO2sAdcnZqnLCBXgdzPa7/8gLyhaqloI+mFO9iGQiVF+gpJad/IdKfnB9s
+ iRie8Gb/YHDH4CKX3Ac2FHKbysLPUBc1LBmvgyo99rliRCaPpPnSrkUcSavdbHh1Xs84
+ pO2MsMCG/HtAWY3ZaWJ1BleLb0VRsGB7abk4e8XNxHiZRf3+SzGQFa33aWWKtCGbcGKt
+ KXCP1Heu7FMiADAEQf7lTD7mutNtvnVkQdAosbL4/u7wHfuRS0cQ3dU8HWa2zxCWlaWp
+ riWQbgFiLk3rZzQtriB9zq7M6DvE7lH9VLX2A9YOMtqWrUxhIb/q2mcuNSvqJpbIOZrk
+ laTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705821246; x=1706426046;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=wHlpOcv02DwrrX6WvncuMRoVIQ5OQyEnOP0Kgmns+98=;
- b=bSwR2XR7VcckEEXtOYhyvIxp+kOJ3D7X+8B2HXhaIQJE/kx4pfPTo2sDO1t11E7LOO
- 4nYXYjIm4QGVIgHvn9uZ0S4/drIQKm4U9/jsHiIZrKoVVp31fWDA+7dWOz4j+20Tk6ly
- hg6U9Y/IMkxn/Nxz4RmhnBUI+o6KjmlNh5BAsgxPlXnel+61iMDn4uCy97OedRDQnZ2l
- bvASEjE8n0euF4D8yo3JX4qn9jAz0ie8r/ZtIQR/g/qZgsDUgHXBs4T2RW4+drspyO3a
- f1IwaJadF4DfhztUo/lTCpOcMejyxJbRUAQaAkyXoRHIruA8/D2c+/NVmL7tQNZQ1l1q
- cxmQ==
-X-Gm-Message-State: AOJu0YyuvN2TazGiz1E8+oPTjyqhCkKnRA8YMG0BpdIx7Vp09zno9CLy
- ja227kRUfGKFHmM/1uLrf9WkE2x5tnEYLbMc04PwYfSRjQ5RYm/aQ1FnDFDfW2X66Hz7dSSCDro
- xp9u94Xe0rzsnPqx8cTe6+2HN5vY=
-X-Google-Smtp-Source: AGHT+IGu+XNmCR16hb6YCOeQpnuYPdTDQ278fIdj65a7GYeQmPxy+HPWJ+/agUSY5sKjTix4G6jkk9SXolvFbQp0uIQ=
-X-Received: by 2002:a05:6402:50d3:b0:55a:c0e7:1e03 with SMTP id
- h19-20020a05640250d300b0055ac0e71e03mr1029655edb.71.1705821246061; Sat, 20
- Jan 2024 23:14:06 -0800 (PST)
+ d=1e100.net; s=20230601; t=1705891117; x=1706495917;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vv+u4W2Hx8OQa8plQDcFKIld72nNQ8ZUv2EyDmmeHb8=;
+ b=ljz85Wyy01gMKBsTbQ6ddY/zhycUGwECsiLQDRidLkGM4hJonFNwh7ibjPSvM6LOCU
+ tguh4QD4YI8DTB9Ei36QS7WT537BMxWmxv4tf0vaoIX72emdvZTLJ3FXeEyTmnHwu4MR
+ ry5a8SNlhmXON2L3hw/eIwNCxOB/UAGOS76n9RqUY+nwUUkbjn+8QK+hUoEFJ0nuOiG4
+ yP3yNsDswB+7/8jd/NIzSUPC7lQXk4Z76Ot2Gz4NYVcNZnM8ECZUv7LOvGKK0ofZp/Rh
+ anJcBeQZqFrV8dGHWtyHc2gS/PpV9jkOinvPpj1cfNW8r4HCiX7aIFuOcMLpy+XMR9rE
+ /qpQ==
+X-Gm-Message-State: AOJu0Yw+Ecj5IGDzXQZCPQRp5ocBSvSNBc98fLSiN2gIqeZTiGR7w0jP
+ 6SEDnft0NgB47ccTs9qEywdoaZrPi+VEmQmYMAkZIf6L8u10hiIhUzLrEdaaoYt2RpCA9DUXxAy
+ Llkd8evt9LyOTwNn1DsLJUXXSew4=
+X-Google-Smtp-Source: AGHT+IG0hmGWEJdOujoz0o16V/RfVq6qm3uO2z5xPIq2W6HY8mknZx0VECJJdJsYqLDybCBdvNgE6yWD2u614rgFS/A=
+X-Received: by 2002:a05:6122:509:b0:4b6:dc25:3d4b with SMTP id
+ x9-20020a056122050900b004b6dc253d4bmr717664vko.12.1705891116273; Sun, 21 Jan
+ 2024 18:38:36 -0800 (PST)
 MIME-Version: 1.0
-References: <20240109102930.405323-1-me@deliversmonkey.space>
- <20240109102930.405323-4-me@deliversmonkey.space>
- <CAKC1njSLR614zQk0_DAgYN1jjdg=0eUa7N1AEwwXZVNN6BwjmA@mail.gmail.com>
- <3cb918ca-27cd-4f1e-8738-306dc5280f42@linaro.org>
- <CAKC1njRXPi1Roch=T+NwQk-TOzN=gSjmPh2KCVsemKdex9CamA@mail.gmail.com>
- <5b6571d3-f654-488d-9dc5-0d18ba542e05@linaro.org>
-In-Reply-To: <5b6571d3-f654-488d-9dc5-0d18ba542e05@linaro.org>
-From: Alexey Baturo <baturo.alexey@gmail.com>
-Date: Sun, 21 Jan 2024 10:13:54 +0300
-Message-ID: <CAFukJ-Cf51kS17BOCkuPpxGXS+h4-MENKqBH5EW7Bj0mz+KPRQ@mail.gmail.com>
-Subject: Re: [PATCH v4 3/6] target/riscv: Add helper functions to calculate
- current number of masked bits for pointer masking
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: Deepak Gupta <debug@rivosinc.com>, zhiwei_liu@linux.alibaba.com,
- palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu, 
- kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Content-Type: multipart/alternative; boundary="0000000000006c00b1060f6f754f"
-Received-SPF: pass client-ip=2a00:1450:4864:20::533;
- envelope-from=baturo.alexey@gmail.com; helo=mail-ed1-x533.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+References: <20240116205817.344178-1-dbarboza@ventanamicro.com>
+ <20240116205817.344178-2-dbarboza@ventanamicro.com>
+In-Reply-To: <20240116205817.344178-2-dbarboza@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 22 Jan 2024 12:38:10 +1000
+Message-ID: <CAKmqyKN71zvJnF8OuLRFmXHXn47OyaYUTVD+r5cS9SipUZYdJw@mail.gmail.com>
+Subject: Re: [PATCH v3 01/13] target/riscv: add 'vlenb' field in cpu->cfg
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, richard.henderson@linaro.org, max.chou@sifive.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92d;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92d.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -93,141 +91,81 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---0000000000006c00b1060f6f754f
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Wed, Jan 17, 2024 at 7:00=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> Our usage of 'vlenb' is overwhelming superior than the use of 'vlen'.
+> We're using 'vlenb' most of the time, having to do 'vlen >> 3' or
+> 'vlen / 8' in every instance.
+>
+> In hindsight we would be better if the 'vlenb' property  was introduced
+> instead of 'vlen'. That's not what happened, and now we can't easily get
+> rid of it due to user scripts all around. What we can do, however, is to
+> change our internal representation to use 'vlenb'.
+>
+> Add a 'vlenb' field in cpu->cfg. It'll be set via the existing 'vlen'
+> property, i.e. setting 'vlen' will also set 'vlenb'.
+>
+> We'll replace all 'vlen >> 3' code to use 'vlenb' directly. Start with
+> the single instance we have in target/riscv/cpu.c.
+>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-Hi,
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Having the feature to run binaries with pointer masking on qemu-user is
-really nice, but I see this patch series as an initial support.
-Obviously there'll be more patches and fixes for pointer masking as soon as
-arch tests are ready.
-I suggest supporting qemu-user in the next patches, but make sure we do
-this before claiming 100% support for pointer masking.
-@Deepak Gupta <debug@rivosinc.com> what do you think?
+Alistair
 
-Thanks
-
-=D1=81=D0=B1, 20 =D1=8F=D0=BD=D0=B2. 2024=E2=80=AF=D0=B3. =D0=B2 10:37, Ric=
-hard Henderson <richard.henderson@linaro.org
->:
-
-> On 1/19/24 09:40, Deepak Gupta wrote:
-> > On Thu, Jan 18, 2024 at 12:50=E2=80=AFPM Richard Henderson
-> > <richard.henderson@linaro.org> wrote:
-> >> At some point pointer masking will be in hardware, and the kernel will
-> gain support for
-> >> it, and there will likely be a prctl() added for it.  At the point the
-> kernel finalizes
-> >> the API, you will be able to enable pointer masking for qemu-user.
-> >
-> > I am sure I am missing some important detail here, BUT...
-> >
-> > How is it different from aarch64 "top byte ignore".
+> ---
+>  target/riscv/cpu.c     | 4 +++-
+>  target/riscv/cpu_cfg.h | 1 +
+>  2 files changed, 4 insertions(+), 1 deletion(-)
 >
-> It is very similar, yes.
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 8d3ec74a1c..f4261d2ffc 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -847,7 +847,7 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *=
+f, int flags)
+>                               csr_ops[csrno].name, val);
+>              }
+>          }
+> -        uint16_t vlenb =3D cpu->cfg.vlen >> 3;
+> +        uint16_t vlenb =3D cpu->cfg.vlenb;
 >
-> > I think commit: 16c8497 enables top byte ignore for user pointers and
-> > by default for qemu-user for aarch64 target.
+>          for (i =3D 0; i < 32; i++) {
+>              qemu_fprintf(f, " %-8s ", riscv_rvv_regnames[i]);
+> @@ -1314,6 +1314,7 @@ static void riscv_cpu_init(Object *obj)
+>      /* Default values for non-bool cpu properties */
+>      cpu->cfg.pmu_mask =3D MAKE_64BIT_MASK(3, 16);
+>      cpu->cfg.vlen =3D 128;
+> +    cpu->cfg.vlenb =3D 128 >> 3;
+>      cpu->cfg.elen =3D 64;
+>      cpu->env.vext_ver =3D VEXT_VERSION_1_00_0;
+>  }
+> @@ -1810,6 +1811,7 @@ static void prop_vlen_set(Object *obj, Visitor *v, =
+const char *name,
 >
-> Not quite, no.
+>      cpu_option_add_user_setting(name, value);
+>      cpu->cfg.vlen =3D value;
+> +    cpu->cfg.vlenb =3D value >> 3;
+>  }
 >
-> commit 0e0c030c681730f3ec55ba3b223b608a8f3e8282
-> Author: Richard Henderson <richard.henderson@linaro.org>
-> Date:   Fri Feb 12 10:48:51 2021 -0800
+>  static void prop_vlen_get(Object *obj, Visitor *v, const char *name,
+> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> index fea14c275f..50479dd72f 100644
+> --- a/target/riscv/cpu_cfg.h
+> +++ b/target/riscv/cpu_cfg.h
+> @@ -140,6 +140,7 @@ struct RISCVCPUConfig {
 >
->      linux-user/aarch64: Implement PR_TAGGED_ADDR_ENABLE
->
-> is more relevant.
->
-> > IIRC, user <--> kernel abi is only needed for pointers that are passed
-> > to the kernel.
->
-> It is also needed to *enable* pointer masking at all.
->
-> For aarch64, TBI has been enabled for user-space since the beginning, but
-> that is not true
-> for riscv.  Therefore there will be a need for a syscall to opt in and
-> enable pointer masking.
->
-> > And in the case of qemu-user, we are talking about the host kernel.
->
-> No, we are not.  We are always emulating the guest kernel.
+>      uint32_t pmu_mask;
+>      uint16_t vlen;
+> +    uint16_t vlenb;
+>      uint16_t elen;
+>      uint16_t cbom_blocksize;
+>      uint16_t cbop_blocksize;
+> --
+> 2.43.0
 >
 >
-> r~
->
-
---0000000000006c00b1060f6f754f
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi,<div><br></div><div>Having the feature to run binaries =
-with pointer masking on qemu-user is really nice, but I see this patch seri=
-es as an initial support.</div><div>Obviously there&#39;ll be more patches =
-and fixes for pointer=C2=A0masking as soon as arch tests are ready.</div><d=
-iv>I suggest supporting qemu-user in the next patches, but make sure we do =
-this before claiming 100% support for pointer masking.</div><div><a class=
-=3D"gmail_plusreply" id=3D"plusReplyChip-0" href=3D"mailto:debug@rivosinc.c=
-om" tabindex=3D"-1">@Deepak Gupta</a>=C2=A0what do you think?<br></div><div=
-><br></div><div>Thanks</div></div><br><div class=3D"gmail_quote"><div dir=
-=3D"ltr" class=3D"gmail_attr">=D1=81=D0=B1, 20 =D1=8F=D0=BD=D0=B2. 2024=E2=
-=80=AF=D0=B3. =D0=B2 10:37, Richard Henderson &lt;<a href=3D"mailto:richard=
-.henderson@linaro.org">richard.henderson@linaro.org</a>&gt;:<br></div><bloc=
-kquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:=
-1px solid rgb(204,204,204);padding-left:1ex">On 1/19/24 09:40, Deepak Gupta=
- wrote:<br>
-&gt; On Thu, Jan 18, 2024 at 12:50=E2=80=AFPM Richard Henderson<br>
-&gt; &lt;<a href=3D"mailto:richard.henderson@linaro.org" target=3D"_blank">=
-richard.henderson@linaro.org</a>&gt; wrote:<br>
-&gt;&gt; At some point pointer masking will be in hardware, and the kernel =
-will gain support for<br>
-&gt;&gt; it, and there will likely be a prctl() added for it.=C2=A0 At the =
-point the kernel finalizes<br>
-&gt;&gt; the API, you will be able to enable pointer masking for qemu-user.=
-<br>
-&gt; <br>
-&gt; I am sure I am missing some important detail here, BUT...<br>
-&gt; <br>
-&gt; How is it different from aarch64 &quot;top byte ignore&quot;.<br>
-<br>
-It is very similar, yes.<br>
-<br>
-&gt; I think commit: 16c8497 enables top byte ignore for user pointers and<=
-br>
-&gt; by default for qemu-user for aarch64 target.<br>
-<br>
-Not quite, no.<br>
-<br>
-commit 0e0c030c681730f3ec55ba3b223b608a8f3e8282<br>
-Author: Richard Henderson &lt;<a href=3D"mailto:richard.henderson@linaro.or=
-g" target=3D"_blank">richard.henderson@linaro.org</a>&gt;<br>
-Date:=C2=A0 =C2=A0Fri Feb 12 10:48:51 2021 -0800<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0linux-user/aarch64: Implement PR_TAGGED_ADDR_ENABLE<br>
-<br>
-is more relevant.<br>
-<br>
-&gt; IIRC, user &lt;--&gt; kernel abi is only needed for pointers that are =
-passed<br>
-&gt; to the kernel.<br>
-<br>
-It is also needed to *enable* pointer masking at all.<br>
-<br>
-For aarch64, TBI has been enabled for user-space since the beginning, but t=
-hat is not true <br>
-for riscv.=C2=A0 Therefore there will be a need for a syscall to opt in and=
- enable pointer masking.<br>
-<br>
-&gt; And in the case of qemu-user, we are talking about the host kernel.<br=
->
-<br>
-No, we are not.=C2=A0 We are always emulating the guest kernel.<br>
-<br>
-<br>
-r~<br>
-</blockquote></div>
-
---0000000000006c00b1060f6f754f--
 
