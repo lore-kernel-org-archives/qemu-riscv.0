@@ -4,76 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92E9AC47DAF
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 16:15:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 706D6C46CD2
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 22:15:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rRwtX-0006TN-Qo; Mon, 22 Jan 2024 11:11:31 -0500
+	id 1rS2a0-0004nL-R5; Mon, 22 Jan 2024 17:15:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rRwtU-0006SS-Js
- for qemu-riscv@nongnu.org; Mon, 22 Jan 2024 11:11:28 -0500
-Received: from mail-pg1-x532.google.com ([2607:f8b0:4864:20::532])
+ id 1rS2Zv-0004m7-PG
+ for qemu-riscv@nongnu.org; Mon, 22 Jan 2024 17:15:41 -0500
+Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rRwtT-0005Im-4t
- for qemu-riscv@nongnu.org; Mon, 22 Jan 2024 11:11:28 -0500
-Received: by mail-pg1-x532.google.com with SMTP id
- 41be03b00d2f7-5cf2d73a183so2982108a12.1
- for <qemu-riscv@nongnu.org>; Mon, 22 Jan 2024 08:11:26 -0800 (PST)
+ id 1rS2Zt-0005tO-71
+ for qemu-riscv@nongnu.org; Mon, 22 Jan 2024 17:15:39 -0500
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-6dbe3fc1421so736590b3a.1
+ for <qemu-riscv@nongnu.org>; Mon, 22 Jan 2024 14:15:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1705939886; x=1706544686; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7DYo8VrPXlh1AJNySLC/rLx/xCLIPadhg3sHTr+fkec=;
- b=Zx81/P8RwK+4CIt4+/IOVuih8cM0aezfMjrjXBzOt6dRjhkWdhgOZIPpg4nKKQKKec
- L7aK1TjY8dPHuS5RJBGE9jfHmClYe3QQ1ynTYXdM1Yc+pmXZ+Pu4YgSiiAsRiz6KNwxy
- hrhgKYLAUvMtf22sRpwteXSA9tWmnqCQIPZQjXFZHbzoe/Xpk/3o154NNikMSqArXVYn
- SNreXCavZu9P14rsUZkh8Unx2DhWnbDzUB2kv4hO4sbEXc61FKrYA1iGaTjjk2bvKbWi
- mOHVZ5Huu5QyY6JiiaoilFUYcPajv0JjsyGXESatyMvuvTjXqXjUg15J9aEcw3HDk7qd
- xYEw==
+ d=ventanamicro.com; s=google; t=1705961735; x=1706566535; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=/8mrrojUFIXViIyax3XRM0xJu20LN1yz7kE9Ge+ZwVc=;
+ b=OMR2MqcVXeonmMeD4VJ1cylHi6kGFKd9EEYBXeS4IzkmhykVfKbwAnboylf3OW9HkZ
+ W2XDZb8frhX8lldTsXzgSa2qMEukRQiTz5V5lTtriZEPAq8MN/XDEB39+4Ta3jLYSvPf
+ fOcovRm6oQbA6JGd+mYyhnSEIaRtvQ4eXKm7HF57lu6JfN0brys99uACTfaHlGKyh/eF
+ tv2PO7wstlF08lGQb457dtsscs3dAtl9dO8kZ8kfbUMcm1wY1iIZNuZeCZHaz590He4l
+ pGNrGk9b5XU24pAq2iLXeb3+Dem7dA/uXxteiLEWS6tVT11eaPgGhBXT/1HG44+tk+wy
+ gTvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705939886; x=1706544686;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=7DYo8VrPXlh1AJNySLC/rLx/xCLIPadhg3sHTr+fkec=;
- b=cVmqMWz8j/qQAhSjjmCzGO3em2WhDNf0mqFIEfcXJhDs1B3D2qxHhMeG3AkzlLYP8O
- tP3J+7MYN4UU5i+J5bH8IO+rRWpZxDaWbBVm7pZB5Zjx2yMx2gFkjPgfKM7byekL/jJo
- eu17drNZ4NjYo1b+o5PPH2OApQ1/Gteyyc1GQJ+ml1a6WJACKn+N4sUh+ic+S9VUeC8H
- 6tkw5o2MLMuqgJm6T7Dlfl926RUBCuBSZ0RG6ORHUYWPnmmw/OAVi7hBI2fq59vupaxI
- NWSbe/m9MGx+aKXoBNmQbfoEmCiPJon7MSly6g7UXfFbMqCrI8wtP6VzWW35yU6IxkUc
- UT6g==
-X-Gm-Message-State: AOJu0YzQS+s6Chu36EK0kYUcKoBYa1raOKIMWKqOapUyxHS22Ht5+4as
- VSKxSbSFUalqCaraWI82DjExuI/QmB5mI8ZJT9TIBwFnJ4Nt3/C0CPSprrSogCQ=
-X-Google-Smtp-Source: AGHT+IEkks5yyX9C7nhNlgXuOzJQfw1/GOWBN/PMFnmdEulC0nWq4kLp8xRfwv4r77CiqZ+Yz8IUkw==
-X-Received: by 2002:a17:90a:43a3:b0:28d:1581:29e6 with SMTP id
- r32-20020a17090a43a300b0028d158129e6mr5320566pjg.13.1705939885966; 
- Mon, 22 Jan 2024 08:11:25 -0800 (PST)
+ d=1e100.net; s=20230601; t=1705961735; x=1706566535;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/8mrrojUFIXViIyax3XRM0xJu20LN1yz7kE9Ge+ZwVc=;
+ b=QhDFZm8x0YFGYVntn7cel06URzElWz1tDpHDW4duGclsEh0sR5aaGkIeDJBTL7a0mt
+ Bj7INCyuG232UemOi7Y0QJx64KQ/hleB7GDUpqAN3+39KIeWjqy0rgQPnKnm0wd0ueL7
+ L5Q0NE0YNi7vAYdr18LU5IP+oB58yUVbyKmKBZq6Ly+XSwdeaS3mbfWM44JurYCBcq89
+ vU9N53V2A0AIuMNy+N+Hk/tQNYoYdRZIbiPKaxP3O/RJvEBufcwgybQYJfYX0LBEf4vo
+ V1hquwTGzzahrPWyHLzP4XtHPsIg1hHR3+rAJTpBC213NEXS1Gy8KYCD+9duCZOtL+kL
+ NSYA==
+X-Gm-Message-State: AOJu0Yx6++SpKBPPwPpszbbkBqcuqMyh3YDYtd8rNf6yzuT98JiA2G10
+ 8ViajvLXUXErd+lK/VLYldUuaQw2UsRCA7dGO711SXGddjwfKRekCqIxKrYLDiY=
+X-Google-Smtp-Source: AGHT+IEsSvt8iUfv8UY72ZhesyuUQt+ymEWn0hwaIrvvkVfabBZfes+3Glxg3ay4ot4vOcpCkMy0ow==
+X-Received: by 2002:a17:902:b283:b0:1d4:e011:8f2a with SMTP id
+ u3-20020a170902b28300b001d4e0118f2amr2772615plr.67.1705961735330; 
+ Mon, 22 Jan 2024 14:15:35 -0800 (PST)
 Received: from grind.. ([152.234.127.94]) by smtp.gmail.com with ESMTPSA id
- db3-20020a17090ad64300b0028e245501e7sm9866446pjb.4.2024.01.22.08.11.23
+ kr8-20020a170903080800b001d7338977e6sm4029104plb.223.2024.01.22.14.15.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jan 2024 08:11:25 -0800 (PST)
+ Mon, 22 Jan 2024 14:15:34 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- richard.henderson@linaro.org,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v4 03/13] target/riscv/gdbstub.c: use 'vlenb' instead of
- shifting 'vlen'
-Date: Mon, 22 Jan 2024 13:10:57 -0300
-Message-ID: <20240122161107.26737-4-dbarboza@ventanamicro.com>
+Subject: [PATCH 0/7] hw/riscv: fix leak, add more g_autofree
+Date: Mon, 22 Jan 2024 19:15:22 -0300
+Message-ID: <20240122221529.86562-1-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240122161107.26737-1-dbarboza@ventanamicro.com>
-References: <20240122161107.26737-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::532;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x532.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,44 +91,48 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/gdbstub.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+Hi,
 
-diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-index 58b3ace0fe..5ab0abda19 100644
---- a/target/riscv/gdbstub.c
-+++ b/target/riscv/gdbstub.c
-@@ -130,7 +130,7 @@ static int riscv_gdb_set_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
- 
- static int riscv_gdb_get_vector(CPURISCVState *env, GByteArray *buf, int n)
- {
--    uint16_t vlenb = riscv_cpu_cfg(env)->vlen >> 3;
-+    uint16_t vlenb = riscv_cpu_cfg(env)->vlenb;
-     if (n < 32) {
-         int i;
-         int cnt = 0;
-@@ -146,7 +146,7 @@ static int riscv_gdb_get_vector(CPURISCVState *env, GByteArray *buf, int n)
- 
- static int riscv_gdb_set_vector(CPURISCVState *env, uint8_t *mem_buf, int n)
- {
--    uint16_t vlenb = riscv_cpu_cfg(env)->vlen >> 3;
-+    uint16_t vlenb = riscv_cpu_cfg(env)->vlenb;
-     if (n < 32) {
-         int i;
-         for (i = 0; i < vlenb; i += 8) {
-@@ -266,7 +266,7 @@ static int ricsv_gen_dynamic_vector_xml(CPUState *cs, int base_reg)
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     GString *s = g_string_new(NULL);
-     g_autoptr(GString) ts = g_string_new("");
--    int reg_width = cpu->cfg.vlen;
-+    int reg_width = cpu->cfg.vlenb << 3;
-     int num_regs = 0;
-     int i;
- 
+First patch fixes a leak found when using Valgrind. The root cause is a
+missing g_free() in a string. 
+
+In fact, I found while doing reviews that we keep repeating the same
+pattern:
+
+====
+char *name;
+name = g_strdup_printf(...);
+(...)
+g_free(name);
+====
+
+With this in mind, I ended up making this rather trivial series to
+introduce more string/array autocleaning in the 'virt' machine code. The
+advantage of doing 'g_autofree' is that we'll guarantee that we'll clean
+ourselves up when the variable goes out of scope, avoiding leaks like
+the one patch 1 fixes. We want to enforce this autoclean style in
+reviews, and for that we need to get rid of at least some of the uses we
+do it right now.
+
+I didn't bother changing the 'spike' and the 'sifive' boards for now
+because the bulk of new patches is done on top of the 'virt' machine,
+so it's more important to tidy this board first.
+
+
+Daniel Henrique Barboza (7):
+  hw/riscv/virt-acpi-build.c: fix leak in build_rhct()
+  hw/riscv/numa.c: use g_autofree in socket_fdt_write_distance_matrix()
+  hw/riscv/virt.c: use g_autofree in create_fdt_socket_cpus()
+  hw/riscv/virt.c: use g_autofree in create_fdt_sockets()
+  hw/riscv/virt.c: use g_autofree in create_fdt_virtio()
+  hw/riscv/virt.c: use g_autofree in virt_machine_init()
+  hw/riscv/virt.c: use g_autofree in create_fdt_*
+
+ hw/riscv/numa.c            |   4 +-
+ hw/riscv/virt-acpi-build.c |   2 +-
+ hw/riscv/virt.c            | 109 ++++++++++++-------------------------
+ 3 files changed, 37 insertions(+), 78 deletions(-)
+
 -- 
 2.43.0
 
