@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9E5EC47DD3
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 03:39:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D799C4725D
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 03:40:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rRl9z-0000Zo-VP; Sun, 21 Jan 2024 22:39:43 -0500
+	id 1rRl9j-0000WN-W1; Sun, 21 Jan 2024 22:39:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rRl9x-0000Yv-CO; Sun, 21 Jan 2024 22:39:41 -0500
-Received: from mail-ua1-x92d.google.com ([2607:f8b0:4864:20::92d])
+ id 1rRl9g-0000VZ-Ra; Sun, 21 Jan 2024 22:39:24 -0500
+Received: from mail-ua1-x930.google.com ([2607:f8b0:4864:20::930])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rRl9v-0003Zl-IL; Sun, 21 Jan 2024 22:39:41 -0500
-Received: by mail-ua1-x92d.google.com with SMTP id
- a1e0cc1a2514c-7d2ded146cbso393912241.2; 
- Sun, 21 Jan 2024 19:39:38 -0800 (PST)
+ id 1rRl9e-0003XG-C1; Sun, 21 Jan 2024 22:39:24 -0500
+Received: by mail-ua1-x930.google.com with SMTP id
+ a1e0cc1a2514c-7cd5ab5d5bbso823428241.3; 
+ Sun, 21 Jan 2024 19:39:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705894777; x=1706499577; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1705894761; x=1706499561; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hY72BxvzmiGSGQtkAGOHlAHwL7oboFqjI4NfFTHI4YI=;
- b=jxspjG45i3tz8+dJnBrYEaRPdow4kNXiglt007l0RyIUCtwyxpugkIA/NqyGHIMu6O
- mPLwSrPDF3/rI8vCTLdsIvDtESGAfmpQi9qCommtKUwwaDgonwZ5jxqm+6xo36Vy1inU
- mBnLKTnZmkS8HY4ag6uybxydBjujrFP9aIXeORhzy6iYUoyOETiCcTNHw5xGp3+SWcoZ
- 5jLV1401NwD7+rGz58EqzF1CBBFmVLPRtrmWVC33FsgM50hVgxR3q/wqrKWApEHbZ8kw
- BTtgR3kT213BqOXEKwT+wknnhVBv2j278asTqXRTkgJNGr1/6qF6oOi+NLPK1qGe553X
- R3Eg==
+ bh=UWykkHMmPGUlpBmq3TPww2Q3eu2EqchxG3mWi7iyKIo=;
+ b=jzBpRGMe5E/8OiK0/SKhTuOV+uZqIsBFdsM3DeyxzCw7DmVon6z06IN7EjPMSkplv4
+ +ZVMznG5J5oG5PYXzPZ4zceMRKLrpzKmuL74DUCi+GP/YB0veLHk5adfc2nVIWJ+Mbui
+ gL+iJ8E0m4SuIRpxoYnuj1GzYMCImMVl0alTfkubq4d+jieMmTrH5Hd+3WBRDtIxRX/0
+ VjXGFq/Wa24meu9KqewTbyI83/Q1SycDZc0Hy2wqATMFhOFGbFQpjdvSHxB7m/qMI8v5
+ oea7/bpmXJx/LLeB28lgCt7JScTjoJIY0n2W+0IYYEYfhovKR33oAiEEkSpuXsg0k89r
+ 8WxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705894777; x=1706499577;
+ d=1e100.net; s=20230601; t=1705894761; x=1706499561;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hY72BxvzmiGSGQtkAGOHlAHwL7oboFqjI4NfFTHI4YI=;
- b=UEHsZohsBbCU3+37P6yiM4vJQZ1wpYt9i4lHJF1gkzVrpyILTs0kJd/XogdiSOEEXq
- p6u4Y3XPsWbA70l27LwCpjndLoJKTJRyThpjZy/NU6GsV8DHOs76sUtj25oZ2LaeyjWn
- 3od7pcG7Nyb1Dqv9/4UagyD3y4DfkADTSod+GdHeyO/4cFO3TGwRO+qHtLMoeM0xfRwF
- CwewQd/etTX3iUOwYVnQNLUA7VBFiuDojl1PIUlJD1ucuXEt7PUsBbJoKxfqtAPc14/I
- +IsVp/TXzB+5xXU4gFtZlMMxfIAqbeNG5quI/ii+l5s43yoYWKwo9WDjNrwx4X0wvCPd
- alkg==
-X-Gm-Message-State: AOJu0Yx4XTqK95kLIkUl9NHkxVpBxXAz07Y7g8YhMfJIs3qJNY4ZHSYD
- z1feFfrEN2gixON/bIR8G5S8ZFzspqzeLnu5LhAEc6jt1o2ahx0f6JhMIql1ZaOR1+QpN16dxxq
- 4eZrYvK3mXtl++E05+DbYqi5Eb04=
-X-Google-Smtp-Source: AGHT+IE+/OxfWU9v8nJL7Hep4g62dFUxePVW+lw4IshWSsmB4WemLyP9+8pqY2A6UdnCzzMAVjYcNSD2LN+YWt/oxhA=
-X-Received: by 2002:a05:6122:ca0:b0:4b6:dc25:3d53 with SMTP id
- ba32-20020a0561220ca000b004b6dc253d53mr1118936vkb.16.1705894777401; Sun, 21
- Jan 2024 19:39:37 -0800 (PST)
+ bh=UWykkHMmPGUlpBmq3TPww2Q3eu2EqchxG3mWi7iyKIo=;
+ b=j0XrtmrTqhSXMLd/X2bNBu7KwDJOzK1da9OtM/C0sbRzChiafFw43gEbsN95nWvinF
+ LQNqECOFsoqlTODjkm2weiEcZkknOikjXxnnf3dFpkhU6elCRBk7dH1lYE87g/8uc+/C
+ mtYNG9PA2mY/3nIgZWqB4E+f2ews+QeVqkCrw79MtnOblsm5aMHJBTTr3B2CvJSJH8Hr
+ ecFedkYTgvKp5a3g95xF7cvdITlsW7rtYuirDTYhK8of4I0wDA5hcflzAAE26BllONqI
+ KA4OKSvgCyAmS26eryw/nAG/LymPZP0jkcoVJNC4Izrwpm21mFDhJKS36OS9vzp+Kp05
+ NBGA==
+X-Gm-Message-State: AOJu0YynnH0bSRXOnwrwSUFykhpFVGmWvJV6R6ta0fOlWdl6RdHqAn66
+ veZ+1aTQ0EB/xPE/x9depcnQ6tcXlPjLxMZ+6ONaH3dhYHXRjtIekYnlZ8LsVWzjZsWVtOKP4Yi
+ pYIWOBcGKHA/hC4iRtbwOd5BSbz/exupCyh4=
+X-Google-Smtp-Source: AGHT+IHR4kxyEo5eWky5FrOT+dIbENXXqOHKTdlwbeHo5NVxEgV3Nh10kiTyJtXaoHAKfXyDVWAjTYnLMTAsIuMohGs=
+X-Received: by 2002:a05:6122:311c:b0:4b6:d4a0:5841 with SMTP id
+ cg28-20020a056122311c00b004b6d4a05841mr890125vkb.6.1705894760858; Sun, 21 Jan
+ 2024 19:39:20 -0800 (PST)
 MIME-Version: 1.0
-References: <20240116205817.344178-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20240116205817.344178-1-dbarboza@ventanamicro.com>
+References: <20240108161903.353648-1-dbarboza@ventanamicro.com>
+In-Reply-To: <20240108161903.353648-1-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 22 Jan 2024 13:39:11 +1000
-Message-ID: <CAKmqyKOeYV6_Li8Q6L2gvWjYsZqQC+CiCOiFhiwti+_4X_7qqg@mail.gmail.com>
-Subject: Re: [PATCH v3 00/13] target/riscv: add 'cpu->cfg.vlenb',
- remove 'cpu->cfg.vlen'
+Date: Mon, 22 Jan 2024 13:38:54 +1000
+Message-ID: <CAKmqyKP3TMrzyn9SvAzL3Wt9U=4mOPP7F-GOJo5anJn_h1m_2Q@mail.gmail.com>
+Subject: Re: [PATCH v2 0/2] riscv: add rv32i,rv32e and rv64e CPUs
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, richard.henderson@linaro.org, max.chou@sifive.com
+ palmer@rivosinc.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92d;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::930;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x930.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -91,72 +90,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jan 17, 2024 at 7:41=E2=80=AFAM Daniel Henrique Barboza
+On Tue, Jan 9, 2024 at 3:40=E2=80=AFAM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
 > Hi,
 >
-> In this v3 the most significant change is with vext_get_vlmax() from
-> cpu.h. The logic used in this function is also used in at least two
-> other places, trans_vrgather_vi() and trans_vrgather_vx(), and we need
-> to make changes in them to remove 'vlen' occurrences.
+> This is the second version of a buried patch series:
 >
-> Instead, we're adding an extra patch (11) to rework vext_get_vlmax()
-> arguments to make the function usable in trans_vrgather_v*(). This
-> rework includes some naming changes in local variables - we're using
-> 'vsew' and 'vlmul' more often to be less ambiguous when reading code.
+> "[PATCH for-9.0 0/6] riscv: rv32i,rv32e,rv64i and rv64e CPUs"
 >
-> Series based on Alistair's riscv-to-apply.next.
+> This version shrank to 2 patches since most of the prep work was already
+> done by the RVA22 profile implementation, which is now queued in
+> riscv-to-apply.next.
 >
-> Patches missing review: patches 10, 11, 12.
+> The motivation is the same as in v1 - give users a cleaner way of using
+> a customized CPU, from scratch, without the need to disable default
+> extensions.
 >
-> Changes from v3:
-> - patch 8:
->   - changed fractional LMUL comment to show the expansion
-> - patches 9 and 10: switched places
-> - patch 10 (former 9):
->   - use 'vlen' in vext_get_vlmax() to avoid a negative shift
-> - patch 11 (new):
->   - change vext_get_vlmax() to use 'vlenb', 'vsew' and 'lmul'
-> - patch 12 (former 11):
->   - use vext_get_vlmax() instead of calculating vlmax manually
-> - v2 link: https://lore.kernel.org/qemu-riscv/20240115222528.257342-1-dba=
+> Patches based on Alistair's riscv-to-apply.next.
+>
+> Changes from v1:
+> - patches 1 to 4 from v1: dropped
+> - patches 5 and 6 from v1: merged into patch 2
+> - patch 1 (new):
+>   - add a new common cpu_init() for all bare CPUs
+> - v1 link: https://lore.kernel.org/qemu-riscv/20231113213904.185320-1-dba=
 rboza@ventanamicro.com/
 >
 >
-> Daniel Henrique Barboza (13):
->   target/riscv: add 'vlenb' field in cpu->cfg
->   target/riscv/csr.c: use 'vlenb' instead of 'vlen'
->   target/riscv/gdbstub.c: use 'vlenb' instead of shifting 'vlen'
->   target/riscv/insn_trans/trans_rvbf16.c.inc: use cpu->cfg.vlenb
->   target/riscv/insn_trans/trans_rvv.c.inc: use 'vlenb'
->   target/riscv/insn_trans/trans_rvvk.c.inc: use 'vlenb'
->   target/riscv/vector_helper.c: use 'vlenb'
->   target/riscv/vector_helper.c: use vlenb in HELPER(vsetvl)
->   target/riscv/insn_trans/trans_rvv.c.inc: use 'vlenb' in MAXSZ()
->   target/riscv/cpu.h: use 'vlenb' in vext_get_vlmax()
->   target/riscv: change vext_get_vlmax() arguments
->   trans_rvv.c.inc: use vext_get_vlmax() in trans_vrgather_v*()
->   target/riscv/cpu.c: remove cpu->cfg.vlen
+> Daniel Henrique Barboza (2):
+>   target/riscv/cpu.c: add riscv_bare_cpu_init()
+>   target/riscv: add rv32i, rv32e and rv64e CPUs
 
 Do you mind rebasing this on
 https://github.com/alistair23/qemu/tree/riscv-to-apply.next ?
 
-Alistair
+Alistai
 
 >
->  target/riscv/cpu.c                         |  12 +-
->  target/riscv/cpu.h                         |  14 +-
->  target/riscv/cpu_cfg.h                     |   2 +-
->  target/riscv/cpu_helper.c                  |  11 +-
->  target/riscv/csr.c                         |   4 +-
->  target/riscv/gdbstub.c                     |   6 +-
->  target/riscv/insn_trans/trans_rvbf16.c.inc |  12 +-
->  target/riscv/insn_trans/trans_rvv.c.inc    | 152 ++++++++++-----------
->  target/riscv/insn_trans/trans_rvvk.c.inc   |  16 +--
->  target/riscv/tcg/tcg-cpu.c                 |   4 +-
->  target/riscv/vector_helper.c               |  43 +++---
->  11 files changed, 148 insertions(+), 128 deletions(-)
+>  target/riscv/cpu-qom.h |  3 ++
+>  target/riscv/cpu.c     | 64 ++++++++++++++++++++++++++++++++----------
+>  2 files changed, 52 insertions(+), 15 deletions(-)
 >
 > --
 > 2.43.0
