@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65A9BC47422
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 03:14:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A3E8C4725D
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 03:31:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rRklh-0000qN-Ft; Sun, 21 Jan 2024 22:14:37 -0500
+	id 1rRl29-00049a-IP; Sun, 21 Jan 2024 22:31:38 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rRklf-0000qA-Pi; Sun, 21 Jan 2024 22:14:35 -0500
-Received: from mail-ua1-x936.google.com ([2607:f8b0:4864:20::936])
+ id 1rRl27-00048y-QF; Sun, 21 Jan 2024 22:31:35 -0500
+Received: from mail-vk1-xa32.google.com ([2607:f8b0:4864:20::a32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rRkle-0006we-3Z; Sun, 21 Jan 2024 22:14:35 -0500
-Received: by mail-ua1-x936.google.com with SMTP id
- a1e0cc1a2514c-7d2dee968a5so313896241.0; 
- Sun, 21 Jan 2024 19:14:32 -0800 (PST)
+ id 1rRl26-0001w8-3h; Sun, 21 Jan 2024 22:31:35 -0500
+Received: by mail-vk1-xa32.google.com with SMTP id
+ 71dfb90a1353d-4b71e8790efso576067e0c.3; 
+ Sun, 21 Jan 2024 19:31:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705893272; x=1706498072; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1705894292; x=1706499092; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HZiKZHenpCp/ipK3xnk011QEJCokR8f2bzsGTp3ZZ1Q=;
- b=Bfq9vNThIAEloAag1c35yF+6TMkv9HIHxGX97qe9XO6qYSRlcNOEhw55tiMgtwf/E8
- 5yo5sUgQOAIJq+SGI51bxFN+2ZSWRIxL3xr+Bzsoi67FS0Rz2FFEXz9ptfh8UXZiEmMJ
- DdlrnKBpDaQPTACK+nc3y21CUI8nGMkwZX2Xb/Fbv6zc6t3Nz3pZ3fz74xGqGhwNk12x
- SiVFoPVBohbtm0te5bLmAbjdR0Wsg2fo8LZ3iPMIoR1uxOOWl3OBNxfQIJ8MdEZjQknu
- Ez/FyjXQK5HKP6GBdpSpuf4OHXtPPzeEMObrbuG8RQ6kuOQzLiCy8dq+l+bfbi2hGor1
- hdoQ==
+ bh=EAOCGSDTsLLK4ekXFuUPVUP7PGb4360SsCeHGQE435A=;
+ b=eUIS9gkQzH2S1G6yG/gR5ny3uxmovDdKhZS9IWfGBTIHWTOWP5k6I5uZh+GjQOn7Du
+ jGbjx8uZl2zVy3qlbHPqyW5EucOuis9m30Acp3ab5vd8bxn20Z9/f7h/6diH7b86CM91
+ ltkum7uUVKyzLNTN5bfDxYeC2cFtCY7bW7Sb5maX/kXu+4r7bNytYM3UwOq6Bgf4Erak
+ KqU5ID8xsSsV3B1D0oJ/nuSrYIFiS4UVf3g7JPcdttWnOm4TXbrcwnIhmkXWNovyuPKs
+ cUgyIJNIjeGsBqVMuu4AkFJZGzno4WN3AYHN76BjALTq4h0Pz6vwxxCRa01IjYaJSDxp
+ bVhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705893272; x=1706498072;
+ d=1e100.net; s=20230601; t=1705894292; x=1706499092;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HZiKZHenpCp/ipK3xnk011QEJCokR8f2bzsGTp3ZZ1Q=;
- b=FrXmdaQ8Hkz1mb6L/DaGaSiWKWv8qe1SMahr4IgJFzpfoB2Hm7ZbkvoVhgUQxT2ykU
- rSmkcWqDG6fu8GiCLUYUuMfgxrwB4Fv3kzBH7ysG2c+EA9fpffOoTyF31kZK1NL6IIHn
- g4wdNYaD5TxlpizGHDUuJTz5IVDFhgIkjdAwkcVpCwl1NVaJ81X7NvJ7BV3ywRFJEAs5
- OC736r+Nbqr1h4sE1f/HyrKlStCd/k3vNfYi7fcCvnXXCRrjyME7xK1KzhewsnWLP4uK
- /qTeNIJQ7F2A+GZBMc5VJUO2etv0Z7zbQWhRtj43FlZNPVECGrs8N5xOAfAfH9/xqBC7
- zJbw==
-X-Gm-Message-State: AOJu0Yxy/15odrU1sSf8YBJ5V39LESOpjcCMLInx/Ztj1zsq72HxfXdP
- oKpfeTA9QLmNthzSsyuMCQP3LZch78yDTmD+l2apcToaKxIG45FcGkNG4dL55t80jyAGMvZ8+tE
- m/PwI/PSwKSe7lbW7wvxtRJlItlI=
-X-Google-Smtp-Source: AGHT+IHVBmIBIvR54PDg17ORNBKt2GKC0IA9bhRHp8+qqhBIw2GVCoR0Xkq20Lz4Zq/iRpu/ypFr1iyXAOnmCzFGxM8=
-X-Received: by 2002:a05:6122:3697:b0:4b6:dbfd:f89b with SMTP id
- ec23-20020a056122369700b004b6dbfdf89bmr1029208vkb.27.1705893272179; Sun, 21
- Jan 2024 19:14:32 -0800 (PST)
+ bh=EAOCGSDTsLLK4ekXFuUPVUP7PGb4360SsCeHGQE435A=;
+ b=LwjNm72uunMTH+Y5vLotnzZHcQbZ1kK7wkt1BcOcl3cgo+Wt/gvabNvuBcOtpmXe8i
+ UcVzDNE0yHA76F9bKlKEJpu0UtmwuHfUNZ/s1bCwwqsElId5RFTlDG/qjhH/uE7hTb7a
+ u5i4jYQAmBbxhBj7Gk+nb/kMgQ3LIqNkleQsSzyd75PNYBjYQgY7RWirBenCbeRW28Pd
+ FI6rvAsTPTLV5AVgBRylGAIRPj83rHgJ7mRWLg0nzop2Ed9SMCJhLkPdaAGfNPKfoKAR
+ OBsJtouvp5jUFh/6m/Jq7xQz3tsNGGtP/gx0CvhPlzrZZC8cm/tV7Jy/P7F3HIJ/sNJI
+ o6Ng==
+X-Gm-Message-State: AOJu0YyL+8w3RNx2xvwynmHJ3AaZD6ltP+ousQmKBSlUNMV2OZq6mWOj
+ YPX86yZy+vWv2tUH5fx0xkgPF2QKlx5O0/g97YoBBK4wViTLRyy8g4OT3zvwADeG7th++Mu+Tbw
+ ZLrkcgCzpY2Wu6WCEBzsiUKIe4sk=
+X-Google-Smtp-Source: AGHT+IGxyjgnASaJSPY1KDGy53XwrTWSNQFjIgz4TLmeu0d4Of4DJxVd43k5GCQAcOizRQGh8PmTKNJfewz50Y5BxhU=
+X-Received: by 2002:a05:6122:ca3:b0:4b6:dc09:3d04 with SMTP id
+ ba35-20020a0561220ca300b004b6dc093d04mr811269vkb.8.1705894292647; Sun, 21 Jan
+ 2024 19:31:32 -0800 (PST)
 MIME-Version: 1.0
-References: <20240116205817.344178-1-dbarboza@ventanamicro.com>
- <20240116205817.344178-14-dbarboza@ventanamicro.com>
-In-Reply-To: <20240116205817.344178-14-dbarboza@ventanamicro.com>
+References: <20240108161903.353648-1-dbarboza@ventanamicro.com>
+ <20240108161903.353648-2-dbarboza@ventanamicro.com>
+In-Reply-To: <20240108161903.353648-2-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 22 Jan 2024 13:14:06 +1000
-Message-ID: <CAKmqyKMgutEUq2Rpsi+8HGUN0LRyWWQXV6+OiAzqN5xTDnvG7Q@mail.gmail.com>
-Subject: Re: [PATCH v3 13/13] target/riscv/cpu.c: remove cpu->cfg.vlen
+Date: Mon, 22 Jan 2024 13:31:06 +1000
+Message-ID: <CAKmqyKOWzne35oBcXt7oOdHHE4haO1zSGQqk9TANgb=DkMtpFQ@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] target/riscv/cpu.c: add riscv_bare_cpu_init()
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, richard.henderson@linaro.org, max.chou@sifive.com
+ palmer@rivosinc.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::936;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x936.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a32;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa32.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -91,93 +91,97 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jan 17, 2024 at 7:03=E2=80=AFAM Daniel Henrique Barboza
+On Tue, Jan 9, 2024 at 3:32=E2=80=AFAM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> There is no need to keep both 'vlen' and 'vlenb'. All existing code
-> that requires 'vlen' is retrieving it via 'vlenb << 3'.
+> Next patch will add more bare CPUs. Their cpu_init() functions would be
+> glorified copy/pastes of rv64i_bare_cpu_init(), differing only by a
+> riscv_cpu_set_misa() call.
+>
+> Add a new .instance_init for the TYPE_RISCV_BARE_CPU typ to avoid this
+> code repetition. While we're at it, add a better explanation on why
+> we're disabling the timing extensions for bare CPUs.
 >
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu.c         | 8 +++-----
->  target/riscv/cpu_cfg.h     | 1 -
->  target/riscv/tcg/tcg-cpu.c | 4 +++-
->  3 files changed, 6 insertions(+), 7 deletions(-)
+>  target/riscv/cpu.c | 45 +++++++++++++++++++++++++++++----------------
+>  1 file changed, 29 insertions(+), 16 deletions(-)
 >
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index f4261d2ffc..7b3f69d3fb 100644
+> index b32681f7f3..1202ec3e57 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -1313,7 +1313,6 @@ static void riscv_cpu_init(Object *obj)
->
->      /* Default values for non-bool cpu properties */
->      cpu->cfg.pmu_mask =3D MAKE_64BIT_MASK(3, 16);
-> -    cpu->cfg.vlen =3D 128;
->      cpu->cfg.vlenb =3D 128 >> 3;
->      cpu->cfg.elen =3D 64;
->      cpu->env.vext_ver =3D VEXT_VERSION_1_00_0;
-> @@ -1802,22 +1801,21 @@ static void prop_vlen_set(Object *obj, Visitor *v=
-, const char *name,
->          return;
->      }
->
-> -    if (value !=3D cpu->cfg.vlen && riscv_cpu_is_vendor(obj)) {
-> +    if (value !=3D cpu->cfg.vlenb && riscv_cpu_is_vendor(obj)) {
->          cpu_set_prop_err(cpu, name, errp);
->          error_append_hint(errp, "Current '%s' val: %u\n",
-> -                          name, cpu->cfg.vlen);
-> +                          name, cpu->cfg.vlenb << 3);
->          return;
->      }
->
->      cpu_option_add_user_setting(name, value);
-> -    cpu->cfg.vlen =3D value;
->      cpu->cfg.vlenb =3D value >> 3;
+> @@ -575,22 +575,6 @@ static void rv64i_bare_cpu_init(Object *obj)
+>  {
+>      CPURISCVState *env =3D &RISCV_CPU(obj)->env;
+>      riscv_cpu_set_misa(env, MXL_RV64, RVI);
+> -
+> -    /* Remove the defaults from the parent class */
+> -    RISCV_CPU(obj)->cfg.ext_zicntr =3D false;
+> -    RISCV_CPU(obj)->cfg.ext_zihpm =3D false;
+> -
+> -    /* Set to QEMU's first supported priv version */
+> -    env->priv_ver =3D PRIV_VERSION_1_10_0;
+> -
+> -    /*
+> -     * Support all available satp_mode settings. The default
+> -     * value will be set to MBARE if the user doesn't set
+> -     * satp_mode manually (see set_satp_mode_default()).
+> -     */
+> -#ifndef CONFIG_USER_ONLY
+> -    set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV64);
+> -#endif
+>  }
+>  #else
+>  static void rv32_base_cpu_init(Object *obj)
+> @@ -1266,6 +1250,34 @@ static void riscv_cpu_init(Object *obj)
+>      RISCV_CPU(obj)->cfg.ext_zihpm =3D true;
 >  }
 >
->  static void prop_vlen_get(Object *obj, Visitor *v, const char *name,
->                           void *opaque, Error **errp)
->  {
-> -    uint16_t value =3D RISCV_CPU(obj)->cfg.vlen;
-> +    uint16_t value =3D RISCV_CPU(obj)->cfg.vlenb << 3;
->
->      visit_type_uint16(v, name, &value, errp);
->  }
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> index 50479dd72f..e241922f89 100644
-> --- a/target/riscv/cpu_cfg.h
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -139,7 +139,6 @@ struct RISCVCPUConfig {
->      bool ext_XVentanaCondOps;
->
->      uint32_t pmu_mask;
-> -    uint16_t vlen;
->      uint16_t vlenb;
->      uint16_t elen;
->      uint16_t cbom_blocksize;
-> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> index daff0b8f60..667421b0b7 100644
-> --- a/target/riscv/tcg/tcg-cpu.c
-> +++ b/target/riscv/tcg/tcg-cpu.c
-> @@ -298,7 +298,9 @@ static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu=
-, Error **errp)
->  static void riscv_cpu_validate_v(CPURISCVState *env, RISCVCPUConfig *cfg=
-,
->                                   Error **errp)
->  {
-> -    if (cfg->vlen > RV_VLEN_MAX || cfg->vlen < 128) {
-> +    uint32_t vlen =3D cfg->vlenb << 3;
+> +static void riscv_bare_cpu_init(Object *obj)
+> +{
+> +    RISCVCPU *cpu =3D RISCV_CPU(obj);
 > +
-> +    if (vlen > RV_VLEN_MAX || vlen < 128) {
->          error_setg(errp,
->                     "Vector extension implementation only supports VLEN "
->                     "in the range [128, %d]", RV_VLEN_MAX);
+> +    /*
+> +     * Bare CPUs do not inherit the timer and performance
+> +     * counters from the parent class (see riscv_cpu_init()
+> +     * for info on why the parent enables them).
+> +     *
+> +     * Users have to explicitly enable these counters for
+> +     * bare CPUs.
+> +     */
+> +    cpu->cfg.ext_zicntr =3D false;
+> +    cpu->cfg.ext_zihpm =3D false;
+> +
+> +    /* Set to QEMU's first supported priv version */
+> +    cpu->env.priv_ver =3D PRIV_VERSION_1_10_0;
+> +
+> +    /*
+> +     * Support all available satp_mode settings. The default
+> +     * value will be set to MBARE if the user doesn't set
+> +     * satp_mode manually (see set_satp_mode_default()).
+> +     */
+> +#ifndef CONFIG_USER_ONLY
+> +    set_satp_mode_max_supported(cpu, VM_1_10_SV64);
+> +#endif
+> +}
+> +
+>  typedef struct misa_ext_info {
+>      const char *name;
+>      const char *description;
+> @@ -1925,6 +1937,7 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
+>      {
+>          .name =3D TYPE_RISCV_BARE_CPU,
+>          .parent =3D TYPE_RISCV_CPU,
+> +        .instance_init =3D riscv_bare_cpu_init,
+>          .abstract =3D true,
+>      },
+>      DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_ANY,      riscv_any_cpu_init),
 > --
 > 2.43.0
 >
