@@ -4,61 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FBCDC4725D
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 04:53:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0386FC47DD3
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 04:54:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rRmJL-0003YE-Ja; Sun, 21 Jan 2024 23:53:27 -0500
+	id 1rRmK9-0003q0-2A; Sun, 21 Jan 2024 23:54:17 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rRmJJ-0003Xk-VT; Sun, 21 Jan 2024 23:53:26 -0500
-Received: from mail-vs1-xe32.google.com ([2607:f8b0:4864:20::e32])
+ id 1rRmK7-0003pS-73; Sun, 21 Jan 2024 23:54:15 -0500
+Received: from mail-vs1-xe2e.google.com ([2607:f8b0:4864:20::e2e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rRmJI-0002eC-6r; Sun, 21 Jan 2024 23:53:25 -0500
-Received: by mail-vs1-xe32.google.com with SMTP id
- ada2fe7eead31-4698c58c589so476622137.3; 
- Sun, 21 Jan 2024 20:53:23 -0800 (PST)
+ id 1rRmK5-0002k0-BB; Sun, 21 Jan 2024 23:54:14 -0500
+Received: by mail-vs1-xe2e.google.com with SMTP id
+ ada2fe7eead31-46781bd40f8so439029137.1; 
+ Sun, 21 Jan 2024 20:54:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705899202; x=1706504002; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1705899252; x=1706504052; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gSfmcu1cTFmVrh0jf5deWQvcYz3lrh68YIdlnO2JaR4=;
- b=AYtNmUSr8cnQ8onbLm+e4ZZ1ogWeI5A7XhOjQhfFPbUUVZhQ7W6uQD6AWS2pwhvHZb
- pQ5lrmMSOZADHd9yhoUwRKJln2/v9zgnrVp0luYQyflN5qqyLSortPCbA3tj+LjRyTWk
- pBqqr+5d2VOVRN3TCEn/huMpj9y4kMXT8R6dtHiJ3Tz7kjszyDJcNHR/6fA+RnozB2bL
- z4CEzOJGEuKBX7A15GiRYqdEre+q020ibFmVNTObfxYJbZHfAqqKRl/kd/8+Up+MVJz8
- yNYyzLl8FzZb+QZ5xlYwi39kas7QEbEoLUJ4lOCGCEgtwruCPqhhqwcyFf9xuiisrB2T
- DuiA==
+ bh=zy52xBxUNeT52zGNu+hDdYIiAmR4ghaKaTzP6obNHEk=;
+ b=WCVzQGnF7dau1qpUw30a5kLHdGVgM1Z1Q4im0qdAEuknqUzwV7+L5gkUnM8KggOXl4
+ OhWyCcAOTy0O3D+b7B5oBcgvZxwyo03SiP1Du9fqFE1zLFmZItqOPOEovSHGRvzxd9n4
+ Ct5ITd0x0fnmT0lqcWwcAMxQ0OoXtcywwbkIO5oS0l0anDwjQjjsAm0nR8IPtd73HlGk
+ JkA1wlHPysonMAT5a1DrdNhbHfXJtkNu0UxLZFirPh2M/ioj/ovml9TsuiBaC3xrQzEY
+ xXuA2XFUWSNOWDV7pBg70sxGrHqpsZaf17jExnnfyRHcjftQv6NKmhUjtYi4ATLQwIjB
+ W6Dg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705899202; x=1706504002;
+ d=1e100.net; s=20230601; t=1705899252; x=1706504052;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gSfmcu1cTFmVrh0jf5deWQvcYz3lrh68YIdlnO2JaR4=;
- b=ASuMGJTVRlikU6TXRukP7SxtSHQHKEM7vYnKFE+f+ZlBCUDmhCOTpnqZXRb2m3pTAQ
- K742U/wWEzr0OmUBB2HjOXGSUW1DC8qOoOXG11Gr8q3TynaMpMFnafJuxQBq1t+8RC5w
- HmVcLiQpzsKwXHmFtkDB8IHKEOeSWZa63/c0nCDdNyPZIeBrl+T6IAmbOiKepXMq/pJG
- 7YrMX+Jvw1MlBcHU3bKjYJCMedsM6L/3GOHSO25gfHTLLk8VtzE4xejf14mQm9+P4dOB
- b2+yT8o3PP6M1ahnLRdTuLG0WnmiLYEcq36RankT4noNvU+2pqJNFsQrRvrFrJnOrnZR
- 2o9A==
-X-Gm-Message-State: AOJu0YwwyEl+bP/kyAW/+pQP9ZNR3BM7krqblWbuw2EVU5GAEuC9piLe
- zkKmj7rB7QregdFIY5LGCCX0eXwhsIthwVJJLQ7MqGbv8QwBGKBQlEVx6aHLJfeP5dzpShETUGV
- +9icHDfNyIuR3TNHI0KLybYKZC/c=
-X-Google-Smtp-Source: AGHT+IERtC7heUwsfNtWrc4sveWDzNaornT7J6h3Jy61A10Akf02UfN91UZq61tZZJBJfTtgXp2pQnj4HEGWwNM3SYM=
-X-Received: by 2002:a67:be05:0:b0:469:554f:f8d6 with SMTP id
- x5-20020a67be05000000b00469554ff8d6mr2012997vsq.34.1705899202529; Sun, 21 Jan
- 2024 20:53:22 -0800 (PST)
+ bh=zy52xBxUNeT52zGNu+hDdYIiAmR4ghaKaTzP6obNHEk=;
+ b=E6AOapzH8+wSHrFebFt72s8WbeRSwDWNW5F3wjy3GOtZ91BtHrjhJOo59nAb8ZLRRz
+ j7dOn+DW6RB3wLTda+OrvVyUCKay5pvX3DKXwrdbKe25rhQL7xKHYH/T9BpT+G5o9l7A
+ BLVZ6B6dKOrbdCWH0v8t7n/RmjIRf38bdFK/cjjTkA5kEaZg8z5169HJKtaeojGP+bBC
+ pqdiQPZRHdIszSgxPKYr6vj9s0+puKG62cFRSUC2CasE4DjTOyw19ZgcSyS3PM5KlEf/
+ t2w19iZrNieaIIcv69eVZe4xPmpa+j0QJKEPUoBkuloL1bm0SIt+g4rRngFEVwliPPk5
+ x41g==
+X-Gm-Message-State: AOJu0YwMC7gLuT5hpIvo4k8mRzvSLoO3R1l2e7rkwmNaER8GfAmUgyLS
+ 1x4p+tdJZ7ZrZz3CrVjpL292g07z+ue8F6ab+zfgpLkCbVIyBd571DtwccMhV5nW2VE5iawlkiZ
+ Sfrc5gfSphdhPkdTXHrDYmIjEdI4=
+X-Google-Smtp-Source: AGHT+IG3FBIBLMN4XV1VGcPvQe9gp7Y3qLwVr95xU2CSgtAlW5f4ESTyoyRC47gV3eTiOUdvC2UrBaeZFrhji26jxpo=
+X-Received: by 2002:a67:c905:0:b0:469:8c51:c625 with SMTP id
+ w5-20020a67c905000000b004698c51c625mr909093vsk.29.1705899251831; Sun, 21 Jan
+ 2024 20:54:11 -0800 (PST)
 MIME-Version: 1.0
 References: <20231229120724.41383-1-heinrich.schuchardt@canonical.com>
  <20231229120724.41383-2-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231229120724.41383-2-heinrich.schuchardt@canonical.com>
+ <CAKmqyKNmyMKMDuUwrgi4RQnAAWAJ7uSzMztDnHW+HRaM1zPNDA@mail.gmail.com>
+ <cf9b3023-d6d4-4da9-ab1e-da440f98bf3e@canonical.com>
+In-Reply-To: <cf9b3023-d6d4-4da9-ab1e-da440f98bf3e@canonical.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 22 Jan 2024 14:52:56 +1000
-Message-ID: <CAKmqyKMsbhV-cBeu46_rh1KTDoRv5VrcSRQ_QfSucPXgJNomog@mail.gmail.com>
+Date: Mon, 22 Jan 2024 14:53:45 +1000
+Message-ID: <CAKmqyKNcwkscRz8FAiCQTWhcZCeCbAozciyOBSUpSsEuBMKK5w@mail.gmail.com>
 Subject: Re: [PATCH v2 1/4] smbios: add processor-family option
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
@@ -72,8 +74,8 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e32;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2e;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2e.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -97,133 +99,169 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Dec 29, 2023 at 10:48=E2=80=AFPM Heinrich Schuchardt
+On Fri, Jan 5, 2024 at 3:44=E2=80=AFPM Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> For RISC-V the SMBIOS standard requires specific values of the processor
-> family value depending on the bitness of the CPU.
+> On 1/5/24 06:24, Alistair Francis wrote:
+> > On Fri, Dec 29, 2023 at 10:48=E2=80=AFPM Heinrich Schuchardt
+> > <heinrich.schuchardt@canonical.com> wrote:
+> >>
+> >> For RISC-V the SMBIOS standard requires specific values of the process=
+or
+> >> family value depending on the bitness of the CPU.
+> >
+> > Can you provide some details of where this is described? I can't seem t=
+o find it
+> >
+> > Alistair
 >
-> Add a processor-family option for SMBIOS table 4.
+> System Management BIOS (SMBIOS) Reference Specification 3.7.0 (DSP0134)
+> https://www.dmtf.org/sites/default/files/standards/documents/DSP0134_3.7.=
+0.pdf
+> 7.5.2 Processor Information =E2=80=94 Processor Family
+> Table 23 =E2=80=93 Processor Information: Processor Family field
 >
-> The value of processor-family may exceed 255 and therefore must be provid=
-ed
-> in the Processor Family 2 field. Set the Processor Family field to 0xFE
-> which signals that the Processor Family 2 is used.
+> 200h 512 RISC-V RV32
+> 201h 513 RISC-V RV64
+> 202h 514 RISC-V RV128
 >
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> While for other architectures values for different CPU generations have
+> been defined the values for RISC-V only depend on the bitness.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Ah, I first read the commit message as saying this is RISC-V specific,
+which I couldn't find in the spec.
+
+I now realise you just mean it's important for RISC-V
 
 Alistair
 
-> ---
-> v2:
->         new patch
-> ---
->  hw/smbios/smbios.c | 13 +++++++++++--
->  qemu-options.hx    |  4 ++--
->  2 files changed, 13 insertions(+), 4 deletions(-)
 >
-> diff --git a/hw/smbios/smbios.c b/hw/smbios/smbios.c
-> index 2a90601ac5..647bc6d603 100644
-> --- a/hw/smbios/smbios.c
-> +++ b/hw/smbios/smbios.c
-> @@ -102,6 +102,7 @@ static struct {
->  #define DEFAULT_CPU_SPEED 2000
+> Best regards
 >
->  static struct {
-> +    uint16_t processor_family;
->      const char *sock_pfx, *manufacturer, *version, *serial, *asset, *par=
-t;
->      uint64_t max_speed;
->      uint64_t current_speed;
-> @@ -110,6 +111,7 @@ static struct {
->      .max_speed =3D DEFAULT_CPU_SPEED,
->      .current_speed =3D DEFAULT_CPU_SPEED,
->      .processor_id =3D 0,
-> +    .processor_family =3D 0x01, /* Other */
->  };
+> Heinrich
 >
->  struct type8_instance {
-> @@ -337,6 +339,10 @@ static const QemuOptDesc qemu_smbios_type4_opts[] =
-=3D {
->          .name =3D "part",
->          .type =3D QEMU_OPT_STRING,
->          .help =3D "part number",
-> +    }, {
-> +        .name =3D "processor-family",
-> +        .type =3D QEMU_OPT_NUMBER,
-> +        .help =3D "processor family",
->      }, {
->          .name =3D "processor-id",
->          .type =3D QEMU_OPT_NUMBER,
-> @@ -726,7 +732,7 @@ static void smbios_build_type_4_table(MachineState *m=
-s, unsigned instance)
->      snprintf(sock_str, sizeof(sock_str), "%s%2x", type4.sock_pfx, instan=
-ce);
->      SMBIOS_TABLE_SET_STR(4, socket_designation_str, sock_str);
->      t->processor_type =3D 0x03; /* CPU */
-> -    t->processor_family =3D 0x01; /* Other */
-> +    t->processor_family =3D 0xfe; /* use Processor Family 2 field */
->      SMBIOS_TABLE_SET_STR(4, processor_manufacturer_str, type4.manufactur=
-er);
->      if (type4.processor_id =3D=3D 0) {
->          t->processor_id[0] =3D cpu_to_le32(smbios_cpuid_version);
-> @@ -758,7 +764,7 @@ static void smbios_build_type_4_table(MachineState *m=
-s, unsigned instance)
->      t->thread_count =3D (threads_per_socket > 255) ? 0xFF : threads_per_=
-socket;
->
->      t->processor_characteristics =3D cpu_to_le16(0x02); /* Unknown */
-> -    t->processor_family2 =3D cpu_to_le16(0x01); /* Other */
-> +    t->processor_family2 =3D cpu_to_le16(type4.processor_family);
->
->      if (tbl_len =3D=3D SMBIOS_TYPE_4_LEN_V30) {
->          t->core_count2 =3D t->core_enabled2 =3D cpu_to_le16(cores_per_so=
-cket);
-> @@ -1402,6 +1408,9 @@ void smbios_entry_add(QemuOpts *opts, Error **errp)
->                  return;
->              }
->              save_opt(&type4.sock_pfx, opts, "sock_pfx");
-> +            type4.processor_family =3D qemu_opt_get_number(opts,
-> +                                                         "processor-fami=
-ly",
-> +                                                         0x01 /* Other *=
-/);
->              save_opt(&type4.manufacturer, opts, "manufacturer");
->              save_opt(&type4.version, opts, "version");
->              save_opt(&type4.serial, opts, "serial");
-> diff --git a/qemu-options.hx b/qemu-options.hx
-> index b66570ae00..7bdb414345 100644
-> --- a/qemu-options.hx
-> +++ b/qemu-options.hx
-> @@ -2694,7 +2694,7 @@ DEF("smbios", HAS_ARG, QEMU_OPTION_smbios,
->      "                specify SMBIOS type 3 fields\n"
->      "-smbios type=3D4[,sock_pfx=3Dstr][,manufacturer=3Dstr][,version=3Ds=
-tr][,serial=3Dstr]\n"
->      "              [,asset=3Dstr][,part=3Dstr][,max-speed=3D%d][,current=
--speed=3D%d]\n"
-> -    "              [,processor-id=3D%d]\n"
-> +    "              [,processor-family=3D%d,processor-id=3D%d]\n"
->      "                specify SMBIOS type 4 fields\n"
->      "-smbios type=3D8[,external_reference=3Dstr][,internal_reference=3Ds=
-tr][,connector_type=3D%d][,port_type=3D%d]\n"
->      "                specify SMBIOS type 8 fields\n"
-> @@ -2722,7 +2722,7 @@ SRST
->  ``-smbios type=3D3[,manufacturer=3Dstr][,version=3Dstr][,serial=3Dstr][,=
-asset=3Dstr][,sku=3Dstr]``
->      Specify SMBIOS type 3 fields
->
-> -``-smbios type=3D4[,sock_pfx=3Dstr][,manufacturer=3Dstr][,version=3Dstr]=
-[,serial=3Dstr][,asset=3Dstr][,part=3Dstr][,processor-id=3D%d]``
-> +``-smbios type=3D4[,sock_pfx=3Dstr][,manufacturer=3Dstr][,version=3Dstr]=
-[,serial=3Dstr][,asset=3Dstr][,part=3Dstr][,processor-family=3D%d][,process=
-or-id=3D%d]``
->      Specify SMBIOS type 4 fields
->
->  ``-smbios type=3D11[,value=3Dstr][,path=3Dfilename]``
-> --
-> 2.43.0
->
+> >
+> >>
+> >> Add a processor-family option for SMBIOS table 4.
+> >>
+> >> The value of processor-family may exceed 255 and therefore must be pro=
+vided
+> >> in the Processor Family 2 field. Set the Processor Family field to 0xF=
+E
+> >> which signals that the Processor Family 2 is used.
+> >>
+> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> >> ---
+> >> v2:
+> >>          new patch
+> >> ---
+> >>   hw/smbios/smbios.c | 13 +++++++++++--
+> >>   qemu-options.hx    |  4 ++--
+> >>   2 files changed, 13 insertions(+), 4 deletions(-)
+> >>
+> >> diff --git a/hw/smbios/smbios.c b/hw/smbios/smbios.c
+> >> index 2a90601ac5..647bc6d603 100644
+> >> --- a/hw/smbios/smbios.c
+> >> +++ b/hw/smbios/smbios.c
+> >> @@ -102,6 +102,7 @@ static struct {
+> >>   #define DEFAULT_CPU_SPEED 2000
+> >>
+> >>   static struct {
+> >> +    uint16_t processor_family;
+> >>       const char *sock_pfx, *manufacturer, *version, *serial, *asset, =
+*part;
+> >>       uint64_t max_speed;
+> >>       uint64_t current_speed;
+> >> @@ -110,6 +111,7 @@ static struct {
+> >>       .max_speed =3D DEFAULT_CPU_SPEED,
+> >>       .current_speed =3D DEFAULT_CPU_SPEED,
+> >>       .processor_id =3D 0,
+> >> +    .processor_family =3D 0x01, /* Other */
+> >>   };
+> >>
+> >>   struct type8_instance {
+> >> @@ -337,6 +339,10 @@ static const QemuOptDesc qemu_smbios_type4_opts[]=
+ =3D {
+> >>           .name =3D "part",
+> >>           .type =3D QEMU_OPT_STRING,
+> >>           .help =3D "part number",
+> >> +    }, {
+> >> +        .name =3D "processor-family",
+> >> +        .type =3D QEMU_OPT_NUMBER,
+> >> +        .help =3D "processor family",
+> >>       }, {
+> >>           .name =3D "processor-id",
+> >>           .type =3D QEMU_OPT_NUMBER,
+> >> @@ -726,7 +732,7 @@ static void smbios_build_type_4_table(MachineState=
+ *ms, unsigned instance)
+> >>       snprintf(sock_str, sizeof(sock_str), "%s%2x", type4.sock_pfx, in=
+stance);
+> >>       SMBIOS_TABLE_SET_STR(4, socket_designation_str, sock_str);
+> >>       t->processor_type =3D 0x03; /* CPU */
+> >> -    t->processor_family =3D 0x01; /* Other */
+> >> +    t->processor_family =3D 0xfe; /* use Processor Family 2 field */
+> >>       SMBIOS_TABLE_SET_STR(4, processor_manufacturer_str, type4.manufa=
+cturer);
+> >>       if (type4.processor_id =3D=3D 0) {
+> >>           t->processor_id[0] =3D cpu_to_le32(smbios_cpuid_version);
+> >> @@ -758,7 +764,7 @@ static void smbios_build_type_4_table(MachineState=
+ *ms, unsigned instance)
+> >>       t->thread_count =3D (threads_per_socket > 255) ? 0xFF : threads_=
+per_socket;
+> >>
+> >>       t->processor_characteristics =3D cpu_to_le16(0x02); /* Unknown *=
+/
+> >> -    t->processor_family2 =3D cpu_to_le16(0x01); /* Other */
+> >> +    t->processor_family2 =3D cpu_to_le16(type4.processor_family);
+> >>
+> >>       if (tbl_len =3D=3D SMBIOS_TYPE_4_LEN_V30) {
+> >>           t->core_count2 =3D t->core_enabled2 =3D cpu_to_le16(cores_pe=
+r_socket);
+> >> @@ -1402,6 +1408,9 @@ void smbios_entry_add(QemuOpts *opts, Error **er=
+rp)
+> >>                   return;
+> >>               }
+> >>               save_opt(&type4.sock_pfx, opts, "sock_pfx");
+> >> +            type4.processor_family =3D qemu_opt_get_number(opts,
+> >> +                                                         "processor-f=
+amily",
+> >> +                                                         0x01 /* Othe=
+r */);
+> >>               save_opt(&type4.manufacturer, opts, "manufacturer");
+> >>               save_opt(&type4.version, opts, "version");
+> >>               save_opt(&type4.serial, opts, "serial");
+> >> diff --git a/qemu-options.hx b/qemu-options.hx
+> >> index b66570ae00..7bdb414345 100644
+> >> --- a/qemu-options.hx
+> >> +++ b/qemu-options.hx
+> >> @@ -2694,7 +2694,7 @@ DEF("smbios", HAS_ARG, QEMU_OPTION_smbios,
+> >>       "                specify SMBIOS type 3 fields\n"
+> >>       "-smbios type=3D4[,sock_pfx=3Dstr][,manufacturer=3Dstr][,version=
+=3Dstr][,serial=3Dstr]\n"
+> >>       "              [,asset=3Dstr][,part=3Dstr][,max-speed=3D%d][,cur=
+rent-speed=3D%d]\n"
+> >> -    "              [,processor-id=3D%d]\n"
+> >> +    "              [,processor-family=3D%d,processor-id=3D%d]\n"
+> >>       "                specify SMBIOS type 4 fields\n"
+> >>       "-smbios type=3D8[,external_reference=3Dstr][,internal_reference=
+=3Dstr][,connector_type=3D%d][,port_type=3D%d]\n"
+> >>       "                specify SMBIOS type 8 fields\n"
+> >> @@ -2722,7 +2722,7 @@ SRST
+> >>   ``-smbios type=3D3[,manufacturer=3Dstr][,version=3Dstr][,serial=3Dst=
+r][,asset=3Dstr][,sku=3Dstr]``
+> >>       Specify SMBIOS type 3 fields
+> >>
+> >> -``-smbios type=3D4[,sock_pfx=3Dstr][,manufacturer=3Dstr][,version=3Ds=
+tr][,serial=3Dstr][,asset=3Dstr][,part=3Dstr][,processor-id=3D%d]``
+> >> +``-smbios type=3D4[,sock_pfx=3Dstr][,manufacturer=3Dstr][,version=3Ds=
+tr][,serial=3Dstr][,asset=3Dstr][,part=3Dstr][,processor-family=3D%d][,proc=
+essor-id=3D%d]``
+> >>       Specify SMBIOS type 4 fields
+> >>
+> >>   ``-smbios type=3D11[,value=3Dstr][,path=3Dfilename]``
+> >> --
+> >> 2.43.0
+> >>
+> >>
 >
 
