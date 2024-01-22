@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F9FFC47422
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 02:56:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F32DC47DD3
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 02:56:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rRkTh-0000FW-Pr; Sun, 21 Jan 2024 21:56:03 -0500
+	id 1rRkU8-0000J9-E1; Sun, 21 Jan 2024 21:56:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rRkTf-0000F1-VL; Sun, 21 Jan 2024 21:55:59 -0500
-Received: from mail-ua1-x92c.google.com ([2607:f8b0:4864:20::92c])
+ id 1rRkU5-0000IB-MR; Sun, 21 Jan 2024 21:56:25 -0500
+Received: from mail-vk1-xa2f.google.com ([2607:f8b0:4864:20::a2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rRkTc-00039m-9s; Sun, 21 Jan 2024 21:55:59 -0500
-Received: by mail-ua1-x92c.google.com with SMTP id
- a1e0cc1a2514c-7d2a78c49d1so1592835241.0; 
- Sun, 21 Jan 2024 18:55:49 -0800 (PST)
+ id 1rRkU4-0003CS-51; Sun, 21 Jan 2024 21:56:25 -0500
+Received: by mail-vk1-xa2f.google.com with SMTP id
+ 71dfb90a1353d-4b71b86ef81so415451e0c.2; 
+ Sun, 21 Jan 2024 18:56:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705892149; x=1706496949; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1705892178; x=1706496978; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6D+lUHCaaaLaTEc1OzGOFgyQeexGGSTV/qw2ByYNTO8=;
- b=EDnDNHlqWcX2aSaVC3maQjOA4XE6ztWPDWYaPTJI29jFPXlS/KeJUaONAbG/8YUwW+
- CY7tlQEorM/sLgu9M7/8BwGSEfVPqJ/DE5oowUBELp0PUZyGaNkCTrSA33SBEwh2KhU6
- ol0dMfvpm259RNogpds67bkRFRmLSWt64WeYpslE0MCQoAEx/GDRyuD3doYbCMk9Iz3Q
- x32me6IqDB2mjVZ0qlcMQ45Waqgb9eIZ+/witS4wnaW1ojWnysRtPJ8UPEKSbYrE5Job
- tEwG4V3FQxs2mktgetq10A0wQL61VgeyiGnQAM1DT97lDejL3X8chZYnJNknjxgu6z6K
- hiiw==
+ bh=yJ6tjGOFs6HzzX2W7HylzF03qUE0BXcKGU/k3ESswzk=;
+ b=D95y3kq3vQQ21P2A62ffRxF3KsYdcws+eaM0ah5T8PXbbWmRS/7nKVdI/n+E9ZHVlk
+ onRqrn38co38dDNXFLhTN4mZQlxRuaHsjdYeXqUSfPFa4YuQO27wWnH9jRMV1RZbID9r
+ cQvAxafY+6Nv9ijGdD+FDIqJhKxAd2Kicg2ZSkQ3gxUy1sxZ/pBiQyhY3hLM6HX+gHRy
+ Oh7JKRr703lRlXeRcVWIT63CPlPrfZx/YtJ6QaulsWF+bZLllArizoYq1B1JsYL3L3MF
+ pjWOBbufwBD3EkA9VMdMmr8NrS51r3EFyvLBIvH6U5X7v3+OYplwh0mB+EGSQ3399eZr
+ YRgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705892149; x=1706496949;
+ d=1e100.net; s=20230601; t=1705892178; x=1706496978;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6D+lUHCaaaLaTEc1OzGOFgyQeexGGSTV/qw2ByYNTO8=;
- b=uVAUFLQv0Lp3WDlypdUILR4qaDPE1zfPYozTSkm8UdyxaZ2qxLxv+76Yl678c6wuMU
- 4YaPB3JL8L5cwxzpeT9Aqjzvwn+7sAsaJmH1A19wM8WFkCHRxekxuxCDsbw/mSHc5DC/
- DMDedQSXCUrANviNnHdkPc5hMd4ildrdeocc1oWvFXJi/pQ+nYtr3xEVOATFtg9qlXvc
- CCiw+7cudApbLkrLuY7Lwo2+4l/M9yWaky8KZRQTWsl3alrHW/Hdj42XQ8uU/SpyVhIm
- SHMJYpYC8fBm313J9TEmDzw8vIf0lIV355a0nqHDQeBeq0y69L4h2fY0/kk4tcET9Kwy
- j1Xg==
-X-Gm-Message-State: AOJu0YzgN4PEvCLBY5wv71ChyBe/yd7SiIZg3h27CZ5vYnYZmicU2dOv
- bq1+hTtAuo9jDFvQHu1JWzTwBZBVp8Ps0A5q1xE4rMpNDNxTwensac2iAQee/uVogKKLf2a62kf
- pzKI4kUVJ+6YlHi85z6Zr4k3JWTw=
-X-Google-Smtp-Source: AGHT+IGi4PxwTAXfBDawVvVyAlFxxRi8FGqFiyFF9MtPuNy0soyXOqqV2PFLc9KTR0+AL/XfhzNE8dHGx8dMGoxy68c=
-X-Received: by 2002:a05:6102:9b3:b0:469:7b0d:6b6b with SMTP id
- f19-20020a05610209b300b004697b0d6b6bmr2168306vsb.5.1705892148715; Sun, 21 Jan
- 2024 18:55:48 -0800 (PST)
+ bh=yJ6tjGOFs6HzzX2W7HylzF03qUE0BXcKGU/k3ESswzk=;
+ b=OAh1M6Zbs55as30Sz5epXqFq4hJZ21D5UkBtQ6TRWw0hWqxN6vCInI/vYm5/UgYf6F
+ FC60cLX1L5E4o/OVpP9QypV+L46w50vomD+MWfUChLzSIi1fGEm3C67UAUEnqMoMRqE0
+ bvRm7l3C9g0RaVYEQMOoOVzvj9yWIVD8spwvKOoP2BWm/7BAI57Ge5E+ELyT4sn21PUT
+ o3k3B5B9bNwlf73Wr/E9uPrPXrG4e9tTfQDeglQh0GKggX92Q3IU71M0qzKQFAbnoVRu
+ gTIpkCTovLBUR2qpM/9H7s4NUDUT9epAomL4Xi7pfw/boI9QhaWi2KtYgxSZmZkSkx4O
+ pzYQ==
+X-Gm-Message-State: AOJu0Yx370iDusmP2a4zAvW7paTgWknlQkWEBSArNog1m8f+4GUeeZh1
+ QJrEnho6EAf6VxCCnvxHe4ZF/Y41AqUI4NHNjuP08Iy98SgCcv/G+Q0Be/JN7xBprDvxexI2/34
+ Kmm0ykhUShgVvp5R6+Jt7WmP7odhJrqHx
+X-Google-Smtp-Source: AGHT+IEX/3iMko+qicMX6wIcvL7jxmJfz+IyjpeE4gJG96PTpfHQ7kg12VeklfUy0/jyhiXAN7URc3dZ3g00n6ofBKo=
+X-Received: by 2002:a05:6122:4219:b0:4b7:689d:9d9 with SMTP id
+ cm25-20020a056122421900b004b7689d09d9mr822291vkb.32.1705892178373; Sun, 21
+ Jan 2024 18:56:18 -0800 (PST)
 MIME-Version: 1.0
 References: <20240116205817.344178-1-dbarboza@ventanamicro.com>
- <20240116205817.344178-3-dbarboza@ventanamicro.com>
-In-Reply-To: <20240116205817.344178-3-dbarboza@ventanamicro.com>
+ <20240116205817.344178-4-dbarboza@ventanamicro.com>
+In-Reply-To: <20240116205817.344178-4-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 22 Jan 2024 12:55:22 +1000
-Message-ID: <CAKmqyKOWc2fPwz=WwQCyC84BOyQtcXJDXnUL+DRoVQon_9JK_A@mail.gmail.com>
-Subject: Re: [PATCH v3 02/13] target/riscv/csr.c: use 'vlenb' instead of 'vlen'
+Date: Mon, 22 Jan 2024 12:55:52 +1000
+Message-ID: <CAKmqyKOadowD0sJ83m7ovj9d0tODezM5S1Hh1HC+o-ea4eM4wg@mail.gmail.com>
+Subject: Re: [PATCH v3 03/13] target/riscv/gdbstub.c: use 'vlenb' instead of
+ shifting 'vlen'
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
  palmer@rivosinc.com, richard.henderson@linaro.org, max.chou@sifive.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92c;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2f;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2f.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -94,9 +95,6 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On Wed, Jan 17, 2024 at 7:00=E2=80=AFAM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> As a bonus, we're being more idiomatic using cpu->cfg.vlenb when
-> reading CSR_VLENB.
->
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
@@ -105,33 +103,44 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/csr.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+>  target/riscv/gdbstub.c | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 674ea075a4..5c8d22452b 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -683,7 +683,7 @@ static RISCVException read_vl(CPURISCVState *env, int=
- csrno,
+> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+> index 58b3ace0fe..5ab0abda19 100644
+> --- a/target/riscv/gdbstub.c
+> +++ b/target/riscv/gdbstub.c
+> @@ -130,7 +130,7 @@ static int riscv_gdb_set_fpu(CPURISCVState *env, uint=
+8_t *mem_buf, int n)
 >
->  static int read_vlenb(CPURISCVState *env, int csrno, target_ulong *val)
+>  static int riscv_gdb_get_vector(CPURISCVState *env, GByteArray *buf, int=
+ n)
 >  {
-> -    *val =3D riscv_cpu_cfg(env)->vlen >> 3;
-> +    *val =3D riscv_cpu_cfg(env)->vlenb;
->      return RISCV_EXCP_NONE;
->  }
+> -    uint16_t vlenb =3D riscv_cpu_cfg(env)->vlen >> 3;
+> +    uint16_t vlenb =3D riscv_cpu_cfg(env)->vlenb;
+>      if (n < 32) {
+>          int i;
+>          int cnt =3D 0;
+> @@ -146,7 +146,7 @@ static int riscv_gdb_get_vector(CPURISCVState *env, G=
+ByteArray *buf, int n)
 >
-> @@ -738,7 +738,7 @@ static RISCVException write_vstart(CPURISCVState *env=
-, int csrno,
->       * The vstart CSR is defined to have only enough writable bits
->       * to hold the largest element index, i.e. lg2(VLEN) bits.
->       */
-> -    env->vstart =3D val & ~(~0ULL << ctzl(riscv_cpu_cfg(env)->vlen));
-> +    env->vstart =3D val & ~(~0ULL << ctzl(riscv_cpu_cfg(env)->vlenb << 3=
-));
->      return RISCV_EXCP_NONE;
->  }
+>  static int riscv_gdb_set_vector(CPURISCVState *env, uint8_t *mem_buf, in=
+t n)
+>  {
+> -    uint16_t vlenb =3D riscv_cpu_cfg(env)->vlen >> 3;
+> +    uint16_t vlenb =3D riscv_cpu_cfg(env)->vlenb;
+>      if (n < 32) {
+>          int i;
+>          for (i =3D 0; i < vlenb; i +=3D 8) {
+> @@ -266,7 +266,7 @@ static int ricsv_gen_dynamic_vector_xml(CPUState *cs,=
+ int base_reg)
+>      RISCVCPU *cpu =3D RISCV_CPU(cs);
+>      GString *s =3D g_string_new(NULL);
+>      g_autoptr(GString) ts =3D g_string_new("");
+> -    int reg_width =3D cpu->cfg.vlen;
+> +    int reg_width =3D cpu->cfg.vlenb << 3;
+>      int num_regs =3D 0;
+>      int i;
 >
 > --
 > 2.43.0
