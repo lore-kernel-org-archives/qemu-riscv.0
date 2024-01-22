@@ -4,79 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51BE4C4725D
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 07:05:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0328C4725D
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 09:16:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rRoN0-0007OB-Jb; Mon, 22 Jan 2024 02:05:22 -0500
+	id 1rRqPy-0001hA-BY; Mon, 22 Jan 2024 04:16:34 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rRoMx-0007MH-2b; Mon, 22 Jan 2024 02:05:19 -0500
-Received: from mail-vs1-xe34.google.com ([2607:f8b0:4864:20::e34])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1rRqPs-0001cV-Cy
+ for qemu-riscv@nongnu.org; Mon, 22 Jan 2024 04:16:29 -0500
+Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rRoMv-0003Km-8R; Mon, 22 Jan 2024 02:05:18 -0500
-Received: by mail-vs1-xe34.google.com with SMTP id
- ada2fe7eead31-469b79d0efdso54151137.3; 
- Sun, 21 Jan 2024 23:05:16 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1rRqPo-0004Th-NQ
+ for qemu-riscv@nongnu.org; Mon, 22 Jan 2024 04:16:28 -0500
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-40e7065b692so32682525e9.3
+ for <qemu-riscv@nongnu.org>; Mon, 22 Jan 2024 01:16:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705907115; x=1706511915; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WZUclu2M2bkOpiKwNIhRIt21C90dQM6h2dS5CyYkPA4=;
- b=TzJ8/6FJktC/bd3UR+yj0KzFUKBwPoaiKWqBy474tbPqtWfuBxWJ8tyPPIbLZDo/Dg
- OjFErUspzMwwPX5eZ5Bluj9i5tor53pxX8lR1T/skmYwlv3FynJzP7bhlOa5h8IVnGn8
- nNNp1hxbSsgk5l2kEI/guY49eRxp25eJNXJUi6NYlw3uSKrIkUmlGmXrK8pqanS1BkQn
- dDjuVsz5cmCFHeRpRtI7+Mt/MxrXbx7hm3HE7M+6Aljv3uYjzgUIkkhaCZw5ReyCYw2B
- Tqe/HGqDdT9gNI1GgglnUqQG7B2wY/vPjrNOPHzCBckyDp/oroint7qGtcu5HH1akNYt
- 7E4w==
+ d=ventanamicro.com; s=google; t=1705914981; x=1706519781; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=NVdJ1l5G9jn1rBjjw7NYRRFNZNCaYHvpzj4eNS9ml7s=;
+ b=gVSyuGc2m+BrMa3DExhr/fVklINccvsnE1ml8ozIyzT9Ux4GZqt1QAvXNYWrYaZLye
+ 7i1DzqSjKppimUF1qQgCS+5CD4gMTCOKjF5OPNvPT8W3OpTa9+S07LvmfwOjkyQK+OFo
+ /PetwfvUd1ETjWK8PbXLi4r2TPe+IYxH7tYqDQJS5/5ldSP8cbvugLmhZhENRgUi+iMx
+ GAaMAA5GHd1ISXy/GKQh/dCbteIXQIjKdRM8MP9/jsO+LGkO5qzdMatqmpmfeIqxUErv
+ m/Lm/k/uaF0Qr+xIJw+MjdQK54dwQeyhSrNW7wApHr10cu1CB6Fwd0N3q21GDfu/lKjd
+ rp2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705907115; x=1706511915;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=WZUclu2M2bkOpiKwNIhRIt21C90dQM6h2dS5CyYkPA4=;
- b=T2YATdToxU/WY/fRSl2VK8zO5FldvxqzvpgaXUEatALnhaSxQeDSTdVTZwSzC3ef2e
- lj2SlfmMkvMSL87esrhRV5ngrerA8IEr2GWGVPy+JNdQHOsCAgjrFqtrqgX7ItIjeImM
- CLFxWHEqa/GSY+C0gVh4LxjthdSnwbsptqq/f4M/wTjCyGQep8+ODj7VIdK+X6reWrup
- qJ7QERUEBDNiyCgLAwBKnHWzkYBGmCBRWn2C8QTjEBvYH3iNgg+3VF7FbGarCbGfG9xq
- lC+URJ64H/rgoo9wzRTiCYyBA3iigJrXJSf10egi95m7y7/Uu5nPI3kCBB+IZEl1V+bb
- Z1eg==
-X-Gm-Message-State: AOJu0YyiKZLlXXJZfOB7tSLhF+v0sa/HbMT3WWuEWLzBMCfTSoz6/wOq
- IeuMRkVwWd12NToiDrlnrymXNgM2FJh0IggAN2gDMX0aEuZMZJ3TmgJib+uXOHpOr73NJNlt8uK
- cAw4POKi2hX3eW4PjzJlg/mTr2wU=
-X-Google-Smtp-Source: AGHT+IGYm3qDcA8p6Rn/3Fos//8J2tIDfyqw01d4kJrLc82NWrR3YSto0pqbauBZWlweQWLz8ZlycjSaIixqQjN5zdc=
-X-Received: by 2002:a05:6102:357a:b0:469:5655:153e with SMTP id
- bh26-20020a056102357a00b004695655153emr1486111vsb.29.1705907115428; Sun, 21
- Jan 2024 23:05:15 -0800 (PST)
+ d=1e100.net; s=20230601; t=1705914981; x=1706519781;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NVdJ1l5G9jn1rBjjw7NYRRFNZNCaYHvpzj4eNS9ml7s=;
+ b=TNpwIbE5RdJQu3GGD/aGd6zPxbc+cBUxKJ+a7V8VZY16UlgvAXJSLdKK4ZaHZCw3br
+ wHiL1HJLa4x6KszirbueYdUT13u1gfAJ9BUwps1Vwg+GLSd/ipx5ezzuP2+tETbrRn/W
+ ZwAL6x8aV+xXHtWoWN4m1YE/NSY53gzFvwlj442m1u8GZzPU2Z5Tdolfa0YKXSyJYrlq
+ bb1Mvic+h08/TaafbcfxpKtykblZP2eBTE+n2QxfFZ6IrpHBICgZGgDqBggevAFdkP9E
+ nnINssA04FjnFhdwvmXL9/GvOLBTjZZAiOb5I1mMnB47ScihNiespeElxf7w64wMhWjo
+ Y3aA==
+X-Gm-Message-State: AOJu0YwENEYoANVb1XsXPl4/f+kBKHMnOJtvXQ0cPzeJqHRT+jiRIdRA
+ S4chQyRLIXHiwjvKv/TZHXBg5pBsPwmrlI/CviuuYbDinaCx40jAdP3Q66k7j6U=
+X-Google-Smtp-Source: AGHT+IGgk+B2VCwTumI0YB42RyFQU/5YceTcdY8zRx+G8ETrrJ0jZp17+9IZGnOmGsYtiFDNDdcpOw==
+X-Received: by 2002:a05:600c:444b:b0:40e:b21a:7ab4 with SMTP id
+ v11-20020a05600c444b00b0040eb21a7ab4mr37022wmn.180.1705914981497; 
+ Mon, 22 Jan 2024 01:16:21 -0800 (PST)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ by smtp.gmail.com with ESMTPSA id
+ w14-20020a5d404e000000b00337d9a717bcsm8858354wrp.52.2024.01.22.01.16.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Jan 2024 01:16:20 -0800 (PST)
+Date: Mon, 22 Jan 2024 10:16:19 +0100
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Rob Bradford <rbradford@rivosinc.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Himanshu Chauhan <hchauhan@ventanamicro.com>, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Alvin Chang <alvinga@andestech.com>, 
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: Re: Re: [PATCH 0/2] Export debug triggers as an extension
+Message-ID: <20240122-29d7d206e9ea3ecd46fad930@orel>
+References: <20240110040203.1920924-1-hchauhan@ventanamicro.com>
+ <e2763db2-fade-482d-b433-1bfce6acf7d3@ventanamicro.com>
+ <CAKmqyKOA6OtixYoMJ_qtXj_u0t6rMdHawg0VEvq3-=mK4q6_XQ@mail.gmail.com>
+ <3c091744cd4bafeb7c1d177455fa9789822e7209.camel@rivosinc.com>
+ <CAKmqyKPkjBBo-2EAL25-3qACSv4c4naGT8V-F5e5as4D=WVa9g@mail.gmail.com>
 MIME-Version: 1.0
-References: <20240109102930.405323-1-me@deliversmonkey.space>
- <20240109102930.405323-3-me@deliversmonkey.space>
-In-Reply-To: <20240109102930.405323-3-me@deliversmonkey.space>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 22 Jan 2024 17:04:49 +1000
-Message-ID: <CAKmqyKNRk_on+ZqKBGGhmXnwLNdmHhXoXK+yTr5p3FEhezOJxg@mail.gmail.com>
-Subject: Re: [PATCH v4 2/6] target/riscv: Add new CSR fields for S{sn, mn,
- m}pm extensions as part of Zjpm v0.8
-To: Alexey Baturo <baturo.alexey@gmail.com>
-Cc: richard.henderson@linaro.org, zhiwei_liu@linux.alibaba.com, 
- palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu, 
- kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e34;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe34.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAKmqyKPkjBBo-2EAL25-3qACSv4c4naGT8V-F5e5as4D=WVa9g@mail.gmail.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::333;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x333.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -92,218 +102,89 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jan 9, 2024 at 8:32=E2=80=AFPM Alexey Baturo <baturo.alexey@gmail.c=
-om> wrote:
+On Mon, Jan 22, 2024 at 03:42:10PM +1000, Alistair Francis wrote:
+> > > From memory the "debug" property is for the original debug spec:
+> > > https://github.com/riscv/riscv-debug-spec/releases/tag/task_group_vote
+> > >
+> > > That was ratified and is an official extension. AFAIK this is what is
+> > > in physical hardware as well.
+> > >
+> > > The actual PDF says draft though, I'm not sure what's going on there.
+> > >
+> > > The debug spec doesn't have a Z* name, so it's just "debug", at least
+> > > AFAIK.
+> > >
+> > > "sdtrig" seems to be a new backwards-incompatible extension doing
+> > > basically the same thing. What a mess
+...
+> >
+> > I've done a bit of digging and I agree things are quite messy. Here are
+> > my discoveries:
+> >
+> > The debug option and the code for triggers was added in these commits:
+> >
+> > c9711bd778 target/riscv: cpu: Enable native debug feature
+> > 38b4e781a4 target/riscv: machine: Add debug state description
+> > b6092544fc target/riscv: csr: Hook debug CSR read/write
+> > 1acdb3b013 target/riscv: cpu: Add a config option for native debug
+> > 95799e36c1 target/riscv: Add initial support for the Sdtrig extension
+> >
+> > In March 2022 - since the commit refers to the Sdtrig extension name
+> > and from the date this was an implementation not of the ratified 0.13
+> > debug spec (which did not have Sdtrig as a separate extension) but
+> > rather a version of the in development 1.0 debug spec.
+> 
+> Yeah... We used the "stable" from master. That is our mistake there.
+> 
+> I'm pretty sure we targeted the 0.13. The "Sdtrig" was only added in
+> the v4 as the changelog says: "mention Sdtrig extension in the commit"
+> 
+> >
+> > It's not trivial to tell if it's closer to the ratified 0.13 version or
+> > the (hopefully soon to be frozen) 1.0 version.
+> >
+> > As the only part of the debug specification to be implemented is the
+> > triggers then effectively the debug option is x-sdtrig.
+> >
+> > I don't think there is any way for code running on the machine to
+> > identify what version of the debug is implemented - the appropriate
+> > register is only available for external debug. Once 1.0 is frozen then
+> > the presence of Sdtrig isa string would indicate 1.0 trigger support is
+> > available.
+> >
+> > According to JIRA - https://jira.riscv.org/browse/RVS-981 the debug
+> > specification should freeze this month.
+> >
+> > How about considering this as a solution:
+> >
+> > - Add a new x-sdtrig option that defaults to false
+> > - Deprecate debug option - but retain it with default on
+> 
+> We can't deprecate a ratified spec. The 0.13 just seems to call it
+> "debug" so that's what we are stuck with
+> 
+> > - Add warning if triggers are used and x-sdtrig is not enabled
+> > - Update the trigger implementation to match frozen spec
+> 
+> We will need to support two versions, as there are two ratified specs.
 >
-> From: Alexey Baturo <baturo.alexey@gmail.com>
->
-> Signed-off-by: Alexey Baturo <baturo.alexey@gmail.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+We'll likely want to be allowed to deprecate ratified extensions as riscv
+evolves. Despite best intentions, extensions may be designed and ratified
+which ultimately fail to be of much utility, and new extensions will
+supersede old extensions. If QEMU keeps every extension it adds, then
+we'll slow progress on new extensions by maintaining old extension code.
+The old extensions will also bitrot or waste CI resources getting tested
+for no reason.
 
-Alistair
+I don't know the history of 'debug' and 'sdtrig', other than what I've
+read above, but, to me, it looks like 'debug' might be one of the first
+extensions which should be deprecated. Assuming we have a long enough
+deprecation period, then I think it's always safe to attempt a
+deprecation. If somebody shouts, then it can always be taken back off the
+chopping block.
 
-> ---
->  target/riscv/cpu.h      |  8 ++++++++
->  target/riscv/cpu_bits.h |  3 +++
->  target/riscv/cpu_cfg.h  |  3 +++
->  target/riscv/csr.c      | 11 +++++++++++
->  target/riscv/machine.c  | 10 +++++++---
->  target/riscv/pmp.c      | 13 ++++++++++---
->  target/riscv/pmp.h      | 11 ++++++-----
->  7 files changed, 48 insertions(+), 11 deletions(-)
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index a43c8fba57..c9bed5c9fc 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -101,6 +101,14 @@ typedef enum {
->      EXT_STATUS_DIRTY,
->  } RISCVExtStatus;
->
-> +/* Enum holds PMM field values for Zjpm v0.8 extension */
-> +typedef enum {
-> +    PMM_FIELD_DISABLED =3D 0,
-> +    PMM_FIELD_RESERVED =3D 1,
-> +    PMM_FIELD_PMLEN7   =3D 2,
-> +    PMM_FIELD_PMLEN16  =3D 3,
-> +} RISCVPmPmm;
-> +
->  #define MMU_USER_IDX 3
->
->  #define MAX_RISCV_PMPS (16)
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 1c92458a01..7cf1049bf4 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -715,6 +715,7 @@ typedef enum RISCVException {
->  #define MENVCFG_CBIE                       (3UL << 4)
->  #define MENVCFG_CBCFE                      BIT(6)
->  #define MENVCFG_CBZE                       BIT(7)
-> +#define MENVCFG_PMM                        (3ULL << 32)
->  #define MENVCFG_ADUE                       (1ULL << 61)
->  #define MENVCFG_PBMTE                      (1ULL << 62)
->  #define MENVCFG_STCE                       (1ULL << 63)
-> @@ -728,11 +729,13 @@ typedef enum RISCVException {
->  #define SENVCFG_CBIE                       MENVCFG_CBIE
->  #define SENVCFG_CBCFE                      MENVCFG_CBCFE
->  #define SENVCFG_CBZE                       MENVCFG_CBZE
-> +#define SENVCFG_PMM                        MENVCFG_PMM
->
->  #define HENVCFG_FIOM                       MENVCFG_FIOM
->  #define HENVCFG_CBIE                       MENVCFG_CBIE
->  #define HENVCFG_CBCFE                      MENVCFG_CBCFE
->  #define HENVCFG_CBZE                       MENVCFG_CBZE
-> +#define HENVCFG_PMM                        MENVCFG_PMM
->  #define HENVCFG_ADUE                       MENVCFG_ADUE
->  #define HENVCFG_PBMTE                      MENVCFG_PBMTE
->  #define HENVCFG_STCE                       MENVCFG_STCE
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> index f4605fb190..201f8af6ae 100644
-> --- a/target/riscv/cpu_cfg.h
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -113,6 +113,9 @@ struct RISCVCPUConfig {
->      bool ext_ssaia;
->      bool ext_sscofpmf;
->      bool ext_smepmp;
-> +    bool ext_ssnpm;
-> +    bool ext_smnpm;
-> +    bool ext_smmpm;
->      bool rvv_ta_all_1s;
->      bool rvv_ma_all_1s;
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index ea4e1ac6ef..a67ba30494 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -527,6 +527,9 @@ static RISCVException have_mseccfg(CPURISCVState *env=
-, int csrno)
->      if (riscv_cpu_cfg(env)->ext_zkr) {
->          return RISCV_EXCP_NONE;
->      }
-> +    if (riscv_cpu_cfg(env)->ext_smmpm) {
-> +        return RISCV_EXCP_NONE;
-> +    }
->
->      return RISCV_EXCP_ILLEGAL_INST;
->  }
-> @@ -2030,6 +2033,10 @@ static RISCVException write_menvcfg(CPURISCVState =
-*env, int csrno,
->                  (cfg->ext_sstc ? MENVCFG_STCE : 0) |
->                  (cfg->ext_svadu ? MENVCFG_ADUE : 0);
->      }
-> +    /* Update PMM field only if the value is valid according to Zjpm v0.=
-8 */
-> +    if (((val & MENVCFG_PMM) >> 32) !=3D PMM_FIELD_RESERVED) {
-> +        mask |=3D MENVCFG_PMM;
-> +    }
->      env->menvcfg =3D (env->menvcfg & ~mask) | (val & mask);
->
->      return RISCV_EXCP_NONE;
-> @@ -2074,6 +2081,10 @@ static RISCVException write_senvcfg(CPURISCVState =
-*env, int csrno,
->                                      target_ulong val)
->  {
->      uint64_t mask =3D SENVCFG_FIOM | SENVCFG_CBIE | SENVCFG_CBCFE | SENV=
-CFG_CBZE;
-> +    /* Update PMM field only if the value is valid according to Zjpm v0.=
-8 */
-> +    if (((val & SENVCFG_PMM) >> 32) !=3D PMM_FIELD_RESERVED) {
-> +        mask |=3D SENVCFG_PMM;
-> +    }
->      RISCVException ret;
->
->      ret =3D smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index 71ee8bab19..0ad593ed5a 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -152,15 +152,19 @@ static const VMStateDescription vmstate_vector =3D =
-{
->
->  static bool pointermasking_needed(void *opaque)
->  {
-> -    return false;
-> +    RISCVCPU *cpu =3D opaque;
-> +    return cpu->cfg.ext_ssnpm || cpu->cfg.ext_smnpm || cpu->cfg.ext_smmp=
-m;
->  }
->
->  static const VMStateDescription vmstate_pointermasking =3D {
->      .name =3D "cpu/pointer_masking",
-> -    .version_id =3D 1,
-> -    .minimum_version_id =3D 1,
-> +    .version_id =3D 2,
-> +    .minimum_version_id =3D 2,
->      .needed =3D pointermasking_needed,
->      .fields =3D (VMStateField[]) {
-> +        VMSTATE_UINTTL(env.mseccfg, RISCVCPU),
-> +        VMSTATE_UINTTL(env.senvcfg, RISCVCPU),
-> +        VMSTATE_UINTTL(env.menvcfg, RISCVCPU),
->          VMSTATE_END_OF_LIST()
->      }
->  };
-> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index 162e88a90a..893ccd58d8 100644
-> --- a/target/riscv/pmp.c
-> +++ b/target/riscv/pmp.c
-> @@ -576,6 +576,12 @@ target_ulong pmpaddr_csr_read(CPURISCVState *env, ui=
-nt32_t addr_index)
->  void mseccfg_csr_write(CPURISCVState *env, target_ulong val)
->  {
->      int i;
-> +    uint64_t mask =3D MSECCFG_MMWP | MSECCFG_MML;
-> +
-> +    /* Update PMM field only if the value is valid according to Zjpm v0.=
-8 */
-> +    if (((val & MSECCFG_PMM) >> 32) !=3D PMM_FIELD_RESERVED) {
-> +        mask |=3D MSECCFG_PMM;
-> +    }
->
->      trace_mseccfg_csr_write(env->mhartid, val);
->
-> @@ -591,12 +597,13 @@ void mseccfg_csr_write(CPURISCVState *env, target_u=
-long val)
->
->      if (riscv_cpu_cfg(env)->ext_smepmp) {
->          /* Sticky bits */
-> -        val |=3D (env->mseccfg & (MSECCFG_MMWP | MSECCFG_MML));
-> -        if ((val ^ env->mseccfg) & (MSECCFG_MMWP | MSECCFG_MML)) {
-> +        val |=3D (env->mseccfg & mask);
-> +        if ((val ^ env->mseccfg) & mask) {
->              tlb_flush(env_cpu(env));
->          }
->      } else {
-> -        val &=3D ~(MSECCFG_MMWP | MSECCFG_MML | MSECCFG_RLB);
-> +        mask |=3D MSECCFG_RLB;
-> +        val &=3D ~(mask);
->      }
->
->      env->mseccfg =3D val;
-> diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
-> index 9af8614cd4..b3ca51c26d 100644
-> --- a/target/riscv/pmp.h
-> +++ b/target/riscv/pmp.h
-> @@ -40,11 +40,12 @@ typedef enum {
->  } pmp_am_t;
->
->  typedef enum {
-> -    MSECCFG_MML   =3D 1 << 0,
-> -    MSECCFG_MMWP  =3D 1 << 1,
-> -    MSECCFG_RLB   =3D 1 << 2,
-> -    MSECCFG_USEED =3D 1 << 8,
-> -    MSECCFG_SSEED =3D 1 << 9
-> +    MSECCFG_MML       =3D 1 << 0,
-> +    MSECCFG_MMWP      =3D 1 << 1,
-> +    MSECCFG_RLB       =3D 1 << 2,
-> +    MSECCFG_USEED     =3D 1 << 8,
-> +    MSECCFG_SSEED     =3D 1 << 9,
-> +    MSECCFG_PMM       =3D 3UL << 32,
->  } mseccfg_field_t;
->
->  typedef struct {
-> --
-> 2.34.1
->
->
+Thanks,
+drew
+
 
