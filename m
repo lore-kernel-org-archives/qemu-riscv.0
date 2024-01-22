@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0328C4725D
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 09:16:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0265C47DAF
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jan 2024 09:57:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rRqPy-0001hA-BY; Mon, 22 Jan 2024 04:16:34 -0500
+	id 1rRr3f-00019X-Ps; Mon, 22 Jan 2024 04:57:35 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rRqPs-0001cV-Cy
- for qemu-riscv@nongnu.org; Mon, 22 Jan 2024 04:16:29 -0500
-Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
+ id 1rRr3c-000191-Ap
+ for qemu-riscv@nongnu.org; Mon, 22 Jan 2024 04:57:33 -0500
+Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rRqPo-0004Th-NQ
- for qemu-riscv@nongnu.org; Mon, 22 Jan 2024 04:16:28 -0500
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-40e7065b692so32682525e9.3
- for <qemu-riscv@nongnu.org>; Mon, 22 Jan 2024 01:16:23 -0800 (PST)
+ id 1rRr3a-0004r5-4Z
+ for qemu-riscv@nongnu.org; Mon, 22 Jan 2024 04:57:31 -0500
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-40e880121efso33168315e9.3
+ for <qemu-riscv@nongnu.org>; Mon, 22 Jan 2024 01:57:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1705914981; x=1706519781; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1705917447; x=1706522247; darn=nongnu.org;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=NVdJ1l5G9jn1rBjjw7NYRRFNZNCaYHvpzj4eNS9ml7s=;
- b=gVSyuGc2m+BrMa3DExhr/fVklINccvsnE1ml8ozIyzT9Ux4GZqt1QAvXNYWrYaZLye
- 7i1DzqSjKppimUF1qQgCS+5CD4gMTCOKjF5OPNvPT8W3OpTa9+S07LvmfwOjkyQK+OFo
- /PetwfvUd1ETjWK8PbXLi4r2TPe+IYxH7tYqDQJS5/5ldSP8cbvugLmhZhENRgUi+iMx
- GAaMAA5GHd1ISXy/GKQh/dCbteIXQIjKdRM8MP9/jsO+LGkO5qzdMatqmpmfeIqxUErv
- m/Lm/k/uaF0Qr+xIJw+MjdQK54dwQeyhSrNW7wApHr10cu1CB6Fwd0N3q21GDfu/lKjd
- rp2g==
+ bh=IMIlHEBbhQ0xlgO3MlmyMzm9DBfzWBP6vqLTmYF2REY=;
+ b=M2KdkDhgMpMny5M/gVACoDEt7sH+2VWYSeJo0p+47wOjvRWEwT/mp1b52573zmZDX0
+ YBB9lbbopdXUrEXTZT4QuHnbi4sspP8WMYYTU1FRIzDGxS9WvAp15aU8EwrUJ3UKffKC
+ gAhLPAkaP3nvRWh+Ry2GA0uJCwNCAdb+NQFkca3GCGH8KXVEcD3NYa5CU92rmp4SufAo
+ yAQCbHPLdUJYZ8T8eQlVWzVBEITOqwD/qCfjCcdJO5YaeCrZeo4UhmkUaqbnlx2esc6S
+ oL+5jQPXh+POhaRZocd+gPz3CHsMJroIVFoVSvVIXCC5gm8afm34mcKMzKojsM2UZoXp
+ j/ig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705914981; x=1706519781;
+ d=1e100.net; s=20230601; t=1705917447; x=1706522247;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NVdJ1l5G9jn1rBjjw7NYRRFNZNCaYHvpzj4eNS9ml7s=;
- b=TNpwIbE5RdJQu3GGD/aGd6zPxbc+cBUxKJ+a7V8VZY16UlgvAXJSLdKK4ZaHZCw3br
- wHiL1HJLa4x6KszirbueYdUT13u1gfAJ9BUwps1Vwg+GLSd/ipx5ezzuP2+tETbrRn/W
- ZwAL6x8aV+xXHtWoWN4m1YE/NSY53gzFvwlj442m1u8GZzPU2Z5Tdolfa0YKXSyJYrlq
- bb1Mvic+h08/TaafbcfxpKtykblZP2eBTE+n2QxfFZ6IrpHBICgZGgDqBggevAFdkP9E
- nnINssA04FjnFhdwvmXL9/GvOLBTjZZAiOb5I1mMnB47ScihNiespeElxf7w64wMhWjo
- Y3aA==
-X-Gm-Message-State: AOJu0YwENEYoANVb1XsXPl4/f+kBKHMnOJtvXQ0cPzeJqHRT+jiRIdRA
- S4chQyRLIXHiwjvKv/TZHXBg5pBsPwmrlI/CviuuYbDinaCx40jAdP3Q66k7j6U=
-X-Google-Smtp-Source: AGHT+IGgk+B2VCwTumI0YB42RyFQU/5YceTcdY8zRx+G8ETrrJ0jZp17+9IZGnOmGsYtiFDNDdcpOw==
-X-Received: by 2002:a05:600c:444b:b0:40e:b21a:7ab4 with SMTP id
- v11-20020a05600c444b00b0040eb21a7ab4mr37022wmn.180.1705914981497; 
- Mon, 22 Jan 2024 01:16:21 -0800 (PST)
+ bh=IMIlHEBbhQ0xlgO3MlmyMzm9DBfzWBP6vqLTmYF2REY=;
+ b=LFE4HZaRj/VwBjjMtM8CzZ2Totm6gkW+Dk+D/IktFvcAoO3OMijeoOfS1vvysNbOqz
+ vrQIUVdqcIJRSpI/m7YFa/ZhalF02PFPaxBRE+7K4quisAKAKTyynnvZrUzeORk6hX86
+ tAwn7QHwCs7+jpv/b9ZRginYwPD/tOeu+EyE2nShioe25GcEuvJblmRssmzUjAYomuAU
+ GVPTEX/oRwL7bqmIIMaXu+c7DLZz5TANVozazSLb5WUY6itxzOzgE/ts2i2Rs7s/UHQg
+ g9Fzsr0F6ZGci/Zptu/fL1wTRgQBHQ5RYCx8PxNJehhGk2m3/l9lPyLpUGUT4dToj3jQ
+ 6Ndg==
+X-Gm-Message-State: AOJu0YzlYgi50d4gNlgAZWZ8kPx8a6Ev2jCCoA1UGv5TS7V+Rto5z7PE
+ H8e5QF3bcQsOOEt7uCyhhJey9ObWLwt9o/uh18e78GodK21KJlFsEidu1sz1+HA=
+X-Google-Smtp-Source: AGHT+IFSqDWd87BYOcIsA/hcnc1HCyyui0Jzi3hIM+4uGoACfJJqPPmohYFFoBPRHfaYevqijIidwQ==
+X-Received: by 2002:a05:600c:a49:b0:40e:864e:495c with SMTP id
+ c9-20020a05600c0a4900b0040e864e495cmr2123508wmq.42.1705917447620; 
+ Mon, 22 Jan 2024 01:57:27 -0800 (PST)
 Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
  [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
  by smtp.gmail.com with ESMTPSA id
- w14-20020a5d404e000000b00337d9a717bcsm8858354wrp.52.2024.01.22.01.16.20
+ bh11-20020a05600c3d0b00b0040eabc7cfacsm4235179wmb.16.2024.01.22.01.57.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jan 2024 01:16:20 -0800 (PST)
-Date: Mon, 22 Jan 2024 10:16:19 +0100
+ Mon, 22 Jan 2024 01:57:27 -0800 (PST)
+Date: Mon, 22 Jan 2024 10:57:26 +0100
 From: Andrew Jones <ajones@ventanamicro.com>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Rob Bradford <rbradford@rivosinc.com>, 
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, 
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Himanshu Chauhan <hchauhan@ventanamicro.com>, 
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Alvin Chang <alvinga@andestech.com>, 
- Alistair Francis <alistair.francis@wdc.com>
-Subject: Re: Re: [PATCH 0/2] Export debug triggers as an extension
-Message-ID: <20240122-29d7d206e9ea3ecd46fad930@orel>
-References: <20240110040203.1920924-1-hchauhan@ventanamicro.com>
- <e2763db2-fade-482d-b433-1bfce6acf7d3@ventanamicro.com>
- <CAKmqyKOA6OtixYoMJ_qtXj_u0t6rMdHawg0VEvq3-=mK4q6_XQ@mail.gmail.com>
- <3c091744cd4bafeb7c1d177455fa9789822e7209.camel@rivosinc.com>
- <CAKmqyKPkjBBo-2EAL25-3qACSv4c4naGT8V-F5e5as4D=WVa9g@mail.gmail.com>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ "Michael S . Tsirkin" <mst@redhat.com>, Igor Mammedov <imammedo@redhat.com>, 
+ Ani Sinha <anisinha@redhat.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Subject: Re: [PATCH v2 3/4] target/riscv: SMBIOS support for RISC-V virt
+ machine
+Message-ID: <20240122-4f4cbce3692cd684e0409f9e@orel>
+References: <20231229120724.41383-1-heinrich.schuchardt@canonical.com>
+ <20231229120724.41383-4-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAKmqyKPkjBBo-2EAL25-3qACSv4c4naGT8V-F5e5as4D=WVa9g@mail.gmail.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::333;
- envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x333.google.com
+In-Reply-To: <20231229120724.41383-4-heinrich.schuchardt@canonical.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x334.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -102,89 +102,120 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Jan 22, 2024 at 03:42:10PM +1000, Alistair Francis wrote:
-> > > From memory the "debug" property is for the original debug spec:
-> > > https://github.com/riscv/riscv-debug-spec/releases/tag/task_group_vote
-> > >
-> > > That was ratified and is an official extension. AFAIK this is what is
-> > > in physical hardware as well.
-> > >
-> > > The actual PDF says draft though, I'm not sure what's going on there.
-> > >
-> > > The debug spec doesn't have a Z* name, so it's just "debug", at least
-> > > AFAIK.
-> > >
-> > > "sdtrig" seems to be a new backwards-incompatible extension doing
-> > > basically the same thing. What a mess
-...
-> >
-> > I've done a bit of digging and I agree things are quite messy. Here are
-> > my discoveries:
-> >
-> > The debug option and the code for triggers was added in these commits:
-> >
-> > c9711bd778 target/riscv: cpu: Enable native debug feature
-> > 38b4e781a4 target/riscv: machine: Add debug state description
-> > b6092544fc target/riscv: csr: Hook debug CSR read/write
-> > 1acdb3b013 target/riscv: cpu: Add a config option for native debug
-> > 95799e36c1 target/riscv: Add initial support for the Sdtrig extension
-> >
-> > In March 2022 - since the commit refers to the Sdtrig extension name
-> > and from the date this was an implementation not of the ratified 0.13
-> > debug spec (which did not have Sdtrig as a separate extension) but
-> > rather a version of the in development 1.0 debug spec.
+On Fri, Dec 29, 2023 at 01:07:23PM +0100, Heinrich Schuchardt wrote:
+> Generate SMBIOS tables for the RISC-V mach-virt.
+> Add CONFIG_SMBIOS=y to the RISC-V default config.
+> Set the default processor family in the type 4 table.
 > 
-> Yeah... We used the "stable" from master. That is our mistake there.
+> The implementation is based on the corresponding ARM and Loongson code.
 > 
-> I'm pretty sure we targeted the 0.13. The "Sdtrig" was only added in
-> the v4 as the changelog says: "mention Sdtrig extension in the commit"
+> With the patch the following firmware tables are provided:
 > 
-> >
-> > It's not trivial to tell if it's closer to the ratified 0.13 version or
-> > the (hopefully soon to be frozen) 1.0 version.
-> >
-> > As the only part of the debug specification to be implemented is the
-> > triggers then effectively the debug option is x-sdtrig.
-> >
-> > I don't think there is any way for code running on the machine to
-> > identify what version of the debug is implemented - the appropriate
-> > register is only available for external debug. Once 1.0 is frozen then
-> > the presence of Sdtrig isa string would indicate 1.0 trigger support is
-> > available.
-> >
-> > According to JIRA - https://jira.riscv.org/browse/RVS-981 the debug
-> > specification should freeze this month.
-> >
-> > How about considering this as a solution:
-> >
-> > - Add a new x-sdtrig option that defaults to false
-> > - Deprecate debug option - but retain it with default on
+>     etc/smbios/smbios-anchor
+>     etc/smbios/smbios-tables
 > 
-> We can't deprecate a ratified spec. The 0.13 just seems to call it
-> "debug" so that's what we are stuck with
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+> v2:
+> 	set processor family
+> ---
+>  hw/riscv/Kconfig |  1 +
+>  hw/riscv/virt.c  | 42 ++++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 43 insertions(+)
 > 
-> > - Add warning if triggers are used and x-sdtrig is not enabled
-> > - Update the trigger implementation to match frozen spec
+> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> index b6a5eb4452..1e11ac9432 100644
+> --- a/hw/riscv/Kconfig
+> +++ b/hw/riscv/Kconfig
+> @@ -41,6 +41,7 @@ config RISCV_VIRT
+>      select RISCV_IMSIC
+>      select SIFIVE_PLIC
+>      select SIFIVE_TEST
+> +    select SMBIOS
+>      select VIRTIO_MMIO
+>      select FW_CFG_DMA
+>      select PLATFORM_BUS
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index d2eac24156..a876dd8f34 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -36,6 +36,7 @@
+>  #include "hw/riscv/boot.h"
+>  #include "hw/riscv/numa.h"
+>  #include "kvm/kvm_riscv.h"
+> +#include "hw/firmware/smbios.h"
+>  #include "hw/intc/riscv_aclint.h"
+>  #include "hw/intc/riscv_aplic.h"
+>  #include "hw/intc/riscv_imsic.h"
+> @@ -1249,6 +1250,45 @@ static void create_platform_bus(RISCVVirtState *s, DeviceState *irqchip)
+>                                  sysbus_mmio_get_region(sysbus, 0));
+>  }
+>  
+> +static void virt_build_smbios(RISCVVirtState *s)
+> +{
+> +    MachineClass *mc = MACHINE_GET_CLASS(s);
+> +    MachineState *ms = MACHINE(s);
+> +    uint8_t *smbios_tables, *smbios_anchor;
+> +    size_t smbios_tables_len, smbios_anchor_len;
+> +    struct smbios_phys_mem_area mem_array;
+> +    const char *product = "QEMU Virtual Machine";
+> +
+> +    if (kvm_enabled()) {
+> +        product = "KVM Virtual Machine";
+> +    }
+> +
+> +    smbios_set_defaults("QEMU", product, mc->name, false,
+> +                        true, SMBIOS_ENTRY_POINT_TYPE_64);
+> +
+> +#if defined(TARGET_RISCV32)
+> +    smbios_set_default_processor_family(0x200);
+> +#elif defined(TARGET_RISCV64)
+> +    smbios_set_default_processor_family(0x201);
+> +#endif
+
+I think we should use misa_mxl_max to determine the family, rather than
+TARGET_*, because, iirc, we're slowly working our ways towards allowing
+rv32 cpus to be instantiated with qemu-system-riscv64.
+
+> +
+> +    /* build the array of physical mem area from base_memmap */
+> +    mem_array.address = s->memmap[VIRT_DRAM].base;
+> +    mem_array.length = ms->ram_size;
+> +
+> +    smbios_get_tables(ms, &mem_array, 1,
+> +                      &smbios_tables, &smbios_tables_len,
+> +                      &smbios_anchor, &smbios_anchor_len,
+> +                      &error_fatal);
+> +
+> +    if (smbios_anchor) {
+> +        fw_cfg_add_file(s->fw_cfg, "etc/smbios/smbios-tables",
+> +                        smbios_tables, smbios_tables_len);
+> +        fw_cfg_add_file(s->fw_cfg, "etc/smbios/smbios-anchor",
+> +                        smbios_anchor, smbios_anchor_len);
+> +    }
+> +}
+> +
+>  static void virt_machine_done(Notifier *notifier, void *data)
+>  {
+>      RISCVVirtState *s = container_of(notifier, RISCVVirtState,
+> @@ -1337,6 +1377,8 @@ static void virt_machine_done(Notifier *notifier, void *data)
+>          riscv_setup_direct_kernel(kernel_entry, fdt_load_addr);
+>      }
+>  
+> +    virt_build_smbios(s);
+> +
+>      if (virt_is_acpi_enabled(s)) {
+>          virt_acpi_setup(s);
+>      }
+> -- 
+> 2.43.0
 > 
-> We will need to support two versions, as there are two ratified specs.
 >
 
-We'll likely want to be allowed to deprecate ratified extensions as riscv
-evolves. Despite best intentions, extensions may be designed and ratified
-which ultimately fail to be of much utility, and new extensions will
-supersede old extensions. If QEMU keeps every extension it adds, then
-we'll slow progress on new extensions by maintaining old extension code.
-The old extensions will also bitrot or waste CI resources getting tested
-for no reason.
+Otherwise,
 
-I don't know the history of 'debug' and 'sdtrig', other than what I've
-read above, but, to me, it looks like 'debug' might be one of the first
-extensions which should be deprecated. Assuming we have a long enough
-deprecation period, then I think it's always safe to attempt a
-deprecation. If somebody shouts, then it can always be taken back off the
-chopping block.
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
 Thanks,
 drew
-
 
