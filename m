@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA62FC47258
-	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Jan 2024 05:44:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42092C47258
+	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Jan 2024 05:47:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rS9aC-00054w-Ht; Tue, 23 Jan 2024 00:44:24 -0500
+	id 1rS9cT-0006DT-TZ; Tue, 23 Jan 2024 00:46:46 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rS9aB-00054X-DV
- for qemu-riscv@nongnu.org; Tue, 23 Jan 2024 00:44:23 -0500
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rS9cO-00067P-VF; Tue, 23 Jan 2024 00:46:41 -0500
+Received: from mail-vs1-xe33.google.com ([2607:f8b0:4864:20::e33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rS9a8-0007j3-V8
- for qemu-riscv@nongnu.org; Tue, 23 Jan 2024 00:44:23 -0500
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-40e775695c6so38536775e9.3
- for <qemu-riscv@nongnu.org>; Mon, 22 Jan 2024 21:44:20 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rS9cL-00084Q-QH; Tue, 23 Jan 2024 00:46:39 -0500
+Received: by mail-vs1-xe33.google.com with SMTP id
+ ada2fe7eead31-46705557756so604660137.1; 
+ Mon, 22 Jan 2024 21:46:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705988659; x=1706593459; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=8QiAzTgH2CtvVh8gUYdFf3w4YBT2g3x8jeISe60mQK4=;
- b=XpbspbYSe5EWPP/IgnIqQirQ+1OQhTzclZ9K6FFcLHi8ApTHvXFh40YaSmjhybQY6Q
- miJcKU476TRAS+ti0nSlO75OAp1X7uKqBMhBEiVKZ3MWm2sFQXyDUEX65UnWeigv4zlm
- pAC7luf5zqBN5CzDi+hMrXpMW/8i6O/LnbcWucNdbQ/yzlKiP4xSpvHRMJgfEjI6CN2K
- P/GMCLwAlcqCacuY4uEH9W7jwTIgsjaytBnbXqxeqEz5wosV6lUgFy7RRLR+otLqc/0n
- nsutP12IiFtZPZ2lzDhxrWw+RYE2wQFdOdJp7mv6nDPX5zD9+6F7xzVPWZsO3jOjFNr0
- dbDw==
+ d=gmail.com; s=20230601; t=1705988792; x=1706593592; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=a3rXgWn5IuDB6M8Y07Gvb4DD+m5fCBo9w+t0lkMafAw=;
+ b=BuvDEEyRudhy8NG9gDD3EmuVBxRkQZpYzqXTb0kSaK76GvF9mLF+hj7r7Gf98JMhcR
+ JcK37Z8vWl6mryaVl/LYsZf4tq5kxcExyQXtLQVP3+VFYuTDtGpMeJP3Qln/kv7jHu/a
+ 3B6ZaZ4lhDZx3qiB0HFZD60i5Qc3MKnRcKhGV3dED2zo20pniw9IsE45QVWPTkaGegSj
+ cka+bTE1XYgb0AjM+us8vb/6JR5XLQw6YILVMSXmO2N+gw6OF+oPdWyWUml3Zzoa6xwj
+ vmgUeo/sglRTShnz2S1dnehTrQ9YSZ53WGC4bQwjgkl90e26yBBEQ+NCRVFPlP+blil8
+ TVgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705988659; x=1706593459;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=8QiAzTgH2CtvVh8gUYdFf3w4YBT2g3x8jeISe60mQK4=;
- b=w4EktuQ30BmbmhlUtat/BM3h01jtXZLJeLUojgEnpEQo7h60W13ujmf5p7eCkwNjb5
- MuWQA9gO6rTrkBNvijxX8WJQbcumUGfmumWvefeSjiCL6waRSRYeQ0tHelZqoK41rIiS
- /sArodvqTsjRGe7oLwmaalgVHA28QASkRXScveE4y+xgwrawZ6i2VXAi+TcTck8rCn1R
- ODQzIwG8ttwF6aInQZSfSe828OTHsi9Zd7BQ/7Zx9u28xolrUZ3V6zNEjQ8d4r6XGHxr
- Z1GeM91koukQSZ0ktjHaMoSCDxMyClqEOTYjCk9gtAqtuVdNcAEdRKpQfFC+MTNDTWFm
- Qymg==
-X-Gm-Message-State: AOJu0Ywqibf0cNqDjsAf06snCY2xcgGo3Gf9oFGdcHXEAvnHVqle/bz1
- lwVnyU3bJKR+QHKd2MMNM2kidLjRbTVxHvoSO573k3R1m0EEbmcqTwhEuaHxPjw=
-X-Google-Smtp-Source: AGHT+IG7CB+iBC09JWQCezo2eHkHsZEF9VgANNWVdGRcPqO/7IkDk0xu3wyqg+SNFeqkZvTmmtISkg==
-X-Received: by 2002:a05:600c:3115:b0:40e:7852:bc85 with SMTP id
- g21-20020a05600c311500b0040e7852bc85mr232519wmo.41.1705988659379; 
- Mon, 22 Jan 2024 21:44:19 -0800 (PST)
-Received: from [192.168.69.100] ([176.187.194.78])
- by smtp.gmail.com with ESMTPSA id
- m35-20020a05600c3b2300b0040e541ddcb1sm41322468wms.33.2024.01.22.21.44.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 22 Jan 2024 21:44:19 -0800 (PST)
-Message-ID: <0527965d-ed44-485e-8683-d7e16b2d8f3e@linaro.org>
-Date: Tue, 23 Jan 2024 06:44:18 +0100
+ d=1e100.net; s=20230601; t=1705988792; x=1706593592;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=a3rXgWn5IuDB6M8Y07Gvb4DD+m5fCBo9w+t0lkMafAw=;
+ b=llxQjxxYe7XmWFvfCihBcubFbRA7jPdSwZzRJAfV+SeG4v7nO7tK1+bsljblKVuhpA
+ hD8sGiXlZoJi+TLXfotKXi+O530oM70zqQT3GbHojgtMjTosoy3oZkLkXcta1CgKtvop
+ S5tw/b5Bhr/IYA74ME1+kt3+DxhVliRShSyuOStdIBnaYV7bIEP5ZsGpiwYDDTEXAQW9
+ X3PzCqz18aZkQKgAEJ8m1mi+yYPq3B2B0fkR8TZlFa597ZEWXIlBcITYwXIDQGyl9qbc
+ Rvc1vzgNjO0OvRnPjYtWQ7iZuxrxFUUJ+pxZXFe+KhHneWN3LmslYe6a3uDBcjj7VJ8X
+ wytQ==
+X-Gm-Message-State: AOJu0YxkzAP+wAJB4TwcBaW5NlgEiACQNS88JZ/kp/Su5RfP/sDDE+uK
+ q+A28OWsc7Lwg9+QSNNkzWwrytz9hidOfTiNsZSuBWRuL5EiW0kwfn6MbuB8nCQqlTpsXIDP2RH
+ kY/+oaF4Z+eM1nTTzfFu9kMYwslI=
+X-Google-Smtp-Source: AGHT+IGSQpKwr2g9P4TVonnCxVhAYoHwBDe1Jmon6jo6A1ELbnQZphFcZBvSK5yncih4WZlDZsbvl6GE5gB/QVapbSQ=
+X-Received: by 2002:a67:ff02:0:b0:469:b799:45ac with SMTP id
+ v2-20020a67ff02000000b00469b79945acmr1311475vsp.27.1705988792343; Mon, 22 Jan
+ 2024 21:46:32 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 6/7] hw/riscv/virt.c: use g_autofree in virt_machine_init()
-Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
-References: <20240122221529.86562-1-dbarboza@ventanamicro.com>
- <20240122221529.86562-7-dbarboza@ventanamicro.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20240122221529.86562-7-dbarboza@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x334.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20240122161107.26737-1-dbarboza@ventanamicro.com>
+In-Reply-To: <20240122161107.26737-1-dbarboza@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 23 Jan 2024 15:46:06 +1000
+Message-ID: <CAKmqyKNrL3dwzKwERtu3+sjVAHM1nOT8VDMVv-9H-oavEiYuPg@mail.gmail.com>
+Subject: Re: [PATCH v4 00/13] target/riscv: add 'cpu->cfg.vlenb', remove
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, richard.henderson@linaro.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e33;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe33.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,15 +90,56 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 22/1/24 23:15, Daniel Henrique Barboza wrote:
-> Move 'soc_name' to the loop, and give it g_autofree, to avoid the manual
-> g_free().
-> 
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->   hw/riscv/virt.c | 5 ++---
->   1 file changed, 2 insertions(+), 3 deletions(-)
+On Tue, Jan 23, 2024 at 2:11=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> Hi,
+>
+> This new version is rebased with a newer riscv-to-apply.next branch
+> (@ 096b6b0729). No other changes made.
+>
+> All patches acked.
+>
+> v4 link: https://lore.kernel.org/qemu-riscv/20240116205817.344178-1-dbarb=
+oza@ventanamicro.com/
+>
+> Daniel Henrique Barboza (13):
+>   target/riscv: add 'vlenb' field in cpu->cfg
+>   target/riscv/csr.c: use 'vlenb' instead of 'vlen'
+>   target/riscv/gdbstub.c: use 'vlenb' instead of shifting 'vlen'
+>   target/riscv/insn_trans/trans_rvbf16.c.inc: use cpu->cfg.vlenb
+>   target/riscv/insn_trans/trans_rvv.c.inc: use 'vlenb'
+>   target/riscv/insn_trans/trans_rvvk.c.inc: use 'vlenb'
+>   target/riscv/vector_helper.c: use 'vlenb'
+>   target/riscv/vector_helper.c: use vlenb in HELPER(vsetvl)
+>   target/riscv/insn_trans/trans_rvv.c.inc: use 'vlenb' in MAXSZ()
+>   target/riscv/cpu.h: use 'vlenb' in vext_get_vlmax()
+>   target/riscv: change vext_get_vlmax() arguments
+>   trans_rvv.c.inc: use vext_get_vlmax() in trans_vrgather_v*()
+>   target/riscv/cpu.c: remove cpu->cfg.vlen
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Thanks!
 
+Applied to riscv-to-apply.next
+
+Alistair
+
+>
+>  target/riscv/cpu.c                         |  12 +-
+>  target/riscv/cpu.h                         |  14 +-
+>  target/riscv/cpu_cfg.h                     |   2 +-
+>  target/riscv/cpu_helper.c                  |  11 +-
+>  target/riscv/csr.c                         |   4 +-
+>  target/riscv/gdbstub.c                     |   6 +-
+>  target/riscv/insn_trans/trans_rvbf16.c.inc |  12 +-
+>  target/riscv/insn_trans/trans_rvv.c.inc    | 152 ++++++++++-----------
+>  target/riscv/insn_trans/trans_rvvk.c.inc   |  16 +--
+>  target/riscv/tcg/tcg-cpu.c                 |   4 +-
+>  target/riscv/vector_helper.c               |  43 +++---
+>  11 files changed, 148 insertions(+), 128 deletions(-)
+>
+> --
+> 2.43.0
+>
+>
 
