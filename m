@@ -4,84 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF769C47DDB
-	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Jan 2024 16:38:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 306CAC47258
+	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Jan 2024 17:45:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rSJm0-0006ej-Lp; Tue, 23 Jan 2024 11:37:16 -0500
+	id 1rSKpX-0004QO-CW; Tue, 23 Jan 2024 12:45:01 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rSJly-0006e1-SF
- for qemu-riscv@nongnu.org; Tue, 23 Jan 2024 11:37:15 -0500
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1rSKpT-0004Py-St
+ for qemu-riscv@nongnu.org; Tue, 23 Jan 2024 12:44:56 -0500
+Received: from mail-yb1-xb34.google.com ([2607:f8b0:4864:20::b34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rSJlu-0002Z2-Jf
- for qemu-riscv@nongnu.org; Tue, 23 Jan 2024 11:37:12 -0500
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-1d6ff29293dso29084555ad.0
- for <qemu-riscv@nongnu.org>; Tue, 23 Jan 2024 08:37:10 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1rSKpS-0007ow-3P
+ for qemu-riscv@nongnu.org; Tue, 23 Jan 2024 12:44:55 -0500
+Received: by mail-yb1-xb34.google.com with SMTP id
+ 3f1490d57ef6-dc2308fe275so3802395276.1
+ for <qemu-riscv@nongnu.org>; Tue, 23 Jan 2024 09:44:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1706027829; x=1706632629; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=2zg5s9867QUffmRR+tZvS4ta7Mlc0s02/jJEDnvLZeE=;
- b=kVR9xM/8k6aT1D7V1WovDDvVtaEqUuIgXgso1R5jHzR/p45zLVwtEGwTWXHO8WOqmB
- ESJbrMwVx2XI2h5qrtnhC35DCGFBlHtbPdZpFzS5LGKsfCEO0kS2Eote3qPJrSsZV0ta
- pKiPHwuKSc2voNJhJzZw2eGG/rB1ucuIQIWdzObU8uQUN02BzT/RO1UqNJVo76AQ5pVi
- LMKs41+H9c2pdFJNfkVQ6ZAj61Ifg3IJIQkhInn8yrU2tP9DwjVZRzHGdlhAZwqE/fdq
- kXZW3pJmBwlqCFf5YNsIbisbg0n4/TaT9GQ82ObI6YCZrjTzEoSRju7DGZMOh3hkU+SE
- zHEg==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1706031892; x=1706636692;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cY+sbWdyrY3TPUbLY7/g3QAsx2vYqWtXyWuZMFZGBSM=;
+ b=DNrHdCjcSNkTSIBT4QA4PYcsvws6uUilD/CZyGxy+rE6Md+B2TPcrnFA7R8ldWtk5T
+ rCX+xqOibAXc7IGZ2Hpb8R5b8alDJcq20Tkl25xwv75PVQHUbNrgpOjP2rwD5AVQ76Of
+ AedNNFEO6lKONVtHyeDBklDYfC1bBACnZ9aqYoXBW6iR+I1A/3r1/EyOuUKM8RQdD1cY
+ //Z7CymDz0L2K6FqR8HRxWv8nO9s2z8V9SpmnwVOSIo6MLO7Mz1hDRc/zqRv++gvl/at
+ rkenm9ovi5SoiWHS7BdTrUZ7dLzD8eeonG4Sm15TWEamj3uRBzJM6QGoh1zBFU3+uMOx
+ jDNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706027829; x=1706632629;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=2zg5s9867QUffmRR+tZvS4ta7Mlc0s02/jJEDnvLZeE=;
- b=UNgt/xgfWCzTk/0CddHvoLSP8CtboYNYf8wDWybPD1ZisfVeFAAi8r+XvECt8BUKSx
- elKitMuxCV7hqU4+4ru1G9ngU4uIhdJzsS4Eq1SGE9lfaVWYpzldvjGLVaLGErF6OkJ/
- N3hjOeeJZFj880+LjRj3Zv9PjNXmLKNEWHXxA9Fe2WaqykvCEeMGoYPP28xHKZ6ILBbL
- pvPl8oxfmEjjB2h2nRLV6DT+x4+qPt5XT1a5F37szQfBjoUEX8CI2vnS366nYhyoqE8L
- 5WKp84kOyqSPFl21bTotI7GoqheBpMnPg4JL2qS54p4E9N7GORQDKbiqP+g4UuByUDrC
- JudA==
-X-Gm-Message-State: AOJu0Yy1Eb9vTkkmmmDcZ5kcto8cd62P6SiMqRomvc4Sw7KaIiL0GrLC
- ZD9nVCXsCoU25V5BgZoL/ut0n028nNP9iHHSU+ct1STEIVeIZsi3X1KfN2QniF0=
-X-Google-Smtp-Source: AGHT+IHOnUVa0a1iuWsEsA+4Ds6+BIq4a9nep2vax6+Tz8Avac3BoVlabsa2suUJZAcI4hZ1cU0Hgg==
-X-Received: by 2002:a17:902:c402:b0:1d7:2b7e:cbd with SMTP id
- k2-20020a170902c40200b001d72b7e0cbdmr3391633plk.129.1706027828857; 
- Tue, 23 Jan 2024 08:37:08 -0800 (PST)
-Received: from [192.168.68.110] ([152.234.127.94])
- by smtp.gmail.com with ESMTPSA id
- u19-20020a170903305300b001d714a6eff7sm8031626pla.80.2024.01.23.08.37.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 23 Jan 2024 08:37:08 -0800 (PST)
-Message-ID: <8c76c139-5f97-48d6-967a-7a65ea89391d@ventanamicro.com>
-Date: Tue, 23 Jan 2024 13:37:06 -0300
+ d=1e100.net; s=20230601; t=1706031892; x=1706636692;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cY+sbWdyrY3TPUbLY7/g3QAsx2vYqWtXyWuZMFZGBSM=;
+ b=IIO09gW/KnRlQg8MCx4ORExM0ZFpA0pbAacatr0h1A58tbJ23vyxAx3LOdlsiZ9h8f
+ BeWtT98jyuoZUqppId4+Cfg4UnZFcMtIkh5npnYf+Rwq0LCe6xZ7N1LSgBLW0Cns5D6H
+ vATAC4WuVaGJ4JBBZSnl/lWusaghMimH5OHNioh6lvvH0daMZUcsx2KdloRo5kyD98cL
+ C90UtU9KhfynUle/gXqj81bb3MlFbLVjloMEgwFgOB4/zRhG6jXwV0anPUyjv73jOSyp
+ 3npBLZ0YykRtriRgy0XQzlGxrGCszO/RTUpmDfuRMX4SJmddhx+6+n0LpW2kXRX0HGrB
+ 5chA==
+X-Gm-Message-State: AOJu0YykvIZb09mfvYk5mw8byZoT4em91QKoEHgb4I9Xv1I6ZrCs716t
+ PeyPa0Ibo/4E13jC3A+UVObhf/wUfVAcT+UA/DNXT69h8EiwMTkPZN/p7TPyc4zN6y+N/C0YELe
+ CpF3OlUKrAmlw+1ToXFHc+cV/vIb0YJao9ar3zw==
+X-Google-Smtp-Source: AGHT+IHrvbB8Z4AgljPrAziLFzaZXeq2n1A/jS2UZT6t2stQe5/1WjAKFQHfnCB2ItqIfRZET3vTDvT6QQOTe2zbRp0=
+X-Received: by 2002:a5b:1ca:0:b0:dbc:e3ba:2f55 with SMTP id
+ f10-20020a5b01ca000000b00dbce3ba2f55mr3658430ybp.112.1706031892514; Tue, 23
+ Jan 2024 09:44:52 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/3] target/riscv: Expose Zaamo and Zalrsc extensions
-Content-Language: en-US
-To: Rob Bradford <rbradford@rivosinc.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, atishp@rivosinc.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com
-References: <20240123111030.15074-1-rbradford@rivosinc.com>
- <20240123111030.15074-4-rbradford@rivosinc.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240123111030.15074-4-rbradford@rivosinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x631.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+References: <20240109102930.405323-1-me@deliversmonkey.space>
+ <20240109102930.405323-4-me@deliversmonkey.space>
+ <CAKC1njSLR614zQk0_DAgYN1jjdg=0eUa7N1AEwwXZVNN6BwjmA@mail.gmail.com>
+ <3cb918ca-27cd-4f1e-8738-306dc5280f42@linaro.org>
+ <CAKC1njRXPi1Roch=T+NwQk-TOzN=gSjmPh2KCVsemKdex9CamA@mail.gmail.com>
+ <5b6571d3-f654-488d-9dc5-0d18ba542e05@linaro.org>
+ <CAFukJ-Cf51kS17BOCkuPpxGXS+h4-MENKqBH5EW7Bj0mz+KPRQ@mail.gmail.com>
+In-Reply-To: <CAFukJ-Cf51kS17BOCkuPpxGXS+h4-MENKqBH5EW7Bj0mz+KPRQ@mail.gmail.com>
+From: Deepak Gupta <debug@rivosinc.com>
+Date: Tue, 23 Jan 2024 09:44:41 -0800
+Message-ID: <CAKC1njTJMWOoBoXeAk6ScCW0Y7CR4=qiErdTxVzf6qn_+XFL3g@mail.gmail.com>
+Subject: Re: [PATCH v4 3/6] target/riscv: Add helper functions to calculate
+ current number of masked bits for pointer masking
+To: Alexey Baturo <baturo.alexey@gmail.com>
+Cc: Richard Henderson <richard.henderson@linaro.org>,
+ zhiwei_liu@linux.alibaba.com, 
+ palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu, 
+ kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b34;
+ envelope-from=debug@rivosinc.com; helo=mail-yb1-xb34.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -98,42 +100,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Sat, Jan 20, 2024 at 11:14=E2=80=AFPM Alexey Baturo <baturo.alexey@gmail=
+.com> wrote:
+>
+> Hi,
+>
+> Having the feature to run binaries with pointer masking on qemu-user is r=
+eally nice, but I see this patch series as an initial support.
+> Obviously there'll be more patches and fixes for pointer masking as soon =
+as arch tests are ready.
+> I suggest supporting qemu-user in the next patches, but make sure we do t=
+his before claiming 100% support for pointer masking.
+> @Deepak Gupta what do you think?
 
+I think that makes sense. Thanks.
 
-On 1/23/24 08:10, Rob Bradford wrote:
-> Expose the newly added extensions to the guest and allow their control
-> through the CPU properties.
-> 
-> Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
-> ---
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
->   target/riscv/cpu.c | 5 +++++
->   1 file changed, 5 insertions(+)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 8d3ec74a1c..604baf53c8 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -103,7 +103,9 @@ const RISCVIsaExtData isa_edata_arr[] = {
->       ISA_EXT_DATA_ENTRY(zihintpause, PRIV_VERSION_1_10_0, ext_zihintpause),
->       ISA_EXT_DATA_ENTRY(zihpm, PRIV_VERSION_1_12_0, ext_zihpm),
->       ISA_EXT_DATA_ENTRY(zmmul, PRIV_VERSION_1_12_0, ext_zmmul),
-> +    ISA_EXT_DATA_ENTRY(zaamo, PRIV_VERSION_1_12_0, ext_zaamo),
->       ISA_EXT_DATA_ENTRY(zacas, PRIV_VERSION_1_12_0, ext_zacas),
-> +    ISA_EXT_DATA_ENTRY(zalrsc, PRIV_VERSION_1_12_0, ext_zalrsc),
->       ISA_EXT_DATA_ENTRY(zawrs, PRIV_VERSION_1_12_0, ext_zawrs),
->       ISA_EXT_DATA_ENTRY(zfa, PRIV_VERSION_1_12_0, ext_zfa),
->       ISA_EXT_DATA_ENTRY(zfbfmin, PRIV_VERSION_1_12_0, ext_zfbfmin),
-> @@ -1491,6 +1493,9 @@ const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] = {
->       MULTI_EXT_CFG_BOOL("x-smaia", ext_smaia, false),
->       MULTI_EXT_CFG_BOOL("x-ssaia", ext_ssaia, false),
->   
-> +    MULTI_EXT_CFG_BOOL("x-zaamo", ext_zaamo, false),
-> +    MULTI_EXT_CFG_BOOL("x-zalrsc", ext_zalrsc, false),
-> +
->       MULTI_EXT_CFG_BOOL("x-zvfh", ext_zvfh, false),
->       MULTI_EXT_CFG_BOOL("x-zvfhmin", ext_zvfhmin, false),
->   
+>
+> Thanks
+>
+> =D1=81=D0=B1, 20 =D1=8F=D0=BD=D0=B2. 2024=E2=80=AF=D0=B3. =D0=B2 10:37, R=
+ichard Henderson <richard.henderson@linaro.org>:
+>>
+>> On 1/19/24 09:40, Deepak Gupta wrote:
+>> > On Thu, Jan 18, 2024 at 12:50=E2=80=AFPM Richard Henderson
+>> > <richard.henderson@linaro.org> wrote:
+>> >> At some point pointer masking will be in hardware, and the kernel wil=
+l gain support for
+>> >> it, and there will likely be a prctl() added for it.  At the point th=
+e kernel finalizes
+>> >> the API, you will be able to enable pointer masking for qemu-user.
+>> >
+>> > I am sure I am missing some important detail here, BUT...
+>> >
+>> > How is it different from aarch64 "top byte ignore".
+>>
+>> It is very similar, yes.
+>>
+>> > I think commit: 16c8497 enables top byte ignore for user pointers and
+>> > by default for qemu-user for aarch64 target.
+>>
+>> Not quite, no.
+>>
+>> commit 0e0c030c681730f3ec55ba3b223b608a8f3e8282
+>> Author: Richard Henderson <richard.henderson@linaro.org>
+>> Date:   Fri Feb 12 10:48:51 2021 -0800
+>>
+>>      linux-user/aarch64: Implement PR_TAGGED_ADDR_ENABLE
+>>
+>> is more relevant.
+>>
+>> > IIRC, user <--> kernel abi is only needed for pointers that are passed
+>> > to the kernel.
+>>
+>> It is also needed to *enable* pointer masking at all.
+>>
+>> For aarch64, TBI has been enabled for user-space since the beginning, bu=
+t that is not true
+>> for riscv.  Therefore there will be a need for a syscall to opt in and e=
+nable pointer masking.
+>>
+>> > And in the case of qemu-user, we are talking about the host kernel.
+>>
+>> No, we are not.  We are always emulating the guest kernel.
+>>
+>>
+>> r~
 
