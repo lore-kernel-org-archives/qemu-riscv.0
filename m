@@ -4,98 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD145C47DDB
-	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Jan 2024 05:49:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A756C47DDB
+	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Jan 2024 05:50:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rS9ep-0007QQ-MX; Tue, 23 Jan 2024 00:49:11 -0500
+	id 1rS9gH-0000VL-1l; Tue, 23 Jan 2024 00:50:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rS9en-0007PF-DX; Tue, 23 Jan 2024 00:49:09 -0500
-Received: from mail-vs1-xe2d.google.com ([2607:f8b0:4864:20::e2d])
+ id 1rS9gF-0000SN-Sq; Tue, 23 Jan 2024 00:50:39 -0500
+Received: from mail-vs1-xe35.google.com ([2607:f8b0:4864:20::e35])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rS9el-0008Tl-QW; Tue, 23 Jan 2024 00:49:09 -0500
-Received: by mail-vs1-xe2d.google.com with SMTP id
- ada2fe7eead31-46771fc85cdso828095137.2; 
- Mon, 22 Jan 2024 21:49:06 -0800 (PST)
+ id 1rS9gE-0000O8-9x; Tue, 23 Jan 2024 00:50:39 -0500
+Received: by mail-vs1-xe35.google.com with SMTP id
+ ada2fe7eead31-4670af5bd56so1055245137.2; 
+ Mon, 22 Jan 2024 21:50:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705988945; x=1706593745; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1705989037; x=1706593837; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XGWFIgPM+i7sy9OAsZEHC3tF/I68FLzyifoG6R+5O+0=;
- b=JthRGq4aQ3XqACeD3RVRYTFvhkUK9NvxzOr1ZixKwM3R0AzTo0ly1pNfBVb2f/edpP
- uKgF4kXYl1Mx2MiNKUb+Vlo0alspETNVygapO4IMdsnCdvIOvCe46lHBNYMly9Y6K9wb
- nmkJCwUd4D0MYXQbx4AplSer6j1tGQQkyVeoXOux0gTfMrnw5L8if9iZa+nyH9TnqTsm
- hT8L2YfBQ1c3oTpvFIUVMnhFEydIUFCphXJuqzoZKqL1YrFHCedEtIbDS9tCtFzPqgNS
- 3120VrxgitOVQk+/3tvO2RnWFP+gLTTMcF4r27IYE87qTwDewTUaESfPSq8hCQsRPBZ5
- /zww==
+ bh=jUcrnRCIp0Br/nrkMzLr3eEgSwkJV1baABwfXLYDFys=;
+ b=SFxnHey339MkkVWuknFz9h1EJiJv7oPraGp3i3iOAVikMvgJO3TxAFlQIQFuPzXad/
+ AzmAtCuXGmJS6yWWs6nlpmEEHEySEh7nItsTAf0yBzHhTQ25G/+MxREp8kjpeqF+Bonf
+ MPZAdat97zJMgid6QJtyeVt2eqkFkm6w29cI7ZwMB7uhIZ0L0acX5WHWH5Wrx/6UAwX7
+ WlkTwWhEozxf/rsuGue7Z1J/5eu+v4ltaLAQyNrQTYW8j1HbPSMZ4EYD3xq80Rijb3W7
+ ikZW1K3IHjJEI1IeaYu5vGJPgShwzt/8nO3547Cm1M1MEX1xY8h3NepkGTHjTCPMEmNb
+ dMAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705988945; x=1706593745;
+ d=1e100.net; s=20230601; t=1705989037; x=1706593837;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XGWFIgPM+i7sy9OAsZEHC3tF/I68FLzyifoG6R+5O+0=;
- b=a2j52BB5zxxKlpM5NWNERFtp7RxePQqLgfL5ZH3RlpiBddrHotHrttsTGhbYOnqduD
- zUFREwD6cj9t127PyzYoLXj+sort+iLjpwKfrEvt3iRTnm94dHn8Bv6n3MIAMk2z6NxM
- 8ZgjYuvrRnqB6QuMrBtO47jzLUL9sKusvfMcM2Hp5FYWx5b++y2WkQ2hzkcVjMteEMRi
- DVRKg3VsGAtDQjGD+rR+A32Ri89xumhC9DHCnN0pBCreVO6O0hmzuzKeJHHoyU8dpDpn
- OdJXpB7Y/wV5BySPxkSZIwxVBE/fIlU5OSh/QhlkUMlhB5pjBLADWcJV6DgV1d1YeZeN
- J3fg==
-X-Gm-Message-State: AOJu0Yz5ZCdMVjNzWhc95O03wt9pPbbbdcwR15mDBzyEUwCwLHt/uLXk
- geSkVM1paVXoobmRFykwiUvifOWT5oQONbITPYTvyEEgUHWU2n/P6IGjTYxylFR9t3d5BEDm9Vr
- J68tRfaF7AOWqJ/oXLtRzwVA1o/s=
-X-Google-Smtp-Source: AGHT+IEGeNkPgWGB2ABOu+k0n1xgc8g0ke5OU9+x6qKIzezRXOSKHl+yIjtOmtVfaKEE0HM4paszPnbDaOrSmaVRSdk=
-X-Received: by 2002:a67:e3a7:0:b0:469:aec1:b42c with SMTP id
- j7-20020a67e3a7000000b00469aec1b42cmr2494332vsm.5.1705988945512; Mon, 22 Jan
- 2024 21:49:05 -0800 (PST)
+ bh=jUcrnRCIp0Br/nrkMzLr3eEgSwkJV1baABwfXLYDFys=;
+ b=bCZbX83l4PZI/+wzNnKbtf0Gd5Jyz+JeVcFxxbjTe1IZegMH0koqHEoN7hQ2CDJRXa
+ 3oVzc5I2chCVDziMC9kYY9XM0kPtLQb6GYbrJaGGF4WSkhcy+11yfIUEmqb8kx8g+TUy
+ Dcwzh4LeGTGcf6mnruHZp6V0jPkDw11pk+Auap/+6QM1OWZu3RNhhY+HH21oeWVO1jC/
+ 4lRrDzAE93PpqMgavi5+Auo67Ul4vx6wLg5UmDQVOMwSLVkNMkzD3Zx0A1ImGD02Qn3u
+ zoci7EtBHb8Jp4wPgGq++g/qaMP8OMo5iANtpTxqgsoOj+CADj3+xVMq0t0LnQ7jnoqF
+ 8N5A==
+X-Gm-Message-State: AOJu0YxZjd/7d2shMcUzWT7MVQBJNBseLig+bjF2FnE2y9uPDYuhGHUn
+ 351ONDZp9wLIxhLnX5n5bDR1K2CyjyVyP5bywVhjt6lqeZ80A/KOzujDtMbAwoYiANq+kvqdIgL
+ Up1rPtCxQ2ryzMwKim1lXOoPNceQ=
+X-Google-Smtp-Source: AGHT+IHdWEbaLuFeBYNhBk5Tb7U63EZpsd9QU9H5DcYMEyXroxL+xf6fCpM6T5pBNgGBM6BPjtOrqfD0Ye3BUGYqaN8=
+X-Received: by 2002:a05:6102:1354:b0:468:df5:2e47 with SMTP id
+ j20-20020a056102135400b004680df52e47mr3095876vsl.11.1705989036948; Mon, 22
+ Jan 2024 21:50:36 -0800 (PST)
 MIME-Version: 1.0
-References: <20240122145610.413836-1-alex.bennee@linaro.org>
- <20240122145610.413836-2-alex.bennee@linaro.org>
-In-Reply-To: <20240122145610.413836-2-alex.bennee@linaro.org>
+References: <20240110-mold-renovate-256db1b5c70e@spud>
+ <CAKmqyKOy19Vy5zm8=9WZmUs3H=aL8Tn49-iXu9LfEHtHJMpadA@mail.gmail.com>
+ <20240122-reflex-tinsmith-209b2e56145f@spud>
+In-Reply-To: <20240122-reflex-tinsmith-209b2e56145f@spud>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 23 Jan 2024 15:48:39 +1000
-Message-ID: <CAKmqyKPawDYf1DBhGb05qnphOKNt8PATHiwaZVBuhS14sHAR0w@mail.gmail.com>
-Subject: Re: [PATCH v3 01/21] hw/riscv: Use misa_mxl instead of misa_mxl_max
-To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
-Cc: qemu-devel@nongnu.org, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Michael Rolnik <mrolnik@gmail.com>,
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- Laurent Vivier <lvivier@redhat.com>, kvm@vger.kernel.org, 
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Laurent Vivier <laurent@vivier.eu>, Yanan Wang <wangyanan55@huawei.com>,
- qemu-ppc@nongnu.org, 
- Weiwei Li <liwei1518@gmail.com>, qemu-s390x@nongnu.org, 
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
- Peter Maydell <peter.maydell@linaro.org>, Alexandre Iooss <erdnaxe@crans.org>, 
- John Snow <jsnow@redhat.com>, Mahmoud Mandour <ma.mandourr@gmail.com>, 
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Ilya Leoshkevich <iii@linux.ibm.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- David Woodhouse <dwmw2@infradead.org>, Cleber Rosa <crosa@redhat.com>,
- Beraldo Leal <bleal@redhat.com>, 
- Bin Meng <bin.meng@windriver.com>, Nicholas Piggin <npiggin@gmail.com>, 
- Aurelien Jarno <aurelien@aurel32.net>,
- Daniel Henrique Barboza <danielhb413@gmail.com>, 
+Date: Tue, 23 Jan 2024 15:50:11 +1000
+Message-ID: <CAKmqyKOsUirGVtT_U4ThkZHcbHuphpmF1z0eH841KGNwk6i8pw@mail.gmail.com>
+Subject: Re: [PATCH v3 0/2] riscv: support new isa extension detection
+ devicetree properties
+To: Conor Dooley <conor@kernel.org>
+Cc: qemu-riscv@nongnu.org, Conor Dooley <conor.dooley@microchip.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>, 
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Thomas Huth <thuth@redhat.com>, 
- David Hildenbrand <david@redhat.com>, qemu-riscv@nongnu.org,
- qemu-arm@nongnu.org, 
- Paolo Bonzini <pbonzini@redhat.com>, Song Gao <gaosong@loongson.cn>, 
- Eduardo Habkost <eduardo@habkost.net>, Brian Cain <bcain@quicinc.com>,
- Paul Durrant <paul@xen.org>, Akihiko Odaki <akihiko.odaki@daynix.com>
+ Andrew Jones <ajones@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2d;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e35;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe35.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -119,41 +96,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jan 23, 2024 at 12:57=E2=80=AFAM Alex Benn=C3=A9e <alex.bennee@lina=
-ro.org> wrote:
+On Mon, Jan 22, 2024 at 10:25=E2=80=AFPM Conor Dooley <conor@kernel.org> wr=
+ote:
 >
-> From: Akihiko Odaki <akihiko.odaki@daynix.com>
+> On Mon, Jan 22, 2024 at 03:24:19PM +1000, Alistair Francis wrote:
+> > On Wed, Jan 10, 2024 at 8:27=E2=80=AFPM Conor Dooley <conor@kernel.org>=
+ wrote:
+> > >
+> > > From: Conor Dooley <conor.dooley@microchip.com>
+> > >
+> > > Making it a series to keep the standalone change to riscv_isa_string(=
+)
+> > > that Drew reported separate.
+> > >
+> > > Changes in v3:
+> > > - g_free() isa_extensions too
+> > > - use misa_mxl_max rather than the compile target for the base isa
+> > > - add a new patch changing riscv_isa_string() to do the same
+> > > - drop a null check that cannot be null
+> > > - rebased on top of Alistair's next branch
+> >
+> > Do you mind rebasing on
+> > https://github.com/alistair23/qemu/tree/riscv-to-apply.next again?
+> > There was a big re-org recently so lots of rebasing is required
 >
-> The effective MXL value matters when booting.
->
-> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-> Message-Id: <20240103173349.398526-23-alex.bennee@linaro.org>
-> Message-Id: <20231213-riscv-v7-1-a760156a337f@daynix.com>
-> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+> I can, sure. Do you want me to introduce the macro that I mentioned in
+> the first patch as a helper for misa_mxl_max -> width conversions when I
+> do?
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Yes please!
 
 Alistair
 
-> ---
->  hw/riscv/boot.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> index 0ffca05189f..bc67c0bd189 100644
-> --- a/hw/riscv/boot.c
-> +++ b/hw/riscv/boot.c
-> @@ -36,7 +36,7 @@
->
->  bool riscv_is_32bit(RISCVHartArrayState *harts)
->  {
-> -    return harts->harts[0].env.misa_mxl_max =3D=3D MXL_RV32;
-> +    return harts->harts[0].env.misa_mxl =3D=3D MXL_RV32;
->  }
->
->  /*
-> --
-> 2.39.2
->
->
+> Thanks,
+> Conor.
 
