@@ -4,87 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 306CAC47258
-	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Jan 2024 17:45:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A89E5C47258
+	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Jan 2024 18:43:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rSKpX-0004QO-CW; Tue, 23 Jan 2024 12:45:01 -0500
+	id 1rSLk2-0004eX-D0; Tue, 23 Jan 2024 13:43:22 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1rSKpT-0004Py-St
- for qemu-riscv@nongnu.org; Tue, 23 Jan 2024 12:44:56 -0500
-Received: from mail-yb1-xb34.google.com ([2607:f8b0:4864:20::b34])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1rSKpS-0007ow-3P
- for qemu-riscv@nongnu.org; Tue, 23 Jan 2024 12:44:55 -0500
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-dc2308fe275so3802395276.1
- for <qemu-riscv@nongnu.org>; Tue, 23 Jan 2024 09:44:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1706031892; x=1706636692;
- darn=nongnu.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cY+sbWdyrY3TPUbLY7/g3QAsx2vYqWtXyWuZMFZGBSM=;
- b=DNrHdCjcSNkTSIBT4QA4PYcsvws6uUilD/CZyGxy+rE6Md+B2TPcrnFA7R8ldWtk5T
- rCX+xqOibAXc7IGZ2Hpb8R5b8alDJcq20Tkl25xwv75PVQHUbNrgpOjP2rwD5AVQ76Of
- AedNNFEO6lKONVtHyeDBklDYfC1bBACnZ9aqYoXBW6iR+I1A/3r1/EyOuUKM8RQdD1cY
- //Z7CymDz0L2K6FqR8HRxWv8nO9s2z8V9SpmnwVOSIo6MLO7Mz1hDRc/zqRv++gvl/at
- rkenm9ovi5SoiWHS7BdTrUZ7dLzD8eeonG4Sm15TWEamj3uRBzJM6QGoh1zBFU3+uMOx
- jDNw==
+ (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
+ id 1rSLk1-0004dm-M4
+ for qemu-riscv@nongnu.org; Tue, 23 Jan 2024 13:43:21 -0500
+Received: from smtp-relay-internal-0.canonical.com ([185.125.188.122])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
+ id 1rSLjz-0002mg-Hz
+ for qemu-riscv@nongnu.org; Tue, 23 Jan 2024 13:43:21 -0500
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 836C54032E
+ for <qemu-riscv@nongnu.org>; Tue, 23 Jan 2024 18:43:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1706035391;
+ bh=5j3mVdGTDGaCWMdmDtFz1Oq1qeObw7oJUX1aePYiZRA=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=UW40Gixl87DJSCe1sx3RZcxR28WHHRNCjwnAvv1fnJ1SP+jJRtrZNHYFhK1wwgdS9
+ rK6wT8LrI9kJCVyyAISd0rwxvj8h1Fj0MGB91VeK64p1WbGdFqbPISH0wmut4l/B0a
+ lsR+5LfuFQLEQc9yOxMFWLITEV8IHCR8SuIevFdBlB/VRXms28Tupi414lWy0Aot1G
+ e5xwmmY9Pp5k3415ChqCrU+z87lULcJpLeOO1ifaWXSbOEsLPiqMELa9hB5ZFRKY3r
+ pi6PG3bq4jLzDiwgdyJL/RrRgQYK/C7tkeIshjhmWp02CXHxZJijgArlUCydKa3f2u
+ Fdf8aEJKH9iPw==
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-40e53200380so40373815e9.3
+ for <qemu-riscv@nongnu.org>; Tue, 23 Jan 2024 10:43:11 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706031892; x=1706636692;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cY+sbWdyrY3TPUbLY7/g3QAsx2vYqWtXyWuZMFZGBSM=;
- b=IIO09gW/KnRlQg8MCx4ORExM0ZFpA0pbAacatr0h1A58tbJ23vyxAx3LOdlsiZ9h8f
- BeWtT98jyuoZUqppId4+Cfg4UnZFcMtIkh5npnYf+Rwq0LCe6xZ7N1LSgBLW0Cns5D6H
- vATAC4WuVaGJ4JBBZSnl/lWusaghMimH5OHNioh6lvvH0daMZUcsx2KdloRo5kyD98cL
- C90UtU9KhfynUle/gXqj81bb3MlFbLVjloMEgwFgOB4/zRhG6jXwV0anPUyjv73jOSyp
- 3npBLZ0YykRtriRgy0XQzlGxrGCszO/RTUpmDfuRMX4SJmddhx+6+n0LpW2kXRX0HGrB
- 5chA==
-X-Gm-Message-State: AOJu0YykvIZb09mfvYk5mw8byZoT4em91QKoEHgb4I9Xv1I6ZrCs716t
- PeyPa0Ibo/4E13jC3A+UVObhf/wUfVAcT+UA/DNXT69h8EiwMTkPZN/p7TPyc4zN6y+N/C0YELe
- CpF3OlUKrAmlw+1ToXFHc+cV/vIb0YJao9ar3zw==
-X-Google-Smtp-Source: AGHT+IHrvbB8Z4AgljPrAziLFzaZXeq2n1A/jS2UZT6t2stQe5/1WjAKFQHfnCB2ItqIfRZET3vTDvT6QQOTe2zbRp0=
-X-Received: by 2002:a5b:1ca:0:b0:dbc:e3ba:2f55 with SMTP id
- f10-20020a5b01ca000000b00dbce3ba2f55mr3658430ybp.112.1706031892514; Tue, 23
- Jan 2024 09:44:52 -0800 (PST)
+ d=1e100.net; s=20230601; t=1706035391; x=1706640191;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=5j3mVdGTDGaCWMdmDtFz1Oq1qeObw7oJUX1aePYiZRA=;
+ b=FKWrN4wNh91OKHL5SL5g5OU9kC8RlPNcFrieAVw6FvNDH5cf7PZGPJCayqOk/VEklP
+ HNio2WmB+/b4lfwT9SEeF/WAo8n0Xh1PWcYCijQE4Z5oBb2i+hdMpnVrH1Xd6liBBnMX
+ TlfltMr2iiOKDe94txEeE5GGwTeBz6LKA8nv3J4bijn9XxcpWRctrHql9W7odBOld5Xf
+ NWl6GTSG7K6yRNmBLm1927z+Sp6B/MM/PskXsoaXb5cL7RvBik+5nUPdb9HmmEPbVbKb
+ aSjia5f+IT0cp997ZatSQjIR5D0ac4sY3czEQVrRRX04L7i3U7YMzW/Qd/n6bz33KGnf
+ vWTA==
+X-Gm-Message-State: AOJu0YzKShDR9nkVK4RWw05cSUP4eyPg9vu/a7Fedait8B6roD3RTcMC
+ Ea4Cp3mTA2grIa8lt9p1GAVu9RJu55zxi4zPk8Era2I8mte1nMVWtWi9QWYdU2zV9Tccsqo5c/f
+ iqO4j+LEYyjrdCKObbCwOAS1iCA0r2hDSPueZR4zoOCgBzTI5JkBqK6EV0qe2QDGLJ7Du
+X-Received: by 2002:a05:600c:56c1:b0:40e:71b9:65b4 with SMTP id
+ ju1-20020a05600c56c100b0040e71b965b4mr743492wmb.133.1706035391016; 
+ Tue, 23 Jan 2024 10:43:11 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEGHcpIGQvddEb5oSLcGJah5hXJAW/KnwvLbR72bGW3HvOqGgzQovLQkgOSYDjHXRwqOo96mg==
+X-Received: by 2002:a05:600c:56c1:b0:40e:71b9:65b4 with SMTP id
+ ju1-20020a05600c56c100b0040e71b965b4mr743486wmb.133.1706035390624; 
+ Tue, 23 Jan 2024 10:43:10 -0800 (PST)
+Received: from workstation5.fritz.box
+ (ip-178-202-040-247.um47.pools.vodafone-ip.de. [178.202.40.247])
+ by smtp.gmail.com with ESMTPSA id
+ u9-20020a5d6ac9000000b00337d392c6c3sm14180252wrw.13.2024.01.23.10.43.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 23 Jan 2024 10:43:10 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Cc: Andrew Jones <ajones@ventanamicro.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Bin Meng <bin.meng@windriver.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v4 0/4] target/riscv: SMBIOS support for RISC-V virt machine
+Date: Tue, 23 Jan 2024 19:42:25 +0100
+Message-ID: <20240123184229.10415-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20240109102930.405323-1-me@deliversmonkey.space>
- <20240109102930.405323-4-me@deliversmonkey.space>
- <CAKC1njSLR614zQk0_DAgYN1jjdg=0eUa7N1AEwwXZVNN6BwjmA@mail.gmail.com>
- <3cb918ca-27cd-4f1e-8738-306dc5280f42@linaro.org>
- <CAKC1njRXPi1Roch=T+NwQk-TOzN=gSjmPh2KCVsemKdex9CamA@mail.gmail.com>
- <5b6571d3-f654-488d-9dc5-0d18ba542e05@linaro.org>
- <CAFukJ-Cf51kS17BOCkuPpxGXS+h4-MENKqBH5EW7Bj0mz+KPRQ@mail.gmail.com>
-In-Reply-To: <CAFukJ-Cf51kS17BOCkuPpxGXS+h4-MENKqBH5EW7Bj0mz+KPRQ@mail.gmail.com>
-From: Deepak Gupta <debug@rivosinc.com>
-Date: Tue, 23 Jan 2024 09:44:41 -0800
-Message-ID: <CAKC1njTJMWOoBoXeAk6ScCW0Y7CR4=qiErdTxVzf6qn_+XFL3g@mail.gmail.com>
-Subject: Re: [PATCH v4 3/6] target/riscv: Add helper functions to calculate
- current number of masked bits for pointer masking
-To: Alexey Baturo <baturo.alexey@gmail.com>
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- zhiwei_liu@linux.alibaba.com, 
- palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu, 
- kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b34;
- envelope-from=debug@rivosinc.com; helo=mail-yb1-xb34.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=185.125.188.122;
+ envelope-from=heinrich.schuchardt@canonical.com;
+ helo=smtp-relay-internal-0.canonical.com
+X-Spam_score_int: -56
+X-Spam_score: -5.7
+X-Spam_bar: -----
+X-Spam_report: (-5.7 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.327,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,69 +111,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, Jan 20, 2024 at 11:14=E2=80=AFPM Alexey Baturo <baturo.alexey@gmail=
-.com> wrote:
->
-> Hi,
->
-> Having the feature to run binaries with pointer masking on qemu-user is r=
-eally nice, but I see this patch series as an initial support.
-> Obviously there'll be more patches and fixes for pointer masking as soon =
-as arch tests are ready.
-> I suggest supporting qemu-user in the next patches, but make sure we do t=
-his before claiming 100% support for pointer masking.
-> @Deepak Gupta what do you think?
+Generate SMBIOS tables for the RISC-V mach-virt.
+Add CONFIG_SMBIOS=y to the RISC-V default config.
 
-I think that makes sense. Thanks.
+With the series the following firmware tables are provided:
 
->
-> Thanks
->
-> =D1=81=D0=B1, 20 =D1=8F=D0=BD=D0=B2. 2024=E2=80=AF=D0=B3. =D0=B2 10:37, R=
-ichard Henderson <richard.henderson@linaro.org>:
->>
->> On 1/19/24 09:40, Deepak Gupta wrote:
->> > On Thu, Jan 18, 2024 at 12:50=E2=80=AFPM Richard Henderson
->> > <richard.henderson@linaro.org> wrote:
->> >> At some point pointer masking will be in hardware, and the kernel wil=
-l gain support for
->> >> it, and there will likely be a prctl() added for it.  At the point th=
-e kernel finalizes
->> >> the API, you will be able to enable pointer masking for qemu-user.
->> >
->> > I am sure I am missing some important detail here, BUT...
->> >
->> > How is it different from aarch64 "top byte ignore".
->>
->> It is very similar, yes.
->>
->> > I think commit: 16c8497 enables top byte ignore for user pointers and
->> > by default for qemu-user for aarch64 target.
->>
->> Not quite, no.
->>
->> commit 0e0c030c681730f3ec55ba3b223b608a8f3e8282
->> Author: Richard Henderson <richard.henderson@linaro.org>
->> Date:   Fri Feb 12 10:48:51 2021 -0800
->>
->>      linux-user/aarch64: Implement PR_TAGGED_ADDR_ENABLE
->>
->> is more relevant.
->>
->> > IIRC, user <--> kernel abi is only needed for pointers that are passed
->> > to the kernel.
->>
->> It is also needed to *enable* pointer masking at all.
->>
->> For aarch64, TBI has been enabled for user-space since the beginning, bu=
-t that is not true
->> for riscv.  Therefore there will be a need for a syscall to opt in and e=
-nable pointer masking.
->>
->> > And in the case of qemu-user, we are talking about the host kernel.
->>
->> No, we are not.  We are always emulating the guest kernel.
->>
->>
->> r~
+    etc/smbios/smbios-anchor
+    etc/smbios/smbios-tables
+
+Add processor-family to the '-smbios type=4' command line options.
+
+v4:
+	remove a superfluous #ifdef
+v3:
+	use misa_mxl_max to determine bitness
+v2:
+	set processor family
+
+Heinrich Schuchardt (4):
+  smbios: add processor-family option
+  smbios: function to set default processor family
+  target/riscv: SMBIOS support for RISC-V virt machine
+  qemu-options: enable -smbios option on RISC-V
+
+ hw/riscv/Kconfig             |  1 +
+ hw/riscv/virt.c              | 42 ++++++++++++++++++++++++++++++++++++
+ hw/smbios/smbios.c           | 20 +++++++++++++++--
+ include/hw/firmware/smbios.h |  1 +
+ qemu-options.hx              |  6 +++---
+ 5 files changed, 65 insertions(+), 5 deletions(-)
+
+-- 
+2.43.0
+
 
