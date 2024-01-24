@@ -4,109 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7310AC46CD2
-	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jan 2024 11:06:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D52BDC46CD2
+	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jan 2024 12:09:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rSb5l-00020Q-Md; Wed, 24 Jan 2024 06:06:49 -0500
+	id 1rSc3r-0001Yc-Jj; Wed, 24 Jan 2024 07:08:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rSb5j-0001za-SD
- for qemu-riscv@nongnu.org; Wed, 24 Jan 2024 06:06:47 -0500
-Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rSb5e-0004kw-O9
- for qemu-riscv@nongnu.org; Wed, 24 Jan 2024 06:06:47 -0500
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-337d05b8942so6058844f8f.3
- for <qemu-riscv@nongnu.org>; Wed, 24 Jan 2024 03:06:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706094401; x=1706699201; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Iy/OKjpiO5yoeXxY83xqvHL6o7nHTDd39y/0xcYG3qM=;
- b=hlmgl4rPJKhE908qaoUiGFGZPyL8H6Xn77AmdNMjqxaTYk+VIXFagKHvzQ2ZIfsluE
- /S5Vw1rrBiWEG1IAVFo24kFafMSgFOqx7PNjUWD45SpPdjcHP+IlZ6603p4iqkpYyzFB
- yP+b+s7CFJSr9FM/JYQWghn7MgL5gZ6QD3wIQ9TgoKl3FgerV/aXXEFqfI3Jk+ASj2UA
- BKRiD0vVRbH3ZCt8To7aWNm4dQCL8kKflJhY+ts0xOPtu1OFJsiOalN4VplDwcQxv6Kn
- MZ82+Nwhokd7Rndm7tr2Swi6OP+HmieYLGZy4IQg+lGvNcRxsNQBWNjpiOO3saEpduF7
- a/eQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706094401; x=1706699201;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Iy/OKjpiO5yoeXxY83xqvHL6o7nHTDd39y/0xcYG3qM=;
- b=Eix/rSWs/Jd2WNI3tecgIfZeIYJxHZd/fES+2LLEN87VW+2eHKP/lK0/LfJM1EyIbc
- I3jgCFdxrw5esrIb22GmYrjltY/VfnpTWokW63IaJ30BK30AsRTxG4Dz5uaHmxHV2TOq
- b28ksaDKYwAvHarDsCNLNMF6slX0uK9/4PiFAMbSJmj4NPegqhRiNhJw7+cLr04WtU33
- ih8+EtKFTZLQhIkKWchGxgb14K0UJCqsefnjTVFonL1RmQZMG7tDqhjge7UWuoYZ9adn
- ZsH/GdED6RC28s0ORkajutPKiJSeehyKQNBQP8Tk9zWVInIwtLOoAhCSyhLJCJ378sf8
- nkfg==
-X-Gm-Message-State: AOJu0Yywqoi8KVODIVRGPmPT3BOJX06wuPv+Q63X9mMEnjUA/ULa2yDK
- 5Np6MyGbcOsJc86/9BwbD9S8CsSC6R58VkRbAkSMLHijOhNLoyyZjv5xvyhAPwI=
-X-Google-Smtp-Source: AGHT+IH/SauWLJ1xOlrVqSMxVFexDKwt7XPZ6S6pWBnjez+xHwFpHdDkwUvpg8Qby7kwDeLsfRpNeA==
-X-Received: by 2002:a5d:618b:0:b0:339:372e:770f with SMTP id
- j11-20020a5d618b000000b00339372e770fmr502198wru.46.1706094400988; 
- Wed, 24 Jan 2024 03:06:40 -0800 (PST)
-Received: from [192.168.69.100] (lgp44-h02-176-184-8-67.dsl.sta.abo.bbox.fr.
- [176.184.8.67]) by smtp.gmail.com with ESMTPSA id
- d10-20020adfa40a000000b0033953f87085sm414725wra.35.2024.01.24.03.06.35
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 24 Jan 2024 03:06:40 -0800 (PST)
-Message-ID: <5a1cb4ae-b43c-4ef5-9572-6636a2d787e7@linaro.org>
-Date: Wed, 24 Jan 2024 12:06:34 +0100
+ (Exim 4.90_1) (envelope-from <vadim.shakirov@syntacore.com>)
+ id 1rSc3q-0001YD-0m; Wed, 24 Jan 2024 07:08:54 -0500
+Received: from mta-04.yadro.com ([89.207.88.248])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <vadim.shakirov@syntacore.com>)
+ id 1rSc3m-00080A-95; Wed, 24 Jan 2024 07:08:53 -0500
+DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com EE66DC0002
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-04; t=1706098121;
+ bh=DF3tDmrsdN5mqIYobCTSS8cQ5lq44Vz72IGCEa43Yqc=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=fOGiFbOpPVe5TlvqePG9SdgOpa//rlIA/nTtdgj8YkzXZghXwncHc3ym1pCnbT9uH
+ 4xNLHEZ6LF7R/b2peWa5KdI+LAy6HIyASdM1ijNq9irYlpdASPR+212vcwSVbKnBpN
+ qkD+86HuG23GTxLK8LBQTZVMtstdlhOaNu/rx9sXN0wEPerR6Dkl1xglb7fVRWQSPM
+ xzL9+HREKaOVtr0yMFptO8JoqfyhcIaMaSXaELVCOeWmriPAs2PfMhH2HjRYFXTv1a
+ 3QdpUVR+kpcjNqIw7zmgHjc3ZCMsjRIkvnByF7PokArPTw1tGm/WUT7hcEagv4iE7a
+ JsH5B3N2Myu9Q==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-03; t=1706098121;
+ bh=DF3tDmrsdN5mqIYobCTSS8cQ5lq44Vz72IGCEa43Yqc=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=zz8oRVVbfQ3RGIWnfemaSay1UPt4xYKF7UI57btc8qwY/UeqKiMkh7vN6adZkZIFS
+ /lWBKByFVhBFgcDBPEJwXVt/gszBBhEwjWSz5VT412afnPz2r4dTqY5wEAhkyFGC8X
+ cjOW1OSkHtseDpcr/YWrIGNENazv99tZKktX+GvJ03nyyDJ29Fn8WPTzyAdPi3vlZF
+ so2vste7NWk9VNKAVyMm3C3LbU4aukZrcVFVmmUA113UZ1avQOWW/2RV+NkRkCGmjV
+ 1yaFmY0CdjNhPpfdnI12yiq9/hs5Cp2hZe20xJgdfkYcN05ZtYb1dkGF6fpHCW2Bi7
+ UlTpIyYEKYxWw==
+From: Vadim Shakirov <vadim.shakirov@syntacore.com>
+To: "open list:All patches CC here" <qemu-devel@nongnu.org>
+CC: Vadim Shakirov <vadim.shakirov@syntacore.com>, Palmer Dabbelt
+ <palmer@dabbelt.com>, Alistair Francis <alistair.francis@wdc.com>, Bin Meng
+ <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, "Daniel Henrique
+ Barboza" <dbarboza@ventanamicro.com>, Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>, <qemu-riscv@nongnu.org>
+Subject: [PATCH] target/riscv/cpu.h: mcountinhibit,
+ mcounteren and scounteren always 32-bit
+Date: Wed, 24 Jan 2024 15:06:58 +0300
+Message-ID: <20240124120658.695350-1-vadim.shakirov@syntacore.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 04/31] docs: mark CRIS support as deprecated
-Content-Language: en-US
-To: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-Cc: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
- Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
- John Snow <jsnow@redhat.com>, libvir-list@redhat.com,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- qemu-s390x@nongnu.org, Song Gao <gaosong@loongson.cn>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Nicholas Piggin <npiggin@gmail.com>, Radoslaw Biernacki <rad@semihalf.com>,
- Eduardo Habkost <eduardo@habkost.net>, Cleber Rosa <crosa@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Mahmoud Mandour
- <ma.mandourr@gmail.com>, Thomas Huth <thuth@redhat.com>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Bin Meng <bin.meng@windriver.com>, Alexandre Iooss <erdnaxe@crans.org>,
- Xiaojuan Yang <yangxiaojuan@loongson.cn>, qemu-ppc@nongnu.org,
- David Hildenbrand <david@redhat.com>, Yanan Wang <wangyanan55@huawei.com>,
- Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
- qemu-arm@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>, Laurent Vivier <lvivier@redhat.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Leif Lindholm <quic_llindhol@quicinc.com>, Beraldo Leal <bleal@redhat.com>,
- Rabin Vincent <rabinv@axis.com>
-References: <20230925144854.1872513-1-alex.bennee@linaro.org>
- <20230925144854.1872513-5-alex.bennee@linaro.org>
- <ZRG1g/2hWi8+AzNn@redhat.com> <878r8urxxc.fsf@linaro.org>
- <CAJy5ezoucKM=VvYsHeFep7r0i1PV_JUCgq6gs4JJQVHqq3Yz3Q@mail.gmail.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <CAJy5ezoucKM=VvYsHeFep7r0i1PV_JUCgq6gs4JJQVHqq3Yz3Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::431;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x431.google.com
+Content-Type: text/plain
+X-ClientProxiedBy: T-EXCH-09.corp.yadro.com (172.17.11.59) To
+ S-Exch-01.corp.yadro.com (10.78.5.241)
+Received-SPF: permerror client-ip=89.207.88.248;
+ envelope-from=vadim.shakirov@syntacore.com; helo=mta-04.yadro.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01,
+ T_SPF_PERMERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -122,76 +80,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 25/9/23 19:17, Edgar E. Iglesias wrote:
-> 
-> On Mon, Sep 25, 2023 at 7:00 PM Alex Bennée <alex.bennee@linaro.org 
-> <mailto:alex.bennee@linaro.org>> wrote:
-> 
-> 
->     Daniel P. Berrangé <berrange@redhat.com
->     <mailto:berrange@redhat.com>> writes:
-> 
->      > On Mon, Sep 25, 2023 at 03:48:27PM +0100, Alex Bennée wrote:
->      >> This might be premature but while streamling the avocado tests I
->      >> realised the only tests we have are "check-tcg" ones. The aging
->      >> fedora-criss-cross image works well enough for developers but
->     can't be
->      >> used in CI as we need supported build platforms to build QEMU.
->      >>
->      >> Does this mean the writing is on the wall for this architecture?
->      >>
->      >> Signed-off-by: Alex Bennée <alex.bennee@linaro.org
->     <mailto:alex.bennee@linaro.org>>
->      >> Cc: Rabin Vincent <rabinv@axis.com <mailto:rabinv@axis.com>>
->      >> Cc: Edgar E. Iglesias <edgar.iglesias@xilinx.com
->     <mailto:edgar.iglesias@xilinx.com>>
->      >> ---
->      >>  docs/about/deprecated.rst | 11 +++++++++++
->      >>  1 file changed, 11 insertions(+)
->      >>
->      >> diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
->      >> index dc4da95329..7cfe313aa6 100644
->      >> --- a/docs/about/deprecated.rst
->      >> +++ b/docs/about/deprecated.rst
->      >> @@ -399,6 +399,17 @@ Specifying the iSCSI password in plain text
->     on the command line using the
->      >>  used instead, to refer to a ``--object secret...`` instance
->     that provides
->      >>  a password via a file, or encrypted.
->      >>
->      >> +TCG CPUs
->      >> +--------
->      >> +
->      >> +CRIS CPU architecture (since 8.1)
->      >> +'''''''''''''''''''''''''''''''''
->      >> +
->      >> +The CRIS architecture was pulled from Linux in 4.17 and the
->     compiler
->      >> +is no longer packaged in any distro making it harder to run the
->      >> +``check-tcg`` tests. Unless we can improve the testing
->     situation there
->      >> +is a chance the code will bitrot without anyone noticing.
->      >
->      > Deprecated is generally a warning that we intend to delete the
->      > feature.   If we're just going to relegate it to untested
->      > status (what I'd call "tier 3" quality), then we should document
->      > that elsewhere.  I don't mind which way we go.
-> 
->     We do have reasonably good coverage with tests/tcg/cris but of course
->     without a compiler we can't build them.
-> 
->     Both nios2 and microblaze have build-toolchain scripts which can be used
->     to re-create containers. However my preference is having pre-built
->     toolchains hosted by others like we do for loongarch, hexagon, xtensa
->     and tricore. Then the docker image can simply curl them into an image.
-> 
-> 
-> Yeah, I guess it's time to deprecate it...
+mcountinhibit, mcounteren and scounteren must always be 32-bit by
+privileged spec
 
-Is that an informal Acked-by? (:
+Signed-off-by: Vadim Shakirov <vadim.shakirov@syntacore.com>
+---
+ target/riscv/cpu.h     | 6 +++---
+ target/riscv/machine.c | 6 +++---
+ 2 files changed, 6 insertions(+), 6 deletions(-)
 
-> 
-> Cheers,
-> Edgar
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 5b0824ef8f..3cf059199c 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -317,10 +317,10 @@ struct CPUArchState {
+      */
+     bool two_stage_indirect_lookup;
+ 
+-    target_ulong scounteren;
+-    target_ulong mcounteren;
++    uint32_t scounteren;
++    uint32_t mcounteren;
+ 
+-    target_ulong mcountinhibit;
++    uint32_t mcountinhibit;
+ 
+     /* PMU counter state */
+     PMUCTRState pmu_ctrs[RV_MAX_MHPMCOUNTERS];
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+index fdde243e04..daab121799 100644
+--- a/target/riscv/machine.c
++++ b/target/riscv/machine.c
+@@ -398,9 +398,9 @@ const VMStateDescription vmstate_riscv_cpu = {
+         VMSTATE_UINTTL(env.mtval, RISCVCPU),
+         VMSTATE_UINTTL(env.miselect, RISCVCPU),
+         VMSTATE_UINTTL(env.siselect, RISCVCPU),
+-        VMSTATE_UINTTL(env.scounteren, RISCVCPU),
+-        VMSTATE_UINTTL(env.mcounteren, RISCVCPU),
+-        VMSTATE_UINTTL(env.mcountinhibit, RISCVCPU),
++        VMSTATE_UINT32(env.scounteren, RISCVCPU),
++        VMSTATE_UINT32(env.mcounteren, RISCVCPU),
++        VMSTATE_UINT32(env.mcountinhibit, RISCVCPU),
+         VMSTATE_STRUCT_ARRAY(env.pmu_ctrs, RISCVCPU, RV_MAX_MHPMCOUNTERS, 0,
+                              vmstate_pmu_ctr_state, PMUCTRState),
+         VMSTATE_UINTTL_ARRAY(env.mhpmevent_val, RISCVCPU, RV_MAX_MHPMEVENTS),
+-- 
+2.34.1
 
 
