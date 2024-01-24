@@ -4,116 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8BC7C47DDC
-	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jan 2024 08:17:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7310AC46CD2
+	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jan 2024 11:06:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rSYRN-00004q-3f; Wed, 24 Jan 2024 03:16:57 -0500
+	id 1rSb5l-00020Q-Md; Wed, 24 Jan 2024 06:06:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rSYRM-0008WO-9w
- for qemu-riscv@nongnu.org; Wed, 24 Jan 2024 03:16:56 -0500
-Received: from mail-ed1-x536.google.com ([2a00:1450:4864:20::536])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rSb5j-0001za-SD
+ for qemu-riscv@nongnu.org; Wed, 24 Jan 2024 06:06:47 -0500
+Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rSYRK-0000GA-Ff
- for qemu-riscv@nongnu.org; Wed, 24 Jan 2024 03:16:56 -0500
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-55a354a65afso4496606a12.0
- for <qemu-riscv@nongnu.org>; Wed, 24 Jan 2024 00:16:54 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rSb5e-0004kw-O9
+ for qemu-riscv@nongnu.org; Wed, 24 Jan 2024 06:06:47 -0500
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-337d05b8942so6058844f8f.3
+ for <qemu-riscv@nongnu.org>; Wed, 24 Jan 2024 03:06:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1706084213; x=1706689013; darn=nongnu.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=9sXg36sUep+N61vSnj8FOK4eOgfj23LfuaYjihRPx9s=;
- b=MA5/Vzg1xp91Ckc9/tGxt9G8jW748KHiOrNUJ1I2CcvZ22kxeIlOcZldPt8vH1Z9LV
- DqxGubtP0mPfhl+fiifeLfU/Kv/nTr9jbdKE9XdfVKXdLBbyakWt4KDsWs+mrNt6QSZt
- DJVMrNRztGOJPYB9FazfN2wHdRgfGLSnsVvFHQ4T6hhWvDXSnrDp1MgWw7RClK5yeuHf
- VfoLxI5757fV3y2qMGJFCEl5CeTNPxJX4YuvU8ZS6S74ex+vbut15Fk2Bit2z79GfcGk
- 8iEyH5WsZjlbdem1T+70XlzXD497MjCPYMJkn9USWnVIxRH3sCtplYND3vjnEK1+g0Uz
- f6rw==
+ d=linaro.org; s=google; t=1706094401; x=1706699201; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Iy/OKjpiO5yoeXxY83xqvHL6o7nHTDd39y/0xcYG3qM=;
+ b=hlmgl4rPJKhE908qaoUiGFGZPyL8H6Xn77AmdNMjqxaTYk+VIXFagKHvzQ2ZIfsluE
+ /S5Vw1rrBiWEG1IAVFo24kFafMSgFOqx7PNjUWD45SpPdjcHP+IlZ6603p4iqkpYyzFB
+ yP+b+s7CFJSr9FM/JYQWghn7MgL5gZ6QD3wIQ9TgoKl3FgerV/aXXEFqfI3Jk+ASj2UA
+ BKRiD0vVRbH3ZCt8To7aWNm4dQCL8kKflJhY+ts0xOPtu1OFJsiOalN4VplDwcQxv6Kn
+ MZ82+Nwhokd7Rndm7tr2Swi6OP+HmieYLGZy4IQg+lGvNcRxsNQBWNjpiOO3saEpduF7
+ a/eQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706084213; x=1706689013;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
+ d=1e100.net; s=20230601; t=1706094401; x=1706699201;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=9sXg36sUep+N61vSnj8FOK4eOgfj23LfuaYjihRPx9s=;
- b=XuJxjCBaI5/qbAR7dk8wjB6lVyDCPqX9snNbCNlo61qdZGL09CnSPcJqVEmtZR9Aef
- YAOk7BBLRrMdd8WhnJ9jA3sWQlN1HcuzMerqGIcL4GbPRXVAvd+C/MEy+YQp3zn2Mr0m
- QNWdBZM5ThaOxb7nZS7oOhKye6/5nnDEcbP6CVmgfYR+M+9Tr9Wdkz9L22mq0lftlmNx
- H3W0CC4E5hG1xvmvEayGz/BNl5q9v2GBW6f2O+MpE+T7VF/FwG3gH2LLzuuYq5rIh74v
- TAJhQjARDYyQUQ4nZ+ewis5SwBoludI379pU7N2q9IIiS3+scX6YIOWeibYQJUDK0a0c
- jLwg==
-X-Gm-Message-State: AOJu0YxBKK74QiS3iwHQT1ZMbPuOQuibgAtJKiefVKjRNN5268mTGyB8
- u68RPy0p0P4D/kbfpFbirNV90J4pMRoNf+F9JX24Ej0VIxz4HpiueYAzn9LVNsU=
-X-Google-Smtp-Source: AGHT+IGDg1ZQqdXZKs3GCQc5JFbRDXhgLr6ZlGiNbTZRR/B1PaEq7yGPv5awPONM0W1s3+iCwea/Kw==
-X-Received: by 2002:a17:906:9c91:b0:a31:2905:5dca with SMTP id
- fj17-20020a1709069c9100b00a3129055dcamr247199ejc.53.1706084212585; 
- Wed, 24 Jan 2024 00:16:52 -0800 (PST)
-Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
- by smtp.gmail.com with ESMTPSA id
- mn6-20020a1709077b0600b00a2ccddf9a7dsm13874643ejc.124.2024.01.24.00.16.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Jan 2024 00:16:52 -0800 (PST)
-Date: Wed, 24 Jan 2024 09:16:51 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Akihiko Odaki <akihiko.odaki@daynix.com>
-Cc: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>, 
- qemu-devel@nongnu.org, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>, 
- Michael Rolnik <mrolnik@gmail.com>,
- =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>, 
- Laurent Vivier <lvivier@redhat.com>, kvm@vger.kernel.org,
- Yoshinori Sato <ysato@users.sourceforge.jp>, 
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Laurent Vivier <laurent@vivier.eu>, 
- Yanan Wang <wangyanan55@huawei.com>, qemu-ppc@nongnu.org,
- Weiwei Li <liwei1518@gmail.com>, 
- qemu-s390x@nongnu.org, =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@kaod.org>, 
- Peter Maydell <peter.maydell@linaro.org>, Alexandre Iooss <erdnaxe@crans.org>, 
- John Snow <jsnow@redhat.com>, Mahmoud Mandour <ma.mandourr@gmail.com>, 
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Ilya Leoshkevich <iii@linux.ibm.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- David Woodhouse <dwmw2@infradead.org>, Cleber Rosa <crosa@redhat.com>,
- Beraldo Leal <bleal@redhat.com>, 
- Bin Meng <bin.meng@windriver.com>, Nicholas Piggin <npiggin@gmail.com>, 
- Aurelien Jarno <aurelien@aurel32.net>,
- Daniel Henrique Barboza <danielhb413@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Thomas Huth <thuth@redhat.com>, 
- David Hildenbrand <david@redhat.com>, qemu-riscv@nongnu.org,
- qemu-arm@nongnu.org, 
- Paolo Bonzini <pbonzini@redhat.com>, Song Gao <gaosong@loongson.cn>, 
- Eduardo Habkost <eduardo@habkost.net>, Brian Cain <bcain@quicinc.com>,
- Paul Durrant <paul@xen.org>
-Subject: Re: Re: [PATCH v3 01/21] hw/riscv: Use misa_mxl instead of
- misa_mxl_max
-Message-ID: <20240124-3d9bec68bff7ab0057b902b6@orel>
-References: <20240122145610.413836-1-alex.bennee@linaro.org>
- <20240122145610.413836-2-alex.bennee@linaro.org>
- <20240123-b8d1c55688885bfc9125c42b@orel>
- <15d2f958-a51e-4b87-9a70-28edf3b55491@daynix.com>
+ bh=Iy/OKjpiO5yoeXxY83xqvHL6o7nHTDd39y/0xcYG3qM=;
+ b=Eix/rSWs/Jd2WNI3tecgIfZeIYJxHZd/fES+2LLEN87VW+2eHKP/lK0/LfJM1EyIbc
+ I3jgCFdxrw5esrIb22GmYrjltY/VfnpTWokW63IaJ30BK30AsRTxG4Dz5uaHmxHV2TOq
+ b28ksaDKYwAvHarDsCNLNMF6slX0uK9/4PiFAMbSJmj4NPegqhRiNhJw7+cLr04WtU33
+ ih8+EtKFTZLQhIkKWchGxgb14K0UJCqsefnjTVFonL1RmQZMG7tDqhjge7UWuoYZ9adn
+ ZsH/GdED6RC28s0ORkajutPKiJSeehyKQNBQP8Tk9zWVInIwtLOoAhCSyhLJCJ378sf8
+ nkfg==
+X-Gm-Message-State: AOJu0Yywqoi8KVODIVRGPmPT3BOJX06wuPv+Q63X9mMEnjUA/ULa2yDK
+ 5Np6MyGbcOsJc86/9BwbD9S8CsSC6R58VkRbAkSMLHijOhNLoyyZjv5xvyhAPwI=
+X-Google-Smtp-Source: AGHT+IH/SauWLJ1xOlrVqSMxVFexDKwt7XPZ6S6pWBnjez+xHwFpHdDkwUvpg8Qby7kwDeLsfRpNeA==
+X-Received: by 2002:a5d:618b:0:b0:339:372e:770f with SMTP id
+ j11-20020a5d618b000000b00339372e770fmr502198wru.46.1706094400988; 
+ Wed, 24 Jan 2024 03:06:40 -0800 (PST)
+Received: from [192.168.69.100] (lgp44-h02-176-184-8-67.dsl.sta.abo.bbox.fr.
+ [176.184.8.67]) by smtp.gmail.com with ESMTPSA id
+ d10-20020adfa40a000000b0033953f87085sm414725wra.35.2024.01.24.03.06.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 24 Jan 2024 03:06:40 -0800 (PST)
+Message-ID: <5a1cb4ae-b43c-4ef5-9572-6636a2d787e7@linaro.org>
+Date: Wed, 24 Jan 2024 12:06:34 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 04/31] docs: mark CRIS support as deprecated
+Content-Language: en-US
+To: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
+Cc: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
+ qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
+ Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
+ John Snow <jsnow@redhat.com>, libvir-list@redhat.com,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+ qemu-s390x@nongnu.org, Song Gao <gaosong@loongson.cn>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Nicholas Piggin <npiggin@gmail.com>, Radoslaw Biernacki <rad@semihalf.com>,
+ Eduardo Habkost <eduardo@habkost.net>, Cleber Rosa <crosa@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Mahmoud Mandour
+ <ma.mandourr@gmail.com>, Thomas Huth <thuth@redhat.com>,
+ Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Bin Meng <bin.meng@windriver.com>, Alexandre Iooss <erdnaxe@crans.org>,
+ Xiaojuan Yang <yangxiaojuan@loongson.cn>, qemu-ppc@nongnu.org,
+ David Hildenbrand <david@redhat.com>, Yanan Wang <wangyanan55@huawei.com>,
+ Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
+ qemu-arm@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>, Laurent Vivier <lvivier@redhat.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Leif Lindholm <quic_llindhol@quicinc.com>, Beraldo Leal <bleal@redhat.com>,
+ Rabin Vincent <rabinv@axis.com>
+References: <20230925144854.1872513-1-alex.bennee@linaro.org>
+ <20230925144854.1872513-5-alex.bennee@linaro.org>
+ <ZRG1g/2hWi8+AzNn@redhat.com> <878r8urxxc.fsf@linaro.org>
+ <CAJy5ezoucKM=VvYsHeFep7r0i1PV_JUCgq6gs4JJQVHqq3Yz3Q@mail.gmail.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <CAJy5ezoucKM=VvYsHeFep7r0i1PV_JUCgq6gs4JJQVHqq3Yz3Q@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <15d2f958-a51e-4b87-9a70-28edf3b55491@daynix.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::536;
- envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x536.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::431;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x431.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -129,86 +122,76 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jan 24, 2024 at 12:08:33PM +0900, Akihiko Odaki wrote:
-> On 2024/01/23 17:20, Andrew Jones wrote:
-> > On Mon, Jan 22, 2024 at 02:55:50PM +0000, Alex Benn�e wrote:
-> > > From: Akihiko Odaki <akihiko.odaki@daynix.com>
-> > > 
-> > > The effective MXL value matters when booting.
-> > 
-> > I'd prefer this commit message get some elaboration. riscv_is_32bit()
-> > is used in a variety of contexts, some where it should be reporting
-> > the max misa.mxl. However, when used for booting an S-mode kernel it
-> > should indeed report the effective mxl. I think we're fine with the
-> > change, though, because at init and on reset the effective mxl is set
-> > to the max mxl, so, in those contexts, where riscv_is_32bit() should
-> > be reporting the max, it does.
-> > 
-> > > 
-> > > Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-> > > Message-Id: <20240103173349.398526-23-alex.bennee@linaro.org>
-> > > Message-Id: <20231213-riscv-v7-1-a760156a337f@daynix.com>
-> > > Signed-off-by: Alex Benn�e <alex.bennee@linaro.org>
-> > > ---
-> > >   hw/riscv/boot.c | 2 +-
-> > >   1 file changed, 1 insertion(+), 1 deletion(-)
-> > > 
-> > > diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> > > index 0ffca05189f..bc67c0bd189 100644
-> > > --- a/hw/riscv/boot.c
-> > > +++ b/hw/riscv/boot.c
-> > > @@ -36,7 +36,7 @@
-> > >   bool riscv_is_32bit(RISCVHartArrayState *harts)
-> > >   {
-> > > -    return harts->harts[0].env.misa_mxl_max == MXL_RV32;
-> > > +    return harts->harts[0].env.misa_mxl == MXL_RV32;
-> > >   }
-> > 
-> > Assuming everyone agrees with what I've written above, then maybe we
-> > should write something similar in a comment above this function.
-> > 
-> > Thanks,
-> > drew
+On 25/9/23 19:17, Edgar E. Iglesias wrote:
 > 
-> The corresponding commit in my series has a more elaborated message:
-> https://patchew.org/QEMU/20240115-riscv-v9-0-ff171e1aedc8@daynix.com/20240115-riscv-v9-1-ff171e1aedc8@daynix.com/
-
-I've pulled the message from that link and quoted it below
-
-> A later commit requires one extra step to retrieve misa_mxl_max. As
-> misa_mxl is semantically more correct and does not need such a extra
-> step, refer to misa_mxl instead. Below is the explanation why misa_mxl
-> is more semantically correct to refer to than misa_mxl_max in this case.
+> On Mon, Sep 25, 2023 at 7:00 PM Alex Bennée <alex.bennee@linaro.org 
+> <mailto:alex.bennee@linaro.org>> wrote:
 > 
-> Currently misa_mxl always equals to misa_mxl_max so it does not matter
+> 
+>     Daniel P. Berrangé <berrange@redhat.com
+>     <mailto:berrange@redhat.com>> writes:
+> 
+>      > On Mon, Sep 25, 2023 at 03:48:27PM +0100, Alex Bennée wrote:
+>      >> This might be premature but while streamling the avocado tests I
+>      >> realised the only tests we have are "check-tcg" ones. The aging
+>      >> fedora-criss-cross image works well enough for developers but
+>     can't be
+>      >> used in CI as we need supported build platforms to build QEMU.
+>      >>
+>      >> Does this mean the writing is on the wall for this architecture?
+>      >>
+>      >> Signed-off-by: Alex Bennée <alex.bennee@linaro.org
+>     <mailto:alex.bennee@linaro.org>>
+>      >> Cc: Rabin Vincent <rabinv@axis.com <mailto:rabinv@axis.com>>
+>      >> Cc: Edgar E. Iglesias <edgar.iglesias@xilinx.com
+>     <mailto:edgar.iglesias@xilinx.com>>
+>      >> ---
+>      >>  docs/about/deprecated.rst | 11 +++++++++++
+>      >>  1 file changed, 11 insertions(+)
+>      >>
+>      >> diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
+>      >> index dc4da95329..7cfe313aa6 100644
+>      >> --- a/docs/about/deprecated.rst
+>      >> +++ b/docs/about/deprecated.rst
+>      >> @@ -399,6 +399,17 @@ Specifying the iSCSI password in plain text
+>     on the command line using the
+>      >>  used instead, to refer to a ``--object secret...`` instance
+>     that provides
+>      >>  a password via a file, or encrypted.
+>      >>
+>      >> +TCG CPUs
+>      >> +--------
+>      >> +
+>      >> +CRIS CPU architecture (since 8.1)
+>      >> +'''''''''''''''''''''''''''''''''
+>      >> +
+>      >> +The CRIS architecture was pulled from Linux in 4.17 and the
+>     compiler
+>      >> +is no longer packaged in any distro making it harder to run the
+>      >> +``check-tcg`` tests. Unless we can improve the testing
+>     situation there
+>      >> +is a chance the code will bitrot without anyone noticing.
+>      >
+>      > Deprecated is generally a warning that we intend to delete the
+>      > feature.   If we're just going to relegate it to untested
+>      > status (what I'd call "tier 3" quality), then we should document
+>      > that elsewhere.  I don't mind which way we go.
+> 
+>     We do have reasonably good coverage with tests/tcg/cris but of course
+>     without a compiler we can't build them.
+> 
+>     Both nios2 and microblaze have build-toolchain scripts which can be used
+>     to re-create containers. However my preference is having pre-built
+>     toolchains hosted by others like we do for loongarch, hexagon, xtensa
+>     and tricore. Then the docker image can simply curl them into an image.
+> 
+> 
+> Yeah, I guess it's time to deprecate it...
 
-That's true, but I think that's due to a bug in write_misa(), which
-shouldn't be masking val with the extension mask until mxl has been
-extracted.
+Is that an informal Acked-by? (:
 
-> which of misa_mxl or misa_mxl_max to refer to. However, it is possible
-> to have different values for misa_mxl and misa_mxl_max if QEMU gains a
-> new feature to load a RV32 kernel on a RV64 system, for example. For
-> such a behavior, the real system will need the firmware to switch MXL to
-> RV32, and if QEMU implements the same behavior, mxl will represent the
-> MXL that corresponds to the kernel being loaded. Therefore, it is more
-> appropriate to refer to mxl instead of misa_mxl_max when
-> misa_mxl != misa_mxl_max.
+> 
+> Cheers,
+> Edgar
 
-Right, but that doesn't say anything more than the original one line,
-"The effective MXL value matters when booting."
-
-What I'm looking for is a code comment explaining how riscv_is_32bit()
-is always safe to use. Something like
-
- /*
-  * Checking the effective mxl is always correct, because the effective
-  * mxl will be equal to the max mxl at initialization and also on reset,
-  * which are the times when it should check the maximum mxl. Later, if
-  * firmware writes misa with a smaller mxl, then that mxl should be
-  * used in checks.
-  */
-
-Thanks,
-drew
 
