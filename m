@@ -4,90 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4B9CC47DDC
-	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jan 2024 15:56:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09BF2C47DDF
+	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jan 2024 20:05:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rSfaO-0003bl-B9; Wed, 24 Jan 2024 10:54:44 -0500
+	id 1rSjUV-0003uB-7c; Wed, 24 Jan 2024 15:04:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rSfaK-0003aB-Lb
- for qemu-riscv@nongnu.org; Wed, 24 Jan 2024 10:54:40 -0500
-Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rSjUR-0003pj-DC
+ for qemu-riscv@nongnu.org; Wed, 24 Jan 2024 15:04:51 -0500
+Received: from mail-pg1-x531.google.com ([2607:f8b0:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rSfaH-0002NU-J2
- for qemu-riscv@nongnu.org; Wed, 24 Jan 2024 10:54:40 -0500
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-337d05b8942so6372927f8f.3
- for <qemu-riscv@nongnu.org>; Wed, 24 Jan 2024 07:54:37 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rSjUN-0005ni-Aq
+ for qemu-riscv@nongnu.org; Wed, 24 Jan 2024 15:04:49 -0500
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-5d46a378f74so1214441a12.0
+ for <qemu-riscv@nongnu.org>; Wed, 24 Jan 2024 12:04:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706111676; x=1706716476; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=aTb7XsL1n33B1zcbpZjICkUyxotK3fc0XdMkkBFWEgg=;
- b=anQR07mYvhrjuYDuaduo4gvl2Pgyxo3W1wENdjnoClt71j+45t2IO9LvyuXVbOx14b
- Mu6OjXQX8zoSm8ZRxm2GHkQkt35blynjOZ7VYXeOQ+L+mXt9jOT8oOIqxMpF+ONZX2CP
- 88dqkQw60MqV0sAEnUnBJYWUO7kdMwpBn+cc8q0TBXjupRDhWbT8vrkCpgKFut/22JXP
- 7ZQmrrnd73qqfknx4zYP5Z6yPrITBCDb5Izm+rqKWIax9WOkK1QWgI/K81zq/YYeUTSX
- VGo2TMuO1EPWiHNaXoK6DyRjwljlbuRSBBvQ35EKgtmPP9U5KSIzsslGOtSvAQHHLAA4
- dxGQ==
+ d=ventanamicro.com; s=google; t=1706126685; x=1706731485; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=TcvvEUmUOJhLGSOP0GKE13bG52dB7JqCEYHsc4HIS/o=;
+ b=K8YcrkPeZPlS9frcA/K03oxmtCA0DRqOmjrZ792RlAY/ozKuy/VZ5YNOj+S+JRbzDg
+ GeOfRU6B2V8pvj03nctp/KSo8o5x6xgCCTka7UYEpp/YhmFsUsjA2i1XVB0EO26KW6w6
+ u181n6MSHdeZAAQYEoQQHd2HYZcTOXSIrEWJsoxlIvOWDe3ix2MMKrmycA9IcFw8hgtC
+ 8E4Pq9aMWXeO0AsYZGLYKzVJRb9p8M/cy/rB1l0HV/NLAmq1CnBJmWSoQsgxcVALqWxv
+ SlvxizDAdmHw+W6Nd2Co1H4tVQCYQ7D1Uvm6CnGXcF60rJqHOJ2Aq1UBBrZzijSnG29c
+ +VRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706111676; x=1706716476;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=aTb7XsL1n33B1zcbpZjICkUyxotK3fc0XdMkkBFWEgg=;
- b=RRrlpVWKlOaZvuoaifnvT9L3k9ECHOu/oPezEl+XVH1/Wm/HddONhV+byBGjemxyMK
- CjZRHw5Z29Dfa8xPMWA0mtk3WttIl1TgYclhbFc4toIdSLSXeuZy43A0QjNILIrkDC/h
- EeAON6NqoaUfiQww6+KYgcvbIwrouptIESuVRVNw+RmX99SEAii3CTJyS/PS6jyT/o+b
- swuKfU8mYdQNs+TNrre3zUsPAnylpNcmzdisTiOPFqIMzmohJo2nN7FubrGvaSR9DpOg
- R6ocoyZZawFkBUuCH47oSpuYjRDfPmcTHQ+UgBuYXcNapOkLa2LEiQzpnTrvcJb7uwOa
- Kcvw==
-X-Gm-Message-State: AOJu0YzUL9WU6ijutx5UWyCADEOx0BPhKv3Pdi9cqovbpEkT+Qm2lsgn
- 01xNoI70h8/vncVWlkrw7bP/PCUnDuswm3Xwbz+cFEeJMBlKVWTzOgTCMxEQeds=
-X-Google-Smtp-Source: AGHT+IEWNMk3AgOpr1E3McOSW2fz67zuR1pIW2mreBkz+XaNSy0I1MnJTEPBGceydnI2SuRckjj6QA==
-X-Received: by 2002:adf:cc84:0:b0:337:6806:f919 with SMTP id
- p4-20020adfcc84000000b003376806f919mr854421wrj.107.1706111675960; 
- Wed, 24 Jan 2024 07:54:35 -0800 (PST)
-Received: from localhost.localdomain
- (lgp44-h02-176-184-8-67.dsl.sta.abo.bbox.fr. [176.184.8.67])
+ d=1e100.net; s=20230601; t=1706126685; x=1706731485;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=TcvvEUmUOJhLGSOP0GKE13bG52dB7JqCEYHsc4HIS/o=;
+ b=vSrayl+xqhVVoR9UMWhZtI2lmk+EgM33U+qV7rE0oOTgXtJRgwmtyQ/PbfoMJFffxX
+ GCZ8jX1HObx+Ar6FB15L3ucl5Z4z5vpfUyF2d7J7kwhbf7gF/SXeB8Lc6yz3fUClbYqH
+ fCok+CPk5oBZeDelfzUl7b0FLYbXlhqVcRsq7Ha7nq1uYpn/KnTSvzXwEKr74JP3rYKQ
+ XgFe04ce6T3y1jwkL1jW7T+OuWw+JuEDjb0BKJmvsWFJLAgYXKvSxJV7s3eOxp21lL+8
+ CYMj8bMri0eJooxbAajMQ5zXkT4/ex4tScHxoCFQI+Aqk4RnkNsFyR0Mku0msp8ITexZ
+ pOZw==
+X-Gm-Message-State: AOJu0YxJ3EP4Vm3jVj2CZAw035mLxYxKzObSSzDsW/EggZjtRTtMYu8U
+ uw/srG86k0ni6MEkD3x0CkhNcTmuw0lYL0qu9wMQKE2fBMLDoUKOWcxTVR7nquU=
+X-Google-Smtp-Source: AGHT+IFBNH2JOb+HkKfQWimA0hg/iE5eAaf55qpqq22/PIAfGc5hvld2z/gHUyMOp8Ye4XFSyEp08w==
+X-Received: by 2002:a05:6a20:5618:b0:19b:7ccb:2140 with SMTP id
+ ir24-20020a056a20561800b0019b7ccb2140mr1363069pzc.105.1706126685443; 
+ Wed, 24 Jan 2024 12:04:45 -0800 (PST)
+Received: from [192.168.68.110] ([152.234.127.94])
  by smtp.gmail.com with ESMTPSA id
- s16-20020a5d5110000000b0033763a9ea2dsm9921845wrt.63.2024.01.24.07.54.33
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 24 Jan 2024 07:54:35 -0800 (PST)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: Richard Henderson <richard.henderson@linaro.org>, qemu-ppc@nongnu.org,
- qemu-arm@nongnu.org, qemu-riscv@nongnu.org, Thomas Huth <thuth@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>, kvm@vger.kernel.org,
- qemu-s390x@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Song Gao <gaosong@loongson.cn>, Aurelien Jarno <aurelien@aurel32.net>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Nicholas Piggin <npiggin@gmail.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>
-Subject: [PATCH 1/2] accel/kvm: Define KVM_ARCH_HAVE_MCE_INJECTION in each
- target
-Date: Wed, 24 Jan 2024 16:54:24 +0100
-Message-ID: <20240124155425.73195-2-philmd@linaro.org>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20240124155425.73195-1-philmd@linaro.org>
-References: <20240124155425.73195-1-philmd@linaro.org>
+ i192-20020a639dc9000000b005d6323da62esm14262pgd.84.2024.01.24.12.04.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 24 Jan 2024 12:04:45 -0800 (PST)
+Message-ID: <61d7fcf6-6b7a-4d19-a6f9-74713b31bc40@ventanamicro.com>
+Date: Wed, 24 Jan 2024 17:04:41 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42a.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 1/2] target/riscv: use misa_mxl_max to populate isa
+ string rather than TARGET_LONG_BITS
+Content-Language: en-US
+To: Conor Dooley <conor@kernel.org>, qemu-riscv@nongnu.org
+Cc: Conor Dooley <conor.dooley@microchip.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Weiwei Li <liwei1518@gmail.com>, Andrew Jones <ajones@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
+References: <20240124-squatting-getup-a16a8499ad73@spud>
+ <20240124-swear-monthly-56c281f809a6@spud>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20240124-swear-monthly-56c281f809a6@spud>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x531.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -110,171 +101,80 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Instead of having KVM_HAVE_MCE_INJECTION optionally defined,
-always define KVM_ARCH_HAVE_MCE_INJECTION for each target,
-and set KVM_HAVE_MCE_INJECTION if it is not zero.
 
-It is now clearer for KVM targets to detect if they lack the
-MCE injection implementation. Also, moving headers around
-is no more painful, because if a target neglects to define
-KVM_ARCH_HAVE_MCE_INJECTION, the build will fail.
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
-I'd rather keep "cpu-param.h" simple/short.
+On 1/24/24 09:55, Conor Dooley wrote:
+> From: Conor Dooley <conor.dooley@microchip.com>
+> 
+> A cpu may not have the same xlen as the compile time target, and
+> misa_mxl_max is the source of truth for what the hart supports.
+> 
+> The conversion from misa_mxl_max to xlen already has one user, so
+> introduce a helper and use that to populate the isa string.
+> 
+> Link: https://lore.kernel.org/qemu-riscv/20240108-efa3f83dcd3997dc0af458d7@orel/
+> Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+> ---
 
-Is a per-target "kvm-param.h" any better?
-Or per-target "accel-param.h"? For example TCG_GUEST_DEFAULT_MO
-is TCG specific and could also go there. Otherwise it will go
-in "cpu-param.h".
----
- include/sysemu/kvm.h         | 5 +++++
- target/arm/cpu-param.h       | 5 +++++
- target/arm/cpu.h             | 4 ----
- target/i386/cpu-param.h      | 2 ++
- target/i386/cpu.h            | 2 --
- target/loongarch/cpu-param.h | 2 ++
- target/mips/cpu-param.h      | 2 ++
- target/ppc/cpu-param.h       | 2 ++
- target/riscv/cpu-param.h     | 2 ++
- target/s390x/cpu-param.h     | 2 ++
- 10 files changed, 22 insertions(+), 6 deletions(-)
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-diff --git a/include/sysemu/kvm.h b/include/sysemu/kvm.h
-index d614878164..2e9aa2fc53 100644
---- a/include/sysemu/kvm.h
-+++ b/include/sysemu/kvm.h
-@@ -212,6 +212,7 @@ int kvm_on_sigbus(int code, void *addr);
- 
- #ifdef NEED_CPU_H
- #include "cpu.h"
-+#include "cpu-param.h"
- 
- void kvm_flush_coalesced_mmio_buffer(void);
- 
-@@ -349,6 +350,10 @@ bool kvm_vcpu_id_is_valid(int vcpu_id);
- /* Returns VCPU ID to be used on KVM_CREATE_VCPU ioctl() */
- unsigned long kvm_arch_vcpu_id(CPUState *cpu);
- 
-+#if KVM_ARCH_HAVE_MCE_INJECTION
-+#define KVM_HAVE_MCE_INJECTION
-+#endif
-+
- #ifdef KVM_HAVE_MCE_INJECTION
- void kvm_arch_on_sigbus_vcpu(CPUState *cpu, int code, void *addr);
- #endif
-diff --git a/target/arm/cpu-param.h b/target/arm/cpu-param.h
-index f9b462a98f..d71cc29864 100644
---- a/target/arm/cpu-param.h
-+++ b/target/arm/cpu-param.h
-@@ -30,7 +30,12 @@
-  */
- # define TARGET_PAGE_BITS_VARY
- # define TARGET_PAGE_BITS_MIN  10
-+#endif
- 
-+#ifdef TARGET_AARCH64
-+#define KVM_ARCH_HAVE_MCE_INJECTION 1
-+#else
-+#define KVM_ARCH_HAVE_MCE_INJECTION 0
- #endif
- 
- #endif
-diff --git a/target/arm/cpu.h b/target/arm/cpu.h
-index ec276fcd57..f92c8d3b88 100644
---- a/target/arm/cpu.h
-+++ b/target/arm/cpu.h
-@@ -30,10 +30,6 @@
- /* ARM processors have a weak memory model */
- #define TCG_GUEST_DEFAULT_MO      (0)
- 
--#ifdef TARGET_AARCH64
--#define KVM_HAVE_MCE_INJECTION 1
--#endif
--
- #define EXCP_UDEF            1   /* undefined instruction */
- #define EXCP_SWI             2   /* software interrupt */
- #define EXCP_PREFETCH_ABORT  3
-diff --git a/target/i386/cpu-param.h b/target/i386/cpu-param.h
-index 911b4cd51b..5933b0b756 100644
---- a/target/i386/cpu-param.h
-+++ b/target/i386/cpu-param.h
-@@ -24,4 +24,6 @@
- #endif
- #define TARGET_PAGE_BITS 12
- 
-+#define KVM_ARCH_HAVE_MCE_INJECTION 1
-+
- #endif
-diff --git a/target/i386/cpu.h b/target/i386/cpu.h
-index 7f0786e8b9..230ab1cded 100644
---- a/target/i386/cpu.h
-+++ b/target/i386/cpu.h
-@@ -33,8 +33,6 @@
- /* The x86 has a strong memory model with some store-after-load re-ordering */
- #define TCG_GUEST_DEFAULT_MO      (TCG_MO_ALL & ~TCG_MO_ST_LD)
- 
--#define KVM_HAVE_MCE_INJECTION 1
--
- /* support for self modifying code even if the modified instruction is
-    close to the modifying instruction */
- #define TARGET_HAS_PRECISE_SMC
-diff --git a/target/loongarch/cpu-param.h b/target/loongarch/cpu-param.h
-index cfe195db4e..f69a94e6b5 100644
---- a/target/loongarch/cpu-param.h
-+++ b/target/loongarch/cpu-param.h
-@@ -14,4 +14,6 @@
- 
- #define TARGET_PAGE_BITS 12
- 
-+#define KVM_ARCH_HAVE_MCE_INJECTION 0
-+
- #endif
-diff --git a/target/mips/cpu-param.h b/target/mips/cpu-param.h
-index 594c91a156..45c885e00e 100644
---- a/target/mips/cpu-param.h
-+++ b/target/mips/cpu-param.h
-@@ -30,4 +30,6 @@
- #define TARGET_PAGE_BITS_MIN 12
- #endif
- 
-+#define KVM_ARCH_HAVE_MCE_INJECTION 0
-+
- #endif
-diff --git a/target/ppc/cpu-param.h b/target/ppc/cpu-param.h
-index 0a0416e0a8..9975ae73ab 100644
---- a/target/ppc/cpu-param.h
-+++ b/target/ppc/cpu-param.h
-@@ -33,4 +33,6 @@
- #endif
- #define TARGET_PAGE_BITS 12
- 
-+#define KVM_ARCH_HAVE_MCE_INJECTION 0
-+
- #endif
-diff --git a/target/riscv/cpu-param.h b/target/riscv/cpu-param.h
-index b2a9396dec..e6199f4f6d 100644
---- a/target/riscv/cpu-param.h
-+++ b/target/riscv/cpu-param.h
-@@ -28,4 +28,6 @@
-  *  - M mode HLV/HLVX/HSV 0b111
-  */
- 
-+#define KVM_ARCH_HAVE_MCE_INJECTION 0
-+
- #endif
-diff --git a/target/s390x/cpu-param.h b/target/s390x/cpu-param.h
-index 84ca08626b..4728b3957e 100644
---- a/target/s390x/cpu-param.h
-+++ b/target/s390x/cpu-param.h
-@@ -13,4 +13,6 @@
- #define TARGET_PHYS_ADDR_SPACE_BITS 64
- #define TARGET_VIRT_ADDR_SPACE_BITS 64
- 
-+#define KVM_ARCH_HAVE_MCE_INJECTION 0
-+
- #endif
--- 
-2.41.0
-
+> I dropped the tags since I added the helper
+> ---
+>   target/riscv/cpu.c     | 9 ++++++++-
+>   target/riscv/cpu.h     | 1 +
+>   target/riscv/gdbstub.c | 2 +-
+>   3 files changed, 10 insertions(+), 2 deletions(-)
+> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index ad1df2318b..4aa4b2e988 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -307,6 +307,11 @@ void riscv_cpu_set_misa(CPURISCVState *env, RISCVMXL mxl, uint32_t ext)
+>       env->misa_ext_mask = env->misa_ext = ext;
+>   }
+>   
+> +int riscv_cpu_max_xlen(CPURISCVState env)
+> +{
+> +    return 16 << env.misa_mxl_max;
+> +}
+> +
+>   #ifndef CONFIG_USER_ONLY
+>   static uint8_t satp_mode_from_str(const char *satp_mode_str)
+>   {
+> @@ -2332,7 +2337,9 @@ char *riscv_isa_string(RISCVCPU *cpu)
+>       int i;
+>       const size_t maxlen = sizeof("rv128") + sizeof(riscv_single_letter_exts);
+>       char *isa_str = g_new(char, maxlen);
+> -    char *p = isa_str + snprintf(isa_str, maxlen, "rv%d", TARGET_LONG_BITS);
+> +    int xlen = riscv_cpu_max_xlen(cpu->env);
+> +    char *p = isa_str + snprintf(isa_str, maxlen, "rv%d", xlen);
+> +
+>       for (i = 0; i < sizeof(riscv_single_letter_exts) - 1; i++) {
+>           if (cpu->env.misa_ext & RV(riscv_single_letter_exts[i])) {
+>               *p++ = qemu_tolower(riscv_single_letter_exts[i]);
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 05e83c4ac9..aacc031397 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -511,6 +511,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>                           MMUAccessType access_type, int mmu_idx,
+>                           bool probe, uintptr_t retaddr);
+>   char *riscv_isa_string(RISCVCPU *cpu);
+> +int riscv_cpu_max_xlen(CPURISCVState env);
+>   bool riscv_cpu_option_set(const char *optname);
+>   
+>   #define cpu_mmu_index riscv_cpu_mmu_index
+> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+> index 58b3ace0fe..f15980fdcf 100644
+> --- a/target/riscv/gdbstub.c
+> +++ b/target/riscv/gdbstub.c
+> @@ -218,7 +218,7 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
+>       CPURISCVState *env = &cpu->env;
+>       GString *s = g_string_new(NULL);
+>       riscv_csr_predicate_fn predicate;
+> -    int bitsize = 16 << env->misa_mxl_max;
+> +    int bitsize = riscv_cpu_max_xlen(*env);
+>       int i;
+>   
+>   #if !defined(CONFIG_USER_ONLY)
 
