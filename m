@@ -4,86 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08199C46CD2
-	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jan 2024 12:38:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A0D7C46CD2
+	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jan 2024 12:56:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rScVv-0005ng-SA; Wed, 24 Jan 2024 07:37:55 -0500
+	id 1rScnY-000335-1s; Wed, 24 Jan 2024 07:56:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rScVq-0005ic-Nm
- for qemu-riscv@nongnu.org; Wed, 24 Jan 2024 07:37:50 -0500
-Received: from mail-lf1-x136.google.com ([2a00:1450:4864:20::136])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rScVo-0006Od-OV
- for qemu-riscv@nongnu.org; Wed, 24 Jan 2024 07:37:50 -0500
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-50e766937ddso6433781e87.3
- for <qemu-riscv@nongnu.org>; Wed, 24 Jan 2024 04:37:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706099865; x=1706704665; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=anXfizGFL/FiMlPSuxh+INuOqI7Q/a7lIPZHLKwCaQ8=;
- b=rFFRj14nds/OPZGdFoRQJg9llzRp831/JEiLH5rqN/21NAI645qb8nOZUSsfEuB3bj
- T0ruDZI4PayzwbaOEd+OqiZvgeKI1IFJHg5NmHbM2TXB3NI0OIodElMuBWnyHgHUODsb
- RmiO++lCVMt/DJMEGe6XLvIcKo0c+aXlpjgLAuO6RZkdtH45xogBxoFinWyPGlI1tXQT
- GuQ3bSPBgQ6g+QFAkb/hCiOxnPlmKRUHDM5BEdG2WN7AzkJoAOAyOI17vLZd6Lmeg8Xs
- Hs+AzySPoqk6Dr/w4fqG568kGEJtVCLCeOS881CpZhKmLCMV35EE13T6yKD74mwDjWwp
- mpDg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706099865; x=1706704665;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=anXfizGFL/FiMlPSuxh+INuOqI7Q/a7lIPZHLKwCaQ8=;
- b=IAjRdVF0gxUqo7R5JbdeOi6e91XHP5UISU3hArV39aiQEofufN/Axt6i+DAqKWx1ee
- ewGGL9unnRFi1Izkk6mVeB5AWrCVtlJkk2Mo2XuFC5MCzfnouBTb2bQ5fz0QFmO/7lBZ
- Sbe9ncRKPV8x+XgdokgesR+jvGVBOlp1pCQp1d4V4Xw0xg2OdNLBIiT3adgWji6V2PEh
- CkF/TdRv5fPxqxxKtiMvcvTVdXCw9Qk3CHM4kzzZ5kiRrKc9lKp1qjoHoXOzlfLPm7iJ
- O8AuwEq5NdougQGMZRZo+PWpeJmxpt3FofK6+lTHRhFkho447hmd/WnDJ5uTsnLZtx5+
- wF5Q==
-X-Gm-Message-State: AOJu0YyEjtcVxH21Xh67fxItuq9TLE5swX5cVPBLJG4g0vTwtllGG8Bb
- 9B8E3t+qMPjKRhHlbxfi3nQsTHASZPq7FUQ7yRwVr2ZEhgLdAEh4rtA8qK7O+qc=
-X-Google-Smtp-Source: AGHT+IGR33VImbL4PW8UFMoeRUsRS6etgUcV6SIP2VnR0NI02jW2qisdew9YmFsQWaZlMgAbWWoIaQ==
-X-Received: by 2002:ac2:5df0:0:b0:510:c63:8f38 with SMTP id
- z16-20020ac25df0000000b005100c638f38mr930305lfq.119.1706099864703; 
- Wed, 24 Jan 2024 04:37:44 -0800 (PST)
-Received: from [192.168.69.100] (lgp44-h02-176-184-8-67.dsl.sta.abo.bbox.fr.
- [176.184.8.67]) by smtp.gmail.com with ESMTPSA id
- q9-20020aa7cc09000000b00558a3e892b3sm16257147edt.41.2024.01.24.04.37.43
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 24 Jan 2024 04:37:44 -0800 (PST)
-Message-ID: <ac17cdc2-b34b-47f9-bf5e-545e4aa4a1ca@linaro.org>
-Date: Wed, 24 Jan 2024 13:37:41 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv/cpu.h: mcountinhibit, mcounteren and
- scounteren always 32-bit
-Content-Language: en-US
-To: Vadim Shakirov <vadim.shakirov@syntacore.com>,
- "open list:All patches CC here" <qemu-devel@nongnu.org>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1rScnV-00032J-UF; Wed, 24 Jan 2024 07:56:05 -0500
+Received: from sin.source.kernel.org ([145.40.73.55])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1rScnT-00018J-O8; Wed, 24 Jan 2024 07:56:05 -0500
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 5E56ACE30FF;
+ Wed, 24 Jan 2024 12:55:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 41E90C43390;
+ Wed, 24 Jan 2024 12:55:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1706100957;
+ bh=ry0lR4qMXsSwWVpsn6ghkeTk9xoq40DbZT3PJKglEhE=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=H9M2V3BYLs1uIEBoVC6fwCFW2ipVCtRwNyfgIM18atHcjq2kJqbpQhqjy8eUX3V3v
+ yEVjYMDidMnXjd5NYFN5g2nkgxxstDNZAn8vQre3tryNUOSQsZKboH8fmN9sCg7qZp
+ CwdA3YVIm/4KVXK4aeWG2uvS9bcENIRD6Y53/ka7lPkHIZAfFAWpuPSHh3NUtjPpSk
+ SnVZS4/ba25kMyToCbeB65epZtUsKTgzDaC3Yhqnoz05i1zvwq41YgQjzMN6U/AE0b
+ 80eHqpIZ2RpeQaT3Xq+bBpGOpYDC6RzCM/asuI5GldWNcyKR3EBkXoeB4A9soWwWdI
+ xx71aPIOr394Q==
+From: Conor Dooley <conor@kernel.org>
+To: qemu-riscv@nongnu.org
+Cc: conor@kernel.org, Conor Dooley <conor.dooley@microchip.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
-References: <20240124120658.695350-1-vadim.shakirov@syntacore.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20240124120658.695350-1-vadim.shakirov@syntacore.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::136;
- envelope-from=philmd@linaro.org; helo=mail-lf1-x136.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ Andrew Jones <ajones@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
+Subject: [PATCH v4 1/2] target/riscv: use misa_mxl_max to populate isa string
+ rather than TARGET_LONG_BITS
+Date: Wed, 24 Jan 2024 12:55:49 +0000
+Message-ID: <20240124-swear-monthly-56c281f809a6@spud>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240124-squatting-getup-a16a8499ad73@spud>
+References: <20240124-squatting-getup-a16a8499ad73@spud>
+MIME-Version: 1.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2734;
+ i=conor.dooley@microchip.com; h=from:subject:message-id;
+ bh=QS/0f+ukaw2mCU94HDKZEschftslg3jvKGDRD/+PYLQ=;
+ b=owGbwMvMwCFWscWwfUFT0iXG02pJDKkbOa4kfX97aX2j4dx+47enbhgq7G+cmL1E/KqxoRnPh
+ 1Sus5wbOkpZGMQ4GGTFFFkSb/e1SK3/47LDuectzBxWJpAhDFycAjCRe28YGaYqvXbfYn5i5e7M
+ c4LCSqnmG8rW/D2Umdj9Ys+0uc8Vp0Qx/PcvnRO5QPTKXKaY5j7l1vkiZzbN6nuisaRGr33qnEy
+ PGF4A
+X-Developer-Key: i=conor.dooley@microchip.com; a=openpgp;
+ fpr=F9ECA03CF54F12CD01F1655722E2C55B37CF380C
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=145.40.73.55; envelope-from=conor@kernel.org;
+ helo=sin.source.kernel.org
+X-Spam_score_int: -58
+X-Spam_score: -5.9
+X-Spam_bar: -----
+X-Spam_report: (-5.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.5,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,55 +84,77 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Vadim,
+From: Conor Dooley <conor.dooley@microchip.com>
 
-On 24/1/24 13:06, Vadim Shakirov wrote:
-> mcountinhibit, mcounteren and scounteren must always be 32-bit by
-> privileged spec
-> 
-> Signed-off-by: Vadim Shakirov <vadim.shakirov@syntacore.com>
-> ---
->   target/riscv/cpu.h     | 6 +++---
->   target/riscv/machine.c | 6 +++---
->   2 files changed, 6 insertions(+), 6 deletions(-)
-> 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 5b0824ef8f..3cf059199c 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -317,10 +317,10 @@ struct CPUArchState {
->        */
->       bool two_stage_indirect_lookup;
->   
-> -    target_ulong scounteren;
-> -    target_ulong mcounteren;
-> +    uint32_t scounteren;
-> +    uint32_t mcounteren;
->   
-> -    target_ulong mcountinhibit;
-> +    uint32_t mcountinhibit;
->   
->       /* PMU counter state */
->       PMUCTRState pmu_ctrs[RV_MAX_MHPMCOUNTERS];
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index fdde243e04..daab121799 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -398,9 +398,9 @@ const VMStateDescription vmstate_riscv_cpu = {
->           VMSTATE_UINTTL(env.mtval, RISCVCPU),
->           VMSTATE_UINTTL(env.miselect, RISCVCPU),
->           VMSTATE_UINTTL(env.siselect, RISCVCPU),
-> -        VMSTATE_UINTTL(env.scounteren, RISCVCPU),
-> -        VMSTATE_UINTTL(env.mcounteren, RISCVCPU),
-> -        VMSTATE_UINTTL(env.mcountinhibit, RISCVCPU),
-> +        VMSTATE_UINT32(env.scounteren, RISCVCPU),
-> +        VMSTATE_UINT32(env.mcounteren, RISCVCPU),
-> +        VMSTATE_UINT32(env.mcountinhibit, RISCVCPU),
+A cpu may not have the same xlen as the compile time target, and
+misa_mxl_max is the source of truth for what the hart supports.
 
-When changing a migrated field size, you need to bump the version_id,
-see https://www.qemu.org/docs/master/devel/migration/main.html#versions.
+The conversion from misa_mxl_max to xlen already has one user, so
+introduce a helper and use that to populate the isa string.
 
-Regards,
+Link: https://lore.kernel.org/qemu-riscv/20240108-efa3f83dcd3997dc0af458d7@orel/
+Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+---
+I dropped the tags since I added the helper
+---
+ target/riscv/cpu.c     | 9 ++++++++-
+ target/riscv/cpu.h     | 1 +
+ target/riscv/gdbstub.c | 2 +-
+ 3 files changed, 10 insertions(+), 2 deletions(-)
 
-Phil.
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index ad1df2318b..4aa4b2e988 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -307,6 +307,11 @@ void riscv_cpu_set_misa(CPURISCVState *env, RISCVMXL mxl, uint32_t ext)
+     env->misa_ext_mask = env->misa_ext = ext;
+ }
+ 
++int riscv_cpu_max_xlen(CPURISCVState env)
++{
++    return 16 << env.misa_mxl_max;
++}
++
+ #ifndef CONFIG_USER_ONLY
+ static uint8_t satp_mode_from_str(const char *satp_mode_str)
+ {
+@@ -2332,7 +2337,9 @@ char *riscv_isa_string(RISCVCPU *cpu)
+     int i;
+     const size_t maxlen = sizeof("rv128") + sizeof(riscv_single_letter_exts);
+     char *isa_str = g_new(char, maxlen);
+-    char *p = isa_str + snprintf(isa_str, maxlen, "rv%d", TARGET_LONG_BITS);
++    int xlen = riscv_cpu_max_xlen(cpu->env);
++    char *p = isa_str + snprintf(isa_str, maxlen, "rv%d", xlen);
++
+     for (i = 0; i < sizeof(riscv_single_letter_exts) - 1; i++) {
+         if (cpu->env.misa_ext & RV(riscv_single_letter_exts[i])) {
+             *p++ = qemu_tolower(riscv_single_letter_exts[i]);
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 05e83c4ac9..aacc031397 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -511,6 +511,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+                         MMUAccessType access_type, int mmu_idx,
+                         bool probe, uintptr_t retaddr);
+ char *riscv_isa_string(RISCVCPU *cpu);
++int riscv_cpu_max_xlen(CPURISCVState env);
+ bool riscv_cpu_option_set(const char *optname);
+ 
+ #define cpu_mmu_index riscv_cpu_mmu_index
+diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+index 58b3ace0fe..f15980fdcf 100644
+--- a/target/riscv/gdbstub.c
++++ b/target/riscv/gdbstub.c
+@@ -218,7 +218,7 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
+     CPURISCVState *env = &cpu->env;
+     GString *s = g_string_new(NULL);
+     riscv_csr_predicate_fn predicate;
+-    int bitsize = 16 << env->misa_mxl_max;
++    int bitsize = riscv_cpu_max_xlen(*env);
+     int i;
+ 
+ #if !defined(CONFIG_USER_ONLY)
+-- 
+2.43.0
+
 
