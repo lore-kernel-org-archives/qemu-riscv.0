@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1869C47422
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Jan 2024 16:58:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A273C47258
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Jan 2024 19:53:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rT32E-0007WJ-MN; Thu, 25 Jan 2024 11:57:02 -0500
+	id 1rT5n3-0004b7-Ig; Thu, 25 Jan 2024 14:53:33 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rT32C-0007Um-JO
- for qemu-riscv@nongnu.org; Thu, 25 Jan 2024 11:57:00 -0500
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rT5n1-0004ad-N3
+ for qemu-riscv@nongnu.org; Thu, 25 Jan 2024 14:53:31 -0500
+Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rT329-00017e-Ov
- for qemu-riscv@nongnu.org; Thu, 25 Jan 2024 11:57:00 -0500
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-40e800461baso82716415e9.3
- for <qemu-riscv@nongnu.org>; Thu, 25 Jan 2024 08:56:57 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rT5n0-00017i-6q
+ for qemu-riscv@nongnu.org; Thu, 25 Jan 2024 14:53:31 -0500
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-2901ceb0d33so860067a91.1
+ for <qemu-riscv@nongnu.org>; Thu, 25 Jan 2024 11:53:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706201816; x=1706806616; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1706212409; x=1706817209; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tu0Wmz1gyaDFvvITpysE/w6FwQ0wlgaZK51MD3LFw0E=;
- b=b1sRax/GvB438lPXezIU42qinJF4oEXHnkbT25JikElIKa4NfBd91r7JSgB0NBNTgh
- FTgC7h02zgRWJQwEr3e7JrXfZ4uxOtP8mb3uzvjee/vAIuKbQMiUapQEtvYL7jW8y6zf
- +H1JSfWq9VwzCwesdnlofcqJXTRt/yHUUfnGEird/X0L7NQRfau+W/kUzQh8dRcsbZjZ
- cmOXSrDe4eUYycSFdGUaReFYTMzpNWWccNatneLKDJKsOye58l2DWjcpvotgmdTPdaTn
- NlKa9Ppi801MEZFhbavJ7wZgJTSi58J4kZQGcFZr8gIVm6dAmjByeuWRR1s9O0Pa51lQ
- RMVg==
+ bh=C/oyfu8F9JrvZRYOrB3TV7TzLXN+nQeozYC9MMIMKt4=;
+ b=muTUxIjIyHToMoqPH5H+zN9d73rGRz4RPCJ/I7frxYwy97Fgp/gX1tA8lKonIXw/Uq
+ 0ATil8GUand02aumrGhgVqYr8Mt8CoEuGWWLlWnGk74N95DqTr0B5phnduQ/Ib2Kl6jI
+ 25vqMMeE0JXLetr3Z4oSSrz9RScxu/ocR/qMiUZOP1j1L28qDv5kpxW3ENGaNfWiYfUV
+ xr2gLU1JbBFeIn0uVLsw1tMjygfNJ7ZKrifC95IYqCfGV55e+RoqVASp3p6J+PdifqkB
+ dRXmNapU8WxgWZF4hDitgKTbPZf/FnzhEgdFtoSow5Qr00Fx+N2GS+MJGuJx51PzTHOH
+ 2R+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706201816; x=1706806616;
+ d=1e100.net; s=20230601; t=1706212409; x=1706817209;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tu0Wmz1gyaDFvvITpysE/w6FwQ0wlgaZK51MD3LFw0E=;
- b=EqqDMCBxfDLQvPfrYuXTww9FjIG5kw978G8WPjMKCrGA6rySXdBG5j4ammUUr6VZyy
- wOIulGz2XilYfLJGVuYaxECLDtr9BtStENHg5SDZiPOiyZ4i+0dmEb7hiV62ekkHljjj
- wRT4dGGQ9NFwHinYwWRZxDs/4JHnhFiizBX+gdOjmazOpybn5WkplLFS/hEGElI4Mrsq
- DZxpCGgi7Ta7sgf00sLFGsiV4kc1yi/IEw+O/nmsl1eiJi51Y3xWBoyd5POKsjnGEeSY
- 8PvEgxI7CBsCJOYKzIvhFsldeYheDRrQaAe57E2ga8yMVIJVsxifukAEXZnVEC3yblon
- 49Sg==
-X-Gm-Message-State: AOJu0YxvHe7a29GWJr2cSJTISv/I/I3fAcH6hiPBeKJlYPR0RvR4coR2
- gsAhkjuJ1GKZk8f89bW2CIq/aFjo94nje/ZMGLWw0kmKj5UETqMZlPw6+lrEm3I=
-X-Google-Smtp-Source: AGHT+IFwNKe9QDuVNpO7uXV8lT04MZQIjsOE3Rmx5GNIrppU4ZWDIdctSfNNo6qnEUQJir3wKf1H5Q==
-X-Received: by 2002:a05:600c:b52:b0:40e:cca8:dd32 with SMTP id
- k18-20020a05600c0b5200b0040ecca8dd32mr7264wmr.364.1706201816314; 
- Thu, 25 Jan 2024 08:56:56 -0800 (PST)
-Received: from m1x-phil.lan (lec62-h02-176-184-19-125.dsl.sta.abo.bbox.fr.
- [176.184.19.125]) by smtp.gmail.com with ESMTPSA id
- j11-20020a05600c190b00b0040e53f24ceasm3223034wmq.16.2024.01.25.08.56.55
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 25 Jan 2024 08:56:56 -0800 (PST)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+ bh=C/oyfu8F9JrvZRYOrB3TV7TzLXN+nQeozYC9MMIMKt4=;
+ b=tUJickch82VQ8kug/5APNypRAv9CAX6eiYL7U7QDKc4U0uc0W1iN4A73ISitqUnXmA
+ +MNrzHXy+WcfJuImst/F1WiA+24kJ/AYhJI/BBvuBmOl/b/6DVE2a68jpDeUCOuyM1PH
+ TuSyNCmPzZbwdFnh1hXgqTFAUTBl26UoLcR1ejjN91Pd2V94I+J+/EY4slcKpUVThD0K
+ umEmpQ2mgjeJZeakFW57KTbJShb3Ud7rOjcM+alNR9bmBiQ/MteB1cvqYMC/TNgmDas2
+ p4DUIc7jq2a9+c13vTnkLKNVE4amHPQmi6YBhA8zofsyD1tqxu37uoiBqH75eqd7DgHR
+ g8hw==
+X-Gm-Message-State: AOJu0Yxn9UsI/m5AmavCOfhg+syfq4KnrKZyQViaY9qG3/XUbKN7pmgg
+ aGx2ZD3WChTCGyxWhjK7Qg2zKfCAFcugGO6Bi+DXrCIS20ZZ+T6s7rcD/jZBIH4=
+X-Google-Smtp-Source: AGHT+IF5d+a2aej83/NQuV1JReLHg5rFAIKC9IRPwRlVTqtA73VDKA9JHyN6xVNzzmb2+6B9RkdckA==
+X-Received: by 2002:a17:90b:390e:b0:293:9966:6b1a with SMTP id
+ ob14-20020a17090b390e00b0029399666b1amr73360pjb.39.1706212408793; 
+ Thu, 25 Jan 2024 11:53:28 -0800 (PST)
+Received: from grind.. ([2804:7f0:bdcd:fb00:6501:2693:db52:c621])
+ by smtp.gmail.com with ESMTPSA id
+ r7-20020a17090ad40700b0028b6759d8c1sm1958613pju.29.2024.01.25.11.53.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 25 Jan 2024 11:53:28 -0800 (PST)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
- Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
- Richard Henderson <richard.henderson@linaro.org>, qemu-s390x@nongnu.org,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 1/2] scripts/coccinelle: Add cpu_env.cocci_template script
-Date: Thu, 25 Jan 2024 17:56:45 +0100
-Message-ID: <20240125165648.49898-2-philmd@linaro.org>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20240125165648.49898-1-philmd@linaro.org>
-References: <20240125165648.49898-1-philmd@linaro.org>
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ ajones@ventanamicro.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH 1/6] target/riscv/tcg: set 'mmu' with 'satp' in
+ cpu_set_profile()
+Date: Thu, 25 Jan 2024 16:53:14 -0300
+Message-ID: <20240125195319.329181-2-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240125195319.329181-1-dbarboza@ventanamicro.com>
+References: <20240125195319.329181-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x330.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x102c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,101 +97,31 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add a Coccinelle script to convert the following slow path
-(due to the QOM cast macro):
+Recent changes in options handling removed the 'mmu' default the bare
+CPUs had, meaning that we must enable 'mmu' by hand when using the
+rva22s64 profile CPU.
 
-  &ARCH_CPU(..)->env
+Given that this profile is setting a satp mode, it already implies that
+we need a 'mmu'. Enable the 'mmu' in this case.
 
-to the following fast path:
-
-  cpu_env(..)
-
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- MAINTAINERS                               |  1 +
- scripts/coccinelle/cpu_env.cocci_template | 60 +++++++++++++++++++++++
- 2 files changed, 61 insertions(+)
- create mode 100644 scripts/coccinelle/cpu_env.cocci_template
+ target/riscv/tcg/tcg-cpu.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index dfaca8323e..1d57130ff8 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -157,6 +157,7 @@ F: accel/tcg/
- F: accel/stubs/tcg-stub.c
- F: util/cacheinfo.c
- F: util/cacheflush.c
-+F: scripts/coccinelle/cpu_env.cocci_template
- F: scripts/decodetree.py
- F: docs/devel/decodetree.rst
- F: docs/devel/tcg*
-diff --git a/scripts/coccinelle/cpu_env.cocci_template b/scripts/coccinelle/cpu_env.cocci_template
-new file mode 100644
-index 0000000000..53aa3a1fea
---- /dev/null
-+++ b/scripts/coccinelle/cpu_env.cocci_template
-@@ -0,0 +1,60 @@
-+/*
-+
-+ Convert &ARCH_CPU(..)->env to use cpu_env(..).
-+
-+ Rationale: ARCH_CPU() might be slow, being a QOM cast macro.
-+            cpu_env() is its fast equivalent.
-+
-+ SPDX-License-Identifier: GPL-2.0-or-later
-+ SPDX-FileCopyrightText: Linaro Ltd 2024
-+ SPDX-FileContributor: Philippe Mathieu-Daudé
-+
-+ Usage as of v8.2.0:
-+
-+ $ for targetdir in target/*; do test -d $targetdir || continue; \
-+       export target=${targetdir:7}; \
-+       sed \
-+           -e "s/__CPUArchState__/$( \
-+               git grep -h --no-line-number '@env: #CPU.*State' \
-+                   target/$target/cpu.h \
-+               | sed -n -e 's/.*\(CPU.*State\).\?/\1/p')/g" \
-+           -e "s/__ARCHCPU__/$( \
-+               git grep -h --no-line-number OBJECT_DECLARE_CPU_TYPE.*CPU \
-+                   target/$target/cpu-qom.h \
-+               | sed -n -e 's/.*(\(.*\), .*, .*)/\1/p')/g" \
-+           -e "s/__ARCH_CPU__/$( \
-+               git grep -h --no-line-number OBJECT_DECLARE_CPU_TYPE.*CPU \
-+                   target/$target/cpu-qom.h \
-+               | sed -n -e 's/.*(.*, .*, \(.*\))/\1/p')/g" \
-+       < scripts/coccinelle/cpu_env.cocci_template \
-+       > $TMPDIR/cpu_env_$target.cocci; \
-+       for dir in hw target/$target; do \
-+           spatch --macro-file scripts/cocci-macro-file.h \
-+                  --sp-file $TMPDIR/cpu_env_$target.cocci \
-+                  --keep-comments \
-+                  --dir $dir \
-+                  --in-place; \
-+       done; \
-+   done
-+
-+*/
-+
-+@ CPUState_arg_used @
-+CPUState *cs;
-+identifier cpu;
-+identifier env;
-+@@
-+-   __ARCHCPU__ *cpu = __ARCH_CPU__(cs);
-+-   __CPUArchState__ *env = &cpu->env;
-++   __CPUArchState__ *env = cpu_env(cs);
-+    ... when != cpu
-+
-+@ depends on never CPUState_arg_used @
-+identifier obj;
-+identifier cpu;
-+identifier env;
-+@@
-+-   __ARCHCPU__ *cpu = __ARCH_CPU__(obj);
-+-   __CPUArchState__ *env = &cpu->env;
-++   __CPUArchState__ *env = cpu_env(CPU(obj));
-+    ... when != cpu
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index da437975b4..88f92d1c7d 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -1107,6 +1107,7 @@ static void cpu_set_profile(Object *obj, Visitor *v, const char *name,
+ 
+ #ifndef CONFIG_USER_ONLY
+     if (profile->satp_mode != RISCV_PROFILE_ATTR_UNUSED) {
++        object_property_set_bool(obj, "mmu", true, NULL);
+         const char *satp_prop = satp_mode_str(profile->satp_mode,
+                                               riscv_cpu_is_32bit(cpu));
+         object_property_set_bool(obj, satp_prop, profile->enabled, NULL);
 -- 
-2.41.0
+2.43.0
 
 
