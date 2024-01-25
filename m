@@ -4,118 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B5C3C48260
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Jan 2024 11:42:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4164C47422
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Jan 2024 16:57:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rSy7H-0001dL-7z; Thu, 25 Jan 2024 06:41:56 -0500
+	id 1rT327-0007QZ-W3; Thu, 25 Jan 2024 11:56:56 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rSy7A-0001cD-7Z
- for qemu-riscv@nongnu.org; Thu, 25 Jan 2024 06:41:48 -0500
-Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rT326-0007LW-Go
+ for qemu-riscv@nongnu.org; Thu, 25 Jan 2024 11:56:54 -0500
+Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rSy77-0007lK-0F
- for qemu-riscv@nongnu.org; Thu, 25 Jan 2024 06:41:47 -0500
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-55c1ac8d2f2so5753351a12.2
- for <qemu-riscv@nongnu.org>; Thu, 25 Jan 2024 03:41:44 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rT324-000167-Bl
+ for qemu-riscv@nongnu.org; Thu, 25 Jan 2024 11:56:54 -0500
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-40e5afc18f5so74864785e9.3
+ for <qemu-riscv@nongnu.org>; Thu, 25 Jan 2024 08:56:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1706182902; x=1706787702; darn=nongnu.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=tlIg1ioriM7mX8+RYlQYJvoj00rwt6syn72TbvjwLGc=;
- b=mYahnpmF/Ofox04HiDh9fjbm7QexyEDErBbwnrESGZdSPvDbvRvV12T+FlkVJQwEEx
- KP1cCMtJmNxY/ad+lD/jJq4X+Z0TayVuBzogQcBxuOXa+gnRfXyTQugaub4wARgOV1ip
- zilJARHO9aquwXPcMarm6TKXg3v3oMqWjmoIXNcwE/ApSADR6c5WJnbQko2COwsITRzi
- vcWK3jX1KqU8crD1bo+vKTZRTmGXuYrfjQbI5nFTzZfh5PAdp/ZyedOXXrqijCcRugw3
- V87OFyzHTF3TX+OfVnoi+WswMnM1IzyhgPEuztJjo7RvHjS4IT/bWHMfRC0+iFGHSFpm
- k5og==
+ d=linaro.org; s=google; t=1706201811; x=1706806611; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZeCoqulJucVMeGZeJh3AVKZGYWy92cXRHx62XhZNVWU=;
+ b=wVCcmnAOwfWfXH6eBwAsUiotEO/EGIr9e2A0WY/Nm1f9BTmd+PG7o9yG/8wKQd1Y1J
+ fEqC7JUb5ULN//ZT6wxz1OOMU/KiSvqvpI2b02FVDR4Ku18CQUaVrtdbsD9aV4A9r+zR
+ qpEiwKkU8lmxmPAM7mgW33A6a/1Avxt0vRDv5tEAcsGtio9nMjAPe8/OTsXoUjQ/HeSV
+ Ay+czTYPBe1V2Lgh7Pjhf7P8t2htmzPiV9Kd+/A0eKC0qJ3dvgDb0phSV/juIExy0Dqh
+ WUsf62uBGCIeNrLEGFahEieR519Jj013lHOXV0XH/kn48MhzrLiNvW8svwujgx5TV32K
+ +klA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706182902; x=1706787702;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=tlIg1ioriM7mX8+RYlQYJvoj00rwt6syn72TbvjwLGc=;
- b=UG/fvrqZoYkAlUogTUioLZiAcajBCBHIGHAedJa1Q6sH0KeY5MZjKyuZgaoh3F/DBr
- bwXto3aI64HNXc+7uor2MFZlBIeA2LAvpCcJbwj3Gx4QLLRAF5ZvMX2gp20usR3EySci
- sJUuyTS2z5SPgIyYDivm8wOas3AQ22J35dFwc9VNG2KCsl1fJBH/pWMGdvmYfTtpbxOT
- bFsxYGBznnPallQBwhXnIFJs4zlaGXVaKlx7MH3q8kBRtELjBTCDstZfFs1/EOe+8eRL
- da8WjkwGrtumFfK0kgoGChvlnVt46/3q6UOaOZ5pRbmRN50S1oG/alc9nsjrUg5r6uT+
- U3PQ==
-X-Gm-Message-State: AOJu0Yw7xQVW6+NmKn7fSo7xi0lAtcABM8Mjuko/QTi/GWi+Ee1tkjsv
- CVHQog5TfQSK0dCmI1zQae0Nn4wtNtahCessGIkVKvpRI2iq+JEBR0cCVG+AGLE=
-X-Google-Smtp-Source: AGHT+IFkyRmD2hzS1gOnNZnLdv8EIZ8KrezT8Nj5/WaffSq6c11w7MGu1/Ch650W9qnJD8fVmx2Rqg==
-X-Received: by 2002:a17:906:dd0:b0:a30:ad90:22a with SMTP id
- p16-20020a1709060dd000b00a30ad90022amr536503eji.94.1706182902334; 
- Thu, 25 Jan 2024 03:41:42 -0800 (PST)
-Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
- by smtp.gmail.com with ESMTPSA id
- ep21-20020a1709069b5500b00a2ae7fb3fc6sm956224ejc.93.2024.01.25.03.41.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jan 2024 03:41:41 -0800 (PST)
-Date: Thu, 25 Jan 2024 12:41:41 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Akihiko Odaki <akihiko.odaki@daynix.com>
-Cc: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>, 
- qemu-devel@nongnu.org, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>, 
- Michael Rolnik <mrolnik@gmail.com>,
- =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>, 
- Laurent Vivier <lvivier@redhat.com>, kvm@vger.kernel.org,
- Yoshinori Sato <ysato@users.sourceforge.jp>, 
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Laurent Vivier <laurent@vivier.eu>, 
- Yanan Wang <wangyanan55@huawei.com>, qemu-ppc@nongnu.org,
- Weiwei Li <liwei1518@gmail.com>, 
- qemu-s390x@nongnu.org, =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@kaod.org>, 
- Peter Maydell <peter.maydell@linaro.org>, Alexandre Iooss <erdnaxe@crans.org>, 
- John Snow <jsnow@redhat.com>, Mahmoud Mandour <ma.mandourr@gmail.com>, 
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Ilya Leoshkevich <iii@linux.ibm.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- David Woodhouse <dwmw2@infradead.org>, Cleber Rosa <crosa@redhat.com>,
- Beraldo Leal <bleal@redhat.com>, 
- Bin Meng <bin.meng@windriver.com>, Nicholas Piggin <npiggin@gmail.com>, 
- Aurelien Jarno <aurelien@aurel32.net>,
- Daniel Henrique Barboza <danielhb413@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Thomas Huth <thuth@redhat.com>, 
- David Hildenbrand <david@redhat.com>, qemu-riscv@nongnu.org,
- qemu-arm@nongnu.org, 
- Paolo Bonzini <pbonzini@redhat.com>, Song Gao <gaosong@loongson.cn>, 
- Eduardo Habkost <eduardo@habkost.net>, Brian Cain <bcain@quicinc.com>,
- Paul Durrant <paul@xen.org>
-Subject: Re: Re: [PATCH v3 01/21] hw/riscv: Use misa_mxl instead of
- misa_mxl_max
-Message-ID: <20240125-61a7ba58367f81afbe444a50@orel>
-References: <20240122145610.413836-1-alex.bennee@linaro.org>
- <20240122145610.413836-2-alex.bennee@linaro.org>
- <20240123-b8d1c55688885bfc9125c42b@orel>
- <15d2f958-a51e-4b87-9a70-28edf3b55491@daynix.com>
- <20240124-3d9bec68bff7ab0057b902b6@orel>
- <246ea370-934e-4666-ba73-b49c3ff6e531@daynix.com>
+ d=1e100.net; s=20230601; t=1706201811; x=1706806611;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZeCoqulJucVMeGZeJh3AVKZGYWy92cXRHx62XhZNVWU=;
+ b=vxIrTjFgUaKF0e6X8ms0vm39B8SNDnk1q+/XxrW+S5/uJAcPre4ocNasgpxZOlGUWb
+ LZghmWIPTeZ+KnawdjBtV5filla7k0aYxQKVn6uvq3zp6TJZ9wY1wetH4kNPsI4YqJqh
+ rrmpxGRbHjNXpBGxTIj+f6+1xAaJyF8zJP8dWILzvmvimUq9yOXqcmA99afpouX8jbl8
+ bhM47EZFn3e6ctcOPTVxfXFeU5Dqb72mDxWuyoZu2GC7uECkp/Gr7rcCsKBHBoYGNM6s
+ kw3Pz3rg0q0/vIUxLhs96OOr18Oyd6ziCCkXvy9b3gaip2rLzv959CMKgGovbXclZKIZ
+ DR/w==
+X-Gm-Message-State: AOJu0YyX7awVVoegX8mPIfBb9sOZpE0HMxwDSumGlQsL4cTvg5El1e+H
+ ljdvRdYLCdUqz+HW9aGHSlb1VcZUHp4dcHAtRBbx3Uzmtd8Bl0P2UTaRQqMRep4=
+X-Google-Smtp-Source: AGHT+IEs9JI5+dzE9sbGKyzM77EHCGgsKATVpuajnSB9J1jLbapjWSUtUh1PXEKFy8Ig0oTSYejbew==
+X-Received: by 2002:a05:600c:214d:b0:40e:94f9:229e with SMTP id
+ v13-20020a05600c214d00b0040e94f9229emr23954wml.68.1706201810691; 
+ Thu, 25 Jan 2024 08:56:50 -0800 (PST)
+Received: from m1x-phil.lan (lec62-h02-176-184-19-125.dsl.sta.abo.bbox.fr.
+ [176.184.19.125]) by smtp.gmail.com with ESMTPSA id
+ v17-20020a05600c471100b0040ec7fcaea6sm3174210wmo.37.2024.01.25.08.56.49
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Thu, 25 Jan 2024 08:56:50 -0800 (PST)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
+ Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
+ Richard Henderson <richard.henderson@linaro.org>, qemu-s390x@nongnu.org,
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 0/2] hw,
+ target: Prefer fast cpu_env() over slower CPU QOM cast macro
+Date: Thu, 25 Jan 2024 17:56:44 +0100
+Message-ID: <20240125165648.49898-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <246ea370-934e-4666-ba73-b49c3ff6e531@daynix.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
- envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x52f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x334.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -131,122 +95,133 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jan 25, 2024 at 05:23:20PM +0900, Akihiko Odaki wrote:
-> On 2024/01/24 17:16, Andrew Jones wrote:
-> > On Wed, Jan 24, 2024 at 12:08:33PM +0900, Akihiko Odaki wrote:
-> > > On 2024/01/23 17:20, Andrew Jones wrote:
-> > > > On Mon, Jan 22, 2024 at 02:55:50PM +0000, Alex Bennée wrote:
-> > > > > From: Akihiko Odaki <akihiko.odaki@daynix.com>
-> > > > > 
-> > > > > The effective MXL value matters when booting.
-> > > > 
-> > > > I'd prefer this commit message get some elaboration. riscv_is_32bit()
-> > > > is used in a variety of contexts, some where it should be reporting
-> > > > the max misa.mxl. However, when used for booting an S-mode kernel it
-> > > > should indeed report the effective mxl. I think we're fine with the
-> > > > change, though, because at init and on reset the effective mxl is set
-> > > > to the max mxl, so, in those contexts, where riscv_is_32bit() should
-> > > > be reporting the max, it does.
-> > > > 
-> > > > > 
-> > > > > Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-> > > > > Message-Id: <20240103173349.398526-23-alex.bennee@linaro.org>
-> > > > > Message-Id: <20231213-riscv-v7-1-a760156a337f@daynix.com>
-> > > > > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-> > > > > ---
-> > > > >    hw/riscv/boot.c | 2 +-
-> > > > >    1 file changed, 1 insertion(+), 1 deletion(-)
-> > > > > 
-> > > > > diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> > > > > index 0ffca05189f..bc67c0bd189 100644
-> > > > > --- a/hw/riscv/boot.c
-> > > > > +++ b/hw/riscv/boot.c
-> > > > > @@ -36,7 +36,7 @@
-> > > > >    bool riscv_is_32bit(RISCVHartArrayState *harts)
-> > > > >    {
-> > > > > -    return harts->harts[0].env.misa_mxl_max == MXL_RV32;
-> > > > > +    return harts->harts[0].env.misa_mxl == MXL_RV32;
-> > > > >    }
-> > > > 
-> > > > Assuming everyone agrees with what I've written above, then maybe we
-> > > > should write something similar in a comment above this function.
-> > > > 
-> > > > Thanks,
-> > > > drew
-> > > 
-> > > The corresponding commit in my series has a more elaborated message:
-> > > https://patchew.org/QEMU/20240115-riscv-v9-0-ff171e1aedc8@daynix.com/20240115-riscv-v9-1-ff171e1aedc8@daynix.com/
-> > 
-> > I've pulled the message from that link and quoted it below
-> > 
-> > > A later commit requires one extra step to retrieve misa_mxl_max. As
-> > > misa_mxl is semantically more correct and does not need such a extra
-> > > step, refer to misa_mxl instead. Below is the explanation why misa_mxl
-> > > is more semantically correct to refer to than misa_mxl_max in this case.
-> > > 
-> > > Currently misa_mxl always equals to misa_mxl_max so it does not matter
-> > 
-> > That's true, but I think that's due to a bug in write_misa(), which
-> > shouldn't be masking val with the extension mask until mxl has been
-> > extracted.
-> 
-> misa.MXL writes are not supported since the MISA write code was introduced
-> with commit f18637cd611c ("RISC-V: Add misa runtime write support"). It
-> doesn't matter if we allow the guest to write MXL; the firmware code is
-> emulated by QEMU when QEMU loads a kernel.
+Use cpu_env() -- which is fast path -- when possible.
+Bulk conversion using Coccinelle spatch (script included).
 
-Of course it matters. mxl will only change if we allow the guest to write
-it. Being aware of when/why mxl changes, i.e. is no longer equal to the
-max mxl, is the whole point of this patch.
+Philippe Mathieu-DaudÃ© (2):
+  scripts/coccinelle: Add cpu_env.cocci_template script
+  bulk: Prefer fast cpu_env() over slower CPU QOM cast macro
 
-> 
-> > 
-> > > which of misa_mxl or misa_mxl_max to refer to. However, it is possible
-> > > to have different values for misa_mxl and misa_mxl_max if QEMU gains a
-> > > new feature to load a RV32 kernel on a RV64 system, for example. For
-> > > such a behavior, the real system will need the firmware to switch MXL to
-> > > RV32, and if QEMU implements the same behavior, mxl will represent the
-> > > MXL that corresponds to the kernel being loaded. Therefore, it is more
-> > > appropriate to refer to mxl instead of misa_mxl_max when
-> > > misa_mxl != misa_mxl_max.
-> > 
-> > Right, but that doesn't say anything more than the original one line,
-> > "The effective MXL value matters when booting."
-> 
-> What do you think is missing?
+ MAINTAINERS                               |  1 +
+ target/i386/hvf/vmx.h                     |  9 ++--
+ hw/i386/vmmouse.c                         |  6 +--
+ hw/i386/xen/xen-hvm.c                     |  3 +-
+ hw/intc/arm_gicv3_cpuif_common.c          |  3 +-
+ hw/ppc/mpc8544_guts.c                     |  3 +-
+ hw/ppc/pnv.c                              |  3 +-
+ hw/ppc/pnv_xscom.c                        |  3 +-
+ hw/ppc/ppce500_spin.c                     |  3 +-
+ hw/ppc/spapr.c                            |  3 +-
+ hw/ppc/spapr_caps.c                       |  6 +--
+ target/alpha/cpu.c                        | 21 +++-----
+ target/alpha/gdbstub.c                    |  6 +--
+ target/alpha/helper.c                     | 12 ++---
+ target/alpha/mem_helper.c                 |  9 ++--
+ target/arm/cpu.c                          | 15 ++----
+ target/arm/debug_helper.c                 |  6 +--
+ target/arm/gdbstub.c                      |  6 +--
+ target/arm/gdbstub64.c                    |  6 +--
+ target/arm/helper.c                       |  9 ++--
+ target/arm/hvf/hvf.c                      | 12 ++---
+ target/arm/kvm.c                          |  3 +-
+ target/arm/ptw.c                          |  3 +-
+ target/arm/tcg/cpu32.c                    |  3 +-
+ target/avr/cpu.c                          | 21 +++-----
+ target/avr/gdbstub.c                      |  6 +--
+ target/avr/helper.c                       |  9 ++--
+ target/cris/cpu.c                         |  3 +-
+ target/cris/gdbstub.c                     |  9 ++--
+ target/cris/helper.c                      | 12 ++---
+ target/cris/translate.c                   |  3 +-
+ target/hppa/cpu.c                         |  6 +--
+ target/hppa/int_helper.c                  |  6 +--
+ target/hppa/mem_helper.c                  |  3 +-
+ target/i386/arch_memory_mapping.c         |  3 +-
+ target/i386/cpu-dump.c                    |  3 +-
+ target/i386/cpu.c                         | 36 +++++---------
+ target/i386/helper.c                      | 30 ++++--------
+ target/i386/hvf/hvf.c                     |  6 +--
+ target/i386/hvf/x86.c                     |  3 +-
+ target/i386/hvf/x86_emu.c                 |  6 +--
+ target/i386/hvf/x86_task.c                | 10 ++--
+ target/i386/hvf/x86hvf.c                  |  6 +--
+ target/i386/kvm/kvm.c                     |  6 +--
+ target/i386/kvm/xen-emu.c                 | 30 ++++--------
+ target/i386/tcg/sysemu/bpt_helper.c       |  3 +-
+ target/i386/tcg/tcg-cpu.c                 | 12 ++---
+ target/i386/tcg/user/excp_helper.c        |  3 +-
+ target/i386/tcg/user/seg_helper.c         |  3 +-
+ target/m68k/cpu.c                         | 30 ++++--------
+ target/m68k/gdbstub.c                     |  6 +--
+ target/m68k/helper.c                      |  3 +-
+ target/m68k/m68k-semi.c                   |  6 +--
+ target/m68k/op_helper.c                   |  9 ++--
+ target/m68k/translate.c                   |  3 +-
+ target/microblaze/helper.c                |  3 +-
+ target/microblaze/translate.c             |  3 +-
+ target/mips/cpu.c                         |  9 ++--
+ target/mips/gdbstub.c                     |  6 +--
+ target/mips/kvm.c                         | 27 ++++------
+ target/mips/sysemu/physaddr.c             |  3 +-
+ target/mips/tcg/exception.c               |  3 +-
+ target/mips/tcg/op_helper.c               |  3 +-
+ target/mips/tcg/sysemu/special_helper.c   |  3 +-
+ target/mips/tcg/sysemu/tlb_helper.c       |  6 +--
+ target/mips/tcg/translate.c               |  3 +-
+ target/nios2/cpu.c                        |  9 ++--
+ target/nios2/helper.c                     |  3 +-
+ target/nios2/nios2-semi.c                 |  6 +--
+ target/openrisc/gdbstub.c                 |  3 +-
+ target/openrisc/interrupt.c               |  6 +--
+ target/openrisc/translate.c               |  3 +-
+ target/ppc/cpu_init.c                     |  9 ++--
+ target/ppc/excp_helper.c                  |  3 +-
+ target/ppc/gdbstub.c                      | 12 ++---
+ target/ppc/kvm.c                          |  6 +--
+ target/ppc/ppc-qmp-cmds.c                 |  3 +-
+ target/ppc/user_only_helper.c             |  3 +-
+ target/riscv/arch_dump.c                  |  6 +--
+ target/riscv/cpu.c                        | 15 ++----
+ target/riscv/cpu_helper.c                 | 13 ++---
+ target/riscv/debug.c                      |  9 ++--
+ target/riscv/gdbstub.c                    |  6 +--
+ target/riscv/kvm/kvm-cpu.c                |  6 +--
+ target/riscv/tcg/tcg-cpu.c                |  9 ++--
+ target/riscv/translate.c                  |  3 +-
+ target/rx/gdbstub.c                       |  6 +--
+ target/rx/helper.c                        |  6 +--
+ target/rx/translate.c                     |  3 +-
+ target/s390x/cpu-dump.c                   |  3 +-
+ target/s390x/gdbstub.c                    |  6 +--
+ target/s390x/helper.c                     |  3 +-
+ target/s390x/kvm/kvm.c                    |  6 +--
+ target/s390x/tcg/excp_helper.c            |  9 ++--
+ target/s390x/tcg/translate.c              |  3 +-
+ target/sh4/cpu.c                          | 15 ++----
+ target/sh4/gdbstub.c                      |  6 +--
+ target/sh4/helper.c                       |  9 ++--
+ target/sh4/translate.c                    |  3 +-
+ target/sparc/cpu.c                        | 12 ++---
+ target/sparc/gdbstub.c                    |  3 +-
+ target/sparc/int32_helper.c               |  3 +-
+ target/sparc/int64_helper.c               |  3 +-
+ target/sparc/ldst_helper.c                |  6 +--
+ target/sparc/mmu_helper.c                 | 15 ++----
+ target/sparc/translate.c                  |  3 +-
+ target/tricore/cpu.c                      | 12 ++---
+ target/tricore/gdbstub.c                  |  6 +--
+ target/tricore/helper.c                   |  3 +-
+ target/tricore/translate.c                |  3 +-
+ target/xtensa/dbg_helper.c                |  3 +-
+ target/xtensa/exc_helper.c                |  3 +-
+ target/xtensa/gdbstub.c                   |  6 +--
+ target/xtensa/helper.c                    |  9 ++--
+ target/xtensa/translate.c                 |  3 +-
+ scripts/coccinelle/cpu_env.cocci_template | 60 +++++++++++++++++++++++
+ 116 files changed, 334 insertions(+), 548 deletions(-)
+ create mode 100644 scripts/coccinelle/cpu_env.cocci_template
 
-Um, what I wrote below...
+-- 
+2.41.0
 
-> 
-> > 
-> > What I'm looking for is a code comment explaining how riscv_is_32bit()
-> > is always safe to use. Something like
-> > 
-> >   /*
-> >    * Checking the effective mxl is always correct, because the effective
-> >    * mxl will be equal to the max mxl at initialization and also on reset,
-> >    * which are the times when it should check the maximum mxl. Later, if
-> >    * firmware writes misa with a smaller mxl, then that mxl should be
-> >    * used in checks.
-> 
-> It is misleading to say the maximum MXL should be checked only at
-> initialization and on reset. We can refer to the maximum MXL anytime; we
-> just don't need it to load a kernel.
->
-
-Of course mxl_max can be checked whenever one wants, but you're changing
-a function named riscv_is_32bit(), not
-riscv_is_32bit_when_loading_a_kernel(). riscv_is_32bit() is used in
-contexts where one should be concerned as to whether mxl == mxl_max
-or not, because what they really want is the max. The comment I suggest
-will allow them to rest easy.
-
-It's concerning that it doesn't appear you were aware that
-riscv_is_32bit() is used outside kernel loading contexts, which means it's
-unlikely you knew it was safe to make this change at all... I'm actually
-starting to think that maybe we should not make this change.
-riscv_is_32bit() should always check mxl_max and something like
-riscv_effective_mxl_is_32bit() should check mxl.
-
-drew
 
