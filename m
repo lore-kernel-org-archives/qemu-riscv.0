@@ -4,89 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED4B5C46CD2
-	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jan 2024 20:49:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 321CBC47258
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Jan 2024 03:17:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rSkAT-000701-1j; Wed, 24 Jan 2024 15:48:17 -0500
+	id 1rSqF9-0006rq-0Y; Wed, 24 Jan 2024 22:17:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rSkAR-0006z2-9C
- for qemu-riscv@nongnu.org; Wed, 24 Jan 2024 15:48:15 -0500
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rSqF2-0006rY-28; Wed, 24 Jan 2024 22:17:26 -0500
+Received: from mail-vk1-xa2d.google.com ([2607:f8b0:4864:20::a2d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rSkAM-0001Wz-5k
- for qemu-riscv@nongnu.org; Wed, 24 Jan 2024 15:48:15 -0500
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-3394446205dso1870673f8f.1
- for <qemu-riscv@nongnu.org>; Wed, 24 Jan 2024 12:48:07 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rSqEz-00052g-PM; Wed, 24 Jan 2024 22:17:23 -0500
+Received: by mail-vk1-xa2d.google.com with SMTP id
+ 71dfb90a1353d-4b978e5e240so1515059e0c.0; 
+ Wed, 24 Jan 2024 19:17:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706129286; x=1706734086; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1706152640; x=1706757440; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2DFoEEORhbYqrzpaYOOIPvsx4spA+Behkc0xiRJOJKg=;
- b=pXYrNxbPaufHiqVLrHdrZfSZ8xovHMnhWLwoZ99rLn9+l5bp8DQ6eurqKtizq2pTtM
- pRSfI97cXBPlYWwUkysw4otYVFJ8gejvxj07+jypJAGf+2PlfUAuWrDFW3yz1VlkBWCa
- m5Tq8RJeGO5QDlJfHilOmLoQDWb/UEJYHghKW+eipYNI2IIqIQf5tAYTNeg9nAVzCXq5
- dbm/lFPs9kOCWX68U03mFQ+FtdQ4Z0exwu1VYIRoviWGjXtoIFCrLvoduXUyqC5BaO9l
- R8cuTIbgI23HlojcQycklWyF5OYcaiaFNQC2oL2CdI2vrzxY9zZNbhtCUki5V1FLwJhV
- TeMg==
+ bh=lwaN3CbtlAQJ3htcvjSjKVPspX5QtiKkTXlSr2wqJ3c=;
+ b=Auu1iC0lWyMafTQLM3CEiQKHWiT0VS8vD9bnTd2mjNfjKNybsDg4zFubUTxRZxDJXn
+ yLYLXUMjF4i8Yq3bTWQOoLyHDO30t83vJ0wfwxcqwk30tqtSGU2Db4d0/6FZrgcO1wjm
+ JXJNCjHjE5VkLkk+tXYCHW+vnbpWt0Ol5ue0OylYIkXFinI2aikQJ6KQWBWyeIonRHFB
+ /QTkQw/q1TrcCxb9/IUeoFbrAPycQ0M3RtXIHsU47E58ejhcmh0Qb1itXQuc/GsH3P8e
+ Fn5pgXuJD4nRZsAZo75xCHj3zryQZ4PFFZPwG8xZ+D2MVAikeC3FFCDkNSRDQM7TwTkh
+ IRwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706129286; x=1706734086;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=2DFoEEORhbYqrzpaYOOIPvsx4spA+Behkc0xiRJOJKg=;
- b=YSWP73p1A705e9CpSWlydy/QhRWzTvTuYYskqiN59LMHAnGUpx4JuXl/XZ0fRCCY6I
- TRR22vjBCbXyw+Rw18sTDu0Pc3Y9fmNXOmzEcOFpSwl0TQhaMevsoijP0j8Kgi5JJOX0
- YHB6av3pB9MDAYBdkY4uvSbm5gcNEwaKCIIj33nx8mkzkXM+kEtMW++Z8g03LpQcp7e8
- a6PdIRF8jm92Jdq4wX8cDG2dzDiXzJGPcJRXdwR8hvcK6fNG4GHlHNuMjH/ra6aiFkA9
- Elr2+u023TgcsZWTcYVr9jgLTWajX61h8XNp2WUQZdkJvKCXMEUcLIlfmh52B474flE3
- Aq0w==
-X-Gm-Message-State: AOJu0YzlAqFxDVvQZiyWXWmeIAxH9y92mVUHEq642+TK2HdluEWMGZMw
- p5zJal1lVl1JeyMOnJe7PzKTjsSTzR677RQ7EYmIiJFvNDfFwtgyUfaba5ql/nc=
-X-Google-Smtp-Source: AGHT+IHY14kD5rNW/WqXoLuPWKhJG2siL9M1HTav9Wf26p7ngHZruTutoSDn9MvT5UR5mm2IYM7j0g==
-X-Received: by 2002:a05:600c:4fc9:b0:40e:b17d:2f56 with SMTP id
- o9-20020a05600c4fc900b0040eb17d2f56mr1779043wmq.23.1706129285703; 
- Wed, 24 Jan 2024 12:48:05 -0800 (PST)
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- v17-20020a05600c471100b0040d91fa270fsm248736wmo.36.2024.01.24.12.48.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Jan 2024 12:48:05 -0800 (PST)
-Received: from draig (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id D81A55F754;
- Wed, 24 Jan 2024 20:48:04 +0000 (GMT)
-From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org,  qemu-riscv@nongnu.org,  qemu-s390x@nongnu.org,
- qemu-block@nongnu.org,  qemu-arm@nongnu.org,  Bin Meng
- <bmeng@tinylab.org>,  Richard Henderson <richard.henderson@linaro.org>,
- Max Filippov <jcmvbkbc@gmail.com>
-Subject: Re: [PULL 33/36] hw/elf_ops: Ignore loadable segments with zero size
-In-Reply-To: <20240119113507.31951-34-philmd@linaro.org> ("Philippe
- =?utf-8?Q?Mathieu-Daud=C3=A9=22's?= message of "Fri, 19 Jan 2024 12:35:02
- +0100")
-References: <20240119113507.31951-1-philmd@linaro.org>
- <20240119113507.31951-34-philmd@linaro.org>
-User-Agent: mu4e 1.11.27; emacs 29.1
-Date: Wed, 24 Jan 2024 20:48:04 +0000
-Message-ID: <87r0i65ugr.fsf@draig.linaro.org>
+ d=1e100.net; s=20230601; t=1706152640; x=1706757440;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lwaN3CbtlAQJ3htcvjSjKVPspX5QtiKkTXlSr2wqJ3c=;
+ b=uM786k8nT+Xra06PSGCwNYpZalWx/pKRAnHy0VENns0kBGbRM7bSWiH939jJvQByQE
+ x485upHAYyrTzyHUxioao3KDxU9u14/3OW2gnEQlY1kCI72oA4tN1wlSnn+FWmB/2+go
+ DedYPvYtCAFCxLyEjGua3eYNB1moCInccorJpN6aPrQTCBm7DpzK7mvNVD2o3h1FYFSS
+ eK0fNJVrmtk8R1CTVQ4iesj1bpLh05Hlf5eWjJUtJwncaYJFtRSAz5bO964+2BXdDeKV
+ YkLbzyXnjEzt5D173vtMLycqYAy+I+hdhUMOQDALT/HZ9vQtNl0aHkTBNf0c8DXd/UI2
+ sCpA==
+X-Gm-Message-State: AOJu0Yw8UEJd1HqYfzMB3G8LpQ5qOwwuxu1X8OPI0DnhhYojoovmJ9K1
+ VPE87V+ji6DwPBhQcq1KkFtYB9WSqnHqLFGTKX7hPM9e2mV/X9M3U2Z8Yqe9kB4PQQgVUKuYNJa
+ fciA1SXQVwC5m3HWkD2+UMpXY9Bg=
+X-Google-Smtp-Source: AGHT+IHMHxdKXSL/IXvLYYZtkgnAb2Gv/ERvktmnhUmi93yIVwMielkr4sosTa0CGfH1uMGM6evZ/chjZ2JPgUrGoiw=
+X-Received: by 2002:a05:6122:4598:b0:4bd:6041:99f9 with SMTP id
+ de24-20020a056122459800b004bd604199f9mr189318vkb.31.1706152639678; Wed, 24
+ Jan 2024 19:17:19 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+References: <20231229120724.41383-1-heinrich.schuchardt@canonical.com>
+ <20231229120724.41383-4-heinrich.schuchardt@canonical.com>
+ <20240122-4f4cbce3692cd684e0409f9e@orel>
+ <22105210-d8d1-4808-b9ed-41eee71c53ca@canonical.com>
+ <20240122-195c4a8d0ece609441068e16@orel>
+In-Reply-To: <20240122-195c4a8d0ece609441068e16@orel>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 25 Jan 2024 13:16:53 +1000
+Message-ID: <CAKmqyKOpcLoMnSKwsecSqNEFS8rmxsAuPW_njT=+v_tPsswXww@mail.gmail.com>
+Subject: Re: Re: [PATCH v2 3/4] target/riscv: SMBIOS support for RISC-V virt
+ machine
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ "Michael S . Tsirkin" <mst@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
+ Ani Sinha <anisinha@redhat.com>, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x429.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2d;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2d.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,190 +102,70 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> writes:
-
-> From: Bin Meng <bmeng@tinylab.org>
+On Tue, Jan 23, 2024 at 12:19=E2=80=AFAM Andrew Jones <ajones@ventanamicro.=
+com> wrote:
 >
-> Some ELF files really do have segments of zero size, e.g.:
->
-> Program Headers:
->   Type           Offset             VirtAddr           PhysAddr
->                  FileSiz            MemSiz              Flags  Align
->   RISCV_ATTRIBUT 0x00000000000025b8 0x0000000000000000 0x0000000000000000
->                  0x000000000000003e 0x0000000000000000  R      0x1
->   LOAD           0x0000000000001000 0x0000000080200000 0x0000000080200000
->                  0x00000000000001d1 0x00000000000001d1  R E    0x1000
->   LOAD           0x00000000000011d1 0x00000000802001d1 0x00000000802001d1
->                  0x0000000000000e37 0x0000000000000e37  RW     0x1000
->   LOAD           0x0000000000000120 0x0000000000000000 0x0000000000000000
->                  0x0000000000000000 0x0000000000000000         0x1000
->
-> The current logic does not check for this condition, resulting in
-> the incorrect assignment of 'lowaddr' as zero.
->
-> There is already a piece of codes inside the segment traversal loop
-> that checks for zero-sized loadable segments for not creating empty
-> ROM blobs. Let's move this check to the beginning of the loop to
-> cover both scenarios.
->
-> Signed-off-by: Bin Meng <bmeng@tinylab.org>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> Message-ID: <20240116155049.390301-1-bmeng@tinylab.org>
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-
-This has broken Xtensa system emulation:
-
-  =E2=9E=9C  /bin/sh -c "cd builds/bisect; ninja; make check-tcg"
-  [8/8] Linking target qemu-system-xtensa
-    BUILD   debian-xtensa-cross
-    BUILD   xtensa-softmmu guest-tests
-    RUN     xtensa-softmmu guest-tests
-    TEST    test_bi on xtensa
-    TEST    test_boolean on xtensa
-    TEST    test_break on xtensa
-    TEST    test_b on xtensa
-    TEST    test_bz on xtensa
-    TEST    test_cache on xtensa
-    TEST    test_clamps on xtensa
-    TEST    test_dfp0_arith on xtensa
-    TEST    test_exclusive on xtensa
-    TEST    test_extui on xtensa
-    TEST    test_flix on xtensa
-    TEST    test_fp0_arith on xtensa
-    TEST    test_fp0_conv on xtensa
-    TEST    test_fp0_div on xtensa
-    TEST    test_fp0_sqrt on xtensa
-    TEST    test_fp1 on xtensa
-    TEST    test_fp_cpenable on xtensa
-    TEST    test_interrupt on xtensa
-    TEST    test_load_store on xtensa
-  qemu-system-xtensa: Some ROM regions are overlapping
-  These ROM regions might have been loaded by direct user request or by def=
-ault.
-  They could be BIOS/firmware images, a guest kernel, initrd or some other =
-file loaded into guest memory.
-  Check whether you intended to load all this guest code, and whether it ha=
-s been built to load to the correct addresses.
-
-  The following two regions overlap (in the memory address space):
-    test_load_store ELF program header segment 1 (addresses 0x0000000000001=
-000 - 0x0000000000001f26)
-    test_load_store ELF program header segment 2 (addresses 0x0000000000001=
-ab8 - 0x0000000000001ab8)
-  make[1]: *** [Makefile:187: run-test_load_store] Error 1
-  make: *** [/home/alex/lsrc/qemu.git/tests/Makefile.include:56: run-tcg-te=
-sts-xtensa-softmmu] Error 2
-
-> ---
->  include/hw/elf_ops.h | 71 +++++++++++++++++++++++---------------------
->  1 file changed, 37 insertions(+), 34 deletions(-)
->
-> diff --git a/include/hw/elf_ops.h b/include/hw/elf_ops.h
-> index 9c35d1b9da..3e966ddd5a 100644
-> --- a/include/hw/elf_ops.h
-> +++ b/include/hw/elf_ops.h
-> @@ -427,6 +427,16 @@ static ssize_t glue(load_elf, SZ)(const char *name, =
-int fd,
->              file_size =3D ph->p_filesz; /* Size of the allocated data */
->              data_offset =3D ph->p_offset; /* Offset where the data is lo=
-cated */
->=20=20
-> +            /*
-> +             * Some ELF files really do have segments of zero size;
-> +             * just ignore them rather than trying to set the wrong addr,
-> +             * or create empty ROM blobs, because the zero-length blob c=
+> On Mon, Jan 22, 2024 at 01:28:18PM +0100, Heinrich Schuchardt wrote:
+> > On 22.01.24 10:57, Andrew Jones wrote:
+> > > On Fri, Dec 29, 2023 at 01:07:23PM +0100, Heinrich Schuchardt wrote:
+> ...
+> > > > +#if defined(TARGET_RISCV32)
+> > > > +    smbios_set_default_processor_family(0x200);
+> > > > +#elif defined(TARGET_RISCV64)
+> > > > +    smbios_set_default_processor_family(0x201);
+> > > > +#endif
+> > >
+> > > I think we should use misa_mxl_max to determine the family, rather th=
 an
-> +             * falsely trigger the overlapping-ROM-blobs check.
-> +             */
-> +            if (mem_size =3D=3D 0) {
-> +                continue;
-> +            }
-> +
->              if (file_size > 0) {
->                  if (g_mapped_file_get_length(mapped_file) <
->                      file_size + data_offset) {
-> @@ -530,45 +540,38 @@ static ssize_t glue(load_elf, SZ)(const char *name,=
- int fd,
->                  *pentry =3D ehdr.e_entry - ph->p_vaddr + ph->p_paddr;
->              }
->=20=20
-> -            /* Some ELF files really do have segments of zero size;
-> -             * just ignore them rather than trying to create empty
-> -             * ROM blobs, because the zero-length blob can falsely
-> -             * trigger the overlapping-ROM-blobs check.
-> -             */
-> -            if (mem_size !=3D 0) {
-> -                if (load_rom) {
-> -                    g_autofree char *label =3D
-> -                        g_strdup_printf("%s ELF program header segment %=
-d",
-> -                                        name, i);
-> +            if (load_rom) {
-> +                g_autofree char *label =3D
-> +                    g_strdup_printf("%s ELF program header segment %d",
-> +                                    name, i);
->=20=20
-> -                    /*
-> -                     * rom_add_elf_program() takes its own reference to
-> -                     * 'mapped_file'.
-> -                     */
-> -                    rom_add_elf_program(label, mapped_file, data, file_s=
-ize,
-> -                                        mem_size, addr, as);
-> -                } else {
-> -                    MemTxResult res;
-> +                /*
-> +                 * rom_add_elf_program() takes its own reference to
-> +                 * 'mapped_file'.
-> +                 */
-> +                rom_add_elf_program(label, mapped_file, data, file_size,
-> +                                    mem_size, addr, as);
-> +            } else {
-> +                MemTxResult res;
->=20=20
-> -                    res =3D address_space_write(as ? as : &address_space=
-_memory,
-> -                                              addr, MEMTXATTRS_UNSPECIFI=
-ED,
-> -                                              data, file_size);
-> +                res =3D address_space_write(as ? as : &address_space_mem=
-ory,
-> +                                          addr, MEMTXATTRS_UNSPECIFIED,
-> +                                          data, file_size);
-> +                if (res !=3D MEMTX_OK) {
-> +                    goto fail;
-> +                }
-> +                /*
-> +                 * We need to zero'ify the space that is not copied
-> +                 * from file
-> +                 */
-> +                if (file_size < mem_size) {
-> +                    res =3D address_space_set(as ? as : &address_space_m=
-emory,
-> +                                            addr + file_size, 0,
-> +                                            mem_size - file_size,
-> +                                            MEMTXATTRS_UNSPECIFIED);
->                      if (res !=3D MEMTX_OK) {
->                          goto fail;
->                      }
-> -                    /*
-> -                     * We need to zero'ify the space that is not copied
-> -                     * from file
-> -                     */
-> -                    if (file_size < mem_size) {
-> -                        res =3D address_space_set(as ? as : &address_spa=
-ce_memory,
-> -                                                addr + file_size, 0,
-> -                                                mem_size - file_size,
-> -                                                MEMTXATTRS_UNSPECIFIED);
-> -                        if (res !=3D MEMTX_OK) {
-> -                            goto fail;
-> -                        }
-> -                    }
->                  }
->              }
+> > > TARGET_*, because, iirc, we're slowly working our ways towards allowi=
+ng
+> > > rv32 cpus to be instantiated with qemu-system-riscv64.
+> >
+> > Hello Andrew,
+> >
+> > thank you for reviewing. I guess you mean something like:
+> >
+> >     if (riscv_is_32bit(&s->soc[0])) {
+> >         smbios_set_default_processor_family(0x200);
+> > #if defined(TARGET_RISCV64)
+> >     } else {
+> >         smbios_set_default_processor_family(0x201);
+> > #endif
+> >     }
+>
+> Yes, but I'm not sure we need the #ifdef around the 64-bit part.
+>
+> >
+> > riscv_is_32bit returns harts->harts[0].env.misa_mxl_max =3D=3D MXL_RV32=
+.
+> >
+> > Some real hardware has a 32bit hart and multiple 64bit harts. Will QEMU
+> > support mixing harts with different bitness on the virt machine in futu=
+re?
 
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
+That is the hope. Although no one is directly working on it at the
+moment. We want to try and keep the RISC-V target setup to do this.
+
+The first goal is to just create and use a 32-bit CPU on the 64-bit
+build, which currently doesn't work but it's something that should
+work.
+
+Alistair
+
+> > In that case we would have to revisit the code using misa_mxl_max in
+> > multiple places.
+> >
+>
+> Never say never, but I don't think there has been much effort to support
+> these types of configurations with a single QEMU binary. My googling is
+> failing me right now, but I seem to recall that there may have been
+> efforts to implement Arm big.LITTLE with multiprocess QEMU [1]. IOW, I
+> think we're safe to use misa_mxl_max, since we'll have one for each QEMU
+> instance and we'll use a different QEMU instance for each hart bitness.
+>
+> [1] docs/system/multi-process.rst
+>
+> Thanks,
+> drew
+>
 
