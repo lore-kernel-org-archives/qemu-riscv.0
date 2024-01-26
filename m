@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1907C47DDB
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFD8EC47DDF
 	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 17:35:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTQ4n-0007QX-6O; Fri, 26 Jan 2024 12:33:13 -0500
+	id 1rTQ5E-0008IX-Kv; Fri, 26 Jan 2024 12:33:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1rTQ4f-0007Bq-Oi; Fri, 26 Jan 2024 12:33:05 -0500
-Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ <BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1rTQ59-000898-JK; Fri, 26 Jan 2024 12:33:35 -0500
+Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1rTQ4c-0001jJ-HB; Fri, 26 Jan 2024 12:33:05 -0500
+ <BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1rTQ57-0001cT-T0; Fri, 26 Jan 2024 12:33:35 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+ d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=f4zhtWJwTDv/GTqQefyNMB0pZHdx/v1BNCZKPZQKYkE=; b=nSwxOvPfmxriQ/utFCd6E5uTgk
- zLRl3W9ZzxOKqxVeKHfIePMrsRsDgzhQob0ieitsWWAtWHoxaW/ddWelyJgrB6j43fCgZx4CfWKWo
- Jtz18hNYhD1A3V7taJd3cmQeJpm+sgEx4s7SJ+A7w3RGfK1faQT8DK58V5Zl3rCgJsNTSup6ChZRl
- 5zbnuTqtlRDWshBloZzpeVj6jD4ScFBWVJ6Q8sJX08c7z2Es93nvEn+66ltrPI8hM8b5C/++EVrqU
- 9XwrgCAONDTRJDXixzJBtRo6ZCM49mnTc0R0ZIYs2m6pjhjVoj7eKiK+d6DVc0muGuqz6H90aRRuc
- Z9ZupxNA==;
+ bh=naEYB+jSEP7+OXxDQs3WhFqyYITtE2y0vubPL3hIMXY=; b=LXa7z8onC4XELkebk7mstMSFNz
+ E89f6kjIfZ9IGzPF/oa7YGF+kwE7zTt2D/EQQwe+sHNG02KPSo1BZeUUSTMsaCMCDoIEmh6ymJDPI
+ DdsHwfajWEQbadMy8M6KScyk18HIJjiA/lIsaOvbAJrjul7CVduVWjwqE3lMaowPTk7UukG5TAUmS
+ /W/Yr9imQpqSah+onhT4MZ2egm+d3/kIx6DLCy8ZWacG89c9LF8G80s4zmEHs+q1gQEajYWK+rzEu
+ gNiR6+5hlTaRGDTuDN74aqTy4BmRs0/0pjpquju6zylRF49bR/RK9fMf3XzUlOVz2SLzt88GfGTB6
+ RxFJaYjQ==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1rTQ4A-000000069Uk-1tKu; Fri, 26 Jan 2024 17:32:34 +0000
+ by casper.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
+ id 1rTQ48-0000000EKUR-2WVo; Fri, 26 Jan 2024 17:32:34 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.97.1 #2 (Red
- Hat Linux)) id 1rTQ47-00000001ele-2qm0;
- Fri, 26 Jan 2024 17:32:31 +0000
+ Hat Linux)) id 1rTQ49-00000001emz-1aGM;
+ Fri, 26 Jan 2024 17:32:33 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -86,19 +86,19 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>,
  Thomas Huth <thuth@redhat.com>
-Subject: [PATCH v4 09/47] hw/arm/virt: use pci_init_nic_devices()
-Date: Fri, 26 Jan 2024 17:24:46 +0000
-Message-ID: <20240126173228.394202-10-dwmw2@infradead.org>
+Subject: [PATCH v4 27/47] hw/arm/highbank: use qemu_create_nic_device()
+Date: Fri, 26 Jan 2024 17:25:04 +0000
+Message-ID: <20240126173228.394202-28-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240126173228.394202-1-dwmw2@infradead.org>
 References: <20240126173228.394202-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- desiato.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1:d65d:64ff:fe57:4e05;
- envelope-from=BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@desiato.srs.infradead.org;
- helo=desiato.infradead.org
+ casper.infradead.org. See http://www.infradead.org/rpr.html
+Received-SPF: none client-ip=2001:8b0:10b:1236::1;
+ envelope-from=BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org;
+ helo=casper.infradead.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -126,24 +126,38 @@ From: David Woodhouse <dwmw@amazon.co.uk>
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 ---
- hw/arm/virt.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ hw/arm/highbank.c | 12 +++++-------
+ 1 file changed, 5 insertions(+), 7 deletions(-)
 
-diff --git a/hw/arm/virt.c b/hw/arm/virt.c
-index 5cbc69dff8..ad8e7edb8c 100644
---- a/hw/arm/virt.c
-+++ b/hw/arm/virt.c
-@@ -1454,9 +1454,7 @@ static void create_pcie(VirtMachineState *vms)
-     pci->bypass_iommu = vms->default_bus_bypass_iommu;
-     vms->bus = pci->bus;
-     if (vms->bus) {
--        for (i = 0; i < nb_nics; i++) {
--            pci_nic_init_nofail(&nd_table[i], pci->bus, mc->default_nic, NULL);
--        }
-+        pci_init_nic_devices(pci->bus, mc->default_nic);
-     }
+diff --git a/hw/arm/highbank.c b/hw/arm/highbank.c
+index c21e18d08f..6a0e20e58d 100644
+--- a/hw/arm/highbank.c
++++ b/hw/arm/highbank.c
+@@ -296,19 +296,17 @@ static void calxeda_init(MachineState *machine, enum cxmachines machine_id)
  
-     nodename = vms->pciehb_nodename = g_strdup_printf("/pcie@%" PRIx64, base);
+     sysbus_create_simple(TYPE_SYSBUS_AHCI, 0xffe08000, pic[83]);
+ 
+-    if (nd_table[0].used) {
+-        qemu_check_nic_model(&nd_table[0], "xgmac");
+-        dev = qdev_new("xgmac");
+-        qdev_set_nic_properties(dev, &nd_table[0]);
++    dev = qemu_create_nic_device("xgmac", true, NULL);
++    if (dev) {
+         sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+         sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, 0xfff50000);
+         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, pic[77]);
+         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 1, pic[78]);
+         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 2, pic[79]);
++    }
+ 
+-        qemu_check_nic_model(&nd_table[1], "xgmac");
+-        dev = qdev_new("xgmac");
+-        qdev_set_nic_properties(dev, &nd_table[1]);
++    dev = qemu_create_nic_device("xgmac", true, NULL);
++    if (dev) {
+         sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+         sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, 0xfff51000);
+         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, pic[80]);
 -- 
 2.43.0
 
