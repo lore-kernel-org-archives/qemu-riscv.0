@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D1C7C47DDB
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 16:08:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6791AC47422
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 16:21:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTOkn-0004H0-6k; Fri, 26 Jan 2024 11:08:29 -0500
+	id 1rTOwL-0007c3-QR; Fri, 26 Jan 2024 11:20:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTOkj-0004FC-OO
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 11:08:27 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTOwI-0007bI-D5
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 11:20:22 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTOkg-0006gU-Gz
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 11:08:24 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTOwG-0000HR-Ox
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 11:20:22 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1706285301;
+ s=mimecast20190719; t=1706286020;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=D9F2bbUWw9sCxIexKZ1mkLwkfc28SE4GywK/1ph1ddI=;
- b=C+biXBt/nvxkaLMjj04oVjlyDz76YEmv++s7sBRgN76Ux7S11fR9Bn7cYejNMqvstBvlgM
- 4JIzNle410ggtHpN+59955IKbKN1iqZmoCd9Ui1kLAe4Y32vFYxP3SToul9HkyCf2n8z9k
- ZZdIILt7wfVxzvO/4Ul8uVSiT5+AOL4=
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
- [209.85.219.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=MRIjfaHeC/HCDOxGifaONkhJ6qMUTCsidTOpeocpbFI=;
+ b=J98nAPV3tMYevFgzWTmuIuRhT1zrfXHWEnErWgLr8ZP5Cy/wg1MVACbzvY5g/sfJNcAs3q
+ 1KVKaCakmjbr5PKmsmv6YdAD2tPbSB7FLuM2bWJ0N1sjXgRdNNaKb6WnnAr7KqdMzx4spK
+ aWPru/BH4W6Z5ouMzARPFzj5OwwkWq4=
+Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
+ [209.85.219.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-495-RTdIK49iNPKJJFl0R4Li-g-1; Fri, 26 Jan 2024 11:08:20 -0500
-X-MC-Unique: RTdIK49iNPKJJFl0R4Li-g-1
-Received: by mail-qv1-f72.google.com with SMTP id
- 6a1803df08f44-685850fb111so9528416d6.0
- for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 08:08:19 -0800 (PST)
+ us-mta-194-cuxs_Kz9PB-BBmiI4f18Ww-1; Fri, 26 Jan 2024 11:20:18 -0500
+X-MC-Unique: cuxs_Kz9PB-BBmiI4f18Ww-1
+Received: by mail-qv1-f70.google.com with SMTP id
+ 6a1803df08f44-685850fb111so9702226d6.0
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 08:20:18 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706285299; x=1706890099;
+ d=1e100.net; s=20230601; t=1706286018; x=1706890818;
  h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
  :to:content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=D9F2bbUWw9sCxIexKZ1mkLwkfc28SE4GywK/1ph1ddI=;
- b=jyDO2iaAtDSL/4rd1mizrH72oo49IEw05MnQEQBfpVq9cvjluvvN0NBkViI6WqAWy9
- KBFCK/7OrhQ2uw/fFYRrGTiytNMx431cCNaoNqX0w7mUdU3jN1AdPVtAmUSEitmZ6sfL
- TmI1niDUpFfoSkHg/kvwDrMoxqb+yBM5AVy0zgXjKUiYgK9zILXTYDw3HGzqORnjvDQN
- zH5iK5QDI5yoeQxH9cE3QmYn7UykX8QHZlSOfLFMzb29BmoxlRcp3nbRkxdE4r5iUQMt
- l+kuKha7zSPppw0U9fNZlRL7HK2V91/LKY7RcW1X+93p5JquUUV+AEhEWpNsgHy9vnHn
- I+KQ==
-X-Gm-Message-State: AOJu0Yw9cC0JNh9sK2FOY0OxdWEfsm/nqZFTjIotbokwMh3ruazwOoLf
- POq+ZykhNj07Vq3gCLrVSvuEvFksme/KfBZ/89OfNXBFAX+FEjLyVKxcyJqPfy7jK76bDL5U7OQ
- REXCb2YuRu4IyWg6g9yc9vxtoIUR6bD7NlhfcLXeaoTehfus5bhhj
-X-Received: by 2002:a05:6214:2687:b0:686:aa78:d51b with SMTP id
- gm7-20020a056214268700b00686aa78d51bmr82316qvb.57.1706285299240; 
- Fri, 26 Jan 2024 08:08:19 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHNArWGZ+tje0Xl0Uzc0q///s3mwURQqzEKUHVLL7xKYxKz6pPU0pTaaLASTTrq+c0dCUpAoQ==
-X-Received: by 2002:a05:6214:2687:b0:686:aa78:d51b with SMTP id
- gm7-20020a056214268700b00686aa78d51bmr82301qvb.57.1706285298903; 
- Fri, 26 Jan 2024 08:08:18 -0800 (PST)
+ bh=MRIjfaHeC/HCDOxGifaONkhJ6qMUTCsidTOpeocpbFI=;
+ b=HJ10fxVc3HGvjfUeiMybhkgNhUa62XvGJuCwA30t2rnBDsrB1njPkJ2T3w2BQh/e/J
+ kePPA5vrWkuQZ+9znhK5Ggv/Fon8DWnZCk1/PYiY2yItDZosap2DKXv4a9arlbrMoVkE
+ JradZFDYUtKcmcUE9nvBVvlr4Wz5wZ6dVLnIqjf/U6HBm5sod8k1X+m743wV4Xfwj4s+
+ IcMHC+w6VMlsbjoOXxybEfgbfRp+jw6swduBMeZ5gcbzk/XJeJrjU2cyLq1p8RDypBBh
+ YeDs/SqGTI3KR7fjHLpHRmdkaUtWYlI3IqIhZUZoe5jdL/e2ojAs5TRqo2lezCftsxCU
+ T2ng==
+X-Gm-Message-State: AOJu0YwKx/0xZorLZPBkjuyN+gGjEDtAdW8EX7HaGBJjwrfn8dynvHLo
+ wJP49BvaWMqONFYEvs/qZxs7P8+Mfmr2P8rlCogGEywwlRM3Uhe2t5tkyRBoK7mVbdXm1DnFrkt
+ xEDO3e5Mt823qRBbsaRiexe6ab0GV9564p51w0Sd8rUcqIUNyoclM
+X-Received: by 2002:a05:6214:2481:b0:686:aa83:4cc with SMTP id
+ gi1-20020a056214248100b00686aa8304ccmr116069qvb.16.1706286017985; 
+ Fri, 26 Jan 2024 08:20:17 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHswNQ/uBjF8/Et4Ed+zf4w9PiVErcfgVM/nEdyBOIwzjWjPL1NLQrRxdQyyvj3MNG/c4OfnQ==
+X-Received: by 2002:a05:6214:2481:b0:686:aa83:4cc with SMTP id
+ gi1-20020a056214248100b00686aa8304ccmr116030qvb.16.1706286017691; 
+ Fri, 26 Jan 2024 08:20:17 -0800 (PST)
 Received: from [192.168.0.9] (ip-109-43-176-119.web.vodafone.de.
  [109.43.176.119]) by smtp.gmail.com with ESMTPSA id
- kf4-20020a056214524400b006837a012417sm621834qvb.51.2024.01.26.08.08.06
+ om12-20020a0562143d8c00b006869bae3b11sm632416qvb.35.2024.01.26.08.20.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 26 Jan 2024 08:08:18 -0800 (PST)
-Message-ID: <532e0d7c-ddf0-4db4-a6eb-6660469fc72f@redhat.com>
-Date: Fri, 26 Jan 2024 17:08:04 +0100
+ Fri, 26 Jan 2024 08:20:17 -0800 (PST)
+Message-ID: <80fe8746-3b93-41c7-bd53-13bd8dac9471@redhat.com>
+Date: Fri, 26 Jan 2024 17:20:00 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 46/46] net: make nb_nics and nd_table[] static in
- net/net.c
-To: David Woodhouse <dwmw2@infradead.org>, qemu-devel@nongnu.org
+Subject: Re: [PATCH v3 35/46] hw/mips/mipssim: use qemu_create_nic_device()
+To: David Woodhouse <dwmw2@infradead.org>, qemu-devel@nongnu.org,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 Cc: Richard Henderson <richard.henderson@linaro.org>,
  Beniamino Galvani <b.galvani@gmail.com>,
  Peter Maydell <peter.maydell@linaro.org>,
@@ -78,11 +78,10 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  <clg@kaod.org>, Andrew Jeffery <andrew@codeconstruct.com.au>,
  Joel Stanley <joel@jms.id.au>, Igor Mitsyanko <i.mitsyanko@gmail.com>,
  Jean-Christophe Dubois <jcd@tribudubois.net>,
- Andrey Smirnov <andrew.smirnov@gmail.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Rob Herring <robh@kernel.org>, Subbaraya Sundeep <sundeep.lkml@gmail.com>,
- Jan Kiszka <jan.kiszka@web.de>, Tyrone Ting <kfting@nuvoton.com>,
- Hao Wu <wuhaotsh@google.com>, Radoslaw Biernacki <rad@semihalf.com>,
+ Andrey Smirnov <andrew.smirnov@gmail.com>, Rob Herring <robh@kernel.org>,
+ Subbaraya Sundeep <sundeep.lkml@gmail.com>, Jan Kiszka <jan.kiszka@web.de>,
+ Tyrone Ting <kfting@nuvoton.com>, Hao Wu <wuhaotsh@google.com>,
+ Radoslaw Biernacki <rad@semihalf.com>,
  Leif Lindholm <quic_llindhol@quicinc.com>,
  Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
@@ -116,7 +115,7 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
- <20240108204909.564514-47-dwmw2@infradead.org>
+ <20240108204909.564514-36-dwmw2@infradead.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -160,22 +159,22 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20240108204909.564514-47-dwmw2@infradead.org>
+In-Reply-To: <20240108204909.564514-36-dwmw2@infradead.org>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -33
 X-Spam_score: -3.4
 X-Spam_bar: ---
 X-Spam_report: (-3.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.313,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -193,63 +192,52 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 08/01/2024 21.27, David Woodhouse wrote:
 > From: David Woodhouse <dwmw@amazon.co.uk>
-
-Please add: "Also remove the leftover definition of host_net_devices which 
-has been forgotten to be removed in commit 7cc28cb061040cb089." (or so)
-
-With that:
-Reviewed-by: Thomas Huth <thuth@redhat.com>
-
-
-
+> 
+> The MIPS SIM platform instantiates its NIC only if a corresponding
+> configuration exists for it. Use qemu_create_nic_device() function for
+> that.
+> 
 > Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 > ---
->   include/net/net.h | 4 ----
->   net/net.c         | 3 +++
->   system/globals.c  | 2 --
->   3 files changed, 3 insertions(+), 6 deletions(-)
+>   hw/mips/mipssim.c | 13 +++++++------
+>   1 file changed, 7 insertions(+), 6 deletions(-)
 > 
-> diff --git a/include/net/net.h b/include/net/net.h
-> index 19fb82833c..766201c62c 100644
-> --- a/include/net/net.h
-> +++ b/include/net/net.h
-> @@ -247,10 +247,6 @@ struct NICInfo {
->       int nvectors;
->   };
+> diff --git a/hw/mips/mipssim.c b/hw/mips/mipssim.c
+> index 01e323904d..16af31648e 100644
+> --- a/hw/mips/mipssim.c
+> +++ b/hw/mips/mipssim.c
+> @@ -118,13 +118,15 @@ static void main_cpu_reset(void *opaque)
+>       }
+>   }
 >   
-> -extern int nb_nics;
-> -extern NICInfo nd_table[MAX_NICS];
-> -extern const char *host_net_devices[];
-> -
->   /* from net.c */
->   extern NetClientStateList net_clients;
->   bool netdev_is_modern(const char *optstr);
-> diff --git a/net/net.c b/net/net.c
-> index 09ab0889f5..71cccb19da 100644
-> --- a/net/net.c
-> +++ b/net/net.c
-> @@ -77,6 +77,9 @@ static NetdevQueue nd_queue = QSIMPLEQ_HEAD_INITIALIZER(nd_queue);
+> -static void mipsnet_init(int base, qemu_irq irq, NICInfo *nd)
+> +static void mipsnet_init(int base, qemu_irq irq)
+>   {
+>       DeviceState *dev;
+>       SysBusDevice *s;
 >   
->   static GHashTable *nic_model_help;
+> -    dev = qdev_new("mipsnet");
+> -    qdev_set_nic_properties(dev, nd);
+> +    dev = qemu_create_nic_device("mipsnet", true, NULL);
+> +    if (!dev) {
+> +        return;
+> +    }
 >   
-> +static int nb_nics;
-> +static NICInfo nd_table[MAX_NICS];
-> +
->   /***********************************************************/
->   /* network device redirectors */
+>       s = SYS_BUS_DEVICE(dev);
+>       sysbus_realize_and_unref(s, &error_fatal);
+> @@ -225,9 +227,8 @@ mips_mipssim_init(MachineState *machine)
+>                         sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0));
+>       }
 >   
-> diff --git a/system/globals.c b/system/globals.c
-> index e83b5428d1..b6d4e72530 100644
-> --- a/system/globals.c
-> +++ b/system/globals.c
-> @@ -36,8 +36,6 @@ int display_opengl;
->   const char* keyboard_layout;
->   bool enable_mlock;
->   bool enable_cpu_pm;
-> -int nb_nics;
-> -NICInfo nd_table[MAX_NICS];
->   int autostart = 1;
->   int vga_interface_type = VGA_NONE;
->   bool vga_interface_created;
+> -    if (nd_table[0].used)
+> -        /* MIPSnet uses the MIPS CPU INT0, which is interrupt 2. */
+> -        mipsnet_init(0x4200, env->irq[2], &nd_table[0]);
+> +    /* MIPSnet uses the MIPS CPU INT0, which is interrupt 2. */
+> +    mipsnet_init(0x4200, env->irq[2]);
+>   }
+>   
+>   static void mips_mipssim_machine_init(MachineClass *mc)
+
+Reviewed-by: Thomas Huth <thuth@redhat.com>
 
 
