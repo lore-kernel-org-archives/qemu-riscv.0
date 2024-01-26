@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D7E9C47DDF
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 17:40:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0EC7C48285
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 17:40:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTQ4q-0007XV-IV; Fri, 26 Jan 2024 12:33:16 -0500
+	id 1rTQ4t-0007g7-V9; Fri, 26 Jan 2024 12:33:20 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rTQ4N-00071Y-UD; Fri, 26 Jan 2024 12:32:48 -0500
-Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
+ <BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1rTQ4f-0007CD-VX; Fri, 26 Jan 2024 12:33:05 -0500
+Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rTQ4K-0001cU-Fw; Fri, 26 Jan 2024 12:32:47 -0500
+ <BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1rTQ4c-0001jO-MM; Fri, 26 Jan 2024 12:33:05 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
- Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
- To:From:Reply-To:Content-ID:Content-Description;
- bh=pMTNl31Z4wpC7RcyuXgVYoTxdcUq3RoTFZ8/v9Gj+ug=; b=ODknmQx9pYHZ2OKzuPTEoZWS1B
- QfPM2lEpj+28gcu3a/nGfEJDtNOhbYE5phTZvy+Q95iPyF7opdo6PhO4rKABtsv1fVlLZ8/pUr+Ps
- snEPHO+f2tc4eKwrTOt4PRfShqjQC8kKFEpjsViqXHkLjp+mcTXkA0bqpHVgIykBy/YyJb5emsmXy
- PAqprcm+ymy0h/xEza6ae9QafFApdKKvSK+Gfgyvnp7DFT99VAYGuoBSMPd5FWS2dUQmSWMyHM9mt
- 8RukyYs2i5ya21RAr7O3+4ZQ1nhuYilKDm9rnb2d1dJmC3axTOwTubfqZrvhFzMpUh0qimjhcAqMC
- lUUf6c0A==;
+ d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+ MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
+ Reply-To:Content-Type:Content-ID:Content-Description;
+ bh=84SjqVRU3phUY6XFnzqwJCBs+MK5duPh9P72Y2DAnRw=; b=YLRHM0QJuZvioEMu4cTtQ8XMuH
+ DVoVTEiaE3jTfvMomCo1nLl8WENf0AkMzj8FCw9W+7oiwcKi2HBu4BfDOoQVkyRU9MsxkrQ1e7Xoo
+ A3MhXXnSEOIzy17tHel7ZFnScnbb+71N0lUKLS/zL6uRTqCA3xT9Z7TnteXeHUI3M3jnXdfElquLe
+ DFrF7Ha30BtG/n/jc3x/HMOoIMGwInJvf3fq4+spwa79+6kWiWPn3Ljos1oDjoWwt2f8xjw9JGNut
+ PoVOqnueY4A0hkcHW0bulErS47xyEAhtQFp/1VXRa7LDgHUgjJYtMtyHVIHys3oHO7S6dS2crmmcb
+ QBtUxEmw==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1rTQ48-0000000EKUO-1Dvu; Fri, 26 Jan 2024 17:32:33 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
+ id 1rTQ4B-000000069Uy-2xei; Fri, 26 Jan 2024 17:32:36 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.97.1 #2 (Red
- Hat Linux)) id 1rTQ48-00000001emH-43JH;
- Fri, 26 Jan 2024 17:32:32 +0000
+ Hat Linux)) id 1rTQ4A-00000001eoF-2md2;
+ Fri, 26 Jan 2024 17:32:34 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -85,20 +85,19 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v4 22/47] hw/arm/aspeed: use qemu_configure_nic_device()
-Date: Fri, 26 Jan 2024 17:24:59 +0000
-Message-ID: <20240126173228.394202-23-dwmw2@infradead.org>
+Subject: [PATCH v4 42/47] hw/sparc/sun4m: use qemu_find_nic_info()
+Date: Fri, 26 Jan 2024 17:25:19 +0000
+Message-ID: <20240126173228.394202-43-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240126173228.394202-1-dwmw2@infradead.org>
 References: <20240126173228.394202-1-dwmw2@infradead.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- casper.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1236::1;
- envelope-from=BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org;
- helo=casper.infradead.org
+ desiato.infradead.org. See http://www.infradead.org/rpr.html
+Received-SPF: none client-ip=2001:8b0:10b:1:d65d:64ff:fe57:4e05;
+ envelope-from=BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@desiato.srs.infradead.org;
+ helo=desiato.infradead.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -123,39 +122,81 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Acked-by: Cédric Le Goater <clg@kaod.org>
----
- hw/arm/aspeed.c | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
+Obtain the MAC address from the NIC configuration if there is one, or
+generate one explicitly so that it can be placed in the PROM.
 
-diff --git a/hw/arm/aspeed.c b/hw/arm/aspeed.c
-index cc59176563..bed5e4f40b 100644
---- a/hw/arm/aspeed.c
-+++ b/hw/arm/aspeed.c
-@@ -356,7 +356,6 @@ static void aspeed_machine_init(MachineState *machine)
-     AspeedMachineClass *amc = ASPEED_MACHINE_GET_CLASS(machine);
-     AspeedSoCClass *sc;
-     int i;
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+---
+ hw/sparc/sun4m.c | 20 ++++++++++++++------
+ 1 file changed, 14 insertions(+), 6 deletions(-)
+
+diff --git a/hw/sparc/sun4m.c b/hw/sparc/sun4m.c
+index 550af01690..e782c8ec7a 100644
+--- a/hw/sparc/sun4m.c
++++ b/hw/sparc/sun4m.c
+@@ -299,13 +299,15 @@ static void *iommu_init(hwaddr addr, uint32_t version, qemu_irq irq)
+ 
+ static void *sparc32_dma_init(hwaddr dma_base,
+                               hwaddr esp_base, qemu_irq espdma_irq,
+-                              hwaddr le_base, qemu_irq ledma_irq, NICInfo *nd)
++                              hwaddr le_base, qemu_irq ledma_irq,
++                              MACAddr *mac)
+ {
+     DeviceState *dma;
+     ESPDMADeviceState *espdma;
+     LEDMADeviceState *ledma;
+     SysBusESPState *esp;
+     SysBusPCNetState *lance;
++    NICInfo *nd = qemu_find_nic_info("lance", true, NULL);
+ 
+     dma = qdev_new(TYPE_SPARC32_DMA);
+     espdma = SPARC32_ESPDMA_DEVICE(object_resolve_path_component(
+@@ -320,7 +322,14 @@ static void *sparc32_dma_init(hwaddr dma_base,
+ 
+     lance = SYSBUS_PCNET(object_resolve_path_component(
+                          OBJECT(ledma), "lance"));
+-    qdev_set_nic_properties(DEVICE(lance), nd);
++
++    if (nd) {
++        qdev_set_nic_properties(DEVICE(lance), nd);
++        memcpy(mac->a, nd->macaddr.a, sizeof(mac->a));
++    } else {
++        qemu_macaddr_default_if_unset(mac);
++        qdev_prop_set_macaddr(DEVICE(lance), "mac", mac->a);
++    }
+ 
+     sysbus_realize_and_unref(SYS_BUS_DEVICE(dma), &error_fatal);
+     sysbus_mmio_map(SYS_BUS_DEVICE(dma), 0, dma_base);
+@@ -823,7 +832,7 @@ static void sun4m_hw_init(MachineState *machine)
+     unsigned int smp_cpus = machine->smp.cpus;
+     unsigned int max_cpus = machine->smp.max_cpus;
+     HostMemoryBackend *ram_memdev = machine->memdev;
 -    NICInfo *nd = &nd_table[0];
++    MACAddr hostid;
  
-     bmc->soc = ASPEED_SOC(object_new(amc->soc_name));
-     object_property_add_child(OBJECT(machine), "soc", OBJECT(bmc->soc));
-@@ -371,10 +370,10 @@ static void aspeed_machine_init(MachineState *machine)
-                              &error_fatal);
- 
-     for (i = 0; i < sc->macs_num; i++) {
--        if ((amc->macs_mask & (1 << i)) && nd->used) {
--            qemu_check_nic_model(nd, TYPE_FTGMAC100);
--            qdev_set_nic_properties(DEVICE(&bmc->soc->ftgmac100[i]), nd);
--            nd++;
-+        if ((amc->macs_mask & (1 << i)) &&
-+            !qemu_configure_nic_device(DEVICE(&bmc->soc->ftgmac100[i]),
-+                                       true, NULL)) {
-+            break; /* No configs left; stop asking */
-         }
+     if (machine->ram_size > hwdef->max_mem) {
+         error_report("Too much memory for this machine: %" PRId64 ","
+@@ -884,10 +893,9 @@ static void sun4m_hw_init(MachineState *machine)
+                         hwdef->iommu_pad_base, hwdef->iommu_pad_len);
      }
  
+-    qemu_check_nic_model(nd, TYPE_LANCE);
+     sparc32_dma_init(hwdef->dma_base,
+                      hwdef->esp_base, slavio_irq[18],
+-                     hwdef->le_base, slavio_irq[16], nd);
++                     hwdef->le_base, slavio_irq[16], &hostid);
+ 
+     if (graphic_depth != 8 && graphic_depth != 24) {
+         error_report("Unsupported depth: %d", graphic_depth);
+@@ -1039,7 +1047,7 @@ static void sun4m_hw_init(MachineState *machine)
+                                     machine->initrd_filename,
+                                     machine->ram_size, &initrd_size);
+ 
+-    nvram_init(nvram, (uint8_t *)&nd->macaddr, machine->kernel_cmdline,
++    nvram_init(nvram, hostid.a, machine->kernel_cmdline,
+                machine->boot_config.order, machine->ram_size, kernel_size,
+                graphic_width, graphic_height, graphic_depth,
+                hwdef->nvram_machine_id, "Sun4m");
 -- 
 2.43.0
 
