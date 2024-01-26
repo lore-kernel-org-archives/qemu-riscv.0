@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4149C47422
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 17:36:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70521C47DDB
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 17:36:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTQ6D-0002aC-4v; Fri, 26 Jan 2024 12:34:45 -0500
+	id 1rTQ5w-0001rs-7Y; Fri, 26 Jan 2024 12:34:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rTQ5D-0008GK-Pz; Fri, 26 Jan 2024 12:33:39 -0500
+ id 1rTQ5E-0008HS-AG; Fri, 26 Jan 2024 12:33:40 -0500
 Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rTQ58-0001cS-I6; Fri, 26 Jan 2024 12:33:39 -0500
+ id 1rTQ58-0001ca-Is; Fri, 26 Jan 2024 12:33:39 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=WRBuYa2rIuMOyCdfUaeq0aJt9tQyMaQzZk9uum9u4Yo=; b=pbgctkJkh9eaXYKWWUsW2nOnb5
- l3/8L/atRueV3pL+D+HzG7RHpQ+feZYCUdhPXZkdz2PfjHkDUCs9WxKoRw9ZI0wWNtnrluWAMaMoD
- OJ+N457sv2U7r8YHNyD0xMQ10uyPuk8lzBA04v7nt8pOF9VZIx6qjrTXKgkMpb0OedmfZ94Jd5O7h
- LYLz0sU8o9SGAzI6dm1AVi6h3b60IiNuLpJcHAGvvR8fOturCflELq4U38XAW3XovsNMiuh9jZ8L8
- b/pu5DMAf4ZGcH95ztIBGI2cN+TD9Q+Jm6vW0/1944EDl9T/wUt4fPE1kFkxTLnSyda/hvWlXeU0p
- z8rNRsyA==;
+ bh=DVny/j77ulUUleAP4xxt8G+Z0haYgB9hlZ/h/9Yyrxg=; b=DlRBjExjlAWl+S+PBC+lla3Kef
+ FuduYJJNw+3RIesEwWQ06DsltvkZ60y4rdBDynv1/T8B8x6xYBKa7PlEA43FRHSnvrqK/kcNkt6f4
+ AKgmjbjlKqGsJ84ajqCs6o7Jt1R1IOYfpeRTOLvC0msw3643izcxMzr+Odu1lE9tB9En31J5J+Ypk
+ d0u8RGMG34ZZ8sOqjEKpjBpG7mOPpvBL29eQY1NJhRu6nd9spHxshDeDiPi+PK0c6r0n7KVyMUZnL
+ LLM1YbMTN37dL7+Qf2lYlh93U3q+exZBv4S3jTbCbNeVVNWqcCGAsr5gT2azI7+Gwixra42hQAhbq
+ dj4A4AkQ==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1rTQ49-0000000EKV4-2g9X; Fri, 26 Jan 2024 17:32:35 +0000
+ id 1rTQ49-0000000EKUx-1uSO; Fri, 26 Jan 2024 17:32:35 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.97.1 #2 (Red
- Hat Linux)) id 1rTQ4A-00000001eo0-1h7n;
+ Hat Linux)) id 1rTQ4A-00000001eng-14GT;
  Fri, 26 Jan 2024 17:32:34 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
@@ -85,10 +85,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v4 39/47] hw/openrisc/openrisc_sim: use
- qemu_create_nic_device()
-Date: Fri, 26 Jan 2024 17:25:16 +0000
-Message-ID: <20240126173228.394202-40-dwmw2@infradead.org>
+Subject: [PATCH v4 37/47] hw/net/lasi_i82596: Re-enable build
+Date: Fri, 26 Jan 2024 17:25:14 +0000
+Message-ID: <20240126173228.394202-38-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240126173228.394202-1-dwmw2@infradead.org>
 References: <20240126173228.394202-1-dwmw2@infradead.org>
@@ -123,54 +122,42 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
+When converting to the shiny build-system-du-jour, a typo prevented the
+last_i82596 driver from being built. Correct the config option name to
+re-enable the build. And include "sysemu/sysemu.h" so it actually builds.
+
+Fixes: b1419fa66558 ("meson: convert hw/net")
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/openrisc/openrisc_sim.c | 18 +++++++++---------
- 1 file changed, 9 insertions(+), 9 deletions(-)
+ hw/net/lasi_i82596.c | 1 +
+ hw/net/meson.build   | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/hw/openrisc/openrisc_sim.c b/hw/openrisc/openrisc_sim.c
-index 35da123aef..bffd6f721f 100644
---- a/hw/openrisc/openrisc_sim.c
-+++ b/hw/openrisc/openrisc_sim.c
-@@ -170,7 +170,7 @@ static void openrisc_create_fdt(Or1ksimState *state,
- 
- static void openrisc_sim_net_init(Or1ksimState *state, hwaddr base, hwaddr size,
-                                   int num_cpus, OpenRISCCPU *cpus[],
--                                  int irq_pin, NICInfo *nd)
-+                                  int irq_pin)
- {
-     void *fdt = state->fdt;
-     DeviceState *dev;
-@@ -178,8 +178,10 @@ static void openrisc_sim_net_init(Or1ksimState *state, hwaddr base, hwaddr size,
-     char *nodename;
-     int i;
- 
--    dev = qdev_new("open_eth");
--    qdev_set_nic_properties(dev, nd);
-+    dev = qemu_create_nic_device("open_eth", true, NULL);
-+    if (!dev) {
-+        return;
-+    }
- 
-     s = SYS_BUS_DEVICE(dev);
-     sysbus_realize_and_unref(s, &error_fatal);
-@@ -313,12 +315,10 @@ static void openrisc_sim_init(MachineState *machine)
-     openrisc_create_fdt(state, or1ksim_memmap, smp_cpus, machine->ram_size,
-                         machine->kernel_cmdline);
- 
--    if (nd_table[0].used) {
--        openrisc_sim_net_init(state, or1ksim_memmap[OR1KSIM_ETHOC].base,
--                              or1ksim_memmap[OR1KSIM_ETHOC].size,
--                              smp_cpus, cpus,
--                              OR1KSIM_ETHOC_IRQ, nd_table);
--    }
-+    openrisc_sim_net_init(state, or1ksim_memmap[OR1KSIM_ETHOC].base,
-+                          or1ksim_memmap[OR1KSIM_ETHOC].size,
-+                          smp_cpus, cpus,
-+                          OR1KSIM_ETHOC_IRQ);
- 
-     if (smp_cpus > 1) {
-         openrisc_sim_ompic_init(state, or1ksim_memmap[OR1KSIM_OMPIC].base,
+diff --git a/hw/net/lasi_i82596.c b/hw/net/lasi_i82596.c
+index 6a3147fe2d..09e830ba5f 100644
+--- a/hw/net/lasi_i82596.c
++++ b/hw/net/lasi_i82596.c
+@@ -14,6 +14,7 @@
+ #include "qapi/error.h"
+ #include "qemu/timer.h"
+ #include "hw/sysbus.h"
++#include "sysemu/sysemu.h"
+ #include "net/eth.h"
+ #include "hw/net/lasi_82596.h"
+ #include "hw/net/i82596.h"
+diff --git a/hw/net/meson.build b/hw/net/meson.build
+index 9afceb0619..2b426d3d5a 100644
+--- a/hw/net/meson.build
++++ b/hw/net/meson.build
+@@ -33,7 +33,7 @@ system_ss.add(when: 'CONFIG_MARVELL_88W8618', if_true: files('mv88w8618_eth.c'))
+ system_ss.add(when: 'CONFIG_CADENCE', if_true: files('cadence_gem.c'))
+ system_ss.add(when: 'CONFIG_STELLARIS_ENET', if_true: files('stellaris_enet.c'))
+ system_ss.add(when: 'CONFIG_LANCE', if_true: files('lance.c'))
+-system_ss.add(when: 'CONFIG_LASI_I82596', if_true: files('lasi_i82596.c'))
++system_ss.add(when: 'CONFIG_LASI_82596', if_true: files('lasi_i82596.c'))
+ system_ss.add(when: 'CONFIG_I82596_COMMON', if_true: files('i82596.c'))
+ system_ss.add(when: 'CONFIG_SUNHME', if_true: files('sunhme.c'))
+ system_ss.add(when: 'CONFIG_FTGMAC100', if_true: files('ftgmac100.c'))
 -- 
 2.43.0
 
