@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB66AC47DDB
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 17:35:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 416D4C47422
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 17:35:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTQ5n-0001Rj-LS; Fri, 26 Jan 2024 12:34:15 -0500
+	id 1rTQ50-0007jF-76; Fri, 26 Jan 2024 12:33:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rTQ5E-0008IM-Kq; Fri, 26 Jan 2024 12:33:40 -0500
-Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
+ <BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1rTQ4h-0007F1-6W; Fri, 26 Jan 2024 12:33:07 -0500
+Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rTQ58-0001cO-Jm; Fri, 26 Jan 2024 12:33:40 -0500
+ <BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1rTQ4c-0001jQ-E8; Fri, 26 Jan 2024 12:33:06 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+ d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=7Uppd3XmmgMw4XasqXjrqhb0RWV0UlzHWXb7dMHxQkk=; b=Y5xjzzCyYHVwBdSMOVhNKGeW0i
- 4vvcFhkcRtx0NfvDdc6Eo+Rajz/qrT7LuRHMzDNblleNw/eHjlNZ+14lo0BYTIMel5RVut4KakDcm
- pcEaYTD5+Hu0ylfmx64cEgXxj8jmLsrfwaBepCcayzt242CE3re6zAs7gU5tZvAtsTRcZw+R1hYDn
- FOKySQ4UWj+5Jv5MQFc+l4U4VHZob8iOy6Y9sS9vXKu5WMLD0IDz2QcB2wGI+Glx6W0K45sUvDE8M
- WOiS8RLg2iLZEy1jHmvYyBSND2F1F1H6LydXISsLobmrKgTkhR9byITplob0iPkEty4l/ttty6CzN
- rfP4m9+g==;
+ bh=X6ke30CwveEkz5smymx38sGBgkKUHVYamBl46p3i/0I=; b=G494fFd2mP0Dj7LuDOipJm7Owz
+ lg4FxCPBqEekH32mKUFiRpjvM4gbvJl8IyqV24tQnkqtoD3kIoU0//E55ptwp/KNLJLObDFWl84xA
+ LyyEbvysIGcuVn6jGjouhI95tXxUJ5Wd2Y1sxDNUbYJzAg1ojC1/ejwquyKqaxjA5h1ljcaxMG72Y
+ kKR324Lr/AGkF8i4Pg3J0gV8ytJQjyDewTTJR3xZfCcDxwRcsAqAf2QEZIPUmTm49PSKqH9r6ZzZo
+ qoBceM7r7v7IC4Pnmllgo8gsJCI7tdgMmdddhMb++f9cefXfZaemmAftT3NzjS7qS0dXTKscg1YGC
+ Zf2G4uPw==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1rTQ48-0000000EKUG-0XHH; Fri, 26 Jan 2024 17:32:33 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
+ id 1rTQ4A-000000069Up-1vM6; Fri, 26 Jan 2024 17:32:35 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.97.1 #2 (Red
- Hat Linux)) id 1rTQ48-00000001elt-0h3b;
- Fri, 26 Jan 2024 17:32:32 +0000
+ Hat Linux)) id 1rTQ49-00000001en3-1zqq;
+ Fri, 26 Jan 2024 17:32:33 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -84,21 +84,21 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
- xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>,
- Thomas Huth <thuth@redhat.com>
-Subject: [PATCH v4 14/47] hw/mips/loongson3_virt: use pci_init_nic_devices()
-Date: Fri, 26 Jan 2024 17:24:51 +0000
-Message-ID: <20240126173228.394202-15-dwmw2@infradead.org>
+ xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
+Subject: [PATCH v4 28/47] hw/arm/npcm7xx: use qemu_configure_nic_device,
+ allow emc0/emc1 as aliases
+Date: Fri, 26 Jan 2024 17:25:05 +0000
+Message-ID: <20240126173228.394202-29-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240126173228.394202-1-dwmw2@infradead.org>
 References: <20240126173228.394202-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- casper.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1236::1;
- envelope-from=BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org;
- helo=casper.infradead.org
+ desiato.infradead.org. See http://www.infradead.org/rpr.html
+Received-SPF: none client-ip=2001:8b0:10b:1:d65d:64ff:fe57:4e05;
+ envelope-from=BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@desiato.srs.infradead.org;
+ helo=desiato.infradead.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -123,27 +123,80 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Thomas Huth <thuth@redhat.com>
----
- hw/mips/loongson3_virt.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+Also update the test to specify which device to attach the test socket
+to, and remove the comment lamenting the fact that we can't do so.
 
-diff --git a/hw/mips/loongson3_virt.c b/hw/mips/loongson3_virt.c
-index 33eae01eca..caedde2df0 100644
---- a/hw/mips/loongson3_virt.c
-+++ b/hw/mips/loongson3_virt.c
-@@ -451,9 +451,7 @@ static inline void loongson3_virt_devices_init(MachineState *machine,
-         usb_create_simple(usb_bus_find(-1), "usb-tablet");
-     }
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+---
+ hw/arm/npcm7xx.c               | 16 +++++++++-------
+ tests/qtest/npcm7xx_emc-test.c | 18 ++++--------------
+ 2 files changed, 13 insertions(+), 21 deletions(-)
+
+diff --git a/hw/arm/npcm7xx.c b/hw/arm/npcm7xx.c
+index 15ff21d047..ee395864e4 100644
+--- a/hw/arm/npcm7xx.c
++++ b/hw/arm/npcm7xx.c
+@@ -655,8 +655,9 @@ static void npcm7xx_realize(DeviceState *dev, Error **errp)
  
--    for (i = 0; i < nb_nics; i++) {
--        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
+     /*
+      * EMC Modules. Cannot fail.
+-     * The mapping of the device to its netdev backend works as follows:
+-     * emc[i] = nd_table[i]
++     * Use the available NIC configurations in order, allowing 'emc0' and
++     * 'emc1' to by used as aliases for the model= parameter to override.
++     *
+      * This works around the inability to specify the netdev property for the
+      * emc device: it's not pluggable and thus the -device option can't be
+      * used.
+@@ -664,12 +665,13 @@ static void npcm7xx_realize(DeviceState *dev, Error **errp)
+     QEMU_BUILD_BUG_ON(ARRAY_SIZE(npcm7xx_emc_addr) != ARRAY_SIZE(s->emc));
+     QEMU_BUILD_BUG_ON(ARRAY_SIZE(s->emc) != 2);
+     for (i = 0; i < ARRAY_SIZE(s->emc); i++) {
+-        s->emc[i].emc_num = i;
+         SysBusDevice *sbd = SYS_BUS_DEVICE(&s->emc[i]);
+-        if (nd_table[i].used) {
+-            qemu_check_nic_model(&nd_table[i], TYPE_NPCM7XX_EMC);
+-            qdev_set_nic_properties(DEVICE(sbd), &nd_table[i]);
+-        }
++        char alias[6];
++
++        s->emc[i].emc_num = i;
++        snprintf(alias, sizeof(alias), "emc%u", i);
++        qemu_configure_nic_device(DEVICE(sbd), true, alias);
++
+         /*
+          * The device exists regardless of whether it's connected to a QEMU
+          * netdev backend. So always instantiate it even if there is no
+diff --git a/tests/qtest/npcm7xx_emc-test.c b/tests/qtest/npcm7xx_emc-test.c
+index b046f1d76a..f7646fae2c 100644
+--- a/tests/qtest/npcm7xx_emc-test.c
++++ b/tests/qtest/npcm7xx_emc-test.c
+@@ -225,21 +225,11 @@ static int *packet_test_init(int module_num, GString *cmd_line)
+     g_assert_cmpint(ret, != , -1);
+ 
+     /*
+-     * KISS and use -nic. We specify two nics (both emc{0,1}) because there's
+-     * currently no way to specify only emc1: The driver implicitly relies on
+-     * emc[i] == nd_table[i].
++     * KISS and use -nic. The driver accepts 'emc0' and 'emc1' as aliases
++     * in the 'model' field to specify the device to match.
+      */
+-    if (module_num == 0) {
+-        g_string_append_printf(cmd_line,
+-                               " -nic socket,fd=%d,model=" TYPE_NPCM7XX_EMC " "
+-                               " -nic user,model=" TYPE_NPCM7XX_EMC " ",
+-                               test_sockets[1]);
+-    } else {
+-        g_string_append_printf(cmd_line,
+-                               " -nic user,model=" TYPE_NPCM7XX_EMC " "
+-                               " -nic socket,fd=%d,model=" TYPE_NPCM7XX_EMC " ",
+-                               test_sockets[1]);
 -    }
-+    pci_init_nic_devices(pci_bus, mc->default_nic);
- }
++    g_string_append_printf(cmd_line, " -nic socket,fd=%d,model=emc%d ",
++                           test_sockets[1], module_num);
  
- static void mips_loongson3_virt_init(MachineState *machine)
+     g_test_queue_destroy(packet_test_clear, test_sockets);
+     return test_sockets;
 -- 
 2.43.0
 
