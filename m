@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00634C47422
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 14:25:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D82D8C47422
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 14:36:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTN8H-00079y-7b; Fri, 26 Jan 2024 09:24:37 -0500
+	id 1rTNHJ-0002NR-Pa; Fri, 26 Jan 2024 09:33:57 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTN8E-00079G-HJ
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 09:24:34 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTNHG-0002Il-Ao
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 09:33:54 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTN8B-0005w8-4p
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 09:24:32 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTNHE-0007wc-0G
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 09:33:54 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1706279070;
+ s=mimecast20190719; t=1706279631;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=jUrd5KTeD1q5DTPPS/kJC4Y1ngRfQ3py8ThoXCvuejQ=;
- b=E09fn31CvixwwQiKUxYj0IBnwagUDyfwabgdIoS+JAn8QuNlLst16VC35T7Y5e9amLSdGV
- v+OE8mAG2IRBTyBqFKIG25//PSa4dq6oZu7XwwAFIH7o0Gx/MW7d7bnmD+KV6fhd6VSmW1
- DygBSg8wMdvoiAV37kZDedVQKy+xaew=
-Received: from mail-ot1-f69.google.com (mail-ot1-f69.google.com
- [209.85.210.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=XO3uKYSgCxcQQA08HN7uml3FSQq73eoPnM4iRraw2cY=;
+ b=NwsMUB/6PxY0JCumybYXX9mAauu73kmFVYkoiceuNOYUSQkfOIM6gL6h/oUDEvCauyGZ2U
+ E5ZwqzUUR4ycXcpVrvzBjwLC9evGHCDD3/3sbxB5kHenGhsfFELjH4OBJFPI1wS0d60mmP
+ 2B2pEh113iWJlJBTbD+/651LifpUTVA=
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
+ [209.85.222.200]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-694-In-dHyDxOVCgk_3YR2kjOw-1; Fri, 26 Jan 2024 09:24:28 -0500
-X-MC-Unique: In-dHyDxOVCgk_3YR2kjOw-1
-Received: by mail-ot1-f69.google.com with SMTP id
- 46e09a7af769-6de2dd25786so408030a34.3
- for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 06:24:28 -0800 (PST)
+ us-mta-512-JVShEa3nMEW7y1vIlHpUsQ-1; Fri, 26 Jan 2024 09:33:48 -0500
+X-MC-Unique: JVShEa3nMEW7y1vIlHpUsQ-1
+Received: by mail-qk1-f200.google.com with SMTP id
+ af79cd13be357-78315f41c6cso62997985a.1
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 06:33:48 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706279067; x=1706883867;
+ d=1e100.net; s=20230601; t=1706279628; x=1706884428;
  h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
  :to:content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=jUrd5KTeD1q5DTPPS/kJC4Y1ngRfQ3py8ThoXCvuejQ=;
- b=ZablD6ECNEyddUR3oO4ZlZ4iP+ev6ag+cN8yA2Qnr+rEtIedGT9z3nV1yMJ8ghK+TF
- f9MX2lxgGWGMeevW6ENruE8sath83JLfuOF1lT8a4U7Q4JfzxC8JCwtGqLhlSNj5cTeg
- 8/YGpgLnDf0uCRGq6wCQYXP4LPaDlm5FfE3JKeBvY89Zmi3R4x9KzZFMqhxl4lvmp518
- XumSUV86+P/fwbsGhOAILYSsL+9k2FJfXK5EfDFaWAAJVHJTaPNrqlN6P9KYGtbW/s6q
- eRnneWGmTM3qo+b9IOk4ZDZQD9eyRMxS+t0NndaovGeFiMs9aNDKme4gGHNrxURcj5/g
- CbHQ==
-X-Gm-Message-State: AOJu0YyPBwwq7eVpMsJcBMTct1i8ZcTQ8bVoRVQ766floxJDtc98n00S
- eI9N5rwieJ5nye4B1Oo3DBpDfTEJdczidDCbKubik9fdkqFPMJsWihWJlUTdm3AI86YveuH38lL
- TKmtTq5hHeEe4pcdkYClBraMEEWL5MeXLdpJyzNFwyvXalzZcqXxj
-X-Received: by 2002:a05:6830:16c9:b0:6dc:5e1:3d89 with SMTP id
- l9-20020a05683016c900b006dc05e13d89mr2502827otr.17.1706279067521; 
- Fri, 26 Jan 2024 06:24:27 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEvQb2QMtDakhsKad11G5Ngw+td2fWgSOrBLYhwo2dd5mgI0vJLO90pn1r13zxc6OJiiMceQQ==
-X-Received: by 2002:a05:6830:16c9:b0:6dc:5e1:3d89 with SMTP id
- l9-20020a05683016c900b006dc05e13d89mr2502754otr.17.1706279067162; 
- Fri, 26 Jan 2024 06:24:27 -0800 (PST)
+ bh=XO3uKYSgCxcQQA08HN7uml3FSQq73eoPnM4iRraw2cY=;
+ b=hy/yRbrbyVskKwafM6fdeAYsqys+J3CK51LdUiE+pSTfNFC8fuNP9YQqFmu0yyKcfm
+ Egy94ayIKsLKJ63gCPpMmk9rRqI5cc1cUbOdYbvNOr6A+oGdf9ekjrnrKN9um3Mgy6/X
+ 1192KJPucXPs0ltLnELUTZ9lbbznExhnri57zuNT5glRo5PeLyJ/dPFS1Nu0mUlXh4h0
+ XkqqdQIPlfwHekEXd0S5ZSL1bxuljcEgPuoY4rtW/jA7z7fWQPGj+6wgZSfvbqIQK+x/
+ qUBrddcEwZstwOIzWVU6JkgzvL0H0ekvXMw/yaTiSw1hRc61/XN54osMretEPpOI3jqS
+ YMqA==
+X-Gm-Message-State: AOJu0YwknvToL9MsVqIe/m9PEcz8KJCMgJF7yYzVAkkXRkizZasaSA54
+ a8Ovi1Jz1Fgt68xR2UNq5UEoPIWg/dQdLhxbmTNbCykv12x6lUIa9rG5npvsTdXVyROp5s8mlDz
+ Q+V+yKHgGE4g2dnCkvN6tXmSKdtZ86tn9pu3P5dSb9kxhtddPDUVB
+X-Received: by 2002:a05:620a:a46:b0:783:9a8f:27a4 with SMTP id
+ j6-20020a05620a0a4600b007839a8f27a4mr1843436qka.5.1706279627830; 
+ Fri, 26 Jan 2024 06:33:47 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFLU1FiT+dpVwDXfyESOn/OYV+USTQU7Glot+fqvgnRH9/ehvAQ6E+hMypl3svO3bsrsSmPRA==
+X-Received: by 2002:a05:620a:a46:b0:783:9a8f:27a4 with SMTP id
+ j6-20020a05620a0a4600b007839a8f27a4mr1843428qka.5.1706279627561; 
+ Fri, 26 Jan 2024 06:33:47 -0800 (PST)
 Received: from [192.168.0.9] (ip-109-43-176-119.web.vodafone.de.
  [109.43.176.119]) by smtp.gmail.com with ESMTPSA id
- t25-20020a0cb719000000b0068602f8966esm555293qvd.111.2024.01.26.06.24.15
+ y5-20020a37e305000000b0078392eacfd4sm619792qki.80.2024.01.26.06.33.33
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 26 Jan 2024 06:24:26 -0800 (PST)
-Message-ID: <72f116bd-f9ce-4d61-bb21-b615f15eb4b1@redhat.com>
-Date: Fri, 26 Jan 2024 15:24:13 +0100
+ Fri, 26 Jan 2024 06:33:47 -0800 (PST)
+Message-ID: <9ae3e373-5213-4906-9a57-7a5eb026a51f@redhat.com>
+Date: Fri, 26 Jan 2024 15:33:30 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 01/46] net: add qemu_{configure, create}_nic_device(), 
- qemu_find_nic_info()
+Subject: Re: [PATCH v3 02/46] net: report list of available models according
+ to platform
 To: David Woodhouse <dwmw2@infradead.org>, qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
  Beniamino Galvani <b.galvani@gmail.com>,
@@ -113,11 +113,10 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Stefano Stabellini <sstabellini@kernel.org>,
  Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
- qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, xen-devel@lists.xenproject.org
+ qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
+ xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
- <20240108204909.564514-2-dwmw2@infradead.org>
- <9218c20b-8ba8-402b-bea5-856cb51156dc@redhat.com>
- <0914e6a51218793cca3121879ef21b39d9aac612.camel@infradead.org>
+ <20240108204909.564514-3-dwmw2@infradead.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -161,12 +160,12 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <0914e6a51218793cca3121879ef21b39d9aac612.camel@infradead.org>
+In-Reply-To: <20240108204909.564514-3-dwmw2@infradead.org>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -33
@@ -192,42 +191,71 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 26/01/2024 15.16, David Woodhouse wrote:
-> On Fri, 2024-01-26 at 12:10 +0100, Thomas Huth wrote:
->>
->>> +/* "Please create a device, if you have a configuration for it" */
->>> +DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
->>> +                                    const char *alias)
->>> +{
->>> +    NICInfo *nd = qemu_find_nic_info(typename, match_default, alias);
->>> +    DeviceState *dev;
->>> +
->>> +    if (!nd) {
->>> +        return NULL;
->>> +    }
->>
->> The qemu_check_nic_model() function that was used in some code that you
->> turned into qemu_create_nic_device() used to set:
->>
->>       if (!nd->model)
->>           nd->model = g_strdup(default_model);
->>
->> (in the qemu_find_nic_model() function that has been called by
->> qemu_check_nic_model())
->>
->> Should we do that also here to make sure that nd->model is not NULL afterwards?
+On 08/01/2024 21.26, David Woodhouse wrote:
+> From: David Woodhouse <dwmw@amazon.co.uk>
 > 
-> Good question, but I don't think we care. The qdev_set_nic_properties()
-> function certainly doesn't propagate nd->model to anywhere.
+> By noting the models for which a configuration was requested, we can give
+> the user an accurate list of which NIC models were actually available on
+> the platform/configuration that was otherwise chosen.
 > 
-> I renamed nd->model to nd->modelname in a patch shown below, just to be
-> 100% sure I'm not missing any other code paths which might consume it.
+> Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+> Reviewed-by: Paul Durrant <paul@xen.org>
+> ---
+>   net/net.c | 94 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+>   1 file changed, 94 insertions(+)
+> 
+> diff --git a/net/net.c b/net/net.c
+> index aeb7f573fc..962904eaef 100644
+> --- a/net/net.c
+> +++ b/net/net.c
+> @@ -75,6 +75,8 @@ typedef QSIMPLEQ_HEAD(, NetdevQueueEntry) NetdevQueue;
+>   
+>   static NetdevQueue nd_queue = QSIMPLEQ_HEAD_INITIALIZER(nd_queue);
+>   
+> +static GHashTable *nic_model_help;
+> +
+>   /***********************************************************/
+>   /* network device redirectors */
+>   
+> @@ -1087,12 +1089,94 @@ static int net_init_nic(const Netdev *netdev, const char *name,
+>       return idx;
+>   }
+>   
+> +static gboolean add_nic_result(gpointer key, gpointer value, gpointer user_data)
+> +{
+> +    GPtrArray *results = user_data;
+> +    GPtrArray *alias_list = value;
+> +    const char *model = key;
+> +    char *result;
+> +
+> +    if (!alias_list) {
+> +        result = g_strdup(model);
+> +    } else {
+> +        GString *result_str = g_string_new(model);
+> +        int i;
+> +
+> +        g_string_append(result_str, " (aka ");
 
-Ok, thanks for checking! Maybe mention it in the patch description in v4, so 
-that we've got it recorded somewhere that nd->model might be left at NULL 
-afterwards, but that there are no further consumers, so it should be fine?
+It's an abbreviation, so I'd rather use "a.k.a." instead of "aka".
+
+Apart from that, the patch looks reasonable to me.
 
   Thomas
 
+> +        for (i = 0; i < alias_list->len; i++) {
+> +            if (i) {
+> +                g_string_append(result_str, ", ");
+> +            }
+> +            g_string_append(result_str, alias_list->pdata[i]);
+> +        }
+> +        g_string_append(result_str, ")");
+> +        result = result_str->str;
+> +        g_string_free(result_str, false);
+> +        g_ptr_array_unref(alias_list);
+> +    }
+> +    g_ptr_array_add(results, result);
+> +    return true;
+> +}
+...
 
 
