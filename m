@@ -4,177 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDE38C47DDF
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 14:42:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB971C47422
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 14:44:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTNOn-0002Ew-EJ; Fri, 26 Jan 2024 09:41:42 -0500
+	id 1rTNQR-0005PW-FK; Fri, 26 Jan 2024 09:43:23 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTNOi-0002DJ-N8
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 09:41:38 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTNOf-0001JX-Te
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 09:41:36 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1706280093;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=DmKwAtFzXK8d4BC5O5Aq2vnMeF2thz+sOGStUzBKtm4=;
- b=hLyIkCmeAne1e7Zr11AQrC9MmLyfZC08NuBE+JScmfalPp9KP4gjdLynQFuQ0JCcBKIlbS
- uQuGhV3mLPusQ9gravHWRU+a2qCuCy2EmzT4qxYXV9kK/vNwVr9wqXOjLK7WnhARXzqhDh
- rg0QG4m2hBdLQe3b3rLwDNqlOMB7q8w=
-Received: from mail-yb1-f200.google.com (mail-yb1-f200.google.com
- [209.85.219.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-467-iM-6md7EMmW6r06Ov2NM7g-1; Fri, 26 Jan 2024 09:41:31 -0500
-X-MC-Unique: iM-6md7EMmW6r06Ov2NM7g-1
-Received: by mail-yb1-f200.google.com with SMTP id
- 3f1490d57ef6-dbf216080f5so926851276.1
- for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 06:41:31 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1rTNQQ-0005Of-EB
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 09:43:22 -0500
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1rTNQM-0001kq-EP
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 09:43:21 -0500
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-40e72a567eeso13919125e9.0
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 06:43:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1706280196; x=1706884996; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=EhLQSD7+BW8XOT2H7obLO80KK16iLrWUr/ASvWBkRuk=;
+ b=BMZGQSvzoOeTntngJ/IEvyrBpzW0wApmUBmM12jDwRt3BGnFKaI06PDYlOd5vD1yuO
+ OJBN7PAJTozEyAiPyXM/YVkLbpcnZD5Bs6SZ2nsD1olS6yHCqt2W0V3fKYzL6j3K7w6b
+ w4Qceuc56ThSGxmXWtxHE/h+LldImVlgCHEpkOjXX0QVHbbzyOUOJ9BnnSSdBBF0aNko
+ rtg8LuapCA+O2M3ue1JCAy4+JW0f5iYQtV3+F20dhzMBFf04JxgKOUxFveChxBo5gmZm
+ /gkPONYYvL5h4FbJzV1JQf+WIsHo2jx0gkmuAMsL0sBF2PCNytzkwHtLPWWXB3aTft8p
+ Jh1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706280091; x=1706884891;
- h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
- :to:content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=DmKwAtFzXK8d4BC5O5Aq2vnMeF2thz+sOGStUzBKtm4=;
- b=JRvNKj3LBcWi3WUXx5DH1QQ0e0SH62lskZthCJEWYDEOPaJO7qf8XIDddnPL1ahmLo
- HMjZj698crfRvJRHDxwtMrb19adt3gCGSkVh9Kr51IlhVd3O0VmHCUpsMtIyAyKnfeJX
- fCOTiVF0wlVWU4fwkO7d0KACcIkFT22pYX8E77aMc5fkbYj6+TykuRcQ2BTqf4WqVqBP
- ZWMHmu+AfEquALb1mQtbQPHJ3Q0R+6nOe3hgid0np+3VwWj5XyhGLkXlqAzpsjSR4P7r
- HCmiHaIXaS9alV7W9yVCsWpj+2kRmZ3p0sa4UhRt0uVjaRnkDclUPuIpAhrogWghyh/m
- cDKg==
-X-Gm-Message-State: AOJu0YxLw+sAyXuAjzJcEG8YPBsSfxc5kHe6i94hvfhbABaubj5o8OlN
- U2qozVuRhdtkqx3ohLND2dS/+mRt1VQZ2XM/lpTx21CUtQ8lVLfuSczQRhu2Ln+HU3zxyoZLefV
- pijNq8ORJtGl+adAJ1dn08VToHd2hA1JIeE8XNQKNDZPyt27FcQYr
-X-Received: by 2002:a05:6902:2411:b0:dc2:52f4:2356 with SMTP id
- dr17-20020a056902241100b00dc252f42356mr1291552ybb.119.1706280091353; 
- Fri, 26 Jan 2024 06:41:31 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHZ4lnobhYx6YjCi1LfVF9lTpXT6/dvoUo9LF2Bfk+3VQgsX1dJHh5W0RY2W03/Gm8qexWmsw==
-X-Received: by 2002:a05:6902:2411:b0:dc2:52f4:2356 with SMTP id
- dr17-20020a056902241100b00dc252f42356mr1291539ybb.119.1706280091089; 
- Fri, 26 Jan 2024 06:41:31 -0800 (PST)
-Received: from [192.168.0.9] (ip-109-43-176-119.web.vodafone.de.
- [109.43.176.119]) by smtp.gmail.com with ESMTPSA id
- qj10-20020a056214320a00b00680d39626fcsm555489qvb.47.2024.01.26.06.41.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 26 Jan 2024 06:41:30 -0800 (PST)
-Message-ID: <75b8ba34-6861-495f-8bb1-48a01e50e0e6@redhat.com>
-Date: Fri, 26 Jan 2024 15:41:16 +0100
+ d=1e100.net; s=20230601; t=1706280196; x=1706884996;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=EhLQSD7+BW8XOT2H7obLO80KK16iLrWUr/ASvWBkRuk=;
+ b=tYYXA7RSglJ4E9wg+b4JKQweJzZcFonfxpbRqs9qt3vGwXfk967yNWV0Rj0ap8AFVU
+ UE68/rx+BNIh+dX1X9/p/JXdrpqNBK2NDsZgf3KH1x7ruxvxCAhDl/Op4944jWsjpK6g
+ tXqSIfWG8t6AzkKqgOI7PG0H1vYiLS76pdhbj0YqoEdPND1DVyBMrhWNVPag5ALaCZ7R
+ 9dvC2EwjBb2YsHmzqZBBw56KtAtZqHGnf7HFBBzmF1dOg+Eb79p58W6+TYUcxe//+fH+
+ apjqRdGEufaextUDBWQOf8al5K4gHrmPGJeKxKyQ+dZfR4yO9L9rFD4EoPTXp73jCSo/
+ rYAQ==
+X-Gm-Message-State: AOJu0YwxZrKHuTqECuWndRM/v8Ffd7BBtnUXphra46SnrisrT9V+bkUp
+ bxsjnWArPiSAex2yyvQ0A7hfUFaQS5YTcJVA6+Io3LDlN58pm2wLuu+XRZ/V+/vxCwjMJcQ0t4L
+ QXkw1IZ+vVFozH3jKHpjAuVQQESJX3UsecUWdrw==
+X-Google-Smtp-Source: AGHT+IGgFYkEGapICfD+7OZIAc7B1qLYTLJlzePH6Kestx1lg5b0pP5KESins2khUNkI4Y7yAyfKuXsSzxAbztCM8KU=
+X-Received: by 2002:a05:600c:1992:b0:40e:5577:189 with SMTP id
+ t18-20020a05600c199200b0040e55770189mr568615wmq.147.1706280196041; Fri, 26
+ Jan 2024 06:43:16 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 03/46] net: add qemu_create_nic_bus_devices()
-To: David Woodhouse <dwmw2@infradead.org>, qemu-devel@nongnu.org
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Beniamino Galvani <b.galvani@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Strahinja Jankovic <strahinja.p.jankovic@gmail.com>,
- Niek Linnenbank <nieklinnenbank@gmail.com>, =?UTF-8?Q?C=C3=A9dric_Le_Goater?=
- <clg@kaod.org>, Andrew Jeffery <andrew@codeconstruct.com.au>,
- Joel Stanley <joel@jms.id.au>, Igor Mitsyanko <i.mitsyanko@gmail.com>,
- Jean-Christophe Dubois <jcd@tribudubois.net>,
- Andrey Smirnov <andrew.smirnov@gmail.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Rob Herring <robh@kernel.org>, Subbaraya Sundeep <sundeep.lkml@gmail.com>,
- Jan Kiszka <jan.kiszka@web.de>, Tyrone Ting <kfting@nuvoton.com>,
- Hao Wu <wuhaotsh@google.com>, Radoslaw Biernacki <rad@semihalf.com>,
- Leif Lindholm <quic_llindhol@quicinc.com>,
- Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Alistair Francis <alistair@alistair23.me>, Helge Deller <deller@gmx.de>,
- Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Song Gao
- <gaosong@loongson.cn>, Thomas Huth <huth@tuxfamily.org>,
- Laurent Vivier <laurent@vivier.eu>, Huacai Chen <chenhuacai@kernel.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Aurelien Jarno <aurelien@aurel32.net>, Jason Wang <jasowang@redhat.com>,
- Jia Liu <proljc@gmail.com>, Stafford Horne <shorne@gmail.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Nicholas Piggin <npiggin@gmail.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>, Bin Meng
- <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Eric Farman <farman@linux.ibm.com>, David Hildenbrand <david@redhat.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Magnus Damm <magnus.damm@gmail.com>, Artyom Tarasenko <atar4qemu@gmail.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
- Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
- qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
- xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
- <20240108204909.564514-4-dwmw2@infradead.org>
-From: Thomas Huth <thuth@redhat.com>
-Autocrypt: addr=thuth@redhat.com; keydata=
- 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
-In-Reply-To: <20240108204909.564514-4-dwmw2@infradead.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -33
-X-Spam_score: -3.4
-X-Spam_bar: ---
-X-Spam_report: (-3.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.313,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ <20240108204909.564514-2-dwmw2@infradead.org>
+In-Reply-To: <20240108204909.564514-2-dwmw2@infradead.org>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Fri, 26 Jan 2024 14:43:05 +0000
+Message-ID: <CAFEAcA8JtnXezmo-h-rFZcbqsN_-CnOYCTUfLfd_q=F0702U9g@mail.gmail.com>
+Subject: Re: [PATCH v3 01/46] net: add qemu_{configure, create}_nic_device(),
+ qemu_find_nic_info()
+To: David Woodhouse <dwmw2@infradead.org>
+Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>, 
+ Beniamino Galvani <b.galvani@gmail.com>,
+ Strahinja Jankovic <strahinja.p.jankovic@gmail.com>, 
+ Niek Linnenbank <nieklinnenbank@gmail.com>,
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
+ Andrew Jeffery <andrew@codeconstruct.com.au>, Joel Stanley <joel@jms.id.au>, 
+ Igor Mitsyanko <i.mitsyanko@gmail.com>,
+ Jean-Christophe Dubois <jcd@tribudubois.net>, 
+ Andrey Smirnov <andrew.smirnov@gmail.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Rob Herring <robh@kernel.org>, Subbaraya Sundeep <sundeep.lkml@gmail.com>,
+ Jan Kiszka <jan.kiszka@web.de>, 
+ Tyrone Ting <kfting@nuvoton.com>, Hao Wu <wuhaotsh@google.com>, 
+ Radoslaw Biernacki <rad@semihalf.com>,
+ Leif Lindholm <quic_llindhol@quicinc.com>, 
+ Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Alistair Francis <alistair@alistair23.me>, 
+ Helge Deller <deller@gmx.de>, Paolo Bonzini <pbonzini@redhat.com>, 
+ Eduardo Habkost <eduardo@habkost.net>, "Michael S. Tsirkin" <mst@redhat.com>, 
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Song Gao <gaosong@loongson.cn>, 
+ Thomas Huth <huth@tuxfamily.org>, Laurent Vivier <laurent@vivier.eu>, 
+ Huacai Chen <chenhuacai@kernel.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>, 
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, 
+ Jason Wang <jasowang@redhat.com>, Jia Liu <proljc@gmail.com>, 
+ Stafford Horne <shorne@gmail.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
+ Nicholas Piggin <npiggin@gmail.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>, 
+ David Gibson <david@gibson.dropbear.id.au>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>, 
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>, 
+ Eric Farman <farman@linux.ibm.com>, David Hildenbrand <david@redhat.com>, 
+ Ilya Leoshkevich <iii@linux.ibm.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>, 
+ Magnus Damm <magnus.damm@gmail.com>, Artyom Tarasenko <atar4qemu@gmail.com>, 
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony Perard <anthony.perard@citrix.com>, 
+ Paul Durrant <paul@xen.org>, Max Filippov <jcmvbkbc@gmail.com>,
+ qemu-arm@nongnu.org, 
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, 
+ xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=peter.maydell@linaro.org; helo=mail-wm1-x330.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -190,22 +135,50 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 08/01/2024 21.26, David Woodhouse wrote:
+On Mon, 8 Jan 2024 at 20:49, David Woodhouse <dwmw2@infradead.org> wrote:
+>
 > From: David Woodhouse <dwmw@amazon.co.uk>
-> 
-> This will instantiate any NICs which live on a given bus type. Each bus
-> is allowed *one* substitution (for PCI it's virtio → virtio-net-pci, for
-> Xen it's xen → xen-net-device; no point in overengineering it unless we
-> actually want more).
-> 
+>
+> Most code which directly accesses nd_table[] and nb_nics uses them for
+> one of two things. Either "I have created a NIC device and I'd like a
+> configuration for it", or "I will create a NIC device *if* there is a
+> configuration for it".  With some variants on the theme around whether
+> they actually *check* if the model specified in the configuration is
+> the right one.
+>
+> Provide functions which perform both of those, allowing platforms to
+> be a little more consistent and as a step towards making nd_table[]
+> and nb_nics private to the net code.
+>
+> Also export the qemu_find_nic_info() helper, as some platforms have
+> special cases they need to handle.
+>
 > Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 > Reviewed-by: Paul Durrant <paul@xen.org>
 > ---
->   include/net/net.h |  3 +++
->   net/net.c         | 53 +++++++++++++++++++++++++++++++++++++++++++++++
->   2 files changed, 56 insertions(+)
+>  include/net/net.h |  7 ++++++-
+>  net/net.c         | 51 +++++++++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 57 insertions(+), 1 deletion(-)
+>
+> diff --git a/include/net/net.h b/include/net/net.h
+> index ffbd2c8d56..25ea83fd12 100644
+> --- a/include/net/net.h
+> +++ b/include/net/net.h
+> @@ -207,7 +207,12 @@ int qemu_show_nic_models(const char *arg, const char *const *models);
+>  void qemu_check_nic_model(NICInfo *nd, const char *model);
+>  int qemu_find_nic_model(NICInfo *nd, const char * const *models,
+>                          const char *default_model);
+> -
+> +NICInfo *qemu_find_nic_info(const char *typename, bool match_default,
+> +                            const char *alias);
+> +bool qemu_configure_nic_device(DeviceState *dev, bool match_default,
+> +                               const char *alias);
+> +DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
+> +                                    const char *alias);
 
-Reviewed-by: Thomas Huth <thuth@redhat.com>
+Could we have doc comments that document the purpose and API
+for these new global functions, please?
 
-
+thanks
+-- PMM
 
