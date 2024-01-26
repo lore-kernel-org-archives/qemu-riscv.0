@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDFFBC47422
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 22:05:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 790D5C47422
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 22:05:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTUJH-0006wv-4t; Fri, 26 Jan 2024 17:04:27 -0500
+	id 1rTUKH-0008Dw-Q2; Fri, 26 Jan 2024 17:05:31 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rTUJG-0006vx-D8
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 17:04:26 -0500
-Received: from mail-lj1-x22c.google.com ([2a00:1450:4864:20::22c])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rTUJt-0007j8-6n
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 17:05:07 -0500
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rTUJE-0003NR-Ay
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 17:04:26 -0500
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2cf4bc44ce1so10356081fa.0
- for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 14:04:23 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rTUJo-0003gy-18
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 17:05:03 -0500
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-40e80046264so18407835e9.0
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 14:04:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706306662; x=1706911462; darn=nongnu.org;
+ d=linaro.org; s=google; t=1706306698; x=1706911498; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=44vj1U77cG8ByngsPLkvtVP46j6F/SEPuSA1albtNLM=;
- b=Qdg5POseFn96pizitSylgPijIrzKPtAg0qpl8eWI0nT7Z/FgAQsngbiFY//li5o8L+
- klriDw5oNLLb890mf1Xp4lD5lOxg+IZDaxaVS9gv4OkIQc5mdkqMiGsXUqu3EwT7c40A
- fP9CXIvDOerUomCyx3PlEFmjkavPI7R1QSlki+DeLucz6y1KyL80rY8ZnXkPnOYg0yjW
- dAKdwXmy3RGXPrKZ5UzD7oqMtezV9fhClDnfDbEh33CHq3HjWtTaC1gxY47zVVO698rl
- Kjb+g9fGUh1L7Z1OPVFyZUozS7bMs4dqBknTjfv4vOGVeC+eiRD3BjMuC8wCjQ/80+DC
- VzUw==
+ bh=cPu55INOwoo+R5I4TkxjPDT1q0XH169I9oVKNyLzarM=;
+ b=oaEmwjqqryulukgyuMsVx7oBIBceLgoF9Dy4vyFT3YN3HjnKJH+3ORTu4kB8UAPGEb
+ 70IF4CkptYf8o0qKG8XOXwqmt02YUQP6taFycl9yJ5yeEJ6t3BBcsE+QJwpDLIn/xnNN
+ Uc0CtccIlWy7RquzXip6RgyiTZSVF7zqEKhyEYGF92/cZnoNNtA3TP7zmunYeTE7fFWG
+ vW38+Y/frt7KC/HnsOVr8VJ6lsMno071c4khHvw5AW9XnCAQ/NSBK0s7nLkW8h7+t6Ve
+ j0AzCLg0dAcPjJGhCMya9l/kviMlGCIVW2sEqogJf+Pd3zoyD7nGLhGPoZ772qn5V5o8
+ 1aSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706306662; x=1706911462;
+ d=1e100.net; s=20230601; t=1706306698; x=1706911498;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=44vj1U77cG8ByngsPLkvtVP46j6F/SEPuSA1albtNLM=;
- b=Jsjaj8pU5Q3fRz5bGvq/igp3DBaYBjeTgtAjepJxnLlCagAaEtPT3y5wB6M7URl8UN
- nTgg5C5l3ADbOL87qvTrzMQTrZqkvzLOjdafjxmjeRa2mr/CcUeEib0Op72QzPMEg0Zm
- 2yx+GSCd5bkML19PMEy+AN25/rHMlJqw398rahnTr7tLq0R3icL2zGU4oo0J6R6DDs8S
- sAdz+ATIlrwvdQ65viX04jyPRJs/dqch5747eoDVjAG/9Plfmln7ZKBBTBQuJcnAT/s/
- nlu+DZ4khb3ix4fLi5olUzthudg6zTjtw6vus9MTiq404lGG9GSjjFOtVlW48N6xPgXN
- ZgWg==
-X-Gm-Message-State: AOJu0YwCZ3QvEICaXM6QPXq//wNL6++g1d0EKo1HYUVD0gxF1l5eOL3X
- jzJTdr6XtzHvqmGVVQbTAT95UMr8cBXtbXzgXU35S8tcptkDPjQ4qBbV97lNFw4=
-X-Google-Smtp-Source: AGHT+IEnfgWYNd5eOLvLxcXg8k3YinEkfDQvcjv1CL6+umhezAI8wEelphIMVoflH/5EHRA+97EafA==
-X-Received: by 2002:a05:651c:1a29:b0:2cf:127d:a79f with SMTP id
- by41-20020a05651c1a2900b002cf127da79fmr334833ljb.51.1706306662283; 
- Fri, 26 Jan 2024 14:04:22 -0800 (PST)
+ bh=cPu55INOwoo+R5I4TkxjPDT1q0XH169I9oVKNyLzarM=;
+ b=t0ghauUc9GXn5i93pNXtagtfQ0sWHYYelYv3mNHE4TaaycsnJjXtAYOBDDOlVexbnN
+ HEo25djheKwzGexm/zx0Eio2WydKlYIY6KFvbUt2PPEStBIVcyoQvfrOmwRjoDrbJek5
+ 0eL8Xy8tes7EtXDTFBuwiMqJaOQDaV3+qqjQnocoq/cMLk6ZOrq7E/C4o8H0NfoI3HD6
+ bpB88Yumqf9fphz9+AKdBuGKCgntpEXnLjk7qEWv/yFuChVIU48Zs5Yx9N48NC9PVLSr
+ PpMX94qjtB3uof/hCyaxIlSgJD2GIGG1NyxPQK20hFT0G3mC/kj2vm23PoFst0yWQl7X
+ SG6Q==
+X-Gm-Message-State: AOJu0YyvUsWt7G6EMKt6WERlS2k5TQQcY4wAH2S/j9DaOIAdfMpC3o0W
+ dBYyFMqsDAIDCtIQpgZS2TRtcGqt85gCUVUXQXRnzI4+mFmWVjtwQlHDxr1KR1k=
+X-Google-Smtp-Source: AGHT+IFz1Gm3pWnHWJtepFYUd+mHJkbx4hd3qM79tYeiKpusAyuve3swffXhdA6yAfiWQSALIRnIQw==
+X-Received: by 2002:a05:600c:1f91:b0:40c:610d:c2bf with SMTP id
+ je17-20020a05600c1f9100b0040c610dc2bfmr319162wmb.16.1706306698503; 
+ Fri, 26 Jan 2024 14:04:58 -0800 (PST)
 Received: from m1x-phil.lan ([176.176.142.39])
  by smtp.gmail.com with ESMTPSA id
- g14-20020a056402180e00b0055920196ddesm1004348edy.54.2024.01.26.14.04.20
+ fi5-20020a056402550500b005583e670df7sm1016030edb.73.2024.01.26.14.04.56
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 26 Jan 2024 14:04:21 -0800 (PST)
+ Fri, 26 Jan 2024 14:04:58 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-s390x@nongnu.org,
@@ -65,24 +65,25 @@ Cc: qemu-arm@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-s390x@nongnu.org,
  Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
  Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v2 02/23] scripts/coccinelle: Add cpu_env.cocci_template script
-Date: Fri, 26 Jan 2024 23:03:44 +0100
-Message-ID: <20240126220407.95022-3-philmd@linaro.org>
+Subject: [PATCH v2 08/23] target/hppa: Prefer fast cpu_env() over slower CPU
+ QOM cast macro
+Date: Fri, 26 Jan 2024 23:03:50 +0100
+Message-ID: <20240126220407.95022-9-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240126220407.95022-1-philmd@linaro.org>
 References: <20240126220407.95022-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::22c;
- envelope-from=philmd@linaro.org; helo=mail-lj1-x22c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::332;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,132 +99,90 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add a Coccinelle script to convert the following slow path
-(due to the QOM cast macro):
-
-  &ARCH_CPU(..)->env
-
-to the following fast path:
-
-  cpu_env(..)
+Mechanical patch produced running the command documented
+in scripts/coccinelle/cpu_env.cocci_template header.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- MAINTAINERS                               |  1 +
- scripts/coccinelle/cpu_env.cocci_template | 92 +++++++++++++++++++++++
- 2 files changed, 93 insertions(+)
- create mode 100644 scripts/coccinelle/cpu_env.cocci_template
+ target/hppa/cpu.c        | 8 ++------
+ target/hppa/int_helper.c | 8 ++------
+ target/hppa/mem_helper.c | 3 +--
+ 3 files changed, 5 insertions(+), 14 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index dfaca8323e..1d57130ff8 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -157,6 +157,7 @@ F: accel/tcg/
- F: accel/stubs/tcg-stub.c
- F: util/cacheinfo.c
- F: util/cacheflush.c
-+F: scripts/coccinelle/cpu_env.cocci_template
- F: scripts/decodetree.py
- F: docs/devel/decodetree.rst
- F: docs/devel/tcg*
-diff --git a/scripts/coccinelle/cpu_env.cocci_template b/scripts/coccinelle/cpu_env.cocci_template
-new file mode 100644
-index 0000000000..462ed418bb
---- /dev/null
-+++ b/scripts/coccinelle/cpu_env.cocci_template
-@@ -0,0 +1,92 @@
-+/*
-+
-+ Convert &ARCH_CPU(..)->env to use cpu_env(..).
-+
-+ Rationale: ARCH_CPU() might be slow, being a QOM cast macro.
-+            cpu_env() is its fast equivalent.
-+
-+ SPDX-License-Identifier: GPL-2.0-or-later
-+ SPDX-FileCopyrightText: Linaro Ltd 2024
-+ SPDX-FileContributor: Philippe Mathieu-Daudé
-+
-+ Usage as of v8.2.0:
-+
-+ $ for targetdir in target/*; do test -d $targetdir || continue; \
-+       export target=${targetdir:7}; \
-+       sed \
-+           -e "s/__CPUArchState__/$( \
-+               git grep -h --no-line-number '@env: #CPU.*State' \
-+                   target/$target/cpu.h \
-+               | sed -n -e 's/.*\(CPU.*State\).\?/\1/p')/g" \
-+           -e "s/__ARCHCPU__/$( \
-+               git grep -h --no-line-number OBJECT_DECLARE_CPU_TYPE.*CPU \
-+                   target/$target/cpu-qom.h \
-+               | sed -n -e 's/.*(\(.*\), .*, .*)/\1/p')/g" \
-+           -e "s/__ARCH_CPU__/$( \
-+               git grep -h --no-line-number OBJECT_DECLARE_CPU_TYPE.*CPU \
-+                   target/$target/cpu-qom.h \
-+               | sed -n -e 's/.*(.*, .*, \(.*\))/\1/p')/g" \
-+       < scripts/coccinelle/cpu_env.cocci_template \
-+       > $TMPDIR/cpu_env_$target.cocci; \
-+       for dir in hw target/$target; do \
-+           spatch --macro-file scripts/cocci-macro-file.h \
-+                  --sp-file $TMPDIR/cpu_env_$target.cocci \
-+                  --keep-comments \
-+                  --dir $dir \
-+                  --in-place; \
-+       done; \
-+   done
-+
-+*/
-+
-+/* Argument is CPUState* */
-+@ CPUState_arg_used @
-+CPUState *cs;
-+identifier cpu;
-+identifier env;
-+@@
-+-    __ARCHCPU__ *cpu = __ARCH_CPU__(cs);
-+-    __CPUArchState__ *env = &cpu->env;
-++    __CPUArchState__ *env = cpu_env(cs);
-+     ... when != cpu
-+
-+/*
-+ * Argument is not CPUState* but a related QOM object.
-+ * CPU() is not a QOM macro but a cast (See commit 0d6d1ab499).
-+ */
-+@ depends on never CPUState_arg_used @
-+identifier obj;
-+identifier cpu;
-+identifier env;
-+@@
-+-    __ARCHCPU__ *cpu = __ARCH_CPU__(obj);
-+-    __CPUArchState__ *env = &cpu->env;
-++    __CPUArchState__ *env = cpu_env(CPU(obj));
-+     ... when != cpu
-+
-+/* Both first_cpu/current_cpu are CPUState* */
-+@@
-+symbol first_cpu;
-+symbol current_cpu;
-+@@
-+(
-+-    CPU(first_cpu)
-++    first_cpu
-+|
-+-    CPU(current_cpu)
-++    current_cpu
-+)
-+
-+/* When single use of 'env', call cpu_env() in place */
-+@@
-+type CPUArchState;
-+identifier env;
-+expression cs;
-+@@
-+ {
-+-    CPUArchState *env = cpu_env(cs);
-+     ... when != env
-+-     env
-++     cpu_env(cs)
-+     ... when != env
-+ }
+diff --git a/target/hppa/cpu.c b/target/hppa/cpu.c
+index 14e17fa9aa..3200de0998 100644
+--- a/target/hppa/cpu.c
++++ b/target/hppa/cpu.c
+@@ -106,11 +106,8 @@ void hppa_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+                                   MMUAccessType access_type, int mmu_idx,
+                                   uintptr_t retaddr)
+ {
+-    HPPACPU *cpu = HPPA_CPU(cs);
+-    CPUHPPAState *env = &cpu->env;
+-
+     cs->exception_index = EXCP_UNALIGN;
+-    hppa_set_ior_and_isr(env, addr, MMU_IDX_MMU_DISABLED(mmu_idx));
++    hppa_set_ior_and_isr(cpu_env(cs), addr, MMU_IDX_MMU_DISABLED(mmu_idx));
+ 
+     cpu_loop_exit_restore(cs, retaddr);
+ }
+@@ -145,8 +142,7 @@ static void hppa_cpu_realizefn(DeviceState *dev, Error **errp)
+ static void hppa_cpu_initfn(Object *obj)
+ {
+     CPUState *cs = CPU(obj);
+-    HPPACPU *cpu = HPPA_CPU(obj);
+-    CPUHPPAState *env = &cpu->env;
++    CPUHPPAState *env = cpu_env(CPU(obj));
+ 
+     cs->exception_index = -1;
+     cpu_hppa_loaded_fr0(env);
+diff --git a/target/hppa/int_helper.c b/target/hppa/int_helper.c
+index efe638b36e..d072ad2af7 100644
+--- a/target/hppa/int_helper.c
++++ b/target/hppa/int_helper.c
+@@ -99,8 +99,7 @@ void HELPER(write_eiem)(CPUHPPAState *env, target_ulong val)
+ 
+ void hppa_cpu_do_interrupt(CPUState *cs)
+ {
+-    HPPACPU *cpu = HPPA_CPU(cs);
+-    CPUHPPAState *env = &cpu->env;
++    CPUHPPAState *env = cpu_env(cs);
+     int i = cs->exception_index;
+     uint64_t old_psw;
+ 
+@@ -268,9 +267,6 @@ void hppa_cpu_do_interrupt(CPUState *cs)
+ 
+ bool hppa_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+ {
+-    HPPACPU *cpu = HPPA_CPU(cs);
+-    CPUHPPAState *env = &cpu->env;
+-
+     if (interrupt_request & CPU_INTERRUPT_NMI) {
+         /* Raise TOC (NMI) interrupt */
+         cpu_reset_interrupt(cs, CPU_INTERRUPT_NMI);
+@@ -280,7 +276,7 @@ bool hppa_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+     }
+ 
+     /* If interrupts are requested and enabled, raise them.  */
+-    if ((env->psw & PSW_I) && (interrupt_request & CPU_INTERRUPT_HARD)) {
++    if ((cpu_env(cs)->psw & PSW_I) && (interrupt_request & CPU_INTERRUPT_HARD)) {
+         cs->exception_index = EXCP_EXT_INTERRUPT;
+         hppa_cpu_do_interrupt(cs);
+         return true;
+diff --git a/target/hppa/mem_helper.c b/target/hppa/mem_helper.c
+index bb85962d50..7e73b80788 100644
+--- a/target/hppa/mem_helper.c
++++ b/target/hppa/mem_helper.c
+@@ -357,8 +357,7 @@ bool hppa_cpu_tlb_fill(CPUState *cs, vaddr addr, int size,
+                        MMUAccessType type, int mmu_idx,
+                        bool probe, uintptr_t retaddr)
+ {
+-    HPPACPU *cpu = HPPA_CPU(cs);
+-    CPUHPPAState *env = &cpu->env;
++    CPUHPPAState *env = cpu_env(cs);
+     HPPATLBEntry *ent;
+     int prot, excp, a_prot;
+     hwaddr phys;
 -- 
 2.41.0
 
