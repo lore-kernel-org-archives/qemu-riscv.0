@@ -4,88 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F262C47422
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 18:16:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03209C47422
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 21:12:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTQkb-0005e3-9r; Fri, 26 Jan 2024 13:16:25 -0500
+	id 1rTTTw-0007bT-G0; Fri, 26 Jan 2024 16:11:24 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1rTQkZ-0005d7-MV
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 13:16:23 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1rTQkX-0003TG-E8
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 13:16:23 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1706292980;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=uNG6H+3tybJ100+FQ7ifNQULqIkXKOGQRCmck6q+baY=;
- b=dBWZnp3zPPd2/AjiEvuq1Hmih1zFnun9C6IU+BX3Yl1E47sZlrZPmFnR5c1XRK7wYJAV2b
- vgY5vuKT2ef+SNu8Sxus4/GT4SA5M2B+O5uLjsYVqZvlMPOWe648CHskwlmXf8rh49yo7v
- egO+SpXvyJIiUwW+E7cTKpUGD8wevrk=
-Received: from mail-oi1-f198.google.com (mail-oi1-f198.google.com
- [209.85.167.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-93-DCT-QgHYP2C-nFwFr_YNdQ-1; Fri, 26 Jan 2024 13:16:18 -0500
-X-MC-Unique: DCT-QgHYP2C-nFwFr_YNdQ-1
-Received: by mail-oi1-f198.google.com with SMTP id
- 5614622812f47-3bd97c17091so1245059b6e.3
- for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 10:16:18 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rTTTu-0007ad-Ba
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 16:11:23 -0500
+Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rTTTp-00073E-LZ
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 16:11:22 -0500
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-40ee418e7edso12407065e9.2
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 13:11:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1706303475; x=1706908275; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=vxYwthXZn31ySjM2DeVKX29v0Ws6VePUGUeM9gtZWoA=;
+ b=JDyHEwqvqboDEDYNihCFNcIfscK5BYQxoaPaj7zQNDvQce41kvjJJ7wWCIoXaPO8Ny
+ V2C2JM9kpYUFAtpXvyb+Qeb5R/mhscWC4bgWqWLQPNrm3/piv4BS/n5Q/AEQrJxJDRv4
+ DgS03b2WjA0PboF5keTTl/bbAyy6WchopJLj8IiGlLvG2EcChbYI63uVPl6PRu59jT8W
+ 7iBNyeGdfQ+9oQiKVjYhLiGjnXCeT71Xf4L4Fu8+/6iCG+ssZWyL0XXqf13O0+9lvUUU
+ NNVVWzO25VGIAXR6AB7iTn96O8KOVfsQdkbAAL+4FdRxTmR8gkSSyq8K2WRFj+u1yYk4
+ laVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706292977; x=1706897777;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=uNG6H+3tybJ100+FQ7ifNQULqIkXKOGQRCmck6q+baY=;
- b=Pb7amESVnIB0p2lRBMp2grNG4B9kh3lR5kEhlgMnrV+CuX3JzYrTCon3eubaY7RMLb
- Il4iZst24vi3RmuXFQ9RxsdynKkcp6tdRWMcrLa5XzdWMOWHGG8HEoX6MCOUGErtbYF+
- DisDotPEfveNqif1+7tMLEVS9v4m6cRJki5gB8xEerKgaADPtREc5iE65ij69H8qFnJJ
- A5wookUrHfdHw4iPzOvWmWWs62hx0iAnbB7LgmtlBzx+71XMwMioJTB7jTZ8HJNILtWT
- oCt6VNy6CAejykK8T75E2ugEZiZQhG/2MJQMg0h/I2AbmUnhslfkQ3k+2UWqiQr0IXaE
- MRWQ==
-X-Gm-Message-State: AOJu0YwH7t/Jq8jqKONMd78Ai5kYyvGc6/gMlhoY0S2Z7mMwZSY+YCCq
- iZXmaBBAJtuXR4M4K0HtbCrTAAXrBlP1S+EcSy/xt+ZFwXKPNeLU8FC9iwJRF/sWRyBovP9bE1A
- p2fx3kFaFDrV3FaVzJweabOXKPRC9Ta5pDD4jE4R5u5m+EuOAchfaisAcWI3T0h3CEw7bAp3vXr
- NE6HxkNqzOi8TdJBX5h6XD0S2VbDI=
-X-Received: by 2002:a05:6808:d4b:b0:3bd:f41f:f9a6 with SMTP id
- w11-20020a0568080d4b00b003bdf41ff9a6mr168934oik.25.1706292977729; 
- Fri, 26 Jan 2024 10:16:17 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFxGYME3uEkFpYZdF0yuGNjBmdCuRZUGKjm+7ziR8gEBrV71tk/J3Re8/gUBge6UdSLwQtE2ayJ0S4PUmkNJQ4=
-X-Received: by 2002:a05:6808:d4b:b0:3bd:f41f:f9a6 with SMTP id
- w11-20020a0568080d4b00b003bdf41ff9a6mr168928oik.25.1706292977542; Fri, 26 Jan
- 2024 10:16:17 -0800 (PST)
+ d=1e100.net; s=20230601; t=1706303475; x=1706908275;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=vxYwthXZn31ySjM2DeVKX29v0Ws6VePUGUeM9gtZWoA=;
+ b=CsKcR6eQc3EziuwY9RXLmbMlgYqOZhgUaQk48c+eCBE34ISKisVi9/U4f7BaPlX6gf
+ 6wEJ+M0QVFMY9ewfEzgaeNY4MQAoOBHXhjnmke8yQJLZMX1Ig3KK9JqF7Z6n3UWSY7wf
+ tviOcD9isGIKA9UoOvMeR4Qg3DXKAw9uqGtPCgNM6EKf/3+S/50LpxGXv33ujSVxx4Mj
+ w/UgSKW71Efyq5XQqYjTIqhSMNinPDJgXu406QwA9346kYp4ZMR17ZskNrEXL8C1iVId
+ OsFeJm6Pqg9n8ulZZbUcD08NJfY3y6iei0S43ENjmDdu2hY14YmBY39uznV8NJCieqBq
+ LgLw==
+X-Gm-Message-State: AOJu0YyA4I0DvHpgRO/sJvWG8zMpJDWTTdRqe0sI7jkXk5fE3otvwpEd
+ V+UPIwq1zl+SK5EqkBieHdUWoEJ3O41AEDBFwYQ2wb8udr1juAjgSbWh7IuihI8=
+X-Google-Smtp-Source: AGHT+IHPfVDNkHfFEZ920e1AvtHAgCTjycghkqkwfmMNm/uoHYkWmbEXdBjZ/pk1I5xFKz0+SjDwuw==
+X-Received: by 2002:a05:600c:4ca7:b0:40e:5534:728c with SMTP id
+ g39-20020a05600c4ca700b0040e5534728cmr286415wmp.136.1706303475465; 
+ Fri, 26 Jan 2024 13:11:15 -0800 (PST)
+Received: from [192.168.69.100] ([176.176.142.39])
+ by smtp.gmail.com with ESMTPSA id
+ a5-20020a05600c348500b0040e48abec33sm6615547wmq.45.2024.01.26.13.11.10
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 26 Jan 2024 13:11:15 -0800 (PST)
+Message-ID: <c4c07c69-11c6-4883-8ff8-1e5ec627d9bc@linaro.org>
+Date: Fri, 26 Jan 2024 22:11:08 +0100
 MIME-Version: 1.0
-References: <20240124155425.73195-1-philmd@linaro.org>
-In-Reply-To: <20240124155425.73195-1-philmd@linaro.org>
-From: Paolo Bonzini <pbonzini@redhat.com>
-Date: Fri, 26 Jan 2024 19:16:06 +0100
-Message-ID: <CABgObfb8pKdf=Q7JPDQ9j=Zanbk9gYOC8ufxprGA88zAPaoO5Q@mail.gmail.com>
-Subject: Re: [PATCH 0/2] accel/kvm: Sanitize KVM_HAVE_MCE_INJECTION definition
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>, 
- qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, 
- Thomas Huth <thuth@redhat.com>, Peter Maydell <peter.maydell@linaro.org>,
- kvm@vger.kernel.org, qemu-s390x@nongnu.org
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=pbonzini@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -33
-X-Spam_score: -3.4
-X-Spam_bar: ---
-X-Spam_report: (-3.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.313,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] bulk: Prefer fast cpu_env() over slower CPU QOM cast
+ macro
+Content-Language: en-US
+To: Thomas Huth <thuth@redhat.com>, qemu-devel@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
+ Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
+ Richard Henderson <richard.henderson@linaro.org>, qemu-s390x@nongnu.org,
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
+ Nicholas Piggin <npiggin@gmail.com>, =?UTF-8?B?RnLDqWTDqXJpYyBCYXJyYXQ=?=
+ <fbarrat@linux.ibm.com>, Daniel Henrique Barboza <danielhb413@gmail.com>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>, Alexander Graf
+ <agraf@csgraf.de>, Michael Rolnik <mrolnik@gmail.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Cameron Esfahani <dirty@apple.com>, Roman Bolshakov <rbolshakov@ddn.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>, David Woodhouse
+ <dwmw2@infradead.org>, Laurent Vivier <laurent@vivier.eu>,
+ Aurelien Jarno <aurelien@aurel32.net>, Jiaxun Yang
+ <jiaxun.yang@flygoat.com>, Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Huacai Chen <chenhuacai@kernel.org>, Chris Wulff <crwulff@gmail.com>,
+ Marek Vasut <marex@denx.de>, Stafford Horne <shorne@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Max Filippov <jcmvbkbc@gmail.com>, xen-devel@lists.xenproject.org,
+ kvm@vger.kernel.org
+References: <20240125165648.49898-1-philmd@linaro.org>
+ <20240125165648.49898-3-philmd@linaro.org>
+ <135941df-2f8b-4fd5-91c7-40b413e6eae3@redhat.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <135941df-2f8b-4fd5-91c7-40b413e6eae3@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -102,36 +131,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jan 24, 2024 at 4:54=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
-<philmd@linaro.org> wrote:
->
-> Trivial replacement of KVM_HAVE_MCE_INJECTION by
-> KVM_ARCH_HAVE_MCE_INJECTION (not the "ARCH_" difference).
+On 26/1/24 18:09, Thomas Huth wrote:
+> On 25/01/2024 17.56, Philippe Mathieu-Daudé wrote:
+>> Mechanical patch produced running the command documented
+>> in scripts/coccinelle/cpu_env.cocci_template header.
+>>
+>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>> ---
 
-I am confused, why can't you just rename the symbol and instead you go
-through this change?
+>>   114 files changed, 273 insertions(+), 548 deletions(-)
+> 
+> A huge patch ... I wonder whether it would make sense to split it up by 
+> target architecture to ease the review?
+> 
+> ...
+>> diff --git a/hw/i386/vmmouse.c b/hw/i386/vmmouse.c
+>> index a8d014d09a..eb0613bfbe 100644
+>> --- a/hw/i386/vmmouse.c
+>> +++ b/hw/i386/vmmouse.c
+>> @@ -74,8 +74,7 @@ struct VMMouseState {
+>>   static void vmmouse_get_data(uint32_t *data)
+>>   {
+>> -    X86CPU *cpu = X86_CPU(current_cpu);
+>> -    CPUX86State *env = &cpu->env;
+>> +    CPUX86State *env = cpu_env(CPU(current_cpu));
+> 
+> No need for the CPU() cast here, current_cpu is already
+> of type "CPUState *".
 
-Paolo
+Yes, Paolo noticed and I fixed for v2.
 
-> Philippe Mathieu-Daud=C3=A9 (2):
->   accel/kvm: Define KVM_ARCH_HAVE_MCE_INJECTION in each target
->   accel/kvm: Directly check KVM_ARCH_HAVE_MCE_INJECTION value in place
->
->  include/sysemu/kvm.h         |  7 ++++++-
->  target/arm/cpu-param.h       |  5 +++++
->  target/arm/cpu.h             |  4 ----
->  target/i386/cpu-param.h      |  2 ++
->  target/i386/cpu.h            |  2 --
->  target/loongarch/cpu-param.h |  2 ++
->  target/mips/cpu-param.h      |  2 ++
->  target/ppc/cpu-param.h       |  2 ++
->  target/riscv/cpu-param.h     |  2 ++
->  target/s390x/cpu-param.h     |  2 ++
->  accel/kvm/kvm-all.c          | 10 +++++-----
->  11 files changed, 28 insertions(+), 12 deletions(-)
->
-> --
-> 2.41.0
->
+> I'll stop here, please respin with the cpu_env(CPU(current_cpu)) fixed to
+> cpu_env(current_cpu), and please split the patch by target CPU types.
 
+Well I don't know, this is an reproducible mechanical patch..
+But indeed as Paolo you found an optimization so worth not making
+human review a pain.
+
+I was about to post v2 but I'll see how to split.
+
+Thanks for the review!
+
+Phil.
 
