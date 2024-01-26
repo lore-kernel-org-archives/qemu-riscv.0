@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CE81C47422
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 13:32:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2206C47DDF
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 13:32:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTMIh-00012v-Vu; Fri, 26 Jan 2024 08:31:20 -0500
+	id 1rTMIZ-0000pt-Pw; Fri, 26 Jan 2024 08:31:11 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rTMIb-0000rP-KZ
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 08:31:13 -0500
-Received: from mail-ed1-x536.google.com ([2a00:1450:4864:20::536])
+ id 1rTMIY-0000lX-1v
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 08:31:10 -0500
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rTMIZ-0007cw-Dq
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 08:31:13 -0500
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-55a5e7fa471so293551a12.1
- for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 05:31:10 -0800 (PST)
+ id 1rTMIU-0007bM-E5
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 08:31:09 -0500
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-40eacb6067dso7838035e9.1
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 05:31:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1706275870; x=1706880670; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1706275865; x=1706880665; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=c+kBSbmB+uu4ccq3+PBWVAG48fqoWqgXKPn/QchcjM0=;
- b=TxennN52JV8bHgwXoZ4PUTFZejDuxWdNSIUmZ6Gv1uk1T6ciwTQ5hG6HBktjoli1zL
- zGQrHzW87mYgIFy8w4q/fpnmt2+THZImgHpIr78M2HwDVk32MizEUayCMpyF2Cg8aqRY
- jKRX2TtCEvDeFDy/jwktwPPeZUIYcC3pNfl+IFJj57VBeyHUg86ZoTZ3x327LnJzxHbE
- 7O5BpvPE3u7KWoauEEmaDWm5FjXz46FmQRxdWw3jGljSOCMfdtBcBKROC8vePqC8E5hW
- XYXiYMg62oJtD26e1qkaJcwcsLfW178WuPay00k4GwW985XsOcqMcAuMUADeSZavIU+W
- zijg==
+ bh=RVWt+St3Ao7R6IQtw+wm6ZjZD9uCy5mKNVtcNByTS0E=;
+ b=IeQwgOQ7vBckQ0DNx8H9kA1oX7cu/N9QIfuBZneyUbbRGyeYHVlPAr4kdLntGCDyXI
+ yeSMRFhSLrFbsDfyQWRIH/MCJfXn+MmuWCWzMRDqoxTt6GtIeQzzsVU8OFurNPXlgowZ
+ RsV5FMoydVE1r0RHcWCES8x14AMIp/haRgI5QEUvE/tVG8jjAGG4fG+s7nPFOjA+E5qG
+ hIzxIoWp7cBiZvY4rrOBGlDi/jXR12BoEBBNsb6pXB+Bks2kYTI6Sqc6E4ucXMJ2t5dh
+ ZJAx+itjDoyuuwm4o1nrICmBZSYuPwPKJ9fAVTG8/0hXCD+CQJJTOxobAmFi4s4wQQXV
+ dkIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706275870; x=1706880670;
+ d=1e100.net; s=20230601; t=1706275865; x=1706880665;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=c+kBSbmB+uu4ccq3+PBWVAG48fqoWqgXKPn/QchcjM0=;
- b=hbB2ef3rqhoxb7uIUm8/6DX0nse7cd9U3M2JGCs1ZyATlbfSnj8ZIZUotWzQD8kDi0
- cufekKwf3tA0Q2zDbQUtvWVrcdvUFw1aacOh7uz/bRdVfSnJyFI2CJnmFYLdnXSTxPP1
- sGPmVsLbc8LpkcLFNYaGb79lssX29msSJfRW4iE3Fn6xC+gZ482CxmObSJhUbtwsTZ3C
- ct58haZtqeG9tHy9YYlOweAX4qykCnpFC7hmUOmZEo1Aqc3+7nUyX1MVAvO9njg6hmko
- NEbSHFeeF6S3WaPn1JEb326Viwqds+32FFikTMfXyGoxX9D+PlCTAMefd3YeUKCPmeWX
- mDFA==
-X-Gm-Message-State: AOJu0YzRTajjKN0FH/y3wg/Sq4yj2FDeV+PQeh4x4WNoKI55bGox7jDF
- gSaoWQlMZboyk/T1mbV1U+HeFoDttTMqxYFaBhdFfnpDaet991iOHczCoZviLdI=
-X-Google-Smtp-Source: AGHT+IHnMPbpTkj4Cy8/ecQ2CRy1VMACkWyevAHtLHanlI4/I7u4hit1TnA+TN5C8tebRoTW9t0wkA==
-X-Received: by 2002:a17:906:a2c8:b0:a2f:b9be:66df with SMTP id
- by8-20020a170906a2c800b00a2fb9be66dfmr783974ejb.17.1706275869993; 
- Fri, 26 Jan 2024 05:31:09 -0800 (PST)
+ bh=RVWt+St3Ao7R6IQtw+wm6ZjZD9uCy5mKNVtcNByTS0E=;
+ b=Kq9SVyRbASQPaiRNwZmb4RxpkeQLR3HJ9JOrwlsNVt1pMi4R/9P++fXbtWgPTkHPhD
+ xb3IUlbAUpwbSKoZLPGBjPqtqw1Mk5kvZlZYCsYcGGV5IDwSJxwHZ8fWJXidNU0cdtSN
+ mtPLTS3SOHkpsmxmjNfcQO5T5stQ5W0InqPu9tIfE0GlATL2Uwb1QNaW8RePloKogzmQ
+ fB1V7w8DBOtJG9prl8ovoAgXMs1DqFRV5VYSxlGR5YknrR0zKGhz5n10QAESbjASzt0A
+ FoFhwbIiHVRAngULYlvbK5doCxwv2yCR6fE014rFhUw1ZLihEqYHgQLcz/IV4EmHlS0h
+ EP5Q==
+X-Gm-Message-State: AOJu0YwJEp3lx8Dh/k/Vv3KSlReqORBvG8jDxnGUq9Dx4GV6b/s1vgnF
+ hL2ldIs3ih0TZtt5pppVc3wGJyf1PoR3A+ATNHqjfbHlEW3yFri6ffF2oh+PUbY=
+X-Google-Smtp-Source: AGHT+IHP6LQoTNmZHR2oodocUL7BmkJZvjTK5udXH74C2vxgw35NBxU+8nXWncJRB05FM+LlJS0KJg==
+X-Received: by 2002:a05:600c:3785:b0:40e:c7fc:a44d with SMTP id
+ o5-20020a05600c378500b0040ec7fca44dmr547990wmr.355.1706275864754; 
+ Fri, 26 Jan 2024 05:31:04 -0800 (PST)
 Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
  [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
  by smtp.gmail.com with ESMTPSA id
- ch21-20020a170906c2d500b00a317346a353sm629974ejb.123.2024.01.26.05.31.09
+ b26-20020a056402139a00b0055c4c97b1f2sm591166edv.91.2024.01.26.05.31.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Jan 2024 05:31:09 -0800 (PST)
+ Fri, 26 Jan 2024 05:31:04 -0800 (PST)
 From: Andrew Jones <ajones@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  dbarboza@ventanamicro.com
-Subject: [PATCH v2 5/6] target/riscv: Gate hardware A/D PTE bit updating
-Date: Fri, 26 Jan 2024 14:31:07 +0100
-Message-ID: <20240126133101.61344-13-ajones@ventanamicro.com>
+Subject: [PATCH v2 1/6] target/riscv/tcg: set 'mmu' with 'satp' in
+ cpu_set_profile()
+Date: Fri, 26 Jan 2024 14:31:03 +0100
+Message-ID: <20240126133101.61344-9-ajones@ventanamicro.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240126133101.61344-8-ajones@ventanamicro.com>
 References: <20240126133101.61344-8-ajones@ventanamicro.com>
 MIME-Version: 1.0
 Content-type: text/plain
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::536;
- envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x536.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x336.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,126 +98,32 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Gate hardware A/D PTE bit updating on {m,h}envcfg.ADUE and only
-enable menvcfg.ADUE on reset if svade has not been selected. Now
-that we also consider svade, we have four possible configurations:
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
- 1) !svade && !svadu
-    use hardware updating and there's no way to disable it
-    (the default, which maintains past behavior. Maintaining
-     the default, even with !svadu is a change that fixes [1])
+Recent changes in options handling removed the 'mmu' default the bare
+CPUs had, meaning that we must enable 'mmu' by hand when using the
+rva22s64 profile CPU.
 
- 2) !svade && svadu
-    use hardware updating, but also provide {m,h}envcfg.ADUE,
-    allowing software to switch to exception mode
-    (being able to switch is a change which fixes [1])
+Given that this profile is setting a satp mode, it already implies that
+we need a 'mmu'. Enable the 'mmu' in this case.
 
- 3) svade && !svadu
-    use exception mode and there's no way to switch to hardware
-    updating
-    (this behavior change fixes [2])
-
- 4) svade && svadu
-    use exception mode, but also provide {m,h}envcfg.ADUE,
-    allowing software to switch to hardware updating
-    (this behavior change fixes [2])
-
-Fixes: 0af3f115e68e ("target/riscv: Add *envcfg.HADE related check in address translation") [1]
-Fixes: 48531f5adb2a ("target/riscv: implement svade") [2]
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- target/riscv/cpu.c         |  2 +-
- target/riscv/cpu_helper.c  | 18 ++++++++++++++----
- target/riscv/tcg/tcg-cpu.c | 16 +++++-----------
- 3 files changed, 20 insertions(+), 16 deletions(-)
+ target/riscv/tcg/tcg-cpu.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 7fd433daee74..a56c2ff91d6d 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -960,7 +960,7 @@ static void riscv_cpu_reset_hold(Object *obj)
-     env->two_stage_lookup = false;
- 
-     env->menvcfg = (cpu->cfg.ext_svpbmt ? MENVCFG_PBMTE : 0) |
--                   (cpu->cfg.ext_svadu ? MENVCFG_ADUE : 0);
-+                   (!cpu->cfg.ext_svade && cpu->cfg.ext_svadu ? MENVCFG_ADUE : 0);
-     env->henvcfg = 0;
- 
-     /* Initialized default priorities of local interrupts. */
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 8da9104da450..9da9758cb4d4 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -907,7 +907,9 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-     }
- 
-     bool pbmte = env->menvcfg & MENVCFG_PBMTE;
--    bool adue = env->menvcfg & MENVCFG_ADUE;
-+    bool svade = riscv_cpu_cfg(env)->ext_svade;
-+    bool svadu = riscv_cpu_cfg(env)->ext_svadu;
-+    bool adue = svadu ? env->menvcfg & MENVCFG_ADUE : !svade;
- 
-     if (first_stage && two_stage && env->virt_enabled) {
-         pbmte = pbmte && (env->henvcfg & HENVCFG_PBMTE);
-@@ -1082,9 +1084,17 @@ restart:
-         return TRANSLATE_FAIL;
-     }
- 
--    /* If necessary, set accessed and dirty bits. */
--    target_ulong updated_pte = pte | PTE_A |
--                (access_type == MMU_DATA_STORE ? PTE_D : 0);
-+    target_ulong updated_pte = pte;
-+
-+    /*
-+     * If ADUE is enabled, set accessed and dirty bits.
-+     * Otherwise raise an exception if necessary.
-+     */
-+    if (adue) {
-+        updated_pte |= PTE_A | (access_type == MMU_DATA_STORE ? PTE_D : 0);
-+    } else if (!(pte & PTE_A) || (access_type == MMU_DATA_STORE && !(pte & PTE_D))) {
-+        return TRANSLATE_FAIL;
-+    }
- 
-     /* Page table updates need to be atomic with MTTCG enabled */
-     if (updated_pte != pte && !is_debug) {
 diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 6d5028cf84d0..bc3c45b11704 100644
+index da437975b429..88f92d1c7d2c 100644
 --- a/target/riscv/tcg/tcg-cpu.c
 +++ b/target/riscv/tcg/tcg-cpu.c
-@@ -196,18 +196,14 @@ static bool cpu_cfg_offset_is_named_feat(uint32_t ext_offset)
+@@ -1107,6 +1107,7 @@ static void cpu_set_profile(Object *obj, Visitor *v, const char *name,
  
- static void riscv_cpu_enable_named_feat(RISCVCPU *cpu, uint32_t feat_offset)
- {
--    switch (feat_offset) {
--    case CPU_CFG_OFFSET(ext_zic64b):
-+     /*
-+      * All other named features are already enabled
-+      * in riscv_tcg_cpu_instance_init().
-+      */
-+    if (feat_offset == CPU_CFG_OFFSET(ext_zic64b)) {
-         cpu->cfg.cbom_blocksize = 64;
-         cpu->cfg.cbop_blocksize = 64;
-         cpu->cfg.cboz_blocksize = 64;
--        break;
--    case CPU_CFG_OFFSET(ext_svade):
--        cpu->cfg.ext_svadu = false;
--        break;
--    default:
--        /* Named feature already enabled in riscv_tcg_cpu_instance_init */
--        return;
-     }
- }
- 
-@@ -349,8 +345,6 @@ static void riscv_cpu_update_named_features(RISCVCPU *cpu)
-     cpu->cfg.ext_zic64b = cpu->cfg.cbom_blocksize == 64 &&
-                           cpu->cfg.cbop_blocksize == 64 &&
-                           cpu->cfg.cboz_blocksize == 64;
--
--    cpu->cfg.ext_svade = !cpu->cfg.ext_svadu;
- }
- 
- static void riscv_cpu_validate_g(RISCVCPU *cpu)
+ #ifndef CONFIG_USER_ONLY
+     if (profile->satp_mode != RISCV_PROFILE_ATTR_UNUSED) {
++        object_property_set_bool(obj, "mmu", true, NULL);
+         const char *satp_prop = satp_mode_str(profile->satp_mode,
+                                               riscv_cpu_is_32bit(cpu));
+         object_property_set_bool(obj, satp_prop, profile->enabled, NULL);
 -- 
 2.43.0
 
