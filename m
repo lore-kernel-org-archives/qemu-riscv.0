@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66D29C47422
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 13:58:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEB3CC47DDF
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 13:59:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTMiQ-00066R-MC; Fri, 26 Jan 2024 08:57:54 -0500
+	id 1rTMjP-0008TD-5P; Fri, 26 Jan 2024 08:58:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTMiP-000632-1I
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 08:57:53 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTMjN-0008CU-2b
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 08:58:53 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTMiN-0006Bv-AV
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 08:57:52 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTMjL-0006QG-C4
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 08:58:52 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1706277469;
+ s=mimecast20190719; t=1706277530;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=4f00KaOYW+hD0GFHAeduBNGn1fOJMEZkwWILKd+Ajqk=;
- b=dA9QsCbIMZIwxxl/2V0q+t/s8WLPXbdPxN9kvxAz1f9ca0roxDZ71E4fB+Moaj26BkOi0k
- 7TCQmmqG61HXaK84gKm8qfjDHdeLrOoe1OS0TP2IFPcxnpGk4Y7YkGZqUc9iE4oC/jczYB
- 9IESEEuahxh6IkV2O2xp0jRizJpHK98=
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
- [209.85.219.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=IEOUvFRUViQ3avFX3oB5M3Sw8AV4FF+8vEvsFPQx7K4=;
+ b=YSycrtUa4t2yrjuwjUkXYaKQqbFBmk8JR4RtSryqjSzso/L/s5FJhFEgP5jfWiIpSui56r
+ xe0u1X+VPVK7+/TSp3hUu9uK4hBh4gqS6yqwgSbmbKIXnzuWp4UcGrTiRiwfA4UrDMJ07Z
+ FU4YE3K77TRRBwJ18iC5J6+9msY5j5Y=
+Received: from mail-vs1-f71.google.com (mail-vs1-f71.google.com
+ [209.85.217.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-150-jzJBUC2VPPytCHS4q_WKUA-1; Fri, 26 Jan 2024 08:57:46 -0500
-X-MC-Unique: jzJBUC2VPPytCHS4q_WKUA-1
-Received: by mail-qv1-f71.google.com with SMTP id
- 6a1803df08f44-685ce2080aeso7722396d6.1
- for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 05:57:46 -0800 (PST)
+ us-mta-191-9xXJkf3SOnS2dcbVihWolw-1; Fri, 26 Jan 2024 08:58:49 -0500
+X-MC-Unique: 9xXJkf3SOnS2dcbVihWolw-1
+Received: by mail-vs1-f71.google.com with SMTP id
+ ada2fe7eead31-46afa22a320so46865137.2
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 05:58:49 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706277465; x=1706882265;
+ d=1e100.net; s=20230601; t=1706277528; x=1706882328;
  h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
  :to:content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=4f00KaOYW+hD0GFHAeduBNGn1fOJMEZkwWILKd+Ajqk=;
- b=l6RARCRlttTjWj+6WBVqUDGGdld4b3eZ6ZGzAPShkoIJoIDtsd1F0zyqdBBDLiyQ5f
- PUt93neK1R815m0C1YZn/EqZNMZKeSjz1BHO0Bu1vO83FfP5jtwgHBUdo0hvRgaLkO18
- tWeLextVV4M6BKLA91GSMKtX7vaICzq6+H3hnk8Fe1/juPqjjcKUKBNjyHGVPgmOlE3o
- owQXHrpCJ0vJ0lwI3SX6e2ghw+R6JLEqnl7htpcVigEibkFFiAZAcBnfTBuDgBALRntc
- jCmnv+1WJBo4a8fQsG3+9kuPllq+Xv3kQDRB3NUeo3599ftiomPqowX+y4qY2xkm++rj
- H+bQ==
-X-Gm-Message-State: AOJu0Yy8p9/gxwRSc+tPFhcy+FkfVEOMuMDwjH/Hrarks399jPQ2c1pV
- NHdHqkWIjftSW/3jPp0xVIuwtUpKyrmh/WTiNoh3OiKMaDbzFFrK3m65zZ68EZERkB8cfEDqEs1
- 6Wnlyyb3j/U2mMqQELHYTbR/d/Pns0409OLViI0kbpRVzzJJr0fm1
-X-Received: by 2002:a05:6214:1301:b0:681:899d:7169 with SMTP id
- pn1-20020a056214130100b00681899d7169mr1527517qvb.70.1706277465608; 
- Fri, 26 Jan 2024 05:57:45 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHVHPe+ZubnFiPMTriTntPlt9DLRJQPjUL7CvdiHbDklS/dg90/Zaqvq0CQvJQU/sAi2UQuhQ==
-X-Received: by 2002:a05:6214:1301:b0:681:899d:7169 with SMTP id
- pn1-20020a056214130100b00681899d7169mr1527480qvb.70.1706277465344; 
- Fri, 26 Jan 2024 05:57:45 -0800 (PST)
+ bh=IEOUvFRUViQ3avFX3oB5M3Sw8AV4FF+8vEvsFPQx7K4=;
+ b=t2kV72cqV58Jqxm+oL2yDS+YxOwN3UNZvbdXauh0YNzxmrv0ZBWXboqi5bwPvQj74u
+ mcpAob+teHT8Yez0m+mKNGQSQSpBiIibL4ZwlAKkvorjrU2Q5gALpVb42zuB48sz3l3i
+ 5EGNk8Dea8llCS87cM2MZAuZJW/N9SCoSFMo8Tqqk4Km6eBwrOEn4fckLrtsF+MDafzw
+ LzA/NV8mw/ukcNLbHLjtdf6MjTaH3KhSz0SlZsACCDEjR9xrECSwd1EBo/Qt6Cm26PKn
+ 87ThfE0R/A0ScvZbc49Cs9cOpMEiq9eatRvlnNLzMPPugwHHsu0o3i8kvjMPbpjIhdW7
+ PaUw==
+X-Gm-Message-State: AOJu0YzXTP4iZ8oyB3Jp7RuN4xEOWk5n5lg4oCflH/caPRqnv4nE4jC3
+ qQ4bF03ChN1cPyi7iUILMNUQomB+IwwEV6nkx7OrjVjzp9WZMOH+U7/hbFjBXlpxUnazSydbA+w
+ ttCoWLnkT0sYkkxfWAdXumFLu0NTkGpPH/rIOruu6qZazQI0Exa/L
+X-Received: by 2002:a05:6102:f12:b0:46b:2403:3b88 with SMTP id
+ v18-20020a0561020f1200b0046b24033b88mr1057617vss.25.1706277528727; 
+ Fri, 26 Jan 2024 05:58:48 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IE+EyUqiT1oc8jTbobnl8hZ/hSyAFLOhY1Po3ksYgV6a5XvgIOPkE9HeND9NGdPWtD4PpoLLg==
+X-Received: by 2002:a05:6102:f12:b0:46b:2403:3b88 with SMTP id
+ v18-20020a0561020f1200b0046b24033b88mr1057583vss.25.1706277528357; 
+ Fri, 26 Jan 2024 05:58:48 -0800 (PST)
 Received: from [192.168.0.9] (ip-109-43-176-119.web.vodafone.de.
  [109.43.176.119]) by smtp.gmail.com with ESMTPSA id
- bt3-20020ad455c3000000b0068698b10ae6sm520455qvb.119.2024.01.26.05.57.30
+ bt3-20020ad455c3000000b0068698b10ae6sm520455qvb.119.2024.01.26.05.58.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 26 Jan 2024 05:57:45 -0800 (PST)
-Message-ID: <dff6c566-04df-4dd9-b745-1058d7da277f@redhat.com>
-Date: Fri, 26 Jan 2024 14:57:29 +0100
+ Fri, 26 Jan 2024 05:58:48 -0800 (PST)
+Message-ID: <5d8d738c-4538-496d-926b-9aaad70a1d17@redhat.com>
+Date: Fri, 26 Jan 2024 14:58:34 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 13/46] hw/mips/malta: use pci_init_nic_devices()
-To: David Woodhouse <dwmw2@infradead.org>, qemu-devel@nongnu.org,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: Re: [PATCH v3 14/46] hw/mips/loongson3_virt: use
+ pci_init_nic_devices()
+To: David Woodhouse <dwmw2@infradead.org>, qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
  Beniamino Galvani <b.galvani@gmail.com>,
  Peter Maydell <peter.maydell@linaro.org>,
@@ -78,10 +78,11 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  <clg@kaod.org>, Andrew Jeffery <andrew@codeconstruct.com.au>,
  Joel Stanley <joel@jms.id.au>, Igor Mitsyanko <i.mitsyanko@gmail.com>,
  Jean-Christophe Dubois <jcd@tribudubois.net>,
- Andrey Smirnov <andrew.smirnov@gmail.com>, Rob Herring <robh@kernel.org>,
- Subbaraya Sundeep <sundeep.lkml@gmail.com>, Jan Kiszka <jan.kiszka@web.de>,
- Tyrone Ting <kfting@nuvoton.com>, Hao Wu <wuhaotsh@google.com>,
- Radoslaw Biernacki <rad@semihalf.com>,
+ Andrey Smirnov <andrew.smirnov@gmail.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Rob Herring <robh@kernel.org>, Subbaraya Sundeep <sundeep.lkml@gmail.com>,
+ Jan Kiszka <jan.kiszka@web.de>, Tyrone Ting <kfting@nuvoton.com>,
+ Hao Wu <wuhaotsh@google.com>, Radoslaw Biernacki <rad@semihalf.com>,
  Leif Lindholm <quic_llindhol@quicinc.com>,
  Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
@@ -115,7 +116,7 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
- <20240108204909.564514-14-dwmw2@infradead.org>
+ <20240108204909.564514-15-dwmw2@infradead.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -159,20 +160,20 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20240108204909.564514-14-dwmw2@infradead.org>
+In-Reply-To: <20240108204909.564514-15-dwmw2@infradead.org>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.313,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
  RCVD_IN_SORBS_WEB=1.5, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -193,46 +194,27 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On 08/01/2024 21.26, David Woodhouse wrote:
 > From: David Woodhouse <dwmw@amazon.co.uk>
 > 
-> The Malta board setup code would previously place the first NIC into PCI
-> slot 11 if was a PCNet card, and the rest (including the first if it was
-> anything other than a PCNet card) would be dynamically assigned.
-> 
-> Now it will place any PCNet NIC into slot 11, and then anything else will
-> be dynamically assigned.
-> 
 > Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 > ---
->   hw/mips/malta.c | 15 +++------------
->   1 file changed, 3 insertions(+), 12 deletions(-)
+>   hw/mips/loongson3_virt.c | 4 +---
+>   1 file changed, 1 insertion(+), 3 deletions(-)
 > 
-> diff --git a/hw/mips/malta.c b/hw/mips/malta.c
-> index d22bb1edef..af74008c82 100644
-> --- a/hw/mips/malta.c
-> +++ b/hw/mips/malta.c
-> @@ -612,18 +612,9 @@ static MaltaFPGAState *malta_fpga_init(MemoryRegion *address_space,
->   /* Network support */
->   static void network_init(PCIBus *pci_bus)
->   {
-> -    int i;
-> -
+> diff --git a/hw/mips/loongson3_virt.c b/hw/mips/loongson3_virt.c
+> index 33eae01eca..caedde2df0 100644
+> --- a/hw/mips/loongson3_virt.c
+> +++ b/hw/mips/loongson3_virt.c
+> @@ -451,9 +451,7 @@ static inline void loongson3_virt_devices_init(MachineState *machine,
+>           usb_create_simple(usb_bus_find(-1), "usb-tablet");
+>       }
+>   
 > -    for (i = 0; i < nb_nics; i++) {
-> -        NICInfo *nd = &nd_table[i];
-> -        const char *default_devaddr = NULL;
-> -
-> -        if (i == 0 && (!nd->model || strcmp(nd->model, "pcnet") == 0))
-> -            /* The malta board has a PCNet card using PCI SLOT 11 */
-> -            default_devaddr = "0b";
-> -
-> -        pci_nic_init_nofail(nd, pci_bus, "pcnet", default_devaddr);
+> -        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
 > -    }
-> +    /* The malta board has a PCNet card using PCI SLOT 11 */
-> +    pci_init_nic_in_slot(pci_bus, "pcnet", NULL, "0b");
-> +    pci_init_nic_devices(pci_bus, "pcnet");
+> +    pci_init_nic_devices(pci_bus, mc->default_nic);
 >   }
+>   
+>   static void mips_loongson3_virt_init(MachineState *machine)
 
 Reviewed-by: Thomas Huth <thuth@redhat.com>
-
-Philippe, could you maybe have a look at this, too?
-
 
 
