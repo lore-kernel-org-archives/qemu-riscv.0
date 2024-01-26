@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9889CC47422
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 10:45:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5A81C47422
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 11:11:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTJha-0000iD-3f; Fri, 26 Jan 2024 05:44:50 -0500
+	id 1rTK6c-0005HJ-Qj; Fri, 26 Jan 2024 06:10:42 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTJhW-0000gM-Tu
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 05:44:47 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTK6V-00055k-Oa
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 06:10:38 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTJhT-0002pZ-Fe
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 05:44:46 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTK6S-0003PK-9O
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 06:10:35 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1706265860;
+ s=mimecast20190719; t=1706267431;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=qdgZVkts9TNdCcMB7WSm4PePcnSmcwv1SyVUyDuZlro=;
- b=J4uHGz3jqVTrH4AP1dg3FveprL3OlQI8UKqZCTjaj1qOStIGDpqIM7UKsM0m3abGqo/2UJ
- iZYyiNOk991jEeUVbxFgvKenH85D9GE2A52oi6b6HPx24dOJ6bwR4eNY1Vxd2iYQo7h4od
- BDfl4xeQBBK8I3BSLN/jri209SV1NvI=
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
- [209.85.160.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=v2/lmMXltQRLNYt6P2ilUAPc0Q3BMq0DxuQOWysRNdo=;
+ b=Fs4ZRu9NaHPg4cFCp7cRe5bJVf1xNezs/GDaHERnftaNaXCt00brlPaBDT864UlH+CxTvF
+ iIo31Ll8Owf99mxnhanstvtSv7xFD1IuoOoTFdEUrnJgySn6t3bMauHEJ4W2BRCc+4xOVV
+ ue/xDqQGzZal4jvU29WhKn77N547VGI=
+Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
+ [209.85.219.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-436-CJ2Zx9vjN5imPPypWi_4MA-1; Fri, 26 Jan 2024 05:44:18 -0500
-X-MC-Unique: CJ2Zx9vjN5imPPypWi_4MA-1
-Received: by mail-qt1-f198.google.com with SMTP id
- d75a77b69052e-429be5ecc87so2153021cf.2
- for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 02:44:17 -0800 (PST)
+ us-mta-113-Z5c8QjnzPTGGk_uSoSRPBQ-1; Fri, 26 Jan 2024 06:10:30 -0500
+X-MC-Unique: Z5c8QjnzPTGGk_uSoSRPBQ-1
+Received: by mail-qv1-f70.google.com with SMTP id
+ 6a1803df08f44-6800e52d47aso33491976d6.1
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 03:10:30 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706265857; x=1706870657;
+ d=1e100.net; s=20230601; t=1706267429; x=1706872229;
  h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
  :to:content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qdgZVkts9TNdCcMB7WSm4PePcnSmcwv1SyVUyDuZlro=;
- b=vtv0yRii1JSMNy31ccqNQzEQotAu8AI8aGBI3jDc588AXSRfte4KFKVHToUEgHUGLY
- xP/Rfs47hOKwWzibAvVUnFqYRzS6oBXE05iP9s4afzND45zJm3u/JpcOT+rGAMavNMKr
- gAQYNT9Le5ZrtGiz58W4/LCdAcK4CH7ezMhPoqdpQsfgO6xRlqWOzC5GTCI6Nei7E/oR
- +iWiHUxr/nAY1q0fRiRvUm3S5+bg89JMXIN5oy6CtW43tCNCk75WIrye08xT1hDZ6tgv
- ZxUkNmwPsqjIIEVZ7JtbAJSuU3i5EK+3Erucp+/KVA7KnM/x52XxR4Y+7GMxgm7KQEAs
- iqYw==
-X-Gm-Message-State: AOJu0YzA0PkQklcC7B+QzQbE4uqqKgQlQZT8lJhtYtf5YiI3+2mW5QuJ
- f2VUHeqE0dc0iElf7EfwzY/aUgKanjJKsa37ufpuNPKUUaZRUslU+/mEHKI9/ZzqudOp2TMcVTc
- BcSFYdbqCXrer620fxOUYPxHkwLJddWTcWqxjYzsHDSvsGpMYAFUQ
-X-Received: by 2002:a05:622a:1244:b0:42a:85b1:9bdf with SMTP id
- z4-20020a05622a124400b0042a85b19bdfmr49558qtx.118.1706265857455; 
- Fri, 26 Jan 2024 02:44:17 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEs+u/g5hW3mLwGN/+U+q+HUat9s5yDCDXJ6+VLisoOE1qJ7LskvrAR7MMb1PswjGvvfOollQ==
-X-Received: by 2002:a05:622a:1244:b0:42a:85b1:9bdf with SMTP id
- z4-20020a05622a124400b0042a85b19bdfmr49529qtx.118.1706265856437; 
- Fri, 26 Jan 2024 02:44:16 -0800 (PST)
+ bh=v2/lmMXltQRLNYt6P2ilUAPc0Q3BMq0DxuQOWysRNdo=;
+ b=LHxKQ5nrrXGral5xTnxaxBdmo0zNonu1sxSfw1hmKu2xhk2xmLKrdz/6IzewWMuBHk
+ qLhm6+6DvYjroKWGrHxkbaHu0FBED+v6ZIFCURcXnL2MYQkGcSF1o3HnkMauWa/k/+Nj
+ j4EQMpqBZLIMHilC6EWzvdVvBJHVpDq5GU2zlQDBHFNeYH2Hpxi4z4NtacmQem8pDgK/
+ kM52RBJvdX+hiM57jI17isWjm/Asg4T9l8s9JrEAW/NXk2VOhSG46qDdjgWhJFS1QADy
+ 8Jugmb9KE3ZAnNmhiLRHsbdE9rJMVHvuXHFi9E2pzaLN1etr7FJh93bHFDnd+cx1QHGD
+ 31zA==
+X-Gm-Message-State: AOJu0Yy1P4s72LeIHwIarejrPPmopWmykFCljss+b+8VBEk1zei6PMzK
+ 1qELOAYlEGrRP495+YOtLPmYua3Fih4/YgorB82IacjYjcZ0QlTAU7v7lJhtBCDIGYEK9w1CYL4
+ CcQ/rKGNPMcKiiGzlX96tYUZ3VOoDusjLuBiOMrJjAxzjESL00qKD
+X-Received: by 2002:a0c:b341:0:b0:681:132c:8b8e with SMTP id
+ a1-20020a0cb341000000b00681132c8b8emr1235257qvf.46.1706267429666; 
+ Fri, 26 Jan 2024 03:10:29 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IExh71HXG5OQTQJ658GxmPXTaBWNJQ1JNeXo3zpX4HUYj9y/kYObKvL/nmUj6LeMZaJG5o+SA==
+X-Received: by 2002:a0c:b341:0:b0:681:132c:8b8e with SMTP id
+ a1-20020a0cb341000000b00681132c8b8emr1235181qvf.46.1706267429300; 
+ Fri, 26 Jan 2024 03:10:29 -0800 (PST)
 Received: from [192.168.0.9] (ip-109-43-176-119.web.vodafone.de.
  [109.43.176.119]) by smtp.gmail.com with ESMTPSA id
- z5-20020ac86b85000000b0042a6859ff3esm405399qts.61.2024.01.26.02.44.02
+ mu3-20020a056214328300b006869d54c818sm11603qvb.109.2024.01.26.03.10.14
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 26 Jan 2024 02:44:16 -0800 (PST)
-Message-ID: <d6b0fd22-92ef-4873-a19a-e7752bfddd2d@redhat.com>
-Date: Fri, 26 Jan 2024 11:43:59 +0100
+ Fri, 26 Jan 2024 03:10:28 -0800 (PST)
+Message-ID: <9218c20b-8ba8-402b-bea5-856cb51156dc@redhat.com>
+Date: Fri, 26 Jan 2024 12:10:11 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 05/46] hw/i386/pc: use qemu_get_nic_info() and
- pci_init_nic_devices()
+Subject: Re: [PATCH v3 01/46] net: add qemu_{configure, create}_nic_device(), 
+ qemu_find_nic_info()
 To: David Woodhouse <dwmw2@infradead.org>, qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
  Beniamino Galvani <b.galvani@gmail.com>,
@@ -116,7 +116,7 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
- <20240108204909.564514-6-dwmw2@infradead.org>
+ <20240108204909.564514-2-dwmw2@infradead.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -160,21 +160,21 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20240108204909.564514-6-dwmw2@infradead.org>
+In-Reply-To: <20240108204909.564514-2-dwmw2@infradead.org>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.5,
+X-Spam_score_int: -35
+X-Spam_score: -3.6
+X-Spam_bar: ---
+X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.5,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_SORBS_WEB=1.5, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -194,47 +194,123 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On 08/01/2024 21.26, David Woodhouse wrote:
 > From: David Woodhouse <dwmw@amazon.co.uk>
 > 
-> Eliminate direct access to nd_table[] and nb_nics by processing the the
-> Xen and ISA NICs first and then calling pci_init_nic_devices() for the
-> rest.
+> Most code which directly accesses nd_table[] and nb_nics uses them for
+> one of two things. Either "I have created a NIC device and I'd like a
+> configuration for it", or "I will create a NIC device *if* there is a
+> configuration for it".  With some variants on the theme around whether
+> they actually *check* if the model specified in the configuration is
+> the right one.
+> 
+> Provide functions which perform both of those, allowing platforms to
+> be a little more consistent and as a step towards making nd_table[]
+> and nb_nics private to the net code.
+> 
+> Also export the qemu_find_nic_info() helper, as some platforms have
+> special cases they need to handle.
 > 
 > Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 > Reviewed-by: Paul Durrant <paul@xen.org>
 > ---
->   hw/i386/pc.c                | 26 ++++++++++++++++----------
->   include/hw/net/ne2000-isa.h |  2 --
->   2 files changed, 16 insertions(+), 12 deletions(-)
+>   include/net/net.h |  7 ++++++-
+>   net/net.c         | 51 +++++++++++++++++++++++++++++++++++++++++++++++
+>   2 files changed, 57 insertions(+), 1 deletion(-)
 > 
-> diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-> index 496498df3a..d80c536d88 100644
-> --- a/hw/i386/pc.c
-> +++ b/hw/i386/pc.c
-> @@ -658,8 +658,11 @@ static void pc_init_ne2k_isa(ISABus *bus, NICInfo *nd)
->   {
->       static int nb_ne2k = 0;
+> diff --git a/include/net/net.h b/include/net/net.h
+> index ffbd2c8d56..25ea83fd12 100644
+> --- a/include/net/net.h
+> +++ b/include/net/net.h
+> @@ -207,7 +207,12 @@ int qemu_show_nic_models(const char *arg, const char *const *models);
+>   void qemu_check_nic_model(NICInfo *nd, const char *model);
+>   int qemu_find_nic_model(NICInfo *nd, const char * const *models,
+>                           const char *default_model);
+> -
+> +NICInfo *qemu_find_nic_info(const char *typename, bool match_default,
+> +                            const char *alias);
+> +bool qemu_configure_nic_device(DeviceState *dev, bool match_default,
+> +                               const char *alias);
+> +DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
+> +                                    const char *alias);
+>   void print_net_client(Monitor *mon, NetClientState *nc);
+>   void net_socket_rs_init(SocketReadState *rs,
+>                           SocketReadStateFinalize *finalize,
+> diff --git a/net/net.c b/net/net.c
+> index 0520bc1681..aeb7f573fc 100644
+> --- a/net/net.c
+> +++ b/net/net.c
+> @@ -1087,6 +1087,57 @@ static int net_init_nic(const Netdev *netdev, const char *name,
+>       return idx;
+>   }
 >   
-> -    if (nb_ne2k == NE2000_NB_MAX)
-> +    if (nb_ne2k == NE2000_NB_MAX) {
-> +        error_setg(&error_fatal,
-> +                   "maximum number of ISA NE2000 devices exceeded");
->           return;
+> +NICInfo *qemu_find_nic_info(const char *typename, bool match_default,
+> +                            const char *alias)
+> +{
+> +    NICInfo *nd;
+> +    int i;
+> +
+> +    for (i = 0; i < nb_nics; i++) {
+> +        nd = &nd_table[i];
+> +
+> +        if (!nd->used || nd->instantiated) {
+> +            continue;
+> +        }
+> +
+> +        if ((match_default && !nd->model) || !g_strcmp0(nd->model, typename)
+> +            || (alias && !g_strcmp0(nd->model, alias))) {
+> +            return nd;
+> +        }
+> +    }
+> +    return NULL;
+> +}
+> +
+> +
+> +/* "I have created a device. Please configure it if you can" */
+> +bool qemu_configure_nic_device(DeviceState *dev, bool match_default,
+> +                               const char *alias)
+> +{
+> +    NICInfo *nd = qemu_find_nic_info(object_get_typename(OBJECT(dev)),
+> +                                     match_default, alias);
+> +
+> +    if (nd) {
+> +        qdev_set_nic_properties(dev, nd);
+> +        return true;
+> +    }
+> +    return false;
+> +}
+> +
+> +/* "Please create a device, if you have a configuration for it" */
+> +DeviceState *qemu_create_nic_device(const char *typename, bool match_default,
+> +                                    const char *alias)
+> +{
+> +    NICInfo *nd = qemu_find_nic_info(typename, match_default, alias);
+> +    DeviceState *dev;
+> +
+> +    if (!nd) {
+> +        return NULL;
 > +    }
 
-error_setg(&error_fatal, ...) quits QEMU, so the "return;" does not make 
-much sense anymore.
-Now, according to include/qapi/error.h :
+The qemu_check_nic_model() function that was used in some code that you 
+turned into qemu_create_nic_device() used to set:
 
-  * Please don't error_setg(&error_fatal, ...), use error_report() and
-  * exit(), because that's more obvious.
+     if (!nd->model)
+         nd->model = g_strdup(default_model);
 
-So I'd suggest to do that instead.
+(in the qemu_find_nic_model() function that has been called by 
+qemu_check_nic_model())
 
-  Thanks,
-   Thomas
+Should we do that also here to make sure that nd->model is not NULL afterwards?
 
+(same question likely applies to qemu_configure_nic_device() )
 
->       isa_ne2000_init(bus, ne2000_io[nb_ne2k],
->                       ne2000_irq[nb_ne2k], nd);
->       nb_ne2k++;
+Apart from that, the patch looks fine to me.
+
+  Thomas
+
+> +    dev = qdev_new(typename);
+> +    qdev_set_nic_properties(dev, nd);
+> +    return dev;
+> +}
+>   
+>   static int (* const net_client_init_fun[NET_CLIENT_DRIVER__MAX])(
+>       const Netdev *netdev,
 
 
