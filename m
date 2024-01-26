@@ -4,58 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 790D5C47422
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 22:05:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50835C47422
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 22:05:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTUKH-0008Dw-Q2; Fri, 26 Jan 2024 17:05:31 -0500
+	id 1rTUJC-0006qM-D9; Fri, 26 Jan 2024 17:04:22 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rTUJt-0007j8-6n
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 17:05:07 -0500
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rTUJA-0006me-56
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 17:04:20 -0500
+Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rTUJo-0003gy-18
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 17:05:03 -0500
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-40e80046264so18407835e9.0
- for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 14:04:59 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rTUJ4-0003Ge-Qh
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 17:04:18 -0500
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-55a8fb31fc2so728326a12.0
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 14:04:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706306698; x=1706911498; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cPu55INOwoo+R5I4TkxjPDT1q0XH169I9oVKNyLzarM=;
- b=oaEmwjqqryulukgyuMsVx7oBIBceLgoF9Dy4vyFT3YN3HjnKJH+3ORTu4kB8UAPGEb
- 70IF4CkptYf8o0qKG8XOXwqmt02YUQP6taFycl9yJ5yeEJ6t3BBcsE+QJwpDLIn/xnNN
- Uc0CtccIlWy7RquzXip6RgyiTZSVF7zqEKhyEYGF92/cZnoNNtA3TP7zmunYeTE7fFWG
- vW38+Y/frt7KC/HnsOVr8VJ6lsMno071c4khHvw5AW9XnCAQ/NSBK0s7nLkW8h7+t6Ve
- j0AzCLg0dAcPjJGhCMya9l/kviMlGCIVW2sEqogJf+Pd3zoyD7nGLhGPoZ772qn5V5o8
- 1aSQ==
+ d=linaro.org; s=google; t=1706306650; x=1706911450; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=tLDD+gX81/flexkUVsp4uo9ttE0hN1WJun7ndqYAwQ4=;
+ b=onuuo5K3EB1q3NgZ5tIglUXtf4PnvZwWxbsVotd3mLqf7OJ5RrEKpVMI0SKhB8WCEN
+ Mp9zzmKvuhpEbD5Sd//WUsiHeWp3VNiFm2PUekoayNFMao6yhnYSmcZhnEIGRoCHW2Ku
+ E8MdXTuViLZ4aBo6YqnAr/s2nVnLIuieZvtE14Nr8s/AjHiFHw4psOsfhOfRNeHOJDGR
+ zUPLnDaOJVx3vGCJWBUI1D5ALq9TW1v01svrIxROOEeNa4h5+h6o/HJBZbpKs0fgRVvw
+ zZXF8Cgf1cKDqwER+l1CBsYF6YMpfaCtvJtXBGStdNcel1rNciHVSKw/mwbMwBSTx0WS
+ srWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706306698; x=1706911498;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cPu55INOwoo+R5I4TkxjPDT1q0XH169I9oVKNyLzarM=;
- b=t0ghauUc9GXn5i93pNXtagtfQ0sWHYYelYv3mNHE4TaaycsnJjXtAYOBDDOlVexbnN
- HEo25djheKwzGexm/zx0Eio2WydKlYIY6KFvbUt2PPEStBIVcyoQvfrOmwRjoDrbJek5
- 0eL8Xy8tes7EtXDTFBuwiMqJaOQDaV3+qqjQnocoq/cMLk6ZOrq7E/C4o8H0NfoI3HD6
- bpB88Yumqf9fphz9+AKdBuGKCgntpEXnLjk7qEWv/yFuChVIU48Zs5Yx9N48NC9PVLSr
- PpMX94qjtB3uof/hCyaxIlSgJD2GIGG1NyxPQK20hFT0G3mC/kj2vm23PoFst0yWQl7X
- SG6Q==
-X-Gm-Message-State: AOJu0YyvUsWt7G6EMKt6WERlS2k5TQQcY4wAH2S/j9DaOIAdfMpC3o0W
- dBYyFMqsDAIDCtIQpgZS2TRtcGqt85gCUVUXQXRnzI4+mFmWVjtwQlHDxr1KR1k=
-X-Google-Smtp-Source: AGHT+IFz1Gm3pWnHWJtepFYUd+mHJkbx4hd3qM79tYeiKpusAyuve3swffXhdA6yAfiWQSALIRnIQw==
-X-Received: by 2002:a05:600c:1f91:b0:40c:610d:c2bf with SMTP id
- je17-20020a05600c1f9100b0040c610dc2bfmr319162wmb.16.1706306698503; 
- Fri, 26 Jan 2024 14:04:58 -0800 (PST)
+ d=1e100.net; s=20230601; t=1706306650; x=1706911450;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=tLDD+gX81/flexkUVsp4uo9ttE0hN1WJun7ndqYAwQ4=;
+ b=YulX1FGBunytzjPe5xw3xRMLhAt1s/5gm5j7KOCiIdg7kSdMSQuFh3hQylOmtK2CPA
+ vXHeyXUERiE2T0oI8Eq3SKkqSP2f4KfCadEaGK6NxItZP9jlGn6Ww1b8MRWWEY9YxK9Z
+ h4WxoV9HlBpXbcTq7lF5a8TKk4GPu/X77sSszD4BN+6YWYfuvegVGWPakUT1Lg+lm8bs
+ s/1mBOIvWJZy4PojZEVR9QWUZGTrv46KTSxxvc/zE1Gul5vd8a9kTlit+Z81yPKBKbZu
+ OWQ+S3CO7PK02jRDcse6Q3Ias8xjhRuU5mtjDxw4znQ/o748um6fuz6Lbg2C530p6K+Y
+ TkPQ==
+X-Gm-Message-State: AOJu0Yz0GZwYGwB73xlrBfLxzrqtolaINbLIHu02cyiLzjhlgrEy78M7
+ 1wjLOwNNhHyiClHvji1OMJZfcPjY2w/lSGZr0JkZVM61LxUVnGZW6S0xDIuVENM=
+X-Google-Smtp-Source: AGHT+IGWhZXaRIHB9nwyS9lCEMvqEDeCuORw5KmVreqBxAf4Gq4cXJxAPlMEFjgBo9HmOpkFYvI2/A==
+X-Received: by 2002:aa7:dc0f:0:b0:55c:d474:56dc with SMTP id
+ b15-20020aa7dc0f000000b0055cd47456dcmr203467edu.39.1706306650281; 
+ Fri, 26 Jan 2024 14:04:10 -0800 (PST)
 Received: from m1x-phil.lan ([176.176.142.39])
  by smtp.gmail.com with ESMTPSA id
- fi5-20020a056402550500b005583e670df7sm1016030edb.73.2024.01.26.14.04.56
+ q15-20020a056402032f00b0055ce4ea1c81sm1006182edw.89.2024.01.26.14.04.08
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 26 Jan 2024 14:04:58 -0800 (PST)
+ Fri, 26 Jan 2024 14:04:09 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-s390x@nongnu.org,
@@ -65,18 +64,16 @@ Cc: qemu-arm@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-s390x@nongnu.org,
  Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
  Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v2 08/23] target/hppa: Prefer fast cpu_env() over slower CPU
- QOM cast macro
-Date: Fri, 26 Jan 2024 23:03:50 +0100
-Message-ID: <20240126220407.95022-9-philmd@linaro.org>
+Subject: [PATCH v2 00/23] hw,
+ target: Prefer fast cpu_env() over slower CPU QOM cast macro
+Date: Fri, 26 Jan 2024 23:03:42 +0100
+Message-ID: <20240126220407.95022-1-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20240126220407.95022-1-philmd@linaro.org>
-References: <20240126220407.95022-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::530;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x530.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,90 +96,172 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Mechanical patch produced running the command documented
-in scripts/coccinelle/cpu_env.cocci_template header.
+Use cpu_env() -- which is fast path -- when possible.
+Bulk conversion using Coccinelle spatch (script included).
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
- target/hppa/cpu.c        | 8 ++------
- target/hppa/int_helper.c | 8 ++------
- target/hppa/mem_helper.c | 3 +--
- 3 files changed, 5 insertions(+), 14 deletions(-)
+Since v1:
+- Avoid CPU() cast (Paolo)
+- Split per targets (Thomas)
 
-diff --git a/target/hppa/cpu.c b/target/hppa/cpu.c
-index 14e17fa9aa..3200de0998 100644
---- a/target/hppa/cpu.c
-+++ b/target/hppa/cpu.c
-@@ -106,11 +106,8 @@ void hppa_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
-                                   MMUAccessType access_type, int mmu_idx,
-                                   uintptr_t retaddr)
- {
--    HPPACPU *cpu = HPPA_CPU(cs);
--    CPUHPPAState *env = &cpu->env;
--
-     cs->exception_index = EXCP_UNALIGN;
--    hppa_set_ior_and_isr(env, addr, MMU_IDX_MMU_DISABLED(mmu_idx));
-+    hppa_set_ior_and_isr(cpu_env(cs), addr, MMU_IDX_MMU_DISABLED(mmu_idx));
- 
-     cpu_loop_exit_restore(cs, retaddr);
- }
-@@ -145,8 +142,7 @@ static void hppa_cpu_realizefn(DeviceState *dev, Error **errp)
- static void hppa_cpu_initfn(Object *obj)
- {
-     CPUState *cs = CPU(obj);
--    HPPACPU *cpu = HPPA_CPU(obj);
--    CPUHPPAState *env = &cpu->env;
-+    CPUHPPAState *env = cpu_env(CPU(obj));
- 
-     cs->exception_index = -1;
-     cpu_hppa_loaded_fr0(env);
-diff --git a/target/hppa/int_helper.c b/target/hppa/int_helper.c
-index efe638b36e..d072ad2af7 100644
---- a/target/hppa/int_helper.c
-+++ b/target/hppa/int_helper.c
-@@ -99,8 +99,7 @@ void HELPER(write_eiem)(CPUHPPAState *env, target_ulong val)
- 
- void hppa_cpu_do_interrupt(CPUState *cs)
- {
--    HPPACPU *cpu = HPPA_CPU(cs);
--    CPUHPPAState *env = &cpu->env;
-+    CPUHPPAState *env = cpu_env(cs);
-     int i = cs->exception_index;
-     uint64_t old_psw;
- 
-@@ -268,9 +267,6 @@ void hppa_cpu_do_interrupt(CPUState *cs)
- 
- bool hppa_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
- {
--    HPPACPU *cpu = HPPA_CPU(cs);
--    CPUHPPAState *env = &cpu->env;
--
-     if (interrupt_request & CPU_INTERRUPT_NMI) {
-         /* Raise TOC (NMI) interrupt */
-         cpu_reset_interrupt(cs, CPU_INTERRUPT_NMI);
-@@ -280,7 +276,7 @@ bool hppa_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
-     }
- 
-     /* If interrupts are requested and enabled, raise them.  */
--    if ((env->psw & PSW_I) && (interrupt_request & CPU_INTERRUPT_HARD)) {
-+    if ((cpu_env(cs)->psw & PSW_I) && (interrupt_request & CPU_INTERRUPT_HARD)) {
-         cs->exception_index = EXCP_EXT_INTERRUPT;
-         hppa_cpu_do_interrupt(cs);
-         return true;
-diff --git a/target/hppa/mem_helper.c b/target/hppa/mem_helper.c
-index bb85962d50..7e73b80788 100644
---- a/target/hppa/mem_helper.c
-+++ b/target/hppa/mem_helper.c
-@@ -357,8 +357,7 @@ bool hppa_cpu_tlb_fill(CPUState *cs, vaddr addr, int size,
-                        MMUAccessType type, int mmu_idx,
-                        bool probe, uintptr_t retaddr)
- {
--    HPPACPU *cpu = HPPA_CPU(cs);
--    CPUHPPAState *env = &cpu->env;
-+    CPUHPPAState *env = cpu_env(cs);
-     HPPATLBEntry *ent;
-     int prot, excp, a_prot;
-     hwaddr phys;
+Philippe Mathieu-Daudé (23):
+  hw/acpi/cpu: Use CPUState typedef
+  scripts/coccinelle: Add cpu_env.cocci_template script
+  bulk: Call in place single use cpu_env()
+  target/alpha: Prefer fast cpu_env() over slower CPU QOM cast macro
+  target/arm: Prefer fast cpu_env() over slower CPU QOM cast macro
+  target/avr: Prefer fast cpu_env() over slower CPU QOM cast macro
+  target/cris: Prefer fast cpu_env() over slower CPU QOM cast macro
+  target/hppa: Prefer fast cpu_env() over slower CPU QOM cast macro
+  target/i386/hvf: Use CPUState typedef
+  target/i386: Prefer fast cpu_env() over slower CPU QOM cast macro
+  target/m68k: Prefer fast cpu_env() over slower CPU QOM cast macro
+  target/microblaze: Prefer fast cpu_env() over slower CPU QOM cast
+    macro
+  target/mips: Prefer fast cpu_env() over slower CPU QOM cast macro
+  target/nios2: Prefer fast cpu_env() over slower CPU QOM cast macro
+  target/openrisc: Prefer fast cpu_env() over slower CPU QOM cast macro
+  target/ppc: Prefer fast cpu_env() over slower CPU QOM cast macro
+  target/riscv: Prefer fast cpu_env() over slower CPU QOM cast macro
+  target/rx: Prefer fast cpu_env() over slower CPU QOM cast macro
+  target/s390x: Prefer fast cpu_env() over slower CPU QOM cast macro
+  target/sh4: Prefer fast cpu_env() over slower CPU QOM cast macro
+  target/tricore: Prefer fast cpu_env() over slower CPU QOM cast macro
+  target/xtensa: Prefer fast cpu_env() over slower CPU QOM cast macro
+  target/sparc: Prefer fast cpu_env() over slower CPU QOM cast macro
+
+ MAINTAINERS                               |  1 +
+ include/hw/acpi/cpu.h                     |  2 +-
+ target/i386/hvf/vmx.h                     | 13 +---
+ target/i386/hvf/x86.h                     | 26 +++----
+ target/i386/hvf/x86_descr.h               | 14 ++--
+ target/i386/hvf/x86_emu.h                 |  4 +-
+ target/i386/hvf/x86_mmu.h                 |  6 +-
+ accel/tcg/cpu-exec.c                      |  3 +-
+ hw/i386/vmmouse.c                         |  6 +-
+ hw/i386/xen/xen-hvm.c                     |  3 +-
+ hw/intc/arm_gicv3_cpuif_common.c          |  5 +-
+ hw/ppc/mpc8544_guts.c                     |  3 +-
+ hw/ppc/pnv.c                              |  3 +-
+ hw/ppc/pnv_xscom.c                        |  5 +-
+ hw/ppc/ppce500_spin.c                     |  3 +-
+ hw/ppc/spapr.c                            |  3 +-
+ hw/ppc/spapr_caps.c                       |  6 +-
+ linux-user/i386/cpu_loop.c                |  4 +-
+ target/alpha/cpu.c                        | 31 ++------
+ target/alpha/gdbstub.c                    |  6 +-
+ target/alpha/helper.c                     | 12 +--
+ target/alpha/mem_helper.c                 | 11 +--
+ target/arm/cpu.c                          | 19 ++---
+ target/arm/debug_helper.c                 |  8 +-
+ target/arm/gdbstub.c                      |  6 +-
+ target/arm/gdbstub64.c                    |  6 +-
+ target/arm/helper.c                       |  9 +--
+ target/arm/hvf/hvf.c                      | 12 +--
+ target/arm/kvm.c                          |  3 +-
+ target/arm/ptw.c                          |  3 +-
+ target/arm/tcg/cpu32.c                    |  3 +-
+ target/avr/cpu.c                          | 27 ++-----
+ target/avr/gdbstub.c                      |  6 +-
+ target/avr/helper.c                       | 10 +--
+ target/cris/cpu.c                         |  5 +-
+ target/cris/gdbstub.c                     |  9 +--
+ target/cris/helper.c                      | 12 +--
+ target/cris/translate.c                   |  3 +-
+ target/hppa/cpu.c                         |  8 +-
+ target/hppa/int_helper.c                  |  8 +-
+ target/hppa/mem_helper.c                  |  6 +-
+ target/hppa/translate.c                   |  3 +-
+ target/i386/arch_memory_mapping.c         |  3 +-
+ target/i386/cpu-dump.c                    |  3 +-
+ target/i386/cpu.c                         | 37 +++------
+ target/i386/helper.c                      | 39 +++-------
+ target/i386/hvf/hvf.c                     |  8 +-
+ target/i386/hvf/x86.c                     | 30 ++++----
+ target/i386/hvf/x86_descr.c               |  8 +-
+ target/i386/hvf/x86_emu.c                 |  6 +-
+ target/i386/hvf/x86_mmu.c                 | 14 ++--
+ target/i386/hvf/x86_task.c                | 10 +--
+ target/i386/hvf/x86hvf.c                  |  6 +-
+ target/i386/kvm/kvm.c                     |  6 +-
+ target/i386/kvm/xen-emu.c                 | 32 +++-----
+ target/i386/nvmm/nvmm-all.c               |  6 +-
+ target/i386/tcg/sysemu/bpt_helper.c       |  3 +-
+ target/i386/tcg/tcg-cpu.c                 | 14 +---
+ target/i386/tcg/user/excp_helper.c        |  3 +-
+ target/i386/tcg/user/seg_helper.c         |  3 +-
+ target/i386/whpx/whpx-all.c               | 18 ++---
+ target/loongarch/tcg/translate.c          |  3 +-
+ target/m68k/cpu.c                         | 30 +++-----
+ target/m68k/gdbstub.c                     |  6 +-
+ target/m68k/helper.c                      |  3 +-
+ target/m68k/m68k-semi.c                   |  6 +-
+ target/m68k/op_helper.c                   | 11 +--
+ target/m68k/translate.c                   |  3 +-
+ target/microblaze/helper.c                |  3 +-
+ target/microblaze/translate.c             |  3 +-
+ target/mips/cpu.c                         | 11 +--
+ target/mips/gdbstub.c                     |  6 +-
+ target/mips/kvm.c                         | 27 +++----
+ target/mips/sysemu/physaddr.c             |  3 +-
+ target/mips/tcg/exception.c               |  3 +-
+ target/mips/tcg/op_helper.c               |  3 +-
+ target/mips/tcg/sysemu/special_helper.c   |  3 +-
+ target/mips/tcg/sysemu/tlb_helper.c       |  6 +-
+ target/mips/tcg/translate.c               |  3 +-
+ target/nios2/cpu.c                        | 15 +---
+ target/nios2/helper.c                     |  3 +-
+ target/nios2/nios2-semi.c                 |  6 +-
+ target/openrisc/gdbstub.c                 |  3 +-
+ target/openrisc/interrupt.c               |  6 +-
+ target/openrisc/translate.c               |  3 +-
+ target/ppc/cpu_init.c                     | 11 +--
+ target/ppc/excp_helper.c                  |  3 +-
+ target/ppc/gdbstub.c                      | 12 +--
+ target/ppc/kvm.c                          |  6 +-
+ target/ppc/ppc-qmp-cmds.c                 |  3 +-
+ target/ppc/user_only_helper.c             |  3 +-
+ target/riscv/arch_dump.c                  |  6 +-
+ target/riscv/cpu.c                        | 17 ++---
+ target/riscv/cpu_helper.c                 | 14 +---
+ target/riscv/debug.c                      |  9 +--
+ target/riscv/gdbstub.c                    |  6 +-
+ target/riscv/kvm/kvm-cpu.c                |  6 +-
+ target/riscv/tcg/tcg-cpu.c                |  9 +--
+ target/riscv/translate.c                  |  3 +-
+ target/rx/gdbstub.c                       |  6 +-
+ target/rx/helper.c                        |  6 +-
+ target/rx/translate.c                     |  6 +-
+ target/s390x/cpu-dump.c                   |  3 +-
+ target/s390x/gdbstub.c                    |  6 +-
+ target/s390x/helper.c                     |  3 +-
+ target/s390x/kvm/kvm.c                    |  6 +-
+ target/s390x/tcg/excp_helper.c            | 11 +--
+ target/s390x/tcg/translate.c              |  3 +-
+ target/sh4/cpu.c                          | 15 ++--
+ target/sh4/gdbstub.c                      |  6 +-
+ target/sh4/helper.c                       | 11 +--
+ target/sh4/op_helper.c                    |  4 +-
+ target/sh4/translate.c                    |  3 +-
+ target/sparc/cpu.c                        | 14 +---
+ target/sparc/gdbstub.c                    |  3 +-
+ target/sparc/int32_helper.c               |  3 +-
+ target/sparc/int64_helper.c               |  3 +-
+ target/sparc/ldst_helper.c                |  6 +-
+ target/sparc/mmu_helper.c                 | 15 ++--
+ target/sparc/translate.c                  |  3 +-
+ target/tricore/cpu.c                      | 20 +----
+ target/tricore/gdbstub.c                  |  6 +-
+ target/tricore/helper.c                   |  3 +-
+ target/tricore/translate.c                |  3 +-
+ target/xtensa/dbg_helper.c                |  3 +-
+ target/xtensa/exc_helper.c                |  3 +-
+ target/xtensa/gdbstub.c                   |  6 +-
+ target/xtensa/helper.c                    |  9 +--
+ target/xtensa/translate.c                 |  3 +-
+ scripts/coccinelle/cpu_env.cocci_template | 92 +++++++++++++++++++++++
+ 130 files changed, 432 insertions(+), 714 deletions(-)
+ create mode 100644 scripts/coccinelle/cpu_env.cocci_template
+
 -- 
 2.41.0
 
