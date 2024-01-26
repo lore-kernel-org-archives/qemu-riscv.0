@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C61C8C47DDB
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 17:37:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76568C47422
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 17:38:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTQ6M-0002kt-Qd; Fri, 26 Jan 2024 12:34:51 -0500
+	id 1rTQ5i-0000w1-Gb; Fri, 26 Jan 2024 12:34:11 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1rTQ5S-0000BW-9q; Fri, 26 Jan 2024 12:33:55 -0500
-Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ <BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1rTQ5A-0008AZ-Va; Fri, 26 Jan 2024 12:33:36 -0500
+Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1rTQ5O-0001jF-GF; Fri, 26 Jan 2024 12:33:54 -0500
+ <BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1rTQ57-0001cg-W9; Fri, 26 Jan 2024 12:33:36 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+ d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=4MfAr1yLI5YhElasbf+xYz8slg97fPxYAJHsYCE6HR0=; b=QCcaZ/6C5Iz4cXurFdCGdwPkbs
- Tx+OFOX65z8WZLMrj3r1M1OMa1uCBfhIBkcTalLwyCSVgdp6MRC0yngtPLUk5QQopCNkJxAPjr8jV
- gHBfM+h8Ivnb1jSyeRCUQN44kMg1saXw8rCMBiZrSz0X4jfd6xIpolJgUrAOJCJSl5DCO184V81xQ
- YRJVYKJmmArP7BgFHFDffL11xggxzqvuYlMBM/FYtZ++qK5KeLTkvIsQV7g7OmUG8MlMaO9v2/PFx
- 5M7WoyLiczrNts5+qs1F+3zrEq194HhwpwIokm0ghvWCjhXCW0mVX+pXANYl+JThRACU+DCvFtyGJ
- gN/pe2eA==;
+ bh=RalmZg2g2HcWNPspE1WbCMjLC5xu8xXxgPEaYu8kgcA=; b=E5mQKWR4z4aHkGBp7qVHFzw67C
+ v5wpWOcAtFcL6EkJiTQAISbFdVRSj2uOXmFt3yxiz2bdgjWcIy8+LJVGopK1l7o+Rbnwd+2nWkMYG
+ oIlroP1+I+949w2ebYVnJMwaCjTNv8hFsvAmC/MQ1tQjJJ1u/CGn5MWPPB7AOz+02tR7o0Ze+U7C4
+ JnUu2L1rG9U5mLFmVmv+Dvy5uXqsOlGL1qUQ32dy1gg508bL9gVJu8cL6oKbqdxodIXzXojp9Fq25
+ VnC9u6fY29dh8CbDgYiBQNL4vetAuKC9EhtiJZDBjVdfo9mOKEoWtD6k03kl1X0hLFRbwVi8eMjVx
+ tG0btbuA==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1rTQ4B-000000069V8-2yGf; Fri, 26 Jan 2024 17:32:36 +0000
+ by casper.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
+ id 1rTQ49-0000000EKUi-0YRl; Fri, 26 Jan 2024 17:32:34 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.97.1 #2 (Red
- Hat Linux)) id 1rTQ4B-00000001eoX-07cN;
- Fri, 26 Jan 2024 17:32:35 +0000
+ Hat Linux)) id 1rTQ4A-00000001enU-00UM;
+ Fri, 26 Jan 2024 17:32:34 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -84,21 +84,21 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
- xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v4 46/47] net: remove qemu_show_nic_models(),
- qemu_find_nic_model()
-Date: Fri, 26 Jan 2024 17:25:23 +0000
-Message-ID: <20240126173228.394202-47-dwmw2@infradead.org>
+ xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>,
+ Thomas Huth <thuth@redhat.com>
+Subject: [PATCH v4 34/47] hw/microblaze: use qemu_configure_nic_device()
+Date: Fri, 26 Jan 2024 17:25:11 +0000
+Message-ID: <20240126173228.394202-35-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240126173228.394202-1-dwmw2@infradead.org>
 References: <20240126173228.394202-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- desiato.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1:d65d:64ff:fe57:4e05;
- envelope-from=BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@desiato.srs.infradead.org;
- helo=desiato.infradead.org
+ casper.infradead.org. See http://www.infradead.org/rpr.html
+Received-SPF: none client-ip=2001:8b0:10b:1236::1;
+ envelope-from=BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org;
+ helo=casper.infradead.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -123,90 +123,49 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-These old functions can be removed now too. Let net_param_nic() print
-the full set of network devices directly, and also make it note that a
-list more specific to this platform/config will be available by using
-'-nic model=help' instead.
-
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
 ---
- include/net/net.h |  3 ---
- net/net.c         | 39 ++++++---------------------------------
- 2 files changed, 6 insertions(+), 36 deletions(-)
+ hw/microblaze/petalogix_ml605_mmu.c      | 3 +--
+ hw/microblaze/petalogix_s3adsp1800_mmu.c | 3 +--
+ 2 files changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/include/net/net.h b/include/net/net.h
-index 00ee1af7ab..588ee55f28 100644
---- a/include/net/net.h
-+++ b/include/net/net.h
-@@ -203,9 +203,6 @@ void qemu_set_vnet_hdr_len(NetClientState *nc, int len);
- int qemu_set_vnet_le(NetClientState *nc, bool is_le);
- int qemu_set_vnet_be(NetClientState *nc, bool is_be);
- void qemu_macaddr_default_if_unset(MACAddr *macaddr);
--int qemu_show_nic_models(const char *arg, const char *const *models);
--int qemu_find_nic_model(NICInfo *nd, const char * const *models,
--                        const char *default_model);
- /**
-  * qemu_find_nic_info: Obtain NIC configuration information
-  * @typename: Name of device object type
-diff --git a/net/net.c b/net/net.c
-index ffd4b42d5a..d705e9b0fd 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -977,38 +977,6 @@ GPtrArray *qemu_get_nic_models(const char *device_type)
-     return nic_models;
- }
+diff --git a/hw/microblaze/petalogix_ml605_mmu.c b/hw/microblaze/petalogix_ml605_mmu.c
+index fb7889cf67..0f5fabc32e 100644
+--- a/hw/microblaze/petalogix_ml605_mmu.c
++++ b/hw/microblaze/petalogix_ml605_mmu.c
+@@ -133,7 +133,6 @@ petalogix_ml605_init(MachineState *machine)
+     sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[TIMER_IRQ]);
  
--int qemu_show_nic_models(const char *arg, const char *const *models)
--{
--    int i;
--
--    if (!arg || !is_help_option(arg)) {
--        return 0;
--    }
--
--    printf("Available NIC models:\n");
--    for (i = 0 ; models[i]; i++) {
--        printf("%s\n", models[i]);
--    }
--    return 1;
--}
--
--int qemu_find_nic_model(NICInfo *nd, const char * const *models,
--                        const char *default_model)
--{
--    int i;
--
--    if (!nd->model)
--        nd->model = g_strdup(default_model);
--
--    for (i = 0 ; models[i]; i++) {
--        if (strcmp(nd->model, models[i]) == 0)
--            return i;
--    }
--
--    error_report("Unsupported NIC model: %s", nd->model);
--    return -1;
--}
--
- static int net_init_nic(const Netdev *netdev, const char *name,
-                         NetClientState *peer, Error **errp)
- {
-@@ -1791,9 +1759,14 @@ static int net_param_nic(void *dummy, QemuOpts *opts, Error **errp)
-         }
-         if (is_help_option(type)) {
-             GPtrArray *nic_models = qemu_get_nic_models(TYPE_DEVICE);
-+            int i;
-             show_netdevs();
-             printf("\n");
--            qemu_show_nic_models(type, (const char **)nic_models->pdata);
-+            printf("Available NIC models "
-+                   "(use -nic model=help for a filtered list):\n");
-+            for (i = 0 ; nic_models->pdata[i]; i++) {
-+                printf("%s\n", (char *)nic_models->pdata[i]);
-+            }
-             g_ptr_array_free(nic_models, true);
-             exit(0);
-         }
+     /* axi ethernet and dma initialization. */
+-    qemu_check_nic_model(&nd_table[0], "xlnx.axi-ethernet");
+     eth0 = qdev_new("xlnx.axi-ethernet");
+     dma = qdev_new("xlnx.axi-dma");
+ 
+@@ -145,7 +144,7 @@ petalogix_ml605_init(MachineState *machine)
+                                   "axistream-connected-target", NULL);
+     cs = object_property_get_link(OBJECT(dma),
+                                   "axistream-control-connected-target", NULL);
+-    qdev_set_nic_properties(eth0, &nd_table[0]);
++    qemu_configure_nic_device(eth0, true, NULL);
+     qdev_prop_set_uint32(eth0, "rxmem", 0x1000);
+     qdev_prop_set_uint32(eth0, "txmem", 0x1000);
+     object_property_set_link(OBJECT(eth0), "axistream-connected", ds,
+diff --git a/hw/microblaze/petalogix_s3adsp1800_mmu.c b/hw/microblaze/petalogix_s3adsp1800_mmu.c
+index 505639c298..dad46bd7f9 100644
+--- a/hw/microblaze/petalogix_s3adsp1800_mmu.c
++++ b/hw/microblaze/petalogix_s3adsp1800_mmu.c
+@@ -114,9 +114,8 @@ petalogix_s3adsp1800_init(MachineState *machine)
+     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, TIMER_BASEADDR);
+     sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[TIMER_IRQ]);
+ 
+-    qemu_check_nic_model(&nd_table[0], "xlnx.xps-ethernetlite");
+     dev = qdev_new("xlnx.xps-ethernetlite");
+-    qdev_set_nic_properties(dev, &nd_table[0]);
++    qemu_configure_nic_device(dev, true, NULL);
+     qdev_prop_set_uint32(dev, "tx-ping-pong", 0);
+     qdev_prop_set_uint32(dev, "rx-ping-pong", 0);
+     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
 -- 
 2.43.0
 
