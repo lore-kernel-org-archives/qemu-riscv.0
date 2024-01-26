@@ -4,108 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCCBDC47422
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 17:41:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F262C47422
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 18:16:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTQ6v-0006Vo-1q; Fri, 26 Jan 2024 12:35:25 -0500
+	id 1rTQkb-0005e3-9r; Fri, 26 Jan 2024 13:16:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from
- <BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1rTQ5P-00008s-In; Fri, 26 Jan 2024 12:33:53 -0500
-Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
+ id 1rTQkZ-0005d7-MV
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 13:16:23 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from
- <BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1rTQ5O-0001jY-09; Fri, 26 Jan 2024 12:33:51 -0500
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
- MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
- Reply-To:Content-Type:Content-ID:Content-Description;
- bh=1By8MLkJQQ5aDNY2GpLO8Lg7eMBepYz9kIQOUj3RWg4=; b=Lu42CPJkj0fpF55INNF9dFE3Jb
- 36moigKQb4zpZw+xI/DratrTzBmjGRdyT25PQKyglZ74refrkiMyun8BzZSzSHEJM+92iI9HenrW6
- meVmjVhZdnroFEGp4i3jIHB5B8t+nh2Jact19MP0cKrJ6KjxVjd4w6lDHuYT9vILTen85kESCpoyf
- 1GIEUuuVMXBnJEC97Vd9RxAMa7BSErwen5aaBIVeSoBaLU1C6Kyaix6HEoW+2GZcYsz447SCP6Oa7
- VOEez5Ox5CXR3k9U+T1cFCtXv2IqJHwEagBkJc1Fk3ADvav1IGvajAx3hyQ0Co8W1aAPD/XV5AGfR
- vRRhxKww==;
-Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1rTQ4A-000000069Uh-1rdy; Fri, 26 Jan 2024 17:32:34 +0000
-Received: from dwoodhou by i7.infradead.org with local (Exim 4.97.1 #2 (Red
- Hat Linux)) id 1rTQ48-00000001elq-0EMr;
- Fri, 26 Jan 2024 17:32:32 +0000
-From: David Woodhouse <dwmw2@infradead.org>
-To: qemu-devel@nongnu.org
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Beniamino Galvani <b.galvani@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Strahinja Jankovic <strahinja.p.jankovic@gmail.com>,
- Niek Linnenbank <nieklinnenbank@gmail.com>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- Andrew Jeffery <andrew@codeconstruct.com.au>,
- Joel Stanley <joel@jms.id.au>, Igor Mitsyanko <i.mitsyanko@gmail.com>,
- Jean-Christophe Dubois <jcd@tribudubois.net>,
- Andrey Smirnov <andrew.smirnov@gmail.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Rob Herring <robh@kernel.org>, Subbaraya Sundeep <sundeep.lkml@gmail.com>,
- Jan Kiszka <jan.kiszka@web.de>, Tyrone Ting <kfting@nuvoton.com>,
- Hao Wu <wuhaotsh@google.com>, Radoslaw Biernacki <rad@semihalf.com>,
- Leif Lindholm <quic_llindhol@quicinc.com>,
- Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Alistair Francis <alistair@alistair23.me>, Helge Deller <deller@gmx.de>,
- Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Song Gao <gaosong@loongson.cn>, Thomas Huth <huth@tuxfamily.org>,
- Laurent Vivier <laurent@vivier.eu>, Huacai Chen <chenhuacai@kernel.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- =?UTF-8?q?Herv=C3=A9=20Poussineau?= <hpoussin@reactos.org>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Aurelien Jarno <aurelien@aurel32.net>, Jason Wang <jasowang@redhat.com>,
- Jia Liu <proljc@gmail.com>, Stafford Horne <shorne@gmail.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Nicholas Piggin <npiggin@gmail.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Eric Farman <farman@linux.ibm.com>, David Hildenbrand <david@redhat.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Magnus Damm <magnus.damm@gmail.com>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
- Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
- xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>,
- Thomas Huth <thuth@redhat.com>
-Subject: [PATCH v4 13/47] hw/mips/malta: use pci_init_nic_devices()
-Date: Fri, 26 Jan 2024 17:24:50 +0000
-Message-ID: <20240126173228.394202-14-dwmw2@infradead.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240126173228.394202-1-dwmw2@infradead.org>
-References: <20240126173228.394202-1-dwmw2@infradead.org>
+ (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
+ id 1rTQkX-0003TG-E8
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 13:16:23 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1706292980;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=uNG6H+3tybJ100+FQ7ifNQULqIkXKOGQRCmck6q+baY=;
+ b=dBWZnp3zPPd2/AjiEvuq1Hmih1zFnun9C6IU+BX3Yl1E47sZlrZPmFnR5c1XRK7wYJAV2b
+ vgY5vuKT2ef+SNu8Sxus4/GT4SA5M2B+O5uLjsYVqZvlMPOWe648CHskwlmXf8rh49yo7v
+ egO+SpXvyJIiUwW+E7cTKpUGD8wevrk=
+Received: from mail-oi1-f198.google.com (mail-oi1-f198.google.com
+ [209.85.167.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-93-DCT-QgHYP2C-nFwFr_YNdQ-1; Fri, 26 Jan 2024 13:16:18 -0500
+X-MC-Unique: DCT-QgHYP2C-nFwFr_YNdQ-1
+Received: by mail-oi1-f198.google.com with SMTP id
+ 5614622812f47-3bd97c17091so1245059b6e.3
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 10:16:18 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706292977; x=1706897777;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=uNG6H+3tybJ100+FQ7ifNQULqIkXKOGQRCmck6q+baY=;
+ b=Pb7amESVnIB0p2lRBMp2grNG4B9kh3lR5kEhlgMnrV+CuX3JzYrTCon3eubaY7RMLb
+ Il4iZst24vi3RmuXFQ9RxsdynKkcp6tdRWMcrLa5XzdWMOWHGG8HEoX6MCOUGErtbYF+
+ DisDotPEfveNqif1+7tMLEVS9v4m6cRJki5gB8xEerKgaADPtREc5iE65ij69H8qFnJJ
+ A5wookUrHfdHw4iPzOvWmWWs62hx0iAnbB7LgmtlBzx+71XMwMioJTB7jTZ8HJNILtWT
+ oCt6VNy6CAejykK8T75E2ugEZiZQhG/2MJQMg0h/I2AbmUnhslfkQ3k+2UWqiQr0IXaE
+ MRWQ==
+X-Gm-Message-State: AOJu0YwH7t/Jq8jqKONMd78Ai5kYyvGc6/gMlhoY0S2Z7mMwZSY+YCCq
+ iZXmaBBAJtuXR4M4K0HtbCrTAAXrBlP1S+EcSy/xt+ZFwXKPNeLU8FC9iwJRF/sWRyBovP9bE1A
+ p2fx3kFaFDrV3FaVzJweabOXKPRC9Ta5pDD4jE4R5u5m+EuOAchfaisAcWI3T0h3CEw7bAp3vXr
+ NE6HxkNqzOi8TdJBX5h6XD0S2VbDI=
+X-Received: by 2002:a05:6808:d4b:b0:3bd:f41f:f9a6 with SMTP id
+ w11-20020a0568080d4b00b003bdf41ff9a6mr168934oik.25.1706292977729; 
+ Fri, 26 Jan 2024 10:16:17 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFxGYME3uEkFpYZdF0yuGNjBmdCuRZUGKjm+7ziR8gEBrV71tk/J3Re8/gUBge6UdSLwQtE2ayJ0S4PUmkNJQ4=
+X-Received: by 2002:a05:6808:d4b:b0:3bd:f41f:f9a6 with SMTP id
+ w11-20020a0568080d4b00b003bdf41ff9a6mr168928oik.25.1706292977542; Fri, 26 Jan
+ 2024 10:16:17 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- desiato.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1:d65d:64ff:fe57:4e05;
- envelope-from=BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@desiato.srs.infradead.org;
- helo=desiato.infradead.org
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+References: <20240124155425.73195-1-philmd@linaro.org>
+In-Reply-To: <20240124155425.73195-1-philmd@linaro.org>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Date: Fri, 26 Jan 2024 19:16:06 +0100
+Message-ID: <CABgObfb8pKdf=Q7JPDQ9j=Zanbk9gYOC8ufxprGA88zAPaoO5Q@mail.gmail.com>
+Subject: Re: [PATCH 0/2] accel/kvm: Sanitize KVM_HAVE_MCE_INJECTION definition
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>, 
+ qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, 
+ Thomas Huth <thuth@redhat.com>, Peter Maydell <peter.maydell@linaro.org>,
+ kvm@vger.kernel.org, qemu-s390x@nongnu.org
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=pbonzini@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -33
+X-Spam_score: -3.4
+X-Spam_bar: ---
+X-Spam_report: (-3.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.313,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -121,48 +102,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+On Wed, Jan 24, 2024 at 4:54=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
+<philmd@linaro.org> wrote:
+>
+> Trivial replacement of KVM_HAVE_MCE_INJECTION by
+> KVM_ARCH_HAVE_MCE_INJECTION (not the "ARCH_" difference).
 
-The Malta board setup code would previously place the first NIC into PCI
-slot 11 if was a PCNet card, and the rest (including the first if it was
-anything other than a PCNet card) would be dynamically assigned.
+I am confused, why can't you just rename the symbol and instead you go
+through this change?
 
-Now it will place any PCNet NIC into slot 11, and then anything else will
-be dynamically assigned.
+Paolo
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Thomas Huth <thuth@redhat.com>
----
- hw/mips/malta.c | 15 +++------------
- 1 file changed, 3 insertions(+), 12 deletions(-)
-
-diff --git a/hw/mips/malta.c b/hw/mips/malta.c
-index d22bb1edef..af74008c82 100644
---- a/hw/mips/malta.c
-+++ b/hw/mips/malta.c
-@@ -612,18 +612,9 @@ static MaltaFPGAState *malta_fpga_init(MemoryRegion *address_space,
- /* Network support */
- static void network_init(PCIBus *pci_bus)
- {
--    int i;
--
--    for (i = 0; i < nb_nics; i++) {
--        NICInfo *nd = &nd_table[i];
--        const char *default_devaddr = NULL;
--
--        if (i == 0 && (!nd->model || strcmp(nd->model, "pcnet") == 0))
--            /* The malta board has a PCNet card using PCI SLOT 11 */
--            default_devaddr = "0b";
--
--        pci_nic_init_nofail(nd, pci_bus, "pcnet", default_devaddr);
--    }
-+    /* The malta board has a PCNet card using PCI SLOT 11 */
-+    pci_init_nic_in_slot(pci_bus, "pcnet", NULL, "0b");
-+    pci_init_nic_devices(pci_bus, "pcnet");
- }
- 
- static void bl_setup_gt64120_jump_kernel(void **p, uint64_t run_addr,
--- 
-2.43.0
+> Philippe Mathieu-Daud=C3=A9 (2):
+>   accel/kvm: Define KVM_ARCH_HAVE_MCE_INJECTION in each target
+>   accel/kvm: Directly check KVM_ARCH_HAVE_MCE_INJECTION value in place
+>
+>  include/sysemu/kvm.h         |  7 ++++++-
+>  target/arm/cpu-param.h       |  5 +++++
+>  target/arm/cpu.h             |  4 ----
+>  target/i386/cpu-param.h      |  2 ++
+>  target/i386/cpu.h            |  2 --
+>  target/loongarch/cpu-param.h |  2 ++
+>  target/mips/cpu-param.h      |  2 ++
+>  target/ppc/cpu-param.h       |  2 ++
+>  target/riscv/cpu-param.h     |  2 ++
+>  target/s390x/cpu-param.h     |  2 ++
+>  accel/kvm/kvm-all.c          | 10 +++++-----
+>  11 files changed, 28 insertions(+), 12 deletions(-)
+>
+> --
+> 2.41.0
+>
 
 
