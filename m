@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BB05C47DDF
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 17:39:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 157B0C48285
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 17:39:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTQ4l-0007Mg-6I; Fri, 26 Jan 2024 12:33:11 -0500
+	id 1rTQ6m-0005AJ-AY; Fri, 26 Jan 2024 12:35:16 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rTQ4N-00071X-S2; Fri, 26 Jan 2024 12:32:48 -0500
-Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
+ <BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1rTQ5R-00009e-1L; Fri, 26 Jan 2024 12:33:55 -0500
+Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rTQ4K-0001cQ-FB; Fri, 26 Jan 2024 12:32:47 -0500
+ <BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1rTQ5O-0001jV-Ea; Fri, 26 Jan 2024 12:33:52 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+ d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=IsEBwT+a/9aBHnvV7Yr1FI82jfvo4oBFxfzxJeL3Zis=; b=o5uphZnnzk66xr9FQuoGoHaWIH
- PD2KSJ0bQgU+wewzGTv6tW1nP7TEDC+E82NfYVZOc0ivOVbXRaWBji21VgdgmcaPk9xvQHH3sxJlL
- W5wBmOCo9yGT9zGskThjhwDeXxPVaZOGfgFkJr/Un2HV5HrdgIyvjt5d2luhddn04WvUuGUPVHH1F
- vgrOcbchZYTSfxytYsLDI2IRBdKtuEUB6IWNVLStJPL2SNKo11VF4z5PXceDtjJZXfL1Zrp+dIdtT
- 0ff5H/8bgPl8RpeD4OefovH/Vdckf2q7lj3BcNiyq79D5dH9O/Ey/uC4NhTumGesDLoMCQmZb15rV
- EMIIlqZQ==;
+ bh=KOJpufq4zmSAW4K5QRQS7wrF9AysmCJpGSwOq9y3MvE=; b=Kkc6w4XBr8jGCKymZ8GonYtRQf
+ 3nKIA1F+AOT0Y0gp30CLxWOk0LHUYyXz6gt/8Cin6mmr3eAbf8dzVvSbbBSk9KelfbaAnW5/yJe5U
+ nExgrTMI7VIqwGLenUCm2tKd4kN7NVsljwGTI1S2gcurVCy29EA/XOYrAGr4SHtmhme8En06YvlVr
+ QQ7FZZSbOFHL7aJJVndJra1TxvjTN0ZuzpRZjXwrL/D8VH3MWjr1xAvkOZuixFv0WeSruJKJnjXhB
+ SsoUQflZFtcaIEQI2SjAQqIKU7bcTVOWPzAHCGgDGAHCbADyxPEJ1yXdQfbzyi0lulvFZ/ELgPpvK
+ 4BgnFm1Q==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1rTQ48-0000000EKUK-0jkb; Fri, 26 Jan 2024 17:32:33 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
+ id 1rTQ4A-000000069Un-1mvK; Fri, 26 Jan 2024 17:32:35 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.97.1 #2 (Red
- Hat Linux)) id 1rTQ48-00000001elz-1dme;
- Fri, 26 Jan 2024 17:32:32 +0000
+ Hat Linux)) id 1rTQ49-00000001emi-0XuV;
+ Fri, 26 Jan 2024 17:32:33 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -86,20 +86,19 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>,
  Thomas Huth <thuth@redhat.com>
-Subject: [PATCH v4 16/47] hw/ppc/spapr: use qemu_get_nic_info() and
- pci_init_nic_devices()
-Date: Fri, 26 Jan 2024 17:24:53 +0000
-Message-ID: <20240126173228.394202-17-dwmw2@infradead.org>
+Subject: [PATCH v4 24/47] hw/arm/fsl: use qemu_configure_nic_device()
+Date: Fri, 26 Jan 2024 17:25:01 +0000
+Message-ID: <20240126173228.394202-25-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240126173228.394202-1-dwmw2@infradead.org>
 References: <20240126173228.394202-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- casper.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1236::1;
- envelope-from=BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org;
- helo=casper.infradead.org
+ desiato.infradead.org. See http://www.infradead.org/rpr.html
+Received-SPF: none client-ip=2001:8b0:10b:1:d65d:64ff:fe57:4e05;
+ envelope-from=BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@desiato.srs.infradead.org;
+ helo=desiato.infradead.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -124,56 +123,67 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Avoid directly referencing nd_table[] by first instantiating any
-spapr-vlan devices using a qemu_get_nic_info() loop, then calling
-pci_init_nic_devices() to do the rest.
-
-No functional change intended.
-
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 ---
- hw/ppc/spapr.c | 18 +++++-------------
- 1 file changed, 5 insertions(+), 13 deletions(-)
+ hw/arm/fsl-imx25.c  | 2 +-
+ hw/arm/fsl-imx6.c   | 2 +-
+ hw/arm/fsl-imx6ul.c | 2 +-
+ hw/arm/fsl-imx7.c   | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/hw/ppc/spapr.c b/hw/ppc/spapr.c
-index e8dabc8614..0d72d286d8 100644
---- a/hw/ppc/spapr.c
-+++ b/hw/ppc/spapr.c
-@@ -2796,6 +2796,7 @@ static void spapr_machine_init(MachineState *machine)
-     MemoryRegion *sysmem = get_system_memory();
-     long load_limit, fw_size;
-     Error *resize_hpt_err = NULL;
-+    NICInfo *nd;
+diff --git a/hw/arm/fsl-imx25.c b/hw/arm/fsl-imx25.c
+index 9d2fb75a68..a24fa7b443 100644
+--- a/hw/arm/fsl-imx25.c
++++ b/hw/arm/fsl-imx25.c
+@@ -170,7 +170,7 @@ static void fsl_imx25_realize(DeviceState *dev, Error **errp)
  
-     if (!filename) {
-         error_report("Could not find LPAR firmware '%s'", bios_name);
-@@ -2996,21 +2997,12 @@ static void spapr_machine_init(MachineState *machine)
+     object_property_set_uint(OBJECT(&s->fec), "phy-num", s->phy_num,
+                              &error_abort);
+-    qdev_set_nic_properties(DEVICE(&s->fec), &nd_table[0]);
++    qemu_configure_nic_device(DEVICE(&s->fec), true, NULL);
  
-     phb = spapr_create_default_phb();
+     if (!sysbus_realize(SYS_BUS_DEVICE(&s->fec), errp)) {
+         return;
+diff --git a/hw/arm/fsl-imx6.c b/hw/arm/fsl-imx6.c
+index af2e982b05..afe9a59a81 100644
+--- a/hw/arm/fsl-imx6.c
++++ b/hw/arm/fsl-imx6.c
+@@ -383,7 +383,7 @@ static void fsl_imx6_realize(DeviceState *dev, Error **errp)
  
--    for (i = 0; i < nb_nics; i++) {
--        NICInfo *nd = &nd_table[i];
--
--        if (!nd->model) {
--            nd->model = g_strdup("spapr-vlan");
--        }
--
--        if (g_str_equal(nd->model, "spapr-vlan") ||
--            g_str_equal(nd->model, "ibmveth")) {
--            spapr_vlan_create(spapr->vio_bus, nd);
--        } else {
--            pci_nic_init_nofail(&nd_table[i], phb->bus, nd->model, NULL);
--        }
-+    while ((nd = qemu_find_nic_info("spapr-vlan", true, "ibmveth"))) {
-+        spapr_vlan_create(spapr->vio_bus, nd);
+     object_property_set_uint(OBJECT(&s->eth), "phy-num", s->phy_num,
+                              &error_abort);
+-    qdev_set_nic_properties(DEVICE(&s->eth), &nd_table[0]);
++    qemu_configure_nic_device(DEVICE(&s->eth), true, NULL);
+     if (!sysbus_realize(SYS_BUS_DEVICE(&s->eth), errp)) {
+         return;
      }
+diff --git a/hw/arm/fsl-imx6ul.c b/hw/arm/fsl-imx6ul.c
+index e37b69a5e1..ca3dd439ec 100644
+--- a/hw/arm/fsl-imx6ul.c
++++ b/hw/arm/fsl-imx6ul.c
+@@ -442,7 +442,7 @@ static void fsl_imx6ul_realize(DeviceState *dev, Error **errp)
+                                  s->phy_num[i], &error_abort);
+         object_property_set_uint(OBJECT(&s->eth[i]), "tx-ring-num",
+                                  FSL_IMX6UL_ETH_NUM_TX_RINGS, &error_abort);
+-        qdev_set_nic_properties(DEVICE(&s->eth[i]), &nd_table[i]);
++        qemu_configure_nic_device(DEVICE(&s->eth[i]), true, NULL);
+         sysbus_realize(SYS_BUS_DEVICE(&s->eth[i]), &error_abort);
  
-+    pci_init_nic_devices(phb->bus, NULL);
-+
-     for (i = 0; i <= drive_get_max_bus(IF_SCSI); i++) {
-         spapr_vscsi_create(spapr->vio_bus);
-     }
+         sysbus_mmio_map(SYS_BUS_DEVICE(&s->eth[i]), 0,
+diff --git a/hw/arm/fsl-imx7.c b/hw/arm/fsl-imx7.c
+index 474cfdc87c..1acbe065db 100644
+--- a/hw/arm/fsl-imx7.c
++++ b/hw/arm/fsl-imx7.c
+@@ -446,7 +446,7 @@ static void fsl_imx7_realize(DeviceState *dev, Error **errp)
+                                  s->phy_num[i], &error_abort);
+         object_property_set_uint(OBJECT(&s->eth[i]), "tx-ring-num",
+                                  FSL_IMX7_ETH_NUM_TX_RINGS, &error_abort);
+-        qdev_set_nic_properties(DEVICE(&s->eth[i]), &nd_table[i]);
++        qemu_configure_nic_device(DEVICE(&s->eth[i]), true, NULL);
+         sysbus_realize(SYS_BUS_DEVICE(&s->eth[i]), &error_abort);
+ 
+         sysbus_mmio_map(SYS_BUS_DEVICE(&s->eth[i]), 0, FSL_IMX7_ENETn_ADDR[i]);
 -- 
 2.43.0
 
