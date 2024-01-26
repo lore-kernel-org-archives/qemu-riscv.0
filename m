@@ -4,86 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B926C47422
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 16:37:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E5F0C47DDB
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 16:50:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTPCR-0004CQ-Vf; Fri, 26 Jan 2024 11:37:04 -0500
+	id 1rTPP6-0005WE-3U; Fri, 26 Jan 2024 11:50:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTPCQ-00042c-DG
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 11:37:02 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTPP3-0005Ut-Qr
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 11:50:05 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTPCO-0005Fy-RT
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 11:37:02 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTPP2-0007iV-4Y
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 11:50:05 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1706287019;
+ s=mimecast20190719; t=1706287803;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=yHJA/a7AtrkrA1dPhXzDTAA1K342Bby9O7QNX8c10rA=;
- b=TjTxgJhg2g/7I5M4aTbg9xxgx31URO1u1wuw090ZZWcNKsHWvvcNOT4R7n7WQbJSDMsUuG
- MOsJkwzs5GaljnOv5i6OnA1daBnXCD13mEY73bU6qq72A/0SZBE1+rlNzulsMO5TZyJKvu
- QfDwunHEwPRUXapADq/FpdmPFh0JM54=
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
- [209.85.219.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=0KfPDhHPOVpc4yilmMGil/qgHhNOxNfCayRNOJMvDwY=;
+ b=K4FRdKPqlioVnfXPezpwU2T+8tUi0H24QZzu4F+7da2NXhAMqz6ozLto25zg5MjjKqGjVM
+ 8Q+gXAGnOkcUO6gzWQUUBC6FnAOTE0StltqhXzXI0zRDTLeqZ8R8xs1Ms4l6gh/dZtJg5t
+ slqf+FxY9V04/CL60EvGSaZwhBmaITE=
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
+ [209.85.222.200]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-664-mnTyCcYaOLe9PmgQ2gK1Cg-1; Fri, 26 Jan 2024 11:36:58 -0500
-X-MC-Unique: mnTyCcYaOLe9PmgQ2gK1Cg-1
-Received: by mail-qv1-f70.google.com with SMTP id
- 6a1803df08f44-68194fcd1f1so33171516d6.0
- for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 08:36:58 -0800 (PST)
+ us-mta-627-HPlK2OpxP5aUtMA1xCmHHA-1; Fri, 26 Jan 2024 11:49:59 -0500
+X-MC-Unique: HPlK2OpxP5aUtMA1xCmHHA-1
+Received: by mail-qk1-f200.google.com with SMTP id
+ af79cd13be357-7832c437dceso70878385a.1
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 08:49:59 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706287018; x=1706891818;
+ d=1e100.net; s=20230601; t=1706287799; x=1706892599;
  h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
  :to:content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=yHJA/a7AtrkrA1dPhXzDTAA1K342Bby9O7QNX8c10rA=;
- b=Y+B7a9DDUdqLRUwO01VYFJFl2+vKrZRhFrdGYjU62JfvzUyMLuTzxAt1Ifh5SFyzek
- ofOWO5PGMC92XNx4YhIH0VomjmMlq/5V4JkwFMy46qpBu0YolMqio0fzOxdWxvpqes3U
- OXRW3mviiCBtDItH3NbVe+agE/ZhHh0i1UwMgGQvIyqh/MHFBiDuGVLGZdLehjW63I9C
- TbzJ1mpzQcbqdOZyRNqQU16LmZtAuEEotte/KN9EnRrS/i+9LM/tvJULiEFsbhSDNVqM
- a0nUL/zLspNSS9i6+iz54KtazINfNAUHtoqhfMQtVr6pxZp+eplsM0/BEtWwADdlMSul
- LMHg==
-X-Gm-Message-State: AOJu0YxnJL/xv2DFkv+ZwnT+gTlDiq5LYPzQhYcLsh4hfswUQSgE5Ce1
- gRFtDyCDY1CaurZk9dqT3zVFRJ+BVY5Y3cG94SliDNO6l2FjwgfliLwjWNvivmEjXiAGYbFBCv1
- YuCu1gtsqVDsEfR5aS6GMLQ/eFnl0yK9DheYX3J92ofUWSYv2Yq3N
-X-Received: by 2002:a05:6214:d6d:b0:68c:3504:19a1 with SMTP id
- 13-20020a0562140d6d00b0068c350419a1mr152672qvs.32.1706287018224; 
- Fri, 26 Jan 2024 08:36:58 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFEYqONftzwFkQaen4n9m6+D/pp+9cG9WOY8KzIaN5G9jpk3hXZtBk78M0Jq+/+iQBTnpZlqg==
-X-Received: by 2002:a05:6214:d6d:b0:68c:3504:19a1 with SMTP id
- 13-20020a0562140d6d00b0068c350419a1mr152658qvs.32.1706287017965; 
- Fri, 26 Jan 2024 08:36:57 -0800 (PST)
+ bh=0KfPDhHPOVpc4yilmMGil/qgHhNOxNfCayRNOJMvDwY=;
+ b=FL2kBdVf4mLSBU5xxHFiRUE93qOJHkUF6/v5R01WalN2nYsC8QhHOZQaE84ipoUaQ0
+ hO8qGJE15K7LY0cg7jlJwCT+kkrYVFk/0DaFdkFs/V6uvg39J833f76Dbx7YQBMx+I+h
+ KIbGAwkQJ2o+Z1E10754/t0RnUuN2pmTuBo8nk5XS64wRlZH62j9oMNlIntknXghXiyj
+ s9A2POLRbZcQIxOOOpK/Wb/fkKj4a1jQ/YDQF08PZzTbY6Q32uvBkcGeS9Z8RkGRobf7
+ 9AKL6TLoSDfTm0Y123ATpn8d1IlzBG/nnJDNGpzBd5SXy4PWCskX+t4aA7zd+VpkEHds
+ sBWw==
+X-Gm-Message-State: AOJu0Yzvm0wCWeVEXbcsLxcHKhsym2NQpUgAEmVmdaBX9FsUnnINqRMf
+ WYIvjixZjmhX4sUhDGPx2UH5TqRamg66JTpMl23CqDcth7U3rIc1bmXCWl/qxx23A3TZzhrWy8c
+ l9kb4N7IFHYSLtv0VVecd2l5bp14n+T5VWoM5GEbaBPg+CrwPxd0o
+X-Received: by 2002:a05:620a:5319:b0:783:3457:a7e5 with SMTP id
+ oo25-20020a05620a531900b007833457a7e5mr14874qkn.53.1706287799486; 
+ Fri, 26 Jan 2024 08:49:59 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGphXDzpKcGUhfOPCNP0TPTVgL1hvzGVl/NturbUf/gHks7ulSbCd9UwbjzXETYsqnWuMLKTg==
+X-Received: by 2002:a05:620a:5319:b0:783:3457:a7e5 with SMTP id
+ oo25-20020a05620a531900b007833457a7e5mr14862qkn.53.1706287799171; 
+ Fri, 26 Jan 2024 08:49:59 -0800 (PST)
 Received: from [192.168.0.9] (ip-109-43-176-119.web.vodafone.de.
  [109.43.176.119]) by smtp.gmail.com with ESMTPSA id
- od10-20020a0562142f0a00b0068c37c745f4sm146555qvb.21.2024.01.26.08.36.54
+ w1-20020a05620a148100b0078322b61e88sm712978qkj.78.2024.01.26.08.49.44
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 26 Jan 2024 08:36:57 -0800 (PST)
-Message-ID: <b684476f-e5c1-41ff-be02-c63a68109011@redhat.com>
-Date: Fri, 26 Jan 2024 17:36:53 +0100
+ Fri, 26 Jan 2024 08:49:58 -0800 (PST)
+Message-ID: <580501eb-e6e2-49d7-8b12-667f4a24d260@redhat.com>
+Date: Fri, 26 Jan 2024 17:49:43 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 39/46] hw/riscv: use qemu_configure_nic_device()
-To: David Woodhouse <dwmw2@infradead.org>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>,
+Subject: Re: [PATCH v3 45/46] net: remove qemu_show_nic_models(),
+ qemu_find_nic_model()
+To: David Woodhouse <dwmw2@infradead.org>, qemu-devel@nongnu.org
+Cc: Richard Henderson <richard.henderson@linaro.org>,
+ Beniamino Galvani <b.galvani@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Strahinja Jankovic <strahinja.p.jankovic@gmail.com>,
+ Niek Linnenbank <nieklinnenbank@gmail.com>, =?UTF-8?Q?C=C3=A9dric_Le_Goater?=
+ <clg@kaod.org>, Andrew Jeffery <andrew@codeconstruct.com.au>,
+ Joel Stanley <joel@jms.id.au>, Igor Mitsyanko <i.mitsyanko@gmail.com>,
+ Jean-Christophe Dubois <jcd@tribudubois.net>,
+ Andrey Smirnov <andrew.smirnov@gmail.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Rob Herring <robh@kernel.org>, Subbaraya Sundeep <sundeep.lkml@gmail.com>,
+ Jan Kiszka <jan.kiszka@web.de>, Tyrone Ting <kfting@nuvoton.com>,
+ Hao Wu <wuhaotsh@google.com>, Radoslaw Biernacki <rad@semihalf.com>,
+ Leif Lindholm <quic_llindhol@quicinc.com>,
+ Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Alistair Francis <alistair@alistair23.me>, Helge Deller <deller@gmx.de>,
+ Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Song Gao
+ <gaosong@loongson.cn>, Thomas Huth <huth@tuxfamily.org>,
+ Laurent Vivier <laurent@vivier.eu>, Huacai Chen <chenhuacai@kernel.org>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>,
  =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>,
  Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
  Aurelien Jarno <aurelien@aurel32.net>, Jason Wang <jasowang@redhat.com>,
  Jia Liu <proljc@gmail.com>, Stafford Horne <shorne@gmail.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Nicholas Piggin <npiggin@gmail.com>,
  Daniel Henrique Barboza <danielhb413@gmail.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>, Bin Meng
+ <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
+ Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Eric Farman <farman@linux.ibm.com>, David Hildenbrand <david@redhat.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Magnus Damm <magnus.damm@gmail.com>, Artyom Tarasenko <atar4qemu@gmail.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
- David Woodhouse <dwmw@amazon.co.uk>
+ Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
+ Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
+ qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
+ xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
- <20240108204909.564514-40-dwmw2@infradead.org>
+ <20240108204909.564514-46-dwmw2@infradead.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -127,22 +160,22 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20240108204909.564514-40-dwmw2@infradead.org>
+In-Reply-To: <20240108204909.564514-46-dwmw2@infradead.org>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -33
 X-Spam_score: -3.4
 X-Spam_bar: ---
 X-Spam_report: (-3.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.313,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -161,70 +194,96 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On 08/01/2024 21.27, David Woodhouse wrote:
 > From: David Woodhouse <dwmw@amazon.co.uk>
 > 
+> These old functions can be removed now too. Let net_param_nic() print
+> the full set of network devices directly, and also make it note that a
+> list more specific to this platform/config will be available by using
+> '-nic model=help' instead.
+> 
 > Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 > ---
->   hw/riscv/microchip_pfsoc.c | 14 ++------------
->   hw/riscv/sifive_u.c        |  7 +------
->   2 files changed, 3 insertions(+), 18 deletions(-)
+>   include/net/net.h |  3 ---
+>   net/net.c         | 39 ++++++---------------------------------
+>   2 files changed, 6 insertions(+), 36 deletions(-)
 > 
-> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> index b775aa8946..7725dfbde5 100644
-> --- a/hw/riscv/microchip_pfsoc.c
-> +++ b/hw/riscv/microchip_pfsoc.c
-> @@ -202,7 +202,6 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
->       MemoryRegion *envm_data = g_new(MemoryRegion, 1);
->       MemoryRegion *qspi_xip_mem = g_new(MemoryRegion, 1);
->       char *plic_hart_config;
-> -    NICInfo *nd;
->       int i;
+> diff --git a/include/net/net.h b/include/net/net.h
+> index 1be8b40074..19fb82833c 100644
+> --- a/include/net/net.h
+> +++ b/include/net/net.h
+> @@ -203,9 +203,6 @@ void qemu_set_vnet_hdr_len(NetClientState *nc, int len);
+>   int qemu_set_vnet_le(NetClientState *nc, bool is_le);
+>   int qemu_set_vnet_be(NetClientState *nc, bool is_be);
+>   void qemu_macaddr_default_if_unset(MACAddr *macaddr);
+> -int qemu_show_nic_models(const char *arg, const char *const *models);
+> -int qemu_find_nic_model(NICInfo *nd, const char * const *models,
+> -                        const char *default_model);
+>   NICInfo *qemu_find_nic_info(const char *typename, bool match_default,
+>                               const char *alias);
+>   bool qemu_configure_nic_device(DeviceState *dev, bool match_default,
+> diff --git a/net/net.c b/net/net.c
+> index ffd4b42d5a..09ab0889f5 100644
+> --- a/net/net.c
+> +++ b/net/net.c
+> @@ -977,38 +977,6 @@ GPtrArray *qemu_get_nic_models(const char *device_type)
+>       return nic_models;
+>   }
 >   
->       sysbus_realize(SYS_BUS_DEVICE(&s->e_cpus), &error_abort);
-> @@ -411,17 +410,8 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
->           memmap[MICROCHIP_PFSOC_USB].size);
->   
->       /* GEMs */
+> -int qemu_show_nic_models(const char *arg, const char *const *models)
+> -{
+> -    int i;
 > -
-> -    nd = &nd_table[0];
-> -    if (nd->used) {
-> -        qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
-> -        qdev_set_nic_properties(DEVICE(&s->gem0), nd);
+> -    if (!arg || !is_help_option(arg)) {
+> -        return 0;
 > -    }
-> -    nd = &nd_table[1];
-> -    if (nd->used) {
-> -        qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
-> -        qdev_set_nic_properties(DEVICE(&s->gem1), nd);
+> -
+> -    printf("Available NIC models:\n");
+> -    for (i = 0 ; models[i]; i++) {
+> -        printf("%s\n", models[i]);
 > -    }
-> +    qemu_configure_nic_device(DEVICE(&s->gem0), true, NULL);
-> +    qemu_configure_nic_device(DEVICE(&s->gem1), true, NULL);
->   
->       object_property_set_int(OBJECT(&s->gem0), "revision", GEM_REVISION, errp);
->       object_property_set_int(OBJECT(&s->gem0), "phy-addr", 8, errp);
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index ec76dce6c9..5207ec1fa5 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -789,7 +789,6 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
->       MemoryRegion *l2lim_mem = g_new(MemoryRegion, 1);
->       char *plic_hart_config;
->       int i, j;
-> -    NICInfo *nd = &nd_table[0];
->   
->       qdev_prop_set_uint32(DEVICE(&s->u_cpus), "num-harts", ms->smp.cpus - 1);
->       qdev_prop_set_uint32(DEVICE(&s->u_cpus), "hartid-base", 1);
-> @@ -893,11 +892,7 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
->       }
->       sysbus_mmio_map(SYS_BUS_DEVICE(&s->otp), 0, memmap[SIFIVE_U_DEV_OTP].base);
->   
-> -    /* FIXME use qdev NIC properties instead of nd_table[] */
-> -    if (nd->used) {
-> -        qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
-> -        qdev_set_nic_properties(DEVICE(&s->gem), nd);
+> -    return 1;
+> -}
+> -
+> -int qemu_find_nic_model(NICInfo *nd, const char * const *models,
+> -                        const char *default_model)
+> -{
+> -    int i;
+> -
+> -    if (!nd->model)
+> -        nd->model = g_strdup(default_model);
+> -
+> -    for (i = 0 ; models[i]; i++) {
+> -        if (strcmp(nd->model, models[i]) == 0)
+> -            return i;
 > -    }
-> +    qemu_configure_nic_device(DEVICE(&s->gem), true, NULL);
->       object_property_set_int(OBJECT(&s->gem), "revision", GEM_REVISION,
->                               &error_abort);
->       if (!sysbus_realize(SYS_BUS_DEVICE(&s->gem), errp)) {
+> -
+> -    error_report("Unsupported NIC model: %s", nd->model);
+> -    return -1;
+> -}
+> -
+>   static int net_init_nic(const Netdev *netdev, const char *name,
+>                           NetClientState *peer, Error **errp)
+>   {
+> @@ -1791,9 +1759,14 @@ static int net_param_nic(void *dummy, QemuOpts *opts, Error **errp)
+>           }
+>           if (is_help_option(type)) {
+>               GPtrArray *nic_models = qemu_get_nic_models(TYPE_DEVICE);
+> +            int i;
+>               show_netdevs();
+>               printf("\n");
+> -            qemu_show_nic_models(type, (const char **)nic_models->pdata);
+> +            printf("Supported NIC models "
 
-Reviewed-by: Thomas Huth <thuth@redhat.com>
+Can we please keep "Available" instead of "Supported" ? ... since not each 
+NIC is supported on each machine type...
+
+  Thomas
+
+
+> +                   "(use -nic model=help for a filtered list):\n");
+> +            for (i = 0 ; nic_models->pdata[i]; i++) {
+> +                printf("%s\n", (char *)nic_models->pdata[i]);
+> +            }
+>               g_ptr_array_free(nic_models, true);
+>               exit(0);
+>           }
 
 
