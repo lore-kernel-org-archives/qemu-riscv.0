@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFA24C47422
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 17:37:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E679C47422
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 17:37:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTQ4s-0007d3-Na; Fri, 26 Jan 2024 12:33:18 -0500
+	id 1rTQ4z-0007j8-I6; Fri, 26 Jan 2024 12:33:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rTQ4P-00072G-91; Fri, 26 Jan 2024 12:32:50 -0500
-Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
+ <BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1rTQ4h-0007FL-BL; Fri, 26 Jan 2024 12:33:07 -0500
+Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rTQ4K-0001d1-Ie; Fri, 26 Jan 2024 12:32:49 -0500
+ <BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1rTQ4c-0001jR-Kg; Fri, 26 Jan 2024 12:33:07 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+ d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=q/lRu96lP+9hig2DfITdw70Fa08pfxR/d1NeEVgyLNY=; b=vj3nhF9bU1XNbBMdoBXROJ/CKp
- z6OGkwU/f2qLQkr5Kvl6koyxRd9PsNFD7P4tvwbtBVduPJTn29ufLl2gUvRSOcwEj5M1PAwCGRop5
- TAWRbg1sb3eiBIKaWuv58DTiU5r64U+Pds1iLl+EEVlFa2HJM9Eato3sSBtkNtsNYU3wwmeim7LTb
- WcS5icwJl23aWJhXOzaJkjYZ5RidPs4FC4bKxLeij+a5tSXiGiJllO04RiIy9N0rlm5r5R5K5PO6m
- X9VWrPGjT/2HbFyzDdU4+Uny7bmEQTUVmH/xr8IH3sBmNjyi8Cw9hpmFUYVd6R/HAUvdgzFPb3SRV
- 4c0egt9A==;
+ bh=GkywRXV+y0p7Nt5wgFGuell3roGE2NQ8qPpvNbU7STs=; b=V4bapDZigG0KqzrpWHLQWnoMdI
+ cCsUhnQ2jJfRVYxm5QPNAx9aG3sYfWfCXybauSoZQ/SxssH+cElsrF0p4HVv4Ue3bzhEPIXPXj+LT
+ htNZt681XmQRX7j36VsmHoNxcTw2TkxrDHu0PGz2CPOboVyIiLeEKvnm3Z1F+VQnC+8GMNUQmuxxM
+ +2J/GblKKNXD4shz499zroeB9kWSx1H7G952MNGnFYL1Vg63gJXtukuip89zNkKRpTqfWlgwgBxUO
+ ER7hClAADuP/6NX4cZiaSNs9/dBeSbU2NeqAF1s/sLQdKRkQIYCWVU7TNNo7A8QWIkXDIJGf8sHEP
+ pYxaDeow==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1rTQ4A-0000000EKVC-0etO; Fri, 26 Jan 2024 17:32:35 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
+ id 1rTQ4A-000000069Us-1wZd; Fri, 26 Jan 2024 17:32:47 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.97.1 #2 (Red
- Hat Linux)) id 1rTQ4A-00000001eoT-3xMI;
- Fri, 26 Jan 2024 17:32:34 +0000
+ Hat Linux)) id 1rTQ49-00000001enM-3JsS;
+ Fri, 26 Jan 2024 17:32:33 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -86,19 +86,19 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>,
  Thomas Huth <thuth@redhat.com>
-Subject: [PATCH v4 45/47] hw/pci: remove pci_nic_init_nofail()
-Date: Fri, 26 Jan 2024 17:25:22 +0000
-Message-ID: <20240126173228.394202-46-dwmw2@infradead.org>
+Subject: [PATCH v4 32/47] hw/m68k/mcf5208: use qemu_create_nic_device()
+Date: Fri, 26 Jan 2024 17:25:09 +0000
+Message-ID: <20240126173228.394202-33-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240126173228.394202-1-dwmw2@infradead.org>
 References: <20240126173228.394202-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- casper.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1236::1;
- envelope-from=BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org;
- helo=casper.infradead.org
+ desiato.infradead.org. See http://www.infradead.org/rpr.html
+Received-SPF: none client-ip=2001:8b0:10b:1:d65d:64ff:fe57:4e05;
+ envelope-from=BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@desiato.srs.infradead.org;
+ helo=desiato.infradead.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -123,113 +123,54 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-This function is no longer used, as all its callers have been converted
-to use pci_init_nic_devices() instead.
-
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 ---
- hw/pci/pci.c         | 72 --------------------------------------------
- include/hw/pci/pci.h |  3 --
- 2 files changed, 75 deletions(-)
+ hw/m68k/mcf5208.c | 19 ++++++-------------
+ 1 file changed, 6 insertions(+), 13 deletions(-)
 
-diff --git a/hw/pci/pci.c b/hw/pci/pci.c
-index 5849606f66..449abfb182 100644
---- a/hw/pci/pci.c
-+++ b/hw/pci/pci.c
-@@ -1853,78 +1853,6 @@ const pci_class_desc *get_class_desc(int class)
-     return desc;
+diff --git a/hw/m68k/mcf5208.c b/hw/m68k/mcf5208.c
+index d22d8536db..0cfb806c20 100644
+--- a/hw/m68k/mcf5208.c
++++ b/hw/m68k/mcf5208.c
+@@ -206,16 +206,16 @@ static void mcf5208_sys_init(MemoryRegion *address_space, qemu_irq *pic)
+     }
  }
  
--/* Initialize a PCI NIC.  */
--PCIDevice *pci_nic_init_nofail(NICInfo *nd, PCIBus *rootbus,
--                               const char *default_model,
--                               const char *default_devaddr)
--{
--    const char *devaddr = nd->devaddr ? nd->devaddr : default_devaddr;
--    GPtrArray *pci_nic_models;
--    PCIBus *bus;
--    PCIDevice *pci_dev;
--    DeviceState *dev;
--    int devfn;
--    int i;
--    int dom, busnr;
--    unsigned slot;
--
--    if (nd->model && !strcmp(nd->model, "virtio")) {
--        g_free(nd->model);
--        nd->model = g_strdup("virtio-net-pci");
--    }
--
--    pci_nic_models = qemu_get_nic_models(TYPE_PCI_DEVICE);
--
--    if (qemu_show_nic_models(nd->model, (const char **)pci_nic_models->pdata)) {
--        exit(0);
--    }
--
--    i = qemu_find_nic_model(nd, (const char **)pci_nic_models->pdata,
--                            default_model);
--    if (i < 0) {
--        exit(1);
--    }
--
--    if (!rootbus) {
--        error_report("No primary PCI bus");
--        exit(1);
--    }
--
--    assert(!rootbus->parent_dev);
--
--    if (!devaddr) {
--        devfn = -1;
--        busnr = 0;
--    } else {
--        if (pci_parse_devaddr(devaddr, &dom, &busnr, &slot, NULL) < 0) {
--            error_report("Invalid PCI device address %s for device %s",
--                         devaddr, nd->model);
--            exit(1);
--        }
--
--        if (dom != 0) {
--            error_report("No support for non-zero PCI domains");
--            exit(1);
--        }
--
--        devfn = PCI_DEVFN(slot, 0);
--    }
--
--    bus = pci_find_bus_nr(rootbus, busnr);
--    if (!bus) {
--        error_report("Invalid PCI device address %s for device %s",
--                     devaddr, nd->model);
--        exit(1);
--    }
--
--    pci_dev = pci_new(devfn, nd->model);
--    dev = &pci_dev->qdev;
--    qdev_set_nic_properties(dev, nd);
--    pci_realize_and_unref(pci_dev, bus, &error_fatal);
--    g_ptr_array_free(pci_nic_models, true);
--    return pci_dev;
--}
--
- void pci_init_nic_devices(PCIBus *bus, const char *default_model)
+-static void mcf_fec_init(MemoryRegion *sysmem, NICInfo *nd, hwaddr base,
+-                         qemu_irq *irqs)
++static void mcf_fec_init(MemoryRegion *sysmem, hwaddr base, qemu_irq *irqs)
  {
-     qemu_create_nic_bus_devices(&bus->qbus, TYPE_PCI_DEVICE, default_model,
-diff --git a/include/hw/pci/pci.h b/include/hw/pci/pci.h
-index 6ff0b95a02..eaa3fc99d8 100644
---- a/include/hw/pci/pci.h
-+++ b/include/hw/pci/pci.h
-@@ -314,9 +314,6 @@ void pci_device_set_intx_routing_notifier(PCIDevice *dev,
-                                           PCIINTxRoutingNotifier notifier);
- void pci_device_reset(PCIDevice *dev);
+     DeviceState *dev;
+     SysBusDevice *s;
+     int i;
  
--PCIDevice *pci_nic_init_nofail(NICInfo *nd, PCIBus *rootbus,
--                               const char *default_model,
--                               const char *default_devaddr);
- void pci_init_nic_devices(PCIBus *bus, const char *default_model);
- bool pci_init_nic_in_slot(PCIBus *rootbus, const char *default_model,
-                           const char *alias, const char *devaddr);
+-    qemu_check_nic_model(nd, TYPE_MCF_FEC_NET);
+-    dev = qdev_new(TYPE_MCF_FEC_NET);
+-    qdev_set_nic_properties(dev, nd);
++    dev = qemu_create_nic_device(TYPE_MCF_FEC_NET, true, NULL);
++    if (!dev) {
++        return;
++    }
+ 
+     s = SYS_BUS_DEVICE(dev);
+     sysbus_realize_and_unref(s, &error_fatal);
+@@ -267,14 +267,7 @@ static void mcf5208evb_init(MachineState *machine)
+ 
+     mcf5208_sys_init(address_space_mem, pic);
+ 
+-    if (nb_nics > 1) {
+-        error_report("Too many NICs");
+-        exit(1);
+-    }
+-    if (nd_table[0].used) {
+-        mcf_fec_init(address_space_mem, &nd_table[0],
+-                     0xfc030000, pic + 36);
+-    }
++    mcf_fec_init(address_space_mem, 0xfc030000, pic + 36);
+ 
+     g_free(pic);
+ 
 -- 
 2.43.0
 
