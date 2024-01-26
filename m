@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFD8EC47DDF
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 17:35:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB66AC47DDB
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 17:35:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTQ5E-0008IX-Kv; Fri, 26 Jan 2024 12:33:40 -0500
+	id 1rTQ5n-0001Rj-LS; Fri, 26 Jan 2024 12:34:15 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rTQ59-000898-JK; Fri, 26 Jan 2024 12:33:35 -0500
+ id 1rTQ5E-0008IM-Kq; Fri, 26 Jan 2024 12:33:40 -0500
 Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
  <BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1rTQ57-0001cT-T0; Fri, 26 Jan 2024 12:33:35 -0500
+ id 1rTQ58-0001cO-Jm; Fri, 26 Jan 2024 12:33:40 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=naEYB+jSEP7+OXxDQs3WhFqyYITtE2y0vubPL3hIMXY=; b=LXa7z8onC4XELkebk7mstMSFNz
- E89f6kjIfZ9IGzPF/oa7YGF+kwE7zTt2D/EQQwe+sHNG02KPSo1BZeUUSTMsaCMCDoIEmh6ymJDPI
- DdsHwfajWEQbadMy8M6KScyk18HIJjiA/lIsaOvbAJrjul7CVduVWjwqE3lMaowPTk7UukG5TAUmS
- /W/Yr9imQpqSah+onhT4MZ2egm+d3/kIx6DLCy8ZWacG89c9LF8G80s4zmEHs+q1gQEajYWK+rzEu
- gNiR6+5hlTaRGDTuDN74aqTy4BmRs0/0pjpquju6zylRF49bR/RK9fMf3XzUlOVz2SLzt88GfGTB6
- RxFJaYjQ==;
+ bh=7Uppd3XmmgMw4XasqXjrqhb0RWV0UlzHWXb7dMHxQkk=; b=Y5xjzzCyYHVwBdSMOVhNKGeW0i
+ 4vvcFhkcRtx0NfvDdc6Eo+Rajz/qrT7LuRHMzDNblleNw/eHjlNZ+14lo0BYTIMel5RVut4KakDcm
+ pcEaYTD5+Hu0ylfmx64cEgXxj8jmLsrfwaBepCcayzt242CE3re6zAs7gU5tZvAtsTRcZw+R1hYDn
+ FOKySQ4UWj+5Jv5MQFc+l4U4VHZob8iOy6Y9sS9vXKu5WMLD0IDz2QcB2wGI+Glx6W0K45sUvDE8M
+ WOiS8RLg2iLZEy1jHmvYyBSND2F1F1H6LydXISsLobmrKgTkhR9byITplob0iPkEty4l/ttty6CzN
+ rfP4m9+g==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1rTQ48-0000000EKUR-2WVo; Fri, 26 Jan 2024 17:32:34 +0000
+ id 1rTQ48-0000000EKUG-0XHH; Fri, 26 Jan 2024 17:32:33 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.97.1 #2 (Red
- Hat Linux)) id 1rTQ49-00000001emz-1aGM;
- Fri, 26 Jan 2024 17:32:33 +0000
+ Hat Linux)) id 1rTQ48-00000001elt-0h3b;
+ Fri, 26 Jan 2024 17:32:32 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -86,9 +86,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>,
  Thomas Huth <thuth@redhat.com>
-Subject: [PATCH v4 27/47] hw/arm/highbank: use qemu_create_nic_device()
-Date: Fri, 26 Jan 2024 17:25:04 +0000
-Message-ID: <20240126173228.394202-28-dwmw2@infradead.org>
+Subject: [PATCH v4 14/47] hw/mips/loongson3_virt: use pci_init_nic_devices()
+Date: Fri, 26 Jan 2024 17:24:51 +0000
+Message-ID: <20240126173228.394202-15-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240126173228.394202-1-dwmw2@infradead.org>
 References: <20240126173228.394202-1-dwmw2@infradead.org>
@@ -126,38 +126,24 @@ From: David Woodhouse <dwmw@amazon.co.uk>
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 ---
- hw/arm/highbank.c | 12 +++++-------
- 1 file changed, 5 insertions(+), 7 deletions(-)
+ hw/mips/loongson3_virt.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/hw/arm/highbank.c b/hw/arm/highbank.c
-index c21e18d08f..6a0e20e58d 100644
---- a/hw/arm/highbank.c
-+++ b/hw/arm/highbank.c
-@@ -296,19 +296,17 @@ static void calxeda_init(MachineState *machine, enum cxmachines machine_id)
+diff --git a/hw/mips/loongson3_virt.c b/hw/mips/loongson3_virt.c
+index 33eae01eca..caedde2df0 100644
+--- a/hw/mips/loongson3_virt.c
++++ b/hw/mips/loongson3_virt.c
+@@ -451,9 +451,7 @@ static inline void loongson3_virt_devices_init(MachineState *machine,
+         usb_create_simple(usb_bus_find(-1), "usb-tablet");
+     }
  
-     sysbus_create_simple(TYPE_SYSBUS_AHCI, 0xffe08000, pic[83]);
+-    for (i = 0; i < nb_nics; i++) {
+-        pci_nic_init_nofail(&nd_table[i], pci_bus, mc->default_nic, NULL);
+-    }
++    pci_init_nic_devices(pci_bus, mc->default_nic);
+ }
  
--    if (nd_table[0].used) {
--        qemu_check_nic_model(&nd_table[0], "xgmac");
--        dev = qdev_new("xgmac");
--        qdev_set_nic_properties(dev, &nd_table[0]);
-+    dev = qemu_create_nic_device("xgmac", true, NULL);
-+    if (dev) {
-         sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-         sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, 0xfff50000);
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, pic[77]);
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 1, pic[78]);
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 2, pic[79]);
-+    }
- 
--        qemu_check_nic_model(&nd_table[1], "xgmac");
--        dev = qdev_new("xgmac");
--        qdev_set_nic_properties(dev, &nd_table[1]);
-+    dev = qemu_create_nic_device("xgmac", true, NULL);
-+    if (dev) {
-         sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-         sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, 0xfff51000);
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, pic[80]);
+ static void mips_loongson3_virt_init(MachineState *machine)
 -- 
 2.43.0
 
