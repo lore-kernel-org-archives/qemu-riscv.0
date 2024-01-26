@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09613C47DDF
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 17:35:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0889C47422
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 17:35:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTQ6Y-0003lI-3Q; Fri, 26 Jan 2024 12:35:02 -0500
+	id 1rTQ4p-0007VH-HA; Fri, 26 Jan 2024 12:33:15 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1rTQ5S-0000Bc-Rh; Fri, 26 Jan 2024 12:33:55 -0500
-Received: from desiato.infradead.org ([2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ <BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1rTQ4P-00072E-2h; Fri, 26 Jan 2024 12:32:50 -0500
+Received: from casper.infradead.org ([2001:8b0:10b:1236::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1rTQ5O-0001jS-J1; Fri, 26 Jan 2024 12:33:54 -0500
+ <BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1rTQ4K-0001cZ-JQ; Fri, 26 Jan 2024 12:32:48 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+ d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Reply-To:Content-Type:Content-ID:Content-Description;
- bh=9AgdaOipdb6TGOSEWyyxp0UQ70Ve7tuTnzaE+SJ5a7E=; b=RlSA+UTC7q9ijwbfNI7o2GxGTF
- ocvo504Xgs4S2Tq0KHotB1jIDV5dmolR2QzaSmqS3e5rpERnX+ZMvN4EzOjcldhT6VgL4oGjne8cv
- Spzg/M2YUy89r04o6P2VaDUd1J2hjtG4kJAhaide9arKLAsN+fXCndAj2U8Ot/6jtbzOpkQWNFx7a
- 55V4Ewas7pbb76OVI4/T3uf3AE7Q5IeDPOtiCP3C8JAcEY6mN/UfIZrzXpDoX3Idkk3eboixD368U
- +5Ywg/7bzEhjlmVFzQsgeDsWCsJfAt8EiBTcE9HDKmdToVy/Nn+0sv9dd0NijVU4mkDsJhJwwr8DF
- 3pG2chQA==;
+ bh=5BpuEatMH64+x8iYMdtmIQQn3xPZYMd0ArcuhcqDaQM=; b=eJe5WnmIIMUOpWsP/6d9hpXa4O
+ Q/uRJsAEUmgzhgYtB1/5l3fodUbNhGiNbWtoQsmh623i55vvF5FajWiOcnZ68m2cQKMBXSiGRQJ0N
+ zVT1SC5MpG+qKH0lF2DtL45ZXxE/IwX2mSdEDNOvv2ruzwl4EXYg/fNR3vJb0lYnnLX55EIdd5N4r
+ ZpkoI/pP5SR837kc6No6o26StrIo/o0OWd7ba9M+Q3OK3Yo1cEPSaOVhrDMHaBYLpRW+AblRCwN5K
+ YGcc37rVS82Xv7fg4G5r0HGDrB6r8jdVc/eQmTK8sNdtTBVz7GOpxksErywzTNYYPflQlj+845k7l
+ Jb0qPrCw==;
 Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
- id 1rTQ4A-000000069Ur-1kMQ; Fri, 26 Jan 2024 17:32:35 +0000
+ by casper.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
+ id 1rTQ48-0000000EKUC-0QWa; Fri, 26 Jan 2024 17:32:33 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.97.1 #2 (Red
- Hat Linux)) id 1rTQ49-00000001enD-2h7N;
- Fri, 26 Jan 2024 17:32:33 +0000
+ Hat Linux)) id 1rTQ47-00000001elb-2OMJ;
+ Fri, 26 Jan 2024 17:32:31 +0000
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -85,19 +85,19 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v4 30/47] hw/arm: use qemu_configure_nic_device()
-Date: Fri, 26 Jan 2024 17:25:07 +0000
-Message-ID: <20240126173228.394202-31-dwmw2@infradead.org>
+Subject: [PATCH v4 08/47] hw/arm/sbsa-ref: use pci_init_nic_devices()
+Date: Fri, 26 Jan 2024 17:24:45 +0000
+Message-ID: <20240126173228.394202-9-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240126173228.394202-1-dwmw2@infradead.org>
 References: <20240126173228.394202-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
- desiato.infradead.org. See http://www.infradead.org/rpr.html
-Received-SPF: none client-ip=2001:8b0:10b:1:d65d:64ff:fe57:4e05;
- envelope-from=BATV+5cc348fc898a3f56ac6c+7460+infradead.org+dwmw2@desiato.srs.infradead.org;
- helo=desiato.infradead.org
+ casper.infradead.org. See http://www.infradead.org/rpr.html
+Received-SPF: none client-ip=2001:8b0:10b:1236::1;
+ envelope-from=BATV+7caeb094913322f6f00d+7460+infradead.org+dwmw2@casper.srs.infradead.org;
+ helo=casper.infradead.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -123,164 +123,26 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 From: David Woodhouse <dwmw@amazon.co.uk>
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Leif Lindholm <quic_llindhol@quicinc.com>
 ---
- hw/arm/mps2-tz.c     |  8 ++------
- hw/arm/msf2-soc.c    |  6 +-----
- hw/arm/musicpal.c    |  3 +--
- hw/arm/xilinx_zynq.c | 11 ++++-------
- hw/arm/xlnx-versal.c |  7 +------
- hw/arm/xlnx-zynqmp.c |  8 +-------
- 6 files changed, 10 insertions(+), 33 deletions(-)
+ hw/arm/sbsa-ref.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/hw/arm/mps2-tz.c b/hw/arm/mps2-tz.c
-index 5d8cdc1a4c..a2d18afd79 100644
---- a/hw/arm/mps2-tz.c
-+++ b/hw/arm/mps2-tz.c
-@@ -503,14 +503,12 @@ static MemoryRegion *make_eth_dev(MPS2TZMachineState *mms, void *opaque,
-                                   const PPCExtraData *extradata)
- {
-     SysBusDevice *s;
--    NICInfo *nd = &nd_table[0];
+diff --git a/hw/arm/sbsa-ref.c b/hw/arm/sbsa-ref.c
+index 477dca0637..f0171176ea 100644
+--- a/hw/arm/sbsa-ref.c
++++ b/hw/arm/sbsa-ref.c
+@@ -671,9 +671,7 @@ static void create_pcie(SBSAMachineState *sms)
  
-     /* In hardware this is a LAN9220; the LAN9118 is software compatible
-      * except that it doesn't support the checksum-offload feature.
-      */
--    qemu_check_nic_model(nd, "lan9118");
-     mms->lan9118 = qdev_new(TYPE_LAN9118);
--    qdev_set_nic_properties(mms->lan9118, nd);
-+    qemu_configure_nic_device(mms->lan9118, true, NULL);
- 
-     s = SYS_BUS_DEVICE(mms->lan9118);
-     sysbus_realize_and_unref(s, &error_fatal);
-@@ -528,7 +526,6 @@ static MemoryRegion *make_eth_usb(MPS2TZMachineState *mms, void *opaque,
-      * irqs[] is the ethernet IRQ.
-      */
-     SysBusDevice *s;
--    NICInfo *nd = &nd_table[0];
- 
-     memory_region_init(&mms->eth_usb_container, OBJECT(mms),
-                        "mps2-tz-eth-usb-container", 0x200000);
-@@ -537,9 +534,8 @@ static MemoryRegion *make_eth_usb(MPS2TZMachineState *mms, void *opaque,
-      * In hardware this is a LAN9220; the LAN9118 is software compatible
-      * except that it doesn't support the checksum-offload feature.
-      */
--    qemu_check_nic_model(nd, "lan9118");
-     mms->lan9118 = qdev_new(TYPE_LAN9118);
--    qdev_set_nic_properties(mms->lan9118, nd);
-+    qemu_configure_nic_device(mms->lan9118, true, NULL);
- 
-     s = SYS_BUS_DEVICE(mms->lan9118);
-     sysbus_realize_and_unref(s, &error_fatal);
-diff --git a/hw/arm/msf2-soc.c b/hw/arm/msf2-soc.c
-index b5fe9f364d..35bf1d64e1 100644
---- a/hw/arm/msf2-soc.c
-+++ b/hw/arm/msf2-soc.c
-@@ -197,12 +197,8 @@ static void m2sxxx_soc_realize(DeviceState *dev_soc, Error **errp)
-         g_free(bus_name);
-     }
- 
--    /* FIXME use qdev NIC properties instead of nd_table[] */
--    if (nd_table[0].used) {
--        qemu_check_nic_model(&nd_table[0], TYPE_MSS_EMAC);
--        qdev_set_nic_properties(DEVICE(&s->emac), &nd_table[0]);
--    }
-     dev = DEVICE(&s->emac);
-+    qemu_configure_nic_device(dev, true, NULL);
-     object_property_set_link(OBJECT(&s->emac), "ahb-bus",
-                              OBJECT(get_system_memory()), &error_abort);
-     if (!sysbus_realize(SYS_BUS_DEVICE(&s->emac), errp)) {
-diff --git a/hw/arm/musicpal.c b/hw/arm/musicpal.c
-index 3200c9f68a..8781e99d27 100644
---- a/hw/arm/musicpal.c
-+++ b/hw/arm/musicpal.c
-@@ -1286,9 +1286,8 @@ static void musicpal_init(MachineState *machine)
-     }
-     sysbus_create_simple(TYPE_MV88W8618_FLASHCFG, MP_FLASHCFG_BASE, NULL);
- 
--    qemu_check_nic_model(&nd_table[0], "mv88w8618");
-     dev = qdev_new(TYPE_MV88W8618_ETH);
--    qdev_set_nic_properties(dev, &nd_table[0]);
-+    qemu_configure_nic_device(dev, true, "mv88w8618");
-     object_property_set_link(OBJECT(dev), "dma-memory",
-                              OBJECT(get_system_memory()), &error_fatal);
-     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-diff --git a/hw/arm/xilinx_zynq.c b/hw/arm/xilinx_zynq.c
-index dbb9793aa1..73a6472b91 100644
---- a/hw/arm/xilinx_zynq.c
-+++ b/hw/arm/xilinx_zynq.c
-@@ -108,16 +108,13 @@ static void zynq_write_board_setup(ARMCPU *cpu,
- 
- static struct arm_boot_info zynq_binfo = {};
- 
--static void gem_init(NICInfo *nd, uint32_t base, qemu_irq irq)
-+static void gem_init(uint32_t base, qemu_irq irq)
- {
-     DeviceState *dev;
-     SysBusDevice *s;
- 
-     dev = qdev_new(TYPE_CADENCE_GEM);
--    if (nd->used) {
--        qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
--        qdev_set_nic_properties(dev, nd);
--    }
-+    qemu_configure_nic_device(dev, true, NULL);
-     object_property_set_int(OBJECT(dev), "phy-addr", 7, &error_abort);
-     s = SYS_BUS_DEVICE(dev);
-     sysbus_realize_and_unref(s, &error_fatal);
-@@ -279,8 +276,8 @@ static void zynq_init(MachineState *machine)
-     sysbus_create_varargs("cadence_ttc", 0xF8002000,
-             pic[69-IRQ_OFFSET], pic[70-IRQ_OFFSET], pic[71-IRQ_OFFSET], NULL);
- 
--    gem_init(&nd_table[0], 0xE000B000, pic[54-IRQ_OFFSET]);
--    gem_init(&nd_table[1], 0xE000C000, pic[77-IRQ_OFFSET]);
-+    gem_init(0xE000B000, pic[54 - IRQ_OFFSET]);
-+    gem_init(0xE000C000, pic[77 - IRQ_OFFSET]);
- 
-     for (n = 0; n < 2; n++) {
-         int hci_irq = n ? 79 : 56;
-diff --git a/hw/arm/xlnx-versal.c b/hw/arm/xlnx-versal.c
-index 9600551c44..01965ddf99 100644
---- a/hw/arm/xlnx-versal.c
-+++ b/hw/arm/xlnx-versal.c
-@@ -254,18 +254,13 @@ static void versal_create_gems(Versal *s, qemu_irq *pic)
-         static const int irqs[] = { VERSAL_GEM0_IRQ_0, VERSAL_GEM1_IRQ_0};
-         static const uint64_t addrs[] = { MM_GEM0, MM_GEM1 };
-         char *name = g_strdup_printf("gem%d", i);
--        NICInfo *nd = &nd_table[i];
-         DeviceState *dev;
-         MemoryRegion *mr;
- 
-         object_initialize_child(OBJECT(s), name, &s->lpd.iou.gem[i],
-                                 TYPE_CADENCE_GEM);
-         dev = DEVICE(&s->lpd.iou.gem[i]);
--        /* FIXME use qdev NIC properties instead of nd_table[] */
--        if (nd->used) {
--            qemu_check_nic_model(nd, "cadence_gem");
--            qdev_set_nic_properties(dev, nd);
+     pci = PCI_HOST_BRIDGE(dev);
+     if (pci->bus) {
+-        for (i = 0; i < nb_nics; i++) {
+-            pci_nic_init_nofail(&nd_table[i], pci->bus, mc->default_nic, NULL);
 -        }
-+        qemu_configure_nic_device(dev, true, NULL);
-         object_property_set_int(OBJECT(dev), "phy-addr", 23, &error_abort);
-         object_property_set_int(OBJECT(dev), "num-priority-queues", 2,
-                                 &error_abort);
-diff --git a/hw/arm/xlnx-zynqmp.c b/hw/arm/xlnx-zynqmp.c
-index 5905a33015..4f1714e4a1 100644
---- a/hw/arm/xlnx-zynqmp.c
-+++ b/hw/arm/xlnx-zynqmp.c
-@@ -616,13 +616,7 @@ static void xlnx_zynqmp_realize(DeviceState *dev, Error **errp)
++        pci_init_nic_devices(pci->bus, mc->default_nic);
      }
  
-     for (i = 0; i < XLNX_ZYNQMP_NUM_GEMS; i++) {
--        NICInfo *nd = &nd_table[i];
--
--        /* FIXME use qdev NIC properties instead of nd_table[] */
--        if (nd->used) {
--            qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
--            qdev_set_nic_properties(DEVICE(&s->gem[i]), nd);
--        }
-+        qemu_configure_nic_device(DEVICE(&s->gem[i]), true, NULL);
-         object_property_set_int(OBJECT(&s->gem[i]), "revision", GEM_REVISION,
-                                 &error_abort);
-         object_property_set_int(OBJECT(&s->gem[i]), "phy-addr", 23,
+     pci_create_simple(pci->bus, -1, "bochs-display");
 -- 
 2.43.0
 
