@@ -4,118 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03209C47422
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 21:12:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AE0CC47422
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 22:05:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTTTw-0007bT-G0; Fri, 26 Jan 2024 16:11:24 -0500
+	id 1rTUJD-0006s9-PL; Fri, 26 Jan 2024 17:04:23 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rTTTu-0007ad-Ba
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 16:11:23 -0500
-Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rTUJC-0006qn-KZ
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 17:04:22 -0500
+Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rTTTp-00073E-LZ
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 16:11:22 -0500
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-40ee418e7edso12407065e9.2
- for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 13:11:16 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rTUJA-0003KP-1C
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 17:04:22 -0500
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-55d4013f3e0so545552a12.3
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 14:04:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706303475; x=1706908275; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=vxYwthXZn31ySjM2DeVKX29v0Ws6VePUGUeM9gtZWoA=;
- b=JDyHEwqvqboDEDYNihCFNcIfscK5BYQxoaPaj7zQNDvQce41kvjJJ7wWCIoXaPO8Ny
- V2C2JM9kpYUFAtpXvyb+Qeb5R/mhscWC4bgWqWLQPNrm3/piv4BS/n5Q/AEQrJxJDRv4
- DgS03b2WjA0PboF5keTTl/bbAyy6WchopJLj8IiGlLvG2EcChbYI63uVPl6PRu59jT8W
- 7iBNyeGdfQ+9oQiKVjYhLiGjnXCeT71Xf4L4Fu8+/6iCG+ssZWyL0XXqf13O0+9lvUUU
- NNVVWzO25VGIAXR6AB7iTn96O8KOVfsQdkbAAL+4FdRxTmR8gkSSyq8K2WRFj+u1yYk4
- laVA==
+ d=linaro.org; s=google; t=1706306656; x=1706911456; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fhPW+/fhD522LvSZgboHJx0z0AbZf2+RXOPHpa2tqdM=;
+ b=ZecPfz1VZW8W1c/ZP+25+UeG5ppVZTN18R9j4VrE81fb2ujT//Yaf2BcaFkw/fmMT3
+ syqAPOCDk6pOx6n6ScwSdjReuTr93/HIvlCXr9m3kPuM7FvqNUXnszRwr7Aa1DASj3BG
+ KxoV6HFBkKuJKm2Mf5ATuCXvhffhOxqBQU3SKIIGfMtLn8gVLW/WFQxRuyNpI1QNI4SO
+ SdyuPRSYESilq4Y+7S9Fo1VHw7Ny6eVsbfSk39kjvEVV7NywlivZTpK7rSH6tnUEHxQT
+ x5+SBg/X2nMYSwUbqiJ+8iL8zEKnvtToONh68FqrgWm0CY38Aau3rrNn21QAcvUTCCa3
+ /10Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706303475; x=1706908275;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=vxYwthXZn31ySjM2DeVKX29v0Ws6VePUGUeM9gtZWoA=;
- b=CsKcR6eQc3EziuwY9RXLmbMlgYqOZhgUaQk48c+eCBE34ISKisVi9/U4f7BaPlX6gf
- 6wEJ+M0QVFMY9ewfEzgaeNY4MQAoOBHXhjnmke8yQJLZMX1Ig3KK9JqF7Z6n3UWSY7wf
- tviOcD9isGIKA9UoOvMeR4Qg3DXKAw9uqGtPCgNM6EKf/3+S/50LpxGXv33ujSVxx4Mj
- w/UgSKW71Efyq5XQqYjTIqhSMNinPDJgXu406QwA9346kYp4ZMR17ZskNrEXL8C1iVId
- OsFeJm6Pqg9n8ulZZbUcD08NJfY3y6iei0S43ENjmDdu2hY14YmBY39uznV8NJCieqBq
- LgLw==
-X-Gm-Message-State: AOJu0YyA4I0DvHpgRO/sJvWG8zMpJDWTTdRqe0sI7jkXk5fE3otvwpEd
- V+UPIwq1zl+SK5EqkBieHdUWoEJ3O41AEDBFwYQ2wb8udr1juAjgSbWh7IuihI8=
-X-Google-Smtp-Source: AGHT+IHPfVDNkHfFEZ920e1AvtHAgCTjycghkqkwfmMNm/uoHYkWmbEXdBjZ/pk1I5xFKz0+SjDwuw==
-X-Received: by 2002:a05:600c:4ca7:b0:40e:5534:728c with SMTP id
- g39-20020a05600c4ca700b0040e5534728cmr286415wmp.136.1706303475465; 
- Fri, 26 Jan 2024 13:11:15 -0800 (PST)
-Received: from [192.168.69.100] ([176.176.142.39])
+ d=1e100.net; s=20230601; t=1706306656; x=1706911456;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=fhPW+/fhD522LvSZgboHJx0z0AbZf2+RXOPHpa2tqdM=;
+ b=o9I7QdTZrJFP9TxIpmGDsnyGRFJIiWkdPaL1r0FuNOfZ8DTlHalHMOpfkC4czbNQfe
+ nHUhHPHqPotrD+WbLr1Cb7Jt3a41u+UhDAW1hJdt4G7TnJbdHPMKmsK7/WN9wYxspKA/
+ CYc3h+FxfpOTdw3GHCB3JyoYyy1wDRs0yNuXeA+1lwVJNV2KYtTPIxi15d+l5/b0dzXZ
+ Sjbnr2FJ//pTTIXdbSJsCLpgT+TSmWitk3fmbFM7PkG48Ief2KuHiEDT8WzB+mda5dm5
+ mmuBXbOkatI63YE2jXSKilvM8AYdLD2ItSLbjATZOph310hzyn1Am3hkLKMaweWoU710
+ TcAw==
+X-Gm-Message-State: AOJu0YykIe6pXUcfzqUwuv5O0AmO/Mj7ILv674oD4ZjM+Cye0dncHxJa
+ 7q53/GtfG+hg7wreqgHGl+A0mq9XbmKrVFgnF8oCfuw3EkR5HFzga+xHkQT2uDE=
+X-Google-Smtp-Source: AGHT+IG4Wg8rywDTMVuRM7GkwEmCFZtMm4l+BGhG1j8wou81QLrVUKTsIfgDuyEQppKx/hJqB7/64Q==
+X-Received: by 2002:a05:6402:34d4:b0:55d:357f:1837 with SMTP id
+ w20-20020a05640234d400b0055d357f1837mr298106edc.1.1706306656478; 
+ Fri, 26 Jan 2024 14:04:16 -0800 (PST)
+Received: from m1x-phil.lan ([176.176.142.39])
  by smtp.gmail.com with ESMTPSA id
- a5-20020a05600c348500b0040e48abec33sm6615547wmq.45.2024.01.26.13.11.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 26 Jan 2024 13:11:15 -0800 (PST)
-Message-ID: <c4c07c69-11c6-4883-8ff8-1e5ec627d9bc@linaro.org>
-Date: Fri, 26 Jan 2024 22:11:08 +0100
+ d26-20020a056402401a00b0055c6048544fsm1007886eda.66.2024.01.26.14.04.14
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Fri, 26 Jan 2024 14:04:16 -0800 (PST)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-s390x@nongnu.org,
+ qemu-riscv@nongnu.org, Eduardo Habkost <eduardo@habkost.net>,
+ kvm@vger.kernel.org, qemu-ppc@nongnu.org,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
+ Ani Sinha <anisinha@redhat.com>
+Subject: [PATCH v2 01/23] hw/acpi/cpu: Use CPUState typedef
+Date: Fri, 26 Jan 2024 23:03:43 +0100
+Message-ID: <20240126220407.95022-2-philmd@linaro.org>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20240126220407.95022-1-philmd@linaro.org>
+References: <20240126220407.95022-1-philmd@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] bulk: Prefer fast cpu_env() over slower CPU QOM cast
- macro
-Content-Language: en-US
-To: Thomas Huth <thuth@redhat.com>, qemu-devel@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
- Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
- Richard Henderson <richard.henderson@linaro.org>, qemu-s390x@nongnu.org,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
- Nicholas Piggin <npiggin@gmail.com>, =?UTF-8?B?RnLDqWTDqXJpYyBCYXJyYXQ=?=
- <fbarrat@linux.ibm.com>, Daniel Henrique Barboza <danielhb413@gmail.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>, Alexander Graf
- <agraf@csgraf.de>, Michael Rolnik <mrolnik@gmail.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Cameron Esfahani <dirty@apple.com>, Roman Bolshakov <rbolshakov@ddn.com>,
- Marcelo Tosatti <mtosatti@redhat.com>, David Woodhouse
- <dwmw2@infradead.org>, Laurent Vivier <laurent@vivier.eu>,
- Aurelien Jarno <aurelien@aurel32.net>, Jiaxun Yang
- <jiaxun.yang@flygoat.com>, Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Huacai Chen <chenhuacai@kernel.org>, Chris Wulff <crwulff@gmail.com>,
- Marek Vasut <marex@denx.de>, Stafford Horne <shorne@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Max Filippov <jcmvbkbc@gmail.com>, xen-devel@lists.xenproject.org,
- kvm@vger.kernel.org
-References: <20240125165648.49898-1-philmd@linaro.org>
- <20240125165648.49898-3-philmd@linaro.org>
- <135941df-2f8b-4fd5-91c7-40b413e6eae3@redhat.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <135941df-2f8b-4fd5-91c7-40b413e6eae3@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::532;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x532.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -131,46 +100,28 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 26/1/24 18:09, Thomas Huth wrote:
-> On 25/01/2024 17.56, Philippe Mathieu-Daudé wrote:
->> Mechanical patch produced running the command documented
->> in scripts/coccinelle/cpu_env.cocci_template header.
->>
->> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
->> ---
+QEMU coding style recommend using structure typedefs:
+https://www.qemu.org/docs/master/devel/style.html#typedefs
 
->>   114 files changed, 273 insertions(+), 548 deletions(-)
-> 
-> A huge patch ... I wonder whether it would make sense to split it up by 
-> target architecture to ease the review?
-> 
-> ...
->> diff --git a/hw/i386/vmmouse.c b/hw/i386/vmmouse.c
->> index a8d014d09a..eb0613bfbe 100644
->> --- a/hw/i386/vmmouse.c
->> +++ b/hw/i386/vmmouse.c
->> @@ -74,8 +74,7 @@ struct VMMouseState {
->>   static void vmmouse_get_data(uint32_t *data)
->>   {
->> -    X86CPU *cpu = X86_CPU(current_cpu);
->> -    CPUX86State *env = &cpu->env;
->> +    CPUX86State *env = cpu_env(CPU(current_cpu));
-> 
-> No need for the CPU() cast here, current_cpu is already
-> of type "CPUState *".
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ include/hw/acpi/cpu.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Yes, Paolo noticed and I fixed for v2.
+diff --git a/include/hw/acpi/cpu.h b/include/hw/acpi/cpu.h
+index bc901660fb..209e1773f8 100644
+--- a/include/hw/acpi/cpu.h
++++ b/include/hw/acpi/cpu.h
+@@ -19,7 +19,7 @@
+ #include "hw/hotplug.h"
+ 
+ typedef struct AcpiCpuStatus {
+-    struct CPUState *cpu;
++    CPUState *cpu;
+     uint64_t arch_id;
+     bool is_inserting;
+     bool is_removing;
+-- 
+2.41.0
 
-> I'll stop here, please respin with the cpu_env(CPU(current_cpu)) fixed to
-> cpu_env(current_cpu), and please split the patch by target CPU types.
-
-Well I don't know, this is an reproducible mechanical patch..
-But indeed as Paolo you found an optimization so worth not making
-human review a pain.
-
-I was about to post v2 but I'll see how to split.
-
-Thanks for the review!
-
-Phil.
 
