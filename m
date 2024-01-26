@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52D5CC47DDB
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 22:06:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D42BEC47DDB
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 22:06:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTUJO-0007Ee-2X; Fri, 26 Jan 2024 17:04:34 -0500
+	id 1rTULL-0002fr-I0; Fri, 26 Jan 2024 17:06:35 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rTUJM-00075Y-SP
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 17:04:32 -0500
-Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rTUKh-00016L-QH
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 17:05:56 -0500
+Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rTUJK-0003Qr-5G
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 17:04:32 -0500
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a28a6cef709so81996766b.1
- for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 14:04:29 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rTUKc-0004Ji-Mp
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 17:05:55 -0500
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-339261a6ec2so1068964f8f.0
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 14:05:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706306668; x=1706911468; darn=nongnu.org;
+ d=linaro.org; s=google; t=1706306748; x=1706911548; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PCbQQLgi9WW85KLAGX/JCbhsNaoCcACzxkgJkt9CV5M=;
- b=qB4Jh03hRMsaQbCrsn8FvOrkl/Vd7g1huBgcU9q/saBW6VU3751EcvK5p91Xtd8DlE
- iurixHUWo+y2HrgK8MxNx9zlqFWFxrTp4qRFnH9pjYPOJ8xQghkfyh59AUwWAHOZE0aH
- qiigGBuVN2UkWacaUzFRVLJLVBsVo8Hdqy0pcaWT9eQs85yRNciM2AQACRuXCwMH+l89
- sVB9ZbcPfuASmFNg5yxrJdNRTCFjS8Fm/LNCptPce1/aAv0ymMsjWO3e3bERvNKO1uW1
- UQGM6ima2tdJXUpeS0MFyZrKW68BwzRMXvkIGmH1dYGsnh8Xjcbrq1xS/wpGvpguk6mx
- hc1Q==
+ bh=hrrpUHlY+apDJ+Bfl8GBcR4XdU7wA9f0hxfDSc9g5ew=;
+ b=LLURRiO+TsuqTB0BpXfXPb2M/onbv4KLGEXBHvsZz6xjhjgjEqlfBBJabP5ZTmhQgZ
+ dDnVF/pFpLPTll1PU00nWrkWggFGqGySSox6HE+it3yThagBIM+5otwjHDX+y1agI/UC
+ doq8SwGl1ndYMMDCI5GbQ/8KL3MHyFtBMW5yQ5e44gGZJq9VALYMyVMxOxzfA1f1P58j
+ SqPo27OMD5JIBfhWzQt9ZsRtHQxLVZlfXQZtYi5rFSgg7HxnABY9P7ZIyjeC58Nsc9XB
+ GAHwMzqk7CYxw7SquUnccDsop7umnf9QLEI0pE1/j2r3gRF3BAqXL1M9LNVnMRIJ9bim
+ lf+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706306668; x=1706911468;
+ d=1e100.net; s=20230601; t=1706306748; x=1706911548;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PCbQQLgi9WW85KLAGX/JCbhsNaoCcACzxkgJkt9CV5M=;
- b=EvEmuki+/z0ISOsWt9YcTs3jg2o8ibPL+vcM4KkErCVMMP8CPPrT0lYy+0kSdb/Bqm
- JgIMIw+JSfKz81VeluWSjmJrj59ybljqPxWWITGHt0eiTXW5pgku0TkQaqCKVdgeZ5Vy
- eUVSIPP/gAcYWADZhBVthcbN3mC0BkCC+zxgN5cmrgX9Mwenzgku0W80uMpQb4Fp+qhJ
- VY8wU0qOC0f+eXHha5cQVpV+sRWT6yUDe31/l96iMfXvNTNPIIwwBQQcDjw60OKxqQFD
- oBJ0/FEd/fhr863BsVHfRMdRqzG2hvvRqtHGNEqu64QQiOItfl6t2rXasT+6TSfTYsgh
- DZ7w==
-X-Gm-Message-State: AOJu0YxTn76SSxZxfKdxtJXkLI4nUG9p+JlSUfYLj04xrkr1WwxH+/wF
- L+zMGi/A4JANhsb0LoV4XOPPioJ5BvyxGw0vXQ4hNghmQzUd0oFZcVYbljBa78o=
-X-Google-Smtp-Source: AGHT+IGN3HDxzBoHLqx3LMmclEgvMHqr8iDo1TTL5LgspPQ/aek2zjtAIt30vwlIWAyc4IXOZ6vHOg==
-X-Received: by 2002:a17:906:278f:b0:a31:5e7:b3ef with SMTP id
- j15-20020a170906278f00b00a3105e7b3efmr235073ejc.47.1706306668578; 
- Fri, 26 Jan 2024 14:04:28 -0800 (PST)
+ bh=hrrpUHlY+apDJ+Bfl8GBcR4XdU7wA9f0hxfDSc9g5ew=;
+ b=LXoAOk8g48AMc55rFnf8cLK7+MIpd/rx4xs7/Jm5g1ZHaGkR3eD7DxV+inM/pZBVVM
+ PKTvDE3NBFJLitwtOtjTdXh9ojoyViP4GP/BZkqrVFllBLe0B/NSULoJ7o1aNJgEi5QC
+ /lc8ySUh+4myYMW6kQ/teFoR4BwRC4S56NhDMOZBTfRrVE1utf8UkRk4JmcNxu/sJa2f
+ nyF8cnwkbuozTMuVuB1RHyJIEgEEyN9KphfndjSsC7YOP0Xs5rOCaNvMoQfjNhhlIroM
+ r4WR+Re32Z7LOIiFAhgGX8zydTVZp1eTB0cw5zZ8FmbTvjnJ3C19i4Dr7WSLKm1FocYy
+ zBjw==
+X-Gm-Message-State: AOJu0Yx5rkLe8vnT3UC28KZEw5mDhoJiqyw4btpmKp3ySLjv8fTXarD3
+ KlG3vNkrkWKLXmpdZBTldziXF2P/v8IC1Ya05oO+MEQsWigUUoRLyOhxFFUnsks=
+X-Google-Smtp-Source: AGHT+IEQKe50gK5ARKXwhup8IC6s7bgd0Ck3aZ5gAXWX69DcDS+bGKUhFgWBLLvFvpdPsm2Ioh9Vag==
+X-Received: by 2002:adf:edd1:0:b0:33a:deec:66ad with SMTP id
+ v17-20020adfedd1000000b0033adeec66admr239506wro.104.1706306747724; 
+ Fri, 26 Jan 2024 14:05:47 -0800 (PST)
 Received: from m1x-phil.lan ([176.176.142.39])
  by smtp.gmail.com with ESMTPSA id
- vh5-20020a170907d38500b00a3517d26918sm508021ejc.107.2024.01.26.14.04.26
+ vh5-20020a170907d38500b00a3517d26918sm508925ejc.107.2024.01.26.14.05.45
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 26 Jan 2024 14:04:28 -0800 (PST)
+ Fri, 26 Jan 2024 14:05:47 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-s390x@nongnu.org,
@@ -65,27 +65,31 @@ Cc: qemu-arm@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-s390x@nongnu.org,
  Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
  Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Laurent Vivier <laurent@vivier.eu>, Reinoud Zandijk <reinoud@netbsd.org>,
- Sunil Muthuswamy <sunilmut@microsoft.com>, Song Gao <gaosong@loongson.cn>,
- Yoshinori Sato <ysato@users.sourceforge.jp>
-Subject: [PATCH v2 03/23] bulk: Call in place single use cpu_env()
-Date: Fri, 26 Jan 2024 23:03:45 +0100
-Message-ID: <20240126220407.95022-4-philmd@linaro.org>
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ Nicholas Piggin <npiggin@gmail.com>,
+ =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Barrat?= <fbarrat@linux.ibm.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>
+Subject: [PATCH v2 16/23] target/ppc: Prefer fast cpu_env() over slower CPU
+ QOM cast macro
+Date: Fri, 26 Jan 2024 23:03:58 +0100
+Message-ID: <20240126220407.95022-17-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240126220407.95022-1-philmd@linaro.org>
 References: <20240126220407.95022-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x62a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::433;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x433.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,284 +105,274 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Avoid CPUArchState local variable when cpu_env() is used once.
-
-Mechanical patch using the following Coccinelle spatch script:
-
- @@
- type CPUArchState;
- identifier env;
- expression cs;
- @@
-  {
- -    CPUArchState *env = cpu_env(cs);
-      ... when != env
- -     env
- +     cpu_env(cs)
-      ... when != env
-  }
+Mechanical patch produced running the command documented
+in scripts/coccinelle/cpu_env.cocci_template header.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- accel/tcg/cpu-exec.c             |  3 +--
- linux-user/i386/cpu_loop.c       |  4 ++--
- target/hppa/mem_helper.c         |  3 +--
- target/hppa/translate.c          |  3 +--
- target/i386/nvmm/nvmm-all.c      |  6 ++----
- target/i386/whpx/whpx-all.c      | 18 ++++++------------
- target/loongarch/tcg/translate.c |  3 +--
- target/rx/translate.c            |  3 +--
- target/sh4/op_helper.c           |  4 +---
- 9 files changed, 16 insertions(+), 31 deletions(-)
+ hw/ppc/mpc8544_guts.c         |  3 +--
+ hw/ppc/pnv.c                  |  3 +--
+ hw/ppc/pnv_xscom.c            |  5 +----
+ hw/ppc/ppce500_spin.c         |  3 +--
+ hw/ppc/spapr.c                |  3 +--
+ hw/ppc/spapr_caps.c           |  6 ++----
+ target/ppc/cpu_init.c         | 11 +++--------
+ target/ppc/excp_helper.c      |  3 +--
+ target/ppc/gdbstub.c          | 12 ++++--------
+ target/ppc/kvm.c              |  6 ++----
+ target/ppc/ppc-qmp-cmds.c     |  3 +--
+ target/ppc/user_only_helper.c |  3 +--
+ 12 files changed, 19 insertions(+), 42 deletions(-)
 
-diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
-index 67eda9865e..86206484f8 100644
---- a/accel/tcg/cpu-exec.c
-+++ b/accel/tcg/cpu-exec.c
-@@ -445,7 +445,6 @@ const void *HELPER(lookup_tb_ptr)(CPUArchState *env)
- static inline TranslationBlock * QEMU_DISABLE_CFI
- cpu_tb_exec(CPUState *cpu, TranslationBlock *itb, int *tb_exit)
+diff --git a/hw/ppc/mpc8544_guts.c b/hw/ppc/mpc8544_guts.c
+index a26e83d048..e3540b0281 100644
+--- a/hw/ppc/mpc8544_guts.c
++++ b/hw/ppc/mpc8544_guts.c
+@@ -71,8 +71,7 @@ static uint64_t mpc8544_guts_read(void *opaque, hwaddr addr,
+                                   unsigned size)
  {
--    CPUArchState *env = cpu_env(cpu);
-     uintptr_t ret;
-     TranslationBlock *last_tb;
-     const void *tb_ptr = itb->tc.ptr;
-@@ -455,7 +454,7 @@ cpu_tb_exec(CPUState *cpu, TranslationBlock *itb, int *tb_exit)
-     }
+     uint32_t value = 0;
+-    PowerPCCPU *cpu = POWERPC_CPU(current_cpu);
+-    CPUPPCState *env = &cpu->env;
++    CPUPPCState *env = cpu_env(current_cpu);
  
-     qemu_thread_jit_execute();
--    ret = tcg_qemu_tb_exec(env, tb_ptr);
-+    ret = tcg_qemu_tb_exec(cpu_env(cpu), tb_ptr);
-     cpu->neg.can_do_io = true;
-     qemu_plugin_disable_mem_helpers(cpu);
-     /*
-diff --git a/linux-user/i386/cpu_loop.c b/linux-user/i386/cpu_loop.c
-index 42ecb4bf0a..92beb6830c 100644
---- a/linux-user/i386/cpu_loop.c
-+++ b/linux-user/i386/cpu_loop.c
-@@ -323,8 +323,8 @@ void cpu_loop(CPUX86State *env)
+     addr &= MPC8544_GUTS_MMIO_SIZE - 1;
+     switch (addr) {
+diff --git a/hw/ppc/pnv.c b/hw/ppc/pnv.c
+index 0297871bdd..a202b377e1 100644
+--- a/hw/ppc/pnv.c
++++ b/hw/ppc/pnv.c
+@@ -2294,8 +2294,7 @@ static void pnv_machine_set_hb(Object *obj, bool value, Error **errp)
  
- static void target_cpu_free(void *obj)
+ static void pnv_cpu_do_nmi_on_cpu(CPUState *cs, run_on_cpu_data arg)
  {
--    CPUArchState *env = cpu_env(obj);
--    target_munmap(env->gdt.base, sizeof(uint64_t) * TARGET_GDT_ENTRIES);
-+    target_munmap(cpu_env(obj)->gdt.base,
-+                  sizeof(uint64_t) * TARGET_GDT_ENTRIES);
-     g_free(obj);
- }
+-    PowerPCCPU *cpu = POWERPC_CPU(cs);
+-    CPUPPCState *env = &cpu->env;
++    CPUPPCState *env = cpu_env(cs);
  
-diff --git a/target/hppa/mem_helper.c b/target/hppa/mem_helper.c
-index 4fcc612754..bb85962d50 100644
---- a/target/hppa/mem_helper.c
-+++ b/target/hppa/mem_helper.c
-@@ -518,7 +518,6 @@ void HELPER(iitlbt_pa20)(CPUHPPAState *env, target_ulong r1, target_ulong r2)
- /* Purge (Insn/Data) TLB. */
- static void ptlb_work(CPUState *cpu, run_on_cpu_data data)
- {
--    CPUHPPAState *env = cpu_env(cpu);
-     vaddr start = data.target_ptr;
-     vaddr end;
- 
-@@ -532,7 +531,7 @@ static void ptlb_work(CPUState *cpu, run_on_cpu_data data)
-     end = (vaddr)TARGET_PAGE_SIZE << (2 * end);
-     end = start + end - 1;
- 
--    hppa_flush_tlb_range(env, start, end);
-+    hppa_flush_tlb_range(cpu_env(cpu), start, end);
- }
- 
- /* This is local to the current cpu. */
-diff --git a/target/hppa/translate.c b/target/hppa/translate.c
-index 3ef39b1bd7..5735335254 100644
---- a/target/hppa/translate.c
-+++ b/target/hppa/translate.c
-@@ -3805,8 +3805,7 @@ static bool trans_b_gate(DisasContext *ctx, arg_b_gate *a)
- 
- #ifndef CONFIG_USER_ONLY
-     if (ctx->tb_flags & PSW_C) {
--        CPUHPPAState *env = cpu_env(ctx->cs);
--        int type = hppa_artype_for_page(env, ctx->base.pc_next);
-+        int type = hppa_artype_for_page(cpu_env(ctx->cs), ctx->base.pc_next);
-         /* If we could not find a TLB entry, then we need to generate an
-            ITLB miss exception so the kernel will provide it.
-            The resulting TLB fill operation will invalidate this TB and
-diff --git a/target/i386/nvmm/nvmm-all.c b/target/i386/nvmm/nvmm-all.c
-index cfdca91123..49a3a3b916 100644
---- a/target/i386/nvmm/nvmm-all.c
-+++ b/target/i386/nvmm/nvmm-all.c
-@@ -340,7 +340,6 @@ nvmm_get_registers(CPUState *cpu)
- static bool
- nvmm_can_take_int(CPUState *cpu)
- {
--    CPUX86State *env = cpu_env(cpu);
-     AccelCPUState *qcpu = cpu->accel;
-     struct nvmm_vcpu *vcpu = &qcpu->vcpu;
-     struct nvmm_machine *mach = get_nvmm_mach();
-@@ -349,7 +348,7 @@ nvmm_can_take_int(CPUState *cpu)
-         return false;
-     }
- 
--    if (qcpu->int_shadow || !(env->eflags & IF_MASK)) {
-+    if (qcpu->int_shadow || !(cpu_env(cpu)->eflags & IF_MASK)) {
-         struct nvmm_x64_state *state = vcpu->state;
- 
-         /* Exit on interrupt window. */
-@@ -645,13 +644,12 @@ static int
- nvmm_handle_halted(struct nvmm_machine *mach, CPUState *cpu,
-     struct nvmm_vcpu_exit *exit)
- {
--    CPUX86State *env = cpu_env(cpu);
-     int ret = 0;
- 
-     bql_lock();
- 
-     if (!((cpu->interrupt_request & CPU_INTERRUPT_HARD) &&
--          (env->eflags & IF_MASK)) &&
-+          (cpu_env(cpu)->eflags & IF_MASK)) &&
-         !(cpu->interrupt_request & CPU_INTERRUPT_NMI)) {
-         cpu->exception_index = EXCP_HLT;
-         cpu->halted = true;
-diff --git a/target/i386/whpx/whpx-all.c b/target/i386/whpx/whpx-all.c
-index a7262654ac..31eec7048c 100644
---- a/target/i386/whpx/whpx-all.c
-+++ b/target/i386/whpx/whpx-all.c
-@@ -300,7 +300,6 @@ static SegmentCache whpx_seg_h2q(const WHV_X64_SEGMENT_REGISTER *hs)
- /* X64 Extended Control Registers */
- static void whpx_set_xcrs(CPUState *cpu)
- {
--    CPUX86State *env = cpu_env(cpu);
-     HRESULT hr;
-     struct whpx_state *whpx = &whpx_global;
-     WHV_REGISTER_VALUE xcr0;
-@@ -311,7 +310,7 @@ static void whpx_set_xcrs(CPUState *cpu)
-     }
- 
-     /* Only xcr0 is supported by the hypervisor currently */
--    xcr0.Reg64 = env->xcr0;
-+    xcr0.Reg64 = cpu_env(cpu)->xcr0;
-     hr = whp_dispatch.WHvSetVirtualProcessorRegisters(
-         whpx->partition, cpu->cpu_index, &xcr0_name, 1, &xcr0);
-     if (FAILED(hr)) {
-@@ -321,7 +320,6 @@ static void whpx_set_xcrs(CPUState *cpu)
- 
- static int whpx_set_tsc(CPUState *cpu)
- {
--    CPUX86State *env = cpu_env(cpu);
-     WHV_REGISTER_NAME tsc_reg = WHvX64RegisterTsc;
-     WHV_REGISTER_VALUE tsc_val;
-     HRESULT hr;
-@@ -345,7 +343,7 @@ static int whpx_set_tsc(CPUState *cpu)
-         }
-     }
- 
--    tsc_val.Reg64 = env->tsc;
-+    tsc_val.Reg64 = cpu_env(cpu)->tsc;
-     hr = whp_dispatch.WHvSetVirtualProcessorRegisters(
-         whpx->partition, cpu->cpu_index, &tsc_reg, 1, &tsc_val);
-     if (FAILED(hr)) {
-@@ -556,7 +554,6 @@ static void whpx_set_registers(CPUState *cpu, int level)
- 
- static int whpx_get_tsc(CPUState *cpu)
- {
--    CPUX86State *env = cpu_env(cpu);
-     WHV_REGISTER_NAME tsc_reg = WHvX64RegisterTsc;
-     WHV_REGISTER_VALUE tsc_val;
-     HRESULT hr;
-@@ -569,14 +566,13 @@ static int whpx_get_tsc(CPUState *cpu)
-         return -1;
-     }
- 
--    env->tsc = tsc_val.Reg64;
-+    cpu_env(cpu)->tsc = tsc_val.Reg64;
-     return 0;
- }
- 
- /* X64 Extended Control Registers */
- static void whpx_get_xcrs(CPUState *cpu)
- {
--    CPUX86State *env = cpu_env(cpu);
-     HRESULT hr;
-     struct whpx_state *whpx = &whpx_global;
-     WHV_REGISTER_VALUE xcr0;
-@@ -594,7 +590,7 @@ static void whpx_get_xcrs(CPUState *cpu)
-         return;
-     }
- 
--    env->xcr0 = xcr0.Reg64;
-+    cpu_env(cpu)->xcr0 = xcr0.Reg64;
- }
- 
- static void whpx_get_registers(CPUState *cpu)
-@@ -1400,8 +1396,7 @@ static vaddr whpx_vcpu_get_pc(CPUState *cpu, bool exit_context_valid)
- {
-     if (cpu->vcpu_dirty) {
-         /* The CPU registers have been modified by other parts of QEMU. */
--        CPUArchState *env = cpu_env(cpu);
--        return env->eip;
-+        return cpu_env(cpu)->eip;
-     } else if (exit_context_valid) {
-         /*
-          * The CPU registers have not been modified by neither other parts
-@@ -1439,12 +1434,11 @@ static vaddr whpx_vcpu_get_pc(CPUState *cpu, bool exit_context_valid)
- 
- static int whpx_handle_halt(CPUState *cpu)
- {
--    CPUX86State *env = cpu_env(cpu);
-     int ret = 0;
- 
-     bql_lock();
-     if (!((cpu->interrupt_request & CPU_INTERRUPT_HARD) &&
--          (env->eflags & IF_MASK)) &&
-+          (cpu_env(cpu)->eflags & IF_MASK)) &&
-         !(cpu->interrupt_request & CPU_INTERRUPT_NMI)) {
-         cpu->exception_index = EXCP_HLT;
-         cpu->halted = true;
-diff --git a/target/loongarch/tcg/translate.c b/target/loongarch/tcg/translate.c
-index 21f4db6fbd..7bb8cecab3 100644
---- a/target/loongarch/tcg/translate.c
-+++ b/target/loongarch/tcg/translate.c
-@@ -282,10 +282,9 @@ static uint64_t make_address_pc(DisasContext *ctx, uint64_t addr)
- 
- static void loongarch_tr_translate_insn(DisasContextBase *dcbase, CPUState *cs)
- {
--    CPULoongArchState *env = cpu_env(cs);
-     DisasContext *ctx = container_of(dcbase, DisasContext, base);
- 
--    ctx->opcode = translator_ldl(env, &ctx->base, ctx->base.pc_next);
-+    ctx->opcode = translator_ldl(cpu_env(cs), &ctx->base, ctx->base.pc_next);
- 
-     if (!decode(ctx, ctx->opcode)) {
-         qemu_log_mask(LOG_UNIMP, "Error: unknown opcode. "
-diff --git a/target/rx/translate.c b/target/rx/translate.c
-index c6ce717a95..1829a0b1cd 100644
---- a/target/rx/translate.c
-+++ b/target/rx/translate.c
-@@ -2195,9 +2195,8 @@ static bool trans_WAIT(DisasContext *ctx, arg_WAIT *a)
- 
- static void rx_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
- {
--    CPURXState *env = cpu_env(cs);
-     DisasContext *ctx = container_of(dcbase, DisasContext, base);
--    ctx->env = env;
-+    ctx->env = cpu_env(cs);
-     ctx->tb_flags = ctx->base.tb->flags;
- }
- 
-diff --git a/target/sh4/op_helper.c b/target/sh4/op_helper.c
-index 54d390fe1f..4559d0d376 100644
---- a/target/sh4/op_helper.c
-+++ b/target/sh4/op_helper.c
-@@ -29,9 +29,7 @@ void superh_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
-                                     MMUAccessType access_type,
-                                     int mmu_idx, uintptr_t retaddr)
- {
--    CPUSH4State *env = cpu_env(cs);
+     cpu_synchronize_state(cs);
+     ppc_cpu_do_system_reset(cs);
+diff --git a/hw/ppc/pnv_xscom.c b/hw/ppc/pnv_xscom.c
+index 805b1d0c87..a17816d072 100644
+--- a/hw/ppc/pnv_xscom.c
++++ b/hw/ppc/pnv_xscom.c
+@@ -44,15 +44,12 @@ static void xscom_complete(CPUState *cs, uint64_t hmer_bits)
+      * passed for the cpu, and no CPU completion is generated.
+      */
+     if (cs) {
+-        PowerPCCPU *cpu = POWERPC_CPU(cs);
+-        CPUPPCState *env = &cpu->env;
 -
--    env->tea = addr;
-+    cpu_env(cs)->tea = addr;
-     switch (access_type) {
-     case MMU_INST_FETCH:
-     case MMU_DATA_LOAD:
+         /*
+          * TODO: Need a CPU helper to set HMER, also handle generation
+          * of HMIs
+          */
+         cpu_synchronize_state(cs);
+-        env->spr[SPR_HMER] |= hmer_bits;
++        cpu_env(cs)->spr[SPR_HMER] |= hmer_bits;
+     }
+ }
+ 
+diff --git a/hw/ppc/ppce500_spin.c b/hw/ppc/ppce500_spin.c
+index bbce63e8a4..dfbe759481 100644
+--- a/hw/ppc/ppce500_spin.c
++++ b/hw/ppc/ppce500_spin.c
+@@ -90,8 +90,7 @@ static void mmubooke_create_initial_mapping(CPUPPCState *env,
+ 
+ static void spin_kick(CPUState *cs, run_on_cpu_data data)
+ {
+-    PowerPCCPU *cpu = POWERPC_CPU(cs);
+-    CPUPPCState *env = &cpu->env;
++    CPUPPCState *env = cpu_env(cs);
+     SpinInfo *curspin = data.host_ptr;
+     hwaddr map_size = 64 * MiB;
+     hwaddr map_start;
+diff --git a/hw/ppc/spapr.c b/hw/ppc/spapr.c
+index e8dabc8614..d7edfc2a1a 100644
+--- a/hw/ppc/spapr.c
++++ b/hw/ppc/spapr.c
+@@ -3487,8 +3487,7 @@ static void spapr_machine_finalizefn(Object *obj)
+ void spapr_do_system_reset_on_cpu(CPUState *cs, run_on_cpu_data arg)
+ {
+     SpaprMachineState *spapr = SPAPR_MACHINE(qdev_get_machine());
+-    PowerPCCPU *cpu = POWERPC_CPU(cs);
+-    CPUPPCState *env = &cpu->env;
++    CPUPPCState *env = cpu_env(cs);
+ 
+     cpu_synchronize_state(cs);
+     /* If FWNMI is inactive, addr will be -1, which will deliver to 0x100 */
+diff --git a/hw/ppc/spapr_caps.c b/hw/ppc/spapr_caps.c
+index e889244e52..39edec0f84 100644
+--- a/hw/ppc/spapr_caps.c
++++ b/hw/ppc/spapr_caps.c
+@@ -194,8 +194,7 @@ static void cap_htm_apply(SpaprMachineState *spapr, uint8_t val, Error **errp)
+ static void cap_vsx_apply(SpaprMachineState *spapr, uint8_t val, Error **errp)
+ {
+     ERRP_GUARD();
+-    PowerPCCPU *cpu = POWERPC_CPU(first_cpu);
+-    CPUPPCState *env = &cpu->env;
++    CPUPPCState *env = cpu_env(first_cpu);
+ 
+     if (!val) {
+         /* TODO: We don't support disabling vsx yet */
+@@ -213,8 +212,7 @@ static void cap_vsx_apply(SpaprMachineState *spapr, uint8_t val, Error **errp)
+ static void cap_dfp_apply(SpaprMachineState *spapr, uint8_t val, Error **errp)
+ {
+     ERRP_GUARD();
+-    PowerPCCPU *cpu = POWERPC_CPU(first_cpu);
+-    CPUPPCState *env = &cpu->env;
++    CPUPPCState *env = cpu_env(first_cpu);
+ 
+     if (!val) {
+         /* TODO: We don't support disabling dfp yet */
+diff --git a/target/ppc/cpu_init.c b/target/ppc/cpu_init.c
+index 344196a8ce..f39f426fa9 100644
+--- a/target/ppc/cpu_init.c
++++ b/target/ppc/cpu_init.c
+@@ -7195,12 +7195,9 @@ static void ppc_cpu_reset_hold(Object *obj)
+ 
+ static bool ppc_cpu_is_big_endian(CPUState *cs)
+ {
+-    PowerPCCPU *cpu = POWERPC_CPU(cs);
+-    CPUPPCState *env = &cpu->env;
+-
+     cpu_synchronize_state(cs);
+ 
+-    return !FIELD_EX64(env->msr, MSR, LE);
++    return !FIELD_EX64(cpu_env(cs)->msr, MSR, LE);
+ }
+ 
+ static bool ppc_get_irq_stats(InterruptStatsProvider *obj,
+@@ -7287,8 +7284,7 @@ static bool ppc_pvr_match_default(PowerPCCPUClass *pcc, uint32_t pvr, bool best)
+ 
+ static void ppc_disas_set_info(CPUState *cs, disassemble_info *info)
+ {
+-    PowerPCCPU *cpu = POWERPC_CPU(cs);
+-    CPUPPCState *env = &cpu->env;
++    CPUPPCState *env = cpu_env(cs);
+ 
+     if ((env->hflags >> MSR_LE) & 1) {
+         info->endian = BFD_ENDIAN_LITTLE;
+@@ -7446,8 +7442,7 @@ void ppc_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+ #define RGPL  4
+ #define RFPL  4
+ 
+-    PowerPCCPU *cpu = POWERPC_CPU(cs);
+-    CPUPPCState *env = &cpu->env;
++    CPUPPCState *env = cpu_env(cs);
+     int i;
+ 
+     qemu_fprintf(f, "NIP " TARGET_FMT_lx "   LR " TARGET_FMT_lx " CTR "
+diff --git a/target/ppc/excp_helper.c b/target/ppc/excp_helper.c
+index 2ec6429e36..fccfefa88e 100644
+--- a/target/ppc/excp_helper.c
++++ b/target/ppc/excp_helper.c
+@@ -2588,8 +2588,7 @@ void ppc_cpu_do_fwnmi_machine_check(CPUState *cs, target_ulong vector)
+ 
+ bool ppc_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+ {
+-    PowerPCCPU *cpu = POWERPC_CPU(cs);
+-    CPUPPCState *env = &cpu->env;
++    CPUPPCState *env = cpu_env(cs);
+     int interrupt;
+ 
+     if ((interrupt_request & CPU_INTERRUPT_HARD) == 0) {
+diff --git a/target/ppc/gdbstub.c b/target/ppc/gdbstub.c
+index ec5731e5d6..fd986b1922 100644
+--- a/target/ppc/gdbstub.c
++++ b/target/ppc/gdbstub.c
+@@ -108,8 +108,7 @@ void ppc_maybe_bswap_register(CPUPPCState *env, uint8_t *mem_buf, int len)
+ 
+ int ppc_cpu_gdb_read_register(CPUState *cs, GByteArray *buf, int n)
+ {
+-    PowerPCCPU *cpu = POWERPC_CPU(cs);
+-    CPUPPCState *env = &cpu->env;
++    CPUPPCState *env = cpu_env(cs);
+     uint8_t *mem_buf;
+     int r = ppc_gdb_register_len(n);
+ 
+@@ -152,8 +151,7 @@ int ppc_cpu_gdb_read_register(CPUState *cs, GByteArray *buf, int n)
+ 
+ int ppc_cpu_gdb_read_register_apple(CPUState *cs, GByteArray *buf, int n)
+ {
+-    PowerPCCPU *cpu = POWERPC_CPU(cs);
+-    CPUPPCState *env = &cpu->env;
++    CPUPPCState *env = cpu_env(cs);
+     uint8_t *mem_buf;
+     int r = ppc_gdb_register_len_apple(n);
+ 
+@@ -206,8 +204,7 @@ int ppc_cpu_gdb_read_register_apple(CPUState *cs, GByteArray *buf, int n)
+ 
+ int ppc_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+ {
+-    PowerPCCPU *cpu = POWERPC_CPU(cs);
+-    CPUPPCState *env = &cpu->env;
++    CPUPPCState *env = cpu_env(cs);
+     int r = ppc_gdb_register_len(n);
+ 
+     if (!r) {
+@@ -253,8 +250,7 @@ int ppc_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+ }
+ int ppc_cpu_gdb_write_register_apple(CPUState *cs, uint8_t *mem_buf, int n)
+ {
+-    PowerPCCPU *cpu = POWERPC_CPU(cs);
+-    CPUPPCState *env = &cpu->env;
++    CPUPPCState *env = cpu_env(cs);
+     int r = ppc_gdb_register_len_apple(n);
+ 
+     if (!r) {
+diff --git a/target/ppc/kvm.c b/target/ppc/kvm.c
+index 26fa9d0575..7a0651b0af 100644
+--- a/target/ppc/kvm.c
++++ b/target/ppc/kvm.c
+@@ -546,8 +546,7 @@ static void kvm_sw_tlb_put(PowerPCCPU *cpu)
+ 
+ static void kvm_get_one_spr(CPUState *cs, uint64_t id, int spr)
+ {
+-    PowerPCCPU *cpu = POWERPC_CPU(cs);
+-    CPUPPCState *env = &cpu->env;
++    CPUPPCState *env = cpu_env(cs);
+     /* Init 'val' to avoid "uninitialised value" Valgrind warnings */
+     union {
+         uint32_t u32;
+@@ -581,8 +580,7 @@ static void kvm_get_one_spr(CPUState *cs, uint64_t id, int spr)
+ 
+ static void kvm_put_one_spr(CPUState *cs, uint64_t id, int spr)
+ {
+-    PowerPCCPU *cpu = POWERPC_CPU(cs);
+-    CPUPPCState *env = &cpu->env;
++    CPUPPCState *env = cpu_env(cs);
+     union {
+         uint32_t u32;
+         uint64_t u64;
+diff --git a/target/ppc/ppc-qmp-cmds.c b/target/ppc/ppc-qmp-cmds.c
+index c0c137d9d7..9ac74f5c04 100644
+--- a/target/ppc/ppc-qmp-cmds.c
++++ b/target/ppc/ppc-qmp-cmds.c
+@@ -133,8 +133,7 @@ static int ppc_cpu_get_reg_num(const char *numstr, int maxnum, int *pregnum)
+ int target_get_monitor_def(CPUState *cs, const char *name, uint64_t *pval)
+ {
+     int i, regnum;
+-    PowerPCCPU *cpu = POWERPC_CPU(cs);
+-    CPUPPCState *env = &cpu->env;
++    CPUPPCState *env = cpu_env(cs);
+ 
+     /* General purpose registers */
+     if ((qemu_tolower(name[0]) == 'r') &&
+diff --git a/target/ppc/user_only_helper.c b/target/ppc/user_only_helper.c
+index 7ff76f7a06..a4d07a0d0d 100644
+--- a/target/ppc/user_only_helper.c
++++ b/target/ppc/user_only_helper.c
+@@ -27,8 +27,7 @@ void ppc_cpu_record_sigsegv(CPUState *cs, vaddr address,
+                             MMUAccessType access_type,
+                             bool maperr, uintptr_t retaddr)
+ {
+-    PowerPCCPU *cpu = POWERPC_CPU(cs);
+-    CPUPPCState *env = &cpu->env;
++    CPUPPCState *env = cpu_env(cs);
+     int exception, error_code;
+ 
+     /*
 -- 
 2.41.0
 
