@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3C73C47DDB
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 15:58:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55DD8C47422
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 16:02:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTOag-0007Vm-Cj; Fri, 26 Jan 2024 10:58:02 -0500
+	id 1rTOeo-0000Fw-Ux; Fri, 26 Jan 2024 11:02:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTOaU-0007Sz-8i
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 10:57:51 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTOen-0000F2-9l
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 11:02:17 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTOaR-0004lC-Sp
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 10:57:49 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rTOej-0005gL-Mk
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 11:02:15 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1706284666;
+ s=mimecast20190719; t=1706284932;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=uICF0HlUwroZLnpf75Ri8CLLs3QRzc6G/+R5nSoBH4g=;
- b=SXffkU3cWtBB7t7Mz0fwNiMum8qXtLgVNAaq6iMOwJRvXdRWL8GNPnxCaQrx9UuySSm12c
- X7crrkWGj3+xmuDau5SYTChga9vzvWwhqn7IpN99t+B591TsPLfthbQY/xUSmXH002MdWL
- xSDIItQHdw6Uc+QJyDEydDVE7Lt9cQY=
-Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
- [209.85.210.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=K0i04O7174d0OKv11gEirJYlyXb4UP+O2CnLeSTT3do=;
+ b=a/08JzLB5B5jbAPR8c/L/xkuO4pHWnVxEc4z0c/MtCWo2PGji1W+qEQRudeK5uFzhmtCdi
+ LlDdEVXDe89ZwcHzpDdu2DV4qezjc8tGm7UmvMBthPceTEq2j5XXD/rr9IRlKEs49PqQNX
+ ydQGU18O8qDmijxN3T0qgiv8zzYL+aI=
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
+ [209.85.160.200]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-399-B8B_8CVhMCuuUtjl5iUUmw-1; Fri, 26 Jan 2024 10:57:44 -0500
-X-MC-Unique: B8B_8CVhMCuuUtjl5iUUmw-1
-Received: by mail-pf1-f198.google.com with SMTP id
- d2e1a72fcca58-6ddce8ad5cfso481303b3a.2
- for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 07:57:44 -0800 (PST)
+ us-mta-74-CaFPtLKYNHmLe5o8prjhQA-1; Fri, 26 Jan 2024 11:02:08 -0500
+X-MC-Unique: CaFPtLKYNHmLe5o8prjhQA-1
+Received: by mail-qt1-f200.google.com with SMTP id
+ d75a77b69052e-42a02969f69so6160361cf.3
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 08:02:08 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706284663; x=1706889463;
+ d=1e100.net; s=20230601; t=1706284928; x=1706889728;
  h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
  :to:content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=uICF0HlUwroZLnpf75Ri8CLLs3QRzc6G/+R5nSoBH4g=;
- b=hHian60XpunXD7HxYSZIXoKRYyWW3ShTNsBRl/DxqrrHWJ66YVndGlF/ZQyDH1rH2C
- skCxqE+PCzE+sgNhaGYTaQjaqiYBNmqlDXu8Y5ujmmFsgTZj9nmiLwznfHfBsYURtqNF
- WLgZUIkebfkIlbJtTtVZ3iF9g0Ce6FJFqWCurenGR87F6PwlcUDLmpg3F5WcNXGKkDvX
- 7zuQo3Mbq2NczAIvIY38p7hGkBJ1AqD86R/wxR0aXZ1DPh+dCz/nrKP8F7BoYc2gmU0U
- tdjSDQmjvNpcIQQTNnpwE0r1V3eHhKHfef+3Ct8zF/wDB5ue2kwiMa5YNb/kKNJKC6mr
- GLfA==
-X-Gm-Message-State: AOJu0YybIUi2fElEZUcnLmjABRJcLqFhsGlmITA4QnQ5RYEDiK4wB5Zo
- dFbePoePK4rS6W1uNFv2wTGa0g/jh3Gi2X1TQH+MhEOgKvEIRAQ9HvTVXctPDRzGfXId+kiyTAK
- XnphiKBdBB4FHZZSCbKweDsX1C6lZlbuKGmMqhdC1cad9ZCZ/nK9h
-X-Received: by 2002:a05:6a20:be20:b0:19c:32cf:8ff2 with SMTP id
- ge32-20020a056a20be2000b0019c32cf8ff2mr1179208pzb.79.1706284663558; 
- Fri, 26 Jan 2024 07:57:43 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFZQOm5h/jLj/QMB8vNdMhQkOVX5I6vLQ693UCCVc/aQRp6NS+s3KWbdrdEUQBgK1ncGlBFCA==
-X-Received: by 2002:a05:6a20:be20:b0:19c:32cf:8ff2 with SMTP id
- ge32-20020a056a20be2000b0019c32cf8ff2mr1179183pzb.79.1706284663142; 
- Fri, 26 Jan 2024 07:57:43 -0800 (PST)
+ bh=K0i04O7174d0OKv11gEirJYlyXb4UP+O2CnLeSTT3do=;
+ b=mbrqg7/ousRr9jyG0vBLJI6EfLR1geuG7B0DBH2V16cuLl7Gfc2sV+ojrcptUWR4tx
+ QqFk/b6da7xXsPNFYdf88avZmc4hwwD2282f29hmflmc8O7lG2iPZ17mIeDwALGA65/M
+ jSv0nf4oZjKjnd40hIXQ7LnNafyl2xIy9Nm2Y3S2SKcYIEFpORGXyrc8YsLAwrhVy8n0
+ +r9qlGftoa8jBTCsPlyxvukuS6x7jfqsQ5numOOr0WZ6D5vtoHIJgvk7qWXced7R1+ho
+ Y2B6p0VzH7ryjTE2k24RO1rtUdpQWQzNh2GJt4BDoBTgUW3POPKmXVeOWfFyY15yQ82d
+ YBFQ==
+X-Gm-Message-State: AOJu0YykVSrbKU3qciOdAYuDM1yrfUuYsHMdh6sj5OKJhc1zmxTYCeIG
+ m9982iThr1flpkxxcuQqg2xT4L6qIpaV5e1Lqt0AcIZoJAnUAmuBZK+mCAcFMi2xTnc3lGUgBxM
+ Jmj2LPtSZn2hxrn0f8SD1vWf4hNVXqZfIrLU3dCG7WkMGuawv38gr
+X-Received: by 2002:a05:622a:2485:b0:42a:3bcd:d1ba with SMTP id
+ cn5-20020a05622a248500b0042a3bcdd1bamr86546qtb.33.1706284927993; 
+ Fri, 26 Jan 2024 08:02:07 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEUI4/Z/eOfg4yDo1GeeqGPkAlWYAog6diD37K8WillbyWHP4eC/1xzEmLGiQxLpoMJJ8MX5Q==
+X-Received: by 2002:a05:622a:2485:b0:42a:3bcd:d1ba with SMTP id
+ cn5-20020a05622a248500b0042a3bcdd1bamr86371qtb.33.1706284926215; 
+ Fri, 26 Jan 2024 08:02:06 -0800 (PST)
 Received: from [192.168.0.9] (ip-109-43-176-119.web.vodafone.de.
  [109.43.176.119]) by smtp.gmail.com with ESMTPSA id
- s191-20020a6377c8000000b005c67a388836sm1253488pgc.62.2024.01.26.07.57.28
+ ie7-20020a05622a698700b00427fabefe3bsm616431qtb.52.2024.01.26.08.01.52
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 26 Jan 2024 07:57:42 -0800 (PST)
-Message-ID: <0702e0c9-599f-4809-b0b2-3b2a85b32971@redhat.com>
-Date: Fri, 26 Jan 2024 16:57:26 +0100
+ Fri, 26 Jan 2024 08:02:05 -0800 (PST)
+Message-ID: <befd1aaf-91af-465e-888f-1ed8db6282dc@redhat.com>
+Date: Fri, 26 Jan 2024 17:01:50 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 34/46] hw/microblaze: use qemu_configure_nic_device()
+Subject: Re: [PATCH v3 43/46] net: remove qemu_check_nic_model()
 To: David Woodhouse <dwmw2@infradead.org>, qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
  Beniamino Galvani <b.galvani@gmail.com>,
@@ -115,7 +115,7 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
 References: <20240108204909.564514-1-dwmw2@infradead.org>
- <20240108204909.564514-35-dwmw2@infradead.org>
+ <20240108204909.564514-44-dwmw2@infradead.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -159,21 +159,21 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20240108204909.564514-35-dwmw2@infradead.org>
+In-Reply-To: <20240108204909.564514-44-dwmw2@infradead.org>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -33
-X-Spam_score: -3.4
-X-Spam_bar: ---
-X-Spam_report: (-3.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.313,
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.313,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001, TVD_SPACE_RATIO=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_SORBS_WEB=1.5, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -192,50 +192,55 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 08/01/2024 21.27, David Woodhouse wrote:
 > From: David Woodhouse <dwmw@amazon.co.uk>
-> 
+
+Please add a short patch description à la "All callers have been converted 
+in the previous patches, so this is not required anymore".
+
+With that:
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+
+
 > Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 > ---
->   hw/microblaze/petalogix_ml605_mmu.c      | 3 +--
->   hw/microblaze/petalogix_s3adsp1800_mmu.c | 3 +--
->   2 files changed, 2 insertions(+), 4 deletions(-)
+>   include/net/net.h |  1 -
+>   net/net.c         | 13 -------------
+>   2 files changed, 14 deletions(-)
 > 
-> diff --git a/hw/microblaze/petalogix_ml605_mmu.c b/hw/microblaze/petalogix_ml605_mmu.c
-> index fb7889cf67..0f5fabc32e 100644
-> --- a/hw/microblaze/petalogix_ml605_mmu.c
-> +++ b/hw/microblaze/petalogix_ml605_mmu.c
-> @@ -133,7 +133,6 @@ petalogix_ml605_init(MachineState *machine)
->       sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[TIMER_IRQ]);
+> diff --git a/include/net/net.h b/include/net/net.h
+> index 31e63d1f0d..1be8b40074 100644
+> --- a/include/net/net.h
+> +++ b/include/net/net.h
+> @@ -204,7 +204,6 @@ int qemu_set_vnet_le(NetClientState *nc, bool is_le);
+>   int qemu_set_vnet_be(NetClientState *nc, bool is_be);
+>   void qemu_macaddr_default_if_unset(MACAddr *macaddr);
+>   int qemu_show_nic_models(const char *arg, const char *const *models);
+> -void qemu_check_nic_model(NICInfo *nd, const char *model);
+>   int qemu_find_nic_model(NICInfo *nd, const char * const *models,
+>                           const char *default_model);
+>   NICInfo *qemu_find_nic_info(const char *typename, bool match_default,
+> diff --git a/net/net.c b/net/net.c
+> index 4651b3f443..ffd4b42d5a 100644
+> --- a/net/net.c
+> +++ b/net/net.c
+> @@ -992,19 +992,6 @@ int qemu_show_nic_models(const char *arg, const char *const *models)
+>       return 1;
+>   }
 >   
->       /* axi ethernet and dma initialization. */
-> -    qemu_check_nic_model(&nd_table[0], "xlnx.axi-ethernet");
->       eth0 = qdev_new("xlnx.axi-ethernet");
->       dma = qdev_new("xlnx.axi-dma");
->   
-> @@ -145,7 +144,7 @@ petalogix_ml605_init(MachineState *machine)
->                                     "axistream-connected-target", NULL);
->       cs = object_property_get_link(OBJECT(dma),
->                                     "axistream-control-connected-target", NULL);
-> -    qdev_set_nic_properties(eth0, &nd_table[0]);
-> +    qemu_configure_nic_device(eth0, true, NULL);
->       qdev_prop_set_uint32(eth0, "rxmem", 0x1000);
->       qdev_prop_set_uint32(eth0, "txmem", 0x1000);
->       object_property_set_link(OBJECT(eth0), "axistream-connected", ds,
-> diff --git a/hw/microblaze/petalogix_s3adsp1800_mmu.c b/hw/microblaze/petalogix_s3adsp1800_mmu.c
-> index 505639c298..dad46bd7f9 100644
-> --- a/hw/microblaze/petalogix_s3adsp1800_mmu.c
-> +++ b/hw/microblaze/petalogix_s3adsp1800_mmu.c
-> @@ -114,9 +114,8 @@ petalogix_s3adsp1800_init(MachineState *machine)
->       sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, TIMER_BASEADDR);
->       sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[TIMER_IRQ]);
->   
-> -    qemu_check_nic_model(&nd_table[0], "xlnx.xps-ethernetlite");
->       dev = qdev_new("xlnx.xps-ethernetlite");
-> -    qdev_set_nic_properties(dev, &nd_table[0]);
-> +    qemu_configure_nic_device(dev, true, NULL);
->       qdev_prop_set_uint32(dev, "tx-ping-pong", 0);
->       qdev_prop_set_uint32(dev, "rx-ping-pong", 0);
->       sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-
-Reviewed-by: Thomas Huth <thuth@redhat.com>
+> -void qemu_check_nic_model(NICInfo *nd, const char *model)
+> -{
+> -    const char *models[2];
+> -
+> -    models[0] = model;
+> -    models[1] = NULL;
+> -
+> -    if (qemu_show_nic_models(nd->model, models))
+> -        exit(0);
+> -    if (qemu_find_nic_model(nd, models, model) < 0)
+> -        exit(1);
+> -}
+> -
+>   int qemu_find_nic_model(NICInfo *nd, const char * const *models,
+>                           const char *default_model)
+>   {
 
 
