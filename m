@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50035C47422
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 22:12:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7192CC47422
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jan 2024 22:12:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTULV-00047B-Hp; Fri, 26 Jan 2024 17:06:45 -0500
+	id 1rTULX-0004F5-2F; Fri, 26 Jan 2024 17:06:47 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rTUL1-0002Fi-97
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 17:06:20 -0500
-Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rTULK-0002Xc-Fl
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 17:06:34 -0500
+Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rTUKw-0004Up-Kg
- for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 17:06:12 -0500
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-40ea5653f6bso15444165e9.3
- for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 14:06:09 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rTULG-0004g0-4C
+ for qemu-riscv@nongnu.org; Fri, 26 Jan 2024 17:06:33 -0500
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-337d05b8942so1093429f8f.3
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jan 2024 14:06:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706306768; x=1706911568; darn=nongnu.org;
+ d=linaro.org; s=google; t=1706306788; x=1706911588; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zizmHElFAIvWicITNbOdvMqLrgaV6VK2Xkw5hMOGCk4=;
- b=nFQXn2wn0su/2fhfH36G5CywlddMX3O2r6a3CmIWy4b3QVYIfaX7N3FdpIvlU7XQVr
- QRlxGwmtqQLcCHcUUn5UpInwaaELgX72V5N0hfHS7E6824mn103VxaMrTcL/UNqhvbny
- LL5ZEN3tejjoilawlIwmuGCZbJ6Opy/TojRMxsrlYzgNtsPdDnC4qjPsgmskl1VhIW+G
- bLRR9TTL8x2KN2GKOytQ57kC3ugUJFQBY4kmrzGZZOYyhTBzKvuVxnIIZt32fTu7OVcB
- ZZHAoY9/3IcFNORUQC+4Xju50iNpy5Cma2Jz/kfioUAYMO1VbXerxsH/exJ9kUGVLB2I
- tS3A==
+ bh=2gDIWjU9eQG9A3OK765d3tfkinBgpjsJUVS32LoH/b8=;
+ b=c6Ph6sF0VFQnRqEFNAjmWZvXHBwThh6kIc9VJXx8PBU50BpU1uK419beIrA42t7Svm
+ KkPuhiShMa5xs99O6Y3i99fQzURJbTtpeP+so99rToR6Rdq0C4JZgvYmqCzjcoxD4bZS
+ I7xvIHuQezCEg3vmeF/jE6FkTEXBrqDqgOBAVHFuq0o1EtV/feIKtPX6mnItFEyFzPcB
+ GgkHb23kQlnf6yeZwoImVi1g7znImX1t9QGI9Pp57HRezqztS0if807sO3zZpXWLtsQo
+ 5P+trc4ue9YV36cj7KqzcDtCLU8guaeaQ3M6fS590gZDujBTEwXHpsCKT7UXk7qVz8b/
+ POsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706306768; x=1706911568;
+ d=1e100.net; s=20230601; t=1706306788; x=1706911588;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zizmHElFAIvWicITNbOdvMqLrgaV6VK2Xkw5hMOGCk4=;
- b=MU9VOy8tGDfNw1hKUBHUdRQP9ctJzN3ussKfnqpSvSI9MyXbxrd+LoumUXReE/Ncr4
- 5iOSuSWmMPfkDluybE0w6Dz8f15o7yBX8RZYyN6vxnHAQxLL9cQaFKPJGrv2kAQTQt4D
- FVetKgmKYNjJgX/ko49JCzqIPUDP/rvhHNhnpTPoQHBPLKG1Wy/R/lz+sia/QH1fK7B7
- NBoD7/b4ReK5GAMbND480P5muZFEZ3F+iBpb/M96AuNYRAzpfFYqVLA6igUarHDiKqmO
- HDGIHwl+iA4NAd6/rgUgAfQVUw58gSeP8q0RndfbHU1nL7SgwKVcDt0KOJWt4c08xxmZ
- ybow==
-X-Gm-Message-State: AOJu0YwBFLkgdtTBgIspFGugV4Q/yWJJj3heF6xZmDZV5jXq2tiVQ685
- 2eE6o/ViF9Rv1QCxz1cgQQdxB8hpx1tK73lT8mIYxTH+e8iQ9iePeHDECiW2WPk=
-X-Google-Smtp-Source: AGHT+IENT++zTxGze1ZxY54yZNYP0exfgleA9HYNxNr2GozYuCeOr5aCqtrcjo6kkJDEzytT4sLd9g==
-X-Received: by 2002:a05:600c:a082:b0:40e:e703:b1ec with SMTP id
- jh2-20020a05600ca08200b0040ee703b1ecmr307070wmb.24.1706306768281; 
- Fri, 26 Jan 2024 14:06:08 -0800 (PST)
+ bh=2gDIWjU9eQG9A3OK765d3tfkinBgpjsJUVS32LoH/b8=;
+ b=h4h1vFUXQu+5qj3/YO0H5x8maNgEZTuUf90kuLgcyqFAxB8AVpQ3kU6950/uzRVZSn
+ JiUvl1WNYtPMbsBhW+1yoxIPeN6fELr9V0s5rtIzM1TQd+D+k1wUhrXdDNPv8RofKtTb
+ cSIIDUwjT5SC0K8d0HuPHSiXovGSjRwlHlzUW3PHZcSlpkL76+HwUjvygOc7YCZqElZM
+ URQCMiR0wKC1mSI26ba6o/HumTwcDJHlrQawbKQoWKN3sFXMXTE9M/hUVA2L5YfACsac
+ lN5buSKc1fTZ/ZSrO6488Wh2bcHlX90ZRJNHiQA7Jt5si2AzscEhatrsE4vbLM2Si9Ri
+ o6jA==
+X-Gm-Message-State: AOJu0YxGstDImbWmxPCeQfxEHBtnbd8W2pNq05BRvOizKapSO/t9deHo
+ b4uxzOMJhZXMkOQDr/nhvIeh1bLpCXJGszI4+/YbnO9Awl1Ed0JqQnEJQRL9Yqo=
+X-Google-Smtp-Source: AGHT+IE6Sp0LhSpi9Ej8yVTXgYN+0vvayY09E84fmgM1h1bEh6llJXcaofzqIUik5z4nEIAzN4Om7w==
+X-Received: by 2002:a5d:6a0b:0:b0:336:6db3:1d7a with SMTP id
+ m11-20020a5d6a0b000000b003366db31d7amr188913wru.103.1706306787955; 
+ Fri, 26 Jan 2024 14:06:27 -0800 (PST)
 Received: from m1x-phil.lan ([176.176.142.39])
  by smtp.gmail.com with ESMTPSA id
- u16-20020a05600c19d000b0040e4733aecbsm2912892wmq.15.2024.01.26.14.06.06
+ bp19-20020a5d5a93000000b003394495566dsm2118313wrb.22.2024.01.26.14.06.26
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 26 Jan 2024 14:06:07 -0800 (PST)
+ Fri, 26 Jan 2024 14:06:27 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-s390x@nongnu.org,
@@ -65,21 +65,19 @@ Cc: qemu-arm@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-s390x@nongnu.org,
  Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
  Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>
-Subject: [PATCH v2 19/23] target/s390x: Prefer fast cpu_env() over slower CPU
+ Max Filippov <jcmvbkbc@gmail.com>
+Subject: [PATCH v2 22/23] target/xtensa: Prefer fast cpu_env() over slower CPU
  QOM cast macro
-Date: Fri, 26 Jan 2024 23:04:01 +0100
-Message-ID: <20240126220407.95022-20-philmd@linaro.org>
+Date: Fri, 26 Jan 2024 23:04:04 +0100
+Message-ID: <20240126220407.95022-23-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240126220407.95022-1-philmd@linaro.org>
 References: <20240126220407.95022-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::336;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x336.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -107,140 +105,113 @@ in scripts/coccinelle/cpu_env.cocci_template header.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/s390x/cpu-dump.c        |  3 +--
- target/s390x/gdbstub.c         |  6 ++----
- target/s390x/helper.c          |  3 +--
- target/s390x/kvm/kvm.c         |  6 ++----
- target/s390x/tcg/excp_helper.c | 11 +++--------
- target/s390x/tcg/translate.c   |  3 +--
- 6 files changed, 10 insertions(+), 22 deletions(-)
+ target/xtensa/dbg_helper.c | 3 +--
+ target/xtensa/exc_helper.c | 3 +--
+ target/xtensa/gdbstub.c    | 6 ++----
+ target/xtensa/helper.c     | 9 +++------
+ target/xtensa/translate.c  | 3 +--
+ 5 files changed, 8 insertions(+), 16 deletions(-)
 
-diff --git a/target/s390x/cpu-dump.c b/target/s390x/cpu-dump.c
-index ffa9e94d84..69cc9f7746 100644
---- a/target/s390x/cpu-dump.c
-+++ b/target/s390x/cpu-dump.c
-@@ -27,8 +27,7 @@
+diff --git a/target/xtensa/dbg_helper.c b/target/xtensa/dbg_helper.c
+index 497dafca71..5546c82ecd 100644
+--- a/target/xtensa/dbg_helper.c
++++ b/target/xtensa/dbg_helper.c
+@@ -66,8 +66,7 @@ void HELPER(wsr_ibreaka)(CPUXtensaState *env, uint32_t i, uint32_t v)
  
- void s390_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+ bool xtensa_debug_check_breakpoint(CPUState *cs)
  {
--    S390CPU *cpu = S390_CPU(cs);
--    CPUS390XState *env = &cpu->env;
-+    CPUS390XState *env = cpu_env(cs);
-     int i;
+-    XtensaCPU *cpu = XTENSA_CPU(cs);
+-    CPUXtensaState *env = &cpu->env;
++    CPUXtensaState *env = cpu_env(cs);
+     unsigned int i;
  
-     qemu_fprintf(f, "PSW=mask %016" PRIx64 " addr %016" PRIx64,
-diff --git a/target/s390x/gdbstub.c b/target/s390x/gdbstub.c
-index 6fbfd41bc8..f02fa316e5 100644
---- a/target/s390x/gdbstub.c
-+++ b/target/s390x/gdbstub.c
-@@ -30,8 +30,7 @@
- 
- int s390_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+     if (xtensa_get_cintlevel(env) >= env->config->debug_level) {
+diff --git a/target/xtensa/exc_helper.c b/target/xtensa/exc_helper.c
+index 168419a505..0514c2c1f3 100644
+--- a/target/xtensa/exc_helper.c
++++ b/target/xtensa/exc_helper.c
+@@ -205,8 +205,7 @@ static void handle_interrupt(CPUXtensaState *env)
+ /* Called from cpu_handle_interrupt with BQL held */
+ void xtensa_cpu_do_interrupt(CPUState *cs)
  {
--    S390CPU *cpu = S390_CPU(cs);
--    CPUS390XState *env = &cpu->env;
-+    CPUS390XState *env = cpu_env(cs);
+-    XtensaCPU *cpu = XTENSA_CPU(cs);
+-    CPUXtensaState *env = &cpu->env;
++    CPUXtensaState *env = cpu_env(cs);
  
-     switch (n) {
-     case S390_PSWM_REGNUM:
-@@ -46,8 +45,7 @@ int s390_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+     if (cs->exception_index == EXC_IRQ) {
+         qemu_log_mask(CPU_LOG_INT,
+diff --git a/target/xtensa/gdbstub.c b/target/xtensa/gdbstub.c
+index 4b3bfb7e59..4748fb6532 100644
+--- a/target/xtensa/gdbstub.c
++++ b/target/xtensa/gdbstub.c
+@@ -65,8 +65,7 @@ void xtensa_count_regs(const XtensaConfig *config,
  
- int s390_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+ int xtensa_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
  {
--    S390CPU *cpu = S390_CPU(cs);
--    CPUS390XState *env = &cpu->env;
-+    CPUS390XState *env = cpu_env(cs);
-     target_ulong tmpl = ldtul_p(mem_buf);
+-    XtensaCPU *cpu = XTENSA_CPU(cs);
+-    CPUXtensaState *env = &cpu->env;
++    CPUXtensaState *env = cpu_env(cs);
+     const XtensaGdbReg *reg = env->config->gdb_regmap.reg + n;
+ #ifdef CONFIG_USER_ONLY
+     int num_regs = env->config->gdb_regmap.num_core_regs;
+@@ -120,8 +119,7 @@ int xtensa_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
  
-     switch (n) {
-diff --git a/target/s390x/helper.c b/target/s390x/helper.c
-index d76c06381b..00d5d403f3 100644
---- a/target/s390x/helper.c
-+++ b/target/s390x/helper.c
-@@ -139,8 +139,7 @@ void do_restart_interrupt(CPUS390XState *env)
- void s390_cpu_recompute_watchpoints(CPUState *cs)
+ int xtensa_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
  {
-     const int wp_flags = BP_CPU | BP_MEM_WRITE | BP_STOP_BEFORE_ACCESS;
--    S390CPU *cpu = S390_CPU(cs);
--    CPUS390XState *env = &cpu->env;
-+    CPUS390XState *env = cpu_env(cs);
+-    XtensaCPU *cpu = XTENSA_CPU(cs);
+-    CPUXtensaState *env = &cpu->env;
++    CPUXtensaState *env = cpu_env(cs);
+     uint32_t tmp;
+     const XtensaGdbReg *reg = env->config->gdb_regmap.reg + n;
+ #ifdef CONFIG_USER_ONLY
+diff --git a/target/xtensa/helper.c b/target/xtensa/helper.c
+index a9f8907083..ca214b948a 100644
+--- a/target/xtensa/helper.c
++++ b/target/xtensa/helper.c
+@@ -217,8 +217,7 @@ static uint32_t check_hw_breakpoints(CPUXtensaState *env)
  
-     /* We are called when the watchpoints have changed. First
-        remove them all.  */
-diff --git a/target/s390x/kvm/kvm.c b/target/s390x/kvm/kvm.c
-index 888d6c1a1c..4ce809c5d4 100644
---- a/target/s390x/kvm/kvm.c
-+++ b/target/s390x/kvm/kvm.c
-@@ -474,8 +474,7 @@ static int can_sync_regs(CPUState *cs, int regs)
- 
- int kvm_arch_put_registers(CPUState *cs, int level)
+ void xtensa_breakpoint_handler(CPUState *cs)
  {
--    S390CPU *cpu = S390_CPU(cs);
--    CPUS390XState *env = &cpu->env;
-+    CPUS390XState *env = cpu_env(cs);
-     struct kvm_fpu fpu = {};
-     int r;
-     int i;
-@@ -601,8 +600,7 @@ int kvm_arch_put_registers(CPUState *cs, int level)
+-    XtensaCPU *cpu = XTENSA_CPU(cs);
+-    CPUXtensaState *env = &cpu->env;
++    CPUXtensaState *env = cpu_env(cs);
  
- int kvm_arch_get_registers(CPUState *cs)
+     if (cs->watchpoint_hit) {
+         if (cs->watchpoint_hit->flags & BP_CPU) {
+@@ -266,8 +265,7 @@ bool xtensa_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+                          MMUAccessType access_type, int mmu_idx,
+                          bool probe, uintptr_t retaddr)
  {
--    S390CPU *cpu = S390_CPU(cs);
--    CPUS390XState *env = &cpu->env;
-+    CPUS390XState *env = cpu_env(cs);
-     struct kvm_fpu fpu;
-     int i, r;
- 
-diff --git a/target/s390x/tcg/excp_helper.c b/target/s390x/tcg/excp_helper.c
-index b875bf14e5..f1c33f7967 100644
---- a/target/s390x/tcg/excp_helper.c
-+++ b/target/s390x/tcg/excp_helper.c
-@@ -90,10 +90,7 @@ void HELPER(data_exception)(CPUS390XState *env, uint32_t dxc)
- static G_NORETURN
- void do_unaligned_access(CPUState *cs, uintptr_t retaddr)
+-    XtensaCPU *cpu = XTENSA_CPU(cs);
+-    CPUXtensaState *env = &cpu->env;
++    CPUXtensaState *env = cpu_env(cs);
+     uint32_t paddr;
+     uint32_t page_size;
+     unsigned access;
+@@ -297,8 +295,7 @@ void xtensa_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr, vaddr addr,
+                                       int mmu_idx, MemTxAttrs attrs,
+                                       MemTxResult response, uintptr_t retaddr)
  {
--    S390CPU *cpu = S390_CPU(cs);
--    CPUS390XState *env = &cpu->env;
--
--    tcg_s390_program_interrupt(env, PGM_SPECIFICATION, retaddr);
-+    tcg_s390_program_interrupt(cpu_env(cs), PGM_SPECIFICATION, retaddr);
- }
+-    XtensaCPU *cpu = XTENSA_CPU(cs);
+-    CPUXtensaState *env = &cpu->env;
++    CPUXtensaState *env = cpu_env(cs);
  
- #if defined(CONFIG_USER_ONLY)
-@@ -146,8 +143,7 @@ bool s390_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-                        MMUAccessType access_type, int mmu_idx,
-                        bool probe, uintptr_t retaddr)
+     cpu_restore_state(cs, retaddr);
+     HELPER(exception_cause_vaddr)(env, env->pc,
+diff --git a/target/xtensa/translate.c b/target/xtensa/translate.c
+index 87947236ca..426dcb6169 100644
+--- a/target/xtensa/translate.c
++++ b/target/xtensa/translate.c
+@@ -1248,8 +1248,7 @@ void gen_intermediate_code(CPUState *cpu, TranslationBlock *tb, int *max_insns,
+ 
+ void xtensa_cpu_dump_state(CPUState *cs, FILE *f, int flags)
  {
--    S390CPU *cpu = S390_CPU(cs);
--    CPUS390XState *env = &cpu->env;
-+    CPUS390XState *env = cpu_env(cs);
-     target_ulong vaddr, raddr;
-     uint64_t asc, tec;
-     int prot, excp;
-@@ -600,8 +596,7 @@ bool s390_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+-    XtensaCPU *cpu = XTENSA_CPU(cs);
+-    CPUXtensaState *env = &cpu->env;
++    CPUXtensaState *env = cpu_env(cs);
+     xtensa_isa isa = env->config->isa;
+     int i, j;
  
- void s390x_cpu_debug_excp_handler(CPUState *cs)
- {
--    S390CPU *cpu = S390_CPU(cs);
--    CPUS390XState *env = &cpu->env;
-+    CPUS390XState *env = cpu_env(cs);
-     CPUWatchpoint *wp_hit = cs->watchpoint_hit;
- 
-     if (wp_hit && wp_hit->flags & BP_CPU) {
-diff --git a/target/s390x/tcg/translate.c b/target/s390x/tcg/translate.c
-index 8df00b7df9..9995689bc8 100644
---- a/target/s390x/tcg/translate.c
-+++ b/target/s390x/tcg/translate.c
-@@ -6558,8 +6558,7 @@ void s390x_restore_state_to_opc(CPUState *cs,
-                                 const TranslationBlock *tb,
-                                 const uint64_t *data)
- {
--    S390CPU *cpu = S390_CPU(cs);
--    CPUS390XState *env = &cpu->env;
-+    CPUS390XState *env = cpu_env(cs);
-     int cc_op = data[1];
- 
-     env->psw.addr = data[0];
 -- 
 2.41.0
 
