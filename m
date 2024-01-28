@@ -4,71 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A350EC46CD2
-	for <qemu-riscv@archiver.kernel.org>; Sat, 27 Jan 2024 13:35:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B396C47258
+	for <qemu-riscv@archiver.kernel.org>; Sun, 28 Jan 2024 08:27:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rTipQ-0007UM-A1; Sat, 27 Jan 2024 08:34:36 -0500
+	id 1rU0W6-0004SC-0O; Sun, 28 Jan 2024 03:27:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1rTipO-0007QO-SI; Sat, 27 Jan 2024 08:34:34 -0500
-Received: from mgamail.intel.com ([192.55.52.115])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1rTipL-0006rm-98; Sat, 27 Jan 2024 08:34:34 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1706362471; x=1737898471;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=gVVli2Tt6OBBfISwbpKEXrAbtF7rDpWL71P6Wg82JMY=;
- b=MG1NHhZXxcaxEjRDi4ACXZRpMoC+XehHiHaCwXAPLxhabsOnLXMD0Xzj
- y8KkJqN+3DjesEb679VT7Pogoyk0YrEdxkLQpdbZWVXi34aokKh3Cl+pn
- jeuVmtREWf0z5fS1ThjS+q1FofNUMXOPwOs3mgRBJdSzgh5h2iw1Xx6hE
- TeCBaTH0SV1j/xBXWuMXdb/5Vs4sypMJFadG9q/m/KMt73am5fqxP3QbV
- S006W7gObJwkyQtW//BUuB9sCNScs31D3IJQmnBp19ipv75TGae26CSEx
- CzFhvMdJCeGzgP+jSSUYzqZdGtPSXERqF04G3yrk0Cb1/uktX5NRM1oYu Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10964"; a="402327112"
-X-IronPort-AV: E=Sophos;i="6.05,220,1701158400"; d="scan'208";a="402327112"
-Received: from orviesa002.jf.intel.com ([10.64.159.142])
- by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 27 Jan 2024 05:34:26 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.05,220,1701158400"; d="scan'208";a="29085249"
-Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
- ([10.239.160.36])
- by orviesa002.jf.intel.com with ESMTP; 27 Jan 2024 05:34:22 -0800
-Date: Sat, 27 Jan 2024 21:47:26 +0800
-From: Zhao Liu <zhao1.liu@intel.com>
-To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org,
- Thomas Huth <thuth@redhat.com>, qemu-s390x@nongnu.org,
- qemu-riscv@nongnu.org, Eduardo Habkost <eduardo@habkost.net>,
- kvm@vger.kernel.org, qemu-ppc@nongnu.org,
- Richard Henderson <richard.henderson@linaro.org>,
- Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
- Paolo Bonzini <pbonzini@redhat.com>, Cameron Esfahani <dirty@apple.com>,
- Roman Bolshakov <rbolshakov@ddn.com>
-Subject: Re: [PATCH v2 09/23] target/i386/hvf: Use CPUState typedef
-Message-ID: <ZbUJboi7SdTsQqwH@intel.com>
-References: <20240126220407.95022-1-philmd@linaro.org>
- <20240126220407.95022-10-philmd@linaro.org>
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1rU0W4-0004Rt-7W
+ for qemu-riscv@nongnu.org; Sun, 28 Jan 2024 03:27:48 -0500
+Received: from mail-oi1-x230.google.com ([2607:f8b0:4864:20::230])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1rU0W1-00079P-Sx
+ for qemu-riscv@nongnu.org; Sun, 28 Jan 2024 03:27:48 -0500
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-3bd6581bc66so1636872b6e.1
+ for <qemu-riscv@nongnu.org>; Sun, 28 Jan 2024 00:27:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1706430464; x=1707035264;
+ darn=nongnu.org; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=MJ/JtCayd5oT7ympEH9TIQ53/Lmd99ySh4obNvOPLBo=;
+ b=UTl3fNCArmbf0bIK+w24lOMPnmkAB3dQqqKVEyeFQbebozEzN8Re/CQI0gg7OVersw
+ NfKAImFzVW7n+hi6oxTqRj7GvEAqKwATXP81G6Nw66MiIHBh/9NfoNr3FlQdEfnYnhG1
+ Q2wPjeDYNhoocut0J6zkxnK5ghjLH9EesWdUeMDGOwHDhcRU+dCbEuOAaapwRYKT3wyP
+ QnxG1W+b5U6eMZWUsLn1Wfr6dtMBwAEZ0tDnKgj/aBBuwDHfXogTG1dUwzdQMDPFkpKv
+ jpxH4QvRWBG+k8VXZcygS4Uy1j12OQORnqVJO9sitwIfE3XOwOl8Mzrkyt3YK2vygHia
+ W8Pw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706430464; x=1707035264;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=MJ/JtCayd5oT7ympEH9TIQ53/Lmd99ySh4obNvOPLBo=;
+ b=Bbhm4baf+2P2tkoFbytSHyIFs46HFLFao0Wrcohy7l6cAgTySNiF+ZWJJGWhDzQU5i
+ scRt8vmRRJlAYqe+vTReIX7d4kYDCXd7vCkaJbW6inSOJyOKFFihWINtUU187ngs0WHX
+ kymHVqrE4OOGRa0ktCdhYegiB3wkqAmNn0O6I3A6kD7qcSVbZ2Q4UgyjiZxMYBH5U3hl
+ xF7krAAthLTGtFBMHVfXYxapxJ9kKc+hhyI4ylOBqDyalgKA04cT/Q5FlEQYXlQDqJpN
+ Dhceeu7KHEIsDNUFzoeL35xrdQgmaY71w4oE8ZAqUU4F38h/9Z2ULWkicWKTyaXxM4+1
+ MUVQ==
+X-Gm-Message-State: AOJu0Yz9jeCbNlxsVH80hCexy3P7XPoBAKfOnvMrezBFUvAE8bBWdjXP
+ GL6vb9O2petSS6u2NY5BdzZ06ebcWtg1UUOigTcVuI/D10Sojct/xdwX334dbG0=
+X-Google-Smtp-Source: AGHT+IFL/Ja0ymH8koosqEl18njhnl9BB51Q+tRqFFEvlFUsF+xaQ5iGbnP2IkmRpwKV0ItzaCLYWA==
+X-Received: by 2002:a05:6808:1314:b0:3be:174c:1888 with SMTP id
+ y20-20020a056808131400b003be174c1888mr3512996oiv.44.1706430464626; 
+ Sun, 28 Jan 2024 00:27:44 -0800 (PST)
+Received: from localhost ([157.82.200.138])
+ by smtp.gmail.com with UTF8SMTPSA id
+ p51-20020a056a0026f300b006dde10a12b6sm3754204pfw.211.2024.01.28.00.27.41
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 28 Jan 2024 00:27:44 -0800 (PST)
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
+Subject: [PATCH v10 0/3] gdbstub and TCG plugin improvements
+Date: Sun, 28 Jan 2024 17:27:38 +0900
+Message-Id: <20240128-riscv-v10-0-fdbe593976e9@daynix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20240126220407.95022-10-philmd@linaro.org>
-Received-SPF: pass client-ip=192.55.52.115; envelope-from=zhao1.liu@intel.com;
- helo=mgamail.intel.com
-X-Spam_score_int: -56
-X-Spam_score: -5.7
-X-Spam_bar: -----
-X-Spam_report: (-5.7 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.282,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAPoPtmUC/2XMTQ6DIBCG4as0rEvDgAp01Xs0XeAAlUW1gYZoj
+ Hcvmpj0Zzlf5nlnklwMLpHzYSbR5ZDC0JcD2PFAsDP93dFgy0A44wI4CBpDwkw9om4qplWDnpT
+ fZ3Q+jFvoeit3F9JriNPWzXJdfwtZUkaNbBjUjRFC+os1Ux/GEw4Psiay+mRqZ6ow1K3nLdSKW
+ /nH9M4qBlDvTBfmPUhwYJxF9cWWZXkDCLriaQoBAAA=
+To: Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ =?utf-8?q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>, 
+ Mikhail Tyutin <m.tyutin@yadro.com>, 
+ Aleksandr Anenkov <a.anenkov@yadro.com>, 
+ =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>, 
+ Fabiano Rosas <farosas@suse.de>, Andrew Jones <ajones@ventanamicro.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Akihiko Odaki <akihiko.odaki@daynix.com>
+X-Mailer: b4 0.12.3
+Received-SPF: none client-ip=2607:f8b0:4864:20::230;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-oi1-x230.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -84,361 +105,75 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Jan 26, 2024 at 11:03:51PM +0100, Philippe Mathieu-Daudé wrote:
-> Date: Fri, 26 Jan 2024 23:03:51 +0100
-> From: Philippe Mathieu-Daudé <philmd@linaro.org>
-> Subject: [PATCH v2 09/23] target/i386/hvf: Use CPUState typedef
-> X-Mailer: git-send-email 2.41.0
-> 
-> QEMU coding style recommend using structure typedefs:
-> https://www.qemu.org/docs/master/devel/style.html#typedefs
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> ---
->  target/i386/hvf/x86.h       | 26 +++++++++++++-------------
->  target/i386/hvf/x86_descr.h | 14 +++++++-------
->  target/i386/hvf/x86_emu.h   |  4 ++--
->  target/i386/hvf/x86_mmu.h   |  6 +++---
->  target/i386/hvf/x86.c       | 26 +++++++++++++-------------
->  target/i386/hvf/x86_descr.c |  8 ++++----
->  target/i386/hvf/x86_mmu.c   | 14 +++++++-------
->  7 files changed, 49 insertions(+), 49 deletions(-)
+This series extracts fixes and refactorings that can be applied
+independently from "[PATCH v9 00/23] plugins: Allow to read registers".
 
-Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
+The patch "target/riscv: Move MISA limits to class" was replaced with
+patch "target/riscv: Move misa_mxl_max to class" since I found instances
+may have different misa_ext_mask.
 
-> 
-> diff --git a/target/i386/hvf/x86.h b/target/i386/hvf/x86.h
-> index 947b98da41..3570f29aa9 100644
-> --- a/target/i386/hvf/x86.h
-> +++ b/target/i386/hvf/x86.h
-> @@ -248,30 +248,30 @@ typedef struct x68_segment_selector {
->  #define BH(cpu)        RH(cpu, R_EBX)
->  
->  /* deal with GDT/LDT descriptors in memory */
-> -bool x86_read_segment_descriptor(struct CPUState *cpu,
-> +bool x86_read_segment_descriptor(CPUState *cpu,
->                                   struct x86_segment_descriptor *desc,
->                                   x68_segment_selector sel);
-> -bool x86_write_segment_descriptor(struct CPUState *cpu,
-> +bool x86_write_segment_descriptor(CPUState *cpu,
->                                    struct x86_segment_descriptor *desc,
->                                    x68_segment_selector sel);
->  
-> -bool x86_read_call_gate(struct CPUState *cpu, struct x86_call_gate *idt_desc,
-> +bool x86_read_call_gate(CPUState *cpu, struct x86_call_gate *idt_desc,
->                          int gate);
->  
->  /* helpers */
-> -bool x86_is_protected(struct CPUState *cpu);
-> -bool x86_is_real(struct CPUState *cpu);
-> -bool x86_is_v8086(struct CPUState *cpu);
-> -bool x86_is_long_mode(struct CPUState *cpu);
-> -bool x86_is_long64_mode(struct CPUState *cpu);
-> -bool x86_is_paging_mode(struct CPUState *cpu);
-> -bool x86_is_pae_enabled(struct CPUState *cpu);
-> +bool x86_is_protected(CPUState *cpu);
-> +bool x86_is_real(CPUState *cpu);
-> +bool x86_is_v8086(CPUState *cpu);
-> +bool x86_is_long_mode(CPUState *cpu);
-> +bool x86_is_long64_mode(CPUState *cpu);
-> +bool x86_is_paging_mode(CPUState *cpu);
-> +bool x86_is_pae_enabled(CPUState *cpu);
->  
->  enum X86Seg;
-> -target_ulong linear_addr(struct CPUState *cpu, target_ulong addr, enum X86Seg seg);
-> -target_ulong linear_addr_size(struct CPUState *cpu, target_ulong addr, int size,
-> +target_ulong linear_addr(CPUState *cpu, target_ulong addr, enum X86Seg seg);
-> +target_ulong linear_addr_size(CPUState *cpu, target_ulong addr, int size,
->                                enum X86Seg seg);
-> -target_ulong linear_rip(struct CPUState *cpu, target_ulong rip);
-> +target_ulong linear_rip(CPUState *cpu, target_ulong rip);
->  
->  static inline uint64_t rdtscp(void)
->  {
-> diff --git a/target/i386/hvf/x86_descr.h b/target/i386/hvf/x86_descr.h
-> index c356932fa4..9f06014b56 100644
-> --- a/target/i386/hvf/x86_descr.h
-> +++ b/target/i386/hvf/x86_descr.h
-> @@ -29,29 +29,29 @@ typedef struct vmx_segment {
->  } vmx_segment;
->  
->  /* deal with vmstate descriptors */
-> -void vmx_read_segment_descriptor(struct CPUState *cpu,
-> +void vmx_read_segment_descriptor(CPUState *cpu,
->                                   struct vmx_segment *desc, enum X86Seg seg);
->  void vmx_write_segment_descriptor(CPUState *cpu, struct vmx_segment *desc,
->                                    enum X86Seg seg);
->  
-> -x68_segment_selector vmx_read_segment_selector(struct CPUState *cpu,
-> +x68_segment_selector vmx_read_segment_selector(CPUState *cpu,
->                                                 enum X86Seg seg);
-> -void vmx_write_segment_selector(struct CPUState *cpu,
-> +void vmx_write_segment_selector(CPUState *cpu,
->                                  x68_segment_selector selector,
->                                  enum X86Seg seg);
->  
-> -uint64_t vmx_read_segment_base(struct CPUState *cpu, enum X86Seg seg);
-> -void vmx_write_segment_base(struct CPUState *cpu, enum X86Seg seg,
-> +uint64_t vmx_read_segment_base(CPUState *cpu, enum X86Seg seg);
-> +void vmx_write_segment_base(CPUState *cpu, enum X86Seg seg,
->                              uint64_t base);
->  
-> -void x86_segment_descriptor_to_vmx(struct CPUState *cpu,
-> +void x86_segment_descriptor_to_vmx(CPUState *cpu,
->                                     x68_segment_selector selector,
->                                     struct x86_segment_descriptor *desc,
->                                     struct vmx_segment *vmx_desc);
->  
->  uint32_t vmx_read_segment_limit(CPUState *cpu, enum X86Seg seg);
->  uint32_t vmx_read_segment_ar(CPUState *cpu, enum X86Seg seg);
-> -void vmx_segment_to_x86_descriptor(struct CPUState *cpu,
-> +void vmx_segment_to_x86_descriptor(CPUState *cpu,
->                                     struct vmx_segment *vmx_desc,
->                                     struct x86_segment_descriptor *desc);
->  
-> diff --git a/target/i386/hvf/x86_emu.h b/target/i386/hvf/x86_emu.h
-> index 4b846ba80e..8bd97608c4 100644
-> --- a/target/i386/hvf/x86_emu.h
-> +++ b/target/i386/hvf/x86_emu.h
-> @@ -26,8 +26,8 @@
->  void init_emu(void);
->  bool exec_instruction(CPUX86State *env, struct x86_decode *ins);
->  
-> -void load_regs(struct CPUState *cpu);
-> -void store_regs(struct CPUState *cpu);
-> +void load_regs(CPUState *cpu);
-> +void store_regs(CPUState *cpu);
->  
->  void simulate_rdmsr(CPUX86State *env);
->  void simulate_wrmsr(CPUX86State *env);
-> diff --git a/target/i386/hvf/x86_mmu.h b/target/i386/hvf/x86_mmu.h
-> index 9ae8a548de..9447ae072c 100644
-> --- a/target/i386/hvf/x86_mmu.h
-> +++ b/target/i386/hvf/x86_mmu.h
-> @@ -36,9 +36,9 @@
->  #define MMU_PAGE_US             (1 << 2)
->  #define MMU_PAGE_NX             (1 << 3)
->  
-> -bool mmu_gva_to_gpa(struct CPUState *cpu, target_ulong gva, uint64_t *gpa);
-> +bool mmu_gva_to_gpa(CPUState *cpu, target_ulong gva, uint64_t *gpa);
->  
-> -void vmx_write_mem(struct CPUState *cpu, target_ulong gva, void *data, int bytes);
-> -void vmx_read_mem(struct CPUState *cpu, void *data, target_ulong gva, int bytes);
-> +void vmx_write_mem(CPUState *cpu, target_ulong gva, void *data, int bytes);
-> +void vmx_read_mem(CPUState *cpu, void *data, target_ulong gva, int bytes);
->  
->  #endif /* X86_MMU_H */
-> diff --git a/target/i386/hvf/x86.c b/target/i386/hvf/x86.c
-> index 8ceea6398e..80e36136d0 100644
-> --- a/target/i386/hvf/x86.c
-> +++ b/target/i386/hvf/x86.c
-> @@ -46,7 +46,7 @@
->     return ar;
->  }*/
->  
-> -bool x86_read_segment_descriptor(struct CPUState *cpu,
-> +bool x86_read_segment_descriptor(CPUState *cpu,
->                                   struct x86_segment_descriptor *desc,
->                                   x68_segment_selector sel)
->  {
-> @@ -76,7 +76,7 @@ bool x86_read_segment_descriptor(struct CPUState *cpu,
->      return true;
->  }
->  
-> -bool x86_write_segment_descriptor(struct CPUState *cpu,
-> +bool x86_write_segment_descriptor(CPUState *cpu,
->                                    struct x86_segment_descriptor *desc,
->                                    x68_segment_selector sel)
->  {
-> @@ -99,7 +99,7 @@ bool x86_write_segment_descriptor(struct CPUState *cpu,
->      return true;
->  }
->  
-> -bool x86_read_call_gate(struct CPUState *cpu, struct x86_call_gate *idt_desc,
-> +bool x86_read_call_gate(CPUState *cpu, struct x86_call_gate *idt_desc,
->                          int gate)
->  {
->      target_ulong base  = rvmcs(cpu->accel->fd, VMCS_GUEST_IDTR_BASE);
-> @@ -115,30 +115,30 @@ bool x86_read_call_gate(struct CPUState *cpu, struct x86_call_gate *idt_desc,
->      return true;
->  }
->  
-> -bool x86_is_protected(struct CPUState *cpu)
-> +bool x86_is_protected(CPUState *cpu)
->  {
->      uint64_t cr0 = rvmcs(cpu->accel->fd, VMCS_GUEST_CR0);
->      return cr0 & CR0_PE_MASK;
->  }
->  
-> -bool x86_is_real(struct CPUState *cpu)
-> +bool x86_is_real(CPUState *cpu)
->  {
->      return !x86_is_protected(cpu);
->  }
->  
-> -bool x86_is_v8086(struct CPUState *cpu)
-> +bool x86_is_v8086(CPUState *cpu)
->  {
->      X86CPU *x86_cpu = X86_CPU(cpu);
->      CPUX86State *env = &x86_cpu->env;
->      return x86_is_protected(cpu) && (env->eflags & VM_MASK);
->  }
->  
-> -bool x86_is_long_mode(struct CPUState *cpu)
-> +bool x86_is_long_mode(CPUState *cpu)
->  {
->      return rvmcs(cpu->accel->fd, VMCS_GUEST_IA32_EFER) & MSR_EFER_LMA;
->  }
->  
-> -bool x86_is_long64_mode(struct CPUState *cpu)
-> +bool x86_is_long64_mode(CPUState *cpu)
->  {
->      struct vmx_segment desc;
->      vmx_read_segment_descriptor(cpu, &desc, R_CS);
-> @@ -146,24 +146,24 @@ bool x86_is_long64_mode(struct CPUState *cpu)
->      return x86_is_long_mode(cpu) && ((desc.ar >> 13) & 1);
->  }
->  
-> -bool x86_is_paging_mode(struct CPUState *cpu)
-> +bool x86_is_paging_mode(CPUState *cpu)
->  {
->      uint64_t cr0 = rvmcs(cpu->accel->fd, VMCS_GUEST_CR0);
->      return cr0 & CR0_PG_MASK;
->  }
->  
-> -bool x86_is_pae_enabled(struct CPUState *cpu)
-> +bool x86_is_pae_enabled(CPUState *cpu)
->  {
->      uint64_t cr4 = rvmcs(cpu->accel->fd, VMCS_GUEST_CR4);
->      return cr4 & CR4_PAE_MASK;
->  }
->  
-> -target_ulong linear_addr(struct CPUState *cpu, target_ulong addr, X86Seg seg)
-> +target_ulong linear_addr(CPUState *cpu, target_ulong addr, X86Seg seg)
->  {
->      return vmx_read_segment_base(cpu, seg) + addr;
->  }
->  
-> -target_ulong linear_addr_size(struct CPUState *cpu, target_ulong addr, int size,
-> +target_ulong linear_addr_size(CPUState *cpu, target_ulong addr, int size,
->                                X86Seg seg)
->  {
->      switch (size) {
-> @@ -179,7 +179,7 @@ target_ulong linear_addr_size(struct CPUState *cpu, target_ulong addr, int size,
->      return linear_addr(cpu, addr, seg);
->  }
->  
-> -target_ulong linear_rip(struct CPUState *cpu, target_ulong rip)
-> +target_ulong linear_rip(CPUState *cpu, target_ulong rip)
->  {
->      return linear_addr(cpu, rip, R_CS);
->  }
-> diff --git a/target/i386/hvf/x86_descr.c b/target/i386/hvf/x86_descr.c
-> index c2d2e9ee84..5a9e8d307c 100644
-> --- a/target/i386/hvf/x86_descr.c
-> +++ b/target/i386/hvf/x86_descr.c
-> @@ -67,12 +67,12 @@ x68_segment_selector vmx_read_segment_selector(CPUState *cpu, X86Seg seg)
->      return sel;
->  }
->  
-> -void vmx_write_segment_selector(struct CPUState *cpu, x68_segment_selector selector, X86Seg seg)
-> +void vmx_write_segment_selector(CPUState *cpu, x68_segment_selector selector, X86Seg seg)
->  {
->      wvmcs(cpu->accel->fd, vmx_segment_fields[seg].selector, selector.sel);
->  }
->  
-> -void vmx_read_segment_descriptor(struct CPUState *cpu, struct vmx_segment *desc, X86Seg seg)
-> +void vmx_read_segment_descriptor(CPUState *cpu, struct vmx_segment *desc, X86Seg seg)
->  {
->      desc->sel = rvmcs(cpu->accel->fd, vmx_segment_fields[seg].selector);
->      desc->base = rvmcs(cpu->accel->fd, vmx_segment_fields[seg].base);
-> @@ -90,7 +90,7 @@ void vmx_write_segment_descriptor(CPUState *cpu, struct vmx_segment *desc, X86Se
->      wvmcs(cpu->accel->fd, sf->ar_bytes, desc->ar);
->  }
->  
-> -void x86_segment_descriptor_to_vmx(struct CPUState *cpu, x68_segment_selector selector, struct x86_segment_descriptor *desc, struct vmx_segment *vmx_desc)
-> +void x86_segment_descriptor_to_vmx(CPUState *cpu, x68_segment_selector selector, struct x86_segment_descriptor *desc, struct vmx_segment *vmx_desc)
->  {
->      vmx_desc->sel = selector.sel;
->      vmx_desc->base = x86_segment_base(desc);
-> @@ -107,7 +107,7 @@ void x86_segment_descriptor_to_vmx(struct CPUState *cpu, x68_segment_selector se
->                      desc->type;
->  }
->  
-> -void vmx_segment_to_x86_descriptor(struct CPUState *cpu, struct vmx_segment *vmx_desc, struct x86_segment_descriptor *desc)
-> +void vmx_segment_to_x86_descriptor(CPUState *cpu, struct vmx_segment *vmx_desc, struct x86_segment_descriptor *desc)
->  {
->      x86_set_segment_limit(desc, vmx_desc->limit);
->      x86_set_segment_base(desc, vmx_desc->base);
-> diff --git a/target/i386/hvf/x86_mmu.c b/target/i386/hvf/x86_mmu.c
-> index 8cd08622a1..649074a7d2 100644
-> --- a/target/i386/hvf/x86_mmu.c
-> +++ b/target/i386/hvf/x86_mmu.c
-> @@ -49,7 +49,7 @@ struct gpt_translation {
->      bool exec_access;
->  };
->  
-> -static int gpt_top_level(struct CPUState *cpu, bool pae)
-> +static int gpt_top_level(CPUState *cpu, bool pae)
->  {
->      if (!pae) {
->          return 2;
-> @@ -73,7 +73,7 @@ static inline int pte_size(bool pae)
->  }
->  
->  
-> -static bool get_pt_entry(struct CPUState *cpu, struct gpt_translation *pt,
-> +static bool get_pt_entry(CPUState *cpu, struct gpt_translation *pt,
->                           int level, bool pae)
->  {
->      int index;
-> @@ -95,7 +95,7 @@ static bool get_pt_entry(struct CPUState *cpu, struct gpt_translation *pt,
->  }
->  
->  /* test page table entry */
-> -static bool test_pt_entry(struct CPUState *cpu, struct gpt_translation *pt,
-> +static bool test_pt_entry(CPUState *cpu, struct gpt_translation *pt,
->                            int level, bool *is_large, bool pae)
->  {
->      uint64_t pte = pt->pte[level];
-> @@ -166,7 +166,7 @@ static inline uint64_t large_page_gpa(struct gpt_translation *pt, bool pae)
->  
->  
->  
-> -static bool walk_gpt(struct CPUState *cpu, target_ulong addr, int err_code,
-> +static bool walk_gpt(CPUState *cpu, target_ulong addr, int err_code,
->                       struct gpt_translation *pt, bool pae)
->  {
->      int top_level, level;
-> @@ -205,7 +205,7 @@ static bool walk_gpt(struct CPUState *cpu, target_ulong addr, int err_code,
->  }
->  
->  
-> -bool mmu_gva_to_gpa(struct CPUState *cpu, target_ulong gva, uint64_t *gpa)
-> +bool mmu_gva_to_gpa(CPUState *cpu, target_ulong gva, uint64_t *gpa)
->  {
->      bool res;
->      struct gpt_translation pt;
-> @@ -225,7 +225,7 @@ bool mmu_gva_to_gpa(struct CPUState *cpu, target_ulong gva, uint64_t *gpa)
->      return false;
->  }
->  
-> -void vmx_write_mem(struct CPUState *cpu, target_ulong gva, void *data, int bytes)
-> +void vmx_write_mem(CPUState *cpu, target_ulong gva, void *data, int bytes)
->  {
->      uint64_t gpa;
->  
-> @@ -246,7 +246,7 @@ void vmx_write_mem(struct CPUState *cpu, target_ulong gva, void *data, int bytes
->      }
->  }
->  
-> -void vmx_read_mem(struct CPUState *cpu, void *data, target_ulong gva, int bytes)
-> +void vmx_read_mem(CPUState *cpu, void *data, target_ulong gva, int bytes)
->  {
->      uint64_t gpa;
->  
-> -- 
-> 2.41.0
-> 
-> 
+V6 -> V7:
+  Rebased.
+
+V5 -> V6:
+  Added patch "default-configs: Add TARGET_XML_FILES definition".
+  Rebased.
+
+V4 -> V5:
+  Added patch "hw/riscv: Use misa_mxl instead of misa_mxl_max".
+
+V3 -> V4:
+  Added patch "gdbstub: Check if gdb_regs is NULL".
+
+V2 -> V3:
+  Restored patch sets from the previous version.
+  Rebased to commit 800485762e6564e04e2ab315132d477069562d91.
+
+V1 -> V2:
+  Added patch "target/riscv: Do not allow MXL_RV32 for TARGET_RISCV64".
+  Added patch "target/riscv: Initialize gdb_core_xml_file only once".
+  Dropped patch "target/riscv: Remove misa_mxl validation".
+  Dropped patch "target/riscv: Move misa_mxl_max to class".
+  Dropped patch "target/riscv: Validate misa_mxl_max only once".
+
+Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+---
+Changes in v10:
+- Dropped patch "hw/riscv: Use misa_mxl instead of misa_mxl_max" due to
+  invalid assumption that the relevant code is only used for kernel
+  loading.
+- Link to v9: https://lore.kernel.org/r/20240115-riscv-v9-0-ff171e1aedc8@daynix.com
+
+Changes in v9:
+- Rebased to commit 977542ded7e6b28d2bc077bcda24568c716e393c.
+- Link to v8: https://lore.kernel.org/r/20231218-riscv-v8-0-c9bf2b1582d7@daynix.com
+
+Changes in v8:
+- Added a more detailed explanation for patch "hw/riscv: Use misa_mxl
+  instead of misa_mxl_max". (Alistair Francis)
+- Link to v7: https://lore.kernel.org/r/20231213-riscv-v7-0-a760156a337f@daynix.com
+
+---
+Akihiko Odaki (3):
+      target/riscv: Remove misa_mxl validation
+      target/riscv: Move misa_mxl_max to class
+      target/riscv: Validate misa_mxl_max only once
+
+ target/riscv/cpu.h         |   4 +-
+ hw/riscv/boot.c            |   3 +-
+ target/riscv/cpu.c         | 183 ++++++++++++++++++++++++++-------------------
+ target/riscv/gdbstub.c     |  12 ++-
+ target/riscv/kvm/kvm-cpu.c |  10 +--
+ target/riscv/machine.c     |   7 +-
+ target/riscv/tcg/tcg-cpu.c |  44 ++---------
+ target/riscv/translate.c   |   3 +-
+ 8 files changed, 135 insertions(+), 131 deletions(-)
+---
+base-commit: 977542ded7e6b28d2bc077bcda24568c716e393c
+change-id: 20231213-riscv-fcc9640986cf
+
+Best regards,
+-- 
+Akihiko Odaki <akihiko.odaki@daynix.com>
+
 
