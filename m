@@ -4,65 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C989BC47258
-	for <qemu-riscv@archiver.kernel.org>; Sun, 28 Jan 2024 10:36:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B666C47258
+	for <qemu-riscv@archiver.kernel.org>; Sun, 28 Jan 2024 16:16:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rU2VT-0004FI-HS; Sun, 28 Jan 2024 05:35:19 -0500
+	id 1rU7ph-0000TU-Ub; Sun, 28 Jan 2024 11:16:33 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kbastian@mail.uni-paderborn.de>)
- id 1rU2VO-0004Dy-Rh; Sun, 28 Jan 2024 05:35:14 -0500
-Received: from zuban.uni-paderborn.de ([2001:638:502:c003::17])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kbastian@mail.uni-paderborn.de>)
- id 1rU2VA-0003da-Cb; Sun, 28 Jan 2024 05:35:14 -0500
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=mail.uni-paderborn.de; s=20170601; h=In-Reply-To:Content-Transfer-Encoding:
- Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:
- Sender:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
- List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vvIF26RBDLw+ldxcag6nMVV5Dto0lCR4pixmzH4okR8=; b=mtzig3qUEc29xOV48tBTafSouS
- kYOTxo1qfO1eb7PHNe7+5869tAjNjANki5CK7hOSu7tfylhpsS2P8/rOpbfXQcILECgiWXepxp8Q2
- tq6NqTcqAisc0R98LRRP3A+RjNTk4zdt50hyxYyw8X2VhXC3NE0/Hoe+69FX9vTAmFoo=;
-Date: Sun, 28 Jan 2024 11:34:48 +0100
-From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, 
- Thomas Huth <thuth@redhat.com>, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org, 
- Eduardo Habkost <eduardo@habkost.net>, kvm@vger.kernel.org, qemu-ppc@nongnu.org,
- Richard Henderson <richard.henderson@linaro.org>,
- Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>, 
- Paolo Bonzini <pbonzini@redhat.com>
-Subject: Re: [PATCH v2 21/23] target/tricore: Prefer fast cpu_env() over
- slower CPU QOM cast macro
-Message-ID: <mc67nwaoaqancyz63zt36awnsyzslgl24w3hnctaxzuycezixt@yvxaywvzntvb>
-References: <20240126220407.95022-1-philmd@linaro.org>
- <20240126220407.95022-22-philmd@linaro.org>
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rU7pe-0000Sl-Af
+ for qemu-riscv@nongnu.org; Sun, 28 Jan 2024 11:16:31 -0500
+Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rU7pc-0000wr-7i
+ for qemu-riscv@nongnu.org; Sun, 28 Jan 2024 11:16:29 -0500
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-33ae5e7d787so920072f8f.1
+ for <qemu-riscv@nongnu.org>; Sun, 28 Jan 2024 08:16:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1706458583; x=1707063383; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=nNQ1mZG/MGqiJb02NhZJ31w2Qw5Q82nN33CYLr2cWWo=;
+ b=njBaFUI93VnNXzvsR6it6qggFRGKnH6UuwJKumCOaFTinmVetiQfwSUX8ki9fB/Hvz
+ /xka1q6B4cahMXLzTC4S18RTWRLOi0bVmVGe4xpy9sc4CDIVbf234Sh767rEM682Lx74
+ qhalorx0q1ol59ZHSLVO5K+C4+4mup5FysSZ0rbliuvBShpSHGgl9QNkESAPqqOmyh8X
+ Klr0u+4TGFWn5R6axUT9LjHCEGBIarcFNa2d1BssFBkUKzACfoweyuhjd88NwKLwyPpV
+ MTHffvsZlYD7m60elcebWlAAQky905Z8HUlWFGoyAOIIFhVg8Jt+AV6+TspuHfAyN3rO
+ bUnA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706458583; x=1707063383;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=nNQ1mZG/MGqiJb02NhZJ31w2Qw5Q82nN33CYLr2cWWo=;
+ b=qM+CbLsP5bqMAp7TNr5LvJLOVfmz7YYGlt2crDpDyJjDqQVZlR6b76oCLXwAN3xjhn
+ OqP80qGDxZTm0gCP+9fh+6feaa4lJQKYBDejYBl24neyOlXfluZI04wQbk38G7Vx8e5R
+ Y36XY2HgMseq/w1kmxp98ipIQScz2czvYORGoBhNMjOpzyegdhs7uJs6ZWfH2IHK2xiD
+ vuG8vj6NV3U0mS1W+pjrdkmUMkkajyDCuvsN0jiaARy8P1PnyNJmbMAPgJUjd+oBrLP5
+ AJC8+lq/jPjGZwH4toP9QUq98QfADKwq8Wq+reSdky/D3+35Nem7B1okUTIdAaVHfJgt
+ 0vhw==
+X-Gm-Message-State: AOJu0YwymS/j3kLV4XPqds8L8HGkUUl38TsWZOz/LVP3tlrryLhJYdFo
+ ITohnRupGobW+Luiw/Yjk61z6cMqSTf07mb7w+N4ge/q8S7OAujTpG3RhoVN9FI=
+X-Google-Smtp-Source: AGHT+IEZiXHH6VkkxIr4855VrA6mlwRi5ZK5DAlf4ThQoy+yRYfRVJ2hAzogGQOYO0OnwUHdVFeDqg==
+X-Received: by 2002:a5d:604c:0:b0:33a:e5e5:163c with SMTP id
+ j12-20020a5d604c000000b0033ae5e5163cmr1763182wrt.71.1706458583105; 
+ Sun, 28 Jan 2024 08:16:23 -0800 (PST)
+Received: from [192.168.69.100] (sev93-h02-176-184-17-196.dsl.sta.abo.bbox.fr.
+ [176.184.17.196]) by smtp.gmail.com with ESMTPSA id
+ ch19-20020a5d5d13000000b00337b47ae539sm5942414wrb.42.2024.01.28.08.16.20
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 28 Jan 2024 08:16:22 -0800 (PST)
+Message-ID: <d7c11962-07c0-4c26-83e1-8b0a3d1e43d0@linaro.org>
+Date: Sun, 28 Jan 2024 17:16:19 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 10/23] target/i386: Prefer fast cpu_env() over slower
+ CPU QOM cast macro
+To: Zhao Liu <zhao1.liu@intel.com>
+Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, Thomas Huth
+ <thuth@redhat.com>, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
+ Eduardo Habkost <eduardo@habkost.net>, kvm@vger.kernel.org,
+ qemu-ppc@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
+ Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
+ Paolo Bonzini <pbonzini@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
+ Cameron Esfahani <dirty@apple.com>, Roman Bolshakov <rbolshakov@ddn.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>, David Woodhouse
+ <dwmw2@infradead.org>, xen-devel@lists.xenproject.org
+References: <20240126220407.95022-1-philmd@linaro.org>
+ <20240126220407.95022-11-philmd@linaro.org> <ZbT1R7impEw4whqP@intel.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <ZbT1R7impEw4whqP@intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20240126220407.95022-22-philmd@linaro.org>
-X-IMT-Source: Extern
-X-IMT-rspamd-score: -25
-X-IMT-Spam-Score: 0.0 ()
-X-Sophos-SenderHistory: ip=84.184.59.80, fs=1716459, da=194047155, mc=2, sc=0,
- hc=2, sp=0, fso=1716459, re=0, sd=0, hd=0
-X-PMX-Version: 6.4.9.2830568, Antispam-Engine: 2.7.2.2107409,
- Antispam-Data: 2024.1.27.235115, AntiVirus-Engine: 6.0.2,
- AntiVirus-Data: 2024.1.26.602001
-X-IMT-Authenticated-Sender: kbastian@UNI-PADERBORN.DE
-Received-SPF: pass client-ip=2001:638:502:c003::17;
- envelope-from=kbastian@mail.uni-paderborn.de; helo=zuban.uni-paderborn.de
-X-Spam_score_int: -42
-X-Spam_score: -4.3
-X-Spam_bar: ----
-X-Spam_report: (-4.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -79,20 +106,99 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Jan 26, 2024 at 11:04:03PM +0100, Philippe Mathieu-DaudÈ wrote:
-> Mechanical patch produced running the command documented
-> in scripts/coccinelle/cpu_env.cocci_template header.
+On 27/1/24 13:21, Zhao Liu wrote:
+> Hi Philippe,
 > 
-> Signed-off-by: Philippe Mathieu-DaudÈ <philmd@linaro.org>
-> ---
->  target/tricore/cpu.c       | 20 ++++----------------
->  target/tricore/gdbstub.c   |  6 ++----
->  target/tricore/helper.c    |  3 +--
->  target/tricore/translate.c |  3 +--
->  4 files changed, 8 insertions(+), 24 deletions(-)
+> On Fri, Jan 26, 2024 at 11:03:52PM +0100, Philippe Mathieu-Daud√© wrote:
+>> Date: Fri, 26 Jan 2024 23:03:52 +0100
+>> From: Philippe Mathieu-Daud√© <philmd@linaro.org>
+>> Subject: [PATCH v2 10/23] target/i386: Prefer fast cpu_env() over slower
+>>   CPU QOM cast macro
+>> X-Mailer: git-send-email 2.41.0
+>>
+>> Mechanical patch produced running the command documented
+>> in scripts/coccinelle/cpu_env.cocci_template header.
+>>
+>> Signed-off-by: Philippe Mathieu-Daud√© <philmd@linaro.org>
+>> ---
+>>   target/i386/hvf/vmx.h               | 13 +++-------
+>>   hw/i386/vmmouse.c                   |  6 ++---
+>>   hw/i386/xen/xen-hvm.c               |  3 +--
+>>   target/i386/arch_memory_mapping.c   |  3 +--
+>>   target/i386/cpu-dump.c              |  3 +--
+>>   target/i386/cpu.c                   | 37 +++++++++------------------
+>>   target/i386/helper.c                | 39 ++++++++---------------------
+>>   target/i386/hvf/hvf.c               |  8 ++----
+>>   target/i386/hvf/x86.c               |  4 +--
+>>   target/i386/hvf/x86_emu.c           |  6 ++---
+>>   target/i386/hvf/x86_task.c          | 10 +++-----
+>>   target/i386/hvf/x86hvf.c            |  6 ++---
+>>   target/i386/kvm/kvm.c               |  6 ++---
+>>   target/i386/kvm/xen-emu.c           | 32 ++++++++---------------
+>>   target/i386/tcg/sysemu/bpt_helper.c |  3 +--
+>>   target/i386/tcg/tcg-cpu.c           | 14 +++--------
+>>   target/i386/tcg/user/excp_helper.c  |  3 +--
+>>   target/i386/tcg/user/seg_helper.c   |  3 +--
+>>   18 files changed, 59 insertions(+), 140 deletions(-)
+>>
+> 
+> [snip]
+> 
+>> diff --git a/target/i386/hvf/x86hvf.c b/target/i386/hvf/x86hvf.c
+>> index 3b1ef5f49a..1e7fd587fe 100644
+>> --- a/target/i386/hvf/x86hvf.c
+>> +++ b/target/i386/hvf/x86hvf.c
+>> @@ -238,8 +238,7 @@ void hvf_get_msrs(CPUState *cs)
+>>   
+>>   int hvf_put_registers(CPUState *cs)
+>>   {
+>> -    X86CPU *x86cpu = X86_CPU(cs);
+>> -    CPUX86State *env = &x86cpu->env;
+>> +    CPUX86State *env = cpu_env(cs);
+>>   
+>>       wreg(cs->accel->fd, HV_X86_RAX, env->regs[R_EAX]);
+>>       wreg(cs->accel->fd, HV_X86_RBX, env->regs[R_EBX]);
+>> @@ -282,8 +281,7 @@ int hvf_put_registers(CPUState *cs)
+>>   
+>>   int hvf_get_registers(CPUState *cs)
+>>   {
+>> -    X86CPU *x86cpu = X86_CPU(cs);
+>> -    CPUX86State *env = &x86cpu->env;
+>> +    CPUX86State *env = cpu_env(cs);
+>>   
+>>       env->regs[R_EAX] = rreg(cs->accel->fd, HV_X86_RAX);
+>>       env->regs[R_EBX] = rreg(cs->accel->fd, HV_X86_RBX);
+> 
+> In this file, there's another corner case:
+> 
+> diff --git a/target/i386/hvf/x86hvf.c b/target/i386/hvf/x86hvf.c
+> index 3b1ef5f49a8a..9a145aa5aa4f 100644
+> --- a/target/i386/hvf/x86hvf.c
+> +++ b/target/i386/hvf/x86hvf.c
+> @@ -342,8 +342,7 @@ void vmx_clear_int_window_exiting(CPUState *cs)
+> 
+>   bool hvf_inject_interrupts(CPUState *cs)
+>   {
+> -    X86CPU *x86cpu = X86_CPU(cs);
+> -    CPUX86State *env = &x86cpu->env;
+> +    CPUX86State *env = cpu_env(cs);
+> 
+>       uint8_t vector;
+>       uint64_t intr_type;
+> @@ -408,7 +407,7 @@ bool hvf_inject_interrupts(CPUState *cs)
+>       if (!(env->hflags & HF_INHIBIT_IRQ_MASK) &&
+>           (cs->interrupt_request & CPU_INTERRUPT_HARD) &&
+>           (env->eflags & IF_MASK) && !(info & VMCS_INTR_VALID)) {
+> -        int line = cpu_get_pic_interrupt(&x86cpu->env);
+> +        int line = cpu_get_pic_interrupt(env);
+>           cs->interrupt_request &= ~CPU_INTERRUPT_HARD;
+>           if (line >= 0) {
+>               wvmcs(cs->accel->fd, VMCS_ENTRY_INTR_INFO, line |
+> 
+> 
+> For this special case, I'm not sure if the script can cover it as well,
+> otherwise maybe it's OK to be cleaned up manually ;-).
 
-Reviewed-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-
-Cheers,
-Bastian
+BTW I forgot to mention I had to skip target/i386/tcg/translate.c
+(7100 LoC) because it is too complex for Coccinelle.
 
