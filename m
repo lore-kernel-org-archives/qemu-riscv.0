@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0F96C47DB3
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 16:56:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A07E0C47DB3
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 16:56:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rUUoU-0006mS-RG; Mon, 29 Jan 2024 11:48:50 -0500
+	id 1rUUoT-0006Yr-81; Mon, 29 Jan 2024 11:48:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUnc-0002X6-2F
- for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:47:56 -0500
-Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUnV-0001qQ-Qb
+ for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:47:50 -0500
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUnZ-0004Rj-DX
- for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:47:55 -0500
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-40ef6bbb61fso10164385e9.1
- for <qemu-riscv@nongnu.org>; Mon, 29 Jan 2024 08:47:52 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUnT-0004Pk-E9
+ for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:47:49 -0500
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-40ee9e21f89so28286305e9.0
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jan 2024 08:47:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706546872; x=1707151672; darn=nongnu.org;
+ d=linaro.org; s=google; t=1706546866; x=1707151666; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EK1f6yC+2+7tJRqq8zpOFY9o0Gec7K9NU3Dea7XiVcs=;
- b=eSCr7yyM3cbUuOeBNgO6lZykNe2w4vM6i6cNBlUpI+SrlWrypuMV/tK1+f4uQC73ll
- nBUCCH+owChmacrP/0a5C75DjeD+Veya2DBa8toEXcrGt2wVa3EmFVsJLpwyLwy7roBH
- QPw3gNA3bHbomUshAYyzjPCHf5nRn0AsoeFJ1rTH3zfkOlpdJAGFc1NYn4YEVCBZIZpr
- IPoE9zTg4M6F4ykpSJSLOTVF7FOGDKwRMm0HHgwgSkOkbi8BBMwgrlR35W82VcsCms0x
- B+Qlsr7dWKree92lGFGAAUtQgcw7n+boUsMd23XnHtL8rsx1doix6881eEL5utbC/0ml
- A5BA==
+ bh=s/zDxvb98/B1ERutMsrHfGwo048VXZrRTuyvepC4E0w=;
+ b=ALCwUdVx5ABnmsdfjS07bA4t9KjAftsNHd+/1PkoZP/0p/Vn8XBGIiQyRcJ3RxewVu
+ 3f4FnTtWym1BAWbZ/scM7hvX3UgLyUzATeHDG2jqLYBMRkMt+epcyVB9VCTn2/UI+oaH
+ TWs67x/w2OoPO5GesmPMLX1cqixrVikcwPPRnKo5FenkWb8mAQBatp0oB3onFWxhYSh7
+ 35fFSjlQQQqd5mMbSVmAwRNIos1U2fKGlOO3fBtePhGDWX8QTvVDhdMZii+5190dOjE7
+ JLrtf34gdRZvlpnw9koyyaqIHo/c0skFFnWXyuRAaS0yDTMmaQeehwpXuxX5Qwjmszta
+ Eh6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706546872; x=1707151672;
+ d=1e100.net; s=20230601; t=1706546866; x=1707151666;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EK1f6yC+2+7tJRqq8zpOFY9o0Gec7K9NU3Dea7XiVcs=;
- b=CWWaUTtE4f2Lgod5GH9h0dAvuKXGagTts8Kbr0zQkXkAei6S0e6To3pSJ0R6eXv7T7
- 6rAbe4/QH7xJdzHZ9OcPjCPW0TeN0ruGtBrViTQgw5XNVr6fOqE2ppur5iG7G2aq0x25
- qQ9JVA8TUtzxwxZgNHTU9kpbPFMST+FBKEWwSJ2ndSD98IvWyCFBgXwnYXVuUQmUPiET
- DtplFoZEmdL+/pVmkBHTlzSXM6MsRSUGAihglKXrWeKKId1Pad9WHsk96txoyaaTEAzY
- UMgqJuuZpYP8+i9USjNmVUdJBgYzlFnfzijTAlA0FvjaBbxLTZZZJ/IChtEiuLMcMibP
- vJUA==
-X-Gm-Message-State: AOJu0Yx9Q2QT1rifYzJl39WbO4N2vr2omeSZxuRnE86uNXsricDPLW9j
- opRurCv10grBPDfHxKKKST1gXtOzY+rmHLvPB1N2/vtVQNM9QPBuUPrrqR2DTZc=
-X-Google-Smtp-Source: AGHT+IGp/BpyozcDAwqfGmyRJlRPq1/IHU+J5kLY+oFMWzv+eh6PdIu4rsOF1seUTLeuqx4RAfarbA==
-X-Received: by 2002:a05:600c:468f:b0:40e:cd0e:f749 with SMTP id
- p15-20020a05600c468f00b0040ecd0ef749mr5338733wmo.28.1706546871830; 
- Mon, 29 Jan 2024 08:47:51 -0800 (PST)
+ bh=s/zDxvb98/B1ERutMsrHfGwo048VXZrRTuyvepC4E0w=;
+ b=DzOZ5PZAxvYcGetgahf7el/+mC+89WTRKx31vECEdGYZLJ5EXbSIND0OfX1iZ5Vm26
+ MJTcIFufk5aMipevPbchLZ1QtAA+IsEJtJ+sPls11Uq77T4VcChpGRj1I7WrY1eYkqm5
+ jXZhAkKssksT9Ppn7D8OGBHIObWsQVDwLhHNA8/ldeRNX+CMKNwSg3N1g/T/0IC7QmUO
+ BCheb4paIUEB7IFQDizx4mh5qxMNbVHzcgYyTQmVdv3T6/pIaWN7xaznXZECKf7iNmS7
+ tF8o4eGWL1buSPvIsoPLXf4WCDe44uu6aF1Z3rzFzpFROno7lkdYYB4LhiH5Rkc9vn6q
+ E34g==
+X-Gm-Message-State: AOJu0YwxHus0Vde7kjee/3DfJSDJAOOgcJVdeKCtsKIjERL2oyoU0/TV
+ eY1vXn2RFMuwIQzLJBSpY4FgqEPe3tYK5u8n3vtx7U2Z7qmz0vUnD+ymzp1sa94=
+X-Google-Smtp-Source: AGHT+IG/a7sScXNJHjqVQX2oWAIJv3ctaAT6+AtLGp/vpNQQ2nLJyCmfZDQ0ku5Yw0WBGO0v8F7fcg==
+X-Received: by 2002:a05:600c:3547:b0:40e:f681:b7b6 with SMTP id
+ i7-20020a05600c354700b0040ef681b7b6mr2655551wmq.37.1706546865930; 
+ Mon, 29 Jan 2024 08:47:45 -0800 (PST)
 Received: from m1x-phil.lan ([176.187.219.39])
  by smtp.gmail.com with ESMTPSA id
- k7-20020a05600c1c8700b0040ef3ae26cdsm5224770wms.37.2024.01.29.08.47.50
+ ay12-20020a5d6f0c000000b0033ad47d7b86sm8556726wrb.27.2024.01.29.08.47.44
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 29 Jan 2024 08:47:51 -0800 (PST)
+ Mon, 29 Jan 2024 08:47:45 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
@@ -63,19 +63,21 @@ Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Yoshinori Sato <ysato@users.sourceforge.jp>
-Subject: [PATCH v3 25/29] target/sh4: Prefer fast cpu_env() over slower CPU
+ Thomas Huth <thuth@redhat.com>, David Hildenbrand <david@redhat.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>, Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>
+Subject: [PATCH v3 24/29] target/s390x: Prefer fast cpu_env() over slower CPU
  QOM cast macro
-Date: Mon, 29 Jan 2024 17:45:07 +0100
-Message-ID: <20240129164514.73104-26-philmd@linaro.org>
+Date: Mon, 29 Jan 2024 17:45:06 +0100
+Message-ID: <20240129164514.73104-25-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240129164514.73104-1-philmd@linaro.org>
 References: <20240129164514.73104-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::335;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x335.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,185 +103,160 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Mechanical patch produced running the command documented
 in scripts/coccinelle/cpu_env.cocci_template header.
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
 ---
- target/sh4/cpu.c       | 18 ++++++------------
- target/sh4/gdbstub.c   |  6 ++----
- target/sh4/helper.c    | 14 ++++----------
- target/sh4/translate.c |  6 ++----
- 4 files changed, 14 insertions(+), 30 deletions(-)
+ target/s390x/cpu-dump.c        |  3 +--
+ target/s390x/gdbstub.c         |  6 ++----
+ target/s390x/helper.c          |  3 +--
+ target/s390x/kvm/kvm.c         |  6 ++----
+ target/s390x/tcg/excp_helper.c | 11 +++--------
+ target/s390x/tcg/misc_helper.c |  4 +---
+ target/s390x/tcg/translate.c   |  3 +--
+ 7 files changed, 11 insertions(+), 25 deletions(-)
 
-diff --git a/target/sh4/cpu.c b/target/sh4/cpu.c
-index 1b03c7bcb1..3308a2be07 100644
---- a/target/sh4/cpu.c
-+++ b/target/sh4/cpu.c
-@@ -71,8 +71,7 @@ static void superh_restore_state_to_opc(CPUState *cs,
- static bool superh_io_recompile_replay_branch(CPUState *cs,
-                                               const TranslationBlock *tb)
+diff --git a/target/s390x/cpu-dump.c b/target/s390x/cpu-dump.c
+index ffa9e94d84..69cc9f7746 100644
+--- a/target/s390x/cpu-dump.c
++++ b/target/s390x/cpu-dump.c
+@@ -27,8 +27,7 @@
+ 
+ void s390_cpu_dump_state(CPUState *cs, FILE *f, int flags)
  {
--    SuperHCPU *cpu = SUPERH_CPU(cs);
--    CPUSH4State *env = &cpu->env;
-+    CPUSH4State *env = cpu_env(cs);
- 
-     if ((env->flags & (TB_FLAG_DELAY_SLOT | TB_FLAG_DELAY_SLOT_COND))
-         && !(cs->tcg_cflags & CF_PCREL) && env->pc != tb->pc) {
-@@ -92,9 +91,8 @@ static bool superh_cpu_has_work(CPUState *cs)
- static void superh_cpu_reset_hold(Object *obj)
- {
-     CPUState *cs = CPU(obj);
--    SuperHCPU *cpu = SUPERH_CPU(cs);
-     SuperHCPUClass *scc = SUPERH_CPU_GET_CLASS(obj);
--    CPUSH4State *env = &cpu->env;
-+    CPUSH4State *env = cpu_env(cs);
- 
-     if (scc->parent_phases.hold) {
-         scc->parent_phases.hold(obj);
-@@ -144,8 +142,7 @@ out:
- 
- static void sh7750r_cpu_initfn(Object *obj)
- {
--    SuperHCPU *cpu = SUPERH_CPU(obj);
--    CPUSH4State *env = &cpu->env;
-+    CPUSH4State *env = cpu_env(CPU(obj));
- 
-     env->id = SH_CPU_SH7750R;
-     env->features = SH_FEATURE_BCR3_AND_BCR4;
-@@ -162,8 +159,7 @@ static void sh7750r_class_init(ObjectClass *oc, void *data)
- 
- static void sh7751r_cpu_initfn(Object *obj)
- {
--    SuperHCPU *cpu = SUPERH_CPU(obj);
--    CPUSH4State *env = &cpu->env;
-+    CPUSH4State *env = cpu_env(CPU(obj));
- 
-     env->id = SH_CPU_SH7751R;
-     env->features = SH_FEATURE_BCR3_AND_BCR4;
-@@ -180,8 +176,7 @@ static void sh7751r_class_init(ObjectClass *oc, void *data)
- 
- static void sh7785_cpu_initfn(Object *obj)
- {
--    SuperHCPU *cpu = SUPERH_CPU(obj);
--    CPUSH4State *env = &cpu->env;
-+    CPUSH4State *env = cpu_env(CPU(obj));
- 
-     env->id = SH_CPU_SH7785;
-     env->features = SH_FEATURE_SH4A;
-@@ -216,8 +211,7 @@ static void superh_cpu_realizefn(DeviceState *dev, Error **errp)
- 
- static void superh_cpu_initfn(Object *obj)
- {
--    SuperHCPU *cpu = SUPERH_CPU(obj);
--    CPUSH4State *env = &cpu->env;
-+    CPUSH4State *env = cpu_env(CPU(obj));
- 
-     env->movcal_backup_tail = &(env->movcal_backup);
- }
-diff --git a/target/sh4/gdbstub.c b/target/sh4/gdbstub.c
-index d8e199fc06..75926d4e04 100644
---- a/target/sh4/gdbstub.c
-+++ b/target/sh4/gdbstub.c
-@@ -26,8 +26,7 @@
- 
- int superh_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
- {
--    SuperHCPU *cpu = SUPERH_CPU(cs);
--    CPUSH4State *env = &cpu->env;
-+    CPUSH4State *env = cpu_env(cs);
- 
-     switch (n) {
-     case 0 ... 7:
-@@ -76,8 +75,7 @@ int superh_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
- 
- int superh_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
- {
--    SuperHCPU *cpu = SUPERH_CPU(cs);
--    CPUSH4State *env = &cpu->env;
-+    CPUSH4State *env = cpu_env(cs);
- 
-     switch (n) {
-     case 0 ... 7:
-diff --git a/target/sh4/helper.c b/target/sh4/helper.c
-index 5a6f653c12..7c6f9d374a 100644
---- a/target/sh4/helper.c
-+++ b/target/sh4/helper.c
-@@ -55,8 +55,7 @@ int cpu_sh4_is_cached(CPUSH4State *env, target_ulong addr)
- 
- void superh_cpu_do_interrupt(CPUState *cs)
- {
--    SuperHCPU *cpu = SUPERH_CPU(cs);
--    CPUSH4State *env = &cpu->env;
-+    CPUSH4State *env = cpu_env(cs);
-     int do_irq = cs->interrupt_request & CPU_INTERRUPT_HARD;
-     int do_exp, irq_vector = cs->exception_index;
- 
-@@ -432,11 +431,10 @@ static int get_physical_address(CPUSH4State * env, target_ulong * physical,
- 
- hwaddr superh_cpu_get_phys_page_debug(CPUState *cs, vaddr addr)
- {
--    SuperHCPU *cpu = SUPERH_CPU(cs);
-     target_ulong physical;
-     int prot;
- 
--    if (get_physical_address(&cpu->env, &physical, &prot, addr, MMU_DATA_LOAD)
-+    if (get_physical_address(cpu_env(cs), &physical, &prot, addr, MMU_DATA_LOAD)
-             == MMU_OK) {
-         return physical;
-     }
-@@ -782,11 +780,8 @@ int cpu_sh4_is_cached(CPUSH4State * env, target_ulong addr)
- bool superh_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
- {
-     if (interrupt_request & CPU_INTERRUPT_HARD) {
--        SuperHCPU *cpu = SUPERH_CPU(cs);
--        CPUSH4State *env = &cpu->env;
--
-         /* Delay slots are indivisible, ignore interrupts */
--        if (env->flags & TB_FLAG_DELAY_SLOT_MASK) {
-+        if (cpu_env(cs)->flags & TB_FLAG_DELAY_SLOT_MASK) {
-             return false;
-         } else {
-             superh_cpu_do_interrupt(cs);
-@@ -800,8 +795,7 @@ bool superh_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-                          MMUAccessType access_type, int mmu_idx,
-                          bool probe, uintptr_t retaddr)
- {
--    SuperHCPU *cpu = SUPERH_CPU(cs);
--    CPUSH4State *env = &cpu->env;
-+    CPUSH4State *env = cpu_env(cs);
-     int ret;
- 
-     target_ulong physical;
-diff --git a/target/sh4/translate.c b/target/sh4/translate.c
-index 81f825f125..d9f222bd15 100644
---- a/target/sh4/translate.c
-+++ b/target/sh4/translate.c
-@@ -159,8 +159,7 @@ void sh4_translate_init(void)
- 
- void superh_cpu_dump_state(CPUState *cs, FILE *f, int flags)
- {
--    SuperHCPU *cpu = SUPERH_CPU(cs);
--    CPUSH4State *env = &cpu->env;
-+    CPUSH4State *env = cpu_env(cs);
+-    S390CPU *cpu = S390_CPU(cs);
+-    CPUS390XState *env = &cpu->env;
++    CPUS390XState *env = cpu_env(cs);
      int i;
  
-     qemu_fprintf(f, "pc=0x%08x sr=0x%08x pr=0x%08x fpscr=0x%08x\n",
-@@ -2186,7 +2185,6 @@ static void decode_gusa(DisasContext *ctx, CPUSH4State *env)
- static void sh4_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
- {
-     DisasContext *ctx = container_of(dcbase, DisasContext, base);
--    CPUSH4State *env = cpu_env(cs);
-     uint32_t tbflags;
-     int bound;
+     qemu_fprintf(f, "PSW=mask %016" PRIx64 " addr %016" PRIx64,
+diff --git a/target/s390x/gdbstub.c b/target/s390x/gdbstub.c
+index 6fbfd41bc8..f02fa316e5 100644
+--- a/target/s390x/gdbstub.c
++++ b/target/s390x/gdbstub.c
+@@ -30,8 +30,7 @@
  
-@@ -2196,7 +2194,7 @@ static void sh4_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
-     /* We don't know if the delayed pc came from a dynamic or static branch,
-        so assume it is a dynamic branch.  */
-     ctx->delayed_pc = -1; /* use delayed pc from env pointer */
--    ctx->features = env->features;
-+    ctx->features = cpu_env(cs)->features;
-     ctx->has_movcal = (tbflags & TB_FLAG_PENDING_MOVCA);
-     ctx->gbank = ((tbflags & (1 << SR_MD)) &&
-                   (tbflags & (1 << SR_RB))) * 0x10;
+ int s390_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+ {
+-    S390CPU *cpu = S390_CPU(cs);
+-    CPUS390XState *env = &cpu->env;
++    CPUS390XState *env = cpu_env(cs);
+ 
+     switch (n) {
+     case S390_PSWM_REGNUM:
+@@ -46,8 +45,7 @@ int s390_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+ 
+ int s390_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+ {
+-    S390CPU *cpu = S390_CPU(cs);
+-    CPUS390XState *env = &cpu->env;
++    CPUS390XState *env = cpu_env(cs);
+     target_ulong tmpl = ldtul_p(mem_buf);
+ 
+     switch (n) {
+diff --git a/target/s390x/helper.c b/target/s390x/helper.c
+index d76c06381b..00d5d403f3 100644
+--- a/target/s390x/helper.c
++++ b/target/s390x/helper.c
+@@ -139,8 +139,7 @@ void do_restart_interrupt(CPUS390XState *env)
+ void s390_cpu_recompute_watchpoints(CPUState *cs)
+ {
+     const int wp_flags = BP_CPU | BP_MEM_WRITE | BP_STOP_BEFORE_ACCESS;
+-    S390CPU *cpu = S390_CPU(cs);
+-    CPUS390XState *env = &cpu->env;
++    CPUS390XState *env = cpu_env(cs);
+ 
+     /* We are called when the watchpoints have changed. First
+        remove them all.  */
+diff --git a/target/s390x/kvm/kvm.c b/target/s390x/kvm/kvm.c
+index 888d6c1a1c..4ce809c5d4 100644
+--- a/target/s390x/kvm/kvm.c
++++ b/target/s390x/kvm/kvm.c
+@@ -474,8 +474,7 @@ static int can_sync_regs(CPUState *cs, int regs)
+ 
+ int kvm_arch_put_registers(CPUState *cs, int level)
+ {
+-    S390CPU *cpu = S390_CPU(cs);
+-    CPUS390XState *env = &cpu->env;
++    CPUS390XState *env = cpu_env(cs);
+     struct kvm_fpu fpu = {};
+     int r;
+     int i;
+@@ -601,8 +600,7 @@ int kvm_arch_put_registers(CPUState *cs, int level)
+ 
+ int kvm_arch_get_registers(CPUState *cs)
+ {
+-    S390CPU *cpu = S390_CPU(cs);
+-    CPUS390XState *env = &cpu->env;
++    CPUS390XState *env = cpu_env(cs);
+     struct kvm_fpu fpu;
+     int i, r;
+ 
+diff --git a/target/s390x/tcg/excp_helper.c b/target/s390x/tcg/excp_helper.c
+index b875bf14e5..f1c33f7967 100644
+--- a/target/s390x/tcg/excp_helper.c
++++ b/target/s390x/tcg/excp_helper.c
+@@ -90,10 +90,7 @@ void HELPER(data_exception)(CPUS390XState *env, uint32_t dxc)
+ static G_NORETURN
+ void do_unaligned_access(CPUState *cs, uintptr_t retaddr)
+ {
+-    S390CPU *cpu = S390_CPU(cs);
+-    CPUS390XState *env = &cpu->env;
+-
+-    tcg_s390_program_interrupt(env, PGM_SPECIFICATION, retaddr);
++    tcg_s390_program_interrupt(cpu_env(cs), PGM_SPECIFICATION, retaddr);
+ }
+ 
+ #if defined(CONFIG_USER_ONLY)
+@@ -146,8 +143,7 @@ bool s390_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+                        MMUAccessType access_type, int mmu_idx,
+                        bool probe, uintptr_t retaddr)
+ {
+-    S390CPU *cpu = S390_CPU(cs);
+-    CPUS390XState *env = &cpu->env;
++    CPUS390XState *env = cpu_env(cs);
+     target_ulong vaddr, raddr;
+     uint64_t asc, tec;
+     int prot, excp;
+@@ -600,8 +596,7 @@ bool s390_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+ 
+ void s390x_cpu_debug_excp_handler(CPUState *cs)
+ {
+-    S390CPU *cpu = S390_CPU(cs);
+-    CPUS390XState *env = &cpu->env;
++    CPUS390XState *env = cpu_env(cs);
+     CPUWatchpoint *wp_hit = cs->watchpoint_hit;
+ 
+     if (wp_hit && wp_hit->flags & BP_CPU) {
+diff --git a/target/s390x/tcg/misc_helper.c b/target/s390x/tcg/misc_helper.c
+index 89b5268fd4..8764846ce8 100644
+--- a/target/s390x/tcg/misc_helper.c
++++ b/target/s390x/tcg/misc_helper.c
+@@ -214,9 +214,7 @@ void HELPER(sckc)(CPUS390XState *env, uint64_t ckc)
+ 
+ void tcg_s390_tod_updated(CPUState *cs, run_on_cpu_data opaque)
+ {
+-    S390CPU *cpu = S390_CPU(cs);
+-
+-    update_ckc_timer(&cpu->env);
++    update_ckc_timer(cpu_env(cs));
+ }
+ 
+ /* Set Clock */
+diff --git a/target/s390x/tcg/translate.c b/target/s390x/tcg/translate.c
+index 8df00b7df9..9995689bc8 100644
+--- a/target/s390x/tcg/translate.c
++++ b/target/s390x/tcg/translate.c
+@@ -6558,8 +6558,7 @@ void s390x_restore_state_to_opc(CPUState *cs,
+                                 const TranslationBlock *tb,
+                                 const uint64_t *data)
+ {
+-    S390CPU *cpu = S390_CPU(cs);
+-    CPUS390XState *env = &cpu->env;
++    CPUS390XState *env = cpu_env(cs);
+     int cc_op = data[1];
+ 
+     env->psw.addr = data[0];
 -- 
 2.41.0
 
