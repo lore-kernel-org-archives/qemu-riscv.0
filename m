@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A92FEC47DB3
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 16:56:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0F96C47DB3
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 16:56:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rUUpL-00013E-Ak; Mon, 29 Jan 2024 11:49:43 -0500
+	id 1rUUoU-0006mS-RG; Mon, 29 Jan 2024 11:48:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUo1-0004DT-MJ
- for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:48:23 -0500
-Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUnc-0002X6-2F
+ for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:47:56 -0500
+Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUnz-0004e1-MN
- for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:48:21 -0500
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-33926ccbc80so1862805f8f.0
- for <qemu-riscv@nongnu.org>; Mon, 29 Jan 2024 08:48:18 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUnZ-0004Rj-DX
+ for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:47:55 -0500
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-40ef6bbb61fso10164385e9.1
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jan 2024 08:47:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706546897; x=1707151697; darn=nongnu.org;
+ d=linaro.org; s=google; t=1706546872; x=1707151672; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Kk5BhQRPM94EKsRIhVMqYgmcfDsB7owy8rOzxcGC7OQ=;
- b=PUFV4X8ABxoNWqyIf0tWmTXPHI7aKlcRQ0hCDU0MGNLi+HI4imGoXWkTTxvizp8RTP
- JP7bxiNN6Xh0ykr8WMyJEQDEWfW+9zTZJcUrJsHk0kTShXMruLlPi8P4j6gvEmwlCo7l
- AlkOvdvJ+98Q0e7P1nM04niBcyU/+GguFUqtRMXmdaWGbKpVo1jpoL50WsXTciREIqtp
- Zq2+fap1r5MBImJUycAvazyNXt8IvyDtAruXPAXd3r+AzOM3XjdDa4AlhNMATrH5wj0C
- DmC2ih5g3SuXzP6zfcKlz3514qiOOr9SrYBLEh8gIxcQgV5n4SawwSOafOvZDtHjPEVs
- IGbg==
+ bh=EK1f6yC+2+7tJRqq8zpOFY9o0Gec7K9NU3Dea7XiVcs=;
+ b=eSCr7yyM3cbUuOeBNgO6lZykNe2w4vM6i6cNBlUpI+SrlWrypuMV/tK1+f4uQC73ll
+ nBUCCH+owChmacrP/0a5C75DjeD+Veya2DBa8toEXcrGt2wVa3EmFVsJLpwyLwy7roBH
+ QPw3gNA3bHbomUshAYyzjPCHf5nRn0AsoeFJ1rTH3zfkOlpdJAGFc1NYn4YEVCBZIZpr
+ IPoE9zTg4M6F4ykpSJSLOTVF7FOGDKwRMm0HHgwgSkOkbi8BBMwgrlR35W82VcsCms0x
+ B+Qlsr7dWKree92lGFGAAUtQgcw7n+boUsMd23XnHtL8rsx1doix6881eEL5utbC/0ml
+ A5BA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706546897; x=1707151697;
+ d=1e100.net; s=20230601; t=1706546872; x=1707151672;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Kk5BhQRPM94EKsRIhVMqYgmcfDsB7owy8rOzxcGC7OQ=;
- b=SpDbEzmFt3B2PkgeLKdZJfmZQGPvMXpXt0BHUIIAhEk2JymYvYtLrEvA45fpqRWduh
- 39vftue39vGrbmvJsRRptxhmEQVNb4DrdpH4wMMo1GkP5+m3dHBZmg0eriUPPtalq59q
- A1qNRAYmtxjkMfb3E5bjPx7vf2yYIA7v6cdI3zQYtqE6Dzzx5ip2dTI9MQPLgBjDamht
- zoijJswlv62Z2Rr4SKi4o25Diip3JVoBIPmnzFFJI777TKMVzYnWIEnvheFCBZ9L0tOR
- mIGopMApFt49sRI7oEHrozGi9j86qnI6LticE1SNTEB/0k7uW142djCl3bgn6fAKh1Z4
- RClA==
-X-Gm-Message-State: AOJu0YwBBBKTM0MMolrPmT1ao+d0Glj5RKUgTzxjZ5igHpVaCkH5VIVg
- ccSmy9+NSkjRegSSV/m5mclmtWaLUQBBtfDrfQKqOn22/HyNzU+BVxRCq8tXQsU=
-X-Google-Smtp-Source: AGHT+IEXA1iompN1/gMqlkZsSEb4uT6I1SbkEs4HXc0WHAilXTqQn4jrwhExiORkNg2dlUXVfvblyw==
-X-Received: by 2002:adf:db11:0:b0:337:c91d:e816 with SMTP id
- s17-20020adfdb11000000b00337c91de816mr4734391wri.1.1706546897611; 
- Mon, 29 Jan 2024 08:48:17 -0800 (PST)
+ bh=EK1f6yC+2+7tJRqq8zpOFY9o0Gec7K9NU3Dea7XiVcs=;
+ b=CWWaUTtE4f2Lgod5GH9h0dAvuKXGagTts8Kbr0zQkXkAei6S0e6To3pSJ0R6eXv7T7
+ 6rAbe4/QH7xJdzHZ9OcPjCPW0TeN0ruGtBrViTQgw5XNVr6fOqE2ppur5iG7G2aq0x25
+ qQ9JVA8TUtzxwxZgNHTU9kpbPFMST+FBKEWwSJ2ndSD98IvWyCFBgXwnYXVuUQmUPiET
+ DtplFoZEmdL+/pVmkBHTlzSXM6MsRSUGAihglKXrWeKKId1Pad9WHsk96txoyaaTEAzY
+ UMgqJuuZpYP8+i9USjNmVUdJBgYzlFnfzijTAlA0FvjaBbxLTZZZJ/IChtEiuLMcMibP
+ vJUA==
+X-Gm-Message-State: AOJu0Yx9Q2QT1rifYzJl39WbO4N2vr2omeSZxuRnE86uNXsricDPLW9j
+ opRurCv10grBPDfHxKKKST1gXtOzY+rmHLvPB1N2/vtVQNM9QPBuUPrrqR2DTZc=
+X-Google-Smtp-Source: AGHT+IGp/BpyozcDAwqfGmyRJlRPq1/IHU+J5kLY+oFMWzv+eh6PdIu4rsOF1seUTLeuqx4RAfarbA==
+X-Received: by 2002:a05:600c:468f:b0:40e:cd0e:f749 with SMTP id
+ p15-20020a05600c468f00b0040ecd0ef749mr5338733wmo.28.1706546871830; 
+ Mon, 29 Jan 2024 08:47:51 -0800 (PST)
 Received: from m1x-phil.lan ([176.187.219.39])
  by smtp.gmail.com with ESMTPSA id
- ck8-20020a5d5e88000000b003392986585esm8609742wrb.41.2024.01.29.08.48.15
+ k7-20020a05600c1c8700b0040ef3ae26cdsm5224770wms.37.2024.01.29.08.47.50
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 29 Jan 2024 08:48:17 -0800 (PST)
+ Mon, 29 Jan 2024 08:47:51 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
@@ -63,27 +63,26 @@ Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Warner Losh <imp@bsdimp.com>, Kyle Evans <kevans@freebsd.org>,
- Laurent Vivier <laurent@vivier.eu>
-Subject: [PATCH v3 29/29] user: Prefer fast cpu_env() over slower CPU QOM cast
- macro
-Date: Mon, 29 Jan 2024 17:45:11 +0100
-Message-ID: <20240129164514.73104-30-philmd@linaro.org>
+ Yoshinori Sato <ysato@users.sourceforge.jp>
+Subject: [PATCH v3 25/29] target/sh4: Prefer fast cpu_env() over slower CPU
+ QOM cast macro
+Date: Mon, 29 Jan 2024 17:45:07 +0100
+Message-ID: <20240129164514.73104-26-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240129164514.73104-1-philmd@linaro.org>
 References: <20240129164514.73104-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::434;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x434.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,69 +101,185 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Mechanical patch produced running the command documented
 in scripts/coccinelle/cpu_env.cocci_template header.
 
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- bsd-user/signal.c   | 3 +--
- linux-user/signal.c | 6 ++----
- 2 files changed, 3 insertions(+), 6 deletions(-)
+ target/sh4/cpu.c       | 18 ++++++------------
+ target/sh4/gdbstub.c   |  6 ++----
+ target/sh4/helper.c    | 14 ++++----------
+ target/sh4/translate.c |  6 ++----
+ 4 files changed, 14 insertions(+), 30 deletions(-)
 
-diff --git a/bsd-user/signal.c b/bsd-user/signal.c
-index ca31470772..c6f0b1be38 100644
---- a/bsd-user/signal.c
-+++ b/bsd-user/signal.c
-@@ -463,14 +463,13 @@ static int fatal_signal(int sig)
- void force_sig_fault(int sig, int code, abi_ulong addr)
+diff --git a/target/sh4/cpu.c b/target/sh4/cpu.c
+index 1b03c7bcb1..3308a2be07 100644
+--- a/target/sh4/cpu.c
++++ b/target/sh4/cpu.c
+@@ -71,8 +71,7 @@ static void superh_restore_state_to_opc(CPUState *cs,
+ static bool superh_io_recompile_replay_branch(CPUState *cs,
+                                               const TranslationBlock *tb)
  {
-     CPUState *cpu = thread_cpu;
--    CPUArchState *env = cpu_env(cpu);
-     target_siginfo_t info = {};
+-    SuperHCPU *cpu = SUPERH_CPU(cs);
+-    CPUSH4State *env = &cpu->env;
++    CPUSH4State *env = cpu_env(cs);
  
-     info.si_signo = sig;
-     info.si_errno = 0;
-     info.si_code = code;
-     info.si_addr = addr;
--    queue_signal(env, sig, QEMU_SI_FAULT, &info);
-+    queue_signal(cpu_env(cpu), sig, QEMU_SI_FAULT, &info);
- }
- 
- static void host_signal_handler(int host_sig, siginfo_t *info, void *puc)
-diff --git a/linux-user/signal.c b/linux-user/signal.c
-index c9527adfa3..f78f7fc476 100644
---- a/linux-user/signal.c
-+++ b/linux-user/signal.c
-@@ -623,7 +623,6 @@ void signal_init(void)
- void force_sig(int sig)
+     if ((env->flags & (TB_FLAG_DELAY_SLOT | TB_FLAG_DELAY_SLOT_COND))
+         && !(cs->tcg_cflags & CF_PCREL) && env->pc != tb->pc) {
+@@ -92,9 +91,8 @@ static bool superh_cpu_has_work(CPUState *cs)
+ static void superh_cpu_reset_hold(Object *obj)
  {
-     CPUState *cpu = thread_cpu;
--    CPUArchState *env = cpu_env(cpu);
-     target_siginfo_t info = {};
+     CPUState *cs = CPU(obj);
+-    SuperHCPU *cpu = SUPERH_CPU(cs);
+     SuperHCPUClass *scc = SUPERH_CPU_GET_CLASS(obj);
+-    CPUSH4State *env = &cpu->env;
++    CPUSH4State *env = cpu_env(cs);
  
-     info.si_signo = sig;
-@@ -631,7 +630,7 @@ void force_sig(int sig)
-     info.si_code = TARGET_SI_KERNEL;
-     info._sifields._kill._pid = 0;
-     info._sifields._kill._uid = 0;
--    queue_signal(env, info.si_signo, QEMU_SI_KILL, &info);
-+    queue_signal(cpu_env(cpu), info.si_signo, QEMU_SI_KILL, &info);
- }
+     if (scc->parent_phases.hold) {
+         scc->parent_phases.hold(obj);
+@@ -144,8 +142,7 @@ out:
  
- /*
-@@ -641,14 +640,13 @@ void force_sig(int sig)
- void force_sig_fault(int sig, int code, abi_ulong addr)
+ static void sh7750r_cpu_initfn(Object *obj)
  {
-     CPUState *cpu = thread_cpu;
--    CPUArchState *env = cpu_env(cpu);
-     target_siginfo_t info = {};
+-    SuperHCPU *cpu = SUPERH_CPU(obj);
+-    CPUSH4State *env = &cpu->env;
++    CPUSH4State *env = cpu_env(CPU(obj));
  
-     info.si_signo = sig;
-     info.si_errno = 0;
-     info.si_code = code;
-     info._sifields._sigfault._addr = addr;
--    queue_signal(env, sig, QEMU_SI_FAULT, &info);
-+    queue_signal(cpu_env(cpu), sig, QEMU_SI_FAULT, &info);
+     env->id = SH_CPU_SH7750R;
+     env->features = SH_FEATURE_BCR3_AND_BCR4;
+@@ -162,8 +159,7 @@ static void sh7750r_class_init(ObjectClass *oc, void *data)
+ 
+ static void sh7751r_cpu_initfn(Object *obj)
+ {
+-    SuperHCPU *cpu = SUPERH_CPU(obj);
+-    CPUSH4State *env = &cpu->env;
++    CPUSH4State *env = cpu_env(CPU(obj));
+ 
+     env->id = SH_CPU_SH7751R;
+     env->features = SH_FEATURE_BCR3_AND_BCR4;
+@@ -180,8 +176,7 @@ static void sh7751r_class_init(ObjectClass *oc, void *data)
+ 
+ static void sh7785_cpu_initfn(Object *obj)
+ {
+-    SuperHCPU *cpu = SUPERH_CPU(obj);
+-    CPUSH4State *env = &cpu->env;
++    CPUSH4State *env = cpu_env(CPU(obj));
+ 
+     env->id = SH_CPU_SH7785;
+     env->features = SH_FEATURE_SH4A;
+@@ -216,8 +211,7 @@ static void superh_cpu_realizefn(DeviceState *dev, Error **errp)
+ 
+ static void superh_cpu_initfn(Object *obj)
+ {
+-    SuperHCPU *cpu = SUPERH_CPU(obj);
+-    CPUSH4State *env = &cpu->env;
++    CPUSH4State *env = cpu_env(CPU(obj));
+ 
+     env->movcal_backup_tail = &(env->movcal_backup);
  }
+diff --git a/target/sh4/gdbstub.c b/target/sh4/gdbstub.c
+index d8e199fc06..75926d4e04 100644
+--- a/target/sh4/gdbstub.c
++++ b/target/sh4/gdbstub.c
+@@ -26,8 +26,7 @@
  
- /* Force a SIGSEGV if we couldn't write to memory trying to set
+ int superh_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+ {
+-    SuperHCPU *cpu = SUPERH_CPU(cs);
+-    CPUSH4State *env = &cpu->env;
++    CPUSH4State *env = cpu_env(cs);
+ 
+     switch (n) {
+     case 0 ... 7:
+@@ -76,8 +75,7 @@ int superh_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+ 
+ int superh_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+ {
+-    SuperHCPU *cpu = SUPERH_CPU(cs);
+-    CPUSH4State *env = &cpu->env;
++    CPUSH4State *env = cpu_env(cs);
+ 
+     switch (n) {
+     case 0 ... 7:
+diff --git a/target/sh4/helper.c b/target/sh4/helper.c
+index 5a6f653c12..7c6f9d374a 100644
+--- a/target/sh4/helper.c
++++ b/target/sh4/helper.c
+@@ -55,8 +55,7 @@ int cpu_sh4_is_cached(CPUSH4State *env, target_ulong addr)
+ 
+ void superh_cpu_do_interrupt(CPUState *cs)
+ {
+-    SuperHCPU *cpu = SUPERH_CPU(cs);
+-    CPUSH4State *env = &cpu->env;
++    CPUSH4State *env = cpu_env(cs);
+     int do_irq = cs->interrupt_request & CPU_INTERRUPT_HARD;
+     int do_exp, irq_vector = cs->exception_index;
+ 
+@@ -432,11 +431,10 @@ static int get_physical_address(CPUSH4State * env, target_ulong * physical,
+ 
+ hwaddr superh_cpu_get_phys_page_debug(CPUState *cs, vaddr addr)
+ {
+-    SuperHCPU *cpu = SUPERH_CPU(cs);
+     target_ulong physical;
+     int prot;
+ 
+-    if (get_physical_address(&cpu->env, &physical, &prot, addr, MMU_DATA_LOAD)
++    if (get_physical_address(cpu_env(cs), &physical, &prot, addr, MMU_DATA_LOAD)
+             == MMU_OK) {
+         return physical;
+     }
+@@ -782,11 +780,8 @@ int cpu_sh4_is_cached(CPUSH4State * env, target_ulong addr)
+ bool superh_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+ {
+     if (interrupt_request & CPU_INTERRUPT_HARD) {
+-        SuperHCPU *cpu = SUPERH_CPU(cs);
+-        CPUSH4State *env = &cpu->env;
+-
+         /* Delay slots are indivisible, ignore interrupts */
+-        if (env->flags & TB_FLAG_DELAY_SLOT_MASK) {
++        if (cpu_env(cs)->flags & TB_FLAG_DELAY_SLOT_MASK) {
+             return false;
+         } else {
+             superh_cpu_do_interrupt(cs);
+@@ -800,8 +795,7 @@ bool superh_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+                          MMUAccessType access_type, int mmu_idx,
+                          bool probe, uintptr_t retaddr)
+ {
+-    SuperHCPU *cpu = SUPERH_CPU(cs);
+-    CPUSH4State *env = &cpu->env;
++    CPUSH4State *env = cpu_env(cs);
+     int ret;
+ 
+     target_ulong physical;
+diff --git a/target/sh4/translate.c b/target/sh4/translate.c
+index 81f825f125..d9f222bd15 100644
+--- a/target/sh4/translate.c
++++ b/target/sh4/translate.c
+@@ -159,8 +159,7 @@ void sh4_translate_init(void)
+ 
+ void superh_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+ {
+-    SuperHCPU *cpu = SUPERH_CPU(cs);
+-    CPUSH4State *env = &cpu->env;
++    CPUSH4State *env = cpu_env(cs);
+     int i;
+ 
+     qemu_fprintf(f, "pc=0x%08x sr=0x%08x pr=0x%08x fpscr=0x%08x\n",
+@@ -2186,7 +2185,6 @@ static void decode_gusa(DisasContext *ctx, CPUSH4State *env)
+ static void sh4_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+ {
+     DisasContext *ctx = container_of(dcbase, DisasContext, base);
+-    CPUSH4State *env = cpu_env(cs);
+     uint32_t tbflags;
+     int bound;
+ 
+@@ -2196,7 +2194,7 @@ static void sh4_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     /* We don't know if the delayed pc came from a dynamic or static branch,
+        so assume it is a dynamic branch.  */
+     ctx->delayed_pc = -1; /* use delayed pc from env pointer */
+-    ctx->features = env->features;
++    ctx->features = cpu_env(cs)->features;
+     ctx->has_movcal = (tbflags & TB_FLAG_PENDING_MOVCA);
+     ctx->gbank = ((tbflags & (1 << SR_MD)) &&
+                   (tbflags & (1 << SR_RB))) * 0x10;
 -- 
 2.41.0
 
