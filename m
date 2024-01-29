@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E34FC48285
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 16:47:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87415C47DB3
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 16:47:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rUUmq-00083z-DJ; Mon, 29 Jan 2024 11:47:09 -0500
+	id 1rUUm8-0006dW-OJ; Mon, 29 Jan 2024 11:46:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUla-00060g-24
- for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:45:55 -0500
-Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUlQ-0005yH-Is
+ for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:45:42 -0500
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUlW-0003gI-2E
- for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:45:49 -0500
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-337d05b8942so2707169f8f.3
- for <qemu-riscv@nongnu.org>; Mon, 29 Jan 2024 08:45:45 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUlM-0003cL-U3
+ for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:45:40 -0500
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-40ee9e21f89so28269255e9.0
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jan 2024 08:45:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706546744; x=1707151544; darn=nongnu.org;
+ d=linaro.org; s=google; t=1706546732; x=1707151532; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=C8JvjcuG17Z5H/fwKhCgUCDDHXtWs59z4HKxSgYIQak=;
- b=oTcODn7UfeAyv9Q4EQ/rhVwGz+zwGF9e9jvBsQ4Hqj8Qxs0ToIcMmGCzVsWiaZly0m
- 0ORPBFKWo7r1VUfkVibk17oy7odmgEcXRSQTfAyUBD+RLCTZwvNmLZJ3rV7z6Ksw7c/l
- f8FtnMGRIh9MgGnTacYsK7raGITCy3mAD55WzN2dLU/rqU9b4OpVq3lOzYO6gzEwilWe
- 0o7vPr9f9+ZP3lHitIDIF11bvS7fZ1xGVFBCIqMIHJ2h/pe+9CJSsRtA3RSHReB+P2C7
- UYN2JptJjUONut/+5i1ssBEM+QCnY0uchKZ3tW7oWw+cZx0jtfucoC+YfFxUJaZmWMgm
- K99g==
+ bh=y2hw1LeDHPXoA09+Z2wFdjf4GaaZ4oIVM8gsKnpZLbQ=;
+ b=gwoiazBHhZMVC4So9zi88B80lq+tj2B+Hg+BDQGHoU2SA70OpRJYX0T5Nuz98/B+By
+ b/ImwaLRaGdTkL4KupS2+KEQKaMcd2d//Vb6MtmxFFtRVieHEB1cpucrR4aEAsiOHaWx
+ ucn4c16yIG3IcUOlT+7wYLy75UvbJu5efD86uF3mYgqFX1eTRNikdkayq//LH/H3Kahh
+ uimHvnT4A2t7A09XKsouby7sGQlwo6IpqBkh2v1/qPFuvnFMWAD+lr+n111q/kHc5XCH
+ 4mMLZjZmtR3LPimuGyNkRUMSp9W8Q+6N4qpIywYwq+VYswEjGI3YF8njQLTUIS1h8dzd
+ X4tQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706546744; x=1707151544;
+ d=1e100.net; s=20230601; t=1706546732; x=1707151532;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=C8JvjcuG17Z5H/fwKhCgUCDDHXtWs59z4HKxSgYIQak=;
- b=JXsIQnZgyx+mY/gao6/Uzs80coKL2hnyihmxqGB2xnY84hVkpPPTqAiPv98qwCgVY1
- SR0gZss3I8SVxYZQa9DnQqI1uv5/YbWevjniaWbhkV8JxwFtakpF0gkuWOhigH/kTO24
- LTImnSExOuWlei/smQj/p0nDL4HQpk42kykZmfFEse/3Zft8BqlkwRQpMtjopSwmjxvh
- lxCUvVjb27cnjeGZeT8nLldCNmIVxUhykaoN37f8TBL/lNz3YVTIr6tYTwFOrC6yBWQR
- w/QfNqOBqGjQW08bAm9z6F0zKTxb4PoJuherjf+Bh3/Bh8C4jn2yqyXsn4skgjmbHnRM
- HFQw==
-X-Gm-Message-State: AOJu0YwnQ1R1nbseO//c2luD2TgoE5t43YLejTqRAM1eIhFzyG6oggmH
- LzlS7Jn3NXYI7WMWZV/uU6yyPvr9QmoeunQrjz2wVawjSFdOSR+711pwT1WlpNE=
-X-Google-Smtp-Source: AGHT+IGsRS3mCrSQqdH7/CVh0bHEjVxZxEE4GjqLYzUtvxEToac4oiSaOtdxXr4oh5vfsiDP3ObnIg==
-X-Received: by 2002:adf:ca8d:0:b0:339:2c1a:5d79 with SMTP id
- r13-20020adfca8d000000b003392c1a5d79mr4032395wrh.6.1706546744013; 
- Mon, 29 Jan 2024 08:45:44 -0800 (PST)
+ bh=y2hw1LeDHPXoA09+Z2wFdjf4GaaZ4oIVM8gsKnpZLbQ=;
+ b=DsP2KYH2DGyW1ztGRcdBhJJKo7icYt2m4yQGHvQ4O/6m2ntq8h/PKOgp59XchPVgwG
+ A/jHCPSURLSbKGpzeT5Qtc2F8GJHICZkPVLaap4LtEfIyx4nXNjD6r3TdHumy6dRzIl9
+ LmnmwMt7uzhEn44L3s3zHW+af/C4+EynenuvxoJBenYxO+MJbGzEa6WZjZhFn6bj5CAW
+ pBsgowQq0fMdS2Ji7fjN5bLlATxupVas0esP2bUzpcIwxOxBl1Rjevc81VAofj4+Y8Nn
+ GoB3n2boI6OrbQwt+nulc0FIXhzrFUwOb2khVoBL1xipyUe/S2nwv9GB+i+UadjoVP/8
+ vv/g==
+X-Gm-Message-State: AOJu0YzusLQPzu+PBW5mLXUlGrP92ugUmXufQhLu6dB8jC+2WuNaL44Z
+ UlF0NSWPvZZ09bZz3SmVvK1sJBW4pCq7CNd2nTIPSLuXlMaGLSwAyVb86jtNk4I=
+X-Google-Smtp-Source: AGHT+IFVrS1YJ9J2dLNRn+st1RiqDBXNn5RMuFWm57xrM1I/AzlVfdLqJZcKs7joGZxBzXAoy74ufw==
+X-Received: by 2002:a05:600c:4e8c:b0:40e:e25c:41cf with SMTP id
+ f12-20020a05600c4e8c00b0040ee25c41cfmr5163477wmq.12.1706546732132; 
+ Mon, 29 Jan 2024 08:45:32 -0800 (PST)
 Received: from m1x-phil.lan ([176.187.219.39])
  by smtp.gmail.com with ESMTPSA id
- v8-20020a5d59c8000000b0033af2a91b47sm2057984wry.70.2024.01.29.08.45.42
+ bs3-20020a056000070300b0033aeb7d4537sm3951432wrb.7.2024.01.29.08.45.29
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 29 Jan 2024 08:45:43 -0800 (PST)
+ Mon, 29 Jan 2024 08:45:31 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
@@ -63,20 +63,30 @@ Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Laurent Vivier <laurent@vivier.eu>, Reinoud Zandijk <reinoud@netbsd.org>,
- Sunil Muthuswamy <sunilmut@microsoft.com>, Song Gao <gaosong@loongson.cn>,
- Yoshinori Sato <ysato@users.sourceforge.jp>
-Subject: [PATCH v3 04/29] bulk: Call in place single use cpu_env()
-Date: Mon, 29 Jan 2024 17:44:46 +0100
-Message-ID: <20240129164514.73104-5-philmd@linaro.org>
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Yanan Wang <wangyanan55@huawei.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Song Gao <gaosong@loongson.cn>, Nicholas Piggin <npiggin@gmail.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Eric Farman <farman@linux.ibm.com>, David Hildenbrand <david@redhat.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>, Thomas Huth <thuth@redhat.com>
+Subject: [PATCH v3 02/29] hw/core: Declare CPUArchId::cpu as CPUState instead
+ of Object
+Date: Mon, 29 Jan 2024 17:44:44 +0100
+Message-ID: <20240129164514.73104-3-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240129164514.73104-1-philmd@linaro.org>
 References: <20240129164514.73104-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x336.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,285 +109,123 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Avoid CPUArchState local variable when cpu_env() is used once.
-
-Mechanical patch using the following Coccinelle spatch script:
-
- @@
- type CPUArchState;
- identifier env;
- expression cs;
- @@
-  {
- -    CPUArchState *env = cpu_env(cs);
-      ... when != env
- -     env
- +     cpu_env(cs)
-      ... when != env
-  }
+Do not accept any Object for CPUArchId::cpu field,
+restrict it to CPUState type.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- accel/tcg/cpu-exec.c             |  3 +--
- linux-user/i386/cpu_loop.c       |  4 ++--
- target/hppa/mem_helper.c         |  3 +--
- target/hppa/translate.c          |  3 +--
- target/i386/nvmm/nvmm-all.c      |  6 ++----
- target/i386/whpx/whpx-all.c      | 18 ++++++------------
- target/loongarch/tcg/translate.c |  3 +--
- target/rx/translate.c            |  3 +--
- target/sh4/op_helper.c           |  4 +---
- 9 files changed, 16 insertions(+), 31 deletions(-)
+ include/hw/boards.h        | 2 +-
+ hw/core/machine.c          | 4 ++--
+ hw/i386/x86.c              | 2 +-
+ hw/loongarch/virt.c        | 2 +-
+ hw/ppc/spapr.c             | 5 ++---
+ hw/s390x/s390-virtio-ccw.c | 2 +-
+ 6 files changed, 8 insertions(+), 9 deletions(-)
 
-diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
-index 67eda9865e..86206484f8 100644
---- a/accel/tcg/cpu-exec.c
-+++ b/accel/tcg/cpu-exec.c
-@@ -445,7 +445,6 @@ const void *HELPER(lookup_tb_ptr)(CPUArchState *env)
- static inline TranslationBlock * QEMU_DISABLE_CFI
- cpu_tb_exec(CPUState *cpu, TranslationBlock *itb, int *tb_exit)
- {
--    CPUArchState *env = cpu_env(cpu);
-     uintptr_t ret;
-     TranslationBlock *last_tb;
-     const void *tb_ptr = itb->tc.ptr;
-@@ -455,7 +454,7 @@ cpu_tb_exec(CPUState *cpu, TranslationBlock *itb, int *tb_exit)
+diff --git a/include/hw/boards.h b/include/hw/boards.h
+index bcfde8a84d..8b8f6d5c00 100644
+--- a/include/hw/boards.h
++++ b/include/hw/boards.h
+@@ -120,7 +120,7 @@ typedef struct CPUArchId {
+     uint64_t arch_id;
+     int64_t vcpus_count;
+     CpuInstanceProperties props;
+-    Object *cpu;
++    CPUState *cpu;
+     const char *type;
+ } CPUArchId;
+ 
+diff --git a/hw/core/machine.c b/hw/core/machine.c
+index fb5afdcae4..854cf00a9b 100644
+--- a/hw/core/machine.c
++++ b/hw/core/machine.c
+@@ -716,7 +716,7 @@ HotpluggableCPUList *machine_query_hotpluggable_cpus(MachineState *machine)
+     mc->possible_cpu_arch_ids(machine);
+ 
+     for (i = 0; i < machine->possible_cpus->len; i++) {
+-        Object *cpu;
++        CPUState *cpu;
+         HotpluggableCPU *cpu_item = g_new0(typeof(*cpu_item), 1);
+ 
+         cpu_item->type = g_strdup(machine->possible_cpus->cpus[i].type);
+@@ -726,7 +726,7 @@ HotpluggableCPUList *machine_query_hotpluggable_cpus(MachineState *machine)
+ 
+         cpu = machine->possible_cpus->cpus[i].cpu;
+         if (cpu) {
+-            cpu_item->qom_path = object_get_canonical_path(cpu);
++            cpu_item->qom_path = object_get_canonical_path(OBJECT(cpu));
+         }
+         QAPI_LIST_PREPEND(head, cpu_item);
+     }
+diff --git a/hw/i386/x86.c b/hw/i386/x86.c
+index 2b6291ad8d..19464ea971 100644
+--- a/hw/i386/x86.c
++++ b/hw/i386/x86.c
+@@ -221,7 +221,7 @@ void x86_cpu_plug(HotplugHandler *hotplug_dev,
      }
  
-     qemu_thread_jit_execute();
--    ret = tcg_qemu_tb_exec(env, tb_ptr);
-+    ret = tcg_qemu_tb_exec(cpu_env(cpu), tb_ptr);
-     cpu->neg.can_do_io = true;
-     qemu_plugin_disable_mem_helpers(cpu);
-     /*
-diff --git a/linux-user/i386/cpu_loop.c b/linux-user/i386/cpu_loop.c
-index 42ecb4bf0a..92beb6830c 100644
---- a/linux-user/i386/cpu_loop.c
-+++ b/linux-user/i386/cpu_loop.c
-@@ -323,8 +323,8 @@ void cpu_loop(CPUX86State *env)
- 
- static void target_cpu_free(void *obj)
- {
--    CPUArchState *env = cpu_env(obj);
--    target_munmap(env->gdt.base, sizeof(uint64_t) * TARGET_GDT_ENTRIES);
-+    target_munmap(cpu_env(obj)->gdt.base,
-+                  sizeof(uint64_t) * TARGET_GDT_ENTRIES);
-     g_free(obj);
+     found_cpu = x86_find_cpu_slot(MACHINE(x86ms), cpu->apic_id, NULL);
+-    found_cpu->cpu = OBJECT(dev);
++    found_cpu->cpu = CPU(dev);
+ out:
+     error_propagate(errp, local_err);
  }
- 
-diff --git a/target/hppa/mem_helper.c b/target/hppa/mem_helper.c
-index 4fcc612754..bb85962d50 100644
---- a/target/hppa/mem_helper.c
-+++ b/target/hppa/mem_helper.c
-@@ -518,7 +518,6 @@ void HELPER(iitlbt_pa20)(CPUHPPAState *env, target_ulong r1, target_ulong r2)
- /* Purge (Insn/Data) TLB. */
- static void ptlb_work(CPUState *cpu, run_on_cpu_data data)
- {
--    CPUHPPAState *env = cpu_env(cpu);
-     vaddr start = data.target_ptr;
-     vaddr end;
- 
-@@ -532,7 +531,7 @@ static void ptlb_work(CPUState *cpu, run_on_cpu_data data)
-     end = (vaddr)TARGET_PAGE_SIZE << (2 * end);
-     end = start + end - 1;
- 
--    hppa_flush_tlb_range(env, start, end);
-+    hppa_flush_tlb_range(cpu_env(cpu), start, end);
- }
- 
- /* This is local to the current cpu. */
-diff --git a/target/hppa/translate.c b/target/hppa/translate.c
-index 3ef39b1bd7..5735335254 100644
---- a/target/hppa/translate.c
-+++ b/target/hppa/translate.c
-@@ -3805,8 +3805,7 @@ static bool trans_b_gate(DisasContext *ctx, arg_b_gate *a)
- 
- #ifndef CONFIG_USER_ONLY
-     if (ctx->tb_flags & PSW_C) {
--        CPUHPPAState *env = cpu_env(ctx->cs);
--        int type = hppa_artype_for_page(env, ctx->base.pc_next);
-+        int type = hppa_artype_for_page(cpu_env(ctx->cs), ctx->base.pc_next);
-         /* If we could not find a TLB entry, then we need to generate an
-            ITLB miss exception so the kernel will provide it.
-            The resulting TLB fill operation will invalidate this TB and
-diff --git a/target/i386/nvmm/nvmm-all.c b/target/i386/nvmm/nvmm-all.c
-index cfdca91123..49a3a3b916 100644
---- a/target/i386/nvmm/nvmm-all.c
-+++ b/target/i386/nvmm/nvmm-all.c
-@@ -340,7 +340,6 @@ nvmm_get_registers(CPUState *cpu)
- static bool
- nvmm_can_take_int(CPUState *cpu)
- {
--    CPUX86State *env = cpu_env(cpu);
-     AccelCPUState *qcpu = cpu->accel;
-     struct nvmm_vcpu *vcpu = &qcpu->vcpu;
-     struct nvmm_machine *mach = get_nvmm_mach();
-@@ -349,7 +348,7 @@ nvmm_can_take_int(CPUState *cpu)
-         return false;
+diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
+index c9a680e61a..524a53de06 100644
+--- a/hw/loongarch/virt.c
++++ b/hw/loongarch/virt.c
+@@ -811,7 +811,7 @@ static void loongarch_init(MachineState *machine)
+     for (i = 0; i < possible_cpus->len; i++) {
+         cpu = cpu_create(machine->cpu_type);
+         cpu->cpu_index = i;
+-        machine->possible_cpus->cpus[i].cpu = OBJECT(cpu);
++        machine->possible_cpus->cpus[i].cpu = cpu;
+         lacpu = LOONGARCH_CPU(cpu);
+         lacpu->phy_id = machine->possible_cpus->cpus[i].arch_id;
      }
- 
--    if (qcpu->int_shadow || !(env->eflags & IF_MASK)) {
-+    if (qcpu->int_shadow || !(cpu_env(cpu)->eflags & IF_MASK)) {
-         struct nvmm_x64_state *state = vcpu->state;
- 
-         /* Exit on interrupt window. */
-@@ -645,13 +644,12 @@ static int
- nvmm_handle_halted(struct nvmm_machine *mach, CPUState *cpu,
-     struct nvmm_vcpu_exit *exit)
- {
--    CPUX86State *env = cpu_env(cpu);
-     int ret = 0;
- 
-     bql_lock();
- 
-     if (!((cpu->interrupt_request & CPU_INTERRUPT_HARD) &&
--          (env->eflags & IF_MASK)) &&
-+          (cpu_env(cpu)->eflags & IF_MASK)) &&
-         !(cpu->interrupt_request & CPU_INTERRUPT_NMI)) {
-         cpu->exception_index = EXCP_HLT;
-         cpu->halted = true;
-diff --git a/target/i386/whpx/whpx-all.c b/target/i386/whpx/whpx-all.c
-index a7262654ac..31eec7048c 100644
---- a/target/i386/whpx/whpx-all.c
-+++ b/target/i386/whpx/whpx-all.c
-@@ -300,7 +300,6 @@ static SegmentCache whpx_seg_h2q(const WHV_X64_SEGMENT_REGISTER *hs)
- /* X64 Extended Control Registers */
- static void whpx_set_xcrs(CPUState *cpu)
- {
--    CPUX86State *env = cpu_env(cpu);
-     HRESULT hr;
-     struct whpx_state *whpx = &whpx_global;
-     WHV_REGISTER_VALUE xcr0;
-@@ -311,7 +310,7 @@ static void whpx_set_xcrs(CPUState *cpu)
-     }
- 
-     /* Only xcr0 is supported by the hypervisor currently */
--    xcr0.Reg64 = env->xcr0;
-+    xcr0.Reg64 = cpu_env(cpu)->xcr0;
-     hr = whp_dispatch.WHvSetVirtualProcessorRegisters(
-         whpx->partition, cpu->cpu_index, &xcr0_name, 1, &xcr0);
-     if (FAILED(hr)) {
-@@ -321,7 +320,6 @@ static void whpx_set_xcrs(CPUState *cpu)
- 
- static int whpx_set_tsc(CPUState *cpu)
- {
--    CPUX86State *env = cpu_env(cpu);
-     WHV_REGISTER_NAME tsc_reg = WHvX64RegisterTsc;
-     WHV_REGISTER_VALUE tsc_val;
-     HRESULT hr;
-@@ -345,7 +343,7 @@ static int whpx_set_tsc(CPUState *cpu)
+diff --git a/hw/ppc/spapr.c b/hw/ppc/spapr.c
+index e8dabc8614..0b77aa5514 100644
+--- a/hw/ppc/spapr.c
++++ b/hw/ppc/spapr.c
+@@ -3985,7 +3985,6 @@ static void spapr_core_plug(HotplugHandler *hotplug_dev, DeviceState *dev)
+     SpaprMachineClass *smc = SPAPR_MACHINE_CLASS(mc);
+     SpaprCpuCore *core = SPAPR_CPU_CORE(OBJECT(dev));
+     CPUCore *cc = CPU_CORE(dev);
+-    CPUState *cs;
+     SpaprDrc *drc;
+     CPUArchId *core_slot;
+     int index;
+@@ -4019,7 +4018,7 @@ static void spapr_core_plug(HotplugHandler *hotplug_dev, DeviceState *dev)
          }
      }
  
--    tsc_val.Reg64 = env->tsc;
-+    tsc_val.Reg64 = cpu_env(cpu)->tsc;
-     hr = whp_dispatch.WHvSetVirtualProcessorRegisters(
-         whpx->partition, cpu->cpu_index, &tsc_reg, 1, &tsc_val);
-     if (FAILED(hr)) {
-@@ -556,7 +554,6 @@ static void whpx_set_registers(CPUState *cpu, int level)
+-    core_slot->cpu = OBJECT(dev);
++    core_slot->cpu = CPU(dev);
  
- static int whpx_get_tsc(CPUState *cpu)
- {
--    CPUX86State *env = cpu_env(cpu);
-     WHV_REGISTER_NAME tsc_reg = WHvX64RegisterTsc;
-     WHV_REGISTER_VALUE tsc_val;
-     HRESULT hr;
-@@ -569,14 +566,13 @@ static int whpx_get_tsc(CPUState *cpu)
-         return -1;
+     /*
+      * Set compatibility mode to match the boot CPU, which was either set
+@@ -4035,7 +4034,7 @@ static void spapr_core_plug(HotplugHandler *hotplug_dev, DeviceState *dev)
+ 
+     if (smc->pre_2_10_has_unused_icps) {
+         for (i = 0; i < cc->nr_threads; i++) {
+-            cs = CPU(core->threads[i]);
++            CPUState *cs = CPU(core->threads[i]);
+             pre_2_10_vmstate_unregister_dummy_icp(cs->cpu_index);
+         }
      }
+diff --git a/hw/s390x/s390-virtio-ccw.c b/hw/s390x/s390-virtio-ccw.c
+index c99682b07d..69e39e13ff 100644
+--- a/hw/s390x/s390-virtio-ccw.c
++++ b/hw/s390x/s390-virtio-ccw.c
+@@ -324,7 +324,7 @@ static void s390_cpu_plug(HotplugHandler *hotplug_dev,
+     ERRP_GUARD();
  
--    env->tsc = tsc_val.Reg64;
-+    cpu_env(cpu)->tsc = tsc_val.Reg64;
-     return 0;
- }
+     g_assert(!ms->possible_cpus->cpus[cpu->env.core_id].cpu);
+-    ms->possible_cpus->cpus[cpu->env.core_id].cpu = OBJECT(dev);
++    ms->possible_cpus->cpus[cpu->env.core_id].cpu = CPU(dev);
  
- /* X64 Extended Control Registers */
- static void whpx_get_xcrs(CPUState *cpu)
- {
--    CPUX86State *env = cpu_env(cpu);
-     HRESULT hr;
-     struct whpx_state *whpx = &whpx_global;
-     WHV_REGISTER_VALUE xcr0;
-@@ -594,7 +590,7 @@ static void whpx_get_xcrs(CPUState *cpu)
-         return;
-     }
- 
--    env->xcr0 = xcr0.Reg64;
-+    cpu_env(cpu)->xcr0 = xcr0.Reg64;
- }
- 
- static void whpx_get_registers(CPUState *cpu)
-@@ -1400,8 +1396,7 @@ static vaddr whpx_vcpu_get_pc(CPUState *cpu, bool exit_context_valid)
- {
-     if (cpu->vcpu_dirty) {
-         /* The CPU registers have been modified by other parts of QEMU. */
--        CPUArchState *env = cpu_env(cpu);
--        return env->eip;
-+        return cpu_env(cpu)->eip;
-     } else if (exit_context_valid) {
-         /*
-          * The CPU registers have not been modified by neither other parts
-@@ -1439,12 +1434,11 @@ static vaddr whpx_vcpu_get_pc(CPUState *cpu, bool exit_context_valid)
- 
- static int whpx_handle_halt(CPUState *cpu)
- {
--    CPUX86State *env = cpu_env(cpu);
-     int ret = 0;
- 
-     bql_lock();
-     if (!((cpu->interrupt_request & CPU_INTERRUPT_HARD) &&
--          (env->eflags & IF_MASK)) &&
-+          (cpu_env(cpu)->eflags & IF_MASK)) &&
-         !(cpu->interrupt_request & CPU_INTERRUPT_NMI)) {
-         cpu->exception_index = EXCP_HLT;
-         cpu->halted = true;
-diff --git a/target/loongarch/tcg/translate.c b/target/loongarch/tcg/translate.c
-index 21f4db6fbd..7bb8cecab3 100644
---- a/target/loongarch/tcg/translate.c
-+++ b/target/loongarch/tcg/translate.c
-@@ -282,10 +282,9 @@ static uint64_t make_address_pc(DisasContext *ctx, uint64_t addr)
- 
- static void loongarch_tr_translate_insn(DisasContextBase *dcbase, CPUState *cs)
- {
--    CPULoongArchState *env = cpu_env(cs);
-     DisasContext *ctx = container_of(dcbase, DisasContext, base);
- 
--    ctx->opcode = translator_ldl(env, &ctx->base, ctx->base.pc_next);
-+    ctx->opcode = translator_ldl(cpu_env(cs), &ctx->base, ctx->base.pc_next);
- 
-     if (!decode(ctx, ctx->opcode)) {
-         qemu_log_mask(LOG_UNIMP, "Error: unknown opcode. "
-diff --git a/target/rx/translate.c b/target/rx/translate.c
-index c6ce717a95..1829a0b1cd 100644
---- a/target/rx/translate.c
-+++ b/target/rx/translate.c
-@@ -2195,9 +2195,8 @@ static bool trans_WAIT(DisasContext *ctx, arg_WAIT *a)
- 
- static void rx_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
- {
--    CPURXState *env = cpu_env(cs);
-     DisasContext *ctx = container_of(dcbase, DisasContext, base);
--    ctx->env = env;
-+    ctx->env = cpu_env(cs);
-     ctx->tb_flags = ctx->base.tb->flags;
- }
- 
-diff --git a/target/sh4/op_helper.c b/target/sh4/op_helper.c
-index 54d390fe1f..4559d0d376 100644
---- a/target/sh4/op_helper.c
-+++ b/target/sh4/op_helper.c
-@@ -29,9 +29,7 @@ void superh_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
-                                     MMUAccessType access_type,
-                                     int mmu_idx, uintptr_t retaddr)
- {
--    CPUSH4State *env = cpu_env(cs);
--
--    env->tea = addr;
-+    cpu_env(cs)->tea = addr;
-     switch (access_type) {
-     case MMU_INST_FETCH:
-     case MMU_DATA_LOAD:
+     if (s390_has_topology()) {
+         s390_topology_setup_cpu(ms, cpu, errp);
 -- 
 2.41.0
 
