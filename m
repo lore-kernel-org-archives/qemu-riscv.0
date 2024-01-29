@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53571C47DDB
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 16:51:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74437C47DDB
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 16:53:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rUUpH-0000iJ-EF; Mon, 29 Jan 2024 11:49:39 -0500
+	id 1rUUoN-00061z-Rm; Mon, 29 Jan 2024 11:48:43 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUnu-00046S-Bh
- for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:48:18 -0500
-Received: from mail-lf1-x12d.google.com ([2a00:1450:4864:20::12d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUn2-00008q-Kn
+ for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:47:25 -0500
+Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUns-0004at-CP
- for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:48:13 -0500
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-5100ed2b33dso4624176e87.0
- for <qemu-riscv@nongnu.org>; Mon, 29 Jan 2024 08:48:11 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUmv-00049f-K0
+ for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:47:18 -0500
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-40eec4984acso23252125e9.2
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jan 2024 08:47:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706546890; x=1707151690; darn=nongnu.org;
+ d=linaro.org; s=google; t=1706546830; x=1707151630; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rfR8cC6O+BWQhQkWXGdZ7PfclWjDr/hbLCsaxnqdy8k=;
- b=DIy2XmezmVWtAyc6E0HEtvM82wc7b721PmBqh1IBwU8IPrVX7fpTILo90rjNGg/r43
- 2rqD8e19qtA9DIHeCLfJN+JV8897o0iyy53tMcImva577Fz3eimvHetpWbhTQdJx4vSS
- 5xJeMPPqGAB9QlrAlfnfJG8konzHaA99KcA6DyxyoqqujYoK46QkLmfJ+zLJ1PIyTYLh
- PQ65ZYbL649vT8p84waBfenoetVqnaEYE0fYgvyLPM30YZi8wwwoC3eyffkdmHwE2xCG
- j0Lcevkwkc4+jcxM1Sr0bkyNpKTyYuYEHp9QKl848v/LMYHPcvg+eEInNnGQIR/0Zmm7
- 4yPA==
+ bh=a1GRxsPkPoYM/j9b9XVxD2Uv8+2XdiDkavqzy6v+eQw=;
+ b=l75F1M+UT8AQEVnvVC4OdWYUUxlfQSjhiPTLLWUlCj/hf59P9NLHvqRqOICNZxVsJ5
+ u86T79mnws12QcuZBZ4NAocUBU0+mi4lHS5pMgTuT2JE47AKTdlSA+3rIMEvNinBXgV4
+ hcHaF6mVHyxyyN4YufOy56QTY2t+t0ODliKeSRzQrrTP9Ubh2EO2NRwV5R7wGFMR5gG/
+ ClrNBisR8uAqiyE9tNkIrtAh96/NOVuQ2nN+kWVCpZviJfpE1LNoZQxhAV8C9NP+iQdS
+ TS/VEW62ATcr3IAg9U/9W5SIIIhzBOkJUh6u0TAi4n6GiYI6As803GZDbQtMuuP4WCgG
+ Te7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706546890; x=1707151690;
+ d=1e100.net; s=20230601; t=1706546830; x=1707151630;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rfR8cC6O+BWQhQkWXGdZ7PfclWjDr/hbLCsaxnqdy8k=;
- b=Ih7j24j/pg7Q4Mx4tGjaJJtRXRV17os8kCa3kXa7hNm6mIJoKJi5NLpIpJ1T6Xejrv
- h6B9IqQS9bq9xgUY5aHTpQt2dhdCMz73F1nIA9qleG1HoCw3mA4G28UyogXWhrPP/dl7
- qx3qtkCyEE55C0S/wtQ7cV8Y7t8wxzOJImkdDKBjgO/r3ewtcbZhmoY8NObyBLq/hLYR
- SE/h02Ltx4fWCOVgXHmvQUbL20yEQQ7om0VxIKwgATayxN4f0fvA/49oy2TKKMLVtEZk
- lvhB1gNcgFE9RsYas0+29fRqRdcT2OUlnfB31BSrlYX3awEtqhQRPb7FDPnuFfFwGFnm
- yOzg==
-X-Gm-Message-State: AOJu0Yz94W3XfU2OfO8zjWdn8E+FIxvZvStbl6x3604l88uscp/X6yK6
- aw2/cIZ3Uo39UG+CKbPg7D2XIi2WcNZwyKuxtlhCPN/c19bviAsk6vZ5Xh4vkp4=
-X-Google-Smtp-Source: AGHT+IFdYBYX+YhuXRJ5ebXXB5wSuyFUDmegmoCsIRNXBDPunLZRwNY2MqJbCauv7QOv9aYvnOjo7g==
-X-Received: by 2002:ac2:4e08:0:b0:510:1b81:ac2f with SMTP id
- e8-20020ac24e08000000b005101b81ac2fmr4708425lfr.62.1706546890079; 
- Mon, 29 Jan 2024 08:48:10 -0800 (PST)
+ bh=a1GRxsPkPoYM/j9b9XVxD2Uv8+2XdiDkavqzy6v+eQw=;
+ b=TAYsOUiCHNs7goQqWnnvHUgHbr21m4LVOOgodw45I1UG6fxx1t1epsusIRfnQjQHyg
+ jVk35fas2l9OiycgzkNoNWMP/M0lzbMvnuwdNL8jRr/djPodliF069laaVTSBb64zztL
+ e1KJPhkA13nb4/fJoFt145OCsv9dxr7sa/7LYA+2Hrw8DrlEfFRXS5eoH9auuve00rf/
+ q/h+AlGLq1juiRujZdsoJrFUpWyNQ/hNkV/KisVndbCA94udMgEwG0eVjMyH83e+UsgY
+ cp4Sy8x1UVdQ3XnUcIknU6/OdwUsdghJqyqlUpjGyP91stG9eop/AH1RpoZYe58elc2b
+ o6OA==
+X-Gm-Message-State: AOJu0Yy6jERp5NZZwIkuKMvwth8NQNCTIEcipcAPo6gagzliZDPqmdcE
+ vFKhaGnEk6ZkZWl2MeYiDuTEY9gbkdoj+1qgjtaQAt2V6u+wUxcpgR5IflXVEiU=
+X-Google-Smtp-Source: AGHT+IEpEpjILUE8/G6pqPee5gIH5YxC8wNTBQ4S47nuLxugvg/Jof6ItSCTwlZoBEcJKZyXSOwA2g==
+X-Received: by 2002:adf:f5c7:0:b0:33a:f505:c0f3 with SMTP id
+ k7-20020adff5c7000000b0033af505c0f3mr1122952wrp.2.1706546830355; 
+ Mon, 29 Jan 2024 08:47:10 -0800 (PST)
 Received: from m1x-phil.lan ([176.187.219.39])
  by smtp.gmail.com with ESMTPSA id
- u11-20020a056000038b00b0033aed5feea4sm3296936wrf.54.2024.01.29.08.48.08
+ k14-20020adff28e000000b003392172fd60sm8453319wro.51.2024.01.29.08.47.08
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 29 Jan 2024 08:48:09 -0800 (PST)
+ Mon, 29 Jan 2024 08:47:09 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
@@ -63,26 +63,29 @@ Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Max Filippov <jcmvbkbc@gmail.com>
-Subject: [PATCH v3 28/29] target/xtensa: Prefer fast cpu_env() over slower CPU
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Huacai Chen <chenhuacai@kernel.org>
+Subject: [PATCH v3 18/29] target/mips: Prefer fast cpu_env() over slower CPU
  QOM cast macro
-Date: Mon, 29 Jan 2024 17:45:10 +0100
-Message-ID: <20240129164514.73104-29-philmd@linaro.org>
+Date: Mon, 29 Jan 2024 17:45:00 +0100
+Message-ID: <20240129164514.73104-19-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240129164514.73104-1-philmd@linaro.org>
 References: <20240129164514.73104-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::12d;
- envelope-from=philmd@linaro.org; helo=mail-lf1-x12d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,144 +104,291 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Mechanical patch produced running the command documented
 in scripts/coccinelle/cpu_env.cocci_template header.
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/xtensa/cpu.c        | 3 +--
- target/xtensa/dbg_helper.c | 3 +--
- target/xtensa/exc_helper.c | 3 +--
- target/xtensa/gdbstub.c    | 6 ++----
- target/xtensa/helper.c     | 9 +++------
- target/xtensa/translate.c  | 6 ++----
- 6 files changed, 10 insertions(+), 20 deletions(-)
+ target/mips/cpu.c                       | 15 ++++----------
+ target/mips/gdbstub.c                   |  6 ++----
+ target/mips/kvm.c                       | 27 +++++++++----------------
+ target/mips/sysemu/physaddr.c           |  3 +--
+ target/mips/tcg/exception.c             |  3 +--
+ target/mips/tcg/op_helper.c             |  8 +++-----
+ target/mips/tcg/sysemu/special_helper.c |  3 +--
+ target/mips/tcg/sysemu/tlb_helper.c     |  6 ++----
+ target/mips/tcg/translate.c             |  3 +--
+ 9 files changed, 24 insertions(+), 50 deletions(-)
 
-diff --git a/target/xtensa/cpu.c b/target/xtensa/cpu.c
-index ce044466ad..47fd7c7ca9 100644
---- a/target/xtensa/cpu.c
-+++ b/target/xtensa/cpu.c
-@@ -91,9 +91,8 @@ bool xtensa_abi_call0(void)
- static void xtensa_cpu_reset_hold(Object *obj)
- {
-     CPUState *cs = CPU(obj);
--    XtensaCPU *cpu = XTENSA_CPU(cs);
-     XtensaCPUClass *xcc = XTENSA_CPU_GET_CLASS(obj);
--    CPUXtensaState *env = &cpu->env;
-+    CPUXtensaState *env = cpu_env(cs);
-     bool dfpu = xtensa_option_enabled(env->config,
-                                       XTENSA_OPTION_DFP_COPROCESSOR);
+diff --git a/target/mips/cpu.c b/target/mips/cpu.c
+index 6ced52f985..1bea76e40a 100644
+--- a/target/mips/cpu.c
++++ b/target/mips/cpu.c
+@@ -80,8 +80,7 @@ static void fpu_dump_state(CPUMIPSState *env, FILE *f, int flags)
  
-diff --git a/target/xtensa/dbg_helper.c b/target/xtensa/dbg_helper.c
-index 497dafca71..5546c82ecd 100644
---- a/target/xtensa/dbg_helper.c
-+++ b/target/xtensa/dbg_helper.c
-@@ -66,8 +66,7 @@ void HELPER(wsr_ibreaka)(CPUXtensaState *env, uint32_t i, uint32_t v)
- 
- bool xtensa_debug_check_breakpoint(CPUState *cs)
+ static void mips_cpu_dump_state(CPUState *cs, FILE *f, int flags)
  {
--    XtensaCPU *cpu = XTENSA_CPU(cs);
--    CPUXtensaState *env = &cpu->env;
-+    CPUXtensaState *env = cpu_env(cs);
+-    MIPSCPU *cpu = MIPS_CPU(cs);
+-    CPUMIPSState *env = &cpu->env;
++    CPUMIPSState *env = cpu_env(cs);
+     int i;
+ 
+     qemu_fprintf(f, "pc=0x" TARGET_FMT_lx " HI=0x" TARGET_FMT_lx
+@@ -123,9 +122,7 @@ void cpu_set_exception_base(int vp_index, target_ulong address)
+ 
+ static void mips_cpu_set_pc(CPUState *cs, vaddr value)
+ {
+-    MIPSCPU *cpu = MIPS_CPU(cs);
+-
+-    mips_env_set_pc(&cpu->env, value);
++    mips_env_set_pc(cpu_env(cs), value);
+ }
+ 
+ static vaddr mips_cpu_get_pc(CPUState *cs)
+@@ -137,8 +134,7 @@ static vaddr mips_cpu_get_pc(CPUState *cs)
+ 
+ static bool mips_cpu_has_work(CPUState *cs)
+ {
+-    MIPSCPU *cpu = MIPS_CPU(cs);
+-    CPUMIPSState *env = &cpu->env;
++    CPUMIPSState *env = cpu_env(cs);
+     bool has_work = false;
+ 
+     /*
+@@ -428,10 +424,7 @@ static void mips_cpu_reset_hold(Object *obj)
+ 
+ static void mips_cpu_disas_set_info(CPUState *s, disassemble_info *info)
+ {
+-    MIPSCPU *cpu = MIPS_CPU(s);
+-    CPUMIPSState *env = &cpu->env;
+-
+-    if (!(env->insn_flags & ISA_NANOMIPS32)) {
++    if (!(cpu_env(s)->insn_flags & ISA_NANOMIPS32)) {
+ #if TARGET_BIG_ENDIAN
+         info->print_insn = print_insn_big_mips;
+ #else
+diff --git a/target/mips/gdbstub.c b/target/mips/gdbstub.c
+index 62d7b72407..169d47416a 100644
+--- a/target/mips/gdbstub.c
++++ b/target/mips/gdbstub.c
+@@ -25,8 +25,7 @@
+ 
+ int mips_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+ {
+-    MIPSCPU *cpu = MIPS_CPU(cs);
+-    CPUMIPSState *env = &cpu->env;
++    CPUMIPSState *env = cpu_env(cs);
+ 
+     if (n < 32) {
+         return gdb_get_regl(mem_buf, env->active_tc.gpr[n]);
+@@ -78,8 +77,7 @@ int mips_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+ 
+ int mips_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+ {
+-    MIPSCPU *cpu = MIPS_CPU(cs);
+-    CPUMIPSState *env = &cpu->env;
++    CPUMIPSState *env = cpu_env(cs);
+     target_ulong tmp;
+ 
+     tmp = ldtul_p(mem_buf);
+diff --git a/target/mips/kvm.c b/target/mips/kvm.c
+index 15d0cf9adb..6c52e59f55 100644
+--- a/target/mips/kvm.c
++++ b/target/mips/kvm.c
+@@ -63,8 +63,7 @@ int kvm_arch_irqchip_create(KVMState *s)
+ 
+ int kvm_arch_init_vcpu(CPUState *cs)
+ {
+-    MIPSCPU *cpu = MIPS_CPU(cs);
+-    CPUMIPSState *env = &cpu->env;
++    CPUMIPSState *env = cpu_env(cs);
+     int ret = 0;
+ 
+     qemu_add_vm_change_state_handler(kvm_mips_update_state, cs);
+@@ -460,8 +459,7 @@ static inline int kvm_mips_change_one_reg(CPUState *cs, uint64_t reg_id,
+  */
+ static int kvm_mips_save_count(CPUState *cs)
+ {
+-    MIPSCPU *cpu = MIPS_CPU(cs);
+-    CPUMIPSState *env = &cpu->env;
++    CPUMIPSState *env = cpu_env(cs);
+     uint64_t count_ctl;
+     int err, ret = 0;
+ 
+@@ -502,8 +500,7 @@ static int kvm_mips_save_count(CPUState *cs)
+  */
+ static int kvm_mips_restore_count(CPUState *cs)
+ {
+-    MIPSCPU *cpu = MIPS_CPU(cs);
+-    CPUMIPSState *env = &cpu->env;
++    CPUMIPSState *env = cpu_env(cs);
+     uint64_t count_ctl;
+     int err_dc, err, ret = 0;
+ 
+@@ -590,8 +587,7 @@ static void kvm_mips_update_state(void *opaque, bool running, RunState state)
+ 
+ static int kvm_mips_put_fpu_registers(CPUState *cs, int level)
+ {
+-    MIPSCPU *cpu = MIPS_CPU(cs);
+-    CPUMIPSState *env = &cpu->env;
++    CPUMIPSState *env = cpu_env(cs);
+     int err, ret = 0;
      unsigned int i;
  
-     if (xtensa_get_cintlevel(env) >= env->config->debug_level) {
-diff --git a/target/xtensa/exc_helper.c b/target/xtensa/exc_helper.c
-index 168419a505..0514c2c1f3 100644
---- a/target/xtensa/exc_helper.c
-+++ b/target/xtensa/exc_helper.c
-@@ -205,8 +205,7 @@ static void handle_interrupt(CPUXtensaState *env)
- /* Called from cpu_handle_interrupt with BQL held */
- void xtensa_cpu_do_interrupt(CPUState *cs)
+@@ -670,8 +666,7 @@ static int kvm_mips_put_fpu_registers(CPUState *cs, int level)
+ 
+ static int kvm_mips_get_fpu_registers(CPUState *cs)
  {
--    XtensaCPU *cpu = XTENSA_CPU(cs);
--    CPUXtensaState *env = &cpu->env;
-+    CPUXtensaState *env = cpu_env(cs);
+-    MIPSCPU *cpu = MIPS_CPU(cs);
+-    CPUMIPSState *env = &cpu->env;
++    CPUMIPSState *env = cpu_env(cs);
+     int err, ret = 0;
+     unsigned int i;
  
-     if (cs->exception_index == EXC_IRQ) {
-         qemu_log_mask(CPU_LOG_INT,
-diff --git a/target/xtensa/gdbstub.c b/target/xtensa/gdbstub.c
-index 4b3bfb7e59..4748fb6532 100644
---- a/target/xtensa/gdbstub.c
-+++ b/target/xtensa/gdbstub.c
-@@ -65,8 +65,7 @@ void xtensa_count_regs(const XtensaConfig *config,
+@@ -751,8 +746,7 @@ static int kvm_mips_get_fpu_registers(CPUState *cs)
  
- int xtensa_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+ static int kvm_mips_put_cp0_registers(CPUState *cs, int level)
  {
--    XtensaCPU *cpu = XTENSA_CPU(cs);
--    CPUXtensaState *env = &cpu->env;
-+    CPUXtensaState *env = cpu_env(cs);
-     const XtensaGdbReg *reg = env->config->gdb_regmap.reg + n;
- #ifdef CONFIG_USER_ONLY
-     int num_regs = env->config->gdb_regmap.num_core_regs;
-@@ -120,8 +119,7 @@ int xtensa_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+-    MIPSCPU *cpu = MIPS_CPU(cs);
+-    CPUMIPSState *env = &cpu->env;
++    CPUMIPSState *env = cpu_env(cs);
+     int err, ret = 0;
  
- int xtensa_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+     (void)level;
+@@ -974,8 +968,7 @@ static int kvm_mips_put_cp0_registers(CPUState *cs, int level)
+ 
+ static int kvm_mips_get_cp0_registers(CPUState *cs)
  {
--    XtensaCPU *cpu = XTENSA_CPU(cs);
--    CPUXtensaState *env = &cpu->env;
-+    CPUXtensaState *env = cpu_env(cs);
-     uint32_t tmp;
-     const XtensaGdbReg *reg = env->config->gdb_regmap.reg + n;
- #ifdef CONFIG_USER_ONLY
-diff --git a/target/xtensa/helper.c b/target/xtensa/helper.c
-index a9f8907083..ca214b948a 100644
---- a/target/xtensa/helper.c
-+++ b/target/xtensa/helper.c
-@@ -217,8 +217,7 @@ static uint32_t check_hw_breakpoints(CPUXtensaState *env)
+-    MIPSCPU *cpu = MIPS_CPU(cs);
+-    CPUMIPSState *env = &cpu->env;
++    CPUMIPSState *env = cpu_env(cs);
+     int err, ret = 0;
  
- void xtensa_breakpoint_handler(CPUState *cs)
+     err = kvm_mips_get_one_reg(cs, KVM_REG_MIPS_CP0_INDEX, &env->CP0_Index);
+@@ -1181,8 +1174,7 @@ static int kvm_mips_get_cp0_registers(CPUState *cs)
+ 
+ int kvm_arch_put_registers(CPUState *cs, int level)
  {
--    XtensaCPU *cpu = XTENSA_CPU(cs);
--    CPUXtensaState *env = &cpu->env;
-+    CPUXtensaState *env = cpu_env(cs);
+-    MIPSCPU *cpu = MIPS_CPU(cs);
+-    CPUMIPSState *env = &cpu->env;
++    CPUMIPSState *env = cpu_env(cs);
+     struct kvm_regs regs;
+     int ret;
+     int i;
+@@ -1217,8 +1209,7 @@ int kvm_arch_put_registers(CPUState *cs, int level)
  
-     if (cs->watchpoint_hit) {
-         if (cs->watchpoint_hit->flags & BP_CPU) {
-@@ -266,8 +265,7 @@ bool xtensa_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-                          MMUAccessType access_type, int mmu_idx,
-                          bool probe, uintptr_t retaddr)
+ int kvm_arch_get_registers(CPUState *cs)
  {
--    XtensaCPU *cpu = XTENSA_CPU(cs);
--    CPUXtensaState *env = &cpu->env;
-+    CPUXtensaState *env = cpu_env(cs);
-     uint32_t paddr;
-     uint32_t page_size;
-     unsigned access;
-@@ -297,8 +295,7 @@ void xtensa_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr, vaddr addr,
-                                       int mmu_idx, MemTxAttrs attrs,
-                                       MemTxResult response, uintptr_t retaddr)
+-    MIPSCPU *cpu = MIPS_CPU(cs);
+-    CPUMIPSState *env = &cpu->env;
++    CPUMIPSState *env = cpu_env(cs);
+     int ret = 0;
+     struct kvm_regs regs;
+     int i;
+diff --git a/target/mips/sysemu/physaddr.c b/target/mips/sysemu/physaddr.c
+index 05990aa5bb..56380dfe6c 100644
+--- a/target/mips/sysemu/physaddr.c
++++ b/target/mips/sysemu/physaddr.c
+@@ -230,8 +230,7 @@ int get_physical_address(CPUMIPSState *env, hwaddr *physical,
+ 
+ hwaddr mips_cpu_get_phys_page_debug(CPUState *cs, vaddr addr)
  {
--    XtensaCPU *cpu = XTENSA_CPU(cs);
--    CPUXtensaState *env = &cpu->env;
-+    CPUXtensaState *env = cpu_env(cs);
+-    MIPSCPU *cpu = MIPS_CPU(cs);
+-    CPUMIPSState *env = &cpu->env;
++    CPUMIPSState *env = cpu_env(cs);
+     hwaddr phys_addr;
+     int prot;
  
-     cpu_restore_state(cs, retaddr);
-     HELPER(exception_cause_vaddr)(env, env->pc,
-diff --git a/target/xtensa/translate.c b/target/xtensa/translate.c
-index 87947236ca..e646e016df 100644
---- a/target/xtensa/translate.c
-+++ b/target/xtensa/translate.c
-@@ -1127,10 +1127,9 @@ static void xtensa_tr_init_disas_context(DisasContextBase *dcbase,
-                                          CPUState *cpu)
+diff --git a/target/mips/tcg/exception.c b/target/mips/tcg/exception.c
+index da49a93912..13275d1ded 100644
+--- a/target/mips/tcg/exception.c
++++ b/target/mips/tcg/exception.c
+@@ -79,8 +79,7 @@ void helper_wait(CPUMIPSState *env)
+ 
+ void mips_cpu_synchronize_from_tb(CPUState *cs, const TranslationBlock *tb)
  {
-     DisasContext *dc = container_of(dcbase, DisasContext, base);
--    CPUXtensaState *env = cpu_env(cpu);
-     uint32_t tb_flags = dc->base.tb->flags;
+-    MIPSCPU *cpu = MIPS_CPU(cs);
+-    CPUMIPSState *env = &cpu->env;
++    CPUMIPSState *env = cpu_env(cs);
  
--    dc->config = env->config;
-+    dc->config = cpu_env(cpu)->config;
-     dc->pc = dc->base.pc_first;
-     dc->ring = tb_flags & XTENSA_TBFLAG_RING_MASK;
-     dc->cring = (tb_flags & XTENSA_TBFLAG_EXCM) ? 0 : dc->ring;
-@@ -1248,8 +1247,7 @@ void gen_intermediate_code(CPUState *cpu, TranslationBlock *tb, int *max_insns,
- 
- void xtensa_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+     tcg_debug_assert(!(cs->tcg_cflags & CF_PCREL));
+     env->active_tc.PC = tb->pc;
+diff --git a/target/mips/tcg/op_helper.c b/target/mips/tcg/op_helper.c
+index 98935b5e64..65403f1a87 100644
+--- a/target/mips/tcg/op_helper.c
++++ b/target/mips/tcg/op_helper.c
+@@ -279,8 +279,7 @@ void mips_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+                                   MMUAccessType access_type,
+                                   int mmu_idx, uintptr_t retaddr)
  {
--    XtensaCPU *cpu = XTENSA_CPU(cs);
--    CPUXtensaState *env = &cpu->env;
-+    CPUXtensaState *env = cpu_env(cs);
-     xtensa_isa isa = env->config->isa;
-     int i, j;
+-    MIPSCPU *cpu = MIPS_CPU(cs);
+-    CPUMIPSState *env = &cpu->env;
++    CPUMIPSState *env = cpu_env(cs);
+     int error_code = 0;
+     int excp;
  
+@@ -306,9 +305,8 @@ void mips_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr,
+                                     int mmu_idx, MemTxAttrs attrs,
+                                     MemTxResult response, uintptr_t retaddr)
+ {
+-    MIPSCPU *cpu = MIPS_CPU(cs);
+-    MIPSCPUClass *mcc = MIPS_CPU_GET_CLASS(cpu);
+-    CPUMIPSState *env = &cpu->env;
++    MIPSCPUClass *mcc = MIPS_CPU_GET_CLASS(cs);
++    CPUMIPSState *env = cpu_env(cs);
+ 
+     if (access_type == MMU_INST_FETCH) {
+         do_raise_exception(env, EXCP_IBE, retaddr);
+diff --git a/target/mips/tcg/sysemu/special_helper.c b/target/mips/tcg/sysemu/special_helper.c
+index 93276f789d..7934f2ea41 100644
+--- a/target/mips/tcg/sysemu/special_helper.c
++++ b/target/mips/tcg/sysemu/special_helper.c
+@@ -90,8 +90,7 @@ static void debug_post_eret(CPUMIPSState *env)
+ 
+ bool mips_io_recompile_replay_branch(CPUState *cs, const TranslationBlock *tb)
+ {
+-    MIPSCPU *cpu = MIPS_CPU(cs);
+-    CPUMIPSState *env = &cpu->env;
++    CPUMIPSState *env = cpu_env(cs);
+ 
+     if ((env->hflags & MIPS_HFLAG_BMASK) != 0
+         && !(cs->tcg_cflags & CF_PCREL) && env->active_tc.PC != tb->pc) {
+diff --git a/target/mips/tcg/sysemu/tlb_helper.c b/target/mips/tcg/sysemu/tlb_helper.c
+index 4ede904800..6c48c4fa80 100644
+--- a/target/mips/tcg/sysemu/tlb_helper.c
++++ b/target/mips/tcg/sysemu/tlb_helper.c
+@@ -910,8 +910,7 @@ bool mips_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+                        MMUAccessType access_type, int mmu_idx,
+                        bool probe, uintptr_t retaddr)
+ {
+-    MIPSCPU *cpu = MIPS_CPU(cs);
+-    CPUMIPSState *env = &cpu->env;
++    CPUMIPSState *env = cpu_env(cs);
+     hwaddr physical;
+     int prot;
+     int ret = TLBRET_BADADDR;
+@@ -1346,8 +1345,7 @@ void mips_cpu_do_interrupt(CPUState *cs)
+ bool mips_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+ {
+     if (interrupt_request & CPU_INTERRUPT_HARD) {
+-        MIPSCPU *cpu = MIPS_CPU(cs);
+-        CPUMIPSState *env = &cpu->env;
++        CPUMIPSState *env = cpu_env(cs);
+ 
+         if (cpu_mips_hw_interrupts_enabled(env) &&
+             cpu_mips_hw_interrupts_pending(env)) {
+diff --git a/target/mips/tcg/translate.c b/target/mips/tcg/translate.c
+index 13e43fa3b6..e74b98de1c 100644
+--- a/target/mips/tcg/translate.c
++++ b/target/mips/tcg/translate.c
+@@ -15628,8 +15628,7 @@ void mips_restore_state_to_opc(CPUState *cs,
+                                const TranslationBlock *tb,
+                                const uint64_t *data)
+ {
+-    MIPSCPU *cpu = MIPS_CPU(cs);
+-    CPUMIPSState *env = &cpu->env;
++    CPUMIPSState *env = cpu_env(cs);
+ 
+     env->active_tc.PC = data[0];
+     env->hflags &= ~MIPS_HFLAG_BMASK;
 -- 
 2.41.0
 
