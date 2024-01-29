@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CBFDC47DB3
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 16:49:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 091AEC47DDB
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 16:49:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rUUoA-0004mP-Rd; Mon, 29 Jan 2024 11:48:30 -0500
+	id 1rUUnR-0001Hm-57; Mon, 29 Jan 2024 11:47:45 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUn8-0000B3-6a
- for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:47:33 -0500
-Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUm5-0006PI-05
+ for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:46:22 -0500
+Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUn6-0004CT-98
- for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:47:25 -0500
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-40ee705e9bfso32613325e9.0
- for <qemu-riscv@nongnu.org>; Mon, 29 Jan 2024 08:47:22 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUm2-0003u6-Cn
+ for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:46:20 -0500
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-40eacb4bfa0so35005705e9.1
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jan 2024 08:46:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706546842; x=1707151642; darn=nongnu.org;
+ d=linaro.org; s=google; t=1706546776; x=1707151576; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=81+lsllbL0HrT+oLcmb3UYRaeAjWMCareNwo8xEwpX8=;
- b=kYWcNNgnmIdoTW7yNmzdwoDFvIUYB3MOp09YkYcX63HGi1Clws3rZBiP3J3SEt76W0
- royFn75knaET8Ry8Rguw+pv4LXWLktNxZ1ZSQfoXiRuvVqZCCImzhafZ/zhqfGtxRy1N
- B54AkMhMgeeGItnBdQEhKhM0rsZJwalBkS9UBobQRavoVSqjOH9MLdXyOpcpg0D/dYVR
- lqp8JQ/Xrri69Ky7BFgs28etHgKyOzfQEeD+NQ2NAK+Ry4YRYL6slWDUF9R5zGwHF7RT
- vi4vgbvkLQs8KO54Zs2LzrbjGGh1D9xsihRNV09caDzWtCQfGBGIEDQCJUKU8p6pHWrb
- MfxA==
+ bh=pPVrCbRU1M9we1PYSP3dETCN8UlJAlkr84+2F+spRWs=;
+ b=R5+ccjgyt0wl49flqVAoimHC8H+t6wDZiqg53pkxw77bLkdXOv+Lq+uj9McPAV7rr9
+ rUpoi0QqzsJnIGYpgevTsnrYxJjEiy3mjjYcNdgFKuBzid/4O8nPYJbnKwKMjF0m42co
+ uuKCd9y7nYCb7fiZJnElwdk5zzDyFDKR+8OVAAjcOOk2BjUJd30T5XPIhha99aBRm0GZ
+ RSX60UiZcMBWcnInt+/jMvWP4ukrGPmmris0DIJNIAr9yn2l3MDSm+a1hJwSjN+83Yzv
+ 9eP03easd4p8zdftsdnRWS5dEwv+PHv4Fqt4vT2uC9Nuk+mEk87HgjkfyA+eZtijQOpZ
+ vOTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706546842; x=1707151642;
+ d=1e100.net; s=20230601; t=1706546776; x=1707151576;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=81+lsllbL0HrT+oLcmb3UYRaeAjWMCareNwo8xEwpX8=;
- b=jBOtRCALb9gzpAqwqHd7MHCP36SL6ixS1dpugvfFKkeu1yI3bn2wxw4EOXSqFP6Dk4
- bGobGUPiIdvMwz0sMwsLkwF1v+NPg256k6qsJCBBQk1v1ZhnYJL+L2KBnXFpZ5QfWPab
- b3QHMk7EuPGZA0dDHMh2yx04r6uwAcr+5UftQKyDps5i6GKOv1JZrC8Yyv/p+LbFgBXW
- 9vBE88LAE2vUGTOLpp9jZ3PcXmMHOAO+epWXaMzQHgb0N46jYNGeDuy8SAB6Ivn/dJEd
- iZQ7fi7jcUx7EcCBplHxxPm9AsHyCZKJP5KHDTniFvQQoRdbOm5KHDRD550unWIC42M/
- YkGw==
-X-Gm-Message-State: AOJu0YxdpOtuFLk3PeajJG5ewHC6mGOGyJ3r+iZn7N+eMeSx/G/7d2Qd
- t7Tj3Un+hrL1KwJtutnjt6EIYsjS13UAiNeU4spDQq7S/1MqqQEvPWSZHfJGjU4=
-X-Google-Smtp-Source: AGHT+IF84eaJDqu3xt4h++MvVzAifUXMdWy4p6XWOiZiCT5EhNKvbhRD8nzigVrNm+QsqfgoC8z5Ng==
-X-Received: by 2002:adf:fc46:0:b0:33a:eadb:f4cd with SMTP id
- e6-20020adffc46000000b0033aeadbf4cdmr2748018wrs.58.1706546841883; 
- Mon, 29 Jan 2024 08:47:21 -0800 (PST)
+ bh=pPVrCbRU1M9we1PYSP3dETCN8UlJAlkr84+2F+spRWs=;
+ b=StePRPidJb4+NPbrIMqXf9C26PtkSdl7/2Zt7yu0klWo4CoY05OAgisGrO6OK4/jZY
+ WyuqBUj8i6neBDWbXTJCcSvMpJS/1Btl1dyyvVhXJTpzGPvRy8ejtJqUo3sMN+Z/ksS8
+ 6bAzxoVasQOtztAz640ZZR0lXDuw6LVIrUohCJdfEI3NVhl624B4+nSGkoxPV473RDd7
+ yn3fo0xvUsi+IZNsMEoGcks7Ul1+ZRp+VcXREBhRiIPXYqnns8f4uu+tUtrLoPSv0QNl
+ t3OCJ2m5ooLGrPzsAZSfGNUTsmpaXNivt09O9c+SAD/8BhdPVV4Xpyxf1MxtH2vkORZz
+ 7fqw==
+X-Gm-Message-State: AOJu0Yx9NvTohDypY27mYUP/7ref6M9pakPaxQGZB7ad5FGKEiZxYdAD
+ D+d8MKaOdMxchh35J63QywIogkjydIZkB3ptuYwDFyilR8YXdLfOBUoQc0GM2iI=
+X-Google-Smtp-Source: AGHT+IGoyi1GJloWLT4o+Y6UqAMpV8DbzJbKaJW69srVFEf22YWTwUw/j8yDRVynsB1cqMzyP4ftLg==
+X-Received: by 2002:a05:600c:35d5:b0:40e:af40:b4da with SMTP id
+ r21-20020a05600c35d500b0040eaf40b4damr6044761wmq.26.1706546775871; 
+ Mon, 29 Jan 2024 08:46:15 -0800 (PST)
 Received: from m1x-phil.lan ([176.187.219.39])
  by smtp.gmail.com with ESMTPSA id
- p7-20020a5d4587000000b0033af670213dsm259833wrq.110.2024.01.29.08.47.20
+ t18-20020a05600c451200b0040e880ac6ecsm14562416wmo.35.2024.01.29.08.46.14
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 29 Jan 2024 08:47:21 -0800 (PST)
+ Mon, 29 Jan 2024 08:46:15 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
@@ -63,26 +63,26 @@ Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Stafford Horne <shorne@gmail.com>
-Subject: [PATCH v3 20/29] target/openrisc: Prefer fast cpu_env() over slower
- CPU QOM cast macro
-Date: Mon, 29 Jan 2024 17:45:02 +0100
-Message-ID: <20240129164514.73104-21-philmd@linaro.org>
+ Michael Rolnik <mrolnik@gmail.com>
+Subject: [PATCH v3 09/29] target/avr: Prefer fast cpu_env() over slower CPU
+ QOM cast macro
+Date: Mon, 29 Jan 2024 17:44:51 +0100
+Message-ID: <20240129164514.73104-10-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240129164514.73104-1-philmd@linaro.org>
 References: <20240129164514.73104-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::336;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x336.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::333;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x333.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,84 +104,167 @@ in scripts/coccinelle/cpu_env.cocci_template header.
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/openrisc/gdbstub.c   | 6 ++----
- target/openrisc/interrupt.c | 6 ++----
- target/openrisc/translate.c | 6 ++----
- 3 files changed, 6 insertions(+), 12 deletions(-)
+ target/avr/cpu.c       | 27 +++++++--------------------
+ target/avr/gdbstub.c   |  6 ++----
+ target/avr/helper.c    | 10 +++-------
+ target/avr/translate.c |  3 +--
+ 4 files changed, 13 insertions(+), 33 deletions(-)
 
-diff --git a/target/openrisc/gdbstub.c b/target/openrisc/gdbstub.c
-index d1074a0581..c2a77d5d4d 100644
---- a/target/openrisc/gdbstub.c
-+++ b/target/openrisc/gdbstub.c
-@@ -23,8 +23,7 @@
+diff --git a/target/avr/cpu.c b/target/avr/cpu.c
+index 0f191a4c9d..50ded8538b 100644
+--- a/target/avr/cpu.c
++++ b/target/avr/cpu.c
+@@ -43,31 +43,22 @@ static vaddr avr_cpu_get_pc(CPUState *cs)
  
- int openrisc_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+ static bool avr_cpu_has_work(CPUState *cs)
  {
--    OpenRISCCPU *cpu = OPENRISC_CPU(cs);
--    CPUOpenRISCState *env = &cpu->env;
-+    CPUOpenRISCState *env = cpu_env(cs);
+-    AVRCPU *cpu = AVR_CPU(cs);
+-    CPUAVRState *env = &cpu->env;
+-
+     return (cs->interrupt_request & (CPU_INTERRUPT_HARD | CPU_INTERRUPT_RESET))
+-            && cpu_interrupts_enabled(env);
++            && cpu_interrupts_enabled(cpu_env(cs));
+ }
  
-     if (n < 32) {
-         return gdb_get_reg32(mem_buf, cpu_get_gpr(env, n));
-@@ -48,9 +47,8 @@ int openrisc_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
- 
- int openrisc_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+ static void avr_cpu_synchronize_from_tb(CPUState *cs,
+                                         const TranslationBlock *tb)
  {
--    OpenRISCCPU *cpu = OPENRISC_CPU(cs);
-     CPUClass *cc = CPU_GET_CLASS(cs);
--    CPUOpenRISCState *env = &cpu->env;
-+    CPUOpenRISCState *env = cpu_env(cs);
-     uint32_t tmp;
+-    AVRCPU *cpu = AVR_CPU(cs);
+-    CPUAVRState *env = &cpu->env;
+-
+     tcg_debug_assert(!(cs->tcg_cflags & CF_PCREL));
+-    env->pc_w = tb->pc / 2; /* internally PC points to words */
++    cpu_env(cs)->pc_w = tb->pc / 2; /* internally PC points to words */
+ }
  
-     if (n > cc->gdb_num_core_regs) {
-diff --git a/target/openrisc/interrupt.c b/target/openrisc/interrupt.c
-index d4fdb8ce8e..b3b5b40577 100644
---- a/target/openrisc/interrupt.c
-+++ b/target/openrisc/interrupt.c
-@@ -29,8 +29,7 @@
- 
- void openrisc_cpu_do_interrupt(CPUState *cs)
+ static void avr_restore_state_to_opc(CPUState *cs,
+                                      const TranslationBlock *tb,
+                                      const uint64_t *data)
  {
--    OpenRISCCPU *cpu = OPENRISC_CPU(cs);
--    CPUOpenRISCState *env = &cpu->env;
-+    CPUOpenRISCState *env = cpu_env(cs);
-     int exception = cs->exception_index;
+-    AVRCPU *cpu = AVR_CPU(cs);
+-    CPUAVRState *env = &cpu->env;
+-
+-    env->pc_w = data[0];
++    cpu_env(cs)->pc_w = data[0];
+ }
  
-     env->epcr = env->pc;
-@@ -105,8 +104,7 @@ void openrisc_cpu_do_interrupt(CPUState *cs)
+ static void avr_cpu_reset_hold(Object *obj)
+@@ -165,8 +156,7 @@ static ObjectClass *avr_cpu_class_by_name(const char *cpu_model)
  
- bool openrisc_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+ static void avr_cpu_dump_state(CPUState *cs, FILE *f, int flags)
  {
--    OpenRISCCPU *cpu = OPENRISC_CPU(cs);
--    CPUOpenRISCState *env = &cpu->env;
-+    CPUOpenRISCState *env = cpu_env(cs);
-     int idx = -1;
- 
-     if ((interrupt_request & CPU_INTERRUPT_HARD) && (env->sr & SR_IEE)) {
-diff --git a/target/openrisc/translate.c b/target/openrisc/translate.c
-index ecff4412b7..12899c911d 100644
---- a/target/openrisc/translate.c
-+++ b/target/openrisc/translate.c
-@@ -1564,8 +1564,7 @@ static void openrisc_tr_insn_start(DisasContextBase *dcbase, CPUState *cs)
- static void openrisc_tr_translate_insn(DisasContextBase *dcbase, CPUState *cs)
- {
-     DisasContext *dc = container_of(dcbase, DisasContext, base);
--    OpenRISCCPU *cpu = OPENRISC_CPU(cs);
--    uint32_t insn = translator_ldl(&cpu->env, &dc->base, dc->base.pc_next);
-+    uint32_t insn = translator_ldl(cpu_env(cs), &dc->base, dc->base.pc_next);
- 
-     if (!decode(dc, insn)) {
-         gen_illegal_exception(dc);
-@@ -1668,8 +1667,7 @@ void gen_intermediate_code(CPUState *cs, TranslationBlock *tb, int *max_insns,
- 
- void openrisc_cpu_dump_state(CPUState *cs, FILE *f, int flags)
- {
--    OpenRISCCPU *cpu = OPENRISC_CPU(cs);
--    CPUOpenRISCState *env = &cpu->env;
-+    CPUOpenRISCState *env = cpu_env(cs);
+-    AVRCPU *cpu = AVR_CPU(cs);
+-    CPUAVRState *env = &cpu->env;
++    CPUAVRState *env = cpu_env(cs);
      int i;
  
-     qemu_fprintf(f, "PC=%08x\n", env->pc);
+     qemu_fprintf(f, "\n");
+@@ -276,8 +266,7 @@ static void avr_cpu_class_init(ObjectClass *oc, void *data)
+  */
+ static void avr_avr5_initfn(Object *obj)
+ {
+-    AVRCPU *cpu = AVR_CPU(obj);
+-    CPUAVRState *env = &cpu->env;
++    CPUAVRState *env = cpu_env(CPU(obj));
+ 
+     set_avr_feature(env, AVR_FEATURE_LPM);
+     set_avr_feature(env, AVR_FEATURE_IJMP_ICALL);
+@@ -305,8 +294,7 @@ static void avr_avr5_initfn(Object *obj)
+  */
+ static void avr_avr51_initfn(Object *obj)
+ {
+-    AVRCPU *cpu = AVR_CPU(obj);
+-    CPUAVRState *env = &cpu->env;
++    CPUAVRState *env = cpu_env(CPU(obj));
+ 
+     set_avr_feature(env, AVR_FEATURE_LPM);
+     set_avr_feature(env, AVR_FEATURE_IJMP_ICALL);
+@@ -335,8 +323,7 @@ static void avr_avr51_initfn(Object *obj)
+  */
+ static void avr_avr6_initfn(Object *obj)
+ {
+-    AVRCPU *cpu = AVR_CPU(obj);
+-    CPUAVRState *env = &cpu->env;
++    CPUAVRState *env = cpu_env(CPU(obj));
+ 
+     set_avr_feature(env, AVR_FEATURE_LPM);
+     set_avr_feature(env, AVR_FEATURE_IJMP_ICALL);
+diff --git a/target/avr/gdbstub.c b/target/avr/gdbstub.c
+index 150344d8b9..2eeee2bf4e 100644
+--- a/target/avr/gdbstub.c
++++ b/target/avr/gdbstub.c
+@@ -23,8 +23,7 @@
+ 
+ int avr_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+ {
+-    AVRCPU *cpu = AVR_CPU(cs);
+-    CPUAVRState *env = &cpu->env;
++    CPUAVRState *env = cpu_env(cs);
+ 
+     /*  R */
+     if (n < 32) {
+@@ -53,8 +52,7 @@ int avr_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+ 
+ int avr_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+ {
+-    AVRCPU *cpu = AVR_CPU(cs);
+-    CPUAVRState *env = &cpu->env;
++    CPUAVRState *env = cpu_env(cs);
+ 
+     /*  R */
+     if (n < 32) {
+diff --git a/target/avr/helper.c b/target/avr/helper.c
+index fdc9884ea0..eeca415c43 100644
+--- a/target/avr/helper.c
++++ b/target/avr/helper.c
+@@ -30,8 +30,7 @@
+ 
+ bool avr_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+ {
+-    AVRCPU *cpu = AVR_CPU(cs);
+-    CPUAVRState *env = &cpu->env;
++    CPUAVRState *env = cpu_env(cs);
+ 
+     /*
+      * We cannot separate a skip from the next instruction,
+@@ -69,8 +68,7 @@ bool avr_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+ 
+ void avr_cpu_do_interrupt(CPUState *cs)
+ {
+-    AVRCPU *cpu = AVR_CPU(cs);
+-    CPUAVRState *env = &cpu->env;
++    CPUAVRState *env = cpu_env(cs);
+ 
+     uint32_t ret = env->pc_w;
+     int vector = 0;
+@@ -144,9 +142,7 @@ bool avr_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+             if (probe) {
+                 page_size = 1;
+             } else {
+-                AVRCPU *cpu = AVR_CPU(cs);
+-                CPUAVRState *env = &cpu->env;
+-                env->fullacc = 1;
++                cpu_env(cs)->fullacc = 1;
+                 cpu_loop_exit_restore(cs, retaddr);
+             }
+         }
+diff --git a/target/avr/translate.c b/target/avr/translate.c
+index cdffa04519..682a44139e 100644
+--- a/target/avr/translate.c
++++ b/target/avr/translate.c
+@@ -2657,11 +2657,10 @@ static bool canonicalize_skip(DisasContext *ctx)
+ static void avr_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+ {
+     DisasContext *ctx = container_of(dcbase, DisasContext, base);
+-    CPUAVRState *env = cpu_env(cs);
+     uint32_t tb_flags = ctx->base.tb->flags;
+ 
+     ctx->cs = cs;
+-    ctx->env = env;
++    ctx->env = cpu_env(cs);
+     ctx->npc = ctx->base.pc_first / 2;
+ 
+     ctx->skip_cond = TCG_COND_NEVER;
 -- 
 2.41.0
 
