@@ -4,67 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7F1DC47DA9
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 08:48:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0A6CC47422
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 09:19:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rUNJg-0003Kf-R2; Mon, 29 Jan 2024 03:48:32 -0500
+	id 1rUNnj-0004pU-TI; Mon, 29 Jan 2024 04:19:36 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <vadim.shakirov@syntacore.com>)
- id 1rUNJe-0003ID-CI; Mon, 29 Jan 2024 03:48:30 -0500
-Received: from mta-04.yadro.com ([89.207.88.248])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <vadim.shakirov@syntacore.com>)
- id 1rUNJc-0006ZH-BY; Mon, 29 Jan 2024 03:48:30 -0500
-DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com 1E471C0016
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-04; t=1706518104;
- bh=C1QYP0j3twV0lFLiJ0IiCEddYoizmIvDtyy/2gcN9u4=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=oAZ4d+2Ahq15BGv6D2YZWcXe5IcFB2H8q2aoZ0FLBgbh+w3XeeH/Dfs1um9zjnbn0
- xgwLgQm/E8eNsJJkLFCRQ63OM5xR2mUsayFO4PFHce4svendhOuD+PUx1lgD+lvz7g
- LcNC+YfHITECqbdYYMyRKg9Tz92o2xIsx+hCIKAcBPnG7ME3zcO69eHM3d/xAelYRq
- hXwmg1tu0WA5Z1mPdhgk6vIKBH3dMcviVA9Fep660QaVoQUGuAIdeMNLyXYJ/UKw4u
- v6VdWYHlOvwEyjOI2A406lwIDRiLByyccjSQdcnxXgqbCX2SLcrkAPzKOj8y9nVBXi
- 9yeY54uwwFBoQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-03; t=1706518104;
- bh=C1QYP0j3twV0lFLiJ0IiCEddYoizmIvDtyy/2gcN9u4=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=IW3iXXBHsb7QLNLAXcv7bO94swhOS/LXRc1ya4ACk0QfPoSkXR+mzpxkKdbD0I771
- DBj8DUfu8s85Dd/Klh7RwslNdWnoq7RbfmYvE9QQfA+V9o4sGr1Vpd4Z2D9hjIW0ow
- 02OKVinRjUavyG11Oor0EFkA6LGmoGcaLdAEurlhr3sWNXMj6Lp/g8rDtwem9oYqY/
- aLCh/UxOu85dvaC0TexJAy6FFyGSrzpJ6xU1wdVGbh7Gps3QvPd6/R/HB3Fzl4TxwQ
- 8WL53mwf5lVEg8EefUucPsJEiNaS0WHyLFb0JP8BzyK46ZMIIYK8ugYbdECb6GgdHE
- 6RfLYf9DjWKqg==
-From: Vadim Shakirov <vadim.shakirov@syntacore.com>
-To: <qemu-devel@nongnu.org>
-CC: Vadim Shakirov <vadim.shakirov@syntacore.com>, Palmer Dabbelt
- <palmer@dabbelt.com>, Alistair Francis <alistair.francis@wdc.com>, Bin Meng
- <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, "Daniel Henrique
- Barboza" <dbarboza@ventanamicro.com>, Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>, <qemu-riscv@nongnu.org>
-Subject: [PATCH v2] target/riscv: mcountinhibit,
- mcounteren and scounteren always 32-bit
-Date: Mon, 29 Jan 2024 11:47:28 +0300
-Message-ID: <20240129084728.48311-1-vadim.shakirov@syntacore.com>
-X-Mailer: git-send-email 2.34.1
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1rUNnR-0004kv-CB
+ for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 04:19:19 -0500
+Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1rUNnJ-0005CF-I5
+ for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 04:19:14 -0500
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-55f15762840so304076a12.0
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jan 2024 01:19:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1706519945; x=1707124745; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Z1Iz0NXm8lZKCaX5Vu1diFa6lfHDRFty58QoqBOmom8=;
+ b=MiYXsbmd1spaAVDadc2EsgGB2KVwh+PsHDvl1WmTIrgWEpfq1AS59L01Jt3R+u097+
+ cHfzILJzstgKKK2bV3lBd70RyCaONEsxCOJ6szRIbG34dTWOBRdsgdGL87GpNPf5TpWE
+ 0gAtuZUuc3oozNPJikizKKEUWpbFCPqA6pLQxPXiqSiI/6njEaM9StmQt2FtvEmH2bFM
+ 1z5F7wxL8U3+cV4UD4S8w9Mh7KU68n6XHCeGrUGagfB0qzsJBN0E+7bKplsBPrM5kFiz
+ qQQBFRycxdMWeQfbXkDp9/kDARPm45uiSp3Yk1HkThM6gIg2+03fcu3kVH9fagzkII56
+ T/dQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706519945; x=1707124745;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Z1Iz0NXm8lZKCaX5Vu1diFa6lfHDRFty58QoqBOmom8=;
+ b=FRj/79T5PTlXMVBdFiucmJERVMp7vc7oxCx4ZBscRn4v65LhR/b+bCHmgXv3iq9I5x
+ BcWzJz3q/CDJFhHC3zo+OGiJAh1mhPLnFneydBfVjgNE4Pu1cecwx0516jaz8+zQRGDd
+ vgCLc6wyFcv+No0E+FjRa1sbxMukzKscPOnSwzX9FGrWtJAe0g8iZEe1O53sg0M81ojO
+ r4g2EMiYH21xx3blHLHMci+AjiAfZ68o/Ao0d9gdBnZ35UnyndzHB638twDKpwbNE/KR
+ WjEM/LgkBQ0cgx/FFyWC5GjvMFyQD0eFRxTEURuf4Yq86ekg8Q87cqlg9H9gnIlbOy4U
+ ucVA==
+X-Gm-Message-State: AOJu0YyOZ2revxKXOi7I739KzFxtMzWNxtaKny0V5uhZnTwgfUuoDc4K
+ kZbajzQynKvOQJcluwfJHc8P3G9r6nRrnfRhQo7h6S76eCLyCW5MoG3x/s7gON4=
+X-Google-Smtp-Source: AGHT+IF3AcSBCnrhvowGY96NJtm3PxdIrHebqRj3h5iTxP/LdHb+se7Ok7NnANsGS6Qd4Vxmc6za0Q==
+X-Received: by 2002:a17:906:1196:b0:a35:f361:724 with SMTP id
+ n22-20020a170906119600b00a35f3610724mr57509eja.21.1706519945155; 
+ Mon, 29 Jan 2024 01:19:05 -0800 (PST)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ by smtp.gmail.com with ESMTPSA id
+ tx18-20020a1709078e9200b00a3551f727d1sm2350257ejc.68.2024.01.29.01.19.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 29 Jan 2024 01:19:04 -0800 (PST)
+Date: Mon, 29 Jan 2024 10:19:03 +0100
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Sia Jee Heng <jeeheng.sia@starfivetech.com>
+Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ mst@redhat.com, imammedo@redhat.com, anisinha@redhat.com, 
+ peter.maydell@linaro.org, shannon.zhaosl@gmail.com, sunilvl@ventanamicro.com, 
+ palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
+ liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
+Subject: Re: [RESEND v2 1/2] hw/arm/virt-acpi-build.c: Migrate SPCR creation
+ to common location
+Message-ID: <20240129-e51095f37656f4ba5262ec68@orel>
+References: <20240129021440.17640-1-jeeheng.sia@starfivetech.com>
+ <20240129021440.17640-2-jeeheng.sia@starfivetech.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: T-EXCH-08.corp.yadro.com (172.17.11.58) To
- S-Exch-01.corp.yadro.com (10.78.5.241)
-Received-SPF: permerror client-ip=89.207.88.248;
- envelope-from=vadim.shakirov@syntacore.com; helo=mta-04.yadro.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240129021440.17640-2-jeeheng.sia@starfivetech.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::529;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x529.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- T_SCC_BODY_TEXT_LINE=-0.01,
- T_SPF_PERMERROR=0.01 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -80,62 +99,240 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-mcountinhibit, mcounteren and scounteren must always be 32-bit by
-privileged spec
+On Sun, Jan 28, 2024 at 06:14:39PM -0800, Sia Jee Heng wrote:
+> RISC-V should also generate the SPCR in a manner similar to ARM.
+> Therefore, instead of replicating the code, relocate this function
+> to the common AML build.
+> 
+> Signed-off-by: Sia Jee Heng <jeeheng.sia@starfivetech.com>
+> ---
+>  hw/acpi/aml-build.c         | 51 ++++++++++++++++++++++++++++
+>  hw/arm/virt-acpi-build.c    | 68 +++++++++++++++----------------------
+>  include/hw/acpi/acpi-defs.h | 33 ++++++++++++++++++
+>  include/hw/acpi/aml-build.h |  4 +++
+>  4 files changed, 115 insertions(+), 41 deletions(-)
+> 
+> diff --git a/hw/acpi/aml-build.c b/hw/acpi/aml-build.c
+> index af66bde0f5..f3904650e4 100644
+> --- a/hw/acpi/aml-build.c
+> +++ b/hw/acpi/aml-build.c
+> @@ -1994,6 +1994,57 @@ static void build_processor_hierarchy_node(GArray *tbl, uint32_t flags,
+>      }
+>  }
+>  
+> +void build_spcr(GArray *table_data, BIOSLinker *linker,
+> +                const AcpiSpcrData *f, const uint8_t rev,
+> +                const char *oem_id, const char *oem_table_id)
+> +{
+> +    AcpiTable table = { .sig = "SPCR", .rev = rev, .oem_id = oem_id,
+> +                        .oem_table_id = oem_table_id };
+> +
+> +    acpi_table_begin(&table, table_data);
+> +    /* Interface type */
+> +    build_append_int_noprefix(table_data, f->interface_type, 1);
+> +    /* Reserved */
+> +    build_append_int_noprefix(table_data, 0, 3);
+> +    /* Base Address */
+> +    build_append_gas(table_data, f->base_addr.id, f->base_addr.width,
+> +                     f->base_addr.offset, f->base_addr.size,
+> +                     f->base_addr.addr);
+> +    /* Interrupt type */
+> +    build_append_int_noprefix(table_data, f->interrupt_type, 1);
+> +    /* IRQ */
+> +    build_append_int_noprefix(table_data, f->pc_interrupt, 1);
+> +    /* Global System Interrupt */
+> +    build_append_int_noprefix(table_data, f->interrupt, 4);
+> +    /* Baud Rate */
+> +    build_append_int_noprefix(table_data, f->baud_rate, 1);
+> +    /* Parity */
+> +    build_append_int_noprefix(table_data, f->parity, 1);
+> +    /* Stop Bits */
+> +    build_append_int_noprefix(table_data, f->stop_bits, 1);
+> +    /* Flow Control */
+> +    build_append_int_noprefix(table_data, f->flow_control, 1);
+> +    /* Terminal Type */
+> +    build_append_int_noprefix(table_data, f->terminal_type, 1);
+> +    /* PCI Device ID  */
+> +    build_append_int_noprefix(table_data, f->pci_device_id, 2);
+> +    /* PCI Vendor ID */
+> +    build_append_int_noprefix(table_data, f->pci_vendor_id, 2);
+> +    /* PCI Bus Number */
+> +    build_append_int_noprefix(table_data, f->pci_bus, 1);
+> +    /* PCI Device Number */
+> +    build_append_int_noprefix(table_data, f->pci_device, 1);
+> +    /* PCI Function Number */
+> +    build_append_int_noprefix(table_data, f->pci_function, 1);
+> +    /* PCI Flags */
+> +    build_append_int_noprefix(table_data, f->pci_flags, 4);
+> +    /* PCI Segment */
+> +    build_append_int_noprefix(table_data, f->pci_segment, 1);
+> +    /* Reserved */
+> +    build_append_int_noprefix(table_data, 0, 4);
+> +
+> +    acpi_table_end(linker, &table);
+> +}
+>  /*
+>   * ACPI spec, Revision 6.3
+>   * 5.2.29 Processor Properties Topology Table (PPTT)
+> diff --git a/hw/arm/virt-acpi-build.c b/hw/arm/virt-acpi-build.c
+> index a22a2f43a5..195767c0f0 100644
+> --- a/hw/arm/virt-acpi-build.c
+> +++ b/hw/arm/virt-acpi-build.c
+> @@ -431,48 +431,34 @@ build_iort(GArray *table_data, BIOSLinker *linker, VirtMachineState *vms)
+>   * Rev: 1.07
+>   */
+>  static void
+> -build_spcr(GArray *table_data, BIOSLinker *linker, VirtMachineState *vms)
+> +spcr_setup(GArray *table_data, BIOSLinker *linker, VirtMachineState *vms)
+>  {
+> -    AcpiTable table = { .sig = "SPCR", .rev = 2, .oem_id = vms->oem_id,
+> -                        .oem_table_id = vms->oem_table_id };
+> -
+> -    acpi_table_begin(&table, table_data);
+> -
+> -    /* Interface Type */
+> -    build_append_int_noprefix(table_data, 3, 1); /* ARM PL011 UART */
+> -    build_append_int_noprefix(table_data, 0, 3); /* Reserved */
+> -    /* Base Address */
+> -    build_append_gas(table_data, AML_AS_SYSTEM_MEMORY, 32, 0, 3,
+> -                     vms->memmap[VIRT_UART].base);
+> -    /* Interrupt Type */
+> -    build_append_int_noprefix(table_data,
+> -        (1 << 3) /* Bit[3] ARMH GIC interrupt */, 1);
+> -    build_append_int_noprefix(table_data, 0, 1); /* IRQ */
+> -    /* Global System Interrupt */
+> -    build_append_int_noprefix(table_data,
+> -                              vms->irqmap[VIRT_UART] + ARM_SPI_BASE, 4);
+> -    build_append_int_noprefix(table_data, 3 /* 9600 */, 1); /* Baud Rate */
+> -    build_append_int_noprefix(table_data, 0 /* No Parity */, 1); /* Parity */
+> -    /* Stop Bits */
+> -    build_append_int_noprefix(table_data, 1 /* 1 Stop bit */, 1);
+> -    /* Flow Control */
+> -    build_append_int_noprefix(table_data,
+> -        (1 << 1) /* RTS/CTS hardware flow control */, 1);
+> -    /* Terminal Type */
+> -    build_append_int_noprefix(table_data, 0 /* VT100 */, 1);
+> -    build_append_int_noprefix(table_data, 0, 1); /* Language */
+> -    /* PCI Device ID  */
+> -    build_append_int_noprefix(table_data, 0xffff /* not a PCI device*/, 2);
+> -    /* PCI Vendor ID */
+> -    build_append_int_noprefix(table_data, 0xffff /* not a PCI device*/, 2);
+> -    build_append_int_noprefix(table_data, 0, 1); /* PCI Bus Number */
+> -    build_append_int_noprefix(table_data, 0, 1); /* PCI Device Number */
+> -    build_append_int_noprefix(table_data, 0, 1); /* PCI Function Number */
+> -    build_append_int_noprefix(table_data, 0, 4); /* PCI Flags */
+> -    build_append_int_noprefix(table_data, 0, 1); /* PCI Segment */
+> -    build_append_int_noprefix(table_data, 0, 4); /* Reserved */
+> +    AcpiSpcrData serial = {
+> +        .interface_type = 3,       /* ARM PL011 UART */
+> +        .base_addr.id = AML_AS_SYSTEM_MEMORY,
+> +        .base_addr.width = 32,
+> +        .base_addr.offset = 0,
+> +        .base_addr.size = 3,
+> +        .base_addr.addr = vms->memmap[VIRT_UART].base,
+> +        .interrupt_type = (1 << 3),/* Bit[3] ARMH GIC interrupt*/
+> +        .pc_interrupt = 0,         /* IRQ */
+> +        .interrupt = (vms->irqmap[VIRT_UART] + ARM_SPI_BASE),
+> +        .baud_rate = 3,            /* 9600 */
+> +        .parity = 0,               /* No Parity */
+> +        .stop_bits = 1,            /* 1 Stop bit */
+> +        .flow_control = 1 << 1,    /* RTS/CTS hardware flow control */
+> +        .terminal_type = 0,        /* VT100 */
+> +        .language = 0,             /* Language */
+> +        .pci_device_id = 0xffff,   /* not a PCI device*/
+> +        .pci_vendor_id = 0xffff,   /* not a PCI device*/
+> +        .pci_bus = 0,
+> +        .pci_device = 0,
+> +        .pci_function = 0,
+> +        .pci_flags = 0,
+> +        .pci_segment = 0,
 
-Signed-off-by: Vadim Shakirov <vadim.shakirov@syntacore.com>
----
- target/riscv/cpu.h     |  6 +++---
- target/riscv/machine.c | 10 +++++-----
- 2 files changed, 8 insertions(+), 8 deletions(-)
+Sharing code is good, but if we have to parametrize the entire table, then
+we might as well keep Arm and RISCV separate. Building the table first
+with this struct, just to have it built again with the build_append API,
+doesn't make much sense to me. Do Arm and riscv really diverge on all
+these parameters? If not, then just add the parameters which do diverge
+build_scpr's arguments.
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 5138187727..2236a55bf1 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -334,10 +334,10 @@ struct CPUArchState {
-      */
-     bool two_stage_indirect_lookup;
- 
--    target_ulong scounteren;
--    target_ulong mcounteren;
-+    uint32_t scounteren;
-+    uint32_t mcounteren;
- 
--    target_ulong mcountinhibit;
-+    uint32_t mcountinhibit;
- 
-     /* PMU counter state */
-     PMUCTRState pmu_ctrs[RV_MAX_MHPMCOUNTERS];
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index 72fe2374dc..6bf013054d 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -354,8 +354,8 @@ static const VMStateDescription vmstate_jvt = {
- 
- const VMStateDescription vmstate_riscv_cpu = {
-     .name = "cpu",
--    .version_id = 9,
--    .minimum_version_id = 9,
-+    .version_id = 10,
-+    .minimum_version_id = 10,
-     .post_load = riscv_cpu_post_load,
-     .fields = (const VMStateField[]) {
-         VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
-@@ -398,9 +398,9 @@ const VMStateDescription vmstate_riscv_cpu = {
-         VMSTATE_UINTTL(env.mtval, RISCVCPU),
-         VMSTATE_UINTTL(env.miselect, RISCVCPU),
-         VMSTATE_UINTTL(env.siselect, RISCVCPU),
--        VMSTATE_UINTTL(env.scounteren, RISCVCPU),
--        VMSTATE_UINTTL(env.mcounteren, RISCVCPU),
--        VMSTATE_UINTTL(env.mcountinhibit, RISCVCPU),
-+        VMSTATE_UINT32(env.scounteren, RISCVCPU),
-+        VMSTATE_UINT32(env.mcounteren, RISCVCPU),
-+        VMSTATE_UINT32(env.mcountinhibit, RISCVCPU),
-         VMSTATE_STRUCT_ARRAY(env.pmu_ctrs, RISCVCPU, RV_MAX_MHPMCOUNTERS, 0,
-                              vmstate_pmu_ctr_state, PMUCTRState),
-         VMSTATE_UINTTL_ARRAY(env.mhpmevent_val, RISCVCPU, RV_MAX_MHPMEVENTS),
--- 
-2.34.1
+Thanks,
+drew
 
+
+> +    };
+>  
+> -    acpi_table_end(linker, &table);
+> +    build_spcr(table_data, linker, &serial, 2, vms->oem_id, vms->oem_table_id);
+>  }
+>  
+>  /*
+> @@ -930,7 +916,7 @@ void virt_acpi_build(VirtMachineState *vms, AcpiBuildTables *tables)
+>      }
+>  
+>      acpi_add_table(table_offsets, tables_blob);
+> -    build_spcr(tables_blob, tables->linker, vms);
+> +    spcr_setup(tables_blob, tables->linker, vms);
+>  
+>      acpi_add_table(table_offsets, tables_blob);
+>      build_dbg2(tables_blob, tables->linker, vms);
+> diff --git a/include/hw/acpi/acpi-defs.h b/include/hw/acpi/acpi-defs.h
+> index 2b42e4192b..0e6e82b339 100644
+> --- a/include/hw/acpi/acpi-defs.h
+> +++ b/include/hw/acpi/acpi-defs.h
+> @@ -90,6 +90,39 @@ typedef struct AcpiFadtData {
+>      unsigned *xdsdt_tbl_offset;
+>  } AcpiFadtData;
+>  
+> +typedef struct AcpiGas {
+> +    uint8_t id;                /* Address space ID */
+> +    uint8_t width;             /* Register bit width */
+> +    uint8_t offset;            /* Register bit offset */
+> +    uint8_t size;              /* Access size */
+> +    uint64_t addr;             /* Address */
+> +} AcpiGas;
+> +
+> +/* SPCR (Serial Port Console Redirection table) */
+> +typedef struct AcpiSpcrData {
+> +    uint8_t interface_type;
+> +    uint8_t reserved[3];
+> +    struct AcpiGas base_addr;
+> +    uint8_t interrupt_type;
+> +    uint8_t pc_interrupt;
+> +    uint32_t interrupt;        /* Global system interrupt */
+> +    uint8_t baud_rate;
+> +    uint8_t parity;
+> +    uint8_t stop_bits;
+> +    uint8_t flow_control;
+> +    uint8_t terminal_type;
+> +    uint8_t language;
+> +    uint8_t reserved1;
+> +    uint16_t pci_device_id;    /* Must be 0xffff if not PCI device */
+> +    uint16_t pci_vendor_id;    /* Must be 0xffff if not PCI device */
+> +    uint8_t pci_bus;
+> +    uint8_t pci_device;
+> +    uint8_t pci_function;
+> +    uint32_t pci_flags;
+> +    uint8_t pci_segment;
+> +    uint32_t reserved2;
+> +} AcpiSpcrData;
+> +
+>  #define ACPI_FADT_ARM_PSCI_COMPLIANT  (1 << 0)
+>  #define ACPI_FADT_ARM_PSCI_USE_HVC    (1 << 1)
+>  
+> diff --git a/include/hw/acpi/aml-build.h b/include/hw/acpi/aml-build.h
+> index ff2a310270..a3784155cb 100644
+> --- a/include/hw/acpi/aml-build.h
+> +++ b/include/hw/acpi/aml-build.h
+> @@ -497,4 +497,8 @@ void build_fadt(GArray *tbl, BIOSLinker *linker, const AcpiFadtData *f,
+>  
+>  void build_tpm2(GArray *table_data, BIOSLinker *linker, GArray *tcpalog,
+>                  const char *oem_id, const char *oem_table_id);
+> +
+> +void build_spcr(GArray *table_data, BIOSLinker *linker,
+> +                const AcpiSpcrData *f, const uint8_t rev,
+> +                const char *oem_id, const char *oem_table_id);
+>  #endif
+> -- 
+> 2.34.1
+> 
+> 
 
