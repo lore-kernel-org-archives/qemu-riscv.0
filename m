@@ -4,124 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A13D4C47DB3
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 20:25:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C63AC47DA9
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 21:44:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rUYC8-000413-1W; Mon, 29 Jan 2024 15:25:28 -0500
+	id 1rUZQK-0000lS-Io; Mon, 29 Jan 2024 16:44:12 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <deller@gmx.de>)
- id 1rUYC0-0003po-7v; Mon, 29 Jan 2024 15:25:22 -0500
-Received: from mout.gmx.net ([212.227.15.18])
+ (Exim 4.90_1) (envelope-from <mark.cave-ayland@ilande.co.uk>)
+ id 1rUZQH-0000ba-GX; Mon, 29 Jan 2024 16:44:09 -0500
+Received: from mail.ilande.co.uk ([2001:41c9:1:41f::167])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <deller@gmx.de>)
- id 1rUYBx-0000Df-TP; Mon, 29 Jan 2024 15:25:19 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1706559910; x=1707164710; i=deller@gmx.de;
- bh=t4y5O2v80/N1buYxN57NYKAZ0Bev0mKEYyc3wQDHke4=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=mRsgy2nT6qg8doTPKWg4MJ8aGSLokAoS9T4Eafl/q8XtDYcMDg3532PQD++oGrRT
- 3AraDvWUJgRR5EjTogtJZeR0z4N+pI1HP9KfPf45tGRecBwuxqaseu/JylHEtUBln
- OFyiA4eAxAnR8T5H72f2blTcWuaqIGYEgGWsjLt+6Yka3+0J9JXgnKdvfQKf2EKw2
- +4RD6EVxuZzZl0Eoq2dKa3VSHuDqtmXZ/xgyYWZYwp+7Bim704xg3pwU3lk4P24Zp
- 3QQ0yEQbeGNnQtqjlCRm1XkFFSTEVv3yn41ussPVuQm5k15VaV/1H5k1P7XVXF7aN
- h3py3MQZrEHfAwSeLA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.20.55] ([94.134.155.171]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mlw3N-1qnYBx1vRz-00j11b; Mon, 29
- Jan 2024 21:25:10 +0100
-Message-ID: <9c2e60fa-7a23-496d-bf81-8826810e6351@gmx.de>
-Date: Mon, 29 Jan 2024 21:25:09 +0100
+ (Exim 4.90_1) (envelope-from <mark.cave-ayland@ilande.co.uk>)
+ id 1rUZQF-0001Pd-BU; Mon, 29 Jan 2024 16:44:09 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=ilande.co.uk; s=20220518; h=Subject:Content-Transfer-Encoding:Content-Type:
+ In-Reply-To:From:References:Cc:To:MIME-Version:Date:Message-ID:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=veI10lYyuYNbseN0HhfyLzNbmfkodDIhyCjJhQPlH4U=; b=sXNtKQt2HGf1xe43EsfKGmaW55
+ ac4WFljyRTE0azonz4LSccRbxcXyJgrZpkMnDFH0CqTOkYYpOgU34rfsrPigJfIP62K6F3z2cQR7o
+ wH0Ing9tnMyhdYEP2M/o/FJyqs4JsDd+W27RhnTz32bDPUpRJwJ59k2Tpucy9Sd3svnRwLTpyymAG
+ mE9QnmCfSrxmdIPJ8QUCIHrFvVUy7PRwsfBxZde/8HPSGpv7RGh6nfugA6izWNF1QzsMKkkHyA2GC
+ sP2jx86ysth7BHP9pL9V6XURtIJcMAZhyy8wP1rjs1AJpwa2K06Nm8eDuWe047BKrKNBQJIxiG/sq
+ HeTCvtow3Cmqd4njg6hAXkQB7ohvf2m27c5TkMKjfJOyMC3hScCZW+8m0bTTg7lVM7JdwcXfzmxCJ
+ 6hZb7mjLdRWDcWZyvsivnsDSndBqMcojQoY2c25spXeMk2HuBJWzbXd3HzsSkwmb/lLgLQBp/Pwis
+ Wk87k3EGsBbNqib+/3thgRa2utHHNCidTq9XJRJvvX2xeib3EZoufQP/IvED7yKMVvosrkpNfzYGf
+ egL9Jr6BCIJjzadXZQJtuZgziA7Pvl4v4MJngQDzIx8eVa/NALgY46WxLox8kMERjGsivxZ3sfndv
+ ObMFnq+9ILoW4NlbhcEzskSa33aJ44tpFTOwVk37k=;
+Received: from [2a00:23c4:8bb2:a00:c9b9:c424:5b7e:9d9f]
+ by mail.ilande.co.uk with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.92) (envelope-from <mark.cave-ayland@ilande.co.uk>)
+ id 1rUZPY-0004mf-A5; Mon, 29 Jan 2024 21:43:28 +0000
+Message-ID: <140c63fc-f99c-41f3-b96c-5f9d88fa82ba@ilande.co.uk>
+Date: Mon, 29 Jan 2024 21:43:59 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 12/29] target/hppa: Prefer fast cpu_env() over slower
- CPU QOM cast macro
 Content-Language: en-US
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>, kvm@vger.kernel.org,
- qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
- Richard Henderson <richard.henderson@linaro.org>
-References: <20240129164514.73104-1-philmd@linaro.org>
- <20240129164514.73104-13-philmd@linaro.org>
-From: Helge Deller <deller@gmx.de>
-Autocrypt: addr=deller@gmx.de; keydata=
- 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
-In-Reply-To: <20240129164514.73104-13-philmd@linaro.org>
+Cc: qemu-arm@nongnu.org, Thomas Huth <thuth@redhat.com>,
+ qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
+ Eduardo Habkost <eduardo@habkost.net>, kvm@vger.kernel.org,
+ qemu-ppc@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
+ Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
+ Paolo Bonzini <pbonzini@redhat.com>, Artyom Tarasenko <atar4qemu@gmail.com>
+References: <20240126220407.95022-1-philmd@linaro.org>
+ <20240126220407.95022-24-philmd@linaro.org>
+From: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
+Autocrypt: addr=mark.cave-ayland@ilande.co.uk; keydata=
+ xsBNBFQJuzwBCADAYvxrwUh1p/PvUlNFwKosVtVHHplgWi5p29t58QlOUkceZG0DBYSNqk93
+ 3JzBTbtd4JfFcSupo6MNNOrCzdCbCjZ64ik8ycaUOSzK2tKbeQLEXzXoaDL1Y7vuVO7nL9bG
+ E5Ru3wkhCFc7SkoypIoAUqz8EtiB6T89/D9TDEyjdXUacc53R5gu8wEWiMg5MQQuGwzbQy9n
+ PFI+mXC7AaEUqBVc2lBQVpAYXkN0EyqNNT12UfDLdxaxaFpUAE2pCa2LTyo5vn5hEW+i3VdN
+ PkmjyPvL6DdY03fvC01PyY8zaw+UI94QqjlrDisHpUH40IUPpC/NB0LwzL2aQOMkzT2NABEB
+ AAHNME1hcmsgQ2F2ZS1BeWxhbmQgPG1hcmsuY2F2ZS1heWxhbmRAaWxhbmRlLmNvLnVrPsLA
+ eAQTAQIAIgUCVAm7PAIbAwYLCQgHAwIGFQgCCQoLBBYCAwECHgECF4AACgkQW8LFb64PMh9f
+ NAgAuc3ObOEY8NbZko72AGrg2tWKdybcMVITxmcor4hb9155o/OWcA4IDbeATR6cfiDL/oxU
+ mcmtXVgPqOwtW3NYAKr5g/FrZZ3uluQ2mtNYAyTFeALy8YF7N3yhs7LOcpbFP7tEbkSzoXNG
+ z8iYMiYtKwttt40WaheWuRs0ZOLbs6yoczZBDhna3Nj0LA3GpeJKlaV03O4umjKJgACP1c/q
+ T2Pkg+FCBHHFP454+waqojHp4OCBo6HyK+8I4wJRa9Z0EFqXIu8lTDYoggeX0Xd6bWeCFHK3
+ DhD0/Xi/kegSW33unsp8oVcM4kcFxTkpBgj39dB4KwAUznhTJR0zUHf63M7ATQRUCbs8AQgA
+ y7kyevA4bpetM/EjtuqQX4U05MBhEz/2SFkX6IaGtTG2NNw5wbcAfhOIuNNBYbw6ExuaJ3um
+ 2uLseHnudmvN4VSJ5Hfbd8rhqoMmmO71szgT/ZD9MEe2KHzBdmhmhxJdp+zQNivy215j6H27
+ 14mbC2dia7ktwP1rxPIX1OOfQwPuqlkmYPuVwZP19S4EYnCELOrnJ0m56tZLn5Zj+1jZX9Co
+ YbNLMa28qsktYJ4oU4jtn6V79H+/zpERZAHmH40IRXdR3hA+Ye7iC/ZpWzT2VSDlPbGY9Yja
+ Sp7w2347L5G+LLbAfaVoejHlfy/msPeehUcuKjAdBLoEhSPYzzdvEQARAQABwsBfBBgBAgAJ
+ BQJUCbs8AhsMAAoJEFvCxW+uDzIfabYIAJXmBepHJpvCPiMNEQJNJ2ZSzSjhic84LTMWMbJ+
+ opQgr5cb8SPQyyb508fc8b4uD8ejlF/cdbbBNktp3BXsHlO5BrmcABgxSP8HYYNsX0n9kERv
+ NMToU0oiBuAaX7O/0K9+BW+3+PGMwiu5ml0cwDqljxfVN0dUBZnQ8kZpLsY+WDrIHmQWjtH+
+ Ir6VauZs5Gp25XLrL6bh/SL8aK0BX6y79m5nhfKI1/6qtzHAjtMAjqy8ChPvOqVVVqmGUzFg
+ KPsrrIoklWcYHXPyMLj9afispPVR8e0tMKvxzFBWzrWX1mzljbBlnV2n8BIwVXWNbgwpHSsj
+ imgcU9TTGC5qd9g=
+In-Reply-To: <20240126220407.95022-24-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:xCtZ4NVqvrToy67dRKju7QMLsPslL2OSiWJVmyiAeOUiyCESqoD
- utHKpaNLSE25RvMViB2HhD3ifvw/it1fJE+hDZOweA1JBACyRGeRvLOD7qfBYGjQwipvsWQ
- LpwzihaLy0Y59ZL29TDPSaLRld7pGiLOH5/p+OPlYQdLGEpPB3auOcwJ5yPiy4zf5BzDZna
- z5wQQw5llbjlnpHDsgVmQ==
-UI-OutboundReport: notjunk:1;M01:P0:5RFp/sdB+cw=;jxsVH2MuGrETdaV8Hb4NfNGRGdm
- d9Ev6uyc5cnRIlJVbZ2yPy1Go/1UwnYnLQval1/SlifLvYoTlAwtLNbaWioe0arMG7tQUvDos
- N3s7vntWS4eKrcUxpI1U3rvrEDX8fZrilxMnnvsfnyIlSQJdTmVQ6MRoge/LbAbP+t1t//HKa
- roDskNom3sAoaDmCp0768gnn+O7zLtpgKtBt0JKWHM05b7bLBctGSeFXdccPG3lZ6jj/0OMpL
- h45ywtHk1zn6ddZxKYxo5vy/LZ+i1BKpRt5gTxYaDCV2rRZb6XIKYDQRDcsGVBd2VEpyANT2M
- ORG27OEppDmWfmPhkKamrzqbvlHk/lk/lDrA3GN+JC+o4+H7HY0C0UDsRwXlTSgWbAmu28/yS
- uQ7IsdItn/B1X6mNsRktror78EvMNlT+Lf2pHtwkEvFB1O9tNhoP+DpwHZ9JQ1yJitFRJEgbF
- FaYFY3GkfVU2fbv6b61h2NQfOnoKx3MPwLTaFkoMxGx24gbc02aXqmfm3m7nU1mQ43tYmHS5i
- 488JLHtL8NOxI977NG5u0RYU3JbzjjTpfcrepr1w4dvt22bHr6d2xXAET8BHthDXm+uxBwCDW
- xHn0Conl74rKt/FURDX+jnX2AsVLE/qJG10EXHpBI89/I+JeqIKcyy4AdTHMTD6xLrXrtsjMy
- etlpA6Lcd62djZdAVtlI+t1kVg3j5ExSb9EYC6agW7ZAmxjkQEGulVt661/egM2HP9sQm4gJu
- MhobtE97chh1d8+G5Hb7HgKavWGGv7rIUxZleDOzg+zmfMsimZBYBPtUhoAE8RVgSoEkhHUsW
- vgdRYfaWZjIjUesSwyQczew5YX9qMA577tdTzziJLb/kg3a7ucr1f9KV/Tqn+VSHHxAn86Igt
- C7FuC1HDzr8Ac65/Fp5HESPIIbi5el9xbRc7wHS5asptW0Mz3VWtCr2m29OB5Oh9B+1e9cQ6i
- ZOQmCq4eJE3vzgQemJJVoxW8DQQ=
-Received-SPF: pass client-ip=212.227.15.18; envelope-from=deller@gmx.de;
- helo=mout.gmx.net
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 2a00:23c4:8bb2:a00:c9b9:c424:5b7e:9d9f
+X-SA-Exim-Mail-From: mark.cave-ayland@ilande.co.uk
+Subject: Re: [PATCH v2 23/23] target/sparc: Prefer fast cpu_env() over slower
+ CPU QOM cast macro
+X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
+X-SA-Exim-Scanned: Yes (on mail.ilande.co.uk)
+Received-SPF: pass client-ip=2001:41c9:1:41f::167;
+ envelope-from=mark.cave-ayland@ilande.co.uk; helo=mail.ilande.co.uk
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -138,52 +110,209 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 1/29/24 17:44, Philippe Mathieu-Daud=C3=A9 wrote:
+On 26/01/2024 22:04, Philippe Mathieu-Daudé wrote:
+
 > Mechanical patch produced running the command documented
 > in scripts/coccinelle/cpu_env.cocci_template header.
->
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->   target/hppa/cpu.c        | 8 ++------
->   target/hppa/int_helper.c | 8 ++------
->   target/hppa/mem_helper.c | 3 +--
->   3 files changed, 5 insertions(+), 14 deletions(-)
->
-> diff --git a/target/hppa/cpu.c b/target/hppa/cpu.c
-> index 14e17fa9aa..3200de0998 100644
-> --- a/target/hppa/cpu.c
-> +++ b/target/hppa/cpu.c
-> @@ -106,11 +106,8 @@ void hppa_cpu_do_unaligned_access(CPUState *cs, vad=
-dr addr,
->                                     MMUAccessType access_type, int mmu_i=
-dx,
->                                     uintptr_t retaddr)
+>   target/sparc/cpu.c          | 14 ++++----------
+>   target/sparc/gdbstub.c      |  3 +--
+>   target/sparc/int32_helper.c |  3 +--
+>   target/sparc/int64_helper.c |  3 +--
+>   target/sparc/ldst_helper.c  |  6 ++----
+>   target/sparc/mmu_helper.c   | 15 +++++----------
+>   target/sparc/translate.c    |  3 +--
+>   7 files changed, 15 insertions(+), 32 deletions(-)
+> 
+> diff --git a/target/sparc/cpu.c b/target/sparc/cpu.c
+> index befa7fc4eb..a53c200d8b 100644
+> --- a/target/sparc/cpu.c
+> +++ b/target/sparc/cpu.c
+> @@ -83,8 +83,7 @@ static void sparc_cpu_reset_hold(Object *obj)
+>   static bool sparc_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
 >   {
-> -    HPPACPU *cpu =3D HPPA_CPU(cs);
-> -    CPUHPPAState *env =3D &cpu->env;
+>       if (interrupt_request & CPU_INTERRUPT_HARD) {
+> -        SPARCCPU *cpu = SPARC_CPU(cs);
+> -        CPUSPARCState *env = &cpu->env;
+> +        CPUSPARCState *env = cpu_env(cs);
+>   
+>           if (cpu_interrupts_enabled(env) && env->interrupt_index > 0) {
+>               int pil = env->interrupt_index & 0xf;
+> @@ -613,8 +612,7 @@ static void cpu_print_cc(FILE *f, uint32_t cc)
+>   
+>   static void sparc_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+>   {
+> -    SPARCCPU *cpu = SPARC_CPU(cs);
+> -    CPUSPARCState *env = &cpu->env;
+> +    CPUSPARCState *env = cpu_env(cs);
+>       int i, x;
+>   
+>       qemu_fprintf(f, "pc: " TARGET_FMT_lx "  npc: " TARGET_FMT_lx "\n", env->pc,
+> @@ -711,11 +709,8 @@ static void sparc_cpu_synchronize_from_tb(CPUState *cs,
+>   
+>   static bool sparc_cpu_has_work(CPUState *cs)
+>   {
+> -    SPARCCPU *cpu = SPARC_CPU(cs);
+> -    CPUSPARCState *env = &cpu->env;
 > -
->       cs->exception_index =3D EXCP_UNALIGN;
-> -    hppa_set_ior_and_isr(env, addr, MMU_IDX_MMU_DISABLED(mmu_idx));
-> +    hppa_set_ior_and_isr(cpu_env(cs), addr, MMU_IDX_MMU_DISABLED(mmu_id=
-x));
->
->       cpu_loop_exit_restore(cs, retaddr);
+>       return (cs->interrupt_request & CPU_INTERRUPT_HARD) &&
+> -           cpu_interrupts_enabled(env);
+> +           cpu_interrupts_enabled(cpu_env(cs));
 >   }
-> @@ -145,8 +142,7 @@ static void hppa_cpu_realizefn(DeviceState *dev, Err=
-or **errp)
->   static void hppa_cpu_initfn(Object *obj)
+>   
+>   static char *sparc_cpu_type_name(const char *cpu_model)
+> @@ -749,8 +744,7 @@ static void sparc_cpu_realizefn(DeviceState *dev, Error **errp)
+>       CPUState *cs = CPU(dev);
+>       SPARCCPUClass *scc = SPARC_CPU_GET_CLASS(dev);
+>       Error *local_err = NULL;
+> -    SPARCCPU *cpu = SPARC_CPU(dev);
+> -    CPUSPARCState *env = &cpu->env;
+> +    CPUSPARCState *env = cpu_env(cs);
+>   
+>   #if defined(CONFIG_USER_ONLY)
+>       /* We are emulating the kernel, which will trap and emulate float128. */
+> diff --git a/target/sparc/gdbstub.c b/target/sparc/gdbstub.c
+> index a1c8fdc4d5..5257c49a0d 100644
+> --- a/target/sparc/gdbstub.c
+> +++ b/target/sparc/gdbstub.c
+> @@ -29,8 +29,7 @@
+>   
+>   int sparc_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
 >   {
->       CPUState *cs =3D CPU(obj);
-> -    HPPACPU *cpu =3D HPPA_CPU(obj);
-> -    CPUHPPAState *env =3D &cpu->env;
-> +    CPUHPPAState *env =3D cpu_env(CPU(obj));
+> -    SPARCCPU *cpu = SPARC_CPU(cs);
+> -    CPUSPARCState *env = &cpu->env;
+> +    CPUSPARCState *env = cpu_env(cs);
+>   
+>       if (n < 8) {
+>           /* g0..g7 */
+> diff --git a/target/sparc/int32_helper.c b/target/sparc/int32_helper.c
+> index 058dd712b5..6b7d65b031 100644
+> --- a/target/sparc/int32_helper.c
+> +++ b/target/sparc/int32_helper.c
+> @@ -99,8 +99,7 @@ void cpu_check_irqs(CPUSPARCState *env)
+>   
+>   void sparc_cpu_do_interrupt(CPUState *cs)
+>   {
+> -    SPARCCPU *cpu = SPARC_CPU(cs);
+> -    CPUSPARCState *env = &cpu->env;
+> +    CPUSPARCState *env = cpu_env(cs);
+>       int cwp, intno = cs->exception_index;
+>   
+>       if (qemu_loglevel_mask(CPU_LOG_INT)) {
+> diff --git a/target/sparc/int64_helper.c b/target/sparc/int64_helper.c
+> index 27df9dba89..bd14c7a0db 100644
+> --- a/target/sparc/int64_helper.c
+> +++ b/target/sparc/int64_helper.c
+> @@ -130,8 +130,7 @@ void cpu_check_irqs(CPUSPARCState *env)
+>   
+>   void sparc_cpu_do_interrupt(CPUState *cs)
+>   {
+> -    SPARCCPU *cpu = SPARC_CPU(cs);
+> -    CPUSPARCState *env = &cpu->env;
+> +    CPUSPARCState *env = cpu_env(cs);
+>       int intno = cs->exception_index;
+>       trap_state *tsptr;
+>   
+> diff --git a/target/sparc/ldst_helper.c b/target/sparc/ldst_helper.c
+> index 09066d5487..203441bfb2 100644
+> --- a/target/sparc/ldst_helper.c
+> +++ b/target/sparc/ldst_helper.c
+> @@ -421,8 +421,7 @@ static void sparc_raise_mmu_fault(CPUState *cs, hwaddr addr,
+>                                     bool is_write, bool is_exec, int is_asi,
+>                                     unsigned size, uintptr_t retaddr)
+>   {
+> -    SPARCCPU *cpu = SPARC_CPU(cs);
+> -    CPUSPARCState *env = &cpu->env;
+> +    CPUSPARCState *env = cpu_env(cs);
+>       int fault_type;
+>   
+>   #ifdef DEBUG_UNASSIGNED
+> @@ -483,8 +482,7 @@ static void sparc_raise_mmu_fault(CPUState *cs, hwaddr addr,
+>                                     bool is_write, bool is_exec, int is_asi,
+>                                     unsigned size, uintptr_t retaddr)
+>   {
+> -    SPARCCPU *cpu = SPARC_CPU(cs);
+> -    CPUSPARCState *env = &cpu->env;
+> +    CPUSPARCState *env = cpu_env(cs);
+>   
+>   #ifdef DEBUG_UNASSIGNED
+>       printf("Unassigned mem access to " HWADDR_FMT_plx " from " TARGET_FMT_lx
+> diff --git a/target/sparc/mmu_helper.c b/target/sparc/mmu_helper.c
+> index 453498c670..a05ee22315 100644
+> --- a/target/sparc/mmu_helper.c
+> +++ b/target/sparc/mmu_helper.c
+> @@ -206,8 +206,7 @@ bool sparc_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>                           MMUAccessType access_type, int mmu_idx,
+>                           bool probe, uintptr_t retaddr)
+>   {
+> -    SPARCCPU *cpu = SPARC_CPU(cs);
+> -    CPUSPARCState *env = &cpu->env;
+> +    CPUSPARCState *env = cpu_env(cs);
+>       CPUTLBEntryFull full = {};
+>       target_ulong vaddr;
+>       int error_code = 0, access_index;
+> @@ -391,8 +390,7 @@ void dump_mmu(CPUSPARCState *env)
+>   int sparc_cpu_memory_rw_debug(CPUState *cs, vaddr address,
+>                                 uint8_t *buf, int len, bool is_write)
+>   {
+> -    SPARCCPU *cpu = SPARC_CPU(cs);
+> -    CPUSPARCState *env = &cpu->env;
+> +    CPUSPARCState *env = cpu_env(cs);
+>       target_ulong addr = address;
+>       int i;
+>       int len1;
+> @@ -759,8 +757,7 @@ bool sparc_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>                           MMUAccessType access_type, int mmu_idx,
+>                           bool probe, uintptr_t retaddr)
+>   {
+> -    SPARCCPU *cpu = SPARC_CPU(cs);
+> -    CPUSPARCState *env = &cpu->env;
+> +    CPUSPARCState *env = cpu_env(cs);
+>       CPUTLBEntryFull full = {};
+>       int error_code = 0, access_index;
+>   
+> @@ -898,8 +895,7 @@ hwaddr cpu_get_phys_page_nofault(CPUSPARCState *env, target_ulong addr,
+>   
+>   hwaddr sparc_cpu_get_phys_page_debug(CPUState *cs, vaddr addr)
+>   {
+> -    SPARCCPU *cpu = SPARC_CPU(cs);
+> -    CPUSPARCState *env = &cpu->env;
+> +    CPUSPARCState *env = cpu_env(cs);
+>       hwaddr phys_addr;
+>       int mmu_idx = cpu_mmu_index(env, false);
+>   
+> @@ -916,8 +912,7 @@ G_NORETURN void sparc_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+>                                                 int mmu_idx,
+>                                                 uintptr_t retaddr)
+>   {
+> -    SPARCCPU *cpu = SPARC_CPU(cs);
+> -    CPUSPARCState *env = &cpu->env;
+> +    CPUSPARCState *env = cpu_env(cs);
+>   
+>   #ifdef TARGET_SPARC64
+>       env->dmmu.sfsr = build_sfsr(env, mmu_idx, access_type);
+> diff --git a/target/sparc/translate.c b/target/sparc/translate.c
+> index 9387299559..412b7d1b66 100644
+> --- a/target/sparc/translate.c
+> +++ b/target/sparc/translate.c
+> @@ -5406,8 +5406,7 @@ void sparc_restore_state_to_opc(CPUState *cs,
+>                                   const TranslationBlock *tb,
+>                                   const uint64_t *data)
+>   {
+> -    SPARCCPU *cpu = SPARC_CPU(cs);
+> -    CPUSPARCState *env = &cpu->env;
+> +    CPUSPARCState *env = cpu_env(cs);
+>       target_ulong pc = data[0];
+>       target_ulong npc = data[1];
+>   
 
-Here it can become cpu_env(cs) too.
+Reviewed-by: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
 
-The rest looks ok, so with that changed:
-Reviewed-by: Helge Deller <deller@gmx.de>
 
-Helge
+ATB,
+
+Mark.
 
 
