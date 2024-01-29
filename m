@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A894CC48285
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 16:51:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53571C47DDB
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 16:51:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rUUoC-0004wJ-ND; Mon, 29 Jan 2024 11:48:32 -0500
+	id 1rUUpH-0000iJ-EF; Mon, 29 Jan 2024 11:49:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUn8-0000BG-Al
- for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:47:33 -0500
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUnu-00046S-Bh
+ for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:48:18 -0500
+Received: from mail-lf1-x12d.google.com ([2a00:1450:4864:20::12d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUn1-0004At-1J
- for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:47:25 -0500
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-40eacb4bfa0so35015085e9.1
- for <qemu-riscv@nongnu.org>; Mon, 29 Jan 2024 08:47:17 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUns-0004at-CP
+ for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:48:13 -0500
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-5100ed2b33dso4624176e87.0
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jan 2024 08:48:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706546836; x=1707151636; darn=nongnu.org;
+ d=linaro.org; s=google; t=1706546890; x=1707151690; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=a+WHgRt8aoFwU9PH4yyhsDxrOBo9TuwHJWddMcT5sv4=;
- b=PSiux/CnR2ucLc4rXWhKj7NH0VoLrYvuHpWajN4yWMJWzM0/IKYr2psYdM7V+1+5K8
- lF4GQzoSeXMJSLcALNb73RgtKH4BpD2DTmf7bcSaLSWjfUv+gPiPCaToqfHi+TRzPabb
- TrA8ZnObYxiG7L/GGW6Ux4rWg8h/4NHj/3f7W7R7IDuYSOZpTwN/SndwnHDuHFwPkTFe
- mGS8/LxWdsa7NzejwU2ZZYtZ4xz2znITLZIic7+TvJDt5VQA3QrGeZzwkI26DO8yrpjm
- XkZsl+s47tX8AoVhYQyCkmccZxkqVkYwTs9/SFaI+pMaJD21iGJChpsTX+sp5Kw8DXCG
- 7luA==
+ bh=rfR8cC6O+BWQhQkWXGdZ7PfclWjDr/hbLCsaxnqdy8k=;
+ b=DIy2XmezmVWtAyc6E0HEtvM82wc7b721PmBqh1IBwU8IPrVX7fpTILo90rjNGg/r43
+ 2rqD8e19qtA9DIHeCLfJN+JV8897o0iyy53tMcImva577Fz3eimvHetpWbhTQdJx4vSS
+ 5xJeMPPqGAB9QlrAlfnfJG8konzHaA99KcA6DyxyoqqujYoK46QkLmfJ+zLJ1PIyTYLh
+ PQ65ZYbL649vT8p84waBfenoetVqnaEYE0fYgvyLPM30YZi8wwwoC3eyffkdmHwE2xCG
+ j0Lcevkwkc4+jcxM1Sr0bkyNpKTyYuYEHp9QKl848v/LMYHPcvg+eEInNnGQIR/0Zmm7
+ 4yPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706546836; x=1707151636;
+ d=1e100.net; s=20230601; t=1706546890; x=1707151690;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=a+WHgRt8aoFwU9PH4yyhsDxrOBo9TuwHJWddMcT5sv4=;
- b=Lpoz5ykNHx+jD2Hq/GC0ecqBToDMSp0IqA3Qe0ABiNH73BWiTMCmspwZVJowWGN0/F
- 4fcD2NF5wyFrGrSkE+pd9gIPOOkC8aadIsg5oyfZkucQwwpk306IFrRyuUDd5vMETHU0
- espCSG3CWN7zeHNSVM3KHzHeapOs+XjU1RKDU2zW1Eb+EWxLdjil6NcOijyD/3dgKyAZ
- Sor7i0TPWdHFbQW1W05VQON8aepJkFlHqM2PMebSrxdIYMrnB1BiEWlNFVbe0dYjvF3/
- B978Yz75hr61y8ee1Y688hCMDsKNKct7pmty7B2BvcLXtiGQoCLlmdnM2S2Dp3RpyepH
- rylg==
-X-Gm-Message-State: AOJu0YwiKpp/dwkPvT/oIjHWBIpsUh1XN/91Cn571/wzWjPJbAHkiac9
- ovo5vnN+YjDRtUcokLkVk+CIrXKPtHq2pf396j2KbC1i3owduvmdEinT6bKVy78=
-X-Google-Smtp-Source: AGHT+IGYhnGe776oZg8Nf+XW6qyKWUfG5CSd+AahADH4rgW9WuZbEKC9nCTJSkL02Ck+OeTkF8tuTg==
-X-Received: by 2002:a05:600c:4689:b0:40d:5575:a197 with SMTP id
- p9-20020a05600c468900b0040d5575a197mr5396356wmo.12.1706546836062; 
- Mon, 29 Jan 2024 08:47:16 -0800 (PST)
+ bh=rfR8cC6O+BWQhQkWXGdZ7PfclWjDr/hbLCsaxnqdy8k=;
+ b=Ih7j24j/pg7Q4Mx4tGjaJJtRXRV17os8kCa3kXa7hNm6mIJoKJi5NLpIpJ1T6Xejrv
+ h6B9IqQS9bq9xgUY5aHTpQt2dhdCMz73F1nIA9qleG1HoCw3mA4G28UyogXWhrPP/dl7
+ qx3qtkCyEE55C0S/wtQ7cV8Y7t8wxzOJImkdDKBjgO/r3ewtcbZhmoY8NObyBLq/hLYR
+ SE/h02Ltx4fWCOVgXHmvQUbL20yEQQ7om0VxIKwgATayxN4f0fvA/49oy2TKKMLVtEZk
+ lvhB1gNcgFE9RsYas0+29fRqRdcT2OUlnfB31BSrlYX3awEtqhQRPb7FDPnuFfFwGFnm
+ yOzg==
+X-Gm-Message-State: AOJu0Yz94W3XfU2OfO8zjWdn8E+FIxvZvStbl6x3604l88uscp/X6yK6
+ aw2/cIZ3Uo39UG+CKbPg7D2XIi2WcNZwyKuxtlhCPN/c19bviAsk6vZ5Xh4vkp4=
+X-Google-Smtp-Source: AGHT+IFdYBYX+YhuXRJ5ebXXB5wSuyFUDmegmoCsIRNXBDPunLZRwNY2MqJbCauv7QOv9aYvnOjo7g==
+X-Received: by 2002:ac2:4e08:0:b0:510:1b81:ac2f with SMTP id
+ e8-20020ac24e08000000b005101b81ac2fmr4708425lfr.62.1706546890079; 
+ Mon, 29 Jan 2024 08:48:10 -0800 (PST)
 Received: from m1x-phil.lan ([176.187.219.39])
  by smtp.gmail.com with ESMTPSA id
- l29-20020a05600c1d1d00b0040ef8aa4822sm2704220wms.38.2024.01.29.08.47.14
+ u11-20020a056000038b00b0033aed5feea4sm3296936wrf.54.2024.01.29.08.48.08
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 29 Jan 2024 08:47:15 -0800 (PST)
+ Mon, 29 Jan 2024 08:48:09 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
@@ -63,26 +63,26 @@ Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Chris Wulff <crwulff@gmail.com>, Marek Vasut <marex@denx.de>
-Subject: [PATCH v3 19/29] target/nios2: Prefer fast cpu_env() over slower CPU
+ Max Filippov <jcmvbkbc@gmail.com>
+Subject: [PATCH v3 28/29] target/xtensa: Prefer fast cpu_env() over slower CPU
  QOM cast macro
-Date: Mon, 29 Jan 2024 17:45:01 +0100
-Message-ID: <20240129164514.73104-20-philmd@linaro.org>
+Date: Mon, 29 Jan 2024 17:45:10 +0100
+Message-ID: <20240129164514.73104-29-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240129164514.73104-1-philmd@linaro.org>
 References: <20240129164514.73104-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::12d;
+ envelope-from=philmd@linaro.org; helo=mail-lf1-x12d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,107 +104,141 @@ in scripts/coccinelle/cpu_env.cocci_template header.
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/nios2/cpu.c        | 15 +++------------
- target/nios2/helper.c     |  3 +--
- target/nios2/nios2-semi.c |  6 ++----
- target/nios2/translate.c  |  3 +--
- 4 files changed, 7 insertions(+), 20 deletions(-)
+ target/xtensa/cpu.c        | 3 +--
+ target/xtensa/dbg_helper.c | 3 +--
+ target/xtensa/exc_helper.c | 3 +--
+ target/xtensa/gdbstub.c    | 6 ++----
+ target/xtensa/helper.c     | 9 +++------
+ target/xtensa/translate.c  | 6 ++----
+ 6 files changed, 10 insertions(+), 20 deletions(-)
 
-diff --git a/target/nios2/cpu.c b/target/nios2/cpu.c
-index 09b122e24d..b5b3773fb8 100644
---- a/target/nios2/cpu.c
-+++ b/target/nios2/cpu.c
-@@ -28,28 +28,19 @@
- 
- static void nios2_cpu_set_pc(CPUState *cs, vaddr value)
+diff --git a/target/xtensa/cpu.c b/target/xtensa/cpu.c
+index ce044466ad..47fd7c7ca9 100644
+--- a/target/xtensa/cpu.c
++++ b/target/xtensa/cpu.c
+@@ -91,9 +91,8 @@ bool xtensa_abi_call0(void)
+ static void xtensa_cpu_reset_hold(Object *obj)
  {
--    Nios2CPU *cpu = NIOS2_CPU(cs);
--    CPUNios2State *env = &cpu->env;
--
--    env->pc = value;
-+    cpu_env(cs)->pc = value;
- }
+     CPUState *cs = CPU(obj);
+-    XtensaCPU *cpu = XTENSA_CPU(cs);
+     XtensaCPUClass *xcc = XTENSA_CPU_GET_CLASS(obj);
+-    CPUXtensaState *env = &cpu->env;
++    CPUXtensaState *env = cpu_env(cs);
+     bool dfpu = xtensa_option_enabled(env->config,
+                                       XTENSA_OPTION_DFP_COPROCESSOR);
  
- static vaddr nios2_cpu_get_pc(CPUState *cs)
+diff --git a/target/xtensa/dbg_helper.c b/target/xtensa/dbg_helper.c
+index 497dafca71..5546c82ecd 100644
+--- a/target/xtensa/dbg_helper.c
++++ b/target/xtensa/dbg_helper.c
+@@ -66,8 +66,7 @@ void HELPER(wsr_ibreaka)(CPUXtensaState *env, uint32_t i, uint32_t v)
+ 
+ bool xtensa_debug_check_breakpoint(CPUState *cs)
  {
--    Nios2CPU *cpu = NIOS2_CPU(cs);
--    CPUNios2State *env = &cpu->env;
--
--    return env->pc;
-+    return cpu_env(cs)->pc;
- }
+-    XtensaCPU *cpu = XTENSA_CPU(cs);
+-    CPUXtensaState *env = &cpu->env;
++    CPUXtensaState *env = cpu_env(cs);
+     unsigned int i;
  
- static void nios2_restore_state_to_opc(CPUState *cs,
-                                        const TranslationBlock *tb,
-                                        const uint64_t *data)
+     if (xtensa_get_cintlevel(env) >= env->config->debug_level) {
+diff --git a/target/xtensa/exc_helper.c b/target/xtensa/exc_helper.c
+index 168419a505..0514c2c1f3 100644
+--- a/target/xtensa/exc_helper.c
++++ b/target/xtensa/exc_helper.c
+@@ -205,8 +205,7 @@ static void handle_interrupt(CPUXtensaState *env)
+ /* Called from cpu_handle_interrupt with BQL held */
+ void xtensa_cpu_do_interrupt(CPUState *cs)
  {
--    Nios2CPU *cpu = NIOS2_CPU(cs);
--    CPUNios2State *env = &cpu->env;
--
--    env->pc = data[0];
-+    cpu_env(cs)->pc = data[0];
- }
+-    XtensaCPU *cpu = XTENSA_CPU(cs);
+-    CPUXtensaState *env = &cpu->env;
++    CPUXtensaState *env = cpu_env(cs);
  
- static bool nios2_cpu_has_work(CPUState *cs)
-diff --git a/target/nios2/helper.c b/target/nios2/helper.c
-index bb3b09e5a7..ac57121afc 100644
---- a/target/nios2/helper.c
-+++ b/target/nios2/helper.c
-@@ -287,8 +287,7 @@ void nios2_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
-                                    MMUAccessType access_type,
-                                    int mmu_idx, uintptr_t retaddr)
+     if (cs->exception_index == EXC_IRQ) {
+         qemu_log_mask(CPU_LOG_INT,
+diff --git a/target/xtensa/gdbstub.c b/target/xtensa/gdbstub.c
+index 4b3bfb7e59..4748fb6532 100644
+--- a/target/xtensa/gdbstub.c
++++ b/target/xtensa/gdbstub.c
+@@ -65,8 +65,7 @@ void xtensa_count_regs(const XtensaConfig *config,
+ 
+ int xtensa_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
  {
--    Nios2CPU *cpu = NIOS2_CPU(cs);
--    CPUNios2State *env = &cpu->env;
-+    CPUNios2State *env = cpu_env(cs);
+-    XtensaCPU *cpu = XTENSA_CPU(cs);
+-    CPUXtensaState *env = &cpu->env;
++    CPUXtensaState *env = cpu_env(cs);
+     const XtensaGdbReg *reg = env->config->gdb_regmap.reg + n;
+ #ifdef CONFIG_USER_ONLY
+     int num_regs = env->config->gdb_regmap.num_core_regs;
+@@ -120,8 +119,7 @@ int xtensa_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
  
-     env->ctrl[CR_BADADDR] = addr;
-     cs->exception_index = EXCP_UNALIGN;
-diff --git a/target/nios2/nios2-semi.c b/target/nios2/nios2-semi.c
-index 0b84fcb6b6..420702e293 100644
---- a/target/nios2/nios2-semi.c
-+++ b/target/nios2/nios2-semi.c
-@@ -75,8 +75,7 @@ static int host_to_gdb_errno(int err)
- 
- static void nios2_semi_u32_cb(CPUState *cs, uint64_t ret, int err)
+ int xtensa_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
  {
--    Nios2CPU *cpu = NIOS2_CPU(cs);
--    CPUNios2State *env = &cpu->env;
-+    CPUNios2State *env = cpu_env(cs);
-     target_ulong args = env->regs[R_ARG1];
+-    XtensaCPU *cpu = XTENSA_CPU(cs);
+-    CPUXtensaState *env = &cpu->env;
++    CPUXtensaState *env = cpu_env(cs);
+     uint32_t tmp;
+     const XtensaGdbReg *reg = env->config->gdb_regmap.reg + n;
+ #ifdef CONFIG_USER_ONLY
+diff --git a/target/xtensa/helper.c b/target/xtensa/helper.c
+index a9f8907083..ca214b948a 100644
+--- a/target/xtensa/helper.c
++++ b/target/xtensa/helper.c
+@@ -217,8 +217,7 @@ static uint32_t check_hw_breakpoints(CPUXtensaState *env)
  
-     if (put_user_u32(ret, args) ||
-@@ -93,8 +92,7 @@ static void nios2_semi_u32_cb(CPUState *cs, uint64_t ret, int err)
- 
- static void nios2_semi_u64_cb(CPUState *cs, uint64_t ret, int err)
+ void xtensa_breakpoint_handler(CPUState *cs)
  {
--    Nios2CPU *cpu = NIOS2_CPU(cs);
--    CPUNios2State *env = &cpu->env;
-+    CPUNios2State *env = cpu_env(cs);
-     target_ulong args = env->regs[R_ARG1];
+-    XtensaCPU *cpu = XTENSA_CPU(cs);
+-    CPUXtensaState *env = &cpu->env;
++    CPUXtensaState *env = cpu_env(cs);
  
-     if (put_user_u32(ret >> 32, args) ||
-diff --git a/target/nios2/translate.c b/target/nios2/translate.c
-index e806623594..30beb303f9 100644
---- a/target/nios2/translate.c
-+++ b/target/nios2/translate.c
-@@ -970,7 +970,6 @@ static void nios2_tr_insn_start(DisasContextBase *dcbase, CPUState *cs)
- static void nios2_tr_translate_insn(DisasContextBase *dcbase, CPUState *cs)
+     if (cs->watchpoint_hit) {
+         if (cs->watchpoint_hit->flags & BP_CPU) {
+@@ -266,8 +265,7 @@ bool xtensa_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+                          MMUAccessType access_type, int mmu_idx,
+                          bool probe, uintptr_t retaddr)
+ {
+-    XtensaCPU *cpu = XTENSA_CPU(cs);
+-    CPUXtensaState *env = &cpu->env;
++    CPUXtensaState *env = cpu_env(cs);
+     uint32_t paddr;
+     uint32_t page_size;
+     unsigned access;
+@@ -297,8 +295,7 @@ void xtensa_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr, vaddr addr,
+                                       int mmu_idx, MemTxAttrs attrs,
+                                       MemTxResult response, uintptr_t retaddr)
+ {
+-    XtensaCPU *cpu = XTENSA_CPU(cs);
+-    CPUXtensaState *env = &cpu->env;
++    CPUXtensaState *env = cpu_env(cs);
+ 
+     cpu_restore_state(cs, retaddr);
+     HELPER(exception_cause_vaddr)(env, env->pc,
+diff --git a/target/xtensa/translate.c b/target/xtensa/translate.c
+index 87947236ca..e646e016df 100644
+--- a/target/xtensa/translate.c
++++ b/target/xtensa/translate.c
+@@ -1127,10 +1127,9 @@ static void xtensa_tr_init_disas_context(DisasContextBase *dcbase,
+                                          CPUState *cpu)
  {
      DisasContext *dc = container_of(dcbase, DisasContext, base);
--    CPUNios2State *env = cpu_env(cs);
-     const Nios2Instruction *instr;
-     uint32_t code, pc;
-     uint8_t op;
-@@ -980,7 +979,7 @@ static void nios2_tr_translate_insn(DisasContextBase *dcbase, CPUState *cs)
-     dc->base.pc_next = pc + 4;
+-    CPUXtensaState *env = cpu_env(cpu);
+     uint32_t tb_flags = dc->base.tb->flags;
  
-     /* Decode an instruction */
--    code = cpu_ldl_code(env, pc);
-+    code = cpu_ldl_code(cpu_env(cs), pc);
-     op = get_opcode(code);
+-    dc->config = env->config;
++    dc->config = cpu_env(cpu)->config;
+     dc->pc = dc->base.pc_first;
+     dc->ring = tb_flags & XTENSA_TBFLAG_RING_MASK;
+     dc->cring = (tb_flags & XTENSA_TBFLAG_EXCM) ? 0 : dc->ring;
+@@ -1248,8 +1247,7 @@ void gen_intermediate_code(CPUState *cpu, TranslationBlock *tb, int *max_insns,
  
-     if (unlikely(op >= ARRAY_SIZE(i_type_instructions))) {
+ void xtensa_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+ {
+-    XtensaCPU *cpu = XTENSA_CPU(cs);
+-    CPUXtensaState *env = &cpu->env;
++    CPUXtensaState *env = cpu_env(cs);
+     xtensa_isa isa = env->config->isa;
+     int i, j;
+ 
 -- 
 2.41.0
 
