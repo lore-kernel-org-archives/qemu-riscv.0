@@ -4,141 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F26F2C47422
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 04:25:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D628C47422
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 05:13:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rUJCv-0006ny-AH; Sun, 28 Jan 2024 23:25:17 -0500
+	id 1rUJxE-0000o2-KG; Mon, 29 Jan 2024 00:13:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rUJCt-0006mt-IV
- for qemu-riscv@nongnu.org; Sun, 28 Jan 2024 23:25:15 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rUJCs-0001XI-2G
- for qemu-riscv@nongnu.org; Sun, 28 Jan 2024 23:25:15 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1706502313;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=StWMSNsyYZRk6aJRm7neTuX5AZOzEOFCGIdrgyjYPSY=;
- b=SD9M+mW2xi7FSSMW/WAZFmETOqndGAKRj0r0sfh2fIJHQzFIkbc+V+muL1EVted9Z0Pzu1
- xkJ/iHNWvbOZu4PFmoo3OhCK9u9PwZVOqfqRuClgM1AxMFWPnPrk00CHamd1/Z3+FqVeg7
- 8I/73vxZS1IcNqf22BT8VCnurOe+lYY=
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
- [209.85.219.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-53-gcEkqGBfNMmAC-j29WraiA-1; Sun, 28 Jan 2024 23:25:12 -0500
-X-MC-Unique: gcEkqGBfNMmAC-j29WraiA-1
-Received: by mail-qv1-f70.google.com with SMTP id
- 6a1803df08f44-6800e52d47aso75934526d6.1
- for <qemu-riscv@nongnu.org>; Sun, 28 Jan 2024 20:25:11 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1rUJx7-0000lx-Dm
+ for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 00:13:02 -0500
+Received: from mail-io1-xd2c.google.com ([2607:f8b0:4864:20::d2c])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1rUJx2-0001de-9z
+ for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 00:13:00 -0500
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-7bc332d49f6so103165739f.1
+ for <qemu-riscv@nongnu.org>; Sun, 28 Jan 2024 21:12:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1706505174; x=1707109974; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=X3hsOXabyf7PsVosDH8kLvhsbh4Sp3r+QQ5wYl0vhHw=;
+ b=JsJmFu3OamyC6oh6HK6Y+IQMUhz71bcv7fE7BP4E2/NLXxKkOIGGkRzUJwnBoCRnuI
+ 5YXGYfCeZPihwLV5SvlheN8BJiWXwvDbSJZ9k2ZElhFuOwpwvUQUH+39J18x8ukwsNHc
+ A5KgGsILmdm/RddJBGZBS+39t2NAgDSLlCv7Ununyf4zHRV6tOa3+akue7hAgqz1neQf
+ 7aMGwv041lGhznBtX+MBytW8gkmijlVPITV+gxendTK3W0uDFFBHL1+4n81oYca+h0FD
+ jcUSmEoU4JxAfUT8BMkhF+BofmqnTnp+udlVLSQszDq+2vSx7MJBj5F1135kJ/Md3SPT
+ IKEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706502311; x=1707107111;
- h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
- :to:content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=StWMSNsyYZRk6aJRm7neTuX5AZOzEOFCGIdrgyjYPSY=;
- b=cX0PrvZJGpJ0+0aJVsk8kp36a4WP8tPmVHQhY+jH93L9dYMY6O+ZEEUHE/BTsAUmY+
- ycGZHNBgfzMrWRbYIeMm6Dqpjrq4ZmCJj5oPq+hWV+FUgqqfHxAzPJis0TNG/BPLxao5
- YwYFZ4BDC+5dG5rz+oyxJRt49OgOutAtteD+m1fvxBKryhR7iigkHqRNTYqGAMNkHfcv
- GafMGKiLCGMrCMgEmU9AeuF8cjYrWo9c3xQsixxomP7TgBRwPfmwKYOsrBn0DwqlJT+/
- pR2dWbkliNFiOcLQauJGEtSoljA1MGY9bVsGRYu0QX/69ySXa6JQbS9i4YOEJ8a3QdUP
- t2dw==
-X-Gm-Message-State: AOJu0Yxq1Di/YXZ7FsMpJe5m7S+cnBZMjbnntb2T4d06tuyowWRjLb/Z
- CsEsaoNu8sTE6xvZ3CFzacfDuOoPKHm7ihihPRm6JkHm1f8LUrEQ6Amxvaar6tjh51XN4mPixFN
- UoOyFFbWbeeb4S0OvwxpKp/4XC7k+HP8PCT92f/2uxz5ZzvD9DlS4
-X-Received: by 2002:a0c:db86:0:b0:68c:3be3:1fc1 with SMTP id
- m6-20020a0cdb86000000b0068c3be31fc1mr5030197qvk.29.1706502311589; 
- Sun, 28 Jan 2024 20:25:11 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IELNb66VKNLoFWjDs0jSPGPB6JfFYG7hJYuC99QmCw4bbb8Z/5TeDGHo958ic9pOiBb5QB7vQ==
-X-Received: by 2002:a0c:db86:0:b0:68c:3be3:1fc1 with SMTP id
- m6-20020a0cdb86000000b0068c3be31fc1mr5030183qvk.29.1706502311335; 
- Sun, 28 Jan 2024 20:25:11 -0800 (PST)
-Received: from [192.168.0.9] (ip-109-43-176-119.web.vodafone.de.
- [109.43.176.119]) by smtp.gmail.com with ESMTPSA id
- b17-20020a0cbf51000000b0068109717d02sm3026359qvj.54.2024.01.28.20.25.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 28 Jan 2024 20:25:11 -0800 (PST)
-Message-ID: <b59c59b2-fa29-4084-89f4-966f0b9aa745@redhat.com>
-Date: Mon, 29 Jan 2024 05:25:06 +0100
+ d=1e100.net; s=20230601; t=1706505174; x=1707109974;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=X3hsOXabyf7PsVosDH8kLvhsbh4Sp3r+QQ5wYl0vhHw=;
+ b=DScjEs5AXlsgSwkG2gYxf02TIMrnXEBLtbEBscw+MwpSxUTyLnfao197/PoxzBzv+o
+ i49o2B0COyKP4LdysGaP6mq8OpOXtkts5X3Rbj5Wbxb/SngDsASe0LWI7uRM9/Dj9xCV
+ 2slCBKElGvRaP7AA/BjrOUKDaaqo1eBzPB7z8CH0UMSpQEUCwYHKzsK5xmmpE5naDoia
+ 4/M6MDrHVrQDN3EzH6wOlSWmey+L6gK32UkBLQFu3iRX29+/SfLAeKZiIDXQsePFXJz8
+ 0+xB8gicW3t08X8zOQJU3iAEQ1K9ZuX7XRYl38mNRqJM70EAbj8njBK8Ww64LCEa93Ka
+ x5/Q==
+X-Gm-Message-State: AOJu0YwSdmdwrNgOeuAx1sz3qyzPWJkjKw2drUSekXOjUqebZ51uk1bX
+ FXVnuyHKG4RH2j12UViAeRVzVHSvzXnOwnSQWV0xnuHR48AQwDFZK7bcSo/77iQ=
+X-Google-Smtp-Source: AGHT+IEXL1SYdIBVNd5gu/tl7KsSl4zCJSS8xGRHzdWVyVJ4O+9Mvn/tp7UlNJqN3ULhqO4NhLrZsQ==
+X-Received: by 2002:a92:dcd1:0:b0:363:7379:5fde with SMTP id
+ b17-20020a92dcd1000000b0036373795fdemr5150375ilr.27.1706505174498; 
+ Sun, 28 Jan 2024 21:12:54 -0800 (PST)
+Received: from sunil-laptop ([106.51.190.212])
+ by smtp.gmail.com with ESMTPSA id
+ g21-20020a02b715000000b0046ee92bc557sm1583999jam.92.2024.01.28.21.12.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 28 Jan 2024 21:12:54 -0800 (PST)
+Date: Mon, 29 Jan 2024 10:42:43 +0530
+From: Sunil V L <sunilvl@ventanamicro.com>
+To: Sia Jee Heng <jeeheng.sia@starfivetech.com>
+Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ mst@redhat.com, imammedo@redhat.com, anisinha@redhat.com,
+ peter.maydell@linaro.org, shannon.zhaosl@gmail.com,
+ palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
+Subject: Re: [RESEND v2 1/2] hw/arm/virt-acpi-build.c: Migrate SPCR creation
+ to common location
+Message-ID: <Zbczy87+E0gJEzgw@sunil-laptop>
+References: <20240129021440.17640-1-jeeheng.sia@starfivetech.com>
+ <20240129021440.17640-2-jeeheng.sia@starfivetech.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 19/23] target/s390x: Prefer fast cpu_env() over slower
- CPU QOM cast macro
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
- Eduardo Habkost <eduardo@habkost.net>, kvm@vger.kernel.org,
- qemu-ppc@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
- Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
- Paolo Bonzini <pbonzini@redhat.com>, David Hildenbrand <david@redhat.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>, Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>
-References: <20240126220407.95022-1-philmd@linaro.org>
- <20240126220407.95022-20-philmd@linaro.org>
-From: Thomas Huth <thuth@redhat.com>
-Autocrypt: addr=thuth@redhat.com; keydata=
- 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
-In-Reply-To: <20240126220407.95022-20-philmd@linaro.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -45
-X-Spam_score: -4.6
-X-Spam_bar: ----
-X-Spam_report: (-4.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-2.485,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240129021440.17640-2-jeeheng.sia@starfivetech.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2c;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-io1-xd2c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -154,20 +99,238 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 26/01/2024 23.04, Philippe Mathieu-Daudé wrote:
-> Mechanical patch produced running the command documented
-> in scripts/coccinelle/cpu_env.cocci_template header.
+Hi Jee Heng,
+
+On Sun, Jan 28, 2024 at 06:14:39PM -0800, Sia Jee Heng wrote:
+> RISC-V should also generate the SPCR in a manner similar to ARM.
+> Therefore, instead of replicating the code, relocate this function
+> to the common AML build.
 > 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Signed-off-by: Sia Jee Heng <jeeheng.sia@starfivetech.com>
 > ---
->   target/s390x/cpu-dump.c        |  3 +--
->   target/s390x/gdbstub.c         |  6 ++----
->   target/s390x/helper.c          |  3 +--
->   target/s390x/kvm/kvm.c         |  6 ++----
->   target/s390x/tcg/excp_helper.c | 11 +++--------
->   target/s390x/tcg/translate.c   |  3 +--
->   6 files changed, 10 insertions(+), 22 deletions(-)
+>  hw/acpi/aml-build.c         | 51 ++++++++++++++++++++++++++++
+>  hw/arm/virt-acpi-build.c    | 68 +++++++++++++++----------------------
+>  include/hw/acpi/acpi-defs.h | 33 ++++++++++++++++++
+>  include/hw/acpi/aml-build.h |  4 +++
+>  4 files changed, 115 insertions(+), 41 deletions(-)
+> 
+> diff --git a/hw/acpi/aml-build.c b/hw/acpi/aml-build.c
+> index af66bde0f5..f3904650e4 100644
+> --- a/hw/acpi/aml-build.c
+> +++ b/hw/acpi/aml-build.c
+> @@ -1994,6 +1994,57 @@ static void build_processor_hierarchy_node(GArray *tbl, uint32_t flags,
+>      }
+>  }
+>  
+> +void build_spcr(GArray *table_data, BIOSLinker *linker,
+> +                const AcpiSpcrData *f, const uint8_t rev,
+> +                const char *oem_id, const char *oem_table_id)
+> +{
+> +    AcpiTable table = { .sig = "SPCR", .rev = rev, .oem_id = oem_id,
+> +                        .oem_table_id = oem_table_id };
+> +
+> +    acpi_table_begin(&table, table_data);
+> +    /* Interface type */
+> +    build_append_int_noprefix(table_data, f->interface_type, 1);
+> +    /* Reserved */
+> +    build_append_int_noprefix(table_data, 0, 3);
+> +    /* Base Address */
+> +    build_append_gas(table_data, f->base_addr.id, f->base_addr.width,
+> +                     f->base_addr.offset, f->base_addr.size,
+> +                     f->base_addr.addr);
+> +    /* Interrupt type */
+> +    build_append_int_noprefix(table_data, f->interrupt_type, 1);
+> +    /* IRQ */
+> +    build_append_int_noprefix(table_data, f->pc_interrupt, 1);
+> +    /* Global System Interrupt */
+> +    build_append_int_noprefix(table_data, f->interrupt, 4);
+> +    /* Baud Rate */
+> +    build_append_int_noprefix(table_data, f->baud_rate, 1);
+> +    /* Parity */
+> +    build_append_int_noprefix(table_data, f->parity, 1);
+> +    /* Stop Bits */
+> +    build_append_int_noprefix(table_data, f->stop_bits, 1);
+> +    /* Flow Control */
+> +    build_append_int_noprefix(table_data, f->flow_control, 1);
+> +    /* Terminal Type */
+> +    build_append_int_noprefix(table_data, f->terminal_type, 1);
+> +    /* PCI Device ID  */
+> +    build_append_int_noprefix(table_data, f->pci_device_id, 2);
+> +    /* PCI Vendor ID */
+> +    build_append_int_noprefix(table_data, f->pci_vendor_id, 2);
+> +    /* PCI Bus Number */
+> +    build_append_int_noprefix(table_data, f->pci_bus, 1);
+> +    /* PCI Device Number */
+> +    build_append_int_noprefix(table_data, f->pci_device, 1);
+> +    /* PCI Function Number */
+> +    build_append_int_noprefix(table_data, f->pci_function, 1);
+> +    /* PCI Flags */
+> +    build_append_int_noprefix(table_data, f->pci_flags, 4);
+> +    /* PCI Segment */
+> +    build_append_int_noprefix(table_data, f->pci_segment, 1);
+> +    /* Reserved */
+> +    build_append_int_noprefix(table_data, 0, 4);
+> +
+I think either there should be a comment that this supports only v2 of
+SPCR spec or it should be able to create SPCR of any version. IMO, I
+think it is better to add support till v4 (latest). Since consumers like
+Linux probably doesn't support v4 yet, ARM/RISC-V can continue to create
+v2 itself for the time being but the generic build_spcr() should be able
+to create v4 also if the arch requires it.
 
-Reviewed-by: Thomas Huth <thuth@redhat.com>
-
+Thanks,
+Sunil
+> +    acpi_table_end(linker, &table);
+> +}
+>  /*
+>   * ACPI spec, Revision 6.3
+>   * 5.2.29 Processor Properties Topology Table (PPTT)
+> diff --git a/hw/arm/virt-acpi-build.c b/hw/arm/virt-acpi-build.c
+> index a22a2f43a5..195767c0f0 100644
+> --- a/hw/arm/virt-acpi-build.c
+> +++ b/hw/arm/virt-acpi-build.c
+> @@ -431,48 +431,34 @@ build_iort(GArray *table_data, BIOSLinker *linker, VirtMachineState *vms)
+>   * Rev: 1.07
+>   */
+>  static void
+> -build_spcr(GArray *table_data, BIOSLinker *linker, VirtMachineState *vms)
+> +spcr_setup(GArray *table_data, BIOSLinker *linker, VirtMachineState *vms)
+>  {
+> -    AcpiTable table = { .sig = "SPCR", .rev = 2, .oem_id = vms->oem_id,
+> -                        .oem_table_id = vms->oem_table_id };
+> -
+> -    acpi_table_begin(&table, table_data);
+> -
+> -    /* Interface Type */
+> -    build_append_int_noprefix(table_data, 3, 1); /* ARM PL011 UART */
+> -    build_append_int_noprefix(table_data, 0, 3); /* Reserved */
+> -    /* Base Address */
+> -    build_append_gas(table_data, AML_AS_SYSTEM_MEMORY, 32, 0, 3,
+> -                     vms->memmap[VIRT_UART].base);
+> -    /* Interrupt Type */
+> -    build_append_int_noprefix(table_data,
+> -        (1 << 3) /* Bit[3] ARMH GIC interrupt */, 1);
+> -    build_append_int_noprefix(table_data, 0, 1); /* IRQ */
+> -    /* Global System Interrupt */
+> -    build_append_int_noprefix(table_data,
+> -                              vms->irqmap[VIRT_UART] + ARM_SPI_BASE, 4);
+> -    build_append_int_noprefix(table_data, 3 /* 9600 */, 1); /* Baud Rate */
+> -    build_append_int_noprefix(table_data, 0 /* No Parity */, 1); /* Parity */
+> -    /* Stop Bits */
+> -    build_append_int_noprefix(table_data, 1 /* 1 Stop bit */, 1);
+> -    /* Flow Control */
+> -    build_append_int_noprefix(table_data,
+> -        (1 << 1) /* RTS/CTS hardware flow control */, 1);
+> -    /* Terminal Type */
+> -    build_append_int_noprefix(table_data, 0 /* VT100 */, 1);
+> -    build_append_int_noprefix(table_data, 0, 1); /* Language */
+> -    /* PCI Device ID  */
+> -    build_append_int_noprefix(table_data, 0xffff /* not a PCI device*/, 2);
+> -    /* PCI Vendor ID */
+> -    build_append_int_noprefix(table_data, 0xffff /* not a PCI device*/, 2);
+> -    build_append_int_noprefix(table_data, 0, 1); /* PCI Bus Number */
+> -    build_append_int_noprefix(table_data, 0, 1); /* PCI Device Number */
+> -    build_append_int_noprefix(table_data, 0, 1); /* PCI Function Number */
+> -    build_append_int_noprefix(table_data, 0, 4); /* PCI Flags */
+> -    build_append_int_noprefix(table_data, 0, 1); /* PCI Segment */
+> -    build_append_int_noprefix(table_data, 0, 4); /* Reserved */
+> +    AcpiSpcrData serial = {
+> +        .interface_type = 3,       /* ARM PL011 UART */
+> +        .base_addr.id = AML_AS_SYSTEM_MEMORY,
+> +        .base_addr.width = 32,
+> +        .base_addr.offset = 0,
+> +        .base_addr.size = 3,
+> +        .base_addr.addr = vms->memmap[VIRT_UART].base,
+> +        .interrupt_type = (1 << 3),/* Bit[3] ARMH GIC interrupt*/
+> +        .pc_interrupt = 0,         /* IRQ */
+> +        .interrupt = (vms->irqmap[VIRT_UART] + ARM_SPI_BASE),
+> +        .baud_rate = 3,            /* 9600 */
+> +        .parity = 0,               /* No Parity */
+> +        .stop_bits = 1,            /* 1 Stop bit */
+> +        .flow_control = 1 << 1,    /* RTS/CTS hardware flow control */
+> +        .terminal_type = 0,        /* VT100 */
+> +        .language = 0,             /* Language */
+> +        .pci_device_id = 0xffff,   /* not a PCI device*/
+> +        .pci_vendor_id = 0xffff,   /* not a PCI device*/
+> +        .pci_bus = 0,
+> +        .pci_device = 0,
+> +        .pci_function = 0,
+> +        .pci_flags = 0,
+> +        .pci_segment = 0,
+> +    };
+>  
+> -    acpi_table_end(linker, &table);
+> +    build_spcr(table_data, linker, &serial, 2, vms->oem_id, vms->oem_table_id);
+>  }
+>  
+>  /*
+> @@ -930,7 +916,7 @@ void virt_acpi_build(VirtMachineState *vms, AcpiBuildTables *tables)
+>      }
+>  
+>      acpi_add_table(table_offsets, tables_blob);
+> -    build_spcr(tables_blob, tables->linker, vms);
+> +    spcr_setup(tables_blob, tables->linker, vms);
+>  
+>      acpi_add_table(table_offsets, tables_blob);
+>      build_dbg2(tables_blob, tables->linker, vms);
+> diff --git a/include/hw/acpi/acpi-defs.h b/include/hw/acpi/acpi-defs.h
+> index 2b42e4192b..0e6e82b339 100644
+> --- a/include/hw/acpi/acpi-defs.h
+> +++ b/include/hw/acpi/acpi-defs.h
+> @@ -90,6 +90,39 @@ typedef struct AcpiFadtData {
+>      unsigned *xdsdt_tbl_offset;
+>  } AcpiFadtData;
+>  
+> +typedef struct AcpiGas {
+> +    uint8_t id;                /* Address space ID */
+> +    uint8_t width;             /* Register bit width */
+> +    uint8_t offset;            /* Register bit offset */
+> +    uint8_t size;              /* Access size */
+> +    uint64_t addr;             /* Address */
+> +} AcpiGas;
+> +
+> +/* SPCR (Serial Port Console Redirection table) */
+> +typedef struct AcpiSpcrData {
+> +    uint8_t interface_type;
+> +    uint8_t reserved[3];
+> +    struct AcpiGas base_addr;
+> +    uint8_t interrupt_type;
+> +    uint8_t pc_interrupt;
+> +    uint32_t interrupt;        /* Global system interrupt */
+> +    uint8_t baud_rate;
+> +    uint8_t parity;
+> +    uint8_t stop_bits;
+> +    uint8_t flow_control;
+> +    uint8_t terminal_type;
+> +    uint8_t language;
+> +    uint8_t reserved1;
+> +    uint16_t pci_device_id;    /* Must be 0xffff if not PCI device */
+> +    uint16_t pci_vendor_id;    /* Must be 0xffff if not PCI device */
+> +    uint8_t pci_bus;
+> +    uint8_t pci_device;
+> +    uint8_t pci_function;
+> +    uint32_t pci_flags;
+> +    uint8_t pci_segment;
+> +    uint32_t reserved2;
+> +} AcpiSpcrData;
+> +
+>  #define ACPI_FADT_ARM_PSCI_COMPLIANT  (1 << 0)
+>  #define ACPI_FADT_ARM_PSCI_USE_HVC    (1 << 1)
+>  
+> diff --git a/include/hw/acpi/aml-build.h b/include/hw/acpi/aml-build.h
+> index ff2a310270..a3784155cb 100644
+> --- a/include/hw/acpi/aml-build.h
+> +++ b/include/hw/acpi/aml-build.h
+> @@ -497,4 +497,8 @@ void build_fadt(GArray *tbl, BIOSLinker *linker, const AcpiFadtData *f,
+>  
+>  void build_tpm2(GArray *table_data, BIOSLinker *linker, GArray *tcpalog,
+>                  const char *oem_id, const char *oem_table_id);
+> +
+> +void build_spcr(GArray *table_data, BIOSLinker *linker,
+> +                const AcpiSpcrData *f, const uint8_t rev,
+> +                const char *oem_id, const char *oem_table_id);
+>  #endif
+> -- 
+> 2.34.1
+> 
 
