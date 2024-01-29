@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87415C47DB3
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 16:47:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCECDC47DDB
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 16:47:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rUUm8-0006dW-OJ; Mon, 29 Jan 2024 11:46:25 -0500
+	id 1rUUmw-0008S5-Ox; Mon, 29 Jan 2024 11:47:15 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUlQ-0005yH-Is
- for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:45:42 -0500
-Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUlo-000654-Sa
+ for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:46:07 -0500
+Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUlM-0003cL-U3
- for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:45:40 -0500
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-40ee9e21f89so28269255e9.0
- for <qemu-riscv@nongnu.org>; Mon, 29 Jan 2024 08:45:33 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUlj-0003jF-Kj
+ for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:46:02 -0500
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-33aeb088324so1019464f8f.2
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jan 2024 08:45:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706546732; x=1707151532; darn=nongnu.org;
+ d=linaro.org; s=google; t=1706546758; x=1707151558; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=y2hw1LeDHPXoA09+Z2wFdjf4GaaZ4oIVM8gsKnpZLbQ=;
- b=gwoiazBHhZMVC4So9zi88B80lq+tj2B+Hg+BDQGHoU2SA70OpRJYX0T5Nuz98/B+By
- b/ImwaLRaGdTkL4KupS2+KEQKaMcd2d//Vb6MtmxFFtRVieHEB1cpucrR4aEAsiOHaWx
- ucn4c16yIG3IcUOlT+7wYLy75UvbJu5efD86uF3mYgqFX1eTRNikdkayq//LH/H3Kahh
- uimHvnT4A2t7A09XKsouby7sGQlwo6IpqBkh2v1/qPFuvnFMWAD+lr+n111q/kHc5XCH
- 4mMLZjZmtR3LPimuGyNkRUMSp9W8Q+6N4qpIywYwq+VYswEjGI3YF8njQLTUIS1h8dzd
- X4tQ==
+ bh=ToHK+HKGdiJp+sEUEXA9pvpmoAbDWVbOtuhkHM5nAUs=;
+ b=IUfyHMlfkAxRlh0/uaXdIhqlPO97VQebvhk5jHet8UZHxFqEoTt2MFQ437QrA+Jyfg
+ BW/dbf/cUH/YMrhRc7GhvG6nl6leENDns7SQWpVW1Yn095Pjcl3z9c1ptautblmNGlrA
+ Rnl6yBUEyAKeDdymc0GjK9ZPm2RlRsLP8RHiEaIdODRfsaRisiIuMK1KvCWw41rFPG8P
+ 0/Sv3xjOrc7G7p/LI/cpdvNrJO1hJRg+ArXYiXmFWh7xsNmJP7VEptFPwzECTf+GJxhT
+ rDLfiQxEWgK9PmQJYH8VLTw4Eig3IMt3PpstQj1Zs6/eBO1royPag/r7TCm9+202F3VS
+ qxcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706546732; x=1707151532;
+ d=1e100.net; s=20230601; t=1706546758; x=1707151558;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=y2hw1LeDHPXoA09+Z2wFdjf4GaaZ4oIVM8gsKnpZLbQ=;
- b=DsP2KYH2DGyW1ztGRcdBhJJKo7icYt2m4yQGHvQ4O/6m2ntq8h/PKOgp59XchPVgwG
- A/jHCPSURLSbKGpzeT5Qtc2F8GJHICZkPVLaap4LtEfIyx4nXNjD6r3TdHumy6dRzIl9
- LmnmwMt7uzhEn44L3s3zHW+af/C4+EynenuvxoJBenYxO+MJbGzEa6WZjZhFn6bj5CAW
- pBsgowQq0fMdS2Ji7fjN5bLlATxupVas0esP2bUzpcIwxOxBl1Rjevc81VAofj4+Y8Nn
- GoB3n2boI6OrbQwt+nulc0FIXhzrFUwOb2khVoBL1xipyUe/S2nwv9GB+i+UadjoVP/8
- vv/g==
-X-Gm-Message-State: AOJu0YzusLQPzu+PBW5mLXUlGrP92ugUmXufQhLu6dB8jC+2WuNaL44Z
- UlF0NSWPvZZ09bZz3SmVvK1sJBW4pCq7CNd2nTIPSLuXlMaGLSwAyVb86jtNk4I=
-X-Google-Smtp-Source: AGHT+IFVrS1YJ9J2dLNRn+st1RiqDBXNn5RMuFWm57xrM1I/AzlVfdLqJZcKs7joGZxBzXAoy74ufw==
-X-Received: by 2002:a05:600c:4e8c:b0:40e:e25c:41cf with SMTP id
- f12-20020a05600c4e8c00b0040ee25c41cfmr5163477wmq.12.1706546732132; 
- Mon, 29 Jan 2024 08:45:32 -0800 (PST)
+ bh=ToHK+HKGdiJp+sEUEXA9pvpmoAbDWVbOtuhkHM5nAUs=;
+ b=jGvEIVanYBYj2n1RMRlE8rzsIa18tDV8AYGsVfPPcooWtwqRmqO9BqY1NI3lqCTmjg
+ fLn77ngDscU4SXLq2DdJ3ogqinAszlvMgEy4s6TzWHoASPlb9VcPIdcPiqob17s8pfc1
+ FG1DsuNmCZBOWd5v+A7suh61foaTesM0AsI1NACax3JDeZ8rK1QLlRgxIA6j8QaLqt1h
+ oExT2Lit+QYcgEYNSFhst52sty+pPz5Tn+d0rAr1neMyL15C4j4OYAfDCapNmqMYti1h
+ 6agfTtzK9W6NgZUrZugh2Jges5bue4/lA+JLpaRirhfBAuoFUj6QTC0MdV6BvoQE28b+
+ ksgQ==
+X-Gm-Message-State: AOJu0YyNUDxTfWjdRGauXSP3tP5GD8aCc5Nt/AFjfXtqAMqNMMHcZXca
+ 8RWhmCd0v2s1q42o/U0P+xYpn7OwfOz+qW3m+64fGyu4+gtRvcEdRbq8uM490kc=
+X-Google-Smtp-Source: AGHT+IF61qD8G7s4vfL0JnXU60CJz7kqXB9Iq6Bv8jWrWEKI1XEtYhFyxmEQuvkuzF+s/E0uz/WcNg==
+X-Received: by 2002:a05:6000:1888:b0:33a:f172:9a43 with SMTP id
+ a8-20020a056000188800b0033af1729a43mr2206152wri.47.1706546758111; 
+ Mon, 29 Jan 2024 08:45:58 -0800 (PST)
 Received: from m1x-phil.lan ([176.187.219.39])
  by smtp.gmail.com with ESMTPSA id
- bs3-20020a056000070300b0033aeb7d4537sm3951432wrb.7.2024.01.29.08.45.29
+ fa1-20020a056000258100b0033af5716a7fsm815673wrb.61.2024.01.29.08.45.54
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 29 Jan 2024 08:45:31 -0800 (PST)
+ Mon, 29 Jan 2024 08:45:57 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
@@ -63,37 +63,45 @@ Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- Song Gao <gaosong@loongson.cn>, Nicholas Piggin <npiggin@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Michael Rolnik <mrolnik@gmail.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Brian Cain <bcain@quicinc.com>, Song Gao <gaosong@loongson.cn>,
+ Laurent Vivier <laurent@vivier.eu>, Aurelien Jarno <aurelien@aurel32.net>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Chris Wulff <crwulff@gmail.com>, Marek Vasut <marex@denx.de>,
+ Stafford Horne <shorne@gmail.com>, Nicholas Piggin <npiggin@gmail.com>,
  Daniel Henrique Barboza <danielhb413@gmail.com>,
  =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- David Gibson <david@gibson.dropbear.id.au>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Eric Farman <farman@linux.ibm.com>, David Hildenbrand <david@redhat.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>, Thomas Huth <thuth@redhat.com>
-Subject: [PATCH v3 02/29] hw/core: Declare CPUArchId::cpu as CPUState instead
- of Object
-Date: Mon, 29 Jan 2024 17:44:44 +0100
-Message-ID: <20240129164514.73104-3-philmd@linaro.org>
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Max Filippov <jcmvbkbc@gmail.com>
+Subject: [PATCH v3 06/29] target: Replace CPU_GET_CLASS(cpu -> obj) in
+ cpu_reset_hold() handler
+Date: Mon, 29 Jan 2024 17:44:48 +0100
+Message-ID: <20240129164514.73104-7-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240129164514.73104-1-philmd@linaro.org>
 References: <20240129164514.73104-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::336;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x336.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,123 +117,409 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Do not accept any Object for CPUArchId::cpu field,
-restrict it to CPUState type.
+Since CPU() macro is a simple cast, the following are equivalent:
+
+  Object *obj;
+  CPUState *cs = CPU(obj)
+
+In order to ease static analysis when running
+scripts/coccinelle/cpu_env.cocci from the previous commit,
+replace:
+
+ - CPU_GET_CLASS(cpu);
+ + CPU_GET_CLASS(obj);
+
+Most code use the 'cs' variable name for CPUState handle.
+Replace few 's' -> 'cs' to unify cpu_reset_hold() style.
+
+No logical change in this patch.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/hw/boards.h        | 2 +-
- hw/core/machine.c          | 4 ++--
- hw/i386/x86.c              | 2 +-
- hw/loongarch/virt.c        | 2 +-
- hw/ppc/spapr.c             | 5 ++---
- hw/s390x/s390-virtio-ccw.c | 2 +-
- 6 files changed, 8 insertions(+), 9 deletions(-)
+ target/arm/cpu.c        | 14 +++++++-------
+ target/avr/cpu.c        |  2 +-
+ target/cris/cpu.c       |  2 +-
+ target/hexagon/cpu.c    |  2 +-
+ target/i386/cpu.c       | 14 +++++++-------
+ target/loongarch/cpu.c  |  2 +-
+ target/m68k/cpu.c       |  6 +++---
+ target/microblaze/cpu.c |  6 +++---
+ target/mips/cpu.c       |  2 +-
+ target/nios2/cpu.c      |  2 +-
+ target/openrisc/cpu.c   |  8 ++++----
+ target/ppc/cpu_init.c   | 12 ++++++------
+ target/riscv/cpu.c      |  2 +-
+ target/rx/cpu.c         |  2 +-
+ target/sh4/cpu.c        |  6 +++---
+ target/sparc/cpu.c      |  6 +++---
+ target/tricore/cpu.c    |  6 +++---
+ target/xtensa/cpu.c     |  8 ++++----
+ 18 files changed, 51 insertions(+), 51 deletions(-)
 
-diff --git a/include/hw/boards.h b/include/hw/boards.h
-index bcfde8a84d..8b8f6d5c00 100644
---- a/include/hw/boards.h
-+++ b/include/hw/boards.h
-@@ -120,7 +120,7 @@ typedef struct CPUArchId {
-     uint64_t arch_id;
-     int64_t vcpus_count;
-     CpuInstanceProperties props;
--    Object *cpu;
-+    CPUState *cpu;
-     const char *type;
- } CPUArchId;
+diff --git a/target/arm/cpu.c b/target/arm/cpu.c
+index 60ab8f3242..e5deb5195b 100644
+--- a/target/arm/cpu.c
++++ b/target/arm/cpu.c
+@@ -209,9 +209,9 @@ static void cp_reg_check_reset(gpointer key, gpointer value,  gpointer opaque)
  
-diff --git a/hw/core/machine.c b/hw/core/machine.c
-index fb5afdcae4..854cf00a9b 100644
---- a/hw/core/machine.c
-+++ b/hw/core/machine.c
-@@ -716,7 +716,7 @@ HotpluggableCPUList *machine_query_hotpluggable_cpus(MachineState *machine)
-     mc->possible_cpu_arch_ids(machine);
+ static void arm_cpu_reset_hold(Object *obj)
+ {
+-    CPUState *s = CPU(obj);
+-    ARMCPU *cpu = ARM_CPU(s);
+-    ARMCPUClass *acc = ARM_CPU_GET_CLASS(cpu);
++    CPUState *cs = CPU(obj);
++    ARMCPU *cpu = ARM_CPU(cs);
++    ARMCPUClass *acc = ARM_CPU_GET_CLASS(obj);
+     CPUARMState *env = &cpu->env;
  
-     for (i = 0; i < machine->possible_cpus->len; i++) {
--        Object *cpu;
-+        CPUState *cpu;
-         HotpluggableCPU *cpu_item = g_new0(typeof(*cpu_item), 1);
+     if (acc->parent_phases.hold) {
+@@ -228,7 +228,7 @@ static void arm_cpu_reset_hold(Object *obj)
+     env->vfp.xregs[ARM_VFP_MVFR1] = cpu->isar.mvfr1;
+     env->vfp.xregs[ARM_VFP_MVFR2] = cpu->isar.mvfr2;
  
-         cpu_item->type = g_strdup(machine->possible_cpus->cpus[i].type);
-@@ -726,7 +726,7 @@ HotpluggableCPUList *machine_query_hotpluggable_cpus(MachineState *machine)
+-    cpu->power_state = s->start_powered_off ? PSCI_OFF : PSCI_ON;
++    cpu->power_state = cs->start_powered_off ? PSCI_OFF : PSCI_ON;
  
-         cpu = machine->possible_cpus->cpus[i].cpu;
-         if (cpu) {
--            cpu_item->qom_path = object_get_canonical_path(cpu);
-+            cpu_item->qom_path = object_get_canonical_path(OBJECT(cpu));
+     if (arm_feature(env, ARM_FEATURE_IWMMXT)) {
+         env->iwmmxt.cregs[ARM_IWMMXT_wCID] = 0x69051000 | 'Q';
+@@ -433,7 +433,7 @@ static void arm_cpu_reset_hold(Object *obj)
+ 
+         /* Load the initial SP and PC from offset 0 and 4 in the vector table */
+         vecbase = env->v7m.vecbase[env->v7m.secure];
+-        rom = rom_ptr_for_as(s->as, vecbase, 8);
++        rom = rom_ptr_for_as(cs->as, vecbase, 8);
+         if (rom) {
+             /* Address zero is covered by ROM which hasn't yet been
+              * copied into physical memory.
+@@ -446,8 +446,8 @@ static void arm_cpu_reset_hold(Object *obj)
+              * it got copied into memory. In the latter case, rom_ptr
+              * will return a NULL pointer and we should use ldl_phys instead.
+              */
+-            initial_msp = ldl_phys(s->as, vecbase);
+-            initial_pc = ldl_phys(s->as, vecbase + 4);
++            initial_msp = ldl_phys(cs->as, vecbase);
++            initial_pc = ldl_phys(cs->as, vecbase + 4);
          }
-         QAPI_LIST_PREPEND(head, cpu_item);
-     }
-diff --git a/hw/i386/x86.c b/hw/i386/x86.c
-index 2b6291ad8d..19464ea971 100644
---- a/hw/i386/x86.c
-+++ b/hw/i386/x86.c
-@@ -221,7 +221,7 @@ void x86_cpu_plug(HotplugHandler *hotplug_dev,
-     }
  
-     found_cpu = x86_find_cpu_slot(MACHINE(x86ms), cpu->apic_id, NULL);
--    found_cpu->cpu = OBJECT(dev);
-+    found_cpu->cpu = CPU(dev);
- out:
-     error_propagate(errp, local_err);
- }
-diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
-index c9a680e61a..524a53de06 100644
---- a/hw/loongarch/virt.c
-+++ b/hw/loongarch/virt.c
-@@ -811,7 +811,7 @@ static void loongarch_init(MachineState *machine)
-     for (i = 0; i < possible_cpus->len; i++) {
-         cpu = cpu_create(machine->cpu_type);
-         cpu->cpu_index = i;
--        machine->possible_cpus->cpus[i].cpu = OBJECT(cpu);
-+        machine->possible_cpus->cpus[i].cpu = cpu;
-         lacpu = LOONGARCH_CPU(cpu);
-         lacpu->phy_id = machine->possible_cpus->cpus[i].arch_id;
-     }
-diff --git a/hw/ppc/spapr.c b/hw/ppc/spapr.c
-index e8dabc8614..0b77aa5514 100644
---- a/hw/ppc/spapr.c
-+++ b/hw/ppc/spapr.c
-@@ -3985,7 +3985,6 @@ static void spapr_core_plug(HotplugHandler *hotplug_dev, DeviceState *dev)
-     SpaprMachineClass *smc = SPAPR_MACHINE_CLASS(mc);
-     SpaprCpuCore *core = SPAPR_CPU_CORE(OBJECT(dev));
-     CPUCore *cc = CPU_CORE(dev);
--    CPUState *cs;
-     SpaprDrc *drc;
-     CPUArchId *core_slot;
-     int index;
-@@ -4019,7 +4018,7 @@ static void spapr_core_plug(HotplugHandler *hotplug_dev, DeviceState *dev)
+         qemu_log_mask(CPU_LOG_INT,
+diff --git a/target/avr/cpu.c b/target/avr/cpu.c
+index f5cbdc4a8c..0f191a4c9d 100644
+--- a/target/avr/cpu.c
++++ b/target/avr/cpu.c
+@@ -74,7 +74,7 @@ static void avr_cpu_reset_hold(Object *obj)
+ {
+     CPUState *cs = CPU(obj);
+     AVRCPU *cpu = AVR_CPU(cs);
+-    AVRCPUClass *mcc = AVR_CPU_GET_CLASS(cpu);
++    AVRCPUClass *mcc = AVR_CPU_GET_CLASS(obj);
+     CPUAVRState *env = &cpu->env;
+ 
+     if (mcc->parent_phases.hold) {
+diff --git a/target/cris/cpu.c b/target/cris/cpu.c
+index 9ba08e8b0c..4187e0ef3c 100644
+--- a/target/cris/cpu.c
++++ b/target/cris/cpu.c
+@@ -60,7 +60,7 @@ static void cris_cpu_reset_hold(Object *obj)
+ {
+     CPUState *s = CPU(obj);
+     CRISCPU *cpu = CRIS_CPU(s);
+-    CRISCPUClass *ccc = CRIS_CPU_GET_CLASS(cpu);
++    CRISCPUClass *ccc = CRIS_CPU_GET_CLASS(obj);
+     CPUCRISState *env = &cpu->env;
+     uint32_t vr;
+ 
+diff --git a/target/hexagon/cpu.c b/target/hexagon/cpu.c
+index c0cd739e15..085d6c0115 100644
+--- a/target/hexagon/cpu.c
++++ b/target/hexagon/cpu.c
+@@ -289,7 +289,7 @@ static void hexagon_cpu_reset_hold(Object *obj)
+ {
+     CPUState *cs = CPU(obj);
+     HexagonCPU *cpu = HEXAGON_CPU(cs);
+-    HexagonCPUClass *mcc = HEXAGON_CPU_GET_CLASS(cpu);
++    HexagonCPUClass *mcc = HEXAGON_CPU_GET_CLASS(obj);
+     CPUHexagonState *env = &cpu->env;
+ 
+     if (mcc->parent_phases.hold) {
+diff --git a/target/i386/cpu.c b/target/i386/cpu.c
+index 03822d9ba8..66345c204a 100644
+--- a/target/i386/cpu.c
++++ b/target/i386/cpu.c
+@@ -6690,9 +6690,9 @@ static void x86_cpu_set_sgxlepubkeyhash(CPUX86State *env)
+ 
+ static void x86_cpu_reset_hold(Object *obj)
+ {
+-    CPUState *s = CPU(obj);
+-    X86CPU *cpu = X86_CPU(s);
+-    X86CPUClass *xcc = X86_CPU_GET_CLASS(cpu);
++    CPUState *cs = CPU(obj);
++    X86CPU *cpu = X86_CPU(cs);
++    X86CPUClass *xcc = X86_CPU_GET_CLASS(obj);
+     CPUX86State *env = &cpu->env;
+     target_ulong cr4;
+     uint64_t xcr0;
+@@ -6780,8 +6780,8 @@ static void x86_cpu_reset_hold(Object *obj)
+     memset(env->dr, 0, sizeof(env->dr));
+     env->dr[6] = DR6_FIXED_1;
+     env->dr[7] = DR7_FIXED_1;
+-    cpu_breakpoint_remove_all(s, BP_CPU);
+-    cpu_watchpoint_remove_all(s, BP_CPU);
++    cpu_breakpoint_remove_all(cs, BP_CPU);
++    cpu_watchpoint_remove_all(cs, BP_CPU);
+ 
+     cr4 = 0;
+     xcr0 = XSTATE_FP_MASK;
+@@ -6832,9 +6832,9 @@ static void x86_cpu_reset_hold(Object *obj)
+     env->triple_fault_pending = false;
+ #if !defined(CONFIG_USER_ONLY)
+     /* We hard-wire the BSP to the first CPU. */
+-    apic_designate_bsp(cpu->apic_state, s->cpu_index == 0);
++    apic_designate_bsp(cpu->apic_state, cs->cpu_index == 0);
+ 
+-    s->halted = !cpu_is_bsp(cpu);
++    cs->halted = !cpu_is_bsp(cpu);
+ 
+     if (kvm_enabled()) {
+         kvm_arch_reset_vcpu(cpu);
+diff --git a/target/loongarch/cpu.c b/target/loongarch/cpu.c
+index 064540397d..3094bbc0d9 100644
+--- a/target/loongarch/cpu.c
++++ b/target/loongarch/cpu.c
+@@ -500,7 +500,7 @@ static void loongarch_cpu_reset_hold(Object *obj)
+ {
+     CPUState *cs = CPU(obj);
+     LoongArchCPU *cpu = LOONGARCH_CPU(cs);
+-    LoongArchCPUClass *lacc = LOONGARCH_CPU_GET_CLASS(cpu);
++    LoongArchCPUClass *lacc = LOONGARCH_CPU_GET_CLASS(obj);
+     CPULoongArchState *env = &cpu->env;
+ 
+     if (lacc->parent_phases.hold) {
+diff --git a/target/m68k/cpu.c b/target/m68k/cpu.c
+index 1421e77c2c..4d14d04c33 100644
+--- a/target/m68k/cpu.c
++++ b/target/m68k/cpu.c
+@@ -68,9 +68,9 @@ static void m68k_unset_feature(CPUM68KState *env, int feature)
+ 
+ static void m68k_cpu_reset_hold(Object *obj)
+ {
+-    CPUState *s = CPU(obj);
+-    M68kCPU *cpu = M68K_CPU(s);
+-    M68kCPUClass *mcc = M68K_CPU_GET_CLASS(cpu);
++    CPUState *cs = CPU(obj);
++    M68kCPU *cpu = M68K_CPU(cs);
++    M68kCPUClass *mcc = M68K_CPU_GET_CLASS(obj);
+     CPUM68KState *env = &cpu->env;
+     floatx80 nan = floatx80_default_nan(NULL);
+     int i;
+diff --git a/target/microblaze/cpu.c b/target/microblaze/cpu.c
+index bbb3335cad..6d4b7c2c8f 100644
+--- a/target/microblaze/cpu.c
++++ b/target/microblaze/cpu.c
+@@ -167,9 +167,9 @@ static void microblaze_cpu_set_irq(void *opaque, int irq, int level)
+ 
+ static void mb_cpu_reset_hold(Object *obj)
+ {
+-    CPUState *s = CPU(obj);
+-    MicroBlazeCPU *cpu = MICROBLAZE_CPU(s);
+-    MicroBlazeCPUClass *mcc = MICROBLAZE_CPU_GET_CLASS(cpu);
++    CPUState *cs = CPU(obj);
++    MicroBlazeCPU *cpu = MICROBLAZE_CPU(cs);
++    MicroBlazeCPUClass *mcc = MICROBLAZE_CPU_GET_CLASS(obj);
+     CPUMBState *env = &cpu->env;
+ 
+     if (mcc->parent_phases.hold) {
+diff --git a/target/mips/cpu.c b/target/mips/cpu.c
+index a0023edd43..6ced52f985 100644
+--- a/target/mips/cpu.c
++++ b/target/mips/cpu.c
+@@ -188,7 +188,7 @@ static void mips_cpu_reset_hold(Object *obj)
+ {
+     CPUState *cs = CPU(obj);
+     MIPSCPU *cpu = MIPS_CPU(cs);
+-    MIPSCPUClass *mcc = MIPS_CPU_GET_CLASS(cpu);
++    MIPSCPUClass *mcc = MIPS_CPU_GET_CLASS(obj);
+     CPUMIPSState *env = &cpu->env;
+ 
+     if (mcc->parent_phases.hold) {
+diff --git a/target/nios2/cpu.c b/target/nios2/cpu.c
+index a27732bf2b..09b122e24d 100644
+--- a/target/nios2/cpu.c
++++ b/target/nios2/cpu.c
+@@ -61,7 +61,7 @@ static void nios2_cpu_reset_hold(Object *obj)
+ {
+     CPUState *cs = CPU(obj);
+     Nios2CPU *cpu = NIOS2_CPU(cs);
+-    Nios2CPUClass *ncc = NIOS2_CPU_GET_CLASS(cpu);
++    Nios2CPUClass *ncc = NIOS2_CPU_GET_CLASS(obj);
+     CPUNios2State *env = &cpu->env;
+ 
+     if (ncc->parent_phases.hold) {
+diff --git a/target/openrisc/cpu.c b/target/openrisc/cpu.c
+index 381ebe00d3..0fdadf9e55 100644
+--- a/target/openrisc/cpu.c
++++ b/target/openrisc/cpu.c
+@@ -75,9 +75,9 @@ static void openrisc_disas_set_info(CPUState *cpu, disassemble_info *info)
+ 
+ static void openrisc_cpu_reset_hold(Object *obj)
+ {
+-    CPUState *s = CPU(obj);
+-    OpenRISCCPU *cpu = OPENRISC_CPU(s);
+-    OpenRISCCPUClass *occ = OPENRISC_CPU_GET_CLASS(cpu);
++    CPUState *cs = CPU(obj);
++    OpenRISCCPU *cpu = OPENRISC_CPU(cs);
++    OpenRISCCPUClass *occ = OPENRISC_CPU_GET_CLASS(obj);
+ 
+     if (occ->parent_phases.hold) {
+         occ->parent_phases.hold(obj);
+@@ -88,7 +88,7 @@ static void openrisc_cpu_reset_hold(Object *obj)
+     cpu->env.pc = 0x100;
+     cpu->env.sr = SR_FO | SR_SM;
+     cpu->env.lock_addr = -1;
+-    s->exception_index = -1;
++    cs->exception_index = -1;
+     cpu_set_fpcsr(&cpu->env, 0);
+ 
+     set_float_detect_tininess(float_tininess_before_rounding,
+diff --git a/target/ppc/cpu_init.c b/target/ppc/cpu_init.c
+index 344196a8ce..61b8495a90 100644
+--- a/target/ppc/cpu_init.c
++++ b/target/ppc/cpu_init.c
+@@ -7107,9 +7107,9 @@ static bool ppc_cpu_has_work(CPUState *cs)
+ 
+ static void ppc_cpu_reset_hold(Object *obj)
+ {
+-    CPUState *s = CPU(obj);
+-    PowerPCCPU *cpu = POWERPC_CPU(s);
+-    PowerPCCPUClass *pcc = POWERPC_CPU_GET_CLASS(cpu);
++    CPUState *cs = CPU(obj);
++    PowerPCCPU *cpu = POWERPC_CPU(cs);
++    PowerPCCPUClass *pcc = POWERPC_CPU_GET_CLASS(obj);
+     CPUPPCState *env = &cpu->env;
+     target_ulong msr;
+     int i;
+@@ -7158,8 +7158,8 @@ static void ppc_cpu_reset_hold(Object *obj)
+     env->nip = env->hreset_vector | env->excp_prefix;
+ 
+     if (tcg_enabled()) {
+-        cpu_breakpoint_remove_all(s, BP_CPU);
+-        cpu_watchpoint_remove_all(s, BP_CPU);
++        cpu_breakpoint_remove_all(cs, BP_CPU);
++        cpu_watchpoint_remove_all(cs, BP_CPU);
+         if (env->mmu_model != POWERPC_MMU_REAL) {
+             ppc_tlb_invalidate_all(env);
          }
-     }
+@@ -7173,7 +7173,7 @@ static void ppc_cpu_reset_hold(Object *obj)
+     env->reserve_addr = (target_ulong)-1ULL;
+     /* Be sure no exception or interrupt is pending */
+     env->pending_interrupts = 0;
+-    s->exception_index = POWERPC_EXCP_NONE;
++    cs->exception_index = POWERPC_EXCP_NONE;
+     env->error_code = 0;
+     ppc_irq_reset(cpu);
  
--    core_slot->cpu = OBJECT(dev);
-+    core_slot->cpu = CPU(dev);
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 8cbfc7e781..1bd99bc5c6 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -875,7 +875,7 @@ static void riscv_cpu_reset_hold(Object *obj)
+ #endif
+     CPUState *cs = CPU(obj);
+     RISCVCPU *cpu = RISCV_CPU(cs);
+-    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cpu);
++    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(obj);
+     CPURISCVState *env = &cpu->env;
  
-     /*
-      * Set compatibility mode to match the boot CPU, which was either set
-@@ -4035,7 +4034,7 @@ static void spapr_core_plug(HotplugHandler *hotplug_dev, DeviceState *dev)
+     if (mcc->parent_phases.hold) {
+diff --git a/target/rx/cpu.c b/target/rx/cpu.c
+index c5ffeffe32..58ca26184d 100644
+--- a/target/rx/cpu.c
++++ b/target/rx/cpu.c
+@@ -67,7 +67,7 @@ static bool rx_cpu_has_work(CPUState *cs)
+ static void rx_cpu_reset_hold(Object *obj)
+ {
+     RXCPU *cpu = RX_CPU(obj);
+-    RXCPUClass *rcc = RX_CPU_GET_CLASS(cpu);
++    RXCPUClass *rcc = RX_CPU_GET_CLASS(obj);
+     CPURXState *env = &cpu->env;
+     uint32_t *resetvec;
  
-     if (smc->pre_2_10_has_unused_icps) {
-         for (i = 0; i < cc->nr_threads; i++) {
--            cs = CPU(core->threads[i]);
-+            CPUState *cs = CPU(core->threads[i]);
-             pre_2_10_vmstate_unregister_dummy_icp(cs->cpu_index);
-         }
-     }
-diff --git a/hw/s390x/s390-virtio-ccw.c b/hw/s390x/s390-virtio-ccw.c
-index c99682b07d..69e39e13ff 100644
---- a/hw/s390x/s390-virtio-ccw.c
-+++ b/hw/s390x/s390-virtio-ccw.c
-@@ -324,7 +324,7 @@ static void s390_cpu_plug(HotplugHandler *hotplug_dev,
-     ERRP_GUARD();
+diff --git a/target/sh4/cpu.c b/target/sh4/cpu.c
+index 806a0ef875..1b03c7bcb1 100644
+--- a/target/sh4/cpu.c
++++ b/target/sh4/cpu.c
+@@ -91,9 +91,9 @@ static bool superh_cpu_has_work(CPUState *cs)
  
-     g_assert(!ms->possible_cpus->cpus[cpu->env.core_id].cpu);
--    ms->possible_cpus->cpus[cpu->env.core_id].cpu = OBJECT(dev);
-+    ms->possible_cpus->cpus[cpu->env.core_id].cpu = CPU(dev);
+ static void superh_cpu_reset_hold(Object *obj)
+ {
+-    CPUState *s = CPU(obj);
+-    SuperHCPU *cpu = SUPERH_CPU(s);
+-    SuperHCPUClass *scc = SUPERH_CPU_GET_CLASS(cpu);
++    CPUState *cs = CPU(obj);
++    SuperHCPU *cpu = SUPERH_CPU(cs);
++    SuperHCPUClass *scc = SUPERH_CPU_GET_CLASS(obj);
+     CPUSH4State *env = &cpu->env;
  
-     if (s390_has_topology()) {
-         s390_topology_setup_cpu(ms, cpu, errp);
+     if (scc->parent_phases.hold) {
+diff --git a/target/sparc/cpu.c b/target/sparc/cpu.c
+index befa7fc4eb..152bee4f81 100644
+--- a/target/sparc/cpu.c
++++ b/target/sparc/cpu.c
+@@ -31,9 +31,9 @@
+ 
+ static void sparc_cpu_reset_hold(Object *obj)
+ {
+-    CPUState *s = CPU(obj);
+-    SPARCCPU *cpu = SPARC_CPU(s);
+-    SPARCCPUClass *scc = SPARC_CPU_GET_CLASS(cpu);
++    CPUState *cs = CPU(obj);
++    SPARCCPU *cpu = SPARC_CPU(cs);
++    SPARCCPUClass *scc = SPARC_CPU_GET_CLASS(obj);
+     CPUSPARCState *env = &cpu->env;
+ 
+     if (scc->parent_phases.hold) {
+diff --git a/target/tricore/cpu.c b/target/tricore/cpu.c
+index 8acacdf0c0..9bdaa1593a 100644
+--- a/target/tricore/cpu.c
++++ b/target/tricore/cpu.c
+@@ -72,9 +72,9 @@ static void tricore_restore_state_to_opc(CPUState *cs,
+ 
+ static void tricore_cpu_reset_hold(Object *obj)
+ {
+-    CPUState *s = CPU(obj);
+-    TriCoreCPU *cpu = TRICORE_CPU(s);
+-    TriCoreCPUClass *tcc = TRICORE_CPU_GET_CLASS(cpu);
++    CPUState *cs = CPU(obj);
++    TriCoreCPU *cpu = TRICORE_CPU(cs);
++    TriCoreCPUClass *tcc = TRICORE_CPU_GET_CLASS(obj);
+     CPUTriCoreState *env = &cpu->env;
+ 
+     if (tcc->parent_phases.hold) {
+diff --git a/target/xtensa/cpu.c b/target/xtensa/cpu.c
+index 99c0ca130f..ce044466ad 100644
+--- a/target/xtensa/cpu.c
++++ b/target/xtensa/cpu.c
+@@ -90,9 +90,9 @@ bool xtensa_abi_call0(void)
+ 
+ static void xtensa_cpu_reset_hold(Object *obj)
+ {
+-    CPUState *s = CPU(obj);
+-    XtensaCPU *cpu = XTENSA_CPU(s);
+-    XtensaCPUClass *xcc = XTENSA_CPU_GET_CLASS(cpu);
++    CPUState *cs = CPU(obj);
++    XtensaCPU *cpu = XTENSA_CPU(cs);
++    XtensaCPUClass *xcc = XTENSA_CPU_GET_CLASS(obj);
+     CPUXtensaState *env = &cpu->env;
+     bool dfpu = xtensa_option_enabled(env->config,
+                                       XTENSA_OPTION_DFP_COPROCESSOR);
+@@ -127,7 +127,7 @@ static void xtensa_cpu_reset_hold(Object *obj)
+ 
+ #ifndef CONFIG_USER_ONLY
+     reset_mmu(env);
+-    s->halted = env->runstall;
++    cs->halted = env->runstall;
+ #endif
+     set_no_signaling_nans(!dfpu, &env->fp_status);
+     set_use_first_nan(!dfpu, &env->fp_status);
 -- 
 2.41.0
 
