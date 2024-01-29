@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B982DC47DDB
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 16:55:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A92FEC47DB3
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 16:56:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rUUoR-0006Nc-OP; Mon, 29 Jan 2024 11:48:47 -0500
+	id 1rUUpL-00013E-Ak; Mon, 29 Jan 2024 11:49:43 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUnP-00016O-QH
- for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:47:43 -0500
-Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUo1-0004DT-MJ
+ for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:48:23 -0500
+Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUnN-0004NI-F4
- for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:47:43 -0500
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-33ae7ae1c32so1168717f8f.3
- for <qemu-riscv@nongnu.org>; Mon, 29 Jan 2024 08:47:40 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUnz-0004e1-MN
+ for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:48:21 -0500
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-33926ccbc80so1862805f8f.0
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jan 2024 08:48:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706546860; x=1707151660; darn=nongnu.org;
+ d=linaro.org; s=google; t=1706546897; x=1707151697; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hwuuHYCScnVvYP7kr484+mrpPVY1E/98uP6CY+N7AAI=;
- b=RFKg3vCoowrAkLTqnIIURrSNTlEJlBXG3vjNksP7QymPt35OO3QJo2y1p51b0RVrRy
- Y40fLgxd36wiD2lyFhcC9Q85rlHi303u3Gb/ZWEnwoB4Y1+4XTz5SEns+4wKlLKYLBka
- iArpWMGOgRmiQoqTh42tmoumr7JRTp0NIsDaaOYLZ8btVNJJGWLCzzIuv79jS1hfiZG1
- zm0HVCivE9gGaEKnRU0uxxLgLhiBobMmaKtCwQ0LlbYBkbJdSIMQnR0P1ROs0bwdN0yU
- t8u14cGanoeIOLrfN7MdA8does6j5FSL3WEXmULzUgR4lXet0laqbvpbIug2Ta/3HBOP
- mhGw==
+ bh=Kk5BhQRPM94EKsRIhVMqYgmcfDsB7owy8rOzxcGC7OQ=;
+ b=PUFV4X8ABxoNWqyIf0tWmTXPHI7aKlcRQ0hCDU0MGNLi+HI4imGoXWkTTxvizp8RTP
+ JP7bxiNN6Xh0ykr8WMyJEQDEWfW+9zTZJcUrJsHk0kTShXMruLlPi8P4j6gvEmwlCo7l
+ AlkOvdvJ+98Q0e7P1nM04niBcyU/+GguFUqtRMXmdaWGbKpVo1jpoL50WsXTciREIqtp
+ Zq2+fap1r5MBImJUycAvazyNXt8IvyDtAruXPAXd3r+AzOM3XjdDa4AlhNMATrH5wj0C
+ DmC2ih5g3SuXzP6zfcKlz3514qiOOr9SrYBLEh8gIxcQgV5n4SawwSOafOvZDtHjPEVs
+ IGbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706546860; x=1707151660;
+ d=1e100.net; s=20230601; t=1706546897; x=1707151697;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hwuuHYCScnVvYP7kr484+mrpPVY1E/98uP6CY+N7AAI=;
- b=KQCzMm7ww5l5IMuwa7lgoXczdxyVv2UrTELQJMODeQ/te/RU1G+9/6d92ByBpG/iqK
- HYQ1L/3lM9TMigreIJmvY+18nvnZZWBdnv6lmuYu3YpQ68/k4AzEJjXMj2DplxkQbV0s
- IMiU+WxF1wQ/QVuA5mYjXwI/FMteX36V3iGg4YIW7O2zxvZ61mR9dv0IVVg/lMH7Rv0O
- iAkkACHTxAFM5K67IyrDt2/0dKmEFqyqAhtjUdltyKEbB6in5XdyGBNnvgfIAcxOzsi0
- LgnUarcSN8U4rpK5fgcW4mXa0/mqeIcxV7BU6F6BwuMS5V2d8ZOI5L7D78KBuPyG/7qD
- PjVg==
-X-Gm-Message-State: AOJu0Yz9MhYRQO6HMVIpQskSGHzN/SOvTVe9QwBQW2YedEwns7S7709Y
- o+E+rbhpUSZLiYwsBP0S0+7IHqqyLPFZZHgwKLGmKcIrOttZVELjwmTLi/dqOcM=
-X-Google-Smtp-Source: AGHT+IFTnZ+wzzZWUdYzzOHHXq5N3vCTRzXyKyUR2LVbswqDwUPsHfY3FzalsZVCFAgzuwGQbmEO1g==
-X-Received: by 2002:adf:f310:0:b0:33a:eae2:11a6 with SMTP id
- i16-20020adff310000000b0033aeae211a6mr2615980wro.37.1706546860049; 
- Mon, 29 Jan 2024 08:47:40 -0800 (PST)
+ bh=Kk5BhQRPM94EKsRIhVMqYgmcfDsB7owy8rOzxcGC7OQ=;
+ b=SpDbEzmFt3B2PkgeLKdZJfmZQGPvMXpXt0BHUIIAhEk2JymYvYtLrEvA45fpqRWduh
+ 39vftue39vGrbmvJsRRptxhmEQVNb4DrdpH4wMMo1GkP5+m3dHBZmg0eriUPPtalq59q
+ A1qNRAYmtxjkMfb3E5bjPx7vf2yYIA7v6cdI3zQYtqE6Dzzx5ip2dTI9MQPLgBjDamht
+ zoijJswlv62Z2Rr4SKi4o25Diip3JVoBIPmnzFFJI777TKMVzYnWIEnvheFCBZ9L0tOR
+ mIGopMApFt49sRI7oEHrozGi9j86qnI6LticE1SNTEB/0k7uW142djCl3bgn6fAKh1Z4
+ RClA==
+X-Gm-Message-State: AOJu0YwBBBKTM0MMolrPmT1ao+d0Glj5RKUgTzxjZ5igHpVaCkH5VIVg
+ ccSmy9+NSkjRegSSV/m5mclmtWaLUQBBtfDrfQKqOn22/HyNzU+BVxRCq8tXQsU=
+X-Google-Smtp-Source: AGHT+IEXA1iompN1/gMqlkZsSEb4uT6I1SbkEs4HXc0WHAilXTqQn4jrwhExiORkNg2dlUXVfvblyw==
+X-Received: by 2002:adf:db11:0:b0:337:c91d:e816 with SMTP id
+ s17-20020adfdb11000000b00337c91de816mr4734391wri.1.1706546897611; 
+ Mon, 29 Jan 2024 08:48:17 -0800 (PST)
 Received: from m1x-phil.lan ([176.187.219.39])
  by smtp.gmail.com with ESMTPSA id
- v9-20020adff689000000b0033af5c43155sm657193wrp.56.2024.01.29.08.47.38
+ ck8-20020a5d5e88000000b003392986585esm8609742wrb.41.2024.01.29.08.48.15
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 29 Jan 2024 08:47:39 -0800 (PST)
+ Mon, 29 Jan 2024 08:48:17 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
@@ -63,26 +63,27 @@ Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Yoshinori Sato <ysato@users.sourceforge.jp>
-Subject: [PATCH v3 23/29] target/rx: Prefer fast cpu_env() over slower CPU QOM
- cast macro
-Date: Mon, 29 Jan 2024 17:45:05 +0100
-Message-ID: <20240129164514.73104-24-philmd@linaro.org>
+ Warner Losh <imp@bsdimp.com>, Kyle Evans <kevans@freebsd.org>,
+ Laurent Vivier <laurent@vivier.eu>
+Subject: [PATCH v3 29/29] user: Prefer fast cpu_env() over slower CPU QOM cast
+ macro
+Date: Mon, 29 Jan 2024 17:45:11 +0100
+Message-ID: <20240129164514.73104-30-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240129164514.73104-1-philmd@linaro.org>
 References: <20240129164514.73104-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::430;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x430.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::434;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x434.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,92 +103,68 @@ Mechanical patch produced running the command documented
 in scripts/coccinelle/cpu_env.cocci_template header.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/rx/cpu.c       | 4 ++--
- target/rx/gdbstub.c   | 6 ++----
- target/rx/helper.c    | 6 ++----
- target/rx/translate.c | 3 +--
- 4 files changed, 7 insertions(+), 12 deletions(-)
+ bsd-user/signal.c   | 3 +--
+ linux-user/signal.c | 6 ++----
+ 2 files changed, 3 insertions(+), 6 deletions(-)
 
-diff --git a/target/rx/cpu.c b/target/rx/cpu.c
-index 58ca26184d..4689587fa9 100644
---- a/target/rx/cpu.c
-+++ b/target/rx/cpu.c
-@@ -66,9 +66,9 @@ static bool rx_cpu_has_work(CPUState *cs)
- 
- static void rx_cpu_reset_hold(Object *obj)
+diff --git a/bsd-user/signal.c b/bsd-user/signal.c
+index ca31470772..c6f0b1be38 100644
+--- a/bsd-user/signal.c
++++ b/bsd-user/signal.c
+@@ -463,14 +463,13 @@ static int fatal_signal(int sig)
+ void force_sig_fault(int sig, int code, abi_ulong addr)
  {
--    RXCPU *cpu = RX_CPU(obj);
-+    CPUState *cs = CPU(obj);
-     RXCPUClass *rcc = RX_CPU_GET_CLASS(obj);
--    CPURXState *env = &cpu->env;
-+    CPURXState *env = cpu_env(cs);
-     uint32_t *resetvec;
+     CPUState *cpu = thread_cpu;
+-    CPUArchState *env = cpu_env(cpu);
+     target_siginfo_t info = {};
  
-     if (rcc->parent_phases.hold) {
-diff --git a/target/rx/gdbstub.c b/target/rx/gdbstub.c
-index d7e0e6689b..f222bf003b 100644
---- a/target/rx/gdbstub.c
-+++ b/target/rx/gdbstub.c
-@@ -21,8 +21,7 @@
+     info.si_signo = sig;
+     info.si_errno = 0;
+     info.si_code = code;
+     info.si_addr = addr;
+-    queue_signal(env, sig, QEMU_SI_FAULT, &info);
++    queue_signal(cpu_env(cpu), sig, QEMU_SI_FAULT, &info);
+ }
  
- int rx_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+ static void host_signal_handler(int host_sig, siginfo_t *info, void *puc)
+diff --git a/linux-user/signal.c b/linux-user/signal.c
+index c9527adfa3..f78f7fc476 100644
+--- a/linux-user/signal.c
++++ b/linux-user/signal.c
+@@ -623,7 +623,6 @@ void signal_init(void)
+ void force_sig(int sig)
  {
--    RXCPU *cpu = RX_CPU(cs);
--    CPURXState *env = &cpu->env;
-+    CPURXState *env = cpu_env(cs);
+     CPUState *cpu = thread_cpu;
+-    CPUArchState *env = cpu_env(cpu);
+     target_siginfo_t info = {};
  
-     switch (n) {
-     case 0 ... 15:
-@@ -53,8 +52,7 @@ int rx_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+     info.si_signo = sig;
+@@ -631,7 +630,7 @@ void force_sig(int sig)
+     info.si_code = TARGET_SI_KERNEL;
+     info._sifields._kill._pid = 0;
+     info._sifields._kill._uid = 0;
+-    queue_signal(env, info.si_signo, QEMU_SI_KILL, &info);
++    queue_signal(cpu_env(cpu), info.si_signo, QEMU_SI_KILL, &info);
+ }
  
- int rx_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+ /*
+@@ -641,14 +640,13 @@ void force_sig(int sig)
+ void force_sig_fault(int sig, int code, abi_ulong addr)
  {
--    RXCPU *cpu = RX_CPU(cs);
--    CPURXState *env = &cpu->env;
-+    CPURXState *env = cpu_env(cs);
-     uint32_t psw;
-     switch (n) {
-     case 0 ... 15:
-diff --git a/target/rx/helper.c b/target/rx/helper.c
-index dad5fb4976..80912e8dcb 100644
---- a/target/rx/helper.c
-+++ b/target/rx/helper.c
-@@ -45,8 +45,7 @@ void rx_cpu_unpack_psw(CPURXState *env, uint32_t psw, int rte)
- #define INT_FLAGS (CPU_INTERRUPT_HARD | CPU_INTERRUPT_FIR)
- void rx_cpu_do_interrupt(CPUState *cs)
- {
--    RXCPU *cpu = RX_CPU(cs);
--    CPURXState *env = &cpu->env;
-+    CPURXState *env = cpu_env(cs);
-     int do_irq = cs->interrupt_request & INT_FLAGS;
-     uint32_t save_psw;
+     CPUState *cpu = thread_cpu;
+-    CPUArchState *env = cpu_env(cpu);
+     target_siginfo_t info = {};
  
-@@ -122,8 +121,7 @@ void rx_cpu_do_interrupt(CPUState *cs)
+     info.si_signo = sig;
+     info.si_errno = 0;
+     info.si_code = code;
+     info._sifields._sigfault._addr = addr;
+-    queue_signal(env, sig, QEMU_SI_FAULT, &info);
++    queue_signal(cpu_env(cpu), sig, QEMU_SI_FAULT, &info);
+ }
  
- bool rx_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
- {
--    RXCPU *cpu = RX_CPU(cs);
--    CPURXState *env = &cpu->env;
-+    CPURXState *env = cpu_env(cs);
-     int accept = 0;
-     /* hardware interrupt (Normal) */
-     if ((interrupt_request & CPU_INTERRUPT_HARD) &&
-diff --git a/target/rx/translate.c b/target/rx/translate.c
-index 1829a0b1cd..26aaf7a6b5 100644
---- a/target/rx/translate.c
-+++ b/target/rx/translate.c
-@@ -131,8 +131,7 @@ static int bdsp_s(DisasContext *ctx, int d)
- 
- void rx_cpu_dump_state(CPUState *cs, FILE *f, int flags)
- {
--    RXCPU *cpu = RX_CPU(cs);
--    CPURXState *env = &cpu->env;
-+    CPURXState *env = cpu_env(cs);
-     int i;
-     uint32_t psw;
- 
+ /* Force a SIGSEGV if we couldn't write to memory trying to set
 -- 
 2.41.0
 
