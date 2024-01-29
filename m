@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D317C47DB3
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 16:48:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58838C47DDB
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 16:48:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rUUnK-0000Yq-Sq; Mon, 29 Jan 2024 11:47:39 -0500
+	id 1rUUnf-0002q3-Uh; Mon, 29 Jan 2024 11:48:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUlf-00061e-Kf
- for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:45:59 -0500
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUmG-000778-JZ
+ for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:46:33 -0500
+Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUlb-0003hg-LL
- for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:45:54 -0500
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-40ed3101ce3so44774325e9.2
- for <qemu-riscv@nongnu.org>; Mon, 29 Jan 2024 08:45:50 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUmC-0003xL-Ss
+ for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:46:31 -0500
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-33af2823edbso509560f8f.0
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jan 2024 08:46:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706546749; x=1707151549; darn=nongnu.org;
+ d=linaro.org; s=google; t=1706546787; x=1707151587; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=B6GmB2IPQQ3XezKE8bqOs65jaQBYCmOI4YcRWUsHLHk=;
- b=czbKw03mCMTdRk0AFEO/zBU4kMqdogCSgrY7zp53aSAttdQh7z7VzU42W8FX2jV/5e
- fNQzi4oc5l3EXpTERwq/CJkDVA3yxlZTAa7S1BB2fKErBt1wP+Wd4Lq1ihIWjPqij9A+
- 4cPBQyUQzbQXbsfmw04PGLBCE4pyDmdzG2qd9WhJiCUACFEsjMTutiYql5ayP2jSWcb/
- WOVTyxTX+EuXSPKwy7RmW9Fo5S+Wxw+JnaSqgvy6J1jgVpImtuptVBcUndFVHUk7kr9V
- VKf+e3DVdSL8x1S/nHpyRPt2gAJ8mvEYkq+Lb5iz+nEJ4H3ndSVk/1HGeN0YPmLkyEsb
- lFyQ==
+ bh=wpEyww5ql+HDyU+E74XNxXzD2LWLWxnIJJxDrC1dnKo=;
+ b=XLINSp+Ces/DTB30elwFcbAG4KQQCg6YrP2UDMa5yARNPPCkMCgwfSWZMYGGaF3nKa
+ 9XklbPkXk4aFEwy9P+XKgT6HPyJQgNpLe7kxL68a2UDRH8JIU6cXMka/yPoRgdyJV//t
+ IRuedVvbgGkI/CLm98U+1J2vypT9o8zW8MErl7yBgMuQExQyq36g2FGgkeVe2HsnqyBQ
+ 4kRL6+X0xmLtHdbhrmQfzxk/N5zgk122R2leM2aYsbPgfdK5cHyQRzrdHLMqAk4Nq/wP
+ HKNtCFkvYDSQ9DTJEsbhyxLejz4An+zgDIW/pCKTZKx5R/pGeuvwO8z4WD6lcqPYiWs7
+ XleQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706546749; x=1707151549;
+ d=1e100.net; s=20230601; t=1706546787; x=1707151587;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=B6GmB2IPQQ3XezKE8bqOs65jaQBYCmOI4YcRWUsHLHk=;
- b=f7jrSexkneYVjDBdSYtbb33uyL8OiEAL4oAB2ZvnLQBAuSdtd6+63XkImXjZtrs3iz
- Ndp6+sGK5fyhTO9W9bqa13qVGwqK1xM86yIMyXZuC/zpHPtOxA0Z41ELUdorsEDzirJ0
- GgnDdq3JtdUvJXeVbMJQR/QDxM39W6keKkfF27nqWq/tHhi1ybBkSrvX6RFC+hPvOGaM
- xj/UQLdy1/6KivjpiikW+0A2cLQPMPG6lm7/nUg0CMjsVEl6S8IXrjzSjMHCzM5oxbZB
- XecPt9C+uGqQMT2X+pUqQOBArt/xElw16p5HMEYcKH5Xf8W1ozo48vw/3P3ecxqQ8EwU
- ficA==
-X-Gm-Message-State: AOJu0Yy2WXU6KIMgQK8HPpW6CZhiQsyG+WPh31wbtihWKHQxr+m+wGSz
- en3Q6uaRseBr6TOxIAPdxqQg6Uc5+s62xzKVsN9ri31A7OwwrrWXErOX9ZlaLPw=
-X-Google-Smtp-Source: AGHT+IF/M4JMBgkyz42lTen3ZH5avOQ7AmvAMgZOIUtFFNwiFxYGzMm049Zz6nlzZCQLDXADh4NIrw==
-X-Received: by 2002:a05:600c:1f83:b0:40e:b1f6:2ed7 with SMTP id
- je3-20020a05600c1f8300b0040eb1f62ed7mr5943831wmb.32.1706546749731; 
- Mon, 29 Jan 2024 08:45:49 -0800 (PST)
+ bh=wpEyww5ql+HDyU+E74XNxXzD2LWLWxnIJJxDrC1dnKo=;
+ b=rqXLas5k7hGJJ/C/QuuO0YsGreWeAUkQaKh80mrk1dfI8em03T2Ve8JSXdEw1rnp1K
+ Hseh69Vunil2Oxx9pE+EZhuKdnvvnJhT0MJL+cRX+h53EZnbBl+IsYfbVuaLlo2RG0NI
+ r+o5hNVYUndYKC7RHrIO6aa2ZLpdraSehZQrLIJbVcNQZF2x6vKKgDhrpDYczcjQ27Dd
+ ap0aD/WnwDcCJ71LqD4i+hjHhOFqVROOoneuNoiqUZpGSqKBC1qgGlmQtyUCWjA0Jwsl
+ Rv9/jVoOxP6gLJvjttpjTB92l7jV9XtAqVb9zxwRn+it7tRvs8ZrV7LN2VEK+8lB6X8O
+ fJMA==
+X-Gm-Message-State: AOJu0Yzn5ox/0cgExEBP2z4lrjZJ78Jgg39OKMwRWr5yYXJkpDE2bqZv
+ ZkbjaxszkwLGRWlHMf8rrsljvSmA4vZ6fxW0Bt1c7yhkYH1W/BGJpcSFG12dYjg=
+X-Google-Smtp-Source: AGHT+IE/pmLN7aJB50sjYT7HNVrs0xGJu0OS4F2RLGx8AfT4RgKOArlTbN0yv5fwQwzrh+8k2SbzhQ==
+X-Received: by 2002:adf:fa51:0:b0:33a:eae2:11a4 with SMTP id
+ y17-20020adffa51000000b0033aeae211a4mr2806032wrr.26.1706546787414; 
+ Mon, 29 Jan 2024 08:46:27 -0800 (PST)
 Received: from m1x-phil.lan ([176.187.219.39])
  by smtp.gmail.com with ESMTPSA id
- b6-20020a05600003c600b0033aed4e3b55sm3381414wrg.102.2024.01.29.08.45.48
+ p7-20020a5d4587000000b0033af670213dsm258204wrq.110.2024.01.29.08.46.25
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 29 Jan 2024 08:45:49 -0800 (PST)
+ Mon, 29 Jan 2024 08:46:27 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>, kvm@vger.kernel.org,
  qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v3 05/29] scripts/coccinelle: Add cpu_env.cocci script
-Date: Mon, 29 Jan 2024 17:44:47 +0100
-Message-ID: <20240129164514.73104-6-philmd@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Brian Cain <bcain@quicinc.com>
+Subject: [PATCH v3 11/29] target/hexagon: Prefer fast cpu_env() over slower
+ CPU QOM cast macro
+Date: Mon, 29 Jan 2024 17:44:53 +0100
+Message-ID: <20240129164514.73104-12-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240129164514.73104-1-philmd@linaro.org>
 References: <20240129164514.73104-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x330.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::435;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x435.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,140 +98,105 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add a Coccinelle script to convert the following slow path
-(due to the QOM cast macro):
-
-  &ARCH_CPU(..)->env
-
-to the following fast path:
-
-  cpu_env(..)
+Mechanical patch produced running the command documented
+in scripts/coccinelle/cpu_env.cocci_template header.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- MAINTAINERS                      |   1 +
- scripts/coccinelle/cpu_env.cocci | 100 +++++++++++++++++++++++++++++++
- 2 files changed, 101 insertions(+)
- create mode 100644 scripts/coccinelle/cpu_env.cocci
+ target/hexagon/cpu.c     | 25 ++++++-------------------
+ target/hexagon/gdbstub.c |  6 ++----
+ 2 files changed, 8 insertions(+), 23 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index dfaca8323e..ca3c8c18ab 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -157,6 +157,7 @@ F: accel/tcg/
- F: accel/stubs/tcg-stub.c
- F: util/cacheinfo.c
- F: util/cacheflush.c
-+F: scripts/coccinelle/cpu_env.cocci
- F: scripts/decodetree.py
- F: docs/devel/decodetree.rst
- F: docs/devel/tcg*
-diff --git a/scripts/coccinelle/cpu_env.cocci b/scripts/coccinelle/cpu_env.cocci
-new file mode 100644
-index 0000000000..5a70c2211a
---- /dev/null
-+++ b/scripts/coccinelle/cpu_env.cocci
-@@ -0,0 +1,100 @@
-+/*
-+ * Convert &ARCH_CPU(..)->env to use cpu_env(..).
-+ *
-+ * Rationale: ARCH_CPU() might be slow, being a QOM cast macro.
-+ *            cpu_env() is its fast equivalent.
-+ *            CPU() macro is a no-op.
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ * SPDX-FileCopyrightText: Linaro Ltd 2024
-+ * SPDX-FileContributor: Philippe Mathieu-Daudé
-+ */
-+
-+@@
-+type ArchCPU =~ "CPU$";
-+identifier cpu;
-+type CPUArchState =~ "^CPU";
-+identifier env;
-+@@
-+     ArchCPU *cpu;
-+     ...
-+     CPUArchState *env = &cpu->env;
-+     <...
-+-    &cpu->env
-++    env
-+     ...>
-+
-+
-+/*
-+ * Due to commit 8ce5c64499 ("semihosting: Return failure from
-+ * softmmu-uaccess.h functions"), skip functions using softmmu-uaccess.h
-+ * macros (they don't pass 'env' as argument).
-+ */
-+@ uaccess_api_used exists @
-+identifier semihosting_func =~ "^(put|get)_user_[us](al|8|16|32)$";
-+@@
-+      semihosting_func(...)
-+
-+
-+/*
-+ * Argument is CPUState*
-+ */
-+@ cpustate_arg depends on !uaccess_api_used @
-+identifier cpu;
-+type ArchCPU =~ "CPU$";
-+type CPUArchState;
-+identifier ARCH_CPU =~ "CPU$";
-+identifier env;
-+CPUState *cs;
-+@@
-+-    ArchCPU *cpu = ARCH_CPU(cs);
-+     ...
-+-    CPUArchState *env = &cpu->env;
-++    CPUArchState *env = cpu_env(cs);
-+     ... when != cpu
-+
-+
-+/*
-+ * Argument is not CPUState* but a related QOM object.
-+ * CPU() is not a QOM macro but a cast (See commit 0d6d1ab499).
-+ */
-+@ depends on !uaccess_api_used  && !cpustate_arg @
-+identifier cpu;
-+type ArchCPU =~ "CPU$";
-+type CPUArchState;
-+identifier ARCH_CPU =~ "CPU$";
-+identifier env;
-+expression cs;
-+@@
-+-    ArchCPU *cpu = ARCH_CPU(cs);
-+     ...
-+-    CPUArchState *env = &cpu->env;
-++    CPUArchState *env = cpu_env(CPU(cs));
-+     ... when != cpu
-+
-+
-+/* When single use of 'env', call cpu_env() in place */
-+@ depends on !uaccess_api_used @
-+type CPUArchState;
-+identifier env;
-+expression cs;
-+@@
-+-    CPUArchState *env = cpu_env(cs);
-+     ... when != env
-+-     env
-++     cpu_env(cs)
-+     ... when != env
-+
-+
-+/* Both first_cpu/current_cpu are extern CPUState* */
-+@@
-+symbol first_cpu;
-+symbol current_cpu;
-+@@
-+(
-+-    CPU(first_cpu)
-++    first_cpu
-+|
-+-    CPU(current_cpu)
-++    current_cpu
-+)
+diff --git a/target/hexagon/cpu.c b/target/hexagon/cpu.c
+index 085d6c0115..17a22aa7a5 100644
+--- a/target/hexagon/cpu.c
++++ b/target/hexagon/cpu.c
+@@ -236,10 +236,7 @@ static void hexagon_dump(CPUHexagonState *env, FILE *f, int flags)
+ 
+ static void hexagon_dump_state(CPUState *cs, FILE *f, int flags)
+ {
+-    HexagonCPU *cpu = HEXAGON_CPU(cs);
+-    CPUHexagonState *env = &cpu->env;
+-
+-    hexagon_dump(env, f, flags);
++    hexagon_dump(cpu_env(cs), f, flags);
+ }
+ 
+ void hexagon_debug(CPUHexagonState *env)
+@@ -249,25 +246,19 @@ void hexagon_debug(CPUHexagonState *env)
+ 
+ static void hexagon_cpu_set_pc(CPUState *cs, vaddr value)
+ {
+-    HexagonCPU *cpu = HEXAGON_CPU(cs);
+-    CPUHexagonState *env = &cpu->env;
+-    env->gpr[HEX_REG_PC] = value;
++    cpu_env(cs)->gpr[HEX_REG_PC] = value;
+ }
+ 
+ static vaddr hexagon_cpu_get_pc(CPUState *cs)
+ {
+-    HexagonCPU *cpu = HEXAGON_CPU(cs);
+-    CPUHexagonState *env = &cpu->env;
+-    return env->gpr[HEX_REG_PC];
++    return cpu_env(cs)->gpr[HEX_REG_PC];
+ }
+ 
+ static void hexagon_cpu_synchronize_from_tb(CPUState *cs,
+                                             const TranslationBlock *tb)
+ {
+-    HexagonCPU *cpu = HEXAGON_CPU(cs);
+-    CPUHexagonState *env = &cpu->env;
+     tcg_debug_assert(!(cs->tcg_cflags & CF_PCREL));
+-    env->gpr[HEX_REG_PC] = tb->pc;
++    cpu_env(cs)->gpr[HEX_REG_PC] = tb->pc;
+ }
+ 
+ static bool hexagon_cpu_has_work(CPUState *cs)
+@@ -279,18 +270,14 @@ static void hexagon_restore_state_to_opc(CPUState *cs,
+                                          const TranslationBlock *tb,
+                                          const uint64_t *data)
+ {
+-    HexagonCPU *cpu = HEXAGON_CPU(cs);
+-    CPUHexagonState *env = &cpu->env;
+-
+-    env->gpr[HEX_REG_PC] = data[0];
++    cpu_env(cs)->gpr[HEX_REG_PC] = data[0];
+ }
+ 
+ static void hexagon_cpu_reset_hold(Object *obj)
+ {
+     CPUState *cs = CPU(obj);
+-    HexagonCPU *cpu = HEXAGON_CPU(cs);
+     HexagonCPUClass *mcc = HEXAGON_CPU_GET_CLASS(obj);
+-    CPUHexagonState *env = &cpu->env;
++    CPUHexagonState *env = cpu_env(cs);
+ 
+     if (mcc->parent_phases.hold) {
+         mcc->parent_phases.hold(obj);
+diff --git a/target/hexagon/gdbstub.c b/target/hexagon/gdbstub.c
+index 54d37e006e..f773f8ea4f 100644
+--- a/target/hexagon/gdbstub.c
++++ b/target/hexagon/gdbstub.c
+@@ -22,8 +22,7 @@
+ 
+ int hexagon_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+ {
+-    HexagonCPU *cpu = HEXAGON_CPU(cs);
+-    CPUHexagonState *env = &cpu->env;
++    CPUHexagonState *env = cpu_env(cs);
+ 
+     if (n == HEX_REG_P3_0_ALIASED) {
+         uint32_t p3_0 = 0;
+@@ -42,8 +41,7 @@ int hexagon_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+ 
+ int hexagon_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+ {
+-    HexagonCPU *cpu = HEXAGON_CPU(cs);
+-    CPUHexagonState *env = &cpu->env;
++    CPUHexagonState *env = cpu_env(cs);
+ 
+     if (n == HEX_REG_P3_0_ALIASED) {
+         uint32_t p3_0 = ldtul_p(mem_buf);
 -- 
 2.41.0
 
