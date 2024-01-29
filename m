@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 856E9C47DDB
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 16:48:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC92FC47DB3
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jan 2024 16:48:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rUUnY-0002Bq-Pd; Mon, 29 Jan 2024 11:47:52 -0500
+	id 1rUUnQ-0001F8-Ih; Mon, 29 Jan 2024 11:47:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUmA-0006n3-T1
- for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:46:27 -0500
-Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUmN-0007J1-8V
+ for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:46:40 -0500
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUm7-0003vo-4E
- for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:46:26 -0500
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-33adec41b55so2987559f8f.0
- for <qemu-riscv@nongnu.org>; Mon, 29 Jan 2024 08:46:22 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUUmK-0003yp-2N
+ for qemu-riscv@nongnu.org; Mon, 29 Jan 2024 11:46:38 -0500
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-40ef64d8955so10937775e9.3
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jan 2024 08:46:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706546781; x=1707151581; darn=nongnu.org;
+ d=linaro.org; s=google; t=1706546793; x=1707151593; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qs1q2hIX1TKLXUzvNhNiLBWs7dxyWeQLrsbzeUj/euM=;
- b=Ch/RCi0UXz1xSC3fxQT+A46De1e0aXvbw/pYhIKaOG0qH70b332S4wYXOG2ek1X64m
- qQ7rRkXx8umBulrwASA7MWVRq6vGLP3HU8Jo+agzO/ki8bDk3qmEM7STdGe/6JNacMMF
- EsthOmf6zaWzQowJP6N7A1xx0VopO7/KSKfVxERP94S+y2gKp0lxuYcYBxyfdJY7rMRr
- 8+f/IxMZ2alhQQhJFztpiFUYAkc2B43aEfnKpNYG6iJQc15HRTqgfYstXSfmMgzeWBym
- lGoKYB296krBDtPyoQ9ADZ8Ux26nHZ4SPtgK5E3YeRmesUhd2sxK6wNn7FzdPL/uCEqy
- PoWg==
+ bh=8fRIZrJNpcnOiODb5mhhkKtvMpcISUpGajS0aMN6lEM=;
+ b=gku0dkQMgLTlxeDCD6S7HS+yJM2k1H2BFXwRNKUkkEATbXMbz+9Pp25VTCACbOTRq7
+ hFSvymlv32/0JFTWDSztrcgaJM9xfXsun8TvvCr9wAsCW7ist7vUOLDugdbfUa5pmnm2
+ uqAxn1q3Ff9SCX26Jcvo1TfyvwXyF4oT0Zc6LGEK2xCdr6CRMODAQO6T64OgcWKvo1mj
+ 4A0sJeQf87AKslF2twT3lpTm9hz3a2FUN6VVy79zAzOrAnFeyTzZqBCgbQtSQOAgGXOF
+ 0nUOMZzsiqGKuMd9USxjwGzlTBnwXj+wH1qhSO2ktQUAV/E/fMwrOi3Ad2/NxnI13z0S
+ nV2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706546781; x=1707151581;
+ d=1e100.net; s=20230601; t=1706546793; x=1707151593;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qs1q2hIX1TKLXUzvNhNiLBWs7dxyWeQLrsbzeUj/euM=;
- b=RCSvFKWia1Rs4QYsv5u4WJjv/0LXO7Pq3R8g8KiGo3KMf1hmC3JyXnBHerDLQrRzxr
- ZFu76Zhp+SXhAtjbqHE2GeLDoGvEpWA7wNrMxu/4+aSTe66QyYLkJRtTWbP9RCt8bAVj
- vjadCBAj2jqk9AN35AaaPCyfiyhekA9Fg9LPMT6ovtsPKoc0OTVrGNoCyZzVoJtY8DYm
- BwXHylKlE3+XRvbZA+BPyKTXLXXwcAM8Hsk9FJ2IPUGygbIrv14Hio6jWzD212Q7RKfG
- 9L8eujO4PmYPU6YMwogqb9/qhKMdOmpkKumpQvHzzUDFC8zIjoDXo+78tFZU2aVU8xF9
- UXYw==
-X-Gm-Message-State: AOJu0Yxr0fzMnGSKqUVdIvOno/RS3k1w7N7JhC/bopcsxkKPSm5KfSHW
- s1kEjEIPd5gtkC4DILmwUs2SFFQfUZqljMui6oYcvKt3sq2cELjbw85zBK1hd18=
-X-Google-Smtp-Source: AGHT+IFCSjt586qMBuxNZypsApcZ+VC1FCZxUMqaBfFfPBMsHNMjn2msv5U3H1M4DbXITkHOuF5KTQ==
-X-Received: by 2002:a05:6000:402a:b0:33a:e525:b15 with SMTP id
- cp42-20020a056000402a00b0033ae5250b15mr4721457wrb.19.1706546781551; 
- Mon, 29 Jan 2024 08:46:21 -0800 (PST)
+ bh=8fRIZrJNpcnOiODb5mhhkKtvMpcISUpGajS0aMN6lEM=;
+ b=cLnw6iR5VKLfWKON95G2wqI5jEX3TtJXxUWskbcrKnm01YThA+/APpOZGngR9aNOPs
+ bgnBbeCOnrCUwvX0lr9n6PgUyiqpcjXxz4+XMQWs0sOUgiOPtii5i7PLR1nj7dnZZPI0
+ yexbnAyBLiu031H3E1JXUdIDVhjzPSOwksjkyy6oB+GUeIxWmNFkfFF8n5sQmnmyUvXW
+ Oq2VbxAVQ6Qio27wRivPagLifJuAcp+kCU7t8xTghkAZaytKYgwhw8/PTeJ3WgReoSkz
+ lZ63riDShtMJp+r/lg3kAqNNpxJU4OBram2zR0bMeHxHVr/a2+W9ZwOHessffojCIM+b
+ YYxA==
+X-Gm-Message-State: AOJu0Yy4DXdPvw5IgKt0MX1IyDGSJ2HDH/qaozmfyfy+jM4Iv5Cjai8K
+ fsf27tWE0vbPZZXmKkIzSD2wuA0uKVIKBK15TCqEDK+oYVXLWfo9WuEiHMx1Ddd1D5f5YPoCQi7
+ E
+X-Google-Smtp-Source: AGHT+IH/9F8cyyKVNSFyJK/XuxhMwJqDVtIMy6daRNXg1ZJWGMneBXNSLk4RtK2/569lG7qwYgQxgQ==
+X-Received: by 2002:a05:600c:1986:b0:40e:e97c:e71 with SMTP id
+ t6-20020a05600c198600b0040ee97c0e71mr6257966wmq.1.1706546793662; 
+ Mon, 29 Jan 2024 08:46:33 -0800 (PST)
 Received: from m1x-phil.lan ([176.187.219.39])
  by smtp.gmail.com with ESMTPSA id
- bh5-20020a05600005c500b0033aed46956csm3386579wrb.80.2024.01.29.08.46.20
+ w18-20020a05600c475200b0040e9f7308f4sm10656778wmo.10.2024.01.29.08.46.31
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 29 Jan 2024 08:46:21 -0800 (PST)
+ Mon, 29 Jan 2024 08:46:32 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>, kvm@vger.kernel.org,
  qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
-Subject: [PATCH v3 10/29] target/cris: Prefer fast cpu_env() over slower CPU
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH v3 12/29] target/hppa: Prefer fast cpu_env() over slower CPU
  QOM cast macro
-Date: Mon, 29 Jan 2024 17:44:52 +0100
-Message-ID: <20240129164514.73104-11-philmd@linaro.org>
+Date: Mon, 29 Jan 2024 17:44:54 +0100
+Message-ID: <20240129164514.73104-13-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240129164514.73104-1-philmd@linaro.org>
 References: <20240129164514.73104-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,153 +101,88 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Mechanical patch produced running the command documented
 in scripts/coccinelle/cpu_env.cocci_template header.
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/cris/cpu.c       | 10 +++-------
- target/cris/gdbstub.c   |  9 +++------
- target/cris/helper.c    | 12 ++++--------
- target/cris/translate.c |  6 ++----
- 4 files changed, 12 insertions(+), 25 deletions(-)
+ target/hppa/cpu.c        | 8 ++------
+ target/hppa/int_helper.c | 8 ++------
+ target/hppa/mem_helper.c | 3 +--
+ 3 files changed, 5 insertions(+), 14 deletions(-)
 
-diff --git a/target/cris/cpu.c b/target/cris/cpu.c
-index 4187e0ef3c..122071f142 100644
---- a/target/cris/cpu.c
-+++ b/target/cris/cpu.c
-@@ -58,10 +58,9 @@ static bool cris_cpu_has_work(CPUState *cs)
- 
- static void cris_cpu_reset_hold(Object *obj)
+diff --git a/target/hppa/cpu.c b/target/hppa/cpu.c
+index 14e17fa9aa..3200de0998 100644
+--- a/target/hppa/cpu.c
++++ b/target/hppa/cpu.c
+@@ -106,11 +106,8 @@ void hppa_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+                                   MMUAccessType access_type, int mmu_idx,
+                                   uintptr_t retaddr)
  {
--    CPUState *s = CPU(obj);
--    CRISCPU *cpu = CRIS_CPU(s);
-+    CPUState *cs = CPU(obj);
-     CRISCPUClass *ccc = CRIS_CPU_GET_CLASS(obj);
--    CPUCRISState *env = &cpu->env;
-+    CPUCRISState *env = cpu_env(cs);
-     uint32_t vr;
- 
-     if (ccc->parent_phases.hold) {
-@@ -142,10 +141,7 @@ static void cris_cpu_set_irq(void *opaque, int irq, int level)
- 
- static void cris_disas_set_info(CPUState *cpu, disassemble_info *info)
- {
--    CRISCPU *cc = CRIS_CPU(cpu);
--    CPUCRISState *env = &cc->env;
+-    HPPACPU *cpu = HPPA_CPU(cs);
+-    CPUHPPAState *env = &cpu->env;
 -
--    if (env->pregs[PR_VR] != 32) {
-+    if (cpu_env(cpu)->pregs[PR_VR] != 32) {
-         info->mach = bfd_mach_cris_v0_v10;
-         info->print_insn = print_insn_crisv10;
-     } else {
-diff --git a/target/cris/gdbstub.c b/target/cris/gdbstub.c
-index 25c0ca33a5..9e87069da8 100644
---- a/target/cris/gdbstub.c
-+++ b/target/cris/gdbstub.c
-@@ -23,8 +23,7 @@
+     cs->exception_index = EXCP_UNALIGN;
+-    hppa_set_ior_and_isr(env, addr, MMU_IDX_MMU_DISABLED(mmu_idx));
++    hppa_set_ior_and_isr(cpu_env(cs), addr, MMU_IDX_MMU_DISABLED(mmu_idx));
  
- int crisv10_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+     cpu_loop_exit_restore(cs, retaddr);
+ }
+@@ -145,8 +142,7 @@ static void hppa_cpu_realizefn(DeviceState *dev, Error **errp)
+ static void hppa_cpu_initfn(Object *obj)
  {
--    CRISCPU *cpu = CRIS_CPU(cs);
--    CPUCRISState *env = &cpu->env;
-+    CPUCRISState *env = cpu_env(cs);
+     CPUState *cs = CPU(obj);
+-    HPPACPU *cpu = HPPA_CPU(obj);
+-    CPUHPPAState *env = &cpu->env;
++    CPUHPPAState *env = cpu_env(CPU(obj));
  
-     if (n < 15) {
-         return gdb_get_reg32(mem_buf, env->regs[n]);
-@@ -55,8 +54,7 @@ int crisv10_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+     cs->exception_index = -1;
+     cpu_hppa_loaded_fr0(env);
+diff --git a/target/hppa/int_helper.c b/target/hppa/int_helper.c
+index efe638b36e..d072ad2af7 100644
+--- a/target/hppa/int_helper.c
++++ b/target/hppa/int_helper.c
+@@ -99,8 +99,7 @@ void HELPER(write_eiem)(CPUHPPAState *env, target_ulong val)
  
- int cris_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+ void hppa_cpu_do_interrupt(CPUState *cs)
  {
--    CRISCPU *cpu = CRIS_CPU(cs);
--    CPUCRISState *env = &cpu->env;
-+    CPUCRISState *env = cpu_env(cs);
-     uint8_t srs;
+-    HPPACPU *cpu = HPPA_CPU(cs);
+-    CPUHPPAState *env = &cpu->env;
++    CPUHPPAState *env = cpu_env(cs);
+     int i = cs->exception_index;
+     uint64_t old_psw;
  
-     srs = env->pregs[PR_SRS];
-@@ -90,8 +88,7 @@ int cris_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+@@ -268,9 +267,6 @@ void hppa_cpu_do_interrupt(CPUState *cs)
  
- int cris_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+ bool hppa_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
  {
--    CRISCPU *cpu = CRIS_CPU(cs);
--    CPUCRISState *env = &cpu->env;
-+    CPUCRISState *env = cpu_env(cs);
-     uint32_t tmp;
+-    HPPACPU *cpu = HPPA_CPU(cs);
+-    CPUHPPAState *env = &cpu->env;
+-
+     if (interrupt_request & CPU_INTERRUPT_NMI) {
+         /* Raise TOC (NMI) interrupt */
+         cpu_reset_interrupt(cs, CPU_INTERRUPT_NMI);
+@@ -280,7 +276,7 @@ bool hppa_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+     }
  
-     if (n > 49) {
-diff --git a/target/cris/helper.c b/target/cris/helper.c
-index c0bf987e3e..1c3f86876f 100644
---- a/target/cris/helper.c
-+++ b/target/cris/helper.c
-@@ -53,8 +53,7 @@ bool cris_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-                        MMUAccessType access_type, int mmu_idx,
+     /* If interrupts are requested and enabled, raise them.  */
+-    if ((env->psw & PSW_I) && (interrupt_request & CPU_INTERRUPT_HARD)) {
++    if ((cpu_env(cs)->psw & PSW_I) && (interrupt_request & CPU_INTERRUPT_HARD)) {
+         cs->exception_index = EXCP_EXT_INTERRUPT;
+         hppa_cpu_do_interrupt(cs);
+         return true;
+diff --git a/target/hppa/mem_helper.c b/target/hppa/mem_helper.c
+index bb85962d50..7e73b80788 100644
+--- a/target/hppa/mem_helper.c
++++ b/target/hppa/mem_helper.c
+@@ -357,8 +357,7 @@ bool hppa_cpu_tlb_fill(CPUState *cs, vaddr addr, int size,
+                        MMUAccessType type, int mmu_idx,
                         bool probe, uintptr_t retaddr)
  {
--    CRISCPU *cpu = CRIS_CPU(cs);
--    CPUCRISState *env = &cpu->env;
-+    CPUCRISState *env = cpu_env(cs);
-     struct cris_mmu_result res;
-     int prot, miss;
-     target_ulong phy;
-@@ -97,8 +96,7 @@ bool cris_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
- 
- void crisv10_cpu_do_interrupt(CPUState *cs)
- {
--    CRISCPU *cpu = CRIS_CPU(cs);
--    CPUCRISState *env = &cpu->env;
-+    CPUCRISState *env = cpu_env(cs);
-     int ex_vec = -1;
- 
-     D_LOG("exception index=%d interrupt_req=%d\n",
-@@ -159,8 +157,7 @@ void crisv10_cpu_do_interrupt(CPUState *cs)
- 
- void cris_cpu_do_interrupt(CPUState *cs)
- {
--    CRISCPU *cpu = CRIS_CPU(cs);
--    CPUCRISState *env = &cpu->env;
-+    CPUCRISState *env = cpu_env(cs);
-     int ex_vec = -1;
- 
-     D_LOG("exception index=%d interrupt_req=%d\n",
-@@ -262,8 +259,7 @@ hwaddr cris_cpu_get_phys_page_debug(CPUState *cs, vaddr addr)
- bool cris_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
- {
-     CPUClass *cc = CPU_GET_CLASS(cs);
--    CRISCPU *cpu = CRIS_CPU(cs);
--    CPUCRISState *env = &cpu->env;
-+    CPUCRISState *env = cpu_env(cs);
-     bool ret = false;
- 
-     if (interrupt_request & CPU_INTERRUPT_HARD
-diff --git a/target/cris/translate.c b/target/cris/translate.c
-index b3974ba0bb..5213db820b 100644
---- a/target/cris/translate.c
-+++ b/target/cris/translate.c
-@@ -3006,7 +3006,6 @@ static void cris_tr_insn_start(DisasContextBase *dcbase, CPUState *cpu)
- static void cris_tr_translate_insn(DisasContextBase *dcbase, CPUState *cs)
- {
-     DisasContext *dc = container_of(dcbase, DisasContext, base);
--    CPUCRISState *env = cpu_env(cs);
-     unsigned int insn_len;
- 
-     /* Pretty disas.  */
-@@ -3014,7 +3013,7 @@ static void cris_tr_translate_insn(DisasContextBase *dcbase, CPUState *cs)
- 
-     dc->clear_x = 1;
- 
--    insn_len = dc->decoder(env, dc);
-+    insn_len = dc->decoder(cpu_env(cs), dc);
-     dc->ppc = dc->pc;
-     dc->pc += insn_len;
-     dc->base.pc_next += insn_len;
-@@ -3180,8 +3179,7 @@ void gen_intermediate_code(CPUState *cs, TranslationBlock *tb, int *max_insns,
- 
- void cris_cpu_dump_state(CPUState *cs, FILE *f, int flags)
- {
--    CRISCPU *cpu = CRIS_CPU(cs);
--    CPUCRISState *env = &cpu->env;
-+    CPUCRISState *env = cpu_env(cs);
-     const char * const *regnames;
-     const char * const *pregnames;
-     int i;
+-    HPPACPU *cpu = HPPA_CPU(cs);
+-    CPUHPPAState *env = &cpu->env;
++    CPUHPPAState *env = cpu_env(cs);
+     HPPATLBEntry *ent;
+     int prot, excp, a_prot;
+     hwaddr phys;
 -- 
 2.41.0
 
