@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2FC0C46CD2
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Jan 2024 12:41:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A1BAC46CD2
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Jan 2024 12:51:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rUnQ7-0007IJ-OC; Tue, 30 Jan 2024 07:40:55 -0500
+	id 1rUnZh-00057H-TA; Tue, 30 Jan 2024 07:50:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rUnQ6-0007Hq-KQ
- for qemu-riscv@nongnu.org; Tue, 30 Jan 2024 07:40:54 -0500
-Received: from mail-ej1-x635.google.com ([2a00:1450:4864:20::635])
+ id 1rUnZg-00054L-5I
+ for qemu-riscv@nongnu.org; Tue, 30 Jan 2024 07:50:48 -0500
+Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rUnQ1-0003OF-9C
- for qemu-riscv@nongnu.org; Tue, 30 Jan 2024 07:40:53 -0500
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-a354fc17f24so331977466b.0
- for <qemu-riscv@nongnu.org>; Tue, 30 Jan 2024 04:40:48 -0800 (PST)
+ id 1rUnZX-0005Lw-UF
+ for qemu-riscv@nongnu.org; Tue, 30 Jan 2024 07:50:47 -0500
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-a357cba4a32so320863566b.2
+ for <qemu-riscv@nongnu.org>; Tue, 30 Jan 2024 04:50:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1706618447; x=1707223247; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1706619037; x=1707223837; darn=nongnu.org;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3xiuxMFz3OfQObhMihP2i/a0ELom1I9/fTE2cX0G9Pg=;
- b=m1QtG3qNdFPhQOBhSddb9ASJ7YjoGuzntECDZLSA+BUaNs38yir1Suh9gbTL+x6LW7
- pgqs9C0wtXoea/SbX2qRJwAljWH8qk+wSnY5ocspPDoYaZFTFg6GzccZ2lgjf3rAVJ0h
- IMUF7BNA5QZ2ChqcFpXLL5ng4m0jKq/TbHHp+D4PyqSzyj+h0WBUcvbN9wreDYBdC97d
- Ld0Syzs/wKBr0yVxIemr5O8Jf12biRJ7pWrEIHjA0odQiez7lgWFKgYf635gIKku2s+v
- 9A4Q2sXe5kWPRmiOXUmCQeTJPLfY02TTZsjNF8feob8MogBneCgOaZc7brSB9Que2NnT
- LBBA==
+ bh=FErAMGRMo5n3bVgxQ4ZhDOcJETw4leepzAnCBEurNTU=;
+ b=gH7Lt52H6Ryl1gKj5m/52nhBG/L3miSW0bHQvM//FEDH3nUCyRQfQAD+kjZOOI7BoJ
+ 1egP+RclC9bf0gssMB9eoYfTTigpyuDuOIL2LcpECPO4KRovLFEmtpBG3lXZLx08Tyc8
+ y+2/vgj0nNK9kS5p+2SI/ZprwNeCHkuTOiEXXkXbh4nROTa8RIs4mH4CCFbWHOOZVATh
+ Ge7rXGTSDJB4boALOUInENKEL7HzYsMyK1RHPqJfbNOlm76HBsrdpqmv/Cj21Xr4Co+9
+ jda69Nx3SPPeeY0MB5oYuBwIOOnwElCEi+YNd5o096Jch0Pe11BtwdgKj9IE8SRYS+EE
+ s25w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706618447; x=1707223247;
+ d=1e100.net; s=20230601; t=1706619037; x=1707223837;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3xiuxMFz3OfQObhMihP2i/a0ELom1I9/fTE2cX0G9Pg=;
- b=KKA/m9hb01P3A/jlyCzYiQPg5/KJdftBj8DXQzgyXlXnqXko0brTV1SkcNYMBkOCnf
- jEheg5MF/3Cd5QwaBrVtKk9OFoC4GzL1H2VQoxDrS0Idi/fpzmwvl35luqrQ6dJgPqQ6
- ZgQik88g7Z7zDGcOolWD9OwAsWS4Ma1X4KJ9beFaScsKZ5lbNru/GFnEc+Nk0/RODVbX
- AisZJQ6Qj374o72YsZLydnznmdHNS85vDY0s2n0WYgSKgrUHhWAG+woXd45IEssRi1DC
- q0L3WwEUhuBAuHGtLlxfJPKaCQnZSeXSx1V3aXtI8K0+FpnISGJ6dS+M0pvYuPECGC1H
- zCgQ==
-X-Gm-Message-State: AOJu0Yx9JH4mXt03Rm5yX+AcxkAiwrspw9Svz1W+cV+YZyeypPvoXcqI
- LUb2wN6KGi/3UoIN2Vo1oyAVKRQgtrg4IPZvb/dPhurOW1hs86Vv+jc9juluLfQ=
-X-Google-Smtp-Source: AGHT+IEyLXQQbYCZ84Z0Vnoej/iQ4ZAXl+PAUrd9OMGCV4+P/yE1YCXVPBP5Ap86hk+6ISGmIp/oUw==
-X-Received: by 2002:a17:906:d146:b0:a23:493a:d355 with SMTP id
- br6-20020a170906d14600b00a23493ad355mr6629044ejb.27.1706618447457; 
- Tue, 30 Jan 2024 04:40:47 -0800 (PST)
+ bh=FErAMGRMo5n3bVgxQ4ZhDOcJETw4leepzAnCBEurNTU=;
+ b=oibUggIHRyHVo79RlAVbUuu7QTKAYMl7mNCEpYEA7j6Abuh0sY8o2Nw3hAjhQAiphj
+ p1cuM2NZlmKuEfcBsGql5sOPEcnBBeraqw5t7B3hGoMnmMVwohTHUPeEFjgp9otpDdPD
+ jHlx1UjLcEseHEgwbgxu8jMW0ZIT/ypWKZCC9Othix/2RMTaOLz5Do9BQodLYIpNWhgc
+ 8SXogOiFfkKr81s808zy21TttPQP+II0T9NMtu4P4Lnw62Y23FHy814/RxI6aIBSQsMZ
+ q9SQA1MZvBoD/a/+4T6IS5Ms0pqD2b3+yjDEMQ7wvzhxfzfwTziCRZjNlfqesmpPHlE5
+ hYJg==
+X-Gm-Message-State: AOJu0Yw9+XapZB2gVIQrjw6BQ7wxKN2XCnVbWnZa9AfFlutN72Wh5ytz
+ O1W7ZmpumN8f2Ejo642BqlQaqCiNaLYl1cJHm2WH3vgYGgutLD/uv3NlvWDmrmI=
+X-Google-Smtp-Source: AGHT+IHprd1Zesz0HZSZLQhTWjiY6//T9U6Y9L8Sy0YEKD448UqmkEqiyPXlGz7Z3RWWWtEZCnIbEQ==
+X-Received: by 2002:a17:906:4c56:b0:a35:9414:f46f with SMTP id
+ d22-20020a1709064c5600b00a359414f46fmr4731786ejw.13.1706619037398; 
+ Tue, 30 Jan 2024 04:50:37 -0800 (PST)
 Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
  [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
  by smtp.gmail.com with ESMTPSA id
- vu3-20020a170907a64300b00a360ba43173sm947594ejc.99.2024.01.30.04.40.46
+ o18-20020a1709061b1200b00a2e7d1b6042sm5047658ejg.196.2024.01.30.04.50.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Jan 2024 04:40:47 -0800 (PST)
-Date: Tue, 30 Jan 2024 13:40:46 +0100
+ Tue, 30 Jan 2024 04:50:36 -0800 (PST)
+Date: Tue, 30 Jan 2024 13:50:36 +0100
 From: Andrew Jones <ajones@ventanamicro.com>
 To: JeeHeng Sia <jeeheng.sia@starfivetech.com>
-Cc: Sunil V L <sunilvl@ventanamicro.com>, 
- "qemu-arm@nongnu.org" <qemu-arm@nongnu.org>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, 
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "mst@redhat.com" <mst@redhat.com>, 
- "imammedo@redhat.com" <imammedo@redhat.com>,
- "anisinha@redhat.com" <anisinha@redhat.com>, 
- "peter.maydell@linaro.org" <peter.maydell@linaro.org>,
- "shannon.zhaosl@gmail.com" <shannon.zhaosl@gmail.com>, 
+Cc: "qemu-arm@nongnu.org" <qemu-arm@nongnu.org>, 
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
+ "mst@redhat.com" <mst@redhat.com>, "imammedo@redhat.com" <imammedo@redhat.com>,
+ "anisinha@redhat.com" <anisinha@redhat.com>,
+ "peter.maydell@linaro.org" <peter.maydell@linaro.org>, 
+ "shannon.zhaosl@gmail.com" <shannon.zhaosl@gmail.com>,
+ "sunilvl@ventanamicro.com" <sunilvl@ventanamicro.com>, 
  "palmer@dabbelt.com" <palmer@dabbelt.com>,
  "alistair.francis@wdc.com" <alistair.francis@wdc.com>, 
  "bin.meng@windriver.com" <bin.meng@windriver.com>,
@@ -78,17 +77,17 @@ Cc: Sunil V L <sunilvl@ventanamicro.com>,
  "zhiwei_liu@linux.alibaba.com" <zhiwei_liu@linux.alibaba.com>
 Subject: Re: RE: [RESEND v2 1/2] hw/arm/virt-acpi-build.c: Migrate SPCR
  creation to common location
-Message-ID: <20240130-e230d950bf57b58d52188b64@orel>
+Message-ID: <20240130-48cfb21fac247f0d535f87c9@orel>
 References: <20240129021440.17640-1-jeeheng.sia@starfivetech.com>
  <20240129021440.17640-2-jeeheng.sia@starfivetech.com>
- <Zbczy87+E0gJEzgw@sunil-laptop>
- <BJSPR01MB0561C2196A51F2AE79DA67C29C7DA@BJSPR01MB0561.CHNPR01.prod.partner.outlook.cn>
+ <20240129-e51095f37656f4ba5262ec68@orel>
+ <BJSPR01MB0561D2F722BBC446017856709C7DA@BJSPR01MB0561.CHNPR01.prod.partner.outlook.cn>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <BJSPR01MB0561C2196A51F2AE79DA67C29C7DA@BJSPR01MB0561.CHNPR01.prod.partner.outlook.cn>
-Received-SPF: pass client-ip=2a00:1450:4864:20::635;
- envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x635.google.com
+In-Reply-To: <BJSPR01MB0561D2F722BBC446017856709C7DA@BJSPR01MB0561.CHNPR01.prod.partner.outlook.cn>
+Received-SPF: pass client-ip=2a00:1450:4864:20::632;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -111,23 +110,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jan 30, 2024 at 03:16:34AM +0000, JeeHeng Sia wrote:
+On Tue, Jan 30, 2024 at 03:30:13AM +0000, JeeHeng Sia wrote:
 ...
-> > I think either there should be a comment that this supports only v2 of
-> > SPCR spec or it should be able to create SPCR of any version. IMO, I
-> > think it is better to add support till v4 (latest). Since consumers like
-> > Linux probably doesn't support v4 yet, ARM/RISC-V can continue to create
-> > v2 itself for the time being but the generic build_spcr() should be able
-> > to create v4 also if the arch requires it.
-> A v4 table depends on the updated acpica. I am not aware if there is a
-> request from ARM to update to v4. Anyway, RISC-V BRS Spec did mentioned
-> on poll-based sbi console. I can check with acpica community if updating
-> table to v4 is the go otherwise I would suggest we cont stick to v2 because
-> there is no compatible ACPI guest to test the code.
+> > Sharing code is good, but if we have to parametrize the entire table, then
+> > we might as well keep Arm and RISCV separate. Building the table first
+> > with this struct, just to have it built again with the build_append API,
+> > doesn't make much sense to me. Do Arm and riscv really diverge on all
+> > these parameters? If not, then just add the parameters which do diverge
+> > build_scpr's arguments.
+> It is kind of chicken and egg thing, I would suggest let the arch code to
+> fill in the value. It doesn't make sense to change again in the future when
+> both riscv and arm realized the parameters were different.
+> Can arm confirm that these values wouldn't change in the future?
 > > 
 
-Generally we want to produce the oldest version which meets the
-requirements in order to support the widest set of consumers.
+We can't be sure that arm nor riscv will change in the future, but we
+(arm/riscv/etc. QEMU developers) control the code for both, so I don't see
+a problem with only parametrizing what's necessary today and then
+extending that, or completely separating, later if necessary. In any case,
+I'd rather see the two completely separate from the start, than to see
+the structure with all the parameters get added. There's no difference to
+me when reading a list of 's->param_name = value' or a list of
+build_append_int(table, value, size) /* param_name */. And, given we need
+the later eventually anyway, then there's no reason for the former at all.
 
 Thanks,
 drew
