@@ -4,87 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EBA2C46CD2
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Jan 2024 07:51:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01630C46CD2
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Jan 2024 08:36:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rUiu2-0002wT-Sr; Tue, 30 Jan 2024 02:51:33 -0500
+	id 1rUjab-00052k-MT; Tue, 30 Jan 2024 03:35:29 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUitw-0002to-9l
- for qemu-riscv@nongnu.org; Tue, 30 Jan 2024 02:51:24 -0500
-Received: from mail-lf1-x131.google.com ([2a00:1450:4864:20::131])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUjaQ-0004wS-QS
+ for qemu-riscv@nongnu.org; Tue, 30 Jan 2024 03:35:19 -0500
+Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUitu-0005wH-KR
- for qemu-riscv@nongnu.org; Tue, 30 Jan 2024 02:51:24 -0500
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-5111c7d40deso418169e87.1
- for <qemu-riscv@nongnu.org>; Mon, 29 Jan 2024 23:51:22 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rUjaI-0004rq-0X
+ for qemu-riscv@nongnu.org; Tue, 30 Jan 2024 03:35:14 -0500
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-33af4b34e2cso747851f8f.1
+ for <qemu-riscv@nongnu.org>; Tue, 30 Jan 2024 00:35:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706601081; x=1707205881; darn=nongnu.org;
+ d=linaro.org; s=google; t=1706603706; x=1707208506; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=JsLkEIfJHXL56e0Gz/0no1vs5VXLmbOPVBqPvukIiU8=;
- b=nLXhStVhLOY+garxPEvnLXzzX5v3MHSR87Okva2LWTiv+/uotKtTAaZzk7K9Dkuv37
- Ba+4wtWmBF/F0sLOSZQq0HkLmCcHrjxNQ1yTpp4dutwMheZPlgEjj66Xjkntb48pkyzf
- Ri3by5EG+NgkBai0opd1tXm7I4e7LmuNjzCOSBpSrvhNh6zjIUFDfJAvXp4v+KHP9FkP
- OnPYEuKFjORbRGw0pyGf1Ur2OLzDpcEk4k80NQBjdKVgYsj1P1W4+caZxGrXMFer87F0
- 6O/thV4VP2M7AdDq4jQ/Fx7ySMKSi7vzL2QZhM4oe0Plo8lvFC8MP2FV5quPhZlkk5rG
- bnCQ==
+ bh=+oxqw9LaaR4ABwL+8F2feAdaVXYVhFV1aHt0UfCnPH4=;
+ b=vY2WOk0xFC7U5jzwyR81U0g/E4uVWcLoX4zKMeBVLjN5sZNXqIzw8tfkxGJo/FYw4f
+ gnJ0W9P4HoiOzmPDGaNx8VMQPG1Q6by+raR7x9e4OjIZm0UjPfTmwk8w1RARpgrERVjd
+ HI+rHaUEBw9KWgFJxVEgJBU+yO4GAxok5I8znykhwmBAal2MPBw3biCptFC17n4T/XFM
+ s0WwPimuDKRtVdCtVxW8e8TfcCHWq+28bb3rRD1FhelBnEMhYScmF6oWHhJtFU78zy0C
+ xaUVZohKW4iU4ApkGq7lHXLsCoLjxRThHH1HCa3NdVDhQLYpaVkaEcwW6VerYknb9yXH
+ nAtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706601081; x=1707205881;
+ d=1e100.net; s=20230601; t=1706603706; x=1707208506;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=JsLkEIfJHXL56e0Gz/0no1vs5VXLmbOPVBqPvukIiU8=;
- b=ogKrgY2zSGmmeXlsnrOhh/bb6YUTh2X6xe0HT9fcLG3vr/5qQ0htFfpu0uA1iGe0Fl
- /u97Du8rE9p0vG7s6WXhWcqQCwfD//m4yK6WLzPTbIaYUv2FArB8oFuFA96AeY/1tVvz
- aEpIrjTnfmFTKZmQe8+ZtTwCOi8Xmjv9uUc9/04juYwa2RB31mGz5jemhFK7ZdGxK816
- eeH3FVOupi8CNYWHhZYHV+vX8uxnKuZbJFnGjZoYKh9DBBWMHnC0LllD3tmB4LW/mxbj
- 9qCzK8B7DS3cVLnaHWPNvDBD0wsfqLbKjkRa9LbO6FCKUgOPONf3DW/XUkeWBG9OnF7b
- t8xg==
-X-Gm-Message-State: AOJu0YwWUDwhatrD5DxuPHrEhMEgtufkh81S8gQtCc4v6r5Ulaqn3QSu
- kbIXaMXWs300uMdOUak+L2SwIZpUbTydJrRiDokcRxAp5610+ZxsBLpFhbND2lI=
-X-Google-Smtp-Source: AGHT+IFWzaowBCfFdqxo4lHRT2VllA/FJkRQfMYfm9wxtWBueGzfvA2BDS84YhjFY+SIoGFksm4Q2w==
-X-Received: by 2002:a05:6512:11c7:b0:511:1ed7:61b9 with SMTP id
- h7-20020a05651211c700b005111ed761b9mr278683lfr.39.1706601080891; 
- Mon, 29 Jan 2024 23:51:20 -0800 (PST)
+ bh=+oxqw9LaaR4ABwL+8F2feAdaVXYVhFV1aHt0UfCnPH4=;
+ b=g9TSEkBi+TsbLJpziw5R6F5uMQZ+u5HLs0nAf0gqwzukEDEeUZ62xTFCUVnaQiLaga
+ cC621p6jGmj6lxjJfBekNudNeV5g0L0EsC8iKgiEReuIv1TEVEEwgHgAKMRBwjhNsro2
+ 3LCFzXVMC5TEJ19dHv1ARkc+c7ZA5Jpfm8yD8bEIKdBG4RHEmfZDgTDaKDT8sLLYrIW1
+ 8K/CFnOfPtyyl3IsnyIiicAbxB4w8YwAS0vWLRvruEHK6SSloZ53m3Pmz2GMpodIbbMQ
+ 7FMqbvUy45YWQc2dpy+0pP7kOvj8VzXelJ1kT38OYmVnhlsYrmyydnjEHe5NgENqGycl
+ ewTQ==
+X-Gm-Message-State: AOJu0YxoHBWb+cqg9Puk9K77irkdb9Ph8Fe6TreorJWyqDVePfLUDkVc
+ hzeBaLEXgUnH+k6IFeQM5+NCT4pgEIBbPfT1EbbRjBrQps8IIhTpz+dhc1QK/Wk=
+X-Google-Smtp-Source: AGHT+IFinhriq9opApucFygFCf8/r8RCnbLlR0s9lHOzuLUuW/wPS37EuxVFbEZYu/F6pHaMYxSF/g==
+X-Received: by 2002:a05:6000:12ca:b0:33a:d28c:222c with SMTP id
+ l10-20020a05600012ca00b0033ad28c222cmr723780wrx.11.1706603706469; 
+ Tue, 30 Jan 2024 00:35:06 -0800 (PST)
 Received: from [192.168.69.100] ([176.187.218.134])
  by smtp.gmail.com with ESMTPSA id
- eo6-20020a056000428600b0033af5086c2dsm2570237wrb.58.2024.01.29.23.51.19
+ o4-20020a05600c510400b0040ef7186b7esm5150644wms.29.2024.01.30.00.35.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 29 Jan 2024 23:51:20 -0800 (PST)
-Message-ID: <ecf81b39-0b2a-44be-a496-18557316b9b9@linaro.org>
-Date: Tue, 30 Jan 2024 08:51:18 +0100
+ Tue, 30 Jan 2024 00:35:06 -0800 (PST)
+Message-ID: <1d4cc1d0-7230-4654-b534-339de480a5a2@linaro.org>
+Date: Tue, 30 Jan 2024 09:35:03 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 26/29] target/sparc: Prefer fast cpu_env() over slower
+Subject: Re: [PATCH v3 22/29] target/riscv: Prefer fast cpu_env() over slower
  CPU QOM cast macro
 Content-Language: en-US
-To: qemu-devel@nongnu.org
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>, kvm@vger.kernel.org,
  qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 References: <20240129164514.73104-1-philmd@linaro.org>
- <20240129164514.73104-27-philmd@linaro.org>
+ <20240129164514.73104-23-philmd@linaro.org>
+ <c1604184-d470-43ef-9530-cb8c0e5c8901@ventanamicro.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20240129164514.73104-27-philmd@linaro.org>
+In-Reply-To: <c1604184-d470-43ef-9530-cb8c0e5c8901@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::131;
- envelope-from=philmd@linaro.org; helo=mail-lf1-x131.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::434;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x434.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,24 +103,20 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 29/1/24 17:45, Philippe Mathieu-Daudé wrote:
-> Mechanical patch produced running the command documented
-> in scripts/coccinelle/cpu_env.cocci_template header.
+On 29/1/24 22:53, Daniel Henrique Barboza wrote:
+> Hey Phil,
 > 
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> ---
->   target/sparc/cpu.c          | 17 +++++------------
->   target/sparc/gdbstub.c      |  3 +--
->   target/sparc/int32_helper.c |  3 +--
->   target/sparc/int64_helper.c |  3 +--
->   target/sparc/ldst_helper.c  |  6 ++----
->   target/sparc/mmu_helper.c   | 15 +++++----------
->   target/sparc/translate.c    |  9 +++------
->   7 files changed, 18 insertions(+), 38 deletions(-)
+> This patch is giving me a conflict in target/riscv/cpu_helper.c when 
+> applying
+> on top of master. Not sure if I'm missing any dependency.
 
-Per v2:
-Reviewed-by: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
+My 'master' was commit 7a1dc45af5.
 
-(https://lore.kernel.org/qemu-devel/140c63fc-f99c-41f3-b96c-5f9d88fa82ba@ilande.co.uk/)
+> It's a trivial conflict though, just a FYI. As for the patch:
+> 
+> 
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+Thanks!
+
 
