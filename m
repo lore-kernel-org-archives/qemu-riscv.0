@@ -4,78 +4,161 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D538C47DB3
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Jan 2024 01:11:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DE59C47DA9
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Jan 2024 02:45:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rUceV-0004uc-6q; Mon, 29 Jan 2024 20:11:03 -0500
+	id 1rUe73-0001yy-DD; Mon, 29 Jan 2024 21:44:37 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rUceT-0004rz-86; Mon, 29 Jan 2024 20:11:01 -0500
-Received: from mail-vk1-xa2c.google.com ([2607:f8b0:4864:20::a2c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rUceR-0006zJ-6Z; Mon, 29 Jan 2024 20:11:00 -0500
-Received: by mail-vk1-xa2c.google.com with SMTP id
- 71dfb90a1353d-4bddb27e832so641983e0c.0; 
- Mon, 29 Jan 2024 17:10:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706577058; x=1707181858; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=R3VubPsSFNsoGb6IT4tjxLCgDTp4ID39cxhGZ/Camr0=;
- b=gYnN5BVJ2MJO5oJtNhStosXDSqJEJm0e5e52sWjSTstEMrLQNlGd+LIKGTi++KfvPT
- MhoDBpTQI9kI7+eOkEyEPND7mZuIGS52D7Odh6wRrz2xCQsXlbpX3GcQjPKQTI0FjA+3
- r682mVwHTcr3dMi6WoV6NIXzZubnYlXKnxepUkGOav+wsmGpKPdjHX1QdP2Ea+u7bYDS
- CG9IShju03NWT/5W+vkwJpGqGTNfVb00V80QmfCzJtpYG4srhhfCbIkYd85h3T0xszTk
- LFmO1rY3HI0xUAmqhyF9oJwI42/GOvnn1p52wbjSGxn+vJkMag9f4RhtGt+9YN/6qH9d
- voaA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706577058; x=1707181858;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=R3VubPsSFNsoGb6IT4tjxLCgDTp4ID39cxhGZ/Camr0=;
- b=K/K9lq69JSoiReZzPg2Q4m9vuhR/9V6nio2gkktzkH+O3u4GLiobksmQXAB42VBN9b
- XwN7KyBLFGx+F0jd/CpDWhSXyGjiYd3R+FLGoVCaY+gTy+qN418WZbuS/HesomeDW0XR
- Qbl9A6ws7r4fHgCLvkltkVkVYZtbUgx6a7oX/8omxRI3j0SwFnZA4RwRLtIcpuqSebxD
- HErp5OExT5Avnu6zMgvndOahgOHRCbr6WRyFZ63P20XixycM451V6eAQmPe0o3+YuGA4
- PRkfF09XH05xrV5ij3K/FVNi2fntrYCYDN5Xu4oFsurCEuiELbldGZADwskEW2gzzRnj
- I0qw==
-X-Gm-Message-State: AOJu0YxyGB8xq0SLNtYlIPh3fR6d3feyKRpdy/CrrX1k2AiTElqK8PlK
- LOsQUDc7LvGA6lehMx/JR511I4oHanleWtICbF2PDlihTyqf29Kb2lIDnm+WlBq05OfsBah4ySE
- 4BlYV65l2LGPa2EBycVCKme+I6oo=
-X-Google-Smtp-Source: AGHT+IGW3GV3QMG4Rdd2Kd1CxvtsOVqUsqn44I0G53SfuLNTL6k0q6E76A5wXUByF4xgiBm202pgtACWfOrnQwltzgo=
-X-Received: by 2002:a05:6122:2013:b0:4bd:5cd5:f494 with SMTP id
- l19-20020a056122201300b004bd5cd5f494mr3579142vkd.28.1706577057620; Mon, 29
- Jan 2024 17:10:57 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <bcain@quicinc.com>)
+ id 1rUe70-0001y0-MZ; Mon, 29 Jan 2024 21:44:34 -0500
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <bcain@quicinc.com>)
+ id 1rUe6y-00087C-KM; Mon, 29 Jan 2024 21:44:34 -0500
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 40U2A0KN016381; Tue, 30 Jan 2024 02:44:24 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ from:to:cc:subject:date:message-id:references:in-reply-to
+ :content-type:content-transfer-encoding:mime-version; s=
+ qcppdkim1; bh=v4/DPUGnv2NVttHk9/bNa9EH1La+0VOg5BuA1W+8Btw=; b=oI
+ M7QiU1EJSrXReJ+GWupxWus+xyT/0q1wUIT2mSIYJrCE0VkY8IM7K5WOTT2gwPcv
+ 5gJbyJTxHUL0EQuiKvEnrk8T6de/TV3rOrVDliAS3u6E9bm4fFnD3Mxw8mjxXy/N
+ rdRvFSAo8B0SOsC3JLYIUPRkqF7F2ReVtxvw0/nIWYvWc3SxFetT56P+FdvgGvoF
+ LmFQqqIxxcaBNxL+4pFXcmQBsXhBCrxFsoYhx7n3J0KYzlQgCkSlMEiBYqgbmOlC
+ 3jNkHHXPZRuoxvLAW2eY4pGp4QLVibFCCBJ8Otz99vMf5uiGvlA+ewbJStg3mRDJ
+ qb/Hpl5m0QDcqDAZNjSw==
+Received: from nam11-co1-obe.outbound.protection.outlook.com
+ (mail-co1nam11lp2168.outbound.protection.outlook.com [104.47.56.168])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3vxr2v01pc-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 30 Jan 2024 02:44:24 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=CuYzoE1t6GuHPxPyPlVbRw30a3x0WQKF3CySHKAVPmtogcAp+BgeTFGH1UtW8+raunluwX3gYWWMQ1jkzv9InqQWX4h0/cj472XDmNVY8x/XgJ16zxgvP0kBzOnx12NMuNOJ4tl3oDzrWdr8jfH+/SGKdUlIvaiRFVPu8uSOHzEGiNN4tcR5ZuUpo1BZW3WozJWVUi2boC+oCRC/4BMKHuRjliRBCodY1w73Wn924BQUryvbqOMeWlvAFJDLDvc9xcBic7MArb70kUwslyM7VJ4BC0OKP8pL4J5N7mlg/S/z10JoNWEq4vRsz+nwh6ljBFucsd8k4HVf1SY7A8irsw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=v4/DPUGnv2NVttHk9/bNa9EH1La+0VOg5BuA1W+8Btw=;
+ b=LmImrgsKbWCFmMxG6wZ0S4zT3fzJEocCgiEw//Z1thBIFXChwbsLzOARyYRGQMgnQWk/4ycQpMaJBSjanHNQu+px2zDA7gvxClwA+oosGE2MBYOjdAiC1NbHJKW1m8a3ELjnJtDcTEeFflXJeBIBk00TUOdK8uRq6xcQ96uomGoJtGFUm8pPFhh+f//MwURKNjnh5pVt1loUSZwhSsgSPVNNPH74q6LlSB9nLuZgqt/HXws+7pQNs1n+tRiyifj8TvM8/ATbZEWDJn67J5vLHny52l7jkLzGwhujC/2I2RSDA/5QvDvm5sMKCQH4pjiFRzfzH/US/2aiL0AlqWfJDQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=quicinc.com; dmarc=pass action=none header.from=quicinc.com;
+ dkim=pass header.d=quicinc.com; arc=none
+Received: from CH3PR02MB10247.namprd02.prod.outlook.com
+ (2603:10b6:610:1c2::10) by CH3PR02MB10036.namprd02.prod.outlook.com
+ (2603:10b6:610:19d::8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7228.34; Tue, 30 Jan
+ 2024 02:44:22 +0000
+Received: from CH3PR02MB10247.namprd02.prod.outlook.com
+ ([fe80::1e37:59f7:9ae:2058]) by CH3PR02MB10247.namprd02.prod.outlook.com
+ ([fe80::1e37:59f7:9ae:2058%6]) with mapi id 15.20.7228.029; Tue, 30 Jan 2024
+ 02:44:22 +0000
+From: Brian Cain <bcain@quicinc.com>
+To: =?utf-8?B?UGhpbGlwcGUgTWF0aGlldS1EYXVkw6k=?= <philmd@linaro.org>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
+CC: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, "qemu-s390x@nongnu.org"
+ <qemu-s390x@nongnu.org>, Paolo Bonzini <pbonzini@redhat.com>,
+ "kvm@vger.kernel.org" <kvm@vger.kernel.org>, "qemu-ppc@nongnu.org"
+ <qemu-ppc@nongnu.org>, "qemu-arm@nongnu.org" <qemu-arm@nongnu.org>, Richard
+ Henderson <richard.henderson@linaro.org>
+Subject: RE: [PATCH v3 11/29] target/hexagon: Prefer fast cpu_env() over
+ slower CPU QOM cast macro
+Thread-Topic: [PATCH v3 11/29] target/hexagon: Prefer fast cpu_env() over
+ slower CPU QOM cast macro
+Thread-Index: AQHaUtK3Ru8qxvWcMUCg4muoD+zR/rDxprTw
+Date: Tue, 30 Jan 2024 02:44:21 +0000
+Message-ID: <CH3PR02MB102478EDAEB87976969F264AFB87D2@CH3PR02MB10247.namprd02.prod.outlook.com>
+References: <20240129164514.73104-1-philmd@linaro.org>
+ <20240129164514.73104-12-philmd@linaro.org>
+In-Reply-To: <20240129164514.73104-12-philmd@linaro.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: CH3PR02MB10247:EE_|CH3PR02MB10036:EE_
+x-ms-office365-filtering-correlation-id: 3495ca8e-fd3e-4dc5-8db3-08dc213d5d2e
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: Zt1LsmTCSUV9ySvBiefzKsZdCwBaeo7JzzO9iDopoTm4VUXvyACbX7atKqGHKBTXMw0UtGMQbQP6yHw56CQy+eGdGFkduoxPzLf2C5AtVZ9BYOlA5dPAuAiWnX0Qp9guJgoWdfcHzO9nRqs5wx58PnW2c9/9lvkjWNAYn1AxpdANfdWbe3oAnv910mk+YaF8l12mslPXjHBQUmmIbQszuIsj2oQDOyU8lFmDl6+T2OF2EPpiTb3N6gmw1uihIokXTy6GSVodHpNtVE79mVTYEaWFUmAZ0IjWql6UkAaKJ4ETob9lReRgzcd9x7JaSAcYI88ht+1lA9XttEs0ndcYdNpc1VfYqpjiI8PdQMVzssFF/4TQUZA/aKBmHWIIrQpeKqR1rPtrPtGvBTywO/4QnOpLhk00/q1uR7TwCOjaC7uxfrZ9TLFeCunMBvDZjRdzZ9eVIuqLkE5SAxQPQa85SawrY7i/HcUJUY6Kb8Mh/yaBmwvnE8VLGLT7ibthwT5sNrcXnzAI8OjgjRTLQuIu5dRbpcWXSgBk4ZRTzWWNFnZ5sJouLnvk3OadskHpQxbnpMSaJ67jxfGYnGrAFUWkenED3wgKb0Y+Kyb03h8HcSYK7OUkC1gzjltRTVagGyxlfDG4xzYeMqbv6qXS7WHE0V8ZtvSTrkqi8ho9Or4tGm0=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CH3PR02MB10247.namprd02.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(39860400002)(366004)(136003)(346002)(396003)(376002)(230273577357003)(230922051799003)(230173577357003)(64100799003)(1800799012)(451199024)(186009)(55016003)(83380400001)(33656002)(86362001)(38070700009)(122000001)(66556008)(4326008)(9686003)(38100700002)(26005)(6506007)(7696005)(52536014)(66946007)(478600001)(76116006)(2906002)(41300700001)(8676002)(110136005)(316002)(66476007)(64756008)(54906003)(53546011)(71200400001)(66446008)(8936002)(5660300002);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?U1VYWHdaUWwrOE1GVHl1Y3RSRVZJMXcySHNTYUdLZXptcU9Sc1p1NVdjVFNT?=
+ =?utf-8?B?NldGM1loWUgxYURQS3o2aXRPWjc4cCs2TVE2RTU1SWx4ZVduS3VYeEk3azZ2?=
+ =?utf-8?B?a1FGM2tlRGRXWm1xcGhMV0c2SXI0SnRwdHpISkZTSTJ1Skp0NFlYMGV3UjlL?=
+ =?utf-8?B?dG82dHBjcFUweW1hUk1LalhGK2Y4dk55WGdwSE1GUUxHUXZRT1llR0ZOMlVw?=
+ =?utf-8?B?TnBBMW1KVCtycDNDeDB3ekNtVlFLY1ZGeW51ck5UaDkyQkhkaU1pbkNrakRz?=
+ =?utf-8?B?L2Fwcm5Jb3JiRmYybWZzRGprdDh6cUxkVXU0TWw4R2h3endwekh6ejczSDhJ?=
+ =?utf-8?B?WEs5YnlJTUhtVTI5b2MwcTN4eE41SWtJd2F1eDQrT0ZBbG9NZGNpa1VtaDV4?=
+ =?utf-8?B?c0xUZnZ1YVBmSjVoczQ2Qmp1dks0aW54WEd6WDZBUmJxNmxDc1RMOUpyOFox?=
+ =?utf-8?B?NS8zSkw3SW1Va1dOS2JhMnp1Mjc4MWhsVGtoU2dsNTlaRStnWjhlQ2xZOUtK?=
+ =?utf-8?B?WEpBY2I4ZTUxSmtWQURJWWtrQThqV0YrSkZvNDYyamQwMmJNMHJ2Y0NoMUFq?=
+ =?utf-8?B?NCtWWXhNZDdid09Na2ZuRlhBSFNXQ21wUUdCV3VVT2tvcW9QQ3Z0Q1BhQU4w?=
+ =?utf-8?B?bjRMVjRFUC9oUWJwc0ZSUXJRcUQzbVN4TTlJR3o4enZCZFJjblZiRDRKSk1j?=
+ =?utf-8?B?Sm52NzNaNzhWL3ZLMDZYVG4rZmFYekI2WWF5aEg1Wk9UczY4N3JJRURJUGxu?=
+ =?utf-8?B?WExRVmhURGhHWkR4bmszaXFxZU1TYTRYRlNkQ2lsWkFxUW9NQ013WFlTUXZE?=
+ =?utf-8?B?QnFrVnBySDREVzE0TFRsc21nRk1DWkMwd29LSjlnS2hqYm1lcnJnMVl5d2dF?=
+ =?utf-8?B?RVpQcjJlYldLMEZvdWR3eVNZUUxNQmtOMlR1ZjBjcE0yak52bmFjdEtlaWdL?=
+ =?utf-8?B?Vk5ndGdQLzNrUHU1aEhwbmhZb3lIR2tHWDFMRVR4ZmtOMWxlZjZTS0MrcWRw?=
+ =?utf-8?B?Z1RhbUhPclNxeVBCWHd1R1M1Zk5rZmROaVpmUkU4bkRvMTZoZ1RmOVBOc2tj?=
+ =?utf-8?B?NVJyV20vckVKQTNGY1lYWU1iVUk5OHpqRVJmY0N2aWJVbHpVZWFuQnFlc3Nq?=
+ =?utf-8?B?djlEZlNSellKN3FhRXVlR0JvTmNvUHVZZDVQZXBHSnZESlk2VFpMamJmWnEx?=
+ =?utf-8?B?WGVpWDZKbFNkNDlNVldYNDlKejVsZHhma1ZLRHJWbnR5WVFueTY1WjJ6YlRJ?=
+ =?utf-8?B?dUpTem9VT3JCMWJuSXp5ek9uRmZsMkcycjZHVmZ1NkVYNHFNOGVaRndSenc3?=
+ =?utf-8?B?ZWRLWmRtK3lxSXNGcnlINFI5di92VkVMUmpYNzA0dThMU0p4L2p6VUwycjFI?=
+ =?utf-8?B?ekIrRGx0WFgzSytxVXBDU0hVT0Nya0ZBSDRYWmQrUEhLWWxSV1NZTHBtOHIz?=
+ =?utf-8?B?UDBuYjRqV1A5OFJ0T3pqU2x6YXVST1BzQUhUM2EyY1d5a1FCVDNrbVBza2kr?=
+ =?utf-8?B?SDdZL21MN3VsM3dRMHBmTGRsOUhWV3RWMGFjaGdLTGJnRE9VYUsyZU5pWXlM?=
+ =?utf-8?B?MytqY3dydnZQM3VZci8wMCt5WGxCN3Fwb0FUQVp6aUpEbzU4STFpeWdDL0p0?=
+ =?utf-8?B?WTMxQlEyNjgyQ0RWcjB2R3pqT2FvN2M3eVFMSEF3MWVxNEFLNDRwK2xmcXFM?=
+ =?utf-8?B?L3Zya1lVd3V5OEJOZkRMc0pDYjY0TzVtVjVGN0lZS2lKemZBSHdTMW01cnhM?=
+ =?utf-8?B?Z2FzMm5ubURCVXlwNW5pSEgzSmloZGorSWthT2VlSktMRzlJalhLRmp2OWNK?=
+ =?utf-8?B?ZGlXV1NCNURjczNnYk5Nd2FsMXk5WVE4Q285RDNIbEFUQkxtS3ZNUmRobmxy?=
+ =?utf-8?B?NmxrTVg1Z20ybjJXZGs5ZlF4bjl0WDNkclg2bVNMdkYwMHpRaDQ1SDZmOGlD?=
+ =?utf-8?B?ZGlYNGtEZ1pLZmVoQ1NLdEhPRHZ5d2xGaVpkRGxPUXJXK05zaGFGQjR5dHg3?=
+ =?utf-8?B?UVFUTGF4SkgvVDRmRlRyZUdudnZRSHhKQUYvQ0pncWh4cC9GQXJwZkUwZHpC?=
+ =?utf-8?B?aWZYaTFSTVIzM29hRHJ5ZC84bDF4UWZaVldCSkJZdEwyVEoxNjhEMUV5TmtE?=
+ =?utf-8?Q?Y3jM=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20240125195319.329181-1-dbarboza@ventanamicro.com>
- <20240125195319.329181-4-dbarboza@ventanamicro.com>
-In-Reply-To: <20240125195319.329181-4-dbarboza@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 30 Jan 2024 11:10:31 +1000
-Message-ID: <CAKmqyKNZ73Ep1sBKGBoX=wNvOPq_R+UU_K9qSRABBQUzK-LFLA@mail.gmail.com>
-Subject: Re: [PATCH 3/6] target/riscv: add remaining named features
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, ajones@ventanamicro.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2c;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2c.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: Jm2jRkoGJJmEYePOJA0tOIpMCMuygAR2i2rqGJFhUsJNasqDkDhWFu/++ggDdgkVEND8TmauuF6yrBqCLtTbGZM9xMNA+xPCmfVVGWyx8dfmClj/otG75Ui91woE2F9P3tTBjIRK8IT9XLUFdR2FwFa9C9paBpcM41Yuy/XjwASkyQRhB3FaDPeDzorccgXZ7aB9/LIuFGg0TIb2kXvG2bdghtMyLAlDOpRhFIKtXP4KzE8Z2xYsAcOCpmYPCvWiVyVDIYkcB8ThbxH2NHNllor+RCRvSyMjTGqWBWSr1TddvaUDoWu+bB0I3YFnAo1bWWaEFZBVOtSLd8MkBRmMgPlOFABzv6inZbQASmwNFHc/aNyjOwBXLFY903KiA3Oh7/BMjkh+BXqA8gODbmH3bhAuoAJgRLtUwUoA5u9/+eZmtZBQHV9xLBsy/zjvLswhq+TRXAbMnCun3h+fgVASav9PS58DCd+q5t8+kGSQQi/XNFlM9Xs79uuqh1n7S1h8F2MlznijzjPA4G10dv+AMP3bu3RrW6tRo4+ZiV4JPkSVvBkpethGZHPZFHNc1IDjlB9oLwzo6afYga6ON9/1zGpLBK3pH80/Ajy/yP3iy/y0yMFaV6M2XT2LbwS+yz4k
+X-OriginatorOrg: quicinc.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: CH3PR02MB10247.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3495ca8e-fd3e-4dc5-8db3-08dc213d5d2e
+X-MS-Exchange-CrossTenant-originalarrivaltime: 30 Jan 2024 02:44:21.9661 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 98e9ba89-e1a1-4e38-9007-8bdabc25de1d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: Kocsbhwx8INYRC3Afxw5E6Wc+CWEmheJ8F4AZHF8kTH+lZdviIxP7f//zwVmjkuecdDp90H7BFx6XsDlJHvlVw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR02MB10036
+X-Proofpoint-GUID: R1Ku94LyJJIhAN6scrRdqR5SDYJprXHA
+X-Proofpoint-ORIG-GUID: R1Ku94LyJJIhAN6scrRdqR5SDYJprXHA
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-01-29_15,2024-01-29_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 mlxlogscore=733
+ impostorscore=0 bulkscore=0 suspectscore=0 spamscore=0 malwarescore=0
+ clxscore=1011 mlxscore=0 priorityscore=1501 lowpriorityscore=0
+ phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2401190000 definitions=main-2401300018
+Received-SPF: pass client-ip=205.220.168.131; envelope-from=bcain@quicinc.com;
+ helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -91,213 +174,80 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Jan 26, 2024 at 5:54=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
-> The RVA22U64 and RVA22S64 profiles mandates certain extensions that,
-> until now, we were implying that they were available.
->
-> We can't do this anymore since named features also has a riscv,isa
-> entry.  Let's add them to riscv_cpu_named_features[].
->
-> They will also need to be explicitly enabled in both profile
-> descriptions. TCG will enable the named features it already implements,
-> other accelerators are free to handle it as they like.
->
-> After this patch, here's the riscv,isa from a buildroot using the
-> 'rva22s64' CPU:
->
->  # cat /proc/device-tree/cpus/cpu@0/riscv,isa
-> rv64imafdc_zic64b_zicbom_zicbop_zicboz_ziccamoa_ziccif_zicclsm_ziccrse_
-> zicntr_zicsr_zifencei_zihintpause_zihpm_za64rs_zfhmin_zca_zcd_zba_zbb_
-> zbs_zkt_sscounterenw_sstvala_sstvecd_svade_svinval_svpbmt#
->
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->  target/riscv/cpu.c         | 41 +++++++++++++++++++++++++++++---------
->  target/riscv/cpu_cfg.h     |  9 +++++++++
->  target/riscv/tcg/tcg-cpu.c | 19 +++++++++++++++++-
->  3 files changed, 59 insertions(+), 10 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 28d3cfa8ce..1ecd8a57ed 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -101,6 +101,10 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
->      ISA_EXT_DATA_ENTRY(zicbom, PRIV_VERSION_1_12_0, ext_zicbom),
->      ISA_EXT_DATA_ENTRY(zicbop, PRIV_VERSION_1_12_0, ext_zicbop),
->      ISA_EXT_DATA_ENTRY(zicboz, PRIV_VERSION_1_12_0, ext_zicboz),
-> +    ISA_EXT_DATA_ENTRY(ziccamoa, PRIV_VERSION_1_11_0, ext_ziccamoa),
-> +    ISA_EXT_DATA_ENTRY(ziccif, PRIV_VERSION_1_11_0, ext_ziccif),
-> +    ISA_EXT_DATA_ENTRY(zicclsm, PRIV_VERSION_1_11_0, ext_zicclsm),
-> +    ISA_EXT_DATA_ENTRY(ziccrse, PRIV_VERSION_1_11_0, ext_ziccrse),
->      ISA_EXT_DATA_ENTRY(zicond, PRIV_VERSION_1_12_0, ext_zicond),
->      ISA_EXT_DATA_ENTRY(zicntr, PRIV_VERSION_1_12_0, ext_zicntr),
->      ISA_EXT_DATA_ENTRY(zicsr, PRIV_VERSION_1_10_0, ext_zicsr),
-> @@ -109,6 +113,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
->      ISA_EXT_DATA_ENTRY(zihintpause, PRIV_VERSION_1_10_0, ext_zihintpause=
-),
->      ISA_EXT_DATA_ENTRY(zihpm, PRIV_VERSION_1_12_0, ext_zihpm),
->      ISA_EXT_DATA_ENTRY(zmmul, PRIV_VERSION_1_12_0, ext_zmmul),
-> +    ISA_EXT_DATA_ENTRY(za64rs, PRIV_VERSION_1_12_0, ext_za64rs),
->      ISA_EXT_DATA_ENTRY(zacas, PRIV_VERSION_1_12_0, ext_zacas),
->      ISA_EXT_DATA_ENTRY(zawrs, PRIV_VERSION_1_12_0, ext_zawrs),
->      ISA_EXT_DATA_ENTRY(zfa, PRIV_VERSION_1_12_0, ext_zfa),
-> @@ -170,8 +175,12 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
->      ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
->      ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
->      ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
-> +    ISA_EXT_DATA_ENTRY(ssccptr, PRIV_VERSION_1_11_0, ext_ssccptr),
->      ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
-> +    ISA_EXT_DATA_ENTRY(sscounterenw, PRIV_VERSION_1_12_0, ext_sscountere=
-nw),
->      ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
-> +    ISA_EXT_DATA_ENTRY(sstvala, PRIV_VERSION_1_12_0, ext_sstvala),
-> +    ISA_EXT_DATA_ENTRY(sstvecd, PRIV_VERSION_1_12_0, ext_sstvecd),
->      ISA_EXT_DATA_ENTRY(svade, PRIV_VERSION_1_11_0, ext_svade),
->      ISA_EXT_DATA_ENTRY(svadu, PRIV_VERSION_1_12_0, ext_svadu),
->      ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
-> @@ -1523,6 +1532,22 @@ const RISCVCPUMultiExtConfig riscv_cpu_named_featu=
-res[] =3D {
->      MULTI_EXT_CFG_BOOL("svade", ext_svade, true),
->      MULTI_EXT_CFG_BOOL("zic64b", ext_zic64b, true),
->
-> +    /*
-> +     * cache-related extensions that are always enabled
-> +     * since QEMU RISC-V does not have a cache model.
-> +     */
-> +    MULTI_EXT_CFG_BOOL("za64rs", ext_za64rs, true),
-> +    MULTI_EXT_CFG_BOOL("ziccif", ext_ziccif, true),
-> +    MULTI_EXT_CFG_BOOL("ziccrse", ext_ziccrse, true),
-> +    MULTI_EXT_CFG_BOOL("ziccamoa", ext_ziccamoa, true),
-> +    MULTI_EXT_CFG_BOOL("zicclsm", ext_zicclsm, true),
-> +    MULTI_EXT_CFG_BOOL("ssccptr", ext_ssccptr, true),
-> +
-> +    /* Other named features that QEMU TCG always implements */
-> +    MULTI_EXT_CFG_BOOL("sstvecd", ext_sstvecd, true),
-> +    MULTI_EXT_CFG_BOOL("sstvala", ext_sstvala, true),
-> +    MULTI_EXT_CFG_BOOL("sscounterenw", ext_sscounterenw, true),
-> +
->      DEFINE_PROP_END_OF_LIST(),
->  };
->
-> @@ -2116,13 +2141,8 @@ static const PropertyInfo prop_marchid =3D {
->  };
->
->  /*
-> - * RVA22U64 defines some 'named features' or 'synthetic extensions'
-> - * that are cache related: Za64rs, Zic64b, Ziccif, Ziccrse, Ziccamoa
-> - * and Zicclsm. We do not implement caching in QEMU so we'll consider
-> - * all these named features as always enabled.
-> - *
-> - * There's no riscv,isa update for them (nor for zic64b, despite it
-> - * having a cfg offset) at this moment.
-> + * RVA22U64 defines some cache related extensions: Za64rs,
-> + * Ziccif, Ziccrse, Ziccamoa and Zicclsm.
->   */
->  static RISCVCPUProfile RVA22U64 =3D {
->      .parent =3D NULL,
-> @@ -2139,7 +2159,9 @@ static RISCVCPUProfile RVA22U64 =3D {
->          CPU_CFG_OFFSET(ext_zicbop), CPU_CFG_OFFSET(ext_zicboz),
->
->          /* mandatory named features for this profile */
-> -        CPU_CFG_OFFSET(ext_zic64b),
-> +        CPU_CFG_OFFSET(ext_za64rs), CPU_CFG_OFFSET(ext_zic64b),
-> +        CPU_CFG_OFFSET(ext_ziccif), CPU_CFG_OFFSET(ext_ziccrse),
-> +        CPU_CFG_OFFSET(ext_ziccamoa), CPU_CFG_OFFSET(ext_zicclsm),
->
->          RISCV_PROFILE_EXT_LIST_END
->      }
-> @@ -2170,7 +2192,8 @@ static RISCVCPUProfile RVA22S64 =3D {
->          CPU_CFG_OFFSET(ext_svinval),
->
->          /* rva22s64 named features */
-> -        CPU_CFG_OFFSET(ext_svade),
-> +        CPU_CFG_OFFSET(ext_sstvecd), CPU_CFG_OFFSET(ext_sstvala),
-> +        CPU_CFG_OFFSET(ext_sscounterenw), CPU_CFG_OFFSET(ext_svade),
->
->          RISCV_PROFILE_EXT_LIST_END
->      }
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> index 698f926ab1..f79fc3dfd1 100644
-> --- a/target/riscv/cpu_cfg.h
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -125,6 +125,15 @@ struct RISCVCPUConfig {
->      /* Named features  */
->      bool ext_svade;
->      bool ext_zic64b;
-> +    bool ext_za64rs;
-> +    bool ext_ziccif;
-> +    bool ext_ziccrse;
-> +    bool ext_ziccamoa;
-> +    bool ext_zicclsm;
-> +    bool ext_ssccptr;
-> +    bool ext_sstvecd;
-> +    bool ext_sstvala;
-> +    bool ext_sscounterenw;
-
-Overall this and the previous patch look fine.
-
-One thing though, why store this information? I feel it could be
-confusing having these variables. If a developer sets them to false
-nothing actually happens, which is a little misleading
-
-Alistair
-
->
->      /* Vendor-specific custom extensions */
->      bool ext_xtheadba;
-> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> index 90861cc065..6d5028cf84 100644
-> --- a/target/riscv/tcg/tcg-cpu.c
-> +++ b/target/riscv/tcg/tcg-cpu.c
-> @@ -206,7 +206,8 @@ static void riscv_cpu_enable_named_feat(RISCVCPU *cpu=
-, uint32_t feat_offset)
->          cpu->cfg.ext_svadu =3D false;
->          break;
->      default:
-> -        g_assert_not_reached();
-> +        /* Named feature already enabled in riscv_tcg_cpu_instance_init =
-*/
-> +        return;
->      }
->  }
->
-> @@ -1342,6 +1343,20 @@ static bool riscv_cpu_has_max_extensions(Object *c=
-pu_obj)
->      return object_dynamic_cast(cpu_obj, TYPE_RISCV_CPU_MAX) !=3D NULL;
->  }
->
-> +/* Named features that TCG always implements */
-> +static void riscv_tcg_cpu_enable_named_feats(RISCVCPU *cpu)
-> +{
-> +    cpu->cfg.ext_za64rs =3D true;
-> +    cpu->cfg.ext_ziccif =3D true;
-> +    cpu->cfg.ext_ziccrse =3D true;
-> +    cpu->cfg.ext_ziccamoa =3D true;
-> +    cpu->cfg.ext_zicclsm =3D true;
-> +    cpu->cfg.ext_ssccptr =3D true;
-> +    cpu->cfg.ext_sstvecd =3D true;
-> +    cpu->cfg.ext_sstvala =3D true;
-> +    cpu->cfg.ext_sscounterenw =3D true;
-> +}
-> +
->  static void riscv_tcg_cpu_instance_init(CPUState *cs)
->  {
->      RISCVCPU *cpu =3D RISCV_CPU(cs);
-> @@ -1354,6 +1369,8 @@ static void riscv_tcg_cpu_instance_init(CPUState *c=
-s)
->      if (riscv_cpu_has_max_extensions(obj)) {
->          riscv_init_max_cpu_extensions(obj);
->      }
-> +
-> +    riscv_tcg_cpu_enable_named_feats(cpu);
->  }
->
->  static void riscv_tcg_cpu_init_ops(AccelCPUClass *accel_cpu, CPUClass *c=
-c)
-> --
-> 2.43.0
->
->
+DQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IFBoaWxpcHBlIE1hdGhpZXUt
+RGF1ZMOpIDxwaGlsbWRAbGluYXJvLm9yZz4NCj4gU2VudDogTW9uZGF5LCBKYW51YXJ5IDI5LCAy
+MDI0IDEwOjQ1IEFNDQo+IFRvOiBxZW11LWRldmVsQG5vbmdudS5vcmcNCj4gQ2M6IHFlbXUtcmlz
+Y3ZAbm9uZ251Lm9yZzsgcWVtdS1zMzkweEBub25nbnUub3JnOyBQYW9sbyBCb256aW5pDQo+IDxw
+Ym9uemluaUByZWRoYXQuY29tPjsga3ZtQHZnZXIua2VybmVsLm9yZzsgcWVtdS1wcGNAbm9uZ251
+Lm9yZzsNCj4gcWVtdS1hcm1Abm9uZ251Lm9yZzsgUmljaGFyZCBIZW5kZXJzb24gPHJpY2hhcmQu
+aGVuZGVyc29uQGxpbmFyby5vcmc+Ow0KPiBQaGlsaXBwZSBNYXRoaWV1LURhdWTDqSA8cGhpbG1k
+QGxpbmFyby5vcmc+OyBCcmlhbiBDYWluDQo+IDxiY2FpbkBxdWljaW5jLmNvbT4NCj4gU3ViamVj
+dDogW1BBVENIIHYzIDExLzI5XSB0YXJnZXQvaGV4YWdvbjogUHJlZmVyIGZhc3QgY3B1X2Vudigp
+IG92ZXIgc2xvd2VyDQo+IENQVSBRT00gY2FzdCBtYWNybw0KPiANCj4gV0FSTklORzogVGhpcyBl
+bWFpbCBvcmlnaW5hdGVkIGZyb20gb3V0c2lkZSBvZiBRdWFsY29tbS4gUGxlYXNlIGJlIHdhcnkg
+b2YNCj4gYW55IGxpbmtzIG9yIGF0dGFjaG1lbnRzLCBhbmQgZG8gbm90IGVuYWJsZSBtYWNyb3Mu
+DQo+IA0KPiBNZWNoYW5pY2FsIHBhdGNoIHByb2R1Y2VkIHJ1bm5pbmcgdGhlIGNvbW1hbmQgZG9j
+dW1lbnRlZA0KPiBpbiBzY3JpcHRzL2NvY2NpbmVsbGUvY3B1X2Vudi5jb2NjaV90ZW1wbGF0ZSBo
+ZWFkZXIuDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBQaGlsaXBwZSBNYXRoaWV1LURhdWTDqSA8cGhp
+bG1kQGxpbmFyby5vcmc+DQo+IC0tLQ0KPiAgdGFyZ2V0L2hleGFnb24vY3B1LmMgICAgIHwgMjUg
+KysrKysrLS0tLS0tLS0tLS0tLS0tLS0tLQ0KPiAgdGFyZ2V0L2hleGFnb24vZ2Ric3R1Yi5jIHwg
+IDYgKystLS0tDQo+ICAyIGZpbGVzIGNoYW5nZWQsIDggaW5zZXJ0aW9ucygrKSwgMjMgZGVsZXRp
+b25zKC0pDQo+IA0KPiBkaWZmIC0tZ2l0IGEvdGFyZ2V0L2hleGFnb24vY3B1LmMgYi90YXJnZXQv
+aGV4YWdvbi9jcHUuYw0KPiBpbmRleCAwODVkNmMwMTE1Li4xN2EyMmFhN2E1IDEwMDY0NA0KPiAt
+LS0gYS90YXJnZXQvaGV4YWdvbi9jcHUuYw0KPiArKysgYi90YXJnZXQvaGV4YWdvbi9jcHUuYw0K
+PiBAQCAtMjM2LDEwICsyMzYsNyBAQCBzdGF0aWMgdm9pZCBoZXhhZ29uX2R1bXAoQ1BVSGV4YWdv
+blN0YXRlICplbnYsDQo+IEZJTEUgKmYsIGludCBmbGFncykNCj4gDQo+ICBzdGF0aWMgdm9pZCBo
+ZXhhZ29uX2R1bXBfc3RhdGUoQ1BVU3RhdGUgKmNzLCBGSUxFICpmLCBpbnQgZmxhZ3MpDQo+ICB7
+DQo+IC0gICAgSGV4YWdvbkNQVSAqY3B1ID0gSEVYQUdPTl9DUFUoY3MpOw0KPiAtICAgIENQVUhl
+eGFnb25TdGF0ZSAqZW52ID0gJmNwdS0+ZW52Ow0KPiAtDQo+IC0gICAgaGV4YWdvbl9kdW1wKGVu
+diwgZiwgZmxhZ3MpOw0KPiArICAgIGhleGFnb25fZHVtcChjcHVfZW52KGNzKSwgZiwgZmxhZ3Mp
+Ow0KPiAgfQ0KPiANCj4gIHZvaWQgaGV4YWdvbl9kZWJ1ZyhDUFVIZXhhZ29uU3RhdGUgKmVudikN
+Cj4gQEAgLTI0OSwyNSArMjQ2LDE5IEBAIHZvaWQgaGV4YWdvbl9kZWJ1ZyhDUFVIZXhhZ29uU3Rh
+dGUgKmVudikNCj4gDQo+ICBzdGF0aWMgdm9pZCBoZXhhZ29uX2NwdV9zZXRfcGMoQ1BVU3RhdGUg
+KmNzLCB2YWRkciB2YWx1ZSkNCj4gIHsNCj4gLSAgICBIZXhhZ29uQ1BVICpjcHUgPSBIRVhBR09O
+X0NQVShjcyk7DQo+IC0gICAgQ1BVSGV4YWdvblN0YXRlICplbnYgPSAmY3B1LT5lbnY7DQo+IC0g
+ICAgZW52LT5ncHJbSEVYX1JFR19QQ10gPSB2YWx1ZTsNCj4gKyAgICBjcHVfZW52KGNzKS0+Z3By
+W0hFWF9SRUdfUENdID0gdmFsdWU7DQo+ICB9DQo+IA0KPiAgc3RhdGljIHZhZGRyIGhleGFnb25f
+Y3B1X2dldF9wYyhDUFVTdGF0ZSAqY3MpDQo+ICB7DQo+IC0gICAgSGV4YWdvbkNQVSAqY3B1ID0g
+SEVYQUdPTl9DUFUoY3MpOw0KPiAtICAgIENQVUhleGFnb25TdGF0ZSAqZW52ID0gJmNwdS0+ZW52
+Ow0KPiAtICAgIHJldHVybiBlbnYtPmdwcltIRVhfUkVHX1BDXTsNCj4gKyAgICByZXR1cm4gY3B1
+X2VudihjcyktPmdwcltIRVhfUkVHX1BDXTsNCj4gIH0NCj4gDQo+ICBzdGF0aWMgdm9pZCBoZXhh
+Z29uX2NwdV9zeW5jaHJvbml6ZV9mcm9tX3RiKENQVVN0YXRlICpjcywNCj4gICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY29uc3QgVHJhbnNsYXRpb25CbG9jayAq
+dGIpDQo+ICB7DQo+IC0gICAgSGV4YWdvbkNQVSAqY3B1ID0gSEVYQUdPTl9DUFUoY3MpOw0KPiAt
+ICAgIENQVUhleGFnb25TdGF0ZSAqZW52ID0gJmNwdS0+ZW52Ow0KPiAgICAgIHRjZ19kZWJ1Z19h
+c3NlcnQoIShjcy0+dGNnX2NmbGFncyAmIENGX1BDUkVMKSk7DQo+IC0gICAgZW52LT5ncHJbSEVY
+X1JFR19QQ10gPSB0Yi0+cGM7DQo+ICsgICAgY3B1X2VudihjcyktPmdwcltIRVhfUkVHX1BDXSA9
+IHRiLT5wYzsNCj4gIH0NCj4gDQo+ICBzdGF0aWMgYm9vbCBoZXhhZ29uX2NwdV9oYXNfd29yayhD
+UFVTdGF0ZSAqY3MpDQo+IEBAIC0yNzksMTggKzI3MCwxNCBAQCBzdGF0aWMgdm9pZCBoZXhhZ29u
+X3Jlc3RvcmVfc3RhdGVfdG9fb3BjKENQVVN0YXRlDQo+ICpjcywNCj4gICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgY29uc3QgVHJhbnNsYXRpb25CbG9jayAqdGIsDQo+
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnN0IHVpbnQ2NF90
+ICpkYXRhKQ0KPiAgew0KPiAtICAgIEhleGFnb25DUFUgKmNwdSA9IEhFWEFHT05fQ1BVKGNzKTsN
+Cj4gLSAgICBDUFVIZXhhZ29uU3RhdGUgKmVudiA9ICZjcHUtPmVudjsNCj4gLQ0KPiAtICAgIGVu
+di0+Z3ByW0hFWF9SRUdfUENdID0gZGF0YVswXTsNCj4gKyAgICBjcHVfZW52KGNzKS0+Z3ByW0hF
+WF9SRUdfUENdID0gZGF0YVswXTsNCj4gIH0NCj4gDQo+ICBzdGF0aWMgdm9pZCBoZXhhZ29uX2Nw
+dV9yZXNldF9ob2xkKE9iamVjdCAqb2JqKQ0KPiAgew0KPiAgICAgIENQVVN0YXRlICpjcyA9IENQ
+VShvYmopOw0KPiAtICAgIEhleGFnb25DUFUgKmNwdSA9IEhFWEFHT05fQ1BVKGNzKTsNCj4gICAg
+ICBIZXhhZ29uQ1BVQ2xhc3MgKm1jYyA9IEhFWEFHT05fQ1BVX0dFVF9DTEFTUyhvYmopOw0KPiAt
+ICAgIENQVUhleGFnb25TdGF0ZSAqZW52ID0gJmNwdS0+ZW52Ow0KPiArICAgIENQVUhleGFnb25T
+dGF0ZSAqZW52ID0gY3B1X2Vudihjcyk7DQo+IA0KPiAgICAgIGlmIChtY2MtPnBhcmVudF9waGFz
+ZXMuaG9sZCkgew0KPiAgICAgICAgICBtY2MtPnBhcmVudF9waGFzZXMuaG9sZChvYmopOw0KPiBk
+aWZmIC0tZ2l0IGEvdGFyZ2V0L2hleGFnb24vZ2Ric3R1Yi5jIGIvdGFyZ2V0L2hleGFnb24vZ2Ri
+c3R1Yi5jDQo+IGluZGV4IDU0ZDM3ZTAwNmUuLmY3NzNmOGVhNGYgMTAwNjQ0DQo+IC0tLSBhL3Rh
+cmdldC9oZXhhZ29uL2dkYnN0dWIuYw0KPiArKysgYi90YXJnZXQvaGV4YWdvbi9nZGJzdHViLmMN
+Cj4gQEAgLTIyLDggKzIyLDcgQEANCj4gDQo+ICBpbnQgaGV4YWdvbl9nZGJfcmVhZF9yZWdpc3Rl
+cihDUFVTdGF0ZSAqY3MsIEdCeXRlQXJyYXkgKm1lbV9idWYsIGludCBuKQ0KPiAgew0KPiAtICAg
+IEhleGFnb25DUFUgKmNwdSA9IEhFWEFHT05fQ1BVKGNzKTsNCj4gLSAgICBDUFVIZXhhZ29uU3Rh
+dGUgKmVudiA9ICZjcHUtPmVudjsNCj4gKyAgICBDUFVIZXhhZ29uU3RhdGUgKmVudiA9IGNwdV9l
+bnYoY3MpOw0KPiANCj4gICAgICBpZiAobiA9PSBIRVhfUkVHX1AzXzBfQUxJQVNFRCkgew0KPiAg
+ICAgICAgICB1aW50MzJfdCBwM18wID0gMDsNCj4gQEAgLTQyLDggKzQxLDcgQEAgaW50IGhleGFn
+b25fZ2RiX3JlYWRfcmVnaXN0ZXIoQ1BVU3RhdGUgKmNzLCBHQnl0ZUFycmF5DQo+ICptZW1fYnVm
+LCBpbnQgbikNCj4gDQo+ICBpbnQgaGV4YWdvbl9nZGJfd3JpdGVfcmVnaXN0ZXIoQ1BVU3RhdGUg
+KmNzLCB1aW50OF90ICptZW1fYnVmLCBpbnQgbikNCj4gIHsNCj4gLSAgICBIZXhhZ29uQ1BVICpj
+cHUgPSBIRVhBR09OX0NQVShjcyk7DQo+IC0gICAgQ1BVSGV4YWdvblN0YXRlICplbnYgPSAmY3B1
+LT5lbnY7DQo+ICsgICAgQ1BVSGV4YWdvblN0YXRlICplbnYgPSBjcHVfZW52KGNzKTsNCj4gDQo+
+ICAgICAgaWYgKG4gPT0gSEVYX1JFR19QM18wX0FMSUFTRUQpIHsNCj4gICAgICAgICAgdWludDMy
+X3QgcDNfMCA9IGxkdHVsX3AobWVtX2J1Zik7DQo+IC0tDQo+IDIuNDEuMA0KDQpSZXZpZXdlZC1i
+eTogQnJpYW4gQ2FpbiA8YmNhaW5AcXVpY2luYy5jb20+DQo=
 
