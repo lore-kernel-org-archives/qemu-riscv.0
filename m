@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF205C47258
-	for <qemu-riscv@archiver.kernel.org>; Wed, 31 Jan 2024 16:06:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48DB0C47258
+	for <qemu-riscv@archiver.kernel.org>; Wed, 31 Jan 2024 18:26:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rVD6J-0002HP-67; Wed, 31 Jan 2024 11:06:11 -0500
+	id 1rVFHo-0003Gi-9D; Wed, 31 Jan 2024 13:26:13 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rVD6I-0002H0-2v
- for qemu-riscv@nongnu.org; Wed, 31 Jan 2024 11:06:10 -0500
-Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534])
+ (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
+ id 1rVFHm-0003GQ-8r
+ for qemu-riscv@nongnu.org; Wed, 31 Jan 2024 13:26:10 -0500
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rVD6D-0002b8-4T
- for qemu-riscv@nongnu.org; Wed, 31 Jan 2024 11:06:09 -0500
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-5ce942efda5so3917412a12.2
- for <qemu-riscv@nongnu.org>; Wed, 31 Jan 2024 08:06:04 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
+ id 1rVFHk-0001Vm-BH
+ for qemu-riscv@nongnu.org; Wed, 31 Jan 2024 13:26:10 -0500
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-1d93f2c3701so237385ad.3
+ for <qemu-riscv@nongnu.org>; Wed, 31 Jan 2024 10:26:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1706717163; x=1707321963; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=JV2znCq2trRBW5sN8vrXnJKuDRvit0Tozob7TGfGBT4=;
- b=Ls0XEe9pLOs2gHTGyJoI17RAidAkjxWFRF4u1NgI24dGUJNgT13KoG1ep1Dqq4XMsW
- y350bZnTvlCbUdFNZiYxt8kNUmtGoIKyzCGcBW2NrWDfEjui3m4I4k5AdPqmQCfpqQGi
- tE73GL2c/hvJ5xChQHyWyrk22kpq3Kc8zR+4nLUcf3QAIs+xQClfEfBYCfCh1AOnAFDQ
- p3Ro+L77KvkZPO1N9iAQCLCTrKSonsh6McnbJHoiohcRXygXZ7q6LSBTf67Hi2HIGqSn
- kzceOiQ1DP4gZLvXRDcyd/rPHGrRafgtS/EPliVaLF90JyLq+od+pZxRLqXNzeiVRKTi
- 5w8A==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1706725566; x=1707330366;
+ darn=nongnu.org; 
+ h=to:from:cc:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:to:cc:subject:date:message-id:reply-to;
+ bh=xl8lOyhiLUDTPIVcSct4Ltd9837FiugwFKaP5eSD1yM=;
+ b=X36sTfDAVVnHWtX50Wb2R6d7RjJPyWS7mVgEj9sDZ3GAZvk2cTOY9bJRuzLSCTsJUo
+ 8ztWPQpYObVIZff80uLtlqUOE7swZ2rdPIJaVMJ0rh4jGoFC2PvWyEKLK+whZo592MQJ
+ fm087wVxcpQyZaxrmTvH6FePQe96Hw8GmbX0HDItIk2OCiZHuADa0pqx2n1hEe6iWqtA
+ LRQIjy14LzBAmJx3EwBu0DvKxbhXLm+Dv35VtracN4M/vd09IQtVWJkqAex7xYgdXVM+
+ XmCEoNob6BHcISRThwe8Co+O3DFd5MDJsv5CTFbfEIesHjpnulUpsLoTKrARlNbCGOzR
+ fkHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706717163; x=1707321963;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=JV2znCq2trRBW5sN8vrXnJKuDRvit0Tozob7TGfGBT4=;
- b=wiSsMVMkKdN5ountYNPyRkRZxVeJwbXegIKqSj3B5esMd7ySwbuHr/LhQ7mqZQ/hYw
- oaIlsJVaPvWAUDyv2JMymHR8AYmalCMcRTftoe49VLVlxbq3R2ZTtZnyMYU9q8ScFFT3
- hC5Ig2s2T6VprVwS0osfAR6Dw0t2jPKVPJe6TZVUizkntv7TVoQ/lybEizmGqABE3aw1
- fQnBdjjk86kiZqUtPL2wQcUezsG9bHMrNnEDMBta+0t/bAAYfF5dFZ11jS1dOVAhaZ2v
- AguVIqtInfwA4NEByvN8g5N+i8AbxuMQdIlIhOR3b1Sz0/p8W2G3CqRXXwZzXziAq0fq
- pA5Q==
-X-Gm-Message-State: AOJu0Yw7D3Ay3T3Bl4e/00j/W2tHu+LhtyPk2Av/kfL/Odxz/CSP1HsB
- 5SInalUhzb3KdJBgVT3q/7axAK2xMiBPhcCjDLpPkCox7zo9HP78trLBHFNP5pE=
-X-Google-Smtp-Source: AGHT+IHOCHxdRrnNNfCLdRgls2BDCeQT5TCv8TbsD//Vvrs2wvGwnmUqIfhsMTGWccoAauzLIuNMOg==
-X-Received: by 2002:a05:6a20:7a06:b0:19c:aba2:69e5 with SMTP id
- t6-20020a056a207a0600b0019caba269e5mr1894812pzh.45.1706717163202; 
- Wed, 31 Jan 2024 08:06:03 -0800 (PST)
-Received: from [192.168.68.110] ([177.94.15.159])
- by smtp.gmail.com with ESMTPSA id
- t12-20020a63460c000000b005d24e5ae4e3sm10645606pga.2.2024.01.31.08.06.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 31 Jan 2024 08:06:02 -0800 (PST)
-Message-ID: <04f277c2-fee2-44d5-a7a8-b5db6dca6b56@ventanamicro.com>
-Date: Wed, 31 Jan 2024 13:05:58 -0300
+ d=1e100.net; s=20230601; t=1706725566; x=1707330366;
+ h=to:from:cc:content-transfer-encoding:mime-version:message-id:date
+ :subject:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xl8lOyhiLUDTPIVcSct4Ltd9837FiugwFKaP5eSD1yM=;
+ b=p8MJ7eif5ojsUI8b3ejXxm8Gmq0893t9XZInC9OFVSIX9LogxXGgAdb2WGGXw2TQxc
+ M9Mprw9tAqCAjbEAufy7tA/msLn6gZ8Lo7E9Ml/qCsBZLEcjUC9r71cXTfTPKME7i/Xo
+ GtJ9M9QKFnh18mYH5zYA6UoIEVR4elUgbSbH98J6gfdb/2wK+lqNspI6gXyx4Ngjr7jp
+ pRVAup21MBfTnW6GKYwRZs93nQR/lKxx805YRnNFBbd9tCDVe9dubH60Zq5sEZ1W9IFR
+ gW1F3HIN+Tm13iuI5md9QWnQYQ60xKSYI3A6TL9jHQNNT3YPpMc6pxBrf5/IULB6YOKt
+ 9RFA==
+X-Gm-Message-State: AOJu0YwxWg6SNEe1S+AUYRphm26xSW1K52FoiptUC5ZEnFcRUu6/IUHP
+ +MV6ST00c1GAZ8veD6pbWSOmb3ga3kCzvogKEEY4ouNsLSCZftDsvTdPDcmZDAo=
+X-Google-Smtp-Source: AGHT+IH9XRp4PliDG4VbzcYWZ5osjMSIhTztVv1ivXGQ58iGHiM5di/MzXV1xl467UVW19DXXUhFQg==
+X-Received: by 2002:a17:903:2286:b0:1d9:1df6:6e23 with SMTP id
+ b6-20020a170903228600b001d91df66e23mr2040660plh.39.1706725566314; 
+ Wed, 31 Jan 2024 10:26:06 -0800 (PST)
+X-Forwarded-Encrypted: i=0;
+ AJvYcCXlA59mGIs/P9GLVPqZqFwa5XBGd8AKQPv/pxU5t843Qr96+EX4zKgVODvZxUVr2LubGPQKxc9OahwG2tlkho3cq3lt
+Received: from localhost ([12.44.203.122]) by smtp.gmail.com with ESMTPSA id
+ kr12-20020a170903080c00b001d8f82c61cdsm4740633plb.231.2024.01.31.10.26.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 31 Jan 2024 10:26:04 -0800 (PST)
+Subject: [PATCH] RISC-V: Report the QEMU vendor/arch IDs on virtual CPUs
+Date: Wed, 31 Jan 2024 10:24:30 -0800
+Message-ID: <20240131182430.20174-1-palmer@rivosinc.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: FCSR doesn't contain vxrm and vxsat
-Content-Language: en-US
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
-Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
- liwei1518@gmail.com, qemu-riscv@nongnu.org
-References: <20240130110945.486-1-zhiwei_liu@linux.alibaba.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240130110945.486-1-zhiwei_liu@linux.alibaba.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x534.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@rivosinc.com>
+From: Palmer Dabbelt <palmer@rivosinc.com>
+To: qemu-riscv@nongnu.org
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=palmer@rivosinc.com; helo=mail-pl1-x631.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,38 +91,101 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Right now we just report 0 for marchid/mvendorid in QEMU.  That's legal,
+but it's tricky for users that want to check if they're running on QEMU
+to do so.  This sets marchid to 42, which I've proposed as the QEMU
+architecture ID (mvendorid remains 0, just explicitly set, as that's how
+the ISA handles open source implementations).
 
+Link: https://github.com/riscv/riscv-isa-manual/pull/1213
+Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
+---
+ target/riscv/cpu.c          | 16 ++++++++++++++++
+ target/riscv/cpu_vendorid.h |  3 +++
+ 2 files changed, 19 insertions(+)
 
-On 1/30/24 08:09, LIU Zhiwei wrote:
-> vxrm and vxsat have been moved into a special register vcsr since
-> RVV v1.0. So remove them from FCSR for vector 1.0.
-> 
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-> ---
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 8cbfc7e781..1aef186f87 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -415,6 +415,9 @@ static void riscv_any_cpu_init(Object *obj)
+     cpu->cfg.ext_zicsr = true;
+     cpu->cfg.mmu = true;
+     cpu->cfg.pmp = true;
++
++    cpu->cfg.mvendorid = QEMU_MVENDORID;
++    cpu->cfg.marchid = QEMU_MARCHID;
+ }
+ 
+ static void riscv_max_cpu_init(Object *obj)
+@@ -432,6 +435,8 @@ static void riscv_max_cpu_init(Object *obj)
+     set_satp_mode_max_supported(RISCV_CPU(obj), mlx == MXL_RV32 ?
+                                 VM_1_10_SV32 : VM_1_10_SV57);
+ #endif
++    cpu->cfg.mvendorid = QEMU_MVENDORID;
++    cpu->cfg.marchid = QEMU_MARCHID;
+ }
+ 
+ #if defined(TARGET_RISCV64)
+@@ -445,6 +450,8 @@ static void rv64_base_cpu_init(Object *obj)
+ #ifndef CONFIG_USER_ONLY
+     set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV57);
+ #endif
++    cpu->cfg.mvendorid = QEMU_MVENDORID;
++    cpu->cfg.marchid = QEMU_MARCHID;
+ }
+ 
+ static void rv64_sifive_u_cpu_init(Object *obj)
+@@ -569,6 +576,8 @@ static void rv128_base_cpu_init(Object *obj)
+ #ifndef CONFIG_USER_ONLY
+     set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV57);
+ #endif
++    cpu->cfg.mvendorid = QEMU_MVENDORID;
++    cpu->cfg.marchid = QEMU_MARCHID;
+ }
+ 
+ static void rv64i_bare_cpu_init(Object *obj)
+@@ -591,6 +600,8 @@ static void rv64i_bare_cpu_init(Object *obj)
+ #ifndef CONFIG_USER_ONLY
+     set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV64);
+ #endif
++    cpu->cfg.mvendorid = QEMU_MVENDORID;
++    cpu->cfg.marchid = QEMU_MARCHID;
+ }
+ #else
+ static void rv32_base_cpu_init(Object *obj)
+@@ -603,6 +614,8 @@ static void rv32_base_cpu_init(Object *obj)
+ #ifndef CONFIG_USER_ONLY
+     set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV32);
+ #endif
++    cpu->cfg.mvendorid = QEMU_MVENDORID;
++    cpu->cfg.marchid = QEMU_MARCHID;
+ }
+ 
+ static void rv32_sifive_u_cpu_init(Object *obj)
+@@ -672,6 +685,9 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)
+     cpu->cfg.ext_zifencei = true;
+     cpu->cfg.ext_zicsr = true;
+     cpu->cfg.pmp = true;
++
++    cpu->cfg.mvendorid = QEMU_MVENDORID;
++    cpu->cfg.marchid = QEMU_MARCHID;
+ }
+ #endif
+ 
+diff --git a/target/riscv/cpu_vendorid.h b/target/riscv/cpu_vendorid.h
+index 96b6b9c2cb..486832cd53 100644
+--- a/target/riscv/cpu_vendorid.h
++++ b/target/riscv/cpu_vendorid.h
+@@ -7,4 +7,7 @@
+ #define VEYRON_V1_MIMPID        0x111
+ #define VEYRON_V1_MVENDORID     0x61f
+ 
++#define QEMU_VIRT_MVENDORID     0
++#define QEMU_VIRT_MARCHID       42
++
+ #endif /*  TARGET_RISCV_CPU_VENDORID_H */
+-- 
+2.43.0
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
-
->   target/riscv/cpu_bits.h | 8 --------
->   1 file changed, 8 deletions(-)
-> 
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index ebd7917d49..e116f6c252 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -32,14 +32,6 @@
->   #define FSR_NXA             (FPEXC_NX << FSR_AEXC_SHIFT)
->   #define FSR_AEXC            (FSR_NVA | FSR_OFA | FSR_UFA | FSR_DZA | FSR_NXA)
->   
-> -/* Vector Fixed-Point round model */
-> -#define FSR_VXRM_SHIFT      9
-> -#define FSR_VXRM            (0x3 << FSR_VXRM_SHIFT)
-> -
-> -/* Vector Fixed-Point saturation flag */
-> -#define FSR_VXSAT_SHIFT     8
-> -#define FSR_VXSAT           (0x1 << FSR_VXSAT_SHIFT)
-> -
->   /* Control and Status Registers */
->   
->   /* User Trap Setup */
 
