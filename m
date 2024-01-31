@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D64B3C47258
-	for <qemu-riscv@archiver.kernel.org>; Wed, 31 Jan 2024 12:01:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E35BDC47258
+	for <qemu-riscv@archiver.kernel.org>; Wed, 31 Jan 2024 12:14:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rV9Hy-00058R-5s; Wed, 31 Jan 2024 07:01:58 -0500
+	id 1rV9Tu-0004t9-J8; Wed, 31 Jan 2024 07:14:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rV9Hp-0004wr-GM
- for qemu-riscv@nongnu.org; Wed, 31 Jan 2024 07:01:50 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rV9Ts-0004r4-9f
+ for qemu-riscv@nongnu.org; Wed, 31 Jan 2024 07:14:16 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rV9Hn-00052S-Rx
- for qemu-riscv@nongnu.org; Wed, 31 Jan 2024 07:01:49 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rV9Tq-0008Ae-IT
+ for qemu-riscv@nongnu.org; Wed, 31 Jan 2024 07:14:16 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1706702506;
+ s=mimecast20190719; t=1706703253;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=pMYLE184Js9ZDRow5gx15LL1mWvff0WtPo4I9dm+584=;
- b=VLMWFw6V5gd/s/4Tc1RlSlCY8Pqbn4r+JCasdv1AmbFdX4s5LPnvhu97Ja1zjGHuijUxlR
- HUr2S3VL3jXhBiYBaVRYgLxs7LyIK2HYeTwAvL15nqc14GXPHxMJW83KfT5Kq9Mq8RippU
- jNG0p122A3XDBNLk6eHCniZ/R8VLDmE=
-Received: from mail-ot1-f70.google.com (mail-ot1-f70.google.com
- [209.85.210.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=ixbf8MQxGmVaSKrYxOhBY7rmtk7uk2A4FZyVUvl/PXo=;
+ b=MJiu6gx92Ns92NjMd34rnAbGy1geoJpmuTHQyAYJyGhl174PcYUOF/Gmt7u4MZpdS8jO2U
+ gAMPeE+jblzVcLZ26cXlTAUJZdNMTiuKe264govU4oatUKaPnvh2K7YGNm7ms6YV5ECXJX
+ 7XuKJQjhlAIa0PJu6hyjHT6ImxzVd4w=
+Received: from mail-yb1-f198.google.com (mail-yb1-f198.google.com
+ [209.85.219.198]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-263-K6urwT7gOkCvmvi8duQm6g-1; Wed, 31 Jan 2024 07:01:45 -0500
-X-MC-Unique: K6urwT7gOkCvmvi8duQm6g-1
-Received: by mail-ot1-f70.google.com with SMTP id
- 46e09a7af769-6e1157f9de2so3988684a34.2
- for <qemu-riscv@nongnu.org>; Wed, 31 Jan 2024 04:01:45 -0800 (PST)
+ us-mta-663-qQpskzGvN42HoGrjl9uScw-1; Wed, 31 Jan 2024 07:14:12 -0500
+X-MC-Unique: qQpskzGvN42HoGrjl9uScw-1
+Received: by mail-yb1-f198.google.com with SMTP id
+ 3f1490d57ef6-dc64f63d768so9316285276.2
+ for <qemu-riscv@nongnu.org>; Wed, 31 Jan 2024 04:14:11 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706702504; x=1707307304;
+ d=1e100.net; s=20230601; t=1706703251; x=1707308051;
  h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
  :to:content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=pMYLE184Js9ZDRow5gx15LL1mWvff0WtPo4I9dm+584=;
- b=AVgIbYxEUa8pi02XAE7630wmb4z0gRX0aH/LGx9CBmqEpsRd9PNGpHIJxKHSNj8NkD
- kUVQ0mhAQcKIB4vpGTXw8/cz7QpEdeQfEVJATW7AYOMmDYSmQaxOC00ffvdj9SAiPFk7
- 9FtmgQpEsnnlbVeTabcuMkIUU8RK04KGEQzVGsVgsnn0xfqSo4Il8CJFN09KdUr6Y1j7
- v3/L32pFSoYaiijKFl/uZTQF9ls10Y2nLy2iKEdpKMv68zAaZVHO+VfgscItyGMdejIW
- J34WrvW2apa3cXEN42ep8MeQEWD1EhO45OCRJT6WCbu8Hj5ow7FUwubGVZJEG0z8xwGw
- 1+Kg==
-X-Gm-Message-State: AOJu0YyOt1FKRj16vW5rT6YJviHgCm9wsWBH5T93vb6ROK0JUFjEeJBg
- vRhpbX44JRbEgTi8dCUdDfxxYMrmM8hSiRyMJC4ewtKt08IsNABLeqVUd9npsWkGoKXCCDZcNJL
- wvDwaRoekpK9mElgWxsd5K8o4PkLOZeFtZzuaZ+KGZkPdw6T0PWf8
-X-Received: by 2002:a05:6830:2645:b0:6dd:f020:4871 with SMTP id
- f5-20020a056830264500b006ddf0204871mr1421321otu.75.1706702504488; 
- Wed, 31 Jan 2024 04:01:44 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFCY6zSrmHpxpNeLpbxc/fUn9bljRLzBGfhtjUgQS14XzochVW0pmTdToHBrAQXYe+/xjB6IQ==
-X-Received: by 2002:a05:6830:2645:b0:6dd:f020:4871 with SMTP id
- f5-20020a056830264500b006ddf0204871mr1421243otu.75.1706702504072; 
- Wed, 31 Jan 2024 04:01:44 -0800 (PST)
+ bh=ixbf8MQxGmVaSKrYxOhBY7rmtk7uk2A4FZyVUvl/PXo=;
+ b=u+psjaRs5ycFg+toBj/1QHxQyBa8iZOu8GsId+VNeIdGeGC818XOYcwmk0rSli9/mQ
+ YbBpI/k/4Yn55W6pxMcoRDmtdv2LgCHkUA3RMlUxHb9xai8rWELy8LA8sFV95I/hrNTC
+ D1uMxKWpwVFDIYYI3HfRYxooKGYcS923pVngEbl8qmwVU7juMHhcN4lc3SOqU1QOzVxh
+ 017I04jRnt0eciXAfrVm5dcwpAPla+ApJ7nbNr699SeES9zkhcMnVMqhyVMuUg4IDUOy
+ FgDA0eXk6LnoOuSN+Bpf5uexkHaKKiCLBJMl1RR8yXLIcINbJeULSGHBqeQkUtBE2Ow/
+ wPoA==
+X-Gm-Message-State: AOJu0YzkR+caDM4rlkFRTB25crPHMRgOXY44wbreP/oG5UvN0SNETWdO
+ 4DwZlrJaWm8UHRJZsjCzfAqdh9kxxDowSP9wyUlq9sWc8AlwJX9i0up3ssl+Dw0xwH5YgaHRst7
+ Ph8dUItvPrE4UVUwOALDNpYOnszI1FMYq4BeE7JBGLsFTws0EVRFk
+X-Received: by 2002:a25:b2a2:0:b0:dc6:adf5:5a8e with SMTP id
+ k34-20020a25b2a2000000b00dc6adf55a8emr1337567ybj.32.1706703251248; 
+ Wed, 31 Jan 2024 04:14:11 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGQIDKdu4hdad6Ung4+YYTCZCL6FnUQ2u7pJow0XJRkTbHAmsO6w+F7VaiPMp0IjGcVskJxcg==
+X-Received: by 2002:a25:b2a2:0:b0:dc6:adf5:5a8e with SMTP id
+ k34-20020a25b2a2000000b00dc6adf55a8emr1337519ybj.32.1706703250875; 
+ Wed, 31 Jan 2024 04:14:10 -0800 (PST)
 Received: from [192.168.0.9] (ip-109-43-177-196.web.vodafone.de.
  [109.43.177.196]) by smtp.gmail.com with ESMTPSA id
- mf13-20020a0562145d8d00b0068681793468sm66353qvb.36.2024.01.31.04.01.31
+ ph15-20020a0562144a4f00b0068c50dec857sm2740939qvb.128.2024.01.31.04.13.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 31 Jan 2024 04:01:43 -0800 (PST)
-Message-ID: <2afca706-dbc2-4d28-831f-3f556699fa9e@redhat.com>
-Date: Wed, 31 Jan 2024 13:01:31 +0100
+ Wed, 31 Jan 2024 04:14:10 -0800 (PST)
+Message-ID: <d3f5d8a7-a224-4269-9f17-5f411266ba64@redhat.com>
+Date: Wed, 31 Jan 2024 13:13:55 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 39/47] hw/openrisc/openrisc_sim: use
- qemu_create_nic_device()
+Subject: Re: [PATCH v4 29/47] hw/arm/stellaris: use qemu_find_nic_info()
 To: David Woodhouse <dwmw2@infradead.org>, qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
  Beniamino Galvani <b.galvani@gmail.com>,
@@ -112,10 +111,11 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Magnus Damm <magnus.damm@gmail.com>, Artyom Tarasenko <atar4qemu@gmail.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
  Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
- Max Filippov <jcmvbkbc@gmail.com>, qemu-riscv@nongnu.org,
+ Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
+ qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  David Woodhouse <dwmw@amazon.co.uk>
 References: <20240126173228.394202-1-dwmw2@infradead.org>
- <20240126173228.394202-40-dwmw2@infradead.org>
+ <20240126173228.394202-30-dwmw2@infradead.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -159,7 +159,7 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20240126173228.394202-40-dwmw2@infradead.org>
+In-Reply-To: <20240126173228.394202-30-dwmw2@infradead.org>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
@@ -167,14 +167,14 @@ Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 14
-X-Spam_score: 1.4
-X-Spam_bar: +
-X-Spam_report: (1.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.292,
+X-Spam_score_int: 0
+X-Spam_score: -0.1
+X-Spam_bar: /
+X-Spam_report: (-0.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.292,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_SBL_CSS=3.335, RCVD_IN_SORBS_WEB=1.5, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+ RCVD_IN_SBL_CSS=3.335, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -193,54 +193,82 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On 26/01/2024 18.25, David Woodhouse wrote:
 > From: David Woodhouse <dwmw@amazon.co.uk>
 > 
+> Rather than just using qemu_configure_nic_device(), populate the MAC
+> address in the system-registers device by peeking at the NICInfo before
+> it's assigned to the device.
+> 
+> Generate the MAC address early, if there is no matching -nic option.
+> Otherwise the MAC address wouldn't be generated until net_client_init1()
+> runs.
+> 
 > Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 > ---
->   hw/openrisc/openrisc_sim.c | 18 +++++++++---------
->   1 file changed, 9 insertions(+), 9 deletions(-)
+>   hw/arm/stellaris.c | 30 ++++++++++++++++++++++--------
+>   1 file changed, 22 insertions(+), 8 deletions(-)
 > 
-> diff --git a/hw/openrisc/openrisc_sim.c b/hw/openrisc/openrisc_sim.c
-> index 35da123aef..bffd6f721f 100644
-> --- a/hw/openrisc/openrisc_sim.c
-> +++ b/hw/openrisc/openrisc_sim.c
-> @@ -170,7 +170,7 @@ static void openrisc_create_fdt(Or1ksimState *state,
->   
->   static void openrisc_sim_net_init(Or1ksimState *state, hwaddr base, hwaddr size,
->                                     int num_cpus, OpenRISCCPU *cpus[],
-> -                                  int irq_pin, NICInfo *nd)
-> +                                  int irq_pin)
->   {
->       void *fdt = state->fdt;
->       DeviceState *dev;
-> @@ -178,8 +178,10 @@ static void openrisc_sim_net_init(Or1ksimState *state, hwaddr base, hwaddr size,
->       char *nodename;
+> diff --git a/hw/arm/stellaris.c b/hw/arm/stellaris.c
+> index d18b1144af..34c5a86ac2 100644
+> --- a/hw/arm/stellaris.c
+> +++ b/hw/arm/stellaris.c
+> @@ -1028,7 +1028,8 @@ static void stellaris_init(MachineState *ms, stellaris_board_info *board)
+>       DeviceState *ssys_dev;
 >       int i;
+>       int j;
+> -    const uint8_t *macaddr;
+> +    NICInfo *nd;
+> +    MACAddr mac;
 >   
-> -    dev = qdev_new("open_eth");
-> -    qdev_set_nic_properties(dev, nd);
-> +    dev = qemu_create_nic_device("open_eth", true, NULL);
-> +    if (!dev) {
-> +        return;
+>       MemoryRegion *sram = g_new(MemoryRegion, 1);
+>       MemoryRegion *flash = g_new(MemoryRegion, 1);
+> @@ -1051,12 +1052,22 @@ static void stellaris_init(MachineState *ms, stellaris_board_info *board)
+>        * need its sysclk output.
+>        */
+>       ssys_dev = qdev_new(TYPE_STELLARIS_SYS);
+> -    /* Most devices come preprogrammed with a MAC address in the user data. */
+> -    macaddr = nd_table[0].macaddr.a;
+> +
+> +    /*
+> +     * Most devices come preprogrammed with a MAC address in the user data.
+> +     * Generate a MAC address now, if there isn't a matching -nic for it.
+> +     */
+> +    nd = qemu_find_nic_info("stellaris_enet", true, "stellaris");
+> +    if (nd) {
+> +        memcpy(mac.a, nd->macaddr.a, sizeof(mac.a));
+> +    } else {
+> +        qemu_macaddr_default_if_unset(&mac);
 > +    }
+> +
+>       qdev_prop_set_uint32(ssys_dev, "user0",
+> -                         macaddr[0] | (macaddr[1] << 8) | (macaddr[2] << 16));
+> +                         mac.a[0] | (mac.a[1] << 8) | (mac.a[2] << 16));
+>       qdev_prop_set_uint32(ssys_dev, "user1",
+> -                         macaddr[3] | (macaddr[4] << 8) | (macaddr[5] << 16));
+> +                         mac.a[3] | (mac.a[4] << 8) | (mac.a[5] << 16));
+
+Out of scope of your patch, but I wonder why we didn't use 
+qdev_prop_set_macaddr() with an according MAC address property for this 
+device...?
+
+>       qdev_prop_set_uint32(ssys_dev, "did0", board->did0);
+>       qdev_prop_set_uint32(ssys_dev, "did1", board->did1);
+>       qdev_prop_set_uint32(ssys_dev, "dc0", board->dc0);
+> @@ -1269,10 +1280,13 @@ static void stellaris_init(MachineState *ms, stellaris_board_info *board)
+>       if (board->dc4 & (1 << 28)) {
+>           DeviceState *enet;
 >   
->       s = SYS_BUS_DEVICE(dev);
->       sysbus_realize_and_unref(s, &error_fatal);
-> @@ -313,12 +315,10 @@ static void openrisc_sim_init(MachineState *machine)
->       openrisc_create_fdt(state, or1ksim_memmap, smp_cpus, machine->ram_size,
->                           machine->kernel_cmdline);
->   
-> -    if (nd_table[0].used) {
-> -        openrisc_sim_net_init(state, or1ksim_memmap[OR1KSIM_ETHOC].base,
-> -                              or1ksim_memmap[OR1KSIM_ETHOC].size,
-> -                              smp_cpus, cpus,
-> -                              OR1KSIM_ETHOC_IRQ, nd_table);
-> -    }
-> +    openrisc_sim_net_init(state, or1ksim_memmap[OR1KSIM_ETHOC].base,
-> +                          or1ksim_memmap[OR1KSIM_ETHOC].size,
-> +                          smp_cpus, cpus,
-> +                          OR1KSIM_ETHOC_IRQ);
->   
->       if (smp_cpus > 1) {
->           openrisc_sim_ompic_init(state, or1ksim_memmap[OR1KSIM_OMPIC].base,
+> -        qemu_check_nic_model(&nd_table[0], "stellaris");
+> -
+>           enet = qdev_new("stellaris_enet");
+> -        qdev_set_nic_properties(enet, &nd_table[0]);
+> +        if (nd) {
+> +            qdev_set_nic_properties(enet, nd);
+> +        } else {
+> +            qdev_prop_set_macaddr(enet, "mac", mac.a);
+> +        }
+> +
+>           sysbus_realize_and_unref(SYS_BUS_DEVICE(enet), &error_fatal);
+>           sysbus_mmio_map(SYS_BUS_DEVICE(enet), 0, 0x40048000);
+>           sysbus_connect_irq(SYS_BUS_DEVICE(enet), 0, qdev_get_gpio_in(nvic, 42));
 
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 
