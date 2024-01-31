@@ -4,67 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52EC6C47258
-	for <qemu-riscv@archiver.kernel.org>; Wed, 31 Jan 2024 15:57:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF205C47258
+	for <qemu-riscv@archiver.kernel.org>; Wed, 31 Jan 2024 16:06:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rVCx9-0006FB-3G; Wed, 31 Jan 2024 10:56:43 -0500
+	id 1rVD6J-0002HP-67; Wed, 31 Jan 2024 11:06:11 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jonathan.cameron@huawei.com>)
- id 1rVCwu-00068p-1s; Wed, 31 Jan 2024 10:56:29 -0500
-Received: from frasgout.his.huawei.com ([185.176.79.56])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jonathan.cameron@huawei.com>)
- id 1rVCwr-0008Tk-He; Wed, 31 Jan 2024 10:56:27 -0500
-Received: from mail.maildlp.com (unknown [172.18.186.231])
- by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4TQ64v0Yf9z6JB0F;
- Wed, 31 Jan 2024 23:53:03 +0800 (CST)
-Received: from lhrpeml500005.china.huawei.com (unknown [7.191.163.240])
- by mail.maildlp.com (Postfix) with ESMTPS id 27C1D1408FF;
- Wed, 31 Jan 2024 23:56:23 +0800 (CST)
-Received: from localhost (10.202.227.76) by lhrpeml500005.china.huawei.com
- (7.191.163.240) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 31 Jan
- 2024 15:56:22 +0000
-Date: Wed, 31 Jan 2024 15:56:21 +0000
-To: JeeHeng Sia <jeeheng.sia@starfivetech.com>
-CC: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-arm@nongnu.org"
- <qemu-arm@nongnu.org>, "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "mst@redhat.com" <mst@redhat.com>, "imammedo@redhat.com"
- <imammedo@redhat.com>, "anisinha@redhat.com" <anisinha@redhat.com>,
- "shannon.zhaosl@gmail.com" <shannon.zhaosl@gmail.com>,
- "peter.maydell@linaro.org" <peter.maydell@linaro.org>,
- "sunilvl@ventanamicro.com" <sunilvl@ventanamicro.com>, "palmer@dabbelt.com"
- <palmer@dabbelt.com>, "alistair.francis@wdc.com" <alistair.francis@wdc.com>,
- "bin.meng@windriver.com" <bin.meng@windriver.com>, "liwei1518@gmail.com"
- <liwei1518@gmail.com>, "dbarboza@ventanamicro.com"
- <dbarboza@ventanamicro.com>, "zhiwei_liu@linux.alibaba.com"
- <zhiwei_liu@linux.alibaba.com>
-Subject: Re: [RFC v1 3/3] hw/arm/virt-acpi-build.c: Enable CPU cache topology
-Message-ID: <20240131155621.000015d1@Huawei.com>
-In-Reply-To: <BJSPR01MB056164DC332463349ACD6F3A9C7DA@BJSPR01MB0561.CHNPR01.prod.partner.outlook.cn>
-References: <20240129081423.116615-1-jeeheng.sia@starfivetech.com>
- <20240129081423.116615-4-jeeheng.sia@starfivetech.com>
- <20240129110823.000076df@Huawei.com>
- <BJSPR01MB056164DC332463349ACD6F3A9C7DA@BJSPR01MB0561.CHNPR01.prod.partner.outlook.cn>
-Organization: Huawei Technologies Research and Development (UK) Ltd.
-X-Mailer: Claws Mail 4.1.0 (GTK 3.24.33; x86_64-w64-mingw32)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rVD6I-0002H0-2v
+ for qemu-riscv@nongnu.org; Wed, 31 Jan 2024 11:06:10 -0500
+Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rVD6D-0002b8-4T
+ for qemu-riscv@nongnu.org; Wed, 31 Jan 2024 11:06:09 -0500
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-5ce942efda5so3917412a12.2
+ for <qemu-riscv@nongnu.org>; Wed, 31 Jan 2024 08:06:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1706717163; x=1707321963; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=JV2znCq2trRBW5sN8vrXnJKuDRvit0Tozob7TGfGBT4=;
+ b=Ls0XEe9pLOs2gHTGyJoI17RAidAkjxWFRF4u1NgI24dGUJNgT13KoG1ep1Dqq4XMsW
+ y350bZnTvlCbUdFNZiYxt8kNUmtGoIKyzCGcBW2NrWDfEjui3m4I4k5AdPqmQCfpqQGi
+ tE73GL2c/hvJ5xChQHyWyrk22kpq3Kc8zR+4nLUcf3QAIs+xQClfEfBYCfCh1AOnAFDQ
+ p3Ro+L77KvkZPO1N9iAQCLCTrKSonsh6McnbJHoiohcRXygXZ7q6LSBTf67Hi2HIGqSn
+ kzceOiQ1DP4gZLvXRDcyd/rPHGrRafgtS/EPliVaLF90JyLq+od+pZxRLqXNzeiVRKTi
+ 5w8A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706717163; x=1707321963;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=JV2znCq2trRBW5sN8vrXnJKuDRvit0Tozob7TGfGBT4=;
+ b=wiSsMVMkKdN5ountYNPyRkRZxVeJwbXegIKqSj3B5esMd7ySwbuHr/LhQ7mqZQ/hYw
+ oaIlsJVaPvWAUDyv2JMymHR8AYmalCMcRTftoe49VLVlxbq3R2ZTtZnyMYU9q8ScFFT3
+ hC5Ig2s2T6VprVwS0osfAR6Dw0t2jPKVPJe6TZVUizkntv7TVoQ/lybEizmGqABE3aw1
+ fQnBdjjk86kiZqUtPL2wQcUezsG9bHMrNnEDMBta+0t/bAAYfF5dFZ11jS1dOVAhaZ2v
+ AguVIqtInfwA4NEByvN8g5N+i8AbxuMQdIlIhOR3b1Sz0/p8W2G3CqRXXwZzXziAq0fq
+ pA5Q==
+X-Gm-Message-State: AOJu0Yw7D3Ay3T3Bl4e/00j/W2tHu+LhtyPk2Av/kfL/Odxz/CSP1HsB
+ 5SInalUhzb3KdJBgVT3q/7axAK2xMiBPhcCjDLpPkCox7zo9HP78trLBHFNP5pE=
+X-Google-Smtp-Source: AGHT+IHOCHxdRrnNNfCLdRgls2BDCeQT5TCv8TbsD//Vvrs2wvGwnmUqIfhsMTGWccoAauzLIuNMOg==
+X-Received: by 2002:a05:6a20:7a06:b0:19c:aba2:69e5 with SMTP id
+ t6-20020a056a207a0600b0019caba269e5mr1894812pzh.45.1706717163202; 
+ Wed, 31 Jan 2024 08:06:03 -0800 (PST)
+Received: from [192.168.68.110] ([177.94.15.159])
+ by smtp.gmail.com with ESMTPSA id
+ t12-20020a63460c000000b005d24e5ae4e3sm10645606pga.2.2024.01.31.08.06.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 31 Jan 2024 08:06:02 -0800 (PST)
+Message-ID: <04f277c2-fee2-44d5-a7a8-b5db6dca6b56@ventanamicro.com>
+Date: Wed, 31 Jan 2024 13:05:58 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset="US-ASCII"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] target/riscv: FCSR doesn't contain vxrm and vxsat
+Content-Language: en-US
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
+Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
+ liwei1518@gmail.com, qemu-riscv@nongnu.org
+References: <20240130110945.486-1-zhiwei_liu@linux.alibaba.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20240130110945.486-1-zhiwei_liu@linux.alibaba.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.202.227.76]
-X-ClientProxiedBy: lhrpeml100002.china.huawei.com (7.191.160.241) To
- lhrpeml500005.china.huawei.com (7.191.163.240)
-Received-SPF: pass client-ip=185.176.79.56;
- envelope-from=jonathan.cameron@huawei.com; helo=frasgout.his.huawei.com
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x534.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -77,134 +93,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Jonathan Cameron <Jonathan.Cameron@Huawei.com>
-From:  Jonathan Cameron via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, 30 Jan 2024 05:03:15 +0000
-JeeHeng Sia <jeeheng.sia@starfivetech.com> wrote:
-
-> > -----Original Message-----
-> > From: Jonathan Cameron <Jonathan.Cameron@Huawei.com>
-> > Sent: Monday, January 29, 2024 7:08 PM
-> > To: JeeHeng Sia <jeeheng.sia@starfivetech.com>
-> > Cc: qemu-devel@nongnu.org; qemu-arm@nongnu.org; qemu-riscv@nongnu.org; mst@redhat.com; imammedo@redhat.com;
-> > anisinha@redhat.com; shannon.zhaosl@gmail.com; peter.maydell@linaro.org; sunilvl@ventanamicro.com; palmer@dabbelt.com;
-> > alistair.francis@wdc.com; bin.meng@windriver.com; liwei1518@gmail.com; dbarboza@ventanamicro.com;
-> > zhiwei_liu@linux.alibaba.com
-> > Subject: Re: [RFC v1 3/3] hw/arm/virt-acpi-build.c: Enable CPU cache topology
-> > 
-> > On Mon, 29 Jan 2024 00:14:23 -0800
-> > Sia Jee Heng <jeeheng.sia@starfivetech.com> wrote:
-> >   
-> > > Introduced a 3-layer cache for the ARM virtual machine.
-> > >
-> > > Signed-off-by: Sia Jee Heng <jeeheng.sia@starfivetech.com>  
-> > 
-> > There are a bunch of CPU registers that also need updating to reflect the
-> > described cache.
-> > https://lore.kernel.org/qemu-devel/20230808115713.2613-3-Jonathan.Cameron@huawei.com/
-> > It's called HACK for a reason ;)
-> > But there is some discussion about this issue in the thread.
-> > 
-> > The l1 etc also needs to reflect the CPU model.  This stuff needs to match.
-> > Wrong information being passed to a VM is probably worse than no information.
-> > 
-> > Whilst I plan to circle back to the MPAM support (perhaps next month) there
-> > is a lot more to be done here before we have useful cache descriptions for
-> > guests.  
-> Thanks for the info. I will spend time to look into.
-> > 
-> > Jonathan
-> >   
-> > > ---
-> > >  hw/arm/virt-acpi-build.c | 44 +++++++++++++++++++++++++++++++++++++++-
-> > >  1 file changed, 43 insertions(+), 1 deletion(-)
-> > >
-> > > diff --git a/hw/arm/virt-acpi-build.c b/hw/arm/virt-acpi-build.c
-> > > index 17aeec7a6f..c57067cd63 100644
-> > > --- a/hw/arm/virt-acpi-build.c
-> > > +++ b/hw/arm/virt-acpi-build.c
-> > > @@ -426,6 +426,48 @@ build_iort(GArray *table_data, BIOSLinker *linker, VirtMachineState *vms)
-> > >      g_array_free(its_idmaps, true);
-> > >  }
-> > >
-> > > +static void pptt_setup(GArray *table_data, BIOSLinker *linker, MachineState *ms,
-> > > +                       const char *oem_id, const char *oem_table_id)
-> > > +{
-> > > +    CPUCaches default_cache_info = {
-> > > +        .l1d_cache = &(CPUCacheInfo) {
-> > > +            .type = DATA_CACHE,
-> > > +            .size = 64 * KiB,
-> > > +            .line_size = 64,
-> > > +            .associativity = 4,
-> > > +            .sets = 256,
-> > > +            .attributes = 0x02,
-> > > +        },
-> > > +        .l1i_cache = &(CPUCacheInfo) {
-> > > +            .type = INSTRUCTION_CACHE,
-> > > +            .size = 64 * KiB,
-> > > +            .line_size = 64,
-> > > +            .associativity = 4,
-> > > +            .sets = 256,
-> > > +            .attributes = 0x04,  
-> > 
-> > This is the duplication I commented on in patch 1.
-> > The bit set there is the one to indicate it's an instruction
-> > cache and we have type doing that as well.  
-> But this gives a great readability, no?
-
-Not really no. If .type and attributes end up out of agreement with each
-other it will be non obvious.
-
-You could do 
-		.attributes {
-			.type = INSTRUCTION_CACHE,
-			.other things ...
-		}
-
-if you want to list the type clearly and still maintain the info that
-this ends up in attributes.
 
 
-> > 
-> >   
-> > > +        },
-> > > +        .l2_cache = &(CPUCacheInfo) {
-> > > +            .type = UNIFIED_CACHE,
-> > > +            .size = 2048 * KiB,
-> > > +            .line_size = 64,
-> > > +            .associativity = 8,
-> > > +            .sets = 4096,
-> > > +            .attributes = 0x0a,
-> > > +        },
-> > > +        .l3_cache = &(CPUCacheInfo) {
-> > > +            .type = UNIFIED_CACHE,
-> > > +            .size = 4096 * KiB,
-> > > +            .line_size = 64,
-> > > +            .associativity = 8,
-> > > +            .sets = 8192,
-> > > +            .attributes = 0x0a,
-> > > +        },
-> > > +    };
-> > > +
-> > > +    build_pptt(table_data, linker, ms, oem_id, oem_table_id,
-> > > +               &default_cache_info);
-> > > +}
-> > > +
-> > >  /*
-> > >   * Serial Port Console Redirection Table (SPCR)
-> > >   * Rev: 1.07
-> > > @@ -912,7 +954,7 @@ void virt_acpi_build(VirtMachineState *vms, AcpiBuildTables *tables)
-> > >
-> > >      if (!vmc->no_cpu_topology) {
-> > >          acpi_add_table(table_offsets, tables_blob);
-> > > -        build_pptt(tables_blob, tables->linker, ms,
-> > > +        pptt_setup(tables_blob, tables->linker, ms,
-> > >                     vms->oem_id, vms->oem_table_id);
-> > >      }
-> > >  
+On 1/30/24 08:09, LIU Zhiwei wrote:
+> vxrm and vxsat have been moved into a special register vcsr since
+> RVV v1.0. So remove them from FCSR for vector 1.0.
 > 
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> ---
 
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+
+>   target/riscv/cpu_bits.h | 8 --------
+>   1 file changed, 8 deletions(-)
+> 
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index ebd7917d49..e116f6c252 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -32,14 +32,6 @@
+>   #define FSR_NXA             (FPEXC_NX << FSR_AEXC_SHIFT)
+>   #define FSR_AEXC            (FSR_NVA | FSR_OFA | FSR_UFA | FSR_DZA | FSR_NXA)
+>   
+> -/* Vector Fixed-Point round model */
+> -#define FSR_VXRM_SHIFT      9
+> -#define FSR_VXRM            (0x3 << FSR_VXRM_SHIFT)
+> -
+> -/* Vector Fixed-Point saturation flag */
+> -#define FSR_VXSAT_SHIFT     8
+> -#define FSR_VXSAT           (0x1 << FSR_VXSAT_SHIFT)
+> -
+>   /* Control and Status Registers */
+>   
+>   /* User Trap Setup */
 
