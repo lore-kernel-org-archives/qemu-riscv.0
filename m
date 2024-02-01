@@ -4,76 +4,176 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00BC2C47258
-	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Feb 2024 02:03:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8219C47DDF
+	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Feb 2024 08:59:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rVMPX-0007GD-Kg; Wed, 31 Jan 2024 21:02:39 -0500
+	id 1rVSul-0004XZ-U1; Thu, 01 Feb 2024 03:59:19 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rVMPV-0007Fq-S4; Wed, 31 Jan 2024 21:02:37 -0500
-Received: from mail-vs1-xe34.google.com ([2607:f8b0:4864:20::e34])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rVMPT-0006Ny-U1; Wed, 31 Jan 2024 21:02:37 -0500
-Received: by mail-vs1-xe34.google.com with SMTP id
- ada2fe7eead31-46b2e88a808so162489137.0; 
- Wed, 31 Jan 2024 18:02:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706752953; x=1707357753; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LU10jKjpHLrMn1M9rCn0l6ewu1910EPFvmlq9YgmiBk=;
- b=LbHhbficgCsKK1mcgvjvVJb2/INyi68VT+9O+nILpRNeSjNxS0UU/9bnqf1jFMHzok
- JnMmalmqvs3Bo1trUBxB8Co9pM2lgxAIhF2HLOblXIBnNxO3oeAGKnlO+r6Z7dBNXQpR
- R7RaoBULyaNg+jEPKvE1UEvvSfPFvjVOJrbkHi5iR0kzpETFuglk0+OBLaKehKuH0aZ+
- 27U9prj3O2AEl+ZZ78ibeX8cR1YHU1Irl/27itxp/Gi9MXxVjCbeLx0Eqx5Quqbfgfxh
- f/+o2wBLSonU2SLPD/ocbHfwLv0hpQ0SRMdDa7fKJ/Sgx4aNWzxsDGeonSN3K5xy8rOl
- Pf+w==
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rVSuk-0004X5-NK
+ for qemu-riscv@nongnu.org; Thu, 01 Feb 2024 03:59:18 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rVSuj-0003Z0-1L
+ for qemu-riscv@nongnu.org; Thu, 01 Feb 2024 03:59:18 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1706777955;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=46aTfHzOBMWuZA5PRKaMztJA+fyye2SIsD0CIZHrpW8=;
+ b=d3J9UJEQ7kZAkGNbQPOc00mkPwkie48h011azBgh0XZnm0hcWUw+fMRUnSvCqCDeXlP0Pl
+ IzC3e/wLD4ZWXaPjIOPYGd+qpQc7wBmG8QcGergYRHKGK4MFGzd7Ke1bJUAN1+I4UQmOak
+ /q+bHMbTgjSGbtf2nTmd2r7TGcjudUM=
+Received: from mail-lf1-f69.google.com (mail-lf1-f69.google.com
+ [209.85.167.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-447-vFpCxFAoPDqYd8veMkVUYA-1; Thu, 01 Feb 2024 03:59:14 -0500
+X-MC-Unique: vFpCxFAoPDqYd8veMkVUYA-1
+Received: by mail-lf1-f69.google.com with SMTP id
+ 2adb3069b0e04-51109656bb4so500743e87.1
+ for <qemu-riscv@nongnu.org>; Thu, 01 Feb 2024 00:59:14 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706752953; x=1707357753;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=LU10jKjpHLrMn1M9rCn0l6ewu1910EPFvmlq9YgmiBk=;
- b=dPUlQVIK61QZ0mR0JANe3v1Dpoz8tFSJb1FYkLworg9nqMCkzd2dvKVjKkuYxgscHS
- /Ceqwl9eCEYDH/tkjHTeurbiurQYXmrjLIcty9yP74I/gTQdaLv1gXlinlBtZyBSPtES
- dEqWZRlqOV1Z1YhxOAiFMy514GnNsRhE4Se1hkaNBNou5dexKBJUK1YUcxDZvudhAEax
- f2jbU8tk8kmbvoi6QaMR5vm+I5dDN5ukN4fZ0I84WtyPrK1Ql1L7fjg7yxH0z+uE1RGs
- Tee22nIsi6YMtAw8Yf3xsZ7j18wvtTIZxllpUd/MNYpPapxLS9ixs84vovkkVF4d7bCi
- JtXg==
-X-Gm-Message-State: AOJu0YyrCwjUbGaaQ+YgMYjKzM08YCxZn/hbzf+tJewB3XIe6Jh2Ix5P
- OrwifOs913CX/XS6s6KCBHlsHUMB+Ss2t0nVTkCPVpnZiafk5ZbMjQDxut8m37S8MpU9L64b+LL
- 0Z6+dUGoi4AC8+5VIaHoe/FguBXs=
-X-Google-Smtp-Source: AGHT+IGjiqrmLriMQ5vYEfob5BTRNv8uirAO6DMAxGHbcDbP+AFxRdDqEhj24jc2cmcPHz9APnvmEc4IB5C9PPHEviM=
-X-Received: by 2002:a05:6102:1958:b0:469:94f8:1249 with SMTP id
- jl24-20020a056102195800b0046994f81249mr3463444vsb.16.1706752953432; Wed, 31
- Jan 2024 18:02:33 -0800 (PST)
+ d=1e100.net; s=20230601; t=1706777953; x=1707382753;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+ :to:content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=46aTfHzOBMWuZA5PRKaMztJA+fyye2SIsD0CIZHrpW8=;
+ b=SdF3qwQAitRVS9TZrutcq24uUnIWReA6VcAmRKUK8dtlJGbgNSDvLezP1OgnCyF/GH
+ 14ygsw7KjVW7cPQMvUUDHj9x88WhGj+xpOTKpICsjhXjaw8pmZMahFhJjIUZ0LKxLTzN
+ OpXGKshaZy3hHUHd3yk29nEk6NnurJiI3hgQQlrkXw8oc6Sxxw7kXcIVLVIj/hsmYmON
+ fGogsypkvAnGtr939EXRFG8S/3dazmoCZR6u5jWIxpiyMiVBXFmzsl7BjKwVxJ/1yOhV
+ eBxNq1P5LBiUvQTVvuC816wm/ysH9A2hDkwzm5JeWZXAjtDOrVLKscb2xVfBJB64mtec
+ 60Kw==
+X-Gm-Message-State: AOJu0YySnfVebwU3+klpVbfyeRLRleizBSLnhUh2JzrlyzXl/AHvwx6W
+ LLMFS49rdwBtlCNtXkW/5id/hdEvqs9M0HSg7cyxUptOqexHK2xdofNhspO18nYcL2LIUqScA4f
+ xkDiFq2tsP3nnlbgZaVYdOh5X0SB5TwUaB+ovaLbA3agrgfvox/GJ
+X-Received: by 2002:a19:ad0c:0:b0:511:319f:82eb with SMTP id
+ t12-20020a19ad0c000000b00511319f82ebmr152442lfc.43.1706777953342; 
+ Thu, 01 Feb 2024 00:59:13 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHxtZpmfE8n4eP1jKoWvPvn4IfLMH3obU6Ulatqlu1FlZMnyZlnKO4WsRVCTxkqqtQiWLrSIw==
+X-Received: by 2002:a19:ad0c:0:b0:511:319f:82eb with SMTP id
+ t12-20020a19ad0c000000b00511319f82ebmr152423lfc.43.1706777953003; 
+ Thu, 01 Feb 2024 00:59:13 -0800 (PST)
+Received: from [192.168.0.9] (ip-109-43-177-196.web.vodafone.de.
+ [109.43.177.196]) by smtp.gmail.com with ESMTPSA id
+ t12-20020a05600c450c00b0040e9f7308f4sm3803420wmo.10.2024.02.01.00.59.09
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 01 Feb 2024 00:59:12 -0800 (PST)
+Message-ID: <e3470bee-a714-4259-9bde-df9595618877@redhat.com>
+Date: Thu, 1 Feb 2024 09:59:08 +0100
 MIME-Version: 1.0
-References: <20240129192207.2946870-1-me@deliversmonkey.space>
-In-Reply-To: <20240129192207.2946870-1-me@deliversmonkey.space>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 1 Feb 2024 12:02:06 +1000
-Message-ID: <CAKmqyKMoumWhQKkT4UW8h-UPah-8Z39gGzmTnza-BPktpct-LA@mail.gmail.com>
-Subject: Re: [PATCH v5 0/6] Pointer Masking update for Zjpm v0.8
-To: Alexey Baturo <baturo.alexey@gmail.com>
-Cc: richard.henderson@linaro.org, zhiwei_liu@linux.alibaba.com, 
- palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu, 
- kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e34;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe34.google.com
-X-Spam_score_int: 13
-X-Spam_score: 1.3
-X-Spam_bar: +
-X-Spam_report: (1.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25,
- FREEMAIL_FROM=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, TVD_PH_BODY_ACCOUNTS_POST=0.602, TVD_PH_BODY_META_ALL=2.567,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 37/47] hw/net/lasi_i82596: Re-enable build
+To: David Woodhouse <dwmw2@infradead.org>, qemu-devel@nongnu.org
+Cc: Richard Henderson <richard.henderson@linaro.org>,
+ Beniamino Galvani <b.galvani@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Strahinja Jankovic <strahinja.p.jankovic@gmail.com>,
+ Niek Linnenbank <nieklinnenbank@gmail.com>, =?UTF-8?Q?C=C3=A9dric_Le_Goater?=
+ <clg@kaod.org>, Andrew Jeffery <andrew@codeconstruct.com.au>,
+ Joel Stanley <joel@jms.id.au>, Igor Mitsyanko <i.mitsyanko@gmail.com>,
+ Jean-Christophe Dubois <jcd@tribudubois.net>,
+ Andrey Smirnov <andrew.smirnov@gmail.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Rob Herring <robh@kernel.org>, Subbaraya Sundeep <sundeep.lkml@gmail.com>,
+ Jan Kiszka <jan.kiszka@web.de>, Tyrone Ting <kfting@nuvoton.com>,
+ Hao Wu <wuhaotsh@google.com>, Radoslaw Biernacki <rad@semihalf.com>,
+ Leif Lindholm <quic_llindhol@quicinc.com>,
+ Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Alistair Francis <alistair@alistair23.me>, Helge Deller <deller@gmx.de>,
+ Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Song Gao
+ <gaosong@loongson.cn>, Thomas Huth <huth@tuxfamily.org>,
+ Laurent Vivier <laurent@vivier.eu>, Huacai Chen <chenhuacai@kernel.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, Jason Wang <jasowang@redhat.com>,
+ Jia Liu <proljc@gmail.com>, Stafford Horne <shorne@gmail.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Nicholas Piggin <npiggin@gmail.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>, Bin Meng
+ <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Eric Farman <farman@linux.ibm.com>, David Hildenbrand <david@redhat.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Magnus Damm <magnus.damm@gmail.com>, Artyom Tarasenko <atar4qemu@gmail.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
+ Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
+ qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
+ xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
+References: <20240126173228.394202-1-dwmw2@infradead.org>
+ <20240126173228.394202-38-dwmw2@infradead.org>
+From: Thomas Huth <thuth@redhat.com>
+Autocrypt: addr=thuth@redhat.com; keydata=
+ xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
+ yYkTm9+7zBUc0sW5AuPGR/dp3pSLX/yFWsA/UB4nJsHqgDvDU7BImSeiTrnpMOTXb7Arw2a2
+ 4CflIyFqjCpfDM4MuTmzTjXq4Uov1giGE9X6viNo1pxyEpd7PanlKNnf4PqEQp06X4IgUacW
+ tSGj6Gcns1bCuHV8OPWLkf4hkRnu8hdL6i60Yxz4E6TqlrpxsfYwLXgEeswPHOA6Mn4Cso9O
+ 0lewVYfFfsmokfAVMKWzOl1Sr0KGI5T9CpmRfAiSHpthhHWnECcJFwl72NTi6kUcUzG4se81
+ O6n9d/kTj7pzTmBdfwuOZ0YUSqcqs0W+l1NcASSYZQaDoD3/SLk+nqVeCBB4OnYOGhgmIHNW
+ 0CwMRO/GK+20alxzk//V9GmIM2ACElbfF8+Uug3pqiHkVnKqM7W9/S1NH2qmxB6zMiJUHlTH
+ gnVeZX0dgH27mzstcF786uPcdEqS0KJuxh2kk5IvUSL3Qn3ZgmgdxBMyCPciD/1cb7/Ahazr
+ 3ThHQXSHXkH/aDXdfLsKVuwDzHLVSkdSnZdt5HHh75/NFHxwaTlydgfHmFFwodK8y/TjyiGZ
+ zg2Kje38xnz8zKn9iesFBCcONXS7txENTzX0z80WKBhK+XSFJwARAQABzR5UaG9tYXMgSHV0
+ aCA8dGh1dGhAcmVkaGF0LmNvbT7CwXgEEwECACIFAlVgX6oCGwMGCwkIBwMCBhUIAgkKCwQW
+ AgMBAh4BAheAAAoJEC7Z13T+cC21EbIP/ii9cvT2HHGbFRl8HqGT6+7Wkb+XLMqJBMAIGiQK
+ QIP3xk1HPTsLfVG0ao4hy/oYkGNOP8+ubLnZen6Yq3zAFiMhQ44lvgigDYJo3Ve59gfe99KX
+ EbtB+X95ODARkq0McR6OAsPNJ7gpEUzfkQUUJTXRDQXfG/FX303Gvk+YU0spm2tsIKPl6AmV
+ 1CegDljzjycyfJbk418MQmMu2T82kjrkEofUO2a24ed3VGC0/Uz//XCR2ZTo+vBoBUQl41BD
+ eFFtoCSrzo3yPFS+w5fkH9NT8ChdpSlbNS32NhYQhJtr9zjWyFRf0Zk+T/1P7ECn6gTEkp5k
+ ofFIA4MFBc/fXbaDRtBmPB0N9pqTFApIUI4vuFPPO0JDrII9dLwZ6lO9EKiwuVlvr1wwzsgq
+ zJTPBU3qHaUO4d/8G+gD7AL/6T4zi8Jo/GmjBsnYaTzbm94lf0CjXjsOX3seMhaE6WAZOQQG
+ tZHAO1kAPWpaxne+wtgMKthyPLNwelLf+xzGvrIKvLX6QuLoWMnWldu22z2ICVnLQChlR9d6
+ WW8QFEpo/FK7omuS8KvvopFcOOdlbFMM8Y/8vBgVMSsK6fsYUhruny/PahprPbYGiNIhKqz7
+ UvgyZVl4pBFjTaz/SbimTk210vIlkDyy1WuS8Zsn0htv4+jQPgo9rqFE4mipJjy/iboDzsFN
+ BFH7eUwBEAC2nzfUeeI8dv0C4qrfCPze6NkryUflEut9WwHhfXCLjtvCjnoGqFelH/PE9NF4
+ 4VPSCdvD1SSmFVzu6T9qWdcwMSaC+e7G/z0/AhBfqTeosAF5XvKQlAb9ZPkdDr7YN0a1XDfa
+ +NgA+JZB4ROyBZFFAwNHT+HCnyzy0v9Sh3BgJJwfpXHH2l3LfncvV8rgFv0bvdr70U+On2XH
+ 5bApOyW1WpIG5KPJlDdzcQTyptOJ1dnEHfwnABEfzI3dNf63rlxsGouX/NFRRRNqkdClQR3K
+ gCwciaXfZ7ir7fF0u1N2UuLsWA8Ei1JrNypk+MRxhbvdQC4tyZCZ8mVDk+QOK6pyK2f4rMf/
+ WmqxNTtAVmNuZIwnJdjRMMSs4W4w6N/bRvpqtykSqx7VXcgqtv6eqoDZrNuhGbekQA0sAnCJ
+ VPArerAZGArm63o39me/bRUQeQVSxEBmg66yshF9HkcUPGVeC4B0TPwz+HFcVhheo6hoJjLq
+ knFOPLRj+0h+ZL+D0GenyqD3CyuyeTT5dGcNU9qT74bdSr20k/CklvI7S9yoQje8BeQAHtdV
+ cvO8XCLrpGuw9SgOS7OP5oI26a0548M4KldAY+kqX6XVphEw3/6U1KTf7WxW5zYLTtadjISB
+ X9xsRWSU+Yqs3C7oN5TIPSoj9tXMoxZkCIHWvnqGwZ7JhwARAQABwsFfBBgBAgAJBQJR+3lM
+ AhsMAAoJEC7Z13T+cC21hPAQAIsBL9MdGpdEpvXs9CYrBkd6tS9mbaSWj6XBDfA1AEdQkBOn
+ ZH1Qt7HJesk+qNSnLv6+jP4VwqK5AFMrKJ6IjE7jqgzGxtcZnvSjeDGPF1h2CKZQPpTw890k
+ fy18AvgFHkVk2Oylyexw3aOBsXg6ukN44vIFqPoc+YSU0+0QIdYJp/XFsgWxnFIMYwDpxSHS
+ 5fdDxUjsk3UBHZx+IhFjs2siVZi5wnHIqM7eK9abr2cK2weInTBwXwqVWjsXZ4tq5+jQrwDK
+ cvxIcwXdUTLGxc4/Z/VRH1PZSvfQxdxMGmNTGaXVNfdFZjm4fz0mz+OUi6AHC4CZpwnsliGV
+ ODqwX8Y1zic9viSTbKS01ZNp175POyWViUk9qisPZB7ypfSIVSEULrL347qY/hm9ahhqmn17
+ Ng255syASv3ehvX7iwWDfzXbA0/TVaqwa1YIkec+/8miicV0zMP9siRcYQkyTqSzaTFBBmqD
+ oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
+ IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
+ yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
+In-Reply-To: <20240126173228.394202-38-dwmw2@infradead.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: 0
+X-Spam_score: -0.1
+X-Spam_bar: /
+X-Spam_report: (-0.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.292,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, RCVD_IN_SBL_CSS=3.335,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -90,93 +190,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jan 30, 2024 at 5:23=E2=80=AFAM Alexey Baturo <baturo.alexey@gmail.=
-com> wrote:
->
-> From: Alexey Baturo <baturo.alexey@gmail.com>
->
-> Hi,
->
-> This patch series targets Zjpm v0.8 extension.
-> The spec itself could be found here: https://github.com/riscv/riscv-j-ext=
-ension/blob/8088461d8d66a7676872b61c908cbeb7cf5c5d1d/zjpm-spec.pdf
-> This patch series is updated after the suggested comments:
-> - add "x-" to the extension names to indicate experimental
+On 26/01/2024 18.25, David Woodhouse wrote:
+> From: David Woodhouse <dwmw@amazon.co.uk>
+> 
+> When converting to the shiny build-system-du-jour, a typo prevented the
+> last_i82596 driver from being built. Correct the config option name to
+> re-enable the build. And include "sysemu/sysemu.h" so it actually builds.
+> 
+> Fixes: b1419fa66558 ("meson: convert hw/net")
+> Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+> ---
+>   hw/net/lasi_i82596.c | 1 +
+>   hw/net/meson.build   | 2 +-
+>   2 files changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/hw/net/lasi_i82596.c b/hw/net/lasi_i82596.c
+> index 6a3147fe2d..09e830ba5f 100644
+> --- a/hw/net/lasi_i82596.c
+> +++ b/hw/net/lasi_i82596.c
+> @@ -14,6 +14,7 @@
+>   #include "qapi/error.h"
+>   #include "qemu/timer.h"
+>   #include "hw/sysbus.h"
+> +#include "sysemu/sysemu.h"
+>   #include "net/eth.h"
+>   #include "hw/net/lasi_82596.h"
+>   #include "hw/net/i82596.h"
+> diff --git a/hw/net/meson.build b/hw/net/meson.build
+> index 9afceb0619..2b426d3d5a 100644
+> --- a/hw/net/meson.build
+> +++ b/hw/net/meson.build
+> @@ -33,7 +33,7 @@ system_ss.add(when: 'CONFIG_MARVELL_88W8618', if_true: files('mv88w8618_eth.c'))
+>   system_ss.add(when: 'CONFIG_CADENCE', if_true: files('cadence_gem.c'))
+>   system_ss.add(when: 'CONFIG_STELLARIS_ENET', if_true: files('stellaris_enet.c'))
+>   system_ss.add(when: 'CONFIG_LANCE', if_true: files('lance.c'))
+> -system_ss.add(when: 'CONFIG_LASI_I82596', if_true: files('lasi_i82596.c'))
+> +system_ss.add(when: 'CONFIG_LASI_82596', if_true: files('lasi_i82596.c'))
+>   system_ss.add(when: 'CONFIG_I82596_COMMON', if_true: files('i82596.c'))
+>   system_ss.add(when: 'CONFIG_SUNHME', if_true: files('sunhme.c'))
+>   system_ss.add(when: 'CONFIG_FTGMAC100', if_true: files('ftgmac100.c'))
 
-Do you mind rebasing this on
-https://github.com/alistair23/qemu/tree/riscv-to-apply.next ?
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2144
 
-Alistair
-
->
-> [v4]:
-> Patch series updated after the suggested comments:
-> - removed J-letter extension as it's unused
-> - renamed and fixed function to detect if address should be sign-extended
-> - zeroed unused context variables and moved computation logic to another =
-patch
-> - bumped pointer masking version_id and minimum_version_id by 1
->
-> Thanks
->
-> [v3]:
-> There patches are updated after Richard's comments:
-> - moved new tb flags to the end
-> - used tcg_gen_(s)extract to get the final address
-> - properly handle CONFIG_USER_ONLY
->
-> Thanks
->
-> [v2]:
-> As per Richard's suggestion I made pmm field part of tb_flags.
-> It allowed to get rid of global variable to store pmlen.
-> Also it allowed to simplify all the machinery around it.
->
-> Thanks
->
-> [v1]:
-> Hi all,
->
-> It looks like Zjpm v0.8 is almost frozen and we don't expect it change dr=
-astically anymore.
-> Compared to the original implementation with explicit base and mask CSRs,=
- we now only have
-> several fixed options for number of masked bits which are set using exist=
-ing CSRs.
-> The changes have been tested with handwritten assembly tests and LLVM HWA=
-SAN
-> test suite.
->
-> Thanks
->
-> Alexey Baturo (6):
->   target/riscv: Remove obsolete pointer masking extension code.
->   target/riscv: Add new CSR fields for S{sn,mn,m}pm extensions as part
->     of Zjpm v0.8
->   target/riscv: Add helper functions to calculate current number of
->     masked bits for pointer masking
->   target/riscv: Add pointer masking tb flags
->   target/riscv: Update address modify functions to take into account
->     pointer masking
->   target/riscv: Enable updates for pointer masking variables and thus
->     enable pointer masking extension
->
->  target/riscv/cpu.c           |  22 ++-
->  target/riscv/cpu.h           |  46 +++--
->  target/riscv/cpu_bits.h      |  90 +---------
->  target/riscv/cpu_cfg.h       |   3 +
->  target/riscv/cpu_helper.c    |  97 +++++-----
->  target/riscv/csr.c           | 337 ++---------------------------------
->  target/riscv/machine.c       |  20 +--
->  target/riscv/pmp.c           |  13 +-
->  target/riscv/pmp.h           |  11 +-
->  target/riscv/tcg/tcg-cpu.c   |   5 +-
->  target/riscv/translate.c     |  46 ++---
->  target/riscv/vector_helper.c |  15 +-
->  12 files changed, 158 insertions(+), 547 deletions(-)
->
-> --
-> 2.34.1
->
->
 
