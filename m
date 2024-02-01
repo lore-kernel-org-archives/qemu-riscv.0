@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B15CC47DDF
-	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Feb 2024 12:44:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06957C47DDB
+	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Feb 2024 12:46:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rVWPl-0008Ph-FS; Thu, 01 Feb 2024 07:43:33 -0500
+	id 1rVWSM-0001Nq-Jt; Thu, 01 Feb 2024 07:46:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rVWPi-0008P6-3Y
- for qemu-riscv@nongnu.org; Thu, 01 Feb 2024 07:43:30 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rVWSB-0001Ms-2u
+ for qemu-riscv@nongnu.org; Thu, 01 Feb 2024 07:46:03 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rVWPe-0004xM-Gt
- for qemu-riscv@nongnu.org; Thu, 01 Feb 2024 07:43:29 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rVWS9-0005nd-IV
+ for qemu-riscv@nongnu.org; Thu, 01 Feb 2024 07:46:02 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1706791405;
+ s=mimecast20190719; t=1706791560;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=Hh2SkeDXVJXiKy06zMjEfgwb4cF/vdZEmtW8Zn/iSB8=;
- b=VmM9UEYqhR+cAaYzLgBglYvgaAAtQ43E56uiUAYu+hXyZ8HnF3Ytqqldby+UDc/h9WCUzy
- 3LCM6D6M0uz79kgIknHJvhbTgc91oU46HXzirgP9n2Vv+9Cu4gv5vBH0/Z4OkG9fOKHvc0
- niSxe0Pd4zCj7I7TB/KAiSoWs3X0M3s=
-Received: from mail-lf1-f70.google.com (mail-lf1-f70.google.com
- [209.85.167.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=O9clC6sv9ByZKGN3sbyAhPx8HBkXHyz8S+YSVDWB3gg=;
+ b=RYpmInhFLSgjN3Y2cBA7mL1kxO8nLCKBtEExyT8ntIz4xXhzDSl/l1izVtGtJXwNBTwoqP
+ KPwcsV8OeGp197tWsFAICtMmlWYg0vj1Bc6XoU1Xb4FOlR0zJL4elfPQBvRB9VinELt44J
+ 8QcGr07QeZbaHjEgTcaNGe1TtVeR9Zs=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-182-6zr0FpNSNX-C5A0rKF_uaQ-1; Thu, 01 Feb 2024 07:43:23 -0500
-X-MC-Unique: 6zr0FpNSNX-C5A0rKF_uaQ-1
-Received: by mail-lf1-f70.google.com with SMTP id
- 2adb3069b0e04-51109656bb4so678129e87.1
- for <qemu-riscv@nongnu.org>; Thu, 01 Feb 2024 04:43:23 -0800 (PST)
+ us-mta-77-NrlWgT-BP8W3mAcdORim8w-1; Thu, 01 Feb 2024 07:45:59 -0500
+X-MC-Unique: NrlWgT-BP8W3mAcdORim8w-1
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-40efbe60d32so4536775e9.3
+ for <qemu-riscv@nongnu.org>; Thu, 01 Feb 2024 04:45:59 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706791402; x=1707396202;
+ d=1e100.net; s=20230601; t=1706791558; x=1707396358;
  h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
  :to:content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Hh2SkeDXVJXiKy06zMjEfgwb4cF/vdZEmtW8Zn/iSB8=;
- b=WB7h0lmibFc0r3tfWVOZVKVgbZSrPJ+/J/SM4S8dCWbxi2u0+mp+ePVBlcOWmtpx4E
- 7kBhFjFGW6oyePjFFUtyZlaAzj8xjyLHEFnpIwxye1uvewuKvS8MlW1156FMyqHrq8He
- cnwikM1KeuwrH+UJfecVgLN+12IzndDjHPzn5nR2x5Cjk9TXQlVIe5vnO6LfW6H9M2iP
- aeWQAEwihOfnDbb2J2cCdVTAokwpD6SsmxIRlGmOTSj1Fktj4D97WDw+FUDr8usIPhE6
- XeJdbbYDMf9XaKrtuYOrEzStyjq9+AK9GGpnhu2QYjm9GNy2e8pUTwseNfBr6Cnin8Nw
- Lxqg==
-X-Gm-Message-State: AOJu0YxvJ12mPIG0roo++pljLcgNu0QROMVMckHZeQUoDkX+vh3twJ27
- rD5eNEQXKyVLrdj8ZY07dg/v0yGEhACm3+2btprIGihyc6ToVsGlJNpV+NAzxGmvFOYNd2UFFyo
- xjLMXPIqk7xGW7R6r48EAjDls3vTPXzjgiJNgj6+bU+FAHaEBlqYA
-X-Received: by 2002:ac2:4463:0:b0:50e:7c08:1a55 with SMTP id
- y3-20020ac24463000000b0050e7c081a55mr1663158lfl.18.1706791402430; 
- Thu, 01 Feb 2024 04:43:22 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGHsS7/cRa22XcevGCJp5Gb7lsv9V0DMbPrsSBHjPFWMba5T/z9Bl0Dv63M2vDasbvw26hAkQ==
-X-Received: by 2002:ac2:4463:0:b0:50e:7c08:1a55 with SMTP id
- y3-20020ac24463000000b0050e7c081a55mr1663148lfl.18.1706791402076; 
- Thu, 01 Feb 2024 04:43:22 -0800 (PST)
+ bh=O9clC6sv9ByZKGN3sbyAhPx8HBkXHyz8S+YSVDWB3gg=;
+ b=hH0q8+1lHArQD4Dq6w++qtzHDZrl1CB0YyRppIhkR0ig9iuvXzUPExEiLXNJKvTq95
+ jxeR1ngnv2vsV5iXuzKHxMftTbcU7NCiNKZ/jE9QQP8EbcEIwwuW1f7T14c/iOmIrHZE
+ a6iZmE/VyiznDg27TLnQA/GMy6MHGXSkuL2nLCNcj3Dnb7RA4CZ5bXrnyl1EXL8GwC1j
+ YxSusCz3U3cJ1YTRyh/tcSq65Grjp1etH6GFKzQAJcESWr/uVxfQoxTvLYPEfg4Vd9Sv
+ Ii8swDvtmV0yZvFmfLl1Vwd9DEDe5WHL8N/QshJ7+e1Ly00nl9RcKJvSzQ9MRHgI0RKW
+ Z6oA==
+X-Gm-Message-State: AOJu0YwS3OT9iUcptyHYbBTNl3Nd7Sso8tLEG6nqIuBLf/2Acpn2bTtZ
+ RvCBh5vgCP+e1Uhn/fFsffDne221b5ehGuiOD43LohWMGIiFNDcaxrEMetUZuywFXFq37LPmEww
+ rI8uDkkQ//x8fkoXUTP4vtxNaG7dbd5LmlQMcCpJUNLHxNF4vOB0A
+X-Received: by 2002:a05:600c:4ed1:b0:40e:f9f4:eed2 with SMTP id
+ g17-20020a05600c4ed100b0040ef9f4eed2mr3782720wmq.28.1706791558382; 
+ Thu, 01 Feb 2024 04:45:58 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGDRcbC19xVDHx5NlroNzVq5ewHr7BtxWepacjm+e4ZFtUIFPc+WRTK6Ca6t+lP8PnKXVhIhw==
+X-Received: by 2002:a05:600c:4ed1:b0:40e:f9f4:eed2 with SMTP id
+ g17-20020a05600c4ed100b0040ef9f4eed2mr3782697wmq.28.1706791558062; 
+ Thu, 01 Feb 2024 04:45:58 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCV53XcgGn8djGFerIf5nmRh9+vNwmHGpf8cHYSS7ZZtnF+FQ8m+JTuqUvO0FGfyerRP5+r1x7ZtTOeifhGu7aOYvbkQ64ecoal4nPY1W4GVMV9PUjA+1Mb8+IGh9ph+NwodKM91qsgS9KN3EspcedEjmNYpQhuK5KyoHhBZDHX/jK5DPBphSjuPOZ3588cQinQzTrQpu326vJx2B4MXX+RK24EQ5imgIH9LeNtGYddMyKN6zsgn/njk0PXc3cmgy+FfBUOnLXwONBk0x+X9EV0nYFom2t4XthB3wFPhdBaLsW/TlRYy9gjOXeme5nWa/S7wv5LUF7WPhaBgP3RmnDdj7O1efVGikqsmkq+II1Sg17RiUtEnMSw4Lul+4aaajjLxO6IAKMKjvCK/WAZyVDejK3Ygtw1vxa5u2LSZELOJ2uQ0BYv8X+tvUkeiJyKuaOfeU10wAH2bBqH2Udho+hYaMI4ixAKgY+vI8ITEvzABeuyDs/b7RacxNPTJkYjo4KCB2C2qkaM41+eseGQF8hi1jBf8iot2fLUstFBqYr75VuqMJB+mdPycBmWqsI5yaphWje6kPyZowE9/gRK7DbxCWWQGD7uWljoretjGqTgmbUyaDg==
+ AJvYcCUwNC83l9kQwnkTizLFwk56slYcmh2VkP7MerzNE5Uk6wTpnw5yxbLDZYkVoX5kDvBmPAgPX2JJKQu+doP5lXLGoI3jRrVQXDnj2ETN4SzMdCFnLkE+uD9EC5SUEFlaiRm5WoHWhsH1+K/9I3Lr5bL7PFZrzTiWy3/ka6LTqZpSCs2ddObSISoYsOe9T9Uxfg3ZTVz8KmBO7qDaealW1jFGToCsuAMiGQHexm+1lNqBLyO0erfk/cb5JY5oyJPYf7sksPdFymte2uo6leU0aWqJ0THFhVO4dCufdY0lzeqkoWvu4ekabTzbhD4HOPJNDsjmTe/jHvSKG9894Oe4wERebbMV8QjhJzDLRsJD2TtpFkheq4YXH53JPDXwHckMrD4FhjzV9LvWrfr0mdi1QSWnmDu09ZfDIbmnjjwXpoZupOpE+tYwKU/RFNEhehjxZIrv8jC9b+R4jpiATT9t5Ja/SQhr0vk6K3BAkzkc+31jAq1X1wTD7kYV9KElBEA6jUTgbyz57Z5BUMZhFamx3Vv+x9y+j1JLBMy7Pdm7kBKDgR1Hep4qsOoZBsQl3IILHOLZ+BzpvtJOZTvJ1tRHjRkP+PEp9KyIk9yzw/qB44rTL6zVKpz5TMJPS/lXirxHSqbVLCpDlLwQC407ZgyMl0G3p9QBnxWKkFw+I7DR1d3v
 Received: from [192.168.0.9] (ip-109-43-177-196.web.vodafone.de.
  [109.43.177.196]) by smtp.gmail.com with ESMTPSA id
- w17-20020a05600c475100b0040ec66021a7sm4414186wmo.1.2024.02.01.04.43.20
+ p13-20020a05600c468d00b0040ef2e7041esm4365169wmo.6.2024.02.01.04.45.56
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 01 Feb 2024 04:43:21 -0800 (PST)
-Message-ID: <25209797-86d3-4665-9cd8-a9ec2b236086@redhat.com>
-Date: Thu, 1 Feb 2024 13:43:19 +0100
+ Thu, 01 Feb 2024 04:45:57 -0800 (PST)
+Message-ID: <69ce5d38-7bc1-4cd1-88d5-94f61161e588@redhat.com>
+Date: Thu, 1 Feb 2024 13:45:55 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/5] kconfig: use "select" to enable semihosting
+Subject: Re: [PATCH 2/5] docs: mark CRIS support as deprecated
 To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-devel@nongnu.org
 Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
@@ -84,9 +84,10 @@ Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
  Beraldo Leal <bleal@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>,
  =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Chris Wulff <crwulff@gmail.com>
+ Chris Wulff <crwulff@gmail.com>, Rabin Vincent <rabinv@axis.com>,
+ "Edgar E . Iglesias" <edgar.iglesias@xilinx.com>
 References: <20240201122835.1712347-1-alex.bennee@linaro.org>
- <20240201122835.1712347-6-alex.bennee@linaro.org>
+ <20240201122835.1712347-3-alex.bennee@linaro.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -130,21 +131,21 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20240201122835.1712347-6-alex.bennee@linaro.org>
+In-Reply-To: <20240201122835.1712347-3-alex.bennee@linaro.org>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: 0
 X-Spam_score: -0.1
 X-Spam_bar: /
 X-Spam_report: (-0.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.292,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_SBL_CSS=3.335, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, RCVD_IN_SBL_CSS=3.335,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -162,31 +163,45 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 01/02/2024 13.28, Alex Bennée wrote:
-> From: Paolo Bonzini <pbonzini@redhat.com>
+> This might be premature but while streamling the avocado tests I
+
+s/streamling/streamlining/ ?
+
+> realised the only tests we have are "check-tcg" ones. The aging
+> fedora-criss-cross image works well enough for developers but can't be
+
+s/criss/cris/
+
+> used in CI as we need supported build platforms to build QEMU.
 > 
-> Just like all other dependencies, these can be expressed in Kconfig
-> files rather than in the default configurations.
+> Does this mean the writing is on the wall for this architecture?
 > 
-> Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
-> Acked-by: Alistair Francis <alistair.francis@wdc.com>
-> Message-Id: <20240129115809.1039924-1-pbonzini@redhat.com>
 > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+> Cc: Rabin Vincent <rabinv@axis.com>
+> Cc: Edgar E. Iglesias <edgar.iglesias@xilinx.com>
+> Message-Id: <20230925144854.1872513-5-alex.bennee@linaro.org>
 > ---
->   configs/devices/m68k-softmmu/default.mak    | 2 --
->   configs/devices/mips-softmmu/common.mak     | 3 ---
->   configs/devices/nios2-softmmu/default.mak   | 2 --
->   configs/devices/riscv32-softmmu/default.mak | 2 --
->   configs/devices/riscv64-softmmu/default.mak | 2 --
->   configs/devices/xtensa-softmmu/default.mak  | 2 --
->   target/m68k/Kconfig                         | 1 +
->   target/mips/Kconfig                         | 1 +
->   target/nios2/Kconfig                        | 1 +
->   target/riscv/Kconfig                        | 2 ++
->   target/xtensa/Kconfig                       | 1 +
->   11 files changed, 6 insertions(+), 13 deletions(-)
+>   docs/about/deprecated.rst | 8 ++++++++
+>   1 file changed, 8 insertions(+)
+> 
+> diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
+> index d4492b94604..82922476d72 100644
+> --- a/docs/about/deprecated.rst
+> +++ b/docs/about/deprecated.rst
+> @@ -183,6 +183,14 @@ Nios II CPU (since 8.2)
+>   The Nios II architecture is orphan. The ``nios2`` guest CPU support is
+>   deprecated and will be removed in a future version of QEMU.
+>   
+> +CRIS CPU architecture (since 9.0)
+> +'''''''''''''''''''''''''''''''''
+> +
+> +The CRIS architecture was pulled from Linux in 4.17 and the compiler
+> +is no longer packaged in any distro making it harder to run the
+> +``check-tcg`` tests. Unless we can improve the testing situation there
+> +is a chance the code will bitrot without anyone noticing.
 
+With the typos fixed:
 Reviewed-by: Thomas Huth <thuth@redhat.com>
-
 
 
 
