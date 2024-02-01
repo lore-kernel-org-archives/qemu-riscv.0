@@ -4,90 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65675C47DDF
-	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Feb 2024 13:02:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B45D5C4828D
+	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Feb 2024 14:02:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rVWhg-0006HK-B9; Thu, 01 Feb 2024 08:02:04 -0500
+	id 1rVXd9-0000Vf-4E; Thu, 01 Feb 2024 09:01:27 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1rVWhN-0006BP-Dv
- for qemu-riscv@nongnu.org; Thu, 01 Feb 2024 08:01:48 -0500
-Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1rVXcy-0000RR-FD; Thu, 01 Feb 2024 09:01:20 -0500
+Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1rVWhL-0000Xm-Od
- for qemu-riscv@nongnu.org; Thu, 01 Feb 2024 08:01:45 -0500
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-55c2cf644f3so1150917a12.1
- for <qemu-riscv@nongnu.org>; Thu, 01 Feb 2024 05:01:42 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1rVXcq-0005Kn-G1; Thu, 01 Feb 2024 09:01:15 -0500
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a366ad7ad45so117171666b.3; 
+ Thu, 01 Feb 2024 06:01:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706792501; x=1707397301; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1706796066; x=1707400866; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GAdUFwzti1+9WNHY0F9MBZdywydLXG62Qp0LZhpz+d4=;
- b=JYOUZ5pPRfMQ/YR8Z43qGlDK9XV3pUScx3zIZRz3WsYwxLD3CXpCATZeB6Z8JSmWNp
- sZD/HAMSkeeApgnpLyVVkHRuyovytfBtanJoaJPnWKvjmrKOpnNngiTw3lihTe92Tu4S
- Lb8n0Zg/btvMecsEONVd9h2f/TFoFumeGGeT/KyyoFg+D45f/o1hlGTmEq0VsaBabfjc
- ntNyY6/lAAVc97oQkJ0qV3eSKZ3/uWI+26YYMNGSHS3bGuXFExURRrSHCXPEPDT9Rn/W
- DhpvMHSw8yVWsfRs1C4ZKfeZgGVXxjNQqWTJE2Ma/YvXRmBfLA4CYnV5RGVMMk6PBmup
- bErg==
+ bh=Vwz4Tehyk0t8VGMK24WnQkMqQbhlmibzbAS/3Lxw+fQ=;
+ b=Ym60dRa6DWBwUzVB+l06ay0Rv/OMbrpTTW7wu/oPOtRubHoJ3QhDAXmJadSiMMtGDp
+ 1v+M/Kq85mJrdgoqaTTyKjxKU8ccE+vVAu2K9DIMSvifknIJoFmN42rchTei0sE4u+RP
+ Y1FFCWKTNZqzkLPOmcUE/hiu7M0FHSCxOoUoTm6UNOVs2mrLjkgnkqNUjsB7Ioxw+q6z
+ qqI7i/Hn4bBBxukmelPTvFvUWF8Ac1Gbojp5SLY9YCvBcwSdd8Fqq9OjjFfVm/nRRyS/
+ ZT0sfDpdzzRMifow5sFw06FezBuxmhOuAtqr1+Dq6nlYJ7QvW9uVuimbTLT8ZF8dlNFR
+ +Y5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706792501; x=1707397301;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1706796066; x=1707400866;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GAdUFwzti1+9WNHY0F9MBZdywydLXG62Qp0LZhpz+d4=;
- b=Cd/hsSQFW9XuhKLifw5g9ZrRsy6rfEQby0Eu1rGQeZdgfKrhNgUyMsIgHr05wGz5fr
- 1x/FbAc7spmK/tO2GDTz2D6la0Wi1RFNtU9tVGcJ/a7vOG3NBC8HmcxsKdAILBVLX+Ze
- l4SljguwE/YHmcJrBvHUfnrk72PU8g21Bb95yR/yWi7ukwsfDELWraeQnuWbS2t3xe/Z
- +RLMerLfnwPL57E+Q3d9EH7fXIDAn7pSrdWfGIhd4D5U6mu4Rsh4kOCF1wWLKpOV5dMb
- kZEqVFVZoQcpX9MAKVMamBJwXjCfp8WTKEZvctRLDvotIZ80AeUT+khP+CiNNE0FV72C
- pBYQ==
-X-Gm-Message-State: AOJu0YwzLpQmweEmrtXvDs9R91R5clw+ae+RnSDU0yfhsKDje5/q4Ebm
- C4FtlcGkFuLWv8PVmGEHTO9fMtuB1WoZgX7e1yZYeEYiYR8BRgJcP/rMeKNbdid/DbT1unBG4zz
- bk/9NOQhbo7bEIvyAJSsGLfDQCA4/hiVCzToKew==
-X-Google-Smtp-Source: AGHT+IGchpNugBXd0UWR0L4HfPB7rrrlfbTAhVXgZASVhwQPdfaEYxkablu0FrwKuJEfi6Bkh0r1DqwG91UEW5mupLU=
-X-Received: by 2002:aa7:ccd1:0:b0:55f:19a4:e5f with SMTP id
- y17-20020aa7ccd1000000b0055f19a40e5fmr3378502edt.20.1706792500777; Thu, 01
- Feb 2024 05:01:40 -0800 (PST)
+ bh=Vwz4Tehyk0t8VGMK24WnQkMqQbhlmibzbAS/3Lxw+fQ=;
+ b=QUlsxc36lNWQy5DlRicZrKFqH5NN13LV8720VCef4/Ip1RR3cYtDXDouWym1BzwACt
+ L8vhO4YqPwDdJrTXj98IlDKILhL4yl0NJ6q3fOFa1yV3RqYQAe+8tJufBdIxYV6JhR7R
+ 5F5g/eLSNfioqVraXiRpCeZ8fN92kiz+tch32LiIdfjx63c8yFdssN0UZe6Dlv1SbXRo
+ 2wfLU1E5i/JV/YCBGJhrqpZMtl+TH/feAaWG/HKgP/Ar7ClGUsBpm2dx0JfznwXrpTzM
+ OcoxSITfEi6lvDK69sx8ndimgdYGHHdLDKyXZW45POEElttDnbgzaml32Ko1FUJvn9Bl
+ Ib4g==
+X-Gm-Message-State: AOJu0YxpCxkbMwA+pOkKgDVEk8qM1jxpDWtr41rBwlbJLiRqtbW2hbFG
+ EhNrRUBKPF8aAVNLN7PIX+1NMaUrucCzcuBa3+UNAurK1W9vSsYy
+X-Google-Smtp-Source: AGHT+IHmP3GIaue8NHBmMEFPcimfXyVbN9VAVYSD5bJgE/ErK0LmqkktIm9nUfwYmOXKBXKfKXDO+Q==
+X-Received: by 2002:a17:906:4a0b:b0:a27:5446:27d9 with SMTP id
+ w11-20020a1709064a0b00b00a27544627d9mr3808395eju.5.1706796066064; 
+ Thu, 01 Feb 2024 06:01:06 -0800 (PST)
+X-Forwarded-Encrypted: i=0;
+ AJvYcCUYNPAzWsm2y3Oh0ytQvteFllMIMAJwiPALbrkGP8Ii3YB9FP3V4A8OcAtPnf0pa9yWezxmLTzCZFFIiUYDgTpaXBzG6ZAVjb1FZ/EYc1HfS9CcKPdTutgOPOp1d5qJI/l+5nTZnVpwzcX5SQpl2RDk27iBjE1Socwx7AfqsiKMLasIkWAJnJWpNO5IuSmBUhS18j7vCAXAMloRYcqE9h/3UZ1ac8YlpUrg16vfrHAmeEJ079U44BxGlf94ECbOG+wAcO+LDgDZuqaADDGHKeKpWNmo2uigGeLzhjyieVIm28hVHC3edMTfmqa2RNlxtGtSq7uhpli+Ke4whqUh3wWWbUwdsNogM8zfHwI/yPSgpLmLEwaYPVLs5t8=
+Received: from freya.midgard (broadband-188-255-126-251.ip.moscow.rt.ru.
+ [188.255.126.251]) by smtp.gmail.com with ESMTPSA id
+ un6-20020a170907cb8600b00a36a7f0f087sm902728ejc.222.2024.02.01.06.01.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 01 Feb 2024 06:01:05 -0800 (PST)
+From: Alexey Baturo <baturo.alexey@gmail.com>
+X-Google-Original-From: Alexey Baturo <me@deliversmonkey.space>
+To: 
+Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
+ zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com, Alistair.Francis@wdc.com,
+ sagark@eecs.berkeley.edu, kbastian@mail.uni-paderborn.de,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v6 3/6] target/riscv: Add helper functions to calculate
+ current number of masked bits for pointer masking
+Date: Thu,  1 Feb 2024 14:00:44 +0000
+Message-Id: <20240201140047.3456114-4-me@deliversmonkey.space>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240201140047.3456114-1-me@deliversmonkey.space>
+References: <20240201140047.3456114-1-me@deliversmonkey.space>
 MIME-Version: 1.0
-References: <20240201122835.1712347-1-alex.bennee@linaro.org>
- <20240201122835.1712347-5-alex.bennee@linaro.org>
-In-Reply-To: <20240201122835.1712347-5-alex.bennee@linaro.org>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Thu, 1 Feb 2024 13:01:29 +0000
-Message-ID: <CAFEAcA-1tG=xF5x=v8k-pMXwqmDuDjxJuarXj-Ao8S+DSGdB-g@mail.gmail.com>
-Subject: Re: [PATCH 4/5] Revert "hw/elf_ops: Ignore loadable segments with
- zero size"
-To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
-Cc: qemu-devel@nongnu.org, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Weiwei Li <liwei1518@gmail.com>, Bin Meng <bin.meng@windriver.com>, 
- Laurent Vivier <laurent@vivier.eu>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, devel@lists.libvirt.org, 
- Paolo Bonzini <pbonzini@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Max Filippov <jcmvbkbc@gmail.com>, Marek Vasut <marex@denx.de>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Thomas Huth <thuth@redhat.com>,
- qemu-riscv@nongnu.org, Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>, 
- Beraldo Leal <bleal@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Chris Wulff <crwulff@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::532;
- envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x532.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-ej1-x62f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01,
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,33 +99,101 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, 1 Feb 2024 at 12:30, Alex Benn=C3=A9e <alex.bennee@linaro.org> wrot=
-e:
->
-> This regressed qemu-system-xtensa:
->
->     TEST    test_load_store on xtensa
->   qemu-system-xtensa: Some ROM regions are overlapping
->   These ROM regions might have been loaded by direct user request or by d=
-efault.
->   They could be BIOS/firmware images, a guest kernel, initrd or some othe=
-r file loaded into guest memory.
->   Check whether you intended to load all this guest code, and whether it =
-has been built to load to the correct addresses.
->
->   The following two regions overlap (in the memory address space):
->     test_load_store ELF program header segment 1 (addresses 0x00000000000=
-01000 - 0x0000000000001f26)
->     test_load_store ELF program header segment 2 (addresses 0x00000000000=
-01ab8 - 0x0000000000001ab8)
+From: Alexey Baturo <baturo.alexey@gmail.com>
 
-Hmm -- this second segment is zero length, so why did we create
-a ROM blob for it? The commit being reverted here looks like it
-ought to be expanding the set of things for which we say
-"zero size, ignore entirely"...
+Signed-off-by: Alexey Baturo <baturo.alexey@gmail.com>
 
-Anyway, revert given we have a regression is the first thing
-to do if there's not an immediately obvious fix.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu.h        |  4 +++
+ target/riscv/cpu_helper.c | 58 +++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 62 insertions(+)
 
--- PMM
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index e03ff3003f..96b554a00e 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -699,6 +699,10 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+ 
+ bool riscv_cpu_is_32bit(RISCVCPU *cpu);
+ 
++bool riscv_cpu_virt_mem_enabled(CPURISCVState *env);
++RISCVPmPmm riscv_pm_get_pmm(CPURISCVState *env);
++int riscv_pm_get_pmlen(RISCVPmPmm pmm);
++
+ RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
+                            target_ulong *ret_value,
+                            target_ulong new_value, target_ulong write_mask);
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index aedd5bef50..bef7917668 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -142,6 +142,64 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+     *pflags = flags;
+ }
+ 
++RISCVPmPmm riscv_pm_get_pmm(CPURISCVState *env)
++{
++    int pmm = 0;
++#ifndef CONFIG_USER_ONLY
++    int priv_mode = cpu_address_mode(env);
++    /* Get current PMM field */
++    switch (priv_mode) {
++    case PRV_M:
++        pmm = riscv_cpu_cfg(env)->ext_smmpm ?
++                  get_field(env->mseccfg, MSECCFG_PMM) : PMM_FIELD_DISABLED;
++        break;
++    case PRV_S:
++        pmm = riscv_cpu_cfg(env)->ext_smnpm ?
++                  get_field(env->menvcfg, MENVCFG_PMM) : PMM_FIELD_DISABLED;
++        break;
++    case PRV_U:
++        pmm = riscv_cpu_cfg(env)->ext_ssnpm ?
++                  get_field(env->senvcfg, SENVCFG_PMM) : PMM_FIELD_DISABLED;
++        break;
++    default:
++        g_assert_not_reached();
++    }
++#endif
++    return pmm;
++}
++
++bool riscv_cpu_virt_mem_enabled(CPURISCVState *env)
++{
++    bool virt_mem_en = false;
++#ifndef CONFIG_USER_ONLY
++    int satp_mode = 0;
++    int priv_mode = cpu_address_mode(env);
++    /* Get current PMM field */
++    if (riscv_cpu_mxl(env) == MXL_RV32) {
++        satp_mode = get_field(env->satp, SATP32_MODE);
++    } else {
++        satp_mode = get_field(env->satp, SATP64_MODE);
++    }
++    virt_mem_en = ((satp_mode != VM_1_10_MBARE) && (priv_mode != PRV_M));
++#endif
++    return virt_mem_en;
++}
++
++int riscv_pm_get_pmlen(RISCVPmPmm pmm)
++{
++    switch (pmm) {
++    case PMM_FIELD_DISABLED:
++        return 0;
++    case PMM_FIELD_PMLEN7:
++        return 7;
++    case PMM_FIELD_PMLEN16:
++        return 16;
++    default:
++        g_assert_not_reached();
++    }
++    return -1;
++}
++
+ #ifndef CONFIG_USER_ONLY
+ 
+ /*
+-- 
+2.34.1
+
 
