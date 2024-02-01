@@ -4,81 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79244C4828F
-	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Feb 2024 16:07:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2501C4828D
+	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Feb 2024 16:21:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rVZat-0005jM-0N; Thu, 01 Feb 2024 11:07:15 -0500
+	id 1rVZoE-00069L-Rs; Thu, 01 Feb 2024 11:21:03 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1rVZap-0005bM-5b
- for qemu-riscv@nongnu.org; Thu, 01 Feb 2024 11:07:11 -0500
-Received: from mail-lj1-x233.google.com ([2a00:1450:4864:20::233])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1rVZam-0008I8-DB
- for qemu-riscv@nongnu.org; Thu, 01 Feb 2024 11:07:10 -0500
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-2cf588c4dbcso14435541fa.1
- for <qemu-riscv@nongnu.org>; Thu, 01 Feb 2024 08:07:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706803626; x=1707408426; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7m4biepq+wdTrTMcPIx64LKzglwVFghTFI7I3P3BXkA=;
- b=iCnzWQJMgNuhQm26xq9BWNeWTAT4mv4YzOXe8VQeOnaVY0TtovA6KdPTfA6lnNoFQN
- QC9ESTyx04SkquGgEs2lqW5JuTCBdRYfoOwMfYqVd3bSuB5bFdbMJa/cfJe4PM/G5f1N
- yGUXvJLHTTxmyVSGSiBNBUGIM1iospPxlKBjKHt+sM+HTgYpwQMIXoTB3lRDvXIRazrl
- BgUh/pZvvcd7bceXzzV4E9VbXmXX7BLMaXgXIAFco5Ww9sirhn/W1SLCYto61fZk2G70
- tHXmZ3xLtJysHUvq61AMIBTDx9+wtn3OKLswTJXIQjUaQBWNRgRb/O22Q67o5FvDrChj
- dtiA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706803626; x=1707408426;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7m4biepq+wdTrTMcPIx64LKzglwVFghTFI7I3P3BXkA=;
- b=oFipZuIDknFHG/JhZKdnqQblNgMiZSOALAAav6ht5ZAATWT+XSg6rcvAHEZW0355GO
- sm5ekOBFnL3EEzhzaQg5FwOs+IZdeqmqvwhQ2tn7aqPtn/sYl7QWDdh1DKt5TCg/4Y6x
- 6JhTd8eMjvZ5tZe1xOSqGrfCsO7UHyIzuE428gw0SjGBpnYlDEOkQ1MbN+ZCXcHpsRxA
- 5xQGSEEVUw62ech8X+1zRysXFSXOsP+uSW2mVrqAKybAOfuGzAzqxSsSTZyfGfs2jrHT
- TMDEUkcXlR6vDAWbqfoTuyxthOBfNaYL1nbHGQJKvg+mVxfBizsBlacvJAubQa3ZqtNp
- OeRw==
-X-Gm-Message-State: AOJu0YwzXs7adYHFAZFMn53S0PGCu/zzDCYzceH9Z942L1H+E8SsBWbu
- FkCAD8y+gyo5ULfEQv6Xm3LvO9YT7RxMJi5AfCQfH16HOF36HKsMD89pINDAsYMWyP4Ke5mFu0V
- XT12wJYCjg1yEQJwnB4PRAfAnCWvbOSE8CZtlMw==
-X-Google-Smtp-Source: AGHT+IEGvGgyabcAJqCoVxDTBnOT9GNfh18I7+ZgjDJeqSuRhNZ2cVy9hBI+UknBuLkoXyzkfo1EmyoWvyqvZ7albUU=
-X-Received: by 2002:a2e:994c:0:b0:2d0:6a10:e57e with SMTP id
- r12-20020a2e994c000000b002d06a10e57emr4091165ljj.18.1706803626278; Thu, 01
- Feb 2024 08:07:06 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <SRS0=Qo6T=JK=kaod.org=clg@ozlabs.org>)
+ id 1rVZnv-00060A-6q; Thu, 01 Feb 2024 11:20:43 -0500
+Received: from gandalf.ozlabs.org ([150.107.74.76])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <SRS0=Qo6T=JK=kaod.org=clg@ozlabs.org>)
+ id 1rVZnn-00046L-Ap; Thu, 01 Feb 2024 11:20:42 -0500
+Received: from gandalf.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
+ by gandalf.ozlabs.org (Postfix) with ESMTP id 4TQkf30k39z4wcW;
+ Fri,  2 Feb 2024 03:20:27 +1100 (AEDT)
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 4TQkdZ2ZRRz4wcN;
+ Fri,  2 Feb 2024 03:20:02 +1100 (AEDT)
+Message-ID: <fcd5cf8a-68f7-45c4-a09f-e7870ed7ffa1@kaod.org>
+Date: Thu, 1 Feb 2024 17:19:54 +0100
 MIME-Version: 1.0
-References: <20240129081423.116615-1-jeeheng.sia@starfivetech.com>
- <20240129081423.116615-4-jeeheng.sia@starfivetech.com>
- <20240129110823.000076df@Huawei.com>
-In-Reply-To: <20240129110823.000076df@Huawei.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Thu, 1 Feb 2024 16:06:55 +0000
-Message-ID: <CAFEAcA80VjwM=uKEXfwtg9SVzX947of1Go2c0ph-r0DeyKbpMA@mail.gmail.com>
-Subject: Re: [RFC v1 3/3] hw/arm/virt-acpi-build.c: Enable CPU cache topology
-To: Jonathan Cameron <Jonathan.Cameron@huawei.com>
-Cc: Sia Jee Heng <jeeheng.sia@starfivetech.com>, qemu-devel@nongnu.org, 
- qemu-arm@nongnu.org, qemu-riscv@nongnu.org, mst@redhat.com, 
- imammedo@redhat.com, anisinha@redhat.com, shannon.zhaosl@gmail.com, 
- sunilvl@ventanamicro.com, palmer@dabbelt.com, alistair.francis@wdc.com, 
- bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::233;
- envelope-from=peter.maydell@linaro.org; helo=mail-lj1-x233.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 22/47] hw/arm/aspeed: use qemu_configure_nic_device()
+Content-Language: en-US
+To: David Woodhouse <dwmw2@infradead.org>, qemu-devel@nongnu.org
+Cc: Richard Henderson <richard.henderson@linaro.org>,
+ Beniamino Galvani <b.galvani@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Strahinja Jankovic <strahinja.p.jankovic@gmail.com>,
+ Niek Linnenbank <nieklinnenbank@gmail.com>,
+ Andrew Jeffery <andrew@codeconstruct.com.au>, Joel Stanley <joel@jms.id.au>,
+ Igor Mitsyanko <i.mitsyanko@gmail.com>,
+ Jean-Christophe Dubois <jcd@tribudubois.net>,
+ Andrey Smirnov <andrew.smirnov@gmail.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Rob Herring <robh@kernel.org>, Subbaraya Sundeep <sundeep.lkml@gmail.com>,
+ Jan Kiszka <jan.kiszka@web.de>, Tyrone Ting <kfting@nuvoton.com>,
+ Hao Wu <wuhaotsh@google.com>, Radoslaw Biernacki <rad@semihalf.com>,
+ Leif Lindholm <quic_llindhol@quicinc.com>,
+ Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Alistair Francis <alistair@alistair23.me>, Helge Deller <deller@gmx.de>,
+ Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Song Gao
+ <gaosong@loongson.cn>, Thomas Huth <huth@tuxfamily.org>,
+ Laurent Vivier <laurent@vivier.eu>, Huacai Chen <chenhuacai@kernel.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, Jason Wang <jasowang@redhat.com>,
+ Jia Liu <proljc@gmail.com>, Stafford Horne <shorne@gmail.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Nicholas Piggin <npiggin@gmail.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>, Bin Meng
+ <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Eric Farman <farman@linux.ibm.com>, David Hildenbrand <david@redhat.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Magnus Damm <magnus.damm@gmail.com>, Artyom Tarasenko <atar4qemu@gmail.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
+ Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
+ qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
+ xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>
+References: <20240126173228.394202-1-dwmw2@infradead.org>
+ <20240126173228.394202-23-dwmw2@infradead.org>
+From: =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>
+In-Reply-To: <20240126173228.394202-23-dwmw2@infradead.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=150.107.74.76;
+ envelope-from=SRS0=Qo6T=JK=kaod.org=clg@ozlabs.org; helo=gandalf.ozlabs.org
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9,
+ HEADER_FROM_DIFFERENT_DOMAINS=0.248, SPF_HELO_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01,
+ T_SPF_TEMPERROR=0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -94,32 +109,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, 29 Jan 2024 at 11:08, Jonathan Cameron
-<Jonathan.Cameron@huawei.com> wrote:
->
-> On Mon, 29 Jan 2024 00:14:23 -0800
-> Sia Jee Heng <jeeheng.sia@starfivetech.com> wrote:
->
-> > Introduced a 3-layer cache for the ARM virtual machine.
-> >
-> > Signed-off-by: Sia Jee Heng <jeeheng.sia@starfivetech.com>
->
-> There are a bunch of CPU registers that also need updating to reflect the
-> described cache.
-> https://lore.kernel.org/qemu-devel/20230808115713.2613-3-Jonathan.Cameron@huawei.com/
-> It's called HACK for a reason ;)
-> But there is some discussion about this issue in the thread.
->
-> The l1 etc also needs to reflect the CPU model.  This stuff needs to match.
-> Wrong information being passed to a VM is probably worse than no information.
+On 1/26/24 18:24, David Woodhouse wrote:
+> From: David Woodhouse <dwmw@amazon.co.uk>
+> 
+> Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+> Acked-by: Cédric Le Goater <clg@kaod.org>
 
-Yes. The ACPI table information, if we provide it, should be
-being generated from the CPU cache ID registers.
+and
 
-But I'm a bit confused about why the ACPI table has the cache
-topology in it -- can't the guest read the cache ID registers
-and figure it out for itself?
+Reviewed-by: Cédric Le Goater <clg@kaod.org>
 
-thanks
--- PMM
+Thanks,
+
+C.
+
+
+> ---
+>   hw/arm/aspeed.c | 9 ++++-----
+>   1 file changed, 4 insertions(+), 5 deletions(-)
+> 
+> diff --git a/hw/arm/aspeed.c b/hw/arm/aspeed.c
+> index cc59176563..bed5e4f40b 100644
+> --- a/hw/arm/aspeed.c
+> +++ b/hw/arm/aspeed.c
+> @@ -356,7 +356,6 @@ static void aspeed_machine_init(MachineState *machine)
+>       AspeedMachineClass *amc = ASPEED_MACHINE_GET_CLASS(machine);
+>       AspeedSoCClass *sc;
+>       int i;
+> -    NICInfo *nd = &nd_table[0];
+>   
+>       bmc->soc = ASPEED_SOC(object_new(amc->soc_name));
+>       object_property_add_child(OBJECT(machine), "soc", OBJECT(bmc->soc));
+> @@ -371,10 +370,10 @@ static void aspeed_machine_init(MachineState *machine)
+>                                &error_fatal);
+>   
+>       for (i = 0; i < sc->macs_num; i++) {
+> -        if ((amc->macs_mask & (1 << i)) && nd->used) {
+> -            qemu_check_nic_model(nd, TYPE_FTGMAC100);
+> -            qdev_set_nic_properties(DEVICE(&bmc->soc->ftgmac100[i]), nd);
+> -            nd++;
+> +        if ((amc->macs_mask & (1 << i)) &&
+> +            !qemu_configure_nic_device(DEVICE(&bmc->soc->ftgmac100[i]),
+> +                                       true, NULL)) {
+> +            break; /* No configs left; stop asking */
+>           }
+>       }
+>   
+
 
